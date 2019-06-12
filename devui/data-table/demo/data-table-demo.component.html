@@ -1,0 +1,83 @@
+<div class="demo-container">
+  <div class="demo-example">
+    <div class="demo-title">基本用法</div>
+    <div class="demo-text">
+      简单表格，展示列表数据
+    </div>
+    <ave-codebox id="components-table-default" [sourceData]="basicSource">
+      <ave-datatable-demo-basic demo></ave-datatable-demo-basic>
+    </ave-codebox>
+  </div>
+  <div class="demo-example">
+    <div class="demo-title">复杂表格</div>
+    <div class="demo-text">
+      表格支持选中、列排序以及列宽调整；表头支持自定义按钮和提示等；表格分页；支持指定行显示detail数据。
+    </div>
+    <ave-codebox id="components-table-resize" [sourceData]="resizeSource">
+      <ave-datatable-demo-resizeable demo></ave-datatable-demo-resizeable>
+    </ave-codebox>
+  </div>
+  <div class="demo-example">
+    <div class="demo-title">单列排序</div>
+    <div class="demo-text">
+        表格同一时间只支持一列数据激活排序。
+    </div>
+    <ave-codebox id="components-table-one" [sourceData]="oneColumnSource">
+      <ave-datatable-demo-onlyonecolumnsort demo></ave-datatable-demo-onlyonecolumnsort>
+    </ave-codebox>
+  </div>
+  <div class="demo-example">
+    <div class="demo-title">动态数据</div>
+    <div class="demo-text">
+        表头根据动态数据生成，dataSource数据需要指定对应的表头key值。
+    </div>
+    <ave-codebox id="components-table-dynamic" [sourceData]="dynamicSource">
+      <ave-datatable-demo-dynamic demo></ave-datatable-demo-dynamic>
+    </ave-codebox>
+  </div>
+  <div class="demo-example">
+    <div class="demo-title">异步加载数据</div>
+    <div class="demo-text">
+      异步加载表格数据，支持表头也是异步加载
+    </div>
+    <ave-codebox id="components-table-async" [sourceData]="asyncSource">
+      <ave-datatable-demo-async demo></ave-datatable-demo-async>
+    </ave-codebox>
+  </div>
+  <div class="demo-example">
+    <div class="demo-title">指定最大高度</div>
+    <div class="demo-text">
+        固定表格最大高度
+    </div>
+    <ave-codebox id="components-table-max" [sourceData]="maxHeightSource">
+      <ave-datatable-demo-maxheight demo></ave-datatable-demo-maxheight>
+    </ave-codebox>
+  </div>
+  <div class="demo-example">
+    <div class="demo-title">固定表头</div>
+    <div class="demo-text">
+        固定表格最大高度，表头不跟随滚动
+    </div>
+    <ave-codebox id="components-table-fix" [sourceData]="fixHeightSource">
+      <ave-datatable-demo-fixheader demo></ave-datatable-demo-fixheader>
+    </ave-codebox>
+  </div>
+  <div class="demo-example">
+    <div class="demo-title">列表数据懒加载</div>
+    <div class="demo-text">
+        跟随滚动，懒加载，不断增加表格数据
+    </div>
+    <ave-codebox id="components-table-lazy" [sourceData]="lazySource">
+      <ave-datatable-demo-lazyloaddata demo></ave-datatable-demo-lazyloaddata>
+    </ave-codebox>
+  </div>
+  <div class="demo-example">
+    <div class="demo-title">多行表头</div>
+    <div class="demo-text">
+        表头支持分组，显示多行
+    </div>
+    <ave-codebox id="components-table-multi" [sourceData]="lazySource">
+      <ave-datatable-demo-multiheader demo></ave-datatable-demo-multiheader>
+    </ave-codebox>
+  </div>
+</div>

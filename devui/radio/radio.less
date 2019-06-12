@@ -1,0 +1,58 @@
+@radio-prefix: ~"@{prefix}-radio";
+
+.@{radio-prefix} {
+  position: relative;
+  display: block;
+  padding-left: @check-radio-size + 10px;
+  cursor: pointer;
+
+  &.@{prefix}-disabled {
+    cursor: not-allowed;
+  }
+
+  &-indicator {
+    width: @check-radio-size;
+    height: @check-radio-size;
+  }
+}
+
+.@{radio-prefix}-input {
+  .check(@radio-prefix);
+
+  & + .@{radio-prefix}-indicator {
+    &:before {
+      border-radius: 50%;
+    }
+    &:after {
+      top: (@check-radio-size - @check-dot-size) / 2;
+      left: (@check-radio-size - @check-dot-size) / 2;
+      width: @check-dot-size;
+      height: @check-dot-size;
+      border-radius: 50%;
+      background-color: @check-main-color;
+    }
+  }
+
+  &:checked + .@{radio-prefix}-indicator {
+    &:before {
+      border: 1px solid @check-main-color;
+    }
+  }
+  &:checked[disabled] + .@{radio-prefix}-indicator {
+    &:before {
+      border: 1px solid @check-disabled-border-color;
+    }
+    &:after {
+      background-color: @check-disabled-mark-color;
+    }
+  }
+}
+
+.@{radio-prefix}-group {
+  position: relative;
+}
+
+.@{radio-prefix}-group-inline .@{radio-prefix} {
+  display: inline-block;
+  padding-right: 5px;
+}

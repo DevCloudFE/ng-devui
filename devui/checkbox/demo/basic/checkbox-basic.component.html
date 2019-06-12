@@ -1,0 +1,55 @@
+<section>
+    <ave-checkbox
+        [label]="'选中状态'"
+        [isShowTitle]="false"
+        (change)="onCheckbox1Change($event)"
+        [ngModel]="true">
+    </ave-checkbox>
+    <ave-checkbox
+        [label]="'未选中状态'"
+        [isShowTitle]="false"
+        (change)="onCheckbox1Change($event)"
+        [ngModel]="false">
+    </ave-checkbox>
+    <ave-checkbox [name]="'checkbox-username'"
+              [label]="'选中状态下禁用'"
+              [disabled]="true"
+              [ngModel]="true"
+              (change)="onCheckbox2Change($event)">
+    </ave-checkbox>
+    <ave-checkbox [name]="'checkbox-username'"
+              [label]="'未选中状态下禁用'"
+              [disabled]="true"
+              [ngModel]="false"
+              (change)="onCheckbox2Change($event)">
+    </ave-checkbox>
+    <ave-checkbox
+        [label]="'半选状态'"
+        [isShowTitle]="false"
+        (change)="onCheckbox1Change($event)"
+        [halfchecked]="true">
+    </ave-checkbox>
+    <ave-checkbox
+        [label]="'半选状态下禁用'"
+        [isShowTitle]="false"
+        [disabled]="true"
+        (change)="onCheckbox1Change($event)"
+        [halfchecked]="true">
+    </ave-checkbox>
+    <ave-checkbox [name]="'checkbox-username'"
+        [label]="'数据双向绑定'"
+        [(ngModel)]="checked"
+        (change)="onCheckbox2Change($event)">
+    </ave-checkbox>
+    <ave-checkbox [name]="'checkbox-username'"
+              [ngModel]="true"
+              (change)="onCheckbox2Change($event)"
+              [labelTemplate]="myLabel">
+    </ave-checkbox>
+    <ng-template #myLabel let-disabled="disabled">
+        <div class="inline-block-middle-valign">
+            <ave-select [(ngModel)]="number" [options]="[1,2,3,4]" [disabled]="disabled" size="sm"  class="inline-block-middle-valign"
+            (click)="$event.preventDefault();$event.stopPropagation();"></ave-select> 自定义label模板
+        </div>
+    </ng-template>
+</section>

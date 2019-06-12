@@ -1,0 +1,57 @@
+.menu {
+  width: 400px;
+}
+.badge {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border-radius: 8px;
+  font-size: 12px;
+  line-height: 12px;
+  padding: 2px;
+  color: #FFF;
+  text-align: center;
+  background: #5170FF;
+  margin-top: -2px;
+  font-weight: 400;
+}
+.loading {
+  line-height: 40px;
+  padding-left: 66px;
+}
+.circle-spinner {
+  top: 10px;
+  left: 36px;
+  position: absolute;
+  display: block;
+  width: 20px;
+  height: 20px;
+  transform-origin: center;
+
+  -webkit-animation: circle infinite .75s linear;
+     -moz-animation: circle infinite .75s linear;
+       -o-animation: circle infinite .75s linear;
+          animation: circle infinite .75s linear;
+
+  border: 2px solid #5170FF;
+  border-top-color: transparent;
+  border-radius: 50%;
+}
+
+@keyframes circle
+{
+    0%
+    {
+        -webkit-transform: rotate(0);
+            -ms-transform: rotate(0);
+             -o-transform: rotate(0);
+                transform: rotate(0);
+    }
+    100%
+    {
+        -webkit-transform: rotate(360deg);
+            -ms-transform: rotate(360deg);
+             -o-transform: rotate(360deg);
+                transform: rotate(360deg);
+    }
+}

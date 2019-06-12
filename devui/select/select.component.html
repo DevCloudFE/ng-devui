@@ -1,0 +1,113 @@
+<div class="drop{{popDirection}} {{size ? 'select-' + size : ''}}" [ngClass]="{'open': isOpen}">
+    <div #selectBox class="devui-form-group devui-has-feedback" (click)="toggle()" [tabindex]="0"
+            (keydown.esc)="onEscKeyup($event)"
+            (keydown.ArrowUp)="handleKeyUpEvent($event)"
+            (keydown.ArrowDown)="handleKeyDownEvent($event)"
+            (keydown.enter)="handleKeyEnterEvent($event)">
+        <input
+            #selectInput
+            [placeholder]="placeholder"
+            [disabled]="disabled"
+            [ngClass]="[size ? 'input-' + size : '', overview === 'underlined' ? 'underlined-border' : '', isOpen? 'no-radius' : '']"
+            type="text"
+            class="devui-form-control select-input"
+            [minLength]="0"
+            autocomplete="off"
+            [tabindex]="-1"
+            [readonly]="readonly"
+            [attr.value]="_inputValue"
+            *ngIf="!(extraConfig?.labelization?.enable && multiple)
+                    && !(!extraConfig?.labelization?.enable && extraConfig?.selectedItemWithTemplate?.enable && itemTemplate)"
+        />
+        <div #selectInputWithTemplate class="list-wrapper devui-form-control {{size ? 'input-' + size : ''}}"
+          [ngClass]="[overview === 'underlined' ? 'underlined-border' : '', isOpen? 'no-radius' : '', disabled? 'disabled': '']"
+                *ngIf="extraConfig?.selectedItemWithTemplate?.enable && itemTemplate && !extraConfig?.labelization?.enable">
+
+            <div class="placeholder" *ngIf="!(_inputValue)">{{placeholder}}</div>
+            <div class="selected-item-with-template" *ngIf="_inputValue">
+            <ng-template
+                    [ngTemplateOutlet]="itemTemplate"
+                    [ngTemplateOutletContext]="{ option: value, filterKey: filterKey, position:'result', inputValue: _inputValue}"
+                >
+            </ng-template>
+            </div>
+        </div>
+
+        <div #selectInputWithLabel class="list-wrapper devui-form-control {{size ? 'input-' + size : ''}}"
+                [ngClass]="[overview === 'underlined' ? 'underlined-border' : '', isOpen? 'no-radius' : '', disabled? 'disabled': '']"
+                *ngIf="extraConfig?.labelization?.enable && multiple">
+            <div class="placeholder" *ngIf="multiItems.length === 0">{{placeholder}}</div>
+            <ul class="tag-list {{extraConfig?.labelization?.overflow}}" [style.maxHeight]="extraConfig?.labelization?.containnerMaxHeight" *ngIf="multiItems.length > 0">
+                <li class="tag-item" *ngFor="let item of multiItems;let index = index; trackBy: trackByOptionPointer" [style.maxWidth]="extraConfig?.labelization?.labelMaxWidth"
+                  [ngClass]="{'disabled': optionDisabledKey && item.option[optionDisabledKey]}">
+                    <span class="over-flow-ellipsis" title="{{valueParser(item.option)}}">{{valueParser(item.option)}}</span>
+                    <a class="remove-button" (click)="removeItem(item, $event);" *ngIf="!(optionDisabledKey && item.option[optionDisabledKey])">×</a>
+                </li>
+            </ul>
+        </div>
+        <span class="devui-form-control-feedback"><span class="devui-caret"></span></span>
+    </div>
+    <ul #selectMenu aveLoading [showLoading]="showLoading" [message]="'loading...'" [backdrop]="true"
+        class="devui-dropdown-menu" style="width: 100%" (click)="$event.stopPropagation();$event.preventDefault()">
+        <li [style.display]="isSearch ? 'block' : 'none'" style="padding: 0 5px 5px">
+            <div class="devui-form-group devui-has-feedback" [style.margin]="'0'">
+                <input #filterInput [ngClass]="size ? 'input-' + size : ''"  name="select" type="text" [(ngModel)]="filter" autocomplete="off" class="devui-input filter"
+                    (keydown.ArrowUp)="handleKeyUpEvent($event)"
+                    (keydown.ArrowDown)="handleKeyDownEvent($event)"
+                    (keydown.enter)="handleKeyEnterEvent($event)"
+                    (keydown.esc)="onEscKeyup($event)"
+                    >
+                <span class="devui-form-control-feedback">
+                    <svg class="svg-icon-search" width="1em" height="1em" style="vertical-align: middle" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <path d="M1024 900.584l-121.376 123.2L618.672 735.464c-63.44 43.768-140 69.392-222.44 69.392C177.376 804.848 0 624.712 0 402.536 0 180.336 177.376 0.208 396.232 0.208s396.232 180.144 396.232 402.328c0 75.328-20.752 145.576-56.248 205.872L1024 900.584zM396.232 128.944c-148.8 0-269.456 122.504-269.456 273.592 0 151.08 120.656 273.576 269.456 273.576 148.832 0 269.456-122.504 269.456-273.576C665.688 251.448 545.08 128.944 396.232 128.944z"></path>
+                    </svg>
+                </span>
+            </div>
+        </li>
+        <ul class="list-unstyled" aveLazyLoad [enableLazyLoad]="enableLazyLoad" (loadMore)="loadMoreEvent($event)"  [ngStyle]="{ 'max-height': scrollHight , 'overflow-y': 'auto', 'width': '100%'}" #dropdownUl>
+            <li class="devui-dropdown-item" *ngIf="isSelectAll  && multiple && availableOptions.length > 0" (click)="selectAll()"><span>{{ selectText }}</span></li>
+            <li *ngFor="let item of availableOptions; let index = index; trackBy: trackByFn" title="{{formatter(item.option)}}"
+                [ngClass]="['devui-dropdown-item',
+                  (item.id === activeIndex && !multiple ?  hightLightItemClass : ''),
+                  (multiple && isChecked(item.option) ?  hightLightItemClass : ''),
+                  (selectIndex === index && item.id !== activeIndex ? 'selected' : ''),
+                  (optionDisabledKey && item.option[optionDisabledKey] ) ? 'disabled': '']"
+
+                (click)="choose(item.option, item.id, $event)">
+                <ng-template
+                    [ngTemplateOutlet]="itemTemplate || (multiple ? checkBoxItem :  defaultItem)"
+                    [ngTemplateOutletContext]="multiple
+                        ? { option: item.option, checked: isChecked(item.option), filterKey: filterKey, position:'list', template: checkBoxItem}
+                        : { option: item.option, filterKey: filterKey, position:'list', template :defaultItem }"
+                >
+                </ng-template>
+            </li>
+        </ul>
+        <li *ngIf="availableOptions.length === 0 &&  !noResultItemTemplate" class="no-data-tip">
+            {{ noDataTips }}
+        </li>
+        <li *ngIf="availableOptions.length === 0 && noResultItemTemplate">
+            <ng-template [ngTemplateOutlet]="noResultItemTemplate"
+                [ngTemplateOutletContext]="{ options:options}"></ng-template>
+        </li>
+        <ng-container *ngIf="customViewTemplate">
+          <div class="custom-area">
+            <ng-template [ngTemplateOutlet]="customViewTemplate" [ngTemplateOutletContext]="{ $implicit: this}"></ng-template>
+          </div>
+        </ng-container>
+    </ul>
+</div>
+
+
+<ng-template #defaultItem let-option="option">
+    {{ formatter(option) }}
+</ng-template>
+
+<ng-template #checkBoxItem let-option="option" let-checked="checked">
+    <ave-checkbox
+        [label]="formatter(option)"
+        [cssClass]="'select-checkbox'"
+        [ngModel]="checked"
+        [disabled]="option[optionDisabledKey]">
+    </ave-checkbox>
+</ng-template>

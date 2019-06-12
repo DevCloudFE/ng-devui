@@ -1,0 +1,375 @@
+// @import '../style/theme/color';
+// @import '../style/theme/variables';
+@import '../style/mixins/index';
+
+// $select-dark-1-boxshadow: rgba($dark1, 0.2);
+// $select-tag-label-bgcolor: rgba($status-yellow, 0.3);
+
+.devui-form-group.devui-has-feedback[tabindex] {
+  outline: none;
+}
+// .devui-form-group.devui-has-feedback:focus {
+//   input.devui-form-control.select-input,
+//   .list-wrapper.devui-form-control {
+//     border-color: $focus1;
+//   }
+// }
+.placeholder, .list-wrapper.form-control,.selected-item-with-template {
+  font-size: 14px;
+}
+.list-wrapper.devui-form-control {
+  cursor: pointer;
+}
+.devui-form-group > input.devui-form-control.select-input {
+  cursor: pointer;
+  padding-right: 1em;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.list-wrapper.devui-form-control{
+  cursor: pointer;
+}
+
+.devui-dropdown-item {
+  font-size: 14px;
+  display: block;
+  min-height: 36px;
+  line-height: 18px;
+  width: 100%;
+  padding: 8px 10px;
+  clear: both;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  border: 0;
+  input[name="search"] {
+    font-size: 14px;
+  }
+  // color: $dark1;
+}
+
+.select-lg {
+  font-size: 16px;
+  min-height: 34px;
+  line-height: 22px;
+  .placeholder,.list-wrapper.devui-form-control, .selected-item-with-template{
+    font-size: 16px;
+  }
+  .devui-dropdown-item {
+    font-size: 16px;
+    min-height: 34px;
+    line-height: 22px;
+    input[name="search"] {
+      font-size: 16px;
+    }
+  }
+::ng-deep .devui-checkbox,
+::ng-deep .select-checkbox label .checkbox-label {
+    font-size: 16px;
+    line-height: 22px;
+  }
+::ng-deep .devui-checkbox-material {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.select-sm {
+  font-size: 12px;
+  min-height: 30px;
+  line-height: 14px;
+  .placeholder, .list-wrapper.devui-form-control, .selected-item-with-template{
+    font-size: 12px;
+  }
+  .devui-dropdown-item {
+    font-size: 12px;
+    min-height: 30px;
+    line-height: 14px;
+    input[name="search"] {
+      font-size: 12px;
+    }
+  }
+::ng-deep .select-checkbox label .checkbox-label{
+    font-size: 12px;
+    line-height: 16px;
+  }
+::ng-deep .ave-checkbox-material {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+ul.devui-dropdown-menu {
+  margin-bottom: 5px;
+  cursor: pointer;
+  min-width: auto;
+  // box-shadow: 0px 4px 8px 0 $select-dark-1-boxshadow;
+}
+
+// ul.devui-dropdown-menu > ul.list-unstyled >li:hover:not(.active):not(.disabled) {
+//   background-color: $hover-content;
+// }
+
+// ul.devui-dropdown-menu > ul.list-unstyled > li.selected {
+//   background-color:  $hover-content;
+//   color: $focus1;
+// }
+
+// ul.devui-dropdown-menu > ul.list-unstyled > li.active,
+// ul.devui-dropdown-menu > ul.list-unstyled > li.active:hover{
+//   background-color: $focus3;
+//   color: $focus1;
+// }
+
+.devui-has-feedback {
+  z-index: 5;
+}
+
+.devui-form-control, .devui-form-group .devui-form-control{
+  border-radius: 1px;
+}
+
+.devui-form-control.no-radius, .devui-form-group .devui-form-control.no-radius{
+  border-radius: 1px 1px 0 0;
+}
+
+// .devui-form-control:hover, .devui-form-group .devui-form-control:hover, .devui-form-group .devui-form-control.underlined-border:hover{
+//   &:not(.disabled):not(:disabled) {
+//     border-color: $hover-control;
+//   }
+// }
+// .devui-form-control:focus,.devui-form-group .devui-form-control:focus, .devui-form-group .devui-form-control.underlined-border:focus{
+//   &:not(.disabled) {
+//     border-color: $focus2;
+//   }
+
+// }
+
+
+.devui-form-group .devui-form-control.underlined-border{
+  // border: 0;
+  // border-bottom: 1px solid;
+  border-radius: 0;
+}
+
+.list-wrapper.devui-form-control{
+  height: auto;
+  margin: 0;
+  padding: 2px 2px 0px;
+  padding-right:30px;
+}
+
+.list-wrapper {
+  .selected-item-with-template {
+    height: 28px;
+    line-height: 28px;
+    padding: 0 10px;
+    cursor: pointer;
+  }
+  .placeholder {
+    height: 28px;
+    line-height: 28px;
+    // color: $dark3;
+    padding-left: 12px;
+  }
+  .tag-list {
+    height: 28px;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    overflow: hidden;
+  }
+  .tag-list.normal{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .tag-list.scroll-y{
+    overflow-y:auto;
+    overflow-x:hidden;
+  }
+  .tag-list.multiple-line{
+    height:auto;
+    overflow-y:auto;
+    overflow-x:hidden;
+  }
+
+
+  .tag-item {
+      display: inline-block;
+      margin: 3px 2px 0;
+      padding: 0 5px;
+      min-height: 20px;
+      line-height: 20px;
+      max-height: 20px;
+      border-radius: 1px;
+      // color: $dark1;
+      // background: $select-tag-label-bgcolor;
+      max-width: 100%;
+      position:relative;
+  }
+
+  .tag-item span{
+    display: inline-block;
+    max-width: 100%;
+    padding-right: 14px;
+    // vertical-align: middle;
+  }
+  .tag-item.disabled span{
+    padding-right: 5px;
+  }
+
+  .tag-item .remove-button {
+      position:absolute;
+      right:5px;
+      top:50%;
+      transform: scale(1.2) translateY(-50%);
+      width: 10px;
+      height: 1.2em;
+      padding: 0;
+      border: none;
+      background: 0 0;
+      cursor: pointer;
+      font-size: 1em;
+      // color: $dark1;
+      &:hover {
+        text-decoration: none;
+      }
+  }
+  .over-flow-ellipsis{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  &.input-lg {
+    .selected-item-with-template, .placeholder, .tag-list {
+      height: 42px;
+    }
+    .selected-item-with-template, .placeholder {
+      line-height: 42px;
+    }
+    .tag-item {
+      margin: 7px 3px 0;
+      padding: 0 5px;
+      min-height: 26px;
+      line-height: 26px;
+      max-height: 26px;
+    }
+  }
+  &.input-sm {
+    .selected-item-with-template, .placeholder, .tag-list{
+      height: 26px;
+    }
+    .selected-item-with-template, .placeholder {
+      line-height: 26px;
+    }
+    .tag-item {
+      margin: 3px 2px 0;
+      padding: 0 5px;
+      min-height: 18px;
+      line-height: 18px;
+      max-height: 18px;
+    }
+  }
+
+}
+
+:host /deep/ .select-checkbox{
+   label{
+    width: 100%;
+    .devui-checkbox-label{
+      max-width: calc(100% - 20px);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      line-height: 20px;
+    }
+  }
+}
+
+// .dropdown-item.selected::ng-deep  .select-checkbox,
+// .dropdown-item.active /deep/  .select-checkbox {
+//   .checkbox-label {
+//     color: $focus1;
+//   }
+// }
+
+/*选项disabled*/
+.dropdown-item.disabled,
+.dropdown-item.disabled:hover,
+ul.dropdown-menu > ul.list-unstyled > li.disabled:hover {
+    cursor: not-allowed;
+    opacity: 0.3;
+    // color: $dark1;
+    // background: $white;
+}
+// ul.dropdown-menu > ul.list-unstyled > li.active.disabled:hover {
+//   background: $focus3;
+// }
+
+
+:host /deep/ ul.dropdown-menu > ul.list-unstyled > li.disabled .ave-checkbox.disabled-unchecked,
+:host /deep/ ul.dropdown-menu > ul.list-unstyled > li.disabled .ave-checkbox.disabled-checked{
+  opacity: 1;
+}
+.no-data-tip {
+  user-select:none;
+  cursor: not-allowed;
+  padding: 5px 12px;
+  opacity: 0.3;
+}
+
+.list-wrapper.form-control.disabled,
+.form-control.select-input:disabled, .form-group .form-control.select-input:disabled {
+  cursor: not-allowed;
+}
+
+.list-wrapper.form-control.disabled {
+  opacity: 0.3;
+}
+.list-wrapper.form-control.disabled + .form-control-feedback,
+.form-control.select-input:disabled + .form-control-feedback {
+  opacity: 0.3;
+}
+ul.dropdown-menu > .custom-area::before {
+  display: block;
+  content: '';
+  width: calc(100% - 20px);
+  margin: 0 10px;
+  height: 1px;
+  // border-top: 1px solid $gray2;
+}
+
+// svg.svg-icon-search > path {
+//   fill: $dark1;
+// }
+
+
+.devui-form-control {
+  outline: none;
+  line-height: 1.42857143;
+}
+.select-input {
+  font-size: 14px;
+  height: 32px;
+  &.input-sm {
+    font-size: 12px;
+    height: 30px;
+    + .devui-form-control-feedback{
+      width: 30px;
+      height: 30px;
+      line-height: 30px;
+    }
+  }
+  &.input-lg {
+    height: 34px;
+    font-size: 16px;
+    + .devui-form-control-feedback{
+      width: 34px;
+      height: 34px;
+      line-height: 34px;
+    }
+  }
+}

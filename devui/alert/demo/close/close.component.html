@@ -1,0 +1,14 @@
+<section>
+  <ave-alert [type]="'success'" (onClose)="handleClose($event)">success
+  </ave-alert>
+
+  <ave-alert [type]="'warning'" (onClose)="handleClose($event)">
+    <span class="v-mid icon icon-warning-o" style="color: rgb(255, 255, 255);"></span>
+    <span class="v-mid ml-10">警告。devcloud一站式云端</span>
+  </ave-alert>
+
+  <ave-alert [type]="'danger'" (onClose)="handleClose($event)">
+    <span class="v-mid icon icon-error-o" style="color: rgb(255, 255, 255);"></span>
+    <span class="v-mid ml-10">错误。devcloud一站式云端</span>
+  </ave-alert>
+</section>

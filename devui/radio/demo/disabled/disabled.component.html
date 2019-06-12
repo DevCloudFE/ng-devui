@@ -1,0 +1,10 @@
+<section>
+  <ave-radio
+    [name]="'independent-city'"
+    [(ngModel)]="choose2_3"
+    [disabled]="true"
+    *ngFor="let value of values2"
+    [value]="value">
+  The Radio value is: {{value}}
+  </ave-radio>
+</section>

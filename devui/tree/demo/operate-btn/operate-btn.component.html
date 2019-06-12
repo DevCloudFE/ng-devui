@@ -1,0 +1,14 @@
+<section>
+  <ave-operable-tree #operableTree [tree]="data" [treeNodeIdKey]="'id'" [treeNodeChildrenKey]="'children'"
+    (nodeDeleted)="onOperableNodeDeleted($event)" (nodeSelected)="onOperableNodeSelected($event)"
+    (nodeToggled)="onOperableNodeToggled($event)" (nodeChecked)="onOperableNodeChecked($event)"
+    (nodeEdited)="onOperableNodeEdited($event)" [checkable]="true" [addable]="true" [editable]="true"
+    [deletable]="true">
+  </ave-operable-tree>
+    <ave-button bsSize="sm" bsStyle="primary" (click)="addNode()"> Add
+    </ave-button>
+    <ave-button bsSize="sm" bsStyle="common" (click)="editNodeTitle()">Edit
+    </ave-button>
+    <ave-button bsSize="sm" bsStyle="common" (click)="deleteNode()">Delete
+    </ave-button>
+</section>

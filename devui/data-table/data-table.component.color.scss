@@ -1,0 +1,26 @@
+@import '../style/theme/color';
+
+:host /deep/ th .datatable-svg {
+  g#order-default {
+    path {
+      fill: $gray2;
+    }
+  }
+  g#order-desc {
+    polygon#Path-4 {
+      fill: $gray2;
+    }
+    polygon#Path-4-Copy {
+      fill: $focus1;
+    }
+  }
+  g#order-asc{
+    polygon#Path-4 {
+      fill: $focus1;
+    }
+    polygon#Path-4-Copy {
+      fill: $gray2;
+    }
+  }
+
+}

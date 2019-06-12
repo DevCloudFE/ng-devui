@@ -1,0 +1,86 @@
+.devui-search {
+  position: relative;
+  width: 300px;
+  &-sm {
+    width: 200px;
+    .devui-input {
+      padding-right: 55px;
+    }
+  }
+  &-lg {
+    width: 300px;
+    .devui-input {
+      padding-right: 66px;
+    }
+  }
+
+  .devui-input {
+    padding-right: 60px;
+    text-overflow: ellipsis;
+  }
+  .icon {
+    cursor: pointer;
+  }
+
+  .devui-search-icon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    margin-top: -7px;
+    > svg {
+        height: 14px;
+        width: 14px;
+    }
+    &-sm {
+      margin-top: -6px;
+      > svg {
+          height: 12px;
+          width: 12px;
+      }
+    }
+    &-lg {
+      margin-top: -8px;
+      > svg {
+          height: 18px;
+          width: 18px;
+      }
+    }
+  }
+
+  .devui-search-clear {
+    position: absolute;
+    top: 50%;
+    right: 42px;
+    margin-top: -7px;
+    font-size: 14px;
+    &-sm {
+      right: 40px;
+      margin-top: -6px;
+      font-size: 12px;
+    }
+    &-lg {
+      right: 44px;
+      margin-top: -8px;
+      font-size: 16px;
+    }
+  }
+
+  .devui-serach-line {
+    position: absolute;
+    right: 32px;
+    height: 70%;
+    top: 15%;
+    width: 1px;
+    border-left-width: 1px;
+    border-left-style: solid;
+    line-height: 32px;
+    &-sm {
+      line-height: 30px;
+      right: 30px;
+    }
+    &-lg {
+        line-height: 34px;
+        right: 34px;
+    }
+  }
+}

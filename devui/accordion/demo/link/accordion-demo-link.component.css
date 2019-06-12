@@ -1,0 +1,14 @@
+.menu {
+  width: 200px;
+}
+.menu-wrapper {
+  float: left;
+}
+.menu-wrapper + .menu-wrapper {
+  margin-left: 20px;
+}
+:host::after {
+  content:'';
+  display: block;
+  clear: both;
+}

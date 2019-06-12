@@ -1,0 +1,121 @@
+@import '../style/mixins/index';
+
+:host {
+  display: block;
+}
+
+.devui-checkbox {
+  position: relative;
+  display: flex;
+  display: -ms-flexbox;
+  align-items: center;
+  -ms-flex-align: center;
+  height: 100%;
+  margin: 0;
+
+  label {
+    display: inline-block;
+    position: relative;
+    margin: 0;
+    font-weight: normal;
+    cursor: pointer;
+    // color: $dark1;
+  }
+
+  .devui-checkbox-input {
+    position: absolute;
+    z-index: -1;
+    left: 0;
+    margin: 0;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .devui-checkbox-material {
+    display: inline-block;
+    height: 16px;
+    width: 16px;
+    vertical-align: middle;
+    position: relative;
+    user-select: none;
+    margin-right: 6px;
+    border-width: 1px;
+    border-style: solid;
+    // border-color: $gray1;
+    border-radius: 1px;
+  }
+
+  .devui-checkbox-label {
+    vertical-align: middle;
+  }
+
+  svg {
+    // .check-symbol {
+    //   fill: none;
+    // }
+    // .checked-border{
+    //   fill: $white;
+    // }
+    // .halfchecked-symbol {
+    //   fill: $focus1;
+    // }
+    &.halfchecked{
+      padding: 3px;
+    }
+  }
+
+  // &.checked, &.halfchecked {
+  //   .devui-checkbox-material{
+  //     border-color: $focus1;
+  //   }
+  // }
+
+  // &.checked {
+  //   svg {
+  //     .check-symbol {
+  //       fill: $white;
+  //     }
+  //     .checked-border{
+  //       fill: $focus1;
+  //     }
+  //   }
+  // }
+  &.disabled {
+    opacity: 0.3;
+    label {
+      cursor: not-allowed;
+    }
+  }
+  // &:not(.disabled) {
+  //   .devui-checkbox-material {
+  //     &:hover{
+  //       border-color: $hover-control;
+  //     }
+  //     &:active, &:focus {
+  //       border-color: $focus2;
+  //     }
+  //   }
+  //   // 激活状态hover内容要变色
+  //   &.checked .devui-checkbox-material {
+  //     &:hover {
+  //       svg {
+  //        .checked-border,
+  //        .halfchecked-symbol{
+  //          fill: $hover-control;
+  //        }
+  //       }
+  //     }
+  //     &:active, &:focus, &:hover:active, &:hover:focus {
+  //       svg {
+  //         .checked-border,
+  //         .halfchecked-symbol{
+  //          fill: $focus2;
+  //        }
+  //       }
+  //     }
+  //   }
+  // }
+}

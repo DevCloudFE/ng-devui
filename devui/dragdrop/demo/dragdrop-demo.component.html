@@ -1,0 +1,32 @@
+<div class="demo-container">
+  <div class="demo-example">
+    <div class="demo-title">基本用法</div>
+    <div class="demo-text">
+      从一个container拖动到另外一个container，并支持排序
+    </div>
+    <ave-codebox id="components-tabs-default" [sourceData]="basicSource">
+      <ave-basic demo></ave-basic>
+    </ave-codebox>
+  </div>
+
+  <div class="demo-example">
+    <div class="demo-title">多层树状拖拽</div>
+    <div class="demo-text">
+      排序允许拖拽到元素上，支持层级嵌套
+    </div>
+    <ave-codebox id="components-tabs-default" [sourceData]="treeSource">
+      <ave-tree demo></ave-tree>
+    </ave-codebox>
+  </div>
+
+  <div class="demo-example">
+    <div class="demo-title">拖拽实体元素跟随</div>
+    <div class="demo-text">
+      允许拖拽时候非半透明元素跟随
+    </div>
+    <ave-codebox id="components-tabs-default" [sourceData]="treeSource">
+      <ave-follow demo></ave-follow>
+    </ave-codebox>
+  </div>
+
+</div>

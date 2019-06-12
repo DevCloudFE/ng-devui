@@ -1,0 +1,10 @@
+<section>
+  <ave-button (click)="fetchCustomLoading()">click me!</ave-button>
+  <div aveLoading [loading]="loading2" [templateRef]="templateRef" [style.height.px]="350"></div>
+  <ng-template #templateRef>
+    <div class="ave-loading-demo">
+      <div>One moment please...</div>
+      <div class="ave-loading-img"></div>
+    </div>
+  </ng-template>
+</section>

@@ -1,0 +1,53 @@
+
+<div class="devui-pagination">
+  <div *ngIf="canChangePageSize" class="page-size {{size? 'page-size-' + size : ''}}">
+    <ave-select [scrollHight]="'200px'" [direnction]="selectDirection" [size]="size" [ngModel]="pageSize" (valueChange)="onPageSizeChange($event)" [options]="pageSizeOptions" [isSearch]="false"></ave-select>
+  </div>
+  <div *ngIf="canViewTotal" class="total-size">{{totalItemText}}：{{total}}</div>
+  <ul class="pagination {{size? 'pagination-' + size: ''}}">
+    <li *ngIf="preLink" [ngClass]="{disabled: pageIndex == totalPage}">
+      <a (click)="prev()" class="pagination-link">{{preLink}}</a>
+    </li>
+    <li *ngIf="!preLink" [ngClass]="{disabled: pageIndex == 1}">
+      <a (click)="prev()" class="pagination-link">
+        <svg width="1em" height="1.5em" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1427 301l-531 531 531 531q19 19 19 45t-19 45l-166 166q-19 19-45 19t-45-19l-742-742q-19-19-19-45t19-45l742-742q19-19 45-19t45 19l166 166q19 19 19 45t-19 45z"/>
+        </svg>
+      </a>
+    </li>
+    <li *ngIf="showPages[0] > 1" (click)="first()">
+      <a>1</a>
+    </li>
+    <li *ngIf="showPages[0] > 2" (click)="preRange()">
+      <a>...</a>
+    </li>
+    <li *ngFor="let item of showPages" [ngClass]="{active: item == pageIndex}">
+      <a (click)="onPageIndexChange(item)">{{item}}</a>
+    </li>
+    <li *ngIf="showPages[showPages.length -1] < totalPage - 1" (click)="nextRange()">
+      <a>...</a>
+    </li>
+    <li *ngIf="showPages[showPages.length -1] < totalPage" (click)="last()">
+      <a>{{totalPage}}</a>
+    </li>
+    <ng-container *ngIf="showTruePageIndex &&  pageIndex > totalPage &&  totalPage > 0">
+          <li *ngIf="pageIndex > totalPage + 1 " class="disabled"><a>...</a></li>
+          <li class="active disabled"><a>{{pageIndex}}</a></li>
+    </ng-container>
+    <li *ngIf="nextLink" [ngClass]="{disabled: pageIndex == totalPage}">
+      <a (click)="next()"class="pagination-link">{{nextLink}}</a>
+    </li>
+    <li *ngIf="!nextLink" [ngClass]="{disabled: pageIndex == totalPage}">
+      <a (click)="next()" class="pagination-link">
+        <svg width="1em" height="1.5em" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1363 877l-742 742q-19 19-45 19t-45-19l-166-166q-19-19-19-45t19-45l531-531-531-531q-19-19-19-45t19-45l166-166q19-19 45-19t45 19l742 742q19 19 19 45t-19 45z"/>
+        </svg>
+      </a>
+    </li>
+  </ul>
+  <div *ngIf="canJumpPage" class="jump-container">
+    {{gotToText}} <input type="text" class="devui-input {{ size ? 'devui-input-' + size : ''}}" name="pageIndex" [(ngModel)]="jumpPage"
+      (keyup.enter)="jump()" (keyup)="validateInput()">
+      <div *ngIf="showJumpButton" class="jump-button {{size? 'jump-size-' + size : 'jump-size-default'}}" title="{{gotToText}}" (click)="jump()"><div class="go"></div></div>
+  </div>
+</div>

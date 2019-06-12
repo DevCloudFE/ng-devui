@@ -1,0 +1,32 @@
+<td *ngIf="showDetail"  [style.width]="showDetailColumn.width" [style.color]="'#666'" [style.text-align]="'center'" [style.padding]="'0'">
+  <div *ngIf="rowItem.detail" (click)="toggle()">
+  <span [style.vertical-align]="'middle'" *ngIf="rowItem['$isDetailOpen']">
+    <svg class="svg-icon-arrow" width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+      <g id="chevron-down" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <polygon points="4.5 5 8 8.76923077 11.5 5 13 6.61538462 8 12 3 6.61538462"></polygon>
+      </g>
+    </svg>
+  </span>
+  <span [style.vertical-align]="'middle'" *ngIf="!rowItem['$isDetailOpen']">
+  <svg class="svg-icon-arrow" width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="chevron-up" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+      <polygon points="11.5 12 8 8.23076923 4.5 12 3 10.3846154 8 5 13 10.3846154"></polygon>
+    </g>
+  </svg>
+  </span>
+</div>
+</td>
+<td *ngIf="checkable" class="checkable-cell" [style.width]="checkableColumn.width">
+  <ave-checkbox
+    [ngModelOptions]="{standalone: true}"
+    (ngModelChange)="onRowCheckChange($event, rowIndex, rowItem)"
+    [ngModel]="rowItem.$checked">
+  </ave-checkbox>
+</td>
+<ng-container *ngFor="let column of columns; let colIndex = index; trackBy: trackByFn">
+  <td aveDataTableCell [dataTableTemplates]="dataTableTemplates" [rowIndex]="rowIndex" [colIndex]="colIndex"
+      [column]="column" [rowItem]="rowItem" [style.width]="column.width || ''" [ngStyle]="column.style" [ngClass]="column?.cellClass"
+      [editModel]="editModel" [isEditRow]="editRowItem == rowItem" [timeout]="timeout">
+  </td>
+</ng-container>
+<!-- <td width="0" *ngIf="resizeable"></td> -->

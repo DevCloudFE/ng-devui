@@ -1,0 +1,31 @@
+<div class="devui-search" [ngClass]="size ? 'devui-search-' + size : ''">
+  <input #filterInput (keyup.enter)="keyupEnter(filterInput.value)" [placeholder]="placeholder"
+    [ngClass]="size ? 'devui-input-' + size : ''" (change)="inputChange(filterInput.value, $event)"
+    (keyup)="inputChange(filterInput.value, $event)" [attr.maxlength]="maxLength" type="text" class="devui-input" />
+  <span class="devui-search-icon" [ngClass]="size ? 'devui-search-icon-' + size : ''"
+    (click)="keyupEnter(filterInput.value)">
+    <svg class="svg-icon-search" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+      width="14px" height="14px" viewBox="0 0 16 16" version="1.1">
+      <g id="InspireUI-2.0规范输出" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path
+          d="M12.902261,10.765041 L15.5632031,13.425983 C16.1489895,14.0117695 16.1489895,14.961517 15.5632031,15.5473034 C14.9774166,16.1330898 14.0276691,16.1330898 13.4418827,15.5473034 L10.7844126,12.8898333 C9.69325562,13.5923888 8.39422915,14 7,14 C3.13400675,14 0,10.8659932 0,7 C0,3.13400675 3.13400675,0 7,0 C10.8659932,0 14,3.13400675 14,7 C14,8.38598771 13.5971935,9.67789492 12.902261,10.765041 L12.902261,10.765041 Z M7,12 C9.76142375,12 12,9.76142375 12,7 C12,4.23857625 9.76142375,2 7,2 C4.23857625,2 2,4.23857625 2,7 C2,9.76142375 4.23857625,12 7,12 Z"
+          id="Combined-Shape-Copy-97" fill-rule="nonzero" />
+      </g>
+    </svg>
+  </span>
+  <span #line class="devui-serach-line" [ngClass]="size ? 'devui-serach-line-' + size : ''">
+  </span>
+  <span #clearIcon class="devui-search-clear" [ngClass]="size ? 'devui-search-clear-' + size : ''"
+    (click)="clearText()">
+    <svg class="svg-icon-clear" width="10px" height="10px" viewBox="0 0 10 10" version="1.1"
+      xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+      <g id="InspireUI-2.0规范输出" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="组件-文件上传" transform="translate(-1546.000000, -432.000000)">
+          <polygon id="Combined-Shape-Copy-60"
+            points="1552.36396 436.949747 1555.89949 433.414214 1554.48528 432 1550.94975 435.535534 1547.41421 432 1546 433.414214 1549.53553 436.949747 1546 440.485281 1547.41421 441.899495 1550.94975 438.363961 1554.48528 441.899495 1555.89949 440.485281">
+          </polygon>
+        </g>
+      </g>
+    </svg>
+  </span>
+</div>

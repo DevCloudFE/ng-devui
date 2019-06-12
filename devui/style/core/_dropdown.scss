@@ -1,0 +1,100 @@
+@import '../theme/color.scss';
+.devui-dropdown {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  .devui-dropdown-toggle {
+    display: inline-block;
+    min-width: 100px;
+    line-height: 20px;
+    padding: 5px 15px;
+    border-radius: 2px;
+    text-align: center;
+    cursor: pointer;
+    outline: 0;
+    border-style: solid;
+    border-width: 1px;
+    .devui-caret {
+      display: inline-block;
+      margin-left: 2px;
+      vertical-align: middle;
+      border-top: 4px dashed;
+      border-right: 4px solid transparent;
+      border-left: 4px solid transparent;
+    }
+  }
+}
+.devui-dropdown-menu {
+  position: absolute;
+  float:left;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  min-width: 100px;
+  padding: 5px 0;
+  margin-top: 2px;
+  background-clip: padding-box;
+  border-radius: 0 0 2px 2px;
+  min-width: 160px;
+  list-style: none;
+  background-color: $white;
+  box-shadow: 0 2px 5px 0 rgba($dark, 0.26);
+  .open > &{
+    display: block;
+  }
+  > li > a {
+    height: 36px;
+    line-height: 36px;
+    padding: 0 20px;
+    display: block;
+    cursor: pointer;
+  }
+  li > input {
+    margin: 0 10px;
+  }
+  > .disabled > a {
+    &:hover, &:focus {
+      cursor: not-allowed;
+    }
+  }
+
+  .devui-dropdown-item {
+    &:hover {
+      background-color: $hover-content;
+    }
+    &.devui-dropdown-bg { //箭头选中
+      background-color: $hover-content;
+    }
+    &.active {
+      color: $focus1;
+      background-color: $focus3;
+    }
+  }
+}
+.devui-form-control-feedback {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 2;
+  display: block;
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+  text-align: center;
+  pointer-events: none;
+  .devui-caret {
+    display: inline-block;
+    margin-left: 2px;
+    vertical-align: middle;
+    border-top: 4px solid;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+  }
+}
+.devui-form-group.devui-has-feedback {
+
+}
+.form-group.has-feedback[tabindex] {
+  outline: 0;
+}

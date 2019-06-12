@@ -1,0 +1,101 @@
+<section>
+  <h4>单选</h4>
+  <div class="row">
+    <div class="col-md-5">
+      <div>只在列表使用模板</div>
+      <ave-select [options]="languages2" [filterKey]="'name'" [(ngModel)]="currentOption4" [placeholder]="'Search'">
+        <ng-template let-option="option" let-filterKey="filterKey">
+          Do you agree? {{ option[filterKey] }}
+        </ng-template>
+      </ave-select>
+
+      <div style="margin-top:20px">在列表和选中项使用相同模板</div>
+      <ave-select [options]="languages2" [filterKey]="'name'" [(ngModel)]="currentOption4" [placeholder]="'Search'"
+        [extraConfig]="{selectedItemWithTemplate:{enable: true}}">
+        <ng-template let-option="option" let-filterKey="filterKey">
+          Do you agree? {{ option[filterKey] }}
+        </ng-template>
+      </ave-select>
+
+      <div style="margin-top:20px">在列表和选中项使用不同模板</div>
+      <ave-select [options]="languages2" [filterKey]="'name'" [(ngModel)]="currentOption4" [placeholder]="'Search'"
+        [extraConfig]="{selectedItemWithTemplate:{enable: true}}">
+        <ng-template let-option="option" let-filterKey="filterKey" let-position="position">
+          <ng-container *ngIf="position ==='list'">
+            Do you agree? {{ option[filterKey] }}
+          </ng-container>
+          <ng-container *ngIf="position ==='result'">
+            {{ option['specialContent'] }}
+          </ng-container>
+        </ng-template>
+      </ave-select>
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-5">
+      <pre>Current Select: {{ currentOption4 | json }}</pre>
+    </div>
+  </div>
+</section>
+<section>
+  <h4>多选</h4>
+  <div class="row">
+    <div class="col-md-5">
+      <div style="margin-top:20px">只在列表使用模板</div>
+      <ave-select [options]="languages3" [filterKey]="'name'" [(ngModel)]="currentOption5" [placeholder]="'Search'"
+        [multiple]="true">
+        <ng-template let-option="option" let-filterKey="filterKey" let-checked="checked">
+          <ng-container *ngIf="!checked">[ ]</ng-container>
+          <ng-container *ngIf="checked">[x]</ng-container>
+          Do you agree {{ option[filterKey] }} ?
+        </ng-template>
+      </ave-select>
+
+      <div style="margin-top:20px">在列表和选中项使用不同模板</div>
+      <ave-select [options]="languages3" [filterKey]="'name'" [(ngModel)]="currentOption5" [placeholder]="'Search'"
+        [multiple]="true" [extraConfig]="{selectedItemWithTemplate:{enable: true}}">
+        <ng-template let-option="option" let-filterKey="filterKey" let-position="position" let-checked="checked">
+          <ng-container *ngIf="position ==='result'">
+            <ng-container *ngIf="option?.length === languages3.length"> Agree With All</ng-container>
+            <ng-container *ngIf="option?.length !== languages3.length">
+              Agrre with <ng-container *ngFor="let op of option;let index = index">
+                <ng-container *ngIf="index !== 0 ">, </ng-container>{{op[filterKey]}}
+              </ng-container>.
+              <!-- -->
+            </ng-container>
+          </ng-container>
+          <ng-container *ngIf="position ==='list'">
+            <ng-container *ngIf="!checked">[ ]</ng-container>
+            <ng-container *ngIf="checked">[x]</ng-container>
+            Do you agree with {{ option[filterKey] }} ?
+          </ng-container>
+        </ng-template>
+      </ave-select>
+      <div style="margin-top:20px">在列表和选中项使用不同模板， 某些情况下使用内置模板</div>
+      <ave-select [options]="languages3" [filterKey]="'name'" [(ngModel)]="currentOption5" [placeholder]="'Search'"
+        [multiple]="true" [extraConfig]="{selectedItemWithTemplate:{enable: true}}">
+        <ng-template let-option="option" let-filterKey="filterKey" let-position="position" let-checked="checked"
+          let-template="template">
+          <ng-container *ngIf="position ==='result'">
+            <ng-container *ngIf="option?.length === languages3.length"> Agree With All</ng-container>
+            <ng-container *ngIf="option?.length !== languages3.length">
+              Agrre with <ng-container *ngFor="let op of option;let index = index">
+                <ng-container *ngIf="index !== 0 ">, </ng-container>{{op[filterKey]}}
+              </ng-container>.
+            </ng-container>
+          </ng-container>
+          <ng-container *ngIf="position ==='list'">
+            <ng-template [ngTemplateOutlet]="template"
+              [ngTemplateOutletContext]="{option: option, checked: checked, filterKey: filterKey}"></ng-template>
+          </ng-container>
+        </ng-template>
+      </ave-select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-5">
+      <pre>Current Select: {{ currentOption5 | json }}</pre>
+    </div>
+  </div>
+</section>

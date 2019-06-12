@@ -1,0 +1,13 @@
+<section>
+  <ave-radio-group
+      [cssStyle]="'row'"
+      [(ngModel)]="choose2_2"
+      (change)="log($event)">
+    <ave-radio
+        [name]="'customized-city'"
+        *ngFor="let value of values2"
+        [value]="value">
+      The Radio value is: {{value}}
+    </ave-radio>
+  </ave-radio-group>
+</section>

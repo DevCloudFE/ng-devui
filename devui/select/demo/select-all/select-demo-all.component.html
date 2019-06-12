@@ -1,0 +1,13 @@
+<section>
+  <div class="row">
+    <div class="col-md-5">
+      <ave-select [options]="languages" [isSearch]="true" [multiple]="true" [(ngModel)]="select2" [isSelectAll]="true">
+      </ave-select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-5">
+      <pre>Current Select: {{ select2 | json }}</pre>
+    </div>
+  </div>
+</section>

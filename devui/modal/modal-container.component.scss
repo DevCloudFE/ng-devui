@@ -1,0 +1,22 @@
+.modal-body{
+    padding:10px 30px 10px 30px;
+}
+
+.display-flex {
+    display: flex;
+    align-items: center;
+    display: -ms-flexbox;
+    -ms-flex-align: center;
+}
+
+.alert-icon {
+    margin-right: 10px;
+}
+div.content {
+    word-break: normal;
+    word-wrap: break-word;
+    width: 100%;
+}
+.alert-icon + div.content {
+    width: 'calc(100% - 60px)';
+}

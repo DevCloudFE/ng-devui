@@ -1,0 +1,19 @@
+<div #selectBox class="host" tabindex="-1" (click)="host_click()">
+    <div class="tags">
+        <ul class="tag-list list-unstyled">
+            <li class="tag-item" *ngFor="let tag of tags;let index=index;">
+                <span>{{tag[displayProperty]}}</span>
+                <a class="remove-button" (click)="removeTag(index)">×</a>
+            </li>
+        </ul>
+        <input #tagInput class="input devui-input" [(ngModel)]="newTag" (keydown)="input_keydown($event)" (focus)="input_focus($event)"
+            (blur)="input_blur($event)" (trim)="false" [placeholder]="placeholder"
+            [spellcheck]="spellcheck" [ngClass]="{'invalid-tag': !newTagValid}" type="text">
+    </div>
+    <div class="autocomplete" *ngIf="showSuggestionList&&availableOptions?.length">
+        <ul class="suggestion-list">
+            <li class="suggestion-item" *ngFor="let item of availableOptions;let index=index;"
+                [ngClass]="{'selected': index === selectIndex}" (mousedown)="addSuggestionByIndex(index, item)">{{item[displayProperty]}}</li>
+        </ul>
+    </div>
+</div>

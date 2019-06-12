@@ -1,0 +1,7 @@
+<section>
+    <ave-button (click)="openDrawer()">打开侧滑窗</ave-button>
+    <div [style.margin-top]="'10px'">
+        <ave-button (click)="destroy()" [disabled]="!results?.drawerInstance">手动销毁</ave-button>
+        <div [style.margin-top]="'5px'">关闭后可手动销毁，打开状态调用无效</div>
+    </div>
+  </section>

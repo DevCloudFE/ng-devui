@@ -1,0 +1,137 @@
+@import '../style/theme/color';
+@import '../style/theme/variables';
+@import '../style/mixins/index';
+
+.tree-node {
+  color: $dark2;
+  line-height: 1;
+  white-space: nowrap;
+
+  .tree-node__content {
+    display: inline-flex;
+    align-items: center;
+    font-size: 14px;
+  }
+
+  .tree-node__content--value-wrapper {
+    display: inline-flex;
+    align-items: center;
+    padding: .1em;
+    margin: .3em 0;
+
+    &.isMatch {
+      color: $focus1;
+      border: 1px solid $gray2;//#E8F0FD;
+      border-radius: .2em;
+    }
+  }
+
+  .tree-node__children {
+    padding-left: .8em;
+    &:first-child {
+      border-left-color: transparent;
+    }
+
+    .tree-node {
+      margin-left: 1.2em;
+      content: "";
+      position: relative;
+
+      &:last-child {
+        border-left-color: transparent;
+      }
+    }
+  }
+
+  .tree-node--parent {
+  }
+
+  .tree-node__title {
+    margin-left: .4em;
+    padding: .1em;
+    display: inline-block;
+    border: 1px dashed transparent;
+    border-radius: 2px;
+    cursor: pointer;
+
+    &.active {
+      background-color: $focus3;
+      color: $focus1;
+      text-decoration: none;
+      border-color: transparent;
+    }
+  }
+
+  .tree-node__leaf {
+    cursor: default;
+
+    .tree-node__leaf--default {
+      color: #f2a71f;
+    }
+  }
+
+  .tree-node__folder {
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+    user-select: none;
+
+    .tree-node__folder--default {
+      color: #F2B806;
+    }
+  }
+
+  .loading-children {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 0.5em;
+    margin-top: .15em;
+  }
+
+  .loading-children:after {
+    content: 'loading ...';
+    color: $status-blue;
+    font-style: italic;
+    font-size: 1em;
+    animation-name: loading-children;
+    animation-duration: 2s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+  }
+
+
+  @keyframes loading-children {
+    0% {
+      color: lighten($status-blue, 0.95);
+    }
+    12.5% {
+      color: lighten($status-blue, 0.85);
+    }
+    25% {
+      color: lighten($status-blue, 0.75);
+    }
+    37.5% {
+      color: lighten($status-blue, 0.65);
+    }
+    50% {
+      color: lighten($status-blue, 0.55);
+    }
+    62.5% {
+      color: lighten($status-blue, 0.45);
+    }
+    75% {
+      color: lighten($status-blue, 0.35);
+    }
+    87.5% {
+      color: lighten($status-blue, 0.1);
+    }
+    100% {
+      color: $status-blue;
+    }
+  }
+
+  svg.svg-icon > g > g > path {
+    fill: $dark2;
+  }
+}
+

@@ -1,0 +1,13 @@
+<div>
+    <div class="modal-body">
+        <div *ngIf="!!data.content">{{data.content}}</div>
+    </div>
+    <div class="modal-footer">
+        <ave-button
+                (click)='close($event)'
+                bsStyle="stress"
+                circled="true"  
+        >{{data.cancelBtnText}}
+        </ave-button>
+    </div>
+</div>

@@ -1,0 +1,34 @@
+<section>
+  <div aveAnchorBox [view]="{top: 60, bottom: 0}" [defaultAnchor]="'base-info'" [scrollTarget]="demoDocViewer"
+    class="mymain" style="position:relative;">
+    <div class="mysidebar">
+      <ave-sticky [view]="{top: 60, bottom: 0}" [scrollTarget]="demoDocViewer">
+        <ul class="step-nav">
+          <li [aveAnchorLink]="'base-info'" anchorActive="active">基本信息</li>
+          <li [aveAnchorLink]="'issue-list'" anchorActive="active">需求列表</li>
+          <li [aveAnchorLink]="'case-list'" anchorActive="active">用例列表</li>
+          <li [aveAnchorLink]="'quarlity-result'" anchorActive="active">质量评估</li>
+        </ul>
+      </ave-sticky>
+    </div>
+    <div class="mycontent">
+      <div [aveAnchor]="'base-info'" class="section-block">
+        <h3>基本信息</h3>
+        这里显示基本信息。
+      </div>
+      <div [aveAnchor]="'issue-list'" class="section-block">
+        <h3>需求列表</h3>
+        这里显示需求列表。
+      </div>
+      <div [aveAnchor]="'case-list'" class="section-block">
+        <h3>用例列表</h3>
+        这里显示用例列表。
+      </div>
+      <div [aveAnchor]="'quarlity-result'" class="section-block">
+        <h3>质量评估</h3>
+        这里显示质量评估。
+      </div>
+    </div>
+  </div>
+  <p>组件仅实现了锚点的功能，可搭配sticky使用，跟随滚动效果请参考sticky</p>
+</section>

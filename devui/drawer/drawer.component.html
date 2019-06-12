@@ -1,0 +1,15 @@
+<div class='drawer' [ngClass]="{'left0': _isCover && animateState === 'in'}">
+    <div class='overlay-wrapper' [ngClass]="{'left0': _isCover && animateState === 'in'}">
+        <div class='overlay-backdrop'
+                [@fadeInOut]='animateState'
+                (click)='backdropCloseable && hide()'></div>
+        <div class='drawer-nav'
+                [ngStyle]="{'width': _width}"
+                [@flyInOut]='animateState'
+                (@flyInOut.done)='onAnimationEnd($event)'>
+            <div class="drawer-content">
+                <ng-template aveDrawerContentHost></ng-template>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,8 @@
+<ave-data-table #datatable2 [resizeable]="true" [dataSource]="maxHeightAndFixHeaderDataSource" [pageAllChecked]="true"
+  [scrollable]="true" maxHeight="400px" [showDetail]="true" (checkAllChange)="onCheckAllChange($event)"
+  [checkable]="true" [fixHeader]="true" (rowCheckChange)="onRowCheckChange($event, datatable2)">
+  <ave-column field="$index" header="#" [width]="'100px'"></ave-column>
+  <ave-column *ngFor="let colOption of dataTableOptions.columns" [field]="colOption.field" [header]="colOption.header"
+    [sortable]="colOption.sortable" [fieldType]="colOption.fieldType" [width]="'150px'">
+  </ave-column>
+</ave-data-table>

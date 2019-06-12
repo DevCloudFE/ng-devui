@@ -1,0 +1,27 @@
+<ng-template [ngTemplateOutlet]="uploadedFilesRef ? uploadedFilesRef : default"
+          [ngTemplateOutletContext]="{ $implicit: this, uploadedFiles: uploadedFiles, filePath: filePath, deleteFile: deleteFileProxy}">
+</ng-template>
+
+<ng-template #default>
+    <table class="table" *ngIf="uploadedFiles.length>0" [style.margin-bottom.px]="0">
+        <tbody>
+        <tr *ngFor="let uploadedFile of uploadedFiles; let index=index;">
+            <td width="50%">
+                <span>{{uploadedFile.name}}</span>
+            </td>
+            <td width="25%">
+                <span>{{UPLOADED}}</span>
+            </td>
+            <td>
+                <ave-button
+                        icon="trash"
+                        bsStyle="danger"
+                        bsSize="xs"
+                        (click)="deleteFile(uploadedFile[filePath])">
+                    {{ DELETE }}
+                </ave-button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</ng-template>

@@ -1,0 +1,37 @@
+<ave-uploaded-files
+        #aveUploadedFiles
+        [uploadedFiles]="uploadedFiles"
+        [filePath]="filePath"
+        [uploadedFilesRef]="uploadedFilesRef"
+        (deleteUploadedFileEvent)="_deleteUploadedFileEvent($event)">
+</ave-uploaded-files>
+<ng-template [ngTemplateOutlet]="preloadFilesRef ? preloadFilesRef : default"
+          [ngTemplateOutletContext]="{ $implicit: this, fileUploaders: fileUploaders, UploadStatus: UploadStatus, deleteFile: deleteFileProxy}">
+</ng-template>
+<ng-template #default>
+    <table class="table" *ngIf="fileUploaders.length>0">
+        <tr *ngFor="let fileUploader of fileUploaders;let index=index;">
+            <td width="50%">
+                <span>{{fileUploader.file.name}}</span>
+            </td>
+            <td width="25%">
+                <span *ngIf="fileUploader.status===UploadStatus.preLoad">{{PRELOAD}}</span>
+                <span *ngIf="fileUploader.status===UploadStatus.uploading">{{UPLOADING}}</span>
+                <span *ngIf="fileUploader.status===UploadStatus.uploaded">{{UPLOADED}}</span>
+                <span *ngIf="fileUploader.status===UploadStatus.failed">{{FAILED}}</span>
+            </td>
+            <td>
+                <ave-button
+                        icon="trash"
+                        bsStyle="danger"
+                        bsSize="xs"
+                        *ngIf="fileUploader.status!==UploadStatus.uploaded"
+                        [disabled]="fileUploader.status===UploadStatus.uploading"
+                        (click)="deleteFile(fileUploader.file)">
+                    {{DELETE}}
+                </ave-button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</ng-template>

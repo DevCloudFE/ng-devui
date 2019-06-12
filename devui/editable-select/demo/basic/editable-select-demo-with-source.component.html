@@ -1,0 +1,9 @@
+<section>
+    <ave-editable-select
+        [source]="languages"
+        [maxHeight]='300'
+        [(ngModel)]="selectItem1"
+        name="multiple-auto">
+    </ave-editable-select>
+    <pre>{{ (selectItem1 | json) || "No language select!"}}</pre>
+</section>

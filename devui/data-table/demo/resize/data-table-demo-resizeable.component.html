@@ -1,0 +1,64 @@
+<ave-data-table (detialToggle)="detailToggle($event)" [detailTemplateRef]="detailTemplateRef" [scrollable]="true"
+  [resizeable]="true" [dataSource]="resizeableDataSource" (pageIndexChange)="changePageContent($event)"
+  [multiSort]="multiSort" (multiSortChange)="multiSortChange($event)" (resize)="onResize($event)"
+  [columnDefs]="columnDefs" [pager]="pager" [showDetail]="true" [checkable]="true" [hideColumn]="hideColumn"
+  [showSortIcon]="showSortIcon">
+  <ave-column field="$index" header="#" [width]="'50px'" [minWidth]="'50px'"></ave-column>
+  <ave-column field="firstName" header="First Name" [sortable]="true" [width]="'150px'" [minWidth]="'150px'">
+  </ave-column>
+  <ave-column field="lastName" header="Last Name" [sortable]="true" [width]="'150px'" [minWidth]="'150px'"></ave-column>
+  <ave-column field="gender" header="Gender" [sortable]="true" [minWidth]="'200px'" [width]="'300px'"
+    [style]="{'overflow':'visible'}">
+    <ave-head-cell>
+      <ng-template let-column="column" let-head="">
+        <span aveTooltip [content]="column.header + ' is a head cell template'" [position]="'bottom'"
+          style="cursor:pointer;" (click)="head.onHeadClick(column)">
+          {{column.header}}
+        </span>
+      </ng-template>
+    </ave-head-cell>
+    <ave-cell>
+      <ng-template let-cellValue="cellValue" let-rowItem="rowItem">
+        <span aveTooltip [content]="rowItem.firstName + ' is a ' + cellValue" [position]="'bottom'">
+          {{cellValue.toUpperCase()}}
+        </span>
+      </ng-template>
+    </ave-cell>
+  </ave-column>
+  <ave-column field="dob" header="Date of birth" [fieldType]="'date'" [extraOptions]="{dateFormat: 'MM/DD/YYYY'}"
+    [width]="'100px'" [minWidth]="'100px'"></ave-column>
+  <ave-column field="filter" header="#" [width]="'35px'" [minWidth]="'35px'" [style]="{'overflow':'visible'}">
+    <ave-head-cell>
+      <ng-template>
+        <span aveTooltip content="header filter" [position]="'bottom'" [showAnimate]="true" class="setRole icon-setting"
+          id="setRoleFilter"></span>
+
+        <div class="filter_box" *ngIf="showFilterWin" id="filter_box">
+          <ul class="filter_ul">
+            <li *ngFor="let title of selectedTitle">
+              <span style="position: relative; top: 3px;display: inline-block;max-width: 100%;">
+                <ave-checkbox [name]="'checkbox'" [label]="title.name" [ngModel]="title.selected"
+                  (change)="updateHideColumn($event,title)">
+                </ave-checkbox>
+              </span>
+            </li>
+          </ul>
+        </div>
+      </ng-template>
+    </ave-head-cell>
+  </ave-column>
+</ave-data-table>
+<ave-button style="margin-bottom: 20px;" bordered="true" bsSize="xs" (click)="ChangeIcon()">
+  切换排序未激活图标显示状态
+</ave-button>
+<p>Current multisort parameters:</p>
+<pre>{{ multiSort | json }}</pre>
+
+<ng-template #detailTemplateRef let-detail="detail" let-rowIndex="rowIndex" let-rowItem="rowItem">
+  <div>detail: {{detail}}</div>
+  <div>rowIndex: {{rowIndex}}</div>
+  <div>firstName: {{rowItem.firstName}}</div>
+  <div>lastName: {{rowItem.lastName}}</div>
+  <div>gender: {{rowItem.gender}}</div>
+  <ave-button>This is button</ave-button>
+</ng-template>

@@ -1,0 +1,8 @@
+<section>
+  <ave-operable-tree [tree]="data" [treeNodeIdKey]="'id'" [treeNodeChildrenKey]="'children'" [checkable]="false"
+    [draggable]='true' (nodeOnDrop)='onDrop($event)' [beforeNodeDrop]="beforeNodeDrop">
+  </ave-operable-tree>
+  <span style="display: inline-block; padding:10px 5px; margin: 5px 0; border: 1px solid #405DFF; cursor: move"
+    id="draggableEl" draggable="true">将我拖动树节点上</span>
+  <pre>transferData:{{ transferData }}</pre>
+</section>

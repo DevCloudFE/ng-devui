@@ -1,0 +1,52 @@
+.my-icon::before {
+  width: 16px;
+  height: 16px;
+  font-style: italic;
+  font-size: 12px;
+  line-height: 14px;
+  display: inline-block;
+  text-align: center;
+  color: #FFF;
+  border-radius: 2px;
+}
+.my-icon.doc::before {
+  content:"W";
+  background-color: #295396;
+  border: 1px #248 solid;
+}
+.my-icon.pdf::before{
+  content:"A";
+  background-color: #DA0A0A;
+  border: 1px #D00 solid;
+}
+.my-icon.xls::before {
+  content:"X";
+  background-color: #207044;
+  border: 1px #18683C solid;
+}
+.my-icon.ppt::before {
+  content:"P";
+  background-color: #D14424;
+  border: 1px #d42 solid;
+}
+.my-icon.mix::before {
+  content:"?";
+  font-style: normal;
+  background-color: #aaa;
+  border: 1px #999 solid;
+}
+:host ::ng-deep .icon.icon-collapse {
+  transform: rotateY(180deg); display: inline-block;
+}
+.op-icons{
+  display: inline-block;
+  margin-right: 5px;
+  cursor: pointer;
+}
+.op-status{
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #3DCCA6;
+  margin-right: 5px;
+}

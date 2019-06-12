@@ -1,0 +1,129 @@
+@import '../style/theme/color';
+
+.devui-data-table {
+  border: none;
+  .devui-table-view {
+    padding: 0px;
+    border: none;
+    position: relative;
+    .scroll-view {
+      overflow-y: auto;
+      overflow-x: auto;
+    }
+    .devui-table {
+      border-collapse: collapse;
+      border-spacing: 0;
+      table-layout:fixed;
+      width: 100%;
+      max-width: 100%;
+      position: relative;
+      margin: 0px;
+    }
+    .resize-bar {
+      top: 0;
+      bottom: 0;
+      display: inline-block;
+      position: absolute;
+      cursor: col-resize;
+      background:  $dark2;
+      width: 2px;
+      z-index: 9999;
+      display: none;
+    }
+    .resize-overlay {
+      position: absolute;
+      display: block;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      z-index: 1000;
+    }
+  }
+  .devui-table-view-footer {
+    border: none;
+    margin: 0px;
+    text-align: right;
+  }
+}
+.table-hover ::ng-deep tbody > tr:hover{
+  background: $hover-content;
+}
+.devui-table ::ng-deep{
+  thead > tr {
+    background-color: $white;
+    th {
+      vertical-align: middle;
+      border-bottom-width: 1px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      text-align: left;
+      display: table-cell;
+      line-height: 18px;
+      padding: 10px 0 10px 20px;
+      font-size: 12px;
+      border-bottom: 1px solid $gray1;
+    }
+  }
+  tbody > tr > td {
+    vertical-align: middle;
+    padding: 8px 8px 7px 20px;
+    border-top: none;
+    border-bottom: 1px solid $gray2;
+    word-wrap: break-word;
+    word-break: break-all;
+    line-height: 24px;
+    font-size: 14px;
+    color: $dark1;
+    &.checkable-cell {
+      line-height: 18px;
+      padding: 10px 10px 9px;
+    }
+    a {
+      color: $dark1;
+    }
+
+  }
+  th, td{
+    position: relative;
+  }
+  th:first-child, td:first-child{
+    margin: 0 5px;
+  }
+  .clickable{
+    cursor: pointer;
+  }
+  .ave-checkbox-material {
+    margin-right: 0;
+  }
+  .ave-checkbox > label {
+    margin: auto;
+  }
+  .resize-handle{
+    display: inline-block;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 5px;
+    border-right: 1px solid $white;
+    cursor: col-resize;
+  }
+  th.resizeable.last-resize-header{
+    .resize-handle{
+      border-right: 1px solid transparent;
+    }
+  }
+  .resizeable:hover, .resizeable.last-resize-header:hover{
+    .resize-handle{
+      border-right: 1px dashed $gray1;
+    }
+  }
+}
+
+.devui-table.striped ::ng-deep{
+  tbody > tr:nth-of-type(odd){
+    background: rgba($gray3, .3);
+  }
+}

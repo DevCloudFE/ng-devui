@@ -1,0 +1,142 @@
+.devui-pagination {
+  .page-size {
+    display: inline-block;
+    max-width: 100px;
+    vertical-align: middle;
+    margin: 0 10px 0 0;
+    position: relative;
+    &.page-size-sm {
+      max-width: 60px;
+    }
+    &.page-size-lg {
+      max-width: 100px;
+    }
+  }
+
+  .total-size {
+    display: inline-block;
+    position: relative;
+    margin: 0 20px 0 0px;
+  }
+
+  .pagination {
+    display: inline-block;
+    margin: 20px 0;
+
+    > .disabled > a,
+    > .disabled > a:hover,
+    > .disabled > a:focus {
+      cursor: not-allowed;
+    }
+
+    li {
+      display: inline;
+    }
+
+    li:not(.disabled) {
+      cursor: pointer;
+    }
+
+    .pagination-link {
+      svg {
+        vertical-align: middle;
+      }
+    }
+  }
+
+  .pagination > li > a {
+    margin-left: 5px;
+    padding: 5px 12px;
+    line-height: 1.42857143;
+  }
+
+  .pagination-sm > li > a {
+    padding: 4px 10px;
+    line-height: 1.66666667;
+    font-size: 12px;
+  }
+
+  .pagination-lg > li > a {
+    padding: 9px 17px;
+    font-size: 18px;
+    line-height: 1.3333333;
+  }
+
+  .pagination > li:first-child > a,
+  .pagination > li:last-child > a {
+    padding: 4px 11px;
+    border-radius: 1px;
+    border-width: 1px;
+    border-style: solid;
+  }
+
+  .pagination-sm > li:first-child > a,
+  .pagination-sm > li:last-child > a {
+    padding: 3px 4px;
+  }
+
+  .pagination-lg > li:first-child > a,
+  .pagination-lg > li:last-child > a {
+    padding: 8px 16px;
+  }
+
+  .jump-container {
+    display: inline-block;
+    position: relative;
+    margin: 0 10px 0 10px;
+    .devui-input {
+      display: inline-block;
+      width: 50px;
+      margin-right: 5px;
+    }
+  }
+
+  .jump-button {
+    display: inline-block;
+    border-width: 1px;
+    border-style: solid;
+    vertical-align: bottom;
+    border-radius: 1px;
+    cursor: pointer;
+    .go {
+      width: 0;
+      height: 0;
+      border-top-style: solid;
+      border-left-style: solid;
+      border-bottom-style: solid;
+    }
+  }
+
+  .jump-size-default {
+    width: 32px;
+    height: 32px;
+    .go {
+      border-top-width: 8px;
+      border-left-width: 8px;
+      border-bottom-width: 8px;
+      margin: 8px auto;
+    }
+  }
+
+  .jump-size-sm {
+    width: 30px;
+    height: 30px;
+    .go {
+      border-top-width: 6px;
+      border-left-width: 6px;
+      border-bottom-width: 6px;
+      margin: 9px auto;
+    }
+  }
+
+  .jump-size-lg {
+    width: 34px;
+    height: 34px;
+    .go {
+      border-top-width: 12px;
+      border-left-width: 12px;
+      border-bottom-width: 12px;
+      margin: 5px auto;
+    }
+  }
+}

@@ -1,0 +1,16 @@
+<ng-template #defaultItemTemplate let-item="item" let-term="term">
+  <ave-hightlight [value]="formatter(item)" [term]="term"></ave-hightlight>
+</ng-template>
+
+<ul class="scroll-height" [style.maxHeight]="maxHeight + 'px'">
+  <li *ngFor="let item of source; let $index = index; trackBy: trackByFn" class="devui-dropdown-item"
+      [ngClass]="{'devui-dropdown-bg': $index == activeIndex}" (click)="onSelect(item)"
+      (mouseenter)="onActiveIndexChange($index)">
+    <ng-template [ngTemplateOutlet]="itemTemplate || defaultItemTemplate"
+              [ngTemplateOutletContext]="{ formatter: formatter, term:term, source:source, item:item, $index:$index}"></ng-template>
+  </li>
+  <li class="devui-dropdown-item" *ngIf="!source?.length && noResultItemTemplate">
+    <ng-template [ngTemplateOutlet]="noResultItemTemplate"
+              [ngTemplateOutletContext]="{ term:term, source:source}"></ng-template>
+  </li>
+</ul>

@@ -1,0 +1,12 @@
+<section>
+    <ave-tabs [(activeTab)]="tab2acticeID">
+        <ave-tab *ngFor="let item of tabItems;" [disabled]="item.disabled" [id]="item.id">
+            <ng-template aveTabTitle>
+                {{item.title}}
+            </ng-template>
+            <ng-template aveTabContent>
+                {{item.content}}
+            </ng-template>
+        </ave-tab>
+    </ave-tabs>
+</section>

@@ -1,0 +1,105 @@
+@import '../style/theme/color';
+@import '../style/theme/variables';
+@import '../style/mixins/index';
+
+.modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1050;
+    outline: 0;
+    overflow-y: auto;
+    display:flex;
+    -webkit-box-pack:center;
+    -ms-flex-pack:center;
+    justify-content:center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+.modal-open .modal {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.modal-dialog {
+  position: relative;
+  width: auto;
+  margin: 0px auto;
+}
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1040;
+  opacity: 0.2;
+  background-color: $dark;
+}
+
+:host /deep/ .modal-content{
+  position: relative;
+  border-radius: 2px;
+  border: none;
+  background-color: $white;
+  background-clip: padding-box;
+  outline: 0;
+  box-shadow: 5px 5px 20px 0 rgba($dark, .2);
+  .modal-body {
+    padding-top:    24px;
+    padding-right:  24px;
+    padding-bottom: 16px;
+    padding-left:   24px;
+  }
+
+  .modal-footer {
+    border-top: none;
+    padding: 7px;
+    text-align: center;
+    button {
+      margin: 5px;
+      padding: 5px 20px;
+      width: auto;
+      &.pull-left {
+        padding-left: 5px;
+        padding-right: 5px;
+        position: relative;
+        left: -5px;
+      }
+    }
+    button+button {
+      margin-bottom: 16px;
+    }
+  }
+}
+
+:host /deep/ .ave-btn {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    white-space: nowrap;
+    font-size: 14px;
+    line-height: 1.42857143;
+    border-radius: 2px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+:focus {
+    outline: none;
+}

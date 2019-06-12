@@ -1,0 +1,45 @@
+@import '../style/theme/color';
+@import '../style/theme/variables';
+@import '../style/mixins/index';
+
+$devui-alert-padding: 15px;
+$devui-alert-font-size: 14px;
+$devui-alert-line-height: 20px;
+
+$devui-alert-close-color: $white;
+$devui-alert-colors: (
+  success: (bg: $status-green, color: $white),
+  info: (bg: $status-blue, color: $white),
+  warning: (bg: $status-yellow, color: $dark1),
+  danger: (bg: $status-red, color: $white)
+);
+
+.devui-alert {
+  font-size: $devui-alert-font-size;
+  line-height: $devui-alert-line-height;
+  padding: $devui-alert-padding;
+}
+
+.devui-alert-close {
+  color: $devui-alert-close-color;
+}
+
+@each $c in success, info, warning, danger {
+  .devui-alert-#{$c} {
+      background-color: map-get(map-get($devui-alert-colors, $c), 'bg');
+      color: map-get(map-get($devui-alert-colors, $c), 'color');
+      @if $c == 'warning' {
+        .devui-alert-close {
+          color: $dark1;
+        }
+      }
+  }
+}
+
+.devui-alert-icon-close-warn{
+  fill: $dark1;
+}
+
+.devui-alert-icon-close-no-warn {
+  fill: $white;
+}

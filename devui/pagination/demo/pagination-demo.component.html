@@ -1,0 +1,22 @@
+<div class="demo-container">
+    <div class="demo-example">
+        <div class="demo-title">基本用法</div>
+        <div class="demo-text">
+
+        </div>
+        <ave-codebox id="components-tabs-default" [sourceData]="basicSource">
+            <ave-basic demo></ave-basic>
+        </ave-codebox>
+    </div>
+
+    <div class="demo-example">
+        <div class="demo-title">特殊情况</div>
+        <div class="demo-text">
+            某些场景导致当前页码大于总页数的时候，建议开发者自己处理，如果不进行处理，可以打开showTruePageIndex开关
+        </div>
+        <ave-codebox id="components-tabs-default" [sourceData]="specialSource">
+            <ave-special demo></ave-special>
+        </ave-codebox>
+    </div>
+</div>
+

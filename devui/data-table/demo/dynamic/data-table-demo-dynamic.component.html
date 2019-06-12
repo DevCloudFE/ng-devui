@@ -1,0 +1,7 @@
+<ave-data-table #datatable [dataSource]="dynamicDataSource" [pageAllChecked]="true" [checkable]="true"
+  (checkAllChange)="onCheckAllChange($event)" (rowCheckChange)="onRowCheckChange($event, datatable)">
+  <ave-column field="$index" header="#" [width]="'50px'"></ave-column>
+  <ave-column *ngFor="let colOption of dataTableOptions.columns" [field]="colOption.field" [header]="colOption.header"
+    [sortable]="colOption.sortable" [fieldType]="colOption.fieldType" [width]="'150px'">
+  </ave-column>
+</ave-data-table>

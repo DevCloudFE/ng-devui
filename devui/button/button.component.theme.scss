@@ -1,0 +1,165 @@
+@import '../style/theme/color';
+@import '../style/theme/variables';
+@import '../style/mixins/index';
+
+$devui-btn-loading-color: $dark1;
+$devui-btn-xs-padding: 1px 5px;
+$devui-btn-padding: 5px 20px;
+$devui-btn-lg-padding: 10px 16px;
+$devui-btn-min-width: 80px;
+$devui-btn-xs-font-size: 12px;
+$devui-btn-font-size: 14px;
+$devui-btn-lg-font-size: 18px;
+$devui-btn-line-height: 20px;
+$devui-btn-xs-circled-border-radius: 10px;
+$devui-btn-circled-border-radius: 20px;
+$devui-btn-lg-circled-border-radius: 45px;
+$devui-btn-xs-circled-horizontal-padding: 10px;
+$devui-btn-lg-circled-horizontal-padding: 35px;
+
+$devui-btn-normal-config: (text: (
+  color: $focus1,
+  padding: 0,
+), text-dark: (
+  color: $dark1,
+  padding: 0,
+), common: (
+  color: $dark1,
+  min-width: $devui-btn-min-width,
+  background-color: $white,
+  border-color: $gray1,
+), stress: (
+  color: $white,
+  min-width: $devui-btn-min-width,
+  background-color: $focus1,
+), primary: (
+  color: $white,
+  min-width: $devui-btn-min-width,
+  background-color: $focus1,
+), xs: (
+  padding: $devui-btn-xs-padding,
+  font-size: $devui-btn-xs-font-size,
+), lg: (
+  padding: $devui-btn-lg-padding,
+  font-size: $devui-btn-lg-font-size,
+));
+
+$devui-btn-pseudo-config: (
+  text: (hover: (
+    background-color: $white,
+    color: $hover-control,
+  ), focus: (
+    background-color: $white,
+    color: $hover-control,
+  ), active: (
+    background-color: $white,
+    color: $focus2
+  )),
+  text-dark: (hover: (
+    background-color: $white,
+    color: $hover-control,
+  ), focus: (
+    background-color: $white,
+    color: $hover-control,
+  ), active: (
+    background-color: $white,
+    color: $focus2,
+  )),
+  common: (hover: (
+    border-color: $hover-control,
+  ), focus: (
+    border-color: $hover-control,
+  ), active: (
+    border-color: $focus2,
+  )),
+  stress: (hover: (
+    background-color: $hover-control,
+  ), focus: (
+    background-color: $hover-control,
+  ), active: (
+    background-color: $focus2,
+  )),
+  primary: (hover: (
+    background-color: $hover-control,
+  ), focus: (
+    background-color: $hover-control,
+  ), active: (
+    background-color: $focus2,
+  ))
+);
+
+.devui-btn {
+  padding: $devui-btn-padding;
+  font-size: $devui-btn-font-size;
+  line-height: $devui-btn-line-height;
+  border-radius: 1px;
+  border-width: 1px;
+  border-color: transparent;
+  background-color: transparent;
+
+  @each $type in text, text-dark, common, stress, primary, xs, lg {
+    &.devui-btn-#{$type} {
+      @each $key, $value in map-get($devui-btn-normal-config, $type) {
+        #{$key}: $value;
+      }
+    }
+  }
+
+  @each $type in text, text-dark, common, stress, primary {
+    &.devui-btn-#{$type} {
+      @each $pseudo, $value in map-get($devui-btn-pseudo-config, $type) {
+        &:#{$pseudo} {
+          @each $key, $value2 in map-get(map-get($devui-btn-pseudo-config, $type), $pseudo) {
+            #{$key}: $value2;
+          }
+        }
+      }
+    }
+  }
+
+  &.bordered {
+    &.devui-btn-common {
+      color: $dark1;
+      border-color: transparent;
+      &:hover, &:focus {
+        border-color: $hover-control;
+      }
+      &:active {
+       border-color: $focus2;
+      }
+    }
+
+    &.devui-btn-stress,
+    &.devui-btn-primary {
+      border-color: $focus1;
+      color: $focus1;
+      background-color: $white;
+    }
+
+    &.devui-btn-success {
+      border-color: $status-green;
+      color: $status-green;
+      background-color: $white;
+    }
+
+    &.devui-btn-warning {
+      border-color: $status-yellow;
+      color: $status-yellow;
+      background-color: $white;
+    }
+
+    &.devui-btn-danger {
+      border-color: $status-red;
+      color: $status-red;
+      background-color: $white;
+    }
+  }
+}
+
+.devui-loading {
+  .devui-loading-default-spinner {
+    div {
+      background-color: $dark1;
+    }
+  }
+}

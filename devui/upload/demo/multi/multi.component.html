@@ -1,0 +1,16 @@
+<section style="width:400px;">
+  <h4>多文件上传</h4>
+  <ave-multiple-upload #multipleupload [fileOptions]="fileOptions2" [uploadedFiles]="uploadedFiles2" [filePath]="'name'"
+    [uploadOptions]="uploadOptions2" (onSuccess)="onSuccess2($event)"
+    (onDeleteUploadedFile)="deleteUploadedFile2($event)" (onError)="onError2($event)">
+  </ave-multiple-upload>
+  <h4>多文件支持拖动上传</h4>
+  <ave-multiple-upload #multipleupload [enableDrop]="true" [fileOptions]="fileOptions2" [uploadedFiles]="uploadedFiles2"
+    [filePath]="'name'" [uploadOptions]="uploadOptions2" (onSuccess)="onSuccess2($event)"
+    (onDeleteUploadedFile)="deleteUploadedFile2($event)" (onError)="onError2($event)" (fileDrop)="fileDrop($event)"
+    (fileOver)="fileOver($event)">
+  </ave-multiple-upload>
+  <div [style.margin-top.px]="15">
+    <pre>multipleupload uploadOptions: {{ multipleupload.uploadOptions | json }}</pre>
+  </div>
+</section>

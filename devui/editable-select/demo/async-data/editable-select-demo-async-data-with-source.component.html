@@ -1,0 +1,11 @@
+
+  <section>
+    <h4>Get Async Data With Source</h4>
+    <ave-button [showLoading]="loading3" (click)="getAsyncData()">Get Async Data in 3s</ave-button>
+    <ave-editable-select
+        [(ngModel)]="selectItem3"
+        [source]="languages2"
+        name="multiple-auto">
+    </ave-editable-select>
+    <pre>{{ (selectItem3 | json) || "No language select!"}}</pre>
+</section>

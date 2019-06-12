@@ -1,0 +1,7 @@
+@import '../style/theme/color';
+@import '../style/theme/variables';
+@import '../style/mixins/index';
+
+.devui-loading-backdrop {
+  background-color: rgba($gray1, .3);
+}

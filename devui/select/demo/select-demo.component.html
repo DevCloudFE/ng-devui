@@ -1,0 +1,41 @@
+<div class="demo-container">
+  <div class="demo-example">
+    <div class="demo-title">基本用法</div>
+    <div class="demo-text">
+      通过 options 配置数据源<br>
+      通过 overview、size 配置样式
+    </div>
+    <ave-codebox id="components-select-basic" [sourceData]="SelectDemoBasicComponent">
+      <ave-select-basic demo></ave-select-basic>
+    </ave-codebox>
+  </div>
+  <div class="demo-example">
+    <div class="demo-title">自定义搜索功能</div>
+    <div class="demo-text">
+      通过 isSearch、searchFn开启搜索功能并自定搜索方法<br>
+      通过 multiple 启用多选功能
+    </div>
+    <ave-codebox id="components-select-object" [sourceData]="SelectDemoObjectComponent">
+      <ave-select-object demo></ave-select-object>
+    </ave-codebox>
+  </div>
+  <div class="demo-example">
+    <div class="demo-title">全选下拉选项</div>
+    <div class="demo-text">
+      多选下拉中通过 isSelectAll 启用全选功能
+    </div>
+    <ave-codebox id="components-select-all" [sourceData]="SelectDemoAllComponent">
+      <ave-select-all demo></ave-select-all>
+    </ave-codebox>
+  </div>
+  <div class="demo-example">
+    <div class="demo-title">自定义模板</div>
+    <div class="demo-text">
+      通过模板配置下拉选项和已选项
+    </div>
+    <ave-codebox id="components-select-all" [sourceData]="SelectDemoTemplateComponent">
+      <ave-select-template demo></ave-select-template>
+    </ave-codebox>
+  </div>
+
+</div>

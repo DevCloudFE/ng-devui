@@ -1,0 +1,30 @@
+<div class="demo-container">
+    <div class="demo-example">
+        <div class="demo-title">基本用法</div>
+        <div class="demo-text">
+            单文件上传、拖动文件上传、自动上传
+        </div>
+        <ave-codebox id="basic" [sourceData]="basicSource">
+          <ave-basic demo></ave-basic>
+        </ave-codebox>
+    </div>
+    <div class="demo-example">
+      <div class="demo-title">多文件上传</div>
+      <div class="demo-text">
+        多文件上传，支持拖动文件上传
+      </div>
+      <ave-codebox id="basic" [sourceData]="multiSource">
+        <ave-multi demo></ave-multi>
+      </ave-codebox>
+  </div>
+  <div class="demo-example">
+      <div class="demo-title">自定义</div>
+      <div class="demo-text">
+        自定义上传按钮，通过 preloadFilesRef 设置已选择文件列表模板，
+        通过 uploadedFilesRef 设置已上传文件列表模版
+      </div>
+      <ave-codebox id="customize" [sourceData]="customizeSource">
+        <ave-customize demo></ave-customize>
+      </ave-codebox>
+  </div>
+</div>

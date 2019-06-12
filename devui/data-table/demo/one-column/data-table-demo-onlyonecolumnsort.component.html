@@ -1,0 +1,11 @@
+<ave-data-table [dataSource]="sortableDataSource" [onlyOneColumnSort]="true" [(multiSort)]="sortedColumn"
+  [checkable]="true">
+  <ave-column field="$index" header="#" [width]="'50px'"></ave-column>
+  <ave-column field="firstName" header="First Name" [sortable]="true" [width]="'150px'"></ave-column>
+  <ave-column field="lastName" header="Last Name" [sortable]="true" [width]="'150px'"></ave-column>
+  <ave-column field="gender" header="Gender" [sortable]="true" [width]="'100px'"></ave-column>
+  <ave-column field="dob" header="Date of birth" [fieldType]="'date'" [extraOptions]="{ dateFormat: 'MM/DD/YYYY' }"
+    [width]="'100px'"></ave-column>
+</ave-data-table>
+<p style="margin-top: 20px">Current Sort parameters:</p>
+<pre>{{ sortedColumn | json }}</pre>

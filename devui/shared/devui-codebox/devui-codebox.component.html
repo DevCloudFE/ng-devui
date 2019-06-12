@@ -1,0 +1,40 @@
+<section class="code-box" [ngClass]="{'expand':expanded}">
+  <section class="code-box-demo">
+    <div>
+      <ng-content select="[demo]"></ng-content>
+    </div>
+  </section>
+
+  <section class="code-box-meta markdown">
+    <span aveTooltip [content]="expanded?'收起代码':'展开代码'" [position]="'bottom'" alt="expand code" class="collapse" (click)="toggleCode()">
+      <svg width="16px" height="16px" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <path d="M1003.46892,474.447037 L750.118678,246.329458 C730.418156,228.591027 700.067888,230.181618 682.329458,249.88214 L682.329458,249.88214 L682.329458,249.88214 C664.591027,269.582663 666.181618,299.932931 685.88214,317.671361 L902.31217,512.545835 L686.384104,706.968338 C666.683581,724.706768 665.092991,755.057036 682.831421,774.757559 C700.569852,794.458082 730.92012,796.048672 750.620642,778.310241 L1006.26246,548.129313 C1025.96298,530.390883 1027.55357,500.040615 1009.81514,480.340092 C1007.84473,478.151722 1005.71869,476.186813 1003.46892,474.447037 Z M120.832433,512.545835 L337.262462,317.671361 C356.962985,299.932931 358.553575,269.582663 340.815145,249.88214 L340.815145,249.88214 L340.815145,249.88214 C323.076714,230.181618 292.726447,228.591027 273.025924,246.329458 L19.6756857,474.447037 C17.4259125,476.186813 15.2998752,478.151722 13.3294577,480.340092 L13.3294577,480.340092 L13.3294577,480.340092 C-4.40897251,500.040615 -2.81838236,530.390883 16.8821402,548.129313 L272.52396,778.310241 C292.224483,796.048672 322.574751,794.458082 340.313181,774.757559 C358.051611,755.057036 356.461021,724.706768 336.760498,706.968338 L120.832433,512.545835 Z" id="Combined-Shape"></path>
+      </svg>
+    </span>
+  </section>
+  <section class="highlight-wrapper" [ngClass]="{'highlight-wrapper-expand':expanded}">
+    <div style="padding: 0 20px">
+        <ave-tabs [(activeTab)]="codeTabID">
+            <ave-tab *ngFor="let source of sourceData" [title]="source.title" [id]="source.title">
+                <ng-template aveTabContent>
+                    <div class="highlight">
+                        <div class="code-box-actions">
+                          <span *ngIf="!_copied" aveTooltip [content]="'复制代码'" [position]="'bottom'" (click)="copyCode(source.code)">
+                              <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+                                <path d="M10 4v-4h-7l-3 3v9h6v4h10v-12h-6zM3 1.414v1.586h-1.586l1.586-1.586zM1 11v-7h3v-3h5v3l-3 3v4h-5zM9 5.414v1.586h-1.586l1.586-1.586zM15 15h-8v-7h3v-3h5v10z"></path>
+                              </svg>
+                          </span>
+                          <span *ngIf="_copied"  aveTooltip [content]="'复制成功'" [position]="'bottom'" (click)="copyCode(source.code)">
+                              <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+                                <path d="M13.5 2l-7.5 7.5-3.5-3.5-2.5 2.5 6 6 10-10z"></path>
+                                </svg>
+                          </span>
+                        </div>
+                        <ave-highlight [code]="source.code" [language]="source.language"></ave-highlight>
+                      </div>
+                </ng-template>
+            </ave-tab>
+          </ave-tabs>
+    </div>
+  </section>
+</section>

@@ -1,0 +1,12 @@
+.menu {
+  width: 200px;
+}
+.option {
+  line-height: 20px;
+  vertical-align: middle;
+  margin-top: 20px;
+}
+.option > ave-toggle {
+  display: inline-block;
+  transform: translateY(3px);
+}

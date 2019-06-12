@@ -1,0 +1,21 @@
+<div class="drawer-menu">
+    <div [style.margin]="'20px 20px 0 0'" [style.text-align]="'right'" [style.cursor]="'pointer'">
+        <span [style.margin-right]="'13px'" title="更多操作" class="icon icon-more-operate">
+        </span>
+        <span [style.margin-right]="'7px'" title="全屏" (click)="fullScreen($event)" class="icon icon-maxmize">
+        </span>
+        <span (click)="onBtnClick($event)" title="关闭" class="icon icon-close">
+        </span>
+    </div>
+    <ul class="list-group" [style.margin-top.px]="20">
+        <li class="list-group-item"
+            *ngFor="let item of items; let i = index;"
+            [style.border]="'1px solid #f3f3f3'"
+            [style.padding]="'16px 25px'">
+            {{item}}
+        </li>
+    </ul>
+    <div [style.margin-left]="'27px'">
+        <input type="text" />
+    </div>
+ </div>

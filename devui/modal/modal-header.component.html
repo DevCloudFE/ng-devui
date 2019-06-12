@@ -1,0 +1,20 @@
+<div class='modal-header'>
+    <button
+        type='button'
+        class='close'
+        data-dismiss='modal'
+        aria-label='Close'
+        (click)='close($event)'>
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="12px" height="12px" viewBox="0 0 12 12" version="1.1">
+            <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g id="图标" transform="translate(-1236.000000, -1286.000000)" fill="#3C4458" fill-rule="nonzero">
+                    <g id="close" transform="translate(1234.000000, 1284.000000)">
+                        <polygon id="Mask" points="8 6.58578644 12.2426407 2.34314575 13.6568542 3.75735931 9.41421356 8 13.6568542 12.2426407 12.2426407 13.6568542 8 9.41421356 3.75735931 13.6568542 2.34314575 12.2426407 6.58578644 8 2.34314575 3.75735931 3.75735931 2.34314575"/>
+                    </g>
+                </g>
+            </g>
+        </svg>
+    </button>
+
+    <div class="standard-title" *ngIf="!!title" [title]="title">{{title}}</div>
+</div>

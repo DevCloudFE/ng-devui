@@ -1,0 +1,10 @@
+
+<ave-accordion class="menu" [data]="menu" (itemClick)="itemClick($event)" (menuToggle)="menuToggle($event)"
+ [innerListTemplate]="innerListTemplate"
+></ave-accordion>
+
+<ng-template #innerListTemplate let-item="item">
+  <div class="devui-accordion-submenu my-menu">
+    {{item.content}}
+  </div>
+</ng-template>

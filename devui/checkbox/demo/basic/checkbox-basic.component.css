@@ -1,0 +1,7 @@
+ave-checkbox {
+  height: 30px;
+}
+.inline-block-middle-valign{
+  display: inline-block;
+  vertical-align: middle; /*forIE*/
+}

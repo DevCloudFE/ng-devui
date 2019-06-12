@@ -1,0 +1,20 @@
+<section>
+  <h4>小尺寸</h4>
+  <div>
+    <ave-pagination [canChangePageSize]="true" [size]="'sm'" [total]="pager.total" [(pageSize)]="pager.pageSize" [(pageIndex)]="pager.pageIndex"
+      [canViewTotal]="true" [canJumpPage]="true" [maxItems]="5" [showJumpButton]="true">
+    </ave-pagination>
+  </div>
+  <h4>标准尺寸</h4>
+  <div>
+    <ave-pagination [total]="pager.total" [(pageSize)]="pager.pageSize" [(pageIndex)]="pager.pageIndex"
+      [canViewTotal]="true" [canJumpPage]="true" [maxItems]="5" [showJumpButton]="true">
+    </ave-pagination>
+  </div>
+  <h4>大尺寸</h4>
+  <div>
+    <ave-pagination [size]="'lg'" [total]="pager.total" [(pageSize)]="pager.pageSize" [(pageIndex)]="pager.pageIndex"
+      [canViewTotal]="true" [canJumpPage]="true" [maxItems]="5" [showJumpButton]="true">
+    </ave-pagination>
+  </div>
+</section>

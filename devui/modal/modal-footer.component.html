@@ -1,0 +1,14 @@
+<div class='modal-footer'>
+    <div>
+        <ave-button
+                *ngFor="let button of buttons"
+                [attr.id]="button.id"
+                (click)='button.handler($event)'
+                bsStyle={{button.cssClass}}
+                circled="true"
+                [width]="button.btnwidth"
+                [autofocus] = "button.autofocus"
+        >{{button.text}}
+        </ave-button>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+<label class="devui-radio" [class.active]="radioInput.checked" [class.disabled]="disabled">
+  <input #radioInput type="radio" class="devui-radio-input" [disabled]="disabled" [name]="name" [id]="name + '-' + value" [ngModel]="_value" (change)="handleModelChange($event, value)" [value]="value"/>
+  <span class="devui-radio-material">
+    <svg height="100%" width="100%" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+      <circle id="outer" cx="512" cy="512" r="486.5" [attr.stroke]="radioInput.checked ? color : '#CACFD8'" stroke-width="51" fill="#FFFFFF"/>
+      <path [attr.id]="radioInput.checked ? 'inner': 'inner-disable'" [attr.fill]="radioInput.checked ? color : '#FFFFFF'" fill-rule="nonzero" d="m256 512c0 141.384896 114.615104 256 256 256s256-114.615104 256-256-114.615104-256-256-256-256 114.615104-256 256z"/>
+    </svg>
+  </span>
+  <span class="devui-radio-label">
+    <ng-content></ng-content>
+  </span>
+</label>

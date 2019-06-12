@@ -1,0 +1,16 @@
+.over-flow-ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.clear-fix {
+  zoom:1
+}
+
+.clear-fix:after {
+  content:'';
+  display:block;
+  width:0;
+  clear:both
+}

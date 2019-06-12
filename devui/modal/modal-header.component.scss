@@ -1,0 +1,32 @@
+
+@import '../style/theme/color';
+@import '../style/theme/variables';
+@import '../style/mixins/index';
+
+.modal-header{
+    padding: 10px 20px 0 20px;
+    height: 43px;
+    .standard-title {
+      color: $dark1;
+      letter-spacing: 0;
+      font-size: 16px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+  }
+}
+
+button.close {
+  float: right;
+  font-size: 21px;
+  font-weight: bold;
+  line-height: 1;
+  color: #000;
+  text-shadow: 0 1px 0 $white;
+  filter: alpha(opacity=20);
+  opacity: 0.2;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  -webkit-appearance: none;
+}

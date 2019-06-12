@@ -1,0 +1,22 @@
+<h4>基本样式</h4>
+<div>
+    <ave-toggle checked></ave-toggle>
+    <ave-toggle [checked]="false"></ave-toggle>
+</div>
+
+<h4>禁用状态</h4>
+<div>
+    <ave-toggle disabled></ave-toggle>
+    <ave-toggle checked [disabled]="true"></ave-toggle>
+</div>
+
+<h4>双向绑定</h4>
+<div>
+    <ave-toggle [(ngModel)]="enable"></ave-toggle> {{enable}}
+</div>
+
+<h4>回调事件</h4>
+<div>
+    <ave-toggle (change)="onChange()"></ave-toggle>
+    <div>Change count: {{count}}</div>
+</div>

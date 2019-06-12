@@ -1,0 +1,17 @@
+<section>
+  <h4>Operable Tree</h4>
+  <ave-operable-tree
+          #operableTree1
+          [tree]="data3"
+          [treeNodeIdKey]="'id'"
+          [treeNodeChildrenKey]="'children'"
+          [checkboxDisabledKey]="'disabled'"
+          [checkboxInput]="checkboxInput"
+          (nodeDeleted)="onOperableNodeDeleted($event)"
+          (nodeSelected)="onOperableNodeSelected($event)"
+          (nodeToggled)="onOperableNodeToggled($event)"
+          (nodeChecked)="onOperableNodeChecked($event)"
+  >
+  </ave-operable-tree>
+  <pre>All Checked Notes:{{ checkNote | json }}</pre>
+</section>

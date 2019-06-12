@@ -1,0 +1,29 @@
+<div class="demo-container">
+  <div class="demo-example">
+    <div class="demo-title">基本用法</div>
+    <div class="demo-text">
+      通过 source 设置数据源
+    </div>
+    <ave-codebox [sourceData]="editableSelectDemoBasic">
+      <ave-editable-select-demo-with-source demo></ave-editable-select-demo-with-source>
+    </ave-codebox>
+  </div>
+  <div class="demo-example">
+    <div class="demo-title">自定义匹配方法</div>
+    <div class="demo-text">
+      通过 searchFn 自定义数据匹配方法
+    </div>
+    <ave-codebox [sourceData]="editableSelectDemoSearchFn">
+        <ave-editable-select-demo-with-search-function demo></ave-editable-select-demo-with-search-function>
+    </ave-codebox>
+  </div>
+  <div class="demo-example">
+    <div class="demo-title">异步获取数据源并设置匹配方法</div>
+    <div class="demo-text">
+        支持异步设置数据源并设置匹配方法
+    </div>
+    <ave-codebox [sourceData]="editableSelectDemoAsyncDataSearchFn">
+        <ave-editable-select-demo-async-data-with-function demo></ave-editable-select-demo-async-data-with-function>
+    </ave-codebox>
+  </div>
+</div>

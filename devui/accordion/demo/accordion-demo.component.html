@@ -1,0 +1,39 @@
+<div class="demo-container">
+    <div class="demo-example">
+        <div class="demo-title">基本用法</div>
+        <div class="demo-text">
+            传入菜单，监听一级菜单的开合(menuToggle)或二级菜单的点击(itemClick)。<br/>
+            一级菜单默认展开使用属性open，二级菜单默认激活使用属性active，禁用项使用disabled。<br/>
+            通过restrictOneOpen设置是否限制只能展开一个一级菜单。
+        </div>
+        <ave-codebox id="accordion-demo-basic" [sourceData]="AccordionDemoBasic">
+            <ave-accordion-demo-basic demo></ave-accordion-demo-basic>
+        </ave-codebox>
+    </div>
+    <div class="demo-example">
+        <div class="demo-title">使用内置路由和链接类型</div>
+        <div class="demo-text">
+            通过设置linkType切换不同的内置路由和链接类型：默认类型''； 路由类型'routerLink'；外链类型：'hrefLink'；基于数据判断路由或链接类型：'dependOnLinkTypeKey'。
+        </div>
+        <ave-codebox id="accordion-demo-link" [sourceData]="AccordionDemolink">
+            <ave-accordion-demo-link demo></ave-accordion-demo-link>
+        </ave-codebox>
+    </div>
+    <div class="demo-example">
+        <div class="demo-title">使用模板</div>
+        <div class="demo-text">
+            一级菜单和二级菜单分别使用模板。一级菜单指定menuItemTemplate，二级菜单指定itemTemplate。<br/>
+            没有数据模板指定noContentTemplate，并可以通过showNoContent控制无数据的时候不展开。<br/>
+            加载中模板指定loadingTemplate，通过item的loadingKey对应的属性值控制是否显示加载中。<br/>
+        </div>
+        <ave-codebox id="accordion-demo-template" [sourceData]="AccordionDemoTemplate">
+            <ave-accordion-demo-template demo></ave-accordion-demo-template>
+        </ave-codebox>
+        <div class="demo-text">
+            内部列表通过制定innerListTemplate使用模板
+        </div>
+        <ave-codebox  d="accordion-demo-inner-list-template" [sourceData]="AccordionDemoInnerListTemplate">
+            <ave-accordion-demo-inner-list-template demo></ave-accordion-demo-inner-list-template>
+        </ave-codebox>
+    </div>
+</div>

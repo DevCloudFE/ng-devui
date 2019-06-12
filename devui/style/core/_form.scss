@@ -1,0 +1,121 @@
+@import '../theme/color.scss';
+
+@mixin border-position-radius($position: left){
+  border-top-#{$position}-radius: 0;
+  border-bottom-#{$position}-radius: 0;
+}
+// input 样式
+.devui-input-group {
+  position: relative;
+  display: table;
+  border-collapse: separate;
+
+}
+
+.devui-input-group-addon {
+  border: 1px solid $gray1;
+  border-radius: 1px;
+  display: table-cell;
+  padding: 5px 10px;
+  text-align: center;
+  &:last-child{
+    @include border-position-radius(left);
+    border-left: 0;
+  }
+  &:first-child{
+    @include border-position-radius(right);
+    border-right: 0;
+  }
+}
+
+.devui-input{
+  outline: none;
+  background-color: $white;
+  border: 1px solid $gray1;
+  border-radius: 1px;
+  padding: 5px 10px;
+  line-height: 20px;
+  font-size: 14px;
+  color: $dark1;
+  width: 100%;
+  display: block;
+  &:not([disabled]):not(.disabled) {
+    &:hover {
+      border-color: $hover-control;
+    }
+    &:focus, &:hover:focus, &:hover:focus {
+      border-color: $focus2;
+    }
+  }
+  &[disabled], &.disabled {
+    opacity: 0.3;
+  }
+  .devui-input-group > &{
+    display: table-cell;
+  }
+  .devui-input-group > &:first-child{
+    @include border-position-radius(right);
+  }
+  .devui-input-group > &:last-child{
+    @include border-position-radius(left);
+  }
+  .devui-input-group > &:not(:first-child):not(:last-child){
+    border-radius: 0;
+  }
+}
+
+.devui-input-lg{
+  font-size: 16px;
+  line-height: 22px;
+}
+
+.devui-input-sm{
+  font-size: 12px;
+  line-height: 18px;
+}
+
+// dropdown 公共样式
+.dropup, .dropdown {
+  position: relative;
+}
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  float: left;
+  min-width: 160px;
+  padding: 5px 0;
+  margin: 2px 0 0;
+  font-size: 14px;
+  text-align: left;
+  list-style: none;
+  background-color: $white;
+  background-clip: padding-box;
+  border: 0;
+  border-radius: 0;
+  background-clip: inherit;
+  box-shadow: 0 2px 5px 0 rgba($dark, 0.26);
+  .open > &{
+    display: block;
+  }
+}
+
+.devui-form-group {
+  position: relative;
+}
+.devui-form-control {
+  padding: 5px 12px;
+  border: 1px solid $gray1;
+  display: block;
+  width: 100%;
+}
+
+.devui-form-control:hover{
+  border-color: $hover-control;
+}
+
+.devui-form-control:focus{
+  border-color: $focus2;
+}

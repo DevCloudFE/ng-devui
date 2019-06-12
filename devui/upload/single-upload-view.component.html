@@ -1,0 +1,12 @@
+<ave-uploaded-files
+        #aveUploadedFiles
+        [uploadedFiles]="uploadedFiles"
+        [filePath]="filePath"
+        [uploadedFilesRef]="uploadedFilesRef || default"
+        (deleteUploadedFileEvent)="_deleteUploadedFileEvent($event)">
+</ave-uploaded-files>
+<ng-template [ngTemplateOutlet]="preloadFilesRef ? preloadFilesRef : default"
+          [ngTemplateOutletContext]="{ $implicit: this, fileUploaders: fileUploaders, UploadStatus: UploadStatus, deleteFile: deleteFileProxy}">
+</ng-template>
+<ng-template #default>
+</ng-template>

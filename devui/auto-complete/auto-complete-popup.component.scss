@@ -1,0 +1,21 @@
+@import '../style/mixins/index';
+
+:host(.devui-dropdown-menu) {
+  width: 100%;
+  margin: 0;
+  padding: 5px 0;
+}
+
+.devui-dropdown-item {
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    padding: 8px 1rem;
+    clear: both;
+    white-space: nowrap;
+    border: 0;
+}
+
+.scroll-height {
+    overflow-y: auto;
+}

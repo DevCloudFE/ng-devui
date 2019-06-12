@@ -1,0 +1,26 @@
+<ng-container *ngFor="let rowItem of dataSource; trackBy:trackByFn; let rowIndex = index">
+    <tr aveDataTableRow
+        [checkableColumn]="checkableColumn"
+        [showDetailColumn]="showDetailColumn"
+        [resizeable]="resizeable"
+        [checkable]="checkable" [rowIndex]="rowIndex" [rowItem]="rowItem" [columns]="columns"
+        [editRowItem]="editRowItem"
+        [editModel]="editModel" [dataTableTemplates]="dataTableTemplates" [allChecked]="allChecked"
+        [showDetail]="showDetail"
+        [timeout]="timeout"
+        [ngClass]="{'table-row-selected': rowItem?.$checked}"
+    >
+    </tr>
+    <tr *ngIf="rowItem['$isDetailOpen'] && rowItem.detail">
+        <td [attr.colspan]="checkable ? 2 : 1"></td>
+        <td [attr.colspan]="columns.length" class="detail-content" [style.padding]="'13px'">
+            <ng-template
+                    [ngTemplateOutlet]="detailTemplateRef || default"
+                    [ngTemplateOutletContext]="{$implicit: this, detail:rowItem.detail, rowIndex:rowIndex, rowItem:rowItem}">
+            </ng-template>
+            <ng-template #default let-detail="detail" let-rowIndex="rowIndex" let-rowItem="rowItem">
+                <div>{{detail}}</div>
+            </ng-template>
+        </td>
+    </tr>
+</ng-container>

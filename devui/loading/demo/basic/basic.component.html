@@ -1,0 +1,19 @@
+<section>
+  <ave-button (click)="fetchTableData()">click me!</ave-button>
+  <table aveLoading [loading]="loading" [message]="'One moment please...'" [backdrop]="true" class="table table-hover">
+    <thead>
+      <tr>
+        <th>FirstName</th>
+        <th>LastName</th>
+        <th>UserName</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let names of tableNames">
+        <td *ngFor="let name of names">
+          {{name}}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>

@@ -1,0 +1,101 @@
+<ave-data-table-templates></ave-data-table-templates>
+
+<ave-column #showDetailColumnRef [width]="'25px'" [minWidth]="'25px'"></ave-column>
+<ave-column #checkableColumnRef [width]="'30px'" [minWidth]="'30px'"></ave-column>
+
+<div class="devui-data-table {{cssClass}}">
+
+  <div class="devui-table-view" #tableView>
+    <div
+      *ngIf="fixHeader"
+      #fixHeaderRef
+      [style.overflow]="'hidden'"
+      [style.max-height]="maxHeight ? maxHeight : null"
+      [style.max-width]="maxWidth ? maxWidth : null"
+      [style.width]="!maxWidth ? tableWidth : null"
+    >
+      <table class="devui-table {{type ? type : ''}} {{ hover ? 'table-hover': ''}}">
+        <thead
+          aveDataTableHead
+          [resizeable]="resizeable"
+          [resizeBarRefElement]="resizeBarRefElement"
+          [tableViewRefElement]="tableViewRefElement"
+          [multiSort]="multiSort"
+          [dataTableTemplates]="dataTableTemplates"
+          [columns]="_columns"
+          (headClickSortEvent)="onHandleSort($event)"
+          [headTemplate]="headTemplate"
+          [pager]="pager"
+          [pageAllChecked]="_pageAllChecked"
+          [checkableColumn]="checkableColumn"
+          [showDetailColumn]="showDetailColumn"
+          [checkable]="checkable"
+          [showDetail]="showDetail"
+          [showSortIcon]="showSortIcon"
+          (resizeHandlerEvent)="onResizeHandler($event)"
+        >
+        </thead>
+      </table>
+    </div>
+
+    <div
+      [ngClass]="{'scroll-view': scrollable}"
+      [style.max-height]="maxHeight ? maxHeight : null"
+      [style.max-width]="maxWidth ? maxWidth : null"
+      [style.width]="!maxWidth ? tableWidth : null"
+      (scroll)="onBodyScroll($event)"
+    >
+      <table class="devui-table {{type ? type : ''}} {{ hover ? 'table-hover': ''}}">
+        <thead *ngIf="!fixHeader"
+          aveDataTableHead
+          [resizeable]="resizeable"
+          [resizeBarRefElement]="resizeBarRefElement"
+          [tableViewRefElement]="tableViewRefElement"
+          [multiSort]="multiSort"
+          [dataTableTemplates]="dataTableTemplates"
+          [columns]="_columns"
+          [headTemplate]="headTemplate"
+          [pager]="pager"
+          [pageAllChecked]="_pageAllChecked"
+          [checkable]="checkable"
+          [showDetail]="showDetail"
+          [showSortIcon]="showSortIcon"
+          [checkableColumn]="checkableColumn"
+          [showDetailColumn]="showDetailColumn"
+          (resizeHandlerEvent)="onResizeHandler($event)"
+          (headClickSortEvent)="onHandleSort($event)"
+        >
+        </thead>
+        <tbody aveDataTableBody
+          [dataTableTemplates]="dataTableTemplates"
+          [dataSource]="dataSource"
+          [resizeable]="resizeable"
+          [columns]="_columns"
+          [checkableColumn]="checkableColumn"
+          [showDetailColumn]="showDetailColumn"
+          [checkable]="checkable"
+          [allChecked]="_pageAllChecked"
+          [selectable]="selectable"
+          [editModel]="editModel"
+          [editRowItem]="editRowItem"
+          [showDetail]="showDetail"
+          [detailTemplateRef]="detailTemplateRef"
+          [timeout]="timeout"
+        >
+        </tbody>
+        <tfoot *ngIf="footTemplate" aveDataTableFoot [footTemplate]="footTemplate"></tfoot>
+      </table>
+    </div>
+
+    <div #resizeBar class="resize-bar"></div>
+  </div>
+
+  <div class="devui-table-view-footer text-right" *ngIf="pager">
+    <ave-data-table-pager [pager]="pager" [dataTableTemplates]="dataTableTemplates" [pagerTemplate]="pagerTemplate"></ave-data-table-pager>
+  </div>
+</div>
+
+<ng-container *ngIf="!dataSource?.length && noResultTemplate != null">
+  <ng-template [ngTemplateOutlet]="noResultTemplate" [ngTemplateOutletContext]="{ $implicit: this }"></ng-template>
+</ng-container>
+

@@ -1,0 +1,18 @@
+<section>
+  <ng-template #customiseItemTemplate let-item="item" let-formatter="formatter" let-$index="$index" let-source="source"
+            let-term="term">
+    <span><i class="icon {{getIcon($index)}}"></i>&nbsp;{{$index +1}}: {{formatter(item)}}</span>
+  </ng-template>
+  <ng-template #noResultItemTemplate let-term="term">
+    <span>No any results match <b>{{term}}</b></span>
+  </ng-template>
+  <form class="form">
+    <div class="devui-form-group">
+      <input type="text" class="form-control" name="language" id="language-customiseItemTemplate" [minLength]="0"
+              [(ngModel)]="selectItem4" aveAutoComplete [searchFn]="onSearchLocal.bind(this)"
+              [itemTemplate]="customiseItemTemplate" [noResultItemTemplate]="noResultItemTemplate"
+      />
+    </div>
+    <pre>{{(selectItem4 | json) || 'No language select!'}}</pre>
+  </form>
+</section>

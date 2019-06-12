@@ -1,0 +1,16 @@
+<section>
+  <ave-panel [type]="'primary'" #panel [(isCollapsed)]="isCollapsed">
+    <ave-panel-header>
+      Panel with foldable
+      <i class="icon"
+        [ngClass]="{'icon-chevron-up': panel.isCollapsed,'icon-chevron-down': !panel.isCollapsed}"></i>
+    </ave-panel-header>
+    <ave-panel-body>This is body</ave-panel-body>
+  </ave-panel>
+  <br /><br />
+  <ave-panel>
+    <ave-panel-header>Panel with header and footer</ave-panel-header>
+    <ave-panel-body>This is body</ave-panel-body>
+    <ave-panel-footer>This is footer</ave-panel-footer>
+  </ave-panel>
+</section>

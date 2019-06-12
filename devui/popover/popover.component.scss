@@ -1,0 +1,91 @@
+@import '../style/theme/color';
+@import '../style/theme/variables';
+@import '../style/mixins/index';
+
+:host.popover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: $dark1;
+  line-height: 1em;
+  background: $white;
+  border: none;
+  border-radius: 2px;
+  z-index: 1060;
+  > .arrow {
+    &, &::after {
+      position: absolute;
+      display: block;
+      width: 0;
+      height: 0;
+      border-color: transparent;
+      border-style: solid;
+      border-width: 8px;
+    }
+
+    & {
+      border-width: 8px;
+    }
+
+    &:after {
+      content: "";
+      border-width: 10px;
+    }
+  }
+
+  &.top > .arrow {
+    left: 50%;
+    margin-left: -7px;
+    border-bottom-width: 0;
+    border-top-color: $white;
+    bottom: -8px;
+  }
+
+  &.right > .arrow {
+    top: 50%;
+    left: -8px;
+    margin-top: -8px;
+    border-left-width: 0;
+    border-right-color: $white;
+  }
+
+  &.bottom > .arrow {
+    left: 50%;
+    margin-left: -7px;
+    border-top-width: 0;
+    border-bottom-color: $white;
+    top: -8px;
+  }
+
+  &.left > .arrow {
+    top: 50%;
+    right: -8px;
+    margin-top: -8px;
+    border-right-width: 0;
+    border-left-color: $white;
+  }
+
+  &.top {
+    margin-top: -10px;
+    box-shadow: -5px 5px 20px 0px rgba($dark1, .2);
+  }
+
+  &.bottom {
+    margin-top: 10px;
+    box-shadow: 5px -5px 20px 0px rgba($dark1, .2);
+  }
+
+  &.left {
+    margin-left: -10px;
+    box-shadow: 5px -5px 20px 0px rgba($dark1, .2);
+  }
+
+  &.right {
+    margin-left: 10px;
+    box-shadow: -5px 5px 20px 0px rgba($dark1, .2);
+  }
+}
+
+.popover-content {
+  padding: 9px 14px;
+}

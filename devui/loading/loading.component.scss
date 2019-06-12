@@ -1,0 +1,57 @@
+.devui-loading-spinner-wrapper {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1001;
+  .devui-loading-default-sign {
+    position: relative;
+    display: inline-block;
+    z-index: 1001;
+    padding: 12px 14px;
+    border-style: solid;
+    border-width: 1px;
+    border-top: 0;
+    border-radius: 0 0 4px 4px;
+
+    .devui-loading-default-spinner {
+      position: relative;
+      display: inline-block;
+      width: 25px;
+      height: 25px;
+      vertical-align: middle;
+
+      div {
+        position: absolute;
+        left: 44.5%;
+        top: 37%;
+        width: 10%;
+        height: 26%;
+        border-radius: 50px;
+        animation: busy-spinner-anim 1s linear infinite;
+      }
+
+      @each $i in 1,2,3,4,5,6,7,8,9,10,11,12 {
+        .bar#{$i} {
+            transform: rotate(30 * ($i - 1) + deg) translate(0, -142%);
+            animation-delay: -1 + 1 / 12 * ($i - 1) + s;
+        }
+      }
+    }
+
+    .devui-loading-default-text {
+      display: inline-block;
+      margin-left: 6px;
+      max-width: 400px;
+    }
+
+    @keyframes busy-spinner-anim {
+      from {
+        opacity: 1;
+      }
+      to {
+        opacity: 0.25;
+      }
+    }
+  }
+}

@@ -1,0 +1,334 @@
+@import '../style/theme/color';
+
+.month-view {
+    background-color: $white;
+    /*min-width: 300px;*/
+    font-size: 12px;
+    width: 240px;
+    text-align: center;
+    // box-shadow: 0 2px 2px rgba(0, 0, 0, .24), 0 0 2px rgba(0, 0, 0, .12)
+    box-shadow: 0 4px 8px 0 rgba(41,48,64,0.20);
+    border-radius: 2px;
+}
+
+.month-view .month-view-table {
+    margin-bottom: 0;
+    background: $white;
+    table-layout: fixed;
+}
+
+.month-view .date-title {
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.month-view .btn-link {
+    text-decoration: none;
+    cursor: pointer;
+    .left-triangle, .right-triangle{
+        display: inline-block;
+        position: absolute;
+        top: 6px;
+        width: 0;
+        height: 0;
+        border: 6px solid;
+    }
+    .left-triangle{
+        left: 6px;
+        border-color: transparent $dark1 transparent transparent;
+    }
+    .right-triangle{
+        right: 6px;
+        border-color: transparent transparent transparent $dark1;
+    }
+    .left-triangle.second{
+        left: 12px;
+    }
+    .right-triangle.second{
+        right: 12px;
+    }
+    svg{
+        #left-path{fill: $dark1}
+        #right-path{fill: $dark1}
+    }
+    &:hover{
+        .left-triangle{
+            border-right-color: $hover-control;
+        }
+        .right-triangle{
+            border-left-color: $hover-control;
+        }
+        #left-path{fill: $hover-control}
+        #right-path{fill: $hover-control}
+        svg{
+            #left-path{fill: $hover-control}
+            #right-path{fill: $hover-control}
+        }
+    }
+}
+
+.month-view .date-select {
+    border: none;
+    background: transparent;
+    outline: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.month-view .week-header {
+    cursor: default;
+    margin-bottom: 16px;
+}
+
+.month-view .week-header td {
+    width: 32px;
+    height: 24px;
+    line-height: 24px;
+    color: $dark1;
+    border: none;
+}
+
+.month-view .day:not(.disabled) {
+    cursor: pointer;
+    font-size: 12px;
+    color: #BBBBBB;
+}
+
+.month-view .day.disabled {
+    cursor: not-allowed;
+}
+
+.ave-calendar-date {
+    display: block;
+    margin: 0 auto;
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    line-height: 20px;
+    background: transparent;
+    text-align: center;
+    -webkit-transition: background .3s ease;
+    transition: background .3s ease;
+    font-size: 12px;
+    color: $dark1;
+}
+
+.month-view .day:hover:not(.active):not(.disabled) .ave-calendar-date {
+    background-color:$hover-content;
+    // color:$hover-control;
+}
+
+.month-view .day.active:hover .ave-calendar-date {
+    background-color:$hover-control;
+    color: $white;
+}
+
+.month-view .in-month-day.disabled:not(.active) .ave-calendar-date {
+    color: $dark1;
+    background-color: rgba(240, 240, 240, 0.8) !important;
+    cursor: not-allowed;
+    width: 100%;
+}
+
+.month-view .in-month-day.active .ave-calendar-date {
+    background: $focus1;
+    color: $white;
+}
+
+.month-view .out-of-month .ave-calendar-date {
+    opacity: 0.8;
+    background-color: $white;
+    color: $gray1;
+}
+
+.month-view .minutes:before {
+    content: ':';
+    text-align: center;
+    position: absolute;
+    margin-left: -13px;
+}
+
+.month-view .seconds:before {
+    content: ':';
+    text-align: center;
+    position: absolute;
+    margin-left: -13px;
+    z-index: 999;
+}
+
+.yearOption {
+    /*width: 5em;*/
+    min-width: 4em;
+    margin-left: 4.5em;
+    max-height: 255px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.monthOption {
+    /*width: 3em;*/
+    min-width: 3em;
+    margin-left: 1em;
+}
+
+.yearOption li, .monthOption li {
+    text-align: center;
+}
+
+.yearOption li:hover, .monthOption li:hover {
+    background: $hover-control;
+    color: $white;
+    cursor: pointer;
+}
+
+.yearOption li.active, .monthOption li.active {
+    color:$white;
+    background-color: $focus1;
+    &:hover{
+        background-color: $hover-control;
+    }
+}
+
+.month-view .timepicker {
+    background: #f2f2f2;
+}
+
+.month-view .timepicker input {
+    outline: 0;
+    border: 0;
+    background: #f2f2f2;
+    width: 30px;
+    padding:0px 12px 0px 0px;
+    height:30px;
+}
+
+.month-view .timepicker .time {
+    position: relative;
+    display: inline-block;
+}
+
+.month-view .timepicker .time:not(:first-child):before {
+    content: ':';
+}
+
+.month-view .btn-link.disable-choose-year {
+    color: $gray1;
+}
+
+.disable-choose-year:hover {
+    text-decoration: none;
+}
+
+.month-view .table {
+  > tbody {
+    > tr {
+      > td {
+        vertical-align: middle;
+        padding:4px;
+        border-top: none;
+        &:not(.disabled){
+          border-top: none;
+          background: $white;
+        }
+      }
+    }
+  }
+  > thead {
+    > tr {
+      > td {
+        vertical-align: top;
+        line-height: 1.5;
+      }
+    }
+  }
+}
+
+.month-view .month-view-table td {
+    border-bottom: none;
+}
+
+.month-view .table tfoot {
+    border-top: 1px solid #f5f5f5;
+}
+
+.month-view tfoot td {
+    padding: 2px;
+    vertical-align: middle;
+    border-top: none;
+}
+
+.dropdown-menu{
+    font-size: 12px;
+}
+
+.btn-wrapper {
+    margin-top: 0px;
+}
+
+.time input[type=number]::-webkit-inner-spin-button,
+.time input[type=number]::-webkit-outer-spin-button
+{
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.time input[type=number]
+{
+  -moz-appearance: textfield;
+}
+.btn-nav {
+    display: none;
+    position: absolute;
+    right: 12px;
+    top: 0;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    .btn-up, .btn-down{
+        position: absolute;
+        width: 0;
+        height: 0;
+        border: 6px solid;
+    }
+    .btn-up{
+        padding-top: 3px;
+        padding-bottom: 1px;
+        border-color: transparent transparent $dark1 transparent;
+        &:hover{
+            border-color: transparent transparent $hover-control transparent;
+        }
+    }
+    .btn-down{
+        top: 17px;
+        padding-bottom: 3px;
+        border-color: $dark1 transparent transparent transparent;
+        &:hover{
+            border-color: $hover-control transparent transparent transparent;
+        }
+    }
+}
+.time{
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button
+    {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    input[type=number]
+    {
+    -moz-appearance: textfield;
+    }
+    &:hover{
+        .btn-nav{
+            display: block;
+        }
+    }
+}
+
+
+
+

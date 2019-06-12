@@ -1,0 +1,311 @@
+<!-- begin:template: header label template-->
+<ng-template #defaultHeadTemplate let-head="">
+  <tr>
+    <th *ngIf="head.showDetail" [style.width]="head.showDetailColumn.width" [style.text-align]="'center'" [style.padding]="'0'">
+    </th>
+    <th *ngIf="head.checkable" class="checkable-cell" [style.width]="head.checkableColumn.width" [style.padding]="'10px'">
+      <ave-checkbox [name]="'checkAll'" (change)="head.onCheckAllChange()" [(ngModel)]="head.pageAllChecked">
+      </ave-checkbox>
+    </th>
+    <th *ngFor="let column of head.columns; trackBy:trackByFn; let last = last" aveResizeable [class.last-resize-header]="last" [resizeEnabled]="head.resizeable"
+      [resizeBarRefElement]="head.resizeBarRefElement" [tableViewRefElement]="head.tableViewRefElement"
+      [style.width]="column.width || ''" [minWidth]="column.minWidth" [maxWidth]="column.maxWidth" [ngStyle]="column.style"
+      (resize)="head.onResize($event, column.field, true)">
+
+      <ng-container *ngIf="!column.headCellTmpl?.template"><span [ngClass]="{'clickable': column.sortable}" (click)="head.onHeadClick(column)">{{column.header}}</span></ng-container>
+      <ng-template *ngIf="column.headCellTmpl?.template" [ngTemplateOutlet]="column.headCellTmpl?.template" [ngTemplateOutletContext]="{column: column, $implicit: head}">
+      </ng-template>
+
+      <ng-container *ngIf="head.getIfExistMultiSort(column.field)">
+        <span (click)="head.onHeadClick(column)" [ngClass]="{'clickable': column.sortable}">
+          <i [style.position]="'relative'" class="datatable-svg" [style.overflow]="'hidden'" [style.color]="'#bbb'" *ngIf="head.getSortDirection(column.field) === '' && head.showSortIcon">
+          <svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+            <g id="order-default" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+              <g >
+                <path d="M4,7 L8,1 L12,7 L4,7 Z M12,9 L8,15 L4,9 L12,9 Z" id="形状"></path>
+              </g>
+            </g>
+          </svg>
+          </i>
+          <i [style.position]="'relative'" class="datatable-svg svg-active" [style.overflow]="'hidden'" *ngIf="head.getSortDirection(column.field) === 'DESC'">
+          <svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <g id="order-desc" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+              <g>
+                <polygon id="Path-4" points="4 7 12 7 8 1"></polygon>
+                <polygon id="Path-4-Copy"  transform="translate(8.000000, 12.000000) rotate(-180.000000) translate(-8.000000, -12.000000) "
+                  points="4 15 12 15 8 9"></polygon>
+              </g>
+            </g>
+          </svg>
+          </i>
+          <i [style.position]="'relative'" class="datatable-svg svg-active" [style.overflow]="'hidden'" *ngIf="head.getSortDirection(column.field) === 'ASC'">
+            <svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+              <g id="order-asc" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g>
+                  <polygon id="Path-4" points="4 7 12 7 8 1"></polygon>
+                  <polygon id="Path-4-Copy" transform="translate(8.000000, 12.000000) rotate(-180.000000) translate(-8.000000, -12.000000) "
+                    points="4 15 12 15 8 9"></polygon>
+                </g>
+              </g>
+            </svg>
+          </i>
+        </span>
+      </ng-container>
+    </th>
+    <!-- <th width="0"  *ngIf="head.resizeable"></th> -->
+  </tr>
+</ng-template>
+<!--end:tempate-->
+
+<!-- begin:template: pager template-->
+<ng-template #defaultPagerTemplate let-pager="pager" let-pagerPanel="">
+  <ave-pagination cssClass="devui-table-pagination" [selectDirection]="pager.selectDirection" [total]="pager.total" [size]="pager.componentSize || 'sm'"
+    [pageSize]="pager.pageSize" [maxItems]="pager.maxItems || pagerPanel.pagerMaxItems" [(pageIndex)]="pager.pageIndex" (pageIndexChange)="pagerPanel.onPageChange($event)">
+  </ave-pagination>
+</ng-template>
+<!--end:tempate-->
+
+<!-- begin:template: cell view, edit, filter template-->
+<ave-cell-template #textCellTemplate type="text">
+  <ave-cell>
+    <ng-template let-rowIndex="rowIndex" let-colIndex="colIndex" let-rowItem="rowItem" let-column="column" let-cellItem="cellItem"
+      let-cellValue="cellValue">
+      {{cellValue}}
+    </ng-template>
+  </ave-cell>
+
+  <ave-cell-edit>
+    <ng-template let-rowIndex="rowIndex" let-colIndex="colIndex" let-rowItem="rowItem" let-column="column" let-cell="">
+      <form class="form-inline">
+        <div class="form-group">
+          <!--[aveAutoFocus]="cell.isCellEdit"-->
+          <input [type]="column.fieldType" class="form-control" [name]="column.field" [(ngModel)]="rowItem[column.field]" (keydown.enter)="cell.onFinishCellEdit($event)"
+            (blur)="cell.onFinishCellEdit($event)" />
+        </div>
+      </form>
+    </ng-template>
+  </ave-cell-edit>
+
+  <ave-cell-filter>
+    <ng-template let-head="" let-column="column">
+      <input [type]="column.fieldType" class="form-control search" [(ngModel)]="head.searchQuery[column.field]" [name]="column.field"
+        (keydown.enter)="head.onSearchQueryChange()" (change)="head.onSearchQueryChange()" />
+    </ng-template>
+  </ave-cell-filter>
+
+</ave-cell-template>
+
+<ave-cell-template #numberCellTemplate type="number">
+  <ave-cell-filter>
+    <ng-template let-head="" let-column="column">
+      <form>
+        <div class="row">
+          <div class="col-xs-12 col-sm-6">
+            <input type="number" class="form-control search" placeholder="From" [(ngModel)]="head.searchQuery['ge$$' + column.field]"
+              [name]="column.field + '_min'" (keydown.enter)="head.onSearchQueryChange()" (change)="head.onSearchQueryChange()"
+            />
+          </div>
+          <div class="col-xs-12 col-sm-6">
+            <input type="number" class="form-control search" placeholder="To" [(ngModel)]="head.searchQuery['le$$' +column.field]" [name]="column.field +'_max'"
+              (keydown.enter)="head.onSearchQueryChange()" (change)="head.onSearchQueryChange()" />
+          </div>
+        </div>
+      </form>
+    </ng-template>
+  </ave-cell-filter>
+
+</ave-cell-template>
+
+<ave-cell-template #telCellTemplate type="tel">
+  <ave-cell>
+    <ng-template let-rowIndex="rowIndex" let-colIndex="colIndex" let-rowItem="rowItem" let-column="column" let-cellItem="cellItem"
+      let-cellValue="cellValue">
+      <a [href]="'tel:' + cellValue" (click)="stopPropagation($event)">{{cellValue}}</a>
+    </ng-template>
+  </ave-cell>
+
+</ave-cell-template>
+
+<ave-cell-template #mailCellTemplate type="mail">
+  <ave-cell>
+    <ng-template let-rowIndex="rowIndex" let-colIndex="colIndex" let-rowItem="rowItem" let-column="column" let-cellItem="cellItem"
+      let-cellValue="cellValue">
+      <a [href]=" cellValue ? ('mailto:' + cellValue) : ''" (click)="stopPropagation($event)">{{cellValue}}</a>
+    </ng-template>
+  </ave-cell>
+
+</ave-cell-template>
+
+<ave-cell-template #imageCellTemplate type="image">
+  <ave-cell>
+    <ng-template let-rowIndex="rowIndex" let-colIndex="colIndex" let-rowItem="rowItem" let-column="column" let-cellItem="cellItem"
+      let-cellValue="cellValue">
+      <img class="img-responsive" [src]="cellValue" [attr.alt]="cellValue">
+    </ng-template>
+  </ave-cell>
+
+  <ave-cell-edit>
+    <ng-template>
+      <strong>You need customise edit template!</strong>
+    </ng-template>
+  </ave-cell-edit>
+
+  <ave-cell-filter>
+
+  </ave-cell-filter>
+
+</ave-cell-template>
+
+<ave-cell-template #dateCellTemplate type="date">
+  <ave-cell-edit>
+    <ng-template let-rowIndex="rowIndex" let-colIndex="colIndex" let-rowItem="rowItem" let-column="column" let-cell="">
+      <form class="form-inline">
+        <div class="form-group">
+          <div class="input-group">
+            <!--[aveAutoFocus]="cell.isCellEdit"-->
+            <input class="form-control search" [name]="column.field" [(ngModel)]="rowItem[column.field]" aveDatepicker [dateFormat]="column.extraOptions?.dateFormat"
+              #datePicker="datepicker" (ngModelChange)="cell.onFinishCellEdit()">
+            <div class="input-group-addon" (click)="datePicker.toggle($event)">
+              <i class="icon icon-calendar-end"></i>
+            </div>
+          </div>
+        </div>
+      </form>
+    </ng-template>
+  </ave-cell-edit>
+
+</ave-cell-template>
+
+<ave-cell-template #datetimeCellTemplate type="datetime">
+  <ave-cell-edit>
+    <ng-template let-rowIndex="rowIndex" let-colIndex="colIndex" let-rowItem="rowItem" let-column="column" let-cell="">
+      <form class="form-inline">
+        <div class="form-group">
+          <div class="input-group">
+            <!--[aveAutoFocus]="cell.isCellEdit"-->
+            <input class="form-control search" [showTime]="true" [name]="column.field" [(ngModel)]="rowItem[column.field]" aveDatepicker
+              [dateFormat]="column.extraOptions?.dateFormat" #datePicker="datepicker" (ngModelChange)="cell.onFinishCellEdit()">
+            <div class="input-group-addon" (click)="datePicker.toggle($event)">
+              <i class="icon icon-calendar-end"></i>
+            </div>
+          </div>
+        </div>
+      </form>
+    </ng-template>
+  </ave-cell-edit>
+</ave-cell-template>
+
+
+  <ng-template let-head="" let-rows="rows" #AdvancedHeadTmpl>
+  <tr *ngFor="let rowContex of rows;let rowIndex = index">
+    <th *ngIf="head.showDetail && rowIndex === 0" [style.width]="head.showDetailColumn.width" [style.text-align]="'center'" [style.padding]="'0'" [attr.rowspan]="rows?.length || 1"></th>
+    <th *ngIf="head.checkable && rowIndex === 0" class="checkable-cell" [style.width]="head.checkableColumn.width" [style.padding]="'10px'"  [attr.rowspan]="rows?.length || 1">
+      <ave-checkbox [name]="'checkAll'" (change)="head.onCheckAllChange()" [(ngModel)]="head.pageAllChecked">
+      </ave-checkbox>
+    </th>
+    <ng-container *ngFor="let column of head.columns; trackBy:trackByFn; let colIndex = index ;let last = last">
+    <th *ngIf="column.advancedHeader && column.advancedHeader[rowIndex]?.rowspan && column.advancedHeader[rowIndex]?.colspan"
+      aveResizeable [class.last-resize-header]="last" [resizeEnabled]="head.resizeable  && rowIndex === (column.advancedHeader.length - 1)"
+      [resizeBarRefElement]="head.resizeBarRefElement" [tableViewRefElement]="head.tableViewRefElement" [ngClass]="{'clickable': column.sortable}"
+      [style.width]="rowIndex === (column.advancedHeader.length - 1) ? column.width : column.advancedHeader[rowIndex]['$width']"
+      [ngStyle]="column.style" (resize)="head.onResize($event, column.field, true); head.resizeParent(column);"
+      [attr.rowspan]="column.advancedHeader[rowIndex]?.rowspan" [attr.colspan]="column.advancedHeader[rowIndex]?.colspan"
+      [style.textAlign] = "!column.style && rowIndex !== (column.advancedHeader.length - 1) &&
+                            (column.advancedHeader[rowIndex]?.rowspan > 0 || column.advancedHeader[rowIndex]?.colspan> 0 ) ? 'center' : ''"
+      >
+
+      <ng-container *ngIf="!column.headCellTmpl?.template">
+        <span (click)="rowIndex === (column.advancedHeader.length - 1) && head.onHeadClick(column)">
+          {{column.advancedHeader[rowIndex].header}}
+          </span>
+      </ng-container>
+      <ng-template *ngIf="column.headCellTmpl?.template" [ngTemplateOutlet]="column.headCellTmpl?.template" [ngTemplateOutletContext]="{column: column, $implicit: head , rowIndex: rowIndex, colIndex: colIndex}">
+      </ng-template>
+
+      <ng-container *ngIf="head.getIfExistMultiSort(column.field) && rowIndex === (column.advancedHeader.length - 1)">
+        <span (click)="head.onHeadClick(column)">
+          <i [style.position]="'relative'" class="datatable-svg" [style.overflow]="'hidden'" [style.color]="'#bbb'" *ngIf="head.getSortDirection(column.field) === '' && head.showSortIcon">
+          <svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+            <g id="order-default" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+              <g>
+                <path d="M4,7 L8,1 L12,7 L4,7 Z M12,9 L8,15 L4,9 L12,9 Z" id="形状"></path>
+              </g>
+            </g>
+          </svg>
+          </i>
+          <i [style.position]="'relative'" class="datatable-svg svg-active" [style.overflow]="'hidden'" *ngIf="head.getSortDirection(column.field) === 'DESC'">
+            <svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+              <g id="order-desc" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g>
+                  <polygon id="Path-4" points="4 7 12 7 8 1"></polygon>
+                  <polygon id="Path-4-Copy" transform="translate(8.000000, 12.000000) rotate(-180.000000) translate(-8.000000, -12.000000) "
+                    points="4 15 12 15 8 9"></polygon>
+                </g>
+              </g>
+            </svg>
+          </i>
+          <i [style.position]="'relative'" class="datatable-svg svg-active" [style.overflow]="'hidden'" *ngIf="head.getSortDirection(column.field) === 'ASC'">
+            <svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+              <g id="order-asc" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g>
+                  <polygon id="Path-4" points="4 7 12 7 8 1"></polygon>
+                  <polygon id="Path-4-Copy" transform="translate(8.000000, 12.000000) rotate(-180.000000) translate(-8.000000, -12.000000) "
+                    points="4 15 12 15 8 9"></polygon>
+                </g>
+              </g>
+            </svg>
+          </i>
+        </span>
+      </ng-container>
+    </th>
+    <th *ngIf="!column.advancedHeader && rowIndex === 0" aveResizeable [class.last-resize-header]="last" [resizeEnabled]="head.resizeable"
+      [resizeBarRefElement]="head.resizeBarRefElement" [tableViewRefElement]="head.tableViewRefElement" [ngClass]="{'clickable': column.sortable}"
+      [style.width]="column.width || ''" [minWidth]="column.minWidth" [maxWidth]="column.maxWidth" [ngStyle]="column.style"
+      (resize)="head.onResize($event, column.field, true)" [attr.rowspan]="rows?.length || 1">
+
+      <ng-container *ngIf="!column.headCellTmpl?.template"><span (click)="head.onHeadClick(column)">{{column.header}}</span></ng-container>
+      <ng-template *ngIf="column.headCellTmpl?.template" [ngTemplateOutlet]="column.headCellTmpl?.template" [ngTemplateOutletContext]="{column: column, $implicit: head, rowIndex: rowIndex, colIndex: colIndex}">
+      </ng-template>
+
+      <ng-container *ngIf="head.getIfExistMultiSort(column.field)">
+        <span (click)="head.onHeadClick(column)">
+          <i [style.position]="'relative'" class="datatable-svg" [style.overflow]="'hidden'" [style.color]="'#bbb'" *ngIf="head.getSortDirection(column.field) === '' && head.showSortIcon">
+          <svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+            <g id="order-default" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+              <g>
+                <path d="M4,7 L8,1 L12,7 L4,7 Z M12,9 L8,15 L4,9 L12,9 Z" id="形状"></path>
+              </g>
+            </g>
+          </svg>
+          </i>
+          <i [style.position]="'relative'" class="datatable-svg svg-active" [style.overflow]="'hidden'" *ngIf="head.getSortDirection(column.field) === 'DESC'">
+            <svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+              <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+              <g id="order-default" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g>
+                  <path d="M4,7 L8,1 L12,7 L4,7 Z M12,9 L8,15 L4,9 L12,9 Z" id="形状"></path>
+                </g>
+              </g>
+            </svg>
+          </i>
+          <i [style.position]="'relative'" class="datatable-svg svg-active" [style.overflow]="'hidden'" *ngIf="head.getSortDirection(column.field) === 'ASC'">
+            <svg  height="16px" viewBox="0 0 16 16"style="enable-background:new 0 0 16 16;" width="16px" xmlns="http://www.w3.org/2000/svg">
+            <g>
+              <path id="XMLID_15_" style="fill-rule:evenodd;clip-rule:evenodd;fill:#219BE9;" d="M8.5,2v13h-2V4.9L5.1,7L3.5,5.6l3-4.6h2V2
+			L8.5,2L8.5,2z"/>
+              <path id="XMLID_16_" style="fill-rule:evenodd;clip-rule:evenodd;fill:#ADBAC2;" d="M10.5,3.9h2v9h-2V3.9z"/>
+            </g>
+          </svg>
+          </i>
+        </span>
+      </ng-container>
+    </th>
+    </ng-container>
+    <!-- <th width="0"  *ngIf="head.resizeable"></th> -->
+  </tr>
+  </ng-template>
+
+<!--end:tempate-->

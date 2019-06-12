@@ -1,0 +1,29 @@
+<ave-accordion class="menu" [data]="menu" (itemClick)="itemClick($event)" (menuToggle)="menuToggle($event)"
+  [menuItemTemplate]="menutemplate" [itemTemplate]="itemtemplate" [noContentTemplate]="noContentTemplate" [loadingTemplate]="loadingTemplate"
+></ave-accordion>
+
+<ng-template #menutemplate let-item="item" let-titleKey="titleKey" let-menuToggleFn="menuToggleFn" let-disabledKey="disabledKey">
+  <div class="devui-accordion-item-title over-flow-ellipsis" (click)="!item[disabledKey] && menuToggleFn(item)" title="{{item[titleKey]}}">
+      {{item[titleKey]}} <span class="badge" *ngIf="item.children?.length">{{item.children.length}}</span>
+      <span class="operation-clear" *ngIf="item.needLoadChildren === false" (click)="clearChildrenData($event, item);">重置</span>
+  </div>
+</ng-template>
+<ng-template #itemtemplate let-item="item" let-titleKey="titleKey" let-itemClickFn="itemClickFn" let-disabledKey="disabledKey">
+  <div class="devui-accordion-item-title over-flow-ellipsis" (click)="!item[disabledKey] && itemClickFn(item)" title="{{item[titleKey]}}">
+    {{item[titleKey]}}<span class="info">（点击次数：{{item.clicktimes || '0'}}）</span>
+  </div>
+</ng-template>
+<ng-template #noContentTemplate>
+  <li class="devui-accordion-item disabled">
+    <div class="devui-accordion-item-title over-flow-ellipsis disabled">
+      尚未开放，敬请期待...
+    </div>
+  </li>
+</ng-template>
+<ng-template #loadingTemplate let-item="item">
+  <li class="devui-accordion-item">
+    <div class="loading">
+      <span class="circle-spinner"></span>正在用力地加载中...
+    </div>
+  </li>
+</ng-template>

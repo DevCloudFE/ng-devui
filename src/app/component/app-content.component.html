@@ -1,0 +1,40 @@
+<div class="wrapper">
+    <div class="side-nav-container">
+        <div class="sidebar">
+            <ul class="ave-menu" style="margin-bottom: 0;">
+                <li class="ave-menu-item" routerLinkActive="ave-menu-item-selected">
+                    <a routerLink="get-start">快速开始</a>
+                </li>
+            </ul>
+            <nav class="side-nav">
+                <accordion [showArrows]="true" [closeOthers]="true" [expandAll]="true">
+                    <div *ngFor="let type of types">
+                        <accordion-group>
+                            <accordion-heading>
+                                <span>{{type}}</span>
+                            </accordion-heading>
+                            <ul *ngFor="let routesObj of groupedRoutes;"
+                                class="list-group">
+                                <li *ngFor="let route of routesObj[type]"
+                                    [style.display]="route.path==='' || route.data.nodisplay ? 'none': 'block'">
+                                    <a [routerLink]="[route.path]"
+                                       routerLinkActive="active"
+                                       title="{{route.data?.name || 'UnKnown Component' }} {{route.data?.cnName}}"
+                                       class="list-group-item text-overflow-ellipsis single-line">
+                                       {{route.data?.name || 'UnKnown Component' }}&nbsp;
+                                       <span class="small">{{route.data?.cnName}}</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </accordion-group>
+                    </div>
+                </accordion>
+            </nav>
+        </div>
+        <div class="doc-viewer-container">
+            <div class="main">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</div>

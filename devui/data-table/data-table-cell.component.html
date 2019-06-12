@@ -1,0 +1,28 @@
+<ng-container>
+  <ng-template *ngIf="!column.editable || !isCellEditEnable(column, rowItem)"
+            [ngTemplateOutlet]="dataTableTemplates.getCellViewTemplate(column)"
+            [ngTemplateOutletContext]="{
+                   rowIndex:rowIndex,
+                   colIndex:colIndex,
+                   column: column,
+                   rowItem:rowItem,
+                   cellItem: getCellValue(column, rowIndex, rowItem),
+                   cellValue:  getCellFormatValue(column, rowIndex, rowItem),
+                   $implicit: this,
+                   row: rowComponent
+                   }">
+  </ng-template>
+
+  <ng-template *ngIf="column.editable && isCellEditEnable(column, rowItem)"
+            [ngTemplateOutlet]="dataTableTemplates.getCellEditTemplate(column)"
+            [ngTemplateOutletContext]="{
+                    rowIndex:rowIndex,
+                    colIndex:colIndex,
+                    column: column,
+                    rowItem: rowItem?.$$editModel || rowItem,
+                    viewItem: rowItem,
+                    $implicit: this,
+                    row: rowComponent
+                    }">
+  </ng-template>
+</ng-container>

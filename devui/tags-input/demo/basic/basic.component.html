@@ -1,0 +1,15 @@
+<ave-tags-input
+  (click)="$event.stopPropagation()"
+  id="issue-tags"
+  [tags]="tagList"
+  [displayProperty]="taskTagConfig.displayProperty"
+  [placeholder]="taskTagConfig.placeholder"
+  [minLength]="taskTagConfig.minLength"
+  [maxLength]="taskTagConfig.maxLength"
+  [maxTags]="taskTagConfig.maxTags"
+  [suggestionList]="suggestionList"
+  (valueChange)="getTagValue($event)"
+  [checkBeforeAdd]="customCheck"
+>
+</ave-tags-input>
+<pre style="margin-top: 10px;">{{ tagList | json }}</pre>

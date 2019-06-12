@@ -1,0 +1,8 @@
+<section>
+  <ave-editable-select
+      [(ngModel)]="selectItem2"
+      [searchFn]="onSearchLocal"
+      name="multiple-auto">
+  </ave-editable-select>
+  <pre>{{ (selectItem2 | json) || "No language select!"}}</pre>
+</section>

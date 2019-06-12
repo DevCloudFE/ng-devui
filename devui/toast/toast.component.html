@@ -1,0 +1,76 @@
+<div #container class="devui-toast" [style.zIndex]="zIndex">
+  <div #msgel *ngFor="let msg of value;let i = index" class="devui-toast-item-container"
+    [ngClass]="{'devui-toast-message-info':msg.severity == 'info','devui-toast-message-warn':msg.severity == 'warn',
+          'devui-toast-message-error':msg.severity == 'error','devui-toast-message-success':msg.severity == 'success'}">
+    <div class="devui-toast-item">
+      <a class="ave-toast-icon-close" href="javascript:void(0);" (click)="remove(i,msgel)">
+        <svg width="16px" height="16px" viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink">
+          <defs>
+            <polygon id="path-1"
+              points="8.07106781 6.65685425 10.8994949 3.82842712 12.3137085 5.24264069 9.48528137 8.07106781 12.3137085 10.8994949 10.8994949 12.3137085 8.07106781 9.48528137 5.24264069 12.3137085 3.82842712 10.8994949 6.65685425 8.07106781 3.82842712 5.24264069 5.24264069 3.82842712">
+            </polygon>
+          </defs>
+          <g id="error" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <mask id="mask-2" fill="white">
+              <use xlink:href="#path-1"></use>
+            </mask>
+            <use *ngIf="msg.severity != 'warn'" id="Mask" class="devui-toast-icon-close-no-warn" xlink:href="#path-1">
+            </use>
+            <use *ngIf="msg.severity == 'warn'" id="Mask" class="devui-toast-icon-close-warn" xlink:href="#path-1"></use>
+          </g>
+        </svg>
+      </a>
+      <span class="devui-toast-image">
+        <ng-container *ngIf="msg.severity === 'info'">
+          <svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
+            <g id="warning" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+              <path class="devui-toast-image-info" d="M7,3 L9,3 L9,10 L7,10 L7,3 Z M7,11 L9,11 L9,13 L7,13 L7,11 Z"
+                id="warn"></path>
+            </g>
+          </svg>
+        </ng-container>
+        <ng-container *ngIf="msg.severity === 'warn'">
+          <svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
+            <g id="warning" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+              <path class="devui-toast-image-warning" d="M7,3 L9,3 L9,10 L7,10 L7,3 Z M7,11 L9,11 L9,13 L7,13 L7,11 Z"
+                id="warn"></path>
+            </g>
+          </svg>
+        </ng-container>
+        <ng-container *ngIf="msg.severity === 'error'">
+          <svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
+            <g id="warning" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+              <path class="devui-toast-image-error" d="M7,3 L9,3 L9,10 L7,10 L7,3 Z M7,11 L9,11 L9,13 L7,13 L7,11 Z"
+                id="warn"></path>
+            </g>
+          </svg>
+        </ng-container>
+        <ng-container *ngIf="msg.severity === 'success'">
+          <svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
+            <defs>
+              <polygon id="path-s"
+                points="6.53553391 9.77817459 12.1923882 4.12132034 13.6066017 5.53553391 6.53553391 12.6066017 3 9.07106781 4.41421356 7.65685425 6.53553391 9.77817459">
+              </polygon>
+            </defs>
+            <g id="correct" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+              <mask id="mask-2" fill="white">
+                <use xlink:href="#path-s"></use>
+              </mask>
+              <use id="Mask" class="devui-toast-image-success" xlink:href="#path-s"></use>
+            </g>
+          </svg>
+        </ng-container>
+      </span>
+      <div class="devui-toast-message">
+        <span class="devui-toast-title">{{msg.summary}}</span>
+        <p [innerHTML]="msg.detail"></p>
+      </div>
+      <div style="clear: both;"></div>
+    </div>
+  </div>
+</div>

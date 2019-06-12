@@ -1,0 +1,32 @@
+<section>
+  <h3>Default CSS Demo</h3>
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="card">
+        <div class="card-header">Items</div>
+        <div class="card-block">
+          <ul class="list-group">
+            <li aveDraggable *ngFor="let item of list1" [dragScope]="'default-css'" [dragData]="item" class="list-group-item">
+              {{item.name}}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <div class="card card-outline-primary mb-3" aveDroppable [dropScope]="'default-css'"
+        (dropEvent)="onDrop($event)">
+        <div class="card-header">Drop here,with sort</div>
+        <div class="card-block">
+          <ul class="list-group ave-drop-el" aveSortable>
+            <li  aveDraggable *ngFor="let item of list2" [dragScope]="'default-css'" [dragHandleClass]="'drag-handle'" [dragData]="item" class="list-group-item">
+              <div>
+                {{item.name}}
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,20 @@
+<div class="devui-radio-group">
+  <ul [class.devui-radio-horizontal]="cssStyle === 'row'">
+    <ng-container *ngIf="radios.length === 0">
+      <li *ngFor="let value of values" class="devui-radio-list-item">
+        <label class="devui-radio" [class.active]="value == _value" [class.disabled]="disabled">
+          <input type="radio" class="devui-radio-input" [disabled]="disabled" [name]="name" [id]="name + '-' + value" [value]="value" [checked]="value == _value" (change)="handleChange($event, value)" />
+          <span class="devui-radio-material">
+            <svg height="100%" width="100%" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+              <circle id="outer" cx="512" cy="512" r="486.5" [attr.stroke]="value == _value ? color : '#CACFD8'" stroke-width="51" fill="#FFFFFF"/>
+              <path [attr.id]="value == _value ? 'inner': 'inner-disable'" [attr.fill]="value == _value ? color : '#FFFFFF'" fill-rule="nonzero" d="m256 512c0 141.384896 114.615104 256 256 256s256-114.615104 256-256-114.615104-256-256-256-256 114.615104-256 256z"/>
+            </svg>
+          </span>
+          <span class="devui-radio-label">{{value}}</span>
+        </label>
+      </li>
+    </ng-container>
+
+    <ng-content select="ave-radio"></ng-content>
+  </ul>
+</div>

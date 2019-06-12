@@ -1,0 +1,42 @@
+:host {
+  padding: 0 5px;
+  display: block;
+  line-height: 36px;
+}
+
+.devui-radio {
+  line-height: 1.42857143;
+  cursor: pointer;
+  &.disabled {
+    cursor: not-allowed;
+    opacity: .3;
+  }
+
+  .devui-radio-input {
+    opacity: 0;
+    z-index: -1;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .devui-radio-material {
+    vertical-align: middle;
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    height: 16px;
+    width: 16px;
+    user-select: none;
+    transform: translateY(-1px);
+    > svg > path{
+        transform-origin: center;
+        transform: scale(1.25);
+    }
+  }
+
+  .devui-radio-label {
+    margin-left: 8px;
+  }
+}

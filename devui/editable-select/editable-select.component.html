@@ -1,0 +1,17 @@
+<div class="devui-form-group devui-has-feedback" [style.padding-bottom.px]="2">
+  <input
+    (click)="toggle($event)"
+    style="cursor: pointer"
+    class="devui-form-control" type="text" name="autoCompleteControl"
+    [source]="source"
+    (ngModelChange)="onTermChange($event)"
+    [ngModel]="inputValue"
+    [searchFn]="searchFn"
+    [disabled]="disabled"
+    [placeholder]="placeholder"
+    [itemTemplate]="itemTemplate"
+    [noResultItemTemplate]="noResultItemTemplate"
+    [maxHeight]="maxHeight"
+    aveAutoComplete />
+  <span class="devui-form-control-feedback"><span class="devui-caret"></span></span>
+</div>

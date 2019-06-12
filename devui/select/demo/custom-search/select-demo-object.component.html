@@ -1,0 +1,22 @@
+<section>
+  <h4>单选自定搜索方法</h4>
+  <div class="row">
+    <div class="col-md-5">
+      <ave-select [filterKey]="'name'" [(ngModel)]="currentOption1" [searchFn]="onSelectObject" [isSearch]="true">
+      </ave-select>
+    </div>
+  </div>
+  <h4>多选自定搜索方法</h4>
+  <div class="row">
+    <div class="col-md-5">
+      <ave-select [filterKey]="'name'" [(ngModel)]="currentOption1" [searchFn]="onSelectObject" [isSearch]="true"
+        [multiple]="true">
+      </ave-select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-5">
+      <pre>Current Select: {{ currentOption1 | json }}</pre>
+    </div>
+  </div>
+</section>

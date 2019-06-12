@@ -1,0 +1,47 @@
+<div class="demo-container">
+  <div class="demo-example">
+    <div class="demo-title">基本用法</div>
+    <div class="demo-text">
+      渲染一棵基本树
+    </div>
+    <ave-codebox id="basic" [sourceData]="basicSource">
+      <ave-basic demo></ave-basic>
+    </ave-codebox>
+  </div>
+  <div class="demo-example">
+    <div class="demo-title">可勾选树</div>
+    <div class="demo-text">
+      可以进行勾选的树
+    </div>
+    <ave-codebox id="checkable" [sourceData]="checkableSource">
+      <ave-checkable demo></ave-checkable>
+    </ave-codebox>
+  </div>
+  <div class="demo-example">
+    <div class="demo-title">操作按钮</div>
+    <div class="demo-text">
+      可定义外部操作按钮、虚浮按钮
+    </div>
+    <ave-codebox id="operateBtn" [sourceData]="operateBtnSource">
+      <ave-operate-btn demo></ave-operate-btn>
+    </ave-codebox>
+  </div>
+  <div class="demo-example">
+    <div class="demo-title">自定义图标</div>
+    <div class="demo-text">
+      自定义操作按钮图标、节点图标
+    </div>
+    <ave-codebox id="customize" [sourceData]="customizeSource">
+      <ave-customize demo></ave-customize>
+    </ave-codebox>
+  </div>
+  <div class="demo-example">
+    <div class="demo-title">可拖拽树</div>
+    <div class="demo-text">
+        通过OperableTree的 dragglable 属性配置子节点的拖拽功能，并支持外部元素拖拽入树
+    </div>
+    <ave-codebox id="draggable" [sourceData]="draggableSource">
+      <ave-draggable demo></ave-draggable>
+    </ave-codebox>
+  </div>
+</div>

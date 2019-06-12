@@ -1,0 +1,100 @@
+@import '../style/theme/color';
+@import '../style/theme/variables';
+@import '../style/mixins/index';
+
+$select-dark-1-boxshadow: rgba($dark1, 0.2);
+$select-tag-label-bgcolor: rgba($status-yellow, 0.3);
+
+ave-select {
+  .devui-form-group.devui-has-feedback:focus {
+    input.devui-form-control.select-input,
+    .list-wrapper.devui-form-control {
+      border-color: $focus1;
+    }
+  }
+
+  ul.devui-dropdown-menu {
+    box-shadow: 0px 4px 8px 0 $select-dark-1-boxshadow;
+  }
+
+  ul.devui-dropdown-menu > ul.list-unstyled >li:hover:not(.active):not(.disabled) {
+    background-color: $hover-content;
+  }
+
+  ul.devui-dropdown-menu > ul.list-unstyled > li.selected {
+    background-color:  $hover-content;
+    color: $focus1;
+  }
+
+  ul.devui-dropdown-menu > ul.list-unstyled > li.active,
+  ul.devui-dropdown-menu > ul.list-unstyled > li.active:hover{
+    background-color: $focus3;
+    color: $focus1;
+  }
+
+  .devui-form-control:hover, .devui-form-group .devui-form-control:hover, .devui-form-group .devui-form-control.underlined-border:hover{
+    &:not(.disabled):not(:disabled) {
+      border-color: $hover-control;
+    }
+  }
+  .devui-form-control:focus,.devui-form-group .devui-form-control:focus, .devui-form-group .devui-form-control.underlined-border:focus{
+    &:not(.disabled) {
+      border-color: $focus2;
+    }
+  }
+
+
+  .devui-form-group .devui-form-control.underlined-border{
+    border: 0;
+    border-bottom: 1px solid $gray1;
+  }
+
+
+
+  .list-wrapper {
+    .placeholder {
+      color: $dark3;
+    }
+
+    .tag-item {
+        color: $dark1;
+        background: $select-tag-label-bgcolor;
+    }
+
+
+    .tag-item .remove-button {
+        color: $dark1;
+    }
+    .over-flow-ellipsis{
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+  }
+
+  .dropdown-item.selected  ::ng-deep  .select-checkbox,
+  .dropdown-item.active ::ng-deep  .select-checkbox {
+    .checkbox-label {
+      color: $focus1;
+    }
+  }
+
+  /*选项disabled*/
+  .dropdown-item.disabled,
+  .dropdown-item.disabled:hover,
+  ul.dropdown-menu > ul.list-unstyled > li.disabled:hover {
+      color: $dark1;
+      background: $white;
+  }
+  ul.dropdown-menu > ul.list-unstyled > li.active.disabled:hover {
+    background: $focus3;
+  }
+
+  ul.dropdown-menu > .custom-area::before {
+    border-top: 1px solid $gray2;
+  }
+
+  svg.svg-icon-search > path {
+    fill: $dark1;
+  }
+}

@@ -1,0 +1,48 @@
+.devui-toast {
+	position: fixed;
+	top: 20px;
+	right: 20px;
+	width: 280px;
+  word-break: break-all;
+
+  .devui-toast-item-container {
+    opacity: 0.95;
+    border-radius: 3px;
+    margin-bottom: 10px;
+    .devui-toast-item {
+      position: relative;
+      padding: 8px;
+
+      .ave-toast-icon-close {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+      }
+
+      .devui-toast-image {
+        position: absolute;
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        left: 8px;
+        top: 8px;
+      }
+
+      .devui-toast-message {
+        margin-left: 20px;
+        .devui-toast-title {
+          padding-bottom: 8px;
+          display: block;
+        }
+        p {
+          font-size: 12px;
+          margin-bottom: 8px;
+          line-height: 18px;
+        }
+      }
+    }
+  }
+}
+
+

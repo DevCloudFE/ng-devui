@@ -1,0 +1,11 @@
+<div class="devui-progress" [ngStyle]="{'height': height}">
+    <div class="devui-progress-bar"
+         role="progressbar"
+         aria-valuenow="60"
+         aria-valuemin="0"
+         aria-valuemax="100"
+         [style.background-color]="barbgcolor"
+         [style.width]="percentage + '%'">
+    </div>
+    <span [style.line-height]="height">{{percentageText}}</span>
+</div>
