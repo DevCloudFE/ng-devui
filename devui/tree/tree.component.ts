@@ -1,5 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges, TemplateRef, ViewEncapsulation } from '@angular/core';
-import { OnChanges } from '@angular/core/src/metadata/lifecycle_hooks';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges, TemplateRef, ViewEncapsulation, OnChanges } from '@angular/core';
 import { ITreeItem, TreeFactory, TreeNode } from './tree-factory.class';
 
 @Component({
