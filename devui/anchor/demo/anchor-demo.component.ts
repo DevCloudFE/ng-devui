@@ -5,7 +5,7 @@ import {
 import { DevuiSourceData } from '../../shared/devui-codebox';
 
 @Component({
-    selector: 'ave-demo-anchor',
+    selector: 'd-anchor-demo',
     templateUrl: './anchor-demo.component.html'
 })
 export class AnchorDemoComponent {

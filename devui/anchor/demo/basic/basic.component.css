@@ -1,4 +1,3 @@
-/** No CSS for this demo **/
 /*序号*/
 .step-nav {
   padding-top: 10px;
@@ -13,16 +12,13 @@
   line-height: 30px;
   font-size: 14px;
   color: #5E6678;
-  color:  var(--dark-2,  #5E6678);
   position: relative;
 }
 .step-nav > li:hover {
 color: #405DFF;
-color: var(--hover-control, #405DFF);
 }
 .step-nav > li.active {
 color: #5170FF;
-color: var(--brand-1, #5170FF);
 }
 .step-nav > li::before{
   content:counter(stepli);
@@ -33,19 +29,14 @@ color: var(--brand-1, #5170FF);
   line-height: 26px;
   border-radius: 50%;
   background-color: #FFF;
-  background-color: var(--white, #FFF);
   color: #5170FF;
-  color: var(--brand-1, #5170FF);
   margin-right: 10px;
   border: 2px solid #5170FF;
-  border: 2px solid var(--brand-1, #5170FF);
 }
 
 .step-nav > li.active::before{
   background-color: #5170FF;
-  background-color: var(--brand-1, #5170FF);
   color: #fff;
-  color: var(--font-white, #fff);
 }
 
 /*左侧线*/
@@ -61,17 +52,14 @@ color: var(--brand-1, #5170FF);
   width: 1px;
   height: 30px;
   border-left: 1px solid #5170FF;
-  border-left: 1px solid var(--brand-1, #5170FF);
 }
-`,
-`
+
 .mymain {
   position: relative;
 }
 .mysidebar {
   width: 240px;
   border-right: 1px solid #CACFD8;
-  border-right: 1px solid var(--gray-1, #CACFD8);
   position: absolute;
   top: 0;
   left: 0;
@@ -84,5 +72,39 @@ color: var(--brand-1, #5170FF);
 .section-block {
   min-height: 200px;
   border-bottom: 1px dashed #CACFD8;
-  border-bottom: 1px dashed var(--gray-1, #CACFD8);
 }
+.section-block.active.anchor-active-by-anchor-link {
+  animation: hightlight-and-disapear 1 3s linear;
+}
+@keyframes hightlight-and-disapear
+{
+    0%
+    {
+      outline: invert none medium;
+    }
+    2%
+    {
+      outline: 0 none rgba(255,255,255,0);
+    }
+    10%
+    {
+      outline: 1px solid #5170FF;
+    }
+    50%
+    {
+      outline: 1px solid #5170FF;
+    }
+    90%
+    {
+      outline: 1px solid rgba(255,255,255,0);
+    }
+    99%
+    {
+      outline: 0 none rgba(255,255,255,0);
+    }
+    100%
+    {
+      outline: invert none medium;
+    }
+}
+

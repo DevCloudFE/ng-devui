@@ -1,19 +1,19 @@
-<section style="width: 400px;">
+<section style="width:400px;">
   <h4>单文件</h4>
-  <ave-single-upload #singleupload [fileOptions]="fileOptions" [uploadedFiles]="uploadedFiles"
+  <d-single-upload #singleupload [fileOptions]="fileOptions" [uploadedFiles]="uploadedFiles"
     [uploadOptions]="uploadOptions" [filePath]="'name'" [beforeUpload]="beforeUpload" (successEvent)="onSuccess($event)"
     (deleteUploadedFileEvent)="deleteUploadedFile($event)" (errorEvent)="onError($event)">
-  </ave-single-upload>
+  </d-single-upload>
   <h4>单文件支持拖动上传</h4>
-  <ave-single-upload #singleupload [enableDrop]="true" [fileOptions]="fileOptions" [uploadedFiles]="uploadedFiles"
+  <d-single-upload #singleupload [enableDrop]="true" [fileOptions]="fileOptions" [uploadedFiles]="uploadedFiles"
     [uploadOptions]="uploadOptions" [filePath]="'name'" [beforeUpload]="beforeUpload" (successEvent)="onSuccess($event)"
     (deleteUploadedFileEvent)="deleteUploadedFile($event)" (errorEvent)="onError($event)" (fileDrop)="fileDrop($event)"
     (fileOver)="fileOver($event)">
-  </ave-single-upload>
+  </d-single-upload>
   <h4>自动上传</h4>
-  <ave-single-upload [fileOptions]="fileOptions" [uploadOptions]="uploadedFiles" (onSuccess)="onSuccess($event)"
-    (onError)="onError($event)" [autoUpload]="true">
-  </ave-single-upload>
+  <d-single-upload [fileOptions]="fileOptions" [uploadOptions]="uploadedFiles" (successEvent)="onSuccess($event)"
+    (errorEvent)="onError($event)" [autoUpload]="true">
+  </d-single-upload>
   <div [style.margin-top.px]="10">
     <pre>singleupload uploadOptions: {{ singleupload.uploadOptions | json }}</pre>
   </div>

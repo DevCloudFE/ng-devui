@@ -7,13 +7,18 @@ import { of } from 'rxjs';
 
 
 @Component({
-  selector: 'ave-editable-select-demo-with-search-function',
-  templateUrl: './editable-select-demo-with-search-function.component.html'
+  selector: 'd-editable-select-demo-with-search-function',
+  templateUrl: './editable-select-demo-with-search-function.component.html',
+  styles: [
+    `
+      section {
+        width: 50%;
+      }
+    `
+  ]
 })
 export class EditableSelectDemoWithSearchFunctionComponent implements OnInit {
   selectItem2;
-
-  @HostBinding('attr.ave-ui') aveUi = true;
 
   languages = ['C#', 'C', 'C++', 'CPython', 'Java', 'JavaScript', 'Go', 'Python', 'Ruby', 'F#', 'TypeScript', 'SQL',
     'LiveScript', 'CoffeeScript'];

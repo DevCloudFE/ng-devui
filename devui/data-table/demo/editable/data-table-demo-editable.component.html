@@ -1,0 +1,22 @@
+<section>
+  <d-data-table [dataSource]="basicDataSource" (cellEditEnd)="thisCellEditEnd($event)" [scrollable]="true">
+    <d-column [order]="1" field="$index" header="#" [width]="'50px'"></d-column>
+    <d-column [order]="2" field="firstName" header="First Name" [width]="'100px'" [editable]="true"
+      [extraOptions]="{editableTip: 'btn'}"></d-column>
+    <d-column [order]="4" field="dob" header="Date of birth" [fieldType]="'date'" [editable]="true"
+      [extraOptions]="{dateFormat: 'YYYY-MM-DD HH:mm:ss', showTime:true}" [width]="'150px'"></d-column>
+    <d-column [order]="5" field="gender" header="Gender" [width]="'100px'" [fieldType]="'select'" [editable]="true"
+      [extraOptions]="{source: genderSource, filterKey: 'label', isSearch: true, optionTemplate: myTemplate}">
+    </d-column>
+    <d-column [order]="6" field="age" header="Age" [width]="'100px'" [fieldType]="'number'" [editable]="true">
+    </d-column>
+    <d-column [order]="7" field="hobby" header="Hobby" [width]="'150px'" [fieldType]="'select'" [editable]="true"
+      [extraOptions]="{source: hobbySource, filterKey: 'name', isSearch: true, multiple: true}"></d-column>
+    <d-column [order]="2" field="duty" header="Duty" [width]="'150px'" [fieldType]="'treeSelect'" [editable]="true"
+      [extraOptions]="{source: DutySource, multiple: true, expandTree: true, leafOnly: true, placeholder: 'choose duty',
+    width: '200px;', filterKey: 'title', autoOpen: true, treeNodeTitleKey: 'title'}"></d-column>
+  </d-data-table>
+</section>
+<ng-template #myTemplate let-option="option" let-filterKey="filterKey">
+  <span>gender:{{option[filterKey]}}</span>
+</ng-template>

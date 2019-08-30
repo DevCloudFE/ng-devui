@@ -1,8 +1,6 @@
 @import '../style/theme/color';
-@import '../style/theme/variables';
-@import '../style/mixins/index';
 
-:host-context(.tooltip) {
+:host-context(.devui-tooltip) {
   position: absolute;
   z-index: 1070;
   display: block;
@@ -22,7 +20,7 @@
   white-space: normal;
   font-size: 12px;
   opacity: 1;
-  & .tooltip-arrow {
+  & .devui-tooltip-arrow {
     display: block;
   }
 
@@ -30,7 +28,7 @@
       margin-top: -5px;
       padding: 0;
       box-shadow: -5px 5px 20px 0px rgba($dark1, .2);
-      & .tooltip-arrow {
+      & .devui-tooltip-arrow {
         bottom: -5px;
         left: 50%;
         margin-left: -5px;
@@ -43,7 +41,7 @@
       margin-top: 5px;
       padding: 0;
       box-shadow: 5px -5px 20px 0px rgba($dark1, .2);
-      & .tooltip-arrow {
+      & .devui-tooltip-arrow {
         top: -5px;
         left: 50%;
         margin-left: -5px;
@@ -56,7 +54,7 @@
       margin-left: -5px;
       padding: 0;
       box-shadow: 5px -5px 20px 0px rgba($dark1, .2);
-      & .tooltip-arrow {
+      & .devui-tooltip-arrow {
         top: 50%;
         right: -5px;
         margin-top: -5px;
@@ -69,7 +67,7 @@
       margin-left: 5px;
       padding: 0;
       box-shadow: -5px 5px 20px 0px rgba($dark1, .2);
-      & .tooltip-arrow {
+      & .devui-tooltip-arrow {
         top: 50%;
         left: -5px;
         margin-top: -5px;
@@ -77,23 +75,26 @@
         border-right-color: $white;
     }
   }
-}
-
-.tooltip-inner {
+  .devui-tooltip-inner {
     padding: 5px 10px;
     font-size: 14px;
-    color: #293040;
+    color: $dark1;
     letter-spacing: 0;
     line-height: 20px;
     word-wrap: break-word;
     background: $white;
     box-shadow: none;
+    word-break: break-all;
+    text-align: start;
 }
 
-.tooltip-arrow {
+.devui-tooltip-arrow {
     position: absolute;
     width: 0;
     height: 0;
     border-color: transparent;
     border-style: solid;
 }
+}
+
+

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 @Component({
-    selector: 'ave-basic',
+    selector: 'd-basic',
     changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: './basic.component.html'
 })

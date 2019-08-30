@@ -7,12 +7,11 @@ import {
 import { SourceType, originSource } from '../mock-data';
 
 @Component({
-    selector: 'ave-datatable-demo-multiheader',
+    selector: 'd-datatable-demo-multiheader',
     changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: './data-table-demo-multiheader.component.html'
 })
 export class DatatableDemoMultiHeaderComponent implements OnInit {
-  @HostBinding('attr.ave-ui') aveUi = true;
   basicDataSource: Array<SourceType> = JSON.parse(JSON.stringify(originSource.slice(0, 6)));
 
    cellDBClick(e) {

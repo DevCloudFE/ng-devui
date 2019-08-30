@@ -1,9 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { formatDate } from '../utils/date-utils';
+import { formatDate } from 'ng-devui/utils';
 
 @Pipe({
-  name: 'aveDatePipe'
+  name: 'dDatePipe'
 })
 export class DatePipe implements PipeTransform {
   transform(date: any, pattern: any): any {

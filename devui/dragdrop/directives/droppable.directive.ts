@@ -17,7 +17,7 @@ import { Utils } from '../shared/utils';
 import { Subscription } from 'rxjs';
 
 @Directive({
-    selector: '[aveDroppable]'
+    selector: '[dDroppable]'
 })
 export class DroppableDirective implements OnInit, AfterViewInit, OnDestroy {
 
@@ -86,6 +86,7 @@ export class DroppableDirective implements OnInit, AfterViewInit, OnDestroy {
 
     private dragStartSubscription: Subscription;
     private dragEndSubscription: Subscription;
+    private dropEndSubscription: Subscription;
 
     // 记录上一次悬停的元素，用于对比悬停的元素等是否发生变化
     private overElement;
@@ -108,7 +109,7 @@ export class DroppableDirective implements OnInit, AfterViewInit, OnDestroy {
               });
             }
         });
-        this.dragEndSubscription = this.dragDropService.onDrop.subscribe(() => {
+        this.dropEndSubscription = this.dragDropService.onDrop.subscribe(() => {
           if (this.dragDropService.draggedEl) {
             if (!this.dragDropService.dragFollow) {
               this.renderer.setStyle(this.dragDropService.draggedEl, 'display', '');
@@ -136,17 +137,18 @@ export class DroppableDirective implements OnInit, AfterViewInit, OnDestroy {
     }
 
     ngAfterViewInit() {
-        if (this.el.nativeElement.hasAttribute('ave-sortable')) {
+        if (this.el.nativeElement.hasAttribute('d-sortable')) {
             this.sortContainer = this.el.nativeElement;
           } else {
-            this.sortContainer = this.el.nativeElement.querySelector('[ave-sortable]');
+            this.sortContainer = this.el.nativeElement.querySelector('[d-sortable]');
           }
-         this.sortDirection = this.sortContainer ? this.sortContainer.getAttribute('avesortable') || 'v' : 'v';
+         this.sortDirection = this.sortContainer ? this.sortContainer.getAttribute('dsortable') || 'v' : 'v';
     }
 
     ngOnDestroy() {
         this.dragStartSubscription.unsubscribe();
         this.dragEndSubscription.unsubscribe();
+        this.dropEndSubscription.unsubscribe();
     }
 
     @HostListener('dragenter', ['$event'])

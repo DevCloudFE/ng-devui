@@ -2,10 +2,10 @@ import {
   Component,
   HostBinding
 } from '@angular/core';
-import { DevuiSourceData } from '../../shared/devui-codebox';
+import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 
 @Component({
-    selector: 'ave-demo-search',
+    selector: 'd-demo-search',
     templateUrl: './search-demo.component.html'
 })
 export class SearchDemoComponent {

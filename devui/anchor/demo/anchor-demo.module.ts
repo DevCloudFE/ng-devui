@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 
 import { ButtonModule } from '../../button/index';
 import { StickyModule } from '../../sticky/index';
-import { AnchorModule } from '../scroll-to-anchor.module';
+import { AnchorModule } from '../anchor.module';
 import { AnchorDemoComponent } from './anchor-demo.component';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
 import { BasicComponent } from './basic/basic.component';

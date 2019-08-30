@@ -1,0 +1,13 @@
+<section>
+  <d-button class="demo-margin" (btnClick)="setUnCheckableRelation('downward')">选中父不再选中子</d-button>
+  <d-button class="demo-margin" (btnClick)="setUnCheckableRelation('upward')">选中子不再选中父</d-button>
+  <d-button class="demo-margin" (btnClick)="toggleIcon()">使用自定义展开/收起图标</d-button>
+   <d-data-table #dataTable [dataSource]="basicDataSource" [checkable]="true" [checkableRelation]="checkableRelation" [scrollable]="true"
+   (cellClick)="cellClick($event)" (rowClick)="rowClick($event)" [loadChildrenTable]="loadChildrenTable" (getCheckedRows)="getCheckedRows($event)"
+   [loadAllChildrenTable]="loadAllChildrenTable">
+     <d-column [order]="1" field="title" header="标题" [width]="'40%'" [nestedColumn]="true" [extraOptions]="extraOptions"></d-column>
+     <d-column [order]="2" field="lastName" header="处理人" [width]="'20%'"></d-column>
+     <d-column [order]="3" field="status" header="状态" [width]="'20%'"></d-column>
+     <d-column [order]="4" field="dob" header="截止日期" [fieldType]="'date'" [extraOptions]="{dateFormat: 'MM/DD/YYYY'}" [width]="'20%'"></d-column>
+   </d-data-table>
+ </section>

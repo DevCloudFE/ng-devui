@@ -8,6 +8,9 @@
 * 企业级组件，提供配套设计规范、字体图标库
 * 开箱即用
 
+## Angular Support
+Now supports Angular `^7.0.0`
+
 ## Getting Started
 
 1. Installation:
@@ -32,8 +35,7 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    // 引入公共service
-    DevUIModule.forRoot()
+    DevUIModule
   ],
   bootstrap: [ AppComponent ],
 })
@@ -41,6 +43,16 @@ export class AppModule { }
 
 ```
 
+在 `angular.json` 文件中引入devui样式：
+
+```json
+{
+  "styles": [
+    ...
+    "node_modules/ng-devui/devui.min.css"
+  ]
+}
+```
 
 ## Contribution
 

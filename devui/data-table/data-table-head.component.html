@@ -7,17 +7,4 @@
             [ngTemplateOutletContext]="{ $implicit: this, rows: rowCountArray  }" 
             *ngIf="rowCount > 0">
   </ng-template>
-
-  <!--filter row-->
-  <tr *ngIf="hasAnyFilterColumns(columns)">
-    <th *ngIf="showDetail" [style.width]="showDetailColumn.width" [style.border]="'none'" [style.text-align]="'center'" [style.padding]="'0'"></th>
-    <th *ngIf="checkable"></th>
-    <th *ngFor="let column of columns; trackBy:trackByFn;">
-      <ng-container *ngIf="canFilterable(column)">
-        <ng-template [ngTemplateOutlet]="dataTableTemplates.getCellFilterTemplate(column)"
-                  [ngTemplateOutletContext]="{ $implicit: this , column: column}">
-        </ng-template>
-      </ng-container>
-    </th>
-  </tr>
 </ng-container>

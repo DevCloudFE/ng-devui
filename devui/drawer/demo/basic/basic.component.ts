@@ -3,9 +3,8 @@ import { DrawerContentComponent } from '../drawerContent/drawer-content.componen
 import { IDrawerOpenResult, DrawerService, DialogService } from 'ng-devui';
 
 @Component({
-  selector: 'ave-basic',
+  selector: 'd-basic',
   templateUrl: './basic.component.html',
-  styleUrls: ['./basic.component.css']
 })
 export class BasicComponent {
   results: IDrawerOpenResult;

@@ -3,7 +3,7 @@ import { TabContentDirective } from './tab-content.directive';
 import { TabTitleDirective } from './tab-title.directive';
 
 @Component({
-  selector: 'ave-tab',
+  selector: 'd-tab',
   template: '',
   // changeDetection: ChangeDetectionStrategy.OnPush
 })

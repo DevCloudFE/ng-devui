@@ -1,7 +1,7 @@
 import { DevuiSourceData } from '../../shared/devui-codebox/devui-source-data';
 import { Component } from '@angular/core';
 @Component({
-  selector: 'ave-accordion-demo',
+  selector: 'd-accordion-demo',
   templateUrl: './accordion-demo.component.html',
 })
 export class  AccordionDemoComponent {

@@ -1,2 +1,1 @@
-export * from  './portal.module';
-export * from './portal';
+export * from './public-api';

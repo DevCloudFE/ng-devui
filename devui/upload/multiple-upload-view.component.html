@@ -1,15 +1,15 @@
-<ave-uploaded-files
-        #aveUploadedFiles
+<d-uploaded-files
+        #dUploadedFiles
         [uploadedFiles]="uploadedFiles"
         [filePath]="filePath"
         [uploadedFilesRef]="uploadedFilesRef"
-        (deleteUploadedFileEvent)="_deleteUploadedFileEvent($event)">
-</ave-uploaded-files>
+        (deleteUploadedFileEvent)="_onDeleteUploadedFile($event)">
+</d-uploaded-files>
 <ng-template [ngTemplateOutlet]="preloadFilesRef ? preloadFilesRef : default"
           [ngTemplateOutletContext]="{ $implicit: this, fileUploaders: fileUploaders, UploadStatus: UploadStatus, deleteFile: deleteFileProxy}">
 </ng-template>
 <ng-template #default>
-    <table class="table" *ngIf="fileUploaders.length>0">
+    <table class="devui-table" *ngIf="fileUploaders.length>0">
         <tr *ngFor="let fileUploader of fileUploaders;let index=index;">
             <td width="50%">
                 <span>{{fileUploader.file.name}}</span>
@@ -21,17 +21,17 @@
                 <span *ngIf="fileUploader.status===UploadStatus.failed">{{FAILED}}</span>
             </td>
             <td>
-                <ave-button
+                <d-button
+                        bordered="true"
                         icon="trash"
                         bsStyle="danger"
                         bsSize="xs"
                         *ngIf="fileUploader.status!==UploadStatus.uploaded"
                         [disabled]="fileUploader.status===UploadStatus.uploading"
-                        (click)="deleteFile(fileUploader.file)">
+                        (btnClick)="deleteFile(fileUploader.file)">
                     {{DELETE}}
-                </ave-button>
+                </d-button>
             </td>
         </tr>
-        </tbody>
     </table>
 </ng-template>

@@ -1,64 +1,72 @@
-<ave-data-table (detialToggle)="detailToggle($event)" [detailTemplateRef]="detailTemplateRef" [scrollable]="true"
-  [resizeable]="true" [dataSource]="resizeableDataSource" (pageIndexChange)="changePageContent($event)"
-  [multiSort]="multiSort" (multiSortChange)="multiSortChange($event)" (resize)="onResize($event)"
-  [columnDefs]="columnDefs" [pager]="pager" [showDetail]="true" [checkable]="true" [hideColumn]="hideColumn"
-  [showSortIcon]="showSortIcon">
-  <ave-column field="$index" header="#" [width]="'50px'" [minWidth]="'50px'"></ave-column>
-  <ave-column field="firstName" header="First Name" [sortable]="true" [width]="'150px'" [minWidth]="'150px'">
-  </ave-column>
-  <ave-column field="lastName" header="Last Name" [sortable]="true" [width]="'150px'" [minWidth]="'150px'"></ave-column>
-  <ave-column field="gender" header="Gender" [sortable]="true" [minWidth]="'200px'" [width]="'300px'"
-    [style]="{'overflow':'visible'}">
-    <ave-head-cell>
-      <ng-template let-column="column" let-head="">
-        <span aveTooltip [content]="column.header + ' is a head cell template'" [position]="'bottom'"
-          style="cursor:pointer;" (click)="head.onHeadClick(column)">
-          {{column.header}}
-        </span>
-      </ng-template>
-    </ave-head-cell>
-    <ave-cell>
-      <ng-template let-cellValue="cellValue" let-rowItem="rowItem">
-        <span aveTooltip [content]="rowItem.firstName + ' is a ' + cellValue" [position]="'bottom'">
-          {{cellValue.toUpperCase()}}
-        </span>
-      </ng-template>
-    </ave-cell>
-  </ave-column>
-  <ave-column field="dob" header="Date of birth" [fieldType]="'date'" [extraOptions]="{dateFormat: 'MM/DD/YYYY'}"
-    [width]="'100px'" [minWidth]="'100px'"></ave-column>
-  <ave-column field="filter" header="#" [width]="'35px'" [minWidth]="'35px'" [style]="{'overflow':'visible'}">
-    <ave-head-cell>
-      <ng-template>
-        <span aveTooltip content="header filter" [position]="'bottom'" [showAnimate]="true" class="setRole icon-setting"
-          id="setRoleFilter"></span>
+<div>
+  <section>
+    <d-data-table (detialToggle)="detailToggle($event)" [scrollable]="true" [showDetail]="true" [fixHeader]="true"
+      [resizeable]="true" [dataSource]="resizeableDataSource" (pageIndexChange)="changePageContent($event)"
+      [multiSort]="multiSort" (multiSortChange)="multiSortChange($event)" (resize)="onResize($event)"
+      [columnDefs]="columnDefs" [pager]="pager" [checkable]="true" [hideColumn]="hideColumn"
+      [showSortIcon]="showSortIcon" [scrollable]="true">
+      <d-column field="$index" header="#" [width]="'50px'" [minWidth]="'50px'"></d-column>
+      <d-column field="firstName" header="First Name" [sortable]="true" [width]="'150px'" [minWidth]="'150px'">
+      </d-column>
+      <d-column field="lastName" header="Last Name" [sortable]="true" [width]="'150px'" [minWidth]="'150px'">
+      </d-column>
+      <d-column field="gender" header="Gender" [sortable]="true" [minWidth]="'200px'" [width]="'280px'"
+        [style]="{'overflow':'visible'}">
+        <d-head-cell>
+          <ng-template let-column="column" let-head="">
+            <span dTooltip [content]="column.header + ' is a head cell template'" [position]="'bottom'"
+              style="cursor:pointer;" (click)="head.onHeadClick(column)">
+              {{column.header}}
+            </span>
+            <div style="display: inline-block;position:absolute;right: 20px;left: 100px; top:0;">
+              <input type="text" class="form-control" name="language" id="language0" [minLength]="0"
+                [placeholder]="'search gender'" style="max-width: 150px" [maxHeight]="200" [(ngModel)]="selectItem0"
+                dAutoComplete [source]="languages" />
+            </div>
+          </ng-template>
+        </d-head-cell>
+        <d-cell>
+          <ng-template let-cellValue="cellValue" let-rowItem="rowItem">
+            <span dTooltip [content]="rowItem.firstName + ' is a ' + cellValue" [position]="'bottom'">
+              {{cellValue.toUpperCase()}}
+            </span>
+          </ng-template>
+        </d-cell>
+      </d-column>
+      <d-column field="dob" header="Date of birth" [fieldType]="'date'" [extraOptions]="{dateFormat: 'MM/DD/YYYY'}"
+        [width]="'100px'" [minWidth]="'100px'"></d-column>
+      <d-column field="filter" header="#" [width]="'35px'" [minWidth]="'35px'" [style]="{'overflow':'visible'}">
+        <d-head-cell>
+          <ng-template>
+            <div dDropDown appendToBody [closeScope]="'blank'">
+              <span dTooltip content="header filter" [position]="'bottom'" [showAnimate]="true" class="setRole"
+                id="setRoleFilter" dDropDownToggle></span>
+              <ul dDropDownMenu id="filter_box" class="filter_box">
+                <li role="menuitem" *ngFor="let title of selectedTitle">
+                  <span style="position: relative; top: 3px;display: inline-block;max-width: 100%;">
+                    <d-checkbox [name]="'checkbox'" [label]="title.name" [(ngModel)]="title.selected">
+                    </d-checkbox>
+                  </span>
+                </li>
+                <d-button style="margin-top: 10px;" (click)="updateHideColumn()">确定</d-button>
+              </ul>
+            </div>
+          </ng-template>
+        </d-head-cell>
+      </d-column>
+    </d-data-table>
+    <d-button style="margin-bottom: 20px;" bordered="true" bsStyle="primary" bsSize="xs" (btnClick)="ChangeIcon()">
+      切换排序未激活图标显示状态
+    </d-button>
+    <p>Current multisort parameters:</p>
+    <pre>{{ multiSort | json }}</pre>
+  </section>
 
-        <div class="filter_box" *ngIf="showFilterWin" id="filter_box">
-          <ul class="filter_ul">
-            <li *ngFor="let title of selectedTitle">
-              <span style="position: relative; top: 3px;display: inline-block;max-width: 100%;">
-                <ave-checkbox [name]="'checkbox'" [label]="title.name" [ngModel]="title.selected"
-                  (change)="updateHideColumn($event,title)">
-                </ave-checkbox>
-              </span>
-            </li>
-          </ul>
-        </div>
-      </ng-template>
-    </ave-head-cell>
-  </ave-column>
-</ave-data-table>
-<ave-button style="margin-bottom: 20px;" bordered="true" bsSize="xs" (click)="ChangeIcon()">
-  切换排序未激活图标显示状态
-</ave-button>
-<p>Current multisort parameters:</p>
-<pre>{{ multiSort | json }}</pre>
-
-<ng-template #detailTemplateRef let-detail="detail" let-rowIndex="rowIndex" let-rowItem="rowItem">
-  <div>detail: {{detail}}</div>
-  <div>rowIndex: {{rowIndex}}</div>
-  <div>firstName: {{rowItem.firstName}}</div>
-  <div>lastName: {{rowItem.lastName}}</div>
-  <div>gender: {{rowItem.gender}}</div>
-  <ave-button>This is button</ave-button>
-</ng-template>
+  <ng-template #detailTemplateRef let-rowIndex="rowIndex" let-rowItem="rowItem">
+    <div>rowIndex: {{rowIndex}}</div>
+    <div>firstName: {{rowItem.firstName}}</div>
+    <div>lastName: {{rowItem.lastName}}</div>
+    <div>gender: {{rowItem.gender}}</div>
+    <d-button>This is button</d-button>
+  </ng-template>
+</div>

@@ -9,6 +9,7 @@ import { BasicComponent } from './basic/basic.component';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
+import { ModalModule } from 'ng-devui/modal';
 
 @NgModule({
     imports: [
@@ -17,6 +18,7 @@ import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
         DevUICodeboxModule,
         DevUIApiModule,
         ToggleModule,
+        ModalModule,
         RouterModule.forChild([
           { path: '',  redirectTo: 'demo' },
           { path: 'demo', component: ToggleDemoComponent},

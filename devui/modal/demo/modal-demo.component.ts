@@ -2,19 +2,17 @@ import { Component, Input } from '@angular/core';
 import { DialogService } from '../dialog.service';
 import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 @Component({
-  selector: 'ave-modal-demo',
+  selector: 'd-modal-demo',
   templateUrl: './modal-demo.component.html'
 })
 export class ModalDemoComponent {
   basicSource: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./basic/basic.component.html')},
-    {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./basic/basic.component.ts')},
-    {title: 'CSS', language: 'css', code:  require('!!raw-loader!./basic/basic.component.css')}
+    {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./basic/basic.component.ts')}
   ];
   customizeSource: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./customize/customize.component.html')},
-    {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./customize/customize.component.ts')},
-    {title: 'CSS', language: 'css', code:  require('!!raw-loader!./customize/customize.component.css')}
+    {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./customize/customize.component.ts')}
   ];
   tipsSource: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./tips/tips.component.html')},
@@ -49,18 +47,18 @@ export class ModalTestComponent {
 
 
 @Component({
-  selector: 'ave-modal-alert',
+  selector: 'd-modal-alert',
   template: `<div>
               <div class="modal-body">
                   <div *ngIf="!!data.content">{{data.content}}</div>
               </div>
               <div class="modal-footer">
-                  <ave-button
+                  <d-button
                           (click)='close($event)'
                           bsStyle="stress"
                           circled="true"
                   >{{data.cancelBtnText}}
-                  </ave-button>
+                  </d-button>
               </div>
             </div>`
 })

@@ -5,9 +5,8 @@
 }
 /deep/ .devui-accordion-menu,
 .devui-accordion-menu {
-  // background: @white;
-  // box-shadow: 0 1px 2px 0 @dark-1-boxshadow;
   width: 100%;
+  overflow-y: auto;
   .devui-accordion-item {
       position: relative;
       > .open-icon {
@@ -19,9 +18,6 @@
           height: 16px;
           line-height: 16px;
           transition: transform ease-out 300ms;
-          &::before {
-              font-size: 16px; /*图标太小*/
-          }
       }
       &:not(.open){
           >.open-icon {
@@ -40,36 +36,17 @@
       width: 100%;
       padding: 0 30px 0 20px;
       line-height: 40px;
-      // color: @dark-1;
       font-weight: 700;
-      // background: @white;
       cursor: pointer;
   }
   .devui-accordion-submenu {
-      // background: @gray-3;
       .devui-accordion-item-title {
           font-weight: 400;
-          // background: @gray-3;
           padding-left: 40px;
           padding-right: 10px;
       }
-      // >.accordion-item:not(.disabled) {
-      //     .accordion-item-title:hover {
-      //         background:  @hover-content;
-      //     }
-      //     &.active > .accordion-item-title {
-      //         background: @brand-3;
-      //     }
-      // }
 
   }
-
-  // >.accordion-item.has-active-item > .accordion-item-title {
-  //     color: @brand-1;
-  // }
-  // >.accordion-item:not(.disabled) > .accordion-item-title:hover {
-  //     background: @hover-content;
-  // }
   a.devui-accordion-item-title {
       &:hover {
           text-decoration: none;

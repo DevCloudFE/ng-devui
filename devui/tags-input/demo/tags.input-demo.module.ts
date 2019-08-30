@@ -8,6 +8,7 @@ import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
 import { TagsInputModule } from '../tags.input.module';
+import { TagsInputDemoAsyncComponent } from './async/async.component';
 
 @NgModule({
   imports: [
@@ -25,12 +26,12 @@ import { TagsInputModule } from '../tags.input.module';
     ])
   ],
   exports: [
-    TagsInputDemoComponent,
-    TagsInputDemoBasicComponent
+
   ],
   declarations: [
     TagsInputDemoComponent,
-    TagsInputDemoBasicComponent
+    TagsInputDemoBasicComponent,
+    TagsInputDemoAsyncComponent
   ]
 })
 export class TagsInputDemoModule { }

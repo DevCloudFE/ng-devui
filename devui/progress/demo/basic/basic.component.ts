@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'ave-basic',
+  selector: 'd-demo-progress-basic',
   templateUrl: './basic.component.html',
   styleUrls: ['./basic.component.css']
 })

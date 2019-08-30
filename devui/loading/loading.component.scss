@@ -1,57 +1,76 @@
-.devui-loading-spinner-wrapper {
+@import '../style/theme/color';
+.loading-wrapper {
+  display: flex;
+  flex: 1 1 auto;
+}
+.devui-spinner-wrapper {
   position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
   z-index: 1001;
-  .devui-loading-default-sign {
-    position: relative;
-    display: inline-block;
-    z-index: 1001;
-    padding: 12px 14px;
-    border-style: solid;
-    border-width: 1px;
-    border-top: 0;
-    border-radius: 0 0 4px 4px;
+}
+.fix-loading-position{
+  transform: translate(-50%, -50%);
+}
+.devui-busy-default-sign {
+  position: relative;
+  display: inline-block;
+  z-index: 1001;
+  padding: 12px 14px;
+  color: $dark1;
+}
 
-    .devui-loading-default-spinner {
-      position: relative;
-      display: inline-block;
-      width: 25px;
-      height: 25px;
-      vertical-align: middle;
+.devui-busy-default-text {
+  display: inline-block;
+  margin-left: 6px;
+  max-width: 400px;
+  font-size: 14px;
+  text-align: left;
+}
 
-      div {
-        position: absolute;
-        left: 44.5%;
-        top: 37%;
-        width: 10%;
-        height: 26%;
-        border-radius: 50px;
-        animation: busy-spinner-anim 1s linear infinite;
-      }
+.devui-busy-default-spinner {
+  position: relative;
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  animation: devui-busy-spinner-anim 1s linear infinite;
+  div {
+    position: absolute;
+    left: 44.5%;
+    top: 37%;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+  }
+  .bar1{
+    top: 0;
+    left: 0;
+    background:$status-blue;
+  }
+  .bar2{
+    top: 0;
+    left: 9px;
+    background:$focus4;
+  }
+  .bar3{
+    top: 9px;
+    left: 0;
+    background:$focus4;
 
-      @each $i in 1,2,3,4,5,6,7,8,9,10,11,12 {
-        .bar#{$i} {
-            transform: rotate(30 * ($i - 1) + deg) translate(0, -142%);
-            animation-delay: -1 + 1 / 12 * ($i - 1) + s;
-        }
-      }
-    }
+  }
+  .bar4{
+    top: 9px;
+    left: 9px;
+    background:$status-blue;
+  }
 
-    .devui-loading-default-text {
-      display: inline-block;
-      margin-left: 6px;
-      max-width: 400px;
-    }
-
-    @keyframes busy-spinner-anim {
-      from {
-        opacity: 1;
-      }
-      to {
-        opacity: 0.25;
-      }
-    }
+}
+@keyframes devui-busy-spinner-anim {
+  0% {
+    transform:rotate(0deg) scale(1);
+  }
+  50% {
+    transform:rotate(135deg) scale(1.5);
+  }
+  100% {
+     transform:rotate(270deg) scale(1);
   }
 }

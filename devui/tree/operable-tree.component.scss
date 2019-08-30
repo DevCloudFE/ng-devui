@@ -1,46 +1,59 @@
 @import '../style/theme/color';
 @import '../style/theme/variables';
 @import '../style/mixins/index';
+@import './tree.component';
 
-.tree-node.operable-tree-node {
-  .tree-node__checkbox {
-    margin-left: .5em;
-    margin-top: -.2em;
+:host {
+  display: block;
+}
 
-    .ave-checkbox-material {
-      width: 16px;
-      height: 16px;
-    }
-  }
+::ng-deep {
+  &.tree-node.operable-tree-node {
+    .tree-node__checkbox {
+      margin-left: .5em;
+      margin-top: -.2em;
 
-  .icons {
-    margin-left: .5em;
-    cursor: pointer;
-    svg {
-      #add-path {
-        fill:  $dark1;
-      }
-      #edit-path {
-        fill:  $dark1;
-      }
-      #delete-path {
-        fill:  $dark1;
+      .devui-checkbox-material {
+        width: 16px;
+        height: 16px;
       }
     }
 
-    &:hover {
-      #add-path {
-        fill: $hover-control;
+    .icons {
+      margin-left: .5em;
+      cursor: pointer;
+
+      svg {
+        #add-path {
+          fill: $dark1;
+        }
+
+        #edit-path {
+          fill: $dark1;
+        }
+
+        #delete-path {
+          fill: $dark1;
+        }
       }
-      #edit-path {
-        fill: $hover-control;
-      }
-      #delete-path {
-        fill: $hover-control;
+
+      &:hover {
+        #add-path {
+          fill: $hover-control;
+        }
+
+        #edit-path {
+          fill: $hover-control;
+        }
+
+        #delete-path {
+          fill: $hover-control;
+        }
       }
     }
-  }
-  svg.svg-icon > g > g > path {
-    fill: $dark2;
+
+    svg.svg-icon > g > g > path {
+      fill: $dark2;
+    }
   }
 }

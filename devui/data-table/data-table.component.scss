@@ -1,6 +1,6 @@
 @import '../style/theme/color';
 
-.devui-data-table {
+.devui-data-table ::ng-deep {
   border: none;
   .devui-table-view {
     padding: 0px;
@@ -18,6 +18,9 @@
       max-width: 100%;
       position: relative;
       margin: 0px;
+      & > tbody + tbody {
+        border-top: none;
+      }
     }
     .resize-bar {
       top: 0;
@@ -93,11 +96,12 @@
   }
   .clickable{
     cursor: pointer;
+    vertical-align: middle;
   }
-  .ave-checkbox-material {
+  .devui-checkbox-material {
     margin-right: 0;
   }
-  .ave-checkbox > label {
+  .d-checkbox > label {
     margin: auto;
   }
   .resize-handle{
@@ -122,8 +126,19 @@
   }
 }
 
-.devui-table.striped ::ng-deep{
+.devui-table.table-striped ::ng-deep{
   tbody > tr:nth-of-type(odd){
     background: rgba($gray3, .3);
+  }
+}
+
+:host ::ng-deep .devui-toggle-childtable {
+  cursor: pointer;
+  margin-right: 5px;
+  & > svg {
+    vertical-align: middle;
+    & > g > path {
+      fill: $dark3;
+    }
   }
 }

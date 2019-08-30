@@ -1,0 +1,125 @@
+@import '../style/theme/color';
+
+:host {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+
+  .disabled {
+    cursor: not-allowed;
+    opacity: 0.3;
+  }
+
+  &:hover {
+    .input-box:not(.disabled) {
+      border: 1px solid $hover-control;
+    }
+
+    .input-control-buttons:not(.disabled) {
+      border-color: $hover-control;
+    }
+
+    .input-control-buttons:not(.disabled) {
+      display: flex;
+    }
+  }
+
+  &:focus-within {
+    .input-box:not(.disabled) {
+      border: 1px solid $hover-control;
+    }
+
+    .input-control-buttons:not(.disabled) {
+      border-color: $hover-control;
+    }
+
+    .input-control-buttons:not(.disabled) {
+      display: flex;
+    }
+  }
+
+  .input-box {
+    box-sizing: border-box;
+    padding: 5px 10px;
+    font-size: 14px;
+    color: $dark1;
+    vertical-align: middle;
+    border: 1px solid $gray1;
+    border-radius: 1px;
+    outline: none;
+    width: 100%;
+    background-color: $white;
+    line-height: 20px;
+    height: 32px;
+  }
+
+  .input-control-buttons {
+    position: absolute;
+    right: 0;
+    width: 25px;
+    height: 100%;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid transparent;
+    border-left-color: $gray1;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+    .input-control-button {
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      height: 50%;
+      line-height: 50%;
+      border-width: 0 1px;
+      cursor: pointer;
+      transition: transform .2s ease-in-out;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &:not(.disabled):hover {
+        & > svg > g {
+          fill: $hover-control;
+        }
+      }
+    }
+  }
+
+  .svg-icon-arrow > g {
+    fill: $dark1;
+  }
+}
+
+.devui-input-number-lg {
+  & > .input-box {
+    font-size: 18px;
+    line-height: 24px;
+    height: 46px;
+  }
+
+  & /deep/ .svg-icon-arrow {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.devui-input-number-sm {
+  & > .input-box {
+    font-size: 12px;
+    line-height: 18px;
+    height: 30px;
+  }
+
+  & /deep/ .svg-icon-arrow {
+    width: 13px;
+    height: 13px;
+  }
+}

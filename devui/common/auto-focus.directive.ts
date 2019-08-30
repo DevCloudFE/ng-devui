@@ -1,11 +1,11 @@
 import { AfterViewInit, Directive, ElementRef, Input } from '@angular/core';
 
 @Directive({
-  selector: '[aveAutoFocus]',
+  selector: '[dAutoFocus]',
 })
 export class AutoFocusDirective implements AfterViewInit {
 
-  @Input('aveAutoFocus') autoFocus: boolean;
+  @Input('dAutoFocus') autoFocus: boolean;
 
   constructor(private  elementRef: ElementRef) {
   }

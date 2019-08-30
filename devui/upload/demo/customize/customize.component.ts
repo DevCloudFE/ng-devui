@@ -3,7 +3,7 @@ import { IFileOptions, IUploadOptions } from 'ng-devui';
 import { DevUIConfig } from 'ng-devui/devui.config';
 
 @Component({
-  selector: 'ave-customize',
+  selector: 'd-demo-upload-customize',
   templateUrl: './customize.component.html',
   styleUrls: ['./customize.component.css']
 })

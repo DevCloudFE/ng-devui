@@ -1,5 +1,6 @@
-ave-checkbox {
-  height: 30px;
+d-checkbox {
+  margin-bottom: 15px;
+  display: block;
 }
 .inline-block-middle-valign{
   display: inline-block;

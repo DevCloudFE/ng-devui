@@ -1,7 +1,14 @@
 import { Component } from '@angular/core';
 @Component({
-  selector: 'ave-select-template',
-  templateUrl: './select-demo-template.component.html'
+  selector: 'd-select-template',
+  templateUrl: './select-demo-template.component.html',
+  styles: [
+    `
+      .col-md-5 {
+        width: 50%;
+      }
+    `
+  ]
 })
 export class SelectDemoTemplateComponent {
   languages2 = [{

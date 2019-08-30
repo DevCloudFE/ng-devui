@@ -2,16 +2,15 @@ import {NgModule} from '@angular/core';
 
 import { MultipleUploadViewComponent } from './multiple-upload-view.component';
 import { CommonModule } from '@angular/common';
-import { ButtonModule } from '../button';
 import { SingleUploadViewComponent } from './single-upload-view.component';
 import { SingleUploadComponent } from './single-upload.component';
 import { MultipleUploadComponent } from './multiple-upload.component';
 import { UploadedFilesComponent } from './uploaded-files.component';
 import { SelectFiles } from './select-files.utils';
-import { ModalModule } from '../modal/modal.module';
 import { FileDropDirective } from './file-drop.directive';
-
-
+import { ModalModule } from 'ng-devui/modal';
+import { ButtonModule } from 'ng-devui/button';
+import { DevUIConfig } from 'ng-devui/devui.config';
 @NgModule({
   imports: [
     CommonModule,
@@ -38,7 +37,7 @@ import { FileDropDirective } from './file-drop.directive';
     MultipleUploadViewComponent,
     SingleUploadViewComponent
   ],
-  providers: [SelectFiles],
+  providers: [SelectFiles, DevUIConfig],
 })
 export class UploadModule {
 }

@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'ave-basic',
-  templateUrl: './basic.component.html',
-  styleUrls: ['./basic.component.css']
+  selector: 'd-basic',
+  templateUrl: './basic.component.html'
 })
 export class BasicComponent implements OnInit {
   values2 = ['Beijing', 'Chengdu', 'Shenzhen'];
-  choose2_3 = 'Beijing';
+  choose2 = 'Beijing';
   constructor() { }
 
   ngOnInit() {
   }
-
+  valueChange(value) {
+    console.log(value);
+  }
 }

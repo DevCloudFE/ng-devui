@@ -1,34 +1,49 @@
 <section>
     <div class="btn-group">
-        <ave-button avePopover
-                [content]="'Left!'"
-                [position]="'left'"
-                [trigger]="'click'"
-                [showAnimate]="true"
-                [appendToBody]="false">
-            Left
-        </ave-button>
-        <ave-button avePopover
-                [content]="'Top!'"
-                [position]="'top'"
-                [trigger]="'click'"
-                [showAnimate]="true"
-                [appendToBody]="false">
-            Top
-        </ave-button>
-        <ave-button avePopover
-                [content]="'Bottom!'"
-                [position]="'bottom'"
-                [trigger]="'click'"
-                [appendToBody]="false">
-            Bottom
-        </ave-button>
-        <ave-button avePopover
-                [content]="'Right!'"
-                [position]="'right'"
-                [trigger]="'click'"
-                [appendToBody]="false">
-            Right
-        </ave-button>
+      <d-button dPopover
+                  [popType]="'default'"
+                  [content]="'default!'"
+                  [position]="'left'"
+                  [controlled]="true"
+                  [showAnimate]="true"
+                  [appendToBody]="false">
+        default
+      </d-button>
+      <d-button dPopover
+                  [popType]="'info'"
+                  [content]="'info!'"
+                  [position]="'top'"
+                  [controlled]="true"
+                  [showAnimate]="true"
+                  [appendToBody]="false">
+        info
+      </d-button>
+      <d-button dPopover
+                  [content]="'error!'"
+                  [popType]="'error'"
+                  [position]="'top'"
+                  [controlled]="true"
+                  [showAnimate]="true"
+                  [appendToBody]="false">
+        error
+      </d-button>
+      <d-button dPopover
+                  [content]="'warning!'"
+                  [popType]="'warning'"
+                  [position]="'bottom'"
+                  [controlled]="true"
+                  [showAnimate]="true"
+                  [appendToBody]="false">
+        warning
+      </d-button>
+      <d-button dPopover
+                  [popType]="'success'"
+                  [content]="'success!'"
+                  [position]="'right'"
+                  [controlled]="true"
+                  [showAnimate]="true"
+                  [appendToBody]="false">
+        success
+      </d-button>
     </div>
 </section>

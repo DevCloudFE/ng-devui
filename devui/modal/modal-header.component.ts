@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'ave-modal-header',
+  selector: 'd-modal-header',
   templateUrl: './modal-header.component.html',
   styleUrls: ['./modal-header.component.scss'],
 })

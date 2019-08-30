@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'ave-ngmodel',
+  selector: 'd-ngmodel',
   templateUrl: './ngmodel.component.html',
   styleUrls: ['./ngmodel.component.css']
 })

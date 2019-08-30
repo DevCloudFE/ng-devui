@@ -7,12 +7,13 @@ import {
 import { AlertType } from './alert.types';
 
 @Component({
-  selector: 'ave-alert',
+  selector: 'd-alert',
   templateUrl: './alert.component.html',
   styleUrls: ['./alert.component.scss'],
 })
 export class AlertComponent {
   @Input() type: AlertType = 'info';
+  @Input() cssClass: string;
   @Input() closeable = true;
   @Input() content: HTMLElement | string;
   @Output() closeEvent: EventEmitter<any> = new EventEmitter;

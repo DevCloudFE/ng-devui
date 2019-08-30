@@ -1,0 +1,16 @@
+.devui-dropdown-menu {
+  overflow-y: auto;
+}
+.devui-dropdown-toggle.more{
+  display: inline-block;
+  background: #5170FF;
+  border-left: 1px solid #fff;
+  color: #fff;
+  height: 32px;
+  width: 32px;
+  padding-top: 8px;
+  margin-left: -3px;
+  vertical-align: top;
+  text-align: center;
+  cursor: pointer;
+}

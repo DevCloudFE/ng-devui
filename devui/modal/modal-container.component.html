@@ -1,5 +1,5 @@
 <div>
-    <ave-modal-header id="ave-modal-header" [title]="title" (closeEvent)="close($event)"></ave-modal-header>
+    <d-modal-header id="d-modal-header" [title]="title" (closeEvent)="close($event)"></d-modal-header>
     <div class='modal-body' [ngStyle]="{'maxHeight': maxHeight, 'overflow-y': 'auto'}">
         <div [ngClass]="{'display-flex': (dialogtype !=='' && dialogtype !=='standard')}">
             <div *ngIf="(dialogtype | lowercase) == 'warning'" class="alert-icon">
@@ -16,9 +16,9 @@
             </div>
             <div class="content" *ngIf="!!content && !html">{{content}}</div>
             <div class="content" *ngIf="!!content && html" [innerHTML]="content"></div>
-            <ng-template aveModalContentHost></ng-template>
+            <ng-template dModalContentHost></ng-template>
         </div>
     </div>
 
-    <ave-modal-footer [buttons]="buttons"></ave-modal-footer>
+    <d-modal-footer [buttons]="buttons"></d-modal-footer>
 </div>

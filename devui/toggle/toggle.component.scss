@@ -1,97 +1,97 @@
-@import '../style/theme/color';
-@import '../style/theme/variables';
-@import '../style/mixins/index';
+@import "../style/theme/color";
 
-.toggle {
-    background: $white;
-    border: 1px solid $gray1;
-    position: relative;
-    display: inline-block;
-    box-sizing: content-box;
-    overflow: visible;
-    padding: 0;
-    margin: 0;
-    cursor: pointer;
+:host {
+  display: inline-block;
+}
+
+.devui-toggle {
+  background: $white;
+  border: 1px solid $gray1;
+  position: relative;
+  display: inline-block;
+  box-sizing: content-box;
+  overflow: visible;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  transition: 0.3s ease-out all;
+  -webkit-transition: 0.3s ease-out all;
+  &:hover {
+    border-color: $hover-control;
+  }
+
+  &:active {
+    border-color: $focus2;
+  }
+  small {
+    background: $gray1;
+    border-radius: 100%;
+    position: absolute;
+    top: 0;
+    left: 2px;
     transition: 0.3s ease-out all;
     -webkit-transition: 0.3s ease-out all;
+  }
+  &.toggle-large {
+    width: 66px;
+    height: 40px;
+    border-radius: 40px;
+    & small {
+      width: 40px;
+      height: 40px;
+    }
+    &.checked small {
+      background: $white;
+      left: 26px;
+    }
+  }
+
+  &.toggle-medium {
+    width: 50px;
+    height: 30px;
+    border-radius: 30px;
+    & small {
+      width: 30px;
+      height: 30px;
+    }
+    &.checked small {
+      background: $white;
+      left: 20px;
+    }
+  }
+
+  &.toggle-small {
+    width: 30px;
+    height: 14px;
+    border-radius: 14px;
+    & small {
+      width: 10px;
+      height: 10px;
+      position: absolute;
+      top: 2px;
+    }
+    &.checked small {
+      background: $white;
+      left: 18px;
+    }
+  }
+
+  &.checked {
+    background: $status-blue;
+    border-color: $status-blue;
     &:hover {
-        border-color: $hover-control;
+      background: $hover-control;
+      border-color: $hover-control;
     }
 
     &:active {
-        border-color: $focus2;
+      background: $focus2;
+      border-color: $focus2;
     }
   }
 
-  small {
-      background: $gray1;
-      border-radius: 100%;
-      position: absolute;
-      top: 0;
-      left: 2px;
-      transition: 0.3s ease-out all;
-      -webkit-transition: 0.3s ease-out all;
+  &.disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
   }
-
-  .toggle-large {
-      width: 66px;
-      height: 40px;
-      border-radius: 40px;
-      & small {
-        width: 40px;
-        height: 40px;
-      }
-      &.checked small {
-        background: $white;
-        left: 26px;
-      }
-  }
-
-  .toggle-medium {
-      width: 50px;
-      height: 30px;
-      border-radius: 30px;
-      & small {
-        width: 30px;
-        height: 30px;
-      }
-      &.checked small {
-        background: $white;
-        left: 20px;
-      }
-  }
-
-  .toggle-small {
-      width: 30px;
-      height: 14px;
-      border-radius: 14px;
-      & small {
-        width: 10px;
-        height: 10px;
-        position: absolute;
-        top: 2px;
-      }
-      &.checked small {
-        background: $white;
-        left: 18px;
-      }
-  }
-
-  .checked {
-      background: $status-blue;
-      border-color: $status-blue;
-      &:hover {
-          background: $hover-control;
-          border-color: $hover-control;
-      }
-
-      &:active {
-          background: $focus2;
-          border-color: $focus2;
-      }
-  }
-
-  .disabled {
-      opacity: .30;
-      cursor: not-allowed;
-  }
+}

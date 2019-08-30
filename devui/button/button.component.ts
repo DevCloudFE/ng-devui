@@ -1,24 +1,19 @@
 import {
   Component,
   Input,
-  SimpleChanges,
   Directive,
   ElementRef,
   OnInit,
-  OnChanges,
   Output,
   EventEmitter,
-  HostBinding
 } from '@angular/core';
-
-declare var $: any;
 
 export type IButtonType = 'button' | 'submit' | 'reset';
 export type IButtonStyle = 'common' | 'primary' | 'text' | 'text-dark';
 export type IButtonSize = 'lg' | 'sm' | 'xs';
 
 @Component({
-  selector: 'ave-button',
+  selector: 'd-button',
   templateUrl: './button.component.html',
   styleUrls: ['./button.component.scss']
 })
@@ -26,7 +21,7 @@ export class ButtonComponent {
   @Input() id: string;
   @Input() type: IButtonType = 'button';
   @Input() bsStyle: IButtonStyle = 'primary';
-  @Input() bsSize: IButtonSize;
+  @Input() bsSize: IButtonSize = 'sm';
   @Input() bordered: boolean;
   @Input() icon: string;
   @Input() disabled = false;
@@ -34,7 +29,6 @@ export class ButtonComponent {
   @Input() width?: string;
   @Input() autofocus = false;
   @Output() btnClick = new EventEmitter();
-  @HostBinding('style.display') color = 'inline-block';
   constructor() {
   }
 
@@ -45,13 +39,13 @@ export class ButtonComponent {
 }
 
 @Directive({
-  selector: '[aveBtnAutofocus]',
+  selector: '[dBtnAutofocus]',
 })
 export class BtnAutoFocusDirective implements OnInit {
-  @Input() aveBtnAutofocus = false;
+  @Input() dBtnAutofocus = false;
   constructor(private element: ElementRef) { }
   ngOnInit() {
-      if (this.aveBtnAutofocus) {
+      if (this.dBtnAutofocus) {
           this.element.nativeElement.focus();
       }
   }

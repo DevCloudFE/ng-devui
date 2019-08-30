@@ -1,10 +1,9 @@
-<ave-data-table-templates></ave-data-table-templates>
+<d-data-table-templates></d-data-table-templates>
 
-<ave-column #showDetailColumnRef [width]="'25px'" [minWidth]="'25px'"></ave-column>
-<ave-column #checkableColumnRef [width]="'30px'" [minWidth]="'30px'"></ave-column>
+<d-column #showDetailColumnRef [width]="'25px'" [minWidth]="'25px'"></d-column>
+<d-column #checkableColumnRef [width]="'36px'" [minWidth]="'36px'"></d-column>
 
 <div class="devui-data-table {{cssClass}}">
-
   <div class="devui-table-view" #tableView>
     <div
       *ngIf="fixHeader"
@@ -14,88 +13,133 @@
       [style.max-width]="maxWidth ? maxWidth : null"
       [style.width]="!maxWidth ? tableWidth : null"
     >
-      <table class="devui-table {{type ? type : ''}} {{ hover ? 'table-hover': ''}}">
-        <thead
-          aveDataTableHead
-          [resizeable]="resizeable"
-          [resizeBarRefElement]="resizeBarRefElement"
-          [tableViewRefElement]="tableViewRefElement"
-          [multiSort]="multiSort"
-          [dataTableTemplates]="dataTableTemplates"
-          [columns]="_columns"
-          (headClickSortEvent)="onHandleSort($event)"
-          [headTemplate]="headTemplate"
-          [pager]="pager"
-          [pageAllChecked]="_pageAllChecked"
-          [checkableColumn]="checkableColumn"
-          [showDetailColumn]="showDetailColumn"
-          [checkable]="checkable"
-          [showDetail]="showDetail"
-          [showSortIcon]="showSortIcon"
-          (resizeHandlerEvent)="onResizeHandler($event)"
-        >
-        </thead>
+      <table class="devui-table {{type ? 'table-' + type : ''}} {{ hover ? 'table-hover': ''}}" [style.table-layout]="'fixed'">
+        <ng-template [ngTemplateOutlet]="headerTpl"></ng-template>
       </table>
     </div>
 
-    <div
+    <div cdkScrollable *ngIf="!virtualScroll||dataSource.length===0;else scrollViewTpl"
+      class="devui-scrollbar"
       [ngClass]="{'scroll-view': scrollable}"
       [style.max-height]="maxHeight ? maxHeight : null"
       [style.max-width]="maxWidth ? maxWidth : null"
       [style.width]="!maxWidth ? tableWidth : null"
-      (scroll)="onBodyScroll($event)"
-    >
-      <table class="devui-table {{type ? type : ''}} {{ hover ? 'table-hover': ''}}">
-        <thead *ngIf="!fixHeader"
-          aveDataTableHead
-          [resizeable]="resizeable"
-          [resizeBarRefElement]="resizeBarRefElement"
-          [tableViewRefElement]="tableViewRefElement"
-          [multiSort]="multiSort"
-          [dataTableTemplates]="dataTableTemplates"
-          [columns]="_columns"
-          [headTemplate]="headTemplate"
-          [pager]="pager"
-          [pageAllChecked]="_pageAllChecked"
-          [checkable]="checkable"
-          [showDetail]="showDetail"
-          [showSortIcon]="showSortIcon"
-          [checkableColumn]="checkableColumn"
-          [showDetailColumn]="showDetailColumn"
-          (resizeHandlerEvent)="onResizeHandler($event)"
-          (headClickSortEvent)="onHandleSort($event)"
-        >
-        </thead>
-        <tbody aveDataTableBody
-          [dataTableTemplates]="dataTableTemplates"
-          [dataSource]="dataSource"
-          [resizeable]="resizeable"
-          [columns]="_columns"
-          [checkableColumn]="checkableColumn"
-          [showDetailColumn]="showDetailColumn"
-          [checkable]="checkable"
-          [allChecked]="_pageAllChecked"
-          [selectable]="selectable"
-          [editModel]="editModel"
-          [editRowItem]="editRowItem"
-          [showDetail]="showDetail"
-          [detailTemplateRef]="detailTemplateRef"
-          [timeout]="timeout"
-        >
-        </tbody>
-        <tfoot *ngIf="footTemplate" aveDataTableFoot [footTemplate]="footTemplate"></tfoot>
-      </table>
+      (scroll)="onBodyScroll($event)">
+      <ng-template [ngTemplateOutlet]="tableviewTpl"></ng-template>
     </div>
 
     <div #resizeBar class="resize-bar"></div>
   </div>
 
   <div class="devui-table-view-footer text-right" *ngIf="pager">
-    <ave-data-table-pager [pager]="pager" [dataTableTemplates]="dataTableTemplates" [pagerTemplate]="pagerTemplate"></ave-data-table-pager>
+    <d-data-table-pager [pager]="pager" [dataTableTemplates]="dataTableTemplates" [pagerTemplate]="pagerTemplate"></d-data-table-pager>
   </div>
 </div>
 
 <ng-container *ngIf="!dataSource?.length && noResultTemplate != null">
   <ng-template [ngTemplateOutlet]="noResultTemplate" [ngTemplateOutletContext]="{ $implicit: this }"></ng-template>
 </ng-container>
+
+<ng-template #scrollViewTpl>
+  <cdk-virtual-scroll-viewport [ngStyle]="{'height': maxHeight }"
+    [itemSize]="40" class="devui-scrollbar viewport-wrapper"
+    [ngClass]="{'scroll-view': scrollable}"
+    [style.max-height]="maxHeight ? maxHeight : null"
+    [style.max-width]="maxWidth ? maxWidth : null"
+    [style.width]="!maxWidth ? tableWidth : null"
+    (scroll)="onBodyScroll($event)">
+    <table class="devui-table {{type ? 'table-' + type : ''}} {{ hover ? 'table-hover': ''}}" [style.table-layout]="'fixed'">
+      <ng-template *ngIf="!fixHeader" [ngTemplateOutlet]="headerTpl"></ng-template>
+      <tbody dDataTableBody
+        [dataTableTemplates]="dataTableTemplates"
+        [dataSource]="dataSource"
+        [resizeable]="resizeable"
+        [columns]="_columns"
+        [checkableColumn]="checkableColumn"
+        [showDetailColumn]="showDetailColumn"
+        [checkable]="checkable"
+        [allChecked]="_pageAllChecked"
+        [selectable]="selectable"
+        [editModel]="editModel"
+        [editRowItem]="editRowItem"
+        [showDetail]="showDetail"
+        [detailTemplateRef]="detailTemplateRef"
+        [timeout]="timeout"
+        [type]="type"
+        [hover]="hover"
+        [tableLevel]="tableLevel"
+        [virtualScroll]="virtualScroll"
+      >
+      </tbody>
+      <tfoot *ngIf="footTemplate" dDataTableFoot [footTemplate]="footTemplate"></tfoot>
+    </table>
+  </cdk-virtual-scroll-viewport>
+</ng-template>
+
+<ng-template #headerTpl>
+  <thead
+    dDataTableHead
+    [resizeable]="resizeable"
+    [resizeBarRefElement]="resizeBarRefElement"
+    [tableViewRefElement]="tableViewRefElement"
+    [multiSort]="multiSort"
+    [dataTableTemplates]="dataTableTemplates"
+    [columns]="_columns"
+    [headTemplate]="headTemplate"
+    [pager]="pager"
+    [pageAllChecked]="_pageAllChecked"
+    [checkable]="checkable"
+    [showDetail]="showDetail"
+    [showSortIcon]="showSortIcon"
+    [checkableColumn]="checkableColumn"
+    [showDetailColumn]="showDetailColumn"
+    (resizeHandlerEvent)="onResizeHandler($event)"
+    (headClickSortEvent)="onHandleSort($event)"
+    [halfChecked]="halfChecked"
+
+  >
+  </thead>
+  <tbody *ngIf="headerExpandConfig?.expand">
+    <tr>
+      <td *ngIf="checkable"></td>
+      <td *ngIf="showDetail"></td>
+      <td [attr.colspan]="columns.length">
+        <ng-template [ngTemplateOutlet]="headerExpandConfig?.expandTemplateRef || default"
+          [ngTemplateOutletContext]="{$implicit: this, columns: columns}">
+        </ng-template>
+        <ng-template #default>
+          <div>{{headerExpandConfig?.description}}</div>
+        </ng-template>
+      </td>
+    </tr>
+  </tbody>
+</ng-template>
+
+<ng-template #tableviewTpl>
+  <table class="devui-table {{type ? 'table-' + type : ''}} {{ hover ? 'table-hover': ''}}" [style.table-layout]="'fixed'">
+    <ng-template *ngIf="!fixHeader" [ngTemplateOutlet]="headerTpl"></ng-template>
+    <tbody dDataTableBody
+      [dataTableTemplates]="dataTableTemplates"
+      [dataSource]="dataSource"
+      [resizeable]="resizeable"
+      [columns]="_columns"
+      [checkableColumn]="checkableColumn"
+      [showDetailColumn]="showDetailColumn"
+      [checkable]="checkable"
+      [allChecked]="_pageAllChecked"
+      [selectable]="selectable"
+      [editModel]="editModel"
+      [editRowItem]="editRowItem"
+      [showDetail]="showDetail"
+      [detailTemplateRef]="detailTemplateRef"
+      [timeout]="timeout"
+      [type]="type"
+      [hover]="hover"
+      [tableLevel]="tableLevel"
+      [virtualScroll]="virtualScroll"
+    >
+    </tbody>
+    <tfoot *ngIf="footTemplate" dDataTableFoot [footTemplate]="footTemplate"></tfoot>
+  </table>
+</ng-template>
 

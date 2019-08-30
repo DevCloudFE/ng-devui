@@ -20,7 +20,7 @@ $devui-alert-colors: (
   padding: $devui-alert-padding;
 }
 
-.devui-alert-close {
+.devui-close {
   color: $devui-alert-close-color;
 }
 
@@ -29,7 +29,7 @@ $devui-alert-colors: (
       background-color: map-get(map-get($devui-alert-colors, $c), 'bg');
       color: map-get(map-get($devui-alert-colors, $c), 'color');
       @if $c == 'warning' {
-        .devui-alert-close {
+        .devui-close {
           color: $dark1;
         }
       }

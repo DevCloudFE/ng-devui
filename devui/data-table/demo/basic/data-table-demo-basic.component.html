@@ -1,9 +1,6 @@
-<ave-data-table [type]="'striped'" [dataSource]="basicDataSource" (cellClick)="cellClick($event)"
-  (cellDBClick)="cellDBClick($event)" (rowDBClick)="rowDBClick($event)" (rowClick)="rowClick($event)">
-  <ave-column [order]="1" field="$index" header="#" [width]="'50px'"></ave-column>
-  <ave-column [order]="3" field="firstName" header="First Name" [width]="'150px'"></ave-column>
-  <ave-column [order]="5" field="lastName" header="Last Name" [width]="'150px'"></ave-column>
-  <ave-column [order]="7" field="gender" header="Gender" [width]="'100px'"></ave-column>
-  <ave-column [order]="2" field="dob" header="Date of birth" [fieldType]="'date'"
-    [extraOptions]="{dateFormat: 'MM/DD/YYYY'}" [width]="'100px'"></ave-column>
-</ave-data-table>
+<d-data-table #datatable [dataSource]="basicDataSource" [scrollable]="true" [type]="'striped'">
+    <d-column field="$index" header="#" [width]="'50px'"></d-column>
+    <d-column *ngFor="let colOption of dataTableOptions.columns" [field]="colOption.field" [header]="colOption.header"
+      [fieldType]="colOption.fieldType" [width]="'150px'">
+    </d-column>
+  </d-data-table>

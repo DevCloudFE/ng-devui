@@ -1,0 +1,55 @@
+@import '../style/theme/color';
+
+.tree-select {
+  position: relative;
+  width: 100%;
+
+  input.select-input {
+    cursor: pointer;
+    display: inline-block;
+    width: 100%;
+    color: $dark1;
+    text-overflow: ellipsis;
+  }
+}
+
+.tree-select.options-container {
+  width: 100%;
+  color: $dark1;
+  padding: 5px 0;
+
+  .tree ::ng-deep .tree-node.operable-tree-node {
+    .tree-node__content {
+      margin-left: 10px;
+    }
+
+    & .active {
+      background-color: transparent;
+    }
+
+    &.selected {
+      position: relative;
+
+      &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: $hover-content;
+        z-index: -1;
+      }
+    }
+  }
+}
+
+.tree-select.search-container {
+  padding: 5px;
+}
+
+// 此处设置默认宽度，使用组件时可以自定义宽度，尽量不要入侵组件内部样式。
+:host {
+  display: inline-block;
+  width: 100%;
+}

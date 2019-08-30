@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { LoadingModule } from '../loading';
+import { LoadingModule } from 'ng-devui/loading';
 import { ButtonComponent, BtnAutoFocusDirective } from './button.component';
 
 @NgModule({

@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { DrawerComponent } from './drawer.component';
-import { PortalModule } from '../portal';
+import { PortalModule } from 'ng-devui/portal';
 import { DrawerService } from './drawer.service';
-import { OverlayContainerModule } from '../overlay-container';
+import { OverlayContainerModule } from 'ng-devui/overlay-container';
 import { DrawerContentDirective } from './drawer.component';
 
 @NgModule({

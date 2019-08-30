@@ -5,6 +5,20 @@
 // $select-dark-1-boxshadow: rgba($dark1, 0.2);
 // $select-tag-label-bgcolor: rgba($status-yellow, 0.3);
 
+:host {
+  display: block;
+}
+
+.devui-dropdown-menu {
+  width: 100%;
+}
+
+.devui-dropdown-menu-cdk {
+  position: static;
+  display: block;
+  border: none;
+}
+
 .devui-form-group.devui-has-feedback[tabindex] {
   outline: none;
 }
@@ -94,7 +108,7 @@
     font-size: 12px;
     line-height: 16px;
   }
-::ng-deep .ave-checkbox-material {
+::ng-deep .devui-checkbox-material {
     width: 12px;
     height: 12px;
   }
@@ -105,6 +119,10 @@ ul.devui-dropdown-menu {
   cursor: pointer;
   min-width: auto;
   // box-shadow: 0px 4px 8px 0 $select-dark-1-boxshadow;
+}
+
+ul.devui-dropdown-menu > ul.list-unstyled {
+  overflow-y: auto;
 }
 
 // ul.devui-dropdown-menu > ul.list-unstyled >li:hover:not(.active):not(.disabled) {
@@ -310,8 +328,8 @@ ul.dropdown-menu > ul.list-unstyled > li.disabled:hover {
 // }
 
 
-:host /deep/ ul.dropdown-menu > ul.list-unstyled > li.disabled .ave-checkbox.disabled-unchecked,
-:host /deep/ ul.dropdown-menu > ul.list-unstyled > li.disabled .ave-checkbox.disabled-checked{
+:host /deep/ ul.dropdown-menu > ul.list-unstyled > li.disabled .devui-checkbox.disabled-unchecked,
+:host /deep/ ul.dropdown-menu > ul.list-unstyled > li.disabled .devui-checkbox.disabled-checked{
   opacity: 1;
 }
 .no-data-tip {
@@ -372,4 +390,14 @@ ul.dropdown-menu > .custom-area::before {
       line-height: 34px;
     }
   }
+}
+
+.open .select-chevron-icon {
+  transform: rotate(180deg);
+}
+
+.select-chevron-icon {
+  display: inline-flex;
+  vertical-align: middle;
+  transition: transform 0.3s;
 }

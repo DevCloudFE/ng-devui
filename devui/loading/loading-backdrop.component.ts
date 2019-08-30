@@ -4,7 +4,7 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'ave-loading-backdrop',
+  selector: 'd-loading-backdrop',
   template: `<div class='devui-loading-backdrop'
                   *ngIf='backdrop'>
              </div>`,

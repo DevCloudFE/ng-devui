@@ -8,7 +8,7 @@ import {ModalContentDirective} from './modal.directive';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
-  selector: 'ave-modal-container',
+  selector: 'd-modal-container',
   templateUrl: './modal-container.component.html',
   styleUrls: ['./modal-container.component.scss'],
 })

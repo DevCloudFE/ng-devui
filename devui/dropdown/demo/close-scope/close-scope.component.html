@@ -1,0 +1,17 @@
+<section>
+  <h4>点击菜单外才会关闭的下拉菜单</h4>
+  <div class="btn-group" dDropDown [closeScope]="'blank'" (onToggle)="onToggle($event)">
+    <d-button bsStyle="common" dDropDownToggle>
+      点击下拉
+      <span class="icon-chevron-down"></span>
+    </d-button>
+    <ul dDropDownMenu class="devui-dropdown-menu devui-scrollbar" role="menu">
+      <li role="menuitem">
+        <input type="text" style="width: calc(100% - 20px);margin-right: 10px;" class="devui-form-control"/>
+      </li>
+      <li class="disabled" role="menuitem"><a class="devui-dropdown-item disabled">菜单一</a></li>
+      <li role="menuitem"><a class="devui-dropdown-item">菜单二</a></li>
+      <li role="menuitem"><a class="devui-dropdown-item">菜单三</a></li>
+    </ul>
+  </div>
+</section>

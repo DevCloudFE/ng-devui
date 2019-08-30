@@ -1,13 +1,13 @@
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
-import { DevUIApiModule } from '../../shared/devui-api/devui-api.module';
-import { DevUICodeboxModule } from '../../shared/devui-codebox/devui-codebox.module';
+import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
+import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AutoCompleteDemoComponent } from './auto-complete-demo.component';
-import { AutoCompleteModule } from '../auto-complete.module';
-import { ButtonModule } from '../../button';
+import { AutoCompleteModule } from 'ng-devui/auto-complete';
+import { ButtonModule } from 'ng-devui/button';
 import { AutoDemoBasicComponent } from './basic/auto-complete-demo-basic.component';
 import { AutoDemoArrayComponent } from './array/auto-complete-demo-array.component';
 import { AutoDemoCustomComponent } from './custom/auto-complete-demo-custom.component';

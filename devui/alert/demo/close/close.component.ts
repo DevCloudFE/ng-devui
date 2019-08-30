@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'ave-close',
+  selector: 'd-alert-close',
   templateUrl: './close.component.html',
   styleUrls: ['./close.component.css']
 })

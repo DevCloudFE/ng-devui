@@ -1,4 +1,4 @@
-<input type="text" avePopover id="name" name="name" required minlength="4"
+<input type="text" dPopover id="name" name="name" required minlength="4"
   [(ngModel)]="name" #nameValid="ngModel" autocomplete="false"
   [content]="nameErrMsg" [position]="'top'"
   [visible]="(nameValid.errors && (nameValid.dirty || nameValid.touched)) || false"

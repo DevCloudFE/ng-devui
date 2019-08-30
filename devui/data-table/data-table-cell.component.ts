@@ -1,19 +1,15 @@
-import {
-  Component, ChangeDetectionStrategy, Input, HostListener, ChangeDetectorRef, OnInit,
-  OnDestroy,
-  HostBinding
-} from '@angular/core';
-import { DataTableColumnTmplComponent } from './tmpl/data-table-column-tmpl.component';
-import { DataTableComponent } from './data-table.component';
-import { DataTableTmplsComponent } from './tmpl/data-table-tmpls.component';
-import { DataTableRowComponent } from './data-table-row.component';
+import { ChangeDetectorRef, Component, ElementRef, Input, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { stopPropagationIfExist } from '../utils/dom-utils';
+import { stopPropagationIfExist } from 'ng-devui/utils';
+import { DataTableRowComponent } from './data-table-row.component';
+import { DataTableComponent } from './data-table.component';
+import { DataTableColumnTmplComponent } from './tmpl/data-table-column-tmpl.component';
+import { DataTableTmplsComponent } from './tmpl/data-table-tmpls.component';
 
 @Component({
-  selector: 'ave-data-table-cell,[aveDataTableCell]',
+  selector: 'd-data-table-cell,[dDataTableCell]',
   templateUrl: './data-table-cell.component.html',
-  // changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./data-table-cell.component.scss']
 })
 export class DataTableCellComponent implements OnInit, OnDestroy {
   @Input() rowIndex: number;
@@ -24,24 +20,36 @@ export class DataTableCellComponent implements OnInit, OnDestroy {
   @Input() editModel: string;
   @Input() isEditRow: boolean;
   @Input() timeout: number;
-
+  @Input() tableLevel: number;
+  @Input() rowHovered: boolean;
   isCellEdit: boolean;
   forceUpdateSubscription: Subscription;
-  documentClickubscription: Subscription;
+  documentClickSubscription: Subscription;
+  cellEditorClickSubscription: Subscription;
+  cellActionSubscription: Subscription;
   clickCount = 0; // 记录点击次数
   timeoutId; // 延时id
 
   constructor(public dt: DataTableComponent, private changeDetectorRef: ChangeDetectorRef,
-    public rowComponent: DataTableRowComponent) {
+    public rowComponent: DataTableRowComponent, private cellRef: ElementRef, private ngZone: NgZone) {
+
   }
 
   ngOnInit(): void {
     this.forceUpdateSubscription = this.rowComponent.forceUpdateEvent.subscribe(_ => this.forceUpdate());
+    this.ngZone.runOutsideAngular(() => {
+      this.cellRef.nativeElement.addEventListener(
+          'click',
+          this.onCellClick.bind(this)
+      );
+      this.cellRef.nativeElement.addEventListener(
+        'dblclick',
+        this.onCellDBClick.bind(this)
+      );
+    });
   }
 
-  @HostListener('click', ['$event'])
   onCellClick($event) {
-    // $event.stopPropagation();
     const cellSelectedEventArg = {
       rowIndex: this.rowIndex,
       colIndex: this.colIndex,
@@ -56,23 +64,14 @@ export class DataTableCellComponent implements OnInit, OnDestroy {
       this.timeoutId = setTimeout(() => {
         if (this.clickCount === 1) {
           this.dt.onCellClick(cellSelectedEventArg);
-          if (this.column.editable && this.editModel === 'cell') {
-            stopPropagationIfExist($event);
-            this.isCellEdit = true;
-            this.documentClickubscription = this.dt.documentClickEvent.subscribe(_ => this.onFinishCellEdit());
-            this.dt.onCellEditStart(cellSelectedEventArg);
-          }
         }
         this.clickCount = 0;
         clearTimeout(this.timeoutId);
       }, this.timeout);
     }
-
   }
 
-  @HostListener('dblclick', ['$event'])
   onCellDBClick($event) {
-    // $event.stopPropagation();
     const cellSelectedEventArg = {
       rowIndex: this.rowIndex,
       colIndex: this.colIndex,
@@ -92,8 +91,14 @@ export class DataTableCellComponent implements OnInit, OnDestroy {
     if (this.editModel !== 'cell') {
       return;
     }
-    this.isCellEdit = false;
-    this.unSubscription(this.documentClickubscription);
+    this.ngZone.run(() => {
+      this.isCellEdit = false;
+    });
+
+    // tslint:disable-next-line:no-unused-expression
+    this.documentClickSubscription && this.unSubscription(this.documentClickSubscription);
+    // tslint:disable-next-line:no-unused-expression
+    this.cellEditorClickSubscription && this.unSubscription(this.cellEditorClickSubscription);
     stopPropagationIfExist($event);
 
     this.dt.onCellEditEnd({
@@ -140,14 +145,59 @@ export class DataTableCellComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.unSubscription(this.forceUpdateSubscription);
-    this.unSubscription(this.documentClickubscription);
+    // tslint:disable-next-line:no-unused-expression
+    this.forceUpdateSubscription && this.unSubscription(this.forceUpdateSubscription);
+    // tslint:disable-next-line:no-unused-expression
+    this.documentClickSubscription && this.unSubscription(this.documentClickSubscription);
+    // tslint:disable-next-line:no-unused-expression
+    this.cellEditorClickSubscription && this.unSubscription(this.cellEditorClickSubscription);
+    // tslint:disable-next-line:no-unused-expression
+    this.cellActionSubscription && this.unSubscription(this.cellActionSubscription);
   }
 
   private unSubscription(sbscription: Subscription) {
     if (sbscription) {
       sbscription.unsubscribe();
       sbscription = null;
+    }
+  }
+
+  cellEditing($event) {
+    $event.stopPropagation();
+    $event.preventDefault();
+    this.dt.cellEditorClickEvent.emit($event);
+    const cellSelectedEventArg = {
+      rowIndex: this.rowIndex,
+      colIndex: this.colIndex,
+      column: this.column,
+      rowItem: this.rowItem,
+      cellComponent: this,
+      rowComponent: this.rowComponent
+    };
+    if (this.column.editable && this.editModel === 'cell') {
+      this.isCellEdit = true;
+      this.documentClickSubscription = this.dt.documentClickEvent.subscribe(
+        event => {
+          if (!this.cellRef.nativeElement.contains(event.target)) {
+            this.onFinishCellEdit();
+          }
+        }
+      );
+      this.cellEditorClickSubscription = this.dt.cellEditorClickEvent.subscribe(
+        event => {
+          if (!this.cellRef.nativeElement.contains(event.target)) {
+            this.onFinishCellEdit();
+          }
+        }
+      );
+      this.dt.onCellEditStart(cellSelectedEventArg);
+    }
+  }
+
+  toggleChildTable(rowItem) {
+    rowItem.$isChildTableOpen = !rowItem.$isChildTableOpen;
+    if (rowItem.$isChildTableOpen) {
+      this.dt.onChildTableOpen(rowItem);
     }
   }
 }

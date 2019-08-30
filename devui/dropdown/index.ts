@@ -1,1 +1,1 @@
-export * from './dropdown.moudule';
+export * from './public-api';

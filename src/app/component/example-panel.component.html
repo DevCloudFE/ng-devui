@@ -5,10 +5,10 @@
         <h3>何时使用</h3>
         <div style="margin-bottom: 20px;" [innerHTML]="data.tmw"></div>
     </div>
-    <ave-tabs [showContent]="false" [(activeTab)]="componentTab" (activeTabChange)="activeTabChange($event)">
-        <ave-tab id="demo" title="Demo" tabId="demo"></ave-tab>
-        <ave-tab id="api" title="API" tabId="api"></ave-tab>
-    </ave-tabs>
+    <d-tabs [showContent]="false" [(activeTab)]="componentTab" (activeTabChange)="activeTabChange($event)">
+        <d-tab id="demo" title="Demo" tabId="demo"></d-tab>
+        <d-tab id="api" title="API" tabId="api"></d-tab>
+    </d-tabs>
 </div>
 <div class="examples-viewer">
     <div class="examples-viewer-wrapper">

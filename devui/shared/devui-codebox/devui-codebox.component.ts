@@ -2,7 +2,7 @@ import { Component, OnInit, ElementRef, Input, ViewEncapsulation } from '@angula
 import { DevuiSourceData } from './devui-source-data';
 
 @Component({
-  selector: 'ave-codebox',
+  selector: 'd-codebox',
   templateUrl: './devui-codebox.component.html',
   styleUrls: ['./devui-codebox.component.css'],
   encapsulation: ViewEncapsulation.None

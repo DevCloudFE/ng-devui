@@ -4,7 +4,7 @@ import { DataTableCellEditTmplComponent } from './data-table-cell-edit-tmpl.comp
 import { DataTableCellFilterTmplComponent } from './data-table-cell-filter-tmpl.component';
 
 @Component({
-  selector: 'ave-cell-template',
+  selector: 'd-cell-template',
   template: '',
   changeDetection: ChangeDetectionStrategy.OnPush
 })

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'ave-accordion-demo-template',
+  selector: 'd-accordion-demo-template',
   templateUrl: './accordion-demo-template.component.html',
   styleUrls: ['./accordion-demo-template.component.css'],
 })

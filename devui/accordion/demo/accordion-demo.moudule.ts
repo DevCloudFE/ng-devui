@@ -12,12 +12,13 @@ import { AccordionDemoInnerListTemplateComponent } from './inner-list-template/a
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
+import { ToggleModule } from 'ng-devui/toggle';
 
 @NgModule({
   imports: [
     CommonModule,
     AccordionModule,
-    // ToggleModule,
+    ToggleModule,
     FormsModule,
     DevUICodeboxModule,
     DevUIApiModule,

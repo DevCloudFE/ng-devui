@@ -1,3 +1,2 @@
-export * from './loading.directive';
-export * from './loading.module';
-export * from './loading.types';
+export * from './public-api';
+

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'ave-follow',
+  selector: 'd-follow',
   templateUrl: './follow.component.html',
   styleUrls: ['./follow.component.css']
 })

@@ -1,13 +1,10 @@
+import { Component, ElementRef, EventEmitter, HostListener, Input,
+  OnChanges, OnDestroy, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import isEmpty from 'lodash-es/isEmpty';
-import {
-  Component,
-  OnInit,
-  Input,
-  ViewChild, ElementRef, OnDestroy, HostListener, OnChanges, SimpleChanges, Output, EventEmitter, HostBinding } from '@angular/core';
-import { Observable, of, fromEvent, BehaviorSubject } from 'rxjs';
-import { map, switchMap, filter, debounceTime } from 'rxjs/operators';
+import { BehaviorSubject, fromEvent, Observable, of } from 'rxjs';
+import { debounceTime, filter, map, switchMap } from 'rxjs/operators';
 @Component({
-  selector: 'ave-tags-input',
+  selector: 'd-tags-input',
   templateUrl: './tags.input.component.html',
   styleUrls: ['./tags.input.component.scss'],
   exportAs: 'TagsInput'
@@ -67,7 +64,6 @@ export class TagsInputComponent implements OnInit, OnDestroy, OnChanges {
 
   @ViewChild('tagInput') tagInputElement: ElementRef;
   @ViewChild('selectBox') selectBoxElement: ElementRef;
-  @HostBinding('attr.ave-ui') aveui = true;
 
   newTag = '';
   showSuggestionList = false;

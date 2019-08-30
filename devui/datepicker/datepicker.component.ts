@@ -1,13 +1,27 @@
-import { ChangeDetectorRef, Component, ElementRef, EventEmitter, forwardRef, HostBinding,
-        HostListener, Input, OnInit, Output, Renderer2, TemplateRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnChanges,
+  Input,
+  Output,
+  forwardRef,
+  ElementRef,
+  Renderer2,
+  EventEmitter,
+  ChangeDetectorRef,
+  HostListener,
+  TemplateRef,
+  SimpleChanges
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { DevUIConfig } from '../devui.config';
-import { DateConverter } from '../utils/date-converter';
-import { DefaultDateConverter } from '../utils/default-date-converter';
-import { SelectDateChangeEventArgs, SelectDateChangeReason } from './date-change-event-args.model';
 
+import { DevUIConfig } from 'ng-devui/devui.config';
+import { DateConverter } from 'ng-devui/utils';
+import { SelectDateChangeEventArgs, SelectDateChangeReason } from './date-change-event-args.model';
+import { DefaultDateConverter } from 'ng-devui/utils';
+import { I18nService } from 'ng-devui/utils';
 @Component({
-  selector: 'ave-datepicker',
+  selector: 'd-datepicker',
   templateUrl: './datepicker.component.html',
   styleUrls: ['./datepicker.component.scss'],
   providers: [{
@@ -16,13 +30,13 @@ import { SelectDateChangeEventArgs, SelectDateChangeReason } from './date-change
     multi: true
   }]
 })
-export class DatepickerComponent implements OnInit, ControlValueAccessor {
+export class DatepickerComponent implements OnInit, OnChanges, ControlValueAccessor {
   static DAY_DURATION = 24 * 60 * 60 * 1000;
-  private _maxDate: Date;
-  private _minDate: Date;
-  private nowMinYear: number;
-  private nowMaxYear: number;
-  private _dateFormat: string;
+  protected _maxDate: Date;
+  protected _minDate: Date;
+  protected nowMinYear: number;
+  protected nowMaxYear: number;
+  protected _dateFormat: string;
   @Input() showTime: boolean;
   @Input() cssClass: string;
   @Input() dateConverter: DateConverter;
@@ -31,7 +45,7 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
   @Input() disabled = false;
   @Input() yearNumber = 12;
   @Input() customViewTemplate: TemplateRef<any>;
-  @HostBinding('attr.ave-ui') aveUi = true;
+  @Input() selectedDate: Date;
   _dateConfig: any;
   currentYear: number;
   currentMonth: number;
@@ -43,24 +57,23 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
   displayWeeks: any[];
   yearOptions: number[];
   openChooseYearAndMonth: boolean;
-  selectedDate: Date;
   hoverYear: number;
   hoverMonth: number;
   availableMonths: number[];
 
-  private onChange = (_: any) => null;
-  private onTouched = () => null;
+  protected onChange = (_: any) => null;
+  protected onTouched = () => null;
 
   constructor(
-    private elementRef: ElementRef,
-    private renderer: Renderer2,
-    private devuiConfig: DevUIConfig,
-    private changeDetectorRef: ChangeDetectorRef
+    protected elementRef: ElementRef,
+    protected renderer2: Renderer2,
+    protected devUIConfig: DevUIConfig,
+    protected changeDetectorRef: ChangeDetectorRef,
+    protected i18n: I18nService
   ) {
-    this._dateConfig = this.devuiConfig['datePickerCN'];
-    this.dateConverter = this.devuiConfig['datePickerCN'].dateConverter || new DefaultDateConverter();
-    this.renderer.setStyle(this.elementRef.nativeElement, 'display', 'inline-block');
-    this.selectedDate = null;
+    this._dateConfig = this.devUIConfig[`datePicker${i18n.getLangSuffix()}`];
+    this.dateConverter = this.devUIConfig[`datePicker${i18n.getLangSuffix()}`].dateConverter || new DefaultDateConverter();
+    this.renderer2.setStyle(this.elementRef.nativeElement, 'display', 'inline-block');
   }
 
   ngOnInit() {
@@ -78,8 +91,12 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
     this.onSelectDateChanged();
     this.onDisplayWeeksChange();
     this.onYearRangeChange();
-    if (!this.selectedDate) {
-      this.chooseToday();
+    this.initDatePicker();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes && changes['selectedDate'] && changes['selectedDate'].currentValue) {
+
     }
   }
 
@@ -105,6 +122,7 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
   }
 
   checkDateConfig(dateConfig: any) {
+    if (!dateConfig) { return false; }
     if (!dateConfig.locale || typeof(dateConfig.timePicker) !== 'boolean' || !dateConfig.weeks
       || !dateConfig.months || !dateConfig.max || !dateConfig.min
       || !dateConfig.format || !dateConfig.current) {
@@ -147,14 +165,14 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
     return this._dateFormat;
   }
 
-  private getDateFormat() {
+  protected getDateFormat() {
     if (this.dateFormat) {
       return this.dateFormat;
     }
     return this.showTime ? this.dateConfig.format.time : this.dateConfig.format.date;
   }
 
-  private resetYearOptions() {
+  protected resetYearOptions() {
     const baseYear = this.selectedDate ? this.selectedDate.getFullYear() : (new Date()).getFullYear();
     this.currentYear = baseYear;
     this.nowMinYear = baseYear - Math.floor(this.yearNumber / 2) < this.minDate.getFullYear() ?
@@ -203,12 +221,10 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
       return;
     }
 
-    if (this.currentMonth > 0) {
-      this.currentMonth -= 1;
-    } else {
-      this.currentMonth = 11;
-      this.currentYear -= 1;
-    }
+    const date = new Date(this.currentYear, this.currentMonth);
+    date.setMonth(date.getMonth() - 1);
+    this.currentMonth = date.getMonth();
+    this.currentYear = date.getFullYear();
     this.onDisplayWeeksChange();
   }
 
@@ -220,13 +236,10 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
     if (!this.hasNextMonth()) {
       return;
     }
-
-    if (this.currentMonth < 11) {
-      this.currentMonth += 1;
-    } else {
-      this.currentMonth = 0;
-      this.currentYear += 1;
-    }
+    const date = new Date(this.currentYear, this.currentMonth);
+    date.setMonth(date.getMonth() + 1);
+    this.currentMonth = date.getMonth();
+    this.currentYear = date.getFullYear();
     this.onDisplayWeeksChange();
   }
 
@@ -277,7 +290,7 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
     this.availableMonths = this.onDisplayMonthsChange();
   }
 
-  private onSelectDateChanged() {
+  protected onSelectDateChanged() {
     let date = this.selectedDate || new Date();
     if (date.getTime() < this.minDate.getTime()) {
       date = this.minDate;
@@ -342,7 +355,7 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
     }
   }
 
-  private fillLeft(num: number) {
+  protected fillLeft(num: number) {
     return num < 10 ? `0${num}` : `${num}`;
   }
 
@@ -366,7 +379,10 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
     );
   }
 
-  onSelectDate($event, date) {
+  /*
+    invocation:调用时机
+  */
+  onSelectDate($event, date, invocation?: any) {
     if ($event.stopPropagation) {
       $event.stopPropagation();
     }
@@ -377,11 +393,14 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
       this.currentHour, this.currentMinute, this.currentSecond);
     this.onTouched();
     this.writeValue(this.selectedDate);
-    this.onChange(this.selectedDate);
-    this.selectedDateChange.emit({
-      reason: SelectDateChangeReason.date,
-      selectedDate: this.selectedDate
-    });
+    // 初始化的时候不触发emit和ngModelChange
+    if (invocation !== 'init') {
+      this.onChange(this.selectedDate);
+      this.selectedDateChange.emit({
+        reason: SelectDateChangeReason.date,
+        selectedDate: this.selectedDate
+      });
+    }
     if (this.currentMonth !== this.selectedDate.getMonth() ||
       this.currentYear !== this.selectedDate.getFullYear()
     ) {
@@ -391,7 +410,7 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
     }
   }
 
-  onTimeChange() {
+  public onTimeChange() {
     const date = this.selectedDate || new Date();
     this.selectedDate = new Date(date.getFullYear(),
       date.getMonth(), date.getDate(), this.currentHour, this.currentMinute, this.currentSecond);
@@ -454,6 +473,16 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
    return this.isDisabledDay(new Date());
   }
 
+  initDatePicker() {
+    this.selectedDate = this.selectedDate ? this.selectedDate : new Date();
+    if (this.isDisabledDay(this.selectedDate)) {
+      return;
+    }
+    this.selectedDate = this.selectedDate ? this.selectedDate : new Date();
+    this.onSelectDateChanged();
+    this.onSelectDate({}, this.selectedDate, 'init');
+  }
+
   chooseToday() {
     const today = new Date();
     if (this.isDisabledDay(today)) {
@@ -482,5 +511,13 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
     this.selectedDate = parseDate || new Date();
     this.onSelectDateChanged();
     this.onSelectDate(event, parseDate);
+  }
+
+  get minDateDefined () {
+    return this.minDate.getTime() !== new Date(this.dateConfig.min, 0, 1, 0, 0, 0).getTime();
+  }
+
+  get maxDateDefined () {
+    return this.maxDate.getTime() !== new Date(this.dateConfig.max, 11, 31, 23, 59, 59).getTime();
   }
 }

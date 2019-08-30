@@ -1,0 +1,82 @@
+@import '../style/theme/color';
+
+:host {
+  display: inline-block;
+}
+
+.devui-tag-item {
+  display: inline-block;
+  margin: 2px;
+  padding: 0 5px;
+  min-height: 20px;
+  font-size: 14px;
+  line-height: 20px;
+  color: $dark1;
+  background-color: $tag-label-bgcolor;
+  border-radius: 1px;
+  border-width: 0;
+  border-style: solid;
+  border-color: inherit;
+
+  .remove-button {
+    margin-left: 5px;
+    font-size: 16px;
+    color: $dark1;
+    line-height: 20px;
+    vertical-align: top;
+    cursor: pointer;
+    
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
+
+.blue-w98 {
+  color: #3383FF;
+  background-color: #FBFDFF;
+  border-width: thin;
+  border-color: #E1EDFF;
+}
+.green-w98 {
+  color: #00B679;
+  background-color: #FAFEFC;
+  border-width: thin;
+  border-color: #D9F4EB;
+}
+.yellow-w98 {
+  color: #FFAB05;
+  background-color: #FFFDFA;
+  border-width: thin;
+  border-color: #FFF3DA;
+}
+.orange-w98 {
+  color: #FF7452;
+  background-color: #FFFCFC;
+  border-width: thin;
+  border-color: #FFEAE5;
+}
+.pink-w98 {
+  color: #FF8CC3;
+  background-color: #FEFCFF;
+  border-width: thin;
+  border-color: #F5E8FD;
+}
+.purple-w98 {
+  color: #BC67F0;
+  background-color: #FFFDFE;
+  border-width: thin;
+  border-color: #FFEEF6;
+}
+.turquoise-w98 {
+  color: #00C1DE;
+  background-color: #FAFEFE;
+  border-width: thin;
+  border-color: #D9F6FA;
+}
+.olivine-w98 {
+  color: #89BA3E;
+  background-color: #FDFEFB;
+  border-width: thin;
+  border-color: #EEF5E2;
+}

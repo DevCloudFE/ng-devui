@@ -1,6 +1,6 @@
-<ave-data-table [dataSource]="lazyDataSource" lazy="true" (loadMore)="loadMore($event)">
-  <ave-column *ngFor="let colOption of dataTableOptions.columns" [field]="colOption.field" [header]="colOption.header"
+<d-data-table [dataSource]="lazyDataSource" lazy="true" (loadMore)="loadMore($event)" [scrollable]="true">
+  <d-column *ngFor="let colOption of dataTableOptions.columns" [field]="colOption.field" [header]="colOption.header"
     [sortable]="colOption.sortable" [fieldType]="colOption.fieldType">
-  </ave-column>
-</ave-data-table>
-<div aveLoading [loading]="loading" [backdrop]="true" [message]="'Loading...'" [style.height.px]="100"></div>
+  </d-column>
+</d-data-table>
+<div dLoading [loading]="loading" [backdrop]="true" [message]="'Loading...'" [style.height.px]="100"></div>

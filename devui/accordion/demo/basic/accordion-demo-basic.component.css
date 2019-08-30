@@ -6,7 +6,7 @@
   vertical-align: middle;
   margin-top: 20px;
 }
-.option > ave-toggle {
+.option > d-toggle {
   display: inline-block;
   transform: translateY(3px);
 }

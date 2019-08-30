@@ -1,7 +1,14 @@
 import { Component } from '@angular/core';
 @Component({
-  selector: 'ave-select-basic',
+  selector: 'd-select-basic',
   templateUrl: './select-demo-basic.component.html',
+  styles: [
+    `
+      .col-md-5 {
+        width: 50%;
+      }
+    `
+  ]
 })
 export class SelectDemoBasicComponent {
 

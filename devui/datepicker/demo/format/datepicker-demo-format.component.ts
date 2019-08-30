@@ -1,8 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-    selector: 'ave-datepicker-demo-format',
-    templateUrl: './datepicker-demo-format.component.html'
+    selector: 'd-datepicker-demo-format',
+    templateUrl: './datepicker-demo-format.component.html',
+    styles: [
+      `
+        .col-md-6 {
+          float: left;
+          margin-right: 10px;
+        }
+      `
+    ]
 })
 export class DatepickerDemoFormatComponent implements OnInit {
   dateFormatOptions = ['YYYY-MM-DD HH:mm', 'YY-MM-DD HH:mm', 'MM/DD/YYYY HH:mm', 'MM/DD/YY HH:mm'];

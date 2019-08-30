@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'ave-basic',
-  templateUrl: './basic.component.html',
-  styleUrls: ['./basic.component.css']
+  selector: 'd-pagination-demo-basic',
+  templateUrl: './basic.component.html'
 })
 export class BasicComponent implements OnInit {
   pager = {

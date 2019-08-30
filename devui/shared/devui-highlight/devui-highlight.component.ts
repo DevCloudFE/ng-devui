@@ -9,7 +9,7 @@ import * as HighLight from 'highlight.js/lib/highlight';
 });
 
 @Component({
-  selector     : 'ave-highlight',
+  selector     : 'd-highlight',
   encapsulation: ViewEncapsulation.None,
   template     : `
     <pre [ngClass]="'language-'+language"><code #codeEl [innerText]="code"></code></pre>

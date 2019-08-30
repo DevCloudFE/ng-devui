@@ -1,0 +1,36 @@
+<div class="tree-select">
+  <popper-component [(open)]="isOpen" [fluidPopper]="!width" (openChange)="responsePopperChange($event)"
+                    [appendTo]="appendTo" #popper>
+    <input #selectHost class="select-input devui-input" (click)="toggle()" [placeholder]="placeholder"
+           autocomplete="off" [disabled]="disabled" readonly popper-activator/>
+    <div popper-prepend class="tree-select search-container" *ngIf="searchable">
+      <input class="devui-input" [(ngModel)]="searchString" #searchInputModel="ngModel" #searchInput/>
+    </div>
+    <div class="tree-select options-container" #optionsContainer popper-container [ngStyle]="{width: width}">
+      <d-operable-tree
+        #tree
+        [tree]="treeData"
+        [treeNodeIdKey]="treeNodeIdKey"
+        [treeNodeChildrenKey]="treeNodeChildrenKey"
+        [checkboxDisabledKey]="disabledKey"
+        [checkboxInput]="checkboxInput"
+        [checkable]="multiple"
+        [canActivateNode]="!multiple"
+        [canActivateParentNode]="!leafOnly"
+        (nodeChecked)="onOperableNodeChecked($event)"
+        (nodeSelected)="onOperableNodeSelected($event)"
+        [iconParentOpen]="iconParentOpen"
+        [iconParentClose]="iconParentClose"
+        [iconLeaf]="iconLeaf"
+        [treeNodeTitleKey]="treeNodeTitleKey"
+        [iconTemplatePosition]="iconTemplatePosition"
+        class="tree"
+      >
+        <ng-template *ngIf="iconTemplatePassThrough" #iconTemplate let-node="node">
+          <ng-template [ngTemplateOutlet]="iconTemplatePassThrough" [ngTemplateOutletContext]="{ node: node }">
+          </ng-template>
+        </ng-template>
+      </d-operable-tree>
+    </div>
+  </popper-component>
+</div>

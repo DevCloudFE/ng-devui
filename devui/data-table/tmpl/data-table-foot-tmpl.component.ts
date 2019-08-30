@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy, ContentChild, TemplateRef } from '@angular/core';
 
 @Component({
-  selector: 'ave-foot',
+  selector: 'd-foot',
   template: '',
   changeDetection: ChangeDetectionStrategy.OnPush
 })

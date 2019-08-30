@@ -1,0 +1,7 @@
+<div class="devui-tags">
+    <d-tag *ngFor="let tag of tags;let index=index;" [tag]="displayProperty ? tag[displayProperty]: tag" [deletable]="deletable"
+      [labelStyle]="tag['labelStyle']"
+      [titleContent]="titleProperty ? tag[titleProperty]: displayProperty ? tag[displayProperty]: tag"
+      [customViewTemplate]="customViewTemplate" (tagDelete)="removeTag(tag, index)">
+    </d-tag>
+</div>

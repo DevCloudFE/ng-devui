@@ -6,6 +6,7 @@
   position: relative;
   margin: 5px 0;
   transition: all .2s;
+  /* overflow-x: auto; */
 }
 .code-box-demo {
   border-bottom: 1px solid #e9e9e9;

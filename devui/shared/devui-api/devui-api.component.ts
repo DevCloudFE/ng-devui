@@ -1,16 +1,18 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, AfterViewInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Data } from '@angular/router';
 import * as marked from 'marked';
+import * as hljs from 'highlight.js/lib/highlight';
 
 @Component({
-  selector: 'ave-api',
+  selector: 'd-api',
   templateUrl: './devui-api.component.html',
   styleUrls: ['./devui-api.component.css']
 })
-export class DevUIApiComponent implements OnInit, OnDestroy {
+export class DevUIApiComponent implements OnInit, AfterViewInit, OnDestroy {
   sub: Subscription;
   @Input() api: any;
+
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -36,6 +38,12 @@ export class DevUIApiComponent implements OnInit, OnDestroy {
       return list.length ? '<code>' + list.replace(/[']*[\s]*\|[\s]*[']*/g, '</code>、<code>') + '</code>' : '';
     });
     return marked(md);
+  }
+
+  ngAfterViewInit() {
+    document.querySelectorAll('pre code').forEach((block) => {
+      hljs.highlightBlock(block);
+    });
   }
 
   ngOnDestroy() {

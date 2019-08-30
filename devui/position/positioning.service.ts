@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { WindowRef } from '../window-ref/window-ref.service';
-import { DocumentRef } from '../window-ref/document-ref.service';
+import { WindowRef } from 'ng-devui/window-ref';
+import { DocumentRef } from 'ng-devui/window-ref';
 
 @Injectable()
 export class PositionService {

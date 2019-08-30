@@ -5,7 +5,7 @@ import {
 import { DevuiSourceData } from '../../shared/devui-codebox';
 
 @Component({
-    selector: 'ave-demo-panel',
+    selector: 'd-demo-panel',
     templateUrl: './panel-demo.component.html'
 })
 export class PanelDemoComponent {
@@ -18,7 +18,6 @@ export class PanelDemoComponent {
   typeSource: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./type/type.component.html')},
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./type/type.component.ts')},
-    {title: 'CSS', language: 'css', code:  require('!!raw-loader!./type/type.component.css')}
   ];
 
   constructor() {

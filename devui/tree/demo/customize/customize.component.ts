@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { TreeNode } from 'ng-devui';
 
 @Component({
-  selector: 'ave-customize',
+  selector: 'd-customize',
   templateUrl: './customize.component.html',
   styleUrls: ['./customize.component.css']
 })

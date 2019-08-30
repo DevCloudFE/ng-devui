@@ -1,6 +1,6 @@
-<ave-accordion class="menu" [data]="menu" (itemClick)="itemClick($event)" (menuToggle)="menuToggle($event)"
+<d-accordion class="menu" [data]="menu" (itemClick)="itemClick($event)" (menuToggle)="menuToggle($event)"
   [menuItemTemplate]="menutemplate" [itemTemplate]="itemtemplate" [noContentTemplate]="noContentTemplate" [loadingTemplate]="loadingTemplate"
-></ave-accordion>
+></d-accordion>
 
 <ng-template #menutemplate let-item="item" let-titleKey="titleKey" let-menuToggleFn="menuToggleFn" let-disabledKey="disabledKey">
   <div class="devui-accordion-item-title over-flow-ellipsis" (click)="!item[disabledKey] && menuToggleFn(item)" title="{{item[titleKey]}}">

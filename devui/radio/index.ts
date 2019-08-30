@@ -1,1 +1,1 @@
-export * from './radio.module';
+export * from './public-api';

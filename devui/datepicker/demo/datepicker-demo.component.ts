@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 @Component({
-  selector: 'ave-datepicker-demo',
+  selector: 'd-datepicker-demo',
   templateUrl: './datepicker-demo.component.html',
 
 })

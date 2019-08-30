@@ -1,20 +1,16 @@
-import { animate, state, style, transition, trigger } from '@angular/animations';
 import { AfterViewInit, Component, ElementRef, HostBinding, HostListener, Input, OnDestroy, Renderer2 } from '@angular/core';
+import { PositionService } from 'ng-devui/position';
 import { fromEvent, Subscription } from 'rxjs';
-import { PositionService } from '../position';
+import { directionFadeInOut } from 'ng-devui/utils';
 import { PositionType } from './tooltip.types';
 
+
 @Component({
-  selector: 'ave-tooltip',
+  selector: 'd-tooltip',
   templateUrl: './tooltip.component.html',
   styleUrls: ['./tooltip.component.scss'],
   animations: [
-    trigger('state', [
-      state('void', style({ opacity: 0 })),
-      state('visible', style({ opacity: 1 })),
-      transition('* => visible', animate('150ms cubic-bezier(0.0, 0.0, 0.2, 1)')),
-      transition('visible => *', animate('150ms cubic-bezier(0.4, 0.0, 1, 1)')),
-    ]),
+    directionFadeInOut
   ],
 })
 export class TooltipComponent implements AfterViewInit, OnDestroy {
@@ -22,18 +18,18 @@ export class TooltipComponent implements AfterViewInit, OnDestroy {
   @Input() position: PositionType = 'bottom';
   @Input() triggerElementRef: ElementRef;
   @Input() showAnimate = false;
-  @Input() scrollElement: Element;
-  @HostBinding('attr.ave-ui') aveUi = true;
-  @HostBinding('style.display') display = 'block';
+  scrollElement: Element;
   animateState: string = this.showAnimate ? 'void' : 'visible';
 
+  @HostBinding('style.display') display = 'block';
   @HostBinding('class') get class() {
-    return 'tooltip ' + this.position;
+    return 'devui-tooltip ' + this.position;
   }
 
-  @HostBinding('@state') get state() {
+  @HostBinding('@directionFadeInOut') get state() {
     return this.animateState;
   }
+
 
   _onScroll: Subscription;
 
@@ -60,7 +56,7 @@ export class TooltipComponent implements AfterViewInit, OnDestroy {
   }
 
   onShow() {
-    this.animateState = 'visible';
+    this.animateState = this.position ;
   }
 
   onHide() {
@@ -71,7 +67,7 @@ export class TooltipComponent implements AfterViewInit, OnDestroy {
   onHidden() {
   }
 
-  @HostListener('@state.done', ['$event'])
+  @HostListener('@directionFadeInOut.done', ['$event'])
   onAnimationEnd(event) {
     if (event.toState === 'void') {
       this.onHidden();
@@ -80,10 +76,16 @@ export class TooltipComponent implements AfterViewInit, OnDestroy {
 
 
   updatePosition() {
+    // 解决tooltip自身大小导致出现滚动条，影响位置计算
+    this.renderer2.setStyle(this.tooltip.nativeElement, 'visibility', 'hidden');
+    this.renderer2.setStyle(this.tooltip.nativeElement, 'transform', 'translate(0, -99999px)');
     const rect = this.positionService.positionElements(this.triggerElementRef.nativeElement,
       this.tooltip.nativeElement, this.position, true);
     this.renderer2.setStyle(this.tooltip.nativeElement, 'left', `${rect.left}px`);
     this.renderer2.setStyle(this.tooltip.nativeElement, 'top', `${rect.top}px`);
+    // 移除样式
+    this.renderer2.setStyle(this.tooltip.nativeElement, 'visibility', null);
+    this.renderer2.setStyle(this.tooltip.nativeElement, 'transform', null);
   }
 }
 

@@ -3,9 +3,8 @@ import { Component } from '@angular/core';
 import { IFileOptions, IUploadOptions } from 'ng-devui';
 
 @Component({
-  selector: 'ave-basic',
-  templateUrl: './basic.component.html',
-  styleUrls: ['./basic.component.css']
+  selector: 'd-demo-upload-basic',
+  templateUrl: './basic.component.html'
 })
 export class BasicComponent {
   additionalParameter = {
@@ -23,7 +22,7 @@ export class BasicComponent {
     additionalParameter: this.additionalParameter,
     maximumSize: 0.5,
     method: 'POST',
-    fileFieldName: 'aveFile'
+    fileFieldName: 'dFile'
   };
 
   constructor(private http: HttpClient) {

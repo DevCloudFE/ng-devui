@@ -4,80 +4,80 @@
     <div class="demo-text">
       简单表格，展示列表数据
     </div>
-    <ave-codebox id="components-table-default" [sourceData]="basicSource">
-      <ave-datatable-demo-basic demo></ave-datatable-demo-basic>
-    </ave-codebox>
+    <d-codebox id="components-table-default" [sourceData]="basicSource">
+      <d-datatable-demo-basic demo></d-datatable-demo-basic>
+    </d-codebox>
   </div>
   <div class="demo-example">
-    <div class="demo-title">复杂表格</div>
+    <div class="demo-title">表格交互</div>
     <div class="demo-text">
-      表格支持选中、列排序以及列宽调整；表头支持自定义按钮和提示等；表格分页；支持指定行显示detail数据。
+        支持列排序、列过滤、选中、调整列宽
     </div>
-    <ave-codebox id="components-table-resize" [sourceData]="resizeSource">
-      <ave-datatable-demo-resizeable demo></ave-datatable-demo-resizeable>
-    </ave-codebox>
-  </div>
-  <div class="demo-example">
-    <div class="demo-title">单列排序</div>
-    <div class="demo-text">
-        表格同一时间只支持一列数据激活排序。
-    </div>
-    <ave-codebox id="components-table-one" [sourceData]="oneColumnSource">
-      <ave-datatable-demo-onlyonecolumnsort demo></ave-datatable-demo-onlyonecolumnsort>
-    </ave-codebox>
-  </div>
-  <div class="demo-example">
-    <div class="demo-title">动态数据</div>
-    <div class="demo-text">
-        表头根据动态数据生成，dataSource数据需要指定对应的表头key值。
-    </div>
-    <ave-codebox id="components-table-dynamic" [sourceData]="dynamicSource">
-      <ave-datatable-demo-dynamic demo></ave-datatable-demo-dynamic>
-    </ave-codebox>
+    <d-codebox id="components-table-one" [sourceData]="oneColumnSource">
+      <d-datatable-demo-onlyonecolumnsort demo></d-datatable-demo-onlyonecolumnsort>
+    </d-codebox>
   </div>
   <div class="demo-example">
     <div class="demo-title">异步加载数据</div>
     <div class="demo-text">
-      异步加载表格数据，支持表头也是异步加载
+      异步加载表格数据，列动态配置
     </div>
-    <ave-codebox id="components-table-async" [sourceData]="asyncSource">
-      <ave-datatable-demo-async demo></ave-datatable-demo-async>
-    </ave-codebox>
+    <d-codebox id="components-table-async" [sourceData]="asyncSource">
+      <d-datatable-demo-async demo></d-datatable-demo-async>
+    </d-codebox>
   </div>
   <div class="demo-example">
-    <div class="demo-title">指定最大高度</div>
+    <div class="demo-title">表头固定</div>
     <div class="demo-text">
-        固定表格最大高度
+        设置表格最大高度，同时表头不跟随滚动
     </div>
-    <ave-codebox id="components-table-max" [sourceData]="maxHeightSource">
-      <ave-datatable-demo-maxheight demo></ave-datatable-demo-maxheight>
-    </ave-codebox>
-  </div>
-  <div class="demo-example">
-    <div class="demo-title">固定表头</div>
-    <div class="demo-text">
-        固定表格最大高度，表头不跟随滚动
-    </div>
-    <ave-codebox id="components-table-fix" [sourceData]="fixHeightSource">
-      <ave-datatable-demo-fixheader demo></ave-datatable-demo-fixheader>
-    </ave-codebox>
+    <d-codebox id="components-table-max" [sourceData]="maxHeightSource">
+      <d-datatable-demo-maxheight demo></d-datatable-demo-maxheight>
+    </d-codebox>
   </div>
   <div class="demo-example">
     <div class="demo-title">列表数据懒加载</div>
     <div class="demo-text">
         跟随滚动，懒加载，不断增加表格数据
     </div>
-    <ave-codebox id="components-table-lazy" [sourceData]="lazySource">
-      <ave-datatable-demo-lazyloaddata demo></ave-datatable-demo-lazyloaddata>
-    </ave-codebox>
+    <d-codebox id="components-table-lazy" [sourceData]="lazySource">
+      <d-datatable-demo-lazyloaddata demo></d-datatable-demo-lazyloaddata>
+    </d-codebox>
   </div>
   <div class="demo-example">
     <div class="demo-title">多行表头</div>
     <div class="demo-text">
         表头支持分组，显示多行
     </div>
-    <ave-codebox id="components-table-multi" [sourceData]="lazySource">
-      <ave-datatable-demo-multiheader demo></ave-datatable-demo-multiheader>
-    </ave-codebox>
+    <d-codebox id="components-table-multi" [sourceData]="multiSource">
+      <d-datatable-demo-multiheader demo></d-datatable-demo-multiheader>
+    </d-codebox>
+  </div>
+  <div class="demo-example">
+    <div class="demo-title">编辑单元格</div>
+    <div class="demo-text">
+        通过列的编辑功能（editable）、类型（fieldType）和额外配置（extraOptions）来配置单元格的编辑功能
+    </div>
+    <d-codebox id="components-table-editable" [sourceData]="editableSource">
+      <d-datatable-demo-editable demo></d-datatable-demo-editable>
+    </d-codebox>
+  </div>
+  <div class="demo-example">
+    <div class="demo-title">扩展额外行</div>
+    <div class="demo-text">
+        通过headerExpandConfig和行数据的expandConfig来配置表头和某一行下的可自定义的扩展行，通过showDetail来配置扩展行的展开图标
+    </div>
+    <d-codebox id="components-table-expand" [sourceData]="expandTableSource">
+      <d-expand-row demo></d-expand-row>
+    </d-codebox>
+  </div>
+  <div class="demo-example">
+    <div class="demo-title">树形表格</div>
+    <div class="demo-text">
+        通过列的nestedColumn属性和行数据的children字段来配置渲染树形表格
+    </div>
+    <d-codebox id="components-tree-table" [sourceData]="treeTableSource">
+      <d-tree-data demo></d-tree-data>
+    </d-codebox>
   </div>
 </div>

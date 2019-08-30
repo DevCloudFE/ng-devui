@@ -1,12 +1,12 @@
 import { Directive, EventEmitter, ElementRef, HostListener, Input, Output } from '@angular/core';
 
 
-@Directive({ selector: '[ave-file-drop]' }) // tslint:disable-line
+@Directive({ selector: '[d-file-drop]' }) // tslint:disable-line
 export class FileDropDirective {
   @Input() enableDrop = false;
   @Input() isSingle = false;
-  @Output() public fileOverEvent: EventEmitter<any> = new EventEmitter();
-  @Output() public fileDropEvent: EventEmitter<File[]> = new EventEmitter<File[]>();
+  @Output() public fileOver: EventEmitter<any> = new EventEmitter();
+  @Output() public fileDrop: EventEmitter<File[]> = new EventEmitter<File[]>();
 
   protected element: ElementRef;
 
@@ -25,9 +25,9 @@ export class FileDropDirective {
     }
     this._preventAndStop(event);
     if (this.isSingle) {
-      this.fileDropEvent.emit([transfer.files[0]]);
+      this.fileDrop.emit([transfer.files[0]]);
     } else {
-      this.fileDropEvent.emit(transfer.files);
+      this.fileDrop.emit(transfer.files);
     }
   }
 
@@ -43,7 +43,7 @@ export class FileDropDirective {
 
     transfer.dropEffect = 'move';
     this._preventAndStop(event);
-    this.fileOverEvent.emit(true);
+    this.fileOver.emit(true);
   }
 
   @HostListener('dragleave', [ '$event' ])
@@ -58,7 +58,7 @@ export class FileDropDirective {
     }
 
     this._preventAndStop(event);
-    this.fileOverEvent.emit(false);
+    this.fileOver.emit(false);
   }
 
   protected _getTransfer(event: any): any {

@@ -1,6 +1,7 @@
 import { DataTableColumnTmplComponent } from './tmpl/data-table-column-tmpl.component';
 import { DataTableRowComponent } from './data-table-row.component';
 import { DataTableCellComponent } from './data-table-cell.component';
+import { ElementRef } from '@angular/core';
 
 export interface CellSelectedEventArg {
   rowIndex: number;
@@ -13,6 +14,7 @@ export interface CellSelectedEventArg {
 
 export interface RowSelectedEventArg {
   rowIndex: number;
+  nestedIndex: string;
   rowItem: any;
   rowComponent: DataTableRowComponent;
 }
@@ -25,6 +27,7 @@ export interface SortEventArg {
 
 export interface RowCheckChangeEventArg {
   rowIndex: number;
+  nestedIndex: string;
   rowItem: any;
   checked: boolean;
 }
@@ -41,4 +44,21 @@ export interface DataTablePager {
 export interface ColumnDefs {
   render: (data: any, row: any) => any;
   target: string;
+}
+
+export interface FilterConfig {
+   name: string;
+   value: any;
+   checked?: boolean;
+}
+
+export interface CheckableRelation {
+  upward: boolean;
+  downward: boolean;
+}
+
+export interface TableExpandConfig {
+  expand?: boolean;
+  expandTemplateRef?: ElementRef;
+  description?: string;
 }

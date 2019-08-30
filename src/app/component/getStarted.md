@@ -13,6 +13,8 @@ $ ng new New-Project
 进入你的项目文件夹，使用npm安装DevUI
 ```bash
 $ npm i ng-devui
+# 可选，字体图标库 
+# $ npm i @devui-design/icons
 ```
 
 ### 3. 引入模块
@@ -31,8 +33,7 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    // 引入公共service
-    DevUIModule.forRoot()
+    DevUIModule
   ],
   bootstrap: [ AppComponent ],
 })

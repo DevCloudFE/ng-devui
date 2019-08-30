@@ -68,6 +68,12 @@
     }
 }
 
+.month-view .btn-link.btn-right {
+  transform: scale(-1, 1);
+  display: inline-block;
+  line-height: 1;
+}
+
 .month-view .date-select {
     border: none;
     background: transparent;
@@ -100,7 +106,7 @@
     cursor: not-allowed;
 }
 
-.ave-calendar-date {
+.d-calendar-date {
     display: block;
     margin: 0 auto;
     width: 20px;
@@ -115,29 +121,29 @@
     color: $dark1;
 }
 
-.month-view .day:hover:not(.active):not(.disabled) .ave-calendar-date {
+.month-view .day:hover:not(.active):not(.disabled) .d-calendar-date {
     background-color:$hover-content;
     // color:$hover-control;
 }
 
-.month-view .day.active:hover .ave-calendar-date {
+.month-view .day.active:hover .d-calendar-date {
     background-color:$hover-control;
     color: $white;
 }
 
-.month-view .in-month-day.disabled:not(.active) .ave-calendar-date {
+.month-view .in-month-day.disabled:not(.active) .d-calendar-date {
     color: $dark1;
     background-color: rgba(240, 240, 240, 0.8) !important;
     cursor: not-allowed;
     width: 100%;
 }
 
-.month-view .in-month-day.active .ave-calendar-date {
+.month-view .in-month-day.active .d-calendar-date {
     background: $focus1;
     color: $white;
 }
 
-.month-view .out-of-month .ave-calendar-date {
+.month-view .out-of-month .d-calendar-date {
     opacity: 0.8;
     background-color: $white;
     color: $gray1;

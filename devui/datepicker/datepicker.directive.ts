@@ -3,15 +3,26 @@ import {
   ComponentFactoryResolver, Renderer2, Injector, HostListener, TemplateRef
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-
-import { DateConverter } from '../utils/date-converter';
+import { DateConverter } from 'ng-devui/utils';
 import { DatepickerComponent } from './datepicker.component';
 import { SelectDateChangeEventArgs, SelectDateChangeReason } from './date-change-event-args.model';
-import { DevUIConfig } from '../devui.config';
-import { DefaultDateConverter } from '../utils/default-date-converter';
+import { DevUIConfig } from 'ng-devui/devui.config';
+import { DefaultDateConverter } from 'ng-devui/utils';
+import { I18nService } from 'ng-devui/utils';
+import {
+  animate,
+  AnimationBuilder,
+  AnimationMetadata,
+  AnimationPlayer,
+  style
+} from '@angular/animations';
+
+const easeInQuint = 'cubic-bezier(0.755, 0.05, 0.855, 0.06)';
+const easeOutQuint = 'cubic-bezier(0.23, 1, 0.32, 1)';
+const animationDuration = '200ms';
 
 @Directive({
-  selector: '[aveDatepicker]',
+  selector: '[dDatepicker]:not([appendToBody])',
   exportAs: 'datepicker',
   providers: [{
     provide: NG_VALUE_ACCESSOR,
@@ -20,86 +31,10 @@ import { DefaultDateConverter } from '../utils/default-date-converter';
   }]
 })
 export class DatepickerDirective implements OnInit, ControlValueAccessor {
-  @Input() locale: string;
-  @Input() showTime: boolean;
-  @Input() cssClass: string;
-  @Input() disabled: boolean;
-  @Input() dateConverter: DateConverter;
-  @Input() yearNumber: number;
-  @Input() direnction: 'up' | 'down' = 'down';
-  @Input() customViewTemplate: TemplateRef<any>;
-  @Output() selectedDateChange = new EventEmitter<SelectDateChangeEventArgs>();
-  selectedDate: Date;
-  isOpen = false;
-  _dateConfig: any;
-  private _dateFormat: string;
-  private _maxDate: Date;
-  private _minDate: Date;
-  private cmpRef: ComponentRef<DatepickerComponent>;
-  private onChange = (_: any) => null;
-  private onTouched = () => null;
-
-  constructor(private elementRef: ElementRef, private viewContainerRef: ViewContainerRef,
-              private componentFactoryResolver: ComponentFactoryResolver, private renderer: Renderer2,
-              private injector: Injector, private devuiConfig: DevUIConfig) {
-    this._dateConfig = this.devuiConfig['datePickerCN'];
-    this.dateConverter = this.devuiConfig['datePickerCN'].dateConverter || new DefaultDateConverter();
-    this.selectedDate = null;
-    const factory = this.componentFactoryResolver.resolveComponentFactory(DatepickerComponent);
-    this.cmpRef = this.viewContainerRef.createComponent(factory, this.viewContainerRef.length, this.injector);
-  }
-
-  ngOnInit() {
-    this.showTime = this.showTime || this.dateConfig.timePicker;
-    this.locale = this.locale || this.dateConfig.locale;
-    this._minDate = this.minDate ? new Date(this.minDate) : new Date(this.dateConfig.min, 0, 1, 0, 0, 0);
-    this._maxDate = this.maxDate ? new Date(this.maxDate) : new Date(this.dateConfig.max, 11, 31, 23, 59, 59);
-
-    this.applyPopupStyling(this.cmpRef.location.nativeElement);
-    const component = this.cmpRef.instance;
-    this.hide();
-    component.writeValue(this.selectedDate);
-    this.fillPopupData();
-    component.ngOnInit();
-
-    component.registerOnChange(selectedDate => {
-      this.writeValue(selectedDate);
-      this.onChange(selectedDate);
-    });
-
-    component.selectedDateChange.subscribe((arg: SelectDateChangeEventArgs) => {
-      if (arg.reason === SelectDateChangeReason.date) {
-        this.hide();
-      }
-    });
-  }
-
-  writeValue(obj: any): void {
-    this.selectedDate = obj ?
-      this.dateConverter.parse(obj, this.getDateFormat(), this.locale) : null;
-    this.writeModelValue(this.selectedDate);
-  }
-
-  registerOnChange(fn: any): void {
-    this.onChange = fn;
-  }
-
-  registerOnTouched(fn: any): void {
-    this.onTouched = fn;
-  }
-
-  private parseDateFunc(date, direction) {
-    const parseDate = this.dateConverter.parse(date, this.getDateFormat(), this.locale)
-      ;
-    if (parseDate) {
-      this[direction] = date
-      ;
-    }
-  }
 
 
   @Input() set dateConfig(dateConfig: any) {
-    this._dateConfig = dateConfig ? dateConfig : this.devuiConfig.datePickerCN;
+    this._dateConfig = dateConfig ? dateConfig : this.devUIConfig.datePickerCN;
   }
 
   get dateConfig() {
@@ -138,6 +73,93 @@ export class DatepickerDirective implements OnInit, ControlValueAccessor {
   get minDate() {
     return this._minDate;
   }
+  @Input() locale: string;
+  @Input() showTime: boolean;
+  @Input() cssClass: string;
+  @Input() disabled: boolean;
+  @Input() dateConverter: DateConverter;
+  @Input() yearNumber: number;
+  @Input() direnction: 'up' | 'down' = 'down';
+  @Input() customViewTemplate: TemplateRef<any>;
+  @Input() autoOpen = false;
+  @Output() selectedDateChange = new EventEmitter<SelectDateChangeEventArgs>();
+  selectedDate: Date;
+  isOpen = false;
+  _dateConfig: any;
+  private _dateFormat: string;
+  private _maxDate: Date;
+  private _minDate: Date;
+  private cmpRef: ComponentRef<DatepickerComponent>;
+  private player: AnimationPlayer;
+  private onChange = (_: any) => null;
+  private onTouched = () => null;
+
+  constructor(private elementRef: ElementRef, private viewContainerRef: ViewContainerRef,
+              private componentFactoryResolver: ComponentFactoryResolver, private renderer2: Renderer2,
+              private injector: Injector, private devUIConfig: DevUIConfig, private i18n: I18nService,
+              private builder: AnimationBuilder) {
+    this._dateConfig = devUIConfig[`datePicker${i18n.getLangSuffix()}`];
+    this.dateConverter = devUIConfig[`datePicker${i18n.getLangSuffix()}`].dateConverter || new DefaultDateConverter();
+    this.selectedDate = null;
+    const factory = this.componentFactoryResolver.resolveComponentFactory(DatepickerComponent);
+    this.cmpRef = this.viewContainerRef.createComponent(factory, this.viewContainerRef.length, this.injector);
+    this.i18n.getMessage().subscribe((lang) => {
+      const langSuffix = lang === 'zh-CN' ? 'CN' : 'EN';
+      this._dateConfig = devUIConfig[`datePicker${langSuffix}`];
+    });
+  }
+
+  ngOnInit() {
+    this.showTime = this.showTime || this.dateConfig.timePicker;
+    this.locale = this.dateConfig.locale;
+    this._minDate = this.minDate ? new Date(this.minDate) : new Date(this.dateConfig.min, 0, 1, 0, 0, 0);
+    this._maxDate = this.maxDate ? new Date(this.maxDate) : new Date(this.dateConfig.max, 11, 31, 23, 59, 59);
+    const target = this.cmpRef.location.nativeElement;
+    this.applyPopupStyling(target);
+    const component = this.cmpRef.instance;
+    this.renderer2.setStyle(target, 'display', 'none');
+    component.writeValue(this.selectedDate);
+    this.fillPopupData();
+    component.ngOnInit();
+
+    component.registerOnChange(selectedDate => {
+      this.writeValue(selectedDate);
+      this.onChange(selectedDate);
+    });
+
+    component.selectedDateChange.subscribe((arg: SelectDateChangeEventArgs) => {
+      if (arg.reason === SelectDateChangeReason.date) {
+        this.hide();
+      }
+    });
+
+    if (this.autoOpen) {
+      this.show();
+    }
+  }
+
+  writeValue(obj: any): void {
+    this.selectedDate = obj ?
+      this.dateConverter.parse(obj, this.getDateFormat(), this.locale) : null;
+    this.writeModelValue(this.selectedDate);
+  }
+
+  registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: any): void {
+    this.onTouched = fn;
+  }
+
+  private parseDateFunc(date, direction) {
+    const parseDate = this.dateConverter.parse(date, this.getDateFormat(), this.locale)
+      ;
+    if (parseDate) {
+      this[direction] = date
+      ;
+    }
+  }
 
   private getDateFormat() {
     if (this.dateFormat) {
@@ -147,23 +169,25 @@ export class DatepickerDirective implements OnInit, ControlValueAccessor {
   }
 
   private applyPopupStyling(nativeElement: any) {
-    this.renderer.addClass(nativeElement, 'dropdown-menu');
-    this.renderer.setStyle(nativeElement, 'padding', '0px');
+    this.renderer2.addClass(nativeElement, 'dropdown-menu');
+    this.renderer2.setStyle(nativeElement, 'padding', '0px');
     if (this.direnction === 'up') {
-      this.renderer.setStyle(nativeElement, 'top', 'auto');
-      this.renderer.setStyle(nativeElement, 'bottom', '100%');
+      this.renderer2.setStyle(nativeElement, 'top', 'auto');
+      this.renderer2.setStyle(nativeElement, 'bottom', '100%');
     }
   }
 
   hide() {
+    const playAnimation = this.isOpen !== false;
     this.isOpen = false;
-    const target = this.cmpRef.location.nativeElement;
-    this.renderer.setStyle(target, 'display', 'none');
+    if (playAnimation) {
+      this.playAnimation();
+    }
   }
 
   private writeModelValue(selectDate: Date) {
     const value = selectDate ? this.dateConverter.format(selectDate, this.getDateFormat(), this.locale) : '';
-    this.renderer.setProperty(this.elementRef.nativeElement, 'value', value);
+    this.renderer2.setProperty(this.elementRef.nativeElement, 'value', value);
     if (this.isOpen) {
       this.cmpRef.instance.writeValue(this.selectedDate);
     }
@@ -177,10 +201,11 @@ export class DatepickerDirective implements OnInit, ControlValueAccessor {
     const component = this.cmpRef.instance;
     component.writeValue(this.selectedDate);
     this.fillPopupData();
+    const playAnimation = this.isOpen !== true;
     this.isOpen = true;
-    const targetElement = this.cmpRef.location.nativeElement;
-    const hostElement = this.elementRef.nativeElement;
-    this.renderer.setStyle(targetElement, 'display', 'inline-block');
+    if (playAnimation) {
+      this.playAnimation();
+    }
   }
 
   toggle($event: Event) {
@@ -218,5 +243,69 @@ export class DatepickerDirective implements OnInit, ControlValueAccessor {
 
   clearAll() {
     this.cmpRef.instance.clearAll();
+  }
+
+  private popIn(direction): AnimationMetadata[] {
+    switch (direction) {
+      case 'top':
+        return [
+          style({transform: 'perspective(1px) scale(0.9)', opacity: 0, transformOrigin: '0% 100%', display: 'inline-block'}),
+          animate(`${animationDuration} ${easeOutQuint}`,
+            style({transform: 'perspective(1px) scale(1)', opacity: 1, transformOrigin: '0% 100%'})),
+        ];
+      case 'bottom':
+      default:
+        return [
+          style({transform: 'perspective(1px) scale(0.9)', opacity: 0, transformOrigin: '0% 0%', display: 'inline-block'}),
+          animate(`${animationDuration} ${easeOutQuint}`,
+            style({transform: 'perspective(1px) scale(1)', opacity: 1, transformOrigin: '0% 0%'})),
+        ];
+    }
+  }
+
+  private popOut(direction): AnimationMetadata[] {
+    switch (direction) {
+      case 'top':
+        return [
+          style({transform: 'perspective(1px) scale(1)', opacity: 1, transformOrigin: '0% 100%'}),
+          animate(`${animationDuration} ${easeInQuint}`,
+            style({transform: 'perspective(1px) scale(0.9)', opacity: 0, transformOrigin: '0% 100%'}))
+        ];
+      case 'bottom':
+      default:
+        return [
+          style({transform: 'perspective(1px) scale(1)', opacity: 1, transformOrigin: '0% 0%'}),
+          animate(`${animationDuration} ${easeInQuint}`,
+            style({transform: 'perspective(1px) scale(0.9)', opacity: 0, transformOrigin: '0% 0%'}))
+        ];
+    }
+  }
+
+  private playAnimation() {
+    if (this.player) {
+      this.player.destroy();
+    }
+    let direction = '';
+    switch (this.direnction) {
+      case 'down':
+        direction = 'bottom';
+        break;
+      case 'up':
+        direction = 'top';
+        break;
+      default:
+        direction = 'bottom';
+    }
+    const metadata = this.isOpen ? this.popIn(direction) : this.popOut(direction);
+    const factory = this.builder.build(metadata);
+    this.renderer2.setStyle(this.cmpRef.location.nativeElement, 'display', 'inline-block');
+    this.player = factory.create(this.cmpRef.location.nativeElement);
+    this.player.onDone(() => {
+      if (!this.isOpen) {
+        const targetElement = this.cmpRef.location.nativeElement;
+        this.renderer2.setStyle(targetElement, 'display', 'none');
+      }
+    });
+    this.player.play();
   }
 }

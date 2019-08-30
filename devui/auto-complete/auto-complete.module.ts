@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { AutoCompleteDirective } from './auto-complete.directive';
 import { AutoCompletePopupComponent } from './auto-complete-popup.component';
 import { HightlightComponent } from './hightlight.component';
-import { DevUIConfig } from '../devui.config';
+import { DevUIConfig } from 'ng-devui/devui.config';
 
 @NgModule({
   imports: [CommonModule, FormsModule],

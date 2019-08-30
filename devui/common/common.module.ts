@@ -23,5 +23,5 @@ import { IframeEventPropagateDirective } from './iframe-event-propagate.directiv
   ,
   providers: [],
 })
-export class AveCommonModule {
+export class DCommonModule {
 }

@@ -1,8 +1,9 @@
 import { Component, EventEmitter, forwardRef, HostListener, Input, Output } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'ave-toggle',
+  selector: 'd-toggle',
   templateUrl: './toggle.component.html',
   styleUrls: [`./toggle.component.scss`],
   exportAs: 'toggle',
@@ -17,9 +18,9 @@ export class ToggleComponent implements ControlValueAccessor {
   private _checked: boolean;
   private _disabled: boolean;
 
-  @Input() size = 'small';
-  @Output() change = new EventEmitter<boolean>();
+  @Input() size: 'small' | 'medium' | 'large' = 'small';
   @Input() color: string;
+  @Input() beforeChange: (value) => boolean | Promise<boolean> | Observable<boolean>;
   @Input() set checked(v: boolean) {
     this._checked = v !== false;
   }
@@ -36,6 +37,8 @@ export class ToggleComponent implements ControlValueAccessor {
     return this._disabled;
   }
 
+  @Output() change = new EventEmitter<boolean>();
+
   private onTouchedCallback = (v: any) => {
   }
   private onChangeCallback = (v: any) => {
@@ -46,10 +49,34 @@ export class ToggleComponent implements ControlValueAccessor {
     if (this.disabled) {
       return;
     }
-    this.checked = !this.checked;
-    this.change.emit(this.checked);
-    this.onChangeCallback(this.checked);
-    this.onTouchedCallback(this.checked);
+    this.canChange().then((change) => {
+      if (!change) {
+        return;
+      }
+      this.checked = !this.checked;
+      this.change.emit(this.checked);
+      this.onChangeCallback(this.checked);
+      this.onTouchedCallback(this.checked);
+    });
+  }
+
+  canChange() {
+    let changeResult = Promise.resolve(true);
+
+    if (this.beforeChange) {
+      const result: any = this.beforeChange(this.checked);
+      if (typeof result !== 'undefined') {
+        if (result.then) {
+          changeResult = result;
+        } else if (result.subscribe) {
+          changeResult = (result as Observable<boolean>).toPromise();
+        } else {
+          changeResult = Promise.resolve(result);
+        }
+      }
+    }
+
+    return changeResult;
   }
 
   writeValue(obj: any): void {

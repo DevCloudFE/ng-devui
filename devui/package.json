@@ -1,6 +1,6 @@
 {
   "name": "ng-devui",
-  "version": "7.0.0-alpha",
+  "version": "7.0.0",
   "license": "MIT",
   "description": "DevUI components based on Angular",
   "keywords": [
@@ -8,7 +8,7 @@
     "devui",
     "frontend"
   ],
-  "homepage": "http://devui.design",
+  "homepage": "https://devui.design",
   "repository": {
     "type": "git",
     "url": "https://github.com/DevCloudFE/ng-devui"
@@ -17,8 +17,10 @@
     "url": "https://github.com/DevCloudFE/ng-devui/issues"
   },
   "dependencies": {
+    "@angular/cdk": "^7.3.7",
     "date-fns": "^1.30.1",
-    "lodash-es": "^4.17.11"
+    "lodash-es": "^4.17.11",
+    "popper.js": "^1.15.0"
   },
   "peerDependencies": {
     "@angular/animations": "^7.0.0",

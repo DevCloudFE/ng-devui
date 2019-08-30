@@ -10,6 +10,13 @@ $devui-accordion-dark1-boxshadow1: 0 1px 2px 0 $devui-accordion-dark1-boxshadow-
   font-size: $devui-accordion-font-size;
   background: $white;
   box-shadow: $devui-accordion-dark1-boxshadow1;
+  .devui-accordion-item {
+    > .open-icon {
+        & > svg polygon {
+          fill: $dark1;
+        }
+    }
+  }
   .devui-accordion-item-title {
     color: $dark1;
     background: $white;
@@ -21,13 +28,15 @@ $devui-accordion-dark1-boxshadow1: 0 1px 2px 0 $devui-accordion-dark1-boxshadow-
     }
     >.devui-accordion-item:not(.disabled) {
       .devui-accordion-item-title:hover {
-        background:  $hover-content;
+        background: $hover-content;
       }
+      &.devui-router-active > .devui-accordion-item-title,
       &.active > .devui-accordion-item-title {
         background: $focus3;
       }
     }
   }
+  >.devui-accordion-item.devui-router-active > .devui-accordion-item-title,
   >.devui-accordion-item.has-active-item > .devui-accordion-item-title {
     color: $focus1;
   }
