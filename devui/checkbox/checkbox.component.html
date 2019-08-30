@@ -1,26 +1,24 @@
-<div class="devui-checkbox clearfix {{cssClass}}"
-    [class.checked]="checked"
-    [class.halfchecked]="halfchecked"
-    [class.disabled]="disabled">
-  <label>
-    <input [name]="name || ('checkbox-' + id)"
-      class="devui-checkbox-input"
-      type="checkbox"
-      [attr.checked]="checked"
-      (change)="toggle($event)"
-      [disabled]="disabled"/>
-    <span class="devui-checkbox-material">
-      <svg *ngIf="checked && !halfchecked" width="100%" height="100%" viewBox="0 0 894 894" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-          <rect class="checked-border" stroke-width="0" x="0" y="0" width="894" height="894"></rect>
-          <polygon class="check-symbol"  fill-rule="nonzero" points="759.536874 305.144074 701.650489 247.257689 369.129186 579.778992 198.537903 409.187709 140.650495 467.074094 369.129186 695.552785"></polygon>
-      </svg>
-      <svg *ngIf="halfchecked" class="halfchecked" width="100%" height="100%" viewBox="0 0 894 894"  version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-          <rect class="halfchecked-symbol" stroke-width="0" x="0.760009766" y="0.690002441" width="894.299988" height="894.302309"></rect>
+<div class="devui-checkbox {{cssClass}}"
+     [ngClass]="{active: checked, halfchecked: halfchecked, disabled: disabled, unchecked: !checked}">
+  <label title="{{isShowTitle ? label: ''}}" (click)="toggle($event)">
+    <input [name]="name || ('checkbox-' + id)" class="devui-checkbox-input" type="checkbox" [attr.checked]="checked"
+           [disabled]="disabled" [attr.indeterminate]="halfchecked"
+           (click)="$event.stopPropagation();" (change)="$event.stopPropagation();"/>
+    <span class="devui-checkbox-material" [ngStyle]="{'border-color': checked? color : ''}"
+          [ngClass]="{'custom-color':color}">
+      <span class="devui-checkbox-bg" [ngStyle]="{'background-color': color? (color) : ''}"
+            [ngClass]="{'devui-no-animation': !animationUnlocked}"></span>
+      <svg class="devui-checkbox-tick " version="1.1" xmlns="http://www.w3.org/2000/svg"
+           xmlns:xlink="http://www.w3.org/1999/xlink"
+           x="0px" y="0px" viewBox="0 0 20 20" xml:space="preserve">
+        <polyline class="devui-tick" points="2.6,11 6.9,15.2 17.4,4.8"
+                  [ngClass]="{'devui-no-animation': !animationUnlocked}"/>
       </svg>
     </span>
-    <span class="devui-checkbox-label" *ngIf="!!label && !labelTemplate" title="{{isShowTitle ? label: ''}}">{{label}}</span>
-    <span class="devui-checkbox-label" *ngIf="labelTemplate">
-        <ng-template [ngTemplateOutlet]="labelTemplate" [ngTemplateOutletContext]="{ $implicit: this, checked:checked, halfchecked: halfchecked, disabled:disabled, label: label}"></ng-template>
-    </span>
+    <ng-template [ngIf]="!!label && !labelTemplate">{{label}}</ng-template>
+    <ng-template [ngIf]="!!labelTemplate" [ngTemplateOutlet]="labelTemplate"
+                 [ngTemplateOutletContext]="{ $implicit: this, checked:checked, halfchecked: halfchecked,
+                  disabled:disabled, label: label}">
+    </ng-template>
   </label>
 </div>

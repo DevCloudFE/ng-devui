@@ -3,9 +3,8 @@ import { DialogService } from 'ng-devui';
 import { ModalTestComponent } from '../modal-demo.component';
 
 @Component({
-  selector: 'ave-basic',
+  selector: 'd-basic',
   templateUrl: './basic.component.html',
-  styleUrls: ['./basic.component.css']
 })
 export class BasicComponent implements OnInit {
   constructor(private dialogService: DialogService) {

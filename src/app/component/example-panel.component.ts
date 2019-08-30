@@ -10,7 +10,7 @@ import {
   ElementRef,
   AfterViewInit
 } from '@angular/core';
-import { IExampleData } from '../../../devui/shared/helpers';
+import { IExampleData } from 'ng-devui/shared/helpers';
 
 import * as hljs from 'highlight.js/lib/highlight';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -22,7 +22,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 });
 
 @Component({
-  selector: 'ave-demo-cell',
+  selector: 'd-demo-cell',
   styles: [`
 :host /deep/ section h4,
 :host /deep/ section h5 {
@@ -32,11 +32,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 :host /deep/ section {
   margin-bottom: 50px;
-}
-
-.examples-viewer-wrapper {
-  padding: 0 20% 100px 20%;
-
 }
 
 .examples-viewer-title {
@@ -103,6 +98,7 @@ export class ExamplePanelComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
     if ((this.typescript.last || {} as any).nativeElement) {
       hljs.highlightBlock(this.typescript.last.nativeElement);
     }

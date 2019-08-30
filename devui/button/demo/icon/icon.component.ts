@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'ave-icon',
+  selector: 'd-button-icon',
   templateUrl: './icon.component.html',
   styleUrls: ['./icon.component.css']
 })

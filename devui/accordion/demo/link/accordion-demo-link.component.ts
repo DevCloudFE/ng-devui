@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'ave-accordion-demo-link',
+  selector: 'd-accordion-demo-link',
   templateUrl: './accordion-demo-link.component.html',
   styleUrls: ['./accordion-demo-link.component.css']
 })
@@ -9,9 +9,9 @@ export class AccordionDemoLinkComponent {
   menu = [{
     title: '基础组件',
     children: [
-      {title: '警告', link: '/components/alert'},
-      {title: '锚点', link: '/components/anchor'},
       {title: '手风琴', link: '/components/accordion'},
+      {title: '锚点', link: '/components/anchor'},
+      {title: '按钮', link: '/components/button'},
     ]
   }, {
     title: '高级组件',

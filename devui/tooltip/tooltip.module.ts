@@ -1,24 +1,24 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TooltipComponent } from './tooltip.component';
-import { PortalModule } from '../portal';
+import { PortalModule } from 'ng-devui/portal';
 import { TooltipDirective } from './tooltip.directive';
-import { WindowRef } from '../window-ref/window-ref.service';
-import { DocumentRef } from '../window-ref/document-ref.service';
-import { PositionService } from '../position';
-import { OverlayContainerRef } from '../overlay-container';
+import { WindowRef } from 'ng-devui/window-ref';
+import { DocumentRef } from 'ng-devui/window-ref';
+import { OverlayContainerRef } from 'ng-devui/overlay-container';
+import {PositioningModule} from 'ng-devui/position';
 
 @NgModule({
   imports: [
     CommonModule,
     PortalModule,
+    PositioningModule
   ],
   exports: [TooltipComponent, TooltipDirective],
   declarations: [TooltipComponent, TooltipDirective],
   providers: [
     WindowRef,
     DocumentRef,
-    PositionService,
     OverlayContainerRef,
   ],
   entryComponents: [TooltipComponent]

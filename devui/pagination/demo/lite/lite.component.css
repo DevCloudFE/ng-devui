@@ -1,0 +1,29 @@
+d-button{
+  margin-right: 5px;
+}
+/* 配置中的每一项，自定义项建议应用此样式或在此基础上修改 */
+.pagination-config-item {
+  padding-bottom: 8px;
+  padding-top: 5px;
+  border-bottom: 1px solid #cacfd8;
+}
+
+/* 配置中每一项的标题样式，自定义项建议应用此样式或在此基础上修改 */
+.config-item-title {
+  color: #888;
+  padding-left: 10px;
+  font-size: 12px;
+  line-height: 22px;
+}
+
+.config-item-words {
+  color:#293040;
+  padding-left: 10px;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.config-item-words:hover {
+  background-color: #f3f7fe;
+  cursor: pointer;
+}

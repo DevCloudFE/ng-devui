@@ -1,0 +1,30 @@
+<div>
+  <div class="demo-container">
+    <div class="demo-example">
+      <div class="demo-title">基本用法</div>
+      <d-codebox id="components-slider-default" [sourceData]="SliderBasicComponent">
+        <d-slider-demo-basic demo></d-slider-demo-basic>
+      </d-codebox>
+    </div>
+
+    <div class="demo-example">
+      <div class="demo-title">禁止输入态</div>
+      <div class="demo-text">
+        当 disabled 为 true 的时候是禁止用户输入的状态。
+      </div>
+      <d-codebox id="components-slider-disabled" [sourceData]="SliderDisabledComponent">
+        <d-slider-demo-disabled demo></d-slider-demo-disabled>
+      </d-codebox>
+    </div>
+
+    <div class="demo-example">
+      <div class="demo-title">定制Popover的显示内容</div>
+      <div class="demo-text">
+        通过 tipsRenderer 参数传入函数定制Popover内的显示内容。
+      </div>
+      <d-codebox id="components-slider-formatter" [sourceData]="SliderCustomFormatterComponent">
+        <d-slider-demo-formatter demo></d-slider-demo-formatter>
+      </d-codebox>
+    </div>
+  </div>
+</div>

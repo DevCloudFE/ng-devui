@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
-  selector: 'ave-hightlight',
+  selector: 'd-hightlight',
   template: ``,
   // tslint:disable-next-line:use-host-property-decorator
   host: {

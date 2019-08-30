@@ -1,16 +1,16 @@
 <section>
-  <ave-panel [type]="'primary'" #panel [(isCollapsed)]="isCollapsed">
-    <ave-panel-header>
+  <d-panel [type]="'primary'" #panel [isCollapsed]="isCollapsed">
+    <d-panel-header>
       Panel with foldable
       <i class="icon"
         [ngClass]="{'icon-chevron-up': panel.isCollapsed,'icon-chevron-down': !panel.isCollapsed}"></i>
-    </ave-panel-header>
-    <ave-panel-body>This is body</ave-panel-body>
-  </ave-panel>
+    </d-panel-header>
+    <d-panel-body>This is body</d-panel-body>
+  </d-panel>
   <br /><br />
-  <ave-panel>
-    <ave-panel-header>Panel with header and footer</ave-panel-header>
-    <ave-panel-body>This is body</ave-panel-body>
-    <ave-panel-footer>This is footer</ave-panel-footer>
-  </ave-panel>
+  <d-panel>
+    <d-panel-header>Panel with header and footer</d-panel-header>
+    <d-panel-body>This is body</d-panel-body>
+    <d-panel-footer>This is footer</d-panel-footer>
+  </d-panel>
 </section>

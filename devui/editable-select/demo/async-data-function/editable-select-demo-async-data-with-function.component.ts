@@ -7,8 +7,15 @@ import { of, timer, Observable } from 'rxjs';
 
 
 @Component({
-  selector: 'ave-editable-select-demo-async-data-with-function',
-  templateUrl: './editable-select-demo-async-data-with-function.component.html'
+  selector: 'd-editable-select-demo-async-data-with-function',
+  templateUrl: './editable-select-demo-async-data-with-function.component.html',
+  styles: [
+    `
+      section {
+        width: 50%;
+      }
+    `
+  ]
 })
 export class EditableSelectDemoAsyncDataWithFuncitionComponent implements OnInit {
   selectItem4;

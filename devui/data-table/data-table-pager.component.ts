@@ -5,7 +5,7 @@ import { DataTableComponent } from './data-table.component';
 import { DataTablePager } from './data-table.model';
 
 @Component({
-  selector: 'ave-data-table-pager, [aveDataTablePager]',
+  selector: 'd-data-table-pager, [dDataTablePager]',
   templateUrl: './data-table-pager.component.html',
   // changeDetection: ChangeDetectionStrategy.OnPush
 })

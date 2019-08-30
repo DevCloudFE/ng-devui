@@ -1,17 +1,17 @@
 <section>
   <div class="clear-fix">
     <div class="upload-body">
-      <ave-multiple-upload #multipleupload [fileOptions]="fileOptions2" [uploadedFiles]="uploadedFiles2"
-        [filePath]="'name'" [uploadOptions]="uploadOptions2" (onSuccess)="onSuccess3($event)"
-        (onDeleteUploadedFile)="deleteUploadedFile3($event)" (onError)="onError3($event)"
+      <d-multiple-upload #multipleupload [fileOptions]="fileOptions2" [uploadedFiles]="uploadedFiles2"
+        [filePath]="'name'" [uploadOptions]="uploadOptions2" (successEvent)="onSuccess3($event)"
+        (deleteUploadedFileEvent)="deleteUploadedFile3($event)" (errorEvent)="onError3($event)"
         [uploadedFilesRef]="uploadedFilesTemp" [preloadFilesRef]="preloadFilesTemp"
         [withoutBtn]="true">
-      </ave-multiple-upload>
+      </d-multiple-upload>
     </div>
     <div class="upload-btn">
-      <ave-button [bsStyle]="'primary'" (click)="multipleupload.upload()">
+      <d-button [bsStyle]="'primary'" (click)="multipleupload.upload()">
         {{UPLOAD}}
-      </ave-button>
+      </d-button>
     </div>
   </div>
   <ng-template #uploadedFilesTemp let-uploadedFiles="uploadedFiles" let-deleteFile="deleteFile" let-filePath="filePath">
@@ -25,9 +25,9 @@
             <span>{{UPLOADED}}</span>
           </td>
           <td>
-            <ave-button icon="trash" bsStyle="primary" bsSize="xs" (click)="deleteFile(uploadedFile[filePath])">
+            <d-button icon="trash" bsStyle="primary" bsSize="xs" (click)="deleteFile(uploadedFile[filePath])">
               {{ DELETE }}
-            </ave-button>
+            </d-button>
           </td>
         </tr>
       </tbody>
@@ -47,13 +47,12 @@
           <span *ngIf="fileUploader.status===UploadStatus.failed">{{FAILED}}</span>
         </td>
         <td>
-          <ave-button icon="trash" bsStyle="primary" bsSize="xs" *ngIf="fileUploader.status!==UploadStatus.uploaded"
+          <d-button icon="trash" bsStyle="primary" bsSize="xs" *ngIf="fileUploader.status!==UploadStatus.uploaded"
             [disabled]="fileUploader.status===UploadStatus.uploading" (click)="deleteFile(fileUploader.file)">
             {{ DELETE }}
-          </ave-button>
+          </d-button>
         </td>
       </tr>
-      </tbody>
     </table>
   </ng-template>
 </section>

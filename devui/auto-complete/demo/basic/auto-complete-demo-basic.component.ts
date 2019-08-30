@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 @Component({
-  selector: 'ave-auto-complete-demo-basic',
+  selector: 'd-auto-complete-demo-basic',
   templateUrl: './auto-complete-demo-basic.component.html'
 })
 export class AutoDemoBasicComponent {

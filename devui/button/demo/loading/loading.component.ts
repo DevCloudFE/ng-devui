@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'ave-loading',
+  selector: 'd-button-loading',
   templateUrl: './loading.component.html',
-  styleUrls: ['./loading.component.css']
 })
 export class LoadingComponent implements OnInit {
   showLoading = false;

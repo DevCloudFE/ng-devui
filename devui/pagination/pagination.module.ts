@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
-
+import { SelectModule } from 'ng-devui/select';
 import { PaginationComponent } from './pagination.component';
 import { CommonModule } from '@angular/common';
-import { SelectModule } from '../select';
+import { DevUIConfig } from 'ng-devui/devui.config';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
@@ -13,7 +13,7 @@ import { FormsModule } from '@angular/forms';
   ],
   declarations: [PaginationComponent],
   exports: [PaginationComponent],
-  providers: [],
+  providers: [DevUIConfig],
 })
 export class PaginationModule {
 }

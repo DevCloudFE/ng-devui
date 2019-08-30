@@ -2,11 +2,11 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { Component, ElementRef, HostBinding, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { isUndefined } from 'lodash-es';
 import { Observable } from 'rxjs';
-import { DocumentRef } from '../window-ref/document-ref.service';
+import { DocumentRef } from 'ng-devui/window-ref';
 import { ModalContainerDirective } from './modal.directive';
 
 @Component({
-  selector: 'ave-modal',
+  selector: 'd-modal',
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss'],
   animations: [
@@ -34,7 +34,6 @@ export class ModalComponent implements OnInit {
 
   @ViewChild(ModalContainerDirective) modalContainerHost: ModalContainerDirective;
   @ViewChild('dialog') dialogElement: ElementRef;
-  @HostBinding('attr.ave-ui') aveUi = true;
   animateState: string = this.showAnimate ? 'void' : '';
   draggableHandleEl: HTMLElement;
 
@@ -48,7 +47,7 @@ export class ModalComponent implements OnInit {
   }
 
   ngOnInit() {
-    const handle = document.getElementById('ave-modal-header');
+    const handle = document.getElementById('d-modal-header');
     if (handle) {
       this.draggableHandleEl = handle;
     }

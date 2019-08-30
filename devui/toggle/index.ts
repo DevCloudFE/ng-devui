@@ -1,2 +1,1 @@
-export * from './toggle.component';
-export * from './toggle.module';
+export * from './public-api';

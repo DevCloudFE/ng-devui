@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DialogService } from 'ng-devui';
 
 @Component({
-  selector: 'ave-tips',
+  selector: 'd-tips',
   templateUrl: './tips.component.html',
   styleUrls: ['./tips.component.css']
 })

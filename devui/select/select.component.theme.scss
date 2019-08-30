@@ -5,7 +5,7 @@
 $select-dark-1-boxshadow: rgba($dark1, 0.2);
 $select-tag-label-bgcolor: rgba($status-yellow, 0.3);
 
-ave-select {
+d-select {
   .devui-form-group.devui-has-feedback:focus {
     input.devui-form-control.select-input,
     .list-wrapper.devui-form-control {
@@ -95,6 +95,10 @@ ave-select {
   }
 
   svg.svg-icon-search > path {
+    fill: $dark1;
+  }
+
+  .select-chevron-icon svg > g > polygon {
     fill: $dark1;
   }
 }

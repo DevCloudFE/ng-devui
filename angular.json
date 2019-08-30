@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist",
+            "outputPath": "dist/components",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -147,7 +147,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "devui/src/test.ts",
+            "main": "devui/test.ts",
             "tsConfig": "devui/tsconfig.spec.json",
             "karmaConfig": "devui/karma.conf.js"
           }

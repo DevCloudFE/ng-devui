@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {PortalComponent} from './portal';
+import {PortalComponent} from './portal.component';
 import {CommonModule} from '@angular/common';
 
 @NgModule({

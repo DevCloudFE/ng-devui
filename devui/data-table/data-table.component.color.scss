@@ -1,6 +1,6 @@
 @import '../style/theme/color';
 
-:host /deep/ th .datatable-svg {
+:host ::ng-deep th .datatable-svg {
   g#order-default {
     path {
       fill: $gray2;

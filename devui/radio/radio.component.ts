@@ -1,9 +1,9 @@
-import { Component, OnInit, Input, forwardRef, ChangeDetectorRef } from '@angular/core';
+import { Component, forwardRef, Input, OnInit } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 
 @Component({
-  selector: 'ave-radio',
+  selector: 'd-radio',
   templateUrl: './radio.component.html',
   styleUrls: ['./radio.component.scss'],
   providers: [{
@@ -16,7 +16,6 @@ export class RadioComponent implements OnInit, ControlValueAccessor {
   _name: string;
   _disabled: boolean;
   __value: string;
-  _color: string;
   @Input()
   get name(): string {
     return this._name;
@@ -44,14 +43,6 @@ export class RadioComponent implements OnInit, ControlValueAccessor {
     this.__value = value;
   }
 
-  @Input()
-  get color(): string {
-    return this._color;
-  }
-
-  set color(value: string) {
-    this._color = value;
-  }
   _value: any;
   handleChange: (evnet: any, value: any) => void;
 

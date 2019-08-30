@@ -2,13 +2,21 @@ import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ButtonModule } from 'ng-devui/button';
+import { ToggleModule } from 'ng-devui/toggle';
+import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
+import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
+import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 
 import { DropDownModule } from '../dropdown.moudule';
 import { DropdownDemoComponent } from './dropdown-demo.component';
-import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
 import { BasicComponent } from './basic/basic.component';
-import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
-import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
+import { DropDownDemoAppendToBodyComponent } from './append-to-body/append-to-body.component';
+import { DropDownDemoAddIconComponent } from './add-icon/add-icon.component';
+import { DropDownDemoHoverComponent } from './hover/hover.component';
+import { DropDownDemoFocusComponent } from './focus/focus.component';
+import { DropDownDemoClickBlankComponent } from './close-scope/close-scope.component';
+
 
 @NgModule({
   imports: [
@@ -17,6 +25,8 @@ import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
     DropDownModule,
     DevUICodeboxModule,
     DevUIApiModule,
+    ButtonModule,
+    ToggleModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo' },
       { path: 'demo', component: DropdownDemoComponent},
@@ -29,6 +39,12 @@ import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
   declarations: [
     DropdownDemoComponent,
     BasicComponent,
+    DropDownDemoClickBlankComponent,
+    DropDownDemoFocusComponent,
+    DropDownDemoHoverComponent,
+    DropDownDemoAppendToBodyComponent,
+    DropDownDemoAddIconComponent
+
   ],
   entryComponents: [
     DropdownDemoComponent,

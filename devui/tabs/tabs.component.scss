@@ -2,6 +2,10 @@
 @import '../style/theme/variables';
 @import '../style/mixins/index';
 
+:host {
+  display: block;
+}
+
 .nav-tabs {
   font-size: 14px;
   background: transparent;

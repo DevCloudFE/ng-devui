@@ -1,26 +1,15 @@
 <h4>Async Data Loading</h4>
-<ave-button bordered="true" (click)="getRemoteData()">Request Data</ave-button>
-<ave-button bordered="true" (click)="toggleOptions()"
-  >Dynamic Column: {{ isDynamicColumn }}</ave-button
->
+<d-button (click)="getRemoteData()" style="margin-right: 5px;">Request Data</d-button>
+<d-button (click)="toggleColOptions()">changeColumns</d-button>
 <br />
 <br />
-<ave-data-table
-  aveLoading
-  [backdrop]="true"
-  [showLoading]="showLoading"
-  [dataSource]="remoteDataSource"
->
-  <ave-column
-    *ngFor="let colOption of remoteDataOptions"
-    [field]="colOption.field"
-    [header]="colOption.header"
-    [fieldType]="colOption.fieldType"
-  >
-  </ave-column>
+<d-data-table dLoading [backdrop]="true" [scrollable]="true" [showLoading]="showLoading" [dataSource]="remoteDataSource">
+  <d-column *ngFor="let colOption of colDataOptions" [field]="colOption.field" [header]="colOption.header"
+    [fieldType]="colOption.fieldType">
+  </d-column>
   <ng-template #noResultTemplateRef>
     <div style="text-align: center; margin-top:20px;">
-     No Data
+      No Data
     </div>
   </ng-template>
-</ave-data-table>
+</d-data-table>

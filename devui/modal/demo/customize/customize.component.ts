@@ -3,7 +3,7 @@ import { ModalService } from 'ng-devui';
 import { ModalAlertComponent } from '../modal-demo.component';
 
 @Component({
-  selector: 'ave-customize',
+  selector: 'd-customize',
   templateUrl: './customize.component.html',
   styleUrls: ['./customize.component.css']
 })

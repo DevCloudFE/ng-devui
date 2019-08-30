@@ -1,5 +1,9 @@
 @import '../style/mixins/index';
 
+:host {
+  display: inline-block;
+}
+
 .devui-btn {
   transition: all 0.2s;
   border-style: solid;

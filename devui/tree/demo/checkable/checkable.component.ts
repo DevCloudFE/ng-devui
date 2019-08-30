@@ -2,9 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ICheckboxInput, ITreeItem, OperableTreeComponent, TreeNode } from 'ng-devui';
 
 @Component({
-  selector: 'ave-checkable',
+  selector: 'd-checkable',
   templateUrl: './checkable.component.html',
-  styleUrls: ['./checkable.component.css']
 })
 export class CheckableComponent implements OnInit {
 
@@ -63,7 +62,7 @@ export class CheckableComponent implements OnInit {
   }];
 
   ngOnInit() {
-    setTimeout(() => this.getCheckecNote(this.operableTreeComponent), 0);
+    setTimeout(() => this.getCheckedNote(this.operableTreeComponent), 0);
   }
 
   onOperableNodeDeleted(treeNode: TreeNode) {
@@ -80,16 +79,16 @@ export class CheckableComponent implements OnInit {
   }
 
   onOperableNodeChecked(checkedNodes: Array<ITreeItem>) {
-    this.getCheckecNote(this.operableTreeComponent);
+    this.getCheckedNote(this.operableTreeComponent);
     console.log('checked: ', checkedNodes);
   }
 
-  getCheckecNote(tree: OperableTreeComponent) {
-    if (!tree || !tree.operableTree || !tree.operableTree.treeFactory) {
+  getCheckedNote(tree: OperableTreeComponent) {
+    if (!tree || !tree.treeFactory) {
       this.checkNote = [];
       return;
     }
-    this.checkNote = tree.operableTree.treeFactory.getCheckedNodes()
+    this.checkNote = tree.treeFactory.getCheckedNodes()
       .map((item: any) => ({ id: item.id, data: { title: item.data.title, isChecked: item.data.isChecked } }));
   }
 

@@ -1,1 +1,1 @@
-export * from './progress.module';
+export * from './public-api';

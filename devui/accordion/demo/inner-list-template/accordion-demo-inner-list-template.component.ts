@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'ave-accordion-demo-inner-list-template',
+  selector: 'd-accordion-demo-inner-list-template',
   templateUrl: './accordion-demo-inner-list-template.component.html',
   styleUrls: ['./accordion-demo-inner-list-template.component.css']
 })

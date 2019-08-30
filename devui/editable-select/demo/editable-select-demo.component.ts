@@ -1,7 +1,7 @@
-import { DevuiSourceData } from '../../shared/devui-codebox/devui-source-data';
+import { DevuiSourceData } from 'ng-devui/shared/devui-codebox/devui-source-data';
 import { Component } from '@angular/core';
 @Component({
-  selector: 'ave-editable-select-demo',
+  selector: 'd-editable-select-demo',
   templateUrl: './editable-select-demo.component.html',
 })
 export class EditableSelectDemoComponent {

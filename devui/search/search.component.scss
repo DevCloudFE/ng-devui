@@ -1,14 +1,15 @@
+:host {
+  display: block;
+}
+
 .devui-search {
   position: relative;
-  width: 300px;
   &-sm {
-    width: 200px;
     .devui-input {
       padding-right: 55px;
     }
   }
   &-lg {
-    width: 300px;
     .devui-input {
       padding-right: 66px;
     }

@@ -7,17 +7,20 @@ import {
   SimpleChanges,
   Output,
   EventEmitter,
-  OnDestroy
+  OnDestroy,
+  TemplateRef
 } from '@angular/core';
 import { DataTableCellViewTmplComponent } from './data-table-cell-view-tmpl.component';
 import { DataTableCellEditTmplComponent } from './data-table-cell-edit-tmpl.component';
 import { DataTableCellFilterTmplComponent } from './data-table-cell-filter-tmpl.component';
-import { formatDate } from '../../utils/date-utils';
-import { DevUIConfig } from '../../devui.config';
+import { formatDate } from 'ng-devui/utils';
+import { DevUIConfig } from 'ng-devui/devui.config';
 import { DataTableHeadCellTmplComponent } from './data-table-head-cell-tmpl.component';
+import { FilterConfig } from '../data-table.model';
+import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'ave-column',
+  selector: 'd-column',
   template: '',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -36,20 +39,27 @@ export class DataTableColumnTmplComponent implements OnChanges, OnDestroy {
   @Input() sortable: boolean;
   @Input() editable: boolean;
   @Input() filterable: boolean;
-  @Input() cellClass: string;
   @Input() width: string;
   @Input() style?: any;
   @Input() extraOptions: any;
-  @Input() isShow = true;
   @Input() order: number = Number.MAX_VALUE;
+  @Input() nestedColumn = false;
+     /**
+   * 传入筛选列表
+   */
+  @Input() filterList: Array<FilterConfig>;
+  @Output() filterChange = new EventEmitter<FilterConfig[]>();
+  @Input() filterMultiple = true;
+  @Input() beforeFilter: (value) => boolean | Promise<boolean> | Observable<boolean>;
   @ContentChild(DataTableCellViewTmplComponent) cellCmp: DataTableCellViewTmplComponent;
   @ContentChild(DataTableCellEditTmplComponent) cellEditCmp: DataTableCellEditTmplComponent;
   @ContentChild(DataTableCellFilterTmplComponent) cellFilterCmp: DataTableCellFilterTmplComponent;
   @ContentChild(DataTableHeadCellTmplComponent) headCellTmpl: DataTableHeadCellTmplComponent;
+  @Input() customFilterTemplate: TemplateRef<any>;
   orderChange = new EventEmitter<SimpleChanges>();
   _formatter: (item: any, row?: any) => string;
 
-  constructor(private avenuebirthUIConfig: DevUIConfig) {
+  constructor(private devUIConfig: DevUIConfig) {
 
   }
 
@@ -81,16 +91,35 @@ export class DataTableColumnTmplComponent implements OnChanges, OnDestroy {
   }
 
   date(item) {
-    const pattern = this.extraOptions && this.extraOptions.dateFormat ?
-      this.extraOptions.dateFormat : this.avenuebirthUIConfig.datePickerCN.format.date;
+    let pattern;
+    if (this.extraOptions && this.extraOptions.dateFormat) {
+      pattern = this.extraOptions.dateFormat;
+    } else {
+      pattern = this.extraOptions && this.extraOptions.showTime ?
+      this.devUIConfig.datePickerCN.format.time : this.devUIConfig.datePickerCN.format.date;
+    }
 
     return item ? formatDate(new Date(item), pattern) : '';
   }
+  emitFilterData(filterData) {
+    this.filterChange.emit(filterData);
+  }
+  canFilter(isOpen) {
+    let changeResult = Promise.resolve(true);
 
-  datetime(item) {
-    const pattern = this.extraOptions && this.extraOptions.dateFormat ?
-      this.extraOptions.dateFormat : this.avenuebirthUIConfig.datePickerCN.format.time;
+    if (this.beforeFilter) {
+      const result: any = this.beforeFilter(isOpen);
+      if (typeof result !== 'undefined') {
+        if (result.then) {
+          changeResult = result;
+        } else if (result.subscribe) {
+          changeResult = (result as Observable<boolean>).toPromise();
+        } else {
+          changeResult = Promise.resolve(result);
+        }
+      }
+    }
 
-    return item ? formatDate(new Date(item), pattern) : '';
+    return changeResult;
   }
 }

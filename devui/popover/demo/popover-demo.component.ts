@@ -20,7 +20,6 @@ export class PopoverDemoComponent {
   customizeSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./customize/customize-tmp.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./customize/customize-tmp.component.ts') },
-    { title: 'CSS', language: 'css', code: require('!!raw-loader!./customize/customize-tmp.component.css') }
   ];
   constructor() {
   }

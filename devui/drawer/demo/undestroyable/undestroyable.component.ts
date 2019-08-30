@@ -3,9 +3,8 @@ import { DrawerService, IDrawerOpenResult } from 'ng-devui';
 import { DrawerContentComponent } from '../drawerContent/drawer-content.component';
 
 @Component({
-  selector: 'ave-undestroyable',
+  selector: 'd-undestroyable',
   templateUrl: './undestroyable.component.html',
-  styleUrls: ['./undestroyable.component.css']
 })
 export class UndestroyableComponent {
   results: IDrawerOpenResult;

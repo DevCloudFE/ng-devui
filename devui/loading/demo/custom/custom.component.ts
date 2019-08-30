@@ -4,7 +4,7 @@ import {
 } from '@angular/core';
 import { timer } from 'rxjs';
 import { pullAt, random } from 'lodash-es';
-import { LoadingType } from 'ng-devui';
+import {LoadingType} from 'ng-devui/loading';
 
 
 /**
@@ -40,7 +40,7 @@ const mockFetchNames = (url: string) => new Promise((resolve) => {
 });
 
 @Component({
-  selector: 'ave-custom',
+  selector: 'd-custom',
   templateUrl: './custom.component.html',
   styleUrls: ['./custom.component.css']
 })

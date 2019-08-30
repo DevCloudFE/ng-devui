@@ -6,15 +6,14 @@ import {
   ComponentRef,
   ElementRef,
   OnDestroy,
-  ChangeDetectorRef,
 } from '@angular/core';
-import { OverlayContainerRef } from '../overlay-container';
+import { OverlayContainerRef } from 'ng-devui/overlay-container';
 import { TooltipComponent } from './tooltip.component';
 import { PositionType } from './tooltip.types';
 
 @Directive({
-  selector: '[aveTooltip]',
-  exportAs: 'aveTooltip',
+  selector: '[dTooltip]',
+  exportAs: 'dTooltip',
 })
 export class TooltipDirective implements OnDestroy {
   @Input() content: string;
@@ -24,8 +23,7 @@ export class TooltipDirective implements OnDestroy {
 
   constructor(private triggerElementRef: ElementRef,
               private overlayContainerRef: OverlayContainerRef,
-              private componentFactoryResolver: ComponentFactoryResolver,
-              private changeDetectorRef: ChangeDetectorRef,
+              private componentFactoryResolver: ComponentFactoryResolver
   ) {}
 
   @HostListener('mouseenter') onMouseEnter() {

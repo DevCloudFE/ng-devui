@@ -3,7 +3,7 @@
 </ng-template>
 
 <ng-template #default>
-    <table class="table" *ngIf="uploadedFiles.length>0" [style.margin-bottom.px]="0">
+    <table class="devui-table" *ngIf="uploadedFiles.length>0" [style.margin-bottom.px]="0">
         <tbody>
         <tr *ngFor="let uploadedFile of uploadedFiles; let index=index;">
             <td width="50%">
@@ -13,13 +13,13 @@
                 <span>{{UPLOADED}}</span>
             </td>
             <td>
-                <ave-button
+                <d-button
                         icon="trash"
                         bsStyle="danger"
                         bsSize="xs"
-                        (click)="deleteFile(uploadedFile[filePath])">
+                        (btnClick)="deleteFile(uploadedFile[filePath])">
                     {{ DELETE }}
-                </ave-button>
+                </d-button>
             </td>
         </tr>
         </tbody>

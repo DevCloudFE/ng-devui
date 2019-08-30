@@ -1,6 +1,6 @@
 <section>
-  <ave-button (click)="fetchTableData()">click me!</ave-button>
-  <table aveLoading [loading]="loading" [message]="'One moment please...'" [backdrop]="true" class="table table-hover">
+  <d-button  bsStyle="primary" (click)="fetchTableData()">click me!</d-button>
+  <table dLoading [view]="view" [loading]="loading" [backdrop]="true" class="table table-hover">
     <thead>
       <tr>
         <th>FirstName</th>

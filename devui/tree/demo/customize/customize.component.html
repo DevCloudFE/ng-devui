@@ -1,5 +1,5 @@
 <section>
-  <ave-operable-tree [tree]="data2" [treeNodeIdKey]="'id'" [treeNodeChildrenKey]="'children'"
+  <d-operable-tree [tree]="data2" [treeNodeIdKey]="'id'" [treeNodeChildrenKey]="'children'"
     (nodeSelected)="onOperableNodeSelected($event)" [iconParentOpen]="iconParentOpen"
     [iconParentClose]="iconParentClose" [iconLeaf]="iconLeaf" [iconTemplatePosition]="'after-checkbox'">
     <ng-template #iconTemplate let-node="node">
@@ -14,5 +14,5 @@
       <span class="op-icons icon icon-edit" (click)="editNode($event, node)"></span>
       <span class="op-icons icon icon-close" (click)="deleteNode($event, node)"></span>
     </ng-template>
-  </ave-operable-tree>
+  </d-operable-tree>
 </section>

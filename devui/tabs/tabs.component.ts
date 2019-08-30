@@ -6,15 +6,13 @@ import {
   Input,
   Output,
   EventEmitter,
-  ChangeDetectionStrategy,
   AfterContentInit,
-  HostBinding
 } from '@angular/core';
 import { TabComponent } from './tab.component';
 
 
 @Component({
-  selector: 'ave-tabs',
+  selector: 'd-tabs',
   templateUrl: './tabs.component.html',
   styleUrls: ['./tabs.component.scss'],
   exportAs: 'tabs',
@@ -28,7 +26,6 @@ export class TabsComponent implements OnInit, AfterContentInit {
   @Input() customWidth: string;
   @ContentChildren(TabComponent) tabs: QueryList<TabComponent>;
   @Output() activeTabChange = new EventEmitter<number| string>();
-  @HostBinding('attr.ave-ui') aveUi = true;
 
   constructor() {
   }

@@ -1,0 +1,16 @@
+<section>
+  <h5 class="text-muted">Leaf Only: Single Select</h5>
+  <div class="row">
+    <div class="col-md-5">
+      <d-tree-select placeholder="Standard Input" [treeData]="data1" [leafOnly]="true"
+                     [expandTree]="true" [(ngModel)]="value1" (ngModelChange)="showSelected($event)" style="width: 380px;"></d-tree-select>
+    </div>
+  </div>
+  <h5 class="text-muted" style="margin-top: 20px; ">Leaf Only: Multiple Select</h5>
+  <div class="row">
+    <div class="col-md-5">
+      <d-tree-select placeholder="Standard Input" [treeData]="data2" [multiple]="true" [leafOnly]="true"
+                     [expandTree]="true" [(ngModel)]="value2" (ngModelChange)="showSelected($event)" style="width: 380px;"></d-tree-select>
+    </div>
+  </div>
+</section>

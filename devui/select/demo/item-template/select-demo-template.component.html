@@ -2,23 +2,23 @@
   <h4>单选</h4>
   <div class="row">
     <div class="col-md-5">
-      <div>只在列表使用模板</div>
-      <ave-select [options]="languages2" [filterKey]="'name'" [(ngModel)]="currentOption4" [placeholder]="'Search'">
+      <h5>只在列表使用模板</h5>
+      <d-select [options]="languages2" [filterKey]="'name'" [(ngModel)]="currentOption4" [placeholder]="'Search'">
         <ng-template let-option="option" let-filterKey="filterKey">
           Do you agree? {{ option[filterKey] }}
         </ng-template>
-      </ave-select>
+      </d-select>
 
-      <div style="margin-top:20px">在列表和选中项使用相同模板</div>
-      <ave-select [options]="languages2" [filterKey]="'name'" [(ngModel)]="currentOption4" [placeholder]="'Search'"
+      <h5>在列表和选中项使用相同模板</h5>
+      <d-select [options]="languages2" [filterKey]="'name'" [(ngModel)]="currentOption4" [placeholder]="'Search'"
         [extraConfig]="{selectedItemWithTemplate:{enable: true}}">
         <ng-template let-option="option" let-filterKey="filterKey">
           Do you agree? {{ option[filterKey] }}
         </ng-template>
-      </ave-select>
+      </d-select>
 
-      <div style="margin-top:20px">在列表和选中项使用不同模板</div>
-      <ave-select [options]="languages2" [filterKey]="'name'" [(ngModel)]="currentOption4" [placeholder]="'Search'"
+      <h5>在列表和选中项使用不同模板</h5>
+      <d-select [options]="languages2" [filterKey]="'name'" [(ngModel)]="currentOption4" [placeholder]="'Search'"
         [extraConfig]="{selectedItemWithTemplate:{enable: true}}">
         <ng-template let-option="option" let-filterKey="filterKey" let-position="position">
           <ng-container *ngIf="position ==='list'">
@@ -28,7 +28,7 @@
             {{ option['specialContent'] }}
           </ng-container>
         </ng-template>
-      </ave-select>
+      </d-select>
 
     </div>
   </div>
@@ -42,18 +42,18 @@
   <h4>多选</h4>
   <div class="row">
     <div class="col-md-5">
-      <div style="margin-top:20px">只在列表使用模板</div>
-      <ave-select [options]="languages3" [filterKey]="'name'" [(ngModel)]="currentOption5" [placeholder]="'Search'"
+      <h5>只在列表使用模板</h5>
+      <d-select [options]="languages3" [filterKey]="'name'" [(ngModel)]="currentOption5" [placeholder]="'Search'"
         [multiple]="true">
         <ng-template let-option="option" let-filterKey="filterKey" let-checked="checked">
           <ng-container *ngIf="!checked">[ ]</ng-container>
           <ng-container *ngIf="checked">[x]</ng-container>
           Do you agree {{ option[filterKey] }} ?
         </ng-template>
-      </ave-select>
+      </d-select>
 
-      <div style="margin-top:20px">在列表和选中项使用不同模板</div>
-      <ave-select [options]="languages3" [filterKey]="'name'" [(ngModel)]="currentOption5" [placeholder]="'Search'"
+      <h5>在列表和选中项使用不同模板</h5>
+      <d-select [options]="languages3" [filterKey]="'name'" [(ngModel)]="currentOption5" [placeholder]="'Search'"
         [multiple]="true" [extraConfig]="{selectedItemWithTemplate:{enable: true}}">
         <ng-template let-option="option" let-filterKey="filterKey" let-position="position" let-checked="checked">
           <ng-container *ngIf="position ==='result'">
@@ -71,9 +71,9 @@
             Do you agree with {{ option[filterKey] }} ?
           </ng-container>
         </ng-template>
-      </ave-select>
-      <div style="margin-top:20px">在列表和选中项使用不同模板， 某些情况下使用内置模板</div>
-      <ave-select [options]="languages3" [filterKey]="'name'" [(ngModel)]="currentOption5" [placeholder]="'Search'"
+      </d-select>
+      <h5>在列表和选中项使用不同模板， 某些情况下使用内置模板</h5>
+      <d-select [options]="languages3" [filterKey]="'name'" [(ngModel)]="currentOption5" [placeholder]="'Search'"
         [multiple]="true" [extraConfig]="{selectedItemWithTemplate:{enable: true}}">
         <ng-template let-option="option" let-filterKey="filterKey" let-position="position" let-checked="checked"
           let-template="template">
@@ -90,7 +90,7 @@
               [ngTemplateOutletContext]="{option: option, checked: checked, filterKey: filterKey}"></ng-template>
           </ng-container>
         </ng-template>
-      </ave-select>
+      </d-select>
     </div>
   </div>
   <div class="row">

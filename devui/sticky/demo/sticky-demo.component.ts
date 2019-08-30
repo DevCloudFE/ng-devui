@@ -5,7 +5,7 @@ import {
 import { DevuiSourceData } from '../../shared/devui-codebox';
 
 @Component({
-    selector: 'ave-demo-sticky',
+    selector: 'd-demo-sticky',
     templateUrl: './sticky-demo.component.html'
 })
 export class StickyDemoComponent {

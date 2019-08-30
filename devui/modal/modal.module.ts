@@ -5,7 +5,7 @@ import {
 import { ModalContainerComponent } from './modal-container.component';
 import { CommonModule } from '@angular/common';
 import { ModalService } from './modal.service';
-import { OverlayContainerModule } from '../overlay-container';
+import { OverlayContainerModule } from 'ng-devui/overlay-container';
 import {
   ModalContainerDirective,
   ModalContentDirective
@@ -14,9 +14,9 @@ import { ModalHeaderComponent } from './modal-header.component';
 import { ModalFooterComponent } from './modal-footer.component';
 import { ModalAlertComponent } from './modal-alert.component';
 import { DialogService } from './dialog.service';
-import { DocumentRef } from '../window-ref/document-ref.service';
-import {ButtonModule} from '../button';
-import { AveDraggableDirective } from './draggable';
+import { DocumentRef } from 'ng-devui/window-ref';
+import {ButtonModule} from 'ng-devui/button';
+import { MovableDirective } from './movable.directive';
 
 @NgModule({
   imports: [
@@ -32,7 +32,7 @@ import { AveDraggableDirective } from './draggable';
     ModalHeaderComponent,
     ModalFooterComponent,
     ModalAlertComponent,
-    AveDraggableDirective
+    MovableDirective
   ],
   exports: [
     ModalComponent,

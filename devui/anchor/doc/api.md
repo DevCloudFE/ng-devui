@@ -1,28 +1,44 @@
-需要三个指令配合使用: 'aveAnchor'、'aveAnchorLink'、'aveAnchorBox'
+# Anchor使用说明
 
-### aveAnchor指令
+需要三个指令配合使用: 'dAnchor'、'dAnchorLink'、'dAnchorBox'
+
+## dAnchor指令
 
 定义一个锚点
 
+## dAnchor 参数
+
 | 参数                  | 类型          | 默认            |   说明                                                |
 | :-------------------: | :----------: | :-------------: | :--------------------------------------------------: |
-| aveAnchor             | String       | (none)          | 必填，设置一个锚点的名字                          |
+| dAnchor               | `string`      | --          | 必填，设置一个锚点的名字                          |
+| anchorActive          | `string`      | --          | 可选，锚点处于激活状态的时候，模块生效对应的css类名          |
 
-### aveAnchorLink指令
+### 判断激活锚点的事件
+
+自动会给锚点加上以下类对应不同激活的对象
+
+| css类名                      | 代表意义         |
+| :--------------------------: | :----------: |
+| anchor-active-by-anchor-link | 点击锚点链接激活 |
+| anchor-active-by-scroll      |  容器滚动到锚点位置激活  |
+| anchor-active-by-click-inside | 点击锚点内部内容激活     |
+| anchor-active-by-initial      | 初始化滚动条位置激活 |
+
+## dAnchorLink指令
 
 定义一个锚点的链接，点击链接会滑动到锚点，锚点处于页面顶部的时候也会激活链接的class
 
 | 参数                  | 类型          | 默认            |   说明                                                |
 | :-------------------: | :----------: | :-------------: | :--------------------------------------------------: |
-| aveAnchorLink         | String       | (none)          | 必填，点击滑动的目标锚点的名字                          |
-| anchorActive          | css类名      | (none)          | 可选，锚点处于激活状态的时候，链接生效对应的类名           |
+| dAnchorLink           | `string`       | --              | 必填，点击滑动的目标锚点的名字                          |
+| anchorActive          | `string`       | --              | 可选，锚点处于激活状态的时候，链接生效对应的css类名           |
 
-### aveAnchorBox指令 （必须有一个容器，否则功能无法使用）
+## dAnchorBox指令 （必须有一个容器，否则功能无法使用）
 
-定义一个扫描锚点的容器，放在aveAnchor与aveAnchorLink的公共父节点上，用于锚点和链接之间的通信
+定义一个扫描锚点的容器，放在dAnchor与dAnchorLink的公共父节点上，用于锚点和链接之间的通信
 
 | 参数                  | 类型                          | 默认            |   说明                                                |
 | :-------------------: | :--------------------------: | :-------------: | :--------------------------------------------------: |
-| view                  | {top?:number,bottom?:number} | {top:0,bottom:0} | 可选，用于可视区域的调整，比如顶部有固定位置的头部等，数值对应被遮挡的顶部或底部的高度      |
-| defaultAnchor         | String                      | (none)           | 可选，进入页面后默认被激活的锚点链接，一般设置为第一个锚点，如果不设置，那么第一个锚点需要在滑动到顶部位置的时候才能激活链接  |
-| scrollTarget          | HTMLElment                  | document.documentElement | 可选，设置要发生滚动的容器，一般为滚动条所在容器，为主页面的滚动条时候可以不设置   |
+| view                  | `{top?:number,bottom?:number}` | {top:0,bottom:0} | 可选，用于可视区域的调整，比如顶部有固定位置的头部等，数值对应被遮挡的顶部或底部的高度      |
+| defaultAnchor         | `string`                      | --          | 可选，进入页面后默认被激活的锚点链接，一般设置为第一个锚点，如果不设置，那么第一个锚点需要在滑动到顶部位置的时候才能激活链接  |
+| scrollTarget          | `HTMLElment`                  | document.documentElement | 可选，设置要发生滚动的容器，一般为滚动条所在容器，为主页面的滚动条时候可以不设置   |

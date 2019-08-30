@@ -6,7 +6,7 @@ import { ExamplePanelComponent } from './example-panel.component';
 import { AppContentComponent } from './app-content.component';
 import { routesConfig } from './component.route';
 import { GetStartedComponent } from './get-started.component';
-import { DevUIModule } from 'devui';
+import { DevUIModule } from 'ng-devui';
 
 import xml from 'highlight.js/lib/languages/xml';
 import scss from 'highlight.js/lib/languages/scss';

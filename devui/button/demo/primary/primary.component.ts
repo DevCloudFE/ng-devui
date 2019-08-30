@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'ave-primary',
+  selector: 'd-button-primary',
   templateUrl: './primary.component.html',
-  styleUrls: ['./primary.component.css']
 })
 export class PrimaryComponent implements OnInit {
   constructor() { }

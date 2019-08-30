@@ -1,22 +1,22 @@
 import endsWith from 'lodash-es/endsWith';
-import {IFileOptions} from './file-uploader.types';
+import {IFileOptions, IUploadOptions} from './file-uploader.types';
 import { Observable, from } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
-import {IUploadOptions} from '.';
-import {Injectable} from '@angular/core';
 
-import { DevUIConfig } from '../devui.config';
+import {Injectable} from '@angular/core';
+import { DevUIConfig } from 'ng-devui/devui.config';
 
 @Injectable()
 export class SelectFiles {
   NOT_ALLOWED_FILE_TYPE_MSG: string;
   BEYOND_MAXIMAL_FILE_SIZE_MSG: string;
   currentLocale = 'zh-CN';
-  constructor(private devuiConfig: DevUIConfig) {}
+  constructor(private devUIConfig: DevUIConfig) {
+  }
 
   selectFiles = ({multiple, accept}: IFileOptions): Promise<File[]> => {
     return new Promise((resolve) => {
-      const tempNode = document.getElementById('ave-upload-temp');
+      const tempNode = document.getElementById('d-upload-temp');
       if (tempNode) {
         document.body.removeChild(tempNode);
       }
@@ -26,7 +26,7 @@ export class SelectFiles {
       input.style.left = '-2000px';
       input.style.top = '-2000px';
 
-      input.setAttribute('id', 'ave-upload-temp');
+      input.setAttribute('id', 'd-upload-temp');
       input.setAttribute('type', 'file');
       if (multiple) {
         input.setAttribute('multiple', '');
@@ -78,14 +78,14 @@ export class SelectFiles {
     map((file) => {
       if (!this.isAllowedFileType(accept, <File>file)) {
         this.NOT_ALLOWED_FILE_TYPE_MSG = this.currentLocale === 'zh-CN' ?
-        this.devuiConfig.uploadCN.ERROR_MSG.getNotAllowedFileTypeMsg((<File>file).name, accept) :
-        this.devuiConfig.uploadEN.ERROR_MSG.getNotAllowedFileTypeMsg((<File>file).name, accept);
+        this.devUIConfig.uploadCN.ERROR_MSG.getNotAllowedFileTypeMsg((<File>file).name, accept) :
+         this.devUIConfig.uploadEN.ERROR_MSG.getNotAllowedFileTypeMsg((<File>file).name, accept);
         throw new Error(this.NOT_ALLOWED_FILE_TYPE_MSG);
       }
 
       if (this.beyondMaximalSize((<File>file).size, uploadOptions.maximumSize)) {
-        this.BEYOND_MAXIMAL_FILE_SIZE_MSG = this.currentLocale === 'zh-CN' ? this.devuiConfig.uploadCN.ERROR_MSG
-        .getBeyondMaximalFileSizeMsg((<File>file).name, uploadOptions.maximumSize) : this.devuiConfig.uploadEN.ERROR_MSG
+        this.BEYOND_MAXIMAL_FILE_SIZE_MSG = this.currentLocale === 'zh-CN' ? this.devUIConfig.uploadCN.ERROR_MSG
+        .getBeyondMaximalFileSizeMsg((<File>file).name, uploadOptions.maximumSize) : this.devUIConfig.uploadEN.ERROR_MSG
         .getBeyondMaximalFileSizeMsg((<File>file).name, uploadOptions.maximumSize);
         throw new Error(this.BEYOND_MAXIMAL_FILE_SIZE_MSG);
       }

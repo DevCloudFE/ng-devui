@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy, ContentChild, TemplateRef } from '@angular/core';
 
 @Component({
-  selector: 'ave-head-cell',
+  selector: 'd-head-cell',
   template: '',
   changeDetection: ChangeDetectionStrategy.OnPush
 })

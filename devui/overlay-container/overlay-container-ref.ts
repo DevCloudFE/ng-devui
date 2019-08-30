@@ -10,7 +10,7 @@ import {
   ComponentRef
 } from '@angular/core';
 
-import { DocumentRef } from '../window-ref/document-ref.service';
+import { DocumentRef } from 'ng-devui/window-ref';
 
 @Injectable()
 export class OverlayContainerRef {

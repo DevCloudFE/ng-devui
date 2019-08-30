@@ -5,28 +5,23 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'ave-loading',
-  template: `<div class="devui-loading-wrapper">
-                <ng-container *ngTemplateOutlet="templateRef ? templateRef : default;">
+  selector: 'd-loading',
+  template: `<div class="loading-wrapper">
+                <ng-container *ngTemplateOutlet="loadingTemplateRef ? loadingTemplateRef : default;">
                 </ng-container>
                 <ng-template #default>
-                    <div class="devui-loading-spinner-wrapper">
-                        <div class="devui-loading-default-sign">
-                            <div class="devui-loading-default-spinner">
+                    <div class="devui-spinner-wrapper"
+                         [ngClass]="{'fix-loading-position': !customPosition}"
+                         [style.top]="top"
+                         [style.left]="left">
+                        <div class="devui-busy-default-sign">
+                            <div class="devui-busy-default-spinner">
                                 <div class="bar1"></div>
                                 <div class="bar2"></div>
                                 <div class="bar3"></div>
                                 <div class="bar4"></div>
-                                <div class="bar5"></div>
-                                <div class="bar6"></div>
-                                <div class="bar7"></div>
-                                <div class="bar8"></div>
-                                <div class="bar9"></div>
-                                <div class="bar10"></div>
-                                <div class="bar11"></div>
-                                <div class="bar12"></div>
                             </div>
-                            <div class="devui-loading-default-text" *ngIf="!!message">{{message}}</div>
+                            <div class="devui-busy-default-text" *ngIf="!!message">{{message}}</div>
                         </div>
                      </div>
                 </ng-template>
@@ -34,6 +29,9 @@ import {
   styleUrls: ['./loading.component.scss'],
 })
 export class LoadingComponent {
-  @Input() templateRef: TemplateRef<any>;
+  @Input() loadingTemplateRef: TemplateRef<any>;
   @Input() message: string;
+  @Input() top: string;
+  @Input() left: string;
+  @Input() customPosition: boolean;
 }

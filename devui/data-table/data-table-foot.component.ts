@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 import { DataTableFootTmplComponent } from './tmpl/data-table-foot-tmpl.component';
 
 @Component({
-  selector: 'ave-data-table-foot,[aveDataTableFoot]',
+  selector: 'd-data-table-foot,[dDataTableFoot]',
   templateUrl: './data-table-foot.component.html',
   // changeDetection: ChangeDetectionStrategy.OnPush
 })

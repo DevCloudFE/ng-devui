@@ -1,0 +1,12 @@
+<div class="popper">
+  <div class="popper-activator" #popperActivator>
+    <ng-content select="[popper-activator]"></ng-content>
+  </div>
+  <div class="popper-container" #popperContainer [ngClass]="{'fluid': fluidPopper && !appendTo}">
+    <ng-content select="[popper-prepend]"></ng-content>
+    <div class="popper-container-scrollable devui-scrollbar">
+      <ng-content select="[popper-container]"></ng-content>
+    </div>
+    <ng-content select="[popper-append]"></ng-content>
+  </div>
+</div>

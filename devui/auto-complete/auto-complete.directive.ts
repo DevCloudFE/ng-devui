@@ -22,11 +22,11 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { fromEvent, Observable, Subscription, of } from 'rxjs';
 import { map, filter, debounceTime, distinctUntilChanged, switchMap, tap } from 'rxjs/operators';
-import { DevUIConfig } from '../devui.config';
+import { DevUIConfig } from 'ng-devui/devui.config';
 import { AutoCompletePopupComponent } from './auto-complete-popup.component';
 
 @Directive({
-  selector: '[aveAutoComplete]',
+  selector: '[dAutoComplete]',
   exportAs: 'autoComplete',
   providers: [{
     provide: NG_VALUE_ACCESSOR,

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 
 @Component({
-    selector: 'ave-select-demo',
+    selector: 'd-select-demo',
     templateUrl: './select-demo.component.html',
 })
 export class SelectDemoComponent {

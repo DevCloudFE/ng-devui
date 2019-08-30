@@ -5,7 +5,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { map , filter, debounceTime } from 'rxjs/operators';
 
 @Component({
-  selector: 'ave-search',
+  selector: 'd-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
   exportAs: 'search',

@@ -1,0 +1,75 @@
+@import '../style/theme/color';
+
+:host {
+  display: block;
+}
+
+.devui-slider {
+  position: relative;
+  width: 100%;
+  padding: 5px 0;
+  margin: 5px 0;
+  cursor: pointer;
+  box-sizing: border-box;
+  height: 15px;
+
+  .devui-slider-rail {
+    position: absolute;
+    background-color: $gray2;
+    height: 5px;
+    width: 100%;
+    transition: background-color 0.2s ease-in-out;
+
+    &.disabled {
+      background-color: $gray2;
+    }
+  }
+
+  &:hover {
+    .devui-slider-rail:not(.disabled) {
+      background-color: $gray2;
+    }
+
+    .devui-slider-track:not(.disabled) {
+      background-color: $hover-control;
+    }
+
+    .devui-slider-handle:not(.disabled) {
+      border-color: $hover-control;
+    }
+  }
+
+  .devui-slider-track {
+    position: absolute;
+    background-color: $focus1;
+    height: 5px;
+    width: 0;
+
+    &.disabled {
+    }
+  }
+
+  .devui-slider-handle {
+    position: absolute;
+    background-color: $white;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    margin-left: -7px;
+    margin-top: -5px;
+    left: 0;
+    transition: transform .2s ease-in-out;
+    border: 2px solid $focus1;
+
+    &:not(.disabled) {
+      &:hover, &:active {
+        transform: scale(1.3);
+      }
+    }
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+    opacity: 0.3;
+  }
+}

@@ -2,8 +2,15 @@ import { Component } from '@angular/core';
 import { of } from 'rxjs';
 
 @Component({
-  selector: 'ave-select-object',
-  templateUrl: './select-demo-object.component.html'
+  selector: 'd-select-object',
+  templateUrl: './select-demo-object.component.html',
+  styles: [
+    `
+      .col-md-5 {
+        width: 50%;
+      }
+    `
+  ]
 })
 export class SelectDemoObjectComponent {
   currentOption1 = '';

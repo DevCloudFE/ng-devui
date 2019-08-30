@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange
 import { AccordionMenuType } from './accordion.type';
 
 @Component({
-  selector: 'ave-accordion',
+  selector: 'd-accordion',
   templateUrl: './accordion.component.html',
   styleUrls: ['./accordion.component.scss']
 })

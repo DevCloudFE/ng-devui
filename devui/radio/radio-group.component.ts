@@ -15,7 +15,7 @@ import {NG_VALUE_ACCESSOR, ControlValueAccessor} from '@angular/forms';
 import { RadioComponent } from './radio.component';
 
 @Component({
-  selector: 'ave-radio-group',
+  selector: 'd-radio-group',
   templateUrl: './radio-group.component.html',
   styleUrls: ['./radio-group.component.scss', './radio.component.scss'],
   providers: [{
@@ -29,7 +29,6 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges, Aft
   @Input() name: string;
   @Input() values: any[];
   @Input() cssStyle: 'row' | 'column';
-  @Input() color = '#5170FF';
   @Input() disabled: boolean;
   @Output() change = new EventEmitter<any>();
   @ContentChildren(RadioComponent) radios: QueryList<RadioComponent> = new QueryList<RadioComponent>();
@@ -45,8 +44,10 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges, Aft
       this.registerRadio(radio);
     });
 
-    this.radios.changes.subscribe((radio: RadioComponent) => {
-      this.registerRadio(radio);
+    this.radios.changes.subscribe((newRadios) => {
+      newRadios.forEach((radio: RadioComponent) => {
+        this.registerRadio(radio);
+      });
     });
   }
 
@@ -63,7 +64,7 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges, Aft
       });
     }
 
-    if (changes && changes.color && this.radios) {
+    if (changes && this.radios) {
       this.radios.forEach(radio => {
         radio.disabled = this.disabled;
       });

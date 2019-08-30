@@ -1,9 +1,10 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { DataTableComponent, LoadingType } from 'ng-devui';
+import { DataTableComponent } from '../../data-table.component';
+import {LoadingType} from 'ng-devui/loading';
 import { EMPTY } from 'rxjs';
 
 @Component({
-    selector: 'ave-datatable-demo-lazyloaddata',
+    selector: 'd-datatable-demo-lazyloaddata',
     changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: './data-table-demo-lazyloaddata.component.html'
 })

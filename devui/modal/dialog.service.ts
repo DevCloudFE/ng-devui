@@ -4,7 +4,7 @@ import {
   ComponentRef,
 } from '@angular/core';
 import {ModalComponent} from './modal.component';
-import {OverlayContainerRef} from '../overlay-container';
+import {OverlayContainerRef} from 'ng-devui/overlay-container';
 import {assign, isUndefined} from 'lodash-es';
 import {IDialogOptions} from './modal.types';
 import {ModalContainerComponent} from './modal-container.component';

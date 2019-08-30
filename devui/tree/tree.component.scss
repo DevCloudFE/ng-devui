@@ -2,6 +2,10 @@
 @import '../style/theme/variables';
 @import '../style/mixins/index';
 
+:host {
+  display: block;
+}
+
 .tree-node {
   color: $dark2;
   line-height: 1;
@@ -59,6 +63,17 @@
       color: $focus1;
       text-decoration: none;
       border-color: transparent;
+    }
+  }
+
+  .tree-node__edit {
+    margin-left: .4em;
+    padding: .1em;
+    > .input-sm {
+      height: 26px;
+      &.error, &.error:hover, &.error:focus{
+        border-color: $status-red;
+      }
     }
   }
 

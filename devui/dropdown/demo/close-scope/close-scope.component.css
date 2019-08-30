@@ -1,0 +1,10 @@
+.dropdown-menu > li > input {
+  margin-left: 10px;
+}
+.dropdown-menu {
+  overflow-y: auto;
+}
+.icon-chevron-down{
+  position:relative;
+  top:1px;
+}

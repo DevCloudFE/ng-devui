@@ -1,4 +1,3 @@
-
 import { ExamplePanelComponent } from './example-panel.component';
 import { GetStartedComponent } from './get-started.component';
 
@@ -16,7 +15,7 @@ export const routesConfig = [
     data: { nodisplay: true }
   },
   {
-    path: 'acordion', component: ExamplePanelComponent,
+    path: 'accordion', component: ExamplePanelComponent,
     loadChildren: '../../../devui/accordion/demo/accordion-demo.moudule#AccordionDemoModule',
     data: {
       type: '导航',
@@ -54,7 +53,7 @@ export const routesConfig = [
     loadChildren: '../../../devui/auto-complete/demo/auto-complete-demo.module#AutoCompleteDemoModule',
     data: {
       type: '数据录入',
-      name: 'Auto-Complete',
+      name: 'AutoComplete',
       cnName: '自动补全',
       description: '在用户进行输入时联想用户可能需要的输入结果。',
       tmw: '可以根据用户输入的部分字符推断出他可能想要输入的内容。'
@@ -139,7 +138,6 @@ export const routesConfig = [
     component: ExamplePanelComponent,
     loadChildren: '../../../devui/dropdown/demo/dropdown-demo.module#DropdownDemoModule',
     data: {
-      type: '数据录入',
       name: 'DropDown',
       cnName: '下拉菜单',
       description: '按向下弹出的列表。',
@@ -152,7 +150,7 @@ export const routesConfig = [
     loadChildren: '../../../devui/editable-select/demo/editable-select-demo.module#EditableSelectDemoModule',
     data: {
       type: '数据录入',
-      name: 'Editable-Select',
+      name: 'EditableSelect',
       cnName: '可输入下拉选择框',
       description: '同时支持输入和下拉选择的输入框。',
       tmw: '当需要同时支持用户输入数据和选择已有数据的时候使用，加入输入联想功能，方便用户搜索已有数据。'
@@ -258,6 +256,7 @@ export const routesConfig = [
     component: ExamplePanelComponent,
     loadChildren: '../../../devui/select/demo/select-demo.module#SelectDemoModule',
     data:  {
+      type: '数据录入',
       name: 'Select',
       cnName: '下拉选择框',
       description: '下拉选择框。',
@@ -299,12 +298,24 @@ export const routesConfig = [
     }
   },
   {
+    path: 'tags',
+    component: ExamplePanelComponent,
+    loadChildren: '../../../devui/tags/demo/tags-demo.module#TagsDemoModule',
+    data: {
+      type: '数据录入',
+      name: 'Tags',
+      cnName: '标签',
+      description: '标签展示组件。',
+      tmw: `用户需要展示多个标签时。`
+    }
+  },
+  {
     path: 'tags-input',
     component: ExamplePanelComponent,
     loadChildren: '../../../devui/tags-input/demo/tags.input-demo.module#TagsInputDemoModule',
     data: {
       type: '数据录入',
-      name: 'Tags-input',
+      name: 'TagsInput',
       cnName: '标签输入',
       description: '用于输入多个标签。',
       tmw: `用户需要输入多个标签时。`
@@ -328,7 +339,7 @@ export const routesConfig = [
     loadChildren: '../../../devui/tooltip/demo/tooltip-demo.module#TooltipDemoModule',
     data: {
       name: 'Tooltip',
-      cnName: '工具提示',
+      cnName: '提示',
       description: '文字提示组件',
       tmw: `用户鼠标移动到文字上，需要进一步的提示时使用。`
     }
@@ -368,5 +379,41 @@ export const routesConfig = [
       description: '文件上传组件',
       tmw: `当需要将文件上传到后端服务器时。`
     }
-  }
+  },
+  {
+    path: 'input-number',
+    component: ExamplePanelComponent,
+    loadChildren: '../../../devui/input-number/demo/input-number-demo.module#InputNumberDemoModule',
+    data: {
+      type: '数据录入',
+      name: 'InputNumber',
+      cnName: '数字输入框',
+      description: '通过鼠标或键盘，输入范围内的数值',
+      tmw: `当需要获取标准数值时。`
+    }
+  },
+  {
+    path: 'tree-select',
+    component: ExamplePanelComponent,
+    loadChildren: '../../../devui/tree-select/demo/tree-select-demo.module#TreeSelectDemoModule',
+    data: {
+      type: '数据录入',
+      name: 'TreeSelect',
+      cnName: '树形选择框',
+      description: '树形选择框',
+      tmw: `文件夹、组织架构、生物分类、国家地区等等，世间万物的大多数结构都是树形结构。使用树控件可以完整展现其中的层级关系，并具有展开收起选择等交互功能。`
+    }
+  },
+  {
+    path: 'slider',
+    component: ExamplePanelComponent,
+    loadChildren: '../../../devui/slider/demo/slider-demo.module#SliderDemoModule',
+    data: {
+      type: '数据录入',
+      name: 'Slider',
+      cnName: '滑动输入条',
+      description: '滑动输入条可以更直观地展示当前值和可选范围。',
+      tmw: `当用户需要在数值区间内进行选择时使用。`
+    }
+  },
 ];

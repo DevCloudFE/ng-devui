@@ -2,14 +2,17 @@ import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ButtonModule } from '../../button/index';
-import { PaginationModule } from '../pagination.module';
+import { ButtonModule } from 'ng-devui/button';
+import { PaginationModule } from 'ng-devui/pagination';
 import { PaginationDemoComponent } from './pagination-demo.component';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
 import { BasicComponent } from './basic/basic.component';
-import { SpecialComponent } from './special/special.component';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
+import { PaginationDemoAdditionalComponent } from './additional/additional.component';
+import { PaginationDemoLiteComponent } from './lite/lite.component';
+import { PaginationDemoWidgetsComponent } from './widgets/widgets.component';
+
 
 @NgModule({
   imports: [
@@ -30,7 +33,9 @@ import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
   declarations: [
     PaginationDemoComponent,
     BasicComponent,
-    SpecialComponent,
+    PaginationDemoAdditionalComponent,
+    PaginationDemoLiteComponent,
+    PaginationDemoWidgetsComponent
   ],
   entryComponents: [
     PaginationDemoComponent,

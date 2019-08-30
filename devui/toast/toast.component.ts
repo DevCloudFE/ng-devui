@@ -10,7 +10,7 @@ export interface Message {
 }
 
 @Component({
-  selector: 'ave-toast',
+  selector: 'd-toast',
   templateUrl: './toast.component.html',
   styleUrls: ['./toast.component.scss']
 })

@@ -10,7 +10,7 @@ import { PanelHeaderComponent } from './panel-header.component';
 import { PanelFooterComponent } from './panel-footer.component';
 
 @Component({
-  selector: 'ave-panel',
+  selector: 'd-panel',
   templateUrl: './panel.component.html',
   styleUrls: ['./panel.component.scss']
 })

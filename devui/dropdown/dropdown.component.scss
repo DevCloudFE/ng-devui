@@ -1,0 +1,16 @@
+.cdk-overlay-pane .devui-dropdown-menu {
+  position: relative;
+  top: initial;
+  left: initial;
+  border: none;
+}
+
+.devui-dropdown span.icon-chevron-down {
+  display: inline-block;
+  transition: transform 0.3s;
+}
+
+.devui-dropdown.open span.icon-chevron-down {
+  transform: rotate(180deg);
+}
+

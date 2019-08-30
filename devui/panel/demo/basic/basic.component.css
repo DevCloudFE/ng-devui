@@ -1,10 +1,9 @@
-/** No CSS for this demo **/
-.ave-panel-success > .panel-heading {
+.d-panel-success > .panel-heading {
   color: #ffffff;
   background-color: #9954bb;
   border-color: #7643a8;
 }
 
-ave-panel-header .icon {
+d-panel-header .icon {
   float: right;
 }

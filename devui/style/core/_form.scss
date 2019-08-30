@@ -16,7 +16,7 @@
   border: 1px solid $gray1;
   border-radius: 1px;
   display: table-cell;
-  padding: 5px 10px;
+  padding: 0 10px;
   text-align: center;
   &:last-child{
     @include border-position-radius(left);
@@ -110,6 +110,7 @@
   border: 1px solid $gray1;
   display: block;
   width: 100%;
+  height: 32px;
 }
 
 .devui-form-control:hover{

@@ -3,7 +3,7 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'ave-panel-body',
+  selector: 'd-panel-body',
   template: `<ng-content></ng-content>`
 })
 export class PanelBodyComponent {

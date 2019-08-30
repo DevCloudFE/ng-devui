@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { pullAt, random } from 'lodash-es';
-import { LoadingType } from 'ng-devui';
+import {LoadingType} from 'ng-devui/loading';
 import { from } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
@@ -37,13 +37,17 @@ const mockFetchNames = (url: string) => new Promise((resolve) => {
 });
 
 @Component({
-  selector: 'ave-basic',
+  selector: 'd-basic',
   templateUrl: './basic.component.html',
   styleUrls: ['./basic.component.css']
 })
 export class BasicComponent implements OnInit {
   loading: LoadingType;
   tableNames: string[][] = [[]];
+  view = {
+    top: '50px',
+    left: '50%'
+   };
   constructor() {
 
   }

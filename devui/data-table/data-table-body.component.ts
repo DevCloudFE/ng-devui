@@ -1,20 +1,21 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   Input,
-  TemplateRef
+  TemplateRef,
+  SimpleChanges,
+  OnChanges
 } from '@angular/core';
 import { DataTableComponent } from './data-table.component';
 import { DataTableColumnTmplComponent } from './tmpl/data-table-column-tmpl.component';
 import { DataTableTmplsComponent } from './tmpl/data-table-tmpls.component';
 
 @Component({
-  selector: 'ave-data-table-body, [aveDataTableBody]',
+  selector: 'd-data-table-body, [dDataTableBody]',
   templateUrl: './data-table-body.component.html',
   styleUrls: ['./data-table-body.component.scss'],
   // changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DataTableBodyComponent {
+export class DataTableBodyComponent implements OnChanges {
   @Input() checkable: boolean;
   @Input() showDetail: boolean;
   @Input() allChecked: boolean;
@@ -29,9 +30,27 @@ export class DataTableBodyComponent {
   @Input() dataTableTemplates: DataTableTmplsComponent;
   @Input() detailTemplateRef: TemplateRef<any>;
   @Input() timeout: number;
-
+  @Input() type: string;
+  @Input() hover: boolean;
+  @Input() tableLevel: number;
+  @Input() nestedIndex = '-1';
+  @Input() virtualScroll;
+  childTdColspan: number;
   constructor(public dt: DataTableComponent) {
 
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes && changes.columns) {
+      let columnSpan = this.columns.length;
+      if (this.showDetail) {
+        columnSpan += 1;
+      }
+      if (this.checkable) {
+        columnSpan += 1;
+      }
+      this.childTdColspan = columnSpan;
+    }
   }
 
   trackByFn(index, item) {
