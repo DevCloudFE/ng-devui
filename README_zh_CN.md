@@ -88,7 +88,7 @@ $ ng serve --open
 
 欢迎贡献您的代码或者讨论您的好点子！
 
-在提出pull request之前，请确保您阅读了我们的[贡献指南](./CONTRIBUTING.md)
+在提出pull request之前，请确保您阅读了我们的[贡献指南](./CONTRIBUTING_zh_CN.md)
 
 感谢所有帮助我们构建DevUI的贡献者
 
@@ -103,7 +103,6 @@ $ ng serve --open
 ## 谁在使用
 
 <p><a href="https://devcloud.huaweicloud.com/" target="_blank" rel="noopener noreferrer"><img alt="DevCloud Logo" src="devcloud-logo.png" width="150" style="max-width:100%;"></p>
-
 ## LICENSE
 
 [**MIT**](https://opensource.org/licenses/MIT)

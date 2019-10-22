@@ -83,7 +83,7 @@ $ ng serve --open
 
 Please feel free to contribute code or discuss your idea!
 
-Please make sure you read the [contributing](https://github.com/DevCloudFE/ng-devui/pull/CONTRIBUTING.md) guide before making a pull request.
+Please make sure you read the [contributing](./CONTRIBUTING.md) guide before making a pull request.
 
 We appreciate all contributors who helped us build DevUI.
 
@@ -97,7 +97,6 @@ Modern browsers and Internet Explorer 11+.
 ## Who use it
 
 <p><a href="https://devcloud.huaweicloud.com/" target="_blank" rel="noopener noreferrer"><img alt="DevCloud Logo" src="devcloud-logo.png" width="150" style="max-width:100%;"></p>
-
 ## LICENSE
 
 [**MIT**](https://opensource.org/licenses/MIT)
