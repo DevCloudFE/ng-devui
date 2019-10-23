@@ -102,7 +102,8 @@ $ ng serve --open
 
 ## 谁在使用
 
-<p><a href="https://devcloud.huaweicloud.com/" target="_blank" rel="noopener noreferrer"><img alt="DevCloud Logo" src="devcloud-logo.png" width="150" style="max-width:100%;"></p>
+<p><a href="https://devcloud.huaweicloud.com/" target="_blank" rel="noopener noreferrer"><img alt="DevCloud Logo" src="devcloud-logo.png" width="150" style="max-width:100%;"></a></p>
+
 ## LICENSE
 
 [**MIT**](https://opensource.org/licenses/MIT)
