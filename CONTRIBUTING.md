@@ -1,42 +1,40 @@
-## DevUI 贡献指南
-
-### Issue 规范
-
-- issue 仅用于提交 Bug 或 Feature 以及设计相关的内容，其它内容可能会被直接关闭。
-
-- 在提交 issue 之前，请搜索相关内容是否已被提出。
 
 
-### Pull Request 规范
+## DevUI Contribution Guide
 
-- 请先 fork 一份到自己的项目下，新建一个分支用于变更。
+### Issue Standard
+
+- Issue is only used to submit bugs or Feature and design-related content. Other irrelevant content may be closed directly.
+- Please make sure to search for relevant issue before you make one.
+
+
+### Pull Request Standard
+
+- Please fork this repository to your account, and create a new branch for change.
 
   ```bash
   git checkout -b my-fix-branch master
   ```
 
-- commit 信息请遵循 [angular rules](https://github.com/angular/angular/blob/master/CONTRIBUTING.md#-commit-message-guidelines)。
+- Commit information please follow [angular rules](https://github.com/angular/angular/blob/master/CONTRIBUTING.md#-commit-message-guidelines)。
 
-- 提交 PR 前请先进行 rebase，确保 commit 记录的整洁。
-  ```
+- Please rebase before submit a PR, make sure the commit logs are clean.
+  
+  ```bash
   git rebase master -i
   git push -f
   ```
+  
+- Describe clearly in PR whether to submit `bug` or `issue`.
+  
+### Developing
 
-- 如果是修复 `bug` 或者 `issues`，请在 PR 中描述清楚。
-
-
-### 开发
-
-```bash
-
-# fork && git clone
-...
-# dev
-npm i 
-npm start
-
-```
-
-### 代码规范
-遵循 TSLint
+  ```bash
+  # fork && git clone
+  ...
+  # dev
+  npm i 
+  npm start
+  ```
+### Coding Standard
+Follow TSLint constraints

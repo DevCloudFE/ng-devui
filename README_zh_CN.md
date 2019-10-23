@@ -10,36 +10,41 @@
 </p>
 
 
+
 <h1 align="center">DevUI for Angular</h1>
-The DevUI Design Design system contains a combination of DevUI rules, Design languages, and best practices. DevUI Design allows developers to focus more on application logic, while designers focus on user experience, interactions, and processes.
+DevUI Design设计系统包含了DevUI规则、设计语言和最佳实践的资源组合。DevUI Design可以让开发人员更加专注于应用逻辑的思考，而设计人员专注于用户体验、交互和流程
 
-## Features
+## 设计特点
 
-* **Enterprise components, supporting design specifications, font icon library**
-* **Out of the box**
+* 企业级组件，提供配套设计规范、字体图标库
+* 开箱即用
 
-To see more in [devui.design](https://devui.design/home).
+了解更多请访问官方网站 [devui.design](https://devui.design/home)
 
-## Angular Support
-Now supports Angular <font color=red>`^7.0.0`</font>
+## Angular版本
 
-## Getting Started
+目前支持的angular版本<font color=red>`^7.0.0`</font>
 
-1. Create a new project
+## 快速开始
 
-``` bash
+1. 创建一个项目
+
+推荐使用`@angular/cli`创建你的项目
+
+```bash
 $ ng new New-Project
 ```
 
-2. Installation:
+2. 安装:
 
 ```bash
 $ cd New-Project
 $ npm i ng-devui
-# font icon library
+# 可选，字体图标库 
 # $ npm i @devui-design/icons
 ```
-3. Usage:
+
+3. 引入模块:
 
 ```typescript
 import { BrowserModule } from '@angular/platform-browser';
@@ -62,7 +67,7 @@ import { AppComponent } from './app.component';
 export class AppModule { }
 ```
 
-4. Import devui style into <font color=red>`angular.json`</font> file:
+4. 在 <font color=red>`angular.json`</font> 文件夹中引入样式:
 
 ```json
 {
@@ -73,28 +78,29 @@ export class AppModule { }
 }
 ```
 
-5. Debugging
+5. 启动开发测试
 
 ```bash
 $ ng serve --open
 ```
 
-## Contribution
+## 贡献
 
-Please feel free to contribute code or discuss your idea!
+欢迎贡献您的代码或者讨论您的好点子！
 
-Please make sure you read the [contributing](./CONTRIBUTING.md) guide before making a pull request.
+在提出pull request之前，请确保您阅读了我们的[贡献指南](./CONTRIBUTING_zh_CN.md)
 
-We appreciate all contributors who helped us build DevUI.
+感谢所有帮助我们构建DevUI的贡献者
 
-## Support
-Modern browsers and Internet Explorer 11+.
+## 支持
+
+支持IE11以上及其他浏览器
 
 | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="IE / Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>IE / Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Safari | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/opera/opera_48x48.png" alt="Opera" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Opera |
 | --------- | --------- | --------- | --------- | --------- |
 | IE11, Edge| last 2 versions| last 2 versions| last 2 versions| last 2 versions
 
-## Who use it
+## 谁在使用
 
 <p><a href="https://devcloud.huaweicloud.com/" target="_blank" rel="noopener noreferrer"><img alt="DevCloud Logo" src="devcloud-logo.png" width="150" style="max-width:100%;"></p>
 ## LICENSE
