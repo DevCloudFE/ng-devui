@@ -4,8 +4,8 @@
 
 ### Issue Standard
 
-- Issue is only used to submit bugs or Feature and design-related content. Other irrelevant content may be closed directly.
-- Please make sure to search for relevant issue before you make one.
+- The issue is only used to submit bugs, features or design-related contents. Other irrelevant contents may be closed directly.
+- Please make sure to search for relevant issues before you make one.
 
 
 ### Pull Request Standard
@@ -16,7 +16,7 @@
   git checkout -b my-fix-branch master
   ```
 
-- Commit information please follow [angular rules](https://github.com/angular/angular/blob/master/CONTRIBUTING.md#-commit-message-guidelines)。
+- Commit information please follow [angular rules](https://github.com/angular/angular/blob/master/CONTRIBUTING.md#-commit-message-guidelines).
 
 - Please rebase before submit a PR, make sure the commit logs are clean.
   
