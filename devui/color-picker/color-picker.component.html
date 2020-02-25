@@ -1,0 +1,32 @@
+<div class="container" *ngIf="!hide">
+  <div class="cancel-mask" [class.hide-mask]="showDefault" (click)="cancel.emit()"></div>
+  <div class="color-picker" [class.hide-shadow]="showDefault"
+    (mousemove)="mouseMove($event)"
+    (mouseup)="mouseUp()"
+    (mouseleave)="mouseUp()"
+  >
+    <d-recent-color
+      [limit]="8"
+      (confirm)="doConfirm($event)"
+    ></d-recent-color>
+    <div class="color-panel">
+      <div class="title">
+        <span [class.selected]="'basic' === selectedPanel" (click)="selectPanel('basic')">基本色</span>
+        |
+        <span [class.selected]="'more' === selectedPanel" (click)="selectPanel('more')">更多颜色</span>
+      </div>
+      <div *ngIf="'more' === selectedPanel">
+        <d-advanced-color></d-advanced-color>
+      </div>
+      <div class="color-cubes" *ngIf="'basic' === selectedPanel"> 
+        <d-basic-color
+          [basicColors]="basicColors"
+        ></d-basic-color>
+      </div>
+    </div>
+    <hr>
+    <d-color-input
+      (confirm)="doConfirm($event)"
+    ></d-color-input>
+  </div>
+</div>

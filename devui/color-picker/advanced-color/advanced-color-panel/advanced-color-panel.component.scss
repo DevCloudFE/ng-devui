@@ -1,0 +1,15 @@
+.advanced-color-panel {
+    position: relative;
+    width: calc(100% - 36px);
+    height: 100%;
+    display: inline-block;
+    .pointer {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        background-color: transparent;
+        border: 1px solid white;
+        border-radius: 10px;
+        pointer-events: none;
+    }
+}

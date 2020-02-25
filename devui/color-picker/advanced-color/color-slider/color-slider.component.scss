@@ -1,0 +1,17 @@
+.color-slider {
+    position: relative;
+    width: 20px;
+    height: 100%;
+    display: inline-block;
+    margin-left: 10px;
+    background: linear-gradient(to bottom, 
+    #ff0000, #ffff00, #00ff00, #00ffff, #0000ff, #ff00ff, #ff0000);
+    .pointer {
+        position: absolute;
+        width: 16px;
+        height: 4px;
+        margin: 0px 2px;
+        border-radius: 2px;
+        pointer-events: none;
+    }
+}

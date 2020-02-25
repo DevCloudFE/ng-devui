@@ -1,0 +1,20 @@
+<div class="advanced-color-panel"
+  [ngStyle]="{
+    'background':
+      'linear-gradient(to top, #000, transparent),'+
+      'linear-gradient(to left, '+pureColor+', #fff)'
+  }"
+  (mousedown)="mouseDown()"
+  (mousemove)="mouseMove($event)"
+  (click)="mouseClick($event)"
+  (mouseup)="mouseUp()"
+>
+  <div
+    class="pointer"
+    [ngStyle]="{
+      'left': pointer.left - 5 + 'px', 
+      'top': pointer.top - 5 + 'px',
+      'background-color': pointer.color
+    }"
+  ></div>
+</div>

@@ -1,0 +1,14 @@
+<section>
+  <div
+    class="color-cube"
+    (click)="showColorPicker()"
+    [ngStyle]="{'background-color': backgroundColor}"
+  ></div>
+  <d-color-picker
+    [hide]="hideColorPicker"
+    [color]="backgroundColor"
+    (cancel)="onCancel()"
+    (send)="receiveColor($event)"
+    (confirm)="onConfirm($event)"
+  ></d-color-picker>
+</section>

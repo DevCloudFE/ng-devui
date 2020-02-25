@@ -1,0 +1,23 @@
+@import '../../../style/theme/color';
+
+h1 + p {
+    margin-bottom: 40px;
+}
+
+h3 + p {
+    margin-bottom: 20px;
+}
+
+.demo-title {
+    font-size: 14px;
+    color: #293040;
+    line-height: 24px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.color-cube {
+    width: 30px;
+    height: 30px;
+    border: 1px solid $gray2;
+}

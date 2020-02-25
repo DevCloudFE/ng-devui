@@ -1,0 +1,14 @@
+<div class="color-slider"
+  (mousedown)="mouseDown()"
+  (mousemove)="mouseMove($event)"
+  (click)="mouseClick($event)"
+  (mouseup)="mouseUp()"
+>
+  <div
+    class="pointer"
+    [ngStyle]="{
+      'top': pointer.top - 2 + 'px',
+      'background-color': pointer.color
+    }"
+  ></div>
+</div>

@@ -1,0 +1,5 @@
+<div class="color-input">
+  <d-color-cube [color]="checkColor() ? color : '#'" [size]="30" (click)="doConfirm()"></d-color-cube>
+  <input [(ngModel)]="color" (ngModelChange)="inputChange()">
+  <button (click)=" doConfirm()">确认</button>
+</div>
