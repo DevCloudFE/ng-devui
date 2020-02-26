@@ -44,6 +44,11 @@
         span.selected {
             color: $dark2;
         }
+        .advanced-color {
+            width: 100%;
+            height: 130px;
+            user-select: none;
+        }
     }
     @include hr;
 }

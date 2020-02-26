@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { colorToPureColor, getColorByPointerPositionInSlider, getPointerPositionInSliderByColor } from '../../utils/color';
-import { ColorPickerService } from '../../services/color-picker.service';
+import { colorToPureColor, getColorByPointerPositionInSlider, getPointerPositionInSliderByColor } from '../utils/color';
+import { ColorPickerService } from '../services/color-picker.service';
 
 @Component({
-  selector: 'd-color-slider',
-  templateUrl: './color-slider.component.html',
-  styleUrls: ['./color-slider.component.scss']
+  selector: 'd-advanced-color-slider',
+  templateUrl: './advanced-color-slider.component.html',
+  styleUrls: ['./advanced-color-slider.component.scss']
 })
-export class ColorSliderComponent implements OnInit {
+export class AdvancedColorSliderComponent implements OnInit {
   color: string;
   panel = {
     top: 0,

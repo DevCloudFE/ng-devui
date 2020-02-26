@@ -25,8 +25,8 @@ export class ColorPickerService {
     const oldColor = this.color;
     this.color = color;
     if (oldColor !== color) {
-      this.updateColor.emit(setter);
-    } // setter is who set the color
+      this.updateColor.emit(setter); // setter is who set the color
+    }
   }
 
   setPureColor(color) {

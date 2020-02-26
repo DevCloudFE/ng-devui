@@ -16,7 +16,10 @@
         <span [class.selected]="'more' === selectedPanel" (click)="selectPanel('more')">更多颜色</span>
       </div>
       <div *ngIf="'more' === selectedPanel">
-        <d-advanced-color></d-advanced-color>
+        <div class="advanced-color">
+          <d-advanced-color-panel></d-advanced-color-panel>
+          <d-advanced-color-slider></d-advanced-color-slider>
+        </div>
       </div>
       <div class="color-cubes" *ngIf="'basic' === selectedPanel"> 
         <d-basic-color

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { colorToPureColor, getColorByPosition, getColorPosition } from '../../utils/color';
-import { ColorPickerService } from '../../services/color-picker.service';
+import { colorToPureColor, getColorByPosition, getColorPosition } from '../utils/color';
+import { ColorPickerService } from '../services/color-picker.service';
 
 @Component({
   selector: 'd-advanced-color-panel',
