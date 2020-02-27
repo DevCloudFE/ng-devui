@@ -51,7 +51,7 @@ export class RecentColorComponent implements OnInit {
     this.colorPickerService.setColor('');
   }
 
-  doConfirm(color) {
+  confirmColor(color) {
     this.colorPickerService.setColor(color);
     this.saveRecentlyUsed();
     this.confirm.emit();

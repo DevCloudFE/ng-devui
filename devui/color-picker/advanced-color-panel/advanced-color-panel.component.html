@@ -4,10 +4,10 @@
       'linear-gradient(to top, #000, transparent),'+
       'linear-gradient(to left, '+pureColor+', #fff)'
   }"
-  (mousedown)="mouseDown()"
-  (mousemove)="mouseMove($event)"
-  (click)="mouseClick($event)"
-  (mouseup)="mouseUp()"
+  (mousedown)="mouseDownEvent()"
+  (mousemove)="mouseMoveEvent($event)"
+  (click)="mouseClickEvent($event)"
+  (mouseup)="mouseUpEvent()"
 >
   <div
     class="pointer"

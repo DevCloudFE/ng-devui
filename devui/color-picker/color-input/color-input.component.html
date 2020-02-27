@@ -1,5 +1,5 @@
-<div class="color-input">
-  <d-color-cube [color]="checkColor() ? color : '#'" [size]="30" (click)="doConfirm()"></d-color-cube>
-  <input [(ngModel)]="color" (ngModelChange)="inputChange()">
-  <button (click)=" doConfirm()">确认</button>
+<div class="devui-color-picker-color-input">
+  <d-color-cube [color]="checkColor() ? color : '#'" [size]="30" (click)="confirmColor()"></d-color-cube>
+  <input class="devui-color-picker-input" [(ngModel)]="color" (ngModelChange)="inputChange()">
+  <button class="devui-color-picker-confirm-button" (click)="confirmColor()">确认</button>
 </div>

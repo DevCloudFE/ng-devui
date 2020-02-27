@@ -1,10 +1,9 @@
 @import '../style/mixins/component';
 
-@include color-input;
-
-.color-input {
-  button {
-      vertical-align: top;
-  }
-  @include confirm-button;
+.devui-color-picker-color-input {
+    .devui-color-picker-confirm-button {
+        vertical-align: top;
+    }
+    @include devui-color-picker-input;
+    @include devui-color-picker-confirm-button;
 }

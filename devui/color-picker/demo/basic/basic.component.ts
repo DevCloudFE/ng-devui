@@ -8,26 +8,17 @@ import { Component, OnInit } from '@angular/core';
 export class BasicComponent implements OnInit {
   backgroundColor = '#0080ff';
   hideColorPicker = true;
-  tab1acticeID = 'tab1';
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  showColorPicker() {
-    this.hideColorPicker = false;
-  }
-
-  onCancel() {
-    this.hideColorPicker = true;
-  }
-
-  receiveColor(color) {
+  setColor(color) {
     this.backgroundColor = color;
   }
 
-  onConfirm(color) {
+  confirmColor(color) {
     this.backgroundColor = color;
     this.hideColorPicker = true;
   }

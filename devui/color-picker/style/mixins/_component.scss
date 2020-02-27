@@ -1,7 +1,7 @@
 @import '../../../style/theme/color';
 
-@mixin color-cube {
-    .color-cube {
+@mixin devui-color-picker-color-cube {
+    .devui-color-picker-color-cube {
         display: inline-block;
         margin: 0 6px 6px 0;
         vertical-align: bottom;
@@ -9,22 +9,22 @@
     }
 }
 
-@mixin color-input {
-    input {
+@mixin devui-color-picker-input {
+    .devui-color-picker-input {
         width: 108px;
         height: 30px;
         line-height: 30px;
         margin: 0 5px;
         border: 1px solid $gray2;
         vertical-align: top;
-    }
-    textarea:focus, input:focus{
-        outline: none;
+        &:focus{
+            outline: none;
+        }
     }
 }
 
-@mixin confirm-button {
-    button {
+@mixin devui-color-picker-confirm-button {
+    .devui-color-picker-confirm-button {
         height: 30px;
         width: 80px;
         border: 1px solid $gray2;
@@ -32,8 +32,8 @@
     }
 }
 
-@mixin hr {
-    hr {
+@mixin devui-color-picker-hr {
+    .devui-color-picker-hr {
         margin: 15px 0;
         border: none;
         border-top: 1px dotted $gray2;

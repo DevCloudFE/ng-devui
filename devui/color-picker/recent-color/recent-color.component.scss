@@ -1,15 +1,16 @@
 @import '../style/mixins/component';
 
-@include color-cube;
+@include devui-color-picker-color-cube;
 
-.title {
-    margin: 10px 0;
-}
-
-.clear-cube {
-    position: relative;
-    width: 20px;
-    height: 20px;
-    background: linear-gradient(45deg,
-    #fff 12px, #fff 0, #f00 0px, #f00 13px, #fff 0, #fff 10px);
+.devui-color-picker-recently-used {
+    .devui-color-picker-recently-used-title {
+        margin: 10px 0;
+    }
+    .devui-color-picker-recently-used-clear-cube {
+        position: relative;
+        width: 20px;
+        height: 20px;
+        background: linear-gradient(45deg,
+        #fff 12px, #fff 0, #f00 0px, #f00 13px, #fff 0, #fff 10px);
+    }
 }

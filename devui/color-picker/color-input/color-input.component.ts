@@ -31,7 +31,7 @@ export class ColorInputComponent implements OnInit {
     }
   }
 
-  doConfirm() {
+  confirmColor() {
     if (this.checkColor()) {
       this.confirm.emit(this.color);
     }

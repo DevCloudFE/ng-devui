@@ -33,11 +33,11 @@ export class AdvancedColorSliderComponent implements OnInit {
         }
       }
     );
-    this.colorPickerService.onRootMouseMove.subscribe(
-      (event) => this.mouseMove(event)
+    this.colorPickerService.rootMouseMoveEvent.subscribe(
+      (event) => this.mouseMoveEvent(event)
     );
-    this.colorPickerService.onRootMouseUp.subscribe(
-      () => this.mouseUp()
+    this.colorPickerService.rootMouseUpEvent.subscribe(
+      () => this.mouseUpEvent()
     );
   }
 
@@ -74,16 +74,16 @@ export class AdvancedColorSliderComponent implements OnInit {
     this.pointer.top = position * this.panel.height;
   }
 
-  mouseClick(event: MouseEvent) {
+  mouseClickEvent(event: MouseEvent) {
     this.pointer.top = event.clientY - this.panel.top;
     this.getPureColor();
   }
 
-  mouseDown() {
+  mouseDownEvent() {
     this.dragging = true;
   }
 
-  mouseMove(event: MouseEvent) {
+  mouseMoveEvent(event: MouseEvent) {
     if (!this.dragging) {
       return;
     }
@@ -103,7 +103,7 @@ export class AdvancedColorSliderComponent implements OnInit {
     this.colorPickerService.setPureColor(pureColor);
   }
 
-  mouseUp() {
+  mouseUpEvent() {
     this.dragging = false;
   }
 }

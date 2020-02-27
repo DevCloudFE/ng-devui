@@ -44,11 +44,11 @@ export class AdvancedColorPanelComponent implements OnInit {
         this.getColor();
       }
     );
-    this.colorPickerService.onRootMouseMove.subscribe(
-      (event) => this.mouseMove(event)
+    this.colorPickerService.rootMouseMoveEvent.subscribe(
+      (event) => this.mouseMoveEvent(event)
     );
-    this.colorPickerService.onRootMouseUp.subscribe(
-      () => this.mouseUp()
+    this.colorPickerService.rootMouseUpEvent.subscribe(
+      () => this.mouseUpEvent()
     );
   }
 
@@ -92,17 +92,17 @@ export class AdvancedColorPanelComponent implements OnInit {
     this.pointer.top = position.y * this.panel.height;
   }
 
-  mouseClick(event: MouseEvent) {
+  mouseClickEvent(event: MouseEvent) {
     this.pointer.left = event.clientX - this.panel.left;
     this.pointer.top = event.clientY - this.panel.top;
     this.getColor();
   }
 
-  mouseDown() {
+  mouseDownEvent() {
     this.dragging = true;
   }
 
-  mouseMove(event: MouseEvent) {
+  mouseMoveEvent(event: MouseEvent) {
     if (!this.dragging) {
       return;
     }
@@ -129,7 +129,7 @@ export class AdvancedColorPanelComponent implements OnInit {
     this.colorPickerService.setColor(this.color);
   }
 
-  mouseUp() {
+  mouseUpEvent() {
     this.dragging = false;
   }
 }

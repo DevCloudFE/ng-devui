@@ -17,7 +17,7 @@ export class BasicColorComponent implements OnInit {
   ngOnInit() {
   }
 
-  clickColor(color) {
+  selectColor(color) {
     this.colorPickerService.setColor(color);
   }
 }

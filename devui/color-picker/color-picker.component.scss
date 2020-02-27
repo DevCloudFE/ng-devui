@@ -1,11 +1,11 @@
 @import '../style/theme/color';
 @import './style/mixins/component';
 
-.container {
+.devui-color-picker {
     position: relative;
 }
 
-.cancel-mask {
+.devui-color-picker-cancel-mask {
     position: fixed;
     top:0;
     left: 0;
@@ -16,7 +16,7 @@
     }
 }
 
-.color-picker {
+.devui-color-picker-foreground {
     position: absolute;
     top: 10px;
     left: 0px;
@@ -30,25 +30,22 @@
     &.hide-shadow {
         box-shadow: none;
     }
-    .recently-used{
-        padding-left: 10px;
-    }
-    .title {
-        margin: 10px 0;
-    }
-    .color-panel {
+    .devui-color-picker-color-panel {
         color: $gray1;
-        span {
-            cursor: pointer;
+        .devui-color-picker-color-panel-title {
+            margin: 10px 0;
+            .devui-color-picker-color-panel-span {
+                cursor: pointer;
+                &.selected {
+                    color: $dark2;
+                }
+            }
         }
-        span.selected {
-            color: $dark2;
-        }
-        .advanced-color {
+        .devui-color-picker-advanced-color {
             width: 100%;
             height: 130px;
             user-select: none;
         }
     }
-    @include hr;
+    @include devui-color-picker-hr;
 }
