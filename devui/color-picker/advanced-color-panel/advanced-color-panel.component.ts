@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { colorToPureColor, getColorByPosition, getColorPosition } from '../utils/color';
+import { Panel, Pointer } from '../utils/advanced-color.types';
 import { ColorPickerService } from '../services/color-picker.service';
 
 @Component({
@@ -10,13 +11,13 @@ import { ColorPickerService } from '../services/color-picker.service';
 export class AdvancedColorPanelComponent implements OnInit {
   color: string;
   pureColor: string;
-  panel = {
+  panel: Panel = {
     top: 0,
     left: 0,
     width: 0,
     height: 0
   };
-  pointer = {
+  pointer: Pointer = {
     top: 0,
     left: 0,
     color: ''

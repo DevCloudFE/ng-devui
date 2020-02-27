@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { colorToPureColor, getColorByPointerPositionInSlider, getPointerPositionInSliderByColor } from '../utils/color';
+import { Panel, Pointer } from '../utils/advanced-color.types';
 import { ColorPickerService } from '../services/color-picker.service';
 
 @Component({
@@ -9,11 +10,11 @@ import { ColorPickerService } from '../services/color-picker.service';
 })
 export class AdvancedColorSliderComponent implements OnInit {
   color: string;
-  panel = {
+  panel: Panel = {
     top: 0,
     height: 0
   };
-  pointer = {
+  pointer: Pointer = {
     top: 0,
     color: '#fff'
   };
