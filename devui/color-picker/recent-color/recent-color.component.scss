@@ -1,12 +1,12 @@
 @import '../style/mixins/component';
 
-@include devui-color-picker-color-cube;
+@include color-cube;
 
-.devui-color-picker-recently-used {
-    .devui-color-picker-recently-used-title {
+.recently-used {
+    .title {
         margin: 10px 0;
     }
-    .devui-color-picker-recently-used-clear-cube {
+    .clear-cube {
         position: relative;
         width: 20px;
         height: 20px;
