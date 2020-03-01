@@ -104,8 +104,8 @@ export const routesConfig = [
       type: '数据录入',
       name: 'ColorPicker',
       cnName: '颜色选择器',
-      description: '颜色选择器用于更换选中元素的色彩。',
-      tmw: '当用户需要更换色块或元素背景的颜色时使用。'
+      description: '输入或选择颜色的控件。',
+      tmw: '用户可输入颜色，或在选色面板进行选择。颜色选择器会在本地保存用户最近使用数据。'
     }
   },
   {

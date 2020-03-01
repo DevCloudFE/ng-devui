@@ -29,6 +29,8 @@
     background-color: white;
     &.hide-shadow {
         box-shadow: none;
+        position: inherit;
+        z-index: 0;
     }
     .color-panel {
         color: $gray1;

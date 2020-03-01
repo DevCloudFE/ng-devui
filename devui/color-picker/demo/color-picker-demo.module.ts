@@ -7,6 +7,7 @@ import { ColorPickerModule } from '../../color-picker';
 import { ColorPickerDemoComponent } from './color-picker-demo.component';
 import { DevUIApiComponent } from 'ng-devui//shared/devui-api/devui-api.component';
 import { BasicComponent } from './basic/basic.component';
+import { TapComponent } from './tap/tap.component';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
 import { DevUIApiModule } from 'ng-devui//shared/devui-api/devui-api.module';
 
@@ -29,6 +30,7 @@ import { DevUIApiModule } from 'ng-devui//shared/devui-api/devui-api.module';
   declarations: [
     ColorPickerDemoComponent,
     BasicComponent,
+    TapComponent,
   ],
   entryComponents: [
     ColorPickerDemoComponent,
