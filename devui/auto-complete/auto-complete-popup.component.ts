@@ -9,7 +9,7 @@ import { DevUIConfig } from 'ng-devui/devui.config';
 @Component({
   selector: 'd-auto-complete-popup',
   templateUrl: './auto-complete-popup.component.html',
-  // tslint:disable-next-line:use-host-property-decorator
+  // tslint:disable-next-line:no-host-metadata-property
   host: {
     '[class]': '"devui-dropdown-menu "  +  (cssClass ? cssClass : "")',
     '[style.display]': 'isOpen && (source?.length || noResultItemTemplate) ? "inline-block" : "none"',

@@ -52,6 +52,9 @@
                   "maximumError": "5mb"
                 }
               ]
+            },
+            "es5": {
+              "tsConfig": "src/tsconfig.app.es5.json"
             }
           }
         },
@@ -63,6 +66,9 @@
           "configurations": {
             "production": {
               "browserTarget": "devui:build:production"
+            },
+            "es5": {
+              "browserTarget": "devui:build:es5"
             }
           }
         },

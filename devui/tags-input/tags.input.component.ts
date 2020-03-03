@@ -62,8 +62,8 @@ export class TagsInputComponent implements OnInit, OnDestroy, OnChanges {
  */
   @Output() valueChange = new EventEmitter();
 
-  @ViewChild('tagInput') tagInputElement: ElementRef;
-  @ViewChild('selectBox') selectBoxElement: ElementRef;
+  @ViewChild('tagInput', { static: true }) tagInputElement: ElementRef;
+  @ViewChild('selectBox', { static: true }) selectBoxElement: ElementRef;
 
   newTag = '';
   showSuggestionList = false;

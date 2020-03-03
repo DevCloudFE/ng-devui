@@ -51,10 +51,10 @@ export class DataTableColumnTmplComponent implements OnChanges, OnDestroy {
   @Output() filterChange = new EventEmitter<FilterConfig[]>();
   @Input() filterMultiple = true;
   @Input() beforeFilter: (value) => boolean | Promise<boolean> | Observable<boolean>;
-  @ContentChild(DataTableCellViewTmplComponent) cellCmp: DataTableCellViewTmplComponent;
-  @ContentChild(DataTableCellEditTmplComponent) cellEditCmp: DataTableCellEditTmplComponent;
-  @ContentChild(DataTableCellFilterTmplComponent) cellFilterCmp: DataTableCellFilterTmplComponent;
-  @ContentChild(DataTableHeadCellTmplComponent) headCellTmpl: DataTableHeadCellTmplComponent;
+  @ContentChild(DataTableCellViewTmplComponent, { static: false }) cellCmp: DataTableCellViewTmplComponent;
+  @ContentChild(DataTableCellEditTmplComponent, { static: false }) cellEditCmp: DataTableCellEditTmplComponent;
+  @ContentChild(DataTableCellFilterTmplComponent, { static: false }) cellFilterCmp: DataTableCellFilterTmplComponent;
+  @ContentChild(DataTableHeadCellTmplComponent, { static: false }) headCellTmpl: DataTableHeadCellTmplComponent;
   @Input() customFilterTemplate: TemplateRef<any>;
   orderChange = new EventEmitter<SimpleChanges>();
   _formatter: (item: any, row?: any) => string;

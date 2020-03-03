@@ -63,7 +63,7 @@ export class SingleUploadComponent {
   @Output() deleteUploadedFileEvent: EventEmitter<any> = new EventEmitter();
   @Output() fileDrop: EventEmitter<any> = new EventEmitter();
   @Output() fileOver: EventEmitter<any> = new EventEmitter();
-  @ViewChild('dSingleUploadView') singleUploadViewComponent: SingleUploadViewComponent;
+  @ViewChild('dSingleUploadView', { static: true }) singleUploadViewComponent: SingleUploadViewComponent;
   UploadStatus = UploadStatus;
   isDropOVer = false;
 

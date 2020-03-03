@@ -18,7 +18,7 @@ import * as HighLight from 'highlight.js/lib/highlight';
 export class DevUIHighlightComponent implements OnInit, AfterViewInit {
   // response: HighlightResult;
   _code;
-  @ViewChild('codeEl') codeElement: ElementRef;
+  @ViewChild('codeEl', { static: true }) codeElement: ElementRef;
   @Input() language: string;
 
   @Input()

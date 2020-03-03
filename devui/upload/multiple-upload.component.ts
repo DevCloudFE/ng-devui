@@ -60,7 +60,7 @@ export class MultipleUploadComponent {
   @Output() deleteUploadedFileEvent: EventEmitter<any> = new EventEmitter();
   @Output() fileDrop: EventEmitter<any> = new EventEmitter();
   @Output() fileOver: EventEmitter<any> = new EventEmitter();
-  @ViewChild('dMultipleUploadView') multipleUploadViewComponent: MultipleUploadViewComponent;
+  @ViewChild('dMultipleUploadView', { static: true }) multipleUploadViewComponent: MultipleUploadViewComponent;
 
 
   isDropOVer = false;

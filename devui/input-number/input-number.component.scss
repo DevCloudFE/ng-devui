@@ -105,7 +105,7 @@
     height: 46px;
   }
 
-  & /deep/ .svg-icon-arrow {
+  & ::ng-deep .svg-icon-arrow {
     width: 16px;
     height: 16px;
   }
@@ -118,7 +118,7 @@
     height: 30px;
   }
 
-  & /deep/ .svg-icon-arrow {
+  & ::ng-deep .svg-icon-arrow {
     width: 13px;
     height: 13px;
   }

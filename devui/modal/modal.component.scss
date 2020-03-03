@@ -46,7 +46,7 @@
   background-color: $dark;
 }
 
-:host /deep/ .modal-content{
+:host ::ng-deep .modal-content{
   position: relative;
   border-radius: 2px;
   border: none;
@@ -82,7 +82,7 @@
   }
 }
 
-:host /deep/ .d-btn {
+:host ::ng-deep .d-btn {
     display: inline-block;
     margin-bottom: 0;
     font-weight: normal;

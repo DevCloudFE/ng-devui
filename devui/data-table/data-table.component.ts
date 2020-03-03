@@ -212,22 +212,22 @@ export class DataTableComponent implements OnDestroy, OnInit, AfterContentInit {
   @ContentChildren(DataTableColumnTmplComponent) columns: QueryList<
     DataTableColumnTmplComponent
   >;
-  @ContentChild(DataTableHeadTmplComponent)
+  @ContentChild(DataTableHeadTmplComponent, { static: false })
   headTemplate: DataTableHeadTmplComponent;
-  @ContentChild(DataTableFootTmplComponent)
+  @ContentChild(DataTableFootTmplComponent, { static: false })
   footTemplate: DataTableFootTmplComponent;
-  @ContentChild(DataTablePagerTmplComponent)
+  @ContentChild(DataTablePagerTmplComponent, { static: false })
   pagerTemplate: DataTablePagerTmplComponent;
-  @ContentChild('noResultTemplateRef') noResultTemplate: TemplateRef<any>;
-  @ViewChild(DataTableTmplsComponent)
+  @ContentChild('noResultTemplateRef', { static: false }) noResultTemplate: TemplateRef<any>;
+  @ViewChild(DataTableTmplsComponent, { static: true })
   dataTableTemplates: DataTableTmplsComponent;
-  @ViewChild('showDetailColumnRef')
+  @ViewChild('showDetailColumnRef', { static: true })
   showDetailColumn: DataTableColumnTmplComponent;
-  @ViewChild('checkableColumnRef')
+  @ViewChild('checkableColumnRef', { static: true })
   checkableColumn: DataTableColumnTmplComponent;
-  @ViewChild('fixHeaderRef') fixHeaderRefElement: ElementRef;
-  @ViewChild('resizeBar') resizeBarRefElement: ElementRef;
-  @ViewChild('tableView') tableViewRefElement: ElementRef;
+  @ViewChild('fixHeaderRef', { static: false }) fixHeaderRefElement: ElementRef;
+  @ViewChild('resizeBar', { static: true }) resizeBarRefElement: ElementRef;
+  @ViewChild('tableView', { static: true }) tableViewRefElement: ElementRef;
 
   _dataSource: any[] = [];
   _pageAllChecked = false;

@@ -24,7 +24,7 @@ export class ToastComponent implements AfterViewInit, OnDestroy {
 
   @Output() valueChange: EventEmitter<Message[]> = new EventEmitter<Message[]>();
 
-  @ViewChild('container') containerViewChild: ElementRef;
+  @ViewChild('container', { static: true }) containerViewChild: ElementRef;
 
   _value: Array<Message>;
 

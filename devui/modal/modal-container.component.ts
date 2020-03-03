@@ -26,7 +26,7 @@ export class ModalContainerComponent implements OnInit {
   }>;
   @Input() html: boolean;
   @Input() onClose: EventListener;
-  @ViewChild(ModalContentDirective) modalContentHost: ModalContentDirective;
+  @ViewChild(ModalContentDirective, { static: true }) modalContentHost: ModalContentDirective;
   @Input() dialogtype?: string;
 
   constructor(private sanitizer: DomSanitizer) {}

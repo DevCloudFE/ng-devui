@@ -3,7 +3,7 @@
 :host {
   display: block;
 }
-/deep/ .devui-accordion-menu,
+::ng-deep .devui-accordion-menu,
 .devui-accordion-menu {
   width: 100%;
   overflow-y: auto;

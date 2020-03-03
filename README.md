@@ -21,7 +21,7 @@ The DevUI Design Design system contains a combination of DevUI rules, Design lan
 To see more in [devui.design](https://devui.design/home).
 
 ## Angular Support
-Now supports Angular <font color=red>`^7.0.0`</font>
+Now supports Angular <font color=red>`^8.0.0`</font>
 
 ## Getting Started
 
@@ -43,6 +43,7 @@ $ npm i ng-devui
 
 ```typescript
 import { BrowserModule } from '@angular/platform-browser';
+// need for animations
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { DevUIModule } from 'ng-devui';

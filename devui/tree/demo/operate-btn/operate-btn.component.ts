@@ -8,7 +8,7 @@ import { ITreeItem, OperableTreeComponent, TreeNode } from 'ng-devui';
 })
 export class OperateBtnComponent {
   currentSelectedNode;
-  @ViewChild('operableTree') operableTree: OperableTreeComponent;
+  @ViewChild('operableTree', { static: true }) operableTree: OperableTreeComponent;
   data = [{
     'title': '首页'
   }, {
