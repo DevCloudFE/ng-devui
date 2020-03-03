@@ -12,6 +12,6 @@ export class TabComponent {
   @Input() id: number |string;
   @Input() title: string;
   @Input() disabled = false;
-  @ContentChild(TabContentDirective) contentTpl: TabContentDirective;
-  @ContentChild(TabTitleDirective) titleTpl: TabTitleDirective;
+  @ContentChild(TabContentDirective, { static: false }) contentTpl: TabContentDirective;
+  @ContentChild(TabTitleDirective, { static: false }) titleTpl: TabTitleDirective;
 }

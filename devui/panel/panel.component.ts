@@ -18,8 +18,8 @@ export class PanelComponent {
   @Input() type: PanelType = 'default';
   @Input() heading: string;
   @Input() isCollapsed: boolean;
-  @ContentChild(PanelHeaderComponent) panelHeader;
-  @ContentChild(PanelFooterComponent) panelFooter;
+  @ContentChild(PanelHeaderComponent, { static: false }) panelHeader;
+  @ContentChild(PanelFooterComponent, { static: false }) panelFooter;
 
   toggleBody() {
     if (this.isCollapsed !== undefined) {

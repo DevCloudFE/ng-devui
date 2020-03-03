@@ -29,9 +29,9 @@ export class SearchComponent implements ControlValueAccessor, OnInit, OnDestroy,
   @Input() isKeyupSearch = false;
   @Input() delay = 300;
   @Output() searchFn = new EventEmitter<string>();
-  @ViewChild('filterInput') filterInputElement: ElementRef;
-  @ViewChild('line') lineElement: ElementRef;
-  @ViewChild('clearIcon') clearIconElement: ElementRef;
+  @ViewChild('filterInput', { static: true }) filterInputElement: ElementRef;
+  @ViewChild('line', { static: true }) lineElement: ElementRef;
+  @ViewChild('clearIcon', { static: true }) clearIconElement: ElementRef;
   private subscription: Subscription;
   private onChange = (_: any) => null;
   private onTouch = () => null;

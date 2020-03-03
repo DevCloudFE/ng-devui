@@ -7,6 +7,6 @@ import { Component, ChangeDetectionStrategy, ContentChild, TemplateRef } from '@
 })
 export class DataTableCellFilterTmplComponent {
 
-  @ContentChild(TemplateRef) template: TemplateRef<any>;
+  @ContentChild(TemplateRef, { static: true }) template: TemplateRef<any>;
 
 }

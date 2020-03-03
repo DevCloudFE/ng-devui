@@ -54,8 +54,8 @@ export class PopperComponent implements AfterViewInit, OnDestroy {
   protected popperParent;
 
   @Output() openChange = new EventEmitter();
-  @ViewChild('popperActivator') popperActivator: ElementRef;
-  @ViewChild('popperContainer') popperContainer: ElementRef;
+  @ViewChild('popperActivator', { static: true }) popperActivator: ElementRef;
+  @ViewChild('popperContainer', { static: true }) popperContainer: ElementRef;
 
   static nextTick(fn) {
     // Force to run fn after current data changed.

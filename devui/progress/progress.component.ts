@@ -20,7 +20,7 @@ export class ProgressComponent implements OnInit , OnChanges {
   @Input() height = '20px';
   @Input() strokeWidth = 6; // 设置圈形进度条宽度，单位是进度条与画布宽度的百分比
   @Input() isCircle = false;
-  @ContentChild(TemplateRef) customViewTemplate: TemplateRef<any>;
+  @ContentChild(TemplateRef, { static: false }) customViewTemplate: TemplateRef<any>;
   trailPath: { [key: string]: string };
   strokePath: { [key: string]: string };
   pathString: string;

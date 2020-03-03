@@ -294,7 +294,7 @@ ul.devui-dropdown-menu > ul.list-unstyled {
 
 }
 
-:host /deep/ .select-checkbox{
+:host ::ng-deep .select-checkbox{
    label{
     width: 100%;
     .devui-checkbox-label{
@@ -308,7 +308,7 @@ ul.devui-dropdown-menu > ul.list-unstyled {
 }
 
 // .dropdown-item.selected::ng-deep  .select-checkbox,
-// .dropdown-item.active /deep/  .select-checkbox {
+// .dropdown-item.active ::ng-deep  .select-checkbox {
 //   .checkbox-label {
 //     color: $focus1;
 //   }
@@ -328,8 +328,8 @@ ul.dropdown-menu > ul.list-unstyled > li.disabled:hover {
 // }
 
 
-:host /deep/ ul.dropdown-menu > ul.list-unstyled > li.disabled .devui-checkbox.disabled-unchecked,
-:host /deep/ ul.dropdown-menu > ul.list-unstyled > li.disabled .devui-checkbox.disabled-checked{
+:host ::ng-deep ul.dropdown-menu > ul.list-unstyled > li.disabled .devui-checkbox.disabled-unchecked,
+:host ::ng-deep ul.dropdown-menu > ul.list-unstyled > li.disabled .devui-checkbox.disabled-checked{
   opacity: 1;
 }
 .no-data-tip {

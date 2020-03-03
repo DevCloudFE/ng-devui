@@ -32,8 +32,8 @@ export class ModalComponent implements OnInit {
   @Input() beforeHidden: () => boolean | Promise<boolean> | Observable<boolean>;
   @Input() draggable: boolean;
 
-  @ViewChild(ModalContainerDirective) modalContainerHost: ModalContainerDirective;
-  @ViewChild('dialog') dialogElement: ElementRef;
+  @ViewChild(ModalContainerDirective, { static: true }) modalContainerHost: ModalContainerDirective;
+  @ViewChild('dialog', { static: true }) dialogElement: ElementRef;
   animateState: string = this.showAnimate ? 'void' : '';
   draggableHandleEl: HTMLElement;
 

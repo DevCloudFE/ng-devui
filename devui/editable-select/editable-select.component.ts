@@ -40,7 +40,7 @@ export class EditableSelectComponent implements ControlValueAccessor, OnInit, On
   @Input() minLength: number;
   @Input() maxHeight: number;
   @Input() searchFn: (term: string) => Observable<any[]>;
-  @ViewChild(AutoCompleteDirective) autoCompleteDirective: AutoCompleteDirective;
+  @ViewChild(AutoCompleteDirective, { static: true }) autoCompleteDirective: AutoCompleteDirective;
   multiItems: any[] = [];
   inputValue: any;
   subscription;

@@ -33,7 +33,7 @@ export class DrawerComponent implements OnInit {
   @Input() width = '300px';
   @Input() isCover = true;
   @Input() fullScreen = false;
-  @ViewChild(DrawerContentDirective) drawerContentHost: DrawerContentDirective;
+  @ViewChild(DrawerContentDirective, { static: true }) drawerContentHost: DrawerContentDirective;
   @Input() backdropCloseable: boolean;
   @Input() escKeyCloseable: boolean;
   @Input() beforeHidden: () => boolean | Promise<boolean> | Observable<boolean>;

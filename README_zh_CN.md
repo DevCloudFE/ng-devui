@@ -23,7 +23,7 @@ DevUI Design设计系统包含了DevUI规则、设计语言和最佳实践的资
 
 ## Angular版本
 
-目前支持的angular版本<font color=red>`^7.0.0`</font>
+当前支持的angular版本<font color=red>`^8.0.0`</font>
 
 ## 快速开始
 
@@ -48,6 +48,7 @@ $ npm i ng-devui
 
 ```typescript
 import { BrowserModule } from '@angular/platform-browser';
+// DevUI部分组件依赖angular动画，需要引入animations模块
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { DevUIModule } from 'ng-devui';

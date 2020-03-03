@@ -21,7 +21,7 @@ import { DevUIConfig } from 'ng-devui/devui.config';
   styleUrls: ['./multiple-upload-view.component.scss'],
 })
 export class MultipleUploadViewComponent extends UploadComponent {
-  @ViewChild('dUploadedFiles') uploadedFilesComponent: UploadedFilesComponent;
+  @ViewChild('dUploadedFiles', { static: true }) uploadedFilesComponent: UploadedFilesComponent;
   @Input() uploadOptions: IUploadOptions;
   @Input() preloadFilesRef: TemplateRef<any>;
   @Input() uploadedFiles: Array<Object> = [];

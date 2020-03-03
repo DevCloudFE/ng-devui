@@ -7,7 +7,7 @@ import { ICheckboxInput, ITreeItem, OperableTreeComponent, TreeNode } from 'ng-d
 })
 export class CheckableComponent implements OnInit {
 
-  @ViewChild('operableTree1') operableTreeComponent: OperableTreeComponent;
+  @ViewChild('operableTree1', { static: true }) operableTreeComponent: OperableTreeComponent;
   currentSelectedNode;
   checkNote;
 

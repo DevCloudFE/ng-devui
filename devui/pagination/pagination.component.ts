@@ -102,7 +102,7 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
   litePaginatorOptions: any[] = [];
   private litePaginatorOptionsLengthCache = 0;
   showConfig = false;
-  @ViewChild('litePaginator') litePaginator: ElementRef;
+  @ViewChild('litePaginator', { static: false }) litePaginator: ElementRef;
   private configButtonLoseFocusHandler: Subscription | null = null;
   private loseFocusListener: any = null;
 

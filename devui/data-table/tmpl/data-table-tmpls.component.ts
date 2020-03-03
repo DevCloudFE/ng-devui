@@ -15,18 +15,18 @@ import { DefaultIcons } from 'ng-devui/tree-select';
 })
 export class DataTableTmplsComponent {
 
-  @ViewChild('defaultHeadTemplate') headTemplate: TemplateRef<any>;
-  @ViewChild('filterContentTmpl') filterContentTmpl: TemplateRef<any>;
-  @ViewChild('defaultPagerTemplate') pagerTemplate: TemplateRef<any>;
-  @ViewChild('textCellTemplate') text: DataTableCellTmplComponent;
-  @ViewChild('numberCellTemplate') number: DataTableCellTmplComponent;
-  @ViewChild('telCellTemplate') tel: DataTableCellTmplComponent;
-  @ViewChild('mailCellTemplate') mail: DataTableCellTmplComponent;
-  @ViewChild('imageCellTemplate') image: DataTableCellTmplComponent;
-  @ViewChild('selectCellTemplate') select: DataTableCellTmplComponent;
-  @ViewChild('dateCellTemplate') date: DataTableCellTmplComponent;
-  @ViewChild('AdvancedHeadTmpl') AdvancedHeadTmpl: DataTableHeadTmplComponent;
-  @ViewChild('treeSelectCellTemplate') treeSelect: DataTableCellTmplComponent;
+  @ViewChild('defaultHeadTemplate', { static: true }) headTemplate: TemplateRef<any>;
+  @ViewChild('filterContentTmpl', { static: false }) filterContentTmpl: TemplateRef<any>;
+  @ViewChild('defaultPagerTemplate', { static: true }) pagerTemplate: TemplateRef<any>;
+  @ViewChild('textCellTemplate', { static: true }) text: DataTableCellTmplComponent;
+  @ViewChild('numberCellTemplate', { static: true }) number: DataTableCellTmplComponent;
+  @ViewChild('telCellTemplate', { static: true }) tel: DataTableCellTmplComponent;
+  @ViewChild('mailCellTemplate', { static: true }) mail: DataTableCellTmplComponent;
+  @ViewChild('imageCellTemplate', { static: true }) image: DataTableCellTmplComponent;
+  @ViewChild('selectCellTemplate', { static: true }) select: DataTableCellTmplComponent;
+  @ViewChild('dateCellTemplate', { static: true }) date: DataTableCellTmplComponent;
+  @ViewChild('AdvancedHeadTmpl', { static: true }) AdvancedHeadTmpl: DataTableHeadTmplComponent;
+  @ViewChild('treeSelectCellTemplate', { static: true }) treeSelect: DataTableCellTmplComponent;
   datePicker;
   showDetail;
   rowItem = undefined;

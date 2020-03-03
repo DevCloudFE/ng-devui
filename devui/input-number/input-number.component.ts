@@ -38,8 +38,8 @@ export class InputNumberComponent implements ControlValueAccessor, OnChanges, On
   @Input() disabled = false;
   @Input() size: InputSizeType = '';
   @Output() whileValueChanging = new EventEmitter<number>();
-  @ViewChild('incButton') incButton: ElementRef;
-  @ViewChild('decButton') decButton: ElementRef;
+  @ViewChild('incButton', { static: true }) incButton: ElementRef;
+  @ViewChild('decButton', { static: true }) decButton: ElementRef;
 
   private value: number;
   private incListener: Observable<any>;

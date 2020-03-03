@@ -49,10 +49,10 @@ export class OperableTreeComponent {
   @Output() nodeEdited: EventEmitter<any> = new EventEmitter();
   @Output() editValueChange: EventEmitter<any> = new EventEmitter();
   @Output() nodeOnDrop: EventEmitter<any> = new EventEmitter();
-  @ViewChild('operableTree') operableTree: TreeComponent;
-  @ContentChild('iconTemplate') iconTemplate;
-  @ContentChild('operatorTemplate') operatorTemplate;
-  @ContentChild('statusTemplate') statusTemplate;
+  @ViewChild('operableTree', { static: true }) operableTree: TreeComponent;
+  @ContentChild('iconTemplate', { static: false }) iconTemplate;
+  @ContentChild('operatorTemplate', { static: false }) operatorTemplate;
+  @ContentChild('statusTemplate', { static: false }) statusTemplate;
   private addingNode = false;
 
   onDragstart(event, treeNode) {

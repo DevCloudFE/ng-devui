@@ -41,7 +41,7 @@ export class DevUIApiComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    document.querySelectorAll('pre code').forEach((block) => {
+    Array.from(document.querySelectorAll('pre code')).forEach((block) => {
       hljs.highlightBlock(block);
     });
   }

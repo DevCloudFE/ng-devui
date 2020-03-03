@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, Input, OnChanges, SimpleChanges } f
 @Component({
   selector: 'd-hightlight',
   template: ``,
-  // tslint:disable-next-line:use-host-property-decorator
+  // tslint:disable-next-line:no-host-metadata-property
   host: {
     '[innerHTML]': 'hightlightHtml',
     'display': 'inline'

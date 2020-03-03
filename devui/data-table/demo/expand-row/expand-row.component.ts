@@ -27,9 +27,9 @@ import { TableExpandConfig } from '../../data-table.model';
   ]
 })
 export class ExpandRowComponent implements OnInit, AfterContentInit {
-  @ViewChild('quickAddRowTip') quickAddRowTip: ElementRef;
-  @ViewChild('quickAddRowContent') quickAddRowContent: ElementRef;
-  @ViewChild('addSubRowContent') addSubRowContent: ElementRef;
+  @ViewChild('quickAddRowTip', { static: true }) quickAddRowTip: ElementRef;
+  @ViewChild('quickAddRowContent', { static: true }) quickAddRowContent: ElementRef;
+  @ViewChild('addSubRowContent', { static: true }) addSubRowContent: ElementRef;
 
   basicDataSource: Array<SourceType> = JSON.parse(JSON.stringify(originSource.slice(0, 6)));
   genderSource = ['male', 'female'];
