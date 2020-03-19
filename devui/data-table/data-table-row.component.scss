@@ -3,3 +3,62 @@
 svg.svg-icon-arrow > g > polygon {
   fill: $dark1;
 }
+
+:host ::ng-deep d-button button.d-btn.d-btn-icon{
+  padding:0 !important;
+}
+
+:host ::ng-deep .cell-placeholder {
+  display: inline-block;
+  height: 16px;;
+}
+:host ::ng-deep .cell-container {
+  position: relative;
+  height: 24px;;
+}
+
+:host ::ng-deep .cell-container-inner {
+  position: absolute;
+  max-width: 100%;
+  &.modify-holder {
+    padding-right: 20px;
+    & .cell-modify {
+      display: none;
+      cursor: pointer;
+      position: absolute;
+      right: 0;
+      cursor: pointer;
+      & > svg {
+        vertical-align: middle;
+        & > g > g {
+          fill: $dark1;
+        }
+      }
+
+      &:hover > svg > g > g{
+        fill: $hover-control;
+      }
+    }
+
+    &:hover .cell-modify {
+      display: inline;
+    }
+  }
+}
+
+:host ::ng-deep .not-break {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  word-spacing: normal;
+  word-wrap: normal;
+}
+
+:host ::ng-deep .cell-editable {
+  cursor: pointer;
+  margin-left: -5px;
+  padding-left: 5px;
+  &:hover {
+    background: #E8F0F0;
+  }
+}

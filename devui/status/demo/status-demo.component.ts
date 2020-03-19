@@ -5,7 +5,7 @@ import {
 import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 
 @Component({
-    selector: 'ave-demo-status',
+    selector: 'd-demo-status',
     templateUrl: './status-demo.component.html'
 })
 export class StatusDemoComponent {

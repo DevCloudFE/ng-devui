@@ -1,0 +1,23 @@
+<section>
+    <div>
+      <d-pagination [size]="'sm'" [total]="pager1.total" [(pageSize)]="pager1.pageSize" [(pageIndex)]="pager1.pageIndex" [canViewTotal]="true"
+        [canChangePageSize]="true" [canJumpPage]="true" [maxItems]="5" [showTruePageIndex]="true">
+      </d-pagination>
+    </div>
+    <div>
+      <d-pagination [size]="'sm'" [total]="pager2.total" [(pageSize)]="pager2.pageSize" [(pageIndex)]="pager2.pageIndex" [canViewTotal]="true"
+        [canChangePageSize]="true" [canJumpPage]="true" [maxItems]="5" [showTruePageIndex]="true">
+      </d-pagination>
+    </div>
+    </section>
+        <section>
+    <h4>total is 0</h4>
+    <div>
+      <d-pagination [size]="'sm'" [total]="pager3.total" [(pageSize)]="pager3.pageSize" [(pageIndex)]="pager3.pageIndex" [canViewTotal]="true"
+        [canChangePageSize]="true" [canJumpPage]="true" [maxItems]="5" >
+      </d-pagination>
+      <d-button bsStyle="stress" circled="true" size="sm" (btnClick) = "setTotal(0)">设置total为0</d-button>
+      <d-button bsStyle="stress" circled="true" size="sm" (btnClick) = "setTotal(5)">设置total为5</d-button>
+      <d-button bsStyle="stress" circled="true" size="sm"  (btnClick) = "setTotal(15)">设置total为15</d-button>
+    </div>
+</section>

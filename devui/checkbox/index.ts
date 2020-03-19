@@ -1,2 +1,1 @@
-export * from './checkbox.module';
-export * from './checkbox.component';
+export * from './public-api';

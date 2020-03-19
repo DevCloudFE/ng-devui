@@ -2,7 +2,7 @@
 @import '../style/theme/variables';
 @import '../style/mixins/index';
 
-:host.popover {
+:host.devui-popover {
   position: absolute;
   top: 0;
   left: 0;
@@ -12,7 +12,9 @@
   border: none;
   border-radius: 2px;
   z-index: 1060;
+
   > .arrow {
+    border-width: 8px;
     &, &::after {
       position: absolute;
       display: block;
@@ -20,16 +22,10 @@
       height: 0;
       border-color: transparent;
       border-style: solid;
-      border-width: 8px;
     }
-
-    & {
-      border-width: 8px;
-    }
-
-    &:after {
+    
+    &::after {
       content: "";
-      border-width: 10px;
     }
   }
 
@@ -68,24 +64,137 @@
   &.top {
     margin-top: -10px;
     box-shadow: -5px 5px 20px 0px rgba($dark1, .2);
+
+    &.devui-popover- {
+      &success > .arrow {
+        border-top-color: $status-green;
+      }
+
+      &error > .arrow {
+        border-top-color: $status-red;
+      }
+
+      &warning > .arrow {
+        border-top-color: $status-yellow;
+      }
+
+      &default > .arrow {
+        border-top-color: $dropdown-overlay;
+      }
+
+      &info > .arrow {
+        border-top-color: $status-blue;
+      }
+    }
   }
 
   &.bottom {
     margin-top: 10px;
     box-shadow: 5px -5px 20px 0px rgba($dark1, .2);
+
+    &.devui-popover- {
+      &success > .arrow {
+        border-bottom-color: $status-green;
+      }
+
+      &error > .arrow {
+        border-bottom-color: $status-red;
+      }
+
+      &warning > .arrow {
+        border-bottom-color: $status-yellow;
+      }
+
+      &default > .arrow {
+        border-bottom-color: $dropdown-overlay;
+      }
+
+      &info > .arrow {
+        border-bottom-color: $status-blue;
+      }
+    }
   }
 
   &.left {
     margin-left: -10px;
     box-shadow: 5px -5px 20px 0px rgba($dark1, .2);
+
+    &.devui-popover- {
+      &success > .arrow {
+        border-left-color: $status-green;
+      }
+
+      &error > .arrow {
+        border-left-color: $status-red;
+      }
+
+      &warning > .arrow {
+        border-left-color: $status-yellow;
+      }
+
+      &default > .arrow {
+        border-left-color: $dropdown-overlay;
+      }
+
+      &info > .arrow {
+        border-left-color: $status-blue;
+      }
+    }
   }
 
   &.right {
     margin-left: 10px;
     box-shadow: -5px 5px 20px 0px rgba($dark1, .2);
+
+    &.devui-popover- {
+      &success > .arrow {
+        border-right-color: $status-green;
+      }
+
+      &error > .arrow {
+        border-right-color: $status-red;
+      }
+
+      &warning > .arrow {
+        border-right-color: $status-yellow;
+      }
+
+      &default > .arrow {
+        border-right-color: $dropdown-overlay;
+      }
+
+      &info > .arrow {
+        border-right-color: $status-blue;
+      }
+    }
+  }
+
+  &.devui-popover-success {
+    background-color: $status-green;
+    color: $white;
+  }
+
+  &.devui-popover-error {
+    background-color: $status-red;
+    color: $white;
+  }
+
+  &.devui-popover-info {
+    background-color: $status-blue;
+    color: $white;
+  }
+
+  &.devui-popover-default {
+    background-color: $dropdown-overlay;
+    color: $dark1;
+  }
+
+  &.devui-popover-warning {
+    background-color: $status-yellow;
+    color: $dark;
   }
 }
 
-.popover-content {
+.devui-popover-content {
   padding: 9px 14px;
 }

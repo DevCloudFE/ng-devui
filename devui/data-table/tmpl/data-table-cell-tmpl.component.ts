@@ -4,14 +4,14 @@ import { DataTableCellEditTmplComponent } from './data-table-cell-edit-tmpl.comp
 import { DataTableCellFilterTmplComponent } from './data-table-cell-filter-tmpl.component';
 
 @Component({
-  selector: 'ave-cell-template',
+  selector: 'd-cell-template',
   template: '',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DataTableCellTmplComponent {
   @Input() type: string;
-  @ContentChild(DataTableCellViewTmplComponent) view: DataTableCellViewTmplComponent;
-  @ContentChild(DataTableCellEditTmplComponent) edit: DataTableCellEditTmplComponent;
-  @ContentChild(DataTableCellFilterTmplComponent) filter: DataTableCellFilterTmplComponent;
+  @ContentChild(DataTableCellViewTmplComponent, { static: true }) view: DataTableCellViewTmplComponent;
+  @ContentChild(DataTableCellEditTmplComponent, { static: true }) edit: DataTableCellEditTmplComponent;
+  @ContentChild(DataTableCellFilterTmplComponent, { static: true }) filter: DataTableCellFilterTmplComponent;
 
 }

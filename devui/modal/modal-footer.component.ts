@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'ave-modal-footer',
+  selector: 'd-modal-footer',
   templateUrl: './modal-footer.component.html',
   styleUrls: ['./modal-footer.component.scss'],
 })

@@ -1,56 +1,57 @@
 import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
-  Input,
-  Output,
   EventEmitter,
   forwardRef,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges,
   TemplateRef,
-  ViewEncapsulation,
-  ChangeDetectorRef
 } from '@angular/core';
-import {
-  ControlValueAccessor,
-  NG_VALUE_ACCESSOR
-} from '@angular/forms';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 
 @Component({
-  selector: 'ave-checkbox',
+  selector: 'd-checkbox',
   templateUrl: './checkbox.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./checkbox.component.scss'],
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => CheckBoxComponent),
-    multi: true
-  }]
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => CheckBoxComponent),
+      multi: true
+    }
+  ]
 })
-export class CheckBoxComponent implements ControlValueAccessor {
+export class CheckBoxComponent implements ControlValueAccessor, OnChanges {
   static ID_SEED = 0;
   @Input() name: string;
   @Input() label: string;
+  @Input() cssClass: string;
+  @Input() color;
   @Input() disabled = false;
   @Input() isShowTitle = true;
   @Input() labelTemplate: TemplateRef<any>;
+  @Input() halfchecked = false;
   @Output() change: EventEmitter<boolean> = new EventEmitter();
-  @Input() halfchecked =  false;
-  @Input() cssClass;
-  id: number;
-  checked = false;
-
+  public animationUnlocked = false;
+  public id: number;
+  public checked: boolean;
   private onChange = (_: any) => null;
   private onTouch = () => null;
-
 
   constructor(private changeDetectorRef: ChangeDetectorRef) {
     this.id = CheckBoxComponent.ID_SEED++;
   }
 
   writeValue(checked: any): void {
-    if (checked != null) {
-      this.checked = checked ? true : false;
-    } else {
-      this.checked = false;
+    if (this.animationUnlocked || checked !== null) {
+      this.checked = !!checked;
+      this.changeDetectorRef.markForCheck();
+      this.unlockAnimation();
     }
-    this.changeDetectorRef.markForCheck();
   }
 
   registerOnChange(fn: any): void {
@@ -62,7 +63,6 @@ export class CheckBoxComponent implements ControlValueAccessor {
   }
 
   toggle($event) {
-    $event.stopPropagation();
     if (this.disabled) {
       return;
     }
@@ -70,5 +70,19 @@ export class CheckBoxComponent implements ControlValueAccessor {
     this.onChange(this.checked);
     this.change.next(this.checked);
     this.onTouch();
+  }
+
+  private unlockAnimation() {
+    if (!this.animationUnlocked) {
+      setTimeout(() => {
+        this.animationUnlocked = true;
+      }, 0);
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.hasOwnProperty('halfchecked')) {
+      this.unlockAnimation();
+    }
   }
 }

@@ -1,0 +1,8 @@
+:host {
+  display: block;
+}
+
+.checkbox-list-inline ::ng-deep li {
+  margin-left: 8px;
+  display: inline-block
+}

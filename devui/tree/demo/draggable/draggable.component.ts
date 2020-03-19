@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'ave-draggable',
+  selector: 'd-draggable',
   templateUrl: './draggable.component.html',
   styleUrls: ['./draggable.component.css']
 })

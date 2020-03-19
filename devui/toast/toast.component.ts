@@ -10,7 +10,7 @@ export interface Message {
 }
 
 @Component({
-  selector: 'ave-toast',
+  selector: 'd-toast',
   templateUrl: './toast.component.html',
   styleUrls: ['./toast.component.scss']
 })
@@ -24,7 +24,7 @@ export class ToastComponent implements AfterViewInit, OnDestroy {
 
   @Output() valueChange: EventEmitter<Message[]> = new EventEmitter<Message[]>();
 
-  @ViewChild('container') containerViewChild: ElementRef;
+  @ViewChild('container', { static: true }) containerViewChild: ElementRef;
 
   _value: Array<Message>;
 

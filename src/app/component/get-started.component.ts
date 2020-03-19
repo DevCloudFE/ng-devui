@@ -23,16 +23,6 @@ import * as hljs from 'highlight.js/lib/highlight';
   `,
     styles: [
       `
-      .get-start{
-        overflow: auto;
-        position: absolute;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        margin-top: 3px;
-        padding:0 20%;
-      }
       .readme {
         box-sizing:border-box;
       }
@@ -47,8 +37,9 @@ export class GetStartedComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    if ((this.documentation.last || {} as any).nativeElement) {
-      hljs.highlightBlock(this.documentation.last.nativeElement);
-    }
+    document.querySelectorAll('pre code').forEach((block) => {
+      console.log(block);
+      hljs.highlightBlock(block);
+    });
   }
 }

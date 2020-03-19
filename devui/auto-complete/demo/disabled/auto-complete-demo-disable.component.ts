@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { of } from 'rxjs';
 @Component({
-  selector: 'ave-auto-complete-demo-disable',
+  selector: 'd-auto-complete-demo-disable',
   templateUrl: './auto-complete-demo-disable.component.html'
 })
 export class AutoDemoDisableComponent {

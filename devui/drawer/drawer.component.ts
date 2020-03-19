@@ -4,7 +4,7 @@ import { isNumber, parseInt, trim } from 'lodash-es';
 import { fromEvent, Observable, Subscription } from 'rxjs';
 
 @Directive({
-  selector: '[aveDrawerContentHost]',
+  selector: '[dDrawerContentHost]',
 })
 export class DrawerContentDirective {
   constructor(public viewContainerRef: ViewContainerRef) {
@@ -12,7 +12,7 @@ export class DrawerContentDirective {
 }
 
 @Component({
-  selector: 'ave-drawer',
+  selector: 'd-drawer',
   templateUrl: './drawer.component.html',
   styleUrls: ['./drawer.component.scss'],
   animations: [
@@ -33,12 +33,11 @@ export class DrawerComponent implements OnInit {
   @Input() width = '300px';
   @Input() isCover = true;
   @Input() fullScreen = false;
-  @ViewChild(DrawerContentDirective) drawerContentHost: DrawerContentDirective;
+  @ViewChild(DrawerContentDirective, { static: true }) drawerContentHost: DrawerContentDirective;
   @Input() backdropCloseable: boolean;
   @Input() escKeyCloseable: boolean;
   @Input() beforeHidden: () => boolean | Promise<boolean> | Observable<boolean>;
   @Input() clickDoms: any = [];
-  @HostBinding('attr.ave-ui') aveUi = true;
   _width: string;
   // 全屏时用来记录之前的宽度，因为没遮罩的情况下width不能是百分比
   oldWidth: string;
@@ -125,7 +124,7 @@ export class DrawerComponent implements OnInit {
 
   isHaveDialogOrUpload() {
     const dialog: any = document.getElementsByClassName('modal-dialog');
-    const upload: any = document.getElementById('ave-upload-temp');
+    const upload: any = document.getElementById('d-upload-temp');
     return (dialog && dialog.length > 0) || upload;
   }
 

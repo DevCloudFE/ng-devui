@@ -5,7 +5,7 @@ import {
 import { DevuiSourceData } from '../../shared/devui-codebox';
 
 @Component({
-    selector: 'ave-demo-loading',
+    selector: 'd-demo-loading',
     templateUrl: './loading-demo.component.html'
 })
 export class LoadingDemoComponent {
@@ -23,8 +23,7 @@ export class LoadingDemoComponent {
 
   promiseSource: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./promise/promise.component.html')},
-    {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./promise/promise.component.ts')},
-    {title: 'CSS', language: 'css', code:  require('!!raw-loader!./promise/promise.component.css')}
+    {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./promise/promise.component.ts')}
   ];
 
   constructor() {

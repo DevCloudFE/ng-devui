@@ -5,10 +5,10 @@ import { RouterModule } from '@angular/router';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
-import { DatepickerModule } from '../datepicker.module';
+import { DatepickerModule } from 'ng-devui/datepicker';
 import { DatepickerDemoComponent } from './datepicker-demo.component';
 import { DatepickerDemoBasicComponent } from './basic/basic.component';
-import { AveCommonModule } from 'ng-devui/common';
+import { DCommonModule } from 'ng-devui/common';
 import { DatepickerDemoFormatComponent } from './format/datepicker-demo-format.component';
 import { SelectModule } from 'ng-devui/select';
 import { ButtonModule } from 'ng-devui/button';
@@ -16,7 +16,7 @@ import { ButtonModule } from 'ng-devui/button';
 
 @NgModule({
   imports: [
-    AveCommonModule,
+    DCommonModule,
     CommonModule,
     FormsModule,
     DatepickerModule,

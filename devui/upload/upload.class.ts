@@ -54,4 +54,9 @@ export class UploadComponent {
       return file !== fileUploader.file;
     });
   }
+
+  // 清空已选文件
+  removeFiles() {
+    this.fileUploaders = [];
+  }
 }

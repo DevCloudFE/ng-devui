@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { of } from 'rxjs';
 @Component({
-  selector: 'ave-auto-complete-demo-object',
+  selector: 'd-auto-complete-demo-object',
   templateUrl: './auto-complete-demo-object.component.html',
 })
 export class AutoDemoObjectComponent {

@@ -5,7 +5,7 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'ave-modal-alert',
+  selector: 'd-modal-alert',
   templateUrl: './modal-alert.component.html',
 })
 export class ModalAlertComponent {

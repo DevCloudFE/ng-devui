@@ -1,2 +1,1 @@
-export * from './sticky.module';
-export * from './sticky.component';
+export * from './public-api';

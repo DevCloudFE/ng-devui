@@ -7,12 +7,12 @@ import {
   EventEmitter,
   forwardRef,
   HostBinding,
-  HostListener,
-  Input,
+  Input, NgZone,
   OnChanges,
   OnDestroy,
   OnInit,
   Output,
+  AfterViewInit,
   Renderer2,
   SimpleChanges,
   TemplateRef,
@@ -21,10 +21,13 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { fromEvent, BehaviorSubject, Observable, Subscription, of } from 'rxjs';
 import { tap, map, debounceTime, filter, switchMap } from 'rxjs/operators';
-import { WindowRef } from '../window-ref/window-ref.service';
+import { WindowRef } from 'ng-devui/window-ref';
+import { I18nService } from 'ng-devui/utils';
+import { VerticalConnectionPos, ConnectedOverlayPositionChange, CdkOverlayOrigin } from '@angular/cdk/overlay';
+import { fadeInOut } from 'ng-devui/utils';
 
 @Component({
-  selector: 'ave-select',
+  selector: 'd-select',
   templateUrl: './select.component.html',
   styleUrls: [`./select.component.scss`],
   exportAs: 'select',
@@ -35,9 +38,22 @@ import { WindowRef } from '../window-ref/window-ref.service';
       useExisting: forwardRef(() => SelectComponent),
       multi: true
     }
+  ],
+  animations: [
+    fadeInOut
   ]
 })
-export class SelectComponent implements ControlValueAccessor, OnInit, OnDestroy, OnChanges {
+export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewInit, OnDestroy, OnChanges {
+
+  get isOpen() {
+    return this._isOpen;
+  }
+
+  set isOpen(value) {
+    this._isOpen = value;
+    this.toggleChange.emit(value);
+    this.setDocumentClickListener();
+  }
   /**
    * 【必选】下拉选项资源，支持Array<string>, Array<{key: value}>
    */
@@ -46,6 +62,10 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnDestroy,
    * 【可选】是否支持过滤搜索
    */
   @Input() isSearch = false;
+  /**
+   * 【可选】是否支持聚焦自动展开下拉
+   */
+  @Input() toggleOnFocus = false;
   /**
    * 【可选】下拉菜单高度，建议使用px作为高度单位
    */
@@ -74,6 +94,18 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnDestroy,
    * 【可选】下拉选框尺寸
    */
   @Input() size: '' | 'sm' | 'lg';
+  /**
+   * 【可选】是否appendToBody
+   */
+  @Input() appendToBody = false;
+  /**
+   * 【可选】cdk模式origin width
+   */
+  @Input() width: number;
+  /**
+   * 【可选】模板高度
+   */
+  @Input() templateItemSize: number; // 模板itemSize，appendToBody为true
   /**
    * 【可选】是否禁用下拉框
    */
@@ -106,12 +138,18 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnDestroy,
   @Input() direnction: 'up' | 'down' | 'auto' = 'down';
   @Input() overview: 'border' | 'underlined' = 'border';
 
+  @Input() color;
   /**
    *  【可选】启用数据懒加载，默认不启用
-  */
-   @Input() enableLazyLoad = false;
+   */
+  @Input() enableLazyLoad = false;
 
-  @ContentChild(TemplateRef) itemTemplate: TemplateRef<any>;
+  /**
+   * 是否虚拟滚动
+   */
+  @Input() virtualScroll;
+
+  @ContentChild(TemplateRef, { static: false }) itemTemplate: TemplateRef<any>;
 
   /**
    * 输出函数，当选中某个选项项后，将会调用此函数，参数为当前选择项的值。如果需要获取所有选择状态的值，请参考(ngModelChange)方法
@@ -145,7 +183,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnDestroy,
    * 【当传入资源（options）类型为Array<{key: value}，必选】针对传入资源options的每项对应字段做禁用操作的key
    */
   @Input() optionDisabledKey = '';
-    /**
+  /**
    * 【当传入资源（options）类型为Array<{key: value}，必选】针对传入资源options的每项对应字段禁止变更的key
    */
   @Input() optionImmutableKey = '';
@@ -159,27 +197,21 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnDestroy,
   @Input() keepMultipleOrder: 'origin' | 'user-select' = 'user-select';
   @Input() customViewTemplate: TemplateRef<any>;
 
+  @Input() autoFocus = false;
 
-  @ViewChild('selectInput') selectInputElement: ElementRef;
-  @ViewChild('selectMenu') selectMenuElement: ElementRef;
-  @ViewChild('selectBox') selectBoxElement: ElementRef;
-  @ViewChild('selectInputWithTemplate') selectInputWithTemplateElement: ElementRef;
-  @ViewChild('selectInputWithLabel') selectInputWithLabelElement: ElementRef;
-  @ViewChild('filterInput') filterInputElement: ElementRef;
-  @ViewChild('dropdownUl') dropdownUl: ElementRef;
-  @HostBinding('attr.ave-ui') aveUi = true;
+  @ViewChild('selectInput', { static: false }) selectInputElement: ElementRef;
+  @ViewChild('selectMenu', { static: false }) selectMenuElement: ElementRef;
+  @ViewChild('selectBox', { static: true }) selectBoxElement: ElementRef;
+  @ViewChild('selectInputWithTemplate', { static: false }) selectInputWithTemplateElement: ElementRef;
+  @ViewChild('selectInputWithLabel', { static: false }) selectInputWithLabelElement: ElementRef;
+  @ViewChild('filterInput', { static: false }) filterInputElement: ElementRef;
+  @ViewChild('dropdownUl', { static: false }) dropdownUl: ElementRef;
 
   showLoading = false;
   _isOpen = false;
-
-  get isOpen() {
-    return this._isOpen;
-  }
-
-  set isOpen(value) {
-    this._isOpen = value;
-    this.toggleChange.emit(value);
-  }
+  menuPosition: VerticalConnectionPos = 'bottom';
+  halfChecked = false;
+  allChecked = false;
 
   filter: string;
   activeIndex = -1;
@@ -188,27 +220,36 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnDestroy,
   availableOptions = [];
   multiItems = [];
 
-  popDirection: 'up' | 'down';
+  popDirection: 'top' | 'bottom';
 
   selectIndex = -1;
   _inputValue: any;
+  virtualScrollItemSize: any = { // sm对应是30px，默认36px高，lg对应是44px
+    sm: 30,
+    normal: 36,
+    lg: 44
+  };
+
+  cdkConnectedOverlayOrigin: CdkOverlayOrigin;
 
   private sourceSubscription: BehaviorSubject<any>;
   private filterSubscription: Subscription;
   public value;
   private resetting = false;
+  private searchString = '';
   private onChange = (_: any) => null;
   private onTouch = () => null;
-
   constructor(
     private renderer: Renderer2,
     private windowRef: WindowRef,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
+    private i18n: I18nService,
+    private ngZone: NgZone
   ) {
-    this.selectText = '全选';
-    this.noDataTips = '没有数据';
-    this.valueParser = item => (typeof item === 'object' ? item[this.filterKey] || '' : item ? item.toString() : '');
-    this.formatter = item => (typeof item === 'object' ? item[this.filterKey] || '' : item ? item.toString() : '');
+    this.selectText = i18n.getLangSuffix() === 'CN' ? '全选' : 'Select All';
+    this.noDataTips = i18n.getLangSuffix() === 'CN' ? '没有数据' : 'no data';
+    this.valueParser = item => (typeof item === 'object' ? item[this.filterKey] || '' : (item + '') ? item.toString() : '');
+    this.formatter = item => (typeof item === 'object' ? item[this.filterKey] || '' : (item + '') ? item.toString() : '');
   }
 
   ngOnInit(): void {
@@ -216,7 +257,6 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnDestroy,
       this.searchFn = (term: any) => {
         return of(
           (this.options ? this.options : [])
-            .filter(option => option)
             .map((option, index) => ({ option: option, id: index }))
             .filter(
               item =>
@@ -234,15 +274,45 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnDestroy,
     this.registerFilterChange();
   }
 
+  ngAfterViewInit() {
+    if (this.autoFocus && this.selectBoxElement) {
+      this.selectBoxElement.nativeElement.focus();
+    }
+
+    if (this.selectBoxElement) {
+      this.width = this.width ? this.width : this.selectBoxElement.nativeElement.offsetWidth;
+    }
+  }
+
   ngOnDestroy(): void {
     this.sourceSubscription && this.sourceSubscription.unsubscribe(); // tslint:disable-line:no-unused-expression
     this.filterSubscription && this.filterSubscription.unsubscribe(); // tslint:disable-line:no-unused-expression
+    document.removeEventListener('click', this.onDocumentClick);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes && (changes.searchFn || changes.options)) {
       this.resetSource();
     }
+  }
+
+  getVirtualScrollHeight(len, size) {
+    if (len > 0) {
+      let height = this.templateItemSize ? this.templateItemSize * len : this.virtualScrollItemSize[size ? size : 'normal'] * len;
+      if (this.isSelectAll && this.multiple) {
+        height += this.virtualScrollItemSize[size ? size : 'normal'];
+      }
+      const scrollHight = parseInt(this.scrollHight, 10);
+      if (height > scrollHight) {
+        return this.scrollHight;
+      } else {
+        return height + 'px';
+      }
+    }
+  }
+
+  getVirtualScrollItemSize(size) {
+    return this.templateItemSize ? this.templateItemSize : this.virtualScrollItemSize[size ? size : 'normal'];
   }
 
   resetSource() {
@@ -265,6 +335,9 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnDestroy,
     this.sourceSubscription.pipe(switchMap(term => this.searchFn(term))).subscribe(options => {
       this.availableOptions = options;
       this.changeDetectorRef.markForCheck();
+      if (!this.multiple && !this.value) {
+        this.selectIndex = this.availableOptions && this.availableOptions.length > 0 ? 0 : -1;
+      }
     });
 
     this.sourceSubscription.subscribe(term => {
@@ -274,14 +347,19 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnDestroy,
       }
     });
 
-    this.filterSubscription = fromEvent(this.filterInputElement.nativeElement, 'input')
-      .pipe(
-        map((e: any) => e.target.value),
-        tap(term => this.onTouch()),
-        filter(term => !this.disabled && this.searchFn && term.length >= 0),
-        debounceTime(300) // hard code need refactory
-      )
-      .subscribe(term => this.sourceSubscription.next(term));
+    if (this.isOpen && this.filterInputElement) {
+      this.filterSubscription = fromEvent(this.filterInputElement.nativeElement, 'input')
+        .pipe(
+          map((e: any) => e.target.value),
+          tap(term => this.onTouch()),
+          filter(term => !this.disabled && this.searchFn && term.length >= 0),
+          debounceTime(300) // hard code need refactory
+        )
+        .subscribe(term => {
+          this.searchString = term;
+          return this.sourceSubscription.next(term);
+        });
+    }
   }
 
   writeValue(obj: any): void {
@@ -299,10 +377,14 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnDestroy,
         item => this.formatter(item.option) === this.formatter(this.value)
       );
       this.activeIndex = selectedItem ? selectedItem.id : -1;
+      this.selectIndex = this.activeIndex ? this.activeIndex : -1;
     }
 
     this.writeIntoInput(this.value);
     this.changeDetectorRef.markForCheck();
+    if (this.isSelectAll) {
+      this.setChecked();
+    }
   }
 
   writeIntoInput(value): void {
@@ -317,9 +399,17 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnDestroy,
       $event.preventDefault();
       $event.stopPropagation();
     }
-    if (!option || this.disabled) {
-      this.isOpen = false;
-      return;
+
+    if (typeof option === 'object') {
+      if (Object.keys(option).length === 0 || this.disabled) {
+        this.isOpen = false;
+        return;
+      }
+    } else {
+      if (!(option + '') || this.disabled) {
+        this.isOpen = false;
+        return;
+      }
     }
 
     if (this.optionDisabledKey && option[this.optionDisabledKey]) {
@@ -349,6 +439,15 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnDestroy,
     this.writeIntoInput(this.value);
     this.onChange(this.value);
     this.valueChange.emit(option);
+    if (this.isSelectAll) {
+      this.setChecked();
+    }
+  }
+
+  updateCdkConnectedOverlayOrigin() {
+    if (this.selectBoxElement.nativeElement) {
+      this.cdkConnectedOverlayOrigin = new CdkOverlayOrigin(this.selectBoxElement.nativeElement);
+    }
   }
 
   toggle() {
@@ -361,15 +460,36 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnDestroy,
       this.filter = '';
       this.resetSource();
 
-      this.popDirection = <any>this.direnction;
-      if (this.direnction === 'auto') {
-        this.popDirection = this.isBottomRectEnough() ? 'down' : 'up';
+      if (!this.appendToBody) {
+        let direction = '';
+        switch (this.direnction) {
+          case 'auto':
+            direction = this.isBottomRectEnough() ? 'bottom' : 'top';
+            break;
+          case 'down':
+            direction = 'bottom';
+            break;
+          case 'up':
+            direction = 'top';
+            break;
+          default:
+            direction = 'bottom';
+        }
+        this.popDirection = <any>direction;
+      } else {
+        this.updateCdkConnectedOverlayOrigin();
       }
     }
     this.isOpen = !this.isOpen;
+
     const that = this;
-    setTimeout(function() {
-      that.filterInputElement.nativeElement.focus();
+    setTimeout(function () {
+      if (that.isOpen) {
+        that.registerFilterChange();
+        if (that.filterInputElement) {
+          that.filterInputElement.nativeElement.focus();
+        }
+      }
     });
   }
 
@@ -378,18 +498,10 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnDestroy,
     const selectInputElement = this.selectInputElement || this.selectInputWithLabelElement || this.selectInputWithTemplateElement;
     const displayStyle =
       selectMenuElement.style['display'] || (<any>window).getComputedStyle(selectMenuElement).display;
-    if (displayStyle === 'none') {
-      this.renderer.setStyle(selectMenuElement, 'visibility', 'hidden');
-      this.renderer.setStyle(selectMenuElement, 'display', 'block');
-      this.renderer.setStyle(selectMenuElement, 'transform', 'translate(0, -9999)');
-    }
     const elementHeight = selectMenuElement.offsetHeight;
     const bottemDistance =
       this.windowRef.innerHeight - selectInputElement.nativeElement.getBoundingClientRect().bottom;
     const isBotemEnough = bottemDistance >= elementHeight;
-    this.renderer.setStyle(selectMenuElement, 'visibility', null);
-    this.renderer.setStyle(selectMenuElement, 'display', null);
-    this.renderer.setStyle(selectMenuElement, 'transform', null);
     return isBotemEnough;
   }
 
@@ -397,15 +509,28 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnDestroy,
     return this.multiItems.map(item => this.formatter(item.option)).indexOf(this.formatter(option)) !== -1;
   }
 
-  @HostListener('document:click', ['$event'])
-  onDocumentClick($event: Event) {
+  setDocumentClickListener() {
+    this.ngZone.runOutsideAngular(() => {
+      if (this.isOpen) {
+        document.addEventListener('click', this.onDocumentClick);
+      } else {
+        document.removeEventListener('click', this.onDocumentClick);
+      }
+    });
+  }
+
+  onDocumentClick = ($event: Event) => {
     if (this.isOpen && !this.selectBoxElement.nativeElement.contains($event.target)) {
       this.isOpen = false;
       this.selectIndex = this.activeIndex ? this.activeIndex : -1;
+      this.changeDetectorRef.detectChanges();
     }
   }
 
   onEscKeyup($event) {
+    if (this.isOpen) {
+      $event.stopPropagation();
+    }
     this.isOpen = false;
   }
 
@@ -413,7 +538,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnDestroy,
     if (this.isOpen) {
       $event.preventDefault();
       $event.stopPropagation();
-      this.selectIndex = this.selectIndex === 0 || this.selectIndex === -1 ? 0 : this.selectIndex - 1;
+      this.selectIndex = this.selectIndex === 0 || this.selectIndex === -1 ? this.availableOptions.length - 1 : this.selectIndex - 1;
       this.scrollToActive();
     }
   }
@@ -423,8 +548,16 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnDestroy,
       $event.preventDefault();
       $event.stopPropagation();
       this.selectIndex =
-        this.selectIndex === this.availableOptions.length - 1 ? this.selectIndex : this.selectIndex + 1;
+        this.selectIndex === this.availableOptions.length - 1 ? 0 : this.selectIndex + 1;
       this.scrollToActive();
+    }
+  }
+
+  autoToggle($event) {
+    $event.preventDefault();
+    $event.stopPropagation();
+    if (this.toggleOnFocus) {
+      this.toggle();
     }
   }
 
@@ -444,7 +577,8 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnDestroy,
             scrollPane.scrollIntoView(false);
           }
         }
-      } catch (e) {}
+      } catch (e) {
+      }
     });
   }
 
@@ -458,6 +592,8 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnDestroy,
       } else {
         this.toggle();
       }
+    } else {
+      this.toggle();
     }
   }
 
@@ -467,19 +603,19 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnDestroy,
 
   selectAll() {
     const mutableOption = this.optionImmutableKey
-      ? this.availableOptions.filter(item => ! item.option[this.optionImmutableKey])
+      ? this.availableOptions.filter(item => !item.option[this.optionImmutableKey])
       : this.availableOptions;
     const selectedImmutableOption = this.optionImmutableKey
       ? this.multiItems.filter(item => item.option[this.optionImmutableKey])
       : [];
 
     if (mutableOption && mutableOption.length > (this.multiItems.length - selectedImmutableOption.length)) {
-      mutableOption.map(option => {
+      mutableOption.map(item => {
         const indexOfOption = this.multiItems
-          .map(item => this.formatter(item.option))
-          .indexOf(this.formatter(option.option));
+          .map(value => this.formatter(value.option))
+          .indexOf(this.formatter(item.option));
         if (indexOfOption === -1) {
-          this.multiItems.push({ id: option.id, option: option.option });
+          this.multiItems.push({ id: item.id, option: item.option });
         }
       });
     } else {
@@ -489,6 +625,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnDestroy,
     this.writeIntoInput(this.value);
     this.onChange(this.value);
     this.valueChange.emit(this.multiItems);
+    this.setChecked();
   }
 
   trackByFn(index, item) {
@@ -501,10 +638,44 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnDestroy,
 
   loadMoreEvent(event) {
     this.showLoading = true;
-    this.loadMore.emit({instance: this, event: event});
+    this.loadMore.emit({ instance: this, event: event });
   }
 
   loadFinish() {
     this.showLoading = false;
+    this.changeDetectorRef.markForCheck();
+  }
+
+  onPositionChange(position: ConnectedOverlayPositionChange) {
+    this.menuPosition = position.connectionPair.originY;
+  }
+
+  animationEnd($event) {
+    if (!this.isOpen && this.selectMenuElement) {
+      const targetElement = this.selectMenuElement.nativeElement;
+      this.renderer.setStyle(targetElement, 'display', 'none');
+    }
+  }
+
+  setChecked() {
+    if (!this.value) {
+      return;
+    }
+    this.halfChecked = false;
+    if (this.value.length === this.availableOptions.length) {
+      this.allChecked = true;
+    } else if (this.value.length === 0) {
+      this.allChecked = false;
+    } else {
+      this.halfChecked = true;
+    }
+  }
+
+  showSelectAll() {
+    return this.isSelectAll && this.multiple && this.availableOptions.length > 0;
+  }
+
+  public forceSearchNext() {
+    this.sourceSubscription.next(this.searchString);
   }
 }

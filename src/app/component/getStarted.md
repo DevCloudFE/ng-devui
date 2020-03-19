@@ -1,6 +1,9 @@
 # 快速开始
 引导您如何在项目中使用DevUI
 
+### Angular版本
+当前支持的Angular版本 <font color=red>`^8.0.0`</font>
+
 ### 1. 创建一个项目
 
 推荐使用`@angular/cli`创建你的项目
@@ -13,12 +16,15 @@ $ ng new New-Project
 进入你的项目文件夹，使用npm安装DevUI
 ```bash
 $ npm i ng-devui
+# 可选，字体图标库 
+# $ npm i @devui-design/icons
 ```
 
 ### 3. 引入模块
 
 ```typescript
 import { BrowserModule } from '@angular/platform-browser';
+// DevUI部分组件依赖angular动画，需要引入animations模块
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { DevUIModule } from 'ng-devui';
@@ -31,8 +37,7 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    // 引入公共service
-    DevUIModule.forRoot()
+    DevUIModule
   ],
   bootstrap: [ AppComponent ],
 })

@@ -8,7 +8,8 @@ import {
   OnChanges,
   SimpleChanges,
   HostListener,
-  ElementRef
+  ElementRef,
+  ViewChild,
 } from '@angular/core';
 import { DataTableColumnTmplComponent } from './tmpl/data-table-column-tmpl.component';
 import { DataTableComponent } from './data-table.component';
@@ -17,7 +18,7 @@ import { DataTableTmplsComponent } from './tmpl/data-table-tmpls.component';
 import { DataTablePager } from './data-table.model';
 
 @Component({
-  selector: 'ave-data-table-head,[aveDataTableHead]',
+  selector: 'd-data-table-head,[dDataTableHead]',
   templateUrl: './data-table-head.component.html',
   // changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -38,6 +39,8 @@ export class DataTableHeadComponent implements OnChanges {
   @Input() showDetailColumn: DataTableColumnTmplComponent;
   @Output() headClickSortEvent = new EventEmitter<SortEventArg>();
   @Output() resizeHandlerEvent = new EventEmitter<any>();
+  @Input() halfChecked: boolean;
+  @Input() childrenTableOpen: boolean;
 
   isDrag: boolean;
   dragBoxLeft;
@@ -47,13 +50,17 @@ export class DataTableHeadComponent implements OnChanges {
   multiSortArray: SortEventArg[] = [];
   sortField: string;
   sortDirection: 'ASC' | 'DESC' | '';
-  isDetailOpen: boolean;
   rowItem = undefined;
 
   // 用于多行多列头部
   rowCount;
   rowCountArray;
-
+  filterHalfChecked: boolean;
+  filterAllChecked: boolean;
+  columnForFilter;
+  filterListDisplay = [];
+  choosedItem: any;
+  isFilterHidden = false;
   constructor(public dt: DataTableComponent) { }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -174,7 +181,7 @@ export class DataTableHeadComponent implements OnChanges {
                       .filter(item => item['$cols'].indexOf(changeColumn['$colIndex']) > -1)
                       .forEach(item => {
                         item['$width'] = item['$cols'].map(i => parseInt(this.columns[i].width, 10) || 0)
-                                                      .reduce( (sum, i) => sum + i ) + 'px';
+                                                      .reduce( (sum, rItem) => sum + rItem ) + 'px';
                       });
       }
   }
@@ -182,5 +189,58 @@ export class DataTableHeadComponent implements OnChanges {
   trackByFn(index, item) {
     return index;
   }
+  getFilterDataMultiple(column: DataTableColumnTmplComponent) {
+    const filterData = column['filterList'].filter(item => item.checked);
+    column.emitFilterData(filterData);
+  }
+  getFilterDataRadio(item, column: DataTableColumnTmplComponent) {
+    column.emitFilterData(item);
+    this.choosedItem = item;
+  }
+  showfilterContent($event, column: DataTableColumnTmplComponent) {
+    column.canFilter(!$event).then((change) => {
+      if (!$event) {
+        return;
+      }
+      if (!change) {
+        this.isFilterHidden = true;
+        return;
+      }
+    this.isFilterHidden = false;
+    this.columnForFilter = column;
+    this.filterListDisplay = column['filterList'];
+    this.searchForFilter('');
+    });
+  }
+  searchForFilter($event) {
+    this.filterListDisplay = this.columnForFilter['filterList'].filter(item => item.name.includes($event));
+    this.setHalfChecked();
+  }
+  checkAll($event) {
+    this.filterHalfChecked = false;
+    this.filterListDisplay.forEach(item => {
+      item.checked = $event;
+    });
+  }
+  checkboxChange($event) {
+    this.setHalfChecked();
+  }
+  // 设置全选半选状态
+  setHalfChecked() {
+    this.filterHalfChecked = false;
+    const checked = this.filterListDisplay.filter(item => item.checked);
+    if (checked.length === this.filterListDisplay.length) {
+      this.filterAllChecked = true;
+    } else if (checked.length > 0) {
+      this.filterHalfChecked = true;
+    } else {
+      this.filterAllChecked = false;
+      this.filterHalfChecked = false;
+    }
+  }
 
+  toggleChildrenTable() {
+    this.childrenTableOpen = !this.childrenTableOpen;
+    this.dt.onToggleChildrenTable(this.childrenTableOpen);
+  }
 }

@@ -1,13 +1,13 @@
 import { Component, ChangeDetectionStrategy, ContentChild, TemplateRef } from '@angular/core';
 
 @Component({
-  selector: 'ave-cell-edit',
+  selector: 'd-cell-edit',
   template: '',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DataTableCellEditTmplComponent {
 
-  @ContentChild(TemplateRef) template: TemplateRef<any>;
+  @ContentChild(TemplateRef, { static: true }) template: TemplateRef<any>;
 
   dataPicker;
 }

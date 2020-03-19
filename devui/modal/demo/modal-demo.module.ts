@@ -7,7 +7,7 @@ import {
   ModalAlertComponent
 } from './modal-demo.component';
 import { ModalModule } from '../modal.module';
-import { ButtonModule } from '../../button';
+import { ButtonModule } from 'ng-devui/button';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';

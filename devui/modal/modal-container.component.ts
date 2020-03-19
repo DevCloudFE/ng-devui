@@ -8,7 +8,7 @@ import {ModalContentDirective} from './modal.directive';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
-  selector: 'ave-modal-container',
+  selector: 'd-modal-container',
   templateUrl: './modal-container.component.html',
   styleUrls: ['./modal-container.component.scss'],
 })
@@ -26,7 +26,7 @@ export class ModalContainerComponent implements OnInit {
   }>;
   @Input() html: boolean;
   @Input() onClose: EventListener;
-  @ViewChild(ModalContentDirective) modalContentHost: ModalContentDirective;
+  @ViewChild(ModalContentDirective, { static: true }) modalContentHost: ModalContentDirective;
   @Input() dialogtype?: string;
 
   constructor(private sanitizer: DomSanitizer) {}

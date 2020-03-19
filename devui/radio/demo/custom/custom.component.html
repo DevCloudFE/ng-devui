@@ -1,13 +1,13 @@
 <section>
-  <ave-radio-group
+  <d-radio-group
       [cssStyle]="'row'"
       [(ngModel)]="choose2_2"
       (change)="log($event)">
-    <ave-radio
+    <d-radio
         [name]="'customized-city'"
         *ngFor="let value of values2"
         [value]="value">
       The Radio value is: {{value}}
-    </ave-radio>
-  </ave-radio-group>
+    </d-radio>
+  </d-radio-group>
 </section>

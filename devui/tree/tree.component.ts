@@ -1,11 +1,23 @@
-import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges, TemplateRef, ViewEncapsulation, OnChanges } from '@angular/core';
-import { ITreeItem, TreeFactory, TreeNode } from './tree-factory.class';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  TemplateRef,
+  SimpleChanges,
+  OnChanges
+} from '@angular/core';
+import {
+  ITreeItem,
+  TreeFactory,
+  TreeNode
+} from './tree-factory.class';
 
 @Component({
-  selector: 'ave-tree',
+  selector: 'd-tree',
   templateUrl: './tree.component.html',
   styleUrls: ['./tree.component.scss'],
-  encapsulation: ViewEncapsulation.None,
 })
 export class TreeComponent implements OnInit, OnChanges {
   treeFactory: TreeFactory;
@@ -16,6 +28,7 @@ export class TreeComponent implements OnInit, OnChanges {
   @Input() iconParentOpen: string;
   @Input() iconParentClose: string;
   @Input() iconLeaf: string;
+  @Input() treeNodeTitleKey = 'title';
   @Output() nodeSelected: EventEmitter<any> = new EventEmitter();
   @Output() nodeToggled: EventEmitter<any> = new EventEmitter();
 
@@ -26,7 +39,8 @@ export class TreeComponent implements OnInit, OnChanges {
     this.treeFactory = TreeFactory.fromTree({
       treeItems: this.tree,
       treeNodeChildrenKey: this.treeNodeChildrenKey,
-      treeNodeIdKey: this.treeNodeIdKey
+      treeNodeIdKey: this.treeNodeIdKey,
+      treeNodeTitleKey: this.treeNodeTitleKey
     });
   }
 
@@ -35,18 +49,32 @@ export class TreeComponent implements OnInit, OnChanges {
       this.treeFactory = TreeFactory.fromTree({
         treeItems: this.tree,
         treeNodeChildrenKey: this.treeNodeChildrenKey,
-        treeNodeIdKey: this.treeNodeIdKey
+        treeNodeIdKey: this.treeNodeIdKey,
+        treeNodeTitleKey: this.treeNodeTitleKey
       });
     }
   }
 
-  selectNodes(event, treeNode: TreeNode) {
+  selectNode(event, treeNode: TreeNode) {
     this.nodeSelected.emit(treeNode);
     this.treeFactory.activeNodeById(treeNode.id);
   }
 
-  toggleNodes(event, treeNode: TreeNode) {
+  toggleNode(event, treeNode: TreeNode) {
     this.treeFactory.toggleNodeById(treeNode.id);
     this.nodeToggled.emit(treeNode);
+  }
+
+  public appendTreeItems(treeItems: Array<ITreeItem>, parentId) {
+    if (!this.treeFactory.nodes[parentId]) {
+      throw new Error('parent node does not exist.');
+    }
+    this.treeFactory.mapTreeItems({
+      treeItems: treeItems,
+      parentId: parentId,
+      treeNodeChildrenKey: this.treeNodeChildrenKey,
+      treeNodeIdKey: this.treeNodeIdKey,
+      treeNodeTitleKey: this.treeNodeTitleKey
+    });
   }
 }

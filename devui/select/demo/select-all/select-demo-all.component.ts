@@ -1,7 +1,14 @@
 import { Component } from '@angular/core';
 @Component({
-  selector: 'ave-select-all',
-  templateUrl: './select-demo-all.component.html'
+  selector: 'd-select-all',
+  templateUrl: './select-demo-all.component.html',
+  styles: [
+    `
+      .col-md-5 {
+        width: 50%;
+      }
+    `
+  ]
 })
 
 export class SelectDemoAllComponent {

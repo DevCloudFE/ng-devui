@@ -2,12 +2,11 @@ import { Component, ViewChild } from '@angular/core';
 import { ITreeItem, TreeComponent, TreeNode } from 'ng-devui';
 
 @Component({
-  selector: 'ave-basic',
+  selector: 'd-basic',
   templateUrl: './basic.component.html',
-  styleUrls: ['./basic.component.css']
 })
 export class BasicComponent {
-  @ViewChild('basicTree') basicTree: TreeComponent;
+  @ViewChild('basicTree', { static: true }) basicTree: TreeComponent;
   data1 = [
     {
       title: '父节点1 - 展开',

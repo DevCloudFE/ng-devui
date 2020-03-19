@@ -4,12 +4,12 @@ import {
   TemplateRef
 } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
-import { DevUIConfig } from '../devui.config';
+import { DevUIConfig } from 'ng-devui/devui.config';
 
 @Component({
-  selector: 'ave-auto-complete-popup',
+  selector: 'd-auto-complete-popup',
   templateUrl: './auto-complete-popup.component.html',
-  // tslint:disable-next-line:use-host-property-decorator
+  // tslint:disable-next-line:no-host-metadata-property
   host: {
     '[class]': '"devui-dropdown-menu "  +  (cssClass ? cssClass : "")',
     '[style.display]': 'isOpen && (source?.length || noResultItemTemplate) ? "inline-block" : "none"',

@@ -1,0 +1,38 @@
+@import '../../style/theme/color';
+
+.popper {
+  position: relative;
+  width: 100%;
+
+  .popper-activator {
+    width: 100%;
+  }
+}
+
+.popper-container {
+  display: none;
+  z-index: 1;
+  position: absolute;
+  box-shadow: 0 4px 8px 0 $dark-1-boxshadow;
+  background: $white;
+  border: none;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+
+  .popper-container-scrollable {
+    max-height: 300px;
+    min-height: 80px;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: auto;
+  }
+
+  &.fluid {
+    width: 100%;
+  }
+}
+
+// 此处设置默认宽度，使用组件时可以自定义宽度，尽量不要入侵组件内部样式。
+:host {
+  display: block;
+}

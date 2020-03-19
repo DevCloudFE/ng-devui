@@ -3,7 +3,7 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'ave-panel-header',
+  selector: 'd-panel-header',
   template: `<ng-content></ng-content>`,
 })
 export class PanelHeaderComponent {

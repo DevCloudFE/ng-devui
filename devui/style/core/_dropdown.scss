@@ -4,6 +4,10 @@
   display: inline-block;
   vertical-align: middle;
   .devui-dropdown-toggle {
+    box-shadow: none;
+    outline: none;
+  }
+  .devui-dropdown-toggle.devui-dropdown-default {
     display: inline-block;
     min-width: 100px;
     line-height: 20px;
@@ -14,14 +18,14 @@
     outline: 0;
     border-style: solid;
     border-width: 1px;
-    .devui-caret {
-      display: inline-block;
-      margin-left: 2px;
-      vertical-align: middle;
-      border-top: 4px dashed;
-      border-right: 4px solid transparent;
-      border-left: 4px solid transparent;
-    }
+  }
+  .devui-caret {
+    display: inline-block;
+    margin-left: 2px;
+    vertical-align: middle;
+    border-top: 4px dashed;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
   }
 }
 .devui-dropdown-menu {
@@ -36,10 +40,10 @@
   margin-top: 2px;
   background-clip: padding-box;
   border-radius: 0 0 2px 2px;
-  min-width: 160px;
   list-style: none;
   background-color: $white;
   box-shadow: 0 2px 5px 0 rgba($dark, 0.26);
+  outline: none;
   .open > &{
     display: block;
   }
@@ -92,9 +96,9 @@
     border-left: 4px solid transparent;
   }
 }
-.devui-form-group.devui-has-feedback {
+// .devui-form-group.devui-has-feedback {
 
-}
+// }
 .form-group.has-feedback[tabindex] {
   outline: 0;
 }

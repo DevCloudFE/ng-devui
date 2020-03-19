@@ -1,1 +1,1 @@
-export * from './positioning.service';
+export * from './public-api';

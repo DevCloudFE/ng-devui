@@ -21,20 +21,20 @@ import {
 import {
   ModalService,
   ModalAlertComponent
-} from '../modal';
+} from 'ng-devui/modal';
 import { last, map } from 'rxjs/operators' ;
+import { DevUIConfig } from 'ng-devui/devui.config';
 import { Observable } from 'rxjs';
-import { DevUIConfig } from '../devui.config';
+
 
 @Component({
-  selector: 'ave-single-upload',
+  selector: 'd-single-upload',
   templateUrl: './single-upload.component.html',
-  exportAs: 'aveSingleUpload',
+  exportAs: 'dSingleUpload',
   styleUrls: ['./upload-view.component.scss'],
 })
 export class SingleUploadComponent {
-  aveSingleUploadView;
-  @HostBinding('attr.ave-ui') aveUi = true;
+  dSingleUploadView;
   @Input() uploadOptions: IUploadOptions;
   @Input() fileOptions: IFileOptions;
   @Input() autoUpload = false;
@@ -51,11 +51,11 @@ export class SingleUploadComponent {
   /**
    * 【可选】上传按钮文字
    */
-  @Input() UPLOAD: string;
+  @Input() uploadText: string;
   /**
    * 【可选】错误信息弹出框中确认按钮文字
    */
-  @Input() OK: string;
+  @Input() confirmText: string;
   @Input() beforeUpload: (file) => boolean | Promise<boolean> | Observable<boolean>;
   @Input() enableDrop = false;
   @Output() successEvent: EventEmitter<any> = new EventEmitter();
@@ -63,16 +63,16 @@ export class SingleUploadComponent {
   @Output() deleteUploadedFileEvent: EventEmitter<any> = new EventEmitter();
   @Output() fileDrop: EventEmitter<any> = new EventEmitter();
   @Output() fileOver: EventEmitter<any> = new EventEmitter();
-  @ViewChild('aveSingleUploadView') singleUploadViewComponent: SingleUploadViewComponent;
+  @ViewChild('dSingleUploadView', { static: true }) singleUploadViewComponent: SingleUploadViewComponent;
   UploadStatus = UploadStatus;
   isDropOVer = false;
 
   constructor(private modalService: ModalService,
-              private devuiConfig: DevUIConfig,
+private devUIConfig: DevUIConfig,
               private selectFiles: SelectFiles) {
-    this.UPLOAD = this.devuiConfig['uploadCN'].UPLOAD;
-    this.OK = this.devuiConfig['modalCN'].BUTTON_TEXT.OK;
-    this.CHOOSE_FILE = this.devuiConfig['uploadCN'].CHOOSE_FILE;
+    this.uploadText = this.devUIConfig['uploadCN'].UPLOAD;
+    this.confirmText = this.devUIConfig['modalCN'].BUTTON_TEXT.OK;
+    this.CHOOSE_FILE = this.devUIConfig['uploadCN'].CHOOSE_FILE;
   }
 
   _dealFiles(observale) {
@@ -153,7 +153,7 @@ export class SingleUploadComponent {
     return uploadResult;
   }
 
-  _deleteUploadedFileEvent(filePath: string) {
+  _onDeleteUploadedFile(filePath: string) {
     this.deleteUploadedFileEvent.emit(filePath);
   }
 
@@ -165,7 +165,7 @@ export class SingleUploadComponent {
       component: ModalAlertComponent,
       data: {
         content: errorMsg,
-        cancelBtnText: this.OK,
+        cancelBtnText: this.confirmText,
         onClose: (event) => {
           results.modalInstance.hide();
         },

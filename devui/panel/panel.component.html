@@ -1,11 +1,11 @@
 <div class="devui-panel devui-panel-{{type}}">
     <div class="devui-panel-heading" *ngIf="panelHeader" (click)="toggleBody()" [style.cursor]="isCollapsed !== undefined ? 'pointer' : null">
-        <ng-content select="ave-panel-header"></ng-content>
+        <ng-content select="d-panel-header"></ng-content>
     </div>
     <div class="devui-panel-body" *ngIf="isCollapsed === undefined || isCollapsed">
-        <ng-content select="ave-panel-body"></ng-content>
+        <ng-content select="d-panel-body"></ng-content>
     </div>
     <div class="devui-panel-footer" *ngIf="panelFooter">
-        <ng-content slect="ave-panel-footer"></ng-content>
+        <ng-content slect="d-panel-footer"></ng-content>
     </div>
 </div>

@@ -5,7 +5,7 @@ import {
 import { DevuiSourceData } from '../../shared/devui-codebox';
 
 @Component({
-    selector: 'ave-demo-dragdrop',
+    selector: 'd-demo-dragdrop',
     templateUrl: './dragdrop-demo.component.html'
 })
 export class DragDropDemoComponent {

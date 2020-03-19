@@ -2,7 +2,6 @@ import {
   Component,
   TemplateRef,
   ViewChild,
-  HostBinding,
 } from '@angular/core';
 import {
   Input,
@@ -16,24 +15,22 @@ import {
 import {
   ModalAlertComponent,
   ModalService
-} from '../modal';
+} from 'ng-devui/modal';
 import {MultipleUploadViewComponent} from './multiple-upload-view.component';
 import {
   SelectFiles
 } from './select-files.utils';
+import { DevUIConfig } from 'ng-devui/devui.config';
 import { map, last } from 'rxjs/operators';
-
 import { Observable } from 'rxjs';
-import { DevUIConfig } from '../devui.config';
 
 @Component({
-  selector: 'ave-multiple-upload',
+  selector: 'd-multiple-upload',
   templateUrl: './multiple-upload.component.html',
-  exportAs: 'aveMultipleUpload',
+  exportAs: 'dMultipleUpload',
   styleUrls: ['./upload-view.component.scss'],
 })
 export class MultipleUploadComponent {
-  @HostBinding('attr.ave-ui') aveUi = true;
   @Input() uploadOptions: IUploadOptions;
   @Input() fileOptions: IFileOptions;
   @Input() autoUpload = false;
@@ -50,11 +47,11 @@ export class MultipleUploadComponent {
   /**
    * 【可选】上传按钮文字
    */
-  @Input() UPLOAD: string;
+  @Input() uploadText: string;
   /**
    * 【可选】错误信息弹出框中确认按钮文字
    */
-  @Input() OK: string;
+  @Input() confirmText: string;
   @Input() beforeUpload: (files) => boolean | Promise<boolean> | Observable<boolean>;
   @Input() enableDrop = false;
 
@@ -63,16 +60,16 @@ export class MultipleUploadComponent {
   @Output() deleteUploadedFileEvent: EventEmitter<any> = new EventEmitter();
   @Output() fileDrop: EventEmitter<any> = new EventEmitter();
   @Output() fileOver: EventEmitter<any> = new EventEmitter();
-  @ViewChild('aveMultipleUploadView') multipleUploadViewComponent: MultipleUploadViewComponent;
+  @ViewChild('dMultipleUploadView', { static: true }) multipleUploadViewComponent: MultipleUploadViewComponent;
 
 
   isDropOVer = false;
   constructor(private modalService: ModalService,
-              private devuiConfig: DevUIConfig,
+             private devUIConfig: DevUIConfig,
               private selectFiles: SelectFiles) {
-    this.UPLOAD = this.devuiConfig['uploadCN'].UPLOAD;
-    this.OK = this.devuiConfig['modalCN'].BUTTON_TEXT.OK;
-    this.CHOOSE_FILES = this.devuiConfig['uploadCN'].CHOOSE_FILES;
+    this.uploadText = this.devUIConfig['uploadCN'].UPLOAD;
+    this.confirmText = this.devUIConfig['modalCN'].BUTTON_TEXT.OK;
+    this.CHOOSE_FILES = this.devUIConfig['uploadCN'].CHOOSE_FILES;
   }
 
   _dealFiles(observale) {
@@ -113,6 +110,8 @@ export class MultipleUploadComponent {
   upload() {
     this.canUpload().then((canUpload) => {
       if (!canUpload) {
+        // 检验失败，清理已选文件
+        this.multipleUploadViewComponent.removeFiles();
         return;
       }
       this.multipleUploadViewComponent.upload()
@@ -151,7 +150,7 @@ export class MultipleUploadComponent {
     return uploadResult;
   }
 
-  _deleteUploadedFileEvent(filePath: string) {
+  _onDeleteUploadedFile(filePath: string) {
     this.deleteUploadedFileEvent.emit(filePath);
   }
 
@@ -163,7 +162,7 @@ export class MultipleUploadComponent {
       component: ModalAlertComponent,
       data: {
         content: errorMsg,
-        cancelBtnText: this.OK,
+        cancelBtnText: this.confirmText,
         onClose: (event) => {
           results.modalInstance.hide();
         },
@@ -171,3 +170,4 @@ export class MultipleUploadComponent {
     });
   }
 }
+

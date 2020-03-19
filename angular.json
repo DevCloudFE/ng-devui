@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist",
+            "outputPath": "dist/components",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -52,6 +52,9 @@
                   "maximumError": "5mb"
                 }
               ]
+            },
+            "es5": {
+              "tsConfig": "src/tsconfig.app.es5.json"
             }
           }
         },
@@ -63,6 +66,9 @@
           "configurations": {
             "production": {
               "browserTarget": "devui:build:production"
+            },
+            "es5": {
+              "browserTarget": "devui:build:es5"
             }
           }
         },
@@ -147,7 +153,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "devui/src/test.ts",
+            "main": "devui/test.ts",
             "tsConfig": "devui/tsconfig.spec.json",
             "karmaConfig": "devui/karma.conf.js"
           }

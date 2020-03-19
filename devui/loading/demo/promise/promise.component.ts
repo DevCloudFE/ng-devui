@@ -4,7 +4,7 @@ import {
 } from '@angular/core';
 import { timer } from 'rxjs';
 import { pullAt, random } from 'lodash-es';
-import { LoadingType } from 'ng-devui';
+import {LoadingType} from 'ng-devui/loading';
 
 /**
  *  Mock HTTP Request.
@@ -39,9 +39,8 @@ const mockFetchNames = (url: string) => new Promise((resolve) => {
 });
 
 @Component({
-  selector: 'ave-promise',
-  templateUrl: './promise.component.html',
-  styleUrls: ['./promise.component.css']
+  selector: 'd-promise',
+  templateUrl: './promise.component.html'
 })
 export class PromiseComponent implements OnInit {
   loading3: LoadingType;

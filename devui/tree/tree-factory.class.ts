@@ -2,7 +2,6 @@ import {
   Dictionary,
   filter,
   forEach,
-  isEmpty,
   isUndefined,
   map,
   omitBy,
@@ -25,7 +24,10 @@ export interface ITreeNodeData {
   isActive?: boolean;
   isChecked?: boolean;
   disabled?: boolean;
+
   [prop: string]: any;
+
+  children?: [];
 }
 
 export interface ITreeMap {
@@ -45,8 +47,11 @@ export interface ITreeItem {
   isHide?: boolean;
   isActive?: boolean;
   isChecked?: boolean;
+  halfChecked?: boolean;
   disabled?: boolean;
+
   [prop: string]: any;
+
   disableAdd?: boolean;
   disableEdit?: boolean;
   disableDelete?: boolean;
@@ -59,84 +64,101 @@ export interface ITreeInput {
   treeNodeChildrenKey?: string;
   treeNodeIdKey?: string;
   checkboxDisabledKey?: string;
+  treeNodeTitleKey?: string;
 }
 
-export class TreeNode {
+export class TreeNode implements ITreeNodeData {
   constructor(public id,
-    public parentId,
-    public data) {
+              public parentId,
+              public data) {
   }
 }
 
 export class TreeFactory {
-  treeChildren: Object;
   nodes: Dictionary<TreeNode>;
   private idx: number;
+  private _checked = new Set<Object>();
+  private _treeRoot: TreeNode[] = [];
 
   static create() {
     return new TreeFactory();
   }
 
   // tree model with items
-  static fromTree ({
-                       treeItems,
-    treeNodeChildrenKey = 'items',
-    treeNodeIdKey = 'id',
-    checkboxDisabledKey = 'disabled'
-                     }: ITreeInput): TreeFactory {
+  static fromTree({
+                    treeItems,
+                    treeNodeChildrenKey = 'items',
+                    treeNodeIdKey = 'id',
+                    checkboxDisabledKey = 'disabled',
+                    treeNodeTitleKey = 'title'
+                  }: ITreeInput): TreeFactory {
     const treeFactory = TreeFactory.create();
-    treeFactory.mapTreeItems({ treeItems, parentId: 0, treeNodeChildrenKey, treeNodeIdKey, checkboxDisabledKey });
+    treeFactory.mapTreeItems({treeItems, parentId: undefined, treeNodeChildrenKey, treeNodeIdKey, checkboxDisabledKey, treeNodeTitleKey});
     return treeFactory;
   }
 
   constructor() {
     this.idx = 0;
     this.nodes = {};
-    this.treeChildren = {};
   }
 
   mapTreeItems = ({
                     treeItems,
-    parentId = 0,
-    treeNodeChildrenKey = 'items',
-    treeNodeIdKey = 'id',
-    checkboxDisabledKey = 'disabled'
+                    parentId,
+                    treeNodeChildrenKey = 'items',
+                    treeNodeIdKey = 'id',
+                    checkboxDisabledKey = 'disabled',
+                    treeNodeTitleKey = 'title'
                   }: ITreeInput) => {
     forEach(treeItems, (item: ITreeItem) => {
       const node = this.addNode({
         id: item[treeNodeIdKey],
         parentId,
-        title: item.title,
+        title: item[treeNodeTitleKey],
         isOpen: !!item.open,
         data: item.data || {},
         originItem: item,
-        isParent: !!item.isParent,
+        isParent: !!item.isParent || !!(item['children'] && item['children'].length > 0),
         loading: !!item.loading,
         isMatch: !!item.isMatch,
         isHide: !!item.isHide,
         isChecked: !!item.isChecked,
+        halfChecked: !!item.halfChecked,
         isActive: !!item.isActive,
         disabled: !!item[checkboxDisabledKey],
         disableAdd: !!item.disableAdd,
         disableEdit: !!item.disableEdit,
-        disableDelete: !!item.disableDelete
+        disableDelete: !!item.disableDelete,
+        children: []
       });
-      this.mapTreeItems({ treeItems: item[treeNodeChildrenKey] || [], parentId: node.id, treeNodeChildrenKey: treeNodeChildrenKey,
-         treeNodeIdKey: treeNodeIdKey, checkboxDisabledKey: checkboxDisabledKey });
+
+      if (!!item.isChecked) {
+        this._checked.add(node);
+      }
+
+      this.mapTreeItems({
+        treeItems: item[treeNodeChildrenKey] || [], parentId: node.id, treeNodeChildrenKey, treeNodeIdKey,
+        checkboxDisabledKey, treeNodeTitleKey
+      });
     });
     return this;
   }
 
-  addNode({ id, parentId = 0, ...data }: ITreeNodeData): TreeNode {
+  addNode({id, parentId, ...data}: ITreeNodeData): TreeNode {
     if (isUndefined(id)) {
       this.idx++;
       id = this.idx;
     }
     const treeNode = new TreeNode(id, parentId, data);
+    if (this.nodes.hasOwnProperty(treeNode.id)) {
+      throw new Error(`Duplicated id: ${treeNode.id} detected, please specify unique ids in the tree.`);
+    }
     this.nodes = {
       ...this.nodes,
       [treeNode.id]: treeNode
     };
+
+    this.addChildNode(this.nodes[parentId], treeNode);
     return treeNode;
   }
 
@@ -145,10 +167,14 @@ export class TreeFactory {
   }
 
   deleteNodeById(id: number) {
-    const deleteItems = (childId) => {
-      const children = this.getChildrenById(childId);
-      this.nodes = omitBy<Dictionary<TreeNode>>(this.nodes, (node) => {
-        return node.id === childId;
+    const node = this.nodes[id];
+    const parentNode = this.nodes[node.parentId];
+    this.removeChildNode(parentNode, node);
+
+    const deleteItems = (nodeId) => {
+      const children = this.getChildrenById(nodeId);
+      this.nodes = omitBy<Dictionary<TreeNode>>(this.nodes, (_node) => {
+        return _node.id === id;
       });
       forEach(children, (child) => {
         deleteItems(child.id);
@@ -165,7 +191,7 @@ export class TreeFactory {
 
   openNodesById(id: number) {
     this.nodes[id].data.isOpen = true;
-    if (this.nodes[id].parentId !== 0) {
+    if (this.nodes[id].parentId !== undefined) {
       this.openNodesById(this.nodes[id].parentId);
     }
     return this;
@@ -173,7 +199,7 @@ export class TreeFactory {
 
   closeNodesById(id: number) {
     this.nodes[id].data.isOpen = false;
-    if (this.nodes[id].parentId !== 0) {
+    if (this.nodes[id].parentId !== undefined) {
       this.closeNodesById(this.nodes[id].parentId);
     }
     return this;
@@ -185,8 +211,8 @@ export class TreeFactory {
     const parentId = this.nodes[id].parentId;
     this._disabledParentNodes(parentId);
 
-    const disabledNodes = (childId: number) => {
-      const children = this.getChildrenById(childId);
+    const disabledNodes = (nodeId: number) => {
+      const children = this.getChildrenById(nodeId);
       if (children.length > 0) {
         children.forEach((child) => {
           this.nodes[child.id].data.disabled = true;
@@ -198,14 +224,14 @@ export class TreeFactory {
     return this;
   }
 
-  private _disabledParentNodes(parentId: number) {
+  private _disabledParentNodes(parentId: number | undefined) {
     const children = this.getChildrenById(parentId);
 
     if (children.length < 1) {
       return;
     }
-    const result = reduce(children, (res: boolean, child) => {
-      return res && child.data.disabled;
+    const result = reduce(children, (status: boolean, child) => {
+      return status && child.data.disabled;
     }, true);
 
     if (this.nodes[parentId]) {
@@ -214,46 +240,58 @@ export class TreeFactory {
   }
 
   checkNodesById(id: number, checked: boolean): Array<Object> {
+    this.nodes[id].data.halfChecked = false;
     this.nodes[id].data.isChecked = checked;
 
-    const parentId = this.nodes[id].parentId;
-    this._addCheckToParentNodes(parentId);
-
-    const addCheckedToNodes = (childId: number) => {
-      const children = this.getChildrenById(childId);
-      if (children.length > 0) {
-        children.forEach((child) => {
-          const nodeData = this.nodes[child.id].data;
-          if (!nodeData.disabled) {
-            nodeData.isChecked = checked;
-          }
-          addCheckedToNodes(child.id);
-        });
-      }
-    };
-    addCheckedToNodes(id);
+    this.checkParentNodes(this.nodes[id]);
+    this.checkChildNodes(this.nodes[id], checked);
+    this.maintainCheckedNodeList(this.nodes[id], checked);
     return this.getCheckedNodes();
   }
 
-  private _addCheckToParentNodes(parentId: number) {
-    const children = this.getChildrenById(parentId);
-    if (children.length < 1) {
-      return;
+  private checkParentNodes(node: TreeNode) {
+    const {parentId} = node;
+    const parentNode = this.nodes[parentId];
+    if (parentNode) {
+      const childrenNode = this.getChildrenById(parentId);
+      if (childrenNode.every(childNode => childNode.data.isChecked && !childNode.data.halfChecked)) {
+        parentNode.data.isChecked = true;
+        parentNode.data.halfChecked = false;
+      } else if (childrenNode.some(childNode => childNode.data.halfChecked || childNode.data.isChecked)) {
+        parentNode.data.isChecked = true;
+        parentNode.data.halfChecked = true;
+      } else {
+        parentNode.data.isChecked = false;
+        parentNode.data.halfChecked = false;
+      }
+      this.maintainCheckedNodeList(parentNode, parentNode.data.isChecked);
+      this.checkParentNodes(parentNode);
     }
-    const parentChecked = reduce(children, (result: boolean, child) => {
-      return result && child.data.isChecked;
-    }, true);
+  }
 
-    if (this.nodes[parentId]) {
-      this.nodes[parentId].data.isChecked = parentChecked;
+  private checkChildNodes(node: TreeNode, checked: boolean) {
+    const {id} = node;
+    const childrenNode = this.getChildrenById(id);
+    if (childrenNode.length > 0) {
+      childrenNode.forEach(childNode => {
+        const {id: childId} = childNode;
+        const {data: nodeData} = this.nodes[childId];
+        if (!nodeData.disabled) {
+          nodeData.isChecked = checked;
+          nodeData.halfChecked = false;
+          this.maintainCheckedNodeList(childNode, checked);
+        }
+        this.checkChildNodes(childNode, checked);
+      });
+      const childrenFullCheckedCount = childrenNode.filter(({data: nodeData}) => nodeData.isChecked).length;
+      const childrenCheckedCount = childrenNode
+        .filter(({data: nodeData}) => nodeData.isChecked || nodeData.halfChecked).length;
+      node.data.halfChecked = childrenCheckedCount > 0 && childrenNode.length > childrenFullCheckedCount;
     }
   }
 
   getCheckedNodes(): Array<any> {
-    const results = pickBy(this.nodes, (node) => {
-      return node.data.isChecked === true;
-    });
-    return values(results);
+    return Array.from(this._checked);
   }
 
   getDisabledNodes(): Array<any> {
@@ -273,13 +311,20 @@ export class TreeFactory {
   }
 
   getChildrenById(id: number): Array<TreeNode> {
-    return filter(this.nodes,
-      (node: TreeNode) => {
-        return node.parentId === id;
-      });
+    if (this.nodes[id]) {
+      return this.nodes[id].data.children || [];
+    } else if (id === undefined) {
+      return this._treeRoot;
+    }
+
+    return [];
   }
 
-  toTree() {
+  /*
+  * @deprecated
+  *
+  */
+  private toTree() {
     const patchChildren = (nodes: any) => {
       return map(nodes, (node: any) => {
         return {
@@ -289,7 +334,7 @@ export class TreeFactory {
       });
     };
 
-    return patchChildren(this.getChildrenById(0));
+    return patchChildren(this.getChildrenById(undefined));
   }
 
   startLoading(id: number) {
@@ -300,29 +345,95 @@ export class TreeFactory {
     this.nodes[id].data.loading = false;
   }
 
-  isMatchNode(inputValue: string, hideUnmatched?: boolean) {
-    const trimedValue = trim(inputValue);
-    forEach(this.nodes, (node: TreeNode) => {
-      this.nodes[node.id].data.isMatch = false;
-      this.nodes[node.id].data.isHide = false;
-      if (!isEmpty(trimedValue)) {
-        this.nodes[node.id].data.isHide = hideUnmatched ? true : false;
-        if (node.data.title.toLowerCase().includes(trimedValue.toLocaleLowerCase()) ) {
-          this.nodes[node.id].data.isMatch = true;
-          this.nodes[node.id].data.isHide = false;
-          if (this.nodes[node.parentId]) {
-            let parentId = node.parentId;
-            while (hideUnmatched && parentId !== 0) {
-              this.nodes[parentId].data.isHide = false;
-              parentId = this.nodes[parentId].parentId;
-            }
-            if (this.getChildrenById(node.parentId).length > 0) {
-              this.openNodesById(node.parentId);
-            }
-          }
-        }
+
+  /*
+  * @deprecated
+  */
+  private isMatchNode(inputValue: string, hideUnmatched?: boolean) {
+    const target = trim(inputValue);
+    this.resetSearchResults();
+    this.dfs(target.toLowerCase(), this._treeRoot, hideUnmatched);
+  }
+
+  getNodeById(id): any {
+    return this.nodes[id].data;
+  }
+
+  hideNodeById(id, hide: boolean) {
+    this.nodes[id].data.isHide = hide;
+    return this;
+  }
+
+  private maintainCheckedNodeList(node: TreeNode, checked: boolean) {
+    if (checked && !node.data.halfChecked) {
+      this._checked.add(node);
+    } else {
+      this._checked.delete(node);
+    }
+  }
+
+  private dfs(target, tree, hideUnmatched?: boolean) {
+    if (!tree) { return false; }
+    if (!target) { return false; }
+    if (Array.isArray(tree)) {
+      return tree.map(treeNode => {
+        return this.dfs(target, treeNode, hideUnmatched);
+      });
+    } else {
+      const treeNode = tree;
+      const treeChildren = this.getChildrenById(treeNode.id);
+      const selfMatched = treeNode.data.title.toLowerCase().includes(target);
+      if (selfMatched) {
+        treeNode.data.isMatch = true;
       }
+      // Test if children matches target recursively, do not hide children if parent is matched.
+      const childrenMatched = this.dfs(target, treeChildren, hideUnmatched && !selfMatched).some(_ => !!_);
+      if (selfMatched || childrenMatched) {
+        // Open Node if matched target
+        if (treeChildren.length > 0) {
+          this.openNodesById(treeNode.id);
+        }
+        return true;
+      } else {
+        treeNode.data.isHide = hideUnmatched;
+        return false;
+      }
+    }
+  }
+
+  private addChildNode(parentNode: TreeNode, childNode: TreeNode) {
+    if (parentNode) {
+      Array.isArray(parentNode.data.children) ?
+        parentNode.data.children.push(childNode) : parentNode.data.children = [childNode];
+    } else {
+      this._treeRoot.push(childNode);
+    }
+  }
+
+  private removeChildNode(parentNode: TreeNode, childNode: TreeNode) {
+    if (parentNode) {
+      parentNode.data.children = parentNode.data.children.filter(node => node.id !== childNode.id);
+    } else {
+      this._treeRoot = this._treeRoot.filter(node => node.id !== childNode.id);
+    }
+  }
+
+  private resetSearchResults() {
+    Object.keys(this.nodes).forEach((key) => {
+      const treeNode = this.nodes[key];
+      treeNode.data.isMatch = false;
+      treeNode.data.isHide = false;
     });
+  }
+
+  public searchTree(target, hideUnmatched = false) {
+    target = trim(target);
+    this.resetSearchResults();
+    this.dfs(target.toLowerCase(), this._treeRoot, hideUnmatched);
+  }
+
+  get treeRoot() {
+    return this._treeRoot;
   }
 
 }

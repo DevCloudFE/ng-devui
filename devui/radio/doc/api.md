@@ -1,15 +1,25 @@
-### ave-radio-group
+### d-radio-group 参数
 
 | 参数     | 类型    | 默认          |   说明                 |
 | :------: | :-----: | :-----------: | :----------------------|
-| name     | string  | (none)        | 必选参数，单选项标题 |
-| disabled | boolean | (none)        | 可选参数，是否禁用该单选项 |
-| values    | array  | (none)        | 必选参数，单选数据组 |
+| name     | `string`  | --        | 必选，单选项名称 |
+| values    | `array`  | --        | 必选，单选数据组 |
+| disabled | `boolean` | false      | 可选，是否禁用该单选项组 |
 
-### ave-radio
+### d-radio-group 事件
+| 事件    | 类型     |   说明                 |
+| :------:   | :-----:  | :----------------------|
+| change     | 选中选项的value值   | 单选项值改变时触发，返回选中的值 |
+
+### d-radio 参数
 
 | 参数     | 类型    | 默认          |   说明                 |
 | :------: | :-----: | :-----------: | :----------------------|
-| name     | string  | (none)        | 必选参数，单选项标题 |
-| disabled | boolean | (none)        | 可选参数，是否禁用该单选项 |
-| value    | string  | (none)        | 必选参数，单选项值 |
+| name     | `string`  | --        | 必选，单选项名称 |
+| value    | `string`  | --        | 必选，单选项值 |
+| disabled | `boolean` | false        | 可选，是否禁用该单选项 |
+
+### d-radio 事件
+| 事件    | 类型     |   说明                 |
+| :------:   | :-----:  | :----------------------|
+| ngModelChange     | 选中选项的value值   | 单选项值改变时触发，返回选中的值 |

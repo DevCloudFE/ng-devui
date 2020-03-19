@@ -1,10 +1,9 @@
 <section>
-  <ave-button (click)="fetchCustomLoading()">click me!</ave-button>
-  <div aveLoading [loading]="loading2" [templateRef]="templateRef" [style.height.px]="350"></div>
-  <ng-template #templateRef>
-    <div class="ave-loading-demo">
-      <div>One moment please...</div>
-      <div class="ave-loading-img"></div>
+  <d-button (click)="fetchCustomLoading()">click me!</d-button>
+  <div dLoading [loading]="loading2" [loadingTemplateRef]="loadingTemplateRef" [style.height.px]="150"></div>
+  <ng-template #loadingTemplateRef>
+    <div class="devui-loading-demo">
+      <div class="custom-loader"></div>
     </div>
   </ng-template>
 </section>

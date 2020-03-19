@@ -1,7 +1,7 @@
 import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { Component } from '@angular/core';
 @Component({
-  selector: 'ave-auto-complete-demo',
+  selector: 'd-auto-complete-demo',
   templateUrl: './auto-complete-demo.component.html'
 })
 export class AutoCompleteDemoComponent {

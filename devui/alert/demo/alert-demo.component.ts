@@ -5,7 +5,7 @@ import {
 import { DevuiSourceData } from '../../shared/devui-codebox';
 
 @Component({
-    selector: 'ave-demo-alert',
+    selector: 'd-alert-demo',
     templateUrl: './alert-demo.component.html'
 })
 export class AlertDemoComponent {

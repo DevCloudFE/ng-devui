@@ -1,40 +1,44 @@
 import {
-  AfterContentInit,
-  ChangeDetectorRef,
   Component,
-  ContentChild,
-  ContentChildren,
-  ElementRef,
-  EventEmitter,
-  HostBinding,
-  HostListener,
   Input,
+  ContentChildren,
+  Output,
+  EventEmitter,
+  ContentChild,
   OnDestroy,
   OnInit,
-  Output,
+  AfterContentInit,
   QueryList,
+  ElementRef,
+  ViewChild,
+  HostListener,
+  HostBinding,
+  ChangeDetectorRef,
   TemplateRef,
-  ViewChild
+  NgZone
 } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { WindowRef } from '../window-ref/window-ref.service';
+import { DataTableColumnTmplComponent } from './tmpl/data-table-column-tmpl.component';
 import {
   CellSelectedEventArg,
-  ColumnDefs,
-  DataTablePager,
   RowCheckChangeEventArg,
   RowSelectedEventArg,
-  SortEventArg
+  ColumnDefs,
+  DataTablePager,
+  SortEventArg,
+  FilterConfig,
+  CheckableRelation,
+  TableExpandConfig
 } from './data-table.model';
-import { DataTableColumnTmplComponent } from './tmpl/data-table-column-tmpl.component';
-import { DataTableFootTmplComponent } from './tmpl/data-table-foot-tmpl.component';
 import { DataTableHeadTmplComponent } from './tmpl/data-table-head-tmpl.component';
-import { DataTablePagerTmplComponent } from './tmpl/data-table-pager-tmpl.component';
+import { DataTableFootTmplComponent } from './tmpl/data-table-foot-tmpl.component';
 import { DataTableTmplsComponent } from './tmpl/data-table-tmpls.component';
+import { DataTablePagerTmplComponent } from './tmpl/data-table-pager-tmpl.component';
+import { Subscription } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { WindowRef } from 'ng-devui/window-ref';
 
 @Component({
-  selector: 'ave-data-table',
+  selector: 'd-data-table',
   templateUrl: './data-table.component.html',
   styleUrls: [
     './data-table.component.scss',
@@ -44,7 +48,7 @@ import { DataTableTmplsComponent } from './tmpl/data-table-tmpls.component';
   exportAs: 'dataTable'
 })
 export class DataTableComponent implements OnDestroy, OnInit, AfterContentInit {
-  @HostBinding('attr.ave-ui') aveUi = true;
+  @HostBinding ('style.display') display = 'block';
   /**
    * 【可选】Datatable是否提供勾选行的功能
    */
@@ -143,6 +147,10 @@ export class DataTableComponent implements OnDestroy, OnInit, AfterContentInit {
    */
   @Output() rowDBClick = new EventEmitter<RowSelectedEventArg>();
   /**
+* 获取checked的选项列表
+*/
+  @Output() getCheckedRows = new EventEmitter();
+  /**
    * 表格行双击事件
    */
   @Output() detialToggle = new EventEmitter<RowSelectedEventArg>();
@@ -174,26 +182,52 @@ export class DataTableComponent implements OnDestroy, OnInit, AfterContentInit {
    * 列宽变化事件
    */
   @Output() resize = new EventEmitter<DataTableColumnTmplComponent>();
+  /**
+   * 当前表格层级，默认为0，在树形表格场景下自增长
+   */
+  @Input() tableLevel = 0;
+    /**
+   * 配置树形表格的父子选中是否互相关联
+   * upward：选中子关联父
+   * downward： 选中父关联子
+   */
+  @Input() checkableRelation: CheckableRelation = {upward: true, downward: true};
+  /**
+   * 异步加载子列表
+   */
+  @Input() loadChildrenTable: (rowItem: any) => Promise<any>;
+  /**
+   * 异步加载全部子列表
+   */
+  @Input() loadAllChildrenTable: () => Promise<any>;
+  /**
+   * 是否虚拟滚动
+   */
+  @Input() virtualScroll;
+  /**
+   * 配置header的展开内容
+   */
+  @Input() headerExpandConfig: TableExpandConfig;
 
   @ContentChildren(DataTableColumnTmplComponent) columns: QueryList<
     DataTableColumnTmplComponent
   >;
-  @ContentChild(DataTableHeadTmplComponent)
+  @ContentChild(DataTableHeadTmplComponent, { static: false })
   headTemplate: DataTableHeadTmplComponent;
-  @ContentChild(DataTableFootTmplComponent)
+  @ContentChild(DataTableFootTmplComponent, { static: false })
   footTemplate: DataTableFootTmplComponent;
-  @ContentChild(DataTablePagerTmplComponent)
+  @ContentChild(DataTablePagerTmplComponent, { static: false })
   pagerTemplate: DataTablePagerTmplComponent;
-  @ContentChild('noResultTemplateRef') noResultTemplate: TemplateRef<any>;
-  @ViewChild(DataTableTmplsComponent)
+  @ContentChild('noResultTemplateRef', { static: false }) noResultTemplate: TemplateRef<any>;
+  @ViewChild(DataTableTmplsComponent, { static: true })
   dataTableTemplates: DataTableTmplsComponent;
-  @ViewChild('showDetailColumnRef')
+  @ViewChild('showDetailColumnRef', { static: true })
   showDetailColumn: DataTableColumnTmplComponent;
-  @ViewChild('checkableColumnRef')
+  @ViewChild('checkableColumnRef', { static: true })
   checkableColumn: DataTableColumnTmplComponent;
-  @ViewChild('fixHeaderRef') fixHeaderRefElement: ElementRef;
-  @ViewChild('resizeBar') resizeBarRefElement: ElementRef;
-  @ViewChild('tableView') tableViewRefElement: ElementRef;
+  @ViewChild('fixHeaderRef', { static: false }) fixHeaderRefElement: ElementRef;
+  @ViewChild('resizeBar', { static: true }) resizeBarRefElement: ElementRef;
+  @ViewChild('tableView', { static: true }) tableViewRefElement: ElementRef;
 
   _dataSource: any[] = [];
   _pageAllChecked = false;
@@ -205,6 +239,7 @@ export class DataTableComponent implements OnDestroy, OnInit, AfterContentInit {
   isCellEdit: boolean;
   editRowItem: any;
   documentClickEvent = new EventEmitter<Event>();
+  cellEditorClickEvent = new EventEmitter<Event>();
   _hideColumn: string[] = [];
   _columns: DataTableColumnTmplComponent[];
   displayDataSource: any[];
@@ -215,15 +250,15 @@ export class DataTableComponent implements OnDestroy, OnInit, AfterContentInit {
 
   searchQueryChange = new EventEmitter<{ [key: string]: any }>();
 
+  halfChecked = false;
+
   @Input() set dataSource(dataSource: any[]) {
     if (null === dataSource || !dataSource) {
       dataSource = [];
     }
     this._dataSource = dataSource;
-    this._pageAllChecked =
-      dataSource &&
-      dataSource.length > 0 &&
-      this.dataSource.every(item => item.$checked);
+    this._pageAllChecked = dataSource && dataSource.length > 0 && !this.dataSource.some(this.isNotAllChecked);
+    this.halfChecked = (this.getCheckRows().length) && this.dataSource.some(this.isNotAllChecked);
   }
 
   get dataSource() {
@@ -262,11 +297,14 @@ export class DataTableComponent implements OnDestroy, OnInit, AfterContentInit {
   @Input() set pageAllChecked(pageAllChecked: boolean) {
     if (pageAllChecked) {
       this._dataSource = this.dataSource.map(item => {
-        item.$checked = true;
+        if (!item.$disabled) {
+          item.$checked = true;
+        }
         return item;
       });
     }
     this._pageAllChecked = pageAllChecked;
+    this.halfChecked = (this.getCheckRows().length) && this.dataSource.some(this.isNotAllChecked);
   }
 
   get pageAllChecked() {
@@ -281,26 +319,15 @@ export class DataTableComponent implements OnDestroy, OnInit, AfterContentInit {
     return this._lazy;
   }
 
-  constructor(
-    private windowRef: WindowRef,
-    private elementRef: ElementRef,
-    private changeDetectorRef: ChangeDetectorRef
-  ) {}
-
-  @HostListener('document:click', ['$event'])
-  onDocumentClick($event: Event) {
-    this.documentClickEvent.emit($event);
-  }
-
-  @HostListener('window:wheel', ['$event'])
-  onWinScroll($event: Event) {
-    this.scrollStream.emit($event);
+  constructor(private windowRef: WindowRef, private elementRef: ElementRef,
+    private changeDetectorRef: ChangeDetectorRef, private ngZone: NgZone) {
   }
 
   getColumns() {
-    const cols = this.columns.filter(column => {
-      return !this.hideColumn.some(field => column.field === field);
-    });
+    const cols = this.columns
+      .filter(column => {
+        return !this.hideColumn.some(field => column.field === field);
+      });
     cols.sort((first, second) => first.order - second.order);
     return cols;
   }
@@ -311,6 +338,24 @@ export class DataTableComponent implements OnDestroy, OnInit, AfterContentInit {
       this.pager = null;
     }
     this.setupScrollEvent();
+    this.ngZone.runOutsideAngular(() => {
+      document.addEventListener(
+          'click',
+          this.onDocumentClick.bind(this)
+      );
+      window.addEventListener(
+        'wheel',
+        this.onWinScroll.bind(this)
+      );
+    });
+  }
+
+  onDocumentClick($event: Event) {
+    this.documentClickEvent.emit($event);
+  }
+
+  onWinScroll($event: Event) {
+    this.scrollStream.emit($event);
   }
 
   ngAfterContentInit() {
@@ -413,25 +458,116 @@ export class DataTableComponent implements OnDestroy, OnInit, AfterContentInit {
   onDetailToggle($event: any) {
     this.detialToggle.emit($event);
   }
+// 判断当前数据与子数据是否全部选中
+  isNotAllChecked = (data) => {
+    if (!data.$checked) {
+      return true;
+    }
+    if (data.children) {
+      return data.children.some(this.isNotAllChecked);
+    }
+  }
 
   onRowCheckChange($event: RowCheckChangeEventArg) {
-    this.pageAllChecked = !this.dataSource.some(item => !item.$checked);
+    // 处理children的选中
+    if ($event.rowItem.children && this.checkableRelation.downward) {
+      this.setChildrenCheckedStatus($event.rowItem.children, $event.checked);
+    }
+
+    // 处理parents的选中
+    if (this.checkableRelation.upward) {
+      const nestedIndexArray = $event.nestedIndex.split(',');
+      nestedIndexArray.shift();
+      const nestedIndexArrayToInt = nestedIndexArray.map((value) => {
+        // tslint:disable-next-line:radix
+        return parseInt(value);
+      });
+      // 通过选中行的父级索引设置父的选中状态
+      this.setParentCheckStatus(nestedIndexArrayToInt);
+    }
+
+    // 处理整个table header的选中
+    const hasUnChecked = this.dataSource.some((item) => {
+      return !item.$checked;
+    });
+    const hasChecked = this.dataSource.some((item) => {
+      return item.$checked || item.$halfChecked;
+    });
+    this.pageAllChecked = !hasUnChecked;
+    this.halfChecked = hasUnChecked && hasChecked;
+
     this.rowCheckChange.emit($event);
+    this.getCheckedRows.emit(this.getCheckRows());
+  }
+
+  setParentCheckStatus (nestedIndex) {
+    if (nestedIndex.length > 0) {
+      const topIndex = nestedIndex[0];
+      const topParent = this.dataSource[topIndex];
+      const argNestedIndex = [...nestedIndex];
+      argNestedIndex.shift();
+      const lastParent = this.findLastParent(topParent, argNestedIndex);
+      this.setSelfCheckStatus(lastParent);
+
+      nestedIndex.pop();
+      if (nestedIndex.length > 0) {
+        this.setParentCheckStatus(nestedIndex);
+      }
+    }
+  }
+
+  findLastParent(source, indexArray) {
+    if (source && indexArray.length > 0) {
+      const topIndex = indexArray[0];
+      const topParent = source.children[topIndex];
+      indexArray.shift();
+      return this.findLastParent(topParent, indexArray);
+    } else {
+      return source;
+    }
+  }
+
+  setSelfCheckStatus(data) {
+    if (data && data.children) {
+      const hasUnChecked = data.children.some((child) => {
+        return !child.$checked;
+      });
+
+      const hasChecked = data.children.some((child) => {
+        return child.$checked || child.$halfChecked;
+      });
+
+      data.$checked = !hasUnChecked;
+      data.$halfChecked = hasUnChecked && hasChecked;
+    }
+  }
+
+  setChildrenCheckedStatus(data, checked) {
+    return data.map(item => {
+      if (!item.$disabled) {
+        item.$checked = checked;
+        item.$halfChecked = false;
+      }
+
+      if (item.children) {
+        item.children = this.setChildrenCheckedStatus(item.children, checked);
+      }
+      return item;
+    });
   }
 
   onCheckAllChange($event: boolean) {
     if (this.dataSource) {
-      this._dataSource = this.dataSource.map(item => {
-        item.$checked = $event;
-        return item;
-      });
+      this._dataSource = this.setChildrenCheckedStatus(this.dataSource, $event);
       this.pageAllChecked = $event;
     }
+    this.halfChecked = (this.getCheckRows().length) && this.dataSource.some(this.isNotAllChecked);
     this.checkAllChange.emit($event);
+    this.getCheckedRows.emit(this.getCheckRows());
     this.changeDetectorRef.markForCheck();
   }
 
-  onSearchQueryChange($event: { [key: string]: any }) {
+  onSearchQueryChange($event: { [key: string]: any; }) {
     this.searchQueryChange.emit($event);
   }
 
@@ -443,7 +579,7 @@ export class DataTableComponent implements OnDestroy, OnInit, AfterContentInit {
   }
 
   getCheckRows(): any[] {
-    return this.dataSource ? this.dataSource.filter(item => item.$checked) : [];
+    return this.dataSource ? this.dataSource.filter(item => item.$checked || item.$halfChecked) : [];
   }
 
   getSelectedRowItem(): any[] {
@@ -536,5 +672,48 @@ export class DataTableComponent implements OnDestroy, OnInit, AfterContentInit {
       debounceTime(300),
       distinctUntilChanged()
     );
+  }
+
+  onChildTableOpen(rowItem) {
+    let loadChildrenResult = Promise.resolve(true);
+    if (this.loadChildrenTable) {
+      loadChildrenResult = this.loadChildrenTable(rowItem);
+    }
+    loadChildrenResult.then(() => {
+      // 异步加载子表格是检查选中状态
+      if (rowItem.$checked && this.checkableRelation.downward) {
+        this.setChildrenCheckedStatus(rowItem.children, rowItem.$checked);
+      }
+    });
+  }
+
+  setChildrenToogleStatus(data, open) {
+    return data.map(item => {
+      if (item.children) {
+        item.$isChildTableOpen = open;
+        item.children = this.setChildrenToogleStatus(item.children, open);
+      }
+      return item;
+    });
+  }
+
+  // 切换表头的子表格展开收起
+  onToggleChildrenTable (open) {
+    if (open) {
+      let loadAllChildrenResult = Promise.resolve(true);
+      if (this.loadAllChildrenTable) {
+        loadAllChildrenResult = this.loadAllChildrenTable();
+      }
+      loadAllChildrenResult.then(() => {
+        this.dataSource.forEach(item => {
+          if (item.$checked && item.children) {
+            this.setChildrenCheckedStatus(item.children, true);
+          }
+        });
+        this.setChildrenToogleStatus(this.dataSource, open);
+      });
+    } else {
+      this.setChildrenToogleStatus(this.dataSource, open);
+    }
   }
 }

@@ -4,7 +4,7 @@ import { DragDropService } from '../services/drag-drop.service';
 import { Utils } from '../shared/utils';
 
 @Directive({
-    selector: '[aveDraggable]'
+    selector: '[dDraggable]'
 })
 /**
  * Makes an element draggable by adding the draggable html attribute
@@ -129,7 +129,6 @@ export class DraggableDirective implements OnInit, AfterViewInit {
             e.dataTransfer.effectAllowed = this.dragEffect;
             if (this.enableDragFollow) {
               if ('function' === typeof DataTransfer.prototype.setDragImage) {
-                // console.log('setDragImage');
                 e.dataTransfer.setDragImage(this.imageHandle, 0 , 0);
               } else {
                   e.srcElement.style.display = 'none';
@@ -242,6 +241,7 @@ export class DraggableDirective implements OnInit, AfterViewInit {
     }
     // 兼容各种浏览器的,获取鼠标真实位置
     private mousePosition(event) {
+      // tslint:disable-next-line: deprecation 用于兼容老一点浏览器
       if (!event) { event = window.event; }
       return {
           x: event.clientX,

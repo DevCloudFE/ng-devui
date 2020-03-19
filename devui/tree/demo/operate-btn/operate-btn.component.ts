@@ -2,13 +2,13 @@ import { Component, ViewChild } from '@angular/core';
 import { ITreeItem, OperableTreeComponent, TreeNode } from 'ng-devui';
 
 @Component({
-  selector: 'ave-operate-btn',
+  selector: 'd-operate-btn',
   templateUrl: './operate-btn.component.html',
   styleUrls: ['./operate-btn.component.css']
 })
 export class OperateBtnComponent {
   currentSelectedNode;
-  @ViewChild('operableTree') operableTree: OperableTreeComponent;
+  @ViewChild('operableTree', { static: true }) operableTree: OperableTreeComponent;
   data = [{
     'title': '首页'
   }, {
@@ -73,7 +73,7 @@ export class OperateBtnComponent {
 
   addNode() {
     if (this.currentSelectedNode) {
-      const node = this.operableTree.operableTree.treeFactory.addNode({ parentId: this.currentSelectedNode.id, title: '新增一个节点' });
+      const node = this.operableTree.treeFactory.addNode({ parentId: this.currentSelectedNode.id, title: '新增一个节点' });
       this.currentSelectedNode.data.isOpen = true;
       console.log(node);
     }
@@ -81,13 +81,13 @@ export class OperateBtnComponent {
 
   editNodeTitle() {
     if (this.currentSelectedNode) {
-      this.operableTree.operableTree.treeFactory.editNodeTitle(this.currentSelectedNode.id);
+      this.operableTree.treeFactory.editNodeTitle(this.currentSelectedNode.id);
     }
   }
 
   deleteNode() {
     if (this.currentSelectedNode) {
-      this.operableTree.operableTree.treeFactory.deleteNodeById(this.currentSelectedNode.id);
+      this.operableTree.treeFactory.deleteNodeById(this.currentSelectedNode.id);
     }
   }
 }

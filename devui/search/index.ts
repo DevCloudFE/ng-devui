@@ -1,2 +1,1 @@
-export * from './search.component';
-export * from './search.module';
+export * from './public-api';

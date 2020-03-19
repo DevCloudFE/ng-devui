@@ -1,6 +1,6 @@
 import { ComponentFactoryResolver, Injectable } from '@angular/core';
 import { assign, isUndefined } from 'lodash-es';
-import { OverlayContainerRef } from '../overlay-container';
+import { OverlayContainerRef } from 'ng-devui/overlay-container';
 import { DrawerComponent } from './drawer.component';
 import { IDrawerOpenResult, IDrawerOptions } from './drawer.types';
 

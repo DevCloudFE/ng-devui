@@ -1,18 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
-  selector: 'ave-basic',
+  selector: 'd-anchor-basic',
   templateUrl: './basic.component.html',
   styleUrls: ['./basic.component.css']
 })
-export class BasicComponent implements OnInit {
-  demoDocViewer;
+export class BasicComponent {
   constructor() {
 
   }
-
-  ngOnInit() {
-    this.demoDocViewer = document.querySelector('.doc-viewer-container');
-  }
-
 }

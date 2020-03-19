@@ -1,14 +1,21 @@
 <section>
-  <ave-alert [type]="'success'" (onClose)="handleClose($event)">success
-  </ave-alert>
+  <d-alert [type]="'success'" (onClose)="handleClose($event)">
+    <span class="v-mid icon icon-right-o" style="color: rgb(255, 255, 255);"></span>
+    <span class="v-mid ml-10">成功。devcloud一站式云端DevOps平台。</span>
+  </d-alert>
 
-  <ave-alert [type]="'warning'" (onClose)="handleClose($event)">
+  <d-alert [type]="'warning'" (onClose)="handleClose($event)">
     <span class="v-mid icon icon-warning-o" style="color: rgb(255, 255, 255);"></span>
     <span class="v-mid ml-10">警告。devcloud一站式云端</span>
-  </ave-alert>
+  </d-alert>
 
-  <ave-alert [type]="'danger'" (onClose)="handleClose($event)">
+  <d-alert [type]="'danger'" (onClose)="handleClose($event)">
     <span class="v-mid icon icon-error-o" style="color: rgb(255, 255, 255);"></span>
     <span class="v-mid ml-10">错误。devcloud一站式云端</span>
-  </ave-alert>
+  </d-alert>
+
+  <d-alert [type]="'info'" (onClose)="handleClose($event)">
+    <span class="v-mid icon icon-info-o" style="color:#5170FF;"></span>
+    <span class="v-mid ml-10">提示性信息。devcloud一站式云端DevOps平台。</span>
+  </d-alert>
 </section>

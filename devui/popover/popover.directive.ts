@@ -1,22 +1,26 @@
-import { ComponentFactoryResolver,
+import {
+  ComponentFactoryResolver,
   ComponentRef,
   Directive,
   ElementRef,
-  HostListener,
-  Injector, Input,
+  Injector,
+  Input,
+  OnInit,
   OnDestroy,
   ViewContainerRef } from '@angular/core';
-import { OverlayContainerRef } from '../overlay-container';
-import { PositionType } from '../tooltip';
+import { OverlayContainerRef } from 'ng-devui/overlay-container';
 import { PopoverComponent } from './popover.component';
+import { fromEvent, Subscription,  merge } from 'rxjs';
+import { PopoverType, PositionType, TriggerType } from './popover.types';
 
 @Directive({
-  selector: '[avePopover]',
-  exportAs: 'avePopover',
+  selector: '[dPopover]',
+  exportAs: 'dPopover',
 })
-export class PopoverDirective implements OnDestroy {
+export class PopoverDirective implements OnInit, OnDestroy {
   popoverComponentRef: ComponentRef<PopoverComponent>;
   _content: string | HTMLElement;
+  private subscription: Subscription = new Subscription();
   /**
    * popover内容
    */
@@ -32,11 +36,7 @@ export class PopoverDirective implements OnDestroy {
     }
   }
   /**
-   * 悬浮框的触发方式
-   */
-  @Input() trigger = 'manual';
-  /**
-   * 将废弃
+   * 是否通过visible来控制popover状态
    */
   @Input() controlled: boolean;
   /**
@@ -56,21 +56,13 @@ export class PopoverDirective implements OnDestroy {
    */
   @Input() appendToBody = true;
   @Input() zIndex = 1060;
-  /**
-   * 手动控制弹出框显示
-   */
-  @Input() set visible(_visible: boolean) {
-    if (_visible) {
-      // when set value and create component at the same time，should wait after ng2 dirty check done
-      setTimeout(() => this.show(), 0);
-    } else {
-      this.hide();
-    }
-  }
-  /**
-   * 将废弃
-   */
-  @Input() set isShow(_isShow: boolean) {
+
+  @Input() popType: PopoverType = 'default';
+
+  // 触发 popover 的方式（点击/鼠标悬停等）
+  @Input() trigger: TriggerType = 'click';
+
+  @Input() set visible(_isShow: boolean) {
     if (_isShow) {
       // when set value and create component at the same time，should wait after ng2 dirty check done
       setTimeout(() => this.show(), 0);
@@ -80,24 +72,17 @@ export class PopoverDirective implements OnDestroy {
   }
 
   constructor(private triggerElementRef: ElementRef,
-    private overlayContainerRef: OverlayContainerRef,
-    private viewContainerRef: ViewContainerRef,
-    private injector: Injector,
-    private componentFactoryResolver: ComponentFactoryResolver) {
+              private overlayContainerRef: OverlayContainerRef,
+              private viewContainerRef: ViewContainerRef,
+              private injector: Injector,
+              private componentFactoryResolver: ComponentFactoryResolver) {
   }
 
-  @HostListener('click') onClick() {
-    if (this.trigger === 'click' || this.controlled) {
-      this.show();
-    }
-  }
 
-  @HostListener('document:click', ['$event'])
-  onDocumentClick(event) {
+  onDocumentClick = (event) => {
     event.stopPropagation();
-    if ((this.trigger === 'click' || this.controlled) &&
-    !this.triggerElementRef.nativeElement.contains(event.target) &&
-    !(this.popoverComponentRef && this.popoverComponentRef.instance.elementRef.nativeElement.contains(event.target))) {
+    if (this.controlled && !this.triggerElementRef.nativeElement.contains(event.target) &&
+      !(this.popoverComponentRef && this.popoverComponentRef.instance.elementRef.nativeElement.contains(event.target))) {
       this.hide();
     }
   }
@@ -119,6 +104,7 @@ export class PopoverDirective implements OnDestroy {
       content: this._content,
       triggerElementRef: this.triggerElementRef,
       position: this.position,
+      popType: this.popType,
       scrollElement: this.scrollElement,
       appendToBody: this.appendToBody,
       zIndex: this.zIndex
@@ -130,12 +116,12 @@ export class PopoverDirective implements OnDestroy {
 
     if (!this.popoverComponentRef) {
       this.createPopover();
-      // setTimeout(() => this.popoverComponentRef.instance.updatePosition());
     }
 
     if (this.showAnimate) {
       this.popoverComponentRef.instance.show();
     }
+    document.addEventListener('click', this.onDocumentClick);
   }
 
   destroy() {
@@ -143,10 +129,37 @@ export class PopoverDirective implements OnDestroy {
       this.popoverComponentRef.destroy();
       this.popoverComponentRef = null;
     }
+    document.removeEventListener('click', this.onDocumentClick);
+  }
+
+  ngOnInit() {
+    const element = this.triggerElementRef.nativeElement;
+    if (this.trigger === 'click') {
+      this.subscription.add(fromEvent(element, 'click').subscribe(event => {
+        if (this.controlled) {
+          this.show();
+        }
+      }));
+    } else if (this.trigger === 'hover') {
+      this.subscription.add(
+        merge(
+          fromEvent(element, 'mouseenter'),
+          fromEvent(element, 'mouseleave')
+        ).subscribe((event: MouseEvent) => {
+          if (event.type === 'mouseenter' && this.controlled) {
+            this.show();
+          }
+          if (event.type === 'mouseleave' && this.controlled) {
+            this.hide();
+          }
+        })
+      );
+    }
   }
 
   ngOnDestroy() {
     this.destroy();
+    this.subscription.unsubscribe();
   }
 
   hide() {

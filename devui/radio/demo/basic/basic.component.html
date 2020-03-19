@@ -1,9 +1,10 @@
 <section>
-  <ave-radio
+  <d-radio
     [name]="'independent-city'"
-    [(ngModel)]="choose2_3"
+    [(ngModel)]="choose2"
     *ngFor="let value of values2"
-    [value]="value">
+    [value]="value"
+    (ngModelChange)="valueChange($event)">
   The Radio value is: {{value}}
-  </ave-radio>
+  </d-radio>
 </section>

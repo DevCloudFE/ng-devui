@@ -11,3 +11,20 @@
   background-color: $gray3;
 }
 
+.child-table {
+  &:hover  {
+    background: transparent!important;
+  }
+  .devui-table {
+    background: transparent;
+    margin-bottom: 0;
+  }
+  & > td {
+    padding: 0 0 0 0;
+    border: 0;
+  }
+}
+
+.expand-row:hover {
+  background: inherit!important;
+}

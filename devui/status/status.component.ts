@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
-    selector: 'ave-status',
+    selector: 'd-status',
     templateUrl: './status.component.html',
     styleUrls: ['./status.component.scss']
 })
@@ -22,7 +22,7 @@ export class StatusComponent implements OnInit {
     }
 
     setClassMap() {
-        this.classMap = 'ave-status-bg-' + this.type;
+        this.classMap = 'd-status-bg-' + this.type;
     }
 
     constructor() { }

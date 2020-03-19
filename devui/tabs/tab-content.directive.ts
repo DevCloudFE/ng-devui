@@ -1,7 +1,7 @@
 import { Directive, TemplateRef } from '@angular/core';
 
 @Directive({
-  selector: '[aveTabContent]',
+  selector: '[dTabContent]',
 })
 export class TabContentDirective {
   constructor(public templateRef: TemplateRef<any>) {

@@ -1,22 +1,22 @@
 <h4>基本样式</h4>
 <div>
-    <ave-toggle checked></ave-toggle>
-    <ave-toggle [checked]="false"></ave-toggle>
+    <d-toggle></d-toggle>
+    <d-toggle [checked]="true"></d-toggle>
 </div>
 
 <h4>禁用状态</h4>
 <div>
-    <ave-toggle disabled></ave-toggle>
-    <ave-toggle checked [disabled]="true"></ave-toggle>
+    <d-toggle disabled></d-toggle>
+    <d-toggle checked="true" [disabled]="true"></d-toggle>
 </div>
 
 <h4>双向绑定</h4>
 <div>
-    <ave-toggle [(ngModel)]="enable"></ave-toggle> {{enable}}
+    <d-toggle [(ngModel)]="enable" [beforeChange]="beforeChange" (change)="onChange2($event)"></d-toggle> {{enable}}
 </div>
 
 <h4>回调事件</h4>
 <div>
-    <ave-toggle (change)="onChange()"></ave-toggle>
+    <d-toggle (change)="onChange($event)"></d-toggle>
     <div>Change count: {{count}}</div>
 </div>

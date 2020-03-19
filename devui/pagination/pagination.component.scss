@@ -1,3 +1,9 @@
+@import '../style/theme/color';
+
+:host {
+  display: block;
+}
+
 .devui-pagination {
   .page-size {
     display: inline-block;
@@ -32,9 +38,30 @@
     li {
       display: inline;
     }
-
+    li.disabled a {
+      background: $white;
+      opacity: 0.3;
+    }
     li:not(.disabled) {
       cursor: pointer;
+      a:hover, span:hover, a:focus, span:focus {
+        background: $hover-content;
+      }
+
+      &.active a {
+        &:hover, &:focus, &:active {
+          background: $focus1;
+        }
+      }
+
+      a.pagination-link:hover svg g polygon {
+        fill: $focus1;
+      }
+
+
+      a.pagination-link-lite:hover {
+        border: 1px solid $gray1 !important;
+      }
     }
 
     .pagination-link {
@@ -42,6 +69,12 @@
         vertical-align: middle;
       }
     }
+    .pagination-link-lite {
+      border: 1px solid transparent !important;
+      border-radius: 2px;
+    }
+
+   
   }
 
   .pagination > li > a {
@@ -58,7 +91,7 @@
 
   .pagination-lg > li > a {
     padding: 9px 17px;
-    font-size: 18px;
+    font-size: 16px;
     line-height: 1.3333333;
   }
 
@@ -139,4 +172,90 @@
       margin: 5px auto;
     }
   }
+  .lite-paginator {
+    display: inline-block;
+    margin-right: 5px;
+    width: 100px;
+  }
+  
+  .pagination-config {
+    color: $dark1;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 5px;
+  
+    .setup-icon {
+      line-height: 30px;
+      cursor: pointer;
+      display: flex;
+    }
+  
+    .config-container {
+      padding: 5px 0;
+      box-shadow: 0 0 6px 1px $dark-1-boxshadow;
+      border-radius: 2px;
+      width: 150px;
+      background-color: $white;
+      line-height: 26px;
+      position: absolute;
+      left: -136px;
+      top: 28px;
+      cursor: auto;
+      z-index: 1000;
+      -moz-user-select: none;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+  
+      .pagination-config-item.page-size-config {
+        border-bottom: none;
+      }
+  
+      .pagination-config-item {
+        padding-bottom: 8px;
+        padding-top: 5px;
+        border-bottom: 1px solid $gray2;
+  
+        .config-item-title {
+          color: $dark2;
+          padding-left: 10px;
+          font-size: 12px;
+          line-height: 22px;
+        }
+  
+        .page-number {
+          padding-left: 10px;
+          margin-top: 4px;
+          display: flex;
+          display: -ms-flexbox;
+  
+          div {
+            color: $dark1;
+            cursor: pointer;
+            border-top: 1px solid $gray1;
+            border-bottom: 1px solid $gray1;
+            border-right: 1px solid $gray1;
+            text-align: center;
+            height: 26px;
+            width: 26px;
+          }
+  
+          div:hover {
+            background-color: $hover-content;
+          }
+  
+          div:first-child {
+            border-left: 1px solid $gray1;
+          }
+  
+          .page-number div.choosed, .choosed {
+            color: $focus1;
+            background-color: $focus3 !important;
+            cursor: auto !important;
+          }
+        }
+      }
+    }
+}
 }

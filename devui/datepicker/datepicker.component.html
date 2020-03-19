@@ -1,119 +1,121 @@
 <div class="month-view {{cssClass}}">
-    <table class="table month-view-table">
-        <thead>
-        <tr>
-            <td>
-                <a *ngIf="openChooseYearAndMonth" class="btn-link" aria-hidden="true"
-                   (click)="onPreYearOption()"
-                   [ngClass]="{'disable-choose-year': !hasPreYearOption() || !openChooseYearAndMonth}">
-                   <span class="left-triangle"></span>
-                   <span class="left-triangle second"></span>
-                  </a>
-            </td>
-            <td>
-                <a *ngIf="hasPreMonth()" class="btn-link btn-left" aria-hidden="true"
-                   (click)="onPreMonth()">
-                   <svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                      <g id="collapse-left" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                        <g>
-                          <polygon id="left-path" fill="#293040" fill-rule="nonzero" points="10.7071068 12.2928932 9.29289322 13.7071068 3.58578644 8 9.29289322 2.29289322 10.7071068 3.70710678 6.41421356 8"></polygon>
-                        </g>
-                      </g>
-                    </svg>
+  <table class="table month-view-table">
+      <thead>
+      <tr>
+          <td>
+              <a *ngIf="openChooseYearAndMonth" class="btn-link" aria-hidden="true"
+                 (click)="onPreYearOption()"
+                 [ngClass]="{'disable-choose-year': !hasPreYearOption() || !openChooseYearAndMonth}">
+                 <span class="left-triangle"></span>
+                 <span class="left-triangle second"></span>
                 </a>
-            </td>
-            <td colspan="3" class="dropdown" [ngClass]="{'open': openChooseYearAndMonth}" (click)="toggle($event)">
-                <span class="date-title">{{dateConfig.months[currentMonth]}}</span>
-                <span class="date-title">{{currentYear}}</span>
-                <ul class="dropdown-menu monthOption text-center">
-                    <li *ngFor="let month of availableMonths;" class="dropdown-item"
-                        (mouseover)="changeHoverMonth(month)" (mouseleave)="changeHoverMonth(null)"
-                        [ngClass]="{'active': currentMonth == month}"
-                        (click)="onSelectMonth(month)">{{month + 1}}
-                    </li>
-                </ul>
-                <ul class="dropdown-menu yearOption text-center">
-                    <li *ngFor="let item of yearOptions" class="dropdown-item" (mouseover)="changeHoverYear(item)"
-                        (mouseleave)="changeHoverYear(null)"
-                        [ngClass]="{'active': currentYear == item}"
-                        (click)="onSelectYear(item, $event)">{{item}}
-                    </li>
-                </ul>
-            </td>
-            <td>
-                <a *ngIf="hasNextMonth()" class="btn-link" aria-hidden="true"
-                   (click)="onNextMonth()">
-                  <svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                      <g id="collapse-right" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                          <polygon id="right-path" fill="#293040" fill-rule="nonzero" transform="translate(8.146447, 8.000000) scale(-1, 1) translate(-8.146447, -8.000000) " points="11.7071068 12.2928932 10.2928932 13.7071068 4.58578644 8 10.2928932 2.29289322 11.7071068 3.70710678 7.41421356 8"></polygon>
+          </td>
+          <td>
+              <a *ngIf="hasPreMonth()" class="btn-link btn-left" aria-hidden="true"
+                 (click)="onPreMonth()">
+                 <svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <g id="collapse-left" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                      <g>
+                        <polygon id="left-path" fill-rule="nonzero" points="10.7071068 12.2928932 9.29289322 13.7071068 3.58578644 8 9.29289322 2.29289322 10.7071068 3.70710678 6.41421356 8"></polygon>
                       </g>
+                    </g>
                   </svg>
+              </a>
+          </td>
+          <td colspan="3" class="dropdown" [ngClass]="{'open': openChooseYearAndMonth}" (click)="toggle($event)">
+              <span class="date-title">{{dateConfig.months[currentMonth]}}</span>
+              <span class="date-title">{{currentYear}}</span>
+              <ul class="dropdown-menu monthOption text-center">
+                  <li *ngFor="let month of availableMonths;" class="dropdown-item"
+                      (mouseover)="changeHoverMonth(month)" (mouseleave)="changeHoverMonth(null)"
+                      [ngClass]="{'active': currentMonth == month}"
+                      (click)="onSelectMonth(month)">{{month + 1}}
+                  </li>
+              </ul>
+              <ul class="dropdown-menu yearOption text-center">
+                  <li *ngFor="let item of yearOptions" class="dropdown-item" (mouseover)="changeHoverYear(item)"
+                      (mouseleave)="changeHoverYear(null)"
+                      [ngClass]="{'active': currentYear == item}"
+                      (click)="onSelectYear(item, $event)">{{item}}
+                  </li>
+              </ul>
+          </td>
+          <td>
+              <a *ngIf="hasNextMonth()" class="btn-link btn-right" aria-hidden="true"
+                 (click)="onNextMonth()">
+                 <svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                  <g id="collapse-right" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <g>
+                      <polygon id="right-path" fill-rule="nonzero" points="10.7071068 12.2928932 9.29289322 13.7071068 3.58578644 8 9.29289322 2.29289322 10.7071068 3.70710678 6.41421356 8"></polygon>
+                    </g>
+                  </g>
+                </svg>
                 </a>
-            </td>
-            <td>
-                <a *ngIf="openChooseYearAndMonth" class="btn-link" aria-hidden="true"
-                   (click)="onNextYearOption()"
-                   [ngClass]="{'disable-choose-year': !hasNextYearOption() || !openChooseYearAndMonth}">
-                   <span class="right-triangle"></span>
-                   <span class="right-triangle second"></span>
-                  </a>
-            </td>
+          </td>
+          <td>
+              <a *ngIf="openChooseYearAndMonth" class="btn-link" aria-hidden="true"
+                 (click)="onNextYearOption()"
+                 [ngClass]="{'disable-choose-year': !hasNextYearOption() || !openChooseYearAndMonth}">
+                 <span class="right-triangle"></span>
+                 <span class="right-triangle second"></span>
+                </a>
+          </td>
 
-        </tr>
-        <tr class="small text-center week-header">
-            <td *ngFor="let item of dateConfig.weeks">{{item}}</td>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let week of displayWeeks">
-            <td *ngFor="let day of week" class="day"
-                [ngClass]="{'out-of-month': !day.inMonth, 'in-month-day': day.inMonth, 'active': isSelectDay(day.date),'disabled': isDisabledDay(day.date)}"
-                (click)="onSelectDate($event, day.date)">
-                <div class="ave-calendar-date">{{day.day}}</div>
-            </td>
-        </tr>
-        </tbody>
-        <tfoot>
-        <tr class="time-picker-view">
-            <ng-container *ngIf="!customViewTemplate">
-            <td colspan="4">
-                <div class="timepicker" *ngIf="showTime">
-                    <div class="time">
-                        <input type="number" [(ngModel)]="currentHour" (change)="onTimeChange()" max="23" min="0">
-                        <div class="btn-nav">
-                            <div class="btn-up" (click)="timeUp('h')"></div><div class="btn-down" (click)="timeDown('h')"></div>
-                        </div>
-                    </div>
-                    <div class="time">
-                        <input type="number" class="minutes" [(ngModel)]="currentMinute" (change)="onTimeChange()"
-                               max="59" min="0">
-                        <div class="btn-nav">
-                            <div class="btn-up" (click)="timeUp('m')"></div><div class="btn-down" (click)="timeDown('m')"></div>
-                        </div>
-                    </div>
-                    <div class="time">
-                        <input type="number" class="seconds" [(ngModel)]="currentSecond" (change)="onTimeChange()"
-                               max="59" min="0">
-                        <div class="btn-nav">
-                            <div class="btn-up" (click)="timeUp('s')"></div><div class="btn-down" (click)="timeDown('s')"></div>
-                        </div>
-                    </div>
-                </div>
-            </td>
-            <td colspan="3">
-                <div class="btn-wrapper">
-                    <ave-button [disabled]="isTodayDisable()"
-                            (click)="chooseToday()"  bsSize="sm" >{{dateConfig.current}}
-                    </ave-button>
-                </div>
-            </td>
-            </ng-container>
-            <ng-container *ngIf="customViewTemplate">
-                <td colspan="7">
-                    <ng-template [ngTemplateOutlet]="customViewTemplate" [ngTemplateOutletContext]="{ $implicit: this, chooseDate: chooseDate}"></ng-template>
-                </td>
-            </ng-container>
-        </tr>
-        </tfoot>
-    </table>
+      </tr>
+      <tr class="small text-center week-header">
+          <td *ngFor="let item of dateConfig.weeks">{{item}}</td>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let week of displayWeeks">
+          <td *ngFor="let day of week" class="day"
+              [ngClass]="{'out-of-month': !day.inMonth, 'in-month-day': day.inMonth, 'active': isSelectDay(day.date),'disabled': isDisabledDay(day.date)}"
+              (click)="onSelectDate($event, day.date)">
+              <div class="d-calendar-date">{{day.day}}</div>
+          </td>
+      </tr>
+      </tbody>
+      <tfoot>
+      <tr class="time-picker-view">
+          <ng-container *ngIf="!customViewTemplate">
+          <td colspan="4">
+              <div class="timepicker" *ngIf="showTime">
+                  <div class="time">
+                      <input type="number" [(ngModel)]="currentHour" (change)="onTimeChange()" max="23" min="0">
+                      <div class="btn-nav">
+                          <div class="btn-up" (click)="timeUp('h')"></div><div class="btn-down" (click)="timeDown('h')"></div>
+                      </div>
+                  </div>
+                  <div class="time">
+                      <input type="number" class="minutes" [(ngModel)]="currentMinute" (change)="onTimeChange()"
+                             max="59" min="0">
+                      <div class="btn-nav">
+                          <div class="btn-up" (click)="timeUp('m')"></div><div class="btn-down" (click)="timeDown('m')"></div>
+                      </div>
+                  </div>
+                  <div class="time">
+                      <input type="number" class="seconds" [(ngModel)]="currentSecond" (change)="onTimeChange()"
+                             max="59" min="0">
+                      <div class="btn-nav">
+                          <div class="btn-up" (click)="timeUp('s')"></div><div class="btn-down" (click)="timeDown('s')"></div>
+                      </div>
+                  </div>
+              </div>
+          </td>
+          <td colspan="3">
+              <div class="btn-wrapper">
+                  <d-button bsStyle="primary" [disabled]="isTodayDisable()"
+                          (btnClick)="chooseToday()"  bsSize="sm" >{{dateConfig.current}}
+                  </d-button>
+              </div>
+          </td>
+          </ng-container>
+          <ng-container *ngIf="customViewTemplate">
+              <td colspan="7">
+                  <ng-template [ngTemplateOutlet]="customViewTemplate" [ngTemplateOutletContext]="{ $implicit: this, chooseDate: chooseDate}"></ng-template>
+              </td>
+          </ng-container>
+      </tr>
+      </tfoot>
+  </table>
 </div>

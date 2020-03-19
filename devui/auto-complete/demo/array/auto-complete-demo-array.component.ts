@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { of } from 'rxjs';
 @Component({
-  selector: 'ave-auto-complete-demo-array',
+  selector: 'd-auto-complete-demo-array',
   templateUrl: './auto-complete-demo-array.component.html'
 })
 export class AutoDemoArrayComponent {

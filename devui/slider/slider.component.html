@@ -1,0 +1,7 @@
+<div class="devui-slider" #slider [ngClass]='{disabled: disabled}'>
+  <div class="devui-slider-rail" #sliderRail [ngClass]='{disabled: disabled}'></div>
+  <div class="devui-slider-track" #sliderTrack [ngClass]='{disabled: disabled}'></div>
+  <div class="devui-slider-handle" #sliderHandle [ngClass]='{disabled: disabled}' dPopover position='top'
+       [content]='showValuePopover && tipsRenderer ? tipsRenderer(value): ""' [showAnimate]="false"
+       [visible]='tipsRenderer && showValuePopover'></div>
+</div>

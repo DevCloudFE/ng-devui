@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'ave-custom',
-  templateUrl: './custom.component.html',
-  styleUrls: ['./custom.component.css']
+  selector: 'd-custom',
+  templateUrl: './custom.component.html'
 })
 export class CustomComponent implements OnInit {
   values2 = ['Beijing', 'Chengdu', 'Shenzhen'];

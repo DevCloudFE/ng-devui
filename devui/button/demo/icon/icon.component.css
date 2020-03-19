@@ -1,4 +1,7 @@
-/** No CSS for this demo **/
-ave-button {
+.btn-group {
+  margin-bottom: 20px;
+}
+
+.btn-group d-button {
   margin-right: 5px;
 }

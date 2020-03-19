@@ -5,8 +5,15 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'ave-editable-select-demo-with-source',
-  templateUrl: './editable-select-demo-with-source.component.html'
+  selector: 'd-editable-select-demo-with-source',
+  templateUrl: './editable-select-demo-with-source.component.html',
+  styles: [
+    `
+      section {
+        width: 50%;
+      }
+    `
+  ]
 })
 export class EditableSelectDemoWithSourceComponent implements OnInit {
   selectItem1;

@@ -2,25 +2,32 @@ import {
   Component,
   HostBinding
 } from '@angular/core';
-import { DevuiSourceData } from '../../shared/devui-codebox';
+import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 
 @Component({
-    selector: 'ave-demo-pagination',
+    selector: 'd-demo-pagination',
     templateUrl: './pagination-demo.component.html'
 })
 export class PaginationDemoComponent {
   basicSource: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./basic/basic.component.html')},
-    {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./basic/basic.component.ts')},
-    {title: 'CSS', language: 'css', code:  require('!!raw-loader!./basic/basic.component.css')}
+    {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./basic/basic.component.ts')}
   ];
 
-  specialSource: Array<DevuiSourceData> = [
-    {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./special/special.component.html')},
-    {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./special/special.component.ts')},
-    {title: 'CSS', language: 'css', code:  require('!!raw-loader!./special/special.component.css')}
+  additionalSource: Array<DevuiSourceData> = [
+    {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./additional/additional.component.html')},
+    {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./additional/additional.component.ts')},
+    {title: 'CSS', language: 'css', code:  require('!!raw-loader!./additional/additional.component.css')}
   ];
-
+  liteSource: Array<DevuiSourceData> = [
+    {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./lite/lite.component.html')},
+    {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./lite/lite.component.ts')},
+    {title: 'CSS', language: 'css', code:  require('!!raw-loader!./lite/lite.component.css')}
+  ];
+  widgetsSource: Array<DevuiSourceData> = [
+    {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./widgets/widgets.component.html')},
+    {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./widgets/widgets.component.ts')}
+  ];
   constructor() {
 
   }

@@ -1,6 +1,69 @@
 @import '../style/mixins/index';
+@import '../style/theme/color';
 
-.devui-alert-close {
-    float: right;
-    font-weight: bold;
+:host {
+  display: block;
+}
+
+.devui-alert {
+  color: $white;
+  font-size: 14px;
+  font-weight: bold;
+
+  button.devui-close {
+    color: $white;
+    opacity: 1;
+    box-shadow: none;
+
+    span {
+      color: $white;
+      font-size: 14px;
+      font-weight: bold;
+    }
+  }
+
+  &.devui-alert-success {
+    background-color: $status-green;
+    border-color: $status-green;
+    color: $white;
+  }
+
+  &.devui-alert-info {
+    background-color: $white;
+    box-shadow: 0 1px 4px 0 rgba(41, 48, 64, 0.20);
+    color: $dark1;
+    font-weight: normal;
+  }
+
+  &.devui-alert-warning {
+    background-color: $status-yellow;
+    border-color: $status-yellow;
+    color: $dark1;
+
+    button.devui-alert-close {
+      color: $dark1;
+      opacity: 1;
+      box-shadow: none;
+
+      span {
+        color: $dark1;
+      }
+    }
+  }
+
+  &.devui-alert-danger {
+    background-color: $status-red;
+    border-color: $status-red;
+    color: $white;
+
+  }
+}
+
+.devui-alert-icon-close-warn {
+  fill: $dark1;
+  ;
+}
+
+.devui-alert-icon-close-no-warn {
+  fill: $white;
 }

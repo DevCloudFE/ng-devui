@@ -1,4 +1,4 @@
-<ul class="nav nav-{{type}}" role="tablist">
+<ul class="nav nav-{{type}} {{cssClass}}" role="tablist">
   <ng-container *ngFor="let tab of tabs">
     <li role="presentation" *ngIf="!tab.disabled" [id]="tab.tabId" [class.active]="tab.id == activeTab" (click)="select(tab.id)" >
       <a role="tab" data-toggle="tab" [attr.aria-expanded]="tab.id == activeTab" [style.width]="customWidth" [ngClass]="{'custom-width': customWidth}">

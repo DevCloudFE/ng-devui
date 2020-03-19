@@ -1,4 +1,4 @@
-<ave-accordion [data]="menu" class="menu" [restrictOneOpen]="restrictOneOpen"(itemClick)="itemClick($event)" (menuToggle)="menuToggle($event)"></ave-accordion>
+<d-accordion [data]="menu" class="menu" [restrictOneOpen]="restrictOneOpen" (itemClick)="itemClick($event)" (menuToggle)="menuToggle($event)"></d-accordion>
 <div class="option">
-  <!-- <ave-toggle [(ngModel)]="restrictOneOpen"></ave-toggle> 限制只能展开一个一级菜单 -->
+  <d-toggle [(ngModel)]="restrictOneOpen"></d-toggle> 限制只能展开一个一级菜单
 </div>

@@ -10,7 +10,6 @@ import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 export class TooltipDemoComponent {
   message = 'I have animation!';
   position: 'left';
-  @HostBinding('attr.ave-ui') aveUi = true;
 
   basicSource: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./basic/basic.component.html')},

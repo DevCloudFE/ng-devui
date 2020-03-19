@@ -14,11 +14,11 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Observable } from 'rxjs';
 
-import { AutoCompletePopupComponent, AutoCompleteDirective } from '../auto-complete';
+import { AutoCompletePopupComponent, AutoCompleteDirective } from 'ng-devui/auto-complete';
 
 
 @Component({
-  selector: 'ave-editable-select',
+  selector: 'd-editable-select',
   templateUrl: './editable-select.component.html',
   exportAs: 'editable-select',
   providers: [{
@@ -40,7 +40,7 @@ export class EditableSelectComponent implements ControlValueAccessor, OnInit, On
   @Input() minLength: number;
   @Input() maxHeight: number;
   @Input() searchFn: (term: string) => Observable<any[]>;
-  @ViewChild(AutoCompleteDirective) autoCompleteDirective: AutoCompleteDirective;
+  @ViewChild(AutoCompleteDirective, { static: true }) autoCompleteDirective: AutoCompleteDirective;
   multiItems: any[] = [];
   inputValue: any;
   subscription;

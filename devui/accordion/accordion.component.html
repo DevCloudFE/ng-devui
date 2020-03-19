@@ -4,7 +4,9 @@
             'open': item[openKey],
             'has-active-item': item[childrenKey] && item[childrenKey].indexOf(activeItem) > -1,
             'disabled': item[disabledKey]
-        }">
+        }"
+        [routerLinkActive]="'devui-router-active'"
+        >
         <ng-template [ngTemplateOutlet]="menuItemTemplate || defaultItemTemplate" [ngTemplateOutletContext]="{
             item: item,
             deepth: 0,
@@ -24,12 +26,11 @@
             <ng-container *ngIf="item[childrenKey] && item[childrenKey].length > 0">
                 <ul class="devui-accordion-submenu" [attr.hidden]="item[openKey] ? null : 'hidden'">
                     <li class="devui-accordion-item" *ngFor="let subitem of item[childrenKey]; let i = index;"
-                    [ngClass]="{'active': subitem[activeKey],'disabled':subitem[disabledKey]}">
-                        <ng-template
+                        [routerLinkActive]="'devui-router-active'"
+                        [ngClass]="{'active': subitem[activeKey],'disabled':subitem[disabledKey]}">
+                        <ng-template *ngIf="itemTemplate || !(linkType === 'routerLink' || linkType === 'dependOnLinkTypeKey')"
                         [ngTemplateOutlet]="itemTemplate
-                            || (linkType === 'routerLink' && routerlinkItemTemplate)
                             || (linkType === 'hrefLink' && hreflinkItemTemplate)
-                            || (linkType === 'dependOnLinkTypeKey' && dynamicLinkTemplate)
                             || defaultItemTemplate"
                         [ngTemplateOutletContext]="{
                             parent: item,
@@ -40,6 +41,47 @@
                             disabledKey: disabledKey,
                             itemClickFn: itemClickFn
                         }"></ng-template>
+                        <ng-container *ngIf="linkType === 'routerLink'">
+                          <a [routerLink]="subitem[linkKey]" [routerLinkActive]="'devui-router-active'"
+                              target="{{subitem[linkTargetKey] || linkDefaultTarget}}" rel="noopener"
+                              class="devui-accordion-item-title over-flow-ellipsis"
+                              [ngClass]="{'disabled':subitem[disabledKey]}"
+                              title="{{subitem[titleKey]}}" *ngIf="!subitem[disabledKey]">
+                              {{subitem[titleKey]}}
+                          </a>
+                          <a class="devui-accordion-item-title over-flow-ellipsis"
+                              [ngClass]="{'disabled':subitem[disabledKey], 'active': subitem[activeKey]}"
+                              title="{{subitem[titleKey]}}" *ngIf="subitem[disabledKey]">
+                              {{subitem[titleKey]}}
+                          </a>
+                      </ng-container>
+                      <ng-container *ngIf="linkType === 'dependOnLinkTypeKey'">
+                          <a href="{{subitem[linkKey]}}" target="{{subitem[linkTargetKey] || linkDefaultTarget}}" rel="noopener"
+                              class="devui-accordion-item-title over-flow-ellipsis"
+                              [ngClass]="{'disabled':subitem[disabledKey], 'active': subitem[activeKey]}"
+                              title="{{subitem[titleKey]}}" *ngIf="subitem[linkTypeKey] ==='hrefLink' && !subitem[disabledKey]">
+                              {{subitem[titleKey]}}
+                          </a>
+                          <a [routerLink]="subitem[linkKey]" [routerLinkActive]="'devui-router-active'"
+                              target="{{subitem[linkTargetKey] || linkDefaultTarget}}" rel="noopener"
+                              class="devui-accordion-item-title over-flow-ellipsis"
+                              title="{{subitem[titleKey]}}" *ngIf="subitem[linkTypeKey] ==='routerLink'&& !subitem[disabledKey]">
+                              {{subitem[titleKey]}}
+                          </a>
+                          <a class="devui-accordion-item-title over-flow-ellipsis"
+                              [ngClass]="{'disabled':subitem[disabledKey], 'active': subitem[activeKey]}"
+                              title="{{subitem[titleKey]}}"
+                              *ngIf="(subitem[linkTypeKey] ==='hrefLink' || subitem[linkTypeKey] ==='routerLink') && subitem[disabledKey]">
+                              {{subitem[titleKey]}}
+                          </a>
+                          <div class="devui-accordion-item-title over-flow-ellipsis"
+                              [ngClass]="{'disabled':subitem[disabledKey], 'active': subitem[activeKey]}"
+                              (click)="!subitem[disabledKey] && itemClickFn(item);"
+                              title="{{subitem[titleKey]}}"
+                              *ngIf="subitem[linkTypeKey] !=='hrefLink' && subitem[linkTypeKey] !=='routerLink'">
+                              {{subitem[titleKey]}}
+                          </div>
+                      </ng-container>
                     </li>
                 </ul>
             </ng-container>
@@ -94,44 +136,4 @@
         title="{{item[titleKey]}}" *ngIf="item[disabledKey]">
         {{item[titleKey]}}
     </a>
-</ng-template>
-
-<ng-template #routerlinkItemTemplate let-item="item" let-deepth="deepth" let-titleKey="titleKey" let-disabledKey="disabledKey" let-activeKey="activeKey"
-    let-itemClickFn="itemClickFn"  let-menuToggleFn="menuToggleFn">
-    <a [routerLink]="item[linkKey]" target="{{item[linkTargetKey] || linkDefaultTarget}}" rel="noopener" class="devui-accordion-item-title over-flow-ellipsis"
-        [ngClass]="{'disabled':item[disabledKey], 'active': item[activeKey]}"
-        title="{{item[titleKey]}}" *ngIf="!item[disabledKey]">
-        {{item[titleKey]}}
-    </a>
-    <a class="devui-accordion-item-title over-flow-ellipsis" [ngClass]="{'disabled':item[disabledKey], 'active': item[activeKey]}"
-        title="{{item[titleKey]}}" *ngIf="item[disabledKey]">
-        {{item[titleKey]}}
-    </a>
-</ng-template>
-
-<ng-template #dynamicLinkTemplate let-item="item" let-deepth="deepth" let-titleKey="titleKey" let-disabledKey="disabledKey" let-activeKey="activeKey"
-    let-itemClickFn="itemClickFn"  let-menuToggleFn="menuToggleFn">
-    <!-- 超链接 -->
-    <a href="{{item[linkKey]}}" target="{{item[linkTargetKey] || linkDefaultTarget}}" rel="noopener" class="devui-accordion-item-title over-flow-ellipsis"
-        [ngClass]="{'disabled':item[disabledKey], 'active': item[activeKey]}"
-        title="{{item[titleKey]}}" *ngIf="item[linkTypeKey] ==='hrefLink' && !item[disabledKey]">
-        {{item[titleKey]}}
-    </a>
-    <!-- 路由链接 -->
-    <a [routerLink]="item[linkKey]" target="{{item[linkTargetKey] || linkDefaultTarget}}" rel="noopener" class="devui-accordion-item-title over-flow-ellipsis"
-        [ngClass]="{'disabled':item[disabledKey], 'active': item[activeKey]}"
-        title="{{item[titleKey]}}" *ngIf="item[linkTypeKey] ==='routerLink'&& !item[disabledKey]">
-        {{item[titleKey]}}
-    </a>
-    <!-- （超链接，路由链接）* 禁用 -->
-    <a class="devui-accordion-item-title over-flow-ellipsis" [ngClass]="{'disabled':item[disabledKey], 'active': item[activeKey]}"
-        title="{{item[titleKey]}}" *ngIf="(item[linkTypeKey] ==='hrefLink' || item[linkTypeKey] ==='routerLink') && item[disabledKey]">
-        {{item[titleKey]}}
-    </a>
-    <!-- 普通菜单 -->
-    <div class="devui-accordion-item-title over-flow-ellipsis" [ngClass]="{'disabled':item[disabledKey], 'active': item[activeKey]}"
-        (click)="!item[disabledKey] && itemClickFn(item);"
-        title="{{item[titleKey]}}" *ngIf="item[linkTypeKey] !=='hrefLink' && item[linkTypeKey] !=='routerLink'">
-        {{item[titleKey]}}
-    </div>
 </ng-template>

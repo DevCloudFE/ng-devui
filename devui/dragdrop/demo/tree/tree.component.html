@@ -6,7 +6,7 @@
         <div class="card-header">备选区</div>
         <div class="card-block">
           <ul class="list-group">
-            <li *ngFor="let item of list1; let i = index;" aveDraggable [dragScope]="'drop-area'"
+            <li *ngFor="let item of list1; let i = index;" dDraggable [dragScope]="'drop-area'"
               [dragData]="{item: item, parentList: list1, index: i}" class="list-group-item">
               <div class="name">{{item.name}}</div>
             </li>
@@ -15,12 +15,12 @@
       </div>
     </div>
     <div class="col-sm-3">
-      <div class="card card-outline-primary mb-3" aveDroppable [dropScope]="'drop-area'" [allowDropOnItem]="true"
+      <div class="card card-outline-primary mb-3" dDroppable [dropScope]="'drop-area'" [allowDropOnItem]="true"
         [nestingTargetRect]="{height: 30}" [dragOverItemClass]="'dragover-item'" (dropEvent)="onDrop($event, list2)">
         <div class="card-header">树状排序区</div>
         <div class="card-block">
-          <ul class="list-group ave-drop-el" aveSortable>
-            <li *ngFor="let item of list2; let i = index;" aveDraggable [dragScope]="'drop-area'"
+          <ul class="list-group d-drop-el" dSortable>
+            <li *ngFor="let item of list2; let i = index;" dDraggable [dragScope]="'drop-area'"
               [dragHandleClass]="'drag-handle'" [dragData]="{item: item, parentList: list2, index: i}">
               <div class="name">
                 {{item.name}}
@@ -36,10 +36,10 @@
 </section>
 
 <ng-template #childlist let-parent="item">
-  <ul class="list-group list-group-child" aveSortable aveDroppable [dropScope]="'drop-area'" [allowDropOnItem]="true"
+  <ul class="list-group list-group-child" dSortable dDroppable [dropScope]="'drop-area'" [allowDropOnItem]="true"
     [nestingTargetRect]="{height: 30}" [dragOverItemClass]="'dragover-item'"
     (dropEvent)="onDrop($event, parent.children);">
-    <li *ngFor="let item of parent.children; let j = index;" [dragHandleClass]="'drag-handle'" aveDraggable
+    <li *ngFor="let item of parent.children; let j = index;" [dragHandleClass]="'drag-handle'" dDraggable
       [dragScope]="'drop-area'" [dragData]="{item: item, parentList: parent.children, index: j}">
       <div class="name">
         {{item.name}}

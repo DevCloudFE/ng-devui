@@ -1,0 +1,9 @@
+@import '~@angular/cdk/overlay-prebuilt';
+
+.cdk-overlay-container {
+  z-index: 1051; // 比modal z-index:1050;高
+}
+
+.cdk-global-scrollblock body {
+  overflow-x: visible;
+}

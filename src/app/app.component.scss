@@ -3,18 +3,53 @@ body {
   background: $white;
 }
 
+@mixin menu(){
+  position: fixed;
+  display: block;
+  font-size: 12px;
+  z-index: 5;
+  width: 4em;
+  height: 4em;
+  padding: 1em;
+  transition: all 0.2s ease-out;
+  span {
+    position: relative;
+    display: block;
+    margin-top: 0.9em;
+    &:before, &:after{
+      position: absolute;
+      top: -.55em;
+      content: " ";
+    }
+    &:after{
+      top: .55em;
+    }
+    &, &:before, &:after{
+      background-color: $white;
+      width: 100%;
+      height: .2em;
+      transition: all .4s;
+    }
+  }
+  &.active span{
+    background: transparent;
+    &:before{
+      transform: rotate(45deg) translate(.5em, .4em);
+    }
+    &:after{
+      transform: rotate(-45deg) translate(.4em, -.3em);
+    }
+  }
+}
 .app-container {
   display: flex;
   flex-direction: column;
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  top: 0;
-  min-width: 1280px;
+  transform: none;
   .app-bar {
-    position: relative;
+    position: fixed;
     top: 0;
+    left: 0;
+    right: 0;
     z-index: 10;
   }
 
@@ -23,8 +58,9 @@ body {
   }
 
   header {
-    display: inline-flex;
+    display: flex;
     align-items: center;
+    justify-content: space-between;
     width: 100%;
     height: 50px;
     background: $white;
@@ -45,8 +81,7 @@ body {
     font-size: 20px;
     margin: 0;
     font-weight: bold;
-    width: 240px;
-    padding: 15px 20px;
+    padding: 9px 20px;
     box-sizing: border-box;
     .logo, .text {
       display: inline-block;
@@ -58,19 +93,35 @@ body {
     a:hover {
       text-decoration: none;
     }
+
+    .internal {
+      font-size: small;
+      background-color: #5E7CE0;
+      color: white;
+      margin-left: 5px;
+      font-weight: normal;
+      line-height: 10px;
+      display: inline-block;
+      padding: 3px 4px 0;
+    }
   }
 
   .main-nav {
     display: flex;
     justify-content: flex-end;
-    flex: 1;
     margin-right: 20px;
   }
 
-  .main-nav-right{
-    justify-content: flex-end;
-    flex: 1;
-    margin-right: 20px;
+  .header-menu{
+    right: 5px;
+    @include menu();
+    display: none;
+    span {
+      &, &:before, &:after{
+        background: $dark;
+      }
+
+    }
   }
 
   .main-nav-item {
@@ -99,49 +150,61 @@ body {
     }
   }
 
-  .docs-header {
-    padding: 0 20%;
-  }
-
-  .side-nav-container {
+  .wrapper {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
     position: absolute;
-    top: 0;
+    top: 50px;
     left: 0;
     right: 0;
     bottom: 0;
-    margin-top: 50px;
-    box-sizing: border-box;
-  }
-
-  .wrapper {
-    display: flex;
-    flex: 1 1 auto;
     .sidebar {
       box-sizing: border-box;
-      position: absolute;
-      top: 0;
+      position: fixed;
+      top: 50px;
       bottom: 0;
       left: 0;
       width: 240px;
-      border-right: 1px solid $gray3;
+      margin-left: -240px;
+      border-right: 1px solid $gray2;
       height: 100%;
       overflow-y: hidden;
       z-index: 2;
       background: $white;
+      transition: all .2s ease-out;
       &:hover{
         overflow-y: auto;
       }
     }
 
-    .doc-viewer-container {
-      position: absolute;
+    .menu-link {
       left: 0;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      // z-index: 3; //不要设置zindex会影响toast等的内部zindex
-      margin-left: 240px;
-      overflow-y: auto;
+      background: rgba($dark, 0.7);
+      @include menu();
+    }
+
+    .doc-viewer-container {
+      width: 100%;
+      margin-left:0;
+      // overflow-y: auto;
+      .main{
+        width: 100%;
+        padding: 0 20px;
+      }
+    }
+    &.active {
+      .sidebar{
+        overflow-y: auto;
+        left: 240px;
+      }
+      .doc-viewer-container {
+        width: calc(100% - 240px);
+        margin-left: 240px;
+      }
+      .menu-link{
+        left: 240px;
+      }
     }
   }
 
@@ -150,14 +213,6 @@ body {
     width: 100%;
     height: 100%;
     display: block;
-  }
-
-  :host /deep/ .ave-doc-tabs {
-    a[role='tab'] {
-      padding: 0;
-      padding-left: 15px;
-      line-height: 2.5;
-    }
   }
 
   .side-nav {
@@ -256,7 +311,7 @@ body {
   }
 }
 
-.ave-menu {
+.devui-menu {
   outline: none;
   margin-top: 20px;
   margin-bottom: 0;
@@ -265,7 +320,7 @@ body {
   z-index: 1050;
   background: $white;
 }
-.ave-menu-item {
+.devui-menu-item {
   font-size: 14px;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -276,13 +331,13 @@ body {
     background-color: $hover-content;
   }
 }
-.ave-menu-item>a {
+.devui-menu-item>a {
   display: block;
   color: $dark1;
   text-decoration: none;
 }
 
-.ave-menu-item-selected {
+.devui-menu-item-selected {
   color: $focus1;
   background-color: $focus3;
   border-right: 2px solid $focus1;
@@ -339,21 +394,71 @@ body {
   color: $dark1;
   line-height: 24px;
 }
-.readme .hljs{
-  background: transparent;
+.readme {
+  .hljs{
+    background: transparent;
+  }
+  pre {
+    background-color: $white;
+    border: none;
+    code {
+      border: 1px solid #e9e9e9;
+      overflow-x: auto;
+    }
+  }
+  p {
+    margin: 1em 0;
+  }
 }
 
-.readme pre{
-  background-color: $white;
-  border: none;
+@media (max-width: 768px) {
+  .app-container {
+    .header-menu{
+      display: block;
+    }
+    header {
+      flex-direction: column;
+      justify-items: center;
+      .main-nav{
+        display: none;
+      }
+      &.active{
+        height: 205px;
+        .main-nav{
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+          margin-left: 20px;
+        }
+      }
+    }
+  }
 }
-.readme pre code{
-  display: block;
-  background: $white;
-  color: rgba(0,0,0,.65);
-  line-height: 1.7;
-  border: 1px solid #e9e9e9;
-  padding: 10px 15px;
-  border-radius: 1px;
-  font-size: 13px;
+
+@media (min-width: 1024px) {
+  .app-container .wrapper {
+    .sidebar {
+      left: 240px;
+    }
+    .doc-viewer-container{
+      margin-left: 240px;
+      width: calc(100% - 240px);
+      .main{
+        padding: 0 60px;
+      }
+    }
+    .menu-link {
+      display: none;
+    }
+  }
+}
+
+@media (min-width: 1280px) {
+  .app-container .wrapper {
+    .doc-viewer-container{
+      .main{
+        padding: 0 20%;
+      }
+    }
+  }
 }

@@ -13,6 +13,7 @@ import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { BasicComponent } from './basic/basic.component';
 import { MultiComponent } from './multi/multi.component';
 import { CustomizeComponent } from './customize/customize.component';
+import { UploadAutoComponent } from './auto/auto.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { CustomizeComponent } from './customize/customize.component';
     UploadDemoComponent,
     BasicComponent,
     MultiComponent,
-    CustomizeComponent
+    CustomizeComponent,
+    UploadAutoComponent
   ],
   entryComponents: [UploadDemoComponent],
   providers: [],

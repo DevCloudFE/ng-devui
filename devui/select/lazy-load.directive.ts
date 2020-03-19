@@ -2,7 +2,7 @@ import { Directive, ElementRef, HostListener, Input, Output, EventEmitter, OnIni
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
-@Directive({ selector: '[aveLazyLoad]' })
+@Directive({ selector: '[dLazyLoad]' })
 export class LazyLoadDirective implements OnInit, OnDestroy {
 
   // 启用懒加载，默认不启用
@@ -13,7 +13,7 @@ export class LazyLoadDirective implements OnInit, OnDestroy {
   scrollSubscription: Subscription;
 
   // 触发懒加载的距离
-  loadFactor = 50;
+  loadFactor = 5;
 
   constructor(private el: ElementRef) { }
 
@@ -36,7 +36,7 @@ export class LazyLoadDirective implements OnInit, OnDestroy {
     const clientHeight = targetEl.clientHeight;
     const scrollHeight = targetEl.scrollHeight;
     const scrollTop = targetEl.scrollTop;
-    if (scrollTop + clientHeight + this.loadFactor >= scrollHeight) {
+    if (scrollTop !== 0 && (scrollTop + clientHeight + this.loadFactor >= scrollHeight)) {
       this.loadMore.emit(event);
     }
 

@@ -1,6 +1,6 @@
 <section>
   <h4>Operable Tree</h4>
-  <ave-operable-tree
+  <d-operable-tree
           #operableTree1
           [tree]="data3"
           [treeNodeIdKey]="'id'"
@@ -12,6 +12,6 @@
           (nodeToggled)="onOperableNodeToggled($event)"
           (nodeChecked)="onOperableNodeChecked($event)"
   >
-  </ave-operable-tree>
+  </d-operable-tree>
   <pre>All Checked Notes:{{ checkNote | json }}</pre>
 </section>

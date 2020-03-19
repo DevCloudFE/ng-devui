@@ -15,11 +15,12 @@ import { DatatableDemoResizeableComponent } from './resize/data-table-demo-resiz
 import { TooltipModule } from 'ng-devui/tooltip';
 import { AutoCompleteModule } from 'ng-devui/auto-complete';
 import { DatatableDemoOnlyOneColumnSortComponent } from './one-column/data-table-demo-onlyonecolumnsort.component';
-import { DatatableDemoDynamicComponent } from './dynamic/data-table-demo-dynamic.component';
 import { DatatableDemoMaxheightComponent } from './max-height/data-table-demo-maxheight.component';
-import { DatatableDemoFixheaderComponent } from './fix-height/data-table-demo-fixheader.component';
 import { DatatableDemoLazyloadDataComponent } from './lazy/data-table-demo-lazyloaddata.component';
 import { DatatableDemoMultiHeaderComponent } from './multi-header/data-table-demo-multiheader.component';
+import { DatatableDemoEditableComponent } from './editable/data-table-demo-editable.component';
+import { TreeDataComponent } from './tree-table/tree-data.component';
+import { ExpandRowComponent } from './expand-row/expand-row.component';
 
 
 @NgModule({
@@ -47,11 +48,12 @@ import { DatatableDemoMultiHeaderComponent } from './multi-header/data-table-dem
     DatatableDemoAsyncComponent,
     DatatableDemoResizeableComponent,
     DatatableDemoOnlyOneColumnSortComponent,
-    DatatableDemoDynamicComponent,
     DatatableDemoMaxheightComponent,
     DatatableDemoMultiHeaderComponent,
-    DatatableDemoFixheaderComponent,
-    DatatableDemoLazyloadDataComponent
+    DatatableDemoLazyloadDataComponent,
+    DatatableDemoEditableComponent,
+    TreeDataComponent,
+    ExpandRowComponent
   ],
   providers: [],
   entryComponents: [DataTableDemoComponent]

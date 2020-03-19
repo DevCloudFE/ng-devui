@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'ave-vertical',
-  templateUrl: './vertical.component.html',
-  styleUrls: ['./vertical.component.css']
+  selector: 'd-vertical',
+  templateUrl: './vertical.component.html'
 })
 export class VerticalComponent implements OnInit {
   values = ['Spring', 'Summer', 'Autumn', 'Winter'];
