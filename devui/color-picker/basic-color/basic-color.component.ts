@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Input } from '@angular/core';
-import { ColorPickerService } from '../services/color-picker.service';
+import { Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'd-basic-color',
@@ -8,16 +7,16 @@ import { ColorPickerService } from '../services/color-picker.service';
   styleUrls: ['./basic-color.component.scss']
 })
 export class BasicColorComponent implements OnInit {
+  @Output() send = new EventEmitter();
   @Input() basicColors;
 
   constructor(
-    private colorPickerService: ColorPickerService
   ) { }
 
   ngOnInit() {
   }
 
   selectColor(color) {
-    this.colorPickerService.setColor(color);
+    this.send.emit({color});
   }
 }

@@ -11,27 +11,22 @@ import { ColorPickerService } from '../services/color-picker.service';
 export class RecentColorComponent implements OnInit {
   color: string;
   @Input() limit: number;
+  @Output() send = new EventEmitter();
   @Output() confirm = new EventEmitter();
   recentlyUsed: Array<string> = [];
 
   constructor(
     private colorPickerService: ColorPickerService
   ) {
-    this.colorPickerService.updateColor.subscribe(
-      () => {
-        this.color = this.colorPickerService.getColor();
-      }
-    );
     this.colorPickerService.saveRecentColor.subscribe(
-      () => {
-        this.saveRecentlyUsed();
+      (color) => {
+        this.saveRecentlyUsed(color);
       }
     );
   }
 
   ngOnInit() {
     this.loadFromLocalData();
-    this.color = this.colorPickerService.getColor();
   }
 
   loadFromLocalData() {
@@ -42,18 +37,17 @@ export class RecentColorComponent implements OnInit {
     localStorage.setItem('recentlyUsed', JSON.stringify(this.recentlyUsed));
   }
 
-  saveRecentlyUsed() {
-    saveRecentColors(this.recentlyUsed, this.color, this.limit);
+  saveRecentlyUsed(color) {
+    saveRecentColors(this.recentlyUsed, color, this.limit);
     this.saveToLocalData();
   }
 
   clearColor() {
-    this.colorPickerService.setColor('');
+    this.send.emit({color: ''});
   }
 
   confirmColor(color) {
-    this.colorPickerService.setColor(color);
-    this.saveRecentlyUsed();
-    this.confirm.emit();
+    this.saveRecentlyUsed(color);
+    this.confirm.emit(color);
   }
 }

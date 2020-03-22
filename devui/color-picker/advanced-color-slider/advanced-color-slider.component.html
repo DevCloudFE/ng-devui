@@ -1,4 +1,4 @@
-<div class="color-slider"
+<div [ngClass]="[uniqueId, 'color-slider']"
   (mousedown)="mouseDownEvent()"
   (mousemove)="mouseMoveEvent($event)"
   (click)="mouseClickEvent($event)"
@@ -12,3 +12,4 @@
     }"
   ></div>
 </div>
+<div ng-init="init()"></div>

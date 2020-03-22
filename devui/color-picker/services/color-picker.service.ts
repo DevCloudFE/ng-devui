@@ -3,37 +3,12 @@ import { EventEmitter } from '@angular/core';
 
 @Injectable()
 export class ColorPickerService {
-  color = '';
-  pureColor = '';
-  updateColor = new EventEmitter<string>();
-  updatePureColor = new EventEmitter<void>();
-  saveRecentColor = new EventEmitter<void>();
+  updateAdvancedColor = new EventEmitter<string>();
+  updateAdvancedPureColor = new EventEmitter<string>();
+  saveRecentColor = new EventEmitter<string>();
   rootMouseMoveEvent = new EventEmitter<MouseEvent>();
   rootMouseUpEvent = new EventEmitter<void>();
 
   constructor() { }
 
-  getColor() {
-    return this.color;
-  }
-
-  getPureColor() {
-    return this.pureColor;
-  }
-
-  setColor(color, setter: string = 'normal') {
-    const oldColor = this.color;
-    this.color = color;
-    if (oldColor !== color) {
-      this.updateColor.emit(setter); // setter is who set the color
-    }
-  }
-
-  setPureColor(color) {
-    const oldColor = this.pureColor;
-    this.pureColor = color;
-    if (oldColor !== color) {
-      this.updatePureColor.emit();
-    }
-  }
 }

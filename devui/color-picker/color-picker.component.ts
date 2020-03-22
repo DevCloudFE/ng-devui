@@ -13,6 +13,7 @@ export class ColorPickerComponent implements OnInit {
   @Output() send = new EventEmitter();
   @Output() confirm = new EventEmitter();
   showDefault = false;
+  pureColor = '';
   selectedPanel = 'basic';
   basicColors: Array<string> = ['#ffffff', '#ffd7d5', '#ffdaa9', '#fffed5',
     '#d4fa00', '#73fcd6', '#a5c8ff', '#ffacd5', '#ff7faa', '#d6d6d6',
@@ -26,17 +27,10 @@ export class ColorPickerComponent implements OnInit {
   constructor(
     private colorPickerService: ColorPickerService
   ) {
-    this.colorPickerService.updateColor.subscribe(
-      () => {
-        this.color = this.colorPickerService.getColor();
-        this.send.emit(this.color);
-      }
-    );
   }
 
   ngOnInit() {
     this.showDefault = !this.hide; // when there is an input, the hide could be init as true, so show default
-    this.colorPickerService.setColor(this.color);
   }
 
   selectPanel(panel) {
@@ -51,8 +45,23 @@ export class ColorPickerComponent implements OnInit {
     this.colorPickerService.rootMouseUpEvent.emit();
   }
 
-  confirmEvent() {
-    this.colorPickerService.saveRecentColor.emit();
+  receive(data) {
+    if (typeof data.color === 'string' || data.color) {
+      this.color = data.color;
+      this.send.emit(this.color);
+      if (data.sender !== 'advanced-color-panel') {
+        this.colorPickerService.updateAdvancedColor.emit(data.color);
+      }
+    }
+    if (data.pureColor) {
+      this.pureColor = data.pureColor;
+      this.colorPickerService.updateAdvancedPureColor.emit();
+    }
+  }
+
+  confirmEvent(color) {
+    this.receive({color: color || this.color});
+    this.colorPickerService.saveRecentColor.emit(this.color);
     this.confirm.emit(this.color);
   }
 }

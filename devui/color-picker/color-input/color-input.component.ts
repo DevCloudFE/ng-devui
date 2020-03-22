@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Output, EventEmitter } from '@angular/core';
-import { ColorPickerService } from '../services/color-picker.service';
+import { Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'd-color-input',
@@ -8,26 +7,20 @@ import { ColorPickerService } from '../services/color-picker.service';
   styleUrls: ['./color-input.component.scss']
 })
 export class ColorInputComponent implements OnInit {
-  color: string;
+  @Input() color = '';
+  @Output() send = new EventEmitter();
   @Output() confirm = new EventEmitter();
 
   constructor(
-    private colorPickerService: ColorPickerService
   ) {
-    this.colorPickerService.updateColor.subscribe(
-      () => {
-        this.color = this.colorPickerService.getColor();
-      }
-    );
   }
 
   ngOnInit() {
-    this.color = this.colorPickerService.getColor();
   }
 
   inputChange() {
     if (this.checkColor()) {
-      this.colorPickerService.setColor(this.color, 'colorInput');
+      this.send.emit({color: this.color});
     }
   }
 

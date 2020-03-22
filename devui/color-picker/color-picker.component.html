@@ -7,6 +7,7 @@
   >
     <d-recent-color
       [limit]="8"
+      (send)="receive($event)"
       (confirm)="confirmEvent($event)"
     ></d-recent-color>
     <div class="color-panel">
@@ -17,18 +18,28 @@
       </div>
       <div *ngIf="'more' === selectedPanel">
         <div class="advanced-color">
-          <d-advanced-color-panel></d-advanced-color-panel>
-          <d-advanced-color-slider></d-advanced-color-slider>
+          <d-advanced-color-panel
+            [color]="color"
+            [pureColor]="pureColor"
+            (send)="receive($event)"
+          ></d-advanced-color-panel>
+          <d-advanced-color-slider
+            [color]="color"
+            (send)="receive($event)"
+          ></d-advanced-color-slider>
         </div>
       </div>
       <div class="color-cubes" *ngIf="'basic' === selectedPanel"> 
         <d-basic-color
+          (send)="receive($event)"
           [basicColors]="basicColors"
         ></d-basic-color>
       </div>
     </div>
     <hr>
     <d-color-input
+      [color]="color"
+      (send)="receive($event)"
       (confirm)="confirmEvent($event)"
     ></d-color-input>
   </div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Input, Output, EventEmitter } from '@angular/core';
 import { colorToPureColor, getColorByPosition, getColorPosition } from '../utils/color';
 import { Panel, Pointer } from '../utils/advanced-color.types';
 import { ColorPickerService } from '../services/color-picker.service';
@@ -9,8 +10,10 @@ import { ColorPickerService } from '../services/color-picker.service';
   styleUrls: ['./advanced-color-panel.component.scss']
 })
 export class AdvancedColorPanelComponent implements OnInit {
-  color: string;
-  pureColor: string;
+  @Input() color;
+  @Input() pureColor;
+  @Output() send = new EventEmitter();
+  uniqueId: string = Math.random().toString(36).substring(7);
   panel: Panel = {
     top: 0,
     left: 0,
@@ -27,21 +30,18 @@ export class AdvancedColorPanelComponent implements OnInit {
   constructor(
     private colorPickerService: ColorPickerService
   ) {
-    this.colorPickerService.updateColor.subscribe(
-      (setter) => {
-        if (setter === 'colorInput') {
-          this.color = this.colorPickerService.getColor();
-          if (this.color === '') { // input cleared color
-            return;
-          }
-          this.getPureColor();
-          this.initPointerPosition();
+    this.colorPickerService.updateAdvancedColor.subscribe(
+      (color) => {
+        this.color = color;
+        if (this.color === '') { // input cleared color
+          return;
         }
+        this.getPureColor();
+        this.initPointerPosition();
       }
     );
-    this.colorPickerService.updatePureColor.subscribe(
+    this.colorPickerService.updateAdvancedPureColor.subscribe(
       () => {
-        this.pureColor = this.colorPickerService.getPureColor();
         this.getColor();
       }
     );
@@ -54,13 +54,14 @@ export class AdvancedColorPanelComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.color = this.colorPickerService.getColor();
     if (this.color === '') { // make red as default
       this.color = '#ff0000';
     }
     this.getPureColor();
-    this.initPanel();
-    this.initPointerPosition();
+    setTimeout(() => { // HACK: init the panl after dom inited.
+      this.initPanel();
+      this.initPointerPosition();
+    }, 10);
   }
 
   getPureColor() {
@@ -68,7 +69,7 @@ export class AdvancedColorPanelComponent implements OnInit {
   }
 
   initPanel() {
-    const panel = document.getElementsByClassName('advanced-color-panel')[0] as HTMLElement;
+    const panel = document.getElementsByClassName(this.uniqueId)[0] as HTMLElement;
     let top = panel.offsetTop;
     let left = panel.offsetLeft;
     let parent = panel;
@@ -95,7 +96,7 @@ export class AdvancedColorPanelComponent implements OnInit {
 
   mouseClickEvent(event: MouseEvent) {
     this.pointer.left = event.clientX - this.panel.left;
-    this.pointer.top = event.clientY - this.panel.top;
+    this.pointer.top = event.clientY - this.panel.top + document.documentElement.scrollTop;
     this.getColor();
   }
 
@@ -108,7 +109,8 @@ export class AdvancedColorPanelComponent implements OnInit {
       return;
     }
     this.pointer.left = event.clientX - this.panel.left;
-    this.pointer.top = event.clientY - this.panel.top;
+    // 加上页面卷起来的高度，即得到相对页面的位置
+    this.pointer.top = event.clientY - this.panel.top + document.documentElement.scrollTop;
     // Edge detection
     if (this.pointer.left < 0) {
       this.pointer.left = 0;
@@ -127,7 +129,7 @@ export class AdvancedColorPanelComponent implements OnInit {
 
   getColor() {
     this.color = getColorByPosition(this.pureColor, this.pointer.left / this.panel.width, this.pointer.top / this.panel.height);
-    this.colorPickerService.setColor(this.color);
+    this.send.emit({color: this.color, sender: 'advanced-color-panel'});
   }
 
   mouseUpEvent() {

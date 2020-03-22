@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Input, Output, EventEmitter } from '@angular/core';
 import { colorToPureColor, getColorByPointerPositionInSlider, getPointerPositionInSliderByColor } from '../utils/color';
 import { Panel, Pointer } from '../utils/advanced-color.types';
 import { ColorPickerService } from '../services/color-picker.service';
@@ -9,7 +10,9 @@ import { ColorPickerService } from '../services/color-picker.service';
   styleUrls: ['./advanced-color-slider.component.scss']
 })
 export class AdvancedColorSliderComponent implements OnInit {
-  color: string;
+  @Input() color;
+  @Output() send = new EventEmitter();
+  uniqueId: string = Math.random().toString(36).substring(7);
   panel: Panel = {
     top: 0,
     height: 0
@@ -23,15 +26,13 @@ export class AdvancedColorSliderComponent implements OnInit {
   constructor(
     private colorPickerService: ColorPickerService
   ) {
-    this.colorPickerService.updateColor.subscribe(
-      (setter) => {
-        if (setter === 'colorInput') {
-          this.color = this.colorPickerService.getColor();
-          if (this.color === '') { // input cleared color
-            return;
-          }
-          this.initPointerPosition();
+    this.colorPickerService.updateAdvancedColor.subscribe(
+      (color) => {
+        this.color = color;
+        if (this.color === '') { // input cleared color
+          return;
         }
+        this.initPointerPosition();
       }
     );
     this.colorPickerService.rootMouseMoveEvent.subscribe(
@@ -43,16 +44,17 @@ export class AdvancedColorSliderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.color = this.colorPickerService.getColor();
     if (this.color === '') { // make red as default
       this.color = '#ff0000';
     }
-    this.initPanel();
-    this.initPointerPosition();
+    setTimeout(() => { // HACK: init the panl after dom inited.
+      this.initPanel();
+      this.initPointerPosition();
+    }, 10);
   }
 
   initPanel() {
-    const panel = document.getElementsByClassName('color-slider')[0] as HTMLElement;
+    const panel = document.getElementsByClassName(this.uniqueId)[0] as HTMLElement;
     if (panel === undefined) { // color changed not in basic panel
       return;
     }
@@ -76,7 +78,7 @@ export class AdvancedColorSliderComponent implements OnInit {
   }
 
   mouseClickEvent(event: MouseEvent) {
-    this.pointer.top = event.clientY - this.panel.top;
+    this.pointer.top = event.clientY - this.panel.top + document.documentElement.scrollTop;
     this.getPureColor();
   }
 
@@ -88,7 +90,8 @@ export class AdvancedColorSliderComponent implements OnInit {
     if (!this.dragging) {
       return;
     }
-    this.pointer.top = event.clientY - this.panel.top;
+    // 加上页面卷起来的高度，即得到相对页面的位置
+    this.pointer.top = event.clientY - this.panel.top + document.documentElement.scrollTop;
     // Edge detection
     if (this.pointer.top < 0) {
       this.pointer.top = 0;
@@ -101,7 +104,7 @@ export class AdvancedColorSliderComponent implements OnInit {
 
   getPureColor() {
     const pureColor = getColorByPointerPositionInSlider(this.pointer.top / this.panel.height);
-    this.colorPickerService.setPureColor(pureColor);
+    this.send.emit({pureColor});
   }
 
   mouseUpEvent() {
