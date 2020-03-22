@@ -7,8 +7,8 @@ import { Input } from '@angular/core';
   styleUrls: ['./color-cube.component.scss']
 })
 export class ColorCubeComponent implements OnInit {
-  @Input() color;
-  @Input() size;
+  @Input() color = '#0080ff';
+  @Input() size = 20;
 
   constructor() {
 

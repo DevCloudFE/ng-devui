@@ -15,6 +15,11 @@ export class ColorPickerDemoComponent implements OnInit {
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./tap/tap.component.ts')},
     {title: 'CSS', language: 'css', code:  require('!!raw-loader!./tap/tap.component.scss')}
   ];
+  apartSource: Array<DevuiSourceData> = [
+    {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./apart/apart.component.html')},
+    {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./apart/apart.component.ts')},
+    {title: 'CSS', language: 'css', code:  require('!!raw-loader!./apart/apart.component.scss')}
+  ];
 
   constructor() { }
 

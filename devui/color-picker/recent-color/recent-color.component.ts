@@ -10,7 +10,7 @@ import { ColorPickerService } from '../services/color-picker.service';
 })
 export class RecentColorComponent implements OnInit {
   color: string;
-  @Input() limit: number;
+  @Input() limit = 8;
   @Output() send = new EventEmitter();
   @Output() confirm = new EventEmitter();
   recentlyUsed: Array<string> = [];

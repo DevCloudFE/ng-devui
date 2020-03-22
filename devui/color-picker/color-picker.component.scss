@@ -32,6 +32,11 @@
         position: inherit;
         z-index: 0;
     }
+    .recently-used {
+        .title {
+            margin: 10px 0;
+        }
+    }
     .color-panel {
         color: $gray1;
         .title {

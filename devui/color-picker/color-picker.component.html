@@ -5,11 +5,14 @@
     (mouseup)="mouseUpEvent()"
     (mouseleave)="mouseUpEvent()"
   >
-    <d-recent-color
-      [limit]="8"
-      (send)="receive($event)"
-      (confirm)="confirmEvent($event)"
-    ></d-recent-color>
+    <div class="recently-used">
+      <div class="title">最近使用颜色</div>
+      <d-recent-color
+        [limit]="8"
+        (send)="receive($event)"
+        (confirm)="confirmEvent($event)"
+      ></d-recent-color>
+    </div>
     <div class="color-panel">
       <div class="title">
         <span [class.selected]="'basic' === selectedPanel" (click)="selectPanel('basic')">基本色</span>

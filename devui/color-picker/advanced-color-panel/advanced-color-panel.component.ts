@@ -10,8 +10,8 @@ import { ColorPickerService } from '../services/color-picker.service';
   styleUrls: ['./advanced-color-panel.component.scss']
 })
 export class AdvancedColorPanelComponent implements OnInit {
-  @Input() color;
-  @Input() pureColor;
+  @Input() color = '#ff0000';
+  @Input() pureColor = '#ff0000';
   @Output() send = new EventEmitter();
   uniqueId: string = Math.random().toString(36).substring(7);
   panel: Panel = {

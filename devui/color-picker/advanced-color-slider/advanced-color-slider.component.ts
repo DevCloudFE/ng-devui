@@ -10,7 +10,7 @@ import { ColorPickerService } from '../services/color-picker.service';
   styleUrls: ['./advanced-color-slider.component.scss']
 })
 export class AdvancedColorSliderComponent implements OnInit {
-  @Input() color;
+  @Input() color = '#ff0000';
   @Output() send = new EventEmitter();
   uniqueId: string = Math.random().toString(36).substring(7);
   panel: Panel = {
