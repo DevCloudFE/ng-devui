@@ -4,15 +4,18 @@ import { FormsModule } from '@angular/forms';
 
 import { AutoCompleteDirective } from './auto-complete.directive';
 import { AutoCompletePopupComponent } from './auto-complete-popup.component';
-import { HightlightComponent } from './hightlight.component';
-import { DevUIConfig } from 'ng-devui/devui.config';
+import { HighlightComponent } from './highlight.component';
+import { PositionService } from 'ng-devui/position';
+import { WindowRef } from 'ng-devui/window-ref';
+import { DocumentRef } from 'ng-devui/window-ref';
+import { LazyLoadModule } from 'ng-devui/utils';
+import { LoadingModule } from 'ng-devui/loading';
 
 @NgModule({
-  imports: [CommonModule, FormsModule],
-  exports: [AutoCompleteDirective, AutoCompletePopupComponent, HightlightComponent],
-  declarations: [AutoCompleteDirective, AutoCompletePopupComponent, HightlightComponent],
-  providers: [
-    DevUIConfig],
+  imports: [CommonModule, FormsModule, LazyLoadModule, LoadingModule],
+  exports: [AutoCompleteDirective, AutoCompletePopupComponent, HighlightComponent],
+  declarations: [AutoCompleteDirective, AutoCompletePopupComponent, HighlightComponent],
+  providers: [DocumentRef, WindowRef, PositionService],
   entryComponents: [AutoCompletePopupComponent]
 })
 export class AutoCompleteModule {

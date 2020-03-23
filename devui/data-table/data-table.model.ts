@@ -47,9 +47,10 @@ export interface ColumnDefs {
 }
 
 export interface FilterConfig {
-   name: string;
-   value: any;
-   checked?: boolean;
+  id: number | string;
+  name: string;
+  value: any;
+  checked?: boolean;
 }
 
 export interface CheckableRelation {
@@ -61,4 +62,9 @@ export interface TableExpandConfig {
   expand?: boolean;
   expandTemplateRef?: ElementRef;
   description?: string;
+}
+
+export interface ColumnResizeEventArg {
+  currentColumn: DataTableColumnTmplComponent;
+  nextColumn: DataTableColumnTmplComponent;
 }

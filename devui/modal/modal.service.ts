@@ -26,6 +26,10 @@ export class ModalService {
     componentFactoryResolver,
     onClose,
     beforeHidden,
+    placement = 'center',
+    offsetX,
+    offsetY,
+    bodyScrollable
   }: IModalOptions) {
     const finalComponentFactoryResolver = componentFactoryResolver || this.componentFactoryResolver;
 
@@ -39,6 +43,10 @@ export class ModalService {
       showAnimate,
       beforeHidden,
       backdropCloseable: isUndefined(backdropCloseable) ? true : backdropCloseable,
+      placement,
+      offsetX,
+      offsetY,
+      bodyScrollable
     });
 
     const modalContentInstance = modalRef.instance.modalContainerHost.viewContainerRef
@@ -49,7 +57,9 @@ export class ModalService {
       if (onClose) {
         onClose();
       }
-      modalRef.hostView.destroy();
+      setTimeout(() => {
+        modalRef.hostView.destroy();
+      });
     };
 
     modalRef.instance.show();

@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { DataTableComponent } from '../../data-table.component';
+
 import {LoadingType} from 'ng-devui/loading';
 import { EMPTY } from 'rxjs';
+import { DataTableComponent } from 'ng-devui/data-table';
 
 @Component({
     selector: 'd-datatable-demo-lazyloaddata',
@@ -58,8 +59,7 @@ export class DatatableDemoLazyloadDataComponent implements OnInit {
                 firstName: 'Danni',
                 lastName: 'Yu',
                 gender: 'Female',
-                dob: new Date(1991, 3, 1),
-                detail: '这是另外一个行详情'
+                dob: new Date(1991, 3, 1)
             });
         }
         this.lazyDataSource = this.lazyDataSource.concat(dataSource);

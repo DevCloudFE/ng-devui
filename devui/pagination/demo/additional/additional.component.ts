@@ -3,11 +3,11 @@ import {
   } from '@angular/core';
 
   @Component({
-    selector: 'd-pagination-demo-additional',
+    selector: 'd-additional',
     templateUrl: './additional.component.html',
     styleUrls: ['./additional.component.css']
   })
-  export class PaginationDemoAdditionalComponent {
+  export class AdditionalComponent {
     pager1 = {
       total: 10,
       pageIndex: 2,

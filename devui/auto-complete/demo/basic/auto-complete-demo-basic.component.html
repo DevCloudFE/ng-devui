@@ -1,9 +1,17 @@
 <section>
   <form class="form">
     <div class="devui-form-group">
-      <input type="text" class="form-control" name="language" id="language0" [minLength]="0"
-        [(ngModel)]="selectItem0" dAutoComplete [source]="languages"/>
+      <input
+        type="text"
+        class="devui-form-control"
+        name="language"
+        id="language0"
+        [minLength]="0"
+        [(ngModel)]="selectItem0"
+        dAutoComplete
+        [source]="languages"
+      />
     </div>
-    <pre>{{(selectItem0 | json) || 'No language select!'}}</pre>
+    <pre>{{ (selectItem0 | json) || 'No language select!' }}</pre>
   </form>
 </section>

@@ -3,24 +3,23 @@
 :host ::ng-deep th .datatable-svg {
   g#order-default {
     path {
-      fill: $gray2;
+      fill: $gray-2;
     }
   }
   g#order-desc {
     polygon#Path-4 {
-      fill: $gray2;
+      fill: $gray-2;
     }
     polygon#Path-4-Copy {
-      fill: $focus1;
+      fill: $brand-1;
     }
   }
-  g#order-asc{
+  g#order-asc {
     polygon#Path-4 {
-      fill: $focus1;
+      fill: $brand-1;
     }
     polygon#Path-4-Copy {
-      fill: $gray2;
+      fill: $gray-2;
     }
   }
-
 }

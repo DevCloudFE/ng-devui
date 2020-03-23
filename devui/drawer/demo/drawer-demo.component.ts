@@ -7,12 +7,18 @@ import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 export class DrawerDemoComponent {
   basicSource: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./basic/basic.component.html')},
-    {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./basic/basic.component.ts')}
+    {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./basic/basic.component.ts')},
+    {title: 'drawerContent-html', language: 'xml', code:  require('!!raw-loader!./drawerContent/drawer-content.component.html')},
+    {title: 'drawerContent-ts', language: 'typescript', code:  require('!!raw-loader!./drawerContent/drawer-content.component.ts')},
+    {title: 'drawerContent-css', language: 'css', code:  require('!!raw-loader!./drawerContent/drawer-content.component.css')}
   ];
 
   undestroyableSource: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./undestroyable/undestroyable.component.html')},
-    {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./undestroyable/undestroyable.component.ts')}
+    {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./undestroyable/undestroyable.component.ts')},
+    {title: 'drawerContent-html', language: 'xml', code:  require('!!raw-loader!./drawerContent/drawer-content.component.html')},
+    {title: 'drawerContent-ts', language: 'typescript', code:  require('!!raw-loader!./drawerContent/drawer-content.component.ts')},
+    {title: 'drawerContent-css', language: 'css', code:  require('!!raw-loader!./drawerContent/drawer-content.component.css')}
   ];
 
   constructor() {

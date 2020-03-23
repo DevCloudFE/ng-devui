@@ -10,44 +10,44 @@ export class OperateBtnComponent {
   currentSelectedNode;
   @ViewChild('operableTree', { static: true }) operableTree: OperableTreeComponent;
   data = [{
-    'title': '首页'
+    'title': '父节点1'
   }, {
-    'title': '资源',
+    'title': '父节点2',
     'children': [{
-      'title': '拓扑',
+      'title': '子节点2-1',
       'children': [{
-        'title': '拓扑管理'
+        'title': '子节点2-1-1'
       }, {
-        'title': 'IP拓扑管理'
+        'title': '子节点2-1-2'
       }]
     }, {
-      'title': '监控工具',
+      'title': '子节点2-2',
       'children': [{
-        'title': '大屏监控'
+        'title': '子节点2-2-1'
       }, {
-        'title': '下级网管监控'
+        'title': '子节点2-2-2'
       }]
     }]
   }, {
-    'title': '维护',
+    'title': '父节点3',
     'children': [{
-      'title': '前端维护',
+      'title': '子节点3-1',
     }, {
-      'title': '后台维护',
+      'title': '子节点3-2',
     }],
   }, {
-    'title': '报表',
+    'title': '父节点4',
     'children': [{
-      'title': '报表数据'
+      'title': '子节点4-1'
     }, {
-      'title': '报表统计'
+      'title': '子节点4-2'
     }]
   }, {
-    'title': '管理',
+    'title': '父节点5',
     'children': [{
-      'title': '向导'
+      'title': '子节点5-1'
     }, {
-      'title': '配置'
+      'title': '子节点5-2'
     }]
   }];
   onOperableNodeDeleted(treeNode: TreeNode) {

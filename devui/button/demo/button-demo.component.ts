@@ -35,6 +35,20 @@ export class ButtonDemoComponent {
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./text/text.component.ts')}
   ];
 
+  combinationSource: Array<DevuiSourceData> = [
+    {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./combination/combination.component.html')},
+    {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./combination/combination.component.ts')}
+  ];
+
+  autofocusSource: Array<DevuiSourceData> = [
+    {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./autofocus/autofocus.component.html')},
+    {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./autofocus/autofocus.component.ts')}
+  ];
+
+  sizeSource: Array<DevuiSourceData> = [
+    {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./size/size.component.html')},
+    {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./size/size.component.ts')}
+  ];
   constructor() {
 
   }

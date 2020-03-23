@@ -1,0 +1,277 @@
+<div class="container">
+  <div class="source">
+    <div class="left">
+      <ng-container *ngIf="!sourceCustomViewTemplate">
+        <div class="title">
+          <d-checkbox
+            [label]="titles.source"
+            [disabled]="disabled || sourceDisplayOptionLen === 0"
+            [isShowTitle]="false"
+            (change)="checkAll(transferDirection.SOURCE, $event)"
+            [halfchecked]="sourceHalfChecked"
+            [(ngModel)]="sourceAllChecked"
+          >
+          </d-checkbox>
+          <span class="num">{{ sourceCheckedLen }}/{{ sourceDisplayOptionLen }}</span>
+        </div>
+        <div class="line"></div>
+        <div class="content" [class.disabled]="disabled">
+          <div class="search" *ngIf="isSearch">
+            <d-search
+              style="width:100%"
+              [placeholder]="i18nCommonText?.searchPlaceholder"
+              [size]="'sm'"
+              [(ngModel)]="sourceSearchText"
+              (searchFn)="search(transferDirection.SOURCE, $event)"
+            ></d-search>
+          </div>
+          <ul
+            [id]="'default-left-' + id"
+            dDroppable
+            [placeholderTag]="'li'"
+            [dropScope]="'transfer-source-' + id"
+            (onDrop)="onDrop(transferDirection.SOURCE, $event)"
+            [ngStyle]="{ height: height }"
+            dSortable
+          >
+            <li
+              dDraggable
+              [enableDragFollow]="true"
+              [dragScope]="'transfer-source-' + id"
+              [dragHandle]="'.drag-handle'"
+              [dragData]="item"
+              [dragHandleClass]="'drag-handle'"
+              *ngFor="let item of sourceDisplayOption; let i = index"
+            >
+              <span class="drag-ico">
+                <svg
+                  *ngIf="isSourceDroppable"
+                  [class.disabled]="disabled"
+                  class="drag-handle"
+                  width="16px"
+                  height="16px"
+                  viewBox="0 0 16 16"
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                >
+                  <g id="draggable-big-left" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <g fill="#CACFD8" fill-rule="nonzero">
+                      <path
+                        d="M5.5,0 C6.32842712,-1.3527075e-16 7,0.596953667 7,1.33333333 C7,2.069713 6.32842712,2.66666667 5.5,2.66666667 C4.67157288,2.66666667 4,2.069713 4,1.33333333 C4,0.596953667 4.67157288,1.3527075e-16 5.5,0 Z M5.5,4.44444444 C6.32842712,4.44444444 7,5.04139811 7,5.77777778 C7,6.51415744 6.32842712,7.11111111 5.5,7.11111111 C4.67157288,7.11111111 4,6.51415744 4,5.77777778 C4,5.04139811 4.67157288,4.44444444 5.5,4.44444444 Z M5.5,8.88888889 C6.32842712,8.88888889 7,9.48584256 7,10.2222222 C7,10.9586019 6.32842712,11.5555556 5.5,11.5555556 C4.67157288,11.5555556 4,10.9586019 4,10.2222222 C4,9.48584256 4.67157288,8.88888889 5.5,8.88888889 Z M5.5,13.3333333 C6.32842712,13.3333333 7,13.930287 7,14.6666667 C7,15.4030463 6.32842712,16 5.5,16 C4.67157288,16 4,15.4030463 4,14.6666667 C4,13.930287 4.67157288,13.3333333 5.5,13.3333333 Z M10.5,0 C11.3284271,-1.3527075e-16 12,0.596953667 12,1.33333333 C12,2.069713 11.3284271,2.66666667 10.5,2.66666667 C9.67157288,2.66666667 9,2.069713 9,1.33333333 C9,0.596953667 9.67157288,1.3527075e-16 10.5,0 Z M10.5,4.44444444 C11.3284271,4.44444444 12,5.04139811 12,5.77777778 C12,6.51415744 11.3284271,7.11111111 10.5,7.11111111 C9.67157288,7.11111111 9,6.51415744 9,5.77777778 C9,5.04139811 9.67157288,4.44444444 10.5,4.44444444 Z M10.5,8.88888889 C11.3284271,8.88888889 12,9.48584256 12,10.2222222 C12,10.9586019 11.3284271,11.5555556 10.5,11.5555556 C9.67157288,11.5555556 9,10.9586019 9,10.2222222 C9,9.48584256 9.67157288,8.88888889 10.5,8.88888889 Z M10.5,13.3333333 C11.3284271,13.3333333 12,13.930287 12,14.6666667 C12,15.4030463 11.3284271,16 10.5,16 C9.67157288,16 9,15.4030463 9,14.6666667 C9,13.930287 9.67157288,13.3333333 10.5,13.3333333 Z"
+                      ></path>
+                    </g>
+                  </g>
+                </svg>
+              </span>
+              <d-checkbox
+                [label]="item['name']"
+                [isShowTitle]="false"
+                [(ngModel)]="item['checked']"
+                [disabled]="item['disabled'] || disabled"
+                (change)="checkboxChange(transferDirection.SOURCE, $event)"
+              >
+              </d-checkbox>
+            </li>
+          </ul>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="sourceCustomViewTemplate">
+        <ng-template [ngTemplateOutlet]="sourceCustomViewTemplate" [ngTemplateOutletContext]="{$implicit: this}"></ng-template>
+      </ng-container>
+    </div>
+  </div>
+  <div class="option">
+    <div class="transfer-op">
+      <svg
+        *ngIf="!sourceCanTransfer"
+        width="36px"
+        height="36px"
+        viewBox="0 0 36 36"
+        class="default-svg"
+        version="1.1"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+      >
+        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+          <g id="transfer" transform="translate(-942.000000, -542.000000)">
+            <g
+              id="transfer_icon/left-default"
+              transform="translate(960.000000, 560.000000) scale(-1, 1) translate(-960.000000, -560.000000) translate(942.000000, 542.000000)"
+            >
+              <circle stroke="" fill="" cx="18" cy="18" r="17.5"></circle>
+              <path
+                d="M20,22.003961 C20,22.2801034 20.2238576,22.503961 20.5,22.503961 C20.7761424,22.503961 21,22.2801034 21,22.003961 L21,13.503961 L12.5,13.503961 C12.2238576,13.503961 12,13.7278187 12,14.003961 C12,14.2801034 12.2238576,14.503961 12.5,14.503961 L20,14.503961 L20,22.003961 Z"
+                fill="#CACFD8"
+                fill-rule="nonzero"
+                transform="translate(16.500000, 18.003961) rotate(-315.000000) translate(-16.500000, -18.003961) "
+              ></path>
+            </g>
+          </g>
+        </g>
+      </svg>
+      <svg
+        *ngIf="sourceCanTransfer"
+        [class.disabled]="disabled"
+        (click)="transferTo(transferDirection.SOURCE)"
+        width="36px"
+        height="36px"
+        class="active-svg"
+        viewBox="0 0 36 36"
+        version="1.1"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+      >
+        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+          <g id="transfer-right" transform="translate(-942.000000, -1086.000000)">
+            <g id="transfer_icon/left-activated" transform="translate(942.000000, 1086.000000)">
+              <circle fill="#5170FF" cx="18" cy="18" r="18"></circle>
+              <path
+                d="M23,22.003961 C23,22.2801034 23.2238576,22.503961 23.5,22.503961 C23.7761424,22.503961 24,22.2801034 24,22.003961 L24,13.503961 L15.5,13.503961 C15.2238576,13.503961 15,13.7278187 15,14.003961 C15,14.2801034 15.2238576,14.503961 15.5,14.503961 L23,14.503961 L23,22.003961 Z"
+                fill="#FFFFFF"
+                fill-rule="nonzero"
+                transform="translate(19.500000, 18.003961) scale(-1, 1) rotate(-315.000000) translate(-19.500000, -18.003961) "
+              ></path>
+            </g>
+          </g>
+        </g>
+      </svg>
+    </div>
+    <div class="transfer-op" style="margin-top:10px;">
+      <svg
+        width="36px"
+        *ngIf="!targetCanTransfer"
+        height="36px"
+        viewBox="0 0 36 36"
+        class="default-svg"
+        version="1.1"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+      >
+        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+          <g id="transfer-left" transform="translate(-942.000000, -1030.000000)">
+            <g id="transfer_icon/right-default" transform="translate(942.000000, 1030.000000)">
+              <circle stroke="" fill="" cx="18" cy="18" r="17.5"></circle>
+              <path
+                d="M20,22.003961 C20,22.2801034 20.2238576,22.503961 20.5,22.503961 C20.7761424,22.503961 21,22.2801034 21,22.003961 L21,13.503961 L12.5,13.503961 C12.2238576,13.503961 12,13.7278187 12,14.003961 C12,14.2801034 12.2238576,14.503961 12.5,14.503961 L20,14.503961 L20,22.003961 Z"
+                fill="#CACFD8"
+                fill-rule="nonzero"
+                transform="translate(16.500000, 18.003961) rotate(-315.000000) translate(-16.500000, -18.003961) "
+              ></path>
+            </g>
+          </g>
+        </g>
+      </svg>
+      <svg
+        width="36px"
+        [class.disabled]="disabled"
+        *ngIf="targetCanTransfer"
+        (click)="transferTo(transferDirection.TARGET)"
+        height="36px"
+        viewBox="0 0 36 36"
+        version="1.1"
+        class="active-svg"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+      >
+        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+          <g id="transfer" transform="translate(-942.000000, -486.000000)">
+            <g
+              id="transfer_icon/right-activated"
+              transform="translate(960.000000, 504.000000) scale(-1, 1) translate(-960.000000, -504.000000) translate(942.000000, 486.000000)"
+            >
+              <circle fill="#5170FF" cx="18" cy="18" r="18"></circle>
+              <path
+                d="M23,22.003961 C23,22.2801034 23.2238576,22.503961 23.5,22.503961 C23.7761424,22.503961 24,22.2801034 24,22.003961 L24,13.503961 L15.5,13.503961 C15.2238576,13.503961 15,13.7278187 15,14.003961 C15,14.2801034 15.2238576,14.503961 15.5,14.503961 L23,14.503961 L23,22.003961 Z"
+                fill="#FFFFFF"
+                fill-rule="nonzero"
+                transform="translate(19.500000, 18.003961) scale(-1, 1) rotate(-315.000000) translate(-19.500000, -18.003961) "
+              ></path>
+            </g>
+          </g>
+        </g>
+      </svg>
+    </div>
+  </div>
+  <div class="target">
+    <div class="right">
+      <ng-container *ngIf="!targetCustomViewTemplate">
+        <div class="title">
+          <d-checkbox
+            [disabled]="disabled || targetDisplayOptionLen === 0"
+            [label]="titles.target"
+            [isShowTitle]="false"
+            (change)="checkAll(transferDirection.TARGET, $event)"
+            [halfchecked]="targetHalfChecked"
+            [(ngModel)]="targetAllChecked"
+          >
+          </d-checkbox>
+          <span class="num">{{ targetCheckedLen }}/{{ targetDisplayOptionLen }}</span>
+        </div>
+        <div class="line"></div>
+        <div class="content" [class.disabled]="disabled">
+          <div class="search" *ngIf="isSearch" [class.disabled]="disabled">
+            <d-search
+              style="width:100%"
+              [placeholder]="i18nCommonText?.searchPlaceholder"
+              [size]="'sm'"
+              [(ngModel)]="targetSearchText"
+              (searchFn)="search(transferDirection.TARGET, $event)"
+            ></d-search>
+          </div>
+          <ul
+            dDroppable
+            dSortable
+            [placeholderTag]="'li'"
+            [dropScope]="'transfer-target-' + id"
+            (onDrop)="onDrop(transferDirection.TARGET, $event)"
+            [ngStyle]="{ height: height }"
+          >
+            <li
+              dDraggable
+              [enableDragFollow]="true"
+              [dragScope]="'transfer-target-' + id"
+              [dragHandle]="'.drag-handle'"
+              [dragData]="item"
+              [dragHandleClass]="'drag-handle'"
+              *ngFor="let item of targetDisplayOption; let i = index"
+            >
+              <span class="drag-ico">
+                <svg
+                  *ngIf="isTargetDroppable"
+                  [class.disabled]="disabled"
+                  class="drag-handle"
+                  width="16px"
+                  height="16px"
+                  viewBox="0 0 16 16"
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                >
+                  <g id="draggable-big-right" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <g fill="#CACFD8" fill-rule="nonzero">
+                      <path
+                        d="M5.5,0 C6.32842712,-1.3527075e-16 7,0.596953667 7,1.33333333 C7,2.069713 6.32842712,2.66666667 5.5,2.66666667 C4.67157288,2.66666667 4,2.069713 4,1.33333333 C4,0.596953667 4.67157288,1.3527075e-16 5.5,0 Z M5.5,4.44444444 C6.32842712,4.44444444 7,5.04139811 7,5.77777778 C7,6.51415744 6.32842712,7.11111111 5.5,7.11111111 C4.67157288,7.11111111 4,6.51415744 4,5.77777778 C4,5.04139811 4.67157288,4.44444444 5.5,4.44444444 Z M5.5,8.88888889 C6.32842712,8.88888889 7,9.48584256 7,10.2222222 C7,10.9586019 6.32842712,11.5555556 5.5,11.5555556 C4.67157288,11.5555556 4,10.9586019 4,10.2222222 C4,9.48584256 4.67157288,8.88888889 5.5,8.88888889 Z M5.5,13.3333333 C6.32842712,13.3333333 7,13.930287 7,14.6666667 C7,15.4030463 6.32842712,16 5.5,16 C4.67157288,16 4,15.4030463 4,14.6666667 C4,13.930287 4.67157288,13.3333333 5.5,13.3333333 Z M10.5,0 C11.3284271,-1.3527075e-16 12,0.596953667 12,1.33333333 C12,2.069713 11.3284271,2.66666667 10.5,2.66666667 C9.67157288,2.66666667 9,2.069713 9,1.33333333 C9,0.596953667 9.67157288,1.3527075e-16 10.5,0 Z M10.5,4.44444444 C11.3284271,4.44444444 12,5.04139811 12,5.77777778 C12,6.51415744 11.3284271,7.11111111 10.5,7.11111111 C9.67157288,7.11111111 9,6.51415744 9,5.77777778 C9,5.04139811 9.67157288,4.44444444 10.5,4.44444444 Z M10.5,8.88888889 C11.3284271,8.88888889 12,9.48584256 12,10.2222222 C12,10.9586019 11.3284271,11.5555556 10.5,11.5555556 C9.67157288,11.5555556 9,10.9586019 9,10.2222222 C9,9.48584256 9.67157288,8.88888889 10.5,8.88888889 Z M10.5,13.3333333 C11.3284271,13.3333333 12,13.930287 12,14.6666667 C12,15.4030463 11.3284271,16 10.5,16 C9.67157288,16 9,15.4030463 9,14.6666667 C9,13.930287 9.67157288,13.3333333 10.5,13.3333333 Z"
+                      ></path>
+                    </g>
+                  </g>
+                </svg>
+              </span>
+              <d-checkbox
+                [label]="item['name']"
+                [isShowTitle]="false"
+                [(ngModel)]="item['checked']"
+                [disabled]="item['disabled'] || disabled"
+                (change)="checkboxChange(transferDirection.TARGET, $event)"
+              >
+              </d-checkbox>
+            </li>
+          </ul>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="targetCustomViewTemplate">
+        <ng-template [ngTemplateOutlet]="targetCustomViewTemplate" [ngTemplateOutletContext]="{$implicit: this}"></ng-template>
+      </ng-container>
+    </div>
+  </div>
+</div>

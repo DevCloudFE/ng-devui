@@ -1,14 +1,22 @@
-<div class="tree-select">
-  <popper-component [(open)]="isOpen" [fluidPopper]="!width" (openChange)="responsePopperChange($event)"
-                    [appendTo]="appendTo" #popper>
-    <input #selectHost class="select-input devui-input" (click)="toggle()" [placeholder]="placeholder"
-           autocomplete="off" [disabled]="disabled" readonly popper-activator/>
-    <div popper-prepend class="tree-select search-container" *ngIf="searchable">
-      <input class="devui-input" [(ngModel)]="searchString" #searchInputModel="ngModel" #searchInput/>
+<div class="devui-tree-select">
+  <popper-component [(open)]="isOpen" [fluidPopper]="!width" (openChange)="responsePopperChange($event)" [appendTo]="appendTo" #popper>
+    <input
+      #selectHost
+      class="devui-select-input devui-input devui-form-control devui-tree-select-input"
+      (click)="toggle()"
+      [placeholder]="placeholder"
+      autocomplete="off"
+      [disabled]="disabled"
+      readonly
+      popper-activator
+    />
+    <div popper-prepend class="devui-tree-select devui-search-container" *ngIf="searchable">
+      <input class="devui-input" [(ngModel)]="searchString" #searchInputModel="ngModel" #searchInput />
     </div>
-    <div class="tree-select options-container" #optionsContainer popper-container [ngStyle]="{width: width}">
+    <div class="devui-tree-select devui-options-container" #optionsContainer popper-container [ngStyle]="{ width: width }">
       <d-operable-tree
         #tree
+        [style.display]="treeData && treeData.length > 0 && !noRecord ? 'block' : 'none'"
         [tree]="treeData"
         [treeNodeIdKey]="treeNodeIdKey"
         [treeNodeChildrenKey]="treeNodeChildrenKey"
@@ -19,18 +27,36 @@
         [canActivateParentNode]="!leafOnly"
         (nodeChecked)="onOperableNodeChecked($event)"
         (nodeSelected)="onOperableNodeSelected($event)"
+        (nodeToggled)="onNodeToggled()"
         [iconParentOpen]="iconParentOpen"
         [iconParentClose]="iconParentClose"
         [iconLeaf]="iconLeaf"
         [treeNodeTitleKey]="treeNodeTitleKey"
         [iconTemplatePosition]="iconTemplatePosition"
-        class="tree"
+        class="devui-tree"
       >
-        <ng-template *ngIf="iconTemplatePassThrough" #iconTemplate let-node="node">
-          <ng-template [ngTemplateOutlet]="iconTemplatePassThrough" [ngTemplateOutletContext]="{ node: node }">
+        <ng-template *ngIf="iconTemplateInput || iconTemplatePassThrough" #iconTemplate let-node="node">
+          <ng-template [ngTemplateOutlet]="iconTemplateInput || iconTemplatePassThrough" [ngTemplateOutletContext]="{ node: node }">
           </ng-template>
         </ng-template>
       </d-operable-tree>
+      <div *ngIf="!treeData || treeData.length <= 0" class="devui-no-data-tip">
+        {{ i18nCommonText?.noData }}
+      </div>
+      <div *ngIf="noRecord" class="devui-no-data-tip">
+        {{ i18nCommonText?.noRecordsFound }}
+      </div>
     </div>
   </popper-component>
+  <div
+    [ngClass]="{ disabled: disabled, clear: allowClear }"
+    (click)="$event.stopPropagation(); $event.preventDefault(); clearValue()"
+  ></div>
+  <span class="devui-select-chevron-icon" [class.open]="isOpen" [ngClass]="{ disabled: disabled, clear: allowClear }">
+    <svg width="14px" height="14px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg">
+      <g id="chevron_down" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <polygon id="chevron_down" points="4.5 5 8 8.76923077 11.5 5 13 6.61538462 8 12 3 6.61538462"></polygon>
+      </g>
+    </svg>
+  </span>
 </div>

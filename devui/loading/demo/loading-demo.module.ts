@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { ButtonModule } from '../../button/index';
+
 import { LoadingModule } from '../loading.module';
 import { LoadingDemoComponent } from './loading-demo.component';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
@@ -12,6 +12,8 @@ import { CustomComponent } from './custom/custom.component';
 import { PromiseComponent } from './promise/promise.component';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
+import { SubscriptionComponent } from './subscription/subscription.component';
+import { ButtonModule } from 'ng-devui/button';
 
 @NgModule({
   imports: [
@@ -35,6 +37,7 @@ import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
     BasicComponent,
     CustomComponent,
     PromiseComponent,
+    SubscriptionComponent
   ],
   entryComponents: [
     LoadingDemoComponent,

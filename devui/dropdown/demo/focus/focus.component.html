@@ -1,6 +1,6 @@
 <section>
   <h5>tab键导航到dropdown的Toggle对象的时候，会自动展开菜单</h5>
-  <div class="btn-group g-dropdown" dDropDown (onToggle)="onToggle($event)">
+  <div class="btn-group g-dropdown" dDropDown (ToggleEvent)="onToggle($event)">
     <a dDropDownToggle [toggleOnFocus]="true" class="devui-dropdown-default">
       更多操作
       <span class="icon-chevron-down"></span>
@@ -8,7 +8,7 @@
 
     <ul dDropDownMenu class="devui-dropdown-menu devui-scrollbar" role="menu">
       <li role="menuitem">
-        <input type="text" class="devui-form-control" style="width: 120px;margin-right: 10px;" placeholder="输入框"/>
+        <input type="text" class="devui-form-control" style="width: 120px;margin-right: 10px;" placeholder="输入框" />
       </li>
       <li class="disabled" role="menuitem">
         <a class="devui-dropdown-item disabled">禁用选项</a>
@@ -36,9 +36,9 @@
 </section>
 
 <section>
-<h5>初始化的时候会自动focus；搭配toggleOnFocus可以自动展开，也可单独使用</h5>
+  <h5>初始化的时候会自动focus；搭配toggleOnFocus可以自动展开，也可单独使用</h5>
   <div><d-toggle [(ngModel)]="showExample">初始化/销毁</d-toggle> 初始化/销毁</div>
-  <div class="btn-group g-dropdown" dDropDown (onToggle)="onToggle($event)" *ngIf="showExample">
+  <div class="btn-group g-dropdown" dDropDown (ToggleEvent)="onToggle($event)" *ngIf="showExample">
     <a dDropDownToggle [autoFocus]="true" [toggleOnFocus]="true" class="devui-dropdown-default">
       更多操作
       <span class="icon-chevron-down"></span>
@@ -46,7 +46,7 @@
 
     <ul dDropDownMenu class="devui-dropdown-menu devui-scrollbar" role="menu">
       <li role="menuitem">
-        <input type="text" class="form-control" style="width: 120px;margin-right: 10px;" placeholder="输入框"/>
+        <input type="text" class="form-control" style="width: 120px;margin-right: 10px;" placeholder="输入框" />
       </li>
       <li class="disabled" role="menuitem">
         <a class="devui-dropdown-item disabled">禁用选项</a>

@@ -1,0 +1,27 @@
+<section>
+  <h5 class="text-muted">自定义区域方向和选中</h5>
+  <div class="row">
+    <div class="col-md-5">
+      <d-select
+        [placeholder]="'Standard Input'"
+        [options]="options"
+        [multiple]="true"
+        [customViewTemplate]="myTemplate"
+        [customViewDirection]="'right'"
+      ></d-select>
+    </div>
+  </div>
+</section>
+
+<ng-template #myTemplate let-selectComponent let-choose="choose">
+  <div class="custom-wrapper">
+    <div class="custom-title">最近选择</div>
+    <ul class="custom-box">
+      <li class="custom-list" *ngFor="let recent of recently; let i = index">
+        <div class="custom-single" (click)="chooseRecent($event, i, choose)">
+          {{ recent }}
+        </div>
+      </li>
+    </ul>
+  </div>
+</ng-template>

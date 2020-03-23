@@ -1,54 +1,65 @@
 <div class="demo-container">
+  <div class="demo-example">
+    <div class="demo-title">主要按钮</div>
+    <div class="demo-text"></div>
+    <d-codebox id="components-button-primary" [sourceData]="primarySource">
+      <d-button-primary demo></d-button-primary>
+    </d-codebox>
+  </div>
 
-    <div class="demo-example">
-        <div class="demo-title">主要按钮</div>
-        <div class="demo-text">
-
-        </div>
-        <d-codebox id="components-button-primary" [sourceData]="primarySource">
-            <d-button-primary demo></d-button-primary>
-        </d-codebox>
+  <div class="demo-example">
+    <div class="demo-title">次要按钮</div>
+    <div class="demo-text"></div>
+    <d-codebox id="components-button-common" [sourceData]="commonSource">
+      <d-button-common demo></d-button-common>
+    </d-codebox>
+  </div>
+  <div class="demo-example">
+    <div class="demo-title">主要按钮与次要按钮组合</div>
+    <div class="demo-text">
+      主要按钮与次要按钮组合使用时，主要按钮放置于左侧，需要注意的是，在第二个demo的情况下，按钮组合表示了特殊的逻辑关系，故作为例外情况。
     </div>
+    <d-codebox id="components-button-combination" [sourceData]="combinationSource">
+      <d-button-combination demo></d-button-combination>
+    </d-codebox>
+  </div>
+  <div class="demo-example">
+    <div class="demo-title">文字按钮</div>
+    <div class="demo-text"></div>
+    <d-codebox id="components-button-text" [sourceData]="textSource">
+      <d-button-text demo></d-button-text>
+    </d-codebox>
+  </div>
 
-    <div class="demo-example">
-        <div class="demo-title">次要按钮</div>
-        <div class="demo-text">
+  <div class="demo-example">
+    <div class="demo-title">加载中状态</div>
+    <div class="demo-text"></div>
+    <d-codebox id="components-button-loading" [sourceData]="loadingSource">
+      <d-button-loading demo></d-button-loading>
+    </d-codebox>
+  </div>
 
-        </div>
-        <d-codebox id="components-button-common" [sourceData]="commonSource">
-            <d-button-common demo></d-button-common>
-        </d-codebox>
-    </div>
+  <div class="demo-example">
+    <div class="demo-title">自动获得焦点</div>
+    <div class="demo-text">通过 autofocus 设置按钮自动获得焦点</div>
+    <d-codebox id="components-button-autofocus" [sourceData]="autofocusSource">
+      <d-button-autofocus demo></d-button-autofocus>
+    </d-codebox>
+  </div>
 
-    <div class="demo-example">
-        <div class="demo-title">文字按钮</div>
-        <div class="demo-text">
+  <div class="demo-example">
+    <div class="demo-title">图标按钮</div>
+    <div class="demo-text"></div>
+    <d-codebox id="components-tabs-default" [sourceData]="iconSource">
+      <d-button-icon demo></d-button-icon>
+    </d-codebox>
+  </div>
 
-        </div>
-        <d-codebox id="components-button-text" [sourceData]="textSource">
-            <d-button-text demo></d-button-text>
-        </d-codebox>
-    </div>
-
-    <div class="demo-example">
-        <div class="demo-title">加载中状态</div>
-        <div class="demo-text">
-
-        </div>
-        <d-codebox id="components-button-loading" [sourceData]="loadingSource">
-            <d-button-loading demo></d-button-loading>
-        </d-codebox>
-    </div>
-
-    <div class="demo-example">
-        <div class="demo-title">图标按钮</div>
-        <div class="demo-text">
-
-        </div>
-        <d-codebox id="components-tabs-default" [sourceData]="iconSource">
-            <d-button-icon demo></d-button-icon>
-        </d-codebox>
-    </div>
-
+  <div class="demo-example">
+    <div class="demo-title">按钮大小</div>
+    <div class="demo-text">按钮有3种大小，可以根据业务场景选择合适大小的按钮。</div>
+    <d-codebox id="components-button-size" [sourceData]="sizeSource">
+      <d-button-size demo></d-button-size>
+    </d-codebox>
+  </div>
 </div>
-

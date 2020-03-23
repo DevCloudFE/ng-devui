@@ -1,0 +1,36 @@
+<section>
+  <h4>Operable Tree With Search</h4>
+  <div class="row">
+    <div class="d-demo__search">
+      <input
+        style="width: 30%;height: 30px;"
+        name="search"
+        placeholder="Search your node..."
+        class="form-control"
+        (keyup)="onKeyUp($event)"
+      />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="d-demo__search">
+      <input
+        style="width: 30%;height: 30px;"
+        name="search"
+        placeholder="filter your node..."
+        class="form-control"
+        (keyup)="onKeyUp2($event)"
+      />
+    </div>
+  </div>
+
+  <d-operable-tree
+    #dOperableTreeComponent="dOperableTreeComponent"
+    [tree]="data2"
+    [treeNodeIdKey]="'id'"
+    [treeNodeChildrenKey]="'children'"
+    (nodeDeleted)="onOperableNodeDeleted($event)"
+    (nodeSelected)="onOperableNodeSelected($event)"
+  >
+  </d-operable-tree>
+</section>

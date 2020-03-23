@@ -6,64 +6,170 @@
 }
 
 .devui-alert {
-  color: $white;
-  font-size: 14px;
-  font-weight: bold;
-
+  color: $dark-1;
+  font-size: 12px;
+  border: 1px solid transparent;
+  padding: 10px;
+  line-height: 20px;
   button.devui-close {
-    color: $white;
+    color: $dark-1;
     opacity: 1;
     box-shadow: none;
-
+    & > svg use {
+      fill: $font-white;
+    }
     span {
-      color: $white;
-      font-size: 14px;
+      color: $dark-1;
+      font-size: 12px;
       font-weight: bold;
     }
   }
 
   &.devui-alert-success {
-    background-color: $status-green;
-    border-color: $status-green;
-    color: $white;
+    background-color: $hwc-status-success-background;
+    border-color: $hwc-status-success-border;
+    color: $dark-1;
+    button.devui-close {
+      color: $status-green;
+      & > svg use {
+        fill: $status-green;
+      }
+    }
   }
 
   &.devui-alert-info {
-    background-color: $white;
-    box-shadow: 0 1px 4px 0 rgba(41, 48, 64, 0.20);
-    color: $dark1;
-    font-weight: normal;
+    background-color: $hwc-status-info-background;
+    border-color: $hwc-status-info-border;
+    color: $dark-1;
+    button.devui-close {
+      color: $status-blue;
+      & > svg use {
+        fill: $status-blue;
+      }
+    }
+    button.devui-close {
+      color: $status-blue;
+      & > svg use {
+        fill: $status-blue;
+      }
+    }
   }
 
   &.devui-alert-warning {
-    background-color: $status-yellow;
-    border-color: $status-yellow;
-    color: $dark1;
-
-    button.devui-alert-close {
-      color: $dark1;
-      opacity: 1;
-      box-shadow: none;
-
-      span {
-        color: $dark1;
+    background-color: $hwc-status-warning-background;
+    border-color: $hwc-status-warning-border;
+    color: $dark-1;
+    button.devui-close {
+      color: $status-yellow;
+      & > svg use {
+        fill: $status-yellow;
       }
     }
   }
 
   &.devui-alert-danger {
-    background-color: $status-red;
-    border-color: $status-red;
-    color: $white;
+    background-color: $hwc-status-danger-background;
+    border-color: $hwc-status-danger-border;
+    color: $dark-1;
+    button.devui-close {
+      color: $status-red;
+      & > svg use {
+        fill: $status-red;
+      }
+    }
+  }
 
+  .devui-alert-icon {
+    margin-right: 10px;
+  }
+
+  svg.devui-icon {
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+    transform: translateY(-1px); //字体14px图标16px对齐问题，微调
+  }
+
+  .devui-icon.icon-success > g {
+    & > path {
+      fill: $status-green;
+    }
+
+    & > circle,
+    & > polygon {
+      fill: $bg-white;
+    }
+  }
+
+  .devui-icon.icon-warning > g {
+    & > polygon {
+      fill: $bg-white;
+    }
+
+    & > path {
+      fill: $status-yellow;
+    }
+  }
+
+  .devui-icon.icon-info > g {
+    & > g {
+      fill: $status-blue;
+    }
+
+    & > circle {
+      fill: $bg-white;
+    }
+  }
+
+  .devui-icon.icon-error > g {
+    & > path {
+      fill: $status-red;
+    }
+
+    & > circle {
+      fill: $bg-white;
+    }
   }
 }
-
-.devui-alert-icon-close-warn {
-  fill: $dark1;
-  ;
+.devui-alert-icon {
+  margin-right: 10px;
 }
-
-.devui-alert-icon-close-no-warn {
-  fill: $white;
+svg.devui-icon {
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+  transform: translateY(-1px); //字体14px图标16px对齐问题，微调
+}
+.devui-icon.devui-icon-success > g {
+  & > path {
+    fill: $status-green;
+  }
+  & > circle,
+  & > polygon {
+    fill: $font-white;
+  }
+}
+.devui-icon.devui-icon-warning > g {
+  & > polygon {
+    fill: $font-white;
+  }
+  & > path {
+    fill: $status-yellow;
+  }
+}
+.devui-icon.devui-icon-info > g {
+  & > g {
+    fill: $status-blue;
+  }
+  & > circle {
+    fill: $font-white;
+  }
+}
+.devui-icon.devui-icon-error > g {
+  & > path {
+    fill: $status-red;
+  }
+  & > circle {
+    fill: $font-white;
+  }
 }

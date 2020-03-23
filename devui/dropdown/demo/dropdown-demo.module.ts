@@ -16,7 +16,7 @@ import { DropDownDemoAddIconComponent } from './add-icon/add-icon.component';
 import { DropDownDemoHoverComponent } from './hover/hover.component';
 import { DropDownDemoFocusComponent } from './focus/focus.component';
 import { DropDownDemoClickBlankComponent } from './close-scope/close-scope.component';
-
+import { DropDownDemoMultiLevelComponent } from './multi-level/multi-level.component';
 
 @NgModule({
   imports: [
@@ -43,8 +43,8 @@ import { DropDownDemoClickBlankComponent } from './close-scope/close-scope.compo
     DropDownDemoFocusComponent,
     DropDownDemoHoverComponent,
     DropDownDemoAppendToBodyComponent,
-    DropDownDemoAddIconComponent
-
+    DropDownDemoAddIconComponent,
+    DropDownDemoMultiLevelComponent,
   ],
   entryComponents: [
     DropdownDemoComponent,

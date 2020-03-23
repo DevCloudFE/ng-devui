@@ -1,21 +1,14 @@
 <section>
-  <d-alert [type]="'success'" (onClose)="handleClose($event)">
-    <span class="v-mid icon icon-right-o" style="color: rgb(255, 255, 255);"></span>
-    <span class="v-mid ml-10">成功。devcloud一站式云端DevOps平台。</span>
+  <d-alert [type]="'success'" (closeEvent)="handleClose($event)">
+    <span>成功。devcloud一站式云端DevOps平台。</span>
   </d-alert>
-
-  <d-alert [type]="'warning'" (onClose)="handleClose($event)">
-    <span class="v-mid icon icon-warning-o" style="color: rgb(255, 255, 255);"></span>
-    <span class="v-mid ml-10">警告。devcloud一站式云端</span>
+  <d-alert [type]="'warning'" (closeEvent)="handleClose($event)">
+    <span>警告。devcloud一站式云端DevOps平台。</span>
   </d-alert>
-
-  <d-alert [type]="'danger'" (onClose)="handleClose($event)">
-    <span class="v-mid icon icon-error-o" style="color: rgb(255, 255, 255);"></span>
-    <span class="v-mid ml-10">错误。devcloud一站式云端</span>
+  <d-alert [type]="'danger'" (closeEvent)="handleClose($event)">
+    <span>错误。devcloud一站式云端DevOps平台。</span>
   </d-alert>
-
-  <d-alert [type]="'info'" (onClose)="handleClose($event)">
-    <span class="v-mid icon icon-info-o" style="color:#5170FF;"></span>
-    <span class="v-mid ml-10">提示性信息。devcloud一站式云端DevOps平台。</span>
+  <d-alert [type]="'info'" (closeEvent)="handleClose($event)">
+    <span>提示性信息。devcloud一站式云端DevOps平台。</span>
   </d-alert>
 </section>

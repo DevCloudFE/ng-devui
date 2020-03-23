@@ -13,13 +13,22 @@ export class PopoverDemoComponent {
 
   manualSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./manual/manual.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./manual/manual.component.ts') },
-    { title: 'CSS', language: 'css', code: require('!!raw-loader!./manual/manual.component.css') }
+    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./manual/manual.component.ts') }
   ];
 
   customizeSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./customize/customize-tmp.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./customize/customize-tmp.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./customize/customize.component.html') },
+    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./customize/customize.component.ts') },
+  ];
+
+  scrollElementSource: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./scroll-element/scroll-element.component.html') },
+    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./scroll-element/scroll-element.component.ts') },
+  ];
+
+  hoverToContentSource: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./hover-to-content/hover-to-content.component.html') },
+    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./hover-to-content/hover-to-content.component.ts') },
   ];
   constructor() {
   }

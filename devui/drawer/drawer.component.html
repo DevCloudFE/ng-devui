@@ -1,15 +1,28 @@
-<div class='drawer' [ngClass]="{'left0': _isCover && animateState === 'in'}">
-    <div class='overlay-wrapper' [ngClass]="{'left0': _isCover && animateState === 'in'}">
-        <div class='overlay-backdrop'
-                [@fadeInOut]='animateState'
-                (click)='backdropCloseable && hide()'></div>
-        <div class='drawer-nav'
-                [ngStyle]="{'width': _width}"
-                [@flyInOut]='animateState'
-                (@flyInOut.done)='onAnimationEnd($event)'>
-            <div class="drawer-content">
-                <ng-template dDrawerContentHost></ng-template>
-            </div>
-        </div>
+<div
+  class="drawer"
+  [attr.id]="id"
+  [ngClass]="{ 'display-width': _isCover && animateState === 'in' }"
+  [style.left]="position === 'left' ? 0 : null"
+  [style.right]="position === 'right' ? 0 : null"
+>
+  <div
+    class="overlay-wrapper"
+    [ngClass]="{ 'display-width': _isCover && animateState === 'in' }"
+    [style.left]="position === 'left' ? 0 : null"
+    [style.right]="position === 'right' ? 0 : null"
+  >
+    <div class="overlay-backdrop" [@fadeInOut]="animateState" (click)="backdropCloseable && hide()"></div>
+    <div
+      class="drawer-nav"
+      [ngStyle]="{ width: _width }"
+      [@flyInOut]="position + '-' + animateState"
+      (@flyInOut.done)="animationDone.next($event)"
+      [style.left]="position === 'left' ? 0 : null"
+      [style.right]="position === 'right' ? 0 : null"
+    >
+      <div class="drawer-content" cdkScrollable>
+        <ng-template dDrawerContentHost></ng-template>
+      </div>
     </div>
+  </div>
 </div>

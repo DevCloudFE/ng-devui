@@ -4,6 +4,7 @@ import {
   Output,
   EventEmitter,
   forwardRef,
+  ViewEncapsulation,
   TemplateRef,
   OnChanges,
   SimpleChanges,
@@ -12,6 +13,7 @@ import {
   ControlValueAccessor,
   NG_VALUE_ACCESSOR
 } from '@angular/forms';
+import isArray from 'lodash-es/isArray';
 
 @Component({
   selector: 'd-checkbox-group',
@@ -33,8 +35,9 @@ export class CheckBoxGroupComponent implements OnChanges, ControlValueAccessor {
   @Input() options = [];
   @Input() filterKey: string;
   @Input() labelTemplate: TemplateRef<any>;
+  @Input() showAnimation = true;
   @Output() change: EventEmitter<boolean> = new EventEmitter();
-  values: any[];
+  values: any[] = [];
   options_display = [];
   private onChange = (_: any) => null;
   private onTouch = () => null;
@@ -46,9 +49,6 @@ export class CheckBoxGroupComponent implements OnChanges, ControlValueAccessor {
   }
 
   checkType() {
-    if (!this.values) {
-      return;
-    }
     this.options_display = [];
     const checkedArray = [];
     this.values.forEach(item => {
@@ -59,7 +59,7 @@ export class CheckBoxGroupComponent implements OnChanges, ControlValueAccessor {
       }
     });
     this.options.forEach(item => {
-      const option = {isChecked: false};
+      const option = { isChecked: false };
       option['value'] = item;
       if (this.filterKey && item[this.filterKey]) {
         if (checkedArray[item[this.filterKey]]) {
@@ -75,8 +75,10 @@ export class CheckBoxGroupComponent implements OnChanges, ControlValueAccessor {
   }
 
   writeValue(inputArray: any): void {
-    this.values = inputArray;
-    this.checkType();
+    if (inputArray && isArray(inputArray)) {
+      this.values = inputArray;
+      this.checkType();
+    }
   }
 
   registerOnChange(fn: any): void {

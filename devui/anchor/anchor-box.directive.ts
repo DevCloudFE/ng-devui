@@ -29,17 +29,17 @@ export class AnchorBoxDirective implements IAnchorBox {
     });
     this.refreshAnchorMap.next();
   }
-  get anchroList() {
+  get anchorList() {
     return this._anchorList;
   }
 
   constructor() {
   }
 
-  forceActiveAnchor(anchorName: string, forceActiveSource: AnchorActiveChangeSource = 'scroll', deactiveOtherAnchord = true) {
+  forceActiveAnchor(anchorName: string, forceActiveSource: AnchorActiveChangeSource = 'scroll', deactivateOtherAnchor = true) {
     this.anchorMap[anchorName].activeChangeBy = forceActiveSource;
     this.anchorMap[anchorName].isActive = true;
-    if (deactiveOtherAnchord) {
+    if (deactivateOtherAnchor) {
       Object.keys(this.anchorMap)
             .filter(name => name !== anchorName)
             .map(name => this.anchorMap[name])

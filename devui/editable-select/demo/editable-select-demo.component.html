@@ -4,8 +4,17 @@
     <div class="demo-text">
       通过 source 设置数据源
     </div>
-    <d-codebox [sourceData]="editableSelectDemoBasic">
-      <d-editable-select-demo-with-source demo></d-editable-select-demo-with-source>
+    <d-codebox [sourceData]="BasicSource">
+      <d-with-source demo></d-with-source>
+    </d-codebox>
+  </div>
+  <div class="demo-example">
+    <div class="demo-title">设置禁用选项</div>
+    <div class="demo-text">
+      支持禁用指定数据
+    </div>
+    <d-codebox [sourceData]="DisableDataSource">
+      <d-disable-data-with-source demo></d-disable-data-with-source>
     </d-codebox>
   </div>
   <div class="demo-example">
@@ -13,17 +22,26 @@
     <div class="demo-text">
       通过 searchFn 自定义数据匹配方法
     </div>
-    <d-codebox [sourceData]="editableSelectDemoSearchFn">
-        <d-editable-select-demo-with-search-function demo></d-editable-select-demo-with-search-function>
+    <d-codebox [sourceData]="SearchFnSource">
+      <d-with-search-function demo></d-with-search-function>
     </d-codebox>
   </div>
   <div class="demo-example">
     <div class="demo-title">异步获取数据源并设置匹配方法</div>
     <div class="demo-text">
-        支持异步设置数据源并设置匹配方法
+      支持异步设置数据源并设置匹配方法
     </div>
-    <d-codebox [sourceData]="editableSelectDemoAsyncDataSearchFn">
-        <d-editable-select-demo-async-data-with-function demo></d-editable-select-demo-async-data-with-function>
+    <d-codebox [sourceData]="AsyncDataSearchFnSource">
+      <d-async-data-with-function demo></d-async-data-with-function>
+    </d-codebox>
+  </div>
+  <div class="demo-example">
+    <div class="demo-title">数据懒加载</div>
+    <div class="demo-text">
+      数据懒加载
+    </div>
+    <d-codebox [sourceData]="LazyLoadComponentSource">
+      <d-lazy-load demo></d-lazy-load>
     </d-codebox>
   </div>
 </div>

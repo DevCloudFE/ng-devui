@@ -1,20 +1,36 @@
 @import '../style/theme/color';
 
 svg.svg-icon-arrow > g > polygon {
-  fill: $dark1;
+  fill: $dark-1;
 }
 
-:host ::ng-deep d-button button.d-btn.d-btn-icon{
-  padding:0 !important;
+:host ::ng-deep d-button button.d-btn.d-btn-icon {
+  padding: 0 !important;
+}
+:host ::ng-deep .cell-modify {
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+  & > svg {
+    vertical-align: middle;
+    & > g > g {
+      fill: #9498a0;
+    }
+  }
+
+  &:hover > svg > g > g {
+    fill: $dark-1;
+  }
 }
 
 :host ::ng-deep .cell-placeholder {
   display: inline-block;
-  height: 16px;;
+  height: 16px;
 }
 :host ::ng-deep .cell-container {
   position: relative;
-  height: 24px;;
+  height: 24px;
 }
 
 :host ::ng-deep .cell-container-inner {
@@ -30,12 +46,12 @@ svg.svg-icon-arrow > g > polygon {
       cursor: pointer;
       & > svg {
         vertical-align: middle;
-        & > g > g {
-          fill: $dark1;
+        & > g {
+          fill: $dark-1;
         }
       }
 
-      &:hover > svg > g > g{
+      &:hover > svg > g {
         fill: $hover-control;
       }
     }
@@ -59,6 +75,6 @@ svg.svg-icon-arrow > g > polygon {
   margin-left: -5px;
   padding-left: 5px;
   &:hover {
-    background: #E8F0F0;
+    background: $brand-3;
   }
 }

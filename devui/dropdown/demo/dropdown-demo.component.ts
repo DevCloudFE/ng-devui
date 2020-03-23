@@ -1,8 +1,5 @@
-import {
-  Component,
-  HostBinding
-} from '@angular/core';
-import { DevuiSourceData } from '../../shared/devui-codebox';
+import { Component } from '@angular/core';
+import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 
 @Component({
     selector: 'd-demo-dropdown',
@@ -37,6 +34,11 @@ export class DropdownDemoComponent {
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./add-icon/add-icon.component.html')},
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./add-icon/add-icon.component.ts')},
     {title: 'CSS', language: 'css', code:  require('!!raw-loader!./add-icon/add-icon.component.css')}
+  ];
+  multiLevelSource: Array<DevuiSourceData> = [
+    {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./multi-level/multi-level.component.html')},
+    {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./multi-level/multi-level.component.ts')},
+    {title: 'CSS', language: 'css', code:  require('!!raw-loader!./multi-level/multi-level.component.css')}
   ];
 
   constructor() {

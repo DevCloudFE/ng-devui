@@ -1,0 +1,88 @@
+<ng-container *ngIf="showMenu; else breadcrumbContentTpl">
+  <span [ngClass]="{ 'devui-breadcrumb-item-active': isOpen }" #origin>
+    <ng-template [ngTemplateOutlet]="breadcrumbContentTpl"></ng-template>
+    <i
+      class="devui-breadcrumb-down-icon"
+      dDropDown
+      dDropDownToggle
+      appendToBody
+      [alignOrigin]="origin"
+      [closeScope]="'blank'"
+      (toggleEvent)="onToggle($event)"
+    >
+      <svg
+        width="5px"
+        height="16px"
+        viewBox="0 0 5 16"
+        version="1.1"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+      >
+        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+          <polygon
+            id="Triangle-Copy-2"
+            fill="#959EB2"
+            transform="translate(2.500000, 7.500000) scale(1, -1) translate(-2.500000, -7.500000) "
+            points="2.5 6 5 9 0 9"
+          ></polygon>
+        </g>
+      </svg>
+      <div dDropDownMenu>
+        <ng-template
+          [ngTemplateOutlet]="customMenuTemplate ? customMenuTemplate : dropDownMenuTpl"
+          [ngTemplateOutletContext]="{
+            $implicit: this
+          }"
+        >
+        </ng-template>
+      </div>
+    </i>
+  </span>
+</ng-container>
+
+<ng-template #breadcrumbContentTpl>
+  <span class="devui-breadcrumb-item">
+    <ng-content></ng-content>
+  </span>
+</ng-template>
+
+<ng-template #dropDownMenuTpl>
+  <div *ngIf="isSearch" class="devui-search-container">
+    <d-search [size]="'sm'" (searchFn)="searchEvent($event)"></d-search>
+  </div>
+  <ul class="devui-breadcrumb-dropdown-menu">
+    <li *ngFor="let item of menuListDisplay" title="{{ item.name }}">
+      <a
+        *ngIf="!item.linkType || item.linkType === 'hrefLink'"
+        [href]="item.link"
+        rel="noopener"
+        [target]="item.target ? item.target : '_self'"
+        >{{ item.name }}</a
+      >
+      <a
+        *ngIf="item.linkType === 'routerLink'"
+        rel="noopener"
+        [target]="item.target"
+        [href]="item.link"
+        (click)="navigateTo($event, item)"
+        >{{ item.name }}</a
+      >
+    </li>
+  </ul>
+</ng-template>
+
+<span class="devui-breadcrumb-separator">
+  <ng-template
+    [ngTemplateOutlet]="breadCrumbComponent.separatorIcon ? breadCrumbComponent.separatorIcon : defaultSeparator"
+    [ngTemplateOutletContext]="{
+    $implicit: this
+  }"
+  >
+  </ng-template>
+</span>
+
+<ng-template #defaultSeparator>
+  <span class="devui-breadcrumb-separator">
+    /
+  </span>
+</ng-template>

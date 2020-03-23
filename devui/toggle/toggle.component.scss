@@ -1,12 +1,12 @@
-@import "../style/theme/color";
+@import '../style/theme/color';
 
 :host {
   display: inline-block;
 }
 
 .devui-toggle {
-  background: $white;
-  border: 1px solid $gray1;
+  background: $bg-white;
+  border: 1px solid $gray-1;
   position: relative;
   display: inline-block;
   box-sizing: content-box;
@@ -15,24 +15,22 @@
   margin: 0;
   cursor: pointer;
   transition: 0.3s ease-out all;
-  -webkit-transition: 0.3s ease-out all;
   &:hover {
     border-color: $hover-control;
   }
 
   &:active {
-    border-color: $focus2;
+    border-color: $brand-2;
   }
   small {
-    background: $gray1;
+    background: $gray-1;
     border-radius: 100%;
     position: absolute;
     top: 0;
     left: 2px;
     transition: 0.3s ease-out all;
-    -webkit-transition: 0.3s ease-out all;
   }
-  &.toggle-large {
+  &.devui-toggle-large {
     width: 66px;
     height: 40px;
     border-radius: 40px;
@@ -40,13 +38,13 @@
       width: 40px;
       height: 40px;
     }
-    &.checked small {
-      background: $white;
+    &.devui-checked small {
+      background: $font-white;
       left: 26px;
     }
   }
 
-  &.toggle-medium {
+  &.devui-toggle-medium {
     width: 50px;
     height: 30px;
     border-radius: 30px;
@@ -54,13 +52,13 @@
       width: 30px;
       height: 30px;
     }
-    &.checked small {
-      background: $white;
+    &.devui-checked small {
+      background: $font-white;
       left: 20px;
     }
   }
 
-  &.toggle-small {
+  &.devui-toggle-small {
     width: 30px;
     height: 14px;
     border-radius: 14px;
@@ -70,27 +68,27 @@
       position: absolute;
       top: 2px;
     }
-    &.checked small {
-      background: $white;
+    &.devui-checked small {
+      background: $font-white;
       left: 18px;
     }
   }
 
-  &.checked {
-    background: $status-blue;
-    border-color: $status-blue;
+  &.devui-checked {
+    background: $brand-1;
+    border-color: $brand-1;
     &:hover {
       background: $hover-control;
       border-color: $hover-control;
     }
 
     &:active {
-      background: $focus2;
-      border-color: $focus2;
+      background: $brand-2;
+      border-color: $brand-2;
     }
   }
 
-  &.disabled {
+  &.devui-disabled {
     opacity: 0.3;
     cursor: not-allowed;
   }

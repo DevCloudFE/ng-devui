@@ -1,0 +1,7 @@
+<section style="width: 100%;">
+  <span>双日期选择器:</span>
+  <div class="devui-input-group" dTwoDatePicker #twoDatePicker="twoDatePicker" (selectRange)="selectRange($event)">
+    <input class="devui-input" placeholder="y/MM/dd" [(ngModel)]="rangeStart" dTwoDatePickerStart (selectStart)="selectStart($event)" />
+    <input class="devui-input" placeholder="y/MM/dd" [(ngModel)]="rangeEnd" dTwoDatePickerEnd (selectEnd)="selectEnd($event)" />
+  </div>
+</section>

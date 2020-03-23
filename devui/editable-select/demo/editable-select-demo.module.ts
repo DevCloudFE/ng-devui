@@ -9,15 +9,16 @@ import { EditableSelectDemoComponent } from './editable-select-demo.component';
 import { ButtonModule } from 'ng-devui/button/button.module';
 import { EditableSelectModule } from 'ng-devui/editable-select';
 import {
-  EditableSelectDemoAsyncDataWithFuncitionComponent
-} from './async-data-function/editable-select-demo-async-data-with-function.component';
-import { EditableSelectDemoAsyncDataWithSourceComponent } from './async-data/editable-select-demo-async-data-with-source.component';
-import { EditableSelectDemoWithSearchFunctionComponent } from './search-function/editable-select-demo-with-search-function.component';
-import { EditableSelectDemoWithSourceComponent } from './basic/editable-select-demo-with-source.component';
+  AsyncDataWithFuncitionComponent
+} from './async-data-function/async-data-with-function.component';
+import { DisableDataWithSourceComponent } from './disable-data/disable-data-with-source.component';
+import { WithSearchFunctionComponent } from './search-function/with-search-function.component';
+import { WithSourceComponent } from './basic/with-source.component';
 
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
+import { LazyLoadComponent } from './lazy-load/lazy-load.component';
 
 @NgModule({
   imports: [
@@ -29,20 +30,23 @@ import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
     DevUICodeboxModule,
     ButtonModule,
     RouterModule.forChild([
-      { path: '',  redirectTo: 'demo' },
-      { path: 'demo', component: EditableSelectDemoComponent},
-      { path: 'api', component: DevUIApiComponent, data: {
-        api: require('!html-loader!markdown-loader!../doc/api.md')
-      }}
+      { path: '', redirectTo: 'demo' },
+      { path: 'demo', component: EditableSelectDemoComponent },
+      {
+        path: 'api', component: DevUIApiComponent, data: {
+          api: require('!html-loader!markdown-loader!../doc/api.md')
+        }
+      }
     ])
   ],
   exports: [EditableSelectDemoComponent],
   declarations: [
     EditableSelectDemoComponent,
-    EditableSelectDemoAsyncDataWithFuncitionComponent,
-    EditableSelectDemoAsyncDataWithSourceComponent,
-    EditableSelectDemoWithSearchFunctionComponent,
-    EditableSelectDemoWithSourceComponent
+    AsyncDataWithFuncitionComponent,
+    DisableDataWithSourceComponent,
+    WithSearchFunctionComponent,
+    WithSourceComponent,
+    LazyLoadComponent
   ],
   providers: [],
   entryComponents: [EditableSelectDemoComponent]

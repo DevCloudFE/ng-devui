@@ -5,7 +5,6 @@ import {fadeInOut} from 'ng-devui/utils';
 import {DropDownDirective} from './dropdown.directive';
 
 @Component({
-  // tslint:disable-next-line: component-selector
   selector: '[dDropDown][appendToBody]',
   template: `
     <ng-content></ng-content>
@@ -60,7 +59,7 @@ export class DropDownAppendToBodyComponent implements OnInit, OnChanges {
   setPositions() {
     if (this.appendToBodyDirections && this.appendToBodyDirections.length > 0) {
       this.positions = this.appendToBodyDirections.map(position => {
-        if (typeof position ===  'string') {
+        if (typeof position === 'string') {
           return AppendToBodyDirectionsConfig[position];
         } else {
           return position;

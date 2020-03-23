@@ -1,0 +1,33 @@
+<span class="devui-form-span" [ngClass]="{ 'devui-required': required }">
+  <ng-content></ng-content>
+</span>
+<svg
+  *ngIf="hasHelp"
+  dPopover
+  [content]="helpTips"
+  [popType]="'info'"
+  [content]="'info!'"
+  [position]="'top'"
+  [controlled]="true"
+  [showAnimate]="true"
+  [appendToBody]="true"
+  trigger="hover"
+  class="devui-helping"
+  width="16px"
+  height="16px"
+  viewBox="0 0 16 16"
+  version="1.1"
+  xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+>
+  <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+    <g>
+      <path
+        d="M8.5,8.95852078 L8.5,11 L7.5,11 L7.5,8.5 C7.5,8.22385763 7.72385763,8 8,8 C9.1045695,8 10,7.1045695 10,6 C10,4.8954305 9.1045695,4 8,4 C6.8954305,4 6,4.8954305 6,6 L5,6 C5,4.34314575 6.34314575,3 8,3 C9.65685425,3 11,4.34314575 11,6 C11,7.48649814 9.91885667,8.72048173 8.5,8.95852078 L8.5,8.95852078 Z M8,16 C3.581722,16 0,12.418278 0,8 C0,3.581722 3.581722,0 8,0 C12.418278,0 16,3.581722 16,8 C16,12.418278 12.418278,16 8,16 Z M8,15 C11.8659932,15 15,11.8659932 15,8 C15,4.13400675 11.8659932,1 8,1 C4.13400675,1 1,4.13400675 1,8 C1,11.8659932 4.13400675,15 8,15 Z M7.5,12 L8.5,12 L8.5,13 L7.5,13 L7.5,12 Z"
+        id="Combined-Shape"
+        fill="#293040"
+        fill-rule="nonzero"
+      ></path>
+    </g>
+  </g>
+</svg>

@@ -1,29 +1,39 @@
 <div class="demo-container">
-    <div class="demo-example">
-        <div class="demo-title">基本用法</div>
-        <div class="demo-text">
-
-        </div>
-        <d-codebox id="basic" [sourceData]="basicSource">
-            <d-basic demo></d-basic>
-        </d-codebox>
+  <div class="demo-example">
+    <div class="demo-title">基本用法</div>
+    <div class="demo-text"></div>
+    <d-codebox id="basic" [sourceData]="basicSource">
+      <d-basic demo></d-basic>
+    </d-codebox>
+  </div>
+  <div class="demo-example">
+    <div class="demo-title">手动控制显示</div>
+    <div class="demo-text">
+      通过visible控制弹框显示实现表单验证
     </div>
-    <div class="demo-example">
-        <div class="demo-title">手动控制显示</div>
-        <div class="demo-text">
-            通过visible控制弹框显示实现表单验证
-        </div>
-        <d-codebox id="manual" [sourceData]="manualSource">
-            <d-manual demo></d-manual>
-        </d-codebox>
-    </div>
-    <div class="demo-example">
-        <div class="demo-title">自定义提示内容</div>
-        <div class="demo-text">
-
-        </div>
-        <d-codebox id="customize" [sourceData]="customizeSource">
-            <d-customize-tmp demo></d-customize-tmp>
-        </d-codebox>
-    </div>
+    <d-codebox id="manual" [sourceData]="manualSource">
+      <d-manual demo></d-manual>
+    </d-codebox>
+  </div>
+  <div class="demo-example">
+    <div class="demo-title">自定义提示内容</div>
+    <div class="demo-text"></div>
+    <d-codebox id="customize" [sourceData]="customizeSource">
+      <d-customize demo></d-customize>
+    </d-codebox>
+  </div>
+  <div class="demo-example">
+    <div class="demo-title">父容器设置</div>
+    <div class="demo-text">scrollElement配置，这里默认是 window，默认可以不传，只有当页面的滚动不在 window 上的时候才需要传递</div>
+    <d-codebox id="scroll-element" [sourceData]="scrollElementSource">
+      <d-scroll-element demo></d-scroll-element>
+    </d-codebox>
+  </div>
+  <div class="demo-example">
+    <div class="demo-title">鼠标可移入内容</div>
+    <div class="demo-text">hoverToContent设置</div>
+    <d-codebox id="hover-to-content" [sourceData]="hoverToContentSource">
+      <d-hover-to-content demo></d-hover-to-content>
+    </d-codebox>
+  </div>
 </div>

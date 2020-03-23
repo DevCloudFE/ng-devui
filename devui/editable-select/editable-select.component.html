@@ -1,17 +1,52 @@
-<div class="devui-form-group devui-has-feedback" [style.padding-bottom.px]="2">
+<div
+  class="devui-form-group devui-has-feedback"
+  [style.padding-bottom.px]="2"
+  [style.padding-bottom.px]="2"
+  [ngClass]="{
+    'devui-select-open': autoCompleteDirective.popupRef ? !!autoCompleteDirective.popupRef.instance.isOpen : false
+  }"
+>
   <input
     (click)="toggle($event)"
     style="cursor: pointer"
-    class="devui-form-control" type="text" name="autoCompleteControl"
+    class="devui-form-control"
+    type="text"
+    name="autoCompleteControl"
     [source]="source"
     (ngModelChange)="onTermChange($event)"
     [ngModel]="inputValue"
     [searchFn]="searchFn"
     [disabled]="disabled"
+    [disabledKey]="disabledKey"
     [placeholder]="placeholder"
     [itemTemplate]="itemTemplate"
-    [noResultItemTemplate]="noResultItemTemplate"
+    [noResultItemTemplate]="noResultItemTemplate ? noResultItemTemplate : noDataTemplate"
     [maxHeight]="maxHeight"
-    dAutoComplete />
-  <span class="devui-form-control-feedback"><span class="devui-caret"></span></span>
+    [sceneType]="'select'"
+    dAutoComplete
+    [enableLazyLoad]="enableLazyLoad"
+    (loadMore)="loadMoreEvent($event)"
+  />
+  <span class="devui-form-control-feedback">
+    <span class="devui-select-chevron-icon">
+      <svg
+        width="16px"
+        height="16px"
+        viewBox="0 0 16 16"
+        version="1.1"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+      >
+        <g id="chevron_down" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+          <polygon id="chevron_down" points="4.5 5 8 8.76923077 11.5 5 13 6.61538462 8 12 3 6.61538462"></polygon>
+        </g>
+      </svg>
+    </span>
+  </span>
 </div>
+<ng-template #noDataTemplate>
+  <div class="devui-no-data-tip">
+    <ng-container *ngIf="!inputValue">{{ i18nCommonText?.noData }}</ng-container>
+    <ng-container *ngIf="inputValue">{{ i18nCommonText?.noRecordsFound }}</ng-container>
+  </div>
+</ng-template>

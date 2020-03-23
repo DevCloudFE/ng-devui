@@ -1,0 +1,57 @@
+@import '../style/theme/color';
+@import 'datepicker.component.scss';
+
+.devui-month-view {
+  box-shadow: none;
+
+  & .devui-table > tbody > tr > td.devui-in-month-day {
+    &.devui-in-range {
+      &:not(.active):not(.disabled) {
+        background-color: $hover-content;
+        color: $dark-1;
+      }
+
+      &.disabled:not(.active) {
+        background-color: $gray-2;
+        opacity: 0.8;
+        color: $dark-1;
+      }
+    }
+
+    &.active.disabled {
+      background-color: $gray-2;
+
+      .devui-calendar-date {
+        opacity: 0.8;
+      }
+    }
+  }
+
+  & .devui-in-month-day.devui-in-range.disabled:not(.active) .devui-calendar-date {
+    color: $dark-1;
+    cursor: not-allowed;
+    width: 100%;
+  }
+
+  & .devui-day.devui-out-of-month.active {
+    &:hover .devui-calendar-date {
+      background-color: transparent;
+      color: $dark-2;
+    }
+
+    &.disabled {
+      background-color: transparent;
+    }
+  }
+}
+
+tr.devui-calender-header {
+  height: 29px;
+  user-select: none;
+}
+
+.devui-month-view .devui-btn-link.devui-btn-right {
+  transform: scale(-1, 1);
+  display: inline-block;
+  line-height: 1;
+}

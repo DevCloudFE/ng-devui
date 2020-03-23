@@ -1,0 +1,193 @@
+@import '../style/mixins/index';
+@import '../style/theme/color';
+
+.form-group label {
+  cursor: pointer;
+  font-size: 14px;
+  margin-bottom: 0;
+  width: 100%;
+}
+
+.multiple-label-auto-complete {
+  padding: 0px;
+  font-weight: normal;
+}
+
+.multiple-label-auto-complete ul {
+  display: block;
+  list-style: none;
+  background-color: $bg-white;
+  border-radius: 1px;
+  padding: 5px 5px 0 5px;
+}
+
+.multiple-label-auto-complete-single ul,
+.multiple-label-auto-complete-single-focus ul,
+.multiple-label-auto-complete-border ul,
+.multiple-label-auto-complete-multiline ul {
+  border: 1px solid $gray-1;
+
+  &:hover {
+    border-color: $hover-control;
+  }
+
+  &:active {
+    border-color: $brand-2;
+  }
+}
+
+.multiple-label-auto-complete-single ul,
+.multiple-label-auto-complete-single-focus ul {
+  overflow: hidden;
+}
+
+.multiple-label-auto-complete-multiline ul {
+  height: 60px;
+  overflow: auto;
+}
+
+.multiple-label-auto-complete-none ul {
+  border: 1px solid transparent;
+
+  &:hover,
+  &:active {
+    border-color: transparent;
+  }
+}
+
+.multiple-label-auto-complete-disabled ul {
+  cursor: default;
+
+  &:hover,
+  &:active {
+    border-color: $gray-1;
+  }
+}
+
+.multiple-label-auto-complete ul::-ms-expand {
+  border: 0;
+  background-color: transparent;
+}
+
+::-ms-clear,
+::-ms-reveal {
+  display: none;
+}
+
+.multiple-label-auto-complete ul li {
+  display: inline-block;
+  position: relative;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
+.multiple-label-auto-complete-none ul li {
+  margin-right: 0;
+}
+
+.multiple-label-auto-complete-single ul li,
+.multiple-label-auto-complete-single-focus ul li,
+.multiple-label-auto-complete-multiline ul li {
+  position: static;
+}
+
+.multiple-label-auto-complete-single ul li,
+.multiple-label-auto-complete-single-focus ul li {
+  float: left;
+  width: 100%;
+}
+
+.multiple-label-auto-complete-single-focus ul li:first-child {
+  max-width: calc(100% - 5px);
+  margin-right: 0;
+  width: auto;
+}
+
+.multiple-label-auto-complete-single-focus ul li:last-child {
+  width: 5px;
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.multiple-label-auto-complete ul li .label-close,
+.multiple-label-auto-complete ul li .label-text {
+  border-radius: 0;
+  font-size: 14px;
+  padding: 1px 2px;
+  color: $dark-1;
+  font-weight: 400;
+  background-color: $tag-label-bgcolor;
+}
+
+.multiple-label-auto-complete ul li .label-close {
+  cursor: pointer;
+}
+
+.multiple-label-auto-complete-single ul li .label-text,
+.multiple-label-auto-complete-single-focus ul li .label-text,
+.multiple-label-auto-complete-none ul li .label-text,
+.multiple-label-auto-complete-disabled ul li .label-text {
+  background-color: transparent;
+}
+
+.multiple-label-auto-complete-single ul li .label-text {
+  width: 100%;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
+  height: 20px;
+  line-height: 20px;
+}
+
+.multiple-label-auto-complete-single-focus ul li .label-text {
+  width: 100%;
+  direction: rtl;
+  text-align: left;
+  display: block;
+  height: 20px;
+  line-height: 20px;
+}
+
+.multiple-label-auto-complete .auto-complete-control {
+  height: 20px;
+  border: none;
+  outline: none;
+  background: $bg-white;
+  color: $dark-1;
+  position: relative;
+}
+
+.multiple-label-auto-complete .auto-complete-control:focus,
+.multiple-label-auto-complete .auto-complete-control:hover {
+  border: none;
+  outline: none;
+}
+
+.multiple-label-auto-complete-none .auto-complete-control {
+  width: 0;
+}
+
+:host label {
+  color: inherit;
+}
+
+:host ::ng-deep .multiple-label-auto-complete-border ul li .dropdown-menu {
+  margin-top: 6px;
+}
+
+:host ::ng-deep .multiple-label-auto-complete-multiline ul li .dropdown-menu {
+  margin-top: 0;
+  width: 170px;
+}
+
+:host-context(d-data-table) .multiple-label-auto-complete-single ul,
+:host-context(d-data-table) .multiple-label-auto-complete-single ul li .auto-complete-control {
+  border-color: transparent;
+  background-color: transparent;
+}
+
+:host-context(d-data-table) .multiple-label-auto-complete-single ul {
+  padding-left: 0;
+}

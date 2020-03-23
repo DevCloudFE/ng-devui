@@ -1,0 +1,12 @@
+<ng-container *ngIf="!itemTemplate">
+  {{ title }}
+</ng-container>
+<ng-template
+  *ngIf="itemTemplate"
+  [ngTemplateOutlet]="itemTemplate"
+  [ngTemplateOutletContext]="{
+    parent: parent,
+    item: item,
+    deepth: deepth
+  }"
+></ng-template>

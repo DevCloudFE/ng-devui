@@ -3,10 +3,10 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'd-pagination-demo-widgets',
+  selector: 'd-widgets',
   templateUrl: './widgets.component.html'
 })
-export class PaginationDemoWidgetsComponent {
+export class WidgetsComponent {
   pager = {
     total: 306,
     pageIndex: 5,

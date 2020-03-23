@@ -41,8 +41,14 @@ export class UndestroyableComponent {
             'This is item 4',
             'This is item 5',
           ],
-          onBtnClick: (event) => {
+          close: (event) => {
             this.results.drawerInstance.hide();
+          },
+          fullScreen: (event) => {
+            this.results.drawerInstance.toggleFullScreen();
+          },
+          changeWidth: (event) => {
+            this.results.drawerInstance.setWidth('200px');
           }
         }
       });

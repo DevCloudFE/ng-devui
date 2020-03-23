@@ -1,19 +1,35 @@
 <div #selectBox class="devui-tags-host" tabindex="-1" (click)="host_click()">
-    <div class="devui-tags">
-        <ul class="devui-tag-list">
-            <li class="devui-tag-item" *ngFor="let tag of tags;let index=index;">
-                <span>{{tag[displayProperty]}}</span>
-                <a class="remove-button" (click)="removeTag(index)">×</a>
-            </li>
-        </ul>
-        <input #tagInput class="input devui-input" [(ngModel)]="newTag" (keydown)="input_keydown($event)" (focus)="input_focus($event)"
-            (blur)="input_blur($event)" (trim)="false" [placeholder]="placeholder"
-            [spellcheck]="spellcheck" [ngClass]="{'invalid-tag': !newTagValid}" type="text">
-    </div>
-    <div class="devui-tags-autocomplete" *ngIf="showSuggestionList&&availableOptions?.length">
-        <ul class="devui-suggestion-list">
-            <li class="devui-suggestion-item" *ngFor="let item of availableOptions;let index=index;"
-                [ngClass]="{'selected': index === selectIndex}" (mousedown)="addSuggestionByIndex(index, item)">{{item[displayProperty]}}</li>
-        </ul>
-    </div>
+  <div class="devui-tags">
+    <ul class="devui-tag-list">
+      <li class="devui-tag-item" *ngFor="let tag of tags; let index = index">
+        <span>{{ tag[displayProperty] }}</span>
+        <a class="remove-button" (click)="removeTag(index)">×</a>
+      </li>
+    </ul>
+    <input
+      #tagInput
+      class="input devui-input"
+      [(ngModel)]="newTag"
+      (keydown)="input_keydown($event)"
+      (focus)="input_focus($event)"
+      (blur)="input_blur($event)"
+      (trim)="(false)"
+      [placeholder]="placeholder"
+      [spellcheck]="spellcheck"
+      [ngClass]="{ 'invalid-tag': !newTagValid }"
+      type="text"
+    />
+  </div>
+  <div class="devui-tags-autocomplete" *ngIf="showSuggestionList && availableOptions?.length">
+    <ul class="devui-suggestion-list">
+      <li
+        class="devui-suggestion-item"
+        *ngFor="let item of availableOptions; let index = index"
+        [ngClass]="{ selected: index === selectIndex }"
+        (mousedown)="addSuggestionByIndex(index, item)"
+      >
+        {{ item[displayProperty] }}
+      </li>
+    </ul>
+  </div>
 </div>

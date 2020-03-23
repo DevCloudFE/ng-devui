@@ -2,7 +2,7 @@ d-checkbox {
   margin-bottom: 15px;
   display: block;
 }
-.inline-block-middle-valign{
+.inline-block-middle-valign {
   display: inline-block;
   vertical-align: middle; /*forIE*/
 }

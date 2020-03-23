@@ -1,5 +1,5 @@
 <section>
-  <d-button  bsStyle="primary" (click)="fetchTableData()">click me!</d-button>
+  <d-button bsStyle="primary" (click)="fetchTableData()">click me!</d-button>
   <table dLoading [view]="view" [loading]="loading" [backdrop]="true" class="table table-hover">
     <thead>
       <tr>
@@ -11,7 +11,7 @@
     <tbody>
       <tr *ngFor="let names of tableNames">
         <td *ngFor="let name of names">
-          {{name}}
+          {{ name }}
         </td>
       </tr>
     </tbody>

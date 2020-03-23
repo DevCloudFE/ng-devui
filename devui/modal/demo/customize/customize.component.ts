@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ModalService } from 'ng-devui';
-import { ModalAlertComponent } from '../modal-demo.component';
+import { ModalAlertComponent } from './modal-alert.component';
 
 @Component({
   selector: 'd-customize',

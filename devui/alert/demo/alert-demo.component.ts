@@ -2,7 +2,7 @@ import {
   Component,
   HostBinding
 } from '@angular/core';
-import { DevuiSourceData } from '../../shared/devui-codebox';
+import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 
 @Component({
     selector: 'd-alert-demo',

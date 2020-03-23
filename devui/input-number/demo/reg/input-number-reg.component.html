@@ -1,0 +1,12 @@
+<section>
+  <d-input-number size="sm" [(ngModel)]="value" [reg]="reg" class="input-number" (blur)="blurDetection($event)"> </d-input-number>
+  <d-input-number
+    size="sm"
+    [(ngModel)]="value"
+    [reg]="regStr"
+    class="input-number"
+    (whileValueChanging)="showValue($event, 'typing')"
+    (ngModelChange)="showValue($event, 'model')"
+  >
+  </d-input-number>
+</section>

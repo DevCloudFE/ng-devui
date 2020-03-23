@@ -1,20 +1,114 @@
-<div class='modal-header'>
-    <button
-        type='button'
-        class='close'
-        data-dismiss='modal'
-        aria-label='Close'
-        (click)='close($event)'>
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="12px" height="12px" viewBox="0 0 12 12" version="1.1">
-            <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                <g id="图标" transform="translate(-1236.000000, -1286.000000)" fill="#3C4458" fill-rule="nonzero">
-                    <g id="close" transform="translate(1234.000000, 1284.000000)">
-                        <polygon id="Mask" points="8 6.58578644 12.2426407 2.34314575 13.6568542 3.75735931 9.41421356 8 13.6568542 12.2426407 12.2426407 13.6568542 8 9.41421356 3.75735931 13.6568542 2.34314575 12.2426407 6.58578644 8 2.34314575 3.75735931 3.75735931 2.34314575"/>
-                    </g>
-                </g>
-            </g>
-        </svg>
-    </button>
+<div class="modal-header">
+  <button *ngIf="showCloseBtn" type="button" class="close" aria-label="Close" (click)="close($event)">
+    <svg class="svg-icon-close" xmlns="http://www.w3.org/2000/svg" width="12px" height="12px" viewBox="0 0 12 12" version="1.1">
+      <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="图标" transform="translate(-1236.000000, -1286.000000)" fill-rule="nonzero">
+          <g id="close" transform="translate(1234.000000, 1284.000000)">
+            <polygon
+              id="Mask"
+              points="8 6.58578644 12.2426407 2.34314575 13.6568542 3.75735931 9.41421356 8 13.6568542 12.2426407 12.2426407 13.6568542 8 9.41421356 3.75735931 13.6568542 2.34314575 12.2426407 6.58578644 8 2.34314575 3.75735931 3.75735931 2.34314575"
+            />
+          </g>
+        </g>
+      </g>
+    </svg>
+  </button>
 
-    <div class="standard-title" *ngIf="!!title" [title]="title">{{title}}</div>
+  <div class="standard-title">
+    <div *ngIf="(dialogtype | lowercase) == 'warning'" class="header-alert-icon">
+      <svg
+        t="1523848353321"
+        class="icon"
+        style=""
+        viewBox="0 0 1024 1024"
+        version="1.1"
+        xmlns="http://www.w3.org/2000/svg"
+        p-id="2903"
+        width="16"
+        height="16"
+      >
+        <defs>
+          <style type="text/css"></style>
+        </defs>
+        <path
+          d="M512 0C229.205333 0 0 229.205333 0 512s229.205333 512 512 512 512-229.205333 512-512S794.794667 0 512 0z m-40.021333 230.997333a39.978667 39.978667 0 1 1 80.042666 0v369.024a39.978667 39.978667 0 1 1-80.042666 0V230.997333zM512 794.026667a44.928 44.928 0 0 1-45.013333-44.970667c0-24.917333 20.096-45.013333 45.013333-45.013333s45.013333 20.096 45.013333 45.013333c0 24.746667-20.096 44.970667-45.013333 44.970667z"
+          fill="#fecc55"
+          p-id="2904"
+        ></path>
+      </svg>
+    </div>
+    <div *ngIf="(dialogtype | lowercase) == 'failed'" class="header-alert-icon">
+      <svg
+        t="1523848193850"
+        class="icon"
+        style=""
+        viewBox="0 0 1024 1024"
+        version="1.1"
+        xmlns="http://www.w3.org/2000/svg"
+        p-id="2647"
+        width="16"
+        height="16"
+      >
+        <defs>
+          <style type="text/css"></style>
+        </defs>
+        <path
+          d="M512 0C229.205333 0 0 229.205333 0 512s229.205333 512 512 512 512-229.205333 512-512S794.794667 0 512 0z m205.312 666.88a36.010667 36.010667 0 0 1-51.029333 50.816L512 562.986667l-154.282667 154.709333a35.84 35.84 0 0 1-50.901333 0.085333 36.010667 36.010667 0 0 1-0.128-50.901333L461.226667 512 306.773333 357.12a36.010667 36.010667 0 0 1 50.986667-50.816L512 461.013333l154.282667-154.794666a36.010667 36.010667 0 0 1 51.029333 50.773333L562.773333 512l154.453334 154.88z"
+          fill="#F9504B"
+          p-id="2648"
+        ></path>
+      </svg>
+    </div>
+    <div *ngIf="(dialogtype | lowercase) == 'sucess' || (dialogtype | lowercase) == 'success'" class="header-alert-icon">
+      <svg
+        t="1523848446605"
+        class="icon"
+        style=""
+        viewBox="0 0 1024 1024"
+        version="1.1"
+        xmlns="http://www.w3.org/2000/svg"
+        p-id="3058"
+        width="16"
+        height="16"
+      >
+        <defs>
+          <style type="text/css"></style>
+        </defs>
+        <path
+          d="M512 0C229.205333 0 0 229.205333 0 512s229.205333 512 512 512 512-229.205333 512-512S794.794667 0 512 0z m260.266667 356.394667l-359.466667 360.704-0.426667 0.426666a35.925333 35.925333 0 0 1-57.6-6.826666l-108.885333-190.378667a35.882667 35.882667 0 0 1 13.397333-49.109333 35.882667 35.882667 0 0 1 49.109334 13.397333l85.418666 149.504 327.466667-328.533333a36.010667 36.010667 0 0 1 51.029333 50.816z"
+          fill="#41C99F"
+          p-id="3059"
+        ></path>
+      </svg>
+    </div>
+    <div *ngIf="(dialogtype | lowercase) == 'info'" class="header-alert-icon">
+      <svg
+        t="1523848507870"
+        class="icon"
+        style=""
+        viewBox="0 0 1024 1024"
+        version="1.1"
+        xmlns="http://www.w3.org/2000/svg"
+        p-id="3217"
+        width="16"
+        height="16"
+      >
+        <defs>
+          <style type="text/css"></style>
+        </defs>
+        <path
+          d="M512 0C229.205333 0 0 229.205333 0 512s229.205333 512 512 512 512-229.205333 512-512S794.794667 0 512 0z m-2.986667 184.490667a35.968 35.968 0 1 1 0 71.978666 35.968 35.968 0 0 1 0-71.978666z m157.184 557.098666a35.968 35.968 0 0 1-36.010666 36.010667H387.84a35.968 35.968 0 1 1 0-72.021333h85.205333V391.552H413.013333a35.968 35.968 0 1 1 0-72.021333h96c19.882667 0 35.968 16.128 35.968 36.010666v350.122667h85.205334c19.925333 0 36.010667 16.085333 36.010666 35.968z"
+          fill="#797979"
+          p-id="3218"
+        ></path>
+      </svg>
+    </div>
+    <span *ngIf="!!title" [title]="title" class="title-text">{{ title }}</span>
+    <span *ngIf="!!!title && (dialogtype | lowercase) === 'warning'" class="title-text">提醒</span>
+    <span *ngIf="!!!title && (dialogtype | lowercase) === 'failed'" class="title-text">错误</span>
+    <span *ngIf="!!!title && ((dialogtype | lowercase) === 'sucess' || (dialogtype | lowercase) == 'success')" class="title-text"
+      >成功</span
+    >
+    <span *ngIf="!!!title && (dialogtype | lowercase) === 'info'" class="title-text">提示</span>
+  </div>
 </div>

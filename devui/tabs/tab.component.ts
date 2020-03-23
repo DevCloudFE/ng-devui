@@ -4,8 +4,7 @@ import { TabTitleDirective } from './tab-title.directive';
 
 @Component({
   selector: 'd-tab',
-  template: '',
-  // changeDetection: ChangeDetectionStrategy.OnPush
+  template: ''
 })
 export class TabComponent {
   @Input() tabId?: string;

@@ -1,0 +1,57 @@
+@import '../../style/theme/color';
+.devui-two-date-wrapper {
+  display: inline-flex !important;
+  box-shadow: 0 4px 8px 0 $dark-1-boxshadow;
+  background-color: $bg-white;
+  transform: perspective(1px) translate3d(0, 0, 0);
+  flex-direction: column;
+
+  .devui-two-date-picker {
+    display: inline-flex !important;
+    user-select: none;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 29px;
+      width: 100%;
+      height: 1px;
+      border-bottom: 1px solid $gray-1;
+    }
+  }
+
+  .devui-two-date-custom {
+    width: 500px;
+    border-top: 1px solid $gray-1;
+  }
+
+  .devui-two-date-footer {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    a {
+      color: $brand-1;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    a.disabled {
+      color: $gray-1;
+      cursor: not-allowed;
+    }
+  }
+}
+
+.devui-date-picker:not(:last-child) {
+  margin-right: 20px;
+}
+
+.host-wrapper {
+  color: red;
+}
+
+:host ::ng-deep .devui-input-focus {
+  border-color: $hover-control !important;
+}

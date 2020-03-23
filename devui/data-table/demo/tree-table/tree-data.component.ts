@@ -1,6 +1,7 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
 import { treeDataSource, SourceType } from '../mock-data';
-import { CheckableRelation } from '../../data-table.model';
+import { CheckableRelation } from 'ng-devui/data-table/data-table.model';
+
 
 @Component({
   selector: 'd-tree-data',

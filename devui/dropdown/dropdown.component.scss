@@ -1,7 +1,7 @@
 .cdk-overlay-pane .devui-dropdown-menu {
   position: relative;
-  top: initial;
-  left: initial;
+  top: 0; // initial; ie11不认识initial
+  left: 0; //initial;
   border: none;
 }
 
@@ -13,4 +13,3 @@
 .devui-dropdown.open span.icon-chevron-down {
   transform: rotate(180deg);
 }
-

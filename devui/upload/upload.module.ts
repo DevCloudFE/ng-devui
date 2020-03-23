@@ -10,7 +10,6 @@ import { SelectFiles } from './select-files.utils';
 import { FileDropDirective } from './file-drop.directive';
 import { ModalModule } from 'ng-devui/modal';
 import { ButtonModule } from 'ng-devui/button';
-import { DevUIConfig } from 'ng-devui/devui.config';
 @NgModule({
   imports: [
     CommonModule,
@@ -37,7 +36,7 @@ import { DevUIConfig } from 'ng-devui/devui.config';
     MultipleUploadViewComponent,
     SingleUploadViewComponent
   ],
-  providers: [SelectFiles, DevUIConfig],
+  providers: [SelectFiles],
 })
 export class UploadModule {
 }

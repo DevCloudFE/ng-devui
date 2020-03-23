@@ -1,17 +1,22 @@
 import endsWith from 'lodash-es/endsWith';
 import {IFileOptions, IUploadOptions} from './file-uploader.types';
-import { Observable, from } from 'rxjs';
+import { Observable, from, Subscription } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
 
 import {Injectable} from '@angular/core';
-import { DevUIConfig } from 'ng-devui/devui.config';
+import { I18nInterface, I18nService } from 'ng-devui/i18n';
 
 @Injectable()
 export class SelectFiles {
   NOT_ALLOWED_FILE_TYPE_MSG: string;
   BEYOND_MAXIMAL_FILE_SIZE_MSG: string;
-  currentLocale = 'zh-CN';
-  constructor(private devUIConfig: DevUIConfig) {
+  i18nText: I18nInterface['upload'];
+  i18nSubscription: Subscription;
+  constructor(private i18n: I18nService) {
+    this.i18nText = this.i18n.getI18nText().upload;
+    this.i18nSubscription = this.i18n.langChange().subscribe((data) => {
+      this.i18nText = data.upload;
+    });
   }
 
   selectFiles = ({multiple, accept}: IFileOptions): Promise<File[]> => {
@@ -77,16 +82,12 @@ export class SelectFiles {
     mergeMap(file => <any>file),
     map((file) => {
       if (!this.isAllowedFileType(accept, <File>file)) {
-        this.NOT_ALLOWED_FILE_TYPE_MSG = this.currentLocale === 'zh-CN' ?
-        this.devUIConfig.uploadCN.ERROR_MSG.getNotAllowedFileTypeMsg((<File>file).name, accept) :
-         this.devUIConfig.uploadEN.ERROR_MSG.getNotAllowedFileTypeMsg((<File>file).name, accept);
+        this.NOT_ALLOWED_FILE_TYPE_MSG = this.i18nText.getNotAllowedFileTypeMsg((<File>file).name, accept);
         throw new Error(this.NOT_ALLOWED_FILE_TYPE_MSG);
       }
 
       if (this.beyondMaximalSize((<File>file).size, uploadOptions.maximumSize)) {
-        this.BEYOND_MAXIMAL_FILE_SIZE_MSG = this.currentLocale === 'zh-CN' ? this.devUIConfig.uploadCN.ERROR_MSG
-        .getBeyondMaximalFileSizeMsg((<File>file).name, uploadOptions.maximumSize) : this.devUIConfig.uploadEN.ERROR_MSG
-        .getBeyondMaximalFileSizeMsg((<File>file).name, uploadOptions.maximumSize);
+        this.BEYOND_MAXIMAL_FILE_SIZE_MSG = this.i18nText.getBeyondMaximalFileSizeMsg((<File>file).size, uploadOptions.maximumSize);
         throw new Error(this.BEYOND_MAXIMAL_FILE_SIZE_MSG);
       }
       return file;

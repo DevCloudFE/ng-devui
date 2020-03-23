@@ -1,0 +1,34 @@
+<section>
+  <div class="input-group" style="margin-bottom: 10px; width: 200px;">
+    <d-select [size]="'sm'" [(ngModel)]="dateFormat" [options]="dateFormatOptions"></d-select>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="devui-input-group">
+        <input
+          class="devui-input"
+          [placeholder]="dateFormat"
+          name="dp"
+          [(ngModel)]="selectedDate3"
+          [dateFormat]="dateFormat"
+          [showTime]="true"
+          autocomplete="off"
+          dDatepicker
+          #datePicker2="datepicker"
+          direction="up"
+          placement="top-left"
+          [minDate]="'2010-12-30'"
+          [maxDate]="'2018-02-27'"
+          [yearNumber]="4"
+          (focus)="datePicker2.toggle($event)"
+        />
+        <div class="devui-input-group-addon" (click)="datePicker2.toggle($event)">
+          <i class="icon icon-calendar"></i>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-1">
+      <d-button bsStyle="primary" (click)="datePicker2.clearAll()">重置</d-button>
+    </div>
+  </div>
+</section>

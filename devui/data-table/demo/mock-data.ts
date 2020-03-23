@@ -6,7 +6,7 @@ export interface SourceType {
   gender: string;
   detail?: string;
   $checked?: boolean;
-  expandConfig?: any;
+  $expandConfig?: any;
   children?: any;
 }
 
@@ -384,77 +384,86 @@ export const DutySource = [
 
 export const treeDataSource = [
   {
-      title: '公共方案',
-      lastName: '张三',
+      title: 'table title0',
+      lastName: 'Mark',
       dob: new Date(1990, 12, 1),
-      status: '已关闭',
+      status: 'done',
+      startDate: new Date(2020, 1, 5),
+      endDate: new Date(2020, 1, 8),
       children: [
         {
-            title: '前端框架',
-            lastName: '张三',
-            status: '已关闭',
+            title: 'table title01',
+            lastName: 'Mark',
+            status: 'done',
             dob: new Date(1989, 1, 1),
             children: [
               {
-                  title: 'angular框架',
-                  lastName: '张三',
-                  status: '已关闭',
+                  title: 'table title11',
+                  lastName: 'Mark',
+                  status: 'done',
                   dob: new Date(1989, 1, 1),
               },
               {
-                  title: 'vue框架',
-                  lastName: '张三',
-                  status: '已关闭',
+                  title: 'table title12',
+                  lastName: 'Mark',
+                  status: 'done',
                   dob: new Date(1991, 3, 1),
                   children: [
                     {
-                        title: 'vue组件',
-                        lastName: '张三',
-                        status: '已关闭',
-                        dob: new Date(1989, 1, 1),
-                        children: []
+                        title: 'table title21',
+                        lastName: 'Mark',
+                        status: 'done',
+                        dob: new Date(1989, 1, 1)
                     },
                     {
-                      title: 'vue文档',
-                      lastName: '张三',
-                      status: '已关闭',
-                      dob: new Date(1989, 1, 1),
+                      title: 'table title22',
+                      lastName: 'Mark',
+                      status: 'done',
+                      dob: new Date(1989, 1, 1)
                     }
                   ]
               }
             ]
         },
         {
-            title: '组件库',
-            lastName: '张三',
-            status: '已关闭',
+            title: 'table title102',
+            lastName: 'Mark',
+            status: 'done',
             dob: new Date(1991, 3, 1)
         }
       ]
   },
   {
-      title: '架构设计',
-      lastName: '张三',
-      status: '已关闭',
+      title: 'table title1',
+      lastName: 'Mark',
+      status: 'done',
       dob: new Date(1989, 1, 1),
+      startDate: new Date(2020, 1, 4),
+      endDate: new Date(2020, 1, 8),
   },
   {
-      title: '代码评审',
-      lastName: '张三',
-      status: '已关闭',
+      title: 'table title2',
+      lastName: 'Mark',
+      status: 'done',
       dob: new Date(1991, 3, 1),
+      startDate: new Date(2020, 1, 6),
+      endDate: new Date(2020, 1, 9),
   },
   {
-      title: '性能优化',
-      lastName: '张三',
-      status: '已关闭',
+      title: 'table title3',
+      lastName: 'Mark',
+      status: 'done',
       dob: new Date(1991, 3, 1),
-      detail: '这是一个行详情'
+      detail: '这是一个行详情',
+      startDate: new Date(2020, 1, 7),
+      endDate: new Date(2020, 1, 10),
   },
   {
-      title: '数据统计',
-      lastName: '张三',
-      status: '已关闭',
-      dob: new Date(1991, 3, 1)
+      title: 'table title4',
+      lastName: 'Mark',
+      status: 'done',
+      dob: new Date(1991, 3, 1),
+      startDate: new Date(2020, 1, 7),
+      endDate: new Date(2020, 1, 12),
   }
 ];

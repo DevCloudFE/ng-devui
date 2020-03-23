@@ -1,0 +1,31 @@
+@import '../style/theme/color';
+.devui-date-range-wrapper {
+  display: inline-flex !important;
+  box-shadow: 0 4px 8px 0 $dark-1-boxshadow;
+  background-color: $dropdown-overlay;
+  transform: perspective(1px) translate3d(0, 0, 0);
+  flex-direction: column;
+
+  .devui-date-range-picker {
+    display: inline-flex !important;
+    user-select: none;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 29px;
+      width: 100%;
+      height: 1px;
+      border-bottom: 1px solid $gray-1;
+    }
+  }
+
+  .devui-date-range-custom {
+    width: 500px;
+    border-top: 1px solid $gray-1;
+  }
+}
+
+.devui-date-picker:not(:last-child) {
+  margin-right: 20px;
+}

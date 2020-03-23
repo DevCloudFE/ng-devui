@@ -39,14 +39,4 @@ export class DevUIHighlightComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
   }
-
-  // onHighlight(e) {
-  //   this.response = {
-  //     language: e.language,
-  //     r: e.r,
-  //     second_best: '{...}',
-  //     top: '{...}',
-  //     value: '{...}'
-  //   };
-  // }
 }

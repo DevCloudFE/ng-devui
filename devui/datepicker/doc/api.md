@@ -1,22 +1,28 @@
-### dDatepicker 参数
-| 参数 | 类型 | 默认 | 说明 |
-| :---: | :---: | :---: | :---|
-| cssClass | `string` | '' | 可选，自定义class|
-| local | `string` | 'zh-CN' | 可选，时区 |
-| showTime | `boolean` | false | 可选，是否显示时分秒 |
-| yearNumber | `number` | 12 | 可选，下拉年份显示数量 |
-| disabled | `boolean` | false | 可选，禁用选择 |
-| direnction| `'up' \| 'down'` | 'down' | 可选，日期弹出方向 |
-| dateConverter | `function` | DefaultDateConverter | 可选，日期格式化、解析函数 |
-| customViewTemplate | `tempalte` | - |  可选，自定义快捷设置日期或自定义操作区内容， 可以通过chooseDate(dateString: string)来设置日期	|
+## DatePicker 使用说明
 
+### dDatepicker 参数
+
+| 参数                  | 类型                             | 默认            |   说明                                                |
+| :-------------------: | :-----------------------------: | :-------------: | :--------------------------------------------------:  |
+| cssClass              | `string`                        | --              | 可选，自定义class                                      |
+| locale                 | `string`                        | 'zh-cn'         | 可选，时区                                             |
+| showTime              | `boolean`                       | false           | 可选，是否显示时分秒                                    |
+| yearNumber            | `number`                        | 12              | 可选，下拉年份显示数量                                  |
+| disabled              | `boolean`                       | false           | 可选，禁用选择                                         |
+| direction             | `'up' \| 'down'`                | 'down'          | 可选，日期弹出方向                                      |
+| dateConverter         | `function`                      | DefaultDateConverter | 可选，日期格式化、解析函数                         |
+| dateConfig            | `any`                           | 见下方介绍       | 可选，配置参数                                         |
+| dateFormat            | `any`                           | 'YYYY-MM-DD' \| 'YYYY-MM-DD HH:mm' | 可选，传入格式化，根据是否showTime区别不同默认值|
+| minDate               | `Date`                          | new Date('01/01/1900 00:00:00') | 可选，限制最小可选日期                  |
+| maxDate               | `Date`                          | new Date('11/31/2099 23:59:59') | 可选，限制最大可选日期                  |
+| autoOpen              | `boolean`                       | false           | 可选，初始化是否直接展开                                 |
+| customViewTemplate    | `template`                      | --              | 可选，自定义快捷设置日期或自定义操作区内容，用法见demo     |
 
 ### dDatepicker 事件
-| 事件 | 类型  | 说明 |
-| :---: | :---:| :---|
-| selectedDateChange | object |日期发生变化回调 |
 
-
+| 事件                  | 类型                                        |    说明                                          |
+| :-------------------: | :----------------------------------------: | :----------------------------------------------: |
+| selectedDateChange    | `EventEmitter<object>`                        | 可选，子项切换的时候会发出新激活的子项的数据    |
 
 ## appendToBody(dDatepicker附加指令组件)
 
@@ -90,3 +96,41 @@ export type AppendToBodyDirection= 'rightDown'| 'rightUp' | 'leftUp'| 'leftDown'
 
 appendToBodyDirections默认的显示顺序为 ['rightDown', 'leftDown', 'rightUp', 'leftUp']，
 会尝试第一个位置，第一个位置放不下会尝试第二个位置，依此类推。
+
+
+### 配置参考下面配置，并传递给dateConfig属性
+```
+{
+  timePicker: false,
+  dateConverter: null,
+  min: 1900,
+  max: 2099,
+  format: {
+    date: 'y/MM/dd',
+    time: 'y/MM/dd HH:mm:ss'
+  }
+}
+```
+
+
+### dDateRangePicker 参数
+| 参数 | 类型 | 默认 | 说明 |
+| :---: | :---: | :---: | :---|
+| cssClass | `string` | -- | 可选，自定义class|
+| locale | `string` | 'zh-cn' | 可选，时区 |
+| showTime | `boolean` | false | 可选，是否显示时分秒 |
+| disabled | `boolean` | false | 可选，禁用选择 |
+| dateConverter | `function` | DefaultDateConverter | 可选，日期格式化、解析函数 |
+| dateConfig | `any` | 见下方介绍 | 可选，配置参数 |
+| dateFormat | `any` | `'YYYY-MM-DD' \| 'YYYY-MM-DD HH:mm'` | 可选，传入格式化 |
+| minDate | `Date` | `new Date('01/01/1900 00:00:00')` | 可选，限制最小可选日期 |
+| maxDate | `Date` | `new Date('11/31/2099 23:59:59')` | 可选，限制最大可选日期 |
+| splitter | `string` | `  -  ` | 可选，两日期间的分隔符 |
+| selectedRange | `[Date, Date]` | `[null, null]` | 可选，时选择的日期 |
+| customViewTemplate | `template` | -- |  可选，自定义快捷设置日期或自定义操作区内容，用法见demo	|
+
+
+### dDateRangePicker 事件
+| 事件 | 类型  | 说明 |
+| :---: | :---:| :---|
+| selectedRangeChange | `EventEmitter<object>` | 日期发生变化回调 |

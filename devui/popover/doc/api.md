@@ -1,4 +1,4 @@
-### 参数
+### d-popover参数
 
 | 参数        | 类型          | 默认        |   说明                 |
 | :---------: | :----------: | :---------: | :------------------------------------------|
@@ -12,4 +12,5 @@
 | appendToBody     | `boolean`      | true      | 可选，默认为true，仅当popover绑定元素外层宽高不够时，overflow为hidden，popover的弹出框不会被一并隐藏掉。 |
 | zIndex           | `number`      | 1060      | 可选，z-index值，用于手动控制层高 |
 | scrollElement    | `Element`       | window      | 可选，在这里默认是`window` , 只有当页面的滚动不在`window`上且`appendToBody`的属性为`true`时候才需要传值 |
+| hoverToContent    | `boolean`       | false      | 可选，是否允许鼠标从宿主移动到内容上，仅需要在trigger为hover的时候设置 |
 

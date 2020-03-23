@@ -27,8 +27,8 @@ export class ModalContainerComponent implements OnInit {
   @Input() html: boolean;
   @Input() onClose: EventListener;
   @ViewChild(ModalContentDirective, { static: true }) modalContentHost: ModalContentDirective;
-  @Input() dialogtype?: string;
-
+  @Input() dialogtype = 'standard';
+  @Input() showCloseBtn: boolean;
   constructor(private sanitizer: DomSanitizer) {}
 
   ngOnInit() {

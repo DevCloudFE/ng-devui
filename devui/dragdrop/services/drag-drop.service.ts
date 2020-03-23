@@ -1,117 +1,293 @@
-/**
- * Created by orehman on 2/22/2017.
- */
-
-import { Injectable, Renderer2, NgZone } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { Observable, Subject, Subscription } from 'rxjs';
+import { DragDropTouch } from '../touch-support/dragdrop-touch';
+import { DraggableDirective } from './../directives/draggable.directive';
+import { Utils } from '../shared/utils';
+import { DragPreviewDirective } from '../directives/drag-preview.directive';
 
 @Injectable()
 export class DragDropService {
+  dragData: any;
+  draggedEl: any;
+  draggedElIdentity: any;
+  batchDragData: Array<{
+    identity?: any;
+    draggable: DraggableDirective;
     dragData: any;
-    draggedEl: any;
-    scope: string | Array<string>;
-    dropTargets = [];
-    onDrop: Subject<any> = new Subject();
-    onDragEnd = new Subject<any>();
-    onDragStart = new Subject<any>();
-    dropOnItem: boolean;
-    dragFollow: boolean;
-    // 以下三项只有dragFollow为true的时候才有值
-    draggedElOriginStyle: any;
-    draggedElFollowingMouse: boolean;
-    dragOffset: {
-      top: number;
-      left: number;
-      width?: number;
-      height?: number;
-    };
-    subscription: Subscription = new Observable().subscribe();
-    renderer: Renderer2;
-    constructor(private ngZone: NgZone) {}
-    newSubscription() {
-        this.subscription.unsubscribe();
-        return this.subscription = new Observable().subscribe();
-    }
+  }>;
+  batchDragGroup: string;
+  batchDragStyle: Array<string>;
+  batchDragging: boolean;
+  scope: string | Array<string>;
+  dropTargets = [];
+  dropEvent: Subject<any> = new Subject();
+  dragEndEvent = new Subject<any>();
+  dragStartEvent = new Subject<any>();
+  dropOnItem: boolean;
+  dragFollow: boolean;
+  dragFollowOptions: {
+    appendToBody?: boolean;
+  };
+  dropOnOrigin: boolean;
+  draggedElFollowingMouse: boolean;
+  dragOffset: {
+    top: number;
+    left: number;
+    offsetLeft: number;
+    offsetTop: number;
+    width?: number;
+    height?: number;
+  };
+  subscription: Subscription = Observable.create().subscribe();
+  dragEmptyImage = new Image();
+  dragCloneNode: any;
+  dragOriginPlaceholder: any;
+  dragItemContainer: any;
+  dragItemParentName = '';
+  dragItemChildrenName = '';
+  intersectionObserver: any = null;
+  sub;
+  dragOriginPlaceholderNextSibling: any;
+  touchInstance;
 
-    enableDraggedElFollowMouse(enable = true) {
-      if (enable) {
-        if (!this.draggedElFollowingMouse) {
-          const dragFollowNode =  this.draggedEl;
+  /*协同拖拽需要 */
+  dragElShowHideEvent = new Subject<boolean>();
+  dragSyncGroupDirectives;
+  /*预览功能 */
+  dragPreviewDirective: DragPreviewDirective;
 
-          this.renderer.setStyle(dragFollowNode, 'position', 'fixed');
-          this.renderer.setStyle(dragFollowNode, 'zIndex', '1000');
-          this.renderer.setStyle(dragFollowNode, 'pointerEvents', 'none');
-          this.renderer.setStyle(dragFollowNode, 'width', this.dragOffset.width + 'px');
-          this.renderer.setStyle(dragFollowNode, 'height', this.dragOffset.height + 'px');
-          this.ngZone.runOutsideAngular(() => {
-            // console.log('set')
-            document.addEventListener('dragover', this.followMouse);
-            // this.el.nativeElement.addEventListener('dragover', this.followMouse);
-            dragFollowNode.addEventListener('dragover', this.fixSupportOfPointerEvents); // ie10 only
-            dragFollowNode.addEventListener('drop', this.fixSupportOfPointerEvents); // ie10 only
-          });
-          this.draggedElFollowingMouse = true;
-        }
-      } else {
-        if (this.draggedElFollowingMouse) {
-          const dragFollowNode =  this.draggedEl;
-          const originStyle = this.draggedElOriginStyle;
-
-          this.ngZone.runOutsideAngular(() => {
-            // console.log('clean')
-            document.removeEventListener('dragover', this.followMouse);
-            // this.el.nativeElement.removeEventListener('dragover', this.followMouse);
-            dragFollowNode.removeEventListener('dragover', this.fixSupportOfPointerEvents); // ie10 only
-            dragFollowNode.removeEventListener('drop', this.fixSupportOfPointerEvents); // ie10 only
-          });
-
-          this.renderer.setStyle(dragFollowNode, 'left', originStyle.left || null);
-          this.renderer.setStyle(dragFollowNode, 'top', originStyle.top || null);
-          this.renderer.setStyle(dragFollowNode, 'position', originStyle.position || null);
-          this.renderer.setStyle(dragFollowNode, 'zIndex', originStyle.zIndex || null);
-          this.renderer.setStyle(dragFollowNode, 'pointerEvents', originStyle.pointerEvents || null);
-          this.renderer.setStyle(dragFollowNode, 'width', originStyle.width || null);
-          this.renderer.setStyle(dragFollowNode, 'height', originStyle.height || null);
-          this.draggedElFollowingMouse = false;
-        }
-      }
-
-
+  constructor(private ngZone: NgZone) {
+    this.touchInstance = DragDropTouch.getInstance();
+    // service not support OnInit, only support OnDestroy, so write in constructor
+    // tslint:disable-next-line: max-line-length
+    this.dragEmptyImage.src = 'data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=='; // safari的img必须要有src
+  }
+  newSubscription() {
+    this.subscription.unsubscribe();
+    return this.subscription = Observable.create().subscribe();
   }
 
-  followMouse = (event) => {
-    if (!event) { event = window.event; }
-    const offset = this.dragOffset;
-    // console.log(event.target);
-    this.ngZone.runOutsideAngular(() => {
-      this.renderer.setStyle(this.draggedEl, 'left', event.clientX + offset.left + 'px');
-      this.renderer.setStyle(this.draggedEl, 'top', event.clientY  + offset.top + 'px');
+  enableDraggedCloneNodeFollowMouse() {
+    if (!this.dragCloneNode) {
+      this.dragItemContainer = this.draggedEl.parentElement;
+      if (this.dragPreviewDirective && this.dragPreviewDirective.dragPreviewTemplate) {
+        this.dragPreviewDirective.createPreview();
+        this.dragCloneNode = this.dragPreviewDirective.getPreviewElement();
+        this.dragItemContainer = document.body;
+      } else {
+        this.dragCloneNode = this.draggedEl.cloneNode(true);
+      }
+
+      this.dragCloneNode.style.margin = '0';
+      if (this.dragFollowOptions && this.dragFollowOptions.appendToBody) {
+        this.dragItemContainer = document.body;
+        this.copyStyle(this.draggedEl, this.dragCloneNode);
+      }
+
+      if (this.dragItemChildrenName !== '') {
+        const parentElement = this.dragItemParentName === '' ? this.dragCloneNode : document.querySelector(this.dragItemParentName);
+        const dragItemChildren = parentElement.querySelectorAll(this.dragItemChildrenName);
+        this.interceptChildNode(parentElement, dragItemChildren);
+      }
+      // 拷贝canvas的内容
+      const originCanvasArr = this.draggedEl.querySelectorAll('canvas');
+      const targetCanvasArr = this.dragCloneNode.querySelectorAll('canvas');
+      [].forEach.call(targetCanvasArr, (canvas, index) => {
+        canvas.getContext('2d').drawImage(originCanvasArr[index], 0, 0);
+      });
+
+      this.ngZone.runOutsideAngular(() => {
+        document.addEventListener('dragover', this.followMouse4CloneNode, {capture: true, passive: true});
+      });
+      this.dragCloneNode.style.width = this.dragOffset.width + 'px';
+      this.dragCloneNode.style.height = this.dragOffset.height + 'px';
+
+      if (!(this.dragPreviewDirective
+        && this.dragPreviewDirective.dragPreviewTemplate
+        && this.dragPreviewDirective.dragPreviewOptions
+        && this.dragPreviewDirective.dragPreviewOptions.skipBatchPreview)) {
+      // 批量拖拽样式
+      if (this.batchDragging && this.batchDragData && this.batchDragData.length > 1 ) {
+        // 创建一个节点容器
+        const node = document.createElement('div');
+        node.appendChild(this.dragCloneNode);
+        node.classList.add('batch-dragged-node');
+
+        /* 计数样式定位 */
+        if (this.batchDragStyle && this.batchDragStyle.length && this.batchDragStyle.indexOf('badge') > -1) {
+          const badge = document.createElement('div');
+          badge.innerText = this.batchDragData.length + '';
+          badge.classList.add('batch-dragged-node-count');
+          node.style.position = 'relative';
+          const style = {
+            position: 'absolute',
+            right: '5px',
+            top: '-12px',
+            height: '24px',
+            width: '24px',
+            borderRadius: '12px',
+            fontSize: '14px',
+            lineHeight: '24px',
+            textAlign: 'center',
+            color: '#fff',
+            background: ['#5170ff', 'var(--brand-1, #5170ff)']
+          };
+          Utils.addElStyles(badge, style);
+          node.appendChild(badge);
+        }
+
+        /* 层叠感样式定位 */
+        if (this.batchDragStyle && this.batchDragStyle.length && this.batchDragStyle.indexOf('stack') > -1) {
+          let stack = 2;
+          if (this.batchDragData.length === 2) {
+            stack = 1;
+          }
+          for (let i = 0; i < stack; i++) {
+            const stackNode = this.dragCloneNode.cloneNode(false);
+            const stackStyle = {
+              position: 'absolute',
+              left: -5 * (i + 1 ) + 'px',
+              top: -5 * (i + 1 ) +　'px',
+              zIndex: - (i + 1) + '',
+              width: this.dragOffset.width + 'px',
+              height: this.dragOffset.height + 'px',
+              background: '#fff',
+              border: ['1px solid #5170ff', '1px solid var(--brand-1, #5170ff)']
+            };
+            Utils.addElStyles(stackNode, stackStyle);
+            node.appendChild(stackNode);
+          }
+        }
+        this.dragCloneNode = node;
+      }
+     }
+
+      this.dragCloneNode.classList.add('drag-clone-node');
+      if (! (this.dragPreviewDirective && this.dragPreviewDirective.dragPreviewTemplate)) {
+        this.dragCloneNode.style.width = this.dragOffset.width + 'px';
+        this.dragCloneNode.style.height = this.dragOffset.height + 'px';
+      }
+      this.dragCloneNode.style.position = 'fixed';
+      this.dragCloneNode.style.zIndex = '1090';
+      this.dragCloneNode.style.pointerEvents = 'none';
+      this.dragCloneNode.style.top = this.dragOffset.top + 'px';
+      this.dragCloneNode.style.left = this.dragOffset.left + 'px';
+      this.dragCloneNode.style.willChange = 'left, top';
+      this.dragItemContainer.appendChild(this.dragCloneNode);
+      this.ngZone.runOutsideAngular(() => {
+        setTimeout(() => {
+          if (this.draggedEl) {
+            this.draggedEl.style.display = 'none';
+            this.dragElShowHideEvent.next(false);
+            if (this.dragOriginPlaceholder) {
+              this.dragOriginPlaceholder.style.display = 'block';
+            }
+          }
+        } );
+      });
+    }
+  }
+
+  disableDraggedCloneNodeFollowMouse() {
+    if (this.dragCloneNode) {
+      document.removeEventListener('dragover', this.followMouse4CloneNode, {capture: true});
+      this.dragItemContainer.removeChild(this.dragCloneNode);
+      this.draggedEl.style.display = '';
+      this.dragElShowHideEvent.next(true);
+    }
+    if (this.dragPreviewDirective && this.dragPreviewDirective.dragPreviewTemplate) {
+      this.dragPreviewDirective.destroyPreview();
+    }
+    this.dragCloneNode = undefined;
+    this.dragItemContainer = undefined;
+
+    if (this.intersectionObserver) {
+      this.intersectionObserver.disconnect();
+    }
+  }
+
+  interceptChildNode(parentNode, childNodeList) {
+    const interceptOptions = {
+      root: parentNode
+    };
+    this.intersectionObserver = new IntersectionObserver(this.setChildNodeHide, interceptOptions);
+    [].forEach.call(childNodeList, childNode => {
+      this.intersectionObserver.observe(childNode);
     });
   }
 
-  /**
-   * 修复ie10下pointer-events: none 不生效无法击穿的问题。 注意此处this是监听的target
-   */
-  fixSupportOfPointerEvents =  function (event: DragEvent) {
-    if (this.style.pointerEvents === 'none') {
-      this.style.display = 'none';
-      const {x, y} = {x: event.pageX, y: event.pageY};
-      const under = document.elementFromPoint(x, y);
-      this.style.display = '';
-      event.stopPropagation();
-      event.preventDefault();
-
-      const ev = document.createEvent('DragEvent');
-      ev.initMouseEvent(event.type, true, true, window, 0,
-        event.screenX, event.screenY, event.clientX, event.clientY,
-        event.ctrlKey, event.altKey, event.shiftKey, event.metaKey,
-        event.button, event.relatedTarget);
-      if (ev.dataTransfer !== null) {
-        ev.dataTransfer.setData('text', '');
-        ev.dataTransfer.effectAllowed = event.dataTransfer.effectAllowed;
+  setChildNodeHide(entries) {
+    entries.forEach(element => {
+      const {isIntersecting, target: childNode} = element;
+      if (isIntersecting) {
+        childNode.style.display = 'block';
+      } else {
+        childNode.style.display = 'none';
       }
+    });
+  }
 
-      under.dispatchEvent(ev);
+  followMouse4CloneNode = (event) => {
+    const {offsetLeft, offsetTop} = this.dragOffset;
+    const {clientX, clientY} = event;
+    requestAnimationFrame(() => {
+      if (!this.dragCloneNode) { return; }
+      this.dragCloneNode.style.left =  clientX - offsetLeft + 'px';
+      this.dragCloneNode.style.top =  clientY - offsetTop + 'px';
+    });
+  }
+
+  getBatchDragData(identity?, order: ((a: any, b: any) => number) | 'select' | 'draggedElFirst' = 'draggedElFirst') {
+    const result = this.batchDragData.map(dragData => dragData.dragData);
+    if (typeof order === 'function') {
+      result.sort(<((a: any, b: any) => number)>order);
+    } else if (order === 'draggedElFirst') {
+      let dragData = this.dragData;
+      if (identity) {
+        const realDragData = this.batchDragData.filter(dd => dd.identity === identity).pop().dragData;
+        dragData = realDragData;
+      }
+      result.splice(result.indexOf(dragData), 1);
+      result.splice(0, 0, dragData);
     }
-  };
+    return result;
+   }
+
+   /** usage:
+    * constructor(..., private dragDropService: DragDropService) {}
+    * cleanBatchDragData() { this.dragDropService.cleanBatchDragData(); }
+    */
+   public cleanBatchDragData() {
+     const batchDragData = this.batchDragData;
+     if (this.batchDragData) {
+      this.batchDragData
+        .filter(dragData => dragData.draggable)
+        .map(dragData => dragData.draggable)
+        .forEach(draggable => draggable.batchDraggable.dragData = undefined);
+      this.batchDragData = undefined;
+      this.batchDragGroup = undefined;
+     }
+     return batchDragData;
+   }
+
+   public copyStyle(source, target) {
+    ['id', 'class', 'style', 'draggable'].forEach(function (att) {
+      target.removeAttribute(att);
+    });
+
+    // copy style (without transitions)
+    const computedStyle = getComputedStyle(source);
+    for (let i = 0; i < computedStyle.length; i++) {
+      const key = computedStyle[i];
+        if (key.indexOf('transition') < 0) {
+          target.style[key] = computedStyle[key];
+        }
+      }
+      target.style.pointerEvents = 'none';
+      // and repeat for all children
+      for (let i = 0; i < source.children.length; i++) {
+        this.copyStyle(source.children[i], target.children[i]);
+      }
+    }
+
 }

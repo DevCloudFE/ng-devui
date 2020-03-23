@@ -8,9 +8,13 @@
   padding-right: 15px;
   padding-left: 15px;
   min-width: 220px;
+  width: 220px;
+}
+.list-group .list-group-item {
+  padding: 0 16px;
 }
 .drag-border {
-  border: #5170FF dashed 1px;
+  border: #5170ff dashed 1px;
 }
 .drag-handle {
   cursor: move;
@@ -47,26 +51,31 @@
   margin-left: 15px;
   margin-bottom: 5px;
 }
-.list-group> li {
+.list-group > li {
   padding: 0;
   margin-bottom: 5px;
 }
-.list-group-child >li > .name {
-  background-color: #5170FF;
+.list-group-child > li > .name {
+  background-color: #5170ff;
+  background-color: var(--brand-1, #5170ff);
 }
-.list-group> li > .name {
+.list-group > li > .name {
   display: block;
   width: 100%;
   overflow: hidden;
-  white-space:nowrap;
+  white-space: nowrap;
   text-overflow: ellipsis;
   padding: 0 10px;
   height: 30px;
-  border: 1px solid #5170FF;
+  border: 1px solid #5170ff;
+  border: 1px solid var(--brand-1, #5170ff);
   color: #fff;
   line-height: 30px;
-  background-color: #5170FF;
+  background-color: #5170ff;
+  background-color: var(--brand-1, #5170ff);
 }
-.list-group> li.dragover-item > .name {
-  background-color: #001BC0;
+
+.list-group > li.dragover-item > .name {
+  background-color: #001bc0;
+  background-color: var(--brand-2, #001bc0);
 }

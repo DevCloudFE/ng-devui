@@ -1,0 +1,85 @@
+<ul class="devui-accordion-list" *ngIf="!innerListTemplate || deepth === 0">
+  <li class="devui-accordion-item" *ngFor="let item of data">
+    <!--菜单类型-->
+    <d-accordion-menu *ngIf="item[childrenKey] !== undefined" [item]="item" [deepth]="deepth" [parent]="parent"></d-accordion-menu>
+    <!--非菜单类型-->
+    <ng-container *ngIf="item[childrenKey] === undefined">
+      <!--路由链接-->
+      <d-accordion-item-routerlink
+        *ngIf="linkType === 'routerLink'"
+        [item]="item"
+        [deepth]="deepth"
+        [parent]="parent"
+      ></d-accordion-item-routerlink>
+      <!--普通链接-->
+      <d-accordion-item-hreflink
+        *ngIf="linkType === 'hrefLink'"
+        [item]="item"
+        [deepth]="deepth"
+        [parent]="parent"
+      ></d-accordion-item-hreflink>
+      <!--动态链接-->
+      <ng-container *ngIf="linkType === 'dependOnLinkTypeKey'">
+        <d-accordion-item-routerlink
+          *ngIf="item[linkTypeKey] === 'routerLink'"
+          [item]="item"
+          [deepth]="deepth"
+          [parent]="parent"
+        ></d-accordion-item-routerlink>
+        <d-accordion-item-hreflink
+          *ngIf="item[linkTypeKey] === 'hrefLink'"
+          [item]="item"
+          [deepth]="deepth"
+          [parent]="parent"
+        ></d-accordion-item-hreflink>
+        <d-accordion-item
+          *ngIf="item[linkTypeKey] !== 'hrefLink' && item[linkTypeKey] !== 'routerLink'"
+          [item]="item"
+          [deepth]="deepth"
+          [parent]="parent"
+        ></d-accordion-item>
+      </ng-container>
+      <!--普通类型-->
+      <d-accordion-item *ngIf="!linkType || linkType === ''" [item]="item" [deepth]="deepth" [parent]="parent"></d-accordion-item>
+    </ng-container>
+  </li>
+</ul>
+<!--列表模板-->
+<div *ngIf="innerListTemplate && deepth !== 0">
+  <ng-template
+    [ngTemplateOutlet]="innerListTemplate"
+    [ngTemplateOutletContext]="{
+      item: parent,
+      deepth: deepth,
+      itemClickFn: itemClickItemFn,
+      menuToggleFn: menuToggleItemFn
+    }"
+  ></ng-template>
+</div>
+<!--无数据/加载中模板-->
+<ul *ngIf="!innerListTemplate && (loading || (noContent && showNoContent))">
+  <!--加载中-->
+  <li *ngIf="loading && !loadingTemplate" class="devui-accordion-item">
+    <div class="devui-accordion-item-title devui-over-flow-ellipsis" [style.textIndent]="deepth * 20 + 'px'">
+      {{ i18nCommonText?.loading }}
+    </div>
+  </li>
+  <!--自定义加载中-->
+  <ng-template
+    *ngIf="loading && loadingTemplate"
+    [ngTemplateOutlet]="loadingTemplate"
+    [ngTemplateOutletContext]="{ item: parent, deepth: deepth }"
+  ></ng-template>
+  <!--无数据-->
+  <li *ngIf="showNoContent && !loading && noContent && !noContentTemplate" class="devui-accordion-item">
+    <div class="devui-accordion-item-title devui-over-flow-ellipsis disabled" [style.textIndent]="deepth * 20 + 'px'">
+      {{ i18nCommonText?.noData }}
+    </div>
+  </li>
+  <!--自定义无数据-->
+  <ng-template
+    *ngIf="showNoContent && !loading && noContent && noContentTemplate"
+    [ngTemplateOutlet]="noContentTemplate"
+    [ngTemplateOutletContext]="{ item: parent, deepth: deepth }"
+  ></ng-template>
+</ul>

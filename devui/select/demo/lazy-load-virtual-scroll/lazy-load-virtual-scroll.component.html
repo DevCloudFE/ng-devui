@@ -1,0 +1,12 @@
+<h5 class="text-muted">虚拟滚动</h5>
+<div class="row">
+  <div class="col-md-5">
+    <d-select [virtualScroll]="true" [placeholder]="'Standard Input'" [options]="options"></d-select>
+  </div>
+</div>
+<h5 class="text-muted">滚动到底部懒加载数据</h5>
+<div class="row">
+  <div class="col-md-5">
+    <d-select [enableLazyLoad]="true" (loadMore)="loadMore($event)" [placeholder]="'Small Input'" [options]="options1"></d-select>
+  </div>
+</div>

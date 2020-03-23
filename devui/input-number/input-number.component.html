@@ -1,28 +1,42 @@
-<div class="input-control-buttons" [ngClass]='{
-  disabled: disabled,
- "devui-input-number-lg": size === "lg",
- "devui-input-number-sm": size === "sm"}'>
-  <span class="input-control-button input-control-inc" [ngClass]='{disabled: disabledInc}' #incButton>
-    <svg class="svg-icon-arrow" width="15px" height="15px" viewBox="0 0 16 16" version="1.1"
-         xmlns="http://www.w3.org/2000/svg">
+<div
+  class="input-control-buttons"
+  [ngClass]="{
+    disabled: disabled,
+    'devui-input-number-lg': size === 'lg',
+    'devui-input-number-sm': size === 'sm'
+  }"
+>
+  <span class="input-control-button input-control-inc" [ngClass]="{ disabled: disabledInc }" #incButton>
+    <svg class="devui-svg-icon-arrow" width="15px" height="15px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg">
       <g id="chevron-up" stroke="none" stroke-width="1" fill-rule="evenodd">
         <polygon points="11.5 12 8 8.23076923 4.5 12 3 10.3846154 8 5 13 10.3846154"></polygon>
       </g>
     </svg>
   </span>
-  <span class="input-control-button input-control-dec" [ngClass]='{disabled: disabledDec}' #decButton>
-    <svg class="svg-icon-arrow" width="15px" height="15px" viewBox="0 0 16 16" version="1.1"
-         xmlns="http://www.w3.org/2000/svg">
+  <span class="input-control-button input-control-dec" [ngClass]="{ disabled: disabledDec }" #decButton>
+    <svg class="devui-svg-icon-arrow" width="15px" height="15px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg">
       <g id="chevron-down" stroke="none" stroke-width="1" fill-rule="evenodd">
         <polygon points="4.5 5 8 8.76923077 11.5 5 13 6.61538462 8 12 3 6.61538462"></polygon>
       </g>
     </svg>
   </span>
 </div>
-<div class="input-container" [ngClass]='{
-    "devui-input-number-lg": size === "lg",
-    "devui-input-number-sm": size === "sm"}'>
-  <input class="input-box" [(ngModel)]='valueInput' [ngClass]='{disabled: disabled}'
-         [attr.readonly]='disabled? "" : null'
-         (keypress)="protectInput($event)" (blur)="ensureValueIsValid($event)" (keydown)="handleBackspace($event)"/>
+<div
+  class="input-container"
+  [ngClass]="{
+    'devui-input-number-lg': size === 'lg',
+    'devui-input-number-sm': size === 'sm'
+  }"
+>
+  <input
+    class="input-box"
+    [(ngModel)]="valueInput"
+    [ngClass]="{ disabled: disabled }"
+    [placeholder]="placeholder"
+    [attr.readonly]="disabled ? '' : null"
+    (keypress)="protectInput($event)"
+    (blur)="ensureValueIsValid($event)"
+    (keydown)="handleBackspace($event)"
+    #inputElement
+  />
 </div>

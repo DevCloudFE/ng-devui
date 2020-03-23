@@ -40,6 +40,7 @@ import { MovableDirective } from './movable.directive';
     ModalHeaderComponent,
     ModalFooterComponent,
     ModalAlertComponent,
+    MovableDirective
   ],
   providers: [
     ModalService,

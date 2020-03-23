@@ -1,17 +1,26 @@
 <section>
   <form class="form">
-      <div class="row">
-        <div class="col-sm-6" style="width: 300px; margin-right: 15px; float:left;">
-          <div class="devui-form-group">
-          <input type="text" class="form-control" name="language" id="language5" [minLength]="0" [disabled]="isDisabled"
-                [(ngModel)]="selectItem1" dAutoComplete [searchFn]="onSearchLocal.bind(this)"/>
-            </div>
-        </div>
-        <div class="col-sm-4" style="float:left;">
-          <d-button (click)="isDisabled = !isDisabled"> {{isDisabled ? 'Enable AutoComplete' :
-            'Disable AutoComplete'}}
-          </d-button>
+    <div class="row">
+      <div class="col-sm-6" style="width: 280px; margin-right: 15px; margin-bottom: 5px; float:left;">
+        <div class="devui-form-group">
+          <input
+            type="text"
+            class="devui-form-control"
+            name="language"
+            id="language5"
+            [minLength]="0"
+            [disabled]="isDisabled"
+            [(ngModel)]="selectItem1"
+            dAutoComplete
+            [searchFn]="onSearchLocal.bind(this)"
+          />
         </div>
       </div>
+      <div class="col-sm-4">
+        <d-button (click)="isDisabled = !isDisabled">
+          {{ isDisabled ? 'Enable AutoComplete' : 'Disable AutoComplete' }}
+        </d-button>
+      </div>
+    </div>
   </form>
 </section>

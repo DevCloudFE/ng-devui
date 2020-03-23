@@ -24,9 +24,63 @@
     <div class="demo-text">
       允许拖拽时候非半透明元素跟随
     </div>
-    <d-codebox id="components-dragdrop-follow" [sourceData]="treeSource">
+    <d-codebox id="components-dragdrop-follow" [sourceData]="followSource">
       <d-follow demo></d-follow>
     </d-codebox>
   </div>
-
+  <div class="demo-example">
+    <div class="demo-title">越边交换</div>
+    <div class="demo-text">
+      设置switchWhileCrossEdge允许越过边缘的时候交换。 注意：不可与dropOnItem一起用，dropOnItem为true的时候无效。
+    </div>
+    <d-codebox id="components-dragdrop-switch" [sourceData]="switchSource">
+      <d-switch demo></d-switch>
+    </d-codebox>
+  </div>
+  <div class="demo-example">
+    <div class="demo-title">外部放置位置：就近，前面，后面</div>
+    <div class="demo-text">
+      使用defaultDropPostion配置排序器之外的区域拖拽元素放下的时候默认加到列表的前面或者后面，默认为就近('closest')。
+    </div>
+    <d-codebox id="components-dragdrop-position" [sourceData]="positionSource">
+      <d-position demo></d-position>
+    </d-codebox>
+  </div>
+  <div class="demo-example">
+    <div class="demo-title">拖拽滚动容器增强</div>
+    <div class="demo-text">
+      搭配使用dDropScrollEnhanced指令允许拖拽到边缘的时候加速滚动条向两边滚动。
+    </div>
+    <d-codebox id="components-dragdrop-drop-scroll" [sourceData]="dropScrollSource">
+      <d-drop-scroll demo></d-drop-scroll>
+    </d-codebox>
+  </div>
+  <div class="demo-example">
+    <div class="demo-title">源占位符</div>
+    <div class="demo-text">
+      使用originPlaceholder显示源位置的占位符，示例消失动画。
+    </div>
+    <d-codebox id="components-dragdrop-origin-placeholder" [sourceData]="originPlaceholderSource">
+      <d-origin-placeholder demo></d-origin-placeholder>
+    </d-codebox>
+  </div>
+  <div class="demo-example">
+    <div class="demo-title">批量拖拽</div>
+    <div class="demo-text">
+      使用batchDrag指令标记可以批量拖拽。
+    </div>
+    <d-codebox id="components-dragdrop-batch-drag" [sourceData]="batchDragSource">
+      <d-batch-drag demo></d-batch-drag>
+    </d-codebox>
+  </div>
+  <div class="demo-example">
+    <div class="demo-title">二维拖拽 和 拖拽预览</div>
+    <div class="demo-text">
+      使用dDragDropSyncBox指令、dDragSync指令、dDropSync指令协同拖拽，实现二维拖拽； 使用 dDragPreview 配置拖拽预览， 使用
+      d-drag-preview-clone-dom-ref 完成拖拽节点预览的克隆。
+    </div>
+    <d-codebox id="components-dragdrop-sync" [sourceData]="crossDimensionSource">
+      <d-cross-dimension demo></d-cross-dimension>
+    </d-codebox>
+  </div>
 </div>

@@ -2,6 +2,7 @@ import {
   Component,
   TemplateRef,
   ViewChild,
+  OnDestroy,
 } from '@angular/core';
 import {
   Input,
@@ -16,13 +17,13 @@ import {
   ModalAlertComponent,
   ModalService
 } from 'ng-devui/modal';
-import {MultipleUploadViewComponent} from './multiple-upload-view.component';
+import { MultipleUploadViewComponent } from './multiple-upload-view.component';
 import {
   SelectFiles
 } from './select-files.utils';
-import { DevUIConfig } from 'ng-devui/devui.config';
-import { map, last } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { map, last, debounceTime } from 'rxjs/operators';
+import { Observable, Subscription } from 'rxjs';
+import { I18nInterface, I18nService } from 'ng-devui/i18n';
 
 @Component({
   selector: 'd-multiple-upload',
@@ -30,7 +31,7 @@ import { Observable } from 'rxjs';
   exportAs: 'dMultipleUpload',
   styleUrls: ['./upload-view.component.scss'],
 })
-export class MultipleUploadComponent {
+export class MultipleUploadComponent implements OnDestroy {
   @Input() uploadOptions: IUploadOptions;
   @Input() fileOptions: IFileOptions;
   @Input() autoUpload = false;
@@ -39,18 +40,8 @@ export class MultipleUploadComponent {
   @Input() uploadedFilesRef: TemplateRef<any>;
   @Input() preloadFilesRef?: TemplateRef<any>;
   @Input() filePath: string;
-  // i18n
-  /**
-   * 【可选】上传输入框中的Placeholder文字
-   */
-  @Input() CHOOSE_FILES: string;
-  /**
-   * 【可选】上传按钮文字
-   */
+  @Input() placeholderText: string;
   @Input() uploadText: string;
-  /**
-   * 【可选】错误信息弹出框中确认按钮文字
-   */
   @Input() confirmText: string;
   @Input() beforeUpload: (files) => boolean | Promise<boolean> | Observable<boolean>;
   @Input() enableDrop = false;
@@ -61,32 +52,41 @@ export class MultipleUploadComponent {
   @Output() fileDrop: EventEmitter<any> = new EventEmitter();
   @Output() fileOver: EventEmitter<any> = new EventEmitter();
   @ViewChild('dMultipleUploadView', { static: true }) multipleUploadViewComponent: MultipleUploadViewComponent;
-
-
+  i18nCommonText: I18nInterface['common'];
+  i18nText: I18nInterface['upload'];
   isDropOVer = false;
+  i18nSubscription: Subscription;
   constructor(private modalService: ModalService,
-             private devUIConfig: DevUIConfig,
-              private selectFiles: SelectFiles) {
-    this.uploadText = this.devUIConfig['uploadCN'].UPLOAD;
-    this.confirmText = this.devUIConfig['modalCN'].BUTTON_TEXT.OK;
-    this.CHOOSE_FILES = this.devUIConfig['uploadCN'].CHOOSE_FILES;
+    private selectFiles: SelectFiles,
+    private i18n: I18nService, ) {
+    this.i18nText = this.i18n.getI18nText().upload;
+    this.i18nCommonText = this.i18n.getI18nText().common;
+    this.i18nSubscription = this.i18n.langChange().subscribe((data) => {
+      this.i18nText = data.upload;
+      this.i18nCommonText = data.common;
+    });
   }
 
   _dealFiles(observale) {
+    this.multipleUploadViewComponent.resetSameNameFiles();
     observale.pipe(
       map(file => this.multipleUploadViewComponent.addFile(file)),
-      last()
-      )
-    .subscribe(
-      () => {
-        if (this.autoUpload) {
-          this.upload();
+      debounceTime(100)
+    )
+      .subscribe(
+        () => {
+          const sameNameFiles = this.multipleUploadViewComponent.getSameNameFiles();
+          if (this.autoUpload) {
+            this.upload();
+          }
+          if (this.uploadOptions.checkSameName && sameNameFiles.length) {
+            this.alertMsg(this.i18nText.getExistSameNameFilesMsg(sameNameFiles));
+          }
+        },
+        (error: Error) => {
+          this.alertMsg(error.message);
         }
-      },
-      (error: Error) => {
-        this.alertMsg(error.message);
-      }
-    );
+      );
   }
 
   onClick(event) {
@@ -110,26 +110,25 @@ export class MultipleUploadComponent {
   upload() {
     this.canUpload().then((canUpload) => {
       if (!canUpload) {
-        // 检验失败，清理已选文件
         this.multipleUploadViewComponent.removeFiles();
         return;
       }
       this.multipleUploadViewComponent.upload()
-      .pipe(
-        last()
-      )
-      .subscribe(
-        (results: Array<{file: File, response: any}>) => {
-          this.successEvent.emit(results);
-          results.forEach((result) => {
-            this.multipleUploadViewComponent.deleteFile(result.file);
-            this.multipleUploadViewComponent.uploadedFilesComponent.addFile(result.file);
-          });
-        },
-        (error) => {
-          this.errorEvent.emit(error);
-        }
-      );
+        .pipe(
+          last()
+        )
+        .subscribe(
+          (results: Array<{ file: File, response: any }>) => {
+            this.successEvent.emit(results);
+            results.forEach((result) => {
+              this.multipleUploadViewComponent.deleteFile(result.file);
+              this.multipleUploadViewComponent.uploadedFilesComponent.addFile(result.file);
+            });
+          },
+          (error) => {
+            this.errorEvent.emit(error);
+          }
+        );
     });
   }
 
@@ -162,12 +161,18 @@ export class MultipleUploadComponent {
       component: ModalAlertComponent,
       data: {
         content: errorMsg,
-        cancelBtnText: this.confirmText,
+        cancelBtnText: this.confirmText ? this.confirmText : this.i18nCommonText.btnConfirm,
         onClose: (event) => {
           results.modalInstance.hide();
         },
       },
     });
+  }
+  ngOnDestroy() {
+    if (this.i18nSubscription) {
+      this.i18nSubscription.unsubscribe();
+
+    }
   }
 }
 

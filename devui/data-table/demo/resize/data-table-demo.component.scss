@@ -11,7 +11,7 @@
 
 .filter_box {
   width: 110px;
-  background: $white;
+  background: $bg-white;
   font-size: 12px;
   font-style: normal;
   max-height: 400px;
@@ -19,7 +19,7 @@
   top: 42px;
   overflow-y: auto;
   padding: 5px;
-  border: 1px solid $gray1; //#c1bdbd;
+  border: 1px solid $gray-1;
   position: absolute;
   z-index: 999;
 }
