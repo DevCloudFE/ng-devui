@@ -1,41 +1,46 @@
 import {
   Component,
+  ElementRef,
   Input,
-  TemplateRef
+  TemplateRef,
+  ViewChild
 } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
-import { DevUIConfig } from 'ng-devui/devui.config';
+import { fadeInOut } from 'ng-devui/utils';
 
 @Component({
   selector: 'd-auto-complete-popup',
   templateUrl: './auto-complete-popup.component.html',
-  // tslint:disable-next-line:no-host-metadata-property
-  host: {
-    '[class]': '"devui-dropdown-menu "  +  (cssClass ? cssClass : "")',
-    '[style.display]': 'isOpen && (source?.length || noResultItemTemplate) ? "inline-block" : "none"',
-  },
-  styleUrls: ['auto-complete-popup.component.scss']
+  styleUrls: ['auto-complete-popup.component.scss'],
+  animations: [fadeInOut]
 })
 export class AutoCompletePopupComponent implements ControlValueAccessor {
   activeIndex = 0;
   @Input() cssClass: string;
   @Input() maxHeight: number;
   @Input() disabled: boolean;
+  @Input() disabledKey: string;
   @Input() source: any[];
+  @Input() position: any;
   @Input() isOpen: boolean;
   @Input() term: string;
+  @Input() popTipsText: string;
+  @Input() overview: string;
   @Input() itemTemplate: TemplateRef<any>;
   @Input() noResultItemTemplate: TemplateRef<any>;
   @Input() formatter: (item: any) => string;
   @Input() dropdown: boolean;
-  // @Input() selectWidth: any;  // not use
-
+  @Input() selectWidth: any;
+  @Input() enableLazyLoad: boolean;
+  @ViewChild('selectMenuElement', { static: true }) selectMenuElement: ElementRef;
+  showLoading = false;
   private value: any;
+  labelMinHeight = 20; // position.top小于20px时候，表示光标在第一行
   private onChange = (_: any) => null;
   private onTouched = () => null;
 
-  constructor(private devuiConfig: DevUIConfig) {
-    this.formatter = this.devuiConfig.autoComplete.formatter;
+  constructor() {
+    this.formatter = (item: any) => item ? (item.label || item.toString()) : '';
     this.maxHeight = 300;
   }
 
@@ -55,17 +60,27 @@ export class AutoCompletePopupComponent implements ControlValueAccessor {
     this.onTouched = fn;
   }
 
-  onSelect(item: any) {
+  onSelect(event: any, item: any) {
+    if (this.disabledKey && item[this.disabledKey]) {
+      event.preventDefault();
+      event.stopPropagation();
+      return;
+    }
+    if (this.overview === 'single') { // 单选场景和单行场景不需要冒泡
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
     this.value = item;
     this.onTouched();
-    this.onChange(this.value);
+    this.onChange({ type: 'select', value: this.value });
   }
 
-  selectCurrentItem() {
-    this.onSelect(this.source[this.activeIndex]);
+  selectCurrentItem(event: any) {
+    this.onSelect(event, this.source[this.activeIndex]);
   }
 
-  onActiveIndexChange(index) {
+  onActiveIndexChange(index: any) {
     this.activeIndex = index;
   }
 
@@ -92,7 +107,24 @@ export class AutoCompletePopupComponent implements ControlValueAccessor {
       this.activeIndex = this.activeIndex - 1;
     }
   }
-  trackByFn(index, item) {
+
+  trackByFn(index: any, item: any) {
     return index;
+  }
+
+  animationEnd($event: any) {
+    if (!this.isOpen) {
+      const targetElement = this.selectMenuElement.nativeElement;
+      targetElement.style.display = 'none';
+    }
+  }
+
+  loadMoreEvent($event: any) {
+    this.showLoading = true;
+    this.onChange({ type: 'loadMore', value: this });
+  }
+
+  loadFinish($event: any) {
+    this.showLoading = false;
   }
 }

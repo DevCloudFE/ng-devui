@@ -1,36 +1,40 @@
- <button [attr.id]="id" d-btn class="devui-btn devui-btn-{{bsStyle}} devui-btn-{{bsSize}}"
-            [type]="type"
-            [disabled]="disabled"
-            [class.bordered]="bordered"
-            [class.devui-loading]="showLoading"
-            [showLoading]='showLoading'
-            [loadingTemplateRef]="buttonWithLoading"
-            [backdrop]="true"
-            dLoading
-            [ngStyle]="{'width': width}"
-            [dBtnAutofocus]="autofocus"
-            (click)="onClick($event)"
-            >
-        <span *ngIf="!!icon" class="devui-icon-fix icon {{icon}}"></span>
-        <ng-content></ng-content>
+<button
+  [attr.id]="id"
+  d-btn
+  class="devui-btn devui-btn-{{ bsStyle }} devui-btn-{{ bsSize }}"
+  [type]="type"
+  [disabled]="disabled"
+  [class.bordered]="bordered"
+  [class.devui-loading]="showLoading"
+  [showLoading]="showLoading"
+  [loadingTemplateRef]="buttonWithLoading"
+  [backdrop]="true"
+  dLoading
+  [ngStyle]="{ width: width }"
+  [dBtnAutofocus]="autofocus"
+  (click)="onClick($event)"
+  [ngClass]="{ 'd-btn-icon': !!icon && !hasContent() }"
+>
+  <span *ngIf="!!icon" class="devui-icon-fix icon {{ icon }}"></span
+  ><!--
+  --><span class="button-content" #buttonContent><ng-content></ng-content></span>
 </button>
 
-
 <ng-template #buttonWithLoading>
-    <div class="devui-loading-spinner-wrapper">
-        <div class="devui-loading-default-spinner">
-            <div class="bar1"></div>
-            <div class="bar2"></div>
-            <div class="bar3"></div>
-            <div class="bar4"></div>
-            <div class="bar5"></div>
-            <div class="bar6"></div>
-            <div class="bar7"></div>
-            <div class="bar8"></div>
-            <div class="bar9"></div>
-            <div class="bar10"></div>
-            <div class="bar11"></div>
-            <div class="bar12"></div>
-        </div>
+  <div class="devui-loading-spinner-wrapper">
+    <div class="devui-loading-default-spinner">
+      <div class="bar1"></div>
+      <div class="bar2"></div>
+      <div class="bar3"></div>
+      <div class="bar4"></div>
+      <div class="bar5"></div>
+      <div class="bar6"></div>
+      <div class="bar7"></div>
+      <div class="bar8"></div>
+      <div class="bar9"></div>
+      <div class="bar10"></div>
+      <div class="bar11"></div>
+      <div class="bar12"></div>
     </div>
+  </div>
 </ng-template>

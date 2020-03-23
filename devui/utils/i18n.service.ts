@@ -1,17 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class I18nService {
   private subject = new Subject<string>();
-  toggleLang(lang = 'zh-CN') {
+  toggleLang(lang = 'zhCN') {
     localStorage.setItem('lang', lang);
     this.subject.next(lang);
     window.location.reload();
   }
 
   getLangSuffix() {
-    return localStorage.getItem('lang') === 'en-US' ? 'EN' : 'CN';
+    return localStorage.getItem('lang') === 'enUS' ? 'EN' : 'CN';
   }
 
   getMessage(): Observable<string> {

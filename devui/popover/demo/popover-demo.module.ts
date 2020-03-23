@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PopoverModule } from '../popover.module';
 import { FormsModule } from '@angular/forms';
-import {ButtonModule} from '../../button';
+
 
 import { PopoverDemoComponent } from './popover-demo.component';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
@@ -11,8 +11,10 @@ import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component
 import { BasicComponent } from './basic/basic.component';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { ManualComponent } from './manual/manual.component';
-import { CustomizeTmpComponent } from './customize/customize-tmp.component';
-
+import { CustomizeTmpComponent } from './customize/customize.component';
+import { ScrollElementComponent } from './scroll-element/scroll-element.component';
+import { HoverToContentComponent } from './hover-to-content/hover-to-content.component';
+import { ButtonModule } from 'ng-devui/button';
 @NgModule({
   imports: [
     CommonModule,
@@ -34,7 +36,9 @@ import { CustomizeTmpComponent } from './customize/customize-tmp.component';
     PopoverDemoComponent,
     BasicComponent,
     ManualComponent,
-    CustomizeTmpComponent
+    CustomizeTmpComponent,
+    ScrollElementComponent,
+    HoverToContentComponent
   ],
   entryComponents: [
     PopoverDemoComponent,

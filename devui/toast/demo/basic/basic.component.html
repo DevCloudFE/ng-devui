@@ -1,11 +1,8 @@
 <section>
   <d-toast [value]="msgs"></d-toast>
-
-  <d-button (click)="showToast('success')">Success</d-button>
-  <br /><br />
-  <d-button (click)="showToast('warn')">Warn</d-button>
-  <br /><br />
-  <d-button (click)="showToast('error')">Error</d-button>
-  <br /><br />
-  <d-button (click)="showToast('multiple')">Multiple</d-button>
+  <d-button bsStyle="success" (click)="showToast('success')">Success</d-button>
+  <d-button bsStyle="warning" (click)="showToast('warn')">Warn</d-button>
+  <d-button bsStyle="danger" (click)="showToast('error')">Error</d-button>
+  <d-button bsStyle="primary" (click)="showToast('multiple')">Multiple</d-button>
+  <d-button bsStyle="common" (click)="showToast('link')">link</d-button>
 </section>

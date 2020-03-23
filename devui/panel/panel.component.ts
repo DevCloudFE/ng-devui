@@ -2,7 +2,8 @@ import {
   Component,
   Input,
   ContentChild,
-  HostBinding,
+  Output,
+  EventEmitter,
 } from '@angular/core';
 
 import { PanelType } from './panel.types';
@@ -17,13 +18,16 @@ import { PanelFooterComponent } from './panel-footer.component';
 export class PanelComponent {
   @Input() type: PanelType = 'default';
   @Input() heading: string;
+  @Input() cssClass: string;
   @Input() isCollapsed: boolean;
+  @Output() toggle: EventEmitter<boolean> = new EventEmitter();
   @ContentChild(PanelHeaderComponent, { static: false }) panelHeader;
   @ContentChild(PanelFooterComponent, { static: false }) panelFooter;
 
   toggleBody() {
     if (this.isCollapsed !== undefined) {
       this.isCollapsed = !this.isCollapsed;
+      this.toggle.emit(this.isCollapsed);
     }
   }
 }

@@ -1,0 +1,18 @@
+<section>
+  <div class="row">
+    <div class="col-md-5">
+      <d-select
+        [options]="options2"
+        [isSearch]="true"
+        [filterKey]="'name'"
+        [(ngModel)]="currentOption4"
+        [placeholder]="'Search'"
+      ></d-select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-5">
+      <pre>Current Select: {{ currentOption4 | json }}</pre>
+    </div>
+  </div>
+</section>

@@ -59,7 +59,7 @@
     "husky": "^2.2.0",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
-    "karma": "~4.0.0",
+    "karma": "^4.4.1",
     "karma-chrome-launcher": "~2.2.0",
     "karma-coverage-istanbul-reporter": "~2.0.1",
     "karma-jasmine": "~1.1.2",
@@ -70,6 +70,7 @@
     "ng-packagr": "^5.4.0",
     "ngx-accordion": "^0.0.17",
     "node-sass": "^4.13.1",
+    "prettier": "^1.18.2",
     "protractor": "~5.4.0",
     "rxjs": "~6.5.4",
     "shelljs": "^0.8.3",
@@ -81,7 +82,11 @@
   },
   "lint-staged": {
     "devui/**/*.ts": [
-      "npm run lint:devui",
+      "tslint --fix -p devui/tsconfig.lint.json -c devui/tslint.json \"*.ts\"",
+      "git add"
+    ],
+    "devui/**/*.{html,scss,css}": [
+      "prettier --config ./.prettierrc --write \"*.{html,scss,css}\"",
       "git add"
     ]
   },

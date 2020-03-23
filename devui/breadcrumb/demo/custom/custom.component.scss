@@ -1,0 +1,21 @@
+@import '../../../style/theme/color';
+.breadcrumb-dropdown-menu {
+  padding: 10px 0;
+  width: 160px;
+}
+li {
+  padding: 0 15px;
+  font-size: 12px;
+  line-height: 36px;
+  cursor: pointer;
+}
+li a {
+  color: $dark-1;
+  margin-left: 10px;
+}
+li:hover {
+  background: $hover-content;
+}
+li:hover a {
+  text-decoration: none;
+}

@@ -25,76 +25,74 @@
   }
 
   &.top {
-      margin-top: -5px;
-      padding: 0;
-      box-shadow: -5px 5px 20px 0px rgba($dark1, .2);
-      & .devui-tooltip-arrow {
-        bottom: -5px;
-        left: 50%;
-        margin-left: -5px;
-        border-width: 5px 5px 0;
-        border-top-color: $white;
+    margin-top: -5px;
+    padding: 0;
+    box-shadow: -5px 5px 20px 0px rgba($dark-1, 0.2);
+    & .devui-tooltip-arrow {
+      bottom: -5px;
+      left: 50%;
+      margin-left: -5px;
+      border-width: 5px 5px 0;
+      border-top-color: $hwc-feedback-overlay-background;
     }
   }
 
   &.bottom {
-      margin-top: 5px;
-      padding: 0;
-      box-shadow: 5px -5px 20px 0px rgba($dark1, .2);
-      & .devui-tooltip-arrow {
-        top: -5px;
-        left: 50%;
-        margin-left: -5px;
-        border-width: 0 5px 5px;
-        border-bottom-color: $white;
+    margin-top: 5px;
+    padding: 0;
+    box-shadow: 5px -5px 20px 0px rgba($dark-1, 0.2);
+    & .devui-tooltip-arrow {
+      top: -5px;
+      left: 50%;
+      margin-left: -5px;
+      border-width: 0 5px 5px;
+      border-bottom-color: $hwc-feedback-overlay-background;
     }
   }
 
   &.left {
-      margin-left: -5px;
-      padding: 0;
-      box-shadow: 5px -5px 20px 0px rgba($dark1, .2);
-      & .devui-tooltip-arrow {
-        top: 50%;
-        right: -5px;
-        margin-top: -5px;
-        border-width: 5px 0 5px 5px;
-        border-left-color: $white;
+    margin-left: -5px;
+    padding: 0;
+    box-shadow: 5px -5px 20px 0px rgba($dark-1, 0.2);
+    & .devui-tooltip-arrow {
+      top: 50%;
+      right: -5px;
+      margin-top: -5px;
+      border-width: 5px 0 5px 5px;
+      border-left-color: $hwc-feedback-overlay-background;
     }
   }
 
   &.right {
-      margin-left: 5px;
-      padding: 0;
-      box-shadow: -5px 5px 20px 0px rgba($dark1, .2);
-      & .devui-tooltip-arrow {
-        top: 50%;
-        left: -5px;
-        margin-top: -5px;
-        border-width: 5px 5px 5px 0;
-        border-right-color: $white;
+    margin-left: 5px;
+    padding: 0;
+    box-shadow: -5px 5px 20px 0px rgba($dark-1, 0.2);
+    & .devui-tooltip-arrow {
+      top: 50%;
+      left: -5px;
+      margin-top: -5px;
+      border-width: 5px 5px 5px 0;
+      border-right-color: $hwc-feedback-overlay-background;
     }
   }
   .devui-tooltip-inner {
+    max-width: 200px;
     padding: 5px 10px;
     font-size: 14px;
-    color: $dark1;
+    color: $hwc-feedback-overlay-font-color;
     letter-spacing: 0;
     line-height: 20px;
-    word-wrap: break-word;
-    background: $white;
+    background: $hwc-feedback-overlay-background;
     box-shadow: none;
-    word-break: break-all;
+    overflow-wrap: break-word;
     text-align: start;
-}
+  }
 
-.devui-tooltip-arrow {
+  .devui-tooltip-arrow {
     position: absolute;
     width: 0;
     height: 0;
     border-color: transparent;
     border-style: solid;
+  }
 }
-}
-
-

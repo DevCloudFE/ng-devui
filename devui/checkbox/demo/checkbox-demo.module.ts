@@ -8,8 +8,9 @@ import { SelectModule } from 'ng-devui/select';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
-import { CheckboxDemoBasicComponent } from './basic/checkbox-basic.component';
-import { CheckboxDemoGroupComponent} from './group/checkbox-demo-group.component';
+
+import { CheckboxBasicComponent } from './basic/checkbox-basic.component';
+import { CheckboxGroupBasicComponent} from './group/checkbox-group-basic.component';
 
 @NgModule({
   imports: [
@@ -30,8 +31,8 @@ import { CheckboxDemoGroupComponent} from './group/checkbox-demo-group.component
   exports: [CheckBoxDemoComponent],
   declarations: [
     CheckBoxDemoComponent,
-    CheckboxDemoBasicComponent,
-    CheckboxDemoGroupComponent,
+    CheckboxBasicComponent,
+    CheckboxGroupBasicComponent,
   ],
   entryComponents: [
     CheckBoxDemoComponent,

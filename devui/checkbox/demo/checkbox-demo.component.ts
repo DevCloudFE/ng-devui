@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DevuiSourceData } from '../../shared/devui-codebox';
+import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 
 @Component({
   templateUrl: './checkbox-demo.component.html',
@@ -13,8 +13,8 @@ export class CheckBoxDemoComponent {
   ];
 
   checkboxDemoGroup: Array<DevuiSourceData> = [
-    {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./group/checkbox-demo-group.component.html')},
-    {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./group/checkbox-demo-group.component.ts')},
+    {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./group/checkbox-group-basic.component.html')},
+    {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./group/checkbox-group-basic.component.ts')},
   ];
   constructor() {
   }

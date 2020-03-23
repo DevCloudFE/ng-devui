@@ -1,11 +1,11 @@
 import {Component} from '@angular/core';
 
 @Component({
-  selector: 'd-pagination-demo-lite',
+  selector: 'd-lite',
   templateUrl: './lite.component.html',
   styleUrls: ['./lite.component.css']
 })
-export class PaginationDemoLiteComponent {
+export class LiteComponent {
   pager1 = {
     total: 100,
     pageIndex: 1,

@@ -1,5 +1,6 @@
 import { DateConverter } from './date-converter';
-import { formatDate, parseDate } from './date-utils';
+import { parseDate } from './date-utils';
+import { I18nFormat } from 'ng-devui/i18n';
 
 export class DefaultDateConverter implements DateConverter {
 
@@ -8,6 +9,10 @@ export class DefaultDateConverter implements DateConverter {
   }
 
   format(date: Date, pattern?: string, locale?: string): string {
-    return formatDate(date, pattern);
+    return I18nFormat.formatDate(date, pattern, locale);
+  }
+
+  formatDateTime(date: Date, pattern?: string, locale?: string): string {
+    return I18nFormat.formatDateTimeWithoutGMT(date, pattern, locale);
   }
 }

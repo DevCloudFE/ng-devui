@@ -1,0 +1,20 @@
+<section>
+  <h5 class="text-muted">Standard: Single Select</h5>
+  <div class="row">
+    <div class="col-md-5">
+      <d-tree-select
+        placeholder="Standard Input"
+        [treeData]="data"
+        [expandTree]="true"
+        [(ngModel)]="value"
+        (ngModelChange)="showSelected($event)"
+        iconTemplatePosition="after-checkbox"
+        style="width: 280px;"
+      >
+        <ng-template #iconTemplate let-node="node">
+          <span style="padding-left: 10px;" [ngClass]="{ 'my-icon': node?.data?.type }" class="{{ node?.data?.type }}"></span>
+        </ng-template>
+      </d-tree-select>
+    </div>
+  </div>
+</section>

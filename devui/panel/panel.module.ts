@@ -20,7 +20,7 @@ import {PanelHeaderComponent} from './panel-header.component';
     PanelBodyComponent,
     PanelFooterComponent,
   ],
-  providers: [],
+  providers: []
 })
 export class PanelModule {
 }

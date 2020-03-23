@@ -6,12 +6,16 @@
 :host {
   display: block;
 }
-
+.disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  user-select: none;
+}
 ::ng-deep {
-  &.tree-node.operable-tree-node {
-    .tree-node__checkbox {
-      margin-left: .5em;
-      margin-top: -.2em;
+  &.devui-tree-node.devui-operable-tree-node {
+    .devui-tree-node__checkbox {
+      margin-left: 0.5em;
+      margin-top: -0.2em;
 
       .devui-checkbox-material {
         width: 16px;
@@ -19,21 +23,21 @@
       }
     }
 
-    .icons {
-      margin-left: .5em;
+    .devui-tree-icons {
+      margin-left: 0.5em;
       cursor: pointer;
 
       svg {
         #add-path {
-          fill: $dark1;
+          fill: $dark-1;
         }
 
         #edit-path {
-          fill: $dark1;
+          fill: $dark-1;
         }
 
         #delete-path {
-          fill: $dark1;
+          fill: $dark-1;
         }
       }
 
@@ -53,7 +57,10 @@
     }
 
     svg.svg-icon > g > g > path {
-      fill: $dark2;
+      fill: $dark-2;
     }
   }
+}
+.devui-form-control {
+  outline: none;
 }

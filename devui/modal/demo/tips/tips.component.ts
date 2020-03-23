@@ -63,7 +63,7 @@ export class TipsComponent implements OnInit {
     showAnimate: false,
     title: '',
     html: true,
-    content: '<div style="color:#8a6d3b;">是否离开此页面？</div>',
+    content: '即将离开此页!',
     backdropCloseable: true,
     dialogtype: dialogtype,
     buttons: [
@@ -74,14 +74,6 @@ export class TipsComponent implements OnInit {
           results.modalInstance.hide();
         },
         btnwidth: '84px'
-      },
-      {
-        id: 'btn-cancel',
-        cssClass: 'common',
-        text: 'Cancel',
-        handler: ($event: Event) => {
-          results.modalInstance.hide();
-        }
       }],
     });
   }

@@ -1,0 +1,22 @@
+<section>
+  <d-splitter style="height: 500px; border: 1px solid #E3E5E9;" orientation="vertical">
+    <d-splitter-pane size="200px" minSize="100px" [collapsible]="true" (sizeChange)="sizeChange($event)">
+      <div class="pane-content">
+        <h2>上面板</h2>
+        <div>高度200px</div>
+      </div>
+    </d-splitter-pane>
+    <d-splitter-pane style="overflow: hidden;">
+      <div class="pane-content">
+        <h2>中间面板</h2>
+        <div>高度自适应</div>
+      </div>
+    </d-splitter-pane>
+    <d-splitter-pane size="100px" [resizable]="false" [collapsible]="true">
+      <div class="pane-content">
+        <h2>下面板</h2>
+        <div>高度100px, 不可调节</div>
+      </div>
+    </d-splitter-pane>
+  </d-splitter>
+</section>

@@ -8,12 +8,13 @@
   padding-right: 15px;
   padding-left: 15px;
   min-width: 220px;
+  width: 220px;
 }
 .list-group .list-group-item {
   padding: 0 16px;
 }
 .drag-border {
-  border: #5170FF dashed 1px;
+  border: #5170ff dashed 1px;
 }
 .drag-handle {
   cursor: move;
@@ -45,11 +46,13 @@
   margin-bottom: 20px;
   padding: 10px;
 }
-.list-group>li {
+.list-group > li {
   height: 30px;
-  border: 1px solid #5170FF;
-  color:#fff;
+  border: 1px solid #5170ff;
+  border: 1px solid var(--brand-1, #5170ff);
+  color: #fff;
   margin-bottom: 5px;
   line-height: 30px;
-  background-color: #5170FF;
+  background-color: #5170ff;
+  background-color: var(--brand-1, #5170ff);
 }

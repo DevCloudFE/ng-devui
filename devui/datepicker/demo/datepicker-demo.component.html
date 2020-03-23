@@ -1,20 +1,119 @@
 <div class="demo-container">
   <div class="demo-example">
-      <div class="demo-title">基本用法</div>
-      <div class="demo-text">
-
-      </div>
-      <d-codebox id="components-datepicker-default" [sourceData]="basicSource">
-          <d-basic demo></d-basic>
-      </d-codebox>
+    <div class="demo-title">基本用法</div>
+    <div class="demo-text"></div>
+    <d-codebox id="components-datepicker-default" [sourceData]="basicSource">
+      <d-basic demo></d-basic>
+    </d-codebox>
   </div>
+
   <div class="demo-example">
-      <div class="demo-title">格式化</div>
-      <div class="demo-text">
-        通过dateFormat设置日期的格式
-      </div>
-      <d-codebox id="components-datepicker-format" [sourceData]="formatSource">
-          <d-datepicker-demo-format demo></d-datepicker-demo-format>
-      </d-codebox>
+    <div class="demo-title">范围日期选择器</div>
+    <div class="demo-text">
+      与单日日期选择器相同，范围日期选择器展开时默认选中当前日期。范围日期选择器包含开始日期选择器和结束日期选择器，用户可以选择一段日期。
+    </div>
+    <d-codebox id="components-datepicker-range" [sourceData]="rangeSource">
+      <d-datepicker-range demo></d-datepicker-range>
+    </d-codebox>
+  </div>
+
+  <div class="demo-example">
+    <div class="demo-title">日期范围选择器 集成模式</div>
+    <div class="demo-text"></div>
+    <d-codebox id="d-datepicker-range-basic" [sourceData]="rangePickerSource">
+      <d-datepicker-range-basic demo></d-datepicker-range-basic>
+    </d-codebox>
+  </div>
+
+  <div class="demo-example">
+    <div class="demo-title">日期范围选择器 禁止输入态</div>
+    <div class="demo-text"></div>
+    <d-codebox id="d-datepicker-range-disabled" [sourceData]="rangePickerDisabled">
+      <d-datepicker-range-disabled demo></d-datepicker-range-disabled>
+    </d-codebox>
+  </div>
+
+  <div class="demo-example">
+    <div class="demo-title">日期范围选择器 可选范围</div>
+    <div class="demo-text"></div>
+    <d-codebox id="d-datepicker-range-restricted-range" [sourceData]="rangePickerRestricted">
+      <d-datepicker-range-restricted-range demo></d-datepicker-range-restricted-range>
+    </d-codebox>
+  </div>
+
+  <div class="demo-example">
+    <div class="demo-title">日期范围选择器 选择时间</div>
+    <div class="demo-text"></div>
+    <d-codebox id="d-datepicker-range-time" [sourceData]="rangePickerTime">
+      <d-datepicker-range-time demo></d-datepicker-range-time>
+    </d-codebox>
+  </div>
+
+  <div class="demo-example">
+    <div class="demo-title">日期范围选择器 自定义操作区及清除按钮</div>
+    <div class="demo-text">
+      通过 clearAll 清除选择的日期
+    </div>
+    <d-codebox id="components-datepicker-clear-button" [sourceData]="rangeClearButtonSource">
+      <d-range-clear-button demo></d-range-clear-button>
+    </d-codebox>
+  </div>
+
+  <div class="demo-example">
+    <div class="demo-title">日期范围选择器 自定义操作选择日期</div>
+    <div class="demo-text">
+      通过 chooseDate 结合 rangeStart 和 rangeEnd 设置自定义日期
+    </div>
+    <d-codebox id="components-datepicker-range-today" [sourceData]="rangeTodaySource">
+      <d-range-today demo></d-range-today>
+    </d-codebox>
+  </div>
+
+  <div class="demo-example">
+    <div class="demo-title">格式化</div>
+    <div class="demo-text">
+      通过dateFormat设置日期的格式
+    </div>
+    <d-codebox id="components-datepicker-format" [sourceData]="formatSource">
+      <d-datepicker-format demo></d-datepicker-format>
+    </d-codebox>
+  </div>
+
+  <div class="demo-example">
+    <div class="demo-title">自定义操作区</div>
+    <div class="demo-text">
+      通过 customViewTemplate 自定义快捷设置日期或自定义操作区内容， 可以通过chooseDate(dateString: string)来设置日期
+    </div>
+    <d-codebox id="d-custom-view-template" [sourceData]="customViewTemplateSource">
+      <d-custom-view-template demo></d-custom-view-template>
+    </d-codebox>
+  </div>
+
+  <div class="demo-example">
+    <div class="demo-title">自定义清除按钮</div>
+    <div class="demo-text">
+      通过 customViewTemplate 增加清除按钮， 可以通过clearAll()来触发
+    </div>
+    <d-codebox id="d-date-picker-clear-button" [sourceData]="clearButtonSource">
+      <d-clear-button demo></d-clear-button>
+    </d-codebox>
+  </div>
+
+  <div class="demo-example">
+    <div class="demo-title">日期选择按钮</div>
+    <div class="demo-text">
+      可以通过按钮唤出Datepicker
+    </div>
+    <d-codebox id="d-date-picker-button" [sourceData]="buttonSource">
+      <d-datepicker-button demo></d-datepicker-button>
+    </d-codebox>
+  </div>
+
+  <div class="demo-example">
+    <div class="demo-title">双日期选择器</div>
+    <div class="demo-text"></div>
+    <d-codebox id="d-two-date-picker-basic" [sourceData]="twoDatepickerBasic">
+      <d-two-datepicker-basic demo></d-two-datepicker-basic>
+    </d-codebox>
   </div>
 </div>

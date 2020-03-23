@@ -1,0 +1,14 @@
+<section>
+  <d-input-number size="sm" [min]="min" [max]="max" [step]="step" [(ngModel)]="value" class="input-number"></d-input-number>
+  <d-input-number
+    [min]="min"
+    [max]="max"
+    [step]="step"
+    [(ngModel)]="value"
+    (whileValueChanging)="showValue($event, 'typing')"
+    (ngModelChange)="showValue($event, 'model')"
+    class="input-number"
+  >
+  </d-input-number>
+  <d-input-number size="lg" [min]="min" [max]="max" [step]="step" [(ngModel)]="value" class="input-number"></d-input-number>
+</section>

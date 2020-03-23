@@ -4,11 +4,11 @@ import { from, merge } from 'rxjs';
 import {
   FileUploader
 } from './file-uploader.class';
-import {UploadStatus} from './file-uploader.types';
+import { UploadStatus } from './file-uploader.types';
 
 export class UploadComponent {
   fileUploaders: Array<FileUploader> = [];
-
+  filesWithSameName = [];
   addFile(file, options) {
     if (options.checkSameName) {
       if (this.checkFileSame(file.name)) {
@@ -20,9 +20,13 @@ export class UploadComponent {
   }
   checkFileSame(fileName) {
     let checkRel = true;
+
     for (let i = 0; i < this.fileUploaders.length; i++) {
       if (fileName === this.fileUploaders[i].file.name) {
         checkRel = false;
+        if (this.filesWithSameName.indexOf(fileName) === -1) {
+          this.filesWithSameName.push(fileName);
+        }
         break;
       }
     }
@@ -55,8 +59,14 @@ export class UploadComponent {
     });
   }
 
-  // 清空已选文件
   removeFiles() {
     this.fileUploaders = [];
+    this.filesWithSameName = [];
+  }
+  getSameNameFiles() {
+    return this.filesWithSameName.join();
+  }
+  resetSameNameFiles() {
+    this.filesWithSameName = [];
   }
 }

@@ -1,0 +1,42 @@
+<section>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="devui-input-group">
+        <input
+          class="devui-form-control"
+          placeholder="y/MM/dd"
+          name="dp"
+          [(ngModel)]="selectedDate2"
+          (focus)="datePicker1.toggle($event)"
+          autocomplete="off"
+          dDatepicker
+          #datePicker1="datepicker"
+          (selectedDateChange)="getValue($event)"
+          [customViewTemplate]="myCustomview"
+        />
+        <div class="devui-input-group-addon" (click)="datePicker1.toggle($event)">
+          <i class="icon icon-calendar"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #myCustomview let-chooseDate="chooseDate" let-clearAll="clearAll" let-datePicker>
+    <div class="box">
+      <d-button bsStyle="common" (btnClick)="clearAll()" bsSize="sm">
+        清除
+      </d-button>
+      <d-button bsStyle="primary" (btnClick)="chooseDate(getDay(0))" bsSize="sm">
+        今天
+      </d-button>
+    </div>
+  </ng-template>
+  <div class="row">
+    <div class="col-md-6">
+      <pre
+        >{{ selectedDate2 ? 'selectedDate: ' : null }} {{
+          ((selectedDate2 ? selectedDate2 : null) | dDatePipe) || 'No date was selected!'
+        }}</pre
+      >
+    </div>
+  </div>
+</section>

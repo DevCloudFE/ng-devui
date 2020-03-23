@@ -34,7 +34,7 @@ export class StickyComponent implements OnInit, AfterViewInit, OnDestroy {
             this.statusProcess(this._status);
         }
     }
-    get stauts() {
+    get status() {
         return this._status;
     }
 
@@ -42,9 +42,9 @@ export class StickyComponent implements OnInit, AfterViewInit, OnDestroy {
     containerLeft; // 用于监听是否是横向滚动
 
     private THROTTLE_DELAY = 16;
-    private THROTTLE_TRIGER = 100;
+    private THROTTLE_TRIGGER = 100;
     private scrollPreStart;
-    private scrollTimmer;
+    private scrollTimer;
 
     constructor(private el: ElementRef) {
     }
@@ -106,21 +106,21 @@ export class StickyComponent implements OnInit, AfterViewInit, OnDestroy {
     throttle = () => {
         const fn = this.scrollAndResizeHock;
         const time = Date.now();
-        if (this.scrollTimmer) {
-            clearTimeout(this.scrollTimmer);
+        if (this.scrollTimer) {
+            clearTimeout(this.scrollTimer);
         }
         if (!this.scrollPreStart) {
             this.scrollPreStart = time;
         }
-        if (time - this.scrollPreStart > this.THROTTLE_TRIGER) {
+        if (time - this.scrollPreStart > this.THROTTLE_TRIGGER) {
             fn();
             this.scrollPreStart = null;
-            this.scrollTimmer = null;
+            this.scrollTimer = null;
         } else {
-            this.scrollTimmer = setTimeout(() => {
+            this.scrollTimer = setTimeout(() => {
                 fn();
                 this.scrollPreStart = null;
-                this.scrollTimmer = null;
+                this.scrollTimer = null;
             }, this.THROTTLE_DELAY);
         }
     }

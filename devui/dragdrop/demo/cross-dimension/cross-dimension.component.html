@@ -1,0 +1,85 @@
+<section>
+  <h3></h3>
+  <div class="board" dDragDropSyncBox dDropScrollEnhanced dDropScrollEnhancedSide [direction]="'v'">
+    <div class="row row-group">
+      <div class="row title-row occupied-width">
+        <div class="col-group"><div class="col title-col">责任人</div></div>
+        <div
+          class="col-group"
+          dDroppable
+          dSortable="h"
+          [dropScope]="'col'"
+          [switchWhileCrossEdge]="true"
+          [dDropSortSync]="'col'"
+          (dropEvent)="onDrop($event, listCol)"
+        >
+          <div
+            class="col"
+            dDraggable
+            [dragScope]="'col'"
+            [dDragSync]="'col-' + col.id"
+            [dDragPreview]="colTemplate"
+            *ngFor="let col of listCol"
+            [dragData]="{ item: col, parent: listCol }"
+          >
+            {{ col.name }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row row-group" dSortable dDroppable [dropScope]="'row'" [switchWhileCrossEdge]="true" (dropEvent)="onDrop($event, owners)">
+      <div
+        class="row"
+        dDraggable
+        [dragScope]="'row'"
+        [dragHandle]="'.title-col'"
+        [enableDragFollow]="true"
+        *ngFor="let owner of owners"
+        [dragData]="{ item: owner, parent: owners }"
+      >
+        <div class="col-group">
+          <div class="col title-col">{{ owner.name }}</div>
+        </div>
+        <div class="col-group" [dDropSortSync]="'col'">
+          <div class="col" [dDragSync]="'col-' + col.id" *ngFor="let col of listCol">
+            <ng-template [ngTemplateOutlet]="cardContainer" [ngTemplateOutletContext]="{ list: ownerListMap[owner.id][col.id] }">
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<ng-template #colTemplate let-draggedEl="draggedEl" let-dragSyncDOMElements="dragSyncDOMElements">
+  <div class="board board-preview">
+    <div class="row title-row">
+      <d-drag-preview-clone-dom-ref [domRef]="draggedEl"></d-drag-preview-clone-dom-ref>
+    </div>
+    <div class="row" *ngFor="let dom of dragSyncDOMElements">
+      <d-drag-preview-clone-dom-ref [domRef]="dom"></d-drag-preview-clone-dom-ref>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #cardContainer let-list="list">
+  <div class="card-container" dDroppable [dropScope]="'card-container'" (dropEvent)="onDrop($event, list)" [switchWhileCrossEdge]="true">
+    <ul class="list-group drop-el" dSortable>
+      <li
+        *ngFor="let item of list"
+        class="list-group-item over-flow-ellipsis"
+        dDraggable
+        [dragScope]="'card-container'"
+        [dragData]="{ item: item, parent: list }"
+        [enableDragFollow]="true"
+        (click)="batchSelectCheck($event, item)"
+        batchDrag
+        [batchDragActive]="item.isSelected"
+        (batchDragActiveEvent)="batchSelect(item)"
+        [ngClass]="{ selected: item.isSelected }"
+      >
+        {{ item.name }}
+      </li>
+    </ul>
+  </div>
+</ng-template>

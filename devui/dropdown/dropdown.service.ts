@@ -1,10 +1,9 @@
-import {Injectable} from '@angular/core';
-import {DropDownDirective} from './dropdown.directive';
+import { Injectable } from '@angular/core';
+import { DropDownDirective } from './dropdown.directive';
 
 @Injectable()
 export class DropDownService {
   private openScope: DropDownDirective;
-  private dropdownScope: DropDownDirective;
 
   private closeDropdownBind: EventListener = this.closeDropdown.bind(this);
 
@@ -14,9 +13,6 @@ export class DropDownService {
       setTimeout(() => {
         window.document.addEventListener('click', this.closeDropdownBind);
       });
-    }
-    if (this.openScope && this.openScope !== this.dropdownScope) {
-        this.openScope.isOpen = false;
     }
     this.openScope = dropdownScope;
   }
@@ -35,12 +31,13 @@ export class DropDownService {
     }
     const menuEl = this.openScope.menuEl.nativeElement;
     if (event && this.openScope.menuEl &&
-      ((/input|textarea/i.test((<any> event.target).tagName) && menuEl.contains(event.target)) ||
-      (menuEl.contains(event.target) && this.openScope.closeScope === 'blank')
+      ((/input|textarea/i.test((<any> event.target).tagName) && menuEl.contains(event.target))
+      || this.openScope.closeScope === 'none'
+      || (menuEl.contains(event.target) && this.openScope.closeScope === 'blank')
+      || (this.openScope.dropdownChildren.some(children => children.toggleEl.nativeElement.contains(event.target)))
       )) {
       return;
     }
-
     this.openScope.isOpen = false;
   }
 }

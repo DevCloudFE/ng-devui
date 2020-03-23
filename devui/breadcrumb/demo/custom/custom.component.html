@@ -1,0 +1,25 @@
+<section>
+  <d-breadcrumb [separatorIcon]="separatorIcon">
+    <d-breadcrumb-item>
+      <a routerLink="/components/get-start">DevUI</a>
+    </d-breadcrumb-item>
+    <d-breadcrumb-item [showMenu]="true" [customMenuTemplate]="menuTpl">
+      <span>面包屑</span>
+    </d-breadcrumb-item>
+  </d-breadcrumb>
+  <ng-template #menuTpl>
+    <div class="breadcrumb-dropdown-menu">
+      <li>
+        <span class="icon-arrow-right"></span>
+        <a href="/components/anchor/demo">锚点</a>
+      </li>
+      <li>
+        <span class="icon-arrow-right"></span>
+        <a href="/components/button/demo">按钮</a>
+      </li>
+    </div>
+  </ng-template>
+  <ng-template #separatorIcon>
+    <span class="icon-arrow-right"></span>
+  </ng-template>
+</section>

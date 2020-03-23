@@ -1,7 +1,9 @@
-<ng-template *ngFor="let treeNode of treeList; trackBy: trackByFn"
-          [ngTemplateOutlet]="treeNodesRef"
-          [ngTemplateOutletContext]="{
+<ng-template
+  *ngFor="let treeNode of treeList; trackBy: trackByFn"
+  [ngTemplateOutlet]="treeNodesRef"
+  [ngTemplateOutletContext]="{
           $implicit: this,
            treeNode: treeNode,
-           treeFactory: treeFactory}">
+           treeFactory: treeFactory}"
+>
 </ng-template>

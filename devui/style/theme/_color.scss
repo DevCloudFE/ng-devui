@@ -1,24 +1,52 @@
-$white: #fff !default;
-$huawei-bg: #222222 !default;
-$huawei-red: #e41f2b !default;
-$dark: #000 !default;
-$dark1: #293040 !default;
-$dark2: #5e6678 !default;
-$dark3: #959eb2 !default;
-$focus1: #5170ff !default;
-$focus2: #001bc0 !default;
-$focus3: #e8f0fd !default;
-$focus4: #859BFF !default;
-$gray1: #cacfd8 !default;
-$gray2: #e3e5e9 !default;
-$gray3: #f8f8f8 !default;
-$hover-control: #405dff !default;
-$hover-content: #f3f7fe !default;
-$status-red: #f95f5b !default;
-$status-yellow: #fecc55 !default;
-$status-green: #3dcca6 !default;
-$status-blue: #5170ff !default;
-$dark-1-boxshadow: rgba(41, 48, 64, 0.2);
-$dropdown-overlay: #FFFFFF;
-$global-bg: #f3f6f8 !default;
-$tag-label-bgcolor: rgba(254, 204, 85, 0.3);
+
+$base-bg-white: #ffffff; // 白色背景body
+$bg-white: #ffffff; // 顶部导航颜色，背景色
+$block-bg-white: #ffffff; // 用于按钮和alert提醒条等区域区域
+$brand-1: #5e7ce0; // 控件颜色
+$brand-2: #344899; // 点击控件颜色
+$brand-3: #f2f5fc; // 选中内容底色，如下拉菜单，表格
+$brand-4: #859bff; //用于浅色的loading背景色
+$dark-1: #252b3a; // 主要信息
+$dark-2: #575d6c; // 帮助信息，提示性信息
+$dark-3: #8a8e99; // 占位符
+$dark-1-boxshadow-light: rgba(41, 48, 64, 0.1); // 阴影效果
+$dark-1-boxshadow: rgba(41, 48, 64, 0.2); // 阴影效果
+$dark-1-3: #252b3a; // 用于表格内操作图标
+$dropdown-overlay: #ffffff; // 用于下拉菜单块白色区域
+$font-dark: #293040; // 用于有色浅色背景的深色字体
+$font-white: #ffffff; // 用于有色背景
+// 用于modal
+$full-screen-overlay: #ffffff;
+$global-bg: #f3f6f8; // 浅灰色背景body
+$gray-1: #adb0b8; // 主要分隔线，如边框
+$gray-2: #dfe1e6; // 次要分隔线
+$gray-3: #f8f8f8; // 展开区域颜色
+$highlight-overlay: rgba(255, 255, 255, 0.8); // 用于底部浮层类操作层
+$hover-control: #344899; // 鼠标悬停控件
+$hover-content: #f2f5fc; // 鼠标悬停底色，如下拉菜单，表格
+$huawei-bg: #333854; // 顶部导航颜色
+$huawei-red: #f66f6a; // 顶部菜单选中
+$icon-gray-bg: #e3e5e9; // 用于表头按钮的灰色底色
+$link: #526ecc; // 链接颜色
+$status-red: #f66f6a; // 错误，失败，危险操作告警色
+$status-yellow: #fac20a; // 提示信息
+$status-green: #50d4ab; // 成功，批准
+$status-blue: #5e7ce0; // 运行中，正常
+$status-initial: #e9edfa; // 初始化
+$status-unavaliable: #f5f5f6; // 失效，等待，回退， 中止
+$strip-color: #f2f5fc; // 用于表格类间接行
+$tag-label-bgcolor: #eef0f5; // 标签类型
+// 用于alert
+$hwc-status-danger-border: #ffa4a1;
+$hwc-status-danger-background: #ffeeed;
+$hwc-status-warning-border: #ffbf85;
+$hwc-status-warning-background: #fff3e8;
+$hwc-status-info-border: #96adfa;
+$hwc-status-info-background: #e9edfa;
+$hwc-status-success-border: #50d4ab;
+$hwc-status-success-background: #edfff9;
+// 用于tooltips/ toast
+$hwc-feedback-overlay-background: #464d6e; 
+$hwc-feedback-overlay-font-color: #dfe1e6; 
+
+

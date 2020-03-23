@@ -4,8 +4,9 @@ import { CommonModule } from '@angular/common';
 import {
   ModalDemoComponent,
   ModalTestComponent,
-  ModalAlertComponent
+  ModalFormComponent
 } from './modal-demo.component';
+import { ModalAlertComponent } from './customize/modal-alert.component';
 import { ModalModule } from '../modal.module';
 import { ButtonModule } from 'ng-devui/button';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
@@ -14,6 +15,9 @@ import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { BasicComponent } from './basic/basic.component';
 import { CustomizeComponent } from './customize/customize.component';
 import { TipsComponent } from './tips/tips.component';
+import { HideComponent } from './hide/hide.component';
+import { WarningComponent } from './warning/warning.component';
+import { AutofocusComponent } from './autofocus/autofocus.component';
 
 @NgModule({
   imports: [
@@ -36,12 +40,17 @@ import { TipsComponent } from './tips/tips.component';
     ModalAlertComponent,
     BasicComponent,
     CustomizeComponent,
-    TipsComponent
+    TipsComponent,
+    HideComponent,
+    ModalFormComponent,
+    WarningComponent,
+    AutofocusComponent
   ],
   entryComponents: [
     ModalDemoComponent,
     ModalTestComponent,
-    ModalAlertComponent
+    ModalAlertComponent,
+    ModalFormComponent
   ]
 })
 export class ModalDemoModule {

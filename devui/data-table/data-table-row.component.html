@@ -1,17 +1,30 @@
-<td *ngIf="showDetail" [style.width]="showDetailColumn.width" [style.color]="'#666'" [style.text-align]="'center'"
-  [style.padding]="'0'">
-  <div *ngIf="rowItem.expandConfig" (click)="toggle()">
-    <span [style.vertical-align]="'middle'" *ngIf="rowItem.expandConfig?.expand">
-      <svg class="svg-icon-arrow" width="16px" height="16px" viewBox="0 0 16 16" version="1.1"
-        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<td *ngIf="showExpandToggle" class="devui-detail-cell" [ngClass]="{ 'devui-sticky-left-cell': columns[0]?.fixedLeft }" [style.left]="0">
+  <div *ngIf="rowItem.detail || rowItem.$expandConfig" (click)="toggle()">
+    <span [style.vertical-align]="'middle'" *ngIf="rowItem['$isDetailOpen'] || rowItem.$expandConfig?.expand">
+      <svg
+        class="svg-icon-arrow"
+        width="16px"
+        height="16px"
+        viewBox="0 0 16 16"
+        version="1.1"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+      >
         <g id="chevron-down" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
           <polygon points="4.5 5 8 8.76923077 11.5 5 13 6.61538462 8 12 3 6.61538462"></polygon>
         </g>
       </svg>
     </span>
-    <span [style.vertical-align]="'middle'" *ngIf="!rowItem.expandConfig?.expand">
-      <svg class="svg-icon-arrow" width="16px" height="16px" viewBox="0 0 16 16" version="1.1"
-        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <span [style.vertical-align]="'middle'" *ngIf="!rowItem['$isDetailOpen'] && !rowItem.$expandConfig?.expand">
+      <svg
+        class="svg-icon-arrow"
+        width="16px"
+        height="16px"
+        viewBox="0 0 16 16"
+        version="1.1"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+      >
         <g id="chevron-up" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
           <polygon points="11.5 12 8 8.23076923 4.5 12 3 10.3846154 8 5 13 10.3846154"></polygon>
         </g>
@@ -19,16 +32,44 @@
     </span>
   </div>
 </td>
-<td *ngIf="checkable" class="checkable-cell" [style.width]="checkableColumn.width" [style.padding]="'10px'">
-    <d-checkbox [ngModelOptions]="{standalone: true}" (ngModelChange)="onRowCheckChange($event, rowIndex, nestedIndex, rowItem)"
-      [ngModel]="rowItem.$checked" [halfchecked]="rowItem.$halfChecked" [disabled]="rowItem.$disabled">
-    </d-checkbox>
-  </td>
+<td
+  *ngIf="checkable"
+  class="devui-checkable-cell"
+  [ngClass]="{ 'devui-sticky-left-cell': columns[0]?.fixedLeft }"
+  [style.left]="showExpandToggle && columns[0]?.fixedLeft ? '36px' : '0'"
+>
+  <d-checkbox
+    [ngModelOptions]="{ standalone: true }"
+    (ngModelChange)="onRowCheckChange($event, rowIndex, nestedIndex, rowItem)"
+    [ngModel]="rowItem.$checked"
+    [halfchecked]="rowItem.$halfChecked"
+    [disabled]="rowItem.$disabled"
+    dTooltip
+    [content]="rowItem.$checkBoxTips"
+    [position]="'top'"
+    [showAnimation]="false"
+  >
+  </d-checkbox>
+</td>
 <ng-container *ngFor="let column of columns; let colIndex = index; trackBy: trackByFn">
-  <td dDataTableCell [dataTableTemplates]="dataTableTemplates" [rowIndex]="rowIndex" [colIndex]="colIndex"
-    [column]="column" [rowItem]="rowItem" [style.width]="column.width || ''" [ngStyle]="column.style"
-    [editModel]="rowItem.$$editModel || editModel" [isEditRow]="rowItem.$$edit" [timeout]="timeout"
-    [tableLevel]="tableLevel" [rowHovered]="rowHovered">
-  </td>
+  <td
+    dDataTableCell
+    [rowIndex]="rowIndex"
+    [colIndex]="colIndex"
+    [column]="column"
+    [rowItem]="rowItem"
+    [style.width]="column.width || ''"
+    [ngStyle]="column.style"
+    [editModel]="rowItem.$$editModel || editModel"
+    [isEditRow]="rowItem.$$edit"
+    [timeout]="timeout"
+    [tableLevel]="tableLevel"
+    class="{{ column.cellClass ? column.cellClass : '' }}"
+    [ngClass]="{
+      'devui-sticky-left-cell': column.fixedLeft,
+      'devui-sticky-right-cell': column.fixedRight
+    }"
+    [style.left]="column.fixedLeft ? column.fixedLeft : null"
+    [style.right]="column.fixedRight ? column.fixedRight : null"
+  ></td>
 </ng-container>
-<!-- <td width="0" *ngIf="resizeable"></td> -->

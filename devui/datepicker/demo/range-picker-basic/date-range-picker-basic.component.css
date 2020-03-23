@@ -1,0 +1,33 @@
+@import '~@devui-design/icons/icomoon/devui-icon.css';
+div.box {
+  padding: 10px;
+  font-size: 14px;
+  color: #5170ff;
+  line-height: 24px;
+}
+
+a.date-link {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+a.date-link + a.date-link {
+  margin-left: 15px;
+}
+
+a.date-link:hover {
+  color: blue;
+}
+
+.devui-input-group {
+  width: 300px;
+}
+
+.devui-input-group:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.devui-input-group-addon {
+  width: 1%;
+}

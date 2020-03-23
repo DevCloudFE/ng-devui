@@ -1,36 +1,38 @@
- <!-- Line progress -->
-<div *ngIf="!isCircle" class="devui-progress" [ngStyle]="{'height': height}">
-    <div class="devui-progress-bar"
-         role="progressbar"
-         aria-valuenow="60"
-         aria-valuemin="0"
-         aria-valuemax="100"
-         [style.background-color]="barbgcolor"
-         [style.width]="percentage + '%'">
-    </div>
-    <span [style.line-height]="height">{{percentageText}}</span>
+<div *ngIf="!isCircle" class="devui-progress" [ngStyle]="{ height: height }">
+  <div
+    class="devui-progress-bar"
+    role="progressbar"
+    aria-valuenow="60"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    [style.background-color]="barbgcolor"
+    [style.width]="percentage + '%'"
+  ></div>
+  <span [style.line-height]="height">{{ percentageText }}</span>
 </div>
- <!-- Circle progress -->
- <div *ngIf="isCircle" class="devui-progress-circle">
-        <svg class="devui-progress-circle " viewBox="0 0 100 100">
-          <path
-            class="devui-progress-circle-trail"
-            fill-opacity="0"
-            [attr.stroke-width]="strokeWidth"
-            [ngStyle]="trailPath"
-            [attr.d]="pathString"
-          ></path>
-          <path
-            class="devui-progress-circle-path"
-            [attr.d]="pathString"
-            [attr.stroke-linecap]="'round'"
-            fill-opacity="0"
-            [attr.stroke]="barbgcolor"
-            [attr.stroke-width]="percentage ? strokeWidth : 0"
-            [ngStyle]="strokePath"
-          ></path>
-        </svg>
-        <ng-template *ngIf="customViewTemplate" [ngTemplateOutlet]="customViewTemplate"
-        [ngTemplateOutletContext]="{$implicit: this, percentage:percentage}"></ng-template>
-        <span *ngIf="!customViewTemplate" class="devui-progress-circle-text">{{percentage}}%</span>
+<div *ngIf="isCircle" class="devui-progress-circle">
+  <svg class="devui-progress-circle " viewBox="0 0 100 100">
+    <path
+      class="devui-progress-circle-trail"
+      fill-opacity="0"
+      [attr.stroke-width]="strokeWidth"
+      [ngStyle]="trailPath"
+      [attr.d]="pathString"
+    ></path>
+    <path
+      class="devui-progress-circle-path"
+      [attr.d]="pathString"
+      [attr.stroke-linecap]="'round'"
+      fill-opacity="0"
+      [attr.stroke]="barbgcolor"
+      [attr.stroke-width]="percentage ? strokeWidth : 0"
+      [ngStyle]="strokePath"
+    ></path>
+  </svg>
+  <ng-template
+    *ngIf="customViewTemplate"
+    [ngTemplateOutlet]="customViewTemplate"
+    [ngTemplateOutletContext]="{$implicit: this, percentage:percentage}"
+  ></ng-template>
+  <span *ngIf="!customViewTemplate" class="devui-progress-circle-text">{{ percentage }}%</span>
 </div>

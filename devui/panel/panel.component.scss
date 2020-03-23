@@ -1,3 +1,5 @@
+@import '../style/theme/color';
+
 :host {
   display: block;
 }
@@ -5,13 +7,56 @@
 .devui-panel {
   line-height: 20px;
   border-radius: 2px;
+  box-shadow: 0 1px 6px 0 rgba(#000000, 0.12), 0 1px 6px 0 rgba(#000000, 0.12);
+  background-color: $bg-white;
+
   .devui-panel-heading {
     padding: 10px 15px;
   }
+
   .devui-panel-body {
     padding: 15px;
   }
+
   .devui-panel-footer {
     padding: 10px 15px;
+    color: $dark-1;
+    background-color: $gray-3;
+  }
+
+  &.devui-panel-default {
+    .devui-panel-heading {
+      color: $dark-1;
+      background-color: $gray-3;
+    }
+  }
+
+  &.devui-panel-success {
+    .devui-panel-heading {
+      color: $bg-white;
+      background-color: $status-green;
+    }
+  }
+
+  &.devui-panel-info,
+  &.devui-panel-primary {
+    .devui-panel-heading {
+      color: $bg-white;
+      background-color: $status-blue;
+    }
+  }
+
+  &.devui-panel-warning {
+    .devui-panel-heading {
+      color: $dark-1;
+      background-color: $status-yellow;
+    }
+  }
+
+  &.devui-panel-danger {
+    .devui-panel-heading {
+      color: $bg-white;
+      background-color: $status-red;
+    }
   }
 }

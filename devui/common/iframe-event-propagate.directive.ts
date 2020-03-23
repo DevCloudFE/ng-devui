@@ -1,6 +1,6 @@
 import { Directive, ElementRef, AfterViewInit, Input } from '@angular/core';
 @Directive({
-  selector: 'ng2-ueditor, [dIframeEventPropagate]'
+  selector: '[dIframeEventPropagate]'
 })
 export class IframeEventPropagateDirective implements AfterViewInit {
   @Input() event = 'click';

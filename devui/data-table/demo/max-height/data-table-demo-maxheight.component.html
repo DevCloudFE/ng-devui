@@ -1,6 +1,12 @@
 <d-data-table #datatable1 [dataSource]="maxHeightDataSource" fixHeader="true" maxHeight="400px" [scrollable]="true">
   <d-column field="$index" header="#" [width]="'100px'"></d-column>
-  <d-column *ngFor="let colOption of dataTableOptions.columns" [field]="colOption.field" [header]="colOption.header"
-    [sortable]="colOption.sortable" [fieldType]="colOption.fieldType" [width]="'150px'">
+  <d-column
+    *ngFor="let colOption of dataTableOptions.columns"
+    [field]="colOption.field"
+    [header]="colOption.header"
+    [sortable]="colOption.sortable"
+    [fieldType]="colOption.fieldType"
+    [width]="'150px'"
+  >
   </d-column>
 </d-data-table>

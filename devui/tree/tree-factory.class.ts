@@ -34,7 +34,6 @@ export interface ITreeMap {
   [index: number]: ITreeNodeData;
 }
 
-// 每个tree节点数据组成
 export interface ITreeItem {
   title: string;
   open?: boolean;
@@ -57,7 +56,6 @@ export interface ITreeItem {
   disableDelete?: boolean;
 }
 
-// tree初始化构造数据
 export interface ITreeInput {
   treeItems: Array<ITreeItem>;
   parentId?: number;
@@ -69,8 +67,8 @@ export interface ITreeInput {
 
 export class TreeNode implements ITreeNodeData {
   constructor(public id,
-              public parentId,
-              public data) {
+    public parentId,
+    public data) {
   }
 }
 
@@ -86,14 +84,14 @@ export class TreeFactory {
 
   // tree model with items
   static fromTree({
-                    treeItems,
-                    treeNodeChildrenKey = 'items',
-                    treeNodeIdKey = 'id',
-                    checkboxDisabledKey = 'disabled',
-                    treeNodeTitleKey = 'title'
-                  }: ITreeInput): TreeFactory {
+    treeItems,
+    treeNodeChildrenKey = 'items',
+    treeNodeIdKey = 'id',
+    checkboxDisabledKey = 'disabled',
+    treeNodeTitleKey = 'title'
+  }: ITreeInput): TreeFactory {
     const treeFactory = TreeFactory.create();
-    treeFactory.mapTreeItems({treeItems, parentId: undefined, treeNodeChildrenKey, treeNodeIdKey, checkboxDisabledKey, treeNodeTitleKey});
+    treeFactory.mapTreeItems({ treeItems, parentId: undefined, treeNodeChildrenKey, treeNodeIdKey, checkboxDisabledKey, treeNodeTitleKey });
     return treeFactory;
   }
 
@@ -103,13 +101,13 @@ export class TreeFactory {
   }
 
   mapTreeItems = ({
-                    treeItems,
-                    parentId,
-                    treeNodeChildrenKey = 'items',
-                    treeNodeIdKey = 'id',
-                    checkboxDisabledKey = 'disabled',
-                    treeNodeTitleKey = 'title'
-                  }: ITreeInput) => {
+    treeItems,
+    parentId,
+    treeNodeChildrenKey = 'items',
+    treeNodeIdKey = 'id',
+    checkboxDisabledKey = 'disabled',
+    treeNodeTitleKey = 'title'
+  }: ITreeInput) => {
     forEach(treeItems, (item: ITreeItem) => {
       const node = this.addNode({
         id: item[treeNodeIdKey],
@@ -118,7 +116,7 @@ export class TreeFactory {
         isOpen: !!item.open,
         data: item.data || {},
         originItem: item,
-        isParent: !!item.isParent || !!(item['children'] && item['children'].length > 0),
+        isParent: !!item.isParent || !!(item[treeNodeChildrenKey] && item[treeNodeChildrenKey].length > 0),
         loading: !!item.loading,
         isMatch: !!item.isMatch,
         isHide: !!item.isHide,
@@ -144,7 +142,7 @@ export class TreeFactory {
     return this;
   }
 
-  addNode({id, parentId, ...data}: ITreeNodeData): TreeNode {
+  addNode({ id, parentId, ...data }: ITreeNodeData): TreeNode {
     if (isUndefined(id)) {
       this.idx++;
       id = this.idx;
@@ -181,6 +179,9 @@ export class TreeFactory {
       });
     };
     deleteItems(id);
+    if (parentNode && (!parentNode.data.children || !parentNode.data.children.length)) {
+      parentNode.data.isParent = false;
+    }
     return this;
   }
 
@@ -197,10 +198,14 @@ export class TreeFactory {
     return this;
   }
 
-  closeNodesById(id: number) {
+  closeNodesById(id: number, closeChildren = false) {
     this.nodes[id].data.isOpen = false;
-    if (this.nodes[id].parentId !== undefined) {
-      this.closeNodesById(this.nodes[id].parentId);
+    if (closeChildren) {
+      if (this.nodes[id] && this.nodes[id].data.children) {
+        this.nodes[id].data.children.forEach((node) => {
+          this.closeNodesById(node.id);
+        });
+      }
     }
     return this;
   }
@@ -250,7 +255,7 @@ export class TreeFactory {
   }
 
   private checkParentNodes(node: TreeNode) {
-    const {parentId} = node;
+    const { parentId } = node;
     const parentNode = this.nodes[parentId];
     if (parentNode) {
       const childrenNode = this.getChildrenById(parentId);
@@ -270,12 +275,12 @@ export class TreeFactory {
   }
 
   private checkChildNodes(node: TreeNode, checked: boolean) {
-    const {id} = node;
+    const { id } = node;
     const childrenNode = this.getChildrenById(id);
     if (childrenNode.length > 0) {
       childrenNode.forEach(childNode => {
-        const {id: childId} = childNode;
-        const {data: nodeData} = this.nodes[childId];
+        const { id: childId } = childNode;
+        const { data: nodeData } = this.nodes[childId];
         if (!nodeData.disabled) {
           nodeData.isChecked = checked;
           nodeData.halfChecked = false;
@@ -283,9 +288,9 @@ export class TreeFactory {
         }
         this.checkChildNodes(childNode, checked);
       });
-      const childrenFullCheckedCount = childrenNode.filter(({data: nodeData}) => nodeData.isChecked).length;
+      const childrenFullCheckedCount = childrenNode.filter(({ data: nodeData }) => nodeData.isChecked).length;
       const childrenCheckedCount = childrenNode
-        .filter(({data: nodeData}) => nodeData.isChecked || nodeData.halfChecked).length;
+        .filter(({ data: nodeData }) => nodeData.isChecked || nodeData.halfChecked).length;
       node.data.halfChecked = childrenCheckedCount > 0 && childrenNode.length > childrenFullCheckedCount;
     }
   }
@@ -302,11 +307,7 @@ export class TreeFactory {
   }
 
   activeNodeById(id: number) {
-    forEach(this.nodes, (node) => {
-      if (node.id !== id) {
-        this.nodes[node.id].data.isActive = false;
-      }
-    });
+    this.deactivateAllNodes();
     this.nodes[id].data.isActive = !this.nodes[id].data.isActive;
   }
 
@@ -389,7 +390,6 @@ export class TreeFactory {
       // Test if children matches target recursively, do not hide children if parent is matched.
       const childrenMatched = this.dfs(target, treeChildren, hideUnmatched && !selfMatched).some(_ => !!_);
       if (selfMatched || childrenMatched) {
-        // Open Node if matched target
         if (treeChildren.length > 0) {
           this.openNodesById(treeNode.id);
         }
@@ -401,7 +401,7 @@ export class TreeFactory {
     }
   }
 
-  private addChildNode(parentNode: TreeNode, childNode: TreeNode) {
+  public addChildNode(parentNode: TreeNode, childNode: TreeNode) {
     if (parentNode) {
       Array.isArray(parentNode.data.children) ?
         parentNode.data.children.push(childNode) : parentNode.data.children = [childNode];
@@ -429,11 +429,15 @@ export class TreeFactory {
   public searchTree(target, hideUnmatched = false) {
     target = trim(target);
     this.resetSearchResults();
-    this.dfs(target.toLowerCase(), this._treeRoot, hideUnmatched);
+    return this.dfs(target.toLowerCase(), this._treeRoot, hideUnmatched);
   }
 
   get treeRoot() {
     return this._treeRoot;
   }
-
+  public deactivateAllNodes() {
+    for (const id of Object.keys(this.nodes)) {
+      this.nodes[id].data.isActive = false;
+    }
+  }
 }

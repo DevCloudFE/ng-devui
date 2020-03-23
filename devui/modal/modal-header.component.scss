@@ -1,18 +1,17 @@
-
 @import '../style/theme/color';
 @import '../style/theme/variables';
 @import '../style/mixins/index';
 
-.modal-header{
-    padding: 10px 20px 0 20px;
-    height: 43px;
-    .standard-title {
-      color: $dark1;
-      letter-spacing: 0;
-      font-size: 16px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+.modal-header {
+  padding: 10px 20px 0 20px;
+  height: 43px;
+  .standard-title {
+    color: $dark-1;
+    letter-spacing: 0;
+    font-size: 16px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 }
 
@@ -22,11 +21,40 @@ button.close {
   font-weight: bold;
   line-height: 1;
   color: #000;
-  text-shadow: 0 1px 0 $white;
+  text-shadow: 0 1px 0 $bg-white;
   filter: alpha(opacity=20);
   opacity: 0.2;
   cursor: pointer;
   background: transparent;
   border: 0;
   -webkit-appearance: none;
+}
+
+svg.svg-icon-close > g > g {
+  fill: $dark-1;
+}
+
+.header-alert-icon {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+.title-text {
+  font-size: 16px;
+  font-weight: 600;
+  vertical-align: middle;
+}
+button {
+  outline: none;
+  height: 30px;
+  width: 30px;
+}
+.close:hover {
+  background: $hover-content;
+  svg g {
+    fill: $hover-control;
+  }
 }

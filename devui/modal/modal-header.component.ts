@@ -13,6 +13,8 @@ import {
 export class ModalHeaderComponent {
   @Input() title: string;
   @Output() closeEvent: EventEmitter<any> = new EventEmitter();
+  @Input() dialogtype = 'standard';
+  @Input() showCloseBtn: boolean;
   close(event) {
     this.closeEvent.emit(event);
   }

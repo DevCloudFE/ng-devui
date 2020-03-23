@@ -1,0 +1,148 @@
+<div class="devui-month-view {{ cssClass }}">
+  <table class="devui-table devui-month-view-table">
+    <thead>
+      <tr class="devui-calender-header">
+        <td>
+          <a
+            class="devui-btn-link"
+            aria-hidden="true"
+            (click)="onPreYear()"
+            [ngClass]="{ 'devui-year-month-disabled': !hasPreYearOption() }"
+          >
+            <span class="left-triangle"></span>
+            <span class="left-triangle second"></span>
+          </a>
+        </td>
+        <td>
+          <a
+            class="devui-btn-link devui-btn-left"
+            aria-hidden="true"
+            (click)="onPreMonth()"
+            [ngClass]="{ 'devui-year-month-disabled': !hasPreMonth() }"
+          >
+            <svg
+              width="16px"
+              height="16px"
+              viewBox="0 0 16 16"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+            >
+              <g id="collapse-left" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g>
+                  <polygon
+                    id="left-path"
+                    fill-rule="nonzero"
+                    points="10.7071068 12.2928932 9.29289322 13.7071068 3.58578644 8 9.29289322 2.29289322 10.7071068 3.70710678 6.41421356 8"
+                  ></polygon>
+                </g>
+              </g>
+            </svg>
+          </a>
+        </td>
+        <td colspan="3" class="devui-dropdown">
+          <span class="devui-date-title">{{ (i18nText?.monthsOfYear)[currentMonth] }}</span>
+          <span class="devui-date-title">{{ currentYear }}</span>
+        </td>
+        <td>
+          <a
+            class="devui-btn-link devui-btn-right"
+            aria-hidden="true"
+            (click)="onNextMonth()"
+            [ngClass]="{ 'devui-year-month-disabled': !hasNextMonth() }"
+          >
+            <svg
+              width="16px"
+              height="16px"
+              viewBox="0 0 16 16"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+            >
+              <g id="collapse-right" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g>
+                  <polygon
+                    id="right-path"
+                    fill-rule="nonzero"
+                    points="10.7071068 12.2928932 9.29289322 13.7071068 3.58578644 8 9.29289322 2.29289322 10.7071068 3.70710678 6.41421356 8"
+                  ></polygon>
+                </g>
+              </g>
+            </svg>
+          </a>
+        </td>
+        <td>
+          <a
+            class="devui-btn-link"
+            aria-hidden="true"
+            (click)="onNextYear()"
+            [ngClass]="{ 'devui-year-month-disabled': !hasNextYearOption() }"
+          >
+            <span class="right-triangle"></span>
+            <span class="right-triangle second"></span>
+          </a>
+        </td>
+      </tr>
+      <tr class="small text-center devui-week-header">
+        <td *ngFor="let item of i18nText?.daysOfWeek">{{ item }}</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let week of displayWeeks">
+        <td
+          *ngFor="let day of week"
+          class="devui-day"
+          [ngClass]="{
+            'devui-out-of-month': !day.inMonth,
+            'devui-in-month-day': day.inMonth,
+            active: isSelectDay(day.date),
+            disabled: isDisabledDay(day.date),
+            'devui-in-range': isInRange(day.date)
+          }"
+          (click)="onSelectDate($event, day.date)"
+          (mouseover)="emitHoverDate($event, day.date)"
+        >
+          <div class="devui-calendar-date">{{ day.day }}</div>
+        </td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr class="time-picker-view" *ngIf="showTime">
+        <ng-container *ngIf="!customViewTemplate">
+          <td colspan="4">
+            <div class="devui-timepicker" *ngIf="showTime" [ngClass]="{ 'devui-timepicker-disabled': isDisabledTime() }">
+              <div class="devui-time">
+                <input type="number" [(ngModel)]="currentHour" max="23" min="0" [disabled]="isDisabledTime()" />
+                <div class="devui-btn-nav" *ngIf="!isDisabledTime()">
+                  <div class="btn-up" (click)="timeUp('h')"></div>
+                  <div class="btn-down" (click)="timeDown('h')"></div>
+                </div>
+              </div>
+              <div class="devui-time">
+                <input type="number" class="devui-minutes" [(ngModel)]="currentMinute" max="59" min="0" [disabled]="isDisabledTime()" />
+                <div class="devui-btn-nav" *ngIf="!isDisabledTime()">
+                  <div class="btn-up" (click)="timeUp('m')"></div>
+                  <div class="btn-down" (click)="timeDown('m')"></div>
+                </div>
+              </div>
+              <div class="devui-time">
+                <input type="number" class="devui-seconds" [(ngModel)]="currentSecond" max="59" min="0" [disabled]="isDisabledTime()" />
+                <div class="devui-btn-nav" *ngIf="!isDisabledTime()">
+                  <div class="btn-up" (click)="timeUp('s')"></div>
+                  <div class="btn-down" (click)="timeDown('s')"></div>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td colspan="3" *ngIf="isAuxiliary">
+            <div class="devui-btn-wrapper">
+              <d-button bsStyle="primary" [disabled]="!rangeStart || !rangeEnd" (btnClick)="confirmTime()" bsSize="sm">
+                {{ i18nCommonText?.btnConfirm }}
+              </d-button>
+            </div>
+          </td>
+        </ng-container>
+      </tr>
+    </tfoot>
+  </table>
+</div>

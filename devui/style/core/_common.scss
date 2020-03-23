@@ -5,14 +5,14 @@
 }
 
 .clear-fix {
-  zoom: 1
+  zoom: 1;
 }
 
 .clear-fix:after {
   content: '';
   display: block;
   width: 0;
-  clear: both
+  clear: both;
 }
 
 .devui-close {
@@ -23,7 +23,7 @@
   color: #000;
   text-shadow: 0 1px 0 #fff;
   filter: alpha(opacity=20);
-  opacity: .2;
+  opacity: 0.2;
 
   &:hover,
   &:focus {
@@ -31,7 +31,7 @@
     text-decoration: none;
     cursor: pointer;
     filter: alpha(opacity=50);
-    opacity: .5;
+    opacity: 0.5;
   }
 }
 
@@ -41,4 +41,22 @@ button.devui-close {
   cursor: pointer;
   background: transparent;
   border: 0;
+}
+
+a:hover,
+a:focus {
+  color: $brand-1;
+}
+a:active,
+a:hover {
+  outline: 0;
+}
+
+.devui-link {
+  color: $link;
+  &:hover {
+    color: $hover-control;
+    text-decoration: underline;
+    cursor: pointer;
+  }
 }

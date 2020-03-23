@@ -1,27 +1,25 @@
-<ng-template [ngTemplateOutlet]="uploadedFilesRef ? uploadedFilesRef : default"
-          [ngTemplateOutletContext]="{ $implicit: this, uploadedFiles: uploadedFiles, filePath: filePath, deleteFile: deleteFileProxy}">
+<ng-template
+  [ngTemplateOutlet]="uploadedFilesRef ? uploadedFilesRef : default"
+  [ngTemplateOutletContext]="{ $implicit: this, uploadedFiles: uploadedFiles, filePath: filePath, deleteFile: deleteFileProxy}"
+>
 </ng-template>
 
 <ng-template #default>
-    <table class="devui-table" *ngIf="uploadedFiles.length>0" [style.margin-bottom.px]="0">
-        <tbody>
-        <tr *ngFor="let uploadedFile of uploadedFiles; let index=index;">
-            <td width="50%">
-                <span>{{uploadedFile.name}}</span>
-            </td>
-            <td width="25%">
-                <span>{{UPLOADED}}</span>
-            </td>
-            <td>
-                <d-button
-                        icon="trash"
-                        bsStyle="danger"
-                        bsSize="xs"
-                        (btnClick)="deleteFile(uploadedFile[filePath])">
-                    {{ DELETE }}
-                </d-button>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+  <table class="devui-table" *ngIf="uploadedFiles.length > 0" [style.margin-bottom.px]="0">
+    <tbody>
+      <tr *ngFor="let uploadedFile of uploadedFiles; let index = index">
+        <td width="50%">
+          <span>{{ uploadedFile.name }}</span>
+        </td>
+        <td width="25%">
+          <span>{{ i18nText?.upload }}</span>
+        </td>
+        <td>
+          <d-button icon="trash" bsStyle="danger" bsSize="xs" (btnClick)="deleteFile(uploadedFile[filePath])">
+            {{ i18nText?.delete }}
+          </d-button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </ng-template>

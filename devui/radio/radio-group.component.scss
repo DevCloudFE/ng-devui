@@ -1,7 +1,9 @@
 .devui-radio-horizontal {
   .devui-radio-list-item {
     display: inline-block;
-    padding-right: 20px;
+    padding: 0 5px;
+  }
+  ::ng-deep d-radio {
+    display: inline-block;
   }
 }
-

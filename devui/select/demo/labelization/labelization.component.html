@@ -1,0 +1,72 @@
+<section>
+  <h4>超长换行</h4>
+  <div class="row">
+    <div class="col-md-5">
+      <d-select
+        [overview]="'underlined'"
+        [placeholder]="'please select'"
+        [options]="options3"
+        [isSearch]="true"
+        [readonly]="true"
+        [multiple]="true"
+        [(ngModel)]="select1"
+        [filterKey]="'name'"
+        [extraConfig]="{
+          labelization: { enable: true, overflow: 'multiple-line' }
+        }"
+      ></d-select>
+    </div>
+    <div class="col-md-1">
+      <d-button bsStyle="common" (btnClick)="changeSelect1()">Change default</d-button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-5">
+      <pre>Current Select: {{ select1 | json }}</pre>
+    </div>
+  </div>
+</section>
+<section>
+  <h4>超长单行、出现竖向滚动条</h4>
+  <div class="row">
+    <div class="col-md-5">
+      <d-select
+        [options]="options3"
+        [isSearch]="true"
+        [readonly]="true"
+        [multiple]="true"
+        [(ngModel)]="select2"
+        [filterKey]="'name'"
+        [extraConfig]="{ labelization: { enable: true, overflow: 'scroll-y' } }"
+      ></d-select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-5">
+      <pre>Current Select: {{ select2 | json }}</pre>
+    </div>
+  </div>
+</section>
+<section>
+  <h4>超长单行，配置标签的最大宽度</h4>
+  <div class="row">
+    <div class="col-md-5">
+      <d-select
+        [options]="options3"
+        [isSearch]="true"
+        [readonly]="true"
+        [multiple]="true"
+        [(ngModel)]="select3"
+        [filterKey]="'name'"
+        [extraConfig]="{
+          labelization: { enable: true, labelMaxWidth: '120px' }
+        }"
+      ></d-select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-5">
+      <pre>Current Select: {{ select3 | json }}</pre>
+    </div>
+  </div>
+</section>

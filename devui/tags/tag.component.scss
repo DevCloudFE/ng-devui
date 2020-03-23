@@ -11,7 +11,7 @@
   min-height: 20px;
   font-size: 14px;
   line-height: 20px;
-  color: $dark1;
+  color: $dark-1;
   background-color: $tag-label-bgcolor;
   border-radius: 1px;
   border-width: 0;
@@ -21,11 +21,11 @@
   .remove-button {
     margin-left: 5px;
     font-size: 16px;
-    color: $dark1;
+    color: $dark-1;
     line-height: 20px;
     vertical-align: top;
     cursor: pointer;
-    
+
     &:hover {
       text-decoration: none;
     }
@@ -33,50 +33,50 @@
 }
 
 .blue-w98 {
-  color: #3383FF;
-  background-color: #FBFDFF;
+  color: #3383ff;
+  background-color: #fbfdff;
   border-width: thin;
-  border-color: #E1EDFF;
+  border-color: #e1edff;
 }
 .green-w98 {
-  color: #00B679;
-  background-color: #FAFEFC;
+  color: #00b679;
+  background-color: #fafefc;
   border-width: thin;
-  border-color: #D9F4EB;
+  border-color: #d9f4eb;
 }
 .yellow-w98 {
-  color: #FFAB05;
-  background-color: #FFFDFA;
+  color: #ffab05;
+  background-color: #fffdfa;
   border-width: thin;
-  border-color: #FFF3DA;
+  border-color: #fff3da;
 }
 .orange-w98 {
-  color: #FF7452;
-  background-color: #FFFCFC;
+  color: #ff7452;
+  background-color: #fffcfc;
   border-width: thin;
-  border-color: #FFEAE5;
+  border-color: #ffeae5;
 }
 .pink-w98 {
-  color: #FF8CC3;
-  background-color: #FEFCFF;
+  color: #ff8cc3;
+  background-color: #fefcff;
   border-width: thin;
-  border-color: #F5E8FD;
+  border-color: #f5e8fd;
 }
 .purple-w98 {
-  color: #BC67F0;
-  background-color: #FFFDFE;
+  color: #bc67f0;
+  background-color: #fffdfe;
   border-width: thin;
-  border-color: #FFEEF6;
+  border-color: #ffeef6;
 }
 .turquoise-w98 {
-  color: #00C1DE;
-  background-color: #FAFEFE;
+  color: #00c1de;
+  background-color: #fafefe;
   border-width: thin;
-  border-color: #D9F6FA;
+  border-color: #d9f6fa;
 }
 .olivine-w98 {
-  color: #89BA3E;
-  background-color: #FDFEFB;
+  color: #89ba3e;
+  background-color: #fdfefb;
   border-width: thin;
-  border-color: #EEF5E2;
+  border-color: #eef5e2;
 }

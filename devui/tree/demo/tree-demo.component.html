@@ -9,6 +9,15 @@
     </d-codebox>
   </div>
   <div class="demo-example">
+    <div class="demo-title">自定显示字段</div>
+    <div class="demo-text">
+      通过设置treeNodeTitleKey,自定义树中显示和搜索的关键字
+    </div>
+    <d-codebox id="custom-title-key" [sourceData]="customTitleKeySource">
+      <d-custom-title-key demo></d-custom-title-key>
+    </d-codebox>
+  </div>
+  <div class="demo-example">
     <div class="demo-title">可勾选树</div>
     <div class="demo-text">
       可以进行勾选的树
@@ -27,6 +36,15 @@
     </d-codebox>
   </div>
   <div class="demo-example">
+    <div class="demo-title">搜索过滤</div>
+    <div class="demo-text">
+      通过treeFactory中的searchTree方法可以搜索节点或者过滤节点
+    </div>
+    <d-codebox id="search-filter" [sourceData]="searchFilterSource">
+      <d-search-filter demo></d-search-filter>
+    </d-codebox>
+  </div>
+  <div class="demo-example">
     <div class="demo-title">自定义图标</div>
     <div class="demo-text">
       自定义操作按钮图标、节点图标
@@ -38,7 +56,7 @@
   <div class="demo-example">
     <div class="demo-title">可拖拽树</div>
     <div class="demo-text">
-        通过OperableTree的 dragglable 属性配置子节点的拖拽功能，并支持外部元素拖拽入树
+      通过OperableTree的 dragglable 属性配置子节点的拖拽功能，并支持外部元素拖拽入树
     </div>
     <d-codebox id="draggable" [sourceData]="draggableSource">
       <d-draggable demo></d-draggable>

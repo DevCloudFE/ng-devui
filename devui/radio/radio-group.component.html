@@ -3,14 +3,23 @@
     <ng-container *ngIf="radios.length === 0">
       <li *ngFor="let value of values" class="devui-radio-list-item">
         <label class="devui-radio" [class.active]="value == _value" [class.disabled]="disabled">
-          <input type="radio" class="devui-radio-input" [disabled]="disabled" [name]="name" [id]="name + '-' + value" [value]="value" [checked]="value == _value" (change)="handleChange($event, value)" />
+          <input
+            type="radio"
+            class="devui-radio-input"
+            [disabled]="disabled"
+            [name]="name"
+            [id]="name + '-' + value"
+            [value]="value"
+            [checked]="value == _value"
+            (change)="handleChange($event, value)"
+          />
           <span class="devui-radio-material">
             <svg height="100%" width="100%" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
-              <circle class="outer" cx="512" cy="512" r="486.5" stroke-width="51"/>
-              <circle class="inner" cx="512"  fill-rule="nonzero" cy="512" r="320"/>
+              <circle class="devui-outer" cx="512" cy="512" r="486.5" stroke-width="51" />
+              <circle class="devui-inner" cx="512" fill-rule="nonzero" cy="512" r="320" />
             </svg>
           </span>
-          <span class="devui-radio-label">{{value}}</span>
+          <span class="devui-radio-label">{{ value }}</span>
         </label>
       </li>
     </ng-container>

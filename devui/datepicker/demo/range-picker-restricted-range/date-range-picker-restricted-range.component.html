@@ -1,0 +1,59 @@
+<section style="width: 100%;">
+  <span>日期范围选择器 限制开始和截止范围:</span>
+  <div class="devui-input-group">
+    <input
+      class="devui-input"
+      placeholder="y/MM/dd  -  y/MM/dd"
+      name="dp"
+      [(ngModel)]="dateRange1"
+      (focus)="dateRangePicker1.toggle($event)"
+      autocomplete="off"
+      dDateRangePicker
+      #dateRangePicker1="dateRangePicker"
+      (selectedRangeChange)="getValue($event)"
+      [minDate]="minDate"
+      [maxDate]="maxDate"
+    />
+    <div class="devui-input-group-addon" (click)="dateRangePicker1.toggle($event, true)">
+      <i class="icon icon-calendar"></i>
+    </div>
+  </div>
+
+  <span>日期范围选择器 限制开始范围:</span>
+  <div class="devui-input-group">
+    <input
+      class="devui-input"
+      placeholder="y/MM/dd  -  y/MM/dd"
+      name="dp"
+      [(ngModel)]="dateRange2"
+      (focus)="dateRangePicker2.toggle($event)"
+      autocomplete="off"
+      dDateRangePicker
+      #dateRangePicker2="dateRangePicker"
+      (selectedRangeChange)="getValue($event)"
+      [minDate]="minDate"
+    />
+    <div class="devui-input-group-addon" (click)="dateRangePicker2.toggle($event, true)">
+      <i class="icon icon-calendar"></i>
+    </div>
+  </div>
+
+  <span>日期范围选择器 限制截止范围:</span>
+  <div class="devui-input-group">
+    <input
+      class="devui-input"
+      placeholder="y/MM/dd  -  y/MM/dd"
+      name="dp"
+      [(ngModel)]="dateRange3"
+      (focus)="dateRangePicker3.toggle($event)"
+      autocomplete="off"
+      dDateRangePicker
+      #dateRangePicker3="dateRangePicker"
+      (selectedRangeChange)="getValue($event)"
+      [maxDate]="maxDate"
+    />
+    <div class="devui-input-group-addon" (click)="dateRangePicker3.toggle($event, true)">
+      <i class="icon icon-calendar"></i>
+    </div>
+  </div>
+</section>

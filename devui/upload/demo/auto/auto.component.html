@@ -1,11 +1,12 @@
 <div class="row">
-    <div class="col-md-3">
-        <d-single-upload
-                [fileOptions]="fileOptions1"
-                [uploadOptions]="uploadOptions1"
-                (successEvent)="success($event)"
-                (errorEvent)="error($event)"
-                [autoUpload]="true">
-        </d-single-upload>
-    </div>
+  <div class="col-md-3" style="width: 50%">
+    <d-single-upload
+      [fileOptions]="fileOptions1"
+      [uploadOptions]="uploadOptions1"
+      (successEvent)="success($event)"
+      (errorEvent)="error($event)"
+      [autoUpload]="true"
+    >
+    </d-single-upload>
+  </div>
 </div>

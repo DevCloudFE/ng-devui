@@ -1,4 +1,5 @@
-import { Directive, HostListener, Input, Output, EventEmitter } from '@angular/core';
+import { Directive, HostListener, Input } from '@angular/core';
+import { HttpClient, HttpHeaders, HttpParams, HttpResponse, HttpErrorResponse } from '@angular/common/http';
 
 export class HelperUtils {
   static jumpOuterUrl(url, target = '_blank') {
@@ -77,6 +78,173 @@ export class HelperUtils {
             document.body.removeChild(tempiframe);
       });
       tempform.submit();
+  }
+
+  static downloadFileByHttpClient(
+    httpClient: HttpClient,
+    url: string,
+    option?: {
+      method?: 'POST' | 'GET' | 'post' | 'get',
+      params?: {[property: string]: string},
+      enctype?: 'application/x-www-form-urlencoded' | 'multipart/form-data' | 'text/plain',
+      header?: {
+        [header: string]: string | string[];
+      },
+      responseOption?: 'response' | 'body' | 'json',
+      filename?: string,
+      withCredentials?: boolean,
+      downloadWithoutDispositionHeader?: boolean
+    },
+    onError?: (response) => void,
+    onSuccess?: (response) => void,
+  ) {
+
+    const requestMethod = option && option.method && option.method.toLowerCase() || 'post';
+    const requestHeaderContentType = option.enctype || 'application/x-www-form-urlencoded';
+    const requestParams = option.params ? new HttpParams({
+      fromObject: option.params
+    }) : null;
+
+    const requestUrl = url;
+    const requestOptionParams = requestMethod === 'get' ? requestParams : undefined;
+    const requestBody = requestMethod === 'post' ? requestParams && requestParams.toString() : undefined;
+
+    const responseOption = option.responseOption;
+
+    const requestOption = Object.assign({}, {
+      body: requestBody,
+      observe: 'response',
+      params: requestOptionParams,
+      headers: {
+        'Content-Type': requestHeaderContentType
+      },
+      responseType: 'arraybuffer'
+    }, {
+      headers: option.header
+    });
+
+    const handleResponse = (resOption => {
+      switch (resOption) {
+        case 'response':
+          return (res: HttpResponse<ArrayBuffer>) => res;
+        case 'body':
+          return (res: HttpResponse<ArrayBuffer> | HttpErrorResponse) => {
+            const arrayBuffer = <ArrayBuffer>(<HttpResponse<ArrayBuffer>>res).body || (<HttpErrorResponse>res).error;
+            const body = HelperUtils.utf8ArrayToStr(arrayBuffer);
+            return body;
+          };
+        case 'json':
+        default:
+          return (res: HttpResponse<ArrayBuffer> | HttpErrorResponse) => {
+            const arrayBuffer = <ArrayBuffer>(<HttpResponse<ArrayBuffer>>res).body || (<HttpErrorResponse>res).error;
+            let response;
+            try {
+              const body = HelperUtils.utf8ArrayToStr(arrayBuffer);
+              try {
+                response = JSON.parse(body);
+              } catch (e) {
+                const parser = new DOMParser();
+                const html = parser.parseFromString(body, 'text/html');
+                response = html.body.textContent;
+              }
+            } catch (e) {
+              throw new Error('Parsing Error:' + e);
+            }
+            if (!response) {
+                response = 'Error';
+            }
+            return response;
+          };
+      }
+    })(responseOption);
+
+    const downloadFileFromArrayBuffer = (data: ArrayBuffer, filename: string, contentType: string) => {
+      if (window.navigator && window.navigator.msSaveOrOpenBlob) { // IE11 support
+          const blob = new Blob([data], {type: contentType});
+          window.navigator.msSaveOrOpenBlob(blob, filename);
+      } else {// other browsers
+          if ('download' in document.createElement('a')) {
+            const blob = new Blob([data], {type: contentType});
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(link.href);
+          } else {
+            // not support tag a download attribute use file download, filename won't support
+            const file = new File([data], filename, {type: contentType});
+            const exportUrl = URL.createObjectURL(file);
+            window.location.assign(exportUrl);
+            URL.revokeObjectURL(exportUrl);
+          }
+      }
+    };
+
+    const getFilenameFromDisposition = (disposition: string) => {
+      const filenamePair =  disposition.split(';').filter(str => /^filename=/.test(str.trim())).pop();
+      if (filenamePair) {
+        let str = filenamePair.trim();
+        str = str.split('=')[1];
+        str = str.replace(/['"]/g, '');
+        return decodeURIComponent(str);
+      } else {
+        return null;
+      }
+    };
+
+
+    httpClient.request(requestMethod, requestUrl, requestOption).subscribe((res: HttpResponse<any>) => {
+      const disposition = (<HttpHeaders>res.headers).get('content-disposition');
+      const contentType = (<HttpHeaders>res.headers).get('content-type');
+      if (/^attachment/i.test(disposition) || option.downloadWithoutDispositionHeader ) {
+        const downloadFilename = option.filename || disposition && getFilenameFromDisposition(disposition) || url ;
+        downloadFileFromArrayBuffer(res.body, downloadFilename, contentType);
+        if (onSuccess) {
+          onSuccess(res);
+        }
+      } else {
+        if (onError) {
+          let response;
+          try {
+            response = handleResponse(res);
+          } catch (e) {
+            response = res;
+          }
+          onError(response);
+        }
+      }
+
+    }, err => {
+      if (onError) {
+        let response;
+        try {
+          response = handleResponse(err);
+        } catch (e) {
+          response = err;
+        }
+        onError(response);
+      }
+    });
+  }
+
+  private static utf8ArrayToStr(arrayBuffer) {
+    if (typeof TextDecoder !== 'undefined') {
+      return new TextDecoder('utf-8').decode(arrayBuffer);
+    } else {
+      /**
+       * fallback 方案，无TextDecoder场景使用直接解析，英文无问题，中文会存在乱码
+       * ie 11 下支持中文需要使用MDN推荐的 fastestsmallesttextencoderdecoder以支持TextDecoder
+       * npm install fastestsmallesttextencoderdecoder
+       * polyfill.ts includes
+       * ```
+       * // polyfill for TextDecoder on IE 11
+       * import 'fastestsmallesttextencoderdecoder';
+       * ```
+       */
+      return String.fromCharCode.apply(null, new Uint8Array(arrayBuffer));
+    }
   }
 }
 

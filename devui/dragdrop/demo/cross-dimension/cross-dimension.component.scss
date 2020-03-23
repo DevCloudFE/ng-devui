@@ -1,0 +1,157 @@
+@import '../../../style/theme/color';
+.board {
+  width: 100%;
+  max-height: 500px;
+  overflow: auto;
+  background-color: $gray-3;
+  padding: 5px;
+  .row {
+    display: flex;
+    margin: 10px 0;
+    width: 100%;
+    white-space: nowrap;
+    .col {
+      display: inline-flex;
+      flex-shrink: 0; /* fix ie 11 auto shrink to default value 1 */
+      vertical-align: top;
+      align-items: stretch;
+      min-height: 75px;
+      width: 285px;
+      margin: 0 5px;
+      background-color: $bg-white;
+      box-shadow: 1px 2px 4px 0 $dark-1-boxshadow;
+    }
+  }
+  .row-group {
+    display: block;
+    width: 100%;
+  }
+  .col-group {
+    white-space: nowrap;
+    display: inline-flex;
+    flex-shrink: 0; /* fix ie 11 auto shrink to default value 1 */
+    vertical-align: top;
+    align-items: stretch;
+    .col:last-of-type {
+      margin-right: 10px;
+    }
+  }
+}
+/* 配色 */
+.board {
+  .row.title-row .col {
+    font-weight: bold;
+  }
+  .col.title-col {
+    font-weight: bold;
+  }
+}
+
+/* 行折叠 */
+.board .row.row-collapse {
+  max-height: 100px;
+  .col {
+    max-height: 100%;
+    overflow: hidden;
+  }
+}
+/* 列折叠 */
+.board .col.col-collapse {
+  max-width: 100px;
+  overflow: hidden;
+}
+
+/* 样式修正 */
+.board ::ng-deep .col-group > .drag-placeholder {
+  display: inline-block;
+  vertical-align: top;
+  align-items: stretch;
+  margin: 0 5px;
+}
+
+.board.board-preview {
+  background-color: transparent;
+  opacity: 0.95;
+  overflow: visible;
+  max-height: initial;
+}
+.row.occupied-width {
+  min-width: 100%;
+}
+
+/* 卡片容器 */
+.card-container {
+  width: 100%;
+  height: 100%;
+}
+.list-group .list-group-item {
+  padding: 0 16px;
+}
+.drag-handle {
+  cursor: move;
+  /* fallback if grab cursor is unsupported */
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
+}
+.drag-handle:active {
+  cursor: grabbing;
+  cursor: -moz-grabbing;
+  cursor: -webkit-grabbing;
+}
+.list-group {
+  padding: 10px;
+}
+.list-group > li,
+:host ::ng-deep .list-group > div > li {
+  height: 30px;
+  border: 1px solid #5170ff;
+  border: 1px solid var(--brand-1, #5170ff);
+  color: #293050;
+  color: var(--dark-1, #293050);
+  margin-bottom: 5px;
+  line-height: 30px;
+  background-color: #fff;
+  background-color: var(--white, #fff);
+}
+.list-group > li.selected,
+:host ::ng-deep .list-group > div > li.selected {
+  height: 30px;
+  border: 1px solid #5170ff;
+  border: 1px solid var(--brand-1, #5170ff);
+  color: #5170ff;
+  color: var(--brand-1, #5170ff);
+  margin-bottom: 5px;
+  line-height: 30px;
+  background-color: #e8f0fd;
+  background-color: var(--brand-3, #e8f0fd);
+}
+
+:host::ng-deep .drag-placeholder {
+  border: 1px dashed #5170ff;
+  border: 1px dashed var(--brand-1, #5170ff);
+  margin: 10px 0;
+}
+:host ::ng-deep .show-origin .drag-origin-placeholder:not(.side-drag-origin-placeholder) {
+  border: 1px dashed #cacfd8;
+  border: 1px dashed var(--gray-1, #cacfd8);
+}
+:host ::ng-deep .show-origin .drag-origin-placeholder {
+  margin: 10px 0;
+}
+.show-origin .drop-el ::ng-deep li:first-child + .drag-origin-placeholder,
+:host ::ng-deep .show-origin .drag-origin-placeholder:first-child {
+  margin-top: 0;
+}
+:host ::ng-deep .show-origin .drag-origin-placeholder.hit-origin-placeholder {
+  border-color: #5170ff;
+  border-color: var(--brand-1, #5170ff);
+}
+.show-origin ::ng-deep .drag-origin-placeholder.delay-deletion {
+  animation: origin-placeholder-shrink-to-none 0.2s cubic-bezier(0.86, 0, 0.07, 1) 1 0.05s both;
+}
+@keyframes origin-placeholder-shrink-to-none {
+  to {
+    height: 0px;
+  }
+}

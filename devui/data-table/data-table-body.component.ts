@@ -1,13 +1,6 @@
-import {
-  Component,
-  Input,
-  TemplateRef,
-  SimpleChanges,
-  OnChanges
-} from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, TemplateRef } from '@angular/core';
 import { DataTableComponent } from './data-table.component';
 import { DataTableColumnTmplComponent } from './tmpl/data-table-column-tmpl.component';
-import { DataTableTmplsComponent } from './tmpl/data-table-tmpls.component';
 
 @Component({
   selector: 'd-data-table-body, [dDataTableBody]',
@@ -17,7 +10,7 @@ import { DataTableTmplsComponent } from './tmpl/data-table-tmpls.component';
 })
 export class DataTableBodyComponent implements OnChanges {
   @Input() checkable: boolean;
-  @Input() showDetail: boolean;
+  @Input() showExpandToggle: boolean;
   @Input() allChecked: boolean;
   @Input() selectable: boolean;
   @Input() editModel: string;
@@ -25,9 +18,6 @@ export class DataTableBodyComponent implements OnChanges {
   @Input() dataSource: any[] = [];
   @Input() resizeable: boolean;
   @Input() columns: DataTableColumnTmplComponent[];
-  @Input() checkableColumn: DataTableColumnTmplComponent;
-  @Input() showDetailColumn: DataTableColumnTmplComponent;
-  @Input() dataTableTemplates: DataTableTmplsComponent;
   @Input() detailTemplateRef: TemplateRef<any>;
   @Input() timeout: number;
   @Input() type: string;
@@ -43,7 +33,7 @@ export class DataTableBodyComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes && changes.columns) {
       let columnSpan = this.columns.length;
-      if (this.showDetail) {
+      if (this.showExpandToggle) {
         columnSpan += 1;
       }
       if (this.checkable) {

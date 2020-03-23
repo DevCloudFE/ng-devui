@@ -33,10 +33,7 @@ import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
     TypeComponent,
     PanelDemoComponent,
   ],
-  entryComponents: [
-    PanelDemoComponent,
-  ],
+  entryComponents: [PanelDemoComponent]
 })
-export class PanelDemoModule {
-}
+export class PanelDemoModule { }
 

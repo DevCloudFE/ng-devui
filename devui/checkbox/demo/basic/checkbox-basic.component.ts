@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
     templateUrl: './checkbox-basic.component.html',
     styleUrls: ['./checkbox-basic.component.css']
 })
-export class CheckboxDemoBasicComponent {
+export class CheckboxBasicComponent {
     public checked = false;
     number = 1 ;
 

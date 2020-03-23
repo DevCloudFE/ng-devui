@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { IFileOptions, IUploadOptions } from 'ng-devui';
 
 @Component({
-  selector: 'd-demo-upload-basic',
+  selector: 'd-basic',
   templateUrl: './basic.component.html'
 })
 export class BasicComponent {
@@ -17,7 +17,7 @@ export class BasicComponent {
   };
   uploadedFiles: Array<Object> = [];
   uploadOptions: IUploadOptions = {
-    uri: 'http://localhost:3000/upload',
+    uri: '/upload',
     headers: {},
     additionalParameter: this.additionalParameter,
     maximumSize: 0.5,
@@ -42,7 +42,7 @@ export class BasicComponent {
   }
 
   deleteUploadedFile(filePath: string) {
-    this.http.delete(`http://localhost:9000/files/${filePath}`).subscribe(() => {
+    this.http.delete(`/files/${filePath}`).subscribe(() => {
       console.log(`delete ${filePath}`);
     });
   }

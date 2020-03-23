@@ -1,19 +1,28 @@
 <section>
   <div class="row">
-      <div class="col-md-6">
-          <div class="devui-input-group">
-              <input class="devui-input" placeholder="yyyy-MM-dd" (focus)="datePicker1.toggle($event)" name="dp"
-              [(ngModel)]="selectedDate2" autocomplete="off" dDatepicker #datePicker1="datepicker"
-              (selectedDateChange)="getValue($event)" appendToBody>
-              <div class="devui-input-group-addon" (click)="datePicker1.toggle($event)">
-                  <i class="icon icon-calendar"></i>
-              </div>
-          </div>
+    <div class="col-md-6">
+      <div class="devui-input-group">
+        <input
+          class="devui-input"
+          placeholder="y/MM/dd"
+          (focus)="datePicker1.toggle($event)"
+          name="dp"
+          [(ngModel)]="selectedDate2"
+          autocomplete="off"
+          dDatepicker
+          #datePicker1="datepicker"
+          (selectedDateChange)="getValue($event)"
+          appendToBody
+        />
+        <div class="devui-input-group-addon" (click)="datePicker1.toggle($event)">
+          <i class="icon icon-calendar"></i>
+        </div>
       </div>
+    </div>
   </div>
   <div class="row">
-      <div class="col-md-6">
-        <pre>{{((selectedDate2 ? selectedDate2 : null)| dDatePipe : 'YYYY-MM-DD HH:mm:ss') || 'No date select!'}}</pre>
-      </div>
+    <div class="col-md-6">
+      <pre>{{ ((selectedDate2 ? selectedDate2 : null) | dDatePipe) || 'No date select!' }}</pre>
+    </div>
   </div>
 </section>

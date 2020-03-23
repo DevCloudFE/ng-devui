@@ -12,12 +12,9 @@ import { DataTableBodyComponent } from './data-table-body.component';
 import { DataTableHeadComponent } from './data-table-head.component';
 import { DataTableRowComponent } from './data-table-row.component';
 import { DataTableHeadTmplComponent } from './tmpl/data-table-head-tmpl.component';
-import { DataTableCellFilterTmplComponent } from './tmpl/data-table-cell-filter-tmpl.component';
 import { DataTableFootTmplComponent } from './tmpl/data-table-foot-tmpl.component';
 import { DataTableFootComponent } from './data-table-foot.component';
 import { PaginationModule } from 'ng-devui/pagination';
-import { DataTableTmplsComponent } from './tmpl/data-table-tmpls.component';
-import { DataTableCellTmplComponent } from './tmpl/data-table-cell-tmpl.component';
 import { DataTablePagerComponent } from './data-table-pager.component';
 import { DataTablePagerTmplComponent } from './tmpl/data-table-pager-tmpl.component';
 import { DataTableHeadCellTmplComponent } from './tmpl/data-table-head-cell-tmpl.component';
@@ -25,17 +22,17 @@ import { DCommonModule } from 'ng-devui/common';
 import { DatepickerModule } from 'ng-devui/datepicker';
 import { CheckBoxModule } from 'ng-devui/checkbox';
 import { ResizeableDirective } from './resizeable.directive';
-import { DevUIConfig } from 'ng-devui/devui.config';
 import { ButtonModule } from 'ng-devui/button';
-import { SelectModule } from 'ng-devui/select';
-import { InputNumberModule } from 'ng-devui/input-number';
-import { SearchModule } from 'ng-devui/search';
+import { SelectModule, SelectComponent } from 'ng-devui/select';
+import { InputNumberModule, InputNumberComponent } from 'ng-devui/input-number';
 import { DropDownModule } from 'ng-devui/dropdown';
-import { TreeSelectModule } from 'ng-devui/tree-select';
+import { TreeSelectModule, TreeSelectComponent } from 'ng-devui/tree-select';
 import { SafePipeModule } from 'ng-devui/utils';
 import { DisPlayCellValuePipe } from './display-cell-value.pipe';
-import { DynamicCellTemplatePipe } from './dynamic-cell-template.pipe';
-import { I18nService } from 'ng-devui/utils';
+import { TooltipModule } from 'ng-devui/tooltip';
+import { EditorDirective } from './editor-host.directive';
+import { DataTableCellTmplComponent } from './tmpl/data-table-cell-tmpl.component';
+import { DragDropModule } from 'ng-devui/dragdrop';
 
 @NgModule({
   imports: [
@@ -49,10 +46,11 @@ import { I18nService } from 'ng-devui/utils';
     CheckBoxModule,
     ButtonModule,
     InputNumberModule,
-    SearchModule,
     DropDownModule,
     TreeSelectModule,
-    SafePipeModule
+    SafePipeModule,
+    TooltipModule,
+    DragDropModule
   ],
   exports: [
     DataTableComponent,
@@ -63,15 +61,12 @@ import { I18nService } from 'ng-devui/utils';
     DataTableHeadComponent,
     DataTableCellComponent,
     DataTableHeadTmplComponent,
-    DataTableCellFilterTmplComponent,
     DataTableFootTmplComponent,
     DataTableFootComponent,
-    DataTableTmplsComponent,
     DataTableCellTmplComponent,
     DataTablePagerComponent,
     DataTablePagerTmplComponent,
     DataTableRowComponent,
-    ResizeableDirective,
     DataTableHeadCellTmplComponent
   ],
   declarations: [
@@ -83,20 +78,23 @@ import { I18nService } from 'ng-devui/utils';
     DataTableHeadComponent,
     DataTableCellComponent,
     DataTableHeadTmplComponent,
-    DataTableCellFilterTmplComponent,
     DataTableFootTmplComponent,
     DataTableFootComponent,
-    DataTableTmplsComponent,
     DataTableCellTmplComponent,
     DataTablePagerComponent,
     DataTablePagerTmplComponent,
     DataTableRowComponent,
     ResizeableDirective,
     DataTableHeadCellTmplComponent,
-    DynamicCellTemplatePipe,
-    DisPlayCellValuePipe
+    DisPlayCellValuePipe,
+    EditorDirective
   ],
-  providers: [DevUIConfig, I18nService],
+  entryComponents: [
+    InputNumberComponent,
+    SelectComponent,
+    TreeSelectComponent
+  ],
+  providers: [],
 })
 export class DataTableModule {
 }

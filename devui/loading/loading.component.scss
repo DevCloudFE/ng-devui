@@ -1,5 +1,5 @@
 @import '../style/theme/color';
-.loading-wrapper {
+.devui-loading-wrapper {
   display: flex;
   flex: 1 1 auto;
 }
@@ -7,7 +7,11 @@
   position: absolute;
   z-index: 1001;
 }
-.fix-loading-position{
+.devui-message-wrapper {
+  background: $bg-white;
+  border-radius: 5px;
+}
+.devui-fix-loading-position {
   transform: translate(-50%, -50%);
 }
 .devui-busy-default-sign {
@@ -15,7 +19,7 @@
   display: inline-block;
   z-index: 1001;
   padding: 12px 14px;
-  color: $dark1;
+  color: $dark-1;
 }
 
 .devui-busy-default-text {
@@ -40,37 +44,35 @@
     height: 6px;
     border-radius: 50%;
   }
-  .bar1{
+  .devui-loading-bar1 {
     top: 0;
     left: 0;
-    background:$status-blue;
+    background: $status-blue;
   }
-  .bar2{
+  .devui-loading-bar2 {
     top: 0;
     left: 9px;
-    background:$focus4;
+    background: $brand-4;
   }
-  .bar3{
+  .devui-loading-bar3 {
     top: 9px;
     left: 0;
-    background:$focus4;
-
+    background: $brand-4;
   }
-  .bar4{
+  .devui-loading-bar4 {
     top: 9px;
     left: 9px;
-    background:$status-blue;
+    background: $status-blue;
   }
-
 }
 @keyframes devui-busy-spinner-anim {
   0% {
-    transform:rotate(0deg) scale(1);
+    transform: rotate(0deg) scale(1);
   }
   50% {
-    transform:rotate(135deg) scale(1.5);
+    transform: rotate(135deg) scale(1.5);
   }
   100% {
-     transform:rotate(270deg) scale(1);
+    transform: rotate(270deg) scale(1);
   }
 }

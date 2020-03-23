@@ -5,27 +5,33 @@ import { Component } from '@angular/core';
   templateUrl: './editable-select-demo.component.html',
 })
 export class EditableSelectDemoComponent {
-  editableSelectDemoBasic: Array<DevuiSourceData> = [
-    {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./basic/editable-select-demo-with-source.component.html')},
-    {title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/editable-select-demo-with-source.component.ts')},
+  BasicSource: Array<DevuiSourceData> = [
+    {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./basic/with-source.component.html')},
+    {title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/with-source.component.ts')},
   ];
-  editableSelectDemoSearchFn: Array<DevuiSourceData> = [
+  SearchFnSource: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'xml',
-      code:  require('!!raw-loader!./search-function/editable-select-demo-with-search-function.component.html')},
+      code:  require('!!raw-loader!./search-function/with-search-function.component.html')},
     {title: 'TS', language: 'typescript',
-      code: require('!!raw-loader!./search-function/editable-select-demo-with-search-function.component.ts')},
+      code: require('!!raw-loader!./search-function/with-search-function.component.ts')},
   ];
-  editableSelectDemoAsyncData: Array<DevuiSourceData> = [
+  DisableDataSource: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'xml',
-      code:  require('!!raw-loader!./async-data/editable-select-demo-async-data-with-source.component.html')},
+      code:  require('!!raw-loader!./disable-data/disable-data-with-source.component.html')},
     {title: 'TS', language: 'typescript',
-      code: require('!!raw-loader!./async-data/editable-select-demo-async-data-with-source.component.ts')},
+      code: require('!!raw-loader!./disable-data/disable-data-with-source.component.ts')},
   ];
-  editableSelectDemoAsyncDataSearchFn: Array<DevuiSourceData> = [
+  AsyncDataSearchFnSource: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'xml',
-      code: require('!!raw-loader!./async-data-function/editable-select-demo-async-data-with-function.component.html')},
+      code: require('!!raw-loader!./async-data-function/async-data-with-function.component.html')},
     {title: 'TS', language: 'typescript',
-      code: require('!!raw-loader!./async-data-function/editable-select-demo-async-data-with-function.component.ts')},
+      code: require('!!raw-loader!./async-data-function/async-data-with-function.component.ts')},
+  ];
+  LazyLoadComponentSource: Array<DevuiSourceData> = [
+    {title: 'HTML', language: 'xml',
+      code: require('!!raw-loader!./lazy-load/lazy-load.component.html')},
+    {title: 'TS', language: 'typescript',
+      code: require('!!raw-loader!./lazy-load/lazy-load.component.ts')},
   ];
   constructor() {
   }

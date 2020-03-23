@@ -1,169 +1,185 @@
 import {
-  Renderer2, Directive, ElementRef, HostListener, Input, Output, EventEmitter, OnDestroy, AfterViewInit, HostBinding
+    Renderer, Renderer2, Directive, ElementRef, HostListener, Input, Output, EventEmitter, OnDestroy, AfterViewInit, HostBinding, NgZone
 } from '@angular/core';
 import { Subscription, fromEvent } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-
 @Directive({
   selector: '[dResizeable]'
 })
 export class ResizeableDirective implements OnDestroy, AfterViewInit {
-  @HostBinding('class.resizeable') resizeEnabledClass = 'resizeEnabled';
-  @Input() resizeEnabled = true;
+    @HostBinding('class.resizeable') resizeEnabledClass = 'resizeEnabled';
+    @Input() resizeEnabled = true;
 
-  @HostBinding('attr.minWidth')
-  @Input() minWidth: string | number;
+    @Input() unresizable: boolean;
 
-  @HostBinding('attr.maxWidth')
-  @Input() maxWidth: string | number;
-  @Input() resizeBarRefElement: ElementRef;
-  @Input() tableViewRefElement: ElementRef;
+    @HostBinding('attr.minWidth')
+    @Input() minWidth: string | number;
 
-  @Output() resize: EventEmitter<any> = new EventEmitter();
-  element: HTMLElement;
-  subscription: Subscription;
-  resizing = false;
-  resizeNodeEvent: any;
-  resizeOverlay: HTMLElement;
-  // resizeBarNode: HTMLSpanElement;
-  nextElement: any;
-  constructor(element: ElementRef, private renderer: Renderer2) {
-    this.element = element.nativeElement;
-  }
+    @HostBinding('attr.maxWidth')
+    @Input() maxWidth: string | number;
+    @Input() resizeBarRefElement: ElementRef;
+    @Input() tableViewRefElement: ElementRef;
 
-  ngAfterViewInit(): void {
-    if (this.resizeEnabled) {
-      const node = this.renderer.createElement('span');
-      this.renderer.addClass(node, 'resize-handle');
-      this.renderer.appendChild(this.element, node);
-      this.resizeNodeEvent = this.renderer.listen(node, 'click', (event) => event.stopPropagation());
+    @Output() resize: EventEmitter<any> = new EventEmitter();
+    @Output() beginResize: EventEmitter<any> = new EventEmitter();
+    @Output() resizingEvent: EventEmitter<any> = new EventEmitter();
+    element: HTMLElement;
+    subscription: Subscription;
+    resizing = false;
+    resizeNodeEvent: any;
+    resizeOverlay: HTMLElement;
+    // resizeBarNode: HTMLSpanElement;
+    nextElement: any;
+    moveCount: number;
+    initialWidth: number;
+    totalWidth: number;
+    nextElementWidth: number;
+    mouseDownScreenX: number;
+    constructor(element: ElementRef, private renderer: Renderer, private renderer2: Renderer2, private zone: NgZone) {
+        this.element = element.nativeElement;
     }
-  }
 
-  ngOnDestroy(): void {
-    this._destroySubscription();
-    if (this.resizeNodeEvent) {
-      this.resizeNodeEvent();
+    ngAfterViewInit(): void {
+        if (this.resizeEnabled && !this.unresizable) {
+            const node = this.renderer.createElement(this.element, 'span');
+            this.renderer.setElementClass(node, 'resize-handle', true);
+            this.renderer.attachViewAfter(this.element, node);
+            this.resizeNodeEvent = this.renderer.listen(node, 'click', (event) => event.stopPropagation());
+        }
     }
-  }
 
-  onMouseup(event: MouseEvent, initialWidth: number, mouseDownScreenX: number): void {
-    const movementX = event.clientX - mouseDownScreenX;
-    const newWidth = initialWidth + movementX;
-    const nextElement = this.element.nextElementSibling;
-
-    const minWidth = this.handleWidth(this.minWidth);
-    const maxWidth = this.handleWidth(this.maxWidth);
-
-    const overMinWidth = !this.minWidth || newWidth >= minWidth;
-    const underMaxWidth = !this.maxWidth || newWidth <= maxWidth;
-
-    let finalWidth = !overMinWidth ? minWidth : (!underMaxWidth ? maxWidth : newWidth);
-    if (this.nextElement) {
-      let nextWidth = this.nextElement.clientWidth + initialWidth - finalWidth;
-      const nMinWidth = this.handleWidth(this.nextElement.getAttribute('minWidth'));
-      nextWidth = (!nMinWidth || nextWidth >= nMinWidth) ? nextWidth : nMinWidth;
-      finalWidth = this.nextElement.clientWidth - nextWidth + initialWidth;
-      this.renderer.setStyle(this.nextElement, 'width', `${nextWidth}px`);
+    ngOnDestroy(): void {
+        this._destroySubscription();
+        if (this.resizeNodeEvent) {
+            this.resizeNodeEvent();
+        }
     }
-    this.renderer.setStyle(this.element, 'width', `${finalWidth}px`);
-    this.resizing = false;
 
-    // destroy overlay
-    // this.renderer.detachView([this.resizeOverlay]);
-    // this.renderer.destroyView(this.element, [this.resizeOverlay]);
-    this.renderer.removeChild(this.element, this.resizeOverlay);
+    onMouseup(event: MouseEvent): void {
+        this.zone.run(() => {
+            const movementX = event.clientX - this.mouseDownScreenX;
+            const newWidth = this.initialWidth + movementX;
 
+            const finalWidth = this.getFinalWidth(newWidth);
+            this.setElementWidth(finalWidth);
+            this.resizing = false;
 
-    this.renderer.setStyle(this.tableViewRefElement.nativeElement, '-webkit-user-select', null);
-    this.renderer.setStyle(this.tableViewRefElement.nativeElement, '-moz-user-select', null);
-    this.renderer.setStyle(this.tableViewRefElement.nativeElement, '-ms-user-select', null);
-    this.renderer.setStyle(this.tableViewRefElement.nativeElement, 'user-select', null);
-    this.renderer.setStyle(this.tableViewRefElement.nativeElement, 'cursor', null);
+            // destroy overlay
+            this.renderer.detachView([this.resizeOverlay]);
+            // this.renderer.destroyView(this.element, [this.resizeOverlay]);
+            this.renderer2.removeChild(this.element, this.resizeOverlay);
 
-    if (this.subscription && !this.subscription.closed) {
-      this._destroySubscription();
-      this.resize.emit(this.element.style.width);
-      this.renderer.setStyle(this.resizeBarRefElement.nativeElement, 'display', 'none');
+            this.renderer.setElementClass(this.tableViewRefElement.nativeElement, 'table-view-selector', false);
+
+            this.renderer.setElementClass(this.element, 'hover-bg', false);
+            this.renderer.setElementStyle(this.resizeBarRefElement.nativeElement, 'display', 'none');
+
+            this.resize.emit({width: finalWidth, nextElementWidth: this.nextElementWidth});
+        });
+        if (this.subscription && !this.subscription.closed) {
+            this._destroySubscription();
+        }
+
+        window.document.removeEventListener('mousemove', this.bindMousemove);
     }
-  }
 
-  @HostListener('mousedown', ['$event'])
-  onMousedown(event: MouseEvent): void {
-    const isHandle = (<HTMLElement>(event.target)).classList.contains('resize-handle');
+    @HostListener('mousedown', ['$event'])
+    onMousedown(event: MouseEvent): void {
+        this.moveCount = 0;
+        const isHandle = (<HTMLElement>(event.target)).classList.contains('resize-handle');
 
-    if (isHandle) {
-      const initialWidth = this.element.clientWidth;
-      const initialOffset = this.element.offsetLeft;
-      const mouseDownScreenX = event.clientX;
-      event.stopPropagation();
-      this.nextElement = this.element.nextElementSibling;
-      this.resizing = true;
+        if (isHandle && !this.unresizable) {
+            this.beginResize.emit(event); // emit begin resize event
 
-      // create resizeOverlay
-      this.resizeOverlay = this.renderer.createElement('div');
-      this.renderer.addClass(this.resizeOverlay, 'resize-overlay');
-      this.renderer.listen(this.resizeOverlay, 'click', (ev: Event) => ev.stopPropagation());
+            this.initialWidth = this.element.clientWidth;
+            const initialOffset = this.element.offsetLeft;
+            this.mouseDownScreenX = event.clientX;
+            event.stopPropagation();
+            this.nextElement = this.element.nextElementSibling;
+            this.resizing = true;
+            this.totalWidth = this.nextElement ? this.initialWidth + this.nextElement.clientWidth : this.initialWidth;
 
-      this.renderer.setStyle(this.tableViewRefElement.nativeElement, '-webkit-user-select', 'none');
-      this.renderer.setStyle(this.tableViewRefElement.nativeElement, '-moz-user-select', 'none');
-      this.renderer.setStyle(this.tableViewRefElement.nativeElement, '-ms-user-select', 'none');
-      this.renderer.setStyle(this.tableViewRefElement.nativeElement, 'user-select', 'none');
-      this.renderer.setStyle(this.tableViewRefElement.nativeElement, 'cursor', 'col-resize');
+            // create resizeOverlay
+            this.resizeOverlay = this.renderer.createElement(this.element, 'div');
+            this.renderer.setElementClass(this.resizeOverlay, 'resize-overlay', true);
+            this.renderer.listen(this.resizeOverlay, 'click', (clickEvent: Event) => clickEvent.stopPropagation());
 
-      this.renderer.setStyle(this.resizeBarRefElement.nativeElement, 'display', 'block');
-      this.renderer.setStyle(this.resizeBarRefElement.nativeElement, 'left',
-        (initialOffset + initialWidth) + 'px');
+            this.renderer.setElementClass(this.tableViewRefElement.nativeElement, 'table-view-selector', true);
 
-      const mouseup = fromEvent(document, 'mouseup');
-      this.subscription = mouseup
-        .subscribe((ev: MouseEvent) => this.onMouseup(ev, initialWidth, mouseDownScreenX));
+            this.renderer.setElementStyle(this.resizeBarRefElement.nativeElement, 'display', 'block');
+            this.renderer.setElementStyle(this.resizeBarRefElement.nativeElement, 'left',
+                (initialOffset + this.initialWidth) + 'px');
 
-      const mouseMoveSub = fromEvent(document, 'mousemove')
-        .pipe(
-          takeUntil(mouseup)
-        )
-        .subscribe((ev: MouseEvent) => this.move(ev, initialWidth, mouseDownScreenX));
+            this.renderer.setElementClass(this.element, 'hover-bg', true);
 
-      this.subscription.add(mouseMoveSub);
+            const mouseup = fromEvent(document, 'mouseup');
+            this.subscription = mouseup
+                .subscribe((ev: MouseEvent) => this.onMouseup(ev));
+
+            this.zone.runOutsideAngular(() => {
+                window.document.addEventListener('mousemove', this.bindMousemove);
+            });
+        }
     }
-  }
 
-  move(event: MouseEvent, initialWidth: number, mouseDownScreenX: number): void {
-    const movementX = event.clientX - mouseDownScreenX;
-    const newWidth = initialWidth + movementX;
-
-    const minWidth = this.handleWidth(this.minWidth);
-    const maxWidth = this.handleWidth(this.maxWidth);
-
-    const overMinWidth = !this.minWidth || newWidth >= minWidth;
-    const underMaxWidth = !this.maxWidth || newWidth <= maxWidth;
-
-    if (!overMinWidth) {
-      this.renderer.setStyle(this.resizeBarRefElement.nativeElement, 'left', `${minWidth + this.element.offsetLeft}px`);
-    } else if (!underMaxWidth) {
-      // this.renderer.setStyle(this.resizeBarNode, 'left', `${maxWidth}px`);
-      this.renderer.setStyle(this.resizeBarRefElement.nativeElement, 'left', `${maxWidth + this.element.offsetLeft}px`);
-    } else {
-      // this.renderer.setStyle(this.resizeBarNode, 'left', `${newWidth - 3}px`);
-      this.renderer.setStyle(this.resizeBarRefElement.nativeElement, 'left', `${newWidth + this.element.offsetLeft}px`);
+    bindMousemove = (e) => {
+        this.move(e);
     }
-  }
 
-  private handleWidth(width: string | number) {
-    if (!width) {
-      return;
-    }
-    if (typeof width === 'number') {
-      return width;
-    }
-    return parseInt(width.replace(/[^\d]+/, ''), 10);
-  }
+    move(event: MouseEvent): void {
+        this.moveCount++;
+        if (this.moveCount % 2 === 0 ) {  return; }
 
-  private _destroySubscription() {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-      this.subscription = undefined;
+        const movementX = event.clientX - this.mouseDownScreenX;
+        const newWidth = this.initialWidth + movementX;
+
+        const finalWidth = this.getFinalWidth(newWidth);
+        this.setElementWidth(finalWidth);
+        this.renderer.setElementStyle(this.resizeBarRefElement.nativeElement, 'left', `${finalWidth + this.element.offsetLeft}px`);
+        this.resizingEvent.emit({ width: finalWidth, nextElementWidth: this.nextElementWidth });
     }
-  }
+
+    private setElementWidth(finalWidth: number) {
+        if (this.nextElement) {
+            this.renderer.setElementStyle(this.nextElement, 'width', `${this.nextElementWidth}px`);
+        }
+        this.renderer.setElementStyle(this.element, 'width', `${finalWidth}px`);
+    }
+
+    private getFinalWidth(newWidth: number): number {
+        const minWidth = this.handleWidth(this.minWidth);
+        const maxWidth = this.handleWidth(this.maxWidth);
+
+        const overMinWidth = !this.minWidth || newWidth >= minWidth;
+        const underMaxWidth = !this.maxWidth || newWidth <= maxWidth;
+
+        let finalWidth = !overMinWidth ? minWidth : (!underMaxWidth ? maxWidth : newWidth);
+        if (this.nextElement) {
+            const nextWidth = this.totalWidth - finalWidth;
+            const nMinWidth = this.handleWidth(this.nextElement.getAttribute('minWidth'));
+            this.nextElementWidth = (!nMinWidth || nextWidth >= nMinWidth) ? nextWidth : nMinWidth;
+            finalWidth =  this.totalWidth - this.nextElementWidth;
+        }
+        return finalWidth;
+    }
+
+    private handleWidth(width: string | number) {
+        if (!width) {
+            return;
+        }
+        if (typeof width === 'number') {
+            return width;
+        }
+        if (width.includes('%')) {
+            const tableWidth = this.tableViewRefElement.nativeElement.clientWidth;
+            return tableWidth * parseInt(width, 10) / 100;
+        }
+        return parseInt(width.replace(/[^\d]+/, ''), 10);
+    }
+
+    private _destroySubscription() {
+        if (this.subscription) {
+            this.subscription.unsubscribe();
+            this.subscription = undefined;
+        }
+    }
 }

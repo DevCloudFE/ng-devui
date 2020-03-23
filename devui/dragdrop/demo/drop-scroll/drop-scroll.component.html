@@ -1,0 +1,42 @@
+<section [ngClass]="{ 'show-drop-area': showDropScrollArea }">
+  <h3>拖拽元素到滚动条边缘区块触发滚动</h3>
+  <div class="drop-row devui-scrollbar" dDropScrollEnhanced [direction]="'h'" [dropScrollScope]="['mutiple-group', 'drag-follow']">
+    <div class="drop-col" *ngFor="let list of lists">
+      <div class="card card-outline-primary mb-3" dDroppable [dropScope]="'mutiple-group'" (dropEvent)="onDrop($event, list.list)">
+        <div class="card-header">{{ list.name }}</div>
+        <div class="card-block">
+          <ul
+            class="list-group drop-el devui-scrollbar"
+            dSortable
+            dDropScrollEnhanced
+            [direction]="'v'"
+            [responseEdgeWidth]="'20px'"
+            [dropScrollScope]="'mutiple-group'"
+          >
+            <li
+              dDraggable
+              *ngFor="let item of list.list"
+              [dragScope]="'mutiple-group'"
+              [dragHandleClass]="'drag-handle'"
+              [dragData]="{ item: item, parent: list.list }"
+              class="list-group-item over-flow-ellipsis"
+            >
+              {{ item.name }}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <d-toggle [(ngModel)]="showDropScrollArea"></d-toggle> 显示拖拽滚动感应区域
+  <ng-container *ngIf="showDropScrollArea">
+    <div>
+      <span class="color-example active" style="display:inline-block; width: 25px;height: 14px"></span>
+      活跃区域，拖拽可触发滚动
+    </div>
+    <div>
+      <span class="color-example inactive" style="display:inline-block; width: 25px;height: 14px"></span>
+      非活跃区域，拖拽元素会放在其下的元素
+    </div>
+  </ng-container>
+</section>

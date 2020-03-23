@@ -1,34 +1,105 @@
 <section>
-  <div class="btn-group g-dropdown" dDropDown (onToggle)="onToggle($event)">
+  <div class="btn-group g-dropdown" dDropDown (ToggleEvent)="onToggle($event)">
     <a dDropDownToggle class="devui-dropdown-default">
       更多操作
-      <span class="devui-caret"></span>
+      <span class="icon-chevron-down"></span>
     </a>
 
-    <ul dDropDownMenu class="dropdown-menu devui-dropdown-menu" role="menu">
+    <ul dDropDownMenu class="devui-dropdown-menu" role="menu">
       <li role="menuitem">
         <input type="text" class="devui-input devui-input-sm" style="width: 120px;" placeholder="输入框" />
       </li>
       <li class="disabled" role="menuitem">
-        <a class="dropdown-item disabled">禁用选项</a>
+        <a class="devui-dropdown-item disabled">禁用选项</a>
       </li>
       <li role="menuitem">
-        <a class="dropdown-item">新建</a>
+        <a class="devui-dropdown-item">新建</a>
       </li>
       <li role="menuitem">
-        <a class="dropdown-item">删除</a>
+        <a class="devui-dropdown-item">删除</a>
       </li>
       <li role="menuitem">
-        <a class="dropdown-item">菜单一</a>
+        <a class="devui-dropdown-item">菜单一</a>
       </li>
       <li class="disabled" role="menuitem">
-        <a class="dropdown-item disabled">菜单二</a>
+        <a class="devui-dropdown-item disabled">菜单二</a>
       </li>
       <li role="menuitem">
-        <a class="dropdown-item">菜单三</a>
+        <a class="devui-dropdown-item">菜单三</a>
       </li>
       <li role="menuitem">
-        <a class="dropdown-item">菜单四</a>
+        <a class="devui-dropdown-item">菜单四</a>
+      </li>
+    </ul>
+  </div>
+</section>
+<section>
+  <div class="btn-group g-dropdown" dDropDown (toggleEvent)="onToggle($event)">
+    <a dDropDownToggle class="devui-dropdown-no-border">
+      更多操作
+      <span class="icon-chevron-down"></span>
+    </a>
+
+    <ul dDropDownMenu class="devui-dropdown-menu devui-scrollbar" role="menu">
+      <li role="menuitem">
+        <input type="text" class="devui-input devui-input-sm" style="width: 120px;" placeholder="输入框" />
+      </li>
+      <li class="disabled" role="menuitem">
+        <a class="devui-dropdown-item disabled">禁用选项</a>
+      </li>
+      <li role="menuitem">
+        <a class="devui-dropdown-item">新建</a>
+      </li>
+      <li role="menuitem">
+        <a class="devui-dropdown-item">删除</a>
+      </li>
+      <li role="menuitem">
+        <a class="devui-dropdown-item">菜单一</a>
+      </li>
+      <li class="disabled" role="menuitem">
+        <a class="devui-dropdown-item disabled">菜单二</a>
+      </li>
+      <li role="menuitem">
+        <a class="devui-dropdown-item">菜单三</a>
+      </li>
+      <li role="menuitem">
+        <a class="devui-dropdown-item">菜单四</a>
+      </li>
+    </ul>
+  </div>
+</section>
+<section>
+  <h5>附着到body上防止被滚动条遮挡</h5>
+  <div class="btn-group g-dropdown" dDropDown appendToBody (toggleEvent)="onToggle($event)">
+    <a dDropDownToggle class="devui-dropdown-default">
+      更多操作
+      <span class="icon-chevron-down"></span>
+    </a>
+
+    <ul dDropDownMenu class="devui-dropdown-menu devui-scrollbar" role="menu">
+      <li role="menuitem">
+        <input type="text" class="devui-input" style="width: 120px;margin-right: 10px;" placeholder="输入框" />
+      </li>
+      <li class="disabled" role="menuitem">
+        <a class="devui-dropdown-item disabled">禁用选项</a>
+      </li>
+      <li role="menuitem">
+        <a class="devui-dropdown-item">新建</a>
+      </li>
+      <li role="menuitem">
+        <a class="devui-dropdown-item">删除</a>
+      </li>
+      <li role="menuitem">
+        <a class="devui-dropdown-item">菜单一</a>
+      </li>
+      <li class="disabled" role="menuitem">
+        <a class="devui-dropdown-item disabled">菜单二</a>
+      </li>
+      <li role="menuitem">
+        <a class="devui-dropdown-item">菜单三</a>
+      </li>
+      <li role="menuitem">
+        <a class="devui-dropdown-item">菜单四</a>
       </li>
     </ul>
   </div>

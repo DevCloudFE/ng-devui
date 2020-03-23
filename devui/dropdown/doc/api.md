@@ -4,18 +4,19 @@
 
 ### dDropDown 参数
 
-| 参数                  | 类型          | 默认            |   说明                          |
-| :-------------------: | :----------: | :-------------: | :----------------------------: |
-| isOpen               | `boolean`       | false          | 可以显示指定dropdown是否打开           |
-| disabled             | `boolean`       | false          | 设置为true禁用dropdown            |
-| trigger              | `'click'\|'hover'` | 'click'        | dropdown触发方式     |
-| closeScope           | `'all'\|'blank'` | 'all'           | 点击关闭区域，blank点击非菜单空白才关闭   |
+| 参数                 | 类型             | 默认           |   说明                           |
+| :------------------: | :-------------: | :------------: | :------------------------------: |
+| isOpen               | `boolean`       | false          | 可选，可以显示指定dropdown是否打开       |
+| disabled             | `boolean`       | false          | 可选，设置为true禁用dropdown            |
+| trigger              | `'click'\|'hover'` | 'click'     | 可选，dropdown触发方式                  |
+| closeScope           | `'all'\|'blank'\|'none'`| 'all'   |可选，点击关闭区域，blank点击非菜单空白才关闭, all点击菜单内外都关闭，none菜单内外均不关闭仅下拉按键可以关闭|
+| closeOnMouseLeaveMenu| `boolean`       | false          | 可选，是否进入菜单后离开菜单的时候关闭菜单 |
 
 ### dDropDown 事件
 
 | 事件                 | 类型         |   说明                          |
 | :-------------------: | :----------: | :----------------------------: |
-| toggleEvent           | `boolean`         | dropdown菜单展开和收起的事件     |
+| toggleEvent           | `EventEmitter<boolean>`         | dropdown菜单展开和收起的布尔值，true表示将要展开，false表示将要关闭     |
 
 ## appendToBody(dDropDown附加指令组件)
 
@@ -23,8 +24,8 @@
 
 | 参数                  | 类型          | 默认            |   说明                          |
 | :-------------------: | :----------: | :-------------: | :----------------------------: |
-| alignOrigin           | `HTMLElement`   | dDropDownToggle所在对象 |指定对齐的对象      |
-| appendToBodyDirections| `Array<AppendToBodyDirection \| ConnectedPosition>`   |`['rightDown', 'leftDown', 'rightUp', 'leftUp']` | 方向数组优先采用数组里靠前的位置 |
+| alignOrigin           | `HTMLElement`   | 可选，dDropDownToggle所在对象 |指定对齐的对象      |
+| appendToBodyDirections| `Array<AppendToBodyDirection \| ConnectedPosition>`   |`['rightDown', 'leftDown', 'rightUp', 'leftUp']` |可选， 方向数组优先采用数组里靠前的位置 |
 
 注意： 使用appendToBody后需要在有滚动条的地方使用`cdkScrollable`
 
@@ -99,9 +100,9 @@ appendToBodyDirections默认的显示顺序为 ['rightDown', 'leftDown', 'rightU
 
 | 参数                  | 类型          | 默认            |   说明                          |
 | :-------------------: | :----------: | :-------------: | :----------------------------: |
-| toggleOnFocus        | `boolean`    | false           | 通过Tab聚焦的时候自动展开      |
-| autoFocus            | `boolean`    | false            | 实例化后自动聚焦      |
+| toggleOnFocus        | `boolean`    | false           | 可选，通过Tab聚焦的时候自动展开      |
+| autoFocus            | `boolean`    | false            | 可选，实例化后自动聚焦      |
 
 ## dDropDownMenu
 
-用在需要展开和关闭的菜单上，参考demo
+用在需要展开和关闭的菜单内容上，参考demo

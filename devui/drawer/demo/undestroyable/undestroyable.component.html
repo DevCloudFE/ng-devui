@@ -1,7 +1,7 @@
 <section>
-    <d-button (click)="openDrawer()">打开侧滑窗</d-button>
-    <div [style.margin-top]="'10px'">
-        <d-button (click)="destroy()" [disabled]="!results?.drawerInstance">手动销毁</d-button>
-        <div [style.margin-top]="'5px'">关闭后可手动销毁，打开状态调用无效</div>
-    </div>
-  </section>
+  <d-button (click)="openDrawer()">打开侧滑窗</d-button>
+  <div [style.margin-top]="'10px'">
+    <d-button (click)="destroy()" [disabled]="!results?.drawerInstance">手动销毁</d-button>
+    <div [style.margin-top]="'5px'">关闭后可手动销毁，打开状态调用无效</div>
+  </div>
+</section>

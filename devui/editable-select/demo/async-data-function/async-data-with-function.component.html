@@ -1,0 +1,5 @@
+<section>
+  <d-button [showLoading]="loading4" (click)="getAsyncData2()" style="margin-bottom: 10px;">click me!</d-button>
+  <d-editable-select [(ngModel)]="selectItem4" [searchFn]="onSearchLocal2" name="multiple-auto"> </d-editable-select>
+  <pre>{{ (selectItem4 | json) || 'No language select!' }}</pre>
+</section>

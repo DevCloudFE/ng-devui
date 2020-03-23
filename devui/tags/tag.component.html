@@ -1,6 +1,5 @@
-<span class="devui-tag-item {{labelStyle}}" [style.display]="deleteTag?'none':'inline-block'">
-  <span *ngIf="!customViewTemplate" title="{{ titleContent ? titleContent:tag }}">{{tag}}</span>
-  <ng-template *ngIf="customViewTemplate" [ngTemplateOutlet]="customViewTemplate"
-    [ngTemplateOutletContext]="{ tag:tag}"></ng-template>
+<span class="devui-tag-item {{ labelStyle }}" [style.display]="deleteTag ? 'none' : 'inline-block'">
+  <span *ngIf="!customViewTemplate" title="{{ titleContent ? titleContent : tag }}">{{ tag }}</span>
+  <ng-template *ngIf="customViewTemplate" [ngTemplateOutlet]="customViewTemplate" [ngTemplateOutletContext]="{ tag: tag }"></ng-template>
   <a class="remove-button" *ngIf="deletable" (click)="removeTag(tag)">×</a>
 </span>

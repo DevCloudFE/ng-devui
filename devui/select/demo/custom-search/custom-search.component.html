@@ -1,0 +1,25 @@
+<section>
+  <h4>单选自定搜索方法</h4>
+  <div class="row">
+    <div class="col-md-5">
+      <d-select [filterKey]="'name'" [(ngModel)]="currentOption1" [searchFn]="onSelectObject" [isSearch]="true"> </d-select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-5">
+      <pre>Current Select: {{ currentOption1 | json }}</pre>
+    </div>
+  </div>
+</section>
+<section>
+  <h4>多选自定搜索方法</h4>
+  <div class="row">
+    <div class="col-md-5">
+      <d-select [filterKey]="'name'" [(ngModel)]="currentOption2" [searchFn]="onSelectObject" [isSearch]="true" [multiple]="true">
+      </d-select>
+    </div>
+    <div class="col-md-5">
+      <pre>Current Select: {{ currentOption2 | json }}</pre>
+    </div>
+  </div>
+</section>

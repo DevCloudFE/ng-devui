@@ -1,22 +1,17 @@
 <div class="demo-container">
-    <div class="demo-example">
-        <div class="demo-title">基本用法</div>
-        <div class="demo-text">
+  <div class="demo-example">
+    <div class="demo-title">基本用法</div>
+    <div class="demo-text"></div>
+    <d-codebox id="components-search-default" [sourceData]="basicSource">
+      <d-basic demo></d-basic>
+    </d-codebox>
+  </div>
 
-        </div>
-        <d-codebox id="components-search-default" [sourceData]="basicSource">
-            <d-basic demo></d-basic>
-        </d-codebox>
-    </div>
-
-    <div class="demo-example">
-      <div class="demo-title">双向绑定</div>
-      <div class="demo-text">
-
-      </div>
-      <d-codebox id="components-search-ngmodel" [sourceData]="ngmodelDemoSource">
-          <d-ngmodel demo></d-ngmodel>
-      </d-codebox>
+  <div class="demo-example">
+    <div class="demo-title">双向绑定</div>
+    <div class="demo-text"></div>
+    <d-codebox id="components-search-ngmodel" [sourceData]="ngmodelDemoSource">
+      <d-ngmodel demo></d-ngmodel>
+    </d-codebox>
   </div>
 </div>
-

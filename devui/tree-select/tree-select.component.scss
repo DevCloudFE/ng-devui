@@ -1,25 +1,96 @@
 @import '../style/theme/color';
 
-.tree-select {
+.devui-tree-select {
   position: relative;
   width: 100%;
 
-  input.select-input {
+  input.devui-select-input {
     cursor: pointer;
     display: inline-block;
     width: 100%;
-    color: $dark1;
+    color: $dark-1;
     text-overflow: ellipsis;
+    &.devui-tree-select-input {
+      padding: 5px 2em 5px 10px;
+    }
+  }
+  &:hover {
+    & .clear {
+      position: absolute;
+      height: 14px;
+      width: 14px;
+      right: 12px;
+      top: calc((100% - 14px) / 2);
+      cursor: pointer;
+
+      &::after,
+      &::before {
+        position: absolute;
+        content: '';
+        height: 14px;
+        width: 1px;
+        background-color: $dark-1;
+        left: 50%;
+      }
+
+      &::before {
+        transform: rotate(45deg);
+      }
+
+      &::after {
+        transform: rotate(-45deg);
+      }
+
+      &:hover {
+        &::after,
+        &::before {
+          background-color: $dark-1;
+        }
+      }
+    }
+  }
+
+  .devui-select-chevron-icon {
+    right: 12px;
+    top: calc((100% - 14px) / 2);
+    position: absolute;
+    user-select: none;
+    pointer-events: none;
+    svg {
+      transition: transform 0.3s;
+    }
+
+    &.open svg {
+      transform: rotate(180deg);
+    }
+    &.clear {
+      opacity: 0;
+    }
+
+    &.disabled {
+      opacity: 0.3;
+    }
+
+    & ::ng-deep g {
+      fill: $dark-1;
+    }
+  }
+
+  &:not(:hover) {
+    .devui-select-chevron-icon:not(.disabled) {
+      opacity: 1;
+      transition: opacity 0.1s linear;
+    }
   }
 }
 
-.tree-select.options-container {
+.devui-tree-select.devui-options-container {
   width: 100%;
-  color: $dark1;
+  color: $dark-1;
   padding: 5px 0;
 
-  .tree ::ng-deep .tree-node.operable-tree-node {
-    .tree-node__content {
+  .devui-tree ::ng-deep .devui-tree-node.devui-operable-tree-node {
+    .devui-tree-node__content {
       margin-left: 10px;
     }
 
@@ -29,9 +100,12 @@
 
     &.selected {
       position: relative;
-
+      -webkit-width: fit-content;
+      -moz-width: fit-content;
+      width: fit-content;
+      min-width: calc(100% - 1.2em); // 当数据无法铺满一行时通过最小宽度使其铺满
       &::after {
-        content: "";
+        content: '';
         position: absolute;
         top: 0;
         left: 0;
@@ -42,9 +116,16 @@
       }
     }
   }
+
+  .devui-no-data-tip {
+    user-select: none;
+    cursor: not-allowed;
+    padding: 5px 12px;
+    opacity: 0.3;
+  }
 }
 
-.tree-select.search-container {
+.devui-tree-select.devui-search-container {
   padding: 5px;
 }
 

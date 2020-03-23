@@ -44,7 +44,7 @@ export class RadioComponent implements OnInit, ControlValueAccessor {
   }
 
   _value: any;
-  handleChange: (evnet: any, value: any) => void;
+  handleChange: (event: any, value: any) => void;
 
   private onChange = (_: any) => null;
   private onTouched = () => null;

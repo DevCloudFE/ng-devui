@@ -7,7 +7,8 @@ import { Component, Input } from '@angular/core';
 export class DrawerContentComponent {
   @Input() items;
   @Input() fullScreen;
-  @Input() onBtnClick;
+  @Input() close;
+  @Input() changeWidth;
   constructor() {
   }
 

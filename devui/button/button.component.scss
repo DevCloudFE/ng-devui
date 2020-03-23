@@ -1,4 +1,245 @@
 @import '../style/mixins/index';
+@import '../style/theme/color';
+@import '../style/theme/variables';
+
+$devui-btn-loading-color: $dark-1;
+$devui-btn-xs-padding: 1px 5px;
+$devui-btn-xs-height: 28px;
+$devui-btn-sm-padding: 5px 10px;
+$devui-btn-sm-height: 30px;
+$devui-btn-padding: 5px 20px;
+$devui-btn-lg-padding: 10px 16px;
+$devui-btn-lg-height: 46px;
+$devui-btn-min-width: 80px;
+$devui-btn-xs-font-size: 12px;
+$devui-btn-sm-font-size: 12px;
+$devui-btn-font-size: 14px;
+$devui-btn-lg-font-size: 18px;
+$devui-btn-height: 32px;
+$devui-btn-line-height: 20px;
+$devui-btn-xs-circled-border-radius: 10px;
+$devui-btn-circled-border-radius: 20px;
+$devui-btn-lg-circled-border-radius: 45px;
+$devui-btn-xs-circled-horizontal-padding: 10px;
+$devui-btn-lg-circled-horizontal-padding: 35px;
+
+$devui-btn-normal-config: (
+  text: (
+    color: $brand-1,
+    padding: 0
+  ),
+  text-dark: (
+    color: $dark-1,
+    padding: 0
+  ),
+  common: (
+    color: $dark-1,
+    min-width: $devui-btn-min-width,
+    background-color: $block-bg-white,
+    border-color: $gray-1
+  ),
+  stress: (
+    color: $font-white,
+    min-width: $devui-btn-min-width,
+    background-color: $brand-1
+  ),
+  primary: (
+    color: $font-white,
+    min-width: $devui-btn-min-width,
+    background-color: $brand-1
+  ),
+  xs: (
+    padding: $devui-btn-xs-padding,
+    height: $devui-btn-xs-height,
+    font-size: $devui-btn-xs-font-size
+  ),
+  sm: (
+    padding: $devui-btn-sm-padding,
+    height: $devui-btn-sm-height,
+    font-size: $devui-btn-sm-font-size
+  ),
+  lg: (
+    padding: $devui-btn-lg-padding,
+    height: $devui-btn-lg-height,
+    font-size: $devui-btn-lg-font-size
+  )
+);
+
+$devui-btn-pseudo-config: (
+  text: (
+    hover: (
+      background-color: transparent,
+      color: $hover-control
+    ),
+    focus: (
+      background-color: transparent,
+      color: $hover-control
+    ),
+    active: (
+      background-color: transparent,
+      color: $brand-2
+    )
+  ),
+  text-dark: (
+    hover: (
+      background-color: transparent,
+      color: $hover-control
+    ),
+    focus: (
+      background-color: transparent,
+      color: $hover-control
+    ),
+    active: (
+      background-color: transparent,
+      color: $brand-2
+    )
+  ),
+  common: (
+    hover: (
+      border-color: $hover-control
+    ),
+    focus: (
+      border-color: $hover-control
+    ),
+    active: (
+      border-color: $brand-2
+    )
+  ),
+  stress: (
+    hover: (
+      background-color: $hover-control
+    ),
+    focus: (
+      background-color: $hover-control
+    ),
+    active: (
+      background-color: $brand-2
+    )
+  ),
+  primary: (
+    hover: (
+      background-color: $hover-control
+    ),
+    focus: (
+      background-color: $hover-control
+    ),
+    active: (
+      background-color: $brand-2
+    )
+  )
+);
+
+.devui-btn {
+  padding: $devui-btn-padding;
+  font-size: $devui-btn-font-size;
+  height: $devui-btn-height;
+  line-height: $devui-btn-line-height;
+  border-radius: 1px;
+  border-width: 1px;
+  border-color: transparent;
+  background-color: transparent;
+
+  @each $type in text, text-dark, common, stress, primary, xs, sm, lg {
+    &.devui-btn-#{$type} {
+      @each $key, $value in map-get($devui-btn-normal-config, $type) {
+        #{$key}: $value;
+      }
+    }
+  }
+
+  @each $type in text, text-dark, common, stress, primary {
+    &.devui-btn-#{$type} {
+      @each $pseudo, $value in map-get($devui-btn-pseudo-config, $type) {
+        &:#{$pseudo} {
+          @each $key, $value2 in map-get(map-get($devui-btn-pseudo-config, $type), $pseudo) {
+            #{$key}: $value2;
+          }
+        }
+      }
+    }
+  }
+
+  &.devui-btn-common {
+    &:disabled {
+      color: $dark-1;
+      opacity: 0.3;
+      background: $block-bg-white;
+      border: 1px solid $gray-1;
+    }
+  }
+
+  &.devui-btn-primary {
+    &:disabled {
+      color: $dark-1;
+      background: $block-bg-white;
+      border: 1px solid $gray-1;
+    }
+  }
+
+  &.devui-btn-text-dark {
+    &:disabled {
+      color: $dark-1;
+      background: $block-bg-white;
+    }
+  }
+
+  &.bordered {
+    &.devui-btn-common {
+      color: $dark-1;
+      border-color: transparent;
+      &:hover,
+      &:focus {
+        border-color: $hover-control;
+      }
+      &:active {
+        border-color: $brand-2;
+      }
+    }
+
+    &.devui-btn-stress,
+    &.devui-btn-primary {
+      border-color: $brand-1;
+      color: $brand-1;
+      background-color: $block-bg-white;
+    }
+
+    &.devui-btn-success {
+      border-color: $status-green;
+      color: $status-green;
+      background-color: $block-bg-white;
+    }
+
+    &.devui-btn-warning {
+      border-color: $status-yellow;
+      color: $status-yellow;
+      background-color: $block-bg-white;
+    }
+
+    &.devui-btn-danger {
+      border-color: $status-red;
+      color: $status-red;
+      background-color: $block-bg-white;
+    }
+  }
+  &.d-btn-icon {
+    &:hover,
+    &:focus {
+      border: 1px solid $hover-content;
+      background-color: $hover-content;
+    }
+    &:disabled {
+      background-color: $block-bg-white;
+    }
+  }
+}
+
+.devui-loading {
+  .devui-loading-default-spinner {
+    div {
+      background-color: $dark-1;
+    }
+  }
+}
 
 :host {
   display: inline-block;
@@ -7,9 +248,22 @@
 .devui-btn {
   transition: all 0.2s;
   border-style: solid;
-  &:disabled, &[disabled] {
+  white-space: nowrap;
+  &:disabled,
+  &[disabled] {
     cursor: not-allowed;
-    opacity: .3;
+    opacity: 0.3;
+  }
+  &.d-btn-icon {
+    padding: 7px 8px;
+    line-height: 1em;
+    border: 1px solid transparent;
+  }
+
+  &:not(.d-btn-icon) {
+    .icon-fix {
+      font-size: 16px;
+    }
   }
 }
 
@@ -39,10 +293,10 @@
       animation: spinner-anim 1s linear infinite;
     }
 
-    @each $i in 1,2,3,4,5,6,7,8,9,10,11,12 {
+    @each $i in 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 {
       .bar#{$i} {
-          transform: rotate(30 * ($i - 1) + deg) translate(0, -142%);
-          animation-delay: -1 + 1 / 12 * ($i - 1) + s;
+        transform: rotate(30 * ($i - 1) + deg) translate(0, -142%);
+        animation-delay: -1 + 1 / 12 * ($i - 1) + s;
       }
     }
   }
@@ -69,3 +323,7 @@
   top: 2px;
 }
 
+.button-content {
+  display: inline-block;
+  vertical-align: top;
+}

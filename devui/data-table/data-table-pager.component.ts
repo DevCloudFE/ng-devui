@@ -1,8 +1,7 @@
-import { Component, ChangeDetectionStrategy, Input, ViewChild } from '@angular/core';
-import { DataTableFootTmplComponent } from './tmpl/data-table-foot-tmpl.component';
-import { DataTableTmplsComponent } from './tmpl/data-table-tmpls.component';
+import { Component, Input } from '@angular/core';
 import { DataTableComponent } from './data-table.component';
 import { DataTablePager } from './data-table.model';
+import { DataTableFootTmplComponent } from './tmpl/data-table-foot-tmpl.component';
 
 @Component({
   selector: 'd-data-table-pager, [dDataTablePager]',
@@ -11,7 +10,6 @@ import { DataTablePager } from './data-table.model';
 })
 export class DataTablePagerComponent {
   @Input() pager: DataTablePager;
-  @Input() dataTableTemplates: DataTableTmplsComponent;
   @Input() pagerTemplate: DataTableFootTmplComponent;
   pagerMaxItems = 8;
 

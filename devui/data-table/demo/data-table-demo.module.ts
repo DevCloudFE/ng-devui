@@ -1,4 +1,3 @@
-
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -21,7 +20,9 @@ import { DatatableDemoMultiHeaderComponent } from './multi-header/data-table-dem
 import { DatatableDemoEditableComponent } from './editable/data-table-demo-editable.component';
 import { TreeDataComponent } from './tree-table/tree-data.component';
 import { ExpandRowComponent } from './expand-row/expand-row.component';
-
+import { FixColumnComponent } from './fix-column/fix-column.component';
+import { DragColumnComponent } from './drag-column/drag-column.component';
+import { I18nModule } from 'ng-devui/i18n';
 
 @NgModule({
   imports: [
@@ -33,6 +34,7 @@ import { ExpandRowComponent } from './expand-row/expand-row.component';
     DevUIApiModule,
     TooltipModule,
     AutoCompleteModule,
+    I18nModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo' },
       { path: 'demo', component: DataTableDemoComponent},
@@ -53,7 +55,9 @@ import { ExpandRowComponent } from './expand-row/expand-row.component';
     DatatableDemoLazyloadDataComponent,
     DatatableDemoEditableComponent,
     TreeDataComponent,
-    ExpandRowComponent
+    ExpandRowComponent,
+    FixColumnComponent,
+    DragColumnComponent
   ],
   providers: [],
   entryComponents: [DataTableDemoComponent]
