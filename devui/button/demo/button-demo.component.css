@@ -1,0 +1,22 @@
+.step-nav {
+    width: 150px;
+}
+
+.step-nav>li {
+    list-style: none;
+    padding: 0;
+    cursor: pointer;
+    height: 30px;
+    line-height: 30px;
+    font-size: 14px;
+    color: #5E6678;
+    position: relative;
+}
+
+.step-nav>li:hover {
+    color: #405DFF;
+}
+
+.step-nav>li.active {
+    color: #5170FF;
+}
