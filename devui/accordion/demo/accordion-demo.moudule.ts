@@ -3,6 +3,8 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
+import { StickyModule } from '../../sticky';
+import { AnchorModule } from '../../anchor';
 import { AccordionModule } from '../accordion.module';
 import { AccordionDemoComponent } from './accordion-demo.component';
 import { BasicComponent } from './basic/basic.component';
@@ -15,9 +17,13 @@ import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
 import { ToggleModule } from 'ng-devui/toggle';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 
 @NgModule({
   imports: [
+    DDemoNavModule,
+    StickyModule,
+    AnchorModule,
     CommonModule,
     AccordionModule,
     ToggleModule,

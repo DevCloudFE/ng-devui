@@ -1,13 +1,14 @@
-<div class="demo-container">
+<div class="demo-container" dAnchorBox [view]="{ top: 60, bottom: 0 }">
+  <<d-demo-nav [navItems]=navItems>></d-demo-nav>
   <div class="demo-example">
-    <div class="demo-title">基本用法</div>
+    <div class="demo-title" [dAnchor]="'basic-usage'">基本用法</div>
     <div class="demo-text"></div>
     <d-codebox id="components-pagination-basic" [sourceData]="basicSource">
       <d-basic demo></d-basic>
     </d-codebox>
   </div>
   <div class="demo-example">
-    <div class="demo-title">极简模式</div>
+    <div class="demo-title" [dAnchor]="'minimalist-model'">极简模式</div>
     <div class="demo-text">
       极简模式适用于一些有大量信息的页面，可以简化页面的复杂度
     </div>
@@ -16,7 +17,7 @@
     </d-codebox>
   </div>
   <div class="demo-example">
-    <div class="demo-title">多种配置</div>
+    <div class="demo-title" [dAnchor]="'multiple-configurations'">多种配置</div>
     <div class="demo-text">
       支持设置输入跳转、显示跳转按钮；设置pageSize等功能
     </div>
@@ -25,7 +26,7 @@
     </d-codebox>
   </div>
   <div class="demo-example">
-    <div class="demo-title">特殊情况</div>
+    <div class="demo-title" [dAnchor]="'exceptional-case'">特殊情况</div>
     <div class="demo-text">
       某些场景导致当前页码大于总页数的时候，建议开发者自己处理，如果不进行处理，可以打开showTruePageIndex开关
     </div>

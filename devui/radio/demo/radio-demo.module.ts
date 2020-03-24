@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
+import { StickyModule } from '../../sticky';
+import { AnchorModule } from '../../anchor';
 import { RadioModule } from '../radio.module';
 import { RadioDemoComponent } from './radio-demo.component';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
@@ -13,14 +15,18 @@ import { VerticalComponent } from './vertical/vertical.component';
 import { CustomComponent } from './custom/custom.component';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 
 @NgModule({
   imports: [
+    DDemoNavModule,
     CommonModule,
     FormsModule,
     RadioModule,
     DevUICodeboxModule,
     DevUIApiModule,
+    StickyModule,
+    AnchorModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo' },
       { path: 'demo', component: RadioDemoComponent},

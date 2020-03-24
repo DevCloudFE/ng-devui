@@ -3,6 +3,7 @@ import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 @Component({
   selector: 'd-drawer-demo',
   templateUrl: './drawer-demo.component.html',
+  styleUrls: ['../../style/core/_nav.scss']
 })
 export class DrawerDemoComponent {
   basicSource: Array<DevuiSourceData> = [
@@ -20,6 +21,12 @@ export class DrawerDemoComponent {
     {title: 'drawerContent-ts', language: 'typescript', code:  require('!!raw-loader!./drawerContent/drawer-content.component.ts')},
     {title: 'drawerContent-css', language: 'css', code:  require('!!raw-loader!./drawerContent/drawer-content.component.css')}
   ];
+
+  navItems = [
+    { dAnchorLink: 'basic-usage', value: "基本用法"},
+    { dAnchorLink: 'do-not-destroy-after-closing', value: "关闭后不销毁"}
+  ]
+
 
   constructor() {
 

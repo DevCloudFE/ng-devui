@@ -3,7 +3,8 @@ import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 
 @Component({
   selector: 'd-avatar-demo',
-  templateUrl: './avatar-demo.component.html'
+  templateUrl: './avatar-demo.component.html',
+  styleUrls: ['../../style/core/_nav.scss']
 })
 
 export class AvatarDemoComponent  {
@@ -22,6 +23,13 @@ export class AvatarDemoComponent  {
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./config/config.component.ts')},
     {title: 'CSS', language: 'css', code:  require('!!raw-loader!./config/config.component.css')}
   ];
+
+  navItems = [
+    { dAnchorLink: 'basic-rules', value: "头像显示的基本规则"},
+    { dAnchorLink: 'basic-configuration', value: "头像的基础配置"},
+    { dAnchorLink: 'special-display', value: "头像的特殊显示"}
+  ]
+  
   constructor() {
   }
 

@@ -10,15 +10,21 @@ import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { ModalModule } from 'ng-devui/modal';
+import { StickyModule } from '../../sticky';
+import { AnchorModule } from '../../anchor';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 
 @NgModule({
     imports: [
+        DDemoNavModule,
         CommonModule,
         FormsModule,
         DevUICodeboxModule,
         DevUIApiModule,
         ToggleModule,
         ModalModule,
+        StickyModule,
+        AnchorModule,
         RouterModule.forChild([
           { path: '',  redirectTo: 'demo' },
           { path: 'demo', component: ToggleDemoComponent},

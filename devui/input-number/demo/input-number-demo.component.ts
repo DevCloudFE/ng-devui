@@ -40,4 +40,17 @@ export class InputNumberDemoComponent {
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./reg/input-number-reg.component.ts') },
     { title: 'CSS', language: 'css', code: require('!!raw-loader!./reg/input-number-reg.component.css') }
   ];
+
+  demoDocViewerMain;
+  
+  navItems = [
+    { dAnchorLink: 'number-basic', value: "基本用法"},
+    { dAnchorLink: 'number-disabled', value: "禁止输入态"},
+    { dAnchorLink: 'number-empty', value: "允许空值"},
+    { dAnchorLink: 'number-placeholder-maxlength', value: "placeholder和maxLength"},
+    { dAnchorLink: 'number-reg', value: "正则限制"}
+  ]
+  constructor() {
+    this.demoDocViewerMain = document.querySelector('.doc-viewer-container .main');
+  }
 }

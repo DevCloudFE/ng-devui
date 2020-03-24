@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { StickyModule } from '../../sticky';
+import { AnchorModule } from '../../anchor';
 import { FormModule } from '../form.module';
 import { FormDemoComponent } from './form-demo.component';
 import { ToggleModule } from 'ng-devui/toggle';
@@ -22,13 +23,16 @@ import { MultiColComponent } from './multi-col/multi-col.component';
 import { FilterComponent } from './filter/filter.component';
 import { BasicComponent } from './basic/basic.component';
 import { ModalComponent } from './modal/modal.component';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 
 
 @NgModule({
   imports: [
+    DDemoNavModule,
     CommonModule,
     FormModule,
     StickyModule,
+    AnchorModule,
     DataTableModule,
     ToggleModule,
     ReactiveFormsModule,

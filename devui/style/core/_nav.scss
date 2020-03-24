@@ -1,0 +1,32 @@
+.nav-main {
+  position: fixed;
+  z-index: 1000;
+  right: 20px;
+  top: 60px;
+}
+
+.step-nav {
+  width: 200px;
+}
+
+.step-nav > li {
+  list-style: none;
+  padding: 0;
+  cursor: pointer;
+  height: 30px;
+  line-height: 30px;
+  font-size: 14px;
+  color: #5e6678;
+  position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.step-nav > li:hover {
+  color: #405dff;
+}
+
+.step-nav > li.active {
+  color: #5170ff;
+}

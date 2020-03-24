@@ -34,7 +34,17 @@ export class RadioDemoComponent {
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./custom/custom.component.ts')}
   ];
 
-  constructor() {
+  demoDocViewerMain;
 
+  navItems = [
+    { dAnchorLink: 'basic-usage', value: "互相独立的单选项"},
+    { dAnchorLink: 'disabled', value: "禁用"},
+    { dAnchorLink: 'horizontal', value: "横向排列"},
+    { dAnchorLink: 'vertical', value: "竖向排列"},
+    { dAnchorLink: 'custom', value: "自定义单选项"}
+  ]
+
+  constructor() {
+    this.demoDocViewerMain = document.querySelector('.doc-viewer-container .main');
   }
 }

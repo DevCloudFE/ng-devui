@@ -6,7 +6,8 @@ import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 
 @Component({
     selector: 'd-demo-search',
-    templateUrl: './search-demo.component.html'
+    templateUrl: './search-demo.component.html',
+    styleUrls: ['../../style/core/_nav.scss']
 })
 export class SearchDemoComponent {
   basicSource: Array<DevuiSourceData> = [
@@ -20,6 +21,11 @@ export class SearchDemoComponent {
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./ngmodel/ngmodel.component.ts')},
     {title: 'CSS', language: 'css', code:  require('!!raw-loader!./ngmodel/ngmodel.component.css')}
   ];
+
+  navItems = [
+    { dAnchorLink: 'basic-usage', value: "基本用法"},
+    { dAnchorLink: 'bidirectional-binding', value: "双向绑定"}
+  ]
 
   constructor() {
 

@@ -11,9 +11,16 @@ import { MenuComponent } from './menu/menu.component';
 import { CustomComponent } from './custom/custom.component';
 import { SearchMenuComponent } from './search-menu/search-menu.component';
 import { BreadCrumbDemoComponent } from './breadcrumb-demo.component';
+import { StickyModule } from '../../sticky';
+import { AnchorModule } from '../../anchor';
+
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 
 @NgModule({
   imports: [
+    DDemoNavModule,
+    StickyModule,
+    AnchorModule,
     CommonModule,
     FormsModule,
     BreadcrumbModule,

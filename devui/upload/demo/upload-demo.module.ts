@@ -14,10 +14,13 @@ import { BasicComponent } from './basic/basic.component';
 import { MultiComponent } from './multi/multi.component';
 import { CustomizeComponent } from './customize/customize.component';
 import { UploadAutoComponent } from './auto/auto.component';
-
+import { StickyModule } from '../../sticky';
+import { AnchorModule } from '../../anchor';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 
 @NgModule({
   imports: [
+    DDemoNavModule,
     CommonModule,
     UploadModule,
     DevUIModule,
@@ -26,6 +29,8 @@ import { UploadAutoComponent } from './auto/auto.component';
     FormsModule,
     HttpClientModule,
     ButtonModule,
+    StickyModule,
+    AnchorModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo' },
       { path: 'demo', component: UploadDemoComponent},

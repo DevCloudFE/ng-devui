@@ -1,49 +1,52 @@
-<div>
-  <div class="demo-container">
-    <div class="demo-example">
-      <div class="demo-title">基本用法</div>
-      <div class="demo-text">
-        传入size可定制大小
+<div class="demo-container" dAnchorBox [view]="{ top: 60, bottom: 0 }">
+  <<d-demo-nav [navItems]=navItems>></d-demo-nav>
+  <div>
+    <div class="demo-container">
+      <div class="demo-example" [dAnchor]="'number-basic'">
+        <div class="demo-title">基本用法</div>
+        <div class="demo-text">
+          传入size可定制大小
+        </div>
+        <d-codebox id="components-input-number-default" [sourceData]="InputNumberBasic">
+          <d-input-number-basic demo></d-input-number-basic>
+        </d-codebox>
       </div>
-      <d-codebox id="components-input-number-default" [sourceData]="InputNumberBasic">
-        <d-input-number-basic demo></d-input-number-basic>
-      </d-codebox>
-    </div>
-    <div class="demo-example">
-      <div class="demo-title">禁止输入态</div>
-      <div class="demo-text">
-        当 disabled 为 true 的时候是禁止用户输入的状态。
+      <div class="demo-example" [dAnchor]="'number-disabled'">
+        <div class="demo-title">禁止输入态</div>
+        <div class="demo-text">
+          当 disabled 为 true 的时候是禁止用户输入的状态。
+        </div>
+        <d-codebox id="components-input-number-disabled" [sourceData]="InputNumberDisabled">
+          <d-input-number-disabled demo></d-input-number-disabled>
+        </d-codebox>
       </div>
-      <d-codebox id="components-input-number-disabled" [sourceData]="InputNumberDisabled">
-        <d-input-number-disabled demo></d-input-number-disabled>
-      </d-codebox>
-    </div>
-    <div class="demo-example">
-      <div class="demo-title">允许空值</div>
-      <div class="demo-text">
-        当 allowEmpty 为 true 的时候允许输入框的值为空，空值返回为 null ，传入数据可以为 undefined 或 null。
+      <div class="demo-example" [dAnchor]="'number-empty'">
+        <div class="demo-title">允许空值</div>
+        <div class="demo-text">
+          当 allowEmpty 为 true 的时候允许输入框的值为空，空值返回为 null ，传入数据可以为 undefined 或 null。
+        </div>
+        <d-codebox id="components-input-number-empty" [sourceData]="InputNumberEmpty">
+          <d-input-number-empty demo></d-input-number-empty>
+        </d-codebox>
       </div>
-      <d-codebox id="components-input-number-empty" [sourceData]="InputNumberEmpty">
-        <d-input-number-empty demo></d-input-number-empty>
-      </d-codebox>
-    </div>
-    <div class="demo-example">
-      <div class="demo-title">placeholder和maxLength</div>
-      <div class="demo-text">
-        可传入placeholder提示，也可以使用maxLength限制最大输入长度。
+      <div class="demo-example" [dAnchor]="'number-placeholder-maxlength'">
+        <div class="demo-title">placeholder和maxLength</div>
+        <div class="demo-text">
+          可传入placeholder提示，也可以使用maxLength限制最大输入长度。
+        </div>
+        <d-codebox id="components-input-number-placeholder-maxLength" [sourceData]="InputNumberPlaceholderAndMaxLengthComponent">
+          <d-input-number-placeholder-maxlength demo></d-input-number-placeholder-maxlength>
+        </d-codebox>
       </div>
-      <d-codebox id="components-input-number-placeholder-maxLength" [sourceData]="InputNumberPlaceholderAndMaxLengthComponent">
-        <d-input-number-placeholder-maxlength demo></d-input-number-placeholder-maxlength>
-      </d-codebox>
-    </div>
-    <div class="demo-example">
-      <div class="demo-title">正则限制</div>
-      <div class="demo-text">
-        允许传入正则或正则字符串限制输入，输入时会优先匹配传入的正则，不输入则不限制。
+      <div class="demo-example" [dAnchor]="'number-reg'">
+        <div class="demo-title">正则限制</div>
+        <div class="demo-text">
+          允许传入正则或正则字符串限制输入，输入时会优先匹配传入的正则，不输入则不限制。
+        </div>
+        <d-codebox id="components-input-number-reg" [sourceData]="InputNumberReg">
+          <d-input-number-reg demo></d-input-number-reg>
+        </d-codebox>
       </div>
-      <d-codebox id="components-input-number-reg" [sourceData]="InputNumberReg">
-        <d-input-number-reg demo></d-input-number-reg>
-      </d-codebox>
     </div>
   </div>
 </div>

@@ -17,9 +17,15 @@ import { DropDownDemoHoverComponent } from './hover/hover.component';
 import { DropDownDemoFocusComponent } from './focus/focus.component';
 import { DropDownDemoClickBlankComponent } from './close-scope/close-scope.component';
 import { DropDownDemoMultiLevelComponent } from './multi-level/multi-level.component';
+import { StickyModule } from '../../sticky';
+import { AnchorModule } from '../../anchor';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 
 @NgModule({
   imports: [
+    DDemoNavModule,
+    StickyModule,
+    AnchorModule,
     CommonModule,
     FormsModule,
     DropDownModule,

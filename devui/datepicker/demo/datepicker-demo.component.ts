@@ -126,4 +126,24 @@ export class DatepickerDemoComponent {
       code: require('!!raw-loader!./two-datepicker-basic/two-datepicker-basic.component.css')
     },
   ];
+
+  demoDocViewerMain;
+  navItems = [
+    { dAnchorLink: 'datepicker-default', value: "基本用法"},
+    { dAnchorLink: 'datepicker-range', value: "范围日期选择器"},
+    { dAnchorLink: 'datepicker-range-basic', value: "日期范围选择器 集成模式"},
+    { dAnchorLink: 'datepicker-range-disabled', value: "日期范围选择器 禁止输入态"},
+    { dAnchorLink: 'datepicker-range-restricted-range', value: "日期范围选择器 可选范围"},
+    { dAnchorLink: 'datepicker-range-time', value: "日期范围选择器 选择时间"},
+    { dAnchorLink: 'datepicker-clear-button', value: "日期范围选择器 自定义操作区、清除"},
+    { dAnchorLink: 'datepicker-range-today', value: "日期范围选择器 自定义操作选择日期"},
+    { dAnchorLink: 'datepicker-format', value: "格式化"},
+    { dAnchorLink: 'custom-view-template', value: "自定义操作区"},
+    { dAnchorLink: 'date-picker-clear-button', value: "自定义清除按钮"},
+    { dAnchorLink: 'date-picker-button', value: "日期选择按钮"},
+    { dAnchorLink: 'two-date-picker-basic', value: "双日期选择器"}
+  ]
+  constructor() {
+    this.demoDocViewerMain = document.querySelector('.doc-viewer-container .main');
+  }
 }

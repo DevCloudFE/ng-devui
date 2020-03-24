@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { InputNumberDemoComponent } from './input-number-demo.component';
+
 import { CommonModule } from '@angular/common';
 import { InputNumberModule } from 'ng-devui/input-number';
 import { FormsModule } from '@angular/forms';
@@ -15,13 +16,20 @@ import { InputNumberEmptyComponent } from './empty/input-number-empty.component'
 import { InputNumberPlaceholderAndMaxLengthComponent } from './placeholderAndMaxLength/input-number-placeholder-maxLength.component';
 import { InputNumberRegComponent } from './reg/input-number-reg.component';
 
+import { StickyModule } from '../../sticky';
+import { AnchorModule } from '../../anchor';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
+
 @NgModule({
   imports: [
+    DDemoNavModule,
     CommonModule,
     DevUIApiModule,
     DevUICodeboxModule,
     InputNumberModule,
     FormsModule,
+    StickyModule,
+    AnchorModule,
     RouterModule.forChild([
       { path: '', redirectTo: 'demo' },
       { path: 'demo', component: InputNumberDemoComponent },

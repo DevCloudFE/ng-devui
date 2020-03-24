@@ -15,8 +15,15 @@ import { CustomizeTmpComponent } from './customize/customize.component';
 import { ScrollElementComponent } from './scroll-element/scroll-element.component';
 import { HoverToContentComponent } from './hover-to-content/hover-to-content.component';
 import { ButtonModule } from 'ng-devui/button';
+import { StickyModule } from '../../sticky';
+import { AnchorModule } from '../../anchor';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
+
 @NgModule({
   imports: [
+    DDemoNavModule,
+    StickyModule,
+    AnchorModule,
     CommonModule,
     PopoverModule,
     FormsModule,

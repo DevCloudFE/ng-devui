@@ -6,7 +6,8 @@ import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 
 @Component({
     selector: 'd-demo-pagination',
-    templateUrl: './pagination-demo.component.html'
+    templateUrl: './pagination-demo.component.html',
+    styleUrls: ['../../style/core/_nav.scss']
 })
 export class PaginationDemoComponent {
   basicSource: Array<DevuiSourceData> = [
@@ -28,6 +29,14 @@ export class PaginationDemoComponent {
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./widgets/widgets.component.html')},
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./widgets/widgets.component.ts')}
   ];
+
+  navItems = [
+    { dAnchorLink: 'basic-usage', value: "基本用法"},
+    { dAnchorLink: 'minimalist-model', value: "极简模式"},
+    { dAnchorLink: 'multiple-configurations', value: "多种配置"},
+    { dAnchorLink: 'exceptional-case', value: "特殊情况"}
+  ]
+
   constructor() {
 
   }

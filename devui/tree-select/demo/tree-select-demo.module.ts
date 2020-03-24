@@ -9,6 +9,8 @@ import {DevUIApiComponent} from 'ng-devui/shared/devui-api/devui-api.component';
 import {DevUIApiModule} from 'ng-devui/shared/devui-api/devui-api.module';
 import {ButtonModule} from 'ng-devui/button';
 import {TreeSelectModule} from 'ng-devui/tree-select';
+import { StickyModule } from '../../sticky';
+import { AnchorModule } from '../../anchor';
 
 import {
   TreeSelectAppendToComponent,
@@ -19,15 +21,18 @@ import {TreeSelectCustomIconComponent} from '../demo/custom-icon/tree-select-cus
 import {TreeSelectHooksComponent} from '../demo/hooks/tree-select-hooks.component';
 import {TreeSelectLeafOnlyComponent} from '../demo/leaf-only/tree-select-leaf-only.component';
 import {TreeSelectSearchableComponent} from '../demo/searchable/tree-select-searchable.component';
-
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 @NgModule({
   imports: [
+    DDemoNavModule,
     CommonModule,
     FormsModule,
     DevUICodeboxModule,
     DevUIApiModule,
     ButtonModule,
     TreeSelectModule,
+    StickyModule,
+    AnchorModule,
     RouterModule.forChild([
       {
         path: '',

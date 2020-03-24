@@ -35,21 +35,17 @@ export class ButtonDemoComponent {
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./text/text.component.ts')}
   ];
 
-  combinationSource: Array<DevuiSourceData> = [
-    {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./combination/combination.component.html')},
-    {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./combination/combination.component.ts')}
-  ];
+  demoDocViewerMain;
+  
+  navItems = [
+    { dAnchorLink: 'button-primary', value: "主要按钮"},
+    { dAnchorLink: 'button-common', value: "次要按钮"},
+    { dAnchorLink: 'button-text', value: "文字按钮"},
+    { dAnchorLink: 'button-loading', value: "加载中状态"},
+    { dAnchorLink: 'tabs-default', value: "图标按钮"}
+  ]
 
-  autofocusSource: Array<DevuiSourceData> = [
-    {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./autofocus/autofocus.component.html')},
-    {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./autofocus/autofocus.component.ts')}
-  ];
-
-  sizeSource: Array<DevuiSourceData> = [
-    {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./size/size.component.html')},
-    {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./size/size.component.ts')}
-  ];
   constructor() {
-
+    this.demoDocViewerMain = document.querySelector('.doc-viewer-container .main');
   }
 }

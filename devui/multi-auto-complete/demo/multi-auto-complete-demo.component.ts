@@ -15,4 +15,15 @@ export class MultiAutoCompleteDemoComponent {
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./array/multi-auto-complete-demo-array.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./array/multi-auto-complete-demo-array.component.ts') },
   ];
+
+  demoDocViewerMain;
+
+
+  navItems = [
+    { dAnchorLink: 'basic-usage', value: "基本用法"},
+    { dAnchorLink: 'auto-complete-array', value: "自定义匹配方法"}
+  ]
+  constructor() {
+    this.demoDocViewerMain = document.querySelector('.doc-viewer-container .main');
+  }
 }

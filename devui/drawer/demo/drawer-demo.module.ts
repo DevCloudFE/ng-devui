@@ -17,10 +17,15 @@ import { BasicComponent } from './basic/basic.component';
 import { DrawerContentComponent } from './drawerContent/drawer-content.component';
 import { UndestroyableComponent } from './undestroyable/undestroyable.component';
 import { ButtonModule } from 'ng-devui/button';
-
+import { StickyModule } from '../../sticky';
+import { AnchorModule } from '../../anchor';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 
 @NgModule({
   imports: [
+    DDemoNavModule,
+    StickyModule,
+    AnchorModule,
     DrawerModule,
     CommonModule,
     ButtonModule,

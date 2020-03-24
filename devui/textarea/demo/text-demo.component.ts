@@ -18,4 +18,15 @@ export class TextDemoComponent {
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./resize/resize.component.ts')},
     {title: 'CSS', language: 'css', code:  require('!!raw-loader!./resize/resize.component.css')}
   ];
+
+  demoDocViewerMain;
+
+  navItems = [
+    { dAnchorLink: 'basic-usage', value: "基本用法"},
+    { dAnchorLink: 'resize', value: "调整大小"}
+  ]
+  
+  constructor() {
+    this.demoDocViewerMain = document.querySelector('.doc-viewer-container .main');
+  }
 }

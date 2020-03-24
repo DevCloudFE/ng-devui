@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
+import { StickyModule } from '../../sticky';
+import { AnchorModule } from '../../anchor';
 import { ButtonModule } from 'ng-devui/button';
 import { TooltipModule } from 'ng-devui/tooltip';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
@@ -11,9 +13,13 @@ import { FullscreenModule } from '../fullscreen.module';
 import { FullscreenDemoComponent } from './fullscreen-demo.component';
 import { FullscreenDemoImmersiveComponent } from './immersive/immersive.component';
 import { FullscreenDemoNormalComponent } from './normal/normal.component';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 
 @NgModule({
   imports: [
+    DDemoNavModule,
+    StickyModule,
+    AnchorModule,
     ButtonModule,
     TooltipModule,
     FullscreenModule,

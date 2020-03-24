@@ -6,7 +6,8 @@ import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 
 @Component({
   selector: 'd-demo-tabs',
-  templateUrl: './tabs-demo.component.html'
+  templateUrl: './tabs-demo.component.html',
+  styleUrls: ['../../style/core/_nav.scss']
 })
 export class TabsDemoComponent {
   basicSource: Array<DevuiSourceData> = [
@@ -45,6 +46,15 @@ export class TabsDemoComponent {
         require('!!raw-loader!./configurable-tabs/tabs-transfer/tabs-transfer.component.ts')
     },
   ];
+
+  navItems = [
+    { dAnchorLink: 'basic-usage', value: "基本用法"},
+    { dAnchorLink: 'no-set-content', value: "不设置内容"},
+    { dAnchorLink: 'custom-template', value: "自定义模板"},
+    { dAnchorLink: 'configuration-type-and-arrangement', value: "配置类型与排列"},
+    { dAnchorLink: 'intercept-tab-switch', value: "拦截tab切换"},
+    { dAnchorLink: 'custom-tabs-display-and-arrangement', value: "自定义Tabs显示与排列"}
+  ]
   constructor() {
 
   }

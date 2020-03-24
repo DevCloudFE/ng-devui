@@ -18,6 +18,13 @@ export class TagsInputDemoComponent {
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./async/async.component.ts')}
   ];
 
+  demoDocViewerMain;
+
+  navItems = [
+    { dAnchorLink: 'tags-input-basic', value: "基本用法"},
+    { dAnchorLink: 'tags-input-async', value: "异步数据源"}
+  ]
   constructor() {
+    this.demoDocViewerMain = document.querySelector('.doc-viewer-container .main');
   }
 }

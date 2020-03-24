@@ -10,6 +10,8 @@ import { DatepickerDemoComponent } from './datepicker-demo.component';
 import { DCommonModule } from 'ng-devui/common';
 import { SelectModule } from 'ng-devui/select';
 import { ButtonModule } from 'ng-devui/button';
+import { StickyModule } from '../../sticky';
+import { AnchorModule } from '../../anchor';
 
 import { DatepickerDemoBasicComponent } from './basic/basic.component';
 import { DatepickerRangeComponent } from './range/datepicker-range.component';
@@ -24,10 +26,11 @@ import { CustomViewTemplateComponent } from './custom-view-template/custom-view-
 import { DatepickerClearButtonComponent } from './clear-button/clear-button.component';
 import { DatepickerButtonComponent } from './button/button.component';
 import { TwoDatepickerBasicComponent } from './two-datepicker-basic/two-datepicker-basic.component';
-
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 
 @NgModule({
   imports: [
+    DDemoNavModule,
     DCommonModule,
     CommonModule,
     FormsModule,
@@ -36,6 +39,8 @@ import { TwoDatepickerBasicComponent } from './two-datepicker-basic/two-datepick
     SelectModule,
     ButtonModule,
     DevUIApiModule,
+    StickyModule,
+    AnchorModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo' },
       { path: 'demo', component: DatepickerDemoComponent},

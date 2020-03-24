@@ -3,7 +3,8 @@ import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 
 @Component({
     selector: 'd-anchor-demo',
-    templateUrl: './anchor-demo.component.html'
+    templateUrl: './anchor-demo.component.html',
+    styleUrls: ['../../style/core/_nav.scss']
 })
 export class AnchorDemoComponent {
   basicSource: Array<DevuiSourceData> = [
@@ -18,6 +19,11 @@ export class AnchorDemoComponent {
     {title: 'CSS', language: 'css', code:  require('!!raw-loader!./async/async.component.css')}
   ];
 
+  navItems = [
+    { dAnchorLink: 'basic-usage', value: "基本用法"},
+    { dAnchorLink: 'asynchronous-loading', value: "异步加载"}
+  ]
+  
   constructor() {
 
   }

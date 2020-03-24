@@ -5,7 +5,8 @@ import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 
   @Component({
     selector: 'd-demo-breadcrumb',
-    templateUrl: './breadcrumb-demo.component.html'
+    templateUrl: './breadcrumb-demo.component.html',
+    styleUrls: ['../../style/core/_nav.scss']
   })
 
   export class BreadCrumbDemoComponent {
@@ -29,7 +30,13 @@ import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
       {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./search-menu/search-menu.component.html')},
       {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./search-menu/search-menu.component.ts')}
     ];
-
+    
+  navItems = [
+    { dAnchorLink: 'basic-breadcrumbs', value: "基础面包屑"},
+    { dAnchorLink: 'drop-down-breadcrumbs', value: "可下拉的面包屑"},
+    { dAnchorLink: 'with-search-drop-down-breadcrumbs', value: "带搜索下拉的面包屑"},
+    { dAnchorLink: 'self-defined-breadcrumbs', value: "自定义下拉列表和分隔符的面包屑"}
+  ]
     constructor() {
 
     }

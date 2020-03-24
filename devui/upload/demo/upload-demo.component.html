@@ -1,38 +1,41 @@
-<div class="demo-container">
-  <div class="demo-example">
-    <div class="demo-title">基本用法</div>
-    <div class="demo-text">
-      单文件上传、拖动文件上传、自动上传
+<div class="demo-container" dAnchorBox [view]="{ top: 60, bottom: 0 }">
+  <<d-demo-nav [navItems]=navItems>></d-demo-nav>
+  <div class="demo-container">
+    <div class="demo-example" [dAnchor]="'basic'">
+      <div class="demo-title">基本用法</div>
+      <div class="demo-text">
+        单文件上传、拖动文件上传、自动上传
+      </div>
+      <d-codebox id="basic" [sourceData]="basicSource">
+        <d-basic demo></d-basic>
+      </d-codebox>
     </div>
-    <d-codebox id="basic" [sourceData]="basicSource">
-      <d-basic demo></d-basic>
-    </d-codebox>
-  </div>
-  <div class="demo-example">
-    <div class="demo-title">多文件上传</div>
-    <div class="demo-text">
-      多文件上传，支持拖动文件上传
+    <div class="demo-example" [dAnchor]="'multi'">
+      <div class="demo-title">多文件上传</div>
+      <div class="demo-text">
+        多文件上传，支持拖动文件上传
+      </div>
+      <d-codebox id="multi" [sourceData]="multiSource">
+        <d-multi demo></d-multi>
+      </d-codebox>
     </div>
-    <d-codebox id="multi" [sourceData]="multiSource">
-      <d-multi demo></d-multi>
-    </d-codebox>
-  </div>
-  <div class="demo-example">
-    <div class="demo-title">自动上传</div>
-    <div class="demo-text">
-      通过 autoUpload 设置自动上传
+    <div class="demo-example" [dAnchor]="'auto'">
+      <div class="demo-title">自动上传</div>
+      <div class="demo-text">
+        通过 autoUpload 设置自动上传
+      </div>
+      <d-codebox id="customize" [sourceData]="autoSource">
+        <d-auto demo></d-auto>
+      </d-codebox>
     </div>
-    <d-codebox id="customize" [sourceData]="autoSource">
-      <d-auto demo></d-auto>
-    </d-codebox>
-  </div>
-  <div class="demo-example">
-    <div class="demo-title">自定义</div>
-    <div class="demo-text">
-      自定义上传按钮，通过 preloadFilesRef 设置已选择文件列表模板， 通过 uploadedFilesRef 设置已上传文件列表模版
+    <div class="demo-example" [dAnchor]="'customize'">
+      <div class="demo-title">自定义</div>
+      <div class="demo-text">
+        自定义上传按钮，通过 preloadFilesRef 设置已选择文件列表模板， 通过 uploadedFilesRef 设置已上传文件列表模版
+      </div>
+      <d-codebox id="customize" [sourceData]="customizeSource">
+        <d-customize demo></d-customize>
+      </d-codebox>
     </div>
-    <d-codebox id="customize" [sourceData]="customizeSource">
-      <d-customize demo></d-customize>
-    </d-codebox>
   </div>
 </div>

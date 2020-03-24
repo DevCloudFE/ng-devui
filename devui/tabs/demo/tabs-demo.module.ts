@@ -17,6 +17,9 @@ import { ConfigComponent } from './config/config.component';
 import { TransferModule } from 'ng-devui/transfer';
 import { DropDownModule } from 'ng-devui/dropdown';
 import { ModalModule } from 'ng-devui/modal';
+import { StickyModule } from '../../sticky';
+import { AnchorModule } from '../../anchor';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 
 
 
@@ -24,6 +27,9 @@ import { ModalModule } from 'ng-devui/modal';
 
 @NgModule({
   imports: [
+    DDemoNavModule,
+    StickyModule,
+    AnchorModule,
     CommonModule,
     TabsModule,
     DropDownModule,

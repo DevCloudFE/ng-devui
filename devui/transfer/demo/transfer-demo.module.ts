@@ -9,18 +9,23 @@ import {TransferDemoSortComponent} from './sort/transfer-demo-sort.component';
 import { TransferDemoComponent } from './transfer-demo.component';
 import {ToggleModule} from 'ng-devui/toggle';
 import {DataTableModule} from 'ng-devui/data-table';
+import { StickyModule } from '../../sticky';
+import { AnchorModule } from '../../anchor';
 
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
-
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 @NgModule({
   imports: [
+    DDemoNavModule,
     CommonModule,
     TransferModule,
     DataTableModule,
     ToggleModule,
     DevUIApiModule,
+    StickyModule,
+    AnchorModule,
     DevUICodeboxModule,
     RouterModule.forChild([
       { path: '', redirectTo: 'demo' },

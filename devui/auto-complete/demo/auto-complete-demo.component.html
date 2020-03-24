@@ -1,47 +1,52 @@
-<div class="demo-container">
-  <div class="demo-example">
-    <div class="demo-title">基础用法</div>
-    <div class="demo-text">
-      通过 source 设置自动完成的数据源
+<div class="demo-container" dAnchorBox [view]="{ top: 60, bottom: 0 }">
+
+  <<d-demo-nav [navItems]=navItems>></d-demo-nav>
+
+  <div class="demo-container">
+    <div class="demo-example" [dAnchor]="'auto-basic'">
+      <div class="demo-title">基础用法</div>
+      <div class="demo-text">
+        通过 source 设置自动完成的数据源
+      </div>
+      <d-codebox id="components-auto-basic" [sourceData]="AutoCompleteDemoBasic">
+        <d-auto-complete-demo-basic demo></d-auto-complete-demo-basic>
+      </d-codebox>
     </div>
-    <d-codebox id="components-auto-basic" [sourceData]="AutoCompleteDemoBasic">
-      <d-auto-complete-demo-basic demo></d-auto-complete-demo-basic>
-    </d-codebox>
-  </div>
-  <div class="demo-example">
-    <div class="demo-title">自定义数据匹配方法</div>
-    <div class="demo-text">
-      通过 searchFn 自定义数据的匹配方法和返回的数据格式
+    <div class="demo-example" [dAnchor]="'auto-object'">
+      <div class="demo-title">自定义数据匹配方法</div>
+      <div class="demo-text">
+        通过 searchFn 自定义数据的匹配方法和返回的数据格式
+      </div>
+      <d-codebox id="components-auto-object" [sourceData]="AutoCompleteDemoObject">
+        <d-auto-complete-demo-object demo></d-auto-complete-demo-object>
+      </d-codebox>
     </div>
-    <d-codebox id="components-auto-object" [sourceData]="AutoCompleteDemoObject">
-      <d-auto-complete-demo-object demo></d-auto-complete-demo-object>
-    </d-codebox>
-  </div>
-  <div class="demo-example">
-    <div class="demo-title">自定义模板展示</div>
-    <div class="demo-text">
-      通过 itemTemplate、noResultItemTemplate 自定义下拉框和无匹配提示
+    <div class="demo-example" [dAnchor]="'auto-custom'">
+      <div class="demo-title">自定义模板展示</div>
+      <div class="demo-text">
+        通过 itemTemplate、noResultItemTemplate 自定义下拉框和无匹配提示
+      </div>
+      <d-codebox id="components-auto-custom" [sourceData]="AutoCompleteDemoCustom">
+        <d-auto-complete-demo-custom demo></d-auto-complete-demo-custom>
+      </d-codebox>
     </div>
-    <d-codebox id="components-auto-custom" [sourceData]="AutoCompleteDemoCustom">
-      <d-auto-complete-demo-custom demo></d-auto-complete-demo-custom>
-    </d-codebox>
-  </div>
-  <div class="demo-example">
-    <div class="demo-title">设置禁用</div>
-    <div class="demo-text">
-      通过 disabled 设置输入框禁用
+    <div class="demo-example" [dAnchor]="'auto-disable'">
+      <div class="demo-title">设置禁用</div>
+      <div class="demo-text">
+        通过 disabled 设置输入框禁用
+      </div>
+      <d-codebox id="components-auto-disable" [sourceData]="AutoCompleteDemoDisable">
+        <d-auto-complete-demo-disable demo></d-auto-complete-demo-disable>
+      </d-codebox>
     </div>
-    <d-codebox id="components-auto-disable" [sourceData]="AutoCompleteDemoDisable">
-      <d-auto-complete-demo-disable demo></d-auto-complete-demo-disable>
-    </d-codebox>
-  </div>
-  <div class="demo-example">
-    <div class="demo-title">最近输入</div>
-    <div class="demo-text">
-      通过 latestSource 设置最近输入
+    <div class="demo-example" [dAnchor]="'auto-latest'">
+      <div class="demo-title">最近输入</div>
+      <div class="demo-text">
+        通过 latestSource 设置最近输入
+      </div>
+      <d-codebox id="components-auto-latest" [sourceData]="AutoCompleteDemoLatest">
+        <d-auto-complete-demo-latest demo></d-auto-complete-demo-latest>
+      </d-codebox>
     </div>
-    <d-codebox id="components-auto-latest" [sourceData]="AutoCompleteDemoLatest">
-      <d-auto-complete-demo-latest demo></d-auto-complete-demo-latest>
-    </d-codebox>
   </div>
 </div>

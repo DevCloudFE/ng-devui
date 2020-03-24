@@ -10,11 +10,17 @@ import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component
 import { BasicComponent } from './basic/basic.component';
 import { SpecialComponent } from './special/special.component';
 import { ConfigComponent } from './config/config.component';
+import { StickyModule } from '../../sticky';
+import { AnchorModule } from '../../anchor';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 
 
 
 @NgModule({
   imports: [
+    DDemoNavModule,
+    StickyModule,
+    AnchorModule,
     CommonModule,
     FormsModule,
     DevUICodeboxModule,

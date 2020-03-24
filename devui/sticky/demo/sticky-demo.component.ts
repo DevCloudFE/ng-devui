@@ -6,7 +6,8 @@ import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 
 @Component({
     selector: 'd-demo-sticky',
-    templateUrl: './sticky-demo.component.html'
+    templateUrl: './sticky-demo.component.html',
+    styleUrls: ['../../style/core/_nav.scss']
 })
 export class StickyDemoComponent {
   basicSource: Array<DevuiSourceData> = [
@@ -15,6 +16,9 @@ export class StickyDemoComponent {
     {title: 'CSS', language: 'css', code:  require('!!raw-loader!./basic/basic.component.css')}
   ];
 
+  navItems = [
+    { dAnchorLink: 'basic-usage', value: "基本用法"}
+  ]
   constructor() {
 
   }

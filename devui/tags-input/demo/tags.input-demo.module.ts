@@ -9,14 +9,20 @@ import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
 import { TagsInputModule } from '../tags.input.module';
 import { TagsInputDemoAsyncComponent } from './async/async.component';
+import { StickyModule, StickyComponent } from '../../sticky';
+import { AnchorModule } from '../../anchor';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 
 @NgModule({
   imports: [
+    DDemoNavModule,
     CommonModule,
     FormsModule,
     TagsInputModule,
     DevUIApiModule,
     DevUICodeboxModule,
+    StickyModule,
+    AnchorModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo' },
       { path: 'demo', component: TagsInputDemoComponent},

@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'd-auto-complete-demo',
-  templateUrl: './auto-complete-demo.component.html'
+  templateUrl: './auto-complete-demo.component.html',
 })
 export class AutoCompleteDemoComponent {
   AutoCompleteDemoBasic: Array<DevuiSourceData> = [
@@ -39,4 +39,18 @@ export class AutoCompleteDemoComponent {
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./latest/auto-complete-demo-latest.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./latest/auto-complete-demo-latest.component.ts') },
   ];
+
+  demoDocViewerMain;
+
+  navItems = [
+    { dAnchorLink: 'basic-usage', value: "基本用法"},
+    { dAnchorLink: 'auto-object', value: "自定义数据匹配方法"},
+    { dAnchorLink: 'auto-custom', value: "自定义模板展示"},
+    { dAnchorLink: 'auto-disable', value: "设置禁用"},
+    { dAnchorLink: 'auto-latest', value: "最近输入"}
+  ]
+
+  constructor() {
+    this.demoDocViewerMain = document.querySelector('.doc-viewer-container .main');
+  }
 }

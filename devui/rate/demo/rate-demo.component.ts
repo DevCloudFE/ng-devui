@@ -25,6 +25,14 @@ export class RateDemoComponent implements OnInit {
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./type/type.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./type/type.component.ts') }
   ];
+
+  navItems = [
+    { dAnchorLink: 'read-only-mode', value: "只读模式"},
+    { dAnchorLink: 'dynamic-mode', value: "动态模式"},
+    { dAnchorLink: 'dynamic-mode-Custom', value: "动态模式-自定义"},
+    { dAnchorLink: 'using-the-type-parameter', value: "使用type参数"}
+  ]
+
   constructor() {
   }
 
