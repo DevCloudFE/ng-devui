@@ -1,14 +1,30 @@
-<section style="width:400px;">
+<section style="width:50%;">
   <h4>多文件上传</h4>
-  <d-multiple-upload #multipleupload [fileOptions]="fileOptions2" [uploadedFiles]="uploadedFiles2" [filePath]="'name'"
-    [uploadOptions]="uploadOptions2" (successEvent)="onSuccess2($event)"
-    (deleteUploadedFileEvent)="deleteUploadedFile2($event)" (errorEvent)="onError2($event)">
+  <d-multiple-upload
+    #multipleupload
+    [fileOptions]="fileOptions2"
+    [uploadedFiles]="uploadedFiles2"
+    [filePath]="'name'"
+    [uploadOptions]="uploadOptions2"
+    (successEvent)="onSuccess2($event)"
+    (deleteUploadedFileEvent)="deleteUploadedFile2($event)"
+    (errorEvent)="onError2($event)"
+  >
   </d-multiple-upload>
   <h4>多文件支持拖动上传</h4>
-  <d-multiple-upload #multipleupload [enableDrop]="true" [fileOptions]="fileOptions2" [uploadedFiles]="uploadedFiles2"
-    [filePath]="'name'" [uploadOptions]="uploadOptions2" (successEvent)="onSuccess2($event)"
-    (deleteUploadedFileEvent)="deleteUploadedFile2($event)" (errorEvent)="onError2($event)" (fileDrop)="fileDrop($event)"
-    (fileOver)="fileOver($event)">
+  <d-multiple-upload
+    #multipleupload
+    [enableDrop]="true"
+    [fileOptions]="fileOptions2"
+    [uploadedFiles]="uploadedFiles2"
+    [filePath]="'name'"
+    [uploadOptions]="uploadOptions2"
+    (successEvent)="onSuccess2($event)"
+    (deleteUploadedFileEvent)="deleteUploadedFile2($event)"
+    (errorEvent)="onError2($event)"
+    (fileDrop)="fileDrop($event)"
+    (fileOver)="fileOver($event)"
+  >
   </d-multiple-upload>
   <div [style.margin-top.px]="15">
     <pre>multipleupload uploadOptions: {{ multipleupload.uploadOptions | json }}</pre>

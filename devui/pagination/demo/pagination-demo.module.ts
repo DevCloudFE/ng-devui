@@ -9,9 +9,9 @@ import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component
 import { BasicComponent } from './basic/basic.component';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
-import { PaginationDemoAdditionalComponent } from './additional/additional.component';
-import { PaginationDemoLiteComponent } from './lite/lite.component';
-import { PaginationDemoWidgetsComponent } from './widgets/widgets.component';
+import { AdditionalComponent } from './additional/additional.component';
+import { LiteComponent } from './lite/lite.component';
+import { WidgetsComponent } from './widgets/widgets.component';
 
 
 @NgModule({
@@ -33,9 +33,9 @@ import { PaginationDemoWidgetsComponent } from './widgets/widgets.component';
   declarations: [
     PaginationDemoComponent,
     BasicComponent,
-    PaginationDemoAdditionalComponent,
-    PaginationDemoLiteComponent,
-    PaginationDemoWidgetsComponent
+    AdditionalComponent,
+    LiteComponent,
+    WidgetsComponent
   ],
   entryComponents: [
     PaginationDemoComponent,

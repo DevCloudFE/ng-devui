@@ -6,29 +6,29 @@ import {Component} from '@angular/core';
 })
 
 export class TreeSelectDemoComponent {
-  TreeSelectDemoBasicComponent = [
-    {title: 'HTML', language: 'xml', code: require('!!raw-loader!./basic/tree-select-demo-basic.component.html')},
-    {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./basic/tree-select-demo-basic.component.ts')},
+  TreeSelectBasicComponent = [
+    {title: 'HTML', language: 'xml', code: require('!!raw-loader!./basic/tree-select-basic.component.html')},
+    {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./basic/tree-select-basic.component.ts')},
   ];
-  TreeSelectDemoLeafOnlyComponent = [
-    {title: 'HTML', language: 'xml', code: require('!!raw-loader!./leaf-only/tree-select-demo-leaf-only.component.html')},
-    {title: 'TS', language: 'typescript', code: require('!!raw-loader!./leaf-only/tree-select-demo-leaf-only.component.ts')},
+  TreeSelectLeafOnlyComponent = [
+    {title: 'HTML', language: 'xml', code: require('!!raw-loader!./leaf-only/tree-select-leaf-only.component.html')},
+    {title: 'TS', language: 'typescript', code: require('!!raw-loader!./leaf-only/tree-select-leaf-only.component.ts')},
   ];
-  TreeSelectDemoHooksComponent = [
-    {title: 'HTML', language: 'xml', code: require('!!raw-loader!./hooks/tree-select-demo-hooks.component.html')},
-    {title: 'TS', language: 'typescript', code: require('!!raw-loader!./hooks/tree-select-demo-hooks.component.ts')},
+  TreeSelectHooksComponent = [
+    {title: 'HTML', language: 'xml', code: require('!!raw-loader!./hooks/tree-select-hooks.component.html')},
+    {title: 'TS', language: 'typescript', code: require('!!raw-loader!./hooks/tree-select-hooks.component.ts')},
   ];
-  TreeSelectDemoSearchableComponent = [
-    {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./searchable/tree-select-demo-searchable.component.html')},
-    {title: 'TS', language: 'typescript', code: require('!!raw-loader!./searchable/tree-select-demo-searchable.component.ts')},
+  TreeSelectSearchableComponent = [
+    {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./searchable/tree-select-searchable.component.html')},
+    {title: 'TS', language: 'typescript', code: require('!!raw-loader!./searchable/tree-select-searchable.component.ts')},
   ];
-  TreeSelectDemoAppendToComponent = [
-    {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./append-to/tree-select-demo-append-to.component.html')},
-    {title: 'TS', language: 'typescript', code: require('!!raw-loader!./append-to/tree-select-demo-append-to.component.ts')},
+  TreeSelectAppendToComponent = [
+    {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./append-to/tree-select-append-to.component.html')},
+    {title: 'TS', language: 'typescript', code: require('!!raw-loader!./append-to/tree-select-append-to.component.ts')},
   ];
-  TreeSelectDemoCustomIconComponent = [
-    {title: 'HTML', language: 'xml', code: require('!!raw-loader!./custom-icon/tree-select-demo-custom-icon.component.html')},
-    {title: 'TS', language: 'typescript', code: require('!!raw-loader!./custom-icon/tree-select-demo-custom-icon.component.ts')},
-    {title: 'CSS', language: 'css', code: require('!!raw-loader!./custom-icon/tree-select-demo-custom-icon.component.css')}
+  TreeSelectCustomIconComponent = [
+    {title: 'HTML', language: 'xml', code: require('!!raw-loader!./custom-icon/tree-select-custom-icon.component.html')},
+    {title: 'TS', language: 'typescript', code: require('!!raw-loader!./custom-icon/tree-select-custom-icon.component.ts')},
+    {title: 'CSS', language: 'css', code: require('!!raw-loader!./custom-icon/tree-select-custom-icon.component.css')}
   ];
 }

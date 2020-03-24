@@ -4,9 +4,6 @@ import {LoadingType} from 'ng-devui/loading';
 import { from } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
-/**
- *  Mock HTTP Request.
- */
 const mockFetchNames = (url: string) => new Promise((resolve) => {
   const mockNames = [
     'Arnold', 'Ashley', 'Atkins', 'Burton', 'Butler', 'Byers',

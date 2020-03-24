@@ -16,7 +16,7 @@ export const routesConfig = [
   },
   {
     path: 'accordion', component: ExamplePanelComponent,
-    loadChildren: '../../../devui/accordion/demo/accordion-demo.moudule#AccordionDemoModule',
+    loadChildren: () => import('../../../devui/accordion/demo/accordion-demo.moudule').then(m => m.AccordionDemoModule),
     data: {
       type: '导航',
       name: 'Accordion',
@@ -27,7 +27,7 @@ export const routesConfig = [
   },
   {
     path: 'alert', component: ExamplePanelComponent,
-    loadChildren: '../../../devui/alert/demo/alert-demo.module#AlertDemoModule',
+    loadChildren: () => import('../../../devui/alert/demo/alert-demo.module').then(m => m.AlertDemoModule),
     data: {
       type: '反馈',
       name: 'Alert',
@@ -38,7 +38,7 @@ export const routesConfig = [
   },
   {
     path: 'anchor', component: ExamplePanelComponent,
-    loadChildren: '../../../devui/anchor/demo/anchor-demo.module#AnchorDemoModule',
+    loadChildren: () => import('../../../devui/anchor/demo/anchor-demo.module').then(m => m.AnchorDemoModule),
     data: {
       type: '导航',
       name: 'Anchor',
@@ -50,7 +50,7 @@ export const routesConfig = [
   {
     path: 'auto-complete',
     component: ExamplePanelComponent,
-    loadChildren: '../../../devui/auto-complete/demo/auto-complete-demo.module#AutoCompleteDemoModule',
+    loadChildren: () => import('../../../devui/auto-complete/demo/auto-complete-demo.module').then(m => m.AutoCompleteDemoModule),
     data: {
       type: '数据录入',
       name: 'AutoComplete',
@@ -60,9 +60,33 @@ export const routesConfig = [
     }
   },
   {
+    path: 'avatar',
+    component: ExamplePanelComponent,
+    loadChildren: () => import('../../../devui/avatar/demo/avatar-demo.module').then(m => m.AvatarDemoModule),
+    data: {
+      type:'数据展示',
+      name: 'Avatar',
+      cnName: '头像',
+      description: '设置头像',
+      tmw: '可以根据用户输入的字符显示头像。'
+    }
+  },
+  {
+    path: 'breadcrumb',
+    component: ExamplePanelComponent,
+    loadChildren: () => import('../../../devui/breadcrumb/demo/breadcrumb-demo.module').then(m => m.BreadCrumbDemoModule),
+    data: {
+      type: '导航',
+      name: 'Breadcrumb',
+      cnName: '面包屑',
+      description: '导航辅助，显示当前页面层级，可快速返回任意页面',
+      tmw: `用户需要了解当前出于什么层级时；用户需要快速返回之前的层级时；用户需要导航至与指定层级相同的任意页面时；`
+    }
+  },
+  {
     path: 'button',
     component: ExamplePanelComponent,
-    loadChildren: '../../../devui/button/demo/button-demo.module#ButtonDemoModule',
+    loadChildren: () => import('../../../devui/button/demo/button-demo.module').then(m => m.ButtonDemoModule),
     data: {
       name: 'Button',
       cnName: '按钮',
@@ -73,7 +97,7 @@ export const routesConfig = [
   {
     path: 'checkbox',
     component: ExamplePanelComponent,
-    loadChildren: '../../../devui/checkbox/demo/checkbox-demo.module#CheckBoxDemoModule',
+    loadChildren: () => import('../../../devui/checkbox/demo/checkbox-demo.module').then(m => m.CheckBoxDemoModule),
     data: {
       type: '数据录入',
       name: 'CheckBox',
@@ -86,7 +110,7 @@ export const routesConfig = [
   {
     path: 'datatable',
     component: ExamplePanelComponent,
-    loadChildren: '../../../devui/data-table/demo/data-table-demo.module#DataTableDemoModule',
+    loadChildren: () => import('../../../devui/data-table/demo/data-table-demo.module').then(m => m.DataTableDemoModule),
     data: {
       type: '数据展示',
       name: 'DataTable',
@@ -99,7 +123,7 @@ export const routesConfig = [
   {
     path: 'datepicker',
     component: ExamplePanelComponent,
-    loadChildren: '../../../devui/datepicker/demo/datepicker-demo.module#DatepickerDemoModule',
+    loadChildren: () => import('../../../devui/datepicker/demo/datepicker-demo.module').then(m => m.DatepickerDemoModule),
     data: {
       type: '数据录入',
       name: 'DatePicker',
@@ -109,9 +133,56 @@ export const routesConfig = [
     }
   },
   {
+    path: 'multi-auto-complete',
+    component: ExamplePanelComponent,
+    loadChildren: () => import('../../../devui/multi-auto-complete/demo/multi-auto-complete-demo.module').then(m => m.MultiAutoCompleteDemoModule),
+    data: {
+      type: '数据录入',
+      name: 'MultiAutoComplete',
+      cnName: '多项自动补全',
+      description: '用于在若干选项中选择数个作为输入，通过联想为用户匹配可能的选项输入。',
+      tmw: '当用户需要在若干选项当中选择多个进行输入时。'
+    }
+  },
+  {
+    path: 'form',
+    component: ExamplePanelComponent,
+    loadChildren: () => import('../../../devui/form/demo/form-demo.module').then(m => m.FormDemoModule),
+    data: {
+      type: '数据录入',
+      name: 'Form',
+      cnName: '表单',
+      description: '表单具备数据收集、数据校验、数据提交功能，在业务中被大量使用，并且布局方式很多，包括单列、多列、向导式、Tab页式。',
+      tmw: `表单应用广泛，应用在过滤、创建、编辑等场景。`
+    }
+  },
+  {
+    path: 'fullscreen',
+    component: ExamplePanelComponent,
+    loadChildren: () => import('../../../devui/fullscreen/demo/fullscreen-demo.module').then(m => m.FullscreenDemoModule),
+    data: {
+      name: 'Fullscreen',
+      cnName: '全屏',
+      description: '全屏组件。',
+      tmw: `当用户需要将某一区域进行全屏展示时。`
+    }
+  },
+  {
+    path: 'transfer',
+    component: ExamplePanelComponent,
+    loadChildren: () => import('../../../devui/transfer/demo/transfer-demo.module').then(m => m.TransferDemoModule),
+    data: {
+      type: '数据录入',
+      name: 'Transfer',
+      cnName: '穿梭框',
+      description: '双栏穿梭选择框',
+      tmw: `需要在多个可选项中进行多选时。穿梭选择框可用只管的方式在两栏中移动数据，完成选择行为。其中左边一栏为source，右边一栏为target。最终返回两栏的数据，提供给开发者使用`
+    }
+  },
+  {
     path: 'dragdrop',
     component: ExamplePanelComponent,
-    loadChildren: '../../../devui/dragdrop/demo/dragdrop-demo.module#DragDropDemoModule',
+    loadChildren: () => import('../../../devui/dragdrop/demo/dragdrop-demo.module').then(m => m.DragDropDemoModule),
     data: {
       name: 'DragDrop',
       cnName: '拖拽',
@@ -122,7 +193,7 @@ export const routesConfig = [
   {
     path: 'drawer',
     component: ExamplePanelComponent,
-    loadChildren: '../../../devui/drawer/demo/drawer-demo.module#DrawerDemoModule',
+    loadChildren: () => import('../../../devui/drawer/demo/drawer-demo.module').then(m => m.DrawerDemoModule),
     data: {
       type: '反馈',
       name: 'Drawer',
@@ -136,8 +207,9 @@ export const routesConfig = [
   {
     path: 'dropdown',
     component: ExamplePanelComponent,
-    loadChildren: '../../../devui/dropdown/demo/dropdown-demo.module#DropdownDemoModule',
+    loadChildren: () => import('../../../devui/dropdown/demo/dropdown-demo.module').then(m => m.DropdownDemoModule),
     data: {
+      type:'导航',
       name: 'DropDown',
       cnName: '下拉菜单',
       description: '按向下弹出的列表。',
@@ -147,7 +219,7 @@ export const routesConfig = [
   {
     path: 'editable-select',
     component: ExamplePanelComponent,
-    loadChildren: '../../../devui/editable-select/demo/editable-select-demo.module#EditableSelectDemoModule',
+    loadChildren: () => import('../../../devui/editable-select/demo/editable-select-demo.module').then(m => m.EditableSelectDemoModule),
     data: {
       type: '数据录入',
       name: 'EditableSelect',
@@ -159,7 +231,7 @@ export const routesConfig = [
   {
     path: 'loading',
     component: ExamplePanelComponent,
-    loadChildren: '../../../devui/loading/demo/loading-demo.module#LoadingDemoModule',
+    loadChildren: () => import('../../../devui/loading/demo/loading-demo.module').then(m => m.LoadingDemoModule),
     data: {
       type: '反馈',
       name: 'Loading',
@@ -171,7 +243,7 @@ export const routesConfig = [
   {
     path: 'modal',
     component: ExamplePanelComponent,
-    loadChildren: '../../../devui/modal/demo/modal-demo.module#ModalDemoModule',
+    loadChildren: () => import('../../../devui/modal/demo/modal-demo.module').then(m => m.ModalDemoModule),
     data: {
       type: '反馈',
       name: 'Modal',
@@ -184,9 +256,9 @@ export const routesConfig = [
   {
     path: 'pagination',
     component: ExamplePanelComponent,
-    loadChildren: '../../../devui/pagination/demo/pagination-demo.module#PaginationDemoModule',
+    loadChildren: () => import('../../../devui/pagination/demo/pagination-demo.module').then(m => m.PaginationDemoModule),
     data: {
-      type: '导航',
+      type:'导航',
       name: 'Pagination',
       cnName: '分页',
       description: '采用分页的形式分隔长列表，每次只加载一个页面。',
@@ -196,7 +268,7 @@ export const routesConfig = [
   {
     path: 'panel',
     component: ExamplePanelComponent,
-    loadChildren: '../../../devui/panel/demo/panel-demo.module#PanelDemoModule',
+    loadChildren: () => import('../../../devui/panel/demo/panel-demo.module').then(m => m.PanelDemoModule),
     data: {
       name: 'Panel',
       cnName: '面板',
@@ -207,8 +279,9 @@ export const routesConfig = [
   {
     path: 'popover',
     component: ExamplePanelComponent,
-    loadChildren: '../../../devui/popover/demo/popover-demo.module#PopoverDemoModule',
+    loadChildren: () => import('../../../devui/popover/demo/popover-demo.module').then(m => m.PopoverDemoModule),
     data: {
+      type:'反馈',
       name: 'Popover',
       cnName: '悬浮提示',
       description: '简单的文字提示气泡框。popover用来通知用户非关键性问题或提示某控件处于某特殊情况。',
@@ -218,8 +291,9 @@ export const routesConfig = [
   {
     path: 'progress',
     component: ExamplePanelComponent,
-    loadChildren: '../../../devui/progress/demo/progress-demo.module#ProgressDemoModule',
+    loadChildren: () => import('../../../devui/progress/demo/progress-demo.module').then(m => m.ProgressDemoModule),
     data: {
+      type:'数据展示',
       name: 'Progress',
       cnName: '进度条',
       description: '进度条，用来展示操作的当前进度。',
@@ -231,7 +305,7 @@ export const routesConfig = [
   {
     path: 'radio',
     component: ExamplePanelComponent,
-    loadChildren: '../../../devui/radio/demo/radio-demo.module#RadioDemoModule',
+    loadChildren: () => import('../../../devui/radio/demo/radio-demo.module').then(m => m.RadioDemoModule),
     data: {
       type: '数据录入',
       name: 'Radio',
@@ -241,9 +315,21 @@ export const routesConfig = [
     }
   },
   {
+    path: 'rate',
+    component: ExamplePanelComponent,
+    loadChildren: () => import('../../../devui/rate/demo/rate-demo.module').then(m => m.RateDemoModule),
+    data: {
+      type:'数据展示',
+      name: 'Rate',
+      cnName: '等级评估',
+      description: '等级评估',
+      tmw: `用户对一个产品进行评分时可以使用，有两种模式，只读模式和动态评分模式`
+    }
+  },
+  {
     path: 'search',
     component: ExamplePanelComponent,
-    loadChildren: '../../../devui/search/demo/search-demo.module#SearchDemoModule',
+    loadChildren: () => import('../../../devui/search/demo/search-demo.module').then(m => m.SearchDemoModule),
     data: {
       name: 'Search',
       cnName: '搜索框',
@@ -254,8 +340,8 @@ export const routesConfig = [
   {
     path: 'select',
     component: ExamplePanelComponent,
-    loadChildren: '../../../devui/select/demo/select-demo.module#SelectDemoModule',
-    data:  {
+    loadChildren: () => import('../../../devui/select/demo/select-demo.module').then(m => m.SelectDemoModule),
+    data: {
       type: '数据录入',
       name: 'Select',
       cnName: '下拉选择框',
@@ -266,7 +352,7 @@ export const routesConfig = [
   {
     path: 'status',
     component: ExamplePanelComponent,
-    loadChildren: '../../../devui/status/demo/status-demo.module#StatusDemoModule',
+    loadChildren: () => import('../../../devui/status/demo/status-demo.module').then(m => m.StatusDemoModule),
     data: {
       name: 'Status',
       cnName: '状态',
@@ -277,7 +363,7 @@ export const routesConfig = [
   {
     path: 'sticky',
     component: ExamplePanelComponent,
-    loadChildren: '../../../devui/sticky/demo/sticky-demo.module#StickyDemoModule',
+    loadChildren: () => import('../../../devui/sticky/demo/sticky-demo.module').then(m => m.StickyDemoModule),
     data: {
       name: 'Sticky',
       cnName: '便贴',
@@ -288,7 +374,7 @@ export const routesConfig = [
   {
     path: 'tabs',
     component: ExamplePanelComponent,
-    loadChildren: '../../../devui/tabs/demo/tabs-demo.module#TabsDemoModule',
+    loadChildren: () => import('../../../devui/tabs/demo/tabs-demo.module').then(m => m.TabsDemoModule),
     data: {
       type: '导航',
       name: 'Tabs',
@@ -300,9 +386,9 @@ export const routesConfig = [
   {
     path: 'tags',
     component: ExamplePanelComponent,
-    loadChildren: '../../../devui/tags/demo/tags-demo.module#TagsDemoModule',
+    loadChildren: () => import('../../../devui/tags/demo/tags-demo.module').then(m => m.TagsDemoModule),
     data: {
-      type: '数据录入',
+      type: '数据展示',
       name: 'Tags',
       cnName: '标签',
       description: '标签展示组件。',
@@ -312,7 +398,7 @@ export const routesConfig = [
   {
     path: 'tags-input',
     component: ExamplePanelComponent,
-    loadChildren: '../../../devui/tags-input/demo/tags.input-demo.module#TagsInputDemoModule',
+    loadChildren: () => import('../../../devui/tags-input/demo/tags.input-demo.module').then(m => m.TagsInputDemoModule),
     data: {
       type: '数据录入',
       name: 'TagsInput',
@@ -324,7 +410,7 @@ export const routesConfig = [
   {
     path: 'toast',
     component: ExamplePanelComponent,
-    loadChildren: '../../../devui/toast/demo/toast-demo.module#ToastDemoModule',
+    loadChildren: () => import('../../../devui/toast/demo/toast-demo.module').then(m => m.ToastDemoModule),
     data: {
       type: '反馈',
       name: 'Toast',
@@ -336,8 +422,9 @@ export const routesConfig = [
   {
     path: 'tooltip',
     component: ExamplePanelComponent,
-    loadChildren: '../../../devui/tooltip/demo/tooltip-demo.module#TooltipDemoModule',
+    loadChildren: () => import('../../../devui/tooltip/demo/tooltip-demo.module').then(m => m.TooltipDemoModule),
     data: {
+      type:'反馈',
       name: 'Tooltip',
       cnName: '提示',
       description: '文字提示组件',
@@ -347,7 +434,7 @@ export const routesConfig = [
   {
     path: 'toggle',
     component: ExamplePanelComponent,
-    loadChildren: '../../../devui/toggle/demo/toggle-demo.module#ToggleDemoModule',
+    loadChildren: () => import('../../../devui/toggle/demo/toggle-demo.module').then(m => m.ToggleDemoModule),
     data: {
       type: '数据录入',
       name: 'Toggle',
@@ -359,7 +446,7 @@ export const routesConfig = [
   {
     path: 'tree',
     component: ExamplePanelComponent,
-    loadChildren: '../../../devui/tree/demo/tree-demo.module#TreeDemoModule',
+    loadChildren: () => import('../../../devui/tree/demo/tree-demo.module').then(m => m.TreeDemoModule),
     data: {
       type: '数据展示',
       name: 'Tree',
@@ -371,7 +458,7 @@ export const routesConfig = [
   {
     path: 'upload',
     component: ExamplePanelComponent,
-    loadChildren: '../../../devui/upload/demo/upload-demo.module#UploadDemoModule',
+    loadChildren: () => import('../../../devui/upload/demo/upload-demo.module').then(m => m.UploadDemoModule),
     data: {
       type: '数据录入',
       name: 'Upload',
@@ -383,7 +470,7 @@ export const routesConfig = [
   {
     path: 'input-number',
     component: ExamplePanelComponent,
-    loadChildren: '../../../devui/input-number/demo/input-number-demo.module#InputNumberDemoModule',
+    loadChildren: () => import('../../../devui/input-number/demo/input-number-demo.module').then(m => m.InputNumberDemoModule),
     data: {
       type: '数据录入',
       name: 'InputNumber',
@@ -395,7 +482,7 @@ export const routesConfig = [
   {
     path: 'tree-select',
     component: ExamplePanelComponent,
-    loadChildren: '../../../devui/tree-select/demo/tree-select-demo.module#TreeSelectDemoModule',
+    loadChildren: () => import('../../../devui/tree-select/demo/tree-select-demo.module').then(m => m.TreeSelectDemoModule),
     data: {
       type: '数据录入',
       name: 'TreeSelect',
@@ -407,13 +494,49 @@ export const routesConfig = [
   {
     path: 'slider',
     component: ExamplePanelComponent,
-    loadChildren: '../../../devui/slider/demo/slider-demo.module#SliderDemoModule',
+    loadChildren: () => import('../../../devui/slider/demo/slider-demo.module').then(m => m.SliderDemoModule),
     data: {
       type: '数据录入',
       name: 'Slider',
       cnName: '滑动输入条',
       description: '滑动输入条可以更直观地展示当前值和可选范围。',
       tmw: `当用户需要在数值区间内进行选择时使用。`
+    }
+  },
+  {
+    path: 'splitter',
+    component: ExamplePanelComponent,
+    loadChildren: () => import('../../../devui/splitter/demo/splitter-demo.module').then(m => m.SplitterDemoModule),
+    data: {
+      type: '布局',
+      name: 'Splitter',
+      cnName: '分割器',
+      description: 'Splitter将页面拆分为多个部分，并允许用户控制页面布局。',
+      tmw: `需要动态调整不同页面布局区域大小的时候选择使用。`
+    }
+  },
+  {
+    path: 'text-input',
+    component: ExamplePanelComponent,
+    loadChildren: () => import('../../../devui/text-input/demo/text-input-demo.module').then(m => m.TextInputDemoModule),
+    data: {
+      type: '数据录入',
+      name: 'Text-input',
+      cnName: '文本框',
+      description: '文本域是用户可以录入、编辑文本时的区域。它允许用户在界面中输入文本，常出现在列表和对话框中。',
+      tmw: `需要手动输入文字使用`
+    }
+  },
+  {
+    path: 'textarea',
+    component: ExamplePanelComponent,
+    loadChildren: () => import('../../../devui/textarea/demo/text-demo.module').then(m => m.TextDemoModule),
+    data: {
+      type: '数据录入',
+      name: 'Textarea',
+      cnName: '多行文本框',
+      description: '文本域是用户可以录入、编辑文本时的区域。它允许用户在界面中输入文本，常出现在列表和对话框中。',
+      tmw: `需要手动输入文字使用`
     }
   },
 ];

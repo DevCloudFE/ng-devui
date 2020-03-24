@@ -1,14 +1,21 @@
 <section>
-  <d-operable-tree #operableTree [tree]="data" [treeNodeIdKey]="'id'" [treeNodeChildrenKey]="'children'"
-    (nodeDeleted)="onOperableNodeDeleted($event)" (nodeSelected)="onOperableNodeSelected($event)"
-    (nodeToggled)="onOperableNodeToggled($event)" (nodeChecked)="onOperableNodeChecked($event)"
-    (nodeEdited)="onOperableNodeEdited($event)" [checkable]="true" [addable]="true" [editable]="true"
-    [deletable]="true">
+  <d-operable-tree
+    #operableTree
+    [tree]="data"
+    [treeNodeIdKey]="'id'"
+    [treeNodeChildrenKey]="'children'"
+    (nodeDeleted)="onOperableNodeDeleted($event)"
+    (nodeSelected)="onOperableNodeSelected($event)"
+    (nodeToggled)="onOperableNodeToggled($event)"
+    (nodeChecked)="onOperableNodeChecked($event)"
+    (nodeEdited)="onOperableNodeEdited($event)"
+    [checkable]="true"
+    [addable]="true"
+    [editable]="true"
+    [deletable]="true"
+  >
   </d-operable-tree>
-    <d-button bsSize="sm" bsStyle="primary" (click)="addNode()"> Add
-    </d-button>
-    <d-button bsSize="sm" bsStyle="common" (click)="editNodeTitle()">Edit
-    </d-button>
-    <d-button bsSize="sm" bsStyle="common" (click)="deleteNode()">Delete
-    </d-button>
+  <d-button bsSize="sm" bsStyle="primary" (click)="addNode()"> Add </d-button>
+  <d-button bsSize="sm" bsStyle="common" (click)="editNodeTitle()">Edit </d-button>
+  <d-button bsSize="sm" bsStyle="common" (click)="deleteNode()">Delete </d-button>
 </section>

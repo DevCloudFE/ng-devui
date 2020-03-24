@@ -2,24 +2,27 @@ import {
   Component,
   Input,
   TemplateRef,
-  ComponentRef,
   OnInit,
   OnChanges,
   ViewChild,
   ChangeDetectorRef,
   SimpleChanges,
   forwardRef,
-  HostBinding
+  Output,
+  EventEmitter,
+  OnDestroy
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
-import { AutoCompletePopupComponent, AutoCompleteDirective } from 'ng-devui/auto-complete';
+import {  AutoCompleteDirective } from 'ng-devui/auto-complete';
+import { I18nService, I18nInterface } from 'ng-devui/i18n';
 
 
 @Component({
   selector: 'd-editable-select',
   templateUrl: './editable-select.component.html',
+  styleUrls: ['./editable-select.component.scss'],
   exportAs: 'editable-select',
   providers: [{
     provide: NG_VALUE_ACCESSOR,
@@ -27,32 +30,30 @@ import { AutoCompletePopupComponent, AutoCompleteDirective } from 'ng-devui/auto
     multi: true
   }]
 })
-export class EditableSelectComponent implements ControlValueAccessor, OnInit, OnChanges {
+export class EditableSelectComponent implements ControlValueAccessor, OnInit, OnChanges, OnDestroy {
+  constructor(private changeDetectorRef: ChangeDetectorRef, private i18n: I18nService) {
+    this.i18nCommonText = this.i18n.getI18nText().common;
+  }
   @Input() cssClass: string;
   @Input() disabled = false;
   @Input() placeholder = '';
   @Input() source: any[];
   @Input() isOpen: boolean;
-  @Input() term: string;
   @Input() itemTemplate: TemplateRef<any>;
   @Input() noResultItemTemplate: TemplateRef<any>;
-  @Input() dropdown: boolean;
-  @Input() minLength: number;
   @Input() maxHeight: number;
+  @Input() disabledKey: string;
   @Input() searchFn: (term: string) => Observable<any[]>;
-  @ViewChild(AutoCompleteDirective) autoCompleteDirective: AutoCompleteDirective;
+  @Input() enableLazyLoad = false;
+  @Output() loadMore = new EventEmitter();
+  @ViewChild(AutoCompleteDirective, { static: true }) autoCompleteDirective: AutoCompleteDirective;
   multiItems: any[] = [];
   inputValue: any;
   subscription;
-
-  private popupRef: ComponentRef<AutoCompletePopupComponent>;
-  private value: any;
-  private placement = 'bottom-left';
-
+  i18nCommonText: I18nInterface['common'];
+  i18nSubscription: Subscription;
   private onChange = (_: any) => null;
   private onTouched = () => null;
-  constructor(private changeDetectorRef: ChangeDetectorRef) {
-  }
 
   writeValue(obj: any): void {
     const value = obj || '';
@@ -61,6 +62,9 @@ export class EditableSelectComponent implements ControlValueAccessor, OnInit, On
   }
 
   ngOnInit() {
+    this.i18nSubscription = this.i18n.langChange().subscribe((data) => {
+      this.i18nCommonText = data.common;
+    });
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -88,7 +92,15 @@ export class EditableSelectComponent implements ControlValueAccessor, OnInit, On
   }
 
   toggle($event: Event) {
-    // $event.stopPropagation();
     this.autoCompleteDirective.popupRef.instance.isOpen = !this.autoCompleteDirective.popupRef.instance.isOpen;
+  }
+  loadMoreEvent($event) {
+    this.loadMore.emit($event);
+  }
+  ngOnDestroy() {
+    if (this.i18nSubscription) {
+      this.i18nSubscription.unsubscribe();
+
+    }
   }
 }

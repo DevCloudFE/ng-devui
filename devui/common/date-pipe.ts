@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { formatDate } from 'ng-devui/utils';
+import { I18nFormat } from 'ng-devui/i18n';
 
 @Pipe({
   name: 'dDatePipe'
@@ -10,6 +10,6 @@ export class DatePipe implements PipeTransform {
     if (!date) {
       return;
     }
-    return formatDate(date, pattern);
+    return I18nFormat.formatDate(date, pattern);
   }
 }

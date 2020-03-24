@@ -47,4 +47,12 @@ export class DataTableDemoComponent {
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./expand-row/expand-row.component.html')},
     {title: 'TS', language: 'typescript', code: require('!!raw-loader!./expand-row/expand-row.component.ts')},
   ];
+  fixColumnSource: Array<DevuiSourceData> = [
+    {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./fix-column/fix-column.component.html')},
+    {title: 'TS', language: 'typescript', code: require('!!raw-loader!./fix-column/fix-column.component.ts')},
+  ];
+  dragColumnSource: Array<DevuiSourceData> = [
+    {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./drag-column/drag-column.component.html')},
+    {title: 'TS', language: 'typescript', code: require('!!raw-loader!./drag-column/drag-column.component.ts')},
+  ];
 }

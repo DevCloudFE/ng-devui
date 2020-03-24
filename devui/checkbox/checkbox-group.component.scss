@@ -2,7 +2,19 @@
   display: block;
 }
 
-.checkbox-list-inline ::ng-deep li {
-  margin-left: 8px;
-  display: inline-block
+.devui-checkbox-list-inline {
+  height: 32px;
+  line-height: 32px;
+
+  ::ng-deep li {
+    display: inline-block;
+
+    &:nth-child(n + 2) {
+      margin-left: 10px;
+    }
+  }
+}
+
+.devui-checkbox-column-margin:nth-child(n + 2) {
+  margin-top: 15px;
 }

@@ -1,10 +1,7 @@
-import {
-  Component,
-} from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'd-panel-footer',
-  template: `<ng-content></ng-content>`,
+  template: `<ng-content></ng-content>`
 })
-export class PanelFooterComponent {
-}
+export class PanelFooterComponent { }

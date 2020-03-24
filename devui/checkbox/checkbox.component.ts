@@ -5,18 +5,20 @@ import {
   EventEmitter,
   forwardRef,
   Input,
-  OnChanges,
   Output,
-  SimpleChanges,
   TemplateRef,
+  ViewEncapsulation,
+  SimpleChanges,
+  OnChanges
 } from '@angular/core';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'd-checkbox',
   templateUrl: './checkbox.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./checkbox.component.scss'],
+  encapsulation: ViewEncapsulation.None,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -35,6 +37,7 @@ export class CheckBoxComponent implements ControlValueAccessor, OnChanges {
   @Input() isShowTitle = true;
   @Input() labelTemplate: TemplateRef<any>;
   @Input() halfchecked = false;
+  @Input() showAnimation = true;
   @Output() change: EventEmitter<boolean> = new EventEmitter();
   public animationUnlocked = false;
   public id: number;

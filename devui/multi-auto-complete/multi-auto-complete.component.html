@@ -1,0 +1,99 @@
+<div class="form-group multi-auto-complete">
+  <label
+    for="multiple-label-auto-complete-{{ id }}"
+    class="multiple-label-auto-complete multiple-label-auto-complete-{{ multipleLabelClassNameSuffix }}"
+    [ngClass]="{ 'multiple-label-auto-complete-disabled': disabled }"
+  >
+    <ul *ngIf="overview !== 'single'">
+      <li *ngFor="let item of multiItems">
+        <ng-template
+          [ngTemplateOutlet]="disabled || (overview === 'none' && !inputEdit) ? transparentTemplate : defaultTemplate"
+          [ngTemplateOutletContext]="{
+            item: item,
+            formatter: formatter,
+            parent: multiItems
+          }"
+        ></ng-template>
+      </li>
+      <li *ngIf="!disabled">
+        <input
+          #multiAutoCompleteInput
+          id="multiple-label-auto-complete-{{ id }}"
+          type="text"
+          name="autoCompleteControl"
+          class="auto-complete-control"
+          [placeholder]="placeholderView"
+          [tipsText]="tipsText"
+          [latestSource]="latestSource"
+          (selectValue)="onMultipleSearch($event)"
+          (transInputFocusEmit)="getInputFocusFlag($event)"
+          (keydown.backspace)="onBackspaceKeyUp($event, inputValue)"
+          [formatter]="formatter"
+          [valueParser]="valueParser"
+          [itemTemplate]="itemTemplate"
+          [noResultItemTemplate]="noResultItemTemplate"
+          [cssClass]="cssClass"
+          [overview]="overview"
+          [disabled]="disabled"
+          [(ngModel)]="inputValue"
+          [delay]="delay"
+          dAutoComplete
+          [searchFn]="searchFn"
+        />
+      </li>
+    </ul>
+
+    <!--单选模板-->
+    <ul *ngIf="overview === 'single'" title="{{ formatter(multiItems[0]) }}" (click)="singleClick($event)">
+      <li *ngFor="let item of multiItems">
+        <ng-template
+          [ngTemplateOutlet]="transparentTemplate"
+          [ngTemplateOutletContext]="{
+            item: item,
+            formatter: formatter,
+            parent: multiItems
+          }"
+        ></ng-template>
+      </li>
+      <li *ngIf="!disabled && inputEdit">
+        <input
+          #multiAutoCompleteInput
+          id="multiple-label-auto-complete-{{ id }}"
+          type="text"
+          name="autoCompleteControl"
+          class="auto-complete-control"
+          [placeholder]="placeholder"
+          [tipsText]="tipsText"
+          [latestSource]="latestSource"
+          (selectValue)="onMultipleSearch($event)"
+          (transInputFocusEmit)="getInputFocusFlag($event)"
+          (keydown.backspace)="onBackspaceKeyUp($event, inputValue)"
+          [formatter]="formatter"
+          [valueParser]="valueParser"
+          [itemTemplate]="itemTemplate"
+          [noResultItemTemplate]="noResultItemTemplate"
+          [cssClass]="cssClass"
+          [overview]="overview"
+          [disabled]="disabled"
+          [(ngModel)]="inputValue"
+          [delay]="delay"
+          dAutoComplete
+          [searchFn]="searchFn"
+        />
+      </li>
+    </ul>
+  </label>
+</div>
+
+<!--黄底模板-->
+<ng-template #defaultTemplate let-item="item" let-formatter="formatter">
+  <span class="label-item">
+    <span class="label label-text">{{ formatter(item) }}</span
+    ><span class="label label-close" (click)="removeLabel(item)">&times;</span></span
+  >
+</ng-template>
+
+<!--无底色模板-->
+<ng-template #transparentTemplate let-item="item" let-formatter="formatter" let-parent="parent">
+  <span class="label label-text">{{ formatter(item) }}{{ parent.length > 1 ? ';' : '' }}</span>
+</ng-template>

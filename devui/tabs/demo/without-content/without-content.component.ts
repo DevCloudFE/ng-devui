@@ -5,10 +5,9 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './without-content.component.html'
 })
 export class WithoutContentComponent implements OnInit {
-  tab22acticeID = 'tab1';
+  acticeTabId = 'tab2';
   constructor() { }
 
   ngOnInit() {
   }
-
 }

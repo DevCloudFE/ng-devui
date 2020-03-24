@@ -3,25 +3,22 @@
 @import '../style/mixins/index';
 
 .modal {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 1050;
-    outline: 0;
-    overflow-y: auto;
-    display:flex;
-    -webkit-box-pack:center;
-    -ms-flex-pack:center;
-    justify-content:center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1050;
+  outline: 0;
+  overflow-y: auto;
+  display: block;
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
 }
 
 .modal-open .modal {
@@ -33,6 +30,15 @@
   position: relative;
   width: auto;
   margin: 0px auto;
+  &.place-at-center {
+    margin: auto;
+  }
+  &.place-at-top {
+    margin-bottom: auto;
+  }
+  &.place-at-bottom {
+    margin-top: auto;
+  }
 }
 
 .modal-backdrop {
@@ -43,22 +49,22 @@
   left: 0;
   z-index: 1040;
   opacity: 0.2;
-  background-color: $dark;
+  background-color: #000000;
 }
 
-:host /deep/ .modal-content{
+:host ::ng-deep .modal-content {
   position: relative;
   border-radius: 2px;
   border: none;
-  background-color: $white;
+  background-color: $bg-white;
   background-clip: padding-box;
   outline: 0;
-  box-shadow: 5px 5px 20px 0 rgba($dark, .2);
+  box-shadow: 5px 5px 20px 0 $dark-1-boxshadow;
   .modal-body {
-    padding-top:    24px;
-    padding-right:  24px;
+    padding-top: 24px;
+    padding-right: 24px;
     padding-bottom: 16px;
-    padding-left:   24px;
+    padding-left: 24px;
   }
 
   .modal-footer {
@@ -76,30 +82,30 @@
         left: -5px;
       }
     }
-    button+button {
+    button + button {
       margin-bottom: 16px;
     }
   }
 }
 
-:host /deep/ .d-btn {
-    display: inline-block;
-    margin-bottom: 0;
-    font-weight: normal;
-    text-align: center;
-    vertical-align: middle;
-    touch-action: manipulation;
-    cursor: pointer;
-    background-image: none;
-    white-space: nowrap;
-    font-size: 14px;
-    line-height: 1.42857143;
-    border-radius: 2px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+:host ::ng-deep .d-btn {
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: normal;
+  text-align: center;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  white-space: nowrap;
+  font-size: 14px;
+  line-height: 1.42857143;
+  border-radius: 2px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 :focus {
-    outline: none;
+  outline: none;
 }

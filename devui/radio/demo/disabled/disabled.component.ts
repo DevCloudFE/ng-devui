@@ -5,8 +5,8 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './disabled.component.html'
 })
 export class DisabledComponent implements OnInit {
-  values2 = ['Beijing', 'Chengdu', 'Shenzhen'];
-  choose3 = 'Beijing';
+  values2 = ['Item1', 'Item2', 'Item3'];
+  choose3 = 'Item1';
   constructor() { }
 
   ngOnInit() {

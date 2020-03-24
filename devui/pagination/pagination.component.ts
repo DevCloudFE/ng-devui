@@ -12,8 +12,8 @@ import {
   SimpleChanges,
   ViewChild
 } from '@angular/core';
-import { DevUIConfig } from 'ng-devui/devui.config';
-import {fromEvent, Subscription} from 'rxjs';
+import { fromEvent, Subscription } from 'rxjs';
+import { I18nInterface, I18nService } from 'ng-devui/i18n';
 
 @Component({
   selector: 'd-pagination',
@@ -28,11 +28,11 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
   /**
    * 【可选】每页显示最大条目数量，默认10条
    */
-  @Input() pageSize: number;
+  @Input() pageSize = 10;
   /**
    * 【可选】用于选择更改分页每页最大条目数量的下拉框的数据源，默认为`[5, 10, 20, 50]`
    */
-  @Input() pageSizeOptions: number[];
+  @Input() pageSizeOptions: number[] = [5, 10, 20, 50];
   /**
    * 【可选】初始化页码
    */
@@ -48,7 +48,7 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
   /**
    * 分页最多显示几个按钮，默认10个
    */
-  @Input() maxItems: number;
+  @Input() maxItems = 10;
   /**
    * 【可选】前一页按钮文字，默认为左箭头图标
    */
@@ -60,7 +60,7 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
   /**
    * 【可选】分页组件尺寸
    */
-  @Input() size: '' | 'sm' | 'lg';
+  @Input() size: '' | 'sm' | 'lg' = '';
   /**
    * 【可选】是否显示分页输入跳转
    */
@@ -102,17 +102,17 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
   litePaginatorOptions: any[] = [];
   private litePaginatorOptionsLengthCache = 0;
   showConfig = false;
-  @ViewChild('litePaginator') litePaginator: ElementRef;
+  @ViewChild('litePaginator', { static: false }) litePaginator: ElementRef;
   private configButtonLoseFocusHandler: Subscription | null = null;
   private loseFocusListener: any = null;
-
-  constructor(private devUIConfig: DevUIConfig,  private ref: ChangeDetectorRef) {
-    this.pageSize = this.devUIConfig['paginationCN'].pageSize;
-    this.pageSizeOptions = this.devUIConfig['paginationCN'].pageSizeOptions;
-    this.maxItems = this.devUIConfig['paginationCN'].maxItems;
-    this.size = <any>this.devUIConfig['paginationCN'].size;
-    this.totalItemText = this.devUIConfig['paginationCN'].totalItemText;
-    this.goToText = this.devUIConfig['paginationCN'].goToText;
+  i18nText: I18nInterface['pagination'];
+  i18nSubscription: Subscription;
+  constructor( private ref: ChangeDetectorRef, private i18n: I18nService) {
+    this.i18nText = this.i18n.getI18nText().pagination;
+    this.i18nSubscription = this.i18n.langChange().subscribe((data) => {
+      this.i18nText = data.pagination;
+      this.ref.markForCheck();
+    });
     this.constructLitePaginatorOptions();
   }
 
@@ -274,7 +274,7 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
   private constructLitePaginatorOptions(): void {
     if (this.litePaginatorOptions.length === 0 ||
       this.litePaginatorOptions.length !== this.litePaginatorOptionsLengthCache) {
-      this.litePaginatorOptions = Array.from({length: this.totalPage}).map((v, index: number) => {
+      this.litePaginatorOptions = Array.from({ length: this.totalPage }).map((v, index: number) => {
         return {
           label: `${index + 1}/${this.totalPage}`,
           value: index + 1
@@ -324,6 +324,10 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
 
   ngOnDestroy(): void {
     this.unsubscribeLoseFocusHandler();
+    if (this.i18nSubscription) {
+      this.i18nSubscription.unsubscribe();
+
+    }
   }
 
   private subscribeLoseFocusHandler() {

@@ -28,7 +28,7 @@ export class SingleUploadViewComponent extends UploadComponent {
   @Input() uploadedFilesRef: TemplateRef<any>;
   @Input() filePath: string;
   @Output() deleteUploadedFileEvent: EventEmitter<any> = new EventEmitter();
-  @ViewChild('dUploadedFiles') uploadedFilesComponent: UploadedFilesComponent;
+  @ViewChild('dUploadedFiles', { static: true }) uploadedFilesComponent: UploadedFilesComponent;
 
   UploadStatus = UploadStatus;
   fileUploaders: Array<FileUploader> = [];

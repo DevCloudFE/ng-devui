@@ -1,20 +1,20 @@
 <div class="demo-container">
-    <div class="demo-example">
-        <div class="demo-title">基本用法</div>
-        <div class="demo-text">
-            基本用法，可以控制全屏和关闭
-        </div>
-        <d-codebox id="basic" [sourceData]="basicSource">
-            <d-basic demo></d-basic>
-        </d-codebox>
+  <div class="demo-example">
+    <div class="demo-title">基本用法</div>
+    <div class="demo-text">
+      基本用法，可以控制全屏和关闭
     </div>
-    <div class="demo-example">
-        <div class="demo-title">基本用法</div>
-        <div class="demo-text">
-            基本用法，可以控制全屏和关闭
-        </div>
-        <d-codebox id="undestroyable" [sourceData]="undestroyableSource">
-            <d-undestroyable demo></d-undestroyable>
-        </d-codebox>
+    <d-codebox id="basic" [sourceData]="basicSource">
+      <d-basic demo></d-basic>
+    </d-codebox>
+  </div>
+  <div class="demo-example">
+    <div class="demo-title">关闭后不销毁</div>
+    <div class="demo-text">
+      关闭后不销毁，需要手动销毁，适用于不需要关闭立即销毁的场景
     </div>
+    <d-codebox id="undestroyable" [sourceData]="undestroyableSource">
+      <d-undestroyable demo></d-undestroyable>
+    </d-codebox>
+  </div>
 </div>

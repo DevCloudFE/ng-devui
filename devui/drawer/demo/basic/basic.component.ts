@@ -20,6 +20,7 @@ export class BasicComponent {
       fullScreen: true,
       backdropCloseable: true,
       escKeyCloseable: true,
+      position: 'left',
       beforeHidden: () => this.beforeHidden(),
       onClose: () => {
         console.log('on drawer closed');
@@ -34,12 +35,14 @@ export class BasicComponent {
           'This is item 4',
           'This is item 5',
         ],
-        onBtnClick: (event) => {
-          console.log(event);
+        close: (event) => {
           this.results.drawerInstance.hide();
         },
         fullScreen: (event) => {
           this.results.drawerInstance.toggleFullScreen();
+        },
+        changeWidth: (event) => {
+          this.results.drawerInstance.setWidth('200px');
         }
       }
     });

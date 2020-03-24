@@ -1,0 +1,31 @@
+<section>
+  <div>
+    <h4>传入对象数组</h4>
+    <d-checkbox-group
+      [(ngModel)]="values1"
+      [name]="'City'"
+      [options]="options1"
+      [filterKey]="'name'"
+      [labelTemplate]="mylabel"
+      [isShowTitle]="true"
+      (change)="onCheckbox1Change($event)"
+    >
+      <ng-template #mylabel let-disabled="disabled" let-label="label">
+        <span class="icon-collapse"></span>
+        <span>{{ label }}</span>
+      </ng-template>
+    </d-checkbox-group>
+  </div>
+  <div>
+    <h4>传入字符串数组</h4>
+    <d-checkbox-group
+      [(ngModel)]="values2"
+      [name]="'City'"
+      [options]="options2"
+      [direction]="'row'"
+      [isShowTitle]="true"
+      (change)="onCheckbox2Change($event)"
+    >
+    </d-checkbox-group>
+  </div>
+</section>

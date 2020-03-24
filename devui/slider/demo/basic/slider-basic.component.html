@@ -1,0 +1,9 @@
+<section>
+  <d-slider [(ngModel)]="inputValue" [min]="minValue" [max]="maxValue" class="slider"></d-slider>
+  <div class="composite-slider">
+    <d-slider [(ngModel)]="inputValue2" [min]="minValue" [max]="maxValue" class="slider" (ngModelChange)="showVal($event)"></d-slider>
+    <div class="snapshot-value">
+      <input [(ngModel)]="inputValue2" style="width: 40px;" class="devui-input" />
+    </div>
+  </div>
+</section>

@@ -1,0 +1,23 @@
+<section style="width: 100%;">
+  <span>日期范围选择器:</span>
+  <div class="devui-input-group">
+    <input
+      class="devui-input"
+      placeholder="y/MM/dd  -  y/MM/dd"
+      name="dp"
+      [(ngModel)]="dateRange"
+      (focus)="dateRangePicker.toggle($event)"
+      autocomplete="off"
+      [disabled]="disabled"
+      dDateRangePicker
+      #dateRangePicker="dateRangePicker"
+      (selectedRangeChange)="getValue($event)"
+    />
+    <div class="devui-input-group-addon" (click)="dateRangePicker.toggle($event, true)">
+      <i class="icon icon-calendar"></i>
+    </div>
+  </div>
+  <div>
+    <d-button bsStyle="common" (click)="disabled = !disabled">Toggle Date Range Picker</d-button>
+  </div>
+</section>

@@ -1,6 +1,7 @@
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
+import { DevUIModule } from 'ng-devui/devui.module';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -14,8 +15,7 @@ import { AutoDemoCustomComponent } from './custom/auto-complete-demo-custom.comp
 import { AutoDemoDisableComponent } from './disabled/auto-complete-demo-disable.component';
 import { AutoDemoDropdownComponent } from './dropdown/auto-complete-demo-dropdown.component';
 import { AutoDemoObjectComponent } from './object/auto-complete-demo-object.component';
-
-import { DevUIModule } from 'ng-devui/devui.module';
+import { AutoDemoLatestComponent } from './latest/auto-complete-demo-latest.component';
 
 @NgModule({
   imports: [
@@ -42,9 +42,9 @@ import { DevUIModule } from 'ng-devui/devui.module';
     AutoDemoCustomComponent,
     AutoDemoDisableComponent,
     AutoDemoDropdownComponent,
-    AutoDemoObjectComponent
+    AutoDemoObjectComponent,
+    AutoDemoLatestComponent
   ],
-  providers: [],
+  providers: []
 })
-export class AutoCompleteDemoModule {
-}
+export class AutoCompleteDemoModule { }

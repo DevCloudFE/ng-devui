@@ -1,16 +1,28 @@
-<ul class="nav nav-{{type}} {{cssClass}}" role="tablist">
+<ul
+  class="devui-nav devui-nav-{{ type }} {{ cssClass }}"
+  [ngClass]="{
+    'devui-nav-stacked': vertical
+  }"
+  role="tablist"
+>
   <ng-container *ngFor="let tab of tabs">
-    <li role="presentation" *ngIf="!tab.disabled" [id]="tab.tabId" [class.active]="tab.id == activeTab" (click)="select(tab.id)" >
-      <a role="tab" data-toggle="tab" [attr.aria-expanded]="tab.id == activeTab" [style.width]="customWidth" [ngClass]="{'custom-width': customWidth}">
+    <li role="presentation" [class.disabled]="tab.disabled" [id]="tab.tabId" [class.active]="tab.id == activeTab" (click)="select(tab.id)">
+      <a
+        role="tab"
+        data-toggle="tab"
+        [attr.aria-expanded]="tab.id == activeTab"
+        [style.width]="customWidth"
+        [ngClass]="{ 'custom-width': customWidth }"
+      >
         <ng-template *ngIf="!tab.title" [ngTemplateOutlet]="tab.titleTpl?.templateRef"></ng-template>
-        <span *ngIf="tab.title">{{tab.title}}</span>
+        <span *ngIf="tab.title">{{ tab.title }}</span>
       </a>
     </li>
   </ng-container>
 </ul>
-<div class="tab-content" *ngIf="showContent">
+<div class="devui-tab-content" *ngIf="showContent">
   <ng-container *ngFor="let tab of tabs">
-    <div class="tab-pane fade in" role="tabpanel" *ngIf="tab.id == activeTab" [ngClass]="{'in active': tab.id == activeTab}">
+    <div class="devui-tab-pane fade in" role="tabpanel" *ngIf="tab.id == activeTab" [ngClass]="{ 'in active': tab.id == activeTab }">
       <ng-template [ngTemplateOutlet]="tab.contentTpl.templateRef"></ng-template>
     </div>
   </ng-container>

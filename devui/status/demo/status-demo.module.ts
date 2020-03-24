@@ -28,12 +28,9 @@ import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
   exports: [StatusDemoComponent],
   declarations: [
     StatusDemoComponent,
-    BasicComponent,
+    BasicComponent
   ],
-  entryComponents: [
-    StatusDemoComponent,
-  ],
+  entryComponents: [StatusDemoComponent]
 })
-export class StatusDemoModule {
-}
+export class StatusDemoModule { }
 

@@ -5,27 +5,28 @@
 }
 
 .devui-pagination {
-  .page-size {
+  .devui-page-size {
     display: inline-block;
     max-width: 100px;
     vertical-align: middle;
     margin: 0 10px 0 0;
     position: relative;
-    &.page-size-sm {
+    &.devui-page-size-sm {
       max-width: 60px;
     }
-    &.page-size-lg {
+    &.devui-page-size-lg {
       max-width: 100px;
     }
   }
 
-  .total-size {
+  .devui-total-size {
     display: inline-block;
     position: relative;
     margin: 0 20px 0 0px;
+    color: $dark-2;
   }
 
-  .pagination {
+  .devui-pagination-list {
     display: inline-block;
     margin: 20px 0;
 
@@ -39,81 +40,87 @@
       display: inline;
     }
     li.disabled a {
-      background: $white;
+      background: $bg-white;
       opacity: 0.3;
     }
     li:not(.disabled) {
       cursor: pointer;
-      a:hover, span:hover, a:focus, span:focus {
+      a:hover,
+      span:hover,
+      a:focus,
+      span:focus {
         background: $hover-content;
       }
 
       &.active a {
-        &:hover, &:focus, &:active {
-          background: $focus1;
+        background: $brand-1;
+        color: $font-white;
+        cursor: default;
+      }
+
+      a.devui-pagination-link:hover svg g polygon {
+        fill: $brand-1;
+      }
+
+      a.devui-pagination-link-lite:hover {
+        border: 1px solid $gray-1 !important;
+      }
+    }
+
+    .devui-pagination-link {
+      svg {
+        vertical-align: bottom;
+        g polygon {
+          fill: $dark-1;
         }
       }
-
-      a.pagination-link:hover svg g polygon {
-        fill: $focus1;
-      }
-
-
-      a.pagination-link-lite:hover {
-        border: 1px solid $gray1 !important;
-      }
     }
-
-    .pagination-link {
-      svg {
-        vertical-align: middle;
-      }
-    }
-    .pagination-link-lite {
+    .devui-pagination-link-lite {
       border: 1px solid transparent !important;
       border-radius: 2px;
     }
-
-   
   }
 
-  .pagination > li > a {
+  .devui-pagination-list > li > a {
     margin-left: 5px;
     padding: 5px 12px;
     line-height: 1.42857143;
   }
 
-  .pagination-sm > li > a {
+  .devui-pagination-sm > li > a {
     padding: 4px 10px;
     line-height: 1.66666667;
     font-size: 12px;
   }
 
-  .pagination-lg > li > a {
+  .devui-pagination-lg > li > a {
     padding: 9px 17px;
     font-size: 16px;
     line-height: 1.3333333;
   }
 
-  .pagination > li:first-child > a,
-  .pagination > li:last-child > a {
+  .devui-pagination-list > li:first-child > a,
+  .devui-pagination-list > li:last-child > a {
     padding: 4px 11px;
     border-radius: 1px;
-    border-width: 1px;
-    border-style: solid;
+    border: 1px solid $gray-1;
   }
 
-  .pagination-sm > li:first-child > a,
-  .pagination-sm > li:last-child > a {
+  .devui-pagination-sm > li:first-child > a,
+  .devui-pagination-sm > li:last-child > a {
     padding: 3px 4px;
+    border-radius: 1px;
+    border: 1px solid $gray-1;
   }
 
-  .pagination-lg > li:first-child > a,
-  .pagination-lg > li:last-child > a {
+  .devui-pagination-lg > li:first-child > a,
+  .devui-pagination-lg > li:last-child > a {
     padding: 8px 16px;
+    border-radius: 1px;
+    border: 1px solid $gray-1;
   }
 
-  .jump-container {
+  .devui-jump-container {
     display: inline-block;
     position: relative;
     margin: 0 10px 0 10px;
@@ -124,79 +131,94 @@
     }
   }
 
-  .jump-button {
+  .devui-jump-button {
     display: inline-block;
-    border-width: 1px;
-    border-style: solid;
     vertical-align: bottom;
     border-radius: 1px;
+    border: 1px solid $gray-1;
     cursor: pointer;
-    .go {
+    .devui-pagination-go {
       width: 0;
       height: 0;
       border-top-style: solid;
       border-left-style: solid;
       border-bottom-style: solid;
     }
-  }
+    &:hover {
+      border-color: $hover-control;
 
-  .jump-size-default {
-    width: 32px;
-    height: 32px;
-    .go {
-      border-top-width: 8px;
-      border-left-width: 8px;
-      border-bottom-width: 8px;
-      margin: 8px auto;
+      .devui-pagination-go {
+        border-left-color: $hover-control;
+      }
     }
   }
 
-  .jump-size-sm {
-    width: 30px;
-    height: 30px;
-    .go {
-      border-top-width: 6px;
-      border-left-width: 6px;
-      border-bottom-width: 6px;
-      margin: 9px auto;
-    }
-  }
-
-  .jump-size-lg {
+  .devui-jump-size-default {
     width: 34px;
     height: 34px;
-    .go {
-      border-top-width: 12px;
-      border-left-width: 12px;
-      border-bottom-width: 12px;
-      margin: 5px auto;
+    .devui-pagination-go {
+      width: 0;
+      height: 0;
+      border-top: 12px solid transparent;
+      border-left: 12px solid $dark-2;
+      border-bottom: 12px solid transparent;
+      margin: 4px auto;
     }
   }
-  .lite-paginator {
+
+  .devui-jump-size-sm {
+    width: 24px;
+    height: 24px;
+    .devui-pagination-go {
+      width: 0;
+      height: 0;
+      border-top: 8px solid transparent;
+      border-left: 8px solid $dark-2;
+      border-bottom: 8px solid transparent;
+      margin: 3px auto;
+    }
+  }
+
+  .devui-jump-size-lg {
+    width: 46px;
+    height: 46px;
+    .devui-pagination-go {
+      width: 0;
+      height: 0;
+      border-top: 16px solid transparent;
+      border-left: 16px solid $dark-2;
+      border-bottom: 16px solid transparent;
+      margin: 6px auto;
+    }
+  }
+  .devui-lite-paginator {
     display: inline-block;
     margin-right: 5px;
     width: 100px;
   }
-  
-  .pagination-config {
-    color: $dark1;
+
+  .devui-pagination-config {
+    color: $dark-1;
     position: relative;
     display: inline-block;
     vertical-align: middle;
     margin: 0 5px;
-  
-    .setup-icon {
+
+    .devui-setup-icon {
       line-height: 30px;
       cursor: pointer;
       display: flex;
+      svg g path {
+        fill: $dark-1;
+      }
     }
-  
-    .config-container {
+
+    .devui-config-container {
       padding: 5px 0;
       box-shadow: 0 0 6px 1px $dark-1-boxshadow;
       border-radius: 2px;
       width: 150px;
-      background-color: $white;
+      background-color: $bg-white;
       line-height: 26px;
       position: absolute;
       left: -136px;
@@ -207,55 +229,66 @@
       -webkit-user-select: none;
       -ms-user-select: none;
       user-select: none;
-  
-      .pagination-config-item.page-size-config {
+
+      .devui-pagination-config-item.devui-page-size-config {
         border-bottom: none;
       }
-  
-      .pagination-config-item {
+
+      .devui-pagination-config-item {
         padding-bottom: 8px;
         padding-top: 5px;
-        border-bottom: 1px solid $gray2;
-  
-        .config-item-title {
-          color: $dark2;
+        border-bottom: 1px solid $gray-2;
+
+        .devui-config-item-title {
+          color: $dark-2;
           padding-left: 10px;
           font-size: 12px;
           line-height: 22px;
         }
-  
-        .page-number {
+
+        .devui-page-number {
           padding-left: 10px;
           margin-top: 4px;
           display: flex;
           display: -ms-flexbox;
-  
+
           div {
-            color: $dark1;
+            color: $dark-1;
             cursor: pointer;
-            border-top: 1px solid $gray1;
-            border-bottom: 1px solid $gray1;
-            border-right: 1px solid $gray1;
+            border-top: 1px solid $gray-1;
+            border-bottom: 1px solid $gray-1;
+            border-right: 1px solid $gray-1;
             text-align: center;
             height: 26px;
             width: 26px;
           }
-  
+
           div:hover {
             background-color: $hover-content;
           }
-  
+
           div:first-child {
-            border-left: 1px solid $gray1;
+            border-left: 1px solid $gray-1;
           }
-  
-          .page-number div.choosed, .choosed {
-            color: $focus1;
-            background-color: $focus3 !important;
+
+          .devui-page-number div.choosed,
+          .choosed {
+            color: $brand-1;
+            background-color: $brand-3 !important;
             cursor: auto !important;
           }
         }
       }
     }
+  }
 }
+:host ::ng-deep .devui-input-sm {
+  height: 24px;
+  padding: 5px 5px;
+  font-size: 14px;
+  line-height: 18px;
+  border-radius: 0;
+}
+:host ::ng-deep .devui-select-sm {
+  min-height: 24px;
 }

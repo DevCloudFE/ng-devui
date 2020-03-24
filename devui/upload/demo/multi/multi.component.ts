@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IUploadOptions, IFileOptions } from 'ng-devui';
 
 @Component({
-  selector: 'd-demo-upload-multi',
+  selector: 'd-multi',
   templateUrl: './multi.component.html'
 })
 export class MultiComponent {
@@ -12,7 +12,7 @@ export class MultiComponent {
     age: 11
   };
   uploadOptions2: IUploadOptions = {
-    uri: 'http://localhost:3000/upload',
+    uri: '/upload',
     method: 'post',
     additionalParameter: this.additionalParameter2,
     maximumSize: 20,

@@ -5,7 +5,7 @@ import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
   selector: 'd-tree-demo',
   templateUrl: './tree-demo.component.html'
 })
-export class TreeDemoComponent implements OnInit {
+export class TreeDemoComponent {
   basicSource: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./basic/basic.component.html')},
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./basic/basic.component.ts')},
@@ -14,6 +14,14 @@ export class TreeDemoComponent implements OnInit {
   checkableSource: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./checkable/checkable.component.html')},
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./checkable/checkable.component.ts')},
+  ];
+  customTitleKeySource: Array<DevuiSourceData> = [
+    {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./custom-title-key/custom-title-key.component.html')},
+    {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./custom-title-key/custom-title-key.component.ts')},
+  ];
+  searchFilterSource: Array<DevuiSourceData> = [
+    {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./search-filter/search-filter.component.html')},
+    {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./search-filter/search-filter.component.ts')},
   ];
 
   operateBtnSource: Array<DevuiSourceData> = [
@@ -33,8 +41,6 @@ export class TreeDemoComponent implements OnInit {
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./draggable/draggable.component.ts')},
     {title: 'CSS', language: 'css', code:  require('!!raw-loader!./draggable/draggable.component.css')}
   ];
-  data: any;
   constructor() { }
 
-  ngOnInit() { }
 }

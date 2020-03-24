@@ -18,7 +18,7 @@ import {forEach} from 'lodash-es';
 export class PortalComponent {
     viewRef: EmbeddedViewRef<any>;
     portalContainer: HTMLElement;
-    @ViewChild('templateRef') templateRef: TemplateRef<any>;
+    @ViewChild('templateRef', { static: true }) templateRef: TemplateRef<any>;
 
     constructor(private appRef: ApplicationRef) {
     }

@@ -5,10 +5,12 @@ import { FormsModule } from '@angular/forms';
 
 import { AccordionModule } from '../accordion.module';
 import { AccordionDemoComponent } from './accordion-demo.component';
-import { AccordionDemoBasicComponent } from './basic/accordion-demo-basic.component';
-import { AccordionDemoLinkComponent } from './link/accordion-demo-link.component';
-import { AccordionDemoTemplateComponent } from './template/accordion-demo-template.component';
-import { AccordionDemoInnerListTemplateComponent } from './inner-list-template/accordion-demo-inner-list-template.component';
+import { BasicComponent } from './basic/basic.component';
+import { LinkComponent } from './link/link.component';
+import { TemplateComponent } from './template/template.component';
+import { InnerListTemplateComponent } from './inner-list-template/inner-list-template.component';
+import { MultiLevelComponent } from './multi-level/multi-level.component';
+import { ChangeKeyComponent } from './change-key/change-key.component';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
@@ -33,10 +35,12 @@ import { ToggleModule } from 'ng-devui/toggle';
   exports: [],
   declarations: [
     AccordionDemoComponent,
-    AccordionDemoBasicComponent,
-    AccordionDemoLinkComponent,
-    AccordionDemoTemplateComponent,
-    AccordionDemoInnerListTemplateComponent
+    BasicComponent,
+    LinkComponent,
+    TemplateComponent,
+    InnerListTemplateComponent,
+    MultiLevelComponent,
+    ChangeKeyComponent,
   ],
   providers: [],
   entryComponents: [

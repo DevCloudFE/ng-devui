@@ -5,8 +5,8 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './custom.component.html'
 })
 export class CustomComponent implements OnInit {
-  values2 = ['Beijing', 'Chengdu', 'Shenzhen'];
-  choose2_2 = 'Shenzhen';
+  values2 = ['Item1', 'Item2', 'Item3'];
+  choose2_2 = 'Item3';
   constructor() { }
 
   ngOnInit() {

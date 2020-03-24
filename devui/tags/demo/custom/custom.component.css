@@ -1,4 +1,4 @@
-.tag-custom {
-  background: #5170FF !important;
+:host ::ng-deep .tag-custom {
+  background: #5170ff !important;
   color: white !important;
 }

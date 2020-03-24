@@ -1,8 +1,8 @@
-@import "../devui/style/devui";
+@import '../devui/style/devui';
 @import '~@devui-design/icons/icomoon/devui-icon.css';
 
 .markdown {
-  color: rgba(0,0,0,.65);
+  color: rgba(0, 0, 0, 0.65);
   font-size: 14px;
   line-height: 1.8;
 }
@@ -11,9 +11,12 @@
   position: relative;
 }
 
-code[class*=language-], pre[class*=language-], pre code {
+code[class*='language-'],
+pre[class*='language-'],
+pre code {
   white-space: pre;
-  font-family: Lucida Console,Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;
+  font-family: Lucida Console, Consolas, Monaco, Andale Mono, Ubuntu Mono,
+    monospace;
 }
 pre {
   display: block;
@@ -32,23 +35,26 @@ pre {
 
 pre code {
   display: block;
-  color: $dark1;
-  background: $white;
+  color: $dark-1;
+  background: $bg-white;
   line-height: 1.7;
   padding: 10px 15px;
   border-radius: 4px;
   font-size: 13px;
   overflow-x: auto;
 }
-code, kbd, pre, samp {
+code,
+kbd,
+pre,
+samp {
   font-family: Consolas, Menlo, Courier, monospace;
 }
 
-section{
+section {
   margin-bottom: 0 !important;
 }
 
-.markdown.api-container{
+.markdown.api-container {
   width: 100%;
   display: block;
   overflow-x: auto;
@@ -66,7 +72,8 @@ section{
   border: 1px solid #e9e9e9;
   width: 100%;
   margin: 8px 0 16px;
-  th, td {
+  th,
+  td {
     border: 1px solid #e9e9e9;
     padding: 8px 16px;
     text-align: left;
@@ -85,9 +92,13 @@ section{
 .markdown h3 {
   font-size: 18px;
 }
-.markdown h2, .markdown h3, .markdown h4, .markdown h5, .markdown h6 {
-  color: $dark1;
-  margin: 1.6em 0 .6em;
+.markdown h2,
+.markdown h3,
+.markdown h4,
+.markdown h5,
+.markdown h6 {
+  color: $dark-1;
+  margin: 1.6em 0 0.6em;
   font-weight: 500;
   clear: both;
 }
@@ -96,7 +107,7 @@ code {
   padding: 2px 4px;
   font-size: 90%;
   color: #c7254e;
-  background-color: #F8F8F8;
+  background-color: #f8f8f8;
   border-radius: 1px;
 }
 
@@ -116,7 +127,9 @@ code {
     padding: 30px 0 10px;
   }
 
-  h1,h2,h3 {
+  h1,
+  h2,
+  h3 {
     font-weight: 300;
     margin: 0;
   }

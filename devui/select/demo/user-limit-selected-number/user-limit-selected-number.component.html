@@ -1,0 +1,23 @@
+<section>
+  <div class="row">
+    <div class="col-md-5">
+      <d-select
+        [filterKey]="'name'"
+        [(ngModel)]="currentOption1"
+        [options]="options2"
+        optionDisabledKey="disabled"
+        [multiple]="true"
+        [isSelectAll]="true"
+        [isSearch]="true"
+        (ngModelChange)="checkSelectionNumberFunc()"
+      >
+      </d-select>
+    </div>
+  </div>
+  max select number : 2 , disabled: 1
+  <div class="row">
+    <div class="col-md-5">
+      <pre>Current Select: {{ currentOption1 | json }}</pre>
+    </div>
+  </div>
+</section>

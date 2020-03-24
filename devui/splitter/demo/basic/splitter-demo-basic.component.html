@@ -1,0 +1,16 @@
+<section>
+  <d-splitter [orientation]="orientation" [splitBarSize]="splitBarSize" style="height: 300px; border: 1px solid #E3E5E9;">
+    <d-splitter-pane [size]="size" [minSize]="minSize" [maxSize]="maxSize" [collapsible]="true" (sizeChange)="sizeChange($event)">
+      <div class="pane-content">
+        <h2>左侧面板</h2>
+        <div>左侧内容区域，宽度30%, 最小宽度20%</div>
+      </div>
+    </d-splitter-pane>
+    <d-splitter-pane minSize="15%">
+      <div class="pane-content">
+        <h2>右侧面板</h2>
+        <div>右侧内容区域</div>
+      </div>
+    </d-splitter-pane>
+  </d-splitter>
+</section>

@@ -33,7 +33,12 @@ export class DialogService {
     beforeHidden,
     onClose,
     dialogtype = 'standard',
+    showCloseBtn = true,
     draggable = true,
+    placement = 'center',
+    offsetX,
+    offsetY,
+    bodyScrollable
   }: IDialogOptions) {
     const finalComponentFactoryResolver = componentFactoryResolver || this.componentFactoryResolver;
 
@@ -48,12 +53,16 @@ export class DialogService {
       beforeHidden,
       // set backdropCloseable default value "true" when not passing it
       backdropCloseable: isUndefined(backdropCloseable) ? true : backdropCloseable,
-      draggable
+      draggable,
+      placement,
+      offsetX,
+      offsetY,
+      bodyScrollable
     });
 
     const modalContainerRef = modalRef.instance.modalContainerHost.viewContainerRef
       .createComponent(finalComponentFactoryResolver.resolveComponentFactory(ModalContainerComponent), 0, injector);
-    assign(modalContainerRef.instance, {title, buttons, maxHeight, dialogtype});
+    assign(modalContainerRef.instance, {title, buttons, maxHeight, dialogtype, showCloseBtn});
 
     if (typeof content === 'string') {
       assign(modalContainerRef.instance, {content, html});
@@ -71,7 +80,9 @@ export class DialogService {
       if (onClose) {
         onClose();
       }
-      modalRef.hostView.destroy();
+      setTimeout(() => {
+        modalRef.hostView.destroy();
+      });
     };
 
     modalRef.instance.show();

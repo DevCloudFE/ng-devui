@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { ButtonModule } from '../../button/index';
+import { ButtonModule } from 'ng-devui/button/index';
 import { ToastModule } from '../toast.module';
 import { ToastDemoComponent } from './toast-demo.component';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
@@ -30,12 +30,9 @@ import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
   exports: [ToastDemoComponent],
   declarations: [
     ToastDemoComponent,
-    BasicComponent,
+    BasicComponent
   ],
-  entryComponents: [
-    ToastDemoComponent,
-  ],
+  entryComponents: [ToastDemoComponent]
 })
-export class ToastDemoModule {
-}
+export class ToastDemoModule { }
 

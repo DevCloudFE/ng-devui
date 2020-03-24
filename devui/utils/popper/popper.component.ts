@@ -54,8 +54,8 @@ export class PopperComponent implements AfterViewInit, OnDestroy {
   protected popperParent;
 
   @Output() openChange = new EventEmitter();
-  @ViewChild('popperActivator') popperActivator: ElementRef;
-  @ViewChild('popperContainer') popperContainer: ElementRef;
+  @ViewChild('popperActivator', { static: true }) popperActivator: ElementRef;
+  @ViewChild('popperContainer', { static: true }) popperContainer: ElementRef;
 
   static nextTick(fn) {
     // Force to run fn after current data changed.
@@ -83,7 +83,14 @@ export class PopperComponent implements AfterViewInit, OnDestroy {
     if (!!this.appendTo) {
       if (this.fluidPopper) {
         const popperWidth = this.popperActivator.nativeElement && this.popperActivator.nativeElement.offsetWidth;
-        this.popperContainer.nativeElement.firstElementChild.style.width = `${popperWidth}px`;
+        const firstEle =  this.popperContainer.nativeElement.firstElementChild;
+        if (firstEle.classList.contains('devui-search-container')) {
+          for (const child of this.popperContainer.nativeElement.children) {
+            child.style.width = `${popperWidth}px`;
+          }
+        } else {
+          firstEle.style.width = `${popperWidth}px`;
+        }
       }
       this.attachPopperContainerToSelector(this.appendTo);
     } else {

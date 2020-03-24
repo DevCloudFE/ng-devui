@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { DataTableFootTmplComponent } from './tmpl/data-table-foot-tmpl.component';
 
 @Component({

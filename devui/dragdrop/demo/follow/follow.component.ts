@@ -14,6 +14,8 @@ export class FollowComponent implements OnInit {
   ];
 
   list2 = [];
+  appendToBody = false;
+
   constructor() {
 
   }
@@ -22,7 +24,6 @@ export class FollowComponent implements OnInit {
   }
 
   onDrop(e: any) {
-    // console.log(e);
     let index = e.dropIndex;
     const fromIndex = e.dragFromIndex;
     if (-1 !== index) {

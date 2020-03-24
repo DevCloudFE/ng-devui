@@ -1,10 +1,11 @@
-import {Directive, OnDestroy, Input, Output, HostBinding, EventEmitter, ElementRef,
-  SimpleChanges, OnChanges, AfterContentInit
+import { Directive, OnDestroy, Input, Output, HostBinding, EventEmitter, ElementRef,
+  SimpleChanges, OnChanges, AfterContentInit, Optional, SkipSelf, ContentChildren,
+  QueryList
 } from '@angular/core';
-import {CdkOverlayOrigin} from '@angular/cdk/overlay';
-import {Subject, Observable, merge, fromEvent, Subscription} from 'rxjs';
-import {debounceTime, mapTo, filter} from 'rxjs/operators';
-import {DropDownService} from './dropdown.service';
+import { CdkOverlayOrigin} from '@angular/cdk/overlay';
+import { Subject, Observable, merge, fromEvent, Subscription } from 'rxjs';
+import { debounceTime, mapTo, filter, tap } from 'rxjs/operators';
+import { DropDownService } from './dropdown.service';
 
 @Directive({
   selector: '[dDropDown]',
@@ -12,6 +13,7 @@ import {DropDownService} from './dropdown.service';
   providers: [DropDownService]
 })
 export class DropDownDirective implements OnDestroy, OnChanges, AfterContentInit {
+  @ContentChildren(DropDownDirective, {descendants: true}) dropdownChildren: QueryList<DropDownDirective>;
   private hoverSubscription: Subscription;
   /**
    * 控制是否打开dropdown，绑定一个devui-dropdown-open class
@@ -36,7 +38,7 @@ export class DropDownDirective implements OnDestroy, OnChanges, AfterContentInit
     this.toggleEvent.emit(this.isOpen);
   }
   @HostBinding('class.devui-dropdown') addClass = true;
-  @Input() disabled = null;
+  @Input() disabled = false;
 
   /**
    * dropdown触发方式
@@ -45,7 +47,8 @@ export class DropDownDirective implements OnDestroy, OnChanges, AfterContentInit
   /**
    * 关闭区域，默认点击菜单链接也会关闭，blank点击其他空白区域才关闭
    */
-  @Input() closeScope: 'all' | 'blank' = 'all';
+  @Input() closeScope: 'all' | 'blank' | 'none' = 'all';
+  @Input() closeOnMouseLeaveMenu = false;
 
   @Output() toggleEvent: EventEmitter<boolean> = new EventEmitter();
 
@@ -70,7 +73,20 @@ export class DropDownDirective implements OnDestroy, OnChanges, AfterContentInit
     return this._appendToBody;
   }
 
-  constructor(private dropdownService: DropDownService, public el: ElementRef) { }
+  public set dropDownMenu(dropdownMenu) {
+    // init drop down menu
+    this.menuEl = dropdownMenu.el;
+  }
+
+  public set dropDownToggle(dropdownToggle) {
+    // init toggle element
+    this.toggleEl = dropdownToggle.el;
+    this.updateCdkConnectedOverlayOrigin();
+  }
+
+  constructor(private dropdownService: DropDownService, public el: ElementRef,
+    @Optional() @SkipSelf() public parentDropdown: DropDownDirective) {
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.hasOwnProperty('trigger')) {
@@ -85,17 +101,6 @@ export class DropDownDirective implements OnDestroy, OnChanges, AfterContentInit
 
   ngAfterContentInit() {
     this.handleHoverSubscriptionIfTriggerIsHover();
-  }
-
-  public set dropDownMenu(dropdownMenu) {
-    // init drop down menu
-    this.menuEl = dropdownMenu.el;
-  }
-
-  public set dropDownToggle(dropdownToggle) {
-    // init toggle element
-    this.toggleEl = dropdownToggle.el;
-    this.updateCdkConnectedOverlayOrigin();
   }
 
   public toggle(): boolean {
@@ -139,16 +144,53 @@ export class DropDownDirective implements OnDestroy, OnChanges, AfterContentInit
     if (this.trigger === 'hover') {
       const states: Observable<boolean> = merge(
         fromEvent(this.el.nativeElement, 'mouseenter').pipe(mapTo(true)),
-        fromEvent(this.el.nativeElement, 'mouseleave').pipe(filter((event: MouseEvent) => {
-          return !(this.isOpen && this.appendToBody === true && this.menuEl.nativeElement &&
-            (this.menuEl.nativeElement.parentElement === event.relatedTarget ||
-              this.menuEl.nativeElement.parentElement.contains(event.relatedTarget))
-          );
-        }), mapTo(false))
+        fromEvent(this.el.nativeElement, 'mouseleave').pipe(
+          filter((event: MouseEvent) => {
+            if (this.isOpen && this.appendToBody === true) {
+              // 冒泡模拟的relatedTarget， 和作用于dropdown本身event.relatedTarget
+              // menu（子） -> toggle（父） 冒泡模拟的用于离开菜单的时候判断不判断overlay的div层，即只判断menuEl.nativeElement
+              // toggle（父） -> menu（子） 离开元素本身的需要判断是否落入了overlay的div层，即只判断menuEl.nativeElement.parentElement
+              const relatedTarget = event.relatedTarget || (event['originEvent'] && event['originEvent'].relatedTarget);
+              return  !(this.menuEl.nativeElement && relatedTarget &&
+                  (this.menuEl.nativeElement.parentElement.contains(event.relatedTarget)
+                  || this.menuEl.nativeElement.parentElement.parentElement.contains(event.relatedTarget) // 套了两层div增加判断
+                  || this.menuEl.nativeElement.contains(relatedTarget)
+                  || this.dropdownChildren.some(
+                    children =>
+                      children !== this
+                      // appendToBody的时候可能会没有实例化不在document上需要做判断有没有parentElement
+                      && ( children.menuEl.nativeElement.parentElement
+                      && children.menuEl.nativeElement.parentElement.contains(event.relatedTarget)
+                      || children.menuEl.nativeElement.contains(relatedTarget))
+                  ))
+              );
+            } else {
+              return true;
+            }
+          }),
+          tap(event => {
+            if (this.parentDropdown) {
+              this.simulateEventDispatch(event, this.parentDropdown.el.nativeElement);
+            }
+          }),
+          mapTo(false))
       );
       this.subscribeHoverAction(states);
     } else {
       this.unsubscribeHoverAction();
     }
   }
+
+  simulateEventDispatch($event, target? ) {
+    const event = document.createEvent('MouseEvents');
+    event.initEvent($event.type, true, true);
+    event['originEvent'] = $event['originEvent'] || $event;
+
+    if (!target) {
+      target = this.el.nativeElement;
+    }
+
+    target.dispatchEvent(event);
+  }
+
 }

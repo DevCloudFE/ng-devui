@@ -9,12 +9,26 @@ import { BasicComponent } from './basic/basic.component';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { WithoutContentComponent } from './without-content/without-content.component';
-import { CustomizeTmpComponent } from './customize-tmp/customize-tmp.component';
+import { CustomizeTmpComponent } from './before-change/before-change.component';
+import { ConfigurableComponent } from './configurable-tabs/configurable-tabs.component';
+import { TabsTransferComponent } from './configurable-tabs/tabs-transfer/tabs-transfer.component';
+import { CustomComponent } from './custom/custom.component';
+import { ConfigComponent } from './config/config.component';
+import { TransferModule } from 'ng-devui/transfer';
+import { DropDownModule } from 'ng-devui/dropdown';
+import { ModalModule } from 'ng-devui/modal';
+
+
+
+
 
 @NgModule({
   imports: [
     CommonModule,
     TabsModule,
+    DropDownModule,
+    ModalModule,
+    TransferModule,
     DevUICodeboxModule,
     DevUIApiModule,
     RouterModule.forChild([
@@ -30,10 +44,15 @@ import { CustomizeTmpComponent } from './customize-tmp/customize-tmp.component';
     TabsDemoComponent,
     BasicComponent,
     WithoutContentComponent,
-    CustomizeTmpComponent
+    CustomizeTmpComponent,
+    ConfigurableComponent,
+    TabsTransferComponent,
+    CustomComponent,
+    ConfigComponent
   ],
   entryComponents: [
     TabsDemoComponent,
+    TabsTransferComponent
   ],
 })
 export class TabsDemoModule {

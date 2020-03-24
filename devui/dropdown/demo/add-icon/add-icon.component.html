@@ -1,6 +1,14 @@
 <section>
-  <div class="btn-group g-dropdown" dDropDown appendToBody [appendToBodyDirections]="['leftDown','leftUp']" (onToggle)="onToggle($event)">
-    <d-button icon="icon-add" bsStyle="primary">新建</d-button>
+  <div
+    class="btn-group g-dropdown"
+    dDropDown
+    appendToBody
+    [appendToBodyDirections]="['leftDown', 'leftUp']"
+    (ToggleEvent)="onToggle($event)"
+  >
+    <d-button icon="icon-add" bsStyle="primary">新建</d-button
+    ><!--
+    -->
     <div dDropDownToggle class="more">
       <i class="icon-chevron-down"></i>
     </div>
@@ -8,7 +16,7 @@
       <li role="menuitem" *ngFor="let item of items">
         <a class="devui-dropdown-item">
           <span class="icon-plan" style="padding-right: 5px;  vertical-align: middle"></span>
-          {{item}}
+          {{ item }}
         </a>
       </li>
     </ul>

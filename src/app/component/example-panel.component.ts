@@ -24,13 +24,13 @@ import { Router, ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'd-demo-cell',
   styles: [`
-:host /deep/ section h4,
-:host /deep/ section h5 {
+:host ::ng-deep section h4,
+:host ::ng-deep section h5 {
     font-weight: bold;
     color: rgba(0, 0, 0, 0.4);
 }
 
-:host /deep/ section {
+:host ::ng-deep section {
   margin-bottom: 50px;
 }
 
@@ -55,7 +55,7 @@ div.html, div.typescript, div.markdown {
   padding: 26.5px;
 }
 
-:host /deep/ pre table {
+:host ::ng-deep pre table {
     width: 100%;
     max-width: 100%;
     margin-bottom: 20px;

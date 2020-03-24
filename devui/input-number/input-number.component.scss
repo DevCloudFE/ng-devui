@@ -13,6 +13,7 @@
   &:hover {
     .input-box:not(.disabled) {
       border: 1px solid $hover-control;
+      padding-right: 26px;
     }
 
     .input-control-buttons:not(.disabled) {
@@ -27,6 +28,7 @@
   &:focus-within {
     .input-box:not(.disabled) {
       border: 1px solid $hover-control;
+      padding-right: 26px;
     }
 
     .input-control-buttons:not(.disabled) {
@@ -42,13 +44,13 @@
     box-sizing: border-box;
     padding: 5px 10px;
     font-size: 14px;
-    color: $dark1;
+    color: $dark-1;
     vertical-align: middle;
-    border: 1px solid $gray1;
-    border-radius: 1px;
+    border: 1px solid $gray-1;
+    border-radius: 2px;
     outline: none;
     width: 100%;
-    background-color: $white;
+    background-color: $bg-white;
     line-height: 20px;
     height: 32px;
   }
@@ -63,11 +65,11 @@
     justify-content: center;
     align-items: center;
     border: 1px solid transparent;
-    border-left-color: $gray1;
+    border-left-color: $gray-1;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-
+    line-height: 100%;
     .input-control-button {
       -webkit-user-select: none;
       -moz-user-select: none;
@@ -80,10 +82,14 @@
       line-height: 50%;
       border-width: 0 1px;
       cursor: pointer;
-      transition: transform .2s ease-in-out;
+      transition: transform 0.2s ease-in-out;
       display: flex;
       justify-content: center;
       align-items: center;
+
+      svg > g {
+        fill: $dark-1;
+      }
 
       &:not(.disabled):hover {
         & > svg > g {
@@ -91,10 +97,6 @@
         }
       }
     }
-  }
-
-  .svg-icon-arrow > g {
-    fill: $dark1;
   }
 }
 
@@ -105,7 +107,7 @@
     height: 46px;
   }
 
-  & /deep/ .svg-icon-arrow {
+  & ::ng-deep .devui-svg-icon-arrow {
     width: 16px;
     height: 16px;
   }
@@ -118,8 +120,11 @@
     height: 30px;
   }
 
-  & /deep/ .svg-icon-arrow {
+  & ::ng-deep .devui-svg-icon-arrow {
     width: 13px;
     height: 13px;
   }
+}
+.input-container {
+  line-height: 100%;
 }

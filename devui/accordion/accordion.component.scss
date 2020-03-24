@@ -1,57 +1,128 @@
 @import '../style/mixins/index';
+@import '../style/theme/color';
 
 :host {
   display: block;
 }
-/deep/ .devui-accordion-menu,
-.devui-accordion-menu {
+:host ::ng-deep d-accordion-menu,
+:host ::ng-deep d-accordion-item,
+:host ::ng-deep d-accordion-item-hreflink,
+:host ::ng-deep d-accordion-item-routerlink,
+:host ::ng-deep d-accordion-list {
+  display: block;
+}
+
+/* 菜单底色 */
+:host ::ng-deep .devui-accordion-menu {
+  display: block;
+  background: $bg-white;
+  box-shadow: 0 1px 2px 0 $dark-1-boxshadow;
   width: 100%;
   overflow-y: auto;
-  .devui-accordion-item {
-      position: relative;
-      > .open-icon {
-          pointer-events: none; /*让鼠标穿透*/
-          position: absolute;
-          right: 10px;
-          top: 12px;
-          width: 16px;
-          height: 16px;
-          line-height: 16px;
-          transition: transform ease-out 300ms;
-      }
-      &:not(.open){
-          >.open-icon {
-              transform: rotate(-90deg);
-              transform-origin: center;
-          }
-      }
-      &.disabled > .devui-accordion-item-title,
-      &.disabled > .open-icon{
-          opacity: 0.3;
-          cursor: default;
-      }
-  }
-  .devui-accordion-item-title {
-      height: 40px;
-      width: 100%;
-      padding: 0 30px 0 20px;
-      line-height: 40px;
+  & > .devui-accordion-list > .devui-accordion-item {
+    & > .devui-accordion-menu-item > .devui-accordion-item-title,
+    & > .devui-accordion-item-title {
       font-weight: 700;
-      cursor: pointer;
+    }
   }
-  .devui-accordion-submenu {
-      .devui-accordion-item-title {
-          font-weight: 400;
-          padding-left: 40px;
-          padding-right: 10px;
-      }
-
+  .devui-over-flow-ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
-  a.devui-accordion-item-title {
-      &:hover {
-          text-decoration: none;
+}
+:host ::ng-deep .devui-accordion-submenu {
+  background: $bg-white;
+  width: 100%;
+}
+/* 单行菜单 */
+:host ::ng-deep .devui-accordion-item-title {
+  display: block;
+  height: 40px;
+  width: 100%;
+  padding: 0 10px 0 20px;
+  font-weight: 400;
+  line-height: 40px;
+  color: $dark-1;
+  background: transparent;
+  cursor: pointer;
+  &.disabled {
+    opacity: 0.3;
+    cursor: default;
+  }
+  &:not(.disabled) {
+    &:hover {
+      background: $hover-content;
+    }
+    &.devui-router-active,
+    &.active {
+      color: $brand-1;
+      background: $brand-3;
+      & > a {
+        color: $brand-1;
       }
+    }
+  }
+  & > a {
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    color: $dark-1;
+    &:hover {
+      color: inherit;
       text-decoration: none;
-      display: block;
+    }
   }
+}
+/* 解决链接可点击区域大小不是100%宽度问题 */
+:host ::ng-deep d-accordion-item-hreflink,
+:host ::ng-deep d-accordion-item-routerlink {
+  &.devui-accordion-item-title {
+    padding: 0;
+    & > a {
+      padding: 0 10px 0 20px;
+    }
+  }
+}
+
+/* 展开图标相关 */
+:host ::ng-deep .devui-accordion-menu-item > .devui-accordion-item-title {
+  position: relative;
+  & > .devui-accordion-open-icon {
+    display: inline-block;
+    text-indent: 0;
+    pointer-events: none; /*让鼠标穿透*/
+    position: absolute;
+    right: 10px;
+    top: 12px;
+    width: 16px;
+    height: 16px;
+    line-height: 16px;
+    transition: transform ease-out 300ms;
+    & > svg {
+      width: 16px;
+      height: 16px;
+      polygon {
+        fill: $dark-1;
+      }
+    }
+  }
+  &:not(.open) > .devui-accordion-open-icon {
+    transform: rotate(-90deg);
+    transform-origin: center;
+  }
+  &.disabled > .devui-accordion-open-icon {
+    opacity: 0.3;
+  }
+}
+/* 可展开的菜单 */
+:host ::ng-deep .devui-accordion-menu-item > .devui-accordion-item-title {
+  padding-right: 30px;
+  &.active {
+    color: $brand-1;
+    background: transparent;
+  }
+}
+:host ::ng-deep d-accordion-list.devui-accordion-menu-hidden {
+  display: none;
 }

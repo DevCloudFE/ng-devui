@@ -5,23 +5,25 @@ import {
   TemplateRef,
   Output,
   EventEmitter,
+  OnDestroy,
 } from '@angular/core';
 
 import {
   IUploadOptions,
   UploadStatus
 } from './file-uploader.types';
-import {UploadComponent} from './upload.class';
-import {FileUploader} from './file-uploader.class';
-import {UploadedFilesComponent} from './uploaded-files.component';
-import { DevUIConfig } from 'ng-devui/devui.config';
+import { UploadComponent } from './upload.class';
+import { FileUploader } from './file-uploader.class';
+import { UploadedFilesComponent } from './uploaded-files.component';
+import { I18nInterface, I18nService } from 'ng-devui/i18n';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'd-multiple-upload-view',
   templateUrl: './multiple-upload-view.component.html',
   styleUrls: ['./multiple-upload-view.component.scss'],
 })
-export class MultipleUploadViewComponent extends UploadComponent {
-  @ViewChild('dUploadedFiles') uploadedFilesComponent: UploadedFilesComponent;
+export class MultipleUploadViewComponent extends UploadComponent implements OnDestroy {
+  @ViewChild('dUploadedFiles', { static: true }) uploadedFilesComponent: UploadedFilesComponent;
   @Input() uploadOptions: IUploadOptions;
   @Input() preloadFilesRef: TemplateRef<any>;
   @Input() uploadedFiles: Array<Object> = [];
@@ -30,19 +32,15 @@ export class MultipleUploadViewComponent extends UploadComponent {
   @Output() deleteUploadedFileEvent: EventEmitter<any> = new EventEmitter();
   UploadStatus = UploadStatus;
   fileUploaders: Array<FileUploader> = [];
-  PRELOAD: string;
-  UPLOADING: string;
-  UPLOADED: string;
-  FAILED: string;
-  DELETE: string;
-  constructor(private devUIConfig: DevUIConfig) {
+  i18nText: I18nInterface['upload'];
+  i18nSubscription: Subscription;
+  constructor(private i18n: I18nService) {
     super();
-    this.PRELOAD = this.devUIConfig['uploadCN'].UPLOAD_STATUS.PRELOAD;
-    this.UPLOADING = this.devUIConfig['uploadCN'].UPLOAD_STATUS.UPLOADING;
-    this.UPLOADED = this.devUIConfig['uploadCN'].UPLOAD_STATUS.UPLOADED;
-    this.FAILED = this.devUIConfig['uploadCN'].UPLOAD_STATUS.FAILED;
-    this.DELETE = this.devUIConfig['uploadCN'].DELETE;
-}
+    this.i18nText = this.i18n.getI18nText().upload;
+    this.i18nSubscription = this.i18n.langChange().subscribe((data) => {
+      this.i18nText = data.upload;
+    });
+  }
 
   addFile(file) {
     super.addFile(file, this.uploadOptions);
@@ -64,6 +62,12 @@ export class MultipleUploadViewComponent extends UploadComponent {
 
   _onDeleteUploadedFile(filePath: string) {
     this.deleteUploadedFileEvent.emit(filePath);
+  }
+  ngOnDestroy(): void {
+    if (this.i18nSubscription) {
+      this.i18nSubscription.unsubscribe();
+
+    }
   }
 }
 

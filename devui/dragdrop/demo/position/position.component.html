@@ -1,0 +1,102 @@
+<section>
+  <h3>拖拽到排序列表外部的默认行为</h3>
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="card">
+        <div class="card-header">Items</div>
+        <div class="card-block">
+          <ul class="list-group">
+            <li
+              dDraggable
+              *ngFor="let item of list1"
+              [dragScope]="'default-position'"
+              [dragData]="{ item: item, parent: list1 }"
+              class="list-group-item over-flow-ellipsis"
+            >
+              {{ item.name }}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <div
+        class="card card-outline-primary mb-3"
+        dDroppable
+        [switchWhileCrossEdge]="true"
+        [dropScope]="'default-position'"
+        (dropEvent)="onDrop($event, list2)"
+        [defaultDropPosition]="'before'"
+      >
+        <div class="card-header">拖放到此处加到顶部</div>
+        <div class="card-block">
+          <ul class="list-group drop-el" dSortable>
+            <li
+              dDraggable
+              *ngFor="let item of list2"
+              [dragScope]="'default-position'"
+              [dragHandleClass]="'drag-handle'"
+              [dragData]="{ item: item, parent: list2 }"
+              class="list-group-item over-flow-ellipsis"
+            >
+              {{ item.name }}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <div
+        class="card card-outline-primary mb-3"
+        dDroppable
+        [switchWhileCrossEdge]="true"
+        [dropScope]="'default-position'"
+        (dropEvent)="onDrop($event, list3)"
+        [defaultDropPosition]="'after'"
+      >
+        <div class="card-header">拖放到此处加到底部</div>
+        <div class="card-block">
+          <ul class="list-group drop-el" dSortable>
+            <li
+              dDraggable
+              *ngFor="let item of list3"
+              [dragScope]="'default-position'"
+              [dragHandleClass]="'drag-handle'"
+              [dragData]="{ item: item, parent: list3 }"
+              class="list-group-item over-flow-ellipsis"
+            >
+              {{ item.name }}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <div
+        class="card card-outline-primary mb-3"
+        dDroppable
+        [switchWhileCrossEdge]="true"
+        [dropScope]="'default-position'"
+        (dropEvent)="onDrop($event, list4)"
+        [defaultDropPosition]="'closest'"
+      >
+        <div class="card-header">拖放到此处加到最近处</div>
+        <div class="card-block">
+          <ul class="list-group drop-el" dSortable>
+            <li
+              dDraggable
+              *ngFor="let item of list4"
+              [dragScope]="'default-position'"
+              [dragHandleClass]="'drag-handle'"
+              [dragData]="{ item: item, parent: list4 }"
+              class="list-group-item over-flow-ellipsis"
+            >
+              {{ item.name }}
+            </li>
+          </ul>
+        </div>
+        <div class="card-footer">拖放到此处加到最近处</div>
+      </div>
+    </div>
+  </div>
+</section>

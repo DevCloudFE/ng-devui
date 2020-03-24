@@ -1,0 +1,21 @@
+@import '../style/core/layout';
+
+.devui-form-horizontal :host.devui-form-item {
+  margin-bottom: $element-spacing;
+  display: flex;
+  align-items: center;
+}
+
+.devui-form-vertical :host.devui-form-item {
+  display: flex;
+  margin-bottom: $element-spacing;
+  flex-direction: column;
+}
+
+.devui-form-columns :host.devui-form-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-right: 10px;
+  padding: 8px 0;
+}

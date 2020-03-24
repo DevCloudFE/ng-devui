@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 @Component({
-    selector: 'd-demo-progress-circle',
+    selector: 'd-circle',
     styleUrls: ['./circle.component.css'],
     templateUrl: './circle.component.html'
 })

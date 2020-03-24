@@ -13,6 +13,8 @@ import { CheckableComponent } from './checkable/checkable.component';
 import { OperateBtnComponent } from './operate-btn/operate-btn.component';
 import { CustomizeComponent } from './customize/customize.component';
 import { DraggableComponent } from './draggable/draggable.component';
+import { CustomTitleKeyComponent } from './custom-title-key/custom-title-key.component';
+import { SearchFilterComponent } from './search-filter/search-filter.component';
 
 @NgModule({
   imports: [
@@ -37,7 +39,9 @@ import { DraggableComponent } from './draggable/draggable.component';
     CheckableComponent,
     OperateBtnComponent,
     CustomizeComponent,
-    DraggableComponent
+    DraggableComponent,
+    CustomTitleKeyComponent,
+    SearchFilterComponent
   ],
   entryComponents: [
     TreeDemoComponent,

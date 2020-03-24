@@ -1,0 +1,51 @@
+.menu {
+  width: 400px;
+}
+.badge {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border-radius: 8px;
+  font-size: 12px;
+  line-height: 12px;
+  padding: 2px;
+  color: #fff;
+  text-align: center;
+  background: #5170ff;
+  margin-top: -2px;
+  font-weight: 400;
+}
+.loading {
+  position: relative;
+  line-height: 40px;
+  padding-left: 66px;
+}
+.circle-spinner {
+  top: 10px;
+  left: 36px;
+  position: absolute;
+  display: block;
+  width: 20px;
+  height: 20px;
+  transform-origin: center;
+  animation: circle infinite 0.75s linear;
+
+  border: 2px solid #5170ff;
+  border-top-color: transparent;
+  border-radius: 50%;
+}
+
+@keyframes circle {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 500px) {
+  .menu {
+    width: 80%;
+  }
+}

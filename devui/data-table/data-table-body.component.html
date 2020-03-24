@@ -1,69 +1,106 @@
-<ng-container *ngIf="!virtualScroll;else scrollViewTpl">
-  <ng-container *ngFor="let rowItem of dataSource; trackBy:trackByFn; let rowIndex = index">
-    <ng-template [ngTemplateOutlet]="trTable" [ngTemplateOutletContext]="{rowItem:rowItem, rowIndex:rowIndex}">
-    </ng-template>
+<ng-container *ngIf="!virtualScroll; else scrollViewTpl">
+  <ng-container *ngFor="let rowItem of dataSource; trackBy: trackByFn; let rowIndex = index">
+    <ng-template [ngTemplateOutlet]="trTable" [ngTemplateOutletContext]="{ rowItem: rowItem, rowIndex: rowIndex }"> </ng-template>
   </ng-container>
 </ng-container>
 
 <ng-template #scrollViewTpl>
-  <ng-container *cdkVirtualFor="let rowItem of dataSource; trackBy:trackByFn; let rowIndex = index">
-    <ng-template [ngTemplateOutlet]="trTable" [ngTemplateOutletContext]="{rowItem:rowItem, rowIndex:rowIndex}">
-    </ng-template>
+  <ng-container *cdkVirtualFor="let rowItem of dataSource; trackBy: trackByFn; let rowIndex = index">
+    <ng-template [ngTemplateOutlet]="trTable" [ngTemplateOutletContext]="{ rowItem: rowItem, rowIndex: rowIndex }"> </ng-template>
   </ng-container>
 </ng-template>
 
 <ng-template #trTable let-rowIndex="rowIndex" let-rowItem="rowItem">
-  <tr dDataTableRow
-    [checkableColumn]="checkableColumn"
-    [showDetailColumn]="showDetailColumn"
+  <tr
+    *ngIf="!rowItem['$draggable']"
+    dDataTableRow
     [resizeable]="resizeable"
-    [checkable]="checkable" [rowIndex]="rowIndex" [rowItem]="rowItem" [columns]="columns"
+    [checkable]="checkable"
+    [rowIndex]="rowIndex"
+    [rowItem]="rowItem"
+    [columns]="columns"
     [editRowItem]="editRowItem"
-    [editModel]="editModel" [dataTableTemplates]="dataTableTemplates" [allChecked]="allChecked"
-    [showDetail]="showDetail"
+    [editModel]="editModel"
+    [allChecked]="allChecked"
+    [showExpandToggle]="showExpandToggle"
     [timeout]="timeout"
     [tableLevel]="tableLevel"
-    [nestedIndex] = "nestedIndex"
->
-</tr>
-<tr class="expand-row" *ngIf="rowItem.expandConfig?.expand">
-    <td *ngIf="checkable"></td>
-    <td *ngIf="showDetail"></td>
-    <td [attr.colspan]="columns.length">
-      <ng-template [ngTemplateOutlet]="rowItem.expandConfig?.expandTemplateRef || default"
-        [ngTemplateOutletContext]="{$implicit: this, columns: columns, rowIndex:rowIndex, rowItem:rowItem}">
+    [nestedIndex]="nestedIndex"
+    class="{{ rowItem.$rowClass ? rowItem.$rowClass : '' }}"
+    [ngClass]="{ 'table-row-selected': rowItem.$checked }"
+  ></tr>
+  <tr
+    *ngIf="rowItem['$draggable']"
+    dDataTableRow
+    dDraggable
+    [resizeable]="resizeable"
+    [checkable]="checkable"
+    [rowIndex]="rowIndex"
+    [rowItem]="rowItem"
+    [columns]="columns"
+    [editRowItem]="editRowItem"
+    [editModel]="editModel"
+    [allChecked]="allChecked"
+    [showExpandToggle]="showExpandToggle"
+    [timeout]="timeout"
+    [tableLevel]="tableLevel"
+    [nestedIndex]="nestedIndex"
+    class="{{ rowItem.$rowClass ? rowItem.$rowClass : '' }}"
+    [ngClass]="{ 'table-row-selected': rowItem.$checked }"
+    [dragData]="{ data: rowItem }"
+    [dragScope]="rowItem['$draggable']['scope']"
+    [dragOverClass]="rowItem['$draggable']['class']"
+  ></tr>
+  <tr *ngIf="rowItem['$isDetailOpen'] && rowItem.detail">
+    <td [attr.colspan]="checkable ? 2 : 1"></td>
+    <td [attr.colspan]="columns.length" class="detail-content" [style.padding]="'13px'">
+      <ng-template
+        [ngTemplateOutlet]="detailTemplateRef || default"
+        [ngTemplateOutletContext]="{$implicit: this, detail:rowItem.detail, rowIndex:rowIndex, rowItem:rowItem}"
+      >
       </ng-template>
-      <ng-template #default>
-        <div>{{rowItem.expandConfig?.description}}</div>
+      <ng-template #default let-detail="detail" let-rowIndex="rowIndex" let-rowItem="rowItem">
+        <div>{{ detail }}</div>
       </ng-template>
     </td>
   </tr>
-<tr class="child-table" *ngIf="rowItem['$isChildTableOpen'] && rowItem['children']">
-  <td [attr.colspan]="childTdColspan">
-    <table class="devui-table {{type ? 'table-' + type : ''}} {{ hover ? 'table-hover': ''}}" [style.table-layout]="'fixed'">
-      <thead></thead>
-        <tbody dDataTableBody
-          [dataTableTemplates]="dataTableTemplates"
+  <tr class="expand-row" *ngIf="rowItem.$expandConfig?.expand">
+    <td *ngIf="checkable"></td>
+    <td *ngIf="showExpandToggle"></td>
+    <td [attr.colspan]="columns.length">
+      <ng-template
+        [ngTemplateOutlet]="rowItem.$expandConfig?.expandTemplateRef || default"
+        [ngTemplateOutletContext]="{$implicit: this, columns: columns, rowIndex:rowIndex, rowItem:rowItem}"
+      >
+      </ng-template>
+      <ng-template #default>
+        <div>{{ rowItem.$expandConfig?.description }}</div>
+      </ng-template>
+    </td>
+  </tr>
+  <tr class="child-table" *ngIf="rowItem['$isChildTableOpen'] && rowItem['children']">
+    <td [attr.colspan]="childTdColspan">
+      <table class="devui-table {{ type ? 'table-' + type : '' }} {{ hover ? 'table-hover' : '' }}" [style.table-layout]="'fixed'">
+        <thead></thead>
+        <tbody
+          dDataTableBody
           [dataSource]="rowItem['children']"
           [resizeable]="resizeable"
           [columns]="columns"
-          [checkableColumn]="checkableColumn"
-          [showDetailColumn]="showDetailColumn"
           [checkable]="checkable"
           [allChecked]="allChecked"
           [selectable]="selectable"
           [editModel]="editModel"
           [editRowItem]="editRowItem"
-          [showDetail]="showDetail"
+          [showExpandToggle]="showExpandToggle"
           [detailTemplateRef]="detailTemplateRef"
           [timeout]="timeout"
           [type]="type"
-          [hover] = "hover"
-          [tableLevel] = "tableLevel+1"
-          [nestedIndex] = "nestedIndex+','+rowIndex"
-        >
-        </tbody>
-    </table>
-  </td>
-</tr>
+          [hover]="hover"
+          [tableLevel]="tableLevel + 1"
+          [nestedIndex]="nestedIndex + ',' + rowIndex"
+        ></tbody>
+      </table>
+    </td>
+  </tr>
 </ng-template>

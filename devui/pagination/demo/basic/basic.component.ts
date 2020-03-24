@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'd-pagination-demo-basic',
+  selector: 'd-basic',
   templateUrl: './basic.component.html'
 })
 export class BasicComponent implements OnInit {

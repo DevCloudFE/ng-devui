@@ -3,6 +3,7 @@ import {
   ViewChild,
   TemplateRef,
   HostBinding,
+  OnDestroy,
 } from '@angular/core';
 import {
   Input,
@@ -14,7 +15,7 @@ import {
   IUploadOptions,
   IFileOptions
 } from './file-uploader.types';
-import {SingleUploadViewComponent} from './single-upload-view.component';
+import { SingleUploadViewComponent } from './single-upload-view.component';
 import {
   SelectFiles
 } from './select-files.utils';
@@ -22,9 +23,9 @@ import {
   ModalService,
   ModalAlertComponent
 } from 'ng-devui/modal';
-import { last, map } from 'rxjs/operators' ;
-import { DevUIConfig } from 'ng-devui/devui.config';
-import { Observable } from 'rxjs';
+import { last, map } from 'rxjs/operators';
+import { Observable, Subscription } from 'rxjs';
+import { I18nInterface, I18nService } from 'ng-devui/i18n';
 
 
 @Component({
@@ -33,7 +34,7 @@ import { Observable } from 'rxjs';
   exportAs: 'dSingleUpload',
   styleUrls: ['./upload-view.component.scss'],
 })
-export class SingleUploadComponent {
+export class SingleUploadComponent implements OnDestroy {
   dSingleUploadView;
   @Input() uploadOptions: IUploadOptions;
   @Input() fileOptions: IFileOptions;
@@ -43,18 +44,8 @@ export class SingleUploadComponent {
   @Input() uploadedFilesRef: TemplateRef<any>;
   @Input() preloadFilesRef?: TemplateRef<any>;
   @Input() filePath: string;
-  // i18n
-  /**
-   * 【可选】上传输入框中的Placeholder文字
-   */
-  @Input() CHOOSE_FILE: string;
-  /**
-   * 【可选】上传按钮文字
-   */
+  @Input() placeholderText: string;
   @Input() uploadText: string;
-  /**
-   * 【可选】错误信息弹出框中确认按钮文字
-   */
   @Input() confirmText: string;
   @Input() beforeUpload: (file) => boolean | Promise<boolean> | Observable<boolean>;
   @Input() enableDrop = false;
@@ -63,16 +54,21 @@ export class SingleUploadComponent {
   @Output() deleteUploadedFileEvent: EventEmitter<any> = new EventEmitter();
   @Output() fileDrop: EventEmitter<any> = new EventEmitter();
   @Output() fileOver: EventEmitter<any> = new EventEmitter();
-  @ViewChild('dSingleUploadView') singleUploadViewComponent: SingleUploadViewComponent;
+  @ViewChild('dSingleUploadView', { static: true }) singleUploadViewComponent: SingleUploadViewComponent;
   UploadStatus = UploadStatus;
   isDropOVer = false;
-
+  i18nText: I18nInterface['upload'];
+  i18nCommonText: I18nInterface['common'];
+  i18nSubscription: Subscription;
   constructor(private modalService: ModalService,
-private devUIConfig: DevUIConfig,
-              private selectFiles: SelectFiles) {
-    this.uploadText = this.devUIConfig['uploadCN'].UPLOAD;
-    this.confirmText = this.devUIConfig['modalCN'].BUTTON_TEXT.OK;
-    this.CHOOSE_FILE = this.devUIConfig['uploadCN'].CHOOSE_FILE;
+    private i18n: I18nService,
+    private selectFiles: SelectFiles) {
+    this.i18nText = this.i18n.getI18nText().upload;
+    this.i18nCommonText = this.i18n.getI18nText().common;
+    this.i18nSubscription = this.i18n.langChange().subscribe((data) => {
+      this.i18nText = data.upload;
+      this.i18nCommonText = data.common;
+    });
   }
 
   _dealFiles(observale) {
@@ -121,7 +117,7 @@ private devUIConfig: DevUIConfig,
         .pipe(
           last()
         ).subscribe(
-          (results: Array<{file: File, response: any}>) => {
+          (results: Array<{ file: File, response: any }>) => {
             this.successEvent.emit(results);
             results.forEach((result) => {
               this.singleUploadViewComponent.deleteFile(result.file);
@@ -156,7 +152,11 @@ private devUIConfig: DevUIConfig,
   _onDeleteUploadedFile(filePath: string) {
     this.deleteUploadedFileEvent.emit(filePath);
   }
-
+  deleteFile($event) {
+    $event.stopPropagation();
+    const files = this.singleUploadViewComponent.getFiles();
+    this.singleUploadViewComponent.deleteFile(files[0]);
+  }
   alertMsg(errorMsg) {
     const results = this.modalService.open({
       width: '300px',
@@ -165,11 +165,17 @@ private devUIConfig: DevUIConfig,
       component: ModalAlertComponent,
       data: {
         content: errorMsg,
-        cancelBtnText: this.confirmText,
+        cancelBtnText: this.confirmText ? this.confirmText : this.i18nCommonText.btnConfirm,
         onClose: (event) => {
           results.modalInstance.hide();
         },
       },
     });
+  }
+  ngOnDestroy() {
+    if (this.i18nSubscription) {
+      this.i18nSubscription.unsubscribe();
+
+    }
   }
 }

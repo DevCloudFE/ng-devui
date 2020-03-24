@@ -18,7 +18,7 @@
     position: absolute;
 
     .devui-tick {
-      stroke: $white;
+      stroke: $font-white;
       stroke-dasharray: 50;
       stroke-width: 2;
       stroke-miterlimit: 10;
@@ -27,7 +27,7 @@
       opacity: 0;
       transform: scale(0);
       transform-origin: 50% 50%;
-      transition: stroke-dashoffset .2s ease-in-out, opacity .2s ease-in-out, transform .2s ease-in-out;
+      transition: stroke-dashoffset 0.2s ease-in-out, opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
     }
   }
 
@@ -35,13 +35,13 @@
     opacity: 1;
     stroke-dashoffset: 0;
     transform: scale(1);
-    transition: stroke-dashoffset .3s cubic-bezier(0.755, 0.05, 0.855, 0.06),
-    opacity .2s cubic-bezier(0.755, 0.05, 0.855, 0.06);
+    transition: stroke-dashoffset 0.3s cubic-bezier(0.755, 0.05, 0.855, 0.06), opacity 0.2s cubic-bezier(0.755, 0.05, 0.855, 0.06);
   }
 
-  &.active, &.halfchecked {
+  &.active,
+  &.halfchecked {
     .devui-checkbox-material:not(.custom-color) {
-      border-color: $status-blue;
+      border-color: $brand-1;
     }
   }
 
@@ -50,7 +50,7 @@
       & > .devui-checkbox-bg {
         opacity: 1;
         transform: scale(1);
-        transition: transform .2s ease-in-out;
+        transition: transform 0.2s ease-in-out;
       }
     }
   }
@@ -59,7 +59,7 @@
     .devui-checkbox-material {
       & > .devui-checkbox-bg {
         transform: scale(0);
-        transition: transform .15s cubic-bezier(0.755, 0.05, 0.855, 0.06), opacity .2s cubic-bezier(0.755, 0.05, 0.855, 0.06);
+        transition: transform 0.15s cubic-bezier(0.755, 0.05, 0.855, 0.06), opacity 0.2s cubic-bezier(0.755, 0.05, 0.855, 0.06);
       }
     }
   }
@@ -68,18 +68,19 @@
     .devui-checkbox-material {
       & > .devui-checkbox-bg {
         opacity: 1;
-        transform: scale(.57);
-        transition: transform .2s cubic-bezier(0.755, 0.05, 0.855, 0.06);
+        transform: scale(0.57);
+        transition: transform 0.2s cubic-bezier(0.755, 0.05, 0.855, 0.06);
       }
     }
   }
 
   .devui-checkbox-material {
+    text-align: initial;
     height: 14px;
     width: 14px;
     position: relative;
     user-select: none;
-    border: thin solid $gray1;
+    border: 1px solid $gray-1;
     border-radius: 1px;
     margin-right: 5px;
     vertical-align: text-top;
@@ -87,8 +88,8 @@
     & > .devui-checkbox-bg {
       display: inline-block;
       position: absolute;
-      content: "";
-      background-color: $status-blue;
+      content: '';
+      background-color: $brand-1;
       top: 0;
       left: 0;
       height: 100%;
@@ -101,23 +102,27 @@
   &:not(.disabled) {
     .devui-checkbox-material:not(.custom-color) {
       &:hover {
-        border: thin solid $hover-control;
-        transition: border-color .2s ease-in-out;
+        border: 1px solid $hover-control;
+        transition: border-color 0.2s ease-in-out;
 
         & > .devui-checkbox-bg {
           background-color: $hover-control;
         }
       }
 
-      &:active, &:focus {
-        border: thin solid $focus2;
-        transition: border-color .2s ease-in-out;
+      &:active,
+      &:focus {
+        border: 1px solid $brand-2;
+        transition: border-color 0.2s ease-in-out;
       }
 
       // 激活状态深色
-      &:active, &:focus, &:hover:active, &:hover:focus {
+      &:active,
+      &:focus,
+      &:hover:active,
+      &:hover:focus {
         & > .devui-checkbox-bg {
-          background-color: $focus2;
+          background-color: $brand-2;
         }
       }
     }
@@ -141,7 +146,7 @@
     font-weight: normal;
     line-height: 1;
     cursor: pointer;
-    color: $dark1;
+    color: $dark-1;
     margin: 0;
 
     span {

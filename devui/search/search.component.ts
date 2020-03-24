@@ -1,8 +1,9 @@
 import { fromEvent, Subscription  } from 'rxjs';
 import { ChangeDetectionStrategy, Component, OnInit, OnDestroy, Input, Output, forwardRef, AfterViewInit,
-   EventEmitter, ViewChild, ElementRef, Renderer2 } from '@angular/core';
+   EventEmitter, ViewChild, ElementRef, Renderer2, ChangeDetectorRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { map , filter, debounceTime } from 'rxjs/operators';
+import { I18nService, I18nInterface } from 'ng-devui/i18n';
 
 @Component({
   selector: 'd-search',
@@ -24,22 +25,25 @@ export class SearchComponent implements ControlValueAccessor, OnInit, OnDestroy,
   /**
    * 【可选】下拉默认显示文字
    */
-  @Input() placeholder = 'Please Input keywords';
+  @Input() placeholder: string;
   @Input() maxLength = Number.MAX_SAFE_INTEGER;
   @Input() isKeyupSearch = false;
   @Input() delay = 300;
   @Output() searchFn = new EventEmitter<string>();
-  @ViewChild('filterInput') filterInputElement: ElementRef;
-  @ViewChild('line') lineElement: ElementRef;
-  @ViewChild('clearIcon') clearIconElement: ElementRef;
+  @ViewChild('filterInput', { static: true }) filterInputElement: ElementRef;
+  @ViewChild('line', { static: true }) lineElement: ElementRef;
+  @ViewChild('clearIcon', { static: true }) clearIconElement: ElementRef;
+  i18nCommonText: I18nInterface['common'];
+  i18nSubscription: Subscription;
   private subscription: Subscription;
   private onChange = (_: any) => null;
   private onTouch = () => null;
 
-  constructor(private renderer: Renderer2) {
+  constructor(private renderer: Renderer2, private i18n: I18nService, private cdr: ChangeDetectorRef) {
   }
 
   ngOnInit() {
+    this.setI18nText();
   }
 
   registerOnChange(fn: any): void {
@@ -53,6 +57,14 @@ export class SearchComponent implements ControlValueAccessor, OnInit, OnDestroy,
   writeValue(value: any = ''): void {
     this.renderer.setProperty(this.filterInputElement.nativeElement, 'value', value);
     this.renderClearIcon();
+  }
+
+  setI18nText() {
+    this.i18nCommonText = this.i18n.getI18nText().common;
+    this.i18nSubscription = this.i18n.langChange().subscribe((data) => {
+      this.i18nCommonText = data.common;
+      this.cdr.markForCheck();
+    });
   }
 
   clearText() {
@@ -104,8 +116,12 @@ export class SearchComponent implements ControlValueAccessor, OnInit, OnDestroy,
   }
 
   ngOnDestroy() {
-    // tslint:disable-next-line:no-unused-expression
-    this.subscription && this.subscription.unsubscribe();
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+    if (this.i18nSubscription) {
+      this.i18nSubscription.unsubscribe();
+    }
   }
 
 }

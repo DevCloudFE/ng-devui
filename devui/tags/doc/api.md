@@ -11,7 +11,7 @@
 ### d-tag事件
 | 事件名称        | 类型      |   说明                 |
 | :---------: | :----------: | :-------------------------|
-| tagDelete    | { tag: tag }      | 删除tag的时候触发的事件 |
+| tagDelete    | `EventEmitter<{ tag: tag }>`      | 删除tag的时候触发的事件 |
 
 ### d-tags参数
 | 参数        | 类型          | 默认        |   说明                 |
@@ -24,4 +24,4 @@
 ### d-tags事件
 | 事件名称        | 类型      |   说明                 |
 | :---------: | :----------: | :-------------------------|
-| tagDelete    | { tag: tag, index: index }      | 删除某个tag的时候触发的事件 |
+| tagDelete    | `EventEmitter<{ tag: tag, index: index }>`      | 删除某个tag的时候触发的事件 |

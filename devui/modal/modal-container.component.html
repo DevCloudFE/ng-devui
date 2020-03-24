@@ -1,24 +1,30 @@
 <div>
-    <d-modal-header id="d-modal-header" [title]="title" (closeEvent)="close($event)"></d-modal-header>
-    <div class='modal-body' [ngStyle]="{'maxHeight': maxHeight, 'overflow-y': 'auto'}">
-        <div [ngClass]="{'display-flex': (dialogtype !=='' && dialogtype !=='standard')}">
-            <div *ngIf="(dialogtype | lowercase) == 'warning'" class="alert-icon">
-                <svg t="1523848353321" class="icon" style="" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2903" xmlns:xlink="http://www.w3.org/1999/xlink" width="50" height="50"><defs><style type="text/css"></style></defs><path d="M512 0C229.205333 0 0 229.205333 0 512s229.205333 512 512 512 512-229.205333 512-512S794.794667 0 512 0z m-40.021333 230.997333a39.978667 39.978667 0 1 1 80.042666 0v369.024a39.978667 39.978667 0 1 1-80.042666 0V230.997333zM512 794.026667a44.928 44.928 0 0 1-45.013333-44.970667c0-24.917333 20.096-45.013333 45.013333-45.013333s45.013333 20.096 45.013333 45.013333c0 24.746667-20.096 44.970667-45.013333 44.970667z" fill="#FCAC60" p-id="2904"></path></svg>
-            </div>
-            <div *ngIf="(dialogtype | lowercase) == 'failed'" class="alert-icon">
-                <svg t="1523848193850" class="icon" style="" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2647" xmlns:xlink="http://www.w3.org/1999/xlink" width="50" height="50"><defs><style type="text/css"></style></defs><path d="M512 0C229.205333 0 0 229.205333 0 512s229.205333 512 512 512 512-229.205333 512-512S794.794667 0 512 0z m205.312 666.88a36.010667 36.010667 0 0 1-51.029333 50.816L512 562.986667l-154.282667 154.709333a35.84 35.84 0 0 1-50.901333 0.085333 36.010667 36.010667 0 0 1-0.128-50.901333L461.226667 512 306.773333 357.12a36.010667 36.010667 0 0 1 50.986667-50.816L512 461.013333l154.282667-154.794666a36.010667 36.010667 0 0 1 51.029333 50.773333L562.773333 512l154.453334 154.88z" fill="#F9504B" p-id="2648"></path></svg>
-            </div>
-            <div *ngIf="(dialogtype  | lowercase) == 'sucess' || (dialogtype  | lowercase) == 'success'" class="alert-icon">
-                <svg t="1523848446605" class="icon" style="" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3058" xmlns:xlink="http://www.w3.org/1999/xlink" width="50" height="50"><defs><style type="text/css"></style></defs><path d="M512 0C229.205333 0 0 229.205333 0 512s229.205333 512 512 512 512-229.205333 512-512S794.794667 0 512 0z m260.266667 356.394667l-359.466667 360.704-0.426667 0.426666a35.925333 35.925333 0 0 1-57.6-6.826666l-108.885333-190.378667a35.882667 35.882667 0 0 1 13.397333-49.109333 35.882667 35.882667 0 0 1 49.109334 13.397333l85.418666 149.504 327.466667-328.533333a36.010667 36.010667 0 0 1 51.029333 50.816z" fill="#41C99F" p-id="3059"></path></svg>
-            </div>
-            <div *ngIf="(dialogtype  | lowercase) == 'info'" class="alert-icon">
-                <svg t="1523848507870" class="icon" style="" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3217" xmlns:xlink="http://www.w3.org/1999/xlink" width="50" height="50"><defs><style type="text/css"></style></defs><path d="M512 0C229.205333 0 0 229.205333 0 512s229.205333 512 512 512 512-229.205333 512-512S794.794667 0 512 0z m-2.986667 184.490667a35.968 35.968 0 1 1 0 71.978666 35.968 35.968 0 0 1 0-71.978666z m157.184 557.098666a35.968 35.968 0 0 1-36.010666 36.010667H387.84a35.968 35.968 0 1 1 0-72.021333h85.205333V391.552H413.013333a35.968 35.968 0 1 1 0-72.021333h96c19.882667 0 35.968 16.128 35.968 36.010666v350.122667h85.205334c19.925333 0 36.010667 16.085333 36.010666 35.968z" fill="#797979" p-id="3218"></path></svg>
-            </div>
-            <div class="content" *ngIf="!!content && !html">{{content}}</div>
-            <div class="content" *ngIf="!!content && html" [innerHTML]="content"></div>
-            <ng-template dModalContentHost></ng-template>
-        </div>
+  <d-modal-header
+    id="d-modal-header"
+    [title]="title"
+    (closeEvent)="close($event)"
+    [dialogtype]="dialogtype"
+    [showCloseBtn]="showCloseBtn"
+  ></d-modal-header>
+  <div
+    class="modal-body devui-scrollbar"
+    [ngClass]="{
+      'flex-content': dialogtype === 'warning' || dialogtype === 'failed' || dialogtype === 'success' || dialogtype === 'info'
+    }"
+    [ngStyle]="{ maxHeight: maxHeight, 'overflow-y': 'auto' }"
+  >
+    <div
+      [ngClass]="{
+        'display-flex': dialogtype !== '' && dialogtype !== 'standard'
+      }"
+    >
+      <div class="content" [style.max-height]="maxHeight" *ngIf="!!content && !html">
+        {{ content }}
+      </div>
+      <div class="content" [style.max-height]="maxHeight" *ngIf="!!content && html" [innerHTML]="content"></div>
+      <ng-template dModalContentHost></ng-template>
     </div>
+  </div>
 
-    <d-modal-footer [buttons]="buttons"></d-modal-footer>
+  <d-modal-footer [buttons]="buttons"></d-modal-footer>
 </div>

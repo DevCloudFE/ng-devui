@@ -6,57 +6,102 @@
   display: block;
 }
 
-.nav-tabs {
+.devui-nav-tabs,
+.devui-nav-pills {
   font-size: 14px;
   background: transparent;
+  font-size: 14px;
+  font-weight: bold;
   li {
-    margin-left: 32px;
-    &:first-child{
-      margin-left: 0px;
-    }
     cursor: pointer;
-    border-bottom-width: 2px;
-    border-bottom-style: solid;
+    border: 2px solid transparent;
     & > a {
       cursor: pointer;
       border: none;
       line-height: 30px;
       background-color: transparent;
       padding: 0;
+      color: $dark-1;
     }
-    & > a:hover, & > a:focus, & > a:active {
+    & > a:hover,
+    & > a:focus,
+    & > a:active {
       outline: none;
     }
+    &.disabled {
+      a {
+        opacity: 0.3;
+        cursor: not-allowed;
+      }
+    }
+    &.active,
+    &:hover:not(.disabled) {
+      & > a {
+        color: $brand-1;
+      }
+    }
+  }
+  li:after {
+    content: '';
+    display: block;
+    margin: auto;
+    height: 2px;
+    width: 0px;
+    background: transparent;
+    transition: width 0.3s ease-out, background-color 0.3s ease-out;
+  }
+  li.active:after {
+    width: 100%;
+    background: $brand-1;
   }
 }
 
-.nav-options {
+.devui-nav-options {
   font-size: 14px;
   background: transparent;
   border: none;
   border-radius: 1px;
   > li {
     cursor: pointer;
+    border: 1px solid $gray-1;
     border-left-width: 0px;
+    background-color: $bg-white;
     float: left;
-    &:first-child{
+    &:first-child {
       border-left-width: 1px;
       border-radius: 1px 0 0 1px;
     }
-    &:last-child{
+    &:last-child {
       border-radius: 0 1px 1px 0;
     }
 
     & > a {
       cursor: pointer;
       border: none;
+      color: $dark-1;
       line-height: 30px;
       padding: 0 15px;
-      &:hover, &:focus, &:active {
+      &:hover,
+      &:focus,
+      &:active {
         outline: none;
       }
     }
-    &.active, &:hover {
+    &.disabled {
+      a {
+        opacity: 0.3;
+        cursor: not-allowed;
+      }
+    }
+    &.active,
+    &:hover:not(.disabled) {
+      & > a {
+        color: $font-white;
+        &:hover {
+          color: $font-white;
+          background: transparent;
+        }
+      }
       &:not(:first-child)::before {
         content: '';
         display: block;
@@ -67,12 +112,30 @@
         position: absolute;
       }
     }
+    &.active {
+      background-color: $brand-1;
+      border-color: $brand-1;
+      &:not(:first-child)::before {
+        background-color: $brand-1;
+      }
+      & + li::before {
+        background-color: $brand-1;
+      }
+    }
+
+    &:hover:not(.active):not(.disabled) {
+      background-color: $hover-control;
+      border-color: $hover-control;
+      &:not(:first-child)::before {
+        background-color: $hover-control;
+      }
+    }
   }
 }
 
-.nav {
-  li{
-    > a.custom-width  {
+.devui-nav {
+  li {
+    > a.custom-width {
       display: inline-block;
       padding: 0;
       text-align: center;
@@ -80,20 +143,38 @@
   }
 }
 
-.nav-tabs > li {
-  float: left;
-  margin-bottom: -1px;
+.devui-nav-tabs:not(.devui-nav-stacked) {
+  border-bottom: 1px $gray-1 solid;
+  li {
+    float: left;
+    margin-left: 32px;
+    margin-bottom: -3px;
+    &:first-child {
+      margin-left: 0px;
+    }
+  }
 }
 
-.nav:before, .nav:after {
-  content: " ";
+.devui-nav-pills:not(.devui-nav-stacked) {
+  > li {
+    float: left;
+    margin-left: 32px;
+    &:first-child {
+      margin-left: 0px;
+    }
+  }
+}
+
+.devui-nav:before,
+.devui-nav:after {
+  content: ' ';
   display: table;
 }
 
-.nav:after {
+.devui-nav:after {
   clear: both;
 }
 
-.tab-content{
+.devui-tab-content {
   margin-top: 20px;
 }

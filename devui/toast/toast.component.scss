@@ -1,48 +1,121 @@
-.devui-toast {
-	position: fixed;
-	top: 20px;
-	right: 20px;
-	width: 280px;
-  word-break: break-all;
+@import '../style/mixins/index';
+@import '../style/theme/color';
 
-  .devui-toast-item-container {
-    opacity: 0.95;
-    border-radius: 3px;
-    margin-bottom: 10px;
-    .devui-toast-item {
-      position: relative;
-      padding: 8px;
+:host::ng-deep a {
+  &:link,
+  &:visited {
+    color: $brand-1;
+  }
 
-      .devui-toast-icon-close {
-        position: absolute;
-        top: 8px;
-        right: 8px;
-      }
-
-      .devui-toast-image {
-        position: absolute;
-        display: inline-block;
-        width: 16px;
-        height: 16px;
-        border-radius: 50%;
-        left: 8px;
-        top: 8px;
-      }
-
-      .devui-toast-message {
-        margin-left: 20px;
-        .devui-toast-title {
-          padding-bottom: 8px;
-          display: block;
-        }
-        p {
-          font-size: 12px;
-          margin-bottom: 8px;
-          line-height: 18px;
-        }
-      }
-    }
+  &:hover,
+  &:active {
+    color: $hover-control;
   }
 }
 
+.devui-toast {
+  position: fixed;
+  top: 50px;
+  right: 20px;
+  width: 20em;
+  word-break: normal;
+  word-wrap: break-word;
+}
 
+.devui-toast-item-container {
+  position: relative;
+  margin: 0 0 10px 0;
+  opacity: 0.95;
+  filter: alpha(opacity=95);
+  box-shadow: 0px 12px 24px $dark-1-boxshadow;
+  border-radius: 0.25em;
+  color: $hwc-feedback-overlay-font-color;
+}
+
+.devui-toast-item {
+  position: relative;
+  display: block;
+  padding: 8px 1em;
+}
+
+.devui-toast-item p {
+  padding: 0;
+  margin: 0;
+}
+
+.devui-toast-icon-close {
+  position: absolute;
+  top: 7px;
+  right: 10px;
+  cursor: pointer;
+
+  .devui-toast-close-icon {
+    fill: $font-white;
+  }
+}
+
+.devui-toast-title {
+  font-size: 14px;
+  padding: 0 0 0.5em 0;
+  display: block;
+  font-weight: 700;
+}
+
+.devui-toast-image {
+  position: absolute;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  left: 10px;
+  top: 10px;
+  padding: 0;
+
+  &.devui-toast-image-warning {
+    background-color: $status-yellow;
+  }
+
+  &.devui-toast-image-info {
+    background-color: $status-blue;
+  }
+
+  &.devui-toast-image-error {
+    background-color: $status-red;
+  }
+
+  &.devui-toast-image-success {
+    background-color: $status-green;
+  }
+
+  .devui-toast-image-warning-path,
+  .devui-toast-image-info-path,
+  .devui-toast-image-error-path,
+  .devui-toast-image-success-path {
+    fill: $font-white;
+  }
+}
+
+.devui-toast-message {
+  padding: 0 0 0.25em 0;
+  margin-left: 20px;
+}
+
+.devui-toast-message p {
+  font-size: 12px;
+}
+
+.devui-toast .devui-toast-message-success {
+  background-color: $hwc-feedback-overlay-background;
+}
+
+.devui-toast .devui-toast-message-info {
+  background-color: $hwc-feedback-overlay-background;
+}
+
+.devui-toast .devui-toast-message-warn {
+  background-color: $hwc-feedback-overlay-background;
+}
+
+.devui-toast .devui-toast-message-error {
+  background-color: $hwc-feedback-overlay-background;
+}

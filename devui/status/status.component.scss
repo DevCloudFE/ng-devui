@@ -10,48 +10,41 @@
   line-height: 20px;
   display: inline-block;
   height: 20px;
-    &::before {
-        display: inline-block;
-        content: '';
-        width: 8px;
-        height: 8px;
-        margin-right: 8px;
-        border-radius: 100%;
-    }
 
-     &.d-status-bg-success::before {
-        background: $status-green;
-    }
+  &::before {
+    display: inline-block;
+    content: '';
+    width: 8px;
+    height: 8px;
+    margin-right: 8px;
+    border-radius: 100%;
+  }
 
-    &.d-status-bg-error::before {
-        background: $status-red;
-    }
+  &.devui-status-bg-success::before {
+    background: $status-green;
+  }
 
-    &.d-status-bg-warning::before {
-        background: $status-yellow;
-    }
+  &.devui-status-bg-error::before {
+    background: $status-red;
+  }
 
-    &.d-status-bg-important::before {
-        background: $status-yellow;
-    }
+  &.devui-status-bg-warning::before {
+    background: $status-yellow;
+  }
 
-    &.d-status-bg-less-important::before {
-        background: #FFDF92;
-    }
+  &.devui-status-bg-waiting::before {
+    background: #9faad7;
+  }
 
-    &.d-status-bg-waiting::before {
-        background: #9FAAD7;
-    }
+  &.devui-status-bg-running::before {
+    background: $status-blue;
+  }
 
-    &.d-status-bg-running::before {
-        background: $status-blue;
-    }
+  &.devui-status-bg-invalid::before {
+    background: $gray-1;
+  }
 
-    &.d-status-bg-invalid::before {
-        background: $gray1;
-    }
-
-    &.d-status-bg-initial::before {
-        background: $focus3;
-    }
+  &.devui-status-bg-initial::before {
+    background: $brand-3;
+  }
 }

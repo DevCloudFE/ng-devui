@@ -9,6 +9,10 @@
       "node_modules/@types"
     ]
   },
+  "include": [
+    "**/*.ts",
+    "../devui/**/*.ts"
+  ],
   "exclude": [
     "test.ts",
     "**/*.spec.ts"

@@ -1,21 +1,26 @@
 <section>
   <h4>单个普通标签</h4>
   <d-tag [tag]="'默认标签颜色'"></d-tag>
-  <d-tag [tag]="'标签颜色1'"  [labelStyle]="'blue-w98'"></d-tag>
-  <d-tag [tag]="'标签颜色2'"  [labelStyle]="'green-w98'"></d-tag>
-  <d-tag [tag]="'标签颜色3'"  [labelStyle]="'yellow-w98'"></d-tag>
-  <d-tag [tag]="'标签颜色4'"  [labelStyle]="'orange-w98'"></d-tag>
-  <d-tag [tag]="'标签颜色5'"  [labelStyle]="'pink-w98'"></d-tag>
-  <d-tag [tag]="'标签颜色6'"  [labelStyle]="'purple-w98'"></d-tag>
-  <d-tag [tag]="'标签颜色7'"  [labelStyle]="'turquoise-w98'"></d-tag>
-  <d-tag [tag]="'标签颜色8'"  [labelStyle]="'olivine-w98'"></d-tag>
-  <d-tag [tag]="'自定义标签样式'"  [labelStyle]="'tag-custom'" [titleContent]="'hello'"></d-tag>
+  <d-tag [tag]="'标签颜色1'" [labelStyle]="'blue-w98'"></d-tag>
+  <d-tag [tag]="'标签颜色2'" [labelStyle]="'green-w98'"></d-tag>
+  <d-tag [tag]="'标签颜色3'" [labelStyle]="'yellow-w98'"></d-tag>
+  <d-tag [tag]="'标签颜色4'" [labelStyle]="'orange-w98'"></d-tag>
+  <d-tag [tag]="'标签颜色5'" [labelStyle]="'pink-w98'"></d-tag>
+  <d-tag [tag]="'标签颜色6'" [labelStyle]="'purple-w98'"></d-tag>
+  <d-tag [tag]="'标签颜色7'" [labelStyle]="'turquoise-w98'"></d-tag>
+  <d-tag [tag]="'标签颜色8'" [labelStyle]="'olivine-w98'"></d-tag>
+  <d-tag [tag]="'自定义标签样式'" [labelStyle]="'tag-custom'" [titleContent]="'hello'"></d-tag>
   <h4>单个自定义标签</h4>
-  <d-tag [tag]="tagName" [deletable]="true"  [labelStyle]="'label-color-6'"
-    (tagDelete)="getTagValue($event);deleteTag($event);" [customViewTemplate]="customTag">
+  <d-tag
+    [tag]="tagName"
+    [deletable]="true"
+    [labelStyle]="'label-color-6'"
+    (tagDelete)="getTagValue($event); deleteTag($event)"
+    [customViewTemplate]="customTag"
+  >
   </d-tag>
   <ng-template #customTag let-tag="tag">
     <span class="icon-bug" style="vertical-align:middle;"></span>
-    <span title="{{tag}}">{{tag}}</span>
+    <span title="{{ tag }}">{{ tag }}</span>
   </ng-template>
 </section>

@@ -24,7 +24,7 @@ import { DevUIModule } from 'ng-devui/devui.module';
         },
         {
           path: 'components',
-          loadChildren: './component/app-content.module#AppContentModule'
+          loadChildren: () => import('./component/app-content.module').then(m => m.AppContentModule)
         },
         {
           path: '**',

@@ -1,0 +1,21 @@
+<div class="demo-container">
+  <div class="demo-example">
+    <div class="demo-title">基本用法</div>
+    <div class="demo-text">
+      通过 source 设置数据源
+    </div>
+    <d-codebox id="components-modal-basic" [sourceData]="MultiAutoCompleteDemoDefault">
+      <d-multi-auto-complete-default demo></d-multi-auto-complete-default>
+    </d-codebox>
+  </div>
+
+  <div class="demo-example">
+    <div class="demo-title">自定义匹配方法</div>
+    <div class="demo-text">
+      通过 searchFn 自定义数据的匹配方法和返回的数据格式
+    </div>
+    <d-codebox id="components-modal-basic" [sourceData]="MultiAutoCompleteDemoArray">
+      <d-multi-auto-complete-array demo></d-multi-auto-complete-array>
+    </d-codebox>
+  </div>
+</div>

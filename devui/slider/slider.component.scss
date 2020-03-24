@@ -15,19 +15,19 @@
 
   .devui-slider-rail {
     position: absolute;
-    background-color: $gray2;
+    background-color: $gray-3;
     height: 5px;
     width: 100%;
     transition: background-color 0.2s ease-in-out;
 
     &.disabled {
-      background-color: $gray2;
+      background-color: $gray-3;
     }
   }
 
   &:hover {
     .devui-slider-rail:not(.disabled) {
-      background-color: $gray2;
+      background-color: $gray-3;
     }
 
     .devui-slider-track:not(.disabled) {
@@ -41,7 +41,7 @@
 
   .devui-slider-track {
     position: absolute;
-    background-color: $focus1;
+    background-color: $brand-1;
     height: 5px;
     width: 0;
 
@@ -51,18 +51,19 @@
 
   .devui-slider-handle {
     position: absolute;
-    background-color: $white;
+    background-color: $base-bg-white;
     width: 14px;
     height: 14px;
     border-radius: 50%;
     margin-left: -7px;
     margin-top: -5px;
     left: 0;
-    transition: transform .2s ease-in-out;
-    border: 2px solid $focus1;
+    transition: transform 0.2s ease-in-out;
+    border: 2px solid $brand-1;
 
     &:not(.disabled) {
-      &:hover, &:active {
+      &:hover,
+      &:active {
         transform: scale(1.3);
       }
     }

@@ -1,13 +1,14 @@
 <section>
-  <div dAnchorBox [view]="{top: 60, bottom: 0}" [defaultAnchor]="'base-info'"
-    class="mymain" style="position:relative;">
+  <div dAnchorBox [view]="{ top: 60, bottom: 0 }" [defaultAnchor]="'base-info'" class="mymain" style="position:relative;">
     <div class="mysidebar">
-      <d-sticky [view]="{top: 60, bottom: 0}">
+      <d-sticky [view]="{ top: 60, bottom: 0 }">
         <ul class="step-nav">
           <li [dAnchorLink]="'base-info'" anchorActive="active">基本信息</li>
           <li [dAnchorLink]="'issue-list'" anchorActive="active">需求列表</li>
           <li [dAnchorLink]="'case-list'" anchorActive="active">用例列表</li>
-          <li [dAnchorLink]="'quarlity-result'" anchorActive="active">质量评估</li>
+          <li [dAnchorLink]="'quarlity-result'" anchorActive="active">
+            质量评估
+          </li>
         </ul>
       </d-sticky>
     </div>

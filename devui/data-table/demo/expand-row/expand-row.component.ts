@@ -1,6 +1,7 @@
 import { Component, OnInit, HostBinding, ViewChild, ElementRef, AfterContentInit } from '@angular/core';
 import { originSource, SourceType } from '../mock-data';
-import { TableExpandConfig } from '../../data-table.model';
+import { TableExpandConfig } from 'ng-devui/data-table/data-table.model';
+
 
 @Component({
   selector: 'd-expand-row',
@@ -27,9 +28,9 @@ import { TableExpandConfig } from '../../data-table.model';
   ]
 })
 export class ExpandRowComponent implements OnInit, AfterContentInit {
-  @ViewChild('quickAddRowTip') quickAddRowTip: ElementRef;
-  @ViewChild('quickAddRowContent') quickAddRowContent: ElementRef;
-  @ViewChild('addSubRowContent') addSubRowContent: ElementRef;
+  @ViewChild('quickAddRowTip', { static: true }) quickAddRowTip: ElementRef;
+  @ViewChild('quickAddRowContent', { static: true }) quickAddRowContent: ElementRef;
+  @ViewChild('addSubRowContent', { static: true }) addSubRowContent: ElementRef;
 
   basicDataSource: Array<SourceType> = JSON.parse(JSON.stringify(originSource.slice(0, 6)));
   genderSource = ['male', 'female'];
@@ -47,6 +48,7 @@ export class ExpandRowComponent implements OnInit, AfterContentInit {
   }
 
   ngOnInit() {
+    this.basicDataSource[0].$expandConfig = { expand: false, expandTemplateRef: this.addSubRowContent };
   }
 
   ngAfterContentInit() {
@@ -67,18 +69,18 @@ export class ExpandRowComponent implements OnInit, AfterContentInit {
     this.headerExpandConfig.expandTemplateRef = this.quickAddRowTip;
   }
 
-  addSubData(index, item) {
-    this.basicDataSource[index].expandConfig = { expand: true, expandTemplateRef: this.addSubRowContent };
-  }
+  // addSubData(index, item) {
+  //   this.basicDataSource[index].$expandConfig = { expand: true, expandTemplateRef: this.addSubRowContent };
+  // }
 
   subRowAdded(index, item) {
-    this.basicDataSource[index].expandConfig.expand = false;
+    this.basicDataSource[index].$expandConfig.expand = false;
     const newData = { ...this.defaultRowData };
     this.basicDataSource.splice(index + 1, 0, newData);
   }
 
   subRowCancel(index) {
-    this.basicDataSource[index].expandConfig.expand = false;
+    this.basicDataSource[index].$expandConfig.expand = false;
   }
 
 }

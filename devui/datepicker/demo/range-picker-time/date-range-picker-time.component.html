@@ -1,0 +1,40 @@
+<section style="width: 100%;">
+  <span>日期时间范围选择器:</span>
+  <div class="devui-input-group">
+    <input
+      class="devui-input"
+      placeholder="y/MM/dd  -  y/MM/dd"
+      name="dp"
+      [(ngModel)]="dateRange"
+      (focus)="dateRangePicker.toggle($event)"
+      autocomplete="off"
+      dDateRangePicker
+      #dateRangePicker="dateRangePicker"
+      (selectedRangeChange)="getValue($event)"
+      [showTime]="true"
+    />
+    <div class="devui-input-group-addon" (click)="dateRangePicker.toggle($event, true)">
+      <i class="icon icon-calendar"></i>
+    </div>
+  </div>
+
+  <span>日期时间范围选择器 已赋值:</span>
+  <div class="devui-input-group">
+    <input
+      class="devui-input"
+      placeholder="y/MM/dd  -  y/MM/dd"
+      name="dp"
+      [(ngModel)]="dateRange2"
+      (focus)="dateRangePicker2.toggle($event)"
+      autocomplete="off"
+      dDateRangePicker
+      #dateRangePicker2="dateRangePicker"
+      (selectedRangeChange)="getValue($event)"
+      [showTime]="true"
+      style="width: 270px;"
+    />
+    <div class="devui-input-group-addon" (click)="dateRangePicker2.toggle($event, true)">
+      <i class="icon icon-calendar"></i>
+    </div>
+  </div>
+</section>

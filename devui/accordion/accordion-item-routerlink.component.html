@@ -1,0 +1,32 @@
+<ng-container *ngIf="!disabled">
+  <a [routerLink]="link" [routerLinkActive]="'devui-router-active'" target="{{ target }}" rel="noopener" title="{{ title }}">
+    <ng-container *ngIf="!itemTemplate">
+      {{ title }}
+    </ng-container>
+    <ng-template
+      *ngIf="itemTemplate"
+      [ngTemplateOutlet]="itemTemplate"
+      [ngTemplateOutletContext]="{
+        parent: parent,
+        item: item,
+        deepth: deepth
+      }"
+    ></ng-template>
+  </a>
+</ng-container>
+<ng-container *ngIf="disabled">
+  <a title="{{ title }}">
+    <ng-container *ngIf="!itemTemplate">
+      {{ title }}
+    </ng-container>
+    <ng-template
+      *ngIf="itemTemplate"
+      [ngTemplateOutlet]="itemTemplate"
+      [ngTemplateOutletContext]="{
+        parent: parent,
+        item: item,
+        deepth: deepth
+      }"
+    ></ng-template>
+  </a>
+</ng-container>

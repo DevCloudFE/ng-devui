@@ -1,0 +1,126 @@
+<section>
+  <h4>单击</h4>
+  <div class="btn-group g-dropdown" dDropDown appendToBody [trigger]="'click'">
+    <a dDropDownToggle class="devui-dropdown-default">
+      更多选择
+      <span class="icon icon-chevron-down"></span>
+    </a>
+
+    <ul dDropDownMenu class="devui-dropdown-menu devui-scrollbar" role="menu">
+      <li role="menuitem" dDropDown appendToBody [trigger]="'click'" [appendToBodyDirections]="subMenuDirections">
+        <a class="devui-dropdown-item" dDropDownToggle>内容1 <span class="icon icon-chevron-right"></span></a>
+        <ul dDropDownMenu class="devui-dropdown-menu devui-scrollbar" role="menu">
+          <li role="menuitem" dDropDown appendToBody [trigger]="'click'" [appendToBodyDirections]="subMenuDirections">
+            <a class="devui-dropdown-item" dDropDownToggle>内容1-1 <span class="icon icon-chevron-right"></span></a>
+            <ul dDropDownMenu class="devui-dropdown-menu devui-scrollbar" role="menu">
+              <li role="menuitem">
+                <a class="devui-dropdown-item">内容1-1-1</a>
+              </li>
+              <li role="menuitem">
+                <a class="devui-dropdown-item">内容1-1-2</a>
+              </li>
+              <li role="menuitem">
+                <a class="devui-dropdown-item">内容1-1-3</a>
+              </li>
+            </ul>
+          </li>
+          <li role="menuitem" dDropDown appendToBody [trigger]="'click'" [appendToBodyDirections]="subMenuDirections">
+            <a class="devui-dropdown-item" dDropDownToggle>内容1-2 <span class="icon icon-chevron-right"></span></a>
+            <ul dDropDownMenu class="devui-dropdown-menu devui-scrollbar" role="menu">
+              <li role="menuitem">
+                <a class="devui-dropdown-item">内容1-2-1</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li role="menuitem">
+        <a class="devui-dropdown-item">内容2</a>
+      </li>
+    </ul>
+  </div>
+</section>
+<section>
+  <h4>悬停</h4>
+  <div class="btn-group g-dropdown" dDropDown appendToBody [trigger]="'hover'">
+    <a dDropDownToggle class="devui-dropdown-default">
+      更多选择
+      <span class="icon icon-chevron-down"></span>
+    </a>
+
+    <ul dDropDownMenu class="devui-dropdown-menu devui-scrollbar" role="menu">
+      <li role="menuitem" dDropDown appendToBody [trigger]="'hover'" [appendToBodyDirections]="subMenuDirections">
+        <a class="devui-dropdown-item" dDropDownToggle>内容1 <span class="icon icon-chevron-right"></span></a>
+        <ul dDropDownMenu class="devui-dropdown-menu devui-scrollbar" role="menu">
+          <li role="menuitem" dDropDown appendToBody [trigger]="'hover'" [appendToBodyDirections]="subMenuDirections">
+            <a class="devui-dropdown-item" dDropDownToggle>内容1-1 <span class="icon icon-chevron-right"></span></a>
+            <ul dDropDownMenu class="devui-dropdown-menu devui-scrollbar" role="menu">
+              <li role="menuitem">
+                <a class="devui-dropdown-item">内容1-1-1</a>
+              </li>
+              <li role="menuitem">
+                <a class="devui-dropdown-item">内容1-1-2</a>
+              </li>
+              <li role="menuitem">
+                <a class="devui-dropdown-item">内容1-1-3</a>
+              </li>
+            </ul>
+          </li>
+          <li role="menuitem" dDropDown appendToBody [trigger]="'hover'" [appendToBodyDirections]="subMenuDirections">
+            <a class="devui-dropdown-item" dDropDownToggle>内容1-2 <span class="icon icon-chevron-right"></span></a>
+            <ul dDropDownMenu class="devui-dropdown-menu devui-scrollbar" role="menu">
+              <li role="menuitem">
+                <a class="devui-dropdown-item">内容1-2-1</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li role="menuitem">
+        <a class="devui-dropdown-item">内容2</a>
+      </li>
+    </ul>
+  </div>
+</section>
+<section>
+  <h4>单击展开，离开菜单自动关闭</h4>
+  <div class="btn-group g-dropdown" dDropDown appendToBody [trigger]="'click'" [closeOnMouseLeaveMenu]="true">
+    <a dDropDownToggle class="devui-dropdown-default">
+      更多选择
+      <span class="icon icon-chevron-down"></span>
+    </a>
+
+    <ul dDropDownMenu class="devui-dropdown-menu devui-scrollbar" role="menu">
+      <li role="menuitem" dDropDown appendToBody [trigger]="'hover'" [appendToBodyDirections]="subMenuDirections">
+        <a class="devui-dropdown-item" dDropDownToggle>内容1 <span class="icon icon-chevron-right"></span></a>
+        <ul dDropDownMenu class="devui-dropdown-menu devui-scrollbar" role="menu">
+          <li role="menuitem" dDropDown appendToBody [trigger]="'hover'" [appendToBodyDirections]="subMenuDirections">
+            <a class="devui-dropdown-item" dDropDownToggle>内容1-1 <span class="icon icon-chevron-right"></span></a>
+            <ul dDropDownMenu class="devui-dropdown-menu devui-scrollbar" role="menu">
+              <li role="menuitem">
+                <a class="devui-dropdown-item">内容1-1-1</a>
+              </li>
+              <li role="menuitem">
+                <a class="devui-dropdown-item">内容1-1-2</a>
+              </li>
+              <li role="menuitem">
+                <a class="devui-dropdown-item">内容1-1-3</a>
+              </li>
+            </ul>
+          </li>
+          <li role="menuitem" dDropDown appendToBody [trigger]="'hover'" [appendToBodyDirections]="subMenuDirections">
+            <a class="devui-dropdown-item" dDropDownToggle>内容1-2 <span class="icon icon-chevron-right"></span></a>
+            <ul dDropDownMenu class="devui-dropdown-menu devui-scrollbar" role="menu">
+              <li role="menuitem">
+                <a class="devui-dropdown-item">内容1-2-1</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li role="menuitem">
+        <a class="devui-dropdown-item">内容2</a>
+      </li>
+    </ul>
+  </div>
+</section>

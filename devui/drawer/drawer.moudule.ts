@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 import { DrawerComponent } from './drawer.component';
 import { PortalModule } from 'ng-devui/portal';
@@ -10,6 +11,7 @@ import { DrawerContentDirective } from './drawer.component';
 @NgModule({
   imports: [
     CommonModule,
+    ScrollingModule,
     PortalModule,
     OverlayContainerModule,
   ],

@@ -16,5 +16,4 @@ export class BasicComponent implements OnInit {
   ngOnInit() {
     this.demoDocViewerMain = document.querySelector('.doc-viewer-container .main');
   }
-
 }

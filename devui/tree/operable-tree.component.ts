@@ -5,6 +5,11 @@ import {
   Output,
   ViewChild,
   ContentChild,
+  AfterViewInit,
+  ViewChildren,
+  ElementRef,
+  QueryList,
+  OnDestroy
 } from '@angular/core';
 import {
   ITreeItem,
@@ -12,14 +17,16 @@ import {
 } from './tree-factory.class';
 import { TreeComponent } from './tree.component';
 import { ICheckboxInput } from './tree.types';
-
+import { TreeMaskService } from './tree-mask.service';
+import { I18nService, I18nInterface } from 'ng-devui/i18n';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'd-operable-tree',
   templateUrl: './operable-tree.component.html',
   styleUrls: ['./operable-tree.component.scss'],
   exportAs: 'dOperableTreeComponent',
 })
-export class OperableTreeComponent {
+export class OperableTreeComponent implements AfterViewInit, OnDestroy {
   @Input() tree: Array<ITreeItem>;
   @Input() treeNodeIdKey: string;
   @Input() treeNodeChildrenKey: string;
@@ -37,23 +44,53 @@ export class OperableTreeComponent {
   @Input() beforeAddNode: (node: TreeNode) => Promise<any>;
   @Input() beforeDeleteNode: (node: TreeNode) => Promise<any>;
   @Input() beforeNodeDrop: (drageNodeId: string, dropNodeId: string) => Promise<any>;
+  @Input() beforeEditNode: (node: TreeNode) => Promise<any>;
   @Input() canActivateNode = true;
   @Input() canActivateParentNode = true;
   @Input() treeNodeTitleKey = 'title';
   @Input() postAddNode: (node: TreeNode) => Promise<any>;
   @Input() iconTemplatePosition: string;
   @Output() nodeSelected: EventEmitter<any> = new EventEmitter();
+  @Output() nodeDblClicked: EventEmitter<any> = new EventEmitter();
   @Output() nodeDeleted: EventEmitter<any> = new EventEmitter();
   @Output() nodeToggled: EventEmitter<any> = new EventEmitter();
   @Output() nodeChecked: EventEmitter<any> = new EventEmitter();
   @Output() nodeEdited: EventEmitter<any> = new EventEmitter();
   @Output() editValueChange: EventEmitter<any> = new EventEmitter();
   @Output() nodeOnDrop: EventEmitter<any> = new EventEmitter();
-  @ViewChild('operableTree') operableTree: TreeComponent;
-  @ContentChild('iconTemplate') iconTemplate;
-  @ContentChild('operatorTemplate') operatorTemplate;
-  @ContentChild('statusTemplate') statusTemplate;
+  @ViewChild('operableTree', { static: true }) operableTree: TreeComponent;
+  @ContentChild('iconTemplate', { static: false }) iconTemplate;
+  @ContentChild('nodeTemplate', { static: false }) nodeTemplate;
+  @ContentChild('operatorTemplate', { static: false }) operatorTemplate;
+  @ContentChild('statusTemplate', { static: false }) statusTemplate;
   private addingNode = false;
+  private treeNodeDragoverResponder = {
+    node: null,
+    timeout: null
+  };
+  @ViewChildren('treeNodeContent') treeNodeContent: QueryList<ElementRef>;
+  elementAsMask: any;
+  i18nCommonText: I18nInterface['common'];
+  i18nSubscription: Subscription;
+  constructor(private i18n: I18nService) {
+    this.i18nCommonText = this.i18n.getI18nText().common;
+    this.i18nSubscription = this.i18n.langChange().subscribe((data) => {
+      this.i18nCommonText = data.common;
+    });
+  }
+  ngAfterViewInit() {
+    this.elementAsMask = TreeMaskService.creatMaskElement();
+  }
+
+  addBackGround(e) {
+    e.stopPropagation();
+    TreeMaskService.addMask(e.target, this.elementAsMask, TreeMaskService.calcWidth(this.treeNodeContent));
+  }
+
+  removeBackGround(e) {
+    e.stopPropagation();
+    TreeMaskService.removeMask(e.target, this.elementAsMask);
+  }
 
   onDragstart(event, treeNode) {
     const data = {
@@ -66,12 +103,31 @@ export class OperableTreeComponent {
     event.dataTransfer.setData('Text', JSON.stringify(data));
   }
 
-  onDragover(event) {
-    event.preventDefault();
-    event.dataTransfer.dropEffect = 'move';
+  onDragover(event, droppable, treeNode) {
+    if (droppable) {
+      event.preventDefault();
+      event.dataTransfer.dropEffect = 'move';
+      if (!this.treeNodeDragoverResponder.node ||
+        (this.treeNodeDragoverResponder.node && this.treeNodeDragoverResponder.node.id !== treeNode.id)) {
+        clearTimeout(this.treeNodeDragoverResponder.timeout);
+        this.treeNodeDragoverResponder.node = treeNode;
+        this.treeNodeDragoverResponder.timeout = setTimeout(() => {
+          this.treeFactory.openNodesById(treeNode.id);
+          this.nodeToggled.emit(treeNode);
+        }, 1000);
+      }
+    }
   }
 
-  onDrop(event, treeNode) {
+  onDragleave(event, treeNode) {
+    if (this.treeNodeDragoverResponder.node && this.treeNodeDragoverResponder.node.id === treeNode.id) {
+      this.treeNodeDragoverResponder.node = null;
+      clearTimeout(this.treeNodeDragoverResponder.timeout);
+    }
+  }
+
+
+  onDrop(event, newParentNode) {
     if (!this.draggable) {
       return;
     }
@@ -80,44 +136,46 @@ export class OperableTreeComponent {
     if (transferDataStr) {
       try {
         const transferData = JSON.parse(transferDataStr);
-        // 判断drop的是operableTree的节点
         if (typeof (transferData) === 'object' && transferData.type === 'operable-tree-node') {
           const dragNodeId = transferData['nodeId'];
           const dragNodeParentId = transferData['parentId'];
-          const dragNodeTitle = transferData['nodeTitle'];
-          const dragNodeIsParent = transferData['isParent'];
-          if (dragNodeId === treeNode.id || dragNodeId === treeNode.parentId
-            || dragNodeParentId === treeNode.id) {
+          if (dragNodeId === newParentNode.id || dragNodeId === newParentNode.parentId
+            || dragNodeParentId === newParentNode.id || dragNodeParentId === undefined) {
             return;
           }
           let dragResult = Promise.resolve(true);
           if (this.beforeNodeDrop) {
-            dragResult = this.beforeNodeDrop(dragNodeId, treeNode.id);
+            dragResult = this.beforeNodeDrop(dragNodeId, newParentNode.id);
           }
 
           dragResult.then(() => {
-            this.treeFactory.deleteNodeById(dragNodeId);
-            this.appendTreeItems([{
-              id: dragNodeId,
-              title: dragNodeTitle,
-              isParent: dragNodeIsParent
-            }], treeNode.id);
-            this.nodeToggled.emit(treeNode);
-            this.treeFactory.openNodesById(treeNode.id);
-            treeNode.data.isParent = true;
+            const movingNode = this.treeFactory.nodes[dragNodeId];
+            const originalParentNode = this.treeFactory.nodes[movingNode.parentId];
+            movingNode.parentId = newParentNode.id;
+            this.treeFactory.addChildNode(newParentNode, movingNode);
+            originalParentNode.data.children = originalParentNode.data.children.filter(node => node.id !== dragNodeId);
+            if (!originalParentNode.data.children || !originalParentNode.data.children.length) {
+              originalParentNode.data.isParent = false;
+            }
+            this.nodeToggled.emit(newParentNode);
+            this.treeFactory.openNodesById(newParentNode.id);
+            newParentNode.data.isParent = true;
           });
         }
       } catch (e) {
 
       } finally {
         if (this.nodeOnDrop.observers.length > 0) {
-          this.nodeOnDrop.emit({event, treeNode});
+          this.nodeOnDrop.emit({ event, treeNode: newParentNode });
         }
       }
     }
   }
 
   selectNode(event, treeNode: TreeNode) {
+    if (treeNode.data.disabled) {
+      return;
+    }
     if (!this.canActivateNode) {
       this.checkNode(event, treeNode);
       return;
@@ -178,7 +236,13 @@ export class OperableTreeComponent {
   }
 
   editNode(event, treeNode: TreeNode) {
-    this.treeFactory.editNodeTitle(treeNode.id);
+    let editResult = Promise.resolve(true);
+    if (this.beforeEditNode) {
+      editResult = this.beforeEditNode(treeNode);
+    }
+    editResult.then(() => {
+      this.treeFactory.editNodeTitle(treeNode.id);
+    });
   }
 
   editNodeProxy = (event, treeNode: TreeNode) => {
@@ -193,8 +257,6 @@ export class OperableTreeComponent {
 
   onBlurEdit(treeNode) {
     if (!treeNode.data.errTips) {
-      // tslint:disable-next-line:no-unused-expression
-      treeNode.data.errTips && delete treeNode.data.errTips;
       treeNode.data.editable = false;
       return this.postEditNode(treeNode);
     }
@@ -206,8 +268,9 @@ export class OperableTreeComponent {
         if (validateInfo && validateInfo.errTips) {
           treeNode.data.errTips = validateInfo.errTips;
         } else {
-          // tslint:disable-next-line:no-unused-expression
-          treeNode.data.errTips && delete treeNode.data.errTips;
+          if (treeNode.data.errTips) {
+            delete treeNode.data.errTips;
+          }
         }
       }
     });
@@ -240,6 +303,13 @@ export class OperableTreeComponent {
           // Swap id if id was modified by outer system
           treeNode.id = nodeInfo.id ? nodeInfo.id : originalId;
           delete this.treeFactory.nodes[originalId];
+          if (nodeInfo.hasOwnProperty('data') && nodeInfo.data) {
+            if (treeNode.hasOwnProperty('data') && treeNode.data.hasOwnProperty('data')) {
+              treeNode.data.data = Object.assign({}, treeNode.data.data, nodeInfo.data);
+            } else {
+              treeNode.data = Object.assign(treeNode.data, { data: nodeInfo.data });
+            }
+          }
           this.treeFactory.nodes[treeNode.id] = treeNode;
           return treeNode;
         }).catch((e, reaction = 'cancel') => {
@@ -248,7 +318,7 @@ export class OperableTreeComponent {
               const parentNode = this.treeFactory.nodes[treeNode.parentId];
               const title = treeNode.data.title;
               this.treeFactory.deleteNodeById(treeNode.id);
-              this.addChildNode(null, parentNode, {title: title});
+              this.addChildNode(null, parentNode, { title: title });
               break;
             case 'cancel':
             default:
@@ -285,6 +355,15 @@ export class OperableTreeComponent {
     if (!treeNode.data.disabled) {
       treeNode.data.isChecked = !treeNode.data.isChecked;
       this.checkNodeById(treeNode.data.isChecked, treeNode.id);
+    }
+  }
+  public nodeDblClick(event, node) {
+    this.nodeDblClicked.emit(node);
+  }
+  ngOnDestroy() {
+    if (this.i18nSubscription) {
+      this.i18nSubscription.unsubscribe();
+
     }
   }
 }

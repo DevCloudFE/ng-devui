@@ -1,10 +1,5 @@
 <section>
-  <d-radio
-    [name]="'independent-city'"
-    [(ngModel)]="choose3"
-    [disabled]="true"
-    *ngFor="let value of values2"
-    [value]="value">
-  The Radio value is: {{value}}
+  <d-radio [name]="'independent-city'" [(ngModel)]="choose3" [disabled]="true" *ngFor="let value of values2" [value]="value">
+    The Radio value is: {{ value }}
   </d-radio>
 </section>

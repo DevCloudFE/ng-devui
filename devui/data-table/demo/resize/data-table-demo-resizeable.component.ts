@@ -14,7 +14,7 @@ const pagerSource = JSON.parse(JSON.stringify(originSource));
 })
 
 export class DatatableDemoResizeableComponent implements OnInit, AfterContentInit {
-  @ViewChild('detailTemplateRef') detailTemplateRef: ElementRef;
+  @ViewChild('detailTemplateRef', { static: true }) detailTemplateRef: ElementRef;
   hideColumn = [];
   hideColumnOptions = [];
   // Lazy Load

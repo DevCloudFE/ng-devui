@@ -1,0 +1,27 @@
+<section>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="devui-input-group">
+        <d-button
+          bsStyle="text-dark"
+          dDatepicker
+          #datePicker1="datepicker"
+          (selectedDateChange)="getValue($event)"
+          (click)="datePicker1.toggle($event)"
+          [(ngModel)]="selectedDate2"
+        >
+          {{ ((selectedDate2 ? selectedDate2 : null) | dDatePipe) || 'Select Date' }}
+        </d-button>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <pre
+        >{{ selectedDate2 ? 'selectedDate: ' : null }} {{
+          ((selectedDate2 ? selectedDate2 : null) | dDatePipe: 'y/MM/dd HH:mm:ss') || 'No date was selected!'
+        }}</pre
+      >
+    </div>
+  </div>
+</section>

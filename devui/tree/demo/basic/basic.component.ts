@@ -6,7 +6,7 @@ import { ITreeItem, TreeComponent, TreeNode } from 'ng-devui';
   templateUrl: './basic.component.html',
 })
 export class BasicComponent {
-  @ViewChild('basicTree') basicTree: TreeComponent;
+  @ViewChild('basicTree', { static: true }) basicTree: TreeComponent;
   data1 = [
     {
       title: '父节点1 - 展开',

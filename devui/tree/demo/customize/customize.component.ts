@@ -12,52 +12,52 @@ export class CustomizeComponent {
   iconParentClose = '<span class="icon icon-collapse"></span>';
   iconLeaf = '<span></span>';
   data2 = [{
-    'title': '资源',
+    'title': '父节点1',
     'data': { 'type': 'mix' },
     'open': true,
     'children': [{
-      'title': '拓扑',
+      'title': '子节点1-1',
       'data': { 'type': 'mix' },
       'open': false,
       'children': [{
-        'title': '拓扑管理',
+        'title': '子节点1-1-1',
         'data': { 'type': 'ppt' }
       }, {
-        'title': 'IP拓扑管理',
+        'title': '子节点1-1-2',
         'data': { 'type': 'xls' }
       }]
     }, {
-      'title': '监控工具',
+      'title': '子节点1-2',
       'data': { 'type': 'mix' },
       'open': false,
       'children': [{
-        'title': '工具',
+        'title': '子节点1-2-1',
         'data': { 'type': 'ppt' }
       }, {
-        'title': '使用方法',
+        'title': '子节点1-2-2',
         'data': { 'type': 'doc' }
       }]
     }]
   }, {
-    'title': '演示文稿',
+    'title': '父节点2',
     'data': { 'type': 'ppt' },
     'open': false,
     'children': [{
-      'title': '前端维护',
+      'title': '子节点2-1',
       'data': { 'type': 'ppt' }
     }, {
-      'title': '后台维护',
+      'title': '子节点2-2',
       'data': { 'type': 'ppt' }
     }],
   }, {
-    'title': '报表',
+    'title': '父节点3',
     'data': { 'type': 'xls' },
     'open': false,
     'children': [{
-      'title': '报表数据',
+      'title': '子节点3-1',
       'data': { 'type': 'xls' }
     }, {
-      'title': '报表统计',
+      'title': '子节点3-2',
       'data': { 'type': 'xls' }
     }]
   }];
@@ -65,5 +65,8 @@ export class CustomizeComponent {
   onOperableNodeSelected(treeNode: TreeNode) {
     console.log('selected: ', treeNode);
     this.currentSelectedNode = treeNode;
+  }
+  onBlurEdit(treeNode) {
+    treeNode.editable = false;
   }
 }
