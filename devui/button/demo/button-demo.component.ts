@@ -6,7 +6,8 @@ import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 
 @Component({
     selector: 'd-demo-button',
-    templateUrl: './button-demo.component.html'
+    templateUrl: './button-demo.component.html',
+    styleUrls: ['./button-demo.component.css']
 })
 export class ButtonDemoComponent {
   commonSource: Array<DevuiSourceData> = [
@@ -35,21 +36,8 @@ export class ButtonDemoComponent {
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./text/text.component.ts')}
   ];
 
-  combinationSource: Array<DevuiSourceData> = [
-    {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./combination/combination.component.html')},
-    {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./combination/combination.component.ts')}
-  ];
-
-  autofocusSource: Array<DevuiSourceData> = [
-    {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./autofocus/autofocus.component.html')},
-    {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./autofocus/autofocus.component.ts')}
-  ];
-
-  sizeSource: Array<DevuiSourceData> = [
-    {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./size/size.component.html')},
-    {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./size/size.component.ts')}
-  ];
+  demoDocViewerMain;
   constructor() {
-
+    this.demoDocViewerMain = document.querySelector('.doc-viewer-container .main');
   }
 }
