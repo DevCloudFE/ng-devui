@@ -1,27 +1,40 @@
-<div class="demo-container">
+<div class="demo-container" dAnchorBox [view]="{ top: 60, bottom: 0 }">
+  <div style="position: fixed;right:100px;top:60px;">
+    <d-sticky [view]="{ top: 60, bottom: 0 }" [zIndex]="2000" [container]="demoDocViewerMain">
+      <div>
+        <h3 style="padding-bottom: 20px; border-bottom: 1px #cacfd8 solid;">快速前往</h3>
+        <ul class="step-nav">
+          <li [dAnchorLink]="'basic-breadcrumbs'" anchorActive="active">基础面包屑</li>
+          <li [dAnchorLink]="'drop-down-breadcrumbs'" anchorActive="active">可下拉的面包屑</li>
+          <li [dAnchorLink]="'with-search-drop-down-breadcrumbs'" anchorActive="active">带搜索下拉的面包屑</li>
+          <li [dAnchorLink]="'self-defined-breadcrumbs'" anchorActive="active">自定义下拉列表和分隔符的面包屑</li>
+        </ul>
+      </div>
+    </d-sticky>
+  </div>
   <div class="demo-example">
-    <div class="demo-title">基础面包屑</div>
+    <div class="demo-title" [dAnchor]="'basic-breadcrumbs'">基础面包屑</div>
     <div class="demo-text"></div>
     <d-codebox id="components-breadcrumb-basic" [sourceData]="BasicSource">
       <d-basic demo></d-basic>
     </d-codebox>
   </div>
   <div class="demo-example">
-    <div class="demo-title">可下拉的面包屑</div>
+    <div class="demo-title" [dAnchor]="'drop-down-breadcrumbs'">可下拉的面包屑</div>
     <div class="demo-text"></div>
     <d-codebox id="components-breadcrumb-menu" [sourceData]="MenuSource">
       <d-menu demo></d-menu>
     </d-codebox>
   </div>
   <div class="demo-example">
-    <div class="demo-title">带搜索下拉的面包屑</div>
+    <div class="demo-title" [dAnchor]="'with-search-drop-down-breadcrumbs'">带搜索下拉的面包屑</div>
     <div class="demo-text"></div>
     <d-codebox id="components-breadcrumb-search-menu" [sourceData]="SearchMenuSource">
       <d-search-menu demo></d-search-menu>
     </d-codebox>
   </div>
   <div class="demo-example">
-    <div class="demo-title">自定义下拉列表和分隔符的面包屑</div>
+    <div class="demo-title" [dAnchor]="'self-defined-breadcrumbs'">自定义下拉列表和分隔符的面包屑</div>
     <div class="demo-text"></div>
     <d-codebox id="components-breadcrumb-custom" [sourceData]="CustomSource">
       <d-custom demo></d-custom>

@@ -14,9 +14,13 @@ import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { SubscriptionComponent } from './subscription/subscription.component';
 import { ButtonModule } from 'ng-devui/button';
+import { StickyModule } from '../../sticky';
+import { AnchorModule } from '../../anchor';
 
 @NgModule({
   imports: [
+    StickyModule,
+    AnchorModule,
     CommonModule,
     FormsModule,
     ButtonModule,

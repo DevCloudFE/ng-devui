@@ -13,9 +13,14 @@ import { AdditionalComponent } from './additional/additional.component';
 import { LiteComponent } from './lite/lite.component';
 import { WidgetsComponent } from './widgets/widgets.component';
 
+import { StickyModule } from '../../sticky';
+import { AnchorModule } from '../../anchor';
+
 
 @NgModule({
   imports: [
+    StickyModule,
+    AnchorModule,
     CommonModule,
     ButtonModule,
     PaginationModule,

@@ -6,7 +6,8 @@ import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 
 @Component({
     selector: 'd-demo-sticky',
-    templateUrl: './sticky-demo.component.html'
+    templateUrl: './sticky-demo.component.html',
+    styleUrls: ['../../style/core/_nav.scss']
 })
 export class StickyDemoComponent {
   basicSource: Array<DevuiSourceData> = [

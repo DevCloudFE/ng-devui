@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 
 @Component({
-  templateUrl: './popover-demo.component.html'
+  templateUrl: './popover-demo.component.html',
+  styleUrls: ['../../style/core/_nav.scss']
 })
 export class PopoverDemoComponent {
   basicSource: Array<DevuiSourceData> = [

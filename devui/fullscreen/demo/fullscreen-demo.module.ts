@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
+import { StickyModule } from '../../sticky';
+import { AnchorModule } from '../../anchor';
 import { ButtonModule } from 'ng-devui/button';
 import { TooltipModule } from 'ng-devui/tooltip';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
@@ -14,6 +16,8 @@ import { FullscreenDemoNormalComponent } from './normal/normal.component';
 
 @NgModule({
   imports: [
+    StickyModule,
+    AnchorModule,
     ButtonModule,
     TooltipModule,
     FullscreenModule,

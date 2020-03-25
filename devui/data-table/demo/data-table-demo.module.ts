@@ -23,9 +23,13 @@ import { ExpandRowComponent } from './expand-row/expand-row.component';
 import { FixColumnComponent } from './fix-column/fix-column.component';
 import { DragColumnComponent } from './drag-column/drag-column.component';
 import { I18nModule } from 'ng-devui/i18n';
+import { StickyModule } from '../../sticky';
+import { AnchorModule } from '../../anchor';
 
 @NgModule({
   imports: [
+    StickyModule,
+    AnchorModule,
     CommonModule,
     DevUIModule,
     FormsModule,

@@ -11,10 +11,14 @@ import { RateDemoCustomizeComponent } from './customize/customize.component';
 import { RateDemoBasicComponent } from './basic/basic.component';
 import { RateDemoOnlyReadComponent } from './onlyread/onlyread.component';
 import { TypeComponent } from './type/type.component';
+import { StickyModule } from '../../sticky';
+import { AnchorModule } from '../../anchor';
 
 
 @NgModule({
     imports: [
+        StickyModule,
+        AnchorModule,
         FormsModule,
         CommonModule,
         RateModule,

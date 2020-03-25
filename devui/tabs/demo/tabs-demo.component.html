@@ -1,39 +1,54 @@
-<div class="demo-container">
+<div class="demo-container" dAnchorBox [view]="{ top: 60, bottom: 0 }">
+  <div style="position: fixed;right:100px;top:60px;">
+    <d-sticky [view]="{ top: 60, bottom: 0 }" [zIndex]="2000" [container]="demoDocViewerMain">
+      <div>
+        <h3 style="padding-bottom: 20px; border-bottom: 1px #cacfd8 solid;">快速前往</h3>
+        <ul class="step-nav">
+          <li [dAnchorLink]="'basic-usage'" anchorActive="active">基本用法</li>
+          <li [dAnchorLink]="'no-set-content'" anchorActive="active">不设置内容</li>
+          <li [dAnchorLink]="'custom-template'" anchorActive="active">自定义模板</li>
+          <li [dAnchorLink]="'configuration-type-and-arrangement'" anchorActive="active">配置类型与排列</li>
+          <li [dAnchorLink]="'intercept-tab-switch'" anchorActive="active">拦截tab切换</li>
+          <li [dAnchorLink]="'custom-tabs-display-and-arrangement'" anchorActive="active">自定义Tabs显示与排列</li>
+        </ul>
+      </div>
+    </d-sticky>
+  </div>
   <div class="demo-example">
-    <div class="demo-title">基本用法</div>
+    <div class="demo-title" [dAnchor]="'basic-usage'">基本用法</div>
     <div class="demo-text"></div>
     <d-codebox id="components-tabs-default" [sourceData]="basicSource">
       <d-basic demo></d-basic>
     </d-codebox>
   </div>
   <div class="demo-example">
-    <div class="demo-title">不设置内容</div>
+    <div class="demo-title" [dAnchor]="'no-set-content'">不设置内容</div>
     <div class="demo-text"></div>
     <d-codebox id="components-tabs-without-content" [sourceData]="withoutContentSource">
       <d-without-content demo></d-without-content>
     </d-codebox>
   </div>
   <div class="demo-example">
-    <div class="demo-title">自定义模板</div>
+    <div class="demo-title" [dAnchor]="'custom-template'">自定义模板</div>
     <d-codebox id="components-tabs-custom" [sourceData]="customSource">
       <d-custom demo></d-custom>
     </d-codebox>
   </div>
   <div class="demo-example">
-    <div class="demo-title">配置类型与排列</div>
+    <div class="demo-title" [dAnchor]="'configuration-type-and-arrangement'">配置类型与排列</div>
     <d-codebox id="components-tabs-config" [sourceData]="configSource">
       <d-config demo></d-config>
     </d-codebox>
   </div>
   <div class="demo-example">
-    <div class="demo-title">拦截tab切换</div>
+    <div class="demo-title" [dAnchor]="'intercept-tab-switch'">拦截tab切换</div>
     <div class="demo-text">使用beforeChange拦截tab切换</div>
     <d-codebox id="components-tabs-before-change" [sourceData]="customSource">
       <d-before-change demo></d-before-change>
     </d-codebox>
   </div>
   <div class="demo-example">
-    <div class="demo-title">自定义Tabs显示与排列</div>
+    <div class="demo-title" [dAnchor]="'custom-tabs-display-and-arrangement'">自定义Tabs显示与排列</div>
     <div class="demo-text">通过引入transfer组件，实现tabs的自定义显示</div>
     <d-codebox id="components-tabs-configurable" [sourceData]="ConfigurableSource">
       <d-configurable demo></d-configurable>

@@ -5,7 +5,8 @@ import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 
   @Component({
     selector: 'd-demo-breadcrumb',
-    templateUrl: './breadcrumb-demo.component.html'
+    templateUrl: './breadcrumb-demo.component.html',
+    styleUrls: ['../../style/core/_nav.scss']
   })
 
   export class BreadCrumbDemoComponent {

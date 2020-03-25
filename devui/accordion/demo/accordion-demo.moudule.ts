@@ -3,6 +3,8 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
+import { StickyModule } from '../../sticky';
+import { AnchorModule } from '../../anchor';
 import { AccordionModule } from '../accordion.module';
 import { AccordionDemoComponent } from './accordion-demo.component';
 import { BasicComponent } from './basic/basic.component';
@@ -18,6 +20,8 @@ import { ToggleModule } from 'ng-devui/toggle';
 
 @NgModule({
   imports: [
+    StickyModule,
+    AnchorModule,
     CommonModule,
     AccordionModule,
     ToggleModule,

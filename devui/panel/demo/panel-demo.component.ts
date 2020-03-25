@@ -3,7 +3,8 @@ import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 
 @Component({
   selector: 'd-demo-panel',
-  templateUrl: './panel-demo.component.html'
+  templateUrl: './panel-demo.component.html',
+  styleUrls: ['../../style/core/_nav.scss']
 })
 export class PanelDemoComponent {
   basicSource: Array<DevuiSourceData> = [

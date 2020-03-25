@@ -4,7 +4,8 @@ import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { DialogService } from '../dialog.service';
 @Component({
   selector: 'd-modal-demo',
-  templateUrl: './modal-demo.component.html'
+  templateUrl: './modal-demo.component.html',
+  styleUrls: ['../../style/core/_nav.scss']
 })
 export class ModalDemoComponent {
   basicSource: Array<DevuiSourceData> = [

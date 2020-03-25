@@ -6,7 +6,8 @@ import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 
 @Component({
   selector: 'd-demo-tabs',
-  templateUrl: './tabs-demo.component.html'
+  templateUrl: './tabs-demo.component.html',
+  styleUrls: ['../../style/core/_nav.scss']
 })
 export class TabsDemoComponent {
   basicSource: Array<DevuiSourceData> = [

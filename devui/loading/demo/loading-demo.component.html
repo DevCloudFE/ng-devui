@@ -1,6 +1,19 @@
-<div class="demo-container">
+<div class="demo-container" dAnchorBox [view]="{ top: 60, bottom: 0 }">
+  <div style="position: fixed;right:100px;top:60px;">
+    <d-sticky [view]="{ top: 60, bottom: 0 }" [zIndex]="2000" [container]="demoDocViewerMain">
+      <div>
+        <h3 style="padding-bottom: 20px; border-bottom: 1px #cacfd8 solid;">快速前往</h3>
+        <ul class="step-nav">
+          <li [dAnchorLink]="'basic-usage'" anchorActive="active">基本用法</li>
+          <li [dAnchorLink]="'custom-style'" anchorActive="active">自定义样式</li>
+          <li [dAnchorLink]="'multi-promise'" anchorActive="active">多promise</li>
+          <li [dAnchorLink]="'use-subscription-mode'" anchorActive="active">使用Subscription方式</li>
+        </ul>
+      </div>
+    </d-sticky>
+  </div>
   <div class="demo-example">
-    <div class="demo-title">基本用法</div>
+    <div class="demo-title" [dAnchor]="'basic-usage'">基本用法</div>
     <div class="demo-text">
       展示加载表格数据的场景中的基本使用方法
     </div>
@@ -10,7 +23,7 @@
   </div>
 
   <div class="demo-example">
-    <div class="demo-title">自定义样式</div>
+    <div class="demo-title" [dAnchor]="'custom-style'">自定义样式</div>
     <div class="demo-text">
       通过 templateRef 自定义loading样式
     </div>
@@ -20,7 +33,7 @@
   </div>
 
   <div class="demo-example">
-    <div class="demo-title">多promise</div>
+    <div class="demo-title" [dAnchor]="'multi-promise'">多promise</div>
     <div class="demo-text">
       支持多个promise
     </div>
@@ -29,7 +42,7 @@
     </d-codebox>
   </div>
   <div class="demo-example">
-    <div class="demo-title">使用Subscription方式</div>
+    <div class="demo-title" [dAnchor]="'use-subscription-mode'">使用Subscription方式</div>
     <div class="demo-text">
       使用Subscription方式控制loading的显示
     </div>

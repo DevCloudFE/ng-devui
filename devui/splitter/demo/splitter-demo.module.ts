@@ -11,9 +11,13 @@ import { SplitterDemoMultiComponent } from './multi/splitter-demo-multi.componen
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { SplitterDemoDirectionComponent } from './direction/splitter-demo-direction.component';
+import { StickyModule } from '../../sticky';
+import { AnchorModule } from '../../anchor';
 
 @NgModule({
   imports: [
+    StickyModule,
+    AnchorModule,
     CommonModule,
     DevUICodeboxModule,
     DevUIApiModule,

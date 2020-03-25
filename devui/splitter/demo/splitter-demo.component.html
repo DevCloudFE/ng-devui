@@ -1,25 +1,38 @@
 <div>
-  <div class="demo-container">
+  <div class="demo-container" dAnchorBox [view]="{ top: 60, bottom: 0 }">
+    <div style="position: fixed;right:100px;top:60px;">
+      <d-sticky [view]="{ top: 60, bottom: 0 }" [zIndex]="2000" [container]="demoDocViewerMain">
+        <div>
+          <h3 style="padding-bottom: 20px; border-bottom: 1px #cacfd8 solid;">快速前往</h3>
+          <ul class="step-nav">
+            <li [dAnchorLink]="'basic-usage'" anchorActive="active">基本用法</li>
+            <li [dAnchorLink]="'vertical-layout-usage'" anchorActive="active">垂直布局用法</li>
+            <li [dAnchorLink]="'combined-layout-usage'" anchorActive="active">组合布局用法</li>
+            <li [dAnchorLink]="'specify-the-fold-up-direction'" anchorActive="active">指定折叠收起方向</li>
+          </ul>
+        </div>
+      </d-sticky>
+    </div>
     <div class="demo-example">
-      <div class="demo-title">基本用法</div>
+      <div class="demo-title" [dAnchor]="'basic-usage'">基本用法</div>
       <d-codebox id="components-splitter-default" [sourceData]="SplitterBasicComponent">
         <d-splitter-demo-basic demo></d-splitter-demo-basic>
       </d-codebox>
     </div>
     <div class="demo-example">
-      <div class="demo-title">垂直布局用法</div>
+      <div class="demo-title" [dAnchor]="'vertical-layout-usage'">垂直布局用法</div>
       <d-codebox id="components-splitter-vertical" [sourceData]="SplitterVerticalComponent">
         <d-splitter-demo-vertical demo></d-splitter-demo-vertical>
       </d-codebox>
     </div>
     <div class="demo-example">
-      <div class="demo-title">组合布局用法</div>
+      <div class="demo-title" [dAnchor]="'combined-layout-usage'">组合布局用法</div>
       <d-codebox id="components-splitter-multi" [sourceData]="SplitterMultiComponent">
         <d-splitter-demo-multi demo></d-splitter-demo-multi>
       </d-codebox>
     </div>
     <div class="demo-example">
-      <div class="demo-title">指定折叠收起方向</div>
+      <div class="demo-title" [dAnchor]="'specify-the-fold-up-direction'">指定折叠收起方向</div>
       <d-codebox id="components-splitter-direction" [sourceData]="SplitterDirectionComponent">
         <d-splitter-demo-direction demo></d-splitter-demo-direction>
       </d-codebox>

@@ -6,7 +6,8 @@ import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 
 @Component({
     selector: 'd-demo-pagination',
-    templateUrl: './pagination-demo.component.html'
+    templateUrl: './pagination-demo.component.html',
+    styleUrls: ['../../style/core/_nav.scss']
 })
 export class PaginationDemoComponent {
   basicSource: Array<DevuiSourceData> = [

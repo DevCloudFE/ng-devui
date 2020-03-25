@@ -3,6 +3,7 @@ import { DevuiSourceData } from 'ng-devui/shared/devui-codebox/devui-source-data
 
 @Component({
     templateUrl: './fullscreen-demo.component.html',
+    styleUrls: ['../../style/core/_nav.scss']
 })
 export class FullscreenDemoComponent {
   FullscreenDemoNormal: DevuiSourceData[] = [

@@ -1,12 +1,9 @@
 .step-nav {
-  width: 200px;
+  width: 150px;
 }
 
 .step-nav > li {
   list-style: none;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
   padding: 0;
   cursor: pointer;
   height: 30px;

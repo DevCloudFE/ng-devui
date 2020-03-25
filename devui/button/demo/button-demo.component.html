@@ -1,70 +1,58 @@
-<div class="demo-container" dAnchorBox>
-    <div style="position: fixed;right:100px;top:60px;">
-        <d-sticky [view]="{top:60,bottom:0}" [zIndex]="2000" [container]="demoDocViewerMain">
-            <div>
-                <h3 style="padding-bottom: 20px; border-bottom: 1px #cacfd8 solid;">快速前往</h3>
-                <ul class="step-nav">
-                    <li [dAnchorLink]="'button-primary'" anchorActive="active">主要按钮</li>
-                    <li [dAnchorLink]="'button-common'" anchorActive="active">次要按钮</li>
-                    <li [dAnchorLink]="'button-text'" anchorActive="active">文字按钮</li>
-                    <li [dAnchorLink]="'button-loading'" anchorActive="active">加载中状态</li>
-                    <li [dAnchorLink]="'tabs-default'" anchorActive="active">图标按钮</li>
-                </ul>
-            </div>
-        </d-sticky>
+<div class="demo-container" dAnchorBox [view]="{ top: 60, bottom: 0 }">
+  <div style="position: fixed;right:100px;top:60px;">
+    <d-sticky [view]="{ top: 60, bottom: 0 }" [zIndex]="2000" [container]="demoDocViewerMain">
+      <div>
+        <h3 style="padding-bottom: 20px; border-bottom: 1px #cacfd8 solid;">快速前往</h3>
+        <ul class="step-nav">
+          <li [dAnchorLink]="'button-primary'" anchorActive="active">主要按钮</li>
+          <li [dAnchorLink]="'button-common'" anchorActive="active">次要按钮</li>
+          <li [dAnchorLink]="'button-text'" anchorActive="active">文字按钮</li>
+          <li [dAnchorLink]="'button-loading'" anchorActive="active">加载中状态</li>
+          <li [dAnchorLink]="'tabs-default'" anchorActive="active">图标按钮</li>
+        </ul>
+      </div>
+    </d-sticky>
+  </div>
+
+  <div class="demo-container">
+    <div class="demo-example" [dAnchor]="'button-primary'">
+      <div class="demo-title">主要按钮</div>
+      <div class="demo-text"></div>
+      <d-codebox id="components-button-primary" [sourceData]="primarySource">
+        <d-button-primary demo></d-button-primary>
+      </d-codebox>
     </div>
 
-    <div class="demo-container">
-
-        <div class="demo-example" [dAnchor]="'button-primary'">
-            <div class="demo-title">主要按钮</div>
-            <div class="demo-text">
-
-            </div>
-            <d-codebox id="components-button-primary" [sourceData]="primarySource">
-                <d-button-primary demo></d-button-primary>
-            </d-codebox>
-        </div>
-
-        <div class="demo-example" [dAnchor]="'button-common'">
-            <div class="demo-title">次要按钮</div>
-            <div class="demo-text">
-
-            </div>
-            <d-codebox id="components-button-common" [sourceData]="commonSource">
-                <d-button-common demo></d-button-common>
-            </d-codebox>
-        </div>
-
-        <div class="demo-example" [dAnchor]="'button-text'">
-            <div class="demo-title">文字按钮</div>
-            <div class="demo-text">
-
-            </div>
-            <d-codebox id="components-button-text" [sourceData]="textSource">
-                <d-button-text demo></d-button-text>
-            </d-codebox>
-        </div>
-
-        <div class="demo-example" [dAnchor]="'button-loading'">
-            <div class="demo-title">加载中状态</div>
-            <div class="demo-text">
-
-            </div>
-            <d-codebox id="components-button-loading" [sourceData]="loadingSource">
-                <d-button-loading demo></d-button-loading>
-            </d-codebox>
-        </div>
-
-        <div class="demo-example" [dAnchor]="'tabs-default'">
-            <div class="demo-title">图标按钮</div>
-            <div class="demo-text">
-
-            </div>
-            <d-codebox id="components-tabs-default" [sourceData]="iconSource">
-                <d-button-icon demo></d-button-icon>
-            </d-codebox>
-        </div>
-
+    <div class="demo-example" [dAnchor]="'button-common'">
+      <div class="demo-title">次要按钮</div>
+      <div class="demo-text"></div>
+      <d-codebox id="components-button-common" [sourceData]="commonSource">
+        <d-button-common demo></d-button-common>
+      </d-codebox>
     </div>
+
+    <div class="demo-example" [dAnchor]="'button-text'">
+      <div class="demo-title">文字按钮</div>
+      <div class="demo-text"></div>
+      <d-codebox id="components-button-text" [sourceData]="textSource">
+        <d-button-text demo></d-button-text>
+      </d-codebox>
+    </div>
+
+    <div class="demo-example" [dAnchor]="'button-loading'">
+      <div class="demo-title">加载中状态</div>
+      <div class="demo-text"></div>
+      <d-codebox id="components-button-loading" [sourceData]="loadingSource">
+        <d-button-loading demo></d-button-loading>
+      </d-codebox>
+    </div>
+
+    <div class="demo-example" [dAnchor]="'tabs-default'">
+      <div class="demo-title">图标按钮</div>
+      <div class="demo-text"></div>
+      <d-codebox id="components-tabs-default" [sourceData]="iconSource">
+        <d-button-icon demo></d-button-icon>
+      </d-codebox>
+    </div>
+  </div>
 </div>

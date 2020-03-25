@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'd-demo-splitter',
   templateUrl: './splitter-demo.component.html',
+  styleUrls: ['../../style/core/_nav.scss']
 })
 export class SplitterDemoComponent implements OnInit {
 

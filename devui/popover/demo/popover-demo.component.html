@@ -1,13 +1,27 @@
-<div class="demo-container">
+<div class="demo-container" dAnchorBox [view]="{ top: 60, bottom: 0 }">
+  <div style="position: fixed;right:100px;top:60px;">
+    <d-sticky [view]="{ top: 60, bottom: 0 }" [zIndex]="2000" [container]="demoDocViewerMain">
+      <div>
+        <h3 style="padding-bottom: 20px; border-bottom: 1px #cacfd8 solid;">快速前往</h3>
+        <ul class="step-nav">
+          <li [dAnchorLink]="'basic-usage'" anchorActive="active">基本用法</li>
+          <li [dAnchorLink]="'manual-control-display'" anchorActive="active">手动控制显示</li>
+          <li [dAnchorLink]="'custom-prompt-content'" anchorActive="active">自定义提示内容</li>
+          <li [dAnchorLink]="'parent-container-settings'" anchorActive="active">父容器设置</li>
+          <li [dAnchorLink]="'mouse-can-move-in-content'" anchorActive="active">鼠标可移入内容</li>
+        </ul>
+      </div>
+    </d-sticky>
+  </div>
   <div class="demo-example">
-    <div class="demo-title">基本用法</div>
+    <div class="demo-title" [dAnchor]="'basic-usage'">基本用法</div>
     <div class="demo-text"></div>
     <d-codebox id="basic" [sourceData]="basicSource">
       <d-basic demo></d-basic>
     </d-codebox>
   </div>
   <div class="demo-example">
-    <div class="demo-title">手动控制显示</div>
+    <div class="demo-title" [dAnchor]="'manual-control-display'">手动控制显示</div>
     <div class="demo-text">
       通过visible控制弹框显示实现表单验证
     </div>
@@ -16,21 +30,21 @@
     </d-codebox>
   </div>
   <div class="demo-example">
-    <div class="demo-title">自定义提示内容</div>
+    <div class="demo-title" [dAnchor]="'custom-prompt-content'">自定义提示内容</div>
     <div class="demo-text"></div>
     <d-codebox id="customize" [sourceData]="customizeSource">
       <d-customize demo></d-customize>
     </d-codebox>
   </div>
   <div class="demo-example">
-    <div class="demo-title">父容器设置</div>
+    <div class="demo-title" [dAnchor]="'parent-container-settings'">父容器设置</div>
     <div class="demo-text">scrollElement配置，这里默认是 window，默认可以不传，只有当页面的滚动不在 window 上的时候才需要传递</div>
     <d-codebox id="scroll-element" [sourceData]="scrollElementSource">
       <d-scroll-element demo></d-scroll-element>
     </d-codebox>
   </div>
   <div class="demo-example">
-    <div class="demo-title">鼠标可移入内容</div>
+    <div class="demo-title" [dAnchor]="'mouse-can-move-in-content'">鼠标可移入内容</div>
     <div class="demo-text">hoverToContent设置</div>
     <d-codebox id="hover-to-content" [sourceData]="hoverToContentSource">
       <d-hover-to-content demo></d-hover-to-content>

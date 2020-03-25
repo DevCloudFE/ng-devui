@@ -6,7 +6,8 @@ import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 
 @Component({
     selector: 'd-alert-demo',
-    templateUrl: './alert-demo.component.html'
+    templateUrl: './alert-demo.component.html',
+    styleUrls: ['../../style/core/_nav.scss']
 })
 export class AlertDemoComponent {
   basicSource: Array<DevuiSourceData> = [
