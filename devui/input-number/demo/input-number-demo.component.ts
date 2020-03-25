@@ -40,4 +40,9 @@ export class InputNumberDemoComponent {
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./reg/input-number-reg.component.ts') },
     { title: 'CSS', language: 'css', code: require('!!raw-loader!./reg/input-number-reg.component.css') }
   ];
+
+  demoDocViewerMain;
+  constructor() {
+    this.demoDocViewerMain = document.querySelector('.doc-viewer-container .main');
+  }
 }

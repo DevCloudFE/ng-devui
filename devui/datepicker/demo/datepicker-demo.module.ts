@@ -10,6 +10,8 @@ import { DatepickerDemoComponent } from './datepicker-demo.component';
 import { DCommonModule } from 'ng-devui/common';
 import { SelectModule } from 'ng-devui/select';
 import { ButtonModule } from 'ng-devui/button';
+import { StickyModule } from '../../sticky';
+import { AnchorModule } from '../../anchor';
 
 import { DatepickerDemoBasicComponent } from './basic/basic.component';
 import { DatepickerRangeComponent } from './range/datepicker-range.component';
@@ -36,6 +38,8 @@ import { TwoDatepickerBasicComponent } from './two-datepicker-basic/two-datepick
     SelectModule,
     ButtonModule,
     DevUIApiModule,
+    StickyModule,
+    AnchorModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo' },
       { path: 'demo', component: DatepickerDemoComponent},

@@ -1,46 +1,63 @@
-<div>
-  <div class="demo-container">
-    <div class="demo-example">
-      <div class="demo-title">基本用法</div>
-      <div class="demo-text"></div>
-      <d-codebox id="tree-select-basic" [sourceData]="TreeSelectBasicComponent">
-        <d-tree-select-basic demo></d-tree-select-basic>
-      </d-codebox>
-    </div>
-    <div class="demo-example">
-      <div class="demo-title">仅叶节点可选</div>
-      <div class="demo-text"></div>
-      <d-codebox id="tree-select-leaf-only" [sourceData]="TreeSelectLeafOnlyComponent">
-        <d-tree-select-leaf-only demo></d-tree-select-leaf-only>
-      </d-codebox>
-    </div>
-    <div class="demo-example">
-      <div class="demo-title">初始化完成时调用的钩子</div>
-      <div class="demo-text"></div>
-      <d-codebox id="tree-select-hooks" [sourceData]="TreeSelectHooksComponent">
-        <d-tree-select-hooks demo></d-tree-select-hooks>
-      </d-codebox>
-    </div>
-    <div class="demo-example">
-      <div class="demo-title">可简易搜索树</div>
-      <div class="demo-text"></div>
-      <d-codebox id="tree-select-searchable" [sourceData]="TreeSelectSearchableComponent">
-        <d-tree-select-searchable demo></d-tree-select-searchable>
-      </d-codebox>
-    </div>
-    <div class="demo-example">
-      <div class="demo-title">Append To Element 能力</div>
-      <div class="demo-text"></div>
-      <d-codebox id="tree-select-append-to" [sourceData]="TreeSelectAppendToComponent">
-        <d-tree-select-append-to demo></d-tree-select-append-to>
-      </d-codebox>
-    </div>
-    <div class="demo-example">
-      <div class="demo-title">自定义icon能力</div>
-      <div class="demo-text"></div>
-      <d-codebox id="tree-select-custom-icon" [sourceData]="TreeSelectCustomIconComponent">
-        <d-tree-select-custom-icon demo></d-tree-select-custom-icon>
-      </d-codebox>
+<div class="demo-container" dAnchorBox [view]="{ top: 60, bottom: 0 }">
+  <div style="position: fixed;right:100px;top:60px;">
+    <d-sticky [view]="{ top: 60, bottom: 0 }" [zIndex]="2000" [container]="demoDocViewerMain">
+      <div>
+        <h3 style="padding-bottom: 20px; border-bottom: 1px #cacfd8 solid;">快速前往</h3>
+        <ul class="step-nav">
+          <li [dAnchorLink]="'tree-select-basic'" anchorActive="active">基本用法</li>
+          <li [dAnchorLink]="'tree-select-leaf-only'" anchorActive="active">仅叶节点可选</li>
+          <li [dAnchorLink]="'tree-select-hooks'" anchorActive="active">初始化完成时调用的钩子</li>
+          <li [dAnchorLink]="'tree-select-searchable'" anchorActive="active">可简易搜索树</li>
+          <li [dAnchorLink]="'tree-select-append-to'" anchorActive="active">Append To Element 能力</li>
+          <li [dAnchorLink]="'tree-select-custom-icon'" anchorActive="active">自定义icon能力</li>
+        </ul>
+      </div>
+    </d-sticky>
+  </div>
+  <div>
+    <div class="demo-container">
+      <div class="demo-example" [dAnchor]="'tree-select-basic'">
+        <div class="demo-title">基本用法</div>
+        <div class="demo-text"></div>
+        <d-codebox id="tree-select-basic" [sourceData]="TreeSelectBasicComponent">
+          <d-tree-select-basic demo></d-tree-select-basic>
+        </d-codebox>
+      </div>
+      <div class="demo-example" [dAnchor]="'tree-select-leaf-only'">
+        <div class="demo-title">仅叶节点可选</div>
+        <div class="demo-text"></div>
+        <d-codebox id="tree-select-leaf-only" [sourceData]="TreeSelectLeafOnlyComponent">
+          <d-tree-select-leaf-only demo></d-tree-select-leaf-only>
+        </d-codebox>
+      </div>
+      <div class="demo-example" [dAnchor]="'tree-select-hooks'">
+        <div class="demo-title">初始化完成时调用的钩子</div>
+        <div class="demo-text"></div>
+        <d-codebox id="tree-select-hooks" [sourceData]="TreeSelectHooksComponent">
+          <d-tree-select-hooks demo></d-tree-select-hooks>
+        </d-codebox>
+      </div>
+      <div class="demo-example" [dAnchor]="'tree-select-searchable'">
+        <div class="demo-title">可简易搜索树</div>
+        <div class="demo-text"></div>
+        <d-codebox id="tree-select-searchable" [sourceData]="TreeSelectSearchableComponent">
+          <d-tree-select-searchable demo></d-tree-select-searchable>
+        </d-codebox>
+      </div>
+      <div class="demo-example" [dAnchor]="'tree-select-append-to'">
+        <div class="demo-title">Append To Element 能力</div>
+        <div class="demo-text"></div>
+        <d-codebox id="tree-select-append-to" [sourceData]="TreeSelectAppendToComponent">
+          <d-tree-select-append-to demo></d-tree-select-append-to>
+        </d-codebox>
+      </div>
+      <div class="demo-example" [dAnchor]="'tree-select-custom-icon'">
+        <div class="demo-title">自定义icon能力</div>
+        <div class="demo-text"></div>
+        <d-codebox id="tree-select-custom-icon" [sourceData]="TreeSelectCustomIconComponent">
+          <d-tree-select-custom-icon demo></d-tree-select-custom-icon>
+        </d-codebox>
+      </div>
     </div>
   </div>
 </div>

@@ -23,6 +23,8 @@ export class UploadDemoComponent {
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./auto/auto.component.html')},
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./auto/auto.component.ts')}
   ];
+  demoDocViewerMain;
   constructor() {
+    this.demoDocViewerMain = document.querySelector('.doc-viewer-container .main');
   }
 }

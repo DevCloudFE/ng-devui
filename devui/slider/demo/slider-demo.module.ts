@@ -7,6 +7,8 @@ import {DevUICodeboxModule} from 'ng-devui/shared/devui-codebox/devui-codebox.mo
 import {DevUIApiModule} from 'ng-devui/shared/devui-api/devui-api.module';
 import {DevUIApiComponent} from 'ng-devui/shared/devui-api/devui-api.component';
 import {FormsModule} from '@angular/forms';
+import {StickyModule} from '../../sticky';
+import {AnchorModule} from '../../anchor';
 
 import {SliderBasicComponent} from './basic/slider-basic.component';
 import {SliderCustomFormatterComponent} from './custom-formatter/slider-custom-formatter.component';
@@ -19,6 +21,8 @@ import {SliderDisabledComponent} from './disabled/slider-disabled.component';
     SliderModule,
     DevUIApiModule,
     FormsModule,
+    StickyModule,
+    AnchorModule,
     RouterModule.forChild([
       {path: '', redirectTo: 'demo'},
       {path: 'demo', component: SliderDemoComponent},

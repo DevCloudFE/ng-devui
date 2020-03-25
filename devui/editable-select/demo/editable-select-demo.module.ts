@@ -2,6 +2,8 @@ import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { StickyModule } from '../../sticky';
+import { AnchorModule } from '../../anchor';
 
 import { AutoCompleteModule } from 'ng-devui/auto-complete/auto-complete.module';
 
@@ -29,6 +31,8 @@ import { LazyLoadComponent } from './lazy-load/lazy-load.component';
     DevUIApiModule,
     DevUICodeboxModule,
     ButtonModule,
+    StickyModule,
+    AnchorModule,
     RouterModule.forChild([
       { path: '', redirectTo: 'demo' },
       { path: 'demo', component: EditableSelectDemoComponent },

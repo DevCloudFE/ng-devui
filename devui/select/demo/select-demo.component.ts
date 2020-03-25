@@ -94,6 +94,8 @@ export class SelectDemoComponent {
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./user-mail-search/user-mail-search.component.ts')},
     {title: 'CSS', language: 'css', code:  require('!!raw-loader!./user-mail-search/user-mail-search.component.css')},
   ];
-    constructor() { }
-
+  demoDocViewerMain;
+  constructor() {
+    this.demoDocViewerMain = document.querySelector('.doc-viewer-container .main');
+  }
 }

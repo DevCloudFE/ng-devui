@@ -15,4 +15,9 @@ export class MultiAutoCompleteDemoComponent {
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./array/multi-auto-complete-demo-array.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./array/multi-auto-complete-demo-array.component.ts') },
   ];
+
+  demoDocViewerMain;
+  constructor() {
+    this.demoDocViewerMain = document.querySelector('.doc-viewer-container .main');
+  }
 }

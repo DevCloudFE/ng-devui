@@ -33,6 +33,8 @@ export class EditableSelectDemoComponent {
     {title: 'TS', language: 'typescript',
       code: require('!!raw-loader!./lazy-load/lazy-load.component.ts')},
   ];
+  demoDocViewerMain;
   constructor() {
+    this.demoDocViewerMain = document.querySelector('.doc-viewer-container .main');
   }
 }

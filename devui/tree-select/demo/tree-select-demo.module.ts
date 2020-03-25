@@ -9,6 +9,8 @@ import {DevUIApiComponent} from 'ng-devui/shared/devui-api/devui-api.component';
 import {DevUIApiModule} from 'ng-devui/shared/devui-api/devui-api.module';
 import {ButtonModule} from 'ng-devui/button';
 import {TreeSelectModule} from 'ng-devui/tree-select';
+import { StickyModule } from '../../sticky';
+import { AnchorModule } from '../../anchor';
 
 import {
   TreeSelectAppendToComponent,
@@ -28,6 +30,8 @@ import {TreeSelectSearchableComponent} from '../demo/searchable/tree-select-sear
     DevUIApiModule,
     ButtonModule,
     TreeSelectModule,
+    StickyModule,
+    AnchorModule,
     RouterModule.forChild([
       {
         path: '',

@@ -12,6 +12,8 @@ export class ToggleDemoComponent {
     { title: 'CSS', language: 'css', code: require('!!raw-loader!./basic/basic.component.css') }
   ];
 
+  demoDocViewerMain;
   constructor() {
+    this.demoDocViewerMain = document.querySelector('.doc-viewer-container .main');
   }
 }
