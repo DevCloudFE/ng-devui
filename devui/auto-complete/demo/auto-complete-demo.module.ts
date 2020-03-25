@@ -9,6 +9,8 @@ import { FormsModule } from '@angular/forms';
 import { AutoCompleteDemoComponent } from './auto-complete-demo.component';
 import { AutoCompleteModule } from 'ng-devui/auto-complete';
 import { ButtonModule } from 'ng-devui/button';
+import { StickyModule } from '../../sticky';
+import { AnchorModule } from '../../anchor';
 import { AutoDemoBasicComponent } from './basic/auto-complete-demo-basic.component';
 import { AutoDemoArrayComponent } from './array/auto-complete-demo-array.component';
 import { AutoDemoCustomComponent } from './custom/auto-complete-demo-custom.component';
@@ -26,6 +28,8 @@ import { AutoDemoLatestComponent } from './latest/auto-complete-demo-latest.comp
     DevUICodeboxModule,
     DevUIApiModule,
     ButtonModule,
+    StickyModule,
+    AnchorModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo' },
       { path: 'demo', component: AutoCompleteDemoComponent},

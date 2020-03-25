@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'd-auto-complete-demo',
-  templateUrl: './auto-complete-demo.component.html'
+  templateUrl: './auto-complete-demo.component.html',
 })
 export class AutoCompleteDemoComponent {
   AutoCompleteDemoBasic: Array<DevuiSourceData> = [
@@ -39,4 +39,9 @@ export class AutoCompleteDemoComponent {
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./latest/auto-complete-demo-latest.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./latest/auto-complete-demo-latest.component.ts') },
   ];
+
+  demoDocViewerMain;
+  constructor() {
+    this.demoDocViewerMain = document.querySelector('.doc-viewer-container .main');
+  }
 }
