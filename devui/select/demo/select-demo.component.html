@@ -1,5 +1,5 @@
 <div class="demo-container" dAnchorBox [view]="{ top: 60, bottom: 0 }">
-  <div style="position: fixed;right:100px;top:60px;">
+  <div class="nav-main">
     <d-sticky [view]="{ top: 60, bottom: 0 }" [zIndex]="2000" [container]="demoDocViewerMain">
       <div>
         <h3 style="padding-bottom: 20px; border-bottom: 1px #cacfd8 solid;">快速前往</h3>
@@ -20,9 +20,7 @@
           <li [dAnchorLink]="'multi-keep-order'" anchorActive="active">设置已选项顺序源数组顺序或选中顺序</li>
           <li [dAnchorLink]="'user-limit-selected-number'" anchorActive="active">用户场景：限制选中个数</li>
           <li [dAnchorLink]="'user-search-n-lazyload'" anchorActive="active">用户场景：自定义搜索的懒加载</li>
-          <li [dAnchorLink]="'user-mail-search'" anchorActive="active" style="word-break:break-all">
-            用户场景：自定义搜索和模板结合 —— 邮箱搜索
-          </li>
+          <li [dAnchorLink]="'user-mail-search'" anchorActive="active">用户场景：自定义搜索和模板结合 —— 邮箱搜索</li>
         </ul>
       </div>
     </d-sticky>
