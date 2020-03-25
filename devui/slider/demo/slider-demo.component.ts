@@ -20,4 +20,9 @@ export class SliderDemoComponent {
     {title: 'TS', language: 'typescript', code: require('!!raw-loader!./custom-formatter/slider-custom-formatter.component.ts')},
   ];
   list = ['基本用法', '禁止输入态', '定制Popover的显示内容'];
+
+  demoDocViewerMain;
+  constructor() {
+    this.demoDocViewerMain = document.querySelector('.doc-viewer-container .main');
+  }
 }

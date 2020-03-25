@@ -32,7 +32,9 @@ export class FormDemoComponent {
     { title: 'CSS', language: 'css', code: require('!!raw-loader!./filter/filter.component.css') }
   ];
 
+  demoDocViewerMain;
   constructor() {
+    this.demoDocViewerMain = document.querySelector('.doc-viewer-container .main');
   }
 
 }

@@ -18,4 +18,9 @@ export class TransferDemoComponent {
   sortSource: Array<DevuiSourceData> = [
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./sort/transfer-demo-sort.component.ts') }
   ];
+
+  demoDocViewerMain;
+  constructor() {
+    this.demoDocViewerMain = document.querySelector('.doc-viewer-container .main');
+  }
 }

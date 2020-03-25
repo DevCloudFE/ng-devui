@@ -18,4 +18,9 @@ export class TextDemoComponent {
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./resize/resize.component.ts')},
     {title: 'CSS', language: 'css', code:  require('!!raw-loader!./resize/resize.component.css')}
   ];
+
+  demoDocViewerMain;
+  constructor() {
+    this.demoDocViewerMain = document.querySelector('.doc-viewer-container .main');
+  }
 }

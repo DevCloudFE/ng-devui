@@ -1,16 +1,30 @@
-<div class="demo-container">
-  <div class="demo-example">
-    <div class="demo-title">基本用法</div>
-    <div class="demo-text"></div>
-    <d-codebox id="components-checkbox-basic" [sourceData]="checkboxDemoBasic">
-      <d-demo-checkbox-basic demo></d-demo-checkbox-basic>
-    </d-codebox>
+<div class="demo-container" dAnchorBox [view]="{ top: 60, bottom: 0 }">
+  <div style="position: fixed;right:100px;top:60px;">
+    <d-sticky [view]="{ top: 60, bottom: 0 }" [zIndex]="2000" [container]="demoDocViewerMain">
+      <div>
+        <h3 style="padding-bottom: 20px; border-bottom: 1px #cacfd8 solid;">快速前往</h3>
+        <ul class="step-nav">
+          <li [dAnchorLink]="'checkbox-basic'" anchorActive="active">基础用法</li>
+          <li [dAnchorLink]="'tabs-group'" anchorActive="active">使用CheckBoxGroup</li>
+        </ul>
+      </div>
+    </d-sticky>
   </div>
-  <div class="demo-example">
-    <div class="demo-title">使用CheckBoxGroup</div>
-    <div class="demo-text"></div>
-    <d-codebox id="components-tabs-group" [sourceData]="checkboxDemoGroup">
-      <d-checkbox-group-basic demo></d-checkbox-group-basic>
-    </d-codebox>
+
+  <div class="demo-container">
+    <div class="demo-example" [dAnchor]="'checkbox-basic'">
+      <div class="demo-title">基本用法</div>
+      <div class="demo-text"></div>
+      <d-codebox id="components-checkbox-basic" [sourceData]="checkboxDemoBasic">
+        <d-demo-checkbox-basic demo></d-demo-checkbox-basic>
+      </d-codebox>
+    </div>
+    <div class="demo-example" [dAnchor]="'tabs-group'">
+      <div class="demo-title">使用CheckBoxGroup</div>
+      <div class="demo-text"></div>
+      <d-codebox id="components-tabs-group" [sourceData]="checkboxDemoGroup">
+        <d-checkbox-group-basic demo></d-checkbox-group-basic>
+      </d-codebox>
+    </div>
   </div>
 </div>

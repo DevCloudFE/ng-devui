@@ -1,47 +1,64 @@
-<div class="demo-container">
-  <div class="demo-example">
-    <div class="demo-title">基本用法</div>
-    <div class="demo-text">
-      通过 source 设置数据源
-    </div>
-    <d-codebox [sourceData]="BasicSource">
-      <d-with-source demo></d-with-source>
-    </d-codebox>
+<div class="demo-container" dAnchorBox [view]="{ top: 60, bottom: 0 }">
+  <div style="position: fixed;right:100px;top:60px;">
+    <d-sticky [view]="{ top: 60, bottom: 0 }" [zIndex]="2000" [container]="demoDocViewerMain">
+      <div>
+        <h3 style="padding-bottom: 20px; border-bottom: 1px #cacfd8 solid;">快速前往</h3>
+        <ul class="step-nav">
+          <li [dAnchorLink]="'with-source'" anchorActive="active">基本用法</li>
+          <li [dAnchorLink]="'disable-data-with-source'" anchorActive="active">设置禁用选项</li>
+          <li [dAnchorLink]="'with-search-function'" anchorActive="active">自定义匹配方法</li>
+          <li [dAnchorLink]="'async-data-with-function'" anchorActive="active">异步获取数据源并设置匹配方法</li>
+          <li [dAnchorLink]="'lazy-load'" anchorActive="active">数据懒加载</li>
+        </ul>
+      </div>
+    </d-sticky>
   </div>
-  <div class="demo-example">
-    <div class="demo-title">设置禁用选项</div>
-    <div class="demo-text">
-      支持禁用指定数据
+
+  <div class="demo-container">
+    <div class="demo-example" [dAnchor]="'with-source'">
+      <div class="demo-title">基本用法</div>
+      <div class="demo-text">
+        通过 source 设置数据源
+      </div>
+      <d-codebox [sourceData]="BasicSource">
+        <d-with-source demo></d-with-source>
+      </d-codebox>
     </div>
-    <d-codebox [sourceData]="DisableDataSource">
-      <d-disable-data-with-source demo></d-disable-data-with-source>
-    </d-codebox>
-  </div>
-  <div class="demo-example">
-    <div class="demo-title">自定义匹配方法</div>
-    <div class="demo-text">
-      通过 searchFn 自定义数据匹配方法
+    <div class="demo-example" [dAnchor]="'disable-data-with-source'">
+      <div class="demo-title">设置禁用选项</div>
+      <div class="demo-text">
+        支持禁用指定数据
+      </div>
+      <d-codebox [sourceData]="DisableDataSource">
+        <d-disable-data-with-source demo></d-disable-data-with-source>
+      </d-codebox>
     </div>
-    <d-codebox [sourceData]="SearchFnSource">
-      <d-with-search-function demo></d-with-search-function>
-    </d-codebox>
-  </div>
-  <div class="demo-example">
-    <div class="demo-title">异步获取数据源并设置匹配方法</div>
-    <div class="demo-text">
-      支持异步设置数据源并设置匹配方法
+    <div class="demo-example" [dAnchor]="'with-search-function'">
+      <div class="demo-title">自定义匹配方法</div>
+      <div class="demo-text">
+        通过 searchFn 自定义数据匹配方法
+      </div>
+      <d-codebox [sourceData]="SearchFnSource">
+        <d-with-search-function demo></d-with-search-function>
+      </d-codebox>
     </div>
-    <d-codebox [sourceData]="AsyncDataSearchFnSource">
-      <d-async-data-with-function demo></d-async-data-with-function>
-    </d-codebox>
-  </div>
-  <div class="demo-example">
-    <div class="demo-title">数据懒加载</div>
-    <div class="demo-text">
-      数据懒加载
+    <div class="demo-example" [dAnchor]="'async-data-with-function'">
+      <div class="demo-title">异步获取数据源并设置匹配方法</div>
+      <div class="demo-text">
+        支持异步设置数据源并设置匹配方法
+      </div>
+      <d-codebox [sourceData]="AsyncDataSearchFnSource">
+        <d-async-data-with-function demo></d-async-data-with-function>
+      </d-codebox>
     </div>
-    <d-codebox [sourceData]="LazyLoadComponentSource">
-      <d-lazy-load demo></d-lazy-load>
-    </d-codebox>
+    <div class="demo-example" [dAnchor]="'lazy-load'">
+      <div class="demo-title">数据懒加载</div>
+      <div class="demo-text">
+        数据懒加载
+      </div>
+      <d-codebox [sourceData]="LazyLoadComponentSource">
+        <d-lazy-load demo></d-lazy-load>
+      </d-codebox>
+    </div>
   </div>
 </div>

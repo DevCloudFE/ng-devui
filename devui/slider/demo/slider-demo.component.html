@@ -1,30 +1,44 @@
-<div>
-  <div class="demo-container">
-    <div class="demo-example">
-      <div class="demo-title">基本用法</div>
-      <d-codebox id="components-slider-default" [sourceData]="SliderBasicComponent">
-        <d-slider-basic demo></d-slider-basic>
-      </d-codebox>
-    </div>
-
-    <div class="demo-example">
-      <div class="demo-title">禁止输入态</div>
-      <div class="demo-text">
-        当 disabled 为 true 的时候是禁止用户输入的状态。
+<div class="demo-container" dAnchorBox [view]="{ top: 60, bottom: 0 }">
+  <div style="position: fixed;right:100px;top:60px;">
+    <d-sticky [view]="{ top: 60, bottom: 0 }" [zIndex]="2000" [container]="demoDocViewerMain">
+      <div>
+        <h3 style="padding-bottom: 20px; border-bottom: 1px #cacfd8 solid;">快速前往</h3>
+        <ul class="step-nav">
+          <li [dAnchorLink]="'slider-basic'" anchorActive="active">基本用法</li>
+          <li [dAnchorLink]="'slider-disabled'" anchorActive="active">禁止输入态</li>
+          <li [dAnchorLink]="'slider-formatter'" anchorActive="active">定制Popover的显示内容</li>
+        </ul>
       </div>
-      <d-codebox id="components-slider-disabled" [sourceData]="SliderDisabledComponent">
-        <d-slider-disabled demo></d-slider-disabled>
-      </d-codebox>
-    </div>
-
-    <div class="demo-example">
-      <div class="demo-title">定制Popover的显示内容</div>
-      <div class="demo-text">
-        通过 tipsRenderer 参数传入函数定制Popover内的显示内容。
+    </d-sticky>
+  </div>
+  <div>
+    <div class="demo-container">
+      <div class="demo-example" [dAnchor]="'slider-basic'">
+        <div class="demo-title">基本用法</div>
+        <d-codebox id="components-slider-default" [sourceData]="SliderBasicComponent">
+          <d-slider-basic demo></d-slider-basic>
+        </d-codebox>
       </div>
-      <d-codebox id="components-slider-formatter" [sourceData]="SliderCustomFormatterComponent">
-        <d-slider-formatter demo></d-slider-formatter>
-      </d-codebox>
+
+      <div class="demo-example" [dAnchor]="'slider-disabled'">
+        <div class="demo-title">禁止输入态</div>
+        <div class="demo-text">
+          当 disabled 为 true 的时候是禁止用户输入的状态。
+        </div>
+        <d-codebox id="components-slider-disabled" [sourceData]="SliderDisabledComponent">
+          <d-slider-disabled demo></d-slider-disabled>
+        </d-codebox>
+      </div>
+
+      <div class="demo-example" [dAnchor]="'slider-formatter'">
+        <div class="demo-title">定制Popover的显示内容</div>
+        <div class="demo-text">
+          通过 tipsRenderer 参数传入函数定制Popover内的显示内容。
+        </div>
+        <d-codebox id="components-slider-formatter" [sourceData]="SliderCustomFormatterComponent">
+          <d-slider-formatter demo></d-slider-formatter>
+        </d-codebox>
+      </div>
     </div>
   </div>
 </div>

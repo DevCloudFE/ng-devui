@@ -126,4 +126,9 @@ export class DatepickerDemoComponent {
       code: require('!!raw-loader!./two-datepicker-basic/two-datepicker-basic.component.css')
     },
   ];
+
+  demoDocViewerMain;
+  constructor() {
+    this.demoDocViewerMain = document.querySelector('.doc-viewer-container .main');
+  }
 }

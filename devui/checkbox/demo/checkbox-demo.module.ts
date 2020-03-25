@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { CheckBoxDemoComponent } from './checkbox-demo.component';
 import { CheckBoxModule } from 'ng-devui/checkbox';
 import { SelectModule } from 'ng-devui/select';
+import { StickyModule } from '../../sticky';
+import { AnchorModule } from '../../anchor';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
@@ -20,6 +22,8 @@ import { CheckboxGroupBasicComponent} from './group/checkbox-group-basic.compone
     SelectModule,
     DevUIApiModule,
     DevUICodeboxModule,
+    StickyModule,
+    AnchorModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo' },
       { path: 'demo', component: CheckBoxDemoComponent},

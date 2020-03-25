@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { StickyModule } from '../../sticky';
+import { AnchorModule } from '../../anchor';
 import { FormModule } from '../form.module';
 import { FormDemoComponent } from './form-demo.component';
 import { ToggleModule } from 'ng-devui/toggle';
@@ -24,11 +25,13 @@ import { BasicComponent } from './basic/basic.component';
 import { ModalComponent } from './modal/modal.component';
 
 
+
 @NgModule({
   imports: [
     CommonModule,
     FormModule,
     StickyModule,
+    AnchorModule,
     DataTableModule,
     ToggleModule,
     ReactiveFormsModule,

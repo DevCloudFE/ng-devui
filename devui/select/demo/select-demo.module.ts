@@ -8,6 +8,8 @@ import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component
 import { SelectModule } from '../select.module';
 import { SelectDemoComponent } from './select-demo.component';
 import { ButtonModule } from 'ng-devui/button';
+import { StickyModule } from '../../sticky';
+import { AnchorModule } from '../../anchor';
 
 import { SelectBasicComponent } from './basic/select-basic.component';
 import { CustomSearchComponent } from './custom-search/custom-search.component';
@@ -35,6 +37,8 @@ import { UserMailSearchComponent } from './user-mail-search/user-mail-search.com
     DevUIApiModule,
     SelectModule,
     ButtonModule,
+    StickyModule,
+    AnchorModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo' },
       { path: 'demo', component: SelectDemoComponent},
