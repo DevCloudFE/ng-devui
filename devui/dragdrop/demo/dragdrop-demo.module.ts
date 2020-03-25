@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
+import { StickyModule } from '../../sticky';
+import { AnchorModule } from '../../anchor';
 import { DragDropModule } from '../drag-drop.module';
 import { DragDropDemoComponent } from './dragdrop-demo.component';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
@@ -22,6 +24,8 @@ import { CrossDimensionComponent } from './cross-dimension/cross-dimension.compo
 
 @NgModule({
   imports: [
+    StickyModule,
+    AnchorModule,
     CommonModule,
     FormsModule,
     DragDropModule,

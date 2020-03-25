@@ -6,7 +6,8 @@ import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 
 @Component({
     selector: 'd-demo-search',
-    templateUrl: './search-demo.component.html'
+    templateUrl: './search-demo.component.html',
+    styleUrls: ['../../style/core/_nav.scss']
 })
 export class SearchDemoComponent {
   basicSource: Array<DevuiSourceData> = [

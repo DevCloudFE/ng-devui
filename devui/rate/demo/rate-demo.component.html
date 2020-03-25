@@ -1,27 +1,40 @@
-<div class="demo-container">
+<div class="demo-container" dAnchorBox [view]="{ top: 60, bottom: 0 }">
+  <div style="position: fixed;right:100px;top:60px;">
+    <d-sticky [view]="{ top: 60, bottom: 0 }" [zIndex]="2000" [container]="demoDocViewerMain">
+      <div>
+        <h3 style="padding-bottom: 20px; border-bottom: 1px #cacfd8 solid;">快速前往</h3>
+        <ul class="step-nav">
+          <li [dAnchorLink]="'read-only-mode'" anchorActive="active">只读模式</li>
+          <li [dAnchorLink]="'dynamic-mode'" anchorActive="active">动态模式</li>
+          <li [dAnchorLink]="'dynamic-mode-Custom'" anchorActive="active">动态模式-自定义</li>
+          <li [dAnchorLink]="'using-the-type-parameter'" anchorActive="active">使用type参数</li>
+        </ul>
+      </div>
+    </d-sticky>
+  </div>
   <div class="demo-example">
-    <div class="demo-title">只读模式</div>
+    <div class="demo-title" [dAnchor]="'read-only-mode'">只读模式</div>
     <div class="demo-text"></div>
     <d-codebox id="components-rate-onlyread" [sourceData]="onlyreadSource">
       <d-rate-demo-onlyread demo></d-rate-demo-onlyread>
     </d-codebox>
   </div>
   <div class="demo-example">
-    <div class="demo-title">动态模式</div>
+    <div class="demo-title" [dAnchor]="'dynamic-mode'">动态模式</div>
     <div class="demo-text"></div>
     <d-codebox id="components-rate-basic" [sourceData]="basicSource">
       <d-rate-demo-basic demo></d-rate-demo-basic>
     </d-codebox>
   </div>
   <div class="demo-example">
-    <div class="demo-title">动态模式-自定义</div>
+    <div class="demo-title" [dAnchor]="'dynamic-mode-Custom'">动态模式-自定义</div>
     <div class="demo-text"></div>
     <d-codebox id="components-rate-customize" [sourceData]="customizeSource">
       <d-rate-demo-customize demo></d-rate-demo-customize>
     </d-codebox>
   </div>
   <div class="demo-example">
-    <div class="demo-title">使用type参数</div>
+    <div class="demo-title" [dAnchor]="'using-the-type-parameter'">使用type参数</div>
     <div class="demo-text"></div>
     <d-codebox id="components-rate-type" [sourceData]="TypeSource">
       <d-type demo></d-type>

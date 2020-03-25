@@ -1,6 +1,17 @@
-<div class="demo-container">
+<div class="demo-container" dAnchorBox [view]="{ top: 60, bottom: 0 }">
+  <div style="position: fixed;right:100px;top:60px;">
+    <d-sticky [view]="{ top: 60, bottom: 0 }" [zIndex]="2000" [container]="demoDocViewerMain">
+      <div>
+        <h3 style="padding-bottom: 20px; border-bottom: 1px #cacfd8 solid;">快速前往</h3>
+        <ul class="step-nav">
+          <li [dAnchorLink]="'basic-usage'" anchorActive="active">基本用法</li>
+          <li [dAnchorLink]="'bidirectional-binding'" anchorActive="active">双向绑定</li>
+        </ul>
+      </div>
+    </d-sticky>
+  </div>
   <div class="demo-example">
-    <div class="demo-title">基本用法</div>
+    <div class="demo-title" [dAnchor]="'basic-usage'">基本用法</div>
     <div class="demo-text"></div>
     <d-codebox id="components-search-default" [sourceData]="basicSource">
       <d-basic demo></d-basic>
@@ -8,7 +19,7 @@
   </div>
 
   <div class="demo-example">
-    <div class="demo-title">双向绑定</div>
+    <div class="demo-title" [dAnchor]="'bidirectional-binding'">双向绑定</div>
     <div class="demo-text"></div>
     <d-codebox id="components-search-ngmodel" [sourceData]="ngmodelDemoSource">
       <d-ngmodel demo></d-ngmodel>

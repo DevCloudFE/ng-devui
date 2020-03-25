@@ -3,7 +3,8 @@ import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 
 @Component({
   selector: 'd-demo-status',
-  templateUrl: './status-demo.component.html'
+  templateUrl: './status-demo.component.html',
+  styleUrls: ['../../style/core/_nav.scss']
 })
 export class StatusDemoComponent {
   basicSource: Array<DevuiSourceData> = [

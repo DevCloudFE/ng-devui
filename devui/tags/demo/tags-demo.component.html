@@ -1,6 +1,17 @@
-<div class="demo-container">
+<div class="demo-container" dAnchorBox [view]="{ top: 60, bottom: 0 }">
+  <div style="position: fixed;right:100px;top:60px;">
+    <d-sticky [view]="{ top: 60, bottom: 0 }" [zIndex]="2000" [container]="demoDocViewerMain">
+      <div>
+        <h3 style="padding-bottom: 20px; border-bottom: 1px #cacfd8 solid;">快速前往</h3>
+        <ul class="step-nav">
+          <li [dAnchorLink]="'single-tag'" anchorActive="active">单个标签</li>
+          <li [dAnchorLink]="'tags-group'" anchorActive="active">标签组</li>
+        </ul>
+      </div>
+    </d-sticky>
+  </div>
   <div class="demo-example">
-    <div class="demo-title">单个标签</div>
+    <div class="demo-title" [dAnchor]="'single-tag'">单个标签</div>
     <div class="demo-text">
       通过labelStyle属性定义标签样式
     </div>
@@ -9,7 +20,7 @@
     </d-codebox>
   </div>
   <div class="demo-example">
-    <div class="demo-title">标签组</div>
+    <div class="demo-title" [dAnchor]="'tags-group'">标签组</div>
     <div class="demo-text">
       标签组可传入字符串数组或对象数组，在对象数组中，可通过displayProperty，titleProperty设置标签显示值和title显示值，通过labelStyle设置标签样式
     </div>

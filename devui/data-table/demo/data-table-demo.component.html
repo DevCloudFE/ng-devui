@@ -1,6 +1,26 @@
-<div class="demo-container">
+<div class="demo-container" dAnchorBox [view]="{ top: 60, bottom: 0 }">
+  <div style="position: fixed;right:100px;top:60px;">
+    <d-sticky [view]="{ top: 60, bottom: 0 }" [zIndex]="2000" [container]="demoDocViewerMain">
+      <div>
+        <h3 style="padding-bottom: 20px; border-bottom: 1px #cacfd8 solid;">快速前往</h3>
+        <ul class="step-nav">
+          <li [dAnchorLink]="'basic-usage'" anchorActive="active">基本用法</li>
+          <li [dAnchorLink]="'table-interaction'" anchorActive="active">表格交互</li>
+          <li [dAnchorLink]="'load-data-asynchronously'" anchorActive="active">异步加载数据</li>
+          <li [dAnchorLink]="'table-fixing'" anchorActive="active">表头固定</li>
+          <li [dAnchorLink]="'lazy-loading-of-list-data'" anchorActive="active">列表数据懒加载</li>
+          <li [dAnchorLink]="'header-grouping'" anchorActive="active">表头分组</li>
+          <li [dAnchorLink]="'edit-cell'" anchorActive="active">编辑单元格</li>
+          <li [dAnchorLink]="'extend-extra-lines'" anchorActive="active">扩展额外行</li>
+          <li [dAnchorLink]="'tree-form'" anchorActive="active">树形表格</li>
+          <li [dAnchorLink]="'fixed-column'" anchorActive="active">固定列</li>
+          <li [dAnchorLink]="'column-dragging'" anchorActive="active">列拖拽</li>
+        </ul>
+      </div>
+    </d-sticky>
+  </div>
   <div class="demo-example">
-    <div class="demo-title">基本用法</div>
+    <div class="demo-title" [dAnchor]="'basic-usage'">基本用法</div>
     <div class="demo-text">
       简单表格，展示列表数据
     </div>
@@ -9,7 +29,7 @@
     </d-codebox>
   </div>
   <div class="demo-example">
-    <div class="demo-title">表格交互</div>
+    <div class="demo-title" [dAnchor]="'table-interaction'">表格交互</div>
     <div class="demo-text">
       支持列排序、列过滤、选中、调整列宽
     </div>
@@ -18,7 +38,7 @@
     </d-codebox>
   </div>
   <div class="demo-example">
-    <div class="demo-title">异步加载数据</div>
+    <div class="demo-title" [dAnchor]="'load-data-asynchronously'">异步加载数据</div>
     <div class="demo-text">
       异步加载表格数据，列动态配置
     </div>
@@ -27,7 +47,7 @@
     </d-codebox>
   </div>
   <div class="demo-example">
-    <div class="demo-title">表头固定</div>
+    <div class="demo-title" [dAnchor]="'table-fixing'">表头固定</div>
     <div class="demo-text">
       设置表格最大高度，同时表头不跟随滚动
     </div>
@@ -36,7 +56,7 @@
     </d-codebox>
   </div>
   <div class="demo-example">
-    <div class="demo-title">列表数据懒加载</div>
+    <div class="demo-title" [dAnchor]="'lazy-loading-of-list-data'">列表数据懒加载</div>
     <div class="demo-text">
       跟随滚动，懒加载，不断增加表格数据
     </div>
@@ -45,7 +65,7 @@
     </d-codebox>
   </div>
   <div class="demo-example">
-    <div class="demo-title">表头分组</div>
+    <div class="demo-title" [dAnchor]="'header-grouping'">表头分组</div>
     <div class="demo-text">
       表头支持分组，显示多行
     </div>
@@ -54,7 +74,7 @@
     </d-codebox>
   </div>
   <div class="demo-example">
-    <div class="demo-title">编辑单元格</div>
+    <div class="demo-title" [dAnchor]="'edit-cell'">编辑单元格</div>
     <div class="demo-text">
       通过列的编辑属性（editable）和自定义单元格来实现单元格编辑功能
     </div>
@@ -63,7 +83,7 @@
     </d-codebox>
   </div>
   <div class="demo-example">
-    <div class="demo-title">扩展额外行</div>
+    <div class="demo-title" [dAnchor]="'extend-extra-lines'">扩展额外行</div>
     <div class="demo-text">
       通过headerExpandConfig和行数据的$expandConfig来配置表头和某一行下的可自定义的扩展行，通过showExpandToggle来配置扩展行的操作图标，
       也可以通过设置行数据的xpandConfig.expand来控制扩展行的显示和隐藏
@@ -73,7 +93,7 @@
     </d-codebox>
   </div>
   <div class="demo-example">
-    <div class="demo-title">树形表格</div>
+    <div class="demo-title" [dAnchor]="'tree-form'">树形表格</div>
     <div class="demo-text">
       通过列的nestedColumn属性和行数据的children字段来配置渲染树形表格
     </div>
@@ -82,7 +102,7 @@
     </d-codebox>
   </div>
   <div class="demo-example">
-    <div class="demo-title">固定列</div>
+    <div class="demo-title" [dAnchor]="'fixed-column'">固定列</div>
     <div class="demo-text">
       当表格列过多时，固定列有利于用户在左右滑动屏幕时，能够便捷地进行数据定位与对比，通过column的fixedLeft、fixedRight来配置
     </div>
@@ -91,7 +111,7 @@
     </d-codebox>
   </div>
   <div class="demo-example">
-    <div class="demo-title">列拖拽</div>
+    <div class="demo-title" [dAnchor]="'column-dragging'">列拖拽</div>
     <div class="demo-text">
       应用于列内容有对比诉求，属于低频操作，默认不展示，当鼠标移入表头显示标识，支持用户快速对列进行排序
     </div>

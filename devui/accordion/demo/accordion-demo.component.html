@@ -1,6 +1,20 @@
-<div class="demo-container">
+<div class="demo-container" dAnchorBox [view]="{ top: 60, bottom: 0 }">
+  <div style="position: fixed;right:100px;top:60px;">
+    <d-sticky [view]="{ top: 60, bottom: 0 }" [zIndex]="2000" [container]="demoDocViewerMain">
+      <div>
+        <h3 style="padding-bottom: 20px; border-bottom: 1px #cacfd8 solid;">快速前往</h3>
+        <ul class="step-nav">
+          <li [dAnchorLink]="'basic-usage'" anchorActive="active">基本用法</li>
+          <li [dAnchorLink]="'use-built-in-routing-and-link-types'" anchorActive="active">内置路由和链接类型</li>
+          <li [dAnchorLink]="'using-templates'" anchorActive="active">使用模板</li>
+          <li [dAnchorLink]="'compound-level-and-auto-expand'" anchorActive="active">复合层级和自动展开</li>
+          <li [dAnchorLink]="'change-values'" anchorActive="active">改变键值</li>
+        </ul>
+      </div>
+    </d-sticky>
+  </div>
   <div class="demo-example">
-    <div class="demo-title">基本用法</div>
+    <div class="demo-title" [dAnchor]="'basic-usage'">基本用法</div>
     <div class="demo-text">
       传入菜单，监听含子项的可展开菜单的开合事件(menuToggle)或可点击菜单的点击事件(itemClick)。<br />
       可展开菜单默认展开使用属性open，可点击菜单默认激活使用属性active，禁用项使用disabled。<br />
@@ -11,7 +25,7 @@
     </d-codebox>
   </div>
   <div class="demo-example">
-    <div class="demo-title">使用内置路由和链接类型</div>
+    <div class="demo-title" [dAnchor]="'use-built-in-routing-and-link-types'">使用内置路由和链接类型</div>
     <div class="demo-text">
       通过设置linkType切换不同的内置路由和链接类型：默认类型''；
       路由类型'routerLink'；外链类型：'hrefLink'；基于数据判断路由或链接类型：'dependOnLinkTypeKey'。
@@ -21,7 +35,7 @@
     </d-codebox>
   </div>
   <div class="demo-example">
-    <div class="demo-title">使用模板</div>
+    <div class="demo-title" [dAnchor]="'using-templates'">使用模板</div>
     <div class="demo-text">
       可展开菜单和可点击菜单分别使用模板。可展开菜单指定menuItemTemplate，可点击菜单指定itemTemplate。<br />
       没有数据模板指定noContentTemplate，并可以通过showNoContent控制无数据的时候不展开。<br />
@@ -39,7 +53,7 @@
   </div>
 
   <div class="demo-example">
-    <div class="demo-title">复合层级和自动展开</div>
+    <div class="demo-title" [dAnchor]="'compound-level-and-auto-expand'">复合层级和自动展开</div>
     <div class="demo-text">
       支持多层级和不限制嵌套层级。可以独立使用autoOpenActiveMenu使得激活的菜单的父层级自动展开。
     </div>
@@ -48,7 +62,7 @@
     </d-codebox>
   </div>
   <div class="demo-example">
-    <div class="demo-title">改变键值</div>
+    <div class="demo-title" [dAnchor]="'change-values'">改变键值</div>
     <div class="demo-text">
       通过titleKey, childrenKey, disabledKey, activeKey等等改变数组键值，适配不同的接口类型定义。
     </div>

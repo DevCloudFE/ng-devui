@@ -1,6 +1,17 @@
-<div class="demo-container">
+<div class="demo-container" dAnchorBox [view]="{ top: 60, bottom: 0 }">
+  <div style="position: fixed;right:100px;top:60px;">
+    <d-sticky [view]="{ top: 60, bottom: 0 }" [zIndex]="2000" [container]="demoDocViewerMain">
+      <div>
+        <h3 style="padding-bottom: 20px; border-bottom: 1px #cacfd8 solid;">快速前往</h3>
+        <ul class="step-nav">
+          <li [dAnchorLink]="'basic-usage'" anchorActive="active">基本用法</li>
+          <li [dAnchorLink]="'do-not-destroy-after-closing'" anchorActive="active">关闭后不销毁</li>
+        </ul>
+      </div>
+    </d-sticky>
+  </div>
   <div class="demo-example">
-    <div class="demo-title">基本用法</div>
+    <div class="demo-title" [dAnchor]="'basic-usage'">基本用法</div>
     <div class="demo-text">
       基本用法，可以控制全屏和关闭
     </div>
@@ -9,7 +20,7 @@
     </d-codebox>
   </div>
   <div class="demo-example">
-    <div class="demo-title">关闭后不销毁</div>
+    <div class="demo-title" [dAnchor]="'do-not-destroy-after-closing'">关闭后不销毁</div>
     <div class="demo-text">
       关闭后不销毁，需要手动销毁，适用于不需要关闭立即销毁的场景
     </div>

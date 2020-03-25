@@ -10,9 +10,13 @@ import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { TagsDemoComponent } from './tags-demo.component';
 import { BasicComponent } from './basic/basic.component';
 import { CustomComponent } from './custom/custom.component';
+import { StickyModule } from '../../sticky';
+import { AnchorModule } from '../../anchor';
 
 @NgModule({
   imports: [
+    StickyModule,
+    AnchorModule,
     CommonModule,
     TagsModule,
     DevUICodeboxModule,

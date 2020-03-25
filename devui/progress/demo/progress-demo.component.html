@@ -1,6 +1,17 @@
-<div class="demo-container">
+<div class="demo-container" dAnchorBox [view]="{ top: 60, bottom: 0 }">
+  <div style="position: fixed;right:100px;top:60px;">
+    <d-sticky [view]="{ top: 60, bottom: 0 }" [zIndex]="2000" [container]="demoDocViewerMain">
+      <div>
+        <h3 style="padding-bottom: 20px; border-bottom: 1px #cacfd8 solid;">快速前往</h3>
+        <ul class="step-nav">
+          <li [dAnchorLink]="'basic-usage1'" anchorActive="active">基本用法1</li>
+          <li [dAnchorLink]="'basic-usage2'" anchorActive="active">基本用法2</li>
+        </ul>
+      </div>
+    </d-sticky>
+  </div>
   <div class="demo-example">
-    <div class="demo-title">基本用法</div>
+    <div class="demo-title" [dAnchorLink]="'basic-usage1'">基本用法1</div>
     <div class="demo-text">
       基本的进度和文字配置。
     </div>
@@ -9,7 +20,7 @@
     </d-codebox>
   </div>
   <div class="demo-example">
-    <div class="demo-title">基本用法</div>
+    <div class="demo-title" [dAnchorLink]="'basic-usage2'">基本用法2</div>
     <div class="demo-text">
       基本的进度和文字配置。
     </div>

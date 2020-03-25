@@ -3,7 +3,8 @@ import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 
 @Component({
     selector: 'd-anchor-demo',
-    templateUrl: './anchor-demo.component.html'
+    templateUrl: './anchor-demo.component.html',
+    styleUrls: ['../../style/core/_nav.scss']
 })
 export class AnchorDemoComponent {
   basicSource: Array<DevuiSourceData> = [

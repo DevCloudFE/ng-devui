@@ -18,9 +18,13 @@ import { TipsComponent } from './tips/tips.component';
 import { HideComponent } from './hide/hide.component';
 import { WarningComponent } from './warning/warning.component';
 import { AutofocusComponent } from './autofocus/autofocus.component';
+import { StickyModule } from '../../sticky';
+import { AnchorModule } from '../../anchor';
 
 @NgModule({
   imports: [
+    StickyModule,
+    AnchorModule,
     CommonModule,
     ModalModule,
     ButtonModule,

@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'd-accordion-demo',
   templateUrl: './accordion-demo.component.html',
+  styleUrls: ['../../style/core/_nav.scss']
 })
 export class  AccordionDemoComponent {
   AccordionDemoBasic: Array<DevuiSourceData> = [

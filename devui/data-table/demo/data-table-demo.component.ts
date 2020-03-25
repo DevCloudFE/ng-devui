@@ -3,6 +3,7 @@ import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 @Component({
   selector: 'd-datatable-demo',
   templateUrl: './data-table-demo.component.html',
+  styleUrls: ['../../style/core/_nav.scss']
 
 })
 export class DataTableDemoComponent {

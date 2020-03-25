@@ -3,7 +3,8 @@ import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 
 @Component({
   selector: 'd-avatar-demo',
-  templateUrl: './avatar-demo.component.html'
+  templateUrl: './avatar-demo.component.html',
+  styleUrls: ['../../style/core/_nav.scss']
 })
 
 export class AvatarDemoComponent  {

@@ -6,7 +6,8 @@ import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 
 @Component({
     selector: 'd-demo-loading',
-    templateUrl: './loading-demo.component.html'
+    templateUrl: './loading-demo.component.html',
+    styleUrls: ['../../style/core/_nav.scss']
 })
 export class LoadingDemoComponent {
   basicSource: Array<DevuiSourceData> = [

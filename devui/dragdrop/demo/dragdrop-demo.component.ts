@@ -6,7 +6,8 @@ import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 
 @Component({
     selector: 'd-demo-dragdrop',
-    templateUrl: './dragdrop-demo.component.html'
+    templateUrl: './dragdrop-demo.component.html',
+    styleUrls: ['../../style/core/_nav.scss']
 })
 export class DragDropDemoComponent {
   basicSource: Array<DevuiSourceData> = [

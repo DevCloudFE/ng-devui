@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
+import { StickyModule } from '../../sticky';
+import { AnchorModule } from '../../anchor';
 import { StatusModule } from '../status.module';
 import { StatusDemoComponent } from './status-demo.component';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
@@ -12,6 +14,8 @@ import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 
 @NgModule({
   imports: [
+    StickyModule,
+    AnchorModule,
     CommonModule,
     FormsModule,
     StatusModule,

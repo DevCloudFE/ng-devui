@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
+import { StickyModule } from '../../sticky';
+import { AnchorModule } from '../../anchor';
 import { SearchModule } from '../search.module';
 import { SearchDemoComponent } from './search-demo.component';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
@@ -13,6 +15,8 @@ import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 
 @NgModule({
   imports: [
+    StickyModule,
+    AnchorModule,
     CommonModule,
     FormsModule,
     SearchModule,

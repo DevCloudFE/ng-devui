@@ -3,7 +3,8 @@ import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 
 @Component({
   selector: 'd-demo-toast',
-  templateUrl: './toast-demo.component.html'
+  templateUrl: './toast-demo.component.html',
+  styleUrls: ['../../style/core/_nav.scss']
 })
 export class ToastDemoComponent {
   basicSource: Array<DevuiSourceData> = [

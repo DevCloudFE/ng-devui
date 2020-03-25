@@ -1,6 +1,19 @@
-<div class="demo-container">
+<div class="demo-container" dAnchorBox [view]="{ top: 60, bottom: 0 }">
+  <div style="position: fixed;right:100px;top:60px;">
+    <d-sticky [view]="{ top: 60, bottom: 0 }" [zIndex]="2000" [container]="demoDocViewerMain">
+      <div>
+        <h3 style="padding-bottom: 20px; border-bottom: 1px #cacfd8 solid;">快速前往</h3>
+        <ul class="step-nav">
+          <li [dAnchorLink]="'basic-rules'" anchorActive="active">头像显示的基本规则</li>
+          <li [dAnchorLink]="'basic-configuration'" anchorActive="active">头像的基础配置</li>
+          <li [dAnchorLink]="'special-display'" anchorActive="active">头像的特殊显示</li>
+        </ul>
+      </div>
+    </d-sticky>
+  </div>
+
   <div class="demo-example">
-    <div class="demo-title">头像显示的基本规则</div>
+    <div class="demo-title" [dAnchor]="'basic-rules'">头像显示的基本规则</div>
     <div class="demo-text">
       头像组件传入'name'属性时，会根据一定的规则显示头像的字段，具体规则如下：
     </div>
@@ -9,7 +22,7 @@
     </d-codebox>
   </div>
   <div class="demo-example">
-    <div class="demo-title">头像的基础配置</div>
+    <div class="demo-title" [dAnchor]="'basic-configuration'">头像的基础配置</div>
     <div class="demo-text">
       头像组件可设置宽度，高度，是否为圆形头像，同时可自定义头像的显示字段，传入自定义图片等
     </div>
@@ -18,7 +31,7 @@
     </d-codebox>
   </div>
   <div class="demo-example">
-    <div class="demo-title">头像的特殊显示</div>
+    <div class="demo-title" [dAnchor]="'special-display'">头像的特殊显示</div>
     <div class="demo-text">
       头像组件会对一些特殊情况进行处理，具体如下：
     </div>

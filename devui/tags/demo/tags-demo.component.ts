@@ -5,7 +5,8 @@ import { DevuiSourceData } from 'ng-devui/shared/devui-codebox/devui-source-data
 
 @Component({
   selector: 'd-demo-tags',
-  templateUrl: './tags-demo.component.html'
+  templateUrl: './tags-demo.component.html',
+  styleUrls: ['../../style/core/_nav.scss']
 })
 
 export class TagsDemoComponent {
