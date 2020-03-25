@@ -4,7 +4,7 @@ import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 @Component({
   selector: 'd-demo-rate',
   templateUrl: './rate-demo.component.html',
-  styleUrls: ['./rate-demo.component.css', '../../style/core/_nav.scss']
+  styleUrls: ['./rate-demo.component.css']
 })
 export class RateDemoComponent implements OnInit {
   basicSource: Array<DevuiSourceData> = [

@@ -1,5 +1,11 @@
+.nav-main {
+  position: fixed;
+  right: 20px;
+  top: 60px;
+}
+
 .step-nav {
-  width: 250px;
+  width: 200px;
 }
 
 .step-nav > li {
@@ -11,6 +17,9 @@
   font-size: 14px;
   color: #5e6678;
   position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .step-nav > li:hover {

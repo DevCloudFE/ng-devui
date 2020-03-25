@@ -6,8 +6,7 @@ import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 
 @Component({
     selector: 'd-demo-button',
-    templateUrl: './button-demo.component.html',
-    styleUrls: ['../../style/core/_nav.scss']
+    templateUrl: './button-demo.component.html'
 })
 export class ButtonDemoComponent {
   commonSource: Array<DevuiSourceData> = [
