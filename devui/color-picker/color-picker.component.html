@@ -21,15 +21,19 @@
       </div>
       <div *ngIf="'more' === selectedPanel">
         <div class="advanced-color">
-          <d-advanced-color-panel
-            [color]="color"
-            [pureColor]="pureColor"
-            (send)="receive($event)"
-          ></d-advanced-color-panel>
-          <d-advanced-color-slider
-            [color]="color"
-            (send)="receive($event)"
-          ></d-advanced-color-slider>
+          <div class="color-panel-container">
+            <d-advanced-color-panel
+              [color]="color"
+              [pureColor]="pureColor"
+              (send)="receive($event)"
+            ></d-advanced-color-panel>
+          </div>
+          <div class="color-slider-container">
+            <d-advanced-color-slider
+              [color]="color"
+              (send)="receive($event)"
+            ></d-advanced-color-slider>
+          </div>
         </div>
       </div>
       <div class="color-cubes" *ngIf="'basic' === selectedPanel"> 

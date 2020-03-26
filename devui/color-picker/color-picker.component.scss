@@ -52,6 +52,17 @@
             width: 100%;
             height: 130px;
             user-select: none;
+            .color-panel-container {
+                display: inline-block;
+                width: calc(100% - 36px);
+                height: 100%;
+            }
+            .color-slider-container {
+                display: inline-block;
+                width: 20px;
+                height: 100%;
+                margin-left: 10px;
+            }
         }
     }
     @include hr;
