@@ -50,12 +50,16 @@ export class ColorPickerComponent implements OnInit {
       this.color = data.color;
       this.send.emit(this.color);
       if (data.sender !== 'advanced-color-panel') {
-        this.colorPickerService.updateAdvancedColor.emit(data.color);
+        setTimeout(() => { // HACK: Service 事件的传递速度比父组件的数据要快
+          this.colorPickerService.updateAdvancedColor.emit();
+        }, 10);
       }
     }
     if (data.pureColor) {
       this.pureColor = data.pureColor;
-      this.colorPickerService.updateAdvancedPureColor.emit();
+      setTimeout(() => { // HACK: Service 事件的传递速度比父组件的数据要快
+        this.colorPickerService.updateAdvancedPureColor.emit();
+      }, 10);
     }
   }
 

@@ -31,8 +31,7 @@ export class AdvancedColorPanelComponent implements OnInit {
     private colorPickerService: ColorPickerService
   ) {
     this.colorPickerService.updateAdvancedColor.subscribe(
-      (color) => {
-        this.color = color;
+      () => {
         if (this.color === '') { // input cleared color
           return;
         }
