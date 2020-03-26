@@ -20,6 +20,12 @@ export class TextDemoComponent {
   ];
 
   demoDocViewerMain;
+
+  navitems = [
+    {dAnchorLink:'basic-usage', value:"基本用法"},
+    {dAnchorLink:'resize', value:"调整大小"}
+  ]
+  
   constructor() {
     this.demoDocViewerMain = document.querySelector('.doc-viewer-container .main');
   }

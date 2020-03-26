@@ -8,6 +8,14 @@ import { DialogService } from '../dialog.service';
   styleUrls: ['../../style/core/_nav.scss']
 })
 export class ModalDemoComponent {
+  navitems = [
+    {dAnchorLink:'standard-dialog', value:"标准对话框"},
+    {dAnchorLink:'custom-dialog', value:"自定义对话框"},
+    {dAnchorLink:'intercept-dialog-closed', value:"拦截对话框关闭"},
+    {dAnchorLink:'message-hint', value:"信息提示"},
+    {dAnchorLink:'warning-pop-up', value:"警告弹出框"},
+    {dAnchorLink:'configure-button-to-get-focus-automatically', value:"配置按钮自动获得焦点"}
+  ]
   basicSource: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./basic/basic.component.html')},
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./basic/basic.component.ts')}

@@ -1,24 +1,5 @@
 <div class="demo-container" dAnchorBox [view]="{ top: 60, bottom: 0 }">
-  <div class="nav-main">
-    <d-sticky [view]="{ top: 60, bottom: 0 }" [zIndex]="2000" [container]="demoDocViewerMain">
-      <div>
-        <h3 style="padding-bottom: 20px; border-bottom: 1px #cacfd8 solid;">快速前往</h3>
-        <ul class="step-nav">
-          <li [dAnchorLink]="'basic-usage'" anchorActive="active">基本用法</li>
-          <li [dAnchorLink]="'table-interaction'" anchorActive="active">表格交互</li>
-          <li [dAnchorLink]="'load-data-asynchronously'" anchorActive="active">异步加载数据</li>
-          <li [dAnchorLink]="'table-fixing'" anchorActive="active">表头固定</li>
-          <li [dAnchorLink]="'lazy-loading-of-list-data'" anchorActive="active">列表数据懒加载</li>
-          <li [dAnchorLink]="'header-grouping'" anchorActive="active">表头分组</li>
-          <li [dAnchorLink]="'edit-cell'" anchorActive="active">编辑单元格</li>
-          <li [dAnchorLink]="'extend-extra-lines'" anchorActive="active">扩展额外行</li>
-          <li [dAnchorLink]="'tree-form'" anchorActive="active">树形表格</li>
-          <li [dAnchorLink]="'fixed-column'" anchorActive="active">固定列</li>
-          <li [dAnchorLink]="'column-dragging'" anchorActive="active">列拖拽</li>
-        </ul>
-      </div>
-    </d-sticky>
-  </div>
+  <d-demo-nav  [navitems]=navitems></d-demo-nav>
   <div class="demo-example">
     <div class="demo-title" [dAnchor]="'basic-usage'">基本用法</div>
     <div class="demo-text">

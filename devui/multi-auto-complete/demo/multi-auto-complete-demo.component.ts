@@ -17,6 +17,12 @@ export class MultiAutoCompleteDemoComponent {
   ];
 
   demoDocViewerMain;
+
+
+  navitems = [
+    {dAnchorLink:'basic-usage', value:"基本用法"},
+    {dAnchorLink:'auto-complete-array', value:"自定义匹配方法"}
+  ]
   constructor() {
     this.demoDocViewerMain = document.querySelector('.doc-viewer-container .main');
   }

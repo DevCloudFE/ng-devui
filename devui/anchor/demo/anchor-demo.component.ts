@@ -19,6 +19,11 @@ export class AnchorDemoComponent {
     {title: 'CSS', language: 'css', code:  require('!!raw-loader!./async/async.component.css')}
   ];
 
+  navitems = [
+    {dAnchorLink:'basic-usage', value:"基本用法"},
+    {dAnchorLink:'asynchronous-loading', value:"异步加载"}
+  ]
+  
   constructor() {
 
   }

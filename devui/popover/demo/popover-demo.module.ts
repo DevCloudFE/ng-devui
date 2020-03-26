@@ -17,9 +17,11 @@ import { HoverToContentComponent } from './hover-to-content/hover-to-content.com
 import { ButtonModule } from 'ng-devui/button';
 import { StickyModule } from '../../sticky';
 import { AnchorModule } from '../../anchor';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 
 @NgModule({
   imports: [
+    DDemoNavModule,
     StickyModule,
     AnchorModule,
     CommonModule,

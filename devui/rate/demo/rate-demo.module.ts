@@ -13,10 +13,12 @@ import { RateDemoOnlyReadComponent } from './onlyread/onlyread.component';
 import { TypeComponent } from './type/type.component';
 import { StickyModule } from '../../sticky';
 import { AnchorModule } from '../../anchor';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 
 
 @NgModule({
     imports: [
+        DDemoNavModule,
         StickyModule,
         AnchorModule,
         FormsModule,

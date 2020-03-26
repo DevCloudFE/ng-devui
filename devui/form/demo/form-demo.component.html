@@ -1,21 +1,5 @@
 <div class="demo-container" dAnchorBox [view]="{ top: 60, bottom: 0 }">
-  <div class="nav-main">
-    <d-sticky [view]="{ top: 60, bottom: 0 }" [zIndex]="2000" [container]="demoDocViewerMain">
-      <div>
-        <h3 style="padding-bottom: 20px; border-bottom: 1px #cacfd8 solid;">快速前往</h3>
-        <ul class="step-nav">
-          <li [dAnchorLink]="'d-form-item'" anchorActive="active">表单项d-form-item</li>
-          <li [dAnchorLink]="'d-form-label'" anchorActive="active">表单项d-form-label</li>
-          <li [dAnchorLink]="'d-form-control'" anchorActive="active">控件容器d-form-control</li>
-          <li [dAnchorLink]="'demo-base'" anchorActive="active">基本用法</li>
-          <li [dAnchorLink]="'demo-label-horizontal'" anchorActive="active">label横向排列</li>
-          <li [dAnchorLink]="'demo-modal'" anchorActive="active">弹框表单</li>
-          <li [dAnchorLink]="'demo-multi-col'" anchorActive="active">多列表单</li>
-          <li [dAnchorLink]="'demo-filter'" anchorActive="active">表单过滤</li>
-        </ul>
-      </div>
-    </d-sticky>
-  </div>
+  <d-demo-nav  [navitems]=navitems></d-demo-nav>
   <div class="demo-container">
     <div class="demo-example" [dAnchor]="'d-form-item'">
       <div class="demo-title">表单项d-form-item</div>

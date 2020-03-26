@@ -26,10 +26,11 @@ import { CustomViewTemplateComponent } from './custom-view-template/custom-view-
 import { DatepickerClearButtonComponent } from './clear-button/clear-button.component';
 import { DatepickerButtonComponent } from './button/button.component';
 import { TwoDatepickerBasicComponent } from './two-datepicker-basic/two-datepicker-basic.component';
-
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 
 @NgModule({
   imports: [
+    DDemoNavModule,
     DCommonModule,
     CommonModule,
     FormsModule,

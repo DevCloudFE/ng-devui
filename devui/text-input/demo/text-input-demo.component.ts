@@ -13,6 +13,9 @@ export class TextInputDemoComponent {
     {title: 'CSS', language: 'css', code:  require('!!raw-loader!./basic/basic.component.css')}
   ];
   demoDocViewerMain;
+  navitems = [
+    {dAnchorLink:'basic-usage', value:"基本用法"}
+  ]
   constructor() {
     this.demoDocViewerMain = document.querySelector('.doc-viewer-container .main');
   }

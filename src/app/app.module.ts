@@ -9,7 +9,7 @@ import { DevUIModule } from 'ng-devui/devui.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,6 +32,8 @@ import { DevUIModule } from 'ng-devui/devui.module';
         }
       ]
     )
+  ],
+  exports: [
   ],
   providers: [],
   bootstrap: [AppComponent]

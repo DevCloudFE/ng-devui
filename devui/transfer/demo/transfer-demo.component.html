@@ -1,17 +1,5 @@
 <div class="demo-container" dAnchorBox [view]="{ top: 60, bottom: 0 }">
-  <div class="nav-main">
-    <d-sticky [view]="{ top: 60, bottom: 0 }" [zIndex]="2000" [container]="demoDocViewerMain">
-      <div>
-        <h3 style="padding-bottom: 20px; border-bottom: 1px #cacfd8 solid;">快速前往</h3>
-        <ul class="step-nav">
-          <li [dAnchorLink]="'transfer-demo-base'" anchorActive="active">基本用法</li>
-          <li [dAnchorLink]="'transfer-demo-search'" anchorActive="active">搜索穿梭框</li>
-          <li [dAnchorLink]="'transfer-demo-sort'" anchorActive="active">排序穿梭框</li>
-          <li [dAnchorLink]="'transfer-demo-custom'" anchorActive="active">自定义穿梭框</li>
-        </ul>
-      </div>
-    </d-sticky>
-  </div>
+  <d-demo-nav  [navitems]=navitems></d-demo-nav>
   <div class="demo-container">
     <div class="demo-example" [dAnchor]="'transfer-demo-base'">
       <div class="demo-title">基本用法</div>

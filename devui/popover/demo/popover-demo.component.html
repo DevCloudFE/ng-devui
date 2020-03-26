@@ -1,18 +1,5 @@
 <div class="demo-container" dAnchorBox [view]="{ top: 60, bottom: 0 }">
-  <div class="nav-main">
-    <d-sticky [view]="{ top: 60, bottom: 0 }" [zIndex]="2000" [container]="demoDocViewerMain">
-      <div>
-        <h3 style="padding-bottom: 20px; border-bottom: 1px #cacfd8 solid;">快速前往</h3>
-        <ul class="step-nav">
-          <li [dAnchorLink]="'basic-usage'" anchorActive="active">基本用法</li>
-          <li [dAnchorLink]="'manual-control-display'" anchorActive="active">手动控制显示</li>
-          <li [dAnchorLink]="'custom-prompt-content'" anchorActive="active">自定义提示内容</li>
-          <li [dAnchorLink]="'parent-container-settings'" anchorActive="active">父容器设置</li>
-          <li [dAnchorLink]="'mouse-can-move-in-content'" anchorActive="active">鼠标可移入内容</li>
-        </ul>
-      </div>
-    </d-sticky>
-  </div>
+  <d-demo-nav  [navitems]=navitems></d-demo-nav>
   <div class="demo-example">
     <div class="demo-title" [dAnchor]="'basic-usage'">基本用法</div>
     <div class="demo-text"></div>

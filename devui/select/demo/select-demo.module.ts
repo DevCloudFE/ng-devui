@@ -28,9 +28,11 @@ import { UserLimitSelectedNumberComponent } from './user-limit-selected-number/u
 import { MultiKeepOrderComponent } from './multi-keep-order/multi-keep-order.component';
 import { UserSearchNLazyLoadComponent } from './user-search-n-lazyload/user-search-n-lazyload.component';
 import { UserMailSearchComponent } from './user-mail-search/user-mail-search.component';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 
 @NgModule({
   imports: [
+    DDemoNavModule,
     CommonModule,
     FormsModule,
     DevUICodeboxModule,

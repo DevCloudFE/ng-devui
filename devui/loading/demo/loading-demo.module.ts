@@ -16,9 +16,11 @@ import { SubscriptionComponent } from './subscription/subscription.component';
 import { ButtonModule } from 'ng-devui/button';
 import { StickyModule } from '../../sticky';
 import { AnchorModule } from '../../anchor';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 
 @NgModule({
   imports: [
+    DDemoNavModule,
     StickyModule,
     AnchorModule,
     CommonModule,

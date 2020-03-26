@@ -21,6 +21,11 @@ export class ProgressDemoComponent {
     {title: 'CSS', language: 'css', code:  require('!!raw-loader!./circle/circle.component.css')}
   ];
 
+  navitems = [
+    {dAnchorLink:'basic-usage1', value:"基本用法1"},
+    {dAnchorLink:'basic-usage2', value:"基本用法2"}
+  ]
+
   constructor() {
 
   }

@@ -11,9 +11,10 @@ import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component
 import { BasicComponent } from './basic/basic.component';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
-
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 @NgModule({
   imports: [
+    DDemoNavModule,
     StickyModule,
     AnchorModule,
     CommonModule,
@@ -36,5 +37,7 @@ import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
   ],
   entryComponents: [StatusDemoComponent]
 })
-export class StatusDemoModule { }
+export class StatusDemoModule { 
+  
+}
 

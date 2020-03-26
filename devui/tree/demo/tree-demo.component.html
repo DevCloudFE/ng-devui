@@ -1,20 +1,5 @@
 <div class="demo-container" dAnchorBox [view]="{ top: 60, bottom: 0 }">
-  <div class="nav-main">
-    <d-sticky [view]="{ top: 60, bottom: 0 }" [zIndex]="2000" [container]="demoDocViewerMain">
-      <div>
-        <h3 style="padding-bottom: 20px; border-bottom: 1px #cacfd8 solid;">快速前往</h3>
-        <ul class="step-nav">
-          <li [dAnchorLink]="'basic-usage'" anchorActive="active">基本用法</li>
-          <li [dAnchorLink]="'custom-display-field'" anchorActive="active">自定显示字段</li>
-          <li [dAnchorLink]="'checkable-tree'" anchorActive="active">可勾选树</li>
-          <li [dAnchorLink]="'operation-button'" anchorActive="active">操作按钮</li>
-          <li [dAnchorLink]="'search-filtering'" anchorActive="active">搜索过滤</li>
-          <li [dAnchorLink]="'custom-icon'" anchorActive="active">自定义图标</li>
-          <li [dAnchorLink]="'drag-and-drop-tree'" anchorActive="active">可拖拽树</li>
-        </ul>
-      </div>
-    </d-sticky>
-  </div>
+  <d-demo-nav  [navitems]=navitems></d-demo-nav>
   <div class="demo-example">
     <div class="demo-title" [dAnchor]="'basic-usage'">基本用法</div>
     <div class="demo-text">

@@ -1,18 +1,5 @@
 <div class="demo-container" dAnchorBox [view]="{ top: 60, bottom: 0 }">
-  <div class="nav-main">
-    <d-sticky [view]="{ top: 60, bottom: 0 }" [zIndex]="2000" [container]="demoDocViewerMain">
-      <div>
-        <h3 style="padding-bottom: 20px; border-bottom: 1px #cacfd8 solid;">快速前往</h3>
-        <ul class="step-nav">
-          <li [dAnchorLink]="'button-primary'" anchorActive="active">主要按钮</li>
-          <li [dAnchorLink]="'button-common'" anchorActive="active">次要按钮</li>
-          <li [dAnchorLink]="'button-text'" anchorActive="active">文字按钮</li>
-          <li [dAnchorLink]="'button-loading'" anchorActive="active">加载中状态</li>
-          <li [dAnchorLink]="'tabs-default'" anchorActive="active">图标按钮</li>
-        </ul>
-      </div>
-    </d-sticky>
-  </div>
+  <d-demo-nav  [navitems]=navitems></d-demo-nav>
 
   <div class="demo-container">
     <div class="demo-example" [dAnchor]="'button-primary'">
