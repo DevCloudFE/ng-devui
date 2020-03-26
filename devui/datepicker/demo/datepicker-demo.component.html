@@ -1,26 +1,5 @@
 <div class="demo-container" dAnchorBox [view]="{ top: 60, bottom: 0 }">
-  <div class="nav-main">
-    <d-sticky [view]="{ top: 60, bottom: 0 }" [zIndex]="2000" [container]="demoDocViewerMain">
-      <div>
-        <h3 style="padding-bottom: 20px; border-bottom: 1px #cacfd8 solid;">快速前往</h3>
-        <ul class="step-nav">
-          <li [dAnchorLink]="'datepicker-default'" anchorActive="active">基础用法</li>
-          <li [dAnchorLink]="'datepicker-range'" anchorActive="active">范围日期选择器</li>
-          <li [dAnchorLink]="'datepicker-range-basic'" anchorActive="active">日期范围选择器 集成模式</li>
-          <li [dAnchorLink]="'datepicker-range-disabled'" anchorActive="active">日期范围选择器 禁止输入态</li>
-          <li [dAnchorLink]="'datepicker-range-restricted-range'" anchorActive="active">日期范围选择器 可选范围</li>
-          <li [dAnchorLink]="'datepicker-range-time'" anchorActive="active">日期范围选择器 选择时间</li>
-          <li [dAnchorLink]="'datepicker-clear-button'" anchorActive="active">日期范围选择器 自定义操作区、清除</li>
-          <li [dAnchorLink]="'datepicker-range-today'" anchorActive="active">日期范围选择器 自定义操作选择日期</li>
-          <li [dAnchorLink]="'datepicker-format'" anchorActive="active">格式化</li>
-          <li [dAnchorLink]="'custom-view-template'" anchorActive="active">自定义操作区</li>
-          <li [dAnchorLink]="'date-picker-clear-button'" anchorActive="active">自定义清除按钮</li>
-          <li [dAnchorLink]="'date-picker-button'" anchorActive="active">日期选择按钮</li>
-          <li [dAnchorLink]="'two-date-picker-basic'" anchorActive="active">双日期选择器</li>
-        </ul>
-      </div>
-    </d-sticky>
-  </div>
+  <d-demo-nav  [navitems]=navitems></d-demo-nav>
   <div class="demo-container">
     <div class="demo-example" [dAnchor]="'datepicker-default'">
       <div class="demo-title">基本用法</div>

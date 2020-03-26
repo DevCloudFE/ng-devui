@@ -24,6 +24,13 @@ export class UploadDemoComponent {
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./auto/auto.component.ts')}
   ];
   demoDocViewerMain;
+
+  navitems = [
+    {dAnchorLink:'basic', value:"基本用法"},
+    {dAnchorLink:'multi', value:"多文件上传"},
+    {dAnchorLink:'auto', value:"自动上传"},
+    {dAnchorLink:'customize', value:"自定义"}
+  ]
   constructor() {
     this.demoDocViewerMain = document.querySelector('.doc-viewer-container .main');
   }

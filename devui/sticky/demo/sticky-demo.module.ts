@@ -11,9 +11,11 @@ import { BasicComponent } from './basic/basic.component';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { ButtonModule } from 'ng-devui/button';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 
 @NgModule({
   imports: [
+    DDemoNavModule,
     AnchorModule,
     CommonModule,
     FormsModule,

@@ -17,6 +17,12 @@ export class CheckBoxDemoComponent {
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./group/checkbox-group-basic.component.ts')},
   ];
   demoDocViewerMain;
+  
+  navitems = [
+    {dAnchorLink:'checkbox-basic', value:"基本用法"},
+    {dAnchorLink:'tabs-group', value:"使用CheckBoxGroup"}
+  ]
+
   constructor() {
     this.demoDocViewerMain = document.querySelector('.doc-viewer-container .main');
   }

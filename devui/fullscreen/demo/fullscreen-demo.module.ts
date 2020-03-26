@@ -13,9 +13,11 @@ import { FullscreenModule } from '../fullscreen.module';
 import { FullscreenDemoComponent } from './fullscreen-demo.component';
 import { FullscreenDemoImmersiveComponent } from './immersive/immersive.component';
 import { FullscreenDemoNormalComponent } from './normal/normal.component';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 
 @NgModule({
   imports: [
+    DDemoNavModule,
     StickyModule,
     AnchorModule,
     ButtonModule,

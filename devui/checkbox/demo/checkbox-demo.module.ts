@@ -13,9 +13,11 @@ import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component
 
 import { CheckboxBasicComponent } from './basic/checkbox-basic.component';
 import { CheckboxGroupBasicComponent} from './group/checkbox-group-basic.component';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 
 @NgModule({
   imports: [
+    DDemoNavModule,
     CommonModule,
     FormsModule,
     CheckBoxModule,

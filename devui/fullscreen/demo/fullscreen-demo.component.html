@@ -1,15 +1,5 @@
 <div class="demo-container" dAnchorBox [view]="{ top: 60, bottom: 0 }">
-  <div class="nav-main">
-    <d-sticky [view]="{ top: 60, bottom: 0 }" [zIndex]="2000" [container]="demoDocViewerMain">
-      <div>
-        <h3 style="padding-bottom: 20px; border-bottom: 1px #cacfd8 solid;">快速前往</h3>
-        <ul class="step-nav">
-          <li [dAnchorLink]="'immersive-full-screen'" anchorActive="active">沉浸式全屏</li>
-          <li [dAnchorLink]="'general-full-screen'" anchorActive="active">普通全屏</li>
-        </ul>
-      </div>
-    </d-sticky>
-  </div>
+  <d-demo-nav  [navitems]=navitems></d-demo-nav>
   <div class="demo-example">
     <div class="demo-title" [dAnchor]="'immersive-full-screen'">沉浸式全屏</div>
     <div class="demo-text">充满整个显示器屏幕的沉浸式全屏</div>

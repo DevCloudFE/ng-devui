@@ -46,4 +46,11 @@ export class  AccordionDemoComponent {
     {title: 'CSS', language: 'css', code:  require('!!raw-loader!./change-key/change-key.component.css')}
   ];
 
+  navitems = [
+    {dAnchorLink:'basic-usage', value:"基本用法"},
+    {dAnchorLink:'use-built-in-routing-and-link-types', value:"内置路由和链接类型"},
+    {dAnchorLink:'using-templates', value:"使用模板"},
+    {dAnchorLink:'compound-level-and-auto-expand', value:"复合层级和自动展开"},
+    {dAnchorLink:'change-values', value:"改变键值"}
+  ]
 }

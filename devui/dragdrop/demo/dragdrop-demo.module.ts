@@ -21,9 +21,11 @@ import { SwitchComponent } from './switch/switch.component';
 import { PositionComponent } from './position/position.component';
 import { OriginPlaceholderComponent } from './origin-placeholder/origin-placeholder.component';
 import { CrossDimensionComponent } from './cross-dimension/cross-dimension.component';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 
 @NgModule({
   imports: [
+    DDemoNavModule,
     StickyModule,
     AnchorModule,
     CommonModule,

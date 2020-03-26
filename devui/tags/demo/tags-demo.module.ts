@@ -12,9 +12,11 @@ import { BasicComponent } from './basic/basic.component';
 import { CustomComponent } from './custom/custom.component';
 import { StickyModule } from '../../sticky';
 import { AnchorModule } from '../../anchor';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 
 @NgModule({
   imports: [
+    DDemoNavModule,
     StickyModule,
     AnchorModule,
     CommonModule,

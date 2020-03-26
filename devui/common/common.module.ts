@@ -12,15 +12,14 @@ import { IframeEventPropagateDirective } from './iframe-event-propagate.directiv
     AutoFocusDirective,
     DatePipe,
     SimulateATagDirective,
-    IframeEventPropagateDirective
+    IframeEventPropagateDirective,
   ],
   declarations: [
     AutoFocusDirective,
     DatePipe,
     SimulateATagDirective,
     IframeEventPropagateDirective
-  ]
-  ,
+  ],
   providers: [],
 })
 export class DCommonModule {

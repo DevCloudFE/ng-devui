@@ -22,6 +22,13 @@ export class SliderDemoComponent {
   list = ['基本用法', '禁止输入态', '定制Popover的显示内容'];
 
   demoDocViewerMain;
+
+  navitems = [
+    {dAnchorLink:'basic-usage', value:"基本用法"},
+    {dAnchorLink:'slider-disabled', value:"禁止输入态"},
+    {dAnchorLink:'slider-formatter', value:"异定制Popover的显示内容"}
+  ]
+
   constructor() {
     this.demoDocViewerMain = document.querySelector('.doc-viewer-container .main');
   }

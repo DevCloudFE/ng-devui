@@ -1,20 +1,5 @@
 <div class="demo-container" dAnchorBox [view]="{ top: 60, bottom: 0 }">
-  <div class="nav-main">
-    <d-sticky [view]="{ top: 60, bottom: 0 }" [zIndex]="2000" [container]="demoDocViewerMain">
-      <div>
-        <h3 style="padding-bottom: 20px; border-bottom: 1px #cacfd8 solid;">快速前往</h3>
-        <ul class="step-nav">
-          <li [dAnchorLink]="'basic-usage'" anchorActive="active">基本用法</li>
-          <li [dAnchorLink]="'turn-off-trigger-point-settings'" anchorActive="active">关闭触发点设置</li>
-          <li [dAnchorLink]="'suspension-drop-down'" anchorActive="active">悬浮下拉</li>
-          <li [dAnchorLink]="'auto-expand-and-auto-focus'" anchorActive="active">自动展开和自动聚焦</li>
-          <li [dAnchorLink]="'when-using-appendtobody'" anchorActive="active">设置展开位置处理</li>
-          <li [dAnchorLink]="'add-icon'" anchorActive="active">支持添加图标</li>
-          <li [dAnchorLink]="'multi-level-drop-down-menu'" anchorActive="active">多级下拉菜单</li>
-        </ul>
-      </div>
-    </d-sticky>
-  </div>
+  <d-demo-nav  [navitems]=navitems></d-demo-nav>
 
   <div class="demo-example">
     <div class="demo-title" [dAnchor]="'basic-usage'">基本用法</div>

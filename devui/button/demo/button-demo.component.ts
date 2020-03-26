@@ -36,6 +36,15 @@ export class ButtonDemoComponent {
   ];
 
   demoDocViewerMain;
+  
+  navitems = [
+    {dAnchorLink:'button-primary', value:"主要按钮"},
+    {dAnchorLink:'button-common', value:"次要按钮"},
+    {dAnchorLink:'button-text', value:"文字按钮"},
+    {dAnchorLink:'button-loading', value:"加载中状态"},
+    {dAnchorLink:'tabs-default', value:"图标按钮"}
+  ]
+
   constructor() {
     this.demoDocViewerMain = document.querySelector('.doc-viewer-container .main');
   }

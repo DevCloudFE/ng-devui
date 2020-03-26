@@ -1,19 +1,5 @@
 <div class="demo-container" dAnchorBox [view]="{ top: 60, bottom: 0 }">
-  <div class="nav-main">
-    <d-sticky [view]="{ top: 60, bottom: 0 }" [zIndex]="2000" [container]="demoDocViewerMain">
-      <div>
-        <h3 style="padding-bottom: 20px; border-bottom: 1px #cacfd8 solid;">快速前往</h3>
-        <ul class="step-nav">
-          <li [dAnchorLink]="'standard-dialog'" anchorActive="active">标准对话框</li>
-          <li [dAnchorLink]="'custom-dialog'" anchorActive="active">自定义对话框</li>
-          <li [dAnchorLink]="'intercept-dialog-closed'" anchorActive="active">拦截对话框关闭</li>
-          <li [dAnchorLink]="'message-hint'" anchorActive="active">信息提示</li>
-          <li [dAnchorLink]="'warning-pop-up'" anchorActive="active">警告弹出框</li>
-          <li [dAnchorLink]="'configure-button-to-get-focus-automatically'" anchorActive="active">配置按钮自动获得焦点</li>
-        </ul>
-      </div>
-    </d-sticky>
-  </div>
+  <d-demo-nav  [navitems]=navitems></d-demo-nav>
   <div class="demo-example">
     <div class="demo-title" [dAnchor]="'standard-dialog'">标准对话框</div>
     <div class="demo-text">

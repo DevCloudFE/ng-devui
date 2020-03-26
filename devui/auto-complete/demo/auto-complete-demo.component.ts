@@ -41,6 +41,15 @@ export class AutoCompleteDemoComponent {
   ];
 
   demoDocViewerMain;
+
+  navitems = [
+    {dAnchorLink:'basic-usage', value:"基本用法"},
+    {dAnchorLink:'auto-object', value:"自定义数据匹配方法"},
+    {dAnchorLink:'auto-custom', value:"自定义模板展示"},
+    {dAnchorLink:'auto-disable', value:"设置禁用"},
+    {dAnchorLink:'auto-latest', value:"最近输入"}
+  ]
+
   constructor() {
     this.demoDocViewerMain = document.querySelector('.doc-viewer-container .main');
   }

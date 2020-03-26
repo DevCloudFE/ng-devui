@@ -24,7 +24,7 @@ export function hljsLanguages() {
   declarations: [
     ExamplePanelComponent,
     AppContentComponent,
-    GetStartedComponent
+    GetStartedComponent,
   ],
   imports: [
     AccordionModule,
@@ -38,6 +38,8 @@ export function hljsLanguages() {
           children: routesConfig
       },
     ]),
+  ],
+  exports: [
   ]
 })
 export class AppContentModule {

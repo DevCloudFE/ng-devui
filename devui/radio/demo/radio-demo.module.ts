@@ -15,9 +15,11 @@ import { VerticalComponent } from './vertical/vertical.component';
 import { CustomComponent } from './custom/custom.component';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 
 @NgModule({
   imports: [
+    DDemoNavModule,
     CommonModule,
     FormsModule,
     RadioModule,

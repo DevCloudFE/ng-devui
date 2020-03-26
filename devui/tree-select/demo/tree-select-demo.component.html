@@ -1,19 +1,5 @@
 <div class="demo-container" dAnchorBox [view]="{ top: 60, bottom: 0 }">
-  <div class="nav-main">
-    <d-sticky [view]="{ top: 60, bottom: 0 }" [zIndex]="2000" [container]="demoDocViewerMain">
-      <div>
-        <h3 style="padding-bottom: 20px; border-bottom: 1px #cacfd8 solid;">快速前往</h3>
-        <ul class="step-nav">
-          <li [dAnchorLink]="'tree-select-basic'" anchorActive="active">基本用法</li>
-          <li [dAnchorLink]="'tree-select-leaf-only'" anchorActive="active">仅叶节点可选</li>
-          <li [dAnchorLink]="'tree-select-hooks'" anchorActive="active">初始化完成时调用的钩子</li>
-          <li [dAnchorLink]="'tree-select-searchable'" anchorActive="active">可简易搜索树</li>
-          <li [dAnchorLink]="'tree-select-append-to'" anchorActive="active">Append To Element 能力</li>
-          <li [dAnchorLink]="'tree-select-custom-icon'" anchorActive="active">自定义icon能力</li>
-        </ul>
-      </div>
-    </d-sticky>
-  </div>
+  <d-demo-nav  [navitems]=navitems></d-demo-nav>
   <div>
     <div class="demo-container">
       <div class="demo-example" [dAnchor]="'tree-select-basic'">

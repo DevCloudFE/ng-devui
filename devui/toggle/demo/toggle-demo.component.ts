@@ -13,6 +13,11 @@ export class ToggleDemoComponent {
   ];
 
   demoDocViewerMain;
+
+  navitems = [
+    {dAnchorLink:'basic-usage', value:"基本用法"}
+  ]
+  
   constructor() {
     this.demoDocViewerMain = document.querySelector('.doc-viewer-container .main');
   }

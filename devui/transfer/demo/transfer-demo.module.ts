@@ -15,9 +15,10 @@ import { AnchorModule } from '../../anchor';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
-
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 @NgModule({
   imports: [
+    DDemoNavModule,
     CommonModule,
     TransferModule,
     DataTableModule,

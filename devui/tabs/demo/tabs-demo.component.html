@@ -1,19 +1,5 @@
 <div class="demo-container" dAnchorBox [view]="{ top: 60, bottom: 0 }">
-  <div class="nav-main">
-    <d-sticky [view]="{ top: 60, bottom: 0 }" [zIndex]="2000" [container]="demoDocViewerMain">
-      <div>
-        <h3 style="padding-bottom: 20px; border-bottom: 1px #cacfd8 solid;">快速前往</h3>
-        <ul class="step-nav">
-          <li [dAnchorLink]="'basic-usage'" anchorActive="active">基本用法</li>
-          <li [dAnchorLink]="'no-set-content'" anchorActive="active">不设置内容</li>
-          <li [dAnchorLink]="'custom-template'" anchorActive="active">自定义模板</li>
-          <li [dAnchorLink]="'configuration-type-and-arrangement'" anchorActive="active">配置类型与排列</li>
-          <li [dAnchorLink]="'intercept-tab-switch'" anchorActive="active">拦截tab切换</li>
-          <li [dAnchorLink]="'custom-tabs-display-and-arrangement'" anchorActive="active">自定义Tabs显示与排列</li>
-        </ul>
-      </div>
-    </d-sticky>
-  </div>
+  <d-demo-nav  [navitems]=navitems></d-demo-nav>
   <div class="demo-example">
     <div class="demo-title" [dAnchor]="'basic-usage'">基本用法</div>
     <div class="demo-text"></div>

@@ -13,9 +13,11 @@ import {AnchorModule} from '../../anchor';
 import {SliderBasicComponent} from './basic/slider-basic.component';
 import {SliderCustomFormatterComponent} from './custom-formatter/slider-custom-formatter.component';
 import {SliderDisabledComponent} from './disabled/slider-disabled.component';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 
 @NgModule({
   imports: [
+    DDemoNavModule,
     CommonModule,
     DevUICodeboxModule,
     SliderModule,

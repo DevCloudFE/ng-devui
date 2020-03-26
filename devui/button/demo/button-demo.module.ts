@@ -15,9 +15,11 @@ import { PrimaryComponent } from './primary/primary.component';
 import { TextComponent } from './text/text.component';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 
 @NgModule({
   imports: [
+    DDemoNavModule,
     CommonModule,
     FormsModule,
     ButtonModule,

@@ -18,9 +18,11 @@ import { InputNumberRegComponent } from './reg/input-number-reg.component';
 
 import { StickyModule } from '../../sticky';
 import { AnchorModule } from '../../anchor';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 
 @NgModule({
   imports: [
+    DDemoNavModule,
     CommonModule,
     DevUIApiModule,
     DevUICodeboxModule,

@@ -13,9 +13,10 @@ import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { SplitterDemoDirectionComponent } from './direction/splitter-demo-direction.component';
 import { StickyModule } from '../../sticky';
 import { AnchorModule } from '../../anchor';
-
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 @NgModule({
   imports: [
+    DDemoNavModule,
     StickyModule,
     AnchorModule,
     CommonModule,

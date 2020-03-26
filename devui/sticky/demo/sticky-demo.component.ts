@@ -16,6 +16,9 @@ export class StickyDemoComponent {
     {title: 'CSS', language: 'css', code:  require('!!raw-loader!./basic/basic.component.css')}
   ];
 
+  navitems = [
+    {dAnchorLink:'basic-usage', value:"基本用法"}
+  ]
   constructor() {
 
   }

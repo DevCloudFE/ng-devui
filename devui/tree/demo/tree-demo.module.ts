@@ -17,9 +17,11 @@ import { CustomTitleKeyComponent } from './custom-title-key/custom-title-key.com
 import { SearchFilterComponent } from './search-filter/search-filter.component';
 import { StickyModule } from '../../sticky';
 import { AnchorModule } from '../../anchor';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 
 @NgModule({
   imports: [
+    DDemoNavModule,
     StickyModule,
     AnchorModule,
     CommonModule,
