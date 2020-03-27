@@ -1,0 +1,41 @@
+@import '../../../style/theme/color';
+
+@mixin color-cube {
+    .color-cube {
+        display: inline-block;
+        margin: 0 6px 6px 0;
+        vertical-align: bottom;
+        border: 1px solid $gray2;
+    }
+}
+
+@mixin input {
+    input {
+        width: 108px;
+        height: 30px;
+        line-height: 30px;
+        margin: 0 5px;
+        border: 1px solid $gray2;
+        vertical-align: top;
+        &:focus{
+            outline: none;
+        }
+    }
+}
+
+@mixin button {
+    button {
+        height: 30px;
+        width: 80px;
+        border: 1px solid $gray2;
+        border-radius: 3px;
+    }
+}
+
+@mixin hr {
+    hr {
+        margin: 15px 0;
+        border: none;
+        border-top: 1px dotted $gray2;
+    }
+}

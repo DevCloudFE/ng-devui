@@ -1,0 +1,9 @@
+@import '../style/mixins/component';
+
+.color-input {
+    button {
+        vertical-align: top;
+    }
+    @include input;
+    @include button;
+}

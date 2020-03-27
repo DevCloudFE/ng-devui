@@ -97,6 +97,18 @@ export const routesConfig = [
     }
   },
   {
+    path: 'color-picker',
+    component: ExamplePanelComponent,
+    loadChildren: '../../../devui/color-picker/demo/color-picker-demo.module#ColorPickerDemoModule',
+    data: {
+      type: '数据录入',
+      name: 'ColorPicker',
+      cnName: '颜色选择器',
+      description: '输入或选择颜色的控件。',
+      tmw: '用户可输入颜色，或在选色面板进行选择。颜色选择器会在本地保存用户最近使用数据。'
+    }
+  },
+  {
     path: 'datepicker',
     component: ExamplePanelComponent,
     loadChildren: '../../../devui/datepicker/demo/datepicker-demo.module#DatepickerDemoModule',
