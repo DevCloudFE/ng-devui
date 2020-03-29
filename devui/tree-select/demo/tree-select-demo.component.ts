@@ -34,13 +34,13 @@ export class TreeSelectDemoComponent {
 
   demoDocViewerMain;
 
-  navitems = [
-    {dAnchorLink:'tree-select-basic', value:"基本用法"},
-    {dAnchorLink:'tree-select-leaf-only', value:"仅叶节点可选"},
-    {dAnchorLink:'tree-select-hooks', value:"初始化完成时调用的钩子"},
-    {dAnchorLink:'tree-select-searchable', value:"可简易搜索树"},
-    {dAnchorLink:'tree-select-append-to', value:"Append To Element 能力"},
-    {dAnchorLink:'tree-select-custom-icon', value:"自定义icon能力"}
+  navItems = [
+    { dAnchorLink: 'tree-select-basic', value: "基本用法"},
+    { dAnchorLink: 'tree-select-leaf-only', value: "仅叶节点可选"},
+    { dAnchorLink: 'tree-select-hooks', value: "初始化完成时调用的钩子"},
+    { dAnchorLink: 'tree-select-searchable', value: "可简易搜索树"},
+    { dAnchorLink: 'tree-select-append-to', value: "Append To Element 能力"},
+    { dAnchorLink: 'tree-select-custom-icon', value: "自定义icon能力"}
   ]
   
   constructor() {

@@ -18,8 +18,8 @@ export class PanelDemoComponent {
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./type/type.component.ts') },
   ];
 
-  navitems = [
-    {dAnchorLink:'basic-usage', value:"基本用法"},
-    {dAnchorLink:'multiple-types', value:"多种类型"}
+  navItems = [
+    { dAnchorLink: 'basic-usage', value: "基本用法"},
+    { dAnchorLink: 'multiple-types', value: "多种类型"}
   ]
 }

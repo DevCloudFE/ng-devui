@@ -43,14 +43,14 @@ export class TreeDemoComponent {
     {title: 'CSS', language: 'css', code:  require('!!raw-loader!./draggable/draggable.component.css')}
   ];
 
-  navitems = [
-    {dAnchorLink:'basic-usage', value:"基本用法"},
-    {dAnchorLink:'custom-display-field', value:"自定显示字段"},
-    {dAnchorLink:'checkable-tree', value:"可勾选树"},
-    {dAnchorLink:'operation-button', value:"操作按钮"},
-    {dAnchorLink:'search-filtering', value:"搜索过滤"},
-    {dAnchorLink:'custom-icon', value:"自定义图标"},
-    {dAnchorLink:'drag-and-drop-tree', value:"可拖拽树"}
+  navItems = [
+    { dAnchorLink: 'basic-usage', value: "基本用法"},
+    { dAnchorLink: 'custom-display-field', value: "自定显示字段"},
+    { dAnchorLink: 'checkable-tree', value: "可勾选树"},
+    { dAnchorLink: 'operation-button', value: "操作按钮"},
+    { dAnchorLink: 'search-filtering', value: "搜索过滤"},
+    { dAnchorLink: 'custom-icon', value: "自定义图标"},
+    { dAnchorLink: 'drag-and-drop-tree', value: "可拖拽树"}
   ]
   constructor() { }
 

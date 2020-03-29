@@ -8,7 +8,7 @@ import { DevUIModule } from 'ng-devui';
 @NgModule({
 imports: [
     CommonModule,
-    DevUIModule.forRoot()
+    DevUIModule
 ],
 declarations: [
     DDemoNavComponent

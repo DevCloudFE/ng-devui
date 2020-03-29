@@ -21,9 +21,9 @@ export class TagsDemoComponent {
     {title: 'CSS', language: 'css', code:  require('!!raw-loader!./custom/custom.component.css')}
   ];
 
-  navitems = [
-    {dAnchorLink:'single-tag', value:"单个标签"},
-    {dAnchorLink:'tags-group', value:"标签组"}
+  navItems = [
+    { dAnchorLink: 'single-tag', value: "单个标签"},
+    { dAnchorLink: 'tags-group', value: "标签组"}
   ]
   constructor() {
   }

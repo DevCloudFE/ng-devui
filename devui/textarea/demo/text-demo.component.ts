@@ -21,9 +21,9 @@ export class TextDemoComponent {
 
   demoDocViewerMain;
 
-  navitems = [
-    {dAnchorLink:'basic-usage', value:"基本用法"},
-    {dAnchorLink:'resize', value:"调整大小"}
+  navItems = [
+    { dAnchorLink: 'basic-usage', value: "基本用法"},
+    { dAnchorLink: 'resize', value: "调整大小"}
   ]
   
   constructor() {

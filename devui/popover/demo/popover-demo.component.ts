@@ -32,12 +32,12 @@ export class PopoverDemoComponent {
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./hover-to-content/hover-to-content.component.ts') },
   ];
 
-  navitems = [
-    {dAnchorLink:'basic-usage', value:"基本用法"},
-    {dAnchorLink:'manual-control-display', value:"手动控制显示"},
-    {dAnchorLink:'custom-prompt-content', value:"自定义提示内容"},
-    {dAnchorLink:'parent-container-settings', value:"父容器设置"},
-    {dAnchorLink:'mouse-can-move-in-content', value:"鼠标可移入内容"}
+  navItems = [
+    { dAnchorLink: 'basic-usage', value: "基本用法"},
+    { dAnchorLink: 'manual-control-display', value: "手动控制显示"},
+    { dAnchorLink: 'custom-prompt-content', value: "自定义提示内容"},
+    { dAnchorLink: 'parent-container-settings', value: "父容器设置"},
+    { dAnchorLink: 'mouse-can-move-in-content', value: "鼠标可移入内容"}
   ]
 
   constructor() {

@@ -3,11 +3,11 @@ import { Component, OnInit, Input } from '@angular/core';
 @Component({
   selector: 'd-demo-nav',
   templateUrl: './d-demo-nav.component.html',
-  styleUrls: ['./d-demo-nav.component.scss']
+  styleUrls: ['../../../devui/style/core/_nav.scss']
 })
 export class DDemoNavComponent implements OnInit {
 
-  @Input() navitems: any;
+  @Input() navItems: any;
 
   constructor() { }
 
