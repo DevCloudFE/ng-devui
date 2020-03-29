@@ -11,8 +11,8 @@ export class ToastDemoComponent {
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./basic/basic.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/basic.component.ts') },
   ];
-  navitems = [
-    {dAnchorLink:'basic-usage', value:"基本用法"}
+  navItems = [
+    { dAnchorLink: 'basic-usage', value: "基本用法"}
   ]
 
 }

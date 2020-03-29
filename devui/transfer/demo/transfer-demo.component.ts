@@ -21,11 +21,11 @@ export class TransferDemoComponent {
 
   demoDocViewerMain;
 
-  navitems = [
-    {dAnchorLink:'transfer-demo-base', value:"基本用法"},
-    {dAnchorLink:'transfer-demo-search', value:"搜索穿梭框"},
-    {dAnchorLink:'transfer-demo-sort', value:"排序穿梭框"},
-    {dAnchorLink:'transfer-demo-custom', value:"自定义穿梭框"}
+  navItems = [
+    { dAnchorLink: 'transfer-demo-base', value: "基本用法"},
+    { dAnchorLink: 'transfer-demo-search', value: "搜索穿梭框"},
+    { dAnchorLink: 'transfer-demo-sort', value: "排序穿梭框"},
+    { dAnchorLink: 'transfer-demo-custom', value: "自定义穿梭框"}
   ]
   constructor() {
     this.demoDocViewerMain = document.querySelector('.doc-viewer-container .main');

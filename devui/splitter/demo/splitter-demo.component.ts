@@ -27,11 +27,11 @@ export class SplitterDemoComponent implements OnInit {
     {title: 'TS', language: 'typescript', code: require('!!raw-loader!./direction/splitter-demo-direction.component.ts')},
   ];
 
-  navitems = [
-    {dAnchorLink:'basic-usage', value:"基本用法"},
-    {dAnchorLink:'vertical-layout-usage', value:"垂直布局用法"},
-    {dAnchorLink:'combined-layout-usage', value:"组合布局用法"},
-    {dAnchorLink:'specify-the-fold-up-direction', value:"指定折叠收起方向"}
+  navItems = [
+    { dAnchorLink: 'basic-usage', value: "基本用法"},
+    { dAnchorLink: 'vertical-layout-usage', value: "垂直布局用法"},
+    { dAnchorLink: 'combined-layout-usage', value: "组合布局用法"},
+    { dAnchorLink: 'specify-the-fold-up-direction', value: "指定折叠收起方向"}
   ]
 
  

@@ -22,9 +22,9 @@ export class SearchDemoComponent {
     {title: 'CSS', language: 'css', code:  require('!!raw-loader!./ngmodel/ngmodel.component.css')}
   ];
 
-  navitems = [
-    {dAnchorLink:'basic-usage', value:"基本用法"},
-    {dAnchorLink:'bidirectional-binding', value:"双向绑定"}
+  navItems = [
+    { dAnchorLink: 'basic-usage', value: "基本用法"},
+    { dAnchorLink: 'bidirectional-binding', value: "双向绑定"}
   ]
 
   constructor() {

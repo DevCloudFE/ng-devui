@@ -18,9 +18,9 @@ export class CheckBoxDemoComponent {
   ];
   demoDocViewerMain;
   
-  navitems = [
-    {dAnchorLink:'checkbox-basic', value:"基本用法"},
-    {dAnchorLink:'tabs-group', value:"使用CheckBoxGroup"}
+  navItems = [
+    { dAnchorLink: 'checkbox-basic', value: "基本用法"},
+    { dAnchorLink: 'tabs-group', value: "使用CheckBoxGroup"}
   ]
 
   constructor() {

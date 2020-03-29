@@ -34,15 +34,15 @@ export class FormDemoComponent {
 
   demoDocViewerMain;
 
-  navitems = [
-    {dAnchorLink:'d-form-item', value:"表单项d-form-item"},
-    {dAnchorLink:'d-form-label', value:"表单项d-form-label"},
-    {dAnchorLink:'d-form-control', value:"控件容器d-form-control"},
-    {dAnchorLink:'demo-base', value:"基本用法"},
-    {dAnchorLink:'demo-label-horizontal', value:"label横向排列"},
-    {dAnchorLink:'demo-modal', value:"弹框表单"},
-    {dAnchorLink:'demo-multi-col', value:"多列表单"},
-    {dAnchorLink:'demo-filter', value:"表单过滤"}
+  navItems = [
+    { dAnchorLink: 'd-form-item', value: "表单项d-form-item"},
+    { dAnchorLink: 'd-form-label', value: "表单项d-form-label"},
+    { dAnchorLink: 'd-form-control', value: "控件容器d-form-control"},
+    { dAnchorLink: 'demo-base', value: "基本用法"},
+    { dAnchorLink: 'demo-label-horizontal', value: "label横向排列"},
+    { dAnchorLink: 'demo-modal', value: "弹框表单"},
+    { dAnchorLink: 'demo-multi-col', value: "多列表单"},
+    { dAnchorLink: 'demo-filter', value: "表单过滤"}
   ]
 
   constructor() {

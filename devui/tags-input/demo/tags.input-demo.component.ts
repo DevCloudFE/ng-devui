@@ -20,9 +20,9 @@ export class TagsInputDemoComponent {
 
   demoDocViewerMain;
 
-  navitems = [
-    {dAnchorLink:'tags-input-basic', value:"基本用法"},
-    {dAnchorLink:'tags-input-async', value:"异步数据源"}
+  navItems = [
+    { dAnchorLink: 'tags-input-basic', value: "基本用法"},
+    { dAnchorLink: 'tags-input-async', value: "异步数据源"}
   ]
   constructor() {
     this.demoDocViewerMain = document.querySelector('.doc-viewer-container .main');

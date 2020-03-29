@@ -14,8 +14,8 @@ export class ToggleDemoComponent {
 
   demoDocViewerMain;
 
-  navitems = [
-    {dAnchorLink:'basic-usage', value:"基本用法"}
+  navItems = [
+    { dAnchorLink: 'basic-usage', value: "基本用法"}
   ]
   
   constructor() {

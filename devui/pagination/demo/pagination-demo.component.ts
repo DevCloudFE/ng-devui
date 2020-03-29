@@ -30,11 +30,11 @@ export class PaginationDemoComponent {
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./widgets/widgets.component.ts')}
   ];
 
-  navitems = [
-    {dAnchorLink:'basic-usage', value:"基本用法"},
-    {dAnchorLink:'minimalist-model', value:"极简模式"},
-    {dAnchorLink:'multiple-configurations', value:"多种配置"},
-    {dAnchorLink:'exceptional-case', value:"特殊情况"}
+  navItems = [
+    { dAnchorLink: 'basic-usage', value: "基本用法"},
+    { dAnchorLink: 'minimalist-model', value: "极简模式"},
+    { dAnchorLink: 'multiple-configurations', value: "多种配置"},
+    { dAnchorLink: 'exceptional-case', value: "特殊情况"}
   ]
 
   constructor() {

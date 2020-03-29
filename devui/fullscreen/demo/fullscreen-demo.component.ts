@@ -15,8 +15,8 @@ export class FullscreenDemoComponent {
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./immersive/immersive.component.ts')}
   ];
 
-  navitems = [
-    {dAnchorLink:'immersive-full-screen', value:"沉浸式全屏"},
-    {dAnchorLink:'general-full-screen', value:"普通全屏"}
+  navItems = [
+    { dAnchorLink: 'immersive-full-screen', value: "沉浸式全屏"},
+    { dAnchorLink: 'general-full-screen', value: "普通全屏"}
   ]
 }

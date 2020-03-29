@@ -57,20 +57,20 @@ export class DataTableDemoComponent {
     {title: 'TS', language: 'typescript', code: require('!!raw-loader!./drag-column/drag-column.component.ts')},
   ];
 
-navitems = [
-  {dAnchorLink:'basic-usage', value:"基本用法"},
-  {dAnchorLink:'table-interaction', value:"表格交互"},
-  {dAnchorLink:'load-data-asynchronously', value:"异步加载数据"},
-  {dAnchorLink:'table-fixing', value:"表头固定"},
-  {dAnchorLink:'lazy-loading-of-list-data', value:"列表数据懒加载"},
-  {dAnchorLink:'header-grouping', value:"表头分组"},
-  {dAnchorLink:'edit-cell', value:"编辑单元格"},
-  {dAnchorLink:'extend-extra-lines', value:"扩展额外行"},
-  {dAnchorLink:'tree-form', value:"树形表格"},
-  {dAnchorLink:'asynchronous-loading', value:"异步加载"},
-  {dAnchorLink:'basic-usage', value:"基本用法"},
-  {dAnchorLink:'fixed-column', value:"固定列"},
-  {dAnchorLink:'column-dragging', value:"列拖拽"}
+navItems = [
+  { dAnchorLink: 'basic-usage', value: "基本用法"},
+  { dAnchorLink: 'table-interaction', value: "表格交互"},
+  { dAnchorLink: 'load-data-asynchronously', value: "异步加载数据"},
+  { dAnchorLink: 'table-fixing', value: "表头固定"},
+  { dAnchorLink: 'lazy-loading-of-list-data', value: "列表数据懒加载"},
+  { dAnchorLink: 'header-grouping', value: "表头分组"},
+  { dAnchorLink: 'edit-cell', value: "编辑单元格"},
+  { dAnchorLink: 'extend-extra-lines', value: "扩展额外行"},
+  { dAnchorLink: 'tree-form', value: "树形表格"},
+  { dAnchorLink: 'asynchronous-loading', value: "异步加载"},
+  { dAnchorLink: 'basic-usage', value: "基本用法"},
+  { dAnchorLink: 'fixed-column', value: "固定列"},
+  { dAnchorLink: 'column-dragging', value: "列拖拽"}
 ]
 
 }

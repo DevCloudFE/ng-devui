@@ -22,9 +22,9 @@ export class DrawerDemoComponent {
     {title: 'drawerContent-css', language: 'css', code:  require('!!raw-loader!./drawerContent/drawer-content.component.css')}
   ];
 
-  navitems = [
-    {dAnchorLink:'basic-usage', value:"基本用法"},
-    {dAnchorLink:'do-not-destroy-after-closing', value:"关闭后不销毁"}
+  navItems = [
+    { dAnchorLink: 'basic-usage', value: "基本用法"},
+    { dAnchorLink: 'do-not-destroy-after-closing', value: "关闭后不销毁"}
   ]
 
 
