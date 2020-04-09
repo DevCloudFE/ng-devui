@@ -24,8 +24,9 @@ A clear and concise description of what you expected to happen.
 If applicable, add screenshots to help explain your problem.
 
 **environments (please complete the following information):**
- - Browser [e.g. chrome, safari]
- - Version [e.g. 22]
+ - Browser [e.g. chrome 80, safari]
+ - component version [e.g. 8.0.0]
+ - angular framework version [e.g. 8.0.0]
 
 **Additional context**
 Add any other context about the problem here.
