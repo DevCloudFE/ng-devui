@@ -8,6 +8,7 @@ const types = [
   'test',
   'build',
   'release',
+  'chore',
   'revert'
 ];
 
