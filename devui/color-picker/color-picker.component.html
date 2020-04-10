@@ -1,0 +1,53 @@
+<div class="devui-color-picker" *ngIf="!hide">
+  <div class="cancel-mask" [class.hide-mask]="showDefault" (click)="cancel.emit()"></div>
+  <div class="foreground" [class.hide-shadow]="showDefault"
+    (mousemove)="mouseMoveEvent($event)"
+    (mouseup)="mouseUpEvent()"
+    (mouseleave)="mouseUpEvent()"
+  >
+    <div class="recently-used">
+      <div class="title">最近使用颜色</div>
+      <d-recent-color
+        [limit]="8"
+        (send)="receive($event)"
+        (confirm)="confirmEvent($event)"
+      ></d-recent-color>
+    </div>
+    <div class="color-panel">
+      <div class="title">
+        <span [class.selected]="'basic' === selectedPanel" (click)="selectPanel('basic')">基本色</span>
+        |
+        <span [class.selected]="'more' === selectedPanel" (click)="selectPanel('more')">更多颜色</span>
+      </div>
+      <div *ngIf="'more' === selectedPanel">
+        <div class="advanced-color">
+          <div class="color-panel-container">
+            <d-advanced-color-panel
+              [color]="color"
+              [pureColor]="pureColor"
+              (send)="receive($event)"
+            ></d-advanced-color-panel>
+          </div>
+          <div class="color-slider-container">
+            <d-advanced-color-slider
+              [color]="color"
+              (send)="receive($event)"
+            ></d-advanced-color-slider>
+          </div>
+        </div>
+      </div>
+      <div class="color-cubes" *ngIf="'basic' === selectedPanel"> 
+        <d-basic-color
+          (send)="receive($event)"
+          [basicColors]="basicColors"
+        ></d-basic-color>
+      </div>
+    </div>
+    <hr>
+    <d-color-input
+      [color]="color"
+      (send)="receive($event)"
+      (confirm)="confirmEvent($event)"
+    ></d-color-input>
+  </div>
+</div>

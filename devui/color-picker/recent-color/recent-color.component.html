@@ -1,0 +1,9 @@
+<div class="recent-color">
+  <div class="clear-cube color-cube" (click)="clearColor()"></div>
+  <d-color-cube
+    [size]="20"
+    [color]="color"
+    *ngFor="let color of recentlyUsed" 
+    (click)="confirmColor(color)"
+  ></d-color-cube>
+</div>
