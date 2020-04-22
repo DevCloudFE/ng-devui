@@ -12,7 +12,7 @@
 | direction             | `'up' \| 'down'`                | 'down'          | 可选，日期弹出方向                                      |
 | dateConverter         | `function`                      | DefaultDateConverter | 可选，日期格式化、解析函数                         |
 | dateConfig            | `any`                           | 见下方介绍       | 可选，配置参数                                         |
-| dateFormat            | `any`                           | 'YYYY-MM-DD' \| 'YYYY-MM-DD HH:mm' | 可选，传入格式化，根据是否showTime区别不同默认值|
+| dateFormat            | `any`                           | 'y/MM/dd' \| 'y/MM/dd HH:mm' | 可选，传入格式化，根据是否showTime区别不同默认值|
 | minDate               | `Date`                          | new Date('01/01/1900 00:00:00') | 可选，限制最小可选日期                  |
 | maxDate               | `Date`                          | new Date('11/31/2099 23:59:59') | 可选，限制最大可选日期                  |
 | autoOpen              | `boolean`                       | false           | 可选，初始化是否直接展开                                 |
@@ -122,7 +122,7 @@ appendToBodyDirections默认的显示顺序为 ['rightDown', 'leftDown', 'rightU
 | disabled | `boolean` | false | 可选，禁用选择 |
 | dateConverter | `function` | DefaultDateConverter | 可选，日期格式化、解析函数 |
 | dateConfig | `any` | 见下方介绍 | 可选，配置参数 |
-| dateFormat | `any` | `'YYYY-MM-DD' \| 'YYYY-MM-DD HH:mm'` | 可选，传入格式化 |
+| dateFormat | `any` | `'y/MM/dd' \| 'y/MM/dd HH:mm'` | 可选，传入格式化 |
 | minDate | `Date` | `new Date('01/01/1900 00:00:00')` | 可选，限制最小可选日期 |
 | maxDate | `Date` | `new Date('11/31/2099 23:59:59')` | 可选，限制最大可选日期 |
 | splitter | `string` | `  -  ` | 可选，两日期间的分隔符 |

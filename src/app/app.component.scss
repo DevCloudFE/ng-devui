@@ -228,24 +228,6 @@ body {
     background: $bg-white;
     padding-bottom: 72px;
 
-    .list-group {
-      margin-bottom: 0;
-      .list-group-item {
-        &:hover {
-          background-color: $hover-content;
-        }
-        &:focus {
-          background-color: $brand-3;
-        }
-      }
-      .text-overflow-ellipsis {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        word-break: break-all;
-        white-space: nowrap;
-      }
-    }
-
     ul {
       margin: 0;
     }
@@ -286,40 +268,6 @@ body {
     }
   }
 
-  .side-nav .list-group li > a {
-    box-sizing: border-box;
-    display: block;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 40px;
-    text-decoration: none;
-    -webkit-transition: all 0.2s;
-    transition: all 0.2s;
-    padding-left: 40px;
-    position: relative;
-    outline: none;
-    color: $dark-1;
-  }
-
-  .side-nav li {
-    a:hover {
-      background: $hover-content;
-    }
-    a:focus {
-      background: $brand-3;
-    }
-  }
-
-  .side-nav .list-group-item.active {
-    outline: none;
-    color: $brand-1;
-    border-right: 2px solid $brand-1;
-    background-color: $brand-3;
-    &:hover,
-    &:focus {
-      outline: none;
-    }
-  }
 }
 
 .devui-menu {
@@ -472,4 +420,14 @@ body {
       }
     }
   }
+}
+.main-nav-item .show-themable {
+  display: none;
+  display: var(--iehack, inline-block);
+}
+.side-nav d-accordion d-accordion-list d-accordion-menu .devui-accordion-open-icon {
+  display: none !important;
+}
+.side-nav d-accordion d-accordion-list{
+  box-shadow: none !important;
 }

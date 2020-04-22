@@ -37,6 +37,7 @@
     (keypress)="protectInput($event)"
     (blur)="ensureValueIsValid($event)"
     (keydown)="handleBackspace($event)"
+    (paste)="protectInput($event)"
     #inputElement
   />
 </div>

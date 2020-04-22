@@ -341,7 +341,7 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
     });
   }
 
-  beginResize($event) {
+  onBeginResize($event) {
     this.beginResizeHandlerEvent.emit($event);
   }
 

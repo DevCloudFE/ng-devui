@@ -10,3 +10,7 @@
   overflow: auto;
   background-color: $bg-white;
 }
+
+::ng-deep .devui-fullscreen {
+  overflow: hidden;
+}

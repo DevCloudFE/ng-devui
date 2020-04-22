@@ -84,8 +84,8 @@ export class TooltipComponent implements AfterViewInit, OnDestroy {
     this.renderer2.setStyle(this.tooltip.nativeElement, 'left', `${rect.left}px`);
     this.renderer2.setStyle(this.tooltip.nativeElement, 'top', `${rect.top}px`);
     // 移除样式
-    this.renderer2.setStyle(this.tooltip.nativeElement, 'visibility', null);
-    this.renderer2.setStyle(this.tooltip.nativeElement, 'transform', null);
+    this.renderer2.removeStyle(this.tooltip.nativeElement, 'visibility');
+    this.renderer2.removeStyle(this.tooltip.nativeElement, 'transform');
   }
 }
 

@@ -1,21 +1,38 @@
-import { Directive, OnDestroy, ContentChildren, QueryList, AfterViewInit } from '@angular/core';
+import { Directive, OnDestroy, AfterViewInit, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { DragDropSyncService } from '../services/drag-drop-sync.service';
 import { DragSyncDirective } from './drag-sync.directive';
 import { DropSortSyncDirective } from './drop-sort-sync.directive';
+import { DescendantRoot } from '../services/drag-drop-desc-reg.service';
+import { DragSyncDescendantRegisterService, DropSortSyncDescendantRegisterService } from '../services/drag-drop-descendant-sync.service';
 
 @Directive({
   selector: '[dDragDropSyncBox]',
   exportAs: 'dDragDropSyncBox',
-  providers: [DragDropSyncService]
+  providers: [
+    DragDropSyncService,
+    DragSyncDescendantRegisterService,
+    DropSortSyncDescendantRegisterService,
+  ]
 })
-
-export class DragDropSyncBoxDirective implements AfterViewInit, OnDestroy {
+export class DragDropSyncBoxDirective implements OnInit, AfterViewInit, OnDestroy {
   sub = new Subscription();
-  @ContentChildren(DragSyncDirective, {descendants: true}) dragSyncList: QueryList<DragSyncDirective>;
-  @ContentChildren(DropSortSyncDirective, {descendants: true}) dropSyncList: QueryList<DropSortSyncDirective>;
-  constructor(private dragDropSyncService: DragDropSyncService) {}
+  // @ContentChildren(DragSyncDirective, {descendants: true})
+  dragSyncList: DescendantRoot<DragSyncDirective>;
+  // @ContentChildren(DropSortSyncDirective, {descendants: true})
+  dropSyncList: DescendantRoot<DropSortSyncDirective>;
+  constructor(private dragDropSyncService: DragDropSyncService,
+      private dragSyncDrs: DragSyncDescendantRegisterService,
+      private dropSortSyncDrs: DropSortSyncDescendantRegisterService) {
+    }
+
+  ngOnInit() {
+    this.dragSyncList = new DescendantRoot<DragSyncDirective>(this.dragSyncDrs);
+    this.dropSyncList = new DescendantRoot<DropSortSyncDirective>(this.dropSortSyncDrs);
+  }
   ngAfterViewInit() {
+    this.dragSyncList.on();
+    this.dropSyncList.on();
     this.dragDropSyncService.updateDragSyncList(this.dragSyncList);
     this.dragDropSyncService.updateDropSyncList(this.dropSyncList);
     this.sub.add(
@@ -32,6 +49,8 @@ export class DragDropSyncBoxDirective implements AfterViewInit, OnDestroy {
     if (this.sub) {
       this.sub.unsubscribe();
     }
+    this.dragSyncList.off();
+    this.dropSyncList.off();
   }
 
 }

@@ -1,6 +1,7 @@
 import { AfterViewChecked, ChangeDetectionStrategy, Component, ElementRef, EventEmitter,
-  HostBinding, Input, Output, Renderer2 } from '@angular/core';
+  HostBinding, Input, Output, Renderer2, OnChanges, SimpleChanges } from '@angular/core';
 import { SplitterOrientation, CollapseDirection } from './splitter.types';
+import { SplitterService } from './splitter.service';
 @Component({
   selector: 'd-splitter-pane',
   templateUrl: './splitter-pane.component.html',
@@ -8,7 +9,7 @@ import { SplitterOrientation, CollapseDirection } from './splitter.types';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
-export class SplitterPaneComponent implements AfterViewChecked {
+export class SplitterPaneComponent implements OnChanges, AfterViewChecked {
    // pane的最小值
    @Input() minSize: string;
    // pane的最大值
@@ -17,6 +18,8 @@ export class SplitterPaneComponent implements AfterViewChecked {
    @Input() resizable = true;
    // 面板是否可折叠
    @Input() collapsible = false;
+   // 面板初始化是否折叠，默认不折叠
+   @Input() collapsed = false;
    // 非边缘面板折叠方向，before只生成向前折叠的按钮，after生成向后折叠按钮，both生成两个
    @Input() collapseDirection: CollapseDirection = 'both';
   // pane初始化大小
@@ -37,16 +40,15 @@ export class SplitterPaneComponent implements AfterViewChecked {
     return this._size;
   }
   // 大小改变事件
-  @Output() sizeChange = new EventEmitter();
+  @Output() sizeChange = new EventEmitter<any>();
 
   // 收起和展开事件
-  @Output() collapsedChange = new EventEmitter();
+  @Output() collapsedChange = new EventEmitter<any>();
 
   @HostBinding('class.devui-splitter-pane') paneClass = true;
 
   orientation: SplitterOrientation; // 分割条方向
   _order = 0; // flex布局下pane位置
-  collapsed = false; // 标记是否折叠
   element; // nativeElement句柄
 
   set order(paneOrder) {
@@ -57,8 +59,14 @@ export class SplitterPaneComponent implements AfterViewChecked {
       return this._order;
   }
 
-  constructor(private el: ElementRef, private renderer: Renderer2) {
+  constructor(private splitter: SplitterService, private el: ElementRef, private renderer: Renderer2) {
     this.element = this.el.nativeElement;
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if ((changes.collapsible && !changes.collapsible.isFirstChange()) || (changes.collapsed && !changes.collapsed.isFirstChange())) {
+      this.splitter.paneChangeSubject.next(true);
+    }
   }
 
   // 设置order

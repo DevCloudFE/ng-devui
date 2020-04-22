@@ -10,14 +10,17 @@ export class DatepickerDemoComponent {
   basicSource: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'html', code: require('!!raw-loader!./basic/basic.component.html')},
     {title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/basic.component.ts')},
+    {title: 'CSS', language: 'css', code: require('!!raw-loader!./basic/basic.component.css')},
   ];
   rangeSource: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'html', code: require('!!raw-loader!./range/datepicker-range.component.html')},
     {title: 'TS', language: 'typescript', code: require('!!raw-loader!./range/datepicker-range.component.ts')},
+    {title: 'CSS', language: 'css', code: require('!!raw-loader!./range/datepicker-range.component.css')},
   ];
   formatSource: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'html', code: require('!!raw-loader!./format/datepicker-format.component.html')},
     {title: 'TS', language: 'typescript', code: require('!!raw-loader!./format/datepicker-format.component.ts')},
+    {title: 'CSS', language: 'css', code: require('!!raw-loader!./format/datepicker-format.component.css')},
   ];
   rangePickerSource = [
     {
@@ -92,22 +95,27 @@ export class DatepickerDemoComponent {
   rangeClearButtonSource: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'html', code: require('!!raw-loader!./range-clear-button/range-clear-button.component.html')},
     {title: 'TS', language: 'typescript', code: require('!!raw-loader!./range-clear-button/range-clear-button.component.ts')},
+    {title: 'CSS', language: 'css', code: require('!!raw-loader!./range-clear-button/range-clear-button.component.css')},
   ];
   rangeTodaySource: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'html', code: require('!!raw-loader!./range-today/range-today.component.html')},
     {title: 'TS', language: 'typescript', code: require('!!raw-loader!./range-today/range-today.component.ts')},
+    {title: 'CSS', language: 'css', code: require('!!raw-loader!./range-today/range-today.component.css')},
   ];
   customViewTemplateSource: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'html', code: require('!!raw-loader!./custom-view-template/custom-view-template.component.html')},
     {title: 'TS', language: 'typescript', code: require('!!raw-loader!./custom-view-template/custom-view-template.component.ts')},
+    {title: 'CSS', language: 'css', code: require('!!raw-loader!./custom-view-template/custom-view-template.component.css')},
   ];
   clearButtonSource: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'html', code: require('!!raw-loader!./clear-button/clear-button.component.html')},
     {title: 'TS', language: 'typescript', code: require('!!raw-loader!./clear-button/clear-button.component.ts')},
+    {title: 'CSS', language: 'css', code: require('!!raw-loader!./clear-button/clear-button.component.css')},
   ];
   buttonSource: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'html', code: require('!!raw-loader!./button/button.component.html')},
     {title: 'TS', language: 'typescript', code: require('!!raw-loader!./button/button.component.ts')},
+    {title: 'CSS', language: 'css', code: require('!!raw-loader!./button/button.component.css')},
   ];
   twoDatepickerBasic = [
     {

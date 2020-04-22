@@ -28,22 +28,22 @@ export class DroppableDirective implements OnInit, AfterViewInit, OnDestroy {
     /**
      *  Event fired when Drag dragged element enters a valid drop target.
      */
-    @Output() dragEnterEvent: EventEmitter<any> = new EventEmitter();
+    @Output() dragEnterEvent: EventEmitter<any> = new EventEmitter<any>();
 
     /**
      * Event fired when an element is being dragged over a valid drop target
      */
-    @Output() dragOverEvent: EventEmitter<any> = new EventEmitter();
+    @Output() dragOverEvent: EventEmitter<any> = new EventEmitter<any>();
 
     /**
      * Event fired when a dragged element leaves a valid drop target.
      */
-    @Output() dragLeaveEvent: EventEmitter<any> = new EventEmitter();
+    @Output() dragLeaveEvent: EventEmitter<any> = new EventEmitter<any>();
 
     /**
      * Event fired when an element is dropped on a valid drop target.
      */
-    @Output() dropEvent: EventEmitter<DropEvent> = new EventEmitter(); // 注意使用了虚拟滚动后，DropEvent中的dragFromIndex无效
+    @Output() dropEvent: EventEmitter<DropEvent> = new EventEmitter<DropEvent>(); // 注意使用了虚拟滚动后，DropEvent中的dragFromIndex无效
 
     /**
      * CSS class applied on the draggable that is applied when the item is being dragged.
@@ -675,14 +675,14 @@ export class DroppableDirective implements OnInit, AfterViewInit, OnDestroy {
             // 针对多源占位符场景
             cmd = {
               command: 'insertBefore',
-              index: getIndex(sortContainerChildren, overElement.el.nextSibling.nextSibling, sortContainerChildren.length)
+              index: getIndex(sortContainerChildren, overElement.el.nextSibling, sortContainerChildren.length) + 1
             };
             this.sortContainer.insertBefore(this.placeholder, overElement.el.nextSibling.nextSibling);
 
           } else {
             cmd = {
               command: 'insertBefore',
-              index: getIndex(sortContainerChildren, overElement.el.nextSibling, sortContainerChildren.length)
+              index: getIndex(sortContainerChildren, overElement.el, sortContainerChildren.length) + 1
             };
             this.sortContainer.insertBefore(this.placeholder, overElement.el.nextSibling);
           }

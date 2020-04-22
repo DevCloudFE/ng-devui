@@ -3,10 +3,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { AutoCompleteModule } from 'ng-devui/auto-complete/auto-complete.module';
+import { AutoCompleteModule } from 'ng-devui/auto-complete';
 
 import { EditableSelectDemoComponent } from './editable-select-demo.component';
-import { ButtonModule } from 'ng-devui/button/button.module';
+import { ButtonModule } from 'ng-devui/button';
 import { EditableSelectModule } from 'ng-devui/editable-select';
 import {
   AsyncDataWithFuncitionComponent

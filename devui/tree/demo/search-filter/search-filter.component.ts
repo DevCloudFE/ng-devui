@@ -1,10 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
 import {
   TreeNode
-} from '../../tree-factory.class';
+} from 'ng-devui/tree';
 import {
   OperableTreeComponent
-} from '../../operable-tree.component';
+} from 'ng-devui/tree';
 @Component({
   selector: 'd-search-filter',
   templateUrl: './search-filter.component.html',

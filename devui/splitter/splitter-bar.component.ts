@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ElementRef, Host,
-   HostBinding, Input, OnInit, Renderer2, OnDestroy } from '@angular/core';
+   HostBinding, Input, OnInit, Renderer2, OnDestroy, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { map, switchMap, takeUntil, tap, filter } from 'rxjs/operators';
 import { ResizeDirective } from './resize.directive';
@@ -12,7 +12,7 @@ import { SplitterOrientation } from './splitter.types';
   styleUrls: ['./splitter-bar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SplitterBarComponent implements OnInit, OnDestroy {
+export class SplitterBarComponent implements OnInit, AfterViewInit, OnDestroy {
   // 当前pane索引
   @Input() index: number;
   // 窗格排列方向
@@ -63,8 +63,14 @@ export class SplitterBarComponent implements OnInit, OnDestroy {
   constructor(private el: ElementRef,
     private splitter: SplitterService,
     private renderer: Renderer2,
-    @Host() private resize: ResizeDirective
-  ) {}
+    @Host() private resize: ResizeDirective,
+    private cdr: ChangeDetectorRef
+  ) {
+    this.splitter.paneChangeSubject.subscribe(() => {
+      this.initialCollapseStatus();
+      this.cdr.detectChanges();
+    });
+  }
 
   ngOnInit(): void {
     let state;
@@ -87,15 +93,28 @@ export class SplitterBarComponent implements OnInit, OnDestroy {
     this.subscriptions.add(resizeListener);
   }
 
+  ngAfterViewInit(): void {
+    this.initialCollapseStatus();
+  }
 
-  collapsePrePane() {
+  initialCollapseStatus() {
+    const prePane = this.splitter.getPane(this.index);
+    const nextPane = this.splitter.getPane(this.index + 1);
+    if (prePane.collapsed && prePane.collapsible) {
+      this.collapsePrePane(true);
+    } else if (nextPane.collapsed && nextPane.collapsible) {
+      this.collapseNextPane(true);
+    }
+  }
+
+  collapsePrePane(lockStatus?) {
     const nearIndex = this.index + 1;
-    this.splitter.togglePane(this.index, nearIndex);
+    this.splitter.togglePane(this.index, nearIndex, lockStatus);
     this.toggleResize(this.index);
   }
 
-  collapseNextPane() {
-    this.splitter.togglePane(this.index + 1, this.index);
+  collapseNextPane(lockStatus?) {
+    this.splitter.togglePane(this.index + 1, this.index, lockStatus);
     this.toggleResize(this.index + 1);
   }
 
@@ -139,8 +158,6 @@ export class SplitterBarComponent implements OnInit, OnDestroy {
     const isCollapsible = pane.collapsible && showIcon;
     // 当前收起状态
     const isCollapsed = pane.collapsed;
-    // 是否是固定pane
-    const isStaticBar = this.splitter.isStaticBar(this.index);
     // 一个pane收起的时候，隐藏相邻pane的收起按钮
     const isNearPaneCollapsed = nearPane.collapsed;
     return this.generateClass({
@@ -152,5 +169,6 @@ export class SplitterBarComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscriptions.unsubscribe();
+    this.splitter.paneChangeSubject.unsubscribe();
   }
 }

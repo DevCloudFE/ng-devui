@@ -1,6 +1,6 @@
 import { Component, OnInit, HostBinding, ViewChild, ElementRef, AfterContentInit } from '@angular/core';
 import { originSource, SourceType } from '../mock-data';
-import { TableExpandConfig } from 'ng-devui/data-table/data-table.model';
+import { TableExpandConfig } from 'ng-devui/data-table';
 
 
 @Component({
@@ -69,9 +69,6 @@ export class ExpandRowComponent implements OnInit, AfterContentInit {
     this.headerExpandConfig.expandTemplateRef = this.quickAddRowTip;
   }
 
-  // addSubData(index, item) {
-  //   this.basicDataSource[index].$expandConfig = { expand: true, expandTemplateRef: this.addSubRowContent };
-  // }
 
   subRowAdded(index, item) {
     this.basicDataSource[index].$expandConfig.expand = false;

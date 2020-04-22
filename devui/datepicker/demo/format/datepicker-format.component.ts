@@ -3,14 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
     selector: 'd-datepicker-format',
     templateUrl: './datepicker-format.component.html',
-    styles: [
-      `
-        .col-md-6 {
-          float: left;
-          margin-right: 10px;
-        }
-      `
-    ]
+    styleUrls: [`./datepicker-format.component.css`]
 })
 export class DatepickerFormatComponent implements OnInit {
   dateFormatOptions = ['y-MM-dd HH:mm:ss', 'yy.MM.dd HH:mm', 'MM/dd/y HH:mm:ss', 'MM/dd/yy HH:mm'];

@@ -49,11 +49,11 @@ export class SingleUploadComponent implements OnDestroy {
   @Input() confirmText: string;
   @Input() beforeUpload: (file) => boolean | Promise<boolean> | Observable<boolean>;
   @Input() enableDrop = false;
-  @Output() successEvent: EventEmitter<any> = new EventEmitter();
-  @Output() errorEvent: EventEmitter<any> = new EventEmitter();
-  @Output() deleteUploadedFileEvent: EventEmitter<any> = new EventEmitter();
-  @Output() fileDrop: EventEmitter<any> = new EventEmitter();
-  @Output() fileOver: EventEmitter<any> = new EventEmitter();
+  @Output() successEvent: EventEmitter<any> = new EventEmitter<any>();
+  @Output() errorEvent: EventEmitter<any> = new EventEmitter<any>();
+  @Output() deleteUploadedFileEvent: EventEmitter<any> = new EventEmitter<any>();
+  @Output() fileDrop: EventEmitter<any> = new EventEmitter<any>();
+  @Output() fileOver: EventEmitter<any> = new EventEmitter<any>();
   @ViewChild('dSingleUploadView', { static: true }) singleUploadViewComponent: SingleUploadViewComponent;
   UploadStatus = UploadStatus;
   isDropOVer = false;

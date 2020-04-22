@@ -1,8 +1,7 @@
 import {
   Component,
   OnInit,
-  ChangeDetectionStrategy,
-  HostBinding
+  ChangeDetectionStrategy
 } from '@angular/core';
 import { SourceType, originSource } from '../mock-data';
 

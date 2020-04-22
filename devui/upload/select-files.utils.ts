@@ -1,9 +1,9 @@
 import endsWith from 'lodash-es/endsWith';
-import {IFileOptions, IUploadOptions} from './file-uploader.types';
+import { IFileOptions, IUploadOptions } from './file-uploader.types';
 import { Observable, from, Subscription } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
 
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
 
 @Injectable()
@@ -19,7 +19,7 @@ export class SelectFiles {
     });
   }
 
-  selectFiles = ({multiple, accept}: IFileOptions): Promise<File[]> => {
+  selectFiles = ({ multiple, accept }: IFileOptions): Promise<File[]> => {
     return new Promise((resolve) => {
       const tempNode = document.getElementById('d-upload-temp');
       if (tempNode) {
@@ -60,38 +60,38 @@ export class SelectFiles {
 
   beyondMaximalSize = (fileSize, maximumSize) => {
     if (maximumSize) {
-      return fileSize > 1000000 * maximumSize;
+      return fileSize > 1024 * 1024 * maximumSize;
     }
     return false;
   }
 
   triggerSelectFiles = (fileOptions: IFileOptions, uploadOptions: IUploadOptions) => {
-    const {multiple, accept} = fileOptions;
-    return this._validateFiles(from(this.selectFiles({multiple, accept})), accept, uploadOptions);
+    const { multiple, accept } = fileOptions;
+    return this._validateFiles(from(this.selectFiles({ multiple, accept })), accept, uploadOptions);
   }
 
 
-  triggerDropFiles =  (fileOptions: IFileOptions, uploadOptions: IUploadOptions, files: any) => {
-    const {multiple, accept} = fileOptions;
+  triggerDropFiles = (fileOptions: IFileOptions, uploadOptions: IUploadOptions, files: any) => {
+    const { multiple, accept } = fileOptions;
     return this._validateFiles(new Observable(observer => observer.next(files)), accept, uploadOptions);
 
   }
 
   _validateFiles(observable, accept, uploadOptions) {
     return observable.pipe(
-    mergeMap(file => <any>file),
-    map((file) => {
-      if (!this.isAllowedFileType(accept, <File>file)) {
-        this.NOT_ALLOWED_FILE_TYPE_MSG = this.i18nText.getNotAllowedFileTypeMsg((<File>file).name, accept);
-        throw new Error(this.NOT_ALLOWED_FILE_TYPE_MSG);
-      }
+      mergeMap(file => <any>file),
+      map((file) => {
+        if (!this.isAllowedFileType(accept, <File>file)) {
+          this.NOT_ALLOWED_FILE_TYPE_MSG = this.i18nText.getNotAllowedFileTypeMsg((<File>file).name, accept);
+          throw new Error(this.NOT_ALLOWED_FILE_TYPE_MSG);
+        }
 
-      if (this.beyondMaximalSize((<File>file).size, uploadOptions.maximumSize)) {
-        this.BEYOND_MAXIMAL_FILE_SIZE_MSG = this.i18nText.getBeyondMaximalFileSizeMsg((<File>file).size, uploadOptions.maximumSize);
-        throw new Error(this.BEYOND_MAXIMAL_FILE_SIZE_MSG);
-      }
-      return file;
-    })
+        if (this.beyondMaximalSize((<File>file).size, uploadOptions.maximumSize)) {
+          this.BEYOND_MAXIMAL_FILE_SIZE_MSG = this.i18nText.getBeyondMaximalFileSizeMsg((<File>file).size, uploadOptions.maximumSize);
+          throw new Error(this.BEYOND_MAXIMAL_FILE_SIZE_MSG);
+        }
+        return file;
+      })
     );
   }
 

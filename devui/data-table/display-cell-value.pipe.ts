@@ -4,27 +4,7 @@ import { DataTableColumnTmplComponent } from './tmpl/data-table-column-tmpl.comp
 
 @Pipe({ name: 'disPlayCellValuePipe' })
 export class DisPlayCellValuePipe implements PipeTransform {
-  datePickerCN = {
-    locale: 'zh-CN',
-    timePicker: false,
-    current: '今天',
-    confirmTime: '确定',
-    dateConverter: null, // DateConverter
-    weeks: ['日', '一', '二', '三', '四', '五', '六'],
-    months: ['一月',
-      '二月',
-      '三月',
-      '四月',
-      '五月',
-      '六月',
-      '七月',
-      '八月',
-      '九月',
-      '十月',
-      '十一月',
-      '十二月'],
-    min: 1900,
-    max: 2099,
+  datePicker = {
     format: {
       date: 'YYYY-MM-DD',
       time: 'YYYY-MM-DD HH:mm'
@@ -50,7 +30,7 @@ export class DisPlayCellValuePipe implements PipeTransform {
           pattern = column.extraOptions.dateFormat;
         } else {
           pattern = column.extraOptions && column.extraOptions.showTime ?
-            this.datePickerCN.format.time : this.datePickerCN.format.date;
+            this.datePicker.format.time : this.datePicker.format.date;
         }
         return cellItem ? formatDate(new Date(cellItem), pattern) : '';
       case 'select':

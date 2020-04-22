@@ -21,7 +21,7 @@ export class BreadCrumbItemComponent implements OnInit {
     @Input() customMenuTemplate: TemplateRef<any>;
     @Input() menuList: Array<MenuConfig>;
     @Input() isSearch = false;
-    @Output() toggleEvent: EventEmitter<any> = new EventEmitter();
+    @Output() toggleEvent: EventEmitter<any> = new EventEmitter<any>();
 
     menuListDisplay: Array<MenuConfig>;
     isOpen: boolean;

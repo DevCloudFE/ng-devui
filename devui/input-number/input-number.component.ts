@@ -286,9 +286,14 @@ export class InputNumberComponent implements ControlValueAccessor, OnChanges, On
     return Math.max(currentValuePrecision, stepPrecision);
   }
 
-  protectInput(event: KeyboardEvent) {
+  protectInput(event: KeyboardEvent | ClipboardEvent) {
     let value = event.target['value'];
-    const input = String.fromCharCode(event.which);
+    let input;
+    if (event['charCode']) {
+      input = String.fromCharCode(event['charCode']);
+    } else {
+      input = event['clipboardData'].getData('text');
+    }
     const selectionStart = event.target['selectionStart'];
     const selectionEnd = event.target['selectionEnd'];
     value = value.substring(0, selectionStart) + input + value.substring(selectionEnd);

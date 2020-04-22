@@ -29,7 +29,7 @@ export class ButtonComponent {
   @Input() showLoading = false;
   @Input() width?: string;
   @Input() autofocus = false;
-  @Output() btnClick = new EventEmitter();
+  @Output() btnClick = new EventEmitter<any>();
   @ViewChild('buttonContent', { static: true }) buttonContent: ElementRef;
   constructor() {
   }

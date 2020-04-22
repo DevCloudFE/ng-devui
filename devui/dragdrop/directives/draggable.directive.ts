@@ -44,25 +44,25 @@ export class DraggableDirective implements OnInit, AfterViewInit, OnDestroy {
   /**
    * Event fired when Drag is started
    */
-  @Output() dragStartEvent: EventEmitter<any> = new EventEmitter();
+  @Output() dragStartEvent: EventEmitter<any> = new EventEmitter<any>();
 
   /**
    * @deprecated
    * Event fired while the element is being dragged
    * 为了性能优化，该函数废弃，请用(drag)自行监听， 如果不需要angular脏检测则最好用runOutsideAngular的addEventListener监听以获得好的性能
    */
-  @Output() dragEvent: PreserveNextEventEmitter<any> = new PreserveNextEventEmitter();
+  @Output() dragEvent: PreserveNextEventEmitter<any> = new PreserveNextEventEmitter<any>();
 
   /**
    * Event fired when dragged ends
    */
-  @Output() dragEndEvent: EventEmitter<any> = new EventEmitter();
+  @Output() dragEndEvent: EventEmitter<any> = new EventEmitter<any>();
 
   /**
    * Keeps track of mouse over element that is used to determine drag handles
    */
   private mouseOverElement: any;
-  @Output() dropEndEvent: PreserveNextEventEmitter<any> = new PreserveNextEventEmitter();
+  @Output() dropEndEvent: PreserveNextEventEmitter<any> = new PreserveNextEventEmitter<any>();
   @Input()
   public get disabled(): boolean {
       return this._disabled;

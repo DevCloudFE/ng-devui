@@ -1,4 +1,4 @@
-.cdk-overlay-pane .devui-dropdown-menu {
+.cdk-overlay-pane > div > .devui-dropdown-menu {
   position: relative;
   top: 0; // initial; ie11不认识initial
   left: 0; //initial;

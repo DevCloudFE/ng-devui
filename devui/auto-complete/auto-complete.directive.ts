@@ -24,6 +24,7 @@ import { fromEvent, Observable, Subscription, of } from 'rxjs';
 import { map, filter, debounceTime, switchMap, tap } from 'rxjs/operators';
 import { PositionService } from 'ng-devui/position';
 import { AutoCompletePopupComponent } from './auto-complete-popup.component';
+import { AutoCompleteConfig } from './auto-complete-config';
 
 @Directive({
   selector: '[dAutoComplete]',
@@ -80,20 +81,22 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
   private onChange = (_: any) => null;
   private onTouched = () => null;
 
-  constructor(private elementRef: ElementRef,
+  constructor(
+    private autoCompleteConfig: AutoCompleteConfig,
+    private elementRef: ElementRef,
     private viewContainerRef: ViewContainerRef,
     private componentFactoryResolver: ComponentFactoryResolver,
     private renderer: Renderer2,
     private injector: Injector,
     private positionService: PositionService,
     private changeDetectorRef: ChangeDetectorRef) {
-    this.delay = 300;
+    this.delay = this.autoCompleteConfig.autoComplete.delay;
     this.valueChanges = this.registerInputEvent(elementRef);
-    this.minLength = 1;
-    this.itemTemplate = null;
-    this.noResultItemTemplate = null;
-    this.formatter = (item: any) => item ? (item.label || item.toString()) : '';
-    this.valueParser = (item: any) => item;
+    this.minLength = this.autoCompleteConfig.autoComplete.minLength;
+    this.itemTemplate = this.autoCompleteConfig.autoComplete.itemTemplate;
+    this.noResultItemTemplate = this.autoCompleteConfig.autoComplete.noResultItemTemplate;
+    this.formatter = this.autoCompleteConfig.autoComplete.formatter;
+    this.valueParser = this.autoCompleteConfig.autoComplete.valueParser;
   }
 
   ngOnInit() {
@@ -147,7 +150,7 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
   }
 
   // 调用时机：input keyup
-  onSourceChange(source: any) {
+  onSourceChange(source) {
     if (!this.elementRef.nativeElement.value) {
       if (this.sceneType !== 'select') { // 下拉场景不展示最近输入
         this.showLatestSource();
@@ -186,7 +189,7 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
     }
   }
 
-  private showSource(source: any, setOpen: any, isReset: any) {
+  private showSource(source, setOpen, isReset) {
     if ((source && source.length) || this.noResultItemTemplate) {
       const pop = this.popupRef.instance;
       if (isReset) {
@@ -203,16 +206,16 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
     }
   }
 
-  writeValue(obj: any): void {
+  writeValue(obj): void {
     this.value = this.formatter(obj) || '';
     this.writeInputValue(this.value);
   }
 
-  registerOnChange(fn: any): void {
+  registerOnChange(fn): void {
     this.onChange = fn;
   }
 
-  registerOnTouched(fn: any): void {
+  registerOnTouched(fn): void {
     this.onTouched = fn;
   }
 
@@ -229,7 +232,7 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
   }
 
   @HostListener('focus', ['$event'])
-  onFocus($event: any) {
+  onFocus($event) {
     this.focus = true;
     this.transInputFocusEmit.emit({
       focus: true,
@@ -252,18 +255,18 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
   }
 
   @HostListener('blur', ['$event'])
-  onBlur($event: any) {
+  onBlur($event) {
     this.focus = false;
     this.onTouched();
   }
 
   @HostListener('keydown.esc', ['$event'])
-  onEscKeyup($event: any) {
+  onEscKeyup($event) {
     this.hidePopup();
   }
 
   @HostListener('keydown.Enter', ['$event'])
-  onEnterKeyDown($event: any) {
+  onEnterKeyDown($event) {
     if (!this.popupRef.instance.source || !this.popupRef.instance.isOpen) {
       return;
     }
@@ -273,7 +276,7 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
   }
 
   @HostListener('keydown.ArrowUp', ['$event'])
-  onArrowUpKeyDown($event: any) {
+  onArrowUpKeyDown($event) {
     if (this.popupRef) {
       $event.preventDefault();
       $event.stopPropagation();
@@ -282,7 +285,7 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
   }
 
   @HostListener('keydown.ArrowDown', ['$event'])
-  onArrowDownKeyDown($event: any) {
+  onArrowDownKeyDown($event) {
     if (this.popupRef) {
       $event.preventDefault();
       $event.stopPropagation();
@@ -318,7 +321,7 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
     }
   }
 
-  private fillPopup(source?: any, term?: string) {
+  private fillPopup(source?, term?: string) {
     this.position = this.positionService.position(this.elementRef.nativeElement);
     const pop = this.popupRef.instance;
     pop.source = source;
@@ -334,7 +337,7 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
       });
   }
 
-  private writeInputValue(value: any) {
+  private writeInputValue(value) {
     this.renderer.setProperty(this.elementRef.nativeElement, 'value', value);
   }
 
@@ -349,7 +352,7 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
     }
   }
 
-  onTermChange(term: any) {
+  onTermChange(term) {
     this.value = term;
     if (this.popupRef) {
       this.popupRef.instance.term = term;

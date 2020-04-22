@@ -46,11 +46,11 @@ export class MultipleUploadComponent implements OnDestroy {
   @Input() beforeUpload: (files) => boolean | Promise<boolean> | Observable<boolean>;
   @Input() enableDrop = false;
 
-  @Output() successEvent: EventEmitter<any> = new EventEmitter();
-  @Output() errorEvent: EventEmitter<any> = new EventEmitter();
-  @Output() deleteUploadedFileEvent: EventEmitter<any> = new EventEmitter();
-  @Output() fileDrop: EventEmitter<any> = new EventEmitter();
-  @Output() fileOver: EventEmitter<any> = new EventEmitter();
+  @Output() successEvent: EventEmitter<any> = new EventEmitter<any>();
+  @Output() errorEvent: EventEmitter<any> = new EventEmitter<any>();
+  @Output() deleteUploadedFileEvent: EventEmitter<any> = new EventEmitter<any>();
+  @Output() fileDrop: EventEmitter<any> = new EventEmitter<any>();
+  @Output() fileOver: EventEmitter<any> = new EventEmitter<any>();
   @ViewChild('dMultipleUploadView', { static: true }) multipleUploadViewComponent: MultipleUploadViewComponent;
   i18nCommonText: I18nInterface['common'];
   i18nText: I18nInterface['upload'];

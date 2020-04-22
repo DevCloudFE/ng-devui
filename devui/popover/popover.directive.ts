@@ -118,9 +118,6 @@ export class PopoverDirective implements OnInit, OnDestroy {
 
   show() {
     this.hide();
-    if (!this._content) {
-      return;
-    }
     if (!this.popoverComponentRef) {
       this.createPopover();
     }

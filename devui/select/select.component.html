@@ -113,6 +113,7 @@
       [cdkConnectedOverlayOrigin]="cdkConnectedOverlayOrigin"
       [cdkConnectedOverlayWidth]="width"
       [cdkConnectedOverlayOpen]="isOpen"
+      [cdkConnectedOverlayPositions]="overlayPositions"
       (positionChange)="onPositionChange($event)"
       (backdropClick)="isOpen = false"
     >
@@ -131,7 +132,8 @@
     class="devui-dropdown-menu"
     [ngClass]="{
       'devui-dropdown-menu-cdk': appendToBody,
-      'devui-custom-right': customViewTemplate && customViewDirection === 'right'
+      'devui-custom-right': customViewTemplate && customViewDirection === 'right',
+      'devui-custom-left': customViewTemplate && customViewDirection === 'left'
     }"
     [@fadeInOut]="isOpen ? (appendToBody ? menuPosition : popDirection) : 'void'"
     (@fadeInOut.done)="animationEnd($event)"
@@ -174,6 +176,32 @@
               <path
                 d="M1024 900.584l-121.376 123.2L618.672 735.464c-63.44 43.768-140 69.392-222.44 69.392C177.376 804.848 0 624.712 0 402.536 0 180.336 177.376 0.208 396.232 0.208s396.232 180.144 396.232 402.328c0 75.328-20.752 145.576-56.248 205.872L1024 900.584zM396.232 128.944c-148.8 0-269.456 122.504-269.456 273.592 0 151.08 120.656 273.576 269.456 273.576 148.832 0 269.456-122.504 269.456-273.576C665.688 251.448 545.08 128.944 396.232 128.944z"
               ></path>
+            </svg>
+          </span>
+          <span
+            #clearIcon
+            class="devui-form-control-feedback devui-search-clear"
+            [ngClass]="size ? 'devui-search-clear-' + size : ''"
+            (click)="clearText()"
+            *ngIf="filter"
+          >
+            <svg
+              class="svg-icon-clear"
+              width="0.8em"
+              height="0.8em"
+              viewBox="0 0 10 10"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+            >
+              <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g transform="translate(-1546.000000, -432.000000)">
+                  <polygon
+                    id="Combined-Shape-Copy-60"
+                    points="1552.36396 436.949747 1555.89949 433.414214 1554.48528 432 1550.94975 435.535534 1547.41421 432 1546 433.414214 1549.53553 436.949747 1546 440.485281 1547.41421 441.899495 1550.94975 438.363961 1554.48528 441.899495 1555.89949 440.485281"
+                  ></polygon>
+                </g>
+              </g>
             </svg>
           </span>
         </div>

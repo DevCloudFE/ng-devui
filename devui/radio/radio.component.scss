@@ -3,14 +3,14 @@
 :host {
   padding: 0 5px;
   display: block;
-  line-height: 36px;
+  line-height: 32px;
 }
 .devui-radio {
   &.disabled {
     cursor: not-allowed;
     opacity: 0.3;
   }
-  font-size: 0;
+  font-size: 14px;
   line-height: 1.42857143;
   font-weight: normal;
   cursor: pointer;
@@ -99,7 +99,6 @@
     color: $dark-1;
     margin-left: 8px;
     font-size: 14px;
-    vertical-align: middle;
   }
 
   .devui-radio-input {

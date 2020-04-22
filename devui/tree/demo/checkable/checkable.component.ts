@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ICheckboxInput, ITreeItem, OperableTreeComponent, TreeNode } from 'ng-devui';
+import { OperableTreeComponent, TreeNode, ITreeItem, ICheckboxInput } from 'ng-devui/tree';
+
 
 @Component({
   selector: 'd-checkable',

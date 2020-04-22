@@ -1,5 +1,4 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnDestroy, Output, ViewChild } from '@angular/core';
-import { ToastService } from './toast.service';
 import { Subject, Subscription } from 'rxjs';
 import { throttleTime } from 'rxjs/operators';
 
@@ -17,11 +16,11 @@ export interface Message {
 })
 export class ToastComponent implements AfterViewInit, OnDestroy {
   @Input() sticky: boolean;
-  @Input() life: any;
-  @Input() style: any;
+  @Input() life: number;
+  @Input() style: string;
   @Input() styleClass: string;
 
-  @Output() closeEvent: EventEmitter<any> = new EventEmitter();
+  @Output() closeEvent: EventEmitter<any> = new EventEmitter<any>();
   @Output() valueChange: EventEmitter<Message[]> = new EventEmitter<Message[]>();
   @ViewChild('container', { static: true }) containerViewChild: ElementRef;
 
@@ -33,16 +32,12 @@ export class ToastComponent implements AfterViewInit, OnDestroy {
         switch (this.value[0].severity) {
           case 'success':
             return 5000;
-            break;
           case 'info':
             return 5000;
-            break;
           case 'warn':
             return 10000;
-            break;
           case 'error':
             return 10000;
-            break;
           default:
             return 5000;
         }
@@ -52,7 +47,7 @@ export class ToastComponent implements AfterViewInit, OnDestroy {
     }
   }
   _value: Array<Message>;
-  zIndex: number;
+  zIndex = 1060;
   container: HTMLDivElement;
   timeout: any;
 
@@ -62,8 +57,7 @@ export class ToastComponent implements AfterViewInit, OnDestroy {
 
   subItem: Subscription;
 
-  constructor(public el: ElementRef, public toastService: ToastService) {
-    this.zIndex = ToastService.zIndex;
+  constructor(public el: ElementRef) {
     this.clickSub = new Subject();
     this.subItem = this.clickSub.pipe(throttleTime(250, undefined, { leading: true, trailing: false }))
       .subscribe(obj => this.remove(obj.index, obj.dom));
@@ -85,8 +79,11 @@ export class ToastComponent implements AfterViewInit, OnDestroy {
   }
 
   handleValueChange() {
-    this.zIndex = ++ToastService.zIndex;
-    this.toastService.fadeIn(this.container, 250);
+    this.zIndex++;
+    setTimeout(() => {
+      const doms = this.container.children;
+      this._value.forEach((v, i) => v && doms[i].classList.add('slide-in'));
+    });
 
     if (!this.sticky) {
       if (this.timeout) {
@@ -104,7 +101,7 @@ export class ToastComponent implements AfterViewInit, OnDestroy {
       const otherToasts = this._value.slice(0);
       otherToasts.splice(index, 1, undefined);
       const doms = this.container.children;
-      otherToasts.forEach((v, i) => v && this.toastService.fadeOut(doms[i], 250));
+      otherToasts.forEach((v, i) => v && doms[i].classList.remove('slide-in'));
     });
   }
 
@@ -117,21 +114,24 @@ export class ToastComponent implements AfterViewInit, OnDestroy {
   }
 
   remove(index: number, msgel: any) {
-    this.toastService.fadeOut(msgel, 250, () => {
+    msgel.classList.remove('slide-in');
+    setTimeout(() => {
       this.closeEvent.emit({ message: this.value[index] });
       this._value = this.value.filter((val, i) => i !== index);
       this.valueChange.emit(this._value);
       this.removeReset();
-    });
+    }, 300);
   }
 
   removeAll() {
     if (this.value && this.value.length) {
-      this.toastService.fadeOut(this.container, 250, () => {
+      const doms = this.container.children;
+      this._value.forEach((v, i) => v && doms[i].classList.remove('slide-in'));
+      setTimeout(() => {
         this.value.forEach((msg, index) => this.closeEvent.emit({ message: this.value[index] }));
         this.value = [];
         this.valueChange.emit(this.value);
-      });
+      }, 300);
     }
   }
 

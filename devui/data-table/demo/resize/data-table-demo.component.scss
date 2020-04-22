@@ -1,4 +1,3 @@
-@import '../../../style/theme/color';
 .setRole {
   display: inline-block;
   position: relative;
@@ -11,7 +10,8 @@
 
 .filter_box {
   width: 110px;
-  background: $bg-white;
+  background: #ffffff;
+  background: var(--white, #ffffff);
   font-size: 12px;
   font-style: normal;
   max-height: 400px;
@@ -19,7 +19,8 @@
   top: 42px;
   overflow-y: auto;
   padding: 5px;
-  border: 1px solid $gray-1;
+  border: 1px solid #adb0b8;
+  border: 1px solid var(--gray-1, #adb0b8);
   position: absolute;
   z-index: 999;
 }

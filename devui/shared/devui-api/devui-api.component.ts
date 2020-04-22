@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, Input, AfterViewInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Data } from '@angular/router';
-import * as marked from 'marked';
+import * as marked from 'marked/lib/marked';
 import * as hljs from 'highlight.js/lib/highlight';
 
 @Component({

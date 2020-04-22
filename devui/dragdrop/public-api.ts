@@ -15,3 +15,5 @@ export * from './directives/drag-sync.directive';
 export * from './directives/dragdrop-sync-box.directive';
 export * from './directives/drop-scroll-enhance-side.directive';
 export * from './directives/drop-sort-sync.directive';
+export * from './services/drag-drop-desc-reg.service';
+export * from './services/drag-drop-descendant-sync.service';

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { DialogService } from 'ng-devui';
-import { ModalFormComponent } from '../modal-demo.component';
+import { DialogService } from 'ng-devui/modal';
+import { ModalFormComponent } from './modal-form.component';
 
 @Component({
   selector: 'd-hide',

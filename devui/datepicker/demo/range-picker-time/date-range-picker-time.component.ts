@@ -14,8 +14,7 @@ export class DateRangePickerTimeComponent {
   dateRange2 = [new Date('07/07/2019 00:07:00'), new Date('09/01/2019 00:08:00')];
 
   getValue(value) {
-    // tslint:disable-next-line:no-console
-    console.info(value);
+    console.log(value);
   }
 
 }

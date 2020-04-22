@@ -3,14 +3,14 @@
 }
 
 .devui-checkbox-list-inline {
-  height: 32px;
+  min-height: 32px;
   line-height: 32px;
 
   ::ng-deep li {
     display: inline-block;
 
-    &:nth-child(n + 2) {
-      margin-left: 10px;
+    &:not(:last-child) {
+      margin-right: 10px;
     }
   }
 }

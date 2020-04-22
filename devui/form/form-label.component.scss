@@ -46,7 +46,7 @@
 }
 
 .devui-form-vertical :host.devui-form-label {
-  flex: 1 1 0;
+  flex: 1 1 auto;
   -moz-box-flex: 1;
   text-align: left;
   padding-bottom: $content-spacing;

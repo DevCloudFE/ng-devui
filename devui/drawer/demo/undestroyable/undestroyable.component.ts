@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DrawerService, IDrawerOpenResult } from 'ng-devui';
+import { DrawerService, IDrawerOpenResult } from 'ng-devui/drawer';
 import { DrawerContentComponent } from '../drawerContent/drawer-content.component';
 
 @Component({

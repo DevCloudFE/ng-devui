@@ -1,4 +1,3 @@
-@import '../../../style/theme/color';
 .breadcrumb-dropdown-menu {
   padding: 10px 0;
   width: 160px;
@@ -10,11 +9,13 @@ li {
   cursor: pointer;
 }
 li a {
-  color: $dark-1;
+  color: #252b3a;
+  color: var(--dark-1, #252b3a);
   margin-left: 10px;
 }
 li:hover {
-  background: $hover-content;
+  background: #f2f5fc;
+  background: var(--hover-content, #f2f5fc);
 }
 li:hover a {
   text-decoration: none;

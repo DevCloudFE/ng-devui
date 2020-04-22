@@ -37,9 +37,9 @@ export class TreeComponent implements OnInit, OnChanges, AfterViewInit, OnDestro
   @Input() iconLeaf: string;
   @Input() treeNodeTitleKey = 'title';
   @Input() checkboxDisabledKey = 'disabled';
-  @Output() nodeSelected: EventEmitter<any> = new EventEmitter();
-  @Output() nodeDblClicked: EventEmitter<any> = new EventEmitter();
-  @Output() nodeToggled: EventEmitter<any> = new EventEmitter();
+  @Output() nodeSelected: EventEmitter<any> = new EventEmitter<any>();
+  @Output() nodeDblClicked: EventEmitter<any> = new EventEmitter<any>();
+  @Output() nodeToggled: EventEmitter<any> = new EventEmitter<any>();
   @ViewChildren('treeNodeContent') treeNodeContent: QueryList<ElementRef>; // 获取content以取得tree宽度
   elementAsMask: any;
   i18nCommonText: I18nInterface['common'];

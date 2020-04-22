@@ -11,6 +11,18 @@
   <body class="devui-body">
     <app-root></app-root>
     <script>
+      var cdnURL = 'https://res.devcloud.huaweicloud.com/obsdevui/furion-cdn.min.js' 
+      !function(x, n) {
+      window[n] = window[n] || {};
+      window[n].config = {
+        appId: "64933B16D8044837BE235CAA2D1AF964", 
+      };
+      var o = document.createElement("script"), d = document.body.firstChild;
+      o.src = x, o.async = !0;
+      document.body.insertBefore(o, d);
+      }(cdnURL, "__fr");
+      </script>
+    <script>
     </script>
   </body>
 </html>

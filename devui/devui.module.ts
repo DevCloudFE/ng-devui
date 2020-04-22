@@ -42,6 +42,7 @@ import { RateModule } from 'ng-devui/rate';
 import { FormModule } from 'ng-devui/form';
 import { TextInputModule } from 'ng-devui/text-input';
 import { TextareaModule } from 'ng-devui/textarea';
+import { FullscreenModule } from 'ng-devui/fullscreen';
 export * from 'ng-devui/accordion';
 export * from 'ng-devui/alert';
 export * from 'ng-devui/anchor';
@@ -56,6 +57,7 @@ export * from 'ng-devui/dragdrop';
 export * from 'ng-devui/drawer';
 export * from 'ng-devui/dropdown';
 export * from 'ng-devui/editable-select';
+export * from 'ng-devui/fullscreen';
 export * from 'ng-devui/form';
 export * from 'ng-devui/loading';
 export * from 'ng-devui/modal';
@@ -105,6 +107,7 @@ export * from './version';
     DropDownModule,
     EditableSelectModule,
     FormModule,
+    FullscreenModule,
     LoadingModule,
     ModalModule,
     MultiAutoCompleteModule,

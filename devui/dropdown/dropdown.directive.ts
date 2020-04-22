@@ -50,7 +50,7 @@ export class DropDownDirective implements OnDestroy, OnChanges, AfterContentInit
   @Input() closeScope: 'all' | 'blank' | 'none' = 'all';
   @Input() closeOnMouseLeaveMenu = false;
 
-  @Output() toggleEvent: EventEmitter<boolean> = new EventEmitter();
+  @Output() toggleEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   visibleSubject = new Subject<boolean>();
 

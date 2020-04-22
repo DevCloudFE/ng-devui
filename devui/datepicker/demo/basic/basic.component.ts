@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 @Component({
     selector: 'd-basic',
+    styleUrls: [`./basic.component.css`],
     changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: './basic.component.html'
 })

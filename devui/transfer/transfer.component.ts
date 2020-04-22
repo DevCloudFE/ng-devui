@@ -37,8 +37,8 @@ export class TransferComponent implements OnInit, OnChanges, OnDestroy {
   @ContentChild('sourceTemplate', { static: false }) sourceCustomViewTemplate: TemplateRef<any>;
   @ContentChild('targetTemplate', { static: false }) targetCustomViewTemplate: TemplateRef<any>;
 
-  @Output() transferToTarget = new EventEmitter();
-  @Output() transferToSource = new EventEmitter();
+  @Output() transferToTarget = new EventEmitter<any>();
+  @Output() transferToSource = new EventEmitter<any>();
 
   transferDirection: any = TransferDirection;
 

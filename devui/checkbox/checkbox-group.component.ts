@@ -36,7 +36,7 @@ export class CheckBoxGroupComponent implements OnChanges, ControlValueAccessor {
   @Input() filterKey: string;
   @Input() labelTemplate: TemplateRef<any>;
   @Input() showAnimation = true;
-  @Output() change: EventEmitter<boolean> = new EventEmitter();
+  @Output() change: EventEmitter<boolean> = new EventEmitter<boolean>();
   values: any[] = [];
   options_display = [];
   private onChange = (_: any) => null;

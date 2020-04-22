@@ -4,7 +4,8 @@ import {
 
 @Component({
   selector: 'd-widgets',
-  templateUrl: './widgets.component.html'
+  templateUrl: './widgets.component.html',
+  styleUrls: ['./widgets.component.css']
 })
 export class WidgetsComponent {
   pager = {

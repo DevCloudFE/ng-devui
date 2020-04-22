@@ -24,7 +24,7 @@ export class DataTableRowComponent implements OnInit {
   @Input() timeout: number;
   @Input() tableLevel: number;
   @Input() nestedIndex: string;
-  @Output() detailChange = new EventEmitter();
+  @Output() detailChange = new EventEmitter<any>();
 
   forceUpdateEvent = new EventEmitter<ForceUpdateReason>();
 

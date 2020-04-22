@@ -24,12 +24,18 @@
 
 .devui-toast-item-container {
   position: relative;
+  left: 150%;
   margin: 0 0 10px 0;
   opacity: 0.95;
   filter: alpha(opacity=95);
   box-shadow: 0px 12px 24px $dark-1-boxshadow;
   border-radius: 0.25em;
   color: $hwc-feedback-overlay-font-color;
+  transition: all 0.3s;
+
+  &.slide-in {
+    left: 0;
+  }
 }
 
 .devui-toast-item {

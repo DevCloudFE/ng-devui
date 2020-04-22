@@ -13,7 +13,7 @@
 |      scrollable      |      `boolean`      | --     |                       可选，表格在超出容器时，是否可以通过滚动查看表格内容                       |
 |       maxWidth       |      `string px`       | --     |                              可选，限制表格最大宽度，默认撑满父容器                              |
 |      maxHeight       |      `string px`       | --     |                                     可选，限制最大高度，默认                                     |
-|         type         |     `'striped'、''`     | ''     |                                          可选，表格类型，striped表示斑马纹类型，默认普通表格                                          |
+|         type         |     `'striped'、'borderless'、''`     | ''     |                                          【可选】表格类型，striped表示斑马纹类型，borderless表示表格内容没有分割线、默认普通表格                                          |
 |        hover         |      `boolean`      | true   |                              可选，表格是否开启鼠标hover行高亮效果                               |
 |       cssClass       |      `string`       | --     |                                       可选，表格自定义样式                                       |
 |      tableWidth      |      `string`       | 100%   |                                          可选，表格宽度                                          |

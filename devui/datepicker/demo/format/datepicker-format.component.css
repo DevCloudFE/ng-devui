@@ -1,0 +1,8 @@
+.col-md-6 {
+  float: left;
+  margin-right: 10px;
+}
+.devui-input-group-addon {
+  vertical-align: middle;
+  padding-top: 4px;
+}

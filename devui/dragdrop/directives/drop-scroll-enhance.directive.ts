@@ -4,6 +4,7 @@ import { Directive, ElementRef, Input, NgZone, OnDestroy, AfterViewInit } from '
 import { fromEvent, Subscription, merge as mergeStatic } from 'rxjs';
 import { throttleTime, tap } from 'rxjs/operators';
 import { DragDropService } from '../services/drag-drop.service';
+import { Utils } from '../shared/utils';
 
 @Directive({
   selector: '[dDropScrollEnhanced]',
@@ -20,13 +21,15 @@ export class DropScrollEnhancedDirective implements AfterViewInit, OnDestroy {
     backward?: DropScrollAreaOffset;
   };
   @Input() dropScrollScope: string | Array<string>;
+  @Input() backSpaceDroppable = true;
 
   private forwardScrollArea: HTMLElement;
   private backwardScrollArea: HTMLElement;
   private subscription: Subscription = new Subscription();
-  private forwardScrollFn: (event: Event) => void;
-  private backwardScrollFn: (event: Event) => void;
+  private forwardScrollFn: (event: DragEvent) => void;
+  private backwardScrollFn: (event: DragEvent) => void;
   private lastScrollTime;
+  private animationFrameId: number;
 
   constructor(private el: ElementRef, private zone: NgZone, private dragDropService: DragDropService) {}
 
@@ -41,16 +44,22 @@ export class DropScrollEnhancedDirective implements AfterViewInit, OnDestroy {
     this.backwardScrollFn = this.createScrollFn(this.direction, DropScrollOrientation.backward, this.speedFn);
     this.zone.runOutsideAngular(() => {
       // 拖拽到其上触发滚动
-      this.subscription.add(fromEvent(this.forwardScrollArea, 'dragover')
+      this.subscription.add(fromEvent<DragEvent>(this.forwardScrollArea, 'dragover')
         .pipe(
           tap(event => {event.preventDefault(); event.stopPropagation(); }),
-          throttleTime(100, undefined, {leading: true, trailing: true})
+          throttleTime(100, undefined, {leading: true, trailing: false})
         ).subscribe(event => this.forwardScrollFn(event)));
-      this.subscription.add(fromEvent(this.backwardScrollArea, 'dragover')
+      this.subscription.add(fromEvent<DragEvent>(this.backwardScrollArea, 'dragover')
         .pipe(
           tap(event => {event.preventDefault(); event.stopPropagation(); }),
-          throttleTime(100, undefined, {leading: true, trailing: true}))
+          throttleTime(100, undefined, {leading: true, trailing: false}))
         .subscribe(event => this.backwardScrollFn(event)));
+      // 拖拽放置委托
+      this.subscription.add(
+        mergeStatic(
+          fromEvent<DragEvent>(this.forwardScrollArea, 'drop'),
+          fromEvent<DragEvent>(this.backwardScrollArea, 'drop')
+        ).subscribe(event => this.delegateDropEvent(event)));
       // 拖拽离开清除参数
       this.subscription.add(
         mergeStatic(
@@ -110,34 +119,56 @@ export class DropScrollEnhancedDirective implements AfterViewInit, OnDestroy {
     const scrollAttr = (direction === 'v') ? 'scrollTop' : 'scrollLeft';
     const eventAttr = (direction === 'v') ? 'clientY' : 'clientX';
     const scrollWidthAttr = (direction === 'v') ? 'scrollHeight' : 'scrollWidth';
+    const offsetWidthAttr = (direction === 'v') ? 'offsetHeight' : 'offsetWidth';
+    const clientWidthAttr = (direction === 'v') ? 'clientHeight' : 'clientWidth';
     const rectWidthAttr = (direction === 'v') ? 'height' : 'width';
     const compareTarget = (orientation === DropScrollOrientation.forward) ? this.forwardScrollArea : this.backwardScrollArea;
     const targetAttr = this.getCriticalEdge(direction, orientation);
     const scrollElement = this.el.nativeElement;
 
-    return (event: Event) => {
+    return (event: DragEvent) => {
       const compareTargetRect = compareTarget.getBoundingClientRect();
       const distance = event[eventAttr] - compareTargetRect[targetAttr];
       let speed = speedFn(Math.abs(distance / (compareTargetRect[rectWidthAttr] || 1)));
       if (speed < this.minSpeed) { speed = this.minSpeed; }
       if (speed > this.maxSpeed) { speed = this.maxSpeed; }
       if (distance < 0) { speed = - speed; }
-      requestAnimationFrame(() => {
+      if (this.animationFrameId) {
+        window.cancelAnimationFrame(this.animationFrameId);
+        this.animationFrameId = undefined;
+      }
+      this.animationFrameId = requestAnimationFrame(() => {
         const time = new Date().getTime();
         const moveDistance = Math.ceil(speed * (time - (this.lastScrollTime || time)) / 1000);
         scrollElement[scrollAttr] -= moveDistance;
         this.lastScrollTime = time;
         // 判断是不是到尽头
         if ((scrollElement[scrollAttr] === 0 && orientation === DropScrollOrientation.backward)
-        || ((scrollElement[scrollAttr] + (scrollElement.getBoundingClientRect())[rectWidthAttr]) === scrollElement[scrollWidthAttr]
+        || ((scrollElement[scrollAttr]
+          + (scrollElement.getBoundingClientRect())[rectWidthAttr]
+          - scrollElement[offsetWidthAttr]
+          + scrollElement[clientWidthAttr]
+          ) === scrollElement[scrollWidthAttr]
           && orientation === DropScrollOrientation.forward)
         ) {
           compareTarget.style.pointerEvents = 'none';
           this.toggleActiveClass(compareTarget, false);
         }
+        this.animationFrameId = undefined;
       });
+      if (this.backSpaceDroppable) {
+        Utils.dispatchEventToUnderElement(event);
+      }
     };
-
+  }
+  delegateDropEvent(event: DragEvent) {
+    if (this.backSpaceDroppable) {
+      const ev = Utils.dispatchEventToUnderElement(event);
+      if (ev.defaultPrevented) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+    }
   }
   getCriticalEdge(direction: DropScrollDirection, orientation: DropScrollOrientation): DropScrollTriggerEdge {
     return (direction === 'v' && orientation === DropScrollOrientation.forward && 'bottom')
@@ -235,9 +266,17 @@ export class DropScrollEnhancedDirective implements AfterViewInit, OnDestroy {
   toggleScrollToOneEnd(scrollElement: any, toggleElement: HTMLElement, direction: DropScrollDirection, orientation: DropScrollOrientation) {
     const scrollAttr = (direction === 'v') ? 'scrollTop' : 'scrollLeft';
     const scrollWidthAttr = (direction === 'v') ? 'scrollHeight' : 'scrollWidth';
+    const offsetWidthAttr = (direction === 'v') ? 'offsetHeight' : 'offsetWidth';
+    const clientWidthAttr = (direction === 'v') ? 'clientHeight' : 'clientWidth';
     const rectWidthAttr = (direction === 'v') ? 'height' : 'width';
     if ((scrollElement[scrollAttr] === 0 && orientation === DropScrollOrientation.backward) || (
-      Math.abs(scrollElement[scrollAttr] + (scrollElement.getBoundingClientRect())[rectWidthAttr] - scrollElement[scrollWidthAttr]) < 1
+      Math.abs(
+        scrollElement[scrollAttr]
+        + (scrollElement.getBoundingClientRect())[rectWidthAttr]
+        - scrollElement[scrollWidthAttr]
+        - scrollElement[offsetWidthAttr]
+        + scrollElement[clientWidthAttr]
+      ) < 1
       && orientation === DropScrollOrientation.forward
     )) {
       toggleElement.style.pointerEvents = 'none';
@@ -249,6 +288,10 @@ export class DropScrollEnhancedDirective implements AfterViewInit, OnDestroy {
   }
 
   cleanLastScrollTime() {
+    if (this.animationFrameId) {
+      window.cancelAnimationFrame(this.animationFrameId);
+      this.animationFrameId = undefined;
+    }
     this.lastScrollTime = undefined;
   }
 

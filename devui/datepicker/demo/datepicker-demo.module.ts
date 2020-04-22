@@ -7,7 +7,6 @@ import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
 import { DatepickerModule } from 'ng-devui/datepicker';
 import { DatepickerDemoComponent } from './datepicker-demo.component';
-import { DCommonModule } from 'ng-devui/common';
 import { SelectModule } from 'ng-devui/select';
 import { ButtonModule } from 'ng-devui/button';
 
@@ -28,7 +27,6 @@ import { TwoDatepickerBasicComponent } from './two-datepicker-basic/two-datepick
 
 @NgModule({
   imports: [
-    DCommonModule,
     CommonModule,
     FormsModule,
     DatepickerModule,

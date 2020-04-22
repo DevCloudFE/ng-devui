@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit,
-  ViewChild, ElementRef, AfterContentInit, HostBinding } from '@angular/core';
+  ViewChild, ElementRef, AfterContentInit } from '@angular/core';
 import { LoadingType } from 'ng-devui/loading';
 import { Observable } from 'rxjs';
 import { originSource, SourceType } from '../mock-data';

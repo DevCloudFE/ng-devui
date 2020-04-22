@@ -37,11 +37,11 @@ export class TwoDatepickerSingleComponent extends SingleDatepickerComponent impl
   @Input() isAuxiliary = false;
   @Input() currentCalendars = Array(2);
   @Input() whichOpen: any;
-  @Output() hoverOnDate = new EventEmitter();
+  @Output() hoverOnDate = new EventEmitter<any>();
   @Output() rangeSelected = new EventEmitter<SelectDateRangeChangeEventArgs>();
   @Output() rangeSelecting = new EventEmitter<SelectDateRangeChangeEventArgs>();
   @Output() syncPickerPair = new EventEmitter<{}>();
-  @Output() consolidateTime = new EventEmitter();
+  @Output() consolidateTime = new EventEmitter<any>();
   public rangeStart;
   public rangeEnd;
   public previewEnd;
