@@ -19,8 +19,7 @@ export class DatepickerRangeComponent implements OnInit {
   ngOnInit() {
   }
   getValue(value) {
-    // tslint:disable-next-line:no-console
-    console.info(value);
+    console.log(value);
   }
   getDay(num: number, str = '-') {
     const day = new Date();

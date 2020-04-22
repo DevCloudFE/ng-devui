@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { ITreeItem, OperableTreeComponent, TreeNode } from 'ng-devui';
+import { ITreeItem, OperableTreeComponent, TreeNode } from 'ng-devui/tree';
 
 @Component({
   selector: 'd-operate-btn',

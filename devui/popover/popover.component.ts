@@ -35,7 +35,9 @@ export class PopoverComponent
   @Input() popType: PopoverType;
   animateState: string = this.showAnimate ? 'void' : '';
 
-  @HostBinding('style.display') display = 'block';
+  @HostBinding('style.display') get display() {
+    return this.content ? 'block' : 'none';
+  }
   @HostBinding('class') get class() {
     return 'devui-popover ' + this.position + ' devui-popover-' + this.popType;
   }

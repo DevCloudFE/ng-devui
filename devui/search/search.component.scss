@@ -43,6 +43,9 @@ svg.svg-icon-search > g > path {
       line-height: 1.3333333;
       padding-right: 71px;
     }
+    &::-ms-clear {
+      display: none;
+    }
   }
   .icon {
     cursor: pointer;

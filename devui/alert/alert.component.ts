@@ -17,7 +17,7 @@ export class AlertComponent {
   @Input() closeable = true;
   @Input() content: HTMLElement | string;
   @Input() showIcon = true;
-  @Output() closeEvent: EventEmitter<any> = new EventEmitter;
+  @Output() closeEvent: EventEmitter<any> = new EventEmitter<any>();
   @Input() set dismissTime(time) {
     setTimeout(() => {
       this.close();

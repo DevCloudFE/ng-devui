@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
-import { ITreeItem, TreeComponent, TreeNode } from 'ng-devui';
+import { TreeComponent, TreeNode, ITreeItem } from 'ng-devui/tree';
+
 
 @Component({
   selector: 'd-basic',

@@ -8,15 +8,15 @@ import { Component } from '@angular/core';
       margin-right: 5px
     }
     :host ::ng-deep .devui-btn-success {
-      background: #3dcca6;
+      background: #3dcca6 !important;
       color: #fff;
     }
     :host ::ng-deep .devui-btn-warning {
-      background: #fa9841;
+      background: #fa9841 !important;
       color: #fff;
     }
     :host ::ng-deep .devui-btn-danger {
-      background: #f66f6a;
+      background: #f66f6a !important;
       color: #fff;
     }
   `]
@@ -38,5 +38,4 @@ export class BasicComponent {
         this.msgs = [{ severity: type, summary: '摘要', detail: '详细信息，测试换行，测试换行，测试换行，测试换行，测试换行' }];
     }
   }
-
 }

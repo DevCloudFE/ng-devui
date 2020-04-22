@@ -1,6 +1,6 @@
-import { Component, OnInit, HostBinding } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { treeDataSource, SourceType } from '../mock-data';
-import { CheckableRelation } from 'ng-devui/data-table/data-table.model';
+import { CheckableRelation } from 'ng-devui/data-table';
 
 
 @Component({
@@ -49,16 +49,17 @@ export class TreeDataComponent implements OnInit {
   }
 
   loadAllChildrenTable = () => {
+    this.basicDataSource[0].children[0].children[1].children[0].children = [];
     this.basicDataSource[0].children[0].children[1].children[0].children.push({
-      title: 'vue表格',
-      lastName: '张三',
-      status: '已关闭',
+      title: 'table title31',
+      lastName: 'Mark',
+      status: 'done',
       dob: new Date(1989, 1, 1),
     },
     {
-        title: 'vue富文本',
-        lastName: '张三',
-        status: '已关闭',
+        title: 'table title32',
+        lastName: 'Mark',
+        status: 'done',
         dob: new Date(1991, 3, 1)
     });
     return new Promise((resolve) => {

@@ -23,8 +23,9 @@ import { fromEvent, BehaviorSubject, Observable, Subscription, of } from 'rxjs';
 import { tap, map, debounceTime, filter, switchMap } from 'rxjs/operators';
 import { WindowRef } from 'ng-devui/window-ref';
 import { I18nService, I18nInterface } from 'ng-devui/i18n';
-import { VerticalConnectionPos, ConnectedOverlayPositionChange, CdkOverlayOrigin, CdkConnectedOverlay } from '@angular/cdk/overlay';
-import { fadeInOut } from 'ng-devui/utils';
+import { VerticalConnectionPos, ConnectedOverlayPositionChange, CdkOverlayOrigin,
+  CdkConnectedOverlay, ConnectedPosition } from '@angular/cdk/overlay';
+import { fadeInOut, AppendToBodyDirection, AppendToBodyDirectionsConfig } from 'ng-devui/utils';
 
 @Component({
   selector: 'd-select',
@@ -98,6 +99,12 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
    * 【可选】是否appendToBody
    */
   @Input() appendToBody = false;
+    /**
+   * 【可选】cdk模式overlay Positions的控制
+   */
+  @Input() appendToBodyDirections: Array<AppendToBodyDirection | ConnectedPosition> = [
+    'rightDown', 'leftDown', 'rightUp', 'leftUp'
+  ];
   /**
    * 【可选】cdk模式origin width
    */
@@ -168,15 +175,15 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
   /**
    * 输出函数，当选中某个选项项后，将会调用此函数，参数为当前选择项的值。如果需要获取所有选择状态的值，请参考(ngModelChange)方法
    */
-  @Output() valueChange = new EventEmitter();
+  @Output() valueChange = new EventEmitter<any>();
   i18nCommonText: I18nInterface['common'];
   i18nSubscription: Subscription;
   /**
    * select下拉toggle事件，值为true或false
    */
-  @Output() toggleChange = new EventEmitter();
+  @Output() toggleChange = new EventEmitter<any>();
 
-  @Output() loadMore = new EventEmitter();
+  @Output() loadMore = new EventEmitter<any>();
 
   @Input() extraConfig: {
     labelization?: {
@@ -190,7 +197,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
       // 单选情况下，显示选项使用了template的情况下，顶部选中的内容是否也以template展示
       enable: boolean; // 默认值为false
     };
-    [featrue: string]: any;
+    [feature: string]: any;
   };
 
   /**
@@ -213,7 +220,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
   /**
    * customViewTemplate的方向，支持下方和右方
    */
-  @Input() customViewDirection: 'bottom' | 'right' = 'bottom';
+  @Input() customViewDirection: 'bottom' | 'right' | 'left' = 'bottom';
   @Input() autoFocus = false;
   @Input() notAutoScroll = false; // 自动聚焦的时候，自动滚动到select位置
 
@@ -251,6 +258,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
   };
 
   cdkConnectedOverlayOrigin: CdkOverlayOrigin;
+  overlayPositions: Array<ConnectedPosition>;
 
   private sourceSubscription: BehaviorSubject<any>;
   private filterSubscription: Subscription;
@@ -291,6 +299,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
     }
     this.setI18nText();
     this.registerFilterChange();
+    this.setPositions();
   }
 
   ngAfterViewInit() {
@@ -321,6 +330,22 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
   ngOnChanges(changes: SimpleChanges): void {
     if (changes && (changes.searchFn || changes.options)) {
       this.resetSource();
+    }
+    if (changes['appendToBodyDirections']) {
+      this.setPositions();
+    }
+  }
+  setPositions() {
+    if (this.appendToBodyDirections && this.appendToBodyDirections.length > 0) {
+      this.overlayPositions = this.appendToBodyDirections.map(position => {
+        if (typeof position === 'string') {
+          return AppendToBodyDirectionsConfig[position];
+        } else {
+          return position;
+        }
+      }).filter(position => position !== undefined);
+    } else {
+      this.overlayPositions = undefined;
     }
   }
 
@@ -699,7 +724,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
       : [];
 
     if (mutableOption && mutableOption.length > (this.multiItems.length - selectedImmutableOption.length)) {
-      mutableOption.map(item => {
+      mutableOption.forEach(item => {
         const indexOfOption = this.multiItems
           .findIndex(i => JSON.stringify(i.option) === JSON.stringify(item.option));
         if (indexOfOption === -1) {
@@ -790,5 +815,10 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
     this.activeIndex = -1;
     this.selectIndex  = -1;
     this.changeDetectorRef.markForCheck();
+  }
+
+  clearText() {
+    this.filter = '';
+    this.forceSearchNext();
   }
 }

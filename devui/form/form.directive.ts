@@ -7,7 +7,7 @@ import {
     HostBinding,
 } from '@angular/core';
 
-enum FormLayout {
+export enum FormLayout {
     Horizontal = 'horizontal',
     Vertical = 'vertical',
     columns = 'columns',

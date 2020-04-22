@@ -4,13 +4,15 @@ import { DroppableDirective } from './droppable.directive';
 import { DragDropSyncService } from '../services/drag-drop-sync.service';
 import { Utils } from '../shared/utils';
 import { DragPlaceholderInsertionEvent, DragPlaceholderInsertionIndexEvent } from './placeholder-insertion-event.type';
+import { DescendantChildren } from '../services/drag-drop-desc-reg.service';
+import { DropSortSyncDescendantRegisterService } from '../services/drag-drop-descendant-sync.service';
 
 @Directive({
   selector: '[dDropSortSync]',
   exportAs: 'dDropSortSync'
 })
 
-export class DropSortSyncDirective implements OnInit, OnDestroy {
+export class DropSortSyncDirective extends DescendantChildren<DropSortSyncDirective> implements OnInit, OnDestroy {
   @Input('dDropSortSync') dropSyncGroup = '';
   @Input('dropSyncDirection') direction: 'v'| 'h' = 'v'; // 与sortContainer正交的方向
   subscription: Subscription = new Subscription();
@@ -18,8 +20,15 @@ export class DropSortSyncDirective implements OnInit, OnDestroy {
   placeholder: HTMLElement;
   sortContainer: HTMLElement;
 
-  constructor(public el: ElementRef , @Optional() @Self() private droppable: DroppableDirective,
-    private dragDropSyncService: DragDropSyncService) {}
+  constructor(
+    public el: ElementRef,
+    @Optional() @Self() private droppable: DroppableDirective,
+    private dragDropSyncService: DragDropSyncService,
+    private dropSortSyncDrs: DropSortSyncDescendantRegisterService,
+  ) {
+    super(dropSortSyncDrs);
+    this.descendantItem = this;
+  }
 
   ngOnInit() {
     this.sortContainer = this.el.nativeElement;
@@ -31,12 +40,14 @@ export class DropSortSyncDirective implements OnInit, OnDestroy {
         this.droppable.placeholderRenderEvent.subscribe(this.subRenderEvent)
       );
     }
+    super.ngOnInit();
   }
 
   ngOnDestroy() {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
+    super.ngOnDestroy();
   }
   subRenderEvent = (nativeStyle: {width: number, height: number}) => {
     this.syncGroupDirectives = this.dragDropSyncService.getDropSyncByGroup(this.dropSyncGroup).filter(directive => directive !== this);

@@ -19,7 +19,9 @@ export class FormDemoComponent {
   ModalSource: Array<DevuiSourceData> = [
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./modal/modal.component.ts')},
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./modal/modal.component.html') },
-    { title: 'CSS', language: 'css', code: require('!!raw-loader!./modal/modal.component.css') }
+    { title: 'CSS', language: 'css', code: require('!!raw-loader!./modal/modal.component.css') },
+    { title: 'ModalOne HTML', language: 'xml', code: require('!!raw-loader!./modal-one/modal-one.component.html') },
+    { title: 'ModalOne TS', language: 'typescript', code: require('!!raw-loader!./modal-one/modal-one.component.ts') }
   ];
   MultiColSource: Array<DevuiSourceData> = [
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./multi-col/multi-col.component.ts')},

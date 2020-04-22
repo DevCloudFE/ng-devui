@@ -64,7 +64,7 @@ export const routesConfig = [
     component: ExamplePanelComponent,
     loadChildren: () => import('../../../devui/avatar/demo/avatar-demo.module').then(m => m.AvatarDemoModule),
     data: {
-      type:'数据展示',
+      type: '数据展示',
       name: 'Avatar',
       cnName: '头像',
       description: '设置头像',
@@ -135,7 +135,8 @@ export const routesConfig = [
   {
     path: 'multi-auto-complete',
     component: ExamplePanelComponent,
-    loadChildren: () => import('../../../devui/multi-auto-complete/demo/multi-auto-complete-demo.module').then(m => m.MultiAutoCompleteDemoModule),
+    loadChildren: () => import('../../../devui/multi-auto-complete/demo/multi-auto-complete-demo.module').
+      then(m => m.MultiAutoCompleteDemoModule),
     data: {
       type: '数据录入',
       name: 'MultiAutoComplete',
@@ -209,7 +210,7 @@ export const routesConfig = [
     component: ExamplePanelComponent,
     loadChildren: () => import('../../../devui/dropdown/demo/dropdown-demo.module').then(m => m.DropdownDemoModule),
     data: {
-      type:'导航',
+      type: '导航',
       name: 'DropDown',
       cnName: '下拉菜单',
       description: '按向下弹出的列表。',
@@ -258,7 +259,7 @@ export const routesConfig = [
     component: ExamplePanelComponent,
     loadChildren: () => import('../../../devui/pagination/demo/pagination-demo.module').then(m => m.PaginationDemoModule),
     data: {
-      type:'导航',
+      type: '导航',
       name: 'Pagination',
       cnName: '分页',
       description: '采用分页的形式分隔长列表，每次只加载一个页面。',
@@ -281,7 +282,7 @@ export const routesConfig = [
     component: ExamplePanelComponent,
     loadChildren: () => import('../../../devui/popover/demo/popover-demo.module').then(m => m.PopoverDemoModule),
     data: {
-      type:'反馈',
+      type: '反馈',
       name: 'Popover',
       cnName: '悬浮提示',
       description: '简单的文字提示气泡框。popover用来通知用户非关键性问题或提示某控件处于某特殊情况。',
@@ -293,7 +294,7 @@ export const routesConfig = [
     component: ExamplePanelComponent,
     loadChildren: () => import('../../../devui/progress/demo/progress-demo.module').then(m => m.ProgressDemoModule),
     data: {
-      type:'数据展示',
+      type: '数据展示',
       name: 'Progress',
       cnName: '进度条',
       description: '进度条，用来展示操作的当前进度。',
@@ -319,7 +320,7 @@ export const routesConfig = [
     component: ExamplePanelComponent,
     loadChildren: () => import('../../../devui/rate/demo/rate-demo.module').then(m => m.RateDemoModule),
     data: {
-      type:'数据展示',
+      type: '数据展示',
       name: 'Rate',
       cnName: '等级评估',
       description: '等级评估',
@@ -424,7 +425,7 @@ export const routesConfig = [
     component: ExamplePanelComponent,
     loadChildren: () => import('../../../devui/tooltip/demo/tooltip-demo.module').then(m => m.TooltipDemoModule),
     data: {
-      type:'反馈',
+      type: '反馈',
       name: 'Tooltip',
       cnName: '提示',
       description: '文字提示组件',

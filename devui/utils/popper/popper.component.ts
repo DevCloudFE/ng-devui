@@ -53,7 +53,7 @@ export class PopperComponent implements AfterViewInit, OnDestroy {
   protected popperNode;
   protected popperParent;
 
-  @Output() openChange = new EventEmitter();
+  @Output() openChange = new EventEmitter<any>();
   @ViewChild('popperActivator', { static: true }) popperActivator: ElementRef;
   @ViewChild('popperContainer', { static: true }) popperContainer: ElementRef;
 

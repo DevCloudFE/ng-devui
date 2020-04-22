@@ -1,6 +1,7 @@
+// 注意需要在使用的NgModule中 import { HttpClientModule  } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { IFileOptions, IUploadOptions } from 'ng-devui';
+import { IFileOptions, IUploadOptions } from 'ng-devui/upload';
 
 @Component({
   selector: 'd-basic',

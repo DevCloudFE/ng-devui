@@ -101,7 +101,7 @@ export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterV
   @ViewChild('popper', { static: true }) popper;
   @ContentChild('iconTemplate', { static: false }) iconTemplatePassThrough;
 
-  @Output() valueChanged = new EventEmitter();
+  @Output() valueChanged = new EventEmitter<any>();
   checkboxInput: ICheckboxInput;
   _treeData: Array<ITreeItem> = [];
   value: object | Array<any>;

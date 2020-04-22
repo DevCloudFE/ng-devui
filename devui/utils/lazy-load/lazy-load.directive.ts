@@ -8,7 +8,7 @@ export class LazyLoadDirective implements OnDestroy, OnChanges {
   // 启用懒加载，默认不启用
   @Input() enableLazyLoad = false;
   // 加载更多
-  @Output() loadMore = new EventEmitter();
+  @Output() loadMore = new EventEmitter<any>();
 
   scrollSubscription: Subscription;
 

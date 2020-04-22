@@ -19,15 +19,12 @@ export class TwoDatepickerBasicComponent implements OnInit {
   }
 
   selectStart(value) {
-    // tslint:disable-next-line:no-console
-    console.info('start', value);
+    console.log('start', value);
   }
   selectEnd(value) {
-    // tslint:disable-next-line:no-console
-    console.info('end', value);
+    console.log('end', value);
   }
   selectRange(value) {
-    // tslint:disable-next-line:no-console
-    console.info(value);
+    console.log(value);
   }
 }

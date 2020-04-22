@@ -16,6 +16,10 @@
     }
     &.devui-page-size-lg {
       max-width: 100px;
+      li a.devui-pagination-link {
+        height: 46px;
+        line-height: 46px;
+      }
     }
   }
 
@@ -28,8 +32,7 @@
 
   .devui-pagination-list {
     display: inline-block;
-    margin: 20px 0;
-
+    vertical-align: middle;
     > .disabled > a,
     > .disabled > a:hover,
     > .disabled > a:focus {
@@ -69,7 +72,7 @@
 
     .devui-pagination-link {
       svg {
-        vertical-align: bottom;
+        vertical-align: middle;
         g polygon {
           fill: $dark-1;
         }
@@ -101,22 +104,28 @@
 
   .devui-pagination-list > li:first-child > a,
   .devui-pagination-list > li:last-child > a {
-    padding: 4px 11px;
+    padding: 7px 11px;
+    height: 32px;
+    line-height: 32px;
     border-radius: 1px;
     border: 1px solid $gray-1;
   }
 
   .devui-pagination-sm > li:first-child > a,
   .devui-pagination-sm > li:last-child > a {
-    padding: 3px 4px;
+    padding: 6px 4px;
     border-radius: 1px;
+    height: 30px;
+    line-height: 30px;
     border: 1px solid $gray-1;
   }
 
   .devui-pagination-lg > li:first-child > a,
   .devui-pagination-lg > li:last-child > a {
-    padding: 8px 16px;
+    padding: 13px 16px;
     border-radius: 1px;
+    height: 46px;
+    line-height: 46px;
     border: 1px solid $gray-1;
   }
 
@@ -124,9 +133,10 @@
     display: inline-block;
     position: relative;
     margin: 0 10px 0 10px;
+    vertical-align: middle;
     .devui-input {
       display: inline-block;
-      width: 50px;
+      width: 3.5em;
       margin-right: 5px;
     }
   }
@@ -167,15 +177,19 @@
   }
 
   .devui-jump-size-sm {
-    width: 24px;
-    height: 24px;
+    width: 30px;
+    height: 30px;
     .devui-pagination-go {
       width: 0;
       height: 0;
       border-top: 8px solid transparent;
       border-left: 8px solid $dark-2;
       border-bottom: 8px solid transparent;
-      margin: 3px auto;
+      margin: 6px auto;
+    }
+    .devui-pagination-link {
+      height: 30px;
+      line-height: 32px;
     }
   }
 
@@ -283,12 +297,9 @@
   }
 }
 :host ::ng-deep .devui-input-sm {
-  height: 24px;
-  padding: 5px 5px;
-  font-size: 14px;
-  line-height: 18px;
-  border-radius: 0;
+  height: 30px;
 }
-:host ::ng-deep .devui-select-sm {
-  min-height: 24px;
+
+:host ::ng-deep .devui-input-lg {
+  height: 46px;
 }

@@ -11,7 +11,7 @@ export class BatchDraggableDirective implements OnInit, OnChanges, OnDestroy, Af
   @Input() batchDragGroup = 'default';
   @Input() batchDragActive = false;
   @Input() batchDragLastOneAutoActiveEventKeys = ['ctrlKey'];
-  @Output() batchDragActiveEvent = new EventEmitter();
+  @Output() batchDragActiveEvent = new EventEmitter<any>();
   dragData;
   needToRestore = false;
   @Input() batchDragStyle: Array<BatchDragStyle> = ['badge', 'stack'];

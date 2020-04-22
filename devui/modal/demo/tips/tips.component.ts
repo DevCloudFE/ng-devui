@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DialogService } from 'ng-devui';
+import { DialogService } from 'ng-devui/modal';
 
 @Component({
   selector: 'd-tips',

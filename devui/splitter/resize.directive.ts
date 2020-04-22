@@ -7,11 +7,11 @@ export class ResizeDirective implements OnInit, OnDestroy {
   // 是否允许拖动
   @Input() enableResize = true;
   // 按下事件，mousedown，touchstart等
-  @Output() pressEvent = new EventEmitter();
+  @Output() pressEvent = new EventEmitter<any>();
   // 拖动中事件，mousemove，touchmove等
-  @Output() dragEvent = new EventEmitter();
+  @Output() dragEvent = new EventEmitter<any>();
  // 释放事件，mouseup，touchend等
-  @Output() releaseEvent = new EventEmitter();
+  @Output() releaseEvent = new EventEmitter<any>();
   constructor(private el: ElementRef, private ngZone: NgZone) {}
 
   ngOnInit() {

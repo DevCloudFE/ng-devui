@@ -45,7 +45,7 @@ export class EditableSelectComponent implements ControlValueAccessor, OnInit, On
   @Input() disabledKey: string;
   @Input() searchFn: (term: string) => Observable<any[]>;
   @Input() enableLazyLoad = false;
-  @Output() loadMore = new EventEmitter();
+  @Output() loadMore = new EventEmitter<any>();
   @ViewChild(AutoCompleteDirective, { static: true }) autoCompleteDirective: AutoCompleteDirective;
   multiItems: any[] = [];
   inputValue: any;

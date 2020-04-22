@@ -1,5 +1,5 @@
 import { Component, AfterViewInit, ElementRef, ChangeDetectorRef } from '@angular/core';
-import { DialogService } from 'ng-devui/modal/dialog.service';
+import { DialogService } from 'ng-devui/modal';
 import { TabsTransferComponent } from './tabs-transfer/tabs-transfer.component';
 @Component({
     selector: 'd-configurable',

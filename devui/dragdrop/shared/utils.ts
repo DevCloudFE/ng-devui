@@ -111,4 +111,25 @@ export class Utils {
       }
     }
   }
+  public static dispatchEventToUnderElement(event: DragEvent, target?: HTMLElement, eventType?: string) {
+    const up = target || <HTMLElement>(event.target);
+    up.style.display = 'none';
+    const {x, y} = {x: event.clientX, y: event.clientY};
+    const under = document.elementFromPoint(x, y);
+    up.style.display = '';
+    if (!under) {
+      return event;
+    }
+    const ev = document.createEvent('DragEvent');
+    ev.initMouseEvent(eventType || event.type, true, true, window, 0,
+      event.screenX, event.screenY, event.clientX, event.clientY,
+      event.ctrlKey, event.altKey, event.shiftKey, event.metaKey,
+      event.button, event.relatedTarget);
+    if (ev.dataTransfer !== null) {
+      ev.dataTransfer.setData('text', '');
+      ev.dataTransfer.effectAllowed = event.dataTransfer.effectAllowed;
+    }
+    under.dispatchEvent(ev);
+    return event;
+  }
 }

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { DialogService } from 'ng-devui';
+import { DialogService } from 'ng-devui/modal';
 @Component({
     selector: 'd-autofocus',
     templateUrl: './autofocus.component.html'

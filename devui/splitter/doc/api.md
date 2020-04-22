@@ -14,7 +14,8 @@
 | maxSize | `string`    | --        |可选，指定pane最大宽度，设置像素值或者百分比|
 | resizable | `boolean`    | true       |可选，指定pane是否可调整大小，会影响相邻pane|
 | collapsible | `boolean`    | false       |可选，指定pane是否可折叠收起|
-| collapseDirection | `'before'\|'after'\|'both'`   | 'both'       |可选，指定非边缘pane收起方向，配合collapsible使用|
+| collapsed | `boolean`    | false       |可选，指定pane初始化是否收起，配合`collapsible`使用|
+| collapseDirection | `'before'\|'after'\|'both'`   | 'both'       |可选，指定非边缘pane收起方向，配合`collapsible`使用|
 
 ## d-splitter-pane事件
 | 事件        | 类型          |  说明       |

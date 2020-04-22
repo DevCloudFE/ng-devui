@@ -29,7 +29,7 @@ export class MultipleUploadViewComponent extends UploadComponent implements OnDe
   @Input() uploadedFiles: Array<Object> = [];
   @Input() uploadedFilesRef: TemplateRef<any>;
   @Input() filePath: string;
-  @Output() deleteUploadedFileEvent: EventEmitter<any> = new EventEmitter();
+  @Output() deleteUploadedFileEvent: EventEmitter<any> = new EventEmitter<any>();
   UploadStatus = UploadStatus;
   fileUploaders: Array<FileUploader> = [];
   i18nText: I18nInterface['upload'];

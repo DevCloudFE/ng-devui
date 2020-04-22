@@ -45,10 +45,10 @@
 
 <ng-template #scrollViewTpl>
   <cdk-virtual-scroll-viewport
-    [ngStyle]="{ height: maxHeight }"
-    [itemSize]="40"
+    autosize
     class="devui-scrollbar table-wrap viewport-wrapper"
     [ngClass]="{ 'scroll-view': scrollable }"
+    [style.height]="maxHeight"
     [style.max-height]="maxHeight ? maxHeight : null"
     [style.max-width]="maxWidth ? maxWidth : null"
     [style.width]="!maxWidth ? tableWidth : null"
@@ -149,30 +149,4 @@
     <tfoot *ngIf="footTemplate" dDataTableFoot [footTemplate]="footTemplate"></tfoot>
     <div #resizeBar class="resize-bar"></div>
   </table>
-</ng-template>
-
-<ng-template #fixColumnHeaderTemplate>
-  <thead
-    dDataTableHead
-    [resizeBarRefElement]="resizeBarRefElement"
-    [tableViewRefElement]="tableViewRefElement"
-    [multiSort]="multiSort"
-    [columns]="_columns"
-    [headTemplate]="headTemplate"
-    [pager]="pager"
-    [pageAllChecked]="_pageAllChecked"
-    [checkable]="checkable"
-    [showExpandToggle]="showExpandToggle"
-    [showSortIcon]="showSortIcon"
-    (onResizeHandler)="onResizeHandler($event)"
-    (onHeadClickSort)="onHandleSort($event)"
-    [halfChecked]="halfChecked"
-    [tableBodyEl]="tableBodyEl"
-    [maxHeight]="maxHeight"
-    (beginResizeHandlerEvent)="beginResizeHandlerEvent($event)"
-    (resizingHandlerEvent)="onResizingFixedHandler($event)"
-    [fixHeader]="fixHeader"
-    (dragTableEndEvent)="handleDragTable($event)"
-    [dataSource]="dataSource"
-  ></thead>
 </ng-template>

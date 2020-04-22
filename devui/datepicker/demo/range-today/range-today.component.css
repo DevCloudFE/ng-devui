@@ -21,3 +21,8 @@ div.singleTemplate:not(:last-child) {
 .input-group:not(:last-child) {
   margin-bottom: 20px;
 }
+
+.devui-input-group-addon {
+  vertical-align: middle;
+  padding-top: 4px;
+}

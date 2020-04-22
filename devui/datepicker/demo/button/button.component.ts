@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, HostBinding, OnInit } from '@angula
 
 @Component({
   selector: 'd-datepicker-button',
+  styleUrls: [`./button.component.css`],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './button.component.html'
 })

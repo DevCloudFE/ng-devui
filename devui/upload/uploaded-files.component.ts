@@ -19,7 +19,7 @@ export class UploadedFilesComponent implements OnDestroy {
   @Input() uploadedFiles: Array<Object> = [];
   @Input() uploadedFilesRef: TemplateRef<any>;
   @Input() filePath: string;
-  @Output() deleteUploadedFileEvent: EventEmitter<any> = new EventEmitter();
+  @Output() deleteUploadedFileEvent: EventEmitter<any> = new EventEmitter<any>();
   i18nText: I18nInterface['upload'];
   i18nSubscription: Subscription;
   constructor(private i18n: I18nService) {

@@ -7,7 +7,7 @@ import { Directive, EventEmitter, ElementRef, HostListener, Input, Output } from
 export class FileDropDirective {
   @Input() enableDrop = false;
   @Input() isSingle = false;
-  @Output() public fileOver: EventEmitter<any> = new EventEmitter();
+  @Output() public fileOver: EventEmitter<any> = new EventEmitter<any>();
   @Output() public fileDrop: EventEmitter<File[]> = new EventEmitter<File[]>();
 
   protected element: ElementRef;

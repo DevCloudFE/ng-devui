@@ -39,8 +39,7 @@ export class DropDownMenuDirective implements OnInit {
           return;
         }
         if (this.player) { // 此处保留一个防止点击过快
-          this.player.destroy();
-          this.player = undefined;
+          this.player.finish();
         }
         if (value) {
           this.render.setStyle(this.el.nativeElement, 'display', 'block');
@@ -49,14 +48,17 @@ export class DropDownMenuDirective implements OnInit {
         const metadata = value ? this.fadeIn(direction) : this.fadeOut(direction);
         const factory = this.builder.build(metadata);
         this.player = factory.create(this.el.nativeElement);
-        this.player.play();
+        const player = this.player;
         this.player.onDone(() => {
           if (!value) {
             this.render.setStyle(this.el.nativeElement, 'display', 'none');
           }
-          this.player.destroy();
-          this.player = undefined;
+          player.destroy();
+          if (this.player === player) {
+            this.player = undefined;
+          }
         });
+        this.player.play();
       }
     });
   }

@@ -20,6 +20,7 @@ module.exports = {
     'type-empty': [2, 'never'],
     'type-enum': [2, 'always', types],
     'scope-case': [0, 'always'],
-    'subject-empty': [2, 'never']
+    'subject-empty': [2, 'never'],
+    'subject-case': [0, 'never']
   }
 };

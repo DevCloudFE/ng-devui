@@ -67,7 +67,6 @@
       background-color: $bg-white;
       th {
         text-align: left;
-        position: relative;
         background-clip: padding-box !important;
         $drag-icon-size: 16px;
         $drag-icon-margin-right: 2px;
@@ -76,25 +75,19 @@
         $half-sort-icon: 8px;
         $childtable-toggler-icon: 20px;
         $negative-half-sort-icon-size: -($sort-clickable-area + $half-sort-icon); // 排序图标的大小为16 * 16 px，所以图标需要移动8px，让图标的一半显示在标题头外
-        vertical-align: middle;
         border-bottom-width: 1px;
         border-bottom: 1px solid $gray-1;
         display: table-cell;
         padding: 0;
-        padding-left: 2px;
-        padding-right: 8px;
         font-size: 0;
         background-color: inherit;
         .drag-icon {
           display: inline-block;
-          vertical-align: middle;
           margin-right: $drag-icon-margin-right;
           visibility: hidden;
         }
 
         .drag-icon + .childtable-toggler {
-          padding-right: 4px;
-          vertical-align: middle;
           > .customized-icon {
             font-size: 14px;
           }
@@ -179,7 +172,18 @@
         &.devui-sticky-left-cell,
         &.devui-sticky-right-cell {
           position: sticky;
-          z-index: 1;
+          z-index: 5;
+        }
+        & .header-container {
+          position: relative;
+          display: -webkit-box;
+          display: -moz-box;
+          display: -ms-flexbox;
+          display: -webkit-flex;
+          display: flex;
+          align-items: center;
+          padding-left: 2px;
+          padding-right: 8px;
         }
       }
       .sort-active {
@@ -194,7 +198,6 @@
       background: $brand-3;
     }
     > td {
-      position: relative;
       background-clip: padding-box;
       vertical-align: middle;
       padding: 7px 8px 8px 20px;
@@ -221,17 +224,13 @@
       &.devui-sticky-left-cell,
       &.devui-sticky-right-cell {
         position: sticky;
-        z-index: 1;
+        z-index: 5;
       }
 
       a {
         color: $dark-1;
       }
     }
-  }
-  th,
-  td {
-    position: relative;
   }
   th:first-child,
   td:first-child {
@@ -272,6 +271,14 @@
 .devui-table.table-striped ::ng-deep {
   tbody > tr:nth-of-type(odd) {
     background: $gray-3;
+  }
+}
+
+.devui-table.table-borderless ::ng-deep {
+  tbody > tr {
+    > td {
+      border-bottom: none;
+    }
   }
 }
 
@@ -319,6 +326,7 @@
 
 :host ::ng-deep .childtable-toggler {
   cursor: pointer;
+  padding-right: 4px;
   & > svg {
     vertical-align: middle;
     & > g > path {
@@ -383,7 +391,7 @@
   display: flex;
 }
 
-:host ::ng-deep .sindu_handle > .drag-icon {
+:host ::ng-deep .sindu_handle > .header-container > .drag-icon {
   cursor: move;
 }
 

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IFileOptions, IUploadOptions } from 'ng-devui';
+import { IFileOptions, IUploadOptions } from 'ng-devui/upload';
 
 @Component({
   selector: 'd-customize',

@@ -22,7 +22,7 @@ export class StickyComponent implements OnInit, AfterViewInit, OnDestroy {
     };
     @Input() scrollTarget;
 
-    @Output() statusChange: EventEmitter<StickyStatus> = new EventEmitter();
+    @Output() statusChange: EventEmitter<StickyStatus> = new EventEmitter<StickyStatus>();
     @ViewChild('stickyWrapper', { static: true }) wrapper;
 
     _prevStatus: StickyStatus = undefined;

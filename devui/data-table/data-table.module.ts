@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { ScrollingModule as ExperimentalScrollingModule } from '@angular/cdk-experimental/scrolling';
 
 import { DataTableComponent } from './data-table.component';
 import { DataTableColumnTmplComponent } from './tmpl/data-table-column-tmpl.component';
@@ -50,7 +51,8 @@ import { DragDropModule } from 'ng-devui/dragdrop';
     TreeSelectModule,
     SafePipeModule,
     TooltipModule,
-    DragDropModule
+    DragDropModule,
+    ExperimentalScrollingModule
   ],
   exports: [
     DataTableComponent,

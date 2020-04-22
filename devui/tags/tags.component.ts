@@ -25,7 +25,7 @@ export class TagsComponent {
   /**
    * tag被删除后触发
    */
-  @Output() tagDelete = new EventEmitter();
+  @Output() tagDelete = new EventEmitter<any>();
 
   removeTag(tag, index) {
     this.tagDelete.emit({ tag: tag, index: index });

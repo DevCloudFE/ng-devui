@@ -1,5 +1,5 @@
 <section>
-  <d-tabs [type]="'tabs'" [(activeTab)]="tab1acticeID">
+  <d-tabs [type]="'tabs'" [(activeTab)]="tab1acticeID" (activeTabChange)="activeTabChange($event)">
     <d-tab id="tab1" title="Tab1" tabId="tab1">
       <ng-template dTabContent>
         <p>

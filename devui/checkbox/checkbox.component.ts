@@ -38,7 +38,7 @@ export class CheckBoxComponent implements ControlValueAccessor, OnChanges {
   @Input() labelTemplate: TemplateRef<any>;
   @Input() halfchecked = false;
   @Input() showAnimation = true;
-  @Output() change: EventEmitter<boolean> = new EventEmitter();
+  @Output() change: EventEmitter<boolean> = new EventEmitter<boolean>();
   public animationUnlocked = false;
   public id: number;
   public checked: boolean;

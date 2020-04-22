@@ -19,14 +19,14 @@ import { Observable } from 'rxjs';
   exportAs: 'tabs'
 })
 export class TabsComponent implements OnInit, AfterContentInit {
-  @Input() type: 'tabs'| 'pills' | 'options' = 'tabs';
+  @Input() type: 'tabs' | 'pills' | 'options' = 'tabs';
   @Input() showContent = true;
-  @Input() activeTab: number |string;
+  @Input() activeTab: number | string;
   @Input() vertical = false;
   @Input() cssClass: string;
   @Input() customWidth: string;
   @ContentChildren(TabComponent) tabs: QueryList<TabComponent>;
-  @Output() activeTabChange = new EventEmitter<number| string>();
+  @Output() activeTabChange = new EventEmitter<number | string>();
   @Input() beforeChange: (value) => boolean | Promise<boolean> | Observable<boolean>;
   constructor() {
   }
@@ -58,6 +58,9 @@ export class TabsComponent implements OnInit, AfterContentInit {
   }
 
   select(id: number | string) {
+    if (this.activeTab === id) {
+      return;
+    }
     this.canChange(id).then((change) => {
       if (!change) {
         return;

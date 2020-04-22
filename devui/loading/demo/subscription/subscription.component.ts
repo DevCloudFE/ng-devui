@@ -4,7 +4,7 @@ import {
 import { of } from 'rxjs';
 
 import { delay } from 'rxjs/operators';
-import { LoadingType } from 'ng-devui/loading/loading.types';
+import { LoadingType } from 'ng-devui/loading';
 
 
 

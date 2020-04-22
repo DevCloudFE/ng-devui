@@ -3,8 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   ModalDemoComponent,
-  ModalTestComponent,
-  ModalFormComponent
+
 } from './modal-demo.component';
 import { ModalAlertComponent } from './customize/modal-alert.component';
 import { ModalModule } from '../modal.module';
@@ -18,6 +17,8 @@ import { TipsComponent } from './tips/tips.component';
 import { HideComponent } from './hide/hide.component';
 import { WarningComponent } from './warning/warning.component';
 import { AutofocusComponent } from './autofocus/autofocus.component';
+import { ModalTestComponent } from './basic/modal-test.component';
+import { ModalFormComponent } from './hide/modal-form.component';
 
 @NgModule({
   imports: [
@@ -27,11 +28,13 @@ import { AutofocusComponent } from './autofocus/autofocus.component';
     DevUICodeboxModule,
     DevUIApiModule,
     RouterModule.forChild([
-    { path: '',  redirectTo: 'demo' },
-    { path: 'demo', component: ModalDemoComponent},
-    { path: 'api', component: DevUIApiComponent, data: {
-      api: require('!html-loader!markdown-loader!../doc/api.md')
-    }}
+      { path: '', redirectTo: 'demo' },
+      { path: 'demo', component: ModalDemoComponent },
+      {
+        path: 'api', component: DevUIApiComponent, data: {
+          api: require('!html-loader!markdown-loader!../doc/api.md')
+        }
+      }
     ])
   ],
   declarations: [

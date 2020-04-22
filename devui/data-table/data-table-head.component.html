@@ -53,484 +53,14 @@
       [style.width]="column.width || ''"
       [minWidth]="column.minWidth"
       [maxWidth]="column.maxWidth"
-      (resize)="onResize($event, column, true)"
+      (resizeEvent)="onResize($event, column, true)"
       [unresizable]="column.unresizable"
-      (beginResize)="beginResize($event)"
+      (beginResizeEvent)="onBeginResize($event)"
       (resizingEvent)="onResizing($event, column)"
       [style.left]="column.fixedLeft ? column.fixedLeft : null"
       [style.right]="column.fixedRight ? column.fixedRight : null"
     >
-      <ng-container>
-        <i class="drag-icon" (mousedown)="onTap($event)">
-          <svg
-            width="16px"
-            height="16px"
-            viewBox="0 0 16 16"
-            version="1.1"
-            xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink"
-          >
-            <g id="icon_drag-default" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-              <path
-                d="M4.5,1.5 L5.5,1.5 C6.05228475,1.5 6.5,1.94771525 6.5,2.5 L6.5,3.5 C6.5,4.05228475 6.05228475,4.5 5.5,4.5 L4.5,4.5 C3.94771525,4.5 3.5,4.05228475 3.5,3.5 L3.5,2.5 C3.5,1.94771525 3.94771525,1.5 4.5,1.5 Z M10.5,1.5 L11.5,1.5 C12.0522847,1.5 12.5,1.94771525 12.5,2.5 L12.5,3.5 C12.5,4.05228475 12.0522847,4.5 11.5,4.5 L10.5,4.5 C9.94771525,4.5 9.5,4.05228475 9.5,3.5 L9.5,2.5 C9.5,1.94771525 9.94771525,1.5 10.5,1.5 Z M4.5,6.5 L5.5,6.5 C6.05228475,6.5 6.5,6.94771525 6.5,7.5 L6.5,8.5 C6.5,9.05228475 6.05228475,9.5 5.5,9.5 L4.5,9.5 C3.94771525,9.5 3.5,9.05228475 3.5,8.5 L3.5,7.5 C3.5,6.94771525 3.94771525,6.5 4.5,6.5 Z M10.5,6.5 L11.5,6.5 C12.0522847,6.5 12.5,6.94771525 12.5,7.5 L12.5,8.5 C12.5,9.05228475 12.0522847,9.5 11.5,9.5 L10.5,9.5 C9.94771525,9.5 9.5,9.05228475 9.5,8.5 L9.5,7.5 C9.5,6.94771525 9.94771525,6.5 10.5,6.5 Z M4.5,11.5 L5.5,11.5 C6.05228475,11.5 6.5,11.9477153 6.5,12.5 L6.5,13.5 C6.5,14.0522847 6.05228475,14.5 5.5,14.5 L4.5,14.5 C3.94771525,14.5 3.5,14.0522847 3.5,13.5 L3.5,12.5 C3.5,11.9477153 3.94771525,11.5 4.5,11.5 Z M10.5,11.5 L11.5,11.5 C12.0522847,11.5 12.5,11.9477153 12.5,12.5 L12.5,13.5 C12.5,14.0522847 12.0522847,14.5 11.5,14.5 L10.5,14.5 C9.94771525,14.5 9.5,14.0522847 9.5,13.5 L9.5,12.5 C9.5,11.9477153 9.94771525,11.5 10.5,11.5 Z"
-                id="Combined-Shape-Copy-10"
-                fill="#C7CAD0"
-              ></path>
-            </g>
-          </svg>
-        </i>
-      </ng-container>
-
-      <ng-container *ngIf="column.nestedColumn && column.extraOptions?.showHeadTableToggler">
-        <span class="childtable-toggler" (click)="toggleChildrenTable()">
-          <ng-container *ngIf="childrenTableOpen">
-            <svg
-              *ngIf="!column.extraOptions?.iconFoldTable"
-              class="svg-icon-close-folder"
-              width="16px"
-              height="16px"
-              viewBox="0 0 16 16"
-              version="1.1"
-              xmlns="http://www.w3.org/2000/svg"
-              xmlns:xlink="http://www.w3.org/1999/xlink"
-            >
-              <g id="h-closeFolder" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                <path
-                  d="M3,2 L13,2 C13.5522847,2 14,2.44771525 14,3 L14,13 C14,13.5522847 13.5522847,14 13,14 L3,14 C2.44771525,14 2,13.5522847 2,13 L2,3 C2,2.44771525 2.44771525,2 3,2 Z M12,7 L4,7 L4,9 L12,9 L12,7 Z"
-                  fill="#293040"
-                  fill-rule="nonzero"
-                ></path>
-              </g>
-            </svg>
-            <span
-              class="customized-icon"
-              *ngIf="column.extraOptions?.iconFoldTable"
-              [innerHTML]="column.extraOptions?.iconFoldTable | safe: 'html'"
-            ></span>
-          </ng-container>
-          <ng-container *ngIf="!childrenTableOpen">
-            <svg
-              *ngIf="!column.extraOptions?.iconUnFoldTable"
-              class="svg-icon-open-folder"
-              width="16px"
-              height="16px"
-              viewBox="0 0 16 16"
-              version="1.1"
-              xmlns="http://www.w3.org/2000/svg"
-              xmlns:xlink="http://www.w3.org/1999/xlink"
-            >
-              <g id="h-openFolder" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                <path
-                  d="M3,2 L13,2 C13.5522847,2 14,2.44771525 14,3 L14,13 C14,13.5522847 13.5522847,14 13,14 L3,14 C2.44771525,14 2,13.5522847 2,13 L2,3 C2,2.44771525 2.44771525,2 3,2 Z M7,7 L4,7 L4,9 L7,9 L7,12 L9,12 L9,9 L12,9 L12,7 L9,7 L9,4 L7,4 L7,7 Z"
-                  fill="#293040"
-                  fill-rule="nonzero"
-                ></path>
-              </g>
-            </svg>
-            <span
-              class="customized-icon"
-              *ngIf="column.extraOptions?.iconUnFoldTable"
-              [innerHTML]="column.extraOptions?.iconUnFoldTable | safe: 'html'"
-            ></span>
-          </ng-container>
-        </span>
-      </ng-container>
-
-      <ng-container *ngIf="!column.headCellTmpl?.template">
-        <span
-          class="title"
-          [ngClass]="{
-            'can-filter': canFilterable(column)
-          }"
-          [attr.title]="column.header"
-          >{{ column.header }}
-        </span>
-      </ng-container>
-
-      <div *ngIf="column.headCellTmpl?.template" class="title" [ngClass]="{ 'can-filter': canFilterable(column) }">
-        <ng-template
-          [ngTemplateOutlet]="column.headCellTmpl?.template"
-          [ngTemplateOutletContext]="{ column: column, $implicit: head }"
-        ></ng-template>
-      </div>
-
-      <ng-container *ngIf="getIfExistMultiSort(column.field)">
-        <span (click)="onHeadClick(column)" class="sort-clickable" [ngClass]="{ clickable: column.sortable }">
-          <i
-            class="datatable-svg"
-            [ngClass]="{
-              'sort-icon-default': getSortDirection(column.field) === '' && showSortIcon,
-              'sort-icon-asc': getSortDirection(column.field) === 'ASC',
-              'sort-icon-desc': getSortDirection(column.field) === 'DESC'
-            }"
-          >
-            <svg
-              width="16px"
-              height="16px"
-              viewBox="0 0 16 16"
-              version="1.1"
-              xmlns="http://www.w3.org/2000/svg"
-              xmlns:xlink="http://www.w3.org/1999/xlink"
-            >
-              <defs>
-                <circle id="sort-svg-path-1" cx="8" cy="8" r="8"></circle>
-                <filter x="-34.4%" y="-21.9%" width="168.8%" height="168.8%" filterUnits="objectBoundingBox" id="filter-2">
-                  <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
-                  <feGaussianBlur stdDeviation="1.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
-                  <feColorMatrix
-                    values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.085309222 0"
-                    type="matrix"
-                    in="shadowBlurOuter1"
-                  ></feColorMatrix>
-                </filter>
-              </defs>
-              <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                <use fill-rule="evenodd" xlink:href="#sort-svg-path-1"></use>
-                <polygon points="8 4 11 7 5 7"></polygon>
-                <polygon points="8 12 5 9 11 9"></polygon>
-              </g>
-            </svg>
-          </i>
-        </span>
-      </ng-container>
-
-      <ng-container *ngIf="canFilterable(column)">
-        <span
-          dDropDown
-          appendToBody
-          [appendToBodyDirections]="['centerDown', 'centerUp']"
-          [closeScope]="'blank'"
-          (toggleEvent)="showfilterContent($event, column)"
-          #filterDropdown="d-dropdown"
-        >
-          <span dDropDownToggle class="devui-adjust-dropdown-offsetY">
-            <i
-              class="filter-icon"
-              [ngClass]="{
-                'filter-icon-active': column.filterIconActive || column.filterIconActiveInner
-              }"
-            >
-              <svg
-                width="16px"
-                height="16px"
-                viewBox="0 0 16 16"
-                version="1.1"
-                xmlns="http://www.w3.org/2000/svg"
-                xmlns:xlink="http://www.w3.org/1999/xlink"
-              >
-                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                  <g>
-                    <polygon id="Triangle-3" points="10.0085775 7 10.0085775 15 6 13 6 7 2 3 2 1 14 1 14 3"></polygon>
-                  </g>
-                </g>
-              </svg>
-            </i>
-          </span>
-          <div
-            dDropDownMenu
-            *ngIf="!column.customFilterTemplate && column.filterMultiple"
-            [ngClass]="{ 'filter-content-hidden': isFilterHidden }"
-          >
-            <ng-template
-              [ngTemplateOutlet]="filterContentTmplForMultiple"
-              [ngTemplateOutletContext]="{
-                $implicit: head,
-                filterListDisplay: filterListDisplay,
-                column: columnForFilter,
-                dropdown: filterDropdown
-              }"
-            >
-            </ng-template>
-          </div>
-          <div
-            dDropDownMenu
-            *ngIf="!column.customFilterTemplate && !column.filterMultiple"
-            [ngClass]="{ 'filter-content-hidden': isFilterHidden }"
-          >
-            <ng-template
-              [ngTemplateOutlet]="filterContentTmplForRadio"
-              [ngTemplateOutletContext]="{
-                $implicit: head,
-                filterListDisplay: filterListDisplay,
-                column: columnForFilter,
-                dropdown: filterDropdown
-              }"
-            >
-            </ng-template>
-          </div>
-          <div dDropDownMenu *ngIf="column.customFilterTemplate">
-            <ng-template
-              [ngTemplateOutlet]="column.customFilterTemplate"
-              [ngTemplateOutletContext]="{
-                $implicit: head,
-                filterListDisplay: filterListDisplay,
-                column: columnForFilter,
-                dropdown: filterDropdown
-              }"
-            >
-            </ng-template>
-          </div>
-        </span>
-      </ng-container>
-    </th>
-    <th *ngIf="fixHeader && tableScrollbarWidth" class="gutter" [style.width.px]="tableScrollbarWidth"></th>
-    <!-- <th width="0"  *ngIf="resizeable"></th> -->
-  </tr>
-</ng-template>
-<!--end:tempate-->
-
-<ng-template let-head="" let-rows="rows" #AdvancedHeadTmpl>
-  <tr *ngFor="let rowContex of rows; let rowIndex = index">
-    <th
-      *ngIf="showExpandToggle && rowIndex === 0"
-      class="devui-detail-cell"
-      [attr.rowspan]="rows?.length || 1"
-      [ngClass]="{ 'devui-sticky-left-cell': columns[0]?.fixedLeft }"
-      [style.left]="0"
-    ></th>
-    <th
-      *ngIf="checkable && rowIndex === 0"
-      class="devui-checkable-cell"
-      [attr.rowspan]="rows?.length || 1"
-      [ngClass]="{ 'devui-sticky-left-cell': columns[0]?.fixedLeft }"
-      [style.left]="showExpandToggle && columns[0]?.fixedLeft ? '16px' : '0'"
-    >
-      <d-checkbox [name]="'checkAll'" (change)="onCheckAllChange()" [(ngModel)]="pageAllChecked" [halfchecked]="halfChecked"> </d-checkbox>
-    </th>
-    <ng-container *ngFor="let column of columns; trackBy: trackByFn; let colIndex = index; let last = last">
-      <th
-        *ngIf="column.advancedHeader && column.advancedHeader[rowIndex]?.rowspan && column.advancedHeader[rowIndex]?.colspan"
-        dResizeable
-        [class.last-resize-header]="last"
-        [resizeEnabled]="resizeable && rowIndex === column.advancedHeader.length - 1 && !last"
-        [resizeBarRefElement]="resizeBarRefElement"
-        [tableViewRefElement]="tableViewRefElement"
-        [style.width]="rowIndex === column.advancedHeader.length - 1 ? column.width : column.advancedHeader[rowIndex]['$width']"
-        [ngStyle]="column.style"
-        (resize)="onResize($event, column, true); resizeParent($event, column)"
-        [attr.rowspan]="column.advancedHeader[rowIndex]?.rowspan"
-        [attr.colspan]="column.advancedHeader[rowIndex]?.colspan"
-        [style.textAlign]="
-          !column.style &&
-          rowIndex !== column.advancedHeader.length - 1 &&
-          (column.advancedHeader[rowIndex]?.rowspan > 0 || column.advancedHeader[rowIndex]?.colspan > 0)
-            ? 'center'
-            : ''
-        "
-        (beginResize)="beginResize($event)"
-        (resizingEvent)="onResizing($event, column); resizingParent($event, column)"
-        [unresizable]="column.unresizable"
-        [ngClass]="{
-          sindu_handle: colDraggable && colIndex > head?.colDropFreezeTo - 1,
-          operable: canFilterable(column) || getIfExistMultiSort(column.field) || (colDraggable && colIndex > head?.colDropFreezeTo - 1),
-          'drop-freeze': colDraggable && colIndex < head?.colDropFreezeTo,
-          clickable: column.sortable,
-          'sort-active':
-            ((getSortDirection(column.field) === 'DESC' || getSortDirection(column.field) === 'ASC') &&
-              rowIndex === column.advancedHeader.length - 1) ||
-            column.filterIconActive ||
-            column.filterIconActiveInner,
-          'devui-sticky-left-cell': column.fixedLeft,
-          'devui-sticky-right-cell': column.fixedRight
-        }"
-        [style.left]="column.fixedLeft ? column.fixedLeft : null"
-        [style.right]="column.fixedRight ? column.fixedRight : null"
-      >
-        <ng-container>
-          <i class="drag-icon" [ngClass]="{ 'hidden-icon': rowIndex !== 0 }" (mousedown)="rowIndex === 0 && onTap($event)">
-            <svg
-              width="16px"
-              height="16px"
-              viewBox="0 0 16 16"
-              version="1.1"
-              xmlns="http://www.w3.org/2000/svg"
-              xmlns:xlink="http://www.w3.org/1999/xlink"
-            >
-              <g id="icon_drag-default" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                <path
-                  d="M4.5,1.5 L5.5,1.5 C6.05228475,1.5 6.5,1.94771525 6.5,2.5 L6.5,3.5 C6.5,4.05228475 6.05228475,4.5 5.5,4.5 L4.5,4.5 C3.94771525,4.5 3.5,4.05228475 3.5,3.5 L3.5,2.5 C3.5,1.94771525 3.94771525,1.5 4.5,1.5 Z M10.5,1.5 L11.5,1.5 C12.0522847,1.5 12.5,1.94771525 12.5,2.5 L12.5,3.5 C12.5,4.05228475 12.0522847,4.5 11.5,4.5 L10.5,4.5 C9.94771525,4.5 9.5,4.05228475 9.5,3.5 L9.5,2.5 C9.5,1.94771525 9.94771525,1.5 10.5,1.5 Z M4.5,6.5 L5.5,6.5 C6.05228475,6.5 6.5,6.94771525 6.5,7.5 L6.5,8.5 C6.5,9.05228475 6.05228475,9.5 5.5,9.5 L4.5,9.5 C3.94771525,9.5 3.5,9.05228475 3.5,8.5 L3.5,7.5 C3.5,6.94771525 3.94771525,6.5 4.5,6.5 Z M10.5,6.5 L11.5,6.5 C12.0522847,6.5 12.5,6.94771525 12.5,7.5 L12.5,8.5 C12.5,9.05228475 12.0522847,9.5 11.5,9.5 L10.5,9.5 C9.94771525,9.5 9.5,9.05228475 9.5,8.5 L9.5,7.5 C9.5,6.94771525 9.94771525,6.5 10.5,6.5 Z M4.5,11.5 L5.5,11.5 C6.05228475,11.5 6.5,11.9477153 6.5,12.5 L6.5,13.5 C6.5,14.0522847 6.05228475,14.5 5.5,14.5 L4.5,14.5 C3.94771525,14.5 3.5,14.0522847 3.5,13.5 L3.5,12.5 C3.5,11.9477153 3.94771525,11.5 4.5,11.5 Z M10.5,11.5 L11.5,11.5 C12.0522847,11.5 12.5,11.9477153 12.5,12.5 L12.5,13.5 C12.5,14.0522847 12.0522847,14.5 11.5,14.5 L10.5,14.5 C9.94771525,14.5 9.5,14.0522847 9.5,13.5 L9.5,12.5 C9.5,11.9477153 9.94771525,11.5 10.5,11.5 Z"
-                  id="Combined-Shape-Copy-10"
-                  fill="#C7CAD0"
-                ></path>
-              </g>
-            </svg>
-          </i>
-        </ng-container>
-
-        <ng-container *ngIf="!column.headCellTmpl?.template">
-          <span
-            [ngClass]="{
-              'parent-title': rowIndex < column.advancedHeader.length - 1,
-              title: rowIndex === column.advancedHeader.length - 1
-            }"
-            [attr.title]="column.advancedHeader[rowIndex].header"
-          >
-            {{ column.advancedHeader[rowIndex].header }}
-          </span>
-        </ng-container>
-        <div *ngIf="column.headCellTmpl?.template" class="title" [ngClass]="{ 'can-filter': canFilterable(column) }">
-          <ng-template
-            [ngTemplateOutlet]="column.headCellTmpl?.template"
-            [ngTemplateOutletContext]="{
-              column: column,
-              $implicit: head,
-              rowIndex: rowIndex,
-              colIndex: colIndex
-            }"
-          >
-          </ng-template>
-        </div>
-        <ng-container *ngIf="getIfExistMultiSort(column.field) && rowIndex === column.advancedHeader.length - 1">
-          <span (click)="onHeadClick(column)" class="sort-clickable" [ngClass]="{ clickable: column.sortable }">
-            <i
-              class="datatable-svg"
-              [ngClass]="{
-                'sort-icon-default': getSortDirection(column.field) === '' && showSortIcon,
-                'sort-icon-asc': getSortDirection(column.field) === 'ASC',
-                'sort-icon-desc': getSortDirection(column.field) === 'DESC'
-              }"
-            >
-              <svg
-                width="16px"
-                height="16px"
-                viewBox="0 0 16 16"
-                version="1.1"
-                xmlns="http://www.w3.org/2000/svg"
-                xmlns:xlink="http://www.w3.org/1999/xlink"
-              >
-                <defs>
-                  <circle id="sort-svg-path-1" cx="8" cy="8" r="8"></circle>
-                  <filter x="-34.4%" y="-21.9%" width="168.8%" height="168.8%" filterUnits="objectBoundingBox" id="filter-2">
-                    <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
-                    <feGaussianBlur stdDeviation="1.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
-                    <feColorMatrix
-                      values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.085309222 0"
-                      type="matrix"
-                      in="shadowBlurOuter1"
-                    ></feColorMatrix>
-                  </filter>
-                </defs>
-                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                  <use fill-rule="evenodd" xlink:href="#sort-svg-path-1"></use>
-                  <polygon points="8 4 11 7 5 7"></polygon>
-                  <polygon points="8 12 5 9 11 9"></polygon>
-                </g>
-              </svg>
-            </i>
-          </span>
-        </ng-container>
-        <ng-container *ngIf="canFilterable(column) && rowIndex === column.advancedHeader.length - 1">
-          <span
-            dDropDown
-            appendToBody
-            [appendToBodyDirections]="['centerDown', 'centerUp']"
-            [closeScope]="'blank'"
-            (toggleEvent)="showfilterContent($event, column)"
-            #filterDropdown="d-dropdown"
-          >
-            <span dDropDownToggle class="devui-adjust-dropdown-offsetY">
-              <i
-                class="filter-icon"
-                [ngClass]="{
-                  'filter-icon-active': column.filterIconActive || column.filterIconActiveInner
-                }"
-              >
-                <svg
-                  width="16px"
-                  height="16px"
-                  viewBox="0 0 16 16"
-                  version="1.1"
-                  xmlns="http://www.w3.org/2000/svg"
-                  xmlns:xlink="http://www.w3.org/1999/xlink"
-                >
-                  <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                    <g>
-                      <polygon id="Triangle-3" points="10.0085775 7 10.0085775 15 6 13 6 7 2 3 2 1 14 1 14 3"></polygon>
-                    </g>
-                  </g>
-                </svg>
-              </i>
-            </span>
-            <div
-              dDropDownMenu
-              *ngIf="!column.customFilterTemplate && column.filterMultiple"
-              [ngClass]="{ 'filter-content-hidden': isFilterHidden }"
-            >
-              <ng-template
-                [ngTemplateOutlet]="filterContentTmplForMultiple"
-                [ngTemplateOutletContext]="{
-                  $implicit: head,
-                  filterListDisplay: filterListDisplay,
-                  column: columnForFilter,
-                  dropdown: filterDropdown
-                }"
-              >
-              </ng-template>
-            </div>
-            <div
-              dDropDownMenu
-              *ngIf="!column.customFilterTemplate && !column.filterMultiple"
-              [ngClass]="{ 'filter-content-hidden': isFilterHidden }"
-            >
-              <ng-template
-                [ngTemplateOutlet]="filterContentTmplForRadio"
-                [ngTemplateOutletContext]="{
-                  $implicit: head,
-                  filterListDisplay: filterListDisplay,
-                  column: columnForFilter,
-                  dropdown: filterDropdown
-                }"
-              >
-              </ng-template>
-            </div>
-            <div dDropDownMenu *ngIf="column.customFilterTemplate">
-              <ng-template
-                [ngTemplateOutlet]="column.customFilterTemplate"
-                [ngTemplateOutletContext]="{
-                  $implicit: head,
-                  filterListDisplay: filterListDisplay,
-                  column: columnForFilter,
-                  dropdown: filterDropdown
-                }"
-              >
-              </ng-template>
-            </div>
-          </span>
-        </ng-container>
-      </th>
-      <th
-        *ngIf="!column.advancedHeader && rowIndex === 0"
-        dResizeable
-        [class.last-resize-header]="last"
-        [ngClass]="{
-          sindu_handle: colDraggable && colIndex > head?.colDropFreezeTo - 1,
-          operable: canFilterable(column) || getIfExistMultiSort(column.field) || (colDraggable && colIndex > head?.colDropFreezeTo - 1),
-          'drop-freeze': colDraggable && colIndex < head?.colDropFreezeTo,
-          'sort-active':
-            getSortDirection(column.field) === 'DESC' ||
-            getSortDirection(column.field) === 'ASC' ||
-            column.filterIconActive ||
-            column.filterIconActiveInner,
-          'devui-sticky-left-cell': column.fixedLeft,
-          'devui-sticky-right-cell': column.fixedRight
-        }"
-        [resizeEnabled]="resizeable && !last"
-        [resizeBarRefElement]="resizeBarRefElement"
-        [unresizable]="column.unresizable"
-        [tableViewRefElement]="tableViewRefElement"
-        [ngClass]="{ clickable: column.sortable }"
-        [style.width]="column.width || ''"
-        [style.min-width]="column.minWidth"
-        [minWidth]="column.minWidth"
-        [maxWidth]="column.maxWidth"
-        [ngStyle]="column.style"
-        (resize)="onResize($event, column, true)"
-        (beginResize)="beginResize($event)"
-        (resizingEvent)="onResizing($event, column)"
-        [attr.rowspan]="rows?.length || 1"
-        [style.left]="column.fixedLeft ? column.fixedLeft : null"
-        [style.right]="column.fixedRight ? column.fixedRight : null"
-      >
+      <div class="header-container">
         <ng-container>
           <i class="drag-icon" (mousedown)="onTap($event)">
             <svg
@@ -552,20 +82,77 @@
           </i>
         </ng-container>
 
-        <ng-container *ngIf="!column.headCellTmpl?.template"
-          ><span class="title" [attr.title]="column.header">{{ column.header }}</span></ng-container
-        >
+        <ng-container *ngIf="column.nestedColumn && column.extraOptions?.showHeadTableToggler">
+          <span class="childtable-toggler" (click)="toggleChildrenTable()">
+            <ng-container *ngIf="childrenTableOpen">
+              <svg
+                *ngIf="!column.extraOptions?.iconFoldTable"
+                class="svg-icon-close-folder"
+                width="16px"
+                height="16px"
+                viewBox="0 0 16 16"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+              >
+                <g id="h-closeFolder" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                  <path
+                    d="M3,2 L13,2 C13.5522847,2 14,2.44771525 14,3 L14,13 C14,13.5522847 13.5522847,14 13,14 L3,14 C2.44771525,14 2,13.5522847 2,13 L2,3 C2,2.44771525 2.44771525,2 3,2 Z M12,7 L4,7 L4,9 L12,9 L12,7 Z"
+                    fill="#293040"
+                    fill-rule="nonzero"
+                  ></path>
+                </g>
+              </svg>
+              <span
+                class="customized-icon"
+                *ngIf="column.extraOptions?.iconFoldTable"
+                [innerHTML]="column.extraOptions?.iconFoldTable | safe: 'html'"
+              ></span>
+            </ng-container>
+            <ng-container *ngIf="!childrenTableOpen">
+              <svg
+                *ngIf="!column.extraOptions?.iconUnFoldTable"
+                class="svg-icon-open-folder"
+                width="16px"
+                height="16px"
+                viewBox="0 0 16 16"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+              >
+                <g id="h-openFolder" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                  <path
+                    d="M3,2 L13,2 C13.5522847,2 14,2.44771525 14,3 L14,13 C14,13.5522847 13.5522847,14 13,14 L3,14 C2.44771525,14 2,13.5522847 2,13 L2,3 C2,2.44771525 2.44771525,2 3,2 Z M7,7 L4,7 L4,9 L7,9 L7,12 L9,12 L9,9 L12,9 L12,7 L9,7 L9,4 L7,4 L7,7 Z"
+                    fill="#293040"
+                    fill-rule="nonzero"
+                  ></path>
+                </g>
+              </svg>
+              <span
+                class="customized-icon"
+                *ngIf="column.extraOptions?.iconUnFoldTable"
+                [innerHTML]="column.extraOptions?.iconUnFoldTable | safe: 'html'"
+              ></span>
+            </ng-container>
+          </span>
+        </ng-container>
+
+        <ng-container *ngIf="!column.headCellTmpl?.template">
+          <span
+            class="title"
+            [ngClass]="{
+              'can-filter': canFilterable(column)
+            }"
+            [attr.title]="column.header"
+            >{{ column.header }}
+          </span>
+        </ng-container>
+
         <div *ngIf="column.headCellTmpl?.template" class="title" [ngClass]="{ 'can-filter': canFilterable(column) }">
           <ng-template
             [ngTemplateOutlet]="column.headCellTmpl?.template"
-            [ngTemplateOutletContext]="{
-              column: column,
-              $implicit: head,
-              rowIndex: rowIndex,
-              colIndex: colIndex
-            }"
-          >
-          </ng-template>
+            [ngTemplateOutletContext]="{ column: column, $implicit: head }"
+          ></ng-template>
         </div>
 
         <ng-container *ngIf="getIfExistMultiSort(column.field)">
@@ -686,6 +273,425 @@
             </div>
           </span>
         </ng-container>
+      </div>
+    </th>
+    <th *ngIf="fixHeader && tableScrollbarWidth" class="gutter" [style.width.px]="tableScrollbarWidth"></th>
+    <!-- <th width="0"  *ngIf="resizeable"></th> -->
+  </tr>
+</ng-template>
+<!--end:tempate-->
+
+<ng-template let-head="" let-rows="rows" #AdvancedHeadTmpl>
+  <tr *ngFor="let rowContex of rows; let rowIndex = index">
+    <th
+      *ngIf="showExpandToggle && rowIndex === 0"
+      class="devui-detail-cell"
+      [attr.rowspan]="rows?.length || 1"
+      [ngClass]="{ 'devui-sticky-left-cell': columns[0]?.fixedLeft }"
+      [style.left]="0"
+    ></th>
+    <th
+      *ngIf="checkable && rowIndex === 0"
+      class="devui-checkable-cell"
+      [attr.rowspan]="rows?.length || 1"
+      [ngClass]="{ 'devui-sticky-left-cell': columns[0]?.fixedLeft }"
+      [style.left]="showExpandToggle && columns[0]?.fixedLeft ? '16px' : '0'"
+    >
+      <d-checkbox [name]="'checkAll'" (change)="onCheckAllChange()" [(ngModel)]="pageAllChecked" [halfchecked]="halfChecked"> </d-checkbox>
+    </th>
+    <ng-container *ngFor="let column of columns; trackBy: trackByFn; let colIndex = index; let last = last">
+      <th
+        *ngIf="column.advancedHeader && column.advancedHeader[rowIndex]?.rowspan && column.advancedHeader[rowIndex]?.colspan"
+        dResizeable
+        [class.last-resize-header]="last"
+        [resizeEnabled]="resizeable && rowIndex === column.advancedHeader.length - 1 && !last"
+        [resizeBarRefElement]="resizeBarRefElement"
+        [tableViewRefElement]="tableViewRefElement"
+        [style.width]="rowIndex === column.advancedHeader.length - 1 ? column.width : column.advancedHeader[rowIndex]['$width']"
+        [ngStyle]="column.style"
+        (resizeEvent)="onResize($event, column, true); resizeParent($event, column)"
+        [attr.rowspan]="column.advancedHeader[rowIndex]?.rowspan"
+        [attr.colspan]="column.advancedHeader[rowIndex]?.colspan"
+        [style.textAlign]="
+          !column.style &&
+          rowIndex !== column.advancedHeader.length - 1 &&
+          (column.advancedHeader[rowIndex]?.rowspan > 0 || column.advancedHeader[rowIndex]?.colspan > 0)
+            ? 'center'
+            : ''
+        "
+        (beginResizeEvent)="onBeginResize($event)"
+        (resizingEvent)="onResizing($event, column); resizingParent($event, column)"
+        [unresizable]="column.unresizable"
+        [ngClass]="{
+          sindu_handle: colDraggable && colIndex > head?.colDropFreezeTo - 1,
+          operable: canFilterable(column) || getIfExistMultiSort(column.field) || (colDraggable && colIndex > head?.colDropFreezeTo - 1),
+          'drop-freeze': colDraggable && colIndex < head?.colDropFreezeTo,
+          clickable: column.sortable,
+          'sort-active':
+            ((getSortDirection(column.field) === 'DESC' || getSortDirection(column.field) === 'ASC') &&
+              rowIndex === column.advancedHeader.length - 1) ||
+            column.filterIconActive ||
+            column.filterIconActiveInner,
+          'devui-sticky-left-cell': column.fixedLeft,
+          'devui-sticky-right-cell': column.fixedRight
+        }"
+        [style.left]="column.fixedLeft ? column.fixedLeft : null"
+        [style.right]="column.fixedRight ? column.fixedRight : null"
+      >
+        <div class="header-container">
+          <ng-container>
+            <i class="drag-icon" [ngClass]="{ 'hidden-icon': rowIndex !== 0 }" (mousedown)="rowIndex === 0 && onTap($event)">
+              <svg
+                width="16px"
+                height="16px"
+                viewBox="0 0 16 16"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+              >
+                <g id="icon_drag-default" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                  <path
+                    d="M4.5,1.5 L5.5,1.5 C6.05228475,1.5 6.5,1.94771525 6.5,2.5 L6.5,3.5 C6.5,4.05228475 6.05228475,4.5 5.5,4.5 L4.5,4.5 C3.94771525,4.5 3.5,4.05228475 3.5,3.5 L3.5,2.5 C3.5,1.94771525 3.94771525,1.5 4.5,1.5 Z M10.5,1.5 L11.5,1.5 C12.0522847,1.5 12.5,1.94771525 12.5,2.5 L12.5,3.5 C12.5,4.05228475 12.0522847,4.5 11.5,4.5 L10.5,4.5 C9.94771525,4.5 9.5,4.05228475 9.5,3.5 L9.5,2.5 C9.5,1.94771525 9.94771525,1.5 10.5,1.5 Z M4.5,6.5 L5.5,6.5 C6.05228475,6.5 6.5,6.94771525 6.5,7.5 L6.5,8.5 C6.5,9.05228475 6.05228475,9.5 5.5,9.5 L4.5,9.5 C3.94771525,9.5 3.5,9.05228475 3.5,8.5 L3.5,7.5 C3.5,6.94771525 3.94771525,6.5 4.5,6.5 Z M10.5,6.5 L11.5,6.5 C12.0522847,6.5 12.5,6.94771525 12.5,7.5 L12.5,8.5 C12.5,9.05228475 12.0522847,9.5 11.5,9.5 L10.5,9.5 C9.94771525,9.5 9.5,9.05228475 9.5,8.5 L9.5,7.5 C9.5,6.94771525 9.94771525,6.5 10.5,6.5 Z M4.5,11.5 L5.5,11.5 C6.05228475,11.5 6.5,11.9477153 6.5,12.5 L6.5,13.5 C6.5,14.0522847 6.05228475,14.5 5.5,14.5 L4.5,14.5 C3.94771525,14.5 3.5,14.0522847 3.5,13.5 L3.5,12.5 C3.5,11.9477153 3.94771525,11.5 4.5,11.5 Z M10.5,11.5 L11.5,11.5 C12.0522847,11.5 12.5,11.9477153 12.5,12.5 L12.5,13.5 C12.5,14.0522847 12.0522847,14.5 11.5,14.5 L10.5,14.5 C9.94771525,14.5 9.5,14.0522847 9.5,13.5 L9.5,12.5 C9.5,11.9477153 9.94771525,11.5 10.5,11.5 Z"
+                    id="Combined-Shape-Copy-10"
+                    fill="#C7CAD0"
+                  ></path>
+                </g>
+              </svg>
+            </i>
+          </ng-container>
+
+          <ng-container *ngIf="!column.headCellTmpl?.template">
+            <span
+              [ngClass]="{
+                'parent-title': rowIndex < column.advancedHeader.length - 1,
+                title: rowIndex === column.advancedHeader.length - 1
+              }"
+              [attr.title]="column.advancedHeader[rowIndex].header"
+            >
+              {{ column.advancedHeader[rowIndex].header }}
+            </span>
+          </ng-container>
+          <div *ngIf="column.headCellTmpl?.template" class="title" [ngClass]="{ 'can-filter': canFilterable(column) }">
+            <ng-template
+              [ngTemplateOutlet]="column.headCellTmpl?.template"
+              [ngTemplateOutletContext]="{
+                column: column,
+                $implicit: head,
+                rowIndex: rowIndex,
+                colIndex: colIndex
+              }"
+            >
+            </ng-template>
+          </div>
+          <ng-container *ngIf="getIfExistMultiSort(column.field) && rowIndex === column.advancedHeader.length - 1">
+            <span (click)="onHeadClick(column)" class="sort-clickable" [ngClass]="{ clickable: column.sortable }">
+              <i
+                class="datatable-svg"
+                [ngClass]="{
+                  'sort-icon-default': getSortDirection(column.field) === '' && showSortIcon,
+                  'sort-icon-asc': getSortDirection(column.field) === 'ASC',
+                  'sort-icon-desc': getSortDirection(column.field) === 'DESC'
+                }"
+              >
+                <svg
+                  width="16px"
+                  height="16px"
+                  viewBox="0 0 16 16"
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                >
+                  <defs>
+                    <circle id="sort-svg-path-1" cx="8" cy="8" r="8"></circle>
+                    <filter x="-34.4%" y="-21.9%" width="168.8%" height="168.8%" filterUnits="objectBoundingBox" id="filter-2">
+                      <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+                      <feGaussianBlur stdDeviation="1.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+                      <feColorMatrix
+                        values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.085309222 0"
+                        type="matrix"
+                        in="shadowBlurOuter1"
+                      ></feColorMatrix>
+                    </filter>
+                  </defs>
+                  <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <use fill-rule="evenodd" xlink:href="#sort-svg-path-1"></use>
+                    <polygon points="8 4 11 7 5 7"></polygon>
+                    <polygon points="8 12 5 9 11 9"></polygon>
+                  </g>
+                </svg>
+              </i>
+            </span>
+          </ng-container>
+          <ng-container *ngIf="canFilterable(column) && rowIndex === column.advancedHeader.length - 1">
+            <span
+              dDropDown
+              appendToBody
+              [appendToBodyDirections]="['centerDown', 'centerUp']"
+              [closeScope]="'blank'"
+              (toggleEvent)="showfilterContent($event, column)"
+              #filterDropdown="d-dropdown"
+            >
+              <span dDropDownToggle class="devui-adjust-dropdown-offsetY">
+                <i
+                  class="filter-icon"
+                  [ngClass]="{
+                    'filter-icon-active': column.filterIconActive || column.filterIconActiveInner
+                  }"
+                >
+                  <svg
+                    width="16px"
+                    height="16px"
+                    viewBox="0 0 16 16"
+                    version="1.1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                  >
+                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                      <g>
+                        <polygon id="Triangle-3" points="10.0085775 7 10.0085775 15 6 13 6 7 2 3 2 1 14 1 14 3"></polygon>
+                      </g>
+                    </g>
+                  </svg>
+                </i>
+              </span>
+              <div
+                dDropDownMenu
+                *ngIf="!column.customFilterTemplate && column.filterMultiple"
+                [ngClass]="{ 'filter-content-hidden': isFilterHidden }"
+              >
+                <ng-template
+                  [ngTemplateOutlet]="filterContentTmplForMultiple"
+                  [ngTemplateOutletContext]="{
+                    $implicit: head,
+                    filterListDisplay: filterListDisplay,
+                    column: columnForFilter,
+                    dropdown: filterDropdown
+                  }"
+                >
+                </ng-template>
+              </div>
+              <div
+                dDropDownMenu
+                *ngIf="!column.customFilterTemplate && !column.filterMultiple"
+                [ngClass]="{ 'filter-content-hidden': isFilterHidden }"
+              >
+                <ng-template
+                  [ngTemplateOutlet]="filterContentTmplForRadio"
+                  [ngTemplateOutletContext]="{
+                    $implicit: head,
+                    filterListDisplay: filterListDisplay,
+                    column: columnForFilter,
+                    dropdown: filterDropdown
+                  }"
+                >
+                </ng-template>
+              </div>
+              <div dDropDownMenu *ngIf="column.customFilterTemplate">
+                <ng-template
+                  [ngTemplateOutlet]="column.customFilterTemplate"
+                  [ngTemplateOutletContext]="{
+                    $implicit: head,
+                    filterListDisplay: filterListDisplay,
+                    column: columnForFilter,
+                    dropdown: filterDropdown
+                  }"
+                >
+                </ng-template>
+              </div>
+            </span>
+          </ng-container>
+        </div>
+      </th>
+      <th
+        *ngIf="!column.advancedHeader && rowIndex === 0"
+        dResizeable
+        [class.last-resize-header]="last"
+        [ngClass]="{
+          sindu_handle: colDraggable && colIndex > head?.colDropFreezeTo - 1,
+          operable: canFilterable(column) || getIfExistMultiSort(column.field) || (colDraggable && colIndex > head?.colDropFreezeTo - 1),
+          'drop-freeze': colDraggable && colIndex < head?.colDropFreezeTo,
+          'sort-active':
+            getSortDirection(column.field) === 'DESC' ||
+            getSortDirection(column.field) === 'ASC' ||
+            column.filterIconActive ||
+            column.filterIconActiveInner,
+          'devui-sticky-left-cell': column.fixedLeft,
+          'devui-sticky-right-cell': column.fixedRight
+        }"
+        [resizeEnabled]="resizeable && !last"
+        [resizeBarRefElement]="resizeBarRefElement"
+        [unresizable]="column.unresizable"
+        [tableViewRefElement]="tableViewRefElement"
+        [ngClass]="{ clickable: column.sortable }"
+        [style.width]="column.width || ''"
+        [style.min-width]="column.minWidth"
+        [minWidth]="column.minWidth"
+        [maxWidth]="column.maxWidth"
+        [ngStyle]="column.style"
+        (resizeEvent)="onResize($event, column, true)"
+        (beginResizeEvent)="onBeginResize($event)"
+        (resizingEvent)="onResizing($event, column)"
+        [attr.rowspan]="rows?.length || 1"
+        [style.left]="column.fixedLeft ? column.fixedLeft : null"
+        [style.right]="column.fixedRight ? column.fixedRight : null"
+      >
+        <div class="header-container">
+          <ng-container>
+            <i class="drag-icon" (mousedown)="onTap($event)">
+              <svg
+                width="16px"
+                height="16px"
+                viewBox="0 0 16 16"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+              >
+                <g id="icon_drag-default" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                  <path
+                    d="M4.5,1.5 L5.5,1.5 C6.05228475,1.5 6.5,1.94771525 6.5,2.5 L6.5,3.5 C6.5,4.05228475 6.05228475,4.5 5.5,4.5 L4.5,4.5 C3.94771525,4.5 3.5,4.05228475 3.5,3.5 L3.5,2.5 C3.5,1.94771525 3.94771525,1.5 4.5,1.5 Z M10.5,1.5 L11.5,1.5 C12.0522847,1.5 12.5,1.94771525 12.5,2.5 L12.5,3.5 C12.5,4.05228475 12.0522847,4.5 11.5,4.5 L10.5,4.5 C9.94771525,4.5 9.5,4.05228475 9.5,3.5 L9.5,2.5 C9.5,1.94771525 9.94771525,1.5 10.5,1.5 Z M4.5,6.5 L5.5,6.5 C6.05228475,6.5 6.5,6.94771525 6.5,7.5 L6.5,8.5 C6.5,9.05228475 6.05228475,9.5 5.5,9.5 L4.5,9.5 C3.94771525,9.5 3.5,9.05228475 3.5,8.5 L3.5,7.5 C3.5,6.94771525 3.94771525,6.5 4.5,6.5 Z M10.5,6.5 L11.5,6.5 C12.0522847,6.5 12.5,6.94771525 12.5,7.5 L12.5,8.5 C12.5,9.05228475 12.0522847,9.5 11.5,9.5 L10.5,9.5 C9.94771525,9.5 9.5,9.05228475 9.5,8.5 L9.5,7.5 C9.5,6.94771525 9.94771525,6.5 10.5,6.5 Z M4.5,11.5 L5.5,11.5 C6.05228475,11.5 6.5,11.9477153 6.5,12.5 L6.5,13.5 C6.5,14.0522847 6.05228475,14.5 5.5,14.5 L4.5,14.5 C3.94771525,14.5 3.5,14.0522847 3.5,13.5 L3.5,12.5 C3.5,11.9477153 3.94771525,11.5 4.5,11.5 Z M10.5,11.5 L11.5,11.5 C12.0522847,11.5 12.5,11.9477153 12.5,12.5 L12.5,13.5 C12.5,14.0522847 12.0522847,14.5 11.5,14.5 L10.5,14.5 C9.94771525,14.5 9.5,14.0522847 9.5,13.5 L9.5,12.5 C9.5,11.9477153 9.94771525,11.5 10.5,11.5 Z"
+                    id="Combined-Shape-Copy-10"
+                    fill="#C7CAD0"
+                  ></path>
+                </g>
+              </svg>
+            </i>
+          </ng-container>
+
+          <ng-container *ngIf="!column.headCellTmpl?.template"
+            ><span class="title" [attr.title]="column.header">{{ column.header }}</span></ng-container
+          >
+          <div *ngIf="column.headCellTmpl?.template" class="title" [ngClass]="{ 'can-filter': canFilterable(column) }">
+            <ng-template
+              [ngTemplateOutlet]="column.headCellTmpl?.template"
+              [ngTemplateOutletContext]="{
+                column: column,
+                $implicit: head,
+                rowIndex: rowIndex,
+                colIndex: colIndex
+              }"
+            >
+            </ng-template>
+          </div>
+
+          <ng-container *ngIf="getIfExistMultiSort(column.field)">
+            <span (click)="onHeadClick(column)" class="sort-clickable" [ngClass]="{ clickable: column.sortable }">
+              <i
+                class="datatable-svg"
+                [ngClass]="{
+                  'sort-icon-default': getSortDirection(column.field) === '' && showSortIcon,
+                  'sort-icon-asc': getSortDirection(column.field) === 'ASC',
+                  'sort-icon-desc': getSortDirection(column.field) === 'DESC'
+                }"
+              >
+                <svg
+                  width="16px"
+                  height="16px"
+                  viewBox="0 0 16 16"
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                >
+                  <defs>
+                    <circle id="sort-svg-path-1" cx="8" cy="8" r="8"></circle>
+                    <filter x="-34.4%" y="-21.9%" width="168.8%" height="168.8%" filterUnits="objectBoundingBox" id="filter-2">
+                      <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+                      <feGaussianBlur stdDeviation="1.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+                      <feColorMatrix
+                        values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.085309222 0"
+                        type="matrix"
+                        in="shadowBlurOuter1"
+                      ></feColorMatrix>
+                    </filter>
+                  </defs>
+                  <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <use fill-rule="evenodd" xlink:href="#sort-svg-path-1"></use>
+                    <polygon points="8 4 11 7 5 7"></polygon>
+                    <polygon points="8 12 5 9 11 9"></polygon>
+                  </g>
+                </svg>
+              </i>
+            </span>
+          </ng-container>
+
+          <ng-container *ngIf="canFilterable(column)">
+            <span
+              dDropDown
+              appendToBody
+              [appendToBodyDirections]="['centerDown', 'centerUp']"
+              [closeScope]="'blank'"
+              (toggleEvent)="showfilterContent($event, column)"
+              #filterDropdown="d-dropdown"
+            >
+              <span dDropDownToggle class="devui-adjust-dropdown-offsetY">
+                <i
+                  class="filter-icon"
+                  [ngClass]="{
+                    'filter-icon-active': column.filterIconActive || column.filterIconActiveInner
+                  }"
+                >
+                  <svg
+                    width="16px"
+                    height="16px"
+                    viewBox="0 0 16 16"
+                    version="1.1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                  >
+                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                      <g>
+                        <polygon id="Triangle-3" points="10.0085775 7 10.0085775 15 6 13 6 7 2 3 2 1 14 1 14 3"></polygon>
+                      </g>
+                    </g>
+                  </svg>
+                </i>
+              </span>
+              <div
+                dDropDownMenu
+                *ngIf="!column.customFilterTemplate && column.filterMultiple"
+                [ngClass]="{ 'filter-content-hidden': isFilterHidden }"
+              >
+                <ng-template
+                  [ngTemplateOutlet]="filterContentTmplForMultiple"
+                  [ngTemplateOutletContext]="{
+                    $implicit: head,
+                    filterListDisplay: filterListDisplay,
+                    column: columnForFilter,
+                    dropdown: filterDropdown
+                  }"
+                >
+                </ng-template>
+              </div>
+              <div
+                dDropDownMenu
+                *ngIf="!column.customFilterTemplate && !column.filterMultiple"
+                [ngClass]="{ 'filter-content-hidden': isFilterHidden }"
+              >
+                <ng-template
+                  [ngTemplateOutlet]="filterContentTmplForRadio"
+                  [ngTemplateOutletContext]="{
+                    $implicit: head,
+                    filterListDisplay: filterListDisplay,
+                    column: columnForFilter,
+                    dropdown: filterDropdown
+                  }"
+                >
+                </ng-template>
+              </div>
+              <div dDropDownMenu *ngIf="column.customFilterTemplate">
+                <ng-template
+                  [ngTemplateOutlet]="column.customFilterTemplate"
+                  [ngTemplateOutletContext]="{
+                    $implicit: head,
+                    filterListDisplay: filterListDisplay,
+                    column: columnForFilter,
+                    dropdown: filterDropdown
+                  }"
+                >
+                </ng-template>
+              </div>
+            </span>
+          </ng-container>
+        </div>
       </th>
     </ng-container>
     <!-- <th width="0"  *ngIf="resizeable"></th> -->

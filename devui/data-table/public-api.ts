@@ -22,3 +22,4 @@ export * from './data-table-foot.component';
 export * from './tmpl/data-table-cell-tmpl.component';
 export * from './tmpl/data-table-pager-tmpl.component';
 export * from './resizeable.directive';
+export * from './data-table.model';

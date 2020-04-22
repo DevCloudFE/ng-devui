@@ -14,8 +14,7 @@ export class DateRangePickerDisabledComponent {
   disabled = true;
 
   getValue(value) {
-    // tslint:disable-next-line:no-console
-    console.info(value);
+    console.log(value);
   }
 
 }

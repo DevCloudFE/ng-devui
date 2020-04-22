@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TreeNode } from 'ng-devui';
+import { TreeNode } from 'ng-devui/tree';
 
 @Component({
   selector: 'd-customize',

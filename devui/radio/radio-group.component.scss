@@ -2,8 +2,15 @@
   .devui-radio-list-item {
     display: inline-block;
     padding: 0 5px;
+    &:first-child {
+      padding-left: 0;
+    }
   }
   ::ng-deep d-radio {
     display: inline-block;
   }
+}
+.devui-radio-list-item {
+  position: relative;
+  line-height: 32px;
 }

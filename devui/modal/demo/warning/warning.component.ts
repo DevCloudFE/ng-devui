@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { DialogService } from 'ng-devui';
+import { DialogService } from 'ng-devui/modal';
 @Component({
   selector: 'd-warning',
   templateUrl: './warning.component.html'

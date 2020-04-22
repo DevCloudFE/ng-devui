@@ -2,7 +2,8 @@
 
 .devui-dropdown-menu {
   width: 100%;
-  &.devui-custom-right {
+  &.devui-custom-right,
+  &.devui-custom-left {
     min-width: 400px;
     display: flex !important;
     & > .devui-dropdown-menu-wrap {
@@ -22,6 +23,9 @@
         display: none;
       }
     }
+  }
+  &.devui-custom-left .devui-select-custom-area {
+    order: -1;
   }
   .devui-dropdown-menu-wrap {
     position: initial;
@@ -522,6 +526,39 @@ svg.svg-icon-search > path {
       display: inline-flex;
       vertical-align: middle;
     }
+  }
+}
+.devui-form-control-feedback.devui-search-clear {
+  right: 32px;
+  cursor: pointer;
+  pointer-events: initial;
+  svg.svg-icon-clear {
+    transform: translateY(0.1em);
+  }
+  svg.svg-icon-clear > g > g {
+    fill: $dark-1;
+  }
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 15%;
+    height: 70%;
+    width: 1px;
+    border-left: 1px solid $gray-1;
+  }
+  &.devui-search-clear-lg {
+    right: 46px;
+    width: 46px;
+    height: 46px;
+    line-height: 46px;
+  }
+  &.devui-search-clear-sm {
+    right: 30px;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
   }
 }
 

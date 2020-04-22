@@ -38,11 +38,11 @@ export class SingleDateRangePickerComponent extends SingleDatepickerComponent im
   @Input() rangePicker = false;
   @Input() isAuxiliary = false;
   @Input() currentCalendars = Array(2);
-  @Output() hoverOnDate = new EventEmitter();
+  @Output() hoverOnDate = new EventEmitter<any>();
   @Output() rangeSelected = new EventEmitter<SelectDateRangeChangeEventArgs>();
   @Output() rangeSelecting = new EventEmitter<SelectDateRangeChangeEventArgs>();
   @Output() syncPickerPair = new EventEmitter<{}>();
-  @Output() consolidateTime = new EventEmitter();
+  @Output() consolidateTime = new EventEmitter<any>();
   public rangeStart;
   public rangeEnd;
   public previewEnd;

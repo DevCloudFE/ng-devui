@@ -17,8 +17,7 @@ export class DateRangePickerRestrictedRangeComponent {
   dateRange3 = [null, null];
 
   getValue(value) {
-    // tslint:disable-next-line:no-console
-    console.info(value);
+    console.log(value);
   }
 
 }

@@ -16,3 +16,7 @@ a.date-link + a.date-link {
 a.date-link:hover {
   color: blue;
 }
+.devui-input-group-addon {
+  vertical-align: middle;
+  padding-top: 4px;
+}

@@ -15,8 +15,7 @@ export class RangeClearButtonComponent {
   dateRange2 = [new Date('11/03/2017 00:00'), new Date('01/02/2019 00:00')];
 
   getValue(value) {
-    // tslint:disable-next-line:no-console
-    console.info(value);
+    console.log(value);
   }
 
 }

@@ -52,7 +52,7 @@ export class DataTableComponent implements OnDestroy, OnInit, AfterContentInit {
   /**
    * 表格类型,striped表现为条纹间隔
    */
-  @Input() type: '' | 'striped' = '';
+  @Input() type: '' | 'striped' | 'borderless' = '';
   /**
    * 表格是否开启鼠标hover行高亮效果
    */
@@ -148,7 +148,7 @@ export class DataTableComponent implements OnDestroy, OnInit, AfterContentInit {
   /**
    * 延迟懒加载完成事件
    */
-  @Output() loadMore = new EventEmitter();
+  @Output() loadMore = new EventEmitter<any>();
   /**
    * 列宽变化事件
    */
@@ -186,7 +186,7 @@ export class DataTableComponent implements OnDestroy, OnInit, AfterContentInit {
   /**
    * 全部子列表关闭事件
    */
-  @Output() allChildrenTableClose = new EventEmitter();
+  @Output() allChildrenTableClose = new EventEmitter<any>();
 
   @ContentChildren(DataTableColumnTmplComponent) columns: QueryList<DataTableColumnTmplComponent>;
   @ContentChild(DataTableHeadTmplComponent, { static: false }) headTemplate: DataTableHeadTmplComponent;
@@ -597,9 +597,6 @@ export class DataTableComponent implements OnDestroy, OnInit, AfterContentInit {
     this._columns = this._columns.map((_column, index) => {
       if (_column.field === column.field) {
         this.ngZone.run(() => {
-          if (index + 1 < this._columns.length && this._columns[index + 1].width && _column.width) {
-            this._columns[index + 1].width = parseInt(nextElementWidth, 10) + 'px';
-          }
           _column.width = width + 'px';
         });
 
@@ -646,9 +643,6 @@ export class DataTableComponent implements OnDestroy, OnInit, AfterContentInit {
     this._columns = this._columns.map((column, index) => {
       if (column.field === field) {
         this.ngZone.run(() => {
-          if (index + 1 < this._columns.length && this._columns[index + 1].width && column.width) {
-            this._columns[index + 1].width = parseInt(nextElementWidth, 10) + 'px';
-          }
           column.width = parseInt(width, 10) + 'px';
           const columnResizeEventArg = { currentColumn: column, nextColumn: this._columns[index + 1] };
           this.resize.emit(columnResizeEventArg);

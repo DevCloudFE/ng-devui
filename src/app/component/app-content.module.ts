@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { AccordionModule } from 'ngx-accordion';
 import { ExamplePanelComponent } from './example-panel.component';
 import { AppContentComponent } from './app-content.component';
 import { routesConfig } from './component.route';
@@ -27,7 +26,6 @@ export function hljsLanguages() {
     GetStartedComponent
   ],
   imports: [
-    AccordionModule,
     CommonModule,
     DevUIModule.forRoot(),
     RouterModule.forChild([

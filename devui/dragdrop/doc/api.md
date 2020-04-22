@@ -122,6 +122,7 @@ type DropEvent = {
 | maxSpeed  | `DropScrollSpeed`即`number`  | 1000  | 响应最大速度 ，函数计算大于这个速度的时候，以最大速度为准 |
 | viewOffset | {forward?: `DropScrollAreaOffset`; backward?: `DropScrollAreaOffset`;} | -- | 设置拖拽区域的偏移，用于某些位置修正|
 | dropScrollScope| `string| Array<string>`| --| 允许触发滚动scope，不配置为默认接收所有scope，配置情况下，draggable的`dragScope`和`dropScrollScope`匹配得上才能触发滚动|
+| backSpaceDroppable| `boolean`|true| 是否允许在滚动面板上同时触发放置到滚动面板的下边的具体可以放置元素，默认为true，设置为false则不能边滚动边放置|
   
 备注： speedFn默认函数为`(x: number) => Math.ceil((1 - x) * 18) * 100`，传入数字`x`是 鼠标位置距离边缘的距离占全响应宽度的百分比，
 最终速度将会是speedFn(x)，但不会小于最小速度`minSpeed`或者大于最大速度`maxSpeed`。

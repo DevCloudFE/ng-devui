@@ -267,57 +267,6 @@ $devui-btn-pseudo-config: (
   }
 }
 
-.devui-loading {
-  .devui-loading-spinner-wrapper {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1001;
-  }
-
-  .devui-loading-default-spinner {
-    position: relative;
-    display: inline-block;
-    vertical-align: middle;
-    width: 20px;
-    height: 20px;
-    div {
-      position: absolute;
-      left: 44.5%;
-      top: 37%;
-      width: 10%;
-      height: 26%;
-      border-radius: 50px;
-      opacity: 0;
-      animation: spinner-anim 1s linear infinite;
-    }
-
-    @each $i in 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 {
-      .bar#{$i} {
-        transform: rotate(30 * ($i - 1) + deg) translate(0, -142%);
-        animation-delay: -1 + 1 / 12 * ($i - 1) + s;
-      }
-    }
-  }
-
-  .devui-loading-default-text {
-    display: inline-block;
-    margin-left: 6px;
-    max-width: 400px;
-  }
-
-  @keyframes spinner-anim {
-    from {
-      opacity: 1;
-    }
-    to {
-      opacity: 0.25;
-    }
-  }
-}
-
-// 还未清理
 .devui-icon-fix {
   position: relative;
   top: 2px;
@@ -326,4 +275,8 @@ $devui-btn-pseudo-config: (
 .button-content {
   display: inline-block;
   vertical-align: top;
+}
+
+.clear-right-5 {
+  margin-right: 5px;
 }

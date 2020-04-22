@@ -31,8 +31,9 @@
 | noResultItemTemplate | `TemplateRef`      | --         | 可选,没有匹配项的展示结果 |
 | keepMultipleOrder | `string`    | 'user-select'         | 可选,`'user-select' \| 'origin'`,配置多选的时候是否维持原数组排序还是用户选择的顺序排序,默认是用户顺序 |
 | customViewTemplate | `TemplateRef`      | --        | 可选,支持自定义区域显示内容定制,可以使用choose来选择某项,choose需要传两个必填参数,第一个为选择的选项,第二个为选项在列表的index值,event参数选填,若不填请自行处理冒泡,详见demo |
-| customViewDirection | `'bottom' \| 'right'`      | 'bottom'         | customViewTemplate所处的相对下拉列表的位置 |
+| customViewDirection | `'bottom' \| 'right'\| 'left'`     | 'bottom'         | customViewTemplate所处的相对下拉列表的位置 |
 | appendToBody    | `boolean`      | false      | 可选,true会被附加到body                     |
+| appendToBodyDirections| `Array<AppendToBodyDirection \| ConnectedPosition>`   |`['rightDown', 'leftDown', 'rightUp', 'leftUp']` |可选， 方向数组优先采用数组里靠前的位置，AppendToBodyDirection和 ConnectedPosition请参考dropdown|
 | width    | `number`      | --     | 可选,搭配appendToBody使用，设置下拉宽度       
 | virtualScroll    | `boolean`      | false      | 可选,是否虚拟滚动，大数据量场景试用                     |
 |allowClear|  `boolean`      | false      | 可选, 配置是否允许清空选值，仅单选场景适用     |

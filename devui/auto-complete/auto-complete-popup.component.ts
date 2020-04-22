@@ -6,6 +6,7 @@ import {
   ViewChild
 } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
+import { AutoCompleteConfig } from './auto-complete-config';
 import { fadeInOut } from 'ng-devui/utils';
 
 @Component({
@@ -39,12 +40,12 @@ export class AutoCompletePopupComponent implements ControlValueAccessor {
   private onChange = (_: any) => null;
   private onTouched = () => null;
 
-  constructor() {
-    this.formatter = (item: any) => item ? (item.label || item.toString()) : '';
+  constructor(private autoCompleteConfig: AutoCompleteConfig) {
+    this.formatter = this.autoCompleteConfig.autoComplete.formatter;
     this.maxHeight = 300;
   }
 
-  writeValue(obj: any): void {
+  writeValue(obj): void {
     this.value = obj;
   }
 
@@ -52,15 +53,15 @@ export class AutoCompletePopupComponent implements ControlValueAccessor {
     this.disabled = isDisabled;
   }
 
-  registerOnChange(fn: any): void {
+  registerOnChange(fn): void {
     this.onChange = fn;
   }
 
-  registerOnTouched(fn: any): void {
+  registerOnTouched(fn): void {
     this.onTouched = fn;
   }
 
-  onSelect(event: any, item: any) {
+  onSelect(event, item) {
     if (this.disabledKey && item[this.disabledKey]) {
       event.preventDefault();
       event.stopPropagation();
@@ -76,11 +77,11 @@ export class AutoCompletePopupComponent implements ControlValueAccessor {
     this.onChange({ type: 'select', value: this.value });
   }
 
-  selectCurrentItem(event: any) {
+  selectCurrentItem(event) {
     this.onSelect(event, this.source[this.activeIndex]);
   }
 
-  onActiveIndexChange(index: any) {
+  onActiveIndexChange(index) {
     this.activeIndex = index;
   }
 
@@ -108,23 +109,23 @@ export class AutoCompletePopupComponent implements ControlValueAccessor {
     }
   }
 
-  trackByFn(index: any, item: any) {
+  trackByFn(index, item) {
     return index;
   }
 
-  animationEnd($event: any) {
+  animationEnd($event) {
     if (!this.isOpen) {
       const targetElement = this.selectMenuElement.nativeElement;
       targetElement.style.display = 'none';
     }
   }
 
-  loadMoreEvent($event: any) {
+  loadMoreEvent($event) {
     this.showLoading = true;
     this.onChange({ type: 'loadMore', value: this });
   }
 
-  loadFinish($event: any) {
+  loadFinish($event) {
     this.showLoading = false;
   }
 }

@@ -28,11 +28,6 @@
         <a class="date-link">选择迭代开始日期</a>
       </div>
     </ng-template>
-    <div class="row">
-      <div class="col-md-12">
-        <pre>{{ startDate ? 'selectedDate: ' : null }} {{ ((startDate ? startDate : null) | dDatePipe) || 'No date was selected!' }}</pre>
-      </div>
-    </div>
   </div>
 
   <div class="col-md-6">
@@ -64,10 +59,5 @@
         <a class="date-link">选择迭代结束日期</a>
       </div>
     </ng-template>
-    <div class="row">
-      <div class="col-md-12">
-        <pre>{{ endDate ? 'selectedDate: ' : null }} {{ ((endDate ? endDate : null) | dDatePipe) || 'No date was selected!' }}</pre>
-      </div>
-    </div>
   </div>
 </section>

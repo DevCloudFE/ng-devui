@@ -20,7 +20,7 @@ export class PanelComponent {
   @Input() heading: string;
   @Input() cssClass: string;
   @Input() isCollapsed: boolean;
-  @Output() toggle: EventEmitter<boolean> = new EventEmitter();
+  @Output() toggle: EventEmitter<boolean> = new EventEmitter<boolean>();
   @ContentChild(PanelHeaderComponent, { static: false }) panelHeader;
   @ContentChild(PanelFooterComponent, { static: false }) panelFooter;
 

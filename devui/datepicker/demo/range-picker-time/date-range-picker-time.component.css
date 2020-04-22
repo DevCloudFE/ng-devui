@@ -30,4 +30,6 @@ a.date-link:hover {
 
 .devui-input-group-addon {
   width: 1%;
+  vertical-align: middle;
+  padding-top: 4px;
 }

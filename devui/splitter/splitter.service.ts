@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 import { SplitterPaneComponent } from './splitter-pane.component';
 
 @Injectable()
@@ -6,7 +7,7 @@ export class SplitterService {
   panes: Array<SplitterPaneComponent>;
   private containerSize: Function;
   paneCount = 0;
-
+  paneChangeSubject = new Subject();
   // 配置pane信息，panes列表，方向，容器大小，方便后续计算使用
   configPane({panes, orientation, containerSize}) {
     this.panes = panes;
@@ -117,11 +118,11 @@ export class SplitterService {
   }
 
   // 切换pane展开，收起
-  togglePane(paneIndex, nearPaneIndex) {
+  togglePane(paneIndex, nearPaneIndex, lockStatus?) {
     const pane = this.getPane(paneIndex);
     const nearPane = this.getPane(nearPaneIndex);
     if (pane.collapsible) {
-        pane.collapsed = !pane.collapsed;
+        pane.collapsed = lockStatus ? pane.collapsed : !pane.collapsed;
         pane.toggleCollapseClass();
         nearPane.toggleNearPaneFlexGrow();
         pane.collapsedChange.emit(pane.collapsed);

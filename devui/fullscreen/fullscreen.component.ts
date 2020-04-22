@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input, Inject, ElementRef, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Inject, ElementRef, Output, EventEmitter, AfterViewInit } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { FullscreenMode } from './fullscreen.type';
 import { DEFAULT_ZINDEX, DEFAULT_MODE, ESC_KEYCODE } from './fullscreen.config';
@@ -8,7 +8,7 @@ import { DEFAULT_ZINDEX, DEFAULT_MODE, ESC_KEYCODE } from './fullscreen.config';
   templateUrl: './fullscreen.component.html',
   styleUrls: [ './fullscreen.component.scss' ]
 })
-export class FullscreenComponent implements OnInit, OnDestroy {
+export class FullscreenComponent implements OnInit, OnDestroy, AfterViewInit {
   private currentTarget: HTMLElement;
   private isFullscreen = false;
 
@@ -16,7 +16,7 @@ export class FullscreenComponent implements OnInit, OnDestroy {
   @Input() zIndex = DEFAULT_ZINDEX;
   @Input() target: HTMLElement;
 
-  @Output() fullscreenLaunch: EventEmitter<any> = new EventEmitter();
+  @Output() fullscreenLaunch: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
     private elementRef: ElementRef,
@@ -26,6 +26,9 @@ export class FullscreenComponent implements OnInit, OnDestroy {
   ngOnInit() {
     document.addEventListener('fullscreenchange', this.onFullScreenChange);
     document.addEventListener('keydown', this.handleKeyDown);
+  }
+
+  ngAfterViewInit() {
     const btnLaunch = this.elementRef.nativeElement.querySelector('[fullscreen-launch]');
     if (btnLaunch) { btnLaunch.addEventListener('click', this.handleFullscreen); }
   }
@@ -74,8 +77,10 @@ export class FullscreenComponent implements OnInit, OnDestroy {
     if (this.currentTarget) {
       const targetElement: HTMLElement = this.currentTarget;
       if (this.doc.fullscreenElement) { // 进入全屏
+        this.addFullScreenStyle();
         this.launchNormalFullscreen(targetElement);
       } else { // 退出全屏
+        this.removeFullScreenStyle();
         this.currentTarget = null;
         this.exitNormalFullscreen(targetElement);
       }
@@ -94,9 +99,11 @@ export class FullscreenComponent implements OnInit, OnDestroy {
     if (this.mode === 'normal') {
       const fullscreen = targetElement.classList.contains('fullscreen');
       if (!fullscreen) { // 进入全屏
+        this.addFullScreenStyle();
         this.launchNormalFullscreen(targetElement);
         isFullscreen = true;
       } else { // 退出全屏
+        this.removeFullScreenStyle();
         this.exitNormalFullscreen(targetElement);
         isFullscreen = false;
       }
@@ -137,5 +144,13 @@ export class FullscreenComponent implements OnInit, OnDestroy {
     document.removeEventListener('keydown', this.handleKeyDown);
     const btnLaunch = this.elementRef.nativeElement.querySelector('[fullscreen-launch]');
     if (btnLaunch) { btnLaunch.removeEventListener('click', this.handleFullscreen); }
+  }
+
+  private addFullScreenStyle() {
+    document.getElementsByTagName('html')[0].classList.add('devui-fullscreen');
+  }
+
+  private removeFullScreenStyle() {
+    document.getElementsByTagName('html')[0].classList.remove('devui-fullscreen');
   }
 }

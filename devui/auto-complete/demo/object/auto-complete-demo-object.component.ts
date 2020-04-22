@@ -10,7 +10,7 @@ export class AutoDemoObjectComponent {
   languages = ['C#', 'C', 'C++', 'CPython', 'Java', 'JavaScript', 'Go', 'Python', 'Ruby', 'F#', 'TypeScript', 'SQL',
     'LiveScript', 'CoffeeScript'];
 
-  onSearchObject(term: any) {
+  onSearchObject(term) {
     return of(this.languages
       .map((lang, index) => ({ label: lang, id: index }))
       .filter(lang => lang.label.toLowerCase().indexOf(term.toLowerCase()) !== -1)

@@ -1,7 +1,9 @@
 # 快速开始
+
 引导您如何在项目中使用DevUI
 
 ### Angular版本
+
 当前支持的Angular版本 <font color=red>`^8.0.0`</font>
 
 ### 1. 创建一个项目
@@ -13,10 +15,12 @@ $ ng new New-Project
 ```
 
 ### 2. 安装
+
 进入你的项目文件夹，使用npm安装DevUI
+
 ```bash
 $ npm i ng-devui
-# 可选，字体图标库 
+# 可选，字体图标库, 部分Demo依赖此字体库
 # $ npm i @devui-design/icons
 ```
 
@@ -59,6 +63,7 @@ export class AppModule { }
 ```
 
 ### 5. 启动开发调试
+
 ```bash
 $ ng serve --open
 ```

@@ -1,9 +1,9 @@
-@import '../../../style/theme/color';
 .board {
   width: 100%;
   max-height: 500px;
   overflow: auto;
-  background-color: $gray-3;
+  background-color: #f8f8f8;
+  background-color: var(--gray-3, #f8f8f8);
   padding: 5px;
   .row {
     display: flex;
@@ -18,8 +18,10 @@
       min-height: 75px;
       width: 285px;
       margin: 0 5px;
-      background-color: $bg-white;
-      box-shadow: 1px 2px 4px 0 $dark-1-boxshadow;
+      background-color: #ffffff;
+      box-shadow: 1px 2px 4px 0 rgba(41, 48, 64, 0.2);
+      background-color: var(--white, #ffffff);
+      box-shadow: 1px 2px 4px 0 var(--dark-1-boxshadow, rgba(41, 48, 64, 0.2));
     }
   }
   .row-group {

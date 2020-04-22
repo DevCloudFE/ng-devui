@@ -19,9 +19,9 @@ export class ResizeableDirective implements OnDestroy, AfterViewInit {
     @Input() resizeBarRefElement: ElementRef;
     @Input() tableViewRefElement: ElementRef;
 
-    @Output() resize: EventEmitter<any> = new EventEmitter();
-    @Output() beginResize: EventEmitter<any> = new EventEmitter();
-    @Output() resizingEvent: EventEmitter<any> = new EventEmitter();
+    @Output() resizeEvent: EventEmitter<any> = new EventEmitter<any>();
+    @Output() beginResizeEvent: EventEmitter<any> = new EventEmitter<any>();
+    @Output() resizingEvent: EventEmitter<any> = new EventEmitter<any>();
     element: HTMLElement;
     subscription: Subscription;
     resizing = false;
@@ -34,16 +34,16 @@ export class ResizeableDirective implements OnDestroy, AfterViewInit {
     totalWidth: number;
     nextElementWidth: number;
     mouseDownScreenX: number;
-    constructor(element: ElementRef, private renderer: Renderer, private renderer2: Renderer2, private zone: NgZone) {
+    constructor(element: ElementRef, private renderer2: Renderer2, private zone: NgZone) {
         this.element = element.nativeElement;
     }
 
     ngAfterViewInit(): void {
         if (this.resizeEnabled && !this.unresizable) {
-            const node = this.renderer.createElement(this.element, 'span');
-            this.renderer.setElementClass(node, 'resize-handle', true);
-            this.renderer.attachViewAfter(this.element, node);
-            this.resizeNodeEvent = this.renderer.listen(node, 'click', (event) => event.stopPropagation());
+            const node = this.renderer2.createElement('span');
+            this.renderer2.addClass(node, 'resize-handle');
+            this.renderer2.appendChild(this.element.firstElementChild, node);
+            this.resizeNodeEvent = this.renderer2.listen(node, 'click', (event) => event.stopPropagation());
         }
     }
 
@@ -51,6 +51,46 @@ export class ResizeableDirective implements OnDestroy, AfterViewInit {
         this._destroySubscription();
         if (this.resizeNodeEvent) {
             this.resizeNodeEvent();
+        }
+    }
+
+    @HostListener('mousedown', ['$event'])
+    onMousedown(event: MouseEvent): void {
+        this.moveCount = 0;
+        const isHandle = (<HTMLElement>(event.target)).classList.contains('resize-handle');
+
+        if (isHandle && !this.unresizable) {
+            this.beginResizeEvent.emit(event); // emit begin resize event
+
+            this.initialWidth = this.element.clientWidth;
+            const initialOffset = this.element.offsetLeft;
+            this.mouseDownScreenX = event.clientX;
+            event.stopPropagation();
+            this.nextElement = this.element.nextElementSibling;
+            this.resizing = true;
+            this.totalWidth = this.nextElement ? this.initialWidth + this.nextElement.clientWidth : this.initialWidth;
+
+            // create resizeOverlay
+            this.resizeOverlay = this.renderer2.createElement('div');
+            this.renderer2.appendChild(this.element.firstElementChild, this.resizeOverlay);
+            this.renderer2.addClass(this.resizeOverlay, 'resize-overlay');
+            this.renderer2.listen(this.resizeOverlay, 'click', (clickEvent: Event) => clickEvent.stopPropagation());
+
+            this.renderer2.addClass(this.tableViewRefElement.nativeElement, 'table-view-selector');
+
+            this.renderer2.setStyle(this.resizeBarRefElement.nativeElement, 'display', 'block');
+            this.renderer2.setStyle(this.resizeBarRefElement.nativeElement, 'left',
+                (initialOffset + this.initialWidth) + 'px');
+
+            this.renderer2.addClass(this.element, 'hover-bg');
+
+            const mouseup = fromEvent(document, 'mouseup');
+            this.subscription = mouseup
+                .subscribe((ev: MouseEvent) => this.onMouseup(ev));
+
+            this.zone.runOutsideAngular(() => {
+                window.document.addEventListener('mousemove', this.bindMousemove);
+            });
         }
     }
 
@@ -64,61 +104,20 @@ export class ResizeableDirective implements OnDestroy, AfterViewInit {
             this.resizing = false;
 
             // destroy overlay
-            this.renderer.detachView([this.resizeOverlay]);
-            // this.renderer.destroyView(this.element, [this.resizeOverlay]);
             this.renderer2.removeChild(this.element, this.resizeOverlay);
 
-            this.renderer.setElementClass(this.tableViewRefElement.nativeElement, 'table-view-selector', false);
+            this.renderer2.removeClass(this.tableViewRefElement.nativeElement, 'table-view-selector');
 
-            this.renderer.setElementClass(this.element, 'hover-bg', false);
-            this.renderer.setElementStyle(this.resizeBarRefElement.nativeElement, 'display', 'none');
+            this.renderer2.removeClass(this.element, 'hover-bg');
+            this.renderer2.setStyle(this.resizeBarRefElement.nativeElement, 'display', 'none');
 
-            this.resize.emit({width: finalWidth, nextElementWidth: this.nextElementWidth});
+            this.resizeEvent.emit({width: finalWidth, nextElementWidth: this.nextElementWidth});
         });
         if (this.subscription && !this.subscription.closed) {
             this._destroySubscription();
         }
 
         window.document.removeEventListener('mousemove', this.bindMousemove);
-    }
-
-    @HostListener('mousedown', ['$event'])
-    onMousedown(event: MouseEvent): void {
-        this.moveCount = 0;
-        const isHandle = (<HTMLElement>(event.target)).classList.contains('resize-handle');
-
-        if (isHandle && !this.unresizable) {
-            this.beginResize.emit(event); // emit begin resize event
-
-            this.initialWidth = this.element.clientWidth;
-            const initialOffset = this.element.offsetLeft;
-            this.mouseDownScreenX = event.clientX;
-            event.stopPropagation();
-            this.nextElement = this.element.nextElementSibling;
-            this.resizing = true;
-            this.totalWidth = this.nextElement ? this.initialWidth + this.nextElement.clientWidth : this.initialWidth;
-
-            // create resizeOverlay
-            this.resizeOverlay = this.renderer.createElement(this.element, 'div');
-            this.renderer.setElementClass(this.resizeOverlay, 'resize-overlay', true);
-            this.renderer.listen(this.resizeOverlay, 'click', (clickEvent: Event) => clickEvent.stopPropagation());
-
-            this.renderer.setElementClass(this.tableViewRefElement.nativeElement, 'table-view-selector', true);
-
-            this.renderer.setElementStyle(this.resizeBarRefElement.nativeElement, 'display', 'block');
-            this.renderer.setElementStyle(this.resizeBarRefElement.nativeElement, 'left',
-                (initialOffset + this.initialWidth) + 'px');
-
-            this.renderer.setElementClass(this.element, 'hover-bg', true);
-
-            const mouseup = fromEvent(document, 'mouseup');
-            this.subscription = mouseup
-                .subscribe((ev: MouseEvent) => this.onMouseup(ev));
-
-            this.zone.runOutsideAngular(() => {
-                window.document.addEventListener('mousemove', this.bindMousemove);
-            });
-        }
     }
 
     bindMousemove = (e) => {
@@ -134,15 +133,12 @@ export class ResizeableDirective implements OnDestroy, AfterViewInit {
 
         const finalWidth = this.getFinalWidth(newWidth);
         this.setElementWidth(finalWidth);
-        this.renderer.setElementStyle(this.resizeBarRefElement.nativeElement, 'left', `${finalWidth + this.element.offsetLeft}px`);
+        this.renderer2.setStyle(this.resizeBarRefElement.nativeElement, 'left', `${finalWidth + this.element.offsetLeft}px`);
         this.resizingEvent.emit({ width: finalWidth, nextElementWidth: this.nextElementWidth });
     }
 
     private setElementWidth(finalWidth: number) {
-        if (this.nextElement) {
-            this.renderer.setElementStyle(this.nextElement, 'width', `${this.nextElementWidth}px`);
-        }
-        this.renderer.setElementStyle(this.element, 'width', `${finalWidth}px`);
+        this.renderer2.setStyle(this.element, 'width', `${finalWidth}px`);
     }
 
     private getFinalWidth(newWidth: number): number {
@@ -152,13 +148,7 @@ export class ResizeableDirective implements OnDestroy, AfterViewInit {
         const overMinWidth = !this.minWidth || newWidth >= minWidth;
         const underMaxWidth = !this.maxWidth || newWidth <= maxWidth;
 
-        let finalWidth = !overMinWidth ? minWidth : (!underMaxWidth ? maxWidth : newWidth);
-        if (this.nextElement) {
-            const nextWidth = this.totalWidth - finalWidth;
-            const nMinWidth = this.handleWidth(this.nextElement.getAttribute('minWidth'));
-            this.nextElementWidth = (!nMinWidth || nextWidth >= nMinWidth) ? nextWidth : nMinWidth;
-            finalWidth =  this.totalWidth - this.nextElementWidth;
-        }
+        const finalWidth = !overMinWidth ? minWidth : (!underMaxWidth ? maxWidth : newWidth);
         return finalWidth;
     }
 

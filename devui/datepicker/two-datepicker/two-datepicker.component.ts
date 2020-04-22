@@ -37,7 +37,7 @@ export class TwoDatePickerComponent implements OnInit, OnDestroy {
   @Input() selectedRange = [null, null];
   @Input() hideOnRangeSelected = true;
   customViewTemplate: TemplateRef<any>;
-  @Output() selectRange = new EventEmitter();
+  @Output() selectRange = new EventEmitter<any>();
   @ViewChild('leftPicker', { static: false }) leftPicker: ElementRef;
   @ViewChild('rightPicker', { static: false }) rightPicker: ElementRef;
   @ViewChild('templateWrap', { static: false }) templateWrap: ElementRef;
