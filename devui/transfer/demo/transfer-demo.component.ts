@@ -19,15 +19,10 @@ export class TransferDemoComponent {
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./sort/transfer-demo-sort.component.ts') }
   ];
 
-  demoDocViewerMain;
-
   navItems = [
-    { dAnchorLink: 'transfer-demo-base', value: "基本用法"},
-    { dAnchorLink: 'transfer-demo-search', value: "搜索穿梭框"},
-    { dAnchorLink: 'transfer-demo-sort', value: "排序穿梭框"},
-    { dAnchorLink: 'transfer-demo-custom', value: "自定义穿梭框"}
-  ]
-  constructor() {
-    this.demoDocViewerMain = document.querySelector('.doc-viewer-container .main');
-  }
+    { dAnchorLink: 'basic-usage', value: '基本用法'},
+    { dAnchorLink: 'transfer-demo-search', value: '搜索穿梭框'},
+    { dAnchorLink: 'transfer-demo-sort', value: '排序穿梭框'},
+    { dAnchorLink: 'transfer-demo-custom', value: '自定义穿梭框'}
+  ];
 }

@@ -94,31 +94,24 @@ export class SelectDemoComponent {
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./user-mail-search/user-mail-search.component.ts')},
     {title: 'CSS', language: 'css', code:  require('!!raw-loader!./user-mail-search/user-mail-search.component.css')},
   ];
-  demoDocViewerMain;
-
   navItems = [
-    { dAnchorLink: 'basic-usage', value: "基本用法"},
-    { dAnchorLink: 'object-filter', value: "使用对象"},
-    { dAnchorLink: 'custom-search', value: "自定义搜索功能"},
-    { dAnchorLink: 'select-all', value: "全选下拉选项"},
-    { dAnchorLink: 'select-template', value: "自定义模板"},
-    { dAnchorLink: 'labelization', value: "标签化"},
-    { dAnchorLink: 'disabled', value: "禁用"},
-    { dAnchorLink: 'allow-clear-value', value: "允许清空值"},
-    { dAnchorLink: 'append-to-body', value: "附着到Body上"},
-    { dAnchorLink: 'lazy-load-virtual-scroll', value: "虚拟滚动 或 懒加载"},
-    { dAnchorLink: 'bloading', value: "异步加载显示加载中"},
-    { dAnchorLink: 'custom-area', value: "自定义区域"},
-    { dAnchorLink: 'custom-area-direction', value: "自定义区域方向和选中"},
-    { dAnchorLink: 'multi-keep-order', value: "设置已选项顺序源数组顺序或选中顺序"},
-    { dAnchorLink: 'user-limit-selected-number', value: "用户场景：限制选中个数"},
-    { dAnchorLink: 'user-search-n-lazyload', value: "用户场景：自定义搜索的懒加载"},
-    { dAnchorLink: 'user-mail-search', value: "用户场景：自定义搜索和模板结合 —— 邮箱搜索"}
+    { dAnchorLink: 'basic-usage', value: '基本用法'},
+    { dAnchorLink: 'object-filter', value: '使用对象'},
+    { dAnchorLink: 'custom-search', value: '自定义搜索功能'},
+    { dAnchorLink: 'select-all', value: '全选下拉选项'},
+    { dAnchorLink: 'select-template', value: '自定义模板'},
+    { dAnchorLink: 'labelization', value: '标签化'},
+    { dAnchorLink: 'disabled', value: '禁用'},
+    { dAnchorLink: 'allow-clear-value', value: '允许清空值'},
+    { dAnchorLink: 'append-to-body', value: '附着到Body上'},
+    { dAnchorLink: 'lazy-load-virtual-scroll', value: '虚拟滚动 或 懒加载'},
+    { dAnchorLink: 'bloading', value: '异步加载显示加载中'},
+    { dAnchorLink: 'custom-area', value: '自定义区域'},
+    { dAnchorLink: 'custom-area-direction', value: '自定义区域方向和选中'},
+    { dAnchorLink: 'multi-keep-order', value: '设置已选项顺序源数组顺序或选中顺序'},
+    { dAnchorLink: 'user-limit-selected-number', value: '用户场景：限制选中个数'},
+    { dAnchorLink: 'user-search-n-lazyload', value: '用户场景：自定义搜索的懒加载'},
+    { dAnchorLink: 'user-mail-search', value: '用户场景：自定义搜索和模板结合 —— 邮箱搜索'}
 
-  ]
-
-
-  constructor() {
-    this.demoDocViewerMain = document.querySelector('.doc-viewer-container .main');
-  }
+  ];
 }
