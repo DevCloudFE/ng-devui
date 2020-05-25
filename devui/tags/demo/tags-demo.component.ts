@@ -19,6 +19,10 @@ export class TagsDemoComponent {
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./custom/custom.component.ts')},
     {title: 'CSS', language: 'css', code:  require('!!raw-loader!./custom/custom.component.css')}
   ];
+  navItems = [
+    { dAnchorLink: 'single-tag', value: '单个标签'},
+    { dAnchorLink: 'tags-group', value: '标签组'}
+  ];
 
   constructor() {
   }

@@ -25,6 +25,9 @@ export default {
       'October',
       'November',
       'December'],
+    yearDisplay(year) {
+      return `${year}`;
+    }
   },
 
   pagination: {
@@ -54,6 +57,21 @@ export default {
   modal: {
     warning: 'Warning',
     error: 'Error',
-    info: 'Information'
+    info: 'Information',
+    success: 'Success'
+  },
+  imagePreview: {
+    rotate: 'Rotate',
+    zoomIn: 'Zoom in',
+    zoomOut: 'Zoom out',
+    bestScale: 'Best Position',
+    originScale: 'Original ratio',
+    pre: 'Pre',
+    next: 'Next'
+  },
+  colorPicker: {
+    recentlyUsed: 'Recently Used',
+    basicColors: 'Basic Colors',
+    moreColors: 'More Colors'
   }
 };

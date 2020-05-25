@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, HostBinding, OnInit, ChangeDetectorRef } from '@angular/core';
 import { LoadingType } from 'ng-devui/loading';
+import { ColumnAdjustStrategy } from 'ng-devui/data-table';
 import { originSource, SourceType } from '../mock-data';
 
 @Component({
@@ -59,7 +60,7 @@ export class DatatableDemoOnlyOneColumnSortComponent implements OnInit {
   complete = false;
   lazyDataSource = [];
   loading: LoadingType;
-
+  columnAdjustStrategy = ColumnAdjustStrategy.mousemove;
   constructor(private ref: ChangeDetectorRef) { }
   ngOnInit() {
   }

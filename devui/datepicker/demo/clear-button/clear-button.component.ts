@@ -4,6 +4,7 @@ import {
   ChangeDetectionStrategy,
   HostBinding
 } from '@angular/core';
+import { SelectDateChangeReason } from 'ng-devui/datepicker';
 
 @Component({
   selector: 'd-clear-button',
@@ -14,6 +15,7 @@ import {
 export class DatepickerClearButtonComponent implements OnInit {
   datePicker1: any;
   selectedDate2 = null;
+  changeReason = SelectDateChangeReason;
   ngOnInit() {
   }
   getValue(value) {

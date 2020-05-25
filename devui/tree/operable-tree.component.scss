@@ -6,11 +6,13 @@
 :host {
   display: block;
 }
+
 .disabled {
-  opacity: 0.3;
-  cursor: not-allowed;
+  color: $disabled-content;
+  cursor: not-allowed !important;
   user-select: none;
 }
+
 ::ng-deep {
   &.devui-tree-node.devui-operable-tree-node {
     .devui-tree-node__checkbox {
@@ -57,10 +59,11 @@
     }
 
     svg.svg-icon > g > g > path {
-      fill: $dark-2;
+      fill: $dark-1;
     }
   }
 }
+
 .devui-form-control {
   outline: none;
 }

@@ -18,4 +18,10 @@ export class TransferDemoComponent {
   sortSource: Array<DevuiSourceData> = [
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./sort/transfer-demo-sort.component.ts') }
   ];
+  navItems = [
+    { dAnchorLink: 'transfer-demo-base', value: '基本用法'},
+    { dAnchorLink: 'transfer-demo-search', value: '搜索穿梭框'},
+    { dAnchorLink: 'transfer-demo-sort', value: '排序穿梭框'},
+    { dAnchorLink: 'transfer-demo-custom', value: '自定义穿梭框'}
+  ];
 }

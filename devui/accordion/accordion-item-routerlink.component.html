@@ -1,5 +1,14 @@
 <ng-container *ngIf="!disabled">
-  <a [routerLink]="link" [routerLinkActive]="'devui-router-active'" target="{{ target }}" rel="noopener" title="{{ title }}">
+  <a
+    class="devui-over-flow-ellipsis"
+    [routerLink]="path"
+    [queryParams]="queryParams"
+    [fragment]="fragment"
+    [routerLinkActive]="'devui-router-active'"
+    target="{{ target }}"
+    rel="noopener"
+    title="{{ title }}"
+  >
     <ng-container *ngIf="!itemTemplate">
       {{ title }}
     </ng-container>
@@ -15,7 +24,7 @@
   </a>
 </ng-container>
 <ng-container *ngIf="disabled">
-  <a title="{{ title }}">
+  <a class="devui-over-flow-ellipsis" title="{{ title }}">
     <ng-container *ngIf="!itemTemplate">
       {{ title }}
     </ng-container>

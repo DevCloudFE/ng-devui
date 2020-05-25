@@ -7,7 +7,8 @@ import {
   Input,
   OnInit,
   OnDestroy,
-  ViewContainerRef } from '@angular/core';
+  ViewContainerRef,
+  TemplateRef } from '@angular/core';
 import { OverlayContainerRef } from 'ng-devui/overlay-container';
 import { PopoverComponent } from './popover.component';
 import { fromEvent, Subscription,  merge } from 'rxjs';
@@ -19,7 +20,7 @@ import { PopoverType, PositionType, TriggerType } from './popover.types';
 })
 export class PopoverDirective implements OnInit, OnDestroy {
   popoverComponentRef: ComponentRef<PopoverComponent>;
-  _content: string | HTMLElement;
+  _content: string | HTMLElement | TemplateRef<any>;
   private subscription: Subscription = new Subscription();
   private blurSub: Subscription = new Subscription();
   private blurSubscription: Subscription = new Subscription();

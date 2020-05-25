@@ -19,6 +19,7 @@ import { SwitchComponent } from './switch/switch.component';
 import { PositionComponent } from './position/position.component';
 import { OriginPlaceholderComponent } from './origin-placeholder/origin-placeholder.component';
 import { CrossDimensionComponent } from './cross-dimension/cross-dimension.component';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 
 @NgModule({
   imports: [
@@ -29,6 +30,7 @@ import { CrossDimensionComponent } from './cross-dimension/cross-dimension.compo
     ToggleModule,
     DevUICodeboxModule,
     DevUIApiModule,
+    DDemoNavModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo' },
       { path: 'demo', component: DragDropDemoComponent},

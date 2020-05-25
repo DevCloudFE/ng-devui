@@ -43,10 +43,14 @@ import { FormModule } from 'ng-devui/form';
 import { TextInputModule } from 'ng-devui/text-input';
 import { TextareaModule } from 'ng-devui/textarea';
 import { FullscreenModule } from 'ng-devui/fullscreen';
+import { ImagePreviewModule } from 'ng-devui/image-preview';
+import { AvatarModule } from 'ng-devui/avatar';
+import { QuadrantDiagramModule } from 'ng-devui/quadrant-diagram';
 export * from 'ng-devui/accordion';
 export * from 'ng-devui/alert';
 export * from 'ng-devui/anchor';
 export * from 'ng-devui/auto-complete';
+export * from 'ng-devui/avatar';
 export * from 'ng-devui/button';
 export * from 'ng-devui/breadcrumb';
 export * from 'ng-devui/checkbox';
@@ -59,6 +63,7 @@ export * from 'ng-devui/dropdown';
 export * from 'ng-devui/editable-select';
 export * from 'ng-devui/fullscreen';
 export * from 'ng-devui/form';
+export * from 'ng-devui/image-preview';
 export * from 'ng-devui/loading';
 export * from 'ng-devui/modal';
 export * from 'ng-devui/multi-auto-complete';
@@ -66,6 +71,7 @@ export * from 'ng-devui/pagination';
 export * from 'ng-devui/panel';
 export * from 'ng-devui/popover';
 export * from 'ng-devui/progress';
+export * from 'ng-devui/quadrant-diagram';
 export * from 'ng-devui/radio';
 export * from 'ng-devui/rate';
 export * from 'ng-devui/search';
@@ -96,6 +102,7 @@ export * from './version';
     AlertModule,
     AnchorModule,
     AutoCompleteModule,
+    AvatarModule,
     DCommonModule,
     ButtonModule,
     BreadcrumbModule,
@@ -108,6 +115,7 @@ export * from './version';
     EditableSelectModule,
     FormModule,
     FullscreenModule,
+    ImagePreviewModule,
     LoadingModule,
     ModalModule,
     MultiAutoCompleteModule,
@@ -115,6 +123,7 @@ export * from './version';
     PanelModule,
     PopoverModule,
     ProgressModule,
+    QuadrantDiagramModule,
     RadioModule,
     RateModule,
     SearchModule,

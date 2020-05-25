@@ -53,7 +53,7 @@
       [style.width]="column.width || ''"
       [minWidth]="column.minWidth"
       [maxWidth]="column.maxWidth"
-      (resizeEvent)="onResize($event, column, true)"
+      (resizeEvent)="onResize($event, column)"
       [unresizable]="column.unresizable"
       (beginResizeEvent)="onBeginResize($event)"
       (resizingEvent)="onResizing($event, column)"
@@ -309,7 +309,7 @@
         [tableViewRefElement]="tableViewRefElement"
         [style.width]="rowIndex === column.advancedHeader.length - 1 ? column.width : column.advancedHeader[rowIndex]['$width']"
         [ngStyle]="column.style"
-        (resizeEvent)="onResize($event, column, true); resizeParent($event, column)"
+        (resizeEvent)="onResize($event, column); resizeParent($event, column)"
         [attr.rowspan]="column.advancedHeader[rowIndex]?.rowspan"
         [attr.colspan]="column.advancedHeader[rowIndex]?.colspan"
         [style.textAlign]="
@@ -528,7 +528,7 @@
         [minWidth]="column.minWidth"
         [maxWidth]="column.maxWidth"
         [ngStyle]="column.style"
-        (resizeEvent)="onResize($event, column, true)"
+        (resizeEvent)="onResize($event, column)"
         (beginResizeEvent)="onBeginResize($event)"
         (resizingEvent)="onResizing($event, column)"
         [attr.rowspan]="rows?.length || 1"
@@ -744,7 +744,7 @@
       </cdk-virtual-scroll-viewport>
     </div>
     <div class="line"></div>
-    <div style="text-align: center">
+    <div style="text-align: center;">
       <span class="button-style" (click)="getFilterDataMultiple(column); closeFilter(dropdown)">{{ i18nCommonText?.btnOk }}</span>
     </div>
   </div>

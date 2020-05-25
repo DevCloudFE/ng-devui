@@ -1,5 +1,6 @@
 .tree-node.customized-tree-node {
   border: none;
+
   .tree-node__content {
     padding: 0.3em;
     font-size: 12px;
@@ -14,9 +15,6 @@
 
   .tree-node__children {
     padding-left: 1em;
-  }
-
-  .tree-node--parent {
   }
 
   .tree-node__title {
@@ -39,6 +37,7 @@
     display: inline-block;
     vertical-align: middle;
     color: rgba(86, 195, 246, 0.6);
+
     &:hover {
       + .tree-node__title {
         text-decoration: underline;
@@ -50,6 +49,7 @@
     margin-top: 0.25em;
     margin-left: 0.5em;
     color: #f83848;
+
     &:hover {
       color: #f85f5b;
     }

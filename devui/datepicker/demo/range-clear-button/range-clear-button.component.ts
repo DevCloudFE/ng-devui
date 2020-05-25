@@ -3,6 +3,7 @@ import {
   ChangeDetectionStrategy,
   HostBinding
 } from '@angular/core';
+import { SelectDateRangeChangeReason } from 'ng-devui/datepicker';
 
 @Component({
     selector: 'd-range-clear-button',
@@ -13,6 +14,7 @@ import {
 export class RangeClearButtonComponent {
   dateRange = [null, null];
   dateRange2 = [new Date('11/03/2017 00:00'), new Date('01/02/2019 00:00')];
+  changeReason = SelectDateRangeChangeReason;
 
   getValue(value) {
     console.log(value);

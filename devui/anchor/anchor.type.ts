@@ -7,4 +7,4 @@ export interface IAnchorBox {
     bottom?: number
   };
 }
-export type AnchorActiveChangeSource = 'anchor-link' | 'scroll' | 'click-inside' | 'initial';
+export type AnchorActiveChangeSource = 'anchor-link' | 'scroll' | 'click-inside' | 'initial' | 'fragment';

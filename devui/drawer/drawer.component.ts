@@ -36,6 +36,7 @@ export class DrawerComponent implements OnInit, OnDestroy {
   animateState = 'void';
   @Input() id: string;
   @Input() width = '300px';
+  @Input() zIndex: number;
   @Input() isCover = true;
   @Input() fullScreen = false;
   @ViewChild(DrawerContentDirective, { static: true }) drawerContentHost: DrawerContentDirective;
@@ -93,6 +94,7 @@ export class DrawerComponent implements OnInit, OnDestroy {
   }
 
   @HostListener('document:keydown.escape', ['$event']) keydownHandler(event: KeyboardEvent) {
+    event.stopPropagation();
     if (this.escKeyCloseable && !this.isHaveDialogOrUpload()) {
       this.hide();
     }
@@ -117,6 +119,10 @@ export class DrawerComponent implements OnInit, OnDestroy {
       document.querySelector('body').classList.add('modal-open');
     }
     this.animateState = 'in';
+    const activeElement = document.activeElement;
+    if (activeElement && typeof(activeElement['blur']) === 'function') {
+      activeElement['blur']();
+    }
     this.isCover = this.isCover === undefined ? true : this.isCover;
     if (!this.backdropCloseable || this.isCover) {
       return;

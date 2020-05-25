@@ -5,9 +5,11 @@
   width: 100%;
   height: auto;
   position: relative;
+
   &.devui-splitter-horizontal {
     flex-direction: row;
   }
+
   &.devui-splitter-vertical {
     flex-direction: column;
   }

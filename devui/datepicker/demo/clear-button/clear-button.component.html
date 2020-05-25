@@ -1,4 +1,5 @@
 <section>
+  <span>可给clearAll()传入参数以定义不同reason</span>
   <div class="row">
     <div class="col-md-6">
       <div class="devui-input-group">
@@ -22,7 +23,7 @@
   </div>
   <ng-template #myCustomview let-chooseDate="chooseDate" let-clearAll="clearAll" let-datePicker>
     <div class="box">
-      <d-button bsStyle="common" (btnClick)="clearAll()" bsSize="sm">
+      <d-button bsStyle="common" (btnClick)="clearAll(changeReason.button)" bsSize="sm">
         清除
       </d-button>
       <d-button bsStyle="primary" (btnClick)="chooseDate(getDay(0))" bsSize="sm">

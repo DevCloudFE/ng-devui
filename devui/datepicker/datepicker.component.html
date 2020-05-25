@@ -44,8 +44,8 @@
           </a>
         </td>
         <td colspan="3" class="devui-dropdown" [ngClass]="{ open: openChooseYearAndMonth }" (click)="toggle($event)">
+          <span class="devui-date-title">{{ i18nText?.yearDisplay(currentYear) }}</span>
           <span class="devui-date-title">{{ (i18nText?.monthsOfYear)[currentMonth] }}</span>
-          <span class="devui-date-title">{{ currentYear }}</span>
           <ul class="devui-dropdown-menu devui-monthOption text-center">
             <li
               *ngFor="let month of availableMonths"

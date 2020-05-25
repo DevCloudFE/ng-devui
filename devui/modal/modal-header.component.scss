@@ -5,7 +5,10 @@
 .modal-header {
   padding: 10px 20px 0 20px;
   height: 43px;
+
   .standard-title {
+    height: 30px;
+    line-height: 30px;
     color: $dark-1;
     letter-spacing: 0;
     font-size: 16px;
@@ -20,7 +23,7 @@ button.close {
   font-size: 21px;
   font-weight: bold;
   line-height: 1;
-  color: #000;
+  color: #000000;
   text-shadow: 0 1px 0 $bg-white;
   filter: alpha(opacity=20);
   opacity: 0.2;
@@ -35,9 +38,7 @@ svg.svg-icon-close > g > g {
 }
 
 .header-alert-icon {
-  width: 16px;
-  height: 16px;
-  display: inline-block;
+  display: inline;
   vertical-align: middle;
   margin-right: 5px;
 }
@@ -47,13 +48,16 @@ svg.svg-icon-close > g > g {
   font-weight: 600;
   vertical-align: middle;
 }
+
 button {
   outline: none;
   height: 30px;
   width: 30px;
 }
+
 .close:hover {
   background: $hover-content;
+
   svg g {
     fill: $hover-control;
   }

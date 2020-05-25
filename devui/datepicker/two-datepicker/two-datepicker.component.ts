@@ -288,10 +288,6 @@ export class TwoDatePickerComponent implements OnInit, OnDestroy {
     this.isDisableToday();
   }
 
-  consolidateTime() {
-
-  }
-
   chooseToday(event) {
     event.preventDefault();
     event.stopPropagation();

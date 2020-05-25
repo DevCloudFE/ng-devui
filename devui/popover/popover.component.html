@@ -72,5 +72,8 @@
       </g>
     </svg>
   </span>
-  <div class="devui-popover-main-content" [ngClass]="{ 'with-icon': popType && popType !== 'default' }" [innerHTML]="content"></div>
+  <ng-template [ngTemplateOutlet]="template || defaultTemplate"> </ng-template>
+  <ng-template #defaultTemplate>
+    <div class="devui-popover-main-content" [ngClass]="{ 'with-icon': popType && popType !== 'default' }" [innerHTML]="content"></div>
+  </ng-template>
 </div>

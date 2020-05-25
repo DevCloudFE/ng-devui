@@ -1,4 +1,5 @@
 @import '~@devui-design/icons/icomoon/devui-icon.css';
+
 div.box {
   display: flex;
   justify-content: space-around;
@@ -6,14 +7,17 @@ div.box {
   font-size: 16px;
   line-height: 32px;
 }
+
 div.singleTemplate {
   flex: 1;
   display: flex;
   justify-content: space-around;
 }
+
 div.singleTemplate:not(:last-child) {
   border-right: 1px solid #cacfd8;
 }
+
 .input-group {
   width: 300px;
 }

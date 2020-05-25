@@ -15,6 +15,7 @@ import { CustomizeTmpComponent } from './customize/customize.component';
 import { ScrollElementComponent } from './scroll-element/scroll-element.component';
 import { HoverToContentComponent } from './hover-to-content/hover-to-content.component';
 import { ButtonModule } from 'ng-devui/button';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 @NgModule({
   imports: [
     CommonModule,
@@ -23,6 +24,7 @@ import { ButtonModule } from 'ng-devui/button';
     DevUICodeboxModule,
     DevUIApiModule,
     ButtonModule,
+    DDemoNavModule,
     RouterModule.forChild([
     { path: '',  redirectTo: 'demo' },
     { path: 'demo', component: PopoverDemoComponent},

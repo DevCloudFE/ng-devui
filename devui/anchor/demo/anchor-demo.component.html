@@ -1,5 +1,6 @@
-<div class="demo-container">
-  <div class="demo-example">
+<div class="demo-container" dAnchorBox [view]="{ top: 60, bottom: 0 }">
+  <d-demo-nav [navItems]="navItems"></d-demo-nav>
+  <div class="demo-example" [dAnchor]="'basic-usage'">
     <div class="demo-title">基本用法</div>
     <div class="demo-text">
       跟随滚动效果请参考sticky
@@ -9,13 +10,22 @@
     </d-codebox>
   </div>
 
-  <div class="demo-example">
+  <div class="demo-example" [dAnchor]="'asynchronous-loading'">
     <div class="demo-title">异步加载</div>
     <div class="demo-text">
       支持异步加载, 可以先加载菜单或者先加载内容，点击按钮切换加载
     </div>
     <d-codebox id="components-tabs-async" [sourceData]="asyncSource">
       <d-anchor-async demo></d-anchor-async>
+    </d-codebox>
+  </div>
+  <div class="demo-example" [dAnchor]="'support-hash'">
+    <div class="demo-title">支持url锚点</div>
+    <div class="demo-text">
+      支持url的锚点哈希链接，支持更新哈希
+    </div>
+    <d-codebox id="components-tabs-async" [sourceData]="hashSource">
+      <d-anchor-hash demo></d-anchor-hash>
     </d-codebox>
   </div>
 </div>

@@ -3,6 +3,7 @@
   display: flex;
   justify-content: space-between;
 }
+
 .devui-input {
   width: 300px;
   display: block;

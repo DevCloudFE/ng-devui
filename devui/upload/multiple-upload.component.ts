@@ -13,10 +13,6 @@ import {
   IUploadOptions,
   IFileOptions
 } from './file-uploader.types';
-import {
-  ModalAlertComponent,
-  ModalService
-} from 'ng-devui/modal';
 import { MultipleUploadViewComponent } from './multiple-upload-view.component';
 import {
   SelectFiles
@@ -56,7 +52,8 @@ export class MultipleUploadComponent implements OnDestroy {
   i18nText: I18nInterface['upload'];
   isDropOVer = false;
   i18nSubscription: Subscription;
-  constructor(private modalService: ModalService,
+  errorMsg = [];
+  constructor(
     private selectFiles: SelectFiles,
     private i18n: I18nService, ) {
     this.i18nText = this.i18n.getI18nText().upload;
@@ -135,7 +132,7 @@ export class MultipleUploadComponent implements OnDestroy {
   canUpload() {
     let uploadResult = Promise.resolve(true);
     if (this.beforeUpload) {
-      const result: any = this.beforeUpload(this.multipleUploadViewComponent.getFiles());
+      const result: any = this.beforeUpload(this.multipleUploadViewComponent.getFullFiles());
       if (typeof result !== 'undefined') {
         if (result.then) {
           uploadResult = result;
@@ -154,19 +151,7 @@ export class MultipleUploadComponent implements OnDestroy {
   }
 
   alertMsg(errorMsg) {
-    const results = this.modalService.open({
-      width: '300px',
-      backdropCloseable: false,
-      showAnimate: true,
-      component: ModalAlertComponent,
-      data: {
-        content: errorMsg,
-        cancelBtnText: this.confirmText ? this.confirmText : this.i18nCommonText.btnConfirm,
-        onClose: (event) => {
-          results.modalInstance.hide();
-        },
-      },
-    });
+    this.errorMsg = [{ severity: 'warn', summary: this.i18nText.warning, detail: errorMsg }];
   }
   ngOnDestroy() {
     if (this.i18nSubscription) {

@@ -12,6 +12,7 @@ export interface IDrawerOptions {
   injector?: Injector;
   id?: string;
   width?: string;
+  zIndex?: number;
   isCover?: boolean;
   clickDoms?: any;
   fullScreen?: boolean;

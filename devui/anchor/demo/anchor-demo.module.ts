@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 
-import { AnchorModule } from '../anchor.module';
+import { AnchorModule } from 'ng-devui/anchor';
 import { AnchorDemoComponent } from './anchor-demo.component';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
 import { BasicComponent } from './basic/basic.component';
@@ -12,7 +12,9 @@ import { AsyncComponent } from './async/async.component';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { ButtonModule } from 'ng-devui/button';
-import { StickyModule } from 'ng-devui/devui.module';
+import { StickyModule } from 'ng-devui/sticky';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
+import { HashComponent } from './hash/hash.component';
 
 @NgModule({
   imports: [
@@ -23,6 +25,7 @@ import { StickyModule } from 'ng-devui/devui.module';
     AnchorModule,
     DevUICodeboxModule,
     DevUIApiModule,
+    DDemoNavModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo' },
       { path: 'demo', component: AnchorDemoComponent},
@@ -36,6 +39,7 @@ import { StickyModule } from 'ng-devui/devui.module';
     AnchorDemoComponent,
     BasicComponent,
     AsyncComponent,
+    HashComponent
   ],
   entryComponents: [
     AnchorDemoComponent,

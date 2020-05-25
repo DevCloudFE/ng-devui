@@ -14,6 +14,7 @@ import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { SubscriptionComponent } from './subscription/subscription.component';
 import { ButtonModule } from 'ng-devui/button';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 
 @NgModule({
   imports: [
@@ -23,6 +24,7 @@ import { ButtonModule } from 'ng-devui/button';
     LoadingModule,
     DevUICodeboxModule,
     DevUIApiModule,
+    DDemoNavModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo' },
       { path: 'demo', component: LoadingDemoComponent},

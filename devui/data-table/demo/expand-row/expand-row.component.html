@@ -13,33 +13,14 @@
     <d-column field="$index" header="#" [width]="'50px'"></d-column>
     <d-column field="firstName" header="First Name" [width]="'150px'" [editable]="true"></d-column>
     <d-column field="lastName" header="Last Name" [width]="'150px'"></d-column>
-    <d-column
-      field="gender"
-      header="Gender"
-      [width]="'100px'"
-      [fieldType]="'select'"
-      [editable]="true"
-      [extraOptions]="{ source: genderSource, isSearch: true }"
-    ></d-column>
-    <d-column
-      field="dob"
-      header="Date of birth"
-      [fieldType]="'date'"
-      [editable]="true"
-      [extraOptions]="{ dateFormat: 'MM/DD/YYYY' }"
-      [width]="'100px'"
-    ></d-column>
-    <!-- <d-column [width]="'50px'">
+    <d-column field="gender" header="Gender" [width]="'100px'"></d-column>
+    <d-column field="dob" header="Date of birth" [width]="'100px'">
       <d-cell>
-        <ng-template let-rowIndex="rowIndex" let-rowItem="rowItem">
-          <div
-            *ngIf="rowIndex !== 2"
-            class="icon icon-create-sub-item cursor-pointer"
-            (click)="addSubData(rowIndex, rowItem)"
-          ></div>
+        <ng-template let-cellItem="cellItem">
+          {{ cellItem | i18nDate: 'short':false }}
         </ng-template>
       </d-cell>
-    </d-column> -->
+    </d-column>
   </d-data-table>
 </section>
 <ng-template #quickAddRowTip>

@@ -1,13 +1,13 @@
 <section>
   <d-button bsStyle="text" (click)="filter()">高级过滤</d-button>
-  <div [ngStyle]="{ display: isShowFilterPannel ? 'block' : 'none' }" style="width:900px;background-color:#F9FAFC;">
+  <div [ngStyle]="{ display: isShowFilterPannel ? 'block' : 'none' }" style="width: 900px; background-color: #f9fafc;">
     <form dForm [layout]="'columns'">
       <div class="grid">
         <div class="u-1-2" *ngFor="let control of listOfControls; let i = index">
           <d-form-item>
             <d-form-label [hasHelp]="true" [helpTips]="'这是计划名，计划名字，计划名'">{{ control.label }}</d-form-label>
             <d-form-control>
-              <input type="text" name="{{ control.name }}" />
+              <input dTextInput type="text" name="{{ control.name }}" />
             </d-form-control>
           </d-form-item>
         </div>
@@ -15,12 +15,12 @@
       <d-form-operation>
         <d-button bsStyle="stress" class="mr-element-spacing" circled="true">过滤</d-button>
         <div class="btn-group g-dropdown" dDropDown [closeScope]="'blank'" (onToggle)="onToggle($event)" #myDropdown="d-dropdown">
-          <a dDropDownToggle class="devui-dropdown-default" style="min-height:34px;">
+          <a dDropDownToggle class="devui-dropdown-default" style="min-height: 34px;">
             增加过滤字段
             <span class="icon-chevron-down"></span>
           </a>
           <ul dDropDownMenu class="padding-element-spacing" role="menu">
-            <li role="menuitem" style="width: 600px; height:400px; margin-right: 10px;">
+            <li role="menuitem" style="width: 600px; height: 400px; margin-right: 10px;">
               <div class="field-text">已选字段</div>
               <div class="grid">
                 <div class="u-1-5" *ngFor="let option of selectedOptions">

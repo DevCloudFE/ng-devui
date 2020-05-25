@@ -98,30 +98,30 @@ export class SplitterBarComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   initialCollapseStatus() {
-    const prePane = this.splitter.getPane(this.index);
-    const nextPane = this.splitter.getPane(this.index + 1);
-    if (prePane.collapsed && prePane.collapsible) {
-      this.collapsePrePane(true);
-    } else if (nextPane.collapsed && nextPane.collapsible) {
-      this.collapseNextPane(true);
-    }
+    this.collapsePrePane(true);
+    this.collapseNextPane(true);
   }
 
   collapsePrePane(lockStatus?) {
-    const nearIndex = this.index + 1;
-    this.splitter.togglePane(this.index, nearIndex, lockStatus);
-    this.toggleResize(this.index);
+    this.splitter.togglePane(this.index, this.index + 1, lockStatus);
+    this.toggleResize();
   }
 
   collapseNextPane(lockStatus?) {
     this.splitter.togglePane(this.index + 1, this.index, lockStatus);
-    this.toggleResize(this.index + 1);
+    this.toggleResize();
+  }
+
+  queryPanes(index, nearIndex) {
+    const pane = this.splitter.getPane(index);
+    const nearPane = this.splitter.getPane(nearIndex);
+    return {pane, nearPane};
   }
 
   // 切换是否允许拖拽，收起时不能拖拽
-  toggleResize(paneIndex) {
-    const pane = this.splitter.getPane(paneIndex);
-    const isCollapsed = pane.collapsed;
+  toggleResize() {
+    const {pane, nearPane} = this.queryPanes(this.index, this.index + 1);
+    const isCollapsed = pane.collapsed || nearPane.collapsed;
     if (isCollapsed) {
       this.renderer.addClass(this.el.nativeElement, 'none-resizable');
     } else {
@@ -131,8 +131,7 @@ export class SplitterBarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   // 计算前面板收起操作样式
   get prevClass() {
-    const pane = this.splitter.getPane(this.index);
-    const nearPane = this.splitter.getPane(this.index + 1);
+    const {pane, nearPane} = this.queryPanes(this.index, this.index + 1);
     // 第一个面板或者其它面板折叠方向不是向后的显示操作按钮
     const showIcon = (pane.collapseDirection !== 'after' || this.index === 0);
     return this.generateCollapseClass(pane, nearPane, showIcon);
@@ -140,8 +139,7 @@ export class SplitterBarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   // 计算相邻面板收起操作样式
   get nextClass() {
-    const pane = this.splitter.getPane(this.index + 1);
-    const nearPane = this.splitter.getPane(this.index);
+    const {pane, nearPane} = this.queryPanes(this.index + 1, this.index);
     // 最后一个面板或者其它面板折叠方向不是向前的显示操作按钮
     const showIcon = (pane.collapseDirection !== 'before' || this.index + 1 === this.splitter.paneCount - 1);
     return this.generateCollapseClass(pane, nearPane, showIcon);

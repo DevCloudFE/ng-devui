@@ -29,6 +29,7 @@ export class ModalComponent implements OnInit, OnDestroy {
   @Input() id: string;
   @Input() showAnimate: boolean;
   @Input() width: string;
+  @Input() zIndex: number;
   @Input() backdropCloseable: boolean;
   @Input() beforeHidden: () => boolean | Promise<boolean> | Observable<boolean>;
   @Input() draggable: boolean;

@@ -12,8 +12,8 @@ import {
 } from 'lodash-es';
 
 export interface ITreeNodeData {
-  id?: number;
-  parentId?: number;
+  id?: number | string;
+  parentId?: number | string;
   title?: string;
   isOpen?: boolean;
   data?: any;
@@ -42,7 +42,7 @@ export interface ITreeItem {
   items?: ITreeItem[];
   isParent?: boolean;
   data?: any;
-  id?: any;
+  id?: number | string;
   isHide?: boolean;
   isActive?: boolean;
   isChecked?: boolean;
@@ -58,7 +58,7 @@ export interface ITreeItem {
 
 export interface ITreeInput {
   treeItems: Array<ITreeItem>;
-  parentId?: number;
+  parentId?: number | string;
   treeNodeChildrenKey?: string;
   treeNodeIdKey?: string;
   checkboxDisabledKey?: string;
@@ -160,11 +160,11 @@ export class TreeFactory {
     return treeNode;
   }
 
-  editNodeTitle(id: number) {
+  editNodeTitle(id: number | string) {
     this.nodes[id].data.editable = true;
   }
 
-  deleteNodeById(id: number) {
+  deleteNodeById(id: number | string) {
     const node = this.nodes[id];
     const parentNode = this.nodes[node.parentId];
     this.removeChildNode(parentNode, node);
@@ -185,12 +185,12 @@ export class TreeFactory {
     return this;
   }
 
-  toggleNodeById(id: number) {
+  toggleNodeById(id: number | string) {
     this.nodes[id].data.isOpen = !this.nodes[id].data.isOpen;
     return this;
   }
 
-  openNodesById(id: number) {
+  openNodesById(id: number | string) {
     this.nodes[id].data.isOpen = true;
     if (this.nodes[id].parentId !== undefined) {
       this.openNodesById(this.nodes[id].parentId);
@@ -198,7 +198,7 @@ export class TreeFactory {
     return this;
   }
 
-  closeNodesById(id: number, closeChildren = false) {
+  closeNodesById(id: number | string, closeChildren = false) {
     this.nodes[id].data.isOpen = false;
     if (closeChildren) {
       if (this.nodes[id] && this.nodes[id].data.children) {
@@ -210,13 +210,13 @@ export class TreeFactory {
     return this;
   }
 
-  disabledNodesById(id: number) {
+  disabledNodesById(id: number | string) {
     this.nodes[id].data.disabled = true;
 
     const parentId = this.nodes[id].parentId;
     this._disabledParentNodes(parentId);
 
-    const disabledNodes = (nodeId: number) => {
+    const disabledNodes = (nodeId: number | string) => {
       const children = this.getChildrenById(nodeId);
       if (children.length > 0) {
         children.forEach((child) => {
@@ -229,7 +229,7 @@ export class TreeFactory {
     return this;
   }
 
-  private _disabledParentNodes(parentId: number | undefined) {
+  private _disabledParentNodes(parentId: number | string | undefined) {
     const children = this.getChildrenById(parentId);
 
     if (children.length < 1) {
@@ -244,7 +244,7 @@ export class TreeFactory {
     }
   }
 
-  checkNodesById(id: number, checked: boolean): Array<Object> {
+  checkNodesById(id: number | string, checked: boolean): Array<Object> {
     this.nodes[id].data.halfChecked = false;
     this.nodes[id].data.isChecked = checked;
 
@@ -306,12 +306,12 @@ export class TreeFactory {
     return values(results);
   }
 
-  activeNodeById(id: number) {
+  activeNodeById(id: number | string) {
     this.deactivateAllNodes();
     this.nodes[id].data.isActive = !this.nodes[id].data.isActive;
   }
 
-  getChildrenById(id: number): Array<TreeNode> {
+  getChildrenById(id: number | string): Array<TreeNode> {
     if (this.nodes[id]) {
       return this.nodes[id].data.children || [];
     } else if (id === undefined) {
@@ -338,11 +338,11 @@ export class TreeFactory {
     return patchChildren(this.getChildrenById(undefined));
   }
 
-  startLoading(id: number) {
+  startLoading(id: number | string) {
     this.nodes[id].data.loading = true;
   }
 
-  endLoading(id: number) {
+  endLoading(id: number | string) {
     this.nodes[id].data.loading = false;
   }
 
@@ -356,11 +356,11 @@ export class TreeFactory {
     this.dfs(target.toLowerCase(), this._treeRoot, hideUnmatched);
   }
 
-  getNodeById(id): any {
+  getNodeById(id: number | string): any {
     return this.nodes[id].data;
   }
 
-  hideNodeById(id, hide: boolean) {
+  hideNodeById(id: number | string, hide: boolean) {
     this.nodes[id].data.isHide = hide;
     return this;
   }
@@ -438,6 +438,11 @@ export class TreeFactory {
   public deactivateAllNodes() {
     for (const id of Object.keys(this.nodes)) {
       this.nodes[id].data.isActive = false;
+    }
+  }
+  public checkAllNodes(checked) {
+    for (const id of Object.keys(this.nodes)) {
+      this.nodes[id].data.isChecked = checked;
     }
   }
 }

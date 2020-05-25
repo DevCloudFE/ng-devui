@@ -9,7 +9,7 @@
 .table > thead > tr > th,
 .table > tbody > tr > td {
   vertical-align: bottom;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #dddddd;
   text-align: left;
   padding: 10px;
 }

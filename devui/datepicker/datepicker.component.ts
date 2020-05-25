@@ -51,9 +51,9 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
   _dateConfig: any;
   currentYear: number;
   currentMonth: number;
-  currentHour: number;
-  currentMinute: number;
-  currentSecond: number;
+  _currentHour: number | string;
+  _currentMinute: number | string;
+  _currentSecond: number | string;
   hourOptions: string[];
   minuteOptions: string[];
   displayWeeks: any[];
@@ -172,6 +172,42 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
 
   get dateFormat() {
     return this._dateFormat;
+  }
+
+  set currentHour(hour) {
+    this._currentHour = hour;
+  }
+
+  get currentHour() {
+    if (this._currentHour < 10) {
+      return '0' + this._currentHour;
+    } else {
+      return this._currentHour;
+    }
+  }
+
+  set currentMinute(min) {
+    this._currentMinute = min;
+  }
+
+  get currentMinute() {
+    if (this._currentMinute < 10) {
+      return '0' + this._currentMinute;
+    } else {
+      return this._currentMinute;
+    }
+  }
+
+  set currentSecond(sec) {
+    this._currentSecond = sec;
+  }
+
+  get currentSecond() {
+    if (this._currentSecond < 10) {
+      return '0' + this._currentSecond;
+    } else {
+      return this._currentSecond;
+    }
   }
 
   protected resetYearOptions() {
@@ -408,7 +444,7 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
       return;
     }
     this.selectedDate = new Date(date.getFullYear(), date.getMonth(), date.getDate(),
-      this.currentHour, this.currentMinute, this.currentSecond);
+      Number(this.currentHour), Number(this.currentMinute), Number(this.currentSecond));
     this.onTouched();
     this.writeValue(this.selectedDate);
     // 初始化的时候不触发emit和ngModelChange
@@ -431,7 +467,7 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
   onTimeChange() {
     const date = this.selectedDate || new Date();
     this.selectedDate = new Date(date.getFullYear(),
-      date.getMonth(), date.getDate(), this.currentHour, this.currentMinute, this.currentSecond);
+      date.getMonth(), date.getDate(), Number(this.currentHour), Number(this.currentMinute), Number(this.currentSecond));
     this.onTouched();
     this.writeValue(this.selectedDate);
     this.onChange(this.selectedDate);
@@ -444,15 +480,15 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
   timeUp(type) {
     switch (type) {
       case 'h': {
-        this.currentHour < 23 ? this.currentHour += 1 : this.currentHour = 0;
+        Number(this.currentHour) < 23 ? this.currentHour = (Number(this.currentHour) + 1) : this.currentHour = 0;
         break;
       }
       case 'm': {
-        this.currentMinute < 59 ? this.currentMinute += 1 : this.currentMinute = 0;
+        Number(this.currentMinute) < 59 ? this.currentMinute = (Number(this.currentMinute) + 1) : this.currentMinute = 0;
         break;
       }
       case 's': {
-        this.currentSecond < 59 ? this.currentSecond += 1 : this.currentSecond = 0;
+        Number(this.currentSecond) < 59 ? this.currentSecond = (Number(this.currentSecond) + 1) : this.currentSecond = 0;
         break;
       }
     }
@@ -462,26 +498,27 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
   timeDown(type) {
     switch (type) {
       case 'h': {
-        this.currentHour > 0 ? this.currentHour -= 1 : this.currentHour = 23;
+        Number(this.currentHour) > 0 ? this.currentHour = (Number(this.currentHour) - 1) : this.currentHour = 23;
         break;
       }
       case 'm': {
-        this.currentMinute > 0 ? this.currentMinute -= 1 : this.currentMinute = 59;
+        Number(this.currentMinute) > 0 ? this.currentMinute = (Number(this.currentMinute) - 1) : this.currentMinute = 59;
         break;
       }
       case 's': {
-        this.currentSecond > 0 ? this.currentSecond -= 1 : this.currentSecond = 59;
+        Number(this.currentSecond) > 0 ? this.currentSecond = (Number(this.currentSecond) - 1) : this.currentSecond = 59;
         break;
       }
     }
     this.onTimeChange();
   }
 
-  clearAll = () => {
+  clearAll = (reason?: SelectDateChangeReason) => {
     this.writeValue(null);
+    const currentReason = typeof reason === 'number' ? reason : SelectDateChangeReason.custom;
     this.onChange(null);
     this.selectedDateChange.emit({
-      reason: SelectDateChangeReason.button,
+      reason: currentReason,
       selectedDate: null
     });
   }

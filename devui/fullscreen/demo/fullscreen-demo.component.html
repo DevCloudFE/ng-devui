@@ -1,12 +1,13 @@
-<div class="demo-container">
-  <div class="demo-example">
+<div class="demo-container" dAnchorBox [view]="{ top: 60, bottom: 0 }">
+  <d-demo-nav [navItems]="navItems"></d-demo-nav>
+  <div class="demo-example" [dAnchor]="'immersive-full-screen'">
     <div class="demo-title">沉浸式全屏</div>
     <div class="demo-text">充满整个显示器屏幕的沉浸式全屏</div>
     <d-codebox id="fullscreen-demo-immersive" [sourceData]="FullscreenDemoImmersive">
       <d-fullscreen-demo-immersive demo></d-fullscreen-demo-immersive>
     </d-codebox>
   </div>
-  <div class="demo-example">
+  <div class="demo-example" [dAnchor]="'general-full-screen'">
     <div class="demo-title">普通全屏</div>
     <div class="demo-text">充满当前浏览器窗口的普通全屏</div>
     <d-codebox id="fullscreen-demo-normal" [sourceData]="FullscreenDemoNormal">

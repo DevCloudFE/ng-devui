@@ -2,7 +2,6 @@ export * from './date-converter';
 export * from './date-utils';
 export * from './default-date-converter';
 export * from './dom-utils';
-export * from './i18n.service';
 export * from './safe-pipe.module';
 export * from './lazy-load/lazy-load.module';
 export * from './popper/popper.module';

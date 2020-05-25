@@ -1,12 +1,13 @@
-<div class="demo-container">
-  <div class="demo-example">
+<div class="demo-container" dAnchorBox [view]="{ top: 60, bottom: 0 }">
+  <d-demo-nav [navItems]="navItems"></d-demo-nav>
+  <div class="demo-example" [dAnchor]="'basic-usage'">
     <div class="demo-title">基本用法</div>
     <div class="demo-text"></div>
     <d-codebox [sourceData]="basicSource">
       <d-demo-dropdown-basic demo></d-demo-dropdown-basic>
     </d-codebox>
   </div>
-  <div class="demo-example">
+  <div class="demo-example" [dAnchor]="'turn-off-trigger-point-settings'">
     <div class="demo-title">关闭触发点设置</div>
     <div class="demo-text">
       通过 closeScope 设置关闭的触发点，blank：非菜单区域点击才会触发，all：菜单区域也会触发，none: 仅下拉区域可以点击关闭，或者自行手动关闭
@@ -15,7 +16,7 @@
       <d-demo-dropdown-close-scope demo></d-demo-dropdown-close-scope>
     </d-codebox>
   </div>
-  <div class="demo-example">
+  <div class="demo-example" [dAnchor]="'suspension-drop-down'">
     <div class="demo-title">悬浮下拉</div>
     <div class="demo-text">
       通过 trigger 设置下拉的触发方式(点击或悬浮)
@@ -24,7 +25,7 @@
       <d-dropdown-demo-hover demo></d-dropdown-demo-hover>
     </d-codebox>
   </div>
-  <div class="demo-example">
+  <div class="demo-example" [dAnchor]="'auto-expand-and-auto-focus'">
     <div class="demo-title">聚焦的时候自动的展开和初始化的时候自动聚焦</div>
     <div class="demo-text">
       通过 toggleOnFocus 设置tab按键等聚焦的时候自动展开；通过 autoFocus 设置初始化的时候自动聚焦；两者可结合使用也可分开使用
@@ -33,7 +34,7 @@
       <d-dropdown-demo-focus demo></d-dropdown-demo-focus>
     </d-codebox>
   </div>
-  <div class="demo-example">
+  <div class="demo-example" [dAnchor]="'when-using-appendtobody'">
     <div class="demo-title">
       使用appendToBody的时候设置展开位置处理，更换对齐对象
     </div>
@@ -44,14 +45,14 @@
       <d-dropdown-appendtobody demo></d-dropdown-appendtobody>
     </d-codebox>
   </div>
-  <div class="demo-example">
+  <div class="demo-example" [dAnchor]="'add-icon'">
     <div class="demo-title">支持添加图标</div>
     <div class="demo-text"></div>
     <d-codebox [sourceData]="addIconSource">
       <d-dropdown-demo-add-icon demo></d-dropdown-demo-add-icon>
     </d-codebox>
   </div>
-  <div class="demo-example">
+  <div class="demo-example" [dAnchor]="'multi-level-drop-down-menu'">
     <div class="demo-title">多级下拉菜单</div>
     <div class="demo-text"></div>
     <d-codebox [sourceData]="multiLevelSource">

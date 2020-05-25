@@ -1,0 +1,74 @@
+section {
+  margin-bottom: 20px !important;
+  user-select: none;
+}
+
+.row {
+  overflow: hidden;
+}
+
+.col-sm-3 {
+  float: left;
+  position: relative;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+  min-width: 220px;
+  width: 220px;
+}
+
+.list-group .list-group-item {
+  padding: 0 16px;
+}
+
+.drag-border {
+  border: #5170ff dashed 1px;
+}
+
+.drag-handle {
+  cursor: move;
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
+}
+
+.drag-handle:active {
+  cursor: grabbing;
+  cursor: -moz-grabbing;
+  cursor: -webkit-grabbing;
+}
+
+.drag-hint-border {
+  border: #3c763d dashed 2px;
+}
+
+.drag-over-border {
+  border: #fbbc05 dashed 2px;
+}
+
+.card {
+  border: 1px solid #cecece;
+}
+
+.card .card-header {
+  font-size: 18px;
+  padding: 10px;
+}
+
+.list-group {
+  margin-bottom: 20px;
+  padding: 10px;
+}
+
+.list-group > li {
+  height: 36px;
+  line-height: 36px;
+  font-size: 14px;
+  color: #293040;
+  background: #ffffff;
+  box-shadow: 0 0 1px 0 rgba(41, 48, 64, 0.25), 0 1px 2px 0 rgba(41, 48, 64, 0.2);
+  border-radius: 1px;
+  width: 120px;
+  margin: 10px;
+  text-align: center;
+}

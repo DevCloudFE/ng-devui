@@ -1,53 +1,57 @@
 ### d-data-table 参数
 
-|        参数名        |        类型         | 默认值 |                                                说明                                                |
-| :------------------: | :-----------------: | :----- | :------------------------------------------------------------------------------------------------: |
-|      checkable       |      `boolean`      | --     |                               可选，Datatable是否提供勾选行的功能                                |
-|   showExpandToggle   |      `boolean`      | --     |                                  可选，是否提供显示行详情的功能                                  |
-|      fixHeader       |      `boolean`      | --     |                 可选，是否固定表头（在表格超过容器最大高度时，表格可滚动时生效）                 |
-|     showSortIcon     |      `boolean`      | true   |                              可选，是否显示排序未激活图标，默认显示                              |
-|      dataSource      |       `any[]`       | --     |                                      数据源，用于渲染表格数据                                      |
-|      hideColumn      |     `string[]`      | --     |                                         可选，用于隐藏列                                         |
-|         lazy         |      `boolean`      | false  |                                       可选，是否懒加载数据                                       |
-|    pageAllChecked    |      `boolean`      | --     |                                     可选，选中当前页所有row                                      |
-|      scrollable      |      `boolean`      | --     |                       可选，表格在超出容器时，是否可以通过滚动查看表格内容                       |
-|       maxWidth       |      `string px`       | --     |                              可选，限制表格最大宽度，默认撑满父容器                              |
-|      maxHeight       |      `string px`       | --     |                                     可选，限制最大高度，默认                                     |
-|         type         |     `'striped'、'borderless'、''`     | ''     |                                          【可选】表格类型，striped表示斑马纹类型，borderless表示表格内容没有分割线、默认普通表格                                          |
-|        hover         |      `boolean`      | true   |                              可选，表格是否开启鼠标hover行高亮效果                               |
-|       cssClass       |      `string`       | --     |                                       可选，表格自定义样式                                       |
-|      tableWidth      |      `string`       | 100%   |                                          可选，表格宽度                                          |
-|  onlyOneColumnSort   |      `boolean`      | --     |                              可选，是否限制多列排序的输出限制为一项                              |
-|      multiSort       |  `SortEventArg` []  | []     |                            可选，多列选择数组，用来指导那几列会被排序                            |
-|      resizeable      |      `boolean`      | --     |                                    可选，是否可以拖拽调整列宽                                    |
-|  detailTemplateRef   |    `TemplateRef`    | --     |                                   可选，用来自定义详情页的模板                                   |
-|       timeout        |      `number`       | 300    | 可选，同时绑定单击、双击事件时，用于区分点击的时间间隔, 默认300ms，两个事件不同时使用可以指定为0 |
-|  headerExpandConfig  | `TableExpandConfig` | --     |                                   可选，配置header下的额外内容                                   |
-|  checkableRelation   | `CheckableRelation` | --     |      可选，配置树形表格的父子选中是否互相关联 upward：选中子关联父 downward： 选中父关联子       |
-|  loadChildrenTable   |      `Promise`      | --     |                            可选，展开子表格的回调，用于异步加载子表格                            |
-| loadAllChildrenTable |      `Promise`      | --     |                      可选，表头展开所有子表格的回调，用于异步加载所有子表格                      |
-|    virtualScroll     |      `boolean`      | false  |                                      可选，是否开启虚拟滚动                                      |
-|    beforeCellEdit    |      `Promise`      | --     |         可选，单元格编辑前的拦截方法, <br>resolve(extraOptions)将更新该列的extraOptions          |
-|     colDraggable     |      `boolean`      | false  |                                    可选，表格列是否可拖动排序                                    |
-|   colDropFreezeTo    |      `number`       | 0      |                            可选，表格列可拖动排序时配置前n列不可拖动                             |
+|        参数名        |             类型              | 默认值                       |                                                  说明                                                   |
+| :------------------: | :---------------------------: | :--------------------------- | :-----------------------------------------------------------------------------------------------------: |
+|      checkable       |           `boolean`           | --                           |                                   可选，Datatable是否提供勾选行的功能                                   |
+|   showExpandToggle   |           `boolean`           | --                           |               可选，是否提供显示扩展行的功能，为true则在配置了扩展行的行前面生成操作按钮                |
+|      fixHeader       |           `boolean`           | --                           |                    可选，是否固定表头（在表格超过容器最大高度时，表格可滚动时生效）                     |
+|     showSortIcon     |           `boolean`           | true                         |                                 可选，是否显示排序未激活图标，默认显示                                  |
+|      dataSource      |            `any[]`            | --                           |                                        数据源，用于渲染表格数据                                         |
+|      hideColumn      |          `string[]`           | --                           |                                            可选，用于隐藏列                                             |
+|         lazy         |           `boolean`           | false                        |                                          可选，是否懒加载数据                                           |
+|    pageAllChecked    |           `boolean`           | --                           |                                         可选，选中当前页所有row                                         |
+|      scrollable      |           `boolean`           | --                           |                          可选，表格在超出容器时，是否可以通过滚动查看表格内容                           |
+|       maxWidth       |          `string px`          | --                           |                                 可选，限制表格最大宽度，默认撑满父容器                                  |
+|      maxHeight       |          `string px`          | --                           |                                        可选，限制最大高度，默认                                         |
+|         type         | `'striped'、'borderless'、''` | ''                           |         【可选】表格类型，striped表示斑马纹类型，borderless表示表格内容没有分割线、默认普通表格         |
+|        hover         |           `boolean`           | true                         |                                  可选，表格是否开启鼠标hover行高亮效果                                  |
+|       cssClass       |           `string`            | --                           |                                          可选，表格自定义样式                                           |
+|      tableWidth      |           `string`            | 100%                         |                                             可选，表格宽度                                              |
+|  onlyOneColumnSort   |           `boolean`           | --                           |                                 可选，是否限制多列排序的输出限制为一项                                  |
+|      multiSort       |       `SortEventArg` []       | []                           |                               可选，多列选择数组，用来指导那几列会被排序                                |
+|    ~~resizeable~~    |         ~~`boolean`~~         | --                           |                                     ~~可选，是否可以拖拽调整列~~宽                                      |
+|  detailTemplateRef   |         `TemplateRef`         | --                           |                                      可选，用来自定义详情页的模板                                       |
+|       timeout        |           `number`            | 300                          |    可选，同时绑定单击、双击事件时，用于区分点击的时间间隔, 默认300ms，两个事件不同时使用可以指定为0     |
+|  headerExpandConfig  |      `TableExpandConfig`      | --                           |                                      可选，配置header下的额外内容                                       |
+|  checkableRelation   |      `CheckableRelation`      | --                           |          可选，配置树形表格的父子选中是否互相关联 upward：选中子关联父 downward： 选中父关联子          |
+|  loadChildrenTable   |           `Promise`           | --                           |                               可选，展开子表格的回调，用于异步加载子表格                                |
+| loadAllChildrenTable |           `Promise`           | --                           |                         可选，表头展开所有子表格的回调，用于异步加载所有子表格                          |
+|    virtualScroll     |           `boolean`           | false                        |                                         可选，是否开启虚拟滚动                                          |
+|    beforeCellEdit    |           `Promise`           | --                           |             可选，单元格编辑前的拦截方法, <br>resolve(extraOptions)将更新该列的extraOptions             |
+|     colDraggable     |           `boolean`           | false                        |                                       可选，表格列是否可拖动排序                                        |
+|   colDropFreezeTo    |           `number`            | 0                            |                                可选，表格列可拖动排序时配置前n列不可拖动                                |
+|   virtualItemSize    |           `number`            | 40                           |                                      可选，虚拟滚动时每一列的高度                                       |
+|  virtualMinBufferPx  |           `number`            | 80                           |                       可选，虚拟滚动时缓冲区最小像素高度，低于该值时将加载新结构                        |
+|  virtualMaxBufferPx  |           `number`            | 200                          |                                   可选，虚拟滚动时缓冲区最大像素高度                                    |
+| columnAdjustStrategy |    `ColumnAdjustStrategy`     | ColumnAdjustStrategy.disable | 可选，列宽调整策略，disable: 列宽不可调整;mouseup: 列宽在鼠标松开时变化;mousemove: 列宽随着鼠标移动变化 |
 
 ### d-data-table 事件
 
-|         事件          |           类型           |                    说明                   |
-| :-------------------: | :----------------------: | :--------------------------------------: |
-|    multiSortChange    |     `EventEmitter<SortEventArg[]>`     |  多列选择Change事件，用来更新多列选择数组，返回单元格信息 |
+|         事件          |                  类型                  |                           说明                           |
+| :-------------------: | :------------------------------------: | :------------------------------------------------------: |
+|    multiSortChange    |     `EventEmitter<SortEventArg[]>`     | 多列选择Change事件，用来更新多列选择数组，返回单元格信息 |
 |       cellClick       |  `EventEmitter<CellSelectedEventArg>`  |            表格单元格点击事件，返回单元格信息            |
 |      cellDBClick      |  `EventEmitter<CellSelectedEventArg>`  |            表格单元格双击事件，返回单元格信息            |
-|       rowClick        |  `EventEmitter<RowSelectedEventArg>`   |              表格行点击事件，返回行信息              |
-|      rowDBClick       |  `EventEmitter<RowSelectedEventArg>`   |              表格行双击事件，返回行信息              |
-|     detialToggle      |      `EventEmitter<any>`      |            扩展行展开收起事件，返回行状态信息            |
+|       rowClick        |  `EventEmitter<RowSelectedEventArg>`   |                表格行点击事件，返回行信息                |
+|      rowDBClick       |  `EventEmitter<RowSelectedEventArg>`   |                表格行双击事件，返回行信息                |
+|     detialToggle      |          `EventEmitter<any>`           |            扩展行展开收起事件，返回行状态信息            |
 |     cellEditStart     |  `EventEmitter<CellSelectedEventArg>`  |          表格单元格开始编辑事件，返回单元格信息          |
-|      cellEditEnd      |  `EventEmitter<CellSelectedEventArg>`  |          表格单元格结束编辑事件，返回单元格信息         |
-|    rowCheckChange     | `EventEmitter<RowCheckChangeEventArg>` |          某行的勾选状态变化事件，返回单元格信息|
-|    checkAllChange     |        `EventEmitter<boolean>`         |        当前页码全勾选状态变化事件，返回true或false        |
-|        resize         |   `EventEmitter<ColumnResizeEventArg>`   |               列宽变化事件，返回单元格信息               |
-|  childrenTableClose   |      `EventEmitter<any>`          |              子列表关闭事件，返回列表行信息              |
-| allChildrenTableClose |      `EventEmitter<any>`        |            全部子列表关闭事件         |
+|      cellEditEnd      |  `EventEmitter<CellSelectedEventArg>`  |          表格单元格结束编辑事件，返回单元格信息          |
+|    rowCheckChange     | `EventEmitter<RowCheckChangeEventArg>` |          某行的勾选状态变化事件，返回单元格信息          |
+|    checkAllChange     |        `EventEmitter<boolean>`         |       当前页码全勾选状态变化事件，返回true或false        |
+|        resize         |  `EventEmitter<ColumnResizeEventArg>`  |               列宽变化事件，返回单元格信息               |
+|  childrenTableClose   |          `EventEmitter<any>`           |              子列表关闭事件，返回列表行信息              |
+| allChildrenTableClose |          `EventEmitter<any>`           |                    全部子列表关闭事件                    |
 
 ### d-data-table 公共方法
 
@@ -58,46 +62,46 @@
 
 ### d-column 参数
 
-|               参数                |              类型               | 默认值            |                                                说明                                                |
-| :-------------------------------: | :-----------------------------: | :---------------- | :------------------------------------------------------------------------------------------------: |
-|             editable              |            `boolean`            | false             |                               可选，在d-column上指定该列是否可编辑                               |
-|            tableLevel             |            `number`             | 0                 |                            可选，当前表格层级, 在树形表格场景下自增长                            |
-|             fieldType             |            `string`             | 'text'            |                                         可选，`将废弃，`单元格类型，支持'text'、'select'、'treeSelect'、'input-number'、'datapicker'、'customized'                        |
-|             maxWidth              |            `string px`             | --                |                                          可选，最大宽度                                          |
-|             minWidth              |            `string px`             | --                |                                          可选，最小宽度                                          |
-|               field               |            `string`             | --                |                                              该列字段                                              |
-|              header               |            `string`             | --                |                                            该列表头文字                                            |
-|             sortable              |            `boolean`            | --                |                                         可选，是否可排序                                         |
-|             editable              |            `boolean`            | --                |                                         可选，是否可编辑                                         |
-|               width               |         `string px、%`          | --                |                                                宽度                                                |
-|           nestedColumn            |            `Boolean`            | false             |           可选，指定该列作为树形表格的操作列，即有展开\折叠按钮和内容缩进表明层级关系            |
-|           extraOptions.`inputs`            |             `any{}`             | --                | 可选，`将废弃，`主要配置单元格编辑时编辑组件的inputs, 支持select、treeSelect、input-number、datapicker组件,如：extraOptions.treeData配置fieldType为treeSelect时的数据源 |
-|     extraOptions.editableTip      |            `'btn'、''`             | --                |     可选，可编辑提示，'btn'表示鼠标悬浮单元格出现编辑按钮，未配置时鼠标悬浮单元格背景色变化      |
-|    extraOptions.iconFoldTable     |           `Template`            | --                |                                 可选，自动定义树形表格的折叠图标                                 |
-|   extraOptions.iconUnFoldTable    |           `Template`            | --                |                                 可选，自动定义树形表格的展开图标                                 |
-| extraOptions.showHeadTableToggler |            `boolean`            | false             |                           可选，树形表格是否在header出现展开\折叠图标                            |
-|               order               |            `number`             | Number. MAX_VALUE |                                           可选，列序号                                           |
-|            filterable             |            `boolean`            | --                |                                         可选，是否可筛选                                         |
-|            filterList             |             `array`             | --                |                          传入需要操作的筛选列表，当filterable为true时必选                          |
-|          filterMultiple           |            `boolean`            | true              |                     可选，选择筛选列表为多选或单选, true为多选，false为单选                      |
-|       customFilterTemplate        |          `TemplateRef`          | --                |                可选，表格过滤弹出框的自定义模板，参考DOC下‘自定义过滤弹出框’使用                 |
-|           beforeFilter            | `function、Promise、Observable` | --                |                  可选，表格过滤弹出框弹出前的回调函数，返回false可阻止弹框弹出                   |
-|             cellClass             |             string              | --                |                                       该列单元格自定义class                                        |
-|             fixedLeft             |             string              | --                |                                 该列固定到左侧的距离，如：‘100px’                                  |
-|            fixedRight             |             string              | --                |                                 该列固定到右侧的距离，如：‘100px’                                  |
-|          filterBoxWidth           |               any               | --                |                                   过滤弹出框的宽度，如：‘300px’                                    |
-|          filterBoxHeight          |               any               | --                |                                   过滤弹出框的高度，如：‘400px’                                    |
+|               参数                |              类型               | 默认值            |                                                                               说明                                                                                |
+| :-------------------------------: | :-----------------------------: | :---------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+|             editable              |            `boolean`            | false             |                                                               可选，在d-column上指定该列是否可编辑                                                                |
+|            tableLevel             |            `number`             | 0                 |                                                            可选，当前表格层级, 在树形表格场景下自增长                                                             |
+|           ~~fieldType~~           |          ~~`string`~~           | ~~'text'~~        |                               ~~可选，单元格类型，支持'text'、'select'、'treeSelect'、'input-number'、'datapicker'、'customized'~~                                |
+|             maxWidth              |           `string px`           | --                |                                                                          可选，最大宽度                                                                           |
+|             minWidth              |           `string px`           | --                |                                                                          可选，最小宽度                                                                           |
+|               field               |            `string`             | --                |                                                                             该列字段                                                                              |
+|              header               |            `string`             | --                |                                                                           该列表头文字                                                                            |
+|             sortable              |            `boolean`            | --                |                                                                         可选，是否可排序                                                                          |
+|             editable              |            `boolean`            | --                |                                                                         可选，是否可编辑                                                                          |
+|               width               |         `string px、%`          | --                |                                                                               宽度                                                                                |
+|           nestedColumn            |            `Boolean`            | false             |                                            可选，指定该列作为树形表格的操作列，即有展开\折叠按钮和内容缩进表明层级关系                                            |
+|     ~~extraOptions.`inputs`~~     |           ~~`any{}`~~           | --                | ~~可选，主要配置单元格编辑时编辑组件的inputs, 支持select、treeSelect、input-number、datapicker组件,如：extraOptions.treeData配置fieldType为treeSelect时的数据源~~ |
+|     extraOptions.editableTip      |           `'btn'、''`           | --                |                                      可选，可编辑提示，'btn'表示鼠标悬浮单元格出现编辑按钮，未配置时鼠标悬浮单元格背景色变化                                      |
+|    extraOptions.iconFoldTable     |           `Template`            | --                |                                                                 可选，自动定义树形表格的折叠图标                                                                  |
+|   extraOptions.iconUnFoldTable    |           `Template`            | --                |                                                                 可选，自动定义树形表格的展开图标                                                                  |
+| extraOptions.showHeadTableToggler |            `boolean`            | false             |                                                            可选，树形表格是否在header出现展开\折叠图标                                                            |
+|               order               |            `number`             | Number. MAX_VALUE |                                                                           可选，列序号                                                                            |
+|            filterable             |            `boolean`            | --                |                                                                         可选，是否可筛选                                                                          |
+|            filterList             |             `array`             | --                |                                                         传入需要操作的筛选列表，当filterable为true时必选                                                          |
+|          filterMultiple           |            `boolean`            | true              |                                                      可选，选择筛选列表为多选或单选, true为多选，false为单选                                                      |
+|       customFilterTemplate        |          `TemplateRef`          | --                |                                                 可选，表格过滤弹出框的自定义模板，参考DOC下‘自定义过滤弹出框’使用                                                 |
+|           beforeFilter            | `function、Promise、Observable` | --                |                                                   可选，表格过滤弹出框弹出前的回调函数，返回false可阻止弹框弹出                                                   |
+|             cellClass             |             string              | --                |                                                                       该列单元格自定义class                                                                       |
+|             fixedLeft             |             string              | --                |                                                                 该列固定到左侧的距离，如：‘100px’                                                                 |
+|            fixedRight             |             string              | --                |                                                                 该列固定到右侧的距离，如：‘100px’                                                                 |
+|          filterBoxWidth           |               any               | --                |                                                                   过滤弹出框的宽度，如：‘300px’                                                                   |
+|          filterBoxHeight          |               any               | --                |                                                                   过滤弹出框的高度，如：‘400px’                                                                   |
 
 ### d-column 事件
 
 |     事件     |       类型       |                 说明                 |
 | :----------: | :--------------: | :----------------------------------: |
-| filterChange | `FilterConfig[]` |  确认筛选回调事件，返回选中的筛选数组 |
+| filterChange | `FilterConfig[]` | 确认筛选回调事件，返回选中的筛选数组 |
 
 ### rowItem参数(行数据rowItem为dataSource的数组元素，可以初始化行数据的以下字段配置表格的行为)
 
-|       参数        |       类型        | 默认值 |                                                    说明                                                     |
-| :---------------: | :---------------: | :----- | :---------------------------------------------------------------------------------------------------------: |
+|       参数        |       类型        | 默认值 |                                                   说明                                                    |
+| :---------------: | :---------------: | :----- | :-------------------------------------------------------------------------------------------------------: |
 | $isChildTableOpen |     `boolean`     | false  |                                     可选，该行下的子表格是否默认展开                                      |
 |     $checked      |     `boolean`     | false  |                                            可选，该行是否选中                                             |
 |   $halfChecked    |     `boolean`     | false  |                                            可选，该行是否半选                                             |
@@ -106,9 +110,9 @@
 | $editDeniedConfig |       array       | --     | 可选，与column配合配置该行的某些单元格的编辑权限, <br>例如: 配置为['age']，表示field为age的单元格不可编辑 |
 |   $expandConfig   | TableExpandConfig | --     |                                        可选，配置该行下的额外内容                                         |
 |     $rowClass     |      string       | --     |                                        可选，配置该行的自定义class                                        |
-|     $hovered      |      boolean      | false  |                           鼠标悬浮该行元素时该值为true, <br>离开该行时该值为false                           |
+|     $hovered      |      boolean      | false  |                          鼠标悬浮该行元素时该值为true, <br>离开该行时该值为false                          |
 |    $draggable     |      object       | --     |       可选，可拖拽配置，{scope: 设置作用范围, dragOverClass: 拖动时元素class}。dragData 为 rowItem        |
-|     children      |       array       | --     |                                            配置该行的子table数据                                            |
+|     children      |       array       | --     |                                           配置该行的子table数据                                           |
 
 #### 自定义单元格
 

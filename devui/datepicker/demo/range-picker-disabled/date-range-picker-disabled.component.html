@@ -6,14 +6,23 @@
       placeholder="y/MM/dd  -  y/MM/dd"
       name="dp"
       [(ngModel)]="dateRange"
-      (focus)="dateRangePicker.toggle($event)"
+      (focus)="toggle(dateRangePicker, $event)"
       autocomplete="off"
       [disabled]="disabled"
       dDateRangePicker
       #dateRangePicker="dateRangePicker"
       (selectedRangeChange)="getValue($event)"
+      [ngClass]="{
+        'devui-disabled': disabled
+      }"
     />
-    <div class="devui-input-group-addon" (click)="dateRangePicker.toggle($event, true)">
+    <div
+      class="devui-input-group-addon"
+      [ngClass]="{
+        'devui-disabled': disabled
+      }"
+      (click)="toggle(dateRangePicker, $event, true)"
+    >
       <i class="icon icon-calendar"></i>
     </div>
   </div>

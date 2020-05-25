@@ -69,7 +69,7 @@
       <li *ngIf="nextLink" [ngClass]="{ disabled: pageIndex == totalPage }">
         <a (click)="next()" class="devui-pagination-link">{{ nextLink }}</a>
       </li>
-      <li *ngIf="!nextLink" [ngClass]="{ disabled: pageIndex == totalPage }">
+      <li *ngIf="!nextLink" [ngClass]="{ disabled: pageIndex == totalPage || !total }">
         <a (click)="next()" class="devui-pagination-link">
           <svg width="1em" height="1.5em" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg">
             <g id="操作/collapse2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -90,7 +90,7 @@
         <a (click)="prev()" [attr.aria-label]="nextLink" class="devui-pagination-link devui-pagination-link-lite">{{ preLink }}</a>
       </li>
       <li *ngIf="!preLink" [ngClass]="{ disabled: pageIndex == 1 }">
-        <a (click)="prev()" [attr.aria-label]="nextLink" class="devui-pagination-link devui-pagination-link-lite ">
+        <a (click)="prev()" [attr.aria-label]="nextLink" class="devui-pagination-link devui-pagination-link-lite">
           <svg width="1em" height="1.5em" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg">
             <g id="操作/collapse1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
               <polygon
@@ -107,7 +107,7 @@
         <a (click)="next()" [attr.aria-label]="nextLink" class="devui-pagination-link devui-pagination-link-lite">{{ nextLink }}</a>
       </li>
       <li *ngIf="!nextLink" [ngClass]="{ disabled: pageIndex >= totalPage }">
-        <a (click)="next()" [attr.aria-label]="nextLink" class="devui-pagination-link devui-pagination-link-lite ">
+        <a (click)="next()" [attr.aria-label]="nextLink" class="devui-pagination-link devui-pagination-link-lite">
           <svg width="1em" height="1.5em" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg">
             <g id="操作/collapse2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
               <polygon
@@ -165,7 +165,7 @@
     <div *ngIf="showConfig" class="devui-config-container">
       <ng-content></ng-content>
       <div class="devui-pagination-config-item devui-page-size-config" *ngIf="canChangePageSize">
-        <div class="devui-config-item-title">每页条数</div>
+        <div class="devui-config-item-title">{{ i18nText?.pageSize }}</div>
         <div class="devui-page-number">
           <ng-container *ngFor="let size of pageSizeOptions">
             <div class="number" [ngClass]="{ choosed: size === pageSize }" (click)="onPageSizeChange(size)">

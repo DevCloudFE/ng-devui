@@ -17,6 +17,7 @@ import { ConfigComponent } from './config/config.component';
 import { TransferModule } from 'ng-devui/transfer';
 import { DropDownModule } from 'ng-devui/dropdown';
 import { ModalModule } from 'ng-devui/modal';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 
 
 
@@ -31,6 +32,7 @@ import { ModalModule } from 'ng-devui/modal';
     TransferModule,
     DevUICodeboxModule,
     DevUIApiModule,
+    DDemoNavModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo' },
       { path: 'demo', component: TabsDemoComponent},

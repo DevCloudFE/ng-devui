@@ -16,6 +16,7 @@ import { AutoDemoDisableComponent } from './disabled/auto-complete-demo-disable.
 import { AutoDemoDropdownComponent } from './dropdown/auto-complete-demo-dropdown.component';
 import { AutoDemoObjectComponent } from './object/auto-complete-demo-object.component';
 import { AutoDemoLatestComponent } from './latest/auto-complete-demo-latest.component';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 
 @NgModule({
   imports: [
@@ -26,6 +27,7 @@ import { AutoDemoLatestComponent } from './latest/auto-complete-demo-latest.comp
     DevUICodeboxModule,
     DevUIApiModule,
     ButtonModule,
+    DDemoNavModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo' },
       { path: 'demo', component: AutoCompleteDemoComponent},

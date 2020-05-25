@@ -10,6 +10,7 @@ import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component
 import { BasicComponent } from './basic/basic.component';
 import { SpecialComponent } from './special/special.component';
 import { ConfigComponent } from './config/config.component';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 
 
 
@@ -20,6 +21,7 @@ import { ConfigComponent } from './config/config.component';
     DevUICodeboxModule,
     DevUIApiModule,
     AvatarModule,
+    DDemoNavModule,
     RouterModule.forChild([
       { path: '', redirectTo: 'demo' },
       { path: 'demo', component: AvatarDemoComponent },

@@ -10,6 +10,7 @@ import { DevUIModule } from 'ng-devui';
 import xml from 'highlight.js/lib/languages/xml';
 import scss from 'highlight.js/lib/languages/scss';
 import typescript from 'highlight.js/lib/languages/typescript';
+import { SafePipeModule } from 'ng-devui/utils';
 
 export function hljsLanguages() {
   return [
@@ -27,6 +28,7 @@ export function hljsLanguages() {
   ],
   imports: [
     CommonModule,
+    SafePipeModule,
     DevUIModule.forRoot(),
     RouterModule.forChild([
       {

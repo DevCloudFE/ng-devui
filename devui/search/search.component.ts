@@ -1,8 +1,21 @@
-import { fromEvent, Subscription  } from 'rxjs';
-import { ChangeDetectionStrategy, Component, OnInit, OnDestroy, Input, Output, forwardRef, AfterViewInit,
-   EventEmitter, ViewChild, ElementRef, Renderer2, ChangeDetectorRef } from '@angular/core';
+import { fromEvent, Subscription } from 'rxjs';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  OnDestroy,
+  Input,
+  Output,
+  forwardRef,
+  AfterViewInit,
+  EventEmitter,
+  ViewChild,
+  ElementRef,
+  Renderer2,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { map , filter, debounceTime } from 'rxjs/operators';
+import { map, debounceTime } from 'rxjs/operators';
 import { I18nService, I18nInterface } from 'ng-devui/i18n';
 
 @Component({
@@ -11,11 +24,13 @@ import { I18nService, I18nInterface } from 'ng-devui/i18n';
   styleUrls: ['./search.component.scss'],
   exportAs: 'search',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => SearchComponent),
-    multi: true
-  }]
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => SearchComponent),
+      multi: true,
+    },
+  ],
 })
 export class SearchComponent implements ControlValueAccessor, OnInit, OnDestroy, AfterViewInit {
   /**
@@ -29,18 +44,19 @@ export class SearchComponent implements ControlValueAccessor, OnInit, OnDestroy,
   @Input() maxLength = Number.MAX_SAFE_INTEGER;
   @Input() isKeyupSearch = false;
   @Input() delay = 300;
+  @Input() disabled = false;
   @Output() searchFn = new EventEmitter<string>();
   @ViewChild('filterInput', { static: true }) filterInputElement: ElementRef;
   @ViewChild('line', { static: true }) lineElement: ElementRef;
   @ViewChild('clearIcon', { static: true }) clearIconElement: ElementRef;
   i18nCommonText: I18nInterface['common'];
   i18nSubscription: Subscription;
+  clearIconExit = false;
   private subscription: Subscription;
   private onChange = (_: any) => null;
   private onTouch = () => null;
 
-  constructor(private renderer: Renderer2, private i18n: I18nService, private cdr: ChangeDetectorRef) {
-  }
+  constructor(private renderer: Renderer2, private i18n: I18nService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.setI18nText();
@@ -69,8 +85,8 @@ export class SearchComponent implements ControlValueAccessor, OnInit, OnDestroy,
 
   clearText() {
     this.renderer.setProperty(this.filterInputElement.nativeElement, 'value', '');
-    if ( this.onChange) {
-        this.onChange('');
+    if (this.onChange) {
+      this.onChange('');
     }
     this.searchFn.emit('');
     this.filterInputElement.nativeElement.focus();
@@ -88,11 +104,11 @@ export class SearchComponent implements ControlValueAccessor, OnInit, OnDestroy,
 
   registerFilterChange() {
     this.subscription = fromEvent(this.filterInputElement.nativeElement, 'input')
-     .pipe(
-      map((e: any) => e.target.value),
-      filter(term => true),
-      debounceTime(this.delay)
-     ).subscribe(value => {
+      .pipe(
+        map((e: any) => e.target.value),
+        debounceTime(this.delay)
+      )
+      .subscribe((value) => {
         this.onChange(value);
         if (this.isKeyupSearch) {
           this.searchFn.emit(value);
@@ -107,11 +123,9 @@ export class SearchComponent implements ControlValueAccessor, OnInit, OnDestroy,
 
   renderClearIcon() {
     if (this.filterInputElement.nativeElement.value && this.lineElement && this.clearIconElement) {
-      this.renderer.setStyle(this.lineElement.nativeElement, 'display', 'block');
-      this.renderer.setStyle(this.clearIconElement.nativeElement, 'display', 'block');
+      this.clearIconExit = true;
     } else if (this.lineElement && this.clearIconElement) {
-      this.renderer.setStyle(this.lineElement.nativeElement, 'display', 'none');
-      this.renderer.setStyle(this.clearIconElement.nativeElement, 'display', 'none');
+      this.clearIconExit = false;
     }
   }
 
@@ -123,5 +137,4 @@ export class SearchComponent implements ControlValueAccessor, OnInit, OnDestroy,
       this.i18nSubscription.unsubscribe();
     }
   }
-
 }

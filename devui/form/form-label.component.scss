@@ -1,9 +1,11 @@
 @import '../style/theme/color';
 @import '../style/core/layout';
+
 .devui-form-span {
   position: relative;
   color: $dark-1;
-  &.devui-required:before {
+
+  &.devui-required::before {
     content: '*';
     color: red;
     display: inline-block;
@@ -24,6 +26,13 @@
   position: relative;
   left: $content-spacing-small;
   top: 3px;
+  cursor: pointer;
+}
+
+.devui-help-tips {
+  display: inline-block;
+  margin-left: 20px;
+  max-width: 200px;
 }
 
 .devui-form-lg.devui-form-horizontal :host.devui-form-label {
@@ -32,12 +41,14 @@
   text-align: right;
   align-self: flex-start;
 }
+
 .devui-form-sm.devui-form-horizontal :host.devui-form-label {
   flex: 0 0 80px;
   justify-content: flex-end;
   text-align: right;
   align-self: flex-start;
 }
+
 .devui-form-horizontal :host.devui-form-label {
   flex: 0 0 100px;
   justify-content: flex-end;
@@ -53,18 +64,21 @@
   justify-content: flex-start;
   align-self: flex-start;
 }
+
 .devui-form-columns :host.devui-form-label {
   flex: 0 0 100px;
   text-align: right;
   justify-content: flex-end;
   align-self: flex-start;
 }
+
 .devui-form-lg.devui-form-columns :host.devui-form-label {
   flex: 0 0 150px;
   justify-content: flex-end;
   text-align: right;
   align-self: flex-start;
 }
+
 .devui-form-sm.devui-form-columns :host.devui-form-label {
   flex: 0 0 80px;
   justify-content: flex-end;

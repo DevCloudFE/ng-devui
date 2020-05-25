@@ -1,10 +1,11 @@
 import { AfterContentInit, ChangeDetectorRef, Component, ContentChild, ContentChildren, ElementRef, EventEmitter,
-  HostBinding, Input, NgZone, OnDestroy, OnInit, Output, QueryList, Renderer2, TemplateRef, ViewChild } from '@angular/core';
+  Input, NgZone, OnDestroy, OnInit, Output, QueryList, Renderer2, TemplateRef, ViewChild, OnChanges,
+  SimpleChanges} from '@angular/core';
 import { Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { WindowRef } from 'ng-devui/window-ref';
 import { CellSelectedEventArg, CheckableRelation, ColumnResizeEventArg, DataTablePager, RowCheckChangeEventArg,
-  RowSelectedEventArg, SortEventArg, TableExpandConfig } from './data-table.model';
+  RowSelectedEventArg, SortEventArg, TableExpandConfig, ColumnAdjustStrategy } from './data-table.model';
 import { DataTableColumnTmplComponent } from './tmpl/data-table-column-tmpl.component';
 import { DataTableFootTmplComponent } from './tmpl/data-table-foot-tmpl.component';
 import { DataTableHeadTmplComponent } from './tmpl/data-table-head-tmpl.component';
@@ -20,7 +21,7 @@ import { DataTablePagerTmplComponent } from './tmpl/data-table-pager-tmpl.compon
   // changeDetection: ChangeDetectionStrategy.OnPush,
   exportAs: 'dataTable'
 })
-export class DataTableComponent implements OnDestroy, OnInit, AfterContentInit {
+export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterContentInit {
   /**
    * 【可选】Datatable是否提供勾选行的功能
    */
@@ -77,6 +78,13 @@ export class DataTableComponent implements OnDestroy, OnInit, AfterContentInit {
    * 【可选】是否可以拖拽调整列宽
    */
   @Input() resizeable: boolean;
+   /**
+   * 【可选】列宽调整策略
+   * disable: 列宽不可调整
+   * mouseup: 列宽在鼠标松开时变化
+   * mousemove: 列宽随着鼠标移动变化
+   */
+  @Input() columnAdjustStrategy: ColumnAdjustStrategy = ColumnAdjustStrategy.disable;
   /**
    * 【可选】用来自定义表格是否可以拖动
    */
@@ -187,6 +195,12 @@ export class DataTableComponent implements OnDestroy, OnInit, AfterContentInit {
    * 全部子列表关闭事件
    */
   @Output() allChildrenTableClose = new EventEmitter<any>();
+  /**
+   * 虚拟滚动配置
+   */
+  @Input() virtualItemSize = 40;
+  @Input() virtualMinBufferPx = 80;
+  @Input() virtualMaxBufferPx = 200;
 
   @ContentChildren(DataTableColumnTmplComponent) columns: QueryList<DataTableColumnTmplComponent>;
   @ContentChild(DataTableHeadTmplComponent, { static: false }) headTemplate: DataTableHeadTmplComponent;
@@ -333,6 +347,15 @@ export class DataTableComponent implements OnDestroy, OnInit, AfterContentInit {
         this.onWinScroll.bind(this)
       );
     });
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['columnAdjustStrategy']) {
+      if (this.columnAdjustStrategy === ColumnAdjustStrategy.mousemove ||
+        this.columnAdjustStrategy === ColumnAdjustStrategy.mouseup) {
+          this.resizeable = true;
+        }
+    }
   }
 
   onDocumentClick($event: Event) {
@@ -593,17 +616,35 @@ export class DataTableComponent implements OnDestroy, OnInit, AfterContentInit {
     this.onDocumentClick($event);
   }
 
-  onResizingFixedHandler({ column, width, nextElementWidth }) {
-    this._columns = this._columns.map((_column, index) => {
-      if (_column.field === column.field) {
-        this.ngZone.run(() => {
-          _column.width = width + 'px';
-        });
-
+  onResizingFixedHandler({ column, width }) {
+    if ((this.resizeable && this.columnAdjustStrategy === ColumnAdjustStrategy.disable)
+    || this.columnAdjustStrategy === ColumnAdjustStrategy.mousemove) {
+      this._columns = this._columns.map((_column) => {
+        if (_column.field === column.field) {
+          this.ngZone.run(() => {
+            _column.width = width + 'px';
+          });
+          return _column;
+        }
         return _column;
+      });
+    }
+  }
+
+  onResizeHandler($event: { width, field }) {
+    const { width, field } = $event;
+    this._columns = this._columns.map((column, index) => {
+      if (column.field === field) {
+        this.ngZone.run(() => {
+          column.width = parseInt(width, 10) + 'px';
+          const columnResizeEventArg = { currentColumn: column, nextColumn: this._columns[index + 1] };
+          this.resize.emit(columnResizeEventArg);
+        });
+        return column;
       }
-      return _column;
+      return column;
     });
+    this.changeDetectorRef.markForCheck();
   }
 
   handleDragTable({ from, to }) {
@@ -636,23 +677,6 @@ export class DataTableComponent implements OnDestroy, OnInit, AfterContentInit {
     this._columns.forEach((item, index) => {
       item.order = index;
     });
-  }
-
-  onResizeHandler($event: { width, field, isUserDefined, nextElementWidth }) {
-    const { width, field, isUserDefined, nextElementWidth } = $event;
-    this._columns = this._columns.map((column, index) => {
-      if (column.field === field) {
-        this.ngZone.run(() => {
-          column.width = parseInt(width, 10) + 'px';
-          const columnResizeEventArg = { currentColumn: column, nextColumn: this._columns[index + 1] };
-          this.resize.emit(columnResizeEventArg);
-        });
-        return column;
-      }
-      return column;
-    });
-
-    this.changeDetectorRef.markForCheck();
   }
 
   onBodyScroll(event: Event) {

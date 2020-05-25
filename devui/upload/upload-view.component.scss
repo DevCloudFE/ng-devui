@@ -7,15 +7,18 @@
   display: table;
   border-collapse: separate;
 }
+
 .devui-input-group:hover .devui-input-group-addon {
   border-color: $hover-control;
   background-color: $gray-2;
   font-weight: bold;
 }
+
 .devui-input-group:hover .devui-form-control {
   border-color: $hover-control;
   border-right-color: $gray-1;
 }
+
 .devui-input-group .devui-input-group-addon:active {
   border-color: $hover-control;
   border-right-color: $gray-1;
@@ -42,6 +45,7 @@
   transition: border-color ease-in-out 0.15s;
   cursor: pointer;
 }
+
 .devui-input-group .devui-form-control {
   cursor: pointer;
   display: block;
@@ -61,11 +65,14 @@
 svg.svg-icon-dot > path {
   fill: $dark-1;
 }
+
 .devui-form-control {
   outline: none;
 }
-.devui-icon-close-position {
+
+.devui-upload-delete-file-button {
   position: absolute;
   top: calc(50% - 7px);
   right: 50px;
+  cursor: pointer;
 }

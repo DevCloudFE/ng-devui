@@ -12,6 +12,7 @@ import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { AdditionalComponent } from './additional/additional.component';
 import { LiteComponent } from './lite/lite.component';
 import { WidgetsComponent } from './widgets/widgets.component';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { WidgetsComponent } from './widgets/widgets.component';
     PaginationModule,
     DevUICodeboxModule,
     DevUIApiModule,
+    DDemoNavModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo' },
       { path: 'demo', component: PaginationDemoComponent},

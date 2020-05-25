@@ -20,6 +20,7 @@
   white-space: normal;
   font-size: 12px;
   opacity: 1;
+
   & .devui-tooltip-arrow {
     display: block;
   }
@@ -27,7 +28,8 @@
   &.top {
     margin-top: -5px;
     padding: 0;
-    box-shadow: -5px 5px 20px 0px rgba($dark-1, 0.2);
+    box-shadow: -5px 5px 20px 0 rgba($dark-1, 0.2);
+
     & .devui-tooltip-arrow {
       bottom: -5px;
       left: 50%;
@@ -40,7 +42,8 @@
   &.bottom {
     margin-top: 5px;
     padding: 0;
-    box-shadow: 5px -5px 20px 0px rgba($dark-1, 0.2);
+    box-shadow: 5px -5px 20px 0 rgba($dark-1, 0.2);
+
     & .devui-tooltip-arrow {
       top: -5px;
       left: 50%;
@@ -53,7 +56,8 @@
   &.left {
     margin-left: -5px;
     padding: 0;
-    box-shadow: 5px -5px 20px 0px rgba($dark-1, 0.2);
+    box-shadow: 5px -5px 20px 0 rgba($dark-1, 0.2);
+
     & .devui-tooltip-arrow {
       top: 50%;
       right: -5px;
@@ -66,7 +70,8 @@
   &.right {
     margin-left: 5px;
     padding: 0;
-    box-shadow: -5px 5px 20px 0px rgba($dark-1, 0.2);
+    box-shadow: -5px 5px 20px 0 rgba($dark-1, 0.2);
+
     & .devui-tooltip-arrow {
       top: 50%;
       left: -5px;
@@ -75,6 +80,7 @@
       border-right-color: $hwc-feedback-overlay-background;
     }
   }
+
   .devui-tooltip-inner {
     max-width: 200px;
     padding: 5px 10px;
@@ -85,6 +91,8 @@
     background: $hwc-feedback-overlay-background;
     box-shadow: none;
     overflow-wrap: break-word;
+    word-break: normal;
+    word-wrap: break-word;
     text-align: start;
   }
 

@@ -10,4 +10,7 @@ export class ToastDemoComponent {
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./basic/basic.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/basic.component.ts') },
   ];
+  navItems = [
+    { dAnchorLink: 'basic-usage', value: '基本用法'}
+  ];
 }

@@ -1,4 +1,4 @@
-<section style="width:50%;">
+<section style="width: 50%;">
   <h4>单文件</h4>
   <d-single-upload
     #singleupload
@@ -20,7 +20,7 @@
     [uploadedFiles]="uploadedFiles"
     [uploadOptions]="uploadOptions"
     [filePath]="'name'"
-    [beforeUpload]="beforeUpload"
+    [beforeUpload]="beforeUploadFn"
     (successEvent)="onSuccess($event)"
     (deleteUploadedFileEvent)="deleteUploadedFile($event)"
     (errorEvent)="onError($event)"

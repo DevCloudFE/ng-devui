@@ -1,12 +1,9 @@
 import { Observable } from 'rxjs';
-import {
-  Type,
-  ComponentFactoryResolver,
-  Injector,
-} from '@angular/core';
+import { Type, ComponentFactoryResolver, Injector } from '@angular/core';
 
 export interface IModalOptions {
   id?: string;
+  zIndex?: number;
   component: Type<any>;
   width?: string;
   showAnimate?: boolean;
@@ -26,15 +23,16 @@ export interface IModalOptions {
 export interface IDialogOptions {
   id?: string;
   title: string;
+  zIndex?: number;
   content: string | Type<any>;
   html?: boolean;
   buttons: Array<{
-    id?: string,
-    cssClass?: string,
-    text: string,
-    handler: ($event: Event) => void,
-    btnwidth?: string,
-    autofocus?: boolean
+    id?: string;
+    cssClass?: string;
+    text: string;
+    handler: ($event: Event) => void;
+    btnwidth?: string;
+    autofocus?: boolean;
   }>;
   width?: string;
   backdropCloseable?: boolean;
@@ -45,7 +43,7 @@ export interface IDialogOptions {
   injector?: Injector;
   onClose?: Function;
   beforeHidden?: () => boolean | Promise<boolean> | Observable<boolean>;
-  dialogtype?: string ;
+  dialogtype?: string;
   draggable?: boolean;
   showCloseBtn?: boolean;
   placement?: 'center' | 'top' | 'bottom';

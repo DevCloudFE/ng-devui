@@ -8,6 +8,7 @@ import { ResizeComponent } from './resize/resize.component';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
     TextareaModule,
     DevUICodeboxModule,
     DevUIApiModule,
+    DDemoNavModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo' },
       { path: 'demo', component: TextDemoComponent},

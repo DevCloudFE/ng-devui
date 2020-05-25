@@ -110,6 +110,7 @@ export class SingleDateRangePickerComponent extends SingleDatepickerComponent im
         return;
       }
       this.selectRange(date);
+      this.selectedDate = this.isAuxiliary ? this.rangeEnd : this.rangeStart;
     }
   }
 
@@ -189,6 +190,58 @@ export class SingleDateRangePickerComponent extends SingleDatepickerComponent im
         date.getDate() === selectedDate.getDate()
       );
     });
+  }
+
+  isDisabledTime() {
+    const selectedSide = this.isAuxiliary ? this.rangeEnd : this.rangeStart;
+    return selectedSide ? super.isDisabledDay(selectedSide) : true;
+  }
+
+  timeUp(type) {
+    switch (type) {
+      case 'h': {
+        Number(this.currentHour) < 23 ? this.currentHour = (Number(this.currentHour) + 1) : this.currentHour = 0;
+        break;
+      }
+      case 'm': {
+        Number(this.currentMinute) < 59 ? this.currentMinute = (Number(this.currentMinute) + 1) : this.currentMinute = 0;
+        break;
+      }
+      case 's': {
+        Number(this.currentSecond) < 59 ? this.currentSecond = (Number(this.currentSecond) + 1) : this.currentSecond = 0;
+        break;
+      }
+    }
+    this.timeChange();
+  }
+
+  timeDown(type) {
+    switch (type) {
+      case 'h': {
+        Number(this.currentHour) > 0 ? this.currentHour = (Number(this.currentHour) - 1) : this.currentHour = 23;
+        break;
+      }
+      case 'm': {
+        Number(this.currentMinute) > 0 ? this.currentMinute = (Number(this.currentMinute) - 1) : this.currentMinute = 59;
+        break;
+      }
+      case 's': {
+        Number(this.currentSecond) > 0 ? this.currentSecond = (Number(this.currentSecond) - 1) : this.currentSecond = 59;
+        break;
+      }
+    }
+    this.timeChange();
+  }
+
+  timeChange() {
+    if (!this.isAuxiliary) {
+      this.rangeStart = new Date(this.rangeStart.getFullYear(), this.rangeStart.getMonth(), this.rangeStart.getDate(),
+        Number(this.currentHour), Number(this.currentMinute), Number(this.currentSecond));
+    } else {
+      this.rangeEnd = new Date(this.rangeEnd.getFullYear(), this.rangeEnd.getMonth(), this.rangeEnd.getDate(),
+        Number(this.currentHour), Number(this.currentMinute), Number(this.currentSecond));
+    }
+    this.rangeChange(this.ensureRangeValueOrder([this.rangeStart, this.rangeEnd]));
   }
 
   ngOnChanges(changes: SimpleChanges) {

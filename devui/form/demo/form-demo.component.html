@@ -1,24 +1,25 @@
-<div class="demo-container">
-  <div class="demo-example">
+<div class="demo-container" dAnchorBox [view]="{ top: 60, bottom: 0 }">
+  <d-demo-nav [navItems]="navItems"></d-demo-nav>
+  <div class="demo-example" [dAnchor]="'d-form-item'">
     <div class="demo-title">表单项d-form-item</div>
     <div class="demo-text">
       表单项，包含表单Label和具体表单输入组件。
     </div>
   </div>
-  <div class="demo-example">
+  <div class="demo-example" [dAnchor]="'d-form-label'">
     <div class="demo-title">表单项d-form-label</div>
     <div class="demo-text">
       表单项Label，描述该项表单关键字，包括帮助信息、是否必填等功能。
     </div>
   </div>
-  <div class="demo-example">
+  <div class="demo-example" [dAnchor]="'d-form-control'">
     <div class="demo-title">控件容器d-form-control</div>
     <div class="demo-text">
       表单项控件容器，里面容纳不同的表单输入组件。
     </div>
   </div>
 
-  <div class="demo-example">
+  <div class="demo-example" [dAnchor]="'basic-usage'">
     <div class="demo-title">基本用法</div>
     <div class="demo-text">
       基本用法当中，Label是在数据框的上面。
@@ -27,7 +28,7 @@
       <d-form-demo-base demo></d-form-demo-base>
     </d-codebox>
   </div>
-  <div class="demo-example">
+  <div class="demo-example" [dAnchor]="'demo-label-horizontal'">
     <div class="demo-title">label横向排列</div>
     <div class="demo-text">
       Label左右布局方式
@@ -36,7 +37,7 @@
       <d-form-demo-label-horizontal demo></d-form-demo-label-horizontal>
     </d-codebox>
   </div>
-  <div class="demo-example">
+  <div class="demo-example" [dAnchor]="'demo-modal'">
     <div class="demo-title">弹框表单</div>
     <div class="demo-text">
       弹框表单，弹框建议是400px，550px，700px，900px，建议宽高比是16:9、3：2
@@ -45,7 +46,7 @@
       <d-form-demo-modal demo></d-form-demo-modal>
     </d-codebox>
   </div>
-  <div class="demo-example">
+  <div class="demo-example" [dAnchor]="'demo-multi-col'">
     <div class="demo-title">多列表单</div>
     <div class="demo-text">
       多列表单
@@ -54,7 +55,7 @@
       <d-form-demo-multi-col demo></d-form-demo-multi-col>
     </d-codebox>
   </div>
-  <div class="demo-example">
+  <div class="demo-example" [dAnchor]="'demo-filter'">
     <div class="demo-title">表单过滤</div>
     <div class="demo-text">
       表单与过滤功能相结合，灵活展示所需内容

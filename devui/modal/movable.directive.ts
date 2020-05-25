@@ -26,6 +26,9 @@ export class MovableDirective implements OnInit, OnChanges {
       if (changes['moveEl']) {
           this.element = this.moveEl || this.el.nativeElement;
       }
+      if (changes['handle']) {
+        this.allowDrag = this._allowDrag;
+      }
     }
 
     @HostListener('mousedown', ['$event'])
@@ -118,7 +121,7 @@ export class MovableDirective implements OnInit, OnChanges {
     @Input('dMovable')
     set allowDrag(value: boolean) {
       this._allowDrag = value;
-      if (this._allowDrag) {
+      if (this._allowDrag && this.handle) {
         this.handle.style.cursor = 'move';
       }
     }

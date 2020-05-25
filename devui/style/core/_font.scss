@@ -1,3 +1,24 @@
+// 准备废弃
 $font-page-title-size: 20px;
 $font-card-title-size: 14px;
 $font-modal-title-size: 16px;
+
+$font-size-primary: 16px;
+$font-size-secondary-card-title: 14px;
+$font-size-modal-title: 18px;
+$font-size-content-help-sup: 12px;
+$font-title-weight: bold;
+$font-content-weight: normal;
+$line-height-base: 1.5;
+
+@mixin font-content() {
+  font-size: $font-size-content-help-sup;
+  font-weight: $font-content-weight;
+  line-height: $line-height-base;
+}
+
+@mixin font-title($font-size: $font-size-primary) {
+  font-size: $font-size;
+  font-weight: $font-title-weight;
+  line-height: $line-height-base;
+}

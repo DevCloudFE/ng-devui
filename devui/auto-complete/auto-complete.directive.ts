@@ -25,6 +25,7 @@ import { map, filter, debounceTime, switchMap, tap } from 'rxjs/operators';
 import { PositionService } from 'ng-devui/position';
 import { AutoCompletePopupComponent } from './auto-complete-popup.component';
 import { AutoCompleteConfig } from './auto-complete-config';
+import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 
 @Directive({
   selector: '[dAutoComplete]',
@@ -45,6 +46,19 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
   @Input() minLength: number;
   @Input() itemTemplate: TemplateRef<any>;
   @Input() noResultItemTemplate: TemplateRef<any>;
+  @Input() searchingTemplate: TemplateRef<any>;
+  @Input() set isSearching (isSearching) {
+    if (this.popupRef && this.searchingTemplate) {
+      const pop = this.popupRef.instance;
+      pop.isSearching = isSearching;
+      pop.searchingTemplate = this.searchingTemplate;
+      if (isSearching) {
+        pop.isOpen = true;
+      }
+    }
+  }
+
+  @Input() appendToBody = false;
   @Input() formatter: (item: any) => string;
   @Input() sceneType = ''; // sceneType使用场景：select(下拉框) suggest(联想)
   @Input() tipsText = ''; // 提示文字
@@ -63,6 +77,7 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
    *  【可选】启用数据懒加载，默认不启用
    */
   @Input() enableLazyLoad = false;
+  @Input() allowEmptyValueSearch = false;  // 在value为空时，是否允许进行搜索
   @Output() loadMore = new EventEmitter<any>();
   @Output() selectValue = new EventEmitter<any>();
   @Output() transInputFocusEmit = new EventEmitter<any>(); // input状态传给父组件函数
@@ -152,7 +167,7 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
   // 调用时机：input keyup
   onSourceChange(source) {
     if (!this.elementRef.nativeElement.value) {
-      if (this.sceneType !== 'select') { // 下拉场景不展示最近输入
+      if (this.sceneType !== 'select' && !this.allowEmptyValueSearch) { // 下拉场景不展示最近输入
         this.showLatestSource();
       } else {
         this.showSource(source, true, true);
@@ -243,20 +258,13 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
       this.searchFn('').subscribe(source => {
         this.showSource(source, isOpen, false);
       });
-    } else {
-      if (!this.elementRef.nativeElement.value) {
-        this.showLatestSource();
-      } else {
-        this.searchFn(this.elementRef.nativeElement.value).subscribe(source => {
-          this.showSource(source, true, false);
-        });
-      }
     }
   }
 
   @HostListener('blur', ['$event'])
   onBlur($event) {
     this.focus = false;
+    // this.hidePopup();    // TODO: 直接做失焦关闭，与点击操作将有冲突，存在click未完成已经blur，这个改动需要考虑
     this.onTouched();
   }
 
@@ -301,17 +309,28 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
         popupRef: this.popupRef
       });
     }
-    if (this.popupRef && !this.popupRef.instance.isOpen) {
-      return;
-    }
 
+    // TODO: sceneType为'select'时，自定义了太多处理，十分不优雅，需要合一化
     const hostElement = this.elementRef.nativeElement;
-    if (!hostElement.contains($event.target)) {
-      this.hidePopup();
-      this.transInputFocusEmit.emit({
-        focus: false,
-        popupRef: this.popupRef
-      });
+    if (this.popupRef && this.popupRef.instance.isOpen) {
+      if (!hostElement.contains($event.target) && this.sceneType === 'select'
+      || this.sceneType !== 'select') {
+        this.hidePopup();
+      }
+      if (!hostElement.contains($event.target)) {
+        this.transInputFocusEmit.emit({
+          focus: false,
+          popupRef: this.popupRef
+        });
+      }
+    } else if (hostElement.contains($event.target) && this.sceneType !== 'select') {
+      if (!this.elementRef.nativeElement.value && !this.allowEmptyValueSearch) {
+        this.showLatestSource();
+      } else {
+        this.searchFn(this.elementRef.nativeElement.value).subscribe(source => {
+          this.showSource(source, true, false);
+        });
+      }
     }
   }
 
@@ -329,6 +348,13 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
     pop.term = term;
     pop.disabledKey = this.disabledKey;
     pop.enableLazyLoad = this.enableLazyLoad;
+    if (this.appendToBody) {
+      pop.appendToBody = true;
+      pop.origin = new CdkOverlayOrigin(this.elementRef);
+      pop.width = this.elementRef.nativeElement.offsetWidth;
+    } else {
+      pop.appendToBody = false;
+    }
     ['formatter', 'itemTemplate', 'noResultItemTemplate', 'cssClass', 'dropdown', 'popTipsText', 'position', 'overview']
       .forEach(key => {
         if (this[key] !== undefined) {

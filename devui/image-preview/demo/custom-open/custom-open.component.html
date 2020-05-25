@@ -1,0 +1,6 @@
+<section>
+  <d-button (btnClick)="open()">预览图片</d-button>
+  <div dImagePreview [customSub]="customSub" [disableDefault]="true">
+    <img *ngFor="let item of imageDatas" [attr.src]="item.src | safe: 'url'" style="max-width: 800px;" />
+  </div>
+</section>

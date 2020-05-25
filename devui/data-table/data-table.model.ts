@@ -68,3 +68,9 @@ export interface ColumnResizeEventArg {
   currentColumn: DataTableColumnTmplComponent;
   nextColumn: DataTableColumnTmplComponent;
 }
+
+export enum ColumnAdjustStrategy {
+  disable = 0, // 不可调整
+  mouseup = 1, // 列宽在鼠标松开时变化
+  mousemove = 2 // 列宽随着鼠标移动变化
+}

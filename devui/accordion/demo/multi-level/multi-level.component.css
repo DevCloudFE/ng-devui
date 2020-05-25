@@ -1,15 +1,18 @@
 .menu {
   width: 400px;
 }
+
 .option {
   line-height: 20px;
   vertical-align: middle;
   margin-top: 20px;
 }
+
 .option > d-toggle {
   display: inline-block;
   transform: translateY(3px);
 }
+
 @media (max-width: 500px) {
   .menu {
     width: 80%;

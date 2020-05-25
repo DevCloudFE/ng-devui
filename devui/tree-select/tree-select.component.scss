@@ -8,12 +8,17 @@
     cursor: pointer;
     display: inline-block;
     width: 100%;
-    color: $dark-1;
     text-overflow: ellipsis;
+
+    &:not([disabled]) {
+      color: $dark-1;
+    }
+
     &.devui-tree-select-input {
       padding: 5px 2em 5px 10px;
     }
   }
+
   &:hover {
     & .clear {
       position: absolute;
@@ -56,6 +61,7 @@
     position: absolute;
     user-select: none;
     pointer-events: none;
+
     svg {
       transition: transform 0.3s;
     }
@@ -63,12 +69,15 @@
     &.open svg {
       transform: rotate(180deg);
     }
+
     &.clear {
       opacity: 0;
     }
 
     &.disabled {
-      opacity: 0.3;
+      svg polygon {
+        fill: $disabled-content;
+      }
     }
 
     & ::ng-deep g {
@@ -104,6 +113,7 @@
       -moz-width: fit-content;
       width: fit-content;
       min-width: calc(100% - 1.2em); // 当数据无法铺满一行时通过最小宽度使其铺满
+
       &::after {
         content: '';
         position: absolute;
@@ -121,7 +131,8 @@
     user-select: none;
     cursor: not-allowed;
     padding: 5px 12px;
-    opacity: 0.3;
+    background-color: $disabled-bg;
+    color: $disabled-content;
   }
 }
 

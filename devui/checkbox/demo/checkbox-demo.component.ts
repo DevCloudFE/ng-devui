@@ -16,6 +16,10 @@ export class CheckBoxDemoComponent {
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./group/checkbox-group-basic.component.html')},
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./group/checkbox-group-basic.component.ts')},
   ];
+  navItems = [
+    { dAnchorLink: 'checkbox-basic', value: '基本用法'},
+    { dAnchorLink: 'tabs-group', value: '使用CheckBoxGroup'}
+  ];
   constructor() {
   }
 }

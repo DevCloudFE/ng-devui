@@ -8,6 +8,7 @@ import { IFileOptions, IUploadOptions } from 'ng-devui/upload';
   templateUrl: './basic.component.html'
 })
 export class BasicComponent {
+  public beforeUploadFn: Function;
   additionalParameter = {
     name: 'tom',
     age: 11
@@ -27,6 +28,7 @@ export class BasicComponent {
   };
 
   constructor(private http: HttpClient) {
+    this.beforeUploadFn = this.beforeUpload2.bind(this);
   }
 
   onSuccess(result) {
@@ -34,6 +36,13 @@ export class BasicComponent {
   }
 
   beforeUpload(file) {
+    console.log(this); // this指向SingleUploadComponent
+    console.log(file);
+    return true;
+  }
+
+  beforeUpload2(file) {
+    console.log(this); // this指向BasicComponent
     console.log(file);
     return true;
   }

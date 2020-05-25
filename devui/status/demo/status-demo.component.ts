@@ -11,4 +11,7 @@ export class StatusDemoComponent {
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/basic.component.ts') },
     { title: 'CSS', language: 'css', code: require('!!raw-loader!./basic/basic.component.css') }
   ];
+  navItems = [
+    { dAnchorLink: 'basic-usage', value: '基本用法'}
+  ];
 }

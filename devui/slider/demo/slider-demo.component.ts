@@ -20,4 +20,9 @@ export class SliderDemoComponent {
     {title: 'TS', language: 'typescript', code: require('!!raw-loader!./custom-formatter/slider-custom-formatter.component.ts')},
   ];
   list = ['基本用法', '禁止输入态', '定制Popover的显示内容'];
+  navItems = [
+    { dAnchorLink: 'basic-usage', value: '基本用法'},
+    { dAnchorLink: 'slider-disabled', value: '禁止输入态'},
+    { dAnchorLink: 'slider-formatter', value: '异定制Popover的显示内容'}
+  ];
 }

@@ -1,0 +1,58 @@
+<d-fullscreen (fullscreenLaunch)="launchFullscreen($event)" [zIndex]="'1001'">
+  <div fullscreen-target>
+    <div
+      [id]="diagramId"
+      dDroppable
+      [dropScope]="dropScope"
+      (dragOverEvent)="dragOverEvent($event)"
+      (dropEvent)="onDrop($event)"
+      (dragleave)="handleDropOut()"
+      class="devui-quadrant-diagram"
+      [style.height.px]="view?.height"
+      [style.width.px]="view?.width"
+    >
+      <div class="devui-control-zoom-container" [style.right.px]="axisConfigs.axisMargin">
+        <div class="devui-icon-display" [class.disabled]="currentLabelSize === 'small'" (click)="zoomOut(currentLabelSize)">
+          <svg
+            width="16px"
+            height="16px"
+            viewBox="0 0 16 16"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+          >
+            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+              <polygon fill="#293040" points="14 7 14 9 2 9 2 7"></polygon>
+            </g>
+          </svg>
+        </div>
+        <div class="devui-icon-display" [class.disabled]="currentLabelSize === 'large'" (click)="zoomIn(currentLabelSize)">
+          <svg
+            width="16px"
+            height="16px"
+            viewBox="0 0 16 16"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+          >
+            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+              <polygon fill="#293040" points="7 7 7 2 9 2 9 7 14 7 14 9 9 9 9 14 7 14 7 9 2 9 2 7"></polygon>
+            </g>
+          </svg>
+        </div>
+        <div fullscreen-launch class="devui-icon-display" [innerHTML]="btnIcon | safe: 'html'"></div>
+      </div>
+      <d-quadrant-axis [diagramId]="diagramId" [view]="view" [axisConfigs]="axisConfigs"></d-quadrant-axis>
+      <d-quadrant-region
+        [view]="view"
+        [labelData]="labelData"
+        [axisConfigs]="axisConfigs"
+        [quadrantConfigs]="quadrantConfigs"
+        [currentLabelSize]="currentLabelSize"
+        [showQuadrants]="showQuadrants"
+        [dropScope]="dropScope"
+        [diagramId]="diagramId"
+      ></d-quadrant-region>
+    </div>
+  </div>
+</d-fullscreen>
