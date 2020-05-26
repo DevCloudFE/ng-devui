@@ -10,6 +10,7 @@ import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { ButtonModule } from 'ng-devui/button';
 import { StickyModule } from '../sticky.module';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ import { StickyModule } from '../sticky.module';
     StickyModule,
     DevUICodeboxModule,
     DevUIApiModule,
+    DDemoNavModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo' },
       { path: 'demo', component: StickyDemoComponent},

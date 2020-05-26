@@ -1,5 +1,6 @@
-<div class="demo-container">
-  <div class="demo-example">
+<div class="demo-container" dAnchorBox [view]="{ top: 60, bottom: 0 }">
+  <d-demo-nav [navItems]="navItems"></d-demo-nav>
+  <div class="demo-example" [dAnchor]="'basic-usage'">
     <div class="demo-title">基本用法</div>
     <div class="demo-text">
       基本用法，可以控制全屏、关闭和设置宽度
@@ -8,7 +9,7 @@
       <d-basic demo></d-basic>
     </d-codebox>
   </div>
-  <div class="demo-example">
+  <div class="demo-example" [dAnchor]="'do-not-destroy-after-closing'">
     <div class="demo-title">关闭后不销毁</div>
     <div class="demo-text">
       关闭后不销毁，需要手动销毁，适用于不需要关闭立即销毁的场景

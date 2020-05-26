@@ -81,6 +81,7 @@ export class TipsComponent implements OnInit {
   openInfoDialog(dialogtype?: string) {
     const results = this.dialogService.open({
     id: 'dialog-service',
+    zIndex: 1050,
     width: '346px',
     maxHeight: '600px',
     showAnimate: false,

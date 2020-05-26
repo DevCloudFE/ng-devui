@@ -1,19 +1,18 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { ScrollingModule } from '@angular/cdk/scrolling';
-
-import { DrawerComponent } from './drawer.component';
-import { PortalModule } from 'ng-devui/portal';
-import { DrawerService } from './drawer.service';
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { OverlayContainerModule } from 'ng-devui/overlay-container';
-import { DrawerContentDirective } from './drawer.component';
+import { PortalModule } from 'ng-devui/portal';
+import { DrawerComponent, DrawerContentDirective } from './drawer.component';
+import { DrawerService } from './drawer.service';
+
 
 @NgModule({
   imports: [
     CommonModule,
     ScrollingModule,
     PortalModule,
-    OverlayContainerModule,
+    OverlayContainerModule
   ],
   exports: [DrawerComponent],
   declarations: [

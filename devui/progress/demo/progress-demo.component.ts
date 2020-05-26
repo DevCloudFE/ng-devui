@@ -19,6 +19,10 @@ export class ProgressDemoComponent {
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./circle/circle.component.ts')},
     {title: 'CSS', language: 'css', code:  require('!!raw-loader!./circle/circle.component.css')}
   ];
+  navItems = [
+    { dAnchorLink: 'basic-usage1', value: '基本用法1'},
+    { dAnchorLink: 'basic-usage2', value: '基本用法2'}
+  ];
 
   constructor() {
 

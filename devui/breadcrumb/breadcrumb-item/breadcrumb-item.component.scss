@@ -1,12 +1,16 @@
 @import '../../style/theme/color';
+
 .devui-breadcrumb-font-style {
   font-size: 12px;
   color: $dark-3;
   line-height: 20px;
 }
+
 .devui-breadcrumb-item {
   @extend.devui-breadcrumb-font-style;
+
   cursor: auto;
+
   ::ng-deep a:hover {
     color: $dark-1;
     text-decoration: none;
@@ -14,12 +18,15 @@
 
   ::ng-deep a {
     @extend.devui-breadcrumb-font-style;
+
     cursor: pointer;
+
     &:focus {
       text-decoration: none;
     }
   }
 }
+
 .devui-breadcrumb-down-icon {
   vertical-align: middle;
   display: inline-block;
@@ -29,33 +36,41 @@
   margin-right: -5px;
   text-align: center;
   outline: none;
+
   &:hover {
     svg g polygon {
       fill: $dark-1;
     }
   }
 }
+
 .devui-breadcrumb-item-active {
   color: $dark-1;
+
   ::ng-deep a {
     color: $dark-1;
     text-decoration: none;
   }
+
   svg g polygon {
     fill: $dark-1;
   }
+
   span {
     color: $dark-1;
   }
 }
+
 .devui-breadcrumb-separator {
   @extend.devui-breadcrumb-font-style;
+
   margin: 0 3px;
 }
 
 .devui-breadcrumb-dropdown-menu {
   padding: 10px 0;
   max-width: 200px;
+
   li {
     padding: 0 15px;
     font-size: 12px;
@@ -65,23 +80,28 @@
     white-space: nowrap;
     text-overflow: ellipsis;
     cursor: pointer;
+
     a {
       color: $dark-1;
       line-height: 36px;
       width: 170px;
       display: inline-block;
+
       &:focus {
         text-decoration: none;
       }
     }
+
     &:hover {
       background: $hover-content;
+
       a {
         text-decoration: none;
       }
     }
   }
 }
+
 .devui-search-container {
   padding: 10px 15px;
   max-width: 200px;

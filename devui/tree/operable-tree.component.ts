@@ -59,10 +59,10 @@ export class OperableTreeComponent implements AfterViewInit, OnDestroy {
   @Output() editValueChange: EventEmitter<any> = new EventEmitter<any>();
   @Output() nodeOnDrop: EventEmitter<any> = new EventEmitter<any>();
   @ViewChild('operableTree', { static: true }) operableTree: TreeComponent;
-  @ContentChild('iconTemplate', { static: false }) iconTemplate;
-  @ContentChild('nodeTemplate', { static: false }) nodeTemplate;
-  @ContentChild('operatorTemplate', { static: false }) operatorTemplate;
-  @ContentChild('statusTemplate', { static: false }) statusTemplate;
+  @ContentChild('iconTemplate') iconTemplate;
+  @ContentChild('nodeTemplate') nodeTemplate;
+  @ContentChild('operatorTemplate') operatorTemplate;
+  @ContentChild('statusTemplate') statusTemplate;
   private addingNode = false;
   private treeNodeDragoverResponder = {
     node: null,

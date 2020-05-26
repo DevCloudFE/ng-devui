@@ -124,7 +124,7 @@ export class SplitterService {
     if (pane.collapsible) {
         pane.collapsed = lockStatus ? pane.collapsed : !pane.collapsed;
         pane.toggleCollapseClass();
-        nearPane.toggleNearPaneFlexGrow();
+        nearPane.toggleNearPaneFlexGrow(pane.collapsed);
         pane.collapsedChange.emit(pane.collapsed);
     }
   }

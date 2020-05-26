@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'd-draggable',
-  templateUrl: './draggable.component.html',
-  styleUrls: ['./draggable.component.css']
+  templateUrl: './draggable.component.html'
 })
 export class DraggableComponent implements OnInit {
 

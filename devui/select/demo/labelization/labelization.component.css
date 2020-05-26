@@ -2,15 +2,18 @@
   width: 50%;
   float: left;
 }
+
 .col-md-1 {
   float: left;
   margin-left: 5%;
 }
+
 .row::before,
 .row::after {
   display: table;
   content: ' ';
 }
+
 .row::after {
   clear: both;
 }

@@ -96,10 +96,10 @@ export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterV
   @ViewChild('selectHost', { static: true }) selectHost: ElementRef;
   @ViewChild('optionsContainer', { static: true }) optionsContainer: ElementRef;
   @ViewChild('tree', { static: true }) tree: OperableTreeComponent;
-  @ViewChild('searchInput', { static: false }) searchInput;
-  @ViewChild('searchInputModel', { static: false }) searchInputModel;
+  @ViewChild('searchInput') searchInput;
+  @ViewChild('searchInputModel') searchInputModel;
   @ViewChild('popper', { static: true }) popper;
-  @ContentChild('iconTemplate', { static: false }) iconTemplatePassThrough;
+  @ContentChild('iconTemplate') iconTemplatePassThrough;
 
   @Output() valueChanged = new EventEmitter<any>();
   checkboxInput: ICheckboxInput;

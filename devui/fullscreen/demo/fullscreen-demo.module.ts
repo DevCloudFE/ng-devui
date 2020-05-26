@@ -11,6 +11,7 @@ import { FullscreenModule } from '../fullscreen.module';
 import { FullscreenDemoComponent } from './fullscreen-demo.component';
 import { FullscreenDemoImmersiveComponent } from './immersive/immersive.component';
 import { FullscreenDemoNormalComponent } from './normal/normal.component';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ import { FullscreenDemoNormalComponent } from './normal/normal.component';
     FullscreenModule,
     DevUICodeboxModule,
     DevUIApiModule,
+    DDemoNavModule,
     RouterModule.forChild([
       { path: '', redirectTo: 'demo' },
       { path: 'demo', component: FullscreenDemoComponent },

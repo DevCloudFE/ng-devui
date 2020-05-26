@@ -10,6 +10,7 @@
   position: relative;
   border-radius: 100px;
   background: $gray-2;
+
   .devui-progress-bar {
     width: 0;
     height: 100%;
@@ -18,6 +19,7 @@
     border-radius: 100px;
     background-color: $brand-1;
   }
+
   > span {
     display: block;
     white-space: nowrap;
@@ -31,9 +33,11 @@
     font-size: 12px;
   }
 }
+
 .devui-progress-circle {
   position: relative;
 }
+
 .devui-progress-circle-text {
   position: absolute;
   top: 50%;
@@ -48,9 +52,11 @@
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
+
 .devui-progress-circle-trail {
   stroke: $gray-2;
 }
+
 .devui-progress-circle-path {
   stroke: $brand-1;
 }

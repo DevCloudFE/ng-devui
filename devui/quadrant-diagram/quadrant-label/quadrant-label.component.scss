@@ -1,0 +1,64 @@
+.devui-list-style {
+  font-size: 14px;
+  color: #293040;
+  background: #ffffff;
+  box-shadow: 0 0 1px 0 rgba(41, 48, 64, 0.25), 0 1px 2px 0 rgba(41, 48, 64, 0.2);
+  border-radius: 1px;
+  z-index: 10;
+  cursor: grabbing;
+
+  &:hover {
+    color: #5170ff;
+    box-shadow: 0 4px 8px 0 rgba(41, 48, 64, 0.25);
+  }
+}
+
+.devui-large-size {
+  height: 36px;
+  line-height: 36px;
+  width: 120px;
+}
+
+.devui-normal-size {
+  height: 28px;
+  line-height: 28px;
+  width: 90px;
+}
+
+.devui-small-size {
+  background: #3dcca6;
+  border-radius: 6px;
+  height: 12px;
+  width: 12px;
+}
+
+.devui-label-style {
+  padding: 0 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+}
+
+:host ::ng-deep .devui-progress {
+  background: #f3f6f8 !important;
+}
+
+.devui-horizontal-line {
+  position: absolute;
+  height: 1px;
+  border-bottom: 1px dashed #959eb2;
+}
+
+.devui-vertical-line {
+  position: absolute;
+  width: 1px;
+  border-left: 1px dashed #959eb2;
+}
+
+.devui-axis-value {
+  color: #5e6678;
+  line-height: 20px;
+  padding: 5px;
+  font-size: 12px;
+}

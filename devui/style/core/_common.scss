@@ -8,7 +8,7 @@
   zoom: 1;
 }
 
-.clear-fix:after {
+.clear-fix::after {
   content: '';
   display: block;
   width: 0;
@@ -20,14 +20,14 @@
   font-size: 21px;
   font-weight: bold;
   line-height: 1;
-  color: #000;
-  text-shadow: 0 1px 0 #fff;
+  color: #000000;
+  text-shadow: 0 1px 0 #ffffff;
   filter: alpha(opacity=20);
   opacity: 0.2;
 
   &:hover,
   &:focus {
-    color: #000;
+    color: #000000;
     text-decoration: none;
     cursor: pointer;
     filter: alpha(opacity=50);
@@ -47,6 +47,7 @@ a:hover,
 a:focus {
   color: $brand-1;
 }
+
 a:active,
 a:hover {
   outline: 0;
@@ -54,9 +55,25 @@ a:hover {
 
 .devui-link {
   color: $link;
+
   &:hover {
     color: $hover-control;
     text-decoration: underline;
     cursor: pointer;
+  }
+}
+
+.devui-disabled {
+  &,
+  &.devui-input-group-addon {
+    border-color: $disabled-border;
+  }
+
+  &,
+  & > input,
+  & > .devui-input-group-addon {
+    color: $disabled-content;
+    background-color: $disabled-bg;
+    cursor: not-allowed;
   }
 }

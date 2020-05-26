@@ -23,7 +23,7 @@ To see more in [devui.design](https://devui.design/home).
 
 ## Angular Support
 
-Now supports Angular <font color=red>`^8.0.0`</font>
+Now supports Angular <font color=red>`^9.0.0`</font>
 
 ## Getting Started
 

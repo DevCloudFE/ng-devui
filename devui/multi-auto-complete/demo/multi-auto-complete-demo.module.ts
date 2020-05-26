@@ -11,6 +11,7 @@ import { MultiAutoCompleteModule } from 'ng-devui/multi-auto-complete';
 import { MultiAutoCompleteDemoComponent } from './multi-auto-complete-demo.component';
 import { MultiAutoCompleteDemoDefaultComponent } from './default/multi-auto-complete-demo-default.component';
 import { MultiAutoCompleteDemoArrayComponent } from './array/multi-auto-complete-demo-array.component';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 
 @NgModule({
   imports: [
@@ -21,6 +22,7 @@ import { MultiAutoCompleteDemoArrayComponent } from './array/multi-auto-complete
     DevUIApiModule,
     DataTableModule,
     DevUICodeboxModule,
+    DDemoNavModule,
     RouterModule.forChild([
       { path: '', redirectTo: 'demo' },
       { path: 'demo', component: MultiAutoCompleteDemoComponent },

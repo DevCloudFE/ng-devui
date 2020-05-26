@@ -332,12 +332,11 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
     }
   }
 
-  onResize($event, column, isUserDefined) {
+  onResize($event, column) {
     // tslint:disable-next-line:no-unused-expression
     column['advancedHeader'] == null && this.resizeHandlerEvent.emit({
       ...$event,
-      field: column.field,
-      isUserDefined: isUserDefined
+      field: column.field
     });
   }
 

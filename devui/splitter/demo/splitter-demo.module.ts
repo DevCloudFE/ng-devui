@@ -11,6 +11,7 @@ import { SplitterDemoMultiComponent } from './multi/splitter-demo-multi.componen
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { SplitterDemoDirectionComponent } from './direction/splitter-demo-direction.component';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ import { SplitterDemoDirectionComponent } from './direction/splitter-demo-direct
     DevUIApiModule,
     SplitterModule,
     FormsModule,
+    DDemoNavModule,
     RouterModule.forChild([
       {path: '', redirectTo: 'demo'},
       {path: 'demo', component: SplitterDemoComponent},

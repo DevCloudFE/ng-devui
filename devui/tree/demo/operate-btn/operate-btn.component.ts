@@ -3,8 +3,7 @@ import { ITreeItem, OperableTreeComponent, TreeNode } from 'ng-devui/tree';
 
 @Component({
   selector: 'd-operate-btn',
-  templateUrl: './operate-btn.component.html',
-  styleUrls: ['./operate-btn.component.css']
+  templateUrl: './operate-btn.component.html'
 })
 export class OperateBtnComponent {
   currentSelectedNode;

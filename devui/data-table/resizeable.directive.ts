@@ -1,6 +1,4 @@
-import {
-    Renderer, Renderer2, Directive, ElementRef, HostListener, Input, Output, EventEmitter, OnDestroy, AfterViewInit, HostBinding, NgZone
-} from '@angular/core';
+import {  Renderer2, Directive, ElementRef, HostListener, Input, Output, EventEmitter, OnDestroy, AfterViewInit, HostBinding, NgZone } from '@angular/core';
 import { Subscription, fromEvent } from 'rxjs';
 @Directive({
   selector: '[dResizeable]'
@@ -27,7 +25,6 @@ export class ResizeableDirective implements OnDestroy, AfterViewInit {
     resizing = false;
     resizeNodeEvent: any;
     resizeOverlay: HTMLElement;
-    // resizeBarNode: HTMLSpanElement;
     nextElement: any;
     moveCount: number;
     initialWidth: number;
@@ -100,7 +97,6 @@ export class ResizeableDirective implements OnDestroy, AfterViewInit {
             const newWidth = this.initialWidth + movementX;
 
             const finalWidth = this.getFinalWidth(newWidth);
-            this.setElementWidth(finalWidth);
             this.resizing = false;
 
             // destroy overlay
@@ -132,13 +128,8 @@ export class ResizeableDirective implements OnDestroy, AfterViewInit {
         const newWidth = this.initialWidth + movementX;
 
         const finalWidth = this.getFinalWidth(newWidth);
-        this.setElementWidth(finalWidth);
         this.renderer2.setStyle(this.resizeBarRefElement.nativeElement, 'left', `${finalWidth + this.element.offsetLeft}px`);
         this.resizingEvent.emit({ width: finalWidth, nextElementWidth: this.nextElementWidth });
-    }
-
-    private setElementWidth(finalWidth: number) {
-        this.renderer2.setStyle(this.element, 'width', `${finalWidth}px`);
     }
 
     private getFinalWidth(newWidth: number): number {

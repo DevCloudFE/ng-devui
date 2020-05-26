@@ -39,6 +39,12 @@ export class UploadComponent {
     });
   }
 
+  getFullFiles() {
+    return this.fileUploaders.map(fileUploader => {
+      return fileUploader;
+    });
+  }
+
   upload() {
     const uploads = this.fileUploaders
       .filter((fileUploader) => fileUploader.status !== UploadStatus.uploaded)

@@ -2,19 +2,18 @@
   display: inline-block;
 }
 
-.devui-dropdown-menu {
-}
-
 .field-text {
   font-weight: bold;
   margin-bottom: 16px;
 }
+
 .filter {
   display: inline-block;
   height: 34px;
   line-height: 34px;
-  decoration: underline;
+  text-decoration: underline;
 }
+
 .single-checkbox {
   display: inline-block;
   margin-right: 10px;

@@ -1,11 +1,13 @@
 .btn-group > span {
   font-size: 20px;
-  color: #666;
+  color: #666666;
   cursor: pointer;
 }
+
 .devui-dropdown-menu {
   overflow-y: auto;
 }
+
 .btn-group {
   display: inline-block;
 }

@@ -1,0 +1,16 @@
+<div class="demo-container" dAnchorBox [view]="{ top: 60, bottom: 0 }">
+  <d-demo-nav [navItems]="navItems"></d-demo-nav>
+  <div class="demo-example" [dAnchor]="'basic-usage'">
+    <div class="demo-title">基本用法</div>
+    <d-codebox id="components-quadrant-diagram-basic" [sourceData]="basicSource">
+      <d-basic demo></d-basic>
+    </d-codebox>
+  </div>
+  <div class="demo-example" [dAnchor]="'custom-quadrant'">
+    <div class="demo-title">配置自定义象限图</div>
+    <div class="demo-text">需要单独设置可放置的区域，将dropScope的值设置为'devui-quadrant-diagram'</div>
+    <d-codebox id="components-quadrant-diagram-basic" [sourceData]="configSource">
+      <d-config demo></d-config>
+    </d-codebox>
+  </div>
+</div>

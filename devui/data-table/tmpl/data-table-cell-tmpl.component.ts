@@ -9,7 +9,7 @@ import { DataTableCellEditTmplComponent } from './data-table-cell-edit-tmpl.comp
 })
 export class DataTableCellTmplComponent {
   @Input() type: string;
-  @ContentChild(DataTableCellViewTmplComponent, { static: false }) view: DataTableCellViewTmplComponent;
-  @ContentChild(DataTableCellEditTmplComponent, { static: false }) edit: DataTableCellEditTmplComponent;
+  @ContentChild(DataTableCellViewTmplComponent) view: DataTableCellViewTmplComponent;
+  @ContentChild(DataTableCellEditTmplComponent) edit: DataTableCellEditTmplComponent;
 
 }

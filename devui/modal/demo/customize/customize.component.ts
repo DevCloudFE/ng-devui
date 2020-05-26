@@ -4,8 +4,7 @@ import { ModalAlertComponent } from './modal-alert.component';
 
 @Component({
   selector: 'd-customize',
-  templateUrl: './customize.component.html',
-  styleUrls: ['./customize.component.css']
+  templateUrl: './customize.component.html'
 })
 export class CustomizeComponent {
 

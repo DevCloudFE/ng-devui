@@ -15,6 +15,7 @@ import { CustomizeComponent } from './customize/customize.component';
 import { DraggableComponent } from './draggable/draggable.component';
 import { CustomTitleKeyComponent } from './custom-title-key/custom-title-key.component';
 import { SearchFilterComponent } from './search-filter/search-filter.component';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 
 @NgModule({
   imports: [
@@ -24,6 +25,7 @@ import { SearchFilterComponent } from './search-filter/search-filter.component';
     FormsModule,
     DevUICodeboxModule,
     DevUIApiModule,
+    DDemoNavModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo' },
       { path: 'demo', component: TreeDemoComponent},

@@ -10,11 +10,12 @@
 .devui-nav-pills {
   font-size: 14px;
   background: transparent;
-  font-size: 14px;
   font-weight: bold;
+
   li {
     cursor: pointer;
     border: 2px solid transparent;
+
     & > a {
       cursor: pointer;
       border: none;
@@ -23,17 +24,20 @@
       padding: 0;
       color: $dark-1;
     }
+
     & > a:hover,
     & > a:focus,
     & > a:active {
       outline: none;
     }
+
     &.disabled {
       a {
-        opacity: 0.3;
+        color: $disabled-content;
         cursor: not-allowed;
       }
     }
+
     &.active,
     &:hover:not(.disabled) {
       & > a {
@@ -41,16 +45,18 @@
       }
     }
   }
-  li:after {
+
+  li::after {
     content: '';
     display: block;
     margin: auto;
     height: 2px;
-    width: 0px;
+    width: 0;
     background: transparent;
     transition: width 0.3s ease-out, background-color 0.3s ease-out;
   }
-  li.active:after {
+
+  li.active::after {
     width: 100%;
     background: $brand-1;
   }
@@ -61,16 +67,19 @@
   background: transparent;
   border: none;
   border-radius: 1px;
+
   > li {
     cursor: pointer;
     border: 1px solid $gray-1;
-    border-left-width: 0px;
+    border-left-width: 0;
     background-color: $bg-white;
     float: left;
+
     &:first-child {
       border-left-width: 1px;
       border-radius: 1px 0 0 1px;
     }
+
     &:last-child {
       border-radius: 0 1px 1px 0;
     }
@@ -81,27 +90,34 @@
       color: $dark-1;
       line-height: 30px;
       padding: 0 15px;
+
       &:hover,
       &:focus,
       &:active {
         outline: none;
       }
     }
+
     &.disabled {
+      border-color: $disabled-border;
+
       a {
-        opacity: 0.3;
+        color: $disabled-content;
         cursor: not-allowed;
       }
     }
+
     &.active,
     &:hover:not(.disabled) {
       & > a {
         color: $font-white;
+
         &:hover {
           color: $font-white;
           background: transparent;
         }
       }
+
       &:not(:first-child)::before {
         content: '';
         display: block;
@@ -112,12 +128,15 @@
         position: absolute;
       }
     }
+
     &.active {
       background-color: $brand-1;
       border-color: $brand-1;
+
       &:not(:first-child)::before {
         background-color: $brand-1;
       }
+
       & + li::before {
         background-color: $brand-1;
       }
@@ -126,6 +145,7 @@
     &:hover:not(.active):not(.disabled) {
       background-color: $hover-control;
       border-color: $hover-control;
+
       &:not(:first-child)::before {
         background-color: $hover-control;
       }
@@ -145,12 +165,14 @@
 
 .devui-nav-tabs:not(.devui-nav-stacked) {
   border-bottom: 1px $gray-1 solid;
+
   li {
     float: left;
     margin-left: 32px;
     margin-bottom: -3px;
+
     &:first-child {
-      margin-left: 0px;
+      margin-left: 0;
     }
   }
 }
@@ -159,19 +181,20 @@
   > li {
     float: left;
     margin-left: 32px;
+
     &:first-child {
-      margin-left: 0px;
+      margin-left: 0;
     }
   }
 }
 
-.devui-nav:before,
-.devui-nav:after {
+.devui-nav::before,
+.devui-nav::after {
   content: ' ';
   display: table;
 }
 
-.devui-nav:after {
+.devui-nav::after {
   clear: both;
 }
 

@@ -18,9 +18,7 @@
         'display-flex': dialogtype !== '' && dialogtype !== 'standard'
       }"
     >
-      <div class="content" [style.max-height]="maxHeight" *ngIf="!!content && !html">
-        {{ content }}
-      </div>
+      <div class="content" [style.max-height]="maxHeight" *ngIf="!!content && !html">{{ content }}</div>
       <div class="content" [style.max-height]="maxHeight" *ngIf="!!content && html" [innerHTML]="content"></div>
       <ng-template dModalContentHost></ng-template>
     </div>

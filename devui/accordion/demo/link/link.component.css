@@ -1,12 +1,15 @@
 .menu {
   width: 200px;
 }
+
 .menu-wrapper {
   float: left;
 }
+
 .menu-wrapper + .menu-wrapper {
   margin-left: 20px;
 }
+
 :host::after {
   content: '';
   display: block;
@@ -17,11 +20,13 @@
   .menu-wrapper {
     float: none;
   }
+
   .menu-wrapper + .menu-wrapper {
     margin-top: 20px;
-    margin-left: 0px;
+    margin-left: 0;
   }
 }
+
 @media (max-width: 250px) {
   .menu {
     width: 80%;

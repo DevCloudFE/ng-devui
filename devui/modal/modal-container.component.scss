@@ -4,8 +4,8 @@
 
 .display-flex {
   display: flex;
-  align-items: center;
   display: -ms-flexbox;
+  align-items: center;
   -ms-flex-align: center;
   max-width: 100%;
 }
@@ -13,11 +13,13 @@
 .alert-icon {
   margin-right: 10px;
 }
+
 div.content {
   word-break: normal;
   word-wrap: break-word;
   width: 100%;
 }
+
 .alert-icon + div.content {
   width: 'calc(100% - 60px)';
 }

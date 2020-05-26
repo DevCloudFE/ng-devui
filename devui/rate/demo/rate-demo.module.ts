@@ -11,6 +11,7 @@ import { RateDemoCustomizeComponent } from './customize/customize.component';
 import { RateDemoBasicComponent } from './basic/basic.component';
 import { RateDemoOnlyReadComponent } from './onlyread/onlyread.component';
 import { TypeComponent } from './type/type.component';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { TypeComponent } from './type/type.component';
         RateModule,
         DevUIApiModule,
         DevUICodeboxModule,
+        DDemoNavModule,
         RouterModule.forChild([
             { path: '', redirectTo: 'demo' },
             { path: 'demo', component: RateDemoComponent },

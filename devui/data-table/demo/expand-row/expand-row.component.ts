@@ -33,7 +33,6 @@ export class ExpandRowComponent implements OnInit, AfterContentInit {
   @ViewChild('addSubRowContent', { static: true }) addSubRowContent: ElementRef;
 
   basicDataSource: Array<SourceType> = JSON.parse(JSON.stringify(originSource.slice(0, 6)));
-  genderSource = ['male', 'female'];
   headerExpandConfig: TableExpandConfig;
   defaultRowData = {
     firstName: '',

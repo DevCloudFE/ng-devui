@@ -31,4 +31,12 @@ export class TreeSelectDemoComponent {
     {title: 'TS', language: 'typescript', code: require('!!raw-loader!./custom-icon/tree-select-custom-icon.component.ts')},
     {title: 'CSS', language: 'css', code: require('!!raw-loader!./custom-icon/tree-select-custom-icon.component.css')}
   ];
+  navItems = [
+    { dAnchorLink: 'basic-usage', value: '基本用法'},
+    { dAnchorLink: 'leaf-only', value: '仅叶节点可选'},
+    { dAnchorLink: 'init-hooks', value: '初始化完成时调用的钩子'},
+    { dAnchorLink: 'simple-search', value: '可简易搜索树'},
+    { dAnchorLink: 'append-to-element', value: 'Append To Element 能力'},
+    { dAnchorLink: 'custom-icon', value: '自定义icon能力'}
+  ];
 }

@@ -2,7 +2,8 @@ export enum SelectDateChangeReason {
   date,
   time,
   button,
-  format
+  format,
+  custom
 }
 
 export interface SelectDateChangeEventArgs {

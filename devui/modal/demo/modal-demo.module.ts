@@ -19,6 +19,7 @@ import { WarningComponent } from './warning/warning.component';
 import { AutofocusComponent } from './autofocus/autofocus.component';
 import { ModalTestComponent } from './basic/modal-test.component';
 import { ModalFormComponent } from './hide/modal-form.component';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 
 @NgModule({
   imports: [
@@ -27,6 +28,7 @@ import { ModalFormComponent } from './hide/modal-form.component';
     ButtonModule,
     DevUICodeboxModule,
     DevUIApiModule,
+    DDemoNavModule,
     RouterModule.forChild([
       { path: '', redirectTo: 'demo' },
       { path: 'demo', component: ModalDemoComponent },

@@ -1,11 +1,14 @@
 @import '../style/core/layout';
+
 .devui-form-horizontal :host.devui-form-controls {
   flex: 1 1 auto;
   margin-left: $element-spacing;
 }
+
 .devui-form-vertical :host.devui-form-controls {
   flex: 1 1 auto;
 }
+
 .devui-form-columns :host.devui-form-controls {
   flex: 1 1 auto;
   margin-left: $element-spacing;

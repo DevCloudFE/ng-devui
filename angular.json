@@ -148,6 +148,11 @@
           "options": {
             "tsConfig": "devui/tsconfig.lib.json",
             "project": "devui/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "devui/tsconfig.lib.prod.json"
+            }
           }
         },
         "test": {

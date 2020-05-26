@@ -3,13 +3,17 @@
     #filterInput
     (keyup.enter)="keyupEnter(filterInput.value)"
     [placeholder]="placeholder || i18nCommonText?.searchPlaceholder"
-    [ngClass]="size ? 'devui-input-' + size : ''"
     (change)="inputChange(filterInput.value, $event)"
     (keyup)="inputChange(filterInput.value, $event)"
     [attr.maxlength]="maxLength"
+    [disabled]="disabled"
     type="text"
     class="devui-input"
-    [ngClass]="size ? 'devui-input-' + size : ''"
+    [ngClass]="{
+      'devui-input-sm': size === 'sm',
+      'devui-input-lg': size === 'lg',
+      'devui-clear-exit': clearIconExit
+    }"
   />
   <span class="devui-search-icon" [ngClass]="size ? 'devui-search-icon-' + size : ''" (click)="keyupEnter(filterInput.value)">
     <svg
@@ -30,8 +34,18 @@
       </g>
     </svg>
   </span>
-  <span #line class="devui-serach-line" [ngClass]="size ? 'devui-serach-line-' + size : ''"> </span>
-  <span #clearIcon class="devui-search-clear" [ngClass]="size ? 'devui-search-clear-' + size : ''" (click)="clearText()">
+  <span
+    #line
+    class="devui-search-line"
+    [ngClass]="{ 'devui-search-line-sm': size === 'sm', 'devui-search-line-lg': size === 'lg', 'devui-clear-exit': clearIconExit }"
+  >
+  </span>
+  <span
+    #clearIcon
+    (click)="clearText()"
+    class="devui-search-clear"
+    [ngClass]="{ 'devui-search-clear-sm': size === 'sm', 'devui-search-clear-lg': size === 'lg', 'devui-clear-exit': clearIconExit }"
+  >
     <svg
       class="svg-icon-clear"
       width="10px"

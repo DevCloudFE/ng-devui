@@ -134,3 +134,25 @@ appendToBodyDirections默认的显示顺序为 ['rightDown', 'leftDown', 'rightU
 | 事件 | 类型  | 说明 |
 | :---: | :---:| :---|
 | selectedRangeChange | `EventEmitter<object>` | 日期发生变化回调 |
+
+
+### 使用reason限制插件emit的reason导出
+datepicker通过
+```TypeScript
+import { SelectDateChangeReason } from 'ng-devui/datepicker';
+```
+dateRangePicker通过
+```TypeScript
+import { SelectDateRangeChangeReason } from 'ng-devui/datepicker';
+```
+来引入reason限制插件，如何使用可以自由发挥，清除按钮demo就提供了一种方式
+reason当前可选值：
+```TypeScript
+enum SelectDateRangeChangeReason {
+  date,
+  time,
+  button,
+  format,
+  custom
+}
+```

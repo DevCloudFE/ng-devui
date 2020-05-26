@@ -8,7 +8,7 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import * as hljs from 'highlight.js/lib/highlight';
 
-['bash', 'typescript'].forEach((langName) => {
+['bash', 'typescript', 'json'].forEach((langName) => {
   const langModule = require(`highlight.js/lib/languages/${langName}`);
   hljs.registerLanguage(langName, langModule);
 });
@@ -17,7 +17,7 @@ import * as hljs from 'highlight.js/lib/highlight';
   template: `
     <div class="get-start">
     <div class="readme">
-    <div [innerHTML]="readMe" #documentation></div>
+    <div [innerHTML]="readMe | safe: 'html'" #documentation></div>
     </div>
     </div>
   `,

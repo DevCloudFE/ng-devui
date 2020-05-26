@@ -138,7 +138,6 @@ $devui-btn-pseudo-config: (
   border-width: 1px;
   border-color: transparent;
   background-color: transparent;
-
   @each $type in text, text-dark, common, stress, primary, xs, sm, lg {
     &.devui-btn-#{$type} {
       @each $key, $value in map-get($devui-btn-normal-config, $type) {
@@ -146,7 +145,6 @@ $devui-btn-pseudo-config: (
       }
     }
   }
-
   @each $type in text, text-dark, common, stress, primary {
     &.devui-btn-#{$type} {
       @each $pseudo, $value in map-get($devui-btn-pseudo-config, $type) {
@@ -161,25 +159,29 @@ $devui-btn-pseudo-config: (
 
   &.devui-btn-common {
     &:disabled {
-      color: $dark-1;
-      opacity: 0.3;
-      background: $block-bg-white;
-      border: 1px solid $gray-1;
+      color: $disabled-content;
+      background: $disabled-bg;
+      border: 1px solid $disabled-border;
     }
   }
 
   &.devui-btn-primary {
     &:disabled {
-      color: $dark-1;
-      background: $block-bg-white;
-      border: 1px solid $gray-1;
+      color: $disabled-content;
+      background: $disabled-bg;
+      border: 1px solid $disabled-border;
     }
   }
 
   &.devui-btn-text-dark {
     &:disabled {
-      color: $dark-1;
-      background: $block-bg-white;
+      color: $disabled-content;
+    }
+  }
+
+  &.devui-btn-text {
+    &:disabled {
+      color: $disabled-content;
     }
   }
 
@@ -187,10 +189,12 @@ $devui-btn-pseudo-config: (
     &.devui-btn-common {
       color: $dark-1;
       border-color: transparent;
+
       &:hover,
       &:focus {
         border-color: $hover-control;
       }
+
       &:active {
         border-color: $brand-2;
       }
@@ -221,14 +225,16 @@ $devui-btn-pseudo-config: (
       background-color: $block-bg-white;
     }
   }
+
   &.d-btn-icon {
     &:hover,
     &:focus {
       border: 1px solid $hover-content;
       background-color: $hover-content;
     }
+
     &:disabled {
-      background-color: $block-bg-white;
+      background-color: $disabled-bg;
     }
   }
 }
@@ -249,11 +255,12 @@ $devui-btn-pseudo-config: (
   transition: all 0.2s;
   border-style: solid;
   white-space: nowrap;
+
   &:disabled,
   &[disabled] {
     cursor: not-allowed;
-    opacity: 0.3;
   }
+
   &.d-btn-icon {
     padding: 7px 8px;
     line-height: 1em;

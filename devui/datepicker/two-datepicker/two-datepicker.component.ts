@@ -38,9 +38,9 @@ export class TwoDatePickerComponent implements OnInit, OnDestroy {
   @Input() hideOnRangeSelected = true;
   customViewTemplate: TemplateRef<any>;
   @Output() selectRange = new EventEmitter<any>();
-  @ViewChild('leftPicker', { static: false }) leftPicker: ElementRef;
-  @ViewChild('rightPicker', { static: false }) rightPicker: ElementRef;
-  @ViewChild('templateWrap', { static: false }) templateWrap: ElementRef;
+  @ViewChild('leftPicker') leftPicker: ElementRef;
+  @ViewChild('rightPicker') rightPicker: ElementRef;
+  @ViewChild('templateWrap') templateWrap: ElementRef;
 
   datePosition: VerticalConnectionPos = 'bottom';
   selectDateSubject = new Subject<{side: String, date: Date, onlyWrite?: Boolean}>();
@@ -286,10 +286,6 @@ export class TwoDatePickerComponent implements OnInit, OnDestroy {
       this.whichOpen = false;
     }
     this.isDisableToday();
-  }
-
-  consolidateTime() {
-
   }
 
   chooseToday(event) {

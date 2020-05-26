@@ -17,6 +17,7 @@ import { BasicComponent } from './basic/basic.component';
 import { DrawerContentComponent } from './drawerContent/drawer-content.component';
 import { UndestroyableComponent } from './undestroyable/undestroyable.component';
 import { ButtonModule } from 'ng-devui/button';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { ButtonModule } from 'ng-devui/button';
     DevUICodeboxModule,
     DevUIApiModule,
     ModalModule,
+    DDemoNavModule,
     RouterModule.forChild([
     { path: '',  redirectTo: 'demo' },
     { path: 'demo', component: DrawerDemoComponent},

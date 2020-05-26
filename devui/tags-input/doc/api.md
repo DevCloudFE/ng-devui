@@ -12,6 +12,7 @@
 | isAddBySpace    | `boolean`       | true        | 可选，是否支持空格键输入标签 |
 | suggestionList | `Array`          | []      | 可选，下拉选项，默认可选择的标签列表 |
 | checkBeforeAdd | `Function\|Promise\|Observable`   | 无      | 可选，自定义校验函数，类型为(newTag: string) => boolean 或者Promise<boolean>或者Observable<boolean> |
+| disabled | `boolean`   | false      | 可选，disabled灰化状态 |
 
 ### 事件
 | 事件        | 类型      |   说明                 |

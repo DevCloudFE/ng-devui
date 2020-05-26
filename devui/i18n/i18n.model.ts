@@ -13,7 +13,8 @@ export interface I18nInterface {
     today: string,
     clear: string,
     daysOfWeek: string[],
-    monthsOfYear: string[]
+    monthsOfYear: string[],
+    yearDisplay(year): string
   };
 
   pagination: {
@@ -22,6 +23,7 @@ export interface I18nInterface {
     pageSize: string
   };
   upload: {
+    warning: string;
     upload: string,
     chooseFile: string,
     chooseFiles: string,
@@ -38,5 +40,21 @@ export interface I18nInterface {
     warning: string;
     error: string;
     info: string;
+    success: string;
   };
+  imagePreview: {
+    rotate: string,
+    zoomIn: string,
+    zoomOut: string,
+    bestScale: string,
+    originScale: string,
+    pre: string,
+    next: string
+  };
+  colorPicker: {
+    recentlyUsed: string;
+    basicColors: string;
+    moreColors: string;
+  };
+
 }

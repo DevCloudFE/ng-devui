@@ -1,6 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { AfterContentChecked, AfterViewInit, Component, ElementRef,
-  HostBinding, HostListener, Input, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+  HostBinding, HostListener, Input, OnDestroy, OnInit, Renderer2, TemplateRef } from '@angular/core';
 import { PositionService } from 'ng-devui/position';
 import { PositionType } from 'ng-devui/tooltip';
 import { fromEvent, Subscription } from 'rxjs';
@@ -27,7 +27,7 @@ export class PopoverComponent
   implements OnInit, AfterViewInit, AfterContentChecked, OnDestroy {
   @Input() triggerElementRef: ElementRef;
   @Input() position: PositionType;
-  @Input() content: string;
+  @Input() content: string | HTMLElement | TemplateRef<any>;
   @Input() showAnimate = false;
   @Input() scrollElement: Element;
   @Input() appendToBody: boolean;
@@ -43,6 +43,10 @@ export class PopoverComponent
   }
   @HostBinding('@state') get state() {
     return this.animateState;
+  }
+
+  get template() {
+    return this.content instanceof TemplateRef ? this.content : null;
   }
 
   subs: Subscription = new Subscription();

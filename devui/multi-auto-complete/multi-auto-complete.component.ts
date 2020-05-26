@@ -51,8 +51,8 @@ export class MultiAutoCompleteComponent implements OnInit, OnChanges, ControlVal
   @Input() valueParser: (item: any) => any;
   @Output() autoSubmit = new EventEmitter<any>(); // 失焦自动提交
 
-  @ViewChild('multiAutoCompleteInput', { static: false }) multiAutoCompleteInputElement: ElementRef;
-  @ViewChild(AutoCompleteDirective, { static: false }) autoCompleteDirective: AutoCompleteDirective;
+  @ViewChild('multiAutoCompleteInput') multiAutoCompleteInputElement: ElementRef;
+  @ViewChild(AutoCompleteDirective) autoCompleteDirective: AutoCompleteDirective;
   multiItems: any[] = [];
   inputValue: any;
   multipleLabelClassNameSuffix: string = this.overview;

@@ -1,13 +1,14 @@
 <div>
-  <div class="demo-container">
-    <div class="demo-example">
+  <div class="demo-container" dAnchorBox [view]="{ top: 60, bottom: 0 }">
+    <d-demo-nav [navItems]="navItems"></d-demo-nav>
+    <div class="demo-example" [dAnchor]="'basic-usage'">
       <div class="demo-title">基本用法</div>
       <d-codebox id="components-slider-default" [sourceData]="SliderBasicComponent">
         <d-slider-basic demo></d-slider-basic>
       </d-codebox>
     </div>
 
-    <div class="demo-example">
+    <div class="demo-example" [dAnchor]="'slider-disabled'">
       <div class="demo-title">禁止输入态</div>
       <div class="demo-text">
         当 disabled 为 true 的时候是禁止用户输入的状态。
@@ -17,7 +18,7 @@
       </d-codebox>
     </div>
 
-    <div class="demo-example">
+    <div class="demo-example" [dAnchor]="'slider-formatter'">
       <div class="demo-title">定制Popover的显示内容</div>
       <div class="demo-text">
         通过 tipsRenderer 参数传入函数定制Popover内的显示内容。

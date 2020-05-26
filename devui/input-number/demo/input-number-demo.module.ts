@@ -14,6 +14,7 @@ import { InputNumberDisabledComponent } from './disabled/input-number-disabled.c
 import { InputNumberEmptyComponent } from './empty/input-number-empty.component';
 import { InputNumberPlaceholderAndMaxLengthComponent } from './placeholderAndMaxLength/input-number-placeholder-maxLength.component';
 import { InputNumberRegComponent } from './reg/input-number-reg.component';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 
 @NgModule({
   imports: [
@@ -22,6 +23,7 @@ import { InputNumberRegComponent } from './reg/input-number-reg.component';
     DevUICodeboxModule,
     InputNumberModule,
     FormsModule,
+    DDemoNavModule,
     RouterModule.forChild([
       { path: '', redirectTo: 'demo' },
       { path: 'demo', component: InputNumberDemoComponent },

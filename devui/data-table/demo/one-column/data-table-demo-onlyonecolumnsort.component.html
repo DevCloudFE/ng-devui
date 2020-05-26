@@ -3,7 +3,7 @@
   [onlyOneColumnSort]="true"
   [(multiSort)]="sortedColumn"
   [scrollable]="true"
-  [resizeable]="true"
+  [columnAdjustStrategy]="columnAdjustStrategy"
   (multiSortChange)="multiSortChange($event)"
   (pageIndexChange)="changePageContent($event)"
   (resize)="onResize($event)"
@@ -70,5 +70,5 @@
   ></d-column>
   <d-column field="hidden" header="hidden" [width]="'100px'">hidden</d-column>
 </d-data-table>
-<p style="margin-top: 20px">Current Sort parameters:</p>
+<p style="margin-top: 20px;">Current Sort parameters:</p>
 <pre>{{ sortedColumn | json }}</pre>

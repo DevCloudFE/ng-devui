@@ -49,6 +49,18 @@ export class ButtonDemoComponent {
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./size/size.component.html')},
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./size/size.component.ts')}
   ];
+
+  navItems = [
+    { dAnchorLink: 'button-primary', value: '主要按钮'},
+    { dAnchorLink: 'button-common', value: '次要按钮'},
+    { dAnchorLink: 'button-primary-and-common', value: '主要按钮与次要按钮组合'},
+    { dAnchorLink: 'button-text', value: '文字按钮'},
+    { dAnchorLink: 'button-loading', value: '加载中状态'},
+    { dAnchorLink: 'button-auto-focus', value: '自动获得焦点'},
+    { dAnchorLink: 'button-icon', value: '图标按钮'},
+    { dAnchorLink: 'button-size', value: '按钮大小'}
+  ];
+
   constructor() {
 
   }

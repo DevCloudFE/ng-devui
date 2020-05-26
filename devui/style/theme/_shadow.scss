@@ -1,0 +1,14 @@
+// 用于阴影
+$hwc-shadow-1: var(--hwc-shadow-1, 0 1px 3px 0 rbga(0, 0, 0, 0.1));
+$hwc-shadow-2: var(--hwc-shadow-2, 0 2px 5px 0 rgba(0, 0, 0, 0.2));
+$hwc-shadow-3: var(--hwc-shadow-3, 0 4px 8px 0 rgba(0, 0, 0, 0.2));
+$hwc-shadow-4: var(--hwc-shadow-4, 0 2px 8px 0 rgba(94, 124, 224, 0.3));
+$hwc-shadow-5: var(--hwc-shadow-5, 0 0 6px 0 rgba(0, 0, 0, 0.1));
+$hwc-shadow-6: var(--hwc-shadow-6, 0 8px 6px -4px rgba(199, 54, 54, 0.4));
+$hwc-shadow-7: var(--hwc-shadow-7, 0 10px 40px 0 rgba(0, 0, 0, 0.1));
+$hwc-shadow-8: var(--hwc-shadow-8, 0 1px 2px 0 rgba(57, 71, 166, 0.5));
+$hwc-shadow-error: var(--hwc-shadow-error, 0 1px 3px 0 rgba(199, 54, 54, 0.25));
+$hwc-shadow-warn: var(--hwc-shadow-warn, 0 1px 3px 0 rgba(204, 100, 20, 0.25));
+$hwc-shadow-prompt: var(--hwc-shadow-prompt, 0 1px 3px 0 rgba(70, 94, 184, 0.25));
+$hwc-shadow-success: var(--hwc-shadow-success, 0 1px 3px 0 rgba(39, 176, 128, 0.25));
+$hwc-shadow-dark: var(--hwc-shadow-dark, 0 5px 8px 0 rgba(70, 77, 110, 0.25));

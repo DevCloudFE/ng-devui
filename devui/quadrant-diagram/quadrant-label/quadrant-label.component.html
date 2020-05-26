@@ -1,0 +1,49 @@
+<ng-template
+  [ngTemplateOutlet]="currentLabelTemplate ? currentLabelTemplate : defaultLabel"
+  [ngTemplateOutletContext]="{
+  $implicit: this,labelData:labelData
+}"
+>
+</ng-template>
+<ng-template #defaultLabel let-labelData="labelData">
+  <div
+    dDraggable
+    [dragScope]="dropScope"
+    [dragData]="{ item: item, parent: labelData }"
+    (dragEndEvent)="handleDropOutRegion($event)"
+    *ngFor="let item of labelData"
+    class="devui-list-style devui-{{ currentLabelSize }}-size"
+    [style.position]="'absolute'"
+    [style.top.px]="getLabelTopValue(item?.y, currentCenterPoint?.y)"
+    [style.left.px]="getLabelLeftValue(item?.x, currentCenterPoint?.x)"
+    dPopover
+    [content]="item?.content"
+    [position]="'bottom'"
+    [controlled]="true"
+    [trigger]="'hover'"
+    (mouseover)="showAxisLine(item?.x, item?.y)"
+    (mouseout)="hideAxisLine()"
+  >
+    <div *ngIf="currentLabelSize !== 'small'" class="devui-label-style">{{ item?.title }}</div>
+    <ng-container *ngIf="currentLabelSize === 'large'">
+      <d-progress style="margin-top: -4px;" [percentage]="item?.progress" [percentageText]="''" [barbgcolor]="'#3ECCA6'" [height]="'4px'">
+      </d-progress>
+    </ng-container>
+  </div>
+  <div
+    class="devui-horizontal-line"
+    [style.width.px]="view.width - axisConfigs.originPosition.left - axisConfigs.axisMargin"
+    [style.left.px]="axisConfigs.originPosition.left"
+    [style.display]="'none'"
+  >
+    <span class="devui-axis-value" id="devui-label-y-axis-value"></span>
+  </div>
+  <div
+    class="devui-vertical-line"
+    [style.height.px]="view.height - axisConfigs.originPosition.bottom - axisConfigs.axisMargin"
+    [style.top.px]="axisConfigs.axisMargin"
+    [style.display]="'none'"
+  >
+    <span class="devui-axis-value" id="devui-label-x-axis-value"></span>
+  </div>
+</ng-template>

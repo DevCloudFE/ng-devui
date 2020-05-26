@@ -18,4 +18,8 @@ export class TextDemoComponent {
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./resize/resize.component.ts')},
     {title: 'CSS', language: 'css', code:  require('!!raw-loader!./resize/resize.component.css')}
   ];
+  navItems = [
+    { dAnchorLink: 'basic-usage', value: '基本用法'},
+    { dAnchorLink: 'resize', value: '调整大小'}
+  ];
 }

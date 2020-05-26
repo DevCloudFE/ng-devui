@@ -1,38 +1,39 @@
-<div class="demo-container">
-  <div class="demo-example">
+<div class="demo-container" dAnchorBox [view]="{ top: 60, bottom: 0 }">
+  <d-demo-nav [navItems]="navItems"></d-demo-nav>
+  <div class="demo-example" [dAnchor]="'basic-usage'">
     <div class="demo-title">基本用法</div>
     <div class="demo-text"></div>
     <d-codebox id="components-tabs-default" [sourceData]="basicSource">
       <d-basic demo></d-basic>
     </d-codebox>
   </div>
-  <div class="demo-example">
+  <div class="demo-example" [dAnchor]="'no-set-content'">
     <div class="demo-title">不设置内容</div>
     <div class="demo-text"></div>
     <d-codebox id="components-tabs-without-content" [sourceData]="withoutContentSource">
       <d-without-content demo></d-without-content>
     </d-codebox>
   </div>
-  <div class="demo-example">
+  <div class="demo-example" [dAnchor]="'custom-template'">
     <div class="demo-title">自定义模板</div>
     <d-codebox id="components-tabs-custom" [sourceData]="customSource">
       <d-custom demo></d-custom>
     </d-codebox>
   </div>
-  <div class="demo-example">
+  <div class="demo-example" [dAnchor]="'configuration-type-and-arrangement'">
     <div class="demo-title">配置类型与排列</div>
     <d-codebox id="components-tabs-config" [sourceData]="configSource">
       <d-config demo></d-config>
     </d-codebox>
   </div>
-  <div class="demo-example">
+  <div class="demo-example" [dAnchor]="'intercept-tab-switch'">
     <div class="demo-title">拦截tab切换</div>
     <div class="demo-text">使用beforeChange拦截tab切换</div>
-    <d-codebox id="components-tabs-before-change" [sourceData]="customSource">
+    <d-codebox id="components-tabs-before-change" [sourceData]="beforeChangeSource">
       <d-before-change demo></d-before-change>
     </d-codebox>
   </div>
-  <div class="demo-example">
+  <div class="demo-example" [dAnchor]="'custom-tabs-display-and-arrangement'">
     <div class="demo-title">自定义Tabs显示与排列</div>
     <div class="demo-text">通过引入transfer组件，实现tabs的自定义显示</div>
     <d-codebox id="components-tabs-configurable" [sourceData]="ConfigurableSource">

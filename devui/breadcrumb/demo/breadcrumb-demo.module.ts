@@ -11,6 +11,7 @@ import { MenuComponent } from './menu/menu.component';
 import { CustomComponent } from './custom/custom.component';
 import { SearchMenuComponent } from './search-menu/search-menu.component';
 import { BreadCrumbDemoComponent } from './breadcrumb-demo.component';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ import { BreadCrumbDemoComponent } from './breadcrumb-demo.component';
     BreadcrumbModule,
     DevUICodeboxModule,
     DevUIApiModule,
+    DDemoNavModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo' },
       { path: 'demo', component: BreadCrumbDemoComponent},

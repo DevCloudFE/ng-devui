@@ -87,7 +87,7 @@ export class SelectFiles {
         }
 
         if (this.beyondMaximalSize((<File>file).size, uploadOptions.maximumSize)) {
-          this.BEYOND_MAXIMAL_FILE_SIZE_MSG = this.i18nText.getBeyondMaximalFileSizeMsg((<File>file).size, uploadOptions.maximumSize);
+          this.BEYOND_MAXIMAL_FILE_SIZE_MSG = this.i18nText.getBeyondMaximalFileSizeMsg((<File>file).name, uploadOptions.maximumSize);
           throw new Error(this.BEYOND_MAXIMAL_FILE_SIZE_MSG);
         }
         return file;

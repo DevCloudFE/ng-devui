@@ -10,6 +10,7 @@ import { BasicComponent } from './basic/basic.component';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import {  CircleComponent } from './circle/circle.component';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 
 @NgModule({
   imports: [
@@ -18,6 +19,7 @@ import {  CircleComponent } from './circle/circle.component';
     ProgressModule,
     DevUICodeboxModule,
     DevUIApiModule,
+    DDemoNavModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo' },
       { path: 'demo', component: ProgressDemoComponent},

@@ -1,6 +1,7 @@
 .row {
   overflow: hidden;
 }
+
 .col-sm-3 {
   float: left;
   position: relative;
@@ -10,45 +11,56 @@
   min-width: 220px;
   width: 220px;
 }
+
 .list-group .list-group-item {
   padding: 0 16px;
 }
+
 .drag-border {
   border: #5170ff dashed 1px;
 }
+
 .drag-handle {
   cursor: move;
+
   /* fallback if grab cursor is unsupported */
   cursor: grab;
   cursor: -moz-grab;
   cursor: -webkit-grab;
 }
+
 .drag-handle:active {
   cursor: grabbing;
   cursor: -moz-grabbing;
   cursor: -webkit-grabbing;
 }
+
 .drag-hint-border {
   border: #3c763d dashed 2px;
 }
+
 .drag-over-border {
   border: #fbbc05 dashed 2px;
 }
+
 .card {
   border: 1px solid #cecece;
 }
+
 .card .card-header {
   font-size: 18px;
   padding: 10px;
 }
+
 .list-group {
   padding: 10px;
 }
+
 .list-group > li {
   height: 30px;
   border: 1px solid #5170ff;
   border: 1px solid var(--brand-1, #5170ff);
-  color: #fff;
+  color: #ffffff;
   margin-bottom: 5px;
   line-height: 30px;
   background-color: #5170ff;

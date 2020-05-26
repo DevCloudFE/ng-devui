@@ -17,7 +17,7 @@ export class LinkComponent {
     title: '高级组件',
     children: [
       {title: '表格(禁用)', disabled: true, link: '/components/datatable'},
-      {title: '拖拽', link: '/components/dragdrop'},
+      {title: '拖拽(参数示例)', link: '/components/dragdrop?query=foo#bar'},
     ]
   }, {
     title: '其他',

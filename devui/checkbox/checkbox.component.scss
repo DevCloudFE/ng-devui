@@ -157,10 +157,47 @@
 
   // 禁用状态透明色
   &.disabled {
-    opacity: 0.3;
-
     label {
       cursor: not-allowed;
+    }
+
+    &.unchecked {
+      .devui-checkbox-material {
+        border-color: $disabled-border;
+
+        .devui-checkbox-bg {
+          background-color: $disabled-bg;
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+    }
+
+    &.halfchecked {
+      .devui-checkbox-material {
+        border-color: $disabled-border;
+
+        .devui-checkbox-bg {
+          background-color: $disabled-bg;
+          opacity: 1;
+          transform: scale(0.57);
+        }
+      }
+    }
+
+    &.active {
+      .devui-checkbox-material {
+        border-color: $disabled-border;
+
+        .devui-checkbox-bg {
+          background-color: $disabled-bg;
+          opacity: 1;
+        }
+
+        svg polyline {
+          stroke: $disabled-border;
+        }
+      }
     }
   }
 }

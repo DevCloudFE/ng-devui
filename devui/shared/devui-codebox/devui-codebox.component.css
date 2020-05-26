@@ -6,12 +6,15 @@
   position: relative;
   margin: 5px 0;
   transition: all 0.2s;
+
   /* overflow-x: auto; */
 }
+
 .code-box-demo {
   border-bottom: 1px solid #e9e9e9;
   padding: 42px 20px 50px;
 }
+
 .code-box-meta.markdown {
   position: relative;
   padding: 10px 40px;
@@ -21,30 +24,34 @@
   font-size: 12px;
   margin-bottom: 0;
 }
+
 .code-box.expand .code-box-meta {
   border-radius: 0;
   border-bottom: 1px dashed #e9e9e9;
 }
+
 .code-box-title {
   position: absolute;
   top: -14px;
   padding: 1px 8px;
-  color: #777;
+  color: #777777;
   border-radius: 4px 4px 0 0;
-  background: #fff;
+  background: #ffffff;
   transition: background-color 0.4s;
 }
+
 .code-box-title > a {
   color: rgba(0, 0, 0, 0.65);
   font-size: 14px;
   font-weight: 500;
   text-decoration: none;
 }
+
 .code-box .collapse {
-  display: block; /*.collapse conflick with bootstrap*/
+  display: block; /* .collapse conflick with bootstrap */
   position: absolute;
   left: 15px;
-  background: #fff;
+  background: #ffffff;
   top: -9px;
   cursor: pointer;
   width: 16px;
@@ -58,21 +65,26 @@
   -ms-user-select: none;
   user-select: none;
 }
+
 .dark-mode .code-box .collapse {
   opacity: 1;
 }
+
 .code-box .highlight-wrapper {
   display: none;
   overflow: auto;
   border-radius: 0 0 4px 4px;
 }
+
 .code-box .highlight-wrapper-expand {
   display: block;
 }
+
 .code-box .highlight {
   padding: 5px;
   position: relative;
 }
+
 .code-box-actions {
   position: absolute;
   top: 10px;
@@ -80,17 +92,19 @@
   text-align: right;
   cursor: pointer;
 }
+
 .code-box-code-copy:hover {
   color: #108ee9;
   -webkit-transform: scale(1.2);
   transform: scale(1.2);
 }
+
 .code-box-code-copy {
   font-size: 14px;
   cursor: pointer;
-  color: #222;
+  color: #222222;
   transition: all 0.24s;
-  background: #fff;
+  background: #ffffff;
   width: 20px;
   height: 20px;
   line-height: 20px;
@@ -98,24 +112,29 @@
   border-radius: 20px;
   opacity: 0;
 }
+
 .code-box .highlight pre {
   margin: 0;
   padding: 0;
 }
+
 .code-box pre {
   margin: 0;
   width: auto;
   border: none;
   margin-top: 10px;
 }
+
 .code-box pre code {
   border: none;
 }
+
 .highlight-wrapper:hover .code-box-code-copy,
 .highlight-wrapper:hover .code-box-codepen,
 .highlight-wrapper:hover .code-box-riddle {
   opacity: 0.66;
 }
+
 .code-box.expand .collapse {
   -webkit-transform: rotate(90deg);
   transform: rotate(90deg);

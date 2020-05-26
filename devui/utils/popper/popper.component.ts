@@ -15,7 +15,7 @@ import Popper, {PopperOptions} from 'popper.js';
 
 @Component({
   // tslint:disable-next-line:component-selector
-  selector: 'popper-component',
+  selector: 'd-popper-component',
   templateUrl: './popper.component.html',
   styleUrls: [`./popper.component.scss`],
 })

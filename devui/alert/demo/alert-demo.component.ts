@@ -21,6 +21,11 @@ export class AlertDemoComponent {
     {title: 'CSS', language: 'css', code:  require('!!raw-loader!./close/close.component.css')}
   ];
 
+  navItems = [
+    { dAnchorLink: 'basic-usage', value: '基本用法'},
+    { dAnchorLink: 'tips-to-close', value: '可关闭的提示'}
+  ];
+
   constructor() {
 
   }

@@ -1,15 +1,19 @@
 @import '../theme/color.scss';
+
 .devui-dropdown {
   position: relative;
   vertical-align: middle;
+
   .devui-dropdown-toggle {
     box-shadow: none;
     outline: none;
   }
+
   .devui-dropdown-toggle.devui-dropdown-default {
     &:not(.devui-dropdown-item) {
       display: inline-block;
     }
+
     min-width: 100px;
     line-height: 20px;
     padding: 5px 15px;
@@ -20,6 +24,7 @@
     border-style: solid;
     border-width: 1px;
   }
+
   .devui-caret {
     display: inline-block;
     margin-left: 2px;
@@ -28,7 +33,12 @@
     border-right: 4px solid transparent;
     border-left: 4px solid transparent;
   }
+
+  &.devui-dropdown-open .devui-dropdown-toggle span.icon-chevron-down {
+    transform: rotate(180deg);
+  }
 }
+
 .devui-dropdown-menu {
   position: absolute;
   float: left;
@@ -45,9 +55,11 @@
   background-color: $dropdown-overlay;
   box-shadow: 0 2px 5px 0 $dark-1-boxshadow;
   outline: none;
+
   .open > & {
     display: block;
   }
+
   > li > a {
     height: 36px;
     line-height: 36px;
@@ -55,11 +67,15 @@
     display: block;
     cursor: pointer;
   }
+
   li > input {
     margin: 0 10px;
   }
+
   > .disabled > a {
-    opacity: 0.3;
+    color: $disabled-content;
+    cursor: not-allowed;
+
     &:hover,
     &:focus {
       cursor: not-allowed;
@@ -70,16 +86,19 @@
     &:hover {
       background-color: $hover-content;
     }
+
     &.devui-dropdown-bg {
       //箭头选中
       background-color: $hover-content;
     }
+
     &.active {
       color: $brand-1;
       background-color: $brand-3;
     }
   }
 }
+
 .devui-form-control-feedback {
   position: absolute;
   top: 0;
@@ -91,6 +110,7 @@
   line-height: 32px;
   text-align: center;
   pointer-events: none;
+
   .devui-caret {
     display: inline-block;
     margin-left: 2px;
@@ -100,9 +120,11 @@
     border-left: 4px solid transparent;
   }
 }
+
 .form-group.has-feedback[tabindex] {
   outline: 0;
 }
+
 .devui-dropdown-no-border {
   display: inline-block;
   min-height: 30px;
@@ -118,15 +140,18 @@
   cursor: pointer;
   background-color: $dropdown-overlay;
   color: $dark-1;
+
   &:hover,
   &:focus {
     text-decoration: none;
   }
+
   &:active:hover,
   &:focus {
     color: $hover-control;
   }
 }
+
 .devui-dropdown-no-border,
 .devui-dropdown-toggle,
 .devui-dropdown-item {
@@ -141,10 +166,12 @@
     background-color: $bg-white;
     color: $dark-1;
     border-color: $gray-1;
+
     &:hover {
       border-color: $brand-1;
       color: $brand-1;
     }
+
     &:active,
     &:focus {
       border-color: $hover-control;
@@ -155,19 +182,19 @@
   .devui-dropdown-menu {
     background-color: $bg-white;
     box-shadow: 0 2px 5px 0 $dark-1-boxshadow;
-    > li > a {
+
+    > li > a:not(.disabled) {
       color: $dark-1;
+
       &:hover,
       &:focus {
         background-color: $hover-content;
       }
     }
+
     > .disabled > a {
-      opacity: 0.3;
-      &:hover,
-      &:focus {
-        background-color: transparent;
-      }
+      color: $disabled-content;
+      cursor: not-allowed;
     }
   }
 }

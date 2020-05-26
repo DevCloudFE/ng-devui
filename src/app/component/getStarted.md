@@ -4,7 +4,7 @@
 
 ### Angular版本
 
-当前支持的Angular版本 <font color=red>`^8.0.0`</font>
+当前支持的Angular版本 <font color=red>`^9.0.0`</font>
 
 ### 1. 创建一个项目
 

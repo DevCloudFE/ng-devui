@@ -2,15 +2,10 @@
 @import '../style/theme/variables';
 @import '../style/mixins/index';
 
-.devui-search {
-  .devui-serach-line {
-    border-color: $gray-1;
-  }
-}
-
 svg.svg-icon-clear > g > g {
   fill: $dark-1;
 }
+
 svg.svg-icon-search > g > path {
   fill: $dark-1;
 }
@@ -27,26 +22,48 @@ svg.svg-icon-search > g > path {
     padding: 5px 12px;
     font-size: 14px;
     line-height: 1.42857143;
-    padding-right: 60px;
+    padding-right: 30px;
     text-overflow: ellipsis;
+
+    &.devui-clear-exit {
+      padding-right: 60px;
+    }
+
     &-sm {
       height: 30px;
       padding: 5px 10px;
       font-size: 12px;
       line-height: 1.5;
-      padding-right: 49px;
+      padding-right: 24px;
+
+      &.devui-clear-exit {
+        padding-right: 49px;
+      }
     }
+
     &-lg {
       height: 46px;
       padding: 10px 16px;
       font-size: 18px;
       line-height: 1.3333333;
-      padding-right: 71px;
+      padding-right: 36px;
+
+      &.devui-clear-exit {
+        padding-right: 71px;
+      }
     }
+
     &::-ms-clear {
       display: none;
     }
+
+    &:disabled {
+      background-color: $disabled-bg;
+      border-color: $disabled-border;
+      color: $disabled-content;
+    }
   }
+
   .icon {
     cursor: pointer;
   }
@@ -64,24 +81,29 @@ svg.svg-icon-search > g > path {
     z-index: 2;
     display: block;
     text-align: center;
+
     > svg {
       height: 14px;
       width: 14px;
     }
+
     &-sm {
       width: 30px;
       height: 30px;
       line-height: 30px;
       padding: 1px 10px;
+
       > svg {
         height: 12px;
         width: 12px;
       }
     }
+
     &-lg {
       width: 46px;
       height: 46px;
       line-height: 46px;
+
       > svg {
         height: 18px;
         width: 18px;
@@ -101,19 +123,26 @@ svg.svg-icon-search > g > path {
     line-height: 32px;
     font-size: 14px;
     z-index: 2;
+    display: none;
+
+    &.devui-clear-exit {
+      display: block;
+    }
+
     &-sm {
       right: 30px;
       line-height: 30px;
-      padding: 0px 8px;
+      padding: 0 8px;
     }
+
     &-lg {
       right: 46px;
       line-height: 46px;
-      padding: 0px 10px;
+      padding: 0 10px;
     }
   }
 
-  .devui-serach-line {
+  .devui-search-line {
     position: absolute;
     right: 32px;
     height: 70%;
@@ -121,11 +150,19 @@ svg.svg-icon-search > g > path {
     width: 1px;
     border-left-width: 1px;
     border-left-style: solid;
+    border-color: $gray-1;
     line-height: 32px;
+    display: none;
+
+    &.devui-clear-exit {
+      display: block;
+    }
+
     &-sm {
       line-height: 30px;
       right: 30px;
     }
+
     &-lg {
       line-height: 46px;
       right: 46px;

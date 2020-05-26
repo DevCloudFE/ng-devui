@@ -1,5 +1,5 @@
 <div class="devui-tree-select">
-  <popper-component [(open)]="isOpen" [fluidPopper]="!width" (openChange)="responsePopperChange($event)" [appendTo]="appendTo" #popper>
+  <d-popper-component [(open)]="isOpen" [fluidPopper]="!width" (openChange)="responsePopperChange($event)" [appendTo]="appendTo" #popper>
     <input
       #selectHost
       class="devui-select-input devui-input devui-form-control devui-tree-select-input"
@@ -47,7 +47,7 @@
         {{ i18nCommonText?.noRecordsFound }}
       </div>
     </div>
-  </popper-component>
+  </d-popper-component>
   <div
     [ngClass]="{ disabled: disabled, clear: allowClear }"
     (click)="$event.stopPropagation(); $event.preventDefault(); clearValue()"

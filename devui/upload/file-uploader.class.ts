@@ -53,7 +53,7 @@ export class FileUploader {
       };
 
       const formData = new FormData();
-      formData.append(fileFieldName_, this.file);
+      formData.append(fileFieldName_, this.file, this.file.name);
       if (additionalParameter) {
         Object.keys(additionalParameter).forEach((key: string) => {
           formData.append(key, additionalParameter[key]);

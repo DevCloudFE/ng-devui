@@ -1,5 +1,12 @@
 <div class="modal-backdrop" [@backdropAnimation]="animateState"></div>
-<div class="modal in" [attr.id]="id" (mousedown)="modalMouseDown($event)" (mouseup)="modalMouseUp($event)" (click)="onModalClick($event)">
+<div
+  class="modal in"
+  [ngStyle]="{ 'z-index': zIndex }"
+  [attr.id]="id"
+  (mousedown)="modalMouseDown($event)"
+  (mouseup)="modalMouseUp($event)"
+  (click)="onModalClick($event)"
+>
   <div
     class="modal-dialog"
     [ngClass]="{

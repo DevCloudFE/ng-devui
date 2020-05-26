@@ -1,0 +1,23 @@
+<ng-container *ngIf="showQuadrants">
+  <div
+    *ngFor="let item of quadrantConfigs; let i = index"
+    class="devui-quadrant-region devui-quadrant-region-{{ i + 1 }}"
+    [style.background-color]="item?.backgroundColor"
+    [style.height.px]="quadrantHeight"
+    [style.width.px]="quadrantWidth"
+    [style.top.px]="getQuadrantTopValue(i)"
+    [style.left.px]="getQuadrantLeftValue(i)"
+  >
+    <div class="devui-quadrant-title" [style.color]="item?.color">
+      <span>{{ item?.title }}</span>
+    </div>
+  </div>
+</ng-container>
+<d-quadrant-label
+  [currentLabelSize]="currentLabelSize"
+  [labelData]="labelData"
+  [axisConfigs]="axisConfigs"
+  [view]="view"
+  [dropScope]="dropScope"
+  [diagramId]="diagramId"
+></d-quadrant-label>

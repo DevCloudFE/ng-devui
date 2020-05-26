@@ -1,26 +1,27 @@
-<div class="demo-container">
-  <div class="demo-example">
+<div class="demo-container" dAnchorBox [view]="{ top: 60, bottom: 0 }">
+  <d-demo-nav [navItems]="navItems"></d-demo-nav>
+  <div class="demo-example" [dAnchor]="'basic-breadcrumbs'">
     <div class="demo-title">基础面包屑</div>
     <div class="demo-text"></div>
     <d-codebox id="components-breadcrumb-basic" [sourceData]="BasicSource">
       <d-basic demo></d-basic>
     </d-codebox>
   </div>
-  <div class="demo-example">
+  <div class="demo-example" [dAnchor]="'drop-down-breadcrumbs'">
     <div class="demo-title">可下拉的面包屑</div>
     <div class="demo-text"></div>
     <d-codebox id="components-breadcrumb-menu" [sourceData]="MenuSource">
       <d-menu demo></d-menu>
     </d-codebox>
   </div>
-  <div class="demo-example">
+  <div class="demo-example" [dAnchor]="'with-search-drop-down-breadcrumbs'">
     <div class="demo-title">带搜索下拉的面包屑</div>
     <div class="demo-text"></div>
     <d-codebox id="components-breadcrumb-search-menu" [sourceData]="SearchMenuSource">
       <d-search-menu demo></d-search-menu>
     </d-codebox>
   </div>
-  <div class="demo-example">
+  <div class="demo-example" [dAnchor]="'self-defined-breadcrumbs'">
     <div class="demo-title">自定义下拉列表和分隔符的面包屑</div>
     <div class="demo-text"></div>
     <d-codebox id="components-breadcrumb-custom" [sourceData]="CustomSource">

@@ -8,9 +8,9 @@
   dLoading
   [showLoading]="showLoading"
   [ngStyle]="{ width: width }"
-  [dBtnAutofocus]="autofocus"
+  [dAutoFocus]="autofocus"
   (click)="onClick($event)"
-  [ngClass]="{ 'd-btn-icon': !!icon && !hasContent() }"
+  [ngClass]="{ 'd-btn-icon': !!icon && !hasContent() && bsStyle !== 'primary' }"
 >
   <span *ngIf="!!icon" class="devui-icon-fix icon {{ icon }}" [ngClass]="{ 'clear-right-5': hasContent() }"></span>
   <!--

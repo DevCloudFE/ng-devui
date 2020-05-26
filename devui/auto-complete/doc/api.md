@@ -1,6 +1,8 @@
 
 | 参数        | 类型          | 默认        |   说明                 |
 | :---------: | :----------: | :---------: | :------------------------------------------|
+| allowEmptyValueSearch | `boolean`        | false          | 可选，在绑定的输入框value为空时，是否进行搜索提示操作 |
+| appendToBody| `boolean`        | false          | 可选，下拉弹出是否append to body |
 | source      | `Array<any>`        | --          | 必选，有searchFn的情况下可以不必选 |
 | disabled    | `boolean`      | false     | 可选，是否禁止指令 |
 | cssClass    | `string`       | --      | 可选，自定义class名 |
@@ -9,7 +11,9 @@
 | itemTemplate| `TemplateRef`  | --      | 可选，自定义展示模板 |
 | noResultItemTemplate| `TemplateRef`        | --      | 可选，没有匹配项的展示结果 |
 | formatter   | `Function`     | --      | 可选，格式化函数 |
+| isSearching | `boolean`      | false   | 可选，是否在搜索中，用于控制searchingTemplate是否显示 |
 | searchFn    | `Function`     | (term: string, target?: AutoCompleteDirective) => Observable<any[]> | 可选，自定义搜索过滤 |
+| searchingTemplate    | `TemplateRef`     | -- | 可选，自定义搜索中显示模板 |
 | selectValue | `Function`     | --      | 可选，选择选项之后的回调函数 |
 | transInputFocusEmit | `Function`     | --      | 可选，input focus和blur标志 |
 | sceneType | `string`     | --      | 可选，值为select、suggest |

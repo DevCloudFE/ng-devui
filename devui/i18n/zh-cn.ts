@@ -13,18 +13,21 @@ export default {
     today: '今天',
     clear: '清除',
     daysOfWeek: ['日', '一', '二', '三', '四', '五', '六'],
-    monthsOfYear: ['一月',
-      '二月',
-      '三月',
-      '四月',
-      '五月',
-      '六月',
-      '七月',
-      '八月',
-      '九月',
-      '十月',
-      '十一月',
-      '十二月'],
+    monthsOfYear: ['1月',
+      '2月',
+      '3月',
+      '4月',
+      '5月',
+      '6月',
+      '7月',
+      '8月',
+      '9月',
+      '10月',
+      '11月',
+      '12月'],
+    yearDisplay(year) {
+      return `${year}年`;
+    }
   },
 
   pagination: {
@@ -33,6 +36,7 @@ export default {
     pageSize: '每页条数'
   },
   upload: {
+    warning: '提醒',
     upload: '上传',
     chooseFile: '选择文件',
     chooseFiles: '选择多个文件',
@@ -42,18 +46,33 @@ export default {
     uploadFailed: '上传失败',
     delete: '删除',
     getNotAllowedFileTypeMsg(filename, scope) {
-      return `您上传的文件"${filename}"不在允许范围"${scope}"内，请重新选择文件`;
+      return `支持的文件类型: "${scope}", 您上传的文件"${filename}"不在允许范围内，请重新选择文件`;
     },
     getBeyondMaximalFileSizeMsg(filename, maximalSize) {
-      return `您上传的文件"${filename}"大小超过最大限制${maximalSize}M，请重新选择文件`;
+      return `最大支持上传${maximalSize}MB的文件, 您上传的文件"${filename}"超过可上传文件大小`;
     },
     getExistSameNameFilesMsg(sameNames) {
-      return `您上传的 "${sameNames}" 存在重名文件 ,请重新选择文件`;
+      return `您上传的 "${sameNames}" 存在重名文件, 请重新选择文件`;
     }
   },
   modal: {
     warning: '提醒',
     error: '错误',
-    info: '提示'
+    info: '提示',
+    success: '成功'
+  },
+  imagePreview: {
+    rotate: '旋转',
+    zoomIn: '放大',
+    zoomOut: '缩小',
+    bestScale: '最佳比例',
+    originScale: '原始比例',
+    pre: '上一张',
+    next: '下一张'
+  },
+  colorPicker: {
+    recentlyUsed: '最近使用',
+    basicColors: '基本颜色',
+    moreColors: '更多颜色'
   }
 };

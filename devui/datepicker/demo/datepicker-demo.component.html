@@ -1,5 +1,6 @@
-<div class="demo-container">
-  <div class="demo-example">
+<div class="demo-container" dAnchorBox [view]="{ top: 60, bottom: 0 }">
+  <d-demo-nav [navItems]="navItems"></d-demo-nav>
+  <div class="demo-example" [dAnchor]="'datepicker-default'">
     <div class="demo-title">基本用法</div>
     <div class="demo-text"></div>
     <d-codebox id="components-datepicker-default" [sourceData]="basicSource">
@@ -7,7 +8,7 @@
     </d-codebox>
   </div>
 
-  <div class="demo-example">
+  <div class="demo-example" [dAnchor]="'datepicker-range'">
     <div class="demo-title">范围日期选择器</div>
     <div class="demo-text">
       与单日日期选择器相同，范围日期选择器展开时默认选中当前日期。范围日期选择器包含开始日期选择器和结束日期选择器，用户可以选择一段日期。
@@ -17,7 +18,7 @@
     </d-codebox>
   </div>
 
-  <div class="demo-example">
+  <div class="demo-example" [dAnchor]="'datepicker-range-basic'">
     <div class="demo-title">日期范围选择器 集成模式</div>
     <div class="demo-text"></div>
     <d-codebox id="d-datepicker-range-basic" [sourceData]="rangePickerSource">
@@ -25,15 +26,17 @@
     </d-codebox>
   </div>
 
-  <div class="demo-example">
+  <div class="demo-example" [dAnchor]="'datepicker-range-disabled'">
     <div class="demo-title">日期范围选择器 禁止输入态</div>
-    <div class="demo-text"></div>
+    <div class="demo-text">
+      禁止输入只提供一种思路，datepicker本身自带disabled状态不可选，请根据业务情况自行操作。
+    </div>
     <d-codebox id="d-datepicker-range-disabled" [sourceData]="rangePickerDisabled">
       <d-datepicker-range-disabled demo></d-datepicker-range-disabled>
     </d-codebox>
   </div>
 
-  <div class="demo-example">
+  <div class="demo-example" [dAnchor]="'datepicker-range-restricted-range'">
     <div class="demo-title">日期范围选择器 可选范围</div>
     <div class="demo-text"></div>
     <d-codebox id="d-datepicker-range-restricted-range" [sourceData]="rangePickerRestricted">
@@ -41,7 +44,7 @@
     </d-codebox>
   </div>
 
-  <div class="demo-example">
+  <div class="demo-example" [dAnchor]="'datepicker-range-time'">
     <div class="demo-title">日期范围选择器 选择时间</div>
     <div class="demo-text"></div>
     <d-codebox id="d-datepicker-range-time" [sourceData]="rangePickerTime">
@@ -49,7 +52,7 @@
     </d-codebox>
   </div>
 
-  <div class="demo-example">
+  <div class="demo-example" [dAnchor]="'datepicker-clear-button'">
     <div class="demo-title">日期范围选择器 自定义操作区及清除按钮</div>
     <div class="demo-text">
       通过 clearAll 清除选择的日期
@@ -59,7 +62,7 @@
     </d-codebox>
   </div>
 
-  <div class="demo-example">
+  <div class="demo-example" [dAnchor]="'datepicker-range-today'">
     <div class="demo-title">日期范围选择器 自定义操作选择日期</div>
     <div class="demo-text">
       通过 chooseDate 结合 rangeStart 和 rangeEnd 设置自定义日期
@@ -69,7 +72,7 @@
     </d-codebox>
   </div>
 
-  <div class="demo-example">
+  <div class="demo-example" [dAnchor]="'datepicker-format'">
     <div class="demo-title">格式化</div>
     <div class="demo-text">
       通过dateFormat设置日期的格式
@@ -79,7 +82,7 @@
     </d-codebox>
   </div>
 
-  <div class="demo-example">
+  <div class="demo-example" [dAnchor]="'custom-view-template'">
     <div class="demo-title">自定义操作区</div>
     <div class="demo-text">
       通过 customViewTemplate 自定义快捷设置日期或自定义操作区内容， 可以通过chooseDate(dateString: string)来设置日期
@@ -89,7 +92,7 @@
     </d-codebox>
   </div>
 
-  <div class="demo-example">
+  <div class="demo-example" [dAnchor]="'date-picker-clear-button'">
     <div class="demo-title">自定义清除按钮</div>
     <div class="demo-text">
       通过 customViewTemplate 增加清除按钮， 可以通过clearAll()来触发
@@ -99,7 +102,7 @@
     </d-codebox>
   </div>
 
-  <div class="demo-example">
+  <div class="demo-example" [dAnchor]="'date-picker-button'">
     <div class="demo-title">日期选择按钮</div>
     <div class="demo-text">
       可以通过按钮唤出Datepicker
@@ -109,7 +112,7 @@
     </d-codebox>
   </div>
 
-  <div class="demo-example">
+  <div class="demo-example" [dAnchor]="'two-date-picker-basic'">
     <div class="demo-title">双日期选择器</div>
     <div class="demo-text"></div>
     <d-codebox id="d-two-date-picker-basic" [sourceData]="twoDatepickerBasic">

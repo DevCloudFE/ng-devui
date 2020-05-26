@@ -10,7 +10,6 @@ import { DataTableModule } from '../data-table.module';
 import { DatatableDemoBasicComponent } from './basic/data-table-demo-basic.component';
 import { DataTableDemoComponent } from './data-table-demo.component';
 import { DatatableDemoAsyncComponent } from './async/data-table-demo-async.component';
-import { DatatableDemoResizeableComponent } from './resize/data-table-demo-resizeable.component';
 import { TooltipModule } from 'ng-devui/tooltip';
 import { AutoCompleteModule } from 'ng-devui/auto-complete';
 import { DatatableDemoOnlyOneColumnSortComponent } from './one-column/data-table-demo-onlyonecolumnsort.component';
@@ -23,6 +22,7 @@ import { ExpandRowComponent } from './expand-row/expand-row.component';
 import { FixColumnComponent } from './fix-column/fix-column.component';
 import { DragColumnComponent } from './drag-column/drag-column.component';
 import { I18nModule } from 'ng-devui/i18n';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 
 @NgModule({
   imports: [
@@ -35,6 +35,7 @@ import { I18nModule } from 'ng-devui/i18n';
     TooltipModule,
     AutoCompleteModule,
     I18nModule,
+    DDemoNavModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo' },
       { path: 'demo', component: DataTableDemoComponent},
@@ -48,7 +49,6 @@ import { I18nModule } from 'ng-devui/i18n';
     DataTableDemoComponent,
     DatatableDemoBasicComponent,
     DatatableDemoAsyncComponent,
-    DatatableDemoResizeableComponent,
     DatatableDemoOnlyOneColumnSortComponent,
     DatatableDemoMaxheightComponent,
     DatatableDemoMultiHeaderComponent,

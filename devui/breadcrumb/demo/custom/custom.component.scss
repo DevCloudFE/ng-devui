@@ -2,21 +2,25 @@
   padding: 10px 0;
   width: 160px;
 }
+
 li {
   padding: 0 15px;
   font-size: 12px;
   line-height: 36px;
   cursor: pointer;
 }
+
 li a {
   color: #252b3a;
   color: var(--dark-1, #252b3a);
   margin-left: 10px;
 }
+
 li:hover {
   background: #f2f5fc;
   background: var(--hover-content, #f2f5fc);
 }
+
 li:hover a {
   text-decoration: none;
 }

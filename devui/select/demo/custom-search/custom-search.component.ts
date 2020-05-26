@@ -8,7 +8,7 @@ import { SelectComponent } from 'ng-devui/select/select.component';
   styleUrls: ['./custom-search.component.css']
 })
 export class CustomSearchComponent {
-  @ViewChild('networkSearchSelect', { static: false }) selectComponent: SelectComponent;
+  @ViewChild('networkSearchSelect') selectComponent: SelectComponent;
   timer: any;
   currentOption1 = '';
   currentOption2 = [];

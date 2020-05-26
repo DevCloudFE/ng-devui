@@ -2,6 +2,11 @@
   click me!
 </d-button>
 &nbsp;
-<d-button dPopover [content]="content" [position]="'right'" [trigger]="'hover'" [controlled]="true">
+<d-button dPopover [content]="customTemplate" [position]="'right'" [trigger]="'hover'" [controlled]="true">
   hover me!
 </d-button>
+
+<ng-template #customTemplate>
+  <p>自定义提示，带链接1</p>
+  <a href="https://devui.design" target="_blank" style="text-decoration: underline; color: #5170ff;">学习更多</a>
+</ng-template>

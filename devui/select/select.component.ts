@@ -170,7 +170,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
    */
   @Input() inputItemTemplate: TemplateRef<any>;
 
-  @ContentChild(TemplateRef, { static: false }) itemTemplate: TemplateRef<any>;
+  @ContentChild(TemplateRef) itemTemplate: TemplateRef<any>;
 
   /**
    * 输出函数，当选中某个选项项后，将会调用此函数，参数为当前选择项的值。如果需要获取所有选择状态的值，请参考(ngModelChange)方法
@@ -224,14 +224,14 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
   @Input() autoFocus = false;
   @Input() notAutoScroll = false; // 自动聚焦的时候，自动滚动到select位置
 
-  @ViewChild('selectInput', { static: false }) selectInputElement: ElementRef;
-  @ViewChild('selectMenu', { static: false }) selectMenuElement: ElementRef;
+  @ViewChild('selectInput') selectInputElement: ElementRef;
+  @ViewChild('selectMenu') selectMenuElement: ElementRef;
   @ViewChild('selectBox', { static: true }) selectBoxElement: ElementRef;
-  @ViewChild('selectInputWithTemplate', { static: false }) selectInputWithTemplateElement: ElementRef;
-  @ViewChild('selectInputWithLabel', { static: false }) selectInputWithLabelElement: ElementRef;
-  @ViewChild('filterInput', { static: false }) filterInputElement: ElementRef;
-  @ViewChild('dropdownUl', { static: false }) dropdownUl: ElementRef;
-  @ViewChild(CdkConnectedOverlay, { static: false }) connectedOverlay: CdkConnectedOverlay;
+  @ViewChild('selectInputWithTemplate') selectInputWithTemplateElement: ElementRef;
+  @ViewChild('selectInputWithLabel') selectInputWithLabelElement: ElementRef;
+  @ViewChild('filterInput') filterInputElement: ElementRef;
+  @ViewChild('dropdownUl') dropdownUl: ElementRef;
+  @ViewChild(CdkConnectedOverlay) connectedOverlay: CdkConnectedOverlay;
 
   showLoading = false;
   _isOpen = false;
