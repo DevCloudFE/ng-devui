@@ -1,5 +1,6 @@
-<div class="demo-container">
-  <div class="demo-example">
+<div class="demo-container" dAnchorBox [view]="{ top: 60, bottom: 0 }">
+  <d-demo-nav [navItems]="navItems"></d-demo-nav>
+  <div class="demo-example" [dAnchor]="'basic-usage1'">
     <div class="demo-title">基本用法</div>
     <div class="demo-text">
       基本的进度和文字配置。
@@ -8,7 +9,7 @@
       <d-basic demo></d-basic>
     </d-codebox>
   </div>
-  <div class="demo-example">
+  <div class="demo-example" [dAnchor]="'basic-usage2'">
     <div class="demo-title">基本用法</div>
     <div class="demo-text">
       基本的进度和文字配置。

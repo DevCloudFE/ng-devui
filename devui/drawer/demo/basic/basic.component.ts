@@ -17,6 +17,7 @@ export class BasicComponent {
     this.results = this.drawerService.open({
       drawerContentComponent: DrawerContentComponent,
       width: '50%',
+      zIndex: 1000,
       isCover: true,
       fullScreen: true,
       backdropCloseable: true,
@@ -55,6 +56,7 @@ export class BasicComponent {
       const results = this.dialogService.open({
         id: 'dialog-service',
         width: '300px',
+        zIndex: 1050,
         maxHeight: '600px',
         showAnimate: false,
         title: 'Close?',

@@ -20,6 +20,7 @@ export class DialogService {
   open({
     id,
     width,
+    zIndex,
     backdropCloseable,
     maxHeight,
     showAnimate,
@@ -49,6 +50,7 @@ export class DialogService {
     assign(modalRef.instance, {
       id,
       width,
+      zIndex,
       showAnimate,
       beforeHidden,
       // set backdropCloseable default value "true" when not passing it

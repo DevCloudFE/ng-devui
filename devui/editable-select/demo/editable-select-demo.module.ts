@@ -19,6 +19,7 @@ import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { LazyLoadComponent } from './lazy-load/lazy-load.component';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 
 @NgModule({
   imports: [
@@ -29,6 +30,7 @@ import { LazyLoadComponent } from './lazy-load/lazy-load.component';
     DevUIApiModule,
     DevUICodeboxModule,
     ButtonModule,
+    DDemoNavModule,
     RouterModule.forChild([
       { path: '', redirectTo: 'demo' },
       { path: 'demo', component: EditableSelectDemoComponent },

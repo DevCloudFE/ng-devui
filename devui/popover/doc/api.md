@@ -2,7 +2,7 @@
 
 | 参数        | 类型          | 默认        |   说明                 |
 | :---------: | :----------: | :---------: | :------------------------------------------|
-| content          | `string`      | --      | 必选，弹出框的显示内容 |
+| content          | `string\|HTMLElement\|TemplateRef`      | --      | 必选，弹出框的显示内容或模板引用 |
 | visible          | `boolean`     | false   | 可选，弹框的初始化弹出状态 |
 | trigger          | `'hover'\|'click'` |  'click' | 弹框触发方式|
 | controlled       | `boolean`     | false   | 可选，是否通过`trigger`方式触发弹框 |

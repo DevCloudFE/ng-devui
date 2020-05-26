@@ -19,6 +19,7 @@ export class ModalService {
     component,
     injector,
     width,
+    zIndex,
     data,
     handler,
     showAnimate,
@@ -40,6 +41,7 @@ export class ModalService {
     assign(modalRef.instance, {
       id,
       width,
+      zIndex,
       showAnimate,
       beforeHidden,
       backdropCloseable: isUndefined(backdropCloseable) ? true : backdropCloseable,

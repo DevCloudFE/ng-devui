@@ -29,13 +29,16 @@
 .modal-dialog {
   position: relative;
   width: auto;
-  margin: 0px auto;
+  margin: 0 auto;
+
   &.place-at-center {
     margin: auto;
   }
+
   &.place-at-top {
     margin-bottom: auto;
   }
+
   &.place-at-bottom {
     margin-top: auto;
   }
@@ -60,6 +63,7 @@
   background-clip: padding-box;
   outline: 0;
   box-shadow: 5px 5px 20px 0 $dark-1-boxshadow;
+
   .modal-body {
     padding-top: 24px;
     padding-right: 24px;
@@ -71,10 +75,12 @@
     border-top: none;
     padding: 7px;
     text-align: center;
+
     button {
       margin: 5px;
       padding: 5px 20px;
       width: auto;
+
       &.pull-left {
         padding-left: 5px;
         padding-right: 5px;
@@ -82,6 +88,7 @@
         left: -5px;
       }
     }
+
     button + button {
       margin-bottom: 16px;
     }
@@ -106,6 +113,7 @@
   -ms-user-select: none;
   user-select: none;
 }
+
 :focus {
   outline: none;
 }

@@ -1,5 +1,6 @@
 :host {
   display: block;
+
   ::ng-deep d-breadcrumb-item:last-child {
     .devui-breadcrumb-separator {
       display: none;

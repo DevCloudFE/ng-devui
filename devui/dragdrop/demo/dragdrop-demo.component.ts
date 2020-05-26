@@ -61,6 +61,18 @@ export class DragDropDemoComponent {
     {title: 'SCSS', language: 'css', code:  require('!!raw-loader!./cross-dimension/cross-dimension.component.scss')}
   ];
 
+  navItems = [
+    { dAnchorLink: 'basic-usage', value: '基本用法'},
+    { dAnchorLink: 'multi-level-tree-drag', value: '多层树状拖拽'},
+    { dAnchorLink: 'drag-entity-elements-to-follow', value: '拖拽实体元素跟随'},
+    { dAnchorLink: 'cross-edge-switching', value: '越边交换'},
+    { dAnchorLink: 'external-location', value: '外部放置位置'},
+    { dAnchorLink: 'drag-and-roll-container-enhancement', value: '拖拽滚动容器增强'},
+    { dAnchorLink: 'source-placeholder', value: '源占位符'},
+    { dAnchorLink: 'batch-drag-and-drop', value: '批量拖拽'},
+    { dAnchorLink: '2D-drag-and-drop-preview', value: '二维拖拽和拖拽预览'}
+  ];
+
   constructor() {
 
   }

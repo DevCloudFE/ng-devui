@@ -1,6 +1,7 @@
 <div
   class="drawer"
   [attr.id]="id"
+  [ngStyle]="{ 'z-index': zIndex }"
   [ngClass]="{ 'display-width': _isCover && animateState === 'in' }"
   [style.left]="position === 'left' ? 0 : null"
   [style.right]="position === 'right' ? 0 : null"

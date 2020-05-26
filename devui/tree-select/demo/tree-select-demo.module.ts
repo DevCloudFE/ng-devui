@@ -19,6 +19,7 @@ import {TreeSelectCustomIconComponent} from '../demo/custom-icon/tree-select-cus
 import {TreeSelectHooksComponent} from '../demo/hooks/tree-select-hooks.component';
 import {TreeSelectLeafOnlyComponent} from '../demo/leaf-only/tree-select-leaf-only.component';
 import {TreeSelectSearchableComponent} from '../demo/searchable/tree-select-searchable.component';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 
 @NgModule({
   imports: [
@@ -28,6 +29,7 @@ import {TreeSelectSearchableComponent} from '../demo/searchable/tree-select-sear
     DevUIApiModule,
     ButtonModule,
     TreeSelectModule,
+    DDemoNavModule,
     RouterModule.forChild([
       {
         path: '',

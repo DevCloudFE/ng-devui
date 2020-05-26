@@ -19,10 +19,6 @@ import { SingleUploadViewComponent } from './single-upload-view.component';
 import {
   SelectFiles
 } from './select-files.utils';
-import {
-  ModalService,
-  ModalAlertComponent
-} from 'ng-devui/modal';
 import { last, map } from 'rxjs/operators';
 import { Observable, Subscription } from 'rxjs';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
@@ -60,7 +56,8 @@ export class SingleUploadComponent implements OnDestroy {
   i18nText: I18nInterface['upload'];
   i18nCommonText: I18nInterface['common'];
   i18nSubscription: Subscription;
-  constructor(private modalService: ModalService,
+  errorMsg = [];
+  constructor(
     private i18n: I18nService,
     private selectFiles: SelectFiles) {
     this.i18nText = this.i18n.getI18nText().upload;
@@ -89,6 +86,11 @@ export class SingleUploadComponent implements OnDestroy {
   }
 
   onClick($event) {
+    if (this.singleUploadViewComponent.uploadedFilesComponent.uploadedFiles.length > 0 ||
+      (this.singleUploadViewComponent.fileUploaders[0] && this.singleUploadViewComponent.fileUploaders[0].status === UploadStatus.uploading)
+    ) {
+      return;
+    }
     this._dealFiles(this.selectFiles.triggerSelectFiles(this.fileOptions, this.uploadOptions));
   }
 
@@ -135,7 +137,7 @@ export class SingleUploadComponent implements OnDestroy {
   canUpload() {
     let uploadResult = Promise.resolve(true);
     if (this.beforeUpload) {
-      const result: any = this.beforeUpload(this.singleUploadViewComponent.getFiles()[0] || {} as File);
+      const result: any = this.beforeUpload(this.singleUploadViewComponent.getFullFiles()[0] || {} as File);
       if (typeof result !== 'undefined') {
         if (result.then) {
           uploadResult = result;
@@ -158,19 +160,7 @@ export class SingleUploadComponent implements OnDestroy {
     this.singleUploadViewComponent.deleteFile(files[0]);
   }
   alertMsg(errorMsg) {
-    const results = this.modalService.open({
-      width: '300px',
-      backdropCloseable: false,
-      showAnimate: true,
-      component: ModalAlertComponent,
-      data: {
-        content: errorMsg,
-        cancelBtnText: this.confirmText ? this.confirmText : this.i18nCommonText.btnConfirm,
-        onClose: (event) => {
-          results.modalInstance.hide();
-        },
-      },
-    });
+    this.errorMsg = [{ severity: 'warn', summary: this.i18nText.warning, detail: errorMsg }];
   }
   ngOnDestroy() {
     if (this.i18nSubscription) {

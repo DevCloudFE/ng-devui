@@ -421,6 +421,41 @@ body {
     }
   }
 }
+
+.demo-example.active.anchor-active-by-anchor-link {
+  animation: hightlight-and-disapear 1 3s linear;
+}
+
+@keyframes hightlight-and-disapear {
+  0% {
+    outline: invert none medium;
+  }
+
+  2% {
+    outline: 0 none rgba(255, 255, 255, 0);
+  }
+
+  10% {
+    outline: 1px solid #5170ff;
+  }
+
+  50% {
+    outline: 1px solid #5170ff;
+  }
+
+  90% {
+    outline: 1px solid rgba(255, 255, 255, 0);
+  }
+
+  99% {
+    outline: 0 none rgba(255, 255, 255, 0);
+  }
+
+  100% {
+    outline: invert none medium;
+  }
+}
+
 .main-nav-item .show-themable {
   display: none;
   display: var(--iehack, inline-block);

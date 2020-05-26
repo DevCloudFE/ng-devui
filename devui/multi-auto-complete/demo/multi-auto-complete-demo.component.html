@@ -1,5 +1,6 @@
-<div class="demo-container">
-  <div class="demo-example">
+<div class="demo-container" dAnchorBox [view]="{ top: 60, bottom: 0 }">
+  <d-demo-nav [navItems]="navItems"></d-demo-nav>
+  <div class="demo-example" [dAnchor]="'basic-usage'">
     <div class="demo-title">基本用法</div>
     <div class="demo-text">
       通过 source 设置数据源
@@ -9,7 +10,7 @@
     </d-codebox>
   </div>
 
-  <div class="demo-example">
+  <div class="demo-example" [dAnchor]="'auto-complete-array'">
     <div class="demo-title">自定义匹配方法</div>
     <div class="demo-text">
       通过 searchFn 自定义数据的匹配方法和返回的数据格式

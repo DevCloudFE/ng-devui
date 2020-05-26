@@ -1,8 +1,9 @@
-/*序号*/
+/* 序号 */
 .step-nav {
   padding-top: 10px;
   width: 240px;
 }
+
 .step-nav > li {
   list-style: none;
   counter-increment: stepli;
@@ -14,12 +15,15 @@
   color: #5e6678;
   position: relative;
 }
+
 .step-nav > li:hover {
   color: #405dff;
 }
+
 .step-nav > li.active {
   color: #5170ff;
 }
+
 .step-nav > li::before {
   content: counter(stepli);
   display: inline-block;
@@ -28,7 +32,7 @@
   text-align: center;
   line-height: 26px;
   border-radius: 50%;
-  background-color: #fff;
+  background-color: #ffffff;
   color: #5170ff;
   margin-right: 10px;
   border: 2px solid #5170ff;
@@ -36,13 +40,14 @@
 
 .step-nav > li.active::before {
   background-color: #5170ff;
-  color: #fff;
+  color: #ffffff;
 }
 
-/*左侧线*/
+/* 左侧线 */
 .step-nav > li:not(:first-of-type) {
   margin-top: 30px;
 }
+
 .step-nav > li:not(:first-of-type)::after {
   content: '';
   display: block;
@@ -57,6 +62,7 @@
 .mymain {
   position: relative;
 }
+
 .mysidebar {
   width: 240px;
   border-right: 1px solid #cacfd8;
@@ -65,36 +71,46 @@
   left: 0;
   height: 100%;
 }
+
 .mycontent {
   padding: 10px;
   margin-left: 240px;
 }
+
 .section-block {
   min-height: 200px;
   border-bottom: 1px dashed #cacfd8;
 }
+
 .section-block.active.anchor-active-by-anchor-link {
   animation: hightlight-and-disapear 1 3s linear;
 }
+
 @keyframes hightlight-and-disapear {
   0% {
     outline: invert none medium;
   }
+
   2% {
     outline: 0 none rgba(255, 255, 255, 0);
   }
+
   10% {
     outline: 1px solid #5170ff;
   }
+
   50% {
     outline: 1px solid #5170ff;
   }
+
   90% {
     outline: 1px solid rgba(255, 255, 255, 0);
   }
+
   99% {
     outline: 0 none rgba(255, 255, 255, 0);
   }
+
   100% {
     outline: invert none medium;
   }

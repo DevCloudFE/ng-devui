@@ -15,4 +15,9 @@ export class MultiAutoCompleteDemoComponent {
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./array/multi-auto-complete-demo-array.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./array/multi-auto-complete-demo-array.component.ts') },
   ];
+
+  navItems = [
+    { dAnchorLink: 'basic-usage', value: '基本用法'},
+    { dAnchorLink: 'auto-complete-array', value: '自定义匹配方法'}
+  ];
 }

@@ -1,5 +1,6 @@
-<div class="demo-container">
-  <div class="demo-example">
+<div class="demo-container" dAnchorBox [view]="{ top: 60, bottom: 0 }">
+  <d-demo-nav [navItems]="navItems"></d-demo-nav>
+  <div class="demo-example" [dAnchor]="'basic-usage'">
     <div class="demo-title">基本用法</div>
     <div class="demo-text">
       展示加载表格数据的场景中的基本使用方法
@@ -9,7 +10,7 @@
     </d-codebox>
   </div>
 
-  <div class="demo-example">
+  <div class="demo-example" [dAnchor]="'custom-style'">
     <div class="demo-title">自定义样式</div>
     <div class="demo-text">
       通过 templateRef 自定义loading样式
@@ -19,7 +20,7 @@
     </d-codebox>
   </div>
 
-  <div class="demo-example">
+  <div class="demo-example" [dAnchor]="'multi-promise'">
     <div class="demo-title">多promise</div>
     <div class="demo-text">
       支持多个promise
@@ -28,7 +29,7 @@
       <d-promise demo></d-promise>
     </d-codebox>
   </div>
-  <div class="demo-example">
+  <div class="demo-example" [dAnchor]="'use-subscription-mode'">
     <div class="demo-title">使用Subscription方式</div>
     <div class="demo-text">
       使用Subscription方式控制loading的显示

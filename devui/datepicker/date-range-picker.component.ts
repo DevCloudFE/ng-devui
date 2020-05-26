@@ -219,13 +219,15 @@ export class DateRangePickerComponent implements OnInit, ControlValueAccessor, O
     });
   }
 
-  rangeChange(data) {
-    this.chooseDate(data.selectedRange);
+  rangeChange(data, reason?) {
+    const currentReason = typeof reason === 'number' ? reason : SelectDateRangeChangeReason.date;
+    this.chooseDate(data.selectedRange, currentReason);
   }
 
-  chooseDate = (range) => {
+  chooseDate = (range, reason?) => {
+    const currentReason = typeof reason === 'number' ? reason : SelectDateRangeChangeReason.custom;
     this.writeValue(range);
-    this.notifyValueChange(range, SelectDateRangeChangeReason.date);
+    this.notifyValueChange(range, currentReason);
     if (!this.showTime && this.hideOnRangeSelected) { this.hide(); }
   }
 
@@ -415,8 +417,9 @@ export class DateRangePickerComponent implements OnInit, ControlValueAccessor, O
     }
   }
 
-  clearAll = () => {
-    this.rangeChange({selectedRange: [null, null]});
+  clearAll = (reason?: SelectDateRangeChangeReason) => {
+    const currentReason = typeof reason === 'number' ? reason : SelectDateRangeChangeReason.custom;
+    this.chooseDate([null, null], currentReason);
   }
 
 }

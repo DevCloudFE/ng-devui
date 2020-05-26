@@ -1,6 +1,7 @@
 .devui-loading-demo {
   margin-top: 50px;
 }
+
 .custom-loader {
   border: 5px solid #cacfd8;
   border-top: 5px solid #e41f2b;
@@ -14,6 +15,7 @@
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }

@@ -29,6 +29,12 @@ export class LoadingDemoComponent {
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./subscription/subscription.component.html')},
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./subscription/subscription.component.ts')}
   ];
+  navItems = [
+    { dAnchorLink: 'basic-usage', value: '基本用法'},
+    { dAnchorLink: 'custom-style', value: '自定义样式'},
+    { dAnchorLink: 'multi-promise', value: '多promise'},
+    { dAnchorLink: 'use-subscription-mode', value: '使用Subscription方式'}
+  ];
   constructor() {
 
   }

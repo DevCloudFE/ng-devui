@@ -1,17 +1,22 @@
 @import '../style/theme/color';
+
 :host {
   display: block;
 }
+
 .devui-data-table ::ng-deep {
   border: none;
+
   .devui-table-view {
-    padding: 0px;
+    padding: 0;
     border: none;
     position: relative;
+
     .scroll-view {
       overflow-y: auto;
       overflow-x: auto;
     }
+
     .devui-table {
       border-collapse: separate;
       border-spacing: 0;
@@ -19,15 +24,16 @@
       width: 100%;
       max-width: 100%;
       position: relative;
-      margin: 0px;
+      margin: 0;
+
       & > tbody + tbody {
         border-top: none;
       }
     }
+
     .resize-bar {
       top: 0;
       bottom: 0;
-      display: inline-block;
       position: absolute;
       cursor: col-resize;
       background: $dark-2;
@@ -35,6 +41,7 @@
       z-index: 9999;
       display: none;
     }
+
     .resize-overlay {
       position: absolute;
       display: block;
@@ -45,11 +52,13 @@
       z-index: 1000;
     }
   }
+
   .devui-table-view-footer {
     border: none;
-    margin: 0px;
+    margin: 0;
   }
   $half-sort-icon-size: 8px;
+
   .table-wrap {
     padding-top: $half-sort-icon-size;
   }
@@ -59,12 +68,13 @@
   thead {
     span {
       font-weight: bold;
-      font-size: 12px;
       color: $dark-1;
       font-size: 14px;
     }
+
     tr {
       background-color: $bg-white;
+
       th {
         text-align: left;
         background-clip: padding-box !important;
@@ -75,12 +85,13 @@
         $half-sort-icon: 8px;
         $childtable-toggler-icon: 20px;
         $negative-half-sort-icon-size: -($sort-clickable-area + $half-sort-icon); // 排序图标的大小为16 * 16 px，所以图标需要移动8px，让图标的一半显示在标题头外
-        border-bottom-width: 1px;
+
         border-bottom: 1px solid $gray-1;
         display: table-cell;
         padding: 0;
         font-size: 0;
         background-color: inherit;
+
         .drag-icon {
           display: inline-block;
           margin-right: $drag-icon-margin-right;
@@ -92,9 +103,11 @@
             font-size: 14px;
           }
         }
+
         > * {
           display: inline-block;
         }
+
         .title,
         .parent-title {
           display: inline-block;
@@ -118,6 +131,7 @@
         .childtable-toggler + .title.can-filter {
           width: calc(100% - #{$drag-icon-size} - #{$drag-icon-margin-right} - #{$filter-icon-size} - #{$childtable-toggler-icon});
         }
+
         .sort-clickable {
           position: absolute;
           top: $negative-half-sort-icon-size;
@@ -129,30 +143,38 @@
         &:hover,
         &.hover {
           border-radius: 2px 0 0 2px;
+
           .filter-icon {
             visibility: visible;
           }
+
           .sort-icon-default {
             visibility: visible;
           }
         }
+
         &.operable:hover {
           background-color: $hover-content;
         }
+
         &.sindu_handle:hover,
         &.sindu_handle.hover {
           border-radius: 2px 0 0 2px;
+
           .drag-icon {
             visibility: visible;
           }
+
           .hidden-icon.drag-icon {
             visibility: hidden;
           }
         }
+
         &.gutter {
           margin: 0;
           padding: 0;
         }
+
         &.gutter:hover {
           background: none;
         }
@@ -174,6 +196,7 @@
           position: sticky;
           z-index: 5;
         }
+
         & .header-container {
           position: relative;
           display: -webkit-box;
@@ -186,17 +209,21 @@
           padding-right: 8px;
         }
       }
+
       .sort-active {
         background: $hover-content;
         border-radius: 2px 0 0 2px;
       }
     }
   }
+
   tbody > tr {
     background: $bg-white;
+
     &.table-row-selected {
       background: $brand-3;
     }
+
     > td {
       background-clip: padding-box;
       vertical-align: middle;
@@ -209,6 +236,7 @@
       color: $dark-1; // #3C4458;
       background-color: inherit;
       border-bottom: 1px solid $gray-2;
+
       &.devui-checkable-cell {
         width: 36px;
         padding: 10px;
@@ -232,20 +260,21 @@
       }
     }
   }
+
   th:first-child,
   td:first-child {
     margin: 0 5px;
   }
+
   .clickable {
     cursor: pointer;
     vertical-align: middle;
   }
-  .devui-checkbox-material {
-    margin-right: 0;
-  }
+
   .d-checkbox > label {
     margin: auto;
   }
+
   .resize-handle {
     display: inline-block;
     position: absolute;
@@ -255,11 +284,13 @@
     width: 5px;
     cursor: col-resize;
   }
+
   th.resizeable.last-resize-header {
     .resize-handle {
       border-right: 1px solid transparent;
     }
   }
+
   .resizeable:hover,
   .resizeable.last-resize-header:hover {
     .resize-handle {
@@ -291,8 +322,10 @@
 :host ::ng-deep .devui-toggle-childtable {
   cursor: pointer;
   margin-right: 5px;
+
   & > svg {
     vertical-align: middle;
+
     & > g > path {
       fill: $dark-3;
     }
@@ -306,6 +339,7 @@
 :host ::ng-deep .hover-bg {
   background: $hover-content;
   pointer-events: none;
+
   & + th {
     pointer-events: none;
   }
@@ -327,8 +361,10 @@
 :host ::ng-deep .childtable-toggler {
   cursor: pointer;
   padding-right: 4px;
+
   & > svg {
     vertical-align: middle;
+
     & > g > path {
       fill: $dark-3;
     }
@@ -337,6 +373,7 @@
 
 :host ::ng-deep .table.table-bordered.table-fix-header {
   border-bottom: 0;
+
   th {
     border-bottom: 0;
   }
@@ -347,7 +384,7 @@
   tr,
   th {
     .devui-sticky-left-cell {
-      box-shadow: rgba(0, 0, 0, 0.05) 6px 6px 6px 0px;
+      box-shadow: rgba(0, 0, 0, 0.05) 6px 6px 6px 0;
     }
   }
 }
@@ -357,7 +394,7 @@
   tr,
   th {
     .devui-sticky-right-cell {
-      box-shadow: rgba(0, 0, 0, 0.05) -6px 6px 6px 0px;
+      box-shadow: rgba(0, 0, 0, 0.05) -6px 6px 6px 0;
     }
   }
 }
@@ -368,21 +405,24 @@
   -ms-user-select: none !important;
   user-select: none !important;
 }
+
 :host ::ng-deep .gu-mirror {
   position: fixed !important;
   margin: 0 !important;
   z-index: 9999 !important;
+
   /* -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)"; */
+
   /* filter: alpha(opacity=80); */
   background-color: white;
   box-shadow: 0 2px 4px 0 var(--dark-1-boxshadow, rgba(41, 48, 64, 0.2));
-  background-color: white;
   list-style: none;
 }
 
 :host ::ng-deep .gu-hide {
   display: none !important;
 }
+
 :host ::ng-deep .sindu_dragger {
   list-style: none;
   margin: 0;

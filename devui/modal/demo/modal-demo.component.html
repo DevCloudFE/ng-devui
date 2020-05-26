@@ -1,5 +1,6 @@
-<div class="demo-container">
-  <div class="demo-example">
+<div class="demo-container" dAnchorBox [view]="{ top: 60, bottom: 0 }">
+  <d-demo-nav [navItems]="navItems"></d-demo-nav>
+  <div class="demo-example" [dAnchor]="'standard-dialog'">
     <div class="demo-title">标准对话框</div>
     <div class="demo-text">
       使用dialogService可拖拽的标准对话框
@@ -8,7 +9,7 @@
       <d-basic demo></d-basic>
     </d-codebox>
   </div>
-  <div class="demo-example">
+  <div class="demo-example" [dAnchor]="'custom-dialog'">
     <div class="demo-title">自定义对话框</div>
     <div class="demo-text">
       使用modalService可以自定义对话框内的所有内容
@@ -17,7 +18,7 @@
       <d-customize demo></d-customize>
     </d-codebox>
   </div>
-  <div class="demo-example">
+  <div class="demo-example" [dAnchor]="'intercept-dialog-closed'">
     <div class="demo-title">拦截对话框关闭</div>
     <div class="demo-text">
       通过 beforeHidden 设置在关闭弹出框时的拦截方法
@@ -26,7 +27,7 @@
       <d-hide demo></d-hide>
     </d-codebox>
   </div>
-  <div class="demo-example">
+  <div class="demo-example" [dAnchor]="'message-hint'">
     <div class="demo-title">信息提示</div>
     <div class="demo-text">
       各种类型的信息提示框
@@ -35,7 +36,7 @@
       <d-tips demo></d-tips>
     </d-codebox>
   </div>
-  <div class="demo-example">
+  <div class="demo-example" [dAnchor]="'warning-pop-up'">
     <div class="demo-title">警告弹出框</div>
     <div class="demo-text">
       标准警告弹出框
@@ -44,7 +45,7 @@
       <d-warning demo></d-warning>
     </d-codebox>
   </div>
-  <div class="demo-example">
+  <div class="demo-example" [dAnchor]="'configure-button-to-get-focus-automatically'">
     <div class="demo-title">配置按钮自动获得焦点</div>
     <div class="demo-text">
       配置dialogService的buttons中的autofocus属性可以设置按钮自动获得焦点，可以通过回车直接触发按钮点击

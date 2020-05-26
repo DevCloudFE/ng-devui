@@ -13,6 +13,7 @@ import {DataTableModule} from 'ng-devui/data-table';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 
 @NgModule({
   imports: [
@@ -22,6 +23,7 @@ import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component
     ToggleModule,
     DevUIApiModule,
     DevUICodeboxModule,
+    DDemoNavModule,
     RouterModule.forChild([
       { path: '', redirectTo: 'demo' },
       { path: 'demo', component: TransferDemoComponent },

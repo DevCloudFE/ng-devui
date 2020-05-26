@@ -87,9 +87,17 @@ export class TwoDatePickerEndDirective implements OnInit, OnDestroy, ControlValu
     }
   }
 
+  clearEnd = () => {
+    this.twoDatePicker.selectEnd(null);
+  }
+
   transUserInputToDatePicker(event) {
     if (!this.twoDatePicker.showTime) {
       const value = event.target.value;
+      if (!value) {
+        this.clearEnd();
+        return;
+      }
       const valueDate = new Date(value);
       const valueFormat = this.twoDatePicker.dateConverter.format(valueDate, this.twoDatePicker.dateFormat, this.twoDatePicker.locale);
       if (value && value === valueFormat) {

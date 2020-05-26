@@ -274,8 +274,8 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
     }
   }
 
-  clearAll() {
-    this.cmpRef.instance.clearAll();
+  clearAll(reason?: SelectDateChangeReason) {
+    this.cmpRef.instance.clearAll(reason);
   }
 
   private popIn(direction): AnimationMetadata[] {
@@ -345,6 +345,10 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
   private transUserInputToDatepicker(event) {
     if (!this.showTime && !this.disabled) {
       const value = event.target.value;
+      if (!value) {
+        this.clearAll();
+        return;
+      }
       const valueDate = new Date(value);
       const valueFormat = this.dateConverter.format(valueDate, this.dateFormat, this.locale || this.i18nLocale);
       if (value && value === valueFormat) {

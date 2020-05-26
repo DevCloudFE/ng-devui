@@ -45,7 +45,9 @@
 
 <ng-template #scrollViewTpl>
   <cdk-virtual-scroll-viewport
-    autosize
+    [itemSize]="virtualItemSize"
+    [minBufferPx]="virtualMinBufferPx"
+    [maxBufferPx]="virtualMaxBufferPx"
     class="devui-scrollbar table-wrap viewport-wrapper"
     [ngClass]="{ 'scroll-view': scrollable }"
     [style.height]="maxHeight"

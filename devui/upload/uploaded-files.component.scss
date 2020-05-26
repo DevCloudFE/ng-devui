@@ -3,12 +3,14 @@ table.devui-table {
   max-width: 100%;
   margin-bottom: 20px;
 }
+
 table.devui-table > tbody > tr > td {
   padding: 8px;
   line-height: 1.42857143;
   vertical-align: top;
-  border-top: 1px solid #ddd;
+  border-top: 1px solid #dddddd;
 }
+
 .devui-upload-input {
   padding: 5px 25px 5px 10px !important;
   cursor: pointer;

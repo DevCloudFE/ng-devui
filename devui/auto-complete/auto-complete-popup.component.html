@@ -1,53 +1,78 @@
-<div
-  class="devui-dropdown-menu"
-  [style.display]="isOpen && (source?.length || noResultItemTemplate) ? 'inline-block' : 'none'"
-  [style.top]="overview === 'multiline' ? (position?.top < labelMinHeight ? '50%' : '100%') : '100%'"
-  [style.left]="overview === 'multiline' ? position?.left + 'px' : '0'"
-  [@fadeInOut]="isOpen ? 'bottom' : 'void'"
-  (@fadeInOut.done)="animationEnd($event)"
-  #selectMenuElement
-  dLoading
-  [showLoading]="showLoading"
-  [backdrop]="true"
->
-  <ul
-    class="devui-list-unstyled scroll-height"
-    [style.maxHeight]="maxHeight + 'px'"
-    dLazyLoad
-    [enableLazyLoad]="enableLazyLoad"
-    (loadMore)="loadMoreEvent($event)"
+<ng-container *ngIf="appendToBody">
+  <ng-template
+    cdk-connected-overlay
+    [cdkConnectedOverlayOrigin]="origin"
+    [cdkConnectedOverlayWidth]="width"
+    [cdkConnectedOverlayOpen]="isOpen"
   >
-    <li *ngIf="popTipsText && popTipsText.length > 0" class="devui-popup-tips">
-      {{ popTipsText }}
-    </li>
-    <li
-      *ngFor="let item of source; let $index = index; trackBy: trackByFn"
-      class="devui-dropdown-item"
-      [title]="formatter(item)"
-      [ngClass]="{
-        'devui-dropdown-bg': $index == activeIndex,
-        disabled: disabledKey && item[disabledKey]
-      }"
-      (click)="onSelect($event, item)"
-      (mouseenter)="onActiveIndexChange($index)"
+    <ng-template [ngTemplateOutlet]="popTpl"> </ng-template>
+  </ng-template>
+</ng-container>
+
+<ng-container *ngIf="!appendToBody">
+  <ng-template [ngTemplateOutlet]="popTpl"> </ng-template>
+</ng-container>
+
+<ng-template #popTpl>
+  <div
+    class="devui-dropdown-menu"
+    [style.display]="isOpen && (source?.length || noResultItemTemplate) ? 'inline-block' : 'none'"
+    [style.top]="overview === 'multiline' ? (position?.top < labelMinHeight ? '50%' : '100%') : '100%'"
+    [style.left]="overview === 'multiline' ? position?.left + 'px' : '0'"
+    [@fadeInOut]="isOpen ? 'bottom' : 'void'"
+    (@fadeInOut.done)="animationEnd($event)"
+    #selectMenuElement
+    dLoading
+    [showLoading]="showLoading"
+    [backdrop]="true"
+  >
+    <ul
+      class="devui-list-unstyled scroll-height"
+      [style.maxHeight]="maxHeight + 'px'"
+      dLazyLoad
+      [enableLazyLoad]="enableLazyLoad"
+      (loadMore)="loadMoreEvent($event)"
+      #dropdownUl
     >
-      <ng-template
-        [ngTemplateOutlet]="itemTemplate || defaultItemTemplate"
-        [ngTemplateOutletContext]="{
-          formatter: formatter,
-          term: term,
-          source: source,
-          item: item,
-          $index: $index
-        }"
-      >
-      </ng-template>
-    </li>
-    <li class="devui-dropdown-item devui-no-result-template" *ngIf="!source?.length && noResultItemTemplate != null">
-      <ng-template [ngTemplateOutlet]="noResultItemTemplate" [ngTemplateOutletContext]="{ term: term, source: source }"> </ng-template>
-    </li>
-  </ul>
-</div>
+      <ng-container *ngIf="!isSearching || !searchingTemplate">
+        <li *ngIf="popTipsText && popTipsText.length > 0" class="devui-popup-tips">
+          {{ popTipsText }}
+        </li>
+        <li
+          *ngFor="let item of source; let $index = index; trackBy: trackByFn"
+          class="devui-dropdown-item"
+          [title]="formatter(item)"
+          [ngClass]="{
+            selected: $index == activeIndex,
+            'devui-dropdown-bg': $index == activeIndex,
+            disabled: disabledKey && item[disabledKey]
+          }"
+          (click)="onSelect($event, item)"
+        >
+          <ng-template
+            [ngTemplateOutlet]="itemTemplate || defaultItemTemplate"
+            [ngTemplateOutletContext]="{
+              formatter: formatter,
+              term: term,
+              source: source,
+              item: item,
+              $index: $index
+            }"
+          >
+          </ng-template>
+        </li>
+        <li class="devui-dropdown-item devui-no-result-template" *ngIf="!source?.length && noResultItemTemplate != null">
+          <ng-template [ngTemplateOutlet]="noResultItemTemplate" [ngTemplateOutletContext]="{ term: term, source: source }"> </ng-template>
+        </li>
+      </ng-container>
+      <ng-container *ngIf="isSearching && searchingTemplate">
+        <li class="devui-dropdown-item devui-is-searching-template">
+          <ng-template [ngTemplateOutlet]="searchingTemplate" [ngTemplateOutletContext]="{ term: term }"> </ng-template>
+        </li>
+      </ng-container>
+    </ul>
+  </div>
+</ng-template>
 
 <ng-template #defaultItemTemplate let-item="item" let-term="term">
   <d-highlight [value]="formatter(item)" [term]="term"></d-highlight>

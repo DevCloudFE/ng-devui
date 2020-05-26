@@ -35,11 +35,11 @@ export class RadioComponent implements OnInit, ControlValueAccessor {
   }
 
   @Input()
-  get value(): string {
+  get value(): any {
     return this.__value;
   }
 
-  set value(value: string) {
+  set value(value: any) {
     this.__value = value;
   }
 

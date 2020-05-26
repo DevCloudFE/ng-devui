@@ -1,10 +1,12 @@
 :host form {
   width: 400px;
 }
+
 .single-checkbox {
   display: inline-block;
   margin-right: 10px;
 }
+
 :host ::ng-deep .devui-radio-horizontal d-radio {
   display: inline-block;
 }

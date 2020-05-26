@@ -11,6 +11,7 @@ import {FormsModule} from '@angular/forms';
 import {SliderBasicComponent} from './basic/slider-basic.component';
 import {SliderCustomFormatterComponent} from './custom-formatter/slider-custom-formatter.component';
 import {SliderDisabledComponent} from './disabled/slider-disabled.component';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ import {SliderDisabledComponent} from './disabled/slider-disabled.component';
     SliderModule,
     DevUIApiModule,
     FormsModule,
+    DDemoNavModule,
     RouterModule.forChild([
       {path: '', redirectTo: 'demo'},
       {path: 'demo', component: SliderDemoComponent},

@@ -1,4 +1,5 @@
 @import '../style/theme/color';
+
 :host {
   &.devui-splitter-pane {
     position: relative;
@@ -8,14 +9,17 @@
     max-width: 100%;
     min-height: 0;
     max-height: 100%;
+
     &-fixed {
       flex-grow: 0;
       flex-shrink: 0;
     }
+
     &-hidden {
       flex: 0 !important;
       overflow: hidden !important;
     }
+
     &-grow {
       flex-grow: 1 !important;
     }

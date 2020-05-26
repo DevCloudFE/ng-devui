@@ -104,11 +104,11 @@
       </svg>
     </div>
     <span *ngIf="!!title" [title]="title" class="title-text">{{ title }}</span>
-    <span *ngIf="!!!title && (dialogtype | lowercase) === 'warning'" class="title-text">提醒</span>
-    <span *ngIf="!!!title && (dialogtype | lowercase) === 'failed'" class="title-text">错误</span>
-    <span *ngIf="!!!title && ((dialogtype | lowercase) === 'sucess' || (dialogtype | lowercase) == 'success')" class="title-text"
-      >成功</span
-    >
-    <span *ngIf="!!!title && (dialogtype | lowercase) === 'info'" class="title-text">提示</span>
+    <span *ngIf="!!!title && (dialogtype | lowercase) === 'warning'" class="title-text"> {{ i18nText?.warning }}</span>
+    <span *ngIf="!!!title && (dialogtype | lowercase) === 'failed'" class="title-text">{{ i18nText?.error }}</span>
+    <span *ngIf="!!!title && ((dialogtype | lowercase) === 'sucess' || (dialogtype | lowercase) == 'success')" class="title-text">{{
+      i18nText?.success
+    }}</span>
+    <span *ngIf="!!!title && (dialogtype | lowercase) === 'info'" class="title-text">{{ i18nText?.info }}</span>
   </div>
 </div>

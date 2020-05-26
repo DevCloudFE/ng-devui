@@ -11,11 +11,14 @@
     vertical-align: middle;
     margin: 0 10px 0 0;
     position: relative;
+
     &.devui-page-size-sm {
       max-width: 60px;
     }
+
     &.devui-page-size-lg {
       max-width: 100px;
+
       li a.devui-pagination-link {
         height: 46px;
         line-height: 46px;
@@ -26,13 +29,14 @@
   .devui-total-size {
     display: inline-block;
     position: relative;
-    margin: 0 20px 0 0px;
+    margin: 0 20px 0 0;
     color: $dark-2;
   }
 
   .devui-pagination-list {
     display: inline-block;
     vertical-align: middle;
+
     > .disabled > a,
     > .disabled > a:hover,
     > .disabled > a:focus {
@@ -42,12 +46,23 @@
     li {
       display: inline;
     }
+
     li.disabled a {
-      background: $bg-white;
-      opacity: 0.3;
+      color: $disabled-content;
+
+      svg g polygon {
+        fill: $disabled-content;
+      }
     }
+
+    li.disabled:first-child a,
+    li.disabled:last-child a {
+      border-color: $disabled-border;
+    }
+
     li:not(.disabled) {
       cursor: pointer;
+
       a:hover,
       span:hover,
       a:focus,
@@ -73,11 +88,13 @@
     .devui-pagination-link {
       svg {
         vertical-align: middle;
+
         g polygon {
           fill: $dark-1;
         }
       }
     }
+
     .devui-pagination-link-lite {
       border: 1px solid transparent !important;
       border-radius: 2px;
@@ -134,6 +151,7 @@
     position: relative;
     margin: 0 10px 0 10px;
     vertical-align: middle;
+
     .devui-input {
       display: inline-block;
       width: 3.5em;
@@ -147,6 +165,7 @@
     border-radius: 1px;
     border: 1px solid $gray-1;
     cursor: pointer;
+
     .devui-pagination-go {
       width: 0;
       height: 0;
@@ -154,6 +173,7 @@
       border-left-style: solid;
       border-bottom-style: solid;
     }
+
     &:hover {
       border-color: $hover-control;
 
@@ -166,6 +186,7 @@
   .devui-jump-size-default {
     width: 34px;
     height: 34px;
+
     .devui-pagination-go {
       width: 0;
       height: 0;
@@ -179,6 +200,7 @@
   .devui-jump-size-sm {
     width: 30px;
     height: 30px;
+
     .devui-pagination-go {
       width: 0;
       height: 0;
@@ -187,6 +209,7 @@
       border-bottom: 8px solid transparent;
       margin: 6px auto;
     }
+
     .devui-pagination-link {
       height: 30px;
       line-height: 32px;
@@ -196,6 +219,7 @@
   .devui-jump-size-lg {
     width: 46px;
     height: 46px;
+
     .devui-pagination-go {
       width: 0;
       height: 0;
@@ -205,6 +229,7 @@
       margin: 6px auto;
     }
   }
+
   .devui-lite-paginator {
     display: inline-block;
     margin-right: 5px;
@@ -222,6 +247,7 @@
       line-height: 30px;
       cursor: pointer;
       display: flex;
+
       svg g path {
         fill: $dark-1;
       }
@@ -296,6 +322,7 @@
     }
   }
 }
+
 :host ::ng-deep .devui-input-sm {
   height: 30px;
 }

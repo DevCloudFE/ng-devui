@@ -274,6 +274,10 @@ export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDes
   private transUserInputToDatepicker(event) {
     if (!this.showTime && !this.disabled) {
       const value = event.target.value;
+      if (!value) {
+        this.clearAll();
+        return;
+      }
       const valueDate = new Date(value);
       const valueFormat = this.dateConverter.format(valueDate, this.dateFormat, this.locale || this.i18nLocale);
       if (value && value === valueFormat) {
@@ -291,8 +295,14 @@ export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDes
     }
   }
 
-  clearAll = () => {
+  clearAll = (reason?: SelectDateChangeReason) => {
     this.writeValue(null);
+    this.onChange(null);
+    const currentReason = typeof reason === 'number' ? reason : SelectDateChangeReason.custom;
+    this.selectedDateChange.emit({
+      reason: currentReason,
+      selectedDate: null
+    });
   }
 
   ngOnDestroy() {

@@ -72,6 +72,31 @@ export const routesConfig = [
     }
   },
   {
+    path: 'quadrant-diagram',
+    component: ExamplePanelComponent,
+    loadChildren: () => import('../../../devui/quadrant-diagram/demo/quadrant-diagram-demo.module').then(m => m.QuadrantDiagramDemoModule),
+    data: {
+      type: '演进中',
+      name: 'Quadrant Diagram',
+      cnName: '象限图',
+      description: '象限图，根据需求对事务进行区域划分与价值排序',
+      tmw: `可用于管理事务的优先级`
+    }
+  },
+  {
+    path: 'ImagePreview',
+    component: ExamplePanelComponent,
+    loadChildren: () => import('../../../devui/image-preview/demo/image-preview-demo.module').then(m => m.ImagePreviewDemoModule),
+    data: {
+      type: '数据展示',
+      name: 'ImagePreview',
+      cnName: '图片预览',
+      description: '对一张或多张图片进行预览',
+      tmw: '可根据用户传入进行图片预览展示 或 对容器内图片进行预览。'
+    }
+  },
+
+  {
     path: 'breadcrumb',
     component: ExamplePanelComponent,
     loadChildren: () => import('../../../devui/breadcrumb/demo/breadcrumb-demo.module').then(m => m.BreadCrumbDemoModule),

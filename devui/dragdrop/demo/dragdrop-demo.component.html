@@ -1,5 +1,6 @@
-<div class="demo-container">
-  <div class="demo-example">
+<div class="demo-container" dAnchorBox [view]="{ top: 60, bottom: 0 }">
+  <d-demo-nav [navItems]="navItems"></d-demo-nav>
+  <div class="demo-example" [dAnchor]="'basic-usage'">
     <div class="demo-title">基本用法</div>
     <div class="demo-text">
       从一个container拖动到另外一个container，并支持排序
@@ -9,7 +10,7 @@
     </d-codebox>
   </div>
 
-  <div class="demo-example">
+  <div class="demo-example" [dAnchor]="'multi-level-tree-drag'">
     <div class="demo-title">多层树状拖拽</div>
     <div class="demo-text">
       排序允许拖拽到元素上，支持层级嵌套
@@ -19,7 +20,7 @@
     </d-codebox>
   </div>
 
-  <div class="demo-example">
+  <div class="demo-example" [dAnchor]="'drag-entity-elements-to-follow'">
     <div class="demo-title">拖拽实体元素跟随</div>
     <div class="demo-text">
       允许拖拽时候非半透明元素跟随
@@ -28,7 +29,7 @@
       <d-follow demo></d-follow>
     </d-codebox>
   </div>
-  <div class="demo-example">
+  <div class="demo-example" [dAnchor]="'cross-edge-switching'">
     <div class="demo-title">越边交换</div>
     <div class="demo-text">
       设置switchWhileCrossEdge允许越过边缘的时候交换。 注意：不可与dropOnItem一起用，dropOnItem为true的时候无效。
@@ -37,7 +38,7 @@
       <d-switch demo></d-switch>
     </d-codebox>
   </div>
-  <div class="demo-example">
+  <div class="demo-example" [dAnchor]="'external-location'">
     <div class="demo-title">外部放置位置：就近，前面，后面</div>
     <div class="demo-text">
       使用defaultDropPostion配置排序器之外的区域拖拽元素放下的时候默认加到列表的前面或者后面，默认为就近('closest')。
@@ -46,7 +47,7 @@
       <d-position demo></d-position>
     </d-codebox>
   </div>
-  <div class="demo-example">
+  <div class="demo-example" [dAnchor]="'drag-and-roll-container-enhancement'">
     <div class="demo-title">拖拽滚动容器增强</div>
     <div class="demo-text">
       搭配使用dDropScrollEnhanced指令允许拖拽到边缘的时候加速滚动条向两边滚动。
@@ -55,7 +56,7 @@
       <d-drop-scroll demo></d-drop-scroll>
     </d-codebox>
   </div>
-  <div class="demo-example">
+  <div class="demo-example" [dAnchor]="'source-placeholder'">
     <div class="demo-title">源占位符</div>
     <div class="demo-text">
       使用originPlaceholder显示源位置的占位符，示例消失动画。
@@ -64,7 +65,7 @@
       <d-origin-placeholder demo></d-origin-placeholder>
     </d-codebox>
   </div>
-  <div class="demo-example">
+  <div class="demo-example" [dAnchor]="'batch-drag-and-drop'">
     <div class="demo-title">批量拖拽</div>
     <div class="demo-text">
       使用batchDrag指令标记可以批量拖拽。
@@ -73,7 +74,7 @@
       <d-batch-drag demo></d-batch-drag>
     </d-codebox>
   </div>
-  <div class="demo-example">
+  <div class="demo-example" [dAnchor]="'2D-drag-and-drop-preview'">
     <div class="demo-title">二维拖拽 和 拖拽预览</div>
     <div class="demo-text">
       使用dDragDropSyncBox指令、dDragSync指令、dDropSync指令协同拖拽，实现二维拖拽； 使用 dDragPreview 配置拖拽预览， 使用

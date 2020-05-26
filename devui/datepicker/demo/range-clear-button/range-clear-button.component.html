@@ -1,5 +1,5 @@
 <section style="width: 100%;">
-  <span>日期范围选择器:</span>
+  <span>日期范围选择器:可给clearAll()传入参数以定义不同reason</span>
   <div class="devui-input-group">
     <input
       class="devui-form-control"
@@ -20,7 +20,7 @@
   </div>
   <ng-template #myCustomview let-clearAll="clearAll" let-datePicker>
     <div class="box">
-      <d-button bsStyle="common" (btnClick)="clearAll()" bsSize="sm">
+      <d-button bsStyle="common" (btnClick)="clearAll(changeReason.button)" bsSize="sm">
         清除
       </d-button>
     </div>

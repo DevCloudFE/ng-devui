@@ -12,6 +12,7 @@
 | componentFactoryResolver   | `ComponentFactoryResolver`   | 组件库provider提供 | 可选，一般不需要设置                             |
 | injector                   | `Injector`                   | default           | 可选，一般不需要设置                             |
 | width                      | `string`                     | '300px'           | 可选，设置drawer的宽度                           |
+| zIndex                     | `number`                     | 1000            | 可选，设置drawer的z-index值
 | isCover                    | `boolean`                    | true              | 可选，是否有遮罩层                               |
 | fullScreen                 | `boolean`                    | false             | 可选，设置默认是否全屏                           |
 | data                       | `any`                        | --            | 可选，可以传入任意对象给drawerContentComponent使用|

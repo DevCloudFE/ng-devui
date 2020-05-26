@@ -44,9 +44,6 @@
     background-color: $brand-1;
     height: 5px;
     width: 0;
-
-    &.disabled {
-    }
   }
 
   .devui-slider-handle {
@@ -71,6 +68,17 @@
 
   &.disabled {
     cursor: not-allowed;
-    opacity: 0.3;
+
+    .devui-slider-rail {
+      background-color: $disabled-bg;
+    }
+
+    .devui-slider-track {
+      background-color: $disabled-border;
+    }
+
+    .devui-slider-handle {
+      border-color: $disabled-border;
+    }
   }
 }

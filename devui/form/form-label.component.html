@@ -4,9 +4,8 @@
 <svg
   *ngIf="hasHelp"
   dPopover
-  [content]="helpTips"
+  [content]="helpTipsTemplate"
   [popType]="'info'"
-  [content]="'info!'"
   [position]="'top'"
   [controlled]="true"
   [showAnimate]="true"
@@ -31,3 +30,6 @@
     </g>
   </g>
 </svg>
+<ng-template #helpTipsTemplate>
+  <span class="devui-help-tips">{{ helpTips }}</span>
+</ng-template>

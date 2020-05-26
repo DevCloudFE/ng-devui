@@ -6,8 +6,7 @@ import * as hljs from 'highlight.js/lib/highlight';
 
 @Component({
   selector: 'd-api',
-  templateUrl: './devui-api.component.html',
-  styleUrls: ['./devui-api.component.css']
+  templateUrl: './devui-api.component.html'
 })
 export class DevUIApiComponent implements OnInit, AfterViewInit, OnDestroy {
   sub: Subscription;

@@ -15,6 +15,7 @@
   margin: 0;
   cursor: pointer;
   transition: 0.3s ease-out all;
+
   &:hover {
     border-color: $hover-control;
   }
@@ -22,6 +23,7 @@
   &:active {
     border-color: $brand-2;
   }
+
   small {
     background: $gray-1;
     border-radius: 100%;
@@ -30,14 +32,17 @@
     left: 2px;
     transition: 0.3s ease-out all;
   }
+
   &.devui-toggle-large {
     width: 66px;
     height: 40px;
     border-radius: 40px;
+
     & small {
       width: 40px;
       height: 40px;
     }
+
     &.devui-checked small {
       background: $font-white;
       left: 26px;
@@ -48,10 +53,12 @@
     width: 50px;
     height: 30px;
     border-radius: 30px;
+
     & small {
       width: 30px;
       height: 30px;
     }
+
     &.devui-checked small {
       background: $font-white;
       left: 20px;
@@ -62,12 +69,14 @@
     width: 30px;
     height: 14px;
     border-radius: 14px;
+
     & small {
       width: 10px;
       height: 10px;
       position: absolute;
       top: 2px;
     }
+
     &.devui-checked small {
       background: $font-white;
       left: 18px;
@@ -77,6 +86,7 @@
   &.devui-checked {
     background: $brand-1;
     border-color: $brand-1;
+
     &:hover {
       background: $hover-control;
       border-color: $hover-control;
@@ -88,8 +98,16 @@
     }
   }
 
-  &.devui-disabled {
-    opacity: 0.3;
+  &.devui-disabled,
+  &.devui-disabled:hover,
+  &.devui-disabled.devui-checked,
+  &.devui-disabled.devui-checked:hover {
     cursor: not-allowed;
+    border-color: $disabled-border;
+    background-color: $disabled-border;
+
+    small {
+      background-color: $font-white;
+    }
   }
 }

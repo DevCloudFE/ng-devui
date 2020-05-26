@@ -1,13 +1,4 @@
-import {
-  Component,
-  Input,
-  Directive,
-  ElementRef,
-  OnInit,
-  Output,
-  EventEmitter,
-  ViewChild,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Directive, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 
 export type IButtonType = 'button' | 'submit' | 'reset';
 export type IButtonStyle = 'common' | 'primary' | 'text' | 'text-dark';
@@ -16,7 +7,8 @@ export type IButtonSize = 'lg' | 'md' | 'sm' | 'xs';
 @Component({
   selector: 'd-button',
   templateUrl: './button.component.html',
-  styleUrls: ['./button.component.scss']
+  styleUrls: ['./button.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ButtonComponent {
   @Input() id: string;
@@ -41,18 +33,5 @@ export class ButtonComponent {
 
   hasContent() {
     return !!this.buttonContent && this.buttonContent.nativeElement && this.buttonContent.nativeElement.innerHTML.trim();
-  }
-}
-
-@Directive({
-  selector: '[dBtnAutofocus]',
-})
-export class BtnAutoFocusDirective implements OnInit {
-  @Input() dBtnAutofocus = false;
-  constructor(private element: ElementRef) { }
-  ngOnInit() {
-      if (this.dBtnAutofocus) {
-          this.element.nativeElement.focus();
-      }
   }
 }

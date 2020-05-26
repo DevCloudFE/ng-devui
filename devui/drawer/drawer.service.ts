@@ -16,6 +16,7 @@ export class DrawerService {
     injector,
     componentFactoryResolver,
     id,
+    zIndex,
     width,
     fullScreen,
     data,
@@ -38,6 +39,7 @@ export class DrawerService {
     assign(drawerRef.instance, {
       id,
       width,
+      zIndex,
       isCover,
       clickDoms,
       fullScreen,
