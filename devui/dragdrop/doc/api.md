@@ -90,7 +90,7 @@ Drag DOM Events 详情: [DragEvent](https://developer.mozilla.org/en-US/docs/Web
 
 ``` typescript
 type DropEvent = {
-    nativeEvent: any; // 原生的drop事件
+    nativeEvent: any; // 原生的drop事件,
     dragData: any; // drag元素的dragData数据
     dropSubject: Subject<any>; //drop事件的Subject
     dropIndex?: number; // drop的位置在列表的index
@@ -115,13 +115,13 @@ type DropEvent = {
 
 | 名字   | 类型 | 默认值  |描述 |
 |:-------|:------------|:-----------|:-----------|
-| direction| `DropScrollSpeed`即`'v'|'h'` | 'v' | 滚动方向，垂直滚动`'v'`, 水平滚动 `'h'`|
+| direction| `DropScrollSpeed`即`'v'\|'h'` | 'v' | 滚动方向，垂直滚动`'v'`, 水平滚动 `'h'`|
 | responseEdgeWidth | `string \| ((total: number) => string)`  | '100px'  | 响应自动滚动边缘宽度, 函数的情况传入的为列表容器同个方向相对宽度 |
 | speedFn  | `DropScrollSpeedFunction`  | 内置函数  | 速率函数，见备注 |
 | minSpeed  | `DropScrollSpeed`即`number`  | 50  | 响应最小速度 ，函数计算小于这个速度的时候，以最小速度为准 |
 | maxSpeed  | `DropScrollSpeed`即`number`  | 1000  | 响应最大速度 ，函数计算大于这个速度的时候，以最大速度为准 |
 | viewOffset | {forward?: `DropScrollAreaOffset`; backward?: `DropScrollAreaOffset`;} | -- | 设置拖拽区域的偏移，用于某些位置修正|
-| dropScrollScope| `string| Array<string>`| --| 允许触发滚动scope，不配置为默认接收所有scope，配置情况下，draggable的`dragScope`和`dropScrollScope`匹配得上才能触发滚动|
+| dropScrollScope| `string\| Array<string>`| --| 允许触发滚动scope，不配置为默认接收所有scope，配置情况下，draggable的`dragScope`和`dropScrollScope`匹配得上才能触发滚动|
 | backSpaceDroppable| `boolean`|true| 是否允许在滚动面板上同时触发放置到滚动面板的下边的具体可以放置元素，默认为true，设置为false则不能边滚动边放置|
   
 备注： speedFn默认函数为`(x: number) => Math.ceil((1 - x) * 18) * 100`，传入数字`x`是 鼠标位置距离边缘的距离占全响应宽度的百分比，
@@ -159,6 +159,17 @@ export type DropScrollTriggerEdge = 'left' | 'right' | 'top' | 'bottom';
 ### dDropScrollEnhancedSide 附属指令
 
 如果需要同时两个方向都有滚动条，则需要使用dDropScrollEnhanced的同时使用dDropScrollEnhancedSide，参数列表同dDropScrollEnhanced指令，唯一不同是direction，如果为`'v'`则side附属指令的实际方向为`'h'`。
+
+| 名字   | 类型 | 默认值  |描述 |
+|:-------|:------------|:-----------|:-----------|
+| direction| `DropScrollSpeed`即`'v'\|'h'` | 'v' | 滚动方向，垂直滚动`'v'`, 水平滚动 `'h'`|
+| responseEdgeWidth | `string \| ((total: number) => string)`  | '100px'  | 响应自动滚动边缘宽度, 函数的情况传入的为列表容器同个方向相对宽度 |
+| speedFn  | `DropScrollSpeedFunction`  | 内置函数  | 速率函数，见备注 |
+| minSpeed  | `DropScrollSpeed`即`number`  | 50  | 响应最小速度 ，函数计算小于这个速度的时候，以最小速度为准 |
+| maxSpeed  | `DropScrollSpeed`即`number`  | 1000  | 响应最大速度 ，函数计算大于这个速度的时候，以最大速度为准 |
+| viewOffset | {forward?: `DropScrollAreaOffset`; backward?: `DropScrollAreaOffset`;} | -- | 设置拖拽区域的偏移，用于某些位置修正|
+| dropScrollScope| `string\| Array<string>`| --| 允许触发滚动scope，不配置为默认接收所有scope，配置情况下，draggable的`dragScope`和`dropScrollScope`匹配得上才能触发滚动|
+| backSpaceDroppable| `boolean`|true| 是否允许在滚动面板上同时触发放置到滚动面板的下边的具体可以放置元素，默认为true，设置为false则不能边滚动边放置|
 
 ## 使用 `dDraggable` & `dDroppable` 指令
 

@@ -160,8 +160,7 @@ export const routesConfig = [
   {
     path: 'multi-auto-complete',
     component: ExamplePanelComponent,
-    loadChildren: () => import('../../../devui/multi-auto-complete/demo/multi-auto-complete-demo.module').
-      then(m => m.MultiAutoCompleteDemoModule),
+    loadChildren: () => import('../../../devui/multi-auto-complete/demo/multi-auto-complete-demo.module').then(m => m.MultiAutoCompleteDemoModule),
     data: {
       type: '数据录入',
       name: 'MultiAutoComplete',

@@ -1,4 +1,12 @@
-
+<!--
+ * @Author: your name
+ * @Date: 2020-03-15 15:21:37
+ * @LastEditTime: 2020-06-04 11:12:19
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \ng-devui\devui\auto-complete\doc\api.md
+--> 
+### d-auto-complete 参数
 | 参数        | 类型          | 默认        |   说明                 |
 | :---------: | :----------: | :---------: | :------------------------------------------|
 | allowEmptyValueSearch | `boolean`        | false          | 可选，在绑定的输入框value为空时，是否进行搜索提示操作 |
@@ -24,9 +32,9 @@
 
 ### d-auto-complete 事件
 
-| 参数        | 类型          | 默认        |   说明                 |
-| :---------: | :----------: | :---------: | :------------------------------------------|
-| loadMore              | `EventEmitter<any>`      | -- | 可选，懒加载触发事件，配合enableLazyLoad使用,使用\`$event.loadFinish()\`关闭loading状态,$event为弹窗组件AutoCompletePopupComponent的实例 |
+| 参数        | 类型           |   说明                 |
+| :---------: | :----------:  | :------------------------------------------|
+| loadMore              | `EventEmitter<any>`      | 可选，懒加载触发事件，配合enableLazyLoad使用,使用\`$event.loadFinish()\`关闭loading状态,$event为弹窗组件AutoCompletePopupComponent的实例 |
 
 #### searchFn默认值
 

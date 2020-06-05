@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-06-03 11:02:15
+ * @LastEditTime: 2020-06-04 16:52:30
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \ng-devui\devui\image-preview\doc\api.md
+--> 
 ## 如何使用
 
 ### 引用
@@ -9,11 +17,11 @@
 `import {ImagePreviewModule} from 'ng-devui/image-preview'`;
 
 
-### 使用dImagePreview指令
+### dImagePreview指令
 
 Image容器元素上使用`dImagePreview`指令
 
- ### dImagePreview 参数
+### dImagePreview 参数
 
 | 参数              | 类型                         | 默认        |   说明                              |
 | :---------------: | :-------------------------: | :---------: | :--------------------------------:  |

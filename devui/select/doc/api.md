@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-03-15 15:21:38
+ * @LastEditTime: 2020-06-04 15:26:23
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \ng-devui\devui\select\doc\api.md
+--> 
 ### d-select 参数
 | 参数 | 类型 | 默认 | 说明 |
 | :---: | :---: | :---: | :---|
@@ -15,7 +23,7 @@
 | searchFn    | `function` | --         | 可选,搜索函数,当需要自定义下拉选择过滤规则时可以使用 |
 | valueParser | `function`     | --         | 可选,决定选择框文字如何显示,默认显示filterKey字段或者本身的值  |
 | formatter   | `function`     | --         | 可选,决定下拉框每项文字如何显示,默认显示filterKey字段或者本身的值 |
-| direction  | `string` | ''         | 可选,下拉选框尺寸,有三种选择`'up'`,`'down'`,`'auto'`|
+| direction  | `'up'`,`'down'`,`'auto'` | ''         | 可选,下拉选框尺寸,有三种选择`'up'`,`'down'`,`'auto'`|
 | overview    | `string`      | 'border'         | 可选,决定选择框样式显示,默认有边框`'border'`,`'underlined'`  |
 | enableLazyLoad | `boolean` | false         | 可选,是否支持数据懒加载，用于滚动到底部时动态请求数据 |
 | extraConfig | `object`      | N/A         | 可选, 可输入配置项 参考示例                  |
@@ -34,7 +42,7 @@
 | customViewDirection | `'bottom' \| 'right'\| 'left'`     | 'bottom'         | customViewTemplate所处的相对下拉列表的位置 |
 | appendToBody    | `boolean`      | false      | 可选,true会被附加到body                     |
 | appendToBodyDirections| `Array<AppendToBodyDirection \| ConnectedPosition>`   |`['rightDown', 'leftDown', 'rightUp', 'leftUp']` |可选， 方向数组优先采用数组里靠前的位置，AppendToBodyDirection和 ConnectedPosition请参考dropdown|
-| width    | `number`      | --     | 可选,搭配appendToBody使用，设置下拉宽度       
+| width    | `number`      | --     | 可选,搭配appendToBody使用，设置下拉宽度 |
 | virtualScroll    | `boolean`      | false      | 可选,是否虚拟滚动，大数据量场景试用                     |
 |allowClear|  `boolean`      | false      | 可选, 配置是否允许清空选值，仅单选场景适用     |
 |inputItemTemplate| `TemplateRef` | --   |可选参数,自定义模板，若传入，会忽略ContentChild |
@@ -42,7 +50,7 @@
 ### d-select 事件
 | 事件 | 类型  | 说明 |
 | :---: | :---:| :---|
-| valueChange | `EventEmitter<Array<any>|any>`      | 可选,输出函数,当选中某个选项项后,将会调用此函数,参数为当前选择项的值 |
+| valueChange | `EventEmitter<Array<any>\|any>`      | 可选,输出函数,当选中某个选项项后,将会调用此函数,参数为当前选择项的值 |
 | toggleChange| `EventEmitter<boolean>`         | 可选,输出函数,下拉打开关闭toggle事件                              |
 | loadMore    | `EventEmitter<{instance: Selectcomponent, event: ScrollEvent}>`          | 懒加载触发事件，配合`enableLazyLoad`使用，使用`$event.instance.loadFinish()`结束本次加载, event为懒加载监听的滚动事件，参考dLazyLoad |
 

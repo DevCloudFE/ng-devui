@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-03-15 15:21:37
+ * @LastEditTime: 2020-06-05 17:49:31
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \ng-devui\devui\anchor\doc\api.md
+--> 
 # Anchor使用说明
 
 需要三个指令配合使用: 'dAnchor'、'dAnchorLink'、'dAnchorBox'
@@ -33,9 +41,10 @@
 | dAnchorLink           | `string`       | --              | 必选，点击滑动的目标锚点的名字                          |
 | anchorActive          | `string`       | --              | 可选，锚点处于激活状态的时候，链接生效对应的css类名           |
 
-## dAnchorBox指令 （必须有一个容器，否则功能无法使用）
+## dAnchorBox指令 
+#### （必须有一个容器，否则功能无法使用）
 
-定义一个扫描锚点的容器，放在dAnchor与dAnchorLink的公共父节点上，用于锚点和链接之间的通信
+定义一个扫描锚点的容器，放在dAnchor与dAnchorLink的公共父节点上，用于锚点和链接之间的通信 
 
 | 参数                  | 类型                          | 默认            |   说明                                                |
 | :-------------------: | :--------------------------: | :-------------: | :--------------------------------------------------: |
@@ -43,7 +52,8 @@
 | defaultAnchor         | `string`                      | --          | 可选，进入页面后默认被激活的锚点链接，一般设置为第一个锚点，如果不设置，那么第一个锚点需要在滑动到顶部位置的时候才能激活链接  |
 | scrollTarget          | `HTMLElement`                  | document.documentElement(document.body) | 可选，设置要发生滚动的容器，一般为滚动条所在容器，为主页面的滚动条时候可以不设置   |
 
-## dAnchorHashSupport指令 （dAnchorBox辅助指令）
+## dAnchorHashSupport指令 
+### （dAnchorBox辅助指令）
 
 | 参数                          | 类型          | 默认            |   说明                                                                      |
 | :--------------------------: | :-----------: | :-------------: | :-------------------------------------------------------------------------: |
@@ -51,6 +61,7 @@
 | scrollToAnchorByHashOnlyInit | `boolean`     | false           | 可选，true为只有初始化的时候接收来自路由的fragment字段变化并接收，用于处理复杂场景 |
 
 dAnchorHashSupport指令搭配dAnchorBox使用， 可以绑定路由的hash fragment， 举例 xxx.xxx/xxx#foo,  foo字段为哈希字段。
+跳转哈希字段可以使用anchor组件，路由navigate，routerLink的fragment字段等。
 跳转哈希字段可以使用anchor组件，路由navigate，routerLink的fragment字段等。
 
 ### 跳转到anchor的方法
