@@ -3,9 +3,9 @@
 | 参数        | 类型          | 默认        |   说明                 |
 | :---------: | :----------: | :---------: | :------------------------------------------|
 | id          | `string`      | --      | 可选，button id |
-| type        | `IButtonType`  | button      | 可选，类型 'button'\|'submit'\|'reset' |
-| bsStyle     | `IButtonStyle` | primary     | 可选，风格 'primary' \| 'common' \| 'text' \| 'text-dark'|
-| bsSize      | `IButtonSize`  | 'md'      | 可选，大小 'lg' \| 'md' \| 'sm' \| 'xs' |
+| type        | `button`\|`submit`\|`reset`  | button      | 可选，按钮类型 |
+| bsStyle     | `primary` \| `common` \| `text` \| `text-dark` | primary | 可选，按钮风格 |
+| bsSize      | `lg` \| `md` \| `sm` \| `xs`   | md     | 可选，按钮大小 |
 | bordered    | `boolean`      | false       | 可选，是否有边框  |
 | icon        | `string`       | --      | 可选， 自定义按钮图标 |
 | showLoading | `boolean`      | false       | 可选，是否显示加载提示 |

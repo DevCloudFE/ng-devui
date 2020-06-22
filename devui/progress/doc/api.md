@@ -1,11 +1,3 @@
-<!--
- * @Author: your name
- * @Date: 2020-03-15 15:21:38
- * @LastEditTime: 2020-06-04 15:00:22
- * @LastEditors: your name
- * @Description: In User Settings Edit
- * @FilePath: \ng-devui\devui\progress\doc\api.md
---> 
 ### d-progress 参数
 
 | 参数            | 类型          | 默认        |   说明                 |

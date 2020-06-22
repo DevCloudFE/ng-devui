@@ -1,11 +1,4 @@
-<!--
- * @Author: your name
- * @Date: 2020-03-15 15:21:37
- * @LastEditTime: 2020-06-05 17:49:31
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \ng-devui\devui\anchor\doc\api.md
---> 
+
 # Anchor使用说明
 
 需要三个指令配合使用: 'dAnchor'、'dAnchorLink'、'dAnchorBox'

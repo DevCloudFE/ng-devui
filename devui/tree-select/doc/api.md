@@ -1,6 +1,6 @@
 ## TreeSelect 使用说明
 
-### dTreeSelect 参数
+### d-tree-select 参数
 
 | 参数 | 类型 | 默认 | 说明 |
 | :---------: | :----------: | :---------: | :------------------------------------------|
@@ -25,7 +25,7 @@
 | iconTemplatePosition | `'before-checkbox' \| 'after-checkbox'` | 'before-checkbox' | 可选，自定义template的位置 |
 | allowClear | `boolean` | false | 可选，是否允许单选模式下点击输入框上的清除按钮来清空已选中的项目。`allowUnselect`必须为`true`，否则将破坏体验一致性规则。 |
 
-### dTreeSelect 事件
+### d-tree-select 事件
 
 | 事件                  | 类型                                        |    说明                                          |
 | :-------------------: | :----------------------------------------: | :----------------------------------------------: |

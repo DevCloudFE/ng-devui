@@ -1,11 +1,3 @@
-<!--
- * @Author: your name
- * @Date: 2020-06-03 11:02:15
- * @LastEditTime: 2020-06-04 16:52:30
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \ng-devui\devui\image-preview\doc\api.md
---> 
 ## 如何使用
 
 ### 引用

@@ -1,11 +1,4 @@
-<!--
- * @Author: your name
- * @Date: 2020-03-15 15:21:38
- * @LastEditTime: 2020-06-04 11:36:56
- * @LastEditors: your name
- * @Description: In User Settings Edit
- * @FilePath: \ng-devui\devui\toast\doc\api.md
---> 
+### d-toast 参数
 | 参数        | 类型          | 默认        |   说明                 |
 | :---------: | :----------: | :---------: | :------------------------------------------|
 | value |  `Array<Message>` | -- | 必选，消息内容数组，Message对象定义见下文|

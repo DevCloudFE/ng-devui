@@ -1,11 +1,4 @@
-<!--
- * @Author: your name
- * @Date: 2020-03-15 15:21:37
- * @LastEditTime: 2020-06-04 11:12:19
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \ng-devui\devui\auto-complete\doc\api.md
---> 
+
 ### d-auto-complete 参数
 | 参数        | 类型          | 默认        |   说明                 |
 | :---------: | :----------: | :---------: | :------------------------------------------|
