@@ -12,3 +12,7 @@
 | required        | `boolean`       | false      | 可选，表单选项是否必填 |
 | hasHelp        | `boolean`       | false      | 可选，表单项是否需要帮助指引 |
 | helpTips        | `string`       | ''      | 可选，表单项帮助指引提示内容，需配合 `hasHelp`使用 |
+
+## d-form-control参数
+
+## d-form-item参数

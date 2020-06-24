@@ -9,11 +9,11 @@
 `import {ImagePreviewModule} from 'ng-devui/image-preview'`;
 
 
-### 使用dImagePreview指令
+### dImagePreview指令
 
 Image容器元素上使用`dImagePreview`指令
 
- ### dImagePreview 参数
+### dImagePreview 参数
 
 | 参数              | 类型                         | 默认        |   说明                              |
 | :---------------: | :-------------------------: | :---------: | :--------------------------------:  |

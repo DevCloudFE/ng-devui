@@ -1,4 +1,4 @@
-### 参数
+### d-tags-input 参数
 | 参数        | 类型          | 默认        |   说明                 |
 | :---------: | :----------: | :---------: | :------------------------------------------|
 | tags        | `Array`        | []         | 必选，记录输入的标签和选择的标签列表 |
@@ -14,7 +14,7 @@
 | checkBeforeAdd | `Function\|Promise\|Observable`   | 无      | 可选，自定义校验函数，类型为(newTag: string) => boolean 或者Promise<boolean>或者Observable<boolean> |
 | disabled | `boolean`   | false      | 可选，disabled灰化状态 |
 
-### 事件
+### d-tags-input 事件
 | 事件        | 类型      |   说明                 |
 | :---------: | :----------: | :------------------|
 | valueChange  | `EventEmitter<any>` | 当选中某个选项项后，将会调用此函数，参数为当前选择项的值。如果需要获取所有选择状态的值，请使用(ngModelChange)|
