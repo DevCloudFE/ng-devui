@@ -1,4 +1,4 @@
-:host ::ng-deep .tag-custom {
-  background: #5170ff !important;
-  color: white !important;
+:host ::ng-deep .devui-tag-item.tag-custom {
+  background-color: #5170ff;
+  color: white;
 }

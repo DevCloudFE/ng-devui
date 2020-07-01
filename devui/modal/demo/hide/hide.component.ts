@@ -7,7 +7,6 @@ import { ModalFormComponent } from './modal-form.component';
   templateUrl: './hide.component.html'
 })
 export class HideComponent {
-
   constructor(private dialogService: DialogService) {
 
   }
@@ -25,7 +24,7 @@ export class HideComponent {
       backdropCloseable: true,
       buttons: [
         {
-          cssClass: 'stress',
+          cssClass: 'primary',
           text: '保存',
           handler: ($event: Event) => {
             results.modalInstance.onHidden();
@@ -48,7 +47,7 @@ export class HideComponent {
         dialogtype: 'warning',
         buttons: [
           {
-            cssClass: 'stress',
+            cssClass: 'primary',
             text: '保存',
             handler: ($event: Event) => {
               results.modalInstance.hide();

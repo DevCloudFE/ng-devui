@@ -18,4 +18,8 @@ export class MenuComponent implements OnInit {
   ngOnInit(): void {
 
   }
+
+  toggleEvent(event) {
+    console.log(event);
+  }
 }

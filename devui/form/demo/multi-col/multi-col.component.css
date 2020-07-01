@@ -1,4 +1,17 @@
 .single-checkbox {
-  display: inline-block;
-  margin-right: 10px;
+  display: block;
+  margin-right: 8px;
+}
+
+.single-checkbox:not(:last-child) {
+  margin-bottom: 8px;
+}
+
+.mul-col-label-withTips {
+  margin-top: -2px;
+  padding-bottom: 6px;
+}
+
+:host ::ng-deep .devui-tags-host > .devui-tags {
+  padding: 1px 5px;
 }

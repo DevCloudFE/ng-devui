@@ -1,9 +1,9 @@
 @import '../style/theme/color';
 
 :host {
-  padding-right: 10px;
+  padding-right: 20px;
   display: block;
-  line-height: 32px;
+  line-height: 18px;
 }
 
 .devui-radio {
@@ -11,8 +11,8 @@
     cursor: not-allowed;
   }
 
-  font-size: 14px;
-  line-height: 1.42857143;
+  font-size: 12px;
+  line-height: 1.5;
   font-weight: normal;
   cursor: pointer;
   color: $dark-1;
@@ -30,18 +30,18 @@
     }
 
     .devui-inner {
-      fill: $brand-1;
+      fill: $hwc-color-icon-hover-active;
     }
   }
 
   &:hover:not(.disabled) svg .devui-outer {
-    stroke: $hover-control;
+    stroke: $hwc-color-border-active;
   }
 
   &:active:not(.disabled),
   &:focus:not(.disabled) {
     svg .devui-outer {
-      stroke: $brand-2;
+      stroke: $hwc-color-border-active;
     }
   }
 
@@ -49,7 +49,7 @@
     svg {
       .devui-outer {
         opacity: 1;
-        stroke: $brand-1;
+        stroke: $hwc-color-border-active;
         transition: stroke 50ms cubic-bezier(0.755, 0.05, 0.855, 0.06);
 
         &.disabled {
@@ -69,28 +69,19 @@
       }
     }
 
-    &:not(.disabled) .devui-radio-material {
-      &:hover {
-        svg {
-          .devui-outer {
-            stroke: $hover-control;
-          }
-
-          .devui-inner {
-            fill: $hover-control;
-          }
-        }
-      }
-
+    &:not(.disabled) {
       &:active,
-      &:focus {
-        svg {
-          .devui-outer {
-            stroke: $brand-2;
-          }
+      &:focus,
+      &:hover {
+        .devui-radio-material {
+          svg {
+            .devui-outer {
+              stroke: $hwc-color-border-active-and-hover;
+            }
 
-          .devui-inner {
-            fill: $brand-2;
+            .devui-inner {
+              fill: $hwc-color-icon-active-and-hover;
+            }
           }
         }
       }
@@ -123,7 +114,7 @@
   .devui-radio-label {
     color: $dark-1;
     margin-left: 8px;
-    font-size: 14px;
+    font-size: 12px;
   }
 
   .devui-radio-input {

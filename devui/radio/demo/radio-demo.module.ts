@@ -7,6 +7,8 @@ import { RadioModule } from '../radio.module';
 import { RadioDemoComponent } from './radio-demo.component';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
 import { BasicComponent } from './basic/basic.component';
+import { ConditionChangeComponent } from './condition-change/condition-change.component';
+import { ConditionRadioGroupComponent } from './condition-radio-group/condition-radio-group.component';
 import { DisabledComponent } from './disabled/disabled.component';
 import { HorizontalComponent } from './horizontal/horizontal.component';
 import { VerticalComponent } from './vertical/vertical.component';
@@ -35,6 +37,8 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
   declarations: [
     RadioDemoComponent,
     BasicComponent,
+    ConditionChangeComponent,
+    ConditionRadioGroupComponent,
     DisabledComponent,
     HorizontalComponent,
     VerticalComponent,

@@ -1,0 +1,19 @@
+<section>
+  <div class="row">
+    <div class="col-md-5">
+      <d-select
+        [options]="options"
+        [isSearch]="true"
+        [filterKey]="'name'"
+        [ngModel]="currentOption | parseFrom: 'value':options"
+        (ngModelChange)="modelChange($event)"
+        [placeholder]="'Search'"
+      ></d-select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-5">
+      <pre>Current Select: {{ currentOption | json }}</pre>
+    </div>
+  </div>
+</section>

@@ -15,7 +15,7 @@
 
 <ng-template #popTpl>
   <div
-    class="devui-dropdown-menu"
+    class="devui-dropdown-menu devui-dropdown-overlay"
     [style.display]="isOpen && (source?.length || noResultItemTemplate) ? 'inline-block' : 'none'"
     [style.top]="overview === 'multiline' ? (position?.top < labelMinHeight ? '50%' : '100%') : '100%'"
     [style.left]="overview === 'multiline' ? position?.left + 'px' : '0'"

@@ -1,0 +1,11 @@
+<h4>选项包含"禁用"字段的checkbox无法切换状态</h4>
+<d-checkbox-group
+  [(ngModel)]="valuesForbidden"
+  [name]="'city-group-forbidden'"
+  [options]="optionsForbidden"
+  [direction]="'row'"
+  [isShowTitle]="true"
+  [beforeChange]="beforeChange"
+  (change)="onCheckboxChange($event)"
+>
+</d-checkbox-group>

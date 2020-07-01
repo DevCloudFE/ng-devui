@@ -1,5 +1,9 @@
 <ng-container *ngIf="showMenu; else breadcrumbContentTpl">
-  <span [ngClass]="{ 'devui-breadcrumb-item-active': isOpen }" #origin>
+  <span
+    [ngClass]="{ 'devui-breadcrumb-item-active': isOpen }"
+    #origin
+    class="devui-dropdown-no-border devui-dropdown-origin devui-breadcrumb-dropdown-origin"
+  >
     <ng-template [ngTemplateOutlet]="breadcrumbContentTpl"></ng-template>
     <i
       class="devui-breadcrumb-down-icon"
@@ -27,7 +31,7 @@
           ></polygon>
         </g>
       </svg>
-      <div dDropDownMenu>
+      <div dDropDownMenu class="devui-dropdown-menu devui-dropdown-overlay">
         <ng-template
           [ngTemplateOutlet]="customMenuTemplate ? customMenuTemplate : dropDownMenuTpl"
           [ngTemplateOutletContext]="{
@@ -48,7 +52,7 @@
 
 <ng-template #dropDownMenuTpl>
   <div *ngIf="isSearch" class="devui-search-container">
-    <d-search [size]="'sm'" (searchFn)="searchEvent($event)"></d-search>
+    <d-search [size]="'sm'" (searchFn)="searchEvent($event)" [cssClass]="'devui-search-in-dropdown'"></d-search>
   </div>
   <ul class="devui-breadcrumb-dropdown-menu">
     <li *ngFor="let item of menuListDisplay" title="{{ item.name }}">

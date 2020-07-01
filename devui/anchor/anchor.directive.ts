@@ -68,6 +68,7 @@ export class AnchorDirective implements AfterViewInit, OnDestroy {
   @HostListener('click') // 鼠标落入范围，激活anchor
   beFocused() {
     this.boxElement.forceActiveAnchor(this.anchor, 'click-inside');
+    this.boxElement.isScrollingToTarget = false;
   }
 
   throttle = () => {
@@ -93,19 +94,20 @@ export class AnchorDirective implements AfterViewInit, OnDestroy {
   }
 
   checkActiveStatus = (activeChangeBy?: AnchorActiveChangeSource) => {
+    if (this.boxElement.isScrollingToTarget) { return; }
     const top = this.element.getBoundingClientRect().top - (this.boxElement.view && this.boxElement.view.top || 0);
     const bottom = this.element.getBoundingClientRect().bottom - (this.boxElement.view && this.boxElement.view.top || 0);
 
     // 首个个特殊处理
     if (this.anchor === this.boxElement.defaultAnchor) {
       this.activeChangeBy = activeChangeBy || 'scroll';
-      this.isActive = bottom > this.REACH_TOP_VISION_OFFSET  ? true : false;
+      this.isActive = bottom > this.REACH_TOP_VISION_OFFSET;
       return;
     }
 
     // 默认处理
     this.activeChangeBy = activeChangeBy || 'scroll';
-    this.isActive = bottom > this.REACH_TOP_VISION_OFFSET  && top < this.REACH_TOP_VISION_OFFSET ? true : false;
+    this.isActive = bottom > this.REACH_TOP_VISION_OFFSET  && top < this.REACH_TOP_VISION_OFFSET;
   }
 
   updateScrollListenTarget () {

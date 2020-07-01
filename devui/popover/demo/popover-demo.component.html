@@ -1,4 +1,4 @@
-<div class="demo-container" dAnchorBox [view]="{ top: 60, bottom: 0 }">
+<div class="demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 60, bottom: 0 }">
   <d-demo-nav [navItems]="navItems"></d-demo-nav>
   <div class="demo-example" [dAnchor]="'basic-usage'">
     <div class="demo-title">基本用法</div>
@@ -30,11 +30,11 @@
       <d-scroll-element demo></d-scroll-element>
     </d-codebox>
   </div>
-  <div class="demo-example" [dAnchor]="'mouse-can-move-in-content'">
-    <div class="demo-title">鼠标可移入内容</div>
-    <div class="demo-text">hoverToContent设置</div>
-    <d-codebox id="hover-to-content" [sourceData]="hoverToContentSource">
-      <d-hover-to-content demo></d-hover-to-content>
+  <div class="demo-example" [dAnchor]="'hover-delay-time'">
+    <div class="demo-title">鼠标移出宿主延迟时间</div>
+    <div class="demo-text">hoverDelayTime设置</div>
+    <d-codebox id="hover-delay-time" [sourceData]="hoverDelayTimeSource">
+      <d-hover-delay-time demo></d-hover-delay-time>
     </d-codebox>
   </div>
 </div>

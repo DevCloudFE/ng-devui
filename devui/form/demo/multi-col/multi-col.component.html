@@ -84,7 +84,7 @@
       </div>
       <div class="u-1-3">
         <d-form-item>
-          <d-form-label [hasHelp]="true" [helpTips]="'这是计划名，计划名字，计划名'">标签选项</d-form-label>
+          <d-form-label class="mul-col-label-withTips" [hasHelp]="true" [helpTips]="'这是计划名，计划名字，计划名'">标签选项</d-form-label>
           <d-form-control>
             <d-tags-input
               name="tag"
@@ -103,7 +103,7 @@
         <d-form-item>
           <d-form-label>单选框</d-form-label>
           <d-form-control>
-            <d-radio-group name="schedule" [cssStyle]="'row'" [(ngModel)]="formData.radioValue">
+            <d-radio-group name="schedule" [cssStyle]="'column'" [(ngModel)]="formData.radioValue">
               <d-radio *ngFor="let option of radioOptions" [value]="option">
                 {{ option.label }}
               </d-radio>

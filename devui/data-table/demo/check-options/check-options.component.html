@@ -1,0 +1,45 @@
+<d-data-table [dataSource]="basicDataSource" [tableWidthConfig]="tableWidthConfig">
+  <thead dTableHead [checkable]="true" [checkOptions]="checkOptions">
+    <tr dTableRow>
+      <th dHeadCell>#</th>
+      <th dHeadCell *ngFor="let colOption of dataTableOptions.columns">{{ colOption.header }}</th>
+    </tr>
+  </thead>
+  <tbody dTableBody>
+    <ng-template let-rowItem="rowItem" let-rowIndex="rowIndex" let-nestedIndex="nestedIndex">
+      <tr dTableRow [ngClass]="{ 'table-row-selected': rowItem.$checked }">
+        <td dTableCell class="devui-checkable-cell">
+          <d-checkbox
+            [ngModelOptions]="{ standalone: true }"
+            (ngModelChange)="onRowCheckChange($event, rowIndex, nestedIndex, rowItem)"
+            [ngModel]="rowItem.$checked"
+            [halfchecked]="rowItem.$halfChecked"
+            [disabled]="rowItem.$disabled"
+            dTooltip
+            [content]="rowItem.$checkBoxTips"
+            [position]="['top', 'right', 'bottom', 'left']"
+            [showAnimation]="false"
+          >
+          </d-checkbox>
+        </td>
+        <td dTableCell>{{ rowIndex + 1 }}</td>
+        <td dTableCell *ngFor="let colOption of dataTableOptions.columns">
+          {{ colOption.fieldType === 'date' ? (rowItem[colOption.field] | i18nDate: 'short':false) : rowItem[colOption.field] }}
+        </td>
+      </tr>
+    </ng-template>
+  </tbody>
+</d-data-table>
+<d-pagination
+  class="page-nation"
+  [size]="'sm'"
+  [total]="pager.total"
+  [pageSize]="pager.pageSize"
+  [showPageSelector]="false"
+  [totalItemText]="'总条数'"
+  [(pageIndex)]="pager.pageIndex"
+  [canViewTotal]="true"
+  [lite]="true"
+  (pageIndexChange)="onPageIndexChange($event)"
+>
+</d-pagination>

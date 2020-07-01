@@ -1,4 +1,4 @@
-<div class="demo-container" dAnchorBox [view]="{ top: 60, bottom: 0 }">
+<div class="demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 60, bottom: 0 }">
   <d-demo-nav [navItems]="navItems"></d-demo-nav>
   <div class="demo-example" [dAnchor]="'basic-usage'">
     <div class="demo-title">基本用法</div>
@@ -61,6 +61,15 @@
     </div>
     <d-codebox id="draggable" [sourceData]="draggableSource">
       <d-draggable demo></d-draggable>
+    </d-codebox>
+  </div>
+  <div class="demo-example" [dAnchor]="'check-control-tree'">
+    <div class="demo-title">控制父子check关系</div>
+    <div class="demo-text">
+      通过OperableTree的 checkableRelation 控制check时父子节点的表现
+    </div>
+    <d-codebox id="draggable" [sourceData]="checkControlSource">
+      <d-check-control demo></d-check-control>
     </d-codebox>
   </div>
 </div>

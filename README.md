@@ -7,7 +7,7 @@
 </br>
   <a href="README.md"><img src="https://img.shields.io/badge/document-English-blue" alt="Document"></a>
   <a href="README_zh_CN.md"><img src="https://img.shields.io/badge/%E6%96%87%E6%A1%A3-%E4%B8%AD%E6%96%87-blue" alt="Document"></a>
-    <a href="https://www.npmjs.com/package/ng-devui"><img src="https://img.shields.io/npm/v/ng-devui" alt="Npm"></a>
+  <a href="https://www.npmjs.com/package/ng-devui"><img src="https://img.shields.io/npm/v/ng-devui" alt="Npm"></a>
   <a href="https://gitter.im/devui-design/devui-design"><img src="https://img.shields.io/gitter/room/devui-design/devui-design" alt="Chat"></a>
 </p>
 
@@ -23,14 +23,14 @@ To see more in [devui.design](https://devui.design/home).
 
 ## Angular Support
 
-Now supports Angular <font color=red>`^8.0.0`</font>
+Now supports Angular <font color=red>`^9.0.0`</font>
 
 ## Getting Started
 
 1. Create a new project
 
 ``` bash
-$ ng new New-Project
+ng new New-Project
 ```
 
 2. Installation:
@@ -80,7 +80,7 @@ export class AppModule { }
 5. Debugging
 
 ```bash
-$ ng serve --open
+ng serve --open
 ```
 
 ## Contribution

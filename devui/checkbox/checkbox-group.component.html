@@ -12,6 +12,7 @@
           [labelTemplate]="labelTemplate"
           [showAnimation]="showAnimation"
           (ngModelChange)="toggle($event, i)"
+          [beforeChange]="beforeChange"
         >
         </d-checkbox>
       </span>

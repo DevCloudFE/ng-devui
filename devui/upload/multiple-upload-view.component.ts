@@ -30,6 +30,7 @@ export class MultipleUploadViewComponent extends UploadComponent implements OnDe
   @Input() uploadedFilesRef: TemplateRef<any>;
   @Input() filePath: string;
   @Output() deleteUploadedFileEvent: EventEmitter<any> = new EventEmitter<any>();
+  @Input() setCustomUploadOptions: (files, uploadOptions) => IUploadOptions;
   UploadStatus = UploadStatus;
   fileUploaders: Array<FileUploader> = [];
   i18nText: I18nInterface['upload'];
@@ -43,12 +44,20 @@ export class MultipleUploadViewComponent extends UploadComponent implements OnDe
   }
 
   addFile(file) {
-    super.addFile(file, this.uploadOptions);
+    let uploadOptions = this.uploadOptions;
+    if (this.setCustomUploadOptions) {
+      uploadOptions = this.setCustomUploadOptions(file, this.uploadOptions);
+    }
+    super.addFile(file, uploadOptions);
   }
 
   deleteFile(file) {
     super.deleteFile(file);
     this.deleteUploadedFileEvent.emit(file);
+  }
+
+  deletePreUploadFile(file) {
+    super.deleteFile(file);
   }
 
   removeFiles() {
@@ -63,6 +72,7 @@ export class MultipleUploadViewComponent extends UploadComponent implements OnDe
   _onDeleteUploadedFile(filePath: string) {
     this.deleteUploadedFileEvent.emit(filePath);
   }
+
   ngOnDestroy(): void {
     if (this.i18nSubscription) {
       this.i18nSubscription.unsubscribe();

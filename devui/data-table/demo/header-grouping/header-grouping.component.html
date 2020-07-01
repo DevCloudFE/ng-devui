@@ -1,0 +1,25 @@
+<d-data-table [type]="'striped'" [scrollable]="true" [tableWidthConfig]="tableWidthConfig" [dataSource]="basicDataSource">
+  <thead dTableHead>
+    <tr dTableRow>
+      <th dHeadCell rowspan="2">#</th>
+      <th dHeadCell rowspan="2">Date of birth</th>
+      <th dHeadCell colspan="2" [style.textAlign]="'center'">Name</th>
+      <th dHeadCell rowspan="2" [sortable]="true">Gender</th>
+    </tr>
+    <tr dTableRow>
+      <th dHeadCell [sortable]="true">First Name</th>
+      <th dHeadCell [sortable]="true">Last Name</th>
+    </tr>
+  </thead>
+  <tbody dTableBody>
+    <ng-template let-rowItem="rowItem" let-rowIndex="rowIndex">
+      <tr dTableRow>
+        <td dTableCell>{{ rowIndex + 1 }}</td>
+        <td dTableCell>{{ rowItem['dob'] | i18nDate: 'short':false }}</td>
+        <td dTableCell>{{ rowItem['firstName'] }}</td>
+        <td dTableCell>{{ rowItem['lastName'] }}</td>
+        <td dTableCell>{{ rowItem['gender'] }}</td>
+      </tr>
+    </ng-template>
+  </tbody>
+</d-data-table>

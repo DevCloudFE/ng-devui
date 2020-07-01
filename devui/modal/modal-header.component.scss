@@ -3,15 +3,17 @@
 @import '../style/mixins/index';
 
 .modal-header {
-  padding: 10px 20px 0 20px;
-  height: 43px;
+  padding: 30px 30px 0 30px;
+  height: 56px;
+  position: relative;
+  border: none; // 覆盖bootStrap默认样式
 
   .standard-title {
-    height: 30px;
-    line-height: 30px;
+    height: 26px;
+    line-height: 26px;
     color: $dark-1;
     letter-spacing: 0;
-    font-size: 16px;
+    font-size: 18px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -19,46 +21,58 @@
 }
 
 button.close {
-  float: right;
-  font-size: 21px;
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  font-size: 14px;
   font-weight: bold;
   line-height: 1;
   color: #000000;
   text-shadow: 0 1px 0 $bg-white;
-  filter: alpha(opacity=20);
-  opacity: 0.2;
   cursor: pointer;
   background: transparent;
   border: 0;
   -webkit-appearance: none;
-}
 
-svg.svg-icon-close > g > g {
-  fill: $dark-1;
+  svg.svg-icon-close polygon {
+    fill: $dark-2;
+  }
+
+  &:hover {
+    svg.svg-icon-close polygon {
+      fill: $hwc-color-icon-hover-active;
+    }
+  }
 }
 
 .header-alert-icon {
-  display: inline;
+  display: inline-block;
   vertical-align: middle;
   margin-right: 5px;
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+  text-align: center;
+  margin-top: -2px; // 使图标对其
+
+  path.devui-icon-warning-outer {
+    fill: $hwc-status-warning-border;
+  }
+
+  path.devui-icon-warning-inner {
+    fill: $font-white;
+    stroke: $font-white;
+  }
 }
 
 .title-text {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
   vertical-align: middle;
 }
 
 button {
   outline: none;
-  height: 30px;
-  width: 30px;
-}
-
-.close:hover {
-  background: $hover-content;
-
-  svg g {
-    fill: $hover-control;
-  }
+  height: 20px;
+  width: 20px;
 }

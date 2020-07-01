@@ -1,58 +1,58 @@
-### d-single-upload 参数
+## d-single-upload 参数
 
-|       参数       |                类型                |    默认    | 说明                                    |
-| :--------------: | :--------------------------------: | :--------: | :-------------------------------------- |
-|   fileOptions    |  `IFileOptions`，参考下方 options  |     --     | 必选，待上传文件配置                    |
-|     filePath     |              `string`              |     --     | 必选，文件路径                          |
-|  uploadOptions   | `IUploadOptions`，参考下方 options |     --     | 必选，上传配置                          |
-|    autoUpload    |             `boolean`              |   false    | 可选，是否自动上传                      |
-|   placeholderText    |              `string`              | '选择文件' | 可选，上传输入框中的 Placeholder 文字   |
-|   confirmText    |              `string`              |   '确定'   | 可选，错误信息弹出框中确认按钮文字      |
-| preloadFilesRef  |        `TemplateRef <any >`        |     --     | 可选，用于创建自定义 已选择文件列表模板 |
-|    uploadText    |              `string`              |   '上传'   | 可选，上传按钮文字                      |
-|  uploadedFiles   |          `Array <Object>`          |     []     | 可选，获取已上传的文件列表              |
-| uploadedFilesRef |        `TemplateRef <any>`         |     --     | 可选，用于创建自定义 已上传文件列表模板 |
-|    withoutBtn    |             `boolean`              |   false    | 可选，是否舍弃按钮                      |
-|    enableDrop    |             `boolean`              |   false    | 可选，是否支持拖拽                      |
+|       参数       |                         类型                         |    默认    | 说明                                                                               | 跳转 Demo                                       |
+| :--------------: | :--------------------------------------------------: | :--------: | :--------------------------------------------------------------------------------- | ----------------------------------------------- |
+|   fileOptions    |           `IFileOptions`，参考下方 options           |     --     | 必选，待上传文件配置                                                               | [基本用法](/components/upload/demo#basic-usage) |
+|     filePath     |                       `string`                       |     --     | 必选，文件路径                                                                     | [基本用法](/components/upload/demo#basic-usage) |
+|  uploadOptions   |          `IUploadOptions`，参考下方 options          |     --     | 必选，上传配置                                                                     | [基本用法](/components/upload/demo#basic-usage) |
+|    autoUpload    |                      `boolean`                       |   false    | 可选，是否自动上传                                                                 | [基本用法](/components/upload/demo#basic-usage) |
+| placeholderText  |                       `string`                       | '选择文件' | 可选，上传输入框中的 Placeholder 文字                                              | [基本用法](/components/upload/demo#basic-usage) |
+| preloadFilesRef  |                 `TemplateRef <any >`                 |     --     | 可选，用于创建自定义 已选择文件列表模板                                            |[自定义](/components/upload/demo#custom)   
+|    uploadText    |                       `string`                       |   '上传'   | 可选，上传按钮文字                                                                 | [基本用法](/components/upload/demo#basic-usage) |
+|  uploadedFiles   |                   `Array <Object>`                   |     []     | 可选，获取已上传的文件列表                                                         | [基本用法](/components/upload/demo#basic-usage) |
+| uploadedFilesRef |                 `TemplateRef <any>`                  |     --     | 可选，用于创建自定义 已上传文件列表模板                                            |[自定义](/components/upload/demo#custom)   
+|    withoutBtn    |                      `boolean`                       |   false    | 可选，是否舍弃按钮                                                                 | [基本用法](/components/upload/demo#basic-usage) |
+|    enableDrop    |                      `boolean`                       |   false    | 可选，是否支持拖拽                                                                 | [基本用法](/components/upload/demo#basic-usage) |
+|   beforeUpload   | `boolean 、 Promise<boolean> 、 Observable<boolean>` |     --     | 上传前的回调，通过返回`true` or `false` ,控制文件是否上传,参数为文件信息及上传配置 | [基本用法](/components/upload/demo#basic-usage) |
 
-### d-single-upload 事件
+## d-single-upload 事件
 
-|          参数           |                         类型                         | 说明                                                                                                                   |
-| :---------------------: | :--------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------- |
-|      beforeUpload       | `boolean 、 Promise<boolean> 、 Observable<boolean>` | 上传前的回调，通过返回`true` or `false` ,控制文件是否上传,参数为文件信息及上传配置                                                              |
-|        fileOver         |                 `EventEmitter<any>`                  | 支持拖拽上传时，文件移动到可拖放区域触发事件,可拖动的元素移出放置目标时返回`false`，元素正在拖动到放置目标时返回`true` |
-|        fileDrop         |                 `EventEmitter<any>`                  | 支持拖拽上传时，当前拖拽的文件列表回调，单文件上传默认返回第一个文件                                                   |
-|      successEvent       |                 `EventEmitter<any>`                  | 上传成功时的回调函数,返回文件及 xhr 的响应信息                                                                         |
-|       errorEvent        |                 `EventEmitter<any>`                  | 上传错误时的回调函数，返回上传失败的错误信息                                                                           |
-| deleteUploadedFileEvent |                 `EventEmitter<any>`                  | 删除上传文件的回调函数，返回删除文件的路径信息                                                                         |
+|          参数           |        类型         | 说明                                                                                                                   | 跳转 Demo                                       |
+| :---------------------: | :-----------------: | :--------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- |
+|        fileOver         | `EventEmitter<any>` | 支持拖拽上传时，文件移动到可拖放区域触发事件,可拖动的元素移出放置目标时返回`false`，元素正在拖动到放置目标时返回`true` | [基本用法](/components/upload/demo#basic-usage) |
+|        fileDrop         | `EventEmitter<any>` | 支持拖拽上传时，当前拖拽的文件列表回调，单文件上传默认返回第一个文件                                                   | [基本用法](/components/upload/demo#basic-usage) |
+|      successEvent       | `EventEmitter<any>` | 上传成功时的回调函数,返回文件及 xhr 的响应信息                                                                         | [基本用法](/components/upload/demo#basic-usage) |
+|       errorEvent        | `EventEmitter<any>` | 上传错误时的回调函数，返回上传失败的错误信息                                                                           | [基本用法](/components/upload/demo#basic-usage) |
+| deleteUploadedFileEvent | `EventEmitter<any>` | 删除上传文件的回调函数，返回删除文件的路径信息                                                                         | [基本用法](/components/upload/demo#basic-usage) |
 
 ## d-multiple-upload 参数
 
-|       参数       |                类型                |      默认      | 说明                                    |
-| :--------------: | :--------------------------------: | :------------: | :-------------------------------------- |
-|   fileOptions    |  `IFileOptions`，参考下方 options  |       --       | 必选，待上传文件配置                    |
-|     filePath     |              `string`              |       --       | 必选，文件路径                          |
-|  uploadOptions   | `IUploadOptions`，参考下方 options |       --       | 必选，上传配置                          |
-|    autoUpload    |             `boolean`              |     false      | 可选，是否自动上传                      |
-|   placeholderText   |              `string`              | '选择多个文件' | 可选，上传输入框中的 Placeholder 文字   |
-|   confirmText    |              `string`              |     '确定'     | 可选，错误信息弹出框中确认按钮文字      |
-| preloadFilesRef  |         `TemplateRef<any>`         |       --       | 可选，用于创建自定义 已选择文件列表模板 |
-|    uploadText    |              `string`              |     '上传'     | 可选，上传按钮文字                      |
-|  uploadedFiles   |          `Array<Object>`           |       []       | 可选，获取已上传的文件列表              |
-| uploadedFilesRef |         `TemplateRef<any>`         |       --       | 可选，用于创建自定义 已上传文件列表模版 |
-|    withoutBtn    |             `boolean`              |     false      | 可选，是否舍弃按钮                      |
-|    enableDrop    |             `boolean`              |     false      | 可选，是否支持拖拽                      |
+|          参数          |                         类型                         |      默认      | 说明                                                                               | 跳转 Demo                                                      |
+| :--------------------: | :--------------------------------------------------: | :------------: | :--------------------------------------------------------------------------------- | -------------------------------------------------------------- |
+|      fileOptions       |           `IFileOptions`，参考下方 options           |       --       | 必选，待上传文件配置                                                               | [多文件上传](/components/upload/demo#multi-files)              |
+|        filePath        |                       `string`                       |       --       | 必选，文件路径                                                                     | [多文件上传](/components/upload/demo#multi-files)              |
+|     uploadOptions      |          `IUploadOptions`，参考下方 options          |       --       | 必选，上传配置                                                                     | [多文件上传](/components/upload/demo#multi-files)              |
+|       autoUpload       |                      `boolean`                       |     false      | 可选，是否自动上传                                                                 | [自动上传](/components/upload/demo#auto-upload)                |
+|    placeholderText     |                       `string`                       | '选择多个文件' | 可选，上传输入框中的 Placeholder 文字                                              |[基本用法](/components/upload/demo#basic-usage)
+|    preloadFilesRef     |                  `TemplateRef<any>`                  |       --       | 可选，用于创建自定义 已选择文件列表模板                                            | [自定义](/components/upload/demo#custom)                       |
+|       uploadText       |                       `string`                       |     '上传'     | 可选，上传按钮文字                                                                 |[基本用法](/components/upload/demo#basic-usage)
+|     uploadedFiles      |                   `Array<Object>`                    |       []       | 可选，获取已上传的文件列表                                                         | [多文件上传](/components/upload/demo#multi-files)              |
+|    uploadedFilesRef    |                  `TemplateRef<any>`                  |       --       | 可选，用于创建自定义 已上传文件列表模版                                            | [自定义](/components/upload/demo#custom)                       |
+|       withoutBtn       |                      `boolean`                       |     false      | 可选，是否舍弃按钮                                                                 | [自定义](/components/upload/demo#custom)                       |
+|       enableDrop       |                      `boolean`                       |     false      | 可选，是否支持拖拽                                                                 | [多文件上传](/components/upload/demo#multi-files)              |
+|      beforeUpload      | `boolean 、 Promise<boolean> 、 Observable<boolean>` |       --       | 上传前的回调，通过返回`true` or `false` ,控制文件是否上传,参数为文件信息及上传配置 | [动态上传参数](/components/upload/demo#dynamic-upload-options) |
+| setCustomUploadOptions |          `IUploadOptions`，参考下方 options          |       --       | 为每个文件设置自定义的上传参数, 参数为当前选中文件及`uploadOptions`的值            | [自动上传](/components/upload/demo#auto-upload)                |
+|     oneTimeUpload      |                      `boolean`                       |     false      | 可选，是否只调用一次接口上传所有文件                                               | [多文件上传](/components/upload/demo#multi-files)              |
 
-### d-multiple-upload 事件
+## d-multiple-upload 事件
 
-|          参数           |                         类型                         | 说明                                                                                                                   |
-| :---------------------: | :--------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------- |
-|      beforeUpload       | `boolean 、 Promise<boolean> 、 Observable<boolean>` | 上传前的回调，通过返回`true` or `false` ,控制文件是否上传,参数为文件信息及上传配置                                                            |
-|        fileOver         |                 `EventEmitter<any>`                  | 支持拖拽上传时，文件移动到可拖放区域触发事件,可拖动的元素移出放置目标时返回`false`，元素正在拖动到放置目标时返回`true` |
-|        fileDrop         |                 `EventEmitter<any>`                  | 支持拖拽上传时，当前拖拽的文件列表回调，单文件上传默认返回第一个文件                                                   |
-|      successEvent       |                 `EventEmitter<any>`                  | 上传成功时的回调函数,返回文件及 xhr 的响应信息                                                                         |
-|       errorEvent        |                 `EventEmitter<any>`                  | 上传错误时的回调函数，返回上传失败的错误信息                                                                           |
-| deleteUploadedFileEvent |                 `EventEmitter<any>`                  | 删除上传文件的回调函数，返回删除文件的路径信息                                                                         |
+|          参数           |        类型         | 说明                                                                                                                   | 跳转 Demo                                         |
+| :---------------------: | :-----------------: | :--------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
+|        fileOver         | `EventEmitter<any>` | 支持拖拽上传时，文件移动到可拖放区域触发事件,可拖动的元素移出放置目标时返回`false`，元素正在拖动到放置目标时返回`true` | [多文件上传](/components/upload/demo#multi-files) |
+|        fileDrop         | `EventEmitter<any>` | 支持拖拽上传时，当前拖拽的文件列表回调，单文件上传默认返回第一个文件                                                   | [多文件上传](/components/upload/demo#multi-files) |
+|      successEvent       | `EventEmitter<any>` | 上传成功时的回调函数,返回文件及 xhr 的响应信息                                                                         | [多文件上传](/components/upload/demo#multi-files) |
+|       errorEvent        | `EventEmitter<any>` | 上传错误时的回调函数，返回上传失败的错误信息                                                                           | [多文件上传](/components/upload/demo#multi-files) |
+| deleteUploadedFileEvent | `EventEmitter<any>` | 删除上传文件的回调函数，返回删除文件的路径信息                                                                         | [多文件上传](/components/upload/demo#multi-files) |
 
 ### options
 

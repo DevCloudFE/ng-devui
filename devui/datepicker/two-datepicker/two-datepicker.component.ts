@@ -37,10 +37,10 @@ export class TwoDatePickerComponent implements OnInit, OnDestroy {
   @Input() selectedRange = [null, null];
   @Input() hideOnRangeSelected = true;
   customViewTemplate: TemplateRef<any>;
-  @Output() selectRange = new EventEmitter<any>();
-  @ViewChild('leftPicker', { static: false }) leftPicker: ElementRef;
-  @ViewChild('rightPicker', { static: false }) rightPicker: ElementRef;
-  @ViewChild('templateWrap', { static: false }) templateWrap: ElementRef;
+  @Output() selectedRangeChange = new EventEmitter<any>();
+  @ViewChild('leftPicker') leftPicker: ElementRef;
+  @ViewChild('rightPicker') rightPicker: ElementRef;
+  @ViewChild('templateWrap') templateWrap: ElementRef;
 
   datePosition: VerticalConnectionPos = 'bottom';
   selectDateSubject = new Subject<{side: String, date: Date, onlyWrite?: Boolean}>();
@@ -57,7 +57,7 @@ export class TwoDatePickerComponent implements OnInit, OnDestroy {
 
   public currentCalendars = [null, null];
   public cdkConnectedOverlayOrigin: CdkOverlayOrigin;
-  public isOpen = false;
+  private _isOpen = false;
   private startOpen = false;
   private endOpen = false;
   private _whichOpen: 'start'|'end'|false;
@@ -85,13 +85,13 @@ export class TwoDatePickerComponent implements OnInit, OnDestroy {
       this._dateFormat = dateFormat;
     }
   }
-  set maxDate(date: Date | any) {
+  @Input() set maxDate(date: Date | any) {
     const parseDate = this.convertDate(date);
     if (parseDate) {
       this._maxDate = parseDate;
     }
   }
-  set minDate(date: Date | any) {
+  @Input() set minDate(date: Date | any) {
     const parseDate = this.convertDate(date);
     if (parseDate) {
       this._minDate = parseDate;
@@ -100,6 +100,21 @@ export class TwoDatePickerComponent implements OnInit, OnDestroy {
   set whichOpen(side: 'start'|'end'|false) {
     this._whichOpen = side;
     this.switchOpenSub.next(side);
+  }
+  set isOpen(isOpen: boolean) {
+    this._isOpen = isOpen;
+    if (!isOpen) {
+      const ele = this.formWithDropDown();
+      if (ele && ele.classList.contains('devui-dropdown-origin-open')) {
+        ele.classList.remove('devui-dropdown-origin-open');
+      }
+      if (ele && ele.classList.contains('devui-dropdown-origin-top')) {
+        ele.classList.remove('devui-dropdown-origin-top');
+      }
+      if (ele && ele.classList.contains('devui-dropdown-origin-bottom')) {
+        ele.classList.remove('devui-dropdown-origin-bottom');
+      }
+    }
   }
 
   get dateConfig() {
@@ -116,6 +131,9 @@ export class TwoDatePickerComponent implements OnInit, OnDestroy {
   }
   get whichOpen() {
     return this._whichOpen;
+  }
+  get isOpen() {
+    return this._isOpen;
   }
 
   @HostListener('document:click', ['$event'])
@@ -176,6 +194,21 @@ export class TwoDatePickerComponent implements OnInit, OnDestroy {
     }
   }
 
+  formWithDropDown() {
+    if (this.el) {
+      if (!this.el.nativeElement.classList.contains('devui-dropdown-origin')) {
+        const parentEle = this.el.nativeElement.parentElement;
+        if (parentEle && parentEle.classList.contains('devui-dropdown-origin')) {
+          return this.el.nativeElement.parentElement;
+        } else {
+          return;
+        }
+      } else {
+        return this.el.nativeElement;
+      }
+    }
+  }
+
   onPositionChange(position: ConnectedOverlayPositionChange) {
     switch (position.connectionPair.overlayY) {
       case 'top':
@@ -184,6 +217,24 @@ export class TwoDatePickerComponent implements OnInit, OnDestroy {
       break;
       case 'bottom':
         this.datePosition = 'top';
+    }
+    this.changeFormWithDropDown(position.connectionPair.overlayY);
+  }
+
+  changeFormWithDropDown(position) {
+    const ele = this.formWithDropDown();
+    let formBorder;
+    if (ele && !ele.classList.contains('devui-dropdown-origin-open')) {
+      ele.classList.add('devui-dropdown-origin-open');
+    }
+    if (position === 'bottom') {
+      formBorder = 'top';
+    } else {
+      formBorder = 'bottom';
+    }
+    if (ele && !ele.classList.contains(`devui-dropdown-origin-${formBorder}`)) {
+      ele.classList.add(`devui-dropdown-origin-${formBorder}`);
+      ele.classList.remove(`devui-dropdown-origin-${position}`);
     }
   }
 
@@ -234,7 +285,7 @@ export class TwoDatePickerComponent implements OnInit, OnDestroy {
 
   notifyValueChange(range) {
     this.onChange(range);
-    this.selectRange.emit(this.selectedRange);
+    this.selectedRangeChange.emit(this.selectedRange);
   }
 
   selectingDate(event) {
@@ -310,6 +361,9 @@ export class TwoDatePickerComponent implements OnInit, OnDestroy {
   }
 
   clear = (side: 'start'|'end') => {
+    if (this.disabled) {
+      return;
+    }
     if (side === 'start') {
       this.selectStart(null);
     } else if (side === 'end') {

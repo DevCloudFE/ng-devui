@@ -1,5 +1,5 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, ElementRef, Input, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnDestroy, OnInit, Renderer2, ViewChild, TemplateRef } from '@angular/core';
 import { DocumentRef } from 'ng-devui/window-ref';
 import { isUndefined } from 'lodash-es';
 import { fromEvent, Observable, Subscription } from 'rxjs';
@@ -37,7 +37,7 @@ export class ModalComponent implements OnInit, OnDestroy {
   @Input() offsetX: string;
   @Input() offsetY: string;
   @Input() bodyScrollable: boolean; // 打开弹窗body是否可滚动
-
+  @Input() escapable: boolean; // 是否支持esc键关闭弹窗
   @ViewChild(ModalContainerDirective, { static: true }) modalContainerHost: ModalContainerDirective;
   @ViewChild('dialog', { static: true }) dialogElement: ElementRef;
   animateState: string = this.showAnimate ? 'void' : '';
@@ -46,6 +46,9 @@ export class ModalComponent implements OnInit, OnDestroy {
   mouseDwonEl: ElementRef;
   ignoreBackDropClick = false;
   pressEscToClose: Subscription = new Subscription();
+
+  contentTemplate: TemplateRef<any>;
+
   constructor(private documentRef: DocumentRef, private renderer: Renderer2) {
     this.backdropCloseable = isUndefined(this.backdropCloseable)
       ? true
@@ -53,11 +56,14 @@ export class ModalComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.pressEscToClose.add(fromEvent(window, 'keydown').subscribe((event) => {
-      if (event['keyCode'] === 27) {
-        this.hide();
-      }
-    }));
+    if (this.escapable) {
+      this.pressEscToClose.add(fromEvent(window, 'keydown').subscribe((event) => {
+        if (event['keyCode'] === 27) {
+          this.hide();
+        }
+      }));
+    }
+
     const handle = document.getElementById('d-modal-header');
     if (handle) {
       this.draggableHandleEl = handle;
@@ -122,11 +128,8 @@ export class ModalComponent implements OnInit, OnDestroy {
         this.renderer.removeClass(this.documentRef.body, 'modal-open');
       }
 
-      if (!this.showAnimate) {
-        this.onHidden();
-        return;
-      }
       this.animateState = 'void';
+      this.onHidden();
     });
   }
 
@@ -160,6 +163,9 @@ export class ModalComponent implements OnInit, OnDestroy {
     return 'translate(' + offsetX + ',' + offsetY + ')';
   }
   ngOnDestroy(): void {
-    this.pressEscToClose.unsubscribe();
+    if (this.pressEscToClose) {
+      this.pressEscToClose.unsubscribe();
+      this.pressEscToClose = null;
+    }
   }
 }

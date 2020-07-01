@@ -3,7 +3,8 @@
   "compilerOptions": {
     "outDir": "../out-tsc/app",
     "types": [
-      "node"
+      "node",
+      "jasmine"
     ],
     "typeRoots": [
       "node_modules/@types"
@@ -15,6 +16,7 @@
   ],
   "exclude": [
     "test.ts",
-    "**/*.spec.ts"
+    "**/*.spec.ts",
+    "../devui/**/*.spec.ts"
   ]
 }

@@ -2,8 +2,8 @@
 
 div.box {
   padding: 10px;
-  font-size: 16px;
-  line-height: 32px;
+  font-size: 12px;
+  line-height: 18px;
 }
 
 a.date-link {
@@ -23,4 +23,22 @@ a.date-link:hover {
 .devui-input-group-addon {
   vertical-align: middle;
   padding-top: 4px;
+}
+
+.devui-input-group {
+  width: 160px;
+}
+
+.devui-input-group-addon:hover {
+  color: #526ecc;
+}
+
+.icon-close-wrapper {
+  padding-right: 0;
+  padding-top: 0;
+}
+
+.icon-close {
+  border-right: 1px solid #dfe1e6;
+  padding-right: 10px;
 }

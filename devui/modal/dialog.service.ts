@@ -39,7 +39,9 @@ export class DialogService {
     placement = 'center',
     offsetX,
     offsetY,
-    bodyScrollable
+    bodyScrollable,
+    contentTemplate,
+    escapable = true
   }: IDialogOptions) {
     const finalComponentFactoryResolver = componentFactoryResolver || this.componentFactoryResolver;
 
@@ -59,19 +61,24 @@ export class DialogService {
       placement,
       offsetX,
       offsetY,
-      bodyScrollable
+      bodyScrollable,
+      escapable
     });
 
     const modalContainerRef = modalRef.instance.modalContainerHost.viewContainerRef
       .createComponent(finalComponentFactoryResolver.resolveComponentFactory(ModalContainerComponent), 0, injector);
     assign(modalContainerRef.instance, {title, buttons, maxHeight, dialogtype, showCloseBtn});
 
-    if (typeof content === 'string') {
-      assign(modalContainerRef.instance, {content, html});
+    if (contentTemplate) {
+      assign(modalContainerRef.instance, {contentTemplate});
     } else {
-      this.contentRef = modalContainerRef.instance.modalContentHost.viewContainerRef
-        .createComponent(finalComponentFactoryResolver.resolveComponentFactory(content));
-      assign(this.contentRef.instance, {data}, dialogtype);
+      if (typeof content === 'string') {
+        assign(modalContainerRef.instance, {content, html});
+      } else {
+        this.contentRef = modalContainerRef.instance.modalContentHost.viewContainerRef
+          .createComponent(finalComponentFactoryResolver.resolveComponentFactory(content));
+        assign(this.contentRef.instance, {data}, dialogtype);
+      }
     }
 
     modalContainerRef.instance.onClose = () => {

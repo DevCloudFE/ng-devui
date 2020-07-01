@@ -1,0 +1,45 @@
+<section>
+  <h5 class="text-muted">Standard: treeNodeIdKey</h5>
+  <div class="row">
+    <div class="col-md-5" style="font-size: 0;">
+      <d-tree-select
+        placeholder="Standard Input"
+        [treeData]="data1"
+        [(ngModel)]="value1"
+        (ngModelChange)="showSelected($event)"
+        [treeNodeIdKey]="'customId'"
+        [closeOnNodeSelected]="false"
+        style="width: 280px;"
+      ></d-tree-select>
+    </div>
+  </div>
+  <h5 class="text-muted">Standard: treeNodeChildrenKey</h5>
+  <div class="row">
+    <div class="col-md-5" style="font-size: 0;">
+      <d-tree-select
+        placeholder="Standard Input"
+        [multiple]="true"
+        [treeData]="data2"
+        [(ngModel)]="value2"
+        (ngModelChange)="showSelected($event)"
+        [treeNodeChildrenKey]="'customChildren'"
+        [iconLeaf]="iconLeaf"
+        style="width: 280px;"
+      ></d-tree-select>
+    </div>
+  </div>
+  <h5 class="text-muted">Standard: treeNodeTitleKey</h5>
+  <div class="row">
+    <div class="col-md-5" style="font-size: 0;">
+      <d-tree-select
+        placeholder="Standard Input"
+        [multiple]="true"
+        [treeData]="data3"
+        [(ngModel)]="value3"
+        (ngModelChange)="showSelected($event)"
+        [treeNodeTitleKey]="'customTitle'"
+        style="width: 280px;"
+      ></d-tree-select>
+    </div>
+  </div>
+</section>

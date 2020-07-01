@@ -39,11 +39,18 @@ export class AutoCompleteDemoComponent {
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./latest/auto-complete-demo-latest.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./latest/auto-complete-demo-latest.component.ts') },
   ];
+
+  AutoCompleteDemoLazyLoad: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./lazy-load/auto-complete-demo-lazy-load.component.html') },
+    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./lazy-load/auto-complete-demo-lazy-load.component.ts') },
+  ];
+
   navItems = [
     { dAnchorLink: 'basic-usage', value: '基本用法'},
     { dAnchorLink: 'auto-object', value: '自定义数据匹配方法'},
     { dAnchorLink: 'auto-custom', value: '自定义模板展示'},
     { dAnchorLink: 'auto-disable', value: '设置禁用'},
-    { dAnchorLink: 'auto-latest', value: '最近输入'}
+    { dAnchorLink: 'auto-latest', value: '最近输入'},
+    { dAnchorLink: 'auto-lazy-load', value: '启用懒加载'}
   ];
 }

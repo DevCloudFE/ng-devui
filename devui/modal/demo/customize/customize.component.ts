@@ -4,13 +4,12 @@ import { ModalAlertComponent } from './modal-alert.component';
 
 @Component({
   selector: 'd-customize',
-  templateUrl: './customize.component.html'
+  templateUrl: './customize.component.html',
 })
 export class CustomizeComponent {
-
-  constructor(private modalService: ModalService) {
-
-  }
+  constructor(
+    private modalService: ModalService
+  ) { }
 
   openModal() {
     const results = this.modalService.open({
@@ -24,7 +23,7 @@ export class CustomizeComponent {
       },
       data: {
         content: 'Error: This is an error message, please take a look.',
-        cancelBtnText: '我知道了',
+        cancelBtnText: '确定',
         onClose: (event) => {
           results.modalInstance.hide();
         },
@@ -32,5 +31,4 @@ export class CustomizeComponent {
     });
     console.log(results);
   }
-
 }

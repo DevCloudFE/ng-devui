@@ -38,7 +38,11 @@ import { distinctUntilChanged, debounceTime } from 'rxjs/operators';
                  [cdkConnectedOverlayOpen]="isOpen"
                  (backdropClick)="isOpen=false"
                  (positionChange)="onPositionChange($event)">
-      <div [@cornerFadeInOut]="isOpen ? datepickerPosition : 'void'" class="devui-date-range-wrapper">
+      <div [@cornerFadeInOut]="isOpen ? datepickerPosition : 'void'" class="devui-date-range-wrapper devui-dropdown-overlay">
+        <div class="devui-date-range-title">
+          <span>开始日期</span>
+          <span>结束日期</span>
+        </div>
         <div class="devui-date-range-picker">
           <d-datepicker-range-single [locale]="locale || i18nLocale" class="devui-date-picker"
                                       [cssClass]="cssClass"
@@ -85,6 +89,14 @@ import { distinctUntilChanged, debounceTime } from 'rxjs/operators';
   ]
 })
 export class DateRangePickerComponent implements OnInit, ControlValueAccessor, OnDestroy {
+
+  @Input() set showTime(showTime: boolean) {
+    this._showTime = showTime;
+  }
+
+  get showTime() {
+    return typeof this._showTime === 'boolean' ? this._showTime : this.dateConfig.timePicker;
+  }
 
   @Input() set dateConfig(dateConfig: any) {
     if (dateConfig) {
@@ -136,6 +148,18 @@ export class DateRangePickerComponent implements OnInit, ControlValueAccessor, O
     if (!isOpen && !this.rangeEnd) {
       this.rangeStart = null;
     }
+    if (!isOpen) {
+      const ele = this.formWithDropDown();
+      if (ele && ele.classList.contains('devui-dropdown-origin-open')) {
+        ele.classList.remove('devui-dropdown-origin-open');
+      }
+      if (ele && ele.classList.contains('devui-dropdown-origin-top')) {
+        ele.classList.remove('devui-dropdown-origin-top');
+      }
+      if (ele && ele.classList.contains('devui-dropdown-origin-bottom')) {
+        ele.classList.remove('devui-dropdown-origin-bottom');
+      }
+    }
   }
 
   get isOpen() {
@@ -147,19 +171,19 @@ export class DateRangePickerComponent implements OnInit, ControlValueAccessor, O
   @Input() disabled: boolean;
   @Input() dateConverter: DateConverter;
   @Input() selectedRange = [null, null];
-  @Input() showTime = false;
   @Input() hideOnRangeSelected = false;
   @Input() customViewTemplate: TemplateRef<any>;
   @Input() splitter = '  -  ';
   @Output() selectedRangeChange = new EventEmitter<SelectDateRangeChangeEventArgs>();
-  @ViewChild('leftPicker', { static: false }) leftPicker: ElementRef;
-  @ViewChild('rightPicker', { static: false }) rightPicker: ElementRef;
-  @ViewChild('templateWrap', { static: false }) templateWrap: ElementRef;
+  @ViewChild('leftPicker') leftPicker: ElementRef;
+  @ViewChild('rightPicker') rightPicker: ElementRef;
+  @ViewChild('templateWrap') templateWrap: ElementRef;
   private _isOpen = false;
   private _dateConfig: any;
   private _dateFormat: string;
   private _maxDate: Date;
   private _minDate: Date;
+  private _showTime: boolean;
   private clickShow = false;
   private inputSub: Subscription;
   public currentCalendars = [null, null];
@@ -246,6 +270,21 @@ export class DateRangePickerComponent implements OnInit, ControlValueAccessor, O
     this.isOpen = false;
   }
 
+  formWithDropDown() {
+    if (this.elementRef) {
+      if (!this.elementRef.nativeElement.classList.contains('devui-dropdown-origin')) {
+        const parentEle = this.elementRef.nativeElement.parentElement;
+        if (parentEle && parentEle.classList.contains('devui-dropdown-origin')) {
+          return this.elementRef.nativeElement.parentElement;
+        } else {
+          return;
+        }
+      } else {
+        return this.elementRef.nativeElement;
+      }
+    }
+  }
+
   private writeModelValue(input) {
     if (Array.isArray(input) && input.every(_ => !!_)) {
       this.renderer.setProperty(this.elementRef.nativeElement, 'value', this.formatDateRange(input));
@@ -284,6 +323,24 @@ export class DateRangePickerComponent implements OnInit, ControlValueAccessor, O
         break;
       case 'bottom':
         this.datepickerPosition = 'top';
+    }
+    this.changeFormWithDropDown(position.connectionPair.overlayY);
+  }
+
+  changeFormWithDropDown(position) {
+    const ele = this.formWithDropDown();
+    let formBorder;
+    if (ele && !ele.classList.contains('devui-dropdown-origin-open')) {
+      ele.classList.add('devui-dropdown-origin-open');
+    }
+    if (position === 'bottom') {
+      formBorder = 'top';
+    } else {
+      formBorder = 'bottom';
+    }
+    if (ele && !ele.classList.contains(`devui-dropdown-origin-${formBorder}`)) {
+      ele.classList.add(`devui-dropdown-origin-${formBorder}`);
+      ele.classList.remove(`devui-dropdown-origin-${position}`);
     }
   }
 
@@ -418,6 +475,9 @@ export class DateRangePickerComponent implements OnInit, ControlValueAccessor, O
   }
 
   clearAll = (reason?: SelectDateRangeChangeReason) => {
+    if (this.disabled) {
+      return;
+    }
     const currentReason = typeof reason === 'number' ? reason : SelectDateRangeChangeReason.custom;
     this.chooseDate([null, null], currentReason);
   }

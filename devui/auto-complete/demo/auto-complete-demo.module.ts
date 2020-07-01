@@ -16,7 +16,9 @@ import { AutoDemoDisableComponent } from './disabled/auto-complete-demo-disable.
 import { AutoDemoDropdownComponent } from './dropdown/auto-complete-demo-dropdown.component';
 import { AutoDemoObjectComponent } from './object/auto-complete-demo-object.component';
 import { AutoDemoLatestComponent } from './latest/auto-complete-demo-latest.component';
+import { AutoDemoLazyLoadComponent } from './lazy-load/auto-complete-demo-lazy-load.component';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
+
 
 @NgModule({
   imports: [
@@ -45,7 +47,8 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
     AutoDemoDisableComponent,
     AutoDemoDropdownComponent,
     AutoDemoObjectComponent,
-    AutoDemoLatestComponent
+    AutoDemoLatestComponent,
+    AutoDemoLazyLoadComponent
   ],
   providers: []
 })

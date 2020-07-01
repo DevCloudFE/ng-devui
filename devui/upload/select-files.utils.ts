@@ -65,34 +65,41 @@ export class SelectFiles {
     return false;
   }
 
+  beyondAllFilesMaximalSize = (fileSize, maximumSize) => {
+    if (maximumSize) {
+      return fileSize > 1024 * 1024 * maximumSize;
+    }
+    return false;
+  }
+
   triggerSelectFiles = (fileOptions: IFileOptions, uploadOptions: IUploadOptions) => {
     const { multiple, accept } = fileOptions;
-    return this._validateFiles(from(this.selectFiles({ multiple, accept })), accept, uploadOptions);
+    return from(this.selectFiles({ multiple, accept })).pipe(mergeMap(file => <any>file));
   }
 
 
   triggerDropFiles = (fileOptions: IFileOptions, uploadOptions: IUploadOptions, files: any) => {
-    const { multiple, accept } = fileOptions;
-    return this._validateFiles(new Observable(observer => observer.next(files)), accept, uploadOptions);
+    return new Observable(observer => observer.next(files)).pipe(mergeMap(file => <any>file));
 
   }
 
-  _validateFiles(observable, accept, uploadOptions) {
-    return observable.pipe(
-      mergeMap(file => <any>file),
-      map((file) => {
-        if (!this.isAllowedFileType(accept, <File>file)) {
-          this.NOT_ALLOWED_FILE_TYPE_MSG = this.i18nText.getNotAllowedFileTypeMsg((<File>file).name, accept);
-          throw new Error(this.NOT_ALLOWED_FILE_TYPE_MSG);
-        }
+  checkAllFilesSize(fileSize, maximumSize) {
+    if (this.beyondMaximalSize(fileSize, maximumSize)) {
+      this.BEYOND_MAXIMAL_FILE_SIZE_MSG = this.i18nText.getAllFilesBeyondMaximalFileSizeMsg(maximumSize);
+      return { checkError: true, errorMsg: this.BEYOND_MAXIMAL_FILE_SIZE_MSG };
+    }
+  }
 
-        if (this.beyondMaximalSize((<File>file).size, uploadOptions.maximumSize)) {
-          this.BEYOND_MAXIMAL_FILE_SIZE_MSG = this.i18nText.getBeyondMaximalFileSizeMsg((<File>file).name, uploadOptions.maximumSize);
-          throw new Error(this.BEYOND_MAXIMAL_FILE_SIZE_MSG);
-        }
-        return file;
-      })
-    );
+  _validateFiles(file, accept, uploadOptions) {
+    if (!this.isAllowedFileType(accept, <File>file)) {
+      this.NOT_ALLOWED_FILE_TYPE_MSG = this.i18nText.getNotAllowedFileTypeMsg((<File>file).name, accept);
+      return { checkError : true, errorMsg: this.NOT_ALLOWED_FILE_TYPE_MSG };
+    }
+    if (this.beyondMaximalSize((<File>file).size, uploadOptions.maximumSize)) {
+      this.BEYOND_MAXIMAL_FILE_SIZE_MSG = this.i18nText.getBeyondMaximalFileSizeMsg((<File>file).name, uploadOptions.maximumSize);
+      return { checkError : true, errorMsg: this.BEYOND_MAXIMAL_FILE_SIZE_MSG };
+    }
+    return { checkError : false, errorMsg: undefined };
   }
 
   simulateClickEvent(input) {

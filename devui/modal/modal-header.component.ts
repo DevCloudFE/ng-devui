@@ -6,7 +6,7 @@ import {
   ChangeDetectorRef
 } from '@angular/core';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
-import { Subscription } from 'rxjs/internal/Subscription';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'd-modal-header',
   templateUrl: './modal-header.component.html',

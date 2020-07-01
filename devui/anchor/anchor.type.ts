@@ -1,4 +1,5 @@
 export interface IAnchorBox {
+  isScrollingToTarget: boolean;
   scrollTarget: Element | Window;
   defaultAnchor: string;
   forceActiveAnchor: Function;

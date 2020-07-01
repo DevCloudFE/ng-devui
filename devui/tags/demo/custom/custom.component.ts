@@ -10,6 +10,8 @@ import {
 
 export class CustomComponent {
 
+  deleteTagName1 = 'tag1';
+  deleteTagName2 = 'tag2';
   tagName = 'bug';
   getTagValue(value) {
     console.log(value.tag);

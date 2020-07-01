@@ -1,6 +1,6 @@
 <td *ngIf="showExpandToggle" class="devui-detail-cell" [ngClass]="{ 'devui-sticky-left-cell': columns[0]?.fixedLeft }" [style.left]="0">
   <div *ngIf="rowItem.detail || rowItem.$expandConfig" (click)="toggle()">
-    <span [style.vertical-align]="'middle'" *ngIf="rowItem['$isDetailOpen'] || rowItem.$expandConfig?.expand">
+    <span [style.vertical-align]="'middle'" *ngIf="!rowItem['$isDetailOpen'] && !rowItem.$expandConfig?.expand">
       <svg
         class="svg-icon-arrow"
         width="16px"
@@ -15,7 +15,7 @@
         </g>
       </svg>
     </span>
-    <span [style.vertical-align]="'middle'" *ngIf="!rowItem['$isDetailOpen'] && !rowItem.$expandConfig?.expand">
+    <span [style.vertical-align]="'middle'" *ngIf="rowItem['$isDetailOpen'] || rowItem.$expandConfig?.expand">
       <svg
         class="svg-icon-arrow"
         width="16px"
@@ -46,7 +46,7 @@
     [disabled]="rowItem.$disabled"
     dTooltip
     [content]="rowItem.$checkBoxTips"
-    [position]="'top'"
+    [position]="['top', 'right', 'bottom', 'left']"
     [showAnimation]="false"
   >
   </d-checkbox>
@@ -58,8 +58,6 @@
     [colIndex]="colIndex"
     [column]="column"
     [rowItem]="rowItem"
-    [style.width]="column.width || ''"
-    [ngStyle]="column.style"
     [editModel]="rowItem.$$editModel || editModel"
     [isEditRow]="rowItem.$$edit"
     [timeout]="timeout"

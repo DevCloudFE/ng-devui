@@ -1,7 +1,10 @@
 @import '../style/theme/color';
 
 .devui-dropdown-menu {
-  width: 100%;
+  &:not(.devui-dropdown-menu-cdk) {
+    width: calc(100% + 2px);
+    left: -1px;
+  }
 
   &.devui-custom-right,
   &.devui-custom-left {
@@ -43,26 +46,25 @@
 .devui-dropdown-menu-cdk {
   position: static;
   display: block;
-  border: none;
+  width: 100%;
+  // border: none;
+  &.devui-dropdown-cdk-top {
+    margin-bottom: -1px;
+  }
+
+  &.devui-dropdown-cdk-bottom {
+    margin-top: -1px;
+  }
 }
 
 .devui-form-group.devui-has-feedback[tabindex] {
   outline: none;
 }
 
-.devui-form-group.devui-has-feedback:focus {
-  input.devui-form-control.devui-select-input,
-  .devui-select-list-wrapper.devui-form-control {
-    &:not(.disabled):not([disabled]) {
-      border-color: $brand-1;
-    }
-  }
-}
-
 .devui-select-placeholder,
 .devui-select-list-wrapper.devui-form-control,
 .devui-select-selected-item-with-template {
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .devui-select-list-wrapper.devui-form-control {
@@ -75,6 +77,11 @@
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+
+  &.devui-select-search {
+    padding-right: 5em;
+    cursor: text;
+  }
 }
 
 .devui-select-list-wrapper.devui-form-control {
@@ -82,12 +89,12 @@
 }
 
 .devui-dropdown-item {
-  font-size: 14px;
+  font-size: 12px;
   display: block;
   min-height: 36px;
-  line-height: 20px;
+  line-height: 1.5;
   width: 100%;
-  padding: 8px 13px;
+  padding: 10px 10px;
   clear: both;
   overflow: hidden;
   white-space: nowrap;
@@ -95,7 +102,7 @@
   border: 0;
 
   input[name='search'] {
-    font-size: 14px;
+    font-size: 12px;
   }
 
   color: $dark-1;
@@ -107,17 +114,10 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    line-height: 20px;
   }
 }
 
 /* 把选中文本的颜色覆盖下去 */
-.devui-dropdown-item.selected ::ng-deep .devui-select-checkbox {
-  .checkbox-label {
-    color: $brand-1;
-  }
-}
-
 .devui-dropdown-item.active ::ng-deep .devui-select-checkbox {
   .checkbox-label {
     color: $brand-1;
@@ -125,42 +125,53 @@
 }
 
 .devui-select-lg {
-  font-size: 18px;
+  font-size: 16px;
   min-height: 46px;
-  line-height: 28px;
+  line-height: 46px;
+
+  .devui-form-control:not(.devui-select-list-wrapper) {
+    height: 44px;
+  }
 
   .devui-select-placeholder,
   .devui-select-list-wrapper.devui-form-control,
   .devui-select-selected-item-with-template {
-    font-size: 18px;
+    font-size: 16px;
   }
 
   .devui-dropdown-item {
-    font-size: 18px;
+    font-size: 16px;
     min-height: 40px;
     line-height: 28px;
+    padding: 11px 10px;
 
     input[name='search'] {
-      font-size: 18px;
+      font-size: 16px;
     }
   }
 
   ::ng-deep .devui-checkbox,
+  ::ng-deep .devui-select-checkbox label,
   ::ng-deep .devui-select-checkbox label .checkbox-label {
-    font-size: 18px;
-    line-height: 28px;
+    font-size: 16px;
+    height: 18px;
   }
 
   ::ng-deep .devui-checkbox-material {
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
   }
 }
 
 .devui-select-sm {
   font-size: 12px;
-  min-height: 30px;
+  min-height: 26px;
   line-height: 14px;
+  height: unset;
+
+  .devui-form-control:not(.devui-select-list-wrapper) {
+    height: 24px;
+  }
 
   .devui-select-placeholder,
   .devui-select-list-wrapper.devui-form-control,
@@ -170,7 +181,7 @@
 
   .devui-dropdown-item {
     font-size: 12px;
-    min-height: 30px;
+    min-height: 26px;
     line-height: 14px;
 
     input[name='search'] {
@@ -186,36 +197,46 @@
   ::ng-deep .devui-checkbox-material {
     width: 12px;
     height: 12px;
+
+    & > svg {
+      width: 12px;
+      height: 12px;
+    }
   }
 }
 
 .devui-dropdown-menu-lg {
   .devui-dropdown-item {
-    font-size: 18px;
+    font-size: 16px;
     min-height: 40px;
     line-height: 28px;
 
     input[name='search'] {
-      font-size: 18px;
+      font-size: 16px;
     }
   }
 
   ::ng-deep .devui-checkbox,
   ::ng-deep .devui-select-checkbox label .checkbox-label {
-    font-size: 18px;
+    font-size: 16px;
     line-height: 28px;
   }
 
   ::ng-deep .devui-checkbox-material {
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
+
+    & > svg {
+      width: 16px;
+      height: 16px;
+    }
   }
 }
 
 .devui-dropdown-menu-sm {
   .devui-dropdown-item {
     font-size: 12px;
-    min-height: 30px;
+    min-height: 26px;
     line-height: 14px;
 
     input[name='search'] {
@@ -235,7 +256,7 @@
 }
 
 div.devui-dropdown-menu {
-  margin-bottom: 5px;
+  // margin-bottom: 5px;
   cursor: pointer;
   min-width: auto;
   box-shadow: 0 4px 8px 0 $dark-1-boxshadow;
@@ -247,30 +268,79 @@ div.devui-dropdown-menu > ul.devui-select-list-unstyled {
 
   & li:hover:not(.active):not(.disabled) {
     background-color: $hover-content;
+    color: $hover-control;
   }
 }
 
-div.devui-dropdown-menu .devui-select-list-unstyled li.selected:not(.disabled),
-div.devui-dropdown-menu > ul.devui-select-list-unstyled li.selected:not(.disabled) {
+div.devui-dropdown-menu .devui-select-list-unstyled li.selected,
+div.devui-dropdown-menu > ul.devui-select-list-unstyled li.selected {
   background-color: $hover-content;
-  color: $brand-1;
+  color: $hover-control;
+}
+div.devui-dropdown-menu:not(.devui-dropdown-menu-multiple) .devui-select-list-unstyled li.active,
+div.devui-dropdown-menu:not(.devui-dropdown-menu-multiple) .devui-select-list-unstyled li.active:hover,
+div.devui-dropdown-menu:not(.devui-dropdown-menu-multiple) > ul.devui-select-list-unstyled li.active,
+div.devui-dropdown-menu:not(.devui-dropdown-menu-multiple) > ul.devui-select-list-unstyled li.active:hover {
+  background-color: $hwc-color-bg-active;
+  color: $font-white;
 }
 
-div.devui-dropdown-menu .devui-select-list-unstyled li.active:not(.disabled),
-div.devui-dropdown-menu .devui-select-list-unstyled li.active:not(.disabled):hover,
-div.devui-dropdown-menu > ul.devui-list-unstyled li.active:not(.disabled),
-div.devui-dropdown-menu > ul.devui-list-unstyled li.active:not(.disabled):hover {
-  background-color: $brand-3;
-  color: $brand-1;
+:host ::ng-deep .devui-dropdown-menu.devui-dropdown-menu-multiple .devui-select-list-unstyled li:not(.disabled):hover,
+:host ::ng-deep .devui-dropdown-menu.devui-dropdown-menu-multiple > ul.devui-select-list-unstyled li:not(.disabled):hover {
+  .devui-checkbox {
+    & > label {
+      color: $hover-control;
+
+      & > .devui-checkbox-material {
+        border-color: $hwc-color-border-active;
+      }
+    }
+  }
+}
+
+div.devui-dropdown-menu.devui-dropdown-menu-multiple .devui-select-list-unstyled li.active:not(.disabled),
+div.devui-dropdown-menu.devui-dropdown-menu-multiple > ul.devui-list-unstyled li.active:not(.disabled) {
+  background-color: transparent;
+
+  &:hover {
+    background-color: $hover-content;
+    color: $hover-control;
+  }
 }
 
 .devui-has-feedback {
   z-index: 5;
+
+  .devui-dropdown-origin-open > & {
+    z-index: 1001;
+  }
+
+  .devui-form-control-feedback {
+    z-index: 1001;
+  }
+}
+
+ul.devui-dropdown-menu-wrap .devui-form-group.devui-has-feedback {
+  & > input.devui-form-control.devui-select-search {
+    &,
+    &:focus {
+      background-color: $hwc-drop-down-search;
+    }
+
+    &:hover,
+    &:hover:focus {
+      background-color: $hwc-drop-down-search-hover;
+    }
+
+    &::placeholder {
+      color: $gray-1;
+    }
+  }
 }
 
 .devui-form-control,
 .devui-form-group .devui-form-control {
-  border-radius: 1px;
+  border-radius: 2px;
   box-shadow: none;
 }
 
@@ -279,23 +349,7 @@ div.devui-dropdown-menu > ul.devui-list-unstyled li.active:not(.disabled):hover 
   border-radius: 1px 1px 0 0;
 }
 
-.devui-form-control:hover,
-.devui-form-group .devui-form-control:hover,
-.devui-form-group .devui-form-control.devui-select-underlined-border:hover {
-  &:not(.disabled):not(:disabled) {
-    border-color: $hover-control;
-  }
-}
-
-.devui-form-control:focus,
-.devui-form-group .devui-form-control:focus,
-.devui-form-group .devui-form-control.devui-select-underlined-border:focus {
-  &:not(.disabled):not(:disabled) {
-    border-color: $brand-2;
-  }
-}
-
-.devui-form-group .devui-form-control.devui-select-underlined-border {
+.devui-select-underlined-border {
   border: 0;
   border-bottom: 1px solid $gray-1;
   border-radius: 0;
@@ -304,51 +358,62 @@ div.devui-dropdown-menu > ul.devui-list-unstyled li.active:not(.disabled):hover 
 .devui-select-list-wrapper.devui-form-control {
   height: auto;
   margin: 0;
-  padding: 2px 2px 0;
+  padding: 0;
   padding-right: 30px;
+
+  + .devui-form-control-feedback {
+    height: 100%;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 .devui-form-control {
-  &.devui-select-input-lg {
-    line-height: 1.3333333;
-    height: 46px;
+  &.devui-select-input {
+    line-height: 1.5;
+    height: 26px;
+    border-color: transparent;
+    outline: none;
 
     + .devui-form-control-feedback {
-      height: 46px;
-      width: 46px;
-      line-height: 46px;
+      height: 100%;
+      padding: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
     }
+  }
+
+  &.devui-select-input-lg {
+    line-height: 1.5;
+    // height: 44px;
   }
 
   &.devui-select-input-sm {
     line-height: 1.5;
-    height: 30px;
-
-    + .devui-form-control-feedback {
-      height: 30px;
-      width: 30px;
-      line-height: 30px;
-    }
+    // height: 24px;
   }
 }
 
 .devui-select-list-wrapper {
   .devui-select-selected-item-with-template {
-    height: 28px;
-    line-height: 28px;
+    height: 24px;
+    line-height: 24px;
     padding: 0 10px;
     cursor: pointer;
   }
 
   .devui-select-placeholder {
-    height: 28px;
-    line-height: 28px;
+    height: 24px;
+    line-height: 24px;
     color: $dark-3;
     padding-left: 10px;
   }
 
   .devui-select-tag-list {
-    height: 28px;
+    height: 24px;
     margin: 0;
     padding: 0;
     list-style-type: none;
@@ -370,70 +435,71 @@ div.devui-dropdown-menu > ul.devui-list-unstyled li.active:not(.disabled):hover 
     height: auto;
     overflow-y: auto;
     overflow-x: hidden;
-    line-height: 1.42857143;
+    line-height: 1.5;
+    max-height: 48px;
   }
 
   .devui-select-tag-item {
     display: inline-block;
-    margin: 3px 2px 0;
-    padding: 0 5px;
-    min-height: 20px;
-    line-height: 20px;
-    max-height: 20px;
-    border-radius: 1px;
+    margin: 1px 1px 0;
+    padding: 0 4px;
+    min-height: 22px;
+    max-height: 22px;
+    border-radius: 2px;
     color: $dark-1;
     background: $tag-label-bgcolor;
     max-width: 100%;
     position: relative;
+    border: 1px solid $tag-label-bgcolor;
 
     &.disabled {
       background: $disabled-bg;
+      border-color: $disabled-bg;
+      cursor: not-allowed;
     }
   }
 
   .devui-select-tag-item span {
     display: inline-block;
     max-width: 100%;
-    padding-right: 14px;
+    padding-right: 30px;
+  }
+
+  .devui-select-tag-item span:hover {
+    color: $brand-1;
   }
 
   .devui-select-tag-item.disabled span {
-    padding-right: 5px;
+    padding-right: 0;
     color: $disabled-content;
   }
 
   .devui-select-tag-item .devui-select-tag-remove-button {
     position: absolute;
-    right: 2px;
+    right: 10px;
     top: 50%;
     transform: translateY(-50%);
-    line-height: 20px; // 同标签高度
-    cursor: pointer;
+    // line-height: 12px;
+    // text-align: center;
     color: $dark-1;
-    width: 1em;
-    height: 1em;
-    display: block;
+    width: 12px;
+    height: 12px;
+    // display: inline-block;
     transition: transform 0.2s ease;
     pointer-events: auto;
+    cursor: pointer;
+    background-color: $gray-1;
+    border-radius: 50%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
 
-    &::after,
-    &::before {
-      position: absolute;
-      content: '';
-      height: 0.6em;
-      width: 0.0715em;
-      background-color: $dark-1;
-      left: calc(50% - 1px);
-      top: 0.25em;
-      transform-origin: center;
+    svg path {
+      fill: $font-white;
     }
 
-    &::before {
-      transform: rotate(45deg);
-    }
-
-    &::after {
-      transform: rotate(-45deg);
+    &:hover {
+      background-color: $brand-1;
     }
   }
 
@@ -441,15 +507,23 @@ div.devui-dropdown-menu > ul.devui-list-unstyled li.active:not(.disabled):hover 
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    height: 20px;
+    line-height: 20px;
+    vertical-align: middle;
   }
 
   &.devui-select-input-lg {
-    line-height: 1.3333333;
+    line-height: 1.5;
 
     .devui-select-selected-item-with-template,
     .devui-select-placeholder,
     .devui-select-tag-list {
       height: 42px;
+
+      &.multiple-line {
+        max-height: 74px;
+        height: unset;
+      }
     }
 
     .devui-select-selected-item-with-template,
@@ -458,11 +532,15 @@ div.devui-dropdown-menu > ul.devui-list-unstyled li.active:not(.disabled):hover 
     }
 
     .devui-select-tag-item {
-      margin: 7px 3px 0;
+      margin: 5px 3px 0;
       padding: 0 5px;
-      min-height: 26px;
-      line-height: 26px;
-      max-height: 26px;
+      min-height: 32px;
+      max-height: 32px;
+
+      .over-flow-ellipsis {
+        height: 30px;
+        line-height: 30px;
+      }
     }
   }
 
@@ -472,22 +550,35 @@ div.devui-dropdown-menu > ul.devui-list-unstyled li.active:not(.disabled):hover 
     .devui-select-selected-item-with-template,
     .devui-select-placeholder,
     .devui-select-tag-list {
-      height: 26px;
+      height: 22px;
+
+      &.multiple-line {
+        max-height: 48px;
+        height: unset;
+      }
     }
 
     .devui-select-selected-item-with-template,
     .devui-select-placeholder {
-      line-height: 26px;
+      line-height: 22px;
     }
 
     .devui-select-tag-item {
-      margin: 3px 2px 0;
+      margin: 1px 1px 0;
       padding: 0 5px;
-      min-height: 18px;
-      line-height: 18px;
-      max-height: 18px;
+      min-height: 20px;
+      max-height: 20px;
+
+      .over-flow-ellipsis {
+        height: 18px;
+        line-height: 18px;
+      }
     }
   }
+}
+
+.disabled .devui-select-list-wrapper .devui-select-tag-item span {
+  padding-right: 0;
 }
 
 /* 选项disabled */
@@ -500,6 +591,14 @@ div.devui-dropdown-menu > ul.devui-select-list-unstyled li.disabled:hover {
   color: $disabled-content;
 }
 
+div.devui-dropdown-menu .devui-select-list-unstyled li.active.disabled,
+div.devui-dropdown-menu > ul.devui-select-list-unstyled li.active.disabled,
+div.devui-dropdown-menu .devui-select-list-unstyled li.active.disabled:hover,
+div.devui-dropdown-menu > ul.devui-select-list-unstyled li.active.disabled:hover {
+  background: $disabled-bg;
+}
+
+/* checkbox的label灰化 */
 :host ::ng-deep li.disabled .devui-checkbox.disabled label,
 :host ::ng-deep .li.disabled .devui-checkbox.disabled label,
 li.disabled ::ng-deep .devui-checkbox.disabled label,
@@ -510,27 +609,54 @@ li.disabled ::ng-deep .devui-checkbox.disabled label {
 .devui-no-data-tip {
   user-select: none;
   cursor: not-allowed;
-  padding: 5px 12px;
+  padding: 10px;
+  background-color: $disabled-bg;
   color: $disabled-content;
 }
 
-.devui-select-list-wrapper.devui-form-control.disabled,
-.devui-form-control.devui-select-input:disabled,
-.devui-form-group .devui-form-control.devui-select-input:disabled {
+.devui-dropdown-origin-wrapper.disabled,
+.devui-dropdown-origin-wrapper.disabled:hover {
   cursor: not-allowed;
-}
-
-.devui-select-list-wrapper.devui-form-control.disabled {
+  background-color: $disabled-bg;
+  border-color: $disabled-border;
   color: $disabled-content;
+
+  .devui-select-list-wrapper.devui-form-control,
+  .devui-form-control.devui-select-input {
+    cursor: not-allowed;
+    background-color: $disabled-bg;
+    color: $disabled-content;
+  }
+
+  .devui-select-list-wrapper.devui-form-control.disabled {
+    color: $disabled-content;
+  }
 }
 
-.devui-form-control-feedback .devui-select-chevron-icon {
-  background: transparent;
+.devui-dropdown-origin-wrapper,
+.devui-dropdown-origin-wrapper:hover {
+  &.disabled .devui-select-tag-list .devui-select-tag-item,
+  .devui-select-tag-list .devui-select-tag-item.disabled {
+    background-color: $disabled-bg;
+    border-color: $disabled-border;
+
+    & > span {
+      color: $disabled-content;
+    }
+
+    & > .devui-select-tag-remove-button {
+      background-color: $disabled-border;
+    }
+  }
 }
 
 .devui-select-list-wrapper.devui-form-control.disabled + .devui-form-control-feedback,
 .devui-form-control.devui-select-input:disabled + .devui-form-control-feedback {
-  .devui-select-chevron-icon svg > g > polygon {
+  cursor: not-allowed;
+  background-color: $disabled-bg;
+
+  .devui-select-clear-icon svg path,
+  .devui-select-chevron-icon svg polygon {
     fill: $disabled-content;
   }
 }
@@ -544,7 +670,7 @@ li.disabled ::ng-deep .devui-checkbox.disabled label {
   border-top: 1px solid $gray-2;
 }
 
-svg.svg-icon-search > path {
+svg.svg-icon-search path {
   fill: $dark-1;
 }
 
@@ -558,15 +684,17 @@ svg.svg-icon-search > path {
   transition: transform 0.3s;
 }
 
-.devui-select-chevron-icon svg > g > polygon {
+.devui-select-chevron-icon svg polygon {
   fill: $dark-1;
 }
 
-.devui-form-group.devui-has-feedback:hover {
-  .devui-form-control:not(.disabled):not([disabled]) {
-    border-color: $hover-control;
+.disabled {
+  .devui-select-chevron-icon svg polygon {
+    fill: $disabled-border;
   }
+}
 
+.devui-form-group.devui-has-feedback:hover {
   .devui-form-control-feedback.devui-clear-icon-show {
     .devui-select-chevron-icon {
       display: none;
@@ -580,7 +708,7 @@ svg.svg-icon-search > path {
 }
 
 .devui-form-control-feedback.devui-search-clear {
-  right: 32px;
+  right: 28px;
   cursor: pointer;
   pointer-events: initial;
 
@@ -588,7 +716,7 @@ svg.svg-icon-search > path {
     transform: translateY(0.1em);
   }
 
-  svg.svg-icon-clear > g > g {
+  svg.svg-icon-clear path {
     fill: $dark-1;
   }
 
@@ -645,6 +773,15 @@ svg.svg-icon-search > path {
   }
 }
 
+.devui-form-control-feedback.devui-search-clear:hover g > g > polygon {
+  fill: $brand-1;
+}
+
+.devui-select-clear-icon:hover::before,
+.devui-select-clear-icon:hover::after {
+  background-color: $brand-1;
+}
+
 input::-ms-clear {
   display: none;
 }
@@ -652,4 +789,8 @@ input::-ms-clear {
 .devui-dropup .devui-dropdown-menu {
   top: auto;
   bottom: 100%;
+}
+
+.devui-dropdown {
+  height: unset;
 }

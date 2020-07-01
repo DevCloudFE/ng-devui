@@ -1,4 +1,4 @@
-<div class="demo-container" dAnchorBox [view]="{ top: 60, bottom: 0 }">
+<div class="demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 60, bottom: 0 }">
   <d-demo-nav [navItems]="navItems"></d-demo-nav>
   <div class="demo-example" [dAnchor]="'basic-usage'">
     <div class="demo-title">基础用法</div>
@@ -30,7 +30,7 @@
   <div class="demo-example" [dAnchor]="'auto-disable'">
     <div class="demo-title">设置禁用</div>
     <div class="demo-text">
-      通过 disabled 设置输入框禁用
+      通过 disabled 设置输入框禁用，通过 disabledKey 禁用下拉选项
     </div>
     <d-codebox id="components-auto-disable" [sourceData]="AutoCompleteDemoDisable">
       <d-auto-complete-demo-disable demo></d-auto-complete-demo-disable>
@@ -43,6 +43,15 @@
     </div>
     <d-codebox id="components-auto-latest" [sourceData]="AutoCompleteDemoLatest">
       <d-auto-complete-demo-latest demo></d-auto-complete-demo-latest>
+    </d-codebox>
+  </div>
+  <div class="demo-example" [dAnchor]="'auto-lazy-load'">
+    <div class="demo-title">懒加载</div>
+    <div class="demo-text">
+      enableLazyLoad开启懒加载
+    </div>
+    <d-codebox id="components-auto-lazy-load" [sourceData]="AutoCompleteDemoLazyLoad">
+      <d-auto-complete-demo-lazy-load demo></d-auto-complete-demo-lazy-load>
     </d-codebox>
   </div>
 </div>

@@ -1,41 +1,46 @@
 <div class="devui-search">
   <input
     #filterInput
-    (keyup.enter)="keyupEnter(filterInput.value)"
+    (keydown.enter)="keydownEnter($event, filterInput.value)"
     [placeholder]="placeholder || i18nCommonText?.searchPlaceholder"
     (change)="inputChange(filterInput.value, $event)"
     (keyup)="inputChange(filterInput.value, $event)"
     [attr.maxlength]="maxLength"
     [disabled]="disabled"
     type="text"
-    class="devui-input"
+    class="devui-input {{ cssClass }}"
     [ngClass]="{
       'devui-input-sm': size === 'sm',
       'devui-input-lg': size === 'lg',
-      'devui-clear-exit': clearIconExit
+      'devui-clear-exit': clearIconExit,
+      'devui-icon-left': iconPosition === 'left'
     }"
   />
-  <span class="devui-search-icon" [ngClass]="size ? 'devui-search-icon-' + size : ''" (click)="keyupEnter(filterInput.value)">
+  <span
+    class="devui-search-icon"
+    [ngClass]="{ 'devui-search-icon-sm': size === 'sm', 'devui-search-icon-lg': size === 'lg', 'devui-icon-left': iconPosition === 'left' }"
+    (click)="clickSearch(filterInput.value)"
+  >
     <svg
-      class="svg-icon-search"
-      xmlns="http://www.w3.org/2000/svg"
-      xmlns:xlink="http://www.w3.org/1999/xlink"
       width="14px"
       height="14px"
-      viewBox="0 0 16 16"
+      viewBox="0 0 14 14"
       version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      class="svg-icon-search"
     >
       <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <path
-          d="M12.902261,10.765041 L15.5632031,13.425983 C16.1489895,14.0117695 16.1489895,14.961517 15.5632031,15.5473034 C14.9774166,16.1330898 14.0276691,16.1330898 13.4418827,15.5473034 L10.7844126,12.8898333 C9.69325562,13.5923888 8.39422915,14 7,14 C3.13400675,14 0,10.8659932 0,7 C0,3.13400675 3.13400675,0 7,0 C10.8659932,0 14,3.13400675 14,7 C14,8.38598771 13.5971935,9.67789492 12.902261,10.765041 L12.902261,10.765041 Z M7,12 C9.76142375,12 12,9.76142375 12,7 C12,4.23857625 9.76142375,2 7,2 C4.23857625,2 2,4.23857625 2,7 C2,9.76142375 4.23857625,12 7,12 Z"
-          id="Combined-Shape-Copy-97"
+          d="M7.30811922,1 C10.7919973,1 13.6162384,3.82424117 13.6162384,7.30811922 C13.6162384,8.72507634 13.149053,10.0329164 12.3603151,11.0860065 L14.7360564,13.4616238 C15.0879812,13.8135487 15.0879812,14.3841316 14.7360564,14.7360564 C14.3841316,15.0879812 13.8135487,15.0879812 13.4616238,14.7360564 L11.0860065,12.3603151 C10.0329164,13.149053 8.72507634,13.6162384 7.30811922,13.6162384 C3.82424117,13.6162384 1,10.7919973 1,7.30811922 C1,3.82424117 3.82424117,1 7.30811922,1 Z M7.31,2.51 C4.6590332,2.51 2.51,4.6590332 2.51,7.31 C2.51,9.9609668 4.6590332,12.11 7.31,12.11 C9.9609668,12.11 12.11,9.9609668 12.11,7.31 C12.11,4.6590332 9.9609668,2.51 7.31,2.51 Z"
           fill-rule="nonzero"
-        />
+        ></path>
       </g>
     </svg>
   </span>
   <span
     #line
+    *ngIf="iconPosition === 'right'"
     class="devui-search-line"
     [ngClass]="{ 'devui-search-line-sm': size === 'sm', 'devui-search-line-lg': size === 'lg', 'devui-clear-exit': clearIconExit }"
   >
@@ -43,24 +48,24 @@
   <span
     #clearIcon
     (click)="clearText()"
+    *ngIf="iconPosition === 'right'"
     class="devui-search-clear"
     [ngClass]="{ 'devui-search-clear-sm': size === 'sm', 'devui-search-clear-lg': size === 'lg', 'devui-clear-exit': clearIconExit }"
   >
     <svg
-      class="svg-icon-clear"
       width="10px"
       height="10px"
       viewBox="0 0 10 10"
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"
       xmlns:xlink="http://www.w3.org/1999/xlink"
+      class="svg-icon-clear"
     >
       <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g transform="translate(-1546.000000, -432.000000)">
-          <polygon
-            id="Combined-Shape-Copy-60"
-            points="1552.36396 436.949747 1555.89949 433.414214 1554.48528 432 1550.94975 435.535534 1547.41421 432 1546 433.414214 1549.53553 436.949747 1546 440.485281 1547.41421 441.899495 1550.94975 438.363961 1554.48528 441.899495 1555.89949 440.485281"
-          ></polygon>
+        <g transform="translate(-3.000000, -3.000000)" fill-rule="nonzero">
+          <path
+            d="M11.6426,3.19816936 C11.9239974,2.91574512 12.4131626,2.93784891 12.7352108,3.24751057 C13.0571998,3.5572302 13.0901298,4.03723416 12.8087324,4.31965839 L9.14064666,7.99900183 L12.8087324,11.6803416 C13.0645482,11.9370909 13.0605893,12.3571292 12.8158402,12.6640749 L12.7352108,12.7524894 C12.4131626,13.0621511 11.9239974,13.0842548 11.6426,12.8018306 L8,9.14489021 L4.35740003,12.8018306 C4.10158422,13.05858 3.6740594,13.0636532 3.35648225,12.8298003 L3.26478919,12.7524894 C2.94280021,12.4427698 2.90987023,11.9627658 3.19126762,11.6803416 L6.8583349,7.99900183 L3.19126762,4.31965839 C2.93545181,4.06290908 2.93941068,3.64287076 3.18415975,3.3359251 L3.26478919,3.24751057 C3.58683735,2.93784891 4.07600264,2.91574512 4.35740003,3.19816936 L8,6.85411161 L11.6426,3.19816936 Z"
+          ></path>
         </g>
       </g>
     </svg>

@@ -6,7 +6,7 @@
   display: block;
   font-style: normal;
   font-weight: 400;
-  line-height: 1.42857143;
+  line-height: 1.5;
   line-break: auto;
   text-align: left;
   text-align: start;
@@ -84,16 +84,17 @@
   .devui-tooltip-inner {
     max-width: 200px;
     padding: 5px 10px;
-    font-size: 14px;
+    font-size: 12px;
     color: $hwc-feedback-overlay-font-color;
     letter-spacing: 0;
-    line-height: 20px;
+    line-height: 1.5;
     background: $hwc-feedback-overlay-background;
     box-shadow: none;
     overflow-wrap: break-word;
     word-break: normal;
     word-wrap: break-word;
     text-align: start;
+    border-radius: 4px;
   }
 
   .devui-tooltip-arrow {

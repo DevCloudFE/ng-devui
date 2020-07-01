@@ -1,0 +1,8 @@
+<section>
+  <h4>download file</h4>
+  <d-button bsStyle="primary" style="margin-right: 5px;" circled="true" (btnClick)="download()">下载文件示例</d-button>
+  <d-button bsStyle="primary" circled="true" (btnClick)="download2()">下载文件示例2——header设置</d-button>
+  <h5>返回错误信息</h5>
+  <pre>{{ downError || '(空)' }}</pre>
+  <h5>说明：源码仅为示例，由于该访问路径不支持POST，且返回的头部没有指定为附件，所以无法直接下载, 将作为错误信息显示在上面的位置。</h5>
+</section>

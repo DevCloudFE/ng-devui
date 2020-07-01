@@ -38,10 +38,14 @@ export class MultipleUploadComponent implements OnDestroy {
   @Input() filePath: string;
   @Input() placeholderText: string;
   @Input() uploadText: string;
+  /**
+   * @deprecated
+   */
   @Input() confirmText: string;
+  @Input() oneTimeUpload = false;
   @Input() beforeUpload: (files) => boolean | Promise<boolean> | Observable<boolean>;
+  @Input() setCustomUploadOptions: (files, uploadOptions) => IUploadOptions;
   @Input() enableDrop = false;
-
   @Output() successEvent: EventEmitter<any> = new EventEmitter<any>();
   @Output() errorEvent: EventEmitter<any> = new EventEmitter<any>();
   @Output() deleteUploadedFileEvent: EventEmitter<any> = new EventEmitter<any>();
@@ -72,6 +76,7 @@ export class MultipleUploadComponent implements OnDestroy {
     )
       .subscribe(
         () => {
+          this.checkValid();
           const sameNameFiles = this.multipleUploadViewComponent.getSameNameFiles();
           if (this.autoUpload) {
             this.upload();
@@ -86,9 +91,29 @@ export class MultipleUploadComponent implements OnDestroy {
       );
   }
 
+  checkValid() {
+    let totalFileSize = 0;
+    this.multipleUploadViewComponent.fileUploaders.forEach(fileUploader => {
+      totalFileSize += fileUploader.file.size;
+      const checkResult = this.selectFiles._validateFiles(fileUploader.file, this.fileOptions.accept, fileUploader.uploadOptions);
+      if (checkResult.checkError) {
+        this.multipleUploadViewComponent.deletePreUploadFile(fileUploader.file);
+        this.alertMsg(checkResult.errorMsg);
+        return;
+      }
+    });
+
+    if (this.oneTimeUpload) {
+      const checkResult = this.selectFiles.checkAllFilesSize(totalFileSize, this.uploadOptions.maximumSize);
+      if (checkResult.checkError) {
+        this.multipleUploadViewComponent.removeFiles();
+        this.alertMsg(checkResult.errorMsg);
+      }
+    }
+  }
+
   onClick(event) {
     this._dealFiles(this.selectFiles.triggerSelectFiles(this.fileOptions, this.uploadOptions));
-
   }
 
   onFileDrop(files) {
@@ -96,8 +121,6 @@ export class MultipleUploadComponent implements OnDestroy {
     this._dealFiles(this.selectFiles.triggerDropFiles(this.fileOptions, this.uploadOptions, files));
     this.fileDrop.emit(files);
   }
-
-
 
   onFileOver(event) {
     this.isDropOVer = event;
@@ -110,7 +133,10 @@ export class MultipleUploadComponent implements OnDestroy {
         this.multipleUploadViewComponent.removeFiles();
         return;
       }
-      this.multipleUploadViewComponent.upload()
+      const uploadObservable = this.oneTimeUpload ?
+        this.multipleUploadViewComponent.oneTimeUpload() :
+        this.multipleUploadViewComponent.upload();
+      uploadObservable
         .pipe(
           last()
         )
@@ -153,6 +179,7 @@ export class MultipleUploadComponent implements OnDestroy {
   alertMsg(errorMsg) {
     this.errorMsg = [{ severity: 'warn', summary: this.i18nText.warning, detail: errorMsg }];
   }
+
   ngOnDestroy() {
     if (this.i18nSubscription) {
       this.i18nSubscription.unsubscribe();

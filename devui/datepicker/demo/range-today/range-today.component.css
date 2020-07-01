@@ -18,10 +18,6 @@ div.singleTemplate:not(:last-child) {
   border-right: 1px solid #cacfd8;
 }
 
-.input-group {
-  width: 300px;
-}
-
 .input-group:not(:last-child) {
   margin-bottom: 20px;
 }
@@ -29,4 +25,22 @@ div.singleTemplate:not(:last-child) {
 .devui-input-group-addon {
   vertical-align: middle;
   padding-top: 4px;
+}
+
+.devui-input-group {
+  width: 250px;
+}
+
+.devui-input-group-addon:hover {
+  color: #526ecc;
+}
+
+.icon-close-wrapper {
+  padding-right: 0;
+  padding-top: 0;
+}
+
+.icon-close {
+  border-right: 1px solid #dfe1e6;
+  padding-right: 10px;
 }

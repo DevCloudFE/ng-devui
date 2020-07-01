@@ -1,10 +1,10 @@
 <section style="display: flex; width：100%;">
-  <div class="col-md-6">
+  <div class="col-md-6" style="margin-right: 10px;">
     <div class="row">
       <div class="col-md-6">
-        <div class="devui-input-group">
+        <div class="devui-input-group devui-dropdown-origin-wrapper devui-dropdown-origin">
           <input
-            class="devui-form-control"
+            class="devui-input devui-form-control"
             placeholder="y/MM/dd"
             name="dp"
             [(ngModel)]="startDate"
@@ -16,6 +16,9 @@
             (selectedDateChange)="getValue($event)"
             [customViewTemplate]="myCustomview"
           />
+          <div *ngIf="startDate" class="devui-input-group-addon icon-close-wrapper" (click)="datePicker1.clearAll()">
+            <i class="icon icon-close"></i>
+          </div>
           <div class="devui-input-group-addon" (click)="datePicker1.toggle($event, true)">
             <i class="icon icon-calendar"></i>
           </div>
@@ -33,9 +36,9 @@
   <div class="col-md-6">
     <div class="row">
       <div class="col-md-6">
-        <div class="devui-input-group">
+        <div class="devui-input-group devui-dropdown-origin-wrapper devui-dropdown-origin">
           <input
-            class="devui-form-control"
+            class="devui-input devui-form-control"
             placeholder="y/MM/dd"
             name="dp"
             [(ngModel)]="endDate"
@@ -47,6 +50,9 @@
             (selectedDateChange)="getValue($event)"
             [customViewTemplate]="myCustomview1"
           />
+          <div *ngIf="endDate" class="devui-input-group-addon icon-close-wrapper" (click)="datePicker2.clearAll()">
+            <i class="icon icon-close"></i>
+          </div>
           <div class="devui-input-group-addon" (click)="datePicker2.toggle($event, true)">
             <i class="icon icon-calendar"></i>
           </div>

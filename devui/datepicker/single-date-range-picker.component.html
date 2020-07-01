@@ -9,8 +9,22 @@
             (click)="onPreYear()"
             [ngClass]="{ 'devui-year-month-disabled': !hasPreYearOption() }"
           >
-            <span class="left-triangle"></span>
-            <span class="left-triangle second"></span>
+            <svg
+              width="10px"
+              height="10px"
+              viewBox="0 0 10 10"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+            >
+              <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g transform="translate(-1.000000, -1.000000)">
+                  <path
+                    d="M11,1.83333333 L11,10.1666667 L7,7.38833333 L7,10.1666667 L1,6 L7,1.83333333 L7,4.61033333 L11,1.83333333 Z"
+                  ></path>
+                </g>
+              </g>
+            </svg>
           </a>
         </td>
         <td>
@@ -21,19 +35,18 @@
             [ngClass]="{ 'devui-year-month-disabled': !hasPreMonth() }"
           >
             <svg
-              width="16px"
-              height="16px"
-              viewBox="0 0 16 16"
+              width="6px"
+              height="10px"
+              viewBox="0 0 6 10"
               version="1.1"
               xmlns="http://www.w3.org/2000/svg"
               xmlns:xlink="http://www.w3.org/1999/xlink"
             >
-              <g id="collapse-left" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                <g>
+              <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g transform="translate(-3.000000, -1.000000)">
                   <polygon
-                    id="left-path"
-                    fill-rule="nonzero"
-                    points="10.7071068 12.2928932 9.29289322 13.7071068 3.58578644 8 9.29289322 2.29289322 10.7071068 3.70710678 6.41421356 8"
+                    transform="translate(6.000000, 6.000000) rotate(-90.000000) translate(-6.000000, -6.000000) "
+                    points="6 3 10.1666667 9 1.83333333 9"
                   ></polygon>
                 </g>
               </g>
@@ -52,19 +65,18 @@
             [ngClass]="{ 'devui-year-month-disabled': !hasNextMonth() }"
           >
             <svg
-              width="16px"
-              height="16px"
-              viewBox="0 0 16 16"
+              width="6px"
+              height="9px"
+              viewBox="0 0 6 9"
               version="1.1"
               xmlns="http://www.w3.org/2000/svg"
               xmlns:xlink="http://www.w3.org/1999/xlink"
             >
-              <g id="collapse-right" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                <g>
+              <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g transform="translate(-3.000000, -2.000000)">
                   <polygon
-                    id="right-path"
-                    fill-rule="nonzero"
-                    points="10.7071068 12.2928932 9.29289322 13.7071068 3.58578644 8 9.29289322 2.29289322 10.7071068 3.70710678 6.41421356 8"
+                    transform="translate(6.000000, 6.166667) scale(-1, 1) rotate(-90.000000) translate(-6.000000, -6.166667) "
+                    points="6 3.16666667 10.1666667 9.16666667 1.83333333 9.16666667"
                   ></polygon>
                 </g>
               </g>
@@ -78,8 +90,20 @@
             (click)="onNextYear()"
             [ngClass]="{ 'devui-year-month-disabled': !hasNextYearOption() }"
           >
-            <span class="right-triangle"></span>
-            <span class="right-triangle second"></span>
+            <svg
+              width="10px"
+              height="9px"
+              viewBox="0 0 10 9"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+            >
+              <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g transform="translate(-1.000000, -2.000000)">
+                  <polygon points="5 4.77777778 5 2 11 6.16666667 5 10.3333333 5 7.55555556 1 10.3333333 1 2"></polygon>
+                </g>
+              </g>
+            </svg>
           </a>
         </td>
       </tr>
@@ -136,7 +160,7 @@
           </td>
           <td colspan="3" *ngIf="isAuxiliary">
             <div class="devui-btn-wrapper">
-              <d-button bsStyle="primary" [disabled]="!rangeStart || !rangeEnd" (btnClick)="confirmTime()" bsSize="sm">
+              <d-button bsStyle="common" [disabled]="!rangeStart || !rangeEnd" (btnClick)="confirmTime()" bsSize="sm">
                 {{ i18nCommonText?.btnConfirm }}
               </d-button>
             </div>

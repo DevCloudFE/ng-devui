@@ -25,7 +25,7 @@ $gray-1: #adb0b8; // 主要分隔线，如边框
 $gray-2: #dfe1e6; // 次要分隔线
 $gray-3: #f8f8f8; // 展开区域颜色
 $highlight-overlay: rgba(255, 255, 255, 0.8); // 用于底部浮层类操作层
-$hover-control: #344899; // 鼠标悬停控件
+$hover-control: #526ecc; // 鼠标悬停控件
 $hover-content: #f2f5fc; // 鼠标悬停底色，如下拉菜单，表格
 $huawei-bg: #333854; // 顶部导航颜色
 $huawei-red: #f66f6a; // 顶部菜单选中
@@ -37,17 +37,47 @@ $status-initial: #e9edfa; // 初始化
 $status-red: #f66f6a; // 错误，失败，危险操作告警色
 $status-unavaliable: #f5f5f6; // 失效，等待，回退， 中止
 $status-yellow: #fac20a; // 提示信息
+$status-waiting: #9faad7; // 等待
 $strip-color: #f2f5fc; // 用于表格类间接行
 $tag-label-bgcolor: #eef0f5; // 标签类型
 // 用于alert
-$hwc-status-danger-border: #ffa4a1;
+$hwc-status-danger-border: #f66f6a;
 $hwc-status-danger-background: #ffeeed;
-$hwc-status-info-border: #96adfa;
-$hwc-status-info-background: #e9edfa;
+$hwc-status-info-border: #5e7ce0;
+$hwc-status-info-background: #f2f5fc;
 $hwc-status-success-border: #50d4ab;
 $hwc-status-success-background: #edfff9;
-$hwc-status-warning-border: #ffbf85;
+$hwc-status-warning-border: #fa9841;
 $hwc-status-warning-background: #fff3e8;
+$hwc-status-primary-border: #5e7ce0;
+$hwc-status-primary-background: #f2f5fc;
 // 用于tooltips/ toast
 $hwc-feedback-overlay-background: #464d6e;
 $hwc-feedback-overlay-font-color: #dfe1e6;
+// 用于modal
+$full-screen-overlay: #ffffff;
+// 用于重要按钮
+$color-bg-primary: #5e7ce0;
+$color-bg-primary-hover: #7693f5;
+$color-bg-primary-active: #526ecc;
+$color-bg-danger: #f66f6a;
+$color-bg-danger-hover: #ff8b87;
+$color-bg-danger-active: #de504e;
+// 用于下拉中搜索框
+$hwc-drop-down-search: #f2f5fc;
+$hwc-drop-down-search-hover: #eef0f5;
+// 用于区块
+$hwc-block-default: #e9edfa;
+// 文字效果拆分
+$hwc-color-text-active-text-link: #526ecc; // $hover-control
+$hwc-color-text-link-hover-active: #344899; // $brand-2
+// 边框效果拆分
+$hwc-color-border-hover: #575d6c; // $dark-2
+$hwc-color-border-active: #5e7ce0; // $brand-1
+$hwc-color-border-active-and-hover: #344899; // $brand-2
+// 图标效果拆分
+$hwc-color-icon-hover-active: #5e7ce0; // $brand-1
+$hwc-color-icon-active-and-hover: #344899; // $brand-2
+// 背景效果拆分
+$hwc-color-bg-active: #5e7ce0; // brand-1
+$hwc-color-bg-active-and-hover: #344899; // brand-2

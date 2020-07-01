@@ -15,5 +15,8 @@ export class DImagePreviewDemoComponent {
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./custom-open/custom-open.component.html')},
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./custom-open/custom-open.component.ts')},
   ];
-
+  navItems = [
+    { dAnchorLink: 'basic-usage', value: '基本用法'},
+    { dAnchorLink: 'custom-usage', value: '自定义开启预览窗口'}
+  ];
 }

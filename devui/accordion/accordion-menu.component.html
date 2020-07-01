@@ -8,6 +8,13 @@
   title="{{ title }}"
   (click)="!disabled && toggle($event)"
 >
+  <div
+    class="devui-accordion-splitter"
+    [ngClass]="{
+      'devui-parent-list': deepth === 0
+    }"
+    [ngStyle]="{ left: deepth * 20 + 10 + 'px' }"
+  ></div>
   <ng-container *ngIf="!menuItemTemplate">
     {{ title }}
   </ng-container>
@@ -23,7 +30,10 @@
   <span class="devui-accordion-open-icon">
     <svg viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
       <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <polygon points="4.5 5 8 8.76923077 11.5 5 13 6.61538462 8 12 3 6.61538462"></polygon>
+        <polygon
+          transform="translate(8.000000, 8.000000) scale(1, -1) rotate(-360.000000) translate(-8.000000, -8.000000) "
+          points="4 5.5 12 5.5 8 10.5"
+        ></polygon>
       </g>
     </svg>
   </span>

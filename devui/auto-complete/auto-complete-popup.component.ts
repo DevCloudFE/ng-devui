@@ -39,8 +39,8 @@ export class AutoCompletePopupComponent implements ControlValueAccessor {
   @Input() enableLazyLoad: boolean;
   @Input() appendToBody = false;
   @Input() origin: CdkOverlayOrigin | undefined;
-  @ViewChild('selectMenuElement', { static: false }) selectMenuElement: ElementRef;
-  @ViewChild('dropdownUl', { static: false }) dropdownUl: ElementRef;
+  @ViewChild('selectMenuElement') selectMenuElement: ElementRef;
+  @ViewChild('dropdownUl') dropdownUl: ElementRef;
 
   showLoading = false;
   private value: any;

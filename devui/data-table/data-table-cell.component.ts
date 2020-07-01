@@ -15,7 +15,7 @@ import { DataTableColumnTmplComponent } from './tmpl/data-table-column-tmpl.comp
   templateUrl: './data-table-cell.component.html'
 })
 export class DataTableCellComponent implements OnInit, OnChanges, OnDestroy {
-  @ViewChild(EditorDirective, { static: false }) editorHost: EditorDirective;
+  @ViewChild(EditorDirective) editorHost: EditorDirective;
   @Input() rowIndex: number;
   @Input() colIndex: number;
   @Input() column: DataTableColumnTmplComponent;
@@ -263,6 +263,6 @@ export class DataTableCellComponent implements OnInit, OnChanges, OnDestroy {
 
   toggleChildTable(rowItem) {
     rowItem.$isChildTableOpen = !rowItem.$isChildTableOpen;
-    this.dt.onToggleChildrenTable(rowItem, rowItem.$isChildTableOpen);
+    this.dt.setRowChildToggleStatus(rowItem, rowItem.$isChildTableOpen);
   }
 }

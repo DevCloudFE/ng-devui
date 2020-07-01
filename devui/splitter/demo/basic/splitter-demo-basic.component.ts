@@ -28,4 +28,8 @@ export class SplitterDemoBasicComponent {
   sizeChange(size) {
     console.log(size);
   }
+
+  collapsedChange(event) {
+    console.log(event);
+  }
 }

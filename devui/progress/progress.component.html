@@ -1,4 +1,4 @@
-<div *ngIf="!isCircle" class="devui-progress" [ngStyle]="{ height: height }">
+<div *ngIf="!isCircle" class="devui-progress" [ngStyle]="{ height: height, borderRadius: height }">
   <div
     class="devui-progress-bar"
     role="progressbar"
@@ -7,11 +7,12 @@
     aria-valuemax="100"
     [style.background-color]="barbgcolor"
     [style.width]="percentage + '%'"
+    [style.borderRadius]="height"
   ></div>
   <span [style.line-height]="height">{{ percentageText }}</span>
 </div>
 <div *ngIf="isCircle" class="devui-progress-circle">
-  <svg class="devui-progress-circle " viewBox="0 0 100 100">
+  <svg class="devui-progress-circle" viewBox="0 0 100 100">
     <path
       class="devui-progress-circle-trail"
       fill-opacity="0"

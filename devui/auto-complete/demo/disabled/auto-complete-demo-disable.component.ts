@@ -11,7 +11,13 @@ export class AutoDemoDisableComponent {
   languages = ['C#', 'C', 'C++', 'CPython', 'Java', 'JavaScript', 'Go', 'Python', 'Ruby', 'F#', 'TypeScript', 'SQL',
     'LiveScript', 'CoffeeScript'];
 
+  languages1 = [{name: 'c'}, {name: 'C++', disable: true}];
+
   onSearchLocal(term) {
     return of(this.languages.filter(lang => lang.toLowerCase().indexOf(term.toLowerCase()) !== -1));
+  }
+
+  formatter(item) {
+    return item.name;
   }
 }

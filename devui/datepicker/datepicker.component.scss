@@ -1,9 +1,13 @@
 @import '../style/theme/color';
 
+.devui-date-header {
+  height: 38px;
+}
+
 .devui-month-view {
   background-color: $dropdown-overlay;
   font-size: 12px;
-  width: 240px;
+  width: 238px;
   text-align: center;
   box-shadow: 0 4px 8px 0 $dark-1-boxshadow;
   border-radius: 2px;
@@ -15,6 +19,7 @@
   background: $dropdown-overlay;
   table-layout: fixed;
   border-collapse: collapse;
+  width: 100%;
 }
 
 .devui-month-view .devui-date-title {
@@ -26,100 +31,30 @@
 .devui-month-view .devui-btn-link {
   text-decoration: none;
   cursor: pointer;
+  display: block;
 
   &.devui-year-month-disabled {
     cursor: not-allowed;
 
-    .left-triangle {
-      border-color: transparent $disabled-border transparent transparent;
-    }
-
-    .right-triangle {
-      border-color: transparent transparent transparent $disabled-border;
-    }
-
-    svg {
-      #left-path {
-        fill: $disabled-border;
-      }
-
-      #right-path {
-        fill: $disabled-border;
-      }
+    svg path,
+    svg polygon {
+      fill: $disabled-content;
     }
   }
 
-  .left-triangle,
-  .right-triangle {
-    display: inline-block;
-    position: absolute;
-    top: 6px;
-    width: 0;
-    height: 0;
-    border: 6px solid;
-  }
-
-  .left-triangle {
-    left: 6px;
-    border-color: transparent $dark-1-3 transparent transparent;
-  }
-
-  .right-triangle {
-    right: 6px;
-    border-color: transparent transparent transparent $dark-1-3;
-  }
-
-  .left-triangle.second {
-    left: 12px;
-  }
-
-  .right-triangle.second {
-    right: 12px;
-  }
-
-  svg {
-    #left-path {
-      fill: $dark-1-3;
-    }
-
-    #right-path {
-      fill: $dark-1-3;
-    }
+  svg path,
+  svg polygon {
+    fill: $dark-2;
   }
 
   &:not(.devui-year-month-disabled):hover {
-    .left-triangle {
-      border-right-color: $hover-control;
-    }
-
-    .right-triangle {
-      border-left-color: $hover-control;
-    }
-
-    #left-path {
-      fill: $hover-control;
-    }
-
-    #right-path {
-      fill: $hover-control;
-    }
-
     svg {
-      #left-path {
-        fill: $hover-control;
-      }
-
-      #right-path {
+      path,
+      polygon {
         fill: $hover-control;
       }
     }
   }
-}
-
-.devui-month-view .devui-btn-link.devui-btn-right {
-  transform: scale(-1, 1);
-  display: inline-block;
-  line-height: 1;
 }
 
 .devui-month-view .date-select {
@@ -169,31 +104,18 @@
   color: $dark-1;
 }
 
-.devui-month-view .devui-day:hover:not(.active):not(.disabled) .devui-calendar-date {
-  background-color: $hover-content;
-}
+.devui-month-view .devui-out-of-month {
+  .devui-calendar-date {
+    opacity: 0.8;
+    background-color: $dropdown-overlay;
+    color: $gray-1;
+  }
 
-.devui-month-view .devui-day.active:hover .devui-calendar-date {
-  background-color: $hover-control;
-  color: $font-white;
-}
-
-.devui-month-view .devui-in-month-day.disabled:not(.active) .devui-calendar-date {
-  color: $dark-1;
-  background-color: $gray-2;
-  opacity: 0.8;
-  cursor: not-allowed;
-}
-
-.devui-month-view .devui-in-month-day.active .devui-calendar-date {
-  background: $brand-1;
-  color: $font-white;
-}
-
-.devui-month-view .devui-out-of-month .devui-calendar-date {
-  opacity: 0.8;
-  background-color: $dropdown-overlay;
-  color: $gray-1;
+  &:hover {
+    .devui-calendar-date {
+      background-color: $hover-content;
+    }
+  }
 }
 
 .devui-month-view .devui-minutes::before {
@@ -211,22 +133,26 @@
   z-index: 999;
 }
 
-.devui-yearOption {
-  min-width: 4em;
-  margin-left: 4.5em;
-  max-height: 255px;
-  overflow-x: hidden;
-  overflow-y: auto;
-}
-
+.devui-yearOption,
 .devui-monthOption {
-  min-width: 3em;
-  margin-left: 1em;
+  width: 240px;
+  height: 195px;
+  position: absolute;
+  left: -68px;
+  top: 30px;
+  z-index: 1;
+  background: $bg-white;
 }
 
 .devui-yearOption li,
 .devui-monthOption li {
+  width: 60px;
+  height: 65px;
+  line-height: 65px;
   text-align: center;
+  display: inline-block;
+  background: $bg-white;
+  border-radius: 2px;
 }
 
 .devui-yearOption li:hover,
@@ -236,14 +162,20 @@
   cursor: pointer;
 }
 
-.devui-yearOption li.active,
-.devui-monthOption li.active {
+.devui-yearOption li.active:not(.disabled),
+.devui-monthOption li.active:not(.disabled) {
   color: $font-white;
   background-color: $brand-1;
 
   &:hover {
     background-color: $hover-control;
   }
+}
+
+.devui-yearOption li.disabled,
+.devui-monthOption li.disabled {
+  color: $disabled-content;
+  background-color: $disabled-bg;
 }
 
 .devui-month-view .devui-timepicker {
@@ -286,10 +218,48 @@
         vertical-align: middle;
         padding: 4px;
         border-top: none;
+        border-radius: 2px;
 
         &:not(.disabled) {
           border-top: none;
           background: $dropdown-overlay;
+        }
+
+        &.devui-day:hover:not(.active):not(.disabled):not(.devui-out-of-month) {
+          background-color: $hover-content;
+        }
+
+        &.devui-day:not(.disabled).active:hover {
+          background-color: $hover-control;
+
+          & > .devui-calendar-date {
+            color: $font-white;
+          }
+        }
+
+        &.devui-in-month-day.disabled {
+          color: $disabled-content;
+          cursor: not-allowed;
+
+          .devui-calendar-date {
+            color: $disabled-content;
+          }
+
+          &:not(.active) {
+            background-color: $disabled-bg;
+          }
+
+          &.active {
+            background-color: $disabled-border;
+          }
+        }
+
+        &.devui-in-month-day:not(.disabled).active {
+          background: $hwc-color-bg-active;
+
+          & > .devui-calendar-date {
+            color: $font-white;
+          }
         }
       }
     }
@@ -298,7 +268,7 @@
   > thead {
     > tr {
       > td {
-        vertical-align: top;
+        vertical-align: middle;
         line-height: 1.5;
         padding: 4px;
       }
@@ -319,7 +289,7 @@
 }
 
 .devui-month-view tfoot td {
-  padding: 2px;
+  padding: 10px;
   vertical-align: middle;
   border-top: none;
 }
@@ -403,4 +373,8 @@
 
 :host ::ng-deep .cdk-overlay-pane d-datepicker.devui-dropdown-menu {
   padding: 0;
+}
+
+:host .devui-form-control {
+  padding-right: 0;
 }

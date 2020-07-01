@@ -209,6 +209,7 @@ export class InputNumberComponent implements ControlValueAccessor, OnChanges, On
         const decimals = this.getMaxDecimals(this.value);
         this.updateValue(parseFloat((this.value + this.step).toFixed(decimals)));
       }
+      this.inputElement.nativeElement.focus();
     }
   }
 
@@ -220,6 +221,7 @@ export class InputNumberComponent implements ControlValueAccessor, OnChanges, On
         const decimals = this.getMaxDecimals(this.value);
         this.updateValue(parseFloat((this.value - this.step).toFixed(decimals)));
       }
+      this.inputElement.nativeElement.focus();
     }
   }
 

@@ -81,7 +81,9 @@
   <tr class="child-table" *ngIf="rowItem['$isChildTableOpen'] && rowItem['children']">
     <td [attr.colspan]="childTdColspan">
       <table class="devui-table {{ type ? 'table-' + type : '' }} {{ hover ? 'table-hover' : '' }}" [style.table-layout]="'fixed'">
-        <thead></thead>
+        <colgroup>
+          <col [style.width]="config.width" *ngFor="let config of tableWidthConfig" />
+        </colgroup>
         <tbody
           dDataTableBody
           [dataSource]="rowItem['children']"
@@ -99,6 +101,7 @@
           [hover]="hover"
           [tableLevel]="tableLevel + 1"
           [nestedIndex]="nestedIndex + ',' + rowIndex"
+          [tableWidthConfig]="tableWidthConfig"
         ></tbody>
       </table>
     </td>

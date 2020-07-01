@@ -17,10 +17,10 @@ export class ProgressComponent implements OnInit , OnChanges {
   @Input() percentage = 0;
   @Input() percentageText: string;
   @Input() barbgcolor: string;
-  @Input() height = '20px';
+  @Input() height = '16px';
   @Input() strokeWidth = 6; // 设置圈形进度条宽度，进度条与画布宽度的百分比
   @Input() isCircle = false;
-  @ContentChild(TemplateRef, { static: false }) customViewTemplate: TemplateRef<any>;
+  @ContentChild(TemplateRef) customViewTemplate: TemplateRef<any>;
   trailPath: { [key: string]: string };
   strokePath: { [key: string]: string };
   pathString: string;

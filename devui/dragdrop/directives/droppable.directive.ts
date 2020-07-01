@@ -57,7 +57,7 @@ export class DroppableDirective implements OnInit, AfterViewInit, OnDestroy {
 
     @Input() placeholderTag = 'div';
 
-    @Input() placeholderStyle: any = {backgroundColor: ['#6A98E3', `var(--brand-4, '#859bff')`], opacity: '.4'};
+    @Input() placeholderStyle: any = {backgroundColor: ['#6A98E3'], opacity: '.4'};
 
     /**
      * 设置placeholder的提示性文字，仅支持文本（安全起见）

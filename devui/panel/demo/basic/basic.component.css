@@ -5,5 +5,7 @@
 }
 
 d-panel-header .icon {
-  float: right;
+  float: left;
+  padding-top: 4px;
+  margin-right: 15px;
 }

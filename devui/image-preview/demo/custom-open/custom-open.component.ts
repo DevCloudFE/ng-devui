@@ -1,5 +1,5 @@
 import { Component, ElementRef } from '@angular/core';
-import {  JPGTESTIMG, JPGTESTIMG2 } from '../fakedata';
+import { JPGTESTIMG, JPGTESTIMG2 } from '../fakedata';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -11,7 +11,7 @@ export class CustomOpenComponent {
   customSub = new Subject();
   imageDatas = [
     { src: JPGTESTIMG},
-    { src: JPGTESTIMG2  }
+    { src: JPGTESTIMG2 }
   ];
   constructor(private elementRef: ElementRef) {
 

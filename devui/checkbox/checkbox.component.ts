@@ -12,6 +12,7 @@ import {
   OnChanges
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'd-checkbox',
@@ -38,6 +39,7 @@ export class CheckBoxComponent implements ControlValueAccessor, OnChanges {
   @Input() labelTemplate: TemplateRef<any>;
   @Input() halfchecked = false;
   @Input() showAnimation = true;
+  @Input() beforeChange: (value) => boolean | Promise<boolean> | Observable<boolean>;
   @Output() change: EventEmitter<boolean> = new EventEmitter<boolean>();
   public animationUnlocked = false;
   public id: number;
@@ -66,13 +68,15 @@ export class CheckBoxComponent implements ControlValueAccessor, OnChanges {
   }
 
   toggle($event) {
-    if (this.disabled) {
-      return;
-    }
-    this.checked = !this.checked;
-    this.onChange(this.checked);
-    this.change.next(this.checked);
-    this.onTouch();
+    this.canChange().then(val => {
+      if (this.disabled || !val) {
+        return;
+      }
+      this.checked = !this.checked;
+      this.onChange(this.checked);
+      this.change.next(this.checked);
+      this.onTouch();
+    });
   }
 
   private unlockAnimation() {
@@ -81,6 +85,25 @@ export class CheckBoxComponent implements ControlValueAccessor, OnChanges {
         this.animationUnlocked = true;
       }, 0);
     }
+  }
+
+  canChange() {
+    let changeResult = Promise.resolve(true);
+
+    if (this.beforeChange) {
+      const result: any = this.beforeChange(this.label);
+      if (typeof result !== 'undefined') {
+        if (result.then) {
+          changeResult = result;
+        } else if (result.subscribe) {
+          changeResult = (result as Observable<boolean>).toPromise();
+        } else {
+          changeResult = Promise.resolve(result);
+        }
+      }
+    }
+
+    return changeResult;
   }
 
   ngOnChanges(changes: SimpleChanges) {

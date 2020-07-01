@@ -14,6 +14,7 @@ import {
   NG_VALUE_ACCESSOR
 } from '@angular/forms';
 import isArray from 'lodash-es/isArray';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'd-checkbox-group',
@@ -36,6 +37,7 @@ export class CheckBoxGroupComponent implements OnChanges, ControlValueAccessor {
   @Input() filterKey: string;
   @Input() labelTemplate: TemplateRef<any>;
   @Input() showAnimation = true;
+  @Input() beforeChange: (value) => boolean | Promise<boolean> | Observable<boolean>;
   @Output() change: EventEmitter<boolean> = new EventEmitter<boolean>();
   values: any[] = [];
   options_display = [];
@@ -104,5 +106,4 @@ export class CheckBoxGroupComponent implements OnChanges, ControlValueAccessor {
     });
     return checkedArray;
   }
-
 }

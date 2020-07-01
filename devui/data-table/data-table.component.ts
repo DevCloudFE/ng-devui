@@ -1,15 +1,16 @@
-import { AfterContentInit, ChangeDetectorRef, Component, ContentChild, ContentChildren, ElementRef, EventEmitter,
+import { AfterContentInit, Component, ContentChild, ContentChildren, ElementRef, EventEmitter,
   Input, NgZone, OnDestroy, OnInit, Output, QueryList, Renderer2, TemplateRef, ViewChild, OnChanges,
-  SimpleChanges} from '@angular/core';
+  SimpleChanges, AfterViewInit} from '@angular/core';
 import { Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { WindowRef } from 'ng-devui/window-ref';
-import { CellSelectedEventArg, CheckableRelation, ColumnResizeEventArg, DataTablePager, RowCheckChangeEventArg,
-  RowSelectedEventArg, SortEventArg, TableExpandConfig, ColumnAdjustStrategy } from './data-table.model';
+import { CellSelectedEventArg, CheckableRelation, ColumnResizeEventArg, RowCheckChangeEventArg,
+  RowSelectedEventArg, SortEventArg, TableExpandConfig, ColumnAdjustStrategy, TableCheckStatusArg,
+  TableWidthConfig, TableCheckOptions} from './data-table.model';
 import { DataTableColumnTmplComponent } from './tmpl/data-table-column-tmpl.component';
-import { DataTableFootTmplComponent } from './tmpl/data-table-foot-tmpl.component';
-import { DataTableHeadTmplComponent } from './tmpl/data-table-head-tmpl.component';
-import { DataTablePagerTmplComponent } from './tmpl/data-table-pager-tmpl.component';
+import { TableThComponent } from './table/head/th/th.component';
+import { TableTheadComponent } from './table/head/thead.component';
+import { TableTbodyComponent } from './table/body/tbody.component';
 
 @Component({
   selector: 'd-data-table',
@@ -21,11 +22,19 @@ import { DataTablePagerTmplComponent } from './tmpl/data-table-pager-tmpl.compon
   // changeDetection: ChangeDetectionStrategy.OnPush,
   exportAs: 'dataTable'
 })
-export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterContentInit {
+export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterContentInit, AfterViewInit {
   /**
    * 【可选】Datatable是否提供勾选行的功能
    */
   @Input() checkable: boolean;
+  /**
+   * 【可选】表头checkbox是否disabled
+   */
+  @Input() headerCheckDisabled: boolean;
+  /**
+   * 【可选】表头选中的下拉项及操作
+   */
+  @Input() checkOptions: TableCheckOptions[];
   /**
    * 【可选】是否提供显示行详情的功能
    */
@@ -83,6 +92,7 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
    * disable: 列宽不可调整
    * mouseup: 列宽在鼠标松开时变化
    * mousemove: 列宽随着鼠标移动变化
+   * @deprecated
    */
   @Input() columnAdjustStrategy: ColumnAdjustStrategy = ColumnAdjustStrategy.disable;
   /**
@@ -150,10 +160,6 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
    */
   @Output() checkAllChange = new EventEmitter<boolean>();
   /**
-   * 页码变化事件
-   */
-  @Output() pageIndexChange = new EventEmitter<any>();
-  /**
    * 延迟懒加载完成事件
    */
   @Output() loadMore = new EventEmitter<any>();
@@ -202,21 +208,29 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
   @Input() virtualMinBufferPx = 80;
   @Input() virtualMaxBufferPx = 200;
 
-  @ContentChildren(DataTableColumnTmplComponent) columns: QueryList<DataTableColumnTmplComponent>;
-  @ContentChild(DataTableHeadTmplComponent, { static: false }) headTemplate: DataTableHeadTmplComponent;
-  @ContentChild(DataTableFootTmplComponent, { static: false }) footTemplate: DataTableFootTmplComponent;
-  @ContentChild(DataTablePagerTmplComponent, { static: false }) pagerTemplate: DataTablePagerTmplComponent;
-  @ContentChild('noResultTemplateRef', { static: false }) noResultTemplate: TemplateRef<any>;
-  @ViewChild('fixHeaderContainerRef', { static: false }) fixHeaderContainerRefElement: ElementRef;
-  @ViewChild('fixHeaderTableRef', { static: false }) fixHeaderTableRefElement: ElementRef;
-  // @ViewChild('fixColumnRef') fixColumnRefElement: ElementRef;
-  @ViewChild('tableView', { static: true }) tableViewRefElement: ElementRef;
+  /**
+   * 懒加载
+   */
+  @Input() lazy: boolean;
+  /**
+   * pager
+   * @deprecated
+   */
+  @Input() pager: any;
 
+  @Input() tableWidthConfig: TableWidthConfig[] = [];
+
+  @ContentChildren(DataTableColumnTmplComponent) columns: QueryList<DataTableColumnTmplComponent>;
+  @ContentChild(TableTheadComponent) innerHeader: TableTheadComponent;
+  @ContentChild(TableTbodyComponent) innerBody: TableTbodyComponent;
+  @ContentChildren(TableThComponent, { descendants: true }) thList: QueryList<TableThComponent>;
+  @ContentChild('noResultTemplateRef') noResultTemplate: TemplateRef<any>;
+  @ViewChild('fixHeaderContainerRef') fixHeaderContainerRefElement: ElementRef;
+  @ViewChild('tableView', { static: true }) tableViewRefElement: ElementRef;
   _dataSource: any[] = [];
   _pageAllChecked = false;
   selectable = true;
   allChecked: number[] = [];
-  _pager: DataTablePager;
   selectedRowItem: any;
   selectedColumnItem: any;
   isCellEdit: boolean;
@@ -226,29 +240,22 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
   _hideColumn: string[] = [];
   _columns: DataTableColumnTmplComponent[];
   displayDataSource: any[];
-  _lazy = false;
   scrollStream = new EventEmitter<Event>();
   subscription: Subscription;
-  colSubscription: Subscription;
+  headertoggleTableSubscription: Subscription;
+  headerCheckStatusSubscription: Subscription;
   searchQueryChange = new EventEmitter<{ [key: string]: any; }>();
   halfChecked = false;
-  tableBodyEl: ElementRef;
-  tableStatusEnum = {
-    open: true,
-    close: false
-  };
-  resizeBarRefElement: ElementRef;
-
+  childrenTableOpen: boolean;
   private scrollY = 0;
-  @ViewChild('resizeBar', { static: false }) set resizeBar(content: ElementRef) {
+  BUILTIN_COL_WIDTH = '36px';
+  BUILTIN_COL_WIDTH_EXTRA = '55px';
+  tableBodyEl: ElementRef;
+  @ViewChild('tableBody') set content(content: ElementRef) {
     setTimeout(() => {
-      this.resizeBarRefElement = content;
-      if (!this.changeDetectorRef['destroyed']) {
-        this.changeDetectorRef.detectChanges();
-      }
+      this.tableBodyEl = content;
     });
   }
-
 
   @Input() set dataSource(dataSource: any[]) {
     if (null === dataSource || !dataSource) {
@@ -276,24 +283,6 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
     return this._hideColumn;
   }
 
-  @Input() set pager(pager: DataTablePager) {
-    if (pager === undefined || pager === null) {
-      return;
-    } else {
-      this._pager = {
-        total: pager.total,
-        pageIndex: pager.pageIndex || 1,
-        pageSize: pager.pageSize || 10,
-        maxItems: pager.maxItems || 8,
-        selectDirection: pager.selectDirection || 'auto'
-      };
-    }
-  }
-
-  get pager() {
-    return this._pager;
-  }
-
   @Input() set pageAllChecked(pageAllChecked: boolean) {
     if (this.dataSource) {
       this._dataSource = this.setCheckedStatus(this.dataSource, pageAllChecked);
@@ -306,18 +295,9 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
     return this._pageAllChecked;
   }
 
-  @Input() set lazy(lazy: boolean) {
-    this._lazy = lazy;
-  }
-
-  get lazy() {
-    return this._lazy;
-  }
-
   constructor(
     private windowRef: WindowRef,
     private elementRef: ElementRef,
-    private changeDetectorRef: ChangeDetectorRef,
     private ngZone: NgZone,
     private renderer: Renderer2) {
   }
@@ -334,18 +314,19 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
   // life hook start
   ngOnInit() {
     if (this.lazy) {
-      this.pager = null;
+      this.setupScrollEvent();
     }
-    this.setupScrollEvent();
     this.ngZone.runOutsideAngular(() => {
       document.addEventListener(
         'click',
         this.onDocumentClick.bind(this)
       );
-      window.addEventListener(
-        'wheel',
-        this.onWinScroll.bind(this)
-      );
+      if (this.lazy) {
+        window.addEventListener(
+          'wheel',
+          this.onWinScroll.bind(this)
+        );
+      }
     });
   }
 
@@ -369,28 +350,54 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
   }
 
   ngAfterContentInit() {
-    this.updateColumns();
-    this.columns.forEach((col) => {
-      col.orderChange.subscribe((order) => {
+    if (this.columns.length > 0) {
+      this.updateColumns();
+      this.columns.forEach((col) => {
+        col.orderChange.subscribe(() => {
+          this.updateColumns();
+        });
+        col.widthChange.subscribe(() => {
+          this.updateColumns();
+        });
+      });
+      this.columns.changes.subscribe(() => {
         this.updateColumns();
       });
-    });
-    this.columns.changes.subscribe(() => {
-      this.updateColumns();
+    }
+
+    if (this.innerHeader) {
+      this.headerCheckStatusSubscription = this.innerHeader.headerCheckStatusEvent.subscribe((status) => {
+        this.onCheckAllChange(status);
+      });
+      this.headertoggleTableSubscription = this.innerHeader.headerChildrenTableToggleEvent.subscribe((status) => {
+        this.onToggleAllChildrenTable(status);
+      });
+    }
+  }
+
+  ngAfterViewInit() {
+    this.thList.forEach(th => {
+      th.tableViewRefElement = this.tableViewRefElement;
     });
   }
 
   private updateColumns() {
     this._columns = this.getColumns();
-  }
-
-  private getScrollbarWidth() {
-    if (this.tableBodyEl) {
-      const inner = this.tableBodyEl.nativeElement.parentNode;
-      const outer = inner.parentNode;
-      // Calculating difference between container's full width and the child width
-      return (outer.offsetWidth - inner.offsetWidth);
+    this.tableWidthConfig = [];
+    if (this.checkable) {
+      if (this.checkOptions && this.checkOptions.length > 0) {
+        this.tableWidthConfig.push({field: 'checkbox', width: this.BUILTIN_COL_WIDTH_EXTRA});
+      } else {
+        this.tableWidthConfig.push({field: 'checkbox', width: this.BUILTIN_COL_WIDTH});
+      }
     }
+
+    if (this.showExpandToggle) {
+      this.tableWidthConfig.push({field: 'expand', width: this.BUILTIN_COL_WIDTH});
+    }
+    this._columns.forEach((col) => {
+      this.tableWidthConfig.push({field: col.field, width: col.width});
+    });
   }
 
   ngOnDestroy(): void {
@@ -489,7 +496,7 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
     }
   }
 
-  onRowCheckChange($event: RowCheckChangeEventArg) {
+  setRowCheckStatus($event: RowCheckChangeEventArg) {
     // 处理children的选中
     if ($event.rowItem.children && this.checkableRelation.downward) {
       this.setCheckedStatus($event.rowItem.children, $event.checked);
@@ -518,6 +525,9 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
       this.halfChecked = hasChecked;
     }
 
+    if (this.innerHeader) {
+      this.innerHeader.setHeaderCheckStatus({pageAllChecked: this._pageAllChecked, pageHalfChecked: this.halfChecked});
+    }
     this.rowCheckChange.emit($event);
   }
 
@@ -587,10 +597,6 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
     this.searchQueryChange.emit($event);
   }
 
-  onPageChange($event: number) {
-    this.pageIndexChange.emit({ pageIndex: $event, pageSize: this.pager.pageSize });
-  }
-
   getSelectedRowItem(): any[] {
     return this.selectedRowItem;
   }
@@ -598,7 +604,11 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
 
   loadFinish(complete: boolean) {
     if (complete) {
-      return this.unSubscription();
+      if (this.subscription) {
+        this.subscription.unsubscribe();
+        this.subscription = null;
+      }
+      return;
     }
     setTimeout(_ => this.onWinScroll(null), 300);
   }
@@ -616,35 +626,36 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
     this.onDocumentClick($event);
   }
 
-  onResizingFixedHandler({ column, width }) {
+  onResizingFixedHandler({ field, width }) {
     if ((this.resizeable && this.columnAdjustStrategy === ColumnAdjustStrategy.disable)
     || this.columnAdjustStrategy === ColumnAdjustStrategy.mousemove) {
-      this._columns = this._columns.map((_column) => {
-        if (_column.field === column.field) {
-          this.ngZone.run(() => {
-            _column.width = width + 'px';
-          });
-          return _column;
-        }
-        return _column;
+      const index = this.tableWidthConfig.findIndex((config) => {
+        return config.field === field;
       });
+      if (index > -1) {
+        setTimeout(() => {
+          this.tableWidthConfig[index].width = width + 'px';
+        });
+      }
     }
   }
 
-  onResizeHandler($event: { width, field }) {
-    const { width, field } = $event;
-    this._columns = this._columns.map((column, index) => {
+  onResizeHandler({ width, field }) {
+    const index = this.tableWidthConfig.findIndex((config) => {
+      return config.field === field;
+    });
+    if (index > -1) {
+      this.tableWidthConfig[index].width = width + 'px';
+    }
+    this._columns = this._columns.map((column, colIndex) => {
       if (column.field === field) {
-        this.ngZone.run(() => {
-          column.width = parseInt(width, 10) + 'px';
-          const columnResizeEventArg = { currentColumn: column, nextColumn: this._columns[index + 1] };
-          this.resize.emit(columnResizeEventArg);
-        });
+        column.width = parseInt(width, 10) + 'px';
+        const columnResizeEventArg = { currentColumn: column, nextColumn: this._columns[colIndex + 1] };
+        this.resize.emit(columnResizeEventArg);
         return column;
       }
       return column;
     });
-    this.changeDetectorRef.markForCheck();
   }
 
   handleDragTable({ from, to }) {
@@ -733,9 +744,14 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
       this.subscription = null;
     }
 
-    if (this.colSubscription) {
-      this.colSubscription.unsubscribe();
-      this.colSubscription = null;
+    if (this.headerCheckStatusSubscription) {
+      this.headerCheckStatusSubscription.unsubscribe();
+      this.headerCheckStatusSubscription = null;
+    }
+
+    if (this.headertoggleTableSubscription) {
+      this.headertoggleTableSubscription.unsubscribe();
+      this.headertoggleTableSubscription = null;
     }
   }
 
@@ -754,8 +770,8 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
       );
   }
 
-  onToggleChildrenTable(rowItem, status) {
-    if (status === this.tableStatusEnum.open) {
+  setRowChildToggleStatus(rowItem: any, open: boolean) {
+    if (open) {
       let loadChildrenResult = Promise.resolve(true);
       if (this.loadChildrenTable) {
         loadChildrenResult = this.loadChildrenTable(rowItem);
@@ -771,19 +787,28 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
     }
   }
 
-  private setChildrenToogleStatus(data, open) {
+  setTableChildrenToggleStatus(open: boolean) {
+    this.onToggleAllChildrenTable(open);
+    if (this.innerHeader) {
+      this.innerHeader.setHeaderToggleStatus(open);
+    } else {
+      this.childrenTableOpen = open;
+    }
+  }
+
+  private travelChildrenToggleStatus(data, open: boolean) {
     return data.map(item => {
       if (item.children) {
         item.$isChildTableOpen = open;
-        item.children = this.setChildrenToogleStatus(item.children, open);
+        item.children = this.travelChildrenToggleStatus(item.children, open);
       }
       return item;
     });
   }
 
   // 切换表头的子表格展开收起
-  onToggleAllChildrenTable(status) {
-    if (status === this.tableStatusEnum.open) {
+  onToggleAllChildrenTable(open: boolean) {
+    if (open) {
       let loadAllChildrenResult = Promise.resolve(true);
       if (this.loadAllChildrenTable) {
         loadAllChildrenResult = this.loadAllChildrenTable();
@@ -794,10 +819,10 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
             this.setCheckedStatus(item.children, true);
           }
         });
-        this.setChildrenToogleStatus(this.dataSource, status);
+        this.travelChildrenToggleStatus(this.dataSource, open);
       });
     } else {
-      this.setChildrenToogleStatus(this.dataSource, status);
+      this.travelChildrenToggleStatus(this.dataSource, open);
       this.allChildrenTableClose.emit();
     }
   }
@@ -826,6 +851,28 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
       const checkedRows = [];
       this.collectCheckedRows(checkedRows, this.dataSource);
       return checkedRows;
+    }
+  }
+
+  setTableCheckStatus(status: TableCheckStatusArg) {
+    if (status.pageAllChecked !== undefined) { // 设置全选
+      if (this.dataSource) {
+        this._dataSource = this.setCheckedStatus(this.dataSource, status.pageAllChecked);
+      }
+      this._pageAllChecked = status.pageAllChecked;
+      if (status.pageAllChecked) { // 全选为true
+        this.halfChecked = false;
+      } else {
+        this.halfChecked = this.dataSource.some(this.hasChecked) && this.dataSource.some(this.hasUnChecked);
+      }
+    }
+
+    if (status.pageHalfChecked !== undefined) { // 设置半选
+      this.halfChecked = status.pageHalfChecked;
+    }
+
+    if (this.innerHeader) {
+      this.innerHeader.setHeaderCheckStatus({pageAllChecked: this._pageAllChecked, pageHalfChecked: this.halfChecked});
     }
   }
 }

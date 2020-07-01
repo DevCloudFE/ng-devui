@@ -12,7 +12,7 @@ export class CheckableComponent implements OnInit {
   currentSelectedNode;
   checkNote;
 
-  checkboxInput: ICheckboxInput;
+  // checkboxInput: ICheckboxInput = { color: '#5170ff' };
   data3 = [{
     'title': '父节点1'
   }, {
@@ -91,4 +91,14 @@ export class CheckableComponent implements OnInit {
       .map((item: any) => ({ id: item.id, data: { title: item.data.title, isChecked: item.data.isChecked } }));
   }
 
+  onOperableNodeDblClicked(node) {
+    console.log(node);
+  }
+
+  onOperableNodeRightClicked(event) {
+    console.log(event.node, event.event);
+  }
+  currentNodeChecked($event) {
+    console.log('current node', $event);
+  }
 }

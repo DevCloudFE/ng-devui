@@ -3,7 +3,7 @@
 
 .form-group label {
   cursor: pointer;
-  font-size: 14px;
+  font-size: 12px;
   margin-bottom: 0;
   width: 100%;
 }
@@ -17,8 +17,9 @@
   display: block;
   list-style: none;
   background-color: $bg-white;
-  border-radius: 1px;
-  padding: 5px 5px 0 5px;
+  border-radius: 2px;
+  padding: 1px 2px 0 2px;
+  min-height: 28px;
 }
 
 .multiple-label-auto-complete-single ul,
@@ -55,12 +56,33 @@
   }
 }
 
-.multiple-label-auto-complete-disabled ul {
-  cursor: default;
+.multiple-label-auto-complete {
+  &:not(.multiple-label-auto-complete-disabled) {
+    ul li:last-child {
+      border-color: transparent;
+    }
+  }
 
-  &:hover,
-  &:active {
-    border-color: $gray-1;
+  &.multiple-label-auto-complete-disabled ul {
+    cursor: not-allowed;
+
+    &,
+    &:hover {
+      border-color: $disabled-border;
+      background-color: $disabled-bg;
+    }
+
+    li {
+      border-color: $disabled-border;
+
+      .label-text {
+        &,
+        &:hover {
+          background-color: $disabled-bg;
+          color: $disabled-content;
+        }
+      }
+    }
   }
 }
 
@@ -77,8 +99,13 @@
 .multiple-label-auto-complete ul li {
   display: inline-block;
   position: relative;
-  margin-right: 5px;
-  margin-bottom: 5px;
+  margin: 0 1px 1px 1px;
+  border: 1px solid $tag-label-bgcolor;
+  border-radius: 2px;
+
+  .label-item {
+    display: flex;
+  }
 }
 
 .multiple-label-auto-complete-none ul li {
@@ -109,24 +136,59 @@
   margin-left: 0;
 }
 
-.multiple-label-auto-complete ul li .label-close,
+.multiple-label-auto-complete ul li {
+  .label-close,
+  .label-text {
+    font-size: 12px;
+    padding: 1px 10px;
+    color: $dark-2;
+    font-weight: 400;
+    background-color: $tag-label-bgcolor;
+  }
+
+  .label-close {
+    padding-left: 3px;
+    display: flex;
+    align-items: center;
+
+    svg {
+      rect {
+        fill: $gray-1;
+      }
+
+      path {
+        fill: $font-white;
+      }
+    }
+
+    &:hover {
+      svg {
+        rect {
+          fill: $hover-control;
+        }
+      }
+    }
+  }
+
+  .label-text {
+    &:hover {
+      color: $hover-control;
+    }
+  }
+}
+
 .multiple-label-auto-complete ul li .label-text {
-  border-radius: 0;
-  font-size: 14px;
-  padding: 1px 2px;
-  color: $dark-1;
-  font-weight: 400;
-  background-color: $tag-label-bgcolor;
+  border-radius: 2px 0 0 2px;
 }
 
 .multiple-label-auto-complete ul li .label-close {
   cursor: pointer;
+  border-radius: 0 2px 2px 0;
 }
 
 .multiple-label-auto-complete-single ul li .label-text,
 .multiple-label-auto-complete-single-focus ul li .label-text,
-.multiple-label-auto-complete-none ul li .label-text,
-.multiple-label-auto-complete-disabled ul li .label-text {
+.multiple-label-auto-complete-none ul li .label-text {
   background-color: transparent;
 }
 
@@ -151,7 +213,7 @@
 }
 
 .multiple-label-auto-complete .auto-complete-control {
-  height: 20px;
+  height: 22px;
   border: none;
   outline: none;
   background: $bg-white;
@@ -173,11 +235,11 @@
   color: inherit;
 }
 
-:host ::ng-deep .multiple-label-auto-complete-border ul li .dropdown-menu {
-  margin-top: 6px;
+:host ::ng-deep .multiple-label-auto-complete-border ul li .devui-dropdown-menu {
+  margin-top: 2px;
 }
 
-:host ::ng-deep .multiple-label-auto-complete-multiline ul li .dropdown-menu {
+:host ::ng-deep .multiple-label-auto-complete-multiline ul li .devui-dropdown-menu {
   margin-top: 0;
   width: 170px;
 }

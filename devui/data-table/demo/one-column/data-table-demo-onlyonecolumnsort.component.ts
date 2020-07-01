@@ -1,14 +1,15 @@
-import { ChangeDetectionStrategy, Component, HostBinding, OnInit, ChangeDetectorRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewChild, OnInit, ChangeDetectorRef } from '@angular/core';
 import { LoadingType } from 'ng-devui/loading';
-import { ColumnAdjustStrategy } from 'ng-devui/data-table';
+import { DataTableComponent } from 'ng-devui/data-table';
 import { originSource, SourceType } from '../mock-data';
 
 @Component({
   selector: 'd-datatable-demo-onlyonecolumnsort',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './data-table-demo-onlyonecolumnsort.component.html'
+  templateUrl: './data-table-demo-onlyonecolumnsort.component.html',
+  styleUrls: ['./data-table-demo-onlyonecolumnsort.component.scss']
 })
 export class DatatableDemoOnlyOneColumnSortComponent implements OnInit {
+  @ViewChild(DataTableComponent, { static: true }) datatable: DataTableComponent;
   pagerSource = JSON.parse(JSON.stringify(originSource));
   sortableDataSource: Array<SourceType> = JSON.parse(JSON.stringify(originSource.slice(0, 6)));
   filterList2 = [
@@ -46,8 +47,7 @@ export class DatatableDemoOnlyOneColumnSortComponent implements OnInit {
     {
       name: 'john',
       value: 'john'
-    },
-
+    }
   ];
   filterListMulti = JSON.parse(JSON.stringify(originSource.slice(0, 6)));
   sortedColumn = [{
@@ -60,9 +60,14 @@ export class DatatableDemoOnlyOneColumnSortComponent implements OnInit {
   complete = false;
   lazyDataSource = [];
   loading: LoadingType;
-  columnAdjustStrategy = ColumnAdjustStrategy.mousemove;
+  checkboxList = [];
+  allChecked = false;
+  halfChecked = false;
+  filterIconActive = false;
+
   constructor(private ref: ChangeDetectorRef) { }
   ngOnInit() {
+    this.checkboxList = JSON.parse(JSON.stringify(originSource.slice(0, 6)));
   }
 
   changePageContent($event) {
@@ -108,5 +113,36 @@ export class DatatableDemoOnlyOneColumnSortComponent implements OnInit {
     this.filterListMulti = this.filterList;
     this.ref.detectChanges();
     return true;
+  }
+
+  getCheckedRows() {
+    const rows = this.datatable.getCheckedRows();
+    console.log(rows);
+  }
+
+  onCheckboxChange($event, name) {
+    this.setHalfChecked();
+  }
+  setHalfChecked() {
+    this.halfChecked = false;
+    const chosen = this.checkboxList.filter(item => item.chosen);
+    if (chosen.length === this.checkboxList.length) {
+      this.allChecked = true;
+    } else if (chosen.length > 0) {
+      this.halfChecked = true;
+    } else {
+      this.allChecked = false;
+      this.halfChecked = false;
+    }
+  }
+
+  filterSource(dropdown) {
+    this.sortableDataSource = this.checkboxList.filter(item => item.chosen);
+    this.filterIconActive = true;
+    dropdown.toggle();
+  }
+
+  cancelFilter(dropdown) {
+    dropdown.toggle();
   }
 }

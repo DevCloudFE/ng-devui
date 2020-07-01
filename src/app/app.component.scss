@@ -1,4 +1,6 @@
 @import '../../devui/style/theme/color';
+@import '../../devui/style/core/font';
+
 body {
   background: $bg-white;
 }
@@ -12,42 +14,51 @@ body {
   height: 4em;
   padding: 1em;
   transition: all 0.2s ease-out;
+
   span {
     position: relative;
     display: block;
     margin-top: 0.9em;
-    &:before,
-    &:after {
+
+    &::before,
+    &::after {
       position: absolute;
       top: -0.55em;
       content: ' ';
     }
-    &:after {
+
+    &::after {
       top: 0.55em;
     }
+
     &,
-    &:before,
-    &:after {
+    &::before,
+    &::after {
       background-color: $bg-white;
       width: 100%;
       height: 0.2em;
       transition: all 0.4s;
     }
   }
+
   &.active span {
     background: transparent;
-    &:before {
+
+    &::before {
       transform: rotate(45deg) translate(0.5em, 0.4em);
     }
-    &:after {
+
+    &::after {
       transform: rotate(-45deg) translate(0.4em, -0.3em);
     }
   }
 }
+
 .app-container {
   display: flex;
   flex-direction: column;
   transform: none;
+
   .app-bar {
     position: fixed;
     top: 0;
@@ -67,9 +78,10 @@ body {
     width: 100%;
     height: 50px;
     background: $bg-white;
-    box-shadow: 0 2px 4px 0 rgba(41, 48, 64, 0.2);
+    box-shadow: 0 2px 4px 0 $dark-1-boxshadow;
+
     a {
-      line-height: 26px;
+      line-height: $line-height-base;
       color: $dark-1;
       text-decoration: none;
     }
@@ -82,19 +94,22 @@ body {
   }
 
   h1.title {
-    font-size: 20px;
+    font-size: $font-size-primary;
     margin: 0;
-    font-weight: bold;
+    font-weight: $font-title-weight;
     padding: 9px 20px;
     box-sizing: border-box;
+
     .logo,
     .text {
       display: inline-block;
       vertical-align: top;
     }
+
     .ui {
       font-weight: normal;
     }
+
     a:hover {
       text-decoration: none;
     }
@@ -120,57 +135,74 @@ body {
   .header-menu {
     right: 5px;
     @include menu();
+
     display: none;
+
     span {
       &,
-      &:before,
-      &:after {
+      &::before,
+      &::after {
         background: #000000;
       }
     }
   }
 
   .main-nav-item {
-    font-size: 15px;
-    display: block;
+    display: flex;
+    align-items: center;
     padding: 5px 0;
     margin: 0 12px;
     color: $dark-1;
 
-    &:hover {
-      text-decoration: none;
-      color: $hover-control;
-    }
-    &:active,
-    &:focus {
-      color: $brand-1;
+    & > span {
+      font-size: $font-size-primary;
+      line-height: $line-height-base;
     }
 
-    &.active {
-      color: $brand-1;
-    }
     &.version-label {
       cursor: default;
+
       &:hover,
       &:focus {
         color: inherit;
       }
     }
+
+    &.language {
+      cursor: pointer;
+      min-width: 50px;
+      text-align: center;
+
+      &:hover {
+        color: inherit;
+        background: $hover-content;
+      }
+    }
+  }
+
+  a.main-nav-item {
+    &:hover {
+      text-decoration: none;
+      color: $hover-control;
+    }
+
+    &:active,
+    &:focus {
+      color: $brand-1;
+    }
   }
 
   .wrapper {
-    // display: flex;
-    // flex: 1;
-    // flex-direction: row;
     position: absolute;
     top: 50px;
     left: 0;
     right: 0;
     bottom: 0;
+
     .sidebar {
       box-sizing: border-box;
       position: fixed;
-      top: 50px;
+      top: 120px;
       bottom: 0;
       left: 0;
       width: 240px;
@@ -181,6 +213,7 @@ body {
       z-index: 2;
       background: $bg-white;
       transition: all 0.2s ease-out;
+
       &:hover {
         overflow-y: auto;
       }
@@ -196,21 +229,27 @@ body {
       width: 100%;
       margin-left: 0;
       transition: all 0.2s ease-out;
-      // overflow-y: auto;
+
       .main {
         width: 100%;
         padding: 0 20px;
       }
     }
+
     &.active {
       .sidebar {
         overflow-y: auto;
         left: 240px;
       }
+
+      .devui-components-search {
+        margin-left: 0;
+      }
+
       .doc-viewer-container {
-        // width: calc(100% - 240px);
         margin-left: 240px;
       }
+
       .menu-link {
         left: 240px;
       }
@@ -226,7 +265,7 @@ body {
 
   .side-nav {
     background: $bg-white;
-    padding-bottom: 72px;
+    padding-bottom: 144px;
 
     ul {
       margin: 0;
@@ -243,7 +282,13 @@ body {
       color: $dark-3;
       margin: 0;
       position: relative;
-      line-height: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+
+      span {
+        @include font-content();
+      }
     }
 
     .panel > .panel-heading,
@@ -258,6 +303,7 @@ body {
 
     [class*='panel-'] > .panel-heading {
       cursor: pointer;
+
       &:hover {
         color: $hover-control;
       }
@@ -267,30 +313,33 @@ body {
       border: none;
     }
   }
-
 }
 
 .devui-menu {
   outline: none;
-  margin-top: 20px;
   margin-bottom: 0;
   padding-left: 0;
   list-style: none;
   z-index: 1050;
   background: $bg-white;
 }
+
 .devui-menu-item {
-  font-size: 14px;
   text-overflow: ellipsis;
   overflow: hidden;
-  font-size: 14px;
-  line-height: 40px;
   padding-left: 20px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+
   &:hover {
     background-color: $hover-content;
   }
 }
+
 .devui-menu-item > a {
+  @include font-content();
+
   display: block;
   color: $dark-1;
   text-decoration: none;
@@ -300,8 +349,23 @@ body {
   color: $brand-1;
   background-color: $brand-3;
   border-right: 2px solid $brand-1;
+
   a {
     color: inherit;
+  }
+}
+
+.main {
+  .docs-header {
+    & > h1 {
+      @include font-title();
+
+      margin: 1em 0;
+    }
+
+    h3 {
+      @include font-title($font-size-secondary-card-title);
+    }
   }
 }
 
@@ -318,53 +382,38 @@ body {
 .demo-example {
   margin-bottom: 20px;
 }
-.demo-nav {
-  position: absolute;
-  height: 100%;
-  top: 0;
-  right: 0;
-  width: 150px;
-  line-height: 24px;
-}
-
-.demo-nav .items {
-  margin-top: 10px;
-  cursor: pointer;
-}
-
-.demo-nav .items > li:hover {
-  color: $brand-1;
-}
-
-.demo-nav-active {
-  color: $brand-1;
-}
 
 .demo-title {
-  font-size: 14px;
+  @include font-title($font-size-secondary-card-title);
+
   color: $dark-1;
-  line-height: 24px;
-  font-weight: bold;
   margin-bottom: 10px;
+  height: 24px;
+  display: flex;
+  align-items: center;
 }
 
 .demo-text {
-  font-size: 14px;
+  @include font-content();
+
   color: $dark-1;
-  line-height: 24px;
 }
+
 .readme {
   .hljs {
     background: transparent;
   }
+
   pre {
     background-color: $bg-white;
     border: none;
+
     code {
       border: 1px solid #e9e9e9;
       overflow-x: auto;
     }
   }
+
   p {
     margin: 1em 0;
   }
@@ -375,14 +424,18 @@ body {
     .header-menu {
       display: block;
     }
+
     header {
       flex-direction: column;
       justify-items: center;
+
       .main-nav {
         display: none;
       }
+
       &.active {
-        height: 205px;
+        height: 405px;
+
         .main-nav {
           display: flex;
           flex-direction: column;
@@ -399,13 +452,20 @@ body {
     .sidebar {
       left: 240px;
     }
+
+    .devui-components-search {
+      margin-left: 0;
+    }
+
     .doc-viewer-container {
       margin-left: 240px;
       width: calc(100% - 240px);
+
       .main {
         padding: 0 60px;
       }
     }
+
     .menu-link {
       display: none;
     }
@@ -422,7 +482,19 @@ body {
   }
 }
 
-.demo-example.active.anchor-active-by-anchor-link {
+.main-nav-item .show-themable {
+  display: none;
+  display: var(--iehack, flex);
+  align-items: center;
+
+  d-select,
+  d-toggle {
+    margin-right: 5px;
+  }
+}
+
+.demo-example.active.anchor-active-by-anchor-link,
+.demo-example.active.anchor-active-by-fragment {
   animation: hightlight-and-disapear 1 3s linear;
 }
 
@@ -456,13 +528,20 @@ body {
   }
 }
 
-.main-nav-item .show-themable {
-  display: none;
-  display: var(--iehack, inline-block);
-}
 .side-nav d-accordion d-accordion-list d-accordion-menu .devui-accordion-open-icon {
   display: none !important;
 }
-.side-nav d-accordion d-accordion-list{
+
+.side-nav d-accordion d-accordion-list {
   box-shadow: none !important;
+}
+
+.devui-components-search {
+  padding: 24px 0 24px 16px;
+  position: fixed;
+  margin-left: -240px;
+  transition: margin-left 0.2s;
+  d-search {
+    width: 215px;
+  }
 }

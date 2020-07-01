@@ -1,0 +1,14 @@
+<section>
+  <d-radio
+    #radioElement
+    [beforeChange]="beforeChange"
+    [name]="'independent-city1'"
+    [(ngModel)]="chooseChange"
+    *ngFor="let value of valuesChange"
+    [value]="value"
+    (ngModelChange)="valueChange($event)"
+    [ngStyle]="{ marginBottom: '20px' }"
+  >
+    The Radio value is: {{ value }}
+  </d-radio>
+</section>

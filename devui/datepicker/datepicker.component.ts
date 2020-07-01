@@ -39,26 +39,28 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
   protected nowMinYear: number;
   protected nowMaxYear: number;
   protected _dateFormat: string;
-  @Input() showTime: boolean;
   @Input() cssClass: string;
   @Input() dateConverter: DateConverter;
   @Input() locale: string;
   @Output() selectedDateChange = new EventEmitter<SelectDateChangeEventArgs>();
   @Input() disabled = false;
-  @Input() yearNumber = 12;
   @Input() customViewTemplate: TemplateRef<any>;
   @Input() selectedDate: Date;
+  yearNumber = 12;
+  _yearNumber = 12;
   _dateConfig: any;
   currentYear: number;
   currentMonth: number;
   _currentHour: number | string;
   _currentMinute: number | string;
   _currentSecond: number | string;
+  _showTime: boolean;
   hourOptions: string[];
   minuteOptions: string[];
   displayWeeks: any[];
-  yearOptions: number[];
-  openChooseYearAndMonth: boolean;
+  yearOptions: any[];
+  openChooseYear: boolean;
+  openChooseMonth: boolean;
   hoverYear: number;
   hoverMonth: number;
   availableMonths: number[];
@@ -83,16 +85,15 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
   }
 
   ngOnInit() {
-    this.showTime = this.showTime || this.dateConfig.timePicker;
     this._minDate = this.minDate ? new Date(this.minDate) : new Date(this.dateConfig.min, 0, 1, 0, 0, 0);
     this._maxDate = this.maxDate ? new Date(this.maxDate) : new Date(this.dateConfig.max, 11, 31, 23, 59, 59);
 
     this.hourOptions = new Array(24).fill(0).map((value, index) => this.fillLeft(index));
     this.minuteOptions = new Array(60).fill(0).map((value, index) => this.fillLeft(index));
-    this.nowMinYear = (new Date()).getFullYear() - Math.floor(this.yearNumber / 2) < this.minDate.getFullYear() ?
-      this.minDate.getFullYear() : (new Date()).getFullYear() - Math.floor(this.yearNumber / 2);
-    this.nowMaxYear = this.nowMinYear + this.yearNumber > this.maxDate.getFullYear() ?
-      this.maxDate.getFullYear() : this.nowMinYear + this.yearNumber;
+    this.nowMinYear = (new Date()).getFullYear() - Math.floor(this._yearNumber / 2) < this.minDate.getFullYear() ?
+      this.minDate.getFullYear() : (new Date()).getFullYear() - Math.floor(this._yearNumber / 2);
+    this.nowMaxYear = this.nowMinYear + this._yearNumber > this.maxDate.getFullYear() ?
+      this.maxDate.getFullYear() : this.nowMinYear + this._yearNumber;
     this.setI18nText();
     this.onSelectDateChanged();
     this.onDisplayWeeksChange();
@@ -109,7 +110,7 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
   @HostListener('document:click', ['$event'])
   onDocumentClick($event) {
     if (!this.elementRef.nativeElement.contains($event.target)) {
-      this.openChooseYearAndMonth = false;
+      this.openChooseYear = this.openChooseMonth = false;
       this.resetYearOptions();
     }
   }
@@ -117,6 +118,14 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
   @HostListener('click', ['$event'])
   onClick($event) {
     $event.stopPropagation();
+  }
+
+  @Input() set showTime(showTime: boolean) {
+    this._showTime = showTime;
+  }
+
+  get showTime() {
+    return typeof this._showTime === 'boolean' ? this._showTime : this.dateConfig.timePicker;
   }
 
   @Input() set dateConfig(dateConfig: any) {
@@ -213,10 +222,10 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
   protected resetYearOptions() {
     const baseYear = this.selectedDate ? this.selectedDate.getFullYear() : (new Date()).getFullYear();
     this.currentYear = baseYear;
-    this.nowMinYear = baseYear - Math.floor(this.yearNumber / 2) < this.minDate.getFullYear() ?
-      this.minDate.getFullYear() : baseYear - Math.floor(this.yearNumber / 2);
-    this.nowMaxYear = this.nowMinYear + this.yearNumber > this.maxDate.getFullYear() ?
-      this.maxDate.getFullYear() : this.nowMinYear + this.yearNumber;
+    this.nowMinYear = baseYear - Math.floor(this._yearNumber / 2) < this.minDate.getFullYear() ?
+      this.minDate.getFullYear() : baseYear - Math.floor(this._yearNumber / 2);
+    this.nowMaxYear = this.nowMinYear + this._yearNumber > this.maxDate.getFullYear() ?
+      this.maxDate.getFullYear() : this.nowMinYear + this._yearNumber;
     this.onYearRangeChange();
   }
 
@@ -224,10 +233,23 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
     if (!this.nowMinYear || !this.nowMaxYear) {
       return;
     }
-    const yearNumber = this.yearNumber > this.nowMaxYear - this.nowMinYear + 1 ? this.nowMaxYear - this.nowMinYear + 1 : this.yearNumber;
-    this.yearOptions = new Array(yearNumber).fill(0).map((value, index) => {
-      return this.nowMinYear + index;
+    const baseYear = this.selectedDate ? this.selectedDate.getFullYear() : (new Date()).getFullYear();
+    this.yearOptions = new Array(this._yearNumber).fill(0).map((value, index) => {
+      const title = baseYear - this._yearNumber / 2 + index;
+      return {
+        title: title,
+        disabled: false
+      };
     });
+    if (this._yearNumber > this.nowMaxYear - this.nowMinYear + 1) {
+      this.yearOptions.forEach((value, index) => {
+        if (index <= 6) {
+          value.disabled = value.title <= this.nowMinYear;
+        } else {
+          value.disabled = value.title >= this.nowMaxYear;
+        }
+      });
+    }
   }
 
   writeValue(obj: any): void {
@@ -299,50 +321,70 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
   }
 
   hasPreYearOption() {
-    return this.nowMinYear > this.minDate.getFullYear();
+    if (this.openChooseYear) {
+      return this.yearOptions[0].title.toString() > this.minDate.getFullYear();
+    } else {
+      return Number(this.currentYear) > this.minDate.getFullYear();
+    }
   }
 
   onPreYearOption() {
     if (!this.hasPreYearOption()) {
       return;
     }
-
-    if (this.nowMinYear - this.yearNumber >= this.minDate.getFullYear()) {
-      this.nowMaxYear = this.nowMinYear - 1;
-      this.nowMinYear = this.nowMinYear - this.yearNumber;
+    if (this.openChooseYear) {
+      if (this.nowMinYear - this._yearNumber >= this.minDate.getFullYear()) {
+        this.nowMaxYear = this.nowMinYear - 1;
+        this.nowMinYear = this.nowMinYear - this._yearNumber;
+      } else {
+        this.nowMaxYear = this.nowMinYear - 1;
+        this.nowMinYear = this.minDate.getFullYear();
+      }
+      this.onYearRangeChange();
     } else {
-      this.nowMaxYear = this.nowMinYear - 1;
-      this.nowMinYear = this.minDate.getFullYear();
+      this.onSelectYear(Number(this.currentYear) - 1);
     }
-    this.onYearRangeChange();
   }
 
   hasNextYearOption() {
-    return this.nowMaxYear < this.maxDate.getFullYear();
+    if (this.openChooseYear) {
+      return this.yearOptions[11].title.toString() < this.maxDate.getFullYear();
+    } else {
+      return Number(this.currentYear) < this.maxDate.getFullYear();
+    }
   }
 
   onNextYearOption() {
     if (!this.hasNextYearOption()) {
       return;
     }
-
-    if (this.nowMaxYear + this.yearNumber <= this.maxDate.getFullYear()) {
-      this.nowMinYear = this.nowMaxYear + 1;
-      this.nowMaxYear = this.nowMaxYear + this.yearNumber;
+    if (this.openChooseYear) {
+      if (this.nowMaxYear + this._yearNumber <= this.maxDate.getFullYear()) {
+        this.nowMinYear = this.nowMaxYear + 1;
+        this.nowMaxYear = this.nowMaxYear + this._yearNumber;
+      } else {
+        this.nowMinYear = this.nowMaxYear + 1;
+        this.nowMaxYear = this.maxDate.getFullYear();
+      }
+      this.onYearRangeChange();
     } else {
-      this.nowMinYear = this.nowMaxYear + 1;
-      this.nowMaxYear = this.maxDate.getFullYear();
+      this.onSelectYear(Number(this.currentYear) + 1);
     }
-    this.onYearRangeChange();
   }
 
   onSelectYear(year, $event?: Event) {
     if ($event) {
       $event.stopPropagation();
     }
-    this.currentYear = year;
+    const yearDisabled = typeof year === 'object' ? year.disabled : false;
+    const yearTitle = typeof year === 'object' ? year.title : year;
+    if (yearDisabled) {
+      return;
+    }
+    this.currentYear = yearTitle;
     this.onDisplayWeeksChange();
     this.availableMonths = this.onDisplayMonthsChange();
+    this.openChooseYear = false;
   }
 
   protected onSelectDateChanged() {
@@ -516,6 +558,7 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
   clearAll = (reason?: SelectDateChangeReason) => {
     this.writeValue(null);
     const currentReason = typeof reason === 'number' ? reason : SelectDateChangeReason.custom;
+    // 清空时将null作为ngModelChange参数传出
     this.onChange(null);
     this.selectedDateChange.emit({
       reason: currentReason,
@@ -523,9 +566,15 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
     });
   }
 
-  toggle($event: Event) {
+  toggle($event: Event, which) {
     $event.stopPropagation();
-    this.openChooseYearAndMonth = !this.openChooseYearAndMonth;
+    if (which === 'year') {
+      this.openChooseYear = !this.openChooseYear;
+      this.openChooseMonth = false;
+    } else {
+      this.openChooseMonth = !this.openChooseMonth;
+      this.openChooseYear = false;
+    }
   }
 
   isTodayDisable() {
@@ -569,6 +618,7 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
   onSelectMonth($index) {
     this.currentMonth = $index;
     this.onDisplayWeeksChange();
+    this.openChooseMonth = false;
   }
 
   changeHoverYear(item: number) {

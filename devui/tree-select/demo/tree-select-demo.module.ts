@@ -19,6 +19,9 @@ import {TreeSelectCustomIconComponent} from '../demo/custom-icon/tree-select-cus
 import {TreeSelectHooksComponent} from '../demo/hooks/tree-select-hooks.component';
 import {TreeSelectLeafOnlyComponent} from '../demo/leaf-only/tree-select-leaf-only.component';
 import {TreeSelectSearchableComponent} from '../demo/searchable/tree-select-searchable.component';
+import {LabelizationComponent} from '../demo/labelization/labelization.component';
+import {TreeSelectKeysComponent} from '../demo/keys/tree-select-keys.component';
+import {TreeSelectIconParentComponent} from '../demo/icon-parent/icon-parent.component';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 
 @NgModule({
@@ -60,7 +63,10 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
     TreeSelectSearchableComponent,
     TreeSelectAppendToComponent,
     TreeSelectModalComponent,
-    TreeSelectCustomIconComponent
+    TreeSelectCustomIconComponent,
+    LabelizationComponent,
+    TreeSelectKeysComponent,
+    TreeSelectIconParentComponent
   ],
   entryComponents: [
     TreeSelectDemoComponent,

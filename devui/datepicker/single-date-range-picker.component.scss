@@ -9,6 +9,7 @@
       &:not(.active):not(.disabled) {
         background-color: $hover-content;
         color: $dark-1;
+        border-radius: 0;
       }
 
       &.disabled:not(.active) {
@@ -46,12 +47,12 @@
 }
 
 tr.devui-calender-header {
-  height: 29px;
+  height: 38px;
   user-select: none;
 }
 
 .devui-month-view .devui-btn-link.devui-btn-right {
-  transform: scale(-1, 1);
+  transform: scale(1, 1);
   display: inline-block;
   line-height: 1;
 }

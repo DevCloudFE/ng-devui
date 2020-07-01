@@ -50,20 +50,24 @@ export class OperableTreeComponent implements AfterViewInit, OnDestroy {
   @Input() treeNodeTitleKey = 'title';
   @Input() postAddNode: (node: TreeNode) => Promise<any>;
   @Input() iconTemplatePosition: string;
+  @Input() checkableRelation: 'upward' | 'downward' | 'both' | 'none' = 'both';
   @Output() nodeSelected: EventEmitter<any> = new EventEmitter<any>();
   @Output() nodeDblClicked: EventEmitter<any> = new EventEmitter<any>();
+  @Output() nodeRightClicked: EventEmitter<any> = new EventEmitter<any>();
   @Output() nodeDeleted: EventEmitter<any> = new EventEmitter<any>();
   @Output() nodeToggled: EventEmitter<any> = new EventEmitter<any>();
   @Output() nodeChecked: EventEmitter<any> = new EventEmitter<any>();
+  @Output() currentNodeChecked: EventEmitter<any> = new EventEmitter<any>();
   @Output() nodeEdited: EventEmitter<any> = new EventEmitter<any>();
   @Output() editValueChange: EventEmitter<any> = new EventEmitter<any>();
   @Output() nodeOnDrop: EventEmitter<any> = new EventEmitter<any>();
   @ViewChild('operableTree', { static: true }) operableTree: TreeComponent;
-  @ContentChild('iconTemplate', { static: false }) iconTemplate;
-  @ContentChild('nodeTemplate', { static: false }) nodeTemplate;
-  @ContentChild('operatorTemplate', { static: false }) operatorTemplate;
-  @ContentChild('statusTemplate', { static: false }) statusTemplate;
+  @ContentChild('iconTemplate') iconTemplate;
+  @ContentChild('nodeTemplate') nodeTemplate;
+  @ContentChild('operatorTemplate') operatorTemplate;
+  @ContentChild('statusTemplate') statusTemplate;
   private addingNode = false;
+  private mouseRightButton = 2;
   private treeNodeDragoverResponder = {
     node: null,
     timeout: null
@@ -78,18 +82,27 @@ export class OperableTreeComponent implements AfterViewInit, OnDestroy {
       this.i18nCommonText = data.common;
     });
   }
+
   ngAfterViewInit() {
     this.elementAsMask = TreeMaskService.creatMaskElement();
+
+  }
+
+  contextmenuEvent(event, node) {
+    if (event.button === this.mouseRightButton) {
+      event.preventDefault();
+      this.nodeRightClicked.emit({ node: node, event: event });
+    }
   }
 
   addBackGround(e) {
     e.stopPropagation();
-    TreeMaskService.addMask(e.target, this.elementAsMask, TreeMaskService.calcWidth(this.treeNodeContent));
+    TreeMaskService.addMask(e.target.parentNode, this.elementAsMask, TreeMaskService.calcWidth(e.target.parentNode));
   }
 
   removeBackGround(e) {
     e.stopPropagation();
-    TreeMaskService.removeMask(e.target, this.elementAsMask);
+    TreeMaskService.removeMask(e.target.parentNode, this.elementAsMask);
   }
 
   onDragstart(event, treeNode) {
@@ -250,9 +263,10 @@ export class OperableTreeComponent implements AfterViewInit, OnDestroy {
   }
 
 
-  public checkNodeById(checked: boolean, id: number) {
-    const results = this.treeFactory.checkNodesById(id, checked);
+  public checkNodeById(checked: boolean, id: number | string) {
+    const results = this.treeFactory.checkNodesById(id, checked, this.checkableRelation);
     this.nodeChecked.emit(results);
+    this.currentNodeChecked.emit({ id: id, data: this.treeFactory.getNodeById(id) });
   }
 
   onBlurEdit(treeNode) {

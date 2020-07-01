@@ -1,4 +1,4 @@
-<div class="demo-container" dAnchorBox [view]="{ top: 60, bottom: 0 }">
+<div class="demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 60, bottom: 0 }">
   <d-demo-nav [navItems]="navItems"></d-demo-nav>
   <div class="demo-example" [dAnchor]="'basic-usage'">
     <div class="demo-title">基本用法</div>
@@ -23,7 +23,7 @@
   <div class="demo-example" [dAnchor]="'custom-search'">
     <div class="demo-title">自定义搜索功能</div>
     <div class="demo-text">
-      通过 isSearch、searchFn开启搜索功能并自定搜索方法<br />
+      通过 isSearch、searchFn开启搜索功能并自定搜索方法，searchPlaceholder定义搜索框显示文字<br />
       通过 multiple 启用多选功能
     </div>
     <d-codebox id="components-select-object" [sourceData]="SelectObjectComponent">
@@ -147,6 +147,13 @@
     <div class="demo-text"></div>
     <d-codebox id="components-select-basic" [sourceData]="UserMailSearchComponent">
       <d-user-mail-search demo></d-user-mail-search>
+    </d-codebox>
+  </div>
+  <div class="demo-example" [dAnchor]="'model-value'">
+    <div class="demo-title">ngModel值处理</div>
+    <div class="demo-text"></div>
+    <d-codebox id="components-select-basic" [sourceData]="ModelValueComponent">
+      <d-model-value demo></d-model-value>
     </d-codebox>
   </div>
 </div>

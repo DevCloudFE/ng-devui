@@ -1,13 +1,16 @@
 <section>
-  <div class="btn-group g-dropdown" dDropDown (ToggleEvent)="onToggle($event)">
-    <a dDropDownToggle class="devui-dropdown-default">
+  <div class="btn-group g-dropdown" dDropDown (toggleEvent)="onToggle($event)">
+    <a dDropDownToggle class="devui-dropdown-default devui-dropdown-origin">
       更多操作
       <span class="icon-chevron-down"></span>
     </a>
 
-    <ul dDropDownMenu class="devui-dropdown-menu" role="menu">
+    <ul dDropDownMenu class="devui-dropdown-menu devui-dropdown-overlay" role="menu">
       <li role="menuitem">
-        <input type="text" class="devui-input devui-input-sm" style="width: 120px;" placeholder="输入框" />
+        <input type="text" class="devui-input devui-input-sm devui-search-in-dropdown" placeholder="输入框" />
+        <div class="icon-in-search">
+          <i class="icon icon-search"></i>
+        </div>
       </li>
       <li class="disabled" role="menuitem">
         <a class="devui-dropdown-item disabled">禁用选项</a>
@@ -35,14 +38,17 @@
 </section>
 <section>
   <div class="btn-group g-dropdown" dDropDown (toggleEvent)="onToggle($event)">
-    <a dDropDownToggle class="devui-dropdown-no-border">
+    <a dDropDownToggle class="devui-dropdown-no-border devui-dropdown-origin">
       更多操作
       <span class="icon-chevron-down"></span>
     </a>
 
-    <ul dDropDownMenu class="devui-dropdown-menu devui-scrollbar" role="menu">
+    <ul dDropDownMenu class="devui-dropdown-menu devui-scrollbar devui-dropdown-overlay" role="menu">
       <li role="menuitem">
-        <input type="text" class="devui-input devui-input-sm" style="width: 120px;" placeholder="输入框" />
+        <input type="text" class="devui-input devui-input-sm devui-search-in-dropdown" placeholder="输入框" />
+        <div class="icon-in-search">
+          <i class="icon icon-search"></i>
+        </div>
       </li>
       <li class="disabled" role="menuitem">
         <a class="devui-dropdown-item disabled">禁用选项</a>
@@ -71,14 +77,17 @@
 <section>
   <h5>附着到body上防止被滚动条遮挡</h5>
   <div class="btn-group g-dropdown" dDropDown appendToBody (toggleEvent)="onToggle($event)">
-    <a dDropDownToggle class="devui-dropdown-default">
+    <a dDropDownToggle class="devui-dropdown-default devui-dropdown-origin">
       更多操作
       <span class="icon-chevron-down"></span>
     </a>
 
-    <ul dDropDownMenu class="devui-dropdown-menu devui-scrollbar" role="menu">
+    <ul dDropDownMenu class="devui-dropdown-menu devui-scrollbar devui-dropdown-overlay" role="menu">
       <li role="menuitem">
-        <input type="text" class="devui-input" style="width: 120px;margin-right: 10px;" placeholder="输入框" />
+        <input type="text" class="devui-input devui-input-sm devui-search-in-dropdown" placeholder="输入框" />
+        <div class="icon-in-search">
+          <i class="icon icon-search"></i>
+        </div>
       </li>
       <li class="disabled" role="menuitem">
         <a class="devui-dropdown-item disabled">禁用选项</a>

@@ -1,32 +1,25 @@
-import {
-  AfterViewInit, ChangeDetectorRef, Component, DoCheck, ElementRef,
-  EventEmitter, Input, IterableDiffers, KeyValueDiffers, NgZone, OnChanges,
-  OnDestroy, OnInit, Output, SimpleChanges, ViewChild
-} from '@angular/core';
-import { BehaviorSubject, fromEvent, Subscription } from 'rxjs';
-import { debounceTime, map, switchMap } from 'rxjs/operators';
-import { DropDownDirective } from 'ng-devui/dropdown';
-import { DataTableComponent } from './data-table.component';
-import { DataTablePager, SortEventArg } from './data-table.model';
-import { DataTableColumnTmplComponent } from './tmpl/data-table-column-tmpl.component';
-import { DataTableHeadTmplComponent } from './tmpl/data-table-head-tmpl.component';
+import { AfterViewInit, ChangeDetectorRef, Component, DoCheck, ElementRef, EventEmitter, Input,
+  IterableDiffers, KeyValueDiffers, NgZone, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
+import { BehaviorSubject, Subscription } from 'rxjs';
+import { DataTableComponent } from './data-table.component';
+import { SortEventArg, SortDirection, TableCheckOptions } from './data-table.model';
+import { DataTableColumnTmplComponent } from './tmpl/data-table-column-tmpl.component';
 
 const documentElement = document.documentElement;
 @Component({
   selector: 'd-data-table-head,[dDataTableHead]',
   templateUrl: './data-table-head.component.html',
   styleUrls: ['./data-table-head.component.scss']
-  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy, DoCheck {
   @Input() checkable: boolean;
+  @Input() headerCheckDisabled: boolean;
+  @Input() checkOptions: TableCheckOptions[];
   @Input() showExpandToggle: boolean;
   @Input() pageAllChecked: boolean;
-  @Input() headTemplate: DataTableHeadTmplComponent;
   @Input() columns: DataTableColumnTmplComponent[];
   @Input() multiSort: SortEventArg[] = [];
-  @Input() pager: DataTablePager | boolean;
   @Input() resizeable: boolean;
   @Input() maxHeight: string;
   @Input() showSortIcon: boolean;
@@ -34,7 +27,6 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
   @Input() colDraggable: boolean;
   @Input() fixHeader: boolean;
   @Input() dataSource: any[] = [];
-  @Input() resizeBarRefElement: ElementRef;
   @Input() tableViewRefElement: ElementRef;
   @Input() tableBodyEl: ElementRef;
   @Input() checkableColumn: DataTableColumnTmplComponent;
@@ -103,7 +95,6 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
   cellMapOffset = 0;
   cellMap = {};
   iterableDiffer;
-  choosedItem: any;
   searchText = '';
 
   i18nCommonText: I18nInterface['common'];
@@ -112,10 +103,6 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
   filterListDisplay = [];
   isFilterHidden = false;
   columnForFilter;
-  private searchElement;
-  private sourceSubscription: Subscription;
-  private sourceSubject: BehaviorSubject<any>;
-  private filterSubscription: Subscription;
   private i18nSubscription: Subscription;
   checkedListForFilter = [];
   constructor(public dt: DataTableComponent,
@@ -143,19 +130,19 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes && changes.columns || changes.multiSort) {
+    if ((changes['columns'] || changes.multiSort) && this.columns) {
       this.multiSortArray = [];
       this.columns.forEach(column => {
         if (column.sortable) {
           const sortIndex = this.multiSort.findIndex(item => item['field'] === column.field);
           this.multiSortArray.push({
             field: column.field,
-            direction: sortIndex !== -1 ? this.multiSort[sortIndex].direction : ''
+            direction: sortIndex !== -1 ? this.multiSort[sortIndex].direction : SortDirection.default
           });
         }
       });
     }
-    if (changes['columns']) {
+    if (changes['columns'] && this.columns) {
       this.rowCount = Math.max(... this.columns.map(column => {
         if (column.advancedHeader) {
           return column.advancedHeader.length;
@@ -174,6 +161,17 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
     if (changes && changes.dataSource) {
       if (this.colDraggable) {
         this.rerenderTables();
+      }
+    }
+
+    if (this.colDraggable && changes['tableBodyEl'] && this.tableBodyEl) {
+      if (this.fixHeader && this.tableBodyEl) {
+        this.fixOriginTable = this.tableBodyEl.nativeElement;
+        this.renderFixFakeTableEl();
+        this.fixFakeTableEl.style.display = 'none';
+        this.fixTableScrollViewEl = this.fixOriginTable.parentNode.parentNode;
+        this.tableScrollbarWidth = this.getScrollbarWidth();
+        this.ref.markForCheck();
       }
     }
   }
@@ -216,20 +214,13 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
       setTimeout(() => { // wait for table render ready
         this.renderFakeTable();
         this.el.style.display = 'none';
-        if (this.fixHeader && this.tableBodyEl) {
-          this.fixOriginTable = this.tableBodyEl.nativeElement;
-          this.tableScrollbarWidth = this.getScrollbarWidth();
-          this.renderFixFakeTableEl();
-          this.fixFakeTableEl.style.display = 'none';
-        }
+
       });
       documentElement.addEventListener('resize', this.renderFakeTable);
       this.createCellMap();
       this.scrollViewEl = this.originTable.parentNode.parentNode;
       this.scrollViewRect = this.scrollViewEl.getBoundingClientRect();
-      if (this.fixHeader && this.tableBodyEl) {
-        this.fixTableScrollViewEl = this.fixOriginTable.parentNode.parentNode;
-      }
+
     }
   }
 
@@ -264,41 +255,10 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
       this.i18nSubscription.unsubscribe();
     }
   }
-  resetSources() {
-    this.checkedListForFilter = [];
-    if (this.sourceSubscription) {
-      this.sourceSubscription.unsubscribe();
-    }
-    if (this.filterSubscription) {
-      this.filterSubscription.unsubscribe();
-    }
-  }
 
-  onHeadClick(column: DataTableColumnTmplComponent) {
-    if (!column.sortable) {
-      return;
-    }
-
-    const sortIndex = this.multiSortArray.findIndex(item => item['field'] === column.field);
-
-    if (sortIndex === -1) {
-      return;
-    }
-
-    switch (this.multiSortArray[sortIndex].direction) {
-      case 'ASC':
-        this.multiSortArray[sortIndex].direction = 'DESC'; break;
-      case 'DESC':
-        this.multiSortArray[sortIndex].direction = ''; break;
-      case '':
-      default:
-        this.multiSortArray[sortIndex].direction = 'ASC';
-    }
-    this.headClickSortEvent.emit({ field: column.field, direction: this.multiSortArray[sortIndex].direction });
-  }
-
-  hasAnyFilterColumns(columns) {
-    return (columns || []).some(col => col && col.filterable);
+  onHeadClick(event: SortEventArg, column: DataTableColumnTmplComponent) {
+    event.field = column.field;
+    this.headClickSortEvent.emit(event);
   }
 
   onCheckAllChange() {
@@ -333,8 +293,7 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
   }
 
   onResize($event, column) {
-    // tslint:disable-next-line:no-unused-expression
-    column['advancedHeader'] == null && this.resizeHandlerEvent.emit({
+    this.resizeHandlerEvent.emit({
       ...$event,
       field: column.field
     });
@@ -345,47 +304,10 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
   }
 
   onResizing($event, column) {
-    // tslint:disable-next-line:no-unused-expression
-    column['advancedHeader'] == null && this.resizingHandlerEvent.emit({
+    this.resizingHandlerEvent.emit({
       ...$event,
-      column
+      field: column.field
     });
-  }
-
-  private setParentNextWidth(lastChildIndex: number, parentWidth: number, newParentWidth: number) {
-    if (!lastChildIndex) { return; }
-
-    const lastChilds = this.columns.filter(column => column['$colIndex'] === lastChildIndex).map(item => item.field);
-
-    for (let index = 0; index < this.columns.length - 1; index++) {
-      if (this.columns[index].field === lastChilds[0] && index + 1 < this.columns.length && this.columns[index + 1].width) {
-        const totalWidth = parentWidth + parseInt(this.columns[index + 1].width, 10);
-        this.columns[index + 1].width = totalWidth - newParentWidth + 'px';
-        return;
-      }
-    }
-  }
-
-  resizingParent($event, changeColumn) {
-    const { width } = $event;
-
-    if (this.rowCount > 0) {
-      this.columns.filter(column => column['advancedHeader'] !== undefined)
-        .map(column => column['advancedHeader'])
-        .reduce((target, newItemArr) => target.concat(newItemArr))
-        .filter(item => item['$cols'].indexOf(changeColumn['$colIndex']) > -1)
-        .forEach(item => {
-          this.zone.run(() => {
-            if (!item.$rowIndex) {
-              const length = item['$cols'].length;
-              const currentIsLastChild = changeColumn['$colIndex'] === item['$cols'][length - 1];
-              // tslint:disable-next-line:no-unused-expression
-              !currentIsLastChild && this.setParentNextWidth(item['$cols'][length - 1], parseInt(item['$width'], 10), length * width);
-              item['$width'] = length * width + 'px';
-            }
-          });
-        });
-    }
   }
 
   // 初始化多行表头，为了兼容resizeable对表头互相影响数据做了记录
@@ -401,26 +323,6 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
         }
         column['$colIndex'] = colIndex;
       });
-    }
-  }
-
-  resizeParent($event, changeColumn) {
-    const { width } = $event;
-    if (this.rowCount > 0) {
-      this.columns.filter(column => column['advancedHeader'] !== undefined)
-        .map(column => column['advancedHeader'])
-        .reduce((target, newItemArr) => target.concat(newItemArr))
-        .filter(item => item['$cols'].indexOf(changeColumn['$colIndex']) > -1)
-        .forEach(item => {
-          if (item['header'] === changeColumn['header']) { // 是当前列则直接赋值
-            item['$width'] = width;
-          } else {
-            // 判断是父列，则修改父列宽
-            if (!item.$rowIndex) {
-              item['$width'] = item['$cols'].length * parseInt(width, 10) + 'px';
-            }
-          }
-        });
     }
   }
 
@@ -986,6 +888,7 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
   getColumnAsTableByIndex(table, selectedColIndex, colSpan, rowSpan) {
     const skipRowIndexList = this.getDataBetween(0, 0 + rowSpan);
     const cTable = table.cloneNode(true);
+    cTable.removeChild(cTable.firstChild); // remove colgroup
     if (this.fixHeader) {
       cTable.deleteCaption();
     } else if (!this.fixHeader && cTable.tBodies.length > 1) {
@@ -1279,110 +1182,14 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
     return 0;
   }
 
-  toggleChildrenTable() {
+  toggleChildrenTable(event) {
     this.childrenTableOpen = !this.childrenTableOpen;
     this.dt.onToggleAllChildrenTable(this.childrenTableOpen);
   }
 
-  closeFilter(dropdown: DropDownDirective) {
-    dropdown.toggle();
-  }
-
-  getFilterDataMultiple(column: DataTableColumnTmplComponent) {
-    // 兼容当前当用户未传入id时，使用name做重名判断
-    const keyValue = this.checkedListForFilter.length ? this.checkedListForFilter[0].hasOwnProperty('id') ? 'id' : 'name' : '';
-    const checkedList = this.removeDuplication(this.checkedListForFilter, keyValue).filter(item => item.checked);
-    this.setFilterIconActive(checkedList, column);
-    column.emitFilterData(checkedList);
-  }
-  getFilterDataRadio(item, column: DataTableColumnTmplComponent) {
-    this.choosedItem = item;
-    this.setFilterIconActive(item, column);
-    column.emitFilterData(item);
-  }
-  showfilterContent($event, column: DataTableColumnTmplComponent) {
-    this.searchText = '';
-    column.canFilter(!$event).then((change) => {
-      if (!$event) {
-        this.resetSources();
-        return;
-      }
-      if (!change) {
-        this.isFilterHidden = true;
-        return;
-      }
-      this.isFilterHidden = false;
-      this.columnForFilter = column;
-      if (!column.customFilterTemplate) {
-        this.registerFilterChange(column);
-      }
-    });
-  }
-  filterCheckAll($event) {
-    this.filterHalfChecked = false;
-    this.filterListDisplay.forEach(item => {
-      item.checked = $event;
-      this.checkedListForFilter.push(item);
-    });
-  }
-  checkboxChange($event, item) {
-    this.checkedListForFilter.push(item);
-    this.setHalfChecked();
-  }
-  // 设置全选半选状态
-  setHalfChecked() {
-    this.filterHalfChecked = false;
-    const checked = this.filterListDisplay.filter(item => item.checked);
-    if (checked.length === this.filterListDisplay.length) {
-      this.filterAllChecked = true;
-    } else if (checked.length > 0) {
-      this.filterHalfChecked = true;
-    } else {
-      this.filterAllChecked = false;
-      this.filterHalfChecked = false;
-    }
-  }
-
-  registerFilterChange(column: DataTableColumnTmplComponent): void {
-    this.sourceSubject = new BehaviorSubject<any>('');
-    setTimeout(() => {
-      this.searchElement = document.querySelector('.data-table-column-filter-content input');
-      this.searchInputValueChangeEvent();
-    });
-    this.sourceSubscription = this.sourceSubject.pipe(switchMap(term => column.searchFn(term))).subscribe(options => {
-      this.filterListDisplay = options;
-      this.checkedListForFilter.push(...options.filter(item => item.checked));
-      this.setHalfChecked();
-      this.ref.markForCheck();
-    });
-  }
-
-  searchInputValueChangeEvent() {
-    this.filterSubscription = fromEvent(this.searchElement, 'input')
-      .pipe(
-        map((e: any) => e.target.value),
-        debounceTime(300) // hard code need refactory
-      )
-      .subscribe(term => {
-        return this.sourceSubject.next(term);
-      });
-  }
-  removeDuplication(array, key) {
-    const hash = {};
-    return array.reduceRight((item, next) => {
-      if (!hash[next[key]]) {
-        hash[next[key]] = true;
-        item.push(next);
-      }
-      return item;
-    }, []);
-  }
-  setFilterIconActive(checkedData, column: DataTableColumnTmplComponent) {
-    if (column['filterIconActive'] === undefined && (Array.isArray(checkedData) ?
-      (checkedData.length && (checkedData.length < column['filterList'].length)) : checkedData)) {
-      column['filterIconActiveInner'] = true;
-    } else {
-      column['filterIconActiveInner'] = false;
+  onOptionSelect(option: TableCheckOptions) {
+    if (option.onChecked) {
+      option.onChecked();
     }
   }
 }

@@ -65,20 +65,20 @@
   box-shadow: 5px 5px 20px 0 $dark-1-boxshadow;
 
   .modal-body {
-    padding-top: 24px;
-    padding-right: 24px;
-    padding-bottom: 16px;
-    padding-left: 24px;
+    padding-top: 10px;
+    padding-right: 30px;
+    padding-bottom: 15px;
+    padding-left: 30px;
+    color: $dark-2;
   }
 
   .modal-footer {
     border-top: none;
-    padding: 7px;
+    padding: 10px 0 25px;
     text-align: center;
 
     button {
       margin: 5px;
-      padding: 5px 20px;
       width: auto;
 
       &.pull-left {

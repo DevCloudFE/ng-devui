@@ -16,6 +16,7 @@ import { DraggableComponent } from './draggable/draggable.component';
 import { CustomTitleKeyComponent } from './custom-title-key/custom-title-key.component';
 import { SearchFilterComponent } from './search-filter/search-filter.component';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
+import { CheckControlComponent } from './check-control/check-control.component';
 
 @NgModule({
   imports: [
@@ -43,7 +44,8 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
     CustomizeComponent,
     DraggableComponent,
     CustomTitleKeyComponent,
-    SearchFilterComponent
+    SearchFilterComponent,
+    CheckControlComponent
   ],
   entryComponents: [
     TreeDemoComponent,

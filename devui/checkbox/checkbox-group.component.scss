@@ -3,18 +3,22 @@
 }
 
 .devui-checkbox-list-inline {
-  min-height: 32px;
-  line-height: 32px;
+  min-height: 28px;
+  line-height: 28px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 
   ::ng-deep li {
     display: inline-block;
 
     &:not(:last-child) {
-      margin-right: 10px;
+      margin-right: 20px;
     }
   }
 }
 
-.devui-checkbox-column-margin:nth-child(n + 2) {
-  margin-top: 15px;
+.devui-checkbox-column-margin {
+  height: 28px;
+  line-height: 28px;
 }

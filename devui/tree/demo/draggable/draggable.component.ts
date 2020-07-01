@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'd-draggable',
-  templateUrl: './draggable.component.html'
+  templateUrl: './draggable.component.html',
+  styleUrls: ['./draggable.component.scss']
 })
 export class DraggableComponent implements OnInit {
 
@@ -53,7 +54,8 @@ export class DraggableComponent implements OnInit {
       'title': '子节点5-2'
     }]
   }];
-  constructor() { }
+  dropItems = [];
+  constructor(private changeDetectorRef: ChangeDetectorRef) { }
 
   ngOnInit() {
     document.getElementById('draggableEl').ondragstart = function (event) {
@@ -75,5 +77,14 @@ export class DraggableComponent implements OnInit {
 
   showNode(node) {
     console.log(node);
+  }
+  dragOver($event) {
+    $event.preventDefault();
+   $event.dataTransfer.dropEffect = 'move';
+  }
+  drop($event) {
+    const transferDataStr = JSON.parse( $event.dataTransfer.getData('Text'));
+    this.dropItems.push(transferDataStr.nodeTitle);
+    this.changeDetectorRef.detectChanges();
   }
 }

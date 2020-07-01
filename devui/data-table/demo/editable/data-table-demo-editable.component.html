@@ -1,77 +1,79 @@
 <section>
   <d-data-table #dataTable [dataSource]="basicDataSource" (cellEditEnd)="thisCellEditEnd($event)" [scrollable]="true">
-    <d-column field="lastName" header="Last Name" [width]="'100px'" [editable]="true">
-      <d-cell-edit>
-        <ng-template let-rowItem="rowItem" let-column="column">
-          <div class="customized-editor edit-padding-fix">
-            <input class="devui-form-control" [(ngModel)]="rowItem[column.field]" maxlength="5" />
-          </div>
-        </ng-template>
-      </d-cell-edit>
-    </d-column>
-    <d-column field="dob" header="Date of birth" [editable]="true" [width]="'150px'">
-      <d-cell>
-        <ng-template let-cellItem="cellItem">
-          {{ cellItem | i18nDate: 'full':false }}
-        </ng-template>
-      </d-cell>
-      <d-cell-edit>
-        <ng-template let-rowItem="rowItem" let-column="column">
-          <form class="form-inline edit-padding-fix">
-            <div class="devui-form-group">
-              <div class="devui-input-group">
-                <input
-                  class="devui-form-control search"
-                  [name]="column.field"
-                  [(ngModel)]="rowItem[column.field]"
-                  dDatepicker
-                  appendToBody
-                  [dateFormat]="YYYY / MM / DD"
-                  #datePicker="datepicker"
-                  [showTime]="true"
-                  [autoOpen]="true"
-                />
-                <div class="devui-input-group-addon" (click)="datePicker.toggle($event, true)">
-                  <i class="icon icon-calendar"></i>
+    <thead dTableHead>
+      <tr dTableRow>
+        <th dHeadCell>Last Name</th>
+        <th dHeadCell>Date of birth</th>
+        <th dHeadCell>Age</th>
+        <th dHeadCell>Gender</th>
+      </tr>
+    </thead>
+    <tbody dTableBody>
+      <ng-template let-rowItem="rowItem" let-rowIndex="rowIndex">
+        <tr dTableRow>
+          <td dTableCell [editable]="true" [editableTip]="editableTip" (editStatusEvent)="onEditing($event, rowItem, 'nameEdit')">
+            <span *ngIf="!rowItem['nameEdit']">{{ rowItem?.lastName }}</span>
+            <form *ngIf="rowItem['nameEdit']" class="form-inline edit-padding-fix">
+              <div class="devui-form-group">
+                <div class="devui-input-group">
+                  <input
+                    class="devui-form-control"
+                    name="lastname"
+                    [(ngModel)]="rowItem.lastName"
+                    [attr.maxlength]="100"
+                    [attr.minlength]="3"
+                  />
                 </div>
               </div>
+            </form>
+          </td>
+          <td dTableCell [editable]="true" (editStatusEvent)="onEditing($event, rowItem, 'dateEdit')">
+            <span *ngIf="!rowItem['dateEdit']">{{ rowItem?.dob | i18nDate: 'short':false }}</span>
+            <form *ngIf="rowItem['dateEdit']" class="form-inline edit-padding-fix">
+              <div class="devui-form-group">
+                <div class="devui-input-group devui-dropdown-origin-wrapper devui-dropdown-origin">
+                  <input
+                    class="devui-form-control search"
+                    name="date"
+                    [(ngModel)]="rowItem.dob"
+                    dDatepicker
+                    appendToBody
+                    #datePicker="datepicker"
+                    [autoOpen]="true"
+                    (ngModelChange)="dateEditEnd(rowItem)"
+                  />
+                  <div class="devui-input-group-addon" (click)="datePicker.toggle($event, true)">
+                    <i class="icon icon-calendar"></i>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </td>
+          <td dTableCell [editable]="true" (editStatusEvent)="onEditing($event, rowItem, 'ageEdit')">
+            <span *ngIf="!rowItem['ageEdit']">{{ rowItem?.age }}</span>
+            <div *ngIf="rowItem['ageEdit']" class="edit-padding-fix">
+              <d-input-number [(ngModel)]="rowItem.age"></d-input-number>
             </div>
-          </form>
-        </ng-template>
-      </d-cell-edit>
-    </d-column>
-    <d-column field="age" header="Age" [width]="'100px'" [editable]="true">
-      <d-cell-edit>
-        <ng-template let-rowItem="rowItem" let-column="column">
-          <div class="customized-editor edit-padding-fix">
-            <d-input-number [(ngModel)]="rowItem[column.field]" class="input-number"></d-input-number>
-          </div>
-        </ng-template>
-      </d-cell-edit>
-    </d-column>
-    <d-column field="gender" header="Gender" [width]="'100px'" [editable]="true">
-      <d-cell>
-        <ng-template let-cellItem="cellItem">
-          {{ cellItem.label }}
-        </ng-template>
-      </d-cell>
-      <d-cell-edit>
-        <ng-template let-rowItem="rowItem" let-column="column">
-          <div class="customized-editor edit-padding-fix">
-            <d-select
-              [options]="genderSource"
-              isSearch="true"
-              [filterKey]="'label'"
-              autoFocus="true"
-              toggleOnFocus="true"
-              [(ngModel)]="rowItem[column.field]"
-              (ngModelChange)="finishEdit()"
-            >
-              <ng-template let-option="option" let-filterKey="filterKey"> gender:{{ option[filterKey] }} </ng-template>
-            </d-select>
-          </div>
-        </ng-template>
-      </d-cell-edit>
-    </d-column>
+          </td>
+          <td dTableCell [editable]="true" (editStatusEvent)="onEditing($event, rowItem, 'genderEdit')">
+            <span *ngIf="!rowItem['genderEdit']">{{ rowItem?.gender?.label }}</span>
+            <div *ngIf="rowItem['genderEdit']" class="customized-editor edit-padding-fix">
+              <d-select
+                [options]="genderSource"
+                isSearch="true"
+                [filterKey]="'label'"
+                autoFocus="true"
+                toggleOnFocus="true"
+                [appendToBody]="true"
+                [(ngModel)]="rowItem.gender"
+                (ngModelChange)="genderEditEnd(rowItem)"
+              >
+                <ng-template let-option="option" let-filterKey="filterKey"> gender:{{ option[filterKey] }} </ng-template>
+              </d-select>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </tbody>
   </d-data-table>
 </section>

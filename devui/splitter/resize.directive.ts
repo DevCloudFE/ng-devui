@@ -72,8 +72,8 @@ export class ResizeDirective implements OnInit, OnDestroy {
   }
 
   touchend = (e) => {
-    this.bind(document, 'touchmove', this.touchmove);
-    this.bind(document, 'touchend', this.touchend);
+    this.unbind(document, 'touchmove', this.touchmove);
+    this.unbind(document, 'touchend', this.touchend);
     if (e.touches.length === 0) {
       this.releaseEvent.emit(this.normalizeEvent(e));
     }

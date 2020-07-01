@@ -1,0 +1,18 @@
+<d-radio-group
+  [name]="'season'"
+  [values]="values"
+  [(ngModel)]="choose"
+  [beforeChange]="beforeChange"
+  (change)="valueChange($event)"
+  [cssStyle]="'row'"
+>
+</d-radio-group>
+<d-radio-group
+  [name]="'season'"
+  [values]="valuesSeason"
+  [(ngModel)]="chooseSeason"
+  [beforeChange]="beforeChange"
+  (change)="valueChange($event)"
+  [cssStyle]="'row'"
+>
+</d-radio-group>

@@ -11,6 +11,7 @@ import { MultiAutoCompleteModule } from 'ng-devui/multi-auto-complete';
 import { MultiAutoCompleteDemoComponent } from './multi-auto-complete-demo.component';
 import { MultiAutoCompleteDemoDefaultComponent } from './default/multi-auto-complete-demo-default.component';
 import { MultiAutoCompleteDemoArrayComponent } from './array/multi-auto-complete-demo-array.component';
+import { MultiAutoCompleteDemoDisabledComponent } from './disabled/multi-auto-complete-demo-disabled.component';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 
 @NgModule({
@@ -38,6 +39,7 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
     MultiAutoCompleteDemoComponent,
     MultiAutoCompleteDemoDefaultComponent,
     MultiAutoCompleteDemoArrayComponent,
+    MultiAutoCompleteDemoDisabledComponent,
   ],
   providers: [],
   entryComponents: [MultiAutoCompleteDemoComponent]

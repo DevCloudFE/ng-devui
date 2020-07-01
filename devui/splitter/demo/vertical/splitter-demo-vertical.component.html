@@ -1,6 +1,6 @@
 <section>
-  <d-splitter style="height: 500px; border: 1px solid #E3E5E9;" orientation="vertical">
-    <d-splitter-pane size="200px" minSize="100px" [collapsible]="true" (sizeChange)="sizeChange($event)">
+  <d-splitter style="height: 500px; border: 1px solid #e3e5e9;" orientation="vertical" [disabledBarSize]="disabledBarSize">
+    <d-splitter-pane size="200px" minSize="100px" [collapsed]="collapsed" [collapsible]="true" (sizeChange)="sizeChange($event)">
       <div class="pane-content">
         <h2>上面板</h2>
         <div>高度200px</div>

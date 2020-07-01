@@ -1,6 +1,7 @@
 @import '../style/theme/color';
 @import '../style/theme/variables';
 @import '../style/mixins/index';
+@import '../style/core/font';
 
 :host {
   display: block;
@@ -8,7 +9,7 @@
 
 .devui-nav-tabs,
 .devui-nav-pills {
-  font-size: 14px;
+  font-size: $font-size-secondary-card-title;
   background: transparent;
   font-weight: bold;
 
@@ -63,7 +64,7 @@
 }
 
 .devui-nav-options {
-  font-size: 14px;
+  font-size: $font-size-base;
   background: transparent;
   border: none;
   border-radius: 1px;
@@ -77,18 +78,18 @@
 
     &:first-child {
       border-left-width: 1px;
-      border-radius: 1px 0 0 1px;
+      border-radius: 2px 0 0 2px;
     }
 
     &:last-child {
-      border-radius: 0 1px 1px 0;
+      border-radius: 0 2px 2px 0;
     }
 
     & > a {
       cursor: pointer;
       border: none;
       color: $dark-1;
-      line-height: 30px;
+      line-height: 26px;
       padding: 0 15px;
 
       &:hover,

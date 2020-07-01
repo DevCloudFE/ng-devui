@@ -46,6 +46,8 @@ import { FullscreenModule } from 'ng-devui/fullscreen';
 import { ImagePreviewModule } from 'ng-devui/image-preview';
 import { AvatarModule } from 'ng-devui/avatar';
 import { QuadrantDiagramModule } from 'ng-devui/quadrant-diagram';
+import { GanttModule } from 'ng-devui/gantt';
+import { CarouselModule } from 'ng-devui/carousel';
 export * from 'ng-devui/accordion';
 export * from 'ng-devui/alert';
 export * from 'ng-devui/anchor';
@@ -54,6 +56,7 @@ export * from 'ng-devui/avatar';
 export * from 'ng-devui/button';
 export * from 'ng-devui/breadcrumb';
 export * from 'ng-devui/checkbox';
+export * from 'ng-devui/carousel';
 export * from 'ng-devui/common';
 export * from 'ng-devui/data-table';
 export * from 'ng-devui/datepicker';
@@ -93,6 +96,7 @@ export * from 'ng-devui/tree-select';
 export * from 'ng-devui/transfer';
 export * from 'ng-devui/text-input';
 export * from 'ng-devui/textarea';
+export * from 'ng-devui/gantt';
 export * from './version';
 
 @NgModule({
@@ -107,6 +111,7 @@ export * from './version';
     ButtonModule,
     BreadcrumbModule,
     CheckBoxModule,
+    CarouselModule,
     DataTableModule,
     DatepickerModule,
     DragDropModule,
@@ -115,6 +120,7 @@ export * from './version';
     EditableSelectModule,
     FormModule,
     FullscreenModule,
+    GanttModule,
     ImagePreviewModule,
     LoadingModule,
     ModalModule,
@@ -149,7 +155,7 @@ export * from './version';
   declarations: []
 })
 export class DevUIModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<DevUIModule> {
     return {
       ngModule: DevUIModule,
     };

@@ -3,6 +3,8 @@ import { Component, ElementRef, EventEmitter, HostListener, Input,
 import isEmpty from 'lodash-es/isEmpty';
 import { BehaviorSubject, fromEvent, Observable, of } from 'rxjs';
 import { debounceTime, filter, map, switchMap } from 'rxjs/operators';
+import { I18nService, I18nInterface } from 'ng-devui/i18n';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'd-tags-input',
   templateUrl: './tags.input.component.html',
@@ -65,14 +67,15 @@ export class TagsInputComponent implements OnInit, OnDestroy, OnChanges {
   @Output() valueChange = new EventEmitter<any>();
 
   @ViewChild('tagInput', { static: true }) tagInputElement: ElementRef;
+  @ViewChild('inputBox', { static: true }) inputBox: ElementRef;
   @ViewChild('selectBox', { static: true }) selectBoxElement: ElementRef;
 
   newTag = '';
-  showSuggestionList = false;
   availableOptions = [];
   newTagValid = false;
   isReduce = false;
   searchFn: (term: string) => Observable<Array<{ id: string | number, option: any }>>;
+  private _showSuggestionList = false;
   private sourceSubscription: BehaviorSubject<any>;
   private KEYS: any = {
     backspace: 8,
@@ -87,8 +90,39 @@ export class TagsInputComponent implements OnInit, OnDestroy, OnChanges {
     delete: 46,
     comma: 188
   };
+  private i18nSubscription: Subscription;
+  public i18nCommonText: I18nInterface['common'];
   // 下拉选中suggestionList的item索引
   selectIndex = 0;
+
+  constructor(private i18n: I18nService) {
+    this.setI18nText();
+  }
+
+  set showSuggestionList(val) {
+    this._showSuggestionList = val;
+    const ele = this.inputBox && this.inputBox.nativeElement;
+    if (ele) {
+      if (val) {
+        if (!ele.classList.contains('devui-dropdown-origin-open')) {
+          ele.classList.add('devui-dropdown-origin-open');
+        }
+        if (!ele.classList.contains('devui-dropdown-origin-bottom')) {
+          ele.classList.add('devui-dropdown-origin-bottom');
+        }
+      } else {
+        if (ele.classList.contains('devui-dropdown-origin-open')) {
+          ele.classList.remove('devui-dropdown-origin-open');
+        }
+        if (ele.classList.contains('devui-dropdown-origin-bottom')) {
+          ele.classList.remove('devui-dropdown-origin-bottom');
+        }
+      }
+    }
+  }
+  get showSuggestionList() {
+    return this._showSuggestionList;
+  }
 
   ngOnInit() {
     this.newTag = '';
@@ -114,6 +148,13 @@ export class TagsInputComponent implements OnInit, OnDestroy, OnChanges {
     }
   }
 
+  private setI18nText() {
+    this.i18nCommonText = this.i18n.getI18nText().common;
+    this.i18nSubscription = this.i18n.langChange().subscribe((data) => {
+      this.i18nCommonText = data.common;
+    });
+  }
+
   registerFilterChange() {
     this.sourceSubscription = new BehaviorSubject<any>('');
     this.sourceSubscription.pipe(
@@ -131,12 +172,11 @@ export class TagsInputComponent implements OnInit, OnDestroy, OnChanges {
           this.selectIndex = 0;
         }
       });
+    // 统一使用ngModel值，允许空格输入时需要正确处理input已有输入参数
     fromEvent(this.tagInputElement.nativeElement, 'input')
       .pipe(
-        map((e: HTMLSelectElement) => e['target'].value),
-        filter(term => true),
-        debounceTime(100) // hard code need refactory
-      ).subscribe(term => this.sourceSubscription.next(term));
+        debounceTime(100)
+      ).subscribe(() => this.sourceSubscription.next(this.newTag));
   }
 
   reduceSuggestionList() {
@@ -176,7 +216,7 @@ export class TagsInputComponent implements OnInit, OnDestroy, OnChanges {
     } else if (event.keyCode === this.KEYS.up) {
       // 向上选择选项
       this.select(--this.selectIndex);
-    } else if (event.keyCode === this.KEYS.enter || event.keyCode === this.KEYS.tab) {
+    } else if (event.keyCode === this.KEYS.enter || event.keyCode === this.KEYS.tab  || event.keyCode === this.KEYS.space) {
       if (this.selectIndex !== -1) {
         // 回车或tab添加selectIndex的值
         setTimeout(() => {
@@ -312,9 +352,12 @@ export class TagsInputComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   ngOnDestroy() {
-     if (this.sourceSubscription) {
-      this.sourceSubscription.unsubscribe();
-     }
+    if (this.sourceSubscription) {
+    this.sourceSubscription.unsubscribe();
+    }
+    if (this.i18nSubscription) {
+      this.i18nSubscription.unsubscribe();
+    }
   }
 
 }

@@ -10,7 +10,8 @@ import {
   forwardRef,
   Output,
   EventEmitter,
-  OnDestroy
+  OnDestroy,
+  HostListener
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
@@ -52,8 +53,29 @@ export class EditableSelectComponent implements ControlValueAccessor, OnInit, On
   subscription;
   i18nCommonText: I18nInterface['common'];
   i18nSubscription: Subscription;
+  private _dropDownOpen = false;
   private onChange = (_: any) => null;
   private onTouched = () => null;
+
+  set dropDownOpen(val) {
+    this._dropDownOpen = val;
+    if (this._dropDownOpen) {
+      this.autoCompleteDirective.openPopup();
+    } else {
+      this.autoCompleteDirective.hidePopup();
+    }
+  }
+  get dropDownOpen() {
+    return this._dropDownOpen;
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick($event: Event) {
+    if (!this.dropDownOpen) {
+      return;
+    }
+    this.dropDownOpen = false;
+  }
 
   writeValue(obj: any): void {
     const value = obj || '';
@@ -92,7 +114,8 @@ export class EditableSelectComponent implements ControlValueAccessor, OnInit, On
   }
 
   toggle($event: Event) {
-    this.autoCompleteDirective.popupRef.instance.isOpen = !this.autoCompleteDirective.popupRef.instance.isOpen;
+    $event.stopPropagation();
+    this.dropDownOpen = !this.dropDownOpen;
   }
   loadMoreEvent($event) {
     this.loadMore.emit($event);

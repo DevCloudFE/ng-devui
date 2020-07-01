@@ -15,7 +15,7 @@
       dPopover
       [popType]="'info'"
       [content]="'info!'"
-      [position]="'top'"
+      [position]="['top', 'right', 'bottom', 'left']"
       [controlled]="true"
       [showAnimate]="true"
       [appendToBody]="false"
@@ -48,10 +48,10 @@
       dPopover
       [popType]="'success'"
       [content]="'success!'"
-      [position]="'right'"
+      [position]="['bottom', 'right', 'top', 'left']"
       [controlled]="true"
       [showAnimate]="true"
-      [appendToBody]="false"
+      [appendToBody]="true"
     >
       success
     </d-button>

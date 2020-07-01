@@ -8,15 +8,16 @@
 
 .devui-status {
   line-height: 20px;
-  display: inline-block;
   height: 20px;
+  display: flex;
+  align-items: center;
 
   &::before {
     display: inline-block;
     content: '';
-    width: 8px;
-    height: 8px;
-    margin-right: 8px;
+    width: 10px;
+    height: 10px;
+    margin-right: 5px;
     border-radius: 100%;
   }
 
@@ -33,7 +34,7 @@
   }
 
   &.devui-status-bg-waiting::before {
-    background: #9faad7;
+    background: $status-waiting;
   }
 
   &.devui-status-bg-running::before {
@@ -41,10 +42,10 @@
   }
 
   &.devui-status-bg-invalid::before {
-    background: $gray-1;
+    background: $gray-2;
   }
 
   &.devui-status-bg-initial::before {
-    background: $brand-3;
+    background: $status-initial;
   }
 }

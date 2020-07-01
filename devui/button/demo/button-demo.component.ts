@@ -35,6 +35,11 @@ export class ButtonDemoComponent {
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./text/text.component.ts')}
   ];
 
+  dangerSource: Array<DevuiSourceData> = [
+    {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./danger/danger.component.html')},
+    {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./danger/danger.component.ts')}
+  ];
+
   combinationSource: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./combination/combination.component.html')},
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./combination/combination.component.ts')}
@@ -54,6 +59,7 @@ export class ButtonDemoComponent {
     { dAnchorLink: 'button-primary', value: '主要按钮'},
     { dAnchorLink: 'button-common', value: '次要按钮'},
     { dAnchorLink: 'button-primary-and-common', value: '主要按钮与次要按钮组合'},
+    { dAnchorLink: 'button-danger', value: '红色按钮'},
     { dAnchorLink: 'button-text', value: '文字按钮'},
     { dAnchorLink: 'button-loading', value: '加载中状态'},
     { dAnchorLink: 'button-auto-focus', value: '自动获得焦点'},

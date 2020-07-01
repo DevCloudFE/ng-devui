@@ -14,10 +14,7 @@
       [value]="filename"
       [title]="filename"
       readonly
-      [class.disabled]="
-        dSingleUploadView.uploadedFilesComponent.uploadedFiles.length > 0 ||
-        dSingleUploadView.fileUploaders[0]?.status === UploadStatus.uploading
-      "
+      [class.disabled]="dSingleUploadView.fileUploaders[0]?.status === UploadStatus.uploading"
     />
     <span *ngIf="!!filename" class="icon-close devui-upload-delete-file-button" (click)="deleteFile($event)"></span>
     <span class="devui-input-group-addon" style="cursor: pointer;">

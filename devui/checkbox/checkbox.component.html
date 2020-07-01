@@ -18,7 +18,11 @@
       (click)="$event.stopPropagation()"
       (change)="$event.stopPropagation()"
     />
-    <span class="devui-checkbox-material" [ngStyle]="{ 'border-color': checked ? color : '' }" [ngClass]="{ 'custom-color': color }">
+    <span
+      class="devui-checkbox-material"
+      [ngStyle]="{ 'border-color': checked ? color : '' }"
+      [ngClass]="{ 'custom-color': color, 'devui-checkbox-no-label': !label && !labelTemplate }"
+    >
       <span
         class="devui-checkbox-bg"
         [ngStyle]="{ 'background-color': color ? color : '' }"
@@ -27,22 +31,22 @@
         }"
       ></span>
       <svg
-        class="devui-checkbox-tick "
+        viewBox="0 0 16 16"
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"
         xmlns:xlink="http://www.w3.org/1999/xlink"
-        x="0px"
-        y="0px"
-        viewBox="0 0 20 20"
-        xml:space="preserve"
+        class="devui-checkbox-tick"
       >
-        <polyline
-          class="devui-tick"
-          points="2.6,11 6.9,15.2 17.4,4.8"
-          [ngClass]="{
-            'devui-no-animation': !showAnimation || !animationUnlocked
-          }"
-        />
+        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+          <polygon
+            fill-rule="nonzero"
+            points="5.17391304 6.56521739 7.7173913 9.10869565 11.826087 5 13 6.17391304 7.7173913 11.4565217 4 7.73913043"
+            class="devui-tick"
+            [ngClass]="{
+              'devui-no-animation': !showAnimation || !animationUnlocked
+            }"
+          ></polygon>
+        </g>
       </svg>
     </span>
     <ng-template [ngIf]="!!label && !labelTemplate">{{ label }}</ng-template>

@@ -54,6 +54,32 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
     this._isOpen = value;
     this.toggleChange.emit(value);
     this.setDocumentClickListener();
+    if (this.selectWrapper) {
+      this.dropDownWidth = this.width ? this.width : (this.selectWrapper.nativeElement.offsetWidth);
+    }
+    const ele = this.selectWrapper && this.selectWrapper.nativeElement;
+    let position = 'bottom';
+    if (this.popDirection === 'bottom') {
+      position = 'top';
+    }
+    if (value) {
+      if (ele && !ele.classList.contains('devui-dropdown-origin-open')) {
+        ele.classList.add('devui-dropdown-origin-open');
+      }
+      if (!this.appendToBody) {
+        if (ele && !ele.classList.contains(`devui-dropdown-origin-${this.popDirection}`)) {
+          ele.classList.add(`devui-dropdown-origin-${this.popDirection}`);
+          ele.classList.remove(`devui-dropdown-origin-${position}`);
+        }
+      }
+    } else {
+      const menuEle = this.selectMenuElement && this.selectMenuElement.nativeElement;
+      ele.classList.remove('devui-dropdown-origin-open');
+      ele.classList.remove('devui-dropdown-origin-top');
+      ele.classList.remove('devui-dropdown-origin-bottom');
+      menuEle.classList.remove(`devui-dropdown-cdk-top`);
+      menuEle.classList.remove(`devui-dropdown-cdk-bottom`);
+    }
   }
   /**
    * 【必选】下拉选项资源，支持Array<string>, Array<{key: value}>
@@ -121,6 +147,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
    * 【可选】下拉默认显示文字
    */
   @Input() placeholder = '';
+  @Input() searchPlaceholder = '';
   /**
    * 【可选】搜索函数，当需要自定义下拉选择过滤规则时可以使用
    *  请保证返回值有id和option字段，id是确保尤其多选的时候能正确索引对应选项
@@ -170,7 +197,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
    */
   @Input() inputItemTemplate: TemplateRef<any>;
 
-  @ContentChild(TemplateRef, { static: false }) itemTemplate: TemplateRef<any>;
+  @ContentChild(TemplateRef) itemTemplate: TemplateRef<any>;
 
   /**
    * 输出函数，当选中某个选项项后，将会调用此函数，参数为当前选择项的值。如果需要获取所有选择状态的值，请参考(ngModelChange)方法
@@ -224,14 +251,15 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
   @Input() autoFocus = false;
   @Input() notAutoScroll = false; // 自动聚焦的时候，自动滚动到select位置
 
-  @ViewChild('selectInput', { static: false }) selectInputElement: ElementRef;
-  @ViewChild('selectMenu', { static: false }) selectMenuElement: ElementRef;
+  @ViewChild('selectWrapper', { static: true }) selectWrapper: ElementRef;
+  @ViewChild('selectInput') selectInputElement: ElementRef;
+  @ViewChild('selectMenu') selectMenuElement: ElementRef;
   @ViewChild('selectBox', { static: true }) selectBoxElement: ElementRef;
-  @ViewChild('selectInputWithTemplate', { static: false }) selectInputWithTemplateElement: ElementRef;
-  @ViewChild('selectInputWithLabel', { static: false }) selectInputWithLabelElement: ElementRef;
-  @ViewChild('filterInput', { static: false }) filterInputElement: ElementRef;
-  @ViewChild('dropdownUl', { static: false }) dropdownUl: ElementRef;
-  @ViewChild(CdkConnectedOverlay, { static: false }) connectedOverlay: CdkConnectedOverlay;
+  @ViewChild('selectInputWithTemplate') selectInputWithTemplateElement: ElementRef;
+  @ViewChild('selectInputWithLabel') selectInputWithLabelElement: ElementRef;
+  @ViewChild('filterInput') filterInputElement: ElementRef;
+  @ViewChild('dropdownUl') dropdownUl: ElementRef;
+  @ViewChild(CdkConnectedOverlay) connectedOverlay: CdkConnectedOverlay;
 
   showLoading = false;
   _isOpen = false;
@@ -239,6 +267,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
   halfChecked = false;
   allChecked = false;
   isMouseEvent = false;
+  dropDownWidth: number;
 
   filter = '';
   activeIndex = -1;
@@ -293,6 +322,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
         );
       };
     }
+
     // 只有多选的情况isSelectAll为true才有意义
     if (!this.multiple) {
       this.isSelectAll = false;
@@ -307,10 +337,6 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
       this.selectBoxElement.nativeElement.focus({
         preventScroll: this.notAutoScroll
       });
-    }
-
-    if (this.selectBoxElement) {
-      this.width = this.width ? this.width : this.selectBoxElement.nativeElement.offsetWidth;
     }
   }
 
@@ -416,7 +442,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
           this.setChecked(selectedItemForFilterOptions);
       }
       if (!this.multiple && (!this.value || this.availableOptions && !this.availableOptions.find(option => option.option === this.value))) {
-        this.selectIndex = this.availableOptions && this.availableOptions.length > 0 ? 0 : -1;
+        this.selectIndex = this.filter && this.availableOptions && this.availableOptions.length > 0 ? 0 : -1;
       }
     });
 
@@ -543,8 +569,8 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
   }
 
   updateCdkConnectedOverlayOrigin() {
-    if (this.selectBoxElement.nativeElement) {
-      this.cdkConnectedOverlayOrigin = new CdkOverlayOrigin(this.selectBoxElement.nativeElement);
+    if (this.selectWrapper.nativeElement) {
+      this.cdkConnectedOverlayOrigin = new CdkOverlayOrigin(this.selectWrapper.nativeElement);
     }
   }
 
@@ -765,6 +791,24 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
 
   onPositionChange(position: ConnectedOverlayPositionChange) {
     this.menuPosition = position.connectionPair.originY;
+    this.changeAppendToBodyFormDropDownDirection(position.connectionPair.overlayY);
+  }
+
+  changeAppendToBodyFormDropDownDirection(position) {
+    const ele = this.selectWrapper && this.selectWrapper.nativeElement;
+    const menuEle = this.selectMenuElement && this.selectMenuElement.nativeElement;
+    let formBorder = 'bottom';
+    if (position === 'bottom') {
+      formBorder = 'top';
+    }
+    if (ele && !ele.classList.contains(`devui-dropdown-origin-${formBorder}`)) {
+      ele.classList.add(`devui-dropdown-origin-${formBorder}`);
+      ele.classList.remove(`devui-dropdown-origin-${position}`);
+    }
+    if (menuEle && !menuEle.classList.contains(`devui-dropdown-cdk-${formBorder}`)) {
+      menuEle.classList.add(`devui-dropdown-cdk-${formBorder}`);
+      menuEle.classList.remove(`devui-dropdown-cdk-${position}`);
+    }
   }
 
   animationEnd($event) {

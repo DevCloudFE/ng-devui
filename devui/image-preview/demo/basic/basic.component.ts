@@ -5,11 +5,10 @@ import { JPGTESTIMG, JPGTESTIMG2 } from '../fakedata';
   selector: 'd-image-preview-basic',
   templateUrl: './basic.component.html'
 })
-export class BasicComponent  {
+export class BasicComponent {
 
   imageDatas = [
     { src: JPGTESTIMG},
     { src: JPGTESTIMG2 }
   ];
-
 }

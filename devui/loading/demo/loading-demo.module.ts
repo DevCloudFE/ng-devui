@@ -15,6 +15,7 @@ import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { SubscriptionComponent } from './subscription/subscription.component';
 import { ButtonModule } from 'ng-devui/button';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
+import { ShowLoadingComponent } from './show-loading/show-loading.component';
 
 @NgModule({
   imports: [
@@ -39,7 +40,8 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
     BasicComponent,
     CustomComponent,
     PromiseComponent,
-    SubscriptionComponent
+    SubscriptionComponent,
+    ShowLoadingComponent
   ],
   entryComponents: [
     LoadingDemoComponent,

@@ -14,7 +14,8 @@ import {
 } from '@angular/core';
 import { fromEvent, Subscription } from 'rxjs';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
-
+import { AppendToBodyDirection } from 'ng-devui/utils';
+import { ConnectedPosition } from '@angular/cdk/overlay';
 @Component({
   selector: 'd-pagination',
   styleUrls: ['./pagination.component.scss'],
@@ -33,6 +34,7 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
    * 【可选】用于选择更改分页每页最大条目数量的下拉框的数据源，默认为`[5, 10, 20, 50]`
    */
   @Input() pageSizeOptions: number[] = [5, 10, 20, 50];
+  @Input() pageSizeDirection: Array<AppendToBodyDirection | ConnectedPosition> = ['centerDown', 'centerUp'];
   /**
    * 【可选】初始化页码
    */
@@ -88,6 +90,7 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
   @Input() totalItemText: string;
   @Input() goToText: string;
   /**
+   * @deprecated
    * 下拉菜单默认方向
    */
   @Input() selectDirection: 'auto' | 'up' | 'down' = 'auto';
@@ -102,15 +105,18 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
   litePaginatorOptions: any[] = [];
   private litePaginatorOptionsLengthCache = 0;
   showConfig = false;
-  @ViewChild('litePaginator', { static: false }) litePaginator: ElementRef;
+  @ViewChild('litePaginator') litePaginator: ElementRef;
   private configButtonLoseFocusHandler: Subscription | null = null;
   private loseFocusListener: any = null;
   i18nText: I18nInterface['pagination'];
+  i18nLocale: I18nInterface['locale'];
   i18nSubscription: Subscription;
-  constructor( private ref: ChangeDetectorRef, private i18n: I18nService) {
+  constructor(private ref: ChangeDetectorRef, private i18n: I18nService) {
     this.i18nText = this.i18n.getI18nText().pagination;
+    this.i18nLocale = this.i18n.getI18nText().locale;
     this.i18nSubscription = this.i18n.langChange().subscribe((data) => {
       this.i18nText = data.pagination;
+      this.i18nLocale = data.locale;
       this.ref.markForCheck();
     });
     this.constructLitePaginatorOptions();

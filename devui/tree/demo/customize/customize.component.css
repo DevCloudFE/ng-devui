@@ -48,8 +48,10 @@
 
 .op-icons {
   display: inline-block;
-  margin-right: 5px;
+  margin-left: 8px;
   cursor: pointer;
+  color: #575d6c;
+  font-size: 16px;
 }
 
 .op-status {
@@ -57,5 +59,4 @@
   height: 12px;
   border-radius: 50%;
   background-color: #3dcca6;
-  margin-right: 5px;
 }

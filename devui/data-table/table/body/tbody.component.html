@@ -1,0 +1,43 @@
+<ng-container *ngIf="!virtualScroll; else scrollViewTpl">
+  <ng-container *ngFor="let rowItem of dataSource; trackBy: trackByFn; let rowIndex = index">
+    <ng-template
+      [ngTemplateOutlet]="trTable"
+      [ngTemplateOutletContext]="{ rowItem: rowItem, rowIndex: rowIndex, nestedLayer: nestedLayer, nestedIndex: nestedIndex }"
+    >
+    </ng-template>
+  </ng-container>
+</ng-container>
+
+<ng-template #scrollViewTpl>
+  <ng-container *cdkVirtualFor="let rowItem of dataSource; trackBy: trackByFn; let rowIndex = index">
+    <ng-template
+      [ngTemplateOutlet]="trTable"
+      [ngTemplateOutletContext]="{ rowItem: rowItem, rowIndex: rowIndex, nestedLayer: nestedLayer, nestedIndex: nestedIndex }"
+    >
+    </ng-template>
+  </ng-container>
+</ng-template>
+
+<ng-template #trTable let-rowIndex="rowIndex" let-rowItem="rowItem" let-nestedLayer="nestedLayer" let-nestedIndex="nestedIndex">
+  <ng-template
+    [ngTemplateOutlet]="rowTemplete"
+    [ngTemplateOutletContext]="{ rowItem: rowItem, rowIndex: rowIndex, nestedLayer: nestedLayer, nestedIndex: nestedIndex }"
+  ></ng-template>
+  <tr class="child-table" *ngIf="rowItem['children'] && rowItem['$isChildTableOpen']">
+    <td [attr.colspan]="tableWidthConfig.length">
+      <table class="devui-table" [style.table-layout]="'fixed'">
+        <colgroup>
+          <col [style.width]="config.width" *ngFor="let config of tableWidthConfig" />
+        </colgroup>
+        <tbody
+          dTableBody
+          [rowTemplete]="rowTemplete"
+          [dataSource]="rowItem['children']"
+          [tableWidthConfig]="tableWidthConfig"
+          [nestedLayer]="nestedLayer + 1"
+          [nestedIndex]="nestedIndex + ',' + rowIndex"
+        ></tbody>
+      </table>
+    </td>
+  </tr>
+</ng-template>

@@ -1,0 +1,22 @@
+tr {
+  td:first-child {
+    border-left: 1px solid #dfe1e6;
+  }
+
+  td {
+    border-right: 1px solid #dfe1e6;
+  }
+}
+
+thead {
+  tr {
+    th:first-child {
+      border-left: 1px solid #dfe1e6;
+    }
+
+    th {
+      border-top: 1px solid #dfe1e6;
+      border-right: 1px solid #dfe1e6;
+    }
+  }
+}

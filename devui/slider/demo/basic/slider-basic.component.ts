@@ -10,6 +10,8 @@ export class SliderBasicComponent {
   minValue = 0;
   maxValue = 20;
   inputValue2 = 15;
+  inputValue3 = 0;
+  step = (this.maxValue - this.minValue) / 5;
 
   showVal($event: any) {
     console.log($event);

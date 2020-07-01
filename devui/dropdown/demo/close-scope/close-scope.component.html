@@ -1,13 +1,16 @@
 <section>
   <h4>点击菜单外才会关闭的下拉菜单</h4>
-  <div class="btn-group" dDropDown [closeScope]="'blank'" (ToggleEvent)="onToggle($event)">
-    <d-button bsStyle="common" dDropDownToggle>
+  <div class="btn-group" dDropDown [closeScope]="'blank'" (toggleEvent)="onToggle($event)">
+    <d-button bsStyle="common" dDropDownToggle class="devui-dropdown-origin">
       点击下拉
       <span class="icon-chevron-down"></span>
     </d-button>
-    <ul dDropDownMenu class="devui-dropdown-menu devui-scrollbar" role="menu">
+    <ul dDropDownMenu class="devui-dropdown-menu devui-scrollbar devui-dropdown-overlay" role="menu">
       <li role="menuitem">
-        <input type="text" style="width: calc(100% - 20px);margin-right: 10px;" class="devui-input" />
+        <input type="text" class="devui-input devui-input devui-search-in-dropdown" placeholder="输入框" />
+        <div class="icon-in-search">
+          <i class="icon icon-search"></i>
+        </div>
       </li>
       <li class="disabled" role="menuitem">
         <a class="devui-dropdown-item disabled">菜单一</a>
@@ -20,14 +23,17 @@
 <section>
   <h4>自行关闭</h4>
   <p>点击最后一个菜单项进行关闭</p>
-  <div class="btn-group" dDropDown [closeScope]="'none'" (ToggleEvent)="onToggle($event)" #myDropdown="d-dropdown">
-    <d-button bsStyle="common" dDropDownToggle>
+  <div class="btn-group" dDropDown [closeScope]="'none'" (toggleEvent)="onToggle($event)" #myDropdown="d-dropdown">
+    <d-button bsStyle="common" dDropDownToggle class="devui-dropdown-origin">
       点击下拉
       <span class="icon-chevron-down"></span>
     </d-button>
-    <ul dDropDownMenu class="dropdown-menu devui-scrollbar" role="menu">
+    <ul dDropDownMenu class="devui-dropdown-menu devui-scrollbar devui-dropdown-overlay" role="menu">
       <li role="menuitem">
-        <input type="text" style="width: calc(100% - 20px);margin-right: 10px;" class="devui-input" />
+        <input type="text" class="devui-input devui-input devui-search-in-dropdown" placeholder="输入框" />
+        <div class="icon-in-search">
+          <i class="icon icon-search"></i>
+        </div>
       </li>
       <li class="disabled" role="menuitem">
         <a class="devui-dropdown-item disabled">菜单一禁用</a>

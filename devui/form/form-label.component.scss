@@ -66,8 +66,9 @@
 }
 
 .devui-form-columns :host.devui-form-label {
-  flex: 0 0 100px;
+  flex: 1 1 auto;
   text-align: right;
+  padding-bottom: 8px;
   justify-content: flex-end;
   align-self: flex-start;
 }

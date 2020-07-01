@@ -13,6 +13,8 @@ import { Component } from '@angular/core';
 })
 export class SplitterDemoVerticalComponent {
 
+  collapsed = true;
+  disabledBarSize = '2px';
   constructor() {
   }
 

@@ -1,5 +1,5 @@
 <div class="arrow"></div>
-<div class="devui-popover-content">
+<div class="devui-popover-content" [style.maxWidth.px]="popMaxWidth">
   <span class="devui-popover-icon" *ngIf="popType && popType !== 'default'">
     <svg
       *ngIf="popType === 'success'"

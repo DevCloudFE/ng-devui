@@ -8,6 +8,7 @@ import { filter } from 'rxjs/operators';
   selector: '[dAnchorBox]'
 })
 export class AnchorBoxDirective implements IAnchorBox {
+  public isScrollingToTarget = false;
   private activeChangeSubject = new Subject();
   public activeChange = this.activeChangeSubject.asObservable();
   sub: Subscription;

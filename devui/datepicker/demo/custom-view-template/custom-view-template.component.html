@@ -1,9 +1,9 @@
 <section>
   <div class="row">
     <div class="col-md-6">
-      <div class="devui-input-group">
+      <div class="devui-input-group devui-dropdown-origin-wrapper devui-dropdown-origin">
         <input
-          class="devui-form-control"
+          class="devui-input devui-form-control"
           placeholder="y/MM/dd"
           name="dp"
           [(ngModel)]="selectedDate2"
@@ -14,6 +14,9 @@
           (selectedDateChange)="getValue($event)"
           [customViewTemplate]="myCustomview"
         />
+        <div *ngIf="selectedDate2" class="devui-input-group-addon icon-close-wrapper" (click)="datePicker1.clearAll()">
+          <i class="icon icon-close"></i>
+        </div>
         <div class="devui-input-group-addon" (click)="datePicker1.toggle($event)">
           <i class="icon icon-calendar"></i>
         </div>

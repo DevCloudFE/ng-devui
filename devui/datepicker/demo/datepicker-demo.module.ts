@@ -22,7 +22,11 @@ import { RangePickerTodayComponent } from './range-today/range-today.component';
 import { CustomViewTemplateComponent } from './custom-view-template/custom-view-template.component';
 import { DatepickerClearButtonComponent } from './clear-button/clear-button.component';
 import { DatepickerButtonComponent } from './button/button.component';
+import { DatepickerDemoMinMaxComponent } from './min-max/min-max.component';
+import { DatepickerDemoAppendToBodyComponent } from './append-to-body/append-to-body.component';
+import { DateRangePickerFormatComponent } from './range-picker-format/date-range-picker-format.component';
 import { TwoDatepickerBasicComponent } from './two-datepicker-basic/two-datepicker-basic.component';
+import { TwoDatepickerFormatComponent } from './two-datepicker-format/two-datepicker-format.component';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 
 
@@ -59,7 +63,11 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
     CustomViewTemplateComponent,
     DatepickerClearButtonComponent,
     DatepickerButtonComponent,
+    DatepickerDemoMinMaxComponent,
+    DatepickerDemoAppendToBodyComponent,
+    DateRangePickerFormatComponent,
     TwoDatepickerBasicComponent,
+    TwoDatepickerFormatComponent,
   ],
   entryComponents: [DatepickerDemoComponent],
   providers: [],

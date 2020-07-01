@@ -1,7 +1,7 @@
 <section>
   <h5 class="text-muted">Standard: Single Select</h5>
   <div class="row">
-    <div class="col-md-5">
+    <div class="col-md-5" style="font-size: 0;">
       <d-tree-select
         placeholder="Standard Input"
         [treeData]="data1"
@@ -12,11 +12,11 @@
       ></d-tree-select>
     </div>
   </div>
-  <h5 class="text-muted" style="margin-top: 20px; ">
+  <h5 class="text-muted" style="margin-top: 20px;">
     Standard: Multiple Select
   </h5>
   <div class="row">
-    <div class="col-md-5">
+    <div class="col-md-5" style="font-size: 0;">
       <d-tree-select
         placeholder="Standard Input"
         [treeData]="data2"
@@ -30,7 +30,7 @@
   </div>
   <h5 class="text-muted">Custom Width: Single Select</h5>
   <div class="row">
-    <div class="col-md-5">
+    <div class="col-md-5" style="font-size: 0;">
       <d-tree-select
         placeholder="Standard Input"
         [treeData]="data1"
@@ -44,7 +44,7 @@
   </div>
   <h5 class="text-muted">Disabled: Single Select</h5>
   <div class="row">
-    <div class="col-md-5">
+    <div class="col-md-5" style="font-size: 0;">
       <d-tree-select
         placeholder="Standard Input"
         [treeData]="data1"
@@ -53,22 +53,6 @@
         (ngModelChange)="showSelected($event)"
         width="auto"
         [disabled]="true"
-        style="width: 280px;"
-      ></d-tree-select>
-    </div>
-  </div>
-  <h5 class="text-muted">
-    AllowClear: Single Select (allowUnselect parameter must be true, which is the default value)
-  </h5>
-  <div class="row">
-    <div class="col-md-5">
-      <d-tree-select
-        placeholder="Standard Input"
-        [treeData]="data1"
-        [expandTree]="true"
-        [(ngModel)]="value1"
-        (ngModelChange)="showSelected($event)"
-        [allowClear]="true"
         style="width: 280px;"
       ></d-tree-select>
     </div>

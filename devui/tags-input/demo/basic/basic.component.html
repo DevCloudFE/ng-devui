@@ -12,6 +12,9 @@
     [maxLength]="taskTagConfig.maxLength"
     [maxTags]="taskTagConfig.maxTags"
     [suggestionList]="suggestionList"
+    [spellcheck]="taskTagConfig.spellcheck"
+    [caseSensitivity]="taskTagConfig.caseSensitivity"
+    [isAddBySpace]="taskTagConfig.isAddBySpace"
     (valueChange)="getTagValue($event)"
     [checkBeforeAdd]="customCheck"
   >

@@ -17,12 +17,11 @@ import { PanelFooterComponent } from './panel-footer.component';
 })
 export class PanelComponent {
   @Input() type: PanelType = 'default';
-  @Input() heading: string;
   @Input() cssClass: string;
   @Input() isCollapsed: boolean;
   @Output() toggle: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @ContentChild(PanelHeaderComponent, { static: false }) panelHeader;
-  @ContentChild(PanelFooterComponent, { static: false }) panelFooter;
+  @ContentChild(PanelHeaderComponent) panelHeader;
+  @ContentChild(PanelFooterComponent) panelFooter;
 
   toggleBody() {
     if (this.isCollapsed !== undefined) {

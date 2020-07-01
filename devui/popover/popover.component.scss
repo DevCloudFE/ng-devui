@@ -7,9 +7,9 @@
   position: absolute;
   top: 0;
   left: 0;
-  line-height: 20px;
+  line-height: 1.5;
   border: none;
-  border-radius: 2px;
+  border-radius: 4px;
   z-index: 1060;
   background-color: $hwc-feedback-overlay-background;
   color: $hwc-feedback-overlay-font-color;
@@ -93,9 +93,8 @@
 .devui-popover-icon {
   display: block;
   position: absolute;
-  left: 12px;
-  top: 8px;
-
+  left: 10px;
+  top: 6px;
   svg.devui-icon {
     width: 16px;
     height: 16px;

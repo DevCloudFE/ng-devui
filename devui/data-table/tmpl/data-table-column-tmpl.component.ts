@@ -2,7 +2,7 @@ import {
   ChangeDetectionStrategy, Component, ContentChild, EventEmitter, Input, OnChanges,
   OnDestroy, OnInit, Output, SimpleChanges, TemplateRef
 } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { FilterConfig } from '../data-table.model';
 import { DataTableCellEditTmplComponent } from './data-table-cell-edit-tmpl.component';
 import { DataTableCellViewTmplComponent } from './data-table-cell-view-tmpl.component';
@@ -20,7 +20,7 @@ export class DataTableColumnTmplComponent implements OnChanges, OnDestroy, OnIni
     colspan: number;
     [prop: string]: any;
   }>;
-  @Input() fieldType = 'text';
+
   @Input() maxWidth: string;
   @Input() minWidth: string;
   @Input() field: string;
@@ -47,47 +47,32 @@ export class DataTableColumnTmplComponent implements OnChanges, OnDestroy, OnIni
   @Input() filterBoxWidth: any;
   @Input() filterBoxHeight: any;
   @Input() beforeFilter: (value) => boolean | Promise<boolean> | Observable<boolean>;
-  @ContentChild(DataTableCellViewTmplComponent, { static: false }) cellCmp: DataTableCellViewTmplComponent;
-  @ContentChild(DataTableCellEditTmplComponent, { static: false }) cellEditCmp: DataTableCellEditTmplComponent;
-  @ContentChild(DataTableHeadCellTmplComponent, { static: false }) headCellTmpl: DataTableHeadCellTmplComponent;
+  @ContentChild(DataTableCellViewTmplComponent) cellCmp: DataTableCellViewTmplComponent;
+  @ContentChild(DataTableCellEditTmplComponent) cellEditCmp: DataTableCellEditTmplComponent;
+  @ContentChild(DataTableHeadCellTmplComponent) headCellTmpl: DataTableHeadCellTmplComponent;
   @Input() customFilterTemplate: TemplateRef<any>;
   @Input() searchFn: (term: string) => Observable<Array<any>>;
   orderChange = new EventEmitter<SimpleChanges>();
+  widthChange = new EventEmitter<SimpleChanges>();
   _formatter: (item: any, row?: any) => string;
 
   // 鼠标是否移动到当前表头单元格
   selected = false;
-  filterIconActiveInner = false;
+
+  // @deprecated
+  @Input() fieldType = 'text';
+
   constructor() {
 
   }
-  ngOnInit(): void {
-    if (this.filterable) {
-      if (this.filterList) {
-        if (!this.searchFn) {
-          this.searchFn = (item) => {
-            return of(
-              (this.filterList ? this.filterList : [])
-                .filter(value => value.name.toLowerCase().includes(item.toLowerCase()))
-            );
-          };
-        }
-      }
-    }
-
-  }
+  ngOnInit(): void {}
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['order']) {
       this.orderChange.emit(changes['order'].currentValue);
     }
-    if (changes['filterList']) {
-      if (this.filterIconActive !== undefined) { return; }
-      const checkedList = this.filterList.filter(item => item.checked);
-      if (checkedList.length && (checkedList.length < this.filterList.length)) {
-        this.filterIconActiveInner = true;
-      } else {
-        this.filterIconActiveInner = false;
-      }
+
+    if (changes['width']) {
+      this.widthChange.emit(changes['width'].currentValue);
     }
   }
 
@@ -99,23 +84,5 @@ export class DataTableColumnTmplComponent implements OnChanges, OnDestroy, OnIni
 
   emitFilterData(filterData) {
     this.filterChange.emit(filterData);
-  }
-  canFilter(isOpen) {
-    let changeResult = Promise.resolve(true);
-
-    if (this.beforeFilter) {
-      const result: any = this.beforeFilter(isOpen);
-      if (typeof result !== 'undefined') {
-        if (result.then) {
-          changeResult = result;
-        } else if (result.subscribe) {
-          changeResult = (result as Observable<boolean>).toPromise();
-        } else {
-          changeResult = Promise.resolve(result);
-        }
-      }
-    }
-
-    return changeResult;
   }
 }

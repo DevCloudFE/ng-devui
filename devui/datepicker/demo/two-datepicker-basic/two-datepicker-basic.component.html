@@ -1,7 +1,114 @@
 <section style="width: 100%;">
-  <span>双日期选择器:</span>
-  <div class="devui-input-group" dTwoDatePicker #twoDatePicker="twoDatePicker" (selectRange)="selectRange($event)">
-    <input class="devui-input" placeholder="y/MM/dd" [(ngModel)]="rangeStart" dTwoDatePickerStart (selectStart)="selectStart($event)" />
-    <input class="devui-input" placeholder="y/MM/dd" [(ngModel)]="rangeEnd" dTwoDatePickerEnd (selectEnd)="selectEnd($event)" />
+  <h5>双日期选择器 选择完成后隐藏</h5>
+  <div class="two-date-wrapper" dTwoDatePicker #twoDatePicker="twoDatePicker" (selectRange)="selectRange($event)">
+    <div class="devui-input-group devui-dropdown-origin-wrapper devui-dropdown-origin">
+      <input
+        class="devui-input devui-form-control"
+        placeholder="y/MM/dd"
+        [(ngModel)]="rangeStart"
+        dTwoDatePickerStart
+        (selectStart)="selectStart($event)"
+        #startPicker="twoDatePickerStart"
+      />
+      <div *ngIf="rangeStart" class="devui-input-group-addon icon-close-wrapper" (click)="twoDatePicker.clear('start')">
+        <i class="icon icon-close"></i>
+      </div>
+      <div class="devui-input-group-addon" (click)="startPicker.toggleStartPicker($event)">
+        <i class="icon icon-calendar"></i>
+      </div>
+    </div>
+    <div class="devui-input-group devui-dropdown-origin-wrapper devui-dropdown-origin">
+      <input
+        class="devui-input devui-form-control"
+        placeholder="y/MM/dd"
+        [(ngModel)]="rangeEnd"
+        dTwoDatePickerEnd
+        (selectEnd)="selectEnd($event)"
+        #endPicker="twoDatePickerEnd"
+      />
+      <div *ngIf="rangeEnd" class="devui-input-group-addon icon-close-wrapper" (click)="twoDatePicker.clear('end')">
+        <i class="icon icon-close"></i>
+      </div>
+      <div class="devui-input-group-addon" (click)="endPicker.toggleEndPicker($event)">
+        <i class="icon icon-calendar"></i>
+      </div>
+    </div>
+  </div>
+  <h5>双日期选择器 (设置cssClass)选择完成后保持打开</h5>
+  <div
+    class="two-date-wrapper"
+    dTwoDatePicker
+    #twoDatePicker2="twoDatePicker"
+    [hideOnRangeSelected]="false"
+    [cssClass]="'custom-css-class'"
+    (selectRange)="selectRange($event)"
+  >
+    <div class="devui-input-group devui-dropdown-origin-wrapper devui-dropdown-origin">
+      <input
+        class="devui-input devui-form-control"
+        placeholder="y/MM/dd"
+        [(ngModel)]="rangeStart2"
+        dTwoDatePickerStart
+        (selectStart)="selectStart($event)"
+        #startPicker2="twoDatePickerStart"
+      />
+      <div *ngIf="rangeStart2" class="devui-input-group-addon icon-close-wrapper" (click)="twoDatePicker2.clear('start')">
+        <i class="icon icon-close"></i>
+      </div>
+      <div class="devui-input-group-addon" (click)="startPicker2.toggleStartPicker($event)">
+        <i class="icon icon-calendar"></i>
+      </div>
+    </div>
+    <div class="devui-input-group devui-dropdown-origin-wrapper devui-dropdown-origin">
+      <input
+        class="devui-input devui-form-control"
+        placeholder="y/MM/dd"
+        [(ngModel)]="rangeEnd2"
+        dTwoDatePickerEnd
+        (selectEnd)="selectEnd($event)"
+        #endPicker2="twoDatePickerEnd"
+      />
+      <div *ngIf="rangeEnd2" class="devui-input-group-addon icon-close-wrapper" (click)="twoDatePicker2.clear('end')">
+        <i class="icon icon-close"></i>
+      </div>
+      <div class="devui-input-group-addon" (click)="endPicker2.toggleEndPicker($event)">
+        <i class="icon icon-calendar"></i>
+      </div>
+    </div>
+  </div>
+  <h5>双日期选择器 禁用(仅提供参考，或参考dateRangePicker进行设置)</h5>
+  <div class="two-date-wrapper" dTwoDatePicker #twoDatePicker3="twoDatePicker" [disabled]="true" (selectRange)="selectRange($event)">
+    <div class="devui-input-group devui-dropdown-origin-wrapper devui-dropdown-origin">
+      <input
+        class="devui-input devui-form-control"
+        placeholder="y/MM/dd"
+        [(ngModel)]="rangeStart3"
+        dTwoDatePickerStart
+        (selectStart)="selectStart($event)"
+        #startPicker3="twoDatePickerStart"
+      />
+      <div *ngIf="rangeStart3" class="devui-input-group-addon icon-close-wrapper" (click)="twoDatePicker3.clear('start')">
+        <i class="icon icon-close"></i>
+      </div>
+      <div class="devui-input-group-addon" (click)="startPicker3.toggleStartPicker($event)">
+        <i class="icon icon-calendar"></i>
+      </div>
+    </div>
+    <div class="devui-input-group devui-dropdown-origin-wrapper devui-dropdown-origin">
+      <input
+        class="devui-input devui-form-control"
+        placeholder="y/MM/dd"
+        [(ngModel)]="rangeEnd3"
+        dTwoDatePickerEnd
+        (selectEnd)="selectEnd($event)"
+        #endPicker3="twoDatePickerEnd"
+      />
+      <div *ngIf="rangeEnd3" class="devui-input-group-addon icon-close-wrapper" (click)="twoDatePicker3.clear('end')">
+        <i class="icon icon-close"></i>
+      </div>
+      <div class="devui-input-group-addon" (click)="endPicker3.toggleEndPicker($event)">
+        <i class="icon icon-calendar"></i>
+      </div>
+    </div>
   </div>
 </section>

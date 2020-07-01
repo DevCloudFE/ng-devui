@@ -1,0 +1,9 @@
+<div [dMovable]="true" [handle]="header" [moveEl]="parent">
+  <div class="header" #header>Modal Template Content</div>
+  <div class="body">
+    <div *ngIf="data?.content">{{ data?.content }}</div>
+  </div>
+  <div class="footer">
+    <d-button (btnClick)="close($event)" bsStyle="primary" circled="true">关闭</d-button>
+  </div>
+</div>

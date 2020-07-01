@@ -13,6 +13,7 @@ import { DImagePreviewDemoComponent } from './image-preview-demo.component';
 
 import { BasicComponent } from './basic/basic.component';
 import { CustomOpenComponent } from './custom-open/custom-open.component';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 
 @NgModule({
   imports: [
@@ -21,6 +22,7 @@ import { CustomOpenComponent } from './custom-open/custom-open.component';
     ImagePreviewModule,
     DevUICodeboxModule,
     DevUIApiModule,
+    DDemoNavModule,
     SafePipeModule,
     ButtonModule,
     RouterModule.forChild([

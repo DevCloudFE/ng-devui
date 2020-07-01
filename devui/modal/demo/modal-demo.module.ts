@@ -20,6 +20,9 @@ import { AutofocusComponent } from './autofocus/autofocus.component';
 import { ModalTestComponent } from './basic/modal-test.component';
 import { ModalFormComponent } from './hide/modal-form.component';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
+import { TemplateComponent } from './template/template.component';
+import { DialogContentComponent } from './template/dialog-content/dialog-content.component';
+import { ModalContentComponent } from './template/modal-content/modal-content.component';
 
 @NgModule({
   imports: [
@@ -49,7 +52,10 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
     HideComponent,
     ModalFormComponent,
     WarningComponent,
-    AutofocusComponent
+    AutofocusComponent,
+    TemplateComponent,
+    DialogContentComponent,
+    ModalContentComponent
   ],
   entryComponents: [
     ModalDemoComponent,

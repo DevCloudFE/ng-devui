@@ -1,11 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 @Component({
     selector: 'd-custom',
-    templateUrl: './custom.component.html'
+    templateUrl: './custom.component.html',
+    styleUrls: ['./custom.component.css'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class CustomComponent {
 
-    tabActiveId = 'tab2';
+    tabActiveId = 'tab1';
     tabItems = [
         {
           id: 'tab1',
@@ -15,7 +17,8 @@ export class CustomComponent {
         {
           id: 'tab2',
           title: 'Tab2',
-          content: `这是Tab2的内容`
+          content: `这是Tab2的内容`,
+          disabled: true
         },
         {
           id: 'tab3',

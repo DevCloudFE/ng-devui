@@ -11,17 +11,11 @@ import { DataTableCellComponent } from './data-table-cell.component';
 import { DataTableBodyComponent } from './data-table-body.component';
 import { DataTableHeadComponent } from './data-table-head.component';
 import { DataTableRowComponent } from './data-table-row.component';
-import { DataTableHeadTmplComponent } from './tmpl/data-table-head-tmpl.component';
-import { DataTableFootTmplComponent } from './tmpl/data-table-foot-tmpl.component';
-import { DataTableFootComponent } from './data-table-foot.component';
 import { PaginationModule } from 'ng-devui/pagination';
-import { DataTablePagerComponent } from './data-table-pager.component';
-import { DataTablePagerTmplComponent } from './tmpl/data-table-pager-tmpl.component';
 import { DataTableHeadCellTmplComponent } from './tmpl/data-table-head-cell-tmpl.component';
 import { DCommonModule } from 'ng-devui/common';
 import { DatepickerModule } from 'ng-devui/datepicker';
 import { CheckBoxModule } from 'ng-devui/checkbox';
-import { ResizeableDirective } from './resizeable.directive';
 import { ButtonModule } from 'ng-devui/button';
 import { SelectModule, SelectComponent } from 'ng-devui/select';
 import { InputNumberModule, InputNumberComponent } from 'ng-devui/input-number';
@@ -31,8 +25,15 @@ import { SafePipeModule } from 'ng-devui/utils';
 import { DisPlayCellValuePipe } from './display-cell-value.pipe';
 import { TooltipModule } from 'ng-devui/tooltip';
 import { EditorDirective } from './editor-host.directive';
-import { DataTableCellTmplComponent } from './tmpl/data-table-cell-tmpl.component';
 import { DragDropModule } from 'ng-devui/dragdrop';
+import { TableThComponent } from './table/head/th/th.component';
+import { FilterComponent } from './table/head/th/filter/filter.component';
+import { SortComponent } from './table/head/th/sort/sort.component';
+import { TableTheadComponent } from './table/head/thead.component';
+import { TableTrComponent } from './table/row/tr.component';
+import { TableTbodyComponent } from './table/body/tbody.component';
+import { TableTdComponent } from './table/body/td/td.component';
+import { DataTableCellTmplComponent } from './tmpl/data-table-cell-tmpl.component';
 
 @NgModule({
   imports: [
@@ -60,14 +61,16 @@ import { DragDropModule } from 'ng-devui/dragdrop';
     DataTableBodyComponent,
     DataTableHeadComponent,
     DataTableCellComponent,
-    DataTableHeadTmplComponent,
-    DataTableFootTmplComponent,
-    DataTableFootComponent,
-    DataTableCellTmplComponent,
-    DataTablePagerComponent,
-    DataTablePagerTmplComponent,
     DataTableRowComponent,
-    DataTableHeadCellTmplComponent
+    DataTableCellTmplComponent,
+    DataTableHeadCellTmplComponent,
+    TableThComponent,
+    FilterComponent,
+    SortComponent,
+    TableTheadComponent,
+    TableTrComponent,
+    TableTbodyComponent,
+    TableTdComponent
   ],
   declarations: [
     DataTableComponent,
@@ -77,17 +80,18 @@ import { DragDropModule } from 'ng-devui/dragdrop';
     DataTableBodyComponent,
     DataTableHeadComponent,
     DataTableCellComponent,
-    DataTableHeadTmplComponent,
-    DataTableFootTmplComponent,
-    DataTableFootComponent,
-    DataTableCellTmplComponent,
-    DataTablePagerComponent,
-    DataTablePagerTmplComponent,
     DataTableRowComponent,
-    ResizeableDirective,
+    DataTableCellTmplComponent,
     DataTableHeadCellTmplComponent,
     DisPlayCellValuePipe,
-    EditorDirective
+    EditorDirective,
+    TableThComponent,
+    FilterComponent,
+    SortComponent,
+    TableTheadComponent,
+    TableTrComponent,
+    TableTbodyComponent,
+    TableTdComponent
   ],
   entryComponents: [
     InputNumberComponent,

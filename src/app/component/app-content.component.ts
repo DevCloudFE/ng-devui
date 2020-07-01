@@ -13,7 +13,7 @@ import {
 import { groupBy, map } from 'lodash-es';
 import { routesConfig } from './component.route';
 import { Subscription, fromEvent } from 'rxjs';
-
+import cloneDeep from 'lodash-es/cloneDeep';
 @Component({
   selector: 'cd-app-content', // tslint:disable-line
   templateUrl: './app-content.component.html',
@@ -26,7 +26,7 @@ export class AppContentComponent implements OnInit, OnDestroy {
   groupedRoutes: any;
   componentsData = [];
   clickSub: Subscription = new Subscription();
-
+  componentsDataDisplay: Array<any>;
   constructor(private renderer2: Renderer2, private ngZone: NgZone) {
     const routesWithData = map(routesConfig, (route) => {
       if (!route.data) {
@@ -88,6 +88,16 @@ export class AppContentComponent implements OnInit, OnDestroy {
           this.renderer2.removeClass(wrapper, 'active');
         }
       }));
+    });
+    this.onSearch('');
+  }
+
+  onSearch(event) {
+    this.componentsDataDisplay = cloneDeep(this.componentsData).filter(catalog => {
+      catalog.children = catalog.children.filter(item => {
+        return item.title.toLowerCase().includes(event.toLowerCase());
+      });
+      return catalog.children.length;
     });
   }
 

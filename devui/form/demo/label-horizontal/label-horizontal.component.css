@@ -1,5 +1,5 @@
 :host form {
-  width: 400px;
+  width: 450px;
 }
 
 .single-checkbox {
@@ -9,4 +9,12 @@
 
 :host ::ng-deep .devui-radio-horizontal d-radio {
   display: inline-block;
+}
+
+.single-radio {
+  line-height: 40px;
+}
+
+.plan-desc {
+  height: 96px;
 }

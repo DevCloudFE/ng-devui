@@ -1,0 +1,27 @@
+<section>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="devui-input-group devui-dropdown-origin-wrapper devui-dropdown-origin">
+        <input
+          class="devui-input devui-form-control"
+          placeholder="y/MM/dd"
+          (focus)="datePicker1.toggle($event)"
+          name="dp"
+          [(ngModel)]="selectedDate1"
+          autocomplete="off"
+          dDatepicker
+          #datePicker1="datepicker"
+          (selectedDateChange)="getValue($event)"
+          appendToBody
+          [appendToBodyDirections]="appendToBodyDirections"
+        />
+        <div *ngIf="selectedDate1" class="devui-input-group-addon icon-close-wrapper" (click)="datePicker1.clearAll()">
+          <i class="icon icon-close"></i>
+        </div>
+        <div class="devui-input-group-addon" (click)="datePicker1.toggle($event, true)">
+          <i class="icon icon-calendar"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

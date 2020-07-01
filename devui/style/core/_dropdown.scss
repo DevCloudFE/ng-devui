@@ -10,19 +10,20 @@
   }
 
   .devui-dropdown-toggle.devui-dropdown-default {
-    &:not(.devui-dropdown-item) {
-      display: inline-block;
-    }
-
-    min-width: 100px;
-    line-height: 20px;
-    padding: 5px 15px;
+    line-height: 1.5;
+    padding: 4px 10px;
     border-radius: 2px;
     text-align: center;
     cursor: pointer;
     outline: 0;
     border-style: solid;
     border-width: 1px;
+    display: flex;
+    align-items: center;
+
+    &:not(.devui-dropdown-item) {
+      display: inline-flex !important;
+    }
   }
 
   .devui-caret {
@@ -42,30 +43,43 @@
 .devui-dropdown-menu {
   position: absolute;
   float: left;
-  top: 100%;
+  top: calc(100% - 1px);
   left: 0;
   z-index: 1000;
   display: none;
-  min-width: 100px;
-  padding: 5px 0;
-  margin-top: 2px;
+  min-width: calc(min(100%, 102px));
+  padding-bottom: 5px;
   background-clip: padding-box;
-  border-radius: 0 0 2px 2px;
+  border-radius: 2px;
   list-style: none;
   background-color: $dropdown-overlay;
   box-shadow: 0 2px 5px 0 $dark-1-boxshadow;
   outline: none;
 
+  &.devui-dropdown-overlay,
+  &.devui-dropdown-overlay.popper-container {
+    border: 1px solid $brand-1;
+  }
+
+  &.devui-dropdown-overlay.popper-container {
+    margin-top: -1px;
+    margin-bottom: -1px;
+  }
+
   .open > & {
     display: block;
   }
 
-  > li > a {
-    height: 36px;
-    line-height: 36px;
-    padding: 0 20px;
-    display: block;
-    cursor: pointer;
+  > li {
+    position: relative;
+
+    > a {
+      height: 36px;
+      padding: 0 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
   }
 
   li > input {
@@ -83,13 +97,20 @@
   }
 
   .devui-dropdown-item:not(.disabled) {
-    &:hover {
+    &:hover:not(:active) {
       background-color: $hover-content;
+      color: $hover-control;
+    }
+
+    &:active:hover {
+      background-color: $hwc-color-bg-active;
+      color: $font-white;
     }
 
     &.devui-dropdown-bg {
       //箭头选中
       background-color: $hover-content;
+      color: $hover-control;
     }
 
     &.active {
@@ -99,25 +120,31 @@
   }
 }
 
-.devui-form-control-feedback {
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: 2;
-  display: block;
-  width: 32px;
-  height: 32px;
-  line-height: 32px;
-  text-align: center;
-  pointer-events: none;
+.devui-form-group.devui-has-feedback {
+  & > .devui-form-control-feedback {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 2;
+    display: block;
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    pointer-events: none;
 
-  .devui-caret {
-    display: inline-block;
-    margin-left: 2px;
-    vertical-align: middle;
-    border-top: 4px solid;
-    border-right: 4px solid transparent;
-    border-left: 4px solid transparent;
+    &:hover {
+      position: absolute;
+    }
+
+    .devui-caret {
+      display: inline-block;
+      margin-left: 2px;
+      vertical-align: middle;
+      border-top: 4px solid;
+      border-right: 4px solid transparent;
+      border-left: 4px solid transparent;
+    }
   }
 }
 
@@ -126,20 +153,22 @@
 }
 
 .devui-dropdown-no-border {
-  display: inline-block;
-  min-height: 30px;
-  min-width: 102px;
-  line-height: 20px;
-  padding: 5px 15px;
+  min-height: 28px;
+  min-width: calc(min(100%, 102px));
+  line-height: 1.5;
+  padding: 4px 10px;
   border-radius: 2px;
   text-align: center;
-  font-size: 14px;
   outline: 0;
   background-image: none;
   text-decoration: none;
   cursor: pointer;
   background-color: $dropdown-overlay;
   color: $dark-1;
+  display: flex;
+  align-items: center;
+  box-shadow: none;
+  border: none;
 
   &:hover,
   &:focus {
@@ -152,30 +181,16 @@
   }
 }
 
-.devui-dropdown-no-border,
-.devui-dropdown-toggle,
-.devui-dropdown-item {
-  .icon[class*=' icon-'] {
-    position: relative;
-    top: 2px;
-  }
-}
-
 .devui-dropdown {
   .devui-dropdown-default {
     background-color: $bg-white;
     color: $dark-1;
     border-color: $gray-1;
 
-    &:hover {
-      border-color: $brand-1;
-      color: $brand-1;
-    }
-
     &:active,
-    &:focus {
-      border-color: $hover-control;
-      color: $hover-control;
+    &:focus,
+    &:hover {
+      border-color: $dark-2;
     }
   }
 
@@ -195,6 +210,11 @@
     > .disabled > a {
       color: $disabled-content;
       cursor: not-allowed;
+
+      &:hover,
+      &:focus {
+        background-color: transparent;
+      }
     }
   }
 }

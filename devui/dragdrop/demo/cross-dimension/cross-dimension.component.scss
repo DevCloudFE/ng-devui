@@ -128,9 +128,11 @@
   color: #293050;
   color: var(--dark-1, #293050);
   margin-bottom: 5px;
-  line-height: 30px;
-  background-color: #ffffff;
-  background-color: var(--white, #ffffff);
+  line-height: 1.5;
+  background-color: #fff;
+  background-color: var(--white, #fff);
+  display: flex;
+  align-items: center;
 }
 
 .list-group > li.selected,
@@ -141,9 +143,11 @@
   color: #5170ff;
   color: var(--brand-1, #5170ff);
   margin-bottom: 5px;
-  line-height: 30px;
+  line-height: 1.5;
   background-color: #e8f0fd;
   background-color: var(--brand-3, #e8f0fd);
+  display: flex;
+  align-items: center;
 }
 
 :host::ng-deep .drag-placeholder {

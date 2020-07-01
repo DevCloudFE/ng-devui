@@ -42,6 +42,9 @@ export class SingleUploadComponent implements OnDestroy {
   @Input() filePath: string;
   @Input() placeholderText: string;
   @Input() uploadText: string;
+   /**
+   * @deprecated
+   */
   @Input() confirmText: string;
   @Input() beforeUpload: (file) => boolean | Promise<boolean> | Observable<boolean>;
   @Input() enableDrop = false;
@@ -75,6 +78,7 @@ export class SingleUploadComponent implements OnDestroy {
     })).subscribe(
       () => {
         this.singleUploadViewComponent.uploadedFilesComponent.cleanUploadedFiles();
+        this.checkValid();
         if (this.autoUpload) {
           this.upload();
         }
@@ -85,10 +89,19 @@ export class SingleUploadComponent implements OnDestroy {
     );
   }
 
+  checkValid() {
+    this.singleUploadViewComponent.fileUploaders.forEach(fileUploader => {
+      const checkResult = this.selectFiles._validateFiles(fileUploader.file, this.fileOptions.accept, fileUploader.uploadOptions);
+      if (checkResult.checkError) {
+        this.singleUploadViewComponent.deletePreUploadFile(fileUploader.file);
+        this.alertMsg(checkResult.errorMsg);
+      }
+    });
+  }
+
   onClick($event) {
-    if (this.singleUploadViewComponent.uploadedFilesComponent.uploadedFiles.length > 0 ||
-      (this.singleUploadViewComponent.fileUploaders[0] && this.singleUploadViewComponent.fileUploaders[0].status === UploadStatus.uploading)
-    ) {
+    if (this.singleUploadViewComponent.fileUploaders[0] &&
+      this.singleUploadViewComponent.fileUploaders[0].status === UploadStatus.uploading) {
       return;
     }
     this._dealFiles(this.selectFiles.triggerSelectFiles(this.fileOptions, this.uploadOptions));

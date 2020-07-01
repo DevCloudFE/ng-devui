@@ -120,6 +120,18 @@ export const routesConfig = [
     }
   },
   {
+    path: 'carousel',
+    component: ExamplePanelComponent,
+    loadChildren: () => import('../../../devui/carousel/demo/carousel-demo.module').then(m => m.CarouselDemoModule),
+    data: {
+      type: '数据展示',
+      name: 'Carousel',
+      cnName: '走马灯',
+      description: '一组轮播的区域，用于展示图片或者卡片。',
+      tmw: `<div>常用于一组图片或卡片轮播，当内容空间不足时，可以用走马灯的形式进行收纳，进行轮播展现。</div>`
+    }
+  },
+  {
     path: 'checkbox',
     component: ExamplePanelComponent,
     loadChildren: () => import('../../../devui/checkbox/demo/checkbox-demo.module').then(m => m.CheckBoxDemoModule),
@@ -160,7 +172,8 @@ export const routesConfig = [
   {
     path: 'multi-auto-complete',
     component: ExamplePanelComponent,
-    loadChildren: () => import('../../../devui/multi-auto-complete/demo/multi-auto-complete-demo.module').then(m => m.MultiAutoCompleteDemoModule),
+    loadChildren: () => import('../../../devui/multi-auto-complete/demo/multi-auto-complete-demo.module').
+      then(m => m.MultiAutoCompleteDemoModule),
     data: {
       type: '数据录入',
       name: 'MultiAutoComplete',
@@ -190,6 +203,18 @@ export const routesConfig = [
       cnName: '全屏',
       description: '全屏组件。',
       tmw: `当用户需要将某一区域进行全屏展示时。`
+    }
+  },
+  {
+    path: 'gantt',
+    component: ExamplePanelComponent,
+    loadChildren: () => import('../../../devui/gantt/demo/gantt-demo.module').then(m => m.GanttDemoModule),
+    data: {
+      type: '演进中',
+      name: 'Gantt',
+      cnName: '甘特图',
+      description: '',
+      tmw: ``
     }
   },
   {
