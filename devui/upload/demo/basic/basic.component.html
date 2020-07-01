@@ -5,6 +5,7 @@
     [fileOptions]="fileOptions"
     [uploadedFiles]="uploadedFiles"
     [uploadOptions]="uploadOptions"
+    [uploadText]="'点击上传'"
     [filePath]="'name'"
     [beforeUpload]="beforeUpload"
     (successEvent)="onSuccess($event)"
@@ -14,11 +15,13 @@
   </d-single-upload>
   <h4>单文件支持拖动上传</h4>
   <d-single-upload
-    #singleupload
+    #singleuploadDrag
     [enableDrop]="true"
     [fileOptions]="fileOptions"
     [uploadedFiles]="uploadedFiles"
     [uploadOptions]="uploadOptions"
+    [placeholderText]="'请拖动文件上传'"
+    [withoutBtn]="true"
     [filePath]="'name'"
     [beforeUpload]="beforeUploadFn"
     (successEvent)="onSuccess($event)"
@@ -28,6 +31,9 @@
     (fileOver)="fileOver($event)"
   >
   </d-single-upload>
+  <div [style.margin-top.px]="10">
+    <d-button (btnClick)="customUploadEvent()">点我上传</d-button>
+  </div>
   <h4>自动上传</h4>
   <d-single-upload
     [fileOptions]="fileOptions"

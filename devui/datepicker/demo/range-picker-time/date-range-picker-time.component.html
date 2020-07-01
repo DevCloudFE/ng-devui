@@ -1,8 +1,8 @@
 <section style="width: 100%;">
   <span>日期时间范围选择器:</span>
-  <div class="devui-input-group">
+  <div class="devui-input-group devui-dropdown-origin-wrapper devui-dropdown-origin">
     <input
-      class="devui-input"
+      class="devui-input devui-form-control"
       placeholder="y/MM/dd  -  y/MM/dd"
       name="dp"
       [(ngModel)]="dateRange"
@@ -13,15 +13,18 @@
       (selectedRangeChange)="getValue($event)"
       [showTime]="true"
     />
+    <div *ngIf="everyRange(dateRange)" class="devui-input-group-addon icon-close-wrapper" (click)="dateRangePicker.clearAll()">
+      <i class="icon icon-close"></i>
+    </div>
     <div class="devui-input-group-addon" (click)="dateRangePicker.toggle($event, true)">
       <i class="icon icon-calendar"></i>
     </div>
   </div>
 
   <span>日期时间范围选择器 已赋值:</span>
-  <div class="devui-input-group">
+  <div class="devui-input-group devui-dropdown-origin-wrapper devui-dropdown-origin">
     <input
-      class="devui-input"
+      class="devui-input devui-form-control"
       placeholder="y/MM/dd  -  y/MM/dd"
       name="dp"
       [(ngModel)]="dateRange2"
@@ -33,6 +36,9 @@
       [showTime]="true"
       style="width: 270px;"
     />
+    <div *ngIf="everyRange(dateRange2)" class="devui-input-group-addon icon-close-wrapper" (click)="dateRangePicker2.clearAll()">
+      <i class="icon icon-close"></i>
+    </div>
     <div class="devui-input-group-addon" (click)="dateRangePicker2.toggle($event, true)">
       <i class="icon icon-calendar"></i>
     </div>

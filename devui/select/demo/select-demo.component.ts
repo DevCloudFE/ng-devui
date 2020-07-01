@@ -94,6 +94,13 @@ export class SelectDemoComponent {
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./user-mail-search/user-mail-search.component.ts')},
     {title: 'CSS', language: 'css', code:  require('!!raw-loader!./user-mail-search/user-mail-search.component.css')},
   ];
+  ModelValueComponent: Array<DevuiSourceData> = [
+    {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./model-value/model-value.component.html')},
+    {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./model-value/model-value.component.ts')},
+    {title: 'CSS', language: 'css', code:  require('!!raw-loader!./model-value/model-value.component.css')},
+    {title: 'ParseFromPipe', language: 'typescript', code:  require('!!raw-loader!./model-value/parse-from.pipe.ts')},
+    {title: 'MapToPipe', language: 'typescript', code:  require('!!raw-loader!./model-value/map-to.pipe.ts')},
+  ];
   navItems = [
     { dAnchorLink: 'basic-usage', value: '基本用法'},
     { dAnchorLink: 'object-filter', value: '使用对象'},
@@ -111,8 +118,8 @@ export class SelectDemoComponent {
     { dAnchorLink: 'multi-keep-order', value: '设置已选项顺序源数组顺序或选中顺序'},
     { dAnchorLink: 'user-limit-selected-number', value: '用户场景：限制选中个数'},
     { dAnchorLink: 'user-search-n-lazyload', value: '用户场景：自定义搜索的懒加载'},
-    { dAnchorLink: 'user-mail-search', value: '用户场景：自定义搜索和模板结合 —— 邮箱搜索'}
-
+    { dAnchorLink: 'user-mail-search', value: '用户场景：自定义搜索和模板结合 —— 邮箱搜索'},
+    { dAnchorLink: 'model-value', value: 'ngModel值处理'}
   ];
     constructor() { }
 

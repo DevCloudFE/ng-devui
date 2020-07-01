@@ -21,7 +21,7 @@ export class TagsComponent {
 
   @Input() titleProperty = '';
 
-  @ContentChild(TemplateRef, { static: false }) customViewTemplate: TemplateRef<any>;
+  @ContentChild(TemplateRef) customViewTemplate: TemplateRef<any>;
   /**
    * tag被删除后触发
    */

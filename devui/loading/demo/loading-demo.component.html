@@ -1,4 +1,4 @@
-<div class="demo-container" dAnchorBox [view]="{ top: 60, bottom: 0 }">
+<div class="demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 60, bottom: 0 }">
   <d-demo-nav [navItems]="navItems"></d-demo-nav>
   <div class="demo-example" [dAnchor]="'basic-usage'">
     <div class="demo-title">基本用法</div>
@@ -36,6 +36,15 @@
     </div>
     <d-codebox id="components-loading-subscription" [sourceData]="loadingDemoSubscriptionSource">
       <d-subscription demo></d-subscription>
+    </d-codebox>
+  </div>
+  <div class="demo-example" [dAnchor]="'show-loading'">
+    <div class="demo-title">使用showLoading控制</div>
+    <div class="demo-text">
+      使用showLoading的true或false控制loading的显示
+    </div>
+    <d-codebox id="components-loading-subscription" [sourceData]="showLoadingSource">
+      <d-show-loading demo></d-show-loading>
     </d-codebox>
   </div>
 </div>

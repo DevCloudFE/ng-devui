@@ -36,7 +36,7 @@
       bottom: 0;
       position: absolute;
       cursor: col-resize;
-      background: $dark-2;
+      background: $gray-1;
       width: 2px;
       z-index: 9999;
       display: none;
@@ -52,15 +52,16 @@
       z-index: 1000;
     }
   }
-
-  .devui-table-view-footer {
-    border: none;
-    margin: 0;
-  }
   $half-sort-icon-size: 8px;
 
   .table-wrap {
     padding-top: $half-sort-icon-size;
+  }
+
+  .virtual-scroll-wrap {
+    & .cdk-virtual-scroll-content-wrapper {
+      padding-top: $half-sort-icon-size;
+    }
   }
 }
 
@@ -69,7 +70,7 @@
     span {
       font-weight: bold;
       color: $dark-1;
-      font-size: 14px;
+      font-size: 12px;
     }
 
     tr {
@@ -118,6 +119,8 @@
           text-overflow: ellipsis;
           overflow: hidden;
           font-size: 12px;
+          font-weight: bold;
+          color: $dark-1;
         }
 
         .title.can-filter {
@@ -180,8 +183,9 @@
         }
 
         &.devui-checkable-cell {
-          width: 36px;
           padding: 10px;
+          display: flex;
+          align-items: center;
         }
 
         &.devui-detail-cell {
@@ -214,6 +218,11 @@
         background: $hover-content;
         border-radius: 2px 0 0 2px;
       }
+
+      .filter-active {
+        background: $hover-content;
+        border-radius: 2px 0 0 2px;
+      }
     }
   }
 
@@ -232,13 +241,12 @@
       word-wrap: break-word;
       word-break: normal;
       line-height: 24px;
-      font-size: 14px;
+      font-size: 12px;
       color: $dark-1; // #3C4458;
       background-color: inherit;
       border-bottom: 1px solid $gray-2;
 
       &.devui-checkable-cell {
-        width: 36px;
         padding: 10px;
       }
 
@@ -254,16 +262,7 @@
         position: sticky;
         z-index: 5;
       }
-
-      a {
-        color: $dark-1;
-      }
     }
-  }
-
-  th:first-child,
-  td:first-child {
-    margin: 0 5px;
   }
 
   .clickable {
@@ -285,14 +284,7 @@
     cursor: col-resize;
   }
 
-  th.resizeable.last-resize-header {
-    .resize-handle {
-      border-right: 1px solid transparent;
-    }
-  }
-
-  .resizeable:hover,
-  .resizeable.last-resize-header:hover {
+  .resizeable:hover {
     .resize-handle {
       border-right: 3px solid $gray-1;
     }

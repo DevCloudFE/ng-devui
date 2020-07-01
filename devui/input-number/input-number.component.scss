@@ -5,14 +5,19 @@
   position: relative;
   width: 80px;
 
+  .disabled {
+    cursor: not-allowed;
+    // opacity: 0.3;
+  }
+
   &:hover {
     .input-box:not(.disabled) {
-      border: 1px solid $hover-control;
+      border: 1px solid $hwc-color-border-hover;
       padding-right: 26px;
     }
 
     .input-control-buttons:not(.disabled) {
-      border-color: $hover-control;
+      border-color: $hwc-color-border-hover;
     }
 
     .input-control-buttons:not(.disabled) {
@@ -22,12 +27,12 @@
 
   &:focus-within {
     .input-box:not(.disabled) {
-      border: 1px solid $hover-control;
+      border: 1px solid $hwc-color-border-active;
       padding-right: 26px;
     }
 
     .input-control-buttons:not(.disabled) {
-      border-color: $hover-control;
+      border-color: $hwc-color-border-active;
     }
 
     .input-control-buttons:not(.disabled) {
@@ -38,13 +43,13 @@
   .input-box {
     box-sizing: border-box;
     padding: 5px 10px;
-    font-size: 14px;
+    font-size: 12px;
     vertical-align: middle;
     border-radius: 2px;
     outline: none;
     width: 100%;
     line-height: 20px;
-    height: 32px;
+    height: 28px;
     border-width: 1px;
     border-style: solid;
 
@@ -60,7 +65,7 @@
     right: 0;
     width: 25px;
     height: 100%;
-    display: none;
+    // display: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -70,6 +75,11 @@
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     line-height: 100%;
+    border-radius: 0 2px 2px 0;
+
+    &.disabled {
+      border-left-color: $disabled-border;
+    }
 
     .input-control-button {
       -webkit-user-select: none;
@@ -82,19 +92,39 @@
       height: 50%;
       line-height: 50%;
       border-width: 0 1px;
-      cursor: pointer;
       transition: transform 0.2s ease-in-out;
       display: flex;
       justify-content: center;
       align-items: center;
 
-      svg > g {
-        fill: $dark-1;
+      &.input-control-inc svg {
+        position: relative;
+        top: 2px;
+        transform: rotate(180deg);
       }
 
-      &:not(.disabled):hover {
-        & > svg > g {
-          fill: $hover-control;
+      &.input-control-dec svg {
+        position: relative;
+        bottom: 2px;
+      }
+
+      svg polygon {
+        fill: $dark-2;
+      }
+
+      &:not(.disabled) {
+        cursor: pointer;
+
+        &:hover {
+          & > svg polygon {
+            fill: $hover-control;
+          }
+        }
+      }
+
+      &.disabled {
+        & > svg polygon {
+          fill: $disabled-border;
         }
       }
     }
@@ -103,14 +133,16 @@
 
 .devui-input-number-lg {
   & > .input-box {
-    font-size: 18px;
+    font-size: 16px;
     line-height: 24px;
     height: 46px;
   }
 
-  & ::ng-deep .devui-svg-icon-arrow {
-    width: 16px;
-    height: 16px;
+  ::ng-deep &.input-control-buttons .input-control-button {
+    .devui-svg-icon-arrow {
+      width: 16px;
+      height: 16px;
+    }
   }
 }
 
@@ -118,12 +150,20 @@
   & > .input-box {
     font-size: 12px;
     line-height: 18px;
-    height: 30px;
+    height: 26px;
   }
 
-  & ::ng-deep .devui-svg-icon-arrow {
-    width: 13px;
-    height: 13px;
+  & ::ng-deep .input-control-buttons .input-control-button {
+    &:first-child .devui-svg-icon-arrow {
+      width: 14px;
+      height: 14px;
+    }
+
+    &:last-child .devui-svg-icon-arrow {
+      width: 13px;
+      height: 13px;
+      left: 0;
+    }
   }
 }
 

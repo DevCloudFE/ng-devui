@@ -1,0 +1,87 @@
+<ng-container *ngIf="editable && !editing">
+  <div *ngIf="editableTip === 'btn'" class="cell-container">
+    <div class="cell-container-inner not-break modify-holder">
+      <ng-template
+        [ngTemplateOutlet]="nestedTmp"
+        [ngTemplateOutletContext]="{ nestedColumn: nestedColumn, rowItem: rowItem, nestedLayer: nestedLayer }"
+      ></ng-template>
+      <ng-container *ngTemplateOutlet="content"></ng-container>
+      <span class="cell-modify" (click)="startEditing($event)">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16px" height="16px" version="1.1">
+          <g id="cell-modify" fill="none" fill-rule="evenodd" stroke="none" stroke-width="1">
+            <path
+              id="cell-modify-copy"
+              d="M 9.48528 3.41421 L 10.8995 2 L 13.7279 4.82843 L 12.3137 6.24264 L 9.48528 3.41421 Z M 5.24264 13.3137 L 2.41421 13.3137 L 2.41421 10.4853 L 8.77817 4.12132 L 11.6066 6.94975 L 5.24264 13.3137 Z"
+            />
+          </g>
+        </svg>
+      </span>
+    </div>
+  </div>
+
+  <div *ngIf="editableTip !== 'btn'" class="cell-editable" (click)="startEditing($event)">
+    <ng-template
+      [ngTemplateOutlet]="nestedTmp"
+      [ngTemplateOutletContext]="{ nestedColumn: nestedColumn, rowItem: rowItem, nestedLayer: nestedLayer }"
+    ></ng-template>
+    <ng-container *ngTemplateOutlet="content"></ng-container>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="!editable || editing">
+  <ng-template
+    [ngTemplateOutlet]="nestedTmp"
+    [ngTemplateOutletContext]="{ nestedColumn: nestedColumn, rowItem: rowItem, nestedLayer: nestedLayer }"
+  ></ng-template>
+  <ng-container *ngTemplateOutlet="content"></ng-container>
+</ng-container>
+
+<ng-template #content><ng-content></ng-content></ng-template>
+
+<ng-template #nestedTmp let-nestedColumn="nestedColumn" let-rowItem="rowItem" let-nestedLayer="nestedLayer">
+  <ng-container *ngIf="nestedColumn">
+    <span *ngIf="nestedLayer > 0" class="cell-placeholder" [ngStyle]="{ width: nestedLayer * 16 + 'px' }"></span>
+    <span [style.visibility]="rowItem.children ? 'visible' : 'hidden'" class="childtable-toggler" (click)="toggleChildTable(rowItem)">
+      <ng-container *ngIf="rowItem['$isChildTableOpen']">
+        <svg
+          *ngIf="!iconFoldTable"
+          class="svg-icon-close-folder"
+          width="16px"
+          height="16px"
+          viewBox="0 0 16 16"
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+        >
+          <g id="b-closeFolder" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <path
+              d="M3,2 L13,2 C13.5522847,2 14,2.44771525 14,3 L14,13 C14,13.5522847 13.5522847,14 13,14 L3,14 C2.44771525,14 2,13.5522847 2,13 L2,3 C2,2.44771525 2.44771525,2 3,2 Z M12,7 L4,7 L4,9 L12,9 L12,7 Z"
+              fill-rule="nonzero"
+            ></path>
+          </g>
+        </svg>
+        <span *ngIf="iconFoldTable" [innerHTML]="iconFoldTable | safe: 'html'"></span>
+      </ng-container>
+      <ng-container *ngIf="!rowItem['$isChildTableOpen']">
+        <svg
+          *ngIf="!iconUnFoldTable"
+          class="svg-icon-open-folder"
+          width="16px"
+          height="16px"
+          viewBox="0 0 16 16"
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+        >
+          <g id="b-openFolder" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <path
+              d="M3,2 L13,2 C13.5522847,2 14,2.44771525 14,3 L14,13 C14,13.5522847 13.5522847,14 13,14 L3,14 C2.44771525,14 2,13.5522847 2,13 L2,3 C2,2.44771525 2.44771525,2 3,2 Z M7,7 L4,7 L4,9 L7,9 L7,12 L9,12 L9,9 L12,9 L12,7 L9,7 L9,4 L7,4 L7,7 Z"
+              fill-rule="nonzero"
+            ></path>
+          </g>
+        </svg>
+        <span *ngIf="iconUnFoldTable" [innerHTML]="iconUnFoldTable | safe: 'html'"></span>
+      </ng-container>
+    </span>
+  </ng-container>
+</ng-template>

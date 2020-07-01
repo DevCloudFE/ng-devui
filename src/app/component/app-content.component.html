@@ -2,6 +2,9 @@
   <div id="menuLink" class="menu-link">
     <span></span>
   </div>
+  <div class="devui-components-search">
+    <d-search #dSearch [isKeyupSearch]="true" [placeholder]="'请输入您的关键字'" (searchFn)="onSearch($event)"></d-search>
+  </div>
   <div class="sidebar">
     <ul class="devui-menu" style="margin-bottom: 0;">
       <li class="devui-menu-item" routerLinkActive="devui-menu-item-selected">
@@ -9,7 +12,7 @@
       </li>
     </ul>
     <nav class="side-nav">
-      <d-accordion [data]="componentsData" [linkType]="'routerLink'"></d-accordion>
+      <d-accordion [data]="componentsDataDisplay" [linkType]="'routerLink'"></d-accordion>
     </nav>
   </div>
   <div class="doc-viewer-container">

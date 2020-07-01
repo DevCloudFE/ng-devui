@@ -1,15 +1,13 @@
 <div
   class="devui-form-group devui-has-feedback"
-  [style.padding-bottom.px]="2"
-  [style.padding-bottom.px]="2"
   [ngClass]="{
-    'devui-select-open': autoCompleteDirective.popupRef ? !!autoCompleteDirective.popupRef.instance.isOpen : false
+    'devui-select-open': dropDownOpen
   }"
 >
   <input
     (click)="toggle($event)"
-    style="cursor: pointer"
-    class="devui-form-control"
+    style="cursor: pointer;"
+    class="devui-form-control devui-dropdown-origin"
     type="text"
     name="autoCompleteControl"
     [source]="source"
@@ -30,15 +28,17 @@
   <span class="devui-form-control-feedback">
     <span class="devui-select-chevron-icon">
       <svg
-        width="16px"
-        height="16px"
-        viewBox="0 0 16 16"
+        width="8px"
+        height="5px"
+        viewBox="0 0 8 5"
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"
         xmlns:xlink="http://www.w3.org/1999/xlink"
       >
-        <g id="chevron_down" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-          <polygon id="chevron_down" points="4.5 5 8 8.76923077 11.5 5 13 6.61538462 8 12 3 6.61538462"></polygon>
+        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+          <g transform="translate(-4.000000, -6.000000)">
+            <polygon fill="#575D6C" points="4 6 12 6 8 11"></polygon>
+          </g>
         </g>
       </svg>
     </span>

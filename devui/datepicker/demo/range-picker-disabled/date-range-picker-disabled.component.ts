@@ -13,11 +13,15 @@ export class DateRangePickerDisabledComponent {
   dateRange = [new Date('11/03/2017 00:00'), new Date('01/02/2019 00:00')];
   disabled = true;
 
+  everyRange(range) {
+    return range.every(_ => !!_);
+  }
+
   getValue(value) {
     console.log(value);
   }
 
-  toggle(dateRangePicker, $event, open?) {
+  toggleDatePicker(dateRangePicker, $event, open?) {
     if (this.disabled) {
       return;
     }

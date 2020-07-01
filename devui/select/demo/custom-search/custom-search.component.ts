@@ -1,4 +1,4 @@
-import { Component, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { of } from 'rxjs';
 import { SelectComponent } from 'ng-devui/select/select.component';
 
@@ -8,7 +8,7 @@ import { SelectComponent } from 'ng-devui/select/select.component';
   styleUrls: ['./custom-search.component.css']
 })
 export class CustomSearchComponent {
-  @ViewChild('networkSearchSelect', { static: false }) selectComponent: SelectComponent;
+  @ViewChild('networkSearchSelect') selectComponent: SelectComponent;
   timer: any;
   currentOption1 = '';
   currentOption2 = [];
@@ -57,7 +57,7 @@ export class CustomSearchComponent {
     name: 'option10',
     value: 10
   }];
-  constructor(private cdr: ChangeDetectorRef) {}
+  constructor() {}
   onSelectObject = (term) => {
     return of(
       this.options2

@@ -1,5 +1,6 @@
-import { Component, OnInit, } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ILabelDataConfigs, IAxisConfigs, IQuadrantConfigs, IViewConfigs } from 'ng-devui/quadrant-diagram';
+
 
 
 @Component({

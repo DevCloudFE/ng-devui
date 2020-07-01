@@ -19,10 +19,7 @@ export class DropDownDirective implements OnDestroy, OnChanges, AfterContentInit
    * 控制是否打开dropdown，绑定一个devui-dropdown-open class
    */
   @HostBinding('class.devui-dropdown-open')
-  @Input() get isOpen(): boolean {
-      return this._isOpen;
-  }
-  set isOpen(value) {
+  @Input() set isOpen(value) {
     this._isOpen = !!value;
     if (this.disabled) {
       return;
@@ -34,9 +31,23 @@ export class DropDownDirective implements OnDestroy, OnChanges, AfterContentInit
     } else {
       this.visibleSubject.next(false);
       this.dropdownService.close(this);
+      const ele = this.formWithDropDown();
+      if (ele && ele.classList.contains('devui-dropdown-origin-open')) {
+        ele.classList.remove('devui-dropdown-origin-open');
+      }
+      if (ele && ele.classList.contains('devui-dropdown-origin-top')) {
+        ele.classList.remove('devui-dropdown-origin-top');
+      }
+      if (ele && ele.classList.contains('devui-dropdown-origin-bottom')) {
+        ele.classList.remove('devui-dropdown-origin-bottom');
+      }
     }
     this.toggleEvent.emit(this.isOpen);
   }
+  get isOpen(): boolean {
+    return this._isOpen;
+  }
+
   @HostBinding('class.devui-dropdown') addClass = true;
   @Input() disabled = false;
 
@@ -191,6 +202,21 @@ export class DropDownDirective implements OnDestroy, OnChanges, AfterContentInit
     }
 
     target.dispatchEvent(event);
+  }
+
+  formWithDropDown() {
+    if (this.toggleEl) {
+      if (!this.toggleEl.nativeElement.classList.contains('devui-dropdown-origin')) {
+        const parentEle = this.toggleEl.nativeElement.parentElement;
+        if (parentEle && parentEle.classList.contains('devui-dropdown-origin')) {
+          return this.toggleEl.nativeElement.parentElement;
+        } else {
+          return this.toggleEl.nativeElement;
+        }
+      } else {
+        return this.toggleEl.nativeElement;
+      }
+    }
   }
 
 }

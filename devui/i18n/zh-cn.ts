@@ -7,7 +7,10 @@ export default {
     btnConfirm: '确定',
     loading: '加载中...',
     checkAll: '全选',
-    btnOk: '确定'
+    btnOk: '确定',
+    btnCancel: '取消',
+    btnClose: '关闭',
+    btnClickMe: '点击我',
   },
   datePicker: {
     today: '今天',
@@ -33,7 +36,8 @@ export default {
   pagination: {
     totalItem: '所有条目',
     goTo: '跳至',
-    pageSize: '每页条数'
+    pageSize: '每页条数',
+    page: '页',
   },
   upload: {
     warning: '提醒',
@@ -51,15 +55,19 @@ export default {
     getBeyondMaximalFileSizeMsg(filename, maximalSize) {
       return `最大支持上传${maximalSize}MB的文件, 您上传的文件"${filename}"超过可上传文件大小`;
     },
+    getAllFilesBeyondMaximalFileSizeMsg( maximalSize) {
+      return `最大支持上传${maximalSize}MB的文件, 您本次上传的所有文件超过可上传文件大小`;
+    },
     getExistSameNameFilesMsg(sameNames) {
       return `您上传的 "${sameNames}" 存在重名文件, 请重新选择文件`;
-    }
+    },
   },
   modal: {
     warning: '提醒',
     error: '错误',
+    fail: '失败',
     info: '提示',
-    success: '成功'
+    success: '成功',
   },
   imagePreview: {
     rotate: '旋转',
@@ -68,11 +76,11 @@ export default {
     bestScale: '最佳比例',
     originScale: '原始比例',
     pre: '上一张',
-    next: '下一张'
+    next: '下一张',
   },
   colorPicker: {
     recentlyUsed: '最近使用',
     basicColors: '基本颜色',
-    moreColors: '更多颜色'
-  }
+    moreColors: '更多颜色',
+  },
 };

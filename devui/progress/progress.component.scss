@@ -8,7 +8,6 @@
 
 .devui-progress {
   position: relative;
-  border-radius: 100px;
   background: $gray-2;
 
   .devui-progress-bar {
@@ -16,7 +15,6 @@
     height: 100%;
     box-shadow: inset 0 -1px 0 $dark-1-boxshadow;
     transition: width 0.6s ease;
-    border-radius: 100px;
     background-color: $brand-1;
   }
 
@@ -31,6 +29,7 @@
     height: 100%;
     width: 100%;
     font-size: 12px;
+    line-height: 1.5;
   }
 }
 

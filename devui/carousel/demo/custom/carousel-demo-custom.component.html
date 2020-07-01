@@ -1,0 +1,16 @@
+<section>
+  <d-carousel #carousel="dCarousel" [height]="height" [showDots]="showDots" [arrowTrigger]="arrowTrigger">
+    <d-carousel-item *ngFor="let i of array">{{ 'page ' + i }}</d-carousel-item>
+  </d-carousel>
+  <div style="margin-top: 30px;">
+    <d-button bsStyle="common" style="margin-right: 5px;" (btnClick)="carousel.prev()">
+      上一张
+    </d-button>
+    <d-button bsStyle="primary" style="margin-right: 5px;" (btnClick)="carousel.next()">
+      下一张
+    </d-button>
+    <d-button bsStyle="common" (btnClick)="carousel.goTo(0)">
+      第一张
+    </d-button>
+  </div>
+</section>

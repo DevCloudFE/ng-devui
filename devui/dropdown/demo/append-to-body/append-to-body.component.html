@@ -6,7 +6,7 @@
     appendToBody
     [alignOrigin]="origin"
     [appendToBodyDirections]="['leftDown', 'leftUp']"
-    (ToggleEvent)="onToggle($event)"
+    (toggleEvent)="onToggle($event)"
   >
     <div class="align-origin" #origin>
       对齐区域
@@ -16,7 +16,7 @@
       </a>
     </div>
 
-    <ul dDropDownMenu class="devui-dropdown-menu devui-scrollbar" role="menu">
+    <ul dDropDownMenu class="devui-dropdown-menu devui-scrollbar devui-dropdown-overlay" role="menu">
       <li class="disabled" role="menuitem">
         <a class="devui-dropdown-item disabled">禁用选项</a>
       </li>
@@ -36,10 +36,10 @@
     dDropDown
     appendToBody
     [appendToBodyDirections]="['centerDown', 'centerUp']"
-    (ToggleEvent)="onToggle($event)"
+    (toggleEvent)="onToggle($event)"
   >
     <d-button icon="icon-add" bsStyle="text-dark" title="添加" dDropDownToggle></d-button>
-    <ul dDropDownMenu class="devui-dropdown-menu" role="menu">
+    <ul dDropDownMenu class="devui-dropdown-menu devui-dropdown-overlay" role="menu">
       <li class="disabled" role="menuitem">
         <a class="devui-dropdown-item disabled">禁用选项</a>
       </li>

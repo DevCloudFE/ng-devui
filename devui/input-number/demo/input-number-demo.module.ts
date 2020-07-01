@@ -14,6 +14,7 @@ import { InputNumberDisabledComponent } from './disabled/input-number-disabled.c
 import { InputNumberEmptyComponent } from './empty/input-number-empty.component';
 import { InputNumberPlaceholderAndMaxLengthComponent } from './placeholderAndMaxLength/input-number-placeholder-maxLength.component';
 import { InputNumberRegComponent } from './reg/input-number-reg.component';
+import { DecimalLimitAutoFocusComponent } from './decimalLimitAndAutoFocus/decimal-limit-auto-focus.component';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 
 @NgModule({
@@ -41,7 +42,8 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
     InputNumberDisabledComponent,
     InputNumberEmptyComponent,
     InputNumberPlaceholderAndMaxLengthComponent,
-    InputNumberRegComponent
+    InputNumberRegComponent,
+    DecimalLimitAutoFocusComponent
   ],
 })
 export class InputNumberDemoModule {

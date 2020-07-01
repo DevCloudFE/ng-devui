@@ -2,9 +2,9 @@
   <span>可给clearAll()传入参数以定义不同reason</span>
   <div class="row">
     <div class="col-md-6">
-      <div class="devui-input-group">
+      <div class="devui-input-group devui-dropdown-origin-wrapper devui-dropdown-origin">
         <input
-          class="devui-form-control"
+          class="devui-input devui-form-control"
           placeholder="y/MM/dd"
           name="dp"
           [(ngModel)]="selectedDate2"
@@ -15,6 +15,9 @@
           (selectedDateChange)="getValue($event)"
           [customViewTemplate]="myCustomview"
         />
+        <div *ngIf="selectedDate2" class="devui-input-group-addon icon-close-wrapper" (click)="datePicker1.clearAll()">
+          <i class="icon icon-close"></i>
+        </div>
         <div class="devui-input-group-addon" (click)="datePicker1.toggle($event)">
           <i class="icon icon-calendar"></i>
         </div>
@@ -26,7 +29,7 @@
       <d-button bsStyle="common" (btnClick)="clearAll(changeReason.button)" bsSize="sm">
         清除
       </d-button>
-      <d-button bsStyle="primary" (btnClick)="chooseDate(getDay(0))" bsSize="sm">
+      <d-button bsStyle="common" (btnClick)="chooseDate(getDay(0))" bsSize="sm">
         今天
       </d-button>
     </div>

@@ -17,7 +17,7 @@ import { PositionType } from './tooltip.types';
 })
 export class TooltipDirective implements OnDestroy {
   @Input() content: string;
-  @Input() position: PositionType = 'bottom';
+  @Input() position: PositionType | PositionType[] = ['top', 'right', 'bottom', 'left'];
   @Input() showAnimate: boolean;
   tooltipComponentRef: ComponentRef<TooltipComponent>;
 

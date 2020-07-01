@@ -4,13 +4,14 @@
 .devui-dropdown-menu {
   width: 100%;
   display: block;
+  margin-top: -1px;
 }
 
 .devui-dropdown-item {
   cursor: pointer;
   display: block;
   width: 100%;
-  padding: 8px 1rem;
+  padding: 8px 10px;
   clear: both;
   border: 0;
   overflow: hidden;
@@ -18,7 +19,7 @@
   white-space: nowrap;
 
   &.selected:not(.disabled) {
-    color: $brand-1;
+    color: $hwc-color-text-active-text-link;
   }
 }
 
@@ -28,8 +29,10 @@
   background-color: $disabled-bg;
   color: $disabled-content;
 
-  &:hover {
-    background: transparent !important;
+  &:hover,
+  &:active,
+  &:hover:active {
+    background-color: $status-unavaliable;
   }
 }
 
@@ -38,18 +41,11 @@
 .devui-dropdown-item.disabled:hover {
   cursor: not-allowed;
   color: $disabled-content;
-  background: $disabled-bg;
 }
 
 ul.devui-list-unstyled {
   margin: 0;
   overflow-y: auto;
-}
-
-:host(.devui-dropdown-menu) {
-  width: 100%;
-  margin: 0;
-  padding: 5px 0;
 }
 
 .devui-dropdown-bg {

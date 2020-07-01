@@ -264,9 +264,16 @@ export class SingleDateRangePickerComponent extends SingleDatepickerComponent im
 
   ensureRangeValueOrder(dateRange) {
     if (Array.isArray(dateRange) && dateRange.length === 2) {
-      dateRange.sort((a, b) => {
-        return (new Date(a)).getTime() - (new Date(b).getTime());
-      });
+      if (dateRange.every(day => !!day)) {
+        dateRange.sort((a, b) => {
+          return (new Date(a)).getTime() - (new Date(b).getTime());
+        });
+      } else {
+        if (!dateRange[0]) {
+          dateRange[0] = dateRange[1];
+          dateRange[1] = null;
+        }
+      }
     }
     return dateRange;
   }
@@ -424,6 +431,7 @@ export class SingleDateRangePickerComponent extends SingleDatepickerComponent im
     if (date.getTime() > this.maxDate.getTime()) {
       date = this.maxDate;
     }
+    this.selectedDate = this.selectedDate || date;
     this.currentYear = date.getFullYear();
     this.currentMonth = date.getMonth();
     if (!this.showTime) { return; }

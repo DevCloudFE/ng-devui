@@ -1,5 +1,5 @@
 .modal-body {
-  padding: 10px 30px 10px 30px;
+  padding: 10px 30px 0 30px;
 }
 
 .display-flex {
@@ -25,7 +25,7 @@ div.content {
 }
 
 .flex-content ::ng-deep div.content {
-  font-size: 14px;
+  font-size: 12px;
   word-break: normal;
   word-wrap: break-word;
   white-space: pre-wrap;
@@ -33,6 +33,6 @@ div.content {
 
 .flex-content {
   display: flex;
-  justify-content: center;
+  justify-content: left;
   align-items: center;
 }

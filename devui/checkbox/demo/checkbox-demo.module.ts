@@ -12,6 +12,8 @@ import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component
 import { CheckboxBasicComponent } from './basic/checkbox-basic.component';
 import { CheckboxGroupBasicComponent} from './group/checkbox-group-basic.component';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
+import { CheckboxConditionChangeComponent } from './condition-change/condition-change.component';
+import { CheckboxConditionGroupComponent } from './condition-group/condition-group.component';
 
 @NgModule({
   imports: [
@@ -35,6 +37,8 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
     CheckBoxDemoComponent,
     CheckboxBasicComponent,
     CheckboxGroupBasicComponent,
+    CheckboxConditionChangeComponent,
+    CheckboxConditionGroupComponent
   ],
   entryComponents: [
     CheckBoxDemoComponent,

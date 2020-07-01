@@ -10,7 +10,7 @@
   [ngStyle]="{ width: width }"
   [dAutoFocus]="autofocus"
   (click)="onClick($event)"
-  [ngClass]="{ 'd-btn-icon': !!icon && !hasContent() && bsStyle !== 'primary' }"
+  [ngClass]="{ 'd-btn-icon': !!icon && !hasContent() && bsStyle !== 'primary', 'd-btn-icon-wrap': !!icon }"
 >
   <span *ngIf="!!icon" class="devui-icon-fix icon {{ icon }}" [ngClass]="{ 'clear-right-5': hasContent() }"></span>
   <!--

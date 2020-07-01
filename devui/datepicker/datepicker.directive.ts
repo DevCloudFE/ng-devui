@@ -34,6 +34,13 @@ const animationDuration = '200ms';
 })
 export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAccessor {
 
+  @Input() set showTime(showTime: boolean) {
+    this._showTime = showTime;
+  }
+
+  get showTime() {
+    return typeof this._showTime === 'boolean' ? this._showTime : this.dateConfig.timePicker;
+  }
 
   @Input() set dateConfig(dateConfig: any) {
     if (dateConfig) {
@@ -81,11 +88,10 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
     return this._minDate;
   }
   @Input() locale: string;
-  @Input() showTime: boolean;
   @Input() cssClass: string;
   @Input() disabled: boolean;
   @Input() dateConverter: DateConverter;
-  @Input() yearNumber: number;
+  yearNumber = 12;
   @Input() direction: 'up' | 'down' = 'down';
   @Input() customViewTemplate: TemplateRef<any>;
   @Input() autoOpen = false;
@@ -96,6 +102,7 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
   private _dateFormat: string;
   private _maxDate: Date;
   private _minDate: Date;
+  private _showTime: boolean;
   private cmpRef: ComponentRef<DatepickerComponent>;
   private player: AnimationPlayer;
   private inputSub: Subscription;
@@ -123,7 +130,6 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
   }
 
   ngOnInit() {
-    this.showTime = this.showTime || this.dateConfig.timePicker;
     this._minDate = this.minDate ? new Date(this.minDate) : new Date(this.dateConfig.min, 0, 1, 0, 0, 0);
     this._maxDate = this.maxDate ? new Date(this.maxDate) : new Date(this.dateConfig.max, 11, 31, 23, 59, 59);
     const target = this.cmpRef.location.nativeElement;
@@ -190,16 +196,28 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
 
   private applyPopupStyling(nativeElement: any) {
     this.renderer2.addClass(nativeElement, 'devui-dropdown-menu');
+    this.renderer2.addClass(nativeElement, 'devui-dropdown-overlay');
     this.renderer2.setStyle(nativeElement, 'padding', '0px');
+    this.renderer2.setStyle(nativeElement, 'left', '-1px');
     if (this.direction === 'up') {
       this.renderer2.setStyle(nativeElement, 'top', 'auto');
-      this.renderer2.setStyle(nativeElement, 'bottom', '100%');
+      this.renderer2.setStyle(nativeElement, 'bottom', 'calc(100% - 1px)');
     }
   }
 
   hide() {
     const playAnimation = this.isOpen !== false;
     this.isOpen = false;
+    const ele = this.formWithDropDown();
+    if (ele && ele.classList.contains('devui-dropdown-origin-open')) {
+      ele.classList.remove('devui-dropdown-origin-open');
+    }
+    if (ele && ele.classList.contains('devui-dropdown-origin-top')) {
+      ele.classList.remove('devui-dropdown-origin-top');
+    }
+    if (ele && ele.classList.contains('devui-dropdown-origin-bottom')) {
+      ele.classList.remove('devui-dropdown-origin-bottom');
+    }
     if (playAnimation) {
       this.playAnimation();
     }
@@ -236,8 +254,36 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
     this.fillPopupData();
     const playAnimation = this.isOpen !== true;
     this.isOpen = true;
+    const ele = this.formWithDropDown();
+    let formPosition;
+    if (this.direction === 'down') {
+      formPosition = 'bottom';
+    } else {
+      formPosition = 'top';
+    }
+    if (ele && !ele.classList.contains('devui-dropdown-origin-open')) {
+      ele.classList.add('devui-dropdown-origin-open');
+    }
+    if (ele && !ele.classList.contains(`devui-dropdown-origin-${formPosition}`)) {
+      ele.classList.add(`devui-dropdown-origin-${formPosition}`);
+    }
     if (playAnimation) {
       this.playAnimation();
+    }
+  }
+
+  formWithDropDown() {
+    if (this.elementRef) {
+      if (!this.elementRef.nativeElement.classList.contains('devui-dropdown-origin')) {
+        const parentEle = this.elementRef.nativeElement.parentElement;
+        if (parentEle && parentEle.classList.contains('devui-dropdown-origin')) {
+          return this.elementRef.nativeElement.parentElement;
+        } else {
+          return;
+        }
+      } else {
+        return this.elementRef.nativeElement;
+      }
     }
   }
 
@@ -275,6 +321,9 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
   }
 
   clearAll(reason?: SelectDateChangeReason) {
+    if (this.disabled) {
+      return;
+    }
     this.cmpRef.instance.clearAll(reason);
   }
 

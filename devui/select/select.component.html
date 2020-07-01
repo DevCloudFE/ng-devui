@@ -1,6 +1,9 @@
 <div
-  class="devui-drop{{ popDirection === 'bottom' ? 'down' : 'up' }} {{ size ? 'devui-select-' + size : '' }}"
-  [ngClass]="{ open: isOpen }"
+  class="devui-drop{{ popDirection === 'bottom' ? 'down' : 'up' }} {{
+    size ? 'devui-select-' + size : ''
+  }} devui-dropdown-origin-wrapper devui-dropdown-origin"
+  [ngClass]="[isOpen ? 'open' : '', overview === 'underlined' ? 'devui-select-underlined-border' : '', disabled ? 'disabled' : '']"
+  #selectWrapper
 >
   <div
     #selectBox
@@ -17,13 +20,9 @@
       #selectInput
       [placeholder]="placeholder"
       [disabled]="disabled"
-      [ngClass]="[
-        size ? 'devui-select-input-' + size : '',
-        overview === 'underlined' ? 'devui-select-underlined-border' : '',
-        isOpen ? 'no-radius' : ''
-      ]"
+      [ngClass]="[size ? 'devui-select-input-' + size : '', isOpen ? 'no-radius' : '']"
       type="text"
-      class="devui-form-control devui-select-input"
+      class="devui-form-control devui-select-input devui-input"
       [minLength]="0"
       autocomplete="off"
       [tabindex]="-1"
@@ -36,8 +35,8 @@
     />
     <div
       #selectInputWithTemplate
-      class="devui-select-list-wrapper devui-form-control {{ size ? 'input-' + size : '' }}"
-      [ngClass]="[overview === 'underlined' ? 'devui-select-underlined-border' : '', isOpen ? 'no-radius' : '', disabled ? 'disabled' : '']"
+      class="devui-select-list-wrapper devui-form-control {{ size ? 'devui-select-input-' + size : '' }}"
+      [ngClass]="[isOpen ? 'no-radius' : '']"
       *ngIf="extraConfig?.selectedItemWithTemplate?.enable && (inputItemTemplate || itemTemplate) && !extraConfig?.labelization?.enable"
     >
       <div class="devui-select-placeholder" *ngIf="!_inputValue">
@@ -59,8 +58,8 @@
 
     <div
       #selectInputWithLabel
-      class="devui-select-list-wrapper devui-form-control {{ size ? 'input-' + size : '' }}"
-      [ngClass]="[overview === 'underlined' ? 'devui-select-underlined-border' : '', isOpen ? 'no-radius' : '', disabled ? 'disabled' : '']"
+      class="devui-select-list-wrapper devui-form-control {{ size ? 'devui-select-input-' + size : '' }}"
+      [ngClass]="[isOpen ? 'no-radius' : '']"
       *ngIf="extraConfig?.labelization?.enable && multiple"
     >
       <div class="devui-select-placeholder" *ngIf="multiItems.length === 0">
@@ -83,25 +82,44 @@
           <a
             class="devui-select-tag-remove-button"
             (click)="removeItem(item, $event)"
-            *ngIf="!(optionDisabledKey && item.option[optionDisabledKey])"
-          ></a>
+            *ngIf="!(disabled || (optionDisabledKey && item.option[optionDisabledKey]))"
+          >
+            <svg
+              width="6px"
+              height="6px"
+              viewBox="0 0 10 10"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+            >
+              <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g transform="translate(-3.000000, -3.000000)" fill-rule="nonzero">
+                  <path
+                    d="M11.6426,3.19816936 C11.9239974,2.91574512 12.4131626,2.93784891 12.7352108,3.24751057 C13.0571998,3.5572302 13.0901298,4.03723416 12.8087324,4.31965839 L9.14064666,7.99900183 L12.8087324,11.6803416 C13.0645482,11.9370909 13.0605893,12.3571292 12.8158402,12.6640749 L12.7352108,12.7524894 C12.4131626,13.0621511 11.9239974,13.0842548 11.6426,12.8018306 L8,9.14489021 L4.35740003,12.8018306 C4.10158422,13.05858 3.6740594,13.0636532 3.35648225,12.8298003 L3.26478919,12.7524894 C2.94280021,12.4427698 2.90987023,11.9627658 3.19126762,11.6803416 L6.8583349,7.99900183 L3.19126762,4.31965839 C2.93545181,4.06290908 2.93941068,3.64287076 3.18415975,3.3359251 L3.26478919,3.24751057 C3.58683735,2.93784891 4.07600264,2.91574512 4.35740003,3.19816936 L8,6.85411161 L11.6426,3.19816936 Z"
+                  ></path>
+                </g>
+              </g>
+            </svg>
+          </a>
         </li>
       </ul>
     </div>
 
-    <span class="devui-form-control-feedback" [ngClass]="{ 'devui-clear-icon-show': isClearIconShow }">
+    <span class="devui-form-control-feedback devui-input-group-addon" [ngClass]="{ 'devui-clear-icon-show': isClearIconShow }">
       <span class="devui-select-clear-icon" (mousedown)="$event.preventDefault()" (click)="valueClear($event)"> </span>
       <span class="devui-select-chevron-icon">
         <svg
-          width="16px"
-          height="16px"
-          viewBox="0 0 16 16"
+          width="8px"
+          height="5px"
+          viewBox="0 0 8 5"
           version="1.1"
           xmlns="http://www.w3.org/2000/svg"
           xmlns:xlink="http://www.w3.org/1999/xlink"
         >
-          <g id="chevron_down" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-            <polygon id="chevron_down" points="4.5 5 8 8.76923077 11.5 5 13 6.61538462 8 12 3 6.61538462"></polygon>
+          <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <g transform="translate(-4.000000, -6.000000)">
+              <polygon points="4 6 12 6 8 11"></polygon>
+            </g>
           </g>
         </svg>
       </span>
@@ -111,7 +129,7 @@
     <ng-template
       cdk-connected-overlay
       [cdkConnectedOverlayOrigin]="cdkConnectedOverlayOrigin"
-      [cdkConnectedOverlayWidth]="width"
+      [cdkConnectedOverlayWidth]="dropDownWidth"
       [cdkConnectedOverlayOpen]="isOpen"
       [cdkConnectedOverlayPositions]="overlayPositions"
       (positionChange)="onPositionChange($event)"
@@ -129,11 +147,12 @@
 <ng-template #selectDropdownTpl>
   <div
     #selectMenu
-    class="devui-dropdown-menu"
+    class="devui-dropdown-menu devui-dropdown-overlay"
     [ngClass]="{
       'devui-dropdown-menu-cdk': appendToBody,
       'devui-custom-right': customViewTemplate && customViewDirection === 'right',
-      'devui-custom-left': customViewTemplate && customViewDirection === 'left'
+      'devui-custom-left': customViewTemplate && customViewDirection === 'left',
+      'devui-dropdown-menu-multiple': multiple
     }"
     [@fadeInOut]="isOpen ? (appendToBody ? menuPosition : popDirection) : 'void'"
     (@fadeInOut.done)="animationEnd($event)"
@@ -147,7 +166,7 @@
       class="devui-dropdown-menu-wrap {{ size ? 'devui-dropdown-menu-' + size : '' }}"
       (click)="$event.stopPropagation(); $event.preventDefault()"
     >
-      <li [style.display]="isSearch ? 'block' : 'none'" style="padding: 0 5px 5px;">
+      <li [style.display]="isSearch ? 'block' : 'none'">
         <div class="devui-form-group devui-has-feedback" [style.margin]="'0'">
           <input
             #filterInput
@@ -156,7 +175,8 @@
             type="text"
             [ngModel]="filter"
             autocomplete="off"
-            class="devui-form-control filter"
+            [placeholder]="searchPlaceholder"
+            class="devui-form-control devui-select-search devui-select-input"
             (keydown.ArrowUp)="handleKeyUpEvent($event)"
             (keydown.ArrowDown)="handleKeyDownEvent($event)"
             (keydown.enter)="handleKeyEnterEvent($event)"
@@ -164,18 +184,23 @@
           />
           <span class="devui-form-control-feedback">
             <svg
-              class="svg-icon-search"
-              width="1em"
-              height="1em"
-              style="vertical-align: middle"
-              viewBox="0 0 1024 1024"
+              width="14px"
+              height="14px"
+              viewBox="0 0 14 14"
               version="1.1"
               xmlns="http://www.w3.org/2000/svg"
               xmlns:xlink="http://www.w3.org/1999/xlink"
+              class="svg-icon-search"
+              style="vertical-align: middle;"
             >
-              <path
-                d="M1024 900.584l-121.376 123.2L618.672 735.464c-63.44 43.768-140 69.392-222.44 69.392C177.376 804.848 0 624.712 0 402.536 0 180.336 177.376 0.208 396.232 0.208s396.232 180.144 396.232 402.328c0 75.328-20.752 145.576-56.248 205.872L1024 900.584zM396.232 128.944c-148.8 0-269.456 122.504-269.456 273.592 0 151.08 120.656 273.576 269.456 273.576 148.832 0 269.456-122.504 269.456-273.576C665.688 251.448 545.08 128.944 396.232 128.944z"
-              ></path>
+              <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g transform="translate(-1.000000, -1.000000)">
+                  <path
+                    d="M7.30811922,1 C10.7919973,1 13.6162384,3.82424117 13.6162384,7.30811922 C13.6162384,8.72507634 13.149053,10.0329164 12.3603151,11.0860065 L14.7360564,13.4616238 C15.0879812,13.8135487 15.0879812,14.3841316 14.7360564,14.7360564 C14.3841316,15.0879812 13.8135487,15.0879812 13.4616238,14.7360564 L11.0860065,12.3603151 C10.0329164,13.149053 8.72507634,13.6162384 7.30811922,13.6162384 C3.82424117,13.6162384 1,10.7919973 1,7.30811922 C1,3.82424117 3.82424117,1 7.30811922,1 Z M7.31,2.51 C4.6590332,2.51 2.51,4.6590332 2.51,7.31 C2.51,9.9609668 4.6590332,12.11 7.31,12.11 C9.9609668,12.11 12.11,9.9609668 12.11,7.31 C12.11,4.6590332 9.9609668,2.51 7.31,2.51 Z"
+                    fill-rule="nonzero"
+                  ></path>
+                </g>
+              </g>
             </svg>
           </span>
           <span
@@ -186,20 +211,19 @@
             *ngIf="filter"
           >
             <svg
-              class="svg-icon-clear"
-              width="0.8em"
-              height="0.8em"
+              width="10px"
+              height="10px"
               viewBox="0 0 10 10"
               version="1.1"
               xmlns="http://www.w3.org/2000/svg"
               xmlns:xlink="http://www.w3.org/1999/xlink"
+              class="svg-icon-clear"
             >
               <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                <g transform="translate(-1546.000000, -432.000000)">
-                  <polygon
-                    id="Combined-Shape-Copy-60"
-                    points="1552.36396 436.949747 1555.89949 433.414214 1554.48528 432 1550.94975 435.535534 1547.41421 432 1546 433.414214 1549.53553 436.949747 1546 440.485281 1547.41421 441.899495 1550.94975 438.363961 1554.48528 441.899495 1555.89949 440.485281"
-                  ></polygon>
+                <g transform="translate(-3.000000, -3.000000)" fill-rule="nonzero">
+                  <path
+                    d="M11.6426,3.19816936 C11.9239974,2.91574512 12.4131626,2.93784891 12.7352108,3.24751057 C13.0571998,3.5572302 13.0901298,4.03723416 12.8087324,4.31965839 L9.14064666,7.99900183 L12.8087324,11.6803416 C13.0645482,11.9370909 13.0605893,12.3571292 12.8158402,12.6640749 L12.7352108,12.7524894 C12.4131626,13.0621511 11.9239974,13.0842548 11.6426,12.8018306 L8,9.14489021 L4.35740003,12.8018306 C4.10158422,13.05858 3.6740594,13.0636532 3.35648225,12.8298003 L3.26478919,12.7524894 C2.94280021,12.4427698 2.90987023,11.9627658 3.19126762,11.6803416 L6.8583349,7.99900183 L3.19126762,4.31965839 C2.93545181,4.06290908 2.93941068,3.64287076 3.18415975,3.3359251 L3.26478919,3.24751057 C3.58683735,2.93784891 4.07600264,2.91574512 4.35740003,3.19816936 L8,6.85411161 L11.6426,3.19816936 Z"
+                  ></path>
                 </g>
               </g>
             </svg>

@@ -31,7 +31,7 @@
   display: inline-block;
   margin-left: 6px;
   max-width: 400px;
-  font-size: 14px;
+  font-size: 12px;
   text-align: left;
 }
 
@@ -54,7 +54,7 @@
   .devui-loading-bar1 {
     top: 0;
     left: 0;
-    background: $status-blue;
+    background: $brand-1;
   }
 
   .devui-loading-bar2 {
@@ -72,7 +72,7 @@
   .devui-loading-bar4 {
     top: 9px;
     left: 9px;
-    background: $status-blue;
+    background: $brand-1;
   }
 }
 

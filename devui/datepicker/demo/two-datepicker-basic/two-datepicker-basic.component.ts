@@ -14,6 +14,10 @@ import {
 export class TwoDatepickerBasicComponent implements OnInit {
   rangeStart;
   rangeEnd;
+  rangeStart2;
+  rangeEnd2;
+  rangeStart3;
+  rangeEnd3;
 
   ngOnInit() {
   }

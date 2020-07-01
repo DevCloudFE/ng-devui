@@ -4,18 +4,18 @@
     dDropDown
     appendToBody
     [appendToBodyDirections]="['leftDown', 'leftUp']"
-    (ToggleEvent)="onToggle($event)"
+    (toggleEvent)="onToggle($event)"
   >
     <d-button icon="icon-add" bsStyle="primary">新建</d-button
     ><!--
     -->
     <div dDropDownToggle class="more">
-      <i class="icon-chevron-down"></i>
+      <i class="icon-chevron-down devui-dropdown-origin"></i>
     </div>
-    <ul dDropDownMenu class="devui-dropdown-menu devui-scrollbar" role="menu">
+    <ul dDropDownMenu class="devui-dropdown-menu devui-scrollbar devui-dropdown-overlay" role="menu">
       <li role="menuitem" *ngFor="let item of items">
         <a class="devui-dropdown-item">
-          <span class="icon-plan" style="padding-right: 5px;  vertical-align: middle"></span>
+          <span class="icon-plan" style="padding-right: 5px; vertical-align: middle;"></span>
           {{ item }}
         </a>
       </li>

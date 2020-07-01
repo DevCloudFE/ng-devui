@@ -2,28 +2,56 @@
   <d-button class="demo-margin" (btnClick)="setUnCheckableRelation('downward')">选中父不再选中子</d-button>
   <d-button class="demo-margin" (btnClick)="setUnCheckableRelation('upward')">选中子不再选中父</d-button>
   <d-button class="demo-margin" (btnClick)="toggleIcon()">使用自定义展开/收起图标</d-button>
+  <d-button class="demo-margin" (btnClick)="expandAll()">展开全部表格</d-button>
   <d-data-table
-    #dataTable
     [dataSource]="basicDataSource"
-    [checkable]="true"
+    [tableWidthConfig]="tableWidthConfig"
     [checkableRelation]="checkableRelation"
-    [scrollable]="true"
-    (cellClick)="cellClick($event)"
-    (rowClick)="rowClick($event)"
     [loadChildrenTable]="loadChildrenTable"
-    (getCheckedRows)="getCheckedRows($event)"
     [loadAllChildrenTable]="loadAllChildrenTable"
+    [scrollable]="true"
   >
-    <d-column [order]="1" field="title" header="title" [width]="'40%'" [nestedColumn]="true" [extraOptions]="extraOptions"></d-column>
-    <d-column [order]="2" field="lastName" header="name" [width]="'20%'"></d-column>
-    <d-column [order]="3" field="status" header="status" [width]="'20%'"></d-column>
-    <d-column
-      [order]="4"
-      field="dob"
-      header="date"
-      [fieldType]="'date'"
-      [extraOptions]="{ dateFormat: 'MM/DD/YYYY' }"
-      [width]="'20%'"
-    ></d-column>
+    <thead dTableHead [checkable]="true">
+      <tr dTableRow>
+        <th dHeadCell [nestedColumn]="true" [iconFoldTable]="iconParentOpen" [iconUnFoldTable]="iconParentClose">title</th>
+        <th dHeadCell>name</th>
+        <th dHeadCell>status</th>
+        <th dHeadCell>date</th>
+      </tr>
+    </thead>
+    <tbody dTableBody>
+      <ng-template let-rowItem="rowItem" let-rowIndex="rowIndex" let-nestedLayer="nestedLayer" let-nestedIndex="nestedIndex">
+        <tr dTableRow [ngClass]="{ 'table-row-selected': rowItem.$checked }">
+          <td dTableCell class="devui-checkable-cell">
+            <d-checkbox
+              [ngModelOptions]="{ standalone: true }"
+              [ngModel]="rowItem.$checked"
+              [halfchecked]="rowItem.$halfChecked"
+              [disabled]="rowItem.$disabled"
+              (ngModelChange)="onRowCheckChange($event, rowIndex, nestedIndex, rowItem)"
+              dTooltip
+              [content]="rowItem.$checkBoxTips"
+              [position]="['top', 'right', 'bottom', 'left']"
+              [showAnimation]="false"
+            >
+            </d-checkbox>
+          </td>
+          <td
+            dTableCell
+            [nestedColumn]="true"
+            [rowItem]="rowItem"
+            [nestedLayer]="nestedLayer"
+            [iconFoldTable]="iconParentOpen"
+            [iconUnFoldTable]="iconParentClose"
+            (toggleChildTableEvent)="onChildTableToggle($event, rowItem)"
+          >
+            {{ rowItem['title'] }}
+          </td>
+          <td dTableCell>{{ rowItem['lastName'] }}</td>
+          <td dTableCell>{{ rowItem['status'] }}</td>
+          <td dTableCell>{{ rowItem['dob'] | i18nDate: 'short':false }}</td>
+        </tr>
+      </ng-template>
+    </tbody>
   </d-data-table>
 </section>

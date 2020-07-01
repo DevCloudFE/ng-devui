@@ -1,4 +1,9 @@
 <section>
-  <d-multi-auto-complete [source]="languages" [(ngModel)]="multiItems" name="multiple-auto"></d-multi-auto-complete>
+  <d-multi-auto-complete
+    [placeholder]="'请选择...'"
+    [source]="languages"
+    [(ngModel)]="multiItems"
+    name="multiple-auto"
+  ></d-multi-auto-complete>
   <pre>{{ multiItems | json }}</pre>
 </section>

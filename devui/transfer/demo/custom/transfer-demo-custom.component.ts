@@ -182,8 +182,8 @@ export class TransferDemoCustomComponent {
   basicTargetSource: Array<SourceType> = JSON.parse(JSON.stringify(this.targetSource.slice(0, this.pager.pageSize)));
   sourceCheckedLen = 0;
   targetCheckedLen = 0;
-  @ViewChild('sourceTable', { static: false }) sourceTable: DataTableComponent;
-  @ViewChild('targetTable', { static: false }) targetTable: DataTableComponent;
+  @ViewChild('sourceTable') sourceTable: DataTableComponent;
+  @ViewChild('targetTable') targetTable: DataTableComponent;
 
   sourceChangePageContent(event: any) {
     this.basicDataSource = this.originSource.slice((event.pageIndex - 1) * event.pageSize, event.pageIndex * event.pageSize);

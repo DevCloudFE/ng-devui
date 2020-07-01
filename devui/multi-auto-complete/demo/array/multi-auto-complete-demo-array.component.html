@@ -1,4 +1,10 @@
 <section>
-  <d-multi-auto-complete [(ngModel)]="multiItems2" [searchFn]="onSearchMultiple2.bind(this)" name="multiple-auto"> </d-multi-auto-complete>
+  <d-multi-auto-complete
+    [(ngModel)]="multiItems2"
+    [searchFn]="onSearchMultiple2.bind(this)"
+    (autoSubmit)="autoSubmit($event)"
+    name="multiple-auto"
+  >
+  </d-multi-auto-complete>
   <pre>{{ multiItems2 | json }}</pre>
 </section>

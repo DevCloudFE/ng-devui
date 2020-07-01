@@ -14,13 +14,14 @@ export class DropDownMenuDirective implements OnInit {
   @HostBinding('style.display') diplay = 'none';
   @HostBinding('attr.tabIndex') tabIndex = -1;
   @HostBinding('class.devui-dropdown-menu') addClass = true;
+  @HostBinding('class.devui-dropdown-overlay') addDropDownClass = true;
   keydownEscapeEvent$ = fromEvent(document.body, 'keydown').pipe(
-    // tslint:disable-next-line: deprecation // ie11不支持code
-    filter(event => (<KeyboardEvent>event).keyCode === 27)
+    // chrome 为 Escape , ie 11为Esc
+    filter(event => (<KeyboardEvent>event).key === 'Escape' || (<KeyboardEvent>event).key === 'Esc')
   );
   keydownEscapeSub: Subscription;
   popDirectionCache: 'top' | 'bottom';
-  private currentValue: any;
+  private currentValue: any = false;
   constructor(@Host() private dropdown: DropDownDirective, private el: ElementRef, private render: Renderer2,
   private windowRef: WindowRef, private builder: AnimationBuilder) {
     this.dropdown.visibleSubject.subscribe(value => {
@@ -76,15 +77,49 @@ export class DropDownMenuDirective implements OnInit {
       return this.popDirectionCache;
     } else {
       if (!isBottomEnough) {
-        this.render.setStyle(dropdownMenuElement, 'bottom', '100%');
+        this.render.setStyle(dropdownMenuElement, 'bottom', 'calc(100% - 1px)');
         this.render.setStyle(dropdownMenuElement, 'top', 'auto');
         this.popDirectionCache = 'top';
+        this.changeFormWithDropDown(this.popDirectionCache);
         return 'top';
       } else {
         this.render.removeStyle(dropdownMenuElement, 'bottom');
         this.render.removeStyle(dropdownMenuElement, 'top');
         this.popDirectionCache = 'bottom';
+        this.changeFormWithDropDown(this.popDirectionCache);
         return 'bottom';
+      }
+    }
+  }
+
+  changeFormWithDropDown(position) {
+    const ele = this.formWithDropDown();
+    let formBorder;
+    if (ele && !ele.classList.contains('devui-dropdown-origin-open')) {
+      ele.classList.add('devui-dropdown-origin-open');
+    }
+    if (position === 'bottom') {
+      formBorder = 'top';
+    } else {
+      formBorder = 'bottom';
+    }
+    if (ele && !ele.classList.contains(`devui-dropdown-origin-${position}`)) {
+      ele.classList.add(`devui-dropdown-origin-${position}`);
+      ele.classList.remove(`devui-dropdown-origin-${formBorder}`);
+    }
+  }
+
+  formWithDropDown() {
+    if (this.dropdown && this.dropdown.toggleEl) {
+      if (!this.dropdown.toggleEl.nativeElement.classList.contains('devui-dropdown-origin')) {
+        const parentEle = this.dropdown.toggleEl.nativeElement.parentElement;
+        if (parentEle && parentEle.classList.contains('devui-dropdown-origin')) {
+          return this.dropdown.toggleEl.nativeElement.parentElement;
+        } else {
+          return this.dropdown.toggleEl.nativeElement;
+        }
+      } else {
+        return this.dropdown.toggleEl.nativeElement;
       }
     }
   }

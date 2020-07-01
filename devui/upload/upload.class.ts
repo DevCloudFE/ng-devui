@@ -10,7 +10,7 @@ export class UploadComponent {
   fileUploaders: Array<FileUploader> = [];
   filesWithSameName = [];
   addFile(file, options) {
-    if (options.checkSameName) {
+    if (options && options.checkSameName) {
       if (this.checkFileSame(file.name)) {
         this.fileUploaders.push(new FileUploader(file, options));
       }
@@ -57,6 +57,32 @@ export class UploadComponent {
     }
 
     return from(Promise.reject('no files'));
+  }
+
+  oneTimeUpload() {
+    const uploads = this.fileUploaders
+      .filter((fileUploader) => fileUploader.status !== UploadStatus.uploaded);
+    uploads[0].send(uploads); // 触发文件上传
+    const finalUploads = uploads.map((file) => {
+      return from(this.dealUploadData(file, uploads[0]));
+    });
+    if (uploads.length > 0) {
+      return merge(...finalUploads).pipe(toArray());
+    }
+    return from(Promise.reject('no files'));
+  }
+
+  // 根据standard的上传状态为其他file设置状态
+  dealUploadData(file, standard): Promise<{ file: File, response: any }> {
+    return new Promise((resolve, reject) => {
+      file.status = standard.status;
+      file.percentage = standard.percentage;
+      if (standard.status = UploadStatus.failed) {
+        reject({ file: file.file, response: standard.response });
+      } else {
+        resolve({ file: file.file, response: standard.response });
+      }
+    });
   }
 
   deleteFile(file) {

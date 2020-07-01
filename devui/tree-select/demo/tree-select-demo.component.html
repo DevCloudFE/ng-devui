@@ -1,11 +1,18 @@
 <div>
-  <div class="demo-container" dAnchorBox [view]="{ top: 60, bottom: 0 }">
+  <div class="demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 60, bottom: 0 }">
     <d-demo-nav [navItems]="navItems"></d-demo-nav>
     <div class="demo-example" [dAnchor]="'basic-usage'">
       <div class="demo-title">基本用法</div>
       <div class="demo-text"></div>
       <d-codebox id="tree-select-basic" [sourceData]="TreeSelectBasicComponent">
         <d-tree-select-basic demo></d-tree-select-basic>
+      </d-codebox>
+    </div>
+    <div class="demo-example" [dAnchor]="'labelization'">
+      <div class="demo-title">标签化配置</div>
+      <div class="demo-text"></div>
+      <d-codebox id="tree-select-labelization" [sourceData]="TreeSelectLabelizationComponent">
+        <d-tree-select-labelization demo></d-tree-select-labelization>
       </d-codebox>
     </div>
     <div class="demo-example" [dAnchor]="'leaf-only'">
@@ -41,6 +48,20 @@
       <div class="demo-text"></div>
       <d-codebox id="tree-select-custom-icon" [sourceData]="TreeSelectCustomIconComponent">
         <d-tree-select-custom-icon demo></d-tree-select-custom-icon>
+      </d-codebox>
+    </div>
+    <div class="demo-example" [dAnchor]="'keys'">
+      <div class="demo-title">自定义key</div>
+      <div class="demo-text"></div>
+      <d-codebox id="tree-select-keys" [sourceData]="TreeSelectKeysComponent">
+        <d-tree-select-keys demo></d-tree-select-keys>
+      </d-codebox>
+    </div>
+    <div class="demo-example" [dAnchor]="'icon-parent'">
+      <div class="demo-title">自定义节点展开关闭图标</div>
+      <div class="demo-text"></div>
+      <d-codebox id="tree-select-icon-parent" [sourceData]="TreeSelectIconParentComponent">
+        <d-tree-select-icon-parent demo></d-tree-select-icon-parent>
       </d-codebox>
     </div>
   </div>

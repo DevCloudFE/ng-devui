@@ -1,0 +1,73 @@
+@import '../../style/theme/color';
+
+.devui-gantt-bar-parent {
+  width: 100%;
+  box-sizing: border-box;
+  height: 24px;
+  z-index: 3;
+  position: relative;
+
+  .devui-gantt-bar-rail {
+    position: absolute;
+    background: #eaecf0;
+    height: 12px;
+    width: 100%;
+    margin-top: 3px;
+  }
+
+  .devui-gantt-bar-rail::before {
+    width: 0;
+    height: 0;
+    border: 3px transparent solid;
+    border-top-color: #eaecf0;
+    border-left-color: #eaecf0;
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    content: '';
+  }
+
+  .devui-gantt-bar-rail::after {
+    width: 0;
+    height: 0;
+    border: 3px transparent solid;
+    border-top-color: #eaecf0;
+    border-right-color: #eaecf0;
+    position: absolute;
+    right: 0;
+    bottom: -6px;
+    content: '';
+  }
+
+  .devui-gantt-bar-track {
+    position: absolute;
+    background-color: #cacfd8;
+    height: 12px;
+    margin-top: 3px;
+    width: 0;
+  }
+
+  .devui-gantt-bar-track.head::before {
+    width: 0;
+    height: 0;
+    border: 3px transparent solid;
+    border-top-color: #cacfd8;
+    border-left-color: #cacfd8;
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    content: '';
+  }
+
+  .devui-gantt-bar-track.tail::after {
+    width: 0;
+    height: 0;
+    border: 3px transparent solid;
+    border-top-color: #cacfd8;
+    border-right-color: #cacfd8;
+    position: absolute;
+    right: 0;
+    bottom: -6px;
+    content: '';
+  }
+}

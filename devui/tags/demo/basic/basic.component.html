@@ -14,7 +14,7 @@
   <h4>自定义标签组</h4>
   <d-tags [tags]="tagList_custom" [deletable]="true" (tagDelete)="getTagValue($event); deleteTagCustom($event.index)">
     <ng-template let-tag="tag">
-      <span class="icon-bug" style="vertical-align:middle;"></span>
+      <span class="icon-bug"></span>
       <span title="{{ tag.name }}">{{ tag.name }}</span>
     </ng-template>
   </d-tags>

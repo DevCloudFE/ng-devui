@@ -1,5 +1,6 @@
 @import '../style/mixins/index';
 @import '../style/theme/color';
+@import '../style/theme/shadow';
 
 :host::ng-deep a {
   &:link,
@@ -28,10 +29,11 @@
   margin: 0 0 10px 0;
   opacity: 0.95;
   filter: alpha(opacity=95);
-  box-shadow: 0 12px 24px $dark-1-boxshadow;
-  border-radius: 0.25em;
+  box-shadow: $hwc-shadow-3;
+  border-radius: 4px;
   color: $hwc-feedback-overlay-font-color;
   transition: all 0.3s;
+  background-color: $huawei-bg;
 
   &.slide-in {
     left: 0;
@@ -41,7 +43,7 @@
 .devui-toast-item {
   position: relative;
   display: block;
-  padding: 8px 1em;
+  padding: 12px 16px;
 }
 
 .devui-toast-item p {
@@ -73,12 +75,19 @@
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  left: 10px;
-  top: 10px;
+  left: 16px;
+  top: 14px;
   padding: 0;
 
   &.devui-toast-image-warning {
-    background-color: $status-yellow;
+    path.devui-icon-warning-outer {
+      fill: $hwc-status-warning-border;
+    }
+
+    path.devui-icon-warning-inner {
+      fill: $font-white;
+      stroke: $font-white;
+    }
   }
 
   &.devui-toast-image-info {
@@ -93,7 +102,6 @@
     background-color: $status-green;
   }
 
-  .devui-toast-image-warning-path,
   .devui-toast-image-info-path,
   .devui-toast-image-error-path,
   .devui-toast-image-success-path {
@@ -102,26 +110,13 @@
 }
 
 .devui-toast-message {
-  padding: 0 0 0.25em 0;
   margin-left: 20px;
+}
+
+.devui-toast-message-common .devui-toast-message {
+  margin-left: 0;
 }
 
 .devui-toast-message p {
   font-size: 12px;
-}
-
-.devui-toast .devui-toast-message-success {
-  background-color: $hwc-feedback-overlay-background;
-}
-
-.devui-toast .devui-toast-message-info {
-  background-color: $hwc-feedback-overlay-background;
-}
-
-.devui-toast .devui-toast-message-warn {
-  background-color: $hwc-feedback-overlay-background;
-}
-
-.devui-toast .devui-toast-message-error {
-  background-color: $hwc-feedback-overlay-background;
 }

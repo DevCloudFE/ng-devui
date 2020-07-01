@@ -14,14 +14,11 @@
   -o-align-items: center;
 }
 
-.source {
-  width: 48%;
-  border: 1px solid $gray-1;
-}
-
+.source,
 .target {
   width: 48%;
   border: 1px solid $gray-1;
+  border-radius: 2px;
 }
 
 .option {
@@ -53,14 +50,23 @@
 .transfer-op {
   .default-svg {
     circle {
-      fill: $block-bg-white;
-      stroke: $icon-gray-bg;
+      fill: $disabled-bg;
+      stroke: $disabled-border;
+    }
+
+    path {
+      fill: $disabled-content;
     }
   }
 
   .active-svg {
     circle {
       fill: $brand-1;
+      stroke: $icon-gray-bg;
+    }
+
+    path {
+      fill: $font-white;
     }
   }
 }

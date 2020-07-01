@@ -45,9 +45,9 @@ import { debounceTime } from 'rxjs/operators';
       <d-datepicker [@cornerFadeInOut]="isOpen ? datepickerPosition : 'void'" [locale]="locale || i18nLocale"
                       [showTime]="showTime" [cssClass]="cssClass" [selectedDate]="selectedDate"
                       [disabled]="disabled" [dateConverter]="dateConverter" (selectedDateChange)="timeChange($event)"
-                      [yearNumber]="yearNumber" [dateFormat]="dateFormat" [dateConfig]="dateConfig"
+                      [dateFormat]="dateFormat" [dateConfig]="dateConfig"
                       [customViewTemplate]="customViewTemplate" [maxDate]="maxDate"
-                      [minDate]="minDate" class="devui-datepicker"></d-datepicker>
+                      [minDate]="minDate" class="devui-datepicker devui-dropdown-overlay"></d-datepicker>
     </ng-template>
   `,
   animations: [
@@ -57,27 +57,35 @@ import { debounceTime } from 'rxjs/operators';
 })
 export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDestroy, ControlValueAccessor {
   @Input() locale: string;
-  @Input() showTime: boolean;
   @Input() cssClass: string;
   @Input() disabled: boolean;
   @Input() dateConverter: DateConverter;
-  @Input() yearNumber = 12;
+  // @Input() yearNumber = 12;
   @Input() customViewTemplate: TemplateRef<any>;
   @Input() autoOpen = false;
   @Output() selectedDateChange = new EventEmitter<SelectDateChangeEventArgs>();
   selectedDate: Date;
-  isOpen = false;
+  _isOpen = false;
   _dateConfig: any;
   positions: ConnectedPosition[];
   datepickerPosition: VerticalConnectionPos = 'bottom';
   private _dateFormat: string;
   private _maxDate: Date;
   private _minDate: Date;
+  private _showTime: boolean;
   private clickShow = false;
   private inputSub: Subscription;
   private i18nSubscription: Subscription;
   public i18nLocale: I18nInterface['locale'];
 
+
+  @Input() set showTime(showTime: boolean) {
+    this._showTime = showTime;
+  }
+
+  get showTime() {
+    return typeof this._showTime === 'boolean' ? this._showTime : this.dateConfig.timePicker;
+  }
 
   @Input() set dateConfig(dateConfig: any) {
     if (dateConfig) {
@@ -123,6 +131,26 @@ export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDes
     return this._minDate;
   }
 
+  set isOpen(open: boolean) {
+    this._isOpen = open;
+    if (!open) {
+      const ele = this.formWithDropDown();
+      if (ele && ele.classList.contains('devui-dropdown-origin-open')) {
+        ele.classList.remove('devui-dropdown-origin-open');
+      }
+      if (ele && ele.classList.contains('devui-dropdown-origin-top')) {
+        ele.classList.remove('devui-dropdown-origin-top');
+      }
+      if (ele && ele.classList.contains('devui-dropdown-origin-bottom')) {
+        ele.classList.remove('devui-dropdown-origin-bottom');
+      }
+    }
+  }
+
+  get isOpen() {
+    return this._isOpen;
+  }
+
   public cdkConnectedOverlayOrigin: any;
 
   @Input() appendToBodyDirections: Array<AppendToBodyDirection | ConnectedPosition> = [
@@ -147,7 +175,6 @@ export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDes
   }
 
   ngOnInit() {
-    this.showTime = this.showTime || this.dateConfig.timePicker;
     this._minDate = this.minDate ? new Date(this.minDate) : new Date(this.dateConfig.min, 0, 1, 0, 0, 0);
     this._maxDate = this.maxDate ? new Date(this.maxDate) : new Date(this.dateConfig.max, 11, 31, 23, 59, 59);
     this.setPositions();
@@ -188,10 +215,10 @@ export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDes
   }
 
   timeChange(data) {
-    this.writeValue(data['selectedDate']);
+    this.writeValue(data ? data['selectedDate'] : null);
     this.writeModelValue(data);
-    if (data['reason'] === SelectDateChangeReason.date && !this.showTime ||
-     data['reason'] === SelectDateChangeReason.button) {
+    if (data && (data['reason'] === SelectDateChangeReason.date && !this.showTime ||
+    data['reason'] === SelectDateChangeReason.button)) {
       this.isOpen = false;
     }
   }
@@ -209,6 +236,21 @@ export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDes
 
   hide() {
     this.isOpen = false;
+  }
+
+  formWithDropDown() {
+    if (this.elementRef) {
+      if (!this.elementRef.nativeElement.classList.contains('devui-dropdown-origin')) {
+        const parentEle = this.elementRef.nativeElement.parentElement;
+        if (parentEle && parentEle.classList.contains('devui-dropdown-origin')) {
+          return this.elementRef.nativeElement.parentElement;
+        } else {
+          return;
+        }
+      } else {
+        return this.elementRef.nativeElement;
+      }
+    }
   }
 
   private writeModelValue(selectDateObj: any) {
@@ -255,6 +297,24 @@ export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDes
       case 'bottom':
         this.datepickerPosition = 'top';
     }
+    this.changeFormWithDropDown(position.connectionPair.overlayY);
+  }
+
+  changeFormWithDropDown(position) {
+    const ele = this.formWithDropDown();
+    let formBorder;
+    if (ele && !ele.classList.contains('devui-dropdown-origin-open')) {
+      ele.classList.add('devui-dropdown-origin-open');
+    }
+    if (position === 'bottom') {
+      formBorder = 'top';
+    } else {
+      formBorder = 'bottom';
+    }
+    if (ele && !ele.classList.contains(`devui-dropdown-origin-${formBorder}`)) {
+      ele.classList.add(`devui-dropdown-origin-${formBorder}`);
+      ele.classList.remove(`devui-dropdown-origin-${position}`);
+    }
   }
 
   setPositions() {
@@ -296,6 +356,9 @@ export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDes
   }
 
   clearAll = (reason?: SelectDateChangeReason) => {
+    if (this.disabled) {
+      return;
+    }
     this.writeValue(null);
     this.onChange(null);
     const currentReason = typeof reason === 'number' ? reason : SelectDateChangeReason.custom;

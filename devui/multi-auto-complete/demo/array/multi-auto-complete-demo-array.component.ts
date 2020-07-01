@@ -22,4 +22,8 @@ export class MultiAutoCompleteDemoArrayComponent implements OnInit {
         && lang.label.toLowerCase().indexOf(term.toLowerCase()) !== -1)
     );
   }
+
+  autoSubmit($event) {
+    console.log($event);
+  }
 }

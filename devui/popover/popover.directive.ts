@@ -45,7 +45,7 @@ export class PopoverDirective implements OnInit, OnDestroy {
   /**
    * popover显示位置
    */
-  @Input() position: PositionType = 'top';
+  @Input() position: PositionType | PositionType[] = ['top', 'right', 'bottom', 'left'];
   /**
    * 是否显示动画
    */
@@ -62,11 +62,16 @@ export class PopoverDirective implements OnInit, OnDestroy {
 
   @Input() popType: PopoverType = 'default';
 
+  @Input() popMaxWidth: number;
+
   // 触发 popover 的方式（点击/鼠标悬停等）
   @Input() trigger: TriggerType = 'click';
 
-  // 触发 popover 的方式（点击/鼠标悬停等）
-  @Input() hoverToContent = false;
+  // 是否可以移入popover内部
+  @Input() hoverToContent = false; // 废弃
+
+  // 触发移入popover内部的延迟时间
+  @Input() hoverDelayTime = 0;
 
   @Input() set visible(_isShow: boolean) {
     if (_isShow) {
@@ -111,6 +116,7 @@ export class PopoverDirective implements OnInit, OnDestroy {
       triggerElementRef: this.triggerElementRef,
       position: this.position,
       popType: this.popType,
+      popMaxWidth: this.popMaxWidth,
       scrollElement: this.scrollElement,
       appendToBody: this.appendToBody,
       zIndex: this.zIndex
@@ -127,7 +133,7 @@ export class PopoverDirective implements OnInit, OnDestroy {
       this.popoverComponentRef.instance.show();
     }
     document.addEventListener('click', this.onDocumentClick);
-    if (this.trigger === 'hover' && this.hoverToContent) {
+    if (this.trigger === 'hover' && this.hoverDelayTime) {
       this.blurSubscription = fromEvent(this.popoverComponentRef.instance.elementRef.nativeElement, 'mouseleave')
       .subscribe((event: MouseEvent) => {
         if (event.type === 'mouseleave' && this.controlled) {
@@ -164,7 +170,7 @@ export class PopoverDirective implements OnInit, OnDestroy {
             this.show();
           }
           if (event.type === 'mouseleave' && this.controlled) {
-            if (this.hoverToContent) {
+            if (this.hoverDelayTime) {
               const hideTimer = setTimeout(() => {
                 const relatedTarget = event.relatedTarget;
                 if (!this.triggerElementRef.nativeElement.contains(relatedTarget) &&
@@ -172,7 +178,7 @@ export class PopoverDirective implements OnInit, OnDestroy {
                   this.hide();
                 }
                 clearTimeout(hideTimer);
-              }, 100);
+              }, this.hoverDelayTime);
             } else {
               this.hide();
             }

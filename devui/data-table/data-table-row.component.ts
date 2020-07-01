@@ -95,7 +95,7 @@ export class DataTableRowComponent implements OnInit {
   onRowCheckChange($event, rowIndex, nestedIndex, rowItem) {
     rowItem.$checked = $event;
     rowItem.$halfChecked = false;
-    this.dt.onRowCheckChange({ rowItem, rowIndex, nestedIndex, checked: $event });
+    this.dt.setRowCheckStatus({ rowItem, rowIndex, nestedIndex, checked: $event });
   }
 
   toggle() {

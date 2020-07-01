@@ -10,13 +10,13 @@ export class FileUploader {
   public percentage = 0;
 
   constructor(public file: File,
-    private uploadOptions: IUploadOptions) {
+    public uploadOptions: IUploadOptions) {
     this.file = file;
     this.uploadOptions = uploadOptions;
     this.status = UploadStatus.preLoad;
   }
 
-  public send(): Promise<{ file: File, response: any }> {
+  public send(uploadFiles?): Promise<{ file: File, response: any }> {
     return new Promise((resolve, reject) => {
       const {
         uri,
@@ -52,13 +52,11 @@ export class FileUploader {
         this.percentage = Math.round(e.loaded * 100 / e.total);
       };
 
-      const formData = new FormData();
-      formData.append(fileFieldName_, this.file, this.file.name);
-      if (additionalParameter) {
-        Object.keys(additionalParameter).forEach((key: string) => {
-          formData.append(key, additionalParameter[key]);
-        });
-      }
+
+      const formData = uploadFiles && uploadFiles.length ?
+        this.oneTimeUploadFiles(fileFieldName_, additionalParameter, uploadFiles) :
+        this.parallelUploadFiles(fileFieldName_, additionalParameter);
+
 
       this.xhr.send(formData);
       this.status = UploadStatus.uploading;
@@ -86,6 +84,30 @@ export class FileUploader {
         }
       };
     });
+  }
+
+  public parallelUploadFiles(fileFieldName_, additionalParameter) {
+    const formData = new FormData();
+    formData.append(fileFieldName_, this.file, this.file.name);
+    if (additionalParameter) {
+      Object.keys(additionalParameter).forEach((key: string) => {
+        formData.append(key, additionalParameter[key]);
+      });
+    }
+    return formData;
+  }
+
+  public oneTimeUploadFiles(fileFieldName_, additionalParameter, uploadFiles) {
+    const formData = new FormData();
+    uploadFiles.forEach(element => {
+      formData.append(fileFieldName_, element.file, element.file.name);
+      if (additionalParameter) {
+        Object.keys(additionalParameter).forEach((key: string) => {
+          formData.append(key, additionalParameter[key]);
+        });
+      }
+    });
+    return formData;
   }
 
   public cancel() {

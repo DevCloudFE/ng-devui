@@ -1,11 +1,11 @@
 <section>
   <form class="form">
     <div class="row">
-      <div class="col-sm-6" style="width: 280px; margin-right: 15px; margin-bottom: 5px; float:left;">
+      <div class="col-sm-6" style="width: 280px; margin-right: 15px; margin-bottom: 5px; float: left;">
         <div class="devui-form-group">
           <input
             type="text"
-            class="devui-form-control"
+            class="devui-form-control devui-dropdown-origin"
             name="language"
             id="language5"
             [minLength]="0"
@@ -20,6 +20,20 @@
         <d-button (click)="isDisabled = !isDisabled">
           {{ isDisabled ? 'Enable AutoComplete' : 'Disable AutoComplete' }}
         </d-button>
+      </div>
+      <div class="devui-form-group">
+        <input
+          type="text"
+          class="devui-form-control devui-dropdown-origin"
+          name="language"
+          id="language5"
+          [minLength]="0"
+          [disabledKey]="'disable'"
+          [source]="languages1"
+          [formatter]="formatter"
+          dAutoComplete
+          [tipsText]="'搜索结果'"
+        />
       </div>
     </div>
   </form>

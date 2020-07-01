@@ -1,3 +1,16 @@
 .d-demo__search {
   margin-bottom: 20px;
+  position: relative;
+}
+
+.d-demo__search > .devui-form-control {
+  width: 30%;
+  height: 30px;
+}
+
+.icon {
+  position: absolute;
+  left: calc(30% - 26px);
+  top: 7px;
+  font-size: 16px;
 }

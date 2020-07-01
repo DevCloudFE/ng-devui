@@ -34,6 +34,9 @@ export class BasicComponent {
         this.msgs = [{ severity: 'info', summary: '摘要', detail: '详细信息，测试换行，测试换行，测试换行，测试换行，测试换行' },
         { severity: 'info', summary: '摘要', detail: '详细信息，测试换行，测试换行，测试换行，测试换行，测试换行' }];
         break;
+      case 'noTitle':
+        this.msgs = [{ severity: 'warn', detail: '详细信息测试换行测试换行测试换行测试换行测试换行测试换行测试换行测试换行测试换行' }];
+        break;
       default:
         this.msgs = [{ severity: type, summary: '摘要', detail: '详细信息，测试换行，测试换行，测试换行，测试换行，测试换行' }];
     }

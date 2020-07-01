@@ -58,7 +58,7 @@ export class TwoDatePickerEndDirective implements OnInit, OnDestroy, ControlValu
   }
 
   @HostListener('click', ['$event'])
-  public toggleDropdown(event: MouseEvent) {
+  public toggleEndPicker(event: MouseEvent) {
     event.stopPropagation();
     this.twoDatePicker.toggle(event, 'end');
   }

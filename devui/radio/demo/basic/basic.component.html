@@ -5,6 +5,7 @@
     *ngFor="let value of values2"
     [value]="value"
     (ngModelChange)="valueChange($event)"
+    [ngStyle]="{ marginBottom: '20px' }"
   >
     The Radio value is: {{ value }}
   </d-radio>

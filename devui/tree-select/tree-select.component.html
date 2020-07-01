@@ -1,17 +1,102 @@
 <div class="devui-tree-select">
-  <d-popper-component [(open)]="isOpen" [fluidPopper]="!width" (openChange)="responsePopperChange($event)" [appendTo]="appendTo" #popper>
-    <input
+  <d-popper-component
+    [(open)]="isOpen"
+    [fluidPopper]="!width"
+    (openChange)="responsePopperChange($event)"
+    [appendTo]="appendTo"
+    [extraConfig]="{
+      extraWidth: -2,
+      offset: '0, 0'
+    }"
+    #popper
+  >
+    <div
       #selectHost
-      class="devui-select-input devui-input devui-form-control devui-tree-select-input"
+      class="devui-select-input devui-form-control devui-tree-select-input devui-dropdown-origin"
       (click)="toggle()"
-      [placeholder]="placeholder"
       autocomplete="off"
-      [disabled]="disabled"
+      [ngClass]="{ disabled: disabled }"
       readonly
       popper-activator
-    />
-    <div popper-prepend class="devui-tree-select devui-search-container" *ngIf="searchable">
-      <input class="devui-input" [(ngModel)]="searchString" #searchInputModel="ngModel" #searchInput />
+    >
+      {{ !valueType ? placeholder : '' }}
+      <div class="devui-select-item" *ngIf="valueType === 'object' && enableLabelization">
+        <span class="devui-select-item-content">{{ value[treeNodeTitleKey] }}</span>
+        <span *ngIf="!disabled" class="devui-select-item-clear-icon" (click)="clearValue($event, value)">
+          <svg
+            width="6px"
+            height="6px"
+            viewBox="0 0 10 10"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+          >
+            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+              <g transform="translate(-3.000000, -3.000000)" fill-rule="nonzero">
+                <path
+                  d="M11.6426,3.19816936 C11.9239974,2.91574512 12.4131626,2.93784891 12.7352108,3.24751057 C13.0571998,3.5572302 13.0901298,4.03723416 12.8087324,4.31965839 L9.14064666,7.99900183 L12.8087324,11.6803416 C13.0645482,11.9370909 13.0605893,12.3571292 12.8158402,12.6640749 L12.7352108,12.7524894 C12.4131626,13.0621511 11.9239974,13.0842548 11.6426,12.8018306 L8,9.14489021 L4.35740003,12.8018306 C4.10158422,13.05858 3.6740594,13.0636532 3.35648225,12.8298003 L3.26478919,12.7524894 C2.94280021,12.4427698 2.90987023,11.9627658 3.19126762,11.6803416 L6.8583349,7.99900183 L3.19126762,4.31965839 C2.93545181,4.06290908 2.93941068,3.64287076 3.18415975,3.3359251 L3.26478919,3.24751057 C3.58683735,2.93784891 4.07600264,2.91574512 4.35740003,3.19816936 L8,6.85411161 L11.6426,3.19816936 Z"
+                ></path>
+              </g>
+            </g>
+          </svg>
+        </span>
+      </div>
+      <div class="devui-select-item devui-no-label-item" *ngIf="valueType === 'object' && !enableLabelization">
+        {{ value[treeNodeTitleKey] }}
+      </div>
+      <ul class="devui-select-list" *ngIf="valueType === 'array' && enableLabelization">
+        <li class="devui-select-item" *ngFor="let item of value; let i = index">
+          <span class="devui-select-item-content">{{ item[treeNodeTitleKey] }}</span>
+          <span *ngIf="!disabled" class="devui-select-item-clear-icon" (click)="clearValue($event, item, i)">
+            <svg
+              width="6px"
+              height="6px"
+              viewBox="0 0 10 10"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+            >
+              <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g transform="translate(-3.000000, -3.000000)" fill-rule="nonzero">
+                  <path
+                    d="M11.6426,3.19816936 C11.9239974,2.91574512 12.4131626,2.93784891 12.7352108,3.24751057 C13.0571998,3.5572302 13.0901298,4.03723416 12.8087324,4.31965839 L9.14064666,7.99900183 L12.8087324,11.6803416 C13.0645482,11.9370909 13.0605893,12.3571292 12.8158402,12.6640749 L12.7352108,12.7524894 C12.4131626,13.0621511 11.9239974,13.0842548 11.6426,12.8018306 L8,9.14489021 L4.35740003,12.8018306 C4.10158422,13.05858 3.6740594,13.0636532 3.35648225,12.8298003 L3.26478919,12.7524894 C2.94280021,12.4427698 2.90987023,11.9627658 3.19126762,11.6803416 L6.8583349,7.99900183 L3.19126762,4.31965839 C2.93545181,4.06290908 2.93941068,3.64287076 3.18415975,3.3359251 L3.26478919,3.24751057 C3.58683735,2.93784891 4.07600264,2.91574512 4.35740003,3.19816936 L8,6.85411161 L11.6426,3.19816936 Z"
+                  ></path>
+                </g>
+              </g>
+            </svg>
+          </span>
+        </li>
+      </ul>
+      <ul class="devui-select-list" *ngIf="valueType === 'array' && !enableLabelization">
+        <li class="devui-select-item devui-no-label-item" *ngFor="let item of value; let i = index">
+          {{ item[treeNodeTitleKey] }}
+          <span *ngIf="valueLength && i < valueLength - 1">, </span>
+        </li>
+      </ul>
+    </div>
+    <div popper-prepend class="devui-tree-select devui-search-container devui-form-group devui-has-feedback" *ngIf="searchable">
+      <input class="devui-input devui-search-in-dropdown" [(ngModel)]="searchString" #searchInputModel="ngModel" #searchInput />
+      <span class="devui-form-control-feedback">
+        <svg
+          width="14px"
+          height="14px"
+          viewBox="0 0 14 14"
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          class="svg-icon-search"
+          style="vertical-align: middle;"
+        >
+          <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <g transform="translate(-1.000000, -1.000000)">
+              <path
+                d="M7.30811922,1 C10.7919973,1 13.6162384,3.82424117 13.6162384,7.30811922 C13.6162384,8.72507634 13.149053,10.0329164 12.3603151,11.0860065 L14.7360564,13.4616238 C15.0879812,13.8135487 15.0879812,14.3841316 14.7360564,14.7360564 C14.3841316,15.0879812 13.8135487,15.0879812 13.4616238,14.7360564 L11.0860065,12.3603151 C10.0329164,13.149053 8.72507634,13.6162384 7.30811922,13.6162384 C3.82424117,13.6162384 1,10.7919973 1,7.30811922 C1,3.82424117 3.82424117,1 7.30811922,1 Z M7.31,2.51 C4.6590332,2.51 2.51,4.6590332 2.51,7.31 C2.51,9.9609668 4.6590332,12.11 7.31,12.11 C9.9609668,12.11 12.11,9.9609668 12.11,7.31 C12.11,4.6590332 9.9609668,2.51 7.31,2.51 Z"
+                fill-rule="nonzero"
+              ></path>
+            </g>
+          </g>
+        </svg>
+      </span>
     </div>
     <div class="devui-tree-select devui-options-container" #optionsContainer popper-container [ngStyle]="{ width: width }">
       <d-operable-tree
@@ -48,14 +133,20 @@
       </div>
     </div>
   </d-popper-component>
-  <div
-    [ngClass]="{ disabled: disabled, clear: allowClear }"
-    (click)="$event.stopPropagation(); $event.preventDefault(); clearValue()"
-  ></div>
+  <div [ngClass]="{ disabled: disabled, clear: allowClear }" (click)="$event.stopPropagation(); $event.preventDefault(); clearAll()"></div>
   <span class="devui-select-chevron-icon" [class.open]="isOpen" [ngClass]="{ disabled: disabled, clear: allowClear }">
-    <svg width="14px" height="14px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg">
-      <g id="chevron_down" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <polygon id="chevron_down" points="4.5 5 8 8.76923077 11.5 5 13 6.61538462 8 12 3 6.61538462"></polygon>
+    <svg
+      width="8px"
+      height="5px"
+      viewBox="0 0 8 5"
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+    >
+      <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g transform="translate(-4.000000, -6.000000)">
+          <polygon points="4 6 12 6 8 11"></polygon>
+        </g>
       </g>
     </svg>
   </span>

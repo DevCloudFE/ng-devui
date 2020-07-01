@@ -81,8 +81,24 @@
         </g>
       </svg>
     </button>
-    <span>{{ targetImageIndex + 1 + '/' + totalImageNum }}</span>
-    <button (click)="next()" dTooltip [position]="'top'" [content]="i18nText.next">
+    <span (click)="showInput = true" class="devui-image-preview-index">
+      <d-input-number
+        *ngIf="showInput"
+        size="sm"
+        [min]="1"
+        [max]="totalImageNum"
+        [autoFocus]="true"
+        [ngModel]="targetImageIndex + 1"
+        (keyup.enter)="showInput = false"
+        (blur)="showInput = false"
+        (whileValueChanging)="inputChange($event)"
+        (ngModelChange)="inputChange($event)"
+      >
+      </d-input-number>
+      <span *ngIf="!showInput">{{ targetImageIndex + 1 + ' ' }}</span>
+      <span>{{ '/ ' + totalImageNum }}</span>
+    </span>
+    <button class="devui-next" (click)="next()" dTooltip [position]="'top'" [content]="i18nText.next">
       <svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1">
         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
           <polygon

@@ -30,6 +30,8 @@ export class DImagePreviewComponent implements OnInit, OnDestroy {
   targetImageIndex: number;
   totalImageNum: number;
 
+  showInput = false;
+
   onClose: () => void;
 
   i18nText: I18nInterface['imagePreview'];
@@ -110,6 +112,12 @@ export class DImagePreviewComponent implements OnInit, OnDestroy {
   setScaleOriginal() {
     this.transformableImageElementRef.setOriginalScale();
     this.isOptimal = false;
+  }
+
+  inputChange($event) {
+    if (!isNaN($event) && $event && $event <= this.totalImageNum) {
+      this.targetImageIndex = $event - 1;
+    }
   }
 
   private addFullScreenStyle() {

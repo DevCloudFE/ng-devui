@@ -1,5 +1,6 @@
-<div class="demo-container" dAnchorBox [view]="{ top: 60, bottom: 0 }">
+<div class="demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 60, bottom: 0 }">
   <d-demo-nav [navItems]="navItems"></d-demo-nav>
+
   <div class="demo-example" [dAnchor]="'checkbox-basic'">
     <div class="demo-title">基本用法</div>
     <div class="demo-text"></div>
@@ -7,11 +8,27 @@
       <d-demo-checkbox-basic demo></d-demo-checkbox-basic>
     </d-codebox>
   </div>
+
   <div class="demo-example" [dAnchor]="'tabs-group'">
     <div class="demo-title">使用CheckBoxGroup</div>
     <div class="demo-text"></div>
     <d-codebox id="components-tabs-group" [sourceData]="checkboxDemoGroup">
       <d-checkbox-group-basic demo></d-checkbox-group-basic>
+    </d-codebox>
+  </div>
+
+  <div class="demo-example" [dAnchor]="'condition-change'">
+    <div class="demo-title">checkbox根据条件终止切换状态</div>
+    <div class="demo-text">根据条件判断，label为'条件判断回调禁止选中'的checkbox终止切换状态</div>
+    <d-codebox id="components-condition-change" [sourceData]="conditionChangeSource">
+      <d-demo-condition-change demo></d-demo-condition-change>
+    </d-codebox>
+  </div>
+
+  <div class="demo-example" [dAnchor]="'condition-group'">
+    <div class="demo-title">checkbox-group根据条件终止切换状态</div>
+    <d-codebox id="components-condition-group" [sourceData]="conditionChangeSource">
+      <d-checkbox-condition-group demo></d-checkbox-condition-group>
     </d-codebox>
   </div>
 </div>

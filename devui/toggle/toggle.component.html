@@ -5,8 +5,8 @@
   [class.devui-toggle-large]="size === 'large'"
   [class.devui-toggle-medium]="size === 'medium'"
   [class.devui-toggle-small]="size === 'small'"
-  [style.background]="checked ? color : ''"
-  [style.border-color]="checked ? color : ''"
+  [style.background]="checked && !disabled ? color : ''"
+  [style.border-color]="checked && !disabled ? color : ''"
 >
   <small></small>
 </span>

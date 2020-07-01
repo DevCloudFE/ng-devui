@@ -33,6 +33,7 @@ import { I18nService, I18nInterface } from 'ng-devui/i18n';
   ],
 })
 export class SearchComponent implements ControlValueAccessor, OnInit, OnDestroy, AfterViewInit {
+  constructor(private renderer: Renderer2, private i18n: I18nService, private cdr: ChangeDetectorRef, private el: ElementRef) {}
   /**
    * 【可选】下拉选框尺寸
    */
@@ -45,18 +46,20 @@ export class SearchComponent implements ControlValueAccessor, OnInit, OnDestroy,
   @Input() isKeyupSearch = false;
   @Input() delay = 300;
   @Input() disabled = false;
+  @Input() cssClass: string;
+  @Input() iconPosition = 'right';
   @Output() searchFn = new EventEmitter<string>();
   @ViewChild('filterInput', { static: true }) filterInputElement: ElementRef;
-  @ViewChild('line', { static: true }) lineElement: ElementRef;
-  @ViewChild('clearIcon', { static: true }) clearIconElement: ElementRef;
+  @ViewChild('line') lineElement: ElementRef;
+  @ViewChild('clearIcon') clearIconElement: ElementRef;
   i18nCommonText: I18nInterface['common'];
   i18nSubscription: Subscription;
   clearIconExit = false;
+  width: number;
   private subscription: Subscription;
+  private enterKeyCodeCN = 229; // 229表示：中文输入法下按enter键后触发事件的keyCode值
   private onChange = (_: any) => null;
   private onTouch = () => null;
-
-  constructor(private renderer: Renderer2, private i18n: I18nService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.setI18nText();
@@ -98,7 +101,13 @@ export class SearchComponent implements ControlValueAccessor, OnInit, OnDestroy,
     // 此函数不能删除，需要给filterInput.value赋值，从而控制clear的显隐。因为registerFilterChange对clear的显隐控制不起作用。
   }
 
-  keyupEnter(term) {
+  keydownEnter(event, term) {
+    if (event.keyCode !== this.enterKeyCodeCN) {
+      this.searchFn.emit(term);
+    }
+  }
+
+  clickSearch(term) {
     this.searchFn.emit(term);
   }
 

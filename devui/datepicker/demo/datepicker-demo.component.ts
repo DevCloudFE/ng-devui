@@ -12,6 +12,16 @@ export class DatepickerDemoComponent {
     {title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/basic.component.ts')},
     {title: 'CSS', language: 'css', code: require('!!raw-loader!./basic/basic.component.css')},
   ];
+  minMaxSource: Array<DevuiSourceData> = [
+    {title: 'HTML', language: 'html', code: require('!!raw-loader!./min-max/min-max.component.html')},
+    {title: 'TS', language: 'typescript', code: require('!!raw-loader!./min-max/min-max.component.ts')},
+    {title: 'CSS', language: 'css', code: require('!!raw-loader!./min-max/min-max.component.css')},
+  ];
+  appendToBodySource: Array<DevuiSourceData> = [
+    {title: 'HTML', language: 'html', code: require('!!raw-loader!./append-to-body/append-to-body.component.html')},
+    {title: 'TS', language: 'typescript', code: require('!!raw-loader!./append-to-body/append-to-body.component.ts')},
+    {title: 'CSS', language: 'css', code: require('!!raw-loader!./append-to-body/append-to-body.component.css')},
+  ];
   rangeSource: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'html', code: require('!!raw-loader!./range/datepicker-range.component.html')},
     {title: 'TS', language: 'typescript', code: require('!!raw-loader!./range/datepicker-range.component.ts')},
@@ -37,6 +47,23 @@ export class DatepickerDemoComponent {
       title: 'CSS',
       language: 'css',
       code: require('!!raw-loader!./range-picker-basic/date-range-picker-basic.component.css')
+    },
+  ];
+  rangePickerFormat = [
+    {
+      title: 'HTML',
+      language: 'html',
+      code: require('!!raw-loader!./range-picker-format/date-range-picker-format.component.html')
+    },
+    {
+      title: 'TS',
+      language: 'typescript',
+      code: require('!!raw-loader!./range-picker-format/date-range-picker-format.component.ts')
+    },
+    {
+      title: 'CSS',
+      language: 'css',
+      code: require('!!raw-loader!./range-picker-format/date-range-picker-format.component.css')
     },
   ];
   rangePickerDisabled = [
@@ -134,10 +161,30 @@ export class DatepickerDemoComponent {
       code: require('!!raw-loader!./two-datepicker-basic/two-datepicker-basic.component.css')
     },
   ];
+  twoDatepickerFormat = [
+    {
+      title: 'HTML',
+      language: 'html',
+      code: require('!!raw-loader!./two-datepicker-format/two-datepicker-format.component.html')
+    },
+    {
+      title: 'TS',
+      language: 'typescript',
+      code: require('!!raw-loader!./two-datepicker-format/two-datepicker-format.component.ts')
+    },
+    {
+      title: 'CSS',
+      language: 'css',
+      code: require('!!raw-loader!./two-datepicker-format/two-datepicker-format.component.css')
+    },
+  ];
   navItems = [
     { dAnchorLink: 'datepicker-default', value: '基本用法'},
+    { dAnchorLink: 'datepicker-min-max', value: '限制最大最小日期'},
+    { dAnchorLink: 'datepicker-append-to-body', value: '附着在body上'},
     { dAnchorLink: 'datepicker-range', value: '范围日期选择器'},
     { dAnchorLink: 'datepicker-range-basic', value: '日期范围选择器 集成模式'},
+    { dAnchorLink: 'datepicker-range-format', value: '日期范围选择器 格式化'},
     { dAnchorLink: 'datepicker-range-disabled', value: '日期范围选择器 禁止输入态'},
     { dAnchorLink: 'datepicker-range-restricted-range', value: '日期范围选择器 可选范围'},
     { dAnchorLink: 'datepicker-range-time', value: '日期范围选择器 选择时间'},
@@ -147,6 +194,7 @@ export class DatepickerDemoComponent {
     { dAnchorLink: 'custom-view-template', value: '自定义操作区'},
     { dAnchorLink: 'date-picker-clear-button', value: '自定义清除按钮'},
     { dAnchorLink: 'date-picker-button', value: '日期选择按钮'},
-    { dAnchorLink: 'two-date-picker-basic', value: '双日期选择器'}
+    { dAnchorLink: 'two-date-picker-basic', value: '双日期选择器'},
+    { dAnchorLink: 'two-date-picker-format', value: '双日期选择器 格式化'}
   ];
 }

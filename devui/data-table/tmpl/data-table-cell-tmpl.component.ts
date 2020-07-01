@@ -3,13 +3,13 @@ import { DataTableCellViewTmplComponent } from './data-table-cell-view-tmpl.comp
 import { DataTableCellEditTmplComponent } from './data-table-cell-edit-tmpl.component';
 
 @Component({
-  selector: 'd-cell-template',
-  template: '',
-  changeDetection: ChangeDetectionStrategy.OnPush
+ selector: 'd-cell-template',
+ template: '',
+ changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DataTableCellTmplComponent {
-  @Input() type: string;
-  @ContentChild(DataTableCellViewTmplComponent, { static: false }) view: DataTableCellViewTmplComponent;
-  @ContentChild(DataTableCellEditTmplComponent, { static: false }) edit: DataTableCellEditTmplComponent;
+ @Input() type: string;
+ @ContentChild(DataTableCellViewTmplComponent) view: DataTableCellViewTmplComponent;
+ @ContentChild(DataTableCellEditTmplComponent) edit: DataTableCellEditTmplComponent;
 
 }

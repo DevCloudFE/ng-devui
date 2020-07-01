@@ -2,10 +2,10 @@
   <div *ngIf="canChangePageSize && !lite" class="devui-page-size {{ size ? 'devui-page-size-' + size : '' }}">
     <d-select
       [scrollHight]="'200px'"
-      [direction]="selectDirection"
       [size]="size"
       [ngModel]="pageSize"
       [appendToBody]="true"
+      [appendToBodyDirections]="pageSizeDirection"
       (valueChange)="onPageSizeChange($event)"
       [options]="pageSizeOptions"
       [isSearch]="false"
@@ -15,11 +15,11 @@
   <div *ngIf="lite && showPageSelector" class="devui-lite-paginator" #litePaginator>
     <d-select
       [scrollHight]="'200px'"
-      [direction]="selectDirection"
       [size]="size"
       [isSearch]="false"
       [ngModel]="litePaginatorIndex"
       [appendToBody]="true"
+      [appendToBodyDirections]="pageSizeDirection"
       [options]="litePaginatorOptions"
       [filterKey]="'label'"
       [disabled]="!litePaginatorOptions.length"
@@ -29,7 +29,7 @@
   <ul class="devui-pagination-list {{ size ? 'devui-pagination-' + size : '' }}">
     <ng-container *ngIf="!lite">
       <li *ngIf="preLink" [ngClass]="{ disabled: pageIndex == totalPage }">
-        <a (click)="prev()" class="devui-pagination-link">{{ preLink }}</a>
+        <a (click)="prev()" class="devui-pagination-link" [innerHTML]="preLink | safe: 'html'"></a>
       </li>
       <li *ngIf="!preLink" [ngClass]="{ disabled: pageIndex == 1 }">
         <a (click)="prev()" class="devui-pagination-link">
@@ -67,7 +67,7 @@
         </li>
       </ng-container>
       <li *ngIf="nextLink" [ngClass]="{ disabled: pageIndex == totalPage }">
-        <a (click)="next()" class="devui-pagination-link">{{ nextLink }}</a>
+        <a (click)="next()" class="devui-pagination-link" [innerHTML]="nextLink | safe: 'html'"></a>
       </li>
       <li *ngIf="!nextLink" [ngClass]="{ disabled: pageIndex == totalPage || !total }">
         <a (click)="next()" class="devui-pagination-link">
@@ -87,7 +87,12 @@
     </ng-container>
     <ng-container *ngIf="lite">
       <li *ngIf="preLink" [ngClass]="{ disabled: pageIndex == totalPage }">
-        <a (click)="prev()" [attr.aria-label]="nextLink" class="devui-pagination-link devui-pagination-link-lite">{{ preLink }}</a>
+        <a
+          (click)="prev()"
+          [attr.aria-label]="nextLink"
+          class="devui-pagination-link devui-pagination-link-lite"
+          [innerHTML]="preLink | safe: 'html'"
+        ></a>
       </li>
       <li *ngIf="!preLink" [ngClass]="{ disabled: pageIndex == 1 }">
         <a (click)="prev()" [attr.aria-label]="nextLink" class="devui-pagination-link devui-pagination-link-lite">
@@ -104,7 +109,12 @@
         </a>
       </li>
       <li *ngIf="nextLink" [ngClass]="{ disabled: pageIndex >= totalPage }">
-        <a (click)="next()" [attr.aria-label]="nextLink" class="devui-pagination-link devui-pagination-link-lite">{{ nextLink }}</a>
+        <a
+          (click)="next()"
+          [attr.aria-label]="nextLink"
+          class="devui-pagination-link devui-pagination-link-lite"
+          [innerHTML]="nextLink | safe: 'html'"
+        ></a>
       </li>
       <li *ngIf="!nextLink" [ngClass]="{ disabled: pageIndex >= totalPage }">
         <a (click)="next()" [attr.aria-label]="nextLink" class="devui-pagination-link devui-pagination-link-lite">
@@ -127,12 +137,14 @@
     {{ goToText ? goToText : i18nText?.goTo }}
     <input
       type="text"
+      autocomplete="off"
       class="devui-input {{ size ? 'devui-input-' + size : '' }}"
       name="pageIndex"
       [(ngModel)]="jumpPage"
       (keyup.enter)="jump()"
       (keyup)="validateInput()"
     />
+    {{ i18nLocale === 'zh-cn' ? i18nText.page : '' }}
     <div
       *ngIf="showJumpButton"
       class="devui-jump-button {{ size ? 'devui-jump-size-' + size : 'devui-jump-size-default' }}"

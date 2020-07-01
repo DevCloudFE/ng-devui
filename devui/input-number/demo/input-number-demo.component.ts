@@ -40,11 +40,18 @@ export class InputNumberDemoComponent {
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./reg/input-number-reg.component.ts') },
     { title: 'CSS', language: 'css', code: require('!!raw-loader!./reg/input-number-reg.component.css') }
   ];
+
+  DecimalLimitAndAutoFocus: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./decimalLimitAndAutoFocus/decimal-limit-auto-focus.component.html') },
+    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./decimalLimitAndAutoFocus/decimal-limit-auto-focus.component.ts') },
+    { title: 'CSS', language: 'css', code: require('!!raw-loader!./decimalLimitAndAutoFocus/decimal-limit-auto-focus.component.css') }
+  ];
   navItems = [
     { dAnchorLink: 'number-basic', value: '基本用法'},
     { dAnchorLink: 'number-disabled', value: '禁止输入态'},
     { dAnchorLink: 'number-empty', value: '允许空值'},
     { dAnchorLink: 'number-placeholder-maxlength', value: 'placeholder和maxLength'},
-    { dAnchorLink: 'number-reg', value: '正则限制'}
+    { dAnchorLink: 'number-reg', value: '正则限制'},
+    { dAnchorLink: 'decimal-limit-auto-focus', value: '限制小数和自动获取焦点'}
   ];
 }

@@ -65,11 +65,9 @@ export class AnchorBoxHashSupportDirective implements OnInit, AfterViewInit, OnD
     if (!frag) { return; }
     if (this.box.anchorMap[frag]) {
       const tempAnchor = new AnchorLinkDirective(this.box);
+      tempAnchor.anchorName = frag;
       tempAnchor.anchorBlock = this.box.anchorMap[frag];
-      tempAnchor.scrollToAnchor();
-      setTimeout(() => {
-        this.box.forceActiveAnchor(frag, 'fragment');
-      }, 500);
+      tempAnchor.scrollToAnchor('fragment');
     }
   }
 }

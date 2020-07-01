@@ -13,7 +13,7 @@ import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { ManualComponent } from './manual/manual.component';
 import { CustomizeTmpComponent } from './customize/customize.component';
 import { ScrollElementComponent } from './scroll-element/scroll-element.component';
-import { HoverToContentComponent } from './hover-to-content/hover-to-content.component';
+import { HoverDelayTimeComponent } from './hover-delay-time/hover-delay-time.component';
 import { ButtonModule } from 'ng-devui/button';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 @NgModule({
@@ -40,7 +40,7 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
     ManualComponent,
     CustomizeTmpComponent,
     ScrollElementComponent,
-    HoverToContentComponent
+    HoverDelayTimeComponent
   ],
   entryComponents: [
     PopoverDemoComponent,

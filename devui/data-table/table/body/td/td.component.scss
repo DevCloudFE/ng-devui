@@ -1,0 +1,88 @@
+@import '../../../../style/theme/color';
+
+svg.svg-icon-arrow > g > polygon {
+  fill: $dark-1;
+}
+
+:host ::ng-deep d-button button.d-btn.d-btn-icon {
+  padding: 0 !important;
+}
+
+.cell-modify {
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+
+  & > svg {
+    vertical-align: middle;
+  }
+
+  &:hover > svg > g > g {
+    fill: $dark-1;
+  }
+}
+
+.cell-placeholder {
+  display: inline-block;
+  height: 16px;
+}
+
+.cell-container {
+  position: relative;
+  height: 24px;
+}
+
+.cell-container-inner {
+  position: absolute;
+  max-width: 100%;
+
+  &.modify-holder {
+    padding-right: 20px;
+
+    & .cell-modify {
+      display: none;
+      cursor: pointer;
+      position: absolute;
+      right: 0;
+
+      & > svg {
+        vertical-align: middle;
+
+        & > g {
+          fill: $dark-1;
+        }
+      }
+
+      &:hover > svg > g {
+        fill: $hover-control;
+      }
+    }
+
+    &:hover .cell-modify {
+      display: inline;
+    }
+  }
+}
+
+.not-break {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  word-spacing: normal;
+  word-wrap: normal;
+}
+
+.cell-editable {
+  cursor: pointer;
+  margin-left: -5px;
+  padding-left: 5px;
+
+  &:hover {
+    background: $brand-3;
+  }
+}
+
+.cell-placeholder {
+  display: inline-block;
+  height: 16px;
+}

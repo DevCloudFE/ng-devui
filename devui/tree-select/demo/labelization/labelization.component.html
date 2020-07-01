@@ -1,0 +1,53 @@
+<section>
+  <h5 class="text-muted">Standard: Single Select</h5>
+  <div class="row">
+    <div class="col-md-5">
+      <d-tree-select
+        placeholder="Standard Input"
+        [treeData]="data1"
+        [expandTree]="true"
+        [(ngModel)]="value1"
+        (ngModelChange)="showSelected($event)"
+        style="width: 280px;"
+        [enableLabelization]="false"
+        [disabled]="true"
+      ></d-tree-select>
+    </div>
+  </div>
+  <h5 class="text-muted" style="margin-top: 20px;">
+    Standard: Multiple Select
+  </h5>
+  <div class="row">
+    <div class="col-md-5">
+      <d-tree-select
+        placeholder="Standard Input"
+        [treeData]="data2"
+        [multiple]="true"
+        [expandTree]="true"
+        [(ngModel)]="value2"
+        (ngModelChange)="showSelected($event)"
+        style="width: 280px;"
+        [enableLabelization]="false"
+        [disabled]="true"
+      ></d-tree-select>
+    </div>
+  </div>
+  <h5 class="text-muted" style="margin-top: 20px;">
+    AllowClear: Single Select (allowUnselect parameter must be true and enableLabelization must be false, which is the default value)
+  </h5>
+  <div class="row">
+    <div class="col-md-5">
+      <d-tree-select
+        placeholder="Standard Input"
+        [treeData]="data1"
+        [expandTree]="true"
+        [(ngModel)]="value1"
+        (ngModelChange)="showSelected($event)"
+        [allowClear]="true"
+        style="width: 280px;"
+        [enableLabelization]="false"
+        [disabled]="true"
+      ></d-tree-select>
+    </div>
+  </div>
+</section>

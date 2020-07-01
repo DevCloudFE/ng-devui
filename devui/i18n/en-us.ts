@@ -7,13 +7,17 @@ export default {
     btnConfirm: 'Confirm',
     loading: 'Loading...',
     checkAll: 'All',
-    btnOk: 'OK'
+    btnOk: 'OK',
+    btnCancel: 'Cancel',
+    btnClose: 'Close',
+    btnClickMe: 'click me!',
   },
   datePicker: {
     today: 'Today',
     clear: 'Clear',
     daysOfWeek: ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat'],
-    monthsOfYear: ['January',
+    monthsOfYear: [
+      'January',
       'February',
       'March',
       'April',
@@ -24,7 +28,8 @@ export default {
       'September',
       'October',
       'November',
-      'December'],
+      'December'
+    ],
     yearDisplay(year) {
       return `${year}`;
     }
@@ -33,16 +38,18 @@ export default {
   pagination: {
     totalItem: 'Total Records',
     goTo: 'Go To',
-    pageSize: 'Page Size'
+    pageSize: 'Page Size',
+    page: 'Page',
   },
   upload: {
+    warning: 'Warning',
     upload: 'Upload',
     chooseFile: '--select--',
     chooseFiles: '--select--',
     preload: 'Selected',
     uploading: 'Uploading...',
     uploaded: 'Upload successful',
-    uploadFailed: 'Upload Failed',
+    uploadFailed: 'Upload failed',
     delete: 'Delete',
     getNotAllowedFileTypeMsg(filename, scope) {
       return `Files with unsupported types: ${filename}. Supported file types: ${scope}`;
@@ -50,28 +57,32 @@ export default {
     getBeyondMaximalFileSizeMsg(filename, maximalSize) {
       return `Maximum file size (MB): ${maximalSize}. Files whose size exceeds the maximum value: ${filename}`;
     },
+    getAllFilesBeyondMaximalFileSizeMsg( maximalSize) {
+      return `Maximum file size (MB): ${maximalSize}. The selected files exceed the maximum value`;
+    },
     getExistSameNameFilesMsg(sameNames) {
       return `Duplicate files exist : "${sameNames}"`;
-    }
+    },
   },
   modal: {
     warning: 'Warning',
     error: 'Error',
+    fail: 'Fail',
     info: 'Information',
-    success: 'Success'
+    success: 'Success',
   },
   imagePreview: {
     rotate: 'Rotate',
-    zoomIn: 'Zoom in',
-    zoomOut: 'Zoom out',
-    bestScale: 'Best Position',
-    originScale: 'Original ratio',
-    pre: 'Pre',
-    next: 'Next'
+    zoomIn: 'Zoom In',
+    zoomOut: 'Zoom Out',
+    bestScale: 'Best Ratio',
+    originScale: 'Original Ratio',
+    pre: 'Previous',
+    next: 'Next',
   },
   colorPicker: {
     recentlyUsed: 'Recently Used',
     basicColors: 'Basic Colors',
-    moreColors: 'More Colors'
-  }
+    moreColors: 'More Colors',
+  },
 };

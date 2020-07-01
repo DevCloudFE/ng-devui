@@ -1,10 +1,28 @@
-<div class="demo-container" dAnchorBox [view]="{ top: 60, bottom: 0 }">
+<div class="demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 60, bottom: 0 }">
   <d-demo-nav [navItems]="navItems"></d-demo-nav>
   <div class="demo-example" [dAnchor]="'datepicker-default'">
     <div class="demo-title">基本用法</div>
     <div class="demo-text"></div>
     <d-codebox id="components-datepicker-default" [sourceData]="basicSource">
       <d-basic demo></d-basic>
+    </d-codebox>
+  </div>
+
+  <d-demo-nav [navItems]="navItems"></d-demo-nav>
+  <div class="demo-example" [dAnchor]="'datepicker-min-max'">
+    <div class="demo-title">限制最大最小日期</div>
+    <div class="demo-text"></div>
+    <d-codebox id="components-datepicker-min-max" [sourceData]="minMaxSource">
+      <d-min-max demo></d-min-max>
+    </d-codebox>
+  </div>
+
+  <d-demo-nav [navItems]="navItems"></d-demo-nav>
+  <div class="demo-example" [dAnchor]="'datepicker-append-to-body'">
+    <div class="demo-title">附着在body上</div>
+    <div class="demo-text"></div>
+    <d-codebox id="components-append-to-body" [sourceData]="appendToBodySource">
+      <d-append-to-body demo></d-append-to-body>
     </d-codebox>
   </div>
 
@@ -23,6 +41,14 @@
     <div class="demo-text"></div>
     <d-codebox id="d-datepicker-range-basic" [sourceData]="rangePickerSource">
       <d-datepicker-range-basic demo></d-datepicker-range-basic>
+    </d-codebox>
+  </div>
+
+  <div class="demo-example" [dAnchor]="'datepicker-range-format'">
+    <div class="demo-title">日期范围选择器 格式化</div>
+    <div class="demo-text"></div>
+    <d-codebox id="d-datepicker-range-format" [sourceData]="rangePickerFormat">
+      <d-datepicker-range-format demo></d-datepicker-range-format>
     </d-codebox>
   </div>
 
@@ -117,6 +143,14 @@
     <div class="demo-text"></div>
     <d-codebox id="d-two-date-picker-basic" [sourceData]="twoDatepickerBasic">
       <d-two-datepicker-basic demo></d-two-datepicker-basic>
+    </d-codebox>
+  </div>
+
+  <div class="demo-example" [dAnchor]="'two-date-picker-format'">
+    <div class="demo-title">双日期选择器 格式化</div>
+    <div class="demo-text"></div>
+    <d-codebox id="d-two-date-picker-format" [sourceData]="twoDatepickerFormat">
+      <d-two-datepicker-format demo></d-two-datepicker-format>
     </d-codebox>
   </div>
 </div>

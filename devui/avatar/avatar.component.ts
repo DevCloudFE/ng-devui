@@ -25,11 +25,11 @@ export class AvatarComponent {
   /**
    * avatar宽度
    */
-  @Input() width = 40;
+  @Input() width = 36;
   /**
    * avatar高度
    */
-  @Input() height = 40;
+  @Input() height = 36;
 
   /**
    * 是否是圆形
@@ -61,7 +61,7 @@ export class AvatarComponent {
     return this._customText;
   }
 
-  fontSize = 14;
+  fontSize = 12;
   code: number;
   nameDisplay: string;
   constructor() { }
@@ -81,7 +81,7 @@ export class AvatarComponent {
     } else {
       this.isNobody = true;
     }
-    this.fontSize = minNum / 4 + 4;
+    this.fontSize = minNum / 4 + 3;
   }
   setDisplayName(name, width) {
     if (this._customText) {

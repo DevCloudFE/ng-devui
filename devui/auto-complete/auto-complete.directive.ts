@@ -42,7 +42,7 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
   @HostBinding('attr.autocorrect') autocorrect = 'off';
   @Input() disabled: boolean;
   @Input() cssClass: string;
-  @Input() delay: number;
+  @Input() delay = 300;
   @Input() minLength: number;
   @Input() itemTemplate: TemplateRef<any>;
   @Input() noResultItemTemplate: TemplateRef<any>;
@@ -81,6 +81,7 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
   @Output() loadMore = new EventEmitter<any>();
   @Output() selectValue = new EventEmitter<any>();
   @Output() transInputFocusEmit = new EventEmitter<any>(); // input状态传给父组件函数
+  @Output() changeDropDownStatus = new EventEmitter<any>();
   KEYBOARD_EVENT_NOT_REFRESH = ['escape', 'enter', 'arrowup', 'arrowdown',
     /*ie 10 edge */ 'esc', 'up', 'down'];
   popupRef: ComponentRef<AutoCompletePopupComponent>;
@@ -105,8 +106,6 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
     private injector: Injector,
     private positionService: PositionService,
     private changeDetectorRef: ChangeDetectorRef) {
-    this.delay = this.autoCompleteConfig.autoComplete.delay;
-    this.valueChanges = this.registerInputEvent(elementRef);
     this.minLength = this.autoCompleteConfig.autoComplete.minLength;
     this.itemTemplate = this.autoCompleteConfig.autoComplete.itemTemplate;
     this.noResultItemTemplate = this.autoCompleteConfig.autoComplete.noResultItemTemplate;
@@ -115,6 +114,7 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
   }
 
   ngOnInit() {
+    this.valueChanges = this.registerInputEvent(this.elementRef);
     // 调用时机：input keyup
     this.subscription = this.valueChanges
       .subscribe(source => this.onSourceChange(source));
@@ -194,7 +194,7 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
         pop.reset();
         this.popTipsText = '最近输入';
         this.fillPopup(tempSource);
-        pop.isOpen = true;
+        this.openPopup();
         this.changeDetectorRef.markForCheck();
       });
     }
@@ -213,12 +213,24 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
       this.popTipsText = this.tipsText || '';
       this.fillPopup(source, this.value);
       if (setOpen) {
-        pop.isOpen = true;
+        this.openPopup();
       }
       this.changeDetectorRef.markForCheck();
     } else {
       this.hidePopup();
     }
+  }
+
+  public openPopup() {
+    const ele = this.elementRef && this.elementRef.nativeElement;
+    this.popupRef.instance.isOpen = true;
+    if (ele && !ele.classList.contains('devui-dropdown-origin-open')) {
+      ele.classList.add('devui-dropdown-origin-open');
+    }
+    if (ele && !ele.classList.contains('devui-dropdown-origin-bottom')) {
+      ele.classList.add('devui-dropdown-origin-bottom');
+    }
+    this.changeDropDownStatus.emit(true);
   }
 
   writeValue(obj): void {
@@ -334,9 +346,17 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
     }
   }
 
-  private hidePopup() {
+  public hidePopup() {
     if (this.popupRef) {
       this.popupRef.instance.isOpen = false;
+      const ele = this.elementRef && this.elementRef.nativeElement;
+      if (ele && ele.classList.contains('devui-dropdown-origin-open')) {
+        ele.classList.remove('devui-dropdown-origin-open');
+      }
+      if (ele && ele.classList.contains('devui-dropdown-origin-bottom')) {
+        ele.classList.remove('devui-dropdown-origin-bottom');
+      }
+      this.changeDropDownStatus.emit(false);
     }
   }
 

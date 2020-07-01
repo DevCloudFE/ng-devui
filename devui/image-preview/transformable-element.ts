@@ -63,7 +63,8 @@ export class TransformableElement {
     this.zoomSub = of($event).pipe(
       throttleTime(300),
       tap((event) => {
-        if (event.deltaY < 0) {
+        const value = -event.wheelDelta || event.deltaY || event.detail;
+        if (value < 0) {
           if (this.zoom === this.MAX_SCALE) {
             this.element.style.cursor = 'not-allowed';
             return;

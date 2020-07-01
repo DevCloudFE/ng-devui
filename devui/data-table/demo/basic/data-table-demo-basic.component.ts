@@ -1,43 +1,61 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy
-} from '@angular/core';
-import { SourceType, originSource } from '../mock-data';
+import { Component, OnInit } from '@angular/core';
+import { originSource, SourceType } from '../mock-data';
+import { TableWidthConfig } from 'ng-devui/data-table';
 
 @Component({
-    selector: 'd-datatable-demo-basic',
-    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'd-basic',
     templateUrl: './data-table-demo-basic.component.html'
 })
 export class DatatableDemoBasicComponent implements OnInit {
-  basicDataSource: Array<SourceType> = JSON.parse(JSON.stringify(originSource.slice(0, 6)));
-  dataTableOptions = {
-    columns: [
+    basicDataSource: Array<SourceType> = JSON.parse(JSON.stringify(originSource.slice(0, 6)));
+    dataTableOptions = {
+        columns: [
+            {
+                field: 'firstName',
+                header: 'First Name',
+                fieldType: 'text'
+            },
+            {
+                field: 'lastName',
+                header: 'Last Name',
+                fieldType: 'text'
+            },
+            {
+                field: 'gender',
+                header: 'Gender',
+                fieldType: 'text'
+            },
+            {
+                field: 'dob',
+                header: 'Date of birth',
+                fieldType: 'date'
+            }
+        ]
+    };
+
+    tableWidthConfig: TableWidthConfig[] = [
+        {
+            field: '#',
+            width: '50px'
+        },
         {
             field: 'firstName',
-            header: 'First Name',
-            fieldType: 'text'
+            width: '150px'
         },
         {
             field: 'lastName',
-            header: 'Last Name',
-            fieldType: 'text'
+            width: '150px'
         },
         {
             field: 'gender',
-            header: 'gender',
-            fieldType: 'text'
+            width: '150px'
         },
         {
             field: 'dob',
-            header: 'Date of birth',
-            fieldType: 'date'
+            width: '150px'
         }
-    ]
-};
+    ];
 
-
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
 }

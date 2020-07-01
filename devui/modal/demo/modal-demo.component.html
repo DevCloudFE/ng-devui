@@ -1,4 +1,4 @@
-<div class="demo-container" dAnchorBox [view]="{ top: 60, bottom: 0 }">
+<div class="demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 60, bottom: 0 }">
   <d-demo-nav [navItems]="navItems"></d-demo-nav>
   <div class="demo-example" [dAnchor]="'standard-dialog'">
     <div class="demo-title">标准对话框</div>
@@ -52,6 +52,15 @@
     </div>
     <d-codebox id="autofocus" [sourceData]="autofocusSource">
       <d-autofocus demo></d-autofocus>
+    </d-codebox>
+  </div>
+  <div class="demo-example" [dAnchor]="'template-content'">
+    <div class="demo-title">自定义弹出框内容模板</div>
+    <div class="demo-text">
+      支持传入contentTemplate属性来配置弹出框内容模板
+    </div>
+    <d-codebox id="autofocus" [sourceData]="templateSource">
+      <d-template demo></d-template>
     </d-codebox>
   </div>
 </div>

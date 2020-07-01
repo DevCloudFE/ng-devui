@@ -11,7 +11,7 @@
       (change)="onCheckbox1Change($event)"
     >
       <ng-template #mylabel let-disabled="disabled" let-label="label">
-        <span class="icon-collapse"></span>
+        <span class="icon-collapse" style="margin-top: 2px;"></span>
         <span>{{ label }}</span>
       </ng-template>
     </d-checkbox-group>
@@ -25,6 +25,34 @@
       [direction]="'row'"
       [isShowTitle]="true"
       (change)="onCheckbox2Change($event)"
+    >
+    </d-checkbox-group>
+  </div>
+
+  <div>
+    <h4>自定义选中颜色</h4>
+    <d-checkbox-group
+      [(ngModel)]="values3"
+      [color]="'RGB(255, 193, 7)'"
+      [name]="'demo3'"
+      [options]="options3"
+      [direction]="'row'"
+      [isShowTitle]="true"
+      (change)="onCheckbox3Change($event)"
+    >
+    </d-checkbox-group>
+  </div>
+
+  <div>
+    <h4>选中状态-关闭动效</h4>
+    <d-checkbox-group
+      [(ngModel)]="values4"
+      [showAnimation]="false"
+      [name]="'demo3'"
+      [options]="options4"
+      [direction]="'row'"
+      [isShowTitle]="true"
+      (change)="onCheckbox3Change($event)"
     >
     </d-checkbox-group>
   </div>

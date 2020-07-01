@@ -1,13 +1,15 @@
 // 注意需要在使用的NgModule中 import { HttpClientModule  } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IFileOptions, IUploadOptions } from 'ng-devui/upload';
+import { SingleUploadComponent } from 'ng-devui/upload';
 
 @Component({
   selector: 'd-basic',
   templateUrl: './basic.component.html'
 })
 export class BasicComponent {
+  @ViewChild('singleuploadDrag', { static: true }) singleuploadDrag: SingleUploadComponent;
   public beforeUploadFn: Function;
   additionalParameter = {
     name: 'tom',
@@ -62,5 +64,8 @@ export class BasicComponent {
   }
   fileOver(event) {
     console.log(event);
+  }
+  customUploadEvent() {
+    this.singleuploadDrag.upload();
   }
 }

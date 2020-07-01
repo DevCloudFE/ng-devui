@@ -1,10 +1,18 @@
-<div class="demo-container" dAnchorBox [view]="{ top: 60, bottom: 0 }">
+<div class="demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 60, bottom: 0 }">
   <d-demo-nav [navItems]="navItems"></d-demo-nav>
   <div class="demo-example" [dAnchor]="'basic-usage'">
     <div class="demo-title">基本用法</div>
-    <div class="demo-text"></div>
-    <d-codebox id="components-tabs-default" [sourceData]="basicSource">
+    <div class="demo-text">common时不展示图标</div>
+    <d-codebox id="components-toast-basic" [sourceData]="basicSource">
       <d-basic demo></d-basic>
+    </d-codebox>
+  </div>
+  <d-demo-nav [navItems]="navItems"></d-demo-nav>
+  <div class="demo-example" [dAnchor]="'life'">
+    <div class="demo-title">超时时间</div>
+    <div class="demo-text">当设置超时时间、没有标题时，则不展示标题和关闭按钮</div>
+    <d-codebox id="components-toast-life" [sourceData]="lifeSource">
+      <d-life demo></d-life>
     </d-codebox>
   </div>
 </div>

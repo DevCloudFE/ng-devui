@@ -23,8 +23,8 @@ export class RateComponent implements OnInit, ControlValueAccessor {
   totalLevel_array = [];
   chooseValue: number;
   width = '';
-  onChange: (value: number) => void = () => null;
-  onTouched: () => void = () => null;
+  onChange: (value: number) => void;
+  onTouched: () => void;
 
   ngOnInit(): void {
     for (let i = 0; i < this.count; i++) {

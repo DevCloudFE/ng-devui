@@ -1,5 +1,5 @@
 <div>
-  <div class="demo-container" dAnchorBox [view]="{ top: 60, bottom: 0 }">
+  <div class="demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 60, bottom: 0 }">
     <d-demo-nav [navItems]="navItems"></d-demo-nav>
     <div class="demo-example" [dAnchor]="'number-basic'">
       <div class="demo-title">基本用法</div>
@@ -44,6 +44,13 @@
       </div>
       <d-codebox id="components-input-number-reg" [sourceData]="InputNumberReg">
         <d-input-number-reg demo></d-input-number-reg>
+      </d-codebox>
+    </div>
+    <div class="demo-example" [dAnchor]="'decimal-limit-auto-focus'">
+      <div class="demo-title">限制小数和自动获取焦点</div>
+      <div class="demo-text"></div>
+      <d-codebox id="components-input-number-decimal-limit-auto-focus" [sourceData]="DecimalLimitAndAutoFocus">
+        <d-decimal-limit-auto-focus demo></d-decimal-limit-auto-focus>
       </d-codebox>
     </div>
   </div>

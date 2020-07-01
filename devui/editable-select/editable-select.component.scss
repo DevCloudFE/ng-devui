@@ -10,8 +10,8 @@
   transform: rotate(180deg);
 }
 
-.devui-select-chevron-icon svg > g > polygon {
-  fill: $dark-1;
+.devui-select-chevron-icon svg polygon {
+  fill: $dark-2;
 }
 
 input::-ms-clear {
@@ -21,9 +21,9 @@ input::-ms-clear {
 .devui-no-data-tip {
   user-select: none;
   cursor: not-allowed;
-  padding: 5px 12px;
 }
 
 .devui-form-control {
   outline: none;
+  padding-right: 22px;
 }

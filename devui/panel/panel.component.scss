@@ -4,59 +4,119 @@
   display: block;
 }
 
+::ng-deep .devui-panel {
+  d-panel-body {
+    line-height: 1.5;
+    padding: 15px;
+    background: $bg-white;
+    flex: 1;
+  }
+
+  .devui-panel-body-collapse {
+    d-panel-body {
+      border-left: 2px solid $dividing;
+    }
+  }
+
+  &.devui-panel-primary {
+    .devui-panel-body-collapse {
+      d-panel-body {
+        border-color: $hwc-status-primary-border;
+      }
+    }
+  }
+
+  &.devui-panel-info {
+    .devui-panel-body-collapse {
+      d-panel-body {
+        border-color: $hwc-status-info-border;
+      }
+    }
+  }
+
+  &.devui-panel-success {
+    .devui-panel-body-collapse {
+      d-panel-body {
+        border-color: $hwc-status-success-border;
+      }
+    }
+  }
+
+  &.devui-panel-warning {
+    .devui-panel-body-collapse {
+      d-panel-body {
+        border-color: $hwc-status-warning-border;
+      }
+    }
+  }
+
+  &.devui-panel-danger {
+    .devui-panel-body-collapse {
+      d-panel-body {
+        border-color: $hwc-status-danger-border;
+      }
+    }
+  }
+}
+
 .devui-panel {
-  line-height: 20px;
-  border-radius: 2px;
-  box-shadow: 0 1px 6px 0 rgba(#000000, 0.12), 0 1px 6px 0 rgba(#000000, 0.12);
+  line-height: 1.5;
   background-color: $bg-white;
 
   .devui-panel-heading {
-    padding: 10px 15px;
+    padding: 12px 20px;
+    color: $dark-1;
+
+    d-panel-header {
+      line-height: 1.5;
+    }
   }
 
   .devui-panel-body {
-    padding: 15px;
+    display: flex;
+    position: relative;
+    border-top: 1px solid $dividing;
+
+    &.devui-panel-body-collapse {
+      &::before {
+        content: '';
+        width: 30px;
+        height: 100%;
+      }
+    }
   }
 
   .devui-panel-footer {
     padding: 10px 15px;
     color: $dark-1;
     background-color: $gray-3;
+
+    d-panel-footer {
+      line-height: 1.5;
+    }
   }
 
   &.devui-panel-default {
-    .devui-panel-heading {
-      color: $dark-1;
-      background-color: $gray-3;
-    }
+    background-color: $global-bg;
+  }
+
+  &.devui-panel-primary {
+    background-color: $hwc-status-primary-background;
+  }
+
+  &.devui-panel-info {
+    background-color: $hwc-status-info-background;
   }
 
   &.devui-panel-success {
-    .devui-panel-heading {
-      color: $bg-white;
-      background-color: $status-green;
-    }
-  }
-
-  &.devui-panel-info,
-  &.devui-panel-primary {
-    .devui-panel-heading {
-      color: $bg-white;
-      background-color: $status-blue;
-    }
+    background-color: $hwc-status-success-background;
   }
 
   &.devui-panel-warning {
-    .devui-panel-heading {
-      color: $dark-1;
-      background-color: $status-yellow;
-    }
+    background-color: $hwc-status-warning-background;
   }
 
   &.devui-panel-danger {
-    .devui-panel-heading {
-      color: $bg-white;
-      background-color: $status-red;
-    }
+    background-color: $hwc-status-danger-background;
   }
 }

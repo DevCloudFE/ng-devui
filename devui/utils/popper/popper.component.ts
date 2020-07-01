@@ -12,6 +12,12 @@ import {
   ViewChild,
 } from '@angular/core';
 import Popper, {PopperOptions} from 'popper.js';
+import { Observable, Subject } from 'rxjs';
+
+interface ExtraSetConfig {
+  extraWidth?: number;
+  offset?: string;
+}
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -42,6 +48,7 @@ export class PopperComponent implements AfterViewInit, OnDestroy {
   }
   @Input() fluidPopper = true;
   @Input() appendTo = 'body';
+  @Input() extraConfig: ExtraSetConfig;
   protected popper: Popper = null;
   protected _isOpen: any = false;
   protected animate: boolean;
@@ -52,6 +59,7 @@ export class PopperComponent implements AfterViewInit, OnDestroy {
   };
   protected popperNode;
   protected popperParent;
+  private directionSubject = new Subject<string>();
 
   @Output() openChange = new EventEmitter<any>();
   @ViewChild('popperActivator', { static: true }) popperActivator: ElementRef;
@@ -82,7 +90,10 @@ export class PopperComponent implements AfterViewInit, OnDestroy {
     // Append to selector or original parent.
     if (!!this.appendTo) {
       if (this.fluidPopper) {
-        const popperWidth = this.popperActivator.nativeElement && this.popperActivator.nativeElement.offsetWidth;
+        let popperWidth = this.popperActivator.nativeElement && this.popperActivator.nativeElement.offsetWidth;
+        if (this.extraConfig && this.extraConfig.extraWidth) {
+          popperWidth = popperWidth + this.extraConfig.extraWidth;
+        }
         const firstEle =  this.popperContainer.nativeElement.firstElementChild;
         if (firstEle.classList.contains('devui-search-container')) {
           for (const child of this.popperContainer.nativeElement.children) {
@@ -184,6 +195,7 @@ export class PopperComponent implements AfterViewInit, OnDestroy {
       this.popperDirection = direction;
       this.setTransitionOrigin();
     }
+    this.directionSubject.next(this.popperDirection);
   }
 
   private setTransitionOrigin() {
@@ -209,7 +221,7 @@ export class PopperComponent implements AfterViewInit, OnDestroy {
         },
         offset: {
           // Set vertical offset 5px
-          offset: '0, 5px'
+          offset: this.extraConfig && this.extraConfig.offset ? this.extraConfig.offset : '0, 5px'
         }
       },
       positionFixed: !!this.appendTo
@@ -265,5 +277,9 @@ export class PopperComponent implements AfterViewInit, OnDestroy {
   ngAfterViewInit(): void {
     // Detach popper container once view initialized.
     this.detachPopperContainer();
+  }
+
+  public directionChange(): Observable<string> {
+    return this.directionSubject.asObservable();
   }
 }

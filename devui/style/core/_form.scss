@@ -7,17 +7,20 @@
 
 .devui-form-controls input[type='text'],
 .devui-form-controls input[type='password'],
-[dTextInput],
-[dTextarea] {
+[dTextInput] {
   width: 100%;
-  height: 32px;
+  height: 28px;
+}
+
+[dTextArea] {
+  width: 100%;
 }
 
 .devui-form-controls textarea,
 [dTextInput],
 [dTextarea] {
   box-sizing: border-box;
-  padding: 5px 10px;
+  padding: 4px 10px;
   color: $dark-1;
   vertical-align: middle;
   border: 1px solid $gray-1;
@@ -25,13 +28,14 @@
   outline: none;
   background-color: $bg-white;
 
-  &:not([disabled]):not(.disabled):not(.devui-disabled) {
-    &:hover {
-      border: 1px solid $brand-1;
+  &:not([disabled]):not(.disabled):not(.devui-disabled):not(.error) {
+    &:hover,
+    &:hover:focus {
+      border-color: $hwc-color-border-hover;
     }
 
     &:focus {
-      border: 1px solid $brand-2;
+      border-color: $hwc-color-border-active;
     }
   }
 
@@ -48,6 +52,11 @@
   }
 }
 
+.devui-form-controls textarea,
+[dTextarea] {
+  width: 100%;
+}
+
 // input 样式
 .devui-input-group {
   position: relative;
@@ -57,7 +66,7 @@
 
 .devui-input-group-addon {
   border: 1px solid $gray-1;
-  border-radius: 1px;
+  border-radius: 2px;
   display: table-cell;
   padding: 0 10px;
   text-align: center;
@@ -79,21 +88,22 @@
   outline: none;
   background-color: $bg-white;
   border: 1px solid $gray-1;
-  border-radius: 1px;
+  border-radius: 2px;
   padding: 5px 10px;
-  line-height: 20px;
-  font-size: 14px;
+  line-height: 1.5;
+  font-size: 12px;
   color: $dark-1;
   width: 100%;
   display: block;
+  cursor: text;
 
-  &:hover {
-    border-color: $hover-control;
+  &:hover,
+  &:hover:focus {
+    border-color: $hwc-color-border-hover;
   }
 
-  &:focus,
-  &:hover:focus {
-    border-color: $brand-2;
+  &:focus {
+    border-color: $hwc-color-border-active;
   }
 
   &[disabled],
@@ -107,6 +117,22 @@
       color: $disabled-content;
       background-color: $disabled-bg;
       cursor: not-allowed;
+    }
+  }
+
+  &::placeholder {
+    color: $gray-1;
+  }
+
+  &.devui-search-in-dropdown {
+    margin: 0;
+    border: none;
+    padding: 5px 26px 5px 10px;
+    background-color: $hwc-drop-down-search;
+    color: $dark-1;
+
+    &:hover {
+      background-color: $hwc-drop-down-search-hover;
     }
   }
 
@@ -150,11 +176,12 @@
 .devui-form-control {
   color: $dark-1;
   background-color: $bg-white;
-  padding: 5px 12px;
+  padding: 5px 10px;
   border: 1px solid $gray-1;
   display: block;
   width: 100%;
-  height: 32px;
+  height: 28px;
+  border-radius: 2px;
   outline: 0;
 
   &[disabled],
@@ -174,12 +201,148 @@
     }
   }
 
-  &:hover {
-    border-color: $hover-control;
+  &:hover,
+  &:hover:focus {
+    border-color: $hwc-color-border-hover;
   }
 
   &:focus {
-    border-color: $brand-2;
+    border-color: $hwc-color-border-active;
+  }
+}
+
+:not(.devui-dropdown-origin-wrapper):not(.multiple-label-auto-complete-disabled) {
+  > .devui-dropdown-origin {
+    position: relative;
+  }
+
+  > .devui-dropdown-origin:hover:not([disabled]):not(.disabled):not(.devui-disabled):not(:focus):not(.devui-dropdown-origin-open) {
+    border-color: $hwc-color-border-hover;
+  }
+
+  > .devui-dropdown-origin:focus:not([disabled]):not(.disabled):not(.devui-disabled) {
+    outline: none;
+    border-color: $hwc-color-border-active;
+
+    &:not(.devui-select-underlined-border):not(.devui-dropdown-no-border) {
+      box-shadow: 0 2px 5px 0 $dark-1-boxshadow;
+    }
+  }
+
+  > .devui-dropdown-origin.devui-dropdown-origin-open:not([disabled]):not(.disabled):not(.devui-disabled) {
+    outline: none;
+    border-color: $brand-1;
+    border-radius: 2px 2px 0 0;
+
+    &:not(.devui-select-underlined-border):not(.devui-dropdown-no-border) {
+      box-shadow: 0 2px 5px 0 $dark-1-boxshadow;
+    }
+  }
+
+  > .devui-dropdown-origin.devui-dropdown-origin-open:not(.devui-no-border):not([disabled]):not(.disabled):not(.devui-disabled):not(.devui-dropdown-no-border) {
+    z-index: 1052; // 为了让dividing边框覆盖cdk边框颜色
+
+    & ~ .devui-form-control-feedback {
+      z-index: 1052;
+    }
+
+    &.devui-dropdown-origin-bottom {
+      border-bottom-color: $dividing;
+      box-shadow: none;
+
+      &::after {
+        content: '';
+        width: 100%;
+        height: 1px;
+        background-color: $dividing;
+        position: absolute;
+        z-index: 1001;
+        left: 0;
+        top: 100%;
+      }
+    }
+
+    &.devui-dropdown-origin-top {
+      border-top-color: $dividing;
+
+      &:not(.devui-select-underlined-border) {
+        box-shadow: 0 2px 5px 0 $dark-1-boxshadow;
+      }
+
+      &::after {
+        content: '';
+        width: 100%;
+        height: 1px;
+        background-color: $dividing;
+        position: absolute;
+        z-index: 1001;
+        left: 0;
+        top: -1px;
+      }
+    }
+  }
+}
+
+.devui-dropdown-origin-wrapper {
+  color: $dark-1;
+  background-color: $bg-white;
+  min-height: 28px;
+  max-height: 52px;
+
+  & > .devui-input,
+  & > .devui-form-control {
+    height: 26px;
+  }
+
+  &:not(.devui-select-underlined-border) {
+    border: 1px solid $gray-1;
+    border-radius: 2px;
+  }
+
+  .devui-form-control,
+  .devui-form-control:hover,
+  .devui-form-control:focus,
+  .devui-form-control:focus:hover,
+  .devui-input-group-addon,
+  .devui-input-group-addon:hover,
+  .devui-input-group-addon:focus,
+  > .devui-dropdown-default,
+  > .devui-dropdown-default:hover,
+  > .devui-dropdown-default:active,
+  > .devui-dropdown-default:focus {
+    position: relative;
+    z-index: 1001;
+    border-color: transparent;
+  }
+
+  &[disabled],
+  &.disabled,
+  &.devui-disabled {
+    .devui-form-control,
+    .devui-form-control:hover,
+    .devui-form-control:focus,
+    .devui-form-control:focus:hover,
+    .devui-input-group-addon,
+    > .devui-dropdown-default,
+    > .devui-dropdown-default:hover,
+    > .devui-dropdown-default:active,
+    > .devui-dropdown-default:focus {
+      background-color: $disabled-bg;
+    }
+  }
+
+  &:not([disabled]):not(.disabled):not(.devui-disabled) {
+    .devui-form-control:not([disabled]):not(.disabled):not(.devui-disabled),
+    .devui-form-control:not([disabled]):not(.disabled):not(.devui-disabled):hover,
+    .devui-form-control:not([disabled]):not(.disabled):not(.devui-disabled):focus,
+    .devui-form-control:not([disabled]):not(.disabled):not(.devui-disabled):focus:hover,
+    .devui-input-group-addon,
+    > .devui-dropdown-default,
+    > .devui-dropdown-default:hover,
+    > .devui-dropdown-default:active,
+    > .devui-dropdown-default:focus {
+      background-color: $bg-white;
+    }
   }
 }
 
@@ -198,5 +361,6 @@ input::-webkit-input-placeholder {
 
 [dTextInput]:not([disabled]):not(.disabled):not(.devui-disabled).error,
 [dTextarea]:not([disabled]):not(.disabled):not(.devui-disabled).error {
-  border-color: $status-red;
+  border-color: $hwc-status-danger-border;
+  background-color: $hwc-status-danger-background;
 }

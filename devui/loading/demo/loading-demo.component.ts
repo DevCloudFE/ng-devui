@@ -29,11 +29,17 @@ export class LoadingDemoComponent {
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./subscription/subscription.component.html')},
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./subscription/subscription.component.ts')}
   ];
+  showLoadingSource: Array<DevuiSourceData> = [
+    {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./show-loading/show-loading.component.html')},
+    {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./show-loading/show-loading.component.ts')},
+    {title: 'CSS', language: 'typescript', code:  require('!!raw-loader!./show-loading/show-loading.component.css')}
+  ];
   navItems = [
     { dAnchorLink: 'basic-usage', value: '基本用法'},
     { dAnchorLink: 'custom-style', value: '自定义样式'},
     { dAnchorLink: 'multi-promise', value: '多promise'},
-    { dAnchorLink: 'use-subscription-mode', value: '使用Subscription方式'}
+    { dAnchorLink: 'use-subscription-mode', value: '使用Subscription方式'},
+    { dAnchorLink: 'show-loading', value: '使用showLoading控制'}
   ];
   constructor() {
 

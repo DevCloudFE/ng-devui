@@ -16,6 +16,10 @@ export class DateRangePickerRestrictedRangeComponent {
   dateRange2 = [null, null];
   dateRange3 = [null, null];
 
+  everyRange(range) {
+    return range.every(_ => !!_);
+  }
+
   getValue(value) {
     console.log(value);
   }

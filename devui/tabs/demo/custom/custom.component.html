@@ -1,6 +1,6 @@
 <section>
-  <d-tabs [(activeTab)]="tabActiveId">
-    <d-tab *ngFor="let item of tabItems" [disabled]="item.disabled" [id]="item.id">
+  <d-tabs [(activeTab)]="tabActiveId" [cssClass]="'custom-tabs'">
+    <d-tab *ngFor="let item of tabItems" [disabled]="item?.disabled" [id]="item.id">
       <ng-template dTabTitle>
         {{ item.title }}
       </ng-template>

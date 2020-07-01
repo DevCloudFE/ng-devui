@@ -24,7 +24,7 @@
   cursor: text;
   background-color: $bg-white;
   border: 1px solid $gray-1;
-  border-radius: 1px;
+  border-radius: 2px;
   height: 100%;
 
   &:hover {
@@ -35,6 +35,10 @@
     outline: 0;
   }
 
+  &.devui-dropdown-origin:focus-within {
+    border-color: $brand-1;
+  }
+
   .devui-tag-list {
     margin: 0;
     padding: 0;
@@ -42,28 +46,67 @@
   }
 
   .devui-tag-item {
-    margin: 2px;
-    padding: 0 5px;
+    margin: 1px;
+    padding: 0 10px;
     display: inline-block;
-    min-height: 20px;
-    line-height: 20px;
-    border-radius: 1px;
+    min-height: 18px;
+    line-height: 18px;
+    border-radius: 2px;
     color: $dark-1;
     background-color: $tag-label-bgcolor;
+    position: relative;
+    border: 1px solid $tag-label-bgcolor;
+
+    span {
+      line-height: 1.5;
+      margin-right: 25px;
+    }
 
     .remove-button {
-      margin: 0 0 0 5px;
+      margin: 0 0 0 12px;
       padding: 0;
       border: none;
-      background: 0 0;
-      cursor: pointer;
+      // background: 0 0;
       vertical-align: top;
       font-size: 16px;
-      line-height: 20px;
-      color: $dark-1;
+      // line-height: 20px;
+      // color: $dark-1;
+      border-radius: 50%;
+      background-color: $gray-1;
+      width: 12px;
+      height: 12px;
+      display: inline-block;
+      line-height: 12px;
+      text-align: center;
+      transform: translateY(-50%);
+      position: absolute;
+      top: 50%;
+      right: 10px;
+
+      svg path {
+        fill: $font-white;
+      }
 
       &:hover {
         text-decoration: none;
+      }
+    }
+  }
+
+  &:not(.devui-disabled) {
+    .devui-tag-item {
+      cursor: pointer;
+
+      span {
+        &:hover {
+          color: $hover-control;
+        }
+      }
+
+      .remove-button {
+        &:hover {
+          background-color: $hover-control;
+        }
       }
     }
   }
@@ -76,9 +119,18 @@
     .devui-tag-item {
       color: $disabled-content;
       background-color: $disabled-bg;
+      border-color: $disabled-border;
+
+      span {
+        margin-right: 0;
+      }
 
       .remove-button {
-        color: $disabled-content;
+        background-color: $disabled-border;
+
+        svg path {
+          fill: $font-white;
+        }
       }
     }
   }
@@ -88,8 +140,8 @@
     outline: 0;
     float: left;
     width: 100%;
-    height: 26px;
-    font-size: 14px;
+    height: 22px;
+    font-size: 12px;
     padding-left: 5px;
 
     &::-ms-clear {
@@ -99,14 +151,17 @@
 }
 
 .devui-tags-autocomplete {
-  margin-top: 5px;
   position: absolute;
-  padding: 5px 0;
-  z-index: 99999;
+  padding-bottom: 5px;
+  z-index: 1000;
   width: 100%;
   background-color: $bg-white;
-  border: $gray-1;
+  // border: $gray-1;
   box-shadow: 0 5px 10px $dark-1-boxshadow;
+
+  &.devui-dropdown-menu.devui-dropdown-overlay {
+    display: block;
+  }
 
   .devui-suggestion-list {
     margin: 0;
@@ -118,22 +173,25 @@
 
     .devui-suggestion-item {
       padding: 5px 10px;
-      cursor: pointer;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      font-size: 14px;
+      font-size: 12px;
       line-height: 20px;
-      color: $dark-1;
-      background-color: $bg-white;
 
-      &:hover {
-        background-color: $hover-content;
-      }
+      &:not(.devui-disabled) {
+        cursor: pointer;
+        color: $dark-1;
+        background-color: $bg-white;
 
-      &.selected {
-        color: $brand-1;
-        background-color: $brand-3;
+        &:hover {
+          background-color: $hover-content;
+        }
+
+        &.selected {
+          color: $brand-1;
+          background-color: $brand-3;
+        }
       }
     }
   }

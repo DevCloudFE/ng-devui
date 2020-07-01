@@ -10,6 +10,7 @@
         (successEvent)="onSuccess3($event)"
         (deleteUploadedFileEvent)="deleteUploadedFile3($event)"
         (errorEvent)="onError3($event)"
+        [setCustomUploadOptions]="setCustomUploadOptions"
         [uploadedFilesRef]="uploadedFilesTemp"
         [preloadFilesRef]="preloadFilesTemp"
         [withoutBtn]="true"

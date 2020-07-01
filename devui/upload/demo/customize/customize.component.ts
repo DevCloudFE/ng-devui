@@ -49,4 +49,24 @@ export class CustomizeComponent {
   deleteUploadedFile3(filePath: string) {
     console.log(`delete ${filePath}`);
   }
+  setCustomUploadOptions(file, options) {
+    let uploadOptions;
+    if (file.type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
+      uploadOptions = {
+        uri: '/upload',
+        additionalParameter: this.additionalParameter2,
+        maximumSize: 0.1,
+        checkSameName: true
+      };
+    }
+    if (file.type  === 'image/png') {
+      uploadOptions = {
+        uri: '/upload',
+        additionalParameter: this.additionalParameter2,
+        maximumSize: 0.5,
+        checkSameName: true
+      };
+    }
+    return uploadOptions;
+  }
 }

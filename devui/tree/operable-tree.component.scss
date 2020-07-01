@@ -9,37 +9,61 @@
 
 .disabled {
   color: $disabled-content;
-  cursor: not-allowed !important;
+  cursor: not-allowed;
   user-select: none;
+
+  &.devui-tree-node__leaf,
+  &.devui-tree-node__folder {
+    cursor: not-allowed;
+
+    > span > svg.svg-icon path {
+      fill: $gray-1;
+    }
+
+    > span > svg.svg-icon rect {
+      stroke: $gray-1;
+    }
+
+    > span > svg.svg-icon.svg-icon-close rect:last-child {
+      stroke: none;
+      fill: $gray-1;
+    }
+
+    .devui-leaf-icon-none {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+    }
+  }
 }
 
 ::ng-deep {
   &.devui-tree-node.devui-operable-tree-node {
     .devui-tree-node__checkbox {
-      margin-left: 0.5em;
-      margin-top: -0.2em;
-
-      .devui-checkbox-material {
-        width: 16px;
-        height: 16px;
-      }
+      margin-left: 8px;
+      margin-right: 5px;
     }
 
     .devui-tree-icons {
-      margin-left: 0.5em;
+      margin-left: 8px;
       cursor: pointer;
 
       svg {
         #add-path {
-          fill: $dark-1;
+          fill: $dark-2;
         }
 
         #edit-path {
-          fill: $dark-1;
+          fill: $dark-2;
         }
 
         #delete-path {
-          fill: $dark-1;
+          fill: $dark-2;
+        }
+
+        path,
+        rect {
+          fill: $dark-2;
         }
       }
 
@@ -56,10 +80,6 @@
           fill: $hover-control;
         }
       }
-    }
-
-    svg.svg-icon > g > g > path {
-      fill: $dark-1;
     }
   }
 }

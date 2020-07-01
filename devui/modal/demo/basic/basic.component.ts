@@ -1,24 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { DialogService } from 'ng-devui/modal';
 import { ModalTestComponent } from './modal-test.component';
-
-
 
 @Component({
   selector: 'd-basic',
   templateUrl: './basic.component.html',
 })
-export class BasicComponent implements OnInit {
-  constructor(private dialogService: DialogService) {
+export class BasicComponent {
 
-  }
+  constructor(private dialogService: DialogService) {}
 
   openstandardDialog(dialogtype?: string) {
     const results = this.dialogService.open({
       id: 'dialog-service',
       width: '346px',
       maxHeight: '600px',
-      showAnimate: false,
+      showAnimate: true,
       title: 'Start Snapshot Version',
       content: ModalTestComponent,
       backdropCloseable: true,
@@ -28,12 +25,12 @@ export class BasicComponent implements OnInit {
       },
       buttons: [
         {
-          cssClass: 'stress',
+          cssClass: 'primary',
           text: '确定',
+          disabled: true,
           handler: ($event: Event) => {
             results.modalInstance.hide();
           },
-
         },
         {
           id: 'btn-cancel',
@@ -42,18 +39,13 @@ export class BasicComponent implements OnInit {
           handler: ($event: Event) => {
             results.modalInstance.hide();
           },
-
         },
       ],
       data: {
         name: 'Tom',
         age: 10,
-        address: 'Chengdu'
+        address: 'Chengdu',
       },
     });
   }
-
-  ngOnInit() {
-  }
-
 }

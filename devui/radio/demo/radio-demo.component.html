@@ -1,10 +1,28 @@
-<div class="demo-container" dAnchorBox [view]="{ top: 60, bottom: 0 }">
+<div class="demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 60, bottom: 0 }">
   <d-demo-nav [navItems]="navItems"></d-demo-nav>
   <div class="demo-example" [dAnchor]="'basic-usage'">
     <div class="demo-title">互相独立的单选项</div>
     <div class="demo-text"></div>
     <d-codebox id="components-radio-basic" [sourceData]="basicSource">
       <d-basic demo></d-basic>
+    </d-codebox>
+  </div>
+
+  <div class="demo-example" [dAnchor]="'condition-change'">
+    <div class="demo-title">radio根据条件终止切换操作</div>
+    <div class="demo-text">根据条件判断，第二项禁止跳转</div>
+    <div class="demo-text"></div>
+    <d-codebox id="components-radio-change" [sourceData]="conditionChangeSource">
+      <d-condition-change demo></d-condition-change>
+    </d-codebox>
+  </div>
+
+  <div class="demo-example" [dAnchor]="'condition-radio-group'">
+    <div class="demo-title">radio-group根据条件终止切换操作</div>
+    <div class="demo-text">根据条件判断，第二个radio-group禁止跳转</div>
+    <div class="demo-text"></div>
+    <d-codebox id="components-radio-change" [sourceData]="conditionChangeSource">
+      <d-condition-radio-group demo></d-condition-radio-group>
     </d-codebox>
   </div>
 

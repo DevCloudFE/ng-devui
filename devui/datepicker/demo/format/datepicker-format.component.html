@@ -4,9 +4,9 @@
   </div>
   <div class="row">
     <div class="col-md-6">
-      <div class="devui-input-group">
+      <div class="devui-input-group devui-dropdown-origin-wrapper devui-dropdown-origin">
         <input
-          class="devui-input"
+          class="devui-input devui-form-control"
           [placeholder]="dateFormat"
           name="dp"
           [(ngModel)]="selectedDate3"
@@ -19,9 +19,11 @@
           placement="top-left"
           [minDate]="'2010-12-30'"
           [maxDate]="'2018-02-27'"
-          [yearNumber]="4"
           (focus)="datePicker2.toggle($event)"
         />
+        <div *ngIf="selectedDate3" class="devui-input-group-addon icon-close-wrapper" (click)="datePicker2.clearAll()">
+          <i class="icon icon-close"></i>
+        </div>
         <div class="devui-input-group-addon" (click)="datePicker2.toggle($event)">
           <i class="icon icon-calendar"></i>
         </div>

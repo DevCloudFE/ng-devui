@@ -1,4 +1,4 @@
-<div class="demo-container" dAnchorBox [view]="{ top: 60, bottom: 0 }">
+<div class="demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 60, bottom: 0 }">
   <d-demo-nav [navItems]="navItems"></d-demo-nav>
   <div class="demo-example" [dAnchor]="'basic-usage'">
     <div class="demo-title">基本用法</div>
@@ -17,6 +17,16 @@
     </div>
     <d-codebox id="components-modal-basic" [sourceData]="MultiAutoCompleteDemoArray">
       <d-multi-auto-complete-array demo></d-multi-auto-complete-array>
+    </d-codebox>
+  </div>
+
+  <div class="demo-example" [dAnchor]="'auto-complete-disabled'">
+    <div class="demo-title">使用禁用</div>
+    <div class="demo-text">
+      通过 disabled 自定义是否使用禁用
+    </div>
+    <d-codebox id="components-modal-disabled" [sourceData]="MultiAutoCompleteDemoDisabled">
+      <d-multi-auto-complete-disabled demo></d-multi-auto-complete-disabled>
     </d-codebox>
   </div>
 </div>

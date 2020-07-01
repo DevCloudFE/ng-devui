@@ -1,0 +1,51 @@
+<div
+  class="devui-gantt-scale {{ unit }}"
+  *ngFor="let data of scaleData; trackBy: trackByFn; let first = first; let last = last"
+  [ngClass]="{ today: data.today, milestone: data.milestone }"
+  dGanttMarker
+  [monthMark]="data.monthStart"
+  [weekend]="data.weekend"
+  [milestone]="data.milestone"
+  [today]="data.today"
+  [date]="data.date"
+  [unit]="unit"
+  [last]="last"
+  [ganttScaleContainerOffsetLeft]="ganttScaleContainerOffsetLeft"
+  [ganttBarContainerElement]="ganttBarContainerElement"
+>
+  <div class="devui-scale-start" [ngClass]="{ milestone: data.milestone }">
+    <ng-container *ngIf="data.milestone && unit === 'day'">
+      {{ data.milestone }}
+    </ng-container>
+    <ng-container *ngIf="!data.milestone || unit !== 'day'">
+      {{
+        data.scaleStartVisable && (first || data.monthStart)
+          ? unit === 'month'
+            ? data.yearLabel + '年'
+            : data.yearLabel + '年' + data.monthLabel + '月'
+          : ''
+      }}
+    </ng-container>
+  </div>
+  <div class="devui-scale-unit">
+    <div *ngIf="highlight && data.highlightStart" class="scale-highlight" [style.minWidth]="highlightMinWidth + 'px'">
+      <div style="float: left;">{{ highlightStartText }}</div>
+      <div style="float: right;">{{ highlightEndText }}</div>
+      <div style="clear: both;"></div>
+    </div>
+    <ng-container *ngIf="!highlight || !data.highlight">
+      <div *ngIf="unit === 'day'" class="border-left" [ngClass]="{ today: data.today }">
+        {{ data.today ? '今天' : data.dayOfMonthLabel }}
+      </div>
+      <div *ngIf="unit === 'week'" [ngClass]="{ 'border-left': first || data.weekend }">
+        {{ first || data.weekend ? data.dayOfMonthLabel : '' }}
+      </div>
+      <div *ngIf="unit === 'month'" [ngClass]="{ 'border-left': first || data.monthStart }">
+        {{ first || data.monthStart ? data.monthLabel + '月' : '' }}
+      </div>
+    </ng-container>
+  </div>
+  <div class="milestone-new {{ unit }}" title="版本里程碑" (click)="addMilestone(data)">
+    <div class="icon-add"></div>
+  </div>
+</div>

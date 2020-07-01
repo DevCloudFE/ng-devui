@@ -98,6 +98,7 @@ path {
   box-shadow: 0 0 3px 0 $dark-1-boxshadow-light;
   position: fixed;
   bottom: 0;
+  left: 0;
 
   button {
     display: inline-flex;
@@ -108,7 +109,25 @@ path {
     color: $dark-1;
   }
 
+  .devui-image-preview-index {
+    display: inline-flex;
+    width: 100px;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    d-input-number {
+      width: 65px;
+      margin-right: 4px;
+    }
+  }
+
   & > :not(:first-child) {
     margin-left: 20px;
+  }
+
+  .devui-image-preview-index,
+  .devui-next {
+    margin-left: 4px;
   }
 }

@@ -1,0 +1,79 @@
+<section>
+  <div class="row">
+    <h5>限制min</h5>
+    <div class="col-md-6">
+      <div class="devui-input-group devui-dropdown-origin-wrapper devui-dropdown-origin">
+        <input
+          class="devui-input devui-form-control"
+          placeholder="y/MM/dd"
+          (focus)="datePicker1.toggle($event)"
+          name="dp"
+          [(ngModel)]="selectedDate1"
+          autocomplete="off"
+          dDatepicker
+          #datePicker1="datepicker"
+          (selectedDateChange)="getValue($event)"
+          [minDate]="min"
+        />
+        <div *ngIf="selectedDate1" class="devui-input-group-addon icon-close-wrapper" (click)="datePicker1.clearAll()">
+          <i class="icon icon-close"></i>
+        </div>
+        <div class="devui-input-group-addon" (click)="datePicker1.toggle($event, true)">
+          <i class="icon icon-calendar"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <h5>限制max</h5>
+    <div class="col-md-6">
+      <div class="devui-input-group devui-dropdown-origin-wrapper devui-dropdown-origin">
+        <input
+          class="devui-input devui-form-control"
+          placeholder="y/MM/dd"
+          (focus)="datePicker2.toggle($event)"
+          name="dp"
+          [(ngModel)]="selectedDate2"
+          autocomplete="off"
+          dDatepicker
+          #datePicker2="datepicker"
+          (selectedDateChange)="getValue($event)"
+          [maxDate]="max"
+        />
+        <div *ngIf="selectedDate2" class="devui-input-group-addon icon-close-wrapper" (click)="datePicker2.clearAll()">
+          <i class="icon icon-close"></i>
+        </div>
+        <div class="devui-input-group-addon" (click)="datePicker2.toggle($event, true)">
+          <i class="icon icon-calendar"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <h5>min、max同时限制autoOpen</h5>
+    <div class="col-md-6">
+      <div class="devui-input-group devui-dropdown-origin-wrapper devui-dropdown-origin">
+        <input
+          class="devui-input devui-form-control"
+          placeholder="y/MM/dd"
+          (focus)="datePicker3.toggle($event)"
+          name="dp"
+          [(ngModel)]="selectedDate3"
+          autocomplete="off"
+          dDatepicker
+          #datePicker3="datepicker"
+          (selectedDateChange)="getValue($event)"
+          [minDate]="min"
+          [maxDate]="max"
+          [autoOpen]="true"
+        />
+        <div *ngIf="selectedDate3" class="devui-input-group-addon icon-close-wrapper" (click)="datePicker3.clearAll()">
+          <i class="icon icon-close"></i>
+        </div>
+        <div class="devui-input-group-addon" (click)="datePicker3.toggle($event, true)">
+          <i class="icon icon-calendar"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -5,22 +5,22 @@
 .devui-dropdown-toggle.more {
   position: relative;
   display: inline-block;
-  background: #5170ff;
-  background: var(--brand-1, #5170ff);
+  background: #5e7ce0;
+  background: var(--color-bg-primary, #5e7ce0);
   border-radius: 0 1px 1px 0;
   color: #ffffff;
   color: var(--font-white, #ffffff);
-  height: 32px;
-  width: 32px;
-  padding-top: 8px;
+  height: 28px;
+  width: 28px;
+  padding-top: 6px;
   vertical-align: top;
   text-align: center;
   cursor: pointer;
 }
 
 .devui-dropdown-toggle.more:hover {
-  background: #405dff;
-  background: var(--hover-control, #405dff);
+  background: #7693f5;
+  background: var(--color-bg-primary-hover, #7693f5);
 }
 
 .devui-dropdown-toggle.more::before {
@@ -30,7 +30,7 @@
   bottom: 4px;
   left: 0;
   width: 1px;
-  background-color: #748dff;
+  background-color: #ffeeed;
 }
 
 .btn-group {

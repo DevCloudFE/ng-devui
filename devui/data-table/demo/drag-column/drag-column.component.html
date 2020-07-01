@@ -1,4 +1,4 @@
-<d-data-table #datatable [dataSource]="basicDataSource" colDraggable="true" colDropFreezeTo="1">
+<d-data-table [fixHeader]="true" [dataSource]="basicDataSource" colDraggable="true" colDropFreezeTo="1">
   <d-column field="$index" header="#" [width]="'50px'"></d-column>
   <d-column
     *ngFor="let colOption of dataTableOptions.columns"

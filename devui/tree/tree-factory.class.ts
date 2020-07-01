@@ -244,12 +244,26 @@ export class TreeFactory {
     }
   }
 
-  checkNodesById(id: number | string, checked: boolean): Array<Object> {
+  checkNodesById(id: number | string, checked: boolean,
+    checkableRelation: 'upward' | 'downward' | 'both' | 'none' = 'both'): Array<Object> {
     this.nodes[id].data.halfChecked = false;
     this.nodes[id].data.isChecked = checked;
-
-    this.checkParentNodes(this.nodes[id]);
-    this.checkChildNodes(this.nodes[id], checked);
+    switch (checkableRelation) {
+      case 'upward':
+        this.checkParentNodes(this.nodes[id]);
+        break;
+      case 'downward':
+        this.checkChildNodes(this.nodes[id], checked);
+        break;
+      case 'both':
+        this.checkParentNodes(this.nodes[id]);
+        this.checkChildNodes(this.nodes[id], checked);
+        break;
+      case 'none':
+        break;
+      default:
+        break;
+    }
     this.maintainCheckedNodeList(this.nodes[id], checked);
     return this.getCheckedNodes();
   }

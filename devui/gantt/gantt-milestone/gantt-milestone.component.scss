@@ -1,0 +1,17 @@
+.devui-gantt-milestone {
+  position: relative;
+  height: 24px;
+  line-height: 24px;
+  display: inline-block;
+
+  & span {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  & .icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+  }
+}

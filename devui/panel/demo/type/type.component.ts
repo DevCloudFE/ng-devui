@@ -4,4 +4,4 @@ import { Component } from '@angular/core';
   selector: 'd-type',
   templateUrl: './type.component.html',
 })
-export class TypeComponent { }
+export class TypeComponent { isCollapsed = true; }

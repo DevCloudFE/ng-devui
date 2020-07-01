@@ -17,15 +17,14 @@
 :host ::ng-deep .devui-accordion-menu {
   display: block;
   background: $bg-white;
-  box-shadow: 0 1px 2px 0 $dark-1-boxshadow;
+  box-shadow: 0 2px 4px 0 $dark-1-boxshadow;
   width: 100%;
   overflow-y: auto;
+  border-radius: 2px;
+  height: 100%;
 
-  & > .devui-accordion-list > .devui-accordion-item {
-    & > .devui-accordion-menu-item > .devui-accordion-item-title,
-    & > .devui-accordion-item-title {
-      font-weight: 700;
-    }
+  & > .devui-accordion-list {
+    padding: 10px 0;
   }
 
   .devui-over-flow-ellipsis {
@@ -48,7 +47,7 @@
   padding: 0 10px 0 20px;
   font-weight: 400;
   line-height: 40px;
-  color: $dark-1;
+  color: $dark-2;
   background: transparent;
   cursor: pointer;
 
@@ -64,15 +63,16 @@
   &:not(.disabled) {
     &:hover {
       background: $hover-content;
+      color: $hover-control;
     }
 
     &.devui-router-active,
-    &.active {
-      color: $brand-1;
-      background: $brand-3;
+    &.active:not(.open) {
+      color: $hwc-color-text-active-text-link;
+      font-weight: bold;
 
       & > a {
-        color: $brand-1;
+        color: $hwc-color-text-active-text-link;
       }
     }
   }
@@ -81,7 +81,7 @@
     text-decoration: none;
     display: block;
     width: 100%;
-    color: $dark-1;
+    color: $dark-2;
 
     &:hover {
       color: inherit;
@@ -116,24 +116,34 @@
     width: 16px;
     height: 16px;
     line-height: 16px;
-    transition: transform ease-out 300ms;
+    transition: transform ease-out 0.3s;
 
     & > svg {
       width: 16px;
       height: 16px;
 
       polygon {
-        fill: $dark-1;
+        fill: $dark-2;
       }
     }
   }
 
-  &:not(.open) > .devui-accordion-open-icon {
-    transform: rotate(-90deg);
-    transform-origin: center;
+  &:not(.open) {
+    &.active {
+      svg polygon {
+        fill: $hwc-color-icon-hover-active;
+      }
+    }
+
+    & > .devui-accordion-open-icon {
+      transform: rotate(-180deg);
+      transform-origin: center;
+    }
   }
 
   &.disabled > .devui-accordion-open-icon {
+    color: $disabled-content;
+
     svg polygon {
       fill: $disabled-content;
     }
@@ -144,12 +154,87 @@
 :host ::ng-deep .devui-accordion-menu-item > .devui-accordion-item-title {
   padding-right: 30px;
 
-  &.active {
-    color: $brand-1;
+  &.active:not(.open) {
+    color: $hwc-color-text-active-text-link;
     background: transparent;
   }
 }
 
 :host ::ng-deep d-accordion-list.devui-accordion-menu-hidden {
   display: none;
+}
+
+/* 视觉融合灰线 */
+:host ::ng-deep .devui-accordion-item-title {
+  position: relative;
+
+  .devui-accordion-splitter {
+    position: absolute;
+    display: inline-block;
+    left: 10px;
+    width: 2px;
+    height: 40px;
+    background: $gray-2;
+    vertical-align: middle;
+
+    &.devui-parent-list {
+      background-color: transparent;
+    }
+  }
+
+  &.devui-router-active,
+  &.active {
+    &:not(.open) .devui-accordion-splitter::before {
+      content: '';
+      display: block;
+      width: 2px;
+      height: 18px;
+      background: $hwc-color-border-active;
+      position: absolute;
+      top: 11px;
+      left: 0;
+    }
+  }
+}
+
+:host ::ng-deep .devui-accordion-list > .devui-accordion-item:first-child {
+  & > .devui-accordion-item-title,
+  & > .devui-accordion-menu-item > .devui-accordion-item-title {
+    & > a > .devui-accordion-splitter,
+    & > .devui-accordion-splitter {
+      height: 28px;
+      top: 12px;
+
+      &::before {
+        top: 0;
+      }
+    }
+  }
+}
+
+:host ::ng-deep .devui-accordion-list > .devui-accordion-item:last-child {
+  & > .devui-accordion-item-title,
+  & > .devui-accordion-menu-item > .devui-accordion-item-title {
+    & > a > .devui-accordion-splitter,
+    & > .devui-accordion-splitter {
+      height: 28px;
+      top: 0;
+
+      &::before {
+        top: initial;
+        bottom: 0;
+      }
+    }
+  }
+}
+
+:host ::ng-deep .devui-accordion-list > .devui-accordion-item:last-child:first-child {
+  & > .devui-accordion-item-title,
+  & > .devui-accordion-menu-item > .devui-accordion-item-title {
+    & > a > .devui-accordion-splitter,
+    & > .devui-accordion-splitter {
+      height: 18px;
+      top: 11px;
+    }
+  }
 }

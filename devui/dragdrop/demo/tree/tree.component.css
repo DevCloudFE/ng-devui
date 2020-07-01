@@ -48,7 +48,7 @@
 }
 
 .card .card-header {
-  font-size: 18px;
+  font-size: 14px;
 
   /* color: #333; */
   padding: 10px;
@@ -76,7 +76,6 @@
 }
 
 .list-group > li > .name {
-  display: block;
   width: 100%;
   overflow: hidden;
   white-space: nowrap;
@@ -86,9 +85,11 @@
   border: 1px solid #5170ff;
   border: 1px solid var(--brand-1, #5170ff);
   color: #ffffff;
-  line-height: 30px;
+  line-height: 1.5;
   background-color: #5170ff;
   background-color: var(--brand-1, #5170ff);
+  display: flex;
+  align-items: center;
 }
 
 .list-group > li.dragover-item > .name {

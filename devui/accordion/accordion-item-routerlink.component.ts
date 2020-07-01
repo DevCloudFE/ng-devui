@@ -9,7 +9,7 @@ import { RouterLinkActive, Router, UrlTree, Params } from '@angular/router';
   encapsulation: ViewEncapsulation.None,
 })
 export class AccordionItemRouterlinkComponent extends AccordionBaseLinkComponent implements OnChanges {
-  @ViewChild(RouterLinkActive, { static: false }) routerLinkActiveDirective: RouterLinkActive;
+  @ViewChild(RouterLinkActive) routerLinkActiveDirective: RouterLinkActive;
   @HostBinding('class.devui-router-active')
   get routerLinkActived(): boolean {
     return !!(this.routerLinkActiveDirective && this.routerLinkActiveDirective.isActive);

@@ -2,6 +2,7 @@
   font-size: 20px;
   color: #666666;
   cursor: pointer;
+  background-color: transparent;
 }
 
 .devui-dropdown-menu {
@@ -10,4 +11,10 @@
 
 .btn-group {
   display: inline-block;
+  height: 20px;
+}
+
+.icon-setup::before {
+  height: 20px;
+  display: block;
 }

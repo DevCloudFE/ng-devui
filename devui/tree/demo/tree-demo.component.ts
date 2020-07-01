@@ -37,7 +37,12 @@ export class TreeDemoComponent {
 
   draggableSource: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./draggable/draggable.component.html')},
-    {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./draggable/draggable.component.ts')}
+    {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./draggable/draggable.component.ts')},
+    {title: 'CSS', language: 'css', code:  require('!!raw-loader!./draggable/draggable.component.scss')}
+  ];
+  checkControlSource: Array<DevuiSourceData> = [
+    {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./check-control/check-control.component.html')},
+    {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./check-control/check-control.component.ts')}
   ];
   navItems = [
     { dAnchorLink: 'basic-usage', value: '基本用法'},
@@ -46,7 +51,8 @@ export class TreeDemoComponent {
     { dAnchorLink: 'operation-button', value: '操作按钮'},
     { dAnchorLink: 'search-filtering', value: '搜索过滤'},
     { dAnchorLink: 'custom-icon', value: '自定义图标'},
-    { dAnchorLink: 'drag-and-drop-tree', value: '可拖拽树'}
+    { dAnchorLink: 'drag-and-drop-tree', value: '可拖拽树'},
+    { dAnchorLink: 'check-control-tree', value: '控制父子check关系'}
   ];
   constructor() { }
 

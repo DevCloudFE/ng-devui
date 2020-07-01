@@ -1,0 +1,41 @@
+<section>
+  <pre>
+    年：
+    date(y/MM/dd) {{ date | dDatePipe: 'y/MM/dd' }}
+    date(yy/MM/dd) {{ date | dDatePipe: 'yy/MM/dd' }}
+    date(yyyy/MM/dd) {{ date | dDatePipe: 'yyyy/MM/dd' }}
+
+    月：
+    date(y/M/dd) {{ date | dDatePipe: 'y/M/dd' }}
+    date(y/MM/dd) {{ date | dDatePipe: 'y/MM/dd' }}
+    date(MMM dd, y) {{ date | dDatePipe: 'MMM dd, y' }}
+    date(MMMM dd, y) {{ date | dDatePipe: 'MMMM dd, y' }}
+
+    年内周：
+    date(y w) {{ date | dDatePipe: 'y w' }}
+    
+    月内日：
+    date(y/M/d) {{ date1 | dDatePipe: 'y/M/d' }}
+    date(y/MM/dd) {{ date1 | dDatePipe: 'y/M/dd' }}
+
+    周内日：
+    date(y/M/d E) {{ date1 | dDatePipe: 'y/M/d E' }}
+    date(y/M/d EEEE) {{ date1 | dDatePipe: 'y/M/d EEEE' }}
+    date(y/M/d EEEEE) {{ date1 | dDatePipe: 'y/M/d EEEEE' }}
+
+    月内周：
+    date(y/M/d W) {{ date1 | dDatePipe: 'y/M/d W' }}
+
+    日内时段：
+    date(y/M/d a) {{ date1 | dDatePipe: 'y/M/d a' }}
+
+    小时、分、秒(1-12)：
+    date(y/M/d hh:mm:ss) {{ date | dDatePipe: 'y/M/d hh:mm:ss' }}
+
+    小时(0-23)：
+    date(y/M/d HH:mm:ss) {{ date | dDatePipe: 'y/M/d HH:mm:ss' }}
+
+    时区：
+    date(y/M/d HH:mm:ss zzzz) {{ date | dDatePipe: 'y/M/d HH:mm:ss zzzz' }}
+  </pre>
+</section>

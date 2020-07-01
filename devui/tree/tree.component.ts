@@ -39,11 +39,13 @@ export class TreeComponent implements OnInit, OnChanges, AfterViewInit, OnDestro
   @Input() checkboxDisabledKey = 'disabled';
   @Output() nodeSelected: EventEmitter<any> = new EventEmitter<any>();
   @Output() nodeDblClicked: EventEmitter<any> = new EventEmitter<any>();
+  @Output() nodeRightClicked: EventEmitter<any> = new EventEmitter<any>();
   @Output() nodeToggled: EventEmitter<any> = new EventEmitter<any>();
   @ViewChildren('treeNodeContent') treeNodeContent: QueryList<ElementRef>; // 获取content以取得tree宽度
   elementAsMask: any;
   i18nCommonText: I18nInterface['common'];
   i18nSubscription: Subscription;
+  private mouseRightButton = 2;
   constructor(private i18n: I18nService) {
     this.i18nCommonText = this.i18n.getI18nText().common;
     this.i18nSubscription = this.i18n.langChange().subscribe((data) => {
@@ -79,12 +81,19 @@ export class TreeComponent implements OnInit, OnChanges, AfterViewInit, OnDestro
 
   addBackGround(e) {
     e.stopPropagation();
-    TreeMaskService.addMask(e.target, this.elementAsMask, TreeMaskService.calcWidth(this.treeNodeContent, 0));
+    TreeMaskService.addMask(e.target.parentNode, this.elementAsMask, TreeMaskService.calcWidth(e.target.parentNode));
+  }
+
+  contextmenuEvent(event, node) {
+    if (event.button === this.mouseRightButton) {
+      event.preventDefault();
+      this.nodeRightClicked.emit({ node: node, event: event });
+    }
   }
 
   removeBackGround(e) {
     e.stopPropagation();
-    TreeMaskService.removeMask(e.target, this.elementAsMask);
+    TreeMaskService.removeMask(e.target.parentNode, this.elementAsMask);
   }
 
   selectNode(event, treeNode: TreeNode) {

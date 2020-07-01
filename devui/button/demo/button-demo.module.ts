@@ -10,6 +10,7 @@ import { CommonComponent } from './common/common.component';
 import { IconComponent } from './icon/icon.component';
 import { LoadingComponent } from './loading/loading.component';
 import { PrimaryComponent } from './primary/primary.component';
+import { DangerComponent } from './danger/danger.component';
 import { TextComponent } from './text/text.component';
 import { CombinationComponent } from './combination/combination.component';
 import { AutofocusComponent } from './autofocus/autofocus.component';
@@ -41,6 +42,7 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
     IconComponent,
     LoadingComponent,
     PrimaryComponent,
+    DangerComponent,
     TextComponent,
     CombinationComponent,
     AutofocusComponent,

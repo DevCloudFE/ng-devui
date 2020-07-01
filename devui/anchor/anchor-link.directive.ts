@@ -1,6 +1,7 @@
 import { Directive, forwardRef, HostListener, Inject, Input, OnDestroy, OnInit, HostBinding } from '@angular/core';
 import { AnchorDirective } from './anchor.directive';
 import { AnchorBoxDirective } from './anchor-box.directive';
+import { AnchorActiveChangeSource } from './anchor.type';
 
 @Directive({
   selector: '[dAnchorLink]',
@@ -59,12 +60,15 @@ export class AnchorLinkDirective implements OnInit, OnDestroy {
   }
 
   @HostListener ('click')
-  scrollToAnchor() {
+  scrollToAnchor(activeChangeBy?: AnchorActiveChangeSource) {
     if ( !this.anchorBlock) {
       return;
     }
     const callback = () => {
-      setTimeout(() => { this.boxElement.forceActiveAnchor(this.anchorName, 'anchor-link'); }, 120);
+      setTimeout(() => {
+        this.boxElement.forceActiveAnchor(this.anchorName, activeChangeBy || 'anchor-link');
+        this.boxElement.isScrollingToTarget = false;
+      }, 120);
     };
     ((container: Element, anchor: Element) => {
       let containerScrollTop = container.scrollTop;
@@ -78,6 +82,7 @@ export class AnchorLinkDirective implements OnInit, OnDestroy {
         undefined, undefined, callback
       );
     })( this.boxElement.scrollTarget || document.documentElement, this.anchorBlock.element);
+    this.boxElement.isScrollingToTarget = true;
   }
 
   scrollAnimate(target, currentTopValue, targetTopValue, timeGap: number = 40, scrollTime: number = 450, callback?) {

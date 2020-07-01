@@ -103,6 +103,15 @@
 }
 
 .devui-search-container {
-  padding: 10px 15px;
   max-width: 200px;
+}
+
+span.devui-breadcrumb-dropdown-origin {
+  min-width: unset;
+  display: inline-flex;
+  padding: 0;
+}
+
+d-search {
+  width: 100%;
 }

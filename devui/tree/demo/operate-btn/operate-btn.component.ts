@@ -89,4 +89,39 @@ export class OperateBtnComponent {
       this.operableTree.treeFactory.deleteNodeById(this.currentSelectedNode.id);
     }
   }
+
+  beforeAddNode(node) {
+    console.log('beforeAddNode', node);
+    return new Promise((resolve, reject) => {
+      // 第一级父节点不允许添加新节点
+      if (node.parentId) {
+        resolve({ title: '新节点' });
+      }
+    }).catch(err => console.error(err));
+  }
+
+  beforeDeleteNode = (node) => {
+    console.log('beforeDeleteNode', node);
+    return new Promise((resolve, reject) => {
+      resolve(node);
+    }).catch(err => console.error(err));
+  }
+
+  beforeEditNode = (node) => {
+    console.log('beforeEditNode', node);
+    return new Promise((resolve, reject) => {
+      resolve(node);
+    }).catch(err => console.error(err));
+  }
+
+  postAddNode = (node) => {
+    console.log('postAddNode', node);
+    return new Promise((resolve, reject) => {
+      resolve(node);
+    }).catch(err => console.error(err));
+  }
+
+  editValueChange(event) {
+    console.log('editChanged', event);
+  }
 }

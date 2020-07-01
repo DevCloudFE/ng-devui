@@ -1,5 +1,5 @@
 <section>
-  <form dForm [layout]="'horizontal'">
+  <form dForm [layout]="'vertical'">
     <d-form-item>
       <d-form-label [required]="true">计划名</d-form-label>
       <d-form-control>
@@ -7,13 +7,13 @@
       </d-form-control>
     </d-form-item>
     <d-form-item>
-      <d-form-label>计划描述</d-form-label>
+      <d-form-label [hasHelp]="true" [helpTips]="'这是计划名，计划名字，计划名'">计划描述</d-form-label>
       <d-form-control>
         <textarea dTextarea name="desc" maxlength="200"></textarea>
       </d-form-control>
     </d-form-item>
     <d-form-item>
-      <d-form-label [hasHelp]="true" [helpTips]="'这是计划名，计划名字，计划名'">单选框</d-form-label>
+      <d-form-label [required]="true">单选框</d-form-label>
       <d-form-control>
         <d-select [options]="selectOptions" name="select1" size="sm" [filterKey]="'label'" [(ngModel)]="formData.selectValue"></d-select>
       </d-form-control>

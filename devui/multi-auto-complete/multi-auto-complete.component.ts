@@ -39,20 +39,21 @@ export class MultiAutoCompleteComponent implements OnInit, OnChanges, ControlVal
   @Input() disabled = false;
   @Input() source: any[];
   @Input() latestSource: any[]; // 最近输入
-  @Input() isOpen: boolean;
-  @Input() term: string;
+  // @Input() isOpen: boolean;   // 未使用
+  // @Input() term: string; // 未使用
   @Input() itemTemplate: TemplateRef<any>;
   @Input() noResultItemTemplate: TemplateRef<any>;
-  @Input() dropdown: boolean;
-  @Input() minLength: number;
+  // @Input() dropdown: boolean; // 未使用
+  // @Input() minLength: number; // 未使用
   @Input() delay: number;
   @Input() searchFn: (term: string) => Observable<any[]>;
   @Input() formatter: (item: any) => string;
   @Input() valueParser: (item: any) => any;
   @Output() autoSubmit = new EventEmitter<any>(); // 失焦自动提交
 
-  @ViewChild('multiAutoCompleteInput', { static: false }) multiAutoCompleteInputElement: ElementRef;
-  @ViewChild(AutoCompleteDirective, { static: false }) autoCompleteDirective: AutoCompleteDirective;
+  @ViewChild('multiAutoCompleteInput') multiAutoCompleteInputElement: ElementRef;
+  @ViewChild('multiAutoCompleteWrapper') multiAutoCompleteWrapperElement: ElementRef;
+  @ViewChild(AutoCompleteDirective) autoCompleteDirective: AutoCompleteDirective;
   multiItems: any[] = [];
   inputValue: any;
   multipleLabelClassNameSuffix: string = this.overview;
@@ -222,6 +223,34 @@ export class MultiAutoCompleteComponent implements OnInit, OnChanges, ControlVal
       } else {
         this.placeholder = this.clonePlaceholder;
       }
+    }
+  }
+
+  changePopUp(open) {
+    if (open) {
+      this.openPopup();
+    } else {
+      this.hidePopup();
+    }
+  }
+
+  openPopup() {
+    const ele = this.multiAutoCompleteWrapperElement && this.multiAutoCompleteWrapperElement.nativeElement;
+    if (!ele.classList.contains('devui-dropdown-origin-open')) {
+      ele.classList.add('devui-dropdown-origin-open');
+    }
+    if (!ele.classList.contains('devui-dropdown-origin-bottom')) {
+      ele.classList.add('devui-dropdown-origin-bottom');
+    }
+  }
+
+  hidePopup() {
+    const ele = this.multiAutoCompleteWrapperElement && this.multiAutoCompleteWrapperElement.nativeElement;
+    if (ele.classList.contains('devui-dropdown-origin-open')) {
+      ele.classList.remove('devui-dropdown-origin-open');
+    }
+    if (ele.classList.contains('devui-dropdown-origin-bottom')) {
+      ele.classList.remove('devui-dropdown-origin-bottom');
     }
   }
 }

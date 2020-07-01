@@ -8,6 +8,7 @@ export interface SourceType {
   $checked?: boolean;
   $expandConfig?: any;
   children?: any;
+  chosen?: boolean;
 }
 
 export const originSource = [
@@ -398,25 +399,25 @@ export const treeDataSource = [
             dob: new Date(1989, 1, 1),
             children: [
               {
-                  title: 'table title11',
+                  title: 'table title011',
                   lastName: 'Mark',
                   status: 'done',
                   dob: new Date(1989, 1, 1),
               },
               {
-                  title: 'table title12',
+                  title: 'table title012',
                   lastName: 'Mark',
                   status: 'done',
                   dob: new Date(1991, 3, 1),
                   children: [
                     {
-                        title: 'table title21',
+                        title: 'table title0121',
                         lastName: 'Mark',
                         status: 'done',
                         dob: new Date(1989, 1, 1)
                     },
                     {
-                      title: 'table title22',
+                      title: 'table title0122',
                       lastName: 'Mark',
                       status: 'done',
                       dob: new Date(1989, 1, 1)
@@ -426,7 +427,7 @@ export const treeDataSource = [
             ]
         },
         {
-            title: 'table title102',
+            title: 'table title02',
             lastName: 'Mark',
             status: 'done',
             dob: new Date(1991, 3, 1)
@@ -440,6 +441,7 @@ export const treeDataSource = [
       dob: new Date(1989, 1, 1),
       startDate: new Date(2020, 1, 4),
       endDate: new Date(2020, 1, 8),
+      children: []
   },
   {
       title: 'table title2',

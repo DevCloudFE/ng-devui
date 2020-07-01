@@ -1,6 +1,7 @@
-import { Input, HostBinding } from '@angular/core';
+import { Input, HostBinding, Directive } from '@angular/core';
 import { AccordionBase, AccordionOptions } from './accordion.type';
 
+@Directive()
 export abstract class AccordionBaseComponent<T extends AccordionBase> {
   @Input() item: any | T;
   @Input() deepth = 0;

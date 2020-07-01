@@ -1,9 +1,13 @@
 <section>
+  <h5>基本用法</h5>
   <d-slider [(ngModel)]="inputValue" [min]="minValue" [max]="maxValue" class="slider"></d-slider>
+  <h5>双向绑定</h5>
   <div class="composite-slider">
     <d-slider [(ngModel)]="inputValue2" [min]="minValue" [max]="maxValue" class="slider" (ngModelChange)="showVal($event)"></d-slider>
     <div class="snapshot-value">
       <input [(ngModel)]="inputValue2" style="width: 40px;" class="devui-input" />
     </div>
   </div>
+  <h5>限制步长</h5>
+  <d-slider [(ngModel)]="inputValue3" [min]="minValue" [max]="maxValue" [step]="step" class="slider"></d-slider>
 </section>

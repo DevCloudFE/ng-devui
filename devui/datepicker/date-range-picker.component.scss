@@ -1,24 +1,22 @@
 @import '../style/theme/color';
 
+.devui-dropdown-overlay {
+  position: relative;
+  left: -1px;
+  border: 1px solid $brand-1;
+}
+
 .devui-date-range-wrapper {
   display: inline-flex !important;
   box-shadow: 0 4px 8px 0 $dark-1-boxshadow;
   background-color: $dropdown-overlay;
   transform: perspective(1px) translate3d(0, 0, 0);
   flex-direction: column;
+  border-radius: 2px;
 
   .devui-date-range-picker {
     display: inline-flex !important;
     user-select: none;
-
-    &::after {
-      content: '';
-      position: absolute;
-      top: 29px;
-      width: 100%;
-      height: 1px;
-      border-bottom: 1px solid $gray-1;
-    }
   }
 
   .devui-date-range-custom {
@@ -29,4 +27,21 @@
 
 .devui-date-picker:not(:last-child) {
   margin-right: 20px;
+}
+
+.devui-date-range-title {
+  height: 38px;
+
+  & > span {
+    display: inline-flex;
+    align-items: center;
+    height: 100%;
+    width: calc((100% - 20px) / 2);
+    padding-left: 10px;
+    font-weight: bold;
+
+    &:not(:last-child) {
+      margin-right: 20px;
+    }
+  }
 }

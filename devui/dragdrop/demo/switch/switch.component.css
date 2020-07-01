@@ -48,7 +48,7 @@
 }
 
 .card .card-header {
-  font-size: 18px;
+  font-size: 14px;
   padding: 10px;
 }
 
@@ -62,7 +62,9 @@
   border: 1px solid var(--brand-1, #5170ff);
   color: #ffffff;
   margin-bottom: 5px;
-  line-height: 30px;
+  line-height: 1.5;
   background-color: #5170ff;
   background-color: var(--brand-1, #5170ff);
+  display: flex;
+  align-items: center;
 }

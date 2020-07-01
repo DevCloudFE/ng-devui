@@ -9,38 +9,54 @@ import {
   OnChanges,
   SimpleChanges,
   AfterViewInit,
+  HostListener,
 } from '@angular/core';
-import {NG_VALUE_ACCESSOR, ControlValueAccessor} from '@angular/forms';
+import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
 import { RadioComponent } from './radio.component';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'd-radio-group',
   templateUrl: './radio-group.component.html',
   styleUrls: ['./radio-group.component.scss', './radio.component.scss'],
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => RadioGroupComponent),
-    multi: true
-  }]
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => RadioGroupComponent),
+      multi: true,
+    },
+  ],
 })
 export class RadioGroupComponent implements ControlValueAccessor, OnChanges, AfterViewInit {
 
+  constructor() {}
   @Input() name: string;
   @Input() values: any[];
   @Input() cssStyle: 'row' | 'column';
   @Input() disabled: boolean;
+  @Input() beforeChange: (value) => boolean | Promise<boolean> | Observable<boolean>;
   @Output() change = new EventEmitter<any>();
   @ContentChildren(RadioComponent) radios: QueryList<RadioComponent> = new QueryList<RadioComponent>();
 
   _value: any;
   onChange: (_: any) => null;
   onTouched: () => null;
+  @HostListener('click', ['$event'])
+  onRadioChange(event) {
+    if (this.disabled) {
+      event.preventDefault();
+    }
 
-  constructor() {}
+    this.canChange().then((change) => {
+      if (!change) {
+        event.preventDefault();
+      }
+    });
+  }
 
   ngAfterViewInit(): void {
-    this.radios.forEach(radio => {
+    this.radios.forEach((radio) => {
       this.registerRadio(radio);
     });
 
@@ -53,19 +69,19 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges, Aft
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes && changes.name && this.radios) {
-      this.radios.forEach(radio => {
+      this.radios.forEach((radio) => {
         radio.name = this.name;
       });
     }
 
     if (changes && changes.disabled && this.radios) {
-      this.radios.forEach(radio => {
+      this.radios.forEach((radio) => {
         radio.disabled = this.disabled;
       });
     }
 
     if (changes && this.radios) {
-      this.radios.forEach(radio => {
+      this.radios.forEach((radio) => {
         radio.disabled = this.disabled;
       });
     }
@@ -79,6 +95,25 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges, Aft
     });
   }
 
+  canChange() {
+    let changeResult = Promise.resolve(true);
+
+    if (this.beforeChange) {
+      const result: any = this.beforeChange(this.values);
+      if (typeof result !== 'undefined') {
+        if (result.then) {
+          changeResult = result;
+        } else if (result.subscribe) {
+          changeResult = (result as Observable<boolean>).toPromise();
+        } else {
+          changeResult = Promise.resolve(result);
+        }
+      }
+    }
+
+    return changeResult;
+  }
+
   handleChange($event, value) {
     $event.stopPropagation();
     this.writeValue(value);
@@ -90,7 +125,7 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges, Aft
     this._value = value;
 
     if (this.radios && this.radios.length > 0) {
-      this.radios.forEach(radio => {
+      this.radios.forEach((radio) => {
         radio.writeValue(this._value);
       });
     }
@@ -103,5 +138,4 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges, Aft
   registerOnTouched(fn: any) {
     this.onTouched = fn;
   }
-
 }

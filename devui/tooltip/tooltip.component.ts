@@ -15,7 +15,15 @@ import { PositionType } from './tooltip.types';
 })
 export class TooltipComponent implements AfterViewInit, OnDestroy {
   @Input() content: string;
-  @Input() position: PositionType = 'bottom';
+  _position: PositionType | PositionType[];
+  @Input() get position() {
+    return this._position;
+  }
+  set position(pos) {
+    this._position = pos;
+    this.currentPosition = Array.isArray(pos) ? pos[0] : pos;
+  }
+  currentPosition: PositionType;
   @Input() triggerElementRef: ElementRef;
   @Input() showAnimate = false;
   scrollElement: Element;
@@ -23,7 +31,7 @@ export class TooltipComponent implements AfterViewInit, OnDestroy {
 
   @HostBinding('style.display') display = 'block';
   @HostBinding('class') get class() {
-    return 'devui-tooltip ' + this.position;
+    return 'devui-tooltip ' + this.currentPosition;
   }
 
   @HostBinding('@directionFadeInOut') get state() {
@@ -56,7 +64,7 @@ export class TooltipComponent implements AfterViewInit, OnDestroy {
   }
 
   onShow() {
-    this.animateState = this.position ;
+    this.animateState = this.currentPosition;
   }
 
   onHide() {
@@ -81,6 +89,9 @@ export class TooltipComponent implements AfterViewInit, OnDestroy {
     this.renderer2.setStyle(this.tooltip.nativeElement, 'transform', 'translate(0, -99999px)');
     const rect = this.positionService.positionElements(this.triggerElementRef.nativeElement,
       this.tooltip.nativeElement, this.position, true);
+    setTimeout(() => { // 预防脏检查
+      this.currentPosition = rect.placementPrimary;
+    });
     this.renderer2.setStyle(this.tooltip.nativeElement, 'left', `${rect.left}px`);
     this.renderer2.setStyle(this.tooltip.nativeElement, 'top', `${rect.top}px`);
     // 移除样式

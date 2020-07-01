@@ -9,6 +9,7 @@ export class TreeMaskService {
       position: 'absolute',
       top: '0',
       right: '0',
+      height: '38px',
       'z-index': '-1' // 设置z-index防止挡住tree
     };
     maskElement.classList.add('devui-tree-mask');
@@ -18,10 +19,8 @@ export class TreeMaskService {
 
   public static addMask(hostElement: any, maskElement: any, treeWidth: number) {
     event.stopPropagation();
-    if (treeWidth) {
-      const nodeHeight = hostElement.clientHeight;
+    if (treeWidth && !hostElement.classList.contains('disabled')) {
       maskElement.style.width = treeWidth + 'px';
-      maskElement.style.height = nodeHeight + 'px';
       maskElement.style.display = 'block';
       hostElement.appendChild(maskElement);
     }

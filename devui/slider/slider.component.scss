@@ -19,6 +19,7 @@
     height: 5px;
     width: 100%;
     transition: background-color 0.2s ease-in-out;
+    border-radius: 4px;
 
     &.disabled {
       background-color: $gray-3;
@@ -44,6 +45,7 @@
     background-color: $brand-1;
     height: 5px;
     width: 0;
+    border-radius: 4px;
   }
 
   .devui-slider-handle {

@@ -1,0 +1,58 @@
+<div
+  *ngIf="startDate && endDate"
+  class="devui-gantt-bar"
+  #ganttBar
+  cdk-overlay-origin
+  #progress="cdkOverlayOrigin"
+  [style.left]="left + 'px'"
+  [style.width]="width + 'px'"
+  (mouseover)="ganttBarPopoverOnMouseHover($event)"
+  (mouseleave)="ganttBarPopoverOnMouseLeave()"
+>
+  <div class="devui-gantt-hover-layer" [style.width]="width + 24 + 'px'" [style.display]="focused ? 'block' : 'none'">
+    <div #ganttBarDarggerLeft class="devui-gantt-dragger left">
+      <div class="handle" [ngClass]="{ disabled: barResizeDisabled }"></div>
+    </div>
+    <div #ganttBarDarggerRight class="devui-gantt-dragger right">
+      <div class="handle" [ngClass]="{ disabled: barResizeDisabled }"></div>
+    </div>
+  </div>
+  <div #ganttBarMain class="devui-gantt-main" [ngClass]="{ disabled: barMoveDisabled }">
+    <div class="devui-gantt-bar-rail" #ganttBarRail></div>
+    <div class="devui-gantt-bar-track" #ganttBarTrack></div>
+  </div>
+  <div
+    class="devui-gantt-bar-progress"
+    #ganttBarProgress
+    [ngClass]="{ disabled: progressDisabled, visible: dragProgressStart }"
+    [attr.title]="progressRate + '%'"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      width="12px"
+      height="16px"
+      viewBox="0 0 12 16"
+      version="1.1"
+    >
+      <g id="gantt-bar-handle" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path
+          d="M7.06066017,1.35355339 C6.76776695,1.06066017 6.38388348,0.914213562 6,0.914213562 C5.61611652,0.914213562 5.23223305,1.06066017 4.93933983,1.35355339 L0.5,5.79289322 L0.5,13 C0.5,13.6903559 0.779822031,14.3153559 1.23223305,14.767767 C1.68464406,15.220178 2.30964406,15.5 3,15.5 L9,15.5 C9.69035594,15.5 10.3153559,15.220178 10.767767,14.767767 C11.220178,14.3153559 11.5,13.6903559 11.5,13 L11.5,5.79289322 L7.06066017,1.35355339 Z"
+          stroke="none"
+          fill="none"
+        />
+      </g>
+    </svg>
+  </div>
+  <ng-template
+    *ngIf="tipTemplateRef"
+    cdk-connected-overlay
+    [cdkConnectedOverlayOffsetX]="cdkOverlayOffsetX"
+    [cdkConnectedOverlayOrigin]="progress"
+    [cdkConnectedOverlayOpen]="(focused || tipHovered) && !mouseMoveOnBar"
+  >
+    <div class="devui-gantt-tips" (mouseover)="tipHovered = true" (mouseleave)="mouseLeaveTip()">
+      <ng-template [ngTemplateOutlet]="tipTemplateRef" [ngTemplateOutletContext]="{ganttInstance: this, data: data}"></ng-template>
+    </div>
+  </ng-template>
+</div>
