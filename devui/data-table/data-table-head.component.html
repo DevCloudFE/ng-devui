@@ -25,6 +25,8 @@
       [style.left]="showExpandToggle && columns[0]?.fixedLeft ? '16px' : '0'"
     >
       <d-checkbox
+        *ngIf="headerCheckVisible"
+        class="check-box-all"
         [name]="'checkAll'"
         [disabled]="headerCheckDisabled"
         (change)="onCheckAllChange()"
@@ -64,6 +66,7 @@
       (sortChange)="onHeadClick($event, column)"
       [filterable]="canFilterable(column)"
       [filterList]="column.filterList"
+      [column]="column"
       [filterMultiple]="column.filterMultiple"
       [filterBoxWidth]="column.filterBoxWidth"
       [filterBoxHeight]="column.filterBoxHeight"
@@ -121,6 +124,8 @@
       [style.left]="showExpandToggle && columns[0]?.fixedLeft ? '16px' : '0'"
     >
       <d-checkbox
+        *ngIf="headerCheckVisible"
+        class="check-box-all"
         [name]="'checkAll'"
         [disabled]="headerCheckDisabled"
         (change)="onCheckAllChange()"
@@ -173,6 +178,7 @@
         (sortChange)="onHeadClick($event, column)"
         [filterable]="canFilterable(column) && rowIndex === column.advancedHeader.length - 1"
         [filterList]="column.filterList"
+        [column]="column"
         [filterMultiple]="column.filterMultiple"
         [filterBoxWidth]="column.filterBoxWidth"
         [filterBoxHeight]="column.filterBoxHeight"
@@ -222,6 +228,7 @@
         (sortChange)="onHeadClick($event, column)"
         [filterable]="canFilterable(column)"
         [filterList]="column.filterList"
+        [column]="column"
         [filterMultiple]="column.filterMultiple"
         [filterBoxWidth]="column.filterBoxWidth"
         [filterBoxHeight]="column.filterBoxHeight"

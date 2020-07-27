@@ -8,9 +8,9 @@
 | :-------------------: | :----------------------: | :-----: | :-------------------------------------------------------------------------------------------------------------: | ----------------------------------------------------------------- |
 |        isOpen         |        `boolean`         |  false  |                                      可选，可以显示指定 dropdown 是否打开                                       |
 |       disabled        |        `boolean`         |  false  |                                         可选，设置为 true 禁用 dropdown                                         |
-|        trigger        |    `'click'\|'hover'`    | 'click' |                                             可选，dropdown 触发方式                                             |                                                                   | [悬浮下拉](/components/dropdown/demo#suspension-drop-down) |
+|        trigger        |    `'click'\|'hover'`    | 'click' |                                             可选，dropdown 触发方式                                             | [悬浮下拉](/components/dropdown/demo#suspension-drop-down) |
 |      closeScope       | `'all'\|'blank'\|'none'` |  'all'  | 可选，点击关闭区域，blank 点击非菜单空白才关闭, all 点击菜单内外都关闭，none 菜单内外均不关闭仅下拉按键可以关闭 | [关闭触发点设置](/components/dropdown/demo#turn-off-trigger-point-settings) |
-| closeOnMouseLeaveMenu |        `boolean`         |  false  |                                   可选，是否进入菜单后离开菜单的时候关闭菜单                                    |
+| closeOnMouseLeaveMenu |        `boolean`         |  false  |                                   可选，是否进入菜单后离开菜单的时候关闭菜单                                    |[多级下拉菜单](/components/dropdown/demo#multi-level-drop-down-menu)
 
 ### dDropDown 事件
 
@@ -101,7 +101,7 @@ appendToBodyDirections 默认的显示顺序为 ['rightDown', 'leftDown', 'right
 |     参数      |   类型    | 默认  |               说明                | 跳转 Demo                                                    |
 | :-----------: | :-------: | :---: | :-------------------------------: | ------------------------------------------------------------ |
 | toggleOnFocus | `boolean` | false | 可选，通过 Tab 聚焦的时候自动展开 | [自动展开和自动聚焦](/components/dropdown/demo#auto-expand-and-auto-focus) |
-|   autoFocus   | `boolean` | false |      可选，实例化后自动聚焦       |
+|   autoFocus   | `boolean` | false |      可选，实例化后自动聚焦       |[自动展开和自动聚焦](/components/dropdown/demo#auto-expand-and-auto-focus) |
 
 ## dDropDownMenu
 

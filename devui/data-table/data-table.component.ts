@@ -32,6 +32,10 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
    */
   @Input() headerCheckDisabled: boolean;
   /**
+   * 【可选】表头checkbox是否可见
+   */
+  @Input() headerCheckVisible = true;
+  /**
    * 【可选】表头选中的下拉项及操作
    */
   @Input() checkOptions: TableCheckOptions[];
@@ -64,9 +68,13 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
    */
   @Input() type: '' | 'striped' | 'borderless' = '';
   /**
-   * 表格是否开启鼠标hover行高亮效果
+   * 鼠标悬浮行时是否高亮
    */
-  @Input() hover = true;
+  @Input() rowHoveredHighlight = true;
+  /**
+   * 鼠标悬浮行时$hovered是否记录到rowItem中
+   */
+  @Input() generalRowHoveredData;
   /**
    * 表格自定义样式
    */
@@ -87,14 +95,6 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
    * 【可选】是否可以拖拽调整列宽
    */
   @Input() resizeable: boolean;
-   /**
-   * 【可选】列宽调整策略
-   * disable: 列宽不可调整
-   * mouseup: 列宽在鼠标松开时变化
-   * mousemove: 列宽随着鼠标移动变化
-   * @deprecated
-   */
-  @Input() columnAdjustStrategy: ColumnAdjustStrategy = ColumnAdjustStrategy.disable;
   /**
    * 【可选】用来自定义表格是否可以拖动
    */
@@ -213,12 +213,15 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
    */
   @Input() lazy: boolean;
   /**
-   * pager
-   * @deprecated
+   * 列宽配置
    */
-  @Input() pager: any;
-
   @Input() tableWidthConfig: TableWidthConfig[] = [];
+  /**
+   * 表格内部滚动事件
+   */
+  @Output() tableScrollEvent = new EventEmitter<Event>();
+
+  @Input() minHeight: string;
 
   @ContentChildren(DataTableColumnTmplComponent) columns: QueryList<DataTableColumnTmplComponent>;
   @ContentChild(TableTheadComponent) innerHeader: TableTheadComponent;
@@ -240,8 +243,6 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
   _hideColumn: string[] = [];
   _columns: DataTableColumnTmplComponent[];
   displayDataSource: any[];
-  scrollStream = new EventEmitter<Event>();
-  subscription: Subscription;
   headertoggleTableSubscription: Subscription;
   headerCheckStatusSubscription: Subscription;
   searchQueryChange = new EventEmitter<{ [key: string]: any; }>();
@@ -313,40 +314,52 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
 
   // life hook start
   ngOnInit() {
-    if (this.lazy) {
-      this.setupScrollEvent();
-    }
     this.ngZone.runOutsideAngular(() => {
       document.addEventListener(
         'click',
         this.onDocumentClick.bind(this)
       );
-      if (this.lazy) {
-        window.addEventListener(
-          'wheel',
-          this.onWinScroll.bind(this)
-        );
-      }
     });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['columnAdjustStrategy']) {
-      if (this.columnAdjustStrategy === ColumnAdjustStrategy.mousemove ||
-        this.columnAdjustStrategy === ColumnAdjustStrategy.mouseup) {
-          this.resizeable = true;
+    if (changes['checkable']) {
+      const checkColIndex = this.tableWidthConfig.findIndex((config) => {
+        return config.field === 'checkbox';
+      });
+      if (this.checkable) {
+        if (checkColIndex < 0) {
+          if (this.showExpandToggle) {
+            this.tableWidthConfig.splice(1, 0, {field: 'checkbox', width: this.BUILTIN_COL_WIDTH});
+          } else {
+            this.tableWidthConfig.unshift({field: 'checkbox', width: this.BUILTIN_COL_WIDTH});
+          }
         }
+      } else {
+        if (checkColIndex > -1) {
+          this.tableWidthConfig.splice(checkColIndex, 1);
+        }
+      }
+    }
+
+    if (changes['showExpandToggle']) {
+      const expandColIndex = this.tableWidthConfig.findIndex((config) => {
+        return config.field === 'expand';
+      });
+      if (this.showExpandToggle) {
+        if (expandColIndex < 0) {
+          this.tableWidthConfig.unshift({field: 'expand', width: this.BUILTIN_COL_WIDTH});
+        }
+      } else {
+        if (expandColIndex > -1) {
+          this.tableWidthConfig.splice(expandColIndex, 1);
+        }
+      }
     }
   }
 
   onDocumentClick($event: Event) {
     this.documentClickEvent.emit($event);
-  }
-
-  onWinScroll($event: Event) {
-    this.ngZone.run(() => {
-      this.scrollStream.emit($event);
-    });
   }
 
   ngAfterContentInit() {
@@ -384,6 +397,9 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
   private updateColumns() {
     this._columns = this.getColumns();
     this.tableWidthConfig = [];
+    if (this.showExpandToggle) {
+      this.tableWidthConfig.push({field: 'expand', width: this.BUILTIN_COL_WIDTH});
+    }
     if (this.checkable) {
       if (this.checkOptions && this.checkOptions.length > 0) {
         this.tableWidthConfig.push({field: 'checkbox', width: this.BUILTIN_COL_WIDTH_EXTRA});
@@ -392,9 +408,6 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
       }
     }
 
-    if (this.showExpandToggle) {
-      this.tableWidthConfig.push({field: 'expand', width: this.BUILTIN_COL_WIDTH});
-    }
     this._columns.forEach((col) => {
       this.tableWidthConfig.push({field: col.field, width: col.width});
     });
@@ -601,25 +614,8 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
     return this.selectedRowItem;
   }
 
-
-  loadFinish(complete: boolean) {
-    if (complete) {
-      if (this.subscription) {
-        this.subscription.unsubscribe();
-        this.subscription = null;
-      }
-      return;
-    }
-    setTimeout(_ => this.onWinScroll(null), 300);
-  }
-
-
-  onScrollChange() {
-    const winHeight = this.windowRef.innerHeight;
-    const clientRect = this.windowRef.getBoundingClientRect(this.elementRef);
-    if (clientRect && winHeight - clientRect.bottom >= 40) {
-      this.loadMore.emit(this);
-    }
+  onLoadMore(event) {
+    this.loadMore.emit(this);
   }
 
   beginResizeHandlerEvent($event) {
@@ -627,8 +623,7 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
   }
 
   onResizingFixedHandler({ field, width }) {
-    if ((this.resizeable && this.columnAdjustStrategy === ColumnAdjustStrategy.disable)
-    || this.columnAdjustStrategy === ColumnAdjustStrategy.mousemove) {
+    if (this.resizeable) {
       const index = this.tableWidthConfig.findIndex((config) => {
         return config.field === field;
       });
@@ -721,6 +716,8 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
     if (this.fixHeader) {
       (<HTMLElement>this.fixHeaderContainerRefElement.nativeElement).scrollLeft = scrollLeft;
     }
+
+    this.tableScrollEvent.emit(event);
   }
 
   private setScrollViewClass(position: string) {
@@ -739,11 +736,6 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
   }
 
   private unSubscription() {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-      this.subscription = null;
-    }
-
     if (this.headerCheckStatusSubscription) {
       this.headerCheckStatusSubscription.unsubscribe();
       this.headerCheckStatusSubscription = null;
@@ -753,21 +745,6 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
       this.headertoggleTableSubscription.unsubscribe();
       this.headertoggleTableSubscription = null;
     }
-  }
-
-  private setupScrollEvent() {
-    if (!this.subscription) {
-      this.subscription = this.registerOnScrollStream(this.scrollStream)
-        .subscribe(_ => this.onScrollChange());
-    }
-  }
-
-  private registerOnScrollStream(scrollStream: EventEmitter<any>) {
-    return scrollStream
-      .pipe(
-        debounceTime(300),
-        distinctUntilChanged()
-      );
   }
 
   setRowChildToggleStatus(rowItem: any, open: boolean) {
@@ -808,6 +785,7 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
 
   // 切换表头的子表格展开收起
   onToggleAllChildrenTable(open: boolean) {
+    this.childrenTableOpen = open;
     if (open) {
       let loadAllChildrenResult = Promise.resolve(true);
       if (this.loadAllChildrenTable) {

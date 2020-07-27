@@ -11,6 +11,10 @@
   [checkable]="true"
   [hideColumn]="hideColumn"
   [showSortIcon]="true"
+  (cellClick)="cellClick($event)"
+  (cellDBClick)="cellDBClick($event)"
+  (rowDBClick)="rowDBClick($event)"
+  (rowClick)="rowClick($event)"
 >
   <d-column field="$index" header="#" [width]="'50px'"></d-column>
   <d-column
@@ -81,7 +85,7 @@
   ></d-column>
   <d-column field="hidden" header="hidden" [width]="'100px'">hidden</d-column>
 </d-data-table>
-<ng-template #customFilterTemplate let-filterList="filterListDisplay" let-dropdown="dropdown">
+<ng-template #customFilterTemplate let-filterList="filterListDisplay" let-dropdown="dropdown" let-column="column">
   <div class="custom-filter-content">
     <div class="filter-options">
       <div *ngFor="let item of checkboxList" class="checkbox-group">

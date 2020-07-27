@@ -1,3 +1,15 @@
+<tr *ngIf="headerExpandConfig?.expand">
+  <td [attr.colspan]="tableWidthConfig.length">
+    <ng-template
+      [ngTemplateOutlet]="headerExpandConfig?.expandTemplateRef || default"
+      [ngTemplateOutletContext]="{$implicit: this, columns: columns}"
+    >
+    </ng-template>
+    <ng-template #default>
+      <div>{{ headerExpandConfig?.description }}</div>
+    </ng-template>
+  </td>
+</tr>
 <ng-container *ngIf="!virtualScroll; else scrollViewTpl">
   <ng-container *ngFor="let rowItem of dataSource; trackBy: trackByFn; let rowIndex = index">
     <ng-template [ngTemplateOutlet]="trTable" [ngTemplateOutletContext]="{ rowItem: rowItem, rowIndex: rowIndex }"> </ng-template>
@@ -14,6 +26,7 @@
   <tr
     *ngIf="!rowItem['$draggable']"
     dDataTableRow
+    [generalRowHoveredData]="generalRowHoveredData"
     [resizeable]="resizeable"
     [checkable]="checkable"
     [rowIndex]="rowIndex"
@@ -33,6 +46,7 @@
     *ngIf="rowItem['$draggable']"
     dDataTableRow
     dDraggable
+    [generalRowHoveredData]="generalRowHoveredData"
     [resizeable]="resizeable"
     [checkable]="checkable"
     [rowIndex]="rowIndex"
@@ -50,6 +64,7 @@
     [dragData]="{ data: rowItem }"
     [dragScope]="rowItem['$draggable']['scope']"
     [dragOverClass]="rowItem['$draggable']['class']"
+    [dragHandle]="rowItem['$draggable']['handler']"
   ></tr>
   <tr *ngIf="rowItem['$isDetailOpen'] && rowItem.detail">
     <td [attr.colspan]="checkable ? 2 : 1"></td>
@@ -80,7 +95,10 @@
   </tr>
   <tr class="child-table" *ngIf="rowItem['$isChildTableOpen'] && rowItem['children']">
     <td [attr.colspan]="childTdColspan">
-      <table class="devui-table {{ type ? 'table-' + type : '' }} {{ hover ? 'table-hover' : '' }}" [style.table-layout]="'fixed'">
+      <table
+        class="devui-table {{ type ? 'table-' + type : '' }} {{ rowHoveredHighlight ? 'table-hover' : '' }}"
+        [style.table-layout]="'fixed'"
+      >
         <colgroup>
           <col [style.width]="config.width" *ngFor="let config of tableWidthConfig" />
         </colgroup>
@@ -98,10 +116,11 @@
           [detailTemplateRef]="detailTemplateRef"
           [timeout]="timeout"
           [type]="type"
-          [hover]="hover"
+          [rowHoveredHighlight]="rowHoveredHighlight"
           [tableLevel]="tableLevel + 1"
           [nestedIndex]="nestedIndex + ',' + rowIndex"
           [tableWidthConfig]="tableWidthConfig"
+          [generalRowHoveredData]="generalRowHoveredData"
         ></tbody>
       </table>
     </td>

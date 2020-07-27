@@ -10,7 +10,7 @@ export class BasicComponent {
     { name: 'Visual Studio Code' },
     { name: 'WebStorm' },
     { name: 'Sublime' },
-    { name: 'Atom' }
+    { name: 'Atom(禁止拖拽)', disabled: true }
   ];
 
   list2 = [];
@@ -40,6 +40,9 @@ export class BasicComponent {
       return e.name;
     }).indexOf(item.name);
     list.splice(index, 1);
+  }
+  log(...v) {
+    console.log(...v);
   }
 }
 

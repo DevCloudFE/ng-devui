@@ -9,10 +9,13 @@ import { TreeNodesComponent } from './tree-nodes.component';
 import { TreeComponent } from './tree.component';
 import { AutofocusDirective } from './auto-focus.directive';
 import { PopoverModule } from 'ng-devui/popover';
-import {SafePipeModule} from 'ng-devui/utils';
+import { SafePipeModule,  } from 'ng-devui/utils';
+import { HighlightModule } from 'ng-devui/utils';
+
+
 
 @NgModule({
-  imports: [CommonModule, FormsModule, LoadingModule, CheckBoxModule, PopoverModule, SafePipeModule],
+  imports: [CommonModule, FormsModule, LoadingModule, CheckBoxModule, PopoverModule, SafePipeModule, HighlightModule],
   exports: [TreeComponent, TreeNodesComponent, OperableTreeComponent],
   declarations: [TreeComponent, TreeNodesComponent, OperableTreeComponent, AutofocusDirective],
   providers: [],

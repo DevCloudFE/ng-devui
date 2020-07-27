@@ -25,6 +25,14 @@
 
 .devui-no-result-template,
 .devui-is-searching-template {
+  display: block;
+  width: 100%;
+  padding: 8px 10px;
+  clear: both;
+  border: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   cursor: not-allowed;
   background-color: $disabled-bg;
   color: $disabled-content;

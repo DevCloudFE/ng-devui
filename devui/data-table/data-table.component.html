@@ -9,10 +9,7 @@
       [style.max-width]="maxWidth ? maxWidth : null"
       [style.width]="!maxWidth ? tableWidth : null"
     >
-      <table
-        class="devui-table {{ type ? 'table-' + type : '' }} {{ hover ? 'table-hover' : '' }} {{ fixHeader ? 'table-fix-header' : '' }}"
-        [style.table-layout]="'fixed'"
-      >
+      <table class="devui-table {{ type ? 'table-' + type : '' }} {{ fixHeader ? 'table-fix-header' : '' }}" [style.table-layout]="'fixed'">
         <colgroup>
           <col *ngFor="let config of tableWidthConfig" [style.width]="config.width" />
         </colgroup>
@@ -23,7 +20,10 @@
 
     <div
       cdkScrollable
-      *ngIf="!virtualScroll || dataSource.length === 0; else scrollViewTpl"
+      dLazyLoad
+      [enableLazyLoad]="lazy"
+      (loadMore)="onLoadMore($event)"
+      *ngIf="!virtualScroll; else scrollViewTpl"
       class="devui-scrollbar"
       [ngClass]="{ 'scroll-view': scrollable, 'table-wrap': !fixHeader }"
       [style.max-height]="maxHeight ? maxHeight : null"
@@ -33,8 +33,9 @@
     >
       <table
         #tableBody
-        class="devui-table {{ type ? 'table-' + type : '' }} {{ hover ? 'table-hover' : '' }}"
+        class="devui-table {{ type ? 'table-' + type : '' }} {{ rowHoveredHighlight ? 'table-hover' : '' }}"
         [style.table-layout]="'fixed'"
+        [style.height]="minHeight ? minHeight : null"
       >
         <colgroup>
           <col *ngFor="let config of tableWidthConfig" [style.width]="config.width" />
@@ -43,15 +44,14 @@
           <ng-container *ngTemplateOutlet="HeaderContent"></ng-container>
           <ng-template *ngIf="!innerHeader" [ngTemplateOutlet]="headerTpl"></ng-template>
         </ng-container>
-        <ng-template [ngTemplateOutlet]="headerExpandTpl"></ng-template>
         <tbody
           dTableBody
           dSortable
           *ngIf="innerBody"
           [dataSource]="dataSource"
           [tableWidthConfig]="tableWidthConfig"
-          [virtualScroll]="virtualScroll"
           [rowTemplete]="innerBody.rowTempleteForSelect"
+          [minHeight]="minHeight"
         ></tbody>
         <tbody
           *ngIf="!innerBody"
@@ -68,9 +68,11 @@
           [detailTemplateRef]="detailTemplateRef"
           [timeout]="timeout"
           [type]="type"
-          [hover]="hover"
+          [rowHoveredHighlight]="rowHoveredHighlight"
           [tableLevel]="tableLevel"
           [tableWidthConfig]="tableWidthConfig"
+          [headerExpandConfig]="headerExpandConfig"
+          [generalRowHoveredData]="generalRowHoveredData"
         ></tbody>
       </table>
     </div>
@@ -83,18 +85,26 @@
 
 <ng-template #scrollViewTpl>
   <cdk-virtual-scroll-viewport
+    dLazyLoad
+    [enableLazyLoad]="lazy"
+    (loadMore)="onLoadMore($event)"
     [itemSize]="virtualItemSize"
     [minBufferPx]="virtualMinBufferPx"
     [maxBufferPx]="virtualMaxBufferPx"
     class="devui-scrollbar viewport-wrapper"
     [ngClass]="{ 'scroll-view': scrollable, 'virtual-scroll-wrap': !fixHeader }"
-    [style.height]="maxHeight"
+    [style.height]="virtualItemSize * (dataSource?.length || 0) + 'px'"
     [style.max-height]="maxHeight ? maxHeight : null"
     [style.max-width]="maxWidth ? maxWidth : null"
     [style.width]="!maxWidth ? tableWidth : null"
     (scroll)="onBodyScroll($event)"
   >
-    <table #tableBody class="devui-table {{ type ? 'table-' + type : '' }} {{ hover ? 'table-hover' : '' }}" [style.table-layout]="'fixed'">
+    <table
+      #tableBody
+      class="devui-table {{ type ? 'table-' + type : '' }} {{ rowHoveredHighlight ? 'table-hover' : '' }}"
+      [style.table-layout]="'fixed'"
+      [style.height]="minHeight ? minHeight : null"
+    >
       <colgroup>
         <col *ngFor="let config of tableWidthConfig" [style.width]="config.width" />
       </colgroup>
@@ -102,7 +112,6 @@
         <ng-container *ngTemplateOutlet="HeaderContent"></ng-container>
         <ng-template *ngIf="!innerHeader" [ngTemplateOutlet]="headerTpl"></ng-template>
       </ng-container>
-      <ng-template [ngTemplateOutlet]="headerExpandTpl"></ng-template>
       <tbody
         dTableBody
         dSortable
@@ -111,6 +120,7 @@
         [tableWidthConfig]="tableWidthConfig"
         [virtualScroll]="virtualScroll"
         [rowTemplete]="innerBody.rowTempleteForSelect"
+        [minHeight]="minHeight"
       ></tbody>
       <tbody
         *ngIf="!innerBody"
@@ -127,10 +137,12 @@
         [detailTemplateRef]="detailTemplateRef"
         [timeout]="timeout"
         [type]="type"
-        [hover]="hover"
+        [rowHoveredHighlight]="rowHoveredHighlight"
         [tableLevel]="tableLevel"
         [virtualScroll]="virtualScroll"
         [tableWidthConfig]="tableWidthConfig"
+        [headerExpandConfig]="headerExpandConfig"
+        [generalRowHoveredData]="generalRowHoveredData"
       ></tbody>
     </table>
   </cdk-virtual-scroll-viewport>
@@ -148,6 +160,7 @@
     [checkable]="checkable"
     [checkOptions]="checkOptions"
     [headerCheckDisabled]="headerCheckDisabled"
+    [headerCheckVisible]="headerCheckVisible"
     [showExpandToggle]="showExpandToggle"
     [showSortIcon]="showSortIcon"
     (resizeHandlerEvent)="onResizeHandler($event)"
@@ -163,22 +176,5 @@
     [colDraggable]="colDraggable"
     [childrenTableOpen]="childrenTableOpen"
   ></thead>
-</ng-template>
-
-<ng-template #headerExpandTpl>
-  <tbody *ngIf="headerExpandConfig?.expand">
-    <tr>
-      <td [attr.colspan]="tableWidthConfig.length">
-        <ng-template
-          [ngTemplateOutlet]="headerExpandConfig?.expandTemplateRef || default"
-          [ngTemplateOutletContext]="{$implicit: this, columns: columns}"
-        >
-        </ng-template>
-        <ng-template #default>
-          <div>{{ headerExpandConfig?.description }}</div>
-        </ng-template>
-      </td>
-    </tr>
-  </tbody>
 </ng-template>
 <ng-template #HeaderContent><ng-content select="thead"></ng-content></ng-template>

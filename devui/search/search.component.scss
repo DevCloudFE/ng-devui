@@ -30,7 +30,6 @@ svg.svg-icon-search path {
     height: 28px;
     padding: 5px 10px;
     font-size: 12px;
-    line-height: 1.5;
     padding-right: 30px;
     text-overflow: ellipsis;
 
@@ -47,7 +46,6 @@ svg.svg-icon-search path {
       height: 26px;
       padding: 5px 10px;
       font-size: 12px;
-      line-height: 1.5;
       padding-right: 24px;
 
       &.devui-clear-exit {
@@ -59,7 +57,7 @@ svg.svg-icon-search path {
       height: 46px;
       padding: 10px 16px;
       font-size: 16px;
-      line-height: 1.5;
+      line-height: 24px;
       padding-right: 36px;
 
       &.devui-clear-exit {

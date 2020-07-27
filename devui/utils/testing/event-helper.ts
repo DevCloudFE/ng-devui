@@ -10,6 +10,7 @@ enum keyBoardLocation {
 interface KeyBoardParams {
   key?: string;
   code?: string;
+  charCode?: number;
   location?: keyBoardLocation;
   ctrlKey?: boolean;
   altKey?: boolean;
@@ -33,6 +34,7 @@ type dragEventType = 'drag' | 'dragend' | 'dragenter' | 'dragexit' | 'dragleave'
 export function createKeyBoardEvent(eventType: keyBoardEventType, params: KeyBoardParams) {
   params.key = params.key || '';
   params.code = params.code || '';
+  params.charCode = params.charCode || 0;
   params.ctrlKey = params.ctrlKey === undefined ? true : params.ctrlKey;
   params.altKey = params.altKey === undefined ? true : params.altKey;
   params.shiftKey = params.shiftKey === undefined ? true : params.shiftKey;
@@ -42,11 +44,12 @@ export function createKeyBoardEvent(eventType: keyBoardEventType, params: KeyBoa
 
   const event = new KeyboardEvent(eventType, {
     key: params.key,
-    code: params.code,
+    code: params.code
   });
 
   Object.defineProperties(event, {
-      keyCode: {value: params.keyCode}
+      keyCode: {value: params.keyCode},
+      charCode: {value: params.charCode}
   });
 
   return event;

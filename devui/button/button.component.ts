@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component, Directive, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 
 export type IButtonType = 'button' | 'submit' | 'reset';
-export type IButtonStyle = 'common' | 'primary' | 'text' | 'text-dark';
+export type IButtonStyle = 'common' | 'primary' | 'text' | 'text-dark' | 'danger';
+export type IButtonPosition = 'left' | 'right' | 'default';
 export type IButtonSize = 'lg' | 'md' | 'sm' | 'xs';
 
 @Component({
@@ -15,6 +16,7 @@ export class ButtonComponent {
   @Input() type: IButtonType = 'button';
   @Input() bsStyle: IButtonStyle = 'primary';
   @Input() bsSize: IButtonSize = 'md';
+  @Input() bsPosition: IButtonPosition = 'default';
   @Input() bordered: boolean;
   @Input() icon: string;
   @Input() disabled = false;

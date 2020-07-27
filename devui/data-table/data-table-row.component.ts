@@ -24,6 +24,7 @@ export class DataTableRowComponent implements OnInit {
   @Input() timeout: number;
   @Input() tableLevel: number;
   @Input() nestedIndex: string;
+  @Input() generalRowHoveredData: boolean;
   @Output() detailChange = new EventEmitter<any>();
 
   forceUpdateEvent = new EventEmitter<ForceUpdateReason>();
@@ -45,14 +46,16 @@ export class DataTableRowComponent implements OnInit {
         'dblclick',
         this.onRowDBClick.bind(this)
       );
-      this.rowRef.nativeElement.addEventListener(
-        'mouseenter',
-        this.onRowMouseEnter.bind(this)
-      );
-      this.rowRef.nativeElement.addEventListener(
-        'mouseleave',
-        this.onRowMouseLeave.bind(this)
-      );
+      if (this.generalRowHoveredData) {
+        this.rowRef.nativeElement.addEventListener(
+          'mouseenter',
+          this.onRowMouseEnter.bind(this)
+        );
+        this.rowRef.nativeElement.addEventListener(
+          'mouseleave',
+          this.onRowMouseLeave.bind(this)
+        );
+      }
     });
   }
 

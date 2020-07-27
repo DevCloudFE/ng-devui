@@ -2,21 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'd-transfer-demo-base',
-  template: `
-    <section>
-    <div style="width:700px; ">
-      <d-transfer [disabled]="disabled"
-      (transferToTarget)="transferToTarget($event)"
-      (transferToSource)="transferToSource($event)"
-      [sourceOption]="sourceOption"
-      [targetOption]="targetOption"
-      [titles]="{source:'源标题', target:'目标标题'}">
-      </d-transfer>
-      <br />
-      禁用：<d-toggle (change)="onChange($event)"></d-toggle>
-    </div>
-    </section>
-  `
+  templateUrl: './transfer-demo-base.component.html'
 })
 export class TransferDemoBaseComponent {
   disabled = false;

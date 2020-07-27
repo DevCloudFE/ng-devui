@@ -1,14 +1,16 @@
 import { Component } from '@angular/core';
 @Component({
-    selector: 'd-demo-checkbox-basic',
-    templateUrl: './checkbox-basic.component.html',
-    styleUrls: ['./checkbox-basic.component.css']
+  selector: 'd-demo-checkbox-basic',
+  templateUrl: './checkbox-basic.component.html',
+  styleUrls: ['./checkbox-basic.component.css'],
 })
 export class CheckboxBasicComponent {
   public checked = false;
   halfCheck = true;
+  halfCheck2 = true;
   allCheck = false;
-  number = 1 ;
+  allCheck2 = false;
+  number = 1;
 
   onCheckbox1Change(value) {
     console.log('checkbox1 checked:', value);
@@ -20,6 +22,11 @@ export class CheckboxBasicComponent {
 
   onHalfCheckboxChange(value) {
     this.halfCheck = !this.allCheck;
+    console.log('halfCheckbox checked:', value);
+  }
+
+  onHalfCheckboxChange2(value) {
+    this.halfCheck2 = !this.allCheck2;
     console.log('halfCheckbox checked:', value);
   }
 }

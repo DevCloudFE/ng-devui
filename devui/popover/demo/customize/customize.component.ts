@@ -7,7 +7,9 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class CustomizeTmpComponent implements OnInit {
   content = this.domSanitizer.bypassSecurityTrustHtml(
-    '<p>自定义提示，带链接</p><a href="https://devui.design" target="_blank" style="text-decoration:none;color:#7693F5">学习更多</a>'
+    `<p>自定义提示，带链接</p>
+     <p><a class="devui-link" href="https://devui.design" target="_blank">学习更多</a></p>
+     <p><a class="devui-link-light" href="https://devui.design" target="_blank">学习更多</a></p>`
     );
   constructor(private domSanitizer: DomSanitizer) { }
 

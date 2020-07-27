@@ -1,6 +1,6 @@
 <section>
   <div class="section-block">
-    <d-sticky [view]="stickyView" [container]="demoDocViewerMain" [zIndex]="1000">
+    <d-sticky [view]="stickyView" [container]="demoDocViewerMain" [zIndex]="1000" (statusChange)="log($event)">
       <div class="tip-content">
         全局文本，需要更改容器为滚动条所在容器。出现后，可以一直贴着屏幕顶部。
         <d-button bsStyle="stress" circled="true">全局按钮</d-button>

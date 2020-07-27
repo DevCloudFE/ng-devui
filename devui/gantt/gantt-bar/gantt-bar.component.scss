@@ -22,7 +22,7 @@
 
   .devui-gantt-bar-rail {
     position: absolute;
-    background: #e8f0fd;
+    background: $status-initial;
     box-shadow: 0 1px 2px 0 rgba(81, 112, 255, 0.19);
     height: 20px;
     margin-top: 2px;
@@ -118,8 +118,7 @@
   min-height: 100px;
   background: $bg-white;
   box-shadow: 0 12px 24px 0 rgba(81, 112, 255, 0.1);
-  border-radius: 5px;
-  border-radius: 5px;
+  border-radius: 2px;
   padding: 15px;
   margin-top: 10px;
 }

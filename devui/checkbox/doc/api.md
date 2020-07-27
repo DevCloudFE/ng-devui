@@ -6,13 +6,14 @@
 | :-----------: | :-----------: | :---: | :----------------------------------: | ------------------------------------------------ |
 |     name      |   `string`    |  --   | 可选，表单域名，input 原生 name 属性 | [基本用法](/components/checkbox/demo#checkbox-basic) |
 |     label     |   `string`    |  --   |            可选，显示标签            | [基本用法](/components/checkbox/demo#checkbox-basic) |
-|  isShowTitle  |   `boolean`   | true  |      可选，是否显示 title 提示       | [基本用法](/components/checkbox/demo#checkbox-basic) |
+|  isShowTitle  |   `boolean`   | true  | 可选，是否显示 title 提示，默认显示参数`label`的值 | [基本用法](/components/checkbox/demo#checkbox-basic) |
+|     title     |   `string`    |  --   |    可选，显示自定义title提示内容      | [基本用法](/components/checkbox/demo#checkbox-basic) |
 |   disabled    |   `boolean`   | false |            可选，是否禁用            | [基本用法](/components/checkbox/demo#checkbox-basic) |
 | labelTemplate | `TemplateRef` |  --   |        可选，标签的自定义模板        | [基本用法](/components/checkbox/demo#checkbox-basic) |
 |  halfchecked  |   `boolean`   | false |            可选，半选状态            | [基本用法](/components/checkbox/demo#checkbox-basic) |
 |     color     |   `string`    |  --   |           可选，复选框颜色           | [基本用法](/components/checkbox/demo#checkbox-basic) |
 | showAnimation |   `boolean`   | true  |        可选，控制是否显示动画        | [基本用法](/components/checkbox/demo#checkbox-basic) |
-| beforeChange | `Function\|Promise\|Observable` | -- | 可选，checkbox 切换前的回调函数，返回 boolean 类型，返回 false 可以阻止 radio 切换 | [回调切换](/components/checkbox/demo#condition-change |
+| beforeChange | `Function\|Promise\|Observable` | -- | 可选，checkbox 切换前的回调函数，返回 boolean 类型，返回 false 可以阻止 radio 切换 | [回调切换](/components/checkbox/demo#condition-change) |
 
 ### d-checkbox 事件
 
@@ -33,7 +34,7 @@
 |  halfchecked  |     `boolean`     |  false   |                   可选，半选状态                   |                                                          |
 |     color     |     `string`      |    --    |                  可选，复选框颜色                  | [使用CheckBoxGroup](/components/checkbox/demo#tabs-group) |
 | showAnimation |     `boolean`     |   true   |               可选，控制是否显示动画               | [使用CheckBoxGroup](/components/checkbox/demo#tabs-group) |
-| beforeChange  | `Function\|Promise\|Observable` | -- | 可选，checkbox 切换前的回调函数，返回 boolean 类型，返回 false 可以阻止 checkbox-group 切换 | [回调切换](/components/checkbox/demo#condition-change |
+| beforeChange  | `Function\|Promise\|Observable` | -- | 可选，checkbox 切换前的回调函数，返回 boolean 类型，返回 false 可以阻止 checkbox-group 切换 | [回调切换](/components/checkbox/demo#condition-change) |
 
 ### d-checkbox-group 事件
 

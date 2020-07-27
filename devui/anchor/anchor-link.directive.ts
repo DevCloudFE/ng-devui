@@ -72,13 +72,17 @@ export class AnchorLinkDirective implements OnInit, OnDestroy {
     };
     ((container: Element, anchor: Element) => {
       let containerScrollTop = container.scrollTop;
+      let containerOffsetTop = container.getBoundingClientRect().top;
       if (container === document.documentElement) {
-        containerScrollTop += document.body.scrollTop;
+        containerScrollTop += document.body.scrollTop; // scrollTop兼容性问题
+        containerOffsetTop = 0; // offsettop抵消
       }
       this.scrollAnimate(
         container,
         containerScrollTop,
-        (containerScrollTop + anchor.getBoundingClientRect().top - (this.boxElement.view && this.boxElement.view.top || 0)),
+        (containerScrollTop + anchor.getBoundingClientRect().top
+        - containerOffsetTop
+        - (this.boxElement.view && this.boxElement.view.top || 0)),
         undefined, undefined, callback
       );
     })( this.boxElement.scrollTarget || document.documentElement, this.anchorBlock.element);

@@ -1,0 +1,68 @@
+<section>
+  <div style="width: 700px;">
+    <d-transfer
+      [customSourceCheckedLen]="sourceCheckedLen"
+      [customTargetCheckedLen]="targetCheckedLen"
+      (transferToTarget)="transferToTarget()"
+      (transferToSource)="transferToSource()"
+      [titles]="{ source: '源标题', target: '目标标题' }"
+    >
+      <ng-template #sourceTemplate>
+        <div class="title">
+          自定义头部
+        </div>
+        <div class="line"></div>
+        <div class="content" style="height: 320px; overflow: auto;">
+          <d-data-table
+            #sourceTable
+            [dataSource]="basicDataSource"
+            [checkable]="true"
+            (rowCheckChange)="sourceRowCheckChange($event)"
+            (checkAllChange)="sourceCheckAllChange()"
+            (pageIndexChange)="sourceChangePageContent($event)"
+          >
+            <d-column [order]="1" field="id" header="ID" [width]="'50px'"></d-column>
+            <d-column [order]="2" field="firstName" header="姓名" [width]="'80px'"></d-column>
+            <d-column
+              [order]="3"
+              field="dob"
+              header="生日"
+              [fieldType]="'date'"
+              [extraOptions]="{ dateFormat: 'MM/DD/YYYY' }"
+              [width]="'100px'"
+            ></d-column>
+            <d-column [order]="4" field="gender" header="性别" [width]="'100px'"></d-column>
+          </d-data-table>
+        </div>
+      </ng-template>
+      <ng-template #targetTemplate>
+        <div class="title">
+          自定义头部
+        </div>
+        <div class="line"></div>
+        <div class="content" style="height: 320px; overflow: auto;">
+          <d-data-table
+            #targetTable
+            [dataSource]="basicTargetSource"
+            [checkable]="true"
+            (pageIndexChange)="targetChangePageContent($event)"
+            (rowCheckChange)="targetRowCheckChange($event)"
+            (checkAllChange)="targetCheckAllChange()"
+          >
+            <d-column [order]="1" field="id" header="ID" [width]="'50px'"></d-column>
+            <d-column [order]="2" field="firstName" header="姓名" [width]="'80px'"></d-column>
+            <d-column
+              [order]="3"
+              field="dob"
+              header="生日"
+              [fieldType]="'date'"
+              [extraOptions]="{ dateFormat: 'MM/DD/YYYY' }"
+              [width]="'100px'"
+            ></d-column>
+            <d-column [order]="4" field="gender" header="性别" [width]="'100px'"></d-column>
+          </d-data-table>
+        </div>
+      </ng-template>
+    </d-transfer>
+  </div>
+</section>

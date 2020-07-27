@@ -1,0 +1,60 @@
+<section class="my-section" #scrollTarget>
+  <div class="section-block">
+    <d-sticky [view]="stickyView" [container]="scrollTarget" [zIndex]="1000" [scrollTarget]="scrollTarget">
+      <div class="tip-content">
+        全局文本，需要更改容器为滚动条所在容器。出现后，可以一直贴着屏幕顶部。
+        <d-button bsStyle="stress" circled="true">全局按钮</d-button>
+      </div>
+    </d-sticky>
+  </div>
+  <div class="main-content">
+    <div class="section-block">
+      <h3>基本信息</h3>
+      这里显示基本信息。
+      <div class="tips">
+        <d-sticky [view]="stickyView" [scrollTarget]="scrollTarget">
+          <div class="tip-content">
+            <h4>小贴士</h4>
+            滚动页面的时候，sticky会随着滚动。
+          </div>
+        </d-sticky>
+      </div>
+    </div>
+    <div class="section-block">
+      <h3>需求列表</h3>
+      这里显示需求列表。
+      <div class="tips">
+        <d-sticky [view]="stickyView" [scrollTarget]="scrollTarget">
+          <div class="tip-content">
+            <h4>小贴士</h4>
+            段落滚动到的时候，sticky会跟着被托走。
+          </div>
+        </d-sticky>
+      </div>
+    </div>
+    <div class="section-block">
+      <h3>用例列表</h3>
+      这里显示用例列表。
+      <div class="tips">
+        <d-sticky [view]="stickyView" [scrollTarget]="scrollTarget">
+          <div class="tip-content">
+            <h4>小贴士</h4>
+            view可以调整视窗的顶部和底部，比如顶部被固定导航块覆盖时候，应将top的值置为导航的高度。
+          </div>
+        </d-sticky>
+      </div>
+    </div>
+    <div class="section-block">
+      <h3>质量评估</h3>
+      这里显示质量评估。
+      <div class="tips">
+        <d-sticky [view]="stickyView">
+          <div class="tip-content">
+            <h4>小贴士</h4>
+            container可以切换判断滚动状态的容器。
+          </div>
+        </d-sticky>
+      </div>
+    </div>
+  </div>
+</section>

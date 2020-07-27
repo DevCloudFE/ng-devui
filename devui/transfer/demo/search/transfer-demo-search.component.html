@@ -1,0 +1,8 @@
+<section>
+  <div style="width: 700px;">
+    <d-transfer [disabled]="disabled" [sourceOption]="sourceOption" [isSearch]="true" [titles]="{ source: '源标题', target: '目标标题' }">
+    </d-transfer>
+  </div>
+  <br />
+  禁用：<d-toggle (change)="onChange($event)"></d-toggle>
+</section>

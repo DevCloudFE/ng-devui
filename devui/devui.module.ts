@@ -3,6 +3,7 @@ import { AccordionModule } from 'ng-devui/accordion';
 import { AlertModule } from 'ng-devui/alert';
 import { AnchorModule } from 'ng-devui/anchor';
 import { ButtonModule } from 'ng-devui/button';
+import { CarouselModule } from 'ng-devui/carousel';
 import { CheckBoxModule } from 'ng-devui/checkbox';
 import { DCommonModule } from 'ng-devui/common';
 import { DataTableModule } from 'ng-devui/data-table';
@@ -34,8 +35,8 @@ import { UploadModule } from 'ng-devui/upload';
 import { AutoCompleteModule } from 'ng-devui/auto-complete';
 import { InputNumberModule } from 'ng-devui/input-number';
 import { SliderModule } from 'ng-devui/slider';
-import { TreeSelectModule} from 'ng-devui/tree-select';
-import {TransferModule} from 'ng-devui/transfer';
+import { TreeSelectModule } from 'ng-devui/tree-select';
+import { TransferModule } from 'ng-devui/transfer';
 import { SplitterModule } from 'ng-devui/splitter';
 import { BreadcrumbModule } from 'ng-devui/breadcrumb';
 import { RateModule } from 'ng-devui/rate';
@@ -45,18 +46,21 @@ import { TextareaModule } from 'ng-devui/textarea';
 import { FullscreenModule } from 'ng-devui/fullscreen';
 import { ImagePreviewModule } from 'ng-devui/image-preview';
 import { AvatarModule } from 'ng-devui/avatar';
+import { LayoutModule } from 'ng-devui/layout';
+import { WindowRefModule } from 'ng-devui/window-ref';
+import { StepsGuideModule } from 'ng-devui/steps-guide';
 import { QuadrantDiagramModule } from 'ng-devui/quadrant-diagram';
 import { GanttModule } from 'ng-devui/gantt';
-import { CarouselModule } from 'ng-devui/carousel';
 export * from 'ng-devui/accordion';
 export * from 'ng-devui/alert';
 export * from 'ng-devui/anchor';
 export * from 'ng-devui/auto-complete';
 export * from 'ng-devui/avatar';
+export * from 'ng-devui/layout';
 export * from 'ng-devui/button';
 export * from 'ng-devui/breadcrumb';
-export * from 'ng-devui/checkbox';
 export * from 'ng-devui/carousel';
+export * from 'ng-devui/checkbox';
 export * from 'ng-devui/common';
 export * from 'ng-devui/data-table';
 export * from 'ng-devui/datepicker';
@@ -74,7 +78,6 @@ export * from 'ng-devui/pagination';
 export * from 'ng-devui/panel';
 export * from 'ng-devui/popover';
 export * from 'ng-devui/progress';
-export * from 'ng-devui/quadrant-diagram';
 export * from 'ng-devui/radio';
 export * from 'ng-devui/rate';
 export * from 'ng-devui/search';
@@ -96,6 +99,9 @@ export * from 'ng-devui/tree-select';
 export * from 'ng-devui/transfer';
 export * from 'ng-devui/text-input';
 export * from 'ng-devui/textarea';
+export * from 'ng-devui/window-ref';
+export * from 'ng-devui/steps-guide';
+export * from 'ng-devui/quadrant-diagram';
 export * from 'ng-devui/gantt';
 export * from './version';
 
@@ -110,8 +116,8 @@ export * from './version';
     DCommonModule,
     ButtonModule,
     BreadcrumbModule,
-    CheckBoxModule,
     CarouselModule,
+    CheckBoxModule,
     DataTableModule,
     DatepickerModule,
     DragDropModule,
@@ -120,16 +126,15 @@ export * from './version';
     EditableSelectModule,
     FormModule,
     FullscreenModule,
-    GanttModule,
     ImagePreviewModule,
     LoadingModule,
+    LayoutModule,
     ModalModule,
     MultiAutoCompleteModule,
     PaginationModule,
     PanelModule,
     PopoverModule,
     ProgressModule,
-    QuadrantDiagramModule,
     RadioModule,
     RateModule,
     SearchModule,
@@ -150,7 +155,11 @@ export * from './version';
     TreeSelectModule,
     TransferModule,
     TextInputModule,
-    TextareaModule
+    TextareaModule,
+    WindowRefModule,
+    StepsGuideModule,
+    QuadrantDiagramModule,
+    GanttModule
   ],
   declarations: []
 })

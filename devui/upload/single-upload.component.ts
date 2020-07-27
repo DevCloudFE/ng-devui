@@ -42,12 +42,13 @@ export class SingleUploadComponent implements OnDestroy {
   @Input() filePath: string;
   @Input() placeholderText: string;
   @Input() uploadText: string;
-   /**
-   * @deprecated
-   */
+  /**
+  * @deprecated
+  */
   @Input() confirmText: string;
   @Input() beforeUpload: (file) => boolean | Promise<boolean> | Observable<boolean>;
   @Input() enableDrop = false;
+  @Input() disabled = false;
   @Output() successEvent: EventEmitter<any> = new EventEmitter<any>();
   @Output() errorEvent: EventEmitter<any> = new EventEmitter<any>();
   @Output() deleteUploadedFileEvent: EventEmitter<any> = new EventEmitter<any>();
@@ -100,8 +101,8 @@ export class SingleUploadComponent implements OnDestroy {
   }
 
   onClick($event) {
-    if (this.singleUploadViewComponent.fileUploaders[0] &&
-      this.singleUploadViewComponent.fileUploaders[0].status === UploadStatus.uploading) {
+    if (this.disabled || (this.singleUploadViewComponent.fileUploaders[0] &&
+      this.singleUploadViewComponent.fileUploaders[0].status === UploadStatus.uploading)) {
       return;
     }
     this._dealFiles(this.selectFiles.triggerSelectFiles(this.fileOptions, this.uploadOptions));

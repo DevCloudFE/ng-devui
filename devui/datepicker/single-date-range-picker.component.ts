@@ -115,7 +115,7 @@ export class SingleDateRangePickerComponent extends SingleDatepickerComponent im
   }
 
   emitHoverDate($event, date) {
-    if (this.selectingRange) {
+    if (this.selectingRange && date.getTime() <= this.maxDate.getTime() && date.getTime() >= this.minDate.getTime()) {
       this.hoverOnDate.emit(date);
     }
   }

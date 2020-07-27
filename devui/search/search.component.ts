@@ -136,6 +136,7 @@ export class SearchComponent implements ControlValueAccessor, OnInit, OnDestroy,
     } else if (this.lineElement && this.clearIconElement) {
       this.clearIconExit = false;
     }
+    this.cdr.markForCheck();
   }
 
   ngOnDestroy() {

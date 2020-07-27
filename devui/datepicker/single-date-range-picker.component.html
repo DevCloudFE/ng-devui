@@ -136,21 +136,21 @@
           <td colspan="4">
             <div class="devui-timepicker" *ngIf="showTime" [ngClass]="{ 'devui-timepicker-disabled': isDisabledTime() }">
               <div class="devui-time">
-                <input type="number" [(ngModel)]="currentHour" max="23" min="0" [disabled]="isDisabledTime()" />
+                <input [ngModel]="currentHour" (keydown)="fixTime($event, 'h')" [disabled]="isDisabledTime()" />
                 <div class="devui-btn-nav" *ngIf="!isDisabledTime()">
                   <div class="btn-up" (click)="timeUp('h')"></div>
                   <div class="btn-down" (click)="timeDown('h')"></div>
                 </div>
               </div>
               <div class="devui-time">
-                <input type="number" class="devui-minutes" [(ngModel)]="currentMinute" max="59" min="0" [disabled]="isDisabledTime()" />
+                <input class="devui-minutes" [ngModel]="currentMinute" (keydown)="fixTime($event, 'm')" [disabled]="isDisabledTime()" />
                 <div class="devui-btn-nav" *ngIf="!isDisabledTime()">
                   <div class="btn-up" (click)="timeUp('m')"></div>
                   <div class="btn-down" (click)="timeDown('m')"></div>
                 </div>
               </div>
               <div class="devui-time">
-                <input type="number" class="devui-seconds" [(ngModel)]="currentSecond" max="59" min="0" [disabled]="isDisabledTime()" />
+                <input class="devui-seconds" [ngModel]="currentSecond" (keydown)="fixTime($event, 's')" [disabled]="isDisabledTime()" />
                 <div class="devui-btn-nav" *ngIf="!isDisabledTime()">
                   <div class="btn-up" (click)="timeUp('s')"></div>
                   <div class="btn-down" (click)="timeDown('s')"></div>
@@ -160,7 +160,7 @@
           </td>
           <td colspan="3" *ngIf="isAuxiliary">
             <div class="devui-btn-wrapper">
-              <d-button bsStyle="common" [disabled]="!rangeStart || !rangeEnd" (btnClick)="confirmTime()" bsSize="sm">
+              <d-button bsStyle="common" [disabled]="!rangeStart || !rangeEnd || disabled" (btnClick)="confirmTime()" bsSize="sm">
                 {{ i18nCommonText?.btnConfirm }}
               </d-button>
             </div>

@@ -43,6 +43,21 @@
     [autoUpload]="true"
   >
   </d-single-upload>
+  <h4>单文件禁止上传状态</h4>
+  <d-single-upload
+    #singleupload
+    [fileOptions]="fileOptions"
+    [uploadedFiles]="uploadedFiles"
+    [uploadOptions]="uploadOptions"
+    [uploadText]="'点击上传'"
+    [filePath]="'name'"
+    [beforeUpload]="beforeUpload"
+    (successEvent)="onSuccess($event)"
+    (deleteUploadedFileEvent)="deleteUploadedFile($event)"
+    (errorEvent)="onError($event)"
+    [disabled]="true"
+  >
+  </d-single-upload>
   <div [style.margin-top.px]="10">
     <pre>singleupload uploadOptions: {{ singleupload.uploadOptions | json }}</pre>
   </div>

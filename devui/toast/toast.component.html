@@ -1,6 +1,6 @@
 <div #container [ngClass]="'devui-toast'" [style.zIndex]="zIndex" [ngStyle]="style" [class]="styleClass">
   <div
-    #msgel
+    #msgItem
     *ngFor="let msg of value; let i = index"
     class="devui-toast-item-container"
     aria-live="polite"
@@ -11,9 +11,11 @@
       'devui-toast-message-success': msg.severity == 'success',
       'devui-toast-message-common': msg.severity == 'common'
     }"
+    (mouseenter)="interrupt(i, msgItem)"
+    (mouseleave)="removeReset(i, msgItem, msg)"
   >
-    <div class="devui-toast-item" [ngSwitch]="msg.severity" (mouseenter)="interrupt(i)" (mouseleave)="removeReset()">
-      <div *ngIf="!(!msg.summary && life)" class="devui-toast-icon-close" (click)="removeThrottle(i, msgel)">
+    <div class="devui-toast-item" [ngSwitch]="msg.severity">
+      <div *ngIf="!(!msg.summary && life)" class="devui-toast-icon-close" (click)="removeThrottle(i, msgItem)">
         <svg
           width="16px"
           height="16px"

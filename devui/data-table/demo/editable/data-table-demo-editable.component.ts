@@ -1,6 +1,6 @@
-import { Component, HostBinding, OnInit, ViewChild } from '@angular/core';
-import {editableOriginSource, SourceType, genderSource} from '../mock-data';
+import { Component, OnInit } from '@angular/core';
 import { EditableTip } from 'ng-devui/data-table';
+import { editableOriginSource, genderSource, SourceType } from '../mock-data';
 
 @Component({
     selector: 'd-editable',
@@ -20,15 +20,7 @@ export class DatatableDemoEditableComponent implements OnInit {
   ngOnInit() {
   }
 
-  onEditing(editing, rowItem, editField) {
-    rowItem[editField] = editing;
-  }
-
-  dateEditEnd(rowItem) {
-    rowItem['dateEdit'] = false;
-  }
-
-  genderEditEnd(rowItem) {
-    rowItem['genderEdit'] = false;
+  onEditEnd(rowItem, field) {
+    rowItem[field] = false;
   }
 }

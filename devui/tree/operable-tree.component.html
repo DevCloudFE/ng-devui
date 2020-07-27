@@ -1,16 +1,28 @@
-<d-tree
-  #operableTree
-  [tree]="tree"
-  [treeNodeIdKey]="treeNodeIdKey"
-  [treeNodeChildrenKey]="treeNodeChildrenKey"
-  [treeNodesRef]="operableTreeNodeRef"
-  [iconParentOpen]="iconParentOpen"
-  [iconParentClose]="iconParentClose"
-  [iconLeaf]="iconLeaf"
-  [treeNodeTitleKey]="treeNodeTitleKey"
-  [checkboxDisabledKey]="checkboxDisabledKey"
->
-</d-tree>
+<div #operableTreeContainer style="position: relative;">
+  <d-tree
+    #operableTree
+    [tree]="tree"
+    [treeNodeIdKey]="treeNodeIdKey"
+    [treeNodeChildrenKey]="treeNodeChildrenKey"
+    [treeNodesRef]="operableTreeNodeRef"
+    [iconParentOpen]="iconParentOpen"
+    [iconParentClose]="iconParentClose"
+    [iconLeaf]="iconLeaf"
+    [treeNodeTitleKey]="treeNodeTitleKey"
+    [checkboxDisabledKey]="checkboxDisabledKey"
+    [selectDisabledKey]="selectDisabledKey"
+    [toggleDisabledKey]="toggleDisabledKey"
+  >
+  </d-tree>
+  <div
+    *ngIf="dragState.showIndicator"
+    #treeDropIndicator
+    class="devui-tree-indicator"
+    [style.top.px]="dragState.indicatorTop"
+    [style.width.px]="dragState.indicatorWidth"
+    [style.left.px]="dragState.indicatorLeft"
+  ></div>
+</div>
 
 <ng-template #operableTreeNodeRef let-treeNode="treeNode" let-treeFactory="treeFactory">
   <div
@@ -28,13 +40,13 @@
       [class.devui-tree-node--parent]="(treeNode.data.children || []).length > 0"
       (mouseenter)="treeNodeHover(treeNode, 'enter')"
       (mouseleave)="treeNodeHover(treeNode, 'leave')"
-      [draggable]="draggable && treeNode.parentId !== undefined"
+      [draggable]="draggable"
       (dragstart)="onDragstart($event, treeNode)"
       (dragover)="onDragover($event, draggable, treeNode)"
       (dragleave)="onDragleave($event, treeNode)"
       (drop)="onDrop($event, treeNode)"
-      (mouseenter)="addBackGround($event)"
-      (mouseleave)="removeBackGround($event)"
+      (mouseenter)="addBackGround($event, treeNode)"
+      (mouseleave)="removeBackGround($event, treeNode)"
       [class.disabled]="treeNode.data.disabled"
     >
       <div class="devui-tree-node__content--value-wrapper" [class.isMatch]="treeNode.data.isMatch">
@@ -42,7 +54,7 @@
           (click)="toggleNode($event, treeNode)"
           *ngIf="(treeNode.data.children || []).length > 0 || treeNode.data.isParent"
           class="devui-tree-node__folder"
-          [class.disabled]="treeNode.data.disabled"
+          [class.toggle-disabled]="treeNode.data.disableToggle"
         >
           <span
             class="devui-tree-node__folder--icon"
@@ -103,11 +115,7 @@
             </svg>
           </span>
         </span>
-        <span
-          class="devui-tree-node__leaf"
-          [class.disabled]="treeNode.data.disabled"
-          *ngIf="(treeNode.data.children || []).length === 0 && !treeNode.data.isParent"
-        >
+        <span class="devui-tree-node__leaf" *ngIf="(treeNode.data.children || []).length === 0 && !treeNode.data.isParent">
           <span *ngIf="!iconLeaf" class="devui-leaf-icon-none"></span>
           <span *ngIf="iconLeaf" [innerHTML]="iconLeaf | safe: 'html'"></span>
         </span>
@@ -137,10 +145,18 @@
           (contextmenu)="contextmenuEvent($event, treeNode)"
           class="devui-tree-node__title"
           [class.active]="treeNode.data.isActive"
-          [class.disabled]="treeNode.data.disabled"
+          [class.select-disabled]="treeNode.data.disableSelect"
           title="{{ treeNode.data.title }}"
-          >{{ treeNode.data.title }}</span
         >
+          <d-highlight
+            *ngIf="treeNode.data?.isMatch"
+            [value]="treeNode.data.title"
+            [term]="treeFactory.searchItem"
+            [highlightClass]="'devui-tree-match-highlight'"
+          >
+          </d-highlight>
+          <ng-container *ngIf="!treeNode.data?.isMatch">{{ treeNode.data.title }}</ng-container>
+        </span>
         <span class="devui-tree-node__edit" *ngIf="!nodeTemplate && treeNode.data?.editable">
           <input
             [class.error]="!!treeNode.data.errTips"

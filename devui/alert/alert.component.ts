@@ -26,9 +26,6 @@ export class AlertComponent {
 
   hide = false;
 
-  constructor() {
-  }
-
   close() {
     this.closeEvent.emit(this);
     this.hide = true;

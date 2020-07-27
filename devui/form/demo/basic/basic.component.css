@@ -6,3 +6,7 @@
 :host ::ng-deep .devui-radio-horizontal d-radio {
   display: inline-block;
 }
+
+form {
+  width: 500px;
+}

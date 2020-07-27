@@ -21,13 +21,13 @@ import * as hljs from 'highlight.js/lib/highlight';
     </div>
     </div>
   `,
-    styles: [
-      `
+  styles: [
+    `
       .readme {
         box-sizing:border-box;
       }
       `
-    ],
+  ],
 })
 export class GetStartedComponent implements AfterViewInit {
   readMe: HTMLElement = require('!html-loader!markdown-loader!./getStarted.md');

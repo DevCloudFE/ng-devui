@@ -12,6 +12,7 @@ export class BasicComponent {
     {
       title: '父节点1 - 展开',
       open: true,
+      disabled: true,
       items: [
         {
           title: '父节点11 - 折叠',
@@ -32,6 +33,7 @@ export class BasicComponent {
         },
         {
           title: '父节点12 - 折叠',
+          disableToggle: true,
           items: [
             {
               title: '叶子节点121'

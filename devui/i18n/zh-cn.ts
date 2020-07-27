@@ -83,4 +83,9 @@ export default {
     basicColors: '基本颜色',
     moreColors: '更多颜色',
   },
+  stepsGuide: {
+    previous: '上一步',
+    next: '我知道啦，继续',
+    finish: '我知道啦'
+  }
 };

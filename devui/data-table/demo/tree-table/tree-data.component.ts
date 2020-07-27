@@ -38,7 +38,9 @@ export class TreeDataComponent implements OnInit {
     }
   ];
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.basicDataSource[0].$isChildTableOpen = true;
+  }
 
   onChildTableToggle(status, rowItem) {
     this.datatable.setRowChildToggleStatus(rowItem, status);

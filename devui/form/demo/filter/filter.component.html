@@ -1,9 +1,9 @@
 <section>
   <d-button bsStyle="text" (click)="filter()">高级过滤</d-button>
-  <div [ngStyle]="{ display: isShowFilterPannel ? 'block' : 'none' }" style="width: 900px; background-color: #f9fafc;">
+  <div [ngStyle]="{ display: isShowFilterPannel ? 'block' : 'none' }" class="advanced-filter-panel">
     <form dForm [layout]="'columns'">
       <div class="grid">
-        <div class="u-1-2" *ngFor="let control of listOfControls; let i = index">
+        <div class="u-1-4" *ngFor="let control of listOfControls; let i = index">
           <d-form-item>
             <d-form-label [hasHelp]="true" [helpTips]="'这是计划名，计划名字，计划名'">{{ control.label }}</d-form-label>
             <d-form-control>
@@ -15,7 +15,7 @@
       <d-form-operation>
         <d-button bsStyle="stress" class="mr-element-spacing" circled="true">过滤</d-button>
         <div class="btn-group g-dropdown" dDropDown [closeScope]="'blank'" (onToggle)="onToggle($event)" #myDropdown="d-dropdown">
-          <a dDropDownToggle class="devui-dropdown-default" style="min-height: 34px;">
+          <a dDropDownToggle class="devui-dropdown-default">
             增加过滤字段
             <span class="icon-chevron-down"></span>
           </a>

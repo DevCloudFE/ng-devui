@@ -18,6 +18,13 @@ export class EditableOldComponent implements OnInit {
   ngOnInit() {
   }
 
+  beforeCellEdit = () => {
+    return new Promise((resolve) => {
+      console.log('beforeCellEdit');
+      resolve();
+    });
+  }
+
   finishEdit() {
     this.dataTable.cancelEditingStatus();
   }

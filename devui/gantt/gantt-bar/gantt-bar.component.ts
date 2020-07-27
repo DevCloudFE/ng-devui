@@ -172,8 +172,6 @@ export class GanttBarComponent implements OnInit, OnChanges, AfterViewInit, OnDe
       if (!this.progressDisabled) {
         this.subscribeMouseActions(['start'], ['progress']);
       }
-
-      this.subscribeMouseActions(['move', 'end']);
     }
 
     if (this.progressRate && this.progressRate > 0) {
@@ -287,8 +285,6 @@ export class GanttBarComponent implements OnInit, OnChanges, AfterViewInit, OnDe
       }),
       pluck<Event, number>('pageX'),
       distinctUntilChanged(),
-      map((position: number) => this.mousePositionToAdaptiveValue(position)),
-      distinctUntilChanged(),
       takeUntil(this.mouseEndListener)
     );
   }
@@ -304,9 +300,6 @@ export class GanttBarComponent implements OnInit, OnChanges, AfterViewInit, OnDe
   }
 
   private mousePositionToAdaptiveValue(handleX: number): number {
-    if (this.moveBarStart || this.resizeBarLeftStart || this.resizeBarRightStart) {
-      return handleX;
-    }
     const sliderStartX = this.getSliderPagePosition();
     const sliderLength = this.getRailLength();
     const ratio = this.convertHandlePositionToRatio(handleX, sliderStartX, sliderLength);
@@ -354,7 +347,7 @@ export class GanttBarComponent implements OnInit, OnChanges, AfterViewInit, OnDe
 
   private mouseMoving(value: number): void {
     if (this.dragProgressStart) {
-      this.setValue(value);
+      this.setValue(this.mousePositionToAdaptiveValue(value));
       this.cdr.markForCheck();
     }
 

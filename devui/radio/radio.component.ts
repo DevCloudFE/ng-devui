@@ -91,12 +91,6 @@ export class RadioComponent implements OnInit, ControlValueAccessor {
     this.onChange(value);
   }
 
-  selectRadio(event) {
-    if (!this.canChange) {
-      event.preventDefault();
-    }
-  }
-
   canChange() {
     let changeResult = Promise.resolve(true);
 

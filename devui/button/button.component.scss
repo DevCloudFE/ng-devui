@@ -21,11 +21,6 @@ $devui-btn-sm-font-size: $font-size-base;
 $devui-btn-font-size: $font-size-base;
 $devui-btn-lg-font-size: $font-size-base;
 $devui-btn-line-height: $line-height-base;
-$devui-btn-xs-circled-border-radius: 10px;
-$devui-btn-circled-border-radius: 20px;
-$devui-btn-lg-circled-border-radius: 45px;
-$devui-btn-xs-circled-horizontal-padding: 10px;
-$devui-btn-lg-circled-horizontal-padding: 35px;
 
 $devui-btn-normal-config: (
   text: (
@@ -74,6 +69,15 @@ $devui-btn-normal-config: (
     height: $devui-btn-lg-height,
     font-size: $devui-btn-lg-font-size,
     min-width: $devui-btn-lg-min-width,
+  ),
+  left: (
+    border-radius: 2px 0 0 2px,
+  ),
+  right: (
+    border-radius: 0 2px 2px 0,
+  ),
+  default: (
+    border-radius: 2px,
   )
 );
 
@@ -164,7 +168,7 @@ $devui-btn-pseudo-config: (
   border-width: 1px;
   border-color: transparent;
   background-color: transparent;
-  @each $type in text, text-dark, common, stress, primary, danger, xs, sm, lg {
+  @each $type in text, text-dark, common, stress, primary, danger, left, right, xs, sm, lg {
     &.devui-btn-#{$type} {
       @each $key, $value in map-get($devui-btn-normal-config, $type) {
         #{$key}: $value;

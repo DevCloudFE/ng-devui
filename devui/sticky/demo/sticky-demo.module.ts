@@ -11,6 +11,8 @@ import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { ButtonModule } from 'ng-devui/button';
 import { StickyModule } from '../sticky.module';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
+import { ScrollTargetComponent } from './scroll-target/scroll-target.component';
+
 
 @NgModule({
   imports: [
@@ -33,6 +35,7 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
   declarations: [
     StickyDemoComponent,
     BasicComponent,
+    ScrollTargetComponent,
   ],
   entryComponents: [
     StickyDemoComponent,

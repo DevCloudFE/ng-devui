@@ -34,7 +34,7 @@
     class="devui-dropdown-menu devui-dropdown-overlay"
     [ngClass]="{ 'filter-content-hidden': isFilterHidden }"
     [style.width]="filterBoxWidth || '250px'"
-    [ngStyle]="{ 'min-height': filterBoxHeight ? filterBoxHeight : '200px' }"
+    [ngStyle]="{ 'min-height': filterBoxHeight ? filterBoxHeight : '60px' }"
   >
     <ng-template
       *ngIf="filterDropdown.isOpen"
@@ -42,7 +42,8 @@
       [ngTemplateOutletContext]="{
         $implicit: this,
         filterListDisplay: filterListDisplay,
-        dropdown: filterDropdown
+        dropdown: filterDropdown,
+        column: column
       }"
     >
     </ng-template>
@@ -105,7 +106,7 @@
         <div
           *ngFor="let item of filterListRadio"
           class="drop-down-item"
-          [ngClass]="{ 'filter-item-active': choseItem === item }"
+          [ngClass]="{ 'filter-item-active': selectedItem === item }"
           (click)="getFilterDataRadio(item); closeFilter(dropdown)"
         >
           {{ item.name }}

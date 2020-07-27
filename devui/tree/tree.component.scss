@@ -13,6 +13,7 @@ $keyframe-blue: #5e7ce0;
   line-height: 1;
   white-space: nowrap;
   position: relative;
+  z-index: 0;
 
   .devui-tree-node__content {
     display: inline-flex;
@@ -25,12 +26,6 @@ $keyframe-blue: #5e7ce0;
     display: inline-flex;
     align-items: center;
     height: 38px;
-
-    &.isMatch {
-      color: $brand-1;
-      border: 1px solid $gray-2;
-      border-radius: 0.2em;
-    }
   }
 
   .devui-tree-node__children {
@@ -239,7 +234,8 @@ $keyframe-blue: #5e7ce0;
       top: 0;
     }
 
-    .devui-tree-node__content { // 只要是子级就都存在左边横线
+    .devui-tree-node__content {
+      // 只要是子级就都存在左边横线
       position: relative;
 
       &::before {
@@ -253,4 +249,27 @@ $keyframe-blue: #5e7ce0;
       }
     }
   }
+}
+
+.toggle-disabled {
+  cursor: not-allowed !important;
+
+  svg.svg-icon rect {
+    stroke: $disabled-content !important;
+  }
+
+  svg.svg-icon.svg-icon-close rect:last-child {
+    stroke: none !important;
+    fill: $disabled-content !important;
+  }
+
+  svg.svg-icon path {
+    fill: $disabled-content !important;
+  }
+}
+
+.select-disabled {
+  color: $disabled-content !important;
+  cursor: not-allowed !important;
+  background-color: transparent !important;
 }

@@ -12,6 +12,11 @@
               [dragScope]="'default-css'"
               [dragData]="{ item: item, parent: list1 }"
               class="list-group-item over-flow-ellipsis"
+              [ngClass]="{ disabled: item.disabled }"
+              [disabled]="item.disabled"
+              (dragStartEvent)="log($event)"
+              (dragEndEvent)="log($event)"
+              (dropEndEvent)="log($event)"
             >
               {{ item.name }}
             </li>
@@ -20,7 +25,15 @@
       </div>
     </div>
     <div class="col-sm-3">
-      <div class="card card-outline-primary mb-3" dDroppable [dropScope]="'default-css'" (dropEvent)="onDrop($event, list2)">
+      <div
+        class="card card-outline-primary mb-3"
+        dDroppable
+        [dropScope]="'default-css'"
+        (dropEvent)="onDrop($event, list2)"
+        (dragEnterEvent)="log($event)"
+        (dragOverEvent)="log($event)"
+        (dragLeaveEvent)="log($event)"
+      >
         <div class="card-header">放置排序区</div>
         <div class="card-block">
           <ul class="list-group d-drop-el" dSortable>
@@ -39,7 +52,15 @@
       </div>
     </div>
     <div class="col-sm-3">
-      <div class="card card-outline-primary mb-3" dDroppable [dropScope]="'default-css'" (dropEvent)="onDrop($event, list3)">
+      <div
+        class="card card-outline-primary mb-3"
+        dDroppable
+        [dropScope]="'default-css'"
+        (dropEvent)="onDrop($event, list3)"
+        (dragEnterEvent)="log($event)"
+        (dragOverEvent)="log($event)"
+        (dragLeaveEvent)="log($event)"
+      >
         <div class="card-header">放置区（无排序）</div>
         <div class="card-block">
           <ul class="list-group drop-el">

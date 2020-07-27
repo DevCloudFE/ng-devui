@@ -11,10 +11,11 @@ import { DevUIModule } from 'ng-devui/devui.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
 import { I18nModule } from 'ng-devui/i18n';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
-import { ResetPositionComponent } from './basic/reset-position/reset-position.component';
+import { ResetPositionComponent } from './table/reset-position/reset-position.component';
+import { TableComponent } from './table/table.component';
 
 @NgModule({
-  declarations: [GanttDemoComponent, BasicComponent, ResetPositionComponent],
+  declarations: [GanttDemoComponent, BasicComponent, ResetPositionComponent, TableComponent],
   imports: [
     CommonModule,
     DevUIApiModule,

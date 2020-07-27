@@ -1,4 +1,5 @@
 @import '../style/core/layout';
+@import '../style/theme/color';
 
 .devui-form-horizontal :host.devui-form-controls {
   flex: 1 1 auto;
@@ -12,4 +13,12 @@
 .devui-form-columns :host.devui-form-controls {
   flex: 1 1 auto;
   margin-right: $component-space;
+}
+
+.devui-form-control-extra-info {
+  font-size: 12px;
+  color: $dark-2;
+  line-height: 18px;
+  margin-top: $content-spacing;
+  text-align: justify;
 }

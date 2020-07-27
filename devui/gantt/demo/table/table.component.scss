@@ -1,0 +1,95 @@
+.handler {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+}
+
+.b-group {
+  margin-right: 5px;
+  display: inline-block;
+  vertical-align: middle;
+
+  div {
+    display: inline-block;
+    padding: 0 8px;
+    height: 32px;
+    min-width: 32px;
+    line-height: 32px;
+    background: var(--block-bg-white, #ffffff);
+    box-shadow: 0 2px 10px 0 rgba(41, 48, 64, 0.1);
+    border-radius: 2px;
+    cursor: pointer;
+    text-align: center;
+  }
+}
+
+.devui-gantt-milestone {
+  height: 24px;
+  line-height: 24px;
+
+  & span {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  & .icon {
+    width: 22px;
+    height: 24px;
+    margin-right: 5px;
+  }
+}
+
+::ng-deep .devui-gantt-tips {
+  & .title {
+    font-size: 14px;
+    color: var(--dark-1, #252b3a);
+    line-height: 24px;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+
+  & .content {
+    font-size: 12px;
+    color: var(--dark-1, #252b3a);
+    line-height: 24px;
+  }
+}
+
+.min-height-stretch-row {
+  background: var(--white, #ffffff) !important;
+
+  &:hover {
+    background: var(--white, #ffffff) !important;
+  }
+
+  & td {
+    padding: 0 !important;
+    border: unset !important;
+  }
+}
+
+.reset-position-container {
+  position: relative;
+}
+
+.reset-position {
+  visibility: hidden;
+}
+
+tr:hover {
+  & .reset-position {
+    visibility: visible;
+  }
+}
+
+.resize-handle {
+  display: inline-block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  border-right: 3px solid var(--gray-1, #adb0b8);
+  cursor: col-resize;
+}

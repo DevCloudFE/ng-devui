@@ -34,7 +34,6 @@ export default {
       return `${year}`;
     }
   },
-
   pagination: {
     totalItem: 'Total Records',
     goTo: 'Go To',
@@ -85,4 +84,9 @@ export default {
     basicColors: 'Basic Colors',
     moreColors: 'More Colors',
   },
+  stepsGuide: {
+    previous: 'Previous',
+    next: 'Continue',
+    finish: 'OK'
+  }
 };

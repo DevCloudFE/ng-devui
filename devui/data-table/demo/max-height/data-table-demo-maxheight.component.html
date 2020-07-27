@@ -1,4 +1,4 @@
-<d-data-table #datatable1 [dataSource]="maxHeightDataSource" [virtualScroll]="true" fixHeader="true" maxHeight="400px" [scrollable]="true">
+<d-data-table [dataSource]="maxHeightDataSource" fixHeader="true" maxHeight="360px" scrollable="true">
   <thead dTableHead>
     <tr dTableRow>
       <th dHeadCell *ngFor="let colOption of dataTableOptions.columns">{{ colOption.header }}</th>

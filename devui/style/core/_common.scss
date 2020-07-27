@@ -63,6 +63,16 @@ a:hover {
   }
 }
 
+.devui-link-light {
+  color: $link-light;
+
+  &:hover {
+    color: $hover-control-light;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}
+
 .devui-disabled {
   &,
   &.devui-input-group-addon {

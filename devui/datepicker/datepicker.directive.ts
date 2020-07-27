@@ -1,6 +1,6 @@
 import {
   Directive, OnInit, Input, ElementRef, forwardRef, ComponentRef, ViewContainerRef, Output, EventEmitter,
-  ComponentFactoryResolver, Renderer2, Injector, HostListener, TemplateRef, OnDestroy
+  ComponentFactoryResolver, Renderer2, Injector, HostListener, TemplateRef, OnDestroy, AfterViewInit
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DateConverter } from 'ng-devui/utils';
@@ -32,7 +32,31 @@ const animationDuration = '200ms';
     multi: true
   }]
 })
-export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAccessor {
+export class DatepickerDirective implements OnInit, AfterViewInit, OnDestroy, ControlValueAccessor {
+  @Input() locale: string;
+  @Input() cssClass: string;
+  @Input() disabled: boolean;
+  @Input() dateConverter: DateConverter;
+  yearNumber = 12;
+  @Input() direction: 'up' | 'down' = 'down';
+  @Input() customViewTemplate: TemplateRef<any>;
+  @Input() autoOpen = false;
+  @Output() selectedDateChange = new EventEmitter<SelectDateChangeEventArgs>();
+  selectedDate: Date;
+  isOpen = false;
+  _dateConfig: any;
+  private _dateFormat: string;
+  private _maxDate: Date;
+  private _minDate: Date;
+  private _showTime: boolean;
+  private cmpRef: ComponentRef<DatepickerComponent>;
+  private player: AnimationPlayer;
+  private inputSub: Subscription;
+  private i18nSubscription: Subscription;
+  private i18nLocale: I18nInterface['locale'];
+
+  private onChange = (_: any) => null;
+  private onTouched = () => null;
 
   @Input() set showTime(showTime: boolean) {
     this._showTime = showTime;
@@ -43,7 +67,7 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
   }
 
   @Input() set dateConfig(dateConfig: any) {
-    if (dateConfig) {
+    if (this.checkDateConfig(dateConfig)) {
       this._dateConfig = dateConfig;
       this._dateFormat = this.showTime ? dateConfig.format.time : dateConfig.format.date;
     } else {
@@ -87,29 +111,6 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
   get minDate() {
     return this._minDate;
   }
-  @Input() locale: string;
-  @Input() cssClass: string;
-  @Input() disabled: boolean;
-  @Input() dateConverter: DateConverter;
-  yearNumber = 12;
-  @Input() direction: 'up' | 'down' = 'down';
-  @Input() customViewTemplate: TemplateRef<any>;
-  @Input() autoOpen = false;
-  @Output() selectedDateChange = new EventEmitter<SelectDateChangeEventArgs>();
-  selectedDate: Date;
-  isOpen = false;
-  _dateConfig: any;
-  private _dateFormat: string;
-  private _maxDate: Date;
-  private _minDate: Date;
-  private _showTime: boolean;
-  private cmpRef: ComponentRef<DatepickerComponent>;
-  private player: AnimationPlayer;
-  private inputSub: Subscription;
-  private i18nSubscription: Subscription;
-  private i18nLocale: I18nInterface['locale'];
-  private onChange = (_: any) => null;
-  private onTouched = () => null;
 
   constructor(private elementRef: ElementRef, private viewContainerRef: ViewContainerRef,
               private componentFactoryResolver: ComponentFactoryResolver, private renderer2: Renderer2,
@@ -120,13 +121,14 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
     this.selectedDate = null;
     const factory = this.componentFactoryResolver.resolveComponentFactory(DatepickerComponent);
     this.cmpRef = this.viewContainerRef.createComponent(factory, this.viewContainerRef.length, this.injector);
+  }
 
-    this.inputSub = fromEvent(this.elementRef.nativeElement, 'input')
-      .pipe(
-        debounceTime(300)
-      ).subscribe(event => {
-        this.transUserInputToDatepicker(event);
-      });
+  checkDateConfig(dateConfig: any) {
+    if (!dateConfig) { return false; }
+    if (typeof(dateConfig.timePicker) !== 'boolean' || !dateConfig.max || !dateConfig.min || !dateConfig.format) {
+      return false;
+    }
+    return true;
   }
 
   ngOnInit() {
@@ -156,6 +158,15 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
       this.show();
     }
     this.setI18nText();
+  }
+
+  ngAfterViewInit() {
+    this.inputSub = fromEvent(this.elementRef.nativeElement, 'input')
+      .pipe(
+        debounceTime(300)
+      ).subscribe(event => {
+        this.transUserInputToDatepicker(event);
+      });
   }
 
   writeValue(obj: any): void {

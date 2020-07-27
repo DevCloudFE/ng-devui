@@ -1,0 +1,65 @@
+@import '../../../style/theme/color';
+
+d-layout {
+  background-color: $bg-white;
+}
+
+d-aside {
+  padding-left: 1px;
+}
+
+d-header {
+  text-align: left;
+  height: 40px;
+  background-color: #333854;
+  position: relative;
+
+  .logo {
+    position: absolute;
+    left: 0;
+    margin-left: 20px;
+    height: 40px;
+    width: 120px;
+    color: $font-white;
+    font-size: 16px;
+    line-height: 40px;
+
+    .logo-devui {
+      margin-top: 7px;
+    }
+
+    .logo-devui,
+    .text {
+      display: inline-block;
+      vertical-align: top;
+    }
+  }
+
+  .search {
+    color: $font-white;
+    margin-right: 40px;
+    position: absolute;
+    right: 0;
+  }
+}
+
+d-content {
+  padding: 0 40px;
+  background-color: #eeeeee;
+
+  d-breadcrumb {
+    margin-top: 8px;
+  }
+
+  .inner-content {
+    background-color: $bg-white;
+    padding: 16px;
+    height: 100%;
+  }
+}
+
+d-footer {
+  color: $font-white;
+  background-color: $huawei-bg;
+  padding: 9px 24px;
+}

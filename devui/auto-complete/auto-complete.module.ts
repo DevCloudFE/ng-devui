@@ -2,9 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { PositionService } from 'ng-devui/position';
-import { WindowRef } from 'ng-devui/window-ref';
-import { DocumentRef } from 'ng-devui/window-ref';
+import { PositioningModule } from 'ng-devui/position';
 import { LazyLoadModule } from 'ng-devui/utils';
 import { LoadingModule } from 'ng-devui/loading';
 
@@ -14,10 +12,10 @@ import { AutoCompletePopupComponent } from './auto-complete-popup.component';
 import { HighlightComponent } from './highlight.component';
 
 @NgModule({
-  imports: [CommonModule, FormsModule, OverlayModule, LazyLoadModule, LoadingModule],
+  imports: [CommonModule, FormsModule, OverlayModule, LazyLoadModule, LoadingModule, PositioningModule],
   exports: [AutoCompleteDirective, AutoCompletePopupComponent, HighlightComponent],
   declarations: [AutoCompleteDirective, AutoCompletePopupComponent, HighlightComponent],
-  providers: [DocumentRef, WindowRef, PositionService, AutoCompleteConfig],
+  providers: [AutoCompleteConfig],
   entryComponents: [AutoCompletePopupComponent]
 })
 export class AutoCompleteModule { }

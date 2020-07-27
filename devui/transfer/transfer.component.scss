@@ -42,9 +42,20 @@
   margin-right: 10px;
 }
 
-.disabled {
-  opacity: 0.3;
+.disable {
+  background-color: $disabled-bg;
+  color: $disabled-content;
   cursor: not-allowed;
+}
+
+:host {
+  ::ng-deep {
+    .disabled {
+      .devui-checkbox label {
+        color: $disabled-content;
+      }
+    }
+  }
 }
 
 .transfer-op {
@@ -71,6 +82,10 @@
   }
 }
 
+.content {
+  padding-top: 10px;
+}
+
 .content ul {
   overflow: auto;
 }
@@ -86,7 +101,7 @@
 
   &:hover {
     svg {
-      display: inline-block;
+      opacity: 1;
       cursor: move;
     }
   }
@@ -100,7 +115,8 @@
   }
 
   svg {
-    display: none;
+    opacity: 0;
+    display: inline-block;
   }
 
   .drag-handle {
@@ -124,7 +140,6 @@
 .line {
   height: 1px;
   background: $gray-2;
-  margin-bottom: 10px;
 }
 
 .option-btn {

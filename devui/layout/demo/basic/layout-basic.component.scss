@@ -1,0 +1,40 @@
+@import '../../../style/theme/color';
+@import '../../../style/theme/shadow';
+
+.basic-usage {
+  box-shadow: $hwc-shadow-5;
+  margin-top: 36px;
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+d-header {
+  text-align: center;
+  line-height: 40px;
+  background-color: #333854;
+  color: $font-white;
+}
+
+d-aside {
+  min-height: 200px;
+  min-width: 120px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fafafa;
+}
+
+d-content {
+  line-height: 200px;
+  text-align: center;
+  background-color: $bg-white;
+}
+
+d-footer {
+  color: $font-white;
+  background-color: $huawei-bg;
+  padding: 9px 24px;
+}

@@ -37,6 +37,8 @@ export class TreeComponent implements OnInit, OnChanges, AfterViewInit, OnDestro
   @Input() iconLeaf: string;
   @Input() treeNodeTitleKey = 'title';
   @Input() checkboxDisabledKey = 'disabled';
+  @Input() selectDisabledKey = 'disabled';
+  @Input() toggleDisabledKey = 'disableToggle';
   @Output() nodeSelected: EventEmitter<any> = new EventEmitter<any>();
   @Output() nodeDblClicked: EventEmitter<any> = new EventEmitter<any>();
   @Output() nodeRightClicked: EventEmitter<any> = new EventEmitter<any>();
@@ -59,7 +61,9 @@ export class TreeComponent implements OnInit, OnChanges, AfterViewInit, OnDestro
       treeNodeChildrenKey: this.treeNodeChildrenKey,
       treeNodeIdKey: this.treeNodeIdKey,
       treeNodeTitleKey: this.treeNodeTitleKey,
-      checkboxDisabledKey: this.checkboxDisabledKey
+      checkboxDisabledKey: this.checkboxDisabledKey,
+      selectDisabledKey: this.selectDisabledKey,
+      toggleDisabledKey: this.toggleDisabledKey
     });
   }
 
@@ -70,7 +74,9 @@ export class TreeComponent implements OnInit, OnChanges, AfterViewInit, OnDestro
         treeNodeChildrenKey: this.treeNodeChildrenKey,
         treeNodeIdKey: this.treeNodeIdKey,
         treeNodeTitleKey: this.treeNodeTitleKey,
-        checkboxDisabledKey: this.checkboxDisabledKey
+        checkboxDisabledKey: this.checkboxDisabledKey,
+        selectDisabledKey: this.selectDisabledKey,
+        toggleDisabledKey: this.toggleDisabledKey
       });
     }
   }
@@ -79,7 +85,10 @@ export class TreeComponent implements OnInit, OnChanges, AfterViewInit, OnDestro
     this.elementAsMask = TreeMaskService.creatMaskElement();
   }
 
-  addBackGround(e) {
+  addBackGround(e, treeNode) {
+    if (treeNode.data.disabled || treeNode.data.disableSelect) {
+      return;
+    }
     e.stopPropagation();
     TreeMaskService.addMask(e.target.parentNode, this.elementAsMask, TreeMaskService.calcWidth(e.target.parentNode));
   }
@@ -91,7 +100,10 @@ export class TreeComponent implements OnInit, OnChanges, AfterViewInit, OnDestro
     }
   }
 
-  removeBackGround(e) {
+  removeBackGround(e, treeNode) {
+    if (treeNode.data.disabled || treeNode.data.disableSelect) {
+      return;
+    }
     e.stopPropagation();
     TreeMaskService.removeMask(e.target.parentNode, this.elementAsMask);
   }
@@ -102,6 +114,9 @@ export class TreeComponent implements OnInit, OnChanges, AfterViewInit, OnDestro
   }
 
   toggleNode(event, treeNode: TreeNode) {
+    if (treeNode.data.disableToggle) {
+      return;
+    }
     this.treeFactory.toggleNodeById(treeNode.id);
     this.nodeToggled.emit(treeNode);
   }
@@ -116,7 +131,9 @@ export class TreeComponent implements OnInit, OnChanges, AfterViewInit, OnDestro
       treeNodeChildrenKey: this.treeNodeChildrenKey,
       treeNodeIdKey: this.treeNodeIdKey,
       treeNodeTitleKey: this.treeNodeTitleKey,
-      checkboxDisabledKey: this.checkboxDisabledKey
+      checkboxDisabledKey: this.checkboxDisabledKey,
+      selectDisabledKey: this.selectDisabledKey,
+      toggleDisabledKey: this.toggleDisabledKey
     });
   }
   public nodeDblClick(event, node) {

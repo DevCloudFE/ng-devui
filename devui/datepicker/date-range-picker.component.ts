@@ -3,6 +3,7 @@ import {
   Component,
   forwardRef,
   OnInit,
+  AfterViewInit,
   Input,
   Output,
   EventEmitter,
@@ -88,7 +89,37 @@ import { distinctUntilChanged, debounceTime } from 'rxjs/operators';
     cornerFadeInOut
   ]
 })
-export class DateRangePickerComponent implements OnInit, ControlValueAccessor, OnDestroy {
+export class DateRangePickerComponent implements OnInit, AfterViewInit, ControlValueAccessor, OnDestroy {
+  @Input() locale: string;
+  @Input() cssClass: string;
+  @Input() disabled: boolean;
+  @Input() dateConverter: DateConverter;
+  @Input() selectedRange = [null, null];
+  @Input() hideOnRangeSelected = false;
+  @Input() customViewTemplate: TemplateRef<any>;
+  @Input() splitter = '  -  ';
+  @Output() selectedRangeChange = new EventEmitter<SelectDateRangeChangeEventArgs>();
+  @ViewChild('leftPicker') leftPicker: ElementRef;
+  @ViewChild('rightPicker') rightPicker: ElementRef;
+  @ViewChild('templateWrap') templateWrap: ElementRef;
+  private _isOpen = false;
+  private _dateConfig: any;
+  private _dateFormat: string;
+  private _maxDate: Date;
+  private _minDate: Date;
+  private _showTime: boolean;
+  private clickShow = false;
+  private inputSub: Subscription;
+  public currentCalendars = [null, null];
+  public cdkConnectedOverlayOrigin: any;
+  public i18nLocale: I18nInterface['locale'];
+  private i18nSubscription: Subscription;
+  hoverOnDate: Subject<object> = new Subject<object>();
+  datepickerPosition: VerticalConnectionPos = 'bottom';
+  rangeStart;
+  rangeEnd;
+  private onChange = (_: any) => null;
+  private onTouched = () => null;
 
   @Input() set showTime(showTime: boolean) {
     this._showTime = showTime;
@@ -99,7 +130,7 @@ export class DateRangePickerComponent implements OnInit, ControlValueAccessor, O
   }
 
   @Input() set dateConfig(dateConfig: any) {
-    if (dateConfig) {
+    if (this.checkDateConfig(dateConfig)) {
       this._dateConfig = dateConfig;
       this._dateFormat = this.showTime ? dateConfig.format.time : dateConfig.format.date;
     } else {
@@ -166,48 +197,18 @@ export class DateRangePickerComponent implements OnInit, ControlValueAccessor, O
     return this._isOpen;
   }
 
-  @Input() locale: string;
-  @Input() cssClass: string;
-  @Input() disabled: boolean;
-  @Input() dateConverter: DateConverter;
-  @Input() selectedRange = [null, null];
-  @Input() hideOnRangeSelected = false;
-  @Input() customViewTemplate: TemplateRef<any>;
-  @Input() splitter = '  -  ';
-  @Output() selectedRangeChange = new EventEmitter<SelectDateRangeChangeEventArgs>();
-  @ViewChild('leftPicker') leftPicker: ElementRef;
-  @ViewChild('rightPicker') rightPicker: ElementRef;
-  @ViewChild('templateWrap') templateWrap: ElementRef;
-  private _isOpen = false;
-  private _dateConfig: any;
-  private _dateFormat: string;
-  private _maxDate: Date;
-  private _minDate: Date;
-  private _showTime: boolean;
-  private clickShow = false;
-  private inputSub: Subscription;
-  public currentCalendars = [null, null];
-  public cdkConnectedOverlayOrigin: any;
-  public i18nLocale: I18nInterface['locale'];
-  private i18nSubscription: Subscription;
-  hoverOnDate: Subject<object> = new Subject<object>();
-  datepickerPosition: VerticalConnectionPos = 'bottom';
-  rangeStart;
-  rangeEnd;
-  private onChange = (_: any) => null;
-  private onTouched = () => null;
-
   constructor(private elementRef: ElementRef, private viewContainerRef: ViewContainerRef,
               private renderer: Renderer2, private datePickerConfig: DatePickerConfig, private i18n: I18nService) {
     this._dateConfig = datePickerConfig['dateConfig'];
     this.dateConverter = datePickerConfig['dateConfig'].dateConverter || new DefaultDateConverter();
+  }
 
-    this.inputSub = fromEvent(this.elementRef.nativeElement, 'input')
-      .pipe(
-        debounceTime(300)
-      ).subscribe(event => {
-        this.transUserInputToDatepicker(event);
-      });
+  checkDateConfig(dateConfig: any) {
+    if (!dateConfig) { return false; }
+    if (typeof(dateConfig.timePicker) !== 'boolean' || !dateConfig.max || !dateConfig.min || !dateConfig.format) {
+      return false;
+    }
+    return true;
   }
 
   ngOnInit() {
@@ -216,6 +217,15 @@ export class DateRangePickerComponent implements OnInit, ControlValueAccessor, O
     this.setI18nText();
     this.updateCdkConnectedOverlayOrigin();
     this.subscribeHoverActions();
+  }
+
+  ngAfterViewInit() {
+    this.inputSub = fromEvent(this.elementRef.nativeElement, 'input')
+      .pipe(
+        debounceTime(300)
+      ).subscribe(event => {
+        this.transUserInputToDatepicker(event);
+      });
   }
 
   registerOnChange(fn: any): void {

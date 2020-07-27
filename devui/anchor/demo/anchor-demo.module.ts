@@ -15,12 +15,15 @@ import { ButtonModule } from 'ng-devui/button';
 import { StickyModule } from 'ng-devui/sticky';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 import { HashComponent } from './hash/hash.component';
+import { ToggleModule } from 'ng-devui/toggle';
+import { ScrollTargetComponent } from './scroll-target/scroll-target.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     ButtonModule,
+    ToggleModule,
     StickyModule,
     AnchorModule,
     DevUICodeboxModule,
@@ -39,7 +42,8 @@ import { HashComponent } from './hash/hash.component';
     AnchorDemoComponent,
     BasicComponent,
     AsyncComponent,
-    HashComponent
+    HashComponent,
+    ScrollTargetComponent
   ],
   entryComponents: [
     AnchorDemoComponent,

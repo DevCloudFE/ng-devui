@@ -188,8 +188,8 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
   }
 
   get currentHour() {
-    if (this._currentHour < 10) {
-      return '0' + this._currentHour;
+    if (this._currentHour + '' === '0') {
+      return '00';
     } else {
       return this._currentHour;
     }
@@ -200,8 +200,8 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
   }
 
   get currentMinute() {
-    if (this._currentMinute < 10) {
-      return '0' + this._currentMinute;
+    if (this._currentMinute + '' === '0') {
+      return '00';
     } else {
       return this._currentMinute;
     }
@@ -212,8 +212,8 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
   }
 
   get currentSecond() {
-    if (this._currentSecond < 10) {
-      return '0' + this._currentSecond;
+    if (this._currentSecond + '' === '0') {
+      return '00';
     } else {
       return this._currentSecond;
     }
@@ -503,6 +503,61 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
       this.currentYear = this.selectedDate.getFullYear();
       this.currentMonth = this.selectedDate.getMonth();
       this.onDisplayWeeksChange();
+    }
+  }
+
+  fixTime(event, type) {
+    // 由于keypress不监听微软输入法需要使用keydown
+    // 而keydown中微软输入法的key是'Process'，且keydown没有charCode，所以需要用code判断
+    // 故退格和输入使用同一个事件
+    let timeType: string;
+    const min = 0;
+    let max = 59;
+    switch (type) {
+      case 'h': {
+        timeType = 'currentHour';
+        max = 23;
+        break;
+      }
+      case 'm': {
+        timeType = 'currentMinute';
+        break;
+      }
+      case 's': {
+        timeType = 'currentSecond';
+        break;
+      }
+    }
+    let value = event.target['value'];
+    const selectionStart = event.target['selectionStart'];
+    const selectionEnd = event.target['selectionEnd'];
+    // 是数字的时候再处理，分为小键盘和数字键
+    if (/^(Digit|Numpad)\d$/.test(event.code)) {
+      event.preventDefault();
+      let input;
+      if (event['clipboardData']) {
+        input = event['clipboardData'].getData('text');
+      } else if (event['code']) {
+        input = event['code'].slice(event['code'].length - 1);
+      }
+      value = value.substring(0, selectionStart) + input + value.substring(selectionEnd);
+      if (value.length === 3 && value.indexOf('0') === 0) {
+        value = value.slice(1);
+      }
+    } else if (event.keyCode === 8) {
+      event.preventDefault();
+      value = value.substring(0, selectionStart - 1) + value.substring(selectionEnd);
+      if (value.length < 2) {
+        value = '0' + value;
+      }
+    } else if (!(event.keyCode >= 37 && event.keyCode <= 40)) {
+      // 如果不是上下左右，就阻拦，执行自己的处理
+      event.preventDefault();
+    }
+    if (/^(Digit|Numpad)\d$/.test(event.code) || event.keyCode === 8) {
+      if (Number(value) >= min && Number(value) <= max) {
+        this[timeType] = value;
+      }
     }
   }
 

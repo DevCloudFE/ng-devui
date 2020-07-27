@@ -1,10 +1,24 @@
 <section>
+  <h3>默认树拖拽</h3>
   <d-operable-tree
     [tree]="data"
     [treeNodeIdKey]="'id'"
     [treeNodeChildrenKey]="'children'"
     [checkable]="false"
     [draggable]="true"
+    (nodeOnDrop)="onDrop($event)"
+    [beforeNodeDrop]="beforeNodeDrop"
+    (nodeToggled)="showNode($event)"
+  >
+  </d-operable-tree>
+  <h3>支持树的拖拽排序</h3>
+  <d-operable-tree
+    [tree]="data"
+    [treeNodeIdKey]="'id'"
+    [treeNodeChildrenKey]="'children'"
+    [checkable]="false"
+    [draggable]="true"
+    [dropType]="dropType"
     (nodeOnDrop)="onDrop($event)"
     [beforeNodeDrop]="beforeNodeDrop"
     (nodeToggled)="showNode($event)"

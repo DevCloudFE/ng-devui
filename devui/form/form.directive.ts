@@ -10,24 +10,42 @@ import {
 export enum FormLayout {
     Horizontal = 'horizontal',
     Vertical = 'vertical',
-    columns = 'columns',
+    Columns = 'columns',
 }
 
 @Directive({
     selector: '[dForm]',
 })
-export class FormDirective implements OnInit {
+export class FormDirective {
     @Input() layout = FormLayout.Horizontal;
     @Input() labelSize: 'sm' | '' | 'lg' = '';
-    constructor(private elementRef: ElementRef,
-        private renderer: Renderer2) {
+
+    @HostBinding('class.devui-form-horizontal')
+    get layoutHorizontal() {
+        return this.layout === FormLayout.Horizontal;
     }
 
-    ngOnInit() {
-        this.renderer.addClass(this.elementRef.nativeElement, 'devui-form-' + this.layout);
-        if (this.labelSize) {
-            this.renderer.addClass(this.elementRef.nativeElement, 'devui-form-' + this.labelSize);
-        }
+    @HostBinding('class.devui-form-vertical')
+    get layoutVertical() {
+        return this.layout === FormLayout.Vertical;
+    }
+
+    @HostBinding('class.devui-form-columns')
+    get layoutColumns() {
+        return this.layout === FormLayout.Columns;
+    }
+
+    @HostBinding('class.devui-form-lg')
+    get labelSizeLg() {
+        return this.labelSize === 'lg';
+    }
+
+    @HostBinding('class.devui-form-sm')
+    get labelSizeSm() {
+        return this.labelSize === 'sm';
+    }
+
+    constructor() {
     }
 
 }

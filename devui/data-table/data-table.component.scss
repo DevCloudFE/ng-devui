@@ -184,8 +184,6 @@
 
         &.devui-checkable-cell {
           padding: 10px;
-          display: flex;
-          align-items: center;
         }
 
         &.devui-detail-cell {
@@ -222,6 +220,11 @@
       .filter-active {
         background: $hover-content;
         border-radius: 2px 0 0 2px;
+      }
+
+      .check-box-all {
+        vertical-align: middle;
+        margin-right: 5px;
       }
     }
   }

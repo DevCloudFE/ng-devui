@@ -47,7 +47,6 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges, Aft
     if (this.disabled) {
       event.preventDefault();
     }
-
     this.canChange().then((change) => {
       if (!change) {
         event.preventDefault();
@@ -97,7 +96,6 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges, Aft
 
   canChange() {
     let changeResult = Promise.resolve(true);
-
     if (this.beforeChange) {
       const result: any = this.beforeChange(this.values);
       if (typeof result !== 'undefined') {
@@ -110,7 +108,6 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges, Aft
         }
       }
     }
-
     return changeResult;
   }
 
@@ -123,7 +120,6 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges, Aft
 
   writeValue(value: any) {
     this._value = value;
-
     if (this.radios && this.radios.length > 0) {
       this.radios.forEach((radio) => {
         radio.writeValue(this._value);

@@ -2,9 +2,7 @@ import {
     Component,
     ElementRef,
     Renderer2,
-    Input,
-    Output,
-    EventEmitter
+    Input
   } from '@angular/core';
 
 

@@ -9,6 +9,7 @@ export interface SourceType {
   $expandConfig?: any;
   children?: any;
   chosen?: boolean;
+  $isChildTableOpen?: boolean;
 }
 
 export const originSource = [
@@ -107,7 +108,7 @@ export const editableOriginSource = [
     firstName: 'Mark',
     lastName: 'Otto',
     dob: new Date(1990, 12, 1),
-    gender: { id: 1, label: 'male' },
+    gender: { id: 1, label: 'Male' },
     age: 24,
     hobby: [{ id: 1, name: 'music' },
     { id: 2, name: 'football' }],
@@ -163,7 +164,7 @@ export const editableOriginSource = [
     id: 4,
     firstName: 'green',
     lastName: 'gerong',
-    gender: { id: 1, label: 'male' },
+    gender: { id: 1, label: 'Male' },
     dob: new Date(2018, 3, 1),
     age: 24,
     hobby: [{ id: 1, name: 'music' },
@@ -182,7 +183,7 @@ export const editableOriginSource = [
     id: 5,
     firstName: 'po',
     lastName: 'lang',
-    gender: { id: 1, label: 'male' },
+    gender: { id: 1, label: 'Male' },
     dob: new Date(2018, 3, 1),
     detail: '这是一个行详情',
     age: 24,

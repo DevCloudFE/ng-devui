@@ -5,6 +5,7 @@
 .single-checkbox {
   display: inline-block;
   margin-right: 10px;
+  height: 28px;
 }
 
 :host ::ng-deep .devui-radio-horizontal d-radio {

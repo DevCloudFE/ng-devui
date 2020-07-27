@@ -5,11 +5,13 @@ import { DropDownDirective } from './dropdown.directive';
 import { DropDownToggleDirective } from './dropdown-toggle.directive';
 import { DropDownMenuDirective } from './dropdown-menu.directive';
 import { DropDownAppendToBodyComponent } from './dropdown.component';
+import { WindowRefModule } from 'ng-devui/window-ref';
 
 @NgModule({
   imports: [
     CommonModule,
-    OverlayModule
+    OverlayModule,
+    WindowRefModule
   ],
   exports: [
     DropDownDirective,

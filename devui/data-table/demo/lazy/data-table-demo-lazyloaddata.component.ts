@@ -1,22 +1,21 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, ChangeDetectorRef } from '@angular/core';
 
 import {LoadingType} from 'ng-devui/loading';
 import { EMPTY } from 'rxjs';
 import { DataTableComponent } from 'ng-devui/data-table';
-
+import { originSource } from './../mock-data';
 @Component({
     selector: 'd-datatable-demo-lazyloaddata',
     changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: './data-table-demo-lazyloaddata.component.html'
 })
 export class DatatableDemoLazyloadDataComponent implements OnInit {
-
+    showLoading = false;
   // Lazy Load
-    total = 20;
+    total = 40;
     next = 1;
     complete = false;
-    lazyDataSource = [];
-    loading: LoadingType;
+    lazyDataSource = originSource;
 
     dataTableOptions = {
         columns: [
@@ -47,11 +46,13 @@ export class DatatableDemoLazyloadDataComponent implements OnInit {
         ]
     };
 
-      loadMore(datatable: DataTableComponent) {
+    constructor(private cdr: ChangeDetectorRef) {}
+
+      loadMore(event) {
         if (this.next > this.total) {
             return;
         }
-
+        this.showLoading = true;
         const end = this.next + 20;
         const dataSource = [];
         for (; this.next < end; this.next++) {
@@ -62,12 +63,12 @@ export class DatatableDemoLazyloadDataComponent implements OnInit {
                 dob: new Date(1991, 3, 1)
             });
         }
-        this.lazyDataSource = this.lazyDataSource.concat(dataSource);
+        setTimeout(() => {
+            this.lazyDataSource = this.lazyDataSource.concat(dataSource);
+            this.showLoading = false;
+            this.cdr.detectChanges();
+        }, 300);
         this.complete = this.next > this.total;
-        datatable.loadFinish(this.complete);
-        if (this.complete) {
-            this.loading = EMPTY;
-        }
         console.log(`load more`, this.next, this.complete);
     }
 

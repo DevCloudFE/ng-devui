@@ -29,4 +29,14 @@
       <d-common-iframe-propagate demo></d-common-iframe-propagate>
     </d-codebox>
   </div>
+
+  <div class="demo-example" [dAnchor]="'lazy-load'">
+    <div class="demo-title">Lazy Load</div>
+    <div class="demo-text">
+      引入util模块中的LazyLoadModule，使用dLazyLoad指令在滚到到容器底部时响应loadMore事件实现懒加载
+    </div>
+    <d-codebox id="common-lazy-load" [sourceData]="lazyLoadSource">
+      <d-lazy-load demo></d-lazy-load>
+    </d-codebox>
+  </div>
 </div>

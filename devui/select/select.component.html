@@ -170,7 +170,7 @@
         <div class="devui-form-group devui-has-feedback" [style.margin]="'0'">
           <input
             #filterInput
-            [ngClass]="size ? 'devui-select-input-' + size : ''"
+            [ngClass]="[size ? 'devui-select-input-' + size : '', filter ? 'devui-search-filter' : '']"
             name="select"
             type="text"
             [ngModel]="filter"
@@ -293,7 +293,7 @@
     title="{{ formatter(item.option) }}"
     [ngClass]="[
       'devui-dropdown-item',
-      item.isChecked ? hightLightItemClass : '',
+      item.isChecked ? highlightItemClass : '',
       selectIndex === index && item.id !== activeIndex ? 'selected' : '',
       optionDisabledKey && item.option[optionDisabledKey] ? 'disabled' : ''
     ]"

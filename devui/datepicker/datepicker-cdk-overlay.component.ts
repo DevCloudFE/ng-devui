@@ -13,7 +13,8 @@ import {
   HostListener,
   OnChanges,
   SimpleChanges,
-  OnDestroy
+  OnDestroy,
+  AfterViewInit
 } from '@angular/core';
 import { CdkOverlayOrigin, ConnectedPosition, ConnectedOverlayPositionChange, VerticalConnectionPos } from '@angular/cdk/overlay';
 
@@ -55,7 +56,10 @@ import { debounceTime } from 'rxjs/operators';
   ],
   styleUrls: ['./datepicker-cdk-overlay.component.scss']
 })
-export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDestroy, ControlValueAccessor {
+export class DatePickerAppendToBodyComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy, ControlValueAccessor {
+  @Input() appendToBodyDirections: Array<AppendToBodyDirection | ConnectedPosition> = [
+    'rightDown', 'leftDown', 'rightUp', 'leftUp'
+  ];
   @Input() locale: string;
   @Input() cssClass: string;
   @Input() disabled: boolean;
@@ -78,6 +82,10 @@ export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDes
   private i18nSubscription: Subscription;
   public i18nLocale: I18nInterface['locale'];
 
+  public cdkConnectedOverlayOrigin: any;
+
+  private onChange = (_: any) => null;
+  private onTouched = () => null;
 
   @Input() set showTime(showTime: boolean) {
     this._showTime = showTime;
@@ -88,7 +96,7 @@ export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDes
   }
 
   @Input() set dateConfig(dateConfig: any) {
-    if (dateConfig) {
+    if (this.checkDateConfig(dateConfig)) {
       this._dateConfig = dateConfig;
       this._dateFormat = this.showTime ? dateConfig.format.time : dateConfig.format.date;
     } else {
@@ -151,27 +159,18 @@ export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDes
     return this._isOpen;
   }
 
-  public cdkConnectedOverlayOrigin: any;
-
-  @Input() appendToBodyDirections: Array<AppendToBodyDirection | ConnectedPosition> = [
-    'rightDown', 'leftDown', 'rightUp', 'leftUp'
-  ];
-
-  private onChange = (_: any) => null;
-  private onTouched = () => null;
-
   constructor(private elementRef: ElementRef, private viewContainerRef: ViewContainerRef,
               private renderer2: Renderer2, private datePickerConfig: DatePickerConfig, private i18n: I18nService) {
     this._dateConfig = datePickerConfig['dateConfig'];
     this.dateConverter = datePickerConfig['dateConfig'].dateConverter || new DefaultDateConverter();
+  }
 
-
-    this.inputSub = fromEvent(this.elementRef.nativeElement, 'input')
-     .pipe(
-      debounceTime(300)
-     ).subscribe(event => {
-        this.transUserInputToDatepicker(event);
-      });
+  checkDateConfig(dateConfig: any) {
+    if (!dateConfig) { return false; }
+    if (typeof(dateConfig.timePicker) !== 'boolean' || !dateConfig.max || !dateConfig.min || !dateConfig.format) {
+      return false;
+    }
+    return true;
   }
 
   ngOnInit() {
@@ -183,6 +182,15 @@ export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDes
     if (this.autoOpen) {
       this.isOpen = true;
     }
+  }
+
+  ngAfterViewInit() {
+    this.inputSub = fromEvent(this.elementRef.nativeElement, 'input')
+     .pipe(
+      debounceTime(300)
+     ).subscribe(event => {
+        this.transUserInputToDatepicker(event);
+      });
   }
 
   ngOnChanges(changes: SimpleChanges) {

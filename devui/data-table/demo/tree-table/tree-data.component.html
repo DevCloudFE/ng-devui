@@ -27,7 +27,7 @@
               [ngModelOptions]="{ standalone: true }"
               [ngModel]="rowItem.$checked"
               [halfchecked]="rowItem.$halfChecked"
-              [disabled]="rowItem.$disabled"
+              [disabled]="rowItem.$checkDisabled"
               (ngModelChange)="onRowCheckChange($event, rowIndex, nestedIndex, rowItem)"
               dTooltip
               [content]="rowItem.$checkBoxTips"

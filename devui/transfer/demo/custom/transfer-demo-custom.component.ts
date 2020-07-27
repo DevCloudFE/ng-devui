@@ -1,4 +1,4 @@
-import { Component, HostBinding, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { DataTableComponent } from 'ng-devui/data-table';
 
 
@@ -14,73 +14,8 @@ interface SourceType {
 
 @Component({
   selector: 'd-transfer-demo-custom',
-  template: `
-    <section>
-    <div style="width:700px; ">
-    <d-transfer [customSourceCheckedLen]="sourceCheckedLen"
-    [customTargetCheckedLen]="targetCheckedLen"
-    (transferToTarget)="transferToTarget()"
-    (transferToSource)="transferToSource()"
-    [titles]="{source:'源标题', target:'目标标题'}">
-      <ng-template #sourceTemplate>
-        <div class="title">
-          自定义头部
-        </div>
-        <div class="line"></div>
-          <div class="content" style="height:320px;overflow:auto;">
-            <d-data-table #sourceTable [pager]="pager" [dataSource]="basicDataSource"
-            [checkable]="true"
-            (rowCheckChange)="sourceRowCheckChange(event)"  (checkAllChange)="sourceCheckAllChange()"
-            (pageIndexChange)="sourceChangePageContent($event)" >
-            <d-column [order]="1" field="id" header="ID" [width]="'50px'"></d-column>
-            <d-column [order]="2" field="firstName" header="姓名" [width]="'80px'"></d-column>
-            <d-column [order]="3" field="dob" header="生日" [fieldType]="'date'" [extraOptions]="{dateFormat: 'MM/DD/YYYY'}"
-              [width]="'100px'"></d-column>
-              <d-column [order]="4" field="gender" header="性别" [width]="'100px'"></d-column>
-            </d-data-table>
-          </div>
-        </ng-template>
-        <ng-template #targetTemplate>
-          <div class="title">
-          自定义头部
-        </div>
-        <div class="line"></div>
-        <div class="content" style="height:320px;overflow:auto;">
-          <d-data-table #targetTable [pager]="pager" [dataSource]="basicTargetSource"
-          [checkable]="true"
-          (pageIndexChange)="targetChangePageContent($event)"
-          (rowCheckChange)="targetRowCheckChange(event)" (checkAllChange)="targetCheckAllChange()" >
-          <d-column [order]="1" field="id" header="ID" [width]="'50px'"></d-column>
-          <d-column [order]="2" field="firstName" header="姓名" [width]="'80px'"></d-column>
-          <d-column [order]="3" field="dob" header="生日" [fieldType]="'date'" [extraOptions]="{dateFormat: 'MM/DD/YYYY'}"
-            [width]="'100px'"></d-column>
-            <d-column [order]="4" field="gender" header="性别"   [width]="'100px'"></d-column>
-          </d-data-table>
-        </div>
-      </ng-template>
-    </d-transfer>
-    </div>
-    </section>
-  `,
-  styles: [`
-    .title {
-      display: flex;
-      height: 40px;
-      line-height: 40px;
-      align-items: center;
-      -webkit-align-items: center;
-      -moz-align-items: center;
-      -ms-align-items: center;
-      -o-align-items: center;
-      margin-left: 20px;
-    }
-
-    .line {
-      height: 1px;
-      background: #E3E5E9;
-      margin-bottom: 10px;
-    }
-`]
+  templateUrl: './transfer-demo-custom.component.html',
+  styleUrls: ['./transfer-demo-custom.component.scss']
 })
 export class TransferDemoCustomComponent {
   originSource: Array<SourceType> = [
@@ -215,10 +150,12 @@ export class TransferDemoCustomComponent {
     this.originSource = this.originSource.filter(item => {
       return !ids.find(id => id === item.id);
     });
+    this.originSource.forEach(item => item.$checked = false);
     this.basicDataSource = JSON.parse(JSON.stringify(this.originSource));
-    checkedRows.forEach(item => item.$checked = false);
     this.targetSource = this.basicTargetSource.concat(checkedRows);
     this.basicTargetSource = JSON.parse(JSON.stringify(this.targetSource));
+
+    this.targetCheckedLen = checkedRows.length;
 
     // 要置0
     this.sourceCheckedLen = 0;
@@ -230,11 +167,11 @@ export class TransferDemoCustomComponent {
     this.targetSource = this.targetSource.filter(item => {
       return !ids.find(id => id === item.id);
     });
+    this.targetSource.forEach(item => item.$checked = false);
     this.basicTargetSource = JSON.parse(JSON.stringify(this.targetSource));
-
-    checkedRows.forEach(item => item.$checked = false);
     this.originSource = this.basicDataSource.concat(checkedRows);
     this.basicDataSource = JSON.parse(JSON.stringify(this.originSource));
+    this.sourceCheckedLen = checkedRows.length;
     // 要置0
     this.targetCheckedLen = 0;
   }

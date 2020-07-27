@@ -17,6 +17,15 @@ export class DomHelper<T> {
       return true;
   }
 
+  judgeAppendToBodyStyleClasses(classList: string[]) {
+      for (let i = 0; i < classList.length; i++) {
+          if (!document.querySelector(classList[i])) {
+            return false;
+          }
+      }
+      return true;
+  }
+
   singleTxt(tagName: string): string {
       const debugEl = this.fixture.debugElement.query(By.css(tagName));
       return debugEl ? debugEl.nativeElement.textContent : undefined;

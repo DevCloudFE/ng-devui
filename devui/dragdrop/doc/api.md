@@ -12,10 +12,10 @@
 | dragScope                     | `string \| Array<string>`                                                                                        | 'default' | 可选，限制drop的位置，必须匹配对应的 `dropScope`                                                                                                                                                                      | [基本用法](/components/dragdrop/demo#basic-usage)                    |
 | dragOverClass                 | `string`                                                                                                         | --        | 可选，拖动时被拖动元素的css                                                                                                                                                                                           | [拖拽实体元素跟随](/components/dragdrop/demo#drag-entity-elements-to-follow) |
 | dragHandleClass               | `string`                                                                                                         | --        | 可选，拖动句柄，css选择器，只有被选中的元素才能响应拖动事件                                                                                                                                                           | [基本用法](/components/dragdrop/demo#basic-usage)                    |
-| disabled                      | `boolean`                                                                                                        | false     | 可选，控制当前元素是否可拖动false为可以，true为不可以                                                                                                                                                                 |
+| disabled                      | `boolean`                                                                                                        | false     | 可选，控制当前元素是否可拖动false为可以，true为不可以                                                                                                                                                                 |[基本用法](/components/dragdrop/demo#basic-usage)  |
 | enableDragFollow              | `boolean`                                                                                                        | false     | 可选，是否启用实体元素跟随（可以添加更多特效，如阴影等）                                                                                                                                                              | [拖拽实体元素跟随](/components/dragdrop/demo#drag-entity-elements-to-follow) |
 | dragFollowOption              | `{appendToBody?: boolean}`                                                                                       | --        | 可选，用于控制实体拖拽的一些配置                                                                                                                                                                                      | [拖拽实体元素跟随](/components/dragdrop/demo#drag-entity-elements-to-follow) |
-| dragFollowOption.appendToBody | `boolean`                                                                                                        | false     | 可选，用于控制实体拖拽的克隆元素插入的位置。默认false会插入到源元素父元素所有子的最后，设置为true会附着到。见说明1                                                                                                    |
+| dragFollowOption.appendToBody | `boolean`                                                                                                        | false     | 可选，用于控制实体拖拽的克隆元素插入的位置。默认false会插入到源元素父元素所有子的最后，设置为true会附着到。见说明1                                                                                                    |[拖拽实体元素跟随](/components/dragdrop/demo#drag-entity-elements-to-follow) |
 | originPlaceholder             | `{show?: boolean; tag?: string; style?: {cssProperties: string]: string}; text?: string; removeDelay?: number;}` | --        | 可选，设置源占位符号，用于被拖拽元素原始位置占位                                                                                                                                                                      | [源占位符](/components/dragdrop/demo#source-placeholder)             |
 | originPlaceholder.show        | `boolean`                                                                                                        | true      | 可选，是否显示，默认originPlaceholder有Input则显示，特殊情况可以关闭                                                                                                                                                  |
 | originPlaceholder.tag         | `string`                                                                                                         | 'div'     | 可选，是否显示，默认originPlaceholder有Input则显示，特殊情况可以关闭                                                                                                                                                  |
@@ -23,8 +23,8 @@
 | originPlaceholder.text        | `string`                                                                                                         | --        | 可选，placeholder内的文字                                                                                                                                                                                             | [源占位符](/components/dragdrop/demo#source-placeholder)             |
 | originPlaceholder.removeDelay | `number`                                                                                                         | --        | 可选，用于希望源占位符在拖拽之后的延时里再删除，方便做动画，单位为ms毫秒                                                                                                                                              | [源占位符](/components/dragdrop/demo#source-placeholder)             |
 | dragIdentity                  | `any`                                                                                                            | --        | 可选，用于虚拟滚动的恢复，虚拟滚动过程中会删除元素（溢出画面）然后又重新生成来恢复元素（回到画面），需要唯一识别值来恢复原始事件拖拽事件监听和源占位符等                                                              |
-| dragItemParentName            | `string`                                                                                                         | --        | 可选，选择器名，和dragItemChildrenName搭配用于拖拽截断看不见的列表内元素以提高性能， 从dragItemParentName匹配的选择器里边查询匹配dragItemChildrenName的元素，通常是列表里查找条目，把超出可视范围的条目克隆的时候剔除 |
-| dragItemChildrenName          | `string`                                                                                                         | --        | 可选，选择器名，和dragItemParentName搭配用于拖拽截断看不见的列表内元素以提高性能，功能见dragItemParentName的描述                                                                                                      |
+| dragItemParentName            | `string`                                                                                                         | --        | 可选，选择器名，和dragItemChildrenName搭配用于拖拽截断看不见的列表内元素以提高性能， 从dragItemParentName匹配的选择器里边查询匹配dragItemChildrenName的元素，通常是列表里查找条目，把超出可视范围的条目克隆的时候剔除 | 暂无
+| dragItemChildrenName          | `string`                                                                                                         | --        | 可选，选择器名，和dragItemParentName搭配用于拖拽截断看不见的列表内元素以提高性能，功能见dragItemParentName的描述                                                                                                      | 暂无
 
 说明1：dragFollowOptions的appendToBody的使用场景：当拖拽离开后源位置的父对象会被销毁的话，需要把克隆体附着到body上防止被销毁。默认会通过复制样式保证克隆到body的实体的样式是正确的，但部分深度依赖DOM节点位置的样式和属性可能会失败，需要手动调整部分样式。
 
@@ -32,9 +32,9 @@
 
 | 事件           | 类型                      | 描述                    | 跳转 Demo |
 | :------------- | :------------------------ | :---------------------- |:----|
-| dragStartEvent | `EventEmitter<DragEvent>` | 开始拖动的DragStart事件 |
-| dragEndEvent   | `EventEmitter<DragEvent>` | 拖动结束的DragEnd事件   |
-| dropEndEvent   | `EventEmitter<DragEvent>` | 放置结束的Drop事件      |
+| dragStartEvent | `EventEmitter<DragEvent>` | 开始拖动的DragStart事件 |[基本用法](/components/dragdrop/demo#basic-usage)                    |
+| dragEndEvent   | `EventEmitter<DragEvent>` | 拖动结束的DragEnd事件   |[基本用法](/components/dragdrop/demo#basic-usage)                    |
+| dropEndEvent   | `EventEmitter<DragEvent>` | 放置结束的Drop事件      |[基本用法](/components/dragdrop/demo#basic-usage)                    |
 
 Drag DOM Events 详情: [DragEvent](https://developer.mozilla.org/en-US/docs/Web/API/DragEvent)
 
@@ -46,11 +46,10 @@ Drag DOM Events 详情: [DragEvent](https://developer.mozilla.org/en-US/docs/Web
 
 | 名字                                                                                         | 类型                      | 默认值             | 描述                                                                                         | 跳转Demo|
 | :------------------------------------------------------------------------------------------- | :------------------------ | :----------------- | :------------------------------------------------------------------------------------------- |:----|
-| 
 | batchDragGroup                                                                               | `string`                  | 'default'          | 可选，批量拖拽分组组名，不同组名                                                             |
-| batchDragActive                                                                              | `boolean`                 | false              | 可选，是否把元素加入到批量拖拽组. 见说明1。                                                  |
-| batchDragLastOneAutoActiveEventKeys                                                          | `Array<key in DragEvent>` | ['ctrlKey']        | 可选，通过过拖拽可以激活批量选中的拖拽事件判断。见说明2。                                    |
-| batchDragStyle                                                                               | `Array<badge\|stack>`     | ['badge', 'stack'] | 可选，批量拖拽的效果，badge代表右上角有统计数字，stack代表有堆叠效果，数组里有该字符串则有效 |
+| batchDragActive                                                                              | `boolean`                 | false              | 可选，是否把元素加入到批量拖拽组. 见说明1。                                                  |[批量拖拽](/components/dragdrop/demo#basic-usage)
+| batchDragLastOneAutoActiveEventKeys                                                          | `Array<key in DragEvent>` | ['ctrlKey']        | 可选，通过过拖拽可以激活批量选中的拖拽事件判断。见说明2。                                    | 
+| batchDragStyle                                                                               | `Array<badge\|stack>`     | ['badge', 'stack'] | 可选，批量拖拽的效果，badge代表右上角有统计数字，stack代表有堆叠效果，数组里有该字符串则有效 |[批量拖拽](/components/dragdrop/demo#basic-usage)  
 
 说明1： `batchDragActive`为`true`的时候会把元素加入组里，加入顺序为变为true的顺序，先加入的在数组前面。第一个元素会确认批量的组名，如果后加入的组名和先加入的组名不一致，则后者无法加入。
 说明2： `batchDragLastOneAutoActiveEventKeys`的默认值为['ctrlKey'], 即可以通过按住ctrl键拖动最后一个元素， 该元素自动加入批量拖拽的组，判断条件是dragStart事件里的ctrlKey事件为true。目前仅支持判断true/false。该参数为数组，可以判断任意一个属性值为true则生效，可用于不同操作系统的按键申明。
@@ -82,9 +81,9 @@ Drag DOM Events 详情: [DragEvent](https://developer.mozilla.org/en-US/docs/Web
 
 | 事件           | 类型                                  | 描述                                                                        | 跳转 Demo                                     |
 | :------------- | :------------------------------------ | :-------------------------------------------------------------------------- | :-------------------------------------------- |
-| dragEnterEvent | `EventEmitter<DragEvent>`             | drag元素进入的dragenter事件                                                 |
-| dragOverEvent  | `EventEmitter<DragEvent>`             | drag元素在drop区域上的dragover事件                                          |
-| dragLeaveEvent | `EventEmitter<DragEvent>`             | drag元素离开的dragleave事件                                                 |
+| dragEnterEvent | `EventEmitter<DragEvent>`             | drag元素进入的dragenter事件                                                 |[基本用法](/components/dragdrop/demo#basic-usage) |
+| dragOverEvent  | `EventEmitter<DragEvent>`             | drag元素在drop区域上的dragover事件                                          |[基本用法](/components/dragdrop/demo#basic-usage) |
+| dragLeaveEvent | `EventEmitter<DragEvent>`             | drag元素离开的dragleave事件                                                 |[基本用法](/components/dragdrop/demo#basic-usage) |
 | dropEvent      | `EventEmitter<DropEvent>`(见下文定义) | 放置一个元素, 接收的事件，其中nativeEvent表示原生的drop事件，其他见定义注释 | [基本用法](/components/dragdrop/demo#basic-usage) |
 
 ### DropEventModel 定义

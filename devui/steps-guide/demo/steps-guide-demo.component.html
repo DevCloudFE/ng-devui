@@ -1,0 +1,17 @@
+<div class="demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 60, bottom: 0 }">
+  <d-demo-nav [navItems]="navItems"></d-demo-nav>
+  <div class="demo-example" [dAnchor]="'basic-usage'">
+    <div class="demo-title">基本用法</div>
+    <div class="demo-text">设定一组操作指引信息顺序显示</div>
+    <d-codebox id="components-toast-basic" [sourceData]="basicSource">
+      <d-basic demo></d-basic>
+    </d-codebox>
+  </div>
+  <div class="demo-example" [dAnchor]="'custom'">
+    <div class="demo-title">自定义</div>
+    <div class="demo-text">自定义操作指引信息弹出的位置和元素</div>
+    <d-codebox id="components-toast-custom" [sourceData]="lifeSource">
+      <d-custom demo></d-custom>
+    </d-codebox>
+  </div>
+</div>

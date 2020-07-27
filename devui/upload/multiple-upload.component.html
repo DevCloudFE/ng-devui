@@ -6,15 +6,9 @@
   (fileOver)="onFileOver($event)"
   [ngStyle]="{ border: isDropOVer ? '1px solid #15bf15' : '0' }"
 >
-  <div class="devui-input-group" (click)="onClick($event)">
-    <input
-      type="text"
-      style="cursor: pointer;"
-      class="devui-form-control"
-      [placeholder]="placeholderText ? placeholderText : i18nText?.chooseFiles"
-      readonly
-    />
-    <span class="devui-input-group-addon" style="cursor: pointer;">
+  <div class="devui-input-group" [class.disabled]="disabled" (click)="onClick($event)">
+    <input type="text" class="devui-form-control" [placeholder]="placeholderText ? placeholderText : i18nText?.chooseFiles" readonly />
+    <span class="devui-input-group-addon">
       <svg class="svg-icon-dot" height="1em" width="1em" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
         <path
           d="m400.31892 176.970574c0-61.574381 50.113351-111.680569 111.679545-111.680569 61.576427 0 111.680569 50.106188 111.680569 111.680569 0 61.568241-50.104141 111.679545-111.680569 111.679545-61.566194 0-111.679545-50.111304-111.679545-111.679545zm0 335.028403c0-61.568241 50.113351-111.678522 111.679545-111.678522 61.576427 0 111.680569 50.110281 111.680569 111.678522 0 61.574381-50.105165 111.682615-111.680569 111.682615-61.566194 0-111.679545-50.108235-111.679545-111.682615zm0 335.037612c0-61.572334 50.113351-111.679545 111.679545-111.679545 61.575404 0 111.680569 50.107211 111.680569 111.679545 0 61.567217-50.105165 111.672382-111.680569 111.672382-61.566194 0-111.679545-50.105164-111.679545-111.672382zm0 0"
@@ -22,7 +16,7 @@
       </svg>
     </span>
   </div>
-  <d-button *ngIf="!autoUpload && !withoutBtn" (btnClick)="upload()" [style.margin-left.px]="10" bsStyle="common">
+  <d-button *ngIf="!autoUpload && !withoutBtn" [disabled]="disabled" (btnClick)="upload()" [style.margin-left.px]="10" bsStyle="common">
     {{ uploadText || i18nText?.upload }}
   </d-button>
 </div>

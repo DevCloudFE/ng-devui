@@ -18,7 +18,7 @@ export class DrawerService {
     id,
     zIndex,
     width,
-    fullScreen,
+    fullScreen, // @deprecated
     data,
     isCover,
     clickDoms,
