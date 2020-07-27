@@ -45,6 +45,13 @@ class TestPopoverBasicComponent {
 
 describe('popover', () => {
 
+  afterEach(() => {
+    const popOverEl = document.getElementsByTagName('d-popover');
+    for (let i = 0; i < popOverEl.length; i++) {
+      popOverEl[i].parentNode.removeChild(popOverEl[i]);
+    }
+  });
+
   describe('popover basic', () => {
     let testComponent: TestPopoverBasicComponent;
     let fixture: ComponentFixture<TestPopoverBasicComponent>;

@@ -257,6 +257,8 @@ export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterV
             insertObject[this.treeNodeIdKey] = treeNode[this.treeNodeIdKey];
             insertObject[this.treeNodeTitleKey] = treeNode[this.treeNodeTitleKey];
             (this.value as any[]).push(insertObject);
+            // 赋值触发setValue设置valueType和valueLength
+            this.value = this.value;
           }
         } else {
           treeNode.isChecked = false;

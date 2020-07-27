@@ -9,14 +9,15 @@ import {
   ViewChildren,
   ElementRef,
   QueryList,
-  OnDestroy
+  OnDestroy,
+  TemplateRef
 } from '@angular/core';
 import {
   ITreeItem,
   TreeNode
 } from './tree-factory.class';
 import { TreeComponent } from './tree.component';
-import { ICheckboxInput } from './tree.types';
+import { ICheckboxInput, IDropType } from './tree.types';
 import { TreeMaskService } from './tree-mask.service';
 import { I18nService, I18nInterface } from 'ng-devui/i18n';
 import { Subscription } from 'rxjs';
@@ -31,6 +32,8 @@ export class OperableTreeComponent implements AfterViewInit, OnDestroy {
   @Input() treeNodeIdKey: string;
   @Input() treeNodeChildrenKey: string;
   @Input() checkboxDisabledKey: string;
+  @Input() selectDisabledKey: string;
+  @Input() toggleDisabledKey: string;
   @Input() iconParentOpen: string;
   @Input() iconParentClose: string;
   @Input() iconLeaf: string;
@@ -62,10 +65,17 @@ export class OperableTreeComponent implements AfterViewInit, OnDestroy {
   @Output() editValueChange: EventEmitter<any> = new EventEmitter<any>();
   @Output() nodeOnDrop: EventEmitter<any> = new EventEmitter<any>();
   @ViewChild('operableTree', { static: true }) operableTree: TreeComponent;
+  @ViewChild('operableTreeContainer', { static: true }) operableTreeEle: ElementRef;
+  @ViewChild('treeDropIndicator') treeDropIndicator: ElementRef;
   @ContentChild('iconTemplate') iconTemplate;
   @ContentChild('nodeTemplate') nodeTemplate;
   @ContentChild('operatorTemplate') operatorTemplate;
   @ContentChild('statusTemplate') statusTemplate;
+  @Input() dropType: IDropType = {
+    dropPrev: false,
+    dropNext: false,
+    dropInner: true
+  };
   private addingNode = false;
   private mouseRightButton = 2;
   private treeNodeDragoverResponder = {
@@ -76,6 +86,15 @@ export class OperableTreeComponent implements AfterViewInit, OnDestroy {
   elementAsMask: any;
   i18nCommonText: I18nInterface['common'];
   i18nSubscription: Subscription;
+  dragState = {
+    showIndicator: true,
+    dropType: null,
+    draggingNode: null,
+    indicatorTop: 0,
+    indicatorLeft: 0,
+    indicatorWidth: 0
+  };
+
   constructor(private i18n: I18nService) {
     this.i18nCommonText = this.i18n.getI18nText().common;
     this.i18nSubscription = this.i18n.langChange().subscribe((data) => {
@@ -95,17 +114,24 @@ export class OperableTreeComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  addBackGround(e) {
+  addBackGround(e, treeNode) {
+    if (treeNode.data.disabled || treeNode.data.disableSelect) {
+      return;
+    }
     e.stopPropagation();
     TreeMaskService.addMask(e.target.parentNode, this.elementAsMask, TreeMaskService.calcWidth(e.target.parentNode));
   }
 
-  removeBackGround(e) {
+  removeBackGround(e, treeNode) {
+    if (treeNode.data.disabled || treeNode.data.disableSelect) {
+      return;
+    }
     e.stopPropagation();
     TreeMaskService.removeMask(e.target.parentNode, this.elementAsMask);
   }
 
   onDragstart(event, treeNode) {
+    this.dragState.draggingNode = event.target;
     const data = {
       type: 'operable-tree-node',
       nodeId: treeNode.id,
@@ -129,18 +155,65 @@ export class OperableTreeComponent implements AfterViewInit, OnDestroy {
           this.nodeToggled.emit(treeNode);
         }, 1000);
       }
+      this.handlerDragState(event, treeNode);
     }
+
+  }
+
+  handlerDragState(event, treeNode) {
+    const dropPrev = this.dropType.dropPrev;
+    const dropNext = this.dropType.dropNext;
+    const dropInner = this.dropType.dropInner;
+    let dropType;
+    const treePosition = this.operableTreeEle.nativeElement.getBoundingClientRect();
+    const prevPercent = dropPrev ? (dropInner ? 0.25 : (dropNext ? 0.45 : 1)) : -1;
+    const nextPercent = dropNext ? (dropInner ? 0.75 : (dropPrev ? 0.55 : 0)) : 1;
+    const targetPosition = event.currentTarget.getBoundingClientRect();
+    const treeNodePosition = event.currentTarget.querySelector('.devui-tree-node__title').getBoundingClientRect();
+    const distance = event.clientY - targetPosition.top;
+
+    if (distance < targetPosition.height * prevPercent) {
+      dropType = 'prev';
+    } else if (distance > targetPosition.height * nextPercent) {
+      dropType = 'next';
+    } else if (dropInner) {
+      dropType = 'inner';
+    } else {
+      dropType = 'none';
+    }
+
+    if (dropType === 'prev') {
+      this.dragState.indicatorTop = treeNodePosition.top - treePosition.top - 10;
+    }
+    if (dropType === 'next') {
+      this.dragState.indicatorTop = treeNodePosition.bottom - treePosition.top + 10;
+    }
+    if (dropType === 'inner') {
+      event.currentTarget.classList.add('devui-drop-inner');
+    } else {
+      event.currentTarget.classList.remove('devui-drop-inner');
+    }
+    this.dragState.indicatorLeft = treeNodePosition.left - treePosition.left;
+    this.dragState.indicatorWidth = treePosition.width - this.dragState.indicatorLeft;
+    this.dragState.dropType = dropType;
+    this.dragState.showIndicator = dropType === 'prev' || dropType === 'next';
   }
 
   onDragleave(event, treeNode) {
+    this.removeDraggingStyle(event.currentTarget);
     if (this.treeNodeDragoverResponder.node && this.treeNodeDragoverResponder.node.id === treeNode.id) {
       this.treeNodeDragoverResponder.node = null;
       clearTimeout(this.treeNodeDragoverResponder.timeout);
     }
   }
 
+  removeDraggingStyle(target) {
+    this.dragState.showIndicator = false;
+    target.classList.remove('devui-drop-inner');
+  }
 
-  onDrop(event, newParentNode) {
+  onDrop(event, dropNode) {
+    this.removeDraggingStyle(event.currentTarget);
     if (!this.draggable) {
       return;
     }
@@ -151,42 +224,85 @@ export class OperableTreeComponent implements AfterViewInit, OnDestroy {
         const transferData = JSON.parse(transferDataStr);
         if (typeof (transferData) === 'object' && transferData.type === 'operable-tree-node') {
           const dragNodeId = transferData['nodeId'];
-          const dragNodeParentId = transferData['parentId'];
-          if (dragNodeId === newParentNode.id || dragNodeId === newParentNode.parentId
-            || dragNodeParentId === newParentNode.id || dragNodeParentId === undefined) {
+          const isParent = this.treeFactory.checkIsParent(dropNode.id, dragNodeId);
+          if (dragNodeId === dropNode.id || isParent) {
             return;
           }
           let dragResult = Promise.resolve(true);
           if (this.beforeNodeDrop) {
-            dragResult = this.beforeNodeDrop(dragNodeId, newParentNode.id);
+            dragResult = this.beforeNodeDrop(dragNodeId, dropNode.id);
           }
 
           dragResult.then(() => {
             const movingNode = this.treeFactory.nodes[dragNodeId];
-            const originalParentNode = this.treeFactory.nodes[movingNode.parentId];
-            movingNode.parentId = newParentNode.id;
-            this.treeFactory.addChildNode(newParentNode, movingNode);
-            originalParentNode.data.children = originalParentNode.data.children.filter(node => node.id !== dragNodeId);
-            if (!originalParentNode.data.children || !originalParentNode.data.children.length) {
-              originalParentNode.data.isParent = false;
+            const movingNodeIndex = this.treeFactory.getNodeIndex(movingNode);
+            const dropNodeIndex = this.treeFactory.getNodeIndex(dropNode);
+            const originalParentNode = movingNode.parentId ? this.treeFactory.nodes[movingNode.parentId] : this.treeFactory.treeRoot;
+
+            switch (this.dragState.dropType) {
+              case 'prev':
+                this.handlerDropSort(movingNodeIndex, dropNodeIndex, movingNode, dropNode, originalParentNode, 'prev');
+                break;
+              case 'next':
+                this.handlerDropSort(movingNodeIndex, dropNodeIndex, movingNode, dropNode, originalParentNode, 'next');
+                break;
+              case 'inner':
+                this.handlerDropInner(movingNodeIndex, movingNode, dropNode, originalParentNode);
+                break;
             }
-            this.nodeToggled.emit(newParentNode);
-            this.treeFactory.openNodesById(newParentNode.id);
-            newParentNode.data.isParent = true;
           });
         }
       } catch (e) {
 
       } finally {
         if (this.nodeOnDrop.observers.length > 0) {
-          this.nodeOnDrop.emit({ event, treeNode: newParentNode });
+          this.nodeOnDrop.emit({ event, treeNode: dropNode });
         }
       }
     }
   }
 
+  handlerDropSort(oldIndex, newIndex, movingNode, dropNode, originalParentNode, type) {
+    const dropIndex = type === 'next' ? newIndex + 1 : newIndex;
+    movingNode.parentId = dropNode.parentId;
+    let parentNode;
+    if (dropNode.parentId === undefined) {
+      parentNode = this.treeFactory.treeRoot;
+      parentNode.splice(dropIndex, 0, movingNode);
+    } else {
+      parentNode = this.treeFactory.getNodeById(dropNode.parentId);
+      parentNode.children.splice(dropIndex, 0, movingNode);
+    }
+    if (dropNode.parentId === originalParentNode.id && newIndex < oldIndex) {
+      this.handlerOriginalParentNode(originalParentNode, oldIndex + 1);
+    } else {
+      this.handlerOriginalParentNode(originalParentNode, oldIndex);
+    }
+
+  }
+
+  handlerOriginalParentNode(originalParentNode, oldIndex) {
+    if (originalParentNode.id === undefined) {
+      originalParentNode.splice(oldIndex, 1);
+    } else {
+      originalParentNode.data.children.splice(oldIndex, 1);
+      if (!originalParentNode.data.children || !originalParentNode.data.children.length) {
+        originalParentNode.data.isParent = false;
+      }
+    }
+  }
+
+  handlerDropInner(oldIndex, movingNode, dropNode, originalParentNode) {
+    movingNode.parentId = dropNode.id;
+    dropNode.data.isParent = true;
+    this.treeFactory.openNodesById(dropNode.id);
+    this.treeFactory.addChildNode(dropNode, movingNode);
+    this.handlerOriginalParentNode(originalParentNode, oldIndex);
+    this.nodeToggled.emit(dropNode);
+  }
+
   selectNode(event, treeNode: TreeNode) {
-    if (treeNode.data.disabled) {
+    if (treeNode.data.disableSelect) {
       return;
     }
     if (!this.canActivateNode) {
@@ -202,6 +318,9 @@ export class OperableTreeComponent implements AfterViewInit, OnDestroy {
   }
 
   toggleNode(event, treeNode: TreeNode) {
+    if (treeNode.data.disableToggle) {
+      return;
+    }
     this.nodeToggled.emit(treeNode);
     this.treeFactory.toggleNodeById(treeNode.id);
   }
@@ -235,7 +354,7 @@ export class OperableTreeComponent implements AfterViewInit, OnDestroy {
         isParent: nodeInfo['isParent'],
         id: nodeInfo['id'] ? nodeInfo['id'] : undefined,
         data: nodeInfo.data
-      });
+      }, nodeInfo.index);
       this.treeFactory.editNodeTitle(node.id);
       this.addingNode = true;
       treeNode.data.isOpen = true;
@@ -357,6 +476,8 @@ export class OperableTreeComponent implements AfterViewInit, OnDestroy {
       treeNodeChildrenKey: this.treeNodeChildrenKey,
       treeNodeIdKey: this.treeNodeIdKey,
       checkboxDisabledKey: this.checkboxDisabledKey,
+      selectDisabledKey: this.selectDisabledKey,
+      toggleDisabledKey: this.toggleDisabledKey,
       treeNodeTitleKey: this.treeNodeTitleKey
     });
   }

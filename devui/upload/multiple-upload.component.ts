@@ -43,6 +43,7 @@ export class MultipleUploadComponent implements OnDestroy {
    */
   @Input() confirmText: string;
   @Input() oneTimeUpload = false;
+  @Input() disabled = false;
   @Input() beforeUpload: (files) => boolean | Promise<boolean> | Observable<boolean>;
   @Input() setCustomUploadOptions: (files, uploadOptions) => IUploadOptions;
   @Input() enableDrop = false;
@@ -113,6 +114,9 @@ export class MultipleUploadComponent implements OnDestroy {
   }
 
   onClick(event) {
+    if (this.disabled) {
+      return;
+    }
     this._dealFiles(this.selectFiles.triggerSelectFiles(this.fileOptions, this.uploadOptions));
   }
 

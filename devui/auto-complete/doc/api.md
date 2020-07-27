@@ -24,7 +24,7 @@
 ### d-auto-complete 事件
 
 |   参数   |        类型         |  说明        | 跳转 Demo |
-| :------: | :-----------------: | :--: | :---------------------------- | --------- |
+| :------: | :-----------------: | :--: | :---------------------------- | 
 | loadMore | `EventEmitter<any>` |   可选，懒加载触发事件，配合 enableLazyLoad 使用,使用\`$event.loadFinish()\`关闭loading状态,$event 为弹窗组件 AutoCompletePopupComponent 的实例 | [启用懒加载](/components/auto-complete/demo#auto-lazy-load) |
 |      selectValue      |   `EventEmitter<any>`    |  可选，选择选项之后的回调函数          | [启用懒加载](/components/auto-complete/demo#auto-lazy-load) |
 |  transInputFocusEmit  |   `EventEmitter<{focus, popupRef}>`    |   可选，input focus 时回调函数        | [启用懒加载](/components/auto-complete/demo#auto-lazy-load) |

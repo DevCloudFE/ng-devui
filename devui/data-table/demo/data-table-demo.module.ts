@@ -12,7 +12,6 @@ import { DataTableDemoComponent } from './data-table-demo.component';
 import { DatatableDemoAsyncComponent } from './async/data-table-demo-async.component';
 import { TooltipModule } from 'ng-devui/tooltip';
 import { AutoCompleteModule } from 'ng-devui/auto-complete';
-import { DatatableDemoOnlyOneColumnSortComponent } from './one-column/data-table-demo-onlyonecolumnsort.component';
 import { DatatableDemoMaxheightComponent } from './max-height/data-table-demo-maxheight.component';
 import { DatatableDemoLazyloadDataComponent } from './lazy/data-table-demo-lazyloaddata.component';
 import { DatatableDemoMultiHeaderComponent } from './multi-header/data-table-demo-multiheader.component';
@@ -35,6 +34,8 @@ import { FixColumnOldComponent } from './fix-column-old/fix-column-old.component
 import { MutiDragRowComponent } from './muti-drag-row/muti-drag-row.component';
 import { CheckOptionsComponent } from './check-options/check-options.component';
 import { CheckOptionsColumnComponent } from './check-options-column/check-options-column.component';
+import { InteractionColumnComponent } from './interaction-column/interaction-column.component';
+import { VirtualScrollComponent } from './virtual-scroll/virtual-scroll.component';
 
 @NgModule({
   imports: [
@@ -61,7 +62,6 @@ import { CheckOptionsColumnComponent } from './check-options-column/check-option
     DataTableDemoComponent,
     DatatableDemoBasicComponent,
     DatatableDemoAsyncComponent,
-    DatatableDemoOnlyOneColumnSortComponent,
     DatatableDemoMaxheightComponent,
     DatatableDemoMultiHeaderComponent,
     DatatableDemoLazyloadDataComponent,
@@ -81,7 +81,9 @@ import { CheckOptionsColumnComponent } from './check-options-column/check-option
     FixColumnOldComponent,
     MutiDragRowComponent,
     CheckOptionsComponent,
-    CheckOptionsColumnComponent
+    CheckOptionsColumnComponent,
+    InteractionColumnComponent,
+    VirtualScrollComponent
   ],
   providers: [],
   entryComponents: [DataTableDemoComponent]

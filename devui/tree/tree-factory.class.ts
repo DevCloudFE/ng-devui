@@ -1,6 +1,4 @@
 import {
-  Dictionary,
-  filter,
   forEach,
   isUndefined,
   map,
@@ -10,7 +8,9 @@ import {
   trim,
   values
 } from 'lodash-es';
-
+export interface Dictionary<T> {
+  [id: number]: T;
+}
 export interface ITreeNodeData {
   id?: number | string;
   parentId?: number | string;
@@ -62,6 +62,8 @@ export interface ITreeInput {
   treeNodeChildrenKey?: string;
   treeNodeIdKey?: string;
   checkboxDisabledKey?: string;
+  selectDisabledKey?: string;
+  toggleDisabledKey?: string;
   treeNodeTitleKey?: string;
 }
 
@@ -77,6 +79,7 @@ export class TreeFactory {
   private idx: number;
   private _checked = new Set<Object>();
   private _treeRoot: TreeNode[] = [];
+  searchItem: string;
 
   static create() {
     return new TreeFactory();
@@ -88,10 +91,13 @@ export class TreeFactory {
     treeNodeChildrenKey = 'items',
     treeNodeIdKey = 'id',
     checkboxDisabledKey = 'disabled',
+    selectDisabledKey = 'disabled', // 默认值与checkboxDisabledKey相同，为了兼容以前tree的disable情况
+    toggleDisabledKey = 'disabledToggle',
     treeNodeTitleKey = 'title'
   }: ITreeInput): TreeFactory {
     const treeFactory = TreeFactory.create();
-    treeFactory.mapTreeItems({ treeItems, parentId: undefined, treeNodeChildrenKey, treeNodeIdKey, checkboxDisabledKey, treeNodeTitleKey });
+    treeFactory.mapTreeItems({ treeItems, parentId: undefined, treeNodeChildrenKey, treeNodeIdKey, checkboxDisabledKey,
+       selectDisabledKey, toggleDisabledKey, treeNodeTitleKey });
     return treeFactory;
   }
 
@@ -106,6 +112,8 @@ export class TreeFactory {
     treeNodeChildrenKey = 'items',
     treeNodeIdKey = 'id',
     checkboxDisabledKey = 'disabled',
+    selectDisabledKey = 'disableSelect',
+    toggleDisabledKey = 'disableToggle',
     treeNodeTitleKey = 'title'
   }: ITreeInput) => {
     forEach(treeItems, (item: ITreeItem) => {
@@ -124,6 +132,8 @@ export class TreeFactory {
         halfChecked: !!item.halfChecked,
         isActive: !!item.isActive,
         disabled: !!item[checkboxDisabledKey],
+        disableSelect: !!item[selectDisabledKey],
+        disableToggle: !!item[toggleDisabledKey],
         disableAdd: !!item.disableAdd,
         disableEdit: !!item.disableEdit,
         disableDelete: !!item.disableDelete,
@@ -142,7 +152,7 @@ export class TreeFactory {
     return this;
   }
 
-  addNode({ id, parentId, ...data }: ITreeNodeData): TreeNode {
+  addNode({ id, parentId, ...data }: ITreeNodeData, index?): TreeNode {
     if (isUndefined(id)) {
       this.idx++;
       id = this.idx;
@@ -156,7 +166,7 @@ export class TreeFactory {
       [treeNode.id]: treeNode
     };
 
-    this.addChildNode(this.nodes[parentId], treeNode);
+    this.addChildNode(this.nodes[parentId], treeNode, index);
     return treeNode;
   }
 
@@ -415,10 +425,11 @@ export class TreeFactory {
     }
   }
 
-  public addChildNode(parentNode: TreeNode, childNode: TreeNode) {
+  public addChildNode(parentNode: TreeNode, childNode: TreeNode, index?) {
     if (parentNode) {
       Array.isArray(parentNode.data.children) ?
-        parentNode.data.children.push(childNode) : parentNode.data.children = [childNode];
+        (index !== undefined ? parentNode.data.children.splice(index, 0, childNode) : parentNode.data.children.push(childNode))
+        : parentNode.data.children = [childNode];
     } else {
       this._treeRoot.push(childNode);
     }
@@ -441,6 +452,7 @@ export class TreeFactory {
   }
 
   public searchTree(target, hideUnmatched = false) {
+    this.searchItem = target;
     target = trim(target);
     this.resetSearchResults();
     return this.dfs(target.toLowerCase(), this._treeRoot, hideUnmatched);
@@ -457,6 +469,33 @@ export class TreeFactory {
   public checkAllNodes(checked) {
     for (const id of Object.keys(this.nodes)) {
       this.nodes[id].data.isChecked = checked;
+    }
+  }
+  public getNodeIndex(node: TreeNode) {
+    let parentNode;
+    let children;
+    if (node.parentId !== undefined) {
+      parentNode = this.getNodeById(node.parentId);
+      children = parentNode.children;
+    } else {
+      children = this.treeRoot;
+    }
+    for (let i = 0; i < children.length; i++) {
+      if (children[i].id === node.id) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  public checkIsParent(childNodeId: number | string, parentNodeId: number | string) {
+    const realParentId = this.nodes[childNodeId].parentId;
+    if (realParentId === parentNodeId) {
+      return true;
+    } else if (realParentId !== undefined) {
+      return this.checkIsParent(realParentId, parentNodeId);
+    } else {
+      return false;
     }
   }
 }

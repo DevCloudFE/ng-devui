@@ -16,9 +16,9 @@ export class DataTableDemoComponent {
     {title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic-old/basic-old.component.ts')},
     {title: 'mock-data', language: 'typescript', code: require('!!raw-loader!./mock-data')}
   ];
-  oneColumnSource: Array<DevuiSourceData> = [
-    {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./one-column/data-table-demo-onlyonecolumnsort.component.html')},
-    {title: 'TS', language: 'typescript', code: require('!!raw-loader!./one-column/data-table-demo-onlyonecolumnsort.component.ts')},
+  interactionColumnSource: Array<DevuiSourceData> = [
+    {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./interaction-column/interaction-column.component.html')},
+    {title: 'TS', language: 'typescript', code: require('!!raw-loader!./interaction-column/interaction-column.component.ts')},
     {title: 'mock-data', language: 'typescript', code: require('!!raw-loader!./mock-data')}
   ];
   interactionSource: Array<DevuiSourceData> = [
@@ -121,13 +121,20 @@ export class DataTableDemoComponent {
     {title: 'CSS', language: 'css', code: require('!!raw-loader!./muti-drag-row/muti-drag-row.component.scss')},
     {title: 'mock-data', language: 'typescript', code: require('!!raw-loader!./mock-data')}
   ];
+  virtualScrollSource: Array<DevuiSourceData> = [
+    {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./virtual-scroll/virtual-scroll.component.html')},
+    {title: 'TS', language: 'typescript', code: require('!!raw-loader!./virtual-scroll/virtual-scroll.component.ts')},
+    {title: 'mock-data', language: 'typescript', code: require('!!raw-loader!./mock-data')}
+  ];
+
   navItems = [
     { dAnchorLink: 'basic-usage', value: '基本用法'},
+    { dAnchorLink: 'async-loading', value: '异步加载数据'},
     { dAnchorLink: 'table-interaction', value: '表格交互'},
     { dAnchorLink: 'table-check-options', value: '自定义表格选中操作'},
-    { dAnchorLink: 'async-loading', value: '异步加载数据'},
-    { dAnchorLink: 'table-fixing', value: '表头固定'},
     { dAnchorLink: 'lazy-loading-of-list-data', value: '懒加载'},
+    { dAnchorLink: 'virtual-scroll', value: '虚拟滚动'},
+    { dAnchorLink: 'table-fixing', value: '表头固定'},
     { dAnchorLink: 'header-grouping', value: '表头分组'},
     { dAnchorLink: 'edit-cell', value: '编辑单元格'},
     { dAnchorLink: 'expand-row', value: '扩展行'},

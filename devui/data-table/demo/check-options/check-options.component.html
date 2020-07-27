@@ -14,7 +14,7 @@
             (ngModelChange)="onRowCheckChange($event, rowIndex, nestedIndex, rowItem)"
             [ngModel]="rowItem.$checked"
             [halfchecked]="rowItem.$halfChecked"
-            [disabled]="rowItem.$disabled"
+            [disabled]="rowItem.$checkDisabled"
             dTooltip
             [content]="rowItem.$checkBoxTips"
             [position]="['top', 'right', 'bottom', 'left']"

@@ -7,7 +7,7 @@
     unchecked: !checked
   }"
 >
-  <label title="{{ isShowTitle ? label : '' }}" (click)="toggle($event)">
+  <label title="{{ isShowTitle ? title || label : '' }}" (click)="toggle($event)">
     <input
       [name]="name || 'checkbox-' + id"
       class="devui-checkbox-input"
@@ -20,12 +20,12 @@
     />
     <span
       class="devui-checkbox-material"
-      [ngStyle]="{ 'border-color': checked ? color : '' }"
+      [ngStyle]="{ 'border-color': (checked || halfchecked) && color ? color : '', 'background-color': color && halfchecked ? color : '' }"
       [ngClass]="{ 'custom-color': color, 'devui-checkbox-no-label': !label && !labelTemplate }"
     >
       <span
         class="devui-checkbox-bg"
-        [ngStyle]="{ 'background-color': color ? color : '' }"
+        [ngStyle]="{ 'background-color': color && !halfchecked ? color : '' }"
         [ngClass]="{
           'devui-no-animation': !showAnimation || !animationUnlocked
         }"

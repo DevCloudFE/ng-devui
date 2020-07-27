@@ -41,7 +41,8 @@ export interface FilterConfig {
   id: number | string;
   name: string;
   value: any;
-  checked?: boolean;
+  checked?: boolean; // for Multiple
+  selected?: boolean; // for Radio
 }
 
 export interface CheckableRelation {

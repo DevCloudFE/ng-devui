@@ -11,23 +11,19 @@
     <tbody dTableBody>
       <ng-template let-rowItem="rowItem" let-rowIndex="rowIndex">
         <tr dTableRow>
-          <td dTableCell [editable]="true" [editableTip]="editableTip" (editStatusEvent)="onEditing($event, rowItem, 'nameEdit')">
+          <td dTableCell [editable]="true" [editableTip]="editableTip" [(editing)]="rowItem['nameEdit']">
             <span *ngIf="!rowItem['nameEdit']">{{ rowItem?.lastName }}</span>
-            <form *ngIf="rowItem['nameEdit']" class="form-inline edit-padding-fix">
-              <div class="devui-form-group">
-                <div class="devui-input-group">
-                  <input
-                    class="devui-form-control"
-                    name="lastname"
-                    [(ngModel)]="rowItem.lastName"
-                    [attr.maxlength]="100"
-                    [attr.minlength]="3"
-                  />
-                </div>
-              </div>
-            </form>
+            <div *ngIf="rowItem['nameEdit']" class="edit-padding-fix">
+              <input
+                class="devui-form-control"
+                name="lastname"
+                [(ngModel)]="rowItem.lastName"
+                [attr.maxlength]="100"
+                [attr.minlength]="3"
+              />
+            </div>
           </td>
-          <td dTableCell [editable]="true" (editStatusEvent)="onEditing($event, rowItem, 'dateEdit')">
+          <td dTableCell [editable]="true" [(editing)]="rowItem['dateEdit']">
             <span *ngIf="!rowItem['dateEdit']">{{ rowItem?.dob | i18nDate: 'short':false }}</span>
             <form *ngIf="rowItem['dateEdit']" class="form-inline edit-padding-fix">
               <div class="devui-form-group">
@@ -40,7 +36,7 @@
                     appendToBody
                     #datePicker="datepicker"
                     [autoOpen]="true"
-                    (ngModelChange)="dateEditEnd(rowItem)"
+                    (ngModelChange)="onEditEnd(rowItem, 'dateEdit')"
                   />
                   <div class="devui-input-group-addon" (click)="datePicker.toggle($event, true)">
                     <i class="icon icon-calendar"></i>
@@ -49,13 +45,13 @@
               </div>
             </form>
           </td>
-          <td dTableCell [editable]="true" (editStatusEvent)="onEditing($event, rowItem, 'ageEdit')">
+          <td dTableCell [editable]="true" [(editing)]="rowItem['ageEdit']">
             <span *ngIf="!rowItem['ageEdit']">{{ rowItem?.age }}</span>
             <div *ngIf="rowItem['ageEdit']" class="edit-padding-fix">
               <d-input-number [(ngModel)]="rowItem.age"></d-input-number>
             </div>
           </td>
-          <td dTableCell [editable]="true" (editStatusEvent)="onEditing($event, rowItem, 'genderEdit')">
+          <td dTableCell [editable]="true" [(editing)]="rowItem['genderEdit']">
             <span *ngIf="!rowItem['genderEdit']">{{ rowItem?.gender?.label }}</span>
             <div *ngIf="rowItem['genderEdit']" class="customized-editor edit-padding-fix">
               <d-select
@@ -66,7 +62,7 @@
                 toggleOnFocus="true"
                 [appendToBody]="true"
                 [(ngModel)]="rowItem.gender"
-                (ngModelChange)="genderEditEnd(rowItem)"
+                (ngModelChange)="onEditEnd(rowItem, 'genderEdit')"
               >
                 <ng-template let-option="option" let-filterKey="filterKey"> gender:{{ option[filterKey] }} </ng-template>
               </d-select>

@@ -20,6 +20,7 @@
       overflow-y: scroll;
       padding-right: 20px;
       line-height: 22px;
+      display: flex;
     }
   }
 
@@ -67,6 +68,7 @@
     pointer-events: none;
     height: 6px;
     line-height: 6px;
+    z-index: 1;
 
     svg {
       transition: transform 0.3s;
@@ -158,8 +160,8 @@
 }
 
 .devui-select-item {
-  display: inline-block;
-  height: 100%;
+  display: inline-flex;
+  align-items: center;
   color: $dark-1;
   padding: 1px 10px;
   line-height: 1.5;
@@ -167,16 +169,26 @@
   border-radius: 2px;
   margin: 0 2px 2px 0;
   border: 1px solid $tag-label-bgcolor;
+  max-width: calc(100% - 2px);
+  height: 22px;
 
   &.devui-no-label-item {
     padding: 1px 0;
     background: transparent;
     border-color: transparent;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .devui-select-item-content {
     display: inline-block;
     cursor: pointer;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: calc(100% - 24px);
 
     &:hover {
       color: $hover-control;
@@ -196,7 +208,6 @@
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    vertical-align: middle;
     cursor: pointer;
 
     svg path {

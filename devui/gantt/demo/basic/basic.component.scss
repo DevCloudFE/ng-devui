@@ -1,49 +1,26 @@
-.handler {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  z-index: 10;
-}
+.gantt-container {
+  overflow: scroll;
 
-.b-group {
-  margin-right: 5px;
-  display: inline-block;
-  vertical-align: middle;
-
-  div {
-    display: inline-block;
-    padding: 0 8px;
-    height: 32px;
-    min-width: 32px;
-    line-height: 32px;
-    background: #ffffff;
-    box-shadow: 0 2px 10px 0 rgba(41, 48, 64, 0.1);
-    border-radius: 2px;
-    cursor: pointer;
-    text-align: center;
-  }
-}
-
-.devui-gantt-milestone {
-  height: 24px;
-  line-height: 24px;
-
-  & span {
-    display: inline-block;
-    vertical-align: middle;
+  .header {
+    position: relative;
+    border-bottom: 1px solid #adb0b8;
   }
 
-  & .icon {
-    width: 22px;
-    height: 24px;
-    margin-right: 5px;
+  .body {
+    position: relative;
+    min-height: 400px;
+
+    .item {
+      height: 40px;
+      padding-top: 8px;
+    }
   }
 }
 
 ::ng-deep .devui-gantt-tips {
   & .title {
     font-size: 14px;
-    color: #252b3a;
+    color: var(--dark-1, #252b3a);
     line-height: 24px;
     font-weight: bold;
     margin-bottom: 15px;
@@ -51,7 +28,7 @@
 
   & .content {
     font-size: 12px;
-    color: #575d6c;
+    color: var(--dark-1, #252b3a);
     line-height: 24px;
   }
 }

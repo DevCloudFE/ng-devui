@@ -1,15 +1,19 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, OnChanges, Output,
-  SimpleChanges, HostBinding, ChangeDetectorRef } from '@angular/core';
+import {
+  Component, ElementRef, EventEmitter,
+  HostBinding, Input, OnChanges, OnInit, Output,
+  SimpleChanges, OnDestroy
+} from '@angular/core';
 import { fromEvent, Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { EditableTip } from '../../../data-table.model';
+import { TableTdService } from './td.service';
 
 @Component({
   selector: '[dTableCell]',
   templateUrl: './td.component.html',
   styleUrls: ['./td.component.scss']
 })
-export class TableTdComponent implements OnInit, OnChanges {
+export class TableTdComponent implements OnInit, OnChanges, OnDestroy {
   @HostBinding('class.devui-sticky-left-cell') stickyLeftClass: boolean;
   @HostBinding('class.devui-sticky-right-cell') stickyRightClass: boolean;
   @HostBinding('style.left') stickyLeftStyle: string;
@@ -24,11 +28,14 @@ export class TableTdComponent implements OnInit, OnChanges {
   @Input() iconFoldTable: string;
   @Input() iconUnFoldTable: string;
   @Input() beforeCellEdit: () => Promise<any>;
-  @Output() editStatusEvent = new EventEmitter<boolean>();
   @Output() toggleChildTableEvent = new EventEmitter<boolean>();
+  @Input() editing: boolean;
+  @Output() editingChange = new EventEmitter<boolean>();
+  @Output() editStatusEvent = new EventEmitter<boolean>();
+
   private documentClickSubscription: Subscription;
-  editing: boolean;
-  constructor(private elementRef: ElementRef, private cdr: ChangeDetectorRef) { }
+  private tdClickSubscription: Subscription;
+  constructor(private elementRef: ElementRef, private tdService: TableTdService) { }
 
   ngOnInit() {}
 
@@ -63,7 +70,9 @@ export class TableTdComponent implements OnInit, OnChanges {
     }
     beforePromise.then(() => {
       this.editing = true;
-      this.editStatusEvent.emit(this.editing);
+      this.editingChange.emit(true);
+      this.editStatusEvent.emit(true);
+      this.tdService.tableCellClickEvent.emit(event);
       setTimeout(() => {
         this.documentClickSubscription = fromEvent(document, 'click').pipe(
           tap((e: Event) => {
@@ -75,16 +84,27 @@ export class TableTdComponent implements OnInit, OnChanges {
             this.finishCellEdit();
           }
         });
+
+        this.tdClickSubscription = this.tdService.tableCellClickEvent.subscribe((clickEvent) => {
+          if (!this.elementRef.nativeElement.contains(clickEvent.target)) {
+            this.finishCellEdit();
+          }
+        });
       });
     });
   }
 
   finishCellEdit() {
     this.editing = false;
-    this.editStatusEvent.emit(this.editing);
+    this.editingChange.emit(false);
+    this.editStatusEvent.emit(false);
     if (this.documentClickSubscription) {
       this.documentClickSubscription.unsubscribe();
       this.documentClickSubscription = null;
+    }
+    if (this.tdClickSubscription) {
+      this.tdClickSubscription.unsubscribe();
+      this.tdClickSubscription = null;
     }
     return this.editing;
   }
@@ -92,5 +112,16 @@ export class TableTdComponent implements OnInit, OnChanges {
   toggleChildTable(rowItem) {
     rowItem.$isChildTableOpen = !rowItem.$isChildTableOpen;
     this.toggleChildTableEvent.emit(rowItem.$isChildTableOpen);
+  }
+
+  ngOnDestroy(): void {
+    if (this.documentClickSubscription) {
+      this.documentClickSubscription.unsubscribe();
+      this.documentClickSubscription = null;
+    }
+    if (this.tdClickSubscription) {
+      this.tdClickSubscription.unsubscribe();
+      this.tdClickSubscription = null;
+    }
   }
 }

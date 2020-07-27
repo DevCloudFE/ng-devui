@@ -100,7 +100,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
   /**
    * 【可选】下拉高亮css
    */
-  @Input() hightLightItemClass = 'active';
+  @Input() highlightItemClass = 'active';
   /**
    * 【当传入资源（options）类型为Array<{key: value}，必选】针对传入资源options的每项对应字段做过滤操作
    */
@@ -856,6 +856,9 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
 
   resetStatus() {
     this.writeIntoInput('');
+    if (this.availableOptions && this.availableOptions[this.selectIndex]) {
+      this.availableOptions[this.selectIndex].isChecked = false;
+    }
     this.activeIndex = -1;
     this.selectIndex  = -1;
     this.changeDetectorRef.markForCheck();

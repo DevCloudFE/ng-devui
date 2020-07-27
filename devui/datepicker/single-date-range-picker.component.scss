@@ -31,7 +31,6 @@
   & .devui-in-month-day.devui-in-range.disabled:not(.active) .devui-calendar-date {
     color: $dark-1;
     cursor: not-allowed;
-    width: 100%;
   }
 
   & .devui-day.devui-out-of-month.active {

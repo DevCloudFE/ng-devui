@@ -15,6 +15,7 @@ const documentElement = document.documentElement;
 export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy, DoCheck {
   @Input() checkable: boolean;
   @Input() headerCheckDisabled: boolean;
+  @Input() headerCheckVisible: boolean;
   @Input() checkOptions: TableCheckOptions[];
   @Input() showExpandToggle: boolean;
   @Input() pageAllChecked: boolean;

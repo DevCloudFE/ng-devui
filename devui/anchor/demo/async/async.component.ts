@@ -8,6 +8,4 @@ import { Component} from '@angular/core';
 export class AsyncComponent {
   loadMenu = false;
   loadContent = false;
-  constructor() { }
-
 }

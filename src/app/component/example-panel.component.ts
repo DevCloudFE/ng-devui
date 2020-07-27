@@ -22,12 +22,12 @@ import { Router, ActivatedRoute } from '@angular/router';
 });
 
 @Component({
-  selector: 'd-demo-cell',
+  selector: 'app-demo-cell',
   styles: [`
 :host ::ng-deep section h4,
 :host ::ng-deep section h5 {
     font-weight: bold;
-    color: rgba(0, 0, 0, 0.4);
+    color: $dark-2;
 }
 
 :host ::ng-deep section {
@@ -81,7 +81,8 @@ export class ExamplePanelComponent implements OnInit, AfterViewInit {
         return `${urlSegment.charAt(0).toUpperCase()}${urlSegment.slice(1)}`;
       });
       this.componentName = names.join(' ');
-      this.componentTab = this.router.url.split('/').pop();
+      const fragmentIndex = this.router.url.split('/').pop().indexOf('#');
+      this.componentTab = fragmentIndex === -1 ? this.router.url.split('/').pop() : this.router.url.split('/').pop().slice(0, fragmentIndex);
     });
 
     this.route.data.subscribe((data: IExampleData) => {
@@ -90,7 +91,7 @@ export class ExamplePanelComponent implements OnInit, AfterViewInit {
 
   }
 
-  activeTabChange (tab: string) {
+  activeTabChange(tab: string) {
     const navigation = this.router.url.split('/');
     navigation.pop();
     navigation.push(tab);

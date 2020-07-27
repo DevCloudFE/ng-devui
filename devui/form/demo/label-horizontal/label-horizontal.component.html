@@ -2,7 +2,7 @@
   <form dForm [layout]="'horizontal'" [labelSize]="'sm'">
     <d-form-item>
       <d-form-label [required]="true">计划名</d-form-label>
-      <d-form-control>
+      <d-form-control [extraInfo]="'输入一个符合阅读习惯的短名字，最多30个字符，不能是系统字段，且不能与已有的字段重名'">
         <input dTextInput name="userName" />
       </d-form-control>
     </d-form-item>
@@ -15,7 +15,13 @@
     <d-form-item>
       <d-form-label [required]="true">单选框</d-form-label>
       <d-form-control>
-        <d-select [options]="selectOptions" name="select1" size="sm" [filterKey]="'label'" [(ngModel)]="formData.selectValue"></d-select>
+        <d-select [options]="selectOptions" name="select1" [filterKey]="'label'" [(ngModel)]="formData.selectValue"></d-select>
+      </d-form-control>
+    </d-form-item>
+    <d-form-item>
+      <d-form-label [required]="true"><span style="line-height: 46px;">单选框</span></d-form-label>
+      <d-form-control>
+        <d-select [options]="selectOptions" name="select1" size="lg" [filterKey]="'label'" [(ngModel)]="formData.selectValue"></d-select>
       </d-form-control>
     </d-form-item>
     <d-form-item>
@@ -24,7 +30,6 @@
         <d-select
           name="multiSelect"
           [options]="selectOptions"
-          size="sm"
           [filterKey]="'label'"
           [isSearch]="true"
           [multiple]="true"
@@ -63,12 +68,12 @@
     <d-form-item>
       <d-form-label>开关</d-form-label>
       <d-form-control>
-        <d-toggle name="anonymous" size="small" [(ngModel)]="formData.toggleValue"></d-toggle>
+        <d-toggle name="anonymous" [(ngModel)]="formData.toggleValue"></d-toggle>
       </d-form-control>
     </d-form-item>
     <d-form-item>
       <d-form-label>执行日</d-form-label>
-      <d-form-control>
+      <d-form-control [extraInfo]="customTemplate">
         <div class="single-checkbox" *ngFor="let option of checkboxOptions">
           <d-checkbox name="runDay" [label]="option.label" [isShowTitle]="false" [ngModel]="option.checked"></d-checkbox>
         </div>
@@ -79,4 +84,7 @@
       <d-button bsStyle="common" circled="true">取消</d-button>
     </d-form-operation>
   </form>
+  <ng-template #customTemplate>
+    <span>选择您的执行周期，推荐选择周一，周三，周五</span>
+  </ng-template>
 </section>

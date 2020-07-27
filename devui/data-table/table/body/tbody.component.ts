@@ -14,12 +14,12 @@ export class TableTbodyComponent implements OnInit {
   @Input() nestedIndex = '-1';
   @Input() virtualScroll;
   @Input() tableWidthConfig: TableWidthConfig[];
+  @Input() minHeight: string;
   @ContentChild(TemplateRef) rowTempleteForSelect: TemplateRef<TableTrComponent>;
 
   constructor() {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   trackByFn(index) {
     return index;

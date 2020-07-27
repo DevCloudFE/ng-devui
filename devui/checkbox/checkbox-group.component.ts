@@ -13,7 +13,7 @@ import {
   ControlValueAccessor,
   NG_VALUE_ACCESSOR
 } from '@angular/forms';
-import isArray from 'lodash-es/isArray';
+import { isArray } from 'lodash-es';
 import { Observable } from 'rxjs';
 
 @Component({

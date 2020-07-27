@@ -15,10 +15,6 @@ import { Component } from '@angular/core';
       background: #fa9841 !important;
       color: #fff;
     }
-    :host ::ng-deep .devui-btn-danger {
-      background: #f66f6a !important;
-      color: #fff;
-    }
   `]
 })
 export class LifeComponent {

@@ -55,6 +55,11 @@ export class DraggableComponent implements OnInit {
     }]
   }];
   dropItems = [];
+  dropType = {
+    dropPrev: true,
+    dropNext: true,
+    dropInner: true
+  };
   constructor(private changeDetectorRef: ChangeDetectorRef) { }
 
   ngOnInit() {
@@ -80,10 +85,10 @@ export class DraggableComponent implements OnInit {
   }
   dragOver($event) {
     $event.preventDefault();
-   $event.dataTransfer.dropEffect = 'move';
+    $event.dataTransfer.dropEffect = 'move';
   }
   drop($event) {
-    const transferDataStr = JSON.parse( $event.dataTransfer.getData('Text'));
+    const transferDataStr = JSON.parse($event.dataTransfer.getData('Text'));
     this.dropItems.push(transferDataStr.nodeTitle);
     this.changeDetectorRef.detectChanges();
   }

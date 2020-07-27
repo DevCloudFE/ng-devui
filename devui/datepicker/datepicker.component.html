@@ -162,7 +162,7 @@
           <td colspan="4">
             <div class="devui-timepicker" *ngIf="showTime" [ngClass]="{ 'devui-timepicker-disabled': isDisabledTime() }">
               <div class="devui-time">
-                <input type="number" [(ngModel)]="currentHour" (change)="onTimeChange()" max="23" min="0" [disabled]="isDisabledTime()" />
+                <input [ngModel]="currentHour" (keydown)="fixTime($event, 'h')" [disabled]="isDisabledTime()" (change)="onTimeChange()" />
                 <div class="devui-btn-nav" *ngIf="!isDisabledTime()">
                   <div class="btn-up" (click)="timeUp('h')"></div>
                   <div class="btn-down" (click)="timeDown('h')"></div>
@@ -170,12 +170,10 @@
               </div>
               <div class="devui-time">
                 <input
-                  type="number"
                   class="devui-minutes"
-                  [(ngModel)]="currentMinute"
+                  [ngModel]="currentMinute"
+                  (keydown)="fixTime($event, 'm')"
                   (change)="onTimeChange()"
-                  max="59"
-                  min="0"
                   [disabled]="isDisabledTime()"
                 />
                 <div class="devui-btn-nav" *ngIf="!isDisabledTime()">
@@ -185,12 +183,10 @@
               </div>
               <div class="devui-time">
                 <input
-                  type="number"
                   class="devui-seconds"
-                  [(ngModel)]="currentSecond"
+                  [ngModel]="currentSecond"
+                  (keydown)="fixTime($event, 's')"
                   (change)="onTimeChange()"
-                  max="59"
-                  min="0"
                   [disabled]="isDisabledTime()"
                 />
                 <div class="devui-btn-nav" *ngIf="!isDisabledTime()">
@@ -207,7 +203,7 @@
               </d-button>
             </div>
             <div class="devui-btn-wrapper" *ngIf="!showTime">
-              <d-button bsStyle="common" [disabled]="isTodayDisable()" (btnClick)="chooseToday()" bsSize="sm"
+              <d-button bsStyle="common" [disabled]="isTodayDisable() || disabled" (btnClick)="chooseToday()" bsSize="sm"
                 >{{ i18nText?.today }}
               </d-button>
             </div>

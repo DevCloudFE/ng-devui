@@ -6,7 +6,4 @@ import { Component } from '@angular/core';
   styleUrls: ['./basic.component.css']
 })
 export class BasicComponent {
-  constructor() {
-
-  }
 }

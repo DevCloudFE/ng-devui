@@ -33,11 +33,13 @@ export class CheckableComponent implements OnInit {
         'disabled': true,
         'isChecked': true
       }, {
-        'title': '子节点2-2-2'
+        'title': '子节点2-2-2',
+        'disableSelect': true
       }]
     }]
   }, {
     'title': '父节点3',
+    'disableToggle': true,
     'children': [{
       'title': '子节点3-1',
     }, {

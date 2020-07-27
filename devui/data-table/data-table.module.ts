@@ -17,11 +17,12 @@ import { DCommonModule } from 'ng-devui/common';
 import { DatepickerModule } from 'ng-devui/datepicker';
 import { CheckBoxModule } from 'ng-devui/checkbox';
 import { ButtonModule } from 'ng-devui/button';
+import { WindowRefModule } from 'ng-devui/window-ref';
 import { SelectModule, SelectComponent } from 'ng-devui/select';
 import { InputNumberModule, InputNumberComponent } from 'ng-devui/input-number';
 import { DropDownModule } from 'ng-devui/dropdown';
 import { TreeSelectModule, TreeSelectComponent } from 'ng-devui/tree-select';
-import { SafePipeModule } from 'ng-devui/utils';
+import { SafePipeModule, LazyLoadModule } from 'ng-devui/utils';
 import { DisPlayCellValuePipe } from './display-cell-value.pipe';
 import { TooltipModule } from 'ng-devui/tooltip';
 import { EditorDirective } from './editor-host.directive';
@@ -34,11 +35,13 @@ import { TableTrComponent } from './table/row/tr.component';
 import { TableTbodyComponent } from './table/body/tbody.component';
 import { TableTdComponent } from './table/body/td/td.component';
 import { DataTableCellTmplComponent } from './tmpl/data-table-cell-tmpl.component';
+import { TableTdService } from './table/body/td/td.service';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
+    WindowRefModule,
     ScrollingModule,
     PaginationModule,
     DCommonModule,
@@ -51,7 +54,8 @@ import { DataTableCellTmplComponent } from './tmpl/data-table-cell-tmpl.componen
     TreeSelectModule,
     SafePipeModule,
     TooltipModule,
-    DragDropModule
+    DragDropModule,
+    LazyLoadModule
   ],
   exports: [
     DataTableComponent,
@@ -98,7 +102,7 @@ import { DataTableCellTmplComponent } from './tmpl/data-table-cell-tmpl.componen
     SelectComponent,
     TreeSelectComponent
   ],
-  providers: [],
+  providers: [ TableTdService ],
 })
 export class DataTableModule {
 }

@@ -5,11 +5,7 @@
     <h3>何时使用</h3>
     <div style="margin-bottom: 20px;" [innerHTML]="data.tmw"></div>
   </div>
-  <d-tabs
-    [showContent]="false"
-    [(activeTab)]="componentTab"
-    (activeTabChange)="activeTabChange($event)"
-  >
+  <d-tabs [showContent]="false" [(activeTab)]="componentTab" (activeTabChange)="activeTabChange($event)">
     <d-tab id="demo" title="Demo" tabId="demo"></d-tab>
     <d-tab id="api" title="API" tabId="api"></d-tab>
   </d-tabs>

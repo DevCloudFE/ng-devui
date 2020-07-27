@@ -19,6 +19,11 @@ export class RadioDemoComponent {
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./condition-change/condition-change.component.ts')}
   ];
 
+  conditionChangeGroupSource: Array<DevuiSourceData> = [
+    {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./condition-radio-group/condition-radio-group.component.html')},
+    {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./condition-radio-group/condition-radio-group.component.ts')}
+  ];
+
   disabledSource: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./disabled/disabled.component.html')},
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./disabled/disabled.component.ts')},

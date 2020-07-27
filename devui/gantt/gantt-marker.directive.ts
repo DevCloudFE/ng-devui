@@ -1,6 +1,5 @@
 import { Directive, ElementRef, Input, OnChanges, OnDestroy, Renderer2, SimpleChanges } from '@angular/core';
 import { GanttScaleUnit } from './gantt.model';
-import { GanttService } from './gantt.service';
 
 @Directive({
   selector: '[dGanttMarker]'
@@ -21,7 +20,7 @@ export class GanttMarkerDirective implements OnChanges, OnDestroy {
   todayElement: HTMLElement;
   milestoneElement: HTMLElement;
 
-  constructor(element: ElementRef, private renderer: Renderer2, private ganttService: GanttService) {
+  constructor(element: ElementRef, private renderer: Renderer2) {
     this.hostElement = element.nativeElement;
   }
 
@@ -163,6 +162,7 @@ export class GanttMarkerDirective implements OnChanges, OnDestroy {
   }
 
   private setElementsStyle() {
+    this.ganttScaleContainerOffsetLeft = this.ganttScaleContainerOffsetLeft ? this.ganttScaleContainerOffsetLeft : 0;
     const leftOffset = this.hostElement.offsetLeft + this.ganttScaleContainerOffsetLeft + 'px';
     if (this.monthMark && this.monthMarkElement) {
       this.renderer.setStyle(this.monthMarkElement, 'left', leftOffset);

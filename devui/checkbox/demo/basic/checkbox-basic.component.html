@@ -1,6 +1,8 @@
 <section>
   <d-checkbox [label]="'选中状态'" [isShowTitle]="false" (change)="onCheckbox1Change($event)" [ngModel]="true"> </d-checkbox>
   <d-checkbox [label]="'未选中状态'" [isShowTitle]="false" (change)="onCheckbox1Change($event)" [ngModel]="false"> </d-checkbox>
+  <d-checkbox [label]="'自定义title'" [isShowTitle]="true" [title]="'我的title'" (change)="onCheckbox1Change($event)" [ngModel]="false">
+  </d-checkbox>
   <d-checkbox
     [label]="'选中状态-关闭动效'"
     [isShowTitle]="false"
@@ -43,6 +45,15 @@
     [color]="'RGB(255, 193, 7)'"
     [ngModel]="false"
     (change)="onCheckbox2Change($event)"
+  >
+  </d-checkbox>
+  <d-checkbox
+    [name]="'checkbox-custom-color'"
+    [halfchecked]="halfCheck2"
+    [label]="'自定义半选颜色'"
+    [color]="'RGB(255, 193, 7)'"
+    [(ngModel)]="allCheck2"
+    (change)="onHalfCheckboxChange2($event)"
   >
   </d-checkbox>
   <d-checkbox [name]="'checkbox-username'" [ngModel]="true" (change)="onCheckbox2Change($event)" [labelTemplate]="myLabel"> </d-checkbox>

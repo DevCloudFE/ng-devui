@@ -101,6 +101,7 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
   @Input() lite = false;
   @Input() showPageSelector = true;
   @Input() haveConfigMenu = false;
+  @Input() autoFixPageIndex = true;
   litePaginatorIndex: { value: number, label: string } | null;
   litePaginatorOptions: any[] = [];
   private litePaginatorOptionsLengthCache = 0;
@@ -205,7 +206,7 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
   onPageSizeChange(size) {
     if (this.pageSize !== size) {
       this.pageSizeChange.emit(size);
-      if (Math.ceil(this.total / size) < this.totalPage) {
+      if (this.autoFixPageIndex && Math.ceil(this.total / size) < this.totalPage) {
         this.totalPage = Math.ceil(this.total / size);
         this.onPageIndexChange(this.totalPage <= this.pageIndex ? this.totalPage : this.pageIndex);
       }

@@ -15,7 +15,7 @@
     <d-form-item>
       <d-form-label [required]="true">单选框</d-form-label>
       <d-form-control>
-        <d-select [options]="selectOptions" name="select1" size="sm" [filterKey]="'label'" [(ngModel)]="formData.selectValue"></d-select>
+        <d-select [options]="selectOptions" name="select1" [filterKey]="'label'" [(ngModel)]="formData.selectValue"></d-select>
       </d-form-control>
     </d-form-item>
     <d-form-item>
@@ -24,7 +24,6 @@
         <d-select
           name="multiSelect"
           [options]="selectOptions"
-          size="sm"
           [filterKey]="'label'"
           [isSearch]="true"
           [multiple]="true"
@@ -63,7 +62,7 @@
     <d-form-item>
       <d-form-label>开关</d-form-label>
       <d-form-control>
-        <d-toggle name="anonymous" size="small" [(ngModel)]="formData.toggleValue"></d-toggle>
+        <d-toggle name="anonymous" [(ngModel)]="formData.toggleValue"></d-toggle>
       </d-form-control>
     </d-form-item>
     <d-form-item>

@@ -58,15 +58,15 @@
 
 ### ModalOpenResult
 
-|         属性         |       类型       |                       说明                        |
-| :------------------: | :--------------: | :-----------------------------------------------: |
-|    modalInstance     | `ModalComponent` | 返回 Modal 对象，可以作为contentTemplate的context |
-| modalContentInstance |   `Type<any>`    |               返回 Modal 内容的对象               |
+|         属性         |       类型       |                       说明                        |                      跳转 Demo                       |
+| :------------------: | :--------------: | :-----------------------------------------------: | :--------------------------------------------------: |
+|    modalInstance     | `ModalComponent` | 返回 Modal 对象，可以作为contentTemplate的context | [标准对话框](/components/modal/demo#standard-dialog) |
+| modalContentInstance |   `Type<any>`    |               返回 Modal 内容的对象               | [标准对话框](/components/modal/demo#standard-dialog) |
 
 ### modalInstance 公共方法
-| 方法名 | 参数  | 默认值 |   说明    | 跳转 Demo |
+| 方法名 | 参数  | 默认值 |   说明    | 跳转 Demo |          
 | :----: | :---: | :----- | :-------: | :-------: |
-|  hide  |  --   | --     | 关闭modal |           |
+|  hide  |  --   | --     | 关闭modal | [标准对话框](/components/modal/demo#standard-dialog) |
 
 ### buttons 类型定义
 

@@ -1,4 +1,4 @@
-import endsWith from 'lodash-es/endsWith';
+import { endsWith } from 'lodash-es';
 import { IFileOptions, IUploadOptions } from './file-uploader.types';
 import { Observable, from, Subscription } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';

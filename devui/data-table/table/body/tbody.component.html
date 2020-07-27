@@ -23,7 +23,7 @@
     [ngTemplateOutlet]="rowTemplete"
     [ngTemplateOutletContext]="{ rowItem: rowItem, rowIndex: rowIndex, nestedLayer: nestedLayer, nestedIndex: nestedIndex }"
   ></ng-template>
-  <tr class="child-table" *ngIf="rowItem['children'] && rowItem['$isChildTableOpen']">
+  <tr class="child-table" *ngIf="rowItem['children'] && rowItem['$isChildTableOpen']" [style.height]="minHeight ? '40px' : null">
     <td [attr.colspan]="tableWidthConfig.length">
       <table class="devui-table" [style.table-layout]="'fixed'">
         <colgroup>

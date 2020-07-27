@@ -1,3 +1,4 @@
+import { LeftRightComponent } from './left-right/left-right.component';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -42,6 +43,7 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
     IconComponent,
     LoadingComponent,
     PrimaryComponent,
+    LeftRightComponent,
     DangerComponent,
     TextComponent,
     CombinationComponent,

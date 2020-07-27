@@ -1,4 +1,5 @@
-import { ComponentFixture, TestBed, tick, fakeAsync } from '@angular/core/testing';
+import { of } from 'rxjs';
+import { ComponentFixture, TestBed, tick, fakeAsync, flush } from '@angular/core/testing';
 import { DebugElement, Component, ViewChild } from '@angular/core';
 import { CheckBoxComponent } from './checkbox.component';
 import { DomHelper } from '../utils/testing/dom-helper';
@@ -9,12 +10,13 @@ import { FormsModule } from '@angular/forms';
 @Component({
   template: `<d-checkbox
     #comp
-    [label]="'选中状态'"
+    [label]="'??'"
     [isShowTitle]="false"
     (change)="onCheckboxChange($event)"
     [ngModel]="true"
     [disabled]="disabled"
     [halfchecked]="halfchecked"
+    [beforeChange]="beforeChange"
   >
   </d-checkbox>`,
 })
@@ -24,6 +26,7 @@ class TestCheckBoxComponent {
   number = 1;
   disabled = false;
   halfchecked = false;
+  beforeChange: (label: string) => any;
 
   constructor() {}
   onCheckboxChange(value) {
@@ -55,8 +58,8 @@ describe('checkbox', () => {
     });
 
     it('should have correct classes', () => {
-      const classList = ['devui-checkbox', 'devui-checkbox-input', 'devui-checkbox-material', 'devui-checkbox-tick'];
-      domHelper.judgeStyleClasses(classList);
+      const classList = ['.devui-checkbox', '.devui-checkbox-input', '.devui-checkbox-material', '.devui-checkbox-tick'];
+      expect(domHelper.judgeStyleClasses(classList)).toBeTruthy();
     });
 
     it('should click trigger toggle function', () => {
@@ -99,5 +102,53 @@ describe('checkbox', () => {
       const classList = ['.devui-checkbox', '.halfchecked', '.devui-no-animation'];
       expect(domHelper.judgeStyleClasses(classList)).toBeTruthy();
     });
+
+    it('should avoid by beforechange', fakeAsync(() => {
+      component.beforeChange = () => false;
+      fixture.detectChanges();
+
+      expect(component.comp.checked).toBeFalsy();
+
+      const labelEl: HTMLElement = debugEl.query(By.css('label')).nativeElement;
+      labelEl.dispatchEvent(new Event('click'));
+
+      fixture.detectChanges();
+      flush();
+      fixture.detectChanges();
+
+      expect(component.comp.checked).toBeFalsy();
+    }));
+
+    it('promise beforechange should work', fakeAsync(() => {
+      component.beforeChange = () => Promise.resolve(false);
+      fixture.detectChanges();
+
+      expect(component.comp.checked).toBeFalsy();
+
+      const labelEl: HTMLElement = debugEl.query(By.css('label')).nativeElement;
+      labelEl.dispatchEvent(new Event('click'));
+
+      fixture.detectChanges();
+      flush();
+      fixture.detectChanges();
+
+      expect(component.comp.checked).toBeFalsy();
+    }));
+
+    it('observale beforechange should work', fakeAsync(() => {
+      component.beforeChange = () => of(false);
+      fixture.detectChanges();
+
+      expect(component.comp.checked).toBeFalsy();
+
+      const labelEl: HTMLElement = debugEl.query(By.css('label')).nativeElement;
+      labelEl.dispatchEvent(new Event('click'));
+
+      fixture.detectChanges();
+      flush();
+      fixture.detectChanges();
+
+      expect(component.comp.checked).toBeFalsy();
+    }));
   });
 });

@@ -12,22 +12,26 @@ export class BasicOldComponent implements OnInit {
             {
                 field: 'firstName',
                 header: 'First Name',
-                fieldType: 'text'
+                fieldType: 'text',
+                order: 1
             },
             {
                 field: 'lastName',
                 header: 'Last Name',
-                fieldType: 'text'
+                fieldType: 'text',
+                order: 2
             },
             {
                 field: 'gender',
                 header: 'Gender',
-                fieldType: 'text'
+                fieldType: 'text',
+                order: 3
             },
             {
                 field: 'dob',
                 header: 'Date of birth',
-                fieldType: 'date'
+                fieldType: 'date',
+                order: 4
             }
         ]
     };

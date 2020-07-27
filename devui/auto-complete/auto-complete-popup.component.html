@@ -61,12 +61,12 @@
           >
           </ng-template>
         </li>
-        <li class="devui-dropdown-item devui-no-result-template" *ngIf="!source?.length && noResultItemTemplate != null">
+        <li class="devui-no-result-template" *ngIf="!source?.length && noResultItemTemplate != null">
           <ng-template [ngTemplateOutlet]="noResultItemTemplate" [ngTemplateOutletContext]="{ term: term, source: source }"> </ng-template>
         </li>
       </ng-container>
       <ng-container *ngIf="isSearching && searchingTemplate">
-        <li class="devui-dropdown-item devui-is-searching-template">
+        <li class="devui-is-searching-template">
           <ng-template [ngTemplateOutlet]="searchingTemplate" [ngTemplateOutletContext]="{ term: term }"> </ng-template>
         </li>
       </ng-container>

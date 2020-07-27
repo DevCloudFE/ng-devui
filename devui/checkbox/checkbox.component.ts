@@ -36,6 +36,7 @@ export class CheckBoxComponent implements ControlValueAccessor, OnChanges {
   @Input() color;
   @Input() disabled = false;
   @Input() isShowTitle = true;
+  @Input() title;
   @Input() labelTemplate: TemplateRef<any>;
   @Input() halfchecked = false;
   @Input() showAnimation = true;

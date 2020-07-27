@@ -26,9 +26,16 @@ export class CommonDemoComponent {
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./iframe-propagate/iframe-propagate.component.ts') },
   ];
 
+  lazyLoadSource: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'html', code: require('!!raw-loader!./lazy-load/lazy-load.component.html') },
+    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./lazy-load/lazy-load.component.ts') },
+    { title: 'CSS', language: 'css', code: require('!!raw-loader!./lazy-load/lazy-load.component.scss') }
+  ];
+
   navItems = [
     { dAnchorLink: 'date-pipe', value: 'Datepipe API' },
     { dAnchorLink: 'helper-utils', value: 'Helper Utils' },
     { dAnchorLink: 'iframe-propagate', value: 'Iframe Event Propagate API' },
+    { dAnchorLink: 'lazy-load', value: 'Lazy Load' },
   ];
 }

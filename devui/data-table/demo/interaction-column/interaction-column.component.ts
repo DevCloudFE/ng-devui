@@ -1,14 +1,15 @@
-import { ChangeDetectionStrategy, Component, ViewChild, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, ViewChild, OnInit, ChangeDetectorRef } from '@angular/core';
 import { LoadingType } from 'ng-devui/loading';
 import { DataTableComponent } from 'ng-devui/data-table';
 import { originSource, SourceType } from '../mock-data';
 
 @Component({
-  selector: 'd-datatable-demo-onlyonecolumnsort',
-  templateUrl: './data-table-demo-onlyonecolumnsort.component.html',
-  styleUrls: ['./data-table-demo-onlyonecolumnsort.component.scss']
+  selector: 'd-interaction-column',
+  templateUrl: './interaction-column.component.html',
+  styleUrls: ['./interaction-column.component.scss']
 })
-export class DatatableDemoOnlyOneColumnSortComponent implements OnInit {
+export class InteractionColumnComponent implements OnInit {
+
   @ViewChild(DataTableComponent, { static: true }) datatable: DataTableComponent;
   pagerSource = JSON.parse(JSON.stringify(originSource));
   sortableDataSource: Array<SourceType> = JSON.parse(JSON.stringify(originSource.slice(0, 6)));
@@ -19,6 +20,7 @@ export class DatatableDemoOnlyOneColumnSortComponent implements OnInit {
     }, {
       name: 'Male',
       value: 'Male',
+      selected: true
     }, {
       name: 'Female',
       value: 'Female',
@@ -68,6 +70,7 @@ export class DatatableDemoOnlyOneColumnSortComponent implements OnInit {
   constructor(private ref: ChangeDetectorRef) { }
   ngOnInit() {
     this.checkboxList = JSON.parse(JSON.stringify(originSource.slice(0, 6)));
+    this.filterChangeRadio(this.filterList2[1]);
   }
 
   changePageContent($event) {
@@ -145,4 +148,23 @@ export class DatatableDemoOnlyOneColumnSortComponent implements OnInit {
   cancelFilter(dropdown) {
     dropdown.toggle();
   }
+
+  cellDBClick(e) {
+    console.log('cellDB');
+    console.log(e);
+  }
+  cellClick(e) {
+      console.log('cell');
+      console.log(e);
+  }
+  rowDBClick(e) {
+      console.log('rowDB');
+      console.log(e);
+  }
+
+  rowClick(e) {
+      console.log('row');
+      console.log(e);
+  }
+
 }

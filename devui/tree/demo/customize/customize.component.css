@@ -60,3 +60,19 @@
   border-radius: 50%;
   background-color: #3dcca6;
 }
+
+.status-position {
+  position: absolute;
+  right: 8px;
+}
+
+:host ::ng-deep .devui-tree-node__content {
+  width: 100%;
+}
+
+.tree-title {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 24px;
+  padding-right: 16px;
+}

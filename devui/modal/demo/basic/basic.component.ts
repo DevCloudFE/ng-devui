@@ -47,5 +47,6 @@ export class BasicComponent {
         address: 'Chengdu',
       },
     });
+    console.log(results.modalContentInstance);
   }
 }

@@ -13,14 +13,15 @@
     <div
       class="devui-tree-node__content"
       [class.devui-tree-node--parent]="(treeNode.data.children || []).length > 0"
-      (mouseenter)="addBackGround($event)"
-      (mouseleave)="removeBackGround($event)"
+      (mouseenter)="addBackGround($event, treeNode)"
+      (mouseleave)="removeBackGround($event, treeNode)"
     >
       <div class="devui-tree-node__content--value-wrapper" [class.isMatch]="treeNode.data.isMatch">
         <span
           (click)="toggleNode($event, treeNode)"
           *ngIf="(treeNode.data.children || []).length > 0 || treeNode.data.isParent"
           class="devui-tree-node__folder"
+          [class.toggle-disabled]="treeNode.data.disableToggle"
         >
           <span class="devui-tree-node__folder--icon" *ngIf="iconParentClose && !treeNode.data.isOpen" [innerHTML]="iconParentClose"></span>
           <span class="devui-tree-node__folder--icon" *ngIf="iconParentOpen && treeNode.data.isOpen" [innerHTML]="iconParentOpen"></span>
@@ -68,6 +69,7 @@
           (dblclick)="nodeDblClick($event, treeNode)"
           (contextmenu)="contextmenuEvent($event, treeNode)"
           class="devui-tree-node__title"
+          [class.select-disabled]="treeNode.data.disableSelect"
           [class.active]="treeNode.data.isActive"
           title="{{ treeNode.data.title }}"
           >{{ treeNode.data.title }}</span

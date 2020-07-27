@@ -11,3 +11,4 @@ export * from './tree-utils';
 export * from './safe.pipe';
 export * from './lazy-load/lazy-load.directive';
 export * from './popper/popper.component';
+export * from './highlight/highlight.module';

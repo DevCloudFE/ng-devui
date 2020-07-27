@@ -1,0 +1,24 @@
+<d-data-table
+  [dataSource]="dataSource"
+  maxHeight="360px"
+  scrollable="true"
+  [virtualScroll]="true"
+  virtualItemSize="40"
+  virtualMinBufferPx="80"
+  virtualMaxBufferPx="200"
+>
+  <thead dTableHead>
+    <tr dTableRow>
+      <th dHeadCell *ngFor="let colOption of dataTableOptions.columns">{{ colOption.header }}</th>
+    </tr>
+  </thead>
+  <tbody dTableBody>
+    <ng-template let-rowItem="rowItem" let-rowIndex="rowIndex">
+      <tr dTableRow>
+        <td dTableCell *ngFor="let colOption of dataTableOptions.columns">
+          {{ colOption.fieldType === 'date' ? (rowItem[colOption.field] | i18nDate: 'short':false) : rowItem[colOption.field] }}
+        </td>
+      </tr>
+    </ng-template>
+  </tbody>
+</d-data-table>

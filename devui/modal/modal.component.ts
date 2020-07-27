@@ -70,12 +70,6 @@ export class ModalComponent implements OnInit, OnDestroy {
     }
   }
 
-  onAnimationDone(event) {
-    if (event.toState === 'void') {
-      this.onHidden();
-    }
-  }
-
   // Will overwrite this method in modal service
   onHidden() {
   }

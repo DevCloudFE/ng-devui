@@ -38,6 +38,9 @@ export class DrawerComponent implements OnInit, OnDestroy {
   @Input() width = '300px';
   @Input() zIndex: number;
   @Input() isCover = true;
+  /*
+  @deprecated
+  */
   @Input() fullScreen = false;
   @ViewChild(DrawerContentDirective, { static: true }) drawerContentHost: DrawerContentDirective;
   @Input() backdropCloseable: boolean;

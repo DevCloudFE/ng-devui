@@ -4,7 +4,7 @@
       <div class="u-1-3">
         <d-form-item>
           <d-form-label [required]="true" [hasHelp]="true" [helpTips]="'这是计划名，计划名字，计划名'">计划名</d-form-label>
-          <d-form-control>
+          <d-form-control class="form-control-width">
             <input dTextInput name="userName" />
           </d-form-control>
         </d-form-item>
@@ -12,7 +12,7 @@
       <div class="u-1-3">
         <d-form-item>
           <d-form-label [required]="true" [hasHelp]="true" [helpTips]="'这是计划名，计划名字，计划名'">计划名</d-form-label>
-          <d-form-control>
+          <d-form-control class="form-control-width">
             <input dTextInput name="userName" />
           </d-form-control>
         </d-form-item>
@@ -20,7 +20,7 @@
       <div class="u-1-3">
         <d-form-item>
           <d-form-label [required]="true" [hasHelp]="true" [helpTips]="'这是计划名，计划名字，计划名'">计划名</d-form-label>
-          <d-form-control>
+          <d-form-control class="form-control-width">
             <input dTextInput name="userName" />
           </d-form-control>
         </d-form-item>
@@ -28,7 +28,7 @@
       <div class="u-1-3">
         <d-form-item>
           <d-form-label [required]="true" [hasHelp]="true" [helpTips]="'这是计划名，计划名字，计划名'">计划名</d-form-label>
-          <d-form-control>
+          <d-form-control class="form-control-width">
             <input dTextInput name="userName" />
           </d-form-control>
         </d-form-item>
@@ -36,7 +36,7 @@
       <div class="u-1-3">
         <d-form-item>
           <d-form-label [required]="true" [hasHelp]="true" [helpTips]="'这是计划名，计划名字，计划名'">计划名</d-form-label>
-          <d-form-control>
+          <d-form-control class="form-control-width">
             <input dTextInput name="userName" />
           </d-form-control>
         </d-form-item>
@@ -44,7 +44,7 @@
       <div class="u-1-3">
         <d-form-item>
           <d-form-label [required]="true" [hasHelp]="true" [helpTips]="'这是计划名，计划名字，计划名'">计划名</d-form-label>
-          <d-form-control>
+          <d-form-control class="form-control-width">
             <input dTextInput name="userName" />
           </d-form-control>
         </d-form-item>
@@ -52,25 +52,18 @@
       <div class="u-1-3">
         <d-form-item>
           <d-form-label [required]="true">单选框</d-form-label>
-          <d-form-control>
-            <d-select
-              [options]="selectOptions"
-              name="select1"
-              size="sm"
-              [filterKey]="'label'"
-              [(ngModel)]="formData.selectValue"
-            ></d-select>
+          <d-form-control class="form-control-width">
+            <d-select [options]="selectOptions" name="select1" [filterKey]="'label'" [(ngModel)]="formData.selectValue"></d-select>
           </d-form-control>
         </d-form-item>
       </div>
       <div class="u-1-3">
         <d-form-item>
           <d-form-label>多选框</d-form-label>
-          <d-form-control>
+          <d-form-control class="form-control-width">
             <d-select
               name="multiSelect"
               [options]="selectOptions"
-              size="sm"
               [filterKey]="'label'"
               [isSearch]="true"
               [multiple]="true"
@@ -85,7 +78,7 @@
       <div class="u-1-3">
         <d-form-item>
           <d-form-label class="mul-col-label-withTips" [hasHelp]="true" [helpTips]="'这是计划名，计划名字，计划名'">标签选项</d-form-label>
-          <d-form-control>
+          <d-form-control class="form-control-width">
             <d-tags-input
               name="tag"
               (click)="$event.stopPropagation()"
@@ -102,7 +95,7 @@
       <div class="u-1-3">
         <d-form-item>
           <d-form-label>单选框</d-form-label>
-          <d-form-control>
+          <d-form-control class="form-control-width">
             <d-radio-group name="schedule" [cssStyle]="'column'" [(ngModel)]="formData.radioValue">
               <d-radio *ngFor="let option of radioOptions" [value]="option">
                 {{ option.label }}
@@ -114,7 +107,7 @@
       <div class="u-1-3">
         <d-form-item>
           <d-form-label>开关</d-form-label>
-          <d-form-control>
+          <d-form-control class="form-control-width">
             <d-toggle name="anonymous" size="small" [(ngModel)]="formData.toggleValue"></d-toggle>
           </d-form-control>
         </d-form-item>
@@ -122,7 +115,7 @@
       <div class="u-1-3">
         <d-form-item>
           <d-form-label>执行日</d-form-label>
-          <d-form-control>
+          <d-form-control class="form-control-width">
             <div class="single-checkbox" *ngFor="let option of checkboxOptions">
               <d-checkbox name="runDay" [label]="option.label" [isShowTitle]="false" [ngModel]="option.checked"></d-checkbox>
             </div>

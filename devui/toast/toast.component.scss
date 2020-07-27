@@ -2,18 +2,6 @@
 @import '../style/theme/color';
 @import '../style/theme/shadow';
 
-:host::ng-deep a {
-  &:link,
-  &:visited {
-    color: $brand-1;
-  }
-
-  &:hover,
-  &:active {
-    color: $hover-control;
-  }
-}
-
 .devui-toast {
   position: fixed;
   top: 50px;

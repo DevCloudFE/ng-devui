@@ -25,7 +25,7 @@
     class="devui-gantt-bar-progress"
     #ganttBarProgress
     [ngClass]="{ disabled: progressDisabled, visible: dragProgressStart }"
-    [attr.title]="progressRate + '%'"
+    [attr.title]="progressRate ? progressRate : 0 + '%'"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"

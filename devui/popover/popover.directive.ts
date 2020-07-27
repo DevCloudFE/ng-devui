@@ -24,6 +24,7 @@ export class PopoverDirective implements OnInit, OnDestroy {
   private subscription: Subscription = new Subscription();
   private blurSub: Subscription = new Subscription();
   private blurSubscription: Subscription = new Subscription();
+  private hideTimer;
   /**
    * popover内容
    */
@@ -82,6 +83,10 @@ export class PopoverDirective implements OnInit, OnDestroy {
     }
   }
 
+  private get eleAppendToBody() {
+    return this.appendToBody || this.triggerElementRef.nativeElement.style.position === 'fixed';
+  }
+
   constructor(private triggerElementRef: ElementRef,
               private overlayContainerRef: OverlayContainerRef,
               private viewContainerRef: ViewContainerRef,
@@ -99,7 +104,7 @@ export class PopoverDirective implements OnInit, OnDestroy {
   }
 
   createPopover() {
-    if (this.appendToBody) {
+    if (this.eleAppendToBody) {
       this.popoverComponentRef = this.overlayContainerRef.createComponent(
         this.componentFactoryResolver.resolveComponentFactory(PopoverComponent)
       );
@@ -118,7 +123,7 @@ export class PopoverDirective implements OnInit, OnDestroy {
       popType: this.popType,
       popMaxWidth: this.popMaxWidth,
       scrollElement: this.scrollElement,
-      appendToBody: this.appendToBody,
+      appendToBody: this.eleAppendToBody,
       zIndex: this.zIndex
     });
   }
@@ -171,13 +176,13 @@ export class PopoverDirective implements OnInit, OnDestroy {
           }
           if (event.type === 'mouseleave' && this.controlled) {
             if (this.hoverDelayTime) {
-              const hideTimer = setTimeout(() => {
+              clearTimeout(this.hideTimer);
+              this.hideTimer = setTimeout(() => {
                 const relatedTarget = event.relatedTarget;
                 if (!this.triggerElementRef.nativeElement.contains(relatedTarget) &&
                 !(this.popoverComponentRef && this.popoverComponentRef.instance.elementRef.nativeElement.contains(relatedTarget))) {
                   this.hide();
                 }
-                clearTimeout(hideTimer);
               }, this.hoverDelayTime);
             } else {
               this.hide();

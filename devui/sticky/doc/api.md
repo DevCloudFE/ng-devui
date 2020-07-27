@@ -15,13 +15,15 @@
 |    zIndex    |            `number`            |            --            |               可选，指定包裹层的 z-index，用于浮动的时候控制 z 轴的叠放                | [基本用法](/components/sticky/demo#basic-usage) |
 |  container   |         `HTMLElement`          |          父容器          |                            可选，触发的容器，可不同于父容器                            | [基本用法](/components/sticky/demo#basic-usage) |
 |     view     | `{top?:number,bottom?:number}` |     {top:0,bottom:0}     | 可选，用于可视区域的调整，比如顶部有固定位置的头部等，数值对应被遮挡的顶部或底部的高度 | [基本用法](/components/sticky/demo#basic-usage) |
-| scrollTarget |         `HTMLElement`          | document.documentElement |    可选，设置要发生滚动的容器，一般为滚动条所在容器，为主页面的滚动条时候可以不设置    |
+| scrollTarget |         `HTMLElement`          | document.documentElement |    可选，设置要发生滚动的容器，一般为滚动条所在容器，为主页面的滚动条时候可以不设置    |[更换滚动容器](/components/sticky/demo#scroll-target) |
+
+注意： container 范围如果大于scrollTarget，生效的只有scrollTarget范围。
 
 ### d-sticky 事件
 
 |     事件     |             类型             |                                                                                                    说明                                                                                                    | 跳转 Demo |
 | :----------: | :--------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | --------- |
-| statusChange | `EventEmitter<StickyStatus>` | 可选，状态变化的时候触发，值为变化后的状态值，'normal'表示处于正常状态，'follow'表示处于跟着页面滚动固定位置状态，'stay'表示横向滚动时候的跟随固定状态, 'remain'表示被容器托起处于容器底部跟着容器走的状态 |
+| statusChange | `EventEmitter<StickyStatus>` | 可选，状态变化的时候触发，值为变化后的状态值，'normal'表示处于正常状态，'follow'表示处于跟着页面滚动固定位置状态，'stay'表示横向滚动时候的跟随固定状态, 'remain'表示被容器托起处于容器底部跟着容器走的状态 |[基本用法](/components/sticky/demo#basic-usage) |
 
 ### StickyStatus 类型定义
 

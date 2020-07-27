@@ -28,15 +28,13 @@
           <ul
             [id]="'default-left-' + id"
             dDroppable
-            [placeholderTag]="'li'"
             [dropScope]="'transfer-source-' + id"
-            (onDrop)="onDrop(transferDirection.SOURCE, $event)"
+            (dropEvent)="onDrop(transferDirection.SOURCE, $event)"
             [ngStyle]="{ height: height }"
             dSortable
           >
             <li
               dDraggable
-              [enableDragFollow]="true"
               [dragScope]="'transfer-source-' + id"
               [dragHandle]="'.drag-handle'"
               [dragData]="item"
@@ -220,14 +218,12 @@
           <ul
             dDroppable
             dSortable
-            [placeholderTag]="'li'"
             [dropScope]="'transfer-target-' + id"
-            (onDrop)="onDrop(transferDirection.TARGET, $event)"
+            (dropEvent)="onDrop(transferDirection.TARGET, $event)"
             [ngStyle]="{ height: height }"
           >
             <li
               dDraggable
-              [enableDragFollow]="true"
               [dragScope]="'transfer-target-' + id"
               [dragHandle]="'.drag-handle'"
               [dragData]="item"

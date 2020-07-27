@@ -7,12 +7,20 @@
       <d-basic demo></d-basic>
     </d-codebox>
   </div>
-  <d-demo-nav [navItems]="navItems"></d-demo-nav>
   <div class="demo-example" [dAnchor]="'life'">
     <div class="demo-title">超时时间</div>
     <div class="demo-text">当设置超时时间、没有标题时，则不展示标题和关闭按钮</div>
     <d-codebox id="components-toast-life" [sourceData]="lifeSource">
       <d-life demo></d-life>
+    </d-codebox>
+  </div>
+  <div class="demo-example" [dAnchor]="'single'">
+    <div class="demo-title">每个消息使用单独的超时时间</div>
+    <div class="demo-text">
+      当设置超时时间模式为single时，每个消息使用自身的life作为超时时间，如果未设置则按severity判断，severity也未设置时默认超时时间为5000毫秒
+    </div>
+    <d-codebox id="components-toast-single" [sourceData]="singleSource">
+      <d-single demo></d-single>
     </d-codebox>
   </div>
 </div>

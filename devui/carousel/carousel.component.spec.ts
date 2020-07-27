@@ -25,7 +25,7 @@ import { By } from '@angular/platform-browser';
     `
   ]
 })
-export class TestCarouselComponent {
+class TestCarouselComponent {
   array = [1, 2, 3, 4];
   height = '200px';
   dotTrigger = 'hover';

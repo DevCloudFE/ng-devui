@@ -1,4 +1,13 @@
-<d-data-table [dataSource]="lazyDataSource" lazy="true" (loadMore)="loadMore($event)" [scrollable]="true">
+<d-data-table
+  [dataSource]="lazyDataSource"
+  lazy="true"
+  (loadMore)="loadMore($event)"
+  scrollable="true"
+  maxHeight="400px"
+  dLoading
+  [showLoading]="showLoading"
+  backdrop="true"
+>
   <thead dTableHead>
     <tr dTableRow>
       <th dHeadCell *ngFor="let colOption of dataTableOptions.columns">{{ colOption.header }}</th>
@@ -14,4 +23,3 @@
     </ng-template>
   </tbody>
 </d-data-table>
-<div dLoading [loading]="loading" [backdrop]="true" [message]="'Loading...'" [style.height.px]="100"></div>

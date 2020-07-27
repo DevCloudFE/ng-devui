@@ -1,5 +1,7 @@
-import { Component, OnInit, Input, Output, EventEmitter, TemplateRef, ChangeDetectorRef,
-  OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
+import {
+  Component, OnInit, Input, Output, EventEmitter, TemplateRef, ChangeDetectorRef,
+  OnChanges, SimpleChanges, OnDestroy
+} from '@angular/core';
 import { DropDownDirective } from 'ng-devui/dropdown';
 import { FilterConfig } from '../../../../data-table.model';
 import { Observable, Subscription, fromEvent, BehaviorSubject, of } from 'rxjs';
@@ -20,8 +22,9 @@ export class FilterComponent implements OnInit, OnChanges, OnDestroy {
   @Input() filterMultiple = true;
   @Input() filterBoxWidth: any;
   @Input() filterBoxHeight: any;
+  @Input() column: any; // 为配置column方式兼容自定义过滤模板context
 
-  @Output() filterIconActiveChange = new EventEmitter<boolean>();
+  @Output() filterIconActiveChange = new EventEmitter<boolean>(true);
   @Output() filterChange = new EventEmitter<FilterConfig[]>();
   private sourceSubject: BehaviorSubject<any>;
   private sourceSubscription: Subscription;
@@ -31,7 +34,7 @@ export class FilterComponent implements OnInit, OnChanges, OnDestroy {
   checkedListForFilter = [];
   filterListDisplay = [];
   searchText = '';
-  choseItem: any;
+  selectedItem: any;
   isFilterHidden = false;
   filterHalfChecked: boolean;
   filterAllChecked: boolean;
@@ -57,13 +60,18 @@ export class FilterComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['filterList'] && this.filterList) {
+    if (changes['filterList'] || changes['filterMultiple'] || changes['filterIconActive']) {
       if (this.filterIconActive !== undefined) { return; }
-      const checkedList = this.filterList.filter(item => item.checked);
-      if (checkedList.length) {
-        this.filterIconActiveInner = true;
+      if (!this.filterMultiple) {
+        this.selectedItem = this.filterList.filter(item => item.selected)[0];
+        this.filterIconActiveInner = (this.selectedItem !== undefined && !!Object.keys(this.selectedItem).length);
       } else {
-        this.filterIconActiveInner = false;
+        const checkedList = this.filterList.filter(item => item.checked);
+        if (checkedList.length) {
+          this.filterIconActiveInner = true;
+        } else {
+          this.filterIconActiveInner = false;
+        }
       }
       this.filterIconActiveChange.emit(this.filterIconActiveInner);
     }
@@ -102,7 +110,7 @@ export class FilterComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   getFilterDataRadio(item) {
-    this.choseItem = item;
+    this.selectedItem = item;
     this.setFilterIconActive(item);
     this.filterChange.emit(item);
   }

@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
 })
 export class BasicComponent {
   restrictOneOpen = false;
+  accordionTypeEmbed = false;
   menu = [{
     title: '内容一',
     children: [
@@ -62,6 +63,9 @@ export class BasicComponent {
         event.item.loading = false;
       }, 1000);
     }
+  }
+  log(...v) {
+    console.log(...v);
   }
 
 }

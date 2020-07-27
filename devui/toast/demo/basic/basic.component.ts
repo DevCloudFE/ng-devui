@@ -15,10 +15,6 @@ import { Component } from '@angular/core';
       background: #fa9841 !important;
       color: #fff;
     }
-    :host ::ng-deep .devui-btn-danger {
-      background: #f66f6a !important;
-      color: #fff;
-    }
   `]
 })
 export class BasicComponent {
@@ -27,8 +23,8 @@ export class BasicComponent {
   showToast(type: any) {
     switch (type) {
       case 'link':
-        this.msgs = [{ severity: 'info', summary: '相对地址', detail: `<a href="/home" target="_blank">返回首页</a>` },
-        { severity: 'info', summary: '绝对地址', detail: `<a href="https://devui.design/home" target="_blank">返回首页</a>` }];
+        this.msgs = [{ severity: 'info', summary: '相对地址', detail: `<a class="devui-link" href="/home" target="_blank">返回首页</a>` },
+        { severity: 'info', summary: '绝对地址', detail: `<a class="devui-link-light" href="https://devui.design" target="_blank">返回首页</a>` }];
         break;
       case 'multiple':
         this.msgs = [{ severity: 'info', summary: '摘要', detail: '详细信息，测试换行，测试换行，测试换行，测试换行，测试换行' },

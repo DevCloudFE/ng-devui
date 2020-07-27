@@ -35,9 +35,6 @@ export class FormDemoComponent {
     { title: 'CSS', language: 'css', code: require('!!raw-loader!./filter/filter.component.css') },
   ];
   navItems = [
-    { dAnchorLink: 'd-form-item', value: '表单项d-form-item' },
-    { dAnchorLink: 'd-form-label', value: '表单项d-form-label' },
-    { dAnchorLink: 'd-form-control', value: '控件容器d-form-control' },
     { dAnchorLink: 'basic-usage', value: '基本用法' },
     { dAnchorLink: 'demo-label-horizontal', value: 'label横向排列' },
     { dAnchorLink: 'demo-modal', value: '弹框表单' },

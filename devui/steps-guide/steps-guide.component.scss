@@ -1,0 +1,247 @@
+@import '../style/theme/color';
+
+:host.devui-step-item {
+  width: 400px;
+  min-height: 160px;
+  background: $brand-1;
+  box-shadow: 0 2px 16px 0 rgba(81, 112, 255, 0.3);
+  border-radius: 6px;
+  font-size: 14px;
+  color: $font-white;
+  padding: 20px;
+  position: absolute;
+
+  .devui-title {
+    font-size: 16px;
+    opacity: 1;
+    margin: 0 0 20px 0;
+    padding: 0;
+  }
+
+  .devui-content {
+    opacity: 0.8;
+  }
+
+  > .devui-arrow,
+  > .devui-arrow::after {
+    position: absolute;
+    display: block;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+  }
+
+  > .devui-arrow {
+    border-width: 8px;
+  }
+
+  &.left > .devui-arrow {
+    top: 20px;
+    right: -6px;
+    margin-top: -3px;
+    border-right-width: 0;
+    transform: rotate(-135deg);
+    border-left-color: $brand-1;
+  }
+
+  &.top > .devui-arrow,
+  &.top-left > .devui-arrow,
+  &.top-right > .devui-arrow {
+    bottom: -6px;
+    border-bottom-width: 0;
+    border-top-color: $brand-1;
+    transform: rotate(135deg);
+  }
+
+  &.top > .devui-arrow {
+    left: 50%;
+  }
+
+  &.top-left > .devui-arrow {
+    left: 20px;
+  }
+
+  &.top-right > .devui-arrow {
+    right: 20px;
+    transform: rotate(-135deg);
+  }
+
+  &.right > .devui-arrow {
+    top: 20px;
+    left: -6px;
+    margin-top: -3px;
+    border-left-width: 0;
+    transform: rotate(135deg);
+    border-right-color: $brand-1;
+  }
+
+  &.bottom > .devui-arrow,
+  &.bottom-left > .devui-arrow,
+  &.bottom-right > .devui-arrow {
+    top: -6px;
+    margin-left: 3px;
+    border-top-width: 0;
+    border-bottom-color: $brand-1;
+  }
+
+  &.bottom > .devui-arrow {
+    left: 50%;
+    transform: rotate(-135deg);
+  }
+
+  &.bottom-right > .devui-arrow {
+    right: 20px;
+    transform: rotate(135deg);
+  }
+
+  &.bottom-left > .devui-arrow {
+    left: 20px;
+    transform: rotate(-135deg);
+  }
+
+  > .devui-shining-dot,
+  .devui-shining-plus {
+    position: absolute;
+    background: $brand-1;
+    width: 6px;
+    height: 6px;
+    border-radius: 6px;
+  }
+
+  &.left > .devui-shining-dot,
+  &.left > .devui-shining-plus {
+    top: 21px;
+    right: -30px;
+  }
+
+  &.right > .devui-shining-dot,
+  &.right > .devui-shining-plus {
+    top: 21px;
+    left: -30px;
+  }
+
+  &.top > .devui-shining-dot,
+  &.top > .devui-shining-plus {
+    left: 203px;
+    bottom: -30px;
+  }
+
+  &.top-left > .devui-shining-dot,
+  &.top-left > .devui-shining-plus {
+    left: 23px;
+    bottom: -30px;
+  }
+
+  &.top-right > .devui-shining-dot,
+  &.top-right > .devui-shining-plus {
+    right: 23px;
+    bottom: -30px;
+  }
+
+  &.bottom > .devui-shining-dot,
+  &.bottom > .devui-shining-plus {
+    top: -30px;
+    left: 203px;
+  }
+
+  &.bottom-right > .devui-shining-dot,
+  &.bottom-right > .devui-shining-plus {
+    top: -30px;
+    right: 23px;
+  }
+
+  &.bottom-left > .devui-shining-dot,
+  &.bottom-left > .devui-shining-plus {
+    top: -30px;
+    left: 25px;
+  }
+
+  .devui-shining-plus {
+    animation: devui-glow 2s 0s infinite;
+  }
+
+  .devui-guide-container {
+    position: relative;
+
+    > .icon-close {
+      position: absolute;
+      top: 0;
+      right: 0;
+      cursor: pointer;
+    }
+
+    .devui-ctrl {
+      display: flex;
+      flex-wrap: wrap;
+
+      .devui-dots {
+        color: $font-white;
+        position: relative;
+        top: 25px;
+        font-size: 12px;
+        height: 30px;
+
+        > em {
+          opacity: 0.2;
+          margin: 0 5px 0 2px;
+
+          &.devui-active {
+            opacity: 1;
+          }
+        }
+      }
+
+      .devui-guide-btn {
+        display: flex;
+        flex-flow: row nowrap;
+        flex-grow: 1;
+        justify-content: flex-end;
+        padding: 20px 0 0 0;
+        white-space: nowrap;
+
+        > div {
+          color: $font-white;
+          background: rgba(255, 255, 255, 0.1);
+          border-radius: 4px;
+          padding: 5px 15px;
+          cursor: pointer;
+          margin-left: 10px;
+
+          &.devui-prev-step {
+            background: none;
+            border: solid 1px rgba(255, 255, 255, 0.1);
+          }
+        }
+      }
+    }
+  }
+}
+
+/* 以下定义动画帧 */
+@keyframes devui-glow {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+
+  25% {
+    transform: scale(2);
+    opacity: 0.3;
+  }
+
+  50% {
+    transform: scale(3);
+    opacity: 0.1;
+  }
+
+  75% {
+    transform: scale(2);
+    opacity: 0.3;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+}

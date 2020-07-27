@@ -9,6 +9,7 @@ import { ToastDemoComponent } from './toast-demo.component';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
 import { BasicComponent } from './basic/basic.component';
 import { LifeComponent } from './life/life.component';
+import { SingleComponent } from './single/single.component';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
@@ -34,7 +35,8 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
   declarations: [
     ToastDemoComponent,
     BasicComponent,
-    LifeComponent
+    LifeComponent,
+    SingleComponent
   ],
   entryComponents: [ToastDemoComponent]
 })

@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ILabelDataConfigs, IAxisConfigs, IQuadrantConfigs, IViewConfigs } from 'ng-devui/quadrant-diagram';
-
+import {
+  ILabelDataConfigs,
+  IAxisConfigs,
+  IQuadrantConfigs,
+  IViewConfigs
+} from 'ng-devui/quadrant-diagram';
 
 
 @Component({
@@ -55,8 +59,10 @@ export class ConfigComponent implements OnInit {
   ];
   labelData = [{ title: 'Rose', x: 80, y: 20, content: '<p>Rose的能力</p><p>能力值：20</p><p>潜力值：80</p>', id: 'Rose' }];
   constructor() { }
+
   ngOnInit(): void {
   }
+
   onDrop(e: any, targetArray) {
     let index = e.dropIndex;
     const fromIndex = e.dragFromIndex;
@@ -83,6 +89,7 @@ export class ConfigComponent implements OnInit {
     list.splice(index, 1);
     this.labelData = Object.assign([], list);
   }
+
   dropEvent(item) {
     console.log(item);
     const droppedItem = this.list.map(function (e) {

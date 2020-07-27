@@ -23,6 +23,15 @@
       </d-tab>
     </d-tabs>
   </div>
+  <div class="demo-example" [dAnchor]="'async-loading'">
+    <div class="demo-title">异步加载数据、配置列及空数据模板</div>
+    <div class="demo-text">
+      模拟异步加载数据、支持配置动态列、使用#noResultTemplateRef配置空数据模板
+    </div>
+    <d-codebox id="table-async" [sourceData]="asyncSource">
+      <d-datatable-demo-async demo></d-datatable-demo-async>
+    </d-codebox>
+  </div>
   <div class="demo-example" [dAnchor]="'table-interaction'">
     <div class="demo-title">表格交互</div>
     <div class="demo-text">
@@ -39,8 +48,8 @@
       </d-tab>
       <d-tab id="tab2" title="配置column" tabId="tab2">
         <ng-template dTabContent>
-          <d-codebox id="table-one" [sourceData]="oneColumnSource">
-            <d-datatable-demo-onlyonecolumnsort demo></d-datatable-demo-onlyonecolumnsort>
+          <d-codebox id="table-one" [sourceData]="interactionColumnSource">
+            <d-interaction-column demo></d-interaction-column>
           </d-codebox>
         </ng-template>
       </d-tab>
@@ -69,31 +78,31 @@
       </d-tab>
     </d-tabs>
   </div>
-  <div class="demo-example" [dAnchor]="'async-loading'">
-    <div class="demo-title">异步加载数据</div>
+  <div class="demo-example" [dAnchor]="'lazy-loading-of-list-data'">
+    <div class="demo-title">懒加载</div>
     <div class="demo-text">
-      异步加载表格数据，列动态配置
+      使用lazy启用懒加载，当滚动表格底部时到分发loadMore事件实现懒加载
     </div>
-    <d-codebox id="table-async" [sourceData]="asyncSource">
-      <d-datatable-demo-async demo></d-datatable-demo-async>
+    <d-codebox id="table-lazy" [sourceData]="lazySource">
+      <d-datatable-demo-lazyloaddata demo></d-datatable-demo-lazyloaddata>
+    </d-codebox>
+  </div>
+  <div class="demo-example" [dAnchor]="'virtual-scroll'">
+    <div class="demo-title">虚拟滚动</div>
+    <div class="demo-text">
+      使用virtualScroll启用虚拟滚动，行高须确定且相同，如果行高高于默认的40px，须配置virtualItemSize
+    </div>
+    <d-codebox id="cell-merge" [sourceData]="virtualScrollSource">
+      <d-virtual-scroll demo></d-virtual-scroll>
     </d-codebox>
   </div>
   <div class="demo-example" [dAnchor]="'table-fixing'">
     <div class="demo-title">表头固定</div>
     <div class="demo-text">
-      设置表格最大高度，同时表头不跟随滚动
+      使用fixHeader设置表头固定，使之不跟随滚动
     </div>
     <d-codebox id="table-max" [sourceData]="maxHeightSource">
       <d-datatable-demo-maxheight demo></d-datatable-demo-maxheight>
-    </d-codebox>
-  </div>
-  <div class="demo-example" [dAnchor]="'lazy-loading-of-list-data'">
-    <div class="demo-title">懒加载</div>
-    <div class="demo-text">
-      响应鼠标滚轮事件并判断是否滚动到表格底部，分发loadMore事件实现懒加载
-    </div>
-    <d-codebox id="table-lazy" [sourceData]="lazySource">
-      <d-datatable-demo-lazyloaddata demo></d-datatable-demo-lazyloaddata>
     </d-codebox>
   </div>
   <div class="demo-example" [dAnchor]="'header-grouping'">

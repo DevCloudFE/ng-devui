@@ -150,17 +150,20 @@ import { SelectDateRangeChangeReason } from 'ng-devui/datepicker';
 ```
 
 来引入 reason 限制插件，如何使用可以自由发挥，清除按钮 demo 就提供了一种方式
-reason 当前可选值：
+
+如下所示，reason是枚举类型，所以需要根据`selectedDateChange`(dateRangePicker为`selectedRangeChange`)返回的`reason`字段的数字进行判断，reason 当前可选值：
 
 ```TypeScript
-enum SelectDateRangeChangeReason {
-  date,
-  time,
-  button,
-  format,
-  custom
+enum SelectDateChangeReason {
+  date, // 返回值为`reason：0`，代表选择日期时触发的reason
+  time, // 返回值为`reason：1`，代表showTime时修改时间触发的reason
+  button, // 返回值为`reason：2`，代表自带的按钮(例如清除和确定)触发时的reason
+  format, // 返回值为`reason：3`，代表改变格式化时触发的reason
+  custom // 返回值为`reason：4`，代表用户传入的变更触发的reason
 }
 ```
+
+SelectDateRangeChangeReason与上述用法相同
 
 ### dTwoDatePicker 参数
 

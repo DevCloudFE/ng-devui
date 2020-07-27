@@ -2,20 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'd-transfer-demo-sort',
-  template: `
-    <section>
-    <div style="width:700px; ">
-      <d-transfer [disabled]="disabled" [isTargetDroppable]="true"
-        (transferToTarget)="transferToTarget($event)"
-        (transferToSource)="transferToSource($event)" [sourceOption]="sourceOption"
-        [targetOption]="targetOption"
-        [titles]="{source:'源标题', target:'目标标题'}">
-      </d-transfer>
-      <br />
-      禁用：<d-toggle (change)="onChange($event)"></d-toggle>
-    </div>
-    </section>
-  `
+  templateUrl: './transfer-demo-sort.component.html'
 })
 export class TransferDemoSortComponent {
   disabled = false;

@@ -41,6 +41,8 @@ export class AccordionComponent implements AccordionOptions, OnChanges, OnInit, 
   @Input() linkTargetKey = 'target'; // 链接目标窗口的key
   @Input() linkDefaultTarget = '_self'; // 不设置target的时候target默认值
 
+  @Input() accordionType: 'normal' | 'embed' = 'normal';
+
   activeItem; // 记录用户点击的激活菜单项
   i18nCommonText: I18nInterface['common'];
   i18nSubscription: Subscription;

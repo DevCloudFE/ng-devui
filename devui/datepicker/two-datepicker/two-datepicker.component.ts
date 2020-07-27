@@ -67,13 +67,8 @@ export class TwoDatePickerComponent implements OnInit, OnDestroy {
   private _minDate: Date;
   private onChange = (_: any) => null;
 
-  constructor(public el: ElementRef, protected datePickerConfig: DatePickerConfig, private i18n: I18nService) {
-    this._dateConfig = datePickerConfig['dateConfig'];
-    this.dateConverter = datePickerConfig['dateConfig'].dateConverter || new DefaultDateConverter();
-  }
-
   @Input() set dateConfig(dateConfig: any) {
-    if (dateConfig) {
+    if (this.checkDateConfig(dateConfig)) {
       this._dateConfig = dateConfig;
       this._dateFormat = this.showTime ? dateConfig.format.time : dateConfig.format.date;
     } else {
@@ -134,6 +129,19 @@ export class TwoDatePickerComponent implements OnInit, OnDestroy {
   }
   get isOpen() {
     return this._isOpen;
+  }
+
+  constructor(public el: ElementRef, protected datePickerConfig: DatePickerConfig, private i18n: I18nService) {
+    this._dateConfig = datePickerConfig['dateConfig'];
+    this.dateConverter = datePickerConfig['dateConfig'].dateConverter || new DefaultDateConverter();
+  }
+
+  checkDateConfig(dateConfig: any) {
+    if (!dateConfig) { return false; }
+    if (typeof(dateConfig.timePicker) !== 'boolean' || !dateConfig.max || !dateConfig.min || !dateConfig.format) {
+      return false;
+    }
+    return true;
   }
 
   @HostListener('document:click', ['$event'])

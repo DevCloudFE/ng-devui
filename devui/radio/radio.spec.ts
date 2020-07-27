@@ -1,3 +1,4 @@
+import { of } from 'rxjs';
 import { RadioComponent } from './radio.component';
 import { Component, DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed, flush, fakeAsync, async, tick } from '@angular/core/testing';
@@ -14,6 +15,7 @@ import { By } from '@angular/platform-browser';
         *ngFor="let value of values"
         [value]="value"
         [disabled]="isDisabled"
+        [beforeChange]="beforeChange"
         (ngModelChange)="valueChange($event)"
       >
         {{ value }}
@@ -25,9 +27,11 @@ class TestRadioComponent {
   values = ['Item1', 'Item2', 'Item3'];
   choose = 'Item1';
   isDisabled = false;
+  beforeChange: (value: any) => any;
   constructor() {}
 
   valueChange = jasmine.createSpy('value change');
+
 }
 
 describe('radio', () => {
@@ -36,6 +40,7 @@ describe('radio', () => {
   let radios: DebugElement[];
   let firstRadioLabel: HTMLElement;
   let secondRadioLabel: HTMLElement;
+  let thirdRadioLabel: HTMLElement;
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [RadioModule, FormsModule],
@@ -110,6 +115,82 @@ describe('radio', () => {
       expect(secondRadioLabel.classList).not.toContain('active');
       expect(testComponent.choose).toBe('Item1');
       expect(testComponent.valueChange).toHaveBeenCalledTimes(0);
+    }));
+  });
+
+  describe('beforechange', () => {
+    beforeEach((() => {
+      fixture = TestBed.createComponent(TestRadioComponent);
+      testComponent = fixture.debugElement.componentInstance;
+    }));
+
+    it('select third should be avoid by beforechange', fakeAsync(() => {
+      testComponent.beforeChange = (value) => {
+        return value !== 'Item3';
+      };
+      fixture.detectChanges();
+      flush();
+      fixture.detectChanges();
+
+      radios = fixture.debugElement.queryAll(By.directive(RadioComponent));
+      firstRadioLabel = radios[0].nativeElement.querySelector('label');
+      thirdRadioLabel = radios[2].nativeElement.querySelector('label');
+      expect(thirdRadioLabel.classList).not.toContain('active');
+
+      fixture.detectChanges();
+      thirdRadioLabel.click();
+      fixture.detectChanges();
+      flush();
+      fixture.detectChanges();
+
+      expect(firstRadioLabel.classList).toContain('active');
+      expect(thirdRadioLabel.classList).not.toContain('active');
+    }));
+
+    it('promise type should work', fakeAsync(() => {
+      testComponent.beforeChange = (value) => {
+        return  Promise.resolve(value !== 'Item3');
+      };
+      fixture.detectChanges();
+      flush();
+      fixture.detectChanges();
+
+      radios = fixture.debugElement.queryAll(By.directive(RadioComponent));
+      firstRadioLabel = radios[0].nativeElement.querySelector('label');
+      thirdRadioLabel = radios[2].nativeElement.querySelector('label');
+      expect(thirdRadioLabel.classList).not.toContain('active');
+
+      fixture.detectChanges();
+      thirdRadioLabel.click();
+      fixture.detectChanges();
+      flush();
+      fixture.detectChanges();
+
+      expect(firstRadioLabel.classList).toContain('active');
+      expect(thirdRadioLabel.classList).not.toContain('active');
+    }));
+
+    it('observable type should work', fakeAsync(() => {
+      testComponent.beforeChange = (value) => {
+        return of(value !== 'Item3');
+      };
+      fixture.detectChanges();
+      flush();
+      fixture.detectChanges();
+
+      radios = fixture.debugElement.queryAll(By.directive(RadioComponent));
+      firstRadioLabel = radios[0].nativeElement.querySelector('label');
+      thirdRadioLabel = radios[2].nativeElement.querySelector('label');
+      expect(thirdRadioLabel.classList).not.toContain('active');
+
+      fixture.detectChanges();
+      thirdRadioLabel.click();
+      fixture.detectChanges();
+      flush();
+      fixture.detectChanges();
+
+      expect(firstRadioLabel.classList).toContain('active');
+      expect(thirdRadioLabel.classList).not.toContain('active');
     }));
   });
 });

@@ -16,6 +16,7 @@ export class TreeTableOldComponent implements OnInit {
   @ViewChild(DataTableComponent, { static: true }) datatable: DataTableComponent;
   ngOnInit() {
     this.extraOptions = {showHeadTableToggler: true};
+    this.basicDataSource[0].$isChildTableOpen = true;
   }
 
   cellClick(e) {

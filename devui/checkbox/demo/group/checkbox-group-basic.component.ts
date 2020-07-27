@@ -32,4 +32,8 @@ export class CheckboxGroupBasicComponent {
   onCheckbox3Change(value) {
     console.log('checkbox3 checked:', value);
   }
+
+  onCheckbox4Change(value) {
+    console.log('checkbox4 checked:', value);
+  }
 }

@@ -66,6 +66,8 @@ export class TableThComponent implements OnChanges, OnDestroy {
     @Output() toggleChildrenTableEvent = new EventEmitter<boolean>();
     @Output() tapEvent = new EventEmitter<any>();
 
+    @Input() column: any; // 为配置column方式兼容自定义过滤模板context
+
     constructor(element: ElementRef, private renderer2: Renderer2, private zone: NgZone, private cdr: ChangeDetectorRef) {
         this.element = element.nativeElement;
     }

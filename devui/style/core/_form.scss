@@ -90,12 +90,13 @@
   border: 1px solid $gray-1;
   border-radius: 2px;
   padding: 5px 10px;
-  line-height: 1.5;
+  line-height: 16px; // 解决ie中文字不居中，由于height28px，有10px的padding和2px的border，剩余16px，使用其他的会使文字不居中
   font-size: 12px;
   color: $dark-1;
   width: 100%;
   display: block;
   cursor: text;
+  height: 28px;
 
   &:hover,
   &:hover:focus {
@@ -121,7 +122,7 @@
   }
 
   &::placeholder {
-    color: $gray-1;
+    color: $dark-3;
   }
 
   &.devui-search-in-dropdown {
@@ -130,6 +131,10 @@
     padding: 5px 26px 5px 10px;
     background-color: $hwc-drop-down-search;
     color: $dark-1;
+
+    &:-ms-input-placeholder {
+      color: $dark-3;
+    }
 
     &:hover {
       background-color: $hwc-drop-down-search-hover;
@@ -155,12 +160,14 @@
 
 .devui-input-lg {
   font-size: 16px;
-  line-height: 22px;
+  line-height: 20px; // 同devui-input
+  height: 32px;
 }
 
 .devui-input-sm {
   font-size: 12px;
-  line-height: 18px;
+  line-height: 14px; // 同devui-input
+  height: 26px;
 }
 
 // dropdown 公共样式
@@ -214,6 +221,7 @@
 :not(.devui-dropdown-origin-wrapper):not(.multiple-label-auto-complete-disabled) {
   > .devui-dropdown-origin {
     position: relative;
+    z-index: 1;
   }
 
   > .devui-dropdown-origin:hover:not([disabled]):not(.disabled):not(.devui-disabled):not(:focus):not(.devui-dropdown-origin-open) {

@@ -1,0 +1,27 @@
+<d-layout>
+  <d-header>
+    <div class="logo">
+      <span class="logo-devui">
+        <img [src]="logoSrc" width="26px" height="26px" />
+      </span>
+      <span class="text">DevUI</span>
+    </div>
+  </d-header>
+  <d-layout>
+    <d-aside>
+      <d-accordion [data]="menu" class="menu"></d-accordion>
+    </d-aside>
+    <d-content>
+      <d-breadcrumb>
+        <d-breadcrumb-item>
+          <span>DevUI</span>
+        </d-breadcrumb-item>
+        <d-breadcrumb-item>
+          <span>面包屑</span>
+        </d-breadcrumb-item>
+      </d-breadcrumb>
+      <div class="inner-content"></div>
+    </d-content>
+  </d-layout>
+  <d-footer>footer</d-footer>
+</d-layout>

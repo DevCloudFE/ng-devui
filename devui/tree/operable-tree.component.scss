@@ -7,36 +7,6 @@
   display: block;
 }
 
-.disabled {
-  color: $disabled-content;
-  cursor: not-allowed;
-  user-select: none;
-
-  &.devui-tree-node__leaf,
-  &.devui-tree-node__folder {
-    cursor: not-allowed;
-
-    > span > svg.svg-icon path {
-      fill: $gray-1;
-    }
-
-    > span > svg.svg-icon rect {
-      stroke: $gray-1;
-    }
-
-    > span > svg.svg-icon.svg-icon-close rect:last-child {
-      stroke: none;
-      fill: $gray-1;
-    }
-
-    .devui-leaf-icon-none {
-      display: inline-block;
-      width: 16px;
-      height: 16px;
-    }
-  }
-}
-
 ::ng-deep {
   &.devui-tree-node.devui-operable-tree-node {
     .devui-tree-node__checkbox {
@@ -86,4 +56,36 @@
 
 .devui-form-control {
   outline: none;
+}
+
+.devui-tree-indicator {
+  height: 1px;
+  background-color: $brand-1;
+  position: absolute;
+}
+
+.devui-drop-inner {
+  color: $brand-1;
+}
+
+.toggle-disabled {
+  cursor: not-allowed !important;
+
+  svg.svg-icon rect {
+    stroke: $disabled-content !important;
+  }
+
+  svg.svg-icon.svg-icon-close rect:last-child {
+    stroke: none !important;
+    fill: $disabled-content !important;
+  }
+
+  svg.svg-icon path {
+    fill: $disabled-content !important;
+  }
+}
+
+.select-disabled {
+  color: $disabled-content !important;
+  cursor: not-allowed !important;
 }

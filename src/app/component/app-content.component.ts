@@ -4,16 +4,14 @@ import {
   OnInit,
   OnDestroy,
   Renderer2,
-  NgZone,
+  NgZone
 } from '@angular/core';
-
-import {
-  Routes
-} from '@angular/router';
+import { cloneDeep } from 'lodash-es';
+import { Routes } from '@angular/router';
 import { groupBy, map } from 'lodash-es';
 import { routesConfig } from './component.route';
 import { Subscription, fromEvent } from 'rxjs';
-import cloneDeep from 'lodash-es/cloneDeep';
+
 @Component({
   selector: 'cd-app-content', // tslint:disable-line
   templateUrl: './app-content.component.html',
@@ -26,7 +24,7 @@ export class AppContentComponent implements OnInit, OnDestroy {
   groupedRoutes: any;
   componentsData = [];
   clickSub: Subscription = new Subscription();
-  componentsDataDisplay: Array<any>;
+  componentsDataDisplay: any;
   constructor(private renderer2: Renderer2, private ngZone: NgZone) {
     const routesWithData = map(routesConfig, (route) => {
       if (!route.data) {
@@ -46,19 +44,19 @@ export class AppContentComponent implements OnInit, OnDestroy {
             return {
               title: item.data.name + ' ' + item.data.cnName,
               link: item.path,
-            }
+            };
           } else {
             return {};
           }
         }
         ).filter((item) => Object.keys(item).length !== 0)
           .sort(function (s1, s2) {
-            s1 = (s1.title).toUpperCase();
-            s2 = (s2.title).toUpperCase();
-            if (s1 < s2) {
+            const prev = (s1.title).toUpperCase();
+            const next = (s2.title).toUpperCase();
+            if (prev < next) {
               return -1;
             }
-            if (s1 > s2) {
+            if (prev > next) {
               return 1;
             }
             return 0;

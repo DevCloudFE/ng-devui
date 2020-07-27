@@ -83,10 +83,8 @@ export class TransferComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes && (changes.customSourceCheckedLen || changes.customTargetCheckedLen)) {
-      this.targetCanTransfer = this.targetCanTransfer
-        || (changes.customSourceCheckedLen && changes.customSourceCheckedLen.currentValue > 0);
-      this.sourceCanTransfer = this.sourceCanTransfer
-        || (changes.customTargetCheckedLen && changes.customTargetCheckedLen.currentValue > 0);
+      this.targetCanTransfer = !!(changes.customSourceCheckedLen && changes.customSourceCheckedLen.currentValue > 0);
+      this.sourceCanTransfer = !!(changes.customTargetCheckedLen && changes.customTargetCheckedLen.currentValue > 0);
     }
   }
 
@@ -138,33 +136,38 @@ export class TransferComponent implements OnInit, OnChanges, OnDestroy {
 
   transferTo(direction: any) {
     if (direction === TransferDirection.TARGET) {
+      const changeData = [];
       // 对源数据更改
       this.sourceDisplayOption.filter(item => item.checked === true).forEach(item => {
         const tmp = { name: item.name, value: item.value, id: item.id, checked: false };
         this.targetOption.push(tmp);
+        changeData.push(tmp);
+        this.sourceOption.splice(this.sourceOption.indexOf(item), 1);
       });
-      this.sourceOption = this.sourceOption.filter(item => item.checked !== true);
       this.targetCanTransfer = false;
 
       if (this.sourceCustomViewTemplate) {
         this.transferToTarget.next();
       } else {
-        this.transferToSource.next({ sourceOption: this.sourceOption, targetOption: this.targetOption });
+        this.transferToTarget.next({ sourceOption: this.sourceOption, targetOption: this.targetOption, changeData });
       }
       if (this.isSearch && this.sourceSearchText !== '') {
         this.sourceSearchText = '';
       }
     } else if (direction === TransferDirection.SOURCE) {
+      const changeData = [];
       this.targetDisplayOption.filter(item => item.checked === true).forEach(item => {
         const tmp = { name: item.name, value: item.value, id: item.id, checked: false };
         this.sourceOption.push(tmp);
+        changeData.push(tmp);
+        this.targetOption.splice(this.targetOption.indexOf(item), 1);
       });
       this.targetOption = this.targetOption.filter(item => item.checked !== true);
       this.sourceCanTransfer = false;
       if (this.targetCustomViewTemplate) {
         this.transferToSource.next();
       } else {
-        this.transferToSource.next({ sourceOption: this.sourceOption, targetOption: this.targetOption });
+        this.transferToSource.next({ sourceOption: this.sourceOption, targetOption: this.targetOption, changeData });
       }
 
       if (this.isSearch && this.targetSearchText !== '') {

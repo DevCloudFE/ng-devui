@@ -12,12 +12,19 @@ import { Subscription, fromEvent } from 'rxjs';
 export class AppComponent implements OnInit, OnDestroy {
   version;
   clickSub: Subscription = new Subscription();
+  versionOptions = [];
+  currentOption;
 
   constructor(private renderer2: Renderer2, private ngZone: NgZone) {
 
   }
   ngOnInit(): void {
     this.version = VERSION.full;
+    this.versionOptions = [
+      { name: this.version, link: '/components/get-start', target: '_self' },
+      { name: '8.2.0', link: '/8.2.0/', target: '_self' }
+    ];
+    this.currentOption = this.versionOptions[0];
     this.ngZone.runOutsideAngular(() => {
       const headerMenu = document.querySelector('#headerMenu');
       const headerNode = headerMenu.parentNode;
@@ -38,6 +45,10 @@ export class AppComponent implements OnInit, OnDestroy {
         }
       }));
     });
+  }
+
+  jumpTo($event) {
+    window.open($event.link, $event.target);
   }
 
   ngOnDestroy(): void {

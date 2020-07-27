@@ -17,11 +17,14 @@
 :host ::ng-deep .devui-accordion-menu {
   display: block;
   background: $bg-white;
-  box-shadow: 0 2px 4px 0 $dark-1-boxshadow;
   width: 100%;
   overflow-y: auto;
   border-radius: 2px;
   height: 100%;
+
+  &.devui-accordion-menu-normal {
+    box-shadow: 0 2px 4px 0 $dark-1-boxshadow;
+  }
 
   & > .devui-accordion-list {
     padding: 10px 0;

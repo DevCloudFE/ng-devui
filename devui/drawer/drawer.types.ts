@@ -15,7 +15,7 @@ export interface IDrawerOptions {
   zIndex?: number;
   isCover?: boolean;
   clickDoms?: any;
-  fullScreen?: boolean;
+  fullScreen?: boolean; // @deprecated
   data?: any;
   backdropCloseable?: boolean;
   escKeyCloseable?: boolean;

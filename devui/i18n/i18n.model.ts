@@ -62,4 +62,9 @@ export interface I18nInterface {
     basicColors: string;
     moreColors: string;
   };
+  stepsGuide: {
+    previous: string,
+    next: string,
+    finish: string
+  };
 }

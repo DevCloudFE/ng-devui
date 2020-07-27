@@ -14,6 +14,9 @@ import { HelperJumpDemoComponent } from './helper-jump/helper-jump.component';
 import { HelperDownloadDemoComponent} from './helper-download/helper-download.component';
 import { HttpClientModule } from '@angular/common/http';
 import { IframPropagateDemoComponent } from './iframe-propagate/iframe-propagate.component';
+import { LazyLoadComponent } from './lazy-load/lazy-load.component';
+import {  LazyLoadModule } from 'ng-devui/utils';
+import { LoadingModule } from 'ng-devui/loading';
 
 @NgModule({
   imports: [
@@ -25,6 +28,8 @@ import { IframPropagateDemoComponent } from './iframe-propagate/iframe-propagate
     DevUIApiModule,
     DCommonModule,
     DDemoNavModule,
+    LazyLoadModule,
+    LoadingModule,
     RouterModule.forChild([
       { path: '', redirectTo: 'demo' },
       { path: 'demo', component: CommonDemoComponent },
@@ -45,7 +50,8 @@ import { IframPropagateDemoComponent } from './iframe-propagate/iframe-propagate
     CommonDemoComponent,
     HelperJumpDemoComponent,
     HelperDownloadDemoComponent,
-    IframPropagateDemoComponent
+    IframPropagateDemoComponent,
+    LazyLoadComponent
   ]
 })
 export class CommonDemoModule {}

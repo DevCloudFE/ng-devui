@@ -236,20 +236,20 @@ export class MultiAutoCompleteComponent implements OnInit, OnChanges, ControlVal
 
   openPopup() {
     const ele = this.multiAutoCompleteWrapperElement && this.multiAutoCompleteWrapperElement.nativeElement;
-    if (!ele.classList.contains('devui-dropdown-origin-open')) {
+    if (ele && !ele.classList.contains('devui-dropdown-origin-open')) {
       ele.classList.add('devui-dropdown-origin-open');
     }
-    if (!ele.classList.contains('devui-dropdown-origin-bottom')) {
+    if (ele && !ele.classList.contains('devui-dropdown-origin-bottom')) {
       ele.classList.add('devui-dropdown-origin-bottom');
     }
   }
 
   hidePopup() {
     const ele = this.multiAutoCompleteWrapperElement && this.multiAutoCompleteWrapperElement.nativeElement;
-    if (ele.classList.contains('devui-dropdown-origin-open')) {
+    if (ele && ele.classList.contains('devui-dropdown-origin-open')) {
       ele.classList.remove('devui-dropdown-origin-open');
     }
-    if (ele.classList.contains('devui-dropdown-origin-bottom')) {
+    if (ele && ele.classList.contains('devui-dropdown-origin-bottom')) {
       ele.classList.remove('devui-dropdown-origin-bottom');
     }
   }

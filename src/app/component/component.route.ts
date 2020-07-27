@@ -589,4 +589,28 @@ export const routesConfig = [
       tmw: `需要手动输入文字使用`
     }
   },
+  {
+    path: 'layout',
+    component: ExamplePanelComponent,
+    loadChildren: () => import('../../../devui/layout/demo/layout-demo.module').then(m => m.LayoutDemoModule),
+    data: {
+      type: '布局',
+      name: 'Layout',
+      cnName: '布局',
+      description: '支持多种布局类型，协助用户进行页面的整体布局',
+      tmw: ``
+    }
+  },
+  {
+    path: 'steps-guide',
+    component: ExamplePanelComponent,
+    loadChildren: () => import('../../../devui/steps-guide/demo/steps-guide-demo.module').then(m => m.StepsGuideDemoModule),
+    data: {
+      type: '导航',
+      name: 'StepsGuide',
+      cnName: '操作指引',
+      description: '在需要指引的业务逻辑元素上绑定，通过按顺序弹出引导用户了解业务使用逻辑。',
+      tmw: `业务推出新特性，或复杂的业务逻辑需要指引用户使用`
+    }
+  },
 ];

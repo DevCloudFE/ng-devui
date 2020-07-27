@@ -1,6 +1,6 @@
 import { Component, ElementRef, EventEmitter, HostListener, Input,
   OnChanges, OnDestroy, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
-import isEmpty from 'lodash-es/isEmpty';
+import { isEmpty } from 'lodash-es';
 import { BehaviorSubject, fromEvent, Observable, of } from 'rxjs';
 import { debounceTime, filter, map, switchMap } from 'rxjs/operators';
 import { I18nService, I18nInterface } from 'ng-devui/i18n';

@@ -1,5 +1,11 @@
 <section>
-  <d-data-table #dataTable [dataSource]="basicDataSource" (cellEditEnd)="thisCellEditEnd($event)" [scrollable]="true">
+  <d-data-table
+    #dataTable
+    [dataSource]="basicDataSource"
+    [beforeCellEdit]="beforeCellEdit"
+    (cellEditEnd)="thisCellEditEnd($event)"
+    [scrollable]="true"
+  >
     <d-column field="lastName" header="Last Name" [width]="'100px'" [editable]="true">
       <d-cell-edit>
         <ng-template let-rowItem="rowItem" let-column="column">

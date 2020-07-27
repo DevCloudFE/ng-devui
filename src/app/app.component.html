@@ -120,9 +120,16 @@
         <a class="main-nav-item" target="_blank" rel="noopener noreferrer" href="https://github.com/DevCloudFE/ng-devui/releases" routerLinkActive="active">
           <span>版本历程</span>
         </a>
-        <a class="main-nav-item version-label">
-          <span>{{ version }}</span>
-        </a>
+        <span class="main-nav-item">
+          <d-select
+            style="width: 80px;"
+            size="sm"
+            [options]="versionOptions"
+            [filterKey]="'name'"
+            [(ngModel)]="currentOption"
+            (valueChange)="jumpTo($event)"
+          ></d-select>
+        </span>
       </div>
       <div id="headerMenu" class="header-menu"><span></span></div>
     </header>

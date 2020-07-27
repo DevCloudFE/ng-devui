@@ -18,3 +18,13 @@
   display: inline-block;
   margin-right: 10px;
 }
+
+.g-dropdown {
+  display: inline-block;
+}
+
+.advanced-filter-panel {
+  width: 900px;
+  background-color: #f9fafc;
+  padding-left: 36px;
+}

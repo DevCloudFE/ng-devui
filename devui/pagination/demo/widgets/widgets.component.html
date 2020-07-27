@@ -7,6 +7,7 @@
     [maxItems]="10"
     [canViewTotal]="true"
     [canJumpPage]="true"
+    [canChangePageSize]="true"
     (pageIndexChange)="pageIndexChange($event)"
     (pageSizeChange)="pageSizeChange($event)"
   >
@@ -33,8 +34,9 @@
     [canViewTotal]="true"
     [canChangePageSize]="true"
     [canJumpPage]="true"
-    (pageIndexChange)="pageIndexChange($event)"
-    (pageSizeChange)="pageSizeChange($event)"
+    [autoFixPageIndex]="false"
+    (pageIndexChange)="pageIndexChangeWithoutFix($event)"
+    (pageSizeChange)="pageSizeChangeWithoutFix($event)"
     [pageSizeOptions]="pager.pageSizeOptions"
     [pageSizeDirection]="['centerUp']"
   >

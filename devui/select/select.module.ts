@@ -5,7 +5,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CheckBoxModule } from 'ng-devui/checkbox';
 import { LoadingModule } from 'ng-devui/loading';
-import { DocumentRef, WindowRef } from 'ng-devui/window-ref';
+import { WindowRefModule } from 'ng-devui/window-ref';
 import { SelectComponent } from './select.component';
 import { LazyLoadModule } from 'ng-devui/utils';
 
@@ -17,17 +17,14 @@ import { LazyLoadModule } from 'ng-devui/utils';
     ScrollingModule,
     CheckBoxModule,
     LoadingModule,
-    LazyLoadModule
+    LazyLoadModule,
+    WindowRefModule
   ],
   exports: [
     SelectComponent,
   ],
   declarations: [
     SelectComponent
-  ],
-  providers: [
-    WindowRef,
-    DocumentRef,
   ]
 })
 export class SelectModule { }

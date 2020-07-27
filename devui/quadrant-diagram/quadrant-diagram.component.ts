@@ -123,6 +123,7 @@ export class QuadrantDiagramComponent implements OnInit, OnChanges {
     }
     this.zoomInEvent.emit(this.currentLabelSize);
   }
+
   dragOverEvent(e) {
     this.quadrantDiagramService.setListPointerEvents(this.diagramId, 'none');
     this.quadrantDiagramService.showAxisLine(e.offsetX, e.offsetY, this.diagramId, this.view, this.axisConfigs);

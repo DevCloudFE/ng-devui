@@ -23,13 +23,18 @@ export class AnchorDemoComponent {
     {title: 'CSS', language: 'css', code:  require('!!raw-loader!./hash/hash.component.css')}
   ];
 
+  ScrollTargetSource: Array<DevuiSourceData> = [
+    {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./scroll-target/scroll-target.component.html')},
+    {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./scroll-target/scroll-target.component.ts')},
+    {title: 'CSS', language: 'css', code:  require('!!raw-loader!./scroll-target/scroll-target.component.css')}
+  ];
+
+
   navItems = [
     { dAnchorLink: 'basic-usage', value: '基本用法'},
     { dAnchorLink: 'asynchronous-loading', value: '异步加载'},
+    { dAnchorLink: 'scroll-target', value: '更换滚动容器'},
     { dAnchorLink: 'support-hash', value: '支持url锚点'}
   ];
 
-  constructor() {
-
-  }
 }

@@ -21,6 +21,7 @@
 |       lite        |                      `boolean`                      |           false            | 可选，是否切换为极简模式                                                                                        | [极简模式](/components/pagination/demo#minimalist-model)        |
 | showPageSelector  |                      `boolean`                      |            true            | 可选，`极简模式`下是否显示页码下拉                                                                              | [极简模式](/components/pagination/demo#minimalist-model)        |
 |  haveConfigMenu   |                      `boolean`                      |           false            | 可选，`极简模式`下是否显示配置                                                                                  | [极简模式](/components/pagination/demo#minimalist-model)        |
+|  autoFixPageIndex   |                      `boolean`                      |           true            | 可选，改变pageSize时是否自动修正页码，若`pageSizeChange`事件中会对`pageIndex`做处理，建议设置为`false`                                                                    | [极简模式](/components/pagination/demo#minimalist-model)        |
 
 ### d-pagination 事件
 
