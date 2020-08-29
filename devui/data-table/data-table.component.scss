@@ -36,7 +36,7 @@
       bottom: 0;
       position: absolute;
       cursor: col-resize;
-      background: $gray-1;
+      background: $devui-line;
       width: 2px;
       z-index: 9999;
       display: none;
@@ -69,12 +69,12 @@
   thead {
     span {
       font-weight: bold;
-      color: $dark-1;
+      color: $devui-text;
       font-size: 12px;
     }
 
     tr {
-      background-color: $bg-white;
+      background-color: $devui-base-bg;
 
       th {
         text-align: left;
@@ -87,7 +87,7 @@
         $childtable-toggler-icon: 20px;
         $negative-half-sort-icon-size: -($sort-clickable-area + $half-sort-icon); // 排序图标的大小为16 * 16 px，所以图标需要移动8px，让图标的一半显示在标题头外
 
-        border-bottom: 1px solid $gray-1;
+        border-bottom: 1px solid $devui-line;
         display: table-cell;
         padding: 0;
         font-size: 0;
@@ -120,7 +120,7 @@
           overflow: hidden;
           font-size: 12px;
           font-weight: bold;
-          color: $dark-1;
+          color: $devui-text;
         }
 
         .title.can-filter {
@@ -157,7 +157,7 @@
         }
 
         &.operable:hover {
-          background-color: $hover-content;
+          background-color: $devui-list-item-hover-bg;
         }
 
         &.sindu_handle:hover,
@@ -171,15 +171,6 @@
           .hidden-icon.drag-icon {
             visibility: hidden;
           }
-        }
-
-        &.gutter {
-          margin: 0;
-          padding: 0;
-        }
-
-        &.gutter:hover {
-          background: none;
         }
 
         &.devui-checkable-cell {
@@ -213,12 +204,12 @@
       }
 
       .sort-active {
-        background: $hover-content;
+        background: $devui-list-item-hover-bg;
         border-radius: 2px 0 0 2px;
       }
 
       .filter-active {
-        background: $hover-content;
+        background: $devui-list-item-hover-bg;
         border-radius: 2px 0 0 2px;
       }
 
@@ -230,10 +221,10 @@
   }
 
   tbody > tr {
-    background: $bg-white;
+    background: $devui-base-bg;
 
     &.table-row-selected {
-      background: $brand-3;
+      background: $devui-list-item-selected-bg;
     }
 
     > td {
@@ -245,9 +236,9 @@
       word-break: normal;
       line-height: 24px;
       font-size: 12px;
-      color: $dark-1; // #3C4458;
+      color: $devui-text; // #3C4458;
       background-color: inherit;
-      border-bottom: 1px solid $gray-2;
+      border-bottom: 1px solid $devui-dividing-line;
 
       &.devui-checkable-cell {
         padding: 10px;
@@ -289,14 +280,14 @@
 
   .resizeable:hover {
     .resize-handle {
-      border-right: 3px solid $gray-1;
+      border-right: 3px solid $devui-line;
     }
   }
 }
 
 .devui-table.table-striped ::ng-deep {
   tbody > tr:nth-of-type(odd) {
-    background: $gray-3;
+    background: $devui-list-item-strip-bg;
   }
 }
 
@@ -310,7 +301,7 @@
 
 .devui-table.table-hover ::ng-deep {
   tbody > tr:hover {
-    background: $hover-content;
+    background: $devui-list-item-hover-bg;
   }
 }
 
@@ -322,7 +313,7 @@
     vertical-align: middle;
 
     & > g > path {
-      fill: $dark-3;
+      fill: $devui-placeholder; // TODO: Color-Question
     }
   }
 }
@@ -332,7 +323,7 @@
 }
 
 :host ::ng-deep .hover-bg {
-  background: $hover-content;
+  background: $devui-list-item-hover-bg;
   pointer-events: none;
 
   & + th {
@@ -356,12 +347,13 @@
 :host ::ng-deep .childtable-toggler {
   cursor: pointer;
   padding-right: 4px;
+  font-size: unset !important;
 
   & > svg {
     vertical-align: middle;
 
     & > g > path {
-      fill: $dark-3;
+      fill: $devui-placeholder;// TODO: Color-Question
     }
   }
 }
@@ -410,7 +402,7 @@
 
   /* filter: alpha(opacity=80); */
   background-color: white;
-  box-shadow: 0 2px 4px 0 var(--dark-1-boxshadow, rgba(41, 48, 64, 0.2));
+  box-shadow: 0 2px 4px 0 var(--devui-text-boxshadow, rgba(41, 48, 64, 0.2));
   list-style: none;
 }
 

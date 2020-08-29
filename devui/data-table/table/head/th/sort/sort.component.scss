@@ -14,16 +14,16 @@
   visibility: hidden;
 
   > svg g use {
-    fill: $gray-2;
+    fill: $devui-dividing-line;
   }
 
   > svg g polygon {
-    fill: $bg-white;
+    fill: $devui-icon-bg;
   }
 
   &:hover {
     > svg g use {
-      fill: $hover-control;
+      fill: $devui-icon-fill-active-hover;
     }
   }
 }
@@ -31,16 +31,16 @@
 .sort-icon-asc,
 .sort-icon-desc {
   > svg g use {
-    fill: $brand-1;
+    fill: $devui-icon-fill-active;
   }
 
   > svg g polygon {
-    fill: $bg-white;
+    fill: $devui-icon-bg;
   }
 
   &:hover {
     > svg g use {
-      fill: $brand-2;
+      fill: $devui-icon-fill-active-hover;
     }
   }
 }

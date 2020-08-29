@@ -25,6 +25,7 @@
 .step-nav > li.active {
   color: #526ecc;
 }
+
 .step-nav > li.active::before {
   border-color: #526ecc;
 }
@@ -37,7 +38,7 @@
   text-align: center;
   line-height: 26px;
   border-radius: 50%;
-  background-color: #fff;
+  background-color: #ffffff;
   margin-right: 18px;
   border: 2px solid #dfe1e6;
 }

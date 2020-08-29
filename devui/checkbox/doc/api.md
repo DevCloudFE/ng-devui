@@ -23,17 +23,18 @@
 
 ### d-checkbox-group 参数
 
-|     参数      |       类型        |   默认   |                        说明                        | 跳转 Demo                                    |
-| :-----------: | :---------------: | :------: | :------------------------------------------------: | -------------------------------------------- |
-|     name      |     `string`      |    --    |        可选，表单域名，input 原生 name 属性        | [使用CheckBoxGroup](/components/checkbox/demo#tabs-group) |
-|   direction   | `'row'\|'column'` | 'column' |                   可选，显示方向                   | [使用CheckBoxGroup](/components/checkbox/demo#tabs-group) |
-|  isShowTitle  |     `boolean`     |   true   |             可选，是否显示 title 提示              | [使用CheckBoxGroup](/components/checkbox/demo#tabs-group) |
-|    options    |   `Array<any>`    |    []    |                可选，复选框选项数组                | [使用CheckBoxGroup](/components/checkbox/demo#tabs-group) |
-|   filterKey   |     `string`      |    --    | 可选，options 为对象数组时，标识选项唯一 id 的键值 | [使用CheckBoxGroup](/components/checkbox/demo#tabs-group) |
-| labelTemplate |   `TemplateRef`   |    --    |               可选，标签的自定义模板               | [使用CheckBoxGroup](/components/checkbox/demo#tabs-group) |
-|  halfchecked  |     `boolean`     |  false   |                   可选，半选状态                   |                                                          |
-|     color     |     `string`      |    --    |                  可选，复选框颜色                  | [使用CheckBoxGroup](/components/checkbox/demo#tabs-group) |
-| showAnimation |     `boolean`     |   true   |               可选，控制是否显示动画               | [使用CheckBoxGroup](/components/checkbox/demo#tabs-group) |
+|     参数      |       类型        |   默认   |                        说明                                         | 跳转 Demo                                    |
+| :-----------: | :---------------: | :------: | :------------------------------------------------:                  | -------------------------------------------- |
+|     name      |     `string`      |    --    |        可选，表单域名，input 原生 name 属性                         | [使用CheckBoxGroup](/components/checkbox/demo#tabs-group) |
+|   direction   | `'row'\|'column'` | 'column' |                   可选，显示方向                                    | [使用CheckBoxGroup](/components/checkbox/demo#tabs-group) |
+|   itemWidth   |      `number`     |    --    | 可选，表示每一项checkbox的宽度（用于存在多行checkbox时，不同长度项对齐使用）|[使用CheckBoxGroup](/components/checkbox/demo#tabs-group) |
+|  isShowTitle  |     `boolean`     |   true   |             可选，是否显示 title 提示                                | [使用CheckBoxGroup](/components/checkbox/demo#tabs-group) |
+|    options    |   `Array<any>`    |    []    |                可选，复选框选项数组                                  | [使用CheckBoxGroup](/components/checkbox/demo#tabs-group) |
+|   filterKey   |     `string`      |    --    | 可选，options 为对象数组时，标识选项唯一 id 的键值                    | [使用CheckBoxGroup](/components/checkbox/demo#tabs-group) |
+| labelTemplate |   `TemplateRef`   |    --    |               可选，标签的自定义模板                                 | [使用CheckBoxGroup](/components/checkbox/demo#tabs-group) |
+|  halfchecked  |     `boolean`     |  false   |                   可选，半选状态                                     |                                                          |
+|     color     |     `string`      |    --    |                  可选，复选框颜色                                    | [使用CheckBoxGroup](/components/checkbox/demo#tabs-group) |
+| showAnimation |     `boolean`     |   true   |               可选，控制是否显示动画                                 | [使用CheckBoxGroup](/components/checkbox/demo#tabs-group) |
 | beforeChange  | `Function\|Promise\|Observable` | -- | 可选，checkbox 切换前的回调函数，返回 boolean 类型，返回 false 可以阻止 checkbox-group 切换 | [回调切换](/components/checkbox/demo#condition-change) |
 
 ### d-checkbox-group 事件

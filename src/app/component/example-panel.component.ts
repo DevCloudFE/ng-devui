@@ -27,7 +27,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 :host ::ng-deep section h4,
 :host ::ng-deep section h5 {
     font-weight: bold;
-    color: $dark-2;
+    color: $devui-text-weak;
 }
 
 :host ::ng-deep section {
@@ -82,7 +82,8 @@ export class ExamplePanelComponent implements OnInit, AfterViewInit {
       });
       this.componentName = names.join(' ');
       const fragmentIndex = this.router.url.split('/').pop().indexOf('#');
-      this.componentTab = fragmentIndex === -1 ? this.router.url.split('/').pop() : this.router.url.split('/').pop().slice(0, fragmentIndex);
+      this.componentTab = fragmentIndex === -1
+        ? this.router.url.split('/').pop() : this.router.url.split('/').pop().slice(0, fragmentIndex);
     });
 
     this.route.data.subscribe((data: IExampleData) => {

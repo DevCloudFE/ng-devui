@@ -144,7 +144,7 @@
       (keyup.enter)="jump()"
       (keyup)="validateInput()"
     />
-    {{ i18nLocale === 'zh-cn' ? i18nText.page : '' }}
+    {{ i18nLocale === 'zh-cn' && !goToText ? i18nText.page : '' }}
     <div
       *ngIf="showJumpButton"
       class="devui-jump-button {{ size ? 'devui-jump-size-' + size : 'devui-jump-size-default' }}"

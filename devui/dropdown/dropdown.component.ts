@@ -1,5 +1,7 @@
 import {Component, Host, OnInit, Input, OnChanges, SimpleChanges, ViewEncapsulation, ElementRef, ViewChild} from '@angular/core';
-import {ConnectedPosition, CdkOverlayOrigin, ConnectedOverlayPositionChange, VerticalConnectionPos} from '@angular/cdk/overlay';
+import {
+  ConnectedPosition, CdkOverlayOrigin, ConnectedOverlayPositionChange, VerticalConnectionPos, CdkConnectedOverlay
+} from '@angular/cdk/overlay';
 import {AppendToBodyDirection, AppendToBodyDirectionsConfig } from 'ng-devui/utils';
 import {fadeInOut} from 'ng-devui/utils';
 import {DropDownDirective} from './dropdown.directive';
@@ -30,6 +32,7 @@ export class DropDownAppendToBodyComponent implements OnInit, OnChanges {
   positions;
   origin;
   @ViewChild('dropDownWrapper') dropDownWrapper: ElementRef;
+  @ViewChild(CdkConnectedOverlay, { static: true }) overlay: CdkConnectedOverlay;
   @Input() alignOrigin: ElementRef<any>;
   @Input() appendToBodyDirections: Array<AppendToBodyDirection | ConnectedPosition> = [
     'rightDown', 'leftDown', 'rightUp', 'leftUp'
@@ -68,6 +71,15 @@ export class DropDownAppendToBodyComponent implements OnInit, OnChanges {
       }).filter(position => position !== undefined);
     } else {
       this.positions = undefined;
+    }
+  }
+
+  reposition(): void {
+    if (this.overlay && this.overlay.overlayRef ) {
+      setTimeout(() => {
+        this.setPositions();
+        this.overlay.overlayRef.updatePosition();
+      }, 0);
     }
   }
 

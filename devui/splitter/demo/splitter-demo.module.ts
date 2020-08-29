@@ -1,3 +1,4 @@
+import { AccordionModule } from 'ng-devui/accordion';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -12,6 +13,7 @@ import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { SplitterDemoDirectionComponent } from './direction/splitter-demo-direction.component';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
+import { SplitterDemoMenuFoldComponent } from './shrink/shrink.component';
 
 @NgModule({
   imports: [
@@ -19,6 +21,7 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
     DevUICodeboxModule,
     DevUIApiModule,
     SplitterModule,
+    AccordionModule,
     FormsModule,
     DDemoNavModule,
     RouterModule.forChild([
@@ -37,7 +40,8 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
     SplitterDemoBasicComponent,
     SplitterDemoVerticalComponent,
     SplitterDemoMultiComponent,
-    SplitterDemoDirectionComponent
+    SplitterDemoDirectionComponent,
+    SplitterDemoMenuFoldComponent
   ],
 })
 export class SplitterDemoModule {

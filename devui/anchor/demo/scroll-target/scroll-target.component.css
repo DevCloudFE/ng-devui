@@ -20,14 +20,17 @@
 
 .step-nav > li:hover {
   color: #526ecc;
+  color: var(--devui-brand-active, #526ecc);
 }
 
 .step-nav > li.active {
   color: #526ecc;
+  color: var(--devui-brand-active, #526ecc);
 }
 
 .step-nav > li.active::before {
   border-color: #526ecc;
+  border-color: var(--devui-brand-active, #526ecc);
 }
 
 .step-nav > li::before {

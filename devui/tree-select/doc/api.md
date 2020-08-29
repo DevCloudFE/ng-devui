@@ -33,3 +33,4 @@
 |      事件      |      类型      |                  说明                  | 跳转 Demo |
 | :------------: | :------------: | :------------------------------------: | --------- |
 | (valueChanged) | `EventEmitter` | 选择节点时触发的变化，参数为数组或对象 | [基本用法](/components/tree-select/demo#basic-usage)       |
+| (nodeToggleEvent) | `EventEmitter` | 展开收起节点时触发，参数为触发的节点 | [基本用法](/components/tree-select/demo#basic-usage)       |

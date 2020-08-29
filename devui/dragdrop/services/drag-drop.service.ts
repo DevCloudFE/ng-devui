@@ -38,7 +38,7 @@ export class DragDropService {
     width?: number;
     height?: number;
   };
-  subscription: Subscription = Observable.create().subscribe();
+  subscription: Subscription = new Observable().subscribe();
   dragEmptyImage = new Image();
   dragCloneNode: any;
   dragOriginPlaceholder: any;
@@ -64,7 +64,7 @@ export class DragDropService {
   }
   newSubscription() {
     this.subscription.unsubscribe();
-    return this.subscription = Observable.create().subscribe();
+    return this.subscription = new Observable().subscribe();
   }
 
   enableDraggedCloneNodeFollowMouse() {
@@ -97,7 +97,7 @@ export class DragDropService {
       });
 
       this.ngZone.runOutsideAngular(() => {
-        document.addEventListener('dragover', this.followMouse4CloneNode, {capture: true, passive: true});
+        document.addEventListener('dragover', this.followMouse4CloneNode, { capture: true, passive: true });
       });
       this.dragCloneNode.style.width = this.dragOffset.width + 'px';
       this.dragCloneNode.style.height = this.dragOffset.height + 'px';
@@ -106,64 +106,64 @@ export class DragDropService {
         && this.dragPreviewDirective.dragPreviewTemplate
         && this.dragPreviewDirective.dragPreviewOptions
         && this.dragPreviewDirective.dragPreviewOptions.skipBatchPreview)) {
-      // 批量拖拽样式
-      if (this.batchDragging && this.batchDragData && this.batchDragData.length > 1 ) {
-        // 创建一个节点容器
-        const node = document.createElement('div');
-        node.appendChild(this.dragCloneNode);
-        node.classList.add('batch-dragged-node');
+        // 批量拖拽样式
+        if (this.batchDragging && this.batchDragData && this.batchDragData.length > 1) {
+          // 创建一个节点容器
+          const node = document.createElement('div');
+          node.appendChild(this.dragCloneNode);
+          node.classList.add('batch-dragged-node');
 
-        /* 计数样式定位 */
-        if (this.batchDragStyle && this.batchDragStyle.length && this.batchDragStyle.indexOf('badge') > -1) {
-          const badge = document.createElement('div');
-          badge.innerText = this.batchDragData.length + '';
-          badge.classList.add('batch-dragged-node-count');
-          node.style.position = 'relative';
-          const style = {
-            position: 'absolute',
-            right: '5px',
-            top: '-12px',
-            height: '24px',
-            width: '24px',
-            borderRadius: '12px',
-            fontSize: '14px',
-            lineHeight: '24px',
-            textAlign: 'center',
-            color: '#fff',
-            background: ['#5170ff', 'var(--brand-1, #5170ff)']
-          };
-          Utils.addElStyles(badge, style);
-          node.appendChild(badge);
-        }
-
-        /* 层叠感样式定位 */
-        if (this.batchDragStyle && this.batchDragStyle.length && this.batchDragStyle.indexOf('stack') > -1) {
-          let stack = 2;
-          if (this.batchDragData.length === 2) {
-            stack = 1;
-          }
-          for (let i = 0; i < stack; i++) {
-            const stackNode = this.dragCloneNode.cloneNode(false);
-            const stackStyle = {
+          /* 计数样式定位 */
+          if (this.batchDragStyle && this.batchDragStyle.length && this.batchDragStyle.indexOf('badge') > -1) {
+            const badge = document.createElement('div');
+            badge.innerText = this.batchDragData.length + '';
+            badge.classList.add('batch-dragged-node-count');
+            node.style.position = 'relative';
+            const style = {
               position: 'absolute',
-              left: -5 * (i + 1 ) + 'px',
-              top: -5 * (i + 1 ) +　'px',
-              zIndex: - (i + 1) + '',
-              width: this.dragOffset.width + 'px',
-              height: this.dragOffset.height + 'px',
-              background: '#fff',
-              border: ['1px solid #5170ff', '1px solid var(--brand-1, #5170ff)']
+              right: '5px',
+              top: '-12px',
+              height: '24px',
+              width: '24px',
+              borderRadius: '12px',
+              fontSize: '14px',
+              lineHeight: '24px',
+              textAlign: 'center',
+              color: '#fff',
+              background: ['#5170ff', 'var(--devui-brand, #5170ff)']
             };
-            Utils.addElStyles(stackNode, stackStyle);
-            node.appendChild(stackNode);
+            Utils.addElStyles(badge, style);
+            node.appendChild(badge);
           }
+
+          /* 层叠感样式定位 */
+          if (this.batchDragStyle && this.batchDragStyle.length && this.batchDragStyle.indexOf('stack') > -1) {
+            let stack = 2;
+            if (this.batchDragData.length === 2) {
+              stack = 1;
+            }
+            for (let i = 0; i < stack; i++) {
+              const stackNode = this.dragCloneNode.cloneNode(false);
+              const stackStyle = {
+                position: 'absolute',
+                left: -5 * (i + 1) + 'px',
+                top: -5 * (i + 1) + 'px',
+                zIndex: - (i + 1) + '',
+                width: this.dragOffset.width + 'px',
+                height: this.dragOffset.height + 'px',
+                background: '#fff',
+                border: ['1px solid #5170ff', '1px solid var(--devui-brand, #5170ff)']
+              };
+              Utils.addElStyles(stackNode, stackStyle);
+              node.appendChild(stackNode);
+            }
+          }
+          this.dragCloneNode = node;
         }
-        this.dragCloneNode = node;
       }
-     }
 
       this.dragCloneNode.classList.add('drag-clone-node');
-      if (! (this.dragPreviewDirective && this.dragPreviewDirective.dragPreviewTemplate)) {
+      if (!(this.dragPreviewDirective && this.dragPreviewDirective.dragPreviewTemplate)) {
         this.dragCloneNode.style.width = this.dragOffset.width + 'px';
         this.dragCloneNode.style.height = this.dragOffset.height + 'px';
       }
@@ -183,14 +183,14 @@ export class DragDropService {
               this.dragOriginPlaceholder.style.display = 'block';
             }
           }
-        } );
+        });
       });
     }
   }
 
   disableDraggedCloneNodeFollowMouse() {
     if (this.dragCloneNode) {
-      document.removeEventListener('dragover', this.followMouse4CloneNode, {capture: true});
+      document.removeEventListener('dragover', this.followMouse4CloneNode, { capture: true });
       this.dragItemContainer.removeChild(this.dragCloneNode);
       this.draggedEl.style.display = '';
       this.dragElShowHideEvent.next(true);
@@ -218,7 +218,7 @@ export class DragDropService {
 
   setChildNodeHide(entries) {
     entries.forEach(element => {
-      const {isIntersecting, target: childNode} = element;
+      const { isIntersecting, target: childNode } = element;
       if (isIntersecting) {
         childNode.style.display = 'block';
       } else {
@@ -228,12 +228,12 @@ export class DragDropService {
   }
 
   followMouse4CloneNode = (event) => {
-    const {offsetLeft, offsetTop} = this.dragOffset;
-    const {clientX, clientY} = event;
+    const { offsetLeft, offsetTop } = this.dragOffset;
+    const { clientX, clientY } = event;
     requestAnimationFrame(() => {
       if (!this.dragCloneNode) { return; }
-      this.dragCloneNode.style.left =  clientX - offsetLeft + 'px';
-      this.dragCloneNode.style.top =  clientY - offsetTop + 'px';
+      this.dragCloneNode.style.left = clientX - offsetLeft + 'px';
+      this.dragCloneNode.style.top = clientY - offsetTop + 'px';
     });
   }
 
@@ -251,26 +251,26 @@ export class DragDropService {
       result.splice(0, 0, dragData);
     }
     return result;
-   }
+  }
 
-   /** usage:
-    * constructor(..., private dragDropService: DragDropService) {}
-    * cleanBatchDragData() { this.dragDropService.cleanBatchDragData(); }
-    */
-   public cleanBatchDragData() {
-     const batchDragData = this.batchDragData;
-     if (this.batchDragData) {
+  /** usage:
+   * constructor(..., private dragDropService: DragDropService) {}
+   * cleanBatchDragData() { this.dragDropService.cleanBatchDragData(); }
+   */
+  public cleanBatchDragData() {
+    const batchDragData = this.batchDragData;
+    if (this.batchDragData) {
       this.batchDragData
         .filter(dragData => dragData.draggable)
         .map(dragData => dragData.draggable)
         .forEach(draggable => draggable.batchDraggable.dragData = undefined);
       this.batchDragData = undefined;
       this.batchDragGroup = undefined;
-     }
-     return batchDragData;
-   }
+    }
+    return batchDragData;
+  }
 
-   public copyStyle(source, target) {
+  public copyStyle(source, target) {
     ['id', 'class', 'style', 'draggable'].forEach(function (att) {
       target.removeAttribute(att);
     });
@@ -279,15 +279,15 @@ export class DragDropService {
     const computedStyle = getComputedStyle(source);
     for (let i = 0; i < computedStyle.length; i++) {
       const key = computedStyle[i];
-        if (key.indexOf('transition') < 0) {
-          target.style[key] = computedStyle[key];
-        }
-      }
-      target.style.pointerEvents = 'none';
-      // and repeat for all children
-      for (let i = 0; i < source.children.length; i++) {
-        this.copyStyle(source.children[i], target.children[i]);
+      if (key.indexOf('transition') < 0) {
+        target.style[key] = computedStyle[key];
       }
     }
+    target.style.pointerEvents = 'none';
+    // and repeat for all children
+    for (let i = 0; i < source.children.length; i++) {
+      this.copyStyle(source.children[i], target.children[i]);
+    }
+  }
 
 }

@@ -49,7 +49,8 @@
 
 .card .card-header {
   font-size: 14px;
-  /*color: #333;*/
+
+  /* color: #333; */
   padding: 10px;
 }
 
@@ -60,25 +61,25 @@
 .list-group > li {
   height: 30px;
   border: 1px solid #5170ff;
-  border: 1px solid var(--brand-1, #5170ff);
+  border: 1px solid var(--devui-brand, #5170ff);
   color: #ffffff;
   margin-bottom: 5px;
   line-height: 1.5;
   background-color: #5170ff;
-  background-color: var(--brand-1, #5170ff);
+  background-color: var(--devui-brand, #5170ff);
   display: flex;
   align-items: center;
 }
 
 :host ::ng-deep .drag-placeholder {
   border: 1px dashed #5170ff;
-  border: 1px dashed var(--brand-1, #5170ff);
+  border: 1px dashed var(--devui-brand, #5170ff);
   margin: 10px 0;
 }
 
 :host ::ng-deep .drag-origin-placeholder {
   border: 1px dashed #cacfd8;
-  border: 1px dashed var(--gray-1, #cacfd8);
+  border: 1px dashed var(--devui-line, #cacfd8);
   margin: 10px 0;
 }
 
@@ -89,7 +90,7 @@
 
 :host ::ng-deep .drag-origin-placeholder.hit-origin-placeholder {
   border-color: #5170ff;
-  border-color: var(--brand-1, #5170ff);
+  border-color: var(--devui-brand, #5170ff);
 }
 
 .list-3 ::ng-deep .drag-origin-placeholder.delay-deletion {

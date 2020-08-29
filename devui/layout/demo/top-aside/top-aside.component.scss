@@ -1,7 +1,7 @@
 @import '../../../style/theme/color';
 
 d-layout {
-  background-color: $bg-white;
+  background-color: $devui-base-bg;
 }
 
 d-aside {
@@ -20,7 +20,7 @@ d-header {
     margin-left: 20px;
     height: 40px;
     width: 120px;
-    color: $font-white;
+    color: $devui-light-text;
     font-size: 16px;
     line-height: 40px;
 
@@ -36,7 +36,7 @@ d-header {
   }
 
   .search {
-    color: $font-white;
+    color: $devui-light-text;
     margin-right: 40px;
     position: absolute;
     right: 0;
@@ -45,21 +45,21 @@ d-header {
 
 d-content {
   padding: 0 40px;
-  background-color: #eeeeee;
+  background-color: $devui-global-bg;
 
   d-breadcrumb {
     margin-top: 8px;
   }
 
   .inner-content {
-    background-color: $bg-white;
+    background-color: $devui-base-bg;
     padding: 16px;
     height: 100%;
   }
 }
 
 d-footer {
-  color: $font-white;
-  background-color: $huawei-bg;
+  color: $devui-light-text;
+  background-color: $devui-base-bg-dark;
   padding: 9px 24px;
 }

@@ -30,7 +30,7 @@
     display: inline-block;
     position: relative;
     margin: 0 20px 0 0;
-    color: $dark-2;
+    color: $devui-text-weak;
   }
 
   .devui-pagination-list {
@@ -49,16 +49,16 @@
     }
 
     li.disabled a {
-      color: $disabled-content;
+      color: $devui-disabled-text;
 
       svg g polygon {
-        fill: $disabled-content;
+        fill: $devui-disabled-text;
       }
     }
 
     li.disabled:first-child a,
     li.disabled:last-child a {
-      border-color: $disabled-border;
+      border-color: $devui-disabled-line;
     }
 
     li:not(.disabled) {
@@ -68,33 +68,33 @@
       span:hover,
       a:focus,
       span:focus {
-        background-color: $hover-content;
-        color: $hover-control;
+        background-color: $devui-list-item-hover-bg;
+        color: $devui-list-item-hover-text;
         text-decoration: none; // 覆盖bootStrap默认样式
       }
 
       a:active {
-        background-color: $hwc-color-bg-active;
-        color: $font-white;
+        background-color: $devui-primary;
+        color: $devui-light-text;
       }
 
       &.active a {
-        background-color: $hwc-color-bg-active;
-        color: $font-white;
+        background-color: $devui-list-item-active-bg;
+        color: $devui-list-item-active-text;
         cursor: pointer;
 
         &:hover {
-          background-color: $hover-content;
-          color: $hover-control;
+          background-color: $devui-list-item-active-hover-bg;
+          color: $devui-list-item-active-text;
         }
       }
 
       a.devui-pagination-link:hover:not(:active) svg g polygon {
-        fill: $hover-control;
+        fill: $devui-icon-fill-active-hover;
       }
 
       a.devui-pagination-link:active svg g polygon {
-        fill: $font-white;
+        fill: $devui-light-text;
       }
     }
 
@@ -103,7 +103,7 @@
         vertical-align: middle;
 
         g polygon {
-          fill: $dark-1;
+          fill: $devui-icon-text;
         }
       }
     }
@@ -119,7 +119,7 @@
     padding: 3px 7px;
     line-height: 1.5;
     border-radius: 2px;
-    color: $dark-2;
+    color: $devui-text-weak;
     display: flex;
     align-items: center;
   }
@@ -183,7 +183,7 @@
     display: inline-block;
     vertical-align: middle;
     border-radius: 1px;
-    border: 1px solid $gray-1;
+    border: 1px solid $devui-line;
     cursor: pointer;
     margin-left: 5px;
 
@@ -196,10 +196,10 @@
     }
 
     &:hover {
-      border-color: $hover-control;
+      border-color: $devui-brand-active;
 
       .devui-pagination-go {
-        border-left-color: $hover-control;
+        border-left-color: $devui-brand-active;
       }
     }
   }
@@ -212,7 +212,7 @@
       width: 0;
       height: 0;
       border-top: 12px solid transparent;
-      border-left: 12px solid $dark-2;
+      border-left: 12px solid $devui-icon-text;
       border-bottom: 12px solid transparent;
       margin: 4px auto;
     }
@@ -226,7 +226,7 @@
       width: 0;
       height: 0;
       border-top: 6px solid transparent;
-      border-left: 6px solid $dark-2;
+      border-left: 6px solid $devui-icon-text;
       border-bottom: 6px solid transparent;
       margin: 5px auto;
     }
@@ -245,7 +245,7 @@
       width: 0;
       height: 0;
       border-top: 16px solid transparent;
-      border-left: 16px solid $dark-2;
+      border-left: 16px solid $devui-icon-text;
       border-bottom: 16px solid transparent;
       margin: 6px auto;
     }
@@ -258,7 +258,7 @@
   }
 
   .devui-pagination-config {
-    color: $dark-1;
+    color: $devui-text;
     position: relative;
     display: inline-block;
     vertical-align: middle;
@@ -270,16 +270,16 @@
       display: flex;
 
       svg g path {
-        fill: $dark-1;
+        fill: $devui-icon-text;
       }
     }
 
     .devui-config-container {
       padding: 5px 0;
-      box-shadow: 0 0 6px 1px $dark-1-boxshadow;
+      box-shadow: 0 0 6px 1px $devui-shadow;
       border-radius: 2px;
       width: 150px;
-      background-color: $bg-white;
+      background-color: $devui-connected-overlay-bg;
       line-height: 26px;
       position: absolute;
       left: -136px;
@@ -298,10 +298,10 @@
       .devui-pagination-config-item {
         padding-bottom: 8px;
         padding-top: 5px;
-        border-bottom: 1px solid $gray-2;
+        border-bottom: 1px solid $devui-dividing-line;
 
         .devui-config-item-title {
-          color: $dark-2;
+          color: $devui-aide-text;
           padding-left: 10px;
           font-size: 12px;
           line-height: 22px;
@@ -314,30 +314,30 @@
           display: -ms-flexbox;
 
           div {
-            color: $dark-1;
+            color: $devui-text;
             cursor: pointer;
-            border-top: 1px solid $gray-1;
-            border-bottom: 1px solid $gray-1;
-            border-right: 1px solid $gray-1;
+            border-top: 1px solid $devui-line;
+            border-bottom: 1px solid $devui-line;
+            border-right: 1px solid $devui-line;
             text-align: center;
             height: 26px;
             width: 26px;
           }
 
           div:hover {
-            background-color: $hover-content;
-            color: $hover-control;
+            background-color: $devui-list-item-hover-bg;
+            color: $devui-list-item-hover-text;
           }
 
           div:first-child {
-            border-left: 1px solid $gray-1;
+            border-left: 1px solid $devui-line;
           }
 
           .devui-page-number div.choosed,
           .choosed {
             &:not(:hover):not(:active) {
-              color: $font-white;
-              background-color: $hwc-color-bg-active !important;
+              color: $devui-list-item-active-text;
+              background-color: $devui-list-item-active-bg !important;
               cursor: auto !important;
             }
           }

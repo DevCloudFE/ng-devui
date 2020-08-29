@@ -3,15 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'd-carousel-demo-trigger',
   templateUrl: './carousel-demo-trigger.component.html',
-  styles: [
-    `
-    d-carousel-item {
-      text-align: center;
-      line-height: 200px;
-      background: #f3f6f8;
-    }
-    `
-  ]
+  styleUrls: ['../carousel-demo.component.scss']
 })
 export class CarouselDemoTriggerComponent {
   array = [1, 2, 3, 4];

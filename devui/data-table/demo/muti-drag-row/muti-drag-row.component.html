@@ -18,6 +18,8 @@
       <tr
         dTableRow
         dDraggable
+        [dragFollowOptions]="{ appendToBody: true }"
+        [batchDragStyle]="['badge']"
         [dragScope]="'mutiple-group'"
         [dragHandle]="'.table-drag-row-handle, .table-drag-row-handle *'"
         [dragData]="rowItem"

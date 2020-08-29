@@ -15,33 +15,33 @@
   line-height: 1.5;
   font-weight: normal;
   cursor: pointer;
-  color: $dark-1;
+  color: $devui-text;
   margin: 0 auto;
 
   svg {
     .devui-outer {
-      stroke: $gray-1;
+      stroke: $devui-line;
       fill: transparent;
 
       &.disabled {
-        stroke: $disabled-border;
-        fill: $disabled-bg;
+        stroke: $devui-disabled-line;
+        fill: $devui-disabled-bg;
       }
     }
 
     .devui-inner {
-      fill: $hwc-color-icon-hover-active;
+      fill: $devui-icon-fill-active;
     }
   }
 
   &:hover:not(.disabled) svg .devui-outer {
-    stroke: $hwc-color-border-active;
+    stroke: $devui-form-control-line-active;
   }
 
   &:active:not(.disabled),
   &:focus:not(.disabled) {
     svg .devui-outer {
-      stroke: $hwc-color-border-active;
+      stroke: $devui-form-control-line-active;
     }
   }
 
@@ -49,11 +49,11 @@
     svg {
       .devui-outer {
         opacity: 1;
-        stroke: $hwc-color-border-active;
+        stroke: $devui-form-control-line-active;
         transition: stroke 50ms cubic-bezier(0.755, 0.05, 0.855, 0.06);
 
         &.disabled {
-          stroke: $disabled-border;
+          stroke: $devui-disabled-line;
         }
       }
 
@@ -61,7 +61,7 @@
         opacity: 1;
 
         &.disabled {
-          fill: $disabled-content;
+          fill: $devui-disabled-text;
         }
 
         transform: scale(1);
@@ -76,11 +76,11 @@
         .devui-radio-material {
           svg {
             .devui-outer {
-              stroke: $hwc-color-border-active-and-hover;
+              stroke: $devui-form-control-line-active-hover;
             }
 
             .devui-inner {
-              fill: $hwc-color-icon-active-and-hover;
+              fill: $devui-icon-fill-active-hover;
             }
           }
         }
@@ -112,7 +112,7 @@
   }
 
   .devui-radio-label {
-    color: $dark-1;
+    color: $devui-text;
     margin-left: 8px;
     font-size: 12px;
   }

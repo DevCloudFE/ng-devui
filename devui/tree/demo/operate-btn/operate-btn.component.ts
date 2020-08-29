@@ -93,10 +93,7 @@ export class OperateBtnComponent {
   beforeAddNode(node) {
     console.log('beforeAddNode', node);
     return new Promise((resolve, reject) => {
-      // 第一级父节点不允许添加新节点
-      if (node.parentId) {
-        resolve({ title: '新节点', index: 0 });
-      }
+      resolve({ title: '新节点', index: 0 });
     }).catch(err => console.error(err));
   }
 

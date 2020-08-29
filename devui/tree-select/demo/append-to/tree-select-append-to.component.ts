@@ -98,7 +98,7 @@ export class TreeSelectModalComponent {
     console.log('event emitted: ', $event);
   }
   close () {
-    this.data.onClose(event);
+    this.data.onClose();
   }
 }
 

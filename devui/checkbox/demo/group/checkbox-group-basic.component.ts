@@ -20,7 +20,25 @@ export class CheckboxGroupBasicComponent {
   options4 = ['data1', 'data2', 'data3', 'data4', 'data5', 'data6', 'data7'];
   values4 = ['data2', 'data3'];
 
-  constructor() {}
+  options5 = [
+    'data00000000000000001',
+    'data2',
+    'data3',
+    'data4',
+    'data5',
+    'data6',
+    'data7',
+    'data8',
+    'data9',
+    'data10',
+    'data11',
+    'data12',
+    'data13',
+    'data14',
+    'data15',
+  ];
+  values5 = ['data2', 'data12'];
+
   onCheckbox1Change(value) {
     console.log('checkbox1 checked:', value);
   }

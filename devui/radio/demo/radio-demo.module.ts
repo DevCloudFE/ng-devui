@@ -1,7 +1,7 @@
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { RadioModule } from '../radio.module';
 import { RadioDemoComponent } from './radio-demo.component';
@@ -25,6 +25,7 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
     DevUICodeboxModule,
     DevUIApiModule,
     DDemoNavModule,
+    ReactiveFormsModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo' },
       { path: 'demo', component: RadioDemoComponent},

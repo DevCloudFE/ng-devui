@@ -4,7 +4,7 @@ import { StepsGuideService } from '../../steps-guide.service';
 @Component({
   selector: 'd-custom',
   templateUrl: './custom.component.html',
-  styles: [`d-button { margin-right: 5px }`]
+  styles: [`d-button { margin-right: 4px }`]
 })
 export class CustomComponent {
   targetElement = document.querySelectorAll('.main-nav-item')[0];

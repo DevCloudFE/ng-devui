@@ -74,7 +74,8 @@ describe('CarouselComponent', () => {
     testComponent.activeIndex = 1;
     fixture.detectChanges();
     const itemContainerElement = carouselElement.querySelector('.devui-carousel-item-container');
-    expect(getComputedStyle(itemContainerElement).getPropertyValue('left')).toEqual(-(itemContainerElement.clientWidth / 4) + 'px');
+    const left = getComputedStyle(itemContainerElement).getPropertyValue('left');
+    expect(Number.parseFloat(left)).toBeCloseTo(-itemContainerElement.clientWidth / 4, 0);
   });
 
   it('should change prev page', fakeAsync(() => {
@@ -82,14 +83,16 @@ describe('CarouselComponent', () => {
     fixture.detectChanges();
     tick(500);
     const itemContainerElement = carouselElement.querySelector('.devui-carousel-item-container');
-    expect(getComputedStyle(itemContainerElement).getPropertyValue('left')).toEqual(-(itemContainerElement.clientWidth * 0.75) + 'px');
+    const left = getComputedStyle(itemContainerElement).getPropertyValue('left');
+    expect(Number.parseFloat(left)).toBeCloseTo(-itemContainerElement.clientWidth * 0.75, 0);
   }));
 
   it('should change next page', () => {
     (<HTMLElement>carouselElement.querySelector('.arrow-right')).click();
     fixture.detectChanges();
     const itemContainerElement = carouselElement.querySelector('.devui-carousel-item-container');
-    expect(getComputedStyle(itemContainerElement).getPropertyValue('left')).toEqual(-(itemContainerElement.clientWidth / 4) + 'px');
+    const left = getComputedStyle(itemContainerElement).getPropertyValue('left');
+    expect(Number.parseFloat(left)).toBeCloseTo(-itemContainerElement.clientWidth / 4, 0);
   });
 
   it('should change last next page', fakeAsync(() => {

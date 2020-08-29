@@ -72,13 +72,6 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
           ele.classList.remove(`devui-dropdown-origin-${position}`);
         }
       }
-    } else {
-      const menuEle = this.selectMenuElement && this.selectMenuElement.nativeElement;
-      ele.classList.remove('devui-dropdown-origin-open');
-      ele.classList.remove('devui-dropdown-origin-top');
-      ele.classList.remove('devui-dropdown-origin-bottom');
-      menuEle.classList.remove(`devui-dropdown-cdk-top`);
-      menuEle.classList.remove(`devui-dropdown-cdk-bottom`);
     }
   }
   /**
@@ -468,7 +461,6 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
           debounceTime(300) // hard code need refactory
         )
         .subscribe(term => {
-          this.filter = term;
           this.selectIndex = -1;
           return this.sourceSubscription.next(term);
         });
@@ -819,6 +811,19 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
         this.renderer.setStyle(targetElement, 'display', 'none');
       });
     }
+    if (!this.isOpen) {
+      const ele = this.selectWrapper && this.selectWrapper.nativeElement;
+      const menuEle = this.selectMenuElement && this.selectMenuElement.nativeElement;
+      if (ele) {
+        ele.classList.remove('devui-dropdown-origin-open');
+        ele.classList.remove('devui-dropdown-origin-top');
+        ele.classList.remove('devui-dropdown-origin-bottom');
+      }
+      if (menuEle) {
+        menuEle.classList.remove(`devui-dropdown-cdk-top`);
+        menuEle.classList.remove(`devui-dropdown-cdk-bottom`);
+      }
+    }
   }
 
   setChecked(selectedItem) {
@@ -856,8 +861,8 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
 
   resetStatus() {
     this.writeIntoInput('');
-    if (this.availableOptions && this.availableOptions[this.selectIndex]) {
-      this.availableOptions[this.selectIndex].isChecked = false;
+    if (this.availableOptions && this.availableOptions[this.activeIndex]) {
+      this.availableOptions[this.activeIndex].isChecked = false;
     }
     this.activeIndex = -1;
     this.selectIndex  = -1;

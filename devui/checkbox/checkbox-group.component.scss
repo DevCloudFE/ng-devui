@@ -6,8 +6,15 @@
   min-height: 28px;
   line-height: 28px;
   display: flex;
+  flex-wrap: wrap;
   justify-content: flex-start;
   align-items: center;
+  // hack for margin between lines
+  margin: -8px 0 0 0;
+
+  & > * {
+    margin-top: 8px;
+  }
 
   ::ng-deep li {
     display: inline-block;
@@ -16,6 +23,12 @@
       margin-right: 20px;
     }
   }
+}
+
+.devui-checkbox-wrap ::ng-deep .devui-checkbox label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .devui-checkbox-column-margin {

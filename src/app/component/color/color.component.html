@@ -1,0 +1,57 @@
+<div class="devui-container">
+  <div class="demo-title devui-theme-color-title">颜色变量</div>
+  <div class="demo-text">
+    1.
+    DevUI整理了颜色规范，包括普通色值和暗黑模式色值，以及列出了这些颜色的使用场景，为了更好的精细化控制和显示，同时对颜色做了分类和语义化变量命名；<br />
+    2. 通过`@import '~ng-devui/styles-var/devui-var.scss';`引入颜色变量后即可使用；<br />
+    3. 若样式表为less文件，则`@import '~ng-devui/styles-var/devui-var.less';`,并将变量前缀'$'改为'@';
+  </div>
+
+  <h3>实例</h3>
+  <div class="demo-text" style="margin-bottom: 16px;">本实例采用颜色变量，色块会跟随主题化切换而随之变色</div>
+  <div class="color-block block-1"></div>
+  <div class="color-block block-2"></div>
+  <div class="color-block block-3"></div>
+  <div class="color-block block-4"></div>
+  <div class="color-block block-5"></div>
+  <div class="color-block block-6"></div>
+  <div class="color-block block-7"></div>
+  <h3>默认主题颜色对照表</h3>
+  <d-data-table #datatable [dataSource]="catalogs" [scrollable]="true" [showExpandToggle]="true">
+    <thead dTableHead>
+      <tr dTableRow>
+        <th dHeadCell></th>
+        <th dHeadCell>颜色变量</th>
+        <th dHeadCell>普通色值</th>
+        <th dHeadCell>暗黑色值</th>
+        <th dHeadCell>描述</th>
+      </tr>
+    </thead>
+    <tbody dTableBody>
+      <ng-template let-rowItem="rowItem" let-rowIndex="rowIndex">
+        <tr dTableRow>
+          <td dTableCell class="cursor-pointer">
+            <div *ngIf="rowItem.expand !== undefined" (click)="toggleExpand(rowItem, rowIndex)">
+              <span class="icon-chevron-up devui-icon-style" *ngIf="rowItem?.expand"></span>
+              <span class="icon-chevron-down devui-icon-style" *ngIf="!rowItem?.expand"></span>
+            </div>
+          </td>
+          <td dTableCell [ngClass]="{ 'devui-catalog-title': rowItem.expand !== undefined }">{{ rowItem?.name }}</td>
+          <td dTableCell>
+            <div class="color-name">
+              {{ rowItem?.light }}
+            </div>
+            <div *ngIf="rowItem?.light" class="color-cube" [ngStyle]="{ 'background-color': rowItem?.light }"></div>
+          </td>
+          <td dTableCell>
+            <div class="color-name">
+              {{ rowItem?.dark }}
+            </div>
+            <div *ngIf="rowItem?.dark" class="color-cube" [ngStyle]="{ 'background-color': rowItem?.dark }"></div>
+          </td>
+          <td dTableCell>{{ rowItem?.description }}</td>
+        </tr>
+      </ng-template>
+    </tbody>
+  </d-data-table>
+</div>

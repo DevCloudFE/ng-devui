@@ -10,8 +10,8 @@
   min-height: 20px;
   font-size: 12px;
   line-height: 20px;
-  color: $dark-1;
-  background-color: $tag-label-bgcolor;
+  color: $devui-text;
+  background-color: $devui-label-bg;
   border-radius: 2px;
   border-width: 0;
   border-style: solid;
@@ -21,7 +21,7 @@
 
   &.devui-operable-tag span {
     &:hover {
-      color: $brand-1;
+      color: $devui-brand;
     }
   }
 
@@ -32,18 +32,18 @@
     width: 12px;
     height: 12px;
     line-height: 12px;
-    background-color: $gray-1;
+    background-color: $devui-line;
     border-radius: 50%;
     display: inline-block;
     text-align: center;
 
     svg path {
-      fill: $font-white;
+      fill: $devui-light-text;
     }
 
     &:hover {
       text-decoration: none;
-      background-color: $brand-1;
+      background-color: $devui-brand;
     }
   }
 }

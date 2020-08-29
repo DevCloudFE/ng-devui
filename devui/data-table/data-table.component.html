@@ -4,7 +4,7 @@
       *ngIf="fixHeader"
       #fixHeaderContainerRef
       class="table-wrap"
-      [style.overflow]="'hidden'"
+      [style.overflow]="'hidden scroll'"
       [style.max-height]="maxHeight ? maxHeight : null"
       [style.max-width]="maxWidth ? maxWidth : null"
       [style.width]="!maxWidth ? tableWidth : null"
@@ -26,10 +26,12 @@
       *ngIf="!virtualScroll; else scrollViewTpl"
       class="devui-scrollbar"
       [ngClass]="{ 'scroll-view': scrollable, 'table-wrap': !fixHeader }"
+      [style.height]="tableHeight ? tableHeight : null"
       [style.max-height]="maxHeight ? maxHeight : null"
       [style.max-width]="maxWidth ? maxWidth : null"
       [style.width]="!maxWidth ? tableWidth : null"
       (scroll)="onBodyScroll($event)"
+      [style.overflow-y]="fixHeader ? 'scroll' : null"
     >
       <table
         #tableBody
@@ -93,10 +95,11 @@
     [maxBufferPx]="virtualMaxBufferPx"
     class="devui-scrollbar viewport-wrapper"
     [ngClass]="{ 'scroll-view': scrollable, 'virtual-scroll-wrap': !fixHeader }"
-    [style.height]="virtualItemSize * (dataSource?.length || 0) + 'px'"
+    [style.height]="tableHeight ? tableHeight : maxHeight"
     [style.max-height]="maxHeight ? maxHeight : null"
     [style.max-width]="maxWidth ? maxWidth : null"
     [style.width]="!maxWidth ? tableWidth : null"
+    [style.overflow-y]="fixHeader ? 'scroll' : null"
     (scroll)="onBodyScroll($event)"
   >
     <table

@@ -173,7 +173,7 @@
             [ngClass]="[size ? 'devui-select-input-' + size : '', filter ? 'devui-search-filter' : '']"
             name="select"
             type="text"
-            [ngModel]="filter"
+            [(ngModel)]="filter"
             autocomplete="off"
             [placeholder]="searchPlaceholder"
             class="devui-form-control devui-select-search devui-select-input"
@@ -264,11 +264,12 @@
 <ng-template #scrollViewTpl>
   <cdk-virtual-scroll-viewport
     [ngStyle]="{
-      height: getVirtualScrollHeight(availableOptions.length, size)
+      height: getVirtualScrollHeight(availableOptions.length, size),
+      width: '100%',
+      'max-height': scrollHight
     }"
     [itemSize]="getVirtualScrollItemSize(size)"
     class="viewport-wrapper devui-select-list-unstyled devui-scrollbar"
-    [ngStyle]="{ 'max-height': scrollHight, width: '100%' }"
     #dropdownUl
   >
     <ng-template [ngTemplateOutlet]="selectAllTpl"></ng-template>

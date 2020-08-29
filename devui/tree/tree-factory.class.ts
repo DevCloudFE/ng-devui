@@ -8,6 +8,8 @@ import {
   trim,
   values
 } from 'lodash-es';
+import { BehaviorSubject, interval } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 export interface Dictionary<T> {
   [id: number]: T;
 }
@@ -65,6 +67,7 @@ export interface ITreeInput {
   selectDisabledKey?: string;
   toggleDisabledKey?: string;
   treeNodeTitleKey?: string;
+  isVirtualScroll?: boolean;
 }
 
 export class TreeNode implements ITreeNodeData {
@@ -80,14 +83,16 @@ export class TreeFactory {
   private _checked = new Set<Object>();
   private _treeRoot: TreeNode[] = [];
   searchItem: string;
-
-  static create() {
-    return new TreeFactory();
+  flattenNodes = new BehaviorSubject<TreeNode[]>([]);
+  virtualScroll: boolean;
+  static create(isVirtualScroll) {
+    return new TreeFactory(isVirtualScroll);
   }
 
   // tree model with items
   static fromTree({
     treeItems,
+    isVirtualScroll = false,
     treeNodeChildrenKey = 'items',
     treeNodeIdKey = 'id',
     checkboxDisabledKey = 'disabled',
@@ -95,13 +100,16 @@ export class TreeFactory {
     toggleDisabledKey = 'disabledToggle',
     treeNodeTitleKey = 'title'
   }: ITreeInput): TreeFactory {
-    const treeFactory = TreeFactory.create();
-    treeFactory.mapTreeItems({ treeItems, parentId: undefined, treeNodeChildrenKey, treeNodeIdKey, checkboxDisabledKey,
-       selectDisabledKey, toggleDisabledKey, treeNodeTitleKey });
+    const treeFactory = TreeFactory.create(isVirtualScroll);
+    treeFactory.mapTreeItems({
+      treeItems, parentId: undefined, treeNodeChildrenKey, treeNodeIdKey, checkboxDisabledKey,
+      selectDisabledKey, toggleDisabledKey, treeNodeTitleKey
+    });
     return treeFactory;
   }
 
-  constructor() {
+  constructor(public isVirtualScroll) {
+    this.virtualScroll = isVirtualScroll;
     this.idx = 0;
     this.nodes = {};
   }
@@ -138,7 +146,7 @@ export class TreeFactory {
         disableEdit: !!item.disableEdit,
         disableDelete: !!item.disableDelete,
         children: []
-      });
+      }, undefined, false);
 
       if (!!item.isChecked) {
         this._checked.add(node);
@@ -152,7 +160,7 @@ export class TreeFactory {
     return this;
   }
 
-  addNode({ id, parentId, ...data }: ITreeNodeData, index?): TreeNode {
+  addNode({ id, parentId, ...data }: ITreeNodeData, index?, renderTree = true): TreeNode {
     if (isUndefined(id)) {
       this.idx++;
       id = this.idx;
@@ -167,6 +175,10 @@ export class TreeFactory {
     };
 
     this.addChildNode(this.nodes[parentId], treeNode, index);
+    // 兼容当前用户外部直接调用addNode方法创建节点
+    if (renderTree) {
+      this.renderFlattenTree();
+    }
     return treeNode;
   }
 
@@ -192,11 +204,13 @@ export class TreeFactory {
     if (parentNode && (!parentNode.data.children || !parentNode.data.children.length)) {
       parentNode.data.isParent = false;
     }
+    this.renderFlattenTree();
     return this;
   }
 
   toggleNodeById(id: number | string) {
     this.nodes[id].data.isOpen = !this.nodes[id].data.isOpen;
+    this.renderFlattenTree();
     return this;
   }
 
@@ -205,6 +219,7 @@ export class TreeFactory {
     if (this.nodes[id].parentId !== undefined) {
       this.openNodesById(this.nodes[id].parentId);
     }
+    this.renderFlattenTree();
     return this;
   }
 
@@ -217,6 +232,7 @@ export class TreeFactory {
         });
       }
     }
+    this.renderFlattenTree();
     return this;
   }
 
@@ -386,6 +402,7 @@ export class TreeFactory {
 
   hideNodeById(id: number | string, hide: boolean) {
     this.nodes[id].data.isHide = hide;
+    this.renderFlattenTree();
     return this;
   }
 
@@ -397,22 +414,24 @@ export class TreeFactory {
     }
   }
 
-  private dfs(target, tree, hideUnmatched?: boolean) {
+  private dfs(target, tree, hideUnmatched?: boolean, keyword?, pattern?) {
     if (!tree) { return false; }
     if (!target) { return false; }
     if (Array.isArray(tree)) {
       return tree.map(treeNode => {
-        return this.dfs(target, treeNode, hideUnmatched);
+        return this.dfs(target, treeNode, hideUnmatched, keyword, pattern);
       });
     } else {
       const treeNode = tree;
       const treeChildren = this.getChildrenById(treeNode.id);
-      const selfMatched = treeNode.data.title.toLowerCase().includes(target);
+      const key = keyword ? treeNode.data.originItem[keyword] : treeNode.data.title;
+      const selfMatched = pattern ? pattern.test(key) : key.toLowerCase().includes(target);
       if (selfMatched) {
         treeNode.data.isMatch = true;
+        treeNode.data.isCustomSearch = keyword;
       }
       // Test if children matches target recursively, do not hide children if parent is matched.
-      const childrenMatched = this.dfs(target, treeChildren, hideUnmatched && !selfMatched).some(_ => !!_);
+      const childrenMatched = this.dfs(target, treeChildren, hideUnmatched && !selfMatched, keyword, pattern).some(_ => !!_);
       if (selfMatched || childrenMatched) {
         if (treeChildren.length > 0) {
           this.openNodesById(treeNode.id);
@@ -431,7 +450,7 @@ export class TreeFactory {
         (index !== undefined ? parentNode.data.children.splice(index, 0, childNode) : parentNode.data.children.push(childNode))
         : parentNode.data.children = [childNode];
     } else {
-      this._treeRoot.push(childNode);
+      index !== undefined ? this._treeRoot.splice(index, 0, childNode) : this._treeRoot.push(childNode);
     }
   }
 
@@ -448,14 +467,15 @@ export class TreeFactory {
       const treeNode = this.nodes[key];
       treeNode.data.isMatch = false;
       treeNode.data.isHide = false;
+      treeNode.data.isCustomSearch = false;
     });
   }
 
-  public searchTree(target, hideUnmatched = false) {
+  public searchTree(target, hideUnmatched = false, keyword?, pattern?) {
     this.searchItem = target;
     target = trim(target);
     this.resetSearchResults();
-    return this.dfs(target.toLowerCase(), this._treeRoot, hideUnmatched);
+    return this.dfs(target.toLowerCase(), this._treeRoot, hideUnmatched, keyword, pattern);
   }
 
   get treeRoot() {
@@ -468,7 +488,10 @@ export class TreeFactory {
   }
   public checkAllNodes(checked) {
     for (const id of Object.keys(this.nodes)) {
-      this.nodes[id].data.isChecked = checked;
+      if (!this.nodes[id].data.disabled) {
+        this.nodes[id].data.isChecked = checked;
+      }
+      this.maintainCheckedNodeList(this.nodes[id], this.nodes[id].data.isChecked);
     }
   }
   public getNodeIndex(node: TreeNode) {
@@ -497,5 +520,34 @@ export class TreeFactory {
     } else {
       return false;
     }
+  }
+
+  public getFlattenNodes() {
+    this.flattenNodes.next(this.flattenTree());
+  }
+
+  public flattenTree() {
+    const flattenTree = [];
+    const flatTree = (nodes) => {
+      for (let i = 0; i < nodes.length; i++) {
+        nodes[i].data.depth = nodes[i].parentId ? this.nodes[nodes[i].parentId].data.depth + 1 : 0;
+        nodes[i].data.hideInVirtualScroll = nodes[i].data.isHide || (nodes[i].parentId ?
+          this.nodes[nodes[i].parentId].data.hideInVirtualScroll || !this.nodes[nodes[i].parentId].data.isOpen : false);
+        nodes[i].data.isLast = i === (nodes.length - 1);
+        flattenTree.push(nodes[i]);
+        if (nodes[i].data.children) {
+          flatTree(nodes[i].data.children);
+        }
+      }
+    };
+    flatTree(this.treeRoot);
+    return flattenTree;
+  }
+
+  public renderFlattenTree() {
+    if (!this.virtualScroll) {
+      return;
+    }
+    this.getFlattenNodes();
   }
 }

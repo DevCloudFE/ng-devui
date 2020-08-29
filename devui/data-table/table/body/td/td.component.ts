@@ -3,7 +3,7 @@ import {
   HostBinding, Input, OnChanges, OnInit, Output,
   SimpleChanges, OnDestroy
 } from '@angular/core';
-import { fromEvent, Subscription } from 'rxjs';
+import { Subscription, Observable, fromEvent } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { EditableTip } from '../../../data-table.model';
 import { TableTdService } from './td.service';
@@ -22,12 +22,14 @@ export class TableTdComponent implements OnInit, OnChanges, OnDestroy {
   @Input() editableTip = EditableTip.hover;
   @Input() nestedColumn = false;
   @Input() nestedLayer: number;
+  @Input() field: string;
   @Input() rowItem: any;
   @Input() fixedLeft: string;
   @Input() fixedRight: string;
   @Input() iconFoldTable: string;
   @Input() iconUnFoldTable: string;
-  @Input() beforeCellEdit: () => Promise<any>;
+  @Input() beforeEditStart: (rowItem, field) => boolean | Promise<boolean> | Observable<boolean>;
+  @Input() beforeEditEnd: (rowItem, field) => boolean | Promise<boolean> | Observable<boolean>;
   @Output() toggleChildTableEvent = new EventEmitter<boolean>();
   @Input() editing: boolean;
   @Output() editingChange = new EventEmitter<boolean>();
@@ -64,49 +66,77 @@ export class TableTdComponent implements OnInit, OnChanges, OnDestroy {
   startEditing(event) {
     event.stopPropagation();
     event.preventDefault();
-    let beforePromise = Promise.resolve();
-    if (this.beforeCellEdit) {
-      beforePromise = this.beforeCellEdit();
+    let beforePromise = Promise.resolve(true);
+    if (this.beforeEditStart) {
+      const result: any = this.beforeEditStart(this.rowItem, this.field);
+      if (typeof result !== 'undefined') {
+        if (result.then) {
+          beforePromise = result;
+        } else if (result.subscribe) {
+          beforePromise = (result as Observable<boolean>).toPromise();
+        } else {
+          beforePromise = Promise.resolve(result);
+        }
+      }
     }
-    beforePromise.then(() => {
-      this.editing = true;
-      this.editingChange.emit(true);
-      this.editStatusEvent.emit(true);
-      this.tdService.tableCellClickEvent.emit(event);
-      setTimeout(() => {
-        this.documentClickSubscription = fromEvent(document, 'click').pipe(
-          tap((e: Event) => {
-            e.stopPropagation();
-            e.preventDefault();
-          })
-        ).subscribe((clickEvent) => {
-          if (!this.elementRef.nativeElement.contains(clickEvent.target)) {
-            this.finishCellEdit();
-          }
-        });
 
-        this.tdClickSubscription = this.tdService.tableCellClickEvent.subscribe((clickEvent) => {
-          if (!this.elementRef.nativeElement.contains(clickEvent.target)) {
-            this.finishCellEdit();
-          }
+    beforePromise.then((canStart) => {
+      if (canStart) {
+        this.editing = true;
+        this.editingChange.emit(true);
+        this.editStatusEvent.emit(true);
+        this.tdService.tableCellClickEvent.emit(event);
+        setTimeout(() => {
+          this.documentClickSubscription = fromEvent(document, 'click').pipe(
+            tap((e: Event) => {
+              e.stopPropagation();
+              e.preventDefault();
+            })
+          ).subscribe((clickEvent) => {
+            if (!this.elementRef.nativeElement.contains(clickEvent.target)) {
+              this.finishCellEdit();
+            }
+          });
+
+          this.tdClickSubscription = this.tdService.tableCellClickEvent.subscribe((clickEvent) => {
+            if (!this.elementRef.nativeElement.contains(clickEvent.target)) {
+              this.finishCellEdit();
+            }
+          });
         });
-      });
+      }
     });
   }
 
   finishCellEdit() {
-    this.editing = false;
-    this.editingChange.emit(false);
-    this.editStatusEvent.emit(false);
-    if (this.documentClickSubscription) {
-      this.documentClickSubscription.unsubscribe();
-      this.documentClickSubscription = null;
+    let beforePromise = Promise.resolve(true);
+    if (this.beforeEditEnd) {
+      const result: any = this.beforeEditEnd(this.rowItem, this.field);
+      if (typeof result !== 'undefined') {
+        if (result.then) {
+          beforePromise = result;
+        } else if (result.subscribe) {
+          beforePromise = (result as Observable<boolean>).toPromise();
+        } else {
+          beforePromise = Promise.resolve(result);
+        }
+      }
     }
-    if (this.tdClickSubscription) {
-      this.tdClickSubscription.unsubscribe();
-      this.tdClickSubscription = null;
-    }
-    return this.editing;
+    beforePromise.then((canEnd) => {
+      if (canEnd) {
+        this.editing = false;
+        this.editingChange.emit(false);
+        this.editStatusEvent.emit(false);
+        if (this.documentClickSubscription) {
+          this.documentClickSubscription.unsubscribe();
+          this.documentClickSubscription = null;
+        }
+        if (this.tdClickSubscription) {
+          this.tdClickSubscription.unsubscribe();
+          this.tdClickSubscription = null;
+        }
+      }
+    });
   }
 
   toggleChildTable(rowItem) {

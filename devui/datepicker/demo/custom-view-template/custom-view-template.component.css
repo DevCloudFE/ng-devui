@@ -41,4 +41,5 @@ a.date-link:hover {
 .icon-close {
   border-right: 1px solid #dfe1e6;
   padding-right: 10px;
+  cursor: pointer;
 }

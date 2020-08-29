@@ -127,6 +127,7 @@ export class FullscreenComponent implements OnInit, OnDestroy, AfterViewInit {
       if (this.isFullscreen) {
         const targetElement = this.elementRef.nativeElement.querySelector('[fullscreen-target]');
         if (this.mode === 'normal') {
+          this.removeFullScreenStyle();
           this.exitNormalFullscreen(targetElement);
         } else {
           if (this.doc.fullscreenElement) { this.exitImmersiveFullScreen(this.doc); }

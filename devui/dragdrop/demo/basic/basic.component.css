@@ -62,21 +62,21 @@
 .list-group > li {
   height: 30px;
   border: 1px solid #5170ff;
-  border: 1px solid var(--brand-1, #5170ff);
+  border: 1px solid var(--devui-brand, #5170ff);
   color: #ffffff;
   margin-bottom: 5px;
   line-height: 1.5;
   background-color: #5170ff;
-  background-color: var(--brand-1, #5170ff);
+  background-color: var(--devui-brand, #5170ff);
   display: flex;
   align-items: center;
 }
 
 li.list-group-item.disabled {
   border-color: #adb0b8;
-  border-color: var(--disabled-content, #adb0b8);
+  border-color: var(--devui-disabled-text, #adb0b8);
   color: #adb0b8;
-  color: var(--disabled-content, #adb0b8);
+  color: var(--devui-disabled-text, #adb0b8);
   background-color: #f5f5f6;
-  background-color: var(--disabled-bg, #f5f5f6);
+  background-color: var(--devui-disabled-bg, #f5f5f6);
 }

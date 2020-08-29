@@ -17,7 +17,7 @@
 .source,
 .target {
   width: 48%;
-  border: 1px solid $gray-1;
+  border: 1px solid $devui-line;
   border-radius: 2px;
 }
 
@@ -38,13 +38,13 @@
   -ms-align-self: center;
   -o-align-self: center;
   font-size: 12px;
-  color: $dark-2;
+  color: $devui-aide-text;
   margin-right: 10px;
 }
 
 .disable {
-  background-color: $disabled-bg;
-  color: $disabled-content;
+  background-color: $devui-disabled-bg;
+  color: $devui-disabled-text;
   cursor: not-allowed;
 }
 
@@ -52,7 +52,7 @@
   ::ng-deep {
     .disabled {
       .devui-checkbox label {
-        color: $disabled-content;
+        color: $devui-disabled-text;
       }
     }
   }
@@ -61,23 +61,23 @@
 .transfer-op {
   .default-svg {
     circle {
-      fill: $disabled-bg;
-      stroke: $disabled-border;
+      fill: $devui-disabled-bg;
+      stroke: $devui-disabled-line;
     }
 
     path {
-      fill: $disabled-content;
+      fill: $devui-disabled-text;
     }
   }
 
   .active-svg {
     circle {
-      fill: $brand-1;
-      stroke: $icon-gray-bg;
+      fill: $devui-icon-fill-active;
+      stroke: $devui-icon-fill;
     }
 
     path {
-      fill: $font-white;
+      fill: $devui-light-text;
     }
   }
 }
@@ -139,7 +139,7 @@
 
 .line {
   height: 1px;
-  background: $gray-2;
+  background: $devui-dividing-line;
 }
 
 .option-btn {

@@ -16,7 +16,7 @@
 .multiple-label-auto-complete ul {
   display: block;
   list-style: none;
-  background-color: $bg-white;
+  background-color: $devui-connected-overlay-bg;
   border-radius: 2px;
   padding: 1px 2px 0 2px;
   min-height: 28px;
@@ -26,14 +26,14 @@
 .multiple-label-auto-complete-single-focus ul,
 .multiple-label-auto-complete-border ul,
 .multiple-label-auto-complete-multiline ul {
-  border: 1px solid $gray-1;
+  border: 1px solid $devui-line;
 
   &:hover {
-    border-color: $hover-control;
+    border-color: $devui-form-control-line-hover;
   }
 
   &:active {
-    border-color: $brand-2;
+    border-color: $devui-form-control-line-active;
   }
 }
 
@@ -68,18 +68,18 @@
 
     &,
     &:hover {
-      border-color: $disabled-border;
-      background-color: $disabled-bg;
+      border-color: $devui-disabled-line;
+      background-color: $devui-disabled-bg;
     }
 
     li {
-      border-color: $disabled-border;
+      border-color: $devui-disabled-line;
 
       .label-text {
         &,
         &:hover {
-          background-color: $disabled-bg;
-          color: $disabled-content;
+          background-color: $devui-disabled-bg;
+          color: $devui-disabled-text;
         }
       }
     }
@@ -100,7 +100,7 @@
   display: inline-block;
   position: relative;
   margin: 0 1px 1px 1px;
-  border: 1px solid $tag-label-bgcolor;
+  border: 1px solid $devui-label-bg;
   border-radius: 2px;
 
   .label-item {
@@ -141,9 +141,9 @@
   .label-text {
     font-size: 12px;
     padding: 1px 10px;
-    color: $dark-2;
+    color: $devui-text-weak;
     font-weight: 400;
-    background-color: $tag-label-bgcolor;
+    background-color: $devui-label-bg;
   }
 
   .label-close {
@@ -153,18 +153,18 @@
 
     svg {
       rect {
-        fill: $gray-1;
+        fill: $devui-line;
       }
 
       path {
-        fill: $font-white;
+        fill: $devui-light-text;
       }
     }
 
     &:hover {
       svg {
         rect {
-          fill: $hover-control;
+          fill: $devui-icon-fill-active-hover;
         }
       }
     }
@@ -172,7 +172,7 @@
 
   .label-text {
     &:hover {
-      color: $hover-control;
+      color: $devui-icon-fill-active-hover;
     }
   }
 }
@@ -205,7 +205,6 @@
 
 .multiple-label-auto-complete-single-focus ul li .label-text {
   width: 100%;
-  direction: rtl;
   text-align: left;
   display: block;
   height: 20px;
@@ -216,8 +215,8 @@
   height: 22px;
   border: none;
   outline: none;
-  background: $bg-white;
-  color: $dark-1;
+  background: $devui-base-bg;
+  color: $devui-text;
   position: relative;
 }
 

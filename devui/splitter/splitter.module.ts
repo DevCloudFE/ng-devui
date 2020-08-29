@@ -5,11 +5,13 @@ import { SplitterComponent } from './splitter.component';
 import { SplitterBarComponent } from './splitter-bar.component';
 import { SplitterPaneComponent } from './splitter-pane.component';
 import { ResizeDirective } from './resize.directive';
+import { TooltipModule } from 'ng-devui/tooltip';
 
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    TooltipModule
   ],
   exports: [
     SplitterComponent,

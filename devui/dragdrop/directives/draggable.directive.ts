@@ -15,7 +15,7 @@ import { DragPreviewDirective } from './drag-preview.directive';
 export class DraggableDirective implements OnInit, AfterViewInit, OnDestroy {
   @HostBinding('draggable') draggable = true;
   /**
-   * The data that will be available to the droppable directive on its `onDrop()` event.
+   * The data that will be available to the droppable directive on its `dropEvent()` event.
    */
   @Input() dragData;
 

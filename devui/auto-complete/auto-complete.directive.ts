@@ -221,8 +221,9 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
     }
   }
 
-  public openPopup() {
+  public openPopup(activeIndex = 0) {
     const ele = this.elementRef && this.elementRef.nativeElement;
+    this.popupRef.instance.activeIndex = activeIndex;
     this.popupRef.instance.isOpen = true;
     if (ele && !ele.classList.contains('devui-dropdown-origin-open')) {
       ele.classList.add('devui-dropdown-origin-open');
@@ -421,4 +422,3 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
       );
   }
 }
-

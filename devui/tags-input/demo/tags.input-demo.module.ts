@@ -1,3 +1,4 @@
+import { ButtonModule } from './../../button/button.module';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -10,6 +11,7 @@ import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.
 import { TagsInputModule } from '../tags.input.module';
 import { TagsInputDemoAsyncComponent } from './async/async.component';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
+import { TagsInputDemoNgModelComponent } from './ngmodel/ngmodel.component';
 
 @NgModule({
   imports: [
@@ -19,6 +21,7 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
     DevUIApiModule,
     DevUICodeboxModule,
     DDemoNavModule,
+    ButtonModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo' },
       { path: 'demo', component: TagsInputDemoComponent},
@@ -33,6 +36,7 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
   declarations: [
     TagsInputDemoComponent,
     TagsInputDemoBasicComponent,
+    TagsInputDemoNgModelComponent,
     TagsInputDemoAsyncComponent
   ]
 })

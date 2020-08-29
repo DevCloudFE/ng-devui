@@ -2,7 +2,7 @@
 
 :host {
   &.devui-splitter-bar {
-    background-color: $gray-2;
+    background-color: $devui-dividing-line;
     display: flex;
     position: relative;
     align-items: center;
@@ -11,7 +11,7 @@
     flex-shrink: 0;
 
     .devui-collapse {
-      background-color: $gray-2;
+      background-color: $devui-dividing-line;
       position: absolute;
       z-index: 15;
       cursor: pointer;
@@ -27,7 +27,7 @@
       }
 
       &:hover {
-        background-color: $hover-control;
+        background-color: $devui-brand-hover;
       }
     }
 
@@ -198,7 +198,7 @@
       &:hover,
       &:focus,
       &:active {
-        background-color: $hover-control;
+        background-color: $devui-brand-active-focus;
       }
 
       &::after {

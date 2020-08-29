@@ -115,7 +115,7 @@ export class DImagePreviewComponent implements OnInit, OnDestroy {
   }
 
   inputChange($event) {
-    if (!isNaN($event) && $event && $event <= this.totalImageNum) {
+    if (!isNaN($event) && $event && $event >= 1 && $event <= this.totalImageNum) {
       this.targetImageIndex = $event - 1;
     }
   }

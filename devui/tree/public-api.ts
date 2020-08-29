@@ -5,3 +5,5 @@ export * from './tree.types';
 export * from './tree-factory.class';
 export * from './auto-focus.directive';
 export * from './tree-nodes.component';
+export * from './pipe/filter-nodes.pipe';
+export * from './pipe/transfer-to-array.pipe';

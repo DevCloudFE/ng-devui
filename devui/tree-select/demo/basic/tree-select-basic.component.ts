@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'd-tree-select-basic',
@@ -140,6 +140,12 @@ export class TreeSelectBasicComponent {
       'id': 17
     }],
     'id': 15
+  },
+  {
+    'title': '懒加载节点',
+    'isParent': true,
+    'isOpen': false,
+    'id': 20
   }];
 
   value1 = {
@@ -158,5 +164,20 @@ export class TreeSelectBasicComponent {
   }];
   showSelected($event: Event) {
     console.log('event emitted: ', $event);
+  }
+  nodeToggleEvent(node) {
+    if (node.id === 20 && !node.data.isOpen) {
+      this.data2[5].children = [{
+        'title': '懒加载节点-1',
+        'id': 21
+      }, {
+        'title': '懒加载节点-2',
+        'id': 22
+      }, {
+        'title': '懒加载节点-3',
+        'id': 23
+      }];
+      this.data2 = [...this.data2];
+    }
   }
 }

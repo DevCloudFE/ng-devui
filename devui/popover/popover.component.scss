@@ -11,8 +11,8 @@
   border: none;
   border-radius: 4px;
   z-index: 1060;
-  background-color: $hwc-feedback-overlay-background;
-  color: $hwc-feedback-overlay-font-color;
+  background-color: $devui-feedback-overlay-bg;
+  color: $devui-feedback-overlay-text;
   overflow-wrap: break-word;
 
   > .arrow {
@@ -37,7 +37,7 @@
     left: 50%;
     margin-left: -7px;
     border-bottom-width: 0;
-    border-top-color: $hwc-feedback-overlay-background;
+    border-top-color: $devui-feedback-overlay-bg;
     bottom: -8px;
   }
 
@@ -46,14 +46,14 @@
     left: -8px;
     margin-top: -8px;
     border-left-width: 0;
-    border-right-color: $hwc-feedback-overlay-background;
+    border-right-color: $devui-feedback-overlay-bg;
   }
 
   &.bottom > .arrow {
     left: 50%;
     margin-left: -7px;
     border-top-width: 0;
-    border-bottom-color: $hwc-feedback-overlay-background;
+    border-bottom-color: $devui-feedback-overlay-bg;
     top: -8px;
   }
 
@@ -62,27 +62,27 @@
     right: -8px;
     margin-top: -8px;
     border-right-width: 0;
-    border-left-color: $hwc-feedback-overlay-background;
+    border-left-color: $devui-feedback-overlay-bg;
   }
 
   &.top {
     margin-top: -10px;
-    box-shadow: -5px 5px 20px 0 $dark-1-boxshadow;
+    box-shadow: -5px 5px 20px 0 $devui-shadow;
   }
 
   &.bottom {
     margin-top: 10px;
-    box-shadow: 5px -5px 20px 0 $dark-1-boxshadow;
+    box-shadow: 5px -5px 20px 0 $devui-shadow;
   }
 
   &.left {
     margin-left: -10px;
-    box-shadow: 5px -5px 20px 0 $dark-1-boxshadow;
+    box-shadow: 5px -5px 20px 0 $devui-shadow;
   }
 
   &.right {
     margin-left: 10px;
-    box-shadow: -5px 5px 20px 0 $dark-1-boxshadow;
+    box-shadow: -5px 5px 20px 0 $devui-shadow;
   }
 }
 
@@ -95,6 +95,7 @@
   position: absolute;
   left: 10px;
   top: 6px;
+
   svg.devui-icon {
     width: 16px;
     height: 16px;
@@ -107,42 +108,42 @@
 
 .devui-icon.devui-icon-success > g {
   & > path {
-    fill: $status-green;
+    fill: $devui-success;
   }
 
   & > circle,
   & > polygon {
-    fill: $font-white;
+    fill: $devui-light-text;
   }
 }
 
 .devui-icon.devui-icon-warning > g {
   & > polygon {
-    fill: $font-white;
+    fill: $devui-light-text;
   }
 
   & > path {
-    fill: $status-yellow;
+    fill: $devui-warning;
   }
 }
 
 .devui-icon.devui-icon-info > g {
   & > g {
-    fill: $status-blue;
+    fill: $devui-info;
   }
 
   & > circle {
-    fill: $font-white;
+    fill: $devui-light-text;
   }
 }
 
 .devui-icon.devui-icon-error > g {
   & > path {
-    fill: $status-red;
+    fill: $devui-danger;
   }
 
   & > circle {
-    fill: $font-white;
+    fill: $devui-light-text;
   }
 }
 

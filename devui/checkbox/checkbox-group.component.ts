@@ -30,6 +30,7 @@ export class CheckBoxGroupComponent implements OnChanges, ControlValueAccessor {
   static ID_SEED = 0;
 
   @Input() name: string;
+  @Input() itemWidth: number;
   @Input() color;
   @Input() direction: 'row' | 'column' = 'column';
   @Input() isShowTitle = true;

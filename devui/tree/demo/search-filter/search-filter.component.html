@@ -1,17 +1,31 @@
 <section>
   <h4>Operable Tree With Search</h4>
   <div class="row">
-    <div class="d-demo__search">
-      <input name="search" placeholder="Search your node..." class="devui-form-control devui-input" (keyup)="onKeyUp($event)" />
-      <em class="icon icon-search"></em>
-    </div>
+    <d-search style="width: 300px;" [placeholder]="'search your node...'" [isKeyupSearch]="true" (searchFn)="onKeyUp($event)"></d-search>
   </div>
 
   <div class="row">
-    <div class="d-demo__search">
-      <input name="search" placeholder="filter your node..." class="devui-form-control devui-input" (keyup)="onKeyUp2($event)" />
-      <em class="icon icon-search"></em>
-    </div>
+    <d-search style="width: 300px;" [placeholder]="'filter your node...'" [isKeyupSearch]="true" (searchFn)="onKeyUp2($event)"></d-search>
+  </div>
+
+  <div class="row">
+    <d-search
+      style="width: 300px;"
+      [placeholder]="'filter your node by  custom key...'"
+      [isKeyupSearch]="true"
+      (searchFn)="onKeyUp3($event)"
+    ></d-search>
+    <span class="icon icon-help help-tip" dTooltip [content]="'使用自定义的属性搜索匹配树节点'"></span>
+  </div>
+
+  <div class="row">
+    <d-search
+      style="width: 300px;"
+      [placeholder]="'filter your node by Regex...'"
+      [isKeyupSearch]="true"
+      (searchFn)="onKeyUp4($event)"
+    ></d-search>
+    <span class="icon icon-help help-tip" dTooltip [content]="'使用正则表达式限定搜索范围'"></span>
   </div>
 
   <d-operable-tree

@@ -20,13 +20,17 @@
 
 .step-nav > li:hover {
   color: #526ecc;
+  color: var(--devui-brand-active, #526ecc);
 }
 
 .step-nav > li.active {
   color: #526ecc;
+  color: var(--devui-brand-active, #526ecc);
 }
+
 .step-nav > li.active::before {
   border-color: #526ecc;
+  border-color: var(--devui-brand-active, #526ecc);
 }
 
 .step-nav > li::before {
@@ -37,7 +41,7 @@
   text-align: center;
   line-height: 26px;
   border-radius: 50%;
-  background-color: #fff;
+  background-color: #ffffff;
   margin-right: 18px;
   border: 2px solid #dfe1e6;
 }
@@ -95,11 +99,11 @@
   }
 
   10% {
-    outline: 1px solid #5170ff;
+    outline: 1px solid var(--devui-brand, #5170ff);
   }
 
   50% {
-    outline: 1px solid #5170ff;
+    outline: 1px solid var(--devui-brand, #5170ff);
   }
 
   90% {

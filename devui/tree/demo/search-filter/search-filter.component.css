@@ -1,16 +1,10 @@
-.d-demo__search {
-  margin-bottom: 20px;
-  position: relative;
+.row {
+  padding: 8px;
 }
 
-.d-demo__search > .devui-form-control {
-  width: 30%;
-  height: 30px;
-}
-
-.icon {
-  position: absolute;
-  left: calc(30% - 26px);
-  top: 7px;
+.help-tip {
+  margin-left: 8px;
   font-size: 16px;
+  vertical-align: middle;
+  cursor: pointer;
 }

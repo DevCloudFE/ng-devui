@@ -69,7 +69,7 @@ export class FileUploader {
       this.xhr.onerror = () => {
         this.response = this.xhr.response;
         this.status = UploadStatus.failed;
-        reject(new Error('Upload failed in some reason.'));
+        reject({ file: this.file, response: this.xhr.response });
       };
 
       this.xhr.onload = () => {

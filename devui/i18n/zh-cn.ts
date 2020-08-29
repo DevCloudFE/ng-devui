@@ -16,7 +16,8 @@ export default {
     today: '今天',
     clear: '清除',
     daysOfWeek: ['日', '一', '二', '三', '四', '五', '六'],
-    monthsOfYear: ['1月',
+    monthsOfYear: [
+      '1月',
       '2月',
       '3月',
       '4月',
@@ -27,7 +28,10 @@ export default {
       '9月',
       '10月',
       '11月',
-      '12月'],
+      '12月'
+    ],
+    startDate: '开始日期',
+    endDate: '结束日期',
     yearDisplay(year) {
       return `${year}年`;
     }
@@ -87,5 +91,25 @@ export default {
     previous: '上一步',
     next: '我知道啦，继续',
     finish: '我知道啦'
+  },
+  splitter: {
+    collapse: '收起',
+    expand: '展开'
+  },
+  relativeTime: {
+    yearsAgo: '年前',
+    monthsAgo: '个月前',
+    weeksAgo: '周前',
+    daysAgo: '天前',
+    hoursAgo: '小时前',
+    minutesAgo: '分钟前',
+    justnow: '刚刚',
+    later: '稍后',
+    minutesLater: '分钟后',
+    hoursLater: '小时后',
+    daysLater: '天后',
+    weeksLater: '周后',
+    monthsLater: '个月后',
+    yearsLater: '年后',
   }
 };

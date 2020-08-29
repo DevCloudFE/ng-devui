@@ -20,7 +20,7 @@ export class  AccordionDemoComponent {
   AccordionDemoTemplate: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./template/template.component.html')},
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./template/template.component.ts')},
-    {title: 'CSS', language: 'css', code:  require('!!raw-loader!./template/template.component.css')}
+    {title: 'CSS', language: 'css', code:  require('!!raw-loader!./template/template.component.scss')}
   ];
 
   AccordionDemoInnerListTemplate: Array<DevuiSourceData> = [

@@ -200,22 +200,6 @@ describe('operable tree', () => {
       expect(tree2Node.query(By.css('.devui-tree-node__children'))).toBeTruthy();
     });
 
-    it('should mouse enter/leave add/remove background', () => {
-      const treeNode: HTMLElement = debugEl.query(By.css('.devui-tree-node')).nativeElement;
-      const treeNodeContentEl: HTMLElement = debugEl.query(By.css('.devui-tree-node__content')).nativeElement;
-      let nativeMask: HTMLElement;
-
-      treeNodeContentEl.dispatchEvent(new Event('mouseenter'));
-      fixture.detectChanges();
-      nativeMask = treeNode.querySelector('.devui-tree-mask');
-      expect(nativeMask).toBeTruthy();
-
-      treeNodeContentEl.dispatchEvent(new Event('mouseleave'));
-      fixture.detectChanges();
-      nativeMask = treeNode.querySelector('.devui-tree-mask');
-      expect(nativeMask).toBeFalsy();
-    });
-
     it('should canActiveNode false work', () => {
       component.activeNode = false;
       fixture.detectChanges();

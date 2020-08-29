@@ -2,6 +2,18 @@
 @import '../style/theme/color';
 @import '../style/theme/shadow';
 
+:host::ng-deep a {
+  &:link,
+  &:visited {
+    color: $devui-link-light;
+  }
+
+  &:hover,
+  &:active {
+    color: $devui-link-light-active;
+  }
+}
+
 .devui-toast {
   position: fixed;
   top: 50px;
@@ -19,9 +31,9 @@
   filter: alpha(opacity=95);
   box-shadow: $hwc-shadow-3;
   border-radius: 4px;
-  color: $hwc-feedback-overlay-font-color;
+  color: $devui-feedback-overlay-text;
   transition: all 0.3s;
-  background-color: $huawei-bg;
+  background-color: $devui-feedback-overlay-bg;
 
   &.slide-in {
     left: 0;
@@ -46,7 +58,7 @@
   cursor: pointer;
 
   .devui-toast-close-icon {
-    fill: $font-white;
+    fill: $devui-light-text;
   }
 }
 
@@ -69,31 +81,31 @@
 
   &.devui-toast-image-warning {
     path.devui-icon-warning-outer {
-      fill: $hwc-status-warning-border;
+      fill: $devui-warning-line;
     }
 
     path.devui-icon-warning-inner {
-      fill: $font-white;
-      stroke: $font-white;
+      fill: $devui-light-text;
+      stroke: $devui-light-text;
     }
   }
 
   &.devui-toast-image-info {
-    background-color: $status-blue;
+    background-color: $devui-info;
   }
 
   &.devui-toast-image-error {
-    background-color: $status-red;
+    background-color: $devui-danger;
   }
 
   &.devui-toast-image-success {
-    background-color: $status-green;
+    background-color: $devui-success;
   }
 
   .devui-toast-image-info-path,
   .devui-toast-image-error-path,
   .devui-toast-image-success-path {
-    fill: $font-white;
+    fill: $devui-light-text;
   }
 }
 

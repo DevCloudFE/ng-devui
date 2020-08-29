@@ -17,6 +17,12 @@ import { CustomTitleKeyComponent } from './custom-title-key/custom-title-key.com
 import { SearchFilterComponent } from './search-filter/search-filter.component';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 import { CheckControlComponent } from './check-control/check-control.component';
+import { VirtualScrollComponent } from './virtual-scroll/virtual-scroll.component';
+import { CustomLoadingComponent } from './custom-loading/custom-loading.component';
+import { LoadingModule } from 'ng-devui/loading';
+import { SafePipeModule } from 'ng-devui/utils';
+import { TooltipModule } from 'ng-devui/tooltip';
+import { SearchModule } from 'ng-devui/search';
 
 @NgModule({
   imports: [
@@ -24,9 +30,13 @@ import { CheckControlComponent } from './check-control/check-control.component';
     TreeModule,
     ButtonModule,
     FormsModule,
+    LoadingModule,
     DevUICodeboxModule,
     DevUIApiModule,
     DDemoNavModule,
+    TooltipModule,
+    SafePipeModule,
+    SearchModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo' },
       { path: 'demo', component: TreeDemoComponent},
@@ -45,7 +55,9 @@ import { CheckControlComponent } from './check-control/check-control.component';
     DraggableComponent,
     CustomTitleKeyComponent,
     SearchFilterComponent,
-    CheckControlComponent
+    CheckControlComponent,
+    VirtualScrollComponent,
+    CustomLoadingComponent
   ],
   entryComponents: [
     TreeDemoComponent,

@@ -45,7 +45,7 @@ button.devui-close {
 
 a:hover,
 a:focus {
-  color: $brand-1;
+  color: $devui-link;
 }
 
 a:active,
@@ -54,20 +54,20 @@ a:hover {
 }
 
 .devui-link {
-  color: $link;
+  color: $devui-link;
 
   &:hover {
-    color: $hover-control;
+    color: $devui-link-active;
     text-decoration: underline;
     cursor: pointer;
   }
 }
 
 .devui-link-light {
-  color: $link-light;
+  color: $devui-link-light;
 
   &:hover {
-    color: $hover-control-light;
+    color: $devui-link-light-active;
     text-decoration: underline;
     cursor: pointer;
   }
@@ -76,14 +76,14 @@ a:hover {
 .devui-disabled {
   &,
   &.devui-input-group-addon {
-    border-color: $disabled-border;
+    border-color: $devui-disabled-line;
   }
 
   &,
   & > input,
   & > .devui-input-group-addon {
-    color: $disabled-content;
-    background-color: $disabled-bg;
+    color: $devui-disabled-text;
+    background-color: $devui-disabled-bg;
     cursor: not-allowed;
   }
 }

@@ -2,19 +2,24 @@
 
 ##### 基本的树，没有增删改查等操作
 
-|        参数         |        类型        |      默认       |                 说明                  | 跳转 Demo                                                  |
-| :-----------------: | :----------------: | :-------------: | :-----------------------------------: | ---------------------------------------------------------- |
-|        tree         | `Array<ITreeItem>` |       --        |   必选，根据传入的数据进行树的渲染    | [基本用法](/components/tree/demo#basic-usage)              |
-|    treeNodeIdKey    |      `string`      |      'id'       | 可选，id 键值名，用来标识节点的唯一性 | [自定显示字段](/components/tree/demo#custom-display-field) |
-| treeNodeChildrenKey |      `string`      |     'items'     |       可选，子节点数组的键值名        | [自定显示字段](/components/tree/demo#custom-display-field) |
-|  treeNodeTitleKey   |      `string`      |     'title'     |      可选，节点显示数据的键值名       | [自定显示字段](/components/tree/demo#custom-display-field) |
-| checkboxDisabledKey |      `string`      |   'disabled'    | 可选，节点禁止点选 checkbox 的键值名  | [自定显示字段](/components/tree/demo#custom-display-field) |
-|  selectDisabledKey  |      `string`      |   'disabled'    |      可选，节点禁止选中的键值名       | [可勾选树](/components/tree/demo#checkable-tree)           |
-|  toggleDisabledKey  |      `string`      | 'disableToggle' |    可选，节点禁止展开收起的键值名     | [可勾选树](/components/tree/demo#checkable-tree)           |
-|   iconParentOpen    |      `string`      |       --        |    可选，自定义父节点展开时的图标     | [自定义图标](/components/tree/demo#custom-icon)            |
-|   iconParentClose   |      `string`      |       --        |    可选，自定义父节点收起时的图标     | [自定义图标](/components/tree/demo#custom-icon)            |
-|      iconLeaf       |      `string`      |       --        |       可选，自定义叶子节点图标        | [自定义图标](/components/tree/demo#custom-icon)            |
-|    treeNodesRef     | `TemplateRef<any>` |       --        |      可选，自定义节点的显示模板       |
+|        参数         |        类型        |      默认       |                                                              说明                                                              | 跳转 Demo                                                   |
+| :-----------------: | :----------------: | :-------------: | :----------------------------------------------------------------------------------------------------------------------------: | ----------------------------------------------------------- |
+|        tree         | `Array<ITreeItem>` |       --        |                                                必选，根据传入的数据进行树的渲染                                                | [基本用法](/components/tree/demo#basic-usage)               |
+|    treeNodeIdKey    |      `string`      |      'id'       |                                             可选，id 键值名，用来标识节点的唯一性                                              | [自定显示字段](/components/tree/demo#custom-display-field)  |
+| treeNodeChildrenKey |      `string`      |     'items'     |                                                    可选，子节点数组的键值名                                                    | [自定显示字段](/components/tree/demo#custom-display-field)  |
+|  treeNodeTitleKey   |      `string`      |     'title'     |                                                   可选，节点显示数据的键值名                                                   | [自定显示字段](/components/tree/demo#custom-display-field)  |
+| checkboxDisabledKey |      `string`      |   'disabled'    |                                              可选，节点禁止点选 checkbox 的键值名                                              | [自定显示字段](/components/tree/demo#custom-display-field)  |
+|  selectDisabledKey  |      `string`      |   'disabled'    |                                                   可选，节点禁止选中的键值名                                                   | [可勾选树](/components/tree/demo#checkable-tree)            |
+|  toggleDisabledKey  |      `string`      | 'disableToggle' |                                                 可选，节点禁止展开收起的键值名                                                 | [可勾选树](/components/tree/demo#checkable-tree)            |
+|   iconParentOpen    |      `string`      |       --        |                                                 可选，自定义父节点展开时的图标                                                 | [自定义图标](/components/tree/demo#custom-icon)             |
+|   iconParentClose   |      `string`      |       --        |                                                 可选，自定义父节点收起时的图标                                                 | [自定义图标](/components/tree/demo#custom-icon)             |
+|      iconLeaf       |      `string`      |       --        |                                                    可选，自定义叶子节点图标                                                    | [自定义图标](/components/tree/demo#custom-icon)             |
+|    treeNodesRef     | `TemplateRef<any>` |       --        |                                                   可选，自定义节点的显示模板                                                   |
+| loadingTemplateRef  | `TemplateRef<any>` |       --        |                                                    可选，自定义加载中的模板                                                    | [自定义 loading 模板](/components/tree/demo#custom-loading) |
+|    virtualScroll    |     `boolean`      |      false      |                                         可选，是否开启虚拟滚动，用于处理大数据量的情形                                         | [大数据量可操作树](/components/tree/demo#virtual-scroll)    |
+| virtualScrollHeight |      `string`      |     '800px'     |                                                  可选，设置虚拟滚动时树的高度                                                  | [大数据量可操作树](/components/tree/demo#virtual-scroll)    |
+|     minBufferPx     |      `number`      |       760       | 可选，设置虚拟滚动时的最小 buffer 尺寸，参考https://material.angular.io/cdk/scrolling/overview#scrolling-over-fixed-size-items | [大数据量可操作树](/components/tree/demo#virtual-scroll)    |
+|     maxBufferPx     |      `number`      |      1140       | 可选，设置虚拟滚动时的最大 buffer 尺寸，参考https://material.angular.io/cdk/scrolling/overview#scrolling-over-fixed-size-items | [大数据量可操作树](/components/tree/demo#virtual-scroll)    |
 
 ## d-tree 事件
 
@@ -29,49 +34,53 @@
 
 ##### 鼠标滑过或者选中支持增删改按钮操作
 
-|         参数          |                     类型                     |      默认       |                                                  说明                                                   | 跳转 Demo                                                       |
-| :-------------------: | :------------------------------------------: | :-------------: | :-----------------------------------------------------------------------------------------------------: | --------------------------------------------------------------- |
-|         tree          |              `Array<ITreeItem>`              |       --        |                                    必选，根据传入的数据进行树的渲染                                     | [可勾选树](/components/tree/demo#checkable-tree)                |
-|     treeNodeIdKey     |                   `string`                   |      'id'       |                                  可选，id 键值名，用来标识节点的唯一性                                  | [可勾选树](/components/tree/demo#checkable-tree)                |
-|  treeNodeChildrenKey  |                   `string`                   |     'items'     |                                        可选，子节点数组的键值名                                         | [可勾选树](/components/tree/demo#checkable-tree)                |
-|   treeNodeTitleKey    |                   `string`                   |     'title'     |                                       可选，节点显示数据的键值名                                        | [可勾选树](/components/tree/demo#checkable-tree)                |
-|  checkboxDisabledKey  |                   `string`                   |   'disabled'    |                                       可选，节点禁止点选的键值名                                        | [可勾选树](/components/tree/demo#checkable-tree)                |
-|   selectDisabledKey   |                   `string`                   |   'disabled'    |                                       可选，节点禁止选中的键值名                                        | [可勾选树](/components/tree/demo#checkable-tree)                |
-|   toggleDisabledKey   |                   `string`                   | 'disableToggle' |                                     可选，节点禁止展开收起的键值名                                      | [可勾选树](/components/tree/demo#checkable-tree)                |
-|    iconParentOpen     |                   `string`                   |       --        |                                     可选，自定义父节点展开时的图标                                      | [自定义图标](/components/tree/demo#custom-icon)                 |
-|    iconParentClose    |                   `string`                   |       --        |                                     可选，自定义父节点收起时的图标                                      | [自定义图标](/components/tree/demo#custom-icon)                 |
-|       iconLeaf        |                   `string`                   |       --        |                                        可选，自定义叶子节点图标                                         | [自定义图标](/components/tree/demo#custom-icon)                 |
-|       checkable       |                  `boolean`                   |      true       |                                可选，是否显示 checkbox，即是否为多选模式                                | [操作按钮](/components/tree/demo#operation-button)              |
-|        addable        |                  `boolean`                   |      false      |                                      可选，是否显示新增子节点按钮                                       | [操作按钮](/components/tree/demo#operation-button)              |
-|       editable        |                  `boolean`                   |      false      |                                      可选，是否显示编辑子节点按钮                                       | [操作按钮](/components/tree/demo#operation-button)              |
-|       deletable       |                  `boolean`                   |      false      |                                      可选，是否显示删除子节点按钮                                       | [操作按钮](/components/tree/demo#operation-button)              |
-|       draggable       |                  `boolean`                   |      false      |                                  可选，树节点是否支持 drag、drop 操作                                   | [可拖拽树](/components/tree/demo#drag-and-drop-tree)            |
-|     checkboxInput     |               `ICheckboxInput`               |       {}        |                                     可选，设置 checkbox 的相关属性                                      | [可勾选树](/components/tree/demo#checkable-tree)                |
-|    canActivateNode    |                  `boolean`                   |      true       |         可选，是否可以选中节点 ,false 时点击节点触发 nodeChecked 事件，不触发 nodeSelected 事件         | [操作按钮](/components/tree/demo#operation-button)              |
-| canActivateParentNode |                  `boolean`                   |      true       |         可选，父节点是否可选中,false 时点击节点触发 nodeChecked 事件，不触发 nodeSelected 事件          | [操作按钮](/components/tree/demo#operation-button)              |
-| iconTemplatePosition  |                   `string`                   |       --        |                    可选，设置图标的位置，可选`'before-checkbox'`或`'after-checkbox'`                    | [自定义图标](/components/tree/demo#custom-icon)                 |
-|   checkableRelation   | `'upward' \| 'downward' \| 'both' \| 'none'` |     'both'      |                                     可选，设置父子节点的 check 规则                                     | [控制父子 check 关系](/components/tree/demo#check-control-tree) |
-|     beforeAddNode     |                `Promise<any>`                |       --        |                                 可选，新增子节点前回调(参数为当前节点), 返回值中可指定添加节点的 index                             | [操作按钮](/components/tree/demo#operation-button)              |
-|   beforeDeleteNode    |                `Promise<any>`                |       --        |                                  可选，删除节点前回调(参数为当前节点)                                   | [操作按钮](/components/tree/demo#operation-button)              |
-|    beforeNodeDrop     |                `Promise<any>`                |       --        |                 可选，子节点内部拖动 drop 前回调(参数为当前拖动的节点与释放位置的节点)                  | [可拖拽树](/components/tree/demo#drag-and-drop-tree)            |
-|    beforeEditNode     |                `Promise<any>`                |       --        |                              可选，子节点编辑前回调(参数为当前编辑的节点)                               | [操作按钮](/components/tree/demo#operation-button)              |
-|      postAddNode      |                `Promise<any>`                |       --        |                                  可选，新增节点后回调(参数为新增节点)                                   | [操作按钮](/components/tree/demo#operation-button)              |
-|       dropType        |                 `IDropType`                  |       --        | 可选，设置拖拽放置的位置，`dropPrev`为放置在节点前，`dropNext`为放置在节点后，`dropInner`为放置在节点中 | [可拖拽树](/components/tree/demo#drag-and-drop-tree)            |
+|         参数          |                     类型                     |      默认       |                                                              说明                                                              | 跳转 Demo                                                       |
+| :-------------------: | :------------------------------------------: | :-------------: | :----------------------------------------------------------------------------------------------------------------------------: | --------------------------------------------------------------- |
+|         tree          |              `Array<ITreeItem>`              |       --        |                                                必选，根据传入的数据进行树的渲染                                                | [可勾选树](/components/tree/demo#checkable-tree)                |
+|     treeNodeIdKey     |                   `string`                   |      'id'       |                                             可选，id 键值名，用来标识节点的唯一性                                              | [可勾选树](/components/tree/demo#checkable-tree)                |
+|  treeNodeChildrenKey  |                   `string`                   |     'items'     |                                                    可选，子节点数组的键值名                                                    | [可勾选树](/components/tree/demo#checkable-tree)                |
+|   treeNodeTitleKey    |                   `string`                   |     'title'     |                                                   可选，节点显示数据的键值名                                                   | [可勾选树](/components/tree/demo#checkable-tree)                |
+|  checkboxDisabledKey  |                   `string`                   |   'disabled'    |                                                   可选，节点禁止点选的键值名                                                   | [可勾选树](/components/tree/demo#checkable-tree)                |
+|   selectDisabledKey   |                   `string`                   |   'disabled'    |                                                   可选，节点禁止选中的键值名                                                   | [可勾选树](/components/tree/demo#checkable-tree)                |
+|   toggleDisabledKey   |                   `string`                   | 'disableToggle' |                                                 可选，节点禁止展开收起的键值名                                                 | [可勾选树](/components/tree/demo#checkable-tree)                |
+|    iconParentOpen     |                   `string`                   |       --        |                                                 可选，自定义父节点展开时的图标                                                 | [自定义图标](/components/tree/demo#custom-icon)                 |
+|    iconParentClose    |                   `string`                   |       --        |                                                 可选，自定义父节点收起时的图标                                                 | [自定义图标](/components/tree/demo#custom-icon)                 |
+|       iconLeaf        |                   `string`                   |       --        |                                                    可选，自定义叶子节点图标                                                    | [自定义图标](/components/tree/demo#custom-icon)                 |
+|       checkable       |                  `boolean`                   |      true       |                                           可选，是否显示 checkbox，即是否为多选模式                                            | [操作按钮](/components/tree/demo#operation-button)              |
+|        addable        |                  `boolean`                   |      false      |                                                  可选，是否显示新增子节点按钮                                                  | [操作按钮](/components/tree/demo#operation-button)              |
+|       editable        |                  `boolean`                   |      false      |                                                  可选，是否显示编辑子节点按钮                                                  | [操作按钮](/components/tree/demo#operation-button)              |
+|       deletable       |                  `boolean`                   |      false      |                                                  可选，是否显示删除子节点按钮                                                  | [操作按钮](/components/tree/demo#operation-button)              |
+|       draggable       |                  `boolean`                   |      false      |                                              可选，树节点是否支持 drag、drop 操作                                              | [可拖拽树](/components/tree/demo#drag-and-drop-tree)            |
+|     checkboxInput     |               `ICheckboxInput`               |       {}        |                                                 可选，设置 checkbox 的相关属性                                                 | [可勾选树](/components/tree/demo#checkable-tree)                |
+|    canActivateNode    |                  `boolean`                   |      true       |                    可选，是否可以选中节点 ,false 时点击节点触发 nodeChecked 事件，不触发 nodeSelected 事件                     | [操作按钮](/components/tree/demo#operation-button)              |
+| canActivateParentNode |                  `boolean`                   |      true       |                     可选，父节点是否可选中,false 时点击节点触发 nodeChecked 事件，不触发 nodeSelected 事件                     | [操作按钮](/components/tree/demo#operation-button)              |
+| iconTemplatePosition  |                   `string`                   |       --        |                               可选，设置图标的位置，可选`'before-checkbox'`或`'after-checkbox'`                                | [自定义图标](/components/tree/demo#custom-icon)                 |
+|   checkableRelation   | `'upward' \| 'downward' \| 'both' \| 'none'` |     'both'      |                                                可选，设置父子节点的 check 规则                                                 | [控制父子 check 关系](/components/tree/demo#check-control-tree) |
+|     beforeAddNode     |                `Promise<any>`                |       --        |                             可选，新增子节点前回调(参数为当前节点), 返回值中可指定添加节点的 index                             | [操作按钮](/components/tree/demo#operation-button)              |
+|   beforeDeleteNode    |                `Promise<any>`                |       --        |                                              可选，删除节点前回调(参数为当前节点)                                              | [操作按钮](/components/tree/demo#operation-button)              |
+|    beforeNodeDrop     |                `Promise<any>`                |       --        |          可选，子节点内部拖动 drop 前回调(参数为当前拖动的节点，释放位置的节点，放置类型（`prev`，`inner`，`next`）)           | [可拖拽树](/components/tree/demo#drag-and-drop-tree)            |
+|    beforeEditNode     |                `Promise<any>`                |       --        |                                          可选，子节点编辑前回调(参数为当前编辑的节点)                                          | [操作按钮](/components/tree/demo#operation-button)              |
+|      postAddNode      |                `Promise<any>`                |       --        |                                              可选，新增节点后回调(参数为新增节点)                                              | [操作按钮](/components/tree/demo#operation-button)              |
+|       dropType        |                 `IDropType`                  |       --        |            可选，设置拖拽放置的位置，`dropPrev`为放置在节点前，`dropNext`为放置在节点后，`dropInner`为放置在节点中             | [可拖拽树](/components/tree/demo#drag-and-drop-tree)            |
+|     virtualScroll     |                  `boolean`                   |      false      |                                         可选，是否开启虚拟滚动，用于处理大数据量的情形                                         | [大数据量可操作树](/components/tree/demo#virtual-scroll)        |
+|  virtualScrollHeight  |                   `string`                   |     '800px'     |                                                  可选，设置虚拟滚动时树的高度                                                  | [大数据量可操作树](/components/tree/demo#virtual-scroll)        |
+|      minBufferPx      |                   `number`                   |       760       | 可选，设置虚拟滚动时的最小 buffer 尺寸，参考https://material.angular.io/cdk/scrolling/overview#scrolling-over-fixed-size-items | [大数据量可操作树](/components/tree/demo#virtual-scroll)        |
+|      maxBufferPx      |                   `number`                   |      1140       | 可选，设置虚拟滚动时的最大 buffer 尺寸，参考https://material.angular.io/cdk/scrolling/overview#scrolling-over-fixed-size-items | [大数据量可操作树](/components/tree/demo#virtual-scroll)        |
 
 ## d-operableTree 事件
 
-|        参数        |        类型         | 说明                                                                              | 跳转 Demo                                            |
-| :----------------: | :-----------------: | :-------------------------------------------------------------------------------- | ---------------------------------------------------- |
-|    nodeSelected    | `EventEmitter<any>` | 可选，节点点击事件回调,返回当前选中节点的数据                                     | [可勾选树](/components/tree/demo#checkable-tree)     |
-|   nodeDblClicked   | `EventEmitter<any>` | 可选，节点双击时的回调函数，返回当前操作的节点的数据                              | [可勾选树](/components/tree/demo#checkable-tree)     |
-|  nodeRightClicked  | `EventEmitter<any>` | 可选，节点鼠标右键点击时的回调函数，返回当前操作的节点的数据以及鼠标事件          | [可勾选树](/components/tree/demo#checkable-tree)     |
-|    nodeDeleted     | `EventEmitter<any>` | 可选，节点删除事件回调,返回当前删除节点的数据                                     | [操作按钮](/components/tree/demo#operation-button)   |
-|    nodeToggled     | `EventEmitter<any>` | 可选，节点展开收起事件回调,返回当前操作的节点的数据                               | [可勾选树](/components/tree/demo#checkable-tree)     |
-|    nodeChecked     | `EventEmitter<any>` | 可选，节点选中事件回调，返回所有选中的节点数据                                    | [可勾选树](/components/tree/demo#checkable-tree)     |
-| currentNodeChecked | `EventEmitter<any>` | 可选，节点选中事件回调，返回当前选中的节点数据                                    | [可勾选树](/components/tree/demo#checkable-tree)     |
-|     nodeEdited     | `EventEmitter<any>` | 可选，节点 title 编辑事件回调，返回当前编辑的节点数据                             | [操作按钮](/components/tree/demo#operation-button)   |
-|  editValueChange   | `EventEmitter<any>` | 可选，节点编辑中数据变化的回调函数，返回校验后的值                                | [操作按钮](/components/tree/demo#operation-button)   |
-|     nodeOnDrop     | `EventEmitter<any>` | 可选，节点 onDrop 事件回调(任意可拖动元素 drop)，返回拖拽事件与释放位置的节点数据 | [可拖拽树](/components/tree/demo#drag-and-drop-tree) |
+|        参数        |        类型         | 说明                                                                                                                 | 跳转 Demo                                            |
+| :----------------: | :-----------------: | :------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
+|    nodeSelected    | `EventEmitter<any>` | 可选，节点点击事件回调,返回当前选中节点的数据                                                                        | [可勾选树](/components/tree/demo#checkable-tree)     |
+|   nodeDblClicked   | `EventEmitter<any>` | 可选，节点双击时的回调函数，返回当前操作的节点的数据                                                                 | [可勾选树](/components/tree/demo#checkable-tree)     |
+|  nodeRightClicked  | `EventEmitter<any>` | 可选，节点鼠标右键点击时的回调函数，返回当前操作的节点的数据以及鼠标事件                                             | [可勾选树](/components/tree/demo#checkable-tree)     |
+|    nodeDeleted     | `EventEmitter<any>` | 可选，节点删除事件回调,返回当前删除节点的数据                                                                        | [操作按钮](/components/tree/demo#operation-button)   |
+|    nodeToggled     | `EventEmitter<any>` | 可选，节点展开收起事件回调,返回当前操作的节点的数据                                                                  | [可勾选树](/components/tree/demo#checkable-tree)     |
+|    nodeChecked     | `EventEmitter<any>` | 可选，节点选中事件回调，返回所有选中的节点数据                                                                       | [可勾选树](/components/tree/demo#checkable-tree)     |
+| currentNodeChecked | `EventEmitter<any>` | 可选，节点选中事件回调，返回当前选中的节点数据                                                                       | [可勾选树](/components/tree/demo#checkable-tree)     |
+|     nodeEdited     | `EventEmitter<any>` | 可选，节点 title 编辑事件回调，返回当前编辑的节点数据                                                                | [操作按钮](/components/tree/demo#operation-button)   |
+|  editValueChange   | `EventEmitter<any>` | 可选，节点编辑中数据变化的回调函数，返回校验后的值                                                                   | [操作按钮](/components/tree/demo#operation-button)   |
+|     nodeOnDrop     | `EventEmitter<any>` | 可选，节点 onDrop 事件回调(任意可拖动元素 drop)，返回拖拽事件，释放位置的节点数据，放置类型（`prev`,`inner`,`next`） | [可拖拽树](/components/tree/demo#drag-and-drop-tree) |
 
 ##### **注意**
 

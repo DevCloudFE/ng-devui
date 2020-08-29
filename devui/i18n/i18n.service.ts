@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, ReplaySubject } from 'rxjs';
 import { I18nInterface } from './i18n.model';
 import zhCN from './zh-cn';
 import enUS from './en-us';
@@ -13,7 +13,12 @@ export class I18nService {
     'en-us': enUS
   };
   private subject = new Subject<string>(); // 废弃
-  private i18nSubject = new Subject<I18nInterface>();
+  private i18nSubject = new ReplaySubject<I18nInterface>(1);
+
+  constructor() {
+    this.i18nSubject.next(this.getI18nText());
+  }
+
   toggleLang(lang = 'zh-cn') {
     localStorage.setItem('lang', lang);
     this.i18nSubject.next(this.getI18nText());

@@ -3,13 +3,13 @@
 .devui-dropdown-overlay {
   position: relative;
   left: -1px;
-  border: 1px solid $brand-1;
+  border: 1px solid $devui-connected-overlay-line;
 }
 
 .devui-two-date-wrapper {
   display: inline-flex !important;
-  box-shadow: 0 4px 8px 0 $dark-1-boxshadow;
-  background-color: $bg-white;
+  box-shadow: 0 4px 8px 0 $devui-shadow;
+  background-color: $devui-connected-overlay-bg;
   transform: perspective(1px) translate3d(0, 0, 0);
   flex-direction: column;
   border-radius: 2px;
@@ -21,7 +21,7 @@
 
   .devui-two-date-custom {
     width: 500px;
-    border-top: 1px solid $gray-1;
+    border-top: 1px solid $devui-line;
   }
 
   .devui-two-date-footer {
@@ -31,13 +31,13 @@
     align-items: center;
 
     a {
-      color: $link;
+      color: $devui-link;
       text-decoration: none;
       cursor: pointer;
     }
 
     a.disabled {
-      color: $gray-1;
+      color: $devui-line;
       cursor: not-allowed;
     }
   }

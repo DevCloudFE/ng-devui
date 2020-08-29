@@ -3,27 +3,27 @@
 :host ::ng-deep th .datatable-svg {
   g#order-default {
     path {
-      fill: $gray-2;
+      fill: $devui-icon-fill;
     }
   }
 
   g#order-desc {
     polygon#Path-4 {
-      fill: $gray-2;
+      fill: $devui-icon-fill;
     }
 
     polygon#Path-4-Copy {
-      fill: $brand-1;
+      fill: $devui-icon-fill-active;
     }
   }
 
   g#order-asc {
     polygon#Path-4 {
-      fill: $brand-1;
+      fill: $devui-icon-fill-active;
     }
 
     polygon#Path-4-Copy {
-      fill: $gray-2;
+      fill: $devui-icon-fill;
     }
   }
 }

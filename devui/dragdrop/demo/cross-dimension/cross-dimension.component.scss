@@ -3,7 +3,7 @@
   max-height: 500px;
   overflow: auto;
   background-color: #f8f8f8;
-  background-color: var(--gray-3, #f8f8f8);
+  background-color: var(--devui-area, #f8f8f8);
   padding: 5px;
 
   .row {
@@ -21,9 +21,9 @@
       width: 285px;
       margin: 0 5px;
       background-color: #ffffff;
-      background-color: var(--white, #ffffff);
+      background-color: var(--devui-base-bg, #ffffff);
       box-shadow: 1px 2px 4px 0 rgba(41, 48, 64, 0.2);
-      box-shadow: 1px 2px 4px 0 var(--dark-1-boxshadow, rgba(41, 48, 64, 0.2));
+      box-shadow: 1px 2px 4px 0 var(--devui-text-boxshadow, rgba(41, 48, 64, 0.2));
     }
   }
 
@@ -124,13 +124,13 @@
 :host ::ng-deep .list-group > div > li {
   height: 30px;
   border: 1px solid #5170ff;
-  border: 1px solid var(--brand-1, #5170ff);
+  border: 1px solid var(--devui-brand, #5170ff);
   color: #293050;
-  color: var(--dark-1, #293050);
+  color: var(--devui-text, #293050);
   margin-bottom: 5px;
   line-height: 1.5;
-  background-color: #fff;
-  background-color: var(--white, #fff);
+  background-color: #ffffff;
+  background-color: var(--devui-base-bg, #ffffff);
   display: flex;
   align-items: center;
 }
@@ -139,26 +139,26 @@
 :host ::ng-deep .list-group > div > li.selected {
   height: 30px;
   border: 1px solid #5170ff;
-  border: 1px solid var(--brand-1, #5170ff);
+  border: 1px solid var(--devui-brand, #5170ff);
   color: #5170ff;
-  color: var(--brand-1, #5170ff);
+  color: var(--devui-brand, #5170ff);
   margin-bottom: 5px;
   line-height: 1.5;
   background-color: #e8f0fd;
-  background-color: var(--brand-3, #e8f0fd);
+  background-color: var(--devui-list-item-selected-bg, #e8f0fd);
   display: flex;
   align-items: center;
 }
 
 :host::ng-deep .drag-placeholder {
   border: 1px dashed #5170ff;
-  border: 1px dashed var(--brand-1, #5170ff);
+  border: 1px dashed var(--devui-brand, #5170ff);
   margin: 10px 0;
 }
 
 :host ::ng-deep .show-origin .drag-origin-placeholder:not(.side-drag-origin-placeholder) {
   border: 1px dashed #cacfd8;
-  border: 1px dashed var(--gray-1, #cacfd8);
+  border: 1px dashed var(--devui-line, #cacfd8);
 }
 
 :host ::ng-deep .show-origin .drag-origin-placeholder {
@@ -172,7 +172,7 @@
 
 :host ::ng-deep .show-origin .drag-origin-placeholder.hit-origin-placeholder {
   border-color: #5170ff;
-  border-color: var(--brand-1, #5170ff);
+  border-color: var(--devui-brand, #5170ff);
 }
 
 .show-origin ::ng-deep .drag-origin-placeholder.delay-deletion {

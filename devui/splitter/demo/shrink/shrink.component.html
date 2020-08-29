@@ -1,0 +1,49 @@
+<section>
+  <d-splitter [orientation]="orientation" [splitBarSize]="splitBarSize" style="border: 1px solid #e3e5e9;" [showCollapseButton]="true">
+    <d-splitter-pane
+      [shrink]="true"
+      [size]="size"
+      [minSize]="minSize"
+      [maxSize]="maxSize"
+      [shrinkWidth]="40"
+      [collapsible]="true"
+      (sizeChange)="sizeChange($event)"
+      (collapsedChange)="collapsedChange($event)"
+      (shrinkStatusChange)="paneShrinkStatus($event)"
+    >
+      <d-accordion *ngIf="!isPaneShrink" [data]="menu" [itemTemplate]="itemtemplate" [menuItemTemplate]="menutemplate"></d-accordion>
+      <ng-template #menutemplate let-item="item">
+        <i class="title-icon {{ item.icon }}"></i><span class="title">{{ item.title }}</span>
+      </ng-template>
+      <ng-template #itemtemplate let-item="item">
+        <i class="title-icon {{ item.icon }}"></i><span class="title">{{ item.title }}</span>
+      </ng-template>
+
+      <ul style="padding: 10px 0;" *ngIf="isPaneShrink">
+        <li
+          *ngFor="let item of menu"
+          class="title-icon {{ item.icon ? item.icon : 'icon-dot-status' }}"
+          [ngClass]="{ active: item.active || isChildrenActive(item) }"
+          (mouseenter)="iconMouseEnter($event, item)"
+          (mouseleave)="iconMouseLeave($event)"
+          (click)="selectItem(item)"
+        ></li>
+      </ul>
+
+      <div class="hover-card" [ngStyle]="{ 'left.px': hoverCardLeft, 'top.px': hoverCardTop }" *ngIf="hoverIcon">
+        <div class="triangle"></div>
+        <span [ngClass]="{ 'parent-item': hoverMenuItem.children }">{{ hoverMenuItem.title }}</span>
+        <ul *ngIf="hoverMenuItem.children">
+          <li *ngFor="let child of hoverMenuItem.children" [ngClass]="{ 'active-child': child.active }">{{ child.title }}</li>
+        </ul>
+      </div>
+    </d-splitter-pane>
+
+    <d-splitter-pane minSize="15%">
+      <div class="pane-content">
+        <h2>右侧面板</h2>
+        <div>右侧内容区域</div>
+      </div>
+    </d-splitter-pane>
+  </d-splitter>
+</section>

@@ -3,7 +3,7 @@
 
 .devui-form-span {
   position: relative;
-  color: $dark-1;
+  color: $devui-text;
 
   &.devui-required::before {
     content: '*';

@@ -30,6 +30,8 @@ export default {
       'November',
       'December'
     ],
+    startDate: 'Start Date',
+    endDate: 'End Date',
     yearDisplay(year) {
       return `${year}`;
     }
@@ -88,5 +90,25 @@ export default {
     previous: 'Previous',
     next: 'Continue',
     finish: 'OK'
+  },
+  splitter: {
+    collapse: 'Collapse',
+    expand: 'Expand'
+  },
+  relativeTime: {
+    yearsAgo: ' years ago',
+    monthsAgo: ' months ago',
+    weeksAgo: ' weeks ago',
+    daysAgo: ' days ago',
+    hoursAgo: ' hours ago',
+    minutesAgo: ' minutes ago',
+    justnow: 'just now',
+    later: 'later',
+    minutesLater: ' minutes later',
+    hoursLater: ' hours later',
+    daysLater: ' days later',
+    weeksLater: ' weeks later',
+    monthsLater: ' months later',
+    yearsLater: ' years later',
   }
 };

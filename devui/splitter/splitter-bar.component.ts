@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component, ElementRef, Host,
-   HostBinding, Input, OnInit, Renderer2, OnDestroy, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+   HostBinding, Input, OnInit, Renderer2, OnDestroy, AfterViewInit, ChangeDetectorRef, SkipSelf } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { map, switchMap, takeUntil, tap, filter } from 'rxjs/operators';
 import { ResizeDirective } from './resize.directive';
 import { SplitterService } from './splitter.service';
 import { SplitterOrientation } from './splitter.types';
+import { I18nService } from 'ng-devui/i18n';
 
 @Component({
   selector: 'd-splitter-bar',
@@ -17,6 +18,8 @@ export class SplitterBarComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() index: number;
   // 窗格排列方向
   @Input() orientation: SplitterOrientation;
+  // 是否显示展开/收缩按钮
+  @Input() showCollapseButton;
   // 分隔条大小
   _splitBarSize;
   @Input()
@@ -38,7 +41,11 @@ export class SplitterBarComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     return bindClass;
   }
-
+  // 国际化文案
+  splitterText;
+  // 提示内容
+  preTip;
+  nextTip;
   subscriptions = new Subscription();
   // 移动的时候，阻止事件冒泡
   private stopPropagation = ({ originalEvent: event }) => {
@@ -64,12 +71,17 @@ export class SplitterBarComponent implements OnInit, AfterViewInit, OnDestroy {
     private splitter: SplitterService,
     private renderer: Renderer2,
     @Host() private resize: ResizeDirective,
-    private cdr: ChangeDetectorRef
+    @SkipSelf() private cdr: ChangeDetectorRef,
+    private i18n: I18nService
   ) {
     this.splitter.paneChangeSubject.subscribe(() => {
       this.initialCollapseStatus();
       this.cdr.detectChanges();
     });
+    this.splitterText = this.i18n.getI18nText().splitter;
+    this.subscriptions.add(this.i18n.langChange().subscribe(data => {
+      this.splitterText = data.splitter;
+    }));
   }
 
   ngOnInit(): void {
@@ -132,6 +144,7 @@ export class SplitterBarComponent implements OnInit, AfterViewInit, OnDestroy {
   // 计算前面板收起操作样式
   get prevClass() {
     const {pane, nearPane} = this.queryPanes(this.index, this.index + 1);
+    this.preTip = pane.collapsed ? this.splitterText.expand : this.splitterText.collapse;
     // 第一个面板或者其它面板折叠方向不是向后的显示操作按钮
     const showIcon = (pane.collapseDirection !== 'after' || this.index === 0);
     return this.generateCollapseClass(pane, nearPane, showIcon);
@@ -140,6 +153,7 @@ export class SplitterBarComponent implements OnInit, AfterViewInit, OnDestroy {
   // 计算相邻面板收起操作样式
   get nextClass() {
     const {pane, nearPane} = this.queryPanes(this.index + 1, this.index);
+    this.nextTip = pane.collapsed ? this.splitterText.expand : this.splitterText.collapse;
     // 最后一个面板或者其它面板折叠方向不是向前的显示操作按钮
     const showIcon = (pane.collapseDirection !== 'before' || this.index + 1 === this.splitter.paneCount - 1);
     return this.generateCollapseClass(pane, nearPane, showIcon);

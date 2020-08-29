@@ -3,15 +3,7 @@ import { Component, ViewChildren } from '@angular/core';
 @Component({
   selector: 'd-carousel-demo-custom',
   templateUrl: './carousel-demo-custom.component.html',
-  styles: [
-    `
-    d-carousel-item {
-      text-align: center;
-      line-height: 200px;
-      background: #f3f6f8;
-    }
-    `
-  ]
+  styleUrls: ['../carousel-demo.component.scss']
 })
 export class CarouselDemoCustomComponent {
   array = [1, 2, 3, 4];

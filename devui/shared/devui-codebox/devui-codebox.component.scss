@@ -1,10 +1,12 @@
+@import '../../style/theme/color';
+
 .code-box {
   border: 1px solid #e9e9e9;
   border-radius: 4px;
   display: inline-block;
   width: 100%;
   position: relative;
-  margin: 5px 0;
+  margin: 4px 0;
   transition: all 0.2s;
 
   /* overflow-x: auto; */
@@ -51,7 +53,7 @@
   display: block; /* .collapse conflick with bootstrap */
   position: absolute;
   left: 15px;
-  background: #ffffff;
+  background: $devui-block;
   top: -9px;
   cursor: pointer;
   width: 16px;

@@ -103,4 +103,8 @@ export class CheckableComponent implements OnInit {
   currentNodeChecked($event) {
     console.log('current node', $event);
   }
+  clearCheckedNodes() {
+    this.operableTreeComponent.treeFactory.checkAllNodes(false);
+    this.getCheckedNote(this.operableTreeComponent);
+  }
 }

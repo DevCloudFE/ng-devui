@@ -8,18 +8,18 @@
   width: 36px;
   height: 36px;
   border-radius: 18px;
-  background: $highlight-overlay;
-  box-shadow: 0 0 8px 0 $dark-1-boxshadow-light;
+  background: $devui-highlight-overlay;
+  box-shadow: 0 0 8px 0 $devui-light-shadow;
   display: inline-flex;
   align-items: center;
   justify-content: center;
 
   &:hover {
-    background: $gray-3;
+    background: $devui-area;
   }
 
   svg polygon {
-    fill: $dark-1;
+    fill: $devui-text;
   }
 }
 
@@ -82,16 +82,16 @@
       height: 6px;
       border-radius: 3px;
       margin-right: 8px;
-      background: $gray-1;
+      background: $devui-icon-fill;
 
       &:hover {
         cursor: pointer;
-        background: $hover-control;
+        background: $devui-list-item-hover-bg;
       }
 
       &.active {
         width: 24px;
-        background: $brand-2;
+        background: $devui-list-item-active-bg;
         transition: all 0.5s ease;
       }
     }

@@ -17,6 +17,8 @@ export interface I18nInterface {
     clear: string;
     daysOfWeek: string[];
     monthsOfYear: string[];
+    startDate: string;
+    endDate: string;
     yearDisplay(year): string;
   };
 
@@ -66,5 +68,25 @@ export interface I18nInterface {
     previous: string,
     next: string,
     finish: string
+  };
+  splitter: {
+    collapse: string,
+    expand: string
+  };
+  relativeTime: {
+    yearsAgo: string;
+    monthsAgo: string;
+    weeksAgo: string;
+    daysAgo: string;
+    hoursAgo: string;
+    minutesAgo: string;
+    justnow: string;
+    later: string;
+    minutesLater: string;
+    hoursLater: string;
+    daysLater: string;
+    weeksLater: string;
+    monthsLater: string;
+    yearsLater: string;
   };
 }

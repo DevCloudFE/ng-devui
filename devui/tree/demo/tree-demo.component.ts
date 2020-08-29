@@ -10,6 +10,11 @@ export class TreeDemoComponent {
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./basic/basic.component.html')},
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./basic/basic.component.ts')},
   ];
+  customLoadingSource: Array<DevuiSourceData> = [
+    {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./custom-loading/custom-loading.component.html')},
+    {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./custom-loading/custom-loading.component.ts')},
+    {title: 'SVG-TS', language: 'typescript', code:  require('!!raw-loader!./custom-loading/custom-loading-svg.ts')}
+  ];
 
   checkableSource: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./checkable/checkable.component.html')},
@@ -44,15 +49,22 @@ export class TreeDemoComponent {
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./check-control/check-control.component.html')},
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./check-control/check-control.component.ts')}
   ];
+  virtualScrollSource: Array<DevuiSourceData> = [
+    {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./virtual-scroll/virtual-scroll.component.html')},
+    {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./virtual-scroll/virtual-scroll.component.ts')},
+    {title: 'CSS', language: 'css', code:  require('!!raw-loader!./virtual-scroll/virtual-scroll.component.css')}
+  ];
   navItems = [
     { dAnchorLink: 'basic-usage', value: '基本用法'},
+    { dAnchorLink: 'custom-loading', value: '自定义loading模板'},
     { dAnchorLink: 'custom-display-field', value: '自定显示字段'},
     { dAnchorLink: 'checkable-tree', value: '可勾选树'},
     { dAnchorLink: 'operation-button', value: '操作按钮'},
     { dAnchorLink: 'search-filtering', value: '搜索过滤'},
     { dAnchorLink: 'custom-icon', value: '自定义图标'},
     { dAnchorLink: 'drag-and-drop-tree', value: '可拖拽树'},
-    { dAnchorLink: 'check-control-tree', value: '控制父子check关系'}
+    { dAnchorLink: 'check-control-tree', value: '控制父子check关系'},
+    { dAnchorLink: 'virtual-scroll', value: '大数据量可操作树'}
   ];
   constructor() { }
 

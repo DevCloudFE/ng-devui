@@ -11,7 +11,16 @@
     <tbody dTableBody>
       <ng-template let-rowItem="rowItem" let-rowIndex="rowIndex">
         <tr dTableRow>
-          <td dTableCell [editable]="true" [editableTip]="editableTip" [(editing)]="rowItem['nameEdit']">
+          <td
+            dTableCell
+            [editable]="true"
+            [editableTip]="editableTip"
+            [(editing)]="rowItem['nameEdit']"
+            [rowItem]="rowItem"
+            [field]="'lastName'"
+            [beforeEditStart]="beforeEditStart"
+            [beforeEditEnd]="beforeEditEnd"
+          >
             <span *ngIf="!rowItem['nameEdit']">{{ rowItem?.lastName }}</span>
             <div *ngIf="rowItem['nameEdit']" class="edit-padding-fix">
               <input

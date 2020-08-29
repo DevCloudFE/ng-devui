@@ -59,17 +59,17 @@
   position: relative;
   border-radius: 2px;
   border: none;
-  background-color: $bg-white;
+  background-color: $devui-fullscreen-overlay-bg;
   background-clip: padding-box;
   outline: 0;
-  box-shadow: 5px 5px 20px 0 $dark-1-boxshadow;
+  box-shadow: 5px 5px 20px 0 $devui-shadow;
 
   .modal-body {
     padding-top: 10px;
     padding-right: 30px;
     padding-bottom: 15px;
     padding-left: 30px;
-    color: $dark-2;
+    color: $devui-text-weak;
   }
 
   .modal-footer {

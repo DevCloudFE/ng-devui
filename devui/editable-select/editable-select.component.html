@@ -3,6 +3,7 @@
   [ngClass]="{
     'devui-select-open': dropDownOpen
   }"
+  #editableSelectBox
 >
   <input
     (click)="toggle($event)"
@@ -19,6 +20,7 @@
     [placeholder]="placeholder"
     [itemTemplate]="itemTemplate"
     [noResultItemTemplate]="noResultItemTemplate ? noResultItemTemplate : noDataTemplate"
+    [appendToBody]="appendToBody"
     [maxHeight]="maxHeight"
     [sceneType]="'select'"
     dAutoComplete

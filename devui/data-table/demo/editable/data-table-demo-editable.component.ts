@@ -23,4 +23,15 @@ export class DatatableDemoEditableComponent implements OnInit {
   onEditEnd(rowItem, field) {
     rowItem[field] = false;
   }
+
+  beforeEditStart(rowItem, field) {
+    console.log('beforeEditStart');
+  }
+
+  beforeEditEnd(rowItem, field) {
+    console.log('beforeEditEnd');
+    if (rowItem && rowItem[field].length < 3) {
+      return false;
+    }
+  }
 }

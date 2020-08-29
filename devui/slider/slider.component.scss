@@ -15,34 +15,34 @@
 
   .devui-slider-rail {
     position: absolute;
-    background-color: $gray-3;
+    background-color: $devui-area;
     height: 5px;
     width: 100%;
     transition: background-color 0.2s ease-in-out;
     border-radius: 4px;
 
     &.disabled {
-      background-color: $gray-3;
+      background-color: $devui-area;
     }
   }
 
   &:hover {
     .devui-slider-rail:not(.disabled) {
-      background-color: $gray-3;
+      background-color: $devui-area;
     }
 
     .devui-slider-track:not(.disabled) {
-      background-color: $hover-control;
+      background-color: $devui-brand-hover;
     }
 
     .devui-slider-handle:not(.disabled) {
-      border-color: $hover-control;
+      border-color: $devui-brand-hover;
     }
   }
 
   .devui-slider-track {
     position: absolute;
-    background-color: $brand-1;
+    background-color: $devui-brand;
     height: 5px;
     width: 0;
     border-radius: 4px;
@@ -50,7 +50,7 @@
 
   .devui-slider-handle {
     position: absolute;
-    background-color: $base-bg-white;
+    background-color: $devui-base-bg;
     width: 14px;
     height: 14px;
     border-radius: 50%;
@@ -58,7 +58,7 @@
     margin-top: -5px;
     left: 0;
     transition: transform 0.2s ease-in-out;
-    border: 2px solid $brand-1;
+    border: 2px solid $devui-brand;
 
     &:not(.disabled) {
       &:hover,
@@ -72,15 +72,15 @@
     cursor: not-allowed;
 
     .devui-slider-rail {
-      background-color: $disabled-bg;
+      background-color: $devui-disabled-bg;
     }
 
     .devui-slider-track {
-      background-color: $disabled-border;
+      background-color: $devui-disabled-line;
     }
 
     .devui-slider-handle {
-      border-color: $disabled-border;
+      border-color: $devui-disabled-line;
     }
   }
 }

@@ -1,16 +1,14 @@
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { SelectModule } from 'ng-devui/select';
-import { InputNumberModule, InputNumberComponent } from 'ng-devui/input-number';
-import { DatepickerModule, DatepickerComponent } from 'ng-devui/datepicker';
+import { InputNumberModule } from 'ng-devui/input-number';
+import { DatepickerModule } from 'ng-devui/datepicker';
 import {
   DataTableComponent,
   TableWidthConfig,
-  DataTableRowComponent,
-  DataTableHeadComponent,
   EditableTip,
 } from 'ng-devui/data-table';
 import { ComponentFixture, TestBed, tick, fakeAsync, flush } from '@angular/core/testing';
-import { Component, DebugElement, ViewChild, ChangeDetectorRef, OnInit } from '@angular/core';
+import { Component, DebugElement, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { SourceType, originSource, genderSource, editableOriginSource, treeDataSource } from './demo/mock-data';
 import { DataTableModule } from './data-table.module';
 import { By } from '@angular/platform-browser';
@@ -19,9 +17,7 @@ import { I18nModule } from '../i18n';
 import { FormsModule } from '@angular/forms';
 import { CheckBoxModule } from 'ng-devui/checkbox';
 import { TooltipModule } from 'ng-devui/tooltip';
-import { DropDownModule, DropDownToggleDirective, DropDownMenuDirective } from 'ng-devui/dropdown';
-import { AvatarModule } from 'ng-devui/avatar';
-import { createMouseEvent } from '../utils/testing/event-helper';
+import { DropDownModule } from 'ng-devui/dropdown';
 
 // basic
 @Component({
@@ -154,7 +150,7 @@ class TestDataTableBasicComponent {
                 (ngModelChange)="onRowCheckChange($event, rowIndex, nestedIndex, rowItem)"
                 [ngModel]="rowItem.$checked"
                 [halfchecked]="rowItem.$halfChecked"
-                [disabled]="rowItem.$disabled"
+                [disabled]="rowItem.$checkDisabled"
                 dTooltip
                 [content]="rowItem.$checkBoxTips"
                 [position]="['top', 'right', 'bottom', 'left']"
@@ -368,7 +364,7 @@ class TestDataTableEditComponent {
                 [ngModelOptions]="{ standalone: true }"
                 [ngModel]="rowItem.$checked"
                 [halfchecked]="rowItem.$halfChecked"
-                [disabled]="rowItem.$disabled"
+                [disabled]="rowItem.$checkDisabled"
                 (ngModelChange)="onRowCheckChange($event, rowIndex, nestedIndex, rowItem)"
                 dTooltip
                 [content]="rowItem.$checkBoxTips"

@@ -29,5 +29,5 @@ export interface IDrawerOptions {
 
 export interface IDrawerOpenResult {
   drawerInstance: DrawerComponent;
-  drawerContentInstance: Type<any>;
+  drawerContentInstance: any;
 }

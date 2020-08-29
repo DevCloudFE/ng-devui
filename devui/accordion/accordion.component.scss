@@ -16,14 +16,14 @@
 /* 菜单底色 */
 :host ::ng-deep .devui-accordion-menu {
   display: block;
-  background: $bg-white;
+  background: $devui-base-bg;
   width: 100%;
   overflow-y: auto;
   border-radius: 2px;
   height: 100%;
 
   &.devui-accordion-menu-normal {
-    box-shadow: 0 2px 4px 0 $dark-1-boxshadow;
+    box-shadow: 0 2px 4px 0 $devui-shadow;
   }
 
   & > .devui-accordion-list {
@@ -38,7 +38,7 @@
 }
 
 :host ::ng-deep .devui-accordion-submenu {
-  background: $bg-white;
+  background: $devui-base-bg;
   width: 100%;
 }
 
@@ -50,32 +50,32 @@
   padding: 0 10px 0 20px;
   font-weight: 400;
   line-height: 40px;
-  color: $dark-2;
+  color: $devui-text-weak;
   background: transparent;
   cursor: pointer;
 
   &.disabled {
-    color: $disabled-content;
+    color: $devui-disabled-text;
     cursor: not-allowed;
 
     & > a {
-      color: $disabled-content;
+      color: $devui-disabled-text;
     }
   }
 
   &:not(.disabled) {
     &:hover {
-      background: $hover-content;
-      color: $hover-control;
+      background: $devui-list-item-hover-bg;
+      color: $devui-list-item-hover-text;
     }
 
     &.devui-router-active,
     &.active:not(.open) {
-      color: $hwc-color-text-active-text-link;
+      color: $devui-brand-active;
       font-weight: bold;
 
       & > a {
-        color: $hwc-color-text-active-text-link;
+        color: $devui-brand-active;
       }
     }
   }
@@ -84,7 +84,7 @@
     text-decoration: none;
     display: block;
     width: 100%;
-    color: $dark-2;
+    color: $devui-text-weak;
 
     &:hover {
       color: inherit;
@@ -126,7 +126,7 @@
       height: 16px;
 
       polygon {
-        fill: $dark-2;
+        fill: $devui-text-weak;
       }
     }
   }
@@ -134,7 +134,7 @@
   &:not(.open) {
     &.active {
       svg polygon {
-        fill: $hwc-color-icon-hover-active;
+        fill: $devui-icon-fill-active;
       }
     }
 
@@ -145,10 +145,10 @@
   }
 
   &.disabled > .devui-accordion-open-icon {
-    color: $disabled-content;
+    color: $devui-disabled-text;
 
     svg polygon {
-      fill: $disabled-content;
+      fill: $devui-disabled-text;
     }
   }
 }
@@ -158,7 +158,7 @@
   padding-right: 30px;
 
   &.active:not(.open) {
-    color: $hwc-color-text-active-text-link;
+    color: $devui-brand-active;
     background: transparent;
   }
 }
@@ -177,7 +177,7 @@
     left: 10px;
     width: 2px;
     height: 40px;
-    background: $gray-2;
+    background: $devui-dividing-line;
     vertical-align: middle;
 
     &.devui-parent-list {
@@ -192,7 +192,7 @@
       display: block;
       width: 2px;
       height: 18px;
-      background: $hwc-color-border-active;
+      background: $devui-form-control-line-active;
       position: absolute;
       top: 11px;
       left: 0;

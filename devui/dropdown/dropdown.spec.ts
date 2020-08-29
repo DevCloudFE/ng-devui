@@ -660,14 +660,14 @@ describe('dropdown', () => {
           fixture.detectChanges();
           tick();
           dropdownMenuElement = debugEl.query(By.directive(DropDownMenuDirective));
-          expect(dropdownMenuElement).toBeNull();
+          expect(dropdownMenuElement).toBe(null);
         }));
         it('click outside hide', fakeAsync(() => {
           document.dispatchEvent(new MouseEvent('click', {'bubbles': true, 'cancelable': true}));
           fixture.detectChanges();
           tick();
           dropdownMenuElement = debugEl.query(By.directive(DropDownMenuDirective));
-          expect(dropdownMenuElement).toBeNull();
+          expect(dropdownMenuElement).toBe(null);
         }));
       });
       it('hover show menu', fakeAsync(() => {
@@ -709,7 +709,7 @@ describe('dropdown', () => {
           tick(); // animationTime
           fixture.detectChanges();
           dropdownMenuElement = debugEl.query(By.directive(DropDownMenuDirective));
-          expect(dropdownMenuElement).toBeNull();
+          expect(dropdownMenuElement).toBe(null);
         }));
         it('mouseleave toggle to menu show', fakeAsync(() => {
           dropdownMenuElement = debugEl.query(By.directive(DropDownMenuDirective));
@@ -754,7 +754,7 @@ describe('dropdown', () => {
             tick(); // animationTime
             fixture.detectChanges();
             dropdownMenuElement = debugEl.query(By.directive(DropDownMenuDirective));
-            expect(dropdownMenuElement).toBeNull();
+            expect(dropdownMenuElement).toBe(null);
           }));
           it('mouseleave menu to toggle show', fakeAsync(() => {
             dropdownMenuElement = debugEl.query(By.directive(DropDownMenuDirective));
@@ -852,7 +852,6 @@ describe('dropdown', () => {
         const verticalBorderOverlayWidth = 1; // 有个重叠的线的效果
         expect(originRect.x === menuRect.x).toBe(true);
         expect(originRect.y + originRect.height - verticalBorderOverlayWidth).toBeCloseTo(menuRect.y);
-
       }));
     });
     describe('dropdown appendToBodyDirections', () => {
@@ -882,7 +881,7 @@ describe('dropdown', () => {
         const originRect = dropdownToggleElement.nativeElement.getBoundingClientRect();
         const menuRect =  dropdownMenuElement.nativeElement.getBoundingClientRect();
         const verticalBorderOverlayWidth = 1; // 有个重叠的线的效果
-        expect(originRect.x + originRect.width === menuRect.x + menuRect.width).toBe(true);
+        expect(originRect.x + originRect.width).toBeCloseTo(menuRect.x + menuRect.width, 0);
         expect(originRect.y + originRect.height - verticalBorderOverlayWidth).toBeCloseTo(menuRect.y);
       }));
       it('centerDown should in the right place', fakeAsync(() => {
@@ -918,8 +917,8 @@ describe('dropdown', () => {
         const originRect = dropdownToggleElement.nativeElement.getBoundingClientRect();
         const menuRect =  dropdownMenuElement.nativeElement.getBoundingClientRect();
         const verticalBorderOverlayWidth = 1; // 有个重叠的线的效果
-        expect(originRect.x + originRect.width === menuRect.x + menuRect.width).toBe(true);
-        expect(originRect.y).toBeCloseTo(menuRect.y + menuRect.height - verticalBorderOverlayWidth);
+        expect(originRect.x + originRect.width).toBeCloseTo(menuRect.x + menuRect.width, 0);
+        expect(originRect.y).toBeCloseTo(menuRect.y + menuRect.height - verticalBorderOverlayWidth, 0);
       }));
       it('centerUp should in the right place', fakeAsync(() => {
         component.directions = ['centerUp'];

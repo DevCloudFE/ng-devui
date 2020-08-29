@@ -1,9 +1,9 @@
 <section>
-  <d-radio-group [cssStyle]="'row'" [(ngModel)]="choose2" (change)="log($event)">
+  <d-radio-group [cssStyle]="'row'" [formControl]="valueControl" (change)="log($event)">
     <d-radio [name]="'customized-city'" *ngFor="let value of values2" [value]="value"> The Radio value is: {{ value }} </d-radio>
   </d-radio-group>
 
   <d-radio-group [cssStyle]="'row'" [(ngModel)]="choose3" (change)="log($event)">
-    <d-radio [name]="'customized-city'" *ngFor="let value of values3" [value]="value"> The Radio value is: {{ value.name }} </d-radio>
+    <d-radio [name]="'customized-city1'" *ngFor="let value of values3" [value]="value"> The Radio value is: {{ value.name }} </d-radio>
   </d-radio-group>
 </section>

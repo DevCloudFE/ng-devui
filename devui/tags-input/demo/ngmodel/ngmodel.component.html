@@ -1,0 +1,16 @@
+<d-button (btnClick)="btnClick()" style="margin-bottom: 4px;">显示数据</d-button>
+<section>
+  <span>
+    双向绑定
+  </span>
+  <d-tags-input
+    (click)="$event.stopPropagation()"
+    id="issue-tags"
+    [suggestionList]="suggestionList"
+    (valueChange)="getTagValue($event)"
+    [checkBeforeAdd]="customCheck"
+    [(ngModel)]="tagList"
+  >
+  </d-tags-input>
+  <pre style="margin: 10px 0;">{{ tagList | json }}</pre>
+</section>

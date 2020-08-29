@@ -62,15 +62,17 @@ export class FilterComponent implements OnInit, OnChanges, OnDestroy {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['filterList'] || changes['filterMultiple'] || changes['filterIconActive']) {
       if (this.filterIconActive !== undefined) { return; }
-      if (!this.filterMultiple) {
-        this.selectedItem = this.filterList.filter(item => item.selected)[0];
-        this.filterIconActiveInner = (this.selectedItem !== undefined && !!Object.keys(this.selectedItem).length);
-      } else {
-        const checkedList = this.filterList.filter(item => item.checked);
-        if (checkedList.length) {
-          this.filterIconActiveInner = true;
+      if (this.filterList) {
+        if (!this.filterMultiple) {
+          this.selectedItem = this.filterList.filter(item => item.selected)[0];
+          this.filterIconActiveInner = (this.selectedItem !== undefined && !!Object.keys(this.selectedItem).length);
         } else {
-          this.filterIconActiveInner = false;
+          const checkedList = this.filterList.filter(item => item.checked);
+          if (checkedList.length) {
+            this.filterIconActiveInner = true;
+          } else {
+            this.filterIconActiveInner = false;
+          }
         }
       }
       this.filterIconActiveChange.emit(this.filterIconActiveInner);

@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { FormModule } from 'ng-devui/form';
 import { AutoCompleteDemoComponent } from './auto-complete-demo.component';
 import { AutoCompleteModule } from 'ng-devui/auto-complete';
 import { ButtonModule } from 'ng-devui/button';
@@ -19,13 +20,13 @@ import { AutoDemoLatestComponent } from './latest/auto-complete-demo-latest.comp
 import { AutoDemoLazyLoadComponent } from './lazy-load/auto-complete-demo-lazy-load.component';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 
-
 @NgModule({
   imports: [
     DevUIModule,
     CommonModule,
     AutoCompleteModule,
     FormsModule,
+    FormModule,
     DevUICodeboxModule,
     DevUIApiModule,
     ButtonModule,

@@ -7,7 +7,7 @@
         dDroppable
         [switchWhileCrossEdge]="true"
         [dropScope]="'default-switch'"
-        (onDrop)="onDrop($event)"
+        (dropEvent)="onDrop($event)"
       >
         <div class="card-header">拖拽排序交换</div>
         <div class="card-block">

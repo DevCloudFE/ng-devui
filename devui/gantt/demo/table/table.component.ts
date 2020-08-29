@@ -8,7 +8,8 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'd-table-gantt',
   templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss']
+  styleUrls: ['./table.component.scss'],
+  providers: [GanttService]
 })
 export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
   basicDataSource: Array<SourceType> = treeDataSource;

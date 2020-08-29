@@ -52,10 +52,16 @@ a:visited {
   text-decoration: none;
 }
 
-:-ms-input-placeholder,
-::-moz-placeholder,
+:-ms-input-placeholder {
+  color: $devui-placeholder;
+}
+
+::-moz-placeholder {
+  color: $devui-placeholder;
+}
+
 ::-webkit-input-placeholder {
-  color: $dark-3;
+  color: $devui-placeholder;
 }
 
 //******************滚动条*************************/
@@ -70,11 +76,11 @@ a:visited {
 
 .devui-scrollbar::-webkit-scrollbar-thumb {
   border-radius: 8px;
-  background-color: $gray-1;
+  background-color: $devui-line;
 }
 
 .devui-scrollbar::-webkit-scrollbar-thumb:hover {
-  background-color: $dark-3;
+  background-color: $devui-placeholder; // TODO: Color-Question
 }
 
 body > * ::-webkit-scrollbar {
@@ -88,9 +94,9 @@ body > * ::-webkit-scrollbar-track {
 
 body > * ::-webkit-scrollbar-thumb {
   border-radius: 8px;
-  background-color: $gray-1;
+  background-color: $devui-line;
 }
 
 body > * ::-webkit-scrollbar-thumb:hover {
-  background-color: $dark-3;
+  background-color: $devui-placeholder; // TODO: Color-Question
 }

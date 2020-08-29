@@ -78,11 +78,11 @@ describe('fullscreen', () => {
         '.icon-frame-contract'
       ];
       expect(domHelper.judgeStyleClasses(classes)).toBeTruthy();
-      expect(document.fullscreen).toBe(false);
+      expect(document.fullscreenElement !== null).toBe(false);
       buttonEle.dispatchEvent(new Event('click'));
       fixture.detectChanges();
       expect(debugEl.query(By.css('.fullscreen'))).toBeNull();
-      expect(document.fullscreen).toBe(false);
+      expect(document.fullscreenElement !== null).toBe(false);
     });
   });
   describe('fullscreen immersive mode', () => {
@@ -103,7 +103,7 @@ describe('fullscreen', () => {
     /* 初始状态不显示 */
     it('Fullscreen should not display at original state ', () => {
       expect(debugEl.query(By.css('.fullscreen'))).toBeNull();
-      expect(document.fullscreen).toBe(false);
+      expect(document.fullscreenElement !== null).toBe(false);
     });
 
     // TODO: fullscreen无法触发浏览器原生全屏，待解决
