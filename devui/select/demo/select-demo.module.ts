@@ -74,9 +74,7 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
     MapToPipe,
     ParseFromPipe
   ],
-  entryComponents: [
-    SelectDemoComponent
-  ],
+
   providers: [],
 })
 export class SelectDemoModule { }

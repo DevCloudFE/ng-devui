@@ -195,12 +195,12 @@ export class HelperUtils {
     };
 
 
-    httpClient.request(requestMethod, requestUrl, requestOption).subscribe((res: HttpResponse<any>) => {
-      const disposition = (<HttpHeaders>res.headers).get('content-disposition');
-      const contentType = (<HttpHeaders>res.headers).get('content-type');
+    httpClient.request(requestMethod, requestUrl, (<any>requestOption)).subscribe((res) => {
+      const disposition = (<any>res).headers.get('content-disposition');
+      const contentType = (<any>res).headers.get('content-type');
       if (/^attachment/i.test(disposition) || option.downloadWithoutDispositionHeader ) {
         const downloadFilename = option.filename || disposition && getFilenameFromDisposition(disposition) || url ;
-        downloadFileFromArrayBuffer(res.body, downloadFilename, contentType);
+        downloadFileFromArrayBuffer((<any>res).body, downloadFilename, contentType);
         if (onSuccess) {
           onSuccess(res);
         }
@@ -208,7 +208,7 @@ export class HelperUtils {
         if (onError) {
           let response;
           try {
-            response = handleResponse(res);
+            response = handleResponse((<any>res));
           } catch (e) {
             response = res;
           }

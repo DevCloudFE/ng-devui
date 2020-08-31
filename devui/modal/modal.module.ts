@@ -46,11 +46,6 @@ import { MovableDirective } from './movable.directive';
     ModalService,
     DialogService,
     DocumentRef,
-  ],
-  entryComponents: [
-    ModalComponent,
-    ModalContainerComponent,
-    ModalAlertComponent,
   ]
 })
 export class ModalModule {

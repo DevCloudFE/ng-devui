@@ -2,8 +2,6 @@
 
 **打开 Drawer 层**：drawerService.**open** ( ~ : **IDrawerOptions** ) : **IDrawerOpenResult**
 
-注意：传递给 API 中 drawerContentComponent 的组件需要在当前 Module 的\`declarations\`和\`entryComponents\`属性中注册
-
 ### IDrawerOptions
 
 |           属性           |            类型            |         默认         |                                                                            说明                                                                             | 跳转 Demo                                                            |

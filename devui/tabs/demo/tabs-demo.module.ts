@@ -51,11 +51,7 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
     TabsTransferComponent,
     CustomComponent,
     ConfigComponent
-  ],
-  entryComponents: [
-    TabsDemoComponent,
-    TabsTransferComponent
-  ],
+  ]
 })
 export class TabsDemoModule {
 }

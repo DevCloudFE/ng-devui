@@ -39,9 +39,6 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
         RateDemoOnlyReadComponent,
         RateDemoCustomizeComponent,
         TypeComponent
-    ],
-    entryComponents: [
-        RateDemoComponent
     ]
 })
 export class RateDemoModule {

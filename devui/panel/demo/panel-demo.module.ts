@@ -35,7 +35,7 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
     TypeComponent,
     PanelDemoComponent,
   ],
-  entryComponents: [PanelDemoComponent]
+
 })
 export class PanelDemoModule { }
 

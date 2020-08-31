@@ -21,9 +21,6 @@ import { ImagePreviewDirective } from './image-preview.directive';
   ],
   exports: [
     ImagePreviewDirective
-  ],
-  entryComponents: [
-    DImagePreviewComponent
   ]
 })
 

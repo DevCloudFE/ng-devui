@@ -37,9 +37,7 @@ import { ScrollTargetComponent } from './scroll-target/scroll-target.component';
     BasicComponent,
     ScrollTargetComponent,
   ],
-  entryComponents: [
-    StickyDemoComponent,
-  ],
+
 })
 export class StickyDemoModule {
 }

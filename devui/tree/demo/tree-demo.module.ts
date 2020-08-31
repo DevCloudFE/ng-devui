@@ -59,9 +59,7 @@ import { SearchModule } from 'ng-devui/search';
     VirtualScrollComponent,
     CustomLoadingComponent
   ],
-  entryComponents: [
-    TreeDemoComponent,
-  ],
+
 })
 export class TreeDemoModule {
 }

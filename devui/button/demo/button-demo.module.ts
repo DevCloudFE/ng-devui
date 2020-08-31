@@ -50,9 +50,7 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
     AutofocusComponent,
     SizeComponent
   ],
-  entryComponents: [
-    ButtonDemoComponent,
-  ],
+
 })
 export class ButtonDemoModule {
 }

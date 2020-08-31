@@ -97,11 +97,6 @@ import { TableTdService } from './table/body/td/td.service';
     TableTbodyComponent,
     TableTdComponent
   ],
-  entryComponents: [
-    InputNumberComponent,
-    SelectComponent,
-    TreeSelectComponent
-  ],
   providers: [ TableTdService ],
 })
 export class DataTableModule {

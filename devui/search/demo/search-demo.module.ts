@@ -34,9 +34,7 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
     BasicComponent,
     NgmodelComponent,
   ],
-  entryComponents: [
-    SearchDemoComponent,
-  ],
+
 })
 export class SearchDemoModule {
 }

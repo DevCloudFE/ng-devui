@@ -48,9 +48,7 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
     DropDownDemoAddIconComponent,
     DropDownDemoMultiLevelComponent,
   ],
-  entryComponents: [
-    DropdownDemoComponent,
-  ],
+
 })
 export class DropdownDemoModule {
 }

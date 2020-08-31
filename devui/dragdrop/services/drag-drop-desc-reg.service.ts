@@ -1,35 +1,6 @@
-import { OnInit, QueryList, Injectable, OnDestroy } from '@angular/core';
+import { OnInit, QueryList, Injectable, OnDestroy, Directive } from '@angular/core';
 import { Subject, BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-
-export class DescendantChildren<T> implements OnInit, OnDestroy {
-  constructor (private drs: DescendantRegisterService<T>) {}
-  protected descendantItem: T;
-  ngOnInit() {
-    this.drs.register(this.descendantItem);
-  }
-  ngOnDestroy() {
-    this.drs.unregister(this.descendantItem);
-  }
-}
-
-export class DescendantRoot<T> extends QueryList<T> {
-  protected sub: Subscription;
-  constructor(private drs: DescendantRegisterService<T>) {
-    super();
-  }
-  public on() {
-    if (this.sub) { return; }
-    this.reset(this.drs.queryResult());
-    this.sub = this.drs.changes.subscribe(result => {this.reset(result); });
-  }
-
-  public off() {
-    if (this.sub) {
-      this.sub.unsubscribe();
-    }
-  }
-}
 
 @Injectable()
 export class DescendantRegisterService<T> {
@@ -56,5 +27,35 @@ export class DescendantRegisterService<T> {
   }
   public queryResult() {
     return this._result.concat([]);
+  }
+}
+
+@Directive()
+export class DescendantChildren<T> implements OnInit, OnDestroy {
+  constructor (private drs: DescendantRegisterService<T>) {}
+  protected descendantItem: T;
+  ngOnInit() {
+    this.drs.register(this.descendantItem);
+  }
+  ngOnDestroy() {
+    this.drs.unregister(this.descendantItem);
+  }
+}
+
+export class DescendantRoot<T> extends QueryList<T> {
+  protected sub: Subscription;
+  constructor(private drs: DescendantRegisterService<T>) {
+    super();
+  }
+  public on() {
+    if (this.sub) { return; }
+    this.reset(this.drs.queryResult());
+    this.sub = this.drs.changes.subscribe(result => {this.reset(result); });
+  }
+
+  public off() {
+    if (this.sub) {
+      this.sub.unsubscribe();
+    }
   }
 }

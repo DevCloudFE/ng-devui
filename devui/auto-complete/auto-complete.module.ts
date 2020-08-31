@@ -16,6 +16,6 @@ import { HighlightComponent } from './highlight.component';
   exports: [AutoCompleteDirective, AutoCompletePopupComponent, HighlightComponent],
   declarations: [AutoCompleteDirective, AutoCompletePopupComponent, HighlightComponent],
   providers: [AutoCompleteConfig],
-  entryComponents: [AutoCompletePopupComponent]
+
 })
 export class AutoCompleteModule { }

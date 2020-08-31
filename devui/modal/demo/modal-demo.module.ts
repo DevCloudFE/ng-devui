@@ -56,12 +56,6 @@ import { ModalContentComponent } from './template/modal-content/modal-content.co
     TemplateComponent,
     DialogContentComponent,
     ModalContentComponent
-  ],
-  entryComponents: [
-    ModalDemoComponent,
-    ModalTestComponent,
-    ModalAlertComponent,
-    ModalFormComponent
   ]
 })
 export class ModalDemoModule {

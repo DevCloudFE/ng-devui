@@ -12,7 +12,6 @@ import { StepsGuideService } from './steps-guide.service';
   ],
   declarations: [StepsGuideComponent, StepsGuideDirective],
   exports: [StepsGuideDirective],
-  entryComponents: [StepsGuideComponent],
   providers: [StepsGuideService]
 })
 export class StepsGuideModule { }

@@ -43,11 +43,7 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
     BasicComponent,
     UndestroyableComponent,
     DrawerContentComponent
-  ],
-  entryComponents: [
-    DrawerDemoComponent,
-    DrawerContentComponent
-  ],
+  ]
 })
 export class DrawerDemoModule {
 }

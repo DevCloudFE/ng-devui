@@ -13,7 +13,7 @@ import { OverlayContainerModule } from 'ng-devui/overlay-container';
   ],
   exports: [PopoverComponent, PopoverDirective],
   declarations: [PopoverComponent, PopoverDirective],
-  entryComponents: [PopoverComponent]
+
 })
 export class PopoverModule {
 }

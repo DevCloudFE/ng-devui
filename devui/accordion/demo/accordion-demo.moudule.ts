@@ -45,8 +45,7 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
     ChangeKeyComponent,
   ],
   providers: [],
-  entryComponents: [
-  ]
+
 })
 export class AccordionDemoModule {
 }

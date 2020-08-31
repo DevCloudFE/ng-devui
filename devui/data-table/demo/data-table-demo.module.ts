@@ -86,7 +86,7 @@ import { VirtualScrollComponent } from './virtual-scroll/virtual-scroll.componen
     VirtualScrollComponent
   ],
   providers: [],
-  entryComponents: [DataTableDemoComponent]
+
 })
 export class DataTableDemoModule {
 }

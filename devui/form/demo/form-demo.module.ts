@@ -69,6 +69,5 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
     MultiColComponent,
     FilterComponent,
   ],
-  entryComponents: [ModalOneComponent],
 })
 export class FormDemoModule {}
