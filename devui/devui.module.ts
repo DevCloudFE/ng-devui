@@ -87,6 +87,7 @@ export * from 'ng-devui/sticky';
 export * from 'ng-devui/tabs';
 export * from 'ng-devui/tags';
 export * from 'ng-devui/tags-input';
+export * from 'ng-devui/theme';
 export * from 'ng-devui/toast';
 export * from 'ng-devui/toggle';
 export * from 'ng-devui/tooltip';

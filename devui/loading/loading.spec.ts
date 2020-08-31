@@ -11,14 +11,14 @@ import { LoadingType } from './loading.types';
   template: `
     <div
       dLoading
-      [showLoading]="showLoading"
-      [positionType]="positionType"
       [backdrop]="showBackDrop"
       [view]="view"
       [message]="message"
+      [positionType]="positionType"
+      [showLoading]="showLoading"
       style="height: 150px;"
     ></div>
-  `
+  `,
 })
 class TestLoadingComponent {
   showLoading = true;
@@ -26,23 +26,22 @@ class TestLoadingComponent {
   showBackDrop = true;
   view = {
     top: '50px',
-    left: '50%'
+    left: '50%',
   };
   message = '测试信息';
 }
 
 @Component({
   template: `
-    <div dLoading [loading]="loading" [showLoading]="showLoading" [loadingTemplateRef]="loadingTemplateRef" [style.height.px]="150"></div>
+    <div dLoading [loadingTemplateRef]="loadingTemplateRef" [loading]="loading" [style.height.px]="150"></div>
     <ng-template #loadingTemplateRef>
       <div class="test-template-loading">
         测试自定义loading
       </div>
     </ng-template>
-  `
+  `,
 })
 class TestLoadingTemplateComponent implements OnInit {
-  showLoading = false;
   loading: LoadingType;
   ngOnInit(): void {
     this.loading = timer(3000);
@@ -66,11 +65,6 @@ describe('loading', () => {
       fixture = TestBed.createComponent(TestLoadingComponent);
       testComponent = fixture.debugElement.componentInstance;
       divDebugElement = fixture.debugElement;
-
-      // solve ng9 problems temporarily
-      testComponent.showLoading = false;
-      fixture.detectChanges();
-      testComponent.showLoading = true;
       fixture.detectChanges();
     });
 
@@ -80,8 +74,10 @@ describe('loading', () => {
       });
 
       it('showLoading and backdrop param should work', () => {
-        expect(divDebugElement.query(By.css('d-loading'))).toBeTruthy();
-        expect(divDebugElement.query(By.css('d-loading-backdrop'))).toBeTruthy();
+        const dLoadingDebugEl = divDebugElement.query(By.css('d-loading'));
+        const loadingBackdropDebugEl = divDebugElement.query(By.css('d-loading-backdrop'));
+        expect(dLoadingDebugEl).toBeTruthy();
+        expect(loadingBackdropDebugEl).toBeTruthy();
 
         testComponent.showLoading = false;
         fixture.detectChanges();
@@ -92,25 +88,20 @@ describe('loading', () => {
         testComponent.showBackDrop = false;
         fixture.detectChanges();
 
-        // solve ng9 problems temporarily
-        testComponent.showLoading = false;
-        fixture.detectChanges();
-        testComponent.showLoading = true;
-        fixture.detectChanges();
-
         expect(divDebugElement.nativeElement.querySelector('d-loading-backdrop')).not.toBeTruthy();
         expect(divDebugElement.query(By.css('d-loading'))).toBeTruthy();
       });
 
       it('positionType param should work', () => {
         expect(divDebugElement.query(By.directive(LoadingDirective)).styles.position).toEqual('relative');
+
         testComponent.showLoading = false;
-        testComponent.positionType = 'block';
+        testComponent.positionType = 'absolute';
         fixture.detectChanges();
         testComponent.showLoading = true;
         fixture.detectChanges();
 
-        expect(divDebugElement.query(By.directive(LoadingDirective)).styles.position).toEqual('');
+        expect(divDebugElement.query(By.directive(LoadingDirective)).styles.position).toEqual('absolute');
       });
 
       it('view param should work', () => {
@@ -134,28 +125,16 @@ describe('loading', () => {
       divDebugElement = fixture.debugElement;
     });
 
-    afterEach(() => {
-      const dLoadingEls = document.getElementsByTagName('d-loading');
-      for (let i = 0; i < dLoadingEls.length; i++) {
-        dLoadingEls[i].parentNode.removeChild(dLoadingEls[i]);
-      }
-    });
-
     describe('template loading', () => {
-      it('should render template', fakeAsync(() => {
-        fixture.detectChanges();
-        tick(3000);
-        fixture.detectChanges();
-        testComponent.showLoading = true;
+      it('shoud render template', () => {
         fixture.detectChanges();
         expect(divDebugElement.query(By.css('.devui-spinner-wrapper'))).not.toBeTruthy(); // 默认的loading不渲染
         expect(divDebugElement.query(By.css('.test-template-loading'))).toBeTruthy(); // 渲染自定义loading
-      }));
+      });
     });
 
     describe('promise loading', () => {
       it('should destory in 3000ms', fakeAsync(() => {
-        testComponent.showLoading = true;
         fixture.detectChanges();
         expect(divDebugElement.nativeElement.querySelector('d-loading')).not.toBeNull();
         tick(3000);
@@ -164,7 +143,6 @@ describe('loading', () => {
       }));
 
       it('should work in subscription type', fakeAsync(() => {
-        testComponent.showLoading = true;
         fixture.detectChanges();
         testComponent.loading = timer(3000).subscribe();
         fixture.detectChanges();
@@ -175,7 +153,6 @@ describe('loading', () => {
       }));
 
       it('should work in array type', fakeAsync(() => {
-        testComponent.showLoading = true;
         fixture.detectChanges();
         testComponent.loading = [timer(1000).toPromise(), timer(1000).toPromise(), timer(1000).toPromise()];
         fixture.detectChanges();

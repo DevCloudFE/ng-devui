@@ -6,7 +6,8 @@ import { GanttService, GanttScaleUnit, GanttTaskInfo } from 'ng-devui/gantt';
 @Component({
   selector: 'd-basic',
   templateUrl: './basic.component.html',
-  styleUrls: ['./basic.component.scss']
+  styleUrls: ['./basic.component.scss'],
+  providers: [GanttService]
 })
 export class BasicComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('ganttContainer', { static: true }) ganttContainer: ElementRef;

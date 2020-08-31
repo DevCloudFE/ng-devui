@@ -2,7 +2,7 @@
 @import '../../devui/style/core/font';
 
 body {
-  background: $bg-white;
+  background: $devui-base-bg;
 }
 
 @mixin menu() {
@@ -34,7 +34,7 @@ body {
     &,
     &::before,
     &::after {
-      background-color: $bg-white;
+      background-color: $devui-base-bg;
       width: 100%;
       height: 0.2em;
       transition: all 0.4s;
@@ -77,18 +77,18 @@ body {
     justify-content: space-between;
     width: 100%;
     height: 50px;
-    background: $bg-white;
-    box-shadow: 0 2px 4px 0 $dark-1-boxshadow;
+    background: $devui-base-bg;
+    box-shadow: 0 2px 4px 0 $devui-shadow;
 
     a {
       line-height: $line-height-base;
-      color: $dark-1;
+      color: $devui-text;
       text-decoration: none;
     }
 
     a:hover,
     a:focus {
-      color: $dark-1;
+      color: $devui-text;
       text-decoration: none;
     }
   }
@@ -152,7 +152,7 @@ body {
     align-items: center;
     padding: 5px 0;
     margin: 0 12px;
-    color: $dark-1;
+    color: $devui-text;
 
     & > span {
       font-size: $font-size-primary;
@@ -175,7 +175,7 @@ body {
 
       &:hover {
         color: inherit;
-        background: $hover-content;
+        background: $devui-list-item-hover-bg;
       }
     }
   }
@@ -183,12 +183,12 @@ body {
   a.main-nav-item {
     &:hover {
       text-decoration: none;
-      color: $hover-control;
+      color: $devui-list-item-hover-text;
     }
 
     &:active,
     &:focus {
-      color: $brand-1;
+      color: $devui-brand;
     }
   }
 
@@ -207,11 +207,11 @@ body {
       left: 0;
       width: 240px;
       margin-left: -240px;
-      border-right: 1px solid $gray-2;
+      border-right: 1px solid $devui-dividing-line;
       height: 100%;
       overflow-y: hidden;
       z-index: 2;
-      background: $bg-white;
+      background: $devui-base-bg;
       transition: all 0.2s ease-out;
 
       &:hover {
@@ -264,7 +264,7 @@ body {
   }
 
   .side-nav {
-    background: $bg-white;
+    background: $devui-base-bg;
     padding-bottom: 144px;
 
     ul {
@@ -273,13 +273,13 @@ body {
 
     .panel-body {
       padding: 0;
-      background-color: $bg-white;
+      background-color: $devui-base-bg;
     }
 
     .panel-title {
       font-size: 12px;
       font-weight: normal;
-      color: $dark-3;
+      color: $devui-placeholder;
       margin: 0;
       position: relative;
       height: 40px;
@@ -293,7 +293,7 @@ body {
 
     .panel > .panel-heading,
     .panel.panel-default > .panel-heading {
-      background: $bg-white;
+      background: $devui-base-bg;
       padding-left: 20px;
     }
 
@@ -305,7 +305,7 @@ body {
       cursor: pointer;
 
       &:hover {
-        color: $hover-control;
+        color: $devui-list-item-hover-text;
       }
     }
 
@@ -321,7 +321,7 @@ body {
   padding-left: 0;
   list-style: none;
   z-index: 1050;
-  background: $bg-white;
+  background: $devui-base-bg;
 }
 
 .devui-menu-item {
@@ -333,7 +333,7 @@ body {
   align-items: center;
 
   &:hover {
-    background-color: $hover-content;
+    background-color: $devui-list-item-hover-bg;
   }
 }
 
@@ -341,14 +341,14 @@ body {
   @include font-content();
 
   display: block;
-  color: $dark-1;
+  color: $devui-text;
   text-decoration: none;
 }
 
 .devui-menu-item-selected {
-  color: $brand-1;
-  background-color: $brand-3;
-  border-right: 2px solid $brand-1;
+  color: $devui-brand;
+  background-color: $devui-list-item-selected-bg;
+  border-right: 2px solid $devui-brand;
 
   a {
     color: inherit;
@@ -383,10 +383,32 @@ body {
   margin-bottom: 20px;
 }
 
+.demo-nav {
+  position: absolute;
+  height: 100%;
+  top: 0;
+  right: 0;
+  width: 150px;
+  line-height: 24px;
+}
+
+.demo-nav .items {
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.demo-nav .items > li:hover {
+  color: $devui-brand;
+}
+
+.demo-nav-active {
+  color: $devui-brand;
+}
+
 .demo-title {
   @include font-title($font-size-secondary-card-title);
 
-  color: $dark-1;
+  color: $devui-text;
   margin-bottom: 10px;
   height: 24px;
   display: flex;
@@ -396,7 +418,7 @@ body {
 .demo-text {
   @include font-content();
 
-  color: $dark-1;
+  color: $devui-text;
 }
 
 .readme {
@@ -405,11 +427,11 @@ body {
   }
 
   pre {
-    background-color: $bg-white;
+    background-color: $devui-base-bg;
     border: none;
 
     code {
-      border: 1px solid #e9e9e9;
+      border: 1px solid #e9e9e9; // TODO: color not variable
       overflow-x: auto;
     }
   }
@@ -419,7 +441,7 @@ body {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .app-container {
     .header-menu {
       display: block;
@@ -434,7 +456,7 @@ body {
       }
 
       &.active {
-        height: 405px;
+        height: 100%;
 
         .main-nav {
           display: flex;
@@ -508,11 +530,11 @@ body {
   }
 
   10% {
-    outline: 1px solid #5170ff;
+    outline: 1px solid $devui-brand;
   }
 
   50% {
-    outline: 1px solid #5170ff;
+    outline: 1px solid $devui-brand;
   }
 
   90% {
@@ -541,7 +563,14 @@ body {
   position: fixed;
   margin-left: -240px;
   transition: margin-left 0.2s;
+
   d-search {
     width: 215px;
   }
+}
+
+.devui-beta-label {
+  transform: scale(0.8);
+  vertical-align: super;
+  display: inline-block;
 }

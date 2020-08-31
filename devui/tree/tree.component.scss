@@ -8,8 +8,14 @@ $keyframe-blue: #5e7ce0;
   display: block;
 }
 
+.devui-text-ellipsis {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
 .devui-tree-node {
-  color: $dark-2;
+  color: $devui-text-weak;
   line-height: 1;
   white-space: nowrap;
   position: relative;
@@ -20,12 +26,18 @@ $keyframe-blue: #5e7ce0;
     align-items: center;
     font-size: 12px;
     padding-right: 10px;
+    width: 100%;
+
+    &:hover {
+      background-color: $devui-list-item-hover-bg;
+    }
   }
 
   .devui-tree-node__content--value-wrapper {
     display: inline-flex;
     align-items: center;
     height: 38px;
+    width: 100%;
   }
 
   .devui-tree-node__children {
@@ -47,19 +59,21 @@ $keyframe-blue: #5e7ce0;
   }
 
   .devui-tree-node__title {
+    @extend .devui-text-ellipsis;
+
     margin-left: 5px;
-    // padding: 0.1em;
     display: inline-block;
     border: 1px dashed transparent;
     border-radius: 2px;
+    max-width: 100%;
 
     &:not(.disabled) {
       cursor: pointer;
     }
 
     &.active {
-      background-color: $brand-3;
-      color: $brand-1;
+      background-color: $devui-list-item-selected-bg;
+      color: $devui-brand;
       text-decoration: none;
       border-color: transparent;
     }
@@ -75,7 +89,7 @@ $keyframe-blue: #5e7ce0;
       &.error,
       &.error:hover,
       &.error:focus {
-        border-color: $status-red;
+        border-color: $devui-danger;
       }
     }
   }
@@ -124,7 +138,7 @@ $keyframe-blue: #5e7ce0;
     vertical-align: middle;
     margin-left: 0.5em;
     margin-top: 0.15em;
-    color: $status-blue;
+    color: $devui-info;
     font-style: italic;
     font-size: 1em;
     animation-name: devui-loading-children;
@@ -171,40 +185,40 @@ $keyframe-blue: #5e7ce0;
   }
 
   svg.svg-icon path {
-    fill: $dark-2;
+    fill: $devui-icon-text;
   }
 
   svg.svg-icon rect {
-    stroke: $dark-2;
+    stroke: $devui-icon-text;
   }
 
   &.devui-tree-node__open:not(.devui-tree-node__customIcon) {
     & > .devui-tree-node__content svg.svg-icon path {
-      fill: $brand-1;
+      fill: $devui-icon-fill-active;
     }
 
     & > .devui-tree-node__content svg.svg-icon rect {
-      stroke: $brand-1;
+      stroke: $devui-icon-fill-active;
     }
 
     & > .devui-tree-node__content svg.svg-icon.svg-icon-close rect:last-child {
       stroke: none;
-      fill: $brand-1;
+      fill: $devui-icon-fill-active;
     }
   }
 
   svg.svg-icon.svg-icon-close rect:last-child {
     stroke: none;
-    fill: $dark-2;
+    fill: $devui-icon-text;
   }
 }
 
 ::ng-deep .devui-tree-mask {
-  background: $hover-content;
+  background: $devui-list-item-hover-bg;
 }
 
 /* 视觉融合灰线 */
-.devui-tree-node {
+.devui-tree-node.devui-tree-without-virtual-scroll {
   &.devui-tree-node__open {
     & > .devui-tree-node__content {
       position: relative;
@@ -213,7 +227,7 @@ $keyframe-blue: #5e7ce0;
         content: '';
         width: 1px;
         height: 4px; // 总高38px减去图标高14px为24px，取下半边12px，灰线举例图标8px，得出高度4px
-        background-color: $dividing;
+        background-color: $devui-dividing-line;
         position: absolute;
         left: 9px; // 距离最左边9px
         top: calc(100% - 4px); // 参考上面高度计算
@@ -228,7 +242,7 @@ $keyframe-blue: #5e7ce0;
       content: '';
       width: 1px;
       height: calc(100% - 19px); // 父级总高度减去半个content的高度
-      background-color: $dividing;
+      background-color: $devui-dividing-line;
       position: absolute;
       left: calc(10px - 1px); // 父级10px的padding减去自身1px宽度
       top: 0;
@@ -242,7 +256,7 @@ $keyframe-blue: #5e7ce0;
         content: '';
         width: 8px;
         height: 1px;
-        background-color: $dividing;
+        background-color: $devui-dividing-line;
         position: absolute;
         left: calc(-1px - 14px); // 对接左侧灰线，自身margin为1.2em加上1px的线宽
         top: 50%;
@@ -251,25 +265,39 @@ $keyframe-blue: #5e7ce0;
   }
 }
 
+.devui-tree-vertical-line {
+  width: 1px;
+  background-color: $devui-dividing-line;
+  position: absolute;
+}
+
+.devui-tree-horizontal-line {
+  height: 1px;
+  background-color: $devui-dividing-line;
+  position: absolute;
+  top: 50%;
+  margin-left: -16px;
+}
+
 .toggle-disabled {
   cursor: not-allowed !important;
 
   svg.svg-icon rect {
-    stroke: $disabled-content !important;
+    stroke: $devui-disabled-text !important;
   }
 
   svg.svg-icon.svg-icon-close rect:last-child {
     stroke: none !important;
-    fill: $disabled-content !important;
+    fill: $devui-disabled-text !important;
   }
 
   svg.svg-icon path {
-    fill: $disabled-content !important;
+    fill: $devui-disabled-text !important;
   }
 }
 
 .select-disabled {
-  color: $disabled-content !important;
+  color: $devui-disabled-text !important;
   cursor: not-allowed !important;
   background-color: transparent !important;
 }

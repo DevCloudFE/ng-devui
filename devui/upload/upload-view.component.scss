@@ -9,20 +9,20 @@
 }
 
 .devui-input-group:not(.disabled):hover .devui-input-group-addon {
-  border-color: $hover-control;
-  background-color: $gray-2;
+  border-color: $devui-form-control-line-active;
+  background-color: $devui-dividing-line;
   font-weight: bold;
 }
 
 .devui-input-group:not(.disabled):hover .devui-form-control {
-  border-color: $hover-control;
-  border-right-color: $gray-1;
+  border-color: $devui-form-control-line-active;
+  border-right-color: $devui-form-control-line;
 }
 
 .devui-input-group:not(.disabled) .devui-input-group-addon:active {
-  border-color: $hover-control;
-  border-right-color: $gray-1;
-  background-color: $gray-2;
+  border-color: $devui-form-control-line-active;
+  border-right-color: $devui-form-control-line;
+  background-color: $devui-dividing-line;
 }
 
 .devui-input-group .devui-input-group-addon {
@@ -33,12 +33,12 @@
   font-size: 14px;
   font-weight: normal;
   line-height: 1;
-  color: $dark-1;
+  color: $devui-text;
   text-align: center;
-  background-color: $gray-3;
-  border-top: 1px solid $gray-1;
-  border-bottom: 1px solid $gray-1;
-  border-right: 1px solid $gray-1;
+  background-color: $devui-area;
+  border-top: 1px solid $devui-form-control-line;
+  border-bottom: 1px solid $devui-form-control-line;
+  border-right: 1px solid $devui-form-control-line;
   border-radius: 0 2px 2px 0;
   display: table-cell;
   transition: border-color ease-in-out 0.15s;
@@ -53,9 +53,9 @@
   padding: 5px 10px;
   font-size: 12px;
   line-height: 1.5;
-  color: $dark-1;
+  color: $devui-text;
   background-image: none;
-  border: 1px solid $gray-1;
+  border: 1px solid $devui-form-control-line;
   border-radius: 2px 0 0 2px;
   transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 }
@@ -63,11 +63,11 @@
 .devui-input-group.disabled .devui-form-control,
 .devui-input-group.disabled .devui-input-group-addon {
   cursor: not-allowed;
-  background-color: $disabled-bg;
+  background-color: $devui-disabled-bg;
 }
 
 svg.svg-icon-dot > path {
-  fill: $dark-1;
+  fill: $devui-icon-text;
 }
 
 .devui-form-control {

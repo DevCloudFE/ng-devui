@@ -7,7 +7,7 @@
 }
 
 .devui-alert {
-  color: $dark-1;
+  color: $devui-text;
   font-size: 12px;
   border: 1px solid transparent;
   padding: 10px;
@@ -16,69 +16,69 @@
   padding-left: 16px;
 
   button.devui-close {
-    color: $dark-1;
+    color: $devui-text;
     opacity: 1;
     box-shadow: none;
 
     & > svg path {
-      fill: $font-white;
+      fill: $devui-light-text;
     }
 
     span {
-      color: $dark-1;
+      color: $devui-text;
       font-size: 12px;
       font-weight: bold;
     }
   }
 
   &.devui-alert-success {
-    background-color: $hwc-status-success-background;
-    border-color: $hwc-status-success-border;
-    color: $dark-1;
+    background-color: $devui-success-bg;
+    border-color: $devui-success-line;
+    color: $devui-text;
     box-shadow: $hwc-shadow-success;
 
     button.devui-close {
       & > svg path {
-        fill: $status-green;
+        fill: $devui-success-line;
       }
     }
   }
 
   &.devui-alert-info {
-    background-color: $hwc-status-info-background;
-    border-color: $hwc-status-info-border;
-    color: $dark-1;
+    background-color: $devui-info-bg;
+    border-color: $devui-info-line;
+    color: $devui-text;
     box-shadow: $hwc-shadow-prompt;
 
     button.devui-close {
       & > svg path {
-        fill: $hwc-status-info-border;
+        fill: $devui-info-line;
       }
     }
   }
 
   &.devui-alert-warning {
-    background-color: $hwc-status-warning-background;
-    border-color: $hwc-status-warning-border;
-    color: $dark-1;
+    background-color: $devui-warning-bg;
+    border-color: $devui-warning-line;
+    color: $devui-text;
     box-shadow: $hwc-shadow-warn;
 
     button.devui-close {
       & > svg path {
-        fill: $hwc-status-warning-border;
+        fill: $devui-warning-line;
       }
     }
   }
 
   &.devui-alert-danger {
-    background-color: $hwc-status-danger-background;
-    border-color: $hwc-status-danger-border;
-    color: $dark-1;
+    background-color: $devui-danger-bg;
+    border-color: $devui-danger-line;
+    color: $devui-text;
     box-shadow: $hwc-shadow-error;
 
     button.devui-close {
       & > svg path {
-        fill: $hwc-status-danger-border;
+        fill: $devui-danger-line;
       }
     }
   }
@@ -93,12 +93,12 @@
   .devui-icon.devui-icon-success {
     & > g {
       path {
-        fill: $hwc-status-success-border;
+        fill: $devui-success-line;
       }
 
       polygon {
-        fill: $font-white;
-        stroke: $font-white;
+        fill: $devui-light-text;
+        stroke: $devui-light-text;
       }
     }
   }
@@ -106,12 +106,12 @@
   .devui-icon.devui-icon-warning {
     & > g {
       path.devui-icon-warning-outer {
-        fill: $hwc-status-warning-border;
+        fill: $devui-warning-line;
       }
 
       path.devui-icon-warning-inner {
-        fill: $font-white;
-        stroke: $font-white;
+        fill: $devui-light-text;
+        stroke: $devui-light-text;
       }
     }
   }
@@ -119,12 +119,12 @@
   .devui-icon.devui-icon-info {
     & > g {
       path.devui-icon-info-outer {
-        fill: $hwc-status-info-border;
+        fill: $devui-info-line;
       }
 
       path.devui-icon-info-inner {
-        fill: $font-white;
-        stroke: $font-white;
+        fill: $devui-light-text;
+        stroke: $devui-light-text;
       }
     }
   }
@@ -132,12 +132,12 @@
   .devui-icon.devui-icon-error {
     & > g {
       path.devui-icon-error-outer {
-        fill: $hwc-status-danger-border;
+        fill: $devui-danger-line;
       }
 
       path.devui-icon-error-inner {
-        fill: $font-white;
-        stroke: $font-white;
+        fill: $devui-light-text;
+        stroke: $devui-light-text;
       }
     }
   }

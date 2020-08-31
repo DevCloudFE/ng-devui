@@ -74,7 +74,7 @@ export class ModalService {
 
     return {
       modalInstance: modalRef.instance,
-      modalContentInstance: modalContentInstance ? modalContentInstance : null
+      modalContentInstance: modalContentInstance ? modalContentInstance.instance : null
     };
   }
 }

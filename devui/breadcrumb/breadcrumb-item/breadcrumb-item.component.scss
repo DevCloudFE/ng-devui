@@ -2,7 +2,7 @@
 
 .devui-breadcrumb-font-style {
   font-size: 12px;
-  color: $dark-3;
+  color: $devui-aide-text;
   line-height: 20px;
 }
 
@@ -12,7 +12,7 @@
   cursor: auto;
 
   ::ng-deep a:hover {
-    color: $dark-1;
+    color: $devui-text;
     text-decoration: none;
   }
 
@@ -39,25 +39,25 @@
 
   &:hover {
     svg g polygon {
-      fill: $dark-1;
+      fill: $devui-icon-text;
     }
   }
 }
 
 .devui-breadcrumb-item-active {
-  color: $dark-1;
+  color: $devui-text;
 
   ::ng-deep a {
-    color: $dark-1;
+    color: $devui-text;
     text-decoration: none;
   }
 
   svg g polygon {
-    fill: $dark-1;
+    fill: $devui-icon-text;
   }
 
   span {
-    color: $dark-1;
+    color: $devui-text;
   }
 }
 
@@ -82,7 +82,7 @@
     cursor: pointer;
 
     a {
-      color: $dark-1;
+      color: $devui-text;
       line-height: 36px;
       width: 170px;
       display: inline-block;
@@ -93,7 +93,7 @@
     }
 
     &:hover {
-      background: $hover-content;
+      background: $devui-list-item-hover-bg;
 
       a {
         text-decoration: none;

@@ -72,7 +72,7 @@
 
 .list-group-child > li > .name {
   background-color: #5170ff;
-  background-color: var(--brand-1, #5170ff);
+  background-color: var(--devui-brand, #5170ff);
 }
 
 .list-group > li > .name {
@@ -83,16 +83,16 @@
   padding: 0 10px;
   height: 30px;
   border: 1px solid #5170ff;
-  border: 1px solid var(--brand-1, #5170ff);
+  border: 1px solid var(--devui-brand, #5170ff);
   color: #ffffff;
   line-height: 1.5;
   background-color: #5170ff;
-  background-color: var(--brand-1, #5170ff);
+  background-color: var(--devui-brand, #5170ff);
   display: flex;
   align-items: center;
 }
 
 .list-group > li.dragover-item > .name {
   background-color: #001bc0;
-  background-color: var(--brand-2, #001bc0);
+  background-color: var(--devui-brand-active-focus, #001bc0);
 }

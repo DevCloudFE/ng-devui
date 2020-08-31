@@ -55,7 +55,8 @@
 
 .card .card-header {
   font-size: 14px;
-  /*color: #333;*/
+
+  /* color: #333; */
   padding: 10px;
 }
 
@@ -66,12 +67,12 @@
 .list-group > li {
   height: 30px;
   border: 1px solid #5170ff;
-  border: 1px solid var(--brand-1, #5170ff);
+  border: 1px solid var(--devui-brand, #5170ff);
   color: #ffffff;
   margin-bottom: 5px;
   line-height: 1.5;
   background-color: #5170ff;
-  background-color: var(--brand-1, #5170ff);
+  background-color: var(--devui-brand, #5170ff);
   display: flex;
   align-items: center;
 }

@@ -9,7 +9,7 @@
   top: 0;
   height: 32px;
   width: 96px;
-  box-shadow: 0 1px 2px 0 $dark-1-boxshadow;
+  box-shadow: 0 1px 2px 0 $devui-shadow;
   background: #ffffff;
   z-index: 10;
 }
@@ -26,6 +26,6 @@
   cursor: not-allowed;
 
   svg g polygon {
-    fill: $disabled-content;
+    fill: $devui-disabled-text;
   }
 }

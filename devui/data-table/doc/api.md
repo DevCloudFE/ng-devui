@@ -12,6 +12,7 @@
 | generalRowHoveredData |           `boolean`           | false  |      可选，使用配置column方式实现table,鼠标悬浮行时$hovered是否记录到rowItem中，默认不记录       |
 |       cssClass        |           `string`            | --     |                                       可选，自定义表格样式                                       |
 |      tableWidth       |           `string`            | 100%   |                                          可选，表格宽度                                          |
+|      tableHeight      |           `string`            | --     |                                          可选，表格高度                                          | [虚拟滚动](/components/datatable/demo#virtual-scroll)                  |
 |   checkableRelation   |      `CheckableRelation`      | --     |                             可选，配置树形表格的父子选中是否互相关联                             | [树形表格](/components/datatable/demo#tree-form)                       |
 |   loadChildrenTable   |           `Promise`           | --     |                            可选，展开子表格的回调，用于异步加载子表格                            | [树形表格](/components/datatable/demo#tree-form)                       |
 | loadAllChildrenTable  |           `Promise`           | --     |                      可选，表头展开所有子表格的回调，用于异步加载所有子表格                      | [树形表格](/components/datatable/demo#tree-form)                       |
@@ -125,19 +126,21 @@
 
 ### dTableCell 参数
 
-|     参数名      |       类型       | 默认值 |                       说明                       | 跳转 Demo                                          |
-| :-------------: | :--------------: | :----- | :----------------------------------------------: | :------------------------------------------------- |
-|    editable     |    `boolean`     | --     |              可选，单元格是否可编辑              | [编辑单元格](/components/datatable/demo#edit-cell) |
-|   editableTip   | `'hover'、'btn'` | --     |  可选，编辑提示，hover背景变色，btn展示编辑按钮  | [编辑单元格](/components/datatable/demo#edit-cell) |
-|  nestedColumn   |    `boolean`     | --     | 可选，树形表格下该行有子表格时展示展开、折叠图标 | [树形表格](/components/datatable/demo#tree-form)   |
-|   nestedLayer   |     `number`     |        |    树形表格下的层级,nestedColumn为true时必选     | [树形表格](/components/datatable/demo#tree-form)   |
-|     rowItem     |     `array`      | --     |         行数据，nestedColumn为true时必选         | [树形表格](/components/datatable/demo#tree-form)   |
-| beforeCellEdit  |    `Promise`     | --     |           可选，单元格编辑前的拦截方法           |
-|  iconFoldTable  |   `DOMString`    | --     |          可选，自定义树形表格的折叠图标          | [树形表格](/components/datatable/demo#tree-form)   |
-| iconUnFoldTable |   `DOMString`    | --     |          可选，自定义树形表格的展开图标          | [树形表格](/components/datatable/demo#tree-form)   |
-|    fixedLeft    |     `string`     | --     |     可选，该列固定到左侧的距离，如：‘100px’      | [固定列](/components/datatable/demo#fixed-column)  |
-|   fixedRight    |     `string`     | --     |     可选，该列固定到右侧的距离，如：‘100px’      | [固定列](/components/datatable/demo#fixed-column)  |
-|     editing     |    `boolean`     | --     |  可选，使用[(editing)]获取和控制单元格编辑状态   | [编辑单元格](/components/datatable/demo#edit-cell) |
+|     参数名      |              类型               | 默认值 |                              说明                              | 跳转 Demo                                          |
+| :-------------: | :-----------------------------: | :----- | :------------------------------------------------------------: | :------------------------------------------------- |
+|    editable     |            `boolean`            | --     |                     可选，单元格是否可编辑                     | [编辑单元格](/components/datatable/demo#edit-cell) |
+|   editableTip   |        `'hover'、'btn'`         | --     |         可选，编辑提示，hover背景变色，btn展示编辑按钮         | [编辑单元格](/components/datatable/demo#edit-cell) |
+|  nestedColumn   |            `boolean`            | --     |        可选，树形表格下该行有子表格时展示展开、折叠图标        | [树形表格](/components/datatable/demo#tree-form)   |
+|   nestedLayer   |            `number`             |        |           树形表格下的层级,nestedColumn为true时必选            | [树形表格](/components/datatable/demo#tree-form)   |
+|     rowItem     |             `array`             | --     | 行数据，nestedColumn为true时必选，也可作为单元格编辑的回调参数 | [树形表格](/components/datatable/demo#tree-form)   |
+| beforeEditStart | `function、Promise、Observable` | --     |    可选，单元格开始编辑前回调，返回false阻止单元格开始编辑     | [编辑单元格](/components/datatable/demo#edit-cell) |
+|  beforeEditEnd  | `function、Promise、Observable` | --     |   可选，单元格结束编辑前的回调，返回false阻止单元格结束编辑    | [编辑单元格](/components/datatable/demo#edit-cell) |
+|  iconFoldTable  |           `DOMString`           | --     |                 可选，自定义树形表格的折叠图标                 | [树形表格](/components/datatable/demo#tree-form)   |
+| iconUnFoldTable |           `DOMString`           | --     |                 可选，自定义树形表格的展开图标                 | [树形表格](/components/datatable/demo#tree-form)   |
+|    fixedLeft    |            `string`             | --     |            可选，该列固定到左侧的距离，如：‘100px’             | [固定列](/components/datatable/demo#fixed-column)  |
+|   fixedRight    |            `string`             | --     |            可选，该列固定到右侧的距离，如：‘100px’             | [固定列](/components/datatable/demo#fixed-column)  |
+|     editing     |            `boolean`            | --     |         可选，使用[(editing)]获取和控制单元格编辑状态          | [编辑单元格](/components/datatable/demo#edit-cell) |
+|      field      |            `string`             | --     |  单元格所属列的字段，作为beforeEditStart、beforeEditEnd的参数  | [编辑单元格](/components/datatable/demo#edit-cell) |
 
 ### dTableCell 事件
 

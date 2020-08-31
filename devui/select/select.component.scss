@@ -26,7 +26,7 @@
 
     & > .devui-select-custom-area {
       width: 50%;
-      border-left: 1px solid $gray-2;
+      border-left: 1px solid $devui-dividing-line;
 
       &::before {
         display: none;
@@ -109,7 +109,7 @@
     font-size: 12px;
   }
 
-  color: $dark-1;
+  color: $devui-text;
 }
 
 .devui-dropdown-item ::ng-deep .devui-select-checkbox {
@@ -118,13 +118,6 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-  }
-}
-
-/* 把选中文本的颜色覆盖下去 */
-.devui-dropdown-item.active ::ng-deep .devui-select-checkbox {
-  .checkbox-label {
-    color: $brand-1;
   }
 }
 
@@ -263,7 +256,7 @@ div.devui-dropdown-menu {
   // margin-bottom: 5px;
   cursor: pointer;
   min-width: auto;
-  box-shadow: 0 4px 8px 0 $dark-1-boxshadow;
+  box-shadow: 0 4px 8px 0 $devui-shadow;
 }
 
 div.devui-dropdown-menu .devui-select-list-unstyled,
@@ -271,33 +264,33 @@ div.devui-dropdown-menu > ul.devui-select-list-unstyled {
   overflow-y: auto;
 
   & li:hover:not(.active):not(.disabled) {
-    background-color: $hover-content;
-    color: $hover-control;
+    background-color: $devui-list-item-hover-bg;
+    color: $devui-list-item-hover-text;
   }
 }
 
 div.devui-dropdown-menu .devui-select-list-unstyled li.selected,
 div.devui-dropdown-menu > ul.devui-select-list-unstyled li.selected {
-  background-color: $hover-content;
-  color: $hover-control;
+  background-color: $devui-list-item-hover-bg;
+  color: $devui-list-item-hover-text;
 }
 
 div.devui-dropdown-menu:not(.devui-dropdown-menu-multiple) .devui-select-list-unstyled li.active,
 div.devui-dropdown-menu:not(.devui-dropdown-menu-multiple) .devui-select-list-unstyled li.active:hover,
 div.devui-dropdown-menu:not(.devui-dropdown-menu-multiple) > ul.devui-select-list-unstyled li.active,
 div.devui-dropdown-menu:not(.devui-dropdown-menu-multiple) > ul.devui-select-list-unstyled li.active:hover {
-  background-color: $hwc-color-bg-active;
-  color: $font-white;
+  background-color: $devui-list-item-active-bg;
+  color: $devui-list-item-active-text;
 }
 
 :host ::ng-deep .devui-dropdown-menu.devui-dropdown-menu-multiple .devui-select-list-unstyled li:not(.disabled):hover,
 :host ::ng-deep .devui-dropdown-menu.devui-dropdown-menu-multiple > ul.devui-select-list-unstyled li:not(.disabled):hover {
   .devui-checkbox {
     & > label {
-      color: $hover-control;
+      color: $devui-list-item-hover-text;
 
       & > .devui-checkbox-material {
-        border-color: $hwc-color-border-active;
+        border-color: $devui-form-control-line-active;
       }
     }
   }
@@ -306,10 +299,11 @@ div.devui-dropdown-menu:not(.devui-dropdown-menu-multiple) > ul.devui-select-lis
 div.devui-dropdown-menu.devui-dropdown-menu-multiple .devui-select-list-unstyled li.active:not(.disabled),
 div.devui-dropdown-menu.devui-dropdown-menu-multiple > ul.devui-list-unstyled li.active:not(.disabled) {
   background-color: transparent;
+  color: $devui-text;
 
   &:hover {
-    background-color: $hover-content;
-    color: $hover-control;
+    background-color: $devui-list-item-hover-bg;
+    color: $devui-list-item-hover-text;
   }
 }
 
@@ -329,16 +323,16 @@ ul.devui-dropdown-menu-wrap .devui-form-group.devui-has-feedback {
   & > input.devui-form-control.devui-select-search {
     &,
     &:focus {
-      background-color: $hwc-drop-down-search;
+      background-color: $devui-embed-search-bg;
     }
 
     &:hover,
     &:hover:focus {
-      background-color: $hwc-drop-down-search-hover;
+      background-color: $devui-embed-search-bg-hover;
     }
 
     &::placeholder {
-      color: $gray-1;
+      color: $devui-line; //TODO: Color-Question
     }
   }
 }
@@ -356,7 +350,7 @@ ul.devui-dropdown-menu-wrap .devui-form-group.devui-has-feedback {
 
 .devui-select-underlined-border {
   border: 0;
-  border-bottom: 1px solid $gray-1;
+  border-bottom: 1px solid $devui-line;
   border-radius: 0;
 }
 
@@ -413,7 +407,7 @@ ul.devui-dropdown-menu-wrap .devui-form-group.devui-has-feedback {
   .devui-select-placeholder {
     height: 24px;
     line-height: 24px;
-    color: $dark-3;
+    color: $devui-placeholder;
     padding-left: 10px;
   }
 
@@ -451,15 +445,15 @@ ul.devui-dropdown-menu-wrap .devui-form-group.devui-has-feedback {
     min-height: 22px;
     max-height: 22px;
     border-radius: 2px;
-    color: $dark-1;
-    background: $tag-label-bgcolor;
+    color: $devui-text;
+    background: $devui-label-bg;
     max-width: 100%;
     position: relative;
-    border: 1px solid $tag-label-bgcolor;
+    border: 1px solid $devui-label-bg;
 
     &.disabled {
-      background: $disabled-bg;
-      border-color: $disabled-bg;
+      background: $devui-disabled-bg;
+      border-color: $devui-disabled-bg;
       cursor: not-allowed;
     }
   }
@@ -471,12 +465,12 @@ ul.devui-dropdown-menu-wrap .devui-form-group.devui-has-feedback {
   }
 
   .devui-select-tag-item span:hover {
-    color: $brand-1;
+    color: $devui-brand;
   }
 
   .devui-select-tag-item.disabled span {
     padding-right: 0;
-    color: $disabled-content;
+    color: $devui-disabled-text;
   }
 
   .devui-select-tag-item .devui-select-tag-remove-button {
@@ -486,25 +480,25 @@ ul.devui-dropdown-menu-wrap .devui-form-group.devui-has-feedback {
     transform: translateY(-50%);
     // line-height: 12px;
     // text-align: center;
-    color: $dark-1;
+    color: $devui-text; // TODO： Color-Question
     width: 12px;
     height: 12px;
     // display: inline-block;
     transition: transform 0.2s ease;
     pointer-events: auto;
     cursor: pointer;
-    background-color: $gray-1;
+    background-color: $devui-line;
     border-radius: 50%;
     display: inline-flex;
     justify-content: center;
     align-items: center;
 
     svg path {
-      fill: $font-white;
+      fill: $devui-light-text; // TODO: Color-Question
     }
 
     &:hover {
-      background-color: $brand-1;
+      background-color: $devui-icon-fill-active;
     }
   }
 
@@ -593,14 +587,14 @@ div.devui-dropdown-menu li.disabled:hover,
 div.devui-dropdown-menu .devui-select-list-unstyled li.disabled:hover,
 div.devui-dropdown-menu > ul.devui-select-list-unstyled li.disabled:hover {
   cursor: not-allowed;
-  color: $disabled-content;
+  color: $devui-disabled-text;
 }
 
 div.devui-dropdown-menu .devui-select-list-unstyled li.active.disabled,
 div.devui-dropdown-menu > ul.devui-select-list-unstyled li.active.disabled,
 div.devui-dropdown-menu .devui-select-list-unstyled li.active.disabled:hover,
 div.devui-dropdown-menu > ul.devui-select-list-unstyled li.active.disabled:hover {
-  background: $disabled-bg;
+  background: $devui-disabled-bg;
 }
 
 /* checkbox的label灰化 */
@@ -608,33 +602,33 @@ div.devui-dropdown-menu > ul.devui-select-list-unstyled li.active.disabled:hover
 :host ::ng-deep .li.disabled .devui-checkbox.disabled label,
 li.disabled ::ng-deep .devui-checkbox.disabled label,
 li.disabled ::ng-deep .devui-checkbox.disabled label {
-  color: $disabled-content;
+  color: $devui-disabled-text;
 }
 
 .devui-no-data-tip {
   user-select: none;
   cursor: not-allowed;
   padding: 10px;
-  background-color: $disabled-bg;
-  color: $disabled-content;
+  background-color: $devui-disabled-bg;
+  color: $devui-disabled-text;
 }
 
 .devui-dropdown-origin-wrapper.disabled,
 .devui-dropdown-origin-wrapper.disabled:hover {
   cursor: not-allowed;
-  background-color: $disabled-bg;
-  border-color: $disabled-border;
-  color: $disabled-content;
+  background-color: $devui-disabled-bg;
+  border-color: $devui-disabled-line;
+  color: $devui-disabled-text;
 
   .devui-select-list-wrapper.devui-form-control,
   .devui-form-control.devui-select-input {
     cursor: not-allowed;
-    background-color: $disabled-bg;
-    color: $disabled-content;
+    background-color: $devui-disabled-bg;
+    color: $devui-disabled-text;
   }
 
   .devui-select-list-wrapper.devui-form-control.disabled {
-    color: $disabled-content;
+    color: $devui-disabled-text;
   }
 }
 
@@ -642,15 +636,15 @@ li.disabled ::ng-deep .devui-checkbox.disabled label {
 .devui-dropdown-origin-wrapper:hover {
   &.disabled .devui-select-tag-list .devui-select-tag-item,
   .devui-select-tag-list .devui-select-tag-item.disabled {
-    background-color: $disabled-bg;
-    border-color: $disabled-border;
+    background-color: $devui-disabled-bg;
+    border-color: $devui-disabled-line;
 
     & > span {
-      color: $disabled-content;
+      color: $devui-disabled-text;
     }
 
     & > .devui-select-tag-remove-button {
-      background-color: $disabled-border;
+      background-color: $devui-disabled-line;
     }
   }
 }
@@ -658,11 +652,11 @@ li.disabled ::ng-deep .devui-checkbox.disabled label {
 .devui-select-list-wrapper.devui-form-control.disabled + .devui-form-control-feedback,
 .devui-form-control.devui-select-input:disabled + .devui-form-control-feedback {
   cursor: not-allowed;
-  background-color: $disabled-bg;
+  background-color: $devui-disabled-bg;
 
   .devui-select-clear-icon svg path,
   .devui-select-chevron-icon svg polygon {
-    fill: $disabled-content;
+    fill: $devui-disabled-text;
   }
 }
 
@@ -672,11 +666,11 @@ li.disabled ::ng-deep .devui-checkbox.disabled label {
   width: calc(100% - 20px);
   margin: 0 10px;
   height: 1px;
-  border-top: 1px solid $gray-2;
+  border-top: 1px solid $devui-dividing-line;
 }
 
 svg.svg-icon-search path {
-  fill: $dark-1;
+  fill: $devui-icon-text;
 }
 
 .open .devui-select-chevron-icon {
@@ -690,12 +684,12 @@ svg.svg-icon-search path {
 }
 
 .devui-select-chevron-icon svg polygon {
-  fill: $dark-1;
+  fill: $devui-icon-text;
 }
 
 .disabled {
   .devui-select-chevron-icon svg polygon {
-    fill: $disabled-border;
+    fill: $devui-disabled-line;
   }
 }
 
@@ -722,7 +716,7 @@ svg.svg-icon-search path {
   }
 
   svg.svg-icon-clear path {
-    fill: $dark-1;
+    fill: $devui-icon-text;
   }
 
   &::after {
@@ -733,7 +727,7 @@ svg.svg-icon-search path {
     top: 15%;
     height: 70%;
     width: 1px;
-    border-left: 1px solid $gray-1;
+    border-left: 1px solid $devui-line;
   }
 
   &.devui-search-clear-lg {
@@ -765,7 +759,7 @@ svg.svg-icon-search path {
     content: '';
     height: 14px;
     width: 2px;
-    background-color: $dark-1;
+    background-color: $devui-icon-text;
     left: 50%;
   }
 
@@ -779,12 +773,12 @@ svg.svg-icon-search path {
 }
 
 .devui-form-control-feedback.devui-search-clear:hover g > g > polygon {
-  fill: $brand-1;
+  fill: $devui-icon-fill-active;
 }
 
 .devui-select-clear-icon:hover::before,
 .devui-select-clear-icon:hover::after {
-  background-color: $brand-1;
+  background-color: $devui-icon-fill-active;
 }
 
 input::-ms-clear {

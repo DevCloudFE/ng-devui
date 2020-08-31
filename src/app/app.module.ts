@@ -1,3 +1,4 @@
+import { ThemePickerModule } from './theme-picker/theme-picker.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -16,6 +17,7 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     FormsModule,
     BrowserAnimationsModule,
+    ThemePickerModule,
     DevUIModule.forRoot(),
     RouterModule.forRoot(
       [

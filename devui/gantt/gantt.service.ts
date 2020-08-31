@@ -2,9 +2,7 @@ import { Injectable } from '@angular/core';
 import { Subject, ReplaySubject } from 'rxjs';
 import { GanttBarStatus, GanttScaleConfig, GanttScaleUnit } from './gantt.model';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class GanttService {
   static DAY_DURATION = 24 * 60 * 60 * 1000;
   scaleUnit = GanttScaleUnit.day;

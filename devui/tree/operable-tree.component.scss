@@ -20,34 +20,34 @@
 
       svg {
         #add-path {
-          fill: $dark-2;
+          fill: $devui-icon-text;
         }
 
         #edit-path {
-          fill: $dark-2;
+          fill: $devui-icon-text;
         }
 
         #delete-path {
-          fill: $dark-2;
+          fill: $devui-icon-text;
         }
 
         path,
         rect {
-          fill: $dark-2;
+          fill: $devui-icon-text;
         }
       }
 
       &:hover {
         #add-path {
-          fill: $hover-control;
+          fill: $devui-icon-fill-active-hover;
         }
 
         #edit-path {
-          fill: $hover-control;
+          fill: $devui-icon-fill-active-hover;
         }
 
         #delete-path {
-          fill: $hover-control;
+          fill: $devui-icon-fill-active-hover;
         }
       }
     }
@@ -60,32 +60,37 @@
 
 .devui-tree-indicator {
   height: 1px;
-  background-color: $brand-1;
+  background-color: $devui-brand;
   position: absolute;
 }
 
 .devui-drop-inner {
-  color: $brand-1;
+  color: $devui-brand;
 }
 
 .toggle-disabled {
   cursor: not-allowed !important;
 
   svg.svg-icon rect {
-    stroke: $disabled-content !important;
+    stroke: $devui-disabled-text !important;
   }
 
   svg.svg-icon.svg-icon-close rect:last-child {
     stroke: none !important;
-    fill: $disabled-content !important;
+    fill: $devui-disabled-text !important;
   }
 
   svg.svg-icon path {
-    fill: $disabled-content !important;
+    fill: $devui-disabled-text !important;
   }
 }
 
 .select-disabled {
-  color: $disabled-content !important;
+  color: $devui-disabled-text !important;
   cursor: not-allowed !important;
+}
+
+.tree-node-highlight {
+  color: $devui-brand;
+  font-weight: 600;
 }

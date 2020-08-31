@@ -4,13 +4,13 @@
 
 .devui-search {
   .devui-serach-line {
-    border-color: $dividing;
+    border-color: $devui-dividing-line;
   }
 }
 
 svg.svg-icon-clear path,
 svg.svg-icon-search path {
-  fill: $dark-2;
+  fill: $devui-icon-text;
 }
 
 :host {
@@ -22,7 +22,7 @@ svg.svg-icon-search path {
 
   &:hover {
     .devui-input {
-      border-color: $dark-2;
+      border-color: $devui-form-control-line-hover;
     }
   }
 
@@ -70,13 +70,13 @@ svg.svg-icon-search path {
     }
 
     &:disabled {
-      background-color: $disabled-bg;
-      border-color: $disabled-border;
-      color: $disabled-content;
+      background-color: $devui-disabled-bg;
+      border-color: $devui-disabled-line;
+      color: $devui-disabled-text;
 
       & + .devui-search-icon {
         svg path {
-          fill: $disabled-content;
+          fill: $devui-disabled-text;
         }
       }
     }
@@ -167,7 +167,7 @@ svg.svg-icon-search path {
 
     &:hover {
       svg.svg-icon-search path {
-        fill: $brand-1;
+        fill: $devui-icon-fill-active;
       }
     }
   }
@@ -180,7 +180,7 @@ svg.svg-icon-search path {
     width: 1px;
     border-left-width: 1px;
     border-left-style: solid;
-    border-color: $dividing;
+    border-color: $devui-dividing-line;
     line-height: 28px;
     display: none;
 

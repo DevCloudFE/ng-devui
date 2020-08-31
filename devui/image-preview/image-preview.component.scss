@@ -40,18 +40,18 @@ $component-scope: 'devui-image-preview';
   width: 36px;
   height: 36px;
   border-radius: 18px;
-  background: $highlight-overlay;
-  box-shadow: 0 0 8px 0 $dark-1-boxshadow-light;
+  background: $devui-highlight-overlay;
+  box-shadow: 0 0 8px 0 $devui-light-shadow;
   display: inline-flex;
   align-items: center;
   justify-content: center;
 
   &:hover {
-    background: $gray-3;
+    background: $devui-area;
   }
 
   svg polygon {
-    fill: $dark-1;
+    fill: $devui-icon-text;
   }
 
   svg {
@@ -78,7 +78,7 @@ svg,
 polygon,
 g,
 path {
-  fill: $dark-1;
+  fill: $devui-icon-text;
 }
 
 .devui-image-preview-close-btn {
@@ -94,8 +94,8 @@ path {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: $highlight-overlay;
-  box-shadow: 0 0 3px 0 $dark-1-boxshadow-light;
+  background: $devui-highlight-overlay;
+  box-shadow: 0 0 3px 0 $devui-light-shadow;
   position: fixed;
   bottom: 0;
   left: 0;
@@ -106,7 +106,7 @@ path {
     height: 24px;
     align-items: center;
     justify-content: center;
-    color: $dark-1;
+    color: $devui-text;
   }
 
   .devui-image-preview-index {

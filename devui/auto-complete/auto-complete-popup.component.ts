@@ -17,7 +17,6 @@ import { CdkOverlayOrigin } from '@angular/cdk/overlay';
   animations: [fadeInOut]
 })
 export class AutoCompletePopupComponent implements ControlValueAccessor {
-  activeIndex = 0;
   @Input() width;
   @Input() cssClass: string;
   @Input() maxHeight: number;
@@ -41,7 +40,7 @@ export class AutoCompletePopupComponent implements ControlValueAccessor {
   @Input() origin: CdkOverlayOrigin | undefined;
   @ViewChild('selectMenuElement') selectMenuElement: ElementRef;
   @ViewChild('dropdownUl') dropdownUl: ElementRef;
-
+  activeIndex = 0;
   showLoading = false;
   private value: any;
   labelMinHeight = 20; // position.top小于20px时候，表示光标在第一行

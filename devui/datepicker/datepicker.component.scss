@@ -5,18 +5,18 @@
 }
 
 .devui-month-view {
-  background-color: $dropdown-overlay;
+  background-color: $devui-connected-overlay-bg;
   font-size: 12px;
-  width: 238px;
+  width: 240px;
   text-align: center;
-  box-shadow: 0 4px 8px 0 $dark-1-boxshadow;
+  box-shadow: 0 4px 8px 0 $devui-shadow;
   border-radius: 2px;
   position: relative;
 }
 
 .devui-month-view .devui-month-view-table {
   margin-bottom: 0;
-  background: $dropdown-overlay;
+  background: $devui-connected-overlay-bg;
   table-layout: fixed;
   border-collapse: collapse;
   width: 100%;
@@ -38,20 +38,20 @@
 
     svg path,
     svg polygon {
-      fill: $disabled-content;
+      fill: $devui-disabled-text;
     }
   }
 
   svg path,
   svg polygon {
-    fill: $dark-2;
+    fill: $devui-text-weak;
   }
 
   &:not(.devui-year-month-disabled):hover {
     svg {
       path,
       polygon {
-        fill: $hover-control;
+        fill: $devui-icon-fill-active-hover;
       }
     }
   }
@@ -75,14 +75,14 @@
   width: 32px;
   height: 24px;
   line-height: 24px;
-  color: $dark-1;
+  color: $devui-text;
   border: none;
 }
 
 .devui-month-view .devui-day:not(.disabled) {
   cursor: pointer;
   font-size: 12px;
-  color: $hwc-feedback-overlay-font-color;
+  color: $devui-feedback-overlay-text;
 }
 
 .devui-month-view .devui-day.disabled {
@@ -101,19 +101,19 @@
   -webkit-transition: background 0.3s ease;
   transition: background 0.3s ease;
   font-size: 12px;
-  color: $dark-1;
+  color: $devui-text;
 }
 
 .devui-month-view .devui-out-of-month {
   .devui-calendar-date {
     opacity: 0.8;
-    background-color: $dropdown-overlay;
-    color: $gray-1;
+    background-color: $devui-connected-overlay-bg;
+    color: $devui-line;
   }
 
   &:hover {
     .devui-calendar-date {
-      background-color: $hover-content;
+      background-color: $devui-list-item-hover-bg;
     }
   }
 }
@@ -141,7 +141,7 @@
   left: -68px;
   top: 30px;
   z-index: 1;
-  background: $bg-white;
+  background: $devui-base-bg;
 }
 
 .devui-yearOption li,
@@ -151,35 +151,36 @@
   line-height: 65px;
   text-align: center;
   display: inline-block;
-  background: $bg-white;
+  background: $devui-base-bg;
   border-radius: 2px;
 }
 
 .devui-yearOption li:hover,
 .devui-monthOption li:hover {
-  background: $hover-control;
-  color: $font-white;
+  background: $devui-list-item-hover-bg;
+  color: $devui-list-item-hover-text;
   cursor: pointer;
 }
 
 .devui-yearOption li.active:not(.disabled),
 .devui-monthOption li.active:not(.disabled) {
-  color: $font-white;
-  background-color: $brand-1;
+  color: $devui-list-item-active-text;
+  background-color: $devui-list-item-active-bg;
 
   &:hover {
-    background-color: $hover-control;
+    background-color: $devui-list-item-active-hover-bg;
   }
 }
 
 .devui-yearOption li.disabled,
 .devui-monthOption li.disabled {
-  color: $disabled-content;
-  background-color: $disabled-bg;
+  color: $devui-disabled-text;
+  background-color: $devui-disabled-bg;
+  cursor: not-allowed;
 }
 
 .devui-month-view .devui-timepicker {
-  background: $gray-3;
+  background: $devui-area;
   display: flex;
   justify-content: space-evenly;
 }
@@ -187,8 +188,8 @@
 .devui-month-view .devui-timepicker input {
   outline: 0;
   border: 0;
-  background: $gray-3;
-  color: $dark-1;
+  background: $devui-area;
+  color: $devui-text;
   width: 30px;
   padding: 0 0 0 3px;
   height: 30px;
@@ -197,8 +198,8 @@
 
 .devui-month-view .devui-timepicker.devui-timepicker-disabled input {
   cursor: not-allowed;
-  color: $disabled-content;
-  background-color: $disabled-bg;
+  color: $devui-disabled-text;
+  background-color: $devui-disabled-bg;
 }
 
 .devui-month-view .devui-timepicker .devui-time {
@@ -220,45 +221,53 @@
         border-top: none;
         border-radius: 2px;
 
+        &.devui-day-start {
+          border-radius: 2px 0 0 2px;
+        }
+
+        &.devui-day-end {
+          border-radius: 0 2px 2px 0;
+        }
+
         &:not(.disabled) {
           border-top: none;
-          background: $dropdown-overlay;
+          background: $devui-connected-overlay-bg;
         }
 
         &.devui-day:hover:not(.active):not(.disabled):not(.devui-out-of-month) {
-          background-color: $hover-content;
+          background-color: $devui-list-item-hover-bg;
         }
 
         &.devui-day:not(.disabled).active:hover {
-          background-color: $hover-control;
+          background-color: $devui-list-item-active-hover-bg;
 
           & > .devui-calendar-date {
-            color: $font-white;
+            color: $devui-light-text;
           }
         }
 
         &.devui-in-month-day.disabled {
-          color: $disabled-content;
+          color: $devui-disabled-text;
           cursor: not-allowed;
 
           .devui-calendar-date {
-            color: $disabled-content;
+            color: $devui-disabled-text;
           }
 
           &:not(.active) {
-            background-color: $disabled-bg;
+            background-color: $devui-disabled-bg;
           }
 
           &.active {
-            background-color: $disabled-border;
+            background-color: $devui-disabled-line;
           }
         }
 
         &.devui-in-month-day:not(.disabled).active {
-          background: $hwc-color-bg-active;
+          background: $devui-list-item-active-bg;
 
           & > .devui-calendar-date {
-            color: $font-white;
+            color: $devui-light-text;
           }
         }
       }
@@ -285,7 +294,7 @@
 }
 
 .devui-month-view .devui-table tfoot {
-  border-top: 1px solid $gray-3;
+  border-top: 1px solid $devui-area;
 }
 
 .devui-month-view tfoot td {
@@ -335,20 +344,20 @@
   .btn-up {
     padding-top: 2px;
     padding-bottom: 1px;
-    border-color: transparent transparent $dark-1 transparent;
+    border-color: transparent transparent $devui-text transparent;
 
     &:hover {
-      border-color: transparent transparent $hover-control transparent;
+      border-color: transparent transparent $devui-icon-fill-active transparent;
     }
   }
 
   .btn-down {
     top: 16px;
     padding-bottom: 4px;
-    border-color: $dark-1 transparent transparent transparent;
+    border-color: $devui-text transparent transparent transparent;
 
     &:hover {
-      border-color: $hover-control transparent transparent transparent;
+      border-color: $devui-icon-fill-active transparent transparent transparent;
     }
   }
 }

@@ -1,10 +1,10 @@
-import { endsWith } from 'lodash-es';
 import { IFileOptions, IUploadOptions } from './file-uploader.types';
 import { Observable, from, Subscription } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
-
+import * as mime from 'mime-db';
 import { Injectable } from '@angular/core';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
+import { endsWith } from 'lodash-es';
 
 @Injectable()
 export class SelectFiles {
@@ -52,7 +52,12 @@ export class SelectFiles {
     if (accept) {
       const acceptArr = accept.split(',');
       return acceptArr.reduce((result: boolean, item: string) => {
-        return result || file.type.indexOf(item.replace(/[\.*]/g, '')) > -1 || endsWith(file.name, item);
+        // 浏览器的文件嗅探会对难以识别的文件type赋值为空，因此需要通过简单的后缀名判断处理
+        if (file.type === '' || !mime[file.type] || !mime[file.type].extensions || item.includes('*')) {
+          return result || file.type.indexOf(item.replace(/[\.*]/g, '')) > -1 || endsWith(file.name, item.replace(/[\.*]/g, ''));
+        } else {
+          return result || mime[file.type].extensions.indexOf(item.replace(/\./g, '')) > -1;
+        }
       }, false);
     }
     return true;
@@ -93,13 +98,13 @@ export class SelectFiles {
   _validateFiles(file, accept, uploadOptions) {
     if (!this.isAllowedFileType(accept, <File>file)) {
       this.NOT_ALLOWED_FILE_TYPE_MSG = this.i18nText.getNotAllowedFileTypeMsg((<File>file).name, accept);
-      return { checkError : true, errorMsg: this.NOT_ALLOWED_FILE_TYPE_MSG };
+      return { checkError: true, errorMsg: this.NOT_ALLOWED_FILE_TYPE_MSG };
     }
     if (this.beyondMaximalSize((<File>file).size, uploadOptions.maximumSize)) {
       this.BEYOND_MAXIMAL_FILE_SIZE_MSG = this.i18nText.getBeyondMaximalFileSizeMsg((<File>file).name, uploadOptions.maximumSize);
-      return { checkError : true, errorMsg: this.BEYOND_MAXIMAL_FILE_SIZE_MSG };
+      return { checkError: true, errorMsg: this.BEYOND_MAXIMAL_FILE_SIZE_MSG };
     }
-    return { checkError : false, errorMsg: undefined };
+    return { checkError: false, errorMsg: undefined };
   }
 
   simulateClickEvent(input) {

@@ -13,54 +13,24 @@
               xmlns:xlink="http://www.w3.org/1999/xlink"
             >
               <defs>
-                <linearGradient
-                  x1="89.5364583%"
-                  y1="21.60078%"
-                  x2="7.57349918%"
-                  y2="65.7395747%"
-                  id="linearGradient-1"
-                >
+                <linearGradient x1="89.5364583%" y1="21.60078%" x2="7.57349918%" y2="65.7395747%" id="linearGradient-1">
                   <stop stop-color="#2954C8" offset="0%"></stop>
                   <stop stop-color="#5170FF" offset="100%"></stop>
                 </linearGradient>
-                <linearGradient
-                  x1="89.5364583%"
-                  y1="21.4573588%"
-                  x2="7.57349918%"
-                  y2="65.8190624%"
-                  id="linearGradient-2"
-                >
+                <linearGradient x1="89.5364583%" y1="21.4573588%" x2="7.57349918%" y2="65.8190624%" id="linearGradient-2">
                   <stop stop-color="#2954C8" offset="0%"></stop>
                   <stop stop-color="#5170FF" offset="100%"></stop>
                 </linearGradient>
-                <linearGradient
-                  x1="-11.5260417%"
-                  y1="24.3907324%"
-                  x2="87.1145833%"
-                  y2="74.8850926%"
-                  id="linearGradient-3"
-                >
+                <linearGradient x1="-11.5260417%" y1="24.3907324%" x2="87.1145833%" y2="74.8850926%" id="linearGradient-3">
                   <stop stop-color="#89D2FF" offset="0%"></stop>
                   <stop stop-color="#5170FF" offset="100%"></stop>
                 </linearGradient>
-                <linearGradient
-                  x1="0%"
-                  y1="18.4813953%"
-                  x2="75.9513522%"
-                  y2="81.5186047%"
-                  id="linearGradient-4"
-                >
+                <linearGradient x1="0%" y1="18.4813953%" x2="75.9513522%" y2="81.5186047%" id="linearGradient-4">
                   <stop stop-color="#89D2FF" offset="0%"></stop>
                   <stop stop-color="#5170FF" offset="100%"></stop>
                 </linearGradient>
               </defs>
-              <g
-                id="Devui-Logo"
-                stroke="none"
-                stroke-width="1"
-                fill="none"
-                fill-rule="evenodd"
-              >
+              <g id="Devui-Logo" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                 <g id="Group-2" transform="translate(3.000000, 0.000000)">
                   <g>
                     <path
@@ -94,30 +64,22 @@
         </a>
       </h1>
       <div class="main-nav">
-        <a
-          class="main-nav-item"
-          target="_self"
-          href="/design-cn"
-          routerLinkActive="active"
-        >
+        <a class="main-nav-item" target="_self" href="/design-cn" routerLinkActive="active">
           <span>设计体系</span>
         </a>
-        <a
-          class="main-nav-item"
-          routerLink="components"
-          routerLinkActive="active"
-        >
+        <a class="main-nav-item" routerLink="components" routerLinkActive="active">
           <span>组件</span>
         </a>
-        <a
-          class="main-nav-item"
-          target="_self"
-          href="/icon"
-          routerLinkActive="active"
-        >
+        <a class="main-nav-item" target="_self" href="/icon" routerLinkActive="active">
           <span>图标库</span>
         </a>
-        <a class="main-nav-item" target="_blank" rel="noopener noreferrer" href="https://github.com/DevCloudFE/ng-devui/releases" routerLinkActive="active">
+        <a
+          class="main-nav-item"
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://github.com/DevCloudFE/ng-devui/releases"
+          routerLinkActive="active"
+        >
           <span>版本历程</span>
         </a>
         <span class="main-nav-item">
@@ -129,6 +91,9 @@
             [(ngModel)]="currentOption"
             (valueChange)="jumpTo($event)"
           ></d-select>
+        </span>
+        <span class="main-nav-item">
+          <app-theme-picker class="show-themable"></app-theme-picker>
         </span>
       </div>
       <div id="headerMenu" class="header-menu"><span></span></div>

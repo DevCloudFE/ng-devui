@@ -21,21 +21,21 @@
 [dTextarea] {
   box-sizing: border-box;
   padding: 4px 10px;
-  color: $dark-1;
+  color: $devui-text;
   vertical-align: middle;
-  border: 1px solid $gray-1;
+  border: 1px solid $devui-form-control-line;
   border-radius: 2px;
   outline: none;
-  background-color: $bg-white;
+  background-color: $devui-base-bg;
 
   &:not([disabled]):not(.disabled):not(.devui-disabled):not(.error) {
     &:hover,
     &:hover:focus {
-      border-color: $hwc-color-border-hover;
+      border-color: $devui-form-control-line-hover;
     }
 
     &:focus {
-      border-color: $hwc-color-border-active;
+      border-color: $devui-form-control-line-active;
     }
   }
 
@@ -45,9 +45,9 @@
     &,
     &:hover {
       cursor: not-allowed;
-      background-color: $disabled-bg;
-      border-color: $disabled-border;
-      color: $disabled-content;
+      background-color: $devui-disabled-bg;
+      border-color: $devui-disabled-line;
+      color: $devui-disabled-text;
     }
   }
 }
@@ -65,7 +65,7 @@
 }
 
 .devui-input-group-addon {
-  border: 1px solid $gray-1;
+  border: 1px solid $devui-form-control-line;
   border-radius: 2px;
   display: table-cell;
   padding: 0 10px;
@@ -86,13 +86,13 @@
 
 .devui-input {
   outline: none;
-  background-color: $bg-white;
-  border: 1px solid $gray-1;
+  background-color: $devui-base-bg;
+  border: 1px solid $devui-form-control-line;
   border-radius: 2px;
   padding: 5px 10px;
   line-height: 16px; // 解决ie中文字不居中，由于height28px，有10px的padding和2px的border，剩余16px，使用其他的会使文字不居中
   font-size: 12px;
-  color: $dark-1;
+  color: $devui-text;
   width: 100%;
   display: block;
   cursor: text;
@@ -100,11 +100,11 @@
 
   &:hover,
   &:hover:focus {
-    border-color: $hwc-color-border-hover;
+    border-color: $devui-form-control-line-hover;
   }
 
   &:focus {
-    border-color: $hwc-color-border-active;
+    border-color: $devui-form-control-line-active;
   }
 
   &[disabled],
@@ -114,30 +114,30 @@
     &:hover,
     &:focus,
     &:hover:focus {
-      border-color: $disabled-border;
-      color: $disabled-content;
-      background-color: $disabled-bg;
+      border-color: $devui-disabled-line;
+      color: $devui-disabled-text;
+      background-color: $devui-disabled-bg;
       cursor: not-allowed;
     }
   }
 
   &::placeholder {
-    color: $dark-3;
+    color: $devui-placeholder;
   }
 
   &.devui-search-in-dropdown {
     margin: 0;
     border: none;
     padding: 5px 26px 5px 10px;
-    background-color: $hwc-drop-down-search;
-    color: $dark-1;
+    background-color: $devui-embed-search-bg;
+    color: $devui-text;
 
     &:-ms-input-placeholder {
-      color: $dark-3;
+      color: $devui-placeholder;
     }
 
     &:hover {
-      background-color: $hwc-drop-down-search-hover;
+      background-color: $devui-embed-search-bg-hover;
     }
   }
 
@@ -181,10 +181,10 @@
 }
 
 .devui-form-control {
-  color: $dark-1;
-  background-color: $bg-white;
+  color: $devui-text;
+  background-color: $devui-base-bg;
   padding: 5px 10px;
-  border: 1px solid $gray-1;
+  border: 1px solid $devui-form-control-line;
   display: block;
   width: 100%;
   height: 28px;
@@ -197,12 +197,12 @@
     &,
     &:hover,
     &:focus {
-      border-color: $disabled-border;
+      border-color: $devui-disabled-line;
 
       &,
       & > input {
-        color: $disabled-content;
-        background-color: $disabled-bg;
+        color: $devui-disabled-text;
+        background-color: $devui-disabled-bg;
         cursor: not-allowed;
       }
     }
@@ -210,11 +210,11 @@
 
   &:hover,
   &:hover:focus {
-    border-color: $hwc-color-border-hover;
+    border-color: $devui-form-control-line-hover;
   }
 
   &:focus {
-    border-color: $hwc-color-border-active;
+    border-color: $devui-form-control-line-active;
   }
 }
 
@@ -225,25 +225,25 @@
   }
 
   > .devui-dropdown-origin:hover:not([disabled]):not(.disabled):not(.devui-disabled):not(:focus):not(.devui-dropdown-origin-open) {
-    border-color: $hwc-color-border-hover;
+    border-color: $devui-form-control-line-hover;
   }
 
   > .devui-dropdown-origin:focus:not([disabled]):not(.disabled):not(.devui-disabled) {
     outline: none;
-    border-color: $hwc-color-border-active;
+    border-color: $devui-form-control-line-active;
 
     &:not(.devui-select-underlined-border):not(.devui-dropdown-no-border) {
-      box-shadow: 0 2px 5px 0 $dark-1-boxshadow;
+      box-shadow: 0 2px 5px 0 $devui-shadow;
     }
   }
 
   > .devui-dropdown-origin.devui-dropdown-origin-open:not([disabled]):not(.disabled):not(.devui-disabled) {
     outline: none;
-    border-color: $brand-1;
+    border-color: $devui-connected-overlay-line;
     border-radius: 2px 2px 0 0;
 
     &:not(.devui-select-underlined-border):not(.devui-dropdown-no-border) {
-      box-shadow: 0 2px 5px 0 $dark-1-boxshadow;
+      box-shadow: 0 2px 5px 0 $devui-shadow;
     }
   }
 
@@ -255,14 +255,14 @@
     }
 
     &.devui-dropdown-origin-bottom {
-      border-bottom-color: $dividing;
+      border-bottom-color: $devui-dividing-line;
       box-shadow: none;
 
       &::after {
         content: '';
         width: 100%;
         height: 1px;
-        background-color: $dividing;
+        background-color: $devui-dividing-line;
         position: absolute;
         z-index: 1001;
         left: 0;
@@ -271,17 +271,17 @@
     }
 
     &.devui-dropdown-origin-top {
-      border-top-color: $dividing;
+      border-top-color: $devui-dividing-line;
 
       &:not(.devui-select-underlined-border) {
-        box-shadow: 0 2px 5px 0 $dark-1-boxshadow;
+        box-shadow: 0 2px 5px 0 $devui-shadow;
       }
 
       &::after {
         content: '';
         width: 100%;
         height: 1px;
-        background-color: $dividing;
+        background-color: $devui-dividing-line;
         position: absolute;
         z-index: 1001;
         left: 0;
@@ -292,8 +292,8 @@
 }
 
 .devui-dropdown-origin-wrapper {
-  color: $dark-1;
-  background-color: $bg-white;
+  color: $devui-text;
+  background-color: $devui-base-bg;
   min-height: 28px;
   max-height: 52px;
 
@@ -303,7 +303,7 @@
   }
 
   &:not(.devui-select-underlined-border) {
-    border: 1px solid $gray-1;
+    border: 1px solid $devui-form-control-line;
     border-radius: 2px;
   }
 
@@ -335,7 +335,7 @@
     > .devui-dropdown-default:hover,
     > .devui-dropdown-default:active,
     > .devui-dropdown-default:focus {
-      background-color: $disabled-bg;
+      background-color: $devui-disabled-bg;
     }
   }
 
@@ -349,26 +349,26 @@
     > .devui-dropdown-default:hover,
     > .devui-dropdown-default:active,
     > .devui-dropdown-default:focus {
-      background-color: $bg-white;
+      background-color: $devui-base-bg;
     }
   }
 }
 
 // css选择器不可合并，否则css解析器总是会失败
 input::-moz-placeholder {
-  color: $dark-3;
+  color: $devui-placeholder;
 }
 
 input:-ms-input-placeholder {
-  color: $dark-3;
+  color: $devui-placeholder;
 }
 
 input::-webkit-input-placeholder {
-  color: $dark-3;
+  color: $devui-placeholder;
 }
 
 [dTextInput]:not([disabled]):not(.disabled):not(.devui-disabled).error,
 [dTextarea]:not([disabled]):not(.disabled):not(.devui-disabled).error {
-  border-color: $hwc-status-danger-border;
-  background-color: $hwc-status-danger-background;
+  border-color: $devui-danger-line;
+  background-color: $devui-danger-bg;
 }

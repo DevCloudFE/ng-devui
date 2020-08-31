@@ -1,8 +1,7 @@
 import { Directive, OnInit, OnDestroy, Host, HostListener, ElementRef, forwardRef, Renderer2, Output, EventEmitter } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { TwoDatePickerComponent } from './two-datepicker.component';
-import { fromEvent, Subscription } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 @Directive({
   selector: '[dTwoDatePickerEnd]',
@@ -18,7 +17,6 @@ export class TwoDatePickerEndDirective implements OnInit, OnDestroy, ControlValu
   @Output() selectEnd = new EventEmitter<any>();
 
   userHtml;
-  private inputSub: Subscription;
   private switchSub: Subscription;
   private twoDateSub: Subscription;
 
@@ -49,18 +47,17 @@ export class TwoDatePickerEndDirective implements OnInit, OnDestroy, ControlValu
         }
       }
     });
-    this.inputSub = fromEvent(this.el.nativeElement, 'input')
-      .pipe(
-        debounceTime(300)
-      ).subscribe(event => {
-        this.transUserInputToDatePicker(event);
-      });
   }
 
   @HostListener('click', ['$event'])
   public toggleEndPicker(event: MouseEvent) {
     event.stopPropagation();
     this.twoDatePicker.toggle(event, 'end');
+  }
+
+  @HostListener('blur', ['$event'])
+  onBlur($event) {
+    this.transUserInputToDatePicker();
   }
 
   ngOnInit() {
@@ -91,15 +88,21 @@ export class TwoDatePickerEndDirective implements OnInit, OnDestroy, ControlValu
     this.twoDatePicker.selectEnd(null);
   }
 
-  transUserInputToDatePicker(event) {
+  transUserInputToDatePicker() {
     if (!this.twoDatePicker.showTime) {
-      const value = event.target.value;
+      const value = this.el.nativeElement.value;
+      if (!value && !this.twoDatePicker.rangeEnd) {
+        return;
+      }
       if (!value) {
         this.clearEnd();
         return;
       }
       const valueDate = new Date(value);
       const valueFormat = this.twoDatePicker.dateConverter.format(valueDate, this.twoDatePicker.dateFormat, this.twoDatePicker.locale);
+      if (new Date(valueFormat).getTime() === new Date(this.twoDatePicker.rangeEnd).getTime()) {
+        return;
+      }
       if (value && value === valueFormat) {
         this.twoDatePicker.selectEnd(valueDate);
         [this.twoDatePicker.rangeStart, this.twoDatePicker.rangeEnd] = this.twoDatePicker.selectedRange;
@@ -116,9 +119,6 @@ export class TwoDatePickerEndDirective implements OnInit, OnDestroy, ControlValu
     }
     if (this.switchSub) {
       this.switchSub.unsubscribe();
-    }
-    if (this.inputSub) {
-      this.inputSub.unsubscribe();
     }
   }
 }

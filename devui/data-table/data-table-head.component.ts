@@ -86,7 +86,7 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
   fixTableOffsetTop;
   childTables = [];
   dataSourceChange = false;
-  tableScrollbarWidth = 0;
+
   scrollViewEl;
   scrollViewRect;
   fixTableScrollViewEl;
@@ -171,7 +171,6 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
         this.renderFixFakeTableEl();
         this.fixFakeTableEl.style.display = 'none';
         this.fixTableScrollViewEl = this.fixOriginTable.parentNode.parentNode;
-        this.tableScrollbarWidth = this.getScrollbarWidth();
         this.ref.markForCheck();
       }
     }
@@ -1171,16 +1170,6 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
         target.animated = false;
       }, time);
     }
-  }
-
-  getScrollbarWidth() {
-    if (this.fixHeader && this.tableBodyEl) {
-      const inner = this.fixOriginTable.parentNode;
-      const outer = inner.parentNode;
-      // Calculating difference between container's full width and the child width
-      return (outer.offsetWidth - inner.offsetWidth);
-    }
-    return 0;
   }
 
   toggleChildrenTable(event) {

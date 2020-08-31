@@ -12,13 +12,13 @@ li {
 
 li a {
   color: #252b3a;
-  color: var(--dark-1, #252b3a);
+  color: var(--devui-text, #252b3a);
   margin-left: 10px;
 }
 
 li:hover {
   background: #f2f5fc;
-  background: var(--hover-content, #f2f5fc);
+  background: var(--devui-list-item-hover-bg, #f2f5fc);
 }
 
 li:hover a {

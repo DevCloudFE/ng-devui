@@ -1,5 +1,6 @@
 import { ExamplePanelComponent } from './example-panel.component';
 import { GetStartedComponent } from './get-started.component';
+import { ColorComponent } from './color/color.component';
 
 
 export const routesConfig = [
@@ -13,6 +14,11 @@ export const routesConfig = [
     path: 'get-start',
     component: GetStartedComponent,
     data: { nodisplay: true }
+  },
+  {
+    path: 'color',
+    component: ColorComponent,
+    data: {nodisplay: true}
   },
   {
     path: 'accordion', component: ExamplePanelComponent,

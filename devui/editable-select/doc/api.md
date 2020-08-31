@@ -2,9 +2,10 @@
 
 |         参数         |      类型      |                默认                 | 说明                                           | 跳转 Demo                                                         |
 | :------------------: | :------------: | :---------------------------------: | :--------------------------------------------- | ----------------------------------------------------------------- |
+|       appendToBody   |     `boolean`      |       false         | 可选，下拉是否appendToBody                 | [基本用法](/components/editable-select/demo#basic-usage)              |
 |       ngModel        |     `any`      |                 --                  | 可选，绑定选中对象，可双向绑定                 | [基本用法](/components/editable-select/demo#basic-usage)              |
 |    ngModelChange     | `EventEmitter` |                 --                  | 可选，仅支持事件绑定，用于处理选中对象发生变化 |
-|        source        |    `any[]`     |                 --                  | 必选，菜单的条目                               | [基本用法](/components/editable-select/demo#basic-usage)              |
+|        source        |    `any[]`     |                 []                  | 必选，菜单的条目                               | [基本用法](/components/editable-select/demo#basic-usage)              |
 |       disabled       |   `boolean`    |                false                | 可选，值为 true 禁用下拉框                     |
 |     disabledKey      |    `string`    |                 --                  | 可选，设置禁用选项的 Key 值                    | [设置禁用选项](/components/editable-select/demo#disable-data-with-source) |
 |     placeholder      |    `string`    |                 ''                  | 可选，没有选中项的时候提示文字                 |

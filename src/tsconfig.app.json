@@ -10,9 +10,12 @@
       "node_modules/@types"
     ]
   },
+  "files": [
+    "main.ts",
+    "polyfills.ts"
+  ],
   "include": [
-    "**/*.ts",
-    "../devui/**/*.ts"
+    "src/**/*.ts"
   ],
   "exclude": [
     "test.ts",

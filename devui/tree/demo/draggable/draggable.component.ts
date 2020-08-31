@@ -68,7 +68,8 @@ export class DraggableComponent implements OnInit {
     };
   }
 
-  beforeNodeDrop = (dragNodeId, dropNodeId) => {
+  beforeNodeDrop = (dragNodeId, dropNodeId, dropType) => {
+    console.log(dropType);
     return new Promise((resovle) => {
       console.log('dragNodeId: ' + dragNodeId);
       console.log('dropNodeId: ' + dropNodeId);

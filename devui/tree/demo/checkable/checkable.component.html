@@ -17,5 +17,6 @@
     (currentNodeChecked)="currentNodeChecked($event)"
   >
   </d-operable-tree>
+  <d-button (btnClick)="clearCheckedNodes()">清空checked节点</d-button>
   <pre>All Checked Notes:{{ checkNote | json }}</pre>
 </section>

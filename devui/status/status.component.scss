@@ -22,30 +22,30 @@
   }
 
   &.devui-status-bg-success::before {
-    background: $status-green;
+    background: $devui-success;
   }
 
   &.devui-status-bg-error::before {
-    background: $status-red;
+    background: $devui-danger;
   }
 
   &.devui-status-bg-warning::before {
-    background: $status-yellow;
+    background: $devui-warning;
   }
 
   &.devui-status-bg-waiting::before {
-    background: $status-waiting;
+    background: $devui-waiting;
   }
 
   &.devui-status-bg-running::before {
-    background: $status-blue;
+    background: $devui-info;
   }
 
   &.devui-status-bg-invalid::before {
-    background: $gray-2;
+    background: $devui-dividing-line;
   }
 
   &.devui-status-bg-initial::before {
-    background: $status-initial;
+    background: $devui-initial;
   }
 }

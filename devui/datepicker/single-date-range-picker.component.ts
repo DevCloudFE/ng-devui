@@ -131,7 +131,7 @@ export class SingleDateRangePickerComponent extends SingleDatepickerComponent im
       this.selectingRange = false;
       this.rangeEnd = this.convertDate(date);
       if (!!this.rangeStart && !!this.rangeEnd) {
-        this.rangeChange(this.ensureRangeValueOrder([this.rangeStart, this.rangeEnd]));
+        this.rangeChange(this.ensureRangeValueOrder([this.rangeStart, this.rangeEnd]), SelectDateRangeChangeReason.date);
       }
     }
   }
@@ -158,19 +158,20 @@ export class SingleDateRangePickerComponent extends SingleDatepickerComponent im
     }
   }
 
-  rangeChange(range) {
+  rangeChange(range, reason?) {
     this.selectedRange = range;
-    this.notifyValueChange(range);
+    this.notifyValueChange(range, reason);
   }
 
   writeValue(selectedRange: any): void {
     this.selectedRange = selectedRange;
   }
 
-  protected notifyValueChange(selectedRange: Date[]) {
+  protected notifyValueChange(selectedRange: Date[], reason?) {
+    const currentReason = typeof reason === 'number' ? reason : SelectDateRangeChangeReason.time;
     this.onChange(selectedRange);
     this.rangeSelected.emit({
-      reason: SelectDateRangeChangeReason.time,
+      reason: currentReason,
       selectedRange: selectedRange
     });
   }
@@ -179,6 +180,9 @@ export class SingleDateRangePickerComponent extends SingleDatepickerComponent im
     let rangeSource = this.selectedRange;
     if (this.selectingRange) {
       rangeSource = [this.rangeStart, this.previewEnd];
+    }
+    if ((!Array.isArray(rangeSource))) {
+      return;
     }
     return rangeSource.some((selectedDate) => {
       if (!selectedDate || !date) {
@@ -190,6 +194,19 @@ export class SingleDateRangePickerComponent extends SingleDatepickerComponent im
         date.getDate() === selectedDate.getDate()
       );
     });
+  }
+
+  isBetweenDay(date) {
+    if (Array.isArray(this.selectedRange) && this.selectedRange.every(day => !!day)) {
+      const index = this.selectedRange.findIndex(day => {
+        return date.getFullYear() === day.getFullYear() &&
+        date.getMonth() === day.getMonth() &&
+        date.getDate() === day.getDate();
+      });
+      return ['devui-day-start', 'devui-day-end'][index];
+    } else {
+      return;
+    }
   }
 
   isDisabledTime() {
@@ -231,6 +248,62 @@ export class SingleDateRangePickerComponent extends SingleDatepickerComponent im
       }
     }
     this.timeChange();
+  }
+
+  fixTime(event, type) {
+    // 由于keypress不监听微软输入法需要使用keydown
+    // 而keydown中微软输入法的key是'Process'，且keydown没有charCode，所以需要用code判断
+    // 故退格和输入使用同一个事件
+    let timeType: string;
+    const min = 0;
+    let max = 59;
+    switch (type) {
+      case 'h': {
+        timeType = 'currentHour';
+        max = 23;
+        break;
+      }
+      case 'm': {
+        timeType = 'currentMinute';
+        break;
+      }
+      case 's': {
+        timeType = 'currentSecond';
+        break;
+      }
+    }
+    let value = event.target['value'];
+    const selectionStart = event.target['selectionStart'];
+    const selectionEnd = event.target['selectionEnd'];
+    // 是数字的时候再处理，分为小键盘和数字键
+    if (/^(Digit|Numpad)\d$/.test(event.code)) {
+      event.preventDefault();
+      let input;
+      if (event['clipboardData']) {
+        input = event['clipboardData'].getData('text');
+      } else if (event['code']) {
+        input = event['code'].slice(event['code'].length - 1);
+      }
+      value = value.substring(0, selectionStart) + input + value.substring(selectionEnd);
+      if (value.length === 3 && value.indexOf('0') === 0) {
+        value = value.slice(1);
+      }
+    } else if (event.keyCode === 8) {
+      event.preventDefault();
+      value = value.substring(0, selectionStart - 1) + value.substring(selectionEnd);
+      if (value.length < 2) {
+        value = '0' + value;
+      }
+    } else if (!(event.keyCode >= 37 && event.keyCode <= 40)) {
+      // 如果不是上下左右，就阻拦，执行自己的处理
+      event.preventDefault();
+    }
+    if (/^(Digit|Numpad)\d$/.test(event.code) || event.keyCode === 8) {
+      if (Number(value) >= min && Number(value) <= max) {
+        this[timeType] = value;
+        this.timeChange();
+      }
+    }
   }
 
   timeChange() {

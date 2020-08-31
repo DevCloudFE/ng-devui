@@ -7,5 +7,5 @@
       "lodash-es": "lodash-es"
     }
   },
-  "whitelistedNonPeerDependencies": ["@angular/cdk","date-fns", "lodash-es", "popper.js"]
+  "whitelistedNonPeerDependencies": ["@angular/cdk","date-fns", "lodash-es", "popper.js", "enquire.js", "css-vars-ponyfill", "mime-db"]
 }

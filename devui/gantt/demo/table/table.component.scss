@@ -16,7 +16,7 @@
     height: 32px;
     min-width: 32px;
     line-height: 32px;
-    background: var(--block-bg-white, #ffffff);
+    background: var(--devui-block, #ffffff);
     box-shadow: 0 2px 10px 0 rgba(41, 48, 64, 0.1);
     border-radius: 2px;
     cursor: pointer;
@@ -43,7 +43,7 @@
 ::ng-deep .devui-gantt-tips {
   & .title {
     font-size: 14px;
-    color: var(--dark-1, #252b3a);
+    color: var(--devui-text, #252b3a);
     line-height: 24px;
     font-weight: bold;
     margin-bottom: 15px;
@@ -51,16 +51,16 @@
 
   & .content {
     font-size: 12px;
-    color: var(--dark-1, #252b3a);
+    color: var(--devui-text, #252b3a);
     line-height: 24px;
   }
 }
 
 .min-height-stretch-row {
-  background: var(--white, #ffffff) !important;
+  background: var(--devui-base-bg, #ffffff) !important;
 
   &:hover {
-    background: var(--white, #ffffff) !important;
+    background: var(--devui-base-bg, #ffffff) !important;
   }
 
   & td {
@@ -90,6 +90,6 @@ tr:hover {
   top: 0;
   bottom: 0;
   width: 3px;
-  border-right: 3px solid var(--gray-1, #adb0b8);
+  border-right: 3px solid var(--devui-line, #adb0b8);
   cursor: col-resize;
 }

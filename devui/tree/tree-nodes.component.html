@@ -1,9 +1,22 @@
-<ng-template
-  *ngFor="let treeNode of treeList; trackBy: trackByFn"
-  [ngTemplateOutlet]="treeNodesRef"
-  [ngTemplateOutletContext]="{
+<ng-container *ngIf="virtualScroll">
+  <ng-template
+    *cdkVirtualFor="let treeNode of treeList | filterNodesPipe: 'hideInVirtualScroll'; trackBy: trackByFn"
+    [ngTemplateOutlet]="treeNodesRef"
+    [ngTemplateOutletContext]="{
           $implicit: this,
            treeNode: treeNode,
            treeFactory: treeFactory}"
->
-</ng-template>
+  >
+  </ng-template>
+</ng-container>
+<ng-container *ngIf="!virtualScroll">
+  <ng-template
+    *ngFor="let treeNode of treeList; trackBy: trackByFn"
+    [ngTemplateOutlet]="treeNodesRef"
+    [ngTemplateOutletContext]="{
+          $implicit: this,
+           treeNode: treeNode,
+           treeFactory: treeFactory}"
+  >
+  </ng-template>
+</ng-container>

@@ -8,7 +8,7 @@
 
 .devui-gantt-scale {
   display: inline-block;
-  color: $dark-3;
+  color: $devui-placeholder; // TODO: Color-Question
   text-align: center;
   position: relative;
   height: 36px;
@@ -44,7 +44,7 @@
     white-space: nowrap;
 
     &.milestone {
-      color: $status-green;
+      color: $devui-success;
     }
   }
 
@@ -56,18 +56,18 @@
 
     & .border-left {
       height: 18px;
-      border-left: 1px solid $brand-3;
+      border-left: 1px solid $devui-list-item-selected-bg;
     }
 
     & .scale-highlight {
       position: absolute;
       height: 18px;
       border-radius: 2px;
-      background-color: $brand-1;
+      background-color: $devui-brand;
       padding: 0 5px 0 5px;
 
       & div {
-        color: $bg-white;
+        color: $devui-base-bg;
         font-size: 12px;
         font-weight: normal;
       }
@@ -86,7 +86,7 @@
     width: 18px;
     height: 18px;
     margin-left: 16px;
-    border: 1px solid $brand-3;
+    border: 1px solid $devui-list-item-selected-bg; // TODO: Color-Question
     cursor: pointer;
 
     & div {
@@ -107,7 +107,7 @@
   bottom: 0;
   width: 2px;
   z-index: 1;
-  background: $gray-1;
+  background: $devui-line;
   opacity: 0.5;
 
   &.today {
@@ -129,7 +129,7 @@
 
   &.milestone {
     opacity: 0.2;
-    background: $status-green;
+    background: $devui-success;
 
     &.day {
       margin-left: 24px;

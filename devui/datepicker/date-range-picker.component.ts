@@ -3,7 +3,6 @@ import {
   Component,
   forwardRef,
   OnInit,
-  AfterViewInit,
   Input,
   Output,
   EventEmitter,
@@ -22,8 +21,8 @@ import { DatePickerConfigService as DatePickerConfig } from './date-picker.confi
 import { I18nService, I18nInterface } from 'ng-devui/i18n';
 import { DefaultDateConverter } from 'ng-devui/utils';
 import { cornerFadeInOut } from 'ng-devui/utils';
-import { Subject, fromEvent, Subscription } from 'rxjs';
-import { distinctUntilChanged, debounceTime } from 'rxjs/operators';
+import { Subject, Subscription } from 'rxjs';
+import { distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: '[dDateRangePicker]',
@@ -41,8 +40,8 @@ import { distinctUntilChanged, debounceTime } from 'rxjs/operators';
                  (positionChange)="onPositionChange($event)">
       <div [@cornerFadeInOut]="isOpen ? datepickerPosition : 'void'" class="devui-date-range-wrapper devui-dropdown-overlay">
         <div class="devui-date-range-title">
-          <span>开始日期</span>
-          <span>结束日期</span>
+          <span>{{i18nText?.startDate}}</span>
+          <span>{{i18nText?.endDate}}</span>
         </div>
         <div class="devui-date-range-picker">
           <d-datepicker-range-single [locale]="locale || i18nLocale" class="devui-date-picker"
@@ -89,7 +88,7 @@ import { distinctUntilChanged, debounceTime } from 'rxjs/operators';
     cornerFadeInOut
   ]
 })
-export class DateRangePickerComponent implements OnInit, AfterViewInit, ControlValueAccessor, OnDestroy {
+export class DateRangePickerComponent implements OnInit, ControlValueAccessor, OnDestroy {
   @Input() locale: string;
   @Input() cssClass: string;
   @Input() disabled: boolean;
@@ -109,10 +108,10 @@ export class DateRangePickerComponent implements OnInit, AfterViewInit, ControlV
   private _minDate: Date;
   private _showTime: boolean;
   private clickShow = false;
-  private inputSub: Subscription;
   public currentCalendars = [null, null];
   public cdkConnectedOverlayOrigin: any;
   public i18nLocale: I18nInterface['locale'];
+  public i18nText: I18nInterface['datePicker'];
   private i18nSubscription: Subscription;
   hoverOnDate: Subject<object> = new Subject<object>();
   datepickerPosition: VerticalConnectionPos = 'bottom';
@@ -132,10 +131,10 @@ export class DateRangePickerComponent implements OnInit, AfterViewInit, ControlV
   @Input() set dateConfig(dateConfig: any) {
     if (this.checkDateConfig(dateConfig)) {
       this._dateConfig = dateConfig;
-      this._dateFormat = this.showTime ? dateConfig.format.time : dateConfig.format.date;
     } else {
       this._dateConfig = this.datePickerConfig.dateConfig;
     }
+    this._dateFormat = this.showTime ? this._dateConfig.format.time : this._dateConfig.format.date;
   }
 
   get dateConfig() {
@@ -143,7 +142,7 @@ export class DateRangePickerComponent implements OnInit, AfterViewInit, ControlV
   }
 
   @Input() set dateFormat(dateFormat: string) {
-    if (this._dateFormat !== dateFormat) {
+    if (dateFormat && this._dateFormat !== dateFormat) {
       this._dateFormat = dateFormat;
     }
   }
@@ -214,18 +213,10 @@ export class DateRangePickerComponent implements OnInit, AfterViewInit, ControlV
   ngOnInit() {
     this._minDate = this.minDate ? new Date(this.minDate) : new Date(this.dateConfig.min, 0, 1, 0, 0, 0);
     this._maxDate = this.maxDate ? new Date(this.maxDate) : new Date(this.dateConfig.max, 11, 31, 23, 59, 59);
+    this._dateFormat = this.showTime ? this.dateConfig.format.time : this.dateConfig.format.date;
     this.setI18nText();
     this.updateCdkConnectedOverlayOrigin();
     this.subscribeHoverActions();
-  }
-
-  ngAfterViewInit() {
-    this.inputSub = fromEvent(this.elementRef.nativeElement, 'input')
-      .pipe(
-        debounceTime(300)
-      ).subscribe(event => {
-        this.transUserInputToDatepicker(event);
-      });
   }
 
   registerOnChange(fn: any): void {
@@ -248,21 +239,23 @@ export class DateRangePickerComponent implements OnInit, AfterViewInit, ControlV
 
   setI18nText() {
     this.i18nLocale = this.i18n.getI18nText().locale;
+    this.i18nText = this.i18n.getI18nText().datePicker;
     this.i18nSubscription = this.i18n.langChange().subscribe((data) => {
       this.i18nLocale = data.locale;
+      this.i18nText = data.datePicker;
     });
   }
 
-  rangeChange(data, reason?) {
-    const currentReason = typeof reason === 'number' ? reason : SelectDateRangeChangeReason.date;
+  rangeChange(data) {
+    const currentReason = typeof data.reason === 'number' ? data.reason : SelectDateRangeChangeReason.date;
     this.chooseDate(data.selectedRange, currentReason);
   }
 
-  chooseDate = (range, reason?) => {
+  chooseDate = (range, reason?, hide = true) => {
     const currentReason = typeof reason === 'number' ? reason : SelectDateRangeChangeReason.custom;
     this.writeValue(range);
     this.notifyValueChange(range, currentReason);
-    if (!this.showTime && this.hideOnRangeSelected) { this.hide(); }
+    if (!this.showTime && this.hideOnRangeSelected && hide) { this.hide(); }
   }
 
   updateCdkConnectedOverlayOrigin() {
@@ -312,6 +305,7 @@ export class DateRangePickerComponent implements OnInit, AfterViewInit, ControlV
   @HostListener('blur', ['$event'])
   onBlur($event) {
     this.onTouched();
+    this.transUserInputToDatepicker();
   }
 
   @HostListener('document:click', ['$event'])
@@ -423,11 +417,14 @@ export class DateRangePickerComponent implements OnInit, AfterViewInit, ControlV
     this.hide();
   }
 
-  private transUserInputToDatepicker(event) {
+  private transUserInputToDatepicker() {
     if (!this.showTime && !this.disabled) {
-      const value = event.target.value;
+      const value = this.elementRef.nativeElement.value;
+      if (!value && !this.selectedRange.every(val => !!val)) {
+        return;
+      }
       if (!value) {
-        this.clearAll();
+        this.clearAll(undefined, false);
         return;
       }
       let valueList = value.split(this.splitter);
@@ -446,6 +443,13 @@ export class DateRangePickerComponent implements OnInit, AfterViewInit, ControlV
         valueList = curValueList;
       }
       // 不管拆出来是6还是2个，都需要组装成2个日期
+      if (
+        valueList.length === 2 &&
+        valueList.every(val => !!val) &&
+        valueList.every((val, index) => new Date(val).getTime() === this.selectedRange[index].getTime())
+      ) {
+        return;
+      }
       if (valueList.length === 2 && valueList.every(val => !!val)) {
         if (valueList[0] !== valueList[1]) {
           // 判断前后两日期是否相等
@@ -466,8 +470,10 @@ export class DateRangePickerComponent implements OnInit, AfterViewInit, ControlV
           return;
         }
         if (valueFormat && value === valueFormat) {
-          this.chooseDate(valueList);
+          this.chooseDate(valueList, undefined, false);
         }
+      } else {
+        this.writeValue(this.selectedRange);
       }
     } else {
       this.writeValue(this.selectedRange);
@@ -476,20 +482,17 @@ export class DateRangePickerComponent implements OnInit, AfterViewInit, ControlV
 
   ngOnDestroy(): void {
     this.hide();
-    if (this.inputSub) {
-      this.inputSub.unsubscribe();
-    }
     if (this.i18nSubscription) {
       this.i18nSubscription.unsubscribe();
     }
   }
 
-  clearAll = (reason?: SelectDateRangeChangeReason) => {
+  clearAll = (reason?: SelectDateRangeChangeReason, hide?: boolean) => {
     if (this.disabled) {
       return;
     }
     const currentReason = typeof reason === 'number' ? reason : SelectDateRangeChangeReason.custom;
-    this.chooseDate([null, null], currentReason);
+    this.chooseDate([null, null], currentReason, hide);
   }
 
 }

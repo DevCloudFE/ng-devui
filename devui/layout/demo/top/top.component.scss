@@ -5,7 +5,7 @@ d-header {
   position: relative;
   height: 40px;
   background-color: #333854;
-  color: $font-white;
+  color: $devui-light-text;
 
   .logo {
     position: absolute;
@@ -13,7 +13,7 @@ d-header {
     margin-left: 40px;
     height: 40px;
     width: 120px;
-    color: $font-white;
+    color: $devui-light-text;
     font-size: 16px;
     line-height: 40px;
 
@@ -32,20 +32,20 @@ d-header {
 d-content {
   padding: 0 40px;
   height: 300px;
-  background-color: #eeeeee;
+  background-color: $devui-global-bg;
 
   d-breadcrumb {
     margin: 8px 0;
   }
 
   .inner-content {
-    background-color: $bg-white;
+    background-color: $devui-base-bg;
     height: 100%;
   }
 }
 
 d-footer {
-  color: $font-white;
-  background-color: $huawei-bg;
+  color: $devui-light-text;
+  background-color: $devui-base-bg-dark;
   padding: 9px 24px;
 }

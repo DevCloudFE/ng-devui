@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, ContentChildren, QueryList, HostBinding,
-  OnChanges, AfterContentInit, SimpleChanges, ElementRef, OnDestroy } from '@angular/core';
+  OnChanges, AfterContentInit, SimpleChanges, ElementRef, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { SplitterPaneComponent } from './splitter-pane.component';
 import { SplitterOrientation } from './splitter.types';
 import { SplitterService } from './splitter.service';
@@ -22,6 +22,8 @@ export class SplitterComponent implements OnChanges, AfterContentInit, OnDestroy
   @Input() splitBarSize = '2px';
   // pane设置为不可调整大小时，生效
   @Input() disabledBarSize = '1px';
+  // 是否显示展开/收缩按钮
+  @Input() showCollapseButton = true;
 
   @HostBinding('class') get class() {
     return 'devui-splitter devui-splitter-' + this.orientation;
@@ -30,7 +32,7 @@ export class SplitterComponent implements OnChanges, AfterContentInit, OnDestroy
   @ContentChildren(SplitterPaneComponent) panes: QueryList<SplitterPaneComponent>;
   paneChangesSubscription: Subscription;
 
-  constructor(private el: ElementRef, private splitter: SplitterService) {
+  constructor(private el: ElementRef, private splitter: SplitterService, private cdr: ChangeDetectorRef) {
 
   }
 
@@ -45,6 +47,7 @@ export class SplitterComponent implements OnChanges, AfterContentInit, OnDestroy
     // contentChildren 变化时，触发重新设置pane
     this.paneChangesSubscription = this.panes.changes.subscribe((panes) => {
       this.reconfigure();
+      this.cdr.detectChanges();
     });
   }
 

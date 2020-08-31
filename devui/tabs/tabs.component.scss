@@ -23,7 +23,7 @@
       line-height: 30px;
       background-color: transparent;
       padding: 0;
-      color: $dark-1;
+      color: $devui-text;
     }
 
     & > a:hover,
@@ -34,7 +34,7 @@
 
     &.disabled {
       a {
-        color: $disabled-content;
+        color: $devui-disabled-text;
         cursor: not-allowed;
       }
     }
@@ -42,7 +42,7 @@
     &.active,
     &:hover:not(.disabled) {
       & > a {
-        color: $brand-1;
+        color: $devui-brand;
       }
     }
   }
@@ -59,7 +59,7 @@
 
   li.active::after {
     width: 100%;
-    background: $brand-1;
+    background: $devui-brand;
   }
 }
 
@@ -71,9 +71,9 @@
 
   > li {
     cursor: pointer;
-    border: 1px solid $gray-1;
+    border: 1px solid $devui-line;
     border-left-width: 0;
-    background-color: $bg-white;
+    background-color: $devui-base-bg;
     float: left;
 
     &:first-child {
@@ -88,7 +88,7 @@
     & > a {
       cursor: pointer;
       border: none;
-      color: $dark-1;
+      color: $devui-text;
       line-height: 26px;
       padding: 0 15px;
 
@@ -100,10 +100,10 @@
     }
 
     &.disabled {
-      border-color: $disabled-border;
+      border-color: $devui-disabled-line;
 
       a {
-        color: $disabled-content;
+        color: $devui-disabled-text;
         cursor: not-allowed;
       }
     }
@@ -111,10 +111,10 @@
     &.active,
     &:hover:not(.disabled) {
       & > a {
-        color: $font-white;
+        color: $devui-light-text;
 
         &:hover {
-          color: $font-white;
+          color: $devui-light-text;
           background: transparent;
         }
       }
@@ -131,24 +131,24 @@
     }
 
     &.active {
-      background-color: $brand-1;
-      border-color: $brand-1;
+      background-color: $devui-brand;
+      border-color: $devui-brand;
 
       &:not(:first-child)::before {
-        background-color: $brand-1;
+        background-color: $devui-brand;
       }
 
       & + li::before {
-        background-color: $brand-1;
+        background-color: $devui-brand;
       }
     }
 
     &:hover:not(.active):not(.disabled) {
-      background-color: $hover-control;
-      border-color: $hover-control;
+      background-color: $devui-brand-active;
+      border-color: $devui-brand-active;
 
       &:not(:first-child)::before {
-        background-color: $hover-control;
+        background-color: $devui-brand-active;
       }
     }
   }
@@ -165,7 +165,7 @@
 }
 
 .devui-nav-tabs:not(.devui-nav-stacked) {
-  border-bottom: 1px $gray-1 solid;
+  border-bottom: 1px $devui-line solid;
 
   li {
     float: left;

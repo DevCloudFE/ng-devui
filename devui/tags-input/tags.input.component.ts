@@ -1,18 +1,26 @@
 import { Component, ElementRef, EventEmitter, HostListener, Input,
-  OnChanges, OnDestroy, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+  OnChanges, OnDestroy, OnInit, Output, SimpleChanges, ViewChild, forwardRef } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { isEmpty } from 'lodash-es';
 import { BehaviorSubject, fromEvent, Observable, of } from 'rxjs';
-import { debounceTime, filter, map, switchMap } from 'rxjs/operators';
+import { debounceTime, map, switchMap } from 'rxjs/operators';
 import { I18nService, I18nInterface } from 'ng-devui/i18n';
 import { Subscription } from 'rxjs';
 @Component({
   selector: 'd-tags-input',
   templateUrl: './tags.input.component.html',
   styleUrls: ['./tags.input.component.scss'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => TagsInputComponent),
+      multi: true,
+    },
+  ],
   exportAs: 'TagsInput'
 })
 
-export class TagsInputComponent implements OnInit, OnDestroy, OnChanges {
+export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestroy, OnChanges {
   /**
   * 【必选】记录输入的标签
   */
@@ -94,9 +102,28 @@ export class TagsInputComponent implements OnInit, OnDestroy, OnChanges {
   public i18nCommonText: I18nInterface['common'];
   // 下拉选中suggestionList的item索引
   selectIndex = 0;
+  private onChange = (_: any) => null;
+  private onTouch = () => null;
 
   constructor(private i18n: I18nService) {
     this.setI18nText();
+  }
+
+  writeValue(value: any): void {
+    if (!value) {
+      return;
+    }
+    this.tags = value;
+    this.isReduce = false;
+    this.reduceSuggestionList();
+  }
+
+  registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: any): void {
+    this.onTouch = fn;
   }
 
   set showSuggestionList(val) {
@@ -262,6 +289,7 @@ export class TagsInputComponent implements OnInit, OnDestroy, OnChanges {
         return;
       }
       this.tags.push(this.availableOptions[index]);
+      this.onChange(this.tags);
       this.valueChange.emit(this.availableOptions[index]);
       const suggestionListIndex = this.suggestionList.findIndex(item =>
         this.caseSensitivity ? item[this.displayProperty]  === value[this.displayProperty] :
@@ -280,6 +308,7 @@ export class TagsInputComponent implements OnInit, OnDestroy, OnChanges {
     this.suggestionList = this.availableOptions;
     const tag = this.tags[index];
     this.tags.splice(index, 1);
+    this.onChange(this.tags);
     this.valueChange.emit(tag);
   }
 
@@ -313,8 +342,8 @@ export class TagsInputComponent implements OnInit, OnDestroy, OnChanges {
           const obj = {};
           obj[this.displayProperty] = this.newTag;
           this.tags.push(obj);
+          this.onChange(this.tags);
           this.valueChange.emit(this.newTag);
-          // this.availableOptions = this.suggestionList;
         }
         setTimeout(() => {
           // 放在timeout里是因为如果用空格添加tag，会导致添加之后输入框里有个空格。

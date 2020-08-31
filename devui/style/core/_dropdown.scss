@@ -52,13 +52,13 @@
   background-clip: padding-box;
   border-radius: 2px;
   list-style: none;
-  background-color: $dropdown-overlay;
-  box-shadow: 0 2px 5px 0 $dark-1-boxshadow;
+  background-color: $devui-connected-overlay-bg;
+  box-shadow: 0 2px 5px 0 $devui-shadow;
   outline: none;
 
   &.devui-dropdown-overlay,
   &.devui-dropdown-overlay.popper-container {
-    border: 1px solid $brand-1;
+    border: 1px solid $devui-brand;
   }
 
   &.devui-dropdown-overlay.popper-container {
@@ -87,7 +87,7 @@
   }
 
   > .disabled > a {
-    color: $disabled-content;
+    color: $devui-disabled-text;
     cursor: not-allowed;
 
     &:hover,
@@ -98,24 +98,24 @@
 
   .devui-dropdown-item:not(.disabled) {
     &:hover:not(:active) {
-      background-color: $hover-content;
-      color: $hover-control;
+      background-color: $devui-list-item-hover-bg;
+      color: $devui-list-item-hover-text;
     }
 
     &:active:hover {
-      background-color: $hwc-color-bg-active;
-      color: $font-white;
+      background-color: $devui-list-item-active-bg;
+      color: $devui-list-item-active-text;
     }
 
     &.devui-dropdown-bg {
       //箭头选中
-      background-color: $hover-content;
-      color: $hover-control;
+      background-color: $devui-list-item-hover-bg;
+      color: $devui-list-item-hover-text;
     }
 
     &.active {
-      color: $brand-1;
-      background-color: $brand-3;
+      color: $devui-list-item-active-text;
+      background-color: $devui-list-item-active-bg;
     }
   }
 }
@@ -163,8 +163,8 @@
   background-image: none;
   text-decoration: none;
   cursor: pointer;
-  background-color: $dropdown-overlay;
-  color: $dark-1;
+  background-color: $devui-connected-overlay-bg;
+  color: $devui-text;
   display: flex;
   align-items: center;
   box-shadow: none;
@@ -177,38 +177,38 @@
 
   &:active:hover,
   &:focus {
-    color: $hover-control;
+    color: $devui-brand-active;
   }
 }
 
 .devui-dropdown {
   .devui-dropdown-default {
-    background-color: $bg-white;
-    color: $dark-1;
-    border-color: $gray-1;
+    background-color: $devui-base-bg;
+    color: $devui-text;
+    border-color: $devui-form-control-line;
 
     &:active,
     &:focus,
     &:hover {
-      border-color: $dark-2;
+      border-color: $devui-form-control-line-hover;
     }
   }
 
   .devui-dropdown-menu {
-    background-color: $bg-white;
-    box-shadow: 0 2px 5px 0 $dark-1-boxshadow;
+    background-color: $devui-connected-overlay-bg;
+    box-shadow: 0 2px 5px 0 $devui-shadow;
 
     > li > a:not(.disabled) {
-      color: $dark-1;
+      color: $devui-text;
 
       &:hover,
       &:focus {
-        background-color: $hover-content;
+        background-color: $devui-list-item-hover-bg;
       }
     }
 
     > .disabled > a {
-      color: $disabled-content;
+      color: $devui-disabled-text;
       cursor: not-allowed;
 
       &:hover,

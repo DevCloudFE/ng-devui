@@ -1,0 +1,37 @@
+<div class="row">
+  <d-search style="width: 300px;" [placeholder]="'search your node...'" [isKeyupSearch]="true" (searchFn)="onKeyUp($event)"></d-search>
+</div>
+
+<div class="row">
+  <d-search style="width: 300px;" [placeholder]="'filter your node...'" [isKeyupSearch]="true" (searchFn)="onKeyUp2($event)"></d-search>
+</div>
+
+<d-operable-tree
+  #operableTree
+  [tree]="data"
+  [treeNodeIdKey]="'id'"
+  [treeNodeChildrenKey]="'children'"
+  [virtualScroll]="true"
+  [virtualScrollHeight]="'600px'"
+  [minBufferPx]="600"
+  [maxBufferPx]="1200"
+  (nodeDeleted)="onOperableNodeDeleted($event)"
+  (nodeSelected)="onOperableNodeSelected($event)"
+  (nodeToggled)="onOperableNodeToggled($event)"
+  (nodeChecked)="onOperableNodeChecked($event)"
+  (nodeEdited)="onOperableNodeEdited($event)"
+  [virtualScrollHeight]="'600px'"
+  [checkable]="true"
+  [addable]="true"
+  [editable]="true"
+  [deletable]="true"
+  [draggable]="true"
+  [dropType]="dropType"
+  [beforeAddNode]="beforeAddNode"
+  [beforeDeleteNode]="beforeDeleteNode"
+  [beforeEditNode]="beforeEditNode"
+  [postAddNode]="postAddNode"
+  (editValueChange)="editValueChange($event)"
+  (nodeOnDrop)="onDrop($event)"
+>
+</d-operable-tree>

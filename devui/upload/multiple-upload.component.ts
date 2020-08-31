@@ -97,7 +97,7 @@ export class MultipleUploadComponent implements OnDestroy {
     this.multipleUploadViewComponent.fileUploaders.forEach(fileUploader => {
       totalFileSize += fileUploader.file.size;
       const checkResult = this.selectFiles._validateFiles(fileUploader.file, this.fileOptions.accept, fileUploader.uploadOptions);
-      if (checkResult.checkError) {
+      if (checkResult && checkResult.checkError) {
         this.multipleUploadViewComponent.deletePreUploadFile(fileUploader.file);
         this.alertMsg(checkResult.errorMsg);
         return;
@@ -106,7 +106,7 @@ export class MultipleUploadComponent implements OnDestroy {
 
     if (this.oneTimeUpload) {
       const checkResult = this.selectFiles.checkAllFilesSize(totalFileSize, this.uploadOptions.maximumSize);
-      if (checkResult.checkError) {
+      if (checkResult && checkResult.checkError) {
         this.multipleUploadViewComponent.removeFiles();
         this.alertMsg(checkResult.errorMsg);
       }

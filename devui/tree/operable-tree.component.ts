@@ -18,14 +18,13 @@ import {
 } from './tree-factory.class';
 import { TreeComponent } from './tree.component';
 import { ICheckboxInput, IDropType } from './tree.types';
-import { TreeMaskService } from './tree-mask.service';
 import { I18nService, I18nInterface } from 'ng-devui/i18n';
 import { Subscription } from 'rxjs';
 @Component({
   selector: 'd-operable-tree',
   templateUrl: './operable-tree.component.html',
   styleUrls: ['./operable-tree.component.scss'],
-  exportAs: 'dOperableTreeComponent',
+  exportAs: 'dOperableTreeComponent'
 })
 export class OperableTreeComponent implements AfterViewInit, OnDestroy {
   @Input() tree: Array<ITreeItem>;
@@ -38,6 +37,8 @@ export class OperableTreeComponent implements AfterViewInit, OnDestroy {
   @Input() iconParentClose: string;
   @Input() iconLeaf: string;
   @Input() showLoading: boolean;
+  @Input() loadingTemplateRef: TemplateRef<any>;
+  @Input() treeNodesRef: TemplateRef<any>;
   @Input() checkable = true;
   @Input() deletable = false;
   @Input() addable = false;
@@ -46,13 +47,18 @@ export class OperableTreeComponent implements AfterViewInit, OnDestroy {
   @Input() checkboxInput: ICheckboxInput = {};
   @Input() beforeAddNode: (node: TreeNode) => Promise<any>;
   @Input() beforeDeleteNode: (node: TreeNode) => Promise<any>;
-  @Input() beforeNodeDrop: (drageNodeId: string, dropNodeId: string) => Promise<any>;
+  @Input() beforeNodeDrop: (drageNodeId: string, dropNodeId: string, dropType: string) => Promise<any>;
   @Input() beforeEditNode: (node: TreeNode) => Promise<any>;
   @Input() canActivateNode = true;
   @Input() canActivateParentNode = true;
   @Input() treeNodeTitleKey = 'title';
   @Input() postAddNode: (node: TreeNode) => Promise<any>;
   @Input() iconTemplatePosition: string;
+  @Input() virtualScroll = false;
+  @Input() virtualScrollHeight = '800px';
+  @Input() itemSize = 38;
+  @Input() minBufferPx = 760;
+  @Input() maxBufferPx = 1140;
   @Input() checkableRelation: 'upward' | 'downward' | 'both' | 'none' = 'both';
   @Output() nodeSelected: EventEmitter<any> = new EventEmitter<any>();
   @Output() nodeDblClicked: EventEmitter<any> = new EventEmitter<any>();
@@ -83,7 +89,6 @@ export class OperableTreeComponent implements AfterViewInit, OnDestroy {
     timeout: null
   };
   @ViewChildren('treeNodeContent') treeNodeContent: QueryList<ElementRef>;
-  elementAsMask: any;
   i18nCommonText: I18nInterface['common'];
   i18nSubscription: Subscription;
   dragState = {
@@ -101,9 +106,7 @@ export class OperableTreeComponent implements AfterViewInit, OnDestroy {
       this.i18nCommonText = data.common;
     });
   }
-
   ngAfterViewInit() {
-    this.elementAsMask = TreeMaskService.creatMaskElement();
 
   }
 
@@ -112,22 +115,6 @@ export class OperableTreeComponent implements AfterViewInit, OnDestroy {
       event.preventDefault();
       this.nodeRightClicked.emit({ node: node, event: event });
     }
-  }
-
-  addBackGround(e, treeNode) {
-    if (treeNode.data.disabled || treeNode.data.disableSelect) {
-      return;
-    }
-    e.stopPropagation();
-    TreeMaskService.addMask(e.target.parentNode, this.elementAsMask, TreeMaskService.calcWidth(e.target.parentNode));
-  }
-
-  removeBackGround(e, treeNode) {
-    if (treeNode.data.disabled || treeNode.data.disableSelect) {
-      return;
-    }
-    e.stopPropagation();
-    TreeMaskService.removeMask(e.target.parentNode, this.elementAsMask);
   }
 
   onDragstart(event, treeNode) {
@@ -230,7 +217,7 @@ export class OperableTreeComponent implements AfterViewInit, OnDestroy {
           }
           let dragResult = Promise.resolve(true);
           if (this.beforeNodeDrop) {
-            dragResult = this.beforeNodeDrop(dragNodeId, dropNode.id);
+            dragResult = this.beforeNodeDrop(dragNodeId, dropNode.id, this.dragState.dropType);
           }
 
           dragResult.then(() => {
@@ -250,13 +237,14 @@ export class OperableTreeComponent implements AfterViewInit, OnDestroy {
                 this.handlerDropInner(movingNodeIndex, movingNode, dropNode, originalParentNode);
                 break;
             }
+            this.treeFactory.renderFlattenTree();
           });
         }
       } catch (e) {
 
       } finally {
         if (this.nodeOnDrop.observers.length > 0) {
-          this.nodeOnDrop.emit({ event, treeNode: dropNode });
+          this.nodeOnDrop.emit({ event, treeNode: dropNode, dropType: this.dragState.dropType });
         }
       }
     }
@@ -354,11 +342,11 @@ export class OperableTreeComponent implements AfterViewInit, OnDestroy {
         isParent: nodeInfo['isParent'],
         id: nodeInfo['id'] ? nodeInfo['id'] : undefined,
         data: nodeInfo.data
-      }, nodeInfo.index);
+      }, nodeInfo.index, false);
       this.treeFactory.editNodeTitle(node.id);
       this.addingNode = true;
-      treeNode.data.isOpen = true;
       treeNode.data.isParent = true;
+      this.treeFactory.openNodesById(treeNode.id);
       return treeNode;
     });
   }
@@ -495,6 +483,7 @@ export class OperableTreeComponent implements AfterViewInit, OnDestroy {
   public nodeDblClick(event, node) {
     this.nodeDblClicked.emit(node);
   }
+
   ngOnDestroy() {
     if (this.i18nSubscription) {
       this.i18nSubscription.unsubscribe();

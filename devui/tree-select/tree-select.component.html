@@ -112,7 +112,7 @@
         [canActivateParentNode]="!leafOnly"
         (nodeChecked)="onOperableNodeChecked($event)"
         (nodeSelected)="onOperableNodeSelected($event)"
-        (nodeToggled)="onNodeToggled()"
+        (nodeToggled)="onNodeToggled($event)"
         [iconParentOpen]="iconParentOpen"
         [iconParentClose]="iconParentClose"
         [iconLeaf]="iconLeaf"

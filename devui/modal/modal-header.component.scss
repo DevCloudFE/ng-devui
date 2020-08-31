@@ -11,36 +11,38 @@
   .standard-title {
     height: 26px;
     line-height: 26px;
-    color: $dark-1;
+    color: $devui-text;
     letter-spacing: 0;
     font-size: 18px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-}
 
-button.close {
-  position: absolute;
-  right: 15px;
-  top: 15px;
-  font-size: 14px;
-  font-weight: bold;
-  line-height: 1;
-  color: #000000;
-  text-shadow: 0 1px 0 $bg-white;
-  cursor: pointer;
-  background: transparent;
-  border: 0;
-  -webkit-appearance: none;
+  button.close {
+    position: absolute;
+    right: 16px;
+    top: 16px;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 1;
+    color: #000000; // TODO: color not variable
+    // text-shadow: 0 1px 0 $devui-base-bg;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    -webkit-appearance: none;
 
-  svg.svg-icon-close polygon {
-    fill: $dark-2;
-  }
-
-  &:hover {
     svg.svg-icon-close polygon {
-      fill: $hwc-color-icon-hover-active;
+      fill: $devui-text-weak;
+    }
+
+    &:hover {
+      background: $devui-list-item-hover-bg;
+
+      svg.svg-icon-close polygon {
+        fill: $devui-icon-fill-active;
+      }
     }
   }
 }
@@ -56,12 +58,12 @@ button.close {
   margin-top: -2px; // 使图标对其
 
   path.devui-icon-warning-outer {
-    fill: $hwc-status-warning-border;
+    fill: $devui-warning-line;
   }
 
   path.devui-icon-warning-inner {
-    fill: $font-white;
-    stroke: $font-white;
+    fill: $devui-light-text;
+    stroke: $devui-light-text;
   }
 }
 

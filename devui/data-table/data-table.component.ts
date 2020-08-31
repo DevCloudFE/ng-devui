@@ -2,8 +2,6 @@ import { AfterContentInit, Component, ContentChild, ContentChildren, ElementRef,
   Input, NgZone, OnDestroy, OnInit, Output, QueryList, Renderer2, TemplateRef, ViewChild, OnChanges,
   SimpleChanges, AfterViewInit} from '@angular/core';
 import { Subscription } from 'rxjs';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { WindowRef } from 'ng-devui/window-ref';
 import { CellSelectedEventArg, CheckableRelation, ColumnResizeEventArg, RowCheckChangeEventArg,
   RowSelectedEventArg, SortEventArg, TableExpandConfig, ColumnAdjustStrategy, TableCheckStatusArg,
   TableWidthConfig, TableCheckOptions} from './data-table.model';
@@ -83,6 +81,10 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
    * 表格宽度
    */
   @Input() tableWidth = '100%';
+  /**
+   * 表格高度
+   */
+  @Input() tableHeight: string;
   /**
    * 【可选】是否限制多列排序的输出限制为一项
    */
@@ -230,6 +232,7 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
   @ContentChild('noResultTemplateRef') noResultTemplate: TemplateRef<any>;
   @ViewChild('fixHeaderContainerRef') fixHeaderContainerRefElement: ElementRef;
   @ViewChild('tableView', { static: true }) tableViewRefElement: ElementRef;
+
   _dataSource: any[] = [];
   _pageAllChecked = false;
   selectable = true;
@@ -251,7 +254,10 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
   private scrollY = 0;
   BUILTIN_COL_WIDTH = '36px';
   BUILTIN_COL_WIDTH_EXTRA = '55px';
+
   tableBodyEl: ElementRef;
+  onDocumentClickListen: any;
+
   @ViewChild('tableBody') set content(content: ElementRef) {
     setTimeout(() => {
       this.tableBodyEl = content;
@@ -297,10 +303,10 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
   }
 
   constructor(
-    private windowRef: WindowRef,
     private elementRef: ElementRef,
     private ngZone: NgZone,
     private renderer: Renderer2) {
+      this.onDocumentClickListen = this.onDocumentClick.bind(this);
   }
 
   private getColumns() {
@@ -315,10 +321,7 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
   // life hook start
   ngOnInit() {
     this.ngZone.runOutsideAngular(() => {
-      document.addEventListener(
-        'click',
-        this.onDocumentClick.bind(this)
-      );
+      document.addEventListener('click', this.onDocumentClickListen);
     });
   }
 
@@ -415,6 +418,7 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
 
   ngOnDestroy(): void {
     this.unSubscription();
+    document.removeEventListener('click', this.onDocumentClickListen);
   }
 
   onHandleSort(column: SortEventArg) {
@@ -588,7 +592,7 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
 
   private setCheckedStatus(data, checked) {
     return data.map(item => {
-      if (!item.$disabled) {
+      if (!item.$checkDisabled || !item.$disabled) {
         item.$checked = checked;
         item.$halfChecked = false;
       }
@@ -603,7 +607,6 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
   onCheckAllChange($event: boolean) {
     this.pageAllChecked = $event;
     this.checkAllChange.emit($event);
-    // this.changeDetectorRef.markForCheck();
   }
 
   onSearchQueryChange($event: { [key: string]: any; }) {

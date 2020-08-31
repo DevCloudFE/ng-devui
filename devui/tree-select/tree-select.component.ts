@@ -123,7 +123,7 @@ export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterV
   @ViewChild('searchInputModel') searchInputModel;
   @ViewChild('popper', { static: true }) popper;
   @ContentChild('iconTemplate') iconTemplatePassThrough;
-
+  @Output() nodeToggleEvent = new EventEmitter<any>();
   @Output() valueChanged = new EventEmitter<any>();
   checkboxInput: ICheckboxInput;
   _treeData: Array<ITreeItem> = [];
@@ -438,10 +438,11 @@ export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterV
     this.value = null;
   }
 
-  onNodeToggled() {
+  onNodeToggled($event) {
     if (this.popper) {
       this.popper.update();
     }
+    this.nodeToggleEvent.emit($event);
   }
 
   changeFormWithDropDown(position) {

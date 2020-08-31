@@ -1,8 +1,14 @@
 <section>
-  <d-button bsStyle="common" (click)="loadMenu = !loadMenu">异步加载菜单</d-button>
+  <d-button bsStyle="common" (click)="loadMenu = !loadMenu" style="margin-right: 4px;">异步加载菜单</d-button>
   <d-button bsStyle="common" (click)="loadContent = !loadContent">异步加载内容</d-button>
   <p>点击切换异步加载内容</p>
-  <div dAnchorBox [view]="{ top: 60, bottom: 0 }" [defaultAnchor]="'base-info'" class="mymain" style="position:relative; min-height:220px;">
+  <div
+    dAnchorBox
+    [view]="{ top: 60, bottom: 0 }"
+    [defaultAnchor]="'base-info'"
+    class="mymain"
+    style="position: relative; min-height: 220px;"
+  >
     <div class="mysidebar" *ngIf="loadMenu">
       <d-sticky [view]="{ top: 60, bottom: 0 }">
         <ul class="step-nav">

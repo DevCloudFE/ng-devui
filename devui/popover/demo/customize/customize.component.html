@@ -1,7 +1,14 @@
-<d-button dPopover [content]="content" [popMaxWidth]="100" [zIndex]="100" [position]="'right'" [controlled]="true">
+<d-button
+  dPopover
+  [content]="content"
+  [popMaxWidth]="100"
+  [zIndex]="100"
+  [position]="'right'"
+  [controlled]="true"
+  style="margin-right: 4px;"
+>
   click me!
 </d-button>
-&nbsp;
 <d-button dPopover [content]="customTemplate" [position]="'right'" [trigger]="'hover'" [controlled]="true">
   hover me!
 </d-button>

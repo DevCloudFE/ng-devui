@@ -31,12 +31,22 @@
   </div>
 
   <div class="demo-example" [dAnchor]="'lazy-load'">
-    <div class="demo-title">Lazy Load</div>
+    <div class="demo-title">懒加载指令</div>
     <div class="demo-text">
       引入util模块中的LazyLoadModule，使用dLazyLoad指令在滚到到容器底部时响应loadMore事件实现懒加载
     </div>
     <d-codebox id="common-lazy-load" [sourceData]="lazyLoadSource">
       <d-lazy-load demo></d-lazy-load>
+    </d-codebox>
+  </div>
+
+  <div class="demo-example" [dAnchor]="'relative-time'">
+    <div class="demo-title">人性化时间管道</div>
+    <div class="demo-text">
+      引入util模块中的RelativeTimeModule，使用dRelativeTime管道转换日期
+    </div>
+    <d-codebox id="common-relative-time" [sourceData]="relativeTimeSource">
+      <d-relative-time demo></d-relative-time>
     </d-codebox>
   </div>
 </div>

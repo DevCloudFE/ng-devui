@@ -57,7 +57,11 @@ export class DisPlayCellValuePipe implements PipeTransform {
           return displayValue === 0 ? 0 : (displayValue || '--');
         }
       default:
-        return cellItem === 0 ? 0 : (cellItem || '--');
+        if (cellItem === null || cellItem === undefined || cellItem === '') {
+          return '--';
+        } else {
+          return cellItem;
+        }
     }
   }
 }

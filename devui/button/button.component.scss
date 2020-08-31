@@ -3,7 +3,7 @@
 @import '../style/theme/variables';
 @import '../style/core/font';
 
-$devui-btn-loading-color: $dark-1;
+$devui-btn-loading-color: $devui-text;
 $devui-btn-xs-padding: 1px 5px;
 $devui-btn-xs-height: 24px;
 $devui-btn-xs-min-width: 48px;
@@ -24,33 +24,33 @@ $devui-btn-line-height: $line-height-base;
 
 $devui-btn-normal-config: (
   text: (
-    color: $hwc-color-text-active-text-link,
+    color: $devui-brand-active,
     padding: 0
   ),
   text-dark: (
-    color: $hwc-color-text-active-text-link,
+    color: $devui-brand-active,
     padding: 0
   ),
   common: (
-    color: $dark-1,
+    color: $devui-text,
     min-width: $devui-btn-min-width,
-    background-color: $block-bg-white,
-    border-color: $gray-1
+    background-color: $devui-block,
+    border-color: $devui-line
   ),
   stress: (
-    color: $font-white,
+    color: $devui-light-text,
     min-width: $devui-btn-min-width,
-    background-color: $color-bg-primary
+    background-color: $devui-primary
   ),
   primary: (
-    color: $font-white,
+    color: $devui-light-text,
     min-width: $devui-btn-min-width,
-    background-color: $color-bg-primary
+    background-color: $devui-primary
   ),
   danger: (
-    color: $font-white,
+    color: $devui-light-text,
     min-width: $devui-btn-min-width,
-    background-color: $huawei-red
+    background-color: $devui-contrast
   ),
   xs: (
     padding: $devui-btn-xs-padding,
@@ -85,76 +85,76 @@ $devui-btn-pseudo-config: (
   text: (
     hover: (
       background-color: transparent,
-      color: $hwc-color-text-link-hover-active
+      color: $devui-brand-active-focus
     ),
     focus: (
       background-color: transparent,
-      color: $hwc-color-text-link-hover-active
+      color: $devui-brand-active-focus
     ),
     active: (
       background-color: transparent,
-      color: $hwc-color-text-link-hover-active
+      color: $devui-brand-active-focus
     )
   ),
   text-dark: (
     hover: (
       background-color: transparent,
-      color: $hwc-color-text-link-hover-active
+      color: $devui-brand-active-focus
     ),
     focus: (
       background-color: transparent,
-      color: $hwc-color-text-link-hover-active
+      color: $devui-brand-active-focus
     ),
     active: (
       background-color: transparent,
-      color: $hwc-color-text-link-hover-active
+      color: $devui-brand-active-focus
     )
   ),
   common: (
     hover: (
-      border-color: $hwc-color-border-active,
-      color: $hwc-color-text-active-text-link
+      border-color: $devui-form-control-line-active,
+      color: $devui-brand-active
     ),
     focus: (
-      border-color: $hwc-color-border-active,
-      color: $hwc-color-text-active-text-link
+      border-color: $devui-form-control-line-active,
+      color: $devui-brand-active
     ),
     active: (
-      border-color: $hwc-color-border-active,
-      color: $hwc-color-text-active-text-link
+      border-color: $devui-form-control-line-active,
+      color: $devui-brand-active
     )
   ),
   stress: (
     hover: (
-      background-color: $color-bg-primary-hover
+      background-color: $devui-primary-hover
     ),
     focus: (
-      background-color: $color-bg-primary-active
+      background-color: $devui-primary-active
     ),
     active: (
-      background-color: $color-bg-primary-active
+      background-color: $devui-primary-active
     )
   ),
   primary: (
     hover: (
-      background-color: $color-bg-primary-hover
+      background-color: $devui-primary-hover
     ),
     focus: (
-      background-color: $color-bg-primary-active
+      background-color: $devui-primary-active
     ),
     active: (
-      background-color: $color-bg-primary-active
+      background-color: $devui-primary-active
     )
   ),
   danger: (
     hover: (
-      background-color: $color-bg-danger-hover
+      background-color: $devui-contrast-hover
     ),
     focus: (
-      background-color: $color-bg-danger-active
+      background-color: $devui-contrast-active
     ),
     active: (
-      background-color: $color-bg-danger-active
+      background-color: $devui-contrast-active
     )
   )
 );
@@ -189,82 +189,90 @@ $devui-btn-pseudo-config: (
 
   &.devui-btn-common {
     &:disabled {
-      color: $disabled-content;
-      background: $disabled-bg;
-      border: 1px solid $disabled-border;
+      color: $devui-disabled-text;
+      background: $devui-disabled-bg;
+      border: 1px solid $devui-disabled-line;
     }
   }
 
   &.devui-btn-primary {
     &:disabled {
-      color: $disabled-content;
-      background: $disabled-bg;
-      border: 1px solid $disabled-border;
+      color: $devui-disabled-text;
+      background: $devui-disabled-bg;
+      border: 1px solid $devui-disabled-line;
+    }
+  }
+
+  &.devui-btn-danger {
+    &:disabled {
+      color: $devui-disabled-text;
+      background: $devui-disabled-bg;
+      border: 1px solid $devui-disabled-line;
     }
   }
 
   &.devui-btn-text-dark {
     &:disabled {
-      color: $disabled-content;
+      color: $devui-disabled-text;
     }
   }
 
   &.devui-btn-text {
     &:disabled {
-      color: $disabled-content;
+      color: $devui-disabled-text;
     }
   }
 
   &.bordered {
     &.devui-btn-common {
-      color: $dark-1;
+      color: $devui-text;
       border-color: transparent;
 
       &:hover,
       &:focus {
-        border-color: $hover-control;
+        border-color: $devui-primary-hover;
       }
 
       &:active {
-        border-color: $hwc-color-border-active-and-hover;
+        border-color: $devui-primary-active;
       }
     }
 
     &.devui-btn-stress,
     &.devui-btn-primary {
-      border-color: $brand-1;
-      color: $brand-1;
-      background-color: $block-bg-white;
+      border-color: $devui-brand;
+      color: $devui-brand;
+      background-color: $devui-block;
     }
 
     &.devui-btn-success {
-      border-color: $status-green;
-      color: $status-green;
-      background-color: $block-bg-white;
+      border-color: $devui-success;
+      color: $devui-success;
+      background-color: $devui-block;
     }
 
     &.devui-btn-warning {
-      border-color: $status-yellow;
-      color: $status-yellow;
-      background-color: $block-bg-white;
+      border-color: $devui-warning;
+      color: $devui-warning;
+      background-color: $devui-block;
     }
 
     &.devui-btn-danger {
-      border-color: $status-red;
-      color: $status-red;
-      background-color: $block-bg-white;
+      border-color: $devui-danger;
+      color: $devui-danger;
+      background-color: $devui-block;
     }
   }
 
   &.d-btn-icon {
     &:hover,
     &:focus {
-      border: 1px solid $hover-content;
-      background-color: $hover-content;
+      border: 1px solid $devui-list-item-hover-bg;
+      background-color: $devui-list-item-hover-bg;
     }
 
     &:disabled {
-      background-color: $disabled-bg;
+      background-color: $devui-disabled-bg;
     }
   }
 
@@ -272,17 +280,17 @@ $devui-btn-pseudo-config: (
     &.devui-btn-text,
     &.devui-btn-text-dark {
       &.d-btn-icon-wrap {
-        color: $dark-1;
+        color: $devui-text;
 
         .devui-icon-fix {
-          color: $dark-2;
+          color: $devui-text-weak;
         }
 
         &:hover {
-          color: $hover-control;
+          color: $devui-list-item-hover-text;
 
           .devui-icon-fix {
-            color: $hwc-color-icon-hover-active;
+            color: $devui-icon-fill-active;
           }
         }
       }
@@ -293,7 +301,7 @@ $devui-btn-pseudo-config: (
 .devui-loading {
   .devui-loading-default-spinner {
     div {
-      background-color: $dark-1;
+      background-color: $devui-text;
     }
   }
 }
@@ -303,7 +311,7 @@ $devui-btn-pseudo-config: (
 }
 
 .devui-btn {
-  transition: all 0.2s;
+  transition: background-color 0.2s;
   border-style: solid;
   white-space: nowrap;
   display: flex;
@@ -335,14 +343,14 @@ $devui-btn-pseudo-config: (
 
 .devui-btn.devui-btn-common:not(:disabled) {
   .devui-icon-fix {
-    color: $dark-2;
+    color: $devui-text-weak;
   }
 
   &:hover,
   &:active,
   &:focus {
     .devui-icon-fix {
-      color: $hwc-color-icon-hover-active;
+      color: $devui-icon-fill-active;
     }
   }
 }

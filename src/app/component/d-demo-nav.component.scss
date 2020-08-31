@@ -12,12 +12,12 @@
     font-family: PingFangSC-Semibold;
     width: 130px;
     font-size: 14px;
-    color: $dark-1;
+    color: $devui-text;
     line-height: 24px;
     font-weight: bold;
     padding-bottom: 10px;
     margin-left: 20px;
-    border-bottom: 1px solid $gray-2;
+    border-bottom: 1px solid $devui-dividing-line;
   }
 
   .step-nav {
@@ -30,14 +30,14 @@
       height: 25px;
       line-height: 25px;
       font-size: 12px;
-      color: $dark-1;
+      color: $devui-text;
       position: relative;
       white-space: nowrap;
       text-overflow: ellipsis;
       overflow: hidden;
 
       &.active {
-        color: $brand-1;
+        color: $devui-link;
       }
     }
   }

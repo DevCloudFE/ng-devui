@@ -12,3 +12,5 @@ export * from './safe.pipe';
 export * from './lazy-load/lazy-load.directive';
 export * from './popper/popper.component';
 export * from './highlight/highlight.module';
+export * from './relative-time/relative-time.module';
+export * from './relative-time/relative-time.pipe';

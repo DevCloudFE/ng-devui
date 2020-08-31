@@ -11,7 +11,7 @@
 }
 
 .devui-message-wrapper {
-  background: $bg-white;
+  background: $devui-base-bg;
   border-radius: 5px;
 }
 
@@ -24,7 +24,7 @@
   display: inline-block;
   z-index: 1001;
   padding: 12px 14px;
-  color: $dark-1;
+  color: $devui-text;
 }
 
 .devui-busy-default-text {
@@ -54,25 +54,25 @@
   .devui-loading-bar1 {
     top: 0;
     left: 0;
-    background: $brand-1;
+    background: $devui-brand;
   }
 
   .devui-loading-bar2 {
     top: 0;
     left: 9px;
-    background: $brand-4;
+    background: $devui-brand-foil;
   }
 
   .devui-loading-bar3 {
     top: 9px;
     left: 0;
-    background: $brand-4;
+    background: $devui-brand-foil;
   }
 
   .devui-loading-bar4 {
     top: 9px;
     left: 9px;
-    background: $brand-1;
+    background: $devui-brand;
   }
 }
 

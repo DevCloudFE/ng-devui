@@ -19,7 +19,7 @@
   white-space: nowrap;
 
   &.selected:not(.disabled) {
-    color: $hwc-color-text-active-text-link;
+    color: $devui-brand-active;
   }
 }
 
@@ -34,13 +34,13 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   cursor: not-allowed;
-  background-color: $disabled-bg;
-  color: $disabled-content;
+  background-color: $devui-disabled-bg;
+  color: $devui-disabled-text;
 
   &:hover,
   &:active,
   &:hover:active {
-    background-color: $status-unavaliable;
+    background-color: $devui-unavailable;
   }
 }
 
@@ -48,7 +48,7 @@
 .devui-dropdown-item.disabled,
 .devui-dropdown-item.disabled:hover {
   cursor: not-allowed;
-  color: $disabled-content;
+  color: $devui-disabled-text;
 }
 
 ul.devui-list-unstyled {
@@ -57,10 +57,10 @@ ul.devui-list-unstyled {
 }
 
 .devui-dropdown-bg {
-  background: $hover-content;
+  background: $devui-list-item-hover-bg;
 }
 
 .devui-popup-tips {
-  color: $gray-1;
-  padding: 3px 1rem;
+  color: $devui-text-weak; // TODO: Color-Question
+  padding: 3px 1em;
 }

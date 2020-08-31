@@ -3,13 +3,13 @@
 .devui-dropdown-overlay {
   position: relative;
   left: -1px;
-  border: 1px solid $brand-1;
+  border: 1px solid $devui-connected-overlay-line;
 }
 
 .devui-date-range-wrapper {
   display: inline-flex !important;
-  box-shadow: 0 4px 8px 0 $dark-1-boxshadow;
-  background-color: $dropdown-overlay;
+  box-shadow: 0 4px 8px 0 $devui-shadow;
+  background-color: $devui-connected-overlay-bg;
   transform: perspective(1px) translate3d(0, 0, 0);
   flex-direction: column;
   border-radius: 2px;
@@ -21,7 +21,7 @@
 
   .devui-date-range-custom {
     width: 500px;
-    border-top: 1px solid $gray-1;
+    border-top: 1px solid $devui-line;
   }
 }
 

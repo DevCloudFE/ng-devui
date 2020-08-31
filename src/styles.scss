@@ -2,15 +2,15 @@
 @import '~@devui-design/icons/icomoon/devui-icon.css';
 
 .markdown {
-  color: $dark-2;
+  color: $devui-text-weak;
   font-size: 14px;
   line-height: 1.8;
 
   a {
-    color: $link;
+    color: $devui-link;
 
     &:hover {
-      color: $hover-control;
+      color: $devui-link-active;
       text-decoration: underline;
       cursor: pointer;
     }
@@ -33,7 +33,7 @@ pre {
   display: block;
   margin: 0 0 10px;
   line-height: 1.42857143;
-  color: $dark-1;
+  color: $devui-text;
   word-break: break-all;
   word-wrap: break-word;
   border: 1px solid #cccccc;
@@ -41,14 +41,15 @@ pre {
 }
 
 .hljs {
-  background: $gray-3;
-  color: $dark-1;
+  background: $devui-area;
+  color: $devui-text;
+  font-size: 12px;
 }
 
 pre code {
   display: block;
-  color: $dark-1;
-  background: $bg-white;
+  color: $devui-text;
+  background: $devui-base-bg;
   line-height: 1.5;
   padding: 10px 15px;
   border-radius: 4px;
@@ -72,7 +73,7 @@ section {
   overflow-x: auto;
 
   table {
-    font-size: 13px;
+    font-size: 12px;
   }
 
   p {
@@ -96,9 +97,9 @@ section {
   }
 
   th {
-    background: $gray-3;
+    background: $devui-area;
     white-space: nowrap;
-    color: $dark-2;
+    color: $devui-text-weak;
     font-weight: 600;
   }
 }
@@ -116,7 +117,7 @@ section {
 .markdown h4,
 .markdown h5,
 .markdown h6 {
-  color: $dark-1;
+  color: $devui-text;
   margin: 1.6em 0 0.6em;
   font-weight: 500;
   clear: both;
@@ -126,7 +127,7 @@ code {
   padding: 2px 4px;
   // font-size: 90%;
   color: #c7254e;
-  background-color: #f8f8f8;
+  background-color: $devui-area;
   border-radius: 1px;
 }
 

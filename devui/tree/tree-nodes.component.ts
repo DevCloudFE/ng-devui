@@ -17,7 +17,7 @@ export class TreeNodesComponent {
   @Input() treeList: Array<TreeNode>;
   @Input() treeNodesRef: TemplateRef<any>;
   @Input() treeFactory: TreeFactory;
-
+  @Input() virtualScroll = false;
   trackByFn(index, item) {
     return index;
   }

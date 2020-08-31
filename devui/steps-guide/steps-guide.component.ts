@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, Renderer2, HostBinding } from '@angular/core';
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime, throttleTime } from 'rxjs/operators';
-import { I18nService } from 'ng-devui/i18n';
+import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { PositionService } from 'ng-devui/position';
 import { StepsGuideService } from './steps-guide.service';
 import { ExtraConfig } from './steps-guide.types';
@@ -32,10 +32,9 @@ export class StepsGuideComponent implements OnInit, AfterViewInit, OnDestroy {
   zIndex = 1100;
   extraConfig: ExtraConfig;
   dots: Array<undefined> = [];
-  scrollSubscriber: Subscription;
-  resizeSubScriber: Subscription;
+  subScriber: Subscription;
   SCROLL_REFRESH_INTERVAL = 100;
-  stepText;
+  i18nCommonText: I18nInterface['stepsGuide'];
 
   constructor(
     private stepService: StepsGuideService,
@@ -44,17 +43,21 @@ export class StepsGuideComponent implements OnInit, AfterViewInit, OnDestroy {
     private elm: ElementRef,
     private i18n: I18nService
   ) {
-    this.resizeSubScriber = fromEvent(window, 'resize')
+    this.subScriber = fromEvent(window, 'resize')
       .pipe(debounceTime(this.SCROLL_REFRESH_INTERVAL))
       .subscribe((event) => {
         this.updatePosition();
       });
-    this.stepText = this.i18n.getI18nText().stepsGuide;
   }
 
   ngOnInit() {
     this.dots = new Array(this.stepsCount);
     this.elm.nativeElement.style.zIndex = this.zIndex;
+    this.i18nCommonText = this.i18n.getI18nText().stepsGuide;
+    const i18nSubscription = this.i18n.langChange().subscribe((data) => {
+      this.i18nCommonText = data.stepsGuide;
+    });
+    this.subScriber.add(i18nSubscription);
   }
 
   ngAfterViewInit() {
@@ -62,18 +65,20 @@ export class StepsGuideComponent implements OnInit, AfterViewInit, OnDestroy {
     if (!this.scrollElement) {
       this.scrollElement = this.positionService.getScrollParent(this.triggerElement);
     }
-    this.scrollSubscriber = fromEvent(window, 'scroll')
+    const scrollSubscriber = fromEvent(window, 'scroll')
       .pipe(
         throttleTime(this.SCROLL_REFRESH_INTERVAL, undefined, { leading: true, trailing: true })
       )
       .subscribe((event) => {
         this.updatePosition();
       });
+      this.subScriber.add(scrollSubscriber);
   }
 
   ngOnDestroy() {
-    this.resizeSubScriber.unsubscribe();
-    this.scrollSubscriber.unsubscribe();
+    if (this.subScriber) {
+      this.subScriber.unsubscribe();
+    }
   }
 
   updatePosition() {

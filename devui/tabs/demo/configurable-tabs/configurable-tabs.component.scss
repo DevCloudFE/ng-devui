@@ -17,7 +17,7 @@
 }
 
 .tabs-menu-container li:hover {
-  background: $hover-content;
+  background: $devui-list-item-hover-bg;
 }
 
 .tabs-menu-container li:hover a {
@@ -25,7 +25,7 @@
 }
 
 .tabs-menu-container li a {
-  color: $dark-1;
+  color: $devui-text;
   line-height: 36px;
   width: 170px;
   display: inline-block;
@@ -37,7 +37,7 @@ a:focus {
 
 .line {
   height: 1px;
-  background: $gray-1;
+  background: $devui-line;
   margin-top: 10px;
   margin-bottom: 15px;
 }
@@ -51,8 +51,8 @@ a:focus {
 }
 
 .menu-tab-active {
-  background: $brand-3;
-  color: $brand-1;
+  background: $devui-list-item-selected-bg;
+  color: $devui-brand;
 }
 
 li {

@@ -65,14 +65,16 @@ export class LoadingDirective {
             return throwError(error);
           })
         )
-        .subscribe(
-          null,
-          () => {
+        .subscribe({
+          next: null,
+          error: () => {
             this.endLoading();
           },
-          () => {
+          complete: () => {
             this.endLoading();
           }
+        }
+
         );
     }
   }
@@ -87,7 +89,7 @@ export class LoadingDirective {
     private viewContainerRef: ViewContainerRef,
     private injector: Injector,
     private elementRef: ElementRef
-  ) {}
+  ) { }
 
   private startLoading() {
     if (!this.loadingRef) {

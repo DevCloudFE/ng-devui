@@ -56,4 +56,18 @@
     >
     </d-checkbox-group>
   </div>
+
+  <div>
+    <h4>多行checkbox</h4>
+    <d-checkbox-group
+      [(ngModel)]="values5"
+      [itemWidth]="64"
+      [name]="'demo5'"
+      [options]="options5"
+      [direction]="'row'"
+      [isShowTitle]="true"
+      (change)="onCheckbox2Change($event)"
+    >
+    </d-checkbox-group>
+  </div>
 </section>

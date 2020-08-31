@@ -13,8 +13,8 @@
   display: none;
   z-index: 1051;
   position: absolute;
-  box-shadow: 0 4px 8px 0 $dark-1-boxshadow;
-  background: $bg-white;
+  box-shadow: 0 4px 8px 0 $devui-shadow;
+  background: $devui-connected-overlay-bg;
   border: none;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;

@@ -191,6 +191,9 @@ export class TwoDatepickerSingleComponent extends SingleDatepickerComponent impl
     if (this.selectingRange) {
       rangeSource = [this.rangeStart || this.rangeEnd, this.previewEnd];
     }
+    if ((!Array.isArray(rangeSource))) {
+      return;
+    }
     return rangeSource.some((selectedDate) => {
       if (!selectedDate || !date) {
         return false;
@@ -201,6 +204,19 @@ export class TwoDatepickerSingleComponent extends SingleDatepickerComponent impl
         date.getDate() === selectedDate.getDate()
       );
     });
+  }
+
+  isBetweenDay(date) {
+    if (Array.isArray(this.selectedRange) && this.selectedRange.every(day => !!day)) {
+      const index = this.selectedRange.findIndex(day => {
+        return date.getFullYear() === day.getFullYear() &&
+        date.getMonth() === day.getMonth() &&
+        date.getDate() === day.getDate();
+      });
+      return ['devui-day-start', 'devui-day-end'][index];
+    } else {
+      return;
+    }
   }
 
   ngOnChanges(changes: SimpleChanges) {

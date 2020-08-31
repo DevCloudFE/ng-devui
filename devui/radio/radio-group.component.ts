@@ -29,7 +29,6 @@ import { Observable } from 'rxjs';
   ],
 })
 export class RadioGroupComponent implements ControlValueAccessor, OnChanges, AfterViewInit {
-
   constructor() {}
   @Input() name: string;
   @Input() values: any[];
@@ -44,14 +43,16 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges, Aft
   onTouched: () => null;
   @HostListener('click', ['$event'])
   onRadioChange(event) {
-    if (this.disabled) {
-      event.preventDefault();
-    }
-    this.canChange().then((change) => {
-      if (!change) {
+    if (event.target.tagName.toLowerCase() === 'input') {
+      if (this.disabled) {
         event.preventDefault();
       }
-    });
+      this.canChange().then((change) => {
+        if (!change) {
+          event.preventDefault();
+        }
+      });
+    }
   }
 
   ngAfterViewInit(): void {
@@ -62,8 +63,13 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges, Aft
     this.radios.changes.subscribe((newRadios) => {
       newRadios.forEach((radio: RadioComponent) => {
         this.registerRadio(radio);
+        Promise.resolve(true).then(() => {
+          radio.writeValue(this._value);
+        });
       });
     });
+
+    this.radios.notifyOnChanges();
   }
 
   ngOnChanges(changes: SimpleChanges): void {

@@ -8,20 +8,20 @@
   d-panel-body {
     line-height: 1.5;
     padding: 15px;
-    background: $bg-white;
+    background: $devui-base-bg;
     flex: 1;
   }
 
   .devui-panel-body-collapse {
     d-panel-body {
-      border-left: 2px solid $dividing;
+      border-left: 2px solid $devui-dividing-line;
     }
   }
 
   &.devui-panel-primary {
     .devui-panel-body-collapse {
       d-panel-body {
-        border-color: $hwc-status-primary-border;
+        border-color: $devui-primary-line;
       }
     }
   }
@@ -29,7 +29,7 @@
   &.devui-panel-info {
     .devui-panel-body-collapse {
       d-panel-body {
-        border-color: $hwc-status-info-border;
+        border-color: $devui-info-line;
       }
     }
   }
@@ -37,7 +37,7 @@
   &.devui-panel-success {
     .devui-panel-body-collapse {
       d-panel-body {
-        border-color: $hwc-status-success-border;
+        border-color: $devui-success-line;
       }
     }
   }
@@ -45,7 +45,7 @@
   &.devui-panel-warning {
     .devui-panel-body-collapse {
       d-panel-body {
-        border-color: $hwc-status-warning-border;
+        border-color: $devui-warning-line;
       }
     }
   }
@@ -53,7 +53,7 @@
   &.devui-panel-danger {
     .devui-panel-body-collapse {
       d-panel-body {
-        border-color: $hwc-status-danger-border;
+        border-color: $devui-danger-line;
       }
     }
   }
@@ -61,11 +61,11 @@
 
 .devui-panel {
   line-height: 1.5;
-  background-color: $bg-white;
+  background-color: $devui-base-bg;
 
   .devui-panel-heading {
     padding: 12px 20px;
-    color: $dark-1;
+    color: $devui-text;
 
     d-panel-header {
       line-height: 1.5;
@@ -75,7 +75,7 @@
   .devui-panel-body {
     display: flex;
     position: relative;
-    border-top: 1px solid $dividing;
+    border-top: 1px solid $devui-dividing-line;
 
     &.devui-panel-body-collapse {
       &::before {
@@ -88,8 +88,8 @@
 
   .devui-panel-footer {
     padding: 10px 15px;
-    color: $dark-1;
-    background-color: $gray-3;
+    color: $devui-text;
+    background-color: $devui-area;
 
     d-panel-footer {
       line-height: 1.5;
@@ -97,26 +97,26 @@
   }
 
   &.devui-panel-default {
-    background-color: $global-bg;
+    background-color: $devui-default-bg;
   }
 
   &.devui-panel-primary {
-    background-color: $hwc-status-primary-background;
+    background-color: $devui-primary-bg;
   }
 
   &.devui-panel-info {
-    background-color: $hwc-status-info-background;
+    background-color: $devui-info-bg;
   }
 
   &.devui-panel-success {
-    background-color: $hwc-status-success-background;
+    background-color: $devui-success-bg;
   }
 
   &.devui-panel-warning {
-    background-color: $hwc-status-warning-background;
+    background-color: $devui-warning-bg;
   }
 
   &.devui-panel-danger {
-    background-color: $hwc-status-danger-background;
+    background-color: $devui-danger-bg;
   }
 }

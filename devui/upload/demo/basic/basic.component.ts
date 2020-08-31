@@ -17,7 +17,7 @@ export class BasicComponent {
   };
   fileOptions: IFileOptions = {
     multiple: false,
-    accept: '.xls,.xlsx,.pages,.mp3,.png',
+    accept: '.*',
   };
   uploadedFiles: Array<Object> = [];
   uploadOptions: IUploadOptions = {

@@ -26,7 +26,7 @@
         </ng-template>
         <ng-template #statusTemplate let-node="node">
           <span class="op-status"></span>
-          <span class="status-position">{{ node.data.originItem.status }}</span>
+          <span class="status-position">{{ node.data.originItem?.status }}</span>
         </ng-template>
         <ng-template #operatorTemplate let-optree let-node="node" let-addNode="addNode" let-editNode="editNode" let-deleteNode="deleteNode">
           <span class="op-icons icon icon-add" (click)="addNode($event, node)"></span>

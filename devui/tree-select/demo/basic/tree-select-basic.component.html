@@ -24,6 +24,7 @@
         [expandTree]="true"
         [(ngModel)]="value2"
         (ngModelChange)="showSelected($event)"
+        (nodeToggleEvent)="nodeToggleEvent($event)"
         style="width: 280px;"
       ></d-tree-select>
     </div>

@@ -1,0 +1,67 @@
+@import '../../../style/theme/color';
+
+.pane-content {
+  padding: 0 10px;
+}
+
+.title-icon {
+  width: 100%;
+  font-size: 16px;
+  line-height: 40px;
+  vertical-align: middle;
+  margin-right: 2px;
+  text-align: center;
+
+  &.icon-dot-status {
+    color: #efefef;
+  }
+
+  &.active {
+    color: $devui-brand-active;
+  }
+}
+
+.hover-card {
+  width: 200px;
+  position: fixed;
+  background-color: $devui-global-bg-normal;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
+  z-index: 1000;
+  transform: translateY(-50%);
+  color: $devui-aide-text;
+
+  .triangle {
+    width: 0;
+    height: 0;
+    border-width: 8px;
+    border-left: 0;
+    border-style: solid;
+    border-color: transparent $devui-global-bg-normal transparent transparent;
+    position: absolute;
+    left: -8px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  span,
+  li {
+    line-height: 40px;
+  }
+
+  span {
+    margin-left: 16px;
+  }
+
+  li {
+    margin-left: 36px;
+  }
+
+  .parent-item {
+    color: #adb0b8;
+  }
+
+  .active-child {
+    color: $devui-brand-active;
+  }
+}

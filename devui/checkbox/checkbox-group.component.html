@@ -1,6 +1,11 @@
 <div class="devui-checkbox-group">
   <ul [class.devui-checkbox-list-inline]="direction === 'row'">
-    <li *ngFor="let item of options_display; let i = index" [class.devui-checkbox-column-margin]="direction === 'column'">
+    <li
+      *ngFor="let item of options_display; let i = index"
+      [class.devui-checkbox-column-margin]="direction === 'column'"
+      [ngStyle]="{ 'width.px': itemWidth }"
+      [ngClass]="{ 'devui-checkbox-wrap': itemWidth !== undefined }"
+    >
       <span>
         <d-checkbox
           [name]="name"

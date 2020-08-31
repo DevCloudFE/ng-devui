@@ -22,15 +22,15 @@
 
   .devui-gantt-bar-rail {
     position: absolute;
-    background: $status-initial;
-    box-shadow: 0 1px 2px 0 rgba(81, 112, 255, 0.19);
+    background: $devui-initial;
+    box-shadow: 0 1px 2px 0 rgba(81, 112, 255, 0.19); // TODO: color not variable
     height: 20px;
     margin-top: 2px;
     width: 100%;
     border-radius: 4px;
 
     &.disabled {
-      background-color: $gray-3;
+      background-color: $devui-area;
     }
   }
 
@@ -40,8 +40,8 @@
     height: 24px;
     left: -12px;
     border-radius: 4px;
-    background-color: $bg-white;
-    box-shadow: 0 0 12px 0 rgba(81, 112, 255, 0.3);
+    background-color: $devui-connected-overlay-bg;
+    box-shadow: 0 0 12px 0 rgba(81, 112, 255, 0.3); // TODO: color not variable
 
     & .devui-gantt-dragger {
       position: absolute;
@@ -60,7 +60,7 @@
       & .handle {
         width: 2px;
         height: 14px;
-        background: $icon-gray-bg;
+        background: $devui-icon-fill;
         border-radius: 1.5px;
         margin: 5px 5px;
 
@@ -73,7 +73,7 @@
 
   .devui-gantt-bar-track {
     position: absolute;
-    background-image: linear-gradient(90deg, $brand-1 0%, $brand-1 100%);
+    background-image: linear-gradient(90deg, $devui-brand 0%, $devui-brand 100%);
     box-shadow: 0 1px 3px 0 rgba(81, 112, 255, 0.4);
     border-radius: 3px 0 0 3px;
     border-radius: 3px 0 0 3px;
@@ -94,8 +94,8 @@
       display: block;
 
       & > g > path {
-        fill: $bg-white;
-        stroke: $brand-1;
+        fill: $devui-icon-bg;
+        stroke: $devui-icon-fill-active;
       }
     }
 
@@ -116,7 +116,7 @@
 .devui-gantt-tips {
   width: 280px;
   min-height: 100px;
-  background: $bg-white;
+  background: $devui-base-bg;
   box-shadow: 0 12px 24px 0 rgba(81, 112, 255, 0.1);
   border-radius: 2px;
   padding: 15px;

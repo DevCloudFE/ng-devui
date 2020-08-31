@@ -70,13 +70,13 @@ export class TwoDatePickerComponent implements OnInit, OnDestroy {
   @Input() set dateConfig(dateConfig: any) {
     if (this.checkDateConfig(dateConfig)) {
       this._dateConfig = dateConfig;
-      this._dateFormat = this.showTime ? dateConfig.format.time : dateConfig.format.date;
     } else {
       this._dateConfig = this.datePickerConfig.dateConfig;
     }
+    this._dateFormat = this.showTime ? this._dateConfig.format.time : this._dateConfig.format.date;
   }
   @Input() set dateFormat(dateFormat: string) {
-    if (this._dateFormat !== dateFormat) {
+    if (dateFormat && this._dateFormat !== dateFormat) {
       this._dateFormat = dateFormat;
     }
   }
@@ -157,6 +157,7 @@ export class TwoDatePickerComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this._minDate = this.minDate ? new Date(this.minDate) : new Date(this.dateConfig.min, 0, 1, 0, 0, 0);
     this._maxDate = this.maxDate ? new Date(this.maxDate) : new Date(this.dateConfig.max, 11, 31, 23, 59, 59);
+    this._dateFormat = this.showTime ? this.dateConfig.format.time : this.dateConfig.format.date;
     this.setI18nText();
     this.updateCdkConnectedOverlayOrigin(this.el.nativeElement);
     this.subscribeHoverActions();

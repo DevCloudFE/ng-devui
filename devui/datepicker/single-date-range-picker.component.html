@@ -115,7 +115,7 @@
       <tr *ngFor="let week of displayWeeks">
         <td
           *ngFor="let day of week"
-          class="devui-day"
+          class="devui-day {{ isBetweenDay(day.date) }}"
           [ngClass]="{
             'devui-out-of-month': !day.inMonth,
             'devui-in-month-day': day.inMonth,

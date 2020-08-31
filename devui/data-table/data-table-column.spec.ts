@@ -23,27 +23,27 @@ const dataTableOptions = {
       field: 'firstName',
       header: 'First Name',
       fieldType: 'text',
-      sortable: true
+      sortable: true,
     },
     {
       field: 'lastName',
       header: 'Last Name',
       fieldType: 'text',
-      sortable: true
+      sortable: true,
     },
     {
       field: 'gender',
       header: 'gender',
       fieldType: 'text',
-      sortable: true
+      sortable: true,
     },
     {
       field: 'dob',
       header: 'Date of birth',
       fieldType: 'date',
-      sortable: true
-    }
-  ]
+      sortable: true,
+    },
+  ],
 };
 
 // column: basic & checkable
@@ -60,7 +60,7 @@ const dataTableOptions = {
       >
       </d-column>
     </d-data-table>
-  `
+  `,
 })
 class TestDataTableColumnBasicComponent {
   @ViewChild('datatable') datatable;
@@ -148,7 +148,7 @@ class TestDataTableColumnBasicComponent {
         </div>
       </div>
     </ng-template>
-  `
+  `,
 })
 class TestDataTableAdvancedColumnComponent implements OnInit {
   constructor(private ref: ChangeDetectorRef) {}
@@ -159,48 +159,48 @@ class TestDataTableAdvancedColumnComponent implements OnInit {
   sortedColumn = [
     {
       field: 'lastName',
-      direction: 'ASC'
-    }
+      direction: 'ASC',
+    },
   ];
   filterList = [
     {
       name: 'Mark',
-      value: 'Mark'
+      value: 'Mark',
     },
     {
       name: 'Jacob',
-      value: 'Jacob'
+      value: 'Jacob',
     },
     {
       name: 'Danni',
-      value: 'Danni'
+      value: 'Danni',
     },
     {
       name: 'green',
-      value: 'green'
+      value: 'green',
     },
     {
       name: 'po',
-      value: 'po'
+      value: 'po',
     },
     {
       name: 'john',
-      value: 'john'
-    }
+      value: 'john',
+    },
   ];
   filterList2 = [
     {
       name: 'Clear',
-      value: 'Clear'
+      value: 'Clear',
     },
     {
       name: 'Male',
-      value: 'Male'
+      value: 'Male',
     },
     {
       name: 'Female',
-      value: 'Female'
-    }
+      value: 'Female',
+    },
   ];
   filterListMulti = JSON.parse(JSON.stringify(originSource.slice(0, 6)));
   hideColumn = ['hidden'];
@@ -375,7 +375,7 @@ class TestDataTableAdvancedColumnComponent implements OnInit {
         </d-cell-edit>
       </d-column>
     </d-data-table>
-  `
+  `,
 })
 class TestDataTableColumnEditComponent {
   @ViewChild(DataTableComponent) dataTable: DataTableComponent;
@@ -413,7 +413,7 @@ class TestDataTableColumnEditComponent {
         [width]="'20%'"
       ></d-column>
     </d-data-table>
-  `
+  `,
 })
 class TestDataTableColumnWithChildrenComponent {
   basicDataSource: Array<SourceType> = JSON.parse(JSON.stringify(treeDataSource.slice(0, 6)));
@@ -463,7 +463,7 @@ class TestDataTableColumnWithChildrenComponent {
         [width]="'200px'"
       ></d-column>
     </d-data-table>
-  `
+  `,
 })
 class TestDataTableColumnMultiHeaderComponent {
   basicDataSource: Array<SourceType> = JSON.parse(JSON.stringify(originSource.slice(0, 6)));
@@ -493,7 +493,7 @@ class TestDataTableColumnMultiHeaderComponent {
       >
       </d-column>
     </d-data-table>
-  `
+  `,
 })
 class TestDataTableColumnFixHeaderComponent {
   resizable = false;
@@ -522,7 +522,7 @@ class TestDataTableColumnFixHeaderComponent {
       >
       </d-column>
     </d-data-table>
-  `
+  `,
 })
 class TestDataTableColumnDragComponent {
   isHeaderFixed = false;
@@ -539,7 +539,7 @@ describe('data-table column', () => {
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [DataTableModule, I18nModule, NoopAnimationsModule],
-        declarations: [TestDataTableColumnBasicComponent]
+        declarations: [TestDataTableColumnBasicComponent],
       });
     });
 
@@ -639,7 +639,7 @@ describe('data-table column', () => {
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [DataTableModule, FormsModule, CheckBoxModule, TooltipModule, AvatarModule, NoopAnimationsModule],
-        declarations: [TestDataTableAdvancedColumnComponent]
+        declarations: [TestDataTableAdvancedColumnComponent],
       });
     });
 
@@ -744,7 +744,7 @@ describe('data-table column', () => {
         const resizeHandleEl = debugEl.query(By.css('table.devui-table thead .resize-handle'));
         resizeHandleEl.nativeElement.dispatchEvent(
           new MouseEvent('mousedown', {
-            bubbles: true
+            bubbles: true,
           })
         );
         fixture.detectChanges();
@@ -759,7 +759,7 @@ describe('data-table column', () => {
         const { x, y } = resizeHandleEl.nativeElement.getBoundingClientRect();
         resizeHandleEl.nativeElement.dispatchEvent(
           new MouseEvent('mousedown', {
-            bubbles: true
+            bubbles: true,
           })
         );
         fixture.detectChanges();
@@ -773,15 +773,15 @@ describe('data-table column', () => {
         // column expand
         resizeHandleEl = debugEl.query(By.css('table.devui-table thead .resize-handle'));
         let xHandled = resizeHandleEl.nativeElement.getBoundingClientRect().x;
-        expect(xHandled).toEqual(2 * x);
+        expect(xHandled).toBeCloseTo(2 * x, 0);
         idxHeaderCell = debugEl.query(By.css('table.devui-table thead th:nth-child(2)'));
-        expect(idxHeaderCell.nativeElement.getBoundingClientRect().width).toEqual(50 + x);
+        expect(idxHeaderCell.nativeElement.getBoundingClientRect().width).toBeCloseTo(50 + x, 0);
         expect(component.resizeEvent).not.toBeNull();
         component.resizeEvent = null; // re-initialize
 
         resizeHandleEl.nativeElement.dispatchEvent(
           new MouseEvent('mousedown', {
-            bubbles: true
+            bubbles: true,
           })
         );
         fixture.detectChanges();
@@ -807,7 +807,7 @@ describe('data-table column', () => {
         const y = resizeElNearByLastNameCol.nativeElement.getBoundingClientRect().y;
         resizeElNearByLastNameCol.nativeElement.dispatchEvent(
           new MouseEvent('mousedown', {
-            bubbles: true
+            bubbles: true,
           })
         );
         fixture.detectChanges();
@@ -824,7 +824,7 @@ describe('data-table column', () => {
         resizeElNearByLastNameCol = debugEl.query(By.css('table.devui-table thead th:nth-child(4) .resize-handle'));
         resizeElNearByLastNameCol.nativeElement.dispatchEvent(
           new MouseEvent('mousedown', {
-            bubbles: true
+            bubbles: true,
           })
         );
         fixture.detectChanges();
@@ -882,7 +882,7 @@ describe('data-table column', () => {
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [FormsModule, DataTableModule, I18nModule, DatepickerModule, InputNumberModule, SelectModule, NoopAnimationsModule],
-        declarations: [TestDataTableColumnEditComponent]
+        declarations: [TestDataTableColumnEditComponent],
       });
     });
 
@@ -1023,7 +1023,7 @@ describe('data-table column', () => {
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [DataTableModule],
-        declarations: [TestDataTableColumnWithChildrenComponent]
+        declarations: [TestDataTableColumnWithChildrenComponent],
       });
     });
 
@@ -1114,8 +1114,8 @@ describe('data-table column', () => {
 
       tbodyTrs = debugEl.queryAll(By.css('.devui-data-table .devui-table-view .devui-scrollbar.scroll-view table.devui-table tbody tr'));
       ({ top: tr1Top } = tbodyTrs[0].nativeElement.getBoundingClientRect());
-      expect(scrollViewTop - 2 * trHeight).toBeLessThanOrEqual(tr1Top); // touch bottom, maybe tr2 part visible
-      expect(tr1Top).toBeLessThan(scrollViewTop);
+      expect(scrollViewTop - 2 * trHeight).toBeLessThanOrEqual(Math.round(tr1Top)); // touch bottom, maybe tr2 part visible
+      expect(Math.round(tr1Top)).toBeLessThan(Math.round(scrollViewTop));
     }));
 
     it('should resize work', fakeAsync(() => {
@@ -1157,7 +1157,7 @@ describe('data-table column', () => {
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [DataTableModule, I18nModule, NoopAnimationsModule],
-        declarations: [TestDataTableColumnMultiHeaderComponent]
+        declarations: [TestDataTableColumnMultiHeaderComponent],
       });
     });
 
@@ -1269,7 +1269,7 @@ describe('data-table column', () => {
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [DataTableModule, NoopAnimationsModule],
-        declarations: [TestDataTableColumnDragComponent]
+        declarations: [TestDataTableColumnDragComponent],
       });
     });
 

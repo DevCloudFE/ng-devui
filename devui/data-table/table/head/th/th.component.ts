@@ -62,6 +62,7 @@ export class TableThComponent implements OnChanges, OnDestroy {
     totalWidth: number;
     mouseDownScreenX: number;
     resizeHandleElement: HTMLElement;
+    tableElement: HTMLElement;
     @Input() childrenTableOpen: boolean;
     @Output() toggleChildrenTableEvent = new EventEmitter<boolean>();
     @Output() tapEvent = new EventEmitter<any>();
@@ -191,11 +192,15 @@ export class TableThComponent implements OnChanges, OnDestroy {
 
             const resizeBar = this.renderer2.createElement('div');
             this.renderer2.addClass(resizeBar, 'resize-bar');
-            this.resizeBarRefElement = resizeBar;
-            this.renderer2.appendChild(this.tableViewRefElement.nativeElement, resizeBar);
-            this.renderer2.setStyle(this.resizeBarRefElement, 'display', 'block');
-            this.renderer2.setStyle(this.resizeBarRefElement, 'left',
-                (initialOffset + this.initialWidth) + 'px');
+
+            this.tableElement = this.tableViewRefElement.nativeElement.querySelector('.devui-scrollbar table');
+            if (this.tableElement) {
+                this.renderer2.appendChild(this.tableElement, resizeBar);
+                this.renderer2.setStyle(resizeBar, 'display', 'block');
+                this.renderer2.setStyle(resizeBar, 'left',
+                    (initialOffset + this.initialWidth) + 'px');
+                this.resizeBarRefElement = resizeBar;
+            }
 
             this.renderer2.addClass(this.element, 'hover-bg');
 
@@ -222,8 +227,9 @@ export class TableThComponent implements OnChanges, OnDestroy {
             this.renderer2.removeClass(this.tableViewRefElement.nativeElement, 'table-view-selector');
 
             this.renderer2.removeClass(this.element, 'hover-bg');
-            this.renderer2.removeChild(this.tableViewRefElement, this.resizeBarRefElement);
-
+            if (this.tableElement) {
+                this.renderer2.removeChild(this.tableElement, this.resizeBarRefElement);
+            }
             // this.width = finalWidth + 'px';
 
             this.resizeEndEvent.emit({ width: finalWidth });
@@ -247,7 +253,9 @@ export class TableThComponent implements OnChanges, OnDestroy {
         const newWidth = this.initialWidth + movementX;
 
         const finalWidth = this.getFinalWidth(newWidth);
-        this.renderer2.setStyle(this.resizeBarRefElement, 'left', `${finalWidth + this.element.offsetLeft}px`);
+        if (this.resizeBarRefElement) {
+            this.renderer2.setStyle(this.resizeBarRefElement, 'left', `${finalWidth + this.element.offsetLeft}px`);
+        }
         this.resizingEvent.emit({ width: finalWidth });
     }
 

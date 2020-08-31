@@ -3,11 +3,11 @@
 :host.devui-step-item {
   width: 400px;
   min-height: 160px;
-  background: $brand-1;
+  background: $devui-brand;
   box-shadow: 0 2px 16px 0 rgba(81, 112, 255, 0.3);
   border-radius: 6px;
   font-size: 14px;
-  color: $font-white;
+  color: $devui-light-text;
   padding: 20px;
   position: absolute;
 
@@ -42,7 +42,7 @@
     margin-top: -3px;
     border-right-width: 0;
     transform: rotate(-135deg);
-    border-left-color: $brand-1;
+    border-left-color: $devui-brand;
   }
 
   &.top > .devui-arrow,
@@ -50,7 +50,7 @@
   &.top-right > .devui-arrow {
     bottom: -6px;
     border-bottom-width: 0;
-    border-top-color: $brand-1;
+    border-top-color: $devui-brand;
     transform: rotate(135deg);
   }
 
@@ -73,7 +73,7 @@
     margin-top: -3px;
     border-left-width: 0;
     transform: rotate(135deg);
-    border-right-color: $brand-1;
+    border-right-color: $devui-brand;
   }
 
   &.bottom > .devui-arrow,
@@ -82,7 +82,7 @@
     top: -6px;
     margin-left: 3px;
     border-top-width: 0;
-    border-bottom-color: $brand-1;
+    border-bottom-color: $devui-brand;
   }
 
   &.bottom > .devui-arrow {
@@ -103,7 +103,7 @@
   > .devui-shining-dot,
   .devui-shining-plus {
     position: absolute;
-    background: $brand-1;
+    background: $devui-brand;
     width: 6px;
     height: 6px;
     border-radius: 6px;
@@ -176,7 +176,7 @@
       flex-wrap: wrap;
 
       .devui-dots {
-        color: $font-white;
+        color: $devui-light-text;
         position: relative;
         top: 25px;
         font-size: 12px;
@@ -201,7 +201,7 @@
         white-space: nowrap;
 
         > div {
-          color: $font-white;
+          color: $devui-light-text;
           background: rgba(255, 255, 255, 0.1);
           border-radius: 4px;
           padding: 5px 15px;

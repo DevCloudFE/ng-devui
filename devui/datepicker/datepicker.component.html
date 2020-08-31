@@ -62,12 +62,12 @@
           <ul class="devui-monthOption text-center" [style.display]="openChooseMonth ? 'block' : 'none'">
             <li
               *ngFor="let month of availableMonths"
-              (mouseover)="changeHoverMonth(month)"
+              (mouseover)="changeHoverMonth(month.title)"
               (mouseleave)="changeHoverMonth(null)"
-              [ngClass]="{ active: currentMonth == month }"
+              [ngClass]="{ active: currentMonth == month.title, disabled: month.disabled }"
               (click)="onSelectMonth(month)"
             >
-              {{ month + 1 }}<span *ngIf="i18nLocale === 'zh-cn'">月</span>
+              {{ month.title + 1 }}<span *ngIf="i18nLocale === 'zh-cn'">月</span>
             </li>
           </ul>
           <ul class="devui-yearOption text-center" [style.display]="openChooseYear ? 'block' : 'none'">
@@ -162,33 +162,21 @@
           <td colspan="4">
             <div class="devui-timepicker" *ngIf="showTime" [ngClass]="{ 'devui-timepicker-disabled': isDisabledTime() }">
               <div class="devui-time">
-                <input [ngModel]="currentHour" (keydown)="fixTime($event, 'h')" [disabled]="isDisabledTime()" (change)="onTimeChange()" />
+                <input [ngModel]="currentHour" (keydown)="fixTime($event, 'h')" [disabled]="isDisabledTime()" />
                 <div class="devui-btn-nav" *ngIf="!isDisabledTime()">
                   <div class="btn-up" (click)="timeUp('h')"></div>
                   <div class="btn-down" (click)="timeDown('h')"></div>
                 </div>
               </div>
               <div class="devui-time">
-                <input
-                  class="devui-minutes"
-                  [ngModel]="currentMinute"
-                  (keydown)="fixTime($event, 'm')"
-                  (change)="onTimeChange()"
-                  [disabled]="isDisabledTime()"
-                />
+                <input class="devui-minutes" [ngModel]="currentMinute" (keydown)="fixTime($event, 'm')" [disabled]="isDisabledTime()" />
                 <div class="devui-btn-nav" *ngIf="!isDisabledTime()">
                   <div class="btn-up" (click)="timeUp('m')"></div>
                   <div class="btn-down" (click)="timeDown('m')"></div>
                 </div>
               </div>
               <div class="devui-time">
-                <input
-                  class="devui-seconds"
-                  [ngModel]="currentSecond"
-                  (keydown)="fixTime($event, 's')"
-                  (change)="onTimeChange()"
-                  [disabled]="isDisabledTime()"
-                />
+                <input class="devui-seconds" [ngModel]="currentSecond" (keydown)="fixTime($event, 's')" [disabled]="isDisabledTime()" />
                 <div class="devui-btn-nav" *ngIf="!isDisabledTime()">
                   <div class="btn-up" (click)="timeUp('s')"></div>
                   <div class="btn-down" (click)="timeDown('s')"></div>

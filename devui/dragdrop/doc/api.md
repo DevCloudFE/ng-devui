@@ -233,7 +233,7 @@ export type DropScrollTriggerEdge = 'left' | 'right' | 'top' | 'bottom';
     <li dDraggable *ngFor="let item of items" [dragData]="item" class="list-group-item">{{item.name}}</li>
 </ul>
 
-<div class="panel panel-default" dDroppable (onDrop)="onItemDrop($event)">
+<div class="panel panel-default" dDroppable (dropEvent)="onItemDrop($event)">
     <div class="panel-heading">Drop Items here</div>
     <div class="panel-body">
         <li *ngFor="let item of droppedItems" class="list-group-item">{{item.name}}</li>
@@ -270,14 +270,14 @@ Drag句柄可以指定实际响应draggable事件的元素，而不是draggable�
 
 ## 异步DropEnd，通知Drag元素
 
-`dDraggable`有一个`dropEndEvent`事件，此事件非浏览器默认事件而是自定义事件，非组件自动触发触发方式是在`dDroppable`的`dropEvent`事件的参数中有一个dropSubject，当需要触发drag元素上的onDropEnd事件的时候调用dropSubject.next(params) 一般是在接口返回之后 例如：
+`dDraggable`有一个`dropEndEvent`事件，此事件非浏览器默认事件而是自定义事件，非组件自动触发触发方式是在`dDroppable`的`dropEvent`事件的参数中有一个dropSubject，当需要触发drag元素上的dropEndEvent事件的时候调用dropSubject.next(params) 一般是在接口返回之后 例如：
 
 ```html
 <ul class="list-group">
-    <li dDraggable *ngFor="let item of items;let i=index;" (onDropEnd)="dropEnd($event, i)" [dragData]="item">{{item.name}}</li>
+    <li dDraggable *ngFor="let item of items;let i=index;" (dropEndEvent)="dropEnd($event, i)" [dragData]="item">{{item.name}}</li>
 </ul>
 
-<div class="panel panel-default" dDroppable (onDrop)="onItemDrop($event)">
+<div class="panel panel-default" dDroppable (dropEvent)="onItemDrop($event)">
     <div class="panel-heading">Drop Items here</div>
     <div class="panel-body">
         <li *ngFor="let item of droppedItems" class="list-group-item">{{item.name}}</li>

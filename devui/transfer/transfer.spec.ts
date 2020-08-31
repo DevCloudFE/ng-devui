@@ -53,7 +53,7 @@ class TransferDemoBaseComponent {
     { name: '选项18', value: 3, id: 18 },
   ];
 
-  title = { source: '源标题', target: '目标标题' };
+  title = {source: '源标题', target: '目标标题'};
 
   targetOption = [
     { name: '选项19', value: 3, id: 19 },
@@ -61,7 +61,7 @@ class TransferDemoBaseComponent {
     { name: '选项21', value: 6, id: 21, disabled: true },
   ];
 
-  transferToTarget = jasmine.createSpy('transfer to target');
+  transferToTarget =  jasmine.createSpy('transfer to target');
 
   transferToSource = jasmine.createSpy('transfer to source');
 
@@ -272,7 +272,7 @@ describe('transfer', () => {
       const firstIconRect = iconList[0].nativeElement.getBoundingClientRect();
       const dropPlaceRect = dropPlace.getBoundingClientRect();
       fixture.detectChanges();
-      iconList[0].nativeElement.dispatchEvent((new MouseEvent('mouseover', { bubbles: true })));
+      iconList[0].nativeElement.dispatchEvent((new MouseEvent('mouseover', { bubbles: true }) ));
       fixture.detectChanges();
 
       const dragstartEvent = createDragEvent('dragstart', {
@@ -288,8 +288,8 @@ describe('transfer', () => {
       const dragoverEvent = createDragEvent('dragover', {
         clientX: dropPlaceRect.left,
         clientY: dropPlaceRect.top,
-        screenX: dropPlaceRect.left,
-        screenY: dropPlaceRect.top
+        screenX:  dropPlaceRect.left,
+        screenY:  dropPlaceRect.top
       });
 
       dropPlace.dispatchEvent(dragoverEvent);
@@ -316,7 +316,7 @@ describe('transfer', () => {
       const firstIconRect = iconList[0].nativeElement.getBoundingClientRect();
       const dropPlaceRect = dropPlace.getBoundingClientRect();
       fixture.detectChanges();
-      iconList[0].nativeElement.dispatchEvent((new MouseEvent('mouseover', { bubbles: true })));
+      iconList[0].nativeElement.dispatchEvent((new MouseEvent('mouseover', { bubbles: true }) ));
       fixture.detectChanges();
 
       const dragstartEvent = createDragEvent('dragstart', {
@@ -332,8 +332,8 @@ describe('transfer', () => {
       const dragoverEvent = createDragEvent('dragover', {
         clientX: dropPlaceRect.left,
         clientY: dropPlaceRect.top,
-        screenX: dropPlaceRect.left,
-        screenY: dropPlaceRect.top
+        screenX:  dropPlaceRect.left,
+        screenY:  dropPlaceRect.top
       });
 
       dropPlace.dispatchEvent(dragoverEvent);

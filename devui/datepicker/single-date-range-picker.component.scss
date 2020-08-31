@@ -7,20 +7,20 @@
   & .devui-table > tbody > tr > td.devui-in-month-day {
     &.devui-in-range {
       &:not(.active):not(.disabled) {
-        background-color: $hover-content;
-        color: $dark-1;
+        background-color: $devui-list-item-hover-bg;
+        color: $devui-text;
         border-radius: 0;
       }
 
       &.disabled:not(.active) {
-        background-color: $gray-2;
+        background-color: $devui-dividing-line;
         opacity: 0.8;
-        color: $dark-1;
+        color: $devui-text;
       }
     }
 
     &.active.disabled {
-      background-color: $gray-2;
+      background-color: $devui-dividing-line;
 
       .devui-calendar-date {
         opacity: 0.8;
@@ -29,14 +29,14 @@
   }
 
   & .devui-in-month-day.devui-in-range.disabled:not(.active) .devui-calendar-date {
-    color: $dark-1;
+    color: $devui-text;
     cursor: not-allowed;
   }
 
   & .devui-day.devui-out-of-month.active {
     &:hover .devui-calendar-date {
       background-color: transparent;
-      color: $dark-2;
+      color: $devui-icon-text;
     }
 
     &.disabled {

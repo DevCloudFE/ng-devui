@@ -15,6 +15,8 @@
 | checkBeforeAdd  | `Function\|Promise\|Observable` |           无            | 可选，自定义校验函数，类型为(newTag: string) => boolean 或者 Promise<boolean>或者 Observable<boolean> | [基本用法](/components/tags-input/demo#basic-usage) |
 |    disabled     |            `boolean`            |          false          | 可选，disabled 灰化状态                                                                               | [基本用法](/components/tags-input/demo#basic-usage) |
 
+备注：除传入`tags`方式实现外，还可采用`ngModel`绑定数组的方式，详细使用示例参考[双向绑定](/components/tags-input/demo#ng-model)。
+
 ### d-tags-input 事件
 
 |    事件     |        类型         | 说明                                                                                                          | 跳转 Demo                                       |

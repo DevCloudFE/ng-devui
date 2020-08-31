@@ -10,9 +10,9 @@
       <em *ngFor="let dot of dots; index as i" class="icon icon-dot-status {{ i === stepIndex ? 'devui-active' : '' }}"></em>
     </div>
     <div class="devui-guide-btn">
-      <div *ngIf="stepIndex > 0 && !extraConfig?.hidePreStep" class="devui-prev-step" (click)="prev()">{{ stepText.previous }}</div>
-      <div *ngIf="stepIndex + 1 < stepsCount" (click)="next()">{{ stepText.next }}</div>
-      <div *ngIf="stepIndex === stepsCount - 1" (click)="closeAll()">{{ stepText.finish }}</div>
+      <div *ngIf="stepIndex > 0 && !extraConfig?.hidePreStep" class="devui-prev-step" (click)="prev()">{{ i18nCommonText.previous }}</div>
+      <div *ngIf="stepIndex + 1 < stepsCount" (click)="next()">{{ i18nCommonText.next }}</div>
+      <div *ngIf="stepIndex === stepsCount - 1" (click)="closeAll()">{{ i18nCommonText.finish }}</div>
     </div>
   </div>
 </div>

@@ -1,6 +1,6 @@
 import {
   Directive, OnInit, Input, ElementRef, forwardRef, ComponentRef, ViewContainerRef, Output, EventEmitter,
-  ComponentFactoryResolver, Renderer2, Injector, HostListener, TemplateRef, OnDestroy, AfterViewInit
+  ComponentFactoryResolver, Renderer2, Injector, HostListener, TemplateRef, OnDestroy
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DateConverter } from 'ng-devui/utils';
@@ -16,8 +16,7 @@ import {
   AnimationPlayer,
   style
 } from '@angular/animations';
-import { fromEvent, Subscription } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 const easeInQuint = 'cubic-bezier(0.755, 0.05, 0.855, 0.06)';
 const easeOutQuint = 'cubic-bezier(0.23, 1, 0.32, 1)';
@@ -32,7 +31,7 @@ const animationDuration = '200ms';
     multi: true
   }]
 })
-export class DatepickerDirective implements OnInit, AfterViewInit, OnDestroy, ControlValueAccessor {
+export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAccessor {
   @Input() locale: string;
   @Input() cssClass: string;
   @Input() disabled: boolean;
@@ -51,7 +50,6 @@ export class DatepickerDirective implements OnInit, AfterViewInit, OnDestroy, Co
   private _showTime: boolean;
   private cmpRef: ComponentRef<DatepickerComponent>;
   private player: AnimationPlayer;
-  private inputSub: Subscription;
   private i18nSubscription: Subscription;
   private i18nLocale: I18nInterface['locale'];
 
@@ -69,10 +67,10 @@ export class DatepickerDirective implements OnInit, AfterViewInit, OnDestroy, Co
   @Input() set dateConfig(dateConfig: any) {
     if (this.checkDateConfig(dateConfig)) {
       this._dateConfig = dateConfig;
-      this._dateFormat = this.showTime ? dateConfig.format.time : dateConfig.format.date;
     } else {
       this._dateConfig = this.datePickerConfig.dateConfig;
     }
+    this._dateFormat = this.showTime ? this._dateConfig.format.time : this._dateConfig.format.date;
   }
 
   get dateConfig() {
@@ -80,7 +78,7 @@ export class DatepickerDirective implements OnInit, AfterViewInit, OnDestroy, Co
   }
 
   @Input() set dateFormat(dateFormat: string) {
-    if (this._dateFormat !== dateFormat) {
+    if (dateFormat && this._dateFormat !== dateFormat) {
       this._dateFormat = dateFormat;
       this.writeModelValue({selectedDate: this.selectedDate, reason: SelectDateChangeReason.format});
     }
@@ -134,6 +132,7 @@ export class DatepickerDirective implements OnInit, AfterViewInit, OnDestroy, Co
   ngOnInit() {
     this._minDate = this.minDate ? new Date(this.minDate) : new Date(this.dateConfig.min, 0, 1, 0, 0, 0);
     this._maxDate = this.maxDate ? new Date(this.maxDate) : new Date(this.dateConfig.max, 11, 31, 23, 59, 59);
+    this._dateFormat = this.showTime ? this.dateConfig.format.time : this.dateConfig.format.date;
     const target = this.cmpRef.location.nativeElement;
     this.applyPopupStyling(target);
     const component = this.cmpRef.instance;
@@ -142,9 +141,9 @@ export class DatepickerDirective implements OnInit, AfterViewInit, OnDestroy, Co
     this.fillPopupData();
     component.ngOnInit();
 
-    component.registerOnChange(selectedDate => {
-      this.writeValue(selectedDate);
-      this.onChange(selectedDate);
+    component.registerOnChange(selectedDateObj => {
+      this.writeValue(selectedDateObj);
+      this.onChange(selectedDateObj.selectedDate);
     });
 
     component.selectedDateChange.subscribe((arg: SelectDateChangeEventArgs) => {
@@ -158,15 +157,6 @@ export class DatepickerDirective implements OnInit, AfterViewInit, OnDestroy, Co
       this.show();
     }
     this.setI18nText();
-  }
-
-  ngAfterViewInit() {
-    this.inputSub = fromEvent(this.elementRef.nativeElement, 'input')
-      .pipe(
-        debounceTime(300)
-      ).subscribe(event => {
-        this.transUserInputToDatepicker(event);
-      });
   }
 
   writeValue(obj: any): void {
@@ -219,16 +209,6 @@ export class DatepickerDirective implements OnInit, AfterViewInit, OnDestroy, Co
   hide() {
     const playAnimation = this.isOpen !== false;
     this.isOpen = false;
-    const ele = this.formWithDropDown();
-    if (ele && ele.classList.contains('devui-dropdown-origin-open')) {
-      ele.classList.remove('devui-dropdown-origin-open');
-    }
-    if (ele && ele.classList.contains('devui-dropdown-origin-top')) {
-      ele.classList.remove('devui-dropdown-origin-top');
-    }
-    if (ele && ele.classList.contains('devui-dropdown-origin-bottom')) {
-      ele.classList.remove('devui-dropdown-origin-bottom');
-    }
     if (playAnimation) {
       this.playAnimation();
     }
@@ -253,10 +233,12 @@ export class DatepickerDirective implements OnInit, AfterViewInit, OnDestroy, Co
     if (this.isOpen) {
       this.cmpRef.instance.writeValue(this.selectedDate);
     }
-    this.selectedDateChange.emit({
-      reason: dateReason,
-      selectedDate: this.selectedDate
-    });
+    if (selectDateObj && typeof selectDateObj === 'object' && selectDateObj.hasOwnProperty('selectedDate')) {
+      this.selectedDateChange.emit({
+        reason: dateReason,
+        selectedDate: this.selectedDate
+      });
+    }
   }
 
   show() {
@@ -322,6 +304,9 @@ export class DatepickerDirective implements OnInit, AfterViewInit, OnDestroy, Co
   @HostListener('blur', ['$event'])
   onBlur($event) {
     this.onTouched();
+    if (!this.cmpRef.instance.isClickingCmp) {
+      this.transUserInputToDatepicker();
+    }
   }
 
   @HostListener('document:click', ['$event'])
@@ -397,40 +382,49 @@ export class DatepickerDirective implements OnInit, AfterViewInit, OnDestroy, Co
       if (!this.isOpen) {
         const targetElement = this.cmpRef.location.nativeElement;
         this.renderer2.setStyle(targetElement, 'display', 'none');
+        const ele = this.formWithDropDown();
+        if (ele && ele.classList.contains('devui-dropdown-origin-open')) {
+          ele.classList.remove('devui-dropdown-origin-open');
+        }
+        if (ele && ele.classList.contains('devui-dropdown-origin-top')) {
+          ele.classList.remove('devui-dropdown-origin-top');
+        }
+        if (ele && ele.classList.contains('devui-dropdown-origin-bottom')) {
+          ele.classList.remove('devui-dropdown-origin-bottom');
+        }
       }
     });
     this.player.play();
   }
 
-  private transUserInputToDatepicker(event) {
-    if (!this.showTime && !this.disabled) {
-      const value = event.target.value;
-      if (!value) {
-        this.clearAll();
-        return;
-      }
-      const valueDate = new Date(value);
-      const valueFormat = this.dateConverter.format(valueDate, this.dateFormat, this.locale || this.i18nLocale);
-      if (value && value === valueFormat) {
-        if (valueDate.getTime() < this.minDate.getTime() || valueDate.getTime() > this.maxDate.getTime()) {
-          this.elementRef.nativeElement.value =
-            this.dateConverter.format(this.selectedDate, this.dateFormat, this.locale || this.i18nLocale);
-        } else {
-          this.cmpRef.instance.chooseDate(value);
-        }
-      } else if (!value) {
-        this.clearAll();
-      }
+  private transUserInputToDatepicker() {
+    const value = this.elementRef.nativeElement.value;
+    if (!value && !this.selectedDate) {
+      return;
+    }
+    if (!value) {
+      this.clearAll();
+      return;
+    }
+    const valueDate = new Date(value);
+    const valueFormat = valueDate instanceof Date && !isNaN(valueDate.getTime()) &&
+      this.dateConverter.format(valueDate, this.dateFormat, this.locale || this.i18nLocale);
+    if (new Date(valueFormat).getTime() === new Date(this.selectedDate).getTime()) {
+      return;
+    }
+    if (
+      this.showTime || this.disabled || !valueDate || value !== valueFormat ||
+      (value === valueFormat && (valueDate.getTime() < this.minDate.getTime() || valueDate.getTime() > this.maxDate.getTime()))
+    ) {
+      this.elementRef.nativeElement.value = this.selectedDate ?
+        this.dateConverter.format(this.selectedDate, this.dateFormat, this.locale || this.i18nLocale) :
+        '';
     } else {
-      this.elementRef.nativeElement.value =
-        this.dateConverter.format(this.selectedDate, this.dateFormat, this.locale || this.i18nLocale);
+      this.cmpRef.instance.chooseDate(value);
     }
   }
 
   ngOnDestroy() {
-    if (this.inputSub) {
-      this.inputSub.unsubscribe();
-    }
     if (this.i18nSubscription) {
       this.i18nSubscription.unsubscribe();
     }

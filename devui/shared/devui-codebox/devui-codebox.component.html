@@ -30,7 +30,7 @@
     </span>
   </section>
   <section class="highlight-wrapper" [ngClass]="{ 'highlight-wrapper-expand': expanded }">
-    <div style="padding: 0 20px">
+    <div style="padding: 0 20px;">
       <d-tabs [(activeTab)]="codeTabID">
         <d-tab *ngFor="let source of sourceData" [title]="source.title" [id]="source.title">
           <ng-template dTabContent>

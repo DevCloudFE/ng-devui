@@ -14,44 +14,61 @@ export class SearchFilterComponent {
   @ViewChild('dOperableTreeComponent', { static: true }) dOperableTreeComponent: OperableTreeComponent;
   currentSelectedNode;
   data2 = [{
-    'title': '父节点1'
+    'title': '父节点1',
+    'customSearchValue': 'a',
   }, {
     'title': '父节点2',
+    'customSearchValue': 'b',
     'children': [{
       'title': '子节点2-1',
+      'customSearchValue': 'c',
       'children': [{
-        'title': '子节点2-1-1'
+        'title': '子节点2-1-1',
+        'customSearchValue': 'd',
       }, {
-        'title': '子节点2-1-2'
+        'title': '子节点2-1-2',
+        'customSearchValue': 'e',
       }]
     }, {
       'title': '子节点2-2',
+      'customSearchValue': 'f',
       'children': [{
-        'title': '子节点2-2-1'
+        'title': '子节点2-2-1',
+        'customSearchValue': 'g',
       }, {
-        'title': '子节点2-2-2'
+        'title': '子节点2-2-2',
+        'customSearchValue': 'h',
       }]
     }]
   }, {
     'title': '父节点3',
+    'customSearchValue': 'i',
     'children': [{
       'title': '子节点3-1',
+      'customSearchValue': 'j',
     }, {
       'title': '子节点3-2',
+      'customSearchValue': 'k',
     }],
   }, {
     'title': '父节点4',
+    'customSearchValue': 'l',
     'children': [{
-      'title': '子节点4-1'
+      'title': '子节点4-1',
+      'customSearchValue': 'm',
     }, {
-      'title': '子节点4-2'
+      'title': '子节点4-2',
+      'customSearchValue': 'n',
     }]
   }, {
     'title': '父节点5',
+    'customSearchValue': 'o',
     'children': [{
-      'title': '子节点5-1'
+      'title': '子节点5-1',
+      'customSearchValue': 'p',
     }, {
-      'title': '子节点5-2'
+      'title': '子节点5-2',
+      'customSearchValue': 'q',
     }]
   }];
 
@@ -65,9 +82,16 @@ export class SearchFilterComponent {
   }
 
   onKeyUp(event) {
-    this.dOperableTreeComponent.operableTree.treeFactory.searchTree(event.target.value);
+    this.dOperableTreeComponent.operableTree.treeFactory.searchTree(event);
   }
   onKeyUp2(event) {
-    this.dOperableTreeComponent.operableTree.treeFactory.searchTree(event.target.value, true);
+    this.dOperableTreeComponent.operableTree.treeFactory.searchTree(event, true);
+  }
+  onKeyUp3(event) {
+    this.dOperableTreeComponent.operableTree.treeFactory.searchTree(event, true, 'customSearchValue');
+  }
+  onKeyUp4(event) {
+    const regex = new RegExp('^' + event + '[\s\S]*');
+    this.dOperableTreeComponent.operableTree.treeFactory.searchTree(event, true, undefined, regex);
   }
 }

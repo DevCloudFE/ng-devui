@@ -9,6 +9,12 @@
       <d-basic demo></d-basic>
     </d-codebox>
   </div>
+  <div class="demo-example" [dAnchor]="'custom-loading'">
+    <div class="demo-title">自定义loading模板</div>
+    <d-codebox id="custom-loading" [sourceData]="customLoadingSource">
+      <d-custom-loading demo></d-custom-loading>
+    </d-codebox>
+  </div>
   <div class="demo-example" [dAnchor]="'custom-display-field'">
     <div class="demo-title">自定显示字段</div>
     <div class="demo-text">
@@ -70,6 +76,15 @@
     </div>
     <d-codebox id="draggable" [sourceData]="checkControlSource">
       <d-check-control demo></d-check-control>
+    </d-codebox>
+  </div>
+  <div class="demo-example" [dAnchor]="'virtual-scroll'">
+    <div class="demo-title">大数据量下的可操作树</div>
+    <div class="demo-text">
+      使用虚拟滚动处理大数据量的加载问题，同时处理大数据量操作耗时长卡顿的问题
+    </div>
+    <d-codebox id="virtual-scroll" [sourceData]="virtualScrollSource">
+      <d-virtual-scroll demo></d-virtual-scroll>
     </d-codebox>
   </div>
 </div>

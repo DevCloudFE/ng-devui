@@ -7,11 +7,11 @@
 
   .devui-select-input {
     &:not([disabled]) {
-      color: $dark-1;
+      color: $devui-text;
     }
 
     &.devui-tree-select-input {
-      color: $gray-1;
+      color: $devui-line; //TODO: Color-Question
       font-size: $font-size-base;
       padding: 2px 10px 0 10px;
       height: unset;
@@ -39,7 +39,7 @@
         content: '';
         height: 14px;
         width: 2px;
-        background-color: $dark-1;
+        background-color: $devui-icon-text;
         left: 50%;
       }
 
@@ -54,7 +54,7 @@
       &:hover {
         &::after,
         &::before {
-          background-color: $brand-1;
+          background-color: $devui-icon-fill-active;
         }
       }
     }
@@ -74,7 +74,7 @@
       transition: transform 0.3s;
 
       polygon {
-        fill: $dark-2;
+        fill: $devui-text-weak;
       }
     }
 
@@ -92,7 +92,7 @@
 
     &.disabled {
       svg polygon {
-        fill: $disabled-content;
+        fill: $devui-disabled-text;
       }
     }
   }
@@ -107,7 +107,7 @@
 
 .devui-tree-select.devui-options-container {
   width: 100%;
-  color: $dark-1;
+  color: $devui-text;
   padding: 5px 0;
 
   .devui-tree ::ng-deep .devui-tree-node.devui-operable-tree-node {
@@ -138,7 +138,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: $brand-3;
+        background-color: $devui-list-item-selected-bg;
         z-index: -1;
       }
     }
@@ -148,8 +148,8 @@
     user-select: none;
     cursor: not-allowed;
     padding: 5px 12px;
-    background-color: $disabled-bg;
-    color: $disabled-content;
+    background-color: $devui-disabled-bg;
+    color: $devui-disabled-text;
   }
 }
 
@@ -162,13 +162,13 @@
 .devui-select-item {
   display: inline-flex;
   align-items: center;
-  color: $dark-1;
+  color: $devui-text;
   padding: 1px 10px;
   line-height: 1.5;
-  background-color: $tag-label-bgcolor;
+  background-color: $devui-label-bg;
   border-radius: 2px;
   margin: 0 2px 2px 0;
-  border: 1px solid $tag-label-bgcolor;
+  border: 1px solid $devui-label-bg;
   max-width: calc(100% - 2px);
   height: 22px;
 
@@ -191,7 +191,7 @@
     max-width: calc(100% - 24px);
 
     &:hover {
-      color: $hover-control;
+      color: $devui-list-item-hover-text;
     }
   }
 
@@ -202,7 +202,7 @@
     text-align: center;
     margin-left: 12px;
     border-radius: 50%;
-    background-color: $gray-1;
+    background-color: $devui-line; // TODO: Color-Question
     position: relative;
     top: -1px;
     display: inline-flex;
@@ -211,11 +211,11 @@
     cursor: pointer;
 
     svg path {
-      fill: $font-white;
+      fill: $devui-light-text;
     }
 
     &:hover {
-      background-color: $hover-control;
+      background-color: $devui-icon-fill-active-hover;
     }
   }
 }
@@ -226,7 +226,7 @@
 }
 
 svg.svg-icon-search path {
-  fill: $dark-2;
+  fill: $devui-text-weak;
 }
 
 // 此处设置默认宽度，使用组件时可以自定义宽度，尽量不要入侵组件内部样式。
@@ -246,20 +246,20 @@ svg.svg-icon-search path {
 
 .devui-select-input.devui-tree-select-input.disabled {
   & .devui-select-item {
-    background-color: $disabled-bg;
-    border-color: $disabled-border;
+    background-color: $devui-disabled-bg;
+    border-color: $devui-disabled-line;
 
     &.devui-no-label-item {
       background-color: transparent;
       border-color: transparent;
-      color: $disabled-content;
+      color: $devui-disabled-text;
     }
 
     & > .devui-select-item-content {
       &,
       &:hover,
       &:focus {
-        color: $disabled-content;
+        color: $devui-disabled-text;
         cursor: not-allowed;
       }
     }
@@ -268,11 +268,11 @@ svg.svg-icon-search path {
       &,
       &:hover,
       &:focus {
-        background-color: $disabled-border;
+        background-color: $devui-disabled-line;
         cursor: not-allowed;
 
         svg path {
-          fill: $disabled-bg;
+          fill: $devui-disabled-bg;
         }
       }
     }

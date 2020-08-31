@@ -28,56 +28,56 @@
   &.top {
     margin-top: -5px;
     padding: 0;
-    box-shadow: -5px 5px 20px 0 rgba($dark-1, 0.2);
+    box-shadow: -5px 5px 20px 0 rgba($devui-text, 0.2);
 
     & .devui-tooltip-arrow {
       bottom: -5px;
       left: 50%;
       margin-left: -5px;
       border-width: 5px 5px 0;
-      border-top-color: $hwc-feedback-overlay-background;
+      border-top-color: $devui-feedback-overlay-bg;
     }
   }
 
   &.bottom {
     margin-top: 5px;
     padding: 0;
-    box-shadow: 5px -5px 20px 0 rgba($dark-1, 0.2);
+    box-shadow: 5px -5px 20px 0 rgba($devui-text, 0.2);
 
     & .devui-tooltip-arrow {
       top: -5px;
       left: 50%;
       margin-left: -5px;
       border-width: 0 5px 5px;
-      border-bottom-color: $hwc-feedback-overlay-background;
+      border-bottom-color: $devui-feedback-overlay-bg;
     }
   }
 
   &.left {
     margin-left: -5px;
     padding: 0;
-    box-shadow: 5px -5px 20px 0 rgba($dark-1, 0.2);
+    box-shadow: 5px -5px 20px 0 rgba($devui-text, 0.2);
 
     & .devui-tooltip-arrow {
       top: 50%;
       right: -5px;
       margin-top: -5px;
       border-width: 5px 0 5px 5px;
-      border-left-color: $hwc-feedback-overlay-background;
+      border-left-color: $devui-feedback-overlay-bg;
     }
   }
 
   &.right {
     margin-left: 5px;
     padding: 0;
-    box-shadow: -5px 5px 20px 0 rgba($dark-1, 0.2);
+    box-shadow: -5px 5px 20px 0 rgba($devui-text, 0.2);
 
     & .devui-tooltip-arrow {
       top: 50%;
       left: -5px;
       margin-top: -5px;
       border-width: 5px 5px 5px 0;
-      border-right-color: $hwc-feedback-overlay-background;
+      border-right-color: $devui-feedback-overlay-bg;
     }
   }
 
@@ -85,10 +85,10 @@
     max-width: 200px;
     padding: 5px 10px;
     font-size: 12px;
-    color: $hwc-feedback-overlay-font-color;
+    color: $devui-feedback-overlay-text;
     letter-spacing: 0;
     line-height: 1.5;
-    background: $hwc-feedback-overlay-background;
+    background: $devui-feedback-overlay-bg;
     box-shadow: none;
     overflow-wrap: break-word;
     word-break: normal;

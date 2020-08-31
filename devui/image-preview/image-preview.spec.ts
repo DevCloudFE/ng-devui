@@ -49,8 +49,6 @@ describe('image-preview', () => {
       for (let i = 0; i < dModalEls.length; i++) {
         dModalEls[i].parentNode.removeChild(dModalEls[i]);
       }
-
-      document.querySelector('body').classList.remove('modal-open');
     });
 
     it('should created correctly', () => {
