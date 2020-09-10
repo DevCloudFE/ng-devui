@@ -1,5 +1,6 @@
-<div class="demo-container">
-  <div class="demo-example">
+<div class="demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 60, bottom: 0 }">
+  <d-demo-nav [navItems]="navItems"></d-demo-nav>
+  <div class="demo-example" [dAnchor]="'basic-usage'">
     <div class="demo-title">基本用法</div>
     <div class="demo-text">
       渲染一棵基本树
@@ -8,7 +9,22 @@
       <d-basic demo></d-basic>
     </d-codebox>
   </div>
-  <div class="demo-example">
+  <div class="demo-example" [dAnchor]="'custom-loading'">
+    <div class="demo-title">自定义loading模板</div>
+    <d-codebox id="custom-loading" [sourceData]="customLoadingSource">
+      <d-custom-loading demo></d-custom-loading>
+    </d-codebox>
+  </div>
+  <div class="demo-example" [dAnchor]="'custom-display-field'">
+    <div class="demo-title">自定显示字段</div>
+    <div class="demo-text">
+      通过设置treeNodeTitleKey,自定义树中显示和搜索的关键字
+    </div>
+    <d-codebox id="custom-title-key" [sourceData]="customTitleKeySource">
+      <d-custom-title-key demo></d-custom-title-key>
+    </d-codebox>
+  </div>
+  <div class="demo-example" [dAnchor]="'checkable-tree'">
     <div class="demo-title">可勾选树</div>
     <div class="demo-text">
       可以进行勾选的树
@@ -17,7 +33,7 @@
       <d-checkable demo></d-checkable>
     </d-codebox>
   </div>
-  <div class="demo-example">
+  <div class="demo-example" [dAnchor]="'operation-button'">
     <div class="demo-title">操作按钮</div>
     <div class="demo-text">
       可定义外部操作按钮、虚浮按钮
@@ -26,7 +42,16 @@
       <d-operate-btn demo></d-operate-btn>
     </d-codebox>
   </div>
-  <div class="demo-example">
+  <div class="demo-example" [dAnchor]="'search-filtering'">
+    <div class="demo-title">搜索过滤</div>
+    <div class="demo-text">
+      通过treeFactory中的searchTree方法可以搜索节点或者过滤节点
+    </div>
+    <d-codebox id="search-filter" [sourceData]="searchFilterSource">
+      <d-search-filter demo></d-search-filter>
+    </d-codebox>
+  </div>
+  <div class="demo-example" [dAnchor]="'custom-icon'">
     <div class="demo-title">自定义图标</div>
     <div class="demo-text">
       自定义操作按钮图标、节点图标
@@ -35,13 +60,31 @@
       <d-customize demo></d-customize>
     </d-codebox>
   </div>
-  <div class="demo-example">
+  <div class="demo-example" [dAnchor]="'drag-and-drop-tree'">
     <div class="demo-title">可拖拽树</div>
     <div class="demo-text">
-        通过OperableTree的 dragglable 属性配置子节点的拖拽功能，并支持外部元素拖拽入树
+      通过OperableTree的 dragglable 属性配置子节点的拖拽功能，并支持外部元素拖拽入树
     </div>
     <d-codebox id="draggable" [sourceData]="draggableSource">
       <d-draggable demo></d-draggable>
+    </d-codebox>
+  </div>
+  <div class="demo-example" [dAnchor]="'check-control-tree'">
+    <div class="demo-title">控制父子check关系</div>
+    <div class="demo-text">
+      通过OperableTree的 checkableRelation 控制check时父子节点的表现
+    </div>
+    <d-codebox id="draggable" [sourceData]="checkControlSource">
+      <d-check-control demo></d-check-control>
+    </d-codebox>
+  </div>
+  <div class="demo-example" [dAnchor]="'virtual-scroll'">
+    <div class="demo-title">大数据量下的可操作树</div>
+    <div class="demo-text">
+      使用虚拟滚动处理大数据量的加载问题，同时处理大数据量操作耗时长卡顿的问题
+    </div>
+    <d-codebox id="virtual-scroll" [sourceData]="virtualScrollSource">
+      <d-virtual-scroll demo></d-virtual-scroll>
     </d-codebox>
   </div>
 </div>

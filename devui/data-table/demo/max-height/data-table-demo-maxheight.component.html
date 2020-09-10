@@ -1,6 +1,16 @@
-<d-data-table #datatable1 [dataSource]="maxHeightDataSource" fixHeader="true" maxHeight="400px" [scrollable]="true">
-  <d-column field="$index" header="#" [width]="'100px'"></d-column>
-  <d-column *ngFor="let colOption of dataTableOptions.columns" [field]="colOption.field" [header]="colOption.header"
-    [sortable]="colOption.sortable" [fieldType]="colOption.fieldType" [width]="'150px'">
-  </d-column>
+<d-data-table [dataSource]="maxHeightDataSource" fixHeader="true" maxHeight="360px" scrollable="true">
+  <thead dTableHead>
+    <tr dTableRow>
+      <th dHeadCell *ngFor="let colOption of dataTableOptions.columns">{{ colOption.header }}</th>
+    </tr>
+  </thead>
+  <tbody dTableBody>
+    <ng-template let-rowItem="rowItem" let-rowIndex="rowIndex">
+      <tr dTableRow>
+        <td dTableCell *ngFor="let colOption of dataTableOptions.columns">
+          {{ colOption.fieldType === 'date' ? (rowItem[colOption.field] | i18nDate: 'short':false) : rowItem[colOption.field] }}
+        </td>
+      </tr>
+    </ng-template>
+  </tbody>
 </d-data-table>

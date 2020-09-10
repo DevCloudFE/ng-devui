@@ -1,13 +1,8 @@
 <div>
-    <div class="modal-body">
-        <div *ngIf="!!data.content">{{data.content}}</div>
-    </div>
-    <div class="modal-footer">
-        <d-button
-                (click)='close($event)'
-                bsStyle="stress"
-                circled="true"  
-        >{{data.cancelBtnText}}
-        </d-button>
-    </div>
+  <div class="modal-body">
+    <div *ngIf="!!data.content">{{ data.content }}</div>
+  </div>
+  <div class="modal-footer">
+    <d-button (btnClick)="close($event)" bsStyle="primary">{{ data.cancelBtnText }} </d-button>
+  </div>
 </div>

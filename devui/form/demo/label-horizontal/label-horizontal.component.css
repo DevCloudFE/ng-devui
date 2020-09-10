@@ -1,0 +1,21 @@
+:host form {
+  width: 450px;
+}
+
+.single-checkbox {
+  display: inline-block;
+  margin-right: 4px;
+  height: 28px;
+}
+
+:host ::ng-deep .devui-radio-horizontal d-radio {
+  display: inline-block;
+}
+
+.single-radio {
+  line-height: 40px;
+}
+
+.plan-desc {
+  height: 96px;
+}

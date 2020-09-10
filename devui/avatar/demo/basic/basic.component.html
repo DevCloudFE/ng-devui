@@ -1,0 +1,18 @@
+<div>
+  <div class="container">
+    <span>中文开头的情况，取最后两个字符：</span>
+    <d-avatar style="text-align: right;" [gender]="'Female'" [name]="'组件头像'"></d-avatar>
+  </div>
+  <div class="container">
+    <span>英文开头的情况，取前面两个字符：</span>
+    <d-avatar [name]="'MyAvatar'"></d-avatar>
+  </div>
+  <div class="container">
+    <span>多个英文名的情况，取前两个英文名首字母：</span>
+    <d-avatar [name]="'Avatar1 Avatar2'"></d-avatar>
+  </div>
+  <div class="container">
+    <span>非中英文开头的情况,取前两个字符：</span>
+    <d-avatar [name]="'1Avatar'"></d-avatar>
+  </div>
+</div>

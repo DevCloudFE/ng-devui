@@ -5,14 +5,10 @@ import { CommonModule } from '@angular/common';
 
 
 @NgModule({
-  imports: [
-    CommonModule
-  ],
+  imports: [CommonModule],
   exports: [StatusComponent],
   declarations: [StatusComponent],
-  providers: [],
+  providers: []
 })
 
-export class StatusModule {
-
-}
+export class StatusModule { }

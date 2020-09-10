@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { IFileOptions, IUploadOptions } from '../../file-uploader.types';
+import { IFileOptions, IUploadOptions } from 'ng-devui/upload';
 
 @Component({
-  selector: 'd-demo-upload-auto',
+  selector: 'd-auto',
   templateUrl: './auto.component.html'
 })
 export class UploadAutoComponent {
@@ -17,7 +17,7 @@ export class UploadAutoComponent {
   };
 
   uploadOptions1: IUploadOptions = {
-    uri: 'http://localhost:8080',
+    uri: '/upload',
     headers: {},
     additionalParameter: this.additionalParameter1,
     maximumSize: 0.5,

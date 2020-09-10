@@ -1,16 +1,22 @@
-.devui-loading-demo{
+.devui-loading-demo {
   margin-top: 50px;
 }
+
 .custom-loader {
   border: 5px solid #cacfd8;
   border-top: 5px solid #e41f2b;
   border-radius: 50%;
   width: 80px;
   height: 80px;
-  animation: spin .5s linear infinite;
+  animation: spin 0.5s linear infinite;
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }

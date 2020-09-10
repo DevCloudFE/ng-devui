@@ -1,0 +1,133 @@
+@import '../style/theme/color';
+
+$component-scope: 'devui-image-preview';
+
+::ng-deep .devui-fullscreen {
+  overflow: hidden !important;
+}
+
+::ng-deep #devui-image-preview-modal .modal-content {
+  overflow: hidden !important;
+  transform: none !important;
+  background-color: transparent;
+}
+
+.devui-image-preview-wrapper {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+
+  .devui-image-preview-main-image {
+    width: auto;
+    height: auto;
+    cursor: grab;
+    margin-top: -20px;
+  }
+
+  .devui-optimal-proportion {
+    max-width: 90%;
+    max-height: 90%;
+  }
+}
+
+@mixin fixed-button() {
+  position: fixed;
+  z-index: 1001;
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  border-radius: 18px;
+  background: $devui-highlight-overlay;
+  box-shadow: 0 0 8px 0 $devui-light-shadow;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background: $devui-area;
+  }
+
+  svg polygon {
+    fill: $devui-icon-text;
+  }
+
+  svg {
+    width: 38px;
+    height: 18px;
+  }
+}
+
+.devui-fixed-arrow-left {
+  @include fixed-button();
+
+  top: calc(50% - 18px);
+  left: 20px;
+}
+
+.devui-fixed-arrow-right {
+  @include fixed-button();
+
+  top: calc(50% - 18px);
+  right: 20px;
+}
+
+svg,
+polygon,
+g,
+path {
+  fill: $devui-icon-text;
+}
+
+.devui-image-preview-close-btn {
+  @include fixed-button();
+
+  top: 15px;
+  right: 20px;
+}
+
+.devui-image-preview-toolbar {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $devui-highlight-overlay;
+  box-shadow: 0 0 3px 0 $devui-light-shadow;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+
+  button {
+    display: inline-flex;
+    width: 24px;
+    height: 24px;
+    align-items: center;
+    justify-content: center;
+    color: $devui-text;
+  }
+
+  .devui-image-preview-index {
+    display: inline-flex;
+    width: 100px;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    d-input-number {
+      width: 65px;
+      margin-right: 4px;
+    }
+  }
+
+  & > :not(:first-child) {
+    margin-left: 20px;
+  }
+
+  .devui-image-preview-index,
+  .devui-next {
+    margin-left: 4px;
+  }
+}

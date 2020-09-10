@@ -1,340 +1,389 @@
 @import '../style/theme/color';
 
-.month-view {
-    background-color: $white;
-    /*min-width: 300px;*/
-    font-size: 12px;
-    width: 240px;
-    text-align: center;
-    // box-shadow: 0 2px 2px rgba(0, 0, 0, .24), 0 0 2px rgba(0, 0, 0, .12)
-    box-shadow: 0 4px 8px 0 rgba(41,48,64,0.20);
-    border-radius: 2px;
+.devui-date-header {
+  height: 38px;
 }
 
-.month-view .month-view-table {
-    margin-bottom: 0;
-    background: $white;
-    table-layout: fixed;
+.devui-month-view {
+  background-color: $devui-connected-overlay-bg;
+  font-size: 12px;
+  width: 240px;
+  text-align: center;
+  box-shadow: 0 4px 8px 0 $devui-shadow;
+  border-radius: 2px;
+  position: relative;
 }
 
-.month-view .date-title {
-    font-weight: bold;
-    cursor: pointer;
-    font-size: 12px;
+.devui-month-view .devui-month-view-table {
+  margin-bottom: 0;
+  background: $devui-connected-overlay-bg;
+  table-layout: fixed;
+  border-collapse: collapse;
+  width: 100%;
 }
 
-.month-view .btn-link {
-    text-decoration: none;
-    cursor: pointer;
-    .left-triangle, .right-triangle{
-        display: inline-block;
-        position: absolute;
-        top: 6px;
-        width: 0;
-        height: 0;
-        border: 6px solid;
-    }
-    .left-triangle{
-        left: 6px;
-        border-color: transparent $dark1 transparent transparent;
-    }
-    .right-triangle{
-        right: 6px;
-        border-color: transparent transparent transparent $dark1;
-    }
-    .left-triangle.second{
-        left: 12px;
-    }
-    .right-triangle.second{
-        right: 12px;
-    }
-    svg{
-        #left-path{fill: $dark1}
-        #right-path{fill: $dark1}
-    }
-    &:hover{
-        .left-triangle{
-            border-right-color: $hover-control;
-        }
-        .right-triangle{
-            border-left-color: $hover-control;
-        }
-        #left-path{fill: $hover-control}
-        #right-path{fill: $hover-control}
-        svg{
-            #left-path{fill: $hover-control}
-            #right-path{fill: $hover-control}
-        }
-    }
+.devui-month-view .devui-date-title {
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 12px;
 }
 
-.month-view .btn-link.btn-right {
-  transform: scale(-1, 1);
-  display: inline-block;
-  line-height: 1;
-}
+.devui-month-view .devui-btn-link {
+  text-decoration: none;
+  cursor: pointer;
+  display: block;
 
-.month-view .date-select {
-    border: none;
-    background: transparent;
-    outline: none;
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    appearance: none;
-}
-
-.month-view .week-header {
-    cursor: default;
-    margin-bottom: 16px;
-}
-
-.month-view .week-header td {
-    width: 32px;
-    height: 24px;
-    line-height: 24px;
-    color: $dark1;
-    border: none;
-}
-
-.month-view .day:not(.disabled) {
-    cursor: pointer;
-    font-size: 12px;
-    color: #BBBBBB;
-}
-
-.month-view .day.disabled {
+  &.devui-year-month-disabled {
     cursor: not-allowed;
+
+    svg path,
+    svg polygon {
+      fill: $devui-disabled-text;
+    }
+  }
+
+  svg path,
+  svg polygon {
+    fill: $devui-text-weak;
+  }
+
+  &:not(.devui-year-month-disabled):hover {
+    svg {
+      path,
+      polygon {
+        fill: $devui-icon-fill-active-hover;
+      }
+    }
+  }
 }
 
-.d-calendar-date {
-    display: block;
-    margin: 0 auto;
-    width: 20px;
-    height: 20px;
-    padding: 0;
-    line-height: 20px;
-    background: transparent;
-    text-align: center;
-    -webkit-transition: background .3s ease;
-    transition: background .3s ease;
-    font-size: 12px;
-    color: $dark1;
+.devui-month-view .date-select {
+  border: none;
+  background: transparent;
+  outline: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
 }
 
-.month-view .day:hover:not(.active):not(.disabled) .d-calendar-date {
-    background-color:$hover-content;
-    // color:$hover-control;
+.devui-month-view .devui-week-header {
+  cursor: default;
+  margin-bottom: 16px;
 }
 
-.month-view .day.active:hover .d-calendar-date {
-    background-color:$hover-control;
-    color: $white;
+.devui-month-view .devui-week-header td {
+  width: 32px;
+  height: 24px;
+  line-height: 24px;
+  color: $devui-text;
+  border: none;
 }
 
-.month-view .in-month-day.disabled:not(.active) .d-calendar-date {
-    color: $dark1;
-    background-color: rgba(240, 240, 240, 0.8) !important;
-    cursor: not-allowed;
-    width: 100%;
+.devui-month-view .devui-day:not(.disabled) {
+  cursor: pointer;
+  font-size: 12px;
+  color: $devui-feedback-overlay-text;
 }
 
-.month-view .in-month-day.active .d-calendar-date {
-    background: $focus1;
-    color: $white;
+.devui-month-view .devui-day.disabled {
+  cursor: not-allowed;
 }
 
-.month-view .out-of-month .d-calendar-date {
+.devui-calendar-date {
+  display: block;
+  margin: 0 3px;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  line-height: 20px;
+  background: transparent;
+  text-align: center;
+  -webkit-transition: background 0.3s ease;
+  transition: background 0.3s ease;
+  font-size: 12px;
+  color: $devui-text;
+}
+
+.devui-month-view .devui-out-of-month {
+  .devui-calendar-date {
     opacity: 0.8;
-    background-color: $white;
-    color: $gray1;
-}
+    background-color: $devui-connected-overlay-bg;
+    color: $devui-line;
+  }
 
-.month-view .minutes:before {
-    content: ':';
-    text-align: center;
-    position: absolute;
-    margin-left: -13px;
-}
-
-.month-view .seconds:before {
-    content: ':';
-    text-align: center;
-    position: absolute;
-    margin-left: -13px;
-    z-index: 999;
-}
-
-.yearOption {
-    /*width: 5em;*/
-    min-width: 4em;
-    margin-left: 4.5em;
-    max-height: 255px;
-    overflow-x: hidden;
-    overflow-y: auto;
-}
-
-.monthOption {
-    /*width: 3em;*/
-    min-width: 3em;
-    margin-left: 1em;
-}
-
-.yearOption li, .monthOption li {
-    text-align: center;
-}
-
-.yearOption li:hover, .monthOption li:hover {
-    background: $hover-control;
-    color: $white;
-    cursor: pointer;
-}
-
-.yearOption li.active, .monthOption li.active {
-    color:$white;
-    background-color: $focus1;
-    &:hover{
-        background-color: $hover-control;
+  &:hover {
+    .devui-calendar-date {
+      background-color: $devui-list-item-hover-bg;
     }
+  }
 }
 
-.month-view .timepicker {
-    background: #f2f2f2;
+.devui-month-view .devui-minutes::before {
+  content: ':';
+  text-align: center;
+  position: absolute;
+  margin-left: -13px;
 }
 
-.month-view .timepicker input {
-    outline: 0;
-    border: 0;
-    background: #f2f2f2;
-    width: 30px;
-    padding:0px 12px 0px 0px;
-    height:30px;
+.devui-month-view .devui-seconds::before {
+  content: ':';
+  text-align: center;
+  position: absolute;
+  margin-left: -13px;
+  z-index: 999;
 }
 
-.month-view .timepicker .time {
-    position: relative;
-    display: inline-block;
+.devui-yearOption,
+.devui-monthOption {
+  width: 240px;
+  height: 195px;
+  position: absolute;
+  left: -68px;
+  top: 30px;
+  z-index: 1;
+  background: $devui-base-bg;
 }
 
-.month-view .timepicker .time:not(:first-child):before {
-    content: ':';
+.devui-yearOption li,
+.devui-monthOption li {
+  width: 60px;
+  height: 65px;
+  line-height: 65px;
+  text-align: center;
+  display: inline-block;
+  background: $devui-base-bg;
+  border-radius: 2px;
 }
 
-.month-view .btn-link.disable-choose-year {
-    color: $gray1;
+.devui-yearOption li:hover,
+.devui-monthOption li:hover {
+  background: $devui-list-item-hover-bg;
+  color: $devui-list-item-hover-text;
+  cursor: pointer;
 }
 
-.disable-choose-year:hover {
-    text-decoration: none;
+.devui-yearOption li.active:not(.disabled),
+.devui-monthOption li.active:not(.disabled) {
+  color: $devui-list-item-active-text;
+  background-color: $devui-list-item-active-bg;
+
+  &:hover {
+    background-color: $devui-list-item-active-hover-bg;
+  }
 }
 
-.month-view .table {
+.devui-yearOption li.disabled,
+.devui-monthOption li.disabled {
+  color: $devui-disabled-text;
+  background-color: $devui-disabled-bg;
+  cursor: not-allowed;
+}
+
+.devui-month-view .devui-timepicker {
+  background: $devui-area;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.devui-month-view .devui-timepicker input {
+  outline: 0;
+  border: 0;
+  background: $devui-area;
+  color: $devui-text;
+  width: 30px;
+  padding: 0 0 0 3px;
+  height: 30px;
+  text-align: center;
+}
+
+.devui-month-view .devui-timepicker.devui-timepicker-disabled input {
+  cursor: not-allowed;
+  color: $devui-disabled-text;
+  background-color: $devui-disabled-bg;
+}
+
+.devui-month-view .devui-timepicker .devui-time {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+}
+
+.devui-month-view .devui-timepicker .devui-time:not(:first-child)::before {
+  content: ':';
+}
+
+.devui-month-view .devui-table {
   > tbody {
     > tr {
       > td {
         vertical-align: middle;
-        padding:4px;
+        padding: 4px;
         border-top: none;
-        &:not(.disabled){
+        border-radius: 2px;
+
+        &.devui-day-start {
+          border-radius: 2px 0 0 2px;
+        }
+
+        &.devui-day-end {
+          border-radius: 0 2px 2px 0;
+        }
+
+        &:not(.disabled) {
           border-top: none;
-          background: $white;
+          background: $devui-connected-overlay-bg;
+        }
+
+        &.devui-day:hover:not(.active):not(.disabled):not(.devui-out-of-month) {
+          background-color: $devui-list-item-hover-bg;
+        }
+
+        &.devui-day:not(.disabled).active:hover {
+          background-color: $devui-list-item-active-hover-bg;
+
+          & > .devui-calendar-date {
+            color: $devui-light-text;
+          }
+        }
+
+        &.devui-in-month-day.disabled {
+          color: $devui-disabled-text;
+          cursor: not-allowed;
+
+          .devui-calendar-date {
+            color: $devui-disabled-text;
+          }
+
+          &:not(.active) {
+            background-color: $devui-disabled-bg;
+          }
+
+          &.active {
+            background-color: $devui-disabled-line;
+          }
+        }
+
+        &.devui-in-month-day:not(.disabled).active {
+          background: $devui-list-item-active-bg;
+
+          & > .devui-calendar-date {
+            color: $devui-light-text;
+          }
         }
       }
     }
   }
+
   > thead {
     > tr {
       > td {
-        vertical-align: top;
+        vertical-align: middle;
         line-height: 1.5;
+        padding: 4px;
       }
     }
   }
 }
 
-.month-view .month-view-table td {
-    border-bottom: none;
+.devui-noSelect {
+  user-select: none;
 }
 
-.month-view .table tfoot {
-    border-top: 1px solid #f5f5f5;
+.devui-month-view .devui-month-view-table td {
+  border-bottom: none;
 }
 
-.month-view tfoot td {
-    padding: 2px;
-    vertical-align: middle;
-    border-top: none;
+.devui-month-view .devui-table tfoot {
+  border-top: 1px solid $devui-area;
 }
 
-.dropdown-menu{
-    font-size: 12px;
+.devui-month-view tfoot td {
+  padding: 10px;
+  vertical-align: middle;
+  border-top: none;
 }
 
-.btn-wrapper {
-    margin-top: 0px;
+.devui-dropdown-menu {
+  font-size: 12px;
 }
 
-.time input[type=number]::-webkit-inner-spin-button,
-.time input[type=number]::-webkit-outer-spin-button
-{
+.devui-btn-wrapper {
+  margin-top: 0;
+}
+
+.devui-time input[type='number']::-webkit-inner-spin-button,
+.devui-time input[type='number']::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-.time input[type=number]
-{
+.devui-time input[type='number'] {
   -moz-appearance: textfield;
 }
-.btn-nav {
-    display: none;
+
+.devui-btn-nav {
+  display: none;
+  position: absolute;
+  right: 9px;
+  top: 0;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+
+  .btn-up,
+  .btn-down {
     position: absolute;
-    right: 12px;
-    top: 0;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    -o-user-select: none;
-    user-select: none;
-    .btn-up, .btn-down{
-        position: absolute;
-        width: 0;
-        height: 0;
-        border: 6px solid;
+    width: 0;
+    height: 0;
+    border: 6px solid;
+  }
+
+  .btn-up {
+    padding-top: 2px;
+    padding-bottom: 1px;
+    border-color: transparent transparent $devui-text transparent;
+
+    &:hover {
+      border-color: transparent transparent $devui-icon-fill-active transparent;
     }
-    .btn-up{
-        padding-top: 3px;
-        padding-bottom: 1px;
-        border-color: transparent transparent $dark1 transparent;
-        &:hover{
-            border-color: transparent transparent $hover-control transparent;
-        }
+  }
+
+  .btn-down {
+    top: 16px;
+    padding-bottom: 4px;
+    border-color: $devui-text transparent transparent transparent;
+
+    &:hover {
+      border-color: $devui-icon-fill-active transparent transparent transparent;
     }
-    .btn-down{
-        top: 17px;
-        padding-bottom: 3px;
-        border-color: $dark1 transparent transparent transparent;
-        &:hover{
-            border-color: $hover-control transparent transparent transparent;
-        }
-    }
+  }
 }
-.time{
-    input[type=number]::-webkit-inner-spin-button,
-    input[type=number]::-webkit-outer-spin-button
-    {
-        -webkit-appearance: none;
-        margin: 0;
-    }
-    input[type=number]
-    {
+
+.devui-time {
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type='number'] {
     -moz-appearance: textfield;
+  }
+
+  &:hover {
+    .devui-btn-nav {
+      display: block;
     }
-    &:hover{
-        .btn-nav{
-            display: block;
-        }
-    }
+  }
 }
 
+:host ::ng-deep .cdk-overlay-pane d-datepicker.devui-dropdown-menu {
+  padding: 0;
+}
 
-
-
+:host .devui-form-control {
+  padding-right: 0;
+}

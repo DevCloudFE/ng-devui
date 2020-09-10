@@ -1,0 +1,113 @@
+<d-button (btnClick)="getCheckedRows()">获取选中行</d-button>
+<d-data-table [dataSource]="sortableDataSource" [scrollable]="true" [tableWidthConfig]="tableWidthConfig" [onlyOneColumnSort]="true">
+  <thead dTableHead [checkable]="true">
+    <tr dTableRow>
+      <th dHeadCell>#</th>
+      <th
+        dHeadCell
+        [filterable]="true"
+        [filterList]="filterListMulti"
+        [beforeFilter]="beforeFilter"
+        (filterChange)="onFirstFilterChange($event)"
+        [resizeEnabled]="true"
+        (resizeEndEvent)="onResize($event, 'firstName')"
+      >
+        First Name
+      </th>
+      <th
+        dHeadCell
+        [minWidth]="'100px'"
+        [maxWidth]="'200px'"
+        [sortable]="true"
+        [sortDirection]="lastNameSortDirection"
+        (sortChange)="onSortChange($event, 'lastName')"
+        [filterable]="true"
+        [filterIconActive]="filterIconActive"
+        [customFilterTemplate]="customFilterTemplate"
+        [resizeEnabled]="true"
+        (resizeEndEvent)="onResize($event, 'lastName')"
+      >
+        Last Name
+      </th>
+      <th
+        dHeadCell
+        [sortable]="true"
+        [sortDirection]="genderSortDirecticon"
+        (sortChange)="onSortChange($event, 'Gender')"
+        [filterable]="true"
+        [filterMultiple]="false"
+        [filterList]="filterListRadio"
+        (filterChange)="filterChangeRadio($event)"
+      >
+        Gender
+      </th>
+      <th dHeadCell>Date of birth</th>
+      <th dHeadCell>Date of birth</th>
+      <th dHeadCell>Date of birth</th>
+      <th dHeadCell>Date of birth</th>
+      <th dHeadCell>Date of birth</th>
+      <th dHeadCell>Date of birth</th>
+    </tr>
+  </thead>
+  <tbody dTableBody>
+    <ng-template let-rowItem="rowItem" let-rowIndex="rowIndex" let-nestedIndex="nestedIndex">
+      <tr dTableRow [ngClass]="{ 'table-row-selected': rowItem.$checked }">
+        <td dTableCell class="devui-checkable-cell">
+          <d-checkbox
+            [ngModelOptions]="{ standalone: true }"
+            (ngModelChange)="onRowCheckChange($event, rowIndex, nestedIndex, rowItem)"
+            [ngModel]="rowItem.$checked"
+            [halfchecked]="rowItem.$halfChecked"
+            [disabled]="rowItem.$checkDisabled"
+            dTooltip
+            [content]="rowItem.$checkBoxTips"
+            [position]="['top', 'right', 'bottom', 'left']"
+            [showAnimation]="false"
+          >
+          </d-checkbox>
+        </td>
+        <td dTableCell>{{ rowItem?.id }}</td>
+        <td dTableCell>
+          <span *ngIf="!rowItem.firstNameEdit">{{ rowItem?.firstName }}</span>
+          <input *ngIf="rowItem.firstNameEdit" [(ngModel)]="rowItem.firstName" type="text" />
+        </td>
+        <td dTableCell>{{ rowItem?.lastName }}</td>
+        <td dTableCell>{{ rowItem?.gender }}</td>
+        <td dTableCell>{{ rowItem?.dob | i18nDate: 'short':false }}</td>
+        <td dTableCell>{{ rowItem?.dob | i18nDate: 'short':false }}</td>
+        <td dTableCell>{{ rowItem?.dob | i18nDate: 'short':false }}</td>
+        <td dTableCell>{{ rowItem?.dob | i18nDate: 'short':false }}</td>
+        <td dTableCell>{{ rowItem?.dob | i18nDate: 'short':false }}</td>
+        <td dTableCell>{{ rowItem?.dob | i18nDate: 'short':false }}</td>
+      </tr>
+    </ng-template>
+  </tbody>
+</d-data-table>
+<ng-template #customFilterTemplate let-filterList="filterListDisplay" let-dropdown="dropdown">
+  <div class="custom-filter-content">
+    <div class="filter-options">
+      <div *ngFor="let item of checkboxList" class="checkbox-group">
+        <d-checkbox
+          [label]="item.lastName"
+          [(ngModel)]="item.chosen"
+          [labelTemplate]="myCheckbox"
+          (change)="onCheckboxChange($event, item.lastName)"
+        >
+          <ng-template #myCheckbox let-label="label">
+            <span style="margin-left: 15px;">
+              <d-avatar [name]="label" [width]="16" [height]="16"></d-avatar>
+            </span>
+            <span class="label-style">{{ label }}</span>
+          </ng-template>
+        </d-checkbox>
+      </div>
+    </div>
+    <div class="line"></div>
+    <div>
+      <span class="button-style" style="border-right: 1px solid #e8f0fd; margin-left: 10px;" (click)="filterSource(dropdown)">CONFIRM</span>
+      <span class="button-style" (click)="cancelFilter(dropdown)">CANCEL</span>
+    </div>
+  </div>
+</ng-template>
+<p style="margin-top: 20px;">Current Sort parameters:</p>
+<pre>{{ sortParams | json }}</pre>

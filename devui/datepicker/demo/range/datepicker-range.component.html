@@ -1,0 +1,69 @@
+<section style="display: flex; width：100%;">
+  <div class="col-md-6" style="margin-right: 10px;">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="devui-input-group devui-dropdown-origin-wrapper devui-dropdown-origin">
+          <input
+            class="devui-input devui-form-control"
+            placeholder="y/MM/dd"
+            name="dp"
+            [(ngModel)]="startDate"
+            (focus)="datePicker1.toggle($event)"
+            autocomplete="off"
+            dDatepicker
+            appendToBody
+            #datePicker1="datepicker"
+            (selectedDateChange)="getValue($event)"
+            [customViewTemplate]="myCustomview"
+          />
+          <div *ngIf="startDate" class="devui-input-group-addon icon-close-wrapper" (click)="datePicker1.clearAll()">
+            <i class="icon icon-close"></i>
+          </div>
+          <div class="devui-input-group-addon" (click)="datePicker1.toggle($event, true)">
+            <i class="icon icon-calendar"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ng-template #myCustomview let-chooseDate="chooseDate" let-datePicker>
+      <div class="box">
+        <a class="date-link" (click)="chooseDate(getDay(0))">选择今天</a>
+        <a class="date-link">选择迭代开始日期</a>
+      </div>
+    </ng-template>
+  </div>
+
+  <div class="col-md-6">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="devui-input-group devui-dropdown-origin-wrapper devui-dropdown-origin">
+          <input
+            class="devui-input devui-form-control"
+            placeholder="y/MM/dd"
+            name="dp"
+            [(ngModel)]="endDate"
+            (focus)="datePicker2.toggle($event)"
+            autocomplete="off"
+            dDatepicker
+            appendToBody
+            #datePicker2="datepicker"
+            (selectedDateChange)="getValue($event)"
+            [customViewTemplate]="myCustomview1"
+          />
+          <div *ngIf="endDate" class="devui-input-group-addon icon-close-wrapper" (click)="datePicker2.clearAll()">
+            <i class="icon icon-close"></i>
+          </div>
+          <div class="devui-input-group-addon" (click)="datePicker2.toggle($event, true)">
+            <i class="icon icon-calendar"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ng-template #myCustomview1 let-chooseDate="chooseDate" let-datePicker>
+      <div class="box">
+        <a class="date-link" (click)="chooseDate(getNextWeekday(7))">选择一周后</a>
+        <a class="date-link">选择迭代结束日期</a>
+      </div>
+    </ng-template>
+  </div>
+</section>

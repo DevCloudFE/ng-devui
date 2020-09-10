@@ -1,0 +1,17 @@
+<section>
+  <d-slider
+    [(ngModel)]="inputValue"
+    [min]="minValue"
+    [max]="maxValue"
+    style="width: 90%; display: block;"
+    [tipsRenderer]="demoFormatter"
+  ></d-slider>
+  <br style="margin-bottom: 20px;" />
+  <d-slider
+    [(ngModel)]="inputValue2"
+    [min]="minValue"
+    [max]="maxValue"
+    style="width: 90%; display: block;"
+    [tipsRenderer]="null"
+  ></d-slider>
+</section>

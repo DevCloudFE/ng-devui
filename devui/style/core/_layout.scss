@@ -1,0 +1,201 @@
+$content-spacing-small: 4px;
+$content-spacing: 8px;
+$element-spacing: 16px;
+$component-space: 24px;
+
+.mr-content-spacing {
+  margin-right: $content-spacing-small;
+}
+
+.padding-element-spacing {
+  padding: $element-spacing !important;
+}
+
+.ml-element-spacing {
+  margin-left: $element-spacing;
+}
+
+.mr-element-spacing {
+  margin-right: $element-spacing;
+}
+
+.mt-element-spacing {
+  margin-top: $element-spacing;
+}
+
+.mb-element-spacing {
+  margin-bottom: $element-spacing;
+}
+
+.mlr-element-spacing {
+  margin-left: $element-spacing;
+  margin-right: $element-spacing;
+}
+
+.mtb-element-spacing {
+  margin-top: $element-spacing;
+  margin-bottom: $element-spacing;
+}
+
+.m-element-spacing {
+  margin: $element-spacing;
+}
+
+.grid {
+  letter-spacing: -0.31em;
+  *letter-spacing: normal;
+  word-spacing: -0.43em;
+}
+
+.u,
+.u-1,
+.u-1-2,
+.u-1-3,
+.u-2-3,
+.u-1-4,
+.u-3-4,
+.u-1-5,
+.u-2-5,
+.u-3-5,
+.u-4-5,
+.u-1-6,
+.u-5-6,
+.u-1-8,
+.u-3-8,
+.u-5-8,
+.u-7-8,
+.u-1-12,
+.u-5-12,
+.u-7-12,
+.u-11-12,
+.u-1-24,
+.u-5-24,
+.u-7-24,
+.u-11-24,
+.u-13-24,
+.u-17-24,
+.u-19-24,
+.u-23-24 {
+  display: inline-block;
+  *display: inline;
+  zoom: 1;
+  letter-spacing: normal;
+  word-spacing: normal;
+  vertical-align: top;
+}
+
+.u-1 {
+  display: block;
+}
+
+.u-1-2 {
+  width: 49.99999%;
+}
+
+.u-1-3 {
+  width: 33.33333%;
+}
+
+.u-2-3 {
+  width: 66.66666%;
+}
+
+.u-1-4 {
+  width: 24.99999%;
+}
+
+.u-3-4 {
+  width: 74.99999%;
+}
+
+.u-1-5 {
+  width: 19.99999%;
+}
+
+.u-2-5 {
+  width: 39.99999%;
+}
+
+.u-3-5 {
+  width: 59.99999%;
+}
+
+.u-4-5 {
+  width: 79.99999%;
+}
+
+.u-1-6 {
+  width: 16.64999%;
+}
+
+.u-5-6 {
+  width: 83.33333%;
+}
+
+.u-1-8 {
+  width: 12.49999%;
+}
+
+.u-3-8 {
+  width: 37.49999%;
+}
+
+.u-5-8 {
+  width: 62.49999%;
+}
+
+.u-7-8 {
+  width: 87.49999%;
+}
+
+.u-1-12 {
+  width: 8.33333%;
+}
+
+.u-5-12 {
+  width: 41.66666%;
+}
+
+.u-7-12 {
+  width: 58.33333%;
+}
+
+.u-11-12 {
+  width: 91.66666%;
+}
+
+.u-1-24 {
+  width: 4.16666%;
+}
+
+.u-5-24 {
+  width: 20.83333%;
+}
+
+.u-7-24 {
+  width: 29.16666%;
+}
+
+.u-11-24 {
+  width: 45.83333%;
+}
+
+.u-13-24 {
+  width: 54.16666%;
+}
+
+.u-17-24 {
+  width: 70.83333%;
+}
+
+.u-19-24 {
+  width: 79.16666%;
+}
+
+.u-23-24 {
+  width: 95.83333%;
+}
+
+.u-content {
+  padding: 0 0 10px 10px;
+}

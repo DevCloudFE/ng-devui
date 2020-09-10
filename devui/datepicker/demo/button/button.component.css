@@ -1,0 +1,12 @@
+.devui-input-group-addon {
+  vertical-align: middle;
+  padding-top: 4px;
+}
+
+.devui-input-group {
+  border: none;
+}
+
+.devui-input-group::after {
+  display: none;
+}

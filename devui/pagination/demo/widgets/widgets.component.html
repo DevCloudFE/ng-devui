@@ -1,15 +1,47 @@
 <section>
-  <d-pagination [size]="'sm'" [total]="pager.total" [(pageSize)]="pager.pageSize" [(pageIndex)]="pager.pageIndex" [maxItems]="10"
-    [canViewTotal]="true" [canJumpPage]="true" (pageIndexChange)="pageIndexChange($event)" (pageSizeChange)="pageSizeChange($event)" >
+  <d-pagination
+    [size]="'sm'"
+    [total]="pager.total"
+    [(pageSize)]="pager.pageSize"
+    [(pageIndex)]="pager.pageIndex"
+    [maxItems]="10"
+    [canViewTotal]="true"
+    [canJumpPage]="true"
+    [canChangePageSize]="true"
+    (pageIndexChange)="pageIndexChange($event)"
+    (pageSizeChange)="pageSizeChange($event)"
+  >
   </d-pagination>
-  <d-pagination [size]="'sm'" [total]="pager.total" [(pageSize)]="pager.pageSize" [(pageIndex)]="pager.pageIndex" [maxItems]="10"
-    [canViewTotal]="true" [canJumpPage]="true" [showJumpButton]="true" (pageIndexChange)="pageIndexChange($event)" (pageSizeChange)="pageSizeChange($event)">
+  <d-pagination
+    [size]="'sm'"
+    [total]="pager.total"
+    [(pageSize)]="pager.pageSize"
+    [(pageIndex)]="pager.pageIndex"
+    [maxItems]="10"
+    [canViewTotal]="true"
+    [canJumpPage]="true"
+    [showJumpButton]="true"
+    (pageIndexChange)="pageIndexChange($event)"
+    (pageSizeChange)="pageSizeChange($event)"
+  >
   </d-pagination>
-  <d-pagination [size]="'sm'" [total]="pager.total" [(pageSize)]="pager.pageSize" [(pageIndex)]="pager.pageIndex" [maxItems]="10"
-    [canViewTotal]="true" [canChangePageSize]="true" [canJumpPage]="true" (pageIndexChange)="pageIndexChange($event)"
-    (pageSizeChange)="pageSizeChange($event)" [pageSizeOptions]="pager.pageSizeOptions" >
+  <d-pagination
+    [size]="'sm'"
+    [total]="pager.total"
+    [(pageSize)]="pager.pageSize"
+    [(pageIndex)]="pager.pageIndex"
+    [maxItems]="10"
+    [canViewTotal]="true"
+    [canChangePageSize]="true"
+    [canJumpPage]="true"
+    [autoFixPageIndex]="false"
+    (pageIndexChange)="pageIndexChangeWithoutFix($event)"
+    (pageSizeChange)="pageSizeChangeWithoutFix($event)"
+    [pageSizeOptions]="pager.pageSizeOptions"
+    [pageSizeDirection]="['centerUp']"
+  >
   </d-pagination>
   <div>
-    <pre>{{pager | json}}</pre>
+    <pre>{{ pager | json }}</pre>
   </div>
 </section>

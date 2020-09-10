@@ -19,7 +19,9 @@ export class TagsInputDemoBasicComponent implements OnInit {
             minLength: 1,
             maxTags: 25,
             placeholder: '添加一个标签',
-            spellcheck: true
+            spellcheck: false,
+            caseSensitivity: false,
+            isAddBySpace: true
         };
         this.suggestionList = [
             { name: 'item1' },

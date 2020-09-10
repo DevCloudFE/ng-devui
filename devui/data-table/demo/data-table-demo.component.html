@@ -1,83 +1,257 @@
-<div class="demo-container">
-  <div class="demo-example">
+<div class="demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 60, bottom: 0 }">
+  <d-demo-nav [navItems]="navItems"></d-demo-nav>
+  <div class="demo-example" [dAnchor]="'basic-usage'">
     <div class="demo-title">基本用法</div>
     <div class="demo-text">
-      简单表格，展示列表数据
+      <div>简单表格，展示列表数据</div>
+      <div>支持两种实现方式，方式一通过自定义head、body模板和其中的行、单元格来实现，方式二通过配置column来实现</div>
     </div>
-    <d-codebox id="components-table-default" [sourceData]="basicSource">
-      <d-datatable-demo-basic demo></d-datatable-demo-basic>
-    </d-codebox>
+    <d-tabs [type]="'tabs'">
+      <d-tab id="tab1" title="自定义模板" tabId="tab1">
+        <ng-template dTabContent>
+          <d-codebox id="basic" [sourceData]="basicSource">
+            <d-basic demo></d-basic>
+          </d-codebox>
+        </ng-template>
+      </d-tab>
+      <d-tab id="tab2" title="配置column" tabId="tab2">
+        <ng-template dTabContent>
+          <d-codebox id="basic-old" [sourceData]="basicOldSource">
+            <d-basic-old demo></d-basic-old>
+          </d-codebox>
+        </ng-template>
+      </d-tab>
+    </d-tabs>
   </div>
-  <div class="demo-example">
-    <div class="demo-title">表格交互</div>
+  <div class="demo-example" [dAnchor]="'async-loading'">
+    <div class="demo-title">异步加载数据、配置列及空数据模板</div>
     <div class="demo-text">
-        支持列排序、列过滤、选中、调整列宽
+      模拟异步加载数据、支持配置动态列、使用#noResultTemplateRef配置空数据模板
     </div>
-    <d-codebox id="components-table-one" [sourceData]="oneColumnSource">
-      <d-datatable-demo-onlyonecolumnsort demo></d-datatable-demo-onlyonecolumnsort>
-    </d-codebox>
-  </div>
-  <div class="demo-example">
-    <div class="demo-title">异步加载数据</div>
-    <div class="demo-text">
-      异步加载表格数据，列动态配置
-    </div>
-    <d-codebox id="components-table-async" [sourceData]="asyncSource">
+    <d-codebox id="table-async" [sourceData]="asyncSource">
       <d-datatable-demo-async demo></d-datatable-demo-async>
     </d-codebox>
   </div>
-  <div class="demo-example">
-    <div class="demo-title">表头固定</div>
+  <div class="demo-example" [dAnchor]="'table-interaction'">
+    <div class="demo-title">表格交互</div>
     <div class="demo-text">
-        设置表格最大高度，同时表头不跟随滚动
+      <div>支持列排序、列过滤、自定义过滤模板、选中、调整列宽</div>
+      <div>支持两种实现方式，方式一通过自定义head、body模板和其中的行、单元格实现，方式二通过配置column来实现</div>
     </div>
-    <d-codebox id="components-table-max" [sourceData]="maxHeightSource">
-      <d-datatable-demo-maxheight demo></d-datatable-demo-maxheight>
-    </d-codebox>
+    <d-tabs [type]="'tabs'">
+      <d-tab id="tab1" title="自定义模板" tabId="tab1">
+        <ng-template dTabContent>
+          <d-codebox id="interaction" [sourceData]="interactionSource">
+            <d-interaction demo></d-interaction>
+          </d-codebox>
+        </ng-template>
+      </d-tab>
+      <d-tab id="tab2" title="配置column" tabId="tab2">
+        <ng-template dTabContent>
+          <d-codebox id="table-one" [sourceData]="interactionColumnSource">
+            <d-interaction-column demo></d-interaction-column>
+          </d-codebox>
+        </ng-template>
+      </d-tab>
+    </d-tabs>
   </div>
-  <div class="demo-example">
-    <div class="demo-title">列表数据懒加载</div>
+  <div class="demo-example" [dAnchor]="'table-check-options'">
+    <div class="demo-title">自定义表格选中操作</div>
     <div class="demo-text">
-        跟随滚动，懒加载，不断增加表格数据
+      <div>通过设置checkOptions来配置表头选中的下拉项及操作</div>
+      <div>支持两种实现方式，方式一通过自定义head的行来实现，方式二通过配置column来实现</div>
     </div>
-    <d-codebox id="components-table-lazy" [sourceData]="lazySource">
+    <d-tabs [type]="'tabs'">
+      <d-tab id="tab1" title="自定义模板" tabId="tab1">
+        <ng-template dTabContent>
+          <d-codebox id="table-check-options" [sourceData]="checkOptionSource">
+            <d-check-options demo></d-check-options>
+          </d-codebox>
+        </ng-template>
+      </d-tab>
+      <d-tab id="tab2" title="配置column" tabId="tab2">
+        <ng-template dTabContent>
+          <d-codebox id="d-check-options-column" [sourceData]="checkOptionColSource">
+            <d-check-options-column demo></d-check-options-column>
+          </d-codebox>
+        </ng-template>
+      </d-tab>
+    </d-tabs>
+  </div>
+  <div class="demo-example" [dAnchor]="'lazy-loading-of-list-data'">
+    <div class="demo-title">懒加载</div>
+    <div class="demo-text">
+      使用lazy启用懒加载，当滚动表格底部时到分发loadMore事件实现懒加载
+    </div>
+    <d-codebox id="table-lazy" [sourceData]="lazySource">
       <d-datatable-demo-lazyloaddata demo></d-datatable-demo-lazyloaddata>
     </d-codebox>
   </div>
-  <div class="demo-example">
-    <div class="demo-title">多行表头</div>
+  <div class="demo-example" [dAnchor]="'virtual-scroll'">
+    <div class="demo-title">虚拟滚动</div>
     <div class="demo-text">
-        表头支持分组，显示多行
+      使用virtualScroll启用虚拟滚动，行高须确定且相同，如果行高高于默认的40px，须配置virtualItemSize
     </div>
-    <d-codebox id="components-table-multi" [sourceData]="multiSource">
-      <d-datatable-demo-multiheader demo></d-datatable-demo-multiheader>
+    <d-codebox id="cell-merge" [sourceData]="virtualScrollSource">
+      <d-virtual-scroll demo></d-virtual-scroll>
     </d-codebox>
   </div>
-  <div class="demo-example">
+  <div class="demo-example" [dAnchor]="'table-fixing'">
+    <div class="demo-title">表头固定</div>
+    <div class="demo-text">
+      使用fixHeader设置表头固定，使之不跟随滚动
+    </div>
+    <d-codebox id="table-max" [sourceData]="maxHeightSource">
+      <d-datatable-demo-maxheight demo></d-datatable-demo-maxheight>
+    </d-codebox>
+  </div>
+  <div class="demo-example" [dAnchor]="'header-grouping'">
+    <div class="demo-title">表头分组</div>
+    <div class="demo-text">
+      <div>支持两种实现方式，方式一通过自定义head模板中th的colspan、rowspan来实现，方式二通过配置column的advancedHeader来实现</div>
+    </div>
+    <d-tabs [type]="'tabs'">
+      <d-tab id="tab1" title="自定义模板" tabId="tab1">
+        <ng-template dTabContent>
+          <d-codebox id="header-grouping" [sourceData]="headerGroupingSource">
+            <d-header-grouping demo></d-header-grouping>
+          </d-codebox>
+        </ng-template>
+      </d-tab>
+
+      <d-tab id="tab2" title="配置column" tabId="tab2">
+        <ng-template dTabContent>
+          <d-codebox id="table-multi" [sourceData]="multiSource">
+            <d-datatable-demo-multiheader demo></d-datatable-demo-multiheader>
+          </d-codebox>
+        </ng-template>
+      </d-tab>
+    </d-tabs>
+  </div>
+  <div class="demo-example" [dAnchor]="'edit-cell'">
     <div class="demo-title">编辑单元格</div>
     <div class="demo-text">
-        通过列的编辑功能（editable）、类型（fieldType）和额外配置（extraOptions）来配置单元格的编辑功能
+      <div>支持两种实现方式，方式一通过自定义body模板中的单元格来实现，方式二通过配置column来实现</div>
     </div>
-    <d-codebox id="components-table-editable" [sourceData]="editableSource">
-      <d-datatable-demo-editable demo></d-datatable-demo-editable>
-    </d-codebox>
+    <d-tabs [type]="'tabs'">
+      <d-tab id="tab1" title="自定义模板" tabId="tab1">
+        <ng-template dTabContent>
+          <d-codebox id="editable" [sourceData]="editableSource">
+            <d-editable demo></d-editable>
+          </d-codebox>
+        </ng-template>
+      </d-tab>
+      <d-tab id="tab2" title="配置column" tabId="tab2">
+        <ng-template dTabContent>
+          <d-codebox id="editable-old" [sourceData]="editableOldSource">
+            <d-editable-old demo></d-editable-old>
+          </d-codebox>
+        </ng-template>
+      </d-tab>
+    </d-tabs>
   </div>
-  <div class="demo-example">
-    <div class="demo-title">扩展额外行</div>
+  <div class="demo-example" [dAnchor]="'expand-row'">
+    <div class="demo-title">扩展行</div>
     <div class="demo-text">
-        通过headerExpandConfig和行数据的expandConfig来配置表头和某一行下的可自定义的扩展行，通过showDetail来配置扩展行的展开图标
+      <div>支持两种实现方式，方式一通过自定义body模板中的行来实现，方式二通过配置column来定义table，并配置input和行数据来实现</div>
     </div>
-    <d-codebox id="components-table-expand" [sourceData]="expandTableSource">
-      <d-expand-row demo></d-expand-row>
-    </d-codebox>
+    <d-tabs [type]="'tabs'">
+      <d-tab id="tab1" title="自定义模板" tabId="tab1">
+        <ng-template dTabContent>
+          <d-codebox id="expand-row" [sourceData]="expandRowSource">
+            <d-expand-row demo></d-expand-row>
+          </d-codebox>
+        </ng-template>
+      </d-tab>
+      <d-tab id="tab2" title="配置column" tabId="tab2">
+        <ng-template dTabContent>
+          <d-codebox id="expand-row-old" [sourceData]="expandRowOldSource">
+            <d-expand-row-old demo></d-expand-row-old>
+          </d-codebox>
+        </ng-template>
+      </d-tab>
+    </d-tabs>
   </div>
-  <div class="demo-example">
+  <div class="demo-example" [dAnchor]="'tree-form'">
     <div class="demo-title">树形表格</div>
     <div class="demo-text">
-        通过列的nestedColumn属性和行数据的children字段来配置渲染树形表格
+      <div>通过nestedColumn属性和行数据的children、$isChildTableOpen字段来配置渲染树形表格</div>
+      <div>支持两种实现方式，方式一通过自定义head、body模板和其中的行、单元格来实现，方式二通过配置column来实现</div>
     </div>
-    <d-codebox id="components-tree-table" [sourceData]="treeTableSource">
-      <d-tree-data demo></d-tree-data>
+    <d-tabs [type]="'tabs'">
+      <d-tab id="tab1" title="自定义模板" tabId="tab1">
+        <ng-template dTabContent>
+          <d-codebox id="tree-table" [sourceData]="treeTableSource">
+            <d-tree-data demo></d-tree-data>
+          </d-codebox>
+        </ng-template>
+      </d-tab>
+      <d-tab id="tab2" title="配置column" tabId="tab2">
+        <ng-template dTabContent>
+          <d-codebox id="tree-table" [sourceData]="treeTableOldSource">
+            <d-tree-table-old demo></d-tree-table-old>
+          </d-codebox>
+        </ng-template>
+      </d-tab>
+    </d-tabs>
+  </div>
+  <div class="demo-example" [dAnchor]="'fixed-column'">
+    <div class="demo-title">固定列</div>
+    <div class="demo-text">
+      <div>当表格列过多时，固定列有利于用户在左右滑动屏幕时，能够便捷地进行数据定位与对比，通过fixedLeft、fixedRight来配置</div>
+      <div>支持两种实现方式，方式一通过自定义head、body模板和其中的行、单元格来实现，方式二通过配置column来实现</div>
+    </div>
+    <d-tabs [type]="'tabs'">
+      <d-tab id="tab1" title="自定义模板" tabId="tab1">
+        <ng-template dTabContent>
+          <d-codebox id="fix-column" [sourceData]="fixColumnSource">
+            <d-fix-column demo></d-fix-column>
+          </d-codebox>
+        </ng-template>
+      </d-tab>
+      <d-tab id="tab2" title="配置column" tabId="tab2">
+        <ng-template dTabContent>
+          <d-codebox id="fix-column-old" [sourceData]="fixColumnOldSource">
+            <d-fix-column-old demo></d-fix-column-old>
+          </d-codebox>
+        </ng-template>
+      </d-tab>
+    </d-tabs>
+  </div>
+  <div class="demo-example" [dAnchor]="'column-dragging'">
+    <div class="demo-title">列拖拽</div>
+    <div class="demo-text">
+      应用于列内容有对比诉求，属于低频操作，默认不展示，当鼠标移入表头显示标识，支持用户快速对列进行排序
+    </div>
+    <d-codebox id="drag-column" [sourceData]="dragColumnSource">
+      <d-drag-column demo></d-drag-column>
+    </d-codebox>
+  </div>
+  <div class="demo-example" [dAnchor]="'cell-merge'">
+    <div class="demo-title">单元格合并</div>
+    <div class="demo-text">
+      支持使用colspan、rowspan等属性来设置单元格的合并，只能通过自定义head、body模板和其中的行、单元格来实现
+    </div>
+    <d-codebox id="cell-merge" [sourceData]="cellMergeSource">
+      <d-cell-merge demo></d-cell-merge>
+    </d-codebox>
+  </div>
+  <div class="demo-example" [dAnchor]="'drag-row'">
+    <div class="demo-title">行拖拽</div>
+    <div class="demo-text">
+      支持使用DragDrop组件来实现表格的行拖拽功能，只能通过自定义head、body模板和其中的行、单元格来实现
+    </div>
+    <d-codebox id="cell-merge" [sourceData]="dragRowSource">
+      <d-drag-row demo></d-drag-row>
+    </d-codebox>
+  </div>
+  <div class="demo-example" [dAnchor]="'muti-drag-row'">
+    <div class="demo-title">批量行拖拽</div>
+    <div class="demo-text">
+      支持使用DragDrop组件来实现表格的批量行拖拽功能，请用Ctrl按键和鼠标多选并进行拖拽，只能通过自定义head、body模板和其中的行、单元格来实现
+    </div>
+    <d-codebox id="cell-merge" [sourceData]="mutiDragRowSource">
+      <d-muti-drag-row demo></d-muti-drag-row>
     </d-codebox>
   </div>
 </div>

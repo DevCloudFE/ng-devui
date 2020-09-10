@@ -1,38 +1,47 @@
 @import '../style/theme/color';
 
+:host {
+  display: block;
+}
+
 .devui-data-table ::ng-deep {
   border: none;
+
   .devui-table-view {
-    padding: 0px;
+    padding: 0;
     border: none;
     position: relative;
+
     .scroll-view {
       overflow-y: auto;
       overflow-x: auto;
     }
+
     .devui-table {
-      border-collapse: collapse;
+      border-collapse: separate;
       border-spacing: 0;
-      table-layout:fixed;
+      table-layout: fixed;
       width: 100%;
       max-width: 100%;
       position: relative;
-      margin: 0px;
+      margin: 0;
+
       & > tbody + tbody {
         border-top: none;
       }
     }
+
     .resize-bar {
       top: 0;
       bottom: 0;
-      display: inline-block;
       position: absolute;
       cursor: col-resize;
-      background:  $dark2;
+      background: $devui-line;
       width: 2px;
       z-index: 9999;
       display: none;
     }
+
     .resize-overlay {
       position: absolute;
       display: block;
@@ -43,102 +52,408 @@
       z-index: 1000;
     }
   }
-  .devui-table-view-footer {
-    border: none;
-    margin: 0px;
-    text-align: right;
+  $half-sort-icon-size: 8px;
+
+  .table-wrap {
+    padding-top: $half-sort-icon-size;
+  }
+
+  .virtual-scroll-wrap {
+    & .cdk-virtual-scroll-content-wrapper {
+      padding-top: $half-sort-icon-size;
+    }
   }
 }
-.table-hover ::ng-deep tbody > tr:hover{
-  background: $hover-content;
-}
-.devui-table ::ng-deep{
-  thead > tr {
-    background-color: $white;
-    th {
-      vertical-align: middle;
-      border-bottom-width: 1px;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      overflow: hidden;
-      text-align: left;
-      display: table-cell;
-      line-height: 18px;
-      padding: 10px 0 10px 20px;
+
+.devui-table ::ng-deep {
+  thead {
+    span {
+      font-weight: bold;
+      color: $devui-text;
       font-size: 12px;
-      border-bottom: 1px solid $gray1;
-    }
-  }
-  tbody > tr > td {
-    vertical-align: middle;
-    padding: 8px 8px 7px 20px;
-    border-top: none;
-    border-bottom: 1px solid $gray2;
-    word-wrap: break-word;
-    word-break: break-all;
-    line-height: 24px;
-    font-size: 14px;
-    color: $dark1;
-    &.checkable-cell {
-      line-height: 18px;
-      padding: 10px 10px 9px;
-    }
-    a {
-      color: $dark1;
     }
 
+    tr {
+      background-color: $devui-base-bg;
+
+      th {
+        text-align: left;
+        background-clip: padding-box !important;
+        $drag-icon-size: 16px;
+        $drag-icon-margin-right: 2px;
+        $filter-icon-size: 16px;
+        $sort-clickable-area: 8px;
+        $half-sort-icon: 8px;
+        $childtable-toggler-icon: 20px;
+        $negative-half-sort-icon-size: -($sort-clickable-area + $half-sort-icon); // 排序图标的大小为16 * 16 px，所以图标需要移动8px，让图标的一半显示在标题头外
+
+        border-bottom: 1px solid $devui-line;
+        display: table-cell;
+        padding: 0;
+        font-size: 0;
+        background-color: inherit;
+
+        .drag-icon {
+          display: inline-block;
+          margin-right: $drag-icon-margin-right;
+          visibility: hidden;
+        }
+
+        .drag-icon + .childtable-toggler {
+          > .customized-icon {
+            font-size: 14px;
+          }
+        }
+
+        > * {
+          display: inline-block;
+        }
+
+        .title,
+        .parent-title {
+          display: inline-block;
+          width: calc(100% - #{$drag-icon-size} - #{$drag-icon-margin-right});
+          line-height: 36px;
+          vertical-align: middle;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          font-size: 12px;
+          font-weight: bold;
+          color: $devui-text;
+        }
+
+        .title.can-filter {
+          width: calc(100% - #{$drag-icon-size} - #{$drag-icon-margin-right} - #{$filter-icon-size});
+        }
+
+        .childtable-toggler + .title {
+          width: calc(100% - #{$drag-icon-size} - #{$drag-icon-margin-right} - #{$childtable-toggler-icon});
+        }
+
+        .childtable-toggler + .title.can-filter {
+          width: calc(100% - #{$drag-icon-size} - #{$drag-icon-margin-right} - #{$filter-icon-size} - #{$childtable-toggler-icon});
+        }
+
+        .sort-clickable {
+          position: absolute;
+          top: $negative-half-sort-icon-size;
+          left: 50%;
+          transform: translateX(-50%);
+          padding: $sort-clickable-area;
+        }
+
+        &:hover,
+        &.hover {
+          border-radius: 2px 0 0 2px;
+
+          .filter-icon {
+            visibility: visible;
+          }
+
+          .sort-icon-default {
+            visibility: visible;
+          }
+        }
+
+        &.operable:hover {
+          background-color: $devui-list-item-hover-bg;
+        }
+
+        &.sindu_handle:hover,
+        &.sindu_handle.hover {
+          border-radius: 2px 0 0 2px;
+
+          .drag-icon {
+            visibility: visible;
+          }
+
+          .hidden-icon.drag-icon {
+            visibility: hidden;
+          }
+        }
+
+        &.devui-checkable-cell {
+          padding: 10px;
+        }
+
+        &.devui-detail-cell {
+          width: 36px;
+          text-align: center;
+          padding: 0;
+          cursor: pointer;
+        }
+
+        &.devui-sticky-left-cell,
+        &.devui-sticky-right-cell {
+          position: sticky;
+          z-index: 5;
+        }
+
+        & .header-container {
+          position: relative;
+          display: -webkit-box;
+          display: -moz-box;
+          display: -ms-flexbox;
+          display: -webkit-flex;
+          display: flex;
+          align-items: center;
+          padding-left: 2px;
+          padding-right: 8px;
+        }
+      }
+
+      .sort-active {
+        background: $devui-list-item-hover-bg;
+        border-radius: 2px 0 0 2px;
+      }
+
+      .filter-active {
+        background: $devui-list-item-hover-bg;
+        border-radius: 2px 0 0 2px;
+      }
+
+      .check-box-all {
+        vertical-align: middle;
+        margin-right: 5px;
+      }
+    }
   }
-  th, td{
-    position: relative;
+
+  tbody > tr {
+    background: $devui-base-bg;
+
+    &.table-row-selected {
+      background: $devui-list-item-selected-bg;
+    }
+
+    > td {
+      background-clip: padding-box;
+      vertical-align: middle;
+      padding: 7px 8px 8px 20px;
+      border-top: none;
+      word-wrap: break-word;
+      word-break: normal;
+      line-height: 24px;
+      font-size: 12px;
+      color: $devui-text; // #3C4458;
+      background-color: inherit;
+      border-bottom: 1px solid $devui-dividing-line;
+
+      &.devui-checkable-cell {
+        padding: 10px;
+      }
+
+      &.devui-detail-cell {
+        width: 36px;
+        text-align: center;
+        padding: 0;
+        cursor: pointer;
+      }
+
+      &.devui-sticky-left-cell,
+      &.devui-sticky-right-cell {
+        position: sticky;
+        z-index: 5;
+      }
+    }
   }
-  th:first-child, td:first-child{
-    margin: 0 5px;
-  }
-  .clickable{
+
+  .clickable {
     cursor: pointer;
     vertical-align: middle;
   }
-  .devui-checkbox-material {
-    margin-right: 0;
-  }
+
   .d-checkbox > label {
     margin: auto;
   }
-  .resize-handle{
+
+  .resize-handle {
     display: inline-block;
     position: absolute;
     right: 0;
     top: 0;
     bottom: 0;
     width: 5px;
-    border-right: 1px solid $white;
     cursor: col-resize;
   }
-  th.resizeable.last-resize-header{
-    .resize-handle{
-      border-right: 1px solid transparent;
-    }
-  }
-  .resizeable:hover, .resizeable.last-resize-header:hover{
-    .resize-handle{
-      border-right: 1px dashed $gray1;
+
+  .resizeable:hover {
+    .resize-handle {
+      border-right: 3px solid $devui-line;
     }
   }
 }
 
-.devui-table.table-striped ::ng-deep{
-  tbody > tr:nth-of-type(odd){
-    background: rgba($gray3, .3);
+.devui-table.table-striped ::ng-deep {
+  tbody > tr:nth-of-type(odd) {
+    background: $devui-list-item-strip-bg;
+  }
+}
+
+.devui-table.table-borderless ::ng-deep {
+  tbody > tr {
+    > td {
+      border-bottom: none;
+    }
+  }
+}
+
+.devui-table.table-hover ::ng-deep {
+  tbody > tr:hover {
+    background: $devui-list-item-hover-bg;
   }
 }
 
 :host ::ng-deep .devui-toggle-childtable {
   cursor: pointer;
   margin-right: 5px;
+
   & > svg {
     vertical-align: middle;
+
     & > g > path {
-      fill: $dark3;
+      fill: $devui-placeholder; // TODO: Color-Question
     }
   }
+}
+
+:host ::ng-deep .full-width {
+  width: 100%;
+}
+
+:host ::ng-deep .hover-bg {
+  background: $devui-list-item-hover-bg;
+  pointer-events: none;
+
+  & + th {
+    pointer-events: none;
+  }
+}
+
+:host ::ng-deep .table-view-selector {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: col-resize;
+}
+
+:host ::ng-deep .edit-padding-fix {
+  margin-top: -6px;
+  margin-bottom: -6px;
+}
+
+:host ::ng-deep .childtable-toggler {
+  cursor: pointer;
+  padding-right: 4px;
+  font-size: unset !important;
+
+  & > svg {
+    vertical-align: middle;
+
+    & > g > path {
+      fill: $devui-placeholder;// TODO: Color-Question
+    }
+  }
+}
+
+:host ::ng-deep .table.table-bordered.table-fix-header {
+  border-bottom: 0;
+
+  th {
+    border-bottom: 0;
+  }
+}
+
+:host ::ng-deep .devui-talbe-scorll-middle,
+:host ::ng-deep .devui-talbe-scorll-right {
+  tr,
+  th {
+    .devui-sticky-left-cell {
+      box-shadow: rgba(0, 0, 0, 0.05) 6px 6px 6px 0;
+    }
+  }
+}
+
+:host ::ng-deep .devui-talbe-scorll-middle,
+:host ::ng-deep .devui-talbe-scorll-left {
+  tr,
+  th {
+    .devui-sticky-right-cell {
+      box-shadow: rgba(0, 0, 0, 0.05) -6px 6px 6px 0;
+    }
+  }
+}
+
+:host ::ng-deep .gu-unselectable {
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+}
+
+:host ::ng-deep .gu-mirror {
+  position: fixed !important;
+  margin: 0 !important;
+  z-index: 9999 !important;
+
+  /* -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)"; */
+
+  /* filter: alpha(opacity=80); */
+  background-color: white;
+  box-shadow: 0 2px 4px 0 var(--devui-text-boxshadow, rgba(41, 48, 64, 0.2));
+  list-style: none;
+}
+
+:host ::ng-deep .gu-hide {
+  display: none !important;
+}
+
+:host ::ng-deep .sindu_dragger {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  display: flex;
+}
+
+:host ::ng-deep .sindu_handle > .header-container > .drag-icon {
+  cursor: move;
+}
+
+:host ::ng-deep .sindu_dragger li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-align: inherit;
+}
+
+:host ::ng-deep .sindu_dragger li table,
+:host ::ng-deep .sindu_dragger tr,
+:host ::ng-deep .sindu_dragger th,
+:host ::ng-deep .sindu_dragger td {
+  box-sizing: border-box;
+}
+
+:host ::ng-deep .sindu_dragging .sindu_origin_table {
+  visibility: hidden;
+}
+
+:host ::ng-deep .gu-mirror li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-align: inherit;
+}
+
+:host ::ng-deep .gu-mirror li table,
+:host ::ng-deep .gu-mirror tr,
+:host ::ng-deep .gu-mirror th,
+:host ::ng-deep .gu-mirror td {
+  box-sizing: border-box;
+}
+
+:host ::ng-deep .gu-transit {
+  opacity: 0.5;
 }

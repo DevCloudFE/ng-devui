@@ -1,0 +1,40 @@
+@import '../../../style/theme/color';
+@import '../../../style/theme/shadow';
+
+.basic-usage {
+  box-shadow: $hwc-shadow-5; // TODO: color not variable
+  margin-top: 36px;
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+d-header {
+  text-align: center;
+  line-height: 40px;
+  background-color: #333854; // TODO: color not variable
+  color: $devui-light-text;
+}
+
+d-aside {
+  min-height: 200px;
+  min-width: 120px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $devui-global-bg;
+}
+
+d-content {
+  line-height: 200px;
+  text-align: center;
+  background-color: $devui-base-bg;
+}
+
+d-footer {
+  color: $devui-light-text;
+  background-color: $devui-base-bg-dark;
+  padding: 9px 24px;
+}

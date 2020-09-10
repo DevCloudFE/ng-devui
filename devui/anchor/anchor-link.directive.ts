@@ -1,6 +1,7 @@
 import { Directive, forwardRef, HostListener, Inject, Input, OnDestroy, OnInit, HostBinding } from '@angular/core';
 import { AnchorDirective } from './anchor.directive';
 import { AnchorBoxDirective } from './anchor-box.directive';
+import { AnchorActiveChangeSource } from './anchor.type';
 
 @Directive({
   selector: '[dAnchorLink]',
@@ -21,7 +22,7 @@ export class AnchorLinkDirective implements OnInit, OnDestroy {
 
   boxElement: AnchorBoxDirective;
   anchorBlock: AnchorDirective;
-  bindingAnchorTimmer;
+  bindingAnchorTimer;
   subscription;
 
   constructor(@Inject(forwardRef(() => AnchorBoxDirective)) box: AnchorBoxDirective) {
@@ -29,7 +30,7 @@ export class AnchorLinkDirective implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-      this.subscribeAnchroMapChange();
+      this.subscribeAnchorMapChange();
   }
 
   ngOnDestroy() {
@@ -38,12 +39,12 @@ export class AnchorLinkDirective implements OnInit, OnDestroy {
       }
   }
 
-  subscribeAnchroMapChange() {
+  subscribeAnchorMapChange() {
     if (this.boxElement) {
       this.subscription = this.boxElement.refreshAnchorMap.subscribe(() => {
-        if (this.bindingAnchorTimmer) {
-          clearTimeout(this.bindingAnchorTimmer);
-          this.bindingAnchorTimmer = undefined;
+        if (this.bindingAnchorTimer) {
+          clearTimeout(this.bindingAnchorTimer);
+          this.bindingAnchorTimer = undefined;
         }
         this.bindAnchorAfterBoxReady();
       });
@@ -54,26 +55,38 @@ export class AnchorLinkDirective implements OnInit, OnDestroy {
     if (this.boxElement.anchorMap) {
       setTimeout(() => {this.anchorBlock = this.boxElement.anchorMap[this.anchorName]; }, 0);
     } else {
-      this.bindingAnchorTimmer = setTimeout(this.bindAnchorAfterBoxReady, 500);
+      this.bindingAnchorTimer = setTimeout(this.bindAnchorAfterBoxReady, 500);
     }
   }
 
   @HostListener ('click')
-  scrollToAnchor() {
+  scrollToAnchor(activeChangeBy?: AnchorActiveChangeSource) {
     if ( !this.anchorBlock) {
       return;
     }
     const callback = () => {
-      setTimeout(() => { this.boxElement.forceActiveAnchor(this.anchorName, 'anchor-link'); }, 120);
+      setTimeout(() => {
+        this.boxElement.forceActiveAnchor(this.anchorName, activeChangeBy || 'anchor-link');
+        this.boxElement.isScrollingToTarget = false;
+      }, 120);
     };
     ((container: Element, anchor: Element) => {
+      let containerScrollTop = container.scrollTop;
+      let containerOffsetTop = container.getBoundingClientRect().top;
+      if (container === document.documentElement) {
+        containerScrollTop += document.body.scrollTop; // scrollTop兼容性问题
+        containerOffsetTop = 0; // offsettop抵消
+      }
       this.scrollAnimate(
         container,
-        container.scrollTop,
-        (container.scrollTop + anchor.getBoundingClientRect().top - (this.boxElement.view && this.boxElement.view.top || 0)),
+        containerScrollTop,
+        (containerScrollTop + anchor.getBoundingClientRect().top
+        - containerOffsetTop
+        - (this.boxElement.view && this.boxElement.view.top || 0)),
         undefined, undefined, callback
       );
     })( this.boxElement.scrollTarget || document.documentElement, this.anchorBlock.element);
+    this.boxElement.isScrollingToTarget = true;
   }
 
   scrollAnimate(target, currentTopValue, targetTopValue, timeGap: number = 40, scrollTime: number = 450, callback?) {
@@ -82,11 +95,19 @@ export class AnchorLinkDirective implements OnInit, OnDestroy {
       const currentTime = Date.now() - startTimeStamp;
       if (currentTime - timeGap > scrollTime ) {
         target.scrollTop = targetTopValue;
+        if (target === document.documentElement) {
+          // 兼容写法，老浏览器/老API模式需要document.body滚动，新的需要documentElement滚动
+          document.body.scrollTop = targetTopValue;
+        }
         if (callback) {
             callback();
         }
       } else {
-        target.scrollTop = this.easeInOutCubic(currentTime, currentTopValue, targetTopValue, scrollTime);
+        const tempTopValue = this.easeInOutCubic(currentTime, currentTopValue, targetTopValue, scrollTime);
+        target.scrollTop = tempTopValue;
+        if (target === document.documentElement) {
+          document.body.scrollTop = tempTopValue;
+        }
         setTimeout(() => {requestAnimationFrame(drawAnimateFrame); }, timeGap);
       }
     };

@@ -1,0 +1,10 @@
+@import '../../../style/theme/color';
+
+.select-options {
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+svg > g > polygon {
+  fill: $devui-icon-text;
+}

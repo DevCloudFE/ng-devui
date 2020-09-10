@@ -1,53 +1,60 @@
-<div class="demo-container">
-    <div class="demo-example">
-        <div class="demo-title">互相独立的单选项</div>
-        <div class="demo-text">
+<div class="demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 60, bottom: 0 }">
+  <d-demo-nav [navItems]="navItems"></d-demo-nav>
+  <div class="demo-example" [dAnchor]="'basic-usage'">
+    <div class="demo-title">互相独立的单选项</div>
+    <div class="demo-text"></div>
+    <d-codebox id="components-radio-basic" [sourceData]="basicSource">
+      <d-basic demo></d-basic>
+    </d-codebox>
+  </div>
 
-        </div>
-        <d-codebox id="components-radio-basic" [sourceData]="basicSource">
-            <d-basic demo></d-basic>
-        </d-codebox>
-    </div>
+  <div class="demo-example" [dAnchor]="'condition-change'">
+    <div class="demo-title">radio根据条件终止切换操作</div>
+    <div class="demo-text">根据条件判断，第二项禁止跳转</div>
+    <div class="demo-text"></div>
+    <d-codebox id="components-radio-change" [sourceData]="conditionChangeSource">
+      <d-condition-change demo></d-condition-change>
+    </d-codebox>
+  </div>
 
-    <div class="demo-example">
-        <div class="demo-title">禁用</div>
-        <div class="demo-text">
+  <div class="demo-example" [dAnchor]="'condition-radio-group'">
+    <div class="demo-title">radio-group根据条件终止切换操作</div>
+    <div class="demo-text">根据条件判断，第二个radio-group禁止跳转</div>
+    <div class="demo-text"></div>
+    <d-codebox id="components-radio-change" [sourceData]="conditionChangeGroupSource">
+      <d-condition-radio-group demo></d-condition-radio-group>
+    </d-codebox>
+  </div>
 
-        </div>
-        <d-codebox id="components-radio-disabled" [sourceData]="disabledSource">
-            <d-disabled demo></d-disabled>
-        </d-codebox>
-    </div>
+  <div class="demo-example" [dAnchor]="'disabled'">
+    <div class="demo-title">禁用</div>
+    <div class="demo-text"></div>
+    <d-codebox id="components-radio-disabled" [sourceData]="disabledSource">
+      <d-disabled demo></d-disabled>
+    </d-codebox>
+  </div>
 
-    <div class="demo-example">
-        <div class="demo-title">横向排列</div>
-        <div class="demo-text">
+  <div class="demo-example" [dAnchor]="'horizontal'">
+    <div class="demo-title">横向排列</div>
+    <div class="demo-text"></div>
+    <d-codebox id="components-radio-horizontal" [sourceData]="horizontalSource">
+      <d-horizontal demo></d-horizontal>
+    </d-codebox>
+  </div>
 
-        </div>
-        <d-codebox id="components-radio-horizontal" [sourceData]="horizontalSource">
-            <d-horizontal demo></d-horizontal>
-        </d-codebox>
-    </div>
+  <div class="demo-example" [dAnchor]="'vertical'">
+    <div class="demo-title">竖向排列</div>
+    <div class="demo-text"></div>
+    <d-codebox id="components-radio-vertical" [sourceData]="verticalSource">
+      <d-vertical demo></d-vertical>
+    </d-codebox>
+  </div>
 
-    <div class="demo-example">
-        <div class="demo-title">竖向排列</div>
-        <div class="demo-text">
-
-        </div>
-        <d-codebox id="components-radio-vertical" [sourceData]="verticalSource">
-            <d-vertical demo></d-vertical>
-        </d-codebox>
-    </div>
-
-    <div class="demo-example">
-        <div class="demo-title">自定义单选项</div>
-        <div class="demo-text">
-
-        </div>
-        <d-codebox id="components-radio-custom" [sourceData]="customSource">
-            <d-custom demo></d-custom>
-        </d-codebox>
-    </div>
-
+  <div class="demo-example" [dAnchor]="'custom'">
+    <div class="demo-title">自定义单选项</div>
+    <div class="demo-text">数组源可为普通数组、对象数组等</div>
+    <d-codebox id="components-radio-custom" [sourceData]="customSource">
+      <d-custom demo></d-custom>
+    </d-codebox>
+  </div>
 </div>
-

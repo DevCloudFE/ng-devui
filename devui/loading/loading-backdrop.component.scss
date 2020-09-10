@@ -1,7 +1,9 @@
+@import '../style/theme/color';
+
 .devui-loading-backdrop {
   position: absolute;
   z-index: 1000;
-  background-color: #ddd;
+  background-color: $devui-line;
   opacity: 0.3;
   left: 0;
   top: 0;

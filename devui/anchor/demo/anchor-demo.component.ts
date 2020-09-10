@@ -1,8 +1,5 @@
-import {
-  Component,
-  HostBinding
-} from '@angular/core';
-import { DevuiSourceData } from '../../shared/devui-codebox';
+import { Component } from '@angular/core';
+import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 
 @Component({
     selector: 'd-anchor-demo',
@@ -15,13 +12,29 @@ export class AnchorDemoComponent {
     {title: 'CSS', language: 'css', code:  require('!!raw-loader!./basic/basic.component.css')}
   ];
 
-  asynSource: Array<DevuiSourceData> = [
-    {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./asyn/asyn.component.html')},
-    {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./asyn/asyn.component.ts')},
-    {title: 'CSS', language: 'css', code:  require('!!raw-loader!./asyn/asyn.component.css')}
+  asyncSource: Array<DevuiSourceData> = [
+    {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./async/async.component.html')},
+    {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./async/async.component.ts')},
+    {title: 'CSS', language: 'css', code:  require('!!raw-loader!./async/async.component.css')}
+  ];
+  hashSource: Array<DevuiSourceData> = [
+    {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./hash/hash.component.html')},
+    {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./hash/hash.component.ts')},
+    {title: 'CSS', language: 'css', code:  require('!!raw-loader!./hash/hash.component.css')}
   ];
 
-  constructor() {
+  ScrollTargetSource: Array<DevuiSourceData> = [
+    {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./scroll-target/scroll-target.component.html')},
+    {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./scroll-target/scroll-target.component.ts')},
+    {title: 'CSS', language: 'css', code:  require('!!raw-loader!./scroll-target/scroll-target.component.css')}
+  ];
 
-  }
+
+  navItems = [
+    { dAnchorLink: 'basic-usage', value: '基本用法'},
+    { dAnchorLink: 'asynchronous-loading', value: '异步加载'},
+    { dAnchorLink: 'scroll-target', value: '更换滚动容器'},
+    { dAnchorLink: 'support-hash', value: '支持url锚点'}
+  ];
+
 }

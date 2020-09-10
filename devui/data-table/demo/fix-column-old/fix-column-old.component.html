@@ -1,0 +1,12 @@
+<d-data-table #datatable [dataSource]="basicDataSource" [scrollable]="true" [checkable]="true">
+  <d-column
+    *ngFor="let colOption of dataTableOptions.columns"
+    [field]="colOption.field"
+    [header]="colOption.header"
+    [fieldType]="colOption.fieldType"
+    [width]="'150px'"
+    [fixedLeft]="colOption?.fixedLeft || null"
+    [fixedRight]="colOption?.fixedRight || null"
+  >
+  </d-column>
+</d-data-table>

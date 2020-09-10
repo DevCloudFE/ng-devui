@@ -1,0 +1,58 @@
+@import '../../../../../style/theme/color';
+
+.sort-clickable {
+  cursor: pointer;
+  position: absolute;
+  top: -16px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 8px;
+  line-height: 20px;
+}
+
+.sort-icon-default {
+  visibility: hidden;
+
+  > svg g use {
+    fill: $devui-dividing-line;
+  }
+
+  > svg g polygon {
+    fill: $devui-icon-bg;
+  }
+
+  &:hover {
+    > svg g use {
+      fill: $devui-icon-fill-active-hover;
+    }
+  }
+}
+
+.sort-icon-asc,
+.sort-icon-desc {
+  > svg g use {
+    fill: $devui-icon-fill-active;
+  }
+
+  > svg g polygon {
+    fill: $devui-icon-bg;
+  }
+
+  &:hover {
+    > svg g use {
+      fill: $devui-icon-fill-active-hover;
+    }
+  }
+}
+
+.sort-icon-asc {
+  > svg g polygon:last-of-type {
+    opacity: 0.3;
+  }
+}
+
+.sort-icon-desc {
+  > svg g polygon:first-of-type {
+    opacity: 0.3;
+  }
+}

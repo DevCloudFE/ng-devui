@@ -5,14 +5,16 @@
     }
   }
 }
+
 table.devui-table {
   width: 100%;
   max-width: 100%;
   margin-bottom: 20px;
 }
-table.devui-table > tbody > tr > td{
+
+table.devui-table > tbody > tr > td {
   padding: 8px;
   line-height: 1.42857143;
   vertical-align: top;
-  border-top: 1px solid #ddd;
+  border-top: 1px solid #dddddd;
 }

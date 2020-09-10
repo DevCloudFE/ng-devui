@@ -1,0 +1,35 @@
+<d-data-table
+  [dataSource]="basicDataSource"
+  [tableWidthConfig]="tableWidthConfig"
+  [scrollable]="true"
+  [type]="'striped'"
+  dDroppable
+  [switchWhileCrossEdge]="true"
+  [dropScope]="'default-switch'"
+  (dropEvent)="onDrop($event)"
+>
+  <thead dTableHead>
+    <tr dTableRow>
+      <th dHeadCell></th>
+      <th dHeadCell *ngFor="let colOption of dataTableOptions.columns">{{ colOption.header }}</th>
+    </tr>
+  </thead>
+  <tbody dTableBody dSortable>
+    <ng-template let-rowItem="rowItem" let-rowIndex="rowIndex">
+      <tr
+        dTableRow
+        dDraggable
+        [dragScope]="'default-switch'"
+        [dragHandle]="'.table-drag-row-handle, .table-drag-row-handle *'"
+        [dragData]="rowItem"
+      >
+        <td dTableCell class="table-drag-row-handle">
+          <div class="icon-drag-small"></div>
+        </td>
+        <td dTableCell *ngFor="let colOption of dataTableOptions.columns">
+          {{ colOption.fieldType === 'date' ? (rowItem[colOption.field] | i18nDate: 'short':false) : rowItem[colOption.field] }}
+        </td>
+      </tr>
+    </ng-template>
+  </tbody>
+</d-data-table>

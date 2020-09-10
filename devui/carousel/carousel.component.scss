@@ -1,0 +1,99 @@
+@import '../style/theme/color';
+
+@mixin fixed-arrow-button() {
+  position: absolute;
+  top: -18px;
+  z-index: 2;
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  border-radius: 18px;
+  background: $devui-highlight-overlay;
+  box-shadow: 0 0 8px 0 $devui-light-shadow;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background: $devui-area;
+  }
+
+  svg polygon {
+    fill: $devui-text;
+  }
+}
+
+.devui-carousel-container {
+  display: block;
+  position: relative;
+
+  .devui-carousel-arrow {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+
+    .arrow-left {
+      @include fixed-arrow-button();
+
+      left: 10px;
+    }
+
+    .arrow-right {
+      @include fixed-arrow-button();
+
+      right: 10px;
+    }
+  }
+
+  .devui-carousel-item-wrapper {
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+
+    .devui-carousel-item-container {
+      display: flex;
+      height: 100%;
+      position: relative;
+
+      ::ng-deep d-carousel-item {
+        flex: 1;
+        position: relative;
+        height: 100%;
+      }
+    }
+  }
+
+  .devui-carousel-dots {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+    &.bottom {
+      bottom: 8px;
+    }
+
+    &.top {
+      top: 8px;
+    }
+
+    .dot-item {
+      width: 6px;
+      height: 6px;
+      border-radius: 3px;
+      margin-right: 8px;
+      background: $devui-icon-fill;
+
+      &:hover {
+        cursor: pointer;
+        background: $devui-list-item-hover-bg;
+      }
+
+      &.active {
+        width: 24px;
+        background: $devui-list-item-active-bg;
+        transition: all 0.5s ease;
+      }
+    }
+  }
+}

@@ -3,6 +3,7 @@ import {
   ViewChild,
   TemplateRef,
   HostBinding,
+  OnDestroy,
 } from '@angular/core';
 import {
   Input,
@@ -14,17 +15,13 @@ import {
   IUploadOptions,
   IFileOptions
 } from './file-uploader.types';
-import {SingleUploadViewComponent} from './single-upload-view.component';
+import { SingleUploadViewComponent } from './single-upload-view.component';
 import {
   SelectFiles
 } from './select-files.utils';
-import {
-  ModalService,
-  ModalAlertComponent
-} from 'ng-devui/modal';
-import { last, map } from 'rxjs/operators' ;
-import { DevUIConfig } from 'ng-devui/devui.config';
-import { Observable } from 'rxjs';
+import { last, map } from 'rxjs/operators';
+import { Observable, Subscription } from 'rxjs';
+import { I18nInterface, I18nService } from 'ng-devui/i18n';
 
 
 @Component({
@@ -33,7 +30,7 @@ import { Observable } from 'rxjs';
   exportAs: 'dSingleUpload',
   styleUrls: ['./upload-view.component.scss'],
 })
-export class SingleUploadComponent {
+export class SingleUploadComponent implements OnDestroy {
   dSingleUploadView;
   @Input() uploadOptions: IUploadOptions;
   @Input() fileOptions: IFileOptions;
@@ -43,36 +40,36 @@ export class SingleUploadComponent {
   @Input() uploadedFilesRef: TemplateRef<any>;
   @Input() preloadFilesRef?: TemplateRef<any>;
   @Input() filePath: string;
-  // i18n
-  /**
-   * 【可选】上传输入框中的Placeholder文字
-   */
-  @Input() CHOOSE_FILE: string;
-  /**
-   * 【可选】上传按钮文字
-   */
+  @Input() placeholderText: string;
   @Input() uploadText: string;
   /**
-   * 【可选】错误信息弹出框中确认按钮文字
-   */
+  * @deprecated
+  */
   @Input() confirmText: string;
   @Input() beforeUpload: (file) => boolean | Promise<boolean> | Observable<boolean>;
   @Input() enableDrop = false;
-  @Output() successEvent: EventEmitter<any> = new EventEmitter();
-  @Output() errorEvent: EventEmitter<any> = new EventEmitter();
-  @Output() deleteUploadedFileEvent: EventEmitter<any> = new EventEmitter();
-  @Output() fileDrop: EventEmitter<any> = new EventEmitter();
-  @Output() fileOver: EventEmitter<any> = new EventEmitter();
+  @Input() disabled = false;
+  @Output() successEvent: EventEmitter<any> = new EventEmitter<any>();
+  @Output() errorEvent: EventEmitter<any> = new EventEmitter<any>();
+  @Output() deleteUploadedFileEvent: EventEmitter<any> = new EventEmitter<any>();
+  @Output() fileDrop: EventEmitter<any> = new EventEmitter<any>();
+  @Output() fileOver: EventEmitter<any> = new EventEmitter<any>();
   @ViewChild('dSingleUploadView', { static: true }) singleUploadViewComponent: SingleUploadViewComponent;
   UploadStatus = UploadStatus;
   isDropOVer = false;
-
-  constructor(private modalService: ModalService,
-private devUIConfig: DevUIConfig,
-              private selectFiles: SelectFiles) {
-    this.uploadText = this.devUIConfig['uploadCN'].UPLOAD;
-    this.confirmText = this.devUIConfig['modalCN'].BUTTON_TEXT.OK;
-    this.CHOOSE_FILE = this.devUIConfig['uploadCN'].CHOOSE_FILE;
+  i18nText: I18nInterface['upload'];
+  i18nCommonText: I18nInterface['common'];
+  i18nSubscription: Subscription;
+  errorMsg = [];
+  constructor(
+    private i18n: I18nService,
+    private selectFiles: SelectFiles) {
+    this.i18nText = this.i18n.getI18nText().upload;
+    this.i18nCommonText = this.i18n.getI18nText().common;
+    this.i18nSubscription = this.i18n.langChange().subscribe((data) => {
+      this.i18nText = data.upload;
+      this.i18nCommonText = data.common;
+    });
   }
 
   _dealFiles(observale) {
@@ -82,6 +79,7 @@ private devUIConfig: DevUIConfig,
     })).subscribe(
       () => {
         this.singleUploadViewComponent.uploadedFilesComponent.cleanUploadedFiles();
+        this.checkValid();
         if (this.autoUpload) {
           this.upload();
         }
@@ -92,7 +90,21 @@ private devUIConfig: DevUIConfig,
     );
   }
 
+  checkValid() {
+    this.singleUploadViewComponent.fileUploaders.forEach(fileUploader => {
+      const checkResult = this.selectFiles._validateFiles(fileUploader.file, this.fileOptions.accept, fileUploader.uploadOptions);
+      if (checkResult.checkError) {
+        this.singleUploadViewComponent.deletePreUploadFile(fileUploader.file);
+        this.alertMsg(checkResult.errorMsg);
+      }
+    });
+  }
+
   onClick($event) {
+    if (this.disabled || (this.singleUploadViewComponent.fileUploaders[0] &&
+      this.singleUploadViewComponent.fileUploaders[0].status === UploadStatus.uploading)) {
+      return;
+    }
     this._dealFiles(this.selectFiles.triggerSelectFiles(this.fileOptions, this.uploadOptions));
   }
 
@@ -121,7 +133,7 @@ private devUIConfig: DevUIConfig,
         .pipe(
           last()
         ).subscribe(
-          (results: Array<{file: File, response: any}>) => {
+          (results: Array<{ file: File, response: any }>) => {
             this.successEvent.emit(results);
             results.forEach((result) => {
               this.singleUploadViewComponent.deleteFile(result.file);
@@ -139,7 +151,7 @@ private devUIConfig: DevUIConfig,
   canUpload() {
     let uploadResult = Promise.resolve(true);
     if (this.beforeUpload) {
-      const result: any = this.beforeUpload(this.singleUploadViewComponent.getFiles()[0] || {} as File);
+      const result: any = this.beforeUpload(this.singleUploadViewComponent.getFullFiles()[0] || {} as File);
       if (typeof result !== 'undefined') {
         if (result.then) {
           uploadResult = result;
@@ -156,20 +168,18 @@ private devUIConfig: DevUIConfig,
   _onDeleteUploadedFile(filePath: string) {
     this.deleteUploadedFileEvent.emit(filePath);
   }
-
+  deleteFile($event) {
+    $event.stopPropagation();
+    const files = this.singleUploadViewComponent.getFiles();
+    this.singleUploadViewComponent.deleteFile(files[0]);
+  }
   alertMsg(errorMsg) {
-    const results = this.modalService.open({
-      width: '300px',
-      backdropCloseable: false,
-      showAnimate: true,
-      component: ModalAlertComponent,
-      data: {
-        content: errorMsg,
-        cancelBtnText: this.confirmText,
-        onClose: (event) => {
-          results.modalInstance.hide();
-        },
-      },
-    });
+    this.errorMsg = [{ severity: 'warn', summary: this.i18nText.warning, detail: errorMsg }];
+  }
+  ngOnDestroy() {
+    if (this.i18nSubscription) {
+      this.i18nSubscription.unsubscribe();
+
+    }
   }
 }

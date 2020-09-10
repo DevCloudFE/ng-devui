@@ -1,6 +1,25 @@
-<d-data-table [dataSource]="lazyDataSource" lazy="true" (loadMore)="loadMore($event)" [scrollable]="true">
-  <d-column *ngFor="let colOption of dataTableOptions.columns" [field]="colOption.field" [header]="colOption.header"
-    [sortable]="colOption.sortable" [fieldType]="colOption.fieldType">
-  </d-column>
+<d-data-table
+  [dataSource]="lazyDataSource"
+  lazy="true"
+  (loadMore)="loadMore($event)"
+  scrollable="true"
+  maxHeight="400px"
+  dLoading
+  [showLoading]="showLoading"
+  backdrop="true"
+>
+  <thead dTableHead>
+    <tr dTableRow>
+      <th dHeadCell *ngFor="let colOption of dataTableOptions.columns">{{ colOption.header }}</th>
+    </tr>
+  </thead>
+  <tbody dTableBody>
+    <ng-template let-rowItem="rowItem" let-rowIndex="rowIndex">
+      <tr dTableRow>
+        <td dTableCell *ngFor="let colOption of dataTableOptions.columns">
+          {{ colOption.fieldType === 'date' ? (rowItem[colOption.field] | i18nDate: 'short':false) : rowItem[colOption.field] }}
+        </td>
+      </tr>
+    </ng-template>
+  </tbody>
 </d-data-table>
-<div dLoading [loading]="loading" [backdrop]="true" [message]="'Loading...'" [style.height.px]="100"></div>

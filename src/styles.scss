@@ -1,64 +1,86 @@
-@import "../devui/style/devui";
+@import '../devui/style/devui';
 @import '~@devui-design/icons/icomoon/devui-icon.css';
 
 .markdown {
-  color: rgba(0,0,0,.65);
+  color: $devui-text-weak;
   font-size: 14px;
   line-height: 1.8;
+
+  a {
+    color: $devui-link;
+
+    &:hover {
+      color: $devui-link-active;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
 }
+
 .highlight {
   line-height: 1.5;
   position: relative;
 }
 
-code[class*=language-], pre[class*=language-], pre code {
+code[class*='language-'],
+pre[class*='language-'],
+pre code {
   white-space: pre;
-  font-family: Lucida Console,Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;
+  font-family: Lucida Console, Consolas, Monaco, Andale Mono, Ubuntu Mono, monospace;
 }
+
 pre {
   display: block;
   margin: 0 0 10px;
-  font-size: 13px;
   line-height: 1.42857143;
-  color: #333333;
+  color: $devui-text;
   word-break: break-all;
   word-wrap: break-word;
-  border: 1px solid #ccc;
+  border: 1px solid #cccccc;
   border-radius: 1px;
 }
+
 .hljs {
-  background: #f5f5f5;
+  background: $devui-area;
+  color: $devui-text;
+  font-size: 12px;
 }
 
 pre code {
   display: block;
-  color: $dark1;
-  background: $white;
-  line-height: 1.7;
+  color: $devui-text;
+  background: $devui-base-bg;
+  line-height: 1.5;
   padding: 10px 15px;
   border-radius: 4px;
-  font-size: 13px;
   overflow-x: auto;
 }
-code, kbd, pre, samp {
+
+code,
+kbd,
+pre,
+samp {
   font-family: Consolas, Menlo, Courier, monospace;
 }
 
-section{
+section {
   margin-bottom: 0 !important;
 }
 
-.markdown.api-container{
+.markdown.api-container {
   width: 100%;
   display: block;
   overflow-x: auto;
+
   table {
-    font-size: 13px;
+    font-size: 12px;
   }
+
   p {
     margin: 1em 0;
   }
 }
+
 .markdown table {
   border-collapse: collapse;
   border-spacing: 0;
@@ -66,15 +88,18 @@ section{
   border: 1px solid #e9e9e9;
   width: 100%;
   margin: 8px 0 16px;
-  th, td {
+
+  th,
+  td {
     border: 1px solid #e9e9e9;
     padding: 8px 16px;
     text-align: left;
   }
+
   th {
-    background: #f7f7f7;
+    background: $devui-area;
     white-space: nowrap;
-    color: #5c6b77;
+    color: $devui-text-weak;
     font-weight: 600;
   }
 }
@@ -82,42 +107,56 @@ section{
 .markdown h2 {
   font-size: 22px;
 }
+
 .markdown h3 {
   font-size: 18px;
 }
-.markdown h2, .markdown h3, .markdown h4, .markdown h5, .markdown h6 {
-  color: $dark1;
-  margin: 1.6em 0 .6em;
+
+.markdown h2,
+.markdown h3,
+.markdown h4,
+.markdown h5,
+.markdown h6 {
+  color: $devui-text;
+  margin: 1.6em 0 0.6em;
   font-weight: 500;
   clear: both;
 }
 
 code {
   padding: 2px 4px;
-  font-size: 90%;
+  // font-size: 90%;
   color: #c7254e;
-  background-color: #F8F8F8;
+  background-color: $devui-area;
   border-radius: 1px;
 }
 
 .readme {
   h1 {
-    font-size: 30px;
+    // font-size: 30px;
+    @include font-title();
+
     padding: 20px 0;
   }
 
   h2 {
-    font-size: 24px;
+    // font-size: 24px;
+    @include font-title($font-size-secondary-card-title);
+
     padding: 40px 0 15px;
   }
 
   h3 {
-    font-size: 18px;
+    // font-size: 18px;
+    @include font-title($font-size-secondary-card-title);
+
     padding: 30px 0 10px;
   }
 
-  h1,h2,h3 {
-    font-weight: 300;
+  h1,
+  h2,
+  h3 {
+    // font-weight: 300;
     margin: 0;
   }
 }

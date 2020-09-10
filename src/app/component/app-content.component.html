@@ -1,41 +1,29 @@
 <div class="wrapper">
   <div id="menuLink" class="menu-link">
-      <span></span>
+    <span></span>
+  </div>
+  <div class="devui-components-search">
+    <d-search #dSearch [isKeyupSearch]="true" [placeholder]="'请输入您的关键字'" (searchFn)="onSearch($event)"></d-search>
   </div>
   <div class="sidebar">
-      <ul class="devui-menu" style="margin-bottom: 0;">
-          <li class="devui-menu-item" routerLinkActive="devui-menu-item-selected">
-              <a routerLink="get-start">快速开始</a>
-          </li>
-      </ul>
-      <nav class="side-nav">
-          <accordion [showArrows]="true" [closeOthers]="true" [expandAll]="true">
-              <div *ngFor="let type of types">
-                  <accordion-group>
-                      <accordion-heading>
-                          <span>{{type}}</span>
-                      </accordion-heading>
-                      <ul *ngFor="let routesObj of groupedRoutes;"
-                          class="list-group">
-                          <li *ngFor="let route of routesObj[type]"
-                              [style.display]="route.path==='' || route.data.nodisplay ? 'none': 'block'">
-                              <a [routerLink]="[route.path]"
-                                  routerLinkActive="active"
-                                  title="{{route.data?.name || 'UnKnown Component' }} {{route.data?.cnName}}"
-                                  class="list-group-item text-overflow-ellipsis single-line">
-                                  {{route.data?.name || 'UnKnown Component' }}&nbsp;
-                                  <span class="small">{{route.data?.cnName}}</span>
-                              </a>
-                          </li>
-                      </ul>
-                  </accordion-group>
-              </div>
-          </accordion>
-      </nav>
+    <ul class="devui-menu" style="margin-bottom: 0;">
+      <li class="devui-menu-item" routerLinkActive="devui-menu-item-selected">
+        <a routerLink="get-start">快速开始</a>
+      </li>
+      <li class="devui-menu-item" routerLinkActive="devui-menu-item-selected">
+        <a routerLink="color" style="position: relative;"
+          >颜色变量
+          <sup class="devui-beta-label">Beta</sup>
+        </a>
+      </li>
+    </ul>
+    <nav class="side-nav">
+      <d-accordion [data]="componentsDataDisplay" [linkType]="'routerLink'"></d-accordion>
+    </nav>
   </div>
   <div class="doc-viewer-container">
-      <div class="main">
-          <router-outlet></router-outlet>
-      </div>
+    <div class="main">
+      <router-outlet></router-outlet>
+    </div>
   </div>
 </div>

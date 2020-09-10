@@ -1,0 +1,17 @@
+.btn-group {
+  display: inline-block;
+}
+
+.icon-in-search {
+  height: 28px;
+  line-height: 28px;
+  width: 20px;
+  position: absolute;
+  top: 0;
+  right: 7px;
+  text-align: center;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

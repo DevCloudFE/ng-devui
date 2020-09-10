@@ -10,13 +10,13 @@ export class FileUploader {
   public percentage = 0;
 
   constructor(public file: File,
-              private uploadOptions: IUploadOptions) {
+    public uploadOptions: IUploadOptions) {
     this.file = file;
     this.uploadOptions = uploadOptions;
     this.status = UploadStatus.preLoad;
   }
 
-  public send(): Promise<{file: File, response: any}> {
+  public send(uploadFiles?): Promise<{ file: File, response: any }> {
     return new Promise((resolve, reject) => {
       const {
         uri,
@@ -26,12 +26,17 @@ export class FileUploader {
         authTokenHeader,
         additionalParameter,
         fileFieldName,
+        withCredentials
       } = this.uploadOptions;
       const authTokenHeader_ = authTokenHeader || 'Authorization';
       const fileFieldName_ = fileFieldName || 'file';
 
       this.xhr = new XMLHttpRequest();
       this.xhr.open(method || 'POST', uri);
+
+      if (withCredentials) {
+        this.xhr.withCredentials = withCredentials;
+      }
 
       if (authToken) {
         this.xhr.setRequestHeader(authTokenHeader_, authToken);
@@ -47,13 +52,11 @@ export class FileUploader {
         this.percentage = Math.round(e.loaded * 100 / e.total);
       };
 
-      const formData = new FormData();
-      formData.append(fileFieldName_, this.file);
-      if (additionalParameter) {
-        Object.keys(additionalParameter).forEach((key: string) => {
-          formData.append(key, additionalParameter[key]);
-        });
-      }
+
+      const formData = uploadFiles && uploadFiles.length ?
+        this.oneTimeUploadFiles(fileFieldName_, additionalParameter, uploadFiles) :
+        this.parallelUploadFiles(fileFieldName_, additionalParameter);
+
 
       this.xhr.send(formData);
       this.status = UploadStatus.uploading;
@@ -66,21 +69,45 @@ export class FileUploader {
       this.xhr.onerror = () => {
         this.response = this.xhr.response;
         this.status = UploadStatus.failed;
-        reject(new Error('Upload failed in some reason.'));
+        reject({ file: this.file, response: this.xhr.response });
       };
 
       this.xhr.onload = () => {
         if (this.xhr.readyState === 4 && this.xhr.status >= 200 && this.xhr.status < 300) {
           this.response = this.xhr.response;
           this.status = UploadStatus.uploaded;
-          resolve({file: this.file, response: this.xhr.response});
+          resolve({ file: this.file, response: this.xhr.response });
         } else {
           this.response = this.xhr.response;
           this.status = UploadStatus.failed;
-          reject({file: this.file, response: this.xhr.response});
+          reject({ file: this.file, response: this.xhr.response });
         }
       };
     });
+  }
+
+  public parallelUploadFiles(fileFieldName_, additionalParameter) {
+    const formData = new FormData();
+    formData.append(fileFieldName_, this.file, this.file.name);
+    if (additionalParameter) {
+      Object.keys(additionalParameter).forEach((key: string) => {
+        formData.append(key, additionalParameter[key]);
+      });
+    }
+    return formData;
+  }
+
+  public oneTimeUploadFiles(fileFieldName_, additionalParameter, uploadFiles) {
+    const formData = new FormData();
+    uploadFiles.forEach(element => {
+      formData.append(fileFieldName_, element.file, element.file.name);
+      if (additionalParameter) {
+        Object.keys(additionalParameter).forEach((key: string) => {
+          formData.append(key, additionalParameter[key]);
+        });
+      }
+    });
+    return formData;
   }
 
   public cancel() {

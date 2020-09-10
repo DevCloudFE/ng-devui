@@ -1,0 +1,21 @@
+<d-button bsStyle="common" dStepsGuide [pageName]="'step-custom-demo'" [stepIndex]="0" [leftFix]="-35" [topFix]="-120" [position]="'top'">
+  custom position
+</d-button>
+<d-button
+  bsStyle="common"
+  dStepsGuide
+  [targetElement]="targetElement"
+  [pageName]="'step-custom-demo'"
+  [stepIndex]="1"
+  [position]="'bottom-left'"
+  [zIndex]="2000"
+  [extraConfig]="config"
+>
+  custom target
+</d-button>
+<d-button (click)="reset()" bsStyle="primary">
+  show
+</d-button>
+<d-button (click)="close()" bsStyle="common">
+  close
+</d-button>

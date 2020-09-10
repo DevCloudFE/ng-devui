@@ -1,0 +1,55 @@
+<h4>全部禁用</h4>
+<section>
+  <div class="row">
+    <div class="col-md-5">
+      <d-select [disabled]="true" [options]="options" [direction]="'auto'" [ngModel]="'选项6'"></d-select>
+    </div>
+  </div>
+</section>
+<section>
+  <h4>禁用某一项</h4>
+  <div class="row">
+    <div class="col-md-5">
+      <d-select [options]="options2" [direction]="'auto'" [filterKey]="'value'" [optionDisabledKey]="'disabled'"></d-select>
+    </div>
+  </div>
+</section>
+<section>
+  <h4>禁用某一项, 标签不可单独操作，全选仍可以选中和取消</h4>
+  <div class="row">
+    <div class="col-md-5">
+      <d-select
+        [options]="options2"
+        [direction]="'auto'"
+        [filterKey]="'value'"
+        [isSelectAll]="true"
+        [multiple]="true"
+        [optionDisabledKey]="'disabled'"
+        [extraConfig]="{
+          labelization: { enable: true, overflow: 'multiple-line' }
+        }"
+        [(ngModel)]="opt2"
+      ></d-select>
+    </div>
+  </div>
+</section>
+<section>
+  <h4>禁用某一项, 使用immutable禁止变更，全选不可选中和取消</h4>
+  <div class="row">
+    <div class="col-md-5">
+      <d-select
+        [options]="options3"
+        [isSelectAll]="true"
+        [multiple]="true"
+        [filterKey]="'value'"
+        [optionDisabledKey]="'disabled'"
+        [optionImmutableKey]="'immutable'"
+        [extraConfig]="{
+          labelization: { enable: true, overflow: 'multiple-line' }
+        }"
+        [(ngModel)]="opt3"
+      ></d-select>
+    </div>
+  </div>
+  immutable只控制不能变更，不会显示为禁用状态，禁用状态请使用disabled。
+</section>

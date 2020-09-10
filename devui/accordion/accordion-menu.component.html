@@ -1,0 +1,48 @@
+<div
+  class="devui-accordion-item-title devui-over-flow-ellipsis"
+  [ngClass]="{
+    open: open,
+    active: childActived,
+    disabled: disabled
+  }"
+  title="{{ title }}"
+  (click)="!disabled && toggle($event)"
+>
+  <div
+    class="devui-accordion-splitter"
+    [ngClass]="{
+      'devui-parent-list': deepth === 0
+    }"
+    [ngStyle]="{ left: deepth * 20 + 10 + 'px' }"
+  ></div>
+  <ng-container *ngIf="!menuItemTemplate">
+    {{ title }}
+  </ng-container>
+  <ng-template
+    *ngIf="menuItemTemplate"
+    [ngTemplateOutlet]="menuItemTemplate"
+    [ngTemplateOutletContext]="{
+      parent: parent,
+      item: item,
+      deepth: deepth
+    }"
+  ></ng-template>
+  <span class="devui-accordion-open-icon">
+    <svg viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+      <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <polygon
+          transform="translate(8.000000, 8.000000) scale(1, -1) rotate(-360.000000) translate(-8.000000, -8.000000) "
+          points="4 5.5 12 5.5 8 10.5"
+        ></polygon>
+      </g>
+    </svg>
+  </span>
+</div>
+<d-accordion-list
+  class="devui-accordion-submenu"
+  [ngClass]="{ 'devui-accordion-menu-hidden': !open }"
+  [deepth]="deepth + 1"
+  [data]="children"
+  [parent]="item"
+>
+</d-accordion-list>

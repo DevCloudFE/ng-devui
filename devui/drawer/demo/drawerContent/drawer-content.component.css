@@ -1,10 +1,10 @@
-input[type="text"] {
+input[type='text'] {
   width: 300px;
   height: 32px;
   box-sizing: border-box;
   padding: 5px 10px;
   font-size: 12px;
-  color: #333;
+  color: #333333;
   vertical-align: middle;
   border: 1px solid #c8cbcc;
   border-radius: 3px;
@@ -12,6 +12,6 @@ input[type="text"] {
   background-color: white;
 }
 
-input[type="text"]:hover {
-border-color:#405DFF;
+input[type='text']:hover {
+  border-color: #405dff;
 }

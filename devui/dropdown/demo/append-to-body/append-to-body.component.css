@@ -1,12 +1,11 @@
 .align-origin {
-  border: 1px dashed #E3E5E9;
+  border: 1px dashed #e3e5e9;
   min-width: 200px;
   min-height: 50px;
   line-height: 50px;
+  display: inline-block;
 }
-.dropdown-menu > li > input {
-  margin-left: 10px;
-}
+
 .devui-dropdown-menu {
   overflow-y: auto;
 }

@@ -1,10 +1,270 @@
 <ng-container>
-  <ng-template [ngTemplateOutlet]="headTemplate ? headTemplate.template : dataTableTemplates.headTemplate"
-            [ngTemplateOutletContext]="{ $implicit: this }" 
-            *ngIf="! (rowCount > 0)">
+  <ng-template [ngTemplateOutlet]="defaultHeadTemplate" [ngTemplateOutletContext]="{ $implicit: this }" *ngIf="!(rowCount > 0)">
   </ng-template>
-  <ng-template [ngTemplateOutlet]="headTemplate ? headTemplate.template : dataTableTemplates.AdvancedHeadTmpl"
-            [ngTemplateOutletContext]="{ $implicit: this, rows: rowCountArray  }" 
-            *ngIf="rowCount > 0">
+  <ng-template
+    [ngTemplateOutlet]="AdvancedHeadTmpl"
+    [ngTemplateOutletContext]="{ $implicit: this, rows: rowCountArray  }"
+    *ngIf="rowCount > 0"
+  >
   </ng-template>
 </ng-container>
+
+<!-- begin:template: header label template-->
+<ng-template #defaultHeadTemplate let-head="">
+  <tr>
+    <th
+      *ngIf="showExpandToggle"
+      class="devui-detail-cell"
+      [ngClass]="{ 'devui-sticky-left-cell': columns[0]?.fixedLeft }"
+      [style.left]="0"
+    ></th>
+    <th
+      *ngIf="checkable"
+      class="devui-checkable-cell"
+      [ngClass]="{ 'devui-sticky-left-cell': columns[0]?.fixedLeft }"
+      [style.left]="showExpandToggle && columns[0]?.fixedLeft ? '16px' : '0'"
+    >
+      <d-checkbox
+        *ngIf="headerCheckVisible"
+        class="check-box-all"
+        [name]="'checkAll'"
+        [disabled]="headerCheckDisabled"
+        (change)="onCheckAllChange()"
+        [(ngModel)]="pageAllChecked"
+        [halfchecked]="halfChecked"
+      >
+      </d-checkbox>
+      <div *ngIf="checkOptions && checkOptions.length > 0" dDropDown appendToBody [trigger]="'hover'" class="select-options">
+        <div dDropDownToggle>
+          <svg
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            height="16px"
+            version="1.1"
+            viewBox="0 0 16 16"
+            width="16px"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g fill="none" fill-rule="evenodd" id="chevron_down" stroke="none" stroke-width="1">
+              <polygon points="4.5 5 8 8.76923077 11.5 5 13 6.61538462 8 12 3 6.61538462"></polygon>
+            </g>
+          </svg>
+        </div>
+        <ul dDropDownMenu class="devui-dropdown-menu devui-dropdown-overlay" role="menu">
+          <li *ngFor="let option of checkOptions" role="menuitem" (click)="onOptionSelect(option)">
+            <a class="devui-dropdown-item disabled">{{ option.label }}</a>
+          </li>
+        </ul>
+      </div>
+    </th>
+    <th
+      dHeadCell
+      *ngFor="let column of columns; trackBy: trackByFn; let last = last; let colIndex = index"
+      [minWidth]="column.minWidth"
+      [maxWidth]="column.maxWidth"
+      [sortable]="getIfExistMultiSort(column.field)"
+      [sortDirection]="getSortDirection(column.field)"
+      (sortChange)="onHeadClick($event, column)"
+      [filterable]="canFilterable(column)"
+      [filterList]="column.filterList"
+      [column]="column"
+      [filterMultiple]="column.filterMultiple"
+      [filterBoxWidth]="column.filterBoxWidth"
+      [filterBoxHeight]="column.filterBoxHeight"
+      [filterIconActive]="column.filterIconActive"
+      [beforeFilter]="column.beforeFilter"
+      [customFilterTemplate]="column.customFilterTemplate"
+      [searchFn]="column.searchFn"
+      (filterChange)="column.emitFilterData($event)"
+      [fixedLeft]="column.fixedLeft"
+      [fixedRight]="column.fixedRight"
+      [nestedColumn]="column.extraOptions?.showHeadTableToggler"
+      (toggleChildrenTableEvent)="toggleChildrenTable($event)"
+      (tapEvent)="onTap($event)"
+      [iconFoldTable]="column.extraOptions?.iconFoldTable"
+      [iconUnFoldTable]="column.extraOptions?.iconUnFoldTable"
+      [tableViewRefElement]="tableViewRefElement"
+      [colDraggable]="colDraggable && colIndex > head?.colDropFreezeTo - 1"
+      [childrenTableOpen]="childrenTableOpen"
+      [ngClass]="{
+        sindu_handle: colDraggable && colIndex > head?.colDropFreezeTo - 1,
+        'drop-freeze': colDraggable && colIndex < head?.colDropFreezeTo
+      }"
+      [resizeEnabled]="resizeable"
+      (resizeEndEvent)="onResize($event, column)"
+      (resizeStartEvent)="onBeginResize($event)"
+      (resizingEvent)="onResizing($event, column)"
+    >
+      <span *ngIf="!column.headCellTmpl?.template" [attr.title]="column.header">{{ column.header }}</span>
+      <ng-container *ngIf="column.headCellTmpl?.template">
+        <ng-template
+          [ngTemplateOutlet]="column.headCellTmpl?.template"
+          [ngTemplateOutletContext]="{ column: column, $implicit: head }"
+        ></ng-template>
+      </ng-container>
+    </th>
+  </tr>
+</ng-template>
+<!--end:tempate-->
+
+<ng-template let-head="" let-rows="rows" #AdvancedHeadTmpl>
+  <tr *ngFor="let rowContex of rows; let rowIndex = index">
+    <th
+      *ngIf="showExpandToggle && rowIndex === 0"
+      class="devui-detail-cell"
+      [attr.rowspan]="rows?.length || 1"
+      [ngClass]="{ 'devui-sticky-left-cell': columns[0]?.fixedLeft }"
+      [style.left]="0"
+    ></th>
+    <th
+      *ngIf="checkable && rowIndex === 0"
+      class="devui-checkable-cell"
+      [attr.rowspan]="rows?.length || 1"
+      [ngClass]="{ 'devui-sticky-left-cell': columns[0]?.fixedLeft }"
+      [style.left]="showExpandToggle && columns[0]?.fixedLeft ? '16px' : '0'"
+    >
+      <d-checkbox
+        *ngIf="headerCheckVisible"
+        class="check-box-all"
+        [name]="'checkAll'"
+        [disabled]="headerCheckDisabled"
+        (change)="onCheckAllChange()"
+        [(ngModel)]="pageAllChecked"
+        [halfchecked]="halfChecked"
+      >
+      </d-checkbox>
+      <div *ngIf="checkOptions && checkOptions.length > 0" dDropDown appendToBody [trigger]="'hover'" class="select-options">
+        <div dDropDownToggle>
+          <svg
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            height="16px"
+            version="1.1"
+            viewBox="0 0 16 16"
+            width="16px"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g fill="none" fill-rule="evenodd" id="chevron_down" stroke="none" stroke-width="1">
+              <polygon points="4.5 5 8 8.76923077 11.5 5 13 6.61538462 8 12 3 6.61538462"></polygon>
+            </g>
+          </svg>
+        </div>
+        <ul dDropDownMenu class="devui-dropdown-menu devui-dropdown-overlay" role="menu">
+          <li *ngFor="let option of checkOptions" role="menuitem" (click)="onOptionSelect(option)">
+            <a class="devui-dropdown-item disabled">{{ option.label }}</a>
+          </li>
+        </ul>
+      </div>
+    </th>
+    <ng-container *ngFor="let column of columns; trackBy: trackByFn; let colIndex = index; let last = last">
+      <th
+        dHeadCell
+        *ngIf="column.advancedHeader && column.advancedHeader[rowIndex]?.rowspan && column.advancedHeader[rowIndex]?.colspan"
+        [attr.rowspan]="column.advancedHeader[rowIndex]?.rowspan"
+        [attr.colspan]="column.advancedHeader[rowIndex]?.colspan"
+        [style.textAlign]="
+          rowIndex !== column.advancedHeader.length - 1 &&
+          (column.advancedHeader[rowIndex]?.rowspan > 0 || column.advancedHeader[rowIndex]?.colspan > 0)
+            ? 'center'
+            : ''
+        "
+        [minWidth]="column.minWidth"
+        [maxWidth]="column.maxWidth"
+        [resizeEnabled]="resizeable && rowIndex === column.advancedHeader.length - 1 && !last"
+        (resizeEndEvent)="onResize($event, column)"
+        (resizeStartEvent)="onBeginResize($event)"
+        (resizingEvent)="onResizing($event, column)"
+        [sortable]="getIfExistMultiSort(column.field) && rowIndex === column.advancedHeader.length - 1"
+        [sortDirection]="getSortDirection(column.field)"
+        (sortChange)="onHeadClick($event, column)"
+        [filterable]="canFilterable(column) && rowIndex === column.advancedHeader.length - 1"
+        [filterList]="column.filterList"
+        [column]="column"
+        [filterMultiple]="column.filterMultiple"
+        [filterBoxWidth]="column.filterBoxWidth"
+        [filterBoxHeight]="column.filterBoxHeight"
+        [filterIconActive]="column.filterIconActive"
+        [beforeFilter]="column.beforeFilter"
+        [customFilterTemplate]="column.customFilterTemplate"
+        [searchFn]="column.searchFn"
+        (filterChange)="column.emitFilterData($event)"
+        [fixedLeft]="column.fixedLeft"
+        [fixedRight]="column.fixedRight"
+        [nestedColumn]="column.extraOptions?.showHeadTableToggler"
+        (toggleChildrenTableEvent)="toggleChildrenTable($event)"
+        (tapEvent)="onTap($event)"
+        [iconFoldTable]="column.extraOptions?.iconFoldTable"
+        [iconUnFoldTable]="column.extraOptions?.iconUnFoldTable"
+        [tableViewRefElement]="tableViewRefElement"
+        [colDraggable]="colDraggable && colIndex > head?.colDropFreezeTo - 1"
+        [childrenTableOpen]="childrenTableOpen"
+        [ngClass]="{
+          sindu_handle: colDraggable && colIndex > head?.colDropFreezeTo - 1,
+          'drop-freeze': colDraggable && colIndex < head?.colDropFreezeTo
+        }"
+      >
+        <span *ngIf="rowIndex < rows.length - 1 || !column.headCellTmpl?.template" [attr.title]="column.advancedHeader[rowIndex].header">{{
+          column.advancedHeader[rowIndex].header
+        }}</span>
+        <ng-container *ngIf="column.headCellTmpl?.template && rowIndex === rows.length - 1">
+          <ng-template
+            [ngTemplateOutlet]="column.headCellTmpl?.template"
+            [ngTemplateOutletContext]="{
+              column: column,
+              $implicit: head,
+              rowIndex: rowIndex,
+              colIndex: colIndex
+            }"
+          >
+          </ng-template>
+        </ng-container>
+      </th>
+      <th
+        dHeadCell
+        *ngIf="!column.advancedHeader && rowIndex === 0"
+        [minWidth]="column.minWidth"
+        [maxWidth]="column.maxWidth"
+        [sortable]="getIfExistMultiSort(column.field)"
+        [sortDirection]="getSortDirection(column.field)"
+        (sortChange)="onHeadClick($event, column)"
+        [filterable]="canFilterable(column)"
+        [filterList]="column.filterList"
+        [column]="column"
+        [filterMultiple]="column.filterMultiple"
+        [filterBoxWidth]="column.filterBoxWidth"
+        [filterBoxHeight]="column.filterBoxHeight"
+        [filterIconActive]="column.filterIconActive"
+        [beforeFilter]="column.beforeFilter"
+        [customFilterTemplate]="column.customFilterTemplate"
+        [searchFn]="column.searchFn"
+        (filterChange)="column.emitFilterData($event)"
+        [fixedLeft]="column.fixedLeft"
+        [fixedRight]="column.fixedRight"
+        [nestedColumn]="column.extraOptions?.showHeadTableToggler"
+        (toggleChildrenTableEvent)="toggleChildrenTable($event)"
+        (tapEvent)="onTap($event)"
+        [iconFoldTable]="column.extraOptions?.iconFoldTable"
+        [iconUnFoldTable]="column.extraOptions?.iconUnFoldTable"
+        [tableViewRefElement]="tableViewRefElement"
+        [colDraggable]="colDraggable && colIndex > head?.colDropFreezeTo - 1"
+        [childrenTableOpen]="childrenTableOpen"
+        [ngClass]="{
+          sindu_handle: colDraggable && colIndex > head?.colDropFreezeTo - 1,
+          'drop-freeze': colDraggable && colIndex < head?.colDropFreezeTo
+        }"
+        [resizeEnabled]="resizeable"
+        (resizeEndEvent)="onResize($event, column)"
+        (resizeStartEvent)="onBeginResize($event)"
+        (resizingEvent)="onResizing($event, column)"
+        [attr.rowspan]="rows?.length || 1"
+      >
+        <span *ngIf="!column.headCellTmpl?.template" [attr.title]="column.header">{{ column.header }}</span>
+        <ng-container *ngIf="column.headCellTmpl?.template">
+          <ng-template
+            [ngTemplateOutlet]="column.headCellTmpl?.template"
+            [ngTemplateOutletContext]="{ column: column, $implicit: head }"
+          ></ng-template>
+        </ng-container>
+      </th>
+    </ng-container>
+    <!-- <th width="0"  *ngIf="resizeable"></th> -->
+  </tr>
+</ng-template>

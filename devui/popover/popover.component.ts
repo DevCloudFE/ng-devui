@@ -1,6 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { AfterContentChecked, AfterViewInit, Component, ElementRef,
-  HostBinding, HostListener, Input, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+  HostBinding, HostListener, Input, OnDestroy, OnInit, Renderer2, TemplateRef } from '@angular/core';
 import { PositionService } from 'ng-devui/position';
 import { PositionType } from 'ng-devui/tooltip';
 import { fromEvent, Subscription } from 'rxjs';
@@ -26,21 +26,29 @@ import { PopoverType } from './popover.types';
 export class PopoverComponent
   implements OnInit, AfterViewInit, AfterContentChecked, OnDestroy {
   @Input() triggerElementRef: ElementRef;
-  @Input() position: PositionType;
-  @Input() content: string;
+  @Input() position: PositionType | PositionType[];
+  currentPosition: PositionType;
+  @Input() content: string | HTMLElement | TemplateRef<any>;
   @Input() showAnimate = false;
   @Input() scrollElement: Element;
   @Input() appendToBody: boolean;
   @Input() zIndex = 1060;
   @Input() popType: PopoverType;
+  @Input() popMaxWidth: number;
   animateState: string = this.showAnimate ? 'void' : '';
 
-  @HostBinding('style.display') display = 'block';
+  @HostBinding('style.display') get display() {
+    return this.content ? 'block' : 'none';
+  }
   @HostBinding('class') get class() {
-    return 'devui-popover ' + this.position + ' devui-popover-' + this.popType;
+    return 'devui-popover ' + this.currentPosition + ' devui-popover-' + this.popType;
   }
   @HostBinding('@state') get state() {
     return this.animateState;
+  }
+
+  get template() {
+    return this.content instanceof TemplateRef ? this.content : null;
   }
 
   subs: Subscription = new Subscription();
@@ -117,6 +125,7 @@ export class PopoverComponent
       this.position,
       this.appendToBody
     );
+    this.currentPosition = rect.placementPrimary;
     this.renderer.setStyle(
       this.elementRef.nativeElement,
       'left',

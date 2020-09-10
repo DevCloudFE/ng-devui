@@ -1,0 +1,25 @@
+.d-form-field {
+  margin-bottom: 20px;
+}
+
+.d-form-label {
+  float: left;
+  width: 105px;
+}
+
+.d-form-label .text {
+  float: left;
+  position: relative;
+  padding-left: 10px;
+  height: 32px;
+  line-height: 32px;
+  font-size: 12px;
+  text-align: right;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.d-form-ctrl {
+  margin-left: 115px;
+}

@@ -1,0 +1,8 @@
+.devui-dropdown-menu {
+  overflow-y: auto;
+  width: 82px;
+}
+
+.btn-group {
+  display: inline-block;
+}

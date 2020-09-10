@@ -1,111 +1,191 @@
-
 <div class="devui-pagination">
-  <div *ngIf="canChangePageSize && !lite" class="page-size {{size? 'page-size-' + size : ''}}">
-    <d-select [scrollHight]="'200px'" [direnction]="selectDirection" [size]="size" [ngModel]="pageSize" (valueChange)="onPageSizeChange($event)" [options]="pageSizeOptions" [isSearch]="false"></d-select>
+  <div *ngIf="canChangePageSize && !lite" class="devui-page-size {{ size ? 'devui-page-size-' + size : '' }}">
+    <d-select
+      [scrollHight]="'200px'"
+      [size]="size"
+      [ngModel]="pageSize"
+      [appendToBody]="true"
+      [appendToBodyDirections]="pageSizeDirection"
+      (valueChange)="onPageSizeChange($event)"
+      [options]="pageSizeOptions"
+      [isSearch]="false"
+    ></d-select>
   </div>
-  <div *ngIf="canViewTotal" class="total-size">{{totalItemText}}：{{total}}</div>
-  <div *ngIf="lite && showPageSelector" class="lite-paginator" #litePaginator>
-    <d-select [scrollHight]="'200px'" [direnction]="selectDirection" [size]="size" [isSearch]="false"
-                [ngModel]="litePaginatorIndex" [options]="litePaginatorOptions" [filterKey]="'label'"
-                [disabled]="!litePaginatorOptions.length" (valueChange)="onPageIndexChange($event.value)"></d-select>
+  <div *ngIf="canViewTotal" class="devui-total-size">{{ totalItemText ? totalItemText : i18nText?.totalItem }}: {{ total }}</div>
+  <div *ngIf="lite && showPageSelector" class="devui-lite-paginator" #litePaginator>
+    <d-select
+      [scrollHight]="'200px'"
+      [size]="size"
+      [isSearch]="false"
+      [ngModel]="litePaginatorIndex"
+      [appendToBody]="true"
+      [appendToBodyDirections]="pageSizeDirection"
+      [options]="litePaginatorOptions"
+      [filterKey]="'label'"
+      [disabled]="!litePaginatorOptions.length"
+      (valueChange)="onPageIndexChange($event.value)"
+    ></d-select>
   </div>
-  <ul class="pagination {{size? 'pagination-' + size: ''}}">
-      <ng-container *ngIf="!lite">
-    <li *ngIf="preLink" [ngClass]="{disabled: pageIndex == totalPage}">
-      <a (click)="prev()" class="pagination-link">{{preLink}}</a>
-    </li>
-    <li *ngIf="!preLink" [ngClass]="{disabled: pageIndex == 1}">
-      <a (click)="prev()" class="pagination-link">
-        <svg width="1em" height="1.5em" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
-          <path d="M1427 301l-531 531 531 531q19 19 19 45t-19 45l-166 166q-19 19-45 19t-45-19l-742-742q-19-19-19-45t19-45l742-742q19-19 45-19t45 19l166 166q19 19 19 45t-19 45z"/>
-        </svg>
-      </a>
-    </li>
-    <li *ngIf="showPages[0] > 1" (click)="first()">
-      <a>1</a>
-    </li>
-    <li *ngIf="showPages[0] > 2" (click)="preRange()">
-      <a>...</a>
-    </li>
-    <li *ngFor="let item of showPages" [ngClass]="{active: item == pageIndex}">
-      <a (click)="onPageIndexChange(item)">{{item}}</a>
-    </li>
-    <li *ngIf="showPages[showPages.length -1] < totalPage - 1" (click)="nextRange()">
-      <a>...</a>
-    </li>
-    <li *ngIf="showPages[showPages.length -1] < totalPage" (click)="last()">
-      <a>{{totalPage}}</a>
-    </li>
-    <ng-container *ngIf="showTruePageIndex &&  pageIndex > totalPage &&  totalPage > 0">
-          <li *ngIf="pageIndex > totalPage + 1 " class="disabled"><a>...</a></li>
-          <li class="active disabled"><a>{{pageIndex}}</a></li>
-    </ng-container>
-    <li *ngIf="nextLink" [ngClass]="{disabled: pageIndex == totalPage}">
-      <a (click)="next()"class="pagination-link">{{nextLink}}</a>
-    </li>
-    <li *ngIf="!nextLink" [ngClass]="{disabled: pageIndex == totalPage}">
-      <a (click)="next()" class="pagination-link">
-        <svg width="1em" height="1.5em" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
-          <path d="M1363 877l-742 742q-19 19-45 19t-45-19l-166-166q-19-19-19-45t19-45l531-531-531-531q-19-19-19-45t19-45l166-166q19-19 45-19t45 19l742 742q19 19 19 45t-19 45z"/>
-        </svg>
-      </a>
-    </li>
-  </ng-container>
-  <ng-container *ngIf="lite">
-      <li *ngIf="preLink" [ngClass]="{disabled: pageIndex == totalPage}">
-        <a (click)="prev()" [attr.aria-label]="nextLink" class="pagination-link pagination-link-lite">{{preLink}}</a>
+  <ul class="devui-pagination-list {{ size ? 'devui-pagination-' + size : '' }}">
+    <ng-container *ngIf="!lite">
+      <li *ngIf="preLink" [ngClass]="{ disabled: pageIndex == totalPage }">
+        <a (click)="prev()" class="devui-pagination-link" [innerHTML]="preLink | safe: 'html'"></a>
       </li>
-      <li *ngIf="!preLink" [ngClass]="{disabled: pageIndex == 1}">
-        <a (click)="prev()" [attr.aria-label]="nextLink" class="pagination-link pagination-link-lite ">
+      <li *ngIf="!preLink" [ngClass]="{ disabled: pageIndex == 1 }">
+        <a (click)="prev()" class="devui-pagination-link">
           <svg width="1em" height="1.5em" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg">
             <g id="操作/collapse1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-              <polygon id="路径" fill="#293040" fill-rule="nonzero"
-                       points="10.7071068 12.2928932 9.29289322 13.7071068 3.58578644 8 9.29289322 2.29289322 10.7071068 3.70710678 6.41421356 8"></polygon>
+              <polygon
+                id="路径"
+                fill="#293040"
+                fill-rule="nonzero"
+                points="10.7071068 12.2928932 9.29289322 13.7071068 3.58578644 8 9.29289322 2.29289322 10.7071068 3.70710678 6.41421356 8"
+              ></polygon>
             </g>
           </svg>
         </a>
       </li>
-      <li *ngIf="nextLink" [ngClass]="{disabled: pageIndex >= totalPage}">
-        <a (click)="next()" [attr.aria-label]="nextLink" class="pagination-link pagination-link-lite">{{nextLink}}</a>
+      <li *ngIf="showPages[0] > 1" (click)="first()">
+        <a>1</a>
       </li>
-      <li *ngIf="!nextLink" [ngClass]="{disabled: pageIndex >= totalPage}">
-        <a (click)="next()" [attr.aria-label]="nextLink" class="pagination-link pagination-link-lite ">
+      <li *ngIf="showPages[0] > 2" (click)="preRange()">
+        <a>...</a>
+      </li>
+      <li *ngFor="let item of showPages" [ngClass]="{ active: item == pageIndex }">
+        <a (click)="onPageIndexChange(item)">{{ item }}</a>
+      </li>
+      <li *ngIf="showPages[showPages.length - 1] < totalPage - 1" (click)="nextRange()">
+        <a>...</a>
+      </li>
+      <li *ngIf="showPages[showPages.length - 1] < totalPage" (click)="last()">
+        <a>{{ totalPage }}</a>
+      </li>
+      <ng-container *ngIf="showTruePageIndex && pageIndex > totalPage && totalPage > 0">
+        <li *ngIf="pageIndex > totalPage + 1" class="disabled"><a>...</a></li>
+        <li class="active disabled">
+          <a>{{ pageIndex }}</a>
+        </li>
+      </ng-container>
+      <li *ngIf="nextLink" [ngClass]="{ disabled: pageIndex == totalPage }">
+        <a (click)="next()" class="devui-pagination-link" [innerHTML]="nextLink | safe: 'html'"></a>
+      </li>
+      <li *ngIf="!nextLink" [ngClass]="{ disabled: pageIndex == totalPage || !total }">
+        <a (click)="next()" class="devui-pagination-link">
           <svg width="1em" height="1.5em" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg">
             <g id="操作/collapse2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-              <polygon id="路径" fill="#293040" fill-rule="nonzero"
-                       transform="translate(8.146447, 8.000000) scale(-1, 1) translate(-8.146447, -8.000000) "
-                       points="11.7071068 12.2928932 10.2928932 13.7071068 4.58578644 8 10.2928932 2.29289322 11.7071068 3.70710678 7.41421356 8"></polygon>
+              <polygon
+                id="路径"
+                fill="#293040"
+                fill-rule="nonzero"
+                transform="translate(8.146447, 8.000000) scale(-1, 1) translate(-8.146447, -8.000000) "
+                points="11.7071068 12.2928932 10.2928932 13.7071068 4.58578644 8 10.2928932 2.29289322 11.7071068 3.70710678 7.41421356 8"
+              ></polygon>
+            </g>
+          </svg>
+        </a>
+      </li>
+    </ng-container>
+    <ng-container *ngIf="lite">
+      <li *ngIf="preLink" [ngClass]="{ disabled: pageIndex == totalPage }">
+        <a
+          (click)="prev()"
+          [attr.aria-label]="nextLink"
+          class="devui-pagination-link devui-pagination-link-lite"
+          [innerHTML]="preLink | safe: 'html'"
+        ></a>
+      </li>
+      <li *ngIf="!preLink" [ngClass]="{ disabled: pageIndex == 1 }">
+        <a (click)="prev()" [attr.aria-label]="nextLink" class="devui-pagination-link devui-pagination-link-lite">
+          <svg width="1em" height="1.5em" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg">
+            <g id="操作/collapse1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+              <polygon
+                id="路径"
+                fill="#293040"
+                fill-rule="nonzero"
+                points="10.7071068 12.2928932 9.29289322 13.7071068 3.58578644 8 9.29289322 2.29289322 10.7071068 3.70710678 6.41421356 8"
+              ></polygon>
+            </g>
+          </svg>
+        </a>
+      </li>
+      <li *ngIf="nextLink" [ngClass]="{ disabled: pageIndex >= totalPage }">
+        <a
+          (click)="next()"
+          [attr.aria-label]="nextLink"
+          class="devui-pagination-link devui-pagination-link-lite"
+          [innerHTML]="nextLink | safe: 'html'"
+        ></a>
+      </li>
+      <li *ngIf="!nextLink" [ngClass]="{ disabled: pageIndex >= totalPage }">
+        <a (click)="next()" [attr.aria-label]="nextLink" class="devui-pagination-link devui-pagination-link-lite">
+          <svg width="1em" height="1.5em" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg">
+            <g id="操作/collapse2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+              <polygon
+                id="路径"
+                fill="#293040"
+                fill-rule="nonzero"
+                transform="translate(8.146447, 8.000000) scale(-1, 1) translate(-8.146447, -8.000000) "
+                points="11.7071068 12.2928932 10.2928932 13.7071068 4.58578644 8 10.2928932 2.29289322 11.7071068 3.70710678 7.41421356 8"
+              ></polygon>
             </g>
           </svg>
         </a>
       </li>
     </ng-container>
   </ul>
-  <div *ngIf="canJumpPage" class="jump-container">
-    {{goToText}} <input type="text" class="devui-input {{ size ? 'devui-input-' + size : ''}}" name="pageIndex" [(ngModel)]="jumpPage"
-      (keyup.enter)="jump()" (keyup)="validateInput()">
-      <div *ngIf="showJumpButton" class="jump-button {{size? 'jump-size-' + size : 'jump-size-default'}}" title="{{goToText}}" (click)="jump()"><div class="go"></div></div>
+  <div *ngIf="canJumpPage" class="devui-jump-container">
+    {{ goToText ? goToText : i18nText?.goTo }}
+    <input
+      type="text"
+      autocomplete="off"
+      class="devui-input {{ size ? 'devui-input-' + size : '' }}"
+      name="pageIndex"
+      [(ngModel)]="jumpPage"
+      (keyup.enter)="jump()"
+      (keyup)="validateInput()"
+    />
+    {{ i18nLocale === 'zh-cn' && !goToText ? i18nText.page : '' }}
+    <div
+      *ngIf="showJumpButton"
+      class="devui-jump-button {{ size ? 'devui-jump-size-' + size : 'devui-jump-size-default' }}"
+      title="{{ goToText ? goToText : i18nText?.goTo }}"
+      (click)="jump()"
+    >
+      <div class="devui-pagination-go"></div>
+    </div>
   </div>
-  <div class="pagination-config" *ngIf="haveConfigMenu">
-      <div class="setup-icon" (click)="$event.stopPropagation(); toggleMenu()">
-        <svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-          <title>操作/设置</title>
-          <desc>Created with Sketch.</desc>
-          <g id="操作/设置" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-            <path d="M8,12 C10.209139,12 12,10.209139 12,8 C12,5.790861 10.209139,4 8,4 C5.790861,4 4,5.790861 4,8 C4,10.209139 5.790861,12 8,12 Z M4.52067059,3.11124369 C5.24511171,2.59473146 6.08922816,2.23522497 7.00334609,2.08239805 C7.00112987,2.05522493 7,2.02774441 7,2 L7,1 C7,0.44771525 7.44771525,1.01453063e-16 8,0 C8.55228475,-1.01453063e-16 9,0.44771525 9,1 L9,2 C9,2.02774441 8.99887013,2.05522493 8.99665391,2.08239805 C9.91077184,2.23522497 10.7548883,2.59473146 11.4793294,3.11124369 C11.4970673,3.09033559 11.5158021,3.06998434 11.5355339,3.05025253 L12.2426407,2.34314575 C12.633165,1.95262146 13.26633,1.95262146 13.6568542,2.34314575 C14.0473785,2.73367004 14.0473785,3.36683502 13.6568542,3.75735931 L12.9497475,4.46446609 C12.9300157,4.4841979 12.9096644,4.50293273 12.8887563,4.52067059 C13.4052685,5.24511171 13.764775,6.08922816 13.917602,7.00334609 C13.9447751,7.00112987 13.9722556,7 14,7 L15,7 C15.5522847,7 16,7.44771525 16,8 C16,8.55228475 15.5522847,9 15,9 L14,9 C13.9722556,9 13.9447751,8.99887013 13.917602,8.99665391 C13.764775,9.91077184 13.4052685,10.7548883 12.8887563,11.4793294 C12.9096644,11.4970673 12.9300157,11.5158021 12.9497475,11.5355339 L13.6568542,12.2426407 C14.0473785,12.633165 14.0473785,13.26633 13.6568542,13.6568542 C13.26633,14.0473785 12.633165,14.0473785 12.2426407,13.6568542 L11.5355339,12.9497475 C11.5158021,12.9300157 11.4970673,12.9096644 11.4793294,12.8887563 C10.7548883,13.4052685 9.91077184,13.764775 8.99665391,13.917602 C8.99887013,13.9447751 9,13.9722556 9,14 L9,15 C9,15.5522847 8.55228475,16 8,16 C7.44771525,16 7,15.5522847 7,15 L7,14 C7,13.9722556 7.00112987,13.9447751 7.00334609,13.917602 C6.08922816,13.764775 5.24511171,13.4052685 4.52067059,12.8887563 C4.50293273,12.9096644 4.4841979,12.9300157 4.46446609,12.9497475 L3.75735931,13.6568542 C3.36683502,14.0473785 2.73367004,14.0473785 2.34314575,13.6568542 C1.95262146,13.26633 1.95262146,12.633165 2.34314575,12.2426407 L3.05025253,11.5355339 C3.06998434,11.5158021 3.09033559,11.4970673 3.11124369,11.4793294 C2.59473146,10.7548883 2.23522497,9.91077184 2.08239805,8.99665391 C2.05522493,8.99887013 2.02774441,9 2,9 L1,9 C0.44771525,9 2.4125371e-16,8.55228475 3.83475851e-17,8 C-1.6455854e-16,7.44771525 0.44771525,7 1,7 L2,7 C2.02774441,7 2.05522493,7.00112987 2.08239805,7.00334609 C2.23522497,6.08922816 2.59473146,5.24511171 3.11124369,4.52067059 C3.09033559,4.50293273 3.06998434,4.4841979 3.05025253,4.46446609 L2.34314575,3.75735931 C1.95262146,3.36683502 1.95262146,2.73367004 2.34314575,2.34314575 C2.73367004,1.95262146 3.36683502,1.95262146 3.75735931,2.34314575 L4.46446609,3.05025253 C4.4841979,3.06998434 4.50293273,3.09033559 4.52067059,3.11124369 Z M8,9 C7.44771525,9 7,8.55228475 7,8 C7,7.44771525 7.44771525,7 8,7 C8.55228475,7 9,7.44771525 9,8 C9,8.55228475 8.55228475,9 8,9 Z" id="形状" fill="#293040" fill-rule="nonzero"></path>
-          </g>
-        </svg>
-      </div>
-      <div *ngIf="showConfig" class="config-container">
-        <ng-content></ng-content>
-        <div class="pagination-config-item page-size-config" *ngIf="canChangePageSize">
-          <div class="config-item-title">每页条数</div>
-          <div class="page-number">
-            <ng-container *ngFor="let size of pageSizeOptions">
-              <div class="number" [ngClass]="{choosed: size===pageSize}" (click)="onPageSizeChange(size)">{{size}}</div>
-            </ng-container>
-          </div>
+  <div class="devui-pagination-config" *ngIf="haveConfigMenu">
+    <div class="devui-setup-icon" (click)="$event.stopPropagation(); toggleMenu()">
+      <svg
+        width="16px"
+        height="16px"
+        viewBox="0 0 16 16"
+        version="1.1"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+      >
+        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+          <path
+            d="M8,12 C10.209139,12 12,10.209139 12,8 C12,5.790861 10.209139,4 8,4 C5.790861,4 4,5.790861 4,8 C4,10.209139 5.790861,12 8,12 Z M4.52067059,3.11124369 C5.24511171,2.59473146 6.08922816,2.23522497 7.00334609,2.08239805 C7.00112987,2.05522493 7,2.02774441 7,2 L7,1 C7,0.44771525 7.44771525,1.01453063e-16 8,0 C8.55228475,-1.01453063e-16 9,0.44771525 9,1 L9,2 C9,2.02774441 8.99887013,2.05522493 8.99665391,2.08239805 C9.91077184,2.23522497 10.7548883,2.59473146 11.4793294,3.11124369 C11.4970673,3.09033559 11.5158021,3.06998434 11.5355339,3.05025253 L12.2426407,2.34314575 C12.633165,1.95262146 13.26633,1.95262146 13.6568542,2.34314575 C14.0473785,2.73367004 14.0473785,3.36683502 13.6568542,3.75735931 L12.9497475,4.46446609 C12.9300157,4.4841979 12.9096644,4.50293273 12.8887563,4.52067059 C13.4052685,5.24511171 13.764775,6.08922816 13.917602,7.00334609 C13.9447751,7.00112987 13.9722556,7 14,7 L15,7 C15.5522847,7 16,7.44771525 16,8 C16,8.55228475 15.5522847,9 15,9 L14,9 C13.9722556,9 13.9447751,8.99887013 13.917602,8.99665391 C13.764775,9.91077184 13.4052685,10.7548883 12.8887563,11.4793294 C12.9096644,11.4970673 12.9300157,11.5158021 12.9497475,11.5355339 L13.6568542,12.2426407 C14.0473785,12.633165 14.0473785,13.26633 13.6568542,13.6568542 C13.26633,14.0473785 12.633165,14.0473785 12.2426407,13.6568542 L11.5355339,12.9497475 C11.5158021,12.9300157 11.4970673,12.9096644 11.4793294,12.8887563 C10.7548883,13.4052685 9.91077184,13.764775 8.99665391,13.917602 C8.99887013,13.9447751 9,13.9722556 9,14 L9,15 C9,15.5522847 8.55228475,16 8,16 C7.44771525,16 7,15.5522847 7,15 L7,14 C7,13.9722556 7.00112987,13.9447751 7.00334609,13.917602 C6.08922816,13.764775 5.24511171,13.4052685 4.52067059,12.8887563 C4.50293273,12.9096644 4.4841979,12.9300157 4.46446609,12.9497475 L3.75735931,13.6568542 C3.36683502,14.0473785 2.73367004,14.0473785 2.34314575,13.6568542 C1.95262146,13.26633 1.95262146,12.633165 2.34314575,12.2426407 L3.05025253,11.5355339 C3.06998434,11.5158021 3.09033559,11.4970673 3.11124369,11.4793294 C2.59473146,10.7548883 2.23522497,9.91077184 2.08239805,8.99665391 C2.05522493,8.99887013 2.02774441,9 2,9 L1,9 C0.44771525,9 2.4125371e-16,8.55228475 3.83475851e-17,8 C-1.6455854e-16,7.44771525 0.44771525,7 1,7 L2,7 C2.02774441,7 2.05522493,7.00112987 2.08239805,7.00334609 C2.23522497,6.08922816 2.59473146,5.24511171 3.11124369,4.52067059 C3.09033559,4.50293273 3.06998434,4.4841979 3.05025253,4.46446609 L2.34314575,3.75735931 C1.95262146,3.36683502 1.95262146,2.73367004 2.34314575,2.34314575 C2.73367004,1.95262146 3.36683502,1.95262146 3.75735931,2.34314575 L4.46446609,3.05025253 C4.4841979,3.06998434 4.50293273,3.09033559 4.52067059,3.11124369 Z M8,9 C7.44771525,9 7,8.55228475 7,8 C7,7.44771525 7.44771525,7 8,7 C8.55228475,7 9,7.44771525 9,8 C9,8.55228475 8.55228475,9 8,9 Z"
+            id="形状"
+            fill="#293040"
+            fill-rule="nonzero"
+          ></path>
+        </g>
+      </svg>
+    </div>
+    <div *ngIf="showConfig" class="devui-config-container">
+      <ng-content></ng-content>
+      <div class="devui-pagination-config-item devui-page-size-config" *ngIf="canChangePageSize">
+        <div class="devui-config-item-title">{{ i18nText?.pageSize }}</div>
+        <div class="devui-page-number">
+          <ng-container *ngFor="let size of pageSizeOptions">
+            <div class="number" [ngClass]="{ choosed: size === pageSize }" (click)="onPageSizeChange(size)">
+              {{ size }}
+            </div>
+          </ng-container>
         </div>
       </div>
     </div>
+  </div>
 </div>

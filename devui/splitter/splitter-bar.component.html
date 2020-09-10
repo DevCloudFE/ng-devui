@@ -1,0 +1,19 @@
+<div
+  class="prev"
+  *ngIf="showCollapseButton"
+  dTooltip
+  [content]="preTip"
+  [ngClass]="prevClass"
+  (click)="collapsePrePane()"
+  (touchstart)="collapsePrePane()"
+></div>
+<div class="devui-resize-handle"></div>
+<div
+  class="next"
+  *ngIf="showCollapseButton"
+  dTooltip
+  [content]="nextTip"
+  [ngClass]="nextClass"
+  (click)="collapseNextPane()"
+  (touchstart)="collapseNextPane()"
+></div>

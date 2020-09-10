@@ -1,0 +1,7 @@
+<ng-content></ng-content>
+<div *ngIf="extraInfo" class="devui-form-control-extra-info">
+  <ng-template [ngTemplateOutlet]="extraInfoTemplate || defaultTemplate"> </ng-template>
+  <ng-template #defaultTemplate>
+    {{ extraInfo }}
+  </ng-template>
+</div>

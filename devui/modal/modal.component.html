@@ -1,16 +1,29 @@
-<div class='modal-backdrop'
-    [@fadeInOut]='animateState'>
-</div>
-<div class="modal in" [attr.id]="id" (mousedown)='modalMouseDown($event)' (mouseup)="modalMouseUp($event)" (click)='onModalClick($event)'>
-    <div class='modal-dialog'
-         [ngStyle]="{'width': width}"
-         [@flyInOut]='animateState'
-         (@flyInOut.done)='onAnimationDone($event)'
-         tabindex="1"
-         #dialog>
-        <div class="modal-content" [dMovable]="draggable" [handle]="draggableHandleEl">
-            <ng-template dModalContainerHost></ng-template>
-        </div>
+<div class="modal-backdrop" [@backdropAnimation]="animateState"></div>
+<div
+  class="modal in"
+  [ngStyle]="{ 'z-index': zIndex }"
+  [attr.id]="id"
+  (mousedown)="modalMouseDown($event)"
+  (mouseup)="modalMouseUp($event)"
+  (click)="onModalClick($event)"
+>
+  <div
+    class="modal-dialog"
+    [ngClass]="{
+      'place-at-top': placement === 'top',
+      'place-at-bottom': placement === 'bottom',
+      'place-at-center': placement === 'center'
+    }"
+    [ngStyle]="{ width: width }"
+    [@modalAnimation]="animateState"
+    tabindex="1"
+    #dialog
+  >
+    <div class="modal-content" [dMovable]="draggable" [handle]="draggableHandleEl" [ngStyle]="{ transform: resolveTransformTranslate() }">
+      <ng-template dModalContainerHost></ng-template>
+      <ng-container *ngIf="contentTemplate">
+        <ng-template [ngTemplateOutlet]="contentTemplate" [ngTemplateOutletContext]="{ modalInstance: this }"></ng-template>
+      </ng-container>
     </div>
+  </div>
 </div>
-

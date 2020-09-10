@@ -8,14 +8,13 @@ import { MultipleUploadComponent } from './multiple-upload.component';
 import { UploadedFilesComponent } from './uploaded-files.component';
 import { SelectFiles } from './select-files.utils';
 import { FileDropDirective } from './file-drop.directive';
-import { ModalModule } from 'ng-devui/modal';
 import { ButtonModule } from 'ng-devui/button';
-import { DevUIConfig } from 'ng-devui/devui.config';
+import { ToastModule } from 'ng-devui/toast';
 @NgModule({
   imports: [
     CommonModule,
     ButtonModule,
-    ModalModule,
+    ToastModule
   ],
   exports: [
     MultipleUploadViewComponent,
@@ -37,7 +36,7 @@ import { DevUIConfig } from 'ng-devui/devui.config';
     MultipleUploadViewComponent,
     SingleUploadViewComponent
   ],
-  providers: [SelectFiles, DevUIConfig],
+  providers: [SelectFiles],
 })
 export class UploadModule {
 }

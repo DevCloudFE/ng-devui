@@ -1,0 +1,84 @@
+@import '../../../../devui/style/theme/color';
+
+.devui-container {
+  margin-top: 16px;
+}
+
+.devui-theme-color-title {
+  font-size: 16px;
+  padding: 20px 0;
+}
+
+.color-block {
+  height: 40px;
+  width: 40px;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.block-1 {
+  background-color: $devui-danger;
+}
+
+.block-2 {
+  background-color: $devui-warning;
+}
+
+.block-3 {
+  background-color: $devui-text;
+}
+
+.block-4 {
+  background-color: $devui-brand;
+}
+
+.block-5 {
+  background-color: $devui-line;
+}
+
+.block-6 {
+  background-color: $devui-list-item-selected-bg;
+}
+
+.block-7 {
+  background-color: $devui-global-bg;
+}
+
+table,
+th,
+td {
+  border: 1px solid $devui-line;
+  border-collapse: collapse;
+}
+
+table {
+  width: 100%;
+  text-align: left;
+}
+
+.color-cube {
+  height: 20px;
+  width: 20px;
+  display: inline-block;
+  vertical-align: middle;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.color-name {
+  display: inline-block;
+  width: 100px;
+  vertical-align: middle;
+}
+
+.devui-icon-style {
+  cursor: pointer;
+}
+
+th,
+td {
+  border: none;
+}
+
+.devui-catalog-title {
+  font-weight: 600;
+}

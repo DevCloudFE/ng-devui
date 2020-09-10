@@ -1,0 +1,33 @@
+<section>
+  <h4>懒加载： 改变options方式</h4>
+  <div class="row">
+    <div class="col-md-5">
+      <d-select
+        #select="select"
+        [options]="options"
+        [isSearch]="true"
+        [readonly]="true"
+        [multiple]="true"
+        [(ngModel)]="currentOption"
+        [filterKey]="'name'"
+        [isSelectAll]="true"
+        (toggleChange)="toggleChange($event)"
+      ></d-select>
+    </div>
+  </div>
+  <h4>懒加载：使用searchFn方式</h4>
+  <div class="row">
+    <div class="col-md-5">
+      <d-select
+        #select1="select"
+        [appendToBody]="true"
+        [filterKey]="'name'"
+        [(ngModel)]="currentOption1"
+        [searchFn]="onSelectObject"
+        [isSearch]="true"
+        (toggleChange)="toggleChange1($event)"
+      >
+      </d-select>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,36 @@
+<div>
+  <div class="demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 60, bottom: 0 }">
+    <d-demo-nav [navItems]="navItems"></d-demo-nav>
+    <div class="demo-example" [dAnchor]="'basic-usage'">
+      <div class="demo-title">基本用法</div>
+      <d-codebox id="components-splitter-default" [sourceData]="SplitterBasicComponent">
+        <d-splitter-demo-basic demo></d-splitter-demo-basic>
+      </d-codebox>
+    </div>
+    <div class="demo-example" [dAnchor]="'vertical-layout'">
+      <div class="demo-title">垂直布局用法</div>
+      <d-codebox id="components-splitter-vertical" [sourceData]="SplitterVerticalComponent">
+        <d-splitter-demo-vertical demo></d-splitter-demo-vertical>
+      </d-codebox>
+    </div>
+    <div class="demo-example" [dAnchor]="'combine-layout'">
+      <div class="demo-title">组合布局用法</div>
+      <d-codebox id="components-splitter-multi" [sourceData]="SplitterMultiComponent">
+        <d-splitter-demo-multi demo></d-splitter-demo-multi>
+      </d-codebox>
+    </div>
+    <div class="demo-example" [dAnchor]="'certain-unfold-direction'">
+      <div class="demo-title">指定折叠收起方向</div>
+      <d-codebox id="components-splitter-direction" [sourceData]="SplitterDirectionComponent">
+        <d-splitter-demo-direction demo></d-splitter-demo-direction>
+      </d-codebox>
+    </div>
+
+    <div class="demo-example" [dAnchor]="'shrink-show-menu'">
+      <div class="demo-title">折叠收缩显示菜单</div>
+      <d-codebox id="components-splitter-direction" [sourceData]="SplitterFoldedMenuComponent">
+        <d-splitter-demo-shrink demo></d-splitter-demo-shrink>
+      </d-codebox>
+    </div>
+  </div>
+</div>

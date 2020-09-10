@@ -1,18 +1,62 @@
-<section style="width:400px;">
+<section style="width: 50%;">
   <h4>单文件</h4>
-  <d-single-upload #singleupload [fileOptions]="fileOptions" [uploadedFiles]="uploadedFiles"
-    [uploadOptions]="uploadOptions" [filePath]="'name'" [beforeUpload]="beforeUpload" (successEvent)="onSuccess($event)"
-    (deleteUploadedFileEvent)="deleteUploadedFile($event)" (errorEvent)="onError($event)">
+  <d-single-upload
+    #singleupload
+    [fileOptions]="fileOptions"
+    [uploadedFiles]="uploadedFiles"
+    [uploadOptions]="uploadOptions"
+    [uploadText]="'点击上传'"
+    [filePath]="'name'"
+    [beforeUpload]="beforeUpload"
+    (successEvent)="onSuccess($event)"
+    (deleteUploadedFileEvent)="deleteUploadedFile($event)"
+    (errorEvent)="onError($event)"
+  >
   </d-single-upload>
   <h4>单文件支持拖动上传</h4>
-  <d-single-upload #singleupload [enableDrop]="true" [fileOptions]="fileOptions" [uploadedFiles]="uploadedFiles"
-    [uploadOptions]="uploadOptions" [filePath]="'name'" [beforeUpload]="beforeUpload" (successEvent)="onSuccess($event)"
-    (deleteUploadedFileEvent)="deleteUploadedFile($event)" (errorEvent)="onError($event)" (fileDrop)="fileDrop($event)"
-    (fileOver)="fileOver($event)">
+  <d-single-upload
+    #singleuploadDrag
+    [enableDrop]="true"
+    [fileOptions]="fileOptions"
+    [uploadedFiles]="uploadedFiles"
+    [uploadOptions]="uploadOptions"
+    [placeholderText]="'请拖动文件上传'"
+    [withoutBtn]="true"
+    [filePath]="'name'"
+    [beforeUpload]="beforeUploadFn"
+    (successEvent)="onSuccess($event)"
+    (deleteUploadedFileEvent)="deleteUploadedFile($event)"
+    (errorEvent)="onError($event)"
+    (fileDrop)="fileDrop($event)"
+    (fileOver)="fileOver($event)"
+  >
   </d-single-upload>
+  <div [style.margin-top.px]="10">
+    <d-button (btnClick)="customUploadEvent()">点我上传</d-button>
+  </div>
   <h4>自动上传</h4>
-  <d-single-upload [fileOptions]="fileOptions" [uploadOptions]="uploadedFiles" (successEvent)="onSuccess($event)"
-    (errorEvent)="onError($event)" [autoUpload]="true">
+  <d-single-upload
+    [fileOptions]="fileOptions"
+    [uploadOptions]="uploadedFiles"
+    (successEvent)="onSuccess($event)"
+    (errorEvent)="onError($event)"
+    [autoUpload]="true"
+  >
+  </d-single-upload>
+  <h4>单文件禁止上传状态</h4>
+  <d-single-upload
+    #singleupload
+    [fileOptions]="fileOptions"
+    [uploadedFiles]="uploadedFiles"
+    [uploadOptions]="uploadOptions"
+    [uploadText]="'点击上传'"
+    [filePath]="'name'"
+    [beforeUpload]="beforeUpload"
+    (successEvent)="onSuccess($event)"
+    (deleteUploadedFileEvent)="deleteUploadedFile($event)"
+    (errorEvent)="onError($event)"
+    [disabled]="true"
+  >
   </d-single-upload>
   <div [style.margin-top.px]="10">
     <pre>singleupload uploadOptions: {{ singleupload.uploadOptions | json }}</pre>

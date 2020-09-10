@@ -1,0 +1,29 @@
+<div>
+  <div class="demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 60, bottom: 0 }">
+    <d-demo-nav [navItems]="navItems"></d-demo-nav>
+    <div class="demo-example" [dAnchor]="'basic-usage'">
+      <div class="demo-title">基本用法</div>
+      <d-codebox id="components-carousel-default" [sourceData]="CarouselBasicComponent">
+        <d-carousel-demo-basic demo></d-carousel-demo-basic>
+      </d-codebox>
+    </div>
+    <div class="demo-example" [dAnchor]="'trigger-usage'">
+      <div class="demo-title">指示器&切换箭头</div>
+      <d-codebox id="components-carousel-trigger" [sourceData]="CarouselTriggerComponent">
+        <d-carousel-demo-trigger demo></d-carousel-demo-trigger>
+      </d-codebox>
+    </div>
+    <div class="demo-example" [dAnchor]="'autoplay-usage'">
+      <div class="demo-title">自动轮播</div>
+      <d-codebox id="components-carousel-autoplay" [sourceData]="CarouselAutoplayComponent">
+        <d-carousel-demo-autoplay demo></d-carousel-demo-autoplay>
+      </d-codebox>
+    </div>
+    <div class="demo-example" [dAnchor]="'custom-usage'">
+      <div class="demo-title">自定义控制</div>
+      <d-codebox id="components-carousel-custom" [sourceData]="CarouselCustomComponent">
+        <d-carousel-demo-custom demo></d-carousel-demo-custom>
+      </d-codebox>
+    </div>
+  </div>
+</div>

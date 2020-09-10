@@ -5,33 +5,33 @@
 }
 
 .clear-fix {
-  zoom: 1
+  zoom: 1;
 }
 
-.clear-fix:after {
+.clear-fix::after {
   content: '';
   display: block;
   width: 0;
-  clear: both
+  clear: both;
 }
 
 .devui-close {
   float: right;
-  font-size: 21px;
   font-weight: bold;
-  line-height: 1;
-  color: #000;
-  text-shadow: 0 1px 0 #fff;
+  line-height: 20px;
+  height: 20px;
+  color: #000000;
+  text-shadow: 0 1px 0 #ffffff;
   filter: alpha(opacity=20);
-  opacity: .2;
+  opacity: 0.2;
 
   &:hover,
   &:focus {
-    color: #000;
+    color: #000000;
     text-decoration: none;
     cursor: pointer;
     filter: alpha(opacity=50);
-    opacity: .5;
+    opacity: 0.5;
   }
 }
 
@@ -41,4 +41,49 @@ button.devui-close {
   cursor: pointer;
   background: transparent;
   border: 0;
+}
+
+a:hover,
+a:focus {
+  color: $devui-link;
+}
+
+a:active,
+a:hover {
+  outline: 0;
+}
+
+.devui-link {
+  color: $devui-link;
+
+  &:hover {
+    color: $devui-link-active;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}
+
+.devui-link-light {
+  color: $devui-link-light;
+
+  &:hover {
+    color: $devui-link-light-active;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}
+
+.devui-disabled {
+  &,
+  &.devui-input-group-addon {
+    border-color: $devui-disabled-line;
+  }
+
+  &,
+  & > input,
+  & > .devui-input-group-addon {
+    color: $devui-disabled-text;
+    background-color: $devui-disabled-bg;
+    cursor: not-allowed;
+  }
 }

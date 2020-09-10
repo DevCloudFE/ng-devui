@@ -4,14 +4,13 @@ import { TabTitleDirective } from './tab-title.directive';
 
 @Component({
   selector: 'd-tab',
-  template: '',
-  // changeDetection: ChangeDetectionStrategy.OnPush
+  template: ''
 })
 export class TabComponent {
   @Input() tabId?: string;
   @Input() id: number |string;
   @Input() title: string;
   @Input() disabled = false;
-  @ContentChild(TabContentDirective, { static: false }) contentTpl: TabContentDirective;
-  @ContentChild(TabTitleDirective, { static: false }) titleTpl: TabTitleDirective;
+  @ContentChild(TabContentDirective) contentTpl: TabContentDirective;
+  @ContentChild(TabTitleDirective) titleTpl: TabTitleDirective;
 }

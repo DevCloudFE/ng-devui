@@ -1,7 +1,6 @@
 <section>
   <h4>Basic Tree</h4>
-  <d-tree #basicTree [tree]="data1" (nodeSelected)="onNodeSelected($event)" (nodeToggled)="onNodeToggled($event)">
-  </d-tree>
+  <d-tree #basicTree [tree]="data1" (nodeSelected)="onNodeSelected($event)" (nodeToggled)="onNodeToggled($event)"> </d-tree>
   <d-button circled="true" bsSize="sm" bsStyle="stress" (click)="changeTree()">
     ChangeData
   </d-button>

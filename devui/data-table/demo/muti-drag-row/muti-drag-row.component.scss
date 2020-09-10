@@ -1,0 +1,10 @@
+.table-drag-row-handle {
+  cursor: move;
+}
+
+.selected {
+  color: #5170ff !important;
+  color: var(--devui-brand, #5170ff) !important;
+  background-color: #e8f0fd !important;
+  background-color: var(--devui-list-item-selected-bg, #e8f0fd) !important;
+}

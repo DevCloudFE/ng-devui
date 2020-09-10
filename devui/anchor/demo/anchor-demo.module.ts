@@ -3,25 +3,32 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { ButtonModule } from '../../button/index';
-import { StickyModule } from '../../sticky/index';
-import { AnchorModule } from '../anchor.module';
+
+import { AnchorModule } from 'ng-devui/anchor';
 import { AnchorDemoComponent } from './anchor-demo.component';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
 import { BasicComponent } from './basic/basic.component';
-import { AsynComponent } from './asyn/asyn.component';
+import { AsyncComponent } from './async/async.component';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
+import { ButtonModule } from 'ng-devui/button';
+import { StickyModule } from 'ng-devui/sticky';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
+import { HashComponent } from './hash/hash.component';
+import { ToggleModule } from 'ng-devui/toggle';
+import { ScrollTargetComponent } from './scroll-target/scroll-target.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     ButtonModule,
+    ToggleModule,
     StickyModule,
     AnchorModule,
     DevUICodeboxModule,
     DevUIApiModule,
+    DDemoNavModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo' },
       { path: 'demo', component: AnchorDemoComponent},
@@ -34,7 +41,9 @@ import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
   declarations: [
     AnchorDemoComponent,
     BasicComponent,
-    AsynComponent,
+    AsyncComponent,
+    HashComponent,
+    ScrollTargetComponent
   ],
   entryComponents: [
     AnchorDemoComponent,

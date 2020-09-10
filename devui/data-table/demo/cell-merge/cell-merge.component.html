@@ -1,0 +1,20 @@
+<d-data-table [dataSource]="basicDataSource">
+  <thead dTableHead>
+    <tr dTableRow>
+      <th dHeadCell>First Name</th>
+      <th dHeadCell>Last Name</th>
+      <th dHeadCell>Gender</th>
+      <th dHeadCell>Date of birth</th>
+    </tr>
+  </thead>
+  <tbody dTableBody>
+    <ng-template let-rowItem="rowItem" let-rowIndex="rowIndex">
+      <tr dTableRow>
+        <td dTableCell [attr.colspan]="rowIndex === 5 ? 4 : 1">{{ rowItem?.firstName }}</td>
+        <td dTableCell *ngIf="rowIndex < 5">{{ rowItem?.lastName }}</td>
+        <td dTableCell *ngIf="rowIndex === 0" rowspan="5">{{ rowItem?.gender }}</td>
+        <td dTableCell *ngIf="rowIndex < 5">{{ rowItem?.dob | i18nDate: 'short':false }}</td>
+      </tr>
+    </ng-template>
+  </tbody>
+</d-data-table>

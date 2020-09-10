@@ -1,0 +1,42 @@
+<d-data-table [dataSource]="basicDataSource" [scrollable]="true" [tableWidthConfig]="tableWidthConfig">
+  <thead dTableHead [checkable]="true">
+    <tr dTableRow>
+      <th
+        dHeadCell
+        *ngFor="let colOption of dataTableOptions.columns"
+        [fixedLeft]="colOption.fixedLeft"
+        [fixedRight]="colOption.fixedRight"
+      >
+        {{ colOption.header }}
+      </th>
+    </tr>
+  </thead>
+  <tbody dTableBody>
+    <ng-template let-rowItem="rowItem" let-rowIndex="rowIndex" let-nestedIndex="nestedIndex">
+      <tr dTableRow [ngClass]="{ 'table-row-selected': rowItem.$checked }">
+        <td dTableCell class="devui-checkable-cell" [fixedLeft]="'0px'">
+          <d-checkbox
+            [ngModelOptions]="{ standalone: true }"
+            [ngModel]="rowItem.$checked"
+            [halfchecked]="rowItem.$halfChecked"
+            [disabled]="rowItem.$checkDisabled"
+            dTooltip
+            [content]="rowItem.$checkBoxTips"
+            [position]="['top', 'right', 'bottom', 'left']"
+            [showAnimation]="false"
+            (ngModelChange)="onRowCheckChange($event, rowIndex, nestedIndex, rowItem)"
+          >
+          </d-checkbox>
+        </td>
+        <td
+          dTableCell
+          *ngFor="let colOption of dataTableOptions.columns"
+          [fixedLeft]="colOption.fixedLeft"
+          [fixedRight]="colOption.fixedRight"
+        >
+          {{ colOption.fieldType === 'date' ? (rowItem[colOption.field] | i18nDate: 'short':false) : rowItem[colOption.field] }}
+        </td>
+      </tr>
+    </ng-template>
+  </tbody>
+</d-data-table>

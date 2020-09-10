@@ -1,0 +1,26 @@
+.input {
+  box-sizing: border-box;
+  padding: 5px 10px;
+  font-size: 14px;
+  color: #293040;
+  vertical-align: middle;
+  border: 1px solid #cacfd8;
+  border-radius: 1px;
+  outline: none;
+  background-color: #ffffff;
+}
+
+.snapshot-value {
+  display: inline-block;
+  margin-left: 20px;
+}
+
+.slider {
+  width: 90%;
+}
+
+.composite-slider {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+}

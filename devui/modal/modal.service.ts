@@ -1,7 +1,6 @@
 import {
   Injectable,
   ComponentFactoryResolver,
-  ComponentRef,
 } from '@angular/core';
 import { ModalComponent } from './modal.component';
 import { OverlayContainerRef } from 'ng-devui/overlay-container';
@@ -19,6 +18,7 @@ export class ModalService {
     component,
     injector,
     width,
+    zIndex,
     data,
     handler,
     showAnimate,
@@ -26,6 +26,12 @@ export class ModalService {
     componentFactoryResolver,
     onClose,
     beforeHidden,
+    placement = 'center',
+    offsetX,
+    offsetY,
+    bodyScrollable,
+    contentTemplate,
+    escapable = true
   }: IModalOptions) {
     const finalComponentFactoryResolver = componentFactoryResolver || this.componentFactoryResolver;
 
@@ -36,27 +42,39 @@ export class ModalService {
     assign(modalRef.instance, {
       id,
       width,
+      zIndex,
       showAnimate,
       beforeHidden,
       backdropCloseable: isUndefined(backdropCloseable) ? true : backdropCloseable,
+      placement,
+      offsetX,
+      offsetY,
+      bodyScrollable,
+      contentTemplate,
+      escapable
     });
 
-    const modalContentInstance = modalRef.instance.modalContainerHost.viewContainerRef
+    let modalContentInstance;
+    if (component) {
+      modalContentInstance = modalRef.instance.modalContainerHost.viewContainerRef
       .createComponent(finalComponentFactoryResolver.resolveComponentFactory(component), 0, injector);
-    assign(modalContentInstance.instance, { data, handler });
+      assign(modalContentInstance.instance, { data, handler });
+    }
 
     modalRef.instance.onHidden = () => {
       if (onClose) {
         onClose();
       }
-      modalRef.hostView.destroy();
+      setTimeout(() => {
+        modalRef.hostView.destroy();
+      });
     };
 
     modalRef.instance.show();
 
     return {
       modalInstance: modalRef.instance,
-      modalContentInstance: modalContentInstance.instance
+      modalContentInstance: modalContentInstance ? modalContentInstance.instance : null
     };
   }
 }

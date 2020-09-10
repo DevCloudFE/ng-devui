@@ -1,22 +1,33 @@
-import {Directive, EventEmitter, HostListener, ElementRef, OnInit, Input} from '@angular/core';
+import {Directive, HostListener, ElementRef, OnInit, Input, OnChanges, SimpleChanges} from '@angular/core';
 
 @Directive({
   selector: '[dMovable]'
 })
-export class MovableDirective implements OnInit {
+export class MovableDirective implements OnInit, OnChanges {
     topStart = 0;
     leftStart = 0;
     _allowDrag = false;
     md: boolean;
     @Input() handle: HTMLElement;
+    @Input() moveEl: HTMLElement;
+    public element: any;
 
-    constructor(public element: ElementRef) {}
+    constructor(public el: ElementRef) {}
 
     ngOnInit() {
+      this.element = this.moveEl || this.el.nativeElement;
       // css changes
       if (this._allowDrag) {
-        this.element.nativeElement.style.position = 'relative';
-        // this.element.nativeElement.className += ' cursor-draggable';
+        this.element.style.position = 'relative';
+      }
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+      if (changes['moveEl']) {
+          this.element = this.moveEl || this.el.nativeElement;
+      }
+      if (changes['handle']) {
+        this.allowDrag = this._allowDrag;
       }
     }
 
@@ -26,8 +37,8 @@ export class MovableDirective implements OnInit {
         return; // prevents right click drag, remove his if you don't want it
       }
       this.md = true;
-      this.topStart = event.clientY - this.element.nativeElement.style.top.replace('px', '');
-      this.leftStart = event.clientX - this.element.nativeElement.style.left.replace('px', '');
+      this.topStart = event.clientY - this.element.style.top.replace('px', '');
+      this.leftStart = event.clientX - this.element.style.left.replace('px', '');
     }
 
     @HostListener('document:mouseup', ['$event'])
@@ -38,16 +49,31 @@ export class MovableDirective implements OnInit {
     @HostListener('document:mousemove', ['$event'])
     onMouseMove(event: MouseEvent) {
       if (this.md && this._allowDrag) {
-        this.element.nativeElement.style.top = (event.clientY - this.topStart) + 'px';
-        this.element.nativeElement.style.left = (event.clientX - this.leftStart) + 'px';
+        // 阻止拖动过程中文字被选中
+        event.stopPropagation();
+        event.preventDefault();
+        // 判断边界条件
+        const modalRect = this.element.getBoundingClientRect();
+        const parentRect = this.element.parentNode.getBoundingClientRect();
+        // 当前偏移量
+        let currentTop = event.clientY - this.topStart;
+        let currentLeft = event.clientX - this.leftStart;
+        // 计算上下距离，按照parentNode的位置计算偏移量，后续parentNode存在偏移量，需要考虑偏移量
+        const maxTop = window.innerHeight - parentRect.top - modalRect.height;
+        currentTop = ((parentRect.top + currentTop) <= 0  && -parentRect.top) || ((maxTop - currentTop <= 0 ) && maxTop) || currentTop;
+        const halfWidth = (window.innerWidth - modalRect.width) / 2;
+        // 计算左右距离，默认居中，后续parentNode存在偏移量，需要考虑偏移量
+        currentLeft = ((currentLeft + halfWidth) <= 0 && -halfWidth) || ((halfWidth - currentLeft) <= 0 && halfWidth) || currentLeft;
+        this.element.style.top = currentTop + 'px';
+        this.element.style.left = currentLeft + 'px';
       }
     }
 
     @HostListener('touchstart', ['$event'])
     onTouchStart(event: any) {
       this.md = true;
-      this.topStart = event.changedTouches[0].clientY - this.element.nativeElement.style.top.replace('px', '');
-      this.leftStart = event.changedTouches[0].clientX - this.element.nativeElement.style.left.replace('px', '');
+      this.topStart = event.changedTouches[0].clientY - this.element.style.top.replace('px', '');
+      this.leftStart = event.changedTouches[0].clientX - this.element.style.left.replace('px', '');
       event.stopPropagation();
     }
 
@@ -59,8 +85,8 @@ export class MovableDirective implements OnInit {
     @HostListener('document:touchmove', ['$event'])
     onTouchMove(event: any) {
       if (this.md && this._allowDrag) {
-        this.element.nativeElement.style.top = ( event.changedTouches[0].clientY - this.topStart ) + 'px';
-        this.element.nativeElement.style.left = ( event.changedTouches[0].clientX - this.leftStart ) + 'px';
+        this.element.style.top = ( event.changedTouches[0].clientY - this.topStart ) + 'px';
+        this.element.style.left = ( event.changedTouches[0].clientX - this.leftStart ) + 'px';
       }
       event.stopPropagation();
     }
@@ -95,7 +121,7 @@ export class MovableDirective implements OnInit {
     @Input('dMovable')
     set allowDrag(value: boolean) {
       this._allowDrag = value;
-      if (this._allowDrag) {
+      if (this._allowDrag && this.handle) {
         this.handle.style.cursor = 'move';
       }
     }

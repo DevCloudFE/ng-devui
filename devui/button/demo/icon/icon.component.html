@@ -8,7 +8,15 @@
     </d-button>
   </div>
   <div class="btn-group">
-    <d-button icon="icon-connect" bsStyle="text-dark" style="margin-right: 20px">
+    <d-button icon="icon-add" bsStyle="primary" [disabled]="true">
+      新建禁用
+    </d-button>
+    <d-button icon="icon-filter" bsStyle="common" [disabled]="true">
+      过滤禁用
+    </d-button>
+  </div>
+  <div class="btn-group">
+    <d-button icon="icon-connect" bsStyle="text-dark" style="margin-right: 4px;">
       关联
     </d-button>
     <d-button icon="icon-run" bsStyle="text-dark">
@@ -16,7 +24,19 @@
     </d-button>
   </div>
   <div class="btn-group">
+    <d-button icon="icon-connect" bsStyle="text-dark" style="margin-right: 4px;" [disabled]="true">
+      关联禁用
+    </d-button>
+    <d-button icon="icon-run" bsStyle="text-dark" [disabled]="true">
+      执行禁用
+    </d-button>
+  </div>
+  <div class="btn-group">
     <d-button icon="icon-add" bsStyle="text-dark" title="添加"></d-button>
     <d-button icon="icon-delete" bsStyle="text-dark" title="删除"></d-button>
+  </div>
+  <div class="btn-group">
+    <d-button icon="icon-add" bsStyle="text-dark" [disabled]="true" title="添加禁用"></d-button>
+    <d-button icon="icon-delete" bsStyle="text-dark" [disabled]="true" title="删除禁用"></d-button>
   </div>
 </section>

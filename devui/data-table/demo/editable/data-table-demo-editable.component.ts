@@ -1,20 +1,37 @@
-import { Component, HostBinding, OnInit } from '@angular/core';
-import {editableOriginSource, SourceType, genderSource, hobbySource, DutySource} from '../mock-data';
+import { Component, OnInit } from '@angular/core';
+import { EditableTip } from 'ng-devui/data-table';
+import { editableOriginSource, genderSource, SourceType } from '../mock-data';
 
 @Component({
-    selector: 'd-datatable-demo-editable',
+    selector: 'd-editable',
     templateUrl: './data-table-demo-editable.component.html'
 })
 export class DatatableDemoEditableComponent implements OnInit {
   genderSource = genderSource;
-  hobbySource = hobbySource;
-  DutySource = DutySource;
   basicDataSource: Array<SourceType> = JSON.parse(JSON.stringify(editableOriginSource.slice(0, 6)));
+
+  editableTip = EditableTip.btn;
+  nameEditing: boolean;
   thisCellEditEnd(event) {
     console.log('cellEditEnd');
     console.log(event.rowItem);
   }
 
   ngOnInit() {
+  }
+
+  onEditEnd(rowItem, field) {
+    rowItem[field] = false;
+  }
+
+  beforeEditStart(rowItem, field) {
+    console.log('beforeEditStart');
+  }
+
+  beforeEditEnd(rowItem, field) {
+    console.log('beforeEditEnd');
+    if (rowItem && rowItem[field].length < 3) {
+      return false;
+    }
   }
 }

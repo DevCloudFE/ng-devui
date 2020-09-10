@@ -1,0 +1,7 @@
+<div class="container" dLoading [showLoading]="showLoading" backdrop="true">
+  <ul class="list" dLazyLoad enableLazyLoad="true" (loadMore)="onLoadMore($event)">
+    <li class="item" *ngFor="let item of list; let index = index">
+      {{ index + 1 + '. ' + item }}
+    </li>
+  </ul>
+</div>

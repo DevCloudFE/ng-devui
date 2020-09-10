@@ -1,0 +1,10 @@
+.row {
+  padding: 8px;
+}
+
+.help-tip {
+  margin-left: 8px;
+  font-size: 16px;
+  vertical-align: middle;
+  cursor: pointer;
+}

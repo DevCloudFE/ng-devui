@@ -5,20 +5,25 @@ import { CommonModule } from '@angular/common';
 import { AnchorDirective } from './anchor.directive';
 import { AnchorBoxDirective } from './anchor-box.directive';
 import { AnchorLinkDirective } from './anchor-link.directive';
+import { AnchorBoxHashSupportDirective } from './anchor-box-hash.directive';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
     imports: [
-        CommonModule
+        CommonModule,
+        RouterModule
     ],
     declarations: [
         AnchorLinkDirective,
         AnchorBoxDirective,
-        AnchorDirective
+        AnchorDirective,
+        AnchorBoxHashSupportDirective
     ],
     exports: [
         AnchorLinkDirective,
         AnchorBoxDirective,
-        AnchorDirective
+        AnchorDirective,
+        AnchorBoxHashSupportDirective
     ],
 })
 

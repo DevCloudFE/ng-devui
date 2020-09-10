@@ -27,7 +27,7 @@ export class SingleUploadViewComponent extends UploadComponent {
   @Input() uploadedFiles: Array<Object> = [];
   @Input() uploadedFilesRef: TemplateRef<any>;
   @Input() filePath: string;
-  @Output() deleteUploadedFileEvent: EventEmitter<any> = new EventEmitter();
+  @Output() deleteUploadedFileEvent: EventEmitter<any> = new EventEmitter<any>();
   @ViewChild('dUploadedFiles', { static: true }) uploadedFilesComponent: UploadedFilesComponent;
 
   UploadStatus = UploadStatus;
@@ -43,10 +43,15 @@ export class SingleUploadViewComponent extends UploadComponent {
     this.deleteUploadedFileEvent.emit(file);
   }
 
+  deletePreUploadFile(file) {
+    super.deleteFile(file);
+  }
+
   // 解决templateContext 传递method.bind(this)引发模板中内嵌组件initialize问题
   deleteFileProxy = file => {
     this.deleteFile(file);
   }
+
   _onDeleteUploadedFile(filePath: string) {
     this.deleteUploadedFileEvent.emit(filePath);
   }

@@ -1,0 +1,67 @@
+@import '../style/theme/color';
+
+.devui-star-align {
+  float: left;
+  font-size: 16px;
+  margin-right: 5px;
+  position: relative;
+}
+
+.devui-pointer {
+  cursor: pointer;
+}
+
+.devui-star-container {
+  display: inline-block;
+}
+
+.devui-star-color-active {
+  color: $devui-brand;
+
+  svg g {
+    fill: $devui-brand;
+  }
+}
+
+.devui-star-color-success {
+  color: $devui-success;
+
+  svg g {
+    fill: $devui-success;
+  }
+}
+
+.devui-star-color-warning {
+  color: $devui-warning;
+
+  svg g {
+    fill: $devui-warning;
+  }
+}
+
+.devui-star-color-error {
+  color: $devui-danger;
+
+  svg g {
+    fill: $devui-danger;
+  }
+}
+
+.devui-active-star {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+.devui-star-color {
+  color: $devui-dividing-line;
+
+  svg g {
+    fill: $devui-dividing-line;
+  }
+}
+
+.devui-only-read {
+  cursor: not-allowed;
+}

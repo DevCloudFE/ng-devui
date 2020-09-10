@@ -4,7 +4,7 @@ import { DevuiSourceData } from './devui-source-data';
 @Component({
   selector: 'd-codebox',
   templateUrl: './devui-codebox.component.html',
-  styleUrls: ['./devui-codebox.component.css'],
+  styleUrls: ['./devui-codebox.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
 export class DevuiCodeboxComponent implements OnInit {

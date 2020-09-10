@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { IFileOptions, IUploadOptions } from 'ng-devui';
-import { DevUIConfig } from 'ng-devui/devui.config';
+import { IFileOptions, IUploadOptions } from 'ng-devui/upload';
 
 @Component({
-  selector: 'd-demo-upload-customize',
+  selector: 'd-customize',
   templateUrl: './customize.component.html',
   styleUrls: ['./customize.component.css']
 })
@@ -13,7 +12,7 @@ export class CustomizeComponent {
     age: 11
   };
   uploadOptions2: IUploadOptions = {
-    uri: 'http://localhost:9000/files',
+    uri: '/upload',
     additionalParameter: this.additionalParameter2,
     maximumSize: 20,
     checkSameName: true
@@ -30,13 +29,13 @@ export class CustomizeComponent {
   UPLOADING: string;
   UPLOAD: string;
 
-  constructor(private devuiConfig: DevUIConfig) {
-    this.UPLOAD = this.devuiConfig['uploadCN'].UPLOAD;
-    this.PRELOAD = this.devuiConfig['uploadCN'].UPLOAD_STATUS.PRELOAD;
-    this.UPLOADING = this.devuiConfig['uploadCN'].UPLOAD_STATUS.UPLOADING;
-    this.UPLOADED = this.devuiConfig['uploadCN'].UPLOAD_STATUS.UPLOADED;
-    this.FAILED = this.devuiConfig['uploadCN'].UPLOAD_STATUS.FAILED;
-    this.DELETE = this.devuiConfig['uploadCN'].DELETE;
+  constructor() {
+    this.UPLOAD = '上传';
+    this.PRELOAD = '预加载';
+    this.UPLOADING = '上传中';
+    this.UPLOADED = '已上传';
+    this.FAILED = '上传失败';
+    this.DELETE = '删除';
   }
 
   onSuccess3(result) {
@@ -49,5 +48,25 @@ export class CustomizeComponent {
 
   deleteUploadedFile3(filePath: string) {
     console.log(`delete ${filePath}`);
+  }
+  setCustomUploadOptions(file, options) {
+    let uploadOptions;
+    if (file.type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
+      uploadOptions = {
+        uri: '/upload',
+        additionalParameter: this.additionalParameter2,
+        maximumSize: 0.1,
+        checkSameName: true
+      };
+    }
+    if (file.type  === 'image/png') {
+      uploadOptions = {
+        uri: '/upload',
+        additionalParameter: this.additionalParameter2,
+        maximumSize: 0.5,
+        checkSameName: true
+      };
+    }
+    return uploadOptions;
   }
 }

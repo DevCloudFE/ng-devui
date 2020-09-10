@@ -1,88 +1,158 @@
+<ng-template *ngIf="!column.editable || fieldEditDenied" [ngTemplateOutlet]="cellViewTemp"></ng-template>
 
-<ng-template *ngIf="!column.editable" [ngTemplateOutlet]="cellViewTemp"></ng-template>
-
-<ng-container *ngIf="column.editable">
-  <div *ngIf="column.extraOptions?.editableTip === 'btn'" class="cell-container"
-    [style.display] ="isCellEditEnable(column, rowItem)?'none':'block'">
+<ng-container *ngIf="column.editable && !fieldEditDenied">
+  <div *ngIf="!isCellEdit && column.extraOptions?.editableTip === 'btn'" class="cell-container">
     <div class="cell-container-inner not-break modify-holder">
       <ng-template [ngTemplateOutlet]="cellViewTemp"></ng-template>
-      <span class="cell-modify" title="编辑"
-        (click)="cellEditing($event);">
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px" height="16px"
-          viewBox="0 0 16 16" version="1.1">
-          <g id="modify" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-            <g id="modify-copy" transform="translate(1.000000, 1.000000)">
-              <path
-                d="M13.671714,0.306229655 C13.8669762,0.501491801 13.8669762,0.81807429 13.671714,1.01333644 L5.89353943,8.79151103 C5.69827728,8.98677318 5.38169479,8.98677318 5.18643265,8.79151103 C4.9911705,8.59624888 4.9911705,8.27966639 5.18643265,8.08440425 L12.9646072,0.306229655 C13.1598694,0.110967509 13.4764519,0.110967509 13.671714,0.306229655 Z M8.75,0 L8.75,1 L1.75,1 C1.33578644,1 1,1.33578644 1,1.75 L1,12.25 C1,12.6642136 1.33578644,13 1.75,13 L12.25,13 C12.6642136,13 13,12.6642136 13,12.25 L13,5.25 L14,5.25 L14,12.25 C14,13.2164983 13.2164983,14 12.25,14 L1.75,14 C0.783501688,14 0,13.2164983 0,12.25 L0,1.75 C0,0.783501688 0.783501688,8.8817842e-16 1.75,8.8817842e-16 L8.75,0 Z"
-                id="Combined-Shape" />
-            </g>
+      <span class="cell-modify" (click)="cellEditing($event)">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16px" height="16px" version="1.1">
+          <g id="cell-modify" fill="none" fill-rule="evenodd" stroke="none" stroke-width="1">
+            <path
+              id="cell-modify-copy"
+              d="M 9.48528 3.41421 L 10.8995 2 L 13.7279 4.82843 L 12.3137 6.24264 L 9.48528 3.41421 Z M 5.24264 13.3137 L 2.41421 13.3137 L 2.41421 10.4853 L 8.77817 4.12132 L 11.6066 6.94975 L 5.24264 13.3137 Z"
+            />
           </g>
         </svg>
       </span>
     </div>
   </div>
-  <div *ngIf="column.extraOptions?.editableTip !== 'btn'" class="cell-editable"
-    [style.display] ="isCellEditEnable(column, rowItem)?'none':'block'"
-    (click)="cellEditing($event);">
+  <div *ngIf="!isCellEdit && column.extraOptions?.editableTip !== 'btn'" class="cell-editable" (click)="cellEditing($event)">
     <ng-template [ngTemplateOutlet]="cellViewTemp"></ng-template>
   </div>
-  <ng-template *ngIf="isCellEditEnable(column, rowItem)"
-    [ngTemplateOutlet]="column | dynamicCellTemplatePipe:dataTableTemplates:'edit'" [ngTemplateOutletContext]="{
+  <div [ngClass]="{ 'edit-padding-fix': dynamicEditorActive }">
+    <ng-template dEditorHost></ng-template>
+  </div>
+  <ng-template
+    *ngIf="templateEditorActive"
+    [ngTemplateOutlet]="column.cellEditCmp ? column.cellEditCmp.template : column.fieldType === 'date' ? dateEditTempate : textEditTempate"
+    [ngTemplateOutletContext]="{
       rowIndex:rowIndex,
       colIndex:colIndex,
       column: column,
       rowItem:rowItem,
-      cellItem: getCellValue(column, rowIndex, rowItem),
-      cellValue:  getCellFormatValue(column, rowIndex, rowItem),
       $implicit: this,
-      row: rowComponent,
-      rowHovered: rowHovered,
-      tableLevel: tableLevel
-      }">
+      row: rowComponent
+      }"
+  >
   </ng-template>
 </ng-container>
 
 <ng-template #cellViewTemp>
-    <ng-container *ngIf="column.nestedColumn">
-      <span *ngIf="tableLevel > 0" class="cell-placeholder" [ngStyle]="{'width': tableLevel*16 + 'px'}"></span>
-      <span [style.visibility]="rowItem.children?'visible':'hidden'" class="devui-toggle-childtable"
-      (click)="toggleChildTable(rowItem)">
-        <ng-container *ngIf="rowItem['$isChildTableOpen']">
-          <svg *ngIf="!column.extraOptions?.iconFoldTable" class="svg-icon-close-folder" width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink">
-            <g id="b-closeFolder" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-              <path
-                d="M3,2 L13,2 C13.5522847,2 14,2.44771525 14,3 L14,13 C14,13.5522847 13.5522847,14 13,14 L3,14 C2.44771525,14 2,13.5522847 2,13 L2,3 C2,2.44771525 2.44771525,2 3,2 Z M12,7 L4,7 L4,9 L12,9 L12,7 Z"
-                fill="#293040" fill-rule="nonzero"></path>
-            </g>
-          </svg>
-          <span *ngIf="column.extraOptions?.iconFoldTable" [innerHTML]="column.extraOptions?.iconFoldTable | safe: 'html'"></span>
-        </ng-container>
-        <ng-container *ngIf="!rowItem['$isChildTableOpen']">
-          <svg *ngIf="!column.extraOptions?.iconUnFoldTable" class="svg-icon-open-folder" width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink">
-            <g id="b-openFolder" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-              <path
-                d="M3,2 L13,2 C13.5522847,2 14,2.44771525 14,3 L14,13 C14,13.5522847 13.5522847,14 13,14 L3,14 C2.44771525,14 2,13.5522847 2,13 L2,3 C2,2.44771525 2.44771525,2 3,2 Z M7,7 L4,7 L4,9 L7,9 L7,12 L9,12 L9,9 L12,9 L12,7 L9,7 L9,4 L7,4 L7,7 Z"
-                fill="#293040" fill-rule="nonzero"></path>
-            </g>
-          </svg>
-          <span *ngIf="column.extraOptions?.iconUnFoldTable" [innerHTML]="column.extraOptions?.iconUnFoldTable | safe: 'html'"></span>
-        </ng-container>
-      </span>
-    </ng-container>
-    <ng-template [ngTemplateOutlet]="column | dynamicCellTemplatePipe:dataTableTemplates:'view'"
-      [ngTemplateOutletContext]="{
+  <ng-container *ngIf="column.nestedColumn">
+    <span *ngIf="tableLevel > 0" class="cell-placeholder" [ngStyle]="{ width: tableLevel * 16 + 'px' }"></span>
+    <span [style.visibility]="rowItem.children ? 'visible' : 'hidden'" class="childtable-toggler" (click)="toggleChildTable(rowItem)">
+      <ng-container *ngIf="rowItem['$isChildTableOpen']">
+        <svg
+          *ngIf="!column.extraOptions?.iconFoldTable"
+          class="svg-icon-close-folder"
+          width="16px"
+          height="16px"
+          viewBox="0 0 16 16"
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+        >
+          <g id="b-closeFolder" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <path
+              d="M3,2 L13,2 C13.5522847,2 14,2.44771525 14,3 L14,13 C14,13.5522847 13.5522847,14 13,14 L3,14 C2.44771525,14 2,13.5522847 2,13 L2,3 C2,2.44771525 2.44771525,2 3,2 Z M12,7 L4,7 L4,9 L12,9 L12,7 Z"
+              fill-rule="nonzero"
+            ></path>
+          </g>
+        </svg>
+        <span *ngIf="column.extraOptions?.iconFoldTable" [innerHTML]="column.extraOptions?.iconFoldTable | safe: 'html'"></span>
+      </ng-container>
+      <ng-container *ngIf="!rowItem['$isChildTableOpen']">
+        <svg
+          *ngIf="!column.extraOptions?.iconUnFoldTable"
+          class="svg-icon-open-folder"
+          width="16px"
+          height="16px"
+          viewBox="0 0 16 16"
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+        >
+          <g id="b-openFolder" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <path
+              d="M3,2 L13,2 C13.5522847,2 14,2.44771525 14,3 L14,13 C14,13.5522847 13.5522847,14 13,14 L3,14 C2.44771525,14 2,13.5522847 2,13 L2,3 C2,2.44771525 2.44771525,2 3,2 Z M7,7 L4,7 L4,9 L7,9 L7,12 L9,12 L9,9 L12,9 L12,7 L9,7 L9,4 L7,4 L7,7 Z"
+              fill-rule="nonzero"
+            ></path>
+          </g>
+        </svg>
+        <span *ngIf="column.extraOptions?.iconUnFoldTable" [innerHTML]="column.extraOptions?.iconUnFoldTable | safe: 'html'"></span>
+      </ng-container>
+    </span>
+  </ng-container>
+  <ng-template
+    [ngTemplateOutlet]="column.cellCmp ? column.cellCmp.template : textViewTemplate"
+    [ngTemplateOutletContext]="{
       rowIndex:rowIndex,
       colIndex:colIndex,
       column: column,
-      rowItem:rowItem,
-      cellItem: getCellValue(column, rowIndex, rowItem),
-      cellValue:  getCellFormatValue(column, rowIndex, rowItem),
+      rowItem: rowItem,
+      cellItem: rowItem[column.field],
+      cellValue: rowItem | disPlayCellValuePipe:rowIndex:column,
       $implicit: this,
       row: rowComponent,
-      rowHovered: rowHovered,
       tableLevel: tableLevel
-      }">
-    </ng-template>
+      }"
+  >
+  </ng-template>
+</ng-template>
+
+<ng-template let-cellValue="cellValue" #textViewTemplate>
+  <span [attr.title]="cellValue">{{ cellValue }}</span>
+</ng-template>
+
+<ng-template let-rowIndex="rowIndex" let-colIndex="colIndex" let-rowItem="rowItem" let-column="column" let-cell="" #textEditTempate>
+  <form class="form-inline edit-padding-fix">
+    <div class="form-group full-width">
+      <div class="input-group full-width">
+        <input
+          [dAutoFocus]="cell && cell.isCellEdit"
+          [type]="column.fieldType"
+          class="devui-form-control"
+          [name]="column.field"
+          [(ngModel)]="rowItem[column.field]"
+          [attr.maxlength]="column.extraOptions?.maxlength"
+          [attr.minlength]="column.extraOptions?.minlength"
+          [attr.pattern]="column.extraOptions?.pattern"
+          (keydown.enter)="cell && cell.finishCellEdit($event)"
+          [placeholder]="column.placeholder || ''"
+        />
+      </div>
+    </div>
+  </form>
+</ng-template>
+
+<ng-template let-rowIndex="rowIndex" let-colIndex="colIndex" let-rowItem="rowItem" let-column="column" let-cell="" #dateEditTempate>
+  <form class="form-inline edit-padding-fix">
+    <div class="devui-form-group">
+      <div class="devui-input-group devui-dropdown-origin-wrapper devui-dropdown-origin">
+        <input
+          class="devui-form-control search"
+          [name]="column.field"
+          [(ngModel)]="rowItem[column.field]"
+          dDatepicker
+          appendToBody
+          [dateFormat]="column.extraOptions?.dateFormat"
+          #datePicker="datepicker"
+          (ngModelChange)="!column.extraOptions?.showTime && cell && cell.finishCellEdit()"
+          [maxDate]="column.extraOptions?.maxDate"
+          [minDate]="column.extraOptions?.minDate"
+          [cssClass]="column.extraOptions?.cssClass"
+          [dateConfig]="column.extraOptions?.dateConfig"
+          [locale]="column.extraOptions?.locale"
+          [customViewTemplate]="column.extraOptions?.customViewTemplate"
+          [disabled]="column.extraOptions?.disabled"
+          [placeholder]="column.placeholder || ''"
+          [autoOpen]="true"
+          [showTime]="column.extraOptions?.showTime"
+        />
+        <div class="devui-input-group-addon" (click)="datePicker.toggle($event, true)">
+          <i class="icon icon-calendar"></i>
+        </div>
+      </div>
+    </div>
+  </form>
 </ng-template>

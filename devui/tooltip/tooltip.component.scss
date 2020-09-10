@@ -6,7 +6,7 @@
   display: block;
   font-style: normal;
   font-weight: 400;
-  line-height: 1.42857143;
+  line-height: 1.5;
   line-break: auto;
   text-align: left;
   text-align: start;
@@ -20,81 +20,88 @@
   white-space: normal;
   font-size: 12px;
   opacity: 1;
+
   & .devui-tooltip-arrow {
     display: block;
   }
 
   &.top {
-      margin-top: -5px;
-      padding: 0;
-      box-shadow: -5px 5px 20px 0px rgba($dark1, .2);
-      & .devui-tooltip-arrow {
-        bottom: -5px;
-        left: 50%;
-        margin-left: -5px;
-        border-width: 5px 5px 0;
-        border-top-color: $white;
+    margin-top: -5px;
+    padding: 0;
+    box-shadow: -5px 5px 20px 0 rgba($devui-text, 0.2);
+
+    & .devui-tooltip-arrow {
+      bottom: -5px;
+      left: 50%;
+      margin-left: -5px;
+      border-width: 5px 5px 0;
+      border-top-color: $devui-feedback-overlay-bg;
     }
   }
 
   &.bottom {
-      margin-top: 5px;
-      padding: 0;
-      box-shadow: 5px -5px 20px 0px rgba($dark1, .2);
-      & .devui-tooltip-arrow {
-        top: -5px;
-        left: 50%;
-        margin-left: -5px;
-        border-width: 0 5px 5px;
-        border-bottom-color: $white;
+    margin-top: 5px;
+    padding: 0;
+    box-shadow: 5px -5px 20px 0 rgba($devui-text, 0.2);
+
+    & .devui-tooltip-arrow {
+      top: -5px;
+      left: 50%;
+      margin-left: -5px;
+      border-width: 0 5px 5px;
+      border-bottom-color: $devui-feedback-overlay-bg;
     }
   }
 
   &.left {
-      margin-left: -5px;
-      padding: 0;
-      box-shadow: 5px -5px 20px 0px rgba($dark1, .2);
-      & .devui-tooltip-arrow {
-        top: 50%;
-        right: -5px;
-        margin-top: -5px;
-        border-width: 5px 0 5px 5px;
-        border-left-color: $white;
+    margin-left: -5px;
+    padding: 0;
+    box-shadow: 5px -5px 20px 0 rgba($devui-text, 0.2);
+
+    & .devui-tooltip-arrow {
+      top: 50%;
+      right: -5px;
+      margin-top: -5px;
+      border-width: 5px 0 5px 5px;
+      border-left-color: $devui-feedback-overlay-bg;
     }
   }
 
   &.right {
-      margin-left: 5px;
-      padding: 0;
-      box-shadow: -5px 5px 20px 0px rgba($dark1, .2);
-      & .devui-tooltip-arrow {
-        top: 50%;
-        left: -5px;
-        margin-top: -5px;
-        border-width: 5px 5px 5px 0;
-        border-right-color: $white;
+    margin-left: 5px;
+    padding: 0;
+    box-shadow: -5px 5px 20px 0 rgba($devui-text, 0.2);
+
+    & .devui-tooltip-arrow {
+      top: 50%;
+      left: -5px;
+      margin-top: -5px;
+      border-width: 5px 5px 5px 0;
+      border-right-color: $devui-feedback-overlay-bg;
     }
   }
-  .devui-tooltip-inner {
-    padding: 5px 10px;
-    font-size: 14px;
-    color: $dark1;
-    letter-spacing: 0;
-    line-height: 20px;
-    word-wrap: break-word;
-    background: $white;
-    box-shadow: none;
-    word-break: break-all;
-    text-align: start;
-}
 
-.devui-tooltip-arrow {
+  .devui-tooltip-inner {
+    max-width: 200px;
+    padding: 5px 10px;
+    font-size: 12px;
+    color: $devui-feedback-overlay-text;
+    letter-spacing: 0;
+    line-height: 1.5;
+    background: $devui-feedback-overlay-bg;
+    box-shadow: none;
+    overflow-wrap: break-word;
+    word-break: normal;
+    word-wrap: break-word;
+    text-align: start;
+    border-radius: 4px;
+  }
+
+  .devui-tooltip-arrow {
     position: absolute;
     width: 0;
     height: 0;
     border-color: transparent;
     border-style: solid;
+  }
 }
-}
-
-

@@ -1,0 +1,12 @@
+<div class="menu-wrapper">
+  <div>路由链接（推荐使用）</div>
+  <d-accordion [data]="menu" class="menu" [linkType]="'routerLink'"></d-accordion>
+</div>
+<div class="menu-wrapper">
+  <div>原生超链接（涉及跨站场景使用）</div>
+  <d-accordion [data]="menu2" class="menu" [linkType]="'hrefLink'" [linkDefaultTarget]="'_self'"></d-accordion>
+</div>
+<div class="menu-wrapper">
+  <div>混合链接（部分涉及跨站场景使用）</div>
+  <d-accordion [data]="menu3" class="menu" [linkType]="'dependOnLinkTypeKey'"></d-accordion>
+</div>

@@ -1,19 +1,80 @@
 <section>
   <div class="row">
-      <div class="col-md-6">
-          <div class="devui-input-group">
-              <input class="devui-input" placeholder="yyyy-MM-dd" (focus)="datePicker1.toggle($event)" name="dp"
-              [(ngModel)]="selectedDate2" autocomplete="off" dDatepicker #datePicker1="datepicker"
-              (selectedDateChange)="getValue($event)" appendToBody>
-              <div class="devui-input-group-addon" (click)="datePicker1.toggle($event)">
-                  <i class="icon icon-calendar"></i>
-              </div>
-          </div>
+    <h5>基本用法</h5>
+    <div class="col-md-6">
+      <div class="devui-input-group devui-dropdown-origin-wrapper devui-dropdown-origin">
+        <input
+          class="devui-input devui-form-control"
+          placeholder="y/MM/dd"
+          (focus)="datePicker1.toggle($event)"
+          name="dp"
+          [(ngModel)]="selectedDate1"
+          autocomplete="off"
+          dDatepicker
+          #datePicker1="datepicker"
+          (selectedDateChange)="getValue($event)"
+        />
+        <div *ngIf="selectedDate1" class="devui-input-group-addon icon-close-wrapper" (click)="datePicker1.clearAll()">
+          <i class="icon icon-close"></i>
+        </div>
+        <div class="devui-input-group-addon" (click)="datePicker1.toggle($event, true)">
+          <i class="icon icon-calendar"></i>
+        </div>
       </div>
+    </div>
   </div>
   <div class="row">
-      <div class="col-md-6">
-        <pre>{{((selectedDate2 ? selectedDate2 : null)| dDatePipe : 'YYYY-MM-DD HH:mm:ss') || 'No date select!'}}</pre>
+    <h5>设置cssClass</h5>
+    <div class="col-md-6">
+      <div class="devui-input-group devui-dropdown-origin-wrapper devui-dropdown-origin">
+        <input
+          class="devui-input devui-form-control"
+          placeholder="y/MM/dd"
+          (focus)="datePicker2.toggle($event)"
+          name="dp"
+          [(ngModel)]="selectedDate2"
+          autocomplete="off"
+          dDatepicker
+          #datePicker2="datepicker"
+          (selectedDateChange)="getValue($event)"
+          [cssClass]="'custom-css-class'"
+        />
+        <div *ngIf="selectedDate2" class="devui-input-group-addon icon-close-wrapper" (click)="datePicker2.clearAll()">
+          <i class="icon icon-close"></i>
+        </div>
+        <div class="devui-input-group-addon" (click)="datePicker2.toggle($event, true)">
+          <i class="icon icon-calendar"></i>
+        </div>
       </div>
+    </div>
+  </div>
+  <div class="row">
+    <h5>disabled态，可采用本效果，或是参考下方dateRangePicker自行设置的效果</h5>
+    <div class="col-md-6">
+      <div class="devui-input-group devui-dropdown-origin-wrapper devui-dropdown-origin" style="width: 210px; margin-bottom: 20px;">
+        <input
+          class="devui-input devui-form-control"
+          placeholder="y/MM/dd"
+          (focus)="datePicker3.toggle($event)"
+          name="dp"
+          [(ngModel)]="selectedDate3"
+          autocomplete="off"
+          dDatepicker
+          #datePicker3="datepicker"
+          (selectedDateChange)="getValue($event)"
+          [disabled]="disabled"
+          [dateConfig]="dateConfig"
+        />
+        <div *ngIf="selectedDate3" class="devui-input-group-addon icon-close-wrapper" (click)="datePicker3.clearAll()">
+          <i class="icon icon-close"></i>
+        </div>
+        <div class="devui-input-group-addon" (click)="datePicker3.toggle($event, true)">
+          <i class="icon icon-calendar"></i>
+        </div>
+      </div>
+      <div>
+        <d-button bsStyle="common" (click)="disabled = !disabled" style="margin-top: 20px;">Toggle Disabled</d-button>
+      </div>
+    </div>
   </div>
 </section>

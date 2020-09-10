@@ -1,0 +1,18 @@
+<div class="devui-shining-dot"></div>
+<div class="devui-shining-plus"></div>
+<div class="devui-arrow"></div>
+<div class="devui-guide-container">
+  <p class="devui-title">{{ title }}</p>
+  <div class="icon icon-close" (click)="closeAll()"></div>
+  <div class="devui-content" [innerHTML]="content | safe: 'html'"></div>
+  <div class="devui-ctrl">
+    <div *ngIf="dots.length > 1 && !extraConfig?.hideStepNav" class="devui-dots">
+      <em *ngFor="let dot of dots; index as i" class="icon icon-dot-status {{ i === stepIndex ? 'devui-active' : '' }}"></em>
+    </div>
+    <div class="devui-guide-btn">
+      <div *ngIf="stepIndex > 0 && !extraConfig?.hidePreStep" class="devui-prev-step" (click)="prev()">{{ i18nCommonText.previous }}</div>
+      <div *ngIf="stepIndex + 1 < stepsCount" (click)="next()">{{ i18nCommonText.next }}</div>
+      <div *ngIf="stepIndex === stepsCount - 1" (click)="closeAll()">{{ i18nCommonText.finish }}</div>
+    </div>
+  </div>
+</div>

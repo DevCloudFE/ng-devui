@@ -1,0 +1,14 @@
+<section>
+  <d-input-number
+    size="sm"
+    [min]="min"
+    [max]="max"
+    [step]="step"
+    [allowEmpty]="true"
+    [(ngModel)]="value"
+    (blur)="blurDetection($event)"
+    (whileValueChanging)="showValue($event, 'typing')"
+    (ngModelChange)="showValue($event, 'model')"
+  >
+  </d-input-number>
+</section>

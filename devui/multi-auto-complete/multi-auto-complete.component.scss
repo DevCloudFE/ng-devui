@@ -1,0 +1,254 @@
+@import '../style/mixins/index';
+@import '../style/theme/color';
+
+.form-group label {
+  cursor: pointer;
+  font-size: 12px;
+  margin-bottom: 0;
+  width: 100%;
+}
+
+.multiple-label-auto-complete {
+  padding: 0;
+  font-weight: normal;
+}
+
+.multiple-label-auto-complete ul {
+  display: block;
+  list-style: none;
+  background-color: $devui-connected-overlay-bg;
+  border-radius: 2px;
+  padding: 1px 2px 0 2px;
+  min-height: 28px;
+}
+
+.multiple-label-auto-complete-single ul,
+.multiple-label-auto-complete-single-focus ul,
+.multiple-label-auto-complete-border ul,
+.multiple-label-auto-complete-multiline ul {
+  border: 1px solid $devui-line;
+
+  &:hover {
+    border-color: $devui-form-control-line-hover;
+  }
+
+  &:active {
+    border-color: $devui-form-control-line-active;
+  }
+}
+
+.multiple-label-auto-complete-single ul,
+.multiple-label-auto-complete-single-focus ul {
+  overflow: hidden;
+}
+
+.multiple-label-auto-complete-multiline ul {
+  height: 60px;
+  overflow: auto;
+}
+
+.multiple-label-auto-complete-none ul {
+  border: 1px solid transparent;
+
+  &:hover,
+  &:active {
+    border-color: transparent;
+  }
+}
+
+.multiple-label-auto-complete {
+  &:not(.multiple-label-auto-complete-disabled) {
+    ul li:last-child {
+      border-color: transparent;
+    }
+  }
+
+  &.multiple-label-auto-complete-disabled ul {
+    cursor: not-allowed;
+
+    &,
+    &:hover {
+      border-color: $devui-disabled-line;
+      background-color: $devui-disabled-bg;
+    }
+
+    li {
+      border-color: $devui-disabled-line;
+
+      .label-text {
+        &,
+        &:hover {
+          background-color: $devui-disabled-bg;
+          color: $devui-disabled-text;
+        }
+      }
+    }
+  }
+}
+
+.multiple-label-auto-complete ul::-ms-expand {
+  border: 0;
+  background-color: transparent;
+}
+
+::-ms-clear,
+::-ms-reveal {
+  display: none;
+}
+
+.multiple-label-auto-complete ul li {
+  display: inline-block;
+  position: relative;
+  margin: 0 1px 1px 1px;
+  border: 1px solid $devui-label-bg;
+  border-radius: 2px;
+
+  .label-item {
+    display: flex;
+  }
+}
+
+.multiple-label-auto-complete-none ul li {
+  margin-right: 0;
+}
+
+.multiple-label-auto-complete-single ul li,
+.multiple-label-auto-complete-single-focus ul li,
+.multiple-label-auto-complete-multiline ul li {
+  position: static;
+}
+
+.multiple-label-auto-complete-single ul li,
+.multiple-label-auto-complete-single-focus ul li {
+  float: left;
+  width: 100%;
+}
+
+.multiple-label-auto-complete-single-focus ul li:first-child {
+  max-width: calc(100% - 5px);
+  margin-right: 0;
+  width: auto;
+}
+
+.multiple-label-auto-complete-single-focus ul li:last-child {
+  width: 5px;
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.multiple-label-auto-complete ul li {
+  .label-close,
+  .label-text {
+    font-size: 12px;
+    padding: 1px 10px;
+    color: $devui-text-weak;
+    font-weight: 400;
+    background-color: $devui-label-bg;
+  }
+
+  .label-close {
+    padding-left: 3px;
+    display: flex;
+    align-items: center;
+
+    svg {
+      rect {
+        fill: $devui-line;
+      }
+
+      path {
+        fill: $devui-light-text;
+      }
+    }
+
+    &:hover {
+      svg {
+        rect {
+          fill: $devui-icon-fill-active-hover;
+        }
+      }
+    }
+  }
+
+  .label-text {
+    &:hover {
+      color: $devui-icon-fill-active-hover;
+    }
+  }
+}
+
+.multiple-label-auto-complete ul li .label-text {
+  border-radius: 2px 0 0 2px;
+}
+
+.multiple-label-auto-complete ul li .label-close {
+  cursor: pointer;
+  border-radius: 0 2px 2px 0;
+}
+
+.multiple-label-auto-complete-single ul li .label-text,
+.multiple-label-auto-complete-single-focus ul li .label-text,
+.multiple-label-auto-complete-none ul li .label-text {
+  background-color: transparent;
+}
+
+.multiple-label-auto-complete-single ul li .label-text {
+  width: 100%;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
+  height: 20px;
+  line-height: 20px;
+}
+
+.multiple-label-auto-complete-single-focus ul li .label-text {
+  width: 100%;
+  text-align: left;
+  display: block;
+  height: 20px;
+  line-height: 20px;
+}
+
+.multiple-label-auto-complete .auto-complete-control {
+  height: 22px;
+  border: none;
+  outline: none;
+  background: $devui-base-bg;
+  color: $devui-text;
+  position: relative;
+}
+
+.multiple-label-auto-complete .auto-complete-control:focus,
+.multiple-label-auto-complete .auto-complete-control:hover {
+  border: none;
+  outline: none;
+}
+
+.multiple-label-auto-complete-none .auto-complete-control {
+  width: 0;
+}
+
+:host label {
+  color: inherit;
+}
+
+:host ::ng-deep .multiple-label-auto-complete-border ul li .devui-dropdown-menu {
+  margin-top: 2px;
+}
+
+:host ::ng-deep .multiple-label-auto-complete-multiline ul li .devui-dropdown-menu {
+  margin-top: 0;
+  width: 170px;
+}
+
+:host-context(d-data-table) .multiple-label-auto-complete-single ul,
+:host-context(d-data-table) .multiple-label-auto-complete-single ul li .auto-complete-control {
+  border-color: transparent;
+  background-color: transparent;
+}
+
+:host-context(d-data-table) .multiple-label-auto-complete-single ul {
+  padding-left: 0;
+}

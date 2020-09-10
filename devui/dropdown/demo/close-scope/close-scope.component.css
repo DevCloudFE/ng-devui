@@ -1,10 +1,25 @@
 .dropdown-menu > li > input {
   margin-left: 10px;
 }
-.dropdown-menu {
+
+.devui-dropdown-menu {
   overflow-y: auto;
 }
-.icon-chevron-down{
-  position:relative;
-  top:1px;
+
+.btn-group {
+  display: inline-block;
+}
+
+.icon-in-search {
+  height: 28px;
+  line-height: 28px;
+  width: 20px;
+  position: absolute;
+  top: 0;
+  right: 7px;
+  text-align: center;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

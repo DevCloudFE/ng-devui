@@ -1,12 +1,14 @@
-@import "../style/theme/color";
+@import '../style/theme/color';
 
 :host {
   display: inline-block;
+  font-size: 0;
+  vertical-align: middle;
 }
 
 .devui-toggle {
-  background: $white;
-  border: 1px solid $gray1;
+  background: $devui-line;
+  border: 1px solid $devui-line;
   position: relative;
   display: inline-block;
   box-sizing: content-box;
@@ -15,83 +17,107 @@
   margin: 0;
   cursor: pointer;
   transition: 0.3s ease-out all;
-  -webkit-transition: 0.3s ease-out all;
-  &:hover {
-    border-color: $hover-control;
+
+  &:not(.devui-checked):hover {
+    border-color: $devui-line;
   }
 
   &:active {
-    border-color: $focus2;
+    border-color: $devui-brand-active-focus;
   }
+
+  &.devui-checked:hover {
+    border-color: $devui-brand-active;
+  }
+
   small {
-    background: $gray1;
+    background: $devui-light-text;
     border-radius: 100%;
     position: absolute;
-    top: 0;
-    left: 2px;
+    top: 1px;
+    left: 1px;
     transition: 0.3s ease-out all;
-    -webkit-transition: 0.3s ease-out all;
   }
-  &.toggle-large {
-    width: 66px;
+
+  &.devui-toggle-large {
+    width: 76px;
     height: 40px;
     border-radius: 40px;
+
     & small {
-      width: 40px;
-      height: 40px;
+      width: 38px;
+      height: 38px;
+      top: 1px;
+      left: 1px;
     }
-    &.checked small {
-      background: $white;
-      left: 26px;
+
+    &.devui-checked small {
+      background: $devui-light-text;
+      left: 37px;
     }
   }
 
-  &.toggle-medium {
-    width: 50px;
+  &.devui-toggle-medium {
+    width: 58px;
     height: 30px;
     border-radius: 30px;
+
     & small {
-      width: 30px;
-      height: 30px;
+      width: 28px;
+      height: 28px;
+      top: 1px;
+      left: 1px;
     }
-    &.checked small {
-      background: $white;
-      left: 20px;
+
+    &.devui-checked small {
+      background: $devui-light-text;
+      left: 29px;
     }
   }
 
-  &.toggle-small {
-    width: 30px;
-    height: 14px;
-    border-radius: 14px;
+  &.devui-toggle-small {
+    width: 36px;
+    height: 18px;
+    border-radius: 18px;
+
     & small {
-      width: 10px;
-      height: 10px;
+      width: 16px;
+      height: 16px;
       position: absolute;
-      top: 2px;
     }
-    &.checked small {
-      background: $white;
-      left: 18px;
+
+    &.devui-checked small {
+      left: 19px;
     }
   }
 
-  &.checked {
-    background: $status-blue;
-    border-color: $status-blue;
+  &.devui-checked {
+    background: $devui-brand;
+    border-color: $devui-brand;
+
     &:hover {
-      background: $hover-control;
-      border-color: $hover-control;
+      background: $devui-brand-active;
+      border-color: $devui-brand-active;
     }
 
     &:active {
-      background: $focus2;
-      border-color: $focus2;
+      background: $devui-brand-active-focus;
+      border-color: $devui-brand-active-focus;
     }
   }
 
-  &.disabled {
-    opacity: 0.3;
-    cursor: not-allowed;
+  &.devui-disabled {
+    &,
+    &:hover,
+    &:active,
+    &.devui-checked {
+      cursor: not-allowed;
+      background-color: $devui-disabled-line;
+      border-color: $devui-disabled-line;
+
+      small {
+        background-color: $devui-light-text;
+      }
+    }
   }
 }

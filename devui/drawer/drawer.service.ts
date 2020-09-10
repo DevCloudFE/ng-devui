@@ -15,16 +15,21 @@ export class DrawerService {
     drawerContentComponent,
     injector,
     componentFactoryResolver,
+    id,
+    zIndex,
     width,
-    fullScreen,
+    fullScreen, // @deprecated
     data,
     isCover,
     clickDoms,
     onClose,
+    afterOpened,
     backdropCloseable,
     escKeyCloseable,
     beforeHidden,
-    destroyOnHide = true
+    destroyOnHide = true,
+    position = 'right',
+    bodyScrollable
   }: IDrawerOptions): IDrawerOpenResult {
     const componentFactoryResolver_ = componentFactoryResolver || this.componentFactoryResolver;
     const drawerRef = this.overlayContainerRef.createComponent(
@@ -32,13 +37,18 @@ export class DrawerService {
       injector
     );
     assign(drawerRef.instance, {
+      id,
       width,
+      zIndex,
       isCover,
       clickDoms,
       fullScreen,
       beforeHidden,
+      afterOpened,
       escKeyCloseable,
-      backdropCloseable: isUndefined(backdropCloseable) ? true : backdropCloseable
+      position,
+      backdropCloseable: isUndefined(backdropCloseable) ? true : backdropCloseable,
+      bodyScrollable
     });
 
     const drawerContentRef = drawerRef.instance.drawerContentHost.viewContainerRef.createComponent(
@@ -53,7 +63,9 @@ export class DrawerService {
         onClose();
       }
       if (destroyOnHide) {
-        drawerRef.hostView.destroy();
+        setTimeout(() => {
+          drawerRef.hostView.destroy();
+        });
       }
     };
 

@@ -10,6 +10,7 @@ import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { TagsDemoComponent } from './tags-demo.component';
 import { BasicComponent } from './basic/basic.component';
 import { CustomComponent } from './custom/custom.component';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import { CustomComponent } from './custom/custom.component';
     TagsModule,
     DevUICodeboxModule,
     DevUIApiModule,
+    DDemoNavModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo' },
       { path: 'demo', component: TagsDemoComponent},

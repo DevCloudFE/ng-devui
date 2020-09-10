@@ -1,0 +1,15 @@
+<section style="width: 50%;">
+  <h4>上传前动态修改上传参数</h4>
+  <d-multiple-upload
+    #multipleupload
+    [fileOptions]="fileOptions"
+    [uploadedFiles]="uploadedFiles"
+    [beforeUpload]="beforeUpload"
+    [filePath]="'name'"
+    [uploadOptions]="uploadOptions"
+    (successEvent)="onSuccess2($event)"
+    (deleteUploadedFileEvent)="deleteUploadedFile2($event)"
+    (errorEvent)="onError2($event)"
+  >
+  </d-multiple-upload>
+</section>

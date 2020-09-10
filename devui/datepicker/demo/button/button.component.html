@@ -1,0 +1,18 @@
+<section>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="devui-input-group devui-dropdown-origin-wrapper devui-dropdown-origin">
+        <d-button
+          bsStyle="text-dark"
+          dDatepicker
+          #datePicker1="datepicker"
+          (selectedDateChange)="getValue($event)"
+          (click)="datePicker1.toggle($event)"
+          [(ngModel)]="selectedDate2"
+        >
+          {{ selectedDate2 ? (selectedDate2 | date) : 'Select Date' }}
+        </d-button>
+      </div>
+    </div>
+  </div>
+</section>

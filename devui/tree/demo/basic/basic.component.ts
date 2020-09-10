@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
-import { ITreeItem, TreeComponent, TreeNode } from 'ng-devui';
+import { TreeComponent, TreeNode, ITreeItem } from 'ng-devui/tree';
+
 
 @Component({
   selector: 'd-basic',
@@ -11,6 +12,7 @@ export class BasicComponent {
     {
       title: '父节点1 - 展开',
       open: true,
+      disabled: true,
       items: [
         {
           title: '父节点11 - 折叠',
@@ -31,6 +33,7 @@ export class BasicComponent {
         },
         {
           title: '父节点12 - 折叠',
+          disableToggle: true,
           items: [
             {
               title: '叶子节点121'

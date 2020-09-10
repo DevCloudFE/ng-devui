@@ -1,0 +1,83 @@
+<section>
+  <d-data-table
+    #dataTable
+    [dataSource]="basicDataSource"
+    [beforeCellEdit]="beforeCellEdit"
+    (cellEditEnd)="thisCellEditEnd($event)"
+    [scrollable]="true"
+  >
+    <d-column field="lastName" header="Last Name" [width]="'100px'" [editable]="true">
+      <d-cell-edit>
+        <ng-template let-rowItem="rowItem" let-column="column">
+          <div class="customized-editor edit-padding-fix">
+            <input class="devui-form-control" [(ngModel)]="rowItem[column.field]" maxlength="5" />
+          </div>
+        </ng-template>
+      </d-cell-edit>
+    </d-column>
+    <d-column field="dob" header="Date of birth" [editable]="true" [width]="'150px'">
+      <d-cell>
+        <ng-template let-cellItem="cellItem">
+          {{ cellItem | i18nDate: 'full':false }}
+        </ng-template>
+      </d-cell>
+      <d-cell-edit>
+        <ng-template let-rowItem="rowItem" let-column="column">
+          <form class="form-inline edit-padding-fix">
+            <div class="devui-form-group">
+              <div class="devui-input-group devui-dropdown-origin-wrapper devui-dropdown-origin">
+                <input
+                  class="devui-form-control search"
+                  [name]="column.field"
+                  [(ngModel)]="rowItem[column.field]"
+                  dDatepicker
+                  appendToBody
+                  [dateFormat]="YYYY / MM / DD"
+                  #datePicker="datepicker"
+                  [showTime]="true"
+                  [autoOpen]="true"
+                />
+                <div class="devui-input-group-addon" (click)="datePicker.toggle($event, true)">
+                  <i class="icon icon-calendar"></i>
+                </div>
+              </div>
+            </div>
+          </form>
+        </ng-template>
+      </d-cell-edit>
+    </d-column>
+    <d-column field="age" header="Age" [width]="'100px'" [editable]="true">
+      <d-cell-edit>
+        <ng-template let-rowItem="rowItem" let-column="column">
+          <div class="customized-editor edit-padding-fix">
+            <d-input-number [(ngModel)]="rowItem[column.field]" class="input-number"></d-input-number>
+          </div>
+        </ng-template>
+      </d-cell-edit>
+    </d-column>
+    <d-column field="gender" header="Gender" [width]="'100px'" [editable]="true">
+      <d-cell>
+        <ng-template let-cellItem="cellItem">
+          {{ cellItem.label }}
+        </ng-template>
+      </d-cell>
+      <d-cell-edit>
+        <ng-template let-rowItem="rowItem" let-column="column">
+          <div class="customized-editor edit-padding-fix">
+            <d-select
+              [options]="genderSource"
+              isSearch="true"
+              [filterKey]="'label'"
+              autoFocus="true"
+              toggleOnFocus="true"
+              [(ngModel)]="rowItem[column.field]"
+              (ngModelChange)="finishEdit()"
+            >
+              <ng-template let-option="option" let-filterKey="filterKey"> gender:{{ option[filterKey] }} </ng-template>
+            </d-select>
+          </div>
+        </ng-template>
+      </d-cell-edit>
+    </d-column>
+  </d-data-table>
+</section>

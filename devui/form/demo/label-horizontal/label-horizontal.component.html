@@ -1,0 +1,90 @@
+<section>
+  <form dForm [layout]="'horizontal'" [labelSize]="'sm'">
+    <d-form-item>
+      <d-form-label [required]="true">计划名</d-form-label>
+      <d-form-control [extraInfo]="'输入一个符合阅读习惯的短名字，最多30个字符，不能是系统字段，且不能与已有的字段重名'">
+        <input dTextInput name="userName" />
+      </d-form-control>
+    </d-form-item>
+    <d-form-item>
+      <d-form-label>计划描述</d-form-label>
+      <d-form-control>
+        <textarea dTextarea name="desc" maxlength="200" [resize]="'vertical'" class="plan-desc"></textarea>
+      </d-form-control>
+    </d-form-item>
+    <d-form-item>
+      <d-form-label [required]="true">单选框</d-form-label>
+      <d-form-control>
+        <d-select [options]="selectOptions" name="select1" [filterKey]="'label'" [(ngModel)]="formData.selectValue"></d-select>
+      </d-form-control>
+    </d-form-item>
+    <d-form-item>
+      <d-form-label [required]="true"><span style="line-height: 46px;">单选框</span></d-form-label>
+      <d-form-control>
+        <d-select [options]="selectOptions" name="select1" size="lg" [filterKey]="'label'" [(ngModel)]="formData.selectValue"></d-select>
+      </d-form-control>
+    </d-form-item>
+    <d-form-item>
+      <d-form-label [required]="true">多选框</d-form-label>
+      <d-form-control>
+        <d-select
+          name="multiSelect"
+          [options]="selectOptions"
+          [filterKey]="'label'"
+          [isSearch]="true"
+          [multiple]="true"
+          [extraConfig]="{
+            labelization: multipleSelect2DemoConfig.labelization
+          }"
+          [ngModel]="formData.multipleSelectValue"
+        ></d-select>
+      </d-form-control>
+    </d-form-item>
+    <d-form-item>
+      <d-form-label>标签选项</d-form-label>
+      <d-form-control>
+        <d-tags-input
+          name="tag"
+          (click)="$event.stopPropagation()"
+          id="tagsInputId"
+          [displayProperty]="'label'"
+          [tags]="addedLabelList"
+          [placeholder]="'标签'"
+          [suggestionList]="labelList"
+        >
+        </d-tags-input>
+      </d-form-control>
+    </d-form-item>
+    <d-form-item>
+      <d-form-label class="single-radio">单选项</d-form-label>
+      <d-form-control>
+        <d-radio-group name="schedule" [cssStyle]="'row'" [(ngModel)]="formData.radioValue">
+          <d-radio *ngFor="let option of radioOptions" [value]="option">
+            {{ option.label }}
+          </d-radio>
+        </d-radio-group>
+      </d-form-control>
+    </d-form-item>
+    <d-form-item>
+      <d-form-label>开关</d-form-label>
+      <d-form-control>
+        <d-toggle name="anonymous" [(ngModel)]="formData.toggleValue"></d-toggle>
+      </d-form-control>
+    </d-form-item>
+    <d-form-item>
+      <d-form-label>执行日</d-form-label>
+      <d-form-control [extraInfo]="customTemplate">
+        <div class="single-checkbox" *ngFor="let option of checkboxOptions">
+          <d-checkbox name="runDay" [label]="option.label" [isShowTitle]="false" [ngModel]="option.checked"></d-checkbox>
+        </div>
+      </d-form-control>
+    </d-form-item>
+    <d-form-operation>
+      <d-button bsStyle="stress" class="mr-element-spacing" circled="true" style="margin-right: 4px;">提交</d-button>
+      <d-button bsStyle="common" circled="true">取消</d-button>
+    </d-form-operation>
+  </form>
+  <ng-template #customTemplate>
+    <span>选择您的执行周期，推荐选择周一，周三，周五</span>
+  </ng-template>
+</section>

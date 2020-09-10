@@ -1,62 +1,124 @@
 @import '../style/theme/color';
 @import '../style/theme/variables';
 @import '../style/mixins/index';
+@import '../style/core/font';
 
 :host {
   display: block;
 }
 
-.nav-tabs {
-  font-size: 14px;
+.devui-nav-tabs,
+.devui-nav-pills {
+  font-size: $font-size-secondary-card-title;
   background: transparent;
+  font-weight: bold;
+
   li {
-    margin-left: 32px;
-    &:first-child{
-      margin-left: 0px;
-    }
     cursor: pointer;
-    border-bottom-width: 2px;
-    border-bottom-style: solid;
+    border: 2px solid transparent;
+
     & > a {
       cursor: pointer;
       border: none;
       line-height: 30px;
       background-color: transparent;
       padding: 0;
+      color: $devui-text;
     }
-    & > a:hover, & > a:focus, & > a:active {
+
+    & > a:hover,
+    & > a:focus,
+    & > a:active {
       outline: none;
     }
+
+    &.disabled {
+      a {
+        color: $devui-disabled-text;
+        cursor: not-allowed;
+      }
+    }
+
+    &.active,
+    &:hover:not(.disabled) {
+      & > a {
+        color: $devui-brand;
+      }
+    }
+  }
+
+  li::after {
+    content: '';
+    display: block;
+    margin: auto;
+    height: 2px;
+    width: 0;
+    background: transparent;
+    transition: width 0.3s ease-out, background-color 0.3s ease-out;
+  }
+
+  li.active::after {
+    width: 100%;
+    background: $devui-brand;
   }
 }
 
-.nav-options {
-  font-size: 14px;
+.devui-nav-options {
+  font-size: $font-size-base;
   background: transparent;
   border: none;
   border-radius: 1px;
+
   > li {
     cursor: pointer;
-    border-left-width: 0px;
+    border: 1px solid $devui-line;
+    border-left-width: 0;
+    background-color: $devui-base-bg;
     float: left;
-    &:first-child{
+
+    &:first-child {
       border-left-width: 1px;
-      border-radius: 1px 0 0 1px;
+      border-radius: 2px 0 0 2px;
     }
-    &:last-child{
-      border-radius: 0 1px 1px 0;
+
+    &:last-child {
+      border-radius: 0 2px 2px 0;
     }
 
     & > a {
       cursor: pointer;
       border: none;
-      line-height: 30px;
+      color: $devui-text;
+      line-height: 26px;
       padding: 0 15px;
-      &:hover, &:focus, &:active {
+
+      &:hover,
+      &:focus,
+      &:active {
         outline: none;
       }
     }
-    &.active, &:hover {
+
+    &.disabled {
+      border-color: $devui-disabled-line;
+
+      a {
+        color: $devui-disabled-text;
+        cursor: not-allowed;
+      }
+    }
+
+    &.active,
+    &:hover:not(.disabled) {
+      & > a {
+        color: $devui-light-text;
+
+        &:hover {
+          color: $devui-light-text;
+          background: transparent;
+        }
+      }
+
       &:not(:first-child)::before {
         content: '';
         display: block;
@@ -67,12 +129,34 @@
         position: absolute;
       }
     }
+
+    &.active {
+      background-color: $devui-brand;
+      border-color: $devui-brand;
+
+      &:not(:first-child)::before {
+        background-color: $devui-brand;
+      }
+
+      & + li::before {
+        background-color: $devui-brand;
+      }
+    }
+
+    &:hover:not(.active):not(.disabled) {
+      background-color: $devui-brand-active;
+      border-color: $devui-brand-active;
+
+      &:not(:first-child)::before {
+        background-color: $devui-brand-active;
+      }
+    }
   }
 }
 
-.nav {
-  li{
-    > a.custom-width  {
+.devui-nav {
+  li {
+    > a.custom-width {
       display: inline-block;
       padding: 0;
       text-align: center;
@@ -80,20 +164,41 @@
   }
 }
 
-.nav-tabs > li {
-  float: left;
-  margin-bottom: -1px;
+.devui-nav-tabs:not(.devui-nav-stacked) {
+  border-bottom: 1px $devui-line solid;
+
+  li {
+    float: left;
+    margin-left: 32px;
+    margin-bottom: -3px;
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
 }
 
-.nav:before, .nav:after {
-  content: " ";
+.devui-nav-pills:not(.devui-nav-stacked) {
+  > li {
+    float: left;
+    margin-left: 32px;
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+}
+
+.devui-nav::before,
+.devui-nav::after {
+  content: ' ';
   display: table;
 }
 
-.nav:after {
+.devui-nav::after {
   clear: both;
 }
 
-.tab-content{
+.devui-tab-content {
   margin-top: 20px;
 }

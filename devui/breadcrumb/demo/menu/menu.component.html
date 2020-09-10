@@ -1,0 +1,9 @@
+<section>
+  <d-breadcrumb>
+    <ng-container *ngFor="let item of breadData">
+      <d-breadcrumb-item [showMenu]="item.showMenu" [menuList]="item.menuList" (toggleEvent)="toggleEvent($event)">
+        <a [href]="item.link">{{ item.label }}</a>
+      </d-breadcrumb-item>
+    </ng-container>
+  </d-breadcrumb>
+</section>

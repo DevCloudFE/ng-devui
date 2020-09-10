@@ -1,3 +1,7 @@
-d-button{
-    margin-right: 5px;
-  }
+d-button {
+  margin-right: 4px;
+}
+
+d-pagination {
+  margin: 20px 0;
+}

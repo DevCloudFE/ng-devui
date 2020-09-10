@@ -1,0 +1,29 @@
+<ng-container *ngIf="source && source.length">
+  <d-breadcrumb-item
+    *ngFor="let item of source"
+    [showMenu]="item.showMenu"
+    [isSearch]="item.isSearch"
+    [menuList]="item.menuList"
+    [customMenuTemplate]="item.customMenuTemplate"
+  >
+    <a
+      *ngIf="!item.noNavigation && (!item.linkType || item.linkType === 'hrefLink')"
+      rel="noopener"
+      [href]="item.link"
+      [target]="item.target ? item.target : '_self'"
+      >{{ item.title }}</a
+    >
+    <a
+      *ngIf="!item.noNavigation && item.linkType === 'routerLink'"
+      rel="noopener"
+      [target]="item.target"
+      [href]="item.link"
+      (click)="navigateTo($event, item)"
+      >{{ item.title }}</a
+    >
+    <span *ngIf="item.noNavigation">{{ item.title }}</span>
+  </d-breadcrumb-item>
+</ng-container>
+<ng-container *ngIf="!(source && source.length)">
+  <ng-content></ng-content>
+</ng-container>

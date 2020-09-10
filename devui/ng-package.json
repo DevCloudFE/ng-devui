@@ -2,7 +2,10 @@
   "$schema": "../node_modules/ng-packagr/ng-package.schema.json",
   "dest": "../publish",
   "lib": {
-    "entryFile": "./index.ts"
+    "entryFile": "./index.ts",
+    "umdModuleIds": {
+      "lodash-es": "lodash-es"
+    }
   },
-  "whitelistedNonPeerDependencies": ["angular", "date-fns", "lodash-es", "popper.js"]
+  "whitelistedNonPeerDependencies": ["@angular/cdk","date-fns", "lodash-es", "popper.js", "enquire.js", "css-vars-ponyfill", "mime-db"]
 }

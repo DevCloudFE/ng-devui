@@ -1,49 +1,63 @@
 <section>
-  <d-data-table #dataTable [type]="'striped'" [fixHeader]="true" [dataSource]="basicDataSource" [showDetail]="true"
-    (cellEditEnd)="thisCellEditEnd($event)" [headerExpandConfig]="headerExpandConfig" [fixHeader]="true" [scrollable]="true">
-    <d-column field="$index" header="#" [width]="'50px'"></d-column>
-    <d-column field="firstName" header="First Name" [width]="'150px'" [editable]="true"></d-column>
-    <d-column field="lastName" header="Last Name" [width]="'150px'"></d-column>
-    <d-column field="gender" header="Gender" [width]="'100px'" [fieldType]="'select'" [editable]="true"
-      [extraOptions]="{source: genderSource, isSearch:true}"></d-column>
-    <d-column field="dob" header="Date of birth" [fieldType]="'date'" [editable]="true"
-      [extraOptions]="{dateFormat: 'MM/DD/YYYY'}" [width]="'100px'"></d-column>
-    <d-column [width]="'50px'">
-      <d-cell>
-        <ng-template let-rowIndex="rowIndex" let-rowItem="rowItem">
-          <div *ngIf="rowIndex !== 2" class="icon icon-create-sub-item cursor-pointer" (click)="addSubData(rowIndex, rowItem)"></div>
-        </ng-template>
-      </d-cell>
-    </d-column>
+  <d-data-table #dataTable [type]="'striped'" [dataSource]="basicDataSource" [scrollable]="true" [tableWidthConfig]="tableWidthConfig">
+    <thead dTableHead>
+      <tr dTableRow>
+        <th dHeadCell></th>
+        <th dHeadCell>#</th>
+        <th dHeadCell>First Name</th>
+        <th dHeadCell>Last Name</th>
+        <th dHeadCell>Gender</th>
+        <th dHeadCell>Date of birth</th>
+      </tr>
+    </thead>
+    <tbody dTableBody>
+      <ng-template let-rowItem="rowItem" let-rowIndex="rowIndex">
+        <tr dTableRow *ngIf="rowIndex === 0">
+          <td dTableCell [attr.colspan]="tableWidthConfig.length">
+            <div *ngIf="!headerNewForm" (click)="newRow()" class="cursor-pointer">
+              <span class="tips-icon icon-add"></span>
+              <span>Create new data</span>
+            </div>
+            <div *ngIf="headerNewForm" class="edit-padding-fix">
+              <div class="input-block">
+                <input class="devui-form-control" [(ngModel)]="defaultRowData.firstName" placeholder="firstName" type="text" />
+              </div>
+              <div class="input-block">
+                <input class="devui-form-control" [(ngModel)]="defaultRowData.lastName" placeholder="lastName" type="text" />
+              </div>
+              <d-button style="margin-right: 5px;" (click)="quickRowAdded()">确定</d-button>
+              <d-button bsStyle="common" (click)="quickRowCancel()">取消</d-button>
+            </div>
+          </td>
+        </tr>
+        <tr dTableRow>
+          <td dTableCell class="cursor-pointer">
+            <div *ngIf="rowItem.$expandConfig" (click)="toggleExpand(rowItem)">
+              <span class="icon-chevron-up" *ngIf="rowItem.$expandConfig?.expand"></span>
+              <span class="icon-chevron-down" *ngIf="!rowItem.$expandConfig?.expand"></span>
+            </div>
+          </td>
+          <td dTableCell>{{ rowIndex + 1 }}</td>
+          <td dTableCell>{{ rowItem.firstName }}</td>
+          <td dTableCell>{{ rowItem.lastName }}</td>
+          <td dTableCell>{{ rowItem.gender }}</td>
+          <td dTableCell>{{ rowItem.dob | i18nDate: 'short':false }}</td>
+        </tr>
+        <tr dTableRow class="expand-row" *ngIf="rowItem.$expandConfig?.expand">
+          <td dTableCell [attr.colspan]="tableWidthConfig.length">
+            <div class="edit-padding-fix">
+              <div class="input-block">
+                <input class="devui-form-control" [(ngModel)]="defaultRowData.firstName" placeholder="firstName" type="text" />
+              </div>
+              <div class="input-block">
+                <input class="devui-form-control" [(ngModel)]="defaultRowData.lastName" placeholder="lastName" type="text" />
+              </div>
+              <d-button style="margin-right: 5px;" (click)="subRowAdded(rowIndex, rowItem)">确定</d-button>
+              <d-button bsStyle="common" (click)="subRowCancel(rowIndex, rowItem)">取消</d-button>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </tbody>
   </d-data-table>
 </section>
-<ng-template #quickAddRowTip>
-  <div (click)="newRow()" class="cursor-pointer">
-    <span class="tips-icon icon-add"></span>
-    <span>Create new data</span>
-  </div>
-</ng-template>
-<ng-template #quickAddRowContent>
-  <div class="edit-padding-fix">
-    <div class="input-block">
-      <input class="devui-form-control" [(ngModel)]="defaultRowData.firstName" placeholder="firstName" type="text">
-    </div>
-    <div class="input-block">
-      <input class="devui-form-control" [(ngModel)]="defaultRowData.lastName" placeholder="lastName" type="text">
-    </div>
-    <d-button style="margin-right: 5px;" (click)="quickRowAdded()">确定</d-button>
-    <d-button bsStyle="common" (click)="quickRowCancel()">取消</d-button>
-  </div>
-</ng-template>
-<ng-template #addSubRowContent let-rowIndex="rowIndex" let-rowItem="rowItem">
-  <div class="edit-padding-fix">
-    <div class="input-block">
-      <input class="devui-form-control" [(ngModel)]="defaultRowData.firstName" placeholder="firstName" type="text">
-    </div>
-    <div class="input-block">
-      <input class="devui-form-control" [(ngModel)]="defaultRowData.lastName" placeholder="lastName" type="text">
-    </div>
-    <d-button style="margin-right: 5px;" (click)="subRowAdded(rowIndex, rowItem)">确定</d-button>
-    <d-button bsStyle="common" (click)="subRowCancel(rowIndex, rowItem)">取消</d-button>
-  </div>
-</ng-template>

@@ -1,0 +1,29 @@
+@import '../style/theme/color';
+
+.devui-select-chevron-icon {
+  display: inline-flex;
+  vertical-align: middle;
+  transition: transform 0.3s;
+}
+
+.devui-select-open .devui-select-chevron-icon {
+  transform: rotate(180deg);
+}
+
+.devui-select-chevron-icon svg polygon {
+  fill: $devui-text-weak;// TODO: Color-Question
+}
+
+input::-ms-clear {
+  display: none;
+}
+
+.devui-no-data-tip {
+  user-select: none;
+  cursor: not-allowed;
+}
+
+.devui-form-control {
+  outline: none;
+  padding-right: 22px;
+}

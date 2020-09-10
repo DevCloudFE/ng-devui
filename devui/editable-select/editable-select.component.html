@@ -1,17 +1,54 @@
-<div class="devui-form-group devui-has-feedback" [style.padding-bottom.px]="2">
+<div
+  class="devui-form-group devui-has-feedback"
+  [ngClass]="{
+    'devui-select-open': dropDownOpen
+  }"
+  #editableSelectBox
+>
   <input
     (click)="toggle($event)"
-    style="cursor: pointer"
-    class="devui-form-control" type="text" name="autoCompleteControl"
+    style="cursor: pointer;"
+    class="devui-form-control devui-dropdown-origin"
+    type="text"
+    name="autoCompleteControl"
     [source]="source"
     (ngModelChange)="onTermChange($event)"
     [ngModel]="inputValue"
     [searchFn]="searchFn"
     [disabled]="disabled"
+    [disabledKey]="disabledKey"
     [placeholder]="placeholder"
     [itemTemplate]="itemTemplate"
-    [noResultItemTemplate]="noResultItemTemplate"
+    [noResultItemTemplate]="noResultItemTemplate ? noResultItemTemplate : noDataTemplate"
+    [appendToBody]="appendToBody"
     [maxHeight]="maxHeight"
-    dAutoComplete />
-  <span class="devui-form-control-feedback"><span class="devui-caret"></span></span>
+    [sceneType]="'select'"
+    dAutoComplete
+    [enableLazyLoad]="enableLazyLoad"
+    (loadMore)="loadMoreEvent($event)"
+  />
+  <span class="devui-form-control-feedback">
+    <span class="devui-select-chevron-icon">
+      <svg
+        width="8px"
+        height="5px"
+        viewBox="0 0 8 5"
+        version="1.1"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+      >
+        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+          <g transform="translate(-4.000000, -6.000000)">
+            <polygon fill="#575D6C" points="4 6 12 6 8 11"></polygon>
+          </g>
+        </g>
+      </svg>
+    </span>
+  </span>
 </div>
+<ng-template #noDataTemplate>
+  <div class="devui-no-data-tip">
+    <ng-container *ngIf="!inputValue">{{ i18nCommonText?.noData }}</ng-container>
+    <ng-container *ngIf="inputValue">{{ i18nCommonText?.noRecordsFound }}</ng-container>
+  </div>
+</ng-template>

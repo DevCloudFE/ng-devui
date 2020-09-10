@@ -3,52 +3,52 @@
 @import '../style/mixins/index';
 
 .drawer {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 1000;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  z-index: 1000;
 }
 
 .overlay-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
 }
 
-.left0 {
-    left: 0;
+.display-width {
+  left: 0;
+  right: 0;
 }
 
 .overlay-backdrop {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba($dark, .3);
-    width: 100%;
-    height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: $devui-shadow;
+  width: 100%;
+  height: 100%;
+}
+
+.drawer-nav,
+.drawer-content {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border-radius: 2px;
 }
 
 .drawer-nav {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    background: $white;
+  background: $devui-base-bg;
 }
 
 .drawer-content {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    overflow: auto;
-    box-shadow: 0px 1px 20px -5px rgba($dark, .5)
+  left: 0;
+  right: 0;
+  overflow: auto;
+  box-shadow: 0 1px 20px -5px $devui-shadow;
 }

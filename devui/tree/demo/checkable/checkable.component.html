@@ -1,17 +1,22 @@
 <section>
   <h4>Operable Tree</h4>
   <d-operable-tree
-          #operableTree1
-          [tree]="data3"
-          [treeNodeIdKey]="'id'"
-          [treeNodeChildrenKey]="'children'"
-          [checkboxDisabledKey]="'disabled'"
-          [checkboxInput]="checkboxInput"
-          (nodeDeleted)="onOperableNodeDeleted($event)"
-          (nodeSelected)="onOperableNodeSelected($event)"
-          (nodeToggled)="onOperableNodeToggled($event)"
-          (nodeChecked)="onOperableNodeChecked($event)"
+    #operableTree1
+    [tree]="data3"
+    [treeNodeIdKey]="'id'"
+    [treeNodeChildrenKey]="'children'"
+    [checkboxDisabledKey]="'disabled'"
+    [toggleDisabledKey]="'disableToggle'"
+    [selectDisabledKey]="'disableSelect'"
+    (nodeDeleted)="onOperableNodeDeleted($event)"
+    (nodeSelected)="onOperableNodeSelected($event)"
+    (nodeDblClicked)="onOperableNodeDblClicked($event)"
+    (nodeRightClicked)="onOperableNodeRightClicked($event)"
+    (nodeToggled)="onOperableNodeToggled($event)"
+    (nodeChecked)="onOperableNodeChecked($event)"
+    (currentNodeChecked)="currentNodeChecked($event)"
   >
   </d-operable-tree>
+  <d-button (btnClick)="clearCheckedNodes()">清空checked节点</d-button>
   <pre>All Checked Notes:{{ checkNote | json }}</pre>
 </section>

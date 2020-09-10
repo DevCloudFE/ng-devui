@@ -4,10 +4,11 @@ import { CommonModule } from '@angular/common';
 import { TooltipModule } from '../tooltip.module';
 import { TooltipDemoComponent } from './tooltip-demo.component';
 import { BasicComponent } from './basic/basic.component';
-import { ButtonModule } from '../../button';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
+import { ButtonModule } from 'ng-devui/button';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
     DevUICodeboxModule,
     ButtonModule,
     DevUIApiModule,
+    DDemoNavModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo' },
       { path: 'demo', component: TooltipDemoComponent},

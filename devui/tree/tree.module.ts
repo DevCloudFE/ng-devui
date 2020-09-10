@@ -9,12 +9,17 @@ import { TreeNodesComponent } from './tree-nodes.component';
 import { TreeComponent } from './tree.component';
 import { AutofocusDirective } from './auto-focus.directive';
 import { PopoverModule } from 'ng-devui/popover';
-import {SafePipeModule} from 'ng-devui/utils';
+import { SafePipeModule, HighlightModule} from 'ng-devui/utils';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { FilterNodesPipe } from './pipe/filter-nodes.pipe';
+import { TransferToArrayPipe } from './pipe/transfer-to-array.pipe';
+
+
 
 @NgModule({
-  imports: [CommonModule, FormsModule, LoadingModule, CheckBoxModule, PopoverModule, SafePipeModule],
+  imports: [CommonModule, FormsModule, LoadingModule, CheckBoxModule, PopoverModule, SafePipeModule, HighlightModule, ScrollingModule],
   exports: [TreeComponent, TreeNodesComponent, OperableTreeComponent],
-  declarations: [TreeComponent, TreeNodesComponent, OperableTreeComponent, AutofocusDirective],
+  declarations: [TreeComponent, TreeNodesComponent, OperableTreeComponent, AutofocusDirective, FilterNodesPipe, TransferToArrayPipe],
   providers: [],
 })
 export class TreeModule {

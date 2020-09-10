@@ -1,6 +1,4 @@
 import {
-  Dictionary,
-  filter,
   forEach,
   isUndefined,
   map,
@@ -10,10 +8,14 @@ import {
   trim,
   values
 } from 'lodash-es';
-
+import { BehaviorSubject, interval } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
+export interface Dictionary<T> {
+  [id: number]: T;
+}
 export interface ITreeNodeData {
-  id?: number;
-  parentId?: number;
+  id?: number | string;
+  parentId?: number | string;
   title?: string;
   isOpen?: boolean;
   data?: any;
@@ -34,7 +36,6 @@ export interface ITreeMap {
   [index: number]: ITreeNodeData;
 }
 
-// 每个tree节点数据组成
 export interface ITreeItem {
   title: string;
   open?: boolean;
@@ -43,7 +44,7 @@ export interface ITreeItem {
   items?: ITreeItem[];
   isParent?: boolean;
   data?: any;
-  id?: any;
+  id?: number | string;
   isHide?: boolean;
   isActive?: boolean;
   isChecked?: boolean;
@@ -57,20 +58,22 @@ export interface ITreeItem {
   disableDelete?: boolean;
 }
 
-// tree初始化构造数据
 export interface ITreeInput {
   treeItems: Array<ITreeItem>;
-  parentId?: number;
+  parentId?: number | string;
   treeNodeChildrenKey?: string;
   treeNodeIdKey?: string;
   checkboxDisabledKey?: string;
+  selectDisabledKey?: string;
+  toggleDisabledKey?: string;
   treeNodeTitleKey?: string;
+  isVirtualScroll?: boolean;
 }
 
 export class TreeNode implements ITreeNodeData {
   constructor(public id,
-              public parentId,
-              public data) {
+    public parentId,
+    public data) {
   }
 }
 
@@ -79,37 +82,48 @@ export class TreeFactory {
   private idx: number;
   private _checked = new Set<Object>();
   private _treeRoot: TreeNode[] = [];
-
-  static create() {
-    return new TreeFactory();
+  searchItem: string;
+  flattenNodes = new BehaviorSubject<TreeNode[]>([]);
+  virtualScroll: boolean;
+  static create(isVirtualScroll) {
+    return new TreeFactory(isVirtualScroll);
   }
 
   // tree model with items
   static fromTree({
-                    treeItems,
-                    treeNodeChildrenKey = 'items',
-                    treeNodeIdKey = 'id',
-                    checkboxDisabledKey = 'disabled',
-                    treeNodeTitleKey = 'title'
-                  }: ITreeInput): TreeFactory {
-    const treeFactory = TreeFactory.create();
-    treeFactory.mapTreeItems({treeItems, parentId: undefined, treeNodeChildrenKey, treeNodeIdKey, checkboxDisabledKey, treeNodeTitleKey});
+    treeItems,
+    isVirtualScroll = false,
+    treeNodeChildrenKey = 'items',
+    treeNodeIdKey = 'id',
+    checkboxDisabledKey = 'disabled',
+    selectDisabledKey = 'disabled', // 默认值与checkboxDisabledKey相同，为了兼容以前tree的disable情况
+    toggleDisabledKey = 'disabledToggle',
+    treeNodeTitleKey = 'title'
+  }: ITreeInput): TreeFactory {
+    const treeFactory = TreeFactory.create(isVirtualScroll);
+    treeFactory.mapTreeItems({
+      treeItems, parentId: undefined, treeNodeChildrenKey, treeNodeIdKey, checkboxDisabledKey,
+      selectDisabledKey, toggleDisabledKey, treeNodeTitleKey
+    });
     return treeFactory;
   }
 
-  constructor() {
+  constructor(public isVirtualScroll) {
+    this.virtualScroll = isVirtualScroll;
     this.idx = 0;
     this.nodes = {};
   }
 
   mapTreeItems = ({
-                    treeItems,
-                    parentId,
-                    treeNodeChildrenKey = 'items',
-                    treeNodeIdKey = 'id',
-                    checkboxDisabledKey = 'disabled',
-                    treeNodeTitleKey = 'title'
-                  }: ITreeInput) => {
+    treeItems,
+    parentId,
+    treeNodeChildrenKey = 'items',
+    treeNodeIdKey = 'id',
+    checkboxDisabledKey = 'disabled',
+    selectDisabledKey = 'disableSelect',
+    toggleDisabledKey = 'disableToggle',
+    treeNodeTitleKey = 'title'
+  }: ITreeInput) => {
     forEach(treeItems, (item: ITreeItem) => {
       const node = this.addNode({
         id: item[treeNodeIdKey],
@@ -118,7 +132,7 @@ export class TreeFactory {
         isOpen: !!item.open,
         data: item.data || {},
         originItem: item,
-        isParent: !!item.isParent || !!(item['children'] && item['children'].length > 0),
+        isParent: !!item.isParent || !!(item[treeNodeChildrenKey] && item[treeNodeChildrenKey].length > 0),
         loading: !!item.loading,
         isMatch: !!item.isMatch,
         isHide: !!item.isHide,
@@ -126,11 +140,13 @@ export class TreeFactory {
         halfChecked: !!item.halfChecked,
         isActive: !!item.isActive,
         disabled: !!item[checkboxDisabledKey],
+        disableSelect: !!item[selectDisabledKey],
+        disableToggle: !!item[toggleDisabledKey],
         disableAdd: !!item.disableAdd,
         disableEdit: !!item.disableEdit,
         disableDelete: !!item.disableDelete,
         children: []
-      });
+      }, undefined, false);
 
       if (!!item.isChecked) {
         this._checked.add(node);
@@ -144,7 +160,7 @@ export class TreeFactory {
     return this;
   }
 
-  addNode({id, parentId, ...data}: ITreeNodeData): TreeNode {
+  addNode({ id, parentId, ...data }: ITreeNodeData, index?, renderTree = true): TreeNode {
     if (isUndefined(id)) {
       this.idx++;
       id = this.idx;
@@ -158,15 +174,19 @@ export class TreeFactory {
       [treeNode.id]: treeNode
     };
 
-    this.addChildNode(this.nodes[parentId], treeNode);
+    this.addChildNode(this.nodes[parentId], treeNode, index);
+    // 兼容当前用户外部直接调用addNode方法创建节点
+    if (renderTree) {
+      this.renderFlattenTree();
+    }
     return treeNode;
   }
 
-  editNodeTitle(id: number) {
+  editNodeTitle(id: number | string) {
     this.nodes[id].data.editable = true;
   }
 
-  deleteNodeById(id: number) {
+  deleteNodeById(id: number | string) {
     const node = this.nodes[id];
     const parentNode = this.nodes[node.parentId];
     this.removeChildNode(parentNode, node);
@@ -181,37 +201,48 @@ export class TreeFactory {
       });
     };
     deleteItems(id);
+    if (parentNode && (!parentNode.data.children || !parentNode.data.children.length)) {
+      parentNode.data.isParent = false;
+    }
+    this.renderFlattenTree();
     return this;
   }
 
-  toggleNodeById(id: number) {
+  toggleNodeById(id: number | string) {
     this.nodes[id].data.isOpen = !this.nodes[id].data.isOpen;
+    this.renderFlattenTree();
     return this;
   }
 
-  openNodesById(id: number) {
+  openNodesById(id: number | string) {
     this.nodes[id].data.isOpen = true;
     if (this.nodes[id].parentId !== undefined) {
       this.openNodesById(this.nodes[id].parentId);
     }
+    this.renderFlattenTree();
     return this;
   }
 
-  closeNodesById(id: number) {
+  closeNodesById(id: number | string, closeChildren = false) {
     this.nodes[id].data.isOpen = false;
-    if (this.nodes[id].parentId !== undefined) {
-      this.closeNodesById(this.nodes[id].parentId);
+    if (closeChildren) {
+      if (this.nodes[id] && this.nodes[id].data.children) {
+        this.nodes[id].data.children.forEach((node) => {
+          this.closeNodesById(node.id);
+        });
+      }
     }
+    this.renderFlattenTree();
     return this;
   }
 
-  disabledNodesById(id: number) {
+  disabledNodesById(id: number | string) {
     this.nodes[id].data.disabled = true;
 
     const parentId = this.nodes[id].parentId;
     this._disabledParentNodes(parentId);
 
-    const disabledNodes = (nodeId: number) => {
+    const disabledNodes = (nodeId: number | string) => {
       const children = this.getChildrenById(nodeId);
       if (children.length > 0) {
         children.forEach((child) => {
@@ -224,7 +255,7 @@ export class TreeFactory {
     return this;
   }
 
-  private _disabledParentNodes(parentId: number | undefined) {
+  private _disabledParentNodes(parentId: number | string | undefined) {
     const children = this.getChildrenById(parentId);
 
     if (children.length < 1) {
@@ -239,18 +270,32 @@ export class TreeFactory {
     }
   }
 
-  checkNodesById(id: number, checked: boolean): Array<Object> {
+  checkNodesById(id: number | string, checked: boolean,
+    checkableRelation: 'upward' | 'downward' | 'both' | 'none' = 'both'): Array<Object> {
     this.nodes[id].data.halfChecked = false;
     this.nodes[id].data.isChecked = checked;
-
-    this.checkParentNodes(this.nodes[id]);
-    this.checkChildNodes(this.nodes[id], checked);
+    switch (checkableRelation) {
+      case 'upward':
+        this.checkParentNodes(this.nodes[id]);
+        break;
+      case 'downward':
+        this.checkChildNodes(this.nodes[id], checked);
+        break;
+      case 'both':
+        this.checkParentNodes(this.nodes[id]);
+        this.checkChildNodes(this.nodes[id], checked);
+        break;
+      case 'none':
+        break;
+      default:
+        break;
+    }
     this.maintainCheckedNodeList(this.nodes[id], checked);
     return this.getCheckedNodes();
   }
 
   private checkParentNodes(node: TreeNode) {
-    const {parentId} = node;
+    const { parentId } = node;
     const parentNode = this.nodes[parentId];
     if (parentNode) {
       const childrenNode = this.getChildrenById(parentId);
@@ -270,12 +315,12 @@ export class TreeFactory {
   }
 
   private checkChildNodes(node: TreeNode, checked: boolean) {
-    const {id} = node;
+    const { id } = node;
     const childrenNode = this.getChildrenById(id);
     if (childrenNode.length > 0) {
       childrenNode.forEach(childNode => {
-        const {id: childId} = childNode;
-        const {data: nodeData} = this.nodes[childId];
+        const { id: childId } = childNode;
+        const { data: nodeData } = this.nodes[childId];
         if (!nodeData.disabled) {
           nodeData.isChecked = checked;
           nodeData.halfChecked = false;
@@ -283,9 +328,9 @@ export class TreeFactory {
         }
         this.checkChildNodes(childNode, checked);
       });
-      const childrenFullCheckedCount = childrenNode.filter(({data: nodeData}) => nodeData.isChecked).length;
+      const childrenFullCheckedCount = childrenNode.filter(({ data: nodeData }) => nodeData.isChecked).length;
       const childrenCheckedCount = childrenNode
-        .filter(({data: nodeData}) => nodeData.isChecked || nodeData.halfChecked).length;
+        .filter(({ data: nodeData }) => nodeData.isChecked || nodeData.halfChecked).length;
       node.data.halfChecked = childrenCheckedCount > 0 && childrenNode.length > childrenFullCheckedCount;
     }
   }
@@ -301,16 +346,12 @@ export class TreeFactory {
     return values(results);
   }
 
-  activeNodeById(id: number) {
-    forEach(this.nodes, (node) => {
-      if (node.id !== id) {
-        this.nodes[node.id].data.isActive = false;
-      }
-    });
+  activeNodeById(id: number | string) {
+    this.deactivateAllNodes();
     this.nodes[id].data.isActive = !this.nodes[id].data.isActive;
   }
 
-  getChildrenById(id: number): Array<TreeNode> {
+  getChildrenById(id: number | string): Array<TreeNode> {
     if (this.nodes[id]) {
       return this.nodes[id].data.children || [];
     } else if (id === undefined) {
@@ -337,11 +378,11 @@ export class TreeFactory {
     return patchChildren(this.getChildrenById(undefined));
   }
 
-  startLoading(id: number) {
+  startLoading(id: number | string) {
     this.nodes[id].data.loading = true;
   }
 
-  endLoading(id: number) {
+  endLoading(id: number | string) {
     this.nodes[id].data.loading = false;
   }
 
@@ -355,12 +396,13 @@ export class TreeFactory {
     this.dfs(target.toLowerCase(), this._treeRoot, hideUnmatched);
   }
 
-  getNodeById(id): any {
+  getNodeById(id: number | string): any {
     return this.nodes[id].data;
   }
 
-  hideNodeById(id, hide: boolean) {
+  hideNodeById(id: number | string, hide: boolean) {
     this.nodes[id].data.isHide = hide;
+    this.renderFlattenTree();
     return this;
   }
 
@@ -372,24 +414,25 @@ export class TreeFactory {
     }
   }
 
-  private dfs(target, tree, hideUnmatched?: boolean) {
+  private dfs(target, tree, hideUnmatched?: boolean, keyword?, pattern?) {
     if (!tree) { return false; }
     if (!target) { return false; }
     if (Array.isArray(tree)) {
       return tree.map(treeNode => {
-        return this.dfs(target, treeNode, hideUnmatched);
+        return this.dfs(target, treeNode, hideUnmatched, keyword, pattern);
       });
     } else {
       const treeNode = tree;
       const treeChildren = this.getChildrenById(treeNode.id);
-      const selfMatched = treeNode.data.title.toLowerCase().includes(target);
+      const key = keyword ? treeNode.data.originItem[keyword] : treeNode.data.title;
+      const selfMatched = pattern ? pattern.test(key) : key.toLowerCase().includes(target);
       if (selfMatched) {
         treeNode.data.isMatch = true;
+        treeNode.data.isCustomSearch = keyword;
       }
       // Test if children matches target recursively, do not hide children if parent is matched.
-      const childrenMatched = this.dfs(target, treeChildren, hideUnmatched && !selfMatched).some(_ => !!_);
+      const childrenMatched = this.dfs(target, treeChildren, hideUnmatched && !selfMatched, keyword, pattern).some(_ => !!_);
       if (selfMatched || childrenMatched) {
-        // Open Node if matched target
         if (treeChildren.length > 0) {
           this.openNodesById(treeNode.id);
         }
@@ -401,12 +444,13 @@ export class TreeFactory {
     }
   }
 
-  private addChildNode(parentNode: TreeNode, childNode: TreeNode) {
+  public addChildNode(parentNode: TreeNode, childNode: TreeNode, index?) {
     if (parentNode) {
       Array.isArray(parentNode.data.children) ?
-        parentNode.data.children.push(childNode) : parentNode.data.children = [childNode];
+        (index !== undefined ? parentNode.data.children.splice(index, 0, childNode) : parentNode.data.children.push(childNode))
+        : parentNode.data.children = [childNode];
     } else {
-      this._treeRoot.push(childNode);
+      index !== undefined ? this._treeRoot.splice(index, 0, childNode) : this._treeRoot.push(childNode);
     }
   }
 
@@ -423,17 +467,87 @@ export class TreeFactory {
       const treeNode = this.nodes[key];
       treeNode.data.isMatch = false;
       treeNode.data.isHide = false;
+      treeNode.data.isCustomSearch = false;
     });
   }
 
-  public searchTree(target, hideUnmatched = false) {
+  public searchTree(target, hideUnmatched = false, keyword?, pattern?) {
+    this.searchItem = target;
     target = trim(target);
     this.resetSearchResults();
-    this.dfs(target.toLowerCase(), this._treeRoot, hideUnmatched);
+    return this.dfs(target.toLowerCase(), this._treeRoot, hideUnmatched, keyword, pattern);
   }
 
   get treeRoot() {
     return this._treeRoot;
   }
+  public deactivateAllNodes() {
+    for (const id of Object.keys(this.nodes)) {
+      this.nodes[id].data.isActive = false;
+    }
+  }
+  public checkAllNodes(checked) {
+    for (const id of Object.keys(this.nodes)) {
+      if (!this.nodes[id].data.disabled) {
+        this.nodes[id].data.isChecked = checked;
+      }
+      this.maintainCheckedNodeList(this.nodes[id], this.nodes[id].data.isChecked);
+    }
+  }
+  public getNodeIndex(node: TreeNode) {
+    let parentNode;
+    let children;
+    if (node.parentId !== undefined) {
+      parentNode = this.getNodeById(node.parentId);
+      children = parentNode.children;
+    } else {
+      children = this.treeRoot;
+    }
+    for (let i = 0; i < children.length; i++) {
+      if (children[i].id === node.id) {
+        return i;
+      }
+    }
+    return -1;
+  }
 
+  public checkIsParent(childNodeId: number | string, parentNodeId: number | string) {
+    const realParentId = this.nodes[childNodeId].parentId;
+    if (realParentId === parentNodeId) {
+      return true;
+    } else if (realParentId !== undefined) {
+      return this.checkIsParent(realParentId, parentNodeId);
+    } else {
+      return false;
+    }
+  }
+
+  public getFlattenNodes() {
+    this.flattenNodes.next(this.flattenTree());
+  }
+
+  public flattenTree() {
+    const flattenTree = [];
+    const flatTree = (nodes) => {
+      for (let i = 0; i < nodes.length; i++) {
+        nodes[i].data.depth = nodes[i].parentId ? this.nodes[nodes[i].parentId].data.depth + 1 : 0;
+        nodes[i].data.hideInVirtualScroll = nodes[i].data.isHide || (nodes[i].parentId ?
+          this.nodes[nodes[i].parentId].data.hideInVirtualScroll || !this.nodes[nodes[i].parentId].data.isOpen : false);
+        nodes[i].data.isLast = i === (nodes.length - 1);
+        flattenTree.push(nodes[i]);
+        if (nodes[i].data.children) {
+          flatTree(nodes[i].data.children);
+        }
+      }
+    };
+    flatTree(this.treeRoot);
+    return flattenTree;
+  }
+
+  public renderFlattenTree() {
+    if (!this.virtualScroll) {
+      return;
+    }
+    this.getFlattenNodes();
+  }
 }

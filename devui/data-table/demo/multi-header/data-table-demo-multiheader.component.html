@@ -1,13 +1,43 @@
-<d-data-table [type]="'striped'" [dataSource]="basicDataSource" (cellClick)="cellClick($event)"
-  (cellDBClick)="cellDBClick($event)" (rowDBClick)="rowDBClick($event)" (rowClick)="rowClick($event)"
-  [resizeable]="true" [scrollable]="true">
+<d-data-table
+  [type]="'striped'"
+  [dataSource]="basicDataSource"
+  (cellClick)="cellClick($event)"
+  (cellDBClick)="cellDBClick($event)"
+  (rowDBClick)="rowDBClick($event)"
+  (rowClick)="rowClick($event)"
+  [scrollable]="true"
+>
   <d-column [order]="1" field="$index" header="#" [width]="'50px'"></d-column>
-  <d-column [order]="3" field="firstName" header="First Name" [sortable]="true" [width]="'150px'"
-    [advancedHeader]="[{header:'Name',rowspan: 1, colspan: 2, $width: '300px'},{header:'First Name',rowspan: 1, colspan:1}]">
+  <d-column
+    [order]="3"
+    field="firstName"
+    header="First Name"
+    [sortable]="true"
+    [width]="'150px'"
+    [advancedHeader]="[
+      { header: 'Name', rowspan: 1, colspan: 2, $width: '300px' },
+      { header: 'First Name', rowspan: 1, colspan: 1 }
+    ]"
+  >
   </d-column>
-  <d-column [order]="5" field="lastName" header="Last Name" [sortable]="true" [width]="'150px'"
-    [advancedHeader]="[{header:'Name',rowspan: 1, colspan: 0},{header:'Last Name',rowspan: 1, colspan:1}]"></d-column>
+  <d-column
+    [order]="5"
+    field="lastName"
+    header="Last Name"
+    [sortable]="true"
+    [width]="'150px'"
+    [advancedHeader]="[
+      { header: 'Name', rowspan: 1, colspan: 0 },
+      { header: 'Last Name', rowspan: 1, colspan: 1 }
+    ]"
+  ></d-column>
   <d-column [order]="7" field="gender" header="Gender" [sortable]="true" [width]="'150px'"></d-column>
-  <d-column [order]="2" field="dob" header="Date of birth" [fieldType]="'date'"
-    [extraOptions]="{dateFormat: 'MM/DD/YYYY'}" [width]="'200px'"></d-column>
+  <d-column
+    [order]="2"
+    field="dob"
+    header="Date of birth"
+    [fieldType]="'date'"
+    [extraOptions]="{ dateFormat: 'YYYY/MM/DD' }"
+    [width]="'200px'"
+  ></d-column>
 </d-data-table>

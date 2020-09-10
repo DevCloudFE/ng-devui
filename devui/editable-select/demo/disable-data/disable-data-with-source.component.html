@@ -1,0 +1,5 @@
+<section>
+  <d-editable-select [(ngModel)]="selectItem3" [source]="languages" [maxHeight]="300" disabledKey="disabled" name="multiple-auto">
+  </d-editable-select>
+  <pre>{{ (selectItem3 | json) || 'No language select!' }}</pre>
+</section>

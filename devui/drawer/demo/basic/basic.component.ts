@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { DrawerContentComponent } from '../drawerContent/drawer-content.component';
-import { IDrawerOpenResult, DrawerService, DialogService } from 'ng-devui';
+import { IDrawerOpenResult, DrawerService } from 'ng-devui/drawer';
+import { DialogService } from 'ng-devui/modal';
 
 @Component({
   selector: 'd-basic',
@@ -16,10 +17,12 @@ export class BasicComponent {
     this.results = this.drawerService.open({
       drawerContentComponent: DrawerContentComponent,
       width: '50%',
+      zIndex: 1000,
       isCover: true,
       fullScreen: true,
       backdropCloseable: true,
       escKeyCloseable: true,
+      position: 'left',
       beforeHidden: () => this.beforeHidden(),
       onClose: () => {
         console.log('on drawer closed');
@@ -34,12 +37,14 @@ export class BasicComponent {
           'This is item 4',
           'This is item 5',
         ],
-        onBtnClick: (event) => {
-          console.log(event);
+        close: (event) => {
           this.results.drawerInstance.hide();
         },
         fullScreen: (event) => {
           this.results.drawerInstance.toggleFullScreen();
+        },
+        changeWidth: (event) => {
+          this.results.drawerInstance.setWidth('200px');
         }
       }
     });
@@ -51,6 +56,7 @@ export class BasicComponent {
       const results = this.dialogService.open({
         id: 'dialog-service',
         width: '300px',
+        zIndex: 1050,
         maxHeight: '600px',
         showAnimate: false,
         title: 'Close?',

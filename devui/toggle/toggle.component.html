@@ -1,12 +1,12 @@
-
-<span class="devui-toggle"
-    [class.checked]="checked"
-    [class.disabled]="disabled"
-    [class.toggle-large]="size === 'large'"
-    [class.toggle-medium]="size === 'medium'"
-    [class.toggle-small]="size === 'small'"
-    [style.background]="checked ? color : ''"
-    [style.border-color]="checked ? color : ''"
-    >
+<span
+  class="devui-toggle"
+  [class.devui-checked]="checked"
+  [class.devui-disabled]="disabled"
+  [class.devui-toggle-large]="size === 'large'"
+  [class.devui-toggle-medium]="size === 'medium'"
+  [class.devui-toggle-small]="size === 'small'"
+  [style.background]="checked && !disabled ? color : ''"
+  [style.border-color]="checked && !disabled ? color : ''"
+>
   <small></small>
 </span>

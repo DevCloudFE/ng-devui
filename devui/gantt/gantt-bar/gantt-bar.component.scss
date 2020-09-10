@@ -1,0 +1,124 @@
+@import '../../style/theme/color';
+
+:host {
+  display: block;
+}
+
+.devui-gantt-bar {
+  position: relative;
+  width: 100%;
+  cursor: pointer;
+  box-sizing: border-box;
+  height: 24px;
+  z-index: 3;
+
+  .devui-gantt-main {
+    cursor: move;
+
+    &.disabled {
+      cursor: not-allowed;
+    }
+  }
+
+  .devui-gantt-bar-rail {
+    position: absolute;
+    background: $devui-initial;
+    box-shadow: 0 1px 2px 0 rgba(81, 112, 255, 0.19); // TODO: color not variable
+    height: 20px;
+    margin-top: 2px;
+    width: 100%;
+    border-radius: 4px;
+
+    &.disabled {
+      background-color: $devui-area;
+    }
+  }
+
+  & .devui-gantt-hover-layer {
+    display: none;
+    position: absolute;
+    height: 24px;
+    left: -12px;
+    border-radius: 4px;
+    background-color: $devui-connected-overlay-bg;
+    box-shadow: 0 0 12px 0 rgba(81, 112, 255, 0.3); // TODO: color not variable
+
+    & .devui-gantt-dragger {
+      position: absolute;
+      width: 12px;
+      height: 24px;
+      cursor: col-resize;
+
+      &.left {
+        left: 0;
+      }
+
+      &.right {
+        right: 0;
+      }
+
+      & .handle {
+        width: 2px;
+        height: 14px;
+        background: $devui-icon-fill;
+        border-radius: 1.5px;
+        margin: 5px 5px;
+
+        &.disabled {
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+
+  .devui-gantt-bar-track {
+    position: absolute;
+    background-image: linear-gradient(90deg, $devui-brand 0%, $devui-brand 100%);
+    box-shadow: 0 1px 3px 0 rgba(81, 112, 255, 0.4);
+    border-radius: 3px 0 0 3px;
+    border-radius: 3px 0 0 3px;
+    height: 20px;
+    margin-top: 2px;
+    width: 0;
+  }
+
+  .devui-gantt-bar-progress {
+    display: none;
+    position: absolute;
+    left: 0;
+    bottom: -8px;
+    margin-left: -6px;
+    cursor: pointer;
+
+    & > svg {
+      display: block;
+
+      & > g > path {
+        fill: $devui-icon-bg;
+        stroke: $devui-icon-fill-active;
+      }
+    }
+
+    &.visible {
+      display: block;
+    }
+
+    &.disabled {
+      cursor: not-allowed;
+    }
+  }
+
+  &:hover .devui-gantt-bar-progress {
+    display: block;
+  }
+}
+
+.devui-gantt-tips {
+  width: 280px;
+  min-height: 100px;
+  background: $devui-base-bg;
+  box-shadow: 0 12px 24px 0 rgba(81, 112, 255, 0.1);
+  border-radius: 2px;
+  padding: 15px;
+  margin-top: 10px;
+}

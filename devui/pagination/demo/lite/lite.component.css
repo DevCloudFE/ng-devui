@@ -1,6 +1,8 @@
-d-button{
+d-button {
   margin-right: 5px;
+  margin-top: 10px;
 }
+
 /* 配置中的每一项，自定义项建议应用此样式或在此基础上修改 */
 .pagination-config-item {
   padding-bottom: 8px;
@@ -10,14 +12,14 @@ d-button{
 
 /* 配置中每一项的标题样式，自定义项建议应用此样式或在此基础上修改 */
 .config-item-title {
-  color: #888;
+  color: #888888;
   padding-left: 10px;
   font-size: 12px;
-  line-height: 22px;
+  line-height: 1.5;
 }
 
 .config-item-words {
-  color:#293040;
+  color: #293040;
   padding-left: 10px;
   font-size: 12px;
   margin-top: 4px;

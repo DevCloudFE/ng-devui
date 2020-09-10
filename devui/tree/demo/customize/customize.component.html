@@ -1,18 +1,39 @@
 <section>
-  <d-operable-tree [tree]="data2" [treeNodeIdKey]="'id'" [treeNodeChildrenKey]="'children'"
-    (nodeSelected)="onOperableNodeSelected($event)" [iconParentOpen]="iconParentOpen"
-    [iconParentClose]="iconParentClose" [iconLeaf]="iconLeaf" [iconTemplatePosition]="'after-checkbox'">
-    <ng-template #iconTemplate let-node="node">
-      <span [ngClass]="{ 'my-icon' : node?.data?.type }" class="{{node?.data?.type}}"></span>
-    </ng-template>
-    <ng-template #statusTemplate let-node="node">
-      <span class="op-status"></span>
-    </ng-template>
-    <ng-template #operatorTemplate let-optree let-node="node" let-addNode="addNode" let-editNode="editNode"
-      let-deleteNode="deleteNode">
-      <span class="op-icons icon icon-add" (click)="addNode($event, node)"></span>
-      <span class="op-icons icon icon-edit" (click)="editNode($event, node)"></span>
-      <span class="op-icons icon icon-close" (click)="deleteNode($event, node)"></span>
-    </ng-template>
-  </d-operable-tree>
+  <div style="width: 350px;">
+    <div class="tree-title">
+      <h4>树节点</h4>
+      <h4>状态</h4>
+    </div>
+    <div>
+      <d-operable-tree
+        [tree]="data2"
+        [treeNodeIdKey]="'id'"
+        [treeNodeChildrenKey]="'children'"
+        (nodeSelected)="onOperableNodeSelected($event)"
+        [iconParentOpen]="iconParentOpen"
+        [iconParentClose]="iconParentClose"
+        [iconLeaf]="iconLeaf"
+        [iconTemplatePosition]="'after-checkbox'"
+      >
+        <ng-template #iconTemplate let-node="node">
+          <span [ngClass]="{ 'my-icon': node?.data?.type }" class="{{ node?.data?.type }}"></span>
+        </ng-template>
+        <ng-template #nodeTemplate let-node="node">
+          <span *ngIf="!node?.editable" style="margin: 0 10px;">{{ node?.title }}</span>
+          <span class="devui-tree-node__edit" *ngIf="node?.editable">
+            <input [(ngModel)]="node.title" (blur)="onBlurEdit(node)" />
+          </span>
+        </ng-template>
+        <ng-template #statusTemplate let-node="node">
+          <span class="op-status"></span>
+          <span class="status-position">{{ node.data.originItem?.status }}</span>
+        </ng-template>
+        <ng-template #operatorTemplate let-optree let-node="node" let-addNode="addNode" let-editNode="editNode" let-deleteNode="deleteNode">
+          <span class="op-icons icon icon-add" (click)="addNode($event, node)"></span>
+          <span class="op-icons icon icon-edit" (click)="editNode($event, node)"></span>
+          <span class="op-icons icon icon-close" (click)="deleteNode($event, node)"></span>
+        </ng-template>
+      </d-operable-tree>
+    </div>
+  </div>
 </section>

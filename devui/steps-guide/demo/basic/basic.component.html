@@ -1,0 +1,99 @@
+<d-button
+  bsStyle="common"
+  dStepsGuide
+  [pageName]="'step-basic-demo'"
+  [steps]="steps"
+  [stepIndex]="0"
+  [position]="'top'"
+  (currentStepChange)="stepChange($event)"
+>
+  Top
+</d-button>
+<d-button
+  bsStyle="common"
+  dStepsGuide
+  [pageName]="'step-basic-demo'"
+  [steps]="steps"
+  [stepIndex]="1"
+  [zIndex]="1900"
+  [position]="'top-left'"
+  (currentStepChange)="stepChange($event)"
+>
+  Top-Left
+</d-button>
+<d-button
+  bsStyle="common"
+  dStepsGuide
+  [pageName]="'step-basic-demo'"
+  [steps]="steps"
+  [stepIndex]="2"
+  [position]="'top-right'"
+  (currentStepChange)="stepChange($event)"
+>
+  Top-Right
+</d-button>
+<d-button
+  bsStyle="common"
+  dStepsGuide
+  [pageName]="'step-basic-demo'"
+  [steps]="steps"
+  [stepIndex]="3"
+  [position]="'left'"
+  (currentStepChange)="stepChange($event)"
+>
+  Left
+</d-button>
+<d-button
+  bsStyle="common"
+  dStepsGuide
+  [pageName]="'step-basic-demo'"
+  [steps]="steps"
+  [stepIndex]="4"
+  [position]="'right'"
+  (currentStepChange)="stepChange($event)"
+>
+  Right
+</d-button>
+<d-button
+  bsStyle="common"
+  dStepsGuide
+  [pageName]="'step-basic-demo'"
+  [steps]="steps"
+  [stepIndex]="5"
+  [position]="'bottom'"
+  (currentStepChange)="stepChange($event)"
+>
+  Bottom
+</d-button>
+<d-button
+  bsStyle="common"
+  dStepsGuide
+  [pageName]="'step-basic-demo'"
+  [steps]="steps"
+  [stepIndex]="6"
+  [position]="'bottom-left'"
+  (currentStepChange)="stepChange($event)"
+>
+  Bottom-Left
+</d-button>
+<d-button
+  bsStyle="common"
+  dStepsGuide
+  [pageName]="'step-basic-demo'"
+  [steps]="steps"
+  [stepIndex]="7"
+  [position]="'bottom-right'"
+  (operateChange)="operateChange($event)"
+  (currentStepChange)="stepChange($event)"
+>
+  Bottom-Right
+</d-button>
+<d-button (click)="reset()" bsStyle="primary">
+  show
+</d-button>
+<d-button (click)="close()" bsStyle="common">
+  close
+</d-button>
+<br />
+<br />
+<p>当前操作步骤：{{ currentStep }}</p>

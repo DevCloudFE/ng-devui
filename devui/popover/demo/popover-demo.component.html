@@ -1,29 +1,40 @@
-<div class="demo-container">
-    <div class="demo-example">
-        <div class="demo-title">基本用法</div>
-        <div class="demo-text">
-
-        </div>
-        <d-codebox id="basic" [sourceData]="basicSource">
-            <d-basic demo></d-basic>
-        </d-codebox>
+<div class="demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 60, bottom: 0 }">
+  <d-demo-nav [navItems]="navItems"></d-demo-nav>
+  <div class="demo-example" [dAnchor]="'basic-usage'">
+    <div class="demo-title">基本用法</div>
+    <div class="demo-text"></div>
+    <d-codebox id="basic" [sourceData]="basicSource">
+      <d-basic demo></d-basic>
+    </d-codebox>
+  </div>
+  <div class="demo-example" [dAnchor]="'manual-control-display'">
+    <div class="demo-title">手动控制显示</div>
+    <div class="demo-text">
+      通过visible控制弹框显示实现表单验证
     </div>
-    <div class="demo-example">
-        <div class="demo-title">手动控制显示</div>
-        <div class="demo-text">
-            通过visible控制弹框显示实现表单验证
-        </div>
-        <d-codebox id="manual" [sourceData]="manualSource">
-            <d-manual demo></d-manual>
-        </d-codebox>
-    </div>
-    <div class="demo-example">
-        <div class="demo-title">自定义提示内容</div>
-        <div class="demo-text">
-
-        </div>
-        <d-codebox id="customize" [sourceData]="customizeSource">
-            <d-customize-tmp demo></d-customize-tmp>
-        </d-codebox>
-    </div>
+    <d-codebox id="manual" [sourceData]="manualSource">
+      <d-manual demo></d-manual>
+    </d-codebox>
+  </div>
+  <div class="demo-example" [dAnchor]="'custom-prompt-content'">
+    <div class="demo-title">自定义提示内容</div>
+    <div class="demo-text">支持传入HTMLElement或TemplateRef类型</div>
+    <d-codebox id="customize" [sourceData]="customizeSource">
+      <d-customize demo></d-customize>
+    </d-codebox>
+  </div>
+  <div class="demo-example" [dAnchor]="'parent-container-settings'">
+    <div class="demo-title">父容器设置</div>
+    <div class="demo-text">scrollElement配置，这里默认是 window，默认可以不传，只有当页面的滚动不在 window 上的时候才需要传递</div>
+    <d-codebox id="scroll-element" [sourceData]="scrollElementSource">
+      <d-scroll-element demo></d-scroll-element>
+    </d-codebox>
+  </div>
+  <div class="demo-example" [dAnchor]="'hover-delay-time'">
+    <div class="demo-title">鼠标移出宿主延迟时间</div>
+    <div class="demo-text">hoverDelayTime设置</div>
+    <d-codebox id="hover-delay-time" [sourceData]="hoverDelayTimeSource">
+      <d-hover-delay-time demo></d-hover-delay-time>
+    </d-codebox>
+  </div>
 </div>

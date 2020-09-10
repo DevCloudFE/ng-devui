@@ -3,25 +3,22 @@
 @import '../style/mixins/index';
 
 .modal {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 1050;
-    outline: 0;
-    overflow-y: auto;
-    display:flex;
-    -webkit-box-pack:center;
-    -ms-flex-pack:center;
-    justify-content:center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1050;
+  outline: 0;
+  overflow-y: auto;
+  display: block;
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
 }
 
 .modal-open .modal {
@@ -32,7 +29,19 @@
 .modal-dialog {
   position: relative;
   width: auto;
-  margin: 0px auto;
+  margin: 0 auto;
+
+  &.place-at-center {
+    margin: auto;
+  }
+
+  &.place-at-top {
+    margin-bottom: auto;
+  }
+
+  &.place-at-bottom {
+    margin-top: auto;
+  }
 }
 
 .modal-backdrop {
@@ -43,32 +52,35 @@
   left: 0;
   z-index: 1040;
   opacity: 0.2;
-  background-color: $dark;
+  background-color: #000000;
 }
 
-:host ::ng-deep .modal-content{
+:host ::ng-deep .modal-content {
   position: relative;
   border-radius: 2px;
   border: none;
-  background-color: $white;
+  background-color: $devui-fullscreen-overlay-bg;
   background-clip: padding-box;
   outline: 0;
-  box-shadow: 5px 5px 20px 0 rgba($dark, .2);
+  box-shadow: 5px 5px 20px 0 $devui-shadow;
+
   .modal-body {
-    padding-top:    24px;
-    padding-right:  24px;
-    padding-bottom: 16px;
-    padding-left:   24px;
+    padding-top: 10px;
+    padding-right: 30px;
+    padding-bottom: 15px;
+    padding-left: 30px;
+    color: $devui-text-weak;
   }
 
   .modal-footer {
     border-top: none;
-    padding: 7px;
+    padding: 10px 0 25px;
     text-align: center;
+
     button {
       margin: 5px;
-      padding: 5px 20px;
       width: auto;
+
       &.pull-left {
         padding-left: 5px;
         padding-right: 5px;
@@ -76,30 +88,32 @@
         left: -5px;
       }
     }
-    button+button {
+
+    button + button {
       margin-bottom: 16px;
     }
   }
 }
 
 :host ::ng-deep .d-btn {
-    display: inline-block;
-    margin-bottom: 0;
-    font-weight: normal;
-    text-align: center;
-    vertical-align: middle;
-    touch-action: manipulation;
-    cursor: pointer;
-    background-image: none;
-    white-space: nowrap;
-    font-size: 14px;
-    line-height: 1.42857143;
-    border-radius: 2px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: normal;
+  text-align: center;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  white-space: nowrap;
+  font-size: 14px;
+  line-height: 1.42857143;
+  border-radius: 2px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
+
 :focus {
-    outline: none;
+  outline: none;
 }

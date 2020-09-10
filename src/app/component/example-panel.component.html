@@ -1,17 +1,17 @@
 <div class="docs-header">
-    <h1>{{(data.name || componentName)}} {{data.cnName}}</h1>
-    <div style="margin-bottom: 40px;">{{data.description}}</div>
-    <div *ngIf="data.tmw">
-        <h3>何时使用</h3>
-        <div style="margin-bottom: 20px;" [innerHTML]="data.tmw"></div>
-    </div>
-    <d-tabs [showContent]="false" [(activeTab)]="componentTab" (activeTabChange)="activeTabChange($event)">
-        <d-tab id="demo" title="Demo" tabId="demo"></d-tab>
-        <d-tab id="api" title="API" tabId="api"></d-tab>
-    </d-tabs>
+  <h1>{{ data.name || componentName }} {{ data.cnName }}</h1>
+  <div style="margin-bottom: 40px;">{{ data.description }}</div>
+  <div *ngIf="data.tmw">
+    <h3>何时使用</h3>
+    <div style="margin-bottom: 20px;" [innerHTML]="data.tmw"></div>
+  </div>
+  <d-tabs [showContent]="false" [(activeTab)]="componentTab" (activeTabChange)="activeTabChange($event)">
+    <d-tab id="demo" title="Demo" tabId="demo"></d-tab>
+    <d-tab id="api" title="API" tabId="api"></d-tab>
+  </d-tabs>
 </div>
 <div class="examples-viewer">
-    <div class="examples-viewer-wrapper">
-            <router-outlet></router-outlet>
-    </div>
+  <div class="examples-viewer-wrapper">
+    <router-outlet></router-outlet>
+  </div>
 </div>

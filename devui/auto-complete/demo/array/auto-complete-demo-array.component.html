@@ -2,9 +2,19 @@
   <form class="form">
     <div class="devui-form-group">
       <label for="language2">Search array:</label>
-      <input type="text" class="form-control" name="language" id="language2" [minLength]="0"
-              [(ngModel)]="selectItem2" dAutoComplete [searchFn]="onSearchLocal.bind(this)" (selectValue)="selectValue($event)"/>
+      <input
+        dTextInput
+        type="text"
+        class="devui-form-control devui-dropdown-origin"
+        name="language"
+        id="language2"
+        [minLength]="0"
+        [(ngModel)]="selectItem2"
+        dAutoComplete
+        [searchFn]="onSearchLocal.bind(this)"
+        (selectValue)="selectValue($event)"
+      />
     </div>
-    <pre>{{(selectItem2 | json) || 'No language select!'}}</pre>
+    <pre>{{ (selectItem2 | json) || 'No language select!' }}</pre>
   </form>
 </section>

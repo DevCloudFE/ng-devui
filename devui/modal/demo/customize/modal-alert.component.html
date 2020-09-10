@@ -1,0 +1,9 @@
+<div [dMovable]="true" [handle]="header" [moveEl]="parent">
+  <div class="modal-header" #header>自定义拖拽标题</div>
+  <div class="modal-body">
+    <div *ngIf="!!data.content">{{ data.content }}</div>
+  </div>
+  <div class="modal-footer">
+    <d-button (click)="close($event)" bsStyle="primary" circled="true">{{ data.cancelBtnText }} </d-button>
+  </div>
+</div>

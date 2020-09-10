@@ -4,25 +4,25 @@ import {Component, OnInit} from '@angular/core';
   selector: 'd-slider-demo',
   templateUrl: './slider-demo.component.html',
 })
-export class SliderDemoComponent implements OnInit {
+export class SliderDemoComponent {
 
   SliderBasicComponent = [
-    {title: 'HTML', language: 'html', code: require('!!raw-loader!./basic/slider-demo-basic.component.html')},
-    {title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/slider-demo-basic.component.ts')},
-    {title: 'CSS', language: 'css', code: require('!!raw-loader!./basic/slider-demo-basic.component.css')},
+    {title: 'HTML', language: 'html', code: require('!!raw-loader!./basic/slider-basic.component.html')},
+    {title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/slider-basic.component.ts')},
+    {title: 'CSS', language: 'css', code: require('!!raw-loader!./basic/slider-basic.component.css')},
   ];
   SliderDisabledComponent = [
-    {title: 'HTML', language: 'html', code: require('!!raw-loader!./disabled/slider-demo-disabled.component.html')},
-    {title: 'TS', language: 'typescript', code: require('!!raw-loader!./disabled/slider-demo-disabled.component.ts')},
+    {title: 'HTML', language: 'html', code: require('!!raw-loader!./disabled/slider-disabled.component.html')},
+    {title: 'TS', language: 'typescript', code: require('!!raw-loader!./disabled/slider-disabled.component.ts')},
   ];
   SliderCustomFormatterComponent = [
-    {title: 'HTML', language: 'html', code: require('!!raw-loader!./custom-formatter/slider-demo-custom-formatter.component.html')},
-    {title: 'TS', language: 'typescript', code: require('!!raw-loader!./custom-formatter/slider-demo-custom-formatter.component.ts')},
+    {title: 'HTML', language: 'html', code: require('!!raw-loader!./custom-formatter/slider-custom-formatter.component.html')},
+    {title: 'TS', language: 'typescript', code: require('!!raw-loader!./custom-formatter/slider-custom-formatter.component.ts')},
   ];
-  demoDocViewer;
   list = ['基本用法', '禁止输入态', '定制Popover的显示内容'];
-
-  ngOnInit() {
-    this.demoDocViewer = document.querySelector('.doc-viewer-container');
-  }
+  navItems = [
+    { dAnchorLink: 'basic-usage', value: '基本用法'},
+    { dAnchorLink: 'slider-disabled', value: '禁止输入态'},
+    { dAnchorLink: 'slider-formatter', value: '异定制Popover的显示内容'}
+  ];
 }

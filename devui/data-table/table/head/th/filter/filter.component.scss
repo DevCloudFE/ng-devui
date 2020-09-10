@@ -1,0 +1,158 @@
+@import '../../../../../style/theme/color';
+
+.data-table-column-filter-content {
+  background: $devui-connected-overlay-bg;
+  border-radius: 2px;
+
+  .drop-down-item {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  .line {
+    width: calc(100% - 20px);
+    margin-left: 10px;
+  }
+
+  & > .filter-options > d-checkbox {
+    height: 30px;
+    padding: 0 10px;
+  }
+
+  .checkbox-group {
+    padding: 0 10px;
+  }
+}
+
+.filter-content-hidden {
+  display: none !important;
+}
+
+.line {
+  height: 1px;
+  background: $devui-dividing-line;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.checkbox-group {
+  height: 30px;
+}
+
+.button-style {
+  display: inline-block;
+  width: 45%;
+  font-size: 12px;
+  color: $devui-text;
+  text-align: center;
+  line-height: 20px;
+  cursor: pointer;
+}
+
+.button-style:hover {
+  color: $devui-brand;
+}
+
+::ng-deep .filter-options .normal-filter-list-container .cdk-virtual-scroll-content-wrapper {
+  width: 100%;
+}
+
+.filter-options ::ng-deep .devui-checkbox > label {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.normal-filter-list-container {
+  overflow-y: auto;
+}
+
+.icon-filter-style {
+  color: $devui-dividing-line;
+  cursor: pointer;
+  margin-left: 20px;
+}
+
+.label-style {
+  font-size: 12px;
+  color: $devui-text;
+  letter-spacing: 0;
+  margin-left: 10px;
+}
+
+.email-style {
+  font-size: 12px;
+  color: $devui-placeholder;// TODO: Color-Question
+  letter-spacing: 0;
+  margin-left: 10px;
+}
+
+.overlay-mask {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 9;
+}
+
+.drop-down-item {
+  padding: 0 10px;
+  height: 30px;
+  line-height: 30px;
+  cursor: pointer;
+
+  &:hover {
+    background: $devui-list-item-hover-bg;
+    color: $devui-list-item-hover-text;
+  }
+}
+
+.filter-item-active {
+  background: $devui-list-item-active-bg;
+  color: $devui-list-item-active-text;
+}
+
+.edit-padding-fix {
+  margin-top: -6px;
+  margin-bottom: -6px;
+}
+
+.filter-icon {
+  display: inline-block;
+  vertical-align: middle;
+  visibility: hidden;
+  cursor: pointer;
+  height: 16px;
+  margin-top: -1px; // 解决漏斗形状视觉效果不局中
+
+  > svg g {
+    fill: $devui-dividing-line;
+  }
+
+  &:hover {
+    > svg g {
+      fill: $devui-icon-fill-active-hover;
+    }
+  }
+}
+
+.filter-icon-active {
+  visibility: visible !important;
+
+  > svg g {
+    fill: $devui-icon-fill-active;
+  }
+
+  &:hover {
+    > svg g {
+      fill: $devui-icon-fill-active-hover;
+    }
+  }
+}
+
+.devui-adjust-dropdown-offsetY {
+  padding-bottom: 12px;
+  box-shadow: none !important;
+}

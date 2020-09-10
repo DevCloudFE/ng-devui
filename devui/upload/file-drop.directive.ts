@@ -1,11 +1,13 @@
 import { Directive, EventEmitter, ElementRef, HostListener, Input, Output } from '@angular/core';
 
 
-@Directive({ selector: '[d-file-drop]' }) // tslint:disable-line
+@Directive({
+  selector: '[d-file-drop]' // tslint:disable-line
+})
 export class FileDropDirective {
   @Input() enableDrop = false;
   @Input() isSingle = false;
-  @Output() public fileOver: EventEmitter<any> = new EventEmitter();
+  @Output() public fileOver: EventEmitter<any> = new EventEmitter<any>();
   @Output() public fileDrop: EventEmitter<File[]> = new EventEmitter<File[]>();
 
   protected element: ElementRef;
@@ -62,7 +64,7 @@ export class FileDropDirective {
   }
 
   protected _getTransfer(event: any): any {
-    return event.dataTransfer ? event.dataTransfer : event.originalEvent.dataTransfer; // jQuery fix;
+    return event.dataTransfer ? event.dataTransfer : event.originalEvent.dataTransfer;
   }
 
   protected _preventAndStop(event: any): any {

@@ -1,20 +1,16 @@
 import {
   Component,
-  HostBinding,
   ViewEncapsulation,
   OnInit,
-  Renderer2,
   OnDestroy,
+  Renderer2,
   NgZone
 } from '@angular/core';
-
-import {
-  Router,
-  Routes
-} from '@angular/router';
-import {groupBy, map, indexOf} from 'lodash-es';
+import { cloneDeep } from 'lodash-es';
+import { Routes } from '@angular/router';
+import { groupBy, map } from 'lodash-es';
 import { routesConfig } from './component.route';
-import { fromEvent, Subscription } from 'rxjs';
+import { Subscription, fromEvent } from 'rxjs';
 
 @Component({
   selector: 'cd-app-content', // tslint:disable-line
@@ -26,9 +22,10 @@ export class AppContentComponent implements OnInit, OnDestroy {
   types = ['通用'];
   routes: Routes = [];
   groupedRoutes: any;
+  componentsData = [];
   clickSub: Subscription = new Subscription();
-
-  constructor(private router: Router, private renderer2: Renderer2, private ngZone: NgZone) {
+  componentsDataDisplay: any;
+  constructor(private renderer2: Renderer2, private ngZone: NgZone) {
     const routesWithData = map(routesConfig, (route) => {
       if (!route.data) {
         route.data = {};
@@ -39,36 +36,35 @@ export class AppContentComponent implements OnInit, OnDestroy {
       (route) => {
         return (route as any).data.type || '通用';
       });
-
     this.groupedRoutes = [];
-    for ( const  key in groupedRoutesObj) {
+    for (const key in groupedRoutesObj) {
       if (key) {
-        const group = groupedRoutesObj[key].sort(function (s1, s2) {
-        s1 = (s1.data.name || '').toUpperCase();
-        s2 = (s2.data.name || '').toUpperCase();
-        if (s1 < s2) {
-            return -1;
+        const group = groupedRoutesObj[key].map((item) => {
+          if (item.data.name) {
+            return {
+              title: item.data.name + ' ' + item.data.cnName,
+              link: item.path,
+            };
+          } else {
+            return {};
+          }
         }
-        if (s1 > s2) {
-            return 1;
-        }
-          return 0;
-        });
-        this.groupedRoutes.push({
-          [key] : group
-        });
-      }
-    }
-
-    const allKeys = Object.keys(groupedRoutesObj);
-    for (let i = 0; i < allKeys.length; i++) {
-      const key = allKeys[i];
-      if (indexOf(this.types, key) === -1) {
-        this.types.push(key);
+        ).filter((item) => Object.keys(item).length !== 0)
+          .sort(function (s1, s2) {
+            const prev = (s1.title).toUpperCase();
+            const next = (s2.title).toUpperCase();
+            if (prev < next) {
+              return -1;
+            }
+            if (prev > next) {
+              return 1;
+            }
+            return 0;
+          });
+        this.componentsData.push({ title: key, children: group, open: true });
       }
     }
   }
-
   ngOnInit(): void {
     this.ngZone.runOutsideAngular(() => {
       const menuLink = document.querySelector('#menuLink');
@@ -90,6 +86,16 @@ export class AppContentComponent implements OnInit, OnDestroy {
           this.renderer2.removeClass(wrapper, 'active');
         }
       }));
+    });
+    this.onSearch('');
+  }
+
+  onSearch(event) {
+    this.componentsDataDisplay = cloneDeep(this.componentsData).filter(catalog => {
+      catalog.children = catalog.children.filter(item => {
+        return item.title.toLowerCase().includes(event.toLowerCase());
+      });
+      return catalog.children.length;
     });
   }
 

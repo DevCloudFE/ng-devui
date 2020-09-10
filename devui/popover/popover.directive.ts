@@ -7,7 +7,8 @@ import {
   Input,
   OnInit,
   OnDestroy,
-  ViewContainerRef } from '@angular/core';
+  ViewContainerRef,
+  TemplateRef } from '@angular/core';
 import { OverlayContainerRef } from 'ng-devui/overlay-container';
 import { PopoverComponent } from './popover.component';
 import { fromEvent, Subscription,  merge } from 'rxjs';
@@ -19,8 +20,11 @@ import { PopoverType, PositionType, TriggerType } from './popover.types';
 })
 export class PopoverDirective implements OnInit, OnDestroy {
   popoverComponentRef: ComponentRef<PopoverComponent>;
-  _content: string | HTMLElement;
+  _content: string | HTMLElement | TemplateRef<any>;
   private subscription: Subscription = new Subscription();
+  private blurSub: Subscription = new Subscription();
+  private blurSubscription: Subscription = new Subscription();
+  private hideTimer;
   /**
    * popover内容
    */
@@ -42,7 +46,7 @@ export class PopoverDirective implements OnInit, OnDestroy {
   /**
    * popover显示位置
    */
-  @Input() position: PositionType = 'top';
+  @Input() position: PositionType | PositionType[] = ['top', 'right', 'bottom', 'left'];
   /**
    * 是否显示动画
    */
@@ -59,8 +63,16 @@ export class PopoverDirective implements OnInit, OnDestroy {
 
   @Input() popType: PopoverType = 'default';
 
+  @Input() popMaxWidth: number;
+
   // 触发 popover 的方式（点击/鼠标悬停等）
   @Input() trigger: TriggerType = 'click';
+
+  // 是否可以移入popover内部
+  @Input() hoverToContent = false; // 废弃
+
+  // 触发移入popover内部的延迟时间
+  @Input() hoverDelayTime = 0;
 
   @Input() set visible(_isShow: boolean) {
     if (_isShow) {
@@ -69,6 +81,10 @@ export class PopoverDirective implements OnInit, OnDestroy {
     } else {
       this.hide();
     }
+  }
+
+  private get eleAppendToBody() {
+    return this.appendToBody || this.triggerElementRef.nativeElement.style.position === 'fixed';
   }
 
   constructor(private triggerElementRef: ElementRef,
@@ -88,7 +104,7 @@ export class PopoverDirective implements OnInit, OnDestroy {
   }
 
   createPopover() {
-    if (this.appendToBody) {
+    if (this.eleAppendToBody) {
       this.popoverComponentRef = this.overlayContainerRef.createComponent(
         this.componentFactoryResolver.resolveComponentFactory(PopoverComponent)
       );
@@ -105,15 +121,15 @@ export class PopoverDirective implements OnInit, OnDestroy {
       triggerElementRef: this.triggerElementRef,
       position: this.position,
       popType: this.popType,
+      popMaxWidth: this.popMaxWidth,
       scrollElement: this.scrollElement,
-      appendToBody: this.appendToBody,
+      appendToBody: this.eleAppendToBody,
       zIndex: this.zIndex
     });
   }
 
   show() {
     this.hide();
-
     if (!this.popoverComponentRef) {
       this.createPopover();
     }
@@ -122,6 +138,15 @@ export class PopoverDirective implements OnInit, OnDestroy {
       this.popoverComponentRef.instance.show();
     }
     document.addEventListener('click', this.onDocumentClick);
+    if (this.trigger === 'hover' && this.hoverDelayTime) {
+      this.blurSubscription = fromEvent(this.popoverComponentRef.instance.elementRef.nativeElement, 'mouseleave')
+      .subscribe((event: MouseEvent) => {
+        if (event.type === 'mouseleave' && this.controlled) {
+          this.hide();
+        }
+      });
+      this.blurSub.add(this.blurSubscription);
+    }
   }
 
   destroy() {
@@ -150,7 +175,18 @@ export class PopoverDirective implements OnInit, OnDestroy {
             this.show();
           }
           if (event.type === 'mouseleave' && this.controlled) {
-            this.hide();
+            if (this.hoverDelayTime) {
+              clearTimeout(this.hideTimer);
+              this.hideTimer = setTimeout(() => {
+                const relatedTarget = event.relatedTarget;
+                if (!this.triggerElementRef.nativeElement.contains(relatedTarget) &&
+                !(this.popoverComponentRef && this.popoverComponentRef.instance.elementRef.nativeElement.contains(relatedTarget))) {
+                  this.hide();
+                }
+              }, this.hoverDelayTime);
+            } else {
+              this.hide();
+            }
           }
         })
       );
@@ -160,9 +196,16 @@ export class PopoverDirective implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.destroy();
     this.subscription.unsubscribe();
+    if (this.blurSub) {
+      this.blurSub.unsubscribe();
+    }
   }
 
   hide() {
+    if (this.blurSubscription) {
+      this.blurSubscription.unsubscribe();
+      this.blurSub.remove(this.blurSubscription);
+    }
     if (this.popoverComponentRef) {
       if (!this.showAnimate) {
         this.destroy();

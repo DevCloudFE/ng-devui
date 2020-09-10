@@ -6,20 +6,20 @@ import {
 
 @Component({
   selector: 'd-loading',
-  template: `<div class="loading-wrapper">
+  template: `<div class="devui-loading-wrapper">
                 <ng-container *ngTemplateOutlet="loadingTemplateRef ? loadingTemplateRef : default;">
                 </ng-container>
                 <ng-template #default>
                     <div class="devui-spinner-wrapper"
-                         [ngClass]="{'fix-loading-position': !customPosition}"
+                         [ngClass]="{'devui-fix-loading-position': !customPosition,'devui-message-wrapper':!!message}"
                          [style.top]="top"
                          [style.left]="left">
                         <div class="devui-busy-default-sign">
                             <div class="devui-busy-default-spinner">
-                                <div class="bar1"></div>
-                                <div class="bar2"></div>
-                                <div class="bar3"></div>
-                                <div class="bar4"></div>
+                                <div class="devui-loading-bar1"></div>
+                                <div class="devui-loading-bar2"></div>
+                                <div class="devui-loading-bar3"></div>
+                                <div class="devui-loading-bar4"></div>
                             </div>
                             <div class="devui-busy-default-text" *ngIf="!!message">{{message}}</div>
                         </div>

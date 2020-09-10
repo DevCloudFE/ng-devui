@@ -16,6 +16,8 @@ export class ModalFooterComponent {
     cssClass?: string,
     text: string,
     handler: ($event: Event) => void,
-    btnwidth?: string
+    btnwidth?: string,
+    autofocus?: boolean,
+    disabled: boolean
   }>;
 }

@@ -1,24 +1,22 @@
 @import '../style/theme/color';
 
-.table-row-selected {
-  background-color: $focus3;
-}
-
 .detail-content {
-  color: $dark1;
+  color: $devui-text;
   font-size: 12px;
-  font-weight: 100;
-  background-color: $gray3;
+  font-weight: 400;
+  background-color: $devui-area;
 }
 
 .child-table {
-  &:hover  {
-    background: transparent!important;
+  &:hover {
+    background: transparent !important;
   }
+
   .devui-table {
     background: transparent;
     margin-bottom: 0;
   }
+
   & > td {
     padding: 0 0 0 0;
     border: 0;
@@ -26,5 +24,5 @@
 }
 
 .expand-row:hover {
-  background: inherit!important;
+  background: inherit !important;
 }

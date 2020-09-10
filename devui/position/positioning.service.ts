@@ -91,7 +91,7 @@ export class PositionService {
     return this.documentRef.body;
   }
 
-  positionElements(hostElement: HTMLElement, targetElement: HTMLElement, placement: string, appendToBody?: boolean): ClientRect {
+  positionElements(hostElement: HTMLElement, targetElement: HTMLElement, placement: string | string[], appendToBody?: boolean): any {
     const hostElPosition = appendToBody ? this.offset(hostElement, false) : this.position(hostElement, false);
     const shiftWidth: any = {
       left: hostElPosition.left,
@@ -104,10 +104,8 @@ export class PositionService {
       bottom: hostElPosition.top + hostElPosition.height
     };
     const targetElBCR = targetElement.getBoundingClientRect();
-    const placementPrimary = placement.split('-')[0] || 'top';
-    const placementSecondary = placement.split('-')[1] || 'center';
 
-    const targetElPosition: ClientRect = {
+    const targetElPosition: any = {
       height: targetElBCR.height || targetElement.offsetHeight,
       width: targetElBCR.width || targetElement.offsetWidth,
       top: 0,
@@ -115,6 +113,18 @@ export class PositionService {
       left: 0,
       right: targetElBCR.width || targetElement.offsetWidth
     };
+
+    let placementPrimary: string;
+    let placementSecondary: string;
+
+    if (Array.isArray(placement)) {
+      const targetPlacement = this.getPlacement(hostElement, targetElement, placement);
+      placementPrimary = targetPlacement[0];
+      placementSecondary = targetPlacement[1];
+    } else {
+      placementPrimary = placement.split('-')[0] || 'top';
+      placementSecondary = placement.split('-')[1] || 'center';
+    }
 
     switch (placementPrimary) {
       case 'top':
@@ -147,8 +157,77 @@ export class PositionService {
     targetElPosition.bottom = Math.round(targetElPosition.bottom);
     targetElPosition.left = Math.round(targetElPosition.left);
     targetElPosition.right = Math.round(targetElPosition.right);
+    targetElPosition.placementPrimary = placementPrimary;
+    targetElPosition.placementSecondary = placementSecondary;
 
     return targetElPosition;
+  }
+
+
+  // 根据传入数组选取第一个合适的位置
+  private getPlacement(hostElement: HTMLElement, targetElement: HTMLElement, placement: string[]) {
+
+    const hostElPosition = this.offset(hostElement, false);
+    const shiftWidth: any = {
+      left: hostElPosition.left,
+      center: hostElPosition.left + hostElPosition.width / 2 - targetElement.offsetWidth / 2,
+      right: hostElPosition.left + hostElPosition.width
+    };
+    const shiftHeight: any = {
+      top: hostElPosition.top,
+      center: hostElPosition.top + hostElPosition.height / 2 - targetElement.offsetHeight / 2,
+      bottom: hostElPosition.top + hostElPosition.height
+    };
+
+    let placementPrimary = placement[0].split('-')[0] || 'top';
+    let placementSecondary = placement[0].split('-')[1] || 'center';
+
+    for (let i = 0; i < placement.length; i++) {
+      const placementPrimaryTemp = placement[i].split('-')[0] || 'top';
+      const placementSecondaryTemp = placement[i].split('-')[1] || 'center';
+
+      let top, left;
+      switch (placementPrimaryTemp) {
+        case 'top':
+          top = hostElPosition.top - targetElement.offsetHeight;
+          left = shiftWidth[placementSecondaryTemp];
+          break;
+        case 'bottom':
+          top = shiftHeight[placementPrimaryTemp];
+          left = shiftWidth[placementSecondaryTemp];
+          break;
+        case 'left':
+          top = shiftHeight[placementSecondaryTemp];
+          left = hostElPosition.left - targetElement.offsetWidth;
+          break;
+        case 'right':
+          top = shiftHeight[placementSecondaryTemp];
+          left = shiftWidth[placementPrimaryTemp];
+          break;
+      }
+      if (this.isInViewPort(targetElement, {offsetLeft: left, offsetTop: top})) {
+        placementPrimary = placement[i].split('-')[0] || 'top';
+        placementSecondary = placement[i].split('-')[1] || 'center';
+        return [placementPrimary, placementSecondary];
+      }
+    }
+    return [placementPrimary, placementSecondary];
+  }
+
+  private isInViewPort(ele, {offsetLeft, offsetTop}) {
+    const targetElBCR = ele.getBoundingClientRect();
+    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+    const viewPortWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+    const height = targetElBCR.height || targetElBCR.offsetHeight;
+    const width = targetElBCR.width || targetElBCR.offsetWidth;
+    offsetTop = offsetTop || ele.offsetTop;
+    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    const top = offsetTop - scrollTop;
+    offsetLeft = offsetLeft || ele.offsetLeft;
+    const scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft;
+    const left = offsetLeft - scrollLeft;
+
+    return top + height <= viewPortHeight && top > 0 && left + width <= viewPortWidth && left > 0;
   }
 
   private getStyle(element: HTMLElement, prop: string): string {

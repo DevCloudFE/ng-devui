@@ -1,0 +1,51 @@
+<ng-container *ngIf="!disabled">
+  <a
+    class="devui-over-flow-ellipsis"
+    [routerLink]="path"
+    [queryParams]="queryParams"
+    [fragment]="fragment"
+    [routerLinkActive]="'devui-router-active'"
+    target="{{ target }}"
+    rel="noopener"
+    title="{{ title }}"
+  >
+    <div
+      class="devui-accordion-splitter"
+      [ngClass]="{ 'devui-parent-list': deepth === 0 }"
+      [ngStyle]="{ left: deepth * 20 + 10 + 'px' }"
+    ></div>
+    <ng-container *ngIf="!itemTemplate">
+      {{ title }}
+    </ng-container>
+    <ng-template
+      *ngIf="itemTemplate"
+      [ngTemplateOutlet]="itemTemplate"
+      [ngTemplateOutletContext]="{
+        parent: parent,
+        item: item,
+        deepth: deepth
+      }"
+    ></ng-template>
+  </a>
+</ng-container>
+<ng-container *ngIf="disabled">
+  <a class="devui-over-flow-ellipsis" title="{{ title }}">
+    <div
+      class="devui-accordion-splitter"
+      [ngClass]="{ 'devui-parent-list': deepth === 0 }"
+      [ngStyle]="{ left: deepth * 20 + 10 + 'px' }"
+    ></div>
+    <ng-container *ngIf="!itemTemplate">
+      {{ title }}
+    </ng-container>
+    <ng-template
+      *ngIf="itemTemplate"
+      [ngTemplateOutlet]="itemTemplate"
+      [ngTemplateOutletContext]="{
+        parent: parent,
+        item: item,
+        deepth: deepth
+      }"
+    ></ng-template>
+  </a>
+</ng-container>

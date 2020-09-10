@@ -1,0 +1,27 @@
+<div class="demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 60, bottom: 0 }">
+  <d-demo-nav [navItems]="navItems"></d-demo-nav>
+  <div class="demo-example" [dAnchor]="'gantt-basic'">
+    <div class="demo-title">基本用法</div>
+    <div class="demo-text">
+      <ul style="list-style: inside;">
+        <li>d-gantt-scale（时间轴）容器作为时间轴标线的定位父级元素，须设置position或者是table、td、th、body元素</li>
+        <li>
+          d-gantt-scale（时间轴）容器和d-gantt-bar（时间条）容器宽度须通过GanttService提供的方法根据起止时间计算后设置，初始化之后还须订阅ganttScaleConfigChange动态设置
+        </li>
+        <li>
+          时间条move、resize事件会改变该时间条起止时间和时间轴的起止时间，订阅时间条resize、move事件和ganttScaleConfigChange来记录变化
+        </li>
+        <li>响应时间条move、resize事件调整最外层容器的滚动以获得更好的体验</li>
+      </ul>
+    </div>
+    <d-codebox id="basic" [sourceData]="basicSource">
+      <d-basic demo></d-basic>
+    </d-codebox>
+  </div>
+  <div class="demo-example" [dAnchor]="'gantt-in-datatable'">
+    <div class="demo-title">与datatable组件结合的甘特图</div>
+    <d-codebox id="inTable" [sourceData]="inTableSource">
+      <d-table-gantt demo></d-table-gantt>
+    </d-codebox>
+  </div>
+</div>

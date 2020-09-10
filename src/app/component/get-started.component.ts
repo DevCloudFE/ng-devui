@@ -8,7 +8,7 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import * as hljs from 'highlight.js/lib/highlight';
 
-['bash', 'typescript'].forEach((langName) => {
+['bash', 'typescript', 'json'].forEach((langName) => {
   const langModule = require(`highlight.js/lib/languages/${langName}`);
   hljs.registerLanguage(langName, langModule);
 });
@@ -17,17 +17,17 @@ import * as hljs from 'highlight.js/lib/highlight';
   template: `
     <div class="get-start">
     <div class="readme">
-    <div [innerHTML]="readMe" #documentation></div>
+    <div [innerHTML]="readMe | safe: 'html'" #documentation></div>
     </div>
     </div>
   `,
-    styles: [
-      `
+  styles: [
+    `
       .readme {
         box-sizing:border-box;
       }
       `
-    ],
+  ],
 })
 export class GetStartedComponent implements AfterViewInit {
   readMe: HTMLElement = require('!html-loader!markdown-loader!./getStarted.md');
@@ -38,7 +38,6 @@ export class GetStartedComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     document.querySelectorAll('pre code').forEach((block) => {
-      console.log(block);
       hljs.highlightBlock(block);
     });
   }

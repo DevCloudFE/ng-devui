@@ -1,0 +1,21 @@
+$font-size-primary: 16px;
+$font-size-secondary-card-title: 14px;
+$font-size-modal-title: 18px;
+$font-size-base: 12px;
+
+$font-title-weight: bold;
+$font-content-weight: normal;
+
+$line-height-base: 1.5;
+
+@mixin font-content() {
+  font-size: $font-size-base;
+  font-weight: $font-content-weight;
+  line-height: $line-height-base;
+}
+
+@mixin font-title($font-size: $font-size-primary) {
+  font-size: $font-size;
+  font-weight: $font-title-weight;
+  line-height: $line-height-base;
+}

@@ -2,43 +2,54 @@
 @import '../style/theme/variables';
 @import '../style/mixins/index';
 
+$keyframe-blue: #5e7ce0;
+
 :host {
   display: block;
 }
 
-.tree-node {
-  color: $dark2;
+.devui-text-ellipsis {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.devui-tree-node {
+  color: $devui-text-weak;
   line-height: 1;
   white-space: nowrap;
+  position: relative;
+  z-index: 0;
 
-  .tree-node__content {
+  .devui-tree-node__content {
     display: inline-flex;
     align-items: center;
-    font-size: 14px;
-  }
+    font-size: 12px;
+    padding-right: 10px;
+    width: 100%;
 
-  .tree-node__content--value-wrapper {
-    display: inline-flex;
-    align-items: center;
-    padding: .1em;
-    margin: .3em 0;
-
-    &.isMatch {
-      color: $focus1;
-      border: 1px solid $gray2;//#E8F0FD;
-      border-radius: .2em;
+    &:hover {
+      background-color: $devui-list-item-hover-bg;
     }
   }
 
-  .tree-node__children {
-    padding-left: .8em;
+  .devui-tree-node__content--value-wrapper {
+    display: inline-flex;
+    align-items: center;
+    height: 38px;
+    width: 100%;
+  }
+
+  .devui-tree-node__children {
+    padding-left: 10px;
+
     &:first-child {
       border-left-color: transparent;
     }
 
-    .tree-node {
-      margin-left: 1.2em;
-      content: "";
+    .devui-tree-node {
+      margin-left: 14px;
+      content: '';
       position: relative;
 
       &:last-child {
@@ -47,106 +58,246 @@
     }
   }
 
-  .tree-node--parent {
-  }
+  .devui-tree-node__title {
+    @extend .devui-text-ellipsis;
 
-  .tree-node__title {
-    margin-left: .4em;
-    padding: .1em;
+    margin-left: 5px;
     display: inline-block;
     border: 1px dashed transparent;
     border-radius: 2px;
-    cursor: pointer;
+    max-width: 100%;
+
+    &:not(.disabled) {
+      cursor: pointer;
+    }
 
     &.active {
-      background-color: $focus3;
-      color: $focus1;
+      background-color: $devui-list-item-selected-bg;
+      color: $devui-brand;
       text-decoration: none;
       border-color: transparent;
     }
   }
 
-  .tree-node__edit {
-    margin-left: .4em;
-    padding: .1em;
-    > .input-sm {
+  .devui-tree-node__edit {
+    margin-left: 0.4em;
+    padding: 0.1em;
+
+    > .devui-input-sm {
       height: 26px;
-      &.error, &.error:hover, &.error:focus{
-        border-color: $status-red;
+
+      &.error,
+      &.error:hover,
+      &.error:focus {
+        border-color: $devui-danger;
       }
     }
   }
 
-  .tree-node__leaf {
-    cursor: default;
+  .devui-tree-node__leaf {
+    &:not(.disabled) {
+      cursor: default;
+    }
 
-    .tree-node__leaf--default {
+    .devui-tree-node__leaf--default {
       color: #f2a71f;
     }
-  }
 
-  .tree-node__folder {
-    display: inline-block;
-    vertical-align: middle;
-    cursor: pointer;
-    user-select: none;
-
-    .tree-node__folder--default {
-      color: #F2B806;
+    .devui-leaf-icon-none {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
     }
   }
 
-  .loading-children {
+  .devui-tree-node__folder {
+    display: inline-block;
+    vertical-align: middle;
+    user-select: none;
+    font-size: 16px;
+    height: 16px;
+    line-height: 16px;
+
+    .devui-tree-node__folder--icon {
+      display: inline-block;
+      height: 16px;
+      line-height: 16px;
+    }
+
+    &:not(.disabled) {
+      cursor: pointer;
+    }
+
+    .devui-tree-node__folder--default {
+      color: #f2b806;
+    }
+  }
+
+  .devui-loading-children {
     display: inline-block;
     vertical-align: middle;
     margin-left: 0.5em;
-    margin-top: .15em;
-  }
-
-  .loading-children:after {
-    content: 'loading ...';
-    color: $status-blue;
+    margin-top: 0.15em;
+    color: $devui-info;
     font-style: italic;
     font-size: 1em;
-    animation-name: loading-children;
+    animation-name: devui-loading-children;
     animation-duration: 2s;
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite;
   }
-
-
-  @keyframes loading-children {
+  @keyframes devui-loading-children {
     0% {
-      color: lighten($status-blue, 0.95);
+      color: lighten($keyframe-blue, 0.95);
     }
+
     12.5% {
-      color: lighten($status-blue, 0.85);
+      color: lighten($keyframe-blue, 0.85);
     }
+
     25% {
-      color: lighten($status-blue, 0.75);
+      color: lighten($keyframe-blue, 0.75);
     }
+
     37.5% {
-      color: lighten($status-blue, 0.65);
+      color: lighten($keyframe-blue, 0.65);
     }
+
     50% {
-      color: lighten($status-blue, 0.55);
+      color: lighten($keyframe-blue, 0.55);
     }
+
     62.5% {
-      color: lighten($status-blue, 0.45);
+      color: lighten($keyframe-blue, 0.45);
     }
+
     75% {
-      color: lighten($status-blue, 0.35);
+      color: lighten($keyframe-blue, 0.35);
     }
+
     87.5% {
-      color: lighten($status-blue, 0.1);
+      color: lighten($keyframe-blue, 0.1);
     }
+
     100% {
-      color: $status-blue;
+      color: $keyframe-blue;
     }
   }
 
-  svg.svg-icon > g > g > path {
-    fill: $dark2;
+  svg.svg-icon path {
+    fill: $devui-icon-text;
+  }
+
+  svg.svg-icon rect {
+    stroke: $devui-icon-text;
+  }
+
+  &.devui-tree-node__open:not(.devui-tree-node__customIcon) {
+    & > .devui-tree-node__content svg.svg-icon path {
+      fill: $devui-icon-fill-active;
+    }
+
+    & > .devui-tree-node__content svg.svg-icon rect {
+      stroke: $devui-icon-fill-active;
+    }
+
+    & > .devui-tree-node__content svg.svg-icon.svg-icon-close rect:last-child {
+      stroke: none;
+      fill: $devui-icon-fill-active;
+    }
+  }
+
+  svg.svg-icon.svg-icon-close rect:last-child {
+    stroke: none;
+    fill: $devui-icon-text;
   }
 }
 
+::ng-deep .devui-tree-mask {
+  background: $devui-list-item-hover-bg;
+}
+
+/* 视觉融合灰线 */
+.devui-tree-node.devui-tree-without-virtual-scroll {
+  &.devui-tree-node__open {
+    & > .devui-tree-node__content {
+      position: relative;
+
+      &::after {
+        content: '';
+        width: 1px;
+        height: 4px; // 总高38px减去图标高14px为24px，取下半边12px，灰线举例图标8px，得出高度4px
+        background-color: $devui-dividing-line;
+        position: absolute;
+        left: 9px; // 距离最左边9px
+        top: calc(100% - 4px); // 参考上面高度计算
+      }
+    }
+  }
+
+  & > .devui-tree-node__children {
+    position: relative;
+
+    &::before {
+      content: '';
+      width: 1px;
+      height: calc(100% - 19px); // 父级总高度减去半个content的高度
+      background-color: $devui-dividing-line;
+      position: absolute;
+      left: calc(10px - 1px); // 父级10px的padding减去自身1px宽度
+      top: 0;
+    }
+
+    .devui-tree-node__content {
+      // 只要是子级就都存在左边横线
+      position: relative;
+
+      &::before {
+        content: '';
+        width: 8px;
+        height: 1px;
+        background-color: $devui-dividing-line;
+        position: absolute;
+        left: calc(-1px - 14px); // 对接左侧灰线，自身margin为1.2em加上1px的线宽
+        top: 50%;
+      }
+    }
+  }
+}
+
+.devui-tree-vertical-line {
+  width: 1px;
+  background-color: $devui-dividing-line;
+  position: absolute;
+}
+
+.devui-tree-horizontal-line {
+  height: 1px;
+  background-color: $devui-dividing-line;
+  position: absolute;
+  top: 50%;
+  margin-left: -16px;
+}
+
+.toggle-disabled {
+  cursor: not-allowed !important;
+
+  svg.svg-icon rect {
+    stroke: $devui-disabled-text !important;
+  }
+
+  svg.svg-icon.svg-icon-close rect:last-child {
+    stroke: none !important;
+    fill: $devui-disabled-text !important;
+  }
+
+  svg.svg-icon path {
+    fill: $devui-disabled-text !important;
+  }
+}
+
+.select-disabled {
+  color: $devui-disabled-text !important;
+  cursor: not-allowed !important;
+  background-color: transparent !important;
+}

@@ -1,0 +1,39 @@
+<th
+  *ngIf="headerCheckable"
+  [attr.rowspan]="headerRowspan"
+  class="devui-checkable-cell"
+  [ngClass]="{ 'devui-sticky-left-cell': firstTh?.fixedLeft }"
+  [style.left]="'0px'"
+>
+  <d-checkbox
+    class="check-box-all"
+    [name]="'checkbox'"
+    (change)="onHeaderCheckChange($event)"
+    [(ngModel)]="headerChecked"
+    [halfchecked]="headerHalfChecked"
+    [disabled]="headerCheckDisabled"
+  ></d-checkbox>
+
+  <div *ngIf="headerCheckOptions && headerCheckOptions.length > 0" dDropDown appendToBody [trigger]="'hover'" class="select-options">
+    <div dDropDownToggle>
+      <svg
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        height="16px"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16px"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <g fill="none" fill-rule="evenodd" id="chevron_down" stroke="none" stroke-width="1">
+          <polygon points="4.5 5 8 8.76923077 11.5 5 13 6.61538462 8 12 3 6.61538462"></polygon>
+        </g>
+      </svg>
+    </div>
+    <ul dDropDownMenu class="devui-dropdown-menu devui-dropdown-overlay" role="menu">
+      <li *ngFor="let option of headerCheckOptions" role="menuitem" (click)="onOptionSelect(option)">
+        <a class="devui-dropdown-item disabled">{{ option.label }}</a>
+      </li>
+    </ul>
+  </div>
+</th>
+<ng-content></ng-content>

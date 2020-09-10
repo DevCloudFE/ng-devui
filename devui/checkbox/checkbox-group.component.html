@@ -1,12 +1,26 @@
 <div class="devui-checkbox-group">
-    <ul [class.checkbox-list-inline]="direction === 'row'">
-        <li *ngFor="let item of options_display;let i=index;" style="margin-top:15px;">
-            <span>
-                <d-checkbox [name]="name" [label]="item['value'][filterKey]?item['value'][filterKey]:item['value']"
-                    [(ngModel)]="item['isChecked']" [isShowTitle]="isShowTitle" [color]="color"
-                    [disabled]="item['value']['disabled']" [labelTemplate]="labelTemplate" (ngModelChange)="toggle($event,i)">
-                </d-checkbox>
-            </span>
-        </li>
-    </ul>
+  <ul [class.devui-checkbox-list-inline]="direction === 'row'">
+    <li
+      *ngFor="let item of options_display; let i = index"
+      [class.devui-checkbox-column-margin]="direction === 'column'"
+      [ngStyle]="{ 'width.px': itemWidth }"
+      [ngClass]="{ 'devui-checkbox-wrap': itemWidth !== undefined }"
+    >
+      <span>
+        <d-checkbox
+          [name]="name"
+          [label]="item['value'][filterKey] ? item['value'][filterKey] : item['value']"
+          [(ngModel)]="item['isChecked']"
+          [isShowTitle]="isShowTitle"
+          [color]="color"
+          [disabled]="item['value']['disabled']"
+          [labelTemplate]="labelTemplate"
+          [showAnimation]="showAnimation"
+          (ngModelChange)="toggle($event, i)"
+          [beforeChange]="beforeChange"
+        >
+        </d-checkbox>
+      </span>
+    </li>
+  </ul>
 </div>

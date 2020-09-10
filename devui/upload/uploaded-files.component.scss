@@ -1,11 +1,20 @@
+@import '../style/theme/color';
+
 table.devui-table {
-    width: 100%;
-    max-width: 100%;
-    margin-bottom: 20px;
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 20px;
 }
-table.devui-table > tbody > tr > td{
-    padding: 8px;
-    line-height: 1.42857143;
-    vertical-align: top;
-    border-top: 1px solid #ddd;
+
+table.devui-table > tbody > tr > td {
+  padding: 8px;
+  line-height: 1.5;
+  vertical-align: top;
+  border-top: 1px solid $devui-dividing-line;
+}
+
+.devui-upload-input {
+  padding: 5px 25px 5px 10px !important;
+  cursor: pointer;
+  text-overflow: ellipsis;
 }

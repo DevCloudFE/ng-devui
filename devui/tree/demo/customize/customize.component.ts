@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TreeNode } from 'ng-devui';
+import { TreeNode } from 'ng-devui/tree';
 
 @Component({
   selector: 'd-customize',
@@ -12,58 +12,76 @@ export class CustomizeComponent {
   iconParentClose = '<span class="icon icon-collapse"></span>';
   iconLeaf = '<span></span>';
   data2 = [{
-    'title': '资源',
+    'title': '父节点1',
     'data': { 'type': 'mix' },
     'open': true,
+    'status': '状态1',
     'children': [{
-      'title': '拓扑',
+      'title': '子节点1-1',
       'data': { 'type': 'mix' },
       'open': false,
+      'status': '状态1',
       'children': [{
-        'title': '拓扑管理',
-        'data': { 'type': 'ppt' }
+        'title': '子节点1-1-1',
+        'data': { 'type': 'ppt' },
+        'status': '状态2',
       }, {
-        'title': 'IP拓扑管理',
-        'data': { 'type': 'xls' }
+        'title': '子节点1-1-2',
+        'data': { 'type': 'xls' }, 'status': '状态2',
       }]
     }, {
-      'title': '监控工具',
+      'title': '子节点1-2',
       'data': { 'type': 'mix' },
       'open': false,
+      'status': '状态1',
       'children': [{
-        'title': '工具',
-        'data': { 'type': 'ppt' }
+        'title': '子节点1-2-1',
+        'data': { 'type': 'ppt' },
+        'status': '状态1',
       }, {
-        'title': '使用方法',
-        'data': { 'type': 'doc' }
+        'title': '子节点1-2-2',
+        'data': { 'type': 'doc' },
+        'status': '状态1',
       }]
     }]
   }, {
-    'title': '演示文稿',
+    'title': '父节点2',
     'data': { 'type': 'ppt' },
     'open': false,
+    'status': '状态1',
     'children': [{
-      'title': '前端维护',
-      'data': { 'type': 'ppt' }
+      'title': '子节点2-1',
+      'data': { 'type': 'ppt' },
+      'status': '状态1',
     }, {
-      'title': '后台维护',
-      'data': { 'type': 'ppt' }
+      'title': '子节点2-2',
+      'data': { 'type': 'ppt' },
+      'status': '状态1',
     }],
   }, {
-    'title': '报表',
+    'title': '父节点3',
     'data': { 'type': 'xls' },
     'open': false,
+    'status': '状态1',
     'children': [{
-      'title': '报表数据',
-      'data': { 'type': 'xls' }
+      'title': '子节点3-1',
+      'data': { 'type': 'xls' },
+      'status': '状态1',
     }, {
-      'title': '报表统计',
-      'data': { 'type': 'xls' }
+      'title': '子节点3-2',
+      'data': { 'type': 'xls' },
+      'status': '状态1',
     }]
   }];
 
   onOperableNodeSelected(treeNode: TreeNode) {
     console.log('selected: ', treeNode);
     this.currentSelectedNode = treeNode;
+  }
+  onBlurEdit(treeNode) {
+    treeNode.editable = false;
+  }
+  showNode(node) {
+    console.log(node);
   }
 }

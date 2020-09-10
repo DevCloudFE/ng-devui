@@ -1,6 +1,7 @@
 import { Component, OnInit, HostBinding, ViewChild, ElementRef, AfterContentInit } from '@angular/core';
 import { originSource, SourceType } from '../mock-data';
-import { TableExpandConfig } from '../../data-table.model';
+import { TableWidthConfig } from 'ng-devui/data-table';
+
 
 @Component({
   selector: 'd-expand-row',
@@ -27,13 +28,37 @@ import { TableExpandConfig } from '../../data-table.model';
   ]
 })
 export class ExpandRowComponent implements OnInit, AfterContentInit {
-  @ViewChild('quickAddRowTip', { static: true }) quickAddRowTip: ElementRef;
-  @ViewChild('quickAddRowContent', { static: true }) quickAddRowContent: ElementRef;
-  @ViewChild('addSubRowContent', { static: true }) addSubRowContent: ElementRef;
+  @ViewChild('quickAddRowTip') quickAddRowTip: ElementRef;
+  @ViewChild('quickAddRowContent') quickAddRowContent: ElementRef;
+  @ViewChild('addSubRowContent') addSubRowContent: ElementRef;
 
   basicDataSource: Array<SourceType> = JSON.parse(JSON.stringify(originSource.slice(0, 6)));
-  genderSource = ['male', 'female'];
-  headerExpandConfig: TableExpandConfig;
+  tableWidthConfig: TableWidthConfig[] = [
+    {
+      field: 'expand',
+      width: '36px'
+    },
+    {
+      field: '$index',
+      width: '50px'
+    },
+    {
+      field: 'firstName',
+      width: '150px'
+    },
+    {
+      field: 'lastName',
+      width: '150px'
+    },
+    {
+      field: 'gender',
+      width: '100px'
+    },
+    {
+      field: 'dob',
+      width: '100px'
+    }
+  ];
   defaultRowData = {
     firstName: '',
     lastName: '',
@@ -41,44 +66,41 @@ export class ExpandRowComponent implements OnInit, AfterContentInit {
     dob: new Date(1991, 3, 1),
   };
 
-  thisCellEditEnd(event) {
-    console.log('cellEditEnd');
-    console.log(event.rowItem);
-  }
-
+  headerNewForm: boolean;
   ngOnInit() {
+    this.basicDataSource[0].$expandConfig = { expand: false };
   }
 
-  ngAfterContentInit() {
-    this.headerExpandConfig = { expand: true, expandTemplateRef: this.quickAddRowTip };
-  }
+  ngAfterContentInit() {}
 
   newRow() {
-    this.headerExpandConfig.expandTemplateRef = this.quickAddRowContent;
+    this.headerNewForm = true;
   }
 
   quickRowAdded() {
     const newData = { ...this.defaultRowData };
     this.basicDataSource.unshift(newData);
-    this.headerExpandConfig.expandTemplateRef = this.quickAddRowTip;
+    this.headerNewForm = false;
   }
 
   quickRowCancel() {
-    this.headerExpandConfig.expandTemplateRef = this.quickAddRowTip;
+    this.headerNewForm = false;
   }
 
-  addSubData(index, item) {
-    this.basicDataSource[index].expandConfig = { expand: true, expandTemplateRef: this.addSubRowContent };
-  }
 
   subRowAdded(index, item) {
-    this.basicDataSource[index].expandConfig.expand = false;
+    this.basicDataSource[index].$expandConfig.expand = false;
     const newData = { ...this.defaultRowData };
     this.basicDataSource.splice(index + 1, 0, newData);
   }
 
   subRowCancel(index) {
-    this.basicDataSource[index].expandConfig.expand = false;
+    this.basicDataSource[index].$expandConfig.expand = false;
   }
 
+  toggleExpand(rowItem) {
+    if (rowItem.$expandConfig) {
+      rowItem.$expandConfig.expand = !rowItem.$expandConfig.expand;
+    }
+  }
 }

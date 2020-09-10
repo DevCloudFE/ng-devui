@@ -1,0 +1,20 @@
+.menu {
+  width: 200px;
+}
+
+.option {
+  line-height: 20px;
+  vertical-align: middle;
+  margin-top: 20px;
+}
+
+.option > d-toggle {
+  display: inline-block;
+  transform: translateY(3px);
+}
+
+@media (max-width: 250px) {
+  .menu {
+    width: 80%;
+  }
+}

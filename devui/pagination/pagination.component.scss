@@ -5,29 +5,38 @@
 }
 
 .devui-pagination {
-  .page-size {
+  .devui-page-size {
     display: inline-block;
     max-width: 100px;
     vertical-align: middle;
     margin: 0 10px 0 0;
     position: relative;
-    &.page-size-sm {
+
+    &.devui-page-size-sm {
       max-width: 60px;
     }
-    &.page-size-lg {
+
+    &.devui-page-size-lg {
       max-width: 100px;
+
+      li a.devui-pagination-link {
+        height: 46px;
+        line-height: 46px;
+      }
     }
   }
 
-  .total-size {
+  .devui-total-size {
     display: inline-block;
     position: relative;
-    margin: 0 20px 0 0px;
+    margin: 0 20px 0 0;
+    color: $devui-text-weak;
   }
 
-  .pagination {
-    display: inline-block;
-    margin: 20px 0;
+  .devui-pagination-list {
+    vertical-align: middle;
+    display: inline-flex;
+    align-items: center;
 
     > .disabled > a,
     > .disabled > a:hover,
@@ -38,165 +47,239 @@
     li {
       display: inline;
     }
+
     li.disabled a {
-      background: $white;
-      opacity: 0.3;
+      color: $devui-disabled-text;
+
+      svg g polygon {
+        fill: $devui-disabled-text;
+      }
     }
+
+    li.disabled:first-child a,
+    li.disabled:last-child a {
+      border-color: $devui-disabled-line;
+    }
+
     li:not(.disabled) {
       cursor: pointer;
-      a:hover, span:hover, a:focus, span:focus {
-        background: $hover-content;
+
+      a:hover,
+      span:hover,
+      a:focus,
+      span:focus {
+        background-color: $devui-list-item-hover-bg;
+        color: $devui-list-item-hover-text;
+        text-decoration: none; // 覆盖bootStrap默认样式
+      }
+
+      a:active {
+        background-color: $devui-primary;
+        color: $devui-light-text;
       }
 
       &.active a {
-        &:hover, &:focus, &:active {
-          background: $focus1;
+        background-color: $devui-list-item-active-bg;
+        color: $devui-list-item-active-text;
+        cursor: pointer;
+
+        &:hover {
+          background-color: $devui-list-item-active-hover-bg;
+          color: $devui-list-item-active-text;
         }
       }
 
-      a.pagination-link:hover svg g polygon {
-        fill: $focus1;
+      a.devui-pagination-link:hover:not(:active) svg g polygon {
+        fill: $devui-icon-fill-active-hover;
       }
 
-
-      a.pagination-link-lite:hover {
-        border: 1px solid $gray1 !important;
+      a.devui-pagination-link:active svg g polygon {
+        fill: $devui-light-text;
       }
     }
 
-    .pagination-link {
+    .devui-pagination-link {
       svg {
         vertical-align: middle;
+
+        g polygon {
+          fill: $devui-icon-text;
+        }
       }
     }
-    .pagination-link-lite {
+
+    .devui-pagination-link-lite {
       border: 1px solid transparent !important;
       border-radius: 2px;
     }
-
-   
   }
 
-  .pagination > li > a {
+  .devui-pagination-list > li > a {
     margin-left: 5px;
-    padding: 5px 12px;
-    line-height: 1.42857143;
+    padding: 3px 7px;
+    line-height: 1.5;
+    border-radius: 2px;
+    color: $devui-text-weak;
+    display: flex;
+    align-items: center;
   }
 
-  .pagination-sm > li > a {
-    padding: 4px 10px;
-    line-height: 1.66666667;
+  .devui-pagination-sm > li > a {
+    padding: 2px 6px;
+    line-height: 1.5;
     font-size: 12px;
   }
 
-  .pagination-lg > li > a {
-    padding: 9px 17px;
+  .devui-pagination-lg > li > a {
+    padding: 8px 12px;
     font-size: 16px;
-    line-height: 1.3333333;
+    line-height: 1.5;
   }
 
-  .pagination > li:first-child > a,
-  .pagination > li:last-child > a {
-    padding: 4px 11px;
-    border-radius: 1px;
-    border-width: 1px;
-    border-style: solid;
+  .devui-pagination-list > li:first-child > a,
+  .devui-pagination-list > li:last-child > a {
+    padding: 7px 11px;
+    height: 32px;
+    line-height: 32px;
   }
 
-  .pagination-sm > li:first-child > a,
-  .pagination-sm > li:last-child > a {
-    padding: 3px 4px;
+  .devui-pagination-sm > li:first-child > a,
+  .devui-pagination-sm > li:last-child > a {
+    border-radius: 2px;
+    height: 30px;
+    line-height: 30px;
   }
 
-  .pagination-lg > li:first-child > a,
-  .pagination-lg > li:last-child > a {
-    padding: 8px 16px;
+  .devui-pagination-sm > li:first-child > a {
+    padding: 6px 5px 6px 3px;
   }
 
-  .jump-container {
+  .devui-pagination-sm > li:last-child > a {
+    padding: 6px 3px 6px 5px;
+  }
+
+  .devui-pagination-lg > li:first-child > a,
+  .devui-pagination-lg > li:last-child > a {
+    padding: 13px 16px;
+    border-radius: 2px;
+    height: 46px;
+    line-height: 46px;
+  }
+
+  .devui-jump-container {
     display: inline-block;
     position: relative;
     margin: 0 10px 0 10px;
+    vertical-align: middle;
+
     .devui-input {
       display: inline-block;
-      width: 50px;
-      margin-right: 5px;
+      width: 3.5em;
+      vertical-align: middle;
     }
   }
 
-  .jump-button {
+  .devui-jump-button {
     display: inline-block;
-    border-width: 1px;
-    border-style: solid;
-    vertical-align: bottom;
+    vertical-align: middle;
     border-radius: 1px;
+    border: 1px solid $devui-line;
     cursor: pointer;
-    .go {
+    margin-left: 5px;
+
+    .devui-pagination-go {
       width: 0;
       height: 0;
       border-top-style: solid;
       border-left-style: solid;
       border-bottom-style: solid;
     }
-  }
 
-  .jump-size-default {
-    width: 32px;
-    height: 32px;
-    .go {
-      border-top-width: 8px;
-      border-left-width: 8px;
-      border-bottom-width: 8px;
-      margin: 8px auto;
+    &:hover {
+      border-color: $devui-brand-active;
+
+      .devui-pagination-go {
+        border-left-color: $devui-brand-active;
+      }
     }
   }
 
-  .jump-size-sm {
-    width: 30px;
-    height: 30px;
-    .go {
-      border-top-width: 6px;
-      border-left-width: 6px;
-      border-bottom-width: 6px;
-      margin: 9px auto;
-    }
-  }
-
-  .jump-size-lg {
+  .devui-jump-size-default {
     width: 34px;
     height: 34px;
-    .go {
-      border-top-width: 12px;
-      border-left-width: 12px;
-      border-bottom-width: 12px;
-      margin: 5px auto;
+
+    .devui-pagination-go {
+      width: 0;
+      height: 0;
+      border-top: 12px solid transparent;
+      border-left: 12px solid $devui-icon-text;
+      border-bottom: 12px solid transparent;
+      margin: 4px auto;
     }
   }
-  .lite-paginator {
+
+  .devui-jump-size-sm {
+    width: 24px;
+    height: 24px;
+
+    .devui-pagination-go {
+      width: 0;
+      height: 0;
+      border-top: 6px solid transparent;
+      border-left: 6px solid $devui-icon-text;
+      border-bottom: 6px solid transparent;
+      margin: 5px auto;
+    }
+
+    .devui-pagination-link {
+      height: 30px;
+      line-height: 32px;
+    }
+  }
+
+  .devui-jump-size-lg {
+    width: 46px;
+    height: 46px;
+
+    .devui-pagination-go {
+      width: 0;
+      height: 0;
+      border-top: 16px solid transparent;
+      border-left: 16px solid $devui-icon-text;
+      border-bottom: 16px solid transparent;
+      margin: 6px auto;
+    }
+  }
+
+  .devui-lite-paginator {
     display: inline-block;
     margin-right: 5px;
     width: 100px;
   }
-  
-  .pagination-config {
-    color: $dark1;
+
+  .devui-pagination-config {
+    color: $devui-text;
     position: relative;
     display: inline-block;
     vertical-align: middle;
     margin: 0 5px;
-  
-    .setup-icon {
+
+    .devui-setup-icon {
       line-height: 30px;
       cursor: pointer;
       display: flex;
+
+      svg g path {
+        fill: $devui-icon-text;
+      }
     }
-  
-    .config-container {
+
+    .devui-config-container {
       padding: 5px 0;
-      box-shadow: 0 0 6px 1px $dark-1-boxshadow;
+      box-shadow: 0 0 6px 1px $devui-shadow;
       border-radius: 2px;
       width: 150px;
-      background-color: $white;
+      background-color: $devui-connected-overlay-bg;
       line-height: 26px;
       position: absolute;
       left: -136px;
@@ -207,55 +290,71 @@
       -webkit-user-select: none;
       -ms-user-select: none;
       user-select: none;
-  
-      .pagination-config-item.page-size-config {
+
+      .devui-pagination-config-item.devui-page-size-config {
         border-bottom: none;
       }
-  
-      .pagination-config-item {
+
+      .devui-pagination-config-item {
         padding-bottom: 8px;
         padding-top: 5px;
-        border-bottom: 1px solid $gray2;
-  
-        .config-item-title {
-          color: $dark2;
+        border-bottom: 1px solid $devui-dividing-line;
+
+        .devui-config-item-title {
+          color: $devui-aide-text;
           padding-left: 10px;
           font-size: 12px;
           line-height: 22px;
         }
-  
-        .page-number {
+
+        .devui-page-number {
           padding-left: 10px;
           margin-top: 4px;
           display: flex;
           display: -ms-flexbox;
-  
+
           div {
-            color: $dark1;
+            color: $devui-text;
             cursor: pointer;
-            border-top: 1px solid $gray1;
-            border-bottom: 1px solid $gray1;
-            border-right: 1px solid $gray1;
+            border-top: 1px solid $devui-line;
+            border-bottom: 1px solid $devui-line;
+            border-right: 1px solid $devui-line;
             text-align: center;
             height: 26px;
             width: 26px;
           }
-  
+
           div:hover {
-            background-color: $hover-content;
+            background-color: $devui-list-item-hover-bg;
+            color: $devui-list-item-hover-text;
           }
-  
+
           div:first-child {
-            border-left: 1px solid $gray1;
+            border-left: 1px solid $devui-line;
           }
-  
-          .page-number div.choosed, .choosed {
-            color: $focus1;
-            background-color: $focus3 !important;
-            cursor: auto !important;
+
+          .devui-page-number div.choosed,
+          .choosed {
+            &:not(:hover):not(:active) {
+              color: $devui-list-item-active-text;
+              background-color: $devui-list-item-active-bg !important;
+              cursor: auto !important;
+            }
           }
         }
       }
     }
+  }
 }
+
+:host ::ng-deep .devui-input-sm {
+  height: 24px;
+  padding: 5px 5px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 2px;
+}
+
+:host ::ng-deep .devui-input-lg {
+  height: 46px;
 }

@@ -1,21 +1,66 @@
 @import '../style/mixins/index';
+@import '../style/theme/color';
 
-:host(.devui-dropdown-menu) {
+.devui-dropdown-menu {
   width: 100%;
-  margin: 0;
-  padding: 5px 0;
+  display: block;
+  margin-top: -1px;
 }
 
 .devui-dropdown-item {
-    cursor: pointer;
-    display: block;
-    width: 100%;
-    padding: 8px 1rem;
-    clear: both;
-    white-space: nowrap;
-    border: 0;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  padding: 8px 10px;
+  clear: both;
+  border: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  &.selected:not(.disabled) {
+    color: $devui-brand-active;
+  }
 }
 
-.scroll-height {
-    overflow-y: auto;
+.devui-no-result-template,
+.devui-is-searching-template {
+  display: block;
+  width: 100%;
+  padding: 8px 10px;
+  clear: both;
+  border: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: not-allowed;
+  background-color: $devui-disabled-bg;
+  color: $devui-disabled-text;
+
+  &:hover,
+  &:active,
+  &:hover:active {
+    background-color: $devui-unavailable;
+  }
+}
+
+/* 选项disabled */
+.devui-dropdown-item.disabled,
+.devui-dropdown-item.disabled:hover {
+  cursor: not-allowed;
+  color: $devui-disabled-text;
+}
+
+ul.devui-list-unstyled {
+  margin: 0;
+  overflow-y: auto;
+}
+
+.devui-dropdown-bg {
+  background: $devui-list-item-hover-bg;
+}
+
+.devui-popup-tips {
+  color: $devui-text-weak; // TODO: Color-Question
+  padding: 3px 1em;
 }

@@ -5,7 +5,7 @@
   "description": "DevUI components based on Angular",
   "engineStrict": true,
   "engines": {
-    "node": ">=8.0.0"
+    "node": ">=10.9.0"
   },
   "scripts": {
     "ng": "ng",
@@ -15,80 +15,106 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
+    "postinstall": "patch-package && ngcc",
     "lint:devui": "tslint -p devui/tsconfig.lint.json -c devui/tslint.json \"devui/**/*.ts\"",
     "lint:devui:fix": "tslint --fix -p devui/tsconfig.lint.json -c devui/tslint.json \"*.ts\"",
-    "build:devui": "node --max_old_space_size=4096 ./node_modules/@angular/cli/bin/ng build devui-lib",
+    "prettier": "prettier --config ./.prettierrc --write \"{devui,src}/**/*.html\"",
+    "stylelint": "stylelint \"{devui,src}/**/*.{scss,css}\"  --fix",
+    "build:devui": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build devui-lib --configuration production",
     "postbuild": "node scripts/move-assets.js",
     "postbuild:devui": "node scripts/copy-artifacts.js && npm run css-compile && npm run css-minify",
     "css-compile": "node-sass --output-style expanded --precision 6 --importer scripts/node-sass.importer.js ./devui/style/devui.scss ./publish/devui.css",
-    "css-minify": "cleancss --format breakWith=lf --output ./publish/devui.min.css ./publish/devui.css"
+    "css-minify": "cleancss --format breakWith=lf --output ./publish/devui.min.css ./publish/devui.css",
+    "build:devui:ivy": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build devui-lib"
   },
   "dependencies": {
-    "@angular/animations": "~8.2.14",
-    "@angular/cdk": "^8.2.3",
-    "@angular/common": "~8.2.14",
-    "@angular/compiler": "~8.2.14",
-    "@angular/core": "~8.2.14",
-    "@angular/forms": "~8.2.14",
-    "@angular/platform-browser": "~8.2.14",
-    "@angular/platform-browser-dynamic": "~8.2.14",
-    "@angular/router": "~8.2.14",
-    "@devui-design/icons": "^1.0.0",
+    "@angular/animations": "~9.1.12",
+    "@angular/cdk": "^9.2.4",
+    "@angular/common": "~9.1.12",
+    "@angular/compiler": "~9.1.12",
+    "@angular/core": "~9.1.12",
+    "@angular/forms": "~9.1.12",
+    "@angular/platform-browser": "~9.1.12",
+    "@angular/platform-browser-dynamic": "~9.1.12",
+    "@angular/router": "~9.1.12",
+    "@devui-design/icons": "^1.1.0",
+    "@types/lodash-es": "^4.17.3",
+    "bootstrap": "^4.4.1",
     "classlist.js": "^1.1.20150312",
     "core-js": "^2.5.4",
-    "date-fns": "^1.30.1",
-    "lodash-es": "^4.17.11",
+    "css-vars-ponyfill": "^2.3.2",
+    "date-fns": "1.30.1",
+    "enquire.js": "^2.1.6",
+    "lodash-es": "^4.17.15",
     "popper.js": "^1.15.0",
-    "zone.js": "~0.9.1"
+    "zone.js": "~0.10.2"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.803.25",
-    "@angular-devkit/build-ng-packagr": "~0.803.25",
-    "@angular/cli": "~8.3.25",
-    "@angular/compiler-cli": "~8.2.14",
-    "@angular/language-service": "^8.2.14",
+    "@angular-builders/custom-webpack": "^9.2.0",
+    "@angular-devkit/build-angular": "~0.901.9",
+    "@angular-devkit/build-ng-packagr": "~0.901.9",
+    "@angular/cli": "^9.1.9",
+    "@angular/compiler-cli": "~9.1.12",
+    "@angular/language-service": "^9.1.12",
     "@commitlint/cli": "^8.1.0",
     "@commitlint/config-conventional": "^8.1.0",
     "@types/jasmine": "~2.8.8",
     "@types/jasminewd2": "~2.0.3",
-    "@types/node": "~8.9.4",
+    "@types/node": "^12.11.1",
     "clean-css-cli": "^4.3.0",
-    "codelyzer": "^5.0.1",
+    "codelyzer": "^5.1.2",
     "highlight.js": "^9.15.8",
     "html-loader": "^0.5.5",
     "husky": "^2.2.0",
-    "jasmine-core": "~2.99.1",
+    "jasmine-core": "^3.5.0",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~4.0.0",
     "karma-chrome-launcher": "~2.2.0",
     "karma-coverage-istanbul-reporter": "~2.0.1",
     "karma-jasmine": "~1.1.2",
-    "karma-jasmine-html-reporter": "^0.2.2",
+    "karma-jasmine-html-reporter": "^1.5.3",
     "lint-staged": "^9.2.3",
     "markdown-loader": "^5.0.0",
     "marked": "^0.8.0",
-    "ng-packagr": "^5.4.0",
-    "ngx-accordion": "^0.0.17",
-    "node-sass": "^4.13.1",
+    "ng-packagr": "^9.0.0",
+    "node-sass": "^4.14.1",
+    "patch-package": "^6.2.2",
+    "prettier": "^2.0.2",
     "protractor": "~5.4.0",
-    "rxjs": "~6.5.4",
+    "rxjs": "~6.6.0",
     "shelljs": "^0.8.3",
+    "stylelint": "^13.3.2",
+    "stylelint-config-recommended-scss": "^4.2.0",
+    "stylelint-config-standard": "^20.0.0",
+    "stylelint-scss": "^3.17.0",
     "ts-node": "~7.0.0",
     "tsickle": "^0.37.0",
     "tslib": "^1.10.0",
     "tslint": "~5.11.0",
-    "typescript": "~3.5.3"
+    "typescript": "~3.8.3"
   },
   "lint-staged": {
     "devui/**/*.ts": [
-      "npm run lint:devui",
+      "tslint --fix -p devui/tsconfig.lint.json -c devui/tslint.json \"*.ts\"",
+      "git add"
+    ],
+    "src/**/*.ts": [
+      "tslint --fix  -c src/tslint.json \"*.ts\"",
+      "git add"
+    ],
+    "{devui,src}/**/*.html": [
+      "prettier --config ./.prettierrc --write",
+      "git add"
+    ],
+    "{devui,src}/**/*.{scss,css}": [
+      "stylelint --fix",
       "git add"
     ]
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "lint-staged"
     }
   }
 }

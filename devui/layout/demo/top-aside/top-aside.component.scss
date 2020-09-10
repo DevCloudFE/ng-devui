@@ -1,0 +1,65 @@
+@import '../../../style/theme/color';
+
+d-layout {
+  background-color: $devui-base-bg;
+}
+
+d-aside {
+  padding-left: 1px;
+}
+
+d-header {
+  text-align: left;
+  height: 40px;
+  background-color: #333854;
+  position: relative;
+
+  .logo {
+    position: absolute;
+    left: 0;
+    margin-left: 20px;
+    height: 40px;
+    width: 120px;
+    color: $devui-light-text;
+    font-size: 16px;
+    line-height: 40px;
+
+    .logo-devui {
+      margin-top: 7px;
+    }
+
+    .logo-devui,
+    .text {
+      display: inline-block;
+      vertical-align: top;
+    }
+  }
+
+  .search {
+    color: $devui-light-text;
+    margin-right: 40px;
+    position: absolute;
+    right: 0;
+  }
+}
+
+d-content {
+  padding: 0 40px;
+  background-color: $devui-global-bg;
+
+  d-breadcrumb {
+    margin-top: 8px;
+  }
+
+  .inner-content {
+    background-color: $devui-base-bg;
+    padding: 16px;
+    height: 100%;
+  }
+}
+
+d-footer {
+  color: $devui-light-text;
+  background-color: $devui-base-bg-dark;
+  padding: 9px 24px;
+}

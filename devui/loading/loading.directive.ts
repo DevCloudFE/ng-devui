@@ -13,7 +13,7 @@ import {
 } from '@angular/core';
 import { LoadingBackdropComponent } from './loading-backdrop.component';
 import { LoadingComponent } from './loading.component';
-import { Observable, from, forkJoin } from 'rxjs';
+import { Observable, from, forkJoin, Subscription } from 'rxjs';
 import { LoadingType } from './loading.types';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
@@ -45,6 +45,11 @@ export class LoadingDirective {
     if (loading === undefined) {
       return;
     }
+    if (loading instanceof Subscription) {
+      this.startLoading();
+      loading.add(() => this.endLoading());
+      return;
+    }
     const loadingArr = [].concat(loading).map(item => {
       if (item instanceof Observable) {
         return item;
@@ -60,12 +65,16 @@ export class LoadingDirective {
             return throwError(error);
           })
         )
-        .subscribe(
-          null,
-          () => {},
-          () => {
+        .subscribe({
+          next: null,
+          error: () => {
+            this.endLoading();
+          },
+          complete: () => {
             this.endLoading();
           }
+        }
+
         );
     }
   }
@@ -80,7 +89,7 @@ export class LoadingDirective {
     private viewContainerRef: ViewContainerRef,
     private injector: Injector,
     private elementRef: ElementRef
-  ) {}
+  ) { }
 
   private startLoading() {
     if (!this.loadingRef) {
@@ -104,7 +113,7 @@ export class LoadingDirective {
         loadingTemplateRef: this.loadingTemplateRef,
         top: this.view ? this.view.top : '50%',
         left: this.view ? this.view.left : '50%',
-        isCustomPosition: !!this.view // 用户未传入view时为undefined，返回false
+        isCustomPosition: !!this.view
       });
     }
   }

@@ -1,0 +1,59 @@
+<div dDropDown appendToBody [appendToBodyDirections]="['leftDown', 'leftUp', 'rightDown', 'rightUp']" [closeScope]="'blank'">
+  <div dDropDownToggle class="theme-toggle">
+    主题
+    <div class="theme-block">
+      <span class="brand-color"></span>
+      <span class="background-color"></span>
+    </div>
+  </div>
+  <div dDropDownMenu class="theme-menu">
+    <section>
+      <div class="title">主题颜色</div>
+      <div class="content theme-color">
+        <div
+          class="theme-brand"
+          [ngStyle]="{
+            backgroundColor: (themes[themePref + '-light-theme']?.data)['devui-brand']
+          }"
+          *ngFor="let themePref of ['devui', 'green']"
+          (click)="themePrefixChange(themePref)"
+        >
+          <ng-container *ngIf="themePref === themePrefix">
+            <svg
+              viewBox="0 0 16 16"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              class="devui-checkbox-tick"
+            >
+              <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <polygon
+                  fill-rule="nonzero"
+                  points="5.17391304 6.56521739 7.7173913 9.10869565 11.826087 5 13 6.17391304 7.7173913 11.4565217 4 7.73913043"
+                  class="devui-tick"
+                ></polygon>
+              </g>
+            </svg>
+          </ng-container>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="title">主题模式</div>
+      <div class="content">
+        <d-radio-group class="theme-select-radio" [(ngModel)]="themeMode" (change)="themesChange()" [ngModelOptions]="{ standalone: true }">
+          <d-radio [value]="'light'" [disabled]="themePrefersColorScheme">{{ '浅色模式' }}</d-radio>
+          <d-radio [value]="'dark'" [disabled]="themePrefersColorScheme">{{ '深色模式' }}</d-radio>
+        </d-radio-group>
+        <div class="prefers-color-scheme">
+          <d-toggle
+            class="theme-follow-toggle"
+            [(ngModel)]="themePrefersColorScheme"
+            (ngModelChange)="themePrefersColorSchemeChange($event)"
+          ></d-toggle>
+          <span>跟随系统</span>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

@@ -7,7 +7,10 @@ import { Directive, ElementRef, HostBinding, Input } from '@angular/core';
  * Makes an element draggable by adding the draggable html attribute
  */
 export class SortableDirective {
-    @Input('dSortable')  dSortDirection = 'v';
-    @HostBinding('attr.d-sortable') dSortable = true;
-    constructor(public el: ElementRef) {}
+  @HostBinding('attr.dsortable')
+  @Input('dSortable')  dSortDirection = 'v';
+  @HostBinding('attr.d-sortable-zmode')
+  @Input() dSortableZMode = false;
+  @HostBinding('attr.d-sortable') dSortable = true;
+  constructor(public el: ElementRef) {}
 }

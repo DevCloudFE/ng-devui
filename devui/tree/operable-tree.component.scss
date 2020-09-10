@@ -8,52 +8,89 @@
 }
 
 ::ng-deep {
-  &.tree-node.operable-tree-node {
-    .tree-node__checkbox {
-      margin-left: .5em;
-      margin-top: -.2em;
-
-      .devui-checkbox-material {
-        width: 16px;
-        height: 16px;
-      }
+  &.devui-tree-node.devui-operable-tree-node {
+    .devui-tree-node__checkbox {
+      margin-left: 8px;
+      margin-right: 5px;
     }
 
-    .icons {
-      margin-left: .5em;
+    .devui-tree-icons {
+      margin-left: 8px;
       cursor: pointer;
 
       svg {
         #add-path {
-          fill: $dark1;
+          fill: $devui-icon-text;
         }
 
         #edit-path {
-          fill: $dark1;
+          fill: $devui-icon-text;
         }
 
         #delete-path {
-          fill: $dark1;
+          fill: $devui-icon-text;
+        }
+
+        path,
+        rect {
+          fill: $devui-icon-text;
         }
       }
 
       &:hover {
         #add-path {
-          fill: $hover-control;
+          fill: $devui-icon-fill-active-hover;
         }
 
         #edit-path {
-          fill: $hover-control;
+          fill: $devui-icon-fill-active-hover;
         }
 
         #delete-path {
-          fill: $hover-control;
+          fill: $devui-icon-fill-active-hover;
         }
       }
     }
-
-    svg.svg-icon > g > g > path {
-      fill: $dark2;
-    }
   }
+}
+
+.devui-form-control {
+  outline: none;
+}
+
+.devui-tree-indicator {
+  height: 1px;
+  background-color: $devui-brand;
+  position: absolute;
+}
+
+.devui-drop-inner {
+  color: $devui-brand;
+}
+
+.toggle-disabled {
+  cursor: not-allowed !important;
+
+  svg.svg-icon rect {
+    stroke: $devui-disabled-text !important;
+  }
+
+  svg.svg-icon.svg-icon-close rect:last-child {
+    stroke: none !important;
+    fill: $devui-disabled-text !important;
+  }
+
+  svg.svg-icon path {
+    fill: $devui-disabled-text !important;
+  }
+}
+
+.select-disabled {
+  color: $devui-disabled-text !important;
+  cursor: not-allowed !important;
+}
+
+.tree-node-highlight {
+  color: $devui-brand;
+  font-weight: 600;
 }

@@ -3,18 +3,23 @@
   "compilerOptions": {
     "outDir": "../out-tsc/app",
     "types": [
-      "node"
+      "node",
+      "jasmine"
     ],
     "typeRoots": [
       "node_modules/@types"
     ]
   },
+  "files": [
+    "main.ts",
+    "polyfills.ts"
+  ],
   "include": [
-    "**/*.ts",
-    "../devui/**/*.ts"
+    "src/**/*.ts"
   ],
   "exclude": [
     "test.ts",
-    "**/*.spec.ts"
+    "**/*.spec.ts",
+    "../devui/**/*.spec.ts"
   ]
 }

@@ -1,4 +1,5 @@
 export interface IAnchorBox {
+  isScrollingToTarget: boolean;
   scrollTarget: Element | Window;
   defaultAnchor: string;
   forceActiveAnchor: Function;
@@ -7,4 +8,4 @@ export interface IAnchorBox {
     bottom?: number
   };
 }
-export type AnchorActiveChangeSource = 'anchor-link' | 'scroll' | 'click-inside' | 'initial';
+export type AnchorActiveChangeSource = 'anchor-link' | 'scroll' | 'click-inside' | 'initial' | 'fragment';

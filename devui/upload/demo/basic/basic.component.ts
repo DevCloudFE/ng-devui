@@ -1,23 +1,27 @@
+// 注意需要在使用的NgModule中 import { HttpClientModule  } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
-import { IFileOptions, IUploadOptions } from 'ng-devui';
+import { Component, ViewChild } from '@angular/core';
+import { IFileOptions, IUploadOptions } from 'ng-devui/upload';
+import { SingleUploadComponent } from 'ng-devui/upload';
 
 @Component({
-  selector: 'd-demo-upload-basic',
+  selector: 'd-basic',
   templateUrl: './basic.component.html'
 })
 export class BasicComponent {
+  @ViewChild('singleuploadDrag', { static: true }) singleuploadDrag: SingleUploadComponent;
+  public beforeUploadFn: Function;
   additionalParameter = {
     name: 'tom',
     age: 11
   };
   fileOptions: IFileOptions = {
     multiple: false,
-    accept: '.xls,.xlsx,.pages,.mp3,.png',
+    accept: '.*',
   };
   uploadedFiles: Array<Object> = [];
   uploadOptions: IUploadOptions = {
-    uri: 'http://localhost:3000/upload',
+    uri: '/upload',
     headers: {},
     additionalParameter: this.additionalParameter,
     maximumSize: 0.5,
@@ -26,6 +30,7 @@ export class BasicComponent {
   };
 
   constructor(private http: HttpClient) {
+    this.beforeUploadFn = this.beforeUpload2.bind(this);
   }
 
   onSuccess(result) {
@@ -33,6 +38,13 @@ export class BasicComponent {
   }
 
   beforeUpload(file) {
+    console.log(this); // this指向SingleUploadComponent
+    console.log(file);
+    return true;
+  }
+
+  beforeUpload2(file) {
+    console.log(this); // this指向BasicComponent
     console.log(file);
     return true;
   }
@@ -42,7 +54,7 @@ export class BasicComponent {
   }
 
   deleteUploadedFile(filePath: string) {
-    this.http.delete(`http://localhost:9000/files/${filePath}`).subscribe(() => {
+    this.http.delete(`/files/${filePath}`).subscribe(() => {
       console.log(`delete ${filePath}`);
     });
   }
@@ -52,5 +64,8 @@ export class BasicComponent {
   }
   fileOver(event) {
     console.log(event);
+  }
+  customUploadEvent() {
+    this.singleuploadDrag.upload();
   }
 }

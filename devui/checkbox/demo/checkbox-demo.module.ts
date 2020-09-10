@@ -8,8 +8,12 @@ import { SelectModule } from 'ng-devui/select';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
-import { CheckboxDemoBasicComponent } from './basic/checkbox-basic.component';
-import { CheckboxDemoGroupComponent} from './group/checkbox-demo-group.component';
+
+import { CheckboxBasicComponent } from './basic/checkbox-basic.component';
+import { CheckboxGroupBasicComponent} from './group/checkbox-group-basic.component';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
+import { CheckboxConditionChangeComponent } from './condition-change/condition-change.component';
+import { CheckboxConditionGroupComponent } from './condition-group/condition-group.component';
 
 @NgModule({
   imports: [
@@ -19,6 +23,7 @@ import { CheckboxDemoGroupComponent} from './group/checkbox-demo-group.component
     SelectModule,
     DevUIApiModule,
     DevUICodeboxModule,
+    DDemoNavModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo' },
       { path: 'demo', component: CheckBoxDemoComponent},
@@ -30,8 +35,10 @@ import { CheckboxDemoGroupComponent} from './group/checkbox-demo-group.component
   exports: [CheckBoxDemoComponent],
   declarations: [
     CheckBoxDemoComponent,
-    CheckboxDemoBasicComponent,
-    CheckboxDemoGroupComponent,
+    CheckboxBasicComponent,
+    CheckboxGroupBasicComponent,
+    CheckboxConditionChangeComponent,
+    CheckboxConditionGroupComponent
   ],
   entryComponents: [
     CheckBoxDemoComponent,

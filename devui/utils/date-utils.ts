@@ -1,9 +1,9 @@
 import * as isDate_ from 'date-fns/is_date';
 import * as dateParse_ from 'date-fns/parse';
 import * as dateFormat_ from 'date-fns/format';
-const isDate = isDate_;
-const dateParse = dateParse_;
-const dateFormat = dateFormat_;
+const isDate: any = isDate_;
+const dateParse: any = dateParse_;
+const dateFormat: any = dateFormat_;
 
 export function isValidDate(date: Date): boolean {
   return isDate(date) && !isNaN(date.getTime());

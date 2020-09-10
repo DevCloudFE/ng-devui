@@ -13,5 +13,7 @@ export class BasicComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  activeTabChange(id) {
+    console.log(id);
+  }
 }

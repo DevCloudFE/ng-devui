@@ -1,13 +1,10 @@
 import { Observable } from 'rxjs';
-import {
-  Type,
-  ComponentFactoryResolver,
-  Injector,
-} from '@angular/core';
+import { Type, ComponentFactoryResolver, Injector, TemplateRef } from '@angular/core';
 
 export interface IModalOptions {
   id?: string;
-  component: Type<any>;
+  zIndex?: number;
+  component?: Type<any>;
   width?: string;
   showAnimate?: boolean;
   data?: any;
@@ -17,20 +14,28 @@ export interface IModalOptions {
   injector?: Injector;
   onClose?: Function;
   beforeHidden?: () => boolean | Promise<boolean> | Observable<boolean>;
+  placement?: 'center' | 'top' | 'bottom';
+  offsetX?: string;
+  offsetY?: string;
+  bodyScrollable?: boolean;
+  contentTemplate?: TemplateRef<any>;
+  escapable?: boolean;
 }
 
 export interface IDialogOptions {
   id?: string;
   title: string;
-  content: string | Type<any>;
+  zIndex?: number;
+  content?: string | Type<any>;
   html?: boolean;
   buttons: Array<{
-    id?: string,
-    cssClass?: string,
-    text: string,
-    handler: ($event: Event) => void,
-    btnwidth?: string,
-    autofocus?: boolean
+    id?: string;
+    cssClass?: string;
+    text: string;
+    handler: ($event: Event) => void;
+    btnwidth?: string;
+    autofocus?: boolean;
+    disabled?: boolean;
   }>;
   width?: string;
   backdropCloseable?: boolean;
@@ -41,6 +46,13 @@ export interface IDialogOptions {
   injector?: Injector;
   onClose?: Function;
   beforeHidden?: () => boolean | Promise<boolean> | Observable<boolean>;
-  dialogtype?: string ;
+  dialogtype?: string;
   draggable?: boolean;
+  showCloseBtn?: boolean;
+  placement?: 'center' | 'top' | 'bottom';
+  offsetX?: string;
+  offsetY?: string;
+  bodyScrollable?: boolean;
+  contentTemplate?: TemplateRef<any>;
+  escapable?: boolean;
 }

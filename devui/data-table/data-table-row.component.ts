@@ -1,8 +1,7 @@
-import { ChangeDetectorRef, Component, EventEmitter, HostListener, Input, Output, NgZone, ElementRef, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, NgZone, OnInit, Output, HostBinding } from '@angular/core';
 import { DataTableComponent } from './data-table.component';
 import { ForceUpdateReason } from './force-update-reason.model';
 import { DataTableColumnTmplComponent } from './tmpl/data-table-column-tmpl.component';
-import { DataTableTmplsComponent } from './tmpl/data-table-tmpls.component';
 
 @Component({
   selector: 'd-data-table-row, [dDataTableRow]',
@@ -10,24 +9,23 @@ import { DataTableTmplsComponent } from './tmpl/data-table-tmpls.component';
   styleUrls: ['./data-table-row.component.scss']
 })
 export class DataTableRowComponent implements OnInit {
+  @Input() rowItem: any;
+  @HostBinding('style.font-weight') fontWeight = '400';
+  @HostBinding('style.vertical-align') verticalAlign = 'middle';
   @Input() selectable: boolean;
   @Input() checkable: boolean;
-  @Input() showDetail: boolean;
-  @Input() rowItem: any;
+  @Input() showExpandToggle: boolean;
   @Input() rowIndex: number;
   @Input() allChecked: boolean;
   @Input() columns: DataTableColumnTmplComponent[];
-  @Input() checkableColumn: DataTableColumnTmplComponent;
-  @Input() showDetailColumn: DataTableColumnTmplComponent;
-  @Input() dataTableTemplates: DataTableTmplsComponent;
   @Input() editModel: string;
   @Input() editRowItem: any;
   @Input() resizeable: boolean;
   @Input() timeout: number;
   @Input() tableLevel: number;
   @Input() nestedIndex: string;
-  @Output() detailChange = new EventEmitter();
-  rowHovered = false;
+  @Input() generalRowHoveredData: boolean;
+  @Output() detailChange = new EventEmitter<any>();
 
   forceUpdateEvent = new EventEmitter<ForceUpdateReason>();
 
@@ -48,14 +46,16 @@ export class DataTableRowComponent implements OnInit {
         'dblclick',
         this.onRowDBClick.bind(this)
       );
-      this.rowRef.nativeElement.addEventListener(
-        'mouseenter',
-        this.onRowMouseEnter.bind(this)
-      );
-      this.rowRef.nativeElement.addEventListener(
-        'mouseleave',
-        this.onRowMouseLeave.bind(this)
-      );
+      if (this.generalRowHoveredData) {
+        this.rowRef.nativeElement.addEventListener(
+          'mouseenter',
+          this.onRowMouseEnter.bind(this)
+        );
+        this.rowRef.nativeElement.addEventListener(
+          'mouseleave',
+          this.onRowMouseLeave.bind(this)
+        );
+      }
     });
   }
 
@@ -84,35 +84,33 @@ export class DataTableRowComponent implements OnInit {
   }
 
   onRowMouseEnter($event) {
-    if (!this.rowHovered) {
-      this.ngZone.run(() => {
-        this.rowHovered = true;
-      });
-    }
+    this.ngZone.run(() => {
+      this.rowItem.$hovered = true;
+    });
   }
 
   onRowMouseLeave($event) {
     this.ngZone.run(() => {
-      this.rowHovered = false;
+      this.rowItem.$hovered = false;
     });
   }
 
   onRowCheckChange($event, rowIndex, nestedIndex, rowItem) {
     rowItem.$checked = $event;
     rowItem.$halfChecked = false;
-    this.dt.onRowCheckChange({ rowItem, rowIndex, nestedIndex, checked: $event });
+    this.dt.setRowCheckStatus({ rowItem, rowIndex, nestedIndex, checked: $event });
   }
 
   toggle() {
-    if (this.rowItem.expandConfig) {
-      this.rowItem.expandConfig.expand = !this.rowItem.expandConfig.expand;
-      this.detailChange.emit({ state: this.rowItem.expandConfig.expand, index: this.rowIndex });
-      this.dt.onDetailToggle({ state: this.rowItem.expandConfig.expand, index: this.rowIndex });
+    this.rowItem['$isDetailOpen'] = !this.rowItem['$isDetailOpen'];
+    if (this.rowItem.$expandConfig) {
+      this.rowItem.$expandConfig.expand = !this.rowItem.$expandConfig.expand;
     }
+    this.detailChange.emit({ state: this.rowItem['$isDetailOpen'], index: this.rowIndex });
+    this.dt.onDetailToggle({ state: this.rowItem['$isDetailOpen'], index: this.rowIndex });
   }
 
   trackByFn(index, item) {
     return index;
   }
-
 }

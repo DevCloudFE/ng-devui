@@ -1,26 +1,126 @@
 @import '../style/theme/color';
+@import '../style/core/font';
 
-.tree-select {
+.devui-tree-select {
   position: relative;
   width: 100%;
 
-  input.select-input {
-    cursor: pointer;
-    display: inline-block;
-    width: 100%;
-    color: $dark1;
-    text-overflow: ellipsis;
+  .devui-select-input {
+    &:not([disabled]) {
+      color: $devui-text;
+    }
+
+    &.devui-tree-select-input {
+      color: $devui-line; //TODO: Color-Question
+      font-size: $font-size-base;
+      padding: 2px 10px 0 10px;
+      height: unset;
+      min-height: 28px;
+      max-height: 52px;
+      overflow-y: scroll;
+      padding-right: 20px;
+      line-height: 22px;
+      display: flex;
+    }
+  }
+
+  &:hover {
+    & .clear {
+      position: absolute;
+      height: 14px;
+      width: 14px;
+      right: 12px;
+      top: calc((100% - 14px) / 2);
+      cursor: pointer;
+
+      &::after,
+      &::before {
+        position: absolute;
+        content: '';
+        height: 14px;
+        width: 2px;
+        background-color: $devui-icon-text;
+        left: 50%;
+      }
+
+      &::before {
+        transform: rotate(45deg);
+      }
+
+      &::after {
+        transform: rotate(-45deg);
+      }
+
+      &:hover {
+        &::after,
+        &::before {
+          background-color: $devui-icon-fill-active;
+        }
+      }
+    }
+  }
+
+  .devui-select-chevron-icon {
+    right: 12px;
+    top: calc((100% - 6px) / 2);
+    position: absolute;
+    user-select: none;
+    pointer-events: none;
+    height: 6px;
+    line-height: 6px;
+    z-index: 1;
+
+    svg {
+      transition: transform 0.3s;
+
+      polygon {
+        fill: $devui-text-weak;
+      }
+    }
+
+    &.open {
+      z-index: 1052;
+
+      svg {
+        transform: rotate(180deg);
+      }
+    }
+
+    &.clear {
+      opacity: 0;
+    }
+
+    &.disabled {
+      svg polygon {
+        fill: $devui-disabled-text;
+      }
+    }
+  }
+
+  &:not(:hover) {
+    .devui-select-chevron-icon:not(.disabled) {
+      opacity: 1;
+      transition: opacity 0.1s linear;
+    }
   }
 }
 
-.tree-select.options-container {
+.devui-tree-select.devui-options-container {
   width: 100%;
-  color: $dark1;
+  color: $devui-text;
   padding: 5px 0;
 
-  .tree ::ng-deep .tree-node.operable-tree-node {
-    .tree-node__content {
+  .devui-tree ::ng-deep .devui-tree-node.devui-operable-tree-node {
+    .devui-tree-node__content {
       margin-left: 10px;
+    }
+
+    & > .devui-tree-node__children::before {
+      left: calc(0.8em + 9px); // 上面增加了margin需要加到原先的计算中
+    }
+
+    &.devui-tree-node__open > .devui-tree-node__content::after {
+      left: 9px; // 上面增加了margin需要加到原先的计算中
     }
 
     & .active {
@@ -29,27 +129,152 @@
 
     &.selected {
       position: relative;
+      min-width: calc(100% - 1.2em); // 当数据无法铺满一行时通过最小宽度使其铺满
 
       &::after {
-        content: "";
+        content: '';
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: $hover-content;
+        background-color: $devui-list-item-selected-bg;
         z-index: -1;
       }
     }
   }
+
+  .devui-no-data-tip {
+    user-select: none;
+    cursor: not-allowed;
+    padding: 5px 12px;
+    background-color: $devui-disabled-bg;
+    color: $devui-disabled-text;
+  }
 }
 
-.tree-select.search-container {
-  padding: 5px;
+.devui-tree-select.devui-search-container {
+  .devui-search-in-dropdown {
+    height: 32px;
+  }
+}
+
+.devui-select-item {
+  display: inline-flex;
+  align-items: center;
+  color: $devui-text;
+  padding: 1px 10px;
+  line-height: 1.5;
+  background-color: $devui-label-bg;
+  border-radius: 2px;
+  margin: 0 2px 2px 0;
+  border: 1px solid $devui-label-bg;
+  max-width: calc(100% - 2px);
+  height: 22px;
+
+  &.devui-no-label-item {
+    padding: 1px 0;
+    background: transparent;
+    border-color: transparent;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .devui-select-item-content {
+    display: inline-block;
+    cursor: pointer;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: calc(100% - 24px);
+
+    &:hover {
+      color: $devui-list-item-hover-text;
+    }
+  }
+
+  & > .devui-select-item-clear-icon {
+    width: 12px;
+    height: 12px;
+    line-height: 12px;
+    text-align: center;
+    margin-left: 12px;
+    border-radius: 50%;
+    background-color: $devui-line; // TODO: Color-Question
+    position: relative;
+    top: -1px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    svg path {
+      fill: $devui-light-text;
+    }
+
+    &:hover {
+      background-color: $devui-icon-fill-active-hover;
+    }
+  }
+}
+
+.devui-select-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+svg.svg-icon-search path {
+  fill: $devui-text-weak;
 }
 
 // 此处设置默认宽度，使用组件时可以自定义宽度，尽量不要入侵组件内部样式。
 :host {
   display: inline-block;
   width: 100%;
+}
+
+.devui-select-input.devui-form-control.devui-tree-select-input.devui-dropdown-origin.devui-dropdown-origin-open {
+  &.devui-dropdown-origin-bottom,
+  &.devui-dropdown-origin-top {
+    &::after {
+      display: none;
+    }
+  }
+}
+
+.devui-select-input.devui-tree-select-input.disabled {
+  & .devui-select-item {
+    background-color: $devui-disabled-bg;
+    border-color: $devui-disabled-line;
+
+    &.devui-no-label-item {
+      background-color: transparent;
+      border-color: transparent;
+      color: $devui-disabled-text;
+    }
+
+    & > .devui-select-item-content {
+      &,
+      &:hover,
+      &:focus {
+        color: $devui-disabled-text;
+        cursor: not-allowed;
+      }
+    }
+
+    & > .devui-select-item-clear-icon {
+      &,
+      &:hover,
+      &:focus {
+        background-color: $devui-disabled-line;
+        cursor: not-allowed;
+
+        svg path {
+          fill: $devui-disabled-bg;
+        }
+      }
+    }
+  }
 }

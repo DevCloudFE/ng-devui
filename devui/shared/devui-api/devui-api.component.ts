@@ -1,19 +1,18 @@
 import { Component, OnInit, OnDestroy, Input, AfterViewInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ActivatedRoute, Data } from '@angular/router';
-import * as marked from 'marked';
+import { ActivatedRoute, Data, Router } from '@angular/router';
+import * as marked from 'marked/lib/marked';
 import * as hljs from 'highlight.js/lib/highlight';
 
 @Component({
   selector: 'd-api',
-  templateUrl: './devui-api.component.html',
-  styleUrls: ['./devui-api.component.css']
+  templateUrl: './devui-api.component.html'
 })
 export class DevUIApiComponent implements OnInit, AfterViewInit, OnDestroy {
   sub: Subscription;
   @Input() api: any;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     this.sub = this.route.data.subscribe(data => {
@@ -41,8 +40,18 @@ export class DevUIApiComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
+    const that = this;
     Array.from(document.querySelectorAll('pre code')).forEach((block) => {
       hljs.highlightBlock(block);
+    });
+    Array.from(document.querySelectorAll('a')).forEach((link) => {
+      if (link.href.includes('/components')) {
+        const hrefValue = link.getAttribute('href');
+        link.onclick = function ($event) {
+          $event.preventDefault();
+          that.router.navigateByUrl(hrefValue);
+        };
+      }
     });
   }
 

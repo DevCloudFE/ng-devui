@@ -1,4 +1,4 @@
-<p align="center"><a href="https://devui.design/home" target="_blank" rel="noopener noreferrer"><img alt="DevUI Logo" src="logo.svg" width="180" style="max-width:100%;">
+<p align="center"><a href="https://devui.design/home" target="_blank" rel="noopener noreferrer"><img alt="DevUI Logo" src="logo.svg?sanitize=true" width="180" style="max-width:100%;">
 </p>
 <p align="center">
   <a href="https://github.com/DevCloudFE/ng-devui"><img src="https://img.shields.io/github/stars/DevCloudFE/ng-devui.svg?label=github%20stars" alt="Github Star"></a>
@@ -7,9 +7,9 @@
 </br>
   <a href="README.md"><img src="https://img.shields.io/badge/document-English-blue" alt="Document"></a>
   <a href="README_zh_CN.md"><img src="https://img.shields.io/badge/%E6%96%87%E6%A1%A3-%E4%B8%AD%E6%96%87-blue" alt="Document"></a>
+  <a href="https://www.npmjs.com/package/ng-devui"><img src="https://img.shields.io/npm/v/ng-devui" alt="Npm"></a>
+  <a href="https://gitter.im/devui-design/devui-design"><img src="https://img.shields.io/gitter/room/devui-design/devui-design" alt="Chat"></a>
 </p>
-
-
 
 <h1 align="center">DevUI for Angular</h1>
 DevUI Design设计系统包含了DevUI规则、设计语言和最佳实践的资源组合。DevUI Design可以让开发人员更加专注于应用逻辑的思考，而设计人员专注于用户体验、交互和流程
@@ -23,7 +23,7 @@ DevUI Design设计系统包含了DevUI规则、设计语言和最佳实践的资
 
 ## Angular版本
 
-当前支持的angular版本<font color=red>`^8.0.0`</font>
+当前支持的angular版本<font color=red>`^9.0.0`</font>
 
 ## 快速开始
 
@@ -32,7 +32,7 @@ DevUI Design设计系统包含了DevUI规则、设计语言和最佳实践的资
 推荐使用`@angular/cli`创建你的项目
 
 ```bash
-$ ng new New-Project
+ng new New-Project
 ```
 
 2. 安装:
@@ -40,7 +40,7 @@ $ ng new New-Project
 ```bash
 $ cd New-Project
 $ npm i ng-devui
-# 可选，字体图标库 
+# 可选，字体图标库
 # $ npm i @devui-design/icons
 ```
 
@@ -82,7 +82,7 @@ export class AppModule { }
 5. 启动开发测试
 
 ```bash
-$ ng serve --open
+ng serve --open
 ```
 
 ## 贡献

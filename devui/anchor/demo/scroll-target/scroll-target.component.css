@@ -1,0 +1,125 @@
+/* 序号 */
+.step-nav {
+  padding-top: 10px;
+  width: 240px;
+}
+
+.step-nav > li {
+  list-style: none;
+  counter-increment: stepli;
+  padding: 0;
+  cursor: pointer;
+  height: 30px;
+  line-height: 1.5;
+  font-size: 12px;
+  color: #5e6678;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.step-nav > li:hover {
+  color: #526ecc;
+  color: var(--devui-brand-active, #526ecc);
+}
+
+.step-nav > li.active {
+  color: #526ecc;
+  color: var(--devui-brand-active, #526ecc);
+}
+
+.step-nav > li.active::before {
+  border-color: #526ecc;
+  border-color: var(--devui-brand-active, #526ecc);
+}
+
+.step-nav > li::before {
+  content: '';
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  text-align: center;
+  line-height: 26px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  margin-right: 18px;
+  border: 2px solid #dfe1e6;
+}
+
+/* 左侧线 */
+.step-nav > li:not(:first-of-type) {
+  margin-top: 32px;
+}
+
+.step-nav > li:not(:first-of-type)::after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: -32px;
+  left: 5px;
+  width: 1px;
+  height: 32px;
+  border-left: 2px solid #dfe1e6;
+}
+
+.mymain {
+  position: relative;
+}
+
+.mysidebar {
+  width: 240px;
+  border-right: 1px solid #cacfd8;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+}
+
+.mycontent {
+  padding: 10px;
+  margin-left: 240px;
+}
+
+.section-block {
+  min-height: 200px;
+  border-bottom: 1px dashed #cacfd8;
+}
+
+.section-block.active.anchor-active-by-anchor-link {
+  animation: hightlight-and-disapear 1 3s linear;
+}
+
+@keyframes hightlight-and-disapear {
+  0% {
+    outline: invert none medium;
+  }
+
+  2% {
+    outline: 0 none rgba(255, 255, 255, 0);
+  }
+
+  10% {
+    outline: 1px solid #5170ff;
+  }
+
+  50% {
+    outline: 1px solid #5170ff;
+  }
+
+  90% {
+    outline: 1px solid rgba(255, 255, 255, 0);
+  }
+
+  99% {
+    outline: 0 none rgba(255, 255, 255, 0);
+  }
+
+  100% {
+    outline: invert none medium;
+  }
+}
+
+.my-section {
+  height: 450px;
+  overflow-y: auto;
+}

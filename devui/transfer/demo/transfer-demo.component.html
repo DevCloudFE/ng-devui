@@ -1,0 +1,31 @@
+<div class="demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 60, bottom: 0 }">
+  <d-demo-nav [navItems]="navItems"></d-demo-nav>
+  <div class="demo-example" [dAnchor]="'transfer-demo-base'">
+    <div class="demo-title">基本用法</div>
+    <div class="demo-text">穿梭框基本用法</div>
+    <d-codebox id="transfer-basic" [sourceData]="basicSource">
+      <d-transfer-demo-base demo></d-transfer-demo-base>
+    </d-codebox>
+  </div>
+  <div class="demo-example" [dAnchor]="'transfer-demo-search'">
+    <div class="demo-title">搜索穿梭框</div>
+    <div class="demo-text">在数据很多的情况下，可以对数据进行搜索和过滤。</div>
+    <d-codebox id="transfer-search" [sourceData]="searchSource">
+      <d-transfer-demo-search demo></d-transfer-demo-search>
+    </d-codebox>
+  </div>
+  <div class="demo-example" [dAnchor]="'transfer-demo-sort'">
+    <div class="demo-title">排序穿梭框</div>
+    <div class="demo-text">可以对穿梭框源和目标框的数据进行排序。</div>
+    <d-codebox id="transfer-sort" [sourceData]="sortSource">
+      <d-transfer-demo-sort demo></d-transfer-demo-sort>
+    </d-codebox>
+  </div>
+  <div class="demo-example" [dAnchor]="'transfer-demo-custom'">
+    <div class="demo-title">自定义穿梭框</div>
+    <div class="demo-text">可以对穿梭框内容的显示进行自定义</div>
+    <d-codebox id="transfer-custom" [sourceData]="customSource">
+      <d-transfer-demo-custom demo></d-transfer-demo-custom>
+    </d-codebox>
+  </div>
+</div>

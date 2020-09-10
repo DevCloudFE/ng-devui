@@ -1,0 +1,34 @@
+.menu {
+  width: 200px;
+}
+
+.menu-wrapper {
+  float: left;
+}
+
+.menu-wrapper + .menu-wrapper {
+  margin-left: 20px;
+}
+
+:host::after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+@media (max-width: 800px), (min-width: 1024px) and (max-width: 1100px), (min-width: 1280px) and (max-width: 1480px) {
+  .menu-wrapper {
+    float: none;
+  }
+
+  .menu-wrapper + .menu-wrapper {
+    margin-top: 20px;
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 250px) {
+  .menu {
+    width: 80%;
+  }
+}

@@ -1,21 +1,21 @@
-<div class="demo-container">
-    <div class="demo-example">
-        <div class="demo-title">单个标签</div>
-        <div class="demo-text">
-            通过labelStyle属性定义标签样式
-        </div>
-        <d-codebox id="components-tabs-without-content" [sourceData]="customSource">
-            <d-custom demo></d-custom>
-        </d-codebox>
+<div class="demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 60, bottom: 0 }">
+  <d-demo-nav [navItems]="navItems"></d-demo-nav>
+  <div class="demo-example" [dAnchor]="'single-tag'">
+    <div class="demo-title">单个标签</div>
+    <div class="demo-text">
+      通过labelStyle属性定义标签样式
     </div>
-    <div class="demo-example">
-        <div class="demo-title">标签组</div>
-        <div class="demo-text">
-            标签组可传入字符串数组或对象数组，在对象数组中，可通过displayProperty，titleProperty设置标签显示值和title显示值，通过labelStyle设置标签样式
-        </div>
-        <d-codebox id="components-tabs-default" [sourceData]="basicSource">
-            <d-basic demo></d-basic>
-        </d-codebox>
+    <d-codebox id="components-tabs-without-content" [sourceData]="customSource">
+      <d-custom demo></d-custom>
+    </d-codebox>
+  </div>
+  <div class="demo-example" [dAnchor]="'tags-group'">
+    <div class="demo-title">标签组</div>
+    <div class="demo-text">
+      标签组可传入字符串数组或对象数组，在对象数组中，可通过displayProperty，titleProperty设置标签显示值和title显示值，通过labelStyle设置标签样式
     </div>
+    <d-codebox id="components-tabs-default" [sourceData]="basicSource">
+      <d-basic demo></d-basic>
+    </d-codebox>
+  </div>
 </div>
-

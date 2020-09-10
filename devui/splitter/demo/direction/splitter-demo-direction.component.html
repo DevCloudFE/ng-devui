@@ -1,0 +1,22 @@
+<section>
+  <d-splitter style="height: 300px; border: 1px solid #e3e5e9;">
+    <d-splitter-pane size="30%" minSize="20%" (sizeChange)="sizeChange($event)">
+      <div class="pane-content">
+        <h2>左侧面板</h2>
+        <div>左侧内容区域，宽度30%, 最小宽度20%</div>
+      </div>
+    </d-splitter-pane>
+    <d-splitter-pane minSize="15%" [collapsible]="true" [collapseDirection]="'before'">
+      <div class="pane-content">
+        <h2>中间面板</h2>
+        <div>中间内容区域, 指定折叠收起方向为向前收起</div>
+      </div>
+    </d-splitter-pane>
+    <d-splitter-pane minSize="15%">
+      <div class="pane-content">
+        <h2>右侧面板</h2>
+        <div>右侧内容区域</div>
+      </div>
+    </d-splitter-pane>
+  </d-splitter>
+</section>

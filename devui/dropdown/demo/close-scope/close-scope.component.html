@@ -1,17 +1,49 @@
 <section>
   <h4>点击菜单外才会关闭的下拉菜单</h4>
-  <div class="btn-group" dDropDown [closeScope]="'blank'" (onToggle)="onToggle($event)">
-    <d-button bsStyle="common" dDropDownToggle>
+  <div class="btn-group" dDropDown [closeScope]="'blank'" (toggleEvent)="onToggle($event)">
+    <d-button bsStyle="common" dDropDownToggle class="devui-dropdown-origin">
       点击下拉
       <span class="icon-chevron-down"></span>
     </d-button>
-    <ul dDropDownMenu class="devui-dropdown-menu devui-scrollbar" role="menu">
+    <ul dDropDownMenu class="devui-dropdown-menu devui-scrollbar devui-dropdown-overlay" role="menu">
       <li role="menuitem">
-        <input type="text" style="width: calc(100% - 20px);margin-right: 10px;" class="devui-form-control"/>
+        <input type="text" class="devui-input devui-input devui-search-in-dropdown" placeholder="输入框" />
+        <div class="icon-in-search">
+          <i class="icon icon-search"></i>
+        </div>
       </li>
-      <li class="disabled" role="menuitem"><a class="devui-dropdown-item disabled">菜单一</a></li>
+      <li class="disabled" role="menuitem">
+        <a class="devui-dropdown-item disabled">菜单一</a>
+      </li>
       <li role="menuitem"><a class="devui-dropdown-item">菜单二</a></li>
       <li role="menuitem"><a class="devui-dropdown-item">菜单三</a></li>
+    </ul>
+  </div>
+</section>
+<section>
+  <h4>自行关闭</h4>
+  <p>点击最后一个菜单项进行关闭</p>
+  <div class="btn-group" dDropDown [closeScope]="'none'" (toggleEvent)="onToggle($event)" #myDropdown="d-dropdown">
+    <d-button bsStyle="common" dDropDownToggle class="devui-dropdown-origin">
+      点击下拉
+      <span class="icon-chevron-down"></span>
+    </d-button>
+    <ul dDropDownMenu class="devui-dropdown-menu devui-scrollbar devui-dropdown-overlay" role="menu">
+      <li role="menuitem">
+        <input type="text" class="devui-input devui-input devui-search-in-dropdown" placeholder="输入框" />
+        <div class="icon-in-search">
+          <i class="icon icon-search"></i>
+        </div>
+      </li>
+      <li class="disabled" role="menuitem">
+        <a class="devui-dropdown-item disabled">菜单一禁用</a>
+      </li>
+      <li role="menuitem">
+        <a class="devui-dropdown-item">菜单二</a>
+      </li>
+      <li role="menuitem" (click)="myDropdown.toggle()">
+        <a class="devui-dropdown-item">关闭</a>
+      </li>
     </ul>
   </div>
 </section>

@@ -1,41 +1,159 @@
-<div class="demo-container">
-  <div class="demo-example">
+<div class="demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 60, bottom: 0 }">
+  <d-demo-nav [navItems]="navItems"></d-demo-nav>
+  <div class="demo-example" [dAnchor]="'basic-usage'">
     <div class="demo-title">基本用法</div>
     <div class="demo-text">
-      通过 options 配置数据源<br>
-      通过 overview、size 配置样式
+      通过 options 配置数据源<br />
+      通过 overview、size 配置样式<br />
+      通过 direction 配置展开方向
     </div>
-    <d-codebox id="components-select-basic" [sourceData]="SelectDemoBasicComponent">
+    <d-codebox id="components-select-basic" [sourceData]="SelectBasicComponent">
       <d-select-basic demo></d-select-basic>
     </d-codebox>
   </div>
-  <div class="demo-example">
-    <div class="demo-title">自定义搜索功能</div>
+  <div class="demo-example" [dAnchor]="'object-filter'">
+    <div class="demo-title">使用对象</div>
     <div class="demo-text">
-      通过 isSearch、searchFn开启搜索功能并自定搜索方法<br>
-      通过 multiple 启用多选功能
+      使用对象数组，通过 filterKey 配置对象显示字段
     </div>
-    <d-codebox id="components-select-object" [sourceData]="SelectDemoObjectComponent">
-      <d-select-object demo></d-select-object>
+    <d-codebox id="components-select-basic" [sourceData]="ObjectFilterComponent">
+      <d-object-filter demo></d-object-filter>
     </d-codebox>
   </div>
-  <div class="demo-example">
+  <div class="demo-example" [dAnchor]="'custom-search'">
+    <div class="demo-title">自定义搜索功能</div>
+    <div class="demo-text">
+      通过 isSearch、searchFn开启搜索功能并自定搜索方法，searchPlaceholder定义搜索框显示文字<br />
+      通过 multiple 启用多选功能
+    </div>
+    <d-codebox id="components-select-object" [sourceData]="SelectObjectComponent">
+      <d-custom-search demo></d-custom-search>
+    </d-codebox>
+  </div>
+  <div class="demo-example" [dAnchor]="'select-all'">
     <div class="demo-title">全选下拉选项</div>
     <div class="demo-text">
       多选下拉中通过 isSelectAll 启用全选功能
     </div>
-    <d-codebox id="components-select-all" [sourceData]="SelectDemoAllComponent">
+    <d-codebox id="components-select-all" [sourceData]="SelectAllComponent">
       <d-select-all demo></d-select-all>
     </d-codebox>
   </div>
-  <div class="demo-example">
+  <div class="demo-example" [dAnchor]="'select-template'">
     <div class="demo-title">自定义模板</div>
     <div class="demo-text">
       通过模板配置下拉选项和已选项
     </div>
-    <d-codebox id="components-select-template" [sourceData]="SelectDemoTemplateComponent">
+    <d-codebox id="components-select-template" [sourceData]="SelectTemplateComponent">
       <d-select-template demo></d-select-template>
     </d-codebox>
   </div>
-
+  <div class="demo-example" [dAnchor]="'labelization'">
+    <div class="demo-title">标签化</div>
+    <div class="demo-text">
+      通过 extraConfig.labelization 配置标签化：<br />
+      1.enable为true时启用，已选项显示为可删除的标签<br />
+      2.overflow配置超长的样式，具体参考api
+    </div>
+    <d-codebox id="labelization" [sourceData]="LabelizationComponent">
+      <d-labelization demo></d-labelization>
+    </d-codebox>
+  </div>
+  <div class="demo-example" [dAnchor]="'disabled'">
+    <div class="demo-title">禁用</div>
+    <div class="demo-text">
+      通过 disabled 禁用下拉，<br />
+      通过选项对象的$disabled禁用选项，<br />
+      通过选项对象的$immutable禁止修改选项
+    </div>
+    <d-codebox id="components-select-basic" [sourceData]="DisabledComponent">
+      <d-disabled demo></d-disabled>
+    </d-codebox>
+  </div>
+  <div class="demo-example" [dAnchor]="'allow-clear-value'">
+    <div class="demo-title">允许清空值</div>
+    <div class="demo-text"></div>
+    <d-codebox id="allow-clear-value" [sourceData]="AllowClearValueComponent">
+      <d-allow-clear-value demo></d-allow-clear-value>
+    </d-codebox>
+  </div>
+  <div class="demo-example" [dAnchor]="'append-to-body'">
+    <div class="demo-title">附着到Body上</div>
+    <div class="demo-text">
+      使用 appendToBody 使得附着到body上，不被带滚动条的容器遮挡
+    </div>
+    <d-codebox id="append-to-body'" [sourceData]="AppendToBodyComponent">
+      <d-append-to-body demo></d-append-to-body>
+    </d-codebox>
+  </div>
+  <div class="demo-example" [dAnchor]="'lazy-load-virtual-scroll'">
+    <div class="demo-title">虚拟滚动 或 懒加载</div>
+    <div class="demo-text">
+      使用 virtualScroll 在大数据量下用虚拟滚动；<br />
+      使用 enableLazyLoad 在大数据量下用懒加载
+    </div>
+    <d-codebox id="lazy-load-virtual-scroll" [sourceData]="LazyLoadVirtualScrollComponent">
+      <d-lazy-load-virtual-scroll demo></d-lazy-load-virtual-scroll>
+    </d-codebox>
+  </div>
+  <div class="demo-example" [dAnchor]="'async-loading'">
+    <div class="demo-title">异步加载显示加载中</div>
+    <div class="demo-text"></div>
+    <d-codebox id="loading" [sourceData]="LoadingComponent">
+      <d-loading demo></d-loading>
+    </d-codebox>
+  </div>
+  <div class="demo-example" [dAnchor]="'custom-area'">
+    <div class="demo-title">自定义区域</div>
+    <div class="demo-text">
+      使用 customViewTemplate 定义自定义区域
+    </div>
+    <d-codebox id="custom-area" [sourceData]="CustomAreaComponent">
+      <d-custom-area demo></d-custom-area>
+    </d-codebox>
+  </div>
+  <div class="demo-example" [dAnchor]="'custom-area-direction'">
+    <div class="demo-title">自定义区域方向和选中</div>
+    <div class="demo-text"></div>
+    <d-codebox id="custom-area-direction" [sourceData]="CustomAreaDirectionComponent">
+      <d-custom-area-direction demo></d-custom-area-direction>
+    </d-codebox>
+  </div>
+  <div class="demo-example" [dAnchor]="'multi-keep-order'">
+    <div class="demo-title">设置已选项顺序源数组顺序或选中顺序</div>
+    <div class="demo-text">
+      通过 keepMultipleOrder 配置多选的时候已选项维持原数组顺序：'origin'源数组排序,'user-select'用户选择顺序排序
+    </div>
+    <d-codebox id="multi-keep-order" [sourceData]="MultiKeepOrderComponent">
+      <d-multi-keep-order demo></d-multi-keep-order>
+    </d-codebox>
+  </div>
+  <div class="demo-example" [dAnchor]="'user-limit-selected-number'">
+    <div class="demo-title">用户场景：限制选中个数</div>
+    <div class="demo-text"></div>
+    <d-codebox id="user-limit-selected-number" [sourceData]="UserLimitSelectedNumberComponent">
+      <d-user-limit-selected-number demo></d-user-limit-selected-number>
+    </d-codebox>
+  </div>
+  <div class="demo-example" [dAnchor]="'user-search-n-lazyload'">
+    <div class="demo-title">用户场景：自定义搜索的懒加载</div>
+    <div class="demo-text"></div>
+    <d-codebox id="user-search-n-lazyload" [sourceData]="UserSearchNLazyLoadComponent">
+      <d-user-search-n-lazyload demo></d-user-search-n-lazyload>
+    </d-codebox>
+  </div>
+  <div class="demo-example" [dAnchor]="'user-mail-search'">
+    <div class="demo-title">用户场景：自定义搜索和模板结合 —— 邮箱搜索</div>
+    <div class="demo-text"></div>
+    <d-codebox id="components-select-basic" [sourceData]="UserMailSearchComponent">
+      <d-user-mail-search demo></d-user-mail-search>
+    </d-codebox>
+  </div>
+  <div class="demo-example" [dAnchor]="'model-value'">
+    <div class="demo-title">ngModel值处理</div>
+    <div class="demo-text"></div>
+    <d-codebox id="components-select-basic" [sourceData]="ModelValueComponent">
+      <d-model-value demo></d-model-value>
+    </d-codebox>
+  </div>
 </div>

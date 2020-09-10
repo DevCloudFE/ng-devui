@@ -1,0 +1,17 @@
+<section>
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="card">
+        <div class="card-header">可拖拽项</div>
+        <div class="card-block">
+          <ul class="list-group">
+            <li dDraggable *ngFor="let item of list" [dragData]="{ item: item, parent: list }" class="list-group-item over-flow-ellipsis">
+              {{ item.title }}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<d-quadrant-diagram [labelData]="labelData" [diagramId]="'basic-quadrant-diagram'" (dropEvent)="dropEvent($event)"></d-quadrant-diagram>

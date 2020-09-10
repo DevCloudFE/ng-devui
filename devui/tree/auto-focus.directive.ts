@@ -1,15 +1,15 @@
 import { Directive, ElementRef, OnInit } from '@angular/core';
 
 @Directive({
-  selector: '[autofocus]' // tslint:disable-line
+  selector: '[dTreeAutoFocus]'
 })
 export class AutofocusDirective implements OnInit {
 
   constructor(private elementRef: ElementRef) { }
 
   ngOnInit(): void {
-    this.elementRef.nativeElement.focus();
     setTimeout(() => {
+      this.elementRef.nativeElement.focus();
       this.elementRef.nativeElement.select();
     });
   }

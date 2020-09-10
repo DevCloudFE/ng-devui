@@ -1,0 +1,31 @@
+<div class="demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 60, bottom: 0 }">
+  <d-demo-nav [navItems]="navItems"></d-demo-nav>
+  <div class="demo-example" [dAnchor]="'read-only-mode'">
+    <div class="demo-title">只读模式</div>
+    <div class="demo-text"></div>
+    <d-codebox id="components-rate-onlyread" [sourceData]="onlyreadSource">
+      <d-rate-demo-onlyread demo></d-rate-demo-onlyread>
+    </d-codebox>
+  </div>
+  <div class="demo-example" [dAnchor]="'dynamic-mode'">
+    <div class="demo-title">动态模式</div>
+    <div class="demo-text"></div>
+    <d-codebox id="components-rate-basic" [sourceData]="basicSource">
+      <d-rate-demo-basic demo></d-rate-demo-basic>
+    </d-codebox>
+  </div>
+  <div class="demo-example" [dAnchor]="'dynamic-mode-Custom'">
+    <div class="demo-title">动态模式-自定义</div>
+    <div class="demo-text"></div>
+    <d-codebox id="components-rate-customize" [sourceData]="customizeSource">
+      <d-rate-demo-customize demo></d-rate-demo-customize>
+    </d-codebox>
+  </div>
+  <div class="demo-example" [dAnchor]="'using-the-type-parameter'">
+    <div class="demo-title">使用type参数</div>
+    <div class="demo-text"></div>
+    <d-codebox id="components-rate-type" [sourceData]="TypeSource">
+      <d-type demo></d-type>
+    </d-codebox>
+  </div>
+</div>

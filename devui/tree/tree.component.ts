@@ -6,20 +6,29 @@ import {
   Output,
   TemplateRef,
   SimpleChanges,
-  OnChanges
+  OnChanges,
+  AfterViewInit,
+  ViewChildren,
+  QueryList,
+  ElementRef,
+  OnDestroy,
+  ViewChild
 } from '@angular/core';
 import {
   ITreeItem,
   TreeFactory,
   TreeNode
 } from './tree-factory.class';
-
+import { I18nService, I18nInterface } from 'ng-devui/i18n';
+import { Subscription, Subject } from 'rxjs';
+import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
+import { takeUntil, throttleTime } from 'rxjs/operators';
 @Component({
   selector: 'd-tree',
   templateUrl: './tree.component.html',
-  styleUrls: ['./tree.component.scss'],
+  styleUrls: ['./tree.component.scss']
 })
-export class TreeComponent implements OnInit, OnChanges {
+export class TreeComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
   treeFactory: TreeFactory;
   @Input() tree: Array<ITreeItem>;
   @Input() treeNodesRef: TemplateRef<any>;
@@ -28,32 +37,74 @@ export class TreeComponent implements OnInit, OnChanges {
   @Input() iconParentOpen: string;
   @Input() iconParentClose: string;
   @Input() iconLeaf: string;
+  @Input() loadingTemplateRef: TemplateRef<any>;
   @Input() treeNodeTitleKey = 'title';
-  @Output() nodeSelected: EventEmitter<any> = new EventEmitter();
-  @Output() nodeToggled: EventEmitter<any> = new EventEmitter();
-
-  constructor() {
-  }
-
-  ngOnInit() {
-    this.treeFactory = TreeFactory.fromTree({
-      treeItems: this.tree,
-      treeNodeChildrenKey: this.treeNodeChildrenKey,
-      treeNodeIdKey: this.treeNodeIdKey,
-      treeNodeTitleKey: this.treeNodeTitleKey
+  @Input() checkboxDisabledKey = 'disabled';
+  @Input() selectDisabledKey = 'disabled';
+  @Input() toggleDisabledKey = 'disableToggle';
+  @Input() virtualScroll = false;
+  @Input() virtualScrollHeight = '800px';
+  @Input() minBufferPx = 760;
+  @Input() maxBufferPx = 1140;
+  @Input() itemSize = 38;
+  @Output() nodeSelected: EventEmitter<any> = new EventEmitter<any>();
+  @Output() nodeDblClicked: EventEmitter<any> = new EventEmitter<any>();
+  @Output() nodeRightClicked: EventEmitter<any> = new EventEmitter<any>();
+  @Output() nodeToggled: EventEmitter<any> = new EventEmitter<any>();
+  @ViewChildren('treeNodeContent') treeNodeContent: QueryList<ElementRef>; // 获取content以取得tree宽度
+  @ViewChild(CdkVirtualScrollViewport) viewPort: CdkVirtualScrollViewport;
+  i18nCommonText: I18nInterface['common'];
+  i18nSubscription: Subscription;
+  treeNodes = [];
+  private mouseRightButton = 2;
+  destroy$ = new Subject();
+  constructor(private i18n: I18nService) {
+    this.i18nCommonText = this.i18n.getI18nText().common;
+    this.i18nSubscription = this.i18n.langChange().subscribe((data) => {
+      this.i18nCommonText = data.common;
     });
   }
 
+  ngOnInit() {
+    this.initTree();
+  }
+
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes && changes.tree) {
-      this.treeFactory = TreeFactory.fromTree({
-        treeItems: this.tree,
-        treeNodeChildrenKey: this.treeNodeChildrenKey,
-        treeNodeIdKey: this.treeNodeIdKey,
-        treeNodeTitleKey: this.treeNodeTitleKey
-      });
+    if (changes && changes.tree && !changes.tree.isFirstChange()) {
+      this.initTree();
     }
   }
+
+  initTree() {
+    this.treeFactory = TreeFactory.fromTree({
+      treeItems: this.tree,
+      isVirtualScroll: this.virtualScroll,
+      treeNodeChildrenKey: this.treeNodeChildrenKey,
+      treeNodeIdKey: this.treeNodeIdKey,
+      treeNodeTitleKey: this.treeNodeTitleKey,
+      checkboxDisabledKey: this.checkboxDisabledKey,
+      selectDisabledKey: this.selectDisabledKey,
+      toggleDisabledKey: this.toggleDisabledKey
+    });
+    if (this.virtualScroll) {
+      this.treeFactory.flattenNodes.pipe(takeUntil(this.destroy$)).subscribe(data => {
+        this.treeNodes = data;
+      });
+      this.treeFactory.getFlattenNodes();
+    }
+  }
+
+  ngAfterViewInit() {
+  }
+
+
+  contextmenuEvent(event, node) {
+    if (event.button === this.mouseRightButton) {
+      event.preventDefault();
+      this.nodeRightClicked.emit({ node: node, event: event });
+    }
+  }
+
 
   selectNode(event, treeNode: TreeNode) {
     this.nodeSelected.emit(treeNode);
@@ -61,8 +112,15 @@ export class TreeComponent implements OnInit, OnChanges {
   }
 
   toggleNode(event, treeNode: TreeNode) {
+    if (treeNode.data.disableToggle) {
+      return;
+    }
     this.treeFactory.toggleNodeById(treeNode.id);
     this.nodeToggled.emit(treeNode);
+  }
+
+  scrollToIndex(index: number) {
+    this.viewPort.scrollToIndex(index, 'smooth');
   }
 
   public appendTreeItems(treeItems: Array<ITreeItem>, parentId) {
@@ -74,7 +132,22 @@ export class TreeComponent implements OnInit, OnChanges {
       parentId: parentId,
       treeNodeChildrenKey: this.treeNodeChildrenKey,
       treeNodeIdKey: this.treeNodeIdKey,
-      treeNodeTitleKey: this.treeNodeTitleKey
+      treeNodeTitleKey: this.treeNodeTitleKey,
+      checkboxDisabledKey: this.checkboxDisabledKey,
+      selectDisabledKey: this.selectDisabledKey,
+      toggleDisabledKey: this.toggleDisabledKey
     });
+  }
+  public nodeDblClick(event, node) {
+    this.nodeDblClicked.emit(node);
+  }
+
+  ngOnDestroy() {
+    if (this.i18nSubscription) {
+      this.i18nSubscription.unsubscribe();
+
+    }
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

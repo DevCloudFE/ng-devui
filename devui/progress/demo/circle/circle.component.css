@@ -1,22 +1,23 @@
-.progress-container{
-    height:130px;
-    width:130px;
-    font-size:20px;
-    display:inline-block;
-    margin-right: 10px;
+.progress-container {
+  height: 130px;
+  width: 130px;
+  font-size: 20px;
+  display: inline-block;
+  margin-right: 10px;
 }
-.icon-position{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    line-height: 1;
-    white-space: normal;
-    text-align: center;
-    -webkit-transform: translate(-50%,-50%);
-    transform: translate(-50%,-50%);
-    color:#3DCCA6;
-    font-size:24px;
+
+.icon-position {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+  white-space: normal;
+  text-align: center;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  color: #3dcca6;
+  font-size: 24px;
 }

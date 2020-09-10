@@ -37,9 +37,17 @@ export class InputNumberComponent implements ControlValueAccessor, OnChanges, On
   @Input() step = 1;
   @Input() disabled = false;
   @Input() size: InputSizeType = '';
+  @Input() decimalLimit;
+  @Input() autoFocus = false;
+  @Input() allowEmpty = false;
+  @Input() placeholder = '';
+  @Input() maxLength = 0;
+  @Input() reg: RegExp | string;
+  @Output() afterValueChanged = new EventEmitter<number>();
   @Output() whileValueChanging = new EventEmitter<number>();
   @ViewChild('incButton', { static: true }) incButton: ElementRef;
   @ViewChild('decButton', { static: true }) decButton: ElementRef;
+  @ViewChild('inputElement', { static: true }) inputElement: ElementRef;
 
   private value: number;
   private incListener: Observable<any>;
@@ -56,8 +64,7 @@ export class InputNumberComponent implements ControlValueAccessor, OnChanges, On
 
   private onChangeCallback = (v: any) => {
   }
-
-  constructor(private cdr: ChangeDetectorRef) {
+  constructor(private cdr: ChangeDetectorRef, private el: ElementRef) {
   }
 
   registerOnChange(fn: any): void {
@@ -86,31 +93,40 @@ export class InputNumberComponent implements ControlValueAccessor, OnChanges, On
     return Math.max(min, Math.min(n, max));
   }
 
-  private ensureValueInRange(value: number | null): number {
-    let safeValue = value;
-    if (!this.valueMustBeValid(value)) {
+  private ensureValueInRange(value: number | null | undefined): number {
+    let safeValue;
+    if (this.allowEmpty && (value === null || value === undefined)) {
+      safeValue = value;
+    } else if (!this.valueMustBeValid(value)) {
       safeValue = this.min;
     } else {
-      safeValue = this.clamp(this.min, value as number, this.max);
+      let currentValue = value;
+      if (!value) {
+        currentValue = 0;
+      }
+      safeValue = this.clamp(this.min, currentValue, this.max);
     }
     return safeValue;
   }
 
-  private setValue(value: number | null): void {
+  private setValue(value: number | null | undefined): void {
     this.value = value;
     this.valueInput = value;
-    if (this.disabled) {
-      return;
-    }
-    if (!this.canDecrease()) {
-      this.unsubscribeDecAction();
-    } else {
+    if (this.disabled) { return; }
+    if (this.allowEmpty && (value === null || value === undefined)) {
       this.subscribeDecAction();
-    }
-    if (!this.canIncrease()) {
-      this.unsubscribeIncAction();
-    } else {
       this.subscribeIncAction();
+    } else {
+      if (!this.canDecrease()) {
+        this.unsubscribeDecAction();
+      } else {
+        this.subscribeDecAction();
+      }
+      if (!this.canIncrease()) {
+        this.unsubscribeIncAction();
+      } else {
+        this.subscribeIncAction();
+      }
     }
     this.cdr.detectChanges();
   }
@@ -119,6 +135,11 @@ export class InputNumberComponent implements ControlValueAccessor, OnChanges, On
     this.registerListeners();
     this.subscribeActions();
     this.toggleDisabled(this.disabled);
+    this.el.nativeElement.addEventListener('click', this.registerBlurListener.bind(this));
+    if (this.autoFocus) {
+      this.el.nativeElement.click();
+      this.inputElement.nativeElement.focus();
+    }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -131,7 +152,7 @@ export class InputNumberComponent implements ControlValueAccessor, OnChanges, On
     this.unsubscribeActions();
   }
 
-  private registerListeners() {
+  registerListeners() {
     if (this.incButton && this.incButton.nativeElement) {
       this.incListener = fromEvent(this.incButton.nativeElement, 'click');
     }
@@ -140,31 +161,31 @@ export class InputNumberComponent implements ControlValueAccessor, OnChanges, On
     }
   }
 
-  private subscribeActions() {
+  subscribeActions() {
     this.subscribeIncAction();
     this.subscribeDecAction();
   }
 
-  private subscribeIncAction() {
+  subscribeIncAction() {
     if (this.incListener && !this.incAction) {
       this.incAction = this.incListener.subscribe(this.increaseValue.bind(this));
       this.disabledInc = false;
     }
   }
 
-  private subscribeDecAction() {
+  subscribeDecAction() {
     if (this.decListener && !this.decAction) {
       this.decAction = this.decListener.subscribe(this.decreaseValue.bind(this));
       this.disabledDec = false;
     }
   }
 
-  private unsubscribeActions() {
+  unsubscribeActions() {
     this.unsubscribeIncAction();
     this.unsubscribeDecAction();
   }
 
-  private unsubscribeIncAction() {
+  unsubscribeIncAction() {
     if (this.incListener && this.incAction) {
       this.incAction.unsubscribe();
       this.incAction = null;
@@ -172,7 +193,7 @@ export class InputNumberComponent implements ControlValueAccessor, OnChanges, On
     }
   }
 
-  private unsubscribeDecAction() {
+  unsubscribeDecAction() {
     if (this.incListener && this.decAction) {
       this.decAction.unsubscribe();
       this.decAction = null;
@@ -182,24 +203,42 @@ export class InputNumberComponent implements ControlValueAccessor, OnChanges, On
 
   private increaseValue() {
     if (this.canIncrease()) {
-      const decimals = this.getMaxDecimals(this.value);
-      this.updateValue(parseFloat((this.value + this.step).toFixed(decimals)));
+      if (this.allowEmpty && (this.value === null || this.value === undefined)) {
+        this.updateValue(this.min);
+      } else {
+        const decimals = this.getMaxDecimals(this.value);
+        this.updateValue(parseFloat((this.value + this.step).toFixed(decimals)));
+      }
+      this.inputElement.nativeElement.focus();
     }
   }
 
   private decreaseValue() {
     if (this.canDecrease()) {
-      const decimals = this.getMaxDecimals(this.value);
-      this.updateValue(parseFloat((this.value - this.step).toFixed(decimals)));
+      if (this.allowEmpty && (this.value === null || this.value === undefined)) {
+        this.updateValue(this.min);
+      } else {
+        const decimals = this.getMaxDecimals(this.value);
+        this.updateValue(parseFloat((this.value - this.step).toFixed(decimals)));
+      }
+      this.inputElement.nativeElement.focus();
     }
   }
 
   private canIncrease() {
-    return (this.value + this.step) <= this.max;
+    if (this.allowEmpty && (this.value === null || this.value === undefined)) {
+      return (this.min + this.step) <= this.max;
+    } else {
+      return (this.value + this.step) <= this.max;
+    }
   }
 
   private canDecrease() {
-    return (this.value - this.step) >= this.min;
+    if (this.allowEmpty && (this.value === null || this.value === undefined)) {
+      return (this.min + this.step) <= this.max;
+    } else {
+      return (this.value - this.step) >= this.min;
+    }
   }
 
   private toggleDisabled(disabled: boolean) {
@@ -211,18 +250,23 @@ export class InputNumberComponent implements ControlValueAccessor, OnChanges, On
   }
 
   ensureValueIsValid(event: Event) {
-    let newValue = event.target['value'];
-    newValue = parseFloat(newValue as string);
-    if (!isNaN(newValue)) {
-      this.updateValue(this.ensureValueInRange(newValue));
-      return;
+    event.stopPropagation();
+
+    const newValue = event.target['value'];
+    const parseValue = parseFloat(newValue as string);
+    if (this.allowEmpty && newValue === '') {
+      this.updateValue(this.ensureValueInRange(null));
+    } else if (!isNaN(parseValue)) {
+      this.updateValue(this.ensureValueInRange(parseValue));
+    } else {
+      this.updateValue(this.ensureValueInRange(this.value));
     }
-    this.updateValue(this.ensureValueInRange(this.value));
+
   }
 
   private checkRangeValues(minValue, maxValue) {
-    if (maxValue <= minValue) {
-      throw new Error(`max value must be greater than min value`);
+    if (maxValue < minValue) {
+      throw new Error(`max value must be greater than or equal to min value`);
     }
   }
 
@@ -238,25 +282,45 @@ export class InputNumberComponent implements ControlValueAccessor, OnChanges, On
     if (!currentValue) {
       return stepPrecision;
     }
+    if (this.decimalLimit !== undefined && this.decimalLimit !== null) {
+      return this.decimalLimit;
+    }
     return Math.max(currentValuePrecision, stepPrecision);
   }
 
-  protectInput(event: KeyboardEvent) {
+  protectInput(event: KeyboardEvent | ClipboardEvent) {
     let value = event.target['value'];
-    // tslint:disable-next-line
-    const input = String.fromCharCode(event.which);
+    let input;
+    if (event['charCode']) {
+      input = String.fromCharCode(event['charCode']);
+    } else {
+      input = event['clipboardData'].getData('text');
+    }
     const selectionStart = event.target['selectionStart'];
     const selectionEnd = event.target['selectionEnd'];
     value = value.substring(0, selectionStart) + input + value.substring(selectionEnd);
-    if (value === '-' || value.match(/^\s*(-|\+)?\d+\.$/) || value.match(/^\s*(-|\+)?\d+\.[0-9]*0$/)) {
+    if (this.maxLength && value.length > this.maxLength) {
+      event.preventDefault();
+      return;
+    }
+    if (this.reg && !value.match(new RegExp(this.reg))) {
+      event.preventDefault();
+      return;
+    } else if (
+      value === '-' || value.match(/^\s*(-|\+)?\d+\.$/) || value.match(/^\s*(-|\+)?\d+\.[0-9]*0$/) || value.match(/^\s*(-|\+)0+$/)
+    ) {
       // indeterminate state
       return;
     } else if (value.match(/^\s*(-|\+)?(\d+|(\d*(\.\d*)))$/)) {
       event.preventDefault();
+
+      if (this.decimalLimit !== undefined && this.decimalLimit !== null) {
+        value = parseFloat(value).toFixed(this.decimalLimit);
+      }
       value = parseFloat(value as string);
       if (!isNaN(value)) {
         this.valueInput = value;
-        this.notifyValueWhileInput(value);
+        this.notifyWhileValueChanging(value);
         // updateValue会使输入游标跳到最后，这里设置输入游标归位
         setTimeout(() => {
           event.target['setSelectionRange'](selectionStart + 1, selectionStart + 1);
@@ -269,10 +333,11 @@ export class InputNumberComponent implements ControlValueAccessor, OnChanges, On
   }
 
   private notifyValueChange() {
+    this.afterValueChanged.emit(this.value);
     this.onChangeCallback(this.value);
   }
 
-  private notifyValueWhileInput(value) {
+  private notifyWhileValueChanging(value) {
     this.whileValueChanging.emit(value);
   }
 
@@ -284,12 +349,32 @@ export class InputNumberComponent implements ControlValueAccessor, OnChanges, On
     }
   }
 
-  handleBackspace($event: KeyboardEvent) {
-    if ($event.key === 'Backspace') {
-      setTimeout(() => {
-        this.notifyValueWhileInput(this.valueInput);
-      }, 0);
+  handleBackspace(event: KeyboardEvent) {
+    if (event.key === 'Backspace') {
+      let oldValue = event.target['value'];
+      const selectionStart = event.target['selectionStart'];
+      const selectionEnd = event.target['selectionEnd'];
+      let newValue = oldValue.substring(0, selectionStart - 1) + oldValue.substring(selectionEnd);
+      oldValue = oldValue === '' ? null : this.ensureValueInRange(oldValue);
+      newValue = newValue === '' ? null : this.ensureValueInRange(newValue);
+      if (oldValue !== newValue && newValue !== '-') {
+        this.notifyWhileValueChanging(newValue);
+      }
+    }
+  }
+
+  registerBlurListener() {
+    document.addEventListener('click', this.emitBlurEvent.bind(this), {
+      capture: true,
+      once: true,
+    });
+  }
+
+  emitBlurEvent(event: MouseEvent) {
+    if (this.el.nativeElement !== event.target && !this.el.nativeElement.contains(event.target)) {
+      this.el.nativeElement.dispatchEvent(new Event('blur', {
+        bubbles: false
+      }));
     }
   }
 }
-

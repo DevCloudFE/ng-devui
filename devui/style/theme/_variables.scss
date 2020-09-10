@@ -1,8 +1,43 @@
 @import './color';
+@import '../core/font';
 
-$text-color: $dark1;
-$font-size-base: 14px;
-$font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei","Helvetica Neue",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+$text-color: $devui-text;
+$font-family: 'Helvetica Neue', helvetica, arial, 'PingFang SC', 'Hiragino Sans GB', 'Heiti SC', 'Microsoft YaHei', 'WenQuanYi Micro Hei',
+  sans-serif;
 $font-variant-base: tabular-nums;
-$line-height-base: 1.15;
-$body-background: $white;
+$body-background: $devui-base-bg;
+$font-size-base: $font-size-base; // 12px
+// $font-size-modal-title: $font-size-modal-title; // 18px
+$font-size-page-title: $font-size-primary; // 16px
+// $font-size-secondary-card-title: $font-size-secondary-card-title; // 14px
+.devui-font-size-base {
+  font-size: $font-size-base; // 12px
+}
+
+.devui-font-base {
+  @include font-content(); // 12px normal 1.5
+}
+
+.devui-font-size-modal-title {
+  font-size: $font-size-modal-title; // 18px
+}
+
+.devui-font-modal-title {
+  @include font-title($font-size-modal-title); // 18px bold 1.5
+}
+
+.devui-font-size-page-title {
+  font-size: $font-size-primary; // 16px
+}
+
+.devui-font-page-title {
+  @include font-title(); // 16px bold 1.5
+}
+
+.devui-font-size-secondary-title {
+  font-size: $font-size-secondary-card-title; // 14px
+}
+
+.devui-font-secondary-title {
+  @include font-title($font-size-secondary-card-title); // 14px bold 1.5
+}

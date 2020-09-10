@@ -1,0 +1,12 @@
+.single-checkbox {
+  display: inline-block;
+  margin-right: 4px;
+}
+
+:host ::ng-deep .devui-radio-horizontal d-radio {
+  display: inline-block;
+}
+
+form {
+  width: 500px;
+}

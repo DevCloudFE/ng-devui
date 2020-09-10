@@ -3,19 +3,23 @@
 @import '../style/mixins/index';
 
 :host.devui-popover {
+  font-size: 12px;
   position: absolute;
   top: 0;
   left: 0;
-  color: $dark1;
-  line-height: 1em;
-  background: $white;
+  line-height: 1.5;
   border: none;
-  border-radius: 2px;
+  border-radius: 4px;
   z-index: 1060;
+  background-color: $devui-feedback-overlay-bg;
+  color: $devui-feedback-overlay-text;
+  overflow-wrap: break-word;
 
   > .arrow {
     border-width: 8px;
-    &, &::after {
+
+    &,
+    &::after {
       position: absolute;
       display: block;
       width: 0;
@@ -23,9 +27,9 @@
       border-color: transparent;
       border-style: solid;
     }
-    
+
     &::after {
-      content: "";
+      content: '';
     }
   }
 
@@ -33,7 +37,7 @@
     left: 50%;
     margin-left: -7px;
     border-bottom-width: 0;
-    border-top-color: $white;
+    border-top-color: $devui-feedback-overlay-bg;
     bottom: -8px;
   }
 
@@ -42,14 +46,14 @@
     left: -8px;
     margin-top: -8px;
     border-left-width: 0;
-    border-right-color: $white;
+    border-right-color: $devui-feedback-overlay-bg;
   }
 
   &.bottom > .arrow {
     left: 50%;
     margin-left: -7px;
     border-top-width: 0;
-    border-bottom-color: $white;
+    border-bottom-color: $devui-feedback-overlay-bg;
     top: -8px;
   }
 
@@ -58,143 +62,91 @@
     right: -8px;
     margin-top: -8px;
     border-right-width: 0;
-    border-left-color: $white;
+    border-left-color: $devui-feedback-overlay-bg;
   }
 
   &.top {
     margin-top: -10px;
-    box-shadow: -5px 5px 20px 0px rgba($dark1, .2);
-
-    &.devui-popover- {
-      &success > .arrow {
-        border-top-color: $status-green;
-      }
-
-      &error > .arrow {
-        border-top-color: $status-red;
-      }
-
-      &warning > .arrow {
-        border-top-color: $status-yellow;
-      }
-
-      &default > .arrow {
-        border-top-color: $dropdown-overlay;
-      }
-
-      &info > .arrow {
-        border-top-color: $status-blue;
-      }
-    }
+    box-shadow: -5px 5px 20px 0 $devui-shadow;
   }
 
   &.bottom {
     margin-top: 10px;
-    box-shadow: 5px -5px 20px 0px rgba($dark1, .2);
-
-    &.devui-popover- {
-      &success > .arrow {
-        border-bottom-color: $status-green;
-      }
-
-      &error > .arrow {
-        border-bottom-color: $status-red;
-      }
-
-      &warning > .arrow {
-        border-bottom-color: $status-yellow;
-      }
-
-      &default > .arrow {
-        border-bottom-color: $dropdown-overlay;
-      }
-
-      &info > .arrow {
-        border-bottom-color: $status-blue;
-      }
-    }
+    box-shadow: 5px -5px 20px 0 $devui-shadow;
   }
 
   &.left {
     margin-left: -10px;
-    box-shadow: 5px -5px 20px 0px rgba($dark1, .2);
-
-    &.devui-popover- {
-      &success > .arrow {
-        border-left-color: $status-green;
-      }
-
-      &error > .arrow {
-        border-left-color: $status-red;
-      }
-
-      &warning > .arrow {
-        border-left-color: $status-yellow;
-      }
-
-      &default > .arrow {
-        border-left-color: $dropdown-overlay;
-      }
-
-      &info > .arrow {
-        border-left-color: $status-blue;
-      }
-    }
+    box-shadow: 5px -5px 20px 0 $devui-shadow;
   }
 
   &.right {
     margin-left: 10px;
-    box-shadow: -5px 5px 20px 0px rgba($dark1, .2);
-
-    &.devui-popover- {
-      &success > .arrow {
-        border-right-color: $status-green;
-      }
-
-      &error > .arrow {
-        border-right-color: $status-red;
-      }
-
-      &warning > .arrow {
-        border-right-color: $status-yellow;
-      }
-
-      &default > .arrow {
-        border-right-color: $dropdown-overlay;
-      }
-
-      &info > .arrow {
-        border-right-color: $status-blue;
-      }
-    }
-  }
-
-  &.devui-popover-success {
-    background-color: $status-green;
-    color: $white;
-  }
-
-  &.devui-popover-error {
-    background-color: $status-red;
-    color: $white;
-  }
-
-  &.devui-popover-info {
-    background-color: $status-blue;
-    color: $white;
-  }
-
-  &.devui-popover-default {
-    background-color: $dropdown-overlay;
-    color: $dark1;
-  }
-
-  &.devui-popover-warning {
-    background-color: $status-yellow;
-    color: $dark;
+    box-shadow: -5px 5px 20px 0 $devui-shadow;
   }
 }
 
 .devui-popover-content {
-  padding: 9px 14px;
+  padding: 5px 14px;
+}
+
+.devui-popover-icon {
+  display: block;
+  position: absolute;
+  left: 10px;
+  top: 6px;
+
+  svg.devui-icon {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.devui-popover-main-content.with-icon {
+  text-indent: 20px;
+}
+
+.devui-icon.devui-icon-success > g {
+  & > path {
+    fill: $devui-success;
+  }
+
+  & > circle,
+  & > polygon {
+    fill: $devui-light-text;
+  }
+}
+
+.devui-icon.devui-icon-warning > g {
+  & > polygon {
+    fill: $devui-light-text;
+  }
+
+  & > path {
+    fill: $devui-warning;
+  }
+}
+
+.devui-icon.devui-icon-info > g {
+  & > g {
+    fill: $devui-info;
+  }
+
+  & > circle {
+    fill: $devui-light-text;
+  }
+}
+
+.devui-icon.devui-icon-error > g {
+  & > path {
+    fill: $devui-danger;
+  }
+
+  & > circle {
+    fill: $devui-light-text;
+  }
+}
+
+.devui-popover-content {
+  padding: 5px 14px;
 }

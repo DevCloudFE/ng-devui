@@ -1,6 +1,7 @@
-import { Component, OnInit, HostBinding } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { treeDataSource, SourceType } from '../mock-data';
-import { CheckableRelation } from '../../data-table.model';
+import { CheckableRelation, DataTableComponent, TableWidthConfig } from 'ng-devui/data-table';
+
 
 @Component({
   selector: 'd-tree-data',
@@ -8,66 +9,83 @@ import { CheckableRelation } from '../../data-table.model';
   styles: ['.demo-margin { margin: 5px 5px 0 0;}']
 })
 export class TreeDataComponent implements OnInit {
-  extraOptions: any;
-  iconParentOpen = '<span class="icon icon-chevron-right"></span>';
-  iconParentClose = '<span class="icon icon-chevron-down"></span>';
+  iconParentOpen: string;
+  iconParentClose: string;
   basicDataSource: Array<SourceType> = JSON.parse(JSON.stringify(treeDataSource.slice(0, 6)));
   checkableRelation: CheckableRelation = {downward: true, upward: true};
+  @ViewChild(DataTableComponent, { static: true }) datatable: DataTableComponent;
+
+  tableWidthConfig: TableWidthConfig[] = [
+    {
+      field: 'checkbox',
+      width: '4%'
+    },
+    {
+      field: 'title',
+      width: '36%'
+    },
+    {
+      field: 'lastName',
+      width: '20%'
+    },
+    {
+      field: 'status',
+      width: '20%'
+    },
+    {
+      field: 'dob',
+      width: '20%'
+    }
+  ];
+
   ngOnInit() {
-    this.extraOptions = {showHeadTableToggler: true};
+    this.basicDataSource[0].$isChildTableOpen = true;
   }
 
-  cellClick(e) {
-      console.log('cell');
-      console.log(e);
-  }
-
-  rowClick(e) {
-      console.log('row');
-      console.log(e);
+  onChildTableToggle(status, rowItem) {
+    this.datatable.setRowChildToggleStatus(rowItem, status);
   }
 
   loadChildrenTable = (rowItem) => {
-    if (rowItem.title === 'vue组件') {
-      rowItem.children.push({
-        title: 'vue表格',
-        lastName: '张三',
-        status: '已关闭',
-        dob: new Date(1989, 1, 1),
-      },
-      {
-          title: 'vue富文本',
-          lastName: '张三',
-          status: '已关闭',
-          dob: new Date(1991, 3, 1)
-      });
-    }
     return new Promise((resolve) => {
-      resolve(rowItem);
+      setTimeout(() => {
+        if (rowItem.title === 'table title1') {
+          if (rowItem.children && rowItem.children.length === 0) {
+            rowItem.children.push({
+              title: 'table title11',
+              lastName: 'Mark',
+              status: 'done',
+              dob: new Date(1989, 1, 1),
+              startDate: new Date(2020, 1, 4),
+              endDate: new Date(2020, 1, 8)
+          });
+          }
+        }
+        resolve(rowItem);
+      }, 500);
+
     });
   }
 
   loadAllChildrenTable = () => {
-    this.basicDataSource[0].children[0].children[1].children[0].children.push({
-      title: 'vue表格',
-      lastName: '张三',
-      status: '已关闭',
-      dob: new Date(1989, 1, 1),
-    },
-    {
-        title: 'vue富文本',
-        lastName: '张三',
-        status: '已关闭',
-        dob: new Date(1991, 3, 1)
-    });
     return new Promise((resolve) => {
-      resolve();
+      setTimeout(() => {
+        this.basicDataSource[0].children[0].children[1].children[0].children = [];
+        this.basicDataSource[0].children[0].children[1].children[0].children.push({
+          title: 'table title01211',
+          lastName: 'Mark',
+          status: 'done',
+          dob: new Date(1989, 1, 1),
+        },
+        {
+            title: 'table title01212',
+            lastName: 'Mark',
+            status: 'done',
+            dob: new Date(1991, 3, 1)
+        });
+        resolve();
+      }, 500);
     });
-  }
-
-  getCheckedRows(e) {
-    console.log('getCheckedRows');
-    console.log(e);
   }
 
   setUnCheckableRelation(type) {
@@ -79,7 +97,22 @@ export class TreeDataComponent implements OnInit {
   }
 
   toggleIcon() {
-    this.extraOptions = {iconUnFoldTable: this.iconParentOpen, iconFoldTable: this.iconParentClose, showHeadTableToggler: true};
+    this.iconParentOpen = '<span class="icon icon-chevron-right"></span>';
+    this.iconParentClose = '<span class="icon icon-chevron-down"></span>';
   }
 
+  onRowCheckChange(checked, rowIndex, nestedIndex, rowItem) {
+    rowItem.$checked = checked;
+    rowItem.$halfChecked = false;
+    this.datatable.setRowCheckStatus({
+      rowIndex: rowIndex,
+      nestedIndex: nestedIndex,
+      rowItem: rowItem,
+      checked: checked
+    });
+  }
+
+  expandAll() {
+    this.datatable.setTableChildrenToggleStatus(true);
+  }
 }

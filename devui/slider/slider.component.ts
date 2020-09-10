@@ -257,7 +257,7 @@ export class SliderComponent implements OnInit, OnChanges, ControlValueAccessor,
   }
 
   private setValue(value: number | null): void {
-    if (!(this.value === value)) {
+    if (this.value !== value) {
       this.value = value;
       this.updateTrackAndHandle();
     }
@@ -265,7 +265,7 @@ export class SliderComponent implements OnInit, OnChanges, ControlValueAccessor,
   }
 
   private ensureValueInRange(value: number | null): number {
-    let safeValue = value;
+    let safeValue;
     if (!this.valueMustBeValid(value)) {
       safeValue = this.min;
     } else {

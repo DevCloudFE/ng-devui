@@ -14,6 +14,8 @@ import { BasicComponent } from './basic/basic.component';
 import { MultiComponent } from './multi/multi.component';
 import { CustomizeComponent } from './customize/customize.component';
 import { UploadAutoComponent } from './auto/auto.component';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
+import { DynamicUploadOptionsComponent } from './dynamic-upload-options/dynamic-upload-options.component';
 
 
 @NgModule({
@@ -26,6 +28,7 @@ import { UploadAutoComponent } from './auto/auto.component';
     FormsModule,
     HttpClientModule,
     ButtonModule,
+    DDemoNavModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo' },
       { path: 'demo', component: UploadDemoComponent},
@@ -40,7 +43,8 @@ import { UploadAutoComponent } from './auto/auto.component';
     BasicComponent,
     MultiComponent,
     CustomizeComponent,
-    UploadAutoComponent
+    UploadAutoComponent,
+    DynamicUploadOptionsComponent
   ],
   entryComponents: [UploadDemoComponent],
   providers: [],

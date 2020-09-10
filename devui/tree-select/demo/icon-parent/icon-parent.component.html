@@ -1,0 +1,16 @@
+<section>
+  <h5 class="text-muted">Standard: iconParent</h5>
+  <div class="row">
+    <div class="col-md-5" style="font-size: 0;">
+      <d-tree-select
+        placeholder="Standard Input"
+        [treeData]="data1"
+        [(ngModel)]="value1"
+        (ngModelChange)="showSelected($event)"
+        [iconParentOpen]="iconParentOpen"
+        [iconParentClose]="iconParentClose"
+        style="width: 280px;"
+      ></d-tree-select>
+    </div>
+  </div>
+</section>

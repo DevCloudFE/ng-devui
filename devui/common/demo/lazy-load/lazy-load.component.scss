@@ -1,0 +1,15 @@
+.container {
+  width: 300px;
+}
+
+.list {
+  position: relative;
+  max-height: 180px;
+  overflow: scroll;
+  width: 295px;
+}
+
+.item {
+  line-height: 35px;
+  border-bottom: 1px solid var(--devui-dividing-line, #dfe1e6);
+}

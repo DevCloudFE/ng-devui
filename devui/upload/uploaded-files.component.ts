@@ -4,25 +4,29 @@ import {
   TemplateRef,
   Output,
   EventEmitter,
+  OnDestroy,
 } from '@angular/core';
-import { DevUIConfig } from 'ng-devui/devui.config';
+import { I18nInterface, I18nService } from 'ng-devui/i18n';
+import { Subscription } from 'rxjs';
+
 @Component({
   selector: 'd-uploaded-files',
   exportAs: 'dUploadFiles',
   templateUrl: './uploaded-files.component.html',
   styleUrls: ['./uploaded-files.component.scss']
 })
-export class UploadedFilesComponent {
+export class UploadedFilesComponent implements OnDestroy {
   @Input() uploadedFiles: Array<Object> = [];
   @Input() uploadedFilesRef: TemplateRef<any>;
   @Input() filePath: string;
-  @Output() deleteUploadedFileEvent: EventEmitter<any> = new EventEmitter();
-  UPLOADED: string;
-  DELETE: string;
-
-  constructor(private devUIConfig: DevUIConfig) {
-    this.UPLOADED = this.devUIConfig['uploadCN'].UPLOAD_STATUS.UPLOADED;
-    this.DELETE = this.devUIConfig['uploadCN'].DELETE;
+  @Output() deleteUploadedFileEvent: EventEmitter<any> = new EventEmitter<any>();
+  i18nText: I18nInterface['upload'];
+  i18nSubscription: Subscription;
+  constructor(private i18n: I18nService) {
+    this.i18nText = this.i18n.getI18nText().upload;
+    this.i18nSubscription = this.i18n.langChange().subscribe((data) => {
+      this.i18nText = data.upload;
+    });
   }
 
   cleanUploadedFiles() {
@@ -45,8 +49,14 @@ export class UploadedFilesComponent {
     this.deleteUploadedFileEvent.emit(filePath);
   }
 
-    // 解决templateContext 传递method.bind(this)引发模板中内嵌组件initialize问题
-    deleteFileProxy = filePath => {
-      this.deleteFile(filePath);
+  // 解决templateContext 传递method.bind(this)引发模板中内嵌组件initialize问题
+  deleteFileProxy = filePath => {
+    this.deleteFile(filePath);
+  }
+  ngOnDestroy() {
+    if (this.i18nSubscription) {
+      this.i18nSubscription.unsubscribe();
+
     }
+  }
 }

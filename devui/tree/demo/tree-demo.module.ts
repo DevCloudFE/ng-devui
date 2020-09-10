@@ -13,6 +13,16 @@ import { CheckableComponent } from './checkable/checkable.component';
 import { OperateBtnComponent } from './operate-btn/operate-btn.component';
 import { CustomizeComponent } from './customize/customize.component';
 import { DraggableComponent } from './draggable/draggable.component';
+import { CustomTitleKeyComponent } from './custom-title-key/custom-title-key.component';
+import { SearchFilterComponent } from './search-filter/search-filter.component';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
+import { CheckControlComponent } from './check-control/check-control.component';
+import { VirtualScrollComponent } from './virtual-scroll/virtual-scroll.component';
+import { CustomLoadingComponent } from './custom-loading/custom-loading.component';
+import { LoadingModule } from 'ng-devui/loading';
+import { SafePipeModule } from 'ng-devui/utils';
+import { TooltipModule } from 'ng-devui/tooltip';
+import { SearchModule } from 'ng-devui/search';
 
 @NgModule({
   imports: [
@@ -20,8 +30,13 @@ import { DraggableComponent } from './draggable/draggable.component';
     TreeModule,
     ButtonModule,
     FormsModule,
+    LoadingModule,
     DevUICodeboxModule,
     DevUIApiModule,
+    DDemoNavModule,
+    TooltipModule,
+    SafePipeModule,
+    SearchModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo' },
       { path: 'demo', component: TreeDemoComponent},
@@ -37,7 +52,12 @@ import { DraggableComponent } from './draggable/draggable.component';
     CheckableComponent,
     OperateBtnComponent,
     CustomizeComponent,
-    DraggableComponent
+    DraggableComponent,
+    CustomTitleKeyComponent,
+    SearchFilterComponent,
+    CheckControlComponent,
+    VirtualScrollComponent,
+    CustomLoadingComponent
   ],
   entryComponents: [
     TreeDemoComponent,

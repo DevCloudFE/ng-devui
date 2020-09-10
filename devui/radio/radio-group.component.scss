@@ -1,7 +1,22 @@
 .devui-radio-horizontal {
   .devui-radio-list-item {
     display: inline-block;
-    padding-right: 20px;
+
+    &:not(:last-child) {
+      padding-right: 20px;
+    }
+  }
+
+  ::ng-deep d-radio {
+    display: inline-block;
   }
 }
 
+.devui-radio-list-item {
+  position: relative;
+  line-height: 28px;
+}
+
+:host ::ng-deep d-radio {
+  line-height: 28px;
+}

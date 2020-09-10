@@ -33,9 +33,9 @@ export class AnchorDirective implements AfterViewInit, OnDestroy {
   REACH_TOP_VISION_OFFSET = 50;
 
   private THROTTLE_DELAY = 100;
-  private THROTTLE_TRIGER = 600;
+  private THROTTLE_TRIGGER = 600;
   private scrollPreStart;
-  private scrollTimmer;
+  private scrollTimer;
 
   constructor(private el: ElementRef) {
     this.element = this.el.nativeElement;
@@ -49,7 +49,7 @@ export class AnchorDirective implements AfterViewInit, OnDestroy {
       if (active) {
         this.element.classList.add(this.anchorActive);
         this.lastActiveBy = 'anchor-active-by-' + this.activeChangeBy;
-        // settimeout是为了this.lastActiveBy每次都能被再次触发
+        // setTimeout是为了this.lastActiveBy每次都能被再次触发
         setTimeout(() => {this.element.classList.add(this.lastActiveBy); }, 0);
       } else {
         this.element.classList.remove(this.anchorActive);
@@ -68,44 +68,46 @@ export class AnchorDirective implements AfterViewInit, OnDestroy {
   @HostListener('click') // 鼠标落入范围，激活anchor
   beFocused() {
     this.boxElement.forceActiveAnchor(this.anchor, 'click-inside');
+    this.boxElement.isScrollingToTarget = false;
   }
 
   throttle = () => {
     const fn = this.checkActiveStatus;
     const time = Date.now();
-    if (this.scrollTimmer) {
-      clearTimeout(this.scrollTimmer);
+    if (this.scrollTimer) {
+      clearTimeout(this.scrollTimer);
     }
     if (!this.scrollPreStart) {
       this.scrollPreStart = time;
     }
-    if (time - this.scrollPreStart > this.THROTTLE_TRIGER) {
+    if (time - this.scrollPreStart > this.THROTTLE_TRIGGER) {
       fn();
       this.scrollPreStart = null;
-      this.scrollTimmer = null;
+      this.scrollTimer = null;
     } else {
-      this.scrollTimmer = setTimeout(() => {
+      this.scrollTimer = setTimeout(() => {
         fn();
         this.scrollPreStart = null;
-        this.scrollTimmer = null;
+        this.scrollTimer = null;
       }, this.THROTTLE_DELAY);
     }
   }
 
   checkActiveStatus = (activeChangeBy?: AnchorActiveChangeSource) => {
+    if (this.boxElement.isScrollingToTarget) { return; }
     const top = this.element.getBoundingClientRect().top - (this.boxElement.view && this.boxElement.view.top || 0);
     const bottom = this.element.getBoundingClientRect().bottom - (this.boxElement.view && this.boxElement.view.top || 0);
 
     // 首个个特殊处理
     if (this.anchor === this.boxElement.defaultAnchor) {
       this.activeChangeBy = activeChangeBy || 'scroll';
-      this.isActive = bottom > this.REACH_TOP_VISION_OFFSET  ? true : false;
+      this.isActive = bottom > this.REACH_TOP_VISION_OFFSET;
       return;
     }
 
     // 默认处理
     this.activeChangeBy = activeChangeBy || 'scroll';
-    this.isActive = bottom > this.REACH_TOP_VISION_OFFSET  && top < this.REACH_TOP_VISION_OFFSET ? true : false;
+    this.isActive = bottom > this.REACH_TOP_VISION_OFFSET  && top < this.REACH_TOP_VISION_OFFSET;
   }
 
   updateScrollListenTarget () {
@@ -113,6 +115,6 @@ export class AnchorDirective implements AfterViewInit, OnDestroy {
     if (this.boxElement) {
       this.scrollListenTarget = this.boxElement.scrollTarget || window; // window有scroll事件，document.documentElement没有scroll事件
     }
-    this.scrollListenTarget.addEventListener('scroll', this.throttle);
+    this.scrollListenTarget.addEventListener('scroll', this.throttle, {passive: true});
   }
 }

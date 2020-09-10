@@ -1,0 +1,34 @@
+.col-md-5 {
+  width: 50%;
+}
+
+.col-md-3 {
+  width: 30%;
+}
+
+.custom-wrapper {
+  padding: 5px;
+}
+
+.custom-title {
+  padding: 5px;
+  color: #959eb2;
+}
+
+.custom-list {
+  padding: 5px;
+}
+
+.custom-single {
+  background: #e8f0fd;
+  border: 1px solid #e8f0fd;
+  border-radius: 2px;
+  text-align: center;
+  padding: 8px;
+  display: inline-block;
+}
+
+.custom-list:hover .custom-single {
+  border: 1px solid #405dff;
+  color: #252b3a;
+}

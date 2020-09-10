@@ -1,32 +1,80 @@
-
 @import '../style/theme/color';
 @import '../style/theme/variables';
 @import '../style/mixins/index';
 
-.modal-header{
-    padding: 10px 20px 0 20px;
-    height: 43px;
-    .standard-title {
-      color: $dark1;
-      letter-spacing: 0;
-      font-size: 16px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+.modal-header {
+  padding: 30px 30px 0 30px;
+  height: 56px;
+  position: relative;
+  border: none; // 覆盖bootStrap默认样式
+
+  .standard-title {
+    height: 26px;
+    line-height: 26px;
+    color: $devui-text;
+    letter-spacing: 0;
+    font-size: 18px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  button.close {
+    position: absolute;
+    right: 16px;
+    top: 16px;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 1;
+    color: #000000; // TODO: color not variable
+    // text-shadow: 0 1px 0 $devui-base-bg;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    -webkit-appearance: none;
+
+    svg.svg-icon-close polygon {
+      fill: $devui-text-weak;
+    }
+
+    &:hover {
+      background: $devui-list-item-hover-bg;
+
+      svg.svg-icon-close polygon {
+        fill: $devui-icon-fill-active;
+      }
+    }
   }
 }
 
-button.close {
-  float: right;
-  font-size: 21px;
-  font-weight: bold;
-  line-height: 1;
-  color: #000;
-  text-shadow: 0 1px 0 $white;
-  filter: alpha(opacity=20);
-  opacity: 0.2;
-  cursor: pointer;
-  background: transparent;
-  border: 0;
-  -webkit-appearance: none;
+.header-alert-icon {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 5px;
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+  text-align: center;
+  margin-top: -2px; // 使图标对其
+
+  path.devui-icon-warning-outer {
+    fill: $devui-warning-line;
+  }
+
+  path.devui-icon-warning-inner {
+    fill: $devui-light-text;
+    stroke: $devui-light-text;
+  }
+}
+
+.title-text {
+  font-size: 18px;
+  font-weight: 600;
+  vertical-align: middle;
+}
+
+button {
+  outline: none;
+  height: 20px;
+  width: 20px;
 }

@@ -1,0 +1,72 @@
+<ng-content></ng-content>
+<ng-template
+  cdk-connected-overlay
+  [cdkConnectedOverlayOrigin]="cdkConnectedOverlayOrigin"
+  [cdkConnectedOverlayOpen]="isOpen"
+  (backdropClick)="isOpen = false"
+  (positionChange)="onPositionChange($event)"
+>
+  <div [@cornerFadeInOut]="isOpen ? datepickerPosition : 'void'" class="devui-two-date-wrapper devui-dropdown-overlay">
+    <div class="devui-two-date-title">
+      <span>开始日期</span>
+      <span>结束日期</span>
+    </div>
+    <div class="devui-two-date-picker">
+      <d-two-datepicker-single
+        class="devui-date-picker"
+        [locale]="locale"
+        [cssClass]="cssClass"
+        [disabled]="disabled"
+        [dateConverter]="dateConverter"
+        [dateFormat]="dateFormat"
+        [dateConfig]="dateConfig"
+        [maxDate]="maxDate"
+        [minDate]="minDate"
+        [rangePicker]="true"
+        [selectedRange]="[rangeStart, rangeEnd]"
+        [currentCalendars]="currentCalendars"
+        [showTime]="showTime"
+        (rangeSelected)="rangeChange($event)"
+        (hoverOnDate)="selectingDate($event)"
+        (rangeSelecting)="syncRangeStart($event, rightPicker)"
+        (syncPickerPair)="syncPickerPair($event, 'left')"
+        [whichOpen]="whichOpen"
+        #leftPicker
+      >
+      </d-two-datepicker-single>
+      <d-two-datepicker-single
+        class="devui-date-picker"
+        [locale]="locale"
+        [cssClass]="cssClass"
+        [disabled]="disabled"
+        [dateConverter]="dateConverter"
+        [dateFormat]="dateFormat"
+        [dateConfig]="dateConfig"
+        [maxDate]="maxDate"
+        [minDate]="minDate"
+        [rangePicker]="true"
+        [selectedRange]="[rangeStart, rangeEnd]"
+        [currentCalendars]="currentCalendars"
+        [showTime]="showTime"
+        (rangeSelected)="rangeChange($event)"
+        (hoverOnDate)="selectingDate($event)"
+        (rangeSelecting)="syncRangeStart($event, leftPicker)"
+        (syncPickerPair)="syncPickerPair($event, 'right')"
+        [isAuxiliary]="true"
+        [whichOpen]="whichOpen"
+        #rightPicker
+      >
+      </d-two-datepicker-single>
+    </div>
+    <div *ngIf="!customViewTemplate" class="devui-two-date-footer devui-two-date-custom">
+      <a
+        [ngClass]="{
+          disabled: disableToday
+        }"
+        (click)="chooseToday($event)"
+        >{{ i18nText.today }}</a
+      >
+      <d-button bsStyle="common" (btnClick)="clearBtn($event)" bsSize="sm">{{ i18nText.clear }}</d-button>
+    </div>
+  </div>
+</ng-template>

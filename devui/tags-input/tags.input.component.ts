@@ -1,16 +1,26 @@
 import { Component, ElementRef, EventEmitter, HostListener, Input,
-  OnChanges, OnDestroy, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
-import isEmpty from 'lodash-es/isEmpty';
+  OnChanges, OnDestroy, OnInit, Output, SimpleChanges, ViewChild, forwardRef } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { isEmpty } from 'lodash-es';
 import { BehaviorSubject, fromEvent, Observable, of } from 'rxjs';
-import { debounceTime, filter, map, switchMap } from 'rxjs/operators';
+import { debounceTime, map, switchMap } from 'rxjs/operators';
+import { I18nService, I18nInterface } from 'ng-devui/i18n';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'd-tags-input',
   templateUrl: './tags.input.component.html',
   styleUrls: ['./tags.input.component.scss'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => TagsInputComponent),
+      multi: true,
+    },
+  ],
   exportAs: 'TagsInput'
 })
 
-export class TagsInputComponent implements OnInit, OnDestroy, OnChanges {
+export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestroy, OnChanges {
   /**
   * 【必选】记录输入的标签
   */
@@ -57,20 +67,23 @@ export class TagsInputComponent implements OnInit, OnDestroy, OnChanges {
   @Input() caseSensitivity = false;
 
   @Input() checkBeforeAdd: (newTag: string) => boolean | Promise<boolean> | Observable<boolean>;
+
+  @Input() disabled = false;
   /**
  * 输出函数，当选中某个选项项后，将会调用此函数，参数为当前选择项的值。如果需要获取所有选择状态的值，请参考(ngModelChange)方法
  */
-  @Output() valueChange = new EventEmitter();
+  @Output() valueChange = new EventEmitter<any>();
 
   @ViewChild('tagInput', { static: true }) tagInputElement: ElementRef;
+  @ViewChild('inputBox', { static: true }) inputBox: ElementRef;
   @ViewChild('selectBox', { static: true }) selectBoxElement: ElementRef;
 
   newTag = '';
-  showSuggestionList = false;
   availableOptions = [];
   newTagValid = false;
   isReduce = false;
   searchFn: (term: string) => Observable<Array<{ id: string | number, option: any }>>;
+  private _showSuggestionList = false;
   private sourceSubscription: BehaviorSubject<any>;
   private KEYS: any = {
     backspace: 8,
@@ -85,8 +98,58 @@ export class TagsInputComponent implements OnInit, OnDestroy, OnChanges {
     delete: 46,
     comma: 188
   };
+  private i18nSubscription: Subscription;
+  public i18nCommonText: I18nInterface['common'];
   // 下拉选中suggestionList的item索引
   selectIndex = 0;
+  private onChange = (_: any) => null;
+  private onTouch = () => null;
+
+  constructor(private i18n: I18nService) {
+    this.setI18nText();
+  }
+
+  writeValue(value: any): void {
+    if (!value) {
+      return;
+    }
+    this.tags = value;
+    this.isReduce = false;
+    this.reduceSuggestionList();
+  }
+
+  registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: any): void {
+    this.onTouch = fn;
+  }
+
+  set showSuggestionList(val) {
+    this._showSuggestionList = val;
+    const ele = this.inputBox && this.inputBox.nativeElement;
+    if (ele) {
+      if (val) {
+        if (!ele.classList.contains('devui-dropdown-origin-open')) {
+          ele.classList.add('devui-dropdown-origin-open');
+        }
+        if (!ele.classList.contains('devui-dropdown-origin-bottom')) {
+          ele.classList.add('devui-dropdown-origin-bottom');
+        }
+      } else {
+        if (ele.classList.contains('devui-dropdown-origin-open')) {
+          ele.classList.remove('devui-dropdown-origin-open');
+        }
+        if (ele.classList.contains('devui-dropdown-origin-bottom')) {
+          ele.classList.remove('devui-dropdown-origin-bottom');
+        }
+      }
+    }
+  }
+  get showSuggestionList() {
+    return this._showSuggestionList;
+  }
 
   ngOnInit() {
     this.newTag = '';
@@ -112,6 +175,13 @@ export class TagsInputComponent implements OnInit, OnDestroy, OnChanges {
     }
   }
 
+  private setI18nText() {
+    this.i18nCommonText = this.i18n.getI18nText().common;
+    this.i18nSubscription = this.i18n.langChange().subscribe((data) => {
+      this.i18nCommonText = data.common;
+    });
+  }
+
   registerFilterChange() {
     this.sourceSubscription = new BehaviorSubject<any>('');
     this.sourceSubscription.pipe(
@@ -129,12 +199,11 @@ export class TagsInputComponent implements OnInit, OnDestroy, OnChanges {
           this.selectIndex = 0;
         }
       });
+    // 统一使用ngModel值，允许空格输入时需要正确处理input已有输入参数
     fromEvent(this.tagInputElement.nativeElement, 'input')
       .pipe(
-        map((e: HTMLSelectElement) => e['target'].value),
-        filter(term => true),
-        debounceTime(100) // hard code need refactory
-      ).subscribe(term => this.sourceSubscription.next(term));
+        debounceTime(100)
+      ).subscribe(() => this.sourceSubscription.next(this.newTag));
   }
 
   reduceSuggestionList() {
@@ -155,8 +224,10 @@ export class TagsInputComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   host_click() {
-    this.tagInputElement.nativeElement.focus();
-    this.selectIndex = 0;
+    if (!this.disabled) {
+      this.tagInputElement.nativeElement.focus();
+      this.selectIndex = 0;
+    }
   }
 
   input_keydown(event) {
@@ -172,7 +243,7 @@ export class TagsInputComponent implements OnInit, OnDestroy, OnChanges {
     } else if (event.keyCode === this.KEYS.up) {
       // 向上选择选项
       this.select(--this.selectIndex);
-    } else if (event.keyCode === this.KEYS.enter || event.keyCode === this.KEYS.tab) {
+    } else if (event.keyCode === this.KEYS.enter || event.keyCode === this.KEYS.tab  || event.keyCode === this.KEYS.space) {
       if (this.selectIndex !== -1) {
         // 回车或tab添加selectIndex的值
         setTimeout(() => {
@@ -218,6 +289,7 @@ export class TagsInputComponent implements OnInit, OnDestroy, OnChanges {
         return;
       }
       this.tags.push(this.availableOptions[index]);
+      this.onChange(this.tags);
       this.valueChange.emit(this.availableOptions[index]);
       const suggestionListIndex = this.suggestionList.findIndex(item =>
         this.caseSensitivity ? item[this.displayProperty]  === value[this.displayProperty] :
@@ -236,6 +308,7 @@ export class TagsInputComponent implements OnInit, OnDestroy, OnChanges {
     this.suggestionList = this.availableOptions;
     const tag = this.tags[index];
     this.tags.splice(index, 1);
+    this.onChange(this.tags);
     this.valueChange.emit(tag);
   }
 
@@ -269,8 +342,8 @@ export class TagsInputComponent implements OnInit, OnDestroy, OnChanges {
           const obj = {};
           obj[this.displayProperty] = this.newTag;
           this.tags.push(obj);
+          this.onChange(this.tags);
           this.valueChange.emit(this.newTag);
-          // this.availableOptions = this.suggestionList;
         }
         setTimeout(() => {
           // 放在timeout里是因为如果用空格添加tag，会导致添加之后输入框里有个空格。
@@ -302,15 +375,18 @@ export class TagsInputComponent implements OnInit, OnDestroy, OnChanges {
 
   @HostListener('document:click', ['$event'])
   onDocumentClick($event: Event) {
-    if (this.showSuggestionList && !this.selectBoxElement.nativeElement.contains($event.target)) {
+    if (!this.disabled && this.showSuggestionList && !this.selectBoxElement.nativeElement.contains($event.target)) {
       this.showSuggestionList = false;
     }
   }
 
   ngOnDestroy() {
-     if (this.sourceSubscription) {
-      this.sourceSubscription.unsubscribe();
-     }
+    if (this.sourceSubscription) {
+    this.sourceSubscription.unsubscribe();
+    }
+    if (this.i18nSubscription) {
+      this.i18nSubscription.unsubscribe();
+    }
   }
 
 }

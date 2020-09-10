@@ -1,121 +1,211 @@
-<div class="month-view {{cssClass}}">
-  <table class="table month-view-table">
-      <thead>
-      <tr>
-          <td>
-              <a *ngIf="openChooseYearAndMonth" class="btn-link" aria-hidden="true"
-                 (click)="onPreYearOption()"
-                 [ngClass]="{'disable-choose-year': !hasPreYearOption() || !openChooseYearAndMonth}">
-                 <span class="left-triangle"></span>
-                 <span class="left-triangle second"></span>
-                </a>
-          </td>
-          <td>
-              <a *ngIf="hasPreMonth()" class="btn-link btn-left" aria-hidden="true"
-                 (click)="onPreMonth()">
-                 <svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                    <g id="collapse-left" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                      <g>
-                        <polygon id="left-path" fill-rule="nonzero" points="10.7071068 12.2928932 9.29289322 13.7071068 3.58578644 8 9.29289322 2.29289322 10.7071068 3.70710678 6.41421356 8"></polygon>
-                      </g>
-                    </g>
-                  </svg>
-              </a>
-          </td>
-          <td colspan="3" class="dropdown" [ngClass]="{'open': openChooseYearAndMonth}" (click)="toggle($event)">
-              <span class="date-title">{{dateConfig.months[currentMonth]}}</span>
-              <span class="date-title">{{currentYear}}</span>
-              <ul class="dropdown-menu monthOption text-center">
-                  <li *ngFor="let month of availableMonths;" class="dropdown-item"
-                      (mouseover)="changeHoverMonth(month)" (mouseleave)="changeHoverMonth(null)"
-                      [ngClass]="{'active': currentMonth == month}"
-                      (click)="onSelectMonth(month)">{{month + 1}}
-                  </li>
-              </ul>
-              <ul class="dropdown-menu yearOption text-center">
-                  <li *ngFor="let item of yearOptions" class="dropdown-item" (mouseover)="changeHoverYear(item)"
-                      (mouseleave)="changeHoverYear(null)"
-                      [ngClass]="{'active': currentYear == item}"
-                      (click)="onSelectYear(item, $event)">{{item}}
-                  </li>
-              </ul>
-          </td>
-          <td>
-              <a *ngIf="hasNextMonth()" class="btn-link btn-right" aria-hidden="true"
-                 (click)="onNextMonth()">
-                 <svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                  <g id="collapse-right" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                    <g>
-                      <polygon id="right-path" fill-rule="nonzero" points="10.7071068 12.2928932 9.29289322 13.7071068 3.58578644 8 9.29289322 2.29289322 10.7071068 3.70710678 6.41421356 8"></polygon>
-                    </g>
-                  </g>
-                </svg>
-                </a>
-          </td>
-          <td>
-              <a *ngIf="openChooseYearAndMonth" class="btn-link" aria-hidden="true"
-                 (click)="onNextYearOption()"
-                 [ngClass]="{'disable-choose-year': !hasNextYearOption() || !openChooseYearAndMonth}">
-                 <span class="right-triangle"></span>
-                 <span class="right-triangle second"></span>
-                </a>
-          </td>
-
+<div class="devui-month-view {{ cssClass }}">
+  <table class="devui-table devui-month-view-table">
+    <thead class="devui-noSelect">
+      <tr class="devui-date-header">
+        <td>
+          <a
+            class="devui-btn-link"
+            aria-hidden="true"
+            (click)="onPreYearOption()"
+            [ngClass]="{
+              'devui-year-month-disabled': !hasPreYearOption()
+            }"
+          >
+            <svg
+              width="10px"
+              height="10px"
+              viewBox="0 0 10 10"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+            >
+              <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g transform="translate(-1.000000, -1.000000)">
+                  <path
+                    d="M11,1.83333333 L11,10.1666667 L7,7.38833333 L7,10.1666667 L1,6 L7,1.83333333 L7,4.61033333 L11,1.83333333 Z"
+                  ></path>
+                </g>
+              </g>
+            </svg>
+          </a>
+        </td>
+        <td>
+          <a
+            *ngIf="!openChooseYear && !openChooseMonth"
+            class="devui-btn-link devui-btn-left"
+            aria-hidden="true"
+            (click)="onPreMonth()"
+            [ngClass]="{ 'devui-year-month-disabled': !hasPreMonth() }"
+          >
+            <svg
+              width="6px"
+              height="10px"
+              viewBox="0 0 6 10"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+            >
+              <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g transform="translate(-3.000000, -1.000000)">
+                  <polygon
+                    transform="translate(6.000000, 6.000000) rotate(-90.000000) translate(-6.000000, -6.000000) "
+                    points="6 3 10.1666667 9 1.83333333 9"
+                  ></polygon>
+                </g>
+              </g>
+            </svg>
+          </a>
+        </td>
+        <td colspan="3" class="devui-dropdown">
+          <span class="devui-date-title" (click)="toggle($event, 'year')">{{ i18nText?.yearDisplay(currentYear) }}</span>
+          <span class="devui-date-title" (click)="toggle($event, 'month')">{{ (i18nText?.monthsOfYear)[currentMonth] }}</span>
+          <ul class="devui-monthOption text-center" [style.display]="openChooseMonth ? 'block' : 'none'">
+            <li
+              *ngFor="let month of availableMonths"
+              (mouseover)="changeHoverMonth(month.title)"
+              (mouseleave)="changeHoverMonth(null)"
+              [ngClass]="{ active: currentMonth == month.title, disabled: month.disabled }"
+              (click)="onSelectMonth(month)"
+            >
+              {{ month.title + 1 }}<span *ngIf="i18nLocale === 'zh-cn'">月</span>
+            </li>
+          </ul>
+          <ul class="devui-yearOption text-center" [style.display]="openChooseYear ? 'block' : 'none'">
+            <li
+              *ngFor="let item of yearOptions"
+              (mouseover)="changeHoverYear(item.title)"
+              (mouseleave)="changeHoverYear(null)"
+              [ngClass]="{ active: currentYear == item.title, disabled: item.disabled }"
+              (click)="onSelectYear(item, $event)"
+            >
+              {{ item.title }}
+            </li>
+          </ul>
+        </td>
+        <td>
+          <a
+            *ngIf="!openChooseYear && !openChooseMonth"
+            class="devui-btn-link devui-btn-right"
+            aria-hidden="true"
+            (click)="onNextMonth()"
+            [ngClass]="{ 'devui-year-month-disabled': !hasNextMonth() }"
+          >
+            <svg
+              width="6px"
+              height="9px"
+              viewBox="0 0 6 9"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+            >
+              <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g transform="translate(-3.000000, -2.000000)">
+                  <polygon
+                    transform="translate(6.000000, 6.166667) scale(-1, 1) rotate(-90.000000) translate(-6.000000, -6.166667) "
+                    points="6 3.16666667 10.1666667 9.16666667 1.83333333 9.16666667"
+                  ></polygon>
+                </g>
+              </g>
+            </svg>
+          </a>
+        </td>
+        <td>
+          <a
+            class="devui-btn-link"
+            aria-hidden="true"
+            (click)="onNextYearOption()"
+            [ngClass]="{
+              'devui-year-month-disabled': !hasNextYearOption()
+            }"
+          >
+            <svg
+              width="10px"
+              height="9px"
+              viewBox="0 0 10 9"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+            >
+              <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g transform="translate(-1.000000, -2.000000)">
+                  <polygon points="5 4.77777778 5 2 11 6.16666667 5 10.3333333 5 7.55555556 1 10.3333333 1 2"></polygon>
+                </g>
+              </g>
+            </svg>
+          </a>
+        </td>
       </tr>
-      <tr class="small text-center week-header">
-          <td *ngFor="let item of dateConfig.weeks">{{item}}</td>
+      <tr class="small text-center devui-week-header">
+        <td *ngFor="let item of i18nText?.daysOfWeek">{{ item }}</td>
       </tr>
-      </thead>
-      <tbody>
+    </thead>
+    <tbody class="devui-noSelect">
       <tr *ngFor="let week of displayWeeks">
-          <td *ngFor="let day of week" class="day"
-              [ngClass]="{'out-of-month': !day.inMonth, 'in-month-day': day.inMonth, 'active': isSelectDay(day.date),'disabled': isDisabledDay(day.date)}"
-              (click)="onSelectDate($event, day.date)">
-              <div class="d-calendar-date">{{day.day}}</div>
-          </td>
+        <td
+          *ngFor="let day of week"
+          class="devui-day"
+          [ngClass]="{
+            'devui-out-of-month': !day.inMonth,
+            'devui-in-month-day': day.inMonth,
+            active: isSelectDay(day.date),
+            disabled: isDisabledDay(day.date)
+          }"
+          (click)="onSelectDate($event, day.date)"
+        >
+          <div class="devui-calendar-date">{{ day.day }}</div>
+        </td>
       </tr>
-      </tbody>
-      <tfoot>
-      <tr class="time-picker-view">
-          <ng-container *ngIf="!customViewTemplate">
+    </tbody>
+    <tfoot [ngClass]="{ 'devui-noSelect': !customViewTemplate }">
+      <tr class="time-picker-view" (click)="!customViewTemplate && $event.stopPropagation()">
+        <ng-container *ngIf="!customViewTemplate">
           <td colspan="4">
-              <div class="timepicker" *ngIf="showTime">
-                  <div class="time">
-                      <input type="number" [(ngModel)]="currentHour" (change)="onTimeChange()" max="23" min="0">
-                      <div class="btn-nav">
-                          <div class="btn-up" (click)="timeUp('h')"></div><div class="btn-down" (click)="timeDown('h')"></div>
-                      </div>
-                  </div>
-                  <div class="time">
-                      <input type="number" class="minutes" [(ngModel)]="currentMinute" (change)="onTimeChange()"
-                             max="59" min="0">
-                      <div class="btn-nav">
-                          <div class="btn-up" (click)="timeUp('m')"></div><div class="btn-down" (click)="timeDown('m')"></div>
-                      </div>
-                  </div>
-                  <div class="time">
-                      <input type="number" class="seconds" [(ngModel)]="currentSecond" (change)="onTimeChange()"
-                             max="59" min="0">
-                      <div class="btn-nav">
-                          <div class="btn-up" (click)="timeUp('s')"></div><div class="btn-down" (click)="timeDown('s')"></div>
-                      </div>
-                  </div>
+            <div class="devui-timepicker" *ngIf="showTime" [ngClass]="{ 'devui-timepicker-disabled': isDisabledTime() }">
+              <div class="devui-time">
+                <input [ngModel]="currentHour" (keydown)="fixTime($event, 'h')" [disabled]="isDisabledTime()" />
+                <div class="devui-btn-nav" *ngIf="!isDisabledTime()">
+                  <div class="btn-up" (click)="timeUp('h')"></div>
+                  <div class="btn-down" (click)="timeDown('h')"></div>
+                </div>
               </div>
+              <div class="devui-time">
+                <input class="devui-minutes" [ngModel]="currentMinute" (keydown)="fixTime($event, 'm')" [disabled]="isDisabledTime()" />
+                <div class="devui-btn-nav" *ngIf="!isDisabledTime()">
+                  <div class="btn-up" (click)="timeUp('m')"></div>
+                  <div class="btn-down" (click)="timeDown('m')"></div>
+                </div>
+              </div>
+              <div class="devui-time">
+                <input class="devui-seconds" [ngModel]="currentSecond" (keydown)="fixTime($event, 's')" [disabled]="isDisabledTime()" />
+                <div class="devui-btn-nav" *ngIf="!isDisabledTime()">
+                  <div class="btn-up" (click)="timeUp('s')"></div>
+                  <div class="btn-down" (click)="timeDown('s')"></div>
+                </div>
+              </div>
+            </div>
           </td>
           <td colspan="3">
-              <div class="btn-wrapper">
-                  <d-button bsStyle="primary" [disabled]="isTodayDisable()"
-                          (btnClick)="chooseToday()"  bsSize="sm" >{{dateConfig.current}}
-                  </d-button>
-              </div>
+            <div class="devui-btn-wrapper" *ngIf="showTime">
+              <d-button bsStyle="common" [disabled]="disabled" (btnClick)="confirmTime($event)" bsSize="sm"
+                >{{ i18nCommonText?.btnConfirm }}
+              </d-button>
+            </div>
+            <div class="devui-btn-wrapper" *ngIf="!showTime">
+              <d-button bsStyle="common" [disabled]="isTodayDisable() || disabled" (btnClick)="chooseToday()" bsSize="sm"
+                >{{ i18nText?.today }}
+              </d-button>
+            </div>
           </td>
-          </ng-container>
-          <ng-container *ngIf="customViewTemplate">
-              <td colspan="7">
-                  <ng-template [ngTemplateOutlet]="customViewTemplate" [ngTemplateOutletContext]="{ $implicit: this, chooseDate: chooseDate}"></ng-template>
-              </td>
-          </ng-container>
+        </ng-container>
+        <ng-container *ngIf="customViewTemplate">
+          <td colspan="7">
+            <ng-template
+              [ngTemplateOutlet]="customViewTemplate"
+              [ngTemplateOutletContext]="{ $implicit: this, chooseDate: chooseDate, clearAll: clearAll }"
+            ></ng-template>
+          </td>
+        </ng-container>
       </tr>
-      </tfoot>
+    </tfoot>
   </table>
 </div>

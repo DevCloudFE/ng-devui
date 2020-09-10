@@ -7,9 +7,11 @@ import {DevUICodeboxModule} from 'ng-devui/shared/devui-codebox/devui-codebox.mo
 import {DevUIApiModule} from 'ng-devui/shared/devui-api/devui-api.module';
 import {DevUIApiComponent} from 'ng-devui/shared/devui-api/devui-api.component';
 import {FormsModule} from '@angular/forms';
-import {SliderDemoCustomFormatterComponent} from './custom-formatter/slider-demo-custom-formatter.component';
-import {SliderDemoDisabledComponent} from './disabled/slider-demo-disabled.component';
-import {SliderDemoBasicComponent} from './basic/slider-demo-basic.component';
+
+import {SliderBasicComponent} from './basic/slider-basic.component';
+import {SliderCustomFormatterComponent} from './custom-formatter/slider-custom-formatter.component';
+import {SliderDisabledComponent} from './disabled/slider-disabled.component';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 
 @NgModule({
   imports: [
@@ -18,6 +20,7 @@ import {SliderDemoBasicComponent} from './basic/slider-demo-basic.component';
     SliderModule,
     DevUIApiModule,
     FormsModule,
+    DDemoNavModule,
     RouterModule.forChild([
       {path: '', redirectTo: 'demo'},
       {path: 'demo', component: SliderDemoComponent},
@@ -31,9 +34,9 @@ import {SliderDemoBasicComponent} from './basic/slider-demo-basic.component';
   exports: [SliderDemoComponent],
   declarations: [
     SliderDemoComponent,
-    SliderDemoBasicComponent,
-    SliderDemoDisabledComponent,
-    SliderDemoCustomFormatterComponent
+    SliderBasicComponent,
+    SliderDisabledComponent,
+    SliderCustomFormatterComponent
   ],
 })
 export class SliderDemoModule {

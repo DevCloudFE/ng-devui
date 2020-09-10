@@ -1,87 +1,200 @@
+@import '../style/theme/color';
+@import '../style/theme/variables';
+@import '../style/mixins/index';
+
+.devui-search {
+  .devui-serach-line {
+    border-color: $devui-dividing-line;
+  }
+}
+
+svg.svg-icon-clear path,
+svg.svg-icon-search path {
+  fill: $devui-icon-text;
+}
+
 :host {
-  display: block;
+  display: inline-block;
 }
 
 .devui-search {
   position: relative;
-  &-sm {
+
+  &:hover {
     .devui-input {
-      padding-right: 55px;
-    }
-  }
-  &-lg {
-    .devui-input {
-      padding-right: 66px;
+      border-color: $devui-form-control-line-hover;
     }
   }
 
   .devui-input {
-    padding-right: 60px;
+    height: 28px;
+    padding: 5px 10px;
+    font-size: 12px;
+    padding-right: 30px;
     text-overflow: ellipsis;
+
+    &.devui-icon-left {
+      border: none;
+      padding-left: 24px;
+    }
+
+    &.devui-clear-exit {
+      padding-right: 60px;
+    }
+
+    &-sm {
+      height: 26px;
+      padding: 5px 10px;
+      font-size: 12px;
+      padding-right: 24px;
+
+      &.devui-clear-exit {
+        padding-right: 49px;
+      }
+    }
+
+    &-lg {
+      height: 46px;
+      padding: 10px 16px;
+      font-size: 16px;
+      line-height: 24px;
+      padding-right: 36px;
+
+      &.devui-clear-exit {
+        padding-right: 71px;
+      }
+    }
+
+    &::-ms-clear {
+      display: none;
+    }
+
+    &:disabled {
+      background-color: $devui-disabled-bg;
+      border-color: $devui-disabled-line;
+      color: $devui-disabled-text;
+
+      & + .devui-search-icon {
+        svg path {
+          fill: $devui-disabled-text;
+        }
+      }
+    }
   }
+
   .icon {
     cursor: pointer;
   }
 
   .devui-search-icon {
     position: absolute;
-    top: 50%;
-    right: 10px;
-    margin-top: -7px;
+    width: auto;
+    pointer-events: all;
+    cursor: pointer;
+    height: 100%;
+    line-height: 28px;
+    padding: 0 10px;
+    top: 0;
+    right: 0;
+    z-index: 2;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &.devui-icon-left {
+      left: 0;
+      right: auto;
+      padding-left: 0;
+    }
+
     > svg {
+      height: 16px;
+      width: 16px;
+    }
+
+    &-sm {
+      width: 34px;
+      height: 26px;
+      line-height: 26px;
+
+      > svg {
         height: 14px;
         width: 14px;
-    }
-    &-sm {
-      margin-top: -6px;
-      > svg {
-          height: 12px;
-          width: 12px;
       }
     }
+
     &-lg {
-      margin-top: -8px;
+      width: 46px;
+      height: 46px;
+      line-height: 46px;
+
       > svg {
-          height: 18px;
-          width: 18px;
+        height: 18px;
+        width: 18px;
       }
     }
   }
 
   .devui-search-clear {
     position: absolute;
-    top: 50%;
-    right: 42px;
-    margin-top: -7px;
+    width: auto;
+    top: 0;
+    right: 36px;
+    padding: 0 10px;
+    pointer-events: all;
+    cursor: pointer;
+    height: 100%;
+    line-height: 28px;
     font-size: 14px;
-    &-sm {
-      right: 40px;
-      margin-top: -6px;
-      font-size: 12px;
+    z-index: 2;
+    display: none;
+
+    &.devui-clear-exit {
+      display: block;
     }
+
+    &-sm {
+      line-height: 26px;
+      padding: 0 8px;
+    }
+
     &-lg {
-      right: 44px;
-      margin-top: -8px;
-      font-size: 16px;
+      right: 46px;
+      line-height: 46px;
+      padding: 0 10px;
+    }
+
+    &:hover {
+      svg.svg-icon-search path {
+        fill: $devui-icon-fill-active;
+      }
     }
   }
 
-  .devui-serach-line {
+  .devui-search-line {
     position: absolute;
-    right: 32px;
-    height: 70%;
-    top: 15%;
+    right: 36px;
+    height: 46%;
+    top: 27%;
     width: 1px;
     border-left-width: 1px;
     border-left-style: solid;
-    line-height: 32px;
-    &-sm {
-      line-height: 30px;
-      right: 30px;
+    border-color: $devui-dividing-line;
+    line-height: 28px;
+    display: none;
+
+    &.devui-clear-exit {
+      display: block;
     }
+
+    &-sm {
+      line-height: 26px;
+    }
+
     &-lg {
-        line-height: 34px;
-        right: 34px;
+      line-height: 46px;
+      right: 46px;
     }
   }
 }
