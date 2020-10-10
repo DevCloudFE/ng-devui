@@ -50,7 +50,7 @@
     "enquire.js": "^2.1.6",
     "fastestsmallesttextencoderdecoder": "1.0.14",
     "lodash-es": "^4.17.15",
-    "marked": "^0.6.3",
+    "marked": "^1.2.0",
     "popper.js": "^1.15.0",
     "web-animations-js": "^2.3.2",
     "zone.js": "~0.10.2"
