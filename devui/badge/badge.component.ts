@@ -7,7 +7,7 @@ import {
   ViewChild
 } from '@angular/core';
 
-import { BadgeStatusType, BadgePositionType } from './types';
+import { BadgeStatusType, BadgePositionType } from './badge.types';
 
 @Component({
   selector: 'd-badge',
