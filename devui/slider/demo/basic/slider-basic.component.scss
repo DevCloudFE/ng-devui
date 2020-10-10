@@ -1,0 +1,28 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
+.input {
+  box-sizing: border-box;
+  padding: 5px 10px;
+  font-size: 14px;
+  color: $devui-text;
+  vertical-align: middle;
+  border: 1px solid $devui-line;
+  border-radius: 1px;
+  outline: none;
+  background-color: $devui-base-bg;
+}
+
+.snapshot-value {
+  display: inline-block;
+  margin-left: 20px;
+}
+
+.slider {
+  width: 90%;
+}
+
+.composite-slider {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+}

@@ -16,7 +16,8 @@ import { Observable } from 'rxjs';
   selector: 'd-tabs',
   templateUrl: './tabs.component.html',
   styleUrls: ['./tabs.component.scss'],
-  exportAs: 'tabs'
+  exportAs: 'tabs',
+  preserveWhitespaces: false,
 })
 export class TabsComponent implements OnInit, AfterContentInit {
   @Input() type: 'tabs' | 'pills' | 'options' = 'tabs';

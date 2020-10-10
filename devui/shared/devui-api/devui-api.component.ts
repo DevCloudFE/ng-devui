@@ -6,7 +6,8 @@ import * as hljs from 'highlight.js/lib/highlight';
 
 @Component({
   selector: 'd-api',
-  templateUrl: './devui-api.component.html'
+  templateUrl: './devui-api.component.html',
+  preserveWhitespaces: false,
 })
 export class DevUIApiComponent implements OnInit, AfterViewInit, OnDestroy {
   sub: Subscription;
@@ -34,14 +35,14 @@ export class DevUIApiComponent implements OnInit, AfterViewInit, OnDestroy {
         list = list.substr(0, list.length - 1);
       }
 
-      return list.length ? '<code>' + list.replace(/[']*[\s]*\|[\s]*[']*/g, '</code>、<code>') + '</code>' : '';
+      return list.length ? '<code>' + list.replace(/[']*[\s]*\|[\s]*[']*/g, '</code>〝<code>') + '</code>' : '';
     });
     return marked(md);
   }
 
   ngAfterViewInit() {
     const that = this;
-    Array.from(document.querySelectorAll('pre code')).forEach((block) => {
+    Array.from<HTMLElement>(document.querySelectorAll('pre code')).forEach((block) => {
       hljs.highlightBlock(block);
     });
     Array.from(document.querySelectorAll('a')).forEach((link) => {

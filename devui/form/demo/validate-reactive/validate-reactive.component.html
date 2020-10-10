@@ -1,0 +1,68 @@
+<section class="demo-section">
+  <h5>验证单个元素</h5>
+  <div>
+    <d-select
+      [options]="verifierOptions"
+      [formControl]="singleSelectControl"
+      [multiple]="true"
+      [attr.name]="'planVerifier'"
+      [filterKey]="'name'"
+      [dValidateRules]="singleSelectRules"
+    >
+    </d-select>
+  </div>
+</section>
+
+<section class="demo-section">
+  <h5>Form验证与提交</h5>
+  <d-toast [value]="msgs"></d-toast>
+  <div>
+    <form
+      dForm
+      [formGroup]="userFormGroup"
+      [dValidateRules]="formRules.rule"
+      [layout]="'vertical'"
+      #userForm="dValidateRules"
+      (dSubmit)="submitForm()"
+    >
+      <d-form-item>
+        <d-form-label [required]="true" [hasHelp]="true" [helpTips]="'填写一个你喜欢的用户名吧'">用户名</d-form-label>
+        <d-form-control>
+          <input dTextInput autocomplete="off" name="username" formControlName="username" [dValidateRules]="formRules.usernameRules" />
+        </d-form-control>
+      </d-form-item>
+      <d-form-item>
+        <d-form-label [required]="true">密码</d-form-label>
+        <d-form-control>
+          <input
+            dTextInput
+            type="password"
+            name="password"
+            formControlName="password"
+            placeholder="请设置6-15位密码"
+            [dValidateRules]="formRules.passwordRules"
+          />
+        </d-form-control>
+      </d-form-item>
+      <d-form-item>
+        <d-form-label [required]="true">确认密码</d-form-label>
+        <d-form-control>
+          <input
+            dTextInput
+            type="password"
+            name="confirmPassword"
+            formControlName="confirmPassword"
+            placeholder="再次确认并输入"
+            [dValidateRules]="formRules.confirmPasswordRules"
+          />
+        </d-form-control>
+      </d-form-item>
+      <d-form-operation>
+        <d-button class="mr-element-spacing" [title]="userForm.errorMessage || ''" circled="true" style="margin-right: 8px" dFormSubmit
+          >注册</d-button
+        >
+        <d-button bsStyle="common" circled="true" dFormReset>重置</d-button>
+      </d-form-operation>
+    </form>
+  </div>
+</section>

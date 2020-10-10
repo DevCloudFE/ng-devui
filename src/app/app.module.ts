@@ -1,4 +1,3 @@
-import { ThemePickerModule } from './theme-picker/theme-picker.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -6,7 +5,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 
-import { DevUIModule } from 'ng-devui/devui.module';
+import { DevUIModule } from 'ng-devui';
+import { ThemePickerModule } from './theme-picker/theme-picker.module';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
@@ -15,10 +15,10 @@ import { FormsModule } from '@angular/forms';
   ],
   imports: [
     BrowserModule,
-    FormsModule,
     BrowserAnimationsModule,
-    ThemePickerModule,
     DevUIModule.forRoot(),
+    FormsModule,
+    ThemePickerModule,
     RouterModule.forRoot(
       [
         {

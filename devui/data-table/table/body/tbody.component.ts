@@ -15,6 +15,8 @@ export class TableTbodyComponent implements OnInit {
   @Input() virtualScroll;
   @Input() tableWidthConfig: TableWidthConfig[];
   @Input() minHeight: string;
+  @Input() minHeightStretchRow: TemplateRef<any>;
+
   @ContentChild(TemplateRef) rowTempleteForSelect: TemplateRef<TableTrComponent>;
 
   constructor() {}

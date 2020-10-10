@@ -26,6 +26,7 @@ import { I18nInterface, I18nService } from 'ng-devui/i18n';
   templateUrl: './multiple-upload.component.html',
   exportAs: 'dMultipleUpload',
   styleUrls: ['./upload-view.component.scss'],
+  preserveWhitespaces: false,
 })
 export class MultipleUploadComponent implements OnDestroy {
   @Input() uploadOptions: IUploadOptions;

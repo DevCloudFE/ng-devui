@@ -4,7 +4,8 @@ import { Component, Input, Output, EventEmitter, TemplateRef, ContentChild } fro
   selector: 'd-tags',
   templateUrl: './tags.component.html',
   styleUrls: ['./tags.component.scss'],
-  exportAs: 'Tags'
+  exportAs: 'Tags',
+  preserveWhitespaces: false,
 })
 
 export class TagsComponent {

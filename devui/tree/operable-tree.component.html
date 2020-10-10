@@ -1,4 +1,4 @@
-<div #operableTreeContainer style="position: relative;">
+<div #operableTreeContainer style="position: relative">
   <d-tree
     #operableTree
     [tree]="tree"
@@ -55,10 +55,11 @@
     ></div>
     <div
       class="devui-tree-node__content"
+      [class.active]="treeNode.data.isActive"
       [class.devui-tree-node--parent]="(treeNode.data.children || []).length > 0"
       (mouseenter)="treeNodeHover(treeNode, 'enter')"
       (mouseleave)="treeNodeHover(treeNode, 'leave')"
-      [draggable]="draggable"
+      [draggable]="draggable && !treeNode?.data?.editable"
       (dragstart)="onDragstart($event, treeNode)"
       (dragover)="onDragover($event, draggable, treeNode)"
       (dragleave)="onDragleave($event, treeNode)"
@@ -161,7 +162,6 @@
           (dblclick)="nodeDblClick($event, treeNode)"
           (contextmenu)="contextmenuEvent($event, treeNode)"
           class="devui-tree-node__title"
-          [class.active]="treeNode.data.isActive"
           [class.select-disabled]="treeNode.data.disableSelect"
           title="{{ treeNode.data.title }}"
         >
@@ -270,7 +270,13 @@
         <ng-container *ngIf="operatorTemplate && (treeNode.data.isActive || treeNode.data.isHover)">
           <ng-template
             [ngTemplateOutlet]="operatorTemplate"
-            [ngTemplateOutletContext]="{$implicit: this, node: treeNode, addNode: addChildNodeProxy, editNode: editNodeProxy, deleteNode: deleteNodesProxy}"
+            [ngTemplateOutletContext]="{
+              $implicit: this,
+              node: treeNode,
+              addNode: addChildNodeProxy,
+              editNode: editNodeProxy,
+              deleteNode: deleteNodesProxy
+            }"
           >
           </ng-template>
         </ng-container>
@@ -291,6 +297,7 @@
   >
     <div
       class="devui-tree-node__content"
+      [class.active]="treeNode.data.isActive"
       [class.devui-tree-node--parent]="(treeNode.data.children || []).length > 0"
       (mouseenter)="treeNodeHover(treeNode, 'enter')"
       (mouseleave)="treeNodeHover(treeNode, 'leave')"
@@ -396,7 +403,6 @@
           (dblclick)="nodeDblClick($event, treeNode)"
           (contextmenu)="contextmenuEvent($event, treeNode)"
           class="devui-tree-node__title"
-          [class.active]="treeNode.data.isActive"
           [class.select-disabled]="treeNode.data.disableSelect"
           title="{{ treeNode.data.title }}"
         >
@@ -506,7 +512,13 @@
         <ng-container *ngIf="operatorTemplate && (treeNode.data.isActive || treeNode.data.isHover)">
           <ng-template
             [ngTemplateOutlet]="operatorTemplate"
-            [ngTemplateOutletContext]="{$implicit: this, node: treeNode, addNode: addChildNodeProxy, editNode: editNodeProxy, deleteNode: deleteNodesProxy}"
+            [ngTemplateOutletContext]="{
+              $implicit: this,
+              node: treeNode,
+              addNode: addChildNodeProxy,
+              editNode: editNodeProxy,
+              deleteNode: deleteNodesProxy
+            }"
           >
           </ng-template>
         </ng-container>

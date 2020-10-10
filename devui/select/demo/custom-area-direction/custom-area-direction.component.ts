@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'd-custom-area-direction',
   templateUrl: './custom-area-direction.component.html',
-  styleUrls: ['./custom-area-direction.component.css']
+  styleUrls: ['./custom-area-direction.component.scss']
 })
 export class CustomAreaDirectionComponent {
   options = ['选项1', '选项2', '选项3', '选项4', '选项5', '选项6', '选项7', '选项8',

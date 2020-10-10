@@ -17,7 +17,7 @@ export class UploadDemoComponent {
   customizeSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./customize/customize.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./customize/customize.component.ts') },
-    { title: 'CSS', language: 'css', code: require('!!raw-loader!./customize/customize.component.css') }
+    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./customize/customize.component.scss') }
   ];
   autoSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./auto/auto.component.html') },

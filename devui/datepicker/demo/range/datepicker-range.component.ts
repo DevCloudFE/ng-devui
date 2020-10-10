@@ -9,7 +9,7 @@ import {
   selector: 'd-datepicker-range',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './datepicker-range.component.html',
-  styleUrls: ['./datepicker-range.component.css']
+  styleUrls: ['./datepicker-range.component.scss']
 })
 export class DatepickerRangeComponent implements OnInit {
   datePicker1: any;

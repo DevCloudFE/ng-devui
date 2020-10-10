@@ -5,6 +5,7 @@
 
 |         参数         |               类型                |                默认                 | 说明                                                                           | 跳转 Demo                                                 |
 | :------------------: | :-------------------------------: | :---------------------------------: | :----------------------------------------------------------------------------- | --------------------------------------------------------- |
+|      appendToBody    |             `boolean`             |                 --                  | 可选，是否appendToBody                                                         | [基本用法](/components/multi-auto-complete/demo#basic-usage) |
 |       disabled       |             `boolean`             |                 --                  | 可选，是否禁用                                                                 | [使用禁用](/components/multi-auto-complete/demo#auto-complete-disabled) |
 |        source        |           `Array<any>`            |                 --                  | 可选，数据列表                                                                 | [基本用法](/components/multi-auto-complete/demo#basic-usage)            |
 |     itemTemplate     |           `TemplateRef`           |                 --                  | 可选，下拉选项模板                                                                   | [自定义模板展示](/components/auto-complete/demo#auto-custom) |
@@ -15,7 +16,7 @@
 |     valueParser      |            `Function`             |         (item: any) => any          | 可选，对选中数据进行转化 | [启用懒加载](/components/auto-complete/demo#auto-lazy-load) |
 |       overview       | `border\|none\|multiline\|single` |              'border'               | 可选（不推荐）                                                                           |
 |       tipsText       |             `string`              |                 --                  | 可选，提示文字                                                                 | [设置禁用](/components/auto-complete/demo#auto-disable)      |
-|     placeholder      |             `string`              |           (请输入关键字)            | 可选，placeholder                                                              | [基本用法](/components/multi-auto-complete/demo#basic-usage)            |
+|     placeholder      |             `string`              |           --            | 可选，placeholder                                                              | [基本用法](/components/multi-auto-complete/demo#basic-usage)            |
 |     latestSource     |           `Array<any>`            |                 --                  | 可选， 最近输入，最多支持 5 个，超过 5 个，截取最后 5 个                       |  [最近输入](/components/auto-complete/demo#auto-latest)      |
 
 ### d-auto-complete 事件

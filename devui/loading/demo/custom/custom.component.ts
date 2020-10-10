@@ -8,7 +8,7 @@ import {LoadingType} from 'ng-devui/loading';
 @Component({
   selector: 'd-custom',
   templateUrl: './custom.component.html',
-  styleUrls: ['./custom.component.css']
+  styleUrls: ['./custom.component.scss']
 })
 export class CustomComponent implements OnInit {
   loading2: LoadingType;

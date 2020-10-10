@@ -52,7 +52,7 @@ $devui-list-item-active-text: var(--devui-list-item-active-text, #ffffff);      
 $devui-list-item-active-hover-bg: var(--devui-list-item-active-hover-bg, #526ecc);           // 列表类型单选选中背景悬停反馈色（仅用于分页等）
 $devui-list-item-hover-bg: var(--devui-list-item-hover-bg, #f2f5fc);                         // 列表类型普通选项悬停背景
 $devui-list-item-hover-text: var(--devui-list-item-hover-text, #526ecc);                     // 列表类型普通选项悬停背景搭配文本
-$devui-list-item-selected-bg: var(--devui-list-item-selected-bg, #f2f5fc);                   // 列表类型多选被选中的行色，仅用于表格类
+$devui-list-item-selected-bg: var(--devui-list-item-selected-bg, #e9edfa);                   // 列表类型多选被选中的行色，仅用于表格类
 $devui-list-item-strip-bg: var(--devui-list-item-strip-bg, #f2f5fc);                         // 列表类型斑马纹色，仅用于表格类
 // 禁用
 $devui-disabled-bg: var(--devui-disabled-bg, #f5f5f6);     // disabled背景颜色

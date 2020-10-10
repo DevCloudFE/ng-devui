@@ -1,0 +1,10 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
+:host ::ng-deep .devui-tag-item.tag-custom {
+  background-color: $devui-brand;
+  color: $devui-light-text;
+}
+
+d-tag {
+  margin: 4px 0;
+}

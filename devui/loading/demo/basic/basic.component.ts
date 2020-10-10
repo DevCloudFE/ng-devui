@@ -36,7 +36,7 @@ const mockFetchNames = (url: string) => new Promise((resolve) => {
 @Component({
   selector: 'd-basic',
   templateUrl: './basic.component.html',
-  styleUrls: ['./basic.component.css']
+  styleUrls: ['./basic.component.scss']
 })
 export class BasicComponent implements OnInit {
   loading: LoadingType;

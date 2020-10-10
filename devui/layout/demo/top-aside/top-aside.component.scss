@@ -1,4 +1,4 @@
-@import '../../../style/theme/color';
+@import '~ng-devui/styles-var/devui-var.scss';
 
 d-layout {
   background-color: $devui-base-bg;
@@ -11,7 +11,7 @@ d-aside {
 d-header {
   text-align: left;
   height: 40px;
-  background-color: #333854;
+  background-color: $devui-base-bg-dark;
   position: relative;
 
   .logo {

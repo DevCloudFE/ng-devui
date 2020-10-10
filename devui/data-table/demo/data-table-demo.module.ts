@@ -1,8 +1,9 @@
+import { LoadingModule } from 'ng-devui/loading';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { DevUIModule } from 'ng-devui/devui.module';
+import { DevUIModule } from 'ng-devui';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
@@ -36,6 +37,7 @@ import { CheckOptionsComponent } from './check-options/check-options.component';
 import { CheckOptionsColumnComponent } from './check-options-column/check-options-column.component';
 import { InteractionColumnComponent } from './interaction-column/interaction-column.component';
 import { VirtualScrollComponent } from './virtual-scroll/virtual-scroll.component';
+import { MutilStylesComponent } from './mutil-styles/mutil-styles.component';
 
 @NgModule({
   imports: [
@@ -49,6 +51,7 @@ import { VirtualScrollComponent } from './virtual-scroll/virtual-scroll.componen
     AutoCompleteModule,
     I18nModule,
     DDemoNavModule,
+    LoadingModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo' },
       { path: 'demo', component: DataTableDemoComponent},
@@ -83,7 +86,8 @@ import { VirtualScrollComponent } from './virtual-scroll/virtual-scroll.componen
     CheckOptionsComponent,
     CheckOptionsColumnComponent,
     InteractionColumnComponent,
-    VirtualScrollComponent
+    VirtualScrollComponent,
+    MutilStylesComponent
   ],
   providers: [],
   entryComponents: [DataTableDemoComponent]

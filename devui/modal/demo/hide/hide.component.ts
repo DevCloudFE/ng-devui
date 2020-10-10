@@ -27,7 +27,7 @@ export class HideComponent {
           cssClass: 'primary',
           text: '保存',
           handler: ($event: Event) => {
-            results.modalInstance.onHidden();
+            results.modalInstance.hide();
           }
         },
       ],

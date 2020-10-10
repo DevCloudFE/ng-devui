@@ -19,7 +19,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DatePickerConfigService as DatePickerConfig } from './date-picker.config.service';
 import { DateConverter } from 'ng-devui/utils';
 import { SelectDateChangeEventArgs, SelectDateChangeReason } from './date-change-event-args.model';
-import { DefaultDateConverter } from 'ng-devui/utils';
+import { DefaultDateConverter, unshiftString } from 'ng-devui/utils';
 import { I18nService, I18nInterface } from 'ng-devui/i18n';
 import { Subscription } from 'rxjs';
 @Component({
@@ -30,7 +30,8 @@ import { Subscription } from 'rxjs';
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => DatepickerComponent),
     multi: true
-  }]
+  }],
+  preserveWhitespaces: false,
 })
 export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, ControlValueAccessor {
   static DAY_DURATION = 24 * 60 * 60 * 1000;
@@ -89,7 +90,6 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
   ngOnInit() {
     this._minDate = this.minDate ? new Date(this.minDate) : new Date(this.dateConfig.min, 0, 1, 0, 0, 0);
     this._maxDate = this.maxDate ? new Date(this.maxDate) : new Date(this.dateConfig.max, 11, 31, 23, 59, 59);
-    this._dateFormat = this.showTime ? this.dateConfig.format.time : this.dateConfig.format.date;
 
     this.hourOptions = new Array(24).fill(0).map((value, index) => this.fillLeft(index));
     this.minuteOptions = new Array(60).fill(0).map((value, index) => this.fillLeft(index));
@@ -203,7 +203,7 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
   }
 
   get currentHour() {
-    return (this._currentHour + '').padStart(2, '0');
+    return unshiftString(this._currentHour + '', 2, '0');
   }
 
   set currentMinute(min: number | string) {
@@ -211,7 +211,7 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
   }
 
   get currentMinute() {
-    return (this._currentMinute + '').padStart(2, '0');
+    return unshiftString(this._currentMinute + '', 2, '0');
   }
 
   set currentSecond(sec: number | string) {
@@ -219,7 +219,7 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
   }
 
   get currentSecond() {
-    return (this._currentSecond + '').padStart(2, '0');
+    return unshiftString(this._currentSecond + '', 2, '0');
   }
 
   protected resetYearOptions() {

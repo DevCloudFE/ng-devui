@@ -1,0 +1,24 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
+.devui-loading-demo {
+  margin-top: 50px;
+}
+
+.custom-loader {
+  border: 5px solid $devui-line;
+  border-top: 5px solid $devui-contrast;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  animation: spin 0.5s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

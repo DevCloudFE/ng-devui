@@ -13,7 +13,8 @@ import { Subscription } from 'rxjs';
   selector: 'd-uploaded-files',
   exportAs: 'dUploadFiles',
   templateUrl: './uploaded-files.component.html',
-  styleUrls: ['./uploaded-files.component.scss']
+  styleUrls: ['./uploaded-files.component.scss'],
+  preserveWhitespaces: false,
 })
 export class UploadedFilesComponent implements OnDestroy {
   @Input() uploadedFiles: Array<Object> = [];

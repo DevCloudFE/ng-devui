@@ -43,7 +43,11 @@
       [ngStyle]="{ width: treeNode.data.isParent ? '8px' : '16px' }"
       class="devui-tree-horizontal-line"
     ></div>
-    <div class="devui-tree-node__content" [class.devui-tree-node--parent]="(treeNode.data.children || []).length > 0">
+    <div
+      class="devui-tree-node__content"
+      [class.active]="treeNode.data.isActive"
+      [class.devui-tree-node--parent]="(treeNode.data.children || []).length > 0"
+    >
       <div class="devui-tree-node__content--value-wrapper" [class.isMatch]="treeNode.data.isMatch">
         <span
           (click)="toggleNode($event, treeNode)"
@@ -98,7 +102,6 @@
           (contextmenu)="contextmenuEvent($event, treeNode)"
           class="devui-tree-node__title"
           [class.select-disabled]="treeNode.data.disableSelect"
-          [class.active]="treeNode.data.isActive"
           title="{{ treeNode.data.title }}"
           >{{ treeNode.data.title }}</span
         >
@@ -121,7 +124,11 @@
     }"
     #treeNodeContent
   >
-    <div class="devui-tree-node__content" [class.devui-tree-node--parent]="(treeNode.data.children || []).length > 0">
+    <div
+      class="devui-tree-node__content"
+      [class.active]="treeNode.data.isActive"
+      [class.devui-tree-node--parent]="(treeNode.data.children || []).length > 0"
+    >
       <div class="devui-tree-node__content--value-wrapper" [class.isMatch]="treeNode.data.isMatch">
         <span
           (click)="toggleNode($event, treeNode)"
@@ -176,7 +183,6 @@
           (contextmenu)="contextmenuEvent($event, treeNode)"
           class="devui-tree-node__title"
           [class.select-disabled]="treeNode.data.disableSelect"
-          [class.active]="treeNode.data.isActive"
           title="{{ treeNode.data.title }}"
           >{{ treeNode.data.title }}</span
         >

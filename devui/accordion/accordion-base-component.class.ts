@@ -2,6 +2,7 @@ import { Input, HostBinding, Directive } from '@angular/core';
 import { AccordionBase, AccordionOptions } from './accordion.type';
 
 @Directive()
+// tslint:disable-next-line: directive-class-suffix
 export abstract class AccordionBaseComponent<T extends AccordionBase> {
   @Input() item: any | T;
   @Input() deepth = 0;

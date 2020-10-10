@@ -23,7 +23,7 @@ export class ModalDemoComponent {
   tipsSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./tips/tips.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./tips/tips.component.ts') },
-    { title: 'CSS', language: 'css', code: require('!!raw-loader!./tips/tips.component.css') }
+    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./tips/tips.component.css') }
   ];
   hideSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./hide/hide.component.html') },

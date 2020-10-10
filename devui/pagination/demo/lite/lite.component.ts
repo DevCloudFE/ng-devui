@@ -3,7 +3,7 @@ import {Component} from '@angular/core';
 @Component({
   selector: 'd-lite',
   templateUrl: './lite.component.html',
-  styleUrls: ['./lite.component.css']
+  styleUrls: ['./lite.component.scss']
 })
 export class LiteComponent {
   pager1 = {

@@ -11,7 +11,7 @@
       (change)="onCheckbox1Change($event)"
     >
       <ng-template #mylabel let-disabled="disabled" let-label="label">
-        <span class="icon-collapse" style="margin-top: 2px;"></span>
+        <span class="icon-collapse" style="margin-top: 2px"></span>
         <span>{{ label }}</span>
       </ng-template>
     </d-checkbox-group>
@@ -25,6 +25,19 @@
       [direction]="'row'"
       [isShowTitle]="true"
       (change)="onCheckbox2Change($event)"
+    >
+    </d-checkbox-group>
+  </div>
+
+  <div>
+    <h4>整组禁用</h4>
+    <d-checkbox-group
+      [(ngModel)]="values6"
+      [options]="options6"
+      [direction]="'row'"
+      [isShowTitle]="true"
+      [disabled]="true"
+      (change)="onCheckbox6Change($event)"
     >
     </d-checkbox-group>
   </div>

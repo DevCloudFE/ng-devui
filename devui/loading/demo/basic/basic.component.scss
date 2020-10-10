@@ -1,0 +1,17 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
+.table {
+  width: 100%;
+  max-width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin: 10px 0;
+}
+
+.table > thead > tr > th,
+.table > tbody > tr > td {
+  vertical-align: bottom;
+  border-bottom: 1px solid $devui-dividing-line;
+  text-align: left;
+  padding: 10px;
+}

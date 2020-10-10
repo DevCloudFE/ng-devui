@@ -56,8 +56,9 @@ export class DropDownToggleDirective implements OnInit, AfterViewInit {
       this.dropdown.toggle();
     }
   }
-  @HostListener('keydown.enter')
-  public toggle() {
+  @HostListener('keydown.enter', ['$event'])
+  public toggle(event) {
+    if (event.defaultPrevented) {return; }
     this.dropdown.toggle();
   }
 }

@@ -1,0 +1,101 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
+.row {
+  overflow: hidden;
+}
+
+.col-sm-3 {
+  float: left;
+  position: relative;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+  min-width: 220px;
+  width: 220px;
+}
+
+.list-group .list-group-item {
+  padding: 0 16px;
+}
+
+.drop-row {
+  white-space: nowrap;
+  overflow-x: auto;
+  margin-bottom: 10px;
+}
+
+.drop-col {
+  margin-left: 10px;
+  display: inline-block;
+  vertical-align: top;
+  width: 180px;
+  padding-bottom: 10px;
+}
+
+.show-drop-area ::ng-deep .dropover-scroll-area,
+.color-example {
+  opacity: 0.1;
+}
+
+.show-drop-area ::ng-deep .dropover-scroll-area.active,
+.color-example.active {
+  background: red;
+}
+
+.show-drop-area ::ng-deep .dropover-scroll-area.inactive,
+.color-example.inactive {
+  background: blue;
+}
+
+.drag-border {
+  border: $devui-brand dashed 1px;
+}
+
+.drag-handle {
+  cursor: move;
+
+  /* fallback if grab cursor is unsupported */
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
+}
+
+.drag-handle:active {
+  cursor: grabbing;
+  cursor: -moz-grabbing;
+  cursor: -webkit-grabbing;
+}
+
+.drag-hint-border {
+  border: $devui-success dashed 2px;
+}
+
+.drag-over-border {
+  border: $devui-warning dashed 2px;
+}
+
+.card {
+  border: 1px solid $devui-dividing-line;
+}
+
+.card .card-header {
+  font-size: 14px;
+  padding: 10px;
+}
+
+.list-group {
+  padding: 10px;
+  max-height: 100px;
+  overflow-y: auto;
+}
+
+.list-group > li {
+  height: 30px;
+  border: 1px solid $devui-brand;
+  color: $devui-light-text;
+  margin-bottom: 5px;
+  line-height: 1.5;
+  background-color: $devui-brand;
+  display: flex;
+  align-items: center;
+}

@@ -3,7 +3,7 @@ import { Component, ChangeDetectorRef } from '@angular/core';
 @Component({
   selector: 'd-batch-drag',
   templateUrl: './batch-drag.component.html',
-  styleUrls: ['./batch-drag.component.css']
+  styleUrls: ['./batch-drag.component.scss']
 })
 export class BatchDragComponent {
   lists = [

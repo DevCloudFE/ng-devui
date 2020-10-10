@@ -1,12 +1,12 @@
+import { ButtonModule } from 'ng-devui/button';
+import { UploadModule } from 'ng-devui/upload';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { UploadModule } from '..';
 import { UploadDemoComponent } from './upload-demo.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule  } from '@angular/common/http';
-import { ButtonModule } from '../../button';
-import { DevUIModule } from 'ng-devui/devui.module';
+import { DevUIModule } from 'ng-devui';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';

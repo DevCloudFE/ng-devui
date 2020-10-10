@@ -17,7 +17,7 @@ export class ButtonDemoComponent {
   iconSource: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./icon/icon.component.html')},
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./icon/icon.component.ts')},
-    {title: 'CSS', language: 'css', code:  require('!!raw-loader!./icon/icon.component.css')}
+    {title: 'SCSS', language: 'css', code:  require('!!raw-loader!./icon/icon.component.scss')}
   ];
 
   loadingSource: Array<DevuiSourceData> = [
@@ -61,6 +61,11 @@ export class ButtonDemoComponent {
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./size/size.component.ts')}
   ];
 
+  groupsSource: Array<DevuiSourceData> = [
+    {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./groups/groups.component.html')},
+    {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./groups/groups.component.ts')}
+  ];
+
   navItems = [
     { dAnchorLink: 'button-primary', value: '主要按钮'},
     { dAnchorLink: 'button-common', value: '次要按钮'},
@@ -71,7 +76,8 @@ export class ButtonDemoComponent {
     { dAnchorLink: 'button-loading', value: '加载中状态'},
     { dAnchorLink: 'button-auto-focus', value: '自动获得焦点'},
     { dAnchorLink: 'button-icon', value: '图标按钮'},
-    { dAnchorLink: 'button-size', value: '按钮大小'}
+    { dAnchorLink: 'button-size', value: '按钮大小'},
+    { dAnchorLink: 'button-groups', value: '按钮组'}
   ];
 
   constructor() {

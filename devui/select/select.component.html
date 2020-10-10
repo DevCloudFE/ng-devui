@@ -67,7 +67,7 @@
       </div>
       <ul
         class="devui-select-tag-list {{ extraConfig?.labelization?.overflow }}"
-        [style.maxHeight]="extraConfig?.labelization?.containnerMaxHeight"
+        [style.maxHeight]="extraConfig?.labelization?.containerMaxHeight || extraConfig?.labelization?.containnerMaxHeight"
         *ngIf="multiItems.length > 0"
       >
         <li
@@ -191,7 +191,7 @@
               xmlns="http://www.w3.org/2000/svg"
               xmlns:xlink="http://www.w3.org/1999/xlink"
               class="svg-icon-search"
-              style="vertical-align: middle;"
+              style="vertical-align: middle"
             >
               <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                 <g transform="translate(-1.000000, -1.000000)">
@@ -218,6 +218,7 @@
               xmlns="http://www.w3.org/2000/svg"
               xmlns:xlink="http://www.w3.org/1999/xlink"
               class="svg-icon-clear"
+              [ngClass]="size ? 'svg-icon-clear-' + size : ''"
             >
               <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                 <g transform="translate(-3.000000, -3.000000)" fill-rule="nonzero">
@@ -254,7 +255,7 @@
     </ul>
     <ng-container *ngIf="customViewTemplate">
       <div class="devui-select-custom-area">
-        <ng-template [ngTemplateOutlet]="customViewTemplate" [ngTemplateOutletContext]="{ $implicit: this, choose: choose}"></ng-template>
+        <ng-template [ngTemplateOutlet]="customViewTemplate" [ngTemplateOutletContext]="{ $implicit: this, choose: choose }"></ng-template>
       </div>
     </ng-container>
   </div>

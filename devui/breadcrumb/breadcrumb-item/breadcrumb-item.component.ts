@@ -11,8 +11,8 @@ import { BreadCrumbService } from '../breadcrumb.service';
     selector: 'd-breadcrumb-item',
     exportAs: 'dBreadcrumbItem',
     templateUrl: './breadcrumb-item.component.html',
-    styleUrls: ['./breadcrumb-item.component.scss']
-
+    styleUrls: ['./breadcrumb-item.component.scss'],
+    preserveWhitespaces: false,
 })
 export class BreadCrumbItemComponent implements OnInit {
 

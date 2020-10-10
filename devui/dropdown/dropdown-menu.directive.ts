@@ -32,6 +32,7 @@ export class DropDownMenuDirective implements OnInit {
         }
         if (value) {
           this.keydownEscapeSub = this.keydownEscapeEvent$.subscribe(event => {
+            if (event.defaultPrevented) {return; }
             this.hide(event);
           });
         }

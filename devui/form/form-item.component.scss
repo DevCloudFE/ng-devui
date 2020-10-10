@@ -1,15 +1,23 @@
 @import '../style/core/layout';
 
 .devui-form-horizontal :host.devui-form-item {
-  margin-bottom: $element-spacing;
+  margin-bottom: 20px;
   display: flex;
   align-items: center;
+
+  &.devui-form-has-error-msg {
+    margin-bottom: 0;
+  }
 }
 
 .devui-form-vertical :host.devui-form-item {
   display: flex;
-  margin-bottom: $element-spacing;
+  margin-bottom: 20px;
   flex-direction: column;
+
+  &.devui-form-has-error-msg {
+    margin-bottom: 0;
+  }
 }
 
 .devui-form-columns :host.devui-form-item {
@@ -17,5 +25,9 @@
   flex-direction: column;
   align-items: flex-start;
   margin-right: $element-spacing;
-  margin-bottom: $element-spacing;
+  margin-bottom: 20px;
+
+  &.devui-form-has-error-msg {
+    margin-bottom: 0;
+  }
 }

@@ -34,7 +34,7 @@ export class TwoDatePickerComponent implements OnInit, OnDestroy {
   @Input() disabled: boolean;
   @Input() dateConverter: DateConverter;
   showTime = false;
-  @Input() selectedRange = [null, null];
+  selectedRange = [null, null];
   @Input() hideOnRangeSelected = true;
   customViewTemplate: TemplateRef<any>;
   @Output() selectedRangeChange = new EventEmitter<any>();
@@ -43,7 +43,7 @@ export class TwoDatePickerComponent implements OnInit, OnDestroy {
   @ViewChild('templateWrap') templateWrap: ElementRef;
 
   datePosition: VerticalConnectionPos = 'bottom';
-  selectDateSubject = new Subject<{side: String, date: Date, onlyWrite?: Boolean}>();
+  selectDateSubject = new Subject<{side: string, date: Date, onlyWrite?: boolean}>();
   hoverOnDate: Subject<object> = new Subject<object>();
   switchOpenSub: Subject<'start'|'end'|false> = new Subject<'start'|'end'|false>();
   today = new Date();
@@ -65,7 +65,6 @@ export class TwoDatePickerComponent implements OnInit, OnDestroy {
   private _dateFormat: string;
   private _maxDate: Date;
   private _minDate: Date;
-  private onChange = (_: any) => null;
 
   @Input() set dateConfig(dateConfig: any) {
     if (this.checkDateConfig(dateConfig)) {
@@ -157,7 +156,6 @@ export class TwoDatePickerComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this._minDate = this.minDate ? new Date(this.minDate) : new Date(this.dateConfig.min, 0, 1, 0, 0, 0);
     this._maxDate = this.maxDate ? new Date(this.maxDate) : new Date(this.dateConfig.max, 11, 31, 23, 59, 59);
-    this._dateFormat = this.showTime ? this.dateConfig.format.time : this.dateConfig.format.date;
     this.setI18nText();
     this.updateCdkConnectedOverlayOrigin(this.el.nativeElement);
     this.subscribeHoverActions();
@@ -289,11 +287,10 @@ export class TwoDatePickerComponent implements OnInit, OnDestroy {
         [this.rangeStart, this.rangeEnd] = this.selectedRange;
       }
     }
-    this.notifyValueChange(range);
+    this.notifyValueChange();
   }
 
-  notifyValueChange(range) {
-    this.onChange(range);
+  notifyValueChange() {
     this.selectedRangeChange.emit(this.selectedRange);
   }
 
@@ -325,27 +322,31 @@ export class TwoDatePickerComponent implements OnInit, OnDestroy {
     picker.selectRange(rangeStart, true);
   }
 
-  selectStart(date: Date) {
-    this.selectDateSubject.next({side: 'start', date: date});
-    this.whichOpen = 'end';
-    this.startOpen = false;
-    this.endOpen = true;
+  selectStart(date: Date, passive = false) {
     this.selectedRange[0] = date;
     this.rangeStart = date;
     this.isDisableToday();
+    if (!passive) {
+      this.selectDateSubject.next({side: 'start', date});
+      this.whichOpen = 'end';
+      this.startOpen = false;
+      this.endOpen = true;
+    }
   }
 
-  selectEnd(date: Date) {
-    this.selectDateSubject.next({side: 'end', date: date});
+  selectEnd(date: Date, passive = false) {
     this.selectedRange[1] = date;
     this.rangeEnd = date;
-    if (!this.showTime && this.hideOnRangeSelected) {
-      this.isOpen = false;
-      this.startOpen = false;
-      this.endOpen = false;
-      this.whichOpen = false;
-    }
     this.isDisableToday();
+    if (!passive) {
+      this.selectDateSubject.next({side: 'end', date: date});
+      if (!this.showTime && this.hideOnRangeSelected) {
+        this.isOpen = false;
+        this.startOpen = false;
+        this.endOpen = false;
+        this.whichOpen = false;
+      }
+    }
   }
 
   chooseToday(event) {

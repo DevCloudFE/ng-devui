@@ -9,7 +9,7 @@ export interface CheckedDataFormat {
 @Component({
   selector: 'd-form-demo-filter',
   templateUrl: './filter.component.html',
-  styleUrls: ['./filter.component.css']
+  styleUrls: ['./filter.component.scss']
 
 })
 export class FilterComponent implements OnInit {

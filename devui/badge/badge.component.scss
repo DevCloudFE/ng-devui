@@ -1,0 +1,103 @@
+@import '../style/theme/color';
+
+@mixin status-color {
+  &-danger {
+    background: $devui-danger;
+  }
+
+  &-warning {
+    background: $devui-warning;
+  }
+
+  &-waiting {
+    background: $devui-waiting;
+  }
+
+  &-success {
+    background: $devui-success;
+  }
+
+  &-info {
+    background: $devui-info;
+  }
+}
+
+:host {
+  position: relative;
+  display: inline-block;
+  line-height: 1;
+}
+
+.devui-badge-content {
+  position: absolute;
+  z-index: auto;
+
+  &-count {
+    background: $devui-placeholder;
+    color: $devui-light-text;
+    min-width: 16px;
+    height: 16px;
+    line-height: 16px;
+    text-align: center;
+    padding: 0 4px;
+    border-radius: 8px;
+  }
+
+  &-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 100%;
+    background: $devui-danger;
+  }
+
+  &-top-left {
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+  }
+
+  &-top-right {
+    top: 0;
+    right: 0;
+    transform: translate(50%, -50%);
+  }
+
+  &-bottom-left {
+    bottom: 0;
+    left: 0;
+    transform: translate(-50%, 50%);
+  }
+
+  &-bottom-right {
+    bottom: 0;
+    right: 0;
+    transform: translate(50%, 50%);
+  }
+  @include status-color;
+}
+
+.devui-badge-count {
+  position: relative;
+  right: 0;
+  background: $devui-placeholder;
+  color: $devui-light-text;
+  min-width: 16px;
+  height: 16px;
+  line-height: 16px;
+  text-align: center;
+  padding: 2px 8px;
+  border-radius: 8px;
+  @include status-color;
+}
+
+.devui-badge-status {
+  line-height: inherit;
+  vertical-align: baseline;
+  position: relative;
+  top: -1px;
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 100%;
+  @include status-color;
+}

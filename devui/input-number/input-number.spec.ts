@@ -74,14 +74,14 @@ describe('input-number', () => {
         expect(inputContainerEL.classList).toContain('devui-input-number-lg');
       });
 
-      it('should bind value undefined work', fakeAsync(() => {
-        component.value = undefined;
+      it('should bind value null work', fakeAsync(() => {
+        component.value = null;
 
         fixture.detectChanges();
         tick();
         fixture.detectChanges();
         const inputEl = debugEl.query(By.css('.input-container .input-box')).nativeElement;
-        expect(inputEl.value).toEqual(component.min + '');
+        expect(inputEl.value).toEqual('0');
       }));
 
       it('should have correctly bind number', fakeAsync(() => {
@@ -97,7 +97,7 @@ describe('input-number', () => {
     describe('initial value is empty', () => {
       it('should value can be empty', fakeAsync(() => {
         component.allowEmpty = true;
-        component.value = undefined;
+        component.value = null;
         fixture.detectChanges();
         tick();
         fixture.detectChanges();
@@ -107,7 +107,7 @@ describe('input-number', () => {
 
       it('should empty increase work', fakeAsync(() => {
         component.allowEmpty = true;
-        component.value = undefined;
+        component.value = null;
         fixture.detectChanges();
         tick();
         fixture.detectChanges();
@@ -118,7 +118,7 @@ describe('input-number', () => {
         tick();
         fixture.detectChanges();
         const inputEl = debugEl.query(By.css('.input-container .input-box')).nativeElement;
-        expect(inputEl.value).toEqual('-100');
+        expect(inputEl.value).toEqual('0');
       }));
 
       it('should not min value bigger than max value', () => {
@@ -131,7 +131,7 @@ describe('input-number', () => {
 
       it('should empty decrease work', fakeAsync(() => {
         component.allowEmpty = true;
-        component.value = undefined;
+        component.value = null;
         fixture.detectChanges();
         tick();
         fixture.detectChanges();
@@ -142,7 +142,7 @@ describe('input-number', () => {
         tick();
         fixture.detectChanges();
         const inputEl = debugEl.query(By.css('.input-container .input-box')).nativeElement;
-        expect(inputEl.value).toEqual('-100');
+        expect(inputEl.value).toEqual('0');
       }));
 
       it('should input empty value blur work', fakeAsync(() => {
@@ -193,7 +193,8 @@ describe('input-number', () => {
     describe('advanced', () => {
       it('should input value changing emiter work', fakeAsync(() => {
         const inputEl = debugEl.query(By.css('.input-container .input-box')).nativeElement;
-        const keyBoardEvent = createKeyBoardEvent('keypress', { key: '5', code: 'Digit5', charCode: 48 + 5 });
+        inputEl.value = '5';
+        const keyBoardEvent = createKeyBoardEvent('input', { data: '5' });
         inputEl.dispatchEvent(keyBoardEvent);
         fixture.detectChanges();
         tick();

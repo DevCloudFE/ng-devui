@@ -36,6 +36,7 @@
 |     color     |     `string`      |    --    |                  可选，复选框颜色                                    | [使用CheckBoxGroup](/components/checkbox/demo#tabs-group) |
 | showAnimation |     `boolean`     |   true   |               可选，控制是否显示动画                                 | [使用CheckBoxGroup](/components/checkbox/demo#tabs-group) |
 | beforeChange  | `Function\|Promise\|Observable` | -- | 可选，checkbox 切换前的回调函数，返回 boolean 类型，返回 false 可以阻止 checkbox-group 切换 | [回调切换](/components/checkbox/demo#condition-change) |
+| disabled |   `boolean`    | false |        可选，是否禁用整个按钮组     | [使用CheckBoxGroup](/components/checkbox/demo#tabs-group) |
 
 ### d-checkbox-group 事件
 

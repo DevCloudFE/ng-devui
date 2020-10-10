@@ -1,9 +1,8 @@
 import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-
+import { ThemeServiceInit, devuiLightTheme, devuiDarkTheme } from 'ng-devui/theme';
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
-import { ThemeServiceInit, devuiLightTheme, devuiDarkTheme } from 'ng-devui/theme';
 import { greenLightTheme, greenDarkTheme } from './app/theme-picker/theme-data-more';
 ThemeServiceInit({
   'devui-light-theme': devuiLightTheme,

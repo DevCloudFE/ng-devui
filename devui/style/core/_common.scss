@@ -20,14 +20,14 @@
   font-weight: bold;
   line-height: 20px;
   height: 20px;
-  color: #000000;
+  color: $devui-text;
   text-shadow: 0 1px 0 #ffffff;
   filter: alpha(opacity=20);
   opacity: 0.2;
 
   &:hover,
   &:focus {
-    color: #000000;
+    color: $devui-text;
     text-decoration: none;
     cursor: pointer;
     filter: alpha(opacity=50);
@@ -86,4 +86,8 @@ a:hover {
     background-color: $devui-disabled-bg;
     cursor: not-allowed;
   }
+}
+
+.devui-body-scrollblock {
+  width: 100%;
 }

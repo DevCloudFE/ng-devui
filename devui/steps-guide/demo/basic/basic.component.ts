@@ -8,7 +8,7 @@ import { StepsGuideService } from 'ng-devui/steps-guide';
 })
 export class BasicComponent implements OnInit {
   currentStep: any;
-  nextStep: any;
+  currentStepOutPut: any;
   steps = [
     {
       title: '方向',
@@ -51,14 +51,15 @@ export class BasicComponent implements OnInit {
   }
 
   ngOnInit() {
-    localStorage.setItem('devui_guide_step-custom-demo', '0');
-    localStorage.removeItem('devui_guide_step-basic-demo');
-    this.stepService.setSteps(this.steps);
-    this.stepService.setCurrentIndex(0);
+    /* 由于整个demo是在一个页面内显示多个操作指引序列，因此需要在初始化时重置显示状态 */
+    localStorage.setItem('devui_guide_step-custom-demo', '0'); /* 设置第二个序列为不显示状态 */
+    localStorage.removeItem('devui_guide_step-basic-demo'); /* 设置第一个序列为显示状态 */
+    this.stepService.setSteps(this.steps); /* 将步骤数据设置为第一个序列的内容 */
+    this.stepService.setCurrentIndex(0); /* 设置当前序列显示步骤为第一个步骤 */
   }
 
   reset() {
-    this.stepService.showGuide(false);
+    this.stepService.showGuide(false); /* 关闭当前正在显示的序列 */
     localStorage.setItem('devui_guide_step-custom-demo', '0');
     localStorage.removeItem('devui_guide_step-basic-demo');
     this.stepService.setSteps(this.steps);
@@ -69,11 +70,8 @@ export class BasicComponent implements OnInit {
     this.stepService.showGuide(false);
   }
 
-  stepChange(step) {
-    console.log(step);
-  }
-
   operateChange(response) {
+    this.currentStepOutPut = response;
     if (response.clickType === 'close' && response.currentIndex === 7) {
       localStorage.removeItem('devui_guide_step-custom-demo');
       const steps = [
@@ -84,6 +82,10 @@ export class BasicComponent implements OnInit {
         {
           title: '自定义元素弹出',
           content: '指定一个元素展示引导弹出位置，与绑定元素无关'
+        },
+        {
+          title: '监听 dom 变化修正定位',
+          content: `点击本页面中的展开代码按钮，页面出现滚动条，绑定在头部菜单的指引信息会随着宽度变化自动定位`
         }
       ];
       this.stepService.setSteps(steps);

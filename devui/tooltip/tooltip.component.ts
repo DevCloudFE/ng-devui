@@ -1,4 +1,5 @@
-import { AfterViewInit, Component, ElementRef, HostBinding, HostListener, Input, OnDestroy, Renderer2 } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, HostBinding, HostListener, Input, OnDestroy, Renderer2,
+  ChangeDetectionStrategy } from '@angular/core';
 import { PositionService } from 'ng-devui/position';
 import { fromEvent, Subscription } from 'rxjs';
 import { directionFadeInOut } from 'ng-devui/utils';
@@ -12,6 +13,7 @@ import { PositionType } from './tooltip.types';
   animations: [
     directionFadeInOut
   ],
+  preserveWhitespaces: false,
 })
 export class TooltipComponent implements AfterViewInit, OnDestroy {
   @Input() content: string;

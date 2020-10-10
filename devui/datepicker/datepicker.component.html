@@ -157,54 +157,52 @@
       </tr>
     </tbody>
     <tfoot [ngClass]="{ 'devui-noSelect': !customViewTemplate }">
-      <tr class="time-picker-view" (click)="!customViewTemplate && $event.stopPropagation()">
-        <ng-container *ngIf="!customViewTemplate">
-          <td colspan="4">
-            <div class="devui-timepicker" *ngIf="showTime" [ngClass]="{ 'devui-timepicker-disabled': isDisabledTime() }">
-              <div class="devui-time">
-                <input [ngModel]="currentHour" (keydown)="fixTime($event, 'h')" [disabled]="isDisabledTime()" />
-                <div class="devui-btn-nav" *ngIf="!isDisabledTime()">
-                  <div class="btn-up" (click)="timeUp('h')"></div>
-                  <div class="btn-down" (click)="timeDown('h')"></div>
-                </div>
-              </div>
-              <div class="devui-time">
-                <input class="devui-minutes" [ngModel]="currentMinute" (keydown)="fixTime($event, 'm')" [disabled]="isDisabledTime()" />
-                <div class="devui-btn-nav" *ngIf="!isDisabledTime()">
-                  <div class="btn-up" (click)="timeUp('m')"></div>
-                  <div class="btn-down" (click)="timeDown('m')"></div>
-                </div>
-              </div>
-              <div class="devui-time">
-                <input class="devui-seconds" [ngModel]="currentSecond" (keydown)="fixTime($event, 's')" [disabled]="isDisabledTime()" />
-                <div class="devui-btn-nav" *ngIf="!isDisabledTime()">
-                  <div class="btn-up" (click)="timeUp('s')"></div>
-                  <div class="btn-down" (click)="timeDown('s')"></div>
-                </div>
+      <tr class="time-picker-view" (click)="!customViewTemplate && $event.stopPropagation()" *ngIf="showTime || !customViewTemplate">
+        <td colspan="4">
+          <div class="devui-timepicker" *ngIf="showTime" [ngClass]="{ 'devui-timepicker-disabled': isDisabledTime() }">
+            <div class="devui-time">
+              <input [ngModel]="currentHour" (keydown)="fixTime($event, 'h')" [disabled]="isDisabledTime()" />
+              <div class="devui-btn-nav" *ngIf="!isDisabledTime()">
+                <div class="btn-up" (click)="timeUp('h')"></div>
+                <div class="btn-down" (click)="timeDown('h')"></div>
               </div>
             </div>
-          </td>
-          <td colspan="3">
-            <div class="devui-btn-wrapper" *ngIf="showTime">
-              <d-button bsStyle="common" [disabled]="disabled" (btnClick)="confirmTime($event)" bsSize="sm"
-                >{{ i18nCommonText?.btnConfirm }}
-              </d-button>
+            <div class="devui-time">
+              <input class="devui-minutes" [ngModel]="currentMinute" (keydown)="fixTime($event, 'm')" [disabled]="isDisabledTime()" />
+              <div class="devui-btn-nav" *ngIf="!isDisabledTime()">
+                <div class="btn-up" (click)="timeUp('m')"></div>
+                <div class="btn-down" (click)="timeDown('m')"></div>
+              </div>
             </div>
-            <div class="devui-btn-wrapper" *ngIf="!showTime">
-              <d-button bsStyle="common" [disabled]="isTodayDisable() || disabled" (btnClick)="chooseToday()" bsSize="sm"
-                >{{ i18nText?.today }}
-              </d-button>
+            <div class="devui-time">
+              <input class="devui-seconds" [ngModel]="currentSecond" (keydown)="fixTime($event, 's')" [disabled]="isDisabledTime()" />
+              <div class="devui-btn-nav" *ngIf="!isDisabledTime()">
+                <div class="btn-up" (click)="timeUp('s')"></div>
+                <div class="btn-down" (click)="timeDown('s')"></div>
+              </div>
             </div>
-          </td>
-        </ng-container>
-        <ng-container *ngIf="customViewTemplate">
-          <td colspan="7">
-            <ng-template
-              [ngTemplateOutlet]="customViewTemplate"
-              [ngTemplateOutletContext]="{ $implicit: this, chooseDate: chooseDate, clearAll: clearAll }"
-            ></ng-template>
-          </td>
-        </ng-container>
+          </div>
+        </td>
+        <td colspan="3">
+          <div class="devui-btn-wrapper" *ngIf="showTime">
+            <d-button bsStyle="common" [disabled]="disabled" (btnClick)="confirmTime($event)" bsSize="sm"
+              >{{ i18nCommonText?.btnConfirm }}
+            </d-button>
+          </div>
+          <div class="devui-btn-wrapper" *ngIf="!showTime">
+            <d-button bsStyle="common" [disabled]="isTodayDisable() || disabled" (btnClick)="chooseToday()" bsSize="sm"
+              >{{ i18nText?.today }}
+            </d-button>
+          </div>
+        </td>
+      </tr>
+      <tr class="time-picker-view devui-custom-area" *ngIf="customViewTemplate">
+        <td colspan="7">
+          <ng-template
+            [ngTemplateOutlet]="customViewTemplate"
+            [ngTemplateOutletContext]="{ $implicit: this, chooseDate: chooseDate, clearAll: clearAll }"
+          ></ng-template>
+        </td>
       </tr>
     </tfoot>
   </table>

@@ -12,12 +12,12 @@ export class QuadrantDiagramDemoComponent implements OnInit {
   basicSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./basic/basic.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/basic.component.ts') },
-    { title: 'CSS', language: 'css', code: require('!!raw-loader!./basic/basic.component.css') }
+    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./basic/basic.component.scss') }
   ];
   configSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./config/config.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./config/config.component.ts') },
-    { title: 'CSS', language: 'css', code: require('!!raw-loader!./config/config.component.css') }
+    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./config/config.component.scss') }
   ];
   navItems = [
     { dAnchorLink: 'basic-usage', value: '基本用法'},

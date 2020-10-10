@@ -42,7 +42,8 @@ import { fadeInOut, AppendToBodyDirection, AppendToBodyDirectionsConfig } from '
   ],
   animations: [
     fadeInOut
-  ]
+  ],
+  preserveWhitespaces: false,
 })
 export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewInit, OnDestroy, OnChanges {
 
@@ -72,6 +73,8 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
           ele.classList.remove(`devui-dropdown-origin-${position}`);
         }
       }
+    } else {
+      this.onTouch();
     }
   }
   /**
@@ -210,7 +213,8 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
       // 选中项显示成标签一样，带有删除按钮可以单个删除
       enable: boolean; // 默认值为false
       overflow?: 'normal' | 'scroll-y' | 'multiple-line' | string; // 默认值为''
-      containnerMaxHeight?: string; // 默认值1.8em
+      containerMaxHeight?: string; // 默认值1.8em
+      containnerMaxHeight?: string;  // 默认值1.8em, 已废弃
       labelMaxWidth?: string; // 默认100%
     };
     selectedItemWithTemplate?: {
@@ -456,7 +460,6 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
         this.filterSubscription = fromEvent(this.filterInputElement.nativeElement, 'input')
         .pipe(
           map((e: any) => e.target.value),
-          tap(term => this.onTouch()),
           filter(term => !this.disabled && this.searchFn && term.length >= 0),
           debounceTime(300) // hard code need refactory
         )

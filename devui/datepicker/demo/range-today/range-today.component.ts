@@ -8,7 +8,7 @@ import {
   selector: 'd-range-today',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './range-today.component.html',
-  styleUrls: ['./range-today.component.css']
+  styleUrls: ['./range-today.component.scss']
 })
 export class RangePickerTodayComponent {
   dateRange = [null, null];

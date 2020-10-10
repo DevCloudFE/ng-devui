@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 import { ButtonModule } from 'ng-devui/button';
-import { StepsGuideModule } from 'ng-devui//steps-guide';
+import { StepsGuideModule } from 'ng-devui/steps-guide';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';

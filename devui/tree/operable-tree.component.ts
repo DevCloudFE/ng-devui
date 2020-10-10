@@ -24,7 +24,8 @@ import { Subscription } from 'rxjs';
   selector: 'd-operable-tree',
   templateUrl: './operable-tree.component.html',
   styleUrls: ['./operable-tree.component.scss'],
-  exportAs: 'dOperableTreeComponent'
+  exportAs: 'dOperableTreeComponent',
+  preserveWhitespaces: false,
 })
 export class OperableTreeComponent implements AfterViewInit, OnDestroy {
   @Input() tree: Array<ITreeItem>;
@@ -46,6 +47,7 @@ export class OperableTreeComponent implements AfterViewInit, OnDestroy {
   @Input() draggable = false;
   @Input() checkboxInput: ICheckboxInput = {};
   @Input() beforeAddNode: (node: TreeNode) => Promise<any>;
+  @Input() disableMouseEvent: boolean;
   @Input() beforeDeleteNode: (node: TreeNode) => Promise<any>;
   @Input() beforeNodeDrop: (drageNodeId: string, dropNodeId: string, dropType: string) => Promise<any>;
   @Input() beforeEditNode: (node: TreeNode) => Promise<any>;
@@ -398,6 +400,9 @@ export class OperableTreeComponent implements AfterViewInit, OnDestroy {
   }
 
   treeNodeHover(treeNode, type) {
+    if (this.disableMouseEvent) {
+      return;
+    }
     treeNode.data.isHover = type === 'enter';
   }
 

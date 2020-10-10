@@ -3,6 +3,7 @@
     [placeholder]="'请选择...'"
     [source]="languages"
     [(ngModel)]="multiItems"
+    [appendToBody]="true"
     name="multiple-auto"
   ></d-multi-auto-complete>
   <pre>{{ multiItems | json }}</pre>

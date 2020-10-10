@@ -22,7 +22,8 @@ import { ModalContainerDirective } from './modal.directive';
       transition('void => in', animate('400ms  cubic-bezier(0.23, 1, 0.32, 1)')),
       transition('in => void', animate('300ms cubic-bezier(0.755, 0.05, 0.855, 0.06)')),
     ])
-  ]
+  ],
+  preserveWhitespaces: false,
 })
 export class ModalComponent implements OnInit, OnDestroy {
 
@@ -42,6 +43,9 @@ export class ModalComponent implements OnInit, OnDestroy {
   @ViewChild('dialog', { static: true }) dialogElement: ElementRef;
   animateState: string = this.showAnimate ? 'void' : '';
   draggableHandleEl: HTMLElement;
+  scrollTop: number;
+  scrollLeft: number;
+  documentOverFlow: boolean;
 
   mouseDwonEl: ElementRef;
   ignoreBackDropClick = false;
@@ -118,9 +122,6 @@ export class ModalComponent implements OnInit, OnDestroy {
       if (!canHide) {
         return;
       }
-      if (!this.bodyScrollable) {
-        this.renderer.removeClass(this.documentRef.body, 'modal-open');
-      }
 
       this.animateState = 'void';
       this.onHidden();
@@ -129,7 +130,14 @@ export class ModalComponent implements OnInit, OnDestroy {
 
   show() {
     if (!this.bodyScrollable) {
-      this.renderer.addClass(this.documentRef.body, 'modal-open');
+      if (document.documentElement.scrollHeight > document.documentElement.clientHeight) {
+        this.documentOverFlow = true;
+        this.scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        this.scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft;
+        this.renderer.addClass(this.documentRef.body, 'devui-body-scrollblock');
+        this.renderer.setStyle(this.documentRef.body, 'top', `-${this.scrollTop}px`);
+        this.renderer.setStyle(this.documentRef.body, 'left', `-${this.scrollLeft}px`);
+      }
     }
 
     this.dialogElement.nativeElement.focus();

@@ -38,7 +38,7 @@ export class DragDropService {
     width?: number;
     height?: number;
   };
-  subscription: Subscription = new Observable().subscribe();
+  subscription: Subscription = new Subscription();
   dragEmptyImage = new Image();
   dragCloneNode: any;
   dragOriginPlaceholder: any;
@@ -64,7 +64,7 @@ export class DragDropService {
   }
   newSubscription() {
     this.subscription.unsubscribe();
-    return this.subscription = new Observable().subscribe();
+    return this.subscription = new Subscription();
   }
 
   enableDraggedCloneNodeFollowMouse() {
@@ -130,7 +130,7 @@ export class DragDropService {
               lineHeight: '24px',
               textAlign: 'center',
               color: '#fff',
-              background: ['#5170ff', 'var(--devui-brand, #5170ff)']
+              background: ['#5170ff', 'var(--brand-1, #5170ff)']
             };
             Utils.addElStyles(badge, style);
             node.appendChild(badge);
@@ -152,7 +152,7 @@ export class DragDropService {
                 width: this.dragOffset.width + 'px',
                 height: this.dragOffset.height + 'px',
                 background: '#fff',
-                border: ['1px solid #5170ff', '1px solid var(--devui-brand, #5170ff)']
+                border: ['1px solid #5170ff', '1px solid var(--brand-1, #5170ff)']
               };
               Utils.addElStyles(stackNode, stackStyle);
               node.appendChild(stackNode);

@@ -9,6 +9,7 @@ import {
   selector: 'd-modal-footer',
   templateUrl: './modal-footer.component.html',
   styleUrls: ['./modal-footer.component.scss'],
+  preserveWhitespaces: false,
 })
 export class ModalFooterComponent {
   @Input() buttons: Array<{

@@ -27,7 +27,7 @@ export class RadioDemoComponent {
   disabledSource: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./disabled/disabled.component.html')},
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./disabled/disabled.component.ts')},
-    {title: 'CSS', language: 'css', code:  require('!!raw-loader!./disabled/disabled.component.css')}
+    {title: 'SCSS', language: 'css', code:  require('!!raw-loader!./disabled/disabled.component.css')}
   ];
 
   horizontalSource: Array<DevuiSourceData> = [

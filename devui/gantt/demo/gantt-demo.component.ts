@@ -9,13 +9,13 @@ export class GanttDemoComponent implements OnInit {
   basicSource: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./basic/basic.component.html')},
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./basic/basic.component.ts')},
-    {title: 'css', language: 'css', code:  require('!!raw-loader!./basic/basic.component.scss')},
+    {title: 'SCSS', language: 'css', code:  require('!!raw-loader!./basic/basic.component.scss')},
     {title: 'data', language: 'typescript', code:  require('!!raw-loader!./mock-data.ts')}
   ];
   inTableSource: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./table/table.component.html')},
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./table/table.component.ts')},
-    {title: 'css', language: 'css', code:  require('!!raw-loader!./table/table.component.scss')},
+    {title: 'SCSS', language: 'css', code:  require('!!raw-loader!./table/table.component.scss')},
     {title: 'reset-position-HTML', language: 'typescript',
     code: require('!!raw-loader!./table/reset-position/reset-position.component.html')},
     {title: 'reset-position-TS', language: 'xml',

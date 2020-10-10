@@ -4,6 +4,7 @@
     [tag]="displayProperty ? tag[displayProperty] : tag"
     [deletable]="deletable"
     [labelStyle]="tag['labelStyle']"
+    [checked]="tag['checked']"
     [titleContent]="titleProperty ? tag[titleProperty] : displayProperty ? tag[displayProperty] : tag"
     [customViewTemplate]="customViewTemplate"
     (tagDelete)="removeTag(tag, index)"

@@ -1,5 +1,5 @@
 import { animate, state, style, transition, trigger, AnimationEvent } from '@angular/animations';
-import { Component, Directive, ElementRef, HostBinding, HostListener, Input,
+import { Component, Directive, ElementRef, Renderer2, HostListener, Input,
   OnInit, ViewChild, ViewContainerRef, OnDestroy } from '@angular/core';
 import { isNumber, parseInt, trim } from 'lodash-es';
 import { fromEvent, Observable, Subscription, Subject } from 'rxjs';
@@ -30,7 +30,8 @@ export class DrawerContentDirective {
       state('right-in', style({transform: 'none', right: 0})),
       transition('* => *', animate('300ms ease')),
     ]),
-  ]
+  ],
+  preserveWhitespaces: false,
 })
 export class DrawerComponent implements OnInit, OnDestroy {
   animateState = 'void';
@@ -60,8 +61,11 @@ export class DrawerComponent implements OnInit, OnDestroy {
   animationDone = new Subject<AnimationEvent>();
   animationDoneSub: Subscription;
   resizeSub: Subscription;
+  documentOverFlow: boolean;
+  scrollTop: number;
+  scrollLeft: number;
 
-  constructor(private elementRef: ElementRef) {
+  constructor(private elementRef: ElementRef, private renderer: Renderer2) {
   }
 
   ngOnInit() {
@@ -119,7 +123,14 @@ export class DrawerComponent implements OnInit, OnDestroy {
 
   show() {
     if (!this.bodyScrollable) {
-      document.querySelector('body').classList.add('modal-open');
+      if (document.documentElement.scrollHeight > document.documentElement.clientHeight) {
+        this.documentOverFlow = true;
+        this.scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        this.scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft;
+        this.renderer.addClass(document.body, 'devui-body-scrollblock');
+        this.renderer.setStyle(document.body, 'top', `-${this.scrollTop}px`);
+        this.renderer.setStyle(document.body, 'left', `-${this.scrollLeft}px`);
+      }
     }
     this.animateState = 'in';
     const activeElement = document.activeElement;
@@ -157,8 +168,14 @@ export class DrawerComponent implements OnInit, OnDestroy {
       if (!canHide) {
         return;
       }
-      if (!this.bodyScrollable) {
-        document.querySelector('body').classList.remove('modal-open');
+      if (!this.bodyScrollable && this.documentOverFlow) {
+        this.renderer.removeStyle(document.body, 'top');
+        this.renderer.removeStyle(document.body, 'left');
+        this.renderer.removeClass(document.body, 'devui-body-scrollblock');
+        document.documentElement.scrollTop = this.scrollTop;
+        document.body.scrollTop = this.scrollTop;
+        document.documentElement.scrollLeft = this.scrollLeft;
+        document.body.scrollLeft = this.scrollLeft;
       }
       this.animateState = 'void';
       if (this.subscription) {

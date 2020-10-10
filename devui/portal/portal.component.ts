@@ -14,6 +14,7 @@ import {forEach} from 'lodash-es';
                    <ng-template #templateRef>
                         <ng-content></ng-content>
                     </ng-template>`,
+    preserveWhitespaces: false,
 })
 export class PortalComponent {
     viewRef: EmbeddedViewRef<any>;

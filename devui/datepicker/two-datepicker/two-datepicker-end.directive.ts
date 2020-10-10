@@ -33,6 +33,7 @@ export class TwoDatePickerEndDirective implements OnInit, OnDestroy, ControlValu
         }
         if (!data.onlyWrite) {
           this.selectEnd.emit(data.date);
+          this.onChange(data.date);
         }
       }
     });
@@ -73,15 +74,12 @@ export class TwoDatePickerEndDirective implements OnInit, OnDestroy, ControlValu
   }
 
   writeValue(selectedEnd): void {
-    if (selectedEnd) {
-      this.renderer.setProperty(
-        this.el.nativeElement,
-        'value',
-        this.twoDatePicker.dateConverter.format(selectedEnd, this.twoDatePicker.dateFormat, this.twoDatePicker.locale)
-      );
-    } else {
-      this.renderer.setProperty(this.el.nativeElement, 'value', '');
-    }
+    selectedEnd = selectedEnd || null;
+    const formatEnd = selectedEnd ?
+      this.twoDatePicker.dateConverter.format(selectedEnd, this.twoDatePicker.dateFormat, this.twoDatePicker.locale) :
+      '';
+    this.renderer.setProperty(this.el.nativeElement, 'value', formatEnd);
+    this.twoDatePicker.selectEnd(selectedEnd, true);
   }
 
   clearEnd = () => {

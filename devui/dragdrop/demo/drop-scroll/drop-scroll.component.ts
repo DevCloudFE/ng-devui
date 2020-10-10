@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'd-drop-scroll',
   templateUrl: './drop-scroll.component.html',
-  styleUrls: ['./drop-scroll.component.css']
+  styleUrls: ['./drop-scroll.component.scss']
 })
 export class DropScrollComponent {
   lists = [

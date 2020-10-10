@@ -1,0 +1,87 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
+.row {
+  overflow: hidden;
+}
+
+.col-sm-3 {
+  float: left;
+  position: relative;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+  min-width: 220px;
+  width: 220px;
+}
+
+.list-group .list-group-item {
+  padding: 0 16px;
+}
+
+.box-shadow {
+  box-shadow: 0 4px 8px 0 rgba(41, 48, 64, 0.2);
+  border-right: 10px red solid;
+  border-bottom: 12px red solid;
+}
+
+.drag-border {
+  border: $devui-brand dashed 1px;
+}
+
+.drag-handle {
+  cursor: move;
+
+  /* fallback if grab cursor is unsupported */
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
+}
+
+.drag-handle:active {
+  cursor: grabbing;
+  cursor: -moz-grabbing;
+  cursor: -webkit-grabbing;
+}
+
+.drag-hint-border {
+  border: $devui-success dashed 2px;
+}
+
+.drag-over-border {
+  border: $devui-warning dashed 2px;
+}
+
+.card {
+  border: 1px solid $devui-dividing-line;
+}
+
+.card .card-header {
+  font-size: 14px;
+  padding: 10px;
+}
+
+.list-group {
+  padding: 10px;
+}
+
+.list-group > li {
+  height: 30px;
+  border: 1px solid $devui-brand;
+  color: $devui-light-text;
+  margin-bottom: 5px;
+  line-height: 1.5;
+  background-color: $devui-brand;
+  display: flex;
+  align-items: center;
+}
+
+.option {
+  line-height: 1.5;
+  vertical-align: middle;
+  margin-top: 20px;
+}
+
+.option > d-toggle {
+  display: inline-block;
+  transform: translateY(3px);
+}

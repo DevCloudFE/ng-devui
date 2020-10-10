@@ -1,0 +1,28 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
+.upload-body {
+  float: left;
+  width: 40%;
+}
+
+.upload-btn {
+  float: left;
+  width: 30%;
+  margin-left: 10px;
+}
+
+.table {
+  width: 100%;
+  max-width: 100%;
+  margin: 10px 0 0 10px;
+  background-color: transparent;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.td {
+  padding: 8px;
+  line-height: 1.42857143;
+  vertical-align: top;
+  border-top: 1px solid $devui-dividing-line;
+}

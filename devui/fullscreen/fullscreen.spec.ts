@@ -9,7 +9,7 @@ import { FullscreenComponent } from './fullscreen.component';
   template: `
     <d-fullscreen
         #fullscreen
-        [mode]="fullcreenMode"
+        [mode]="fullscreenMode"
         (fullscreenLaunch)="launchFullscreen($event)"
         [zIndex]="100">
       <div fullscreen-target>
@@ -20,10 +20,10 @@ import { FullscreenComponent } from './fullscreen.component';
 })
 class TestFullscreenComponent {
   @ViewChild('fullscreen') fullscreen: FullscreenComponent;
-  fullcreenMode = 'normal';
+  fullscreenMode = 'normal';
   btnIcon = 'icon-frame-expand';
 
-  launchFullscreen({isFullscreen}) {
+  launchFullscreen({ isFullscreen }) {
     if (isFullscreen) {
       this.btnIcon = 'icon-frame-contract';
     } else {
@@ -87,7 +87,7 @@ describe('fullscreen', () => {
   });
   describe('fullscreen immersive mode', () => {
     beforeEach(() => {
-      component.fullcreenMode = 'immersive';
+      component.fullscreenMode = 'immersive';
       fixture.detectChanges();
     });
     it('Fullscreen normal should create correctly', () => {

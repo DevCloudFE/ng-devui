@@ -10,13 +10,12 @@
     (tagDelete)="getTagValue($event); deleteTag($event.index)"
   >
   </d-tags>
-  <pre style="margin-top: 10px;">{{ tagList2 | json }}</pre>
+  <pre style="margin-top: 10px">{{ tagList2 | json }}</pre>
   <h4>自定义标签组</h4>
   <d-tags [tags]="tagList_custom" [deletable]="true" (tagDelete)="getTagValue($event); deleteTagCustom($event.index)">
     <ng-template let-tag="tag">
-      <span class="icon-bug"></span>
+      <span class="icon-bug" style="vertical-align: text-bottom"></span>
       <span title="{{ tag.name }}">{{ tag.name }}</span>
     </ng-template>
   </d-tags>
-  <section></section>
 </section>

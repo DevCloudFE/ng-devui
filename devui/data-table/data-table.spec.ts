@@ -704,7 +704,7 @@ describe('data-table', () => {
       const filterIcon = debugEl.query(By.css('.devui-table thead tr th:nth-child(3) .filter-icon'));
       filterIcon.nativeElement.style.visibility = 'visible';
 
-      const filterClickEl = debugEl.query(By.css('.devui-table thead tr th:nth-child(3) .devui-adjust-dropdown-offsetY'));
+      const filterClickEl = filterIcon.parent;
       filterClickEl.nativeElement.dispatchEvent(new Event('click'));
       fixture.detectChanges();
       tick();

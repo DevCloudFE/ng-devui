@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'd-follow',
   templateUrl: './follow.component.html',
-  styleUrls: ['./follow.component.css']
+  styleUrls: ['./follow.component.scss']
 })
 export class FollowComponent implements OnInit {
   list1 = [

@@ -21,7 +21,8 @@ import { ConnectedPosition } from '@angular/cdk/overlay';
   styleUrls: ['./pagination.component.scss'],
   templateUrl: './pagination.component.html',
   exportAs: 'pagination',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  preserveWhitespaces: false,
 })
 export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy {
   static EFFECT_PAGE_RANGE_KEYS = ['total', 'pageSize', 'pageIndex', 'maxItems'];

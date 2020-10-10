@@ -39,6 +39,8 @@
           [delay]="delay"
           dAutoComplete
           [searchFn]="searchFn"
+          [appendToBody]="appendToBody"
+          (blur)="inputBlur()"
           (changeDropDownStatus)="changePopUp($event)"
         />
       </li>
@@ -80,6 +82,7 @@
           [delay]="delay"
           dAutoComplete
           [searchFn]="searchFn"
+          (blur)="inputBlur()"
           (changeDropDownStatus)="changePopUp($event)"
         />
       </li>

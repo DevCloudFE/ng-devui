@@ -6,7 +6,8 @@ import { DataTableColumnTmplComponent } from './tmpl/data-table-column-tmpl.comp
 @Component({
   selector: 'd-data-table-row, [dDataTableRow]',
   templateUrl: './data-table-row.component.html',
-  styleUrls: ['./data-table-row.component.scss']
+  styleUrls: ['./data-table-row.component.scss'],
+  preserveWhitespaces: false,
 })
 export class DataTableRowComponent implements OnInit {
   @Input() rowItem: any;

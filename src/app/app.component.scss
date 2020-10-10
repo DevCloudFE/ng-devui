@@ -34,7 +34,7 @@ body {
     &,
     &::before,
     &::after {
-      background-color: $devui-base-bg;
+      background-color: $devui-text;
       width: 100%;
       height: 0.2em;
       transition: all 0.4s;
@@ -142,7 +142,7 @@ body {
       &,
       &::before,
       &::after {
-        background: #000000;
+        background: $devui-text;
       }
     }
   }
@@ -153,6 +153,7 @@ body {
     padding: 5px 0;
     margin: 0 12px;
     color: $devui-text;
+    cursor: pointer;
 
     & > span {
       font-size: $font-size-primary;
@@ -332,7 +333,7 @@ body {
   display: flex;
   align-items: center;
 
-  &:hover {
+  &:not(.devui-menu-item-selected):hover {
     background-color: $devui-list-item-hover-bg;
   }
 }
@@ -431,7 +432,7 @@ body {
     border: none;
 
     code {
-      border: 1px solid #e9e9e9; // TODO: color not variable
+      border: 1px solid $devui-dividing-line;
       overflow-x: auto;
     }
   }
@@ -518,6 +519,7 @@ body {
 .demo-example.active.anchor-active-by-anchor-link,
 .demo-example.active.anchor-active-by-fragment {
   animation: hightlight-and-disapear 1 3s linear;
+  outline-offset: 8px;
 }
 
 @keyframes hightlight-and-disapear {
@@ -530,15 +532,15 @@ body {
   }
 
   10% {
-    outline: 1px solid $devui-brand;
+    outline: 1px dashed $devui-brand;
   }
 
   50% {
-    outline: 1px solid $devui-brand;
+    outline: 1px dashed $devui-brand;
   }
 
   90% {
-    outline: 1px solid rgba(255, 255, 255, 0);
+    outline: 1px dashed rgba(255, 255, 255, 0);
   }
 
   99% {

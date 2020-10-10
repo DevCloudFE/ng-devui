@@ -13,7 +13,8 @@ import * as HighLight from 'highlight.js/lib/highlight';
   encapsulation: ViewEncapsulation.None,
   template     : `
     <pre [ngClass]="'language-'+language"><code #codeEl [innerText]="code"></code></pre>
-  `
+  `,
+  preserveWhitespaces: false,
 })
 export class DevUIHighlightComponent implements OnInit, AfterViewInit {
   // response: HighlightResult;

@@ -1,6 +1,8 @@
 import { Directive, HostListener, Input } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams, HttpResponse, HttpErrorResponse } from '@angular/common/http';
 
+declare type HttpObserve = 'body' | 'events' | 'response';
+declare type ResponseType = 'arraybuffer' | 'blob' | 'json' | 'text';
 export class HelperUtils {
   static jumpOuterUrl(url, target = '_blank') {
        if (url !== undefined) {
@@ -113,12 +115,12 @@ export class HelperUtils {
 
     const requestOption = Object.assign({}, {
       body: requestBody,
-      observe: 'response',
+      observe: 'response' as HttpObserve,
       params: requestOptionParams,
       headers: {
         'Content-Type': requestHeaderContentType
       },
-      responseType: 'arraybuffer'
+      responseType: 'arraybuffer' as ResponseType
     }, {
       headers: option.header
     });

@@ -39,6 +39,9 @@ export class CheckboxGroupBasicComponent {
   ];
   values5 = ['data2', 'data12'];
 
+  options6 = ['data1', 'data2', 'data3', 'data4', 'data5', 'data6', 'data7'];
+  values6 = ['data3'];
+
   onCheckbox1Change(value) {
     console.log('checkbox1 checked:', value);
   }
@@ -53,5 +56,9 @@ export class CheckboxGroupBasicComponent {
 
   onCheckbox4Change(value) {
     console.log('checkbox4 checked:', value);
+  }
+
+  onCheckbox6Change(value) {
+    console.log('checkbox6 checked:', value);
   }
 }

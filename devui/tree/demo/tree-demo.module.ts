@@ -23,7 +23,7 @@ import { LoadingModule } from 'ng-devui/loading';
 import { SafePipeModule } from 'ng-devui/utils';
 import { TooltipModule } from 'ng-devui/tooltip';
 import { SearchModule } from 'ng-devui/search';
-
+import { DropDownModule } from 'ng-devui/dropdown';
 @NgModule({
   imports: [
     CommonModule,
@@ -35,6 +35,7 @@ import { SearchModule } from 'ng-devui/search';
     DevUIApiModule,
     DDemoNavModule,
     TooltipModule,
+    DropDownModule,
     SafePipeModule,
     SearchModule,
     RouterModule.forChild([

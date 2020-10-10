@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
-import { DevUIModule } from 'ng-devui/devui.module';
+import { DevUIModule } from 'ng-devui';
 import { DataTableModule } from 'ng-devui/data-table';
 import { MultiAutoCompleteModule } from 'ng-devui/multi-auto-complete';
 import { MultiAutoCompleteDemoComponent } from './multi-auto-complete-demo.component';

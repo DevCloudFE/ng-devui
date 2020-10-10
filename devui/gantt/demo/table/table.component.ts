@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
 import { treeDataSource, SourceType } from '../mock-data';
-import { GanttScaleUnit, GanttMilestone, GanttTaskInfo } from 'ng-devui/gantt/gantt.model';
+import { GanttScaleUnit, GanttMilestone, GanttTaskInfo } from 'ng-devui/gantt';
 import { GanttService } from 'ng-devui/gantt';
-import { ColumnResizeEventArg, ColumnAdjustStrategy } from 'ng-devui/data-table/data-table.model';
+import { ColumnResizeEventArg, ColumnAdjustStrategy } from 'ng-devui/data-table';
 import { Subscription } from 'rxjs';
 
 @Component({

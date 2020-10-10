@@ -7,6 +7,7 @@ import {
 @Component({
   selector: 'd-modal-alert',
   templateUrl: './modal-alert.component.html',
+  preserveWhitespaces: false,
 })
 export class ModalAlertComponent {
   @Input() data: any;

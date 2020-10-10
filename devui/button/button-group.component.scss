@@ -1,0 +1,57 @@
+@import './button.component';
+
+:host ::ng-deep .devui-btn-group {
+  display: flex;
+
+  & > * {
+    position: relative;
+
+    &:not(:first-child) {
+      .devui-dropdown-toggle:not(d-button),
+      .devui-btn {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        margin-left: -1px;
+
+        &.devui-btn-primary {
+          margin-left: 0;
+        }
+      }
+
+      .devui-dropdown-menu {
+        left: -1px;
+      }
+    }
+
+    &:not(:last-child) {
+      .devui-dropdown-toggle,
+      .devui-btn {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+    }
+
+    .devui-dropdown-origin {
+      z-index: 0;
+    }
+
+    &:hover,
+    &:active {
+      z-index: 1;
+    }
+
+    &:focus-within {
+      z-index: 1;
+    }
+  }
+}
+
+:host ::ng-deep {
+  @each $type in xs, sm, lg {
+    .devui-btn-group-#{$type} {
+      .devui-btn {
+        @extend .devui-btn-#{$type};
+      }
+    }
+  }
+}

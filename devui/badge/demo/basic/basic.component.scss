@@ -1,0 +1,25 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
+.badge-group {
+  margin-top: 20px;
+
+  d-badge {
+    margin-right: 20px;
+  }
+}
+
+.demo {
+  vertical-align: middle;
+  font-size: 20px;
+
+  &-card {
+    width: 90px;
+    height: 42px;
+    line-height: 42px;
+    border-radius: 4px;
+    background: $devui-global-bg;
+    font-size: 14px;
+    text-align: center;
+    display: inline-block;
+  }
+}

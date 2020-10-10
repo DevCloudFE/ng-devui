@@ -27,6 +27,7 @@ import {
                 </ng-template>
              </div>`,
   styleUrls: ['./loading.component.scss'],
+  preserveWhitespaces: false,
 })
 export class LoadingComponent {
   @Input() loadingTemplateRef: TemplateRef<any>;

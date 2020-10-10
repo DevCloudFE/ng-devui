@@ -18,8 +18,16 @@
   <d-tag [tag]="tagName" (tagDelete)="getTagValue($event); deleteTag($event)" [customViewTemplate]="customTag"> </d-tag>
   <d-tag [tag]="tagName" (tagDelete)="getTagValue($event); deleteTag($event)" [labelStyle]="'purple-w98'" [customViewTemplate]="customTag">
   </d-tag>
+  <h4>可选中标签</h4>
+  <d-tag
+    *ngFor="let tag of tagList; let i = index"
+    [tag]="'标签颜色' + (i + 1)"
+    [labelStyle]="tag.type"
+    [checked]="tag.checked"
+    (click)="changeChekced(tag)"
+  ></d-tag>
   <ng-template #customTag let-tag="tag">
-    <span class="icon-bug"></span>
+    <span class="icon-bug" style="vertical-align: text-bottom"></span>
     <span title="{{ tag }}">{{ tag }}</span>
   </ng-template>
 </section>

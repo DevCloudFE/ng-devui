@@ -4,7 +4,7 @@ import { IFileOptions, IUploadOptions } from 'ng-devui/upload';
 @Component({
   selector: 'd-customize',
   templateUrl: './customize.component.html',
-  styleUrls: ['./customize.component.css']
+  styleUrls: ['./customize.component.scss']
 })
 export class CustomizeComponent {
   additionalParameter2 = {

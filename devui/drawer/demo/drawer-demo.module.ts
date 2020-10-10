@@ -17,6 +17,8 @@ import { BasicComponent } from './basic/basic.component';
 import { DrawerContentComponent } from './drawerContent/drawer-content.component';
 import { UndestroyableComponent } from './undestroyable/undestroyable.component';
 import { ButtonModule } from 'ng-devui/button';
+
+import { TextInputModule } from 'ng-devui/text-input';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 
 
@@ -29,6 +31,7 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
     DevUIApiModule,
     ModalModule,
     DDemoNavModule,
+    TextInputModule,
     RouterModule.forChild([
     { path: '',  redirectTo: 'demo' },
     { path: 'demo', component: DrawerDemoComponent},

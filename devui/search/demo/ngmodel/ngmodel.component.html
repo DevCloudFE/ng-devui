@@ -1,3 +1,10 @@
 <section>
-  <d-search [size]="'sm'" [(ngModel)]="searchText" [maxLength]="5" (searchFn)="onSearch($event)"></d-search>
+  <d-search
+    [size]="'sm'"
+    [(ngModel)]="searchText"
+    [maxLength]="5"
+    (searchFn)="onSearch($event)"
+    [ngModelOptions]="{ updateOn: 'blur' }"
+    [dValidateRules]="[{ required: true, message: '你的输入不能为空' }]"
+  ></d-search>
 </section>

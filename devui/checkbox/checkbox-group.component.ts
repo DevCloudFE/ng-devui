@@ -24,7 +24,8 @@ import { Observable } from 'rxjs';
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => CheckBoxGroupComponent),
     multi: true
-  }]
+  }],
+  preserveWhitespaces: false,
 })
 export class CheckBoxGroupComponent implements OnChanges, ControlValueAccessor {
   static ID_SEED = 0;
@@ -34,6 +35,7 @@ export class CheckBoxGroupComponent implements OnChanges, ControlValueAccessor {
   @Input() color;
   @Input() direction: 'row' | 'column' = 'column';
   @Input() isShowTitle = true;
+  @Input() disabled = false;
   @Input() options = [];
   @Input() filterKey: string;
   @Input() labelTemplate: TemplateRef<any>;

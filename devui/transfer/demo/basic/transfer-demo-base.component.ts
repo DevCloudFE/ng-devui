@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 export class TransferDemoBaseComponent {
   disabled = false;
   sourceOption = [
-    { name: '选项1', value: 1, id: 1 },
+    { name: '选项1（包含此选项禁止transfer）', value: 1, id: 1 },
     { name: '选项2', value: 2, id: 2 },
     { name: '选项3', value: 3, id: 3, disabled: true },
     { name: '选项4', value: 3, id: 4 },
@@ -39,6 +39,11 @@ export class TransferDemoBaseComponent {
 
   transferToSource(data: any) {
     console.log(data);
+  }
+
+  // 示例， 禁止选项1转移
+  beforeTransfer(source, target) {
+    return !source.find(t => t.id === 1).checked;
   }
 
   onChange(event: any) {

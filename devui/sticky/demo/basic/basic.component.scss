@@ -1,0 +1,21 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
+.section-block {
+  min-height: 200px;
+  border-bottom: 1px dashed $devui-dividing-line;
+  padding-right: 200px;
+  position: relative;
+}
+
+.tips {
+  position: absolute;
+  height: 100%;
+  top: 0;
+  right: 0;
+  width: 200px;
+  border: 1px dashed $devui-dividing-line
+}
+
+.tip-content {
+  width: 180px;
+}

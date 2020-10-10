@@ -9,12 +9,12 @@ export class StickyDemoComponent {
   basicSource: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./basic/basic.component.html')},
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./basic/basic.component.ts')},
-    {title: 'CSS', language: 'css', code:  require('!!raw-loader!./basic/basic.component.css')}
+    {title: 'SCSS', language: 'css', code:  require('!!raw-loader!./basic/basic.component.scss')}
   ];
   ScrollTargetSource: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./scroll-target/scroll-target.component.html')},
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./scroll-target/scroll-target.component.ts')},
-    {title: 'CSS', language: 'css', code:  require('!!raw-loader!./scroll-target/scroll-target.component.css')}
+    {title: 'SCSS', language: 'css', code:  require('!!raw-loader!./scroll-target/scroll-target.component.scss')}
   ];
   navItems = [
     { dAnchorLink: 'basic-usage', value: '基本用法'},

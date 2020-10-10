@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, Directive, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef} from '@angular/core';
+import { EventEmitter, Input, Output, ViewChild, HostListener } from '@angular/core';
 
 export type IButtonType = 'button' | 'submit' | 'reset';
 export type IButtonStyle = 'common' | 'primary' | 'text' | 'text-dark' | 'danger';
@@ -9,7 +10,8 @@ export type IButtonSize = 'lg' | 'md' | 'sm' | 'xs';
   selector: 'd-button',
   templateUrl: './button.component.html',
   styleUrls: ['./button.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  preserveWhitespaces: false,
 })
 export class ButtonComponent {
   @Input() id: string;
@@ -25,12 +27,23 @@ export class ButtonComponent {
   @Input() autofocus = false;
   @Output() btnClick = new EventEmitter<any>();
   @ViewChild('buttonContent', { static: true }) buttonContent: ElementRef;
+
+  @HostListener('click', ['$event'])
+  handleDisabled($event: Event) {
+    if (this.disabled) {
+      $event.preventDefault();
+      $event.stopImmediatePropagation();
+    }
+  }
+
   constructor() {
   }
 
   // 新增click事件，解决直接在host上使用click，IE在disabled状态下还能触发事件
   onClick(event) {
-    this.btnClick.emit(event);
+    if (!this.showLoading) {
+      this.btnClick.emit(event);
+    }
   }
 
   hasContent() {

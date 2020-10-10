@@ -2,7 +2,7 @@
 @import '~@devui-design/icons/icomoon/devui-icon.css';
 
 .markdown {
-  color: $devui-text-weak;
+  color: $devui-text;
   font-size: 14px;
   line-height: 1.8;
 
@@ -36,7 +36,7 @@ pre {
   color: $devui-text;
   word-break: break-all;
   word-wrap: break-word;
-  border: 1px solid #cccccc;
+  border: 1px solid $devui-dividing-line;
   border-radius: 1px;
 }
 
@@ -85,13 +85,13 @@ section {
   border-collapse: collapse;
   border-spacing: 0;
   empty-cells: show;
-  border: 1px solid #e9e9e9;
+  border: 1px solid $devui-line;
   width: 100%;
   margin: 8px 0 16px;
 
   th,
   td {
-    border: 1px solid #e9e9e9;
+    border: 1px solid $devui-dividing-line;
     padding: 8px 16px;
     text-align: left;
   }
@@ -99,7 +99,7 @@ section {
   th {
     background: $devui-area;
     white-space: nowrap;
-    color: $devui-text-weak;
+    color: $devui-text;
     font-weight: 600;
   }
 }

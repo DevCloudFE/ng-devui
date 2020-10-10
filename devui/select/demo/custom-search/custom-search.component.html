@@ -29,6 +29,8 @@
         [isSearch]="true"
         [multiple]="true"
         [searchPlaceholder]="'搜索我的选项'"
+        [ngModelOptions]="{ updateOn: 'blur' }"
+        [dValidateRules]="[{ minlength: 3, message: '请至少选择三个选项' }]"
       >
       </d-select>
     </div>

@@ -1,10 +1,10 @@
-@import '../../../style/theme/color';
+@import '~ng-devui/styles-var/devui-var.scss';
 
 d-header {
   text-align: left;
   position: relative;
   height: 40px;
-  background-color: #333854;
+  background-color: $devui-base-bg-dark;
   color: $devui-light-text;
 
   .logo {

@@ -1,0 +1,9 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
+.splitter-border {
+  border: 1px solid $devui-dividing-line;
+}
+
+.pane-content {
+  padding: 0 10px;
+}

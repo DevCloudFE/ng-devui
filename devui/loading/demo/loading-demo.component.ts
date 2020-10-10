@@ -12,13 +12,13 @@ export class LoadingDemoComponent {
   basicSource: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./basic/basic.component.html')},
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./basic/basic.component.ts')},
-    {title: 'CSS', language: 'css', code:  require('!!raw-loader!./basic/basic.component.css')}
+    {title: 'SCSS', language: 'css', code:  require('!!raw-loader!./basic/basic.component.scss')}
   ];
 
   customSource: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./custom/custom.component.html')},
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./custom/custom.component.ts')},
-    {title: 'CSS', language: 'css', code:  require('!!raw-loader!./custom/custom.component.css')}
+    {title: 'SCSS', language: 'css', code:  require('!!raw-loader!./custom/custom.component.scss')}
   ];
 
   promiseSource: Array<DevuiSourceData> = [
@@ -32,7 +32,7 @@ export class LoadingDemoComponent {
   showLoadingSource: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./show-loading/show-loading.component.html')},
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./show-loading/show-loading.component.ts')},
-    {title: 'CSS', language: 'typescript', code:  require('!!raw-loader!./show-loading/show-loading.component.css')}
+    {title: 'SCSS', language: 'typescript', code:  require('!!raw-loader!./show-loading/show-loading.component.scss')}
   ];
   navItems = [
     { dAnchorLink: 'basic-usage', value: '基本用法'},

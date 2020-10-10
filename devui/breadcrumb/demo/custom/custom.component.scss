@@ -1,3 +1,5 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
 .breadcrumb-dropdown-menu {
   padding: 10px 0;
   width: 160px;
@@ -11,14 +13,12 @@ li {
 }
 
 li a {
-  color: #252b3a;
-  color: var(--devui-text, #252b3a);
+  color: $devui-text;
   margin-left: 10px;
 }
 
 li:hover {
-  background: #f2f5fc;
-  background: var(--devui-list-item-hover-bg, #f2f5fc);
+  background: $devui-list-item-hover-bg;
 }
 
 li:hover a {

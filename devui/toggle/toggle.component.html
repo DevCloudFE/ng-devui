@@ -1,10 +1,6 @@
 <span
-  class="devui-toggle"
-  [class.devui-checked]="checked"
-  [class.devui-disabled]="disabled"
-  [class.devui-toggle-large]="size === 'large'"
-  [class.devui-toggle-medium]="size === 'medium'"
-  [class.devui-toggle-small]="size === 'small'"
+  class="devui-toggle devui-toggle-{{ size }}"
+  [ngClass]="{ 'devui-checked': checked, 'devui-disabled': disabled }"
   [style.background]="checked && !disabled ? color : ''"
   [style.border-color]="checked && !disabled ? color : ''"
 >

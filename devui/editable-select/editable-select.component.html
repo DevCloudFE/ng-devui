@@ -7,7 +7,7 @@
 >
   <input
     (click)="toggle($event)"
-    style="cursor: pointer;"
+    style="cursor: pointer"
     class="devui-form-control devui-dropdown-origin"
     type="text"
     name="autoCompleteControl"
@@ -24,6 +24,7 @@
     [maxHeight]="maxHeight"
     [sceneType]="'select'"
     dAutoComplete
+    (selectValue)="selectValue($event)"
     [enableLazyLoad]="enableLazyLoad"
     (loadMore)="loadMoreEvent($event)"
   />

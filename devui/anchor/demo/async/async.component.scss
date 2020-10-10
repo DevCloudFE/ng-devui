@@ -1,0 +1,85 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
+/* 序号 */
+.step-nav {
+  padding-top: 10px;
+  width: 240px;
+}
+
+.step-nav > li {
+  list-style: none;
+  counter-increment: stepli;
+  padding: 0;
+  cursor: pointer;
+  height: 30px;
+  line-height: 1.5;
+  font-size: 12px;
+  color: $devui-text-weak;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.step-nav > li:hover {
+  color: $devui-brand-active;
+}
+
+.step-nav > li.active {
+  color: $devui-brand-active;
+}
+
+.step-nav > li.active::before {
+  border-color: $devui-brand-active;
+}
+
+.step-nav > li::before {
+  content: '';
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  text-align: center;
+  line-height: 26px;
+  border-radius: 50%;
+  background-color: $devui-base-bg;
+  margin-right: 18px;
+  border: 2px solid $devui-dividing-line;
+}
+
+/* 左侧线 */
+.step-nav > li:not(:first-of-type) {
+  margin-top: 32px;
+}
+
+.step-nav > li:not(:first-of-type)::after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: -32px;
+  left: 5px;
+  width: 1px;
+  height: 32px;
+  border-left: 2px solid $devui-dividing-line;
+}
+
+.mymain {
+  position: relative;
+}
+
+.mysidebar {
+  width: 240px;
+  border-right: 1px solid $devui-line;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+}
+
+.mycontent {
+  padding: 10px;
+  margin-left: 240px;
+}
+
+.section-block {
+  min-height: 200px;
+  border-bottom: 1px dashed $devui-line;
+}

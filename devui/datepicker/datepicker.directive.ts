@@ -132,7 +132,6 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
   ngOnInit() {
     this._minDate = this.minDate ? new Date(this.minDate) : new Date(this.dateConfig.min, 0, 1, 0, 0, 0);
     this._maxDate = this.maxDate ? new Date(this.maxDate) : new Date(this.dateConfig.max, 11, 31, 23, 59, 59);
-    this._dateFormat = this.showTime ? this.dateConfig.format.time : this.dateConfig.format.date;
     const target = this.cmpRef.location.nativeElement;
     this.applyPopupStyling(target);
     const component = this.cmpRef.instance;
@@ -238,6 +237,7 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
         reason: dateReason,
         selectedDate: this.selectedDate
       });
+      this.onTouched();
     }
   }
 
@@ -303,7 +303,6 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
 
   @HostListener('blur', ['$event'])
   onBlur($event) {
-    this.onTouched();
     if (!this.cmpRef.instance.isClickingCmp) {
       this.transUserInputToDatepicker();
     }
@@ -320,6 +319,7 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
     if (this.disabled) {
       return;
     }
+    this.onTouched();
     this.cmpRef.instance.clearAll(reason);
   }
 

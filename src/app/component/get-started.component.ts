@@ -37,7 +37,7 @@ export class GetStartedComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    document.querySelectorAll('pre code').forEach((block) => {
+    Array.from<HTMLElement>(document.querySelectorAll('pre code')).forEach((block) => {
       hljs.highlightBlock(block);
     });
   }

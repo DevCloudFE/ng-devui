@@ -2,10 +2,11 @@
 
 :host {
   display: inline-block;
+  position: relative;
 }
 
 .devui-tag-item {
-  margin: 1px;
+  margin: 0 4px;
   padding: 0 10px;
   min-height: 20px;
   font-size: 12px;
@@ -16,16 +17,69 @@
   border-width: 0;
   border-style: solid;
   border-color: inherit;
-  display: inline-flex;
+  display: block;
   align-items: center;
+  position: relative;
+  cursor: default;
 
-  &.devui-operable-tag span {
-    &:hover {
-      color: $devui-brand;
+  .content-wrapper {
+    display: none;
+  }
+
+  &:hover:not(.devui-colorful-tag):not(.devui-selected-tag) {
+    color: $devui-brand-hover;
+
+    .remove-button svg polygon {
+      fill: $devui-brand-hover;
+    }
+  }
+
+  &:hover.devui-colorful-tag {
+    .content-wrapper {
+      display: block;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border: 1px solid transparent;
+      top: 0;
+      left: 0;
+      opacity: 0.08;
+    }
+  }
+
+  &.devui-selected-tag {
+    color: $devui-brand-active;
+
+    .remove-button svg polygon {
+      fill: $devui-brand-active;
     }
   }
 
   .remove-button {
+    margin-left: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 12px;
+    height: 12px;
+    line-height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+    text-align: center;
+    z-index: 10;
+    position: absolute;
+    top: 4px;
+
+    svg polygon {
+      fill: $devui-aide-text;
+    }
+
+    &:hover {
+      text-decoration: none;
+      font-size: 18px;
+    }
+  }
+
+  .default-button {
     margin-left: 12px;
     font-size: 16px;
     cursor: pointer;
@@ -48,101 +102,162 @@
   }
 }
 
-.blue-w98 {
-  color: #3383ff;
-  background-color: #f9fbff;
-  border-width: thin;
-  border-color: #eaf2ff;
+.devui-deletable-tag {
+  padding-right: 28px;
+}
+
+.devui-colorful-tag {
+  height: 18px;
+  line-height: 18px;
 
   .remove-button {
+    top: 3px;
+  }
+}
+
+.blue-w98 {
+  color: #3383ff;
+  background-color: $devui-base-bg;
+  border-width: 1px;
+  border-color: #3383ff;
+
+  .remove-button svg polygon {
+    fill: #3383ff;
+  }
+
+  &.devui-selected-tag {
     background-color: #3383ff;
   }
 }
 
 .aqua-w98 {
   color: #6cbfff;
-  background-color: #fafdff;
-  border-width: thin;
-  border-color: #f0f8ff;
+  background-color: $devui-base-bg;
+  border-width: 1px;
+  border-color: #6cbfff;
 
-  .remove-button {
+  .remove-button svg polygon {
+    fill: #6cbfff;
+  }
+
+  &.devui-selected-tag {
     background-color: #6cbfff;
   }
 }
 
 .olivine-w98 {
   color: #50d4ab;
-  background-color: #f9fdfc;
-  border-width: thin;
-  border-color: #edfaf6;
+  background-color: $devui-base-bg;
+  border-width: 1px;
+  border-color: #50d4ab;
 
-  .remove-button {
+  .remove-button svg polygon {
+    fill: #50d4ab;
+  }
+
+  &.devui-selected-tag {
     background-color: #50d4ab;
   }
 }
 
 .green-w98 {
   color: #a6dd82;
-  background-color: #fcfefb;
-  border-width: thin;
-  border-color: #f6fbf2;
+  background-color: $devui-base-bg;
+  border-width: 1px;
+  border-color: #a6dd82;
 
-  .remove-button {
+  .remove-button svg polygon {
+    fill: #a6dd82;
+  }
+
+  &.devui-selected-tag {
     background-color: #a6dd82;
   }
 }
 
 .yellow-w98 {
   color: #fac20a;
-  background-color: #fefdf7;
-  border-width: thin;
-  border-color: #fef8e6;
+  background-color: $devui-base-bg;
+  border-width: 1px;
+  border-color: #fac20a;
 
-  .remove-button {
+  .remove-button svg polygon {
+    fill: #fac20a;
+  }
+
+  &.devui-selected-tag {
     background-color: #fac20a;
   }
 }
 
 .orange-w98 {
   color: #fa9841;
-  background-color: #fefcf9;
-  border-width: thin;
-  border-color: #fef4ec;
+  background-color: $devui-base-bg;
+  border-width: 1px;
+  border-color: #fa9841;
 
-  .remove-button {
+  .remove-button svg polygon {
+    fill: #fa9841;
+  }
+
+  &.devui-selected-tag {
     background-color: #fa9841;
   }
 }
 
 .pink-w98 {
   color: #f66f6a;
-  background-color: #fefafa;
-  border-width: thin;
-  border-color: #fef0f0;
+  background-color: $devui-base-bg;
+  border-width: 1px;
+  border-color: #f66f6a;
 
-  .remove-button {
+  .remove-button svg polygon {
+    fill: #f66f6a;
+  }
+
+  &.devui-selected-tag {
     background-color: #f66f6a;
   }
 }
 
 .red-w98 {
   color: #f3689a;
-  background-color: #fefafc;
-  border-width: thin;
-  border-color: #fdeff4;
+  background-color: $devui-base-bg;
+  border-width: 1px;
+  border-color: #f3689a;
 
-  .remove-button {
+  .remove-button svg polygon {
+    fill: #f3689a;
+  }
+
+  &.devui-selected-tag {
     background-color: #f3689a;
   }
 }
 
 .purple-w98 {
   color: #a97af8;
-  background-color: #fcfbfe;
-  border-width: thin;
-  border-color: #f6f1fe;
+  background-color: $devui-base-bg;
+  border-width: 1px;
+  border-color: #a97af8;
 
-  .remove-button {
+  .remove-button svg polygon {
+    fill: #a97af8;
+  }
+
+  &.devui-selected-tag {
     background-color: #a97af8;
   }
+}
+
+.devui-selected-tag.devui-colorful-tag {
+  color: $devui-base-bg;
+
+  .remove-button svg polygon {
+    fill: $devui-base-bg;
+  }
+}
+
+.remove-button svg {
+  vertical-align: text-top;
 }

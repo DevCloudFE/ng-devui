@@ -9,6 +9,7 @@ import { ExtraConfig } from './steps-guide.types';
 @Component({
   templateUrl: './steps-guide.component.html',
   styleUrls: ['./steps-guide.component.scss'],
+  preserveWhitespaces: false,
 })
 export class StepsGuideComponent implements OnInit, AfterViewInit, OnDestroy {
   @HostBinding('class')

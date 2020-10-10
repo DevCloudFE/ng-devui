@@ -1,7 +1,16 @@
 <ng-content></ng-content>
-<div *ngIf="extraInfo" class="devui-form-control-extra-info">
-  <ng-template [ngTemplateOutlet]="extraInfoTemplate || defaultTemplate"> </ng-template>
-  <ng-template #defaultTemplate>
-    {{ extraInfo }}
-  </ng-template>
+<div class="devui-form-control-inner-content">
+  <div class="devui-form-message" *ngIf="errorMessage">
+    <span class="devui-form-message-text">
+      <span>
+        {{ errorMessage }}
+      </span>
+    </span>
+  </div>
+  <div *ngIf="extraInfo" class="devui-form-control-extra-info">
+    <ng-template [ngTemplateOutlet]="extraInfoTemplate || defaultTemplate"> </ng-template>
+    <ng-template #defaultTemplate>
+      {{ extraInfo }}
+    </ng-template>
+  </div>
 </div>

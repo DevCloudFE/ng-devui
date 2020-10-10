@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'd-anchor-hash',
   templateUrl: './hash.component.html',
-  styleUrls: ['./hash.component.css']
+  styleUrls: ['./hash.component.scss']
 })
 export class HashComponent {
   updateUrlWhenAnchorActive = true;

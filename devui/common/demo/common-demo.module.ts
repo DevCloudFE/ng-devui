@@ -17,9 +17,8 @@ import { IframPropagateDemoComponent } from './iframe-propagate/iframe-propagate
 import { LazyLoadComponent } from './lazy-load/lazy-load.component';
 import {  LazyLoadModule } from 'ng-devui/utils';
 import { LoadingModule } from 'ng-devui/loading';
-import { RelativeTimeComponent } from './relative-time/relative-time.component';
 import { I18nModule } from 'ng-devui/i18n';
-import { RelativeTimeModule } from 'ng-devui/utils';
+import { DataTableModule } from 'ng-devui/data-table';
 
 @NgModule({
   imports: [
@@ -34,7 +33,7 @@ import { RelativeTimeModule } from 'ng-devui/utils';
     LazyLoadModule,
     LoadingModule,
     I18nModule,
-    RelativeTimeModule,
+    DataTableModule,
     RouterModule.forChild([
       { path: '', redirectTo: 'demo' },
       { path: 'demo', component: CommonDemoComponent },
@@ -56,8 +55,7 @@ import { RelativeTimeModule } from 'ng-devui/utils';
     HelperJumpDemoComponent,
     HelperDownloadDemoComponent,
     IframPropagateDemoComponent,
-    LazyLoadComponent,
-    RelativeTimeComponent
+    LazyLoadComponent
   ]
 })
 export class CommonDemoModule {}

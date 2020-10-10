@@ -48,7 +48,7 @@ export class UndestroyableComponent {
             this.results.drawerInstance.toggleFullScreen();
           },
           changeWidth: (event) => {
-            this.results.drawerInstance.setWidth('200px');
+            this.results.drawerInstance.setWidth(event + 'px');
           }
         }
       });

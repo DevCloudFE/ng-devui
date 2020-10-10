@@ -1,6 +1,6 @@
 {
   "name": "ng-devui",
-  "version": "9.2.0",
+  "version": "9.3.0",
   "license": "MIT",
   "description": "DevUI components based on Angular",
   "keywords": [
@@ -22,8 +22,7 @@
     "lodash-es": "^4.17.11",
     "popper.js": "^1.15.0",
     "enquire.js": "^2.1.6",
-    "css-vars-ponyfill": "^2.3.2",
-    "mime-db": "^1.44.0"
+    "css-vars-ponyfill": "^2.3.2"
   },
   "peerDependencies": {
     "@angular/animations": "^9.0.0",

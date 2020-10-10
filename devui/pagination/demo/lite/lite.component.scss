@@ -1,0 +1,33 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
+d-button {
+  margin-right: 5px;
+  margin-top: 10px;
+}
+
+/* 配置中的每一项，自定义项建议应用此样式或在此基础上修改 */
+.pagination-config-item {
+  padding-bottom: 8px;
+  padding-top: 5px;
+  border-bottom: 1px solid $devui-line;
+}
+
+/* 配置中每一项的标题样式，自定义项建议应用此样式或在此基础上修改 */
+.config-item-title {
+  color: $devui-line;
+  padding-left: 10px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.config-item-words {
+  color: $devui-text;
+  padding-left: 10px;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.config-item-words:hover {
+  background-color: $devui-area;
+  cursor: pointer;
+}

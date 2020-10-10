@@ -46,13 +46,12 @@
 >
   <input
     class="input-box devui-input"
-    [(ngModel)]="valueInput"
     [ngClass]="{ disabled: disabled }"
     [placeholder]="placeholder"
     [attr.readonly]="disabled ? '' : null"
-    (keypress)="protectInput($event)"
+    (keydown)="handleKeyDown($event)"
+    (input)="protectInput($event)"
     (blur)="ensureValueIsValid($event)"
-    (keydown)="handleBackspace($event)"
     (paste)="protectInput($event)"
     #inputElement
   />

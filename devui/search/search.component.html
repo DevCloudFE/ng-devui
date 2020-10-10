@@ -7,6 +7,7 @@
     (keyup)="inputChange(filterInput.value, $event)"
     [attr.maxlength]="maxLength"
     [disabled]="disabled"
+    (blur)="inputBlur()"
     type="text"
     class="devui-input {{ cssClass }}"
     [ngClass]="{

@@ -9,7 +9,7 @@ export class SliderDemoComponent {
   SliderBasicComponent = [
     {title: 'HTML', language: 'html', code: require('!!raw-loader!./basic/slider-basic.component.html')},
     {title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/slider-basic.component.ts')},
-    {title: 'CSS', language: 'css', code: require('!!raw-loader!./basic/slider-basic.component.css')},
+    {title: 'SCSS', language: 'css', code: require('!!raw-loader!./basic/slider-basic.component.scss')},
   ];
   SliderDisabledComponent = [
     {title: 'HTML', language: 'html', code: require('!!raw-loader!./disabled/slider-disabled.component.html')},

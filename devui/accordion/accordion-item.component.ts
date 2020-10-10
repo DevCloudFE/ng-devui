@@ -7,6 +7,7 @@ import { AccordionBaseItemComponent } from './accordion-base-item-component.clas
   selector: 'd-accordion-item',
   templateUrl: './accordion-item.component.html',
   encapsulation: ViewEncapsulation.None,
+  preserveWhitespaces: false,
 })
 export class AccordionItemComponent extends AccordionBaseItemComponent<AccordionBaseItem> {
   constructor(protected accordion: AccordionComponent) {

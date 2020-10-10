@@ -1,0 +1,16 @@
+<d-data-table [dataSource]="dates">
+  <thead dTableHead>
+    <tr dTableRow>
+      <th dHeadCell>转换前</th>
+      <th dHeadCell>转换后</th>
+    </tr>
+  </thead>
+  <tbody dTableBody>
+    <ng-template let-rowItem="rowItem">
+      <tr dTableRow>
+        <td dTableCell>{{ rowItem }}</td>
+        <td dTableCell>{{ rowItem | dRelativeTime: limit | async }}</td>
+      </tr>
+    </ng-template>
+  </tbody>
+</d-data-table>

@@ -3,6 +3,7 @@ import {
   Input,
   Output,
   EventEmitter,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import { AlertType } from './alert.types';
 
@@ -10,6 +11,7 @@ import { AlertType } from './alert.types';
   selector: 'd-alert',
   templateUrl: './alert.component.html',
   styleUrls: ['./alert.component.scss'],
+  preserveWhitespaces: false,
 })
 export class AlertComponent {
   @Input() type: AlertType = 'info';

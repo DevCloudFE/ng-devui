@@ -13,7 +13,7 @@
           [(ngModel)]="item['isChecked']"
           [isShowTitle]="isShowTitle"
           [color]="color"
-          [disabled]="item['value']['disabled']"
+          [disabled]="this.disabled ? true : item['value']['disabled']"
           [labelTemplate]="labelTemplate"
           [showAnimation]="showAnimation"
           (ngModelChange)="toggle($event, i)"

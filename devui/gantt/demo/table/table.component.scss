@@ -1,3 +1,5 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
 .handler {
   position: absolute;
   top: 10px;
@@ -16,7 +18,7 @@
     height: 32px;
     min-width: 32px;
     line-height: 32px;
-    background: var(--devui-block, #ffffff);
+    background: $devui-base-bg;
     box-shadow: 0 2px 10px 0 rgba(41, 48, 64, 0.1);
     border-radius: 2px;
     cursor: pointer;
@@ -43,7 +45,7 @@
 ::ng-deep .devui-gantt-tips {
   & .title {
     font-size: 14px;
-    color: var(--devui-text, #252b3a);
+    color: $devui-text;
     line-height: 24px;
     font-weight: bold;
     margin-bottom: 15px;
@@ -51,16 +53,16 @@
 
   & .content {
     font-size: 12px;
-    color: var(--devui-text, #252b3a);
+    color: $devui-text;
     line-height: 24px;
   }
 }
 
 .min-height-stretch-row {
-  background: var(--devui-base-bg, #ffffff) !important;
+  background: $devui-base-bg !important;
 
   &:hover {
-    background: var(--devui-base-bg, #ffffff) !important;
+    background: $devui-base-bg !important;
   }
 
   & td {
@@ -83,13 +85,13 @@ tr:hover {
   }
 }
 
-.resize-handle {
+:host ::ng-deep .resize-handle {
   display: inline-block;
   position: absolute;
   left: 0;
   top: 0;
   bottom: 0;
   width: 3px;
-  border-right: 3px solid var(--devui-line, #adb0b8);
+  border-right: 3px solid $devui-line;
   cursor: col-resize;
 }

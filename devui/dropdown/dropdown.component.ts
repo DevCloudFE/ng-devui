@@ -25,7 +25,8 @@ import {DropDownDirective} from './dropdown.directive';
   encapsulation: ViewEncapsulation.None,
   animations: [
     fadeInOut
-  ]
+  ],
+  preserveWhitespaces: false,
 })
 export class DropDownAppendToBodyComponent implements OnInit, OnChanges {
   menuPosition: VerticalConnectionPos = 'bottom';

@@ -9,7 +9,7 @@ import {
   ViewRef,
   EmbeddedViewRef,
   TemplateRef,
-  HostBinding
+  HostBinding, OnChanges, SimpleChanges
 } from '@angular/core';
 import { LoadingBackdropComponent } from './loading-backdrop.component';
 import { LoadingComponent } from './loading.component';
@@ -21,7 +21,7 @@ import { throwError } from 'rxjs';
   selector: '[dLoading]',
   exportAs: 'dLoading'
 })
-export class LoadingDirective {
+export class LoadingDirective implements OnChanges {
   @Input() message: string;
   @Input() backdrop: boolean;
   @Input() loadingTemplateRef: TemplateRef<any>;
@@ -33,18 +33,34 @@ export class LoadingDirective {
   @HostBinding('style.position')
   position: string;
 
-  @Input() set showLoading(_showLoading: boolean) {
-    if (_showLoading === true) {
-      this.startLoading();
-    } else {
-      this.endLoading();
+  @Input() showLoading;
+
+  @Input() loading: LoadingType;
+
+  backdropRef: ComponentRef<any>;
+  loadingRef: ComponentRef<any>;
+  active = true;
+
+  constructor(
+    private componentFactoryResolver: ComponentFactoryResolver,
+    private triggerElementRef: ElementRef,
+    private viewContainerRef: ViewContainerRef,
+    private injector: Injector,
+    private elementRef: ElementRef
+  ) { }
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['showLoading'] || changes['loading'] || changes['backdrop'] || changes['loadingTemplateRef']
+      || changes['message'] || changes['positionType'] || changes['view']) {
+      if (this.showLoading !== undefined) {
+        this.showLoadingChangeEvent(this.showLoading);
+      }
+      if (this.loading !== undefined) {
+        this.loadingChangeEvent(this.loading);
+      }
     }
   }
 
-  @Input() set loading(loading: LoadingType) {
-    if (loading === undefined) {
-      return;
-    }
+  loadingChangeEvent(loading) {
     if (loading instanceof Subscription) {
       this.startLoading();
       loading.add(() => this.endLoading());
@@ -79,18 +95,13 @@ export class LoadingDirective {
     }
   }
 
-  backdropRef: ComponentRef<any>;
-  loadingRef: ComponentRef<any>;
-  active = true;
-
-  constructor(
-    private componentFactoryResolver: ComponentFactoryResolver,
-    private triggerElementRef: ElementRef,
-    private viewContainerRef: ViewContainerRef,
-    private injector: Injector,
-    private elementRef: ElementRef
-  ) { }
-
+  showLoadingChangeEvent(showLoading) {
+    if (showLoading === true) {
+      this.startLoading();
+    } else {
+      this.endLoading();
+    }
+  }
   private startLoading() {
     if (!this.loadingRef) {
 

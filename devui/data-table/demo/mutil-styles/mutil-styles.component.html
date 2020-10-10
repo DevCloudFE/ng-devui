@@ -1,0 +1,46 @@
+<div class="handle-group">
+  表框样式：<d-tabs type="options" [(activeTab)]="activeBorder" [showContent]="false">
+    <d-tab *ngFor="let item of borderItems" [id]="item.id">
+      <ng-template dTabTitle>
+        {{ item.title }}
+      </ng-template>
+    </d-tab>
+  </d-tabs>
+</div>
+<div class="handle-group">
+  表格布局：<d-tabs type="options" [(activeTab)]="activeLayout" [showContent]="false" (activeTabChange)="layoutChange($event)">
+    <d-tab *ngFor="let item of layoutItems" [id]="item.id">
+      <ng-template dTabTitle>
+        {{ item.title }}
+      </ng-template>
+    </d-tab>
+  </d-tabs>
+</div>
+<div class="handle-group">表头背景：<d-toggle [(ngModel)]="headerBk"></d-toggle></div>
+<div class="handle-group">斑马纹：<d-toggle [(ngModel)]="striped"></d-toggle></div>
+<d-data-table
+  [dataSource]="basicDataSource"
+  [scrollable]="true"
+  [tableWidthConfig]="tableWidthConfig"
+  [borderType]="activeBorder"
+  [headerBg]="headerBk"
+  [striped]="striped"
+  [tableLayout]="activeLayout"
+>
+  <thead dTableHead>
+    <tr dTableRow>
+      <th dHeadCell>#</th>
+      <th dHeadCell *ngFor="let colOption of dataTableOptions.columns">{{ colOption.header }}</th>
+    </tr>
+  </thead>
+  <tbody dTableBody>
+    <ng-template let-rowItem="rowItem" let-rowIndex="rowIndex">
+      <tr dTableRow>
+        <td dTableCell>{{ rowIndex + 1 }}</td>
+        <td dTableCell *ngFor="let colOption of dataTableOptions.columns">
+          {{ colOption.fieldType === 'date' ? (rowItem[colOption.field] | i18nDate: 'short':false) : rowItem[colOption.field] }}
+        </td>
+      </tr>
+    </ng-template>
+  </tbody>
+</d-data-table>

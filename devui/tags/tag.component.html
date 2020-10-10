@@ -1,12 +1,37 @@
 <span
   class="devui-tag-item {{ labelStyle }}"
-  [style.display]="deleteTag ? 'none' : 'inline-flex'"
-  [ngClass]="deletable ? 'devui-operable-tag' : ''"
+  [style.display]="deleteTag ? 'none' : 'block'"
+  [ngClass]="{
+    'devui-operable-tag': deletable,
+    'devui-colorful-tag': labelStyle && labelStyle !== '',
+    'devui-selected-tag': checked,
+    'devui-deletable-tag': deletable
+  }"
 >
+  <div class="content-wrapper" [ngStyle]="{ 'background-color': colorMap[labelStyle] }"></div>
   <span *ngIf="!customViewTemplate" title="{{ titleContent ? titleContent : tag }}">{{ tag }}</span>
   <ng-template *ngIf="customViewTemplate" [ngTemplateOutlet]="customViewTemplate" [ngTemplateOutletContext]="{ tag: tag }"></ng-template>
-  <a class="remove-button" *ngIf="deletable" (click)="removeTag(tag)">
+  <a class="remove-button" [ngClass]="{ 'default-button': !labelStyle || labelStyle === '' }" *ngIf="deletable" (click)="removeTag(tag)">
     <svg
+      *ngIf="labelStyle && labelStyle !== ''"
+      width="12px"
+      height="12px"
+      viewBox="0 0 16 16"
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+    >
+      <g id="操作/close" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <polygon
+          id="Mask"
+          fill="#293040"
+          fill-rule="nonzero"
+          points="8 6.58578644 12.2426407 2.34314575 13.6568542 3.75735931 9.41421356 8 13.6568542 12.2426407 12.2426407 13.6568542 8 9.41421356 3.75735931 13.6568542 2.34314575 12.2426407 6.58578644 8 2.34314575 3.75735931 3.75735931 2.34314575"
+        ></polygon>
+      </g>
+    </svg>
+    <svg
+      *ngIf="!labelStyle || labelStyle === ''"
       width="12px"
       height="12px"
       viewBox="0 0 12 12"

@@ -1,4 +1,5 @@
-import { Component, EventEmitter, forwardRef, HostListener, Input, Output } from '@angular/core';
+import { Component, EventEmitter, forwardRef, HostListener, Input, Output,
+  ChangeDetectionStrategy } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Observable } from 'rxjs';
 
@@ -11,14 +12,15 @@ import { Observable } from 'rxjs';
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => ToggleComponent),
     multi: true
-  }]
+  }],
+  preserveWhitespaces: false,
 })
 
 export class ToggleComponent implements ControlValueAccessor {
   private _checked: boolean;
   private _disabled: boolean;
 
-  @Input() size: 'small' | 'medium' | 'large' = 'small';
+  @Input() size: 'sm' | '' | 'lg' = '';
   @Input() color: string;
   @Input() beforeChange: (value) => boolean | Promise<boolean> | Observable<boolean>;
   @Input() set checked(v: boolean) {
@@ -39,7 +41,7 @@ export class ToggleComponent implements ControlValueAccessor {
 
   @Output() change = new EventEmitter<boolean>();
 
-  private onTouchedCallback = (v: any) => {
+  private onTouchedCallback = () => {
   }
   private onChangeCallback = (v: any) => {
   }
@@ -56,7 +58,7 @@ export class ToggleComponent implements ControlValueAccessor {
       this.checked = !this.checked;
       this.change.emit(this.checked);
       this.onChangeCallback(this.checked);
-      this.onTouchedCallback(this.checked);
+      this.onTouchedCallback();
     });
   }
 

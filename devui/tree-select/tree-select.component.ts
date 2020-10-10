@@ -34,7 +34,8 @@ import { Subscription } from 'rxjs';
       useExisting: forwardRef(() => TreeSelectComponent),
       multi: true
     }
-  ]
+  ],
+  preserveWhitespaces: false,
 })
 
 export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterViewInit, OnDestroy, OnChanges {
@@ -67,6 +68,7 @@ export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterV
         const dropDownEle = this.popper && this.popper.popperContainer && this.popper.popperContainer.nativeElement;
         this.removeClass(ele, this.inputEleCls);
         this.removeClass(dropDownEle, this.dropEleCls);
+        this.onTouch();
       }
       this.changeDetectorRef.detectChanges();
     }
@@ -136,6 +138,7 @@ export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterV
   valueType: 'array' | 'object' | undefined;
   displayValue: string | Array<string>;
   valueLength: number;
+  userAgent: string;
   private _value: object | Array<any>;
   private _isOpen = false;
   private _sourceTree = [];
@@ -183,6 +186,7 @@ export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterV
     this.directionSubscription = this.popper.directionChange().subscribe(data => {
       this.changeFormWithDropDown(data);
     });
+    this.queryMedia();
   }
 
   registerOnChange(fn: any): void {
@@ -220,6 +224,19 @@ export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterV
     this.i18nSubscription = this.i18n.langChange().subscribe((data) => {
       this.i18nCommonText = data.common;
     });
+  }
+
+  private queryMedia() {
+    const userAgent = window.navigator.userAgent;
+    if (userAgent.indexOf('Edge') > -1) {
+      this.userAgent = 'edge';
+    } else if (userAgent.indexOf('MSIE') > -1 || userAgent.indexOf('Trident/') > -1) {
+      this.userAgent = 'ie';
+    } else if (userAgent.indexOf('Firefox') > -1) {
+      this.userAgent = 'firefox';
+    } else {
+      this.userAgent = 'chrome';
+    }
   }
 
   private expandAllNodes(treeNode) {
@@ -341,7 +358,6 @@ export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterV
     this.visualizeSelectedItems();
     this.onChange(this.value);
     this.valueChanged.emit(this.selectedValue());
-    this.onTouch();
   }
 
   visualizeSelectedItems() {

@@ -100,7 +100,7 @@ describe('dateRangePicker', () => {
       component.inputEle.nativeElement.dispatchEvent(new Event('focus'));
       fixture.detectChanges();
       const classList = [
-        '.devui-date-range-wrapper', '.devui-dropdown-overlay', '.devui-date-range-title', '.devui-date-range-picker', '.devui-date-picker',
+        '.devui-date-range-wrapper', '.devui-dropdown-overlay', '.devui-date-range-picker', '.devui-date-picker',
         '.devui-month-view', '.devui-month-view-table',
         '.devui-calender-header', '.devui-week-header', '.devui-date-title',
         '.devui-day', '.devui-out-of-month', '.devui-in-month-day', '.devui-calendar-date'

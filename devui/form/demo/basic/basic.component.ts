@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-
 abstract class FormControlConfig<T> {
   key: string;
   label: string;
@@ -130,6 +129,9 @@ export class FormMultiDateConfig extends FormControlConfig<string> {
   styleUrls: ['./basic.component.css']
 })
 export class BasicComponent implements OnInit {
+
+  constructor() {
+  }
   inputDemoConfig: any;
   textareaDemoConfig: any;
   selectDemoConfig: any;
@@ -144,6 +146,10 @@ export class BasicComponent implements OnInit {
   selectDemoconfig2: any;
   multipleSelectDemoConfig3: any;
   singleDateDemoConfig2: any;
+
+  input1: any;
+
+  radio1: any;
 
   disabled: false;
 
@@ -214,9 +220,6 @@ export class BasicComponent implements OnInit {
     inputValue2: '',
     singDateValue2: '',
   };
-
-  constructor() {
-  }
 
   ngOnInit() {
     this.multipleSelect2DemoConfig = new FormSelectConfig({

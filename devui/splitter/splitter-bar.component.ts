@@ -11,7 +11,8 @@ import { I18nService } from 'ng-devui/i18n';
   selector: 'd-splitter-bar',
   templateUrl: './splitter-bar.component.html',
   styleUrls: ['./splitter-bar.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  preserveWhitespaces: false,
 })
 export class SplitterBarComponent implements OnInit, AfterViewInit, OnDestroy {
   // 当前pane索引

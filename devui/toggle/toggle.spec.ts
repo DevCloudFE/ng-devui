@@ -47,7 +47,7 @@ describe('toggle', () => {
     it('should toggle close/open status has correct styles', () => {
       const toggleDebugEl: DebugElement = debugEl.query(By.css('.devui-toggle'));
       expect(toggleDebugEl).toBeTruthy();
-      expect(toggleDebugEl.classes['devui-toggle-small']).toBeTruthy();
+      expect(toggleDebugEl.classes['devui-toggle-']).toBeTruthy();
 
       component.checked = true;
       fixture.detectChanges();

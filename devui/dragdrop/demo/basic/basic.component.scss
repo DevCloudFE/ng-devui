@@ -1,0 +1,77 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
+.row {
+  overflow: hidden;
+}
+
+.col-sm-3 {
+  float: left;
+  position: relative;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+  min-width: 220px;
+  width: 220px;
+}
+
+.list-group .list-group-item {
+  padding: 0 16px;
+}
+
+.drag-border {
+  border: $devui-brand dashed 1px;
+}
+
+.drag-handle {
+  cursor: move;
+
+  /* fallback if grab cursor is unsupported */
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
+}
+
+.drag-handle:active {
+  cursor: grabbing;
+  cursor: -moz-grabbing;
+  cursor: -webkit-grabbing;
+}
+
+.drag-hint-border {
+  border: $devui-success dashed 2px;
+}
+
+.drag-over-border {
+  border: $devui-warning dashed 2px;
+}
+
+.card {
+  border: 1px solid $devui-dividing-line;
+}
+
+.card .card-header {
+  font-size: 14px;
+  padding: 10px;
+}
+
+.list-group {
+  margin-bottom: 20px;
+  padding: 10px;
+}
+
+.list-group > li {
+  height: 30px;
+  border: 1px solid $devui-brand;
+  color: $devui-light-text;
+  margin-bottom: 5px;
+  line-height: 1.5;
+  background-color: $devui-brand;
+  display: flex;
+  align-items: center;
+}
+
+li.list-group-item.disabled {
+  border-color: $devui-line;
+  color: $devui-line;
+  background-color: $devui-disabled-bg;
+}

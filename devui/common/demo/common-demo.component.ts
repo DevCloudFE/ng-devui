@@ -29,19 +29,13 @@ export class CommonDemoComponent {
   lazyLoadSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'html', code: require('!!raw-loader!./lazy-load/lazy-load.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./lazy-load/lazy-load.component.ts') },
-    { title: 'CSS', language: 'css', code: require('!!raw-loader!./lazy-load/lazy-load.component.scss') }
-  ];
-
-  relativeTimeSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'html', code: require('!!raw-loader!./relative-time/relative-time.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./relative-time/relative-time.component.ts') }
+    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./lazy-load/lazy-load.component.scss') }
   ];
 
   navItems = [
+    { dAnchorLink: 'lazy-load', value: '懒加载指令' },
     { dAnchorLink: 'date-pipe', value: 'Datepipe API' },
     { dAnchorLink: 'helper-utils', value: 'Helper Utils' },
     { dAnchorLink: 'iframe-propagate', value: 'Iframe Event Propagate API' },
-    { dAnchorLink: 'lazy-load', value: '懒加载指令' },
-    { dAnchorLink: 'relative-time', value: '人性化时间管道' },
   ];
 }

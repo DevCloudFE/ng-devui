@@ -3,7 +3,8 @@ import { DragDropService } from '../services/drag-drop.service';
 
 @Component({
   selector: 'd-drag-preview-clone-dom-ref',
-  template: ''
+  template: '',
+  preserveWhitespaces: false,
 })
 
 export class DragPreviewCloneDomRefComponent implements AfterViewInit, OnChanges, OnDestroy {

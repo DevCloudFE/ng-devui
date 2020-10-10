@@ -29,8 +29,7 @@
   background-color: $devui-base-bg;
 
   &:not([disabled]):not(.disabled):not(.devui-disabled):not(.error) {
-    &:hover,
-    &:hover:focus {
+    &:hover {
       border-color: $devui-form-control-line-hover;
     }
 
@@ -98,8 +97,7 @@
   cursor: text;
   height: 28px;
 
-  &:hover,
-  &:hover:focus {
+  &:hover {
     border-color: $devui-form-control-line-hover;
   }
 
@@ -208,8 +206,7 @@
     }
   }
 
-  &:hover,
-  &:hover:focus {
+  &:hover {
     border-color: $devui-form-control-line-hover;
   }
 
@@ -295,7 +292,6 @@
   color: $devui-text;
   background-color: $devui-base-bg;
   min-height: 28px;
-  max-height: 52px;
 
   & > .devui-input,
   & > .devui-form-control {
@@ -367,8 +363,84 @@ input::-webkit-input-placeholder {
   color: $devui-placeholder;
 }
 
+/* status style start */
+
+/* border color and background */
 [dTextInput]:not([disabled]):not(.disabled):not(.devui-disabled).error,
-[dTextarea]:not([disabled]):not(.disabled):not(.devui-disabled).error {
-  border-color: $devui-danger-line;
-  background-color: $devui-danger-bg;
+[dTextarea]:not([disabled]):not(.disabled):not(.devui-disabled).error,
+[dTextInput]:not([disabled]):not(.disabled):not(.devui-disabled).devui-error,
+[dTextarea]:not([disabled]):not(.disabled):not(.devui-disabled).devui-error {
+  border-color: $devui-danger-line !important; /* Cannot be covered style by hover */
+  background-color: $devui-danger-bg; /* TODO: 边框阴影颜色 */
 }
+
+d-select:not([disabled]):not(.disabled):not(.devui-disabled).devui-error > div.devui-dropdown-origin {
+  border-color: $devui-danger-line !important; /* Cannot be covered style by hover */
+
+  .devui-select-input:not(.devui-select-search),
+  .devui-select-input:not(.devui-select-search) + .devui-form-control-feedback { /* TODO: how to change the dropdown border */
+    background-color: $devui-danger-bg !important;
+  }
+}
+
+d-editable-select:not([disabled]):not(.disabled):not(.devui-disabled).devui-error input.devui-form-control {
+  border-color: $devui-danger-line !important; /* Cannot be covered style by hover */
+  background-color: $devui-danger-bg !important; /* TODO: open时，下边框颜色 */
+}
+
+d-input-number:not([disabled]):not(.disabled):not(.devui-disabled).devui-error {
+  .input-box:not(:disabled) {
+    border-color: $devui-danger-line !important; /* Cannot be covered style by hover */
+    background-color: $devui-danger-bg !important;
+  }
+}
+
+d-multi-auto-complete:not([disabled]):not(.disabled):not(.devui-disabled).devui-error {
+  ul.devui-dropdown-origin {
+    border-color: $devui-danger-line !important; /* Cannot be covered style by hover */
+    background-color: $devui-danger-bg !important; /* TODO: open时，下边框颜色 */
+  }
+
+  input[dAutoComplete] {
+    background-color: $devui-danger-bg !important;
+  }
+}
+
+d-tags-input:not([disabled]):not(.disabled):not(.devui-disabled).devui-error {
+  div.devui-tags {
+    border-color: $devui-danger-line !important; /* Cannot be covered style by hover */
+    background-color: $devui-danger-bg !important; /* TODO: open时，下边框颜色 */
+  }
+
+  input.devui-input {
+    background-color: $devui-danger-bg !important; /* TODO: open时，下边框颜色 */
+  }
+}
+
+d-tree-select:not([disabled]):not(.disabled):not(.devui-disabled).devui-error {
+  div.devui-select-input {
+    border-color: $devui-danger-line !important; /* Cannot be covered style by hover */
+    background-color: $devui-danger-bg !important; /* TODO: open时，下边框颜色 */
+  }
+}
+
+d-search:not([disabled]):not(.disabled):not(.devui-disabled).devui-error {
+  input.devui-input {
+    border-color: $devui-danger-line !important; /* Cannot be covered style by hover */
+    background-color: $devui-danger-bg !important;
+  }
+}
+
+/* border color only */
+d-editor-md:not([disabled]):not(.disabled):not(.devui-disabled).devui-error {
+  border-color: $devui-danger-line !important; /* Cannot be covered style by hover */
+}
+
+d-editor:not([disabled]):not(.disabled):not(.devui-disabled).devui-error {
+  .ql-toolbar,
+  .ql-container {
+    border-color: $devui-danger-line !important;
+  }
+}
+
+/* status style end */

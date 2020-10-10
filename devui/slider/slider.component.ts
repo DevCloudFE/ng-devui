@@ -10,7 +10,9 @@ import {
   OnDestroy,
   OnInit,
   SimpleChanges,
-  ViewChild
+  ViewChild,
+  Output,
+  EventEmitter
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { fromEvent, Observable, Subscription } from 'rxjs';
@@ -29,6 +31,7 @@ const SLIDER_CONTROL_VALUE_ACCESSOR: any = {
   styleUrls: ['./slider.component.scss'],
   providers: [SLIDER_CONTROL_VALUE_ACCESSOR],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  preserveWhitespaces: false,
 })
 
 export class SliderComponent implements OnInit, OnChanges, ControlValueAccessor, OnDestroy, AfterViewInit {
@@ -55,6 +58,7 @@ export class SliderComponent implements OnInit, OnChanges, ControlValueAccessor,
   @Input() min = 0;
   @Input() step = 1;
   @Input() disabled = false;
+  @Output() afterChange = new EventEmitter<number>();
   @Input() tipsRenderer: (value: number) => string = (value) => `${value}`;
 
   ngOnInit() {
@@ -96,7 +100,7 @@ export class SliderComponent implements OnInit, OnChanges, ControlValueAccessor,
     this.setValue(this.ensureValueInRange(newValue));
   }
 
-  private onTouchedCallback = (v: any) => {
+  private onTouchedCallback = () => {
   }
 
   private onChangeCallback = (v: any) => {
@@ -201,7 +205,9 @@ export class SliderComponent implements OnInit, OnChanges, ControlValueAccessor,
   }
 
   private mouseStopMoving(): void {
+    this.afterChange.emit(this.value);
     this.handleController(false);
+    this.onTouchedCallback();
     this.cdr.markForCheck();
   }
 

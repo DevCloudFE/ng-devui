@@ -29,6 +29,7 @@ import { I18nInterface, I18nService } from 'ng-devui/i18n';
   templateUrl: './single-upload.component.html',
   exportAs: 'dSingleUpload',
   styleUrls: ['./upload-view.component.scss'],
+  preserveWhitespaces: false,
 })
 export class SingleUploadComponent implements OnDestroy {
   dSingleUploadView;

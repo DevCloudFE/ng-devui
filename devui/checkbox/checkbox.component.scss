@@ -222,7 +222,7 @@
 
         .devui-checkbox-bg {
           transform: scale(0.4288);
-          background-color: $devui-disabled-line;
+          background-color: $devui-disabled-text;
           opacity: 1;
         }
       }
@@ -230,7 +230,7 @@
 
     &.active {
       svg polygon {
-        fill: $devui-disabled-line;
+        fill: $devui-disabled-text;
       }
     }
   }

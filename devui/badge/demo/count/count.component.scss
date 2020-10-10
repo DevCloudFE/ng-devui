@@ -1,0 +1,39 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
+.title {
+  font-size: 14px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.menu {
+  left: 0;
+  width: 200px;
+  background: $devui-global-bg;
+
+  &-item {
+    a {
+      position: relative;
+      padding: 8px 16px;
+      display: block;
+
+      .right-badge {
+        left: 80px;
+        top: 0;
+      }
+
+      .item-title {
+        color: $devui-text;
+        font-size: 14px;
+      }
+    }
+
+    a:hover {
+      background-color: $devui-list-item-selected-bg;
+
+      .item-title {
+        color: $devui-list-item-hover-text;
+      }
+    }
+  }
+}

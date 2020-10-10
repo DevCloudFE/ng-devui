@@ -13,32 +13,32 @@ export class DropdownDemoComponent {
   hoverSource: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./hover/hover.component.html')},
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./hover/hover.component.ts')},
-    {title: 'CSS', language: 'css', code:  require('!!raw-loader!./hover/hover.component.css')}
+    {title: 'SCSS', language: 'css', code:  require('!!raw-loader!./hover/hover.component.scss')}
   ];
   focusSource: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./focus/focus.component.html')},
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./focus/focus.component.ts')},
-    {title: 'CSS', language: 'css', code:  require('!!raw-loader!./focus/focus.component.css')}
+    {title: 'SCSS', language: 'css', code:  require('!!raw-loader!./focus/focus.component.css')}
   ];
   closeScopeSource: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./close-scope/close-scope.component.html')},
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./close-scope/close-scope.component.ts')},
-    {title: 'CSS', language: 'css', code:  require('!!raw-loader!./close-scope/close-scope.component.css')}
+    {title: 'SCSS', language: 'css', code:  require('!!raw-loader!./close-scope/close-scope.component.css')}
   ];
   appendToBodySource: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./append-to-body/append-to-body.component.html')},
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./append-to-body/append-to-body.component.ts')},
-    {title: 'CSS', language: 'css', code:  require('!!raw-loader!./append-to-body/append-to-body.component.css')}
+    {title: 'SCSS', language: 'css', code:  require('!!raw-loader!./append-to-body/append-to-body.component.scss')}
   ];
   addIconSource: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./add-icon/add-icon.component.html')},
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./add-icon/add-icon.component.ts')},
-    {title: 'CSS', language: 'css', code:  require('!!raw-loader!./add-icon/add-icon.component.css')}
+    {title: 'SCSS', language: 'css', code:  require('!!raw-loader!./add-icon/add-icon.component.scss')}
   ];
   multiLevelSource: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./multi-level/multi-level.component.html')},
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./multi-level/multi-level.component.ts')},
-    {title: 'CSS', language: 'css', code:  require('!!raw-loader!./multi-level/multi-level.component.css')}
+    {title: 'SCSS', language: 'css', code:  require('!!raw-loader!./multi-level/multi-level.component.css')}
   ];
 
   navItems = [

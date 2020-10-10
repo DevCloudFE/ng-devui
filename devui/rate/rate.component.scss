@@ -16,34 +16,34 @@
 }
 
 .devui-star-color-active {
-  color: $devui-brand;
+  color: #6a81ed;
 
   svg g {
-    fill: $devui-brand;
+    fill: #6a81ed;
   }
 }
 
 .devui-star-color-success {
-  color: $devui-success;
+  color: #3dcca6;
 
   svg g {
-    fill: $devui-success;
+    fill: #3dcca6;
   }
 }
 
 .devui-star-color-warning {
-  color: $devui-warning;
+  color: #fac20a;
 
   svg g {
-    fill: $devui-warning;
+    fill: #fac20a;
   }
 }
 
 .devui-star-color-error {
-  color: $devui-danger;
+  color: #f66f6a;
 
   svg g {
-    fill: $devui-danger;
+    fill: #f66f6a;
   }
 }
 
