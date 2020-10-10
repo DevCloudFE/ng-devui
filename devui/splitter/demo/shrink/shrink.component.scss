@@ -1,4 +1,4 @@
-@import '../../../style/theme/color';
+@import '~ng-devui/styles-var/devui-var.scss';
 
 .pane-content {
   padding: 0 10px;
@@ -13,7 +13,7 @@
   text-align: center;
 
   &.icon-dot-status {
-    color: #efefef;
+    color: $devui-light-text;
   }
 
   &.active {
@@ -58,10 +58,14 @@
   }
 
   .parent-item {
-    color: #adb0b8;
+    color: $devui-text-weak;
   }
 
   .active-child {
     color: $devui-brand-active;
   }
+}
+
+.splitter-border {
+  border: 1px solid $devui-dividing-line;
 }

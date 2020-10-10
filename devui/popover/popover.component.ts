@@ -1,6 +1,7 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { AfterContentChecked, AfterViewInit, Component, ElementRef,
-  HostBinding, HostListener, Input, OnDestroy, OnInit, Renderer2, TemplateRef } from '@angular/core';
+  HostBinding, HostListener, Input, OnDestroy, OnInit, Renderer2, TemplateRef,
+  ChangeDetectorRef} from '@angular/core';
 import { PositionService } from 'ng-devui/position';
 import { PositionType } from 'ng-devui/tooltip';
 import { fromEvent, Subscription } from 'rxjs';
@@ -57,7 +58,8 @@ export class PopoverComponent
   constructor(
     private renderer: Renderer2,
     private positionService: PositionService,
-    public elementRef: ElementRef
+    public elementRef: ElementRef,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
@@ -136,5 +138,10 @@ export class PopoverComponent
       'top',
       `${rect.top}px`
     );
+  }
+
+  public updatePositionAndDetectChange() {
+    this.updatePosition();
+    this.cdr.detectChanges();
   }
 }

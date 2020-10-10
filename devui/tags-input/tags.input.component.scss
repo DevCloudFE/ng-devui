@@ -66,11 +66,8 @@
       margin: 0 0 0 12px;
       padding: 0;
       border: none;
-      // background: 0 0;
       vertical-align: top;
       font-size: 16px;
-      // line-height: 20px;
-      // color: $devui-text;
       border-radius: 50%;
       background-color: $devui-line;
       width: 12px;
@@ -132,6 +129,10 @@
           fill: $devui-light-text;
         }
       }
+    }
+
+    .devui-tag-list {
+      min-height: 22px;
     }
   }
 

@@ -8,6 +8,7 @@ import { AccordionComponent } from './accordion.component';
   selector: 'd-accordion-menu',
   templateUrl: './accordion-menu.component.html',
   encapsulation: ViewEncapsulation.None,
+  preserveWhitespaces: false,
 })
 export class AccordionMenuComponent extends AccordionBaseComponent<AccordionBaseMenu<AccordionMenuItem>> {
   @HostBinding('class.devui-accordion-menu-item')

@@ -19,6 +19,7 @@ interface KeyBoardParams {
   repeat?: boolean;
   isComposing?: boolean;
   keyCode?: number;
+  data?: string;
 }
 
 interface MouseEventParams {
@@ -28,7 +29,7 @@ interface MouseEventParams {
   screenY: number;
 }
 
-type keyBoardEventType = 'keydown' | 'keyup' | 'keypress';
+type keyBoardEventType = 'keydown' | 'keyup' | 'keypress' | 'input';
 type dragEventType = 'drag' | 'dragend' | 'dragenter' | 'dragexit' | 'dragleave' | 'dragover' | 'dragstart' | 'drop';
 
 export function createKeyBoardEvent(eventType: keyBoardEventType, params: KeyBoardParams) {
@@ -49,7 +50,8 @@ export function createKeyBoardEvent(eventType: keyBoardEventType, params: KeyBoa
 
   Object.defineProperties(event, {
       keyCode: {value: params.keyCode},
-      charCode: {value: params.charCode}
+      charCode: {value: params.charCode},
+      data: {value: params.data}
   });
 
   return event;

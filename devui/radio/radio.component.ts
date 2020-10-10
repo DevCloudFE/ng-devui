@@ -13,6 +13,7 @@ import { Observable } from 'rxjs';
       multi: true,
     },
   ],
+  preserveWhitespaces: false,
 })
 export class RadioComponent implements OnInit, ControlValueAccessor {
   private _name: string;

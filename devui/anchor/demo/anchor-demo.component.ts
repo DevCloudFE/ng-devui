@@ -9,24 +9,24 @@ export class AnchorDemoComponent {
   basicSource: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./basic/basic.component.html')},
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./basic/basic.component.ts')},
-    {title: 'CSS', language: 'css', code:  require('!!raw-loader!./basic/basic.component.css')}
+    {title: 'SCSS', language: 'css', code:  require('!!raw-loader!./basic/basic.component.scss')}
   ];
 
   asyncSource: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./async/async.component.html')},
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./async/async.component.ts')},
-    {title: 'CSS', language: 'css', code:  require('!!raw-loader!./async/async.component.css')}
+    {title: 'SCSS', language: 'css', code:  require('!!raw-loader!./async/async.component.scss')}
   ];
   hashSource: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./hash/hash.component.html')},
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./hash/hash.component.ts')},
-    {title: 'CSS', language: 'css', code:  require('!!raw-loader!./hash/hash.component.css')}
+    {title: 'SCSS', language: 'css', code:  require('!!raw-loader!./hash/hash.component.scss')}
   ];
 
   ScrollTargetSource: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./scroll-target/scroll-target.component.html')},
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./scroll-target/scroll-target.component.ts')},
-    {title: 'CSS', language: 'css', code:  require('!!raw-loader!./scroll-target/scroll-target.component.css')}
+    {title: 'SCSS', language: 'css', code:  require('!!raw-loader!./scroll-target/scroll-target.component.scss')}
   ];
 
 

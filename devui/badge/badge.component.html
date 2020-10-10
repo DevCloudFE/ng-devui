@@ -1,0 +1,16 @@
+<span #contentProjection><ng-content></ng-content></span>
+<span class="devui-badge-count devui-badge-count-{{ status }}" *ngIf="!showDot && !hasContent">
+  {{ count }}
+</span>
+<span class="devui-badge-status devui-badge-status-{{ status }}" *ngIf="showDot && !hasContent"></span>
+<span
+  class="devui-badge-content devui-badge-content-{{ status }} devui-badge-content-{{ badgePos }}"
+  *ngIf="hasContent"
+  [style.background]="bgColor"
+  [style.right.px]="offsetXY && offsetXY[0] ? -offsetXY[0] : null"
+  [style.top.px]="offsetXY && offsetXY[1] ? offsetXY[1] : null"
+  [ngClass]="{ 'devui-badge-content-count': !showDot, 'devui-badge-content-dot': showDot }"
+>
+  <ng-container *ngIf="!showDot && count <= maxCount">{{ count }}</ng-container>
+  <ng-container *ngIf="!showDot && count > maxCount">{{ maxCount }}+</ng-container>
+</span>

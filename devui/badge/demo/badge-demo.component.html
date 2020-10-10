@@ -1,0 +1,35 @@
+<div class="demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 60, bottom: 0 }">
+  <d-demo-nav [navItems]="navItems"></d-demo-nav>
+
+  <div class="demo-example" [dAnchor]="'badge-basic'">
+    <div class="demo-title">基本徽章</div>
+    <div class="demo-text">基本徽章类型，当有包裹元素时在右上角显示徽章和数目。</div>
+    <d-codebox id="components-button-primary" [sourceData]="basicSource">
+      <d-badge-basic demo></d-badge-basic>
+    </d-codebox>
+  </div>
+
+  <div class="demo-example" [dAnchor]="'badge-dot'">
+    <div class="demo-title">点状徽章</div>
+    <div class="demo-text">点状徽章类型，当有包裹元素且showDot参数为true时为点状徽章，默认在右上角展示小点不显示数目</div>
+    <d-codebox id="components-button-primary" [sourceData]="dotSource">
+      <d-badge-dot demo></d-badge-dot>
+    </d-codebox>
+  </div>
+
+  <div class="demo-example" [dAnchor]="'badge-count'">
+    <div class="demo-title">计数徽章</div>
+    <div class="demo-text">当徽章独立使用且不包裹任何元素时，只展示徽章状态色和数目。</div>
+    <d-codebox id="components-button-primary" [sourceData]="countSource">
+      <d-badge-count demo></d-badge-count>
+    </d-codebox>
+  </div>
+
+  <div class="demo-example" [dAnchor]="'badge-status'">
+    <div class="demo-title">状态徽章</div>
+    <div class="demo-text">当徽章独立使用、不包裹任何元素且showDot参数为true时为状态徽章，不同状态展示不同色点</div>
+    <d-codebox id="components-button-primary" [sourceData]="statusSource">
+      <d-badge-status demo></d-badge-status>
+    </d-codebox>
+  </div>
+</div>

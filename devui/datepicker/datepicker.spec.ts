@@ -46,7 +46,7 @@ import { DatepickerModule } from './datepicker.module';
 })
 class TestDatePickerDirectiveComponent {
   selectedDate1;
-  @ViewChild('inputEle', { read: ElementRef }) inputEle: ElementRef;
+  @ViewChild('inputEle', {read: ElementRef}) inputEle: ElementRef;
   @ViewChild('myCustomView') myCustomView: TemplateRef<any>;
 
   cssClass = '';
@@ -73,7 +73,8 @@ class TestDatePickerDirectiveComponent {
         class="devui-input devui-form-control"
         dDatepicker
         (focus)="datePicker1.toggle($event)"
-        [(ngModel)]="selectedDate1"
+        [ngModel]="selectedDate1"
+        (ngModelChange)="setValue($event)"
         #datePicker1="datepicker"
         (selectedDateChange)="getValue($event)"
         appendToBody
@@ -116,6 +117,12 @@ class TestDatePickerAppendToBodyComponent {
   showTime = false;
 
   getValue = jasmine.createSpy('get value');
+
+  setValue(event) {
+    setTimeout(() => {
+      this.selectedDate1 = event;
+    });
+  }
 
   constructor() {}
 }
@@ -548,17 +555,14 @@ function testInputParam(fixture, wrapperEle, component) {
   component.minDate.setDate(component.minDate.getDate() - 1);
   component.maxDate = new Date();
   component.maxDate.setDate(component.minDate.getDate() + 1);
-
-  // TODO: ExpressionChangedAfterItHasBeenCheckedError after update to ng9
-  /*
-    component.dateFormat = 'MM.dd.y';
-    component.customViewTemplate = component.myCustomView;
-  */
+  component.dateFormat = 'MM.dd.y';
+  component.customViewTemplate = component.myCustomView;
   fixture.detectChanges();
   component.inputEle.nativeElement.dispatchEvent(new Event('focus'));
   fixture.detectChanges();
 
   expect(wrapperEle.querySelector('.test-class')).toBeTruthy();
+  expect(wrapperEle.querySelector('.test-template')).toBeTruthy();
 
   const dayListEle = wrapperEle.querySelector('tbody');
   for (const dayEl of dayListEle.querySelectorAll('.devui-in-month-day')) {
@@ -571,19 +575,16 @@ function testInputParam(fixture, wrapperEle, component) {
     }
   }
 
-  // TODO: ExpressionChangedAfterItHasBeenCheckedError after update to ng9
-  /*
-    const currentDayEle = dayListEle.querySelector('.active');
-    currentDayEle.dispatchEvent(new Event('click'));
-    fixture.detectChanges();
+  const currentDayEle = dayListEle.querySelector('.active');
+  currentDayEle.dispatchEvent(new Event('click'));
+  fixture.detectChanges();
+  tick();
+  fixture.detectChanges();
 
-    expect(component.getValue).toHaveBeenCalled();
-    expect(component.inputEle.nativeElement.value).toBe(
-      `${padZero(new Date().getMonth() + 1)}.${padZero(new Date().getDate())}.${new Date().getFullYear()}`
-    );
-
-    expect(wrapperEle.querySelector('.test-template')).toBeTruthy();
-  */
+  expect(component.getValue).toHaveBeenCalled();
+  expect(component.inputEle.nativeElement.value).toBe(
+    `${padZero(new Date().getMonth() + 1)}.${padZero(new Date().getDate())}.${new Date().getFullYear()}`
+  );
 }
 
 function testTimePicker(fixture, wrapperEle, component) {

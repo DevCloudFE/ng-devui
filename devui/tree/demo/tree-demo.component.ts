@@ -37,13 +37,13 @@ export class TreeDemoComponent {
   customizeSource: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./customize/customize.component.html')},
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./customize/customize.component.ts')},
-    {title: 'CSS', language: 'css', code:  require('!!raw-loader!./customize/customize.component.css')}
+    {title: 'SCSS', language: 'css', code:  require('!!raw-loader!./customize/customize.component.scss')}
   ];
 
   draggableSource: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./draggable/draggable.component.html')},
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./draggable/draggable.component.ts')},
-    {title: 'CSS', language: 'css', code:  require('!!raw-loader!./draggable/draggable.component.scss')}
+    {title: 'SCSS', language: 'css', code:  require('!!raw-loader!./draggable/draggable.component.scss')}
   ];
   checkControlSource: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./check-control/check-control.component.html')},
@@ -52,7 +52,7 @@ export class TreeDemoComponent {
   virtualScrollSource: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./virtual-scroll/virtual-scroll.component.html')},
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./virtual-scroll/virtual-scroll.component.ts')},
-    {title: 'CSS', language: 'css', code:  require('!!raw-loader!./virtual-scroll/virtual-scroll.component.css')}
+    {title: 'SCSS', language: 'css', code:  require('!!raw-loader!./virtual-scroll/virtual-scroll.component.css')}
   ];
   navItems = [
     { dAnchorLink: 'basic-usage', value: '基本用法'},

@@ -7,7 +7,6 @@
 
   .disabled {
     cursor: not-allowed;
-    // opacity: 0.3;
   }
 
   &:hover {
@@ -61,11 +60,11 @@
   }
 
   .input-control-buttons {
+    display: none;
     position: absolute;
     right: 0;
     width: 25px;
     height: 100%;
-    // display: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -96,6 +95,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      background-color: $devui-base-bg;
 
       &.input-control-inc svg {
         position: relative;
@@ -124,7 +124,7 @@
 
       &.disabled {
         & > svg polygon {
-          fill: $devui-disabled-line;
+          fill: $devui-disabled-text;
         }
       }
     }

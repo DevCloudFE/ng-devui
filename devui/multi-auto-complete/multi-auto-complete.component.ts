@@ -25,17 +25,19 @@ import { AutoCompletePopupComponent, AutoCompleteDirective } from 'ng-devui/auto
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => MultiAutoCompleteComponent),
     multi: true
-  }]
+  }],
+  preserveWhitespaces: false,
 })
 export class MultiAutoCompleteComponent implements OnInit, OnChanges, ControlValueAccessor {
   static ID_SEED = 0;
+  @Input() appendToBody = false;
   @Input() cssClass: string;
   /*
   overview: border none multiline single
   */
   @Input() overview = 'border';
   @Input() tipsText: string; // 提示文字
-  @Input() placeholder = '请输入关键字'; // placeholder
+  @Input() placeholder = ''; // placeholder
   @Input() disabled = false;
   @Input() source: any[];
   @Input() latestSource: any[]; // 最近输入
@@ -236,21 +238,25 @@ export class MultiAutoCompleteComponent implements OnInit, OnChanges, ControlVal
 
   openPopup() {
     const ele = this.multiAutoCompleteWrapperElement && this.multiAutoCompleteWrapperElement.nativeElement;
-    if (!ele.classList.contains('devui-dropdown-origin-open')) {
+    if (ele && !ele.classList.contains('devui-dropdown-origin-open')) {
       ele.classList.add('devui-dropdown-origin-open');
     }
-    if (!ele.classList.contains('devui-dropdown-origin-bottom')) {
+    if (ele && !ele.classList.contains('devui-dropdown-origin-bottom')) {
       ele.classList.add('devui-dropdown-origin-bottom');
     }
   }
 
   hidePopup() {
     const ele = this.multiAutoCompleteWrapperElement && this.multiAutoCompleteWrapperElement.nativeElement;
-    if (ele.classList.contains('devui-dropdown-origin-open')) {
+    if (ele && ele.classList.contains('devui-dropdown-origin-open')) {
       ele.classList.remove('devui-dropdown-origin-open');
     }
-    if (ele.classList.contains('devui-dropdown-origin-bottom')) {
+    if (ele && ele.classList.contains('devui-dropdown-origin-bottom')) {
       ele.classList.remove('devui-dropdown-origin-bottom');
     }
+  }
+
+  inputBlur() {
+    this.onTouched();
   }
 }

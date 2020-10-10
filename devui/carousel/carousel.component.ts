@@ -11,7 +11,9 @@ import {
   SimpleChanges,
   OnChanges,
   ChangeDetectorRef,
-  OnDestroy
+  OnDestroy,
+  Output,
+  EventEmitter
 } from '@angular/core';
 import { CarouselItemComponent } from './carousel-item.component';
 
@@ -24,6 +26,7 @@ export type DotPosition = 'bottom' | 'top';
   templateUrl: './carousel.component.html',
   styleUrls: ['./carousel.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  preserveWhitespaces: false,
 })
 export class CarouselComponent implements OnInit, AfterContentInit, OnChanges, OnDestroy {
   // 切换箭头的显示方式
@@ -43,6 +46,9 @@ export class CarouselComponent implements OnInit, AfterContentInit, OnChanges, O
   // 当前激活面板索引，默认从0开始
   @Input() activeIndex = 0;
 
+  // 卡片切换时，返回当前卡片索引，索引从0开始
+  @Output() activeIndexChange = new EventEmitter<number>();
+
   @ContentChildren(CarouselItemComponent) items: QueryList<CarouselItemComponent>;
   // 卡片切换动画间隔，单位ms
   private transitionSpeed = 500;
@@ -54,6 +60,8 @@ export class CarouselComponent implements OnInit, AfterContentInit, OnChanges, O
   private itemCount;
   // 自动调度id
   private scheduledId;
+  // 记录当前页码
+  private currentIndex;
   constructor(private el: ElementRef, private renderer: Renderer2, private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
@@ -66,7 +74,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, OnChanges, O
     if (arrowTrigger && !arrowTrigger.isFirstChange()) {
       this.showArrow = this.arrowTrigger === 'always';
     }
-    if (activeIndex && !activeIndex.isFirstChange()) {
+    if (activeIndex && activeIndex.currentValue !== this.currentIndex && !activeIndex.isFirstChange()) {
       this.translatePosition(this.activeIndex);
     }
     if (!this.autoplay || !this.autoplaySpeed) {
@@ -122,6 +130,8 @@ export class CarouselComponent implements OnInit, AfterContentInit, OnChanges, O
       this.activeIndex = index < 0 ? 0 : index > this.itemCount - 1 ? this.itemCount - 1 : index;
       this.translatePosition(this.activeIndex);
     }
+    this.activeIndexChange.emit(this.activeIndex);
+    this.currentIndex = this.activeIndex;
     this.cdr.detectChanges();
     this.autoScheduleTransition();
   }

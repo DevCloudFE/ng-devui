@@ -56,7 +56,7 @@ export const devuiLightTheme: Theme = new Theme({
     'devui-list-item-active-hover-bg': '#526ecc',
     'devui-list-item-hover-bg': '#f2f5fc',
     'devui-list-item-hover-text': '#526ecc',
-    'devui-list-item-selected-bg': '#f2f5fc',
+    'devui-list-item-selected-bg': '#e9edfa',
     'devui-list-item-strip-bg': '#f2f5fc',
     // 禁用
     'devui-disabled-bg': '#f5f5f6',
@@ -129,7 +129,7 @@ export const devuiDarkTheme: Theme = new Theme({
     'devui-text-weak': '#A0A0A0',
     'devui-aide-text': '#909090',
     'devui-aide-text-stress': '#A0A0A0',
-    'devui-placeholder': '#646464',
+    'devui-placeholder': '#8A8A8A;',
     'devui-light-text': '#ffffff',
     'devui-dark-text': '#252b3a',
     'devui-link': '#526ECC',
@@ -166,12 +166,12 @@ export const devuiDarkTheme: Theme = new Theme({
     // 禁用
     'devui-disabled-bg': '#3D3E44',
     'devui-disabled-line': '#505153',
-    'devui-disabled-text': '#505153',
+    'devui-disabled-text': '#7D7D7D',
     // 特殊背景色
     'devui-label-bg': '#46443F',
     'devui-connected-overlay-bg': '#2F2F2F',
     'devui-connected-overlay-line': '#526ecc',
-    'devui-fullscreen-overlay-bg': '#4C4C4C',
+    'devui-fullscreen-overlay-bg': '#2E2F31',
     'devui-feedback-overlay-bg': '#4C4C4C',
     'devui-feedback-overlay-text': '#DFE1E6',
     'devui-embed-search-bg': '#383838',

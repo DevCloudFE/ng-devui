@@ -101,7 +101,18 @@ export const routesConfig = [
       tmw: '可根据用户传入进行图片预览展示 或 对容器内图片进行预览。'
     }
   },
-
+  {
+    path: 'badge',
+    component: ExamplePanelComponent,
+    loadChildren: () => import('../../../devui/badge/demo/badge-demo.module').then((m) => m.BadgeDemoModule),
+    data: {
+      type: '数据展示',
+      name: 'Badge',
+      cnName: '徽标',
+      description: '图标右上角的数字状态徽标',
+      tmw: '通常出现在图标右上角或列表项右方，通过不同的状态色加数字提示用户有消息需要处理。',
+    },
+  },
   {
     path: 'breadcrumb',
     component: ExamplePanelComponent,

@@ -25,13 +25,12 @@ import { I18nService, I18nInterface } from 'ng-devui/i18n';
   templateUrl: './editable-select.component.html',
   styleUrls: ['./editable-select.component.scss'],
   exportAs: 'editable-select',
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => EditableSelectComponent),
-      multi: true,
-    },
-  ],
+  providers: [{
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: forwardRef(() => EditableSelectComponent),
+    multi: true
+  }],
+  preserveWhitespaces: false,
 })
 export class EditableSelectComponent implements ControlValueAccessor, OnInit, OnChanges, OnDestroy {
   constructor(private changeDetectorRef: ChangeDetectorRef, private i18n: I18nService) {
@@ -68,6 +67,7 @@ export class EditableSelectComponent implements ControlValueAccessor, OnInit, On
       this.autoCompleteDirective.openPopup(this.activeIndex);
     } else {
       this.autoCompleteDirective.hidePopup();
+      this.onTouched();
     }
   }
   get dropDownOpen() {
@@ -82,10 +82,14 @@ export class EditableSelectComponent implements ControlValueAccessor, OnInit, On
 
     const targetEl = $event.target as HTMLElement;
     // 1. elements except current instance's input box click;
-    // 2. drop down item select
-    if (!this.editableSelectBox.nativeElement.contains(targetEl) || targetEl.classList.contains('devui-dropdown-item')) {
+    if (!this.editableSelectBox.nativeElement.contains(targetEl)) {
       this.dropDownOpen = false;
     }
+  }
+
+  // 2. drop down item select
+  selectValue($event) {
+    this.dropDownOpen = false;
   }
 
   writeValue(obj: any): void {
@@ -142,6 +146,7 @@ export class EditableSelectComponent implements ControlValueAccessor, OnInit, On
   loadMoreEvent($event) {
     this.loadMore.emit($event);
   }
+
   ngOnDestroy() {
     if (this.i18nSubscription) {
       this.i18nSubscription.unsubscribe();

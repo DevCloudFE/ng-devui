@@ -180,8 +180,7 @@ describe('transfer', () => {
       const toRightButton = debugEle.queryAll(By.css('.transfer-op'))[1];
       toRightButton.query(By.css('svg')).nativeElement.dispatchEvent(new Event('click'));
 
-      fixture.detectChanges();
-      flush();
+      tick();
       fixture.detectChanges();
 
       expect(testComponent.sourceOption.length).toEqual(17);
@@ -200,9 +199,9 @@ describe('transfer', () => {
       const toLeftButton = debugEle.queryAll(By.css('.transfer-op'))[0];
       toLeftButton.query(By.css('svg')).nativeElement.dispatchEvent(new Event('click'));
 
+      tick();
       fixture.detectChanges();
       flush();
-      fixture.detectChanges();
 
       expect(testComponent.sourceOption.length).toEqual(18);
       expect(testComponent.targetOption.length).toEqual(3);

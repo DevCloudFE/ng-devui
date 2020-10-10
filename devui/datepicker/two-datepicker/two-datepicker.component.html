@@ -7,10 +7,6 @@
   (positionChange)="onPositionChange($event)"
 >
   <div [@cornerFadeInOut]="isOpen ? datepickerPosition : 'void'" class="devui-two-date-wrapper devui-dropdown-overlay">
-    <div class="devui-two-date-title">
-      <span>开始日期</span>
-      <span>结束日期</span>
-    </div>
     <div class="devui-two-date-picker">
       <d-two-datepicker-single
         class="devui-date-picker"

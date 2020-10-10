@@ -7,7 +7,8 @@ import { TransformableElement } from './transformable-element';
   selector: 'd-image-preview',
   templateUrl: './image-preview.component.html',
   styleUrls: ['./image-preview.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  preserveWhitespaces: false,
 })
 
 export class DImagePreviewComponent implements OnInit, OnDestroy {
@@ -38,13 +39,15 @@ export class DImagePreviewComponent implements OnInit, OnDestroy {
   i18nSubscription: Subscription;
 
   get targetImageSrc(): string {
-    return this.images[this.targetImageIndex].getAttribute('src');
+    // 防止targetImageIndex出现-1的情况
+    const idx = this.targetImageIndex >= 0 && this.targetImageIndex || 0;
+    return this.images[idx].getAttribute('src');
   }
 
   constructor(
     private elementRef: ElementRef,
     private i18n: I18nService
-    ) { }
+  ) { }
 
   @HostListener('click', ['$event'])
   click($event) {

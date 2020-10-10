@@ -24,6 +24,7 @@ import { I18nService, I18nInterface } from 'ng-devui/i18n';
   styleUrls: ['./search.component.scss'],
   exportAs: 'search',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  preserveWhitespaces: false,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -99,6 +100,10 @@ export class SearchComponent implements ControlValueAccessor, OnInit, OnDestroy,
   inputChange(value, event?) {
     this.renderClearIcon();
     // 此函数不能删除，需要给filterInput.value赋值，从而控制clear的显隐。因为registerFilterChange对clear的显隐控制不起作用。
+  }
+
+  inputBlur() {
+    this.onTouch();
   }
 
   keydownEnter(event, term) {

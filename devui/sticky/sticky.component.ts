@@ -12,6 +12,7 @@ export type StickyStatus =  'normal' | 'follow' | 'stay' | 'remain';
           <ng-content></ng-content>
         </div>
     `,
+    preserveWhitespaces: false,
 })
 
 export class StickyComponent implements OnInit, AfterViewInit, OnDestroy {

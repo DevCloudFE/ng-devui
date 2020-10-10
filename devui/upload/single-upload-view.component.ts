@@ -20,6 +20,7 @@ import {UploadedFilesComponent} from './uploaded-files.component';
   exportAs: 'dSingleUploadView',
   templateUrl: './single-upload-view.component.html',
   styleUrls: ['./single-upload-view.component.scss'],
+  preserveWhitespaces: false,
 })
 export class SingleUploadViewComponent extends UploadComponent {
   @Input() uploadOptions: IUploadOptions;

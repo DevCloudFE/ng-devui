@@ -1,0 +1,79 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
+.row {
+  overflow: auto;
+}
+
+.col-sm-3 {
+  vertical-align: top;
+  display: inline-block;
+  position: relative;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+  min-width: 220px;
+  width: 220px;
+}
+
+.list-group .list-group-item {
+  padding: 0 16px;
+}
+
+.drag-border {
+  border: $devui-brand dashed 1px;
+}
+
+.drag-handle {
+  cursor: move;
+
+  /* fallback if grab cursor is unsupported */
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
+}
+
+.drag-handle:active {
+  cursor: grabbing;
+  cursor: -moz-grabbing;
+  cursor: -webkit-grabbing;
+}
+
+.drag-hint-border {
+  border: $devui-success dashed 2px;
+}
+
+.drag-over-border {
+  border: $devui-warning dashed 2px;
+}
+
+.card {
+  border: 1px solid $devui-dividing-line;
+}
+
+.card .card-header,
+.card .card-footer {
+  font-size: 14px;
+  padding: 10px;
+}
+
+.list-group {
+  margin: 10px;
+  padding: 10px;
+  border: 1px dashed $devui-dividing-line;
+}
+
+.list-group > li {
+  height: 30px;
+  border: 1px solid $devui-brand;
+  color: $devui-light-text;
+  margin-bottom: 5px;
+  line-height: 1.5;
+  background-color: $devui-brand;
+  display: flex;
+  align-items: center;
+}
+
+.card.drop-area,
+.icon-example.drop-area {
+  background: rgba(255, 0, 0, 0.05);
+}

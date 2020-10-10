@@ -8,6 +8,7 @@ import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component
 import { SelectModule } from '../select.module';
 import { SelectDemoComponent } from './select-demo.component';
 import { ButtonModule } from 'ng-devui/button';
+import { FormModule } from 'ng-devui';
 
 import { SelectBasicComponent } from './basic/select-basic.component';
 import { CustomSearchComponent } from './custom-search/custom-search.component';
@@ -35,6 +36,7 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
   imports: [
     CommonModule,
     FormsModule,
+    FormModule,
     DevUICodeboxModule,
     DevUIApiModule,
     SelectModule,

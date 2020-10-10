@@ -15,8 +15,8 @@
           />
           <span class="devui-radio-material">
             <svg height="100%" width="100%" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
-              <circle class="devui-outer" cx="512" cy="512" r="486.5" stroke-width="51" />
-              <circle class="devui-inner" cx="512" fill-rule="nonzero" cy="512" r="320" />
+              <circle class="devui-outer" [class.disabled]="disabled" cx="512" cy="512" r="486.5" stroke-width="51" />
+              <circle class="devui-inner" [class.disabled]="disabled" cx="512" fill-rule="nonzero" cy="512" r="320" />
             </svg>
           </span>
           <span class="devui-radio-label">{{ value }}</span>

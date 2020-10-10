@@ -7,6 +7,7 @@ import { TableWidthConfig, TableExpandConfig } from './data-table.model';
   selector: 'd-data-table-body, [dDataTableBody]',
   templateUrl: './data-table-body.component.html',
   styleUrls: ['./data-table-body.component.scss'],
+  preserveWhitespaces: false,
   // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DataTableBodyComponent implements OnChanges {

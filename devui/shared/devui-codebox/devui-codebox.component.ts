@@ -5,7 +5,8 @@ import { DevuiSourceData } from './devui-source-data';
   selector: 'd-codebox',
   templateUrl: './devui-codebox.component.html',
   styleUrls: ['./devui-codebox.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  preserveWhitespaces: false,
 })
 export class DevuiCodeboxComponent implements OnInit {
   _copied = false;

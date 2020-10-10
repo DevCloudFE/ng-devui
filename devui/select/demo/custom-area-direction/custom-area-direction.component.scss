@@ -1,0 +1,35 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
+.col-md-5 {
+  width: 50%;
+}
+
+.col-md-3 {
+  width: 30%;
+}
+
+.custom-wrapper {
+  padding: 5px;
+}
+
+.custom-title {
+  padding: 5px;
+  color: $devui-line;
+}
+
+.custom-list {
+  padding: 5px;
+}
+
+.custom-single {
+  background: $devui-brand;
+  color: $devui-light-text;
+  border-radius: 2px;
+  text-align: center;
+  padding: 8px;
+  display: inline-block;
+}
+
+.custom-list:hover .custom-single {
+  background: $devui-brand-hover;
+}

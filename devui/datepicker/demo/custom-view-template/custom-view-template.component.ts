@@ -9,7 +9,7 @@ import {
   selector: 'd-custom-view-template',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './custom-view-template.component.html',
-  styleUrls: ['./custom-view-template.component.css']
+  styleUrls: ['./custom-view-template.component.scss']
 })
 export class CustomViewTemplateComponent implements OnInit {
   datePicker1: any;

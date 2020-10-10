@@ -5,7 +5,7 @@ import { ILabelDataConfigs } from 'ng-devui/quadrant-diagram';
 @Component({
   selector: 'd-basic',
   templateUrl: './basic.component.html',
-  styleUrls: ['./basic.component.css']
+  styleUrls: ['./basic.component.scss']
 })
 export class BasicComponent implements OnInit {
 

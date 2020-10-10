@@ -9,7 +9,13 @@
 |   showDots   |          `boolean`           |   true   | 可选，是否显示面板指示器                        | [自动轮播](/components/carousel/demo#autoplay-usage) |
 | dotPosition  |      `'top'\|'bottom'`       | 'bottom' | 可选，面板指示器位置                            | [指示器&切换箭头](/components/carousel/demo#trigger-usage)  |
 |  dotTrigger  |      `'click'\|'hover'`      | 'click'  | 可选，指示器触发轮播方式                        | [指示器&切换箭头](/components/carousel/demo#trigger-usage)  |
-| activeIndex  |           `number`           |    0     | 可选，初始化激活卡片索引，从 0 开始             | [基本用法](/components/carousel/demo#basic-usage)    |
+| activeIndex  |           `number`           |    0     | 可选，初始化激活卡片索引，从 0 开始，支持`[(activeIndex)]`双向绑定        | [基本用法](/components/carousel/demo#basic-usage)    |
+
+## d-carousel 事件
+
+|      事件          |          类型           |                    说明                     | 跳转 Demo                                                     |
+| :----------------: | :---------------------: | :-----------------------------------------: | -------------------------------------------------            |
+|      activeIndexChange    | `EventEmitter<number>`  | 卡片切换时，返回当前卡片的索引，从0开始    | [基本用法](/components/carousel/demo#basic-usage)             |
 
 ## d-carousel 方法
 

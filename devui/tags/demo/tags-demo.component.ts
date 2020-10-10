@@ -17,7 +17,7 @@ export class TagsDemoComponent {
   customSource: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./custom/custom.component.html')},
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./custom/custom.component.ts')},
-    {title: 'CSS', language: 'css', code:  require('!!raw-loader!./custom/custom.component.css')}
+    {title: 'SCSS', language: 'css', code:  require('!!raw-loader!./custom/custom.component.scss')}
   ];
   navItems = [
     { dAnchorLink: 'single-tag', value: '单个标签'},

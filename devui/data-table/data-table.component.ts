@@ -18,7 +18,8 @@ import { TableTbodyComponent } from './table/body/tbody.component';
     './data-table.component.color.scss'
   ],
   // changeDetection: ChangeDetectionStrategy.OnPush,
-  exportAs: 'dataTable'
+  exportAs: 'dataTable',
+  preserveWhitespaces: false,
 })
 export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterContentInit, AfterViewInit {
   /**
@@ -62,9 +63,9 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
    */
   @Input() maxHeight: string;
   /**
-   * 表格类型,striped表现为条纹间隔
+   * 表格类型 @deprecated
    */
-  @Input() type: '' | 'striped' | 'borderless' = '';
+  @Input() type: any;
   /**
    * 鼠标悬浮行时是否高亮
    */
@@ -218,6 +219,22 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
    * 列宽配置
    */
   @Input() tableWidthConfig: TableWidthConfig[] = [];
+  /**
+   * 表头是否有背景色
+   */
+  @Input() headerBg: boolean;
+  /**
+   * 表格布局
+   */
+  @Input() tableLayout: 'fixed' | 'auto' = 'fixed';
+  /**
+   * 表格边框类型，默认有行边框，bordered：全边框，borderless：无边框
+   */
+  @Input() borderType: '' | 'bordered' | 'borderless' = '';
+  /**
+   * 表格是否展示为斑马纹间隔
+   */
+  @Input() striped: boolean;
   /**
    * 表格内部滚动事件
    */

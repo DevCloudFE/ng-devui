@@ -10,8 +10,8 @@ import { BreadCrumbService } from './breadcrumb.service';
     selector: 'd-breadcrumb',
     exportAs: 'dBreadcrumb',
     templateUrl: './breadcrumb.component.html',
-    styleUrls: ['./breadcrumb.component.scss']
-
+    styleUrls: ['./breadcrumb.component.scss'],
+    preserveWhitespaces: false,
 })
 export class BreadCrumbComponent {
     @Input() separatorIcon: TemplateRef<any>;

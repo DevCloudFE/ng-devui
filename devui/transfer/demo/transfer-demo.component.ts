@@ -12,7 +12,7 @@ export class TransferDemoComponent {
   ];
   customSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'html', code: require('!!raw-loader!./custom/transfer-demo-custom.component.html') },
-    { title: 'CSS', language: 'css', code: require('!!raw-loader!./custom/transfer-demo-custom.component.scss') },
+    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./custom/transfer-demo-custom.component.scss') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./custom/transfer-demo-custom.component.ts') }
   ];
   searchSource: Array<DevuiSourceData> = [

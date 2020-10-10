@@ -1,13 +1,13 @@
-<section style="width: 100%;">
+<section style="width: 100%">
   <h5>双日期选择器 格式化</h5>
-  <div class="input-group" style="margin-bottom: 10px; width: 200px;">
+  <div class="input-group" style="margin-bottom: 10px; width: 200px">
     <d-select [size]="'sm'" [(ngModel)]="dateFormat" [options]="dateFormatOptions"></d-select>
   </div>
   <div
     class="two-date-wrapper"
     dTwoDatePicker
     #twoDatePicker1="twoDatePicker"
-    (selectRange)="selectRange($event)"
+    (selectedRangeChange)="selectRange($event)"
     [dateFormat]="dateFormat"
     [minDate]="'2010-12-30'"
     [maxDate]="'2018-02-27'"
@@ -52,7 +52,7 @@
     #twoDatePicker2="twoDatePicker"
     [hideOnRangeSelected]="false"
     [cssClass]="'custom-css-class'"
-    (selectRange)="selectRange($event)"
+    (selectedRangeChange)="selectRange($event)"
     [dateConfig]="dateConfig"
   >
     <div class="devui-input-group devui-dropdown-origin-wrapper devui-dropdown-origin">

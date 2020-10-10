@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs';
   selector: 'd-accordion',
   templateUrl: './accordion.component.html',
   styleUrls: ['./accordion.component.scss'],
+  preserveWhitespaces: false,
 })
 export class AccordionComponent implements AccordionOptions, OnChanges, OnInit, OnDestroy {
   @Input() data: Array<any> | AccordionMenuType;

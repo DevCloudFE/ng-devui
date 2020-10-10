@@ -2,7 +2,7 @@
 
 |     参数     |              类型               | 默认  | 说明                                                                        | 跳转 Demo                                   |
 | :----------: | :-----------------------------: | :---: | :-------------------------------------------------------------------------- | ------------------------------------------- |
-|     size     |  `'small'\|'medium'\|'large'`   | small | 可选，开关尺寸大小                                                          | [基本用法](/components/toggle/demo#basic-usage) |
+|     size     |  `'sm'\|''\|'lg'`   | '' | 可选，开关尺寸大小                                                          | [基本用法](/components/toggle/demo#basic-usage) |
 |    color     |            `string`             |  --   | 可选，开关打开时的自定义颜色                                                | [基本用法](/components/toggle/demo#basic-usage) |
 |   checked    |            `boolean`            | false | 可选，开关是否打开，默认关闭                                                | [基本用法](/components/toggle/demo#basic-usage) |
 |  [ngModel]   |            `boolean`            | false | 可选，指定当前是否打开，可双向绑定                                          | [基本用法](/components/toggle/demo#basic-usage) |

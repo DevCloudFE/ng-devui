@@ -39,10 +39,6 @@ import { distinctUntilChanged } from 'rxjs/operators';
                  (backdropClick)="isOpen=false"
                  (positionChange)="onPositionChange($event)">
       <div [@cornerFadeInOut]="isOpen ? datepickerPosition : 'void'" class="devui-date-range-wrapper devui-dropdown-overlay">
-        <div class="devui-date-range-title">
-          <span>{{i18nText?.startDate}}</span>
-          <span>{{i18nText?.endDate}}</span>
-        </div>
         <div class="devui-date-range-picker">
           <d-datepicker-range-single [locale]="locale || i18nLocale" class="devui-date-picker"
                                       [cssClass]="cssClass"
@@ -86,7 +82,8 @@ import { distinctUntilChanged } from 'rxjs/operators';
   styleUrls: ['./date-range-picker.component.scss'],
   animations: [
     cornerFadeInOut
-  ]
+  ],
+  preserveWhitespaces: false,
 })
 export class DateRangePickerComponent implements OnInit, ControlValueAccessor, OnDestroy {
   @Input() locale: string;
@@ -213,7 +210,6 @@ export class DateRangePickerComponent implements OnInit, ControlValueAccessor, O
   ngOnInit() {
     this._minDate = this.minDate ? new Date(this.minDate) : new Date(this.dateConfig.min, 0, 1, 0, 0, 0);
     this._maxDate = this.maxDate ? new Date(this.maxDate) : new Date(this.dateConfig.max, 11, 31, 23, 59, 59);
-    this._dateFormat = this.showTime ? this.dateConfig.format.time : this.dateConfig.format.date;
     this.setI18nText();
     this.updateCdkConnectedOverlayOrigin();
     this.subscribeHoverActions();
@@ -304,7 +300,6 @@ export class DateRangePickerComponent implements OnInit, ControlValueAccessor, O
 
   @HostListener('blur', ['$event'])
   onBlur($event) {
-    this.onTouched();
     this.transUserInputToDatepicker();
   }
 
@@ -395,6 +390,7 @@ export class DateRangePickerComponent implements OnInit, ControlValueAccessor, O
     } else {
       currentReason = reason;
     }
+    this.onTouched();
     this.selectedRangeChange.emit({
       reason: currentReason,
       selectedRange: range

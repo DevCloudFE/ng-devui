@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'd-origin-placeholder',
   templateUrl: './origin-placeholder.component.html',
-  styleUrls: ['./origin-placeholder.component.css']
+  styleUrls: ['./origin-placeholder.component.scss']
 })
 export class OriginPlaceholderComponent {
   list1 =  [

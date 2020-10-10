@@ -4,13 +4,14 @@ import { TreeNode } from 'ng-devui/tree';
 @Component({
   selector: 'd-customize',
   templateUrl: './customize.component.html',
-  styleUrls: ['./customize.component.css']
+  styleUrls: ['./customize.component.scss']
 })
 export class CustomizeComponent {
   currentSelectedNode;
   iconParentOpen = '<span class="icon icon-chevron-down"></span>';
   iconParentClose = '<span class="icon icon-collapse"></span>';
   iconLeaf = '<span></span>';
+  disableMouseEvent = false;
   data2 = [{
     'title': '父节点1',
     'data': { 'type': 'mix' },
@@ -83,5 +84,13 @@ export class CustomizeComponent {
   }
   showNode(node) {
     console.log(node);
+  }
+  onToggle($event, node) {
+    if ($event && node.data.isHover) {
+      this.disableMouseEvent = true;
+    } else {
+      node.data.isHover = false;
+      this.disableMouseEvent = false;
+    }
   }
 }

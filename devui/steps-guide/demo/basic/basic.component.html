@@ -5,7 +5,7 @@
   [steps]="steps"
   [stepIndex]="0"
   [position]="'top'"
-  (currentStepChange)="stepChange($event)"
+  (operateChange)="operateChange($event)"
 >
   Top
 </d-button>
@@ -17,7 +17,7 @@
   [stepIndex]="1"
   [zIndex]="1900"
   [position]="'top-left'"
-  (currentStepChange)="stepChange($event)"
+  (operateChange)="operateChange($event)"
 >
   Top-Left
 </d-button>
@@ -28,7 +28,7 @@
   [steps]="steps"
   [stepIndex]="2"
   [position]="'top-right'"
-  (currentStepChange)="stepChange($event)"
+  (operateChange)="operateChange($event)"
 >
   Top-Right
 </d-button>
@@ -39,7 +39,7 @@
   [steps]="steps"
   [stepIndex]="3"
   [position]="'left'"
-  (currentStepChange)="stepChange($event)"
+  (operateChange)="operateChange($event)"
 >
   Left
 </d-button>
@@ -50,7 +50,7 @@
   [steps]="steps"
   [stepIndex]="4"
   [position]="'right'"
-  (currentStepChange)="stepChange($event)"
+  (operateChange)="operateChange($event)"
 >
   Right
 </d-button>
@@ -61,7 +61,7 @@
   [steps]="steps"
   [stepIndex]="5"
   [position]="'bottom'"
-  (currentStepChange)="stepChange($event)"
+  (operateChange)="operateChange($event)"
 >
   Bottom
 </d-button>
@@ -72,7 +72,7 @@
   [steps]="steps"
   [stepIndex]="6"
   [position]="'bottom-left'"
-  (currentStepChange)="stepChange($event)"
+  (operateChange)="operateChange($event)"
 >
   Bottom-Left
 </d-button>
@@ -84,16 +84,12 @@
   [stepIndex]="7"
   [position]="'bottom-right'"
   (operateChange)="operateChange($event)"
-  (currentStepChange)="stepChange($event)"
 >
   Bottom-Right
 </d-button>
-<d-button (click)="reset()" bsStyle="primary">
-  show
-</d-button>
-<d-button (click)="close()" bsStyle="common">
-  close
-</d-button>
+<d-button (click)="reset()" bsStyle="primary"> show </d-button>
+<d-button (click)="close()" bsStyle="common"> close </d-button>
 <br />
 <br />
-<p>当前操作步骤：{{ currentStep }}</p>
+<p>当前步骤：{{ currentStep }}</p>
+<p>操作输出：{{ currentStepOutPut | json }}</p>

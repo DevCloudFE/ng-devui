@@ -12,7 +12,8 @@ import { Subscription } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     SplitterService
-  ]
+  ],
+  preserveWhitespaces: false,
 })
 
 export class SplitterComponent implements OnChanges, AfterContentInit, OnDestroy {

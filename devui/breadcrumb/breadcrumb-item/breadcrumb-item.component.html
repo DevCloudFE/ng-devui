@@ -1,19 +1,15 @@
 <ng-container *ngIf="showMenu; else breadcrumbContentTpl">
   <span
+    class="devui-breadcrumb-item-with-menu devui-dropdown-no-border devui-dropdown-origin devui-breadcrumb-dropdown-origin"
+    dDropDown
+    dDropDownToggle
+    appendToBody
+    trigger="hover"
+    (toggleEvent)="onToggle($event)"
     [ngClass]="{ 'devui-breadcrumb-item-active': isOpen }"
-    #origin
-    class="devui-dropdown-no-border devui-dropdown-origin devui-breadcrumb-dropdown-origin"
   >
     <ng-template [ngTemplateOutlet]="breadcrumbContentTpl"></ng-template>
-    <i
-      class="devui-breadcrumb-down-icon"
-      dDropDown
-      dDropDownToggle
-      appendToBody
-      [alignOrigin]="origin"
-      [closeScope]="'blank'"
-      (toggleEvent)="onToggle($event)"
-    >
+    <i class="devui-breadcrumb-down-icon">
       <svg
         width="5px"
         height="16px"
@@ -31,16 +27,16 @@
           ></polygon>
         </g>
       </svg>
-      <div dDropDownMenu class="devui-dropdown-menu devui-dropdown-overlay">
-        <ng-template
-          [ngTemplateOutlet]="customMenuTemplate ? customMenuTemplate : dropDownMenuTpl"
-          [ngTemplateOutletContext]="{
-            $implicit: this
-          }"
-        >
-        </ng-template>
-      </div>
     </i>
+    <div dDropDownMenu class="devui-dropdown-menu devui-dropdown-overlay">
+      <ng-template
+        [ngTemplateOutlet]="customMenuTemplate ? customMenuTemplate : dropDownMenuTpl"
+        [ngTemplateOutletContext]="{
+          $implicit: this
+        }"
+      >
+      </ng-template>
+    </div>
   </span>
 </ng-container>
 
@@ -79,14 +75,12 @@
   <ng-template
     [ngTemplateOutlet]="breadCrumbComponent.separatorIcon ? breadCrumbComponent.separatorIcon : defaultSeparator"
     [ngTemplateOutletContext]="{
-    $implicit: this
-  }"
+      $implicit: this
+    }"
   >
   </ng-template>
 </span>
 
 <ng-template #defaultSeparator>
-  <span class="devui-breadcrumb-separator">
-    /
-  </span>
+  <span class="devui-breadcrumb-separator"> / </span>
 </ng-template>

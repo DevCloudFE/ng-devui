@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
     selector: 'd-config',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
     templateUrl: './config.component.html'
 })
 export class ConfigComponent {
-    imgSrc = require('logo.svg');
+    imgSrc = environment.production ? './components/assets/logo.svg' : './assets/logo.svg';
 }

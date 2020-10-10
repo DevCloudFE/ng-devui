@@ -12,6 +12,7 @@ import { ModalComponent } from './modal.component';
   selector: 'd-modal-container',
   templateUrl: './modal-container.component.html',
   styleUrls: ['./modal-container.component.scss'],
+  preserveWhitespaces: false,
 })
 export class ModalContainerComponent implements OnInit {
   @Input() maxHeight: string;

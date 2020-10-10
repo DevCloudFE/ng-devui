@@ -1,12 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { ThemeService, ThemeServiceFollowSystemOn, ThemeServiceFollowSystemOff, Theme } from 'ng-devui/theme';
 import { Subscription } from 'rxjs';
-import { greenLightTheme } from './theme-data-more';
 
 @Component({
   selector: 'app-theme-picker',
   templateUrl: './theme-picker.component.html',
-  styleUrls: ['./theme-picker.component.scss']
+  styleUrls: ['./theme-picker.component.scss'],
 })
 export class ThemePickerComponent implements OnInit, OnDestroy {
   themeService: ThemeService;
@@ -16,7 +15,9 @@ export class ThemePickerComponent implements OnInit, OnDestroy {
   themePrefix: 'devui'|'green' | string = 'devui';
   themePrefersColorScheme: boolean;
   sub: Subscription;
-  constructor() {}
+  constructor(
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit() {
     this.themeService = window['devuiThemeService'];
@@ -25,6 +26,7 @@ export class ThemePickerComponent implements OnInit, OnDestroy {
     this.themePrefix = this.theme.split('-')[0];
     this.themeMode = this.themes[this.theme].isDark ? 'dark' : 'light';
     this.themePrefersColorScheme = this.getThemePrefersColorSchemeOn();
+    this.cdr.detectChanges();
     if (this.themePrefersColorScheme) {
       this.themePrefersColorSchemeChange(true);
     }

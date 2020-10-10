@@ -20,12 +20,6 @@ svg.svg-icon-search path {
 .devui-search {
   position: relative;
 
-  &:hover {
-    .devui-input {
-      border-color: $devui-form-control-line-hover;
-    }
-  }
-
   .devui-input {
     height: 28px;
     padding: 5px 10px;

@@ -1,5 +1,5 @@
 <section>
-  <d-splitter [orientation]="orientation" [splitBarSize]="splitBarSize" style="border: 1px solid #e3e5e9;" [showCollapseButton]="true">
+  <d-splitter class="splitter-border" [orientation]="orientation" [splitBarSize]="splitBarSize" [showCollapseButton]="true">
     <d-splitter-pane
       [shrink]="true"
       [size]="size"
@@ -19,7 +19,7 @@
         <i class="title-icon {{ item.icon }}"></i><span class="title">{{ item.title }}</span>
       </ng-template>
 
-      <ul style="padding: 10px 0;" *ngIf="isPaneShrink">
+      <ul style="padding: 10px 0" *ngIf="isPaneShrink">
         <li
           *ngFor="let item of menu"
           class="title-icon {{ item.icon ? item.icon : 'icon-dot-status' }}"

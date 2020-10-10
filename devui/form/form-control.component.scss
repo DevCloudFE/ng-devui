@@ -18,7 +18,44 @@
 .devui-form-control-extra-info {
   font-size: 12px;
   color: $devui-aide-text;
-  line-height: 18px;
-  margin-top: $content-spacing;
+  min-height: 20px;
+  line-height: 1.5;
   text-align: justify;
+}
+
+.devui-form-control-inner-content {
+  line-height: 1;
+}
+
+.devui-form-message {
+  display: inline-block;
+  font-size: 12px;
+  min-height: 20px;
+  padding-left: 1px;
+  color: $devui-danger;
+
+  .devui-form-message-text {
+    display: inline-flex;
+    align-items: center;
+    line-height: 1.5;
+    padding: 1px 0;
+
+    .devui-form-message-svg {
+      line-height: 1;
+    }
+  }
+
+  .devui-icon.devui-icon-error {
+    margin-right: 4px;
+  }
+
+  .devui-icon.devui-icon-error > g {
+    & > path {
+      fill: $devui-danger;
+    }
+
+    & > circle {
+      fill: $devui-light-text;
+    }
+  }
 }

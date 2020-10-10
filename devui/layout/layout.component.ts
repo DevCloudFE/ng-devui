@@ -5,6 +5,7 @@ import { AsideComponent } from './elements/aside.component';
   selector: 'd-layout',
   template: '<ng-content></ng-content>',
   styleUrls: ['./layout.component.scss'],
+  preserveWhitespaces: false,
 })
 export class LayoutComponent {
   @ContentChildren(AsideComponent) listOfSideBarComponent: QueryList<AsideComponent>;

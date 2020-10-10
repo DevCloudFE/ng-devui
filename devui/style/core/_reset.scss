@@ -100,3 +100,7 @@ body > * ::-webkit-scrollbar-thumb {
 body > * ::-webkit-scrollbar-thumb:hover {
   background-color: $devui-placeholder; // TODO: Color-Question
 }
+
+body > * ::-webkit-scrollbar-corner {
+  background-color: transparent;
+}

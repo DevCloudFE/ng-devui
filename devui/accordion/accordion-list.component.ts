@@ -8,6 +8,7 @@ import { AccordionMenuComponent } from './accordion-menu.component';
   selector: 'd-accordion-list',
   templateUrl: './accordion-list.component.html',
   encapsulation: ViewEncapsulation.None,
+  preserveWhitespaces: false,
 })
 export class AccordionListComponent implements OnInit, OnDestroy {
   @Input() data: Array<AccordionMenuItem>;

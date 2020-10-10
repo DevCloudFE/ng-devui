@@ -986,8 +986,6 @@ describe('data-table column', () => {
       expect(ageText).toBe('25');
     }));
 
-    // TODO: select has problem of ExpressionChangedAfterItHasBeenCheckedError
-
     it('should scroll cancel edit status', fakeAsync(() => {
       fixture.detectChanges();
       const lastNameEditDebugEl = debugEl.query(By.css('.devui-table tbody tr .cell-editable'));

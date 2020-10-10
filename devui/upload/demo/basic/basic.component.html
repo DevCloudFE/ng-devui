@@ -1,4 +1,4 @@
-<section style="width: 50%;">
+<section style="width: 50%">
   <h4>单文件</h4>
   <d-single-upload
     #singleupload
@@ -17,7 +17,7 @@
   <d-single-upload
     #singleuploadDrag
     [enableDrop]="true"
-    [fileOptions]="fileOptions"
+    [fileOptions]="fileOptions2"
     [uploadedFiles]="uploadedFiles"
     [uploadOptions]="uploadOptions"
     [placeholderText]="'请拖动文件上传'"
@@ -36,7 +36,7 @@
   </div>
   <h4>自动上传</h4>
   <d-single-upload
-    [fileOptions]="fileOptions"
+    [fileOptions]="fileOptions3"
     [uploadOptions]="uploadedFiles"
     (successEvent)="onSuccess($event)"
     (errorEvent)="onError($event)"

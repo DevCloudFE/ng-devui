@@ -52,7 +52,8 @@ import { Subscription } from 'rxjs';
   animations: [
     cornerFadeInOut
   ],
-  styleUrls: ['./datepicker-cdk-overlay.component.scss']
+  styleUrls: ['./datepicker-cdk-overlay.component.scss'],
+  preserveWhitespaces: false,
 })
 export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDestroy, ControlValueAccessor {
   @Input() appendToBodyDirections: Array<AppendToBodyDirection | ConnectedPosition> = [
@@ -174,7 +175,6 @@ export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDes
   ngOnInit() {
     this._minDate = this.minDate ? new Date(this.minDate) : new Date(this.dateConfig.min, 0, 1, 0, 0, 0);
     this._maxDate = this.maxDate ? new Date(this.maxDate) : new Date(this.dateConfig.max, 11, 31, 23, 59, 59);
-    this._dateFormat = this.showTime ? this.dateConfig.format.time : this.dateConfig.format.date;
     this.setPositions();
     this.setI18nText();
     this.updateCdkConnectedOverlayOrigin();
@@ -266,6 +266,7 @@ export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDes
       selectDate = null;
     }
     this.onChange(selectDate); // 这行代码能触发ngModel绑定的变量值发生变化
+    this.onTouched();
     this.selectedDateChange.emit({
       reason: dateReason,
       selectedDate: this.selectedDate
@@ -274,7 +275,6 @@ export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDes
 
   @HostListener('blur', ['$event'])
   onBlur($event) {
-    this.onTouched();
     if (!this.isClickingCmp) {
       this.transUserInputToDatepicker();
     }
@@ -375,6 +375,7 @@ export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDes
     }
     this.writeValue(null);
     this.onChange(null);
+    this.onTouched();
     const currentReason = typeof reason === 'number' ? reason : SelectDateChangeReason.custom;
     this.selectedDateChange.emit({
       reason: currentReason,

@@ -299,8 +299,41 @@
   }
 }
 
+.devui-table.header-bg ::ng-deep {
+  thead {
+    tr {
+      background-color: $devui-list-item-strip-bg;
+    }
+  }
+}
+
+.devui-table.table-bordered ::ng-deep {
+  tr {
+    td:first-child {
+      border-left: 1px solid $devui-dividing-line;
+    }
+
+    td {
+      border-right: 1px solid $devui-dividing-line;
+    }
+  }
+
+  thead {
+    tr {
+      th:first-child {
+        border-left: 1px solid $devui-dividing-line;
+      }
+
+      th {
+        border-top: 1px solid $devui-dividing-line;
+        border-right: 1px solid $devui-dividing-line;
+      }
+    }
+  }
+}
+
 .devui-table.table-hover ::ng-deep {
-  tbody > tr:hover {
+  tbody > tr:not(.table-row-selected):hover {
     background: $devui-list-item-hover-bg;
   }
 }
@@ -402,7 +435,7 @@
 
   /* filter: alpha(opacity=80); */
   background-color: white;
-  box-shadow: 0 2px 4px 0 var(--devui-text-boxshadow, rgba(41, 48, 64, 0.2));
+  box-shadow: 0 2px 4px 0 var(--dark-1-boxshadow, rgba(41, 48, 64, 0.2));
   list-style: none;
 }
 

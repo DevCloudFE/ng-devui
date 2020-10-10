@@ -1,0 +1,10 @@
+.handle-group {
+  display: inline-flex;
+  align-items: center;
+
+  & d-tabs {
+    display: inline-block;
+  }
+
+  margin-right: 20px;
+}

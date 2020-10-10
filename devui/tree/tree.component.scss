@@ -19,7 +19,6 @@ $keyframe-blue: #5e7ce0;
   line-height: 1;
   white-space: nowrap;
   position: relative;
-  z-index: 0;
 
   .devui-tree-node__content {
     display: inline-flex;
@@ -28,7 +27,13 @@ $keyframe-blue: #5e7ce0;
     padding-right: 10px;
     width: 100%;
 
-    &:hover {
+    &.active {
+      background-color: $devui-list-item-selected-bg;
+      text-decoration: none;
+      border-color: transparent;
+    }
+
+    &:not(.active):hover {
       background-color: $devui-list-item-hover-bg;
     }
   }
@@ -69,13 +74,6 @@ $keyframe-blue: #5e7ce0;
 
     &:not(.disabled) {
       cursor: pointer;
-    }
-
-    &.active {
-      background-color: $devui-list-item-selected-bg;
-      color: $devui-brand;
-      text-decoration: none;
-      border-color: transparent;
     }
   }
 
@@ -122,6 +120,16 @@ $keyframe-blue: #5e7ce0;
       display: inline-block;
       height: 16px;
       line-height: 16px;
+
+      &:hover {
+        svg g path {
+          fill: $devui-icon-fill-active;
+        }
+
+        svg g rect {
+          stroke: $devui-icon-fill-active;
+        }
+      }
     }
 
     &:not(.disabled) {

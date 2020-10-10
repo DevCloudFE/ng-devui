@@ -19,7 +19,8 @@ import { SizeComponent } from './size/size.component';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
-
+import { GroupsComponent } from './groups/groups.component';
+import { DropDownModule } from 'ng-devui/dropdown';
 @NgModule({
   imports: [
     CommonModule,
@@ -28,6 +29,7 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
     DevUICodeboxModule,
     DevUIApiModule,
     DDemoNavModule,
+    DropDownModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo' },
       { path: 'demo', component: ButtonDemoComponent},
@@ -48,7 +50,8 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
     TextComponent,
     CombinationComponent,
     AutofocusComponent,
-    SizeComponent
+    SizeComponent,
+    GroupsComponent,
   ],
   entryComponents: [
     ButtonDemoComponent,

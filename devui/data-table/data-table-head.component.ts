@@ -10,7 +10,8 @@ const documentElement = document.documentElement;
 @Component({
   selector: 'd-data-table-head,[dDataTableHead]',
   templateUrl: './data-table-head.component.html',
-  styleUrls: ['./data-table-head.component.scss']
+  styleUrls: ['./data-table-head.component.scss'],
+  preserveWhitespaces: false,
 })
 export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy, DoCheck {
   @Input() checkable: boolean;

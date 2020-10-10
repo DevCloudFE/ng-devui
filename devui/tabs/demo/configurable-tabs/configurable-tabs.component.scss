@@ -16,8 +16,9 @@
   cursor: pointer;
 }
 
-.tabs-menu-container li:hover {
+.tabs-menu-container li:not(.menu-tab-active):hover {
   background: $devui-list-item-hover-bg;
+  color: $devui-list-item-hover-text;
 }
 
 .tabs-menu-container li:hover a {
@@ -51,8 +52,8 @@ a:focus {
 }
 
 .menu-tab-active {
-  background: $devui-list-item-selected-bg;
-  color: $devui-brand;
+  background: $devui-list-item-active-bg;
+  color: $devui-list-item-active-text;
 }
 
 li {

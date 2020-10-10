@@ -17,12 +17,12 @@ export class PaginationDemoComponent {
   additionalSource: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./additional/additional.component.html')},
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./additional/additional.component.ts')},
-    {title: 'CSS', language: 'css', code:  require('!!raw-loader!./additional/additional.component.css')}
+    {title: 'SCSS', language: 'css', code:  require('!!raw-loader!./additional/additional.component.css')}
   ];
   liteSource: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./lite/lite.component.html')},
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./lite/lite.component.ts')},
-    {title: 'CSS', language: 'css', code:  require('!!raw-loader!./lite/lite.component.css')}
+    {title: 'SCSS', language: 'css', code:  require('!!raw-loader!./lite/lite.component.scss')}
   ];
   widgetsSource: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./widgets/widgets.component.html')},

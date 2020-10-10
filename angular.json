@@ -58,6 +58,9 @@
             },
             "es5": {
               "tsConfig": "src/tsconfig.app.es5.json"
+            },
+            "separate": {
+              "tsConfig": "src/tsconfig.app.separate.json"
             }
           }
         },
@@ -72,6 +75,9 @@
             },
             "es5": {
               "browserTarget": "devui:build:es5"
+            },
+            "separate": {
+              "browserTarget": "devui:build:separate"
             }
           }
         },

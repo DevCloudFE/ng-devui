@@ -1,6 +1,22 @@
 @import '../style/theme/color';
 @import '../style/core/font';
 
+.edge,
+.ie,
+.firefox {
+  &.devui-tree-select {
+    &:hover {
+      .clear {
+        right: 20px;
+      }
+    }
+
+    .devui-select-chevron-icon {
+      right: 20px;
+    }
+  }
+}
+
 .devui-tree-select {
   position: relative;
   width: 100%;
@@ -32,6 +48,7 @@
       right: 12px;
       top: calc((100% - 14px) / 2);
       cursor: pointer;
+      z-index: 1;
 
       &::after,
       &::before {
@@ -57,6 +74,10 @@
           background-color: $devui-icon-fill-active;
         }
       }
+    }
+
+    .allow-clear {
+      opacity: 0;
     }
   }
 
@@ -108,41 +129,7 @@
 .devui-tree-select.devui-options-container {
   width: 100%;
   color: $devui-text;
-  padding: 5px 0;
-
-  .devui-tree ::ng-deep .devui-tree-node.devui-operable-tree-node {
-    .devui-tree-node__content {
-      margin-left: 10px;
-    }
-
-    & > .devui-tree-node__children::before {
-      left: calc(0.8em + 9px); // 上面增加了margin需要加到原先的计算中
-    }
-
-    &.devui-tree-node__open > .devui-tree-node__content::after {
-      left: 9px; // 上面增加了margin需要加到原先的计算中
-    }
-
-    & .active {
-      background-color: transparent;
-    }
-
-    &.selected {
-      position: relative;
-      min-width: calc(100% - 1.2em); // 当数据无法铺满一行时通过最小宽度使其铺满
-
-      &::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: $devui-list-item-selected-bg;
-        z-index: -1;
-      }
-    }
-  }
+  padding: 4px 0 4px 8px;
 
   .devui-no-data-tip {
     user-select: none;

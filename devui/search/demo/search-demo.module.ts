@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { SearchModule } from '../search.module';
 import { SearchDemoComponent } from './search-demo.component';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
+import { FormModule } from 'ng-devui';
 import { BasicComponent } from './basic/basic.component';
 import { NgmodelComponent } from './ngmodel/ngmodel.component';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
@@ -20,6 +21,7 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
     DevUICodeboxModule,
     DevUIApiModule,
     DDemoNavModule,
+    FormModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo' },
       { path: 'demo', component: SearchDemoComponent},

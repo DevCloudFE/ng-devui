@@ -2,6 +2,7 @@ import {
   Injectable,
   ComponentFactoryResolver,
   ComponentRef,
+  Renderer2, RendererFactory2
 } from '@angular/core';
 import {ModalComponent} from './modal.component';
 import {OverlayContainerRef} from 'ng-devui/overlay-container';
@@ -12,9 +13,11 @@ import {ModalContainerComponent} from './modal-container.component';
 @Injectable()
 export class DialogService {
   contentRef: ComponentRef<any>;
+  private renderer: Renderer2;
 
   constructor(private componentFactoryResolver: ComponentFactoryResolver,
-              private overlayContainerRef: OverlayContainerRef) {
+    private overlayContainerRef: OverlayContainerRef, private rendererFactory: RendererFactory2) {
+      this.renderer = this.rendererFactory.createRenderer(null, null);
   }
 
   open({
@@ -86,6 +89,15 @@ export class DialogService {
     };
 
     modalRef.instance.onHidden = () => {
+      if (!bodyScrollable && modalRef.instance.documentOverFlow) {
+        this.renderer.removeStyle(document.body, 'top');
+        this.renderer.removeStyle(document.body, 'left');
+        this.renderer.removeClass(document.body, 'devui-body-scrollblock');
+        document.documentElement.scrollTop = modalRef.instance.scrollTop;
+        document.body.scrollTop = modalRef.instance.scrollTop;
+        document.documentElement.scrollLeft = modalRef.instance.scrollLeft;
+        document.body.scrollLeft = modalRef.instance.scrollLeft;
+      }
       if (onClose) {
         onClose();
       }

@@ -6,23 +6,23 @@
 
 <h4>禁用状态</h4>
 <div>
-  <d-toggle disabled [size]="'small'"></d-toggle>
-  <d-toggle [checked]="true" [disabled]="true" [size]="'small'"></d-toggle>
+  <d-toggle [disabled]="true"></d-toggle>
+  <d-toggle [checked]="true" [disabled]="true"></d-toggle>
 </div>
 
-<h4>双向绑定</h4>
+<h4>双向绑定(小尺寸)</h4>
 <div>
-  <d-toggle [(ngModel)]="enable" [beforeChange]="beforeChange" (change)="onChange2($event)" [size]="'medium'"></d-toggle>
+  <d-toggle [(ngModel)]="enable" [beforeChange]="beforeChange" (change)="onChange2($event)" [size]="'sm'"></d-toggle>
   {{ enable }}
 </div>
 
-<h4>回调事件</h4>
+<h4>回调事件(标准)</h4>
 <div>
-  <d-toggle (change)="onChange($event)" [size]="'large'"></d-toggle>
+  <d-toggle (change)="onChange($event)"></d-toggle>
   <div>Change count: {{ count }}</div>
 </div>
 
-<h4>自定义样式</h4>
+<h4>自定义样式(大尺寸)</h4>
 <div>
-  <d-toggle [checked]="true" [size]="'medium'" [color]="'#FECC55'"></d-toggle>
+  <d-toggle [checked]="true" [size]="'lg'" [color]="'#FECC55'"></d-toggle>
 </div>

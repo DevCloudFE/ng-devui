@@ -3,6 +3,7 @@ import { AccordionBaseItem, AccordionOptions } from './accordion.type';
 import { AccordionBaseComponent } from './accordion-base-component.class';
 
 @Directive()
+// tslint:disable-next-line: directive-class-suffix
 export abstract class AccordionBaseItemComponent<T extends AccordionBaseItem> extends AccordionBaseComponent<T> {
   get itemTemplate() {
     return this.accordion.itemTemplate;

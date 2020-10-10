@@ -293,7 +293,8 @@
   border-bottom: none;
 }
 
-.devui-month-view .devui-table tfoot {
+.devui-month-view .devui-table tfoot,
+.devui-custom-area {
   border-top: 1px solid $devui-area;
 }
 

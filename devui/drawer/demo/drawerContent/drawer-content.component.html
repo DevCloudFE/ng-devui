@@ -5,17 +5,12 @@
     <span (click)="close($event)" title="关闭" class="icon icon-close"> </span>
   </div>
   <ul class="list-group" [style.margin-top.px]="20">
-    <li
-      class="list-group-item"
-      *ngFor="let item of items; let i = index"
-      [style.border]="'1px solid #f3f3f3'"
-      [style.padding]="'16px 25px'"
-    >
+    <li class="list-group-item" *ngFor="let item of items; let i = index">
       {{ item }}
     </li>
   </ul>
-  <div [style.margin-left]="'27px'">
-    <input type="text" />
+  <div class="operation-area">
+    <input #widthInput placeholder="Please input a number" dTextInput type="text" />
+    <d-button (btnClick)="changeWidth(widthInput.value)">改变宽度</d-button>
   </div>
-  <d-button [style.margin]="'10px 0 0 27px'" (btnClick)="changeWidth()">改变宽度</d-button>
 </div>

@@ -1,9 +1,11 @@
-<section>
-  <form dForm [layout]="'vertical'">
+<section style="margin-left: 40px">
+  <form dForm [layout]="'vertical'" ngForm>
     <d-form-item>
       <d-form-label [required]="true" [hasHelp]="true" [helpTips]="'这是计划名，计划名字，计划名'">计划名</d-form-label>
       <d-form-control>
-        <input dTextInput name="userName" />
+        <div>
+          <input dTextInput autocomplete="off" name="userName" />
+        </div>
       </d-form-control>
     </d-form-item>
     <d-form-item>
@@ -74,7 +76,7 @@
       </d-form-control>
     </d-form-item>
     <d-form-operation>
-      <d-button bsStyle="stress" class="mr-element-spacing" circled="true" style="margin-right: 4px;">提交</d-button>
+      <d-button bsStyle="stress" class="mr-element-spacing" circled="true" style="margin-right: 4px">提交</d-button>
       <d-button bsStyle="common" circled="true">取消</d-button>
     </d-form-operation>
   </form>

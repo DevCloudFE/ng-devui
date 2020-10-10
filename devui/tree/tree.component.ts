@@ -26,7 +26,8 @@ import { takeUntil, throttleTime } from 'rxjs/operators';
 @Component({
   selector: 'd-tree',
   templateUrl: './tree.component.html',
-  styleUrls: ['./tree.component.scss']
+  styleUrls: ['./tree.component.scss'],
+  preserveWhitespaces: false,
 })
 export class TreeComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
   treeFactory: TreeFactory;

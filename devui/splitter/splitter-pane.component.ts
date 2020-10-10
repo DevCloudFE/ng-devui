@@ -7,6 +7,7 @@ import { SplitterService } from './splitter.service';
   templateUrl: './splitter-pane.component.html',
   styleUrls: ['./splitter-pane.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  preserveWhitespaces: false,
 })
 
 export class SplitterPaneComponent implements OnChanges, AfterViewChecked {

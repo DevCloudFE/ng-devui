@@ -10,7 +10,15 @@ import { DrawerContentComponent } from './demo/drawerContent/drawer-content.comp
 
 @Component({
   selector: 'd-basic',
-  template: `<d-button>close</d-button>`
+  template: `
+    <div class="placeHolder"></div>
+    <d-button>close</d-button>
+  `,
+  styles: [`
+    .placeHolder {
+      height: 2000px;
+    }
+  `]
 })
 class TestDrawerComponent {
   results: IDrawerOpenResult;
@@ -88,7 +96,7 @@ describe('Drawer', () => {
     fixture.detectChanges();
 
     const bodyElement = document.querySelector('body') as HTMLElement;
-    expect(bodyElement.className).toContain('modal-open');
+    expect(bodyElement.className).toContain('devui-body-scrollblock');
 
     const drawerElement = document.querySelector('.drawer') as HTMLElement;
     expect(drawerElement.style.zIndex).toBe('1000');
@@ -103,7 +111,7 @@ describe('Drawer', () => {
     tick();
     fixture.detectChanges();
     flush();
-    expect(bodyElement.className).not.toContain('modal-open');
+    expect(bodyElement.className).not.toContain('devui-body-scrollblock');
   }));
 
   it('should create with different styles', fakeAsync(() => {

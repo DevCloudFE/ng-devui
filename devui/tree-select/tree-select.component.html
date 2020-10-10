@@ -1,4 +1,4 @@
-<div class="devui-tree-select">
+<div class="devui-tree-select {{ userAgent }}">
   <d-popper-component
     [(open)]="isOpen"
     [fluidPopper]="!width"
@@ -85,7 +85,7 @@
           xmlns="http://www.w3.org/2000/svg"
           xmlns:xlink="http://www.w3.org/1999/xlink"
           class="svg-icon-search"
-          style="vertical-align: middle;"
+          style="vertical-align: middle"
         >
           <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
             <g transform="translate(-1.000000, -1.000000)">
@@ -134,7 +134,7 @@
     </div>
   </d-popper-component>
   <div [ngClass]="{ disabled: disabled, clear: allowClear }" (click)="$event.stopPropagation(); $event.preventDefault(); clearAll()"></div>
-  <span class="devui-select-chevron-icon" [class.open]="isOpen" [ngClass]="{ disabled: disabled, clear: allowClear }">
+  <span class="devui-select-chevron-icon" [class.open]="isOpen" [ngClass]="{ disabled: disabled, 'allow-clear': allowClear }">
     <svg
       width="8px"
       height="5px"

@@ -1,4 +1,4 @@
-@import '../../../style/theme/color';
+@import '~ng-devui/styles-var/devui-var.scss';
 @import '../../../style/theme/shadow';
 
 .basic-usage {
@@ -13,7 +13,7 @@
 d-header {
   text-align: center;
   line-height: 40px;
-  background-color: #333854; // TODO: color not variable
+  background-color: $devui-base-bg-dark; // TODO: color not variable
   color: $devui-light-text;
 }
 
@@ -24,13 +24,13 @@ d-aside {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: $devui-global-bg;
+  background-color: $devui-area;
 }
 
 d-content {
   line-height: 200px;
   text-align: center;
-  background-color: $devui-base-bg;
+  background-color: $devui-global-bg-normal;
 }
 
 d-footer {

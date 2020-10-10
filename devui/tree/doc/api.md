@@ -66,6 +66,7 @@
 |  virtualScrollHeight  |                   `string`                   |     '800px'     |                                                  可选，设置虚拟滚动时树的高度                                                  | [大数据量可操作树](/components/tree/demo#virtual-scroll)        |
 |      minBufferPx      |                   `number`                   |       760       | 可选，设置虚拟滚动时的最小 buffer 尺寸，参考https://material.angular.io/cdk/scrolling/overview#scrolling-over-fixed-size-items | [大数据量可操作树](/components/tree/demo#virtual-scroll)        |
 |      maxBufferPx      |                   `number`                   |      1140       | 可选，设置虚拟滚动时的最大 buffer 尺寸，参考https://material.angular.io/cdk/scrolling/overview#scrolling-over-fixed-size-items | [大数据量可操作树](/components/tree/demo#virtual-scroll)        |
+|      disableMouseEvent      |                   `boolean`                   |      false       | 可选，设置是否禁用鼠标的移入移出事件，主要用于兼容使用appendTobody时无法悬停到下拉框内容的情况 | [自定义图标](/components/tree/demo#custom-icon)        |
 
 ## d-operableTree 事件
 

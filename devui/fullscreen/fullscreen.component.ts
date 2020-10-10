@@ -6,7 +6,8 @@ import { DEFAULT_ZINDEX, DEFAULT_MODE, ESC_KEYCODE } from './fullscreen.config';
 @Component({
   selector: 'd-fullscreen',
   templateUrl: './fullscreen.component.html',
-  styleUrls: [ './fullscreen.component.scss' ]
+  styleUrls: [ './fullscreen.component.scss' ],
+  preserveWhitespaces: false,
 })
 export class FullscreenComponent implements OnInit, OnDestroy, AfterViewInit {
   private currentTarget: HTMLElement;
@@ -25,6 +26,8 @@ export class FullscreenComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit() {
     document.addEventListener('fullscreenchange', this.onFullScreenChange);
+    document.addEventListener('MSFullscreenChange', this.onFullScreenChange);
+    document.addEventListener('webkitfullscreenchange', this.onFullScreenChange);
     document.addEventListener('keydown', this.handleKeyDown);
   }
 
@@ -52,9 +55,9 @@ export class FullscreenComponent implements OnInit, OnDestroy, AfterViewInit {
     } else if (docElement.mozRequestFullScreen) {
       fullscreenLaunch = docElement.mozRequestFullScreen();
     } else if (docElement.webkitRequestFullScreen) {
-      fullscreenLaunch = docElement.webkitRequestFullScreen();
+      fullscreenLaunch = Promise.resolve(docElement.webkitRequestFullScreen());
     } else if (docElement.msRequestFullscreen) {
-      fullscreenLaunch = docElement.msRequestFullscreen();
+      fullscreenLaunch = Promise.resolve(docElement.msRequestFullscreen());
     }
     return await fullscreenLaunch.then(() => !!this.doc.fullscreenElement);
   }
@@ -66,9 +69,9 @@ export class FullscreenComponent implements OnInit, OnDestroy, AfterViewInit {
     } else if (doc.mozCancelFullScreen) {
       fullscreenExit = doc.mozCancelFullScreen();
     } else if (doc.webkitCancelFullScreen) {
-      fullscreenExit = doc.webkitCancelFullScreen();
+      fullscreenExit = Promise.resolve(doc.webkitCancelFullScreen());
     } else if (doc.msExitFullscreen) {
-      fullscreenExit = doc.msExitFullscreen();
+      fullscreenExit = Promise.resolve(doc.msExitFullscreen());
     }
     return await fullscreenExit.then(() => !!this.doc.fullscreenElement);
   }
@@ -76,7 +79,7 @@ export class FullscreenComponent implements OnInit, OnDestroy, AfterViewInit {
   private onFullScreenChange = (event) => {
     if (this.currentTarget) {
       const targetElement: HTMLElement = this.currentTarget;
-      if (this.doc.fullscreenElement) { // 进入全屏
+      if (this.doc.fullscreenElement || this.doc.msFullscreenElement || this.doc.webkitFullscreenElement) { // 进入全屏
         this.addFullScreenStyle();
         this.launchNormalFullscreen(targetElement);
       } else { // 退出全屏
@@ -85,7 +88,7 @@ export class FullscreenComponent implements OnInit, OnDestroy, AfterViewInit {
         this.exitNormalFullscreen(targetElement);
       }
       // F11退出全屏时，需要将全屏状态传出去
-      const isFullscreen = !!this.doc.fullscreenElement;
+      const isFullscreen = !!(this.doc.fullscreenElement || this.doc.msFullscreenElement || this.doc.webkitFullscreenElement);
       this.fullscreenLaunch.emit({
         isFullscreen
       });
@@ -109,7 +112,7 @@ export class FullscreenComponent implements OnInit, OnDestroy, AfterViewInit {
       }
     } else {
       this.currentTarget = targetElement;
-      if (this.doc.fullscreenElement) {
+      if (this.doc.fullscreenElement || this.doc.msFullscreenElement || this.doc.webkitFullscreenElement) {
         isFullscreen = await this.exitImmersiveFullScreen(this.doc);
       } else {
         isFullscreen = await this.launchImmersiveFullScreen(this.doc.documentElement);

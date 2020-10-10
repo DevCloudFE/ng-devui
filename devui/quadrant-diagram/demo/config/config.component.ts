@@ -10,7 +10,7 @@ import {
 @Component({
   selector: 'd-config',
   templateUrl: './config.component.html',
-  styleUrls: ['./config.component.css']
+  styleUrls: ['./config.component.scss']
 })
 export class ConfigComponent implements OnInit {
   xWeight = 2;

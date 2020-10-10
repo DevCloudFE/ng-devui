@@ -1,5 +1,5 @@
-@import '../../../style/theme/color';
+@import '~ng-devui/styles-var/devui-var.scss';
 
 .custom-tabs {
-  background-color: $devui-embed-search-bg !important;
+  background-color: $devui-list-item-selected-bg !important;
 }

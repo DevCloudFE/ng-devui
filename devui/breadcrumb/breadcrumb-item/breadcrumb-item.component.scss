@@ -115,3 +115,7 @@ span.devui-breadcrumb-dropdown-origin {
 d-search {
   width: 100%;
 }
+
+.devui-breadcrumb-item-with-menu .devui-breadcrumb-item {
+  cursor: pointer;
+}

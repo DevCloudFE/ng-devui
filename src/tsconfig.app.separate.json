@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.app.json",
+  "compilerOptions": {
+    "paths": {
+      "ng-devui/shared": ["./devui/shared"],
+      "ng-devui/shared/*": ["./devui/shared/*"],
+      "ng-devui": ["./publish"],
+      "ng-devui/*": ["./publish/*"]
+    }
+  }
+}

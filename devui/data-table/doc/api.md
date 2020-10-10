@@ -7,7 +7,6 @@
 |      scrollable       |           `boolean`           | --     |                       可选，表格在超出容器时，是否可以通过滚动查看表格内容                       | [表格交互](/components/datatable/demo#table-interaction)               |
 |       maxWidth        |          `string px`          | --     |                              可选，限制表格最大宽度，默认撑满父容器                              |
 |       maxHeight       |          `string px`          | --     |                                     可选，限制最大高度，默认                                     | [表头固定](/components/datatable/demo#table-fixing)                    |
-|         type          | `'striped'、'borderless'、''` | ''     |      可选，表格类型，striped表示斑马纹类型，borderless表示表格内容没有分割线、默认普通表格       | [基本用法](/components/datatable/demo#basic-usage)                     |
 |  rowHoveredHighlight  |           `boolean`           | true   |                              可选，鼠标悬浮行时是否高亮,默认高亮认                               |
 | generalRowHoveredData |           `boolean`           | false  |      可选，使用配置column方式实现table,鼠标悬浮行时$hovered是否记录到rowItem中，默认不记录       |
 |       cssClass        |           `string`            | --     |                                       可选，自定义表格样式                                       |
@@ -37,7 +36,10 @@
 |        timeout        |           `number`            | 300    | 可选，同时绑定单击、双击事件时，用于区分点击的时间间隔, 默认300ms，两个事件不同时使用可以指定为0 |
 |  headerExpandConfig   |      `TableExpandConfig`      | --     |                                   可选，配置header下的额外内容                                   | [扩展行](/components/datatable/demo#expand-row)                        |
 |    beforeCellEdit     |           `Promise`           | --     |         可选，单元格编辑前的拦截方法, <br>resolve(extraOptions)将更新该列的extraOptions          | [编辑单元格](/components/datatable/demo#edit-cell)                     |
-
+|    headerBg     |           `boolean`           | false     |         可选，表头是否显示背景色         | [表格样式](/components/datatable/demo#mutil-styles)                     |
+|    tableLayout     |           `'fixed'、'auto'`           | `'fixed'`     |         可选，表格布局         | [表格样式](/components/datatable/demo#mutil-styles)                     |
+|    borderType     |           `''、'bordered'、'borderless'`           | `''`     |         可选，表格边框类型，默认有行边框，bordered：全边框，borderless：无边框         | [表格样式](/components/datatable/demo#mutil-styles)                     |
+|    striped     |           `boolean`           | false     |         可选，表格是否展示为斑马纹间隔         | [表格样式](/components/datatable/demo#mutil-styles)                     |
 
 ### d-data-table 事件
 

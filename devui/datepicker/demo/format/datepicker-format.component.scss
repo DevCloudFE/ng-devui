@@ -1,0 +1,29 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
+.col-md-6 {
+  float: left;
+  margin-right: 10px;
+}
+
+.devui-input-group-addon {
+  vertical-align: middle;
+  padding-top: 4px;
+}
+
+.devui-input-group {
+  width: 200px;
+}
+
+.devui-input-group-addon:hover {
+  color: $devui-brand-active;
+}
+
+.icon-close-wrapper {
+  padding: 0;
+}
+
+.icon-close {
+  border-right: 1px solid $devui-dividing-line;
+  padding-right: 10px;
+  cursor: pointer;
+}

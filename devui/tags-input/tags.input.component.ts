@@ -17,7 +17,8 @@ import { Subscription } from 'rxjs';
       multi: true,
     },
   ],
-  exportAs: 'TagsInput'
+  exportAs: 'TagsInput',
+  preserveWhitespaces: false
 })
 
 export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestroy, OnChanges {
@@ -144,6 +145,7 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
         if (ele.classList.contains('devui-dropdown-origin-bottom')) {
           ele.classList.remove('devui-dropdown-origin-bottom');
         }
+        this.onTouch();
       }
     }
   }

@@ -20,7 +20,7 @@ import { By } from '@angular/platform-browser';
     d-carousel-item {
       text-align: center;
       line-height: 200px;
-      background: #f3f6f8;
+      background: var(--devui-global-bg, #f3f6f8);
     }
     `
   ]

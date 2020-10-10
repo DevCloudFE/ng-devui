@@ -4,8 +4,9 @@
   "lib": {
     "entryFile": "./index.ts",
     "umdModuleIds": {
-      "lodash-es": "lodash-es"
+      "lodash-es": "lodash-es",
+      "enquire.js": "enquire.js"
     }
   },
-  "whitelistedNonPeerDependencies": ["@angular/cdk","date-fns", "lodash-es", "popper.js", "enquire.js", "css-vars-ponyfill", "mime-db"]
+  "whitelistedNonPeerDependencies": ["@angular/cdk","date-fns", "lodash-es", "popper.js", "enquire.js", "css-vars-ponyfill"]
 }

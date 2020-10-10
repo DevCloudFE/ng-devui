@@ -6,6 +6,7 @@ import { AccordionComponent } from './accordion.component';
   selector: 'd-accordion-item-hreflink',
   templateUrl: './accordion-item-hreflink.component.html',
   encapsulation: ViewEncapsulation.None,
+  preserveWhitespaces: false,
 })
 export class AccordionItemHreflinkComponent extends AccordionBaseLinkComponent {
   constructor(protected accordion: AccordionComponent) {

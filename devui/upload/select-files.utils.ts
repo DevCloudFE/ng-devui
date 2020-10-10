@@ -1,10 +1,8 @@
 import { IFileOptions, IUploadOptions } from './file-uploader.types';
 import { Observable, from, Subscription } from 'rxjs';
-import { map, mergeMap } from 'rxjs/operators';
-import * as mime from 'mime-db';
+import {  mergeMap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
-import { endsWith } from 'lodash-es';
 
 @Injectable()
 export class SelectFiles {
@@ -43,7 +41,7 @@ export class SelectFiles {
       input.addEventListener('change', event => {
         resolve(Array.prototype.slice.call((event.target as HTMLInputElement).files));
       });
-      document.body.appendChild(input); // Fix campatability issue with Internet Explorer 11
+      document.body.appendChild(input); // Fix compatibility issue with Internet Explorer 11
       this.simulateClickEvent(input);
     });
   }
@@ -51,14 +49,21 @@ export class SelectFiles {
   isAllowedFileType = (accept: string, file: File) => {
     if (accept) {
       const acceptArr = accept.split(',');
-      return acceptArr.reduce((result: boolean, item: string) => {
-        // 浏览器的文件嗅探会对难以识别的文件type赋值为空，因此需要通过简单的后缀名判断处理
-        if (file.type === '' || !mime[file.type] || !mime[file.type].extensions || item.includes('*')) {
-          return result || file.type.indexOf(item.replace(/[\.*]/g, '')) > -1 || endsWith(file.name, item.replace(/[\.*]/g, ''));
-        } else {
-          return result || mime[file.type].extensions.indexOf(item.replace(/\./g, '')) > -1;
+      const baseMimeType = file.type.replace(/\/.*$/, '');
+      return acceptArr.some((type: string) => {
+        const validType = type.trim();
+        //  suffix name (e.g. '.png,.xlsx')
+        if (validType.startsWith('.')) {
+          return (
+            file.name.toLowerCase().indexOf(validType.toLowerCase(), file.name.toLowerCase().length - validType.toLowerCase().length) > -1
+          );
+          // mime type like 'image/*'
+        } else if (/\/\*$/.test(validType)) {
+          return baseMimeType === validType.replace(/\/.*$/, '');
         }
-      }, false);
+        //  mime type like 'text/plain,application/json'
+        return file.type === validType;
+      });
     }
     return true;
   }

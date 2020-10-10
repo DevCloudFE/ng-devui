@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'd-basic',
-  templateUrl: './basic.component.html',
-  styleUrls: ['./basic.component.css']
+  templateUrl: './basic.component.html'
 })
 export class BasicComponent {
   isCollapsed = true;

@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
     selector: 'd-basic',
-    styleUrls: [`./basic.component.css`],
+    styleUrls: [`./basic.component.scss`],
     changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: './basic.component.html'
 })

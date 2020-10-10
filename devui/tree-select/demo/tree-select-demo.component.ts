@@ -33,7 +33,7 @@ export class TreeSelectDemoComponent {
   TreeSelectCustomIconComponent = [
     {title: 'HTML', language: 'xml', code: require('!!raw-loader!./custom-icon/tree-select-custom-icon.component.html')},
     {title: 'TS', language: 'typescript', code: require('!!raw-loader!./custom-icon/tree-select-custom-icon.component.ts')},
-    {title: 'CSS', language: 'css', code: require('!!raw-loader!./custom-icon/tree-select-custom-icon.component.css')}
+    {title: 'SCSS', language: 'css', code: require('!!raw-loader!./custom-icon/tree-select-custom-icon.component.scss')}
   ];
   TreeSelectKeysComponent = [
     {title: 'HTML', language: 'xml', code: require('!!raw-loader!./keys/tree-select-keys.component.html')},

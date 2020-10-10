@@ -50,20 +50,3 @@
 .host-wrapper {
   color: red;
 }
-
-.devui-two-date-title {
-  height: 38px;
-
-  & > span {
-    display: inline-flex;
-    align-items: center;
-    height: 100%;
-    width: calc((100% - 20px) / 2);
-    padding-left: 10px;
-    font-weight: bold;
-
-    &:not(:last-child) {
-      margin-right: 20px;
-    }
-  }
-}

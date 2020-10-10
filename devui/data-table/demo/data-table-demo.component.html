@@ -23,11 +23,15 @@
       </d-tab>
     </d-tabs>
   </div>
+  <div class="demo-example" [dAnchor]="'mutil-styles'">
+    <div class="demo-title">表格样式</div>
+    <d-codebox id="styels" [sourceData]="mutilStyles">
+      <d-mutil-styles demo></d-mutil-styles>
+    </d-codebox>
+  </div>
   <div class="demo-example" [dAnchor]="'async-loading'">
     <div class="demo-title">异步加载数据、配置列及空数据模板</div>
-    <div class="demo-text">
-      模拟异步加载数据、支持配置动态列、使用#noResultTemplateRef配置空数据模板
-    </div>
+    <div class="demo-text">模拟异步加载数据、支持配置动态列、使用#noResultTemplateRef配置空数据模板</div>
     <d-codebox id="table-async" [sourceData]="asyncSource">
       <d-datatable-demo-async demo></d-datatable-demo-async>
     </d-codebox>
@@ -80,9 +84,7 @@
   </div>
   <div class="demo-example" [dAnchor]="'lazy-loading-of-list-data'">
     <div class="demo-title">懒加载</div>
-    <div class="demo-text">
-      使用lazy启用懒加载，当滚动表格底部时到分发loadMore事件实现懒加载
-    </div>
+    <div class="demo-text">使用lazy启用懒加载，当滚动表格底部时到分发loadMore事件实现懒加载</div>
     <d-codebox id="table-lazy" [sourceData]="lazySource">
       <d-datatable-demo-lazyloaddata demo></d-datatable-demo-lazyloaddata>
     </d-codebox>
@@ -90,7 +92,10 @@
   <div class="demo-example" [dAnchor]="'virtual-scroll'">
     <div class="demo-title">虚拟滚动</div>
     <div class="demo-text">
-      使用virtualScroll启用虚拟滚动，行高须确定且相同，如果行高高于默认的40px，须配置virtualItemSize
+      <div>使用virtualScroll启用虚拟滚动，行高须确定且相同，如果行高高于默认的40px，须配置virtualItemSize</div>
+      <div>
+        若初始状态无数据，需要对class为`cdk-virtual-scroll-viewport`的元素设定高度，并且建议对`d-data-table`元素和noResult模板设定定位
+      </div>
     </div>
     <d-codebox id="cell-merge" [sourceData]="virtualScrollSource">
       <d-virtual-scroll demo></d-virtual-scroll>
@@ -98,9 +103,7 @@
   </div>
   <div class="demo-example" [dAnchor]="'table-fixing'">
     <div class="demo-title">表头固定</div>
-    <div class="demo-text">
-      使用fixHeader设置表头固定，使之不跟随滚动
-    </div>
+    <div class="demo-text">使用fixHeader设置表头固定，使之不跟随滚动</div>
     <d-codebox id="table-max" [sourceData]="maxHeightSource">
       <d-datatable-demo-maxheight demo></d-datatable-demo-maxheight>
     </d-codebox>
@@ -220,27 +223,21 @@
   </div>
   <div class="demo-example" [dAnchor]="'column-dragging'">
     <div class="demo-title">列拖拽</div>
-    <div class="demo-text">
-      应用于列内容有对比诉求，属于低频操作，默认不展示，当鼠标移入表头显示标识，支持用户快速对列进行排序
-    </div>
+    <div class="demo-text">应用于列内容有对比诉求，属于低频操作，默认不展示，当鼠标移入表头显示标识，支持用户快速对列进行排序</div>
     <d-codebox id="drag-column" [sourceData]="dragColumnSource">
       <d-drag-column demo></d-drag-column>
     </d-codebox>
   </div>
   <div class="demo-example" [dAnchor]="'cell-merge'">
     <div class="demo-title">单元格合并</div>
-    <div class="demo-text">
-      支持使用colspan、rowspan等属性来设置单元格的合并，只能通过自定义head、body模板和其中的行、单元格来实现
-    </div>
+    <div class="demo-text">支持使用colspan、rowspan等属性来设置单元格的合并，只能通过自定义head、body模板和其中的行、单元格来实现</div>
     <d-codebox id="cell-merge" [sourceData]="cellMergeSource">
       <d-cell-merge demo></d-cell-merge>
     </d-codebox>
   </div>
   <div class="demo-example" [dAnchor]="'drag-row'">
     <div class="demo-title">行拖拽</div>
-    <div class="demo-text">
-      支持使用DragDrop组件来实现表格的行拖拽功能，只能通过自定义head、body模板和其中的行、单元格来实现
-    </div>
+    <div class="demo-text">支持使用DragDrop组件来实现表格的行拖拽功能，只能通过自定义head、body模板和其中的行、单元格来实现</div>
     <d-codebox id="cell-merge" [sourceData]="dragRowSource">
       <d-drag-row demo></d-drag-row>
     </d-codebox>

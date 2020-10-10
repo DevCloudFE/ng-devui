@@ -7,7 +7,7 @@ import {
   selector: 'd-datepicker-range-time',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: `./date-range-picker-time.component.html`,
-  styleUrls: [`./date-range-picker-time.component.css`]
+  styleUrls: [`./date-range-picker-time.component.scss`]
 })
 export class DateRangePickerTimeComponent {
   dateRange = [null, null];

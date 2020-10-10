@@ -12,6 +12,7 @@ import {
   selector: 'd-tree-nodes',
   templateUrl: './tree-nodes.component.html',
   styleUrls: ['./tree-nodes.component.scss'],
+  preserveWhitespaces: false,
 })
 export class TreeNodesComponent {
   @Input() treeList: Array<TreeNode>;

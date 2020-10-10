@@ -30,7 +30,8 @@ export interface SimpleDate {
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => SingleDateRangePickerComponent),
     multi: true
-  }]
+  }],
+  preserveWhitespaces: false,
 })
 
 export class SingleDateRangePickerComponent extends SingleDatepickerComponent implements OnChanges, OnInit {
@@ -109,7 +110,8 @@ export class SingleDateRangePickerComponent extends SingleDatepickerComponent im
         $event.preventDefault();
         return;
       }
-      this.selectRange(date);
+      const curDate = this.showTime && date ? this.setTime(date) : date;
+      this.selectRange(curDate);
       this.selectedDate = this.isAuxiliary ? this.rangeEnd : this.rangeStart;
     }
   }
@@ -144,7 +146,6 @@ export class SingleDateRangePickerComponent extends SingleDatepickerComponent im
     if (this.disabled) {
       return;
     }
-    this.setTime(date);
     if (!this.rangeStart || (!!this.rangeStart && !!this.rangeEnd)) {
       this.rangeEnd = null;
       this.rangeStart = null;
@@ -491,9 +492,7 @@ export class SingleDateRangePickerComponent extends SingleDatepickerComponent im
   }
 
   private setTime(date: any) {
-    this.currentHour = this.showTime && date ? date.getHours() : 0;
-    this.currentMinute = this.showTime && date ? date.getMinutes() : 0;
-    this.currentSecond = this.showTime && date ? date.getSeconds() : 0;
+    return (new Date(date.setHours(this.currentHour, this.currentMinute, this.currentSecond)));
   }
 
   protected onSelectDateChanged() {

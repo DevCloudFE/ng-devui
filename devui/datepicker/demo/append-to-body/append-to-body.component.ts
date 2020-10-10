@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
     selector: 'd-append-to-body',
-    styleUrls: [`./append-to-body.component.css`],
+    styleUrls: [`./append-to-body.component.scss`],
     changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: './append-to-body.component.html'
 })

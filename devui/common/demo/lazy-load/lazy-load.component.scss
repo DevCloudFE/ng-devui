@@ -1,3 +1,5 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
 .container {
   width: 300px;
 }
@@ -11,5 +13,5 @@
 
 .item {
   line-height: 35px;
-  border-bottom: 1px solid var(--devui-dividing-line, #dfe1e6);
+  border-bottom: 1px solid $devui-dividing-line;
 }

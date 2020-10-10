@@ -3,13 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'd-splitter-demo-basic',
   templateUrl: './splitter-demo-basic.component.html',
-  styles: [
-    `
-    .pane-content{
-      padding: 0 10px;
-    }
-    `
-  ]
+  styleUrls: ['../splitter-demo.component.scss']
 })
 export class SplitterDemoBasicComponent {
  // splitter input

@@ -9,21 +9,25 @@ export class SplitterDemoComponent implements OnInit {
   SplitterBasicComponent = [
     {title: 'HTML', language: 'html', code: require('!!raw-loader!./basic/splitter-demo-basic.component.html')},
     {title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/splitter-demo-basic.component.ts')},
+    {title: 'SCSS', language: 'css', code: require('!!raw-loader!./splitter-demo.component.scss')},
   ];
 
   SplitterVerticalComponent = [
     {title: 'HTML', language: 'html', code: require('!!raw-loader!./vertical/splitter-demo-vertical.component.html')},
     {title: 'TS', language: 'typescript', code: require('!!raw-loader!./vertical/splitter-demo-vertical.component.ts')},
+    {title: 'SCSS', language: 'css', code: require('!!raw-loader!./splitter-demo.component.scss')},
   ];
 
   SplitterMultiComponent = [
     {title: 'HTML', language: 'html', code: require('!!raw-loader!./multi/splitter-demo-multi.component.html')},
     {title: 'TS', language: 'typescript', code: require('!!raw-loader!./multi/splitter-demo-multi.component.ts')},
+    {title: 'SCSS', language: 'css', code: require('!!raw-loader!./splitter-demo.component.scss')},
   ];
 
   SplitterDirectionComponent = [
     {title: 'HTML', language: 'html', code: require('!!raw-loader!./direction/splitter-demo-direction.component.html')},
     {title: 'TS', language: 'typescript', code: require('!!raw-loader!./direction/splitter-demo-direction.component.ts')},
+    {title: 'SCSS', language: 'css', code: require('!!raw-loader!./splitter-demo.component.scss')},
   ];
 
   SplitterFoldedMenuComponent = [

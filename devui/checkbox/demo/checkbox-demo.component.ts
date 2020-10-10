@@ -9,7 +9,7 @@ export class CheckBoxDemoComponent {
   checkboxDemoBasic: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./basic/checkbox-basic.component.html')},
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./basic/checkbox-basic.component.ts')},
-    {title: 'CSS', language: 'css', code:  require('!!raw-loader!./basic/checkbox-basic.component.css')}
+    {title: 'SCSS', language: 'css', code:  require('!!raw-loader!./basic/checkbox-basic.component.css')}
   ];
 
   checkboxDemoGroup: Array<DevuiSourceData> = [
@@ -20,7 +20,7 @@ export class CheckBoxDemoComponent {
   conditionChangeSource: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./condition-change/condition-change.component.html')},
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./condition-change/condition-change.component.ts')},
-    {title: 'CSS', language: 'css', code:  require('!!raw-loader!./condition-change/condition-change.component.scss')},
+    {title: 'SCSS', language: 'css', code:  require('!!raw-loader!./condition-change/condition-change.component.scss')},
   ];
 
   conditionGroupSource: Array<DevuiSourceData> = [

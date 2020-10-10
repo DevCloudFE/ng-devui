@@ -3,6 +3,7 @@ import { AccordionLinkableItem, AccordionOptions } from './accordion.type';
 import { AccordionBaseItemComponent } from './accordion-base-item-component.class';
 
 @Directive()
+// tslint:disable-next-line: directive-class-suffix
 export abstract class AccordionBaseLinkComponent extends AccordionBaseItemComponent<AccordionLinkableItem> {
   get link() {
     return this.item && this.item[this.accordion.linkKey];

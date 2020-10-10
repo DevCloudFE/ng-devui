@@ -1,3 +1,5 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
 d-button:last-child {
   position: relative;
 
@@ -8,6 +10,6 @@ d-button:last-child {
     bottom: 4px;
     left: 0;
     width: 1px;
-    background-color: #ffeeed;
+    background-color: $devui-light-text;
   }
 }

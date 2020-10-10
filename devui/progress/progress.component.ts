@@ -6,12 +6,14 @@ import {
   TemplateRef,
   OnInit,
   OnChanges,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 
 @Component({
   selector: 'd-progress',
   templateUrl: './progress.component.html',
   styleUrls: ['./progress.component.scss'],
+  preserveWhitespaces: false,
 })
 export class ProgressComponent implements OnInit , OnChanges {
   @Input() percentage = 0;

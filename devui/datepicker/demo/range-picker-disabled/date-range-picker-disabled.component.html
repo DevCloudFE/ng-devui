@@ -1,10 +1,11 @@
-<section style="width: 100%;">
+<section style="width: 100%">
   <span>日期范围选择器:</span>
   <div class="devui-input-group devui-dropdown-origin-wrapper devui-dropdown-origin" [ngClass]="{ 'devui-disabled': disabled }">
     <input
       class="devui-input devui-form-control"
       placeholder="y/MM/dd  -  y/MM/dd"
       name="dp"
+      [attr.disabled]="disabled ? true : null"
       [(ngModel)]="dateRange"
       (focus)="toggleDatePicker(dateRangePicker, $event)"
       autocomplete="off"

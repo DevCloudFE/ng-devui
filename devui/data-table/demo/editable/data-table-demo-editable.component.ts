@@ -12,10 +12,6 @@ export class DatatableDemoEditableComponent implements OnInit {
 
   editableTip = EditableTip.btn;
   nameEditing: boolean;
-  thisCellEditEnd(event) {
-    console.log('cellEditEnd');
-    console.log(event.rowItem);
-  }
 
   ngOnInit() {
   }

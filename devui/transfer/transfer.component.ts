@@ -10,7 +10,7 @@ import {
   TemplateRef,
   OnDestroy
 } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { TransferDirection, TransferDataFormat } from './transfer.types';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
 
@@ -18,6 +18,7 @@ import { I18nInterface, I18nService } from 'ng-devui/i18n';
   selector: 'd-transfer',
   templateUrl: './transfer.component.html',
   styleUrls: ['./transfer.component.scss'],
+  preserveWhitespaces: false,
 })
 export class TransferComponent implements OnInit, OnChanges, OnDestroy {
   static ID_SEED = 0;
@@ -30,6 +31,7 @@ export class TransferComponent implements OnInit, OnChanges, OnDestroy {
   @Input() disabled = false;
   @Input() isSourceDroppable = false;
   @Input() isTargetDroppable = false;
+  @Input() beforeTransfer: (sourceOption, targetOption) => boolean | Promise<boolean> | Observable<boolean>;
 
   // 自定义
   @Input() customSourceCheckedLen = 0;
@@ -74,6 +76,25 @@ export class TransferComponent implements OnInit, OnChanges, OnDestroy {
     this.targetDisplayOptionLen = this.targetDisplayOption.length;
   }
 
+  canChange() {
+    let changeResult = Promise.resolve(true);
+
+    if (this.beforeTransfer) {
+      const result: any = this.beforeTransfer(this.sourceOption, this.targetOption);
+      if (typeof result !== 'undefined') {
+        if (result.then) {
+          changeResult = result;
+        } else if (result.subscribe) {
+          changeResult = (result as Observable<boolean>).toPromise();
+        } else {
+          changeResult = Promise.resolve(result);
+        }
+      }
+    }
+
+    return changeResult;
+  }
+
   setI18nText() {
     this.i18nCommonText = this.i18n.getI18nText().common;
     this.i18nSubscription = this.i18n.langChange().subscribe((data) => {
@@ -86,9 +107,16 @@ export class TransferComponent implements OnInit, OnChanges, OnDestroy {
       this.targetCanTransfer = !!(changes.customSourceCheckedLen && changes.customSourceCheckedLen.currentValue > 0);
       this.sourceCanTransfer = !!(changes.customTargetCheckedLen && changes.customTargetCheckedLen.currentValue > 0);
     }
+
+    if (changes && (changes.sourceOption || changes.targetOption)) {
+      this.sourceDisplayOption = this.sourceOption;
+      this.sourceDisplayOptionLen = this.sourceDisplayOption.length;
+      this.targetDisplayOption = this.targetOption;
+      this.targetDisplayOptionLen = this.targetDisplayOption.length;
+    }
   }
 
-  checkboxChange(direction: any, event: any) {
+  checkboxChange(direction: TransferDirection, event: any) {
     if (direction === TransferDirection.SOURCE) {
       this.sourceDisplayOption.filter(item => item.checked).length > 0 ? this.targetCanTransfer = true : this.targetCanTransfer = false;
       this.listTotalCheck(direction);
@@ -98,7 +126,7 @@ export class TransferComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
-  listTotalCheck(direction: any) {
+  listTotalCheck(direction: TransferDirection) {
     if (direction === TransferDirection.SOURCE) {
       const sourceLen = this.sourceDisplayOption.filter(item => item.checked).length;
       this.sourceCheckedLen = sourceLen;
@@ -134,53 +162,59 @@ export class TransferComponent implements OnInit, OnChanges, OnDestroy {
     this.targetDisplayOptionLen = this.targetDisplayOption.length;
   }
 
-  transferTo(direction: any) {
-    if (direction === TransferDirection.TARGET) {
-      const changeData = [];
-      // 对源数据更改
-      this.sourceDisplayOption.filter(item => item.checked === true).forEach(item => {
-        const tmp = { name: item.name, value: item.value, id: item.id, checked: false };
-        this.targetOption.push(tmp);
-        changeData.push(tmp);
-        this.sourceOption.splice(this.sourceOption.indexOf(item), 1);
-      });
-      this.targetCanTransfer = false;
-
-      if (this.sourceCustomViewTemplate) {
-        this.transferToTarget.next();
-      } else {
-        this.transferToTarget.next({ sourceOption: this.sourceOption, targetOption: this.targetOption, changeData });
-      }
-      if (this.isSearch && this.sourceSearchText !== '') {
-        this.sourceSearchText = '';
-      }
-    } else if (direction === TransferDirection.SOURCE) {
-      const changeData = [];
-      this.targetDisplayOption.filter(item => item.checked === true).forEach(item => {
-        const tmp = { name: item.name, value: item.value, id: item.id, checked: false };
-        this.sourceOption.push(tmp);
-        changeData.push(tmp);
-        this.targetOption.splice(this.targetOption.indexOf(item), 1);
-      });
-      this.targetOption = this.targetOption.filter(item => item.checked !== true);
-      this.sourceCanTransfer = false;
-      if (this.targetCustomViewTemplate) {
-        this.transferToSource.next();
-      } else {
-        this.transferToSource.next({ sourceOption: this.sourceOption, targetOption: this.targetOption, changeData });
+  transferTo(direction: TransferDirection) {
+    this.canChange().then(val => {
+      if (!val) {
+        return;
       }
 
-      if (this.isSearch && this.targetSearchText !== '') {
-        this.targetSearchText = '';
+      if (direction === TransferDirection.TARGET) {
+        const changeData = [];
+        // 对源数据更改
+        this.sourceDisplayOption.filter(item => item.checked === true).forEach(item => {
+          const tmp = { name: item.name, value: item.value, id: item.id, checked: false };
+          this.targetOption.push(tmp);
+          changeData.push(tmp);
+          this.sourceOption.splice(this.sourceOption.indexOf(item), 1);
+        });
+        this.targetCanTransfer = false;
+
+        if (this.sourceCustomViewTemplate) {
+          this.transferToTarget.next();
+        } else {
+          this.transferToTarget.next({ sourceOption: this.sourceOption, targetOption: this.targetOption, changeData });
+        }
+        if (this.isSearch && this.sourceSearchText !== '') {
+          this.sourceSearchText = '';
+        }
+      } else if (direction === TransferDirection.SOURCE) {
+        const changeData = [];
+        this.targetDisplayOption.filter(item => item.checked === true).forEach(item => {
+          const tmp = { name: item.name, value: item.value, id: item.id, checked: false };
+          this.sourceOption.push(tmp);
+          changeData.push(tmp);
+          this.targetOption.splice(this.targetOption.indexOf(item), 1);
+        });
+        this.targetOption = this.targetOption.filter(item => item.checked !== true);
+        this.sourceCanTransfer = false;
+        if (this.targetCustomViewTemplate) {
+          this.transferToSource.next();
+        } else {
+          this.transferToSource.next({ sourceOption: this.sourceOption, targetOption: this.targetOption, changeData });
+        }
+
+        if (this.isSearch && this.targetSearchText !== '') {
+          this.targetSearchText = '';
+        }
       }
-    }
-    this.targetDisplayOption = this.targetOption;
-    this.sourceDisplayOption = this.sourceOption;
-    this.listTotalCheck(TransferDirection.TARGET);
-    this.listTotalCheck(TransferDirection.SOURCE);
+      this.targetDisplayOption = this.targetOption;
+      this.sourceDisplayOption = this.sourceOption;
+      this.listTotalCheck(TransferDirection.TARGET);
+      this.listTotalCheck(TransferDirection.SOURCE);
+    });
   }
 
-  checkAll(direction: any, event: any) {
+  checkAll(direction: TransferDirection, event: any) {
     if (direction === TransferDirection.SOURCE) {
       if (event) {
         this.sourceHalfChecked = false;
@@ -210,7 +244,7 @@ export class TransferComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
-  search(direction: any, keyword: any) {
+  search(direction: TransferDirection, keyword: any) {
     if (keyword !== '') {
       if (direction === TransferDirection.SOURCE) {
         this.sourceDisplayOption = this.sourceOption.filter(item => item.name.match(keyword) !== null);
@@ -227,7 +261,7 @@ export class TransferComponent implements OnInit, OnChanges, OnDestroy {
     this.listTotalCheck(direction);
   }
 
-  onDrop(direction: any, e: any) {
+  onDrop(direction: TransferDirection, e: any) {
     let index = e.dropIndex;
     const fromIndex = e.dragFromIndex;
     if (-1 !== index) {

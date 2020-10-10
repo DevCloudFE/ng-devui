@@ -4,6 +4,7 @@ import {
   ContentChild,
   Output,
   EventEmitter,
+  ChangeDetectionStrategy
 } from '@angular/core';
 
 import { PanelType } from './panel.types';
@@ -13,7 +14,7 @@ import { PanelFooterComponent } from './panel-footer.component';
 @Component({
   selector: 'd-panel',
   templateUrl: './panel.component.html',
-  styleUrls: ['./panel.component.scss']
+  styleUrls: ['./panel.component.scss'],
 })
 export class PanelComponent {
   @Input() type: PanelType = 'default';

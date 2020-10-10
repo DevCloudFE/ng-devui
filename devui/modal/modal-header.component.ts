@@ -11,6 +11,7 @@ import { Subscription } from 'rxjs';
   selector: 'd-modal-header',
   templateUrl: './modal-header.component.html',
   styleUrls: ['./modal-header.component.scss'],
+  preserveWhitespaces: false,
 })
 export class ModalHeaderComponent {
   @Input() title: string;

@@ -13,7 +13,8 @@ export interface Message {
 @Component({
   selector: 'd-toast',
   templateUrl: './toast.component.html',
-  styleUrls: ['./toast.component.scss']
+  styleUrls: ['./toast.component.scss'],
+  preserveWhitespaces: false,
 })
 export class ToastComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() sticky: boolean;

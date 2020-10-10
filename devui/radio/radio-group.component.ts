@@ -27,6 +27,7 @@ import { Observable } from 'rxjs';
       multi: true,
     },
   ],
+  preserveWhitespaces: false,
 })
 export class RadioGroupComponent implements ControlValueAccessor, OnChanges, AfterViewInit {
   constructor() {}
@@ -63,9 +64,7 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges, Aft
     this.radios.changes.subscribe((newRadios) => {
       newRadios.forEach((radio: RadioComponent) => {
         this.registerRadio(radio);
-        Promise.resolve(true).then(() => {
-          radio.writeValue(this._value);
-        });
+        Promise.resolve(true).then(() => radio.writeValue(this._value));
       });
     });
 
@@ -96,6 +95,7 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges, Aft
     radio.registerOnChange((value: any) => {
       this.writeValue(value);
       this.onChange(value);
+      Promise.resolve().then(() => this.onTouched());
       this.change.emit(value);
     });
   }

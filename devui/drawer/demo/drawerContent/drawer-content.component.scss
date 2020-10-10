@@ -1,0 +1,37 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
+input[type='text'] {
+  width: 300px;
+  height: 32px;
+  box-sizing: border-box;
+  padding: 5px 10px;
+  font-size: 12px;
+  color: $devui-text;
+  vertical-align: middle;
+  border: 1px solid $devui-dividing-line;
+  border-radius: 3px;
+  outline: none;
+  background-color: $devui-base-bg;
+}
+
+input[type='text']:hover {
+  border-color: $devui-form-control-line-active-hover;
+}
+
+.list-group-item {
+  border-bottom: 1px solid $devui-dividing-line;
+  padding: 16px 24px;
+}
+
+.operation-area {
+  margin: 16px 24px;
+
+  d-button {
+    margin-top: 16px;
+  }
+
+  input {
+    max-width: 90%;
+    margin-right: 16px;
+  }
+}

@@ -1,6 +1,6 @@
-<section style="width: 100%;">
+<section style="width: 100%">
   <h5>双日期选择器 选择完成后隐藏</h5>
-  <div class="two-date-wrapper" dTwoDatePicker #twoDatePicker="twoDatePicker" (selectRange)="selectRange($event)">
+  <div class="two-date-wrapper" dTwoDatePicker #twoDatePicker="twoDatePicker" (selectedRangeChange)="selectRange($event)">
     <div class="devui-input-group devui-dropdown-origin-wrapper devui-dropdown-origin">
       <input
         class="devui-input devui-form-control"
@@ -41,7 +41,7 @@
     #twoDatePicker2="twoDatePicker"
     [hideOnRangeSelected]="false"
     [cssClass]="'custom-css-class'"
-    (selectRange)="selectRange($event)"
+    (selectedRangeChange)="selectRange($event)"
   >
     <div class="devui-input-group devui-dropdown-origin-wrapper devui-dropdown-origin">
       <input
@@ -77,7 +77,13 @@
     </div>
   </div>
   <h5>双日期选择器 禁用(仅提供参考，或参考dateRangePicker进行设置)</h5>
-  <div class="two-date-wrapper" dTwoDatePicker #twoDatePicker3="twoDatePicker" [disabled]="true" (selectRange)="selectRange($event)">
+  <div
+    class="two-date-wrapper"
+    dTwoDatePicker
+    #twoDatePicker3="twoDatePicker"
+    [disabled]="true"
+    (selectedRangeChange)="selectRange($event)"
+  >
     <div class="devui-input-group devui-dropdown-origin-wrapper devui-dropdown-origin">
       <input
         class="devui-input devui-form-control"

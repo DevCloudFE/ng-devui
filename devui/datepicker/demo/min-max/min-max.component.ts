@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
     selector: 'd-min-max',
-    styleUrls: [`./min-max.component.css`],
+    styleUrls: [`./min-max.component.scss`],
     changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: './min-max.component.html'
 })

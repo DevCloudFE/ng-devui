@@ -1,0 +1,22 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
+.btn-group > span {
+  font-size: 20px;
+  color: $devui-text-weak;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.devui-dropdown-menu {
+  overflow-y: auto;
+}
+
+.btn-group {
+  display: inline-block;
+  height: 20px;
+}
+
+.icon-setup::before {
+  height: 20px;
+  display: block;
+}

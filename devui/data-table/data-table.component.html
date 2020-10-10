@@ -4,12 +4,18 @@
       *ngIf="fixHeader"
       #fixHeaderContainerRef
       class="table-wrap"
-      [style.overflow]="'hidden scroll'"
+      [style.overflow-x]="'hidden'"
+      [style.overflow-y]="'scroll'"
       [style.max-height]="maxHeight ? maxHeight : null"
       [style.max-width]="maxWidth ? maxWidth : null"
       [style.width]="!maxWidth ? tableWidth : null"
     >
-      <table class="devui-table {{ type ? 'table-' + type : '' }} {{ fixHeader ? 'table-fix-header' : '' }}" [style.table-layout]="'fixed'">
+      <table
+        class="devui-table {{ borderType ? 'table-' + borderType : '' }} {{ fixHeader ? 'table-fix-header' : '' }} {{
+          headerBg ? 'header-bg' : ''
+        }} {{ striped ? 'table-striped' : '' }}"
+        [style.table-layout]="tableLayout"
+      >
         <colgroup>
           <col *ngFor="let config of tableWidthConfig" [style.width]="config.width" />
         </colgroup>
@@ -35,8 +41,10 @@
     >
       <table
         #tableBody
-        class="devui-table {{ type ? 'table-' + type : '' }} {{ rowHoveredHighlight ? 'table-hover' : '' }}"
-        [style.table-layout]="'fixed'"
+        class="devui-table {{ borderType ? 'table-' + borderType : '' }} {{ rowHoveredHighlight ? 'table-hover' : '' }} {{
+          headerBg ? 'header-bg' : ''
+        }} {{ striped ? 'table-striped' : '' }}"
+        [style.table-layout]="tableLayout"
         [style.height]="minHeight ? minHeight : null"
       >
         <colgroup>
@@ -54,6 +62,7 @@
           [tableWidthConfig]="tableWidthConfig"
           [rowTemplete]="innerBody.rowTempleteForSelect"
           [minHeight]="minHeight"
+          [minHeightStretchRow]="innerBody.minHeightStretchRow"
         ></tbody>
         <tbody
           *ngIf="!innerBody"
@@ -104,8 +113,10 @@
   >
     <table
       #tableBody
-      class="devui-table {{ type ? 'table-' + type : '' }} {{ rowHoveredHighlight ? 'table-hover' : '' }}"
-      [style.table-layout]="'fixed'"
+      class="devui-table {{ borderType ? 'table-' + borderType : '' }} {{ rowHoveredHighlight ? 'table-hover' : '' }} {{
+        headerBg ? 'header-bg' : ''
+      }} {{ striped ? 'table-striped' : '' }}"
+      [style.table-layout]="tableLayout"
       [style.height]="minHeight ? minHeight : null"
     >
       <colgroup>
@@ -124,6 +135,7 @@
         [virtualScroll]="virtualScroll"
         [rowTemplete]="innerBody.rowTempleteForSelect"
         [minHeight]="minHeight"
+        [minHeightStretchRow]="innerBody.minHeightStretchRow"
       ></tbody>
       <tbody
         *ngIf="!innerBody"

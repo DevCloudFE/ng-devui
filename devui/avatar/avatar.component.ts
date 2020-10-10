@@ -1,27 +1,19 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, OnChanges, SimpleChanges, OnInit } from '@angular/core';
 
 @Component({
   selector: 'd-avatar',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './avatar.component.html',
-  styleUrls: ['./avatar.component.scss']
+  styleUrls: ['./avatar.component.scss'],
+  preserveWhitespaces: false,
 })
-export class AvatarComponent {
-  private _name: string;
+export class AvatarComponent implements OnChanges, OnInit {
   isNobody = true;
   isErrorImg = false;
-  private _customText: string;
-  private _gender: string;
   /**
   * 自定义头像显示文字
   */
-  @Input() set gender(genderInput: 'male' | 'female' | string) {
-    this._gender = genderInput;
-    this.calcValues(this._customText ? this._customText : this._name);
-  }
-  get gender() {
-    return this._gender;
-  }
+  @Input() gender: 'male' | 'female' | string;
   /**
    * avatar宽度
    */
@@ -32,7 +24,7 @@ export class AvatarComponent {
   @Input() height = 36;
 
   /**
-   * 是否是圆形
+   * 是否是圆形n
    */
   @Input() isRound = true;
 
@@ -43,28 +35,29 @@ export class AvatarComponent {
   /**
  * 用户名称
  */
-  @Input() set name(nameInput: string) {
-    this._name = nameInput;
-    this.calcValues(nameInput);
-  }
-  get name() {
-    return this._name;
-  }
+  @Input() name: string;
   /**
    * 自定义头像显示文字
    */
-  @Input() set customText(text: string) {
-    this._customText = text;
-    this.calcValues(text);
-  }
-  get customText() {
-    return this._customText;
-  }
+  @Input() customText: string;
 
   fontSize = 12;
   code: number;
   nameDisplay: string;
   constructor() { }
+  ngOnInit(): void {
+    this.calcValues(this.customText ? this.customText : this.name);
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['width'] && !changes['width'].isFirstChange() ||
+      changes['customText'] && !changes['customText'].isFirstChange() ||
+      changes['gender'] && !changes['gender'].isFirstChange() ||
+      changes['height'] && !changes['height'].isFirstChange() ||
+      changes['name'] && !changes['name'].isFirstChange()
+    ) {
+      this.calcValues(this.customText ? this.customText : this.name);
+    }
+  }
   showErrAvatar() {
     this.isErrorImg = true;
   }
@@ -84,9 +77,9 @@ export class AvatarComponent {
     this.fontSize = minNum / 4 + 3;
   }
   setDisplayName(name, width) {
-    if (this._customText) {
-      this.nameDisplay = this._customText;
-      this.getBackgroundColor(this._customText.substr(0, 1));
+    if (this.customText) {
+      this.nameDisplay = this.customText;
+      this.getBackgroundColor(this.customText.substr(0, 1));
       return;
     }
     if (name.length < 2) {
@@ -108,11 +101,11 @@ export class AvatarComponent {
         }
       } else {
         // 非中英文开头默认取前两个字符
-        this.nameDisplay = this._name.substr(0, 2);
+        this.nameDisplay = this.name.substr(0, 2);
       }
     }
     if (width < 30) {
-      this.nameDisplay = this._name.substr(0, 1).toUpperCase();
+      this.nameDisplay = this.name.substr(0, 1).toUpperCase();
     }
     this.getBackgroundColor(name.substr(0, 1));
   }

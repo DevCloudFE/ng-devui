@@ -5,6 +5,8 @@ import { StickyModule } from '../../sticky';
 import { FormModule } from '../form.module';
 import { FormDemoComponent } from './form-demo.component';
 import { ToggleModule } from 'ng-devui/toggle';
+import { ToastModule } from 'ng-devui/toast';
+import { PopoverModule } from 'ng-devui/popover';
 import { DataTableModule } from 'ng-devui/data-table';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
@@ -25,6 +27,10 @@ import { ModalComponent } from './modal/modal.component';
 import { TextInputModule } from 'ng-devui/text-input';
 import { TextareaModule } from 'ng-devui/textarea';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
+import { ValidateTemplateComponent } from './validate-template/validate-template.component';
+import { ValidateReactiveComponent } from './validate-reactive/validate-reactive.component';
+import { ValidateCoordinatedComponent } from './validate-coordinated/validate-coordinated.component';
+import { ValidateDynamicRuleComponent } from './validate-dynamic-rule/validate-dynamic-rule.component';
 
 
 @NgModule({
@@ -47,6 +53,8 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
     DevUIApiModule,
     DevUICodeboxModule,
     DDemoNavModule,
+    PopoverModule,
+    ToastModule,
     RouterModule.forChild([
       { path: '', redirectTo: 'demo' },
       { path: 'demo', component: FormDemoComponent },
@@ -68,6 +76,10 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
     ModalOneComponent,
     MultiColComponent,
     FilterComponent,
+    ValidateTemplateComponent,
+    ValidateReactiveComponent,
+    ValidateCoordinatedComponent,
+    ValidateDynamicRuleComponent,
   ],
   entryComponents: [ModalOneComponent],
 })

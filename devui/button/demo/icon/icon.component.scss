@@ -1,0 +1,34 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
+.btn-group {
+  margin-bottom: 20px;
+}
+
+.btn-group d-button {
+  margin-right: 4px;
+}
+
+.icon-chevron-down {
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  top: -0.1em;
+}
+
+:host ::ng-deep .btn-group d-button.rightIcon {
+  & > .devui-btn-text-dark .button-content {
+    color: $devui-text;
+
+    .icon-chevron-down {
+      color: $devui-text-weak;
+    }
+
+    &:hover {
+      color: $devui-list-item-hover-text;
+
+      .icon-chevron-down {
+        color: $devui-icon-fill-active;
+      }
+    }
+  }
+}

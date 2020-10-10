@@ -106,19 +106,19 @@ export class DataTableDemoComponent {
   cellMergeSource: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./cell-merge/cell-merge.component.html')},
     {title: 'TS', language: 'typescript', code: require('!!raw-loader!./cell-merge/cell-merge.component.ts')},
-    {title: 'CSS', language: 'css', code: require('!!raw-loader!./cell-merge/cell-merge.component.scss')},
+    {title: 'SCSS', language: 'css', code: require('!!raw-loader!./cell-merge/cell-merge.component.scss')},
     {title: 'mock-data', language: 'typescript', code: require('!!raw-loader!./mock-data')}
   ];
   dragRowSource: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./drag-row/drag-row.component.html')},
     {title: 'TS', language: 'typescript', code: require('!!raw-loader!./drag-row/drag-row.component.ts')},
-    {title: 'CSS', language: 'css', code: require('!!raw-loader!./drag-row/drag-row.component.scss')},
+    {title: 'SCSS', language: 'css', code: require('!!raw-loader!./drag-row/drag-row.component.scss')},
     {title: 'mock-data', language: 'typescript', code: require('!!raw-loader!./mock-data')}
   ];
   mutiDragRowSource: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./muti-drag-row/muti-drag-row.component.html')},
     {title: 'TS', language: 'typescript', code: require('!!raw-loader!./muti-drag-row/muti-drag-row.component.ts')},
-    {title: 'CSS', language: 'css', code: require('!!raw-loader!./muti-drag-row/muti-drag-row.component.scss')},
+    {title: 'SCSS', language: 'css', code: require('!!raw-loader!./muti-drag-row/muti-drag-row.component.scss')},
     {title: 'mock-data', language: 'typescript', code: require('!!raw-loader!./mock-data')}
   ];
   virtualScrollSource: Array<DevuiSourceData> = [
@@ -126,9 +126,15 @@ export class DataTableDemoComponent {
     {title: 'TS', language: 'typescript', code: require('!!raw-loader!./virtual-scroll/virtual-scroll.component.ts')},
     {title: 'mock-data', language: 'typescript', code: require('!!raw-loader!./mock-data')}
   ];
+  mutilStyles: Array<DevuiSourceData> = [
+    {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./mutil-styles/mutil-styles.component.html')},
+    {title: 'TS', language: 'typescript', code: require('!!raw-loader!./mutil-styles/mutil-styles.component.ts')},
+    {title: 'mock-data', language: 'typescript', code: require('!!raw-loader!./mock-data')}
+  ];
 
   navItems = [
     { dAnchorLink: 'basic-usage', value: '基本用法'},
+    { dAnchorLink: 'mutil-styles', value: '表格样式'},
     { dAnchorLink: 'async-loading', value: '异步加载数据'},
     { dAnchorLink: 'table-interaction', value: '表格交互'},
     { dAnchorLink: 'table-check-options', value: '自定义表格选中操作'},

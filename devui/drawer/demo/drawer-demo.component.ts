@@ -10,7 +10,7 @@ export class DrawerDemoComponent {
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./basic/basic.component.ts')},
     {title: 'drawerContent-html', language: 'xml', code:  require('!!raw-loader!./drawerContent/drawer-content.component.html')},
     {title: 'drawerContent-ts', language: 'typescript', code:  require('!!raw-loader!./drawerContent/drawer-content.component.ts')},
-    {title: 'drawerContent-css', language: 'css', code:  require('!!raw-loader!./drawerContent/drawer-content.component.css')}
+    {title: 'drawerContent-css', language: 'css', code:  require('!!raw-loader!./drawerContent/drawer-content.component.scss')}
   ];
 
   undestroyableSource: Array<DevuiSourceData> = [
@@ -18,7 +18,7 @@ export class DrawerDemoComponent {
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./undestroyable/undestroyable.component.ts')},
     {title: 'drawerContent-html', language: 'xml', code:  require('!!raw-loader!./drawerContent/drawer-content.component.html')},
     {title: 'drawerContent-ts', language: 'typescript', code:  require('!!raw-loader!./drawerContent/drawer-content.component.ts')},
-    {title: 'drawerContent-css', language: 'css', code:  require('!!raw-loader!./drawerContent/drawer-content.component.css')}
+    {title: 'drawerContent-css', language: 'css', code:  require('!!raw-loader!./drawerContent/drawer-content.component.scss')}
   ];
 
   navItems = [

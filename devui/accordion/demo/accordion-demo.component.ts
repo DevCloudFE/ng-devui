@@ -8,19 +8,19 @@ export class  AccordionDemoComponent {
   AccordionDemoBasic: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./basic/basic.component.html')},
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./basic/basic.component.ts')},
-    {title: 'CSS', language: 'css', code:  require('!!raw-loader!./basic/basic.component.css')}
+    {title: 'SCSS', language: 'css', code:  require('!!raw-loader!./basic/basic.component.css')}
   ];
 
   AccordionDemolink: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./link/link.component.html')},
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./link/link.component.ts')},
-    {title: 'CSS', language: 'css', code:  require('!!raw-loader!./link/link.component.css')}
+    {title: 'SCSS', language: 'css', code:  require('!!raw-loader!./link/link.component.css')}
   ];
 
   AccordionDemoTemplate: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./template/template.component.html')},
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./template/template.component.ts')},
-    {title: 'CSS', language: 'css', code:  require('!!raw-loader!./template/template.component.scss')}
+    {title: 'SCSS', language: 'css', code:  require('!!raw-loader!./template/template.component.scss')}
   ];
 
   AccordionDemoInnerListTemplate: Array<DevuiSourceData> = [
@@ -28,21 +28,21 @@ export class  AccordionDemoComponent {
     code:  require('!!raw-loader!./inner-list-template/inner-list-template.component.html')},
     {title: 'TS', language: 'typescript',
     code:  require('!!raw-loader!./inner-list-template/inner-list-template.component.ts')},
-    {title: 'CSS', language: 'css', code:  require('!!raw-loader!./inner-list-template/inner-list-template.component.css')}
+    {title: 'SCSS', language: 'css', code:  require('!!raw-loader!./inner-list-template/inner-list-template.component.css')}
   ];
   AccordionDemoMultiLevel: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'xml',
     code:  require('!!raw-loader!./multi-level/multi-level.component.html')},
     {title: 'TS', language: 'typescript',
     code:  require('!!raw-loader!./multi-level/multi-level.component.ts')},
-    {title: 'CSS', language: 'css', code:  require('!!raw-loader!./multi-level/multi-level.component.css')}
+    {title: 'SCSS', language: 'css', code:  require('!!raw-loader!./multi-level/multi-level.component.css')}
   ];
   AccordionDemoChangeKey: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'xml',
     code:  require('!!raw-loader!./change-key/change-key.component.html')},
     {title: 'TS', language: 'typescript',
     code:  require('!!raw-loader!./change-key/change-key.component.ts')},
-    {title: 'CSS', language: 'css', code:  require('!!raw-loader!./change-key/change-key.component.css')}
+    {title: 'SCSS', language: 'css', code:  require('!!raw-loader!./change-key/change-key.component.css')}
   ];
   navItems = [
     { dAnchorLink: 'basic-usage', value: '基本用法'},

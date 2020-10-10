@@ -26,7 +26,8 @@ import { Observable } from 'rxjs';
       useExisting: forwardRef(() => CheckBoxComponent),
       multi: true
     }
-  ]
+  ],
+  preserveWhitespaces: false,
 })
 export class CheckBoxComponent implements ControlValueAccessor, OnChanges {
   static ID_SEED = 0;

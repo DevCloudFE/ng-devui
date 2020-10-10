@@ -7,7 +7,7 @@ import {
   selector: 'd-datepicker-range-restricted-range',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: `./date-range-picker-restricted-range.component.html`,
-  styleUrls: [`./date-range-picker-restricted-range.component.css`]
+  styleUrls: [`./date-range-picker-restricted-range.component.scss`]
 })
 export class DateRangePickerRestrictedRangeComponent {
   dateRange1 = [null, null];

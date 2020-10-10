@@ -1,5 +1,5 @@
 <section>
-  <d-carousel [height]="height" [activeIndex]="activeIndex">
+  <d-carousel [height]="height" [(activeIndex)]="activeIndex" (activeIndexChange)="getIndex($event)">
     <d-carousel-item *ngFor="let i of array">{{ 'page ' + i }}</d-carousel-item>
   </d-carousel>
 </section>

@@ -15,9 +15,17 @@ export class BasicComponent {
     name: 'tom',
     age: 11
   };
+  // accept all file types
   fileOptions: IFileOptions = {
     multiple: false,
-    accept: '.*',
+  };
+  fileOptions2: IFileOptions = {
+    multiple: false,
+    accept: '.png,.zip',
+  };
+  fileOptions3: IFileOptions = {
+    multiple: false,
+    accept: 'application/json,image/*,.csv',
   };
   uploadedFiles: Array<Object> = [];
   uploadOptions: IUploadOptions = {

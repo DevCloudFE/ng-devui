@@ -4,7 +4,8 @@ import { TabTitleDirective } from './tab-title.directive';
 
 @Component({
   selector: 'd-tab',
-  template: ''
+  template: '',
+  preserveWhitespaces: false,
 })
 export class TabComponent {
   @Input() tabId?: string;

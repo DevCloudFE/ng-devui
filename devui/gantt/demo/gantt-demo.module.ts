@@ -7,7 +7,7 @@ import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DataTableModule } from 'ng-devui/data-table';
 import { GanttModule } from 'ng-devui/gantt';
-import { DevUIModule } from 'ng-devui/devui.module';
+import { DevUIModule } from 'ng-devui';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
 import { I18nModule } from 'ng-devui/i18n';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';

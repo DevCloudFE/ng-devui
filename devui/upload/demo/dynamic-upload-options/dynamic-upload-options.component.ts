@@ -46,6 +46,9 @@ export class DynamicUploadOptionsComponent implements OnInit {
     console.log(event);
   }
   beforeUpload = (files) => {
+    if (!files || !files.length) {
+      return;
+    }
     files[0].uploadOptions.uri = '/upload2';
     console.log(files);
     return true;

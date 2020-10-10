@@ -2,7 +2,8 @@ import {  Component, TemplateRef, ElementRef, ChangeDetectorRef } from '@angular
 
 @Component({
   selector: 'd-drag-preview',
-  templateUrl: './drag-preview.component.html'
+  templateUrl: './drag-preview.component.html',
+  preserveWhitespaces: false,
 })
 
 export class DragPreviewComponent {

@@ -689,7 +689,7 @@ svg.svg-icon-search path {
 
 .disabled {
   .devui-select-chevron-icon svg polygon {
-    fill: $devui-disabled-line;
+    fill: $devui-disabled-text;
   }
 }
 
@@ -711,7 +711,7 @@ svg.svg-icon-search path {
   cursor: pointer;
   pointer-events: initial;
 
-  svg.svg-icon-clear {
+  svg.svg-icon-clear-sm {
     transform: translateY(0.1em);
   }
 
@@ -731,17 +731,17 @@ svg.svg-icon-search path {
   }
 
   &.devui-search-clear-lg {
-    right: 46px;
-    width: 46px;
-    height: 46px;
-    line-height: 46px;
+    right: 30px;
+    width: 32px;
+    height: 44px;
+    line-height: 44px;
   }
 
   &.devui-search-clear-sm {
-    right: 30px;
-    width: 30px;
-    height: 30px;
-    line-height: 30px;
+    right: 26px;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
   }
 }
 

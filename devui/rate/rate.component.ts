@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, forwardRef } from '@angular/core';
+import { Component, OnInit, Input, forwardRef, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
 @Component({
@@ -11,7 +11,8 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
       useExisting: forwardRef(() => RateComponent),
       multi: true
     }
-  ]
+  ],
+  preserveWhitespaces: false,
 })
 export class RateComponent implements OnInit, ControlValueAccessor {
   @Input() read = false;
@@ -25,6 +26,10 @@ export class RateComponent implements OnInit, ControlValueAccessor {
   width = '';
   onChange: (value: number) => void;
   onTouched: () => void;
+
+  constructor(
+    private cdr: ChangeDetectorRef
+  ) { }
 
   ngOnInit(): void {
     for (let i = 0; i < this.count; i++) {

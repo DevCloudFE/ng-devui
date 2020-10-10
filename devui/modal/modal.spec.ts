@@ -131,7 +131,9 @@ describe('dialog', () => {
       expect(document.querySelector('.close')).toBeTruthy();
 
       const body = document.querySelector('body') as HTMLElement;
-      expect(body.classList).toContain('modal-open');
+      if (document.documentElement.scrollHeight > document.documentElement.clientHeight) {
+        expect(body.classList).toContain('devui-body-scrollblock');
+      }
 
       closeDialog(fixture);
     }));
@@ -299,7 +301,7 @@ describe('dialog', () => {
       expect(modalHeader.style.cursor).not.toBe('move');
       expect(document.querySelector('.close')).toBeFalsy();
       expect(modalContent.style.transform).toBe('translate(0px, 40px)');
-      expect(body.classList).not.toContain('modal-open');
+      expect(body.classList).not.toContain('devui-body-scrollblock');
 
       closeDialog(fixture);
       expect(component.dialogConfig.onClose).toHaveBeenCalled();

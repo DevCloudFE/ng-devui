@@ -195,7 +195,7 @@
   }
 
   .devui-dropdown-menu {
-    background-color: $devui-connected-overlay-bg;
+    background: $devui-connected-overlay-bg;
     box-shadow: 0 2px 5px 0 $devui-shadow;
 
     > li > a:not(.disabled) {

@@ -23,6 +23,8 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 import { TemplateComponent } from './template/template.component';
 import { DialogContentComponent } from './template/dialog-content/dialog-content.component';
 import { ModalContentComponent } from './template/modal-content/modal-content.component';
+import { TextInputModule } from 'ng-devui/text-input';
+
 
 @NgModule({
   imports: [
@@ -32,6 +34,7 @@ import { ModalContentComponent } from './template/modal-content/modal-content.co
     DevUICodeboxModule,
     DevUIApiModule,
     DDemoNavModule,
+    TextInputModule,
     RouterModule.forChild([
       { path: '', redirectTo: 'demo' },
       { path: 'demo', component: ModalDemoComponent },

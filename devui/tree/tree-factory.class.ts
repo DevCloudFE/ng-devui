@@ -192,9 +192,10 @@ export class TreeFactory {
     this.removeChildNode(parentNode, node);
 
     const deleteItems = (nodeId) => {
+      this.maintainCheckedNodeList(this.nodes[nodeId], false);
       const children = this.getChildrenById(nodeId);
       this.nodes = omitBy<Dictionary<TreeNode>>(this.nodes, (_node) => {
-        return _node.id === id;
+        return _node.id === nodeId;
       });
       forEach(children, (child) => {
         deleteItems(child.id);

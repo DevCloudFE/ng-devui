@@ -14,7 +14,8 @@ import { CdkOverlayOrigin } from '@angular/cdk/overlay';
   selector: 'd-auto-complete-popup',
   templateUrl: './auto-complete-popup.component.html',
   styleUrls: ['auto-complete-popup.component.scss'],
-  animations: [fadeInOut]
+  animations: [fadeInOut],
+  preserveWhitespaces: false
 })
 export class AutoCompletePopupComponent implements ControlValueAccessor {
   @Input() width;

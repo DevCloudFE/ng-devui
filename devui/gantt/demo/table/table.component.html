@@ -10,7 +10,7 @@
 <section>
   <d-data-table
     #datatable
-    [type]="'borderless'"
+    [borderType]="'borderless'"
     [cssClass]="'devui-talbe-scorll-middle'"
     [fixHeader]="true"
     [dataSource]="basicDataSource"
@@ -43,7 +43,7 @@
         </th>
       </tr>
     </thead>
-    <tbody dTableBody>
+    <tbody dTableBody [minHeightStretchRow]="minHeightStretchRow">
       <ng-template let-rowItem="rowItem" let-rowIndex="rowIndex" let-nestedLayer="nestedLayer" let-nestedIndex="nestedIndex">
         <tr dTableRow [style.height]="'40px'">
           <td dTableCell [fixedLeft]="'0'" [nestedColumn]="true" [rowItem]="rowItem" [nestedLayer]="nestedLayer">
@@ -225,20 +225,6 @@
             </d-gantt-milestone>
           </td>
         </tr>
-        <tr class="min-height-stretch-row" *ngIf="nestedLayer === 0 && rowIndex === basicDataSource.length - 1">
-          <td dTableCell [fixedLeft]="'0'"></td>
-          <td dTableCell [fixedLeft]="'200px'"></td>
-          <td
-            dTableCell
-            [fixedLeft]="'300px'"
-            dResizeHandle
-            [containerElement]="resizeHandleContainerElement"
-            (resizeStartEvent)="onResizeStart($event)"
-            (resizingEvent)="onResizing($event)"
-            (resizeEndEvent)="onResized($event)"
-          ></td>
-          <td dTableCell></td>
-        </tr>
       </ng-template>
     </tbody>
   </d-data-table>
@@ -252,4 +238,21 @@
     <div>开始时间：{{ ganttInstance?.startDate | i18nDate: 'short' }}</div>
     <div>结束时间：{{ ganttInstance?.endDate | i18nDate: 'short' }}</div>
   </div>
+</ng-template>
+
+<ng-template #minHeightStretchRow>
+  <tr class="min-height-stretch-row">
+    <td dTableCell [fixedLeft]="'0'"></td>
+    <td dTableCell [fixedLeft]="'200px'"></td>
+    <td
+      dTableCell
+      [fixedLeft]="'300px'"
+      dResizeHandle
+      [containerElement]="resizeHandleContainerElement"
+      (resizeStartEvent)="onResizeStart($event)"
+      (resizingEvent)="onResizing($event)"
+      (resizeEndEvent)="onResized($event)"
+    ></td>
+    <td dTableCell></td>
+  </tr>
 </ng-template>
