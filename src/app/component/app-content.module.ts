@@ -12,6 +12,7 @@ import scss from 'highlight.js/lib/languages/scss';
 import typescript from 'highlight.js/lib/languages/typescript';
 import { SafePipeModule } from 'ng-devui/utils';
 import { ColorComponent } from './color/color.component';
+import { ThemeGuideComponent } from './theme-guide.component';
 
 export function hljsLanguages() {
   return [
@@ -26,6 +27,7 @@ export function hljsLanguages() {
     ExamplePanelComponent,
     AppContentComponent,
     GetStartedComponent,
+    ThemeGuideComponent,
     ColorComponent
   ],
   imports: [

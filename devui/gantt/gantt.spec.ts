@@ -194,6 +194,7 @@ describe('gantt', () => {
             const ganttBar = debugEl.query(By.directive(GanttBarComponent)).nativeElement;
             const ganttBarElement = ganttBar.querySelector('.devui-gantt-bar');
             ganttBarElement.dispatchEvent(new Event('mouseover'));
+            tick(250);
             fixture.detectChanges();
 
             let ganttTips = document.querySelector('.devui-gantt-tips');

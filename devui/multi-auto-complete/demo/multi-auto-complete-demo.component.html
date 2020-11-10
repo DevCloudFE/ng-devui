@@ -2,9 +2,7 @@
   <d-demo-nav [navItems]="navItems"></d-demo-nav>
   <div class="demo-example" [dAnchor]="'basic-usage'">
     <div class="demo-title">基本用法</div>
-    <div class="demo-text">
-      通过 source 设置数据源
-    </div>
+    <div class="demo-text">通过 source 设置数据源</div>
     <d-codebox id="components-modal-basic" [sourceData]="MultiAutoCompleteDemoDefault">
       <d-multi-auto-complete-default demo></d-multi-auto-complete-default>
     </d-codebox>
@@ -13,7 +11,7 @@
   <div class="demo-example" [dAnchor]="'auto-complete-array'">
     <div class="demo-title">自定义匹配方法</div>
     <div class="demo-text">
-      通过 searchFn 自定义数据的匹配方法和返回的数据格式
+      通过 searchFn 自定义数据的匹配方法和返回的数据格式，如果你需要实现数据的清空与复制操作，可使用自定义按钮的方式。
     </div>
     <d-codebox id="components-modal-basic" [sourceData]="MultiAutoCompleteDemoArray">
       <d-multi-auto-complete-array demo></d-multi-auto-complete-array>
@@ -22,9 +20,7 @@
 
   <div class="demo-example" [dAnchor]="'auto-complete-disabled'">
     <div class="demo-title">使用禁用</div>
-    <div class="demo-text">
-      通过 disabled 自定义是否使用禁用
-    </div>
+    <div class="demo-text">通过 disabled 自定义是否使用禁用</div>
     <d-codebox id="components-modal-disabled" [sourceData]="MultiAutoCompleteDemoDisabled">
       <d-multi-auto-complete-disabled demo></d-multi-auto-complete-disabled>
     </d-codebox>

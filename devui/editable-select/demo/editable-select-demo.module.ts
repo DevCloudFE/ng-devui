@@ -51,7 +51,7 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
     LazyLoadComponent
   ],
   providers: [],
-  entryComponents: [EditableSelectDemoComponent]
+
 })
 export class EditableSelectDemoModule {
 }

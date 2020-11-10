@@ -19,7 +19,7 @@ export class CustomViewTemplateComponent implements OnInit {
   getValue(value) {
     console.log(value);
   }
-  getDay(num: number, str = '-') {
+  getDay(num: number, str = '/') {
     const day = new Date();
     const nowTime = day.getTime();
     const ms = 24 * 3600 * 1000 * num;

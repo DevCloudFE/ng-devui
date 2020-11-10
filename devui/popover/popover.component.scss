@@ -1,9 +1,10 @@
 @import '../style/theme/color';
 @import '../style/theme/variables';
 @import '../style/mixins/index';
+@import '../style/core/_font';
 
 :host.devui-popover {
-  font-size: 12px;
+  font-size: $devui-font-size;
   position: absolute;
   top: 0;
   left: 0;

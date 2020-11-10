@@ -5,8 +5,9 @@ import {
   ElementRef,
   Input,
   TemplateRef,
-  ChangeDetectorRef,
+  ChangeDetectorRef, HostBinding
 } from '@angular/core';
+import { DFormControlStatus } from './validator-directive/validate.type';
 
 @Component({
   selector: 'd-form-control',
@@ -21,10 +22,22 @@ export class FormControlComponent implements OnInit {
   }
 
   errorMessage: string;
-  feedbackStatus: 'error' | null;
+  @Input() feedbackStatus: DFormControlStatus | null;
+
+  @HostBinding('class.devui-form-control-has-feedback') get status() {
+    return !!this.feedbackStatus;
+  }
+
+  /**
+   * @desc Compatible with z-index of components that include dropdown menu, will be remove.
+   *
+   */
+  @HostBinding('class.devui-control-has-open-dropdown') get dropdownOpen() {
+    return !!this.elementRef.nativeElement.querySelector('.devui-dropdown-origin-open');
+  }
 
   constructor(
-    elementRef: ElementRef,
+    private elementRef: ElementRef,
     renderer: Renderer2,
     private cdr: ChangeDetectorRef,
   ) {
@@ -40,7 +53,7 @@ export class FormControlComponent implements OnInit {
     this.cdr.detectChanges();
   }
 
-  public updateFeedbackStatus(status: 'error' | null): void {
+  public updateFeedbackStatus(status: DFormControlStatus | null): void {
     this.feedbackStatus = status;
     this.cdr.detectChanges();
   }

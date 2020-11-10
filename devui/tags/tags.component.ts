@@ -28,8 +28,8 @@ export class TagsComponent {
    */
   @Output() tagDelete = new EventEmitter<any>();
 
-  removeTag(tag, index) {
-    this.tagDelete.emit({ tag: tag, index: index });
+  removeTag($event, tag, index) {
+    this.tagDelete.emit({ tag: tag, index: index, event: $event });
   }
 
 }

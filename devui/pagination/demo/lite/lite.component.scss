@@ -16,14 +16,14 @@ d-button {
 .config-item-title {
   color: $devui-line;
   padding-left: 10px;
-  font-size: 12px;
+  font-size: $devui-font-size;
   line-height: 1.5;
 }
 
 .config-item-words {
   color: $devui-text;
   padding-left: 10px;
-  font-size: 12px;
+  font-size: $devui-font-size;
   margin-top: 4px;
 }
 

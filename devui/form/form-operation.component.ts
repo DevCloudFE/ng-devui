@@ -37,7 +37,7 @@ export class FormOperationComponent implements OnInit {
 @Directive({
   selector: '[dFormSubmit]',
 })
-export class DFormSubmitDirective {
+export class DFormSubmitDirective implements AfterViewInit, OnDestroy {
   @HostBinding('class.devui-form-submit') default = true;
 
   _eventName = 'click';

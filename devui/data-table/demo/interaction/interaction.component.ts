@@ -110,15 +110,18 @@ export class InteractionComponent implements OnInit {
   constructor(private ref: ChangeDetectorRef) { }
   ngOnInit() {
     this.checkboxList = JSON.parse(JSON.stringify(originSource.slice(0, 6)));
+    this.sortableDataSource[0]['$checkDisabled'] = true;
   }
 
   onSortChange(event: SortEventArg, field) {
     switch (field) {
       case 'Gender':
         this.lastNameSortDirection = SortDirection.default;
+        this.genderSortDirecticon = event.direction;
       break;
       case 'lastName':
         this.genderSortDirecticon = SortDirection.default;
+        this.lastNameSortDirection = event.direction;
         break;
       default:
         break;

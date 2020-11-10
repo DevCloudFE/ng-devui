@@ -44,7 +44,7 @@ import { TwoDatePickerEndDirective } from './two-datepicker/two-datepicker-end.d
     TwoDatePickerStartDirective,
     TwoDatePickerEndDirective
   ],
-  entryComponents: [DatepickerComponent],
+
   providers: [DatePickerConfigService]
 })
 export class DatepickerModule {

@@ -1,3 +1,11 @@
+## 引入
+
+当前组件为实验性组件，需要按需引入，路径如下：
+
+```
+import { GanttModule } from 'ng-devui/gantt';
+```
+
 ### d-gantt-scale 参数
 
 |             参数              |        类型        | 默认  | 说明                                       | 跳转 Demo                                                                  |

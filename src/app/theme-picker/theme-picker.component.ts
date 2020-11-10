@@ -24,7 +24,7 @@ export class ThemePickerComponent implements OnInit, OnDestroy {
     this.themes = window['devuiThemes'];
     this.theme = window['devuiCurrentTheme'];
     this.themePrefix = this.theme.split('-')[0];
-    this.themeMode = this.themes[this.theme].isDark ? 'dark' : 'light';
+    this.themeMode = this.themes[this.theme]?.isDark ? 'dark' : 'light';
     this.themePrefersColorScheme = this.getThemePrefersColorSchemeOn();
     this.cdr.detectChanges();
     if (this.themePrefersColorScheme) {

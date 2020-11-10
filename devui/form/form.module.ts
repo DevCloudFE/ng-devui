@@ -8,6 +8,7 @@ import { FormControlComponent } from './form-control.component';
 import { FormOperationComponent, DFormSubmitDirective, DFormResetDirective } from './form-operation.component';
 import { FormDirective } from './form.directive';
 import { DFormControlRuleDirective, DFormGroupRuleDirective } from './validator-directive/form-control-rules.directive';
+import { DValidateSyncDirective } from './validator-directive/d-validate-sync.directive';
 
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule, FormsModule, PopoverModule],
@@ -20,7 +21,8 @@ import { DFormControlRuleDirective, DFormGroupRuleDirective } from './validator-
     DFormGroupRuleDirective,
     DFormControlRuleDirective,
     DFormSubmitDirective,
-    DFormResetDirective
+    DFormResetDirective,
+    DValidateSyncDirective
   ],
   declarations: [
     FormItemComponent,
@@ -31,7 +33,8 @@ import { DFormControlRuleDirective, DFormGroupRuleDirective } from './validator-
     DFormGroupRuleDirective,
     DFormControlRuleDirective,
     DFormSubmitDirective,
-    DFormResetDirective
+    DFormResetDirective,
+    DValidateSyncDirective
   ],
   providers: [],
 })

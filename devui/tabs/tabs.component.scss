@@ -9,7 +9,7 @@
 
 .devui-nav-tabs,
 .devui-nav-pills {
-  font-size: $font-size-secondary-card-title;
+  font-size: $devui-font-size-card-title;
   background: transparent;
   font-weight: bold;
 
@@ -64,7 +64,7 @@
 }
 
 .devui-nav-options {
-  font-size: $font-size-base;
+  font-size: $devui-font-size;
   background: transparent;
   border: none;
   border-radius: 1px;

@@ -1,0 +1,32 @@
+<section class="demo-section">
+  <d-toast [value]="msgs"></d-toast>
+  <h5>响应式表单跨组件验证</h5>
+  <div>
+    <form
+      dForm
+      [formGroup]="userFormGroup"
+      [dValidateRules]="formRules.rule"
+      [layout]="'vertical'"
+      #userForm="dValidateRules"
+      (dSubmit)="submitForm()"
+    >
+      <d-form-item>
+        <d-form-label [required]="true" [hasHelp]="true" [helpTips]="'填写一个你喜欢的用户名吧'">用户名</d-form-label>
+        <d-form-control>
+          <input dTextInput autocomplete="off" name="username" formControlName="username" [dValidateRules]="formRules.usernameRules" />
+        </d-form-control>
+      </d-form-item>
+      <d-form-item>
+        <d-form-label [required]="true">子用户</d-form-label>
+        <d-form-control>
+          <child-user [control]="userFormGroup.get('childUser')"></child-user>
+        </d-form-control>
+      </d-form-item>
+      <d-form-operation>
+        <d-button class="mr-element-spacing" [title]="userForm.errorMessage || ''" circled="true" style="margin-right: 8px" dFormSubmit
+          >提交</d-button
+        >
+      </d-form-operation>
+    </form>
+  </div>
+</section>

@@ -328,10 +328,7 @@ class TestDataTableEditComponent {
   editableTip = EditableTip.btn;
   nameEditing: boolean;
 
-  thisCellEditEnd(event) {
-    console.log('cellEditEnd');
-    console.log(event.rowItem);
-  }
+  thisCellEditEnd = jasmine.createSpy('cellEditEnd');
 
   onEditing(editing, rowItem, editField) {
     rowItem[editField] = editing;
@@ -531,12 +528,12 @@ describe('data-table', () => {
       tick();
       fixture.detectChanges();
       const inputEl = checkBoxLabel.query(By.css('input'));
-      expect(inputEl.attributes.checked).toBeTruthy();
+      expect(inputEl.properties.checked).toBeTruthy();
 
       tick();
       fixture.detectChanges();
       const checkBoxLabels = debugEl.queryAll(By.css('.devui-data-table .devui-table .devui-checkable-cell input'));
-      expect(checkBoxLabels.every((item) => item.attributes.checked === 'true')).toBeTruthy();
+      expect(checkBoxLabels.every((item) => item.properties.checked)).toBeTruthy();
 
       const pageAllChecked = component.datatable.pageAllChecked;
       expect(pageAllChecked).toBeTruthy();
@@ -552,7 +549,7 @@ describe('data-table', () => {
       tick();
       fixture.detectChanges();
 
-      expect(checkBoxInputs[0].attributes.checked).toBeTruthy();
+      expect(checkBoxInputs[0].properties.checked).toBeTruthy();
       let halfChecked = debugEl.query(By.css('.devui-data-table .devui-table thead tr .devui-checkable-cell .devui-checkbox.halfchecked'));
       expect(halfChecked).toBeTruthy();
 
@@ -561,7 +558,7 @@ describe('data-table', () => {
         fixture.detectChanges();
         tick();
         fixture.detectChanges();
-        expect(checkBoxInputs[i].attributes.checked).toBeTruthy();
+        expect(checkBoxInputs[i].properties.checked).toBeTruthy();
         halfChecked = debugEl.query(By.css('.devui-data-table .devui-table thead tr .devui-checkable-cell .devui-checkbox.halfchecked'));
         expect(halfChecked).toBeTruthy();
       }
@@ -572,7 +569,7 @@ describe('data-table', () => {
       fixture.detectChanges();
       tick();
       fixture.detectChanges();
-      expect(checkBoxInputs[checkBoxLabels.length - 1].attributes.checked).toBeTruthy();
+      expect(checkBoxInputs[checkBoxLabels.length - 1].properties.checked).toBeTruthy();
     }));
 
     it('should set row check status work', fakeAsync(() => {
@@ -584,7 +581,7 @@ describe('data-table', () => {
       fixture.detectChanges();
       const checkBoxLabels = debugEl.queryAll(By.css('.devui-data-table .devui-table .devui-checkable-cell input'));
       const checkRows = component.datatable.getCheckedRows();
-      expect(checkBoxLabels.every((item) => item.attributes.checked === 'true')).toBeTruthy();
+      expect(checkBoxLabels.every((item) => item.properties.checked)).toBeTruthy();
       expect(checkRows.length).toBe(6);
 
       component.datatable.setTableCheckStatus({
@@ -807,7 +804,7 @@ describe('data-table', () => {
       fixture.detectChanges();
 
       const checkboxBodyLabels = debugEl.queryAll(By.css('.devui-data-table .devui-table tbody tr .devui-checkable-cell label > input'));
-      expect(checkboxBodyLabels.every((item) => item.attributes.checked === 'true')).toBeTruthy();
+      expect(checkboxBodyLabels.every((item) => item.properties.checked)).toBeTruthy();
     }));
   });
 

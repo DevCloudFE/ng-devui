@@ -40,17 +40,23 @@ export class TableTheadComponent implements OnInit, AfterContentInit, OnDestroy 
         });
       }
     }
-
     if (this.thList) {
-      this.nestedTh = this.thList.find(th => {
-        return th.nestedColumn;
+      this.setNestedThToggle();
+      this.thList.changes.subscribe((list) => {
+        this.setNestedThToggle();
       });
+    }
+  }
 
-      if (this.nestedTh) {
-        this.toggleTableSubscription = this.nestedTh.toggleChildrenTableEvent.subscribe((childrenTableOpen) => {
-          this.headerChildrenTableToggleEvent.emit(childrenTableOpen);
-        });
-      }
+  setNestedThToggle() {
+    this.nestedTh = this.thList.find(th => {
+      return th.nestedColumn;
+    });
+
+    if (this.nestedTh) {
+      this.toggleTableSubscription = this.nestedTh.toggleChildrenTableEvent.subscribe((childrenTableOpen) => {
+        this.headerChildrenTableToggleEvent.emit(childrenTableOpen);
+      });
     }
   }
 

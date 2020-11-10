@@ -1,6 +1,7 @@
 @import '../style/theme/color';
 @import '../style/theme/variables';
 @import '../style/mixins/index';
+@import '../style/core/_font';
 
 $keyframe-blue: #5e7ce0;
 
@@ -16,14 +17,14 @@ $keyframe-blue: #5e7ce0;
 
 .devui-tree-node {
   color: $devui-text-weak;
-  line-height: 1;
+  line-height: 1.5;
   white-space: nowrap;
   position: relative;
 
   .devui-tree-node__content {
     display: inline-flex;
     align-items: center;
-    font-size: 12px;
+    font-size: $devui-font-size;
     padding-right: 10px;
     width: 100%;
 
@@ -112,7 +113,7 @@ $keyframe-blue: #5e7ce0;
     display: inline-block;
     vertical-align: middle;
     user-select: none;
-    font-size: 16px;
+    font-size: $devui-font-size-icon;
     height: 16px;
     line-height: 16px;
 

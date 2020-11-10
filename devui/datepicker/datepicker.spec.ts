@@ -153,8 +153,7 @@ describe('datePicker', () => {
       });
 
       it('should datePicker show', fakeAsync(() => {
-        component.inputEle.nativeElement.dispatchEvent(new Event('focus'));
-        fixture.detectChanges();
+        tickEvent(component.inputEle.nativeElement, new Event('focus'), fixture);
         const classList = [
           '.devui-month-view', '.devui-month-view-table',
           '.devui-date-header', '.devui-week-header',
@@ -260,8 +259,7 @@ describe('datePicker', () => {
       });
 
       it('should datePicker show', fakeAsync(() => {
-        component.inputEle.nativeElement.dispatchEvent(new Event('focus'));
-        fixture.detectChanges();
+        tickEvent(component.inputEle.nativeElement, new Event('focus'), fixture);
         const classList = [
           '.devui-month-view', '.devui-month-view-table',
           '.devui-date-header', '.devui-week-header',

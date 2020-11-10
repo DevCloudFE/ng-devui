@@ -1,0 +1,29 @@
+.control-container {
+  display: flex;
+  align-items: center;
+  padding-right: 72px;
+
+  d-multi-auto-complete {
+    flex: 1;
+  }
+
+  .button-group {
+    display: none;
+  }
+
+  &:hover {
+    padding-right: 0;
+
+    .button-group {
+      display: inline-block;
+    }
+  }
+}
+
+.button-group {
+  margin-left: 8px;
+
+  d-button:not(:first-child) {
+    margin-left: 4px;
+  }
+}

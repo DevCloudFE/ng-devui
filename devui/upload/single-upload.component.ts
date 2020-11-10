@@ -37,6 +37,7 @@ export class SingleUploadComponent implements OnDestroy {
   @Input() fileOptions: IFileOptions;
   @Input() autoUpload = false;
   @Input() withoutBtn = false;
+  @Input() showTip = false;
   @Input() uploadedFiles: Array<Object> = [];
   @Input() uploadedFilesRef: TemplateRef<any>;
   @Input() preloadFilesRef?: TemplateRef<any>;
@@ -142,6 +143,7 @@ export class SingleUploadComponent implements OnDestroy {
             });
           },
           (error) => {
+            this.singleUploadViewComponent.fileUploaders[0].percentage = 0;
             this.singleUploadViewComponent.uploadedFilesComponent.cleanUploadedFiles();
             this.errorEvent.emit(error);
           }

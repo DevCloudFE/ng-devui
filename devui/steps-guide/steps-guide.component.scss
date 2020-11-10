@@ -1,4 +1,5 @@
 @import '../style/theme/color';
+@import '../style/core/_font';
 
 :host.devui-step-item {
   width: 400px;
@@ -6,13 +7,13 @@
   background: $devui-brand;
   box-shadow: 0 2px 16px 0 rgba(81, 112, 255, 0.3);
   border-radius: 6px;
-  font-size: 14px;
+  font-size: $devui-font-size;
   color: $devui-light-text;
   padding: 20px;
   position: absolute;
 
   .devui-title {
-    font-size: 16px;
+    font-size: $devui-font-size-page-title;
     opacity: 1;
     margin: 0 0 20px 0;
     padding: 0;
@@ -179,7 +180,7 @@
         color: $devui-light-text;
         position: relative;
         top: 25px;
-        font-size: 12px;
+        font-size: $devui-font-size;
         height: 30px;
 
         > em {

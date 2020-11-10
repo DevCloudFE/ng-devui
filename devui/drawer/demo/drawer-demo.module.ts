@@ -47,10 +47,7 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
     UndestroyableComponent,
     DrawerContentComponent
   ],
-  entryComponents: [
-    DrawerDemoComponent,
-    DrawerContentComponent
-  ],
+
 })
 export class DrawerDemoModule {
 }

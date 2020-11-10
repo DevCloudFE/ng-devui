@@ -1,4 +1,5 @@
 @import '../style/theme/color';
+@import '../style/core/_font';
 
 .devui-date-header {
   height: 38px;
@@ -6,7 +7,7 @@
 
 .devui-month-view {
   background-color: $devui-connected-overlay-bg;
-  font-size: 12px;
+  font-size: $devui-font-size;
   width: 240px;
   text-align: center;
   box-shadow: 0 4px 8px 0 $devui-shadow;
@@ -25,7 +26,7 @@
 .devui-month-view .devui-date-title {
   font-weight: bold;
   cursor: pointer;
-  font-size: 12px;
+  font-size: $devui-font-size;
 }
 
 .devui-month-view .devui-btn-link {
@@ -81,7 +82,7 @@
 
 .devui-month-view .devui-day:not(.disabled) {
   cursor: pointer;
-  font-size: 12px;
+  font-size: $devui-font-size;
   color: $devui-feedback-overlay-text;
 }
 
@@ -100,7 +101,7 @@
   text-align: center;
   -webkit-transition: background 0.3s ease;
   transition: background 0.3s ease;
-  font-size: 12px;
+  font-size: $devui-font-size;
   color: $devui-text;
 }
 
@@ -305,7 +306,7 @@
 }
 
 .devui-dropdown-menu {
-  font-size: 12px;
+  font-size: $devui-font-size;
 }
 
 .devui-btn-wrapper {

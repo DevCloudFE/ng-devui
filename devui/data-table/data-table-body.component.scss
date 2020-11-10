@@ -1,8 +1,9 @@
 @import '../style/theme/color';
+@import '../style/core/_font';
 
 .detail-content {
   color: $devui-text;
-  font-size: 12px;
+  font-size: $devui-font-size;
   font-weight: 400;
   background-color: $devui-area;
 }

@@ -1,4 +1,5 @@
 @import '../style/theme/color';
+@import '../style/core/_font';
 
 :host {
   display: inline-block;
@@ -42,7 +43,7 @@
   .input-box {
     box-sizing: border-box;
     padding: 5px 10px;
-    font-size: 12px;
+    font-size: $devui-font-size;
     vertical-align: middle;
     border-radius: 2px;
     outline: none;
@@ -133,7 +134,7 @@
 
 .devui-input-number-lg {
   & > .input-box {
-    font-size: 16px;
+    font-size: $devui-font-size-lg;
     line-height: 24px;
     height: 46px;
   }
@@ -148,7 +149,7 @@
 
 .devui-input-number-sm {
   & > .input-box {
-    font-size: 12px;
+    font-size: $devui-font-size-sm;
     line-height: 18px;
     height: 26px;
   }

@@ -8,13 +8,14 @@
 |     deletable      |   `boolean`   | false | 可选，设置标签是否可删除                                                                                                                                            | [单个标签](/components/tags/demo#single-tag) |
 | customViewTemplate | `TemplateRef` |  --   | 可选，自定义标签模板                                                                                                                                                | [单个标签](/components/tags/demo#single-tag) |
 |      checked       |   `boolean`   | false | 可选，标签选中的初始状态                                                                                                                                            | [单个标签](/components/tags/demo#single-tag) |
+|      customColor       |   `string`   | '' | 可选，传入颜色字符串（如'#f50'），自定义彩色标签的颜色                                                                                                                                            | [单个标签](/components/tags/demo#single-tag) |
 
 
 ### d-tag 事件
 
 | 事件名称  |             类型             | 说明                      | 跳转 Demo                                    |
 | :-------: | :--------------------------: | :------------------------ | -------------------------------------------- |
-| tagDelete | `EventEmitter<{ tag: tag }>` | 删除 tag 的时候触发的事件 | [单个标签](/components/tags/demo#single-tag) |
+| tagDelete | `EventEmitter<{ tag: tag, event: event }>` | 删除 tag 的时候触发的事件 | [单个标签](/components/tags/demo#single-tag) |
 
 ### d-tags 参数
 
@@ -29,4 +30,4 @@
 
 | 事件名称  |                    类型                    | 说明                          | 跳转 Demo                                  |
 | :-------: | :----------------------------------------: | :---------------------------- | ------------------------------------------ |
-| tagDelete | `EventEmitter<{ tag: tag, index: index }>` | 删除某个 tag 的时候触发的事件 | [标签组](/components/tags/demo#tags-group) |
+| tagDelete | `EventEmitter<{ tag: tag, index: index, event: event }>` | 删除某个 tag 的时候触发的事件 | [标签组](/components/tags/demo#tags-group) |

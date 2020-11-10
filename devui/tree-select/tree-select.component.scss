@@ -28,15 +28,18 @@
 
     &.devui-tree-select-input {
       color: $devui-line; //TODO: Color-Question
-      font-size: $font-size-base;
-      padding: 2px 10px 0 10px;
+      font-size: $devui-font-size;
+      padding: 2px 32px 2px 2px;
       height: unset;
       min-height: 28px;
       max-height: 52px;
       overflow-y: scroll;
-      padding-right: 20px;
       line-height: 22px;
       display: flex;
+
+      &.devui-select-no-label {
+        padding-left: 10px;
+      }
     }
   }
 
@@ -147,17 +150,19 @@
 }
 
 .devui-select-item {
-  display: inline-flex;
-  align-items: center;
   color: $devui-text;
-  padding: 1px 10px;
   line-height: 1.5;
   background-color: $devui-label-bg;
   border-radius: 2px;
-  margin: 0 2px 2px 0;
   border: 1px solid $devui-label-bg;
-  max-width: calc(100% - 2px);
-  height: 22px;
+  display: inline-block;
+  max-width: 100%;
+  min-height: 20px;
+  height: 20px;
+  max-height: 20px;
+  margin: 1px;
+  padding: 0 5px;
+  position: relative;
 
   &.devui-no-label-item {
     padding: 1px 0;
@@ -175,7 +180,12 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    max-width: calc(100% - 24px);
+    vertical-align: baseline;
+    height: 18px;
+    line-height: 18px;
+    max-width: 100%;
+    padding-right: 30px;
+    position: relative;
 
     &:hover {
       color: $devui-list-item-hover-text;
@@ -190,12 +200,15 @@
     margin-left: 12px;
     border-radius: 50%;
     background-color: $devui-line; // TODO: Color-Question
-    position: relative;
-    top: -1px;
     display: inline-flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: transform 0.2s ease;
 
     svg path {
       fill: $devui-light-text;
@@ -248,6 +261,7 @@ svg.svg-icon-search path {
       &:focus {
         color: $devui-disabled-text;
         cursor: not-allowed;
+        padding-right: 0;
       }
     }
 

@@ -7,35 +7,7 @@
 >
 </d-uploaded-files>
 <ng-template
-  [ngTemplateOutlet]="preloadFilesRef ? preloadFilesRef : default"
-  [ngTemplateOutletContext]="{ $implicit: this, fileUploaders: fileUploaders, UploadStatus: UploadStatus, deleteFile: deleteFileProxy}"
+  [ngTemplateOutlet]="preloadFilesRef"
+  [ngTemplateOutletContext]="{ $implicit: this, fileUploaders: fileUploaders, UploadStatus: UploadStatus, deleteFile: deleteFileProxy }"
 >
-</ng-template>
-<ng-template #default>
-  <table class="devui-table" *ngIf="fileUploaders.length > 0">
-    <tr *ngFor="let fileUploader of fileUploaders; let index = index">
-      <td width="50%">
-        <span>{{ fileUploader.file.name }}</span>
-      </td>
-      <td width="25%">
-        <span *ngIf="fileUploader.status === UploadStatus.preLoad">{{ i18nText?.preload }}</span>
-        <span *ngIf="fileUploader.status === UploadStatus.uploading">{{ i18nText?.uploading }}</span>
-        <span *ngIf="fileUploader.status === UploadStatus.uploaded">{{ i18nText?.uploaded }}</span>
-        <span *ngIf="fileUploader.status === UploadStatus.failed">{{ i18nText?.uploadFailed }}</span>
-      </td>
-      <td>
-        <d-button
-          bordered="true"
-          icon="trash"
-          bsStyle="danger"
-          bsSize="xs"
-          *ngIf="fileUploader.status !== UploadStatus.uploaded"
-          [disabled]="fileUploader.status === UploadStatus.uploading"
-          (btnClick)="deleteFile(fileUploader.file)"
-        >
-          {{ i18nText?.delete }}
-        </d-button>
-      </td>
-    </tr>
-  </table>
 </ng-template>

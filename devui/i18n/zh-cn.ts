@@ -11,6 +11,7 @@ export default {
     btnCancel: '取消',
     btnClose: '关闭',
     btnClickMe: '点击我',
+    copied: '复制成功'
   },
   datePicker: {
     today: '今天',
@@ -36,7 +37,32 @@ export default {
       return `${year}年`;
     }
   },
-
+  form: {
+    required(val): string {
+      return '值不能为空';
+    },
+    minlength(len): string {
+      return `长度不能小于${len}`;
+    },
+    maxlength(len): string {
+      return `长度不能大于${len}`;
+    },
+    min(val): string {
+      return `值不能小于${val}`;
+    },
+    max(val): string {
+      return `值不能大于${val}`;
+    },
+    requiredTrue(val): string {
+      return '值需要为真';
+    },
+    email(val): string {
+      return '邮箱格式校验不通过';
+    },
+    whitespace(val): string {
+      return '值不能全为空格';
+    }
+  },
   pagination: {
     totalItem: '所有条目',
     goTo: '跳至',
@@ -52,7 +78,10 @@ export default {
     uploading: '上传中...',
     uploaded: '已上传',
     uploadFailed: '上传失败',
+    uploadSuccess: '上传成功!',
     delete: '删除',
+    reUpload: '重新上传',
+    cancelUpload: '取消上传',
     getNotAllowedFileTypeMsg(filename, scope) {
       return `支持的文件类型: "${scope}", 您上传的文件"${filename}"不在允许范围内，请重新选择文件`;
     },
@@ -64,6 +93,15 @@ export default {
     },
     getExistSameNameFilesMsg(sameNames) {
       return `您上传的 "${sameNames}" 存在重名文件, 请重新选择文件`;
+    },
+    getSelectedFilesCount(filesCount) {
+      return `已添加${filesCount}个文件`;
+    },
+    getUploadingFilesCount(uploadingCount, filesCount) {
+      return `${uploadingCount}/${filesCount}正在上传`;
+    },
+    getFailedFilesCount(failedCount) {
+      return `${failedCount}个文件上传失败！`;
     },
   },
   modal: {

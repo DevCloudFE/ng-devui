@@ -7,7 +7,7 @@ import { ToggleComponent } from './toggle.component';
 
 @Component({
   template: `
-    <d-toggle #comp [disabled]="disabled" [checked]="checked" (change)="onChange()" [beforeChange]="beforeChange"></d-toggle>
+    <d-toggle #comp [disabled]="disabled" [size]="'sm'" [checked]="checked" (change)="onChange()" [beforeChange]="beforeChange"></d-toggle>
   `
 })
 class TestToggleComponent {
@@ -47,7 +47,7 @@ describe('toggle', () => {
     it('should toggle close/open status has correct styles', () => {
       const toggleDebugEl: DebugElement = debugEl.query(By.css('.devui-toggle'));
       expect(toggleDebugEl).toBeTruthy();
-      expect(toggleDebugEl.classes['devui-toggle-']).toBeTruthy();
+      expect(toggleDebugEl.classes['devui-toggle-sm']).toBeTruthy();
 
       component.checked = true;
       fixture.detectChanges();

@@ -26,7 +26,6 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
   originOffsetLeft: number;
   columnAdjustStrategy = ColumnAdjustStrategy.mousemove;
   tableScrollLeft = 0;
-
   constructor(private ganttService: GanttService) { }
   tableWidthConfig = [
     {
@@ -43,9 +42,11 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
     },
     {
       field: 'gantt',
-      width: this.ganttScaleWidth
+      width: null
     }
   ];
+
+
 
   ngOnInit() {
     const curDate = new Date();
@@ -114,7 +115,7 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.unit === GanttScaleUnit.day) {
       this.unit = GanttScaleUnit.week;
     }
-    this.ganttService.setScaleConfig({unit: this.unit});
+    this.ganttService.setScaleConfig({ unit: this.unit });
     this.ganttScaleWidth = this.ganttService.getDurationWidth(this.ganttStartDate, this.ganttEndDate) + 'px';
     this.tableWidthConfig[3].width = this.ganttScaleWidth;
   }
@@ -129,7 +130,7 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.unit === GanttScaleUnit.month) {
       this.unit = GanttScaleUnit.week;
     }
-    this.ganttService.setScaleConfig({unit: this.unit});
+    this.ganttService.setScaleConfig({ unit: this.unit });
     this.ganttScaleWidth = this.ganttService.getDurationWidth(this.ganttStartDate, this.ganttEndDate) + 'px';
     this.tableWidthConfig[3].width = this.ganttScaleWidth;
   }

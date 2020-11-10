@@ -1,5 +1,5 @@
 {
-  "extends": "../tsconfig.json",
+  "extends": "../tsconfig.base.json",
   "compilerOptions": {
     "outDir": "../out-tsc/app",
     "types": [
@@ -14,12 +14,5 @@
     "main.ts",
     "polyfills.ts"
   ],
-  "include": [
-    "src/**/*.ts"
-  ],
-  "exclude": [
-    "test.ts",
-    "**/*.spec.ts",
-    "../devui/**/*.spec.ts"
-  ]
+  "include": []
 }

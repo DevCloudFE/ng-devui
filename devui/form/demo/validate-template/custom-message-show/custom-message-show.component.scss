@@ -1,0 +1,8 @@
+@import '../../../../style/theme/color';
+
+.error-message {
+  height: 20px;
+  line-height: 20px;
+  margin-top: 4px;
+  color: $devui-danger;
+}

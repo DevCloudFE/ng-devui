@@ -1,0 +1,32 @@
+<section class="demo-section">
+  <div>
+    <form dForm ngForm [layout]="'horizontal'" [labelSize]="''">
+      <d-form-item>
+        <d-form-label>Input Pending</d-form-label>
+        <d-form-control [feedbackStatus]="'pending'">
+          <input dTextInput name="inputText" />
+        </d-form-control>
+      </d-form-item>
+      <d-form-item>
+        <d-form-label>Search Success</d-form-label>
+        <d-form-control [feedbackStatus]="'success'">
+          <d-search name="search"></d-search>
+        </d-form-control>
+      </d-form-item>
+      <d-form-item>
+        <d-form-label>Select Error</d-form-label>
+        <d-form-control [feedbackStatus]="'error'">
+          <d-select
+            class="devui-error"
+            [options]="verifierOptions"
+            [(ngModel)]="singleSelectData"
+            [multiple]="true"
+            [name]="'singleSelect'"
+            [filterKey]="'name'"
+          >
+          </d-select>
+        </d-form-control>
+      </d-form-item>
+    </form>
+  </div>
+</section>

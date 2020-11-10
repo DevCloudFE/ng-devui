@@ -46,7 +46,7 @@ import { DynamicUploadOptionsComponent } from './dynamic-upload-options/dynamic-
     UploadAutoComponent,
     DynamicUploadOptionsComponent
   ],
-  entryComponents: [UploadDemoComponent],
+
   providers: [],
 })
 export class UploadDemoModule {

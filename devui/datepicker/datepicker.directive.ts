@@ -1,6 +1,6 @@
 import {
   Directive, OnInit, Input, ElementRef, forwardRef, ComponentRef, ViewContainerRef, Output, EventEmitter,
-  ComponentFactoryResolver, Renderer2, Injector, HostListener, TemplateRef, OnDestroy
+  ComponentFactoryResolver, Renderer2, Injector, HostListener, TemplateRef, OnDestroy, ChangeDetectorRef
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DateConverter } from 'ng-devui/utils';
@@ -42,7 +42,7 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
   @Input() autoOpen = false;
   @Output() selectedDateChange = new EventEmitter<SelectDateChangeEventArgs>();
   selectedDate: Date;
-  isOpen = false;
+  private _isOpen = false;
   _dateConfig: any;
   private _dateFormat: string;
   private _maxDate: Date;
@@ -55,6 +55,20 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
 
   private onChange = (_: any) => null;
   private onTouched = () => null;
+
+  set isOpen(val) {
+    this._isOpen = val;
+    if (val) {
+      setTimeout(() => {
+        document.addEventListener('click', this.onDocumentClick);
+      });
+    } else {
+      document.removeEventListener('click', this.onDocumentClick);
+    }
+  }
+  get isOpen() {
+    return this._isOpen;
+  }
 
   @Input() set showTime(showTime: boolean) {
     this._showTime = showTime;
@@ -113,7 +127,7 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
   constructor(private elementRef: ElementRef, private viewContainerRef: ViewContainerRef,
               private componentFactoryResolver: ComponentFactoryResolver, private renderer2: Renderer2,
               private injector: Injector, private datePickerConfig: DatePickerConfig, private i18n: I18nService,
-              private builder: AnimationBuilder) {
+              private builder: AnimationBuilder, private cdr: ChangeDetectorRef) {
     this._dateConfig = datePickerConfig['dateConfig'];
     this.dateConverter = datePickerConfig['dateConfig'].dateConverter || new DefaultDateConverter();
     this.selectedDate = null;
@@ -280,15 +294,28 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
     }
   }
 
-  toggle($event: Event) {
-    if ($event) {
-      $event.stopPropagation();
+  pickOutBoolean(arr: any[]) {
+    return arr.find(i => typeof i === 'boolean');
+  }
+
+  toggle(...args) {
+    let clickShow;
+    if (args.length) {
+      clickShow = this.pickOutBoolean(args);
     }
-    if (this.isOpen) {
-      this.hide();
-      return;
+    if (clickShow === undefined) {
+      if (this.isOpen) {
+        this.hide();
+      } else {
+        this.show();
+      }
+    } else {
+      if (clickShow) {
+        this.show();
+      } else {
+        this.hide();
+      }
     }
-    this.show();
   }
 
   private fillPopupData() {
@@ -308,10 +335,10 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
     }
   }
 
-  @HostListener('document:click', ['$event'])
-    onDocumentClick($event) {
+  onDocumentClick = ($event) => {
     if (this.elementRef.nativeElement !== $event.target) {
       this.hide();
+      this.cdr.markForCheck();
     }
   }
 
@@ -428,5 +455,6 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
     if (this.i18nSubscription) {
       this.i18nSubscription.unsubscribe();
     }
+    document.removeEventListener('click', this.onDocumentClick);
   }
 }

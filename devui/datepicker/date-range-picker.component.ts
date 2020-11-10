@@ -12,7 +12,8 @@ import {
   HostListener,
   ViewChild,
   OnDestroy,
-  TemplateRef
+  TemplateRef,
+  ChangeDetectorRef
 } from '@angular/core';
 import { CdkOverlayOrigin, ConnectedOverlayPositionChange, VerticalConnectionPos } from '@angular/cdk/overlay';
 import { DateConverter } from 'ng-devui/utils';
@@ -93,7 +94,6 @@ export class DateRangePickerComponent implements OnInit, ControlValueAccessor, O
   @Input() selectedRange = [null, null];
   @Input() hideOnRangeSelected = false;
   @Input() customViewTemplate: TemplateRef<any>;
-  @Input() splitter = '  -  ';
   @Output() selectedRangeChange = new EventEmitter<SelectDateRangeChangeEventArgs>();
   @ViewChild('leftPicker') leftPicker: ElementRef;
   @ViewChild('rightPicker') rightPicker: ElementRef;
@@ -101,10 +101,10 @@ export class DateRangePickerComponent implements OnInit, ControlValueAccessor, O
   private _isOpen = false;
   private _dateConfig: any;
   private _dateFormat: string;
+  private _splitter = '  -  ';
   private _maxDate: Date;
   private _minDate: Date;
   private _showTime: boolean;
-  private clickShow = false;
   public currentCalendars = [null, null];
   public cdkConnectedOverlayOrigin: any;
   public i18nLocale: I18nInterface['locale'];
@@ -141,11 +141,23 @@ export class DateRangePickerComponent implements OnInit, ControlValueAccessor, O
   @Input() set dateFormat(dateFormat: string) {
     if (dateFormat && this._dateFormat !== dateFormat) {
       this._dateFormat = dateFormat;
+      this.writeModelValue(this.selectedRange);
     }
   }
 
   get dateFormat() {
     return this._dateFormat;
+  }
+
+  @Input() set splitter (splitter: string) {
+    if (this._splitter !== splitter) {
+      this._splitter = splitter;
+      this.writeModelValue(this.selectedRange);
+    }
+  }
+
+  get splitter() {
+    return this._splitter;
   }
 
   @Input() set maxDate(date: Date | any) {
@@ -171,20 +183,27 @@ export class DateRangePickerComponent implements OnInit, ControlValueAccessor, O
   }
 
   set isOpen(isOpen: boolean) {
-    this._isOpen = isOpen;
-    if (!isOpen && !this.rangeEnd) {
-      this.rangeStart = null;
-    }
-    if (!isOpen) {
-      const ele = this.formWithDropDown();
-      if (ele && ele.classList.contains('devui-dropdown-origin-open')) {
-        ele.classList.remove('devui-dropdown-origin-open');
+    if (this._isOpen !== isOpen) {
+      this._isOpen = isOpen;
+      if (!isOpen && !this.rangeEnd) {
+        this.rangeStart = null;
       }
-      if (ele && ele.classList.contains('devui-dropdown-origin-top')) {
-        ele.classList.remove('devui-dropdown-origin-top');
-      }
-      if (ele && ele.classList.contains('devui-dropdown-origin-bottom')) {
-        ele.classList.remove('devui-dropdown-origin-bottom');
+      if (!isOpen) {
+        document.removeEventListener('click', this.onDocumentClick);
+        const ele = this.formWithDropDown();
+        if (ele && ele.classList.contains('devui-dropdown-origin-open')) {
+          ele.classList.remove('devui-dropdown-origin-open');
+        }
+        if (ele && ele.classList.contains('devui-dropdown-origin-top')) {
+          ele.classList.remove('devui-dropdown-origin-top');
+        }
+        if (ele && ele.classList.contains('devui-dropdown-origin-bottom')) {
+          ele.classList.remove('devui-dropdown-origin-bottom');
+        }
+      } else {
+        setTimeout(() => {
+          document.addEventListener('click', this.onDocumentClick);
+        });
       }
     }
   }
@@ -194,7 +213,8 @@ export class DateRangePickerComponent implements OnInit, ControlValueAccessor, O
   }
 
   constructor(private elementRef: ElementRef, private viewContainerRef: ViewContainerRef,
-              private renderer: Renderer2, private datePickerConfig: DatePickerConfig, private i18n: I18nService) {
+              private renderer: Renderer2, private datePickerConfig: DatePickerConfig, private i18n: I18nService,
+              private cdr: ChangeDetectorRef) {
     this._dateConfig = datePickerConfig['dateConfig'];
     this.dateConverter = datePickerConfig['dateConfig'].dateConverter || new DefaultDateConverter();
   }
@@ -260,9 +280,20 @@ export class DateRangePickerComponent implements OnInit, ControlValueAccessor, O
     }
   }
 
-  public toggle($event: Event, clickShow?: boolean) {
-    this.isOpen = !this.isOpen;
-    this.clickShow = clickShow;
+  pickOutBoolean(arr: any[]) {
+    return arr.find(i => typeof i === 'boolean');
+  }
+
+  toggle(...args) {
+    let clickShow;
+    if (args.length) {
+      clickShow = this.pickOutBoolean(args);
+    }
+    if (clickShow === undefined) {
+      this.isOpen = !this.isOpen;
+    } else {
+      this.isOpen = clickShow;
+    }
   }
 
   public hide() {
@@ -303,15 +334,13 @@ export class DateRangePickerComponent implements OnInit, ControlValueAccessor, O
     this.transUserInputToDatepicker();
   }
 
-  @HostListener('document:click', ['$event'])
-  onDocumentClick($event) {
+  onDocumentClick = ($event) => {
     if (this.templateWrap && this.templateWrap.nativeElement.contains($event.target) && !this.hideOnRangeSelected) {
       this.isOpen = true;
-    } else if (this.elementRef.nativeElement !== $event.target && !this.clickShow) {
+    } else if (this.elementRef.nativeElement !== $event.target) {
       this.isOpen = false;
-    } else {
-      this.clickShow = false;
     }
+    this.cdr.markForCheck();
   }
 
   onPositionChange(position: ConnectedOverlayPositionChange) {
@@ -481,6 +510,7 @@ export class DateRangePickerComponent implements OnInit, ControlValueAccessor, O
     if (this.i18nSubscription) {
       this.i18nSubscription.unsubscribe();
     }
+    document.removeEventListener('click', this.onDocumentClick);
   }
 
   clearAll = (reason?: SelectDateRangeChangeReason, hide?: boolean) => {

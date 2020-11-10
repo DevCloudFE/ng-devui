@@ -6,9 +6,9 @@ import {
   TemplateRef,
   ViewChild,
   Input,
-  HostListener,
   Output,
-  EventEmitter
+  EventEmitter,
+  ChangeDetectorRef
 } from '@angular/core';
 import { CdkOverlayOrigin, ConnectedOverlayPositionChange, VerticalConnectionPos } from '@angular/cdk/overlay';
 import { cornerFadeInOut } from 'ng-devui/utils';
@@ -98,6 +98,7 @@ export class TwoDatePickerComponent implements OnInit, OnDestroy {
   set isOpen(isOpen: boolean) {
     this._isOpen = isOpen;
     if (!isOpen) {
+      document.removeEventListener('click', this.onDocumentClick);
       const ele = this.formWithDropDown();
       if (ele && ele.classList.contains('devui-dropdown-origin-open')) {
         ele.classList.remove('devui-dropdown-origin-open');
@@ -108,6 +109,10 @@ export class TwoDatePickerComponent implements OnInit, OnDestroy {
       if (ele && ele.classList.contains('devui-dropdown-origin-bottom')) {
         ele.classList.remove('devui-dropdown-origin-bottom');
       }
+    } else {
+      setTimeout(() => {
+        document.addEventListener('click', this.onDocumentClick);
+      });
     }
   }
 
@@ -130,7 +135,12 @@ export class TwoDatePickerComponent implements OnInit, OnDestroy {
     return this._isOpen;
   }
 
-  constructor(public el: ElementRef, protected datePickerConfig: DatePickerConfig, private i18n: I18nService) {
+  constructor(
+    public el: ElementRef,
+    protected datePickerConfig: DatePickerConfig,
+    private i18n: I18nService,
+    private cdr: ChangeDetectorRef
+  ) {
     this._dateConfig = datePickerConfig['dateConfig'];
     this.dateConverter = datePickerConfig['dateConfig'].dateConverter || new DefaultDateConverter();
   }
@@ -143,14 +153,14 @@ export class TwoDatePickerComponent implements OnInit, OnDestroy {
     return true;
   }
 
-  @HostListener('document:click', ['$event'])
-  onDocumentClick($event) {
+  onDocumentClick = ($event) => {
     if (this.el.nativeElement !== $event.target) {
       this.isOpen = false;
       this.startOpen = false;
       this.endOpen = false;
       this.whichOpen = false;
     }
+    this.cdr.markForCheck();
   }
 
   ngOnInit() {
@@ -169,8 +179,15 @@ export class TwoDatePickerComponent implements OnInit, OnDestroy {
     }
   }
 
-  toggle(event, side: 'start'|'end') {
-    event.stopPropagation();
+  pickOutBoolean(arr: any[]) {
+    return arr.find(i => (i === 'start' || i === 'end'));
+  }
+
+  toggle(...args) {
+    let side: 'start'|'end';
+    if (args.length) {
+      side = this.pickOutBoolean(args);
+    }
     if (this.isOpen) {
       if (side === 'start') {
         if (this.startOpen) {
@@ -398,5 +415,6 @@ export class TwoDatePickerComponent implements OnInit, OnDestroy {
     if (this.i18nSubscription) {
       this.i18nSubscription.unsubscribe();
     }
+    document.removeEventListener('click', this.onDocumentClick);
   }
 }

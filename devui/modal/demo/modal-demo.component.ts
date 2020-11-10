@@ -18,7 +18,7 @@ export class ModalDemoComponent {
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./customize/customize.component.ts') },
     { title: 'Custom Component HTML', language: 'xml', code: require('!!raw-loader!./customize/modal-alert.component.html') },
     { title: 'Custom Component TS', language: 'typescript', code: require('!!raw-loader!./customize/modal-alert.component.ts') },
-    { title: 'Custom Component CSS', language: 'css', code: require('!!raw-loader!./customize/modal-alert.component.css') }
+    { title: 'Custom Component CSS', language: 'css', code: require('!!raw-loader!./customize/modal-alert.component.scss') }
   ];
   tipsSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./tips/tips.component.html') },
@@ -29,7 +29,7 @@ export class ModalDemoComponent {
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./hide/hide.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./hide/hide.component.ts') },
     { title: 'ModalFormComponent HTML', language: 'xml', code: require('!!raw-loader!./hide/modal-form.component.html') },
-    { title: 'ModalFormComponent CSS', language: 'css', code: require('!!raw-loader!./hide/modal-form.component.css') },
+    { title: 'ModalFormComponent CSS', language: 'css', code: require('!!raw-loader!./hide/modal-form.component.scss') },
     { title: 'ModalFormComponent TS', language: 'typescript', code: require('!!raw-loader!./hide/modal-form.component.ts') },
   ];
   warningSource: Array<DevuiSourceData> = [

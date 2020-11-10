@@ -1,4 +1,5 @@
 @import '../style/theme/color';
+@import '../style/core/_font';
 
 .container {
   width: 100%;
@@ -37,7 +38,7 @@
   -moz-align-self: center;
   -ms-align-self: center;
   -o-align-self: center;
-  font-size: 12px;
+  font-size: $devui-font-size;
   color: $devui-aide-text;
   margin-right: 10px;
 }

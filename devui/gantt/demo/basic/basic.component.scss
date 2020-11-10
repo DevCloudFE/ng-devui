@@ -21,7 +21,7 @@
 
 ::ng-deep .devui-gantt-tips {
   & .title {
-    font-size: 14px;
+    font-size: $devui-font-size-card-title;
     color: $devui-text;
     line-height: 24px;
     font-weight: bold;
@@ -29,7 +29,7 @@
   }
 
   & .content {
-    font-size: 12px;
+    font-size: $devui-font-size;
     color: $devui-text;
     line-height: 24px;
   }

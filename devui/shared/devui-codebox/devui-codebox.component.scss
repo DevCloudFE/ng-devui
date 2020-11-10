@@ -1,4 +1,5 @@
 @import '../../style/theme/color';
+@import '../../style/core/_font';
 
 .code-box {
   border: 1px solid $devui-line;
@@ -27,7 +28,7 @@
   border-radius: 0 0 4px 4px;
   transition: background-color 0.4s;
   width: 100%;
-  font-size: 12px;
+  font-size: $devui-font-size;
   margin-bottom: 0;
 }
 
@@ -48,7 +49,7 @@
 
 .code-box-title > a {
   color: rgba(0, 0, 0, 0.65);
-  font-size: 14px;
+  font-size: $devui-font-size-card-title;
   font-weight: 500;
   text-decoration: none;
 }
@@ -110,7 +111,7 @@
 }
 
 .code-box-code-copy {
-  font-size: 14px;
+  font-size: $devui-font-size-card-title;
   cursor: pointer;
   color: #222222;
   transition: all 0.24s;

@@ -1,0 +1,30 @@
+.input-group {
+  display: flex;
+
+  input,
+  button {
+    outline: none !important;
+    border: 1px solid #d7d8da;
+    height: 32px;
+  }
+
+  input {
+    border-right: none;
+    border-radius: 4px 0 0 4px;
+    padding-left: 8px;
+    line-height: 30px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 200px;
+  }
+
+  button {
+    border-radius: 0 4px 4px 0;
+    padding: 8px;
+    font-size: 14px;
+    line-height: 14px;
+    text-align: center;
+    min-width: 30px;
+  }
+}

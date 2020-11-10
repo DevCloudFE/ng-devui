@@ -1,9 +1,10 @@
 @import '../style/mixins/index';
 @import '../style/theme/color';
+@import '../style/core/_font';
 
 .form-group label {
   cursor: pointer;
-  font-size: 12px;
+  font-size: $devui-font-size;
   margin-bottom: 0;
   width: 100%;
 }
@@ -102,6 +103,7 @@
   margin: 0 1px 1px 1px;
   border: 1px solid $devui-label-bg;
   border-radius: 2px;
+  vertical-align: middle;
 
   .label-item {
     display: flex;
@@ -139,7 +141,7 @@
 .multiple-label-auto-complete ul li {
   .label-close,
   .label-text {
-    font-size: 12px;
+    font-size: $devui-font-size;
     padding: 1px 10px;
     color: $devui-text-weak;
     font-weight: 400;

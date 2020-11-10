@@ -1,11 +1,10 @@
-@import '~@devui-design/icons/icomoon/devui-icon.css';
 @import '~ng-devui/styles-var/devui-var.scss';
 
 div.box {
   display: flex;
   justify-content: flex-end;
   padding: 10px;
-  font-size: 16px;
+  font-size: $devui-font-size;
   line-height: 32px;
 }
 

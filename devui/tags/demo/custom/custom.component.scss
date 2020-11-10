@@ -3,8 +3,16 @@
 :host ::ng-deep .devui-tag-item.tag-custom {
   background-color: $devui-brand;
   color: $devui-light-text;
+  box-sizing: border-box;
+
+  &:hover {
+    height: 18px;
+    line-height: 18px;
+    background-color: $devui-base-bg;
+    border: 1px solid $devui-brand;
+  }
 }
 
 d-tag {
-  margin: 4px 0;
+  margin: 4px;
 }

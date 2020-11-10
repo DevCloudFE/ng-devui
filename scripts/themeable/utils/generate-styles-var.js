@@ -11,6 +11,7 @@ async function task() {
   const dir = 'devui/style/theme/';
   const content = (await readFile([
     '_color.scss',
+    '_font.scss'
   ], dir)).join('\n');
   const targetDir ="publish/styles-var/"
 

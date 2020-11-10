@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'd-form-demo-validate-dynamic-rule',
-  templateUrl: './validate-dynamic-rule.component.html',
-  styleUrls: ['./validate-dynamic-rule.component.css']
+  templateUrl: './validate-dynamic-rule.component.html'
 })
 export class ValidateDynamicRuleComponent implements OnInit {
 

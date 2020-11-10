@@ -13,7 +13,8 @@ import {
   HostListener,
   OnChanges,
   SimpleChanges,
-  OnDestroy
+  OnDestroy,
+  ChangeDetectorRef
 } from '@angular/core';
 import { CdkOverlayOrigin, ConnectedPosition, ConnectedOverlayPositionChange, VerticalConnectionPos } from '@angular/cdk/overlay';
 
@@ -77,7 +78,6 @@ export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDes
   private _maxDate: Date;
   private _minDate: Date;
   private _showTime: boolean;
-  private clickShow = false;
   private i18nSubscription: Subscription;
   public i18nLocale: I18nInterface['locale'];
 
@@ -139,17 +139,24 @@ export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDes
   }
 
   set isOpen(open: boolean) {
-    this._isOpen = open;
-    if (!open) {
-      const ele = this.formWithDropDown();
-      if (ele && ele.classList.contains('devui-dropdown-origin-open')) {
-        ele.classList.remove('devui-dropdown-origin-open');
-      }
-      if (ele && ele.classList.contains('devui-dropdown-origin-top')) {
-        ele.classList.remove('devui-dropdown-origin-top');
-      }
-      if (ele && ele.classList.contains('devui-dropdown-origin-bottom')) {
-        ele.classList.remove('devui-dropdown-origin-bottom');
+    if (this._isOpen !== open) {
+      this._isOpen = open;
+      if (!open) {
+        document.removeEventListener('click', this.onDocumentClick);
+        const ele = this.formWithDropDown();
+        if (ele && ele.classList.contains('devui-dropdown-origin-open')) {
+          ele.classList.remove('devui-dropdown-origin-open');
+        }
+        if (ele && ele.classList.contains('devui-dropdown-origin-top')) {
+          ele.classList.remove('devui-dropdown-origin-top');
+        }
+        if (ele && ele.classList.contains('devui-dropdown-origin-bottom')) {
+          ele.classList.remove('devui-dropdown-origin-bottom');
+        }
+      } else {
+        setTimeout(() => {
+          document.addEventListener('click', this.onDocumentClick);
+        });
       }
     }
   }
@@ -159,7 +166,8 @@ export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDes
   }
 
   constructor(private elementRef: ElementRef, private viewContainerRef: ViewContainerRef,
-              private renderer2: Renderer2, private datePickerConfig: DatePickerConfig, private i18n: I18nService) {
+              private renderer2: Renderer2, private datePickerConfig: DatePickerConfig, private i18n: I18nService,
+              private cdr: ChangeDetectorRef) {
     this._dateConfig = datePickerConfig['dateConfig'];
     this.dateConverter = datePickerConfig['dateConfig'].dateConverter || new DefaultDateConverter();
   }
@@ -227,9 +235,20 @@ export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDes
     }
   }
 
-  toggle($event: Event, clickShow?: boolean) {
-    this.isOpen = !this.isOpen;
-    this.clickShow = clickShow;
+  pickOutBoolean(arr: any[]) {
+    return arr.find(i => typeof i === 'boolean');
+  }
+
+  toggle(...args) {
+    let clickShow;
+    if (args.length) {
+      clickShow = this.pickOutBoolean(args);
+    }
+    if (clickShow === undefined) {
+      this.isOpen = !this.isOpen;
+    } else {
+      this.isOpen = clickShow;
+    }
   }
 
   hide() {
@@ -280,12 +299,10 @@ export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDes
     }
   }
 
-  @HostListener('document:click', ['$event'])
-  onDocumentClick($event) {
-    if (this.elementRef.nativeElement !== $event.target && !this.clickShow) {
+  onDocumentClick = ($event) => {
+    if (this.elementRef.nativeElement !== $event.target) {
       this.isOpen = false;
-    } else {
-      this.clickShow = false;
+      this.cdr.markForCheck();
     }
   }
 
@@ -387,5 +404,6 @@ export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDes
     if (this.i18nSubscription) {
       this.i18nSubscription.unsubscribe();
     }
+    document.removeEventListener('click', this.onDocumentClick);
   }
 }

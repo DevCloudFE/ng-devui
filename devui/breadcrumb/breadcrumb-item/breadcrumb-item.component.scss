@@ -1,7 +1,8 @@
 @import '../../style/theme/color';
+@import '../../style/core/_font';
 
 .devui-breadcrumb-font-style {
-  font-size: 12px;
+  font-size: $devui-font-size;
   color: $devui-aide-text;
   line-height: 20px;
 }
@@ -73,7 +74,7 @@
 
   li {
     padding: 0 15px;
-    font-size: 12px;
+    font-size: $devui-font-size;
     line-height: 36px;
     width: 200px;
     overflow: hidden;

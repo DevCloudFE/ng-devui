@@ -1,5 +1,5 @@
 <section>
-  <d-tabs [(activeTab)]="acticeTabId" [showContent]="false">
+  <d-tabs [(activeTab)]="acticeTabId" [showContent]="false" [reactivable]="true" (activeTabChange)="activeTabChange($event)">
     <d-tab id="tab1" title="Tab1" tabId="tab1" [disabled]="true"> </d-tab>
 
     <d-tab id="tab2" title="Tab2" tabId="tab2"> </d-tab>

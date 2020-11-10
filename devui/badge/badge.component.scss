@@ -1,4 +1,5 @@
 @import '../style/theme/color';
+@import '../style/core/_font';
 
 @mixin status-color {
   &-danger {
@@ -33,13 +34,14 @@
   z-index: auto;
 
   &-count {
-    background: $devui-placeholder;
+    background: $devui-brand;
     color: $devui-light-text;
     min-width: 16px;
     height: 16px;
-    line-height: 16px;
+    font-size: $devui-font-size;
+    line-height: 12px;
     text-align: center;
-    padding: 0 4px;
+    padding: 2px 4px;
     border-radius: 8px;
   }
 
@@ -79,13 +81,14 @@
 .devui-badge-count {
   position: relative;
   right: 0;
-  background: $devui-placeholder;
+  background: $devui-brand;
   color: $devui-light-text;
   min-width: 16px;
   height: 16px;
-  line-height: 16px;
+  font-size: $devui-font-size;
+  line-height: 12px;
   text-align: center;
-  padding: 2px 8px;
+  padding: 2px 4px;
   border-radius: 8px;
   @include status-color;
 }

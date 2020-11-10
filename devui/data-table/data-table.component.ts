@@ -1,6 +1,6 @@
 import { AfterContentInit, Component, ContentChild, ContentChildren, ElementRef, EventEmitter,
   Input, NgZone, OnDestroy, OnInit, Output, QueryList, Renderer2, TemplateRef, ViewChild, OnChanges,
-  SimpleChanges, AfterViewInit} from '@angular/core';
+  SimpleChanges, AfterViewInit, HostBinding} from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CellSelectedEventArg, CheckableRelation, ColumnResizeEventArg, RowCheckChangeEventArg,
   RowSelectedEventArg, SortEventArg, TableExpandConfig, ColumnAdjustStrategy, TableCheckStatusArg,
@@ -249,6 +249,9 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
   @ContentChild('noResultTemplateRef') noResultTemplate: TemplateRef<any>;
   @ViewChild('fixHeaderContainerRef') fixHeaderContainerRefElement: ElementRef;
   @ViewChild('tableView', { static: true }) tableViewRefElement: ElementRef;
+  @HostBinding('style.height') get hostHeight() {
+    return this.tableHeight;
+  }
 
   _dataSource: any[] = [];
   _pageAllChecked = false;
@@ -411,6 +414,11 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
   ngAfterViewInit() {
     this.thList.forEach(th => {
       th.tableViewRefElement = this.tableViewRefElement;
+    });
+    this.thList.changes.subscribe((list) => {
+      list.forEach(th => {
+        th.tableViewRefElement = this.tableViewRefElement;
+      });
     });
   }
 
@@ -609,7 +617,7 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
 
   private setCheckedStatus(data, checked) {
     return data.map(item => {
-      if (!item.$checkDisabled || !item.$disabled) {
+      if (!(item.$checkDisabled || item.$disabled)) {
         item.$checked = checked;
         item.$halfChecked = false;
       }

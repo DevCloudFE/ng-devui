@@ -8,7 +8,7 @@ body {
 @mixin menu() {
   position: fixed;
   display: block;
-  font-size: 12px;
+  font-size: $devui-font-size;
   z-index: 5;
   width: 4em;
   height: 4em;
@@ -94,7 +94,7 @@ body {
   }
 
   h1.title {
-    font-size: $font-size-primary;
+    font-size: $devui-font-size-page-title;
     margin: 0;
     font-weight: $font-title-weight;
     padding: 9px 20px;
@@ -156,7 +156,7 @@ body {
     cursor: pointer;
 
     & > span {
-      font-size: $font-size-primary;
+      font-size: $devui-font-size-page-title;
       line-height: $line-height-base;
     }
 
@@ -278,7 +278,7 @@ body {
     }
 
     .panel-title {
-      font-size: 12px;
+      font-size: $devui-font-size;
       font-weight: normal;
       color: $devui-placeholder;
       margin: 0;
@@ -365,7 +365,7 @@ body {
     }
 
     h3 {
-      @include font-title($font-size-secondary-card-title);
+      @include font-title($devui-font-size-card-title);
     }
   }
 }
@@ -407,7 +407,7 @@ body {
 }
 
 .demo-title {
-  @include font-title($font-size-secondary-card-title);
+  @include font-title($devui-font-size-card-title);
 
   color: $devui-text;
   margin-bottom: 10px;
@@ -569,10 +569,4 @@ body {
   d-search {
     width: 215px;
   }
-}
-
-.devui-beta-label {
-  transform: scale(0.8);
-  vertical-align: super;
-  display: inline-block;
 }

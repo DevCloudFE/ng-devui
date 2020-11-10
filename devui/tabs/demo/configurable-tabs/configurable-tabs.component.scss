@@ -1,4 +1,5 @@
 @import '../../../style/theme/_color.scss';
+@import '../../../style/core/_font';
 
 .tabs-menu-container {
   padding: 10px 0;
@@ -7,7 +8,7 @@
 
 .tabs-menu-container li {
   padding: 0 15px;
-  font-size: 14px;
+  font-size: $devui-font-size;
   line-height: 36px;
   width: 200px;
   overflow: hidden;

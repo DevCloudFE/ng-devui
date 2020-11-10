@@ -8,7 +8,7 @@
   <tbody dTableBody>
     <ng-template let-rowItem="rowItem">
       <tr dTableRow>
-        <td dTableCell>{{ rowItem }}</td>
+        <td dTableCell>{{ getStringName(rowItem) }}</td>
         <td dTableCell>{{ rowItem | dRelativeTime: limit | async }}</td>
       </tr>
     </ng-template>

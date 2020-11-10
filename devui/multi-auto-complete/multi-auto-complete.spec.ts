@@ -5,8 +5,9 @@ import { ComponentFixture, TestBed, tick, fakeAsync } from '@angular/core/testin
 import { Component, DebugElement, ViewChild } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { createKeyBoardEvent } from '../utils/testing/event-helper';
-import { HighlightComponent } from '..';
+
 import { MultiAutoCompleteComponent } from './multi-auto-complete.component';
+import { HighlightComponent } from '../utils/highlight/highlight.component';
 
 @Component({
   template: `

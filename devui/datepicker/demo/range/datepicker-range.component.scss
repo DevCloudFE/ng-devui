@@ -1,9 +1,8 @@
-@import '~@devui-design/icons/icomoon/devui-icon.css';
 @import '~ng-devui/styles-var/devui-var.scss';
 
 div.box {
   padding: 10px;
-  font-size: 12px;
+  font-size: $devui-font-size;
   color: $devui-brand;
   line-height: 18px;
 }

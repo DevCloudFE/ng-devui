@@ -7,7 +7,35 @@
   [ngStyle]="{ border: isDropOVer ? '1px solid #15bf15' : '0' }"
 >
   <div class="devui-input-group" [class.disabled]="disabled" (click)="onClick($event)">
-    <input type="text" class="devui-form-control" [placeholder]="placeholderText ? placeholderText : i18nText?.chooseFiles" readonly />
+    <div *ngIf="dMultipleUploadView.fileUploaders.length === 0" class="devui-form-control" style="max-height: 28px">
+      {{ placeholderText ? placeholderText : i18nText?.chooseFile }}
+    </div>
+    <ul *ngIf="dMultipleUploadView.fileUploaders.length > 0" class="devui-form-control devui-files-list">
+      <li
+        *ngFor="let fileUploader of dMultipleUploadView.fileUploaders; let index = index"
+        class="devui-file-item devui-file-tag"
+        style="display: inline-block; margin: 0 2px 2px 0"
+      >
+        <span class="devui-filename {{ fileUploader.status === UploadStatus.failed ? 'devui-failed-color' : '' }}">
+          {{ fileUploader.file.name }}
+        </span>
+        <span
+          class="icon icon-close {{ fileUploader.status === UploadStatus.failed ? 'devui-upload-delete-file-button' : '' }}
+          {{
+            fileUploader.status === UploadStatus.uploading || fileUploader.status === UploadStatus.uploaded ? 'devui-uploading-delete' : ''
+          }}"
+          (click)="deleteFile($event, fileUploader.file)"
+        >
+        </span>
+        <div *ngIf="fileUploader.status === UploadStatus.uploading" class="icon devui-upload-progress">
+          <d-progress [isCircle]="true" [percentage]="fileUploader.percentage" [barbgcolor]="'#50D4AB'" [strokeWidth]="8">
+            <ng-template let-percentage="percentage"></ng-template>
+          </d-progress>
+        </div>
+        <span *ngIf="fileUploader.status === UploadStatus.failed" class="icon icon-running" (click)="upload($event, fileUploader)"> </span>
+        <span *ngIf="fileUploader.status === UploadStatus.uploaded" class="icon icon-right"></span>
+      </li>
+    </ul>
     <span class="devui-input-group-addon">
       <svg class="svg-icon-dot" height="1em" width="1em" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
         <path
@@ -16,10 +44,36 @@
       </svg>
     </span>
   </div>
-  <d-button *ngIf="!autoUpload && !withoutBtn" [disabled]="disabled" (btnClick)="upload()" [style.margin-left.px]="10" bsStyle="common">
+  <d-button
+    *ngIf="!autoUpload && !withoutBtn"
+    [disabled]="disabled"
+    (btnClick)="upload($event)"
+    [style.margin-left.px]="10"
+    bsStyle="common"
+  >
     {{ uploadText || i18nText?.upload }}
   </d-button>
 </div>
+<ng-container *ngIf="showTip">
+  <div class="devui-upload-tip">
+    <span *ngIf="getStatus() === 'selected'" class="devui-loading">{{ uploadTips }}</span>
+    <span *ngIf="getStatus() === 'uploading'" class="devui-loading">
+      <span style="margin-right: 8px">{{ uploadTips }}</span>
+      <a (click)="cancelUpload()">{{ i18nText?.cancelUpload }}</a>
+    </span>
+    <div *ngIf="getStatus() === 'uploaded'" class="devui-loaded">
+      <i class="icon icon-right-o"></i>
+      <span style="vertical-align: middle">{{ i18nText?.uploadSuccess }}</span>
+    </div>
+    <div *ngIf="getStatus() === 'failed'" class="devui-upload-failed">
+      <i class="icon icon-info-o"></i>
+      <span style="vertical-align: middle">
+        <span style="margin-right: 8px">{{ uploadTips }}</span>
+        <a (click)="upload($event)">{{ i18nText?.reUpload }}</a>
+      </span>
+    </div>
+  </div>
+</ng-container>
 <d-toast [value]="errorMsg"></d-toast>
 <d-multiple-upload-view
   #dMultipleUploadView

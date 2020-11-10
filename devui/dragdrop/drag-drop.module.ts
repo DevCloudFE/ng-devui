@@ -48,9 +48,7 @@ import { DropScrollEnhancedSideDirective } from './directives/drop-scroll-enhanc
   providers: [
       DragDropService
   ],
-  entryComponents: [
-    DragPreviewComponent,
-  ],
+
 })
 export class DragDropModule {
 }

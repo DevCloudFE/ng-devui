@@ -7,6 +7,9 @@
 }
 
 .devui-toggle {
+  width: 36px;
+  height: 18px;
+  border-radius: 18px;
   background: $devui-line;
   border: 1px solid $devui-line;
   position: relative;
@@ -31,12 +34,18 @@
   }
 
   small {
+    width: 16px;
+    height: 16px;
     background: $devui-light-text;
     border-radius: 100%;
     position: absolute;
     top: 1px;
     left: 1px;
     transition: 0.3s ease-out all;
+  }
+
+  &.devui-checked small {
+    left: 19px;
   }
 
   &.devui-toggle-lg {
@@ -54,22 +63,6 @@
     &.devui-checked small {
       background: $devui-light-text;
       left: 29px;
-    }
-  }
-
-  &.devui-toggle- {
-    width: 36px;
-    height: 18px;
-    border-radius: 18px;
-
-    & small {
-      width: 16px;
-      height: 16px;
-      position: absolute;
-    }
-
-    &.devui-checked small {
-      left: 19px;
     }
   }
 

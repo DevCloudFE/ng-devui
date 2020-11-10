@@ -6,12 +6,12 @@ $font-family: 'Helvetica Neue', helvetica, arial, 'PingFang SC', 'Hiragino Sans 
   sans-serif;
 $font-variant-base: tabular-nums;
 $body-background: $devui-base-bg;
-$font-size-base: $font-size-base; // 12px
-// $font-size-modal-title: $font-size-modal-title; // 18px
-$font-size-page-title: $font-size-primary; // 16px
-// $font-size-secondary-card-title: $font-size-secondary-card-title; // 14px
+$devui-font-size: $devui-font-size; // 12px
+// $devui-font-size-modal-title: $devui-font-size-modal-title; // 18px
+$font-size-page-title: $devui-font-size-page-title; // 16px
+// $devui-font-size-card-title: $devui-font-size-card-title; // 14px
 .devui-font-size-base {
-  font-size: $font-size-base; // 12px
+  font-size: $devui-font-size; // 12px
 }
 
 .devui-font-base {
@@ -19,15 +19,15 @@ $font-size-page-title: $font-size-primary; // 16px
 }
 
 .devui-font-size-modal-title {
-  font-size: $font-size-modal-title; // 18px
+  font-size: $devui-font-size-modal-title; // 18px
 }
 
 .devui-font-modal-title {
-  @include font-title($font-size-modal-title); // 18px bold 1.5
+  @include font-title($devui-font-size-modal-title); // 18px bold 1.5
 }
 
 .devui-font-size-page-title {
-  font-size: $font-size-primary; // 16px
+  font-size: $devui-font-size-page-title; // 16px
 }
 
 .devui-font-page-title {
@@ -35,9 +35,9 @@ $font-size-page-title: $font-size-primary; // 16px
 }
 
 .devui-font-size-secondary-title {
-  font-size: $font-size-secondary-card-title; // 14px
+  font-size: $devui-font-size-card-title; // 14px
 }
 
 .devui-font-secondary-title {
-  @include font-title($font-size-secondary-card-title); // 14px bold 1.5
+  @include font-title($devui-font-size-card-title); // 14px bold 1.5
 }

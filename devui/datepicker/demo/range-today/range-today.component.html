@@ -1,4 +1,4 @@
-<section style="width: 100%;">
+<section style="width: 100%">
   <span>日期范围选择器:</span>
   <div class="devui-input-group devui-dropdown-origin-wrapper devui-dropdown-origin">
     <input
@@ -6,7 +6,7 @@
       placeholder="y/MM/dd  -  y/MM/dd"
       name="dp"
       [(ngModel)]="dateRange"
-      (focus)="dateRangePicker.toggle($event)"
+      (focus)="dateRangePicker.toggle()"
       autocomplete="off"
       dDateRangePicker
       #dateRangePicker="dateRangePicker"
@@ -17,27 +17,19 @@
     <div *ngIf="everyRange(dateRange)" class="devui-input-group-addon icon-close-wrapper" (click)="dateRangePicker.clearAll()">
       <i class="icon icon-close"></i>
     </div>
-    <div class="devui-input-group-addon" (click)="dateRangePicker.toggle($event, true)">
+    <div class="devui-input-group-addon" (click)="dateRangePicker.toggle()">
       <i class="icon icon-calendar"></i>
     </div>
   </div>
   <ng-template #myCustomview let-chooseDate="chooseDate" let-rangeStart="rangeStart" let-rangeEnd="rangeEnd" let-datePicker>
     <div class="box">
       <div class="singleTemplate">
-        <d-button bsStyle="common" (btnClick)="chooseDate([getDay(-1), rangeEnd])" bsSize="sm">
-          选择昨天
-        </d-button>
-        <d-button bsStyle="common" (btnClick)="chooseDate([getDay(-7), rangeEnd])" bsSize="sm">
-          选择上周
-        </d-button>
+        <d-button bsStyle="common" (btnClick)="chooseDate([getDay(-1), rangeEnd])" bsSize="sm"> 选择昨天 </d-button>
+        <d-button bsStyle="common" (btnClick)="chooseDate([getDay(-7), rangeEnd])" bsSize="sm"> 选择上周 </d-button>
       </div>
       <div class="singleTemplate">
-        <d-button bsStyle="common" (btnClick)="chooseDate([rangeStart, getDay(0)])" bsSize="sm">
-          选择今天
-        </d-button>
-        <d-button bsStyle="common" (btnClick)="chooseDate([rangeStart, getDay(1)])" bsSize="sm">
-          选择明天
-        </d-button>
+        <d-button bsStyle="common" (btnClick)="chooseDate([rangeStart, getDay(0)])" bsSize="sm"> 选择今天 </d-button>
+        <d-button bsStyle="common" (btnClick)="chooseDate([rangeStart, getDay(1)])" bsSize="sm"> 选择明天 </d-button>
       </div>
     </div>
   </ng-template>

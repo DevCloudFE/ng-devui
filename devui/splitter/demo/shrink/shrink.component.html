@@ -5,6 +5,7 @@
       [size]="size"
       [minSize]="minSize"
       [maxSize]="maxSize"
+      [collapsed]="collapsed"
       [shrinkWidth]="40"
       [collapsible]="true"
       (sizeChange)="sizeChange($event)"
@@ -21,22 +22,15 @@
 
       <ul style="padding: 10px 0" *ngIf="isPaneShrink">
         <li
-          *ngFor="let item of menu"
+          dTooltip
+          [content]="hoverCard[index]"
+          [position]="'right'"
+          *ngFor="let item of menu; let index = index"
           class="title-icon {{ item.icon ? item.icon : 'icon-dot-status' }}"
           [ngClass]="{ active: item.active || isChildrenActive(item) }"
-          (mouseenter)="iconMouseEnter($event, item)"
-          (mouseleave)="iconMouseLeave($event)"
           (click)="selectItem(item)"
         ></li>
       </ul>
-
-      <div class="hover-card" [ngStyle]="{ 'left.px': hoverCardLeft, 'top.px': hoverCardTop }" *ngIf="hoverIcon">
-        <div class="triangle"></div>
-        <span [ngClass]="{ 'parent-item': hoverMenuItem.children }">{{ hoverMenuItem.title }}</span>
-        <ul *ngIf="hoverMenuItem.children">
-          <li *ngFor="let child of hoverMenuItem.children" [ngClass]="{ 'active-child': child.active }">{{ child.title }}</li>
-        </ul>
-      </div>
     </d-splitter-pane>
 
     <d-splitter-pane minSize="15%">

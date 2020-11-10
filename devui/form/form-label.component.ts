@@ -3,8 +3,9 @@ import {
     ElementRef,
     Renderer2,
     Input,
-    ChangeDetectorRef
+    ChangeDetectorRef, HostBinding
   } from '@angular/core';
+import { DFormControlStatus } from './validator-directive/validate.type';
 
 
   @Component({
@@ -18,7 +19,11 @@ import {
     @Input() hasHelp = false;
     @Input() helpTips = '';
 
-    feedbackStatus: 'error' | null = null;
+    feedbackStatus: DFormControlStatus | null = null;
+
+    @HostBinding('class.devui-form-label-has-feedback') get status() {
+      return this.feedbackStatus !== null;
+    }
 
     constructor(
       private cdr: ChangeDetectorRef,
@@ -28,7 +33,7 @@ import {
       renderer.addClass(elementRef.nativeElement, 'devui-form-label');
     }
 
-    public updateFeedbackStatus(status: 'error' | null): void {
+    public updateFeedbackStatus(status: DFormControlStatus | null): void {
       this.feedbackStatus = status;
       this.cdr.detectChanges();
     }

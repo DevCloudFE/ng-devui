@@ -150,8 +150,6 @@ describe('tags input', () => {
         keyCode: 13
       });
 
-      console.log(enterEvent);
-
       tagInputEl.dispatchEvent(enterEvent);
       fixtrue.detectChanges();
       tick(50);

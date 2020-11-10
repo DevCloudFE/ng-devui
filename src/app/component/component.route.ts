@@ -1,6 +1,7 @@
 import { ExamplePanelComponent } from './example-panel.component';
 import { GetStartedComponent } from './get-started.component';
 import { ColorComponent } from './color/color.component';
+import { ThemeGuideComponent } from './theme-guide.component';
 
 
 export const routesConfig = [
@@ -8,12 +9,12 @@ export const routesConfig = [
     path: '',
     redirectTo: 'get-start',
     pathMatch: 'full',
-    data: {}
+    data: {},
   },
   {
     path: 'get-start',
     component: GetStartedComponent,
-    data: { nodisplay: true }
+    data: { nodisplay: true },
   },
   {
     path: 'color',
@@ -21,85 +22,106 @@ export const routesConfig = [
     data: {nodisplay: true}
   },
   {
-    path: 'accordion', component: ExamplePanelComponent,
-    loadChildren: () => import('../../../devui/accordion/demo/accordion-demo.moudule').then(m => m.AccordionDemoModule),
+    path: 'theme-guide',
+    component: ThemeGuideComponent,
+    data: { nodisplay: true },
+  },
+  {
+    path: 'accordion',
+    component: ExamplePanelComponent,
+    loadChildren: () => import('../../../devui/accordion/demo/accordion-demo.moudule').then((m) => m.AccordionDemoModule),
     data: {
       type: '导航',
       name: 'Accordion',
       cnName: '手风琴',
       description: '手风琴，用于需要分组的层级菜单',
-      tmw: '需要通过分组组织菜单的时候使用'
-    }
+      tmw: '需要通过分组组织菜单的时候使用',
+    },
   },
   {
-    path: 'alert', component: ExamplePanelComponent,
-    loadChildren: () => import('../../../devui/alert/demo/alert-demo.module').then(m => m.AlertDemoModule),
+    path: 'alert',
+    component: ExamplePanelComponent,
+    loadChildren: () => import('../../../devui/alert/demo/alert-demo.module').then((m) => m.AlertDemoModule),
     data: {
       type: '反馈',
       name: 'Alert',
       cnName: '警告',
       description: '用于向用户显示警告的信息。',
-      tmw: '当页面需要向用户发出警告信息时。'
-    }
+      tmw: '当页面需要向用户发出警告信息时。',
+    },
   },
   {
-    path: 'anchor', component: ExamplePanelComponent,
-    loadChildren: () => import('../../../devui/anchor/demo/anchor-demo.module').then(m => m.AnchorDemoModule),
+    path: 'anchor',
+    component: ExamplePanelComponent,
+    loadChildren: () => import('../../../devui/anchor/demo/anchor-demo.module').then((m) => m.AnchorDemoModule),
     data: {
       type: '导航',
       name: 'Anchor',
       cnName: '锚点',
       description: '用于跳转到页面指定位置。',
-      tmw: '需要在页面的各个部分之间实现快速跳转时。'
-    }
+      tmw: '需要在页面的各个部分之间实现快速跳转时。',
+    },
   },
   {
     path: 'auto-complete',
     component: ExamplePanelComponent,
-    loadChildren: () => import('../../../devui/auto-complete/demo/auto-complete-demo.module').then(m => m.AutoCompleteDemoModule),
+    loadChildren: () =>
+      import('../../../devui/auto-complete/demo/auto-complete-demo.module').then((m) => m.AutoCompleteDemoModule),
     data: {
       type: '数据录入',
       name: 'AutoComplete',
       cnName: '自动补全',
       description: '在用户进行输入时联想用户可能需要的输入结果。',
-      tmw: '可以根据用户输入的部分字符推断出他可能想要输入的内容。'
-    }
+      tmw: '可以根据用户输入的部分字符推断出他可能想要输入的内容。',
+    },
   },
   {
     path: 'avatar',
     component: ExamplePanelComponent,
-    loadChildren: () => import('../../../devui/avatar/demo/avatar-demo.module').then(m => m.AvatarDemoModule),
+    loadChildren: () => import('../../../devui/avatar/demo/avatar-demo.module').then((m) => m.AvatarDemoModule),
     data: {
       type: '数据展示',
       name: 'Avatar',
       cnName: '头像',
       description: '设置头像',
-      tmw: '可以根据用户输入的字符显示头像。'
-    }
-  },
-  {
-    path: 'quadrant-diagram',
-    component: ExamplePanelComponent,
-    loadChildren: () => import('../../../devui/quadrant-diagram/demo/quadrant-diagram-demo.module').then(m => m.QuadrantDiagramDemoModule),
-    data: {
-      type: '演进中',
-      name: 'Quadrant Diagram',
-      cnName: '象限图',
-      description: '象限图，根据需求对事务进行区域划分与价值排序',
-      tmw: `可用于管理事务的优先级`
-    }
+      tmw: '可以根据用户输入的字符显示头像。',
+    },
   },
   {
     path: 'ImagePreview',
     component: ExamplePanelComponent,
-    loadChildren: () => import('../../../devui/image-preview/demo/image-preview-demo.module').then(m => m.ImagePreviewDemoModule),
+    loadChildren: () =>
+      import('../../../devui/image-preview/demo/image-preview-demo.module').then((m) => m.ImagePreviewDemoModule),
     data: {
       type: '数据展示',
       name: 'ImagePreview',
       cnName: '图片预览',
       description: '对一张或多张图片进行预览',
-      tmw: '可根据用户传入进行图片预览展示 或 对容器内图片进行预览。'
-    }
+      tmw: '可根据用户传入进行图片预览展示 或 对容器内图片进行预览。',
+    },
+  },
+  {
+    path: 'breadcrumb',
+    component: ExamplePanelComponent,
+    loadChildren: () => import('../../../devui/breadcrumb/demo/breadcrumb-demo.module').then((m) => m.BreadCrumbDemoModule),
+    data: {
+      type: '导航',
+      name: 'Breadcrumb',
+      cnName: '面包屑',
+      description: '导航辅助，显示当前页面层级，可快速返回任意页面',
+      tmw: `用户需要了解当前出于什么层级时；用户需要快速返回之前的层级时；用户需要导航至与指定层级相同的任意页面时；`,
+    },
+  },
+  {
+    path: 'button',
+    component: ExamplePanelComponent,
+    loadChildren: () => import('../../../devui/button/demo/button-demo.module').then((m) => m.ButtonDemoModule),
+    data: {
+      name: 'Button',
+      cnName: '按钮',
+      description: '按钮用于开始一个即时操作，发起命令并获取结果，在特定场景中使用特定按钮形态',
+      tmw: '标记了一个（或封装一组）操作命令，响应用户点击行为，触发相应的业务逻辑。',
+    },
   },
   {
     path: 'badge',
@@ -114,153 +136,140 @@ export const routesConfig = [
     },
   },
   {
-    path: 'breadcrumb',
+    path: 'card',
     component: ExamplePanelComponent,
-    loadChildren: () => import('../../../devui/breadcrumb/demo/breadcrumb-demo.module').then(m => m.BreadCrumbDemoModule),
+    loadChildren: () => import('../../../devui/card/demo/card-demo.module').then((m) => m.CardDemoModule),
     data: {
-      type: '导航',
-      name: 'Breadcrumb',
-      cnName: '面包屑',
-      description: '导航辅助，显示当前页面层级，可快速返回任意页面',
-      tmw: `用户需要了解当前出于什么层级时；用户需要快速返回之前的层级时；用户需要导航至与指定层级相同的任意页面时；`
-    }
-  },
-  {
-    path: 'button',
-    component: ExamplePanelComponent,
-    loadChildren: () => import('../../../devui/button/demo/button-demo.module').then(m => m.ButtonDemoModule),
-    data: {
-      name: 'Button',
-      cnName: '按钮',
-      description: '按钮用于开始一个即时操作，发起命令并获取结果，在特定场景中使用特定按钮形态',
-      tmw: '标记了一个（或封装一组）操作命令，响应用户点击行为，触发相应的业务逻辑。'
+      type: '数据展示',
+      name: 'Card',
+      cnName: '卡片',
+      description: '通用卡片容器。当一个模块的同类信息不能自然形成区块感，可借助 Card 组件将信息整合，帮助界面信息模块感更强。',
     }
   },
   {
     path: 'carousel',
     component: ExamplePanelComponent,
-    loadChildren: () => import('../../../devui/carousel/demo/carousel-demo.module').then(m => m.CarouselDemoModule),
+    loadChildren: () => import('../../../devui/carousel/demo/carousel-demo.module').then((m) => m.CarouselDemoModule),
     data: {
       type: '数据展示',
       name: 'Carousel',
       cnName: '走马灯',
       description: '一组轮播的区域，用于展示图片或者卡片。',
-      tmw: `<div>常用于一组图片或卡片轮播，当内容空间不足时，可以用走马灯的形式进行收纳，进行轮播展现。</div>`
-    }
+      tmw: `<div>常用于一组图片或卡片轮播，当内容空间不足时，可以用走马灯的形式进行收纳，进行轮播展现。</div>`,
+    },
   },
   {
     path: 'checkbox',
     component: ExamplePanelComponent,
-    loadChildren: () => import('../../../devui/checkbox/demo/checkbox-demo.module').then(m => m.CheckBoxDemoModule),
+    loadChildren: () => import('../../../devui/checkbox/demo/checkbox-demo.module').then((m) => m.CheckBoxDemoModule),
     data: {
       type: '数据录入',
       name: 'CheckBox',
       cnName: '复选框',
       description: '允许用户从一个数据集中选择多个选项。',
       tmw: `<div>1、在一组选项中进行多项选择。</div>
-      <div>2、单独使用可以表示在两个状态之间切换，需要和提交操作结合。</div>`
-    }
+      <div>2、单独使用可以表示在两个状态之间切换，需要和提交操作结合。</div>`,
+    },
+  },
+  {
+    path: 'common',
+    component: ExamplePanelComponent,
+    loadChildren: () => import('../../../devui/common/demo/common-demo.module').then((m) => m.CommonDemoModule),
+    data: {
+      name: 'Common',
+      cnName: '公共方法',
+      description: '提供一些公共的函数。',
+      tmw: '处理日期字符串转换、文件下载、a标签模拟、懒加载等。',
+    },
   },
   {
     path: 'datatable',
     component: ExamplePanelComponent,
-    loadChildren: () => import('../../../devui/data-table/demo/data-table-demo.module').then(m => m.DataTableDemoModule),
+    loadChildren: () => import('../../../devui/data-table/demo/data-table-demo.module').then((m) => m.DataTableDemoModule),
     data: {
       type: '数据展示',
       name: 'DataTable',
       cnName: '表格',
       description: '展示行列数据。',
       tmw: `<div>1、当有大量结构化的数据需要展现时</div>
-            <div>2、当需要对数据进行排序、搜索、分页、自定义操作等复杂行为时。</div>`
-    }
+            <div>2、当需要对数据进行排序、过滤、自定义操作等复杂行为时。</div>`,
+    },
   },
   {
     path: 'datepicker',
     component: ExamplePanelComponent,
-    loadChildren: () => import('../../../devui/datepicker/demo/datepicker-demo.module').then(m => m.DatepickerDemoModule),
+    loadChildren: () => import('../../../devui/datepicker/demo/datepicker-demo.module').then((m) => m.DatepickerDemoModule),
     data: {
       type: '数据录入',
       name: 'DatePicker',
       cnName: '日期选择器',
       description: '输入或选择日期的控件。',
-      tmw: '当用户需要输入一个日期，可以点击标准输入框，弹出日期面板进行选择。'
-    }
+      tmw: '当用户需要输入一个日期，可以点击标准输入框，弹出日期面板进行选择。',
+    },
   },
   {
     path: 'multi-auto-complete',
     component: ExamplePanelComponent,
-    loadChildren: () => import('../../../devui/multi-auto-complete/demo/multi-auto-complete-demo.module').
-      then(m => m.MultiAutoCompleteDemoModule),
+    loadChildren: () =>
+      import('../../../devui/multi-auto-complete/demo/multi-auto-complete-demo.module').then((m) => m.MultiAutoCompleteDemoModule),
     data: {
       type: '数据录入',
       name: 'MultiAutoComplete',
       cnName: '多项自动补全',
       description: '用于在若干选项中选择数个作为输入，通过联想为用户匹配可能的选项输入。',
-      tmw: '当用户需要在若干选项当中选择多个进行输入时。'
-    }
+      tmw: '当用户需要在若干选项当中选择多个进行输入时。',
+    },
   },
   {
     path: 'form',
     component: ExamplePanelComponent,
-    loadChildren: () => import('../../../devui/form/demo/form-demo.module').then(m => m.FormDemoModule),
+    loadChildren: () => import('../../../devui/form/demo/form-demo.module').then((m) => m.FormDemoModule),
     data: {
       type: '数据录入',
       name: 'Form',
       cnName: '表单',
       description: '表单具备数据收集、数据校验、数据提交功能，在业务中被大量使用，并且布局方式很多，包括单列、多列、向导式、Tab页式。',
-      tmw: `表单应用广泛，应用在过滤、创建、编辑等场景。`
-    }
+      tmw: `表单应用广泛，应用在过滤、创建、编辑等场景。`,
+    },
   },
   {
     path: 'fullscreen',
     component: ExamplePanelComponent,
-    loadChildren: () => import('../../../devui/fullscreen/demo/fullscreen-demo.module').then(m => m.FullscreenDemoModule),
+    loadChildren: () => import('../../../devui/fullscreen/demo/fullscreen-demo.module').then((m) => m.FullscreenDemoModule),
     data: {
       name: 'Fullscreen',
       cnName: '全屏',
       description: '全屏组件。',
-      tmw: `当用户需要将某一区域进行全屏展示时。`
-    }
-  },
-  {
-    path: 'gantt',
-    component: ExamplePanelComponent,
-    loadChildren: () => import('../../../devui/gantt/demo/gantt-demo.module').then(m => m.GanttDemoModule),
-    data: {
-      type: '演进中',
-      name: 'Gantt',
-      cnName: '甘特图',
-      description: '',
-      tmw: ``
-    }
+      tmw: `当用户需要将某一区域进行全屏展示时。`,
+    },
   },
   {
     path: 'transfer',
     component: ExamplePanelComponent,
-    loadChildren: () => import('../../../devui/transfer/demo/transfer-demo.module').then(m => m.TransferDemoModule),
+    loadChildren: () => import('../../../devui/transfer/demo/transfer-demo.module').then((m) => m.TransferDemoModule),
     data: {
       type: '数据录入',
       name: 'Transfer',
       cnName: '穿梭框',
       description: '双栏穿梭选择框',
-      tmw: `需要在多个可选项中进行多选时。穿梭选择框可用只管的方式在两栏中移动数据，完成选择行为。其中左边一栏为source，右边一栏为target。最终返回两栏的数据，提供给开发者使用`
-    }
+      tmw: `需要在多个可选项中进行多选时。穿梭选择框可用只管的方式在两栏中移动数据，完成选择行为。其中左边一栏为source，右边一栏为target。最终返回两栏的数据，提供给开发者使用`,
+    },
   },
   {
     path: 'dragdrop',
     component: ExamplePanelComponent,
-    loadChildren: () => import('../../../devui/dragdrop/demo/dragdrop-demo.module').then(m => m.DragDropDemoModule),
+    loadChildren: () => import('../../../devui/dragdrop/demo/dragdrop-demo.module').then((m) => m.DragDropDemoModule),
     data: {
       name: 'DragDrop',
       cnName: '拖拽',
       description: '拖拽组件。',
-      tmw: `当需要使用数个操作步骤，且步骤的顺序需要灵活调整时。`
-    }
+      tmw: `当需要使用数个操作步骤，且步骤的顺序需要灵活调整时。`,
+    },
   },
   {
     path: 'drawer',
     component: ExamplePanelComponent,
-    loadChildren: () => import('../../../devui/drawer/demo/drawer-demo.module').then(m => m.DrawerDemoModule),
+    loadChildren: () => import('../../../devui/drawer/demo/drawer-demo.module').then((m) => m.DrawerDemoModule),
     data: {
       type: '反馈',
       name: 'Drawer',
@@ -268,97 +277,98 @@ export const routesConfig = [
       description: '屏幕边缘滑出的浮层面板。',
       tmw: `<div>1、抽屉从父窗体边缘滑入，覆盖住部分父窗体内容。用户在抽屉内操作时不必离开当前任务，操作完成后，可以平滑地回到到原任务。</div>
       <div>2、当需要一个附加的面板来控制父窗体内容，这个面板在需要时呼出。比如，控制界面展示样式，往界面中添加内容。</div>
-      <div>3、当需要在当前任务流中插入临时任务，创建或预览附加内容。比如展示协议条款，创建子对象。</div>`
-    }
+      <div>3、当需要在当前任务流中插入临时任务，创建或预览附加内容。比如展示协议条款，创建子对象。</div>`,
+    },
   },
   {
     path: 'dropdown',
     component: ExamplePanelComponent,
-    loadChildren: () => import('../../../devui/dropdown/demo/dropdown-demo.module').then(m => m.DropdownDemoModule),
+    loadChildren: () => import('../../../devui/dropdown/demo/dropdown-demo.module').then((m) => m.DropdownDemoModule),
     data: {
       type: '导航',
       name: 'DropDown',
       cnName: '下拉菜单',
       description: '按向下弹出的列表。',
-      tmw: '当页面上的操作命令过多时，用此组件可以收纳操作元素。点击或移入触点，会出现一个下拉菜单。可在列表中进行选择，并执行相应的命令。'
-    }
+      tmw: '当页面上的操作命令过多时，用此组件可以收纳操作元素。点击或移入触点，会出现一个下拉菜单。可在列表中进行选择，并执行相应的命令。',
+    },
   },
   {
     path: 'editable-select',
     component: ExamplePanelComponent,
-    loadChildren: () => import('../../../devui/editable-select/demo/editable-select-demo.module').then(m => m.EditableSelectDemoModule),
+    loadChildren: () =>
+      import('../../../devui/editable-select/demo/editable-select-demo.module').then((m) => m.EditableSelectDemoModule),
     data: {
       type: '数据录入',
       name: 'EditableSelect',
       cnName: '可输入下拉选择框',
       description: '同时支持输入和下拉选择的输入框。',
-      tmw: '当需要同时支持用户输入数据和选择已有数据的时候使用，加入输入联想功能，方便用户搜索已有数据。'
-    }
+      tmw: '当需要同时支持用户输入数据和选择已有数据的时候使用，加入输入联想功能，方便用户搜索已有数据。',
+    },
   },
   {
     path: 'loading',
     component: ExamplePanelComponent,
-    loadChildren: () => import('../../../devui/loading/demo/loading-demo.module').then(m => m.LoadingDemoModule),
+    loadChildren: () => import('../../../devui/loading/demo/loading-demo.module').then((m) => m.LoadingDemoModule),
     data: {
       type: '反馈',
       name: 'Loading',
       cnName: '加载提示',
       description: '提示用户页面正在执行指令，需要等待。',
-      tmw: '当执行指令时间较长（需要数秒以上）时，向用户展示正在执行的状态。'
-    }
+      tmw: '当执行指令时间较长（需要数秒以上）时，向用户展示正在执行的状态。',
+    },
   },
   {
     path: 'modal',
     component: ExamplePanelComponent,
-    loadChildren: () => import('../../../devui/modal/demo/modal-demo.module').then(m => m.ModalDemoModule),
+    loadChildren: () => import('../../../devui/modal/demo/modal-demo.module').then((m) => m.ModalDemoModule),
     data: {
       type: '反馈',
       name: 'Modal',
       cnName: '模态弹窗',
       description: '弹窗即模态对话框，整个程序只有弹窗区域获得焦点，用户必须处理弹窗内容才可以做其他操作。',
       tmw: `<div>1、需要用户处理事务，又不希望跳转页面以致打断工作流程时，可以使用 Modal 在当前页面正中打开一个浮层，承载相应的操作。</div>
-      <div>2、弹窗起到与用户进行交互的作用，用户可以在对话框中输入信息、阅读提示、设置选项等操作。</div>`
-    }
+      <div>2、弹窗起到与用户进行交互的作用，用户可以在对话框中输入信息、阅读提示、设置选项等操作。</div>`,
+    },
   },
   {
     path: 'pagination',
     component: ExamplePanelComponent,
-    loadChildren: () => import('../../../devui/pagination/demo/pagination-demo.module').then(m => m.PaginationDemoModule),
+    loadChildren: () => import('../../../devui/pagination/demo/pagination-demo.module').then((m) => m.PaginationDemoModule),
     data: {
       type: '导航',
       name: 'Pagination',
       cnName: '分页',
       description: '采用分页的形式分隔长列表，每次只加载一个页面。',
-      tmw: `当加载/渲染所有数据将花费很多时间时，可以切换页码浏览数据。`
-    }
+      tmw: `当加载/渲染所有数据将花费很多时间时，可以切换页码浏览数据。`,
+    },
   },
   {
     path: 'panel',
     component: ExamplePanelComponent,
-    loadChildren: () => import('../../../devui/panel/demo/panel-demo.module').then(m => m.PanelDemoModule),
+    loadChildren: () => import('../../../devui/panel/demo/panel-demo.module').then((m) => m.PanelDemoModule),
     data: {
       name: 'Panel',
       cnName: '面板',
       description: '内容面板，用于内容分组。',
-      tmw: `当页面内容需要进行分组显示时使用，一般包含头部、内容区域、底部是哪个部分。`
-    }
+      tmw: `当页面内容需要进行分组显示时使用，一般包含头部、内容区域、底部是哪个部分。`,
+    },
   },
   {
     path: 'popover',
     component: ExamplePanelComponent,
-    loadChildren: () => import('../../../devui/popover/demo/popover-demo.module').then(m => m.PopoverDemoModule),
+    loadChildren: () => import('../../../devui/popover/demo/popover-demo.module').then((m) => m.PopoverDemoModule),
     data: {
       type: '反馈',
       name: 'Popover',
       cnName: '悬浮提示',
       description: '简单的文字提示气泡框。popover用来通知用户非关键性问题或提示某控件处于某特殊情况。',
-      tmw: `单击控件则显示提示，单击空白处提示消失，气泡浮层不承载复杂文本和操作。`
-    }
+      tmw: `单击控件则显示提示，单击空白处提示消失，气泡浮层不承载复杂文本和操作。`,
+    },
   },
   {
     path: 'progress',
     component: ExamplePanelComponent,
-    loadChildren: () => import('../../../devui/progress/demo/progress-demo.module').then(m => m.ProgressDemoModule),
+    loadChildren: () => import('../../../devui/progress/demo/progress-demo.module').then((m) => m.ProgressDemoModule),
     data: {
       type: '数据展示',
       name: 'Progress',
@@ -366,268 +376,310 @@ export const routesConfig = [
       description: '进度条，用来展示操作的当前进度。',
       tmw: `<div>1、当操作需要较长的时间时，向用户展示操作进度。</div>
             <div>2、当操作需要打断现有界面或后台运行，需要较长时间时。</div>
-            <div>3、当需要显示一个操作完成的百分比或已完成的步骤/总步骤时。</div>`
-    }
+            <div>3、当需要显示一个操作完成的百分比或已完成的步骤/总步骤时。</div>`,
+    },
+  },
+  {
+    path: 'quadrant-diagram',
+    component: ExamplePanelComponent,
+    loadChildren: () =>
+      import('../../../devui/quadrant-diagram/demo/quadrant-diagram-demo.module').then(
+        (m) => m.QuadrantDiagramDemoModule
+      ),
+    data: {
+      type: '演进中',
+      name: 'Quadrant Diagram',
+      cnName: '象限图',
+      description: '象限图，根据需求对事务进行区域划分与价值排序',
+      tmw: `可用于管理事务的优先级`,
+    },
   },
   {
     path: 'radio',
     component: ExamplePanelComponent,
-    loadChildren: () => import('../../../devui/radio/demo/radio-demo.module').then(m => m.RadioDemoModule),
+    loadChildren: () => import('../../../devui/radio/demo/radio-demo.module').then((m) => m.RadioDemoModule),
     data: {
       type: '数据录入',
       name: 'Radio',
       cnName: '单选框',
       description: '单选框。',
-      tmw: `用户要从一个数据集中选择单个选项，且能并排查看所有可选项，选项数量在2~7之间，建议使用单选按钮。`
-    }
+      tmw: `用户要从一个数据集中选择单个选项，且能并排查看所有可选项，选项数量在2~7之间，建议使用单选按钮。`,
+    },
   },
   {
     path: 'rate',
     component: ExamplePanelComponent,
-    loadChildren: () => import('../../../devui/rate/demo/rate-demo.module').then(m => m.RateDemoModule),
+    loadChildren: () => import('../../../devui/rate/demo/rate-demo.module').then((m) => m.RateDemoModule),
     data: {
       type: '数据展示',
       name: 'Rate',
       cnName: '等级评估',
       description: '等级评估',
-      tmw: `用户对一个产品进行评分时可以使用，有两种模式，只读模式和动态评分模式`
-    }
+      tmw: `用户对一个产品进行评分时可以使用，有两种模式，只读模式和动态评分模式`,
+    },
   },
   {
     path: 'search',
     component: ExamplePanelComponent,
-    loadChildren: () => import('../../../devui/search/demo/search-demo.module').then(m => m.SearchDemoModule),
+    loadChildren: () => import('../../../devui/search/demo/search-demo.module').then((m) => m.SearchDemoModule),
     data: {
       name: 'Search',
       cnName: '搜索框',
       description: '搜索框。',
-      tmw: `当用户需要在数据集中搜索所需数据时，输入所需数据的内容（或部分内容），返回所有匹配内容的搜索结果。`
-    }
+      tmw: `当用户需要在数据集中搜索所需数据时，输入所需数据的内容（或部分内容），返回所有匹配内容的搜索结果。`,
+    },
   },
   {
     path: 'select',
     component: ExamplePanelComponent,
-    loadChildren: () => import('../../../devui/select/demo/select-demo.module').then(m => m.SelectDemoModule),
+    loadChildren: () => import('../../../devui/select/demo/select-demo.module').then((m) => m.SelectDemoModule),
     data: {
       type: '数据录入',
       name: 'Select',
       cnName: '下拉选择框',
       description: '下拉选择框。',
-      tmw: `用户可以从多个选项中选择一项或几项；仅支持用户在下拉选项中选择和搜索系统提供的选项，不支持输入。`
-    }
+      tmw: `用户可以从多个选项中选择一项或几项；仅支持用户在下拉选项中选择和搜索系统提供的选项，不支持输入。`,
+    },
   },
   {
     path: 'status',
     component: ExamplePanelComponent,
-    loadChildren: () => import('../../../devui/status/demo/status-demo.module').then(m => m.StatusDemoModule),
+    loadChildren: () => import('../../../devui/status/demo/status-demo.module').then((m) => m.StatusDemoModule),
     data: {
       name: 'Status',
       cnName: '状态',
       description: '状态传达了组件或者页面可互动元素交互的结果。',
-      tmw: `表示一个任务的执行结果时使用。`
-    }
+      tmw: `表示一个任务的执行结果时使用。`,
+    },
   },
   {
     path: 'sticky',
     component: ExamplePanelComponent,
-    loadChildren: () => import('../../../devui/sticky/demo/sticky-demo.module').then(m => m.StickyDemoModule),
+    loadChildren: () => import('../../../devui/sticky/demo/sticky-demo.module').then((m) => m.StickyDemoModule),
     data: {
       name: 'Sticky',
       cnName: '便贴',
       description: '页面内容固定在可视区域。',
-      tmw: `当用户在滚动屏幕时，需要某个区域内容在段落或者浏览器可视区域可见时。`
-    }
+      tmw: `当用户在滚动屏幕时，需要某个区域内容在段落或者浏览器可视区域可见时。`,
+    },
   },
   {
     path: 'tabs',
     component: ExamplePanelComponent,
-    loadChildren: () => import('../../../devui/tabs/demo/tabs-demo.module').then(m => m.TabsDemoModule),
+    loadChildren: () => import('../../../devui/tabs/demo/tabs-demo.module').then((m) => m.TabsDemoModule),
     data: {
       type: '导航',
       name: 'Tabs',
       cnName: '选项卡切换',
       description: '选项卡切换组件。',
-      tmw: `用户需要通过平级的区域将大块内容进行收纳和展现，保持界面整洁。`
-    }
+      tmw: `用户需要通过平级的区域将大块内容进行收纳和展现，保持界面整洁。`,
+    },
   },
   {
     path: 'tags',
     component: ExamplePanelComponent,
-    loadChildren: () => import('../../../devui/tags/demo/tags-demo.module').then(m => m.TagsDemoModule),
+    loadChildren: () => import('../../../devui/tags/demo/tags-demo.module').then((m) => m.TagsDemoModule),
     data: {
       type: '数据展示',
       name: 'Tags',
       cnName: '标签',
       description: '标签展示组件。',
-      tmw: `用户需要展示多个标签时。`
-    }
+      tmw: `用户需要展示多个标签时。`,
+    },
   },
   {
     path: 'tags-input',
     component: ExamplePanelComponent,
-    loadChildren: () => import('../../../devui/tags-input/demo/tags.input-demo.module').then(m => m.TagsInputDemoModule),
+    loadChildren: () => import('../../../devui/tags-input/demo/tags.input-demo.module').then((m) => m.TagsInputDemoModule),
     data: {
       type: '数据录入',
       name: 'TagsInput',
       cnName: '标签输入',
       description: '用于输入多个标签。',
-      tmw: `用户需要输入多个标签时。`
-    }
+      tmw: `用户需要输入多个标签时。`,
+    },
   },
   {
     path: 'toast',
     component: ExamplePanelComponent,
-    loadChildren: () => import('../../../devui/toast/demo/toast-demo.module').then(m => m.ToastDemoModule),
+    loadChildren: () => import('../../../devui/toast/demo/toast-demo.module').then((m) => m.ToastDemoModule),
     data: {
       type: '反馈',
       name: 'Toast',
       cnName: '全局通知',
       description: '全局信息提示组件。',
-      tmw: `当需要向用户全局展示提示信息时使用，显示数秒后消失。`
-    }
+      tmw: `当需要向用户全局展示提示信息时使用，显示数秒后消失。`,
+    },
   },
   {
     path: 'tooltip',
     component: ExamplePanelComponent,
-    loadChildren: () => import('../../../devui/tooltip/demo/tooltip-demo.module').then(m => m.TooltipDemoModule),
+    loadChildren: () => import('../../../devui/tooltip/demo/tooltip-demo.module').then((m) => m.TooltipDemoModule),
     data: {
       type: '反馈',
       name: 'Tooltip',
       cnName: '提示',
       description: '文字提示组件',
-      tmw: `用户鼠标移动到文字上，需要进一步的提示时使用。`
-    }
+      tmw: `用户鼠标移动到文字上，需要进一步的提示时使用。`,
+    },
   },
   {
     path: 'toggle',
     component: ExamplePanelComponent,
-    loadChildren: () => import('../../../devui/toggle/demo/toggle-demo.module').then(m => m.ToggleDemoModule),
+    loadChildren: () => import('../../../devui/toggle/demo/toggle-demo.module').then((m) => m.ToggleDemoModule),
     data: {
       type: '数据录入',
       name: 'Toggle',
       cnName: '开关',
       description: '开/关切换组件',
-      tmw: `当两种状态需要来回切换控制时，比如启用/禁用。`
-    }
+      tmw: `当两种状态需要来回切换控制时，比如启用/禁用。`,
+    },
   },
   {
     path: 'tree',
     component: ExamplePanelComponent,
-    loadChildren: () => import('../../../devui/tree/demo/tree-demo.module').then(m => m.TreeDemoModule),
+    loadChildren: () => import('../../../devui/tree/demo/tree-demo.module').then((m) => m.TreeDemoModule),
     data: {
       type: '数据展示',
       name: 'Tree',
       cnName: '树',
       description: '树型选择组件。',
-      tmw: '文件夹、组织架构、生物分类、国家地区等等，世间万物的大多数结构都是树形结构。使用树控件可以完整展现其中的层级关系，并具有展开收起选择等交互功能。'
-    }
+      tmw:
+        '文件夹、组织架构、生物分类、国家地区等等，世间万物的大多数结构都是树形结构。使用树控件可以完整展现其中的层级关系，并具有展开收起选择等交互功能。',
+    },
   },
+
   {
     path: 'upload',
     component: ExamplePanelComponent,
-    loadChildren: () => import('../../../devui/upload/demo/upload-demo.module').then(m => m.UploadDemoModule),
+    loadChildren: () => import('../../../devui/upload/demo/upload-demo.module').then((m) => m.UploadDemoModule),
     data: {
       type: '数据录入',
       name: 'Upload',
       cnName: '上传',
       description: '文件上传组件',
-      tmw: `当需要将文件上传到后端服务器时。`
-    }
+      tmw: `当需要将文件上传到后端服务器时。`,
+    },
   },
   {
     path: 'input-number',
     component: ExamplePanelComponent,
-    loadChildren: () => import('../../../devui/input-number/demo/input-number-demo.module').then(m => m.InputNumberDemoModule),
+    loadChildren: () => import('../../../devui/input-number/demo/input-number-demo.module').then((m) => m.InputNumberDemoModule),
     data: {
       type: '数据录入',
       name: 'InputNumber',
       cnName: '数字输入框',
       description: '通过鼠标或键盘，输入范围内的数值',
-      tmw: `当需要获取标准数值时。`
-    }
+      tmw: `当需要获取标准数值时。`,
+    },
   },
   {
     path: 'tree-select',
     component: ExamplePanelComponent,
-    loadChildren: () => import('../../../devui/tree-select/demo/tree-select-demo.module').then(m => m.TreeSelectDemoModule),
+    loadChildren: () => import('../../../devui/tree-select/demo/tree-select-demo.module').then((m) => m.TreeSelectDemoModule),
     data: {
       type: '数据录入',
       name: 'TreeSelect',
       cnName: '树形选择框',
       description: '树形选择框',
-      tmw: `文件夹、组织架构、生物分类、国家地区等等，世间万物的大多数结构都是树形结构。使用树控件可以完整展现其中的层级关系，并具有展开收起选择等交互功能。`
-    }
+      tmw: `文件夹、组织架构、生物分类、国家地区等等，世间万物的大多数结构都是树形结构。使用树控件可以完整展现其中的层级关系，并具有展开收起选择等交互功能。`,
+    },
   },
   {
     path: 'slider',
     component: ExamplePanelComponent,
-    loadChildren: () => import('../../../devui/slider/demo/slider-demo.module').then(m => m.SliderDemoModule),
+    loadChildren: () => import('../../../devui/slider/demo/slider-demo.module').then((m) => m.SliderDemoModule),
     data: {
       type: '数据录入',
       name: 'Slider',
       cnName: '滑动输入条',
       description: '滑动输入条可以更直观地展示当前值和可选范围。',
-      tmw: `当用户需要在数值区间内进行选择时使用。`
-    }
+      tmw: `当用户需要在数值区间内进行选择时使用。`,
+    },
   },
   {
     path: 'splitter',
     component: ExamplePanelComponent,
-    loadChildren: () => import('../../../devui/splitter/demo/splitter-demo.module').then(m => m.SplitterDemoModule),
+    loadChildren: () => import('../../../devui/splitter/demo/splitter-demo.module').then((m) => m.SplitterDemoModule),
     data: {
       type: '布局',
       name: 'Splitter',
       cnName: '分割器',
       description: 'Splitter将页面拆分为多个部分，并允许用户控制页面布局。',
-      tmw: `需要动态调整不同页面布局区域大小的时候选择使用。`
-    }
-  },
-  {
-    path: 'text-input',
-    component: ExamplePanelComponent,
-    loadChildren: () => import('../../../devui/text-input/demo/text-input-demo.module').then(m => m.TextInputDemoModule),
-    data: {
-      type: '数据录入',
-      name: 'Text-input',
-      cnName: '文本框',
-      description: '文本域是用户可以录入、编辑文本时的区域。它允许用户在界面中输入文本，常出现在列表和对话框中。',
-      tmw: `需要手动输入文字使用`
-    }
-  },
-  {
-    path: 'textarea',
-    component: ExamplePanelComponent,
-    loadChildren: () => import('../../../devui/textarea/demo/text-demo.module').then(m => m.TextDemoModule),
-    data: {
-      type: '数据录入',
-      name: 'Textarea',
-      cnName: '多行文本框',
-      description: '文本域是用户可以录入、编辑文本时的区域。它允许用户在界面中输入文本，常出现在列表和对话框中。',
-      tmw: `需要手动输入文字使用`
-    }
+      tmw: `需要动态调整不同页面布局区域大小的时候选择使用。`,
+    },
   },
   {
     path: 'layout',
     component: ExamplePanelComponent,
-    loadChildren: () => import('../../../devui/layout/demo/layout-demo.module').then(m => m.LayoutDemoModule),
+    loadChildren: () => import('../../../devui/layout/demo/layout-demo.module').then((m) => m.LayoutDemoModule),
     data: {
       type: '布局',
       name: 'Layout',
       cnName: '布局',
       description: '支持多种布局类型，协助用户进行页面的整体布局',
-      tmw: ``
-    }
+      tmw: ``,
+    },
+  },
+  {
+    path: 'gantt',
+    component: ExamplePanelComponent,
+    loadChildren: () => import('../../../devui/gantt/demo/gantt-demo.module').then((m) => m.GanttDemoModule),
+    data: {
+      type: '演进中',
+      name: 'Gantt',
+      cnName: '甘特图',
+      description: '',
+      tmw: ``,
+    },
+  },
+  {
+    path: 'text-input',
+    component: ExamplePanelComponent,
+    loadChildren: () => import('../../../devui/text-input/demo/text-input-demo.module').then((m) => m.TextInputDemoModule),
+    data: {
+      type: '数据录入',
+      name: 'Text-input',
+      cnName: '文本框',
+      description: '文本域是用户可以录入、编辑文本时的区域。它允许用户在界面中输入文本，常出现在列表和对话框中。',
+      tmw: `需要手动输入文字使用`,
+    },
+  },
+  {
+    path: 'textarea',
+    component: ExamplePanelComponent,
+    loadChildren: () => import('../../../devui/textarea/demo/text-demo.module').then((m) => m.TextDemoModule),
+    data: {
+      type: '数据录入',
+      name: 'Textarea',
+      cnName: '多行文本框',
+      description: '文本域是用户可以录入、编辑文本时的区域。它允许用户在界面中输入文本，常出现在列表和对话框中。',
+      tmw: `需要手动输入文字使用`,
+    },
   },
   {
     path: 'steps-guide',
     component: ExamplePanelComponent,
-    loadChildren: () => import('../../../devui/steps-guide/demo/steps-guide-demo.module').then(m => m.StepsGuideDemoModule),
+    loadChildren: () => import('../../../devui/steps-guide/demo/steps-guide-demo.module').then((m) => m.StepsGuideDemoModule),
     data: {
       type: '导航',
       name: 'StepsGuide',
       cnName: '操作指引',
       description: '在需要指引的业务逻辑元素上绑定，通过按顺序弹出引导用户了解业务使用逻辑。',
-      tmw: `业务推出新特性，或复杂的业务逻辑需要指引用户使用`
-    }
+      tmw: `业务推出新特性，或复杂的业务逻辑需要指引用户使用`,
+    },
   },
+  {
+    path: 'relative-time',
+    component: ExamplePanelComponent,
+    loadChildren: () =>
+      import('../../../devui/relative-time/demo/demo.module').then((m) => m.DemoModule),
+    data: {
+      type: '数据展示',
+      name: 'RelativeTime',
+      cnName: '人性化时间转换',
+      description: '',
+      tmw: ''
+    }
+  }
 ];

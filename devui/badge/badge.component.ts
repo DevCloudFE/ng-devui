@@ -25,6 +25,7 @@ export class BadgeComponent implements AfterViewInit {
   @Input() badgePos: BadgePositionType = 'top-right';
   @Input() offsetXY: [number, number];
   @Input() bgColor: string;
+  @Input() textColor: string;
 
   hasContentProjection() {
     const nodes = this.contentProjection?.nativeElement;

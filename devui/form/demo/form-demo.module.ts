@@ -27,11 +27,33 @@ import { ModalComponent } from './modal/modal.component';
 import { TextInputModule } from 'ng-devui/text-input';
 import { TextareaModule } from 'ng-devui/textarea';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
-import { ValidateTemplateComponent } from './validate-template/validate-template.component';
+import { SearchModule } from 'ng-devui/search';
+import {
+  TreeSelectModule,
+  TagsModule,
+  MultiAutoCompleteModule,
+  InputNumberModule,
+  EditableSelectModule,
+  DatepickerModule,
+} from 'ng-devui';
+
+import { InnerValidatorComponent } from './validate-template/inner-validator/inner-validator.component';
+import { CustomValidatorComponent } from './validate-template/custom-validator/custom-validator.component';
+import { ErrorStrategyComponent } from './validate-template/error-strategy/error-strategy.component';
+import { CustomMessageShowComponent } from './validate-template/custom-message-show/custom-message-show.component';
+import { ValidateTemplateFormComponent } from './validate-template/validate-template-form/validate-template-form.component';
+import { UserRegisterComponent } from './validate-template/user-register/user-register.component';
+import { ValidateSyncComponent } from './validate-sync/validate-sync.component';
+import { ValidateCrossComponentComponent } from './validate-cross-component/validate-cross-component.component';
+import { CrossComponentComponent } from './validate-template/validate-cross-component/validate-cross-component.component';
+
 import { ValidateReactiveComponent } from './validate-reactive/validate-reactive.component';
 import { ValidateCoordinatedComponent } from './validate-coordinated/validate-coordinated.component';
 import { ValidateDynamicRuleComponent } from './validate-dynamic-rule/validate-dynamic-rule.component';
 
+import { ChildUserComponent } from './validate-cross-component/child-control/child-user.component';
+import { ChildFormComponent } from './validate-template/validate-cross-component/child-form/child-form.component';
+import { CustomStatusComponent } from './custom-status/custom-status.component';
 
 @NgModule({
   imports: [
@@ -55,6 +77,13 @@ import { ValidateDynamicRuleComponent } from './validate-dynamic-rule/validate-d
     DDemoNavModule,
     PopoverModule,
     ToastModule,
+    SearchModule,
+    TreeSelectModule,
+    TagsModule,
+    MultiAutoCompleteModule,
+    InputNumberModule,
+    EditableSelectModule,
+    DatepickerModule,
     RouterModule.forChild([
       { path: '', redirectTo: 'demo' },
       { path: 'demo', component: FormDemoComponent },
@@ -67,7 +96,7 @@ import { ValidateDynamicRuleComponent } from './validate-dynamic-rule/validate-d
       },
     ]),
   ],
-  exports: [FormDemoComponent],
+  exports: [FormDemoComponent, ChildUserComponent, ChildFormComponent],
   declarations: [
     FormDemoComponent,
     BasicComponent,
@@ -76,11 +105,22 @@ import { ValidateDynamicRuleComponent } from './validate-dynamic-rule/validate-d
     ModalOneComponent,
     MultiColComponent,
     FilterComponent,
-    ValidateTemplateComponent,
+    InnerValidatorComponent,
+    CustomValidatorComponent,
+    ErrorStrategyComponent,
+    CustomMessageShowComponent,
+    ValidateTemplateFormComponent,
+    UserRegisterComponent,
     ValidateReactiveComponent,
     ValidateCoordinatedComponent,
     ValidateDynamicRuleComponent,
+    ValidateSyncComponent,
+    ValidateCrossComponentComponent,
+    ChildUserComponent,
+    CrossComponentComponent,
+    ChildFormComponent,
+    CustomStatusComponent,
   ],
-  entryComponents: [ModalOneComponent],
+
 })
 export class FormDemoModule {}

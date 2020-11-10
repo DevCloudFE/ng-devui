@@ -20,7 +20,6 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'd-multiple-upload-view',
   templateUrl: './multiple-upload-view.component.html',
-  styleUrls: ['./multiple-upload-view.component.scss'],
   preserveWhitespaces: false,
 })
 export class MultipleUploadViewComponent extends UploadComponent implements OnDestroy {

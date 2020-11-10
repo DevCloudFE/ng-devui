@@ -30,9 +30,7 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
     TextInputDemoComponent,
     BasicComponent
   ],
-  entryComponents: [
-    TextInputDemoComponent,
-  ],
+
 })
 export class TextInputDemoModule {
 }

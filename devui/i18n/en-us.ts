@@ -11,6 +11,7 @@ export default {
     btnCancel: 'Cancel',
     btnClose: 'Close',
     btnClickMe: 'click me!',
+    copied: 'Copied'
   },
   datePicker: {
     today: 'Today',
@@ -36,6 +37,32 @@ export default {
       return `${year}`;
     }
   },
+  form: {
+    required(val): string {
+      return 'The value cannot be empty.';
+    },
+    minlength(len): string {
+      return `The length cannot be less than ${len}.`;
+    },
+    maxlength(len): string {
+      return `The length cannot be greater than ${len}.`;
+    },
+    min(val): string {
+      return `The value cannot be less than ${val}.`;
+    },
+    max(val): string {
+      return `The value cannot be greater than ${val}.`;
+    },
+    requiredTrue(val): string {
+      return 'The value needs to be true.';
+    },
+    email(val): string {
+      return 'Email format verification failed.';
+    },
+    whitespace(val): string {
+      return 'The value cannot only has whitespace.';
+    }
+  },
   pagination: {
     totalItem: 'Total Records',
     goTo: 'Go To',
@@ -51,7 +78,10 @@ export default {
     uploading: 'Uploading...',
     uploaded: 'Upload successful',
     uploadFailed: 'Upload failed',
+    uploadSuccess: 'Upload Successful',
     delete: 'Delete',
+    reUpload: 'reupload',
+    cancelUpload: 'Upload cancel',
     getNotAllowedFileTypeMsg(filename, scope) {
       return `Files with unsupported types: ${filename}. Supported file types: ${scope}`;
     },
@@ -64,6 +94,15 @@ export default {
     getExistSameNameFilesMsg(sameNames) {
       return `Duplicate files exist : "${sameNames}"`;
     },
+    getSelectedFilesCount(filesCount) {
+      return `${filesCount} files added`;
+    },
+    getUploadingFilesCount(uploadingCount, filesCount) {
+      return `${uploadingCount}/${filesCount} is uploading`;
+    },
+    getFailedFilesCount(failedCount) {
+      return `${failedCount} files upload failed`;
+    }
   },
   modal: {
     warning: 'Warning',

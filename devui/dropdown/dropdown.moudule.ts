@@ -25,7 +25,7 @@ import { WindowRefModule } from 'ng-devui/window-ref';
     DropDownToggleDirective,
     DropDownAppendToBodyComponent
   ],
-  entryComponents: []
+
 })
 export class DropDownModule {
 }

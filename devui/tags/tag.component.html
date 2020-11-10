@@ -3,17 +3,22 @@
   [style.display]="deleteTag ? 'none' : 'block'"
   [ngClass]="{
     'devui-operable-tag': deletable,
-    'devui-colorful-tag': labelStyle && labelStyle !== '',
+    'devui-colorful-tag': isColorfulTag,
     'devui-selected-tag': checked,
     'devui-deletable-tag': deletable
   }"
+  [ngStyle]="{
+    'border-color': customColor,
+    color: isColorfulTag ? (checked ? '#fff' : customColor) : '',
+    'background-color': isColorfulTag ? (checked ? customColor : '#fff') : ''
+  }"
 >
-  <div class="content-wrapper" [ngStyle]="{ 'background-color': colorMap[labelStyle] }"></div>
+  <div class="content-wrapper" [ngStyle]="{ 'background-color': colorMap[labelStyle] || customColor }"></div>
   <span *ngIf="!customViewTemplate" title="{{ titleContent ? titleContent : tag }}">{{ tag }}</span>
   <ng-template *ngIf="customViewTemplate" [ngTemplateOutlet]="customViewTemplate" [ngTemplateOutletContext]="{ tag: tag }"></ng-template>
-  <a class="remove-button" [ngClass]="{ 'default-button': !labelStyle || labelStyle === '' }" *ngIf="deletable" (click)="removeTag(tag)">
+  <a class="remove-button" [ngClass]="{ 'default-button': !isColorfulTag }" *ngIf="deletable" (click)="removeTag($event, tag)">
     <svg
-      *ngIf="labelStyle && labelStyle !== ''"
+      *ngIf="isColorfulTag"
       width="12px"
       height="12px"
       viewBox="0 0 16 16"
@@ -21,8 +26,9 @@
       xmlns="http://www.w3.org/2000/svg"
       xmlns:xlink="http://www.w3.org/1999/xlink"
     >
-      <g id="操作/close" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+      <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <polygon
+          [ngStyle]="{ fill: isColorfulTag ? (checked ? '#fff' : customColor) : '' }"
           id="Mask"
           fill="#293040"
           fill-rule="nonzero"
@@ -31,7 +37,7 @@
       </g>
     </svg>
     <svg
-      *ngIf="!labelStyle || labelStyle === ''"
+      *ngIf="!isColorfulTag"
       width="12px"
       height="12px"
       viewBox="0 0 12 12"

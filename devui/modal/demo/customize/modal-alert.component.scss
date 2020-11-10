@@ -1,0 +1,8 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
+.modal-header {
+  line-height: 30px;
+  padding: 10px 20px 0 20px;
+  font-size: $devui-font-size-modal-title;
+  font-weight: bold;
+}

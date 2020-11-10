@@ -79,11 +79,12 @@ export class StepsGuideDirective implements OnInit, OnDestroy {
       // 防止服务中的步骤被置空或默认为空
       const serviceSteps = this.stepService.getSteps() || [];
       this.steps = serviceSteps.length > 0 ? serviceSteps : this.steps;
-      const state = localStorage.getItem(`devui_guide_${this.pageName}`) || 1;
+      const state = localStorage.getItem(`devui_guide_${this.pageName}`) || '1';
       this.toggle = Number(state);
       this.currentIndex = index;
+      const currentStep = this.steps.length > 0 && this.steps[this.currentIndex];
       // 当前步骤内容存在且未被屏蔽显示且为当前索引时插入操作指引弹窗
-      if (this.steps.length > 0 && this.toggle && this.stepIndex === this.currentIndex) {
+      if (currentStep && this.toggle && this.stepIndex === this.currentIndex) {
         const targetDom = this.targetElement || this.elm.nativeElement;
         if (this.scrollToTargetSwitch) {
           targetDom.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
@@ -97,8 +98,8 @@ export class StepsGuideDirective implements OnInit, OnDestroy {
           this.insert({
             triggerElement: targetDom,
             pageName: this.pageName,
-            title: this.steps[this.stepIndex].title,
-            content: this.steps[this.stepIndex].content,
+            title: currentStep.title,
+            content: currentStep.content,
             stepsCount: this.steps.length,
             stepIndex: this.stepIndex,
             position: this.position,
@@ -152,7 +153,8 @@ export class StepsGuideDirective implements OnInit, OnDestroy {
 
   // 监听dom变化的回调方法，即dom发生变化时触发resize事件
   mutationCallBack() {
-    const resizeEvt = new Event('resize');
+    const resizeEvt = document.createEvent('Event');
+    resizeEvt.initEvent('resize', true, true);
     window.dispatchEvent(resizeEvt);
   }
 

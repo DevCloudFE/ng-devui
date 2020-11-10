@@ -3,7 +3,7 @@
 .progress-container {
   height: 130px;
   width: 130px;
-  font-size: 20px;
+  font-size: $devui-font-size-price;
   display: inline-block;
   margin-right: 10px;
 }
@@ -21,5 +21,5 @@
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   color: $devui-success;
-  font-size: 24px;
+  font-size: $devui-font-size-data-overview;
 }

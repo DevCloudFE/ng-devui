@@ -14,7 +14,7 @@ d-header {
     height: 40px;
     width: 120px;
     color: $devui-light-text;
-    font-size: 16px;
+    font-size: $devui-font-size-icon;
     line-height: 40px;
 
     .logo-devui {

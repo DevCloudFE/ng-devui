@@ -38,10 +38,8 @@ class TestSliderBasicComponent {
   min: Number = 0;
   step: Number = 1;
   disabled: Boolean;
+  valueChange = jasmine.createSpy('valueChange');
   tipsRenderer: (value: number) => string = (value) => `${value}`;
-  valueChange(e) {
-    console.log(e);
-  }
 }
 
 describe('slider', () => {

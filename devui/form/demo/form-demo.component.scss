@@ -4,3 +4,24 @@
   border-top: 1px dashed $devui-dividing-line;
   margin: 60px 0;
 }
+
+#demo-validate-template,
+#demo-validate-sync,
+#demo-validate-cross-component,
+#form-custom-status {
+  d-codebox {
+    display: block;
+    margin-top: 16px;
+  }
+
+  ::ng-deep .demo-section {
+    & > div {
+      margin-top: 12px;
+      width: 450px;
+    }
+
+    form {
+      margin-left: 12px;
+    }
+  }
+}

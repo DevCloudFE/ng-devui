@@ -17,6 +17,7 @@
     .devui-tree-icons {
       margin-left: 8px;
       cursor: pointer;
+      display: inherit;
 
       svg {
         #add-path {
@@ -93,4 +94,9 @@
 .tree-node-highlight {
   color: $devui-brand;
   font-weight: 600;
+}
+
+:host ::ng-deep .devui-tree-node__title d-highlight .devui-match-highlight {
+  color: $devui-brand;
+  font-weight: bold;
 }

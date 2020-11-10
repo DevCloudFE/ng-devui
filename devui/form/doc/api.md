@@ -4,7 +4,6 @@
 | :-------: | :-----------------------------------: | :----------: | :----------------------------------------------------------------------- | ------------------------------------------------------------- |
 |  layout   | `'horizontal'\|'vertical'\|'columns'` | 'horizontal' | 可选，设置表单的排列方式                                                 | [基本用法](/components/form/demo#basic-usage)                 |
 | labelSize |         `'sm' \| '' \| 'lg'`          |      ''      | 可选，设置 label 的占宽，未设置默认为 100px,'sm'对应 80px,'lg'对应 150px | [label 横向排列](/components/form/demo#demo-label-horizontal) |
-| dFeedbackType |         `'label' \| null`          |      --      | 可选，设置当前form是否显示反馈图标与反馈的方式 | [响应式表单验证](/components/form/demo#demo-validate-reactive) |
 
 ### d-button 事件
 
@@ -12,6 +11,11 @@
 | :------: | :-----------------: | :-------------------------------------------------------------------------------------- | ---------------------------------------------- |
 | dSubmit | `EventEmitter<{valid: boolean, directive: DFormGroupRuleDirective \| AbstractControlDirective}>` | 可选，使用dFormSubmit绑定元素触发提交时，响应事件 | [模板驱动表单验证（推荐）](/components/form/demo#demo-validate-template) |
 
+## d-form-item 参数
+
+|   参数    |                 类型                  |     默认     | 说明                                                                     | 跳转 Demo                                                     |
+| :-------: | :-----------------------------------: | :----------: | :----------------------------------------------------------------------- | ------------------------------------------------------------- |
+| dHasFeedback |         `boolean`          |      false      | 可选，设置当前formControl是否显示反馈图标 | [响应式表单验证](/components/form/demo#demo-validate-reactive) |
 
 ## d-form-label 参数
 
@@ -26,6 +30,7 @@
 |   参数    |            类型            | 默认 | 说明                                       | 跳转 Demo                                                     |
 | :-------: | :------------------------: | :--: | :----------------------------------------- | ------------------------------------------------------------- |
 | extraInfo | `string\|TemplateRef<any>` |  --  | 可选，附件信息，一般用于补充表单选项的说明 | [label 横向排列](/components/form/demo#demo-label-horizontal) |
+| feedbackStatus | `DFormControlStatus` |  --  | 可选，手动指定当前control状态反馈 | [指定表单状态](/components/form/demo#demo-custom-status) |
 
 
 # 表单校验dValidateRules
@@ -34,7 +39,7 @@
 + DevUI表单验证基于[Angular Form](https://angular.io/guide/forms-overview)，完全兼容响应式表单与模板驱动表单。旨在封装与简化表单校验逻辑，你只需配置简单规则，验证消息与验证状态管理全交由DevUI Form自动完成。
 
 ## 如何使用
-+ 当你使用了响应式表单或模板驱动表单。在你的元素上绑定`dValidateRules`并传入你需要配置的规则即可（*虽在模板中可直接使用字面量传入规则，但考虑了变更检测，我们推荐你在组件控制器中声明规则再绑定到模板中*）。如：
++ 当你使用了响应式表单或模板驱动表单（均需引入`Angular FormsModule`）。在你的元素上绑定`dValidateRules`并传入你需要配置的规则即可（*虽在模板中可直接使用字面量传入规则，但考虑了变更检测，我们推荐你在组件控制器中声明规则再绑定到模板中*）。如：
 ```html
 <input [(ngModel)]="name" [dValidateRules]="yourRules">
 ```
@@ -76,6 +81,8 @@ export type DValidateRules = {
   message ?: string; // 统一配置的message，如果你的某一条校验规则未配置message，将取统一message
 
   messageShowType ?: 'popover' | 'text' | 'none' // 消息自动显示策略（当前仅单个表单组件下生效），(popover | d-form-item容器内部显示 | 不显示)
+
+  popPosition ?: 'top' | 'right' | 'bottom' | 'left' | ('top' | 'right' | 'bottom' | 'left')[]; // 消息显示为popover时，设置popover的内容弹出方向，默认为['right', 'bottom']
 
 } | DValidateRule[];  // 若只需设置同步校验规则，可传同步校验规则数组
 ```
@@ -135,7 +142,7 @@ export type DAsyncValidatorFn = (value: any) => Observable<boolean | string | nu
 #### ruleReservedWords规则对象保留字
 + 定义DevUI Rule规则的保留字，如果你的key不为保留字，则可作为你当前rule id使用（默认校验器id或自定义校验器id）
 ```TS
-export const ruleReservedWords = ['id', 'validator', 'message', 'errorStrategy', 'priority', 'isNgValidator', 'updateOn'];
+export const ruleReservedWords = ['id', 'validator', 'message', 'errorStrategy', 'priority', 'isNgValidator', 'updateOn', 'popPosition'];
 ```
 
 #### dDefaultValidators默认校验器
@@ -149,6 +156,7 @@ export const dDefaultValidators = {
   'requiredTrue': Validators.requiredTrue, // 配置需要为true，rule中使用：{ requiredTrue: true }
   'email': Validators.email, // 配置邮箱校验，rule中使用：{ email: true }
   'pattern': Validators.pattern, // 配置正则校验，rule中使用：{ pattern: RegExp }
+  'whitespace': DValidators.whiteSpace, // 配置输入不能全为空格限制，rule中使用：{ whitespace: true }
 };
 ```
 
@@ -160,3 +168,8 @@ export const dDefaultValidators = {
 ### dFormReset指令
 + 在`<form>`（需绑定dForm）中指定触发`reset`的元素。
 + 可设置触发事件（默认为'click'），如`dFormReset="dblclick"`，设置元素双击时触发`reset`。
+
+## dValidateSyncKey协同验证指令
+|   参数    | 类型 | 默认 | 说明 | 跳转 Demo |
+| :----   : | :---: | :--: | :--: | :--: |
+| dValidateSyncKey | `string` |  --  | 必选，配置唯一标识key，相同key表单元素将在其中一个元素值发生变更时，同时触发校验，支持响应式与模板驱动表单 | [表单协同验证](/components/form/demo#demo-validate-sync) |

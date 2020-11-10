@@ -45,7 +45,7 @@
 
         &.prev {
           border-radius: 0 4px 4px 0;
-          left: 1px;
+          left: 100%;
 
           &::before,
           &.collapsed::before {
@@ -78,7 +78,7 @@
 
         &.next {
           border-radius: 4px 0 0 4px;
-          right: 1px;
+          right: 100%;
 
           &::before,
           &.collapsed::before {
@@ -125,7 +125,7 @@
 
         &.prev {
           border-radius: 0 0 4px 4px;
-          top: 1px;
+          top: 100%;
 
           &::before,
           &.collapsed::before {
@@ -158,7 +158,7 @@
 
         &.next {
           border-radius: 4px 4px 0 0;
-          bottom: 1px;
+          bottom: 100%;
 
           &::before,
           &.collapsed::before {
@@ -198,7 +198,7 @@
       &:hover,
       &:focus,
       &:active {
-        background-color: $devui-brand-active-focus;
+        background-color: $devui-brand-hover;
       }
 
       &::after {

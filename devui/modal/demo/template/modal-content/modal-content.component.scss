@@ -1,9 +1,11 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
 .header {
   padding: 30px 30px 0 30px;
   height: 56px;
   position: relative;
   border: none;
-  font-size: 18px;
+  font-size: $devui-font-size-modal-title;
   font-weight: 600;
   vertical-align: middle;
 }

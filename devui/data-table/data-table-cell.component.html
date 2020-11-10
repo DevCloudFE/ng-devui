@@ -26,13 +26,13 @@
     *ngIf="templateEditorActive"
     [ngTemplateOutlet]="column.cellEditCmp ? column.cellEditCmp.template : column.fieldType === 'date' ? dateEditTempate : textEditTempate"
     [ngTemplateOutletContext]="{
-      rowIndex:rowIndex,
-      colIndex:colIndex,
+      rowIndex: rowIndex,
+      colIndex: colIndex,
       column: column,
-      rowItem:rowItem,
+      rowItem: rowItem,
       $implicit: this,
       row: rowComponent
-      }"
+    }"
   >
   </ng-template>
 </ng-container>
@@ -86,16 +86,16 @@
   <ng-template
     [ngTemplateOutlet]="column.cellCmp ? column.cellCmp.template : textViewTemplate"
     [ngTemplateOutletContext]="{
-      rowIndex:rowIndex,
-      colIndex:colIndex,
+      rowIndex: rowIndex,
+      colIndex: colIndex,
       column: column,
       rowItem: rowItem,
       cellItem: rowItem[column.field],
-      cellValue: rowItem | disPlayCellValuePipe:rowIndex:column,
+      cellValue: rowItem | disPlayCellValuePipe: rowIndex:column,
       $implicit: this,
       row: rowComponent,
       tableLevel: tableLevel
-      }"
+    }"
   >
   </ng-template>
 </ng-template>
@@ -149,7 +149,7 @@
           [autoOpen]="true"
           [showTime]="column.extraOptions?.showTime"
         />
-        <div class="devui-input-group-addon" (click)="datePicker.toggle($event, true)">
+        <div class="devui-input-group-addon" (click)="datePicker.toggle()">
           <i class="icon icon-calendar"></i>
         </div>
       </div>

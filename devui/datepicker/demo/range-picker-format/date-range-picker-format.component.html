@@ -1,6 +1,6 @@
-<section style="width: 100%;">
+<section style="width: 100%">
   <h5>日期范围选择器(设置format):</h5>
-  <div class="input-group" style="margin-bottom: 10px; width: 200px;">
+  <div class="input-group" style="margin-bottom: 10px; width: 200px">
     <d-select [size]="'sm'" [(ngModel)]="dateFormat" [options]="dateFormatOptions"></d-select>
   </div>
   <div class="devui-input-group devui-dropdown-origin-wrapper devui-dropdown-origin">
@@ -9,7 +9,7 @@
       placeholder="y/MM/dd  -  y/MM/dd"
       name="dp"
       [(ngModel)]="dateRange1"
-      (focus)="dateRangePicker1.toggle($event)"
+      (focus)="dateRangePicker1.toggle()"
       autocomplete="off"
       dDateRangePicker
       #dateRangePicker1="dateRangePicker"
@@ -19,12 +19,12 @@
     <div *ngIf="everyRange(dateRange1)" class="devui-input-group-addon icon-close-wrapper" (click)="dateRangePicker1.clearAll()">
       <i class="icon icon-close"></i>
     </div>
-    <div class="devui-input-group-addon" (click)="dateRangePicker1.toggle($event, true)">
+    <div class="devui-input-group-addon" (click)="dateRangePicker1.toggle()">
       <i class="icon icon-calendar"></i>
     </div>
   </div>
   <h5>日期范围选择器(设置dateConfig):</h5>
-  <div class="input-group" style="margin-bottom: 10px; width: 200px;">
+  <div class="input-group" style="margin-bottom: 10px; width: 200px">
     <d-select [size]="'sm'" [(ngModel)]="splitter" [options]="splitterOptions"></d-select>
   </div>
   <div class="devui-input-group devui-dropdown-origin-wrapper devui-dropdown-origin">
@@ -33,7 +33,7 @@
       placeholder="y/MM/dd  -  y/MM/dd"
       name="dp"
       [(ngModel)]="dateRange2"
-      (focus)="dateRangePicker2.toggle($event)"
+      (focus)="dateRangePicker2.toggle()"
       autocomplete="off"
       dDateRangePicker
       #dateRangePicker2="dateRangePicker"
@@ -44,7 +44,7 @@
     <div *ngIf="everyRange(dateRange2)" class="devui-input-group-addon icon-close-wrapper" (click)="dateRangePicker2.clearAll()">
       <i class="icon icon-close"></i>
     </div>
-    <div class="devui-input-group-addon" (click)="dateRangePicker2.toggle($event, true)">
+    <div class="devui-input-group-addon" (click)="dateRangePicker2.toggle()">
       <i class="icon icon-calendar"></i>
     </div>
   </div>

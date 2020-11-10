@@ -30,10 +30,12 @@
       [ngStyle]="strokePath"
     ></path>
   </svg>
-  <ng-template
-    *ngIf="customViewTemplate"
-    [ngTemplateOutlet]="customViewTemplate"
-    [ngTemplateOutletContext]="{$implicit: this, percentage:percentage}"
-  ></ng-template>
-  <span *ngIf="!customViewTemplate" class="devui-progress-circle-text">{{ percentage }}%</span>
+  <ng-container *ngIf="showContent">
+    <ng-template
+      *ngIf="customViewTemplate"
+      [ngTemplateOutlet]="customViewTemplate"
+      [ngTemplateOutletContext]="{ $implicit: this, percentage: percentage }"
+    ></ng-template>
+    <span *ngIf="!customViewTemplate" class="devui-progress-circle-text">{{ percentage }}%</span>
+  </ng-container>
 </div>

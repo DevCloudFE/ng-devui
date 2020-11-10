@@ -76,12 +76,13 @@
         minBufferPx="300"
         maxBufferPx="500"
         class="normal-filter-list-container devui-scrollbar"
-        [style.height]="filterBoxHeight ? 'calc(' + filterBoxHeight + ' - 180px)' : 30 * (filterListMultiple?.length || 0) + 'px'"
+        [style.height]="filterBoxHeight ? 'calc(' + filterBoxHeight + ' - 180px)' : 30 * (filterListMultiple?.length || 1) + 'px'"
         [style.maxHeight]="filterBoxHeight ? 'none' : '250px'"
       >
         <div *cdkVirtualFor="let item of filterListMultiple" class="checkbox-group">
           <d-checkbox [label]="item.name" [(ngModel)]="item.checked" (change)="checkboxChange($event, item)"> </d-checkbox>
         </div>
+        <div class="no-data-container" *ngIf="!filterListMultiple?.length">{{ i18nCommonText?.noData }}</div>
       </cdk-virtual-scroll-viewport>
     </div>
     <div class="line"></div>

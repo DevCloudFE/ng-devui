@@ -1,6 +1,7 @@
 @import '../style/theme/color';
 @import '../style/theme/variables';
 @import '../style/mixins/index';
+@import '../style/core/_font';
 
 .modal {
   position: fixed;
@@ -105,7 +106,7 @@
   cursor: pointer;
   background-image: none;
   white-space: nowrap;
-  font-size: 14px;
+  font-size: $devui-font-size-card-title;
   line-height: 1.42857143;
   border-radius: 2px;
   -webkit-user-select: none;

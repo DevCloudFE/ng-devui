@@ -1,6 +1,7 @@
 @import '../style/theme/color';
 @import '../style/theme/variables';
 @import '../style/mixins/index';
+@import '../style/core/_font';
 
 .devui-input-group {
   position: relative;
@@ -29,8 +30,7 @@
   width: 1%;
   white-space: nowrap;
   vertical-align: middle;
-  padding: 5px 10px;
-  font-size: 14px;
+  font-size: $devui-font-size-icon;
   font-weight: normal;
   line-height: 1;
   color: $devui-text;
@@ -49,15 +49,81 @@
   cursor: pointer;
   display: block;
   width: 100%;
-  height: 28px;
+  min-height: 28px;
+  height: unset;
   padding: 5px 10px;
-  font-size: 12px;
+  font-size: $devui-font-size;
   line-height: 1.5;
   color: $devui-text;
   background-image: none;
   border: 1px solid $devui-form-control-line;
   border-radius: 2px 0 0 2px;
   transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+
+  &.devui-files-list {
+    max-height: 52px;
+    padding: 2px 2px 0 2px;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    .devui-file-item {
+      height: 22px;
+      padding: 2px 48px 2px 10px;
+    }
+
+    .devui-file-tag {
+      position: relative;
+      background-color: $devui-label-bg;
+      border-radius: 2px;
+
+      .devui-filename {
+        height: 100%;
+        display: inline-block;
+        vertical-align: middle;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .icon {
+        position: absolute;
+        cursor: pointer;
+        right: 8px;
+        top: 50%;
+        transform: translateY(-50%);
+
+        &.icon-right {
+          color: $devui-success;
+        }
+
+        &.icon-running {
+          font-size: 16px;
+        }
+
+        &.devui-upload-delete-file-button {
+          margin-right: 20px;
+        }
+
+        &.devui-uploading-delete {
+          display: none;
+        }
+      }
+
+      &:hover {
+        .devui-upload-progress {
+          display: none;
+        }
+
+        .icon-close {
+          display: inline-block;
+        }
+      }
+    }
+  }
+}
+
+:host ::ng-deep .devui-progress-circle {
+  width: 16px;
+  height: 16px;
 }
 
 .devui-input-group.disabled .devui-form-control,
@@ -74,14 +140,40 @@ svg.svg-icon-dot > path {
   outline: none;
 }
 
-.devui-upload-delete-file-button {
-  position: absolute;
-  top: calc(50% - 7px);
-  right: 50px;
-  cursor: pointer;
-}
-
 .devui-input-group.disabled .devui-upload-delete-file-button {
   cursor: not-allowed;
   pointer-events: none;
+}
+
+.devui-loading {
+  color: $devui-aide-text;
+}
+
+.devui-failed-color {
+  color: $devui-danger;
+}
+
+.devui-upload-tip {
+  height: 18px;
+  margin-top: 8px;
+  font-size: 12px;
+
+  .icon {
+    margin-right: 8px;
+    font-size: 16px;
+    vertical-align: middle;
+  }
+
+  .icon-right-o {
+    color: $devui-success;
+  }
+
+  .devui-upload-failed {
+    color: $devui-danger;
+  }
+
+  a {
+    color: $devui-link;
+    cursor: pointer;
+  }
 }

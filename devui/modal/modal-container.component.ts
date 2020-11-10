@@ -34,9 +34,8 @@ export class ModalContainerComponent implements OnInit {
   @Input() dialogtype = 'standard';
   @Input() showCloseBtn: boolean;
   contentTemplate: TemplateRef<any>;
-  modalInstance: ModalComponent;
 
-  constructor(private sanitizer: DomSanitizer) {}
+  constructor(private sanitizer: DomSanitizer, public modalInstance: ModalComponent) {}
 
   ngOnInit() {
     if (this.html) {

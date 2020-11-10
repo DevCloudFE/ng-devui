@@ -36,7 +36,7 @@
   .button-style {
     display: inline-block;
     width: 45%;
-    font-size: 12px;
+    font-size: $devui-font-size;
     color: $devui-text;
     text-align: center;
     line-height: 20px;
@@ -58,7 +58,7 @@
   }
 
   .label-style {
-    font-size: 12px;
+    font-size: $devui-font-size;
     color: $devui-text;
     letter-spacing: 0;
     margin-left: 10px;

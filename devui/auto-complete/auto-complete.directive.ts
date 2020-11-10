@@ -181,7 +181,7 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
     let tempSource = [];
     if (this.latestSource && this.latestSource.length > 0) {
       this.searchFn('').subscribe(source => {
-        const t = this.latestSource.slice(-5); // 最近输入只支持最多5个，截取后5项
+        const t = this.latestSource;
         tempSource = t.filter(data => {
           if (!data.label) {
             return source.find(item => item === data);

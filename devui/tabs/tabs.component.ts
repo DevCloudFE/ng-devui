@@ -29,6 +29,7 @@ export class TabsComponent implements OnInit, AfterContentInit {
   @ContentChildren(TabComponent) tabs: QueryList<TabComponent>;
   @Output() activeTabChange = new EventEmitter<number | string>();
   @Input() beforeChange: (value) => boolean | Promise<boolean> | Observable<boolean>;
+  @Input() reactivable = false;
   constructor() {
   }
 
@@ -59,7 +60,7 @@ export class TabsComponent implements OnInit, AfterContentInit {
   }
 
   select(id: number | string) {
-    if (this.activeTab === id) {
+    if (!this.reactivable && this.activeTab === id) {
       return;
     }
     this.canChange(id).then((change) => {

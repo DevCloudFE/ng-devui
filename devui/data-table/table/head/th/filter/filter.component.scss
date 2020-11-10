@@ -1,4 +1,5 @@
 @import '../../../../../style/theme/color';
+@import '../../../../../style/core/_font';
 
 .data-table-column-filter-content {
   background: $devui-connected-overlay-bg;
@@ -43,7 +44,7 @@
 .button-style {
   display: inline-block;
   width: 45%;
-  font-size: 12px;
+  font-size: $devui-font-size;
   color: $devui-text;
   text-align: center;
   line-height: 20px;
@@ -56,6 +57,11 @@
 
 ::ng-deep .filter-options .normal-filter-list-container .cdk-virtual-scroll-content-wrapper {
   width: 100%;
+
+  .no-data-container {
+    padding: 0 10px;
+    line-height: 30px;
+  }
 }
 
 .filter-options ::ng-deep .devui-checkbox > label {
@@ -75,14 +81,14 @@
 }
 
 .label-style {
-  font-size: 12px;
+  font-size: $devui-font-size;
   color: $devui-text;
   letter-spacing: 0;
   margin-left: 10px;
 }
 
 .email-style {
-  font-size: 12px;
+  font-size: $devui-font-size;
   color: $devui-placeholder;// TODO: Color-Question
   letter-spacing: 0;
   margin-left: 10px;
