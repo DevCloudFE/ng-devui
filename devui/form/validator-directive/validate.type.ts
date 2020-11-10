@@ -1,21 +1,16 @@
-// 后续要提供全局可配置的校验规则，一处配置，处处生效
-// 提供一个手动更新的方法，在特殊情况下需要进行变更
-// 如果是内置的pattern怎么办？怎样区分呢？一次最多只会返回一个pattern，因为一个pattern方法就是一个key
-// 需要可以提供多个正则组合，如phone与email  re1 instanceof RegExp判断是否为正则，可以传正则，与方法，可以传正则数组，传入数组则表示，需要满足多个正则表达式或多个函数
-
 import { AsyncValidatorFn, ValidatorFn, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { DValidators } from './validators';
 
-// TODO: 还需要提供一个debounceTime
+// TODO: 还需提供一个debounceTime
 export type DValidateRules = {
   validators ?: DValidateRule[];
   asyncValidators ?: DAsyncValidateRule[];
-  // messageToView ?: boolean; // 是否需要自动更新message到视图中
   errorStrategy ?: DValidationErrorStrategy; // error更新策略
   message ?: string; // 统一配置的message
   updateOn ?: 'change'|'blur'|'submit'; // model更新策略
-  messageShowType ?: 'popover' | 'text' | 'none' // 消息自动显示策略（当前仅单个表单组件下生效），自身附着popover | form-control下显示 | 不显示，
-  // 如果我想在form上设置怎么处理，想统一设置更新，当前指令提供一个入参进行设置，可以与rules分离
+  messageShowType ?: 'popover' | 'text' | 'none'; // 消息自动显示策略（当前仅单个表单组件下生效），自身附着popover | form-control下显示 | 不显示，
+  popPosition ?: 'top' | 'right' | 'bottom' | 'left' | ('top' | 'right' | 'bottom' | 'left')[];
 } | DValidateRule[];
 
 /* id: 自定义验证器必须具有（也可不必）
@@ -34,7 +29,6 @@ export interface DValidateRule {
   isNgValidator ?: boolean;
   validateLevel?: 'error' | 'warning'; // 校验级别
   [id: string]: boolean | number | string | RegExp | DValidatorFn | ValidatorFn; // 万能key
-  // 是否还需要updateOn
 }
 export interface DAsyncValidateRule {
   id ?: string;
@@ -45,7 +39,6 @@ export interface DAsyncValidateRule {
   isNgValidator ?: boolean;
   validateLevel?: 'error' | 'warning'; // 校验级别
   [id: string]: boolean | number | string | RegExp | DAsyncValidatorFn | AsyncValidatorFn; // 万能key
-  // 是否还需要updateOn
 }
 
 export interface DValidateErrorStatus {
@@ -73,6 +66,7 @@ export const dDefaultValidators = {
   'requiredTrue': Validators.requiredTrue,
   'email': Validators.email,
   'pattern': Validators.pattern,
+  'whitespace': DValidators.whiteSpace,
 };
 
 function isEmptyInputValue(value: any): boolean {
@@ -88,3 +82,5 @@ function hasValidLength(value: any): boolean {
 ** dirty: 抛出error需在dirty状态
 */
 export type DValidationErrorStrategy = 'pristine' | 'dirty';
+
+export type DFormControlStatus = 'error' | 'pending' | 'success';

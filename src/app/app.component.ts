@@ -35,6 +35,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.version = VERSION.full;
     this.versionOptions = [
       { name: this.version, link: '/components/get-start', target: '_self' },
+      { name: '9.3.0', link: '/9.3.0/', target: '_self' },
       { name: '8.2.0', link: '/8.2.0/', target: '_self' }
     ];
     this.currentOption = this.versionOptions[0];

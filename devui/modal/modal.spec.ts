@@ -87,9 +87,7 @@ describe('dialog', () => {
         providers: [DialogService],
       }).overrideModule(BrowserDynamicTestingModule, {
         set: {
-          entryComponents: [
-            ModalTestComponent
-          ]
+
         }
       }).compileComponents();
     }));
@@ -370,9 +368,7 @@ describe('modal', () => {
         providers: [ModalService],
       }).overrideModule(BrowserDynamicTestingModule, {
         set: {
-          entryComponents: [
-            OpenModalComponent
-          ]
+
         }
       }).compileComponents();
     }));
@@ -424,9 +420,7 @@ describe('modal', () => {
         providers: [ModalService],
       }).overrideModule(BrowserDynamicTestingModule, {
         set: {
-          entryComponents: [
-            ModalAlertComponent
-          ]
+
         }
       }).compileComponents();
     }));

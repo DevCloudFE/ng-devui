@@ -1,0 +1,28 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
+.card-container {
+  width: 350px;
+  display: inline-block;
+  margin-right: 50px;
+}
+
+.card-icon {
+  cursor: pointer;
+  font-size: $devui-font-size-icon;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.card-icon + span {
+  vertical-align: middle;
+}
+
+.card-block {
+  margin-right: 16px;
+}
+
+d-card {
+  &:hover {
+    box-shadow: 0 4px 16px 0 $devui-light-shadow;
+  }
+}

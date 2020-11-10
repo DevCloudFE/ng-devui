@@ -39,8 +39,6 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
     BasicComponent,
     CustomOpenComponent
   ],
-  entryComponents: [
-    DImagePreviewDemoComponent,
-  ],
+
 })
 export class ImagePreviewDemoModule { }

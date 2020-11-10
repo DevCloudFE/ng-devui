@@ -3,8 +3,8 @@
   <d-button (click)="openTempleteModal()">Modal</d-button>
 </section>
 
-<ng-template #dialogContent let-modalInstance="modalInstance">
-  <d-dialog-content [data]="dialogData" [modalInstance]="modalInstance"></d-dialog-content>
+<ng-template #dialogContent let-modalInstance="modalInstance" let-modalContentInstance="modalContentInstance">
+  <d-dialog-content [data]="dialogData" [modalInstance]="modalInstance" [modalContentInstance]="modalContentInstance"></d-dialog-content>
 </ng-template>
 <ng-template #modalContent let-modalInstance="modalInstance">
   <d-modal-content [data]="modalData" [modalInstance]="modalInstance"></d-modal-content>

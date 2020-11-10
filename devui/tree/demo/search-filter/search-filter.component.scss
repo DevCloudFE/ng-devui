@@ -1,0 +1,14 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
+.row {
+  padding: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.help-tip {
+  margin-left: 8px;
+  font-size: $devui-font-size-icon;
+  vertical-align: middle;
+  cursor: pointer;
+}

@@ -43,9 +43,7 @@ import { ShowLoadingComponent } from './show-loading/show-loading.component';
     SubscriptionComponent,
     ShowLoadingComponent
   ],
-  entryComponents: [
-    LoadingDemoComponent,
-  ],
+
 })
 export class LoadingDemoModule {
 }

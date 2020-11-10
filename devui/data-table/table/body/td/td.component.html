@@ -19,7 +19,7 @@
     </div>
   </div>
 
-  <div *ngIf="editableTip !== 'btn'" class="cell-editable" (click)="startEditing($event)">
+  <div *ngIf="editableTip !== 'btn'" class="cell-editable not-break" (click)="startEditing($event)">
     <ng-template
       [ngTemplateOutlet]="nestedTmp"
       [ngTemplateOutletContext]="{ nestedColumn: nestedColumn, rowItem: rowItem, nestedLayer: nestedLayer }"

@@ -1,8 +1,9 @@
 @import '../style/theme/color';
+@import '../style/core/_font';
 
 .devui-star-align {
   float: left;
-  font-size: 16px;
+  font-size: $devui-font-size-icon;
   margin-right: 5px;
   position: relative;
 }
@@ -17,6 +18,7 @@
 
 .devui-star-color-active {
   color: #6a81ed;
+  line-height: 1.5;
 
   svg g {
     fill: #6a81ed;
@@ -56,6 +58,7 @@
 
 .devui-star-color {
   color: $devui-dividing-line;
+  line-height: 1.5;
 
   svg g {
     fill: $devui-dividing-line;

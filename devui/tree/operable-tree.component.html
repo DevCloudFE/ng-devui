@@ -65,6 +65,7 @@
       (dragleave)="onDragleave($event, treeNode)"
       (drop)="onDrop($event, treeNode)"
       [class.disabled]="treeNode.data.disabled"
+      (click)="selectNode($event, treeNode)"
     >
       <div class="devui-tree-node__content--value-wrapper" [class.isMatch]="treeNode.data.isMatch">
         <span
@@ -137,7 +138,8 @@
           <span *ngIf="iconLeaf" [innerHTML]="iconLeaf | safe: 'html'"></span>
         </span>
         <ng-container *ngIf="iconTemplate && iconTemplatePosition === 'before-checkbox'">
-          <ng-template [ngTemplateOutlet]="iconTemplate" [ngTemplateOutletContext]="{ node: treeNode.data }"> </ng-template>
+          <ng-template [ngTemplateOutlet]="iconTemplate" [ngTemplateOutletContext]="{ node: treeNode.data, completeNode: treeNode }">
+          </ng-template>
         </ng-container>
         <d-checkbox
           *ngIf="checkable"
@@ -151,27 +153,22 @@
         >
         </d-checkbox>
         <ng-container *ngIf="iconTemplate && (!iconTemplatePosition || iconTemplatePosition === 'after-checkbox')">
-          <ng-template [ngTemplateOutlet]="iconTemplate" [ngTemplateOutletContext]="{ node: treeNode.data }"> </ng-template>
+          <ng-template [ngTemplateOutlet]="iconTemplate" [ngTemplateOutletContext]="{ node: treeNode.data, completeNode: treeNode }">
+          </ng-template>
         </ng-container>
         <ng-container *ngIf="nodeTemplate">
-          <ng-template [ngTemplateOutlet]="nodeTemplate" [ngTemplateOutletContext]="{ node: treeNode.data }"> </ng-template>
+          <ng-template [ngTemplateOutlet]="nodeTemplate" [ngTemplateOutletContext]="{ node: treeNode.data, completeNode: treeNode }">
+          </ng-template>
         </ng-container>
         <span
           *ngIf="!nodeTemplate && !treeNode.data?.editable"
-          (click)="selectNode($event, treeNode)"
           (dblclick)="nodeDblClick($event, treeNode)"
           (contextmenu)="contextmenuEvent($event, treeNode)"
           class="devui-tree-node__title"
           [class.select-disabled]="treeNode.data.disableSelect"
           title="{{ treeNode.data.title }}"
         >
-          <d-highlight
-            *ngIf="treeNode.data?.isMatch"
-            [value]="treeNode.data.title"
-            [term]="treeFactory.searchItem"
-            [highlightClass]="'devui-tree-match-highlight'"
-          >
-          </d-highlight>
+          <d-highlight *ngIf="treeNode.data?.isMatch" [value]="treeNode.data.title" [term]="treeFactory.searchItem"> </d-highlight>
           <ng-container *ngIf="!treeNode.data?.isMatch">{{ treeNode.data.title }}</ng-container>
         </span>
         <span class="devui-tree-node__edit" *ngIf="!nodeTemplate && treeNode.data?.editable">
@@ -229,9 +226,9 @@
           (click)="editNode($event, treeNode)"
         >
           <svg
-            width="15px"
+            width="16px"
             height="16px"
-            viewBox="0 0 15 16"
+            viewBox="0 0 16 16"
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -301,12 +298,13 @@
       [class.devui-tree-node--parent]="(treeNode.data.children || []).length > 0"
       (mouseenter)="treeNodeHover(treeNode, 'enter')"
       (mouseleave)="treeNodeHover(treeNode, 'leave')"
-      [draggable]="draggable"
+      [draggable]="draggable && !treeNode?.data?.editable"
       (dragstart)="onDragstart($event, treeNode)"
       (dragover)="onDragover($event, draggable, treeNode)"
       (dragleave)="onDragleave($event, treeNode)"
       (drop)="onDrop($event, treeNode)"
       [class.disabled]="treeNode.data.disabled"
+      (click)="selectNode($event, treeNode)"
     >
       <div class="devui-tree-node__content--value-wrapper" [class.isMatch]="treeNode.data.isMatch">
         <span
@@ -379,7 +377,8 @@
           <span *ngIf="iconLeaf" [innerHTML]="iconLeaf | safe: 'html'"></span>
         </span>
         <ng-container *ngIf="iconTemplate && iconTemplatePosition === 'before-checkbox'">
-          <ng-template [ngTemplateOutlet]="iconTemplate" [ngTemplateOutletContext]="{ node: treeNode.data }"> </ng-template>
+          <ng-template [ngTemplateOutlet]="iconTemplate" [ngTemplateOutletContext]="{ node: treeNode.data, completeNode: treeNode }">
+          </ng-template>
         </ng-container>
         <d-checkbox
           *ngIf="checkable"
@@ -392,14 +391,15 @@
         >
         </d-checkbox>
         <ng-container *ngIf="iconTemplate && (!iconTemplatePosition || iconTemplatePosition === 'after-checkbox')">
-          <ng-template [ngTemplateOutlet]="iconTemplate" [ngTemplateOutletContext]="{ node: treeNode.data }"> </ng-template>
+          <ng-template [ngTemplateOutlet]="iconTemplate" [ngTemplateOutletContext]="{ node: treeNode.data, completeNode: treeNode }">
+          </ng-template>
         </ng-container>
         <ng-container *ngIf="nodeTemplate">
-          <ng-template [ngTemplateOutlet]="nodeTemplate" [ngTemplateOutletContext]="{ node: treeNode.data }"> </ng-template>
+          <ng-template [ngTemplateOutlet]="nodeTemplate" [ngTemplateOutletContext]="{ node: treeNode.data, completeNode: treeNode }">
+          </ng-template>
         </ng-container>
         <span
           *ngIf="!nodeTemplate && !treeNode.data?.editable"
-          (click)="selectNode($event, treeNode)"
           (dblclick)="nodeDblClick($event, treeNode)"
           (contextmenu)="contextmenuEvent($event, treeNode)"
           class="devui-tree-node__title"
@@ -410,7 +410,6 @@
             *ngIf="treeNode.data?.isMatch && !treeNode.data?.isCustomSearch"
             [value]="treeNode.data.title"
             [term]="treeFactory.searchItem"
-            [highlightClass]="'devui-tree-match-highlight'"
           >
           </d-highlight>
           <span *ngIf="treeNode.data?.isMatch && treeNode.data?.isCustomSearch" class="tree-node-highlight">{{ treeNode.data.title }}</span>
@@ -471,9 +470,9 @@
           (click)="editNode($event, treeNode)"
         >
           <svg
-            width="15px"
+            width="16px"
             height="16px"
-            viewBox="0 0 15 16"
+            viewBox="0 0 16 16"
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink"

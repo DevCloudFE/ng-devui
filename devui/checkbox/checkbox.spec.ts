@@ -29,9 +29,7 @@ class TestCheckBoxComponent {
   beforeChange: (label: string) => any;
 
   constructor() {}
-  onCheckboxChange(value) {
-    console.log('checkbox1 checked:', value);
-  }
+  onCheckboxChange = jasmine.createSpy('onCheckboxChange');
 }
 
 describe('checkbox', () => {

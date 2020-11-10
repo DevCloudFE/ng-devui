@@ -37,7 +37,6 @@ export class VirtualScrollComponent implements OnInit {
   };
 
   dataSource: Array<SourceType> = JSON.parse(JSON.stringify(originSource.slice()));
-
   ngOnInit() {
   }
 

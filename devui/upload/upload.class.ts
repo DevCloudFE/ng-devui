@@ -45,13 +45,18 @@ export class UploadComponent {
     });
   }
 
-  upload() {
-    const uploads = this.fileUploaders
-      .filter((fileUploader) => fileUploader.status !== UploadStatus.uploaded)
+  upload(oneFile?) {
+    let uploads: any[] = [];
+    if (oneFile) {
+      oneFile.percentage = 0;
+      uploads.push(from(oneFile.send()));
+    } else {
+      uploads = this.fileUploaders.filter((fileUploader) => fileUploader.status !== UploadStatus.uploaded)
       .map((fileUploader) => {
+        fileUploader.percentage = 0;
         return from(fileUploader.send());
       });
-
+    }
     if (uploads.length > 0) {
       return merge(...uploads).pipe(toArray());
     }

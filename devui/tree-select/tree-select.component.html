@@ -15,7 +15,7 @@
       class="devui-select-input devui-form-control devui-tree-select-input devui-dropdown-origin"
       (click)="toggle()"
       autocomplete="off"
-      [ngClass]="{ disabled: disabled }"
+      [ngClass]="{ disabled: disabled, 'devui-select-no-label': !enableLabelization }"
       readonly
       popper-activator
     >

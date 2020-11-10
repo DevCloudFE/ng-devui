@@ -8,6 +8,7 @@ import {
   } from '@angular/core';
 import { FormControlComponent } from './form-control.component';
 import { FormLabelComponent } from './form-label.component';
+import { DFormControlStatus } from './validator-directive/validate.type';
 
   @Component({
     selector: 'd-form-item',
@@ -20,7 +21,12 @@ import { FormLabelComponent } from './form-label.component';
   export class FormItemComponent implements OnInit {
     @HostBinding('class.devui-form-has-error-msg') _hasErrorMsg = false;
 
+    /**
+    * @deprecated Use dHasFeedback to replace, No longer support for label
+    */
     @Input() dFeedbackType: 'label' | 'control';
+
+    @Input() dHasFeedback = false;
 
     @ContentChild(FormControlComponent) controlInstance: FormControlComponent;
     @ContentChild(FormLabelComponent) labelInstance: FormLabelComponent;
@@ -39,13 +45,13 @@ import { FormLabelComponent } from './form-label.component';
 
     }
 
-    updateFeedback(status: 'error' | null, updateMessage: string): void {
+    updateFeedback(status: DFormControlStatus | null, updateMessage: string): void {
       this._hasErrorMsg = !!updateMessage;
 
       const feedbackType = this.dFeedbackType;
       if (feedbackType === 'label' && this.labelInstance) {
         this.labelInstance.updateFeedbackStatus(status);
-      } else if (feedbackType === 'control' && this.controlInstance) {
+      } else if ((feedbackType === 'control' || this.dHasFeedback) && this.controlInstance) {
         this.controlInstance.updateFeedbackStatus(status);
       }
 

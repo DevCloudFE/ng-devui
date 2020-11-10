@@ -1,4 +1,5 @@
 @import '../../style/theme/color';
+@import '../../style/core/_font';
 
 :host {
   display: block;
@@ -68,7 +69,7 @@
 
       & div {
         color: $devui-base-bg;
-        font-size: 12px;
+        font-size: $devui-font-size;
         font-weight: normal;
       }
     }

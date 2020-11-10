@@ -71,6 +71,7 @@ export class InteractionColumnComponent implements OnInit {
   ngOnInit() {
     this.checkboxList = JSON.parse(JSON.stringify(originSource.slice(0, 6)));
     this.filterChangeRadio(this.filterList2[1]);
+    this.sortableDataSource[0]['$checkDisabled'] = true;
   }
 
   changePageContent($event) {

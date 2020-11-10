@@ -176,7 +176,7 @@ describe('operable tree', () => {
     });
 
     it('should click apply selectNode function', () => {
-      const treeEl: HTMLElement = debugEl.query(By.css('.devui-tree-node__title')).nativeElement;
+      const treeEl: HTMLElement = debugEl.query(By.css('.devui-tree-node__content')).nativeElement;
 
       treeEl.dispatchEvent(new Event('click'));
       expect(component.onOperableNodeSelected).toHaveBeenCalled();
@@ -204,7 +204,7 @@ describe('operable tree', () => {
       component.activeNode = false;
       fixture.detectChanges();
 
-      const treeEl: HTMLElement = debugEl.query(By.css('.devui-tree-node__title')).nativeElement;
+      const treeEl: HTMLElement = debugEl.query(By.css('.devui-tree-node__content')).nativeElement;
       treeEl.dispatchEvent(new Event('click'));
 
       expect(component.onOperableNodeChecked).toHaveBeenCalled();
@@ -214,7 +214,7 @@ describe('operable tree', () => {
       component.activeParentNode = false;
       fixture.detectChanges();
 
-      const treeDebugEls: Array<DebugElement> = debugEl.queryAll(By.css('.devui-tree-node__title'));
+      const treeDebugEls: Array<DebugElement> = debugEl.queryAll(By.css('.devui-tree-node__content'));
       const parentTreeNode = treeDebugEls[1].nativeElement;
       parentTreeNode.dispatchEvent(new Event('click'));
 

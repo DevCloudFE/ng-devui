@@ -34,9 +34,7 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
     BasicComponent,
     CircleComponent,
   ],
-  entryComponents: [
-    ProgressDemoComponent,
-  ],
+
 })
 export class ProgressDemoModule {
 }

@@ -21,7 +21,10 @@
       <div class="content" [style.max-height]="maxHeight" *ngIf="!!content && !html">{{ content }}</div>
       <div class="content" [style.max-height]="maxHeight" *ngIf="!!content && html" [innerHTML]="content"></div>
       <div class="content" *ngIf="contentTemplate">
-        <ng-template [ngTemplateOutlet]="contentTemplate" [ngTemplateOutletContext]="{ modalInstance: modalInstance }"></ng-template>
+        <ng-template
+          [ngTemplateOutlet]="contentTemplate"
+          [ngTemplateOutletContext]="{ modalInstance: modalInstance, modalContentInstance: this }"
+        ></ng-template>
       </div>
       <ng-template dModalContentHost></ng-template>
     </div>

@@ -1,0 +1,21 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
+.action-text {
+  color: $devui-aide-text;
+}
+
+.card-icon {
+  cursor: pointer;
+  font-size: $devui-font-size-icon;
+  vertical-align: middle;
+
+  &:not(:last-child) {
+    margin-right: 8px;
+  }
+}
+
+d-card {
+  &:hover {
+    box-shadow: 0 4px 16px 0 $devui-light-shadow;
+  }
+}

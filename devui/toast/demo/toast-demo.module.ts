@@ -38,7 +38,7 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
     LifeComponent,
     SingleComponent
   ],
-  entryComponents: [ToastDemoComponent]
+
 })
 export class ToastDemoModule { }
 

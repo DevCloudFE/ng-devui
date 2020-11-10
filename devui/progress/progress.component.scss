@@ -1,6 +1,7 @@
 @import '../style/theme/color';
 @import '../style/theme/variables';
 @import '../style/mixins/index';
+@import '../style/core/_font';
 
 :host {
   display: block;
@@ -28,7 +29,7 @@
     top: 0;
     height: 100%;
     width: 100%;
-    font-size: 12px;
+    font-size: $devui-font-size;
     line-height: 1.5;
   }
 }

@@ -1,0 +1,90 @@
+<section class="demo-section">
+  <h5>Form验证与提交</h5>
+  <ul>
+    <li><code>dValidateRules</code>也可作用于已绑定<code>ngForm、ngModelGroup</code>元素上， 进行表单状态与错误消息的统一管理。</li>
+    <li>对于非边框类元素，建议在<code>d-form-item</code>容器上配置<code>dHasFeedback</code>为<code>true</code> 进行错误反馈提示。</li>
+    <li>对于<code>dForm</code>，可使用<code>dFormSubmit、dFormReset</code> 指令关联将用于触发提交与重置操作的元素。</li>
+    <li>若表单设置了异步校验，可将对应按钮<code>loading</code>与表单<code>pending</code>状态关联起来。</li>
+  </ul>
+  <div>
+    <form
+      dForm
+      ngForm
+      [dValidateRules]="{ message: '表单校验不通过，请检查' }"
+      [layout]="'vertical'"
+      #planForm="dValidateRules"
+      (ngSubmit)="submitPlanForm()"
+    >
+      <div [ngModelGroup]="'textGroup'">
+        <d-form-item>
+          <d-form-label [required]="true" [hasHelp]="true" [helpTips]="'这是计划名'">计划名</d-form-label>
+          <d-form-control>
+            <input
+              dTextInput
+              autocomplete="off"
+              name="planName"
+              [(ngModel)]="planFormData.planName"
+              [dValidateRules]="[{ required: true, message: '计划名不能为空' }]"
+            />
+          </d-form-control>
+        </d-form-item>
+        <d-form-item>
+          <d-form-label>计划描述</d-form-label>
+          <d-form-control>
+            <textarea
+              dTextarea
+              autocomplete="off"
+              name="planDescription"
+              [(ngModel)]="planFormData.planDescription"
+              [dValidateRules]="[{ maxlength: 256, message: '长度不能超过256' }]"
+            ></textarea>
+          </d-form-control>
+        </d-form-item>
+      </div>
+      <d-form-item>
+        <d-form-label [required]="true" [hasHelp]="true" [helpTips]="'任务每次执行的审核人'">审核人</d-form-label>
+        <d-form-control>
+          <d-select
+            [options]="verifierOptions"
+            [(ngModel)]="planFormData.planVerifier"
+            [name]="'planVerifier'"
+            [filterKey]="'name'"
+            [allowClear]="true"
+            [dValidateRules]="[{ required: true, message: '请选择一个执行审核人' }]"
+          ></d-select>
+        </d-form-control>
+      </d-form-item>
+      <d-form-item [dHasFeedback]="true">
+        <d-form-label [required]="true">执行日</d-form-label>
+        <d-form-control [extraInfo]="customTemplate">
+          <d-checkbox-group
+            [options]="checkboxOptions"
+            [(ngModel)]="planFormData.planExerciseDate"
+            [name]="'planExerciseDate'"
+            [direction]="'row'"
+            [filterKey]="'label'"
+            [isShowTitle]="true"
+            [dValidateRules]="{
+              validators: [{ required: true, message: '请至少选择一个执行日' }],
+              asyncValidators: [{ canChoose: validateDate }]
+            }"
+          ></d-checkbox-group>
+        </d-form-control>
+      </d-form-item>
+      <d-form-operation>
+        <d-button
+          class="mr-element-spacing"
+          [title]="planForm.errorMessage || ''"
+          circled="true"
+          style="margin-right: 8px"
+          [showLoading]="planForm.pending"
+          dFormSubmit
+          >提交</d-button
+        >
+      </d-form-operation>
+    </form>
+  </div>
+  <ng-template #customTemplate>
+    <span>选择您的执行周期，推荐选择周一，周三，周五</span>
+  </ng-template>
+</section>

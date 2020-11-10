@@ -11,7 +11,8 @@ import {
 } from '@angular/core';
 import {
   IUploadOptions,
-  IFileOptions
+  IFileOptions,
+  UploadStatus
 } from './file-uploader.types';
 import { MultipleUploadViewComponent } from './multiple-upload-view.component';
 import {
@@ -33,6 +34,7 @@ export class MultipleUploadComponent implements OnDestroy {
   @Input() fileOptions: IFileOptions;
   @Input() autoUpload = false;
   @Input() withoutBtn = false;
+  @Input() showTip = false;
   @Input() uploadedFiles: Array<Object> = [];
   @Input() uploadedFilesRef: TemplateRef<any>;
   @Input() preloadFilesRef?: TemplateRef<any>;
@@ -59,6 +61,8 @@ export class MultipleUploadComponent implements OnDestroy {
   isDropOVer = false;
   i18nSubscription: Subscription;
   errorMsg = [];
+  UploadStatus = UploadStatus;
+  uploadTips: string;
   constructor(
     private selectFiles: SelectFiles,
     private i18n: I18nService, ) {
@@ -132,15 +136,18 @@ export class MultipleUploadComponent implements OnDestroy {
     this.fileOver.emit(event);
   }
 
-  upload() {
+  upload(event?, fileUploader?) {
+    if (event) {
+      event.stopPropagation();
+    }
     this.canUpload().then((canUpload) => {
       if (!canUpload) {
         this.multipleUploadViewComponent.removeFiles();
         return;
       }
       const uploadObservable = this.oneTimeUpload ?
-        this.multipleUploadViewComponent.oneTimeUpload() :
-        this.multipleUploadViewComponent.upload();
+      this.multipleUploadViewComponent.oneTimeUpload() :
+      this.multipleUploadViewComponent.upload(fileUploader);
       uploadObservable
         .pipe(
           last()
@@ -181,8 +188,51 @@ export class MultipleUploadComponent implements OnDestroy {
     this.deleteUploadedFileEvent.emit(filePath);
   }
 
+  deleteFile($event, file) {
+    $event.stopPropagation();
+    this.multipleUploadViewComponent.deleteFile(file);
+  }
+
   alertMsg(errorMsg) {
     this.errorMsg = [{ severity: 'warn', summary: this.i18nText.warning, detail: errorMsg }];
+  }
+
+  getStatus() {
+    let uploadingCount = 0;
+    let uploadedCount  = 0;
+    let failedCount = 0;
+    const filesCount = this.multipleUploadViewComponent.fileUploaders.length;
+    this.multipleUploadViewComponent.fileUploaders.forEach((fileUploader) => {
+      if (fileUploader.status === UploadStatus.uploading) {
+        uploadingCount++;
+      } else if (fileUploader.status === UploadStatus.uploaded) {
+        uploadedCount++;
+      } else if (fileUploader.status === UploadStatus.failed) {
+        failedCount++;
+      }
+    });
+    if (failedCount > 0) {
+      this.uploadTips = this.i18nText.getFailedFilesCount(failedCount);
+      return 'failed';
+    }
+    if (uploadingCount > 0) {
+      this.uploadTips = this.i18nText.getUploadingFilesCount(uploadingCount, filesCount);
+      return 'uploading';
+    }
+    if (uploadedCount === filesCount && uploadedCount !== 0) {
+      return 'uploaded';
+    }
+    if (filesCount !== 0) {
+      this.uploadTips = this.i18nText.getSelectedFilesCount(filesCount);
+      return 'selected';
+    }
+  }
+
+  cancelUpload() {
+    this.multipleUploadViewComponent.fileUploaders.filter((fileUploader) => fileUploader.status === UploadStatus.uploading)
+    .forEach((fileUploader) => {
+      fileUploader.status = UploadStatus.failed;
+    });
   }
 
   ngOnDestroy() {

@@ -1,0 +1,45 @@
+<section class="demo-section">
+  <h5>验证单个元素，配置错误更新策略errorStrategy、校验时机updateOn</h5>
+  <ul>
+    <li>
+      设置<code>errorStrategy</code>元素初始化时若校验不通过，错误是否会进行提示，
+      默认配置为<code>dirty</code>，若需要在初始化时将错误抛出，可配置为<code>pristine</code>。
+    </li>
+    <li><code>errorStrategy</code>可继承。</li>
+    <li>
+      设置<code>updateOn</code>，指定校验的时机。 校验器<code>updateOn</code>基于你绑定的模型的<code>updateOn</code>设置，
+      在模板中你可以通过<code>ngModelOptions</code>来指定， 默认为<code>change</code>，可选值还有<code>blur</code>、<code>submit</code>，
+      设置为<code>submit</code>，则当元素所在表单进行提交时将触发校验。
+    </li>
+  </ul>
+  <div>
+    <d-select
+      [options]="verifierOptions"
+      [(ngModel)]="singleSelectData1"
+      [multiple]="true"
+      [name]="'singleSelect2'"
+      [filterKey]="'name'"
+      [dValidateRules]="{
+        errorStrategy: 'pristine',
+        validators: [{ required: true, message: '请选择一个管理员' }],
+        asyncValidators: [{ isUserBusy: isUserBusy, errorStrategy: 'dirty' }]
+      }"
+    >
+    </d-select>
+  </div>
+  <div>
+    <d-select
+      [options]="verifierOptions"
+      [(ngModel)]="singleSelectData2"
+      [multiple]="true"
+      [name]="'singleSelect2'"
+      [filterKey]="'name'"
+      [ngModelOptions]="{ updateOn: 'blur' }"
+      [dValidateRules]="[
+        { required: true, message: '请选择一个管理员' },
+        { maxUser: maxUsers(3), message: '请不要选择超过三个管理员' }
+      ]"
+    >
+    </d-select>
+  </div>
+</section>

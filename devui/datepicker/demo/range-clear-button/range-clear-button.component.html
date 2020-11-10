@@ -1,4 +1,4 @@
-<section style="width: 100%;">
+<section style="width: 100%">
   <span>日期范围选择器:可给clearAll()传入参数以定义不同reason，everyRange方法仅提供参考，具体请业务自行处理</span>
   <div class="devui-input-group devui-dropdown-origin-wrapper devui-dropdown-origin">
     <input
@@ -6,7 +6,7 @@
       placeholder="y/MM/dd  -  y/MM/dd"
       name="dp"
       [(ngModel)]="dateRange"
-      (focus)="dateRangePicker.toggle($event)"
+      (focus)="dateRangePicker.toggle()"
       autocomplete="off"
       dDateRangePicker
       #dateRangePicker="dateRangePicker"
@@ -17,15 +17,13 @@
     <div *ngIf="everyRange(dateRange)" class="devui-input-group-addon icon-close-wrapper" (click)="dateRangePicker.clearAll()">
       <i class="icon icon-close"></i>
     </div>
-    <div class="devui-input-group-addon" (click)="dateRangePicker.toggle($event, true)">
+    <div class="devui-input-group-addon" (click)="dateRangePicker.toggle()">
       <i class="icon icon-calendar"></i>
     </div>
   </div>
   <ng-template #myCustomview let-clearAll="clearAll" let-datePicker>
     <div class="box">
-      <d-button bsStyle="common" (btnClick)="clearAll(changeReason.button)" bsSize="sm">
-        清除
-      </d-button>
+      <d-button bsStyle="common" (btnClick)="clearAll(changeReason.button)" bsSize="sm"> 清除 </d-button>
     </div>
   </ng-template>
 </section>

@@ -1,4 +1,5 @@
 @import '../theme/color.scss';
+@import './font';
 
 @mixin border-position-radius($position: left) {
   border-top-#{$position}-radius: 0;
@@ -28,7 +29,7 @@
   outline: none;
   background-color: $devui-base-bg;
 
-  &:not([disabled]):not(.disabled):not(.devui-disabled):not(.error) {
+  &:not([disabled]):not(.disabled):not(.devui-disabled):not(.error):not(.devui-error) {
     &:hover {
       border-color: $devui-form-control-line-hover;
     }
@@ -90,7 +91,7 @@
   border-radius: 2px;
   padding: 5px 10px;
   line-height: 16px; // 解决ie中文字不居中，由于height28px，有10px的padding和2px的border，剩余16px，使用其他的会使文字不居中
-  font-size: 12px;
+  font-size: $devui-font-size;
   color: $devui-text;
   width: 100%;
   display: block;
@@ -157,13 +158,13 @@
 }
 
 .devui-input-lg {
-  font-size: 16px;
+  font-size: $devui-font-size-page-title;
   line-height: 20px; // 同devui-input
   height: 32px;
 }
 
 .devui-input-sm {
-  font-size: 12px;
+  font-size: $devui-font-size;
   line-height: 14px; // 同devui-input
   height: 26px;
 }
@@ -335,11 +336,11 @@
     }
   }
 
-  &:not([disabled]):not(.disabled):not(.devui-disabled) {
-    .devui-form-control:not([disabled]):not(.disabled):not(.devui-disabled),
-    .devui-form-control:not([disabled]):not(.disabled):not(.devui-disabled):hover,
-    .devui-form-control:not([disabled]):not(.disabled):not(.devui-disabled):focus,
-    .devui-form-control:not([disabled]):not(.disabled):not(.devui-disabled):focus:hover,
+  &:not([disabled]):not(.disabled):not(.devui-disabled):not(.devui-error) {
+    .devui-form-control:not([disabled]):not(.disabled):not(.devui-disabled):not(.devui-error),
+    .devui-form-control:not([disabled]):not(.disabled):not(.devui-disabled):not(.devui-error):hover,
+    .devui-form-control:not([disabled]):not(.disabled):not(.devui-disabled):not(.devui-error):focus,
+    .devui-form-control:not([disabled]):not(.disabled):not(.devui-disabled):not(.devui-error):focus:hover,
     .devui-input-group-addon,
     > .devui-dropdown-default,
     > .devui-dropdown-default:hover,
@@ -370,76 +371,232 @@ input::-webkit-input-placeholder {
 [dTextarea]:not([disabled]):not(.disabled):not(.devui-disabled).error,
 [dTextInput]:not([disabled]):not(.disabled):not(.devui-disabled).devui-error,
 [dTextarea]:not([disabled]):not(.disabled):not(.devui-disabled).devui-error {
-  border-color: $devui-danger-line !important; /* Cannot be covered style by hover */
-  background-color: $devui-danger-bg; /* TODO: 边框阴影颜色 */
+  border-color: $devui-danger-line;
+  background-color: $devui-danger-bg;
 }
 
-d-select:not([disabled]):not(.disabled):not(.devui-disabled).devui-error > div.devui-dropdown-origin {
-  border-color: $devui-danger-line !important; /* Cannot be covered style by hover */
+[dDatePicker]:not([disabled]):not(.disabled):not(.devui-disabled).devui-error {
+  background-color: $devui-danger-bg;
+}
 
-  .devui-select-input:not(.devui-select-search),
-  .devui-select-input:not(.devui-select-search) + .devui-form-control-feedback { /* TODO: how to change the dropdown border */
-    background-color: $devui-danger-bg !important;
+d-select:not([disabled]):not(.disabled):not(.devui-disabled):not(.devui-dropdown-origin-wrapper):not(.multiple-label-auto-complete-disabled).devui-error {
+  div.devui-dropdown-origin.devui-dropdown-origin-wrapper.devui-dropup,
+  div.devui-dropdown-origin.devui-dropdown-origin-wrapper.devui-dropdown {
+    border-color: $devui-danger-line;
+
+    .devui-form-group .devui-input.devui-form-control.devui-select-input:not(.devui-select-search),
+    .devui-form-group .devui-select-input:not(.devui-select-search) + .devui-form-control-feedback {
+      background-color: $devui-danger-bg;
+    }
   }
 }
 
-d-editable-select:not([disabled]):not(.disabled):not(.devui-disabled).devui-error input.devui-form-control {
-  border-color: $devui-danger-line !important; /* Cannot be covered style by hover */
-  background-color: $devui-danger-bg !important; /* TODO: open时，下边框颜色 */
+d-editable-select:not([disabled]):not(.disabled):not(.devui-disabled).devui-error {
+  .devui-form-group:not(.devui-dropdown-origin-wrapper):not(.multiple-label-auto-complete-disabled) {
+    input.devui-form-control.devui-dropdown-origin {
+      border-color: $devui-danger-line;
+      background-color: $devui-danger-bg; /* TODO: open时，下边框颜色 */
+    }
+  }
 }
 
 d-input-number:not([disabled]):not(.disabled):not(.devui-disabled).devui-error {
   .input-box:not(:disabled) {
-    border-color: $devui-danger-line !important; /* Cannot be covered style by hover */
-    background-color: $devui-danger-bg !important;
+    border-color: $devui-danger-line;
+    background-color: $devui-danger-bg;
   }
 }
 
 d-multi-auto-complete:not([disabled]):not(.disabled):not(.devui-disabled).devui-error {
-  ul.devui-dropdown-origin {
-    border-color: $devui-danger-line !important; /* Cannot be covered style by hover */
-    background-color: $devui-danger-bg !important; /* TODO: open时，下边框颜色 */
-  }
+  :not(.devui-dropdown-origin-wrapper):not(.multiple-label-auto-complete-disabled) {
+    &.multiple-label-auto-complete.multiple-label-auto-complete-border ul.devui-dropdown-origin {
+      border-color: $devui-danger-line;
+      background-color: $devui-danger-bg;
+    }
 
-  input[dAutoComplete] {
-    background-color: $devui-danger-bg !important;
+    input[dAutoComplete] {
+      background-color: $devui-danger-bg;
+    }
   }
 }
 
 d-tags-input:not([disabled]):not(.disabled):not(.devui-disabled).devui-error {
-  div.devui-tags {
-    border-color: $devui-danger-line !important; /* Cannot be covered style by hover */
-    background-color: $devui-danger-bg !important; /* TODO: open时，下边框颜色 */
-  }
+  :not(.devui-dropdown-origin-wrapper):not(.multiple-label-auto-complete-disabled) {
+    div.devui-tags.devui-form-control {
+      border-color: $devui-danger-line;
+      background-color: $devui-danger-bg;
+    }
 
-  input.devui-input {
-    background-color: $devui-danger-bg !important; /* TODO: open时，下边框颜色 */
+    input.devui-input {
+      background-color: $devui-danger-bg;
+    }
   }
 }
 
 d-tree-select:not([disabled]):not(.disabled):not(.devui-disabled).devui-error {
-  div.devui-select-input {
-    border-color: $devui-danger-line !important; /* Cannot be covered style by hover */
-    background-color: $devui-danger-bg !important; /* TODO: open时，下边框颜色 */
+  :not(.devui-dropdown-origin-wrapper):not(.multiple-label-auto-complete-disabled) {
+    & > div.devui-select-input.devui-dropdown-origin.devui-tree-select-input {
+      border-color: $devui-danger-line;
+      background-color: $devui-danger-bg; /* TODO: open时，下边框颜色 */
+    }
   }
 }
 
 d-search:not([disabled]):not(.disabled):not(.devui-disabled).devui-error {
   input.devui-input {
-    border-color: $devui-danger-line !important; /* Cannot be covered style by hover */
-    background-color: $devui-danger-bg !important;
+    border-color: $devui-danger-line;
+    background-color: $devui-danger-bg;
   }
 }
 
 /* border color only */
 d-editor-md:not([disabled]):not(.disabled):not(.devui-disabled).devui-error {
-  border-color: $devui-danger-line !important; /* Cannot be covered style by hover */
+  border-color: $devui-danger-line;
 }
 
 d-editor:not([disabled]):not(.disabled):not(.devui-disabled).devui-error {
   .ql-toolbar,
   .ql-container {
-    border-color: $devui-danger-line !important;
+    border-color: $devui-danger-line;
+  }
+}
+
+d-form-control {
+  d-search {
+    width: 100%;
+  }
+}
+
+.devui-form-controls.devui-form-control-has-feedback {
+  [dTextInput],
+  [dTextarea] {
+    padding-right: 28px;
+  }
+
+  d-search {
+    .devui-search {
+      .devui-search-icon {
+        right: 24px;
+      }
+
+      .devui-search-line {
+        right: 60px;
+      }
+
+      .devui-search-clear {
+        right: 60px;
+      }
+
+      .devui-input.devui-icon-left {
+        padding-right: 30px;
+      }
+
+      .devui-input {
+        padding-right: 54px;
+      }
+
+      .devui-input.devui-clear-exit {
+        padding-right: 84px;
+      }
+
+      .devui-search-line.devui-search-line-sm {
+        right: 60px;
+      }
+
+      .devui-search-clear.devui-search-clear-sm {
+        right: 60px;
+      }
+
+      .devui-input.devui-input-sm {
+        padding-right: 54px;
+      }
+
+      .devui-input.devui-clear-exit.devui-input-sm {
+        padding-right: 84px;
+      }
+
+      .devui-search-line.devui-search-line-lg {
+        right: 70px;
+      }
+
+      .devui-search-clear.devui-search-clear-lg {
+        right: 70px;
+      }
+
+      .devui-input.devui-input-lg {
+        padding-right: 60px;
+      }
+
+      .devui-input.devui-clear-exit.devui-input-lg {
+        padding-right: 95px;
+      }
+    }
+  }
+
+  d-select {
+    .devui-form-group {
+      .devui-select-input {
+        padding-right: 48px;
+      }
+
+      .devui-form-control-feedback {
+        right: 24px;
+      }
+    }
+  }
+
+  d-tree-select {
+    vertical-align: middle;
+
+    .devui-tree-select .devui-select-input.devui-tree-select-input {
+      padding-right: 52px;
+    }
+
+    .devui-tree-select .devui-select-chevron-icon {
+      right: 34px;
+    }
+  }
+
+  d-input-number {
+    width: 100%;
+
+    .input-control-buttons {
+      right: 32px;
+    }
+
+    .input-box {
+      padding-right: 32px;
+    }
+
+    &:hover .input-box:not(.disabled) {
+      padding-right: 58px;
+    }
+  }
+
+  d-tags-input {
+    .devui-tags {
+      padding-right: 28px;
+    }
+  }
+
+  d-multi-auto-complete {
+    .multiple-label-auto-complete ul {
+      padding-right: 28px;
+    }
+  }
+
+  d-editable-select {
+    .devui-form-group.devui-has-feedback > .devui-form-control-feedback {
+      right: 24px;
+    }
+
+    & > div > .devui-form-control {
+      padding-right: 48px;
+    }
+  }
+
+  [dDatePicker].devui-form-control {
+    padding-right: 32px;
   }
 }
 

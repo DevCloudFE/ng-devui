@@ -11,6 +11,7 @@ export interface I18nInterface {
     btnCancel: string;
     btnClose: string;
     btnClickMe: string;
+    copied: string;
   };
   datePicker: {
     today: string;
@@ -21,7 +22,16 @@ export interface I18nInterface {
     endDate: string;
     yearDisplay(year): string;
   };
-
+  form: {
+    required(val): string;
+    minlength(len): string;
+    maxlength(len): string;
+    min(val): string;
+    max(val): string;
+    requiredTrue(val): string;
+    email(val): string;
+    whitespace(val): string;
+  };
   pagination: {
     totalItem: string;
     goTo: string;
@@ -37,11 +47,17 @@ export interface I18nInterface {
     uploading: string,
     uploaded: string,
     uploadFailed: string,
+    uploadSuccess: string,
     delete: string,
+    reUpload: string,
+    cancelUpload: string,
     getNotAllowedFileTypeMsg(filename, scope): string,
     getBeyondMaximalFileSizeMsg(filename, maximalSize): string,
     getExistSameNameFilesMsg(sameNames): string,
-    getAllFilesBeyondMaximalFileSizeMsg(maximalSize): string
+    getAllFilesBeyondMaximalFileSizeMsg(maximalSize): string,
+    getSelectedFilesCount(filesCount): string,
+    getUploadingFilesCount(uploadingCount, filesCount): string,
+    getFailedFilesCount(failedCount): string
   };
   modal: {
     warning: string;

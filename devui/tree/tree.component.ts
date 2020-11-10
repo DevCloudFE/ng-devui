@@ -101,13 +101,17 @@ export class TreeComponent implements OnInit, OnChanges, AfterViewInit, OnDestro
 
   contextmenuEvent(event, node) {
     if (event.button === this.mouseRightButton) {
-      event.preventDefault();
       this.nodeRightClicked.emit({ node: node, event: event });
     }
   }
 
 
   selectNode(event, treeNode: TreeNode) {
+    if (!event.target.classList.contains('devui-tree-node__content--value-wrapper')
+      && !event.target.classList.contains('devui-tree-node__content')
+      && !event.target.classList.contains('devui-tree-node__title')) {
+      return;
+    }
     this.nodeSelected.emit(treeNode);
     this.treeFactory.activeNodeById(treeNode.id);
   }

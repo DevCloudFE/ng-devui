@@ -1,3 +1,5 @@
+@import '../style/core/_font';
+
 .modal-body {
   padding: 10px 30px 0 30px;
 }
@@ -25,7 +27,7 @@ div.content {
 }
 
 .flex-content ::ng-deep div.content {
-  font-size: 12px;
+  font-size: $devui-font-size;
   word-break: normal;
   word-wrap: break-word;
   white-space: pre-wrap;

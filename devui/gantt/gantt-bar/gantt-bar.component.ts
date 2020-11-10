@@ -26,6 +26,8 @@ export class GanttBarComponent implements OnInit, OnChanges, AfterViewInit, OnDe
   private mouseEndHandler: Subscription | null;
   private mouseOverProgressHandler: Subscription | null;
   private mouseLeaveProgressHandler: Subscription | null;
+  mouseMoveTimer: any = null;
+  mouseLeaveTimer: any = null;
 
   dragProgressStart: boolean;
   private moveBarStart: boolean;
@@ -608,18 +610,27 @@ export class GanttBarComponent implements OnInit, OnChanges, AfterViewInit, OnDe
   }
 
   ganttBarPopoverOnMouseHover($event) {
-    const barLeft = this.ganttBar.nativeElement.getClientRects()[0].left;
-    const eventLeft = $event.clientX;
-    this.cdkOverlayOffsetX = eventLeft - barLeft;
+    if (this.mouseLeaveTimer) {
+      clearTimeout(this.mouseLeaveTimer);
+    }
+    this.mouseMoveTimer = setTimeout(() => {
+      const barLeft = this.ganttBar.nativeElement.getClientRects()[0].left;
+      const eventLeft = $event.clientX;
+      this.cdkOverlayOffsetX = eventLeft - barLeft;
 
-    this.barHovering = true;
-    this.focused = this.focusController();
-    this.dispatchGanttBarStatus();
-    this.cdr.markForCheck();
+      this.barHovering = true;
+      this.focused = this.focusController();
+      this.dispatchGanttBarStatus();
+      this.cdr.markForCheck();
+    }, 200);
+
   }
 
   ganttBarPopoverOnMouseLeave() {
-    setTimeout(() => {
+    if (this.mouseMoveTimer) {
+      clearTimeout(this.mouseMoveTimer);
+    }
+    this.mouseLeaveTimer = setTimeout(() => {
       this.barHovering = false;
       this.focused = this.focusController();
       this.dispatchGanttBarStatus();
@@ -653,6 +664,15 @@ export class GanttBarComponent implements OnInit, OnChanges, AfterViewInit, OnDe
     }
   }
 
+  private clearTimer() {
+    if (this.mouseLeaveTimer) {
+      clearTimeout(this.mouseLeaveTimer);
+    }
+    if (this.mouseMoveTimer) {
+      clearTimeout(this.mouseMoveTimer);
+    }
+  }
+
   private focusController() {
     return this.dragProgressStart || this.moveBarStart || this.resizeBarLeftStart
     || this.resizeBarRightStart ||  this.barHovering;
@@ -668,6 +688,7 @@ export class GanttBarComponent implements OnInit, OnChanges, AfterViewInit, OnDe
   }
 
   ngOnDestroy(): void {
+    this.clearTimer();
     this.unsubscribeMouseActions();
     this.unregisterHandleHoverTooltip();
     if (this.ganttScaleStatusHandler) {

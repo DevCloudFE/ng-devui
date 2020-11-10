@@ -10,7 +10,7 @@
 
 .demo {
   vertical-align: middle;
-  font-size: 20px;
+  font-size: $devui-font-size-page-title;
 
   &-card {
     width: 90px;
@@ -18,7 +18,7 @@
     line-height: 42px;
     border-radius: 4px;
     background: $devui-global-bg;
-    font-size: 14px;
+    font-size: $devui-font-size-card-title;
     text-align: center;
     display: inline-block;
   }

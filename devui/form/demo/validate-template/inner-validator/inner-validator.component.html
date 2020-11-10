@@ -1,0 +1,25 @@
+<section class="demo-section">
+  <h5>验证单个元素，使用内置校验器</h5>
+  <p>
+    当前<code>DevUI</code>支持的内置校验器有：<code>required、minlength、maxlength、min、max、requiredTrue、email、pattern、whitespace</code>。
+  </p>
+  <p>若需限制用户输入不能全为空格，可使用<code>whitespace</code>内置校验器</p>
+  <p>若需限制用户输入长度，将最大限制设置为实际校验值<code>+1</code>是一个好的办法。</p>
+  <p>除<code>pattern</code>外，其他内置校验器我们也提供了内置的错误提示信息，在你未自定义提示消息时，我们将使用默认的提示信息。</p>
+  <div>
+    <input
+      dTextInput
+      autocomplete="off"
+      name="singleInput"
+      maxlength="11"
+      [(ngModel)]="singleInput1Data"
+      [dValidateRules]="[
+        { required: true },
+        { whitespace: true },
+        { minlength: 3 },
+        { maxlength: 10 },
+        { pattern: isAlphabetPattern, message: '请勿包含大小写字母以外其他字符' }
+      ]"
+    />
+  </div>
+</section>

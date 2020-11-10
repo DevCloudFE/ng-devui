@@ -1,5 +1,5 @@
 <section>
-  <div class="input-group" style="margin-bottom: 10px; width: 200px;">
+  <div class="input-group" style="margin-bottom: 10px; width: 200px">
     <d-select [size]="'sm'" [(ngModel)]="dateFormat" [options]="dateFormatOptions"></d-select>
   </div>
   <div class="row">
@@ -19,12 +19,12 @@
           placement="top-left"
           [minDate]="'2010-12-30'"
           [maxDate]="'2018-02-27'"
-          (focus)="datePicker2.toggle($event)"
+          (focus)="datePicker2.toggle()"
         />
         <div *ngIf="selectedDate3" class="devui-input-group-addon icon-close-wrapper" (click)="datePicker2.clearAll()">
           <i class="icon icon-close"></i>
         </div>
-        <div class="devui-input-group-addon" (click)="datePicker2.toggle($event)">
+        <div class="devui-input-group-addon" (click)="datePicker2.toggle()">
           <i class="icon icon-calendar"></i>
         </div>
       </div>

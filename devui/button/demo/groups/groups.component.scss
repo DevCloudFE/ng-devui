@@ -24,6 +24,11 @@
         margin-left: 0;
       }
     }
+
+    .border-remove .devui-btn-common {
+      border-left-style: none;
+      margin-left: 0;
+    }
   }
 }
 
@@ -35,7 +40,7 @@
   top: 0;
   right: 7px;
   text-align: center;
-  font-size: 16px;
+  font-size: $devui-font-size-icon;
   display: flex;
   align-items: center;
   justify-content: center;

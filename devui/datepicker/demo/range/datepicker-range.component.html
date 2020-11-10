@@ -1,5 +1,5 @@
 <section style="display: flex; width：100%;">
-  <div class="col-md-6" style="margin-right: 10px;">
+  <div class="col-md-6" style="margin-right: 10px">
     <div class="row">
       <div class="col-md-6">
         <div class="devui-input-group devui-dropdown-origin-wrapper devui-dropdown-origin">
@@ -8,7 +8,7 @@
             placeholder="y/MM/dd"
             name="dp"
             [(ngModel)]="startDate"
-            (focus)="datePicker1.toggle($event)"
+            (focus)="datePicker1.toggle()"
             autocomplete="off"
             dDatepicker
             appendToBody
@@ -19,7 +19,7 @@
           <div *ngIf="startDate" class="devui-input-group-addon icon-close-wrapper" (click)="datePicker1.clearAll()">
             <i class="icon icon-close"></i>
           </div>
-          <div class="devui-input-group-addon" (click)="datePicker1.toggle($event, true)">
+          <div class="devui-input-group-addon" (click)="datePicker1.toggle()">
             <i class="icon icon-calendar"></i>
           </div>
         </div>
@@ -42,7 +42,7 @@
             placeholder="y/MM/dd"
             name="dp"
             [(ngModel)]="endDate"
-            (focus)="datePicker2.toggle($event)"
+            (focus)="datePicker2.toggle()"
             autocomplete="off"
             dDatepicker
             appendToBody
@@ -53,7 +53,7 @@
           <div *ngIf="endDate" class="devui-input-group-addon icon-close-wrapper" (click)="datePicker2.clearAll()">
             <i class="icon icon-close"></i>
           </div>
-          <div class="devui-input-group-addon" (click)="datePicker2.toggle($event, true)">
+          <div class="devui-input-group-addon" (click)="datePicker2.toggle()">
             <i class="icon icon-calendar"></i>
           </div>
         </div>

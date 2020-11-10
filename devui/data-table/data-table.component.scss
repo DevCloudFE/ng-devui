@@ -1,4 +1,5 @@
 @import '../style/theme/color';
+@import '../style/core/_font';
 
 :host {
   display: block;
@@ -6,11 +7,13 @@
 
 .devui-data-table ::ng-deep {
   border: none;
+  height: 100%;
 
   .devui-table-view {
     padding: 0;
     border: none;
     position: relative;
+    height: 100%;
 
     .scroll-view {
       overflow-y: auto;
@@ -70,7 +73,7 @@
     span {
       font-weight: bold;
       color: $devui-text;
-      font-size: 12px;
+      font-size: $devui-font-size;
     }
 
     tr {
@@ -101,7 +104,7 @@
 
         .drag-icon + .childtable-toggler {
           > .customized-icon {
-            font-size: 14px;
+            font-size: $devui-font-size-icon;
           }
         }
 
@@ -118,7 +121,7 @@
           white-space: nowrap;
           text-overflow: ellipsis;
           overflow: hidden;
-          font-size: 12px;
+          font-size: $devui-font-size;
           font-weight: bold;
           color: $devui-text;
         }
@@ -235,7 +238,7 @@
       word-wrap: break-word;
       word-break: normal;
       line-height: 24px;
-      font-size: 12px;
+      font-size: $devui-font-size;
       color: $devui-text; // #3C4458;
       background-color: inherit;
       border-bottom: 1px solid $devui-dividing-line;

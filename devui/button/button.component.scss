@@ -16,10 +16,10 @@ $devui-btn-padding: 3px 20px;
 $devui-btn-lg-padding: 5px 23px;
 $devui-btn-lg-min-width: 72px;
 $devui-btn-lg-height: 32px;
-$devui-btn-xs-font-size: $font-size-base;
-$devui-btn-sm-font-size: $font-size-base;
-$devui-btn-font-size: $font-size-base;
-$devui-btn-lg-font-size: $font-size-base;
+$devui-btn-xs-font-size: $devui-font-size-sm;
+$devui-btn-sm-font-size: $devui-font-size-sm;
+$devui-btn-font-size: $devui-font-size-md;
+$devui-btn-lg-font-size: $devui-font-size-lg;
 $devui-btn-line-height: $line-height-base;
 
 $devui-btn-normal-config: (
@@ -331,14 +331,14 @@ $devui-btn-pseudo-config: (
 
   &:not(.d-btn-icon) {
     .icon-fix {
-      font-size: 16px;
+      font-size: $devui-font-size-icon;
     }
   }
 }
 
 .devui-icon-fix {
   position: relative;
-  font-size: 12px;
+  font-size: $devui-font-size;
 }
 
 .devui-btn.devui-btn-common:not(:disabled) {
@@ -357,6 +357,7 @@ $devui-btn-pseudo-config: (
 
 .button-content {
   display: inline-block;
+  position: relative;
 }
 
 .clear-right-5 {

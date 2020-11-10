@@ -52,9 +52,7 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
     DropScrollComponent,
     CrossDimensionComponent
   ],
-  entryComponents: [
-    DragDropDemoComponent,
-  ],
+
 })
 export class DragDropDemoModule {
 }

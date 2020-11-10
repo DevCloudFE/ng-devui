@@ -9,7 +9,7 @@ import {PositioningModule} from 'ng-devui/position';
   imports: [CommonModule, FormsModule, AutoCompleteModule, PositioningModule],
   exports: [EditableSelectComponent],
   declarations: [EditableSelectComponent],
-  entryComponents: [EditableSelectComponent]
+
 })
 export class EditableSelectModule {
 }

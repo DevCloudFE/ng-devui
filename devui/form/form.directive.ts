@@ -21,8 +21,12 @@ export class FormDirective {
     @Input() layout = FormLayout.Horizontal;
     @Input() labelSize: 'sm' | '' | 'lg' = '';
 
-    /* 统一设置form反馈方式 */
+    /**
+    * @deprecated Use dHasFeedback to replace, No longer support for label
+    */
     @Input() dFeedbackType: 'label' | 'control';
+
+    @Input() dHasFeedback = false;
 
     @Output() dSubmit = new EventEmitter();
 

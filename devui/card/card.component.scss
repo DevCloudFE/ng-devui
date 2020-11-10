@@ -1,0 +1,75 @@
+@import '../style/theme/color';
+@import '../style/core/_font';
+
+$card-ele-space: 8px;
+$card-block-space: 16px;
+$card-border-radius: 6px;
+$card-title-font-size: $devui-font-size-card-title;
+$card-subtitle-font-size: $devui-font-size;
+$card-content-font-size: $devui-font-size;
+
+.devui-card {
+  position: relative;
+  display: block;
+  padding: 16px 20px;
+  border-radius: $card-border-radius;
+  box-shadow: 0 0 4px 0 $devui-light-shadow;
+}
+
+.devui-card-title {
+  display: block;
+  font-size: $card-title-font-size;
+  font-weight: 600;
+  color: $devui-text;
+}
+
+.devui-card-subtitle {
+  display: block;
+  font-size: $card-subtitle-font-size;
+  color: $devui-aide-text-stress;
+}
+
+.devui-card-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: $card-block-space;
+}
+
+.devui-card-avatar {
+  margin-right: $card-block-space;
+}
+
+.devui-card-content {
+  font-size: $card-content-font-size;
+  color: $devui-aide-text;
+}
+
+.devui-card-actions {
+  margin-top: $card-block-space;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.devui-card-title + .devui-card-subtitle {
+  margin-top: $card-ele-space;
+}
+
+.devui-card-actions-align-end {
+  justify-content: flex-end;
+}
+
+.devui-card-actions-align-space-between {
+  justify-content: space-between;
+}
+
+.devui-card-meta {
+  width: calc(100% + 40px);
+  margin: 0 -20px $card-block-space -20px;
+  height: auto;
+}
+
+.devui-card-meta:first-child {
+  margin-top: -$card-block-space;
+}

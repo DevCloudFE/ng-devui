@@ -40,9 +40,7 @@ import { CheckboxConditionGroupComponent } from './condition-group/condition-gro
     CheckboxConditionChangeComponent,
     CheckboxConditionGroupComponent
   ],
-  entryComponents: [
-    CheckBoxDemoComponent,
-  ],
+
 })
 export class CheckBoxDemoModule {
 }

@@ -12,9 +12,9 @@
       [name]="name || 'checkbox-' + id"
       class="devui-checkbox-input"
       type="checkbox"
-      [attr.checked]="checked"
+      [checked]="checked"
       [disabled]="disabled"
-      [attr.indeterminate]="halfchecked"
+      [indeterminate]="halfchecked"
       (click)="$event.stopPropagation()"
       (change)="$event.stopPropagation()"
     />
@@ -53,8 +53,7 @@
     <ng-template
       [ngIf]="!!labelTemplate"
       [ngTemplateOutlet]="labelTemplate"
-      [ngTemplateOutletContext]="{ $implicit: this, checked:checked, halfchecked: halfchecked,
-                  disabled:disabled, label: label}"
+      [ngTemplateOutletContext]="{ $implicit: this, checked: checked, halfchecked: halfchecked, disabled: disabled, label: label }"
     >
     </ng-template>
   </label>

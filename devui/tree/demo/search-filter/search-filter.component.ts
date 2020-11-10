@@ -8,7 +8,7 @@ import {
 @Component({
   selector: 'd-search-filter',
   templateUrl: './search-filter.component.html',
-  styleUrls: ['./search-filter.component.css']
+  styleUrls: ['./search-filter.component.scss']
 })
 export class SearchFilterComponent {
   @ViewChild('dOperableTreeComponent', { static: true }) dOperableTreeComponent: OperableTreeComponent;

@@ -15,6 +15,7 @@
 |    enableDrop    |                      `boolean`                       |   false    | 可选，是否支持拖拽                                                                       | [基本用法](/components/upload/demo#basic-usage) |
 |   beforeUpload   | `boolean 、 Promise<boolean> 、 Observable<boolean>` |     --     | 可选，上传前的回调，通过返回`true` or `false` ,控制文件是否上传,参数为文件信息及上传配置 | [基本用法](/components/upload/demo#basic-usage) |
 |     disabled     |                      `boolean`                       |   false    | 可选，是否禁用上传组件                                                                   | [基本用法](/components/upload/demo#basic-usage) |
+|      showTip     |                      `boolean`                       |   false    | 可选，是否显示上传提示信息                                                                   | [基本用法](/components/upload/demo#basic-usage) |
 
 ## d-single-upload 事件
 
@@ -45,6 +46,8 @@
 | setCustomUploadOptions |          `IUploadOptions`，参考下方 options          |       --       | 为每个文件设置自定义的上传参数, 参数为当前选中文件及`uploadOptions`的值            | [自动上传](/components/upload/demo#auto-upload)                |
 |     oneTimeUpload      |                      `boolean`                       |     false      | 可选，是否只调用一次接口上传所有文件                                               | [多文件上传](/components/upload/demo#multi-files)              |
 |        disabled        |                      `boolean`                       |     false      | 可选，是否禁用上传组件                                                             | [多文件上传](/components/upload/demo#multi-files)              |
+|      showTip     |                      `boolean`                       |   false    | 可选，是否显示上传提示信息                                                                   | [多文件上传](/components/upload/demo#multi-files) |
+
 
 ## d-multiple-upload 事件
 

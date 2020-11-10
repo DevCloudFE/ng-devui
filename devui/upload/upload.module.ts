@@ -10,11 +10,13 @@ import { SelectFiles } from './select-files.utils';
 import { FileDropDirective } from './file-drop.directive';
 import { ButtonModule } from 'ng-devui/button';
 import { ToastModule } from 'ng-devui/toast';
+import { ProgressModule } from 'ng-devui/progress';
 @NgModule({
   imports: [
     CommonModule,
     ButtonModule,
-    ToastModule
+    ToastModule,
+    ProgressModule
   ],
   exports: [
     MultipleUploadViewComponent,
@@ -32,10 +34,7 @@ import { ToastModule } from 'ng-devui/toast';
     UploadedFilesComponent,
     FileDropDirective
   ],
-  entryComponents: [
-    MultipleUploadViewComponent,
-    SingleUploadViewComponent
-  ],
+
   providers: [SelectFiles],
 })
 export class UploadModule {

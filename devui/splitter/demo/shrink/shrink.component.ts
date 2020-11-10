@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'd-splitter-demo-shrink',
   templateUrl: './shrink.component.html',
   styleUrls: ['./shrink.component.scss'],
 })
-export class SplitterDemoMenuFoldComponent {
+export class SplitterDemoMenuFoldComponent implements OnInit {
   // splitter input
   orientation = 'horizontal';
   splitBarSize = '2px';
@@ -15,12 +15,9 @@ export class SplitterDemoMenuFoldComponent {
   size = '20%';
   minSize = '10%';
   maxSize = '60%';
-
-  hoverMenuItem;
+  collapsed = false;
   isPaneShrink = false;
-  hoverIcon = false;
-  hoverCardLeft;
-  hoverCardTop;
+  hoverCard: Array<any> = [];
 
   menu: Array<IMenuType> = [
     {
@@ -31,31 +28,45 @@ export class SplitterDemoMenuFoldComponent {
         { title: '子内容2', active: false },
         { title: '子内容3', active: false },
       ],
-        icon: 'icon-share',
+      icon: 'icon-share',
     },
     {
       title: '内容二',
-        icon: 'icon-gps',
+      icon: 'icon-gps',
       active: false,
     },
     {
       title: '内容三',
-        icon: 'icon-go-module',
+      icon: 'icon-go-module',
       active: false,
     },
     {
       title: '内容四',
-        icon: 'icon-layout',
+      icon: 'icon-layout',
       active: false,
     },
     {
       title: '内容五',
-        icon: 'icon-op-delete',
+      icon: 'icon-op-delete',
       active: false,
     },
   ];
 
   constructor() {}
+
+  ngOnInit() {
+    this.menu.forEach((item) => {
+      if (item.children) {
+        let childTitle = `<span>${item.title}</span>`;
+        item.children.forEach((child) => {
+          childTitle += `<li>${child.title}</li>`;
+        });
+        this.hoverCard.push(childTitle);
+      } else {
+        this.hoverCard.push(item.title);
+      }
+    });
+  }
 
   sizeChange(size) {
     console.log(size);
@@ -63,6 +74,7 @@ export class SplitterDemoMenuFoldComponent {
 
   collapsedChange(event) {
     console.log(event);
+    this.collapsed = event;
   }
 
   selectItem(selectedItem) {
@@ -78,24 +90,11 @@ export class SplitterDemoMenuFoldComponent {
         }
       }
     });
+    this.collapsedChange(false);
   }
 
   paneShrinkStatus(status) {
     this.isPaneShrink = status;
-  }
-
-  iconMouseEnter(event, hoverItem) {
-    this.hoverMenuItem = hoverItem;
-    this.hoverIcon = true;
-
-    const targetLi = event.target;
-    const { x, y, width, height } = targetLi.getBoundingClientRect();
-    this.hoverCardLeft = x + width;
-    this.hoverCardTop = y + height / 2;
-  }
-
-  iconMouseLeave(_) {
-    this.hoverIcon = false;
   }
 
   isChildrenActive(item) {

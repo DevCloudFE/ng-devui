@@ -32,12 +32,12 @@
                   [(ngModel)]="rowItem[column.field]"
                   dDatepicker
                   appendToBody
-                  [dateFormat]="YYYY / MM / DD"
+                  [dateFormat]="'y/MM/dd'"
                   #datePicker="datepicker"
                   [showTime]="true"
                   [autoOpen]="true"
                 />
-                <div class="devui-input-group-addon" (click)="datePicker.toggle($event, true)">
+                <div class="devui-input-group-addon" (click)="datePicker.toggle()">
                   <i class="icon icon-calendar"></i>
                 </div>
               </div>

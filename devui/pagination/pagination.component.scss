@@ -1,4 +1,5 @@
 @import '../style/theme/color';
+@import '../style/core/_font';
 
 :host {
   display: block;
@@ -13,7 +14,7 @@
     position: relative;
 
     &.devui-page-size-sm {
-      max-width: 60px;
+      max-width: 80px;
     }
 
     &.devui-page-size-lg {
@@ -127,12 +128,12 @@
   .devui-pagination-sm > li > a {
     padding: 2px 6px;
     line-height: 1.5;
-    font-size: 12px;
+    font-size: $devui-font-size-sm;
   }
 
   .devui-pagination-lg > li > a {
     padding: 8px 12px;
-    font-size: 16px;
+    font-size: $devui-font-size-lg;
     line-height: 1.5;
   }
 
@@ -304,7 +305,7 @@
         .devui-config-item-title {
           color: $devui-aide-text;
           padding-left: 10px;
-          font-size: 12px;
+          font-size: $devui-font-size;
           line-height: 22px;
         }
 
@@ -351,7 +352,7 @@
 :host ::ng-deep .devui-input-sm {
   height: 24px;
   padding: 5px 5px;
-  font-size: 12px;
+  font-size: $devui-font-size;
   line-height: 1.5;
   border-radius: 2px;
 }

@@ -52,9 +52,26 @@
   <div class="demo-example" [dAnchor]="'demo-validate-template'">
     <div class="demo-title">模板驱动表单验证</div>
     <div class="demo-text">模板中绑定<code>ngModel、ngGroupModel、ngForm</code>的元素，可使用<code>dValidateRules</code>配置校验规则。</div>
-    <d-codebox id="form-validate-template" [sourceData]="ValidateTemplateSource">
-      <d-form-demo-validate-template demo></d-form-demo-validate-template>
-    </d-codebox>
+    <div id="demo-validate-template">
+      <d-codebox id="inner-validator" [sourceData]="InnerValidatorSource">
+        <d-form-demo-inner-validator demo></d-form-demo-inner-validator>
+      </d-codebox>
+      <d-codebox id="custom-validator" [sourceData]="CustomValidatorSource">
+        <d-form-demo-custom-validator demo></d-form-demo-custom-validator>
+      </d-codebox>
+      <d-codebox id="error-strategy" [sourceData]="ErrorStrategySource">
+        <d-form-demo-error-strategy demo></d-form-demo-error-strategy>
+      </d-codebox>
+      <d-codebox id="custom-message-show" [sourceData]="CustomMessageShowSource">
+        <d-form-demo-custom-message-show demo></d-form-demo-custom-message-show>
+      </d-codebox>
+      <d-codebox id="validate-template-form" [sourceData]="ValidateTemplateForm">
+        <d-form-demo-validate-template-form demo></d-form-demo-validate-template-form>
+      </d-codebox>
+      <d-codebox id="user-register" [sourceData]="UserRegisterShowSource">
+        <d-form-demo-user-register demo></d-form-demo-user-register>
+      </d-codebox>
+    </div>
   </div>
   <div class="demo-example" [dAnchor]="'demo-validate-reactive'">
     <div class="demo-title">响应式表单验证</div>
@@ -65,6 +82,58 @@
     <d-codebox id="form-validate-reactive" [sourceData]="ValidateReactiveSource">
       <d-form-demo-validate-reactive demo></d-form-demo-validate-reactive>
     </d-codebox>
+  </div>
+
+  <div class="demo-example" [dAnchor]="'demo-custom-status'">
+    <div class="demo-title">指定表单Feedback状态</div>
+    <div class="demo-text">
+      你可通过对<code>d-form-control</code>设置<code>feedbackStatus</code>手动指定反馈状态。
+      当前已支持状态：<code>success、error、pending</code>。
+    </div>
+    <d-codebox id="form-custom-status" [sourceData]="ValidateCustomStatus">
+      <d-form-custom-status demo></d-form-custom-status>
+    </d-codebox>
+  </div>
+
+  <div class="demo-example" [dAnchor]="'demo-validate-sync'">
+    <div class="demo-title">表单协同验证</div>
+    <div class="demo-text">
+      在一些场景下，你的多个表单组件互相依赖，需共同校验（如注册场景中的密码输入与确认密码），此时你需要用协同验证指令<code>dValidateSyncKey</code>来为需要系统校验的组件指定相同的<code
+        >key</code
+      >
+      <code>dValidateSyncKey</code>指令支持模板驱动表单与响应式表单，以下示例以模板驱动表单为例：
+      <code>password</code>与<code>confirmPassword</code>设置相同的<code>dValidateSyncKey</code>值，
+      在其中一个组件值变更时，另一个组件也将进行校验。
+    </div>
+    <div id="demo-validate-sync">
+      <d-codebox [sourceData]="ValidateSyncSource">
+        <d-form-demo-validate-sync demo></d-form-demo-validate-sync>
+      </d-codebox>
+    </div>
+  </div>
+
+  <div class="demo-example" [dAnchor]="'demo-validate-cross-component'">
+    <div class="demo-title">跨组件验证</div>
+    <div class="demo-text">
+      <ul>
+        <li>
+          当前<code>Angular Form</code
+          >默认暂不支持跨组件共享表单校验状态，对于响应式表单，你可使用统一管理<code>model</code>，向下透传的方式进行组件组织。
+        </li>
+        <li>
+          针对模板驱动表单，你可使用在子组件声明时进行容器注入的方式，将你需要的<code>ngModelGroup</code>或<code>NgForm</code>容器进行注入，
+          以供模板中表单元素自动获取父容器。
+        </li>
+      </ul>
+    </div>
+    <div id="demo-validate-cross-component">
+      <d-codebox [sourceData]="ReactiveFormCrossComponent">
+        <d-form-demo-validate-cross-component demo></d-form-demo-validate-cross-component>
+      </d-codebox>
+      <d-codebox [sourceData]="ValidateTemplateCrossComponent">
+        <d-form-demo-template-cross-component demo></d-form-demo-template-cross-component>
+      </d-codebox>
+    </div>
   </div>
   <!-- <div class="demo-example" [dAnchor]="'demo-validate-coordinated'">
     <div class="demo-title">表单联动</div>

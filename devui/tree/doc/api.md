@@ -174,9 +174,9 @@ export interface IDropType {
 在 operable-tree 内自定义模板`<ng-template>`并给模板标记为`#statusTemplate`, 如`<ng-template #statusTemplate let-node="node">...</ng-template>`
 
 ```xml
-<ng-template #iconTemplate let-node="node">
+<ng-template #iconTemplate let-node="node" let-completeNode="completeNode">
 </ng-template>
-<ng-template #nodeTemplate let-node="node">
+<ng-template #nodeTemplate let-node="node" let-completeNode="completeNode">
 </ng-template>
 <ng-template #operatorTemplate let-node="node">
 </ng-template>

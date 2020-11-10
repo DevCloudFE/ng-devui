@@ -1,5 +1,7 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
 :host {
-  font-size: 16px;
+  font-size: $devui-font-size-icon;
 }
 
 .badge-group d-badge {

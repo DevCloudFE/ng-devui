@@ -1,7 +1,7 @@
 @import '~ng-devui/styles-var/devui-var.scss';
 
 .title {
-  font-size: 14px;
+  font-size: $devui-font-size-card-title;
   margin-bottom: 10px;
   font-weight: bold;
 }
@@ -24,7 +24,7 @@
 
       .item-title {
         color: $devui-text;
-        font-size: 14px;
+        font-size: $devui-font-size-card-title;
       }
     }
 
@@ -36,4 +36,8 @@
       }
     }
   }
+}
+
+.span-space {
+  left: 5px;
 }

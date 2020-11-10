@@ -1,9 +1,10 @@
 @import '../devui/style/devui';
 @import '~@devui-design/icons/icomoon/devui-icon.css';
+@import '../devui/style/core/_font';
 
 .markdown {
   color: $devui-text;
-  font-size: 14px;
+  font-size: $devui-font-size-page-title;
   line-height: 1.8;
 
   a {
@@ -43,7 +44,7 @@ pre {
 .hljs {
   background: $devui-area;
   color: $devui-text;
-  font-size: 12px;
+  font-size: $devui-font-size;
 }
 
 pre code {
@@ -73,7 +74,7 @@ section {
   overflow-x: auto;
 
   table {
-    font-size: 12px;
+    font-size: $devui-font-size;
   }
 
   p {
@@ -141,14 +142,14 @@ code {
 
   h2 {
     // font-size: 24px;
-    @include font-title($font-size-secondary-card-title);
+    @include font-title($devui-font-size-card-title);
 
     padding: 40px 0 15px;
   }
 
   h3 {
     // font-size: 18px;
-    @include font-title($font-size-secondary-card-title);
+    @include font-title($devui-font-size-card-title);
 
     padding: 30px 0 10px;
   }

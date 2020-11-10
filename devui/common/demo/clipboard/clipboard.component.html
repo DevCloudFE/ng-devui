@@ -1,0 +1,15 @@
+<section>
+  <div class="input-group">
+    <input type="text" [(ngModel)]="value" placeholder="请输入内容点击右侧按钮复制" />
+    <button
+      class="icon icon-copy"
+      type="button"
+      dClipboard
+      [content]="value"
+      [position]="'right'"
+      (copyResultEvent)="copyResultEvent($event)"
+    ></button>
+  </div>
+  <br />
+  <pre>{{ result | json }}</pre>
+</section>

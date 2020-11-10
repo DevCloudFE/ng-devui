@@ -55,7 +55,7 @@ export class RelativeTimePipe implements PipeTransform, OnDestroy {
     return this.i18n.langChange().pipe(
       map((data) => {
         if (absDiffSeconds > limit) {
-          return value;
+          return new Date(value);
         }
         const i18nCommonText = data['relativeTime'];
         if (absDiffYears > 0 && absDiffMonths > threshold.month) {

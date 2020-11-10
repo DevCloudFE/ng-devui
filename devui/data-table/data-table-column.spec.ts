@@ -262,7 +262,6 @@ class TestDataTableAdvancedColumnComponent implements OnInit {
   }
 
   beforeFilter = currentValue => {
-    console.log(currentValue);
     this.filterListMulti = this.filterList;
     this.ref.detectChanges();
     return true;
@@ -611,7 +610,7 @@ describe('data-table column', () => {
 
       const headerRowDebugEl = debugEl.query(By.directive(DataTableHeadComponent));
       const headerCheckBox = headerRowDebugEl.query(By.css('.devui-checkable-cell label input'));
-      expect(headerCheckBox.attributes.checked).toBeTruthy();
+      expect(headerCheckBox.properties.checked).toBeTruthy();
     }));
 
     it('should header checked will check all body checkbox', fakeAsync(() => {

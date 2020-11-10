@@ -472,10 +472,15 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
   }
 
   writeValue(obj: any): void {
+    let objValue = obj;
     if (obj === null || obj === undefined) {
-      return;
+      if (this.multiple) {
+        objValue = [];
+      } else {
+        objValue = '';
+      }
     }
-    this.value = obj;
+    this.value = objValue;
 
     if (this.multiple) {
       this.value = this.value ? this.value : [];

@@ -10,6 +10,7 @@
   <d-tag [tag]="'标签颜色7'" [labelStyle]="'pink-w98'"></d-tag>
   <d-tag [tag]="'标签颜色8'" [labelStyle]="'red-w98'"></d-tag>
   <d-tag [tag]="'标签颜色9'" [labelStyle]="'purple-w98'"></d-tag>
+  <d-tag [tag]="'自定义颜色#F50'" [customColor]="'#f50'"></d-tag>
   <d-tag [tag]="'自定义标签样式'" [labelStyle]="'tag-custom'" [titleContent]="'hello'"></d-tag>
   <h4>单个可删除标签</h4>
   <d-tag [tag]="deleteTagName1" [deletable]="true" (tagDelete)="getTagValue($event); deleteTag($event)"></d-tag>
@@ -21,13 +22,14 @@
   <h4>可选中标签</h4>
   <d-tag
     *ngFor="let tag of tagList; let i = index"
-    [tag]="'标签颜色' + (i + 1)"
+    [tag]="tag.name"
     [labelStyle]="tag.type"
     [checked]="tag.checked"
     (click)="changeChekced(tag)"
+    [customColor]="tag.custumColor"
   ></d-tag>
   <ng-template #customTag let-tag="tag">
-    <span class="icon-bug" style="vertical-align: text-bottom"></span>
+    <span class="icon-bug" style="vertical-align: text-top"></span>
     <span title="{{ tag }}">{{ tag }}</span>
   </ng-template>
 </section>

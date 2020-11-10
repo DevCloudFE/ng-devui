@@ -24,7 +24,7 @@
   <div
     class="devui-gantt-bar-progress"
     #ganttBarProgress
-    [ngClass]="{ disabled: progressDisabled, visible: dragProgressStart }"
+    [ngClass]="{ disabled: progressDisabled, visible: focused }"
     [attr.title]="progressRate ? progressRate : 0 + '%'"
   >
     <svg
@@ -52,7 +52,7 @@
     [cdkConnectedOverlayOpen]="(focused || tipHovered) && !mouseMoveOnBar"
   >
     <div class="devui-gantt-tips" (mouseover)="tipHovered = true" (mouseleave)="mouseLeaveTip()">
-      <ng-template [ngTemplateOutlet]="tipTemplateRef" [ngTemplateOutletContext]="{ganttInstance: this, data: data}"></ng-template>
+      <ng-template [ngTemplateOutlet]="tipTemplateRef" [ngTemplateOutletContext]="{ ganttInstance: this, data: data }"></ng-template>
     </div>
   </ng-template>
 </div>

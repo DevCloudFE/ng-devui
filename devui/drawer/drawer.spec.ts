@@ -21,6 +21,7 @@ import { DrawerContentComponent } from './demo/drawerContent/drawer-content.comp
   `]
 })
 class TestDrawerComponent {
+  onClose = jasmine.createSpy('onClose');
   results: IDrawerOpenResult;
   drawerOptions: IDrawerOptions = {
     drawerContentComponent: DrawerContentComponent,
@@ -31,7 +32,7 @@ class TestDrawerComponent {
     escKeyCloseable: true,
     position: 'right',
     onClose: () => {
-      console.log('on drawer closed');
+      this.onClose();
     },
     data: {
       text: 'hello',
@@ -68,9 +69,7 @@ describe('Drawer', () => {
       declarations: [TestDrawerComponent, DrawerContentComponent],
     }).overrideModule(BrowserDynamicTestingModule, {
       set: {
-        entryComponents: [
-          DrawerContentComponent
-        ]
+
       }
     })
       .compileComponents();

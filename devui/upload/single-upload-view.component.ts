@@ -19,7 +19,6 @@ import {UploadedFilesComponent} from './uploaded-files.component';
   selector: 'd-single-upload-view',
   exportAs: 'dSingleUploadView',
   templateUrl: './single-upload-view.component.html',
-  styleUrls: ['./single-upload-view.component.scss'],
   preserveWhitespaces: false,
 })
 export class SingleUploadViewComponent extends UploadComponent {

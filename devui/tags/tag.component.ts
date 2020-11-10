@@ -16,6 +16,8 @@ export class TagComponent {
 
   @Input() labelStyle = '';
 
+  @Input() customColor = '';
+
   @Input() deletable = false;
 
   @Input() titleContent: string;
@@ -45,9 +47,13 @@ export class TagComponent {
     'purple-w98': '#a97af8'
   };
 
-  removeTag(tag) {
+  get isColorfulTag(): boolean {
+    return !!(( this.colorMap[this.labelStyle]) || (this.customColor && this.customColor !== ''));
+  }
+
+  removeTag($event, tag) {
     this.deleteTag = true;
-    this.tagDelete.emit({ tag: tag });
+    this.tagDelete.emit({ tag: tag, event: $event});
   }
 
   selectToggle() {

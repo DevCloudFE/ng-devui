@@ -6,3 +6,6 @@ export * from './form-control.component';
 export * from './form-operation.component';
 export * from './validator-directive/form-control-rules.directive';
 export * from './validator-directive/validate.type';
+export * from './validator-directive/validators';
+export * from './validator-directive/d-validate-sync.directive';
+export * from './services/d-validate-sync.service';

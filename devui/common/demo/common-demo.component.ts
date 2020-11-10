@@ -32,10 +32,17 @@ export class CommonDemoComponent {
     { title: 'SCSS', language: 'css', code: require('!!raw-loader!./lazy-load/lazy-load.component.scss') }
   ];
 
+  clipboardSource: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'html', code: require('!!raw-loader!./clipboard/clipboard.component.html') },
+    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./clipboard/clipboard.component.ts') },
+    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./clipboard/clipboard.component.scss') }
+  ];
+
   navItems = [
     { dAnchorLink: 'lazy-load', value: '懒加载指令' },
     { dAnchorLink: 'date-pipe', value: 'Datepipe API' },
     { dAnchorLink: 'helper-utils', value: 'Helper Utils' },
     { dAnchorLink: 'iframe-propagate', value: 'Iframe Event Propagate API' },
+    { dAnchorLink: 'clipboard', value: '复制到剪贴板指令' },
   ];
 }

@@ -1,6 +1,7 @@
 @import '../style/mixins/index';
 @import '../style/theme/color';
 @import '../style/theme/shadow';
+@import '../style/core/_font';
 
 :host {
   display: block;
@@ -8,7 +9,7 @@
 
 .devui-alert {
   color: $devui-text;
-  font-size: 12px;
+  font-size: $devui-font-size;
   border: 1px solid transparent;
   padding: 10px;
   line-height: 20px;
@@ -26,7 +27,7 @@
 
     span {
       color: $devui-text;
-      font-size: 12px;
+      font-size: $devui-font-size;
       font-weight: bold;
     }
   }

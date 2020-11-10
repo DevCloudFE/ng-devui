@@ -114,7 +114,6 @@ export class OperableTreeComponent implements AfterViewInit, OnDestroy {
 
   contextmenuEvent(event, node) {
     if (event.button === this.mouseRightButton) {
-      event.preventDefault();
       this.nodeRightClicked.emit({ node: node, event: event });
     }
   }
@@ -292,6 +291,11 @@ export class OperableTreeComponent implements AfterViewInit, OnDestroy {
   }
 
   selectNode(event, treeNode: TreeNode) {
+    if (!event.target.classList.contains('devui-tree-node__content--value-wrapper')
+      && !event.target.classList.contains('devui-tree-node__content')
+      && !event.target.classList.contains('devui-tree-node__title')) {
+      return;
+    }
     if (treeNode.data.disableSelect) {
       return;
     }

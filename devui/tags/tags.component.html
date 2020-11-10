@@ -5,9 +5,10 @@
     [deletable]="deletable"
     [labelStyle]="tag['labelStyle']"
     [checked]="tag['checked']"
+    [customColor]="tag['customColor']"
     [titleContent]="titleProperty ? tag[titleProperty] : displayProperty ? tag[displayProperty] : tag"
     [customViewTemplate]="customViewTemplate"
-    (tagDelete)="removeTag(tag, index)"
+    (tagDelete)="removeTag($event, tag, index)"
   >
   </d-tag>
 </div>

@@ -3,7 +3,8 @@ import { IUploadOptions, IFileOptions } from 'ng-devui/upload';
 
 @Component({
   selector: 'd-multi',
-  templateUrl: './multi.component.html'
+  templateUrl: './multi.component.html',
+  styleUrls: ['./multi.component.scss']
 })
 export class MultiComponent {
 
@@ -30,6 +31,21 @@ export class MultiComponent {
     accept: '.xls,.xlsx,.pages,.mp3,.png',
   };
   uploadedFiles2: Array<Object> = [];
+  UPLOADED: string;
+  FAILED: string;
+  DELETE: string;
+  PRELOAD: string;
+  UPLOADING: string;
+  UPLOAD: string;
+
+  constructor() {
+    this.UPLOAD = '上传';
+    this.PRELOAD = '预加载';
+    this.UPLOADING = '上传中...';
+    this.UPLOADED = '已上传';
+    this.FAILED = '上传失败';
+    this.DELETE = '删除';
+  }
 
   onSuccess2(result) {
     console.log(result);

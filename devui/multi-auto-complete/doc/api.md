@@ -17,7 +17,7 @@
 |       overview       | `border\|none\|multiline\|single` |              'border'               | 可选（不推荐）                                                                           |
 |       tipsText       |             `string`              |                 --                  | 可选，提示文字                                                                 | [设置禁用](/components/auto-complete/demo#auto-disable)      |
 |     placeholder      |             `string`              |           --            | 可选，placeholder                                                              | [基本用法](/components/multi-auto-complete/demo#basic-usage)            |
-|     latestSource     |           `Array<any>`            |                 --                  | 可选， 最近输入，最多支持 5 个，超过 5 个，截取最后 5 个                       |  [最近输入](/components/auto-complete/demo#auto-latest)      |
+|     latestSource     |           `Array<any>`            |                 --                  | 可选， 最近输入                       |  [最近输入](/components/auto-complete/demo#auto-latest)      |
 
 ### d-auto-complete 事件
 

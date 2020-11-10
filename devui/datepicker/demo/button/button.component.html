@@ -7,7 +7,7 @@
           dDatepicker
           #datePicker1="datepicker"
           (selectedDateChange)="getValue($event)"
-          (click)="datePicker1.toggle($event)"
+          (click)="datePicker1.toggle()"
           [(ngModel)]="selectedDate2"
         >
           {{ selectedDate2 ? (selectedDate2 | date) : 'Select Date' }}

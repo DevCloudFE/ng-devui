@@ -6,7 +6,7 @@ import {Component} from '@angular/core';
   styleUrls: ['./input-number-basic.component.css']
 })
 export class InputNumberBasicComponent {
-  min = -100;
+  min = 15;
   max = 1000;
   step = 1;
   value = 2;

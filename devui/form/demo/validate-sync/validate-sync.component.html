@@ -1,0 +1,54 @@
+<section class="demo-section">
+  <d-toast [value]="msgs"></d-toast>
+  <div>
+    <form dForm ngForm [dValidateRules]="formRules.rule" [layout]="'vertical'" #userForm="dValidateRules" (dSubmit)="submitForm($event)">
+      <d-form-item>
+        <d-form-label [required]="true">用户名</d-form-label>
+        <d-form-control>
+          <input
+            dTextInput
+            autocomplete="off"
+            name="username"
+            placeholder="填写一个你喜欢的用户名吧"
+            [(ngModel)]="formData.userName"
+            [dValidateRules]="formRules.usernameRules"
+          />
+        </d-form-control>
+      </d-form-item>
+      <d-form-item>
+        <d-form-label [required]="true">密码</d-form-label>
+        <d-form-control>
+          <input
+            dTextInput
+            dValidateSyncKey="password"
+            type="password"
+            name="password"
+            [(ngModel)]="formData.password"
+            placeholder="请设置6-15位密码"
+            [dValidateRules]="formRules.passwordRules"
+          />
+        </d-form-control>
+      </d-form-item>
+      <d-form-item>
+        <d-form-label [required]="true">确认密码</d-form-label>
+        <d-form-control>
+          <input
+            dTextInput
+            dValidateSyncKey="password"
+            type="password"
+            name="confirmPassword"
+            [(ngModel)]="formData.confirmPassword"
+            placeholder="再次确认并输入"
+            [dValidateRules]="formRules.confirmPasswordRules"
+          />
+        </d-form-control>
+      </d-form-item>
+      <d-form-operation>
+        <d-button class="mr-element-spacing" [title]="userForm.errorMessage || ''" circled="true" style="margin-right: 8px" dFormSubmit
+          >注册</d-button
+        >
+        <d-button bsStyle="common" circled="true" dFormReset>重置</d-button>
+      </d-form-operation>
+    </form>
+  </div>
+</section>

@@ -7,7 +7,7 @@
           placeholder="y/MM/dd"
           name="dp"
           [(ngModel)]="selectedDate2"
-          (focus)="datePicker1.toggle($event)"
+          (focus)="datePicker1.toggle()"
           autocomplete="off"
           dDatepicker
           #datePicker1="datepicker"
@@ -17,7 +17,7 @@
         <div *ngIf="selectedDate2" class="devui-input-group-addon icon-close-wrapper" (click)="datePicker1.clearAll()">
           <i class="icon icon-close"></i>
         </div>
-        <div class="devui-input-group-addon" (click)="datePicker1.toggle($event)">
+        <div class="devui-input-group-addon" (click)="datePicker1.toggle()">
           <i class="icon icon-calendar"></i>
         </div>
       </div>

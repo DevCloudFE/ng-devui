@@ -90,7 +90,7 @@ import { MutilStylesComponent } from './mutil-styles/mutil-styles.component';
     MutilStylesComponent
   ],
   providers: [],
-  entryComponents: [DataTableDemoComponent]
+
 })
 export class DataTableDemoModule {
 }

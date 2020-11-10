@@ -53,9 +53,7 @@ import { DropDownModule } from 'ng-devui/dropdown';
     SizeComponent,
     GroupsComponent,
   ],
-  entryComponents: [
-    ButtonDemoComponent,
-  ],
+
 })
 export class ButtonDemoModule {
 }

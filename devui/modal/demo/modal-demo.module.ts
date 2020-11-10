@@ -60,12 +60,7 @@ import { TextInputModule } from 'ng-devui/text-input';
     DialogContentComponent,
     ModalContentComponent
   ],
-  entryComponents: [
-    ModalDemoComponent,
-    ModalTestComponent,
-    ModalAlertComponent,
-    ModalFormComponent
-  ]
+
 })
 export class ModalDemoModule {
 }

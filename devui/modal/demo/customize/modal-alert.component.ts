@@ -3,7 +3,7 @@ import { Input, Component, OnInit, ElementRef } from '@angular/core';
 @Component({
   selector: 'd-modal-alert',
   templateUrl: './modal-alert.component.html',
-  styleUrls: ['./modal-alert.component.css']
+  styleUrls: ['./modal-alert.component.scss']
 })
 export class ModalAlertComponent implements OnInit {
   constructor(private elr: ElementRef) {}

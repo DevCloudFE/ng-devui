@@ -12,14 +12,39 @@
     (click)="onClick($event)"
     class="devui-input-group"
   >
-    <input
-      class="devui-form-control devui-upload-input"
-      [placeholder]="placeholderText ? placeholderText : i18nText?.chooseFile"
-      [value]="filename"
-      [title]="filename"
-      readonly
-    />
-    <span *ngIf="!!filename" class="icon-close devui-upload-delete-file-button" (click)="deleteFile($event)"></span>
+    <div class="devui-form-control devui-files-list">
+      <div *ngIf="!filename" class="devui-file-item">{{ placeholderText ? placeholderText : i18nText?.chooseFile }}</div>
+      <div *ngIf="!!filename" class="devui-file-tag devui-file-item">
+        <span class="devui-filename {{ dSingleUploadView.fileUploaders[0]?.status === UploadStatus.failed ? 'devui-failed-color' : '' }}">
+          {{ filename }}
+        </span>
+        <span
+          class="icon icon-close
+            {{ dSingleUploadView.fileUploaders[0]?.status === UploadStatus.failed ? 'devui-upload-delete-file-button' : '' }}
+            {{
+            dSingleUploadView.fileUploaders[0]?.status === UploadStatus.uploading ||
+            dSingleUploadView.fileUploaders[0]?.status === UploadStatus.uploaded
+              ? 'devui-uploading-delete'
+              : ''
+          }}"
+          (click)="deleteFile($event)"
+        >
+        </span>
+        <div *ngIf="dSingleUploadView.fileUploaders[0]?.status === UploadStatus.uploading" class="icon devui-upload-progress">
+          <d-progress
+            [isCircle]="true"
+            [percentage]="dSingleUploadView.fileUploaders[0].percentage"
+            [barbgcolor]="'#50D4AB'"
+            [strokeWidth]="8"
+          >
+            <ng-template let-percentage="percentage"></ng-template>
+          </d-progress>
+        </div>
+        <span *ngIf="dSingleUploadView.fileUploaders[0]?.status === UploadStatus.failed" class="icon icon-running" (click)="upload()">
+        </span>
+        <span *ngIf="dSingleUploadView.fileUploaders[0]?.status === UploadStatus.uploaded" class="icon icon-right"> </span>
+      </div>
+    </div>
     <span class="devui-input-group-addon">
       <svg class="svg-icon-dot" height="1em" width="1em" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
         <path
@@ -47,6 +72,24 @@
     <span *ngIf="dSingleUploadView.fileUploaders[0]?.status === UploadStatus.failed">{{ i18nText?.uploadFailed }}</span>
   </d-button>
 </div>
+<ng-container *ngIf="showTip">
+  <div class="devui-upload-tip">
+    <span *ngIf="dSingleUploadView.fileUploaders[0]?.status === UploadStatus.uploading" class="devui-loading">
+      {{ i18nText?.uploading }}
+    </span>
+    <div *ngIf="dSingleUploadView.fileUploaders[0]?.status === UploadStatus.uploaded" class="devui-loaded">
+      <i class="icon icon-right-o"></i>
+      <span style="vertical-align: middle">{{ i18nText?.uploadSuccess }}</span>
+    </div>
+    <div *ngIf="dSingleUploadView.fileUploaders[0]?.status === UploadStatus.failed" class="devui-upload-failed">
+      <i class="icon icon-info-o"></i>
+      <span style="vertical-align: middle">
+        <span style="margin-right: 8px">{{ i18nText?.uploadFailed }}</span>
+        <a (click)="upload()">{{ i18nText?.reUpload }}</a>
+      </span>
+    </div>
+  </div>
+</ng-container>
 <d-toast [value]="errorMsg"></d-toast>
 <d-single-upload-view
   #dSingleUploadView="dSingleUploadView"

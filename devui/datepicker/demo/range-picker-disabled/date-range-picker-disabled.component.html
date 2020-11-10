@@ -5,9 +5,9 @@
       class="devui-input devui-form-control"
       placeholder="y/MM/dd  -  y/MM/dd"
       name="dp"
-      [attr.disabled]="disabled ? true : null"
+      [attr.disabled]="disabled || null"
       [(ngModel)]="dateRange"
-      (focus)="toggleDatePicker(dateRangePicker, $event)"
+      (focus)="toggleDatePicker(dateRangePicker)"
       autocomplete="off"
       [disabled]="disabled"
       dDateRangePicker
@@ -25,7 +25,7 @@
       [ngClass]="{
         'devui-disabled': disabled
       }"
-      (click)="toggleDatePicker(dateRangePicker, $event, true)"
+      (click)="toggleDatePicker(dateRangePicker)"
     >
       <i class="icon icon-calendar"></i>
     </div>

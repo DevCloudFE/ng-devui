@@ -18,8 +18,8 @@ import { TableExpandConfig } from 'ng-devui/data-table';
     cursor: pointer;
   }
   .edit-padding-fix {
-    margin-top: -6px;
-    margin-bottom: -6px;
+    margin-top: -2px;
+    margin-bottom: -2px;
   }
   .tips-icon {
     margin-right: 5px;

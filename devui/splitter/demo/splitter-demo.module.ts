@@ -14,6 +14,7 @@ import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { SplitterDemoDirectionComponent } from './direction/splitter-demo-direction.component';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 import { SplitterDemoMenuFoldComponent } from './shrink/shrink.component';
+import { TooltipModule } from 'ng-devui/tooltip';
 
 @NgModule({
   imports: [
@@ -23,6 +24,7 @@ import { SplitterDemoMenuFoldComponent } from './shrink/shrink.component';
     SplitterModule,
     AccordionModule,
     FormsModule,
+    TooltipModule,
     DDemoNavModule,
     RouterModule.forChild([
       {path: '', redirectTo: 'demo'},

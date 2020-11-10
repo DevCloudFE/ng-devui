@@ -1,9 +1,11 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
 .tree-node.customized-tree-node {
   border: none;
 
   .tree-node__content {
     padding: 0.3em;
-    font-size: 12px;
+    font-size: $devui-font-size;
     cursor: pointer;
     user-select: none;
   }

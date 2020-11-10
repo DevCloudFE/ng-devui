@@ -60,9 +60,7 @@ import { DropDownModule } from 'ng-devui/dropdown';
     VirtualScrollComponent,
     CustomLoadingComponent
   ],
-  entryComponents: [
-    TreeDemoComponent,
-  ],
+
 })
 export class TreeDemoModule {
 }

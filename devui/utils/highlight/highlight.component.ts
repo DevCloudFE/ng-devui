@@ -5,7 +5,6 @@ import { DomSanitizer } from '@angular/platform-browser';
     selector: 'd-highlight',
     template: ``,
     styleUrls: ['./highlight.component.scss'],
-    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HighlightComponent implements OnChanges {
@@ -13,7 +12,10 @@ export class HighlightComponent implements OnChanges {
     @HostBinding('style.display') display = 'inline';
     @Input() value: string;
     @Input() term: string;
-    @Input() highlightClass = '';
+    /**
+     * @deprecated
+     */
+    @Input() highlightClass = 'devui-match-highlight';
     highlightHtml: any;
     constructor(private translateHtml: DomSanitizer) { }
     ngOnChanges(changes: SimpleChanges): void {
@@ -25,10 +27,9 @@ export class HighlightComponent implements OnChanges {
     }
 
     highlight(value: string, term: string) {
-        const that = this;
         const regExp = new RegExp(term.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&'), 'gi');
         return value.replace(regExp, function (match) {
-            return `<span class="${that.highlightClass}">${match}</span>`;
+            return `<span class="devui-match-highlight">${match}</span>`;
         });
     }
 }

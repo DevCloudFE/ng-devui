@@ -21,10 +21,10 @@ export class DateRangePickerDisabledComponent {
     console.log(value);
   }
 
-  toggleDatePicker(dateRangePicker, $event, open?) {
+  toggleDatePicker(dateRangePicker) {
     if (this.disabled) {
       return;
     }
-    dateRangePicker.toggle($event, open);
+    dateRangePicker.toggle();
   }
 }

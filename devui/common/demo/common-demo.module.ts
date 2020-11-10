@@ -19,6 +19,7 @@ import {  LazyLoadModule } from 'ng-devui/utils';
 import { LoadingModule } from 'ng-devui/loading';
 import { I18nModule } from 'ng-devui/i18n';
 import { DataTableModule } from 'ng-devui/data-table';
+import { ClipboardDemoComponent } from './clipboard/clipboard.component';
 
 @NgModule({
   imports: [
@@ -55,7 +56,8 @@ import { DataTableModule } from 'ng-devui/data-table';
     HelperJumpDemoComponent,
     HelperDownloadDemoComponent,
     IframPropagateDemoComponent,
-    LazyLoadComponent
+    LazyLoadComponent,
+    ClipboardDemoComponent
   ]
 })
 export class CommonDemoModule {}

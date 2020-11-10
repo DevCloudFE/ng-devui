@@ -42,9 +42,7 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
     ScrollElementComponent,
     HoverDelayTimeComponent
   ],
-  entryComponents: [
-    PopoverDemoComponent,
-  ],
+
 })
 export class PopoverDemoModule {
 }

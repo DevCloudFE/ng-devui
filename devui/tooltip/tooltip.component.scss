@@ -1,4 +1,5 @@
 @import '../style/theme/color';
+@import '../style/core/_font';
 
 :host-context(.devui-tooltip) {
   position: absolute;
@@ -18,7 +19,7 @@
   word-spacing: normal;
   word-wrap: normal;
   white-space: normal;
-  font-size: 12px;
+  font-size: $devui-font-size;
   opacity: 1;
 
   & .devui-tooltip-arrow {
@@ -84,7 +85,7 @@
   .devui-tooltip-inner {
     max-width: 200px;
     padding: 5px 10px;
-    font-size: 12px;
+    font-size: $devui-font-size;
     color: $devui-feedback-overlay-text;
     letter-spacing: 0;
     line-height: 1.5;

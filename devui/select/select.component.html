@@ -27,7 +27,7 @@
       autocomplete="off"
       [tabindex]="-1"
       [readonly]="readonly"
-      [attr.value]="_inputValue"
+      [value]="_inputValue || ''"
       *ngIf="
         !(extraConfig?.labelization?.enable && multiple) &&
         !(!extraConfig?.labelization?.enable && extraConfig?.selectedItemWithTemplate?.enable && (inputItemTemplate || itemTemplate))

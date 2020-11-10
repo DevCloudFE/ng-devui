@@ -1,4 +1,5 @@
 @import '../style/theme/color';
+@import '../style/core/_font';
 
 .devui-dropdown-menu {
   &:not(.devui-dropdown-menu-cdk) {
@@ -64,7 +65,7 @@
 .devui-select-placeholder,
 .devui-select-list-wrapper.devui-form-control,
 .devui-select-selected-item-with-template {
-  font-size: 12px;
+  font-size: $devui-font-size;
 }
 
 .devui-select-list-wrapper.devui-form-control {
@@ -93,7 +94,7 @@
 }
 
 .devui-dropdown-item {
-  font-size: 12px;
+  font-size: $devui-font-size;
   display: block;
   min-height: 36px;
   line-height: 1.5;
@@ -106,7 +107,7 @@
   border: 0;
 
   input[name='search'] {
-    font-size: 12px;
+    font-size: $devui-font-size;
   }
 
   color: $devui-text;
@@ -122,7 +123,7 @@
 }
 
 .devui-select-lg {
-  font-size: 16px;
+  font-size: $devui-font-size-lg;
   min-height: 46px;
   line-height: 46px;
 
@@ -133,24 +134,24 @@
   .devui-select-placeholder,
   .devui-select-list-wrapper.devui-form-control,
   .devui-select-selected-item-with-template {
-    font-size: 16px;
+    font-size: $devui-font-size-lg;
   }
 
   .devui-dropdown-item {
-    font-size: 16px;
+    font-size: $devui-font-size-lg;
     min-height: 40px;
     line-height: 28px;
     padding: 11px 10px;
 
     input[name='search'] {
-      font-size: 16px;
+      font-size: $devui-font-size-lg;
     }
   }
 
   ::ng-deep .devui-checkbox,
   ::ng-deep .devui-select-checkbox label,
   ::ng-deep .devui-select-checkbox label .checkbox-label {
-    font-size: 16px;
+    font-size: $devui-font-size-lg;
     height: 18px;
   }
 
@@ -161,7 +162,7 @@
 }
 
 .devui-select-sm {
-  font-size: 12px;
+  font-size: $devui-font-size-sm;
   min-height: 26px;
   line-height: 14px;
   height: unset;
@@ -173,21 +174,21 @@
   .devui-select-placeholder,
   .devui-select-list-wrapper.devui-form-control,
   .devui-select-selected-item-with-template {
-    font-size: 12px;
+    font-size: $devui-font-size-sm;
   }
 
   .devui-dropdown-item {
-    font-size: 12px;
+    font-size: $devui-font-size-sm;
     min-height: 26px;
     line-height: 14px;
 
     input[name='search'] {
-      font-size: 12px;
+      font-size: $devui-font-size-sm;
     }
   }
 
   ::ng-deep .devui-select-checkbox label .checkbox-label {
-    font-size: 12px;
+    font-size: $devui-font-size-sm;
     line-height: 16px;
   }
 
@@ -204,18 +205,18 @@
 
 .devui-dropdown-menu-lg {
   .devui-dropdown-item {
-    font-size: 16px;
+    font-size: $devui-font-size-lg;
     min-height: 40px;
     line-height: 28px;
 
     input[name='search'] {
-      font-size: 16px;
+      font-size: $devui-font-size-lg;
     }
   }
 
   ::ng-deep .devui-checkbox,
   ::ng-deep .devui-select-checkbox label .checkbox-label {
-    font-size: 16px;
+    font-size: $devui-font-size-lg;
     line-height: 28px;
   }
 
@@ -232,17 +233,17 @@
 
 .devui-dropdown-menu-sm {
   .devui-dropdown-item {
-    font-size: 12px;
+    font-size: $devui-font-size-sm;
     min-height: 26px;
     line-height: 14px;
 
     input[name='search'] {
-      font-size: 12px;
+      font-size: $devui-font-size-sm;
     }
   }
 
   ::ng-deep .devui-select-checkbox label .checkbox-label {
-    font-size: 12px;
+    font-size: $devui-font-size-sm;
     line-height: 16px;
   }
 
@@ -319,8 +320,8 @@ div.devui-dropdown-menu.devui-dropdown-menu-multiple > ul.devui-list-unstyled li
   }
 }
 
-ul.devui-dropdown-menu-wrap .devui-form-group.devui-has-feedback {
-  & > input.devui-form-control.devui-select-search {
+.devui-dropdown-menu ul.devui-dropdown-menu-wrap .devui-form-group.devui-has-feedback {
+  & > input.devui-form-control.devui-select-search.devui-select-input {
     &,
     &:focus {
       background-color: $devui-embed-search-bg;

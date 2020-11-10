@@ -18,12 +18,12 @@ export class DropdownDemoComponent {
   focusSource: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./focus/focus.component.html')},
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./focus/focus.component.ts')},
-    {title: 'SCSS', language: 'css', code:  require('!!raw-loader!./focus/focus.component.css')}
+    {title: 'SCSS', language: 'css', code:  require('!!raw-loader!./focus/focus.component.scss')}
   ];
   closeScopeSource: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./close-scope/close-scope.component.html')},
     {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./close-scope/close-scope.component.ts')},
-    {title: 'SCSS', language: 'css', code:  require('!!raw-loader!./close-scope/close-scope.component.css')}
+    {title: 'SCSS', language: 'css', code:  require('!!raw-loader!./close-scope/close-scope.component.scss')}
   ];
   appendToBodySource: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./append-to-body/append-to-body.component.html')},

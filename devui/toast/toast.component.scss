@@ -1,6 +1,7 @@
 @import '../style/mixins/index';
 @import '../style/theme/color';
 @import '../style/theme/shadow';
+@import '../style/core/_font';
 
 :host::ng-deep a {
   &:link,
@@ -63,8 +64,8 @@
 }
 
 .devui-toast-title {
-  font-size: 14px;
-  padding: 0 0 0.5em 0;
+  font-size: $devui-font-size-card-title;
+  padding: 0 0 calc(0.5em - 2px) 0;
   display: block;
   font-weight: 700;
 }
@@ -118,5 +119,6 @@
 }
 
 .devui-toast-message p {
-  font-size: 12px;
+  font-size: $devui-font-size;
+  margin-top: 2px;
 }

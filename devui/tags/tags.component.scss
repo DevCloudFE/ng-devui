@@ -1,8 +1,12 @@
 @import '../style/theme/color';
 
 .devui-tags {
-  padding: 2px;
   overflow: hidden;
   word-wrap: break-word;
   height: 100%;
+  line-height: 24px;
+}
+
+d-tag:not(:last-of-type) {
+  margin-right: 4px;
 }

@@ -1,5 +1,6 @@
 @import '../style/core/layout';
 @import '../style/theme/color';
+@import '../style/core/_font';
 
 .devui-form-horizontal :host.devui-form-controls {
   flex: 1 1 auto;
@@ -16,7 +17,7 @@
 }
 
 .devui-form-control-extra-info {
-  font-size: 12px;
+  font-size: $devui-font-size;
   color: $devui-aide-text;
   min-height: 20px;
   line-height: 1.5;
@@ -29,7 +30,7 @@
 
 .devui-form-message {
   display: inline-block;
-  font-size: 12px;
+  font-size: $devui-font-size;
   min-height: 20px;
   padding-left: 1px;
   color: $devui-danger;
@@ -57,5 +58,71 @@
     & > circle {
       fill: $devui-light-text;
     }
+  }
+}
+
+/**
+* @desc Compatible with z-index of components that include dropdown menu, will be remove.
+*/
+
+:host.devui-control-has-open-dropdown .devui-form-item-icon {
+  z-index: 1052;
+}
+
+.devui-form-item-icon {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  z-index: 1;
+  width: 32px;
+  height: 16px;
+  margin-top: -7px;
+  line-height: 16px;
+  text-align: center;
+  visibility: visible;
+  pointer-events: none;
+
+  &.devui-form-item-icon-error {
+    svg circle {
+      fill: $devui-danger;
+    }
+
+    svg polygon {
+      fill: $devui-base-bg;
+    }
+  }
+
+  &.devui-form-item-icon-success {
+    svg circle {
+      fill: $devui-success;
+    }
+
+    svg polygon {
+      fill: $devui-base-bg;
+    }
+  }
+
+  &.devui-form-item-icon-pending {
+    svg {
+      animation: devui-loading-keyframes 1s infinite linear;
+    }
+
+    svg path {
+      fill: $devui-brand;
+    }
+  }
+}
+
+:host.devui-form-control-has-feedback .devui-form-control-container {
+  position: relative;
+}
+
+@keyframes devui-loading-keyframes {
+  from {
+    transform: rotateZ(0deg);
+  }
+
+  to {
+    transform: rotateZ(360deg);
   }
 }

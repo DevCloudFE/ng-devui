@@ -41,7 +41,7 @@ export class ModalComponent implements OnInit, OnDestroy {
   @Input() escapable: boolean; // 是否支持esc键关闭弹窗
   @ViewChild(ModalContainerDirective, { static: true }) modalContainerHost: ModalContainerDirective;
   @ViewChild('dialog', { static: true }) dialogElement: ElementRef;
-  animateState: string = this.showAnimate ? 'void' : '';
+  animateState =  '';
   draggableHandleEl: HTMLElement;
   scrollTop: number;
   scrollLeft: number;

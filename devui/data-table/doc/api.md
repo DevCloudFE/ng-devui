@@ -11,7 +11,7 @@
 | generalRowHoveredData |           `boolean`           | false  |      可选，使用配置column方式实现table,鼠标悬浮行时$hovered是否记录到rowItem中，默认不记录       |
 |       cssClass        |           `string`            | --     |                                       可选，自定义表格样式                                       |
 |      tableWidth       |           `string`            | 100%   |                                          可选，表格宽度                                          |
-|      tableHeight      |           `string`            | --     |                                          可选，表格高度                                          | [虚拟滚动](/components/datatable/demo#virtual-scroll)                  |
+|      tableHeight      |           `string`            | --     |                                          可选，表格高度，取值'100%'时依赖table父容器的高度                                          | [虚拟滚动](/components/datatable/demo#virtual-scroll)                  |
 |   checkableRelation   |      `CheckableRelation`      | --     |                             可选，配置树形表格的父子选中是否互相关联                             | [树形表格](/components/datatable/demo#tree-form)                       |
 |   loadChildrenTable   |           `Promise`           | --     |                            可选，展开子表格的回调，用于异步加载子表格                            | [树形表格](/components/datatable/demo#tree-form)                       |
 | loadAllChildrenTable  |           `Promise`           | --     |                      可选，表头展开所有子表格的回调，用于异步加载所有子表格                      | [树形表格](/components/datatable/demo#tree-form)                       |

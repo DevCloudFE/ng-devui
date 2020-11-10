@@ -14,8 +14,8 @@ export class DateRangePickerFormatComponent {
   dateRange2 = [null, null];
   dateFormatOptions = ['y-MM-dd HH:mm:ss', 'yy.MM.dd HH:mm', 'MM/dd/y HH:mm:ss', 'MM/dd/yy HH:mm'];
   splitterOptions = ['  -  ', ' ~ ', ' -- ', ' == '];
-  dateFormat: string;
-  splitter: string;
+  dateFormat = 'y-MM-dd HH:mm:ss';
+  splitter = '  -  ';
   dateConfig = {
     timePicker: true,
     dateConverter: null,

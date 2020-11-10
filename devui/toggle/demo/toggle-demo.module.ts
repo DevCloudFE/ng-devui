@@ -34,7 +34,7 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
         ToggleDemoComponent,
         BasicComponent
     ],
-    entryComponents: [ToggleDemoComponent],
+
     providers: [],
 })
 export class ToggleDemoModule {

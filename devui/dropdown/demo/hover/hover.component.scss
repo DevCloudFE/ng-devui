@@ -1,7 +1,7 @@
 @import '~ng-devui/styles-var/devui-var.scss';
 
 .btn-group > span {
-  font-size: 20px;
+  font-size: $devui-font-size-icon;
   color: $devui-text-weak;
   cursor: pointer;
   background-color: transparent;
