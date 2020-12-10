@@ -1,12 +1,13 @@
 import {
   Component, OnInit, Input, Output, EventEmitter, TemplateRef, ChangeDetectorRef,
-  OnChanges, SimpleChanges, OnDestroy
+  OnChanges, SimpleChanges, OnDestroy, ViewChild
 } from '@angular/core';
 import { DropDownDirective } from 'ng-devui/dropdown';
 import { FilterConfig } from '../../../../data-table.model';
 import { Observable, Subscription, fromEvent, BehaviorSubject, of } from 'rxjs';
 import { map, debounceTime, switchMap } from 'rxjs/operators';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
+import { TableThComponent } from '../th.component';
 
 @Component({
   selector: 'd-table-filter',
@@ -23,9 +24,12 @@ export class FilterComponent implements OnInit, OnChanges, OnDestroy {
   @Input() filterBoxWidth: any;
   @Input() filterBoxHeight: any;
   @Input() column: any; // 为配置column方式兼容自定义过滤模板context
+  @Input() closeWhenScroll: boolean;
 
   @Output() filterIconActiveChange = new EventEmitter<boolean>(true);
   @Output() filterChange = new EventEmitter<FilterConfig[]>();
+
+  @ViewChild('filterDropdown') filterDropdown;
   private sourceSubject: BehaviorSubject<any>;
   private sourceSubscription: Subscription;
   private filterSubscription: Subscription;
@@ -41,7 +45,7 @@ export class FilterComponent implements OnInit, OnChanges, OnDestroy {
   i18nCommonText: I18nInterface['common'];
   filterIconActiveInner: boolean;
   DEBONCE_TIME = 300;
-  constructor(private ref: ChangeDetectorRef, private i18n: I18nService) {
+  constructor(private ref: ChangeDetectorRef, private i18n: I18nService, private thComponent: TableThComponent) {
     this.i18nCommonText = this.i18n.getI18nText().common;
   }
 
@@ -146,7 +150,21 @@ export class FilterComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
+  onContainerScroll = () => {
+    this.closeFilter(this.filterDropdown);
+  }
+
   showFilterContent($event) {
+    if (this.closeWhenScroll) {
+      const tableViewElement = this.thComponent.tableViewRefElement.nativeElement.querySelector('.devui-scrollbar.scroll-view');
+      if ($event) {
+        document.addEventListener('scroll', this.onContainerScroll);
+        tableViewElement.addEventListener('scroll', this.onContainerScroll);
+      } else {
+        document.removeEventListener('scroll', this.onContainerScroll);
+        tableViewElement.removeEventListener('scroll', this.onContainerScroll);
+      }
+    }
     this.searchText = '';
     this.canFilter(!$event).then((change) => {
       if (!$event) {

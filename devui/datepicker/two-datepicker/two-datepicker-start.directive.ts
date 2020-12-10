@@ -17,7 +17,7 @@ export class TwoDatePickerStartDirective implements OnInit, OnDestroy, ControlVa
   @Output() selectStart = new EventEmitter<any>();
 
   userHtml;
-  private switchSub: Subscription;
+  private switchOriginSub: Subscription;
   private twoDateSub: Subscription;
 
   private onChange = (_: any) => null;
@@ -37,23 +37,17 @@ export class TwoDatePickerStartDirective implements OnInit, OnDestroy, ControlVa
         }
       }
     });
-    this.switchSub = this.twoDatePicker.switchOpenSub.subscribe(side => {
-      if (this.el.nativeElement.tagName === 'INPUT') {
-        if (side === 'start') {
-          if (!this.el.nativeElement.classList.contains('devui-input-focus')) {
-            this.el.nativeElement.classList.add('devui-input-focus');
-          }
-        } else {
-          this.el.nativeElement.classList.remove('devui-input-focus');
-        }
+    this.switchOriginSub = this.twoDatePicker.switchOriginPositionSub.subscribe(side => {
+      if (side === 'start') {
+        this.twoDatePicker.changeFormWithDropDown(this.el);
+      } else {
+        this.twoDatePicker.removeClass(this.el);
       }
     });
   }
 
-  @HostListener('click', ['$event'])
-  public toggleStartPicker(event: MouseEvent) {
-    event.stopPropagation();
-    this.twoDatePicker.toggle(event, 'start');
+  public toggle(event?: MouseEvent) {
+    this.twoDatePicker.toggle('start');
   }
 
   @HostListener('blur', ['$event'])
@@ -82,8 +76,8 @@ export class TwoDatePickerStartDirective implements OnInit, OnDestroy, ControlVa
     this.twoDatePicker.selectStart(selectedStart, true);
   }
 
-  clearStart = () => {
-    this.twoDatePicker.selectStart(null);
+  clear = () => {
+    this.twoDatePicker.clear('start');
   }
 
   transUserInputToDatePicker() {
@@ -93,7 +87,7 @@ export class TwoDatePickerStartDirective implements OnInit, OnDestroy, ControlVa
         return;
       }
       if (!value) {
-        this.clearStart();
+        this.clear();
         return;
       }
       const valueDate = new Date(value);
@@ -119,8 +113,8 @@ export class TwoDatePickerStartDirective implements OnInit, OnDestroy, ControlVa
     if (this.twoDateSub) {
       this.twoDateSub.unsubscribe();
     }
-    if (this.switchSub) {
-      this.switchSub.unsubscribe();
+    if (this.switchOriginSub) {
+      this.switchOriginSub.unsubscribe();
     }
   }
 }

@@ -10,7 +10,8 @@ import {
   ElementRef,
   QueryList,
   OnDestroy,
-  TemplateRef
+  TemplateRef,
+  OnInit
 } from '@angular/core';
 import {
   ITreeItem,
@@ -27,7 +28,7 @@ import { Subscription } from 'rxjs';
   exportAs: 'dOperableTreeComponent',
   preserveWhitespaces: false,
 })
-export class OperableTreeComponent implements AfterViewInit, OnDestroy {
+export class OperableTreeComponent implements OnInit, OnDestroy {
   @Input() tree: Array<ITreeItem>;
   @Input() treeNodeIdKey: string;
   @Input() treeNodeChildrenKey: string;
@@ -72,6 +73,7 @@ export class OperableTreeComponent implements AfterViewInit, OnDestroy {
   @Output() nodeEdited: EventEmitter<any> = new EventEmitter<any>();
   @Output() editValueChange: EventEmitter<any> = new EventEmitter<any>();
   @Output() nodeOnDrop: EventEmitter<any> = new EventEmitter<any>();
+  @Output() afterTreeInit: EventEmitter<any> = new EventEmitter<any>();
   @ViewChild('operableTree', { static: true }) operableTree: TreeComponent;
   @ViewChild('operableTreeContainer', { static: true }) operableTreeEle: ElementRef;
   @ViewChild('treeDropIndicator') treeDropIndicator: ElementRef;
@@ -103,13 +105,13 @@ export class OperableTreeComponent implements AfterViewInit, OnDestroy {
   };
 
   constructor(private i18n: I18nService) {
+
+  }
+  ngOnInit(): void {
     this.i18nCommonText = this.i18n.getI18nText().common;
     this.i18nSubscription = this.i18n.langChange().subscribe((data) => {
       this.i18nCommonText = data.common;
     });
-  }
-  ngAfterViewInit() {
-
   }
 
   contextmenuEvent(event, node) {
@@ -291,9 +293,7 @@ export class OperableTreeComponent implements AfterViewInit, OnDestroy {
   }
 
   selectNode(event, treeNode: TreeNode) {
-    if (!event.target.classList.contains('devui-tree-node__content--value-wrapper')
-      && !event.target.classList.contains('devui-tree-node__content')
-      && !event.target.classList.contains('devui-tree-node__title')) {
+    if (!this.operableTree.isSelectableRegion(event.target)) {
       return;
     }
     if (treeNode.data.disableSelect) {
@@ -394,9 +394,11 @@ export class OperableTreeComponent implements AfterViewInit, OnDestroy {
       value: currentValue, callback: (validateInfo) => {
         if (validateInfo && validateInfo.errTips) {
           treeNode.data.errTips = validateInfo.errTips;
+          treeNode.data.errTipsPosition = validateInfo.errTipsPosition || 'top';
         } else {
           if (treeNode.data.errTips) {
             delete treeNode.data.errTips;
+            delete treeNode.data.errTipsPosition;
           }
         }
       }
@@ -491,6 +493,10 @@ export class OperableTreeComponent implements AfterViewInit, OnDestroy {
   }
   public nodeDblClick(event, node) {
     this.nodeDblClicked.emit(node);
+  }
+
+  initTreeFinishEvent($event) {
+    this.afterTreeInit.emit($event);
   }
 
   ngOnDestroy() {

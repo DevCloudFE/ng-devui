@@ -149,5 +149,8 @@ export default {
     weeksLater: ' weeks later',
     monthsLater: ' months later',
     yearsLater: ' years later',
+  },
+  tagsInput: {
+    tagsReachMaxLength: 'The length of tags has reached maxTags',
   }
 };

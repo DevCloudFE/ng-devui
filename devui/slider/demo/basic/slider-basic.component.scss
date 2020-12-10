@@ -7,7 +7,7 @@
   color: $devui-text;
   vertical-align: middle;
   border: 1px solid $devui-line;
-  border-radius: 1px;
+  border-radius: $devui-border-radius;
   outline: none;
   background-color: $devui-base-bg;
 }

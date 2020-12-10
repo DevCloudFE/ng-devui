@@ -1,5 +1,6 @@
 @import '../style/mixins/index';
 @import '../style/theme/color';
+@import '../style/theme/corner';
 
 :host {
   display: inline-block;
@@ -80,7 +81,7 @@
     position: relative;
     user-select: none;
     border: 1px solid $devui-line;
-    border-radius: 2px;
+    border-radius: $devui-border-radius;
     margin-right: 8px;
     vertical-align: text-bottom;
 

@@ -8,3 +8,4 @@ export * from './select-files.utils';
 export * from './file-drop.directive';
 export * from './multiple-upload.component';
 export * from './single-upload.component';
+export * from './upload.directive';

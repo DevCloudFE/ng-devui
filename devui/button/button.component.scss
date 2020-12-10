@@ -1,7 +1,8 @@
 @import '../style/mixins/index';
 @import '../style/theme/color';
 @import '../style/theme/variables';
-@import '../style/core/font';
+@import '../style/theme/font';
+@import '../style/theme/corner';
 
 $devui-btn-loading-color: $devui-text;
 $devui-btn-xs-padding: 1px 5px;
@@ -71,13 +72,13 @@ $devui-btn-normal-config: (
     min-width: $devui-btn-lg-min-width,
   ),
   left: (
-    border-radius: 2px 0 0 2px,
+    border-radius: $devui-border-radius 0 0 $devui-border-radius,
   ),
   right: (
-    border-radius: 0 2px 2px 0,
+    border-radius: 0 $devui-border-radius $devui-border-radius 0,
   ),
   default: (
-    border-radius: 2px,
+    border-radius: $devui-border-radius,
   )
 );
 
@@ -164,7 +165,7 @@ $devui-btn-pseudo-config: (
   font-size: $devui-btn-font-size;
   height: $devui-btn-height;
   line-height: $devui-btn-line-height;
-  border-radius: 2px;
+  border-radius: $devui-border-radius;
   border-width: 1px;
   border-color: transparent;
   background-color: transparent;

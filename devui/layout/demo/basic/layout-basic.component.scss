@@ -2,7 +2,7 @@
 @import '../../../style/theme/shadow';
 
 .basic-usage {
-  box-shadow: $hwc-shadow-5; // TODO: color not variable
+  box-shadow: $devui-shadow-length-base; // TODO: color not variable
   margin-top: 36px;
 
   &:first-child {

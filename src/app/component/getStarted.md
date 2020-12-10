@@ -6,7 +6,7 @@
 
 使用方式参照下方的 StackBlitz 演示，推荐`Fork`本例来进行`Bug Report`，注意不要在实际工程中这样使用。
 
-<a class="devui-link" href="https://stackblitz.com/edit/ng-devui-9" target="_blank">ng-devui stackblitz</a>
+<a class="devui-link" href="https://stackblitz.com/edit/ng-devui-10" target="_blank">ng-devui stackblitz</a>
 
 ### Angular版本
 
@@ -25,9 +25,9 @@ ng new New-Project
 进入你的项目文件夹，使用npm安装DevUI
 
 ```bash
-$ npm i ng-devui
+npm i ng-devui
 # 可选，字体图标库, 部分Demo依赖此字体库
-# $ npm i @devui-design/icons
+# npm i @devui-design/icons
 ```
 
 ### 3. 引入模块
@@ -73,6 +73,9 @@ export class AppModule { }
 ```bash
 ng serve --open
 ```
+
+### 浏览器兼容
++ 支持现代浏览器IE11及以上（polyfills可参考 [Angular Browser Support](https://angular.io/guide/browser-support) 进行配置）。
 
 ## 一起交流
 

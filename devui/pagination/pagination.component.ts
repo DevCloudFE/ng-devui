@@ -8,6 +8,7 @@ import {
   Input,
   OnChanges,
   OnDestroy,
+  OnInit,
   Output,
   SimpleChanges,
   ViewChild
@@ -24,7 +25,7 @@ import { ConnectedPosition } from '@angular/cdk/overlay';
   changeDetection: ChangeDetectionStrategy.OnPush,
   preserveWhitespaces: false,
 })
-export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy {
+export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy, OnInit {
   static EFFECT_PAGE_RANGE_KEYS = ['total', 'pageSize', 'pageIndex', 'maxItems'];
 
   /**
@@ -114,6 +115,10 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
   i18nLocale: I18nInterface['locale'];
   i18nSubscription: Subscription;
   constructor(private ref: ChangeDetectorRef, private i18n: I18nService) {
+
+    this.constructLitePaginatorOptions();
+  }
+  ngOnInit(): void {
     this.i18nText = this.i18n.getI18nText().pagination;
     this.i18nLocale = this.i18n.getI18nText().locale;
     this.i18nSubscription = this.i18n.langChange().subscribe((data) => {
@@ -121,7 +126,6 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
       this.i18nLocale = data.locale;
       this.ref.markForCheck();
     });
-    this.constructLitePaginatorOptions();
   }
 
   @Input() set total(total: any) {

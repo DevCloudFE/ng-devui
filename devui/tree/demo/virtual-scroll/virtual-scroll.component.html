@@ -1,9 +1,9 @@
 <div class="row">
-  <d-search style="width: 300px;" [placeholder]="'search your node...'" [isKeyupSearch]="true" (searchFn)="onKeyUp($event)"></d-search>
+  <d-search style="width: 300px" [placeholder]="'search your node...'" [isKeyupSearch]="true" (searchFn)="onKeyUp($event)"></d-search>
 </div>
 
 <div class="row">
-  <d-search style="width: 300px;" [placeholder]="'filter your node...'" [isKeyupSearch]="true" (searchFn)="onKeyUp2($event)"></d-search>
+  <d-search style="width: 300px" [placeholder]="'filter your node...'" [isKeyupSearch]="true" (searchFn)="onKeyUp2($event)"></d-search>
 </div>
 
 <d-operable-tree
@@ -33,5 +33,6 @@
   [postAddNode]="postAddNode"
   (editValueChange)="editValueChange($event)"
   (nodeOnDrop)="onDrop($event)"
+  (afterTreeInit)="afterTreeInit($event)"
 >
 </d-operable-tree>

@@ -12,6 +12,7 @@
 |       cssClass        |           `string`            | --     |                                       可选，自定义表格样式                                       |
 |      tableWidth       |           `string`            | 100%   |                                          可选，表格宽度                                          |
 |      tableHeight      |           `string`            | --     |                                          可选，表格高度，取值'100%'时依赖table父容器的高度                                          | [虚拟滚动](/components/datatable/demo#virtual-scroll)                  |
+| containFixHeaderHeight |      `boolean`            | false |     可选，固定表头指定的高度是否包含表头高度，`tableHeight`设置的高度默认是表格body的高度    | [固定表头虚拟滚动](/components/datatable/demo#fixed-virtual-scroll)                  |
 |   checkableRelation   |      `CheckableRelation`      | --     |                             可选，配置树形表格的父子选中是否互相关联                             | [树形表格](/components/datatable/demo#tree-form)                       |
 |   loadChildrenTable   |           `Promise`           | --     |                            可选，展开子表格的回调，用于异步加载子表格                            | [树形表格](/components/datatable/demo#tree-form)                       |
 | loadAllChildrenTable  |           `Promise`           | --     |                      可选，表头展开所有子表格的回调，用于异步加载所有子表格                      | [树形表格](/components/datatable/demo#tree-form)                       |
@@ -100,6 +101,7 @@
 |       maxWidth       |                `string px`                 | --     |                  可选，调整宽度时的最大宽度                   |
 |       minWidth       |                `string px`                 | --     |                  可选，调整宽度时的最小宽度                   |
 |      filterable      |                 `boolean`                  | --     |                   可选，该列宽度是否可过滤                    | [表格交互](/components/datatable/demo#table-interaction) |
+|  closeFilterWhenScroll     |                 `boolean`            | --  |                   可选，表格或者body滚动时是否关闭过滤框       | [表格交互](/components/datatable/demo#table-interaction) |
 | customFilterTemplate |               `TemplateRef`                | --     |                 可选，过滤弹出框的自定义模板                  | [表格交互](/components/datatable/demo#table-interaction) |
 |       searchFn       | `(term: string) => Observable<Array<any>>` |        |               可选，过滤时输入关键字的匹配方法                |
 |      filterList      |                  `array`                   | --     |              过滤列表，当filterable为true时必选               | [表格交互](/components/datatable/demo#table-interaction) |
@@ -269,6 +271,7 @@ export interface TableExpandConfig {
 | extraOptions.showHeadTableToggler |            `boolean`            | false             |                       可选，树形表格是否在header出现展开\折叠图标                       | [树形表格](/components/datatable/demo#tree-form)         |
 |               order               |            `number`             | Number. MAX_VALUE |                                      可选，列序号                                       | [基本用法](/components/datatable/demo#basic-usage)       |
 |            filterable             |            `boolean`            | --                |                                    可选，是否可筛选                                     | [表格交互](/components/datatable/demo#table-interaction) |
+|  closeFilterWhenScroll     |                 `boolean`            | --  |                   可选，表格或者body滚动时是否关闭过滤框       | [表格交互](/components/datatable/demo#table-interaction) |
 |            filterList             |             `array`             | --                |                    传入需要操作的筛选列表，当filterable为true时必选                     | [表格交互](/components/datatable/demo#table-interaction) |
 |          filterMultiple           |            `boolean`            | true              |                 可选，选择筛选列表为多选或单选, true为多选，false为单选                 | [表格交互](/components/datatable/demo#table-interaction) |
 |       customFilterTemplate        |          `TemplateRef`          | --                |            可选，表格过滤弹出框的自定义模板，参考DOC下‘自定义过滤弹出框’使用            | [表格交互](/components/datatable/demo#table-interaction) |

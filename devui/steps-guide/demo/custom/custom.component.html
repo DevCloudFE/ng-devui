@@ -1,4 +1,12 @@
-<d-button bsStyle="common" dStepsGuide [pageName]="'step-custom-demo'" [stepIndex]="0" [leftFix]="-35" [topFix]="-120" [position]="'top'">
+<d-button
+  bsStyle="common"
+  dStepsGuide
+  [pageName]="'step-custom-demo'"
+  [stepIndex]="0"
+  [leftFix]="-35"
+  [topFix]="-120"
+  [dStepsGuidePosition]="'top'"
+>
   custom position
 </d-button>
 <d-button
@@ -8,7 +16,7 @@
   [scrollToTargetSwitch]="false"
   [pageName]="'step-custom-demo'"
   [stepIndex]="1"
-  [position]="'bottom-left'"
+  [dStepsGuidePosition]="'bottom-left'"
   [zIndex]="2000"
   [extraConfig]="config"
 >
@@ -21,7 +29,7 @@
   [scrollToTargetSwitch]="false"
   [pageName]="'step-custom-demo'"
   [stepIndex]="2"
-  [position]="'bottom-right'"
+  [dStepsGuidePosition]="'bottom-right'"
   [zIndex]="2000"
   [observerDom]="observerDom"
 >

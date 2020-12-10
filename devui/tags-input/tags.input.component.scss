@@ -1,5 +1,7 @@
 @import '../style/theme/color';
-@import '../style/core/_font';
+@import '../style/theme/shadow';
+@import '../style/theme/corner';
+@import '../style/theme/_font';
 
 :host {
   display: block;
@@ -25,7 +27,7 @@
   cursor: text;
   background-color: $devui-base-bg;
   border: 1px solid $devui-line;
-  border-radius: 2px;
+  border-radius: $devui-border-radius;
   height: 100%;
 
   &:hover {
@@ -52,7 +54,7 @@
     display: inline-block;
     min-height: 18px;
     line-height: 18px;
-    border-radius: 2px;
+    border-radius: $devui-border-radius;
     color: $devui-text;
     background-color: $devui-label-bg;
     position: relative;
@@ -158,7 +160,7 @@
   z-index: 1000;
   width: 100%;
   background-color: $devui-connected-overlay-bg;
-  box-shadow: 0 5px 10px $devui-shadow;
+  box-shadow: $devui-shadow-length-connected-overlay $devui-shadow;
 
   &.devui-dropdown-menu.devui-dropdown-overlay {
     display: block;

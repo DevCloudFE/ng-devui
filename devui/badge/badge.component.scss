@@ -1,5 +1,5 @@
 @import '../style/theme/color';
-@import '../style/core/_font';
+@import '../style/theme/_font';
 
 @mixin status-color {
   &-danger {
@@ -42,7 +42,7 @@
     line-height: 12px;
     text-align: center;
     padding: 2px 4px;
-    border-radius: 8px;
+    border-radius: (16px/2);
   }
 
   &-dot {
@@ -89,7 +89,7 @@
   line-height: 12px;
   text-align: center;
   padding: 2px 4px;
-  border-radius: 8px;
+  border-radius: (16px/2);
   @include status-color;
 }
 

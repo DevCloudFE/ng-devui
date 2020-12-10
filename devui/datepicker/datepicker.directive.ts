@@ -103,7 +103,7 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
   }
 
   @Input() set maxDate(date: Date | any) {
-    const parseDate = this.dateConverter.parse(date, this.dateFormat, this.locale || this.i18nLocale);
+    const parseDate = this.dateConverter.parse(date);
     if (parseDate) {
       this._maxDate = parseDate;
     }
@@ -114,7 +114,7 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
   }
 
   @Input() set minDate(date: Date | any) {
-    const parseDate = this.dateConverter.parse(date, this.dateFormat, this.locale || this.i18nLocale);
+    const parseDate = this.dateConverter.parse(date);
     if (parseDate) {
       this._minDate = parseDate;
     }
@@ -133,6 +133,7 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
     this.selectedDate = null;
     const factory = this.componentFactoryResolver.resolveComponentFactory(DatepickerComponent);
     this.cmpRef = this.viewContainerRef.createComponent(factory, this.viewContainerRef.length, this.injector);
+    this.setI18nText();
   }
 
   checkDateConfig(dateConfig: any) {
@@ -169,7 +170,6 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
     if (this.autoOpen) {
       this.show();
     }
-    this.setI18nText();
   }
 
   writeValue(obj: any): void {
@@ -180,7 +180,7 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
       curDate = obj;
     }
     this.selectedDate = curDate ?
-      this.dateConverter.parse(curDate, this.dateFormat, this.locale || this.i18nLocale) : null;
+      this.dateConverter.parse(curDate) : null;
     this.writeModelValue(obj);
   }
 
@@ -197,15 +197,6 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
     this.i18nSubscription = this.i18n.langChange().subscribe((data) => {
       this.i18nLocale = data.locale;
     });
-  }
-
-  private parseDateFunc(date, direction) {
-    const parseDate = this.dateConverter.parse(date, this.dateFormat, this.locale || this.i18nLocale)
-      ;
-    if (parseDate) {
-      this[direction] = date
-      ;
-    }
   }
 
   private applyPopupStyling(nativeElement: any) {
@@ -294,15 +285,7 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
     }
   }
 
-  pickOutBoolean(arr: any[]) {
-    return arr.find(i => typeof i === 'boolean');
-  }
-
-  toggle(...args) {
-    let clickShow;
-    if (args.length) {
-      clickShow = this.pickOutBoolean(args);
-    }
+  toggle(clickShow?: boolean) {
     if (clickShow === undefined) {
       if (this.isOpen) {
         this.hide();

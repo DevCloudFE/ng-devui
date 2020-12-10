@@ -6,6 +6,7 @@ import { DValidators } from './validators';
 export type DValidateRules = {
   validators ?: DValidateRule[];
   asyncValidators ?: DAsyncValidateRule[];
+  asyncDebounceTime ?: number; // 异步校验器debounceTime
   errorStrategy ?: DValidationErrorStrategy; // error更新策略
   message ?: string; // 统一配置的message
   updateOn ?: 'change'|'blur'|'submit'; // model更新策略
@@ -54,7 +55,16 @@ export type DValidatorFn = (value: any) => boolean | string | null;
 export type DAsyncValidatorFn = (value: any) => Observable<boolean | string | null>;
 
 /* TODO: 这里是否需要导出 */
-export const ruleReservedWords = ['id', 'validator', 'message', 'errorStrategy', 'priority', 'isNgValidator', 'updateOn'];
+export const ruleReservedWords = [
+  'id',
+  'validator',
+  'message',
+  'errorStrategy',
+  'priority',
+  'isNgValidator',
+  'popPosition',
+  'asyncDebounceTime'
+];
 
 // 这里要考虑如果可全局添加默认
 export const dDefaultValidators = {

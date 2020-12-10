@@ -3,6 +3,7 @@ import { AccordionModule } from 'ng-devui/accordion';
 import { AlertModule } from 'ng-devui/alert';
 import { AnchorModule } from 'ng-devui/anchor';
 import { BadgeModule } from 'ng-devui/badge';
+import { BackTopModule } from 'ng-devui/back-top';
 import { ButtonModule } from 'ng-devui/button';
 import { CarouselModule } from 'ng-devui/carousel';
 import { CheckBoxModule } from 'ng-devui/checkbox';
@@ -39,6 +40,7 @@ import { SliderModule } from 'ng-devui/slider';
 import { TreeSelectModule } from 'ng-devui/tree-select';
 import { TransferModule } from 'ng-devui/transfer';
 import { SplitterModule } from 'ng-devui/splitter';
+import { TimeAxisModule } from 'ng-devui/time-axis';
 import { BreadcrumbModule } from 'ng-devui/breadcrumb';
 import { RateModule } from 'ng-devui/rate';
 import { FormModule } from 'ng-devui/form';
@@ -60,6 +62,7 @@ export * from 'ng-devui/auto-complete';
 export * from 'ng-devui/avatar';
 export * from 'ng-devui/layout';
 export * from 'ng-devui/badge';
+export * from 'ng-devui/back-top';
 export * from 'ng-devui/card';
 export * from 'ng-devui/button';
 export * from 'ng-devui/breadcrumb';
@@ -91,7 +94,7 @@ export * from 'ng-devui/sticky';
 export * from 'ng-devui/tabs';
 export * from 'ng-devui/tags';
 export * from 'ng-devui/tags-input';
-export * from 'ng-devui/theme';
+export * from 'ng-devui/time-axis';
 export * from 'ng-devui/toast';
 export * from 'ng-devui/toggle';
 export * from 'ng-devui/tooltip';
@@ -108,6 +111,7 @@ export * from 'ng-devui/window-ref';
 export * from 'ng-devui/steps-guide';
 export * from 'ng-devui/quadrant-diagram';
 export * from 'ng-devui/gantt';
+export * from 'ng-devui/theme';
 export * from './version';
 
 @NgModule({
@@ -120,6 +124,7 @@ export * from './version';
     AvatarModule,
     DCommonModule,
     BadgeModule,
+    BackTopModule,
     ButtonModule,
     BreadcrumbModule,
     CardModule,
@@ -154,6 +159,7 @@ export * from './version';
     ToastModule,
     ToggleModule,
     TooltipModule,
+    TimeAxisModule,
     TreeModule,
     UploadModule,
     InputNumberModule,

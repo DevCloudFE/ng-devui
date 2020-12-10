@@ -132,14 +132,10 @@ export class InputNumberComponent implements ControlValueAccessor, OnChanges, On
     return safeValue;
   }
 
-  private setValue(value: number | null | undefined): void {
-    let currentValue = value;
-    if (this.allowEmpty && value === undefined) {
-      currentValue = null;
-    }
-    this.value = currentValue;
-    this.lastValue = currentValue;
-    if (this.allowEmpty && (value === null || value === undefined)) {
+  private setValue(value: number | null): void {
+    this.value = value;
+    this.lastValue = value;
+    if (this.allowEmpty && value === null) {
       this.subscribeDecAction();
       this.subscribeIncAction();
     } else {
@@ -154,7 +150,7 @@ export class InputNumberComponent implements ControlValueAccessor, OnChanges, On
         this.subscribeIncAction();
       }
     }
-    this.renderer.setProperty(this.inputElement.nativeElement, 'value', currentValue);
+    this.renderer.setProperty(this.inputElement.nativeElement, 'value', value);
     this.cdr.detectChanges();
   }
 
@@ -307,7 +303,7 @@ export class InputNumberComponent implements ControlValueAccessor, OnChanges, On
   private getDecimals(value: number): number {
     const valueString = value.toString();
     const integerLength = valueString.indexOf('.') + 1;
-    return integerLength >= 0 ? valueString.length - integerLength : 0;
+    return valueString.length - integerLength;
   }
 
   private getMaxDecimals(currentValue) {

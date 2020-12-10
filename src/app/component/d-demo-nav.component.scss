@@ -1,5 +1,5 @@
 @import '../../../devui/style/theme/color';
-@import '../../../devui/style/core/font';
+@import '../../../devui/style/theme/font';
 
 .demo-nav {
   width: 240px;
@@ -10,7 +10,6 @@
   z-index: 1;
 
   .fast-forward {
-    font-family: PingFangSC-Semibold;
     width: 130px;
     font-size: $devui-font-size-card-title;
     color: $devui-text;

@@ -1,5 +1,7 @@
 @import '../style/theme/color';
-@import '../style/core/_font';
+@import '../style/theme/shadow';
+@import '../style/theme/corner';
+@import '../style/theme/_font';
 
 :host {
   display: block;
@@ -111,7 +113,7 @@
 
     .devui-pagination-link-lite {
       border: 1px solid transparent !important;
-      border-radius: 2px;
+      border-radius: $devui-border-radius;
     }
   }
 
@@ -119,7 +121,7 @@
     margin-left: 5px;
     padding: 3px 7px;
     line-height: 1.5;
-    border-radius: 2px;
+    border-radius: $devui-border-radius;
     color: $devui-text-weak;
     display: flex;
     align-items: center;
@@ -146,7 +148,7 @@
 
   .devui-pagination-sm > li:first-child > a,
   .devui-pagination-sm > li:last-child > a {
-    border-radius: 2px;
+    border-radius: $devui-border-radius;
     height: 30px;
     line-height: 30px;
   }
@@ -162,7 +164,7 @@
   .devui-pagination-lg > li:first-child > a,
   .devui-pagination-lg > li:last-child > a {
     padding: 13px 16px;
-    border-radius: 2px;
+    border-radius: $devui-border-radius;
     height: 46px;
     line-height: 46px;
   }
@@ -183,7 +185,7 @@
   .devui-jump-button {
     display: inline-block;
     vertical-align: middle;
-    border-radius: 1px;
+    border-radius: $devui-border-radius;
     border: 1px solid $devui-line;
     cursor: pointer;
     margin-left: 5px;
@@ -278,8 +280,8 @@
 
     .devui-config-container {
       padding: 5px 0;
-      box-shadow: 0 0 6px 1px $devui-shadow;
-      border-radius: 2px;
+      box-shadow: $devui-shadow-length-connected-overlay $devui-shadow;
+      border-radius: $devui-border-radius;
       width: 150px;
       background-color: $devui-connected-overlay-bg;
       line-height: 26px;
@@ -354,7 +356,7 @@
   padding: 5px 5px;
   font-size: $devui-font-size;
   line-height: 1.5;
-  border-radius: 2px;
+  border-radius: $devui-border-radius;
 }
 
 :host ::ng-deep .devui-input-lg {

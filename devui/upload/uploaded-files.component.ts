@@ -5,6 +5,7 @@ import {
   Output,
   EventEmitter,
   OnDestroy,
+  OnInit,
 } from '@angular/core';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { Subscription } from 'rxjs';
@@ -13,10 +14,9 @@ import { Subscription } from 'rxjs';
   selector: 'd-uploaded-files',
   exportAs: 'dUploadFiles',
   templateUrl: './uploaded-files.component.html',
-  styleUrls: ['./uploaded-files.component.scss'],
   preserveWhitespaces: false,
 })
-export class UploadedFilesComponent implements OnDestroy {
+export class UploadedFilesComponent implements OnDestroy, OnInit {
   @Input() uploadedFiles: Array<Object> = [];
   @Input() uploadedFilesRef: TemplateRef<any>;
   @Input() filePath: string;
@@ -24,6 +24,9 @@ export class UploadedFilesComponent implements OnDestroy {
   i18nText: I18nInterface['upload'];
   i18nSubscription: Subscription;
   constructor(private i18n: I18nService) {
+
+  }
+  ngOnInit(): void {
     this.i18nText = this.i18n.getI18nText().upload;
     this.i18nSubscription = this.i18n.langChange().subscribe((data) => {
       this.i18nText = data.upload;

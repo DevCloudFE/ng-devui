@@ -13,7 +13,7 @@
 |  halfchecked  |   `boolean`   | false |            可选，半选状态            | [基本用法](/components/checkbox/demo#checkbox-basic) |
 |     color     |   `string`    |  --   |           可选，复选框颜色           | [基本用法](/components/checkbox/demo#checkbox-basic) |
 | showAnimation |   `boolean`   | true  |        可选，控制是否显示动画        | [基本用法](/components/checkbox/demo#checkbox-basic) |
-| beforeChange | `Function\|Promise\|Observable` | -- | 可选，checkbox 切换前的回调函数，返回 boolean 类型，返回 false 可以阻止 radio 切换 | [回调切换](/components/checkbox/demo#condition-change) |
+| beforeChange | `Function\|Promise\|Observable` | -- | 可选，checkbox 切换前的回调函数，返回 boolean 类型，返回 false 可以阻止 checkbox 切换 | [回调切换](/components/checkbox/demo#condition-change) |
 
 ### d-checkbox 事件
 

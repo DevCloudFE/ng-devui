@@ -40,7 +40,7 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
         RateDemoCustomizeComponent,
         TypeComponent
     ],
-
+    
 })
 export class RateDemoModule {
 }

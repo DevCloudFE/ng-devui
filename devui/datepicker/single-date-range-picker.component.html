@@ -55,7 +55,7 @@
         </td>
         <td colspan="3" class="devui-dropdown">
           <span class="devui-date-title">{{ i18nText?.yearDisplay(currentYear) }}</span>
-          <span class="devui-date-title">{{ (i18nText?.monthsOfYear)[currentMonth] }}</span>
+          <span class="devui-date-title">{{ (i18nText?.monthsOfYear)[currentMonthIndex] }}</span>
         </td>
         <td>
           <a
@@ -121,7 +121,8 @@
             'devui-in-month-day': day.inMonth,
             active: isSelectDay(day.date),
             disabled: isDisabledDay(day.date),
-            'devui-in-range': isInRange(day.date)
+            'devui-in-range': isInRange(day.date),
+            'devui-today': day.isToday
           }"
           (click)="onSelectDate($event, day.date)"
           (mouseover)="emitHoverDate($event, day.date)"

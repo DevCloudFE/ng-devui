@@ -1,4 +1,4 @@
-import { ContentChildren, Directive, Input, QueryList, OnInit } from '@angular/core';
+import { ContentChildren, Directive, Input, QueryList, OnInit, OnDestroy } from '@angular/core';
 import { Subject, Subscription} from 'rxjs';
 import { AnchorActiveChangeSource, IAnchorBox } from './anchor.type';
 import { AnchorDirective } from './anchor.directive';
@@ -7,7 +7,7 @@ import { filter } from 'rxjs/operators';
 @Directive({
   selector: '[dAnchorBox]'
 })
-export class AnchorBoxDirective implements IAnchorBox {
+export class AnchorBoxDirective implements IAnchorBox, OnDestroy {
   public isScrollingToTarget = false;
   private activeChangeSubject = new Subject();
   public activeChange = this.activeChangeSubject.asObservable();
@@ -57,6 +57,12 @@ export class AnchorBoxDirective implements IAnchorBox {
               anchor.activeChangeBy = forceActiveSource;
               anchor.isActive = false;
             });
+    }
+  }
+  ngOnDestroy() {
+    this.activeChangeSubject.complete();
+    if (this.sub) {
+      this.sub.unsubscribe();
     }
   }
 }

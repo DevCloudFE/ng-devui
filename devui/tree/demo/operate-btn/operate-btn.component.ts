@@ -120,5 +120,15 @@ export class OperateBtnComponent {
 
   editValueChange(event) {
     console.log('editChanged', event);
+    // 标记态校验节点，可通过传入errTips控制报错信息，errTipsPosition控制报错信息的弹出位置
+    if (event.value === '') {
+      event.callback({
+        errTips: '节点名不能为空！',
+        errTipsPosition: 'right'
+      });
+    } else {
+      // 校验通过后调用callback,取消报错显示
+      event.callback();
+    }
   }
 }

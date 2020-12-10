@@ -17,7 +17,7 @@ import { LoadingDirective } from './loading.directive';
     LoadingBackdropComponent,
     LoadingComponent
   ],
-
+  
   providers: [],
 })
 export class LoadingModule {

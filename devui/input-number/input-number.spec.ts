@@ -14,6 +14,10 @@ import { createKeyBoardEvent } from '../utils/testing/event-helper';
       [max]="max"
       [step]="step"
       [allowEmpty]="allowEmpty"
+      [autoFocus]="autoFocus"
+      [decimalLimit]="decimalLimit"
+      [maxLength]="maxLength"
+      [reg]="reg"
       [(ngModel)]="value"
       (whileValueChanging)="valueChanging($event)"
     ></d-input-number>
@@ -27,6 +31,10 @@ class TestInputNumberComponent {
   step = 1;
   value = 2;
   allowEmpty = false;
+  autoFocus;
+  decimalLimit;
+  maxLength;
+  reg;
   @ViewChild('comp') comp;
   valueChanging = jasmine.createSpy('value changing');
 }
@@ -194,12 +202,43 @@ describe('input-number', () => {
       it('should input value changing emiter work', fakeAsync(() => {
         const inputEl = debugEl.query(By.css('.input-container .input-box')).nativeElement;
         inputEl.value = '5';
-        const keyBoardEvent = createKeyBoardEvent('input', { data: '5' });
+        let keyBoardEvent = createKeyBoardEvent('input', { data: '5' });
         inputEl.dispatchEvent(keyBoardEvent);
         fixture.detectChanges();
         tick();
         fixture.detectChanges();
         expect(component.valueChanging).toHaveBeenCalled();
+
+        component.maxLength = 1;
+        fixture.detectChanges();
+        inputEl.value = '55';
+        keyBoardEvent = createKeyBoardEvent('input', { data: '5' });
+        inputEl.dispatchEvent(keyBoardEvent);
+        fixture.detectChanges();
+        tick();
+        fixture.detectChanges();
+        expect(inputEl.value).toBe('2');
+
+        component.maxLength = 3;
+        fixture.detectChanges();
+        inputEl.value = '2.';
+        keyBoardEvent = createKeyBoardEvent('input', { data: '.' });
+        inputEl.dispatchEvent(keyBoardEvent);
+        fixture.detectChanges();
+        tick();
+        fixture.detectChanges();
+        expect(inputEl.value).toBe('2.');
+
+        component.decimalLimit = 2;
+        fixture.detectChanges();
+        inputEl.value = '2.2';
+        fixture.detectChanges();
+        keyBoardEvent = createKeyBoardEvent('input', { data: '2' });
+        inputEl.dispatchEvent(keyBoardEvent);
+        fixture.detectChanges();
+        tick();
+        fixture.detectChanges();
+        expect(inputEl.value).toBe('2.2');
       }));
 
       it('should blur change the value', fakeAsync(() => {
@@ -209,6 +248,12 @@ describe('input-number', () => {
         let inputEl = debugEl.query(By.css('.input-container .input-box')).nativeElement;
         inputEl.focus();
         inputEl.value = 10;
+
+        const hostEl = debugEl.query(By.css('d-input-number')).nativeElement;
+        hostEl.dispatchEvent(new Event('click'));
+        fixture.detectChanges();
+        document.dispatchEvent(new Event('click'));
+        fixture.detectChanges();
 
         inputEl.dispatchEvent(new Event('blur'));
         fixture.detectChanges();
@@ -239,6 +284,90 @@ describe('input-number', () => {
         fixture.detectChanges();
         inputEl = debugEl.query(By.css('.input-container .input-box')).nativeElement;
         expect(inputEl.value).toEqual('2');
+
+        component.value = 0;
+        fixture.detectChanges();
+        tick();
+        fixture.detectChanges();
+        incBtn.dispatchEvent(new Event('click'));
+        fixture.detectChanges();
+        tick();
+        fixture.detectChanges();
+        expect(inputEl.value).toEqual('1');
+        descBtn.dispatchEvent(new Event('click'));
+        fixture.detectChanges();
+        tick();
+        fixture.detectChanges();
+        expect(inputEl.value).toEqual('0');
+        descBtn.dispatchEvent(new Event('click'));
+        fixture.detectChanges();
+        tick();
+        fixture.detectChanges();
+        expect(inputEl.value).toEqual('-1');
+
+        component.decimalLimit = null;
+        fixture.detectChanges();
+        incBtn.dispatchEvent(new Event('click'));
+        fixture.detectChanges();
+        tick();
+        fixture.detectChanges();
+        expect(inputEl.value).toEqual('0');
+        incBtn.dispatchEvent(new Event('click'));
+        fixture.detectChanges();
+        tick();
+        fixture.detectChanges();
+        expect(inputEl.value).toEqual('1');
+        descBtn.dispatchEvent(new Event('click'));
+        fixture.detectChanges();
+        tick();
+        fixture.detectChanges();
+        expect(inputEl.value).toEqual('0');
+
+        component.decimalLimit = 2;
+        fixture.detectChanges();
+        incBtn.dispatchEvent(new Event('click'));
+        fixture.detectChanges();
+        tick();
+        fixture.detectChanges();
+        expect(inputEl.value).toEqual('1');
+        descBtn.dispatchEvent(new Event('click'));
+        fixture.detectChanges();
+        tick();
+        fixture.detectChanges();
+        expect(inputEl.value).toEqual('0');
+        descBtn.dispatchEvent(new Event('click'));
+        fixture.detectChanges();
+        tick();
+        fixture.detectChanges();
+        expect(inputEl.value).toEqual('-1');
+      }));
+
+      it('should min max equal works', fakeAsync(() => {
+        component.value = component.min = component.max = 0;
+
+        let inputEl = debugEl.query(By.css('.input-container .input-box')).nativeElement;
+        inputEl.focus();
+        fixture.detectChanges();
+        tick();
+        fixture.detectChanges();
+
+        const incBtn = debugEl.query(By.css('.input-control-button.input-control-inc')).nativeElement;
+        const descBtn = debugEl.query(By.css('.input-control-button.input-control-dec')).nativeElement;
+        incBtn.dispatchEvent(new Event('click'));
+        fixture.detectChanges();
+        tick();
+        fixture.detectChanges();
+        inputEl = debugEl.query(By.css('.input-container .input-box')).nativeElement;
+        expect(inputEl.value).toEqual(component.max + '');
+        descBtn.dispatchEvent(new Event('click'));
+        fixture.detectChanges();
+        tick();
+        fixture.detectChanges();
+        inputEl = debugEl.query(By.css('.input-container .input-box')).nativeElement;
+        expect(inputEl.value).toEqual(component.max + '');
+
+        component.min = component.max = null;
+        fixture.detectChanges();
       }));
 
       it('should not increase when exceed max number', fakeAsync(() => {
@@ -337,6 +466,8 @@ describe('input-number', () => {
       fixture = TestBed.createComponent(TestInputNumberDisabledComponent);
       debugEl = fixture.debugElement;
       component = fixture.componentInstance;
+
+      component.disabled = true;
     });
 
     it('should disabled work', fakeAsync(() => {
@@ -346,14 +477,49 @@ describe('input-number', () => {
       tick(); // change bind value
       fixture.detectChanges();
 
-      let inputEl = debugEl.query(By.css('.input-container .input-box')).nativeElement;
+      const inputEl = debugEl.query(By.css('.input-container .input-box')).nativeElement;
+      inputEl.dispatchEvent(new Event('blur'));
       expect(inputEl.value).toEqual('2');
+      expect(inputEl.classList).toContain('disabled');
 
-      component.disabled = true;
+      inputEl.value = '5';
+      const keyBoardEvent = createKeyBoardEvent('input', { data: '5' });
+      inputEl.dispatchEvent(keyBoardEvent);
+      fixture.detectChanges();
+      tick();
+      fixture.detectChanges();
+      expect(inputEl.value).toEqual('5');
+    }));
+  });
+
+  describe('autofocus work', () => {
+    let fixture: ComponentFixture<TestInputNumberComponent>;
+    let debugEl: DebugElement;
+    let component: TestInputNumberComponent;
+
+    beforeEach(() => {
+      TestBed.configureTestingModule({
+        imports: [FormsModule, InputNumberModule],
+        declarations: [TestInputNumberComponent],
+      });
+    });
+
+    beforeEach(() => {
+      fixture = TestBed.createComponent(TestInputNumberComponent);
+      debugEl = fixture.debugElement;
+      component = fixture.componentInstance;
+
+      component.autoFocus = true;
+    });
+
+    it('should autofocus work', fakeAsync(() => {
+      fixture.detectChanges();
+      tick(); // get initial value
+      fixture.detectChanges();
+      tick(); // change bind value
       fixture.detectChanges();
 
-      inputEl = debugEl.query(By.css('.input-container .input-box')).nativeElement;
-      expect(inputEl.classList).toContain('disabled');
+      expect(debugEl.query(By.css('.input-control-buttons')).styles.display).not.toBe('none');
     }));
   });
 });

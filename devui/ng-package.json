@@ -8,5 +8,5 @@
       "enquire.js": "enquire.js"
     }
   },
-  "whitelistedNonPeerDependencies": ["@angular/cdk","date-fns", "lodash-es", "popper.js", "enquire.js", "css-vars-ponyfill"]
+  "whitelistedNonPeerDependencies": ["@angular/cdk","date-fns", "lodash-es", "@popperjs/core", "enquire.js", "css-vars-ponyfill"]
 }

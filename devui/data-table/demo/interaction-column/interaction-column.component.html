@@ -23,6 +23,7 @@
     [sortable]="true"
     [width]="'150px'"
     [filterable]="true"
+    [closeFilterWhenScroll]="true"
     [filterList]="filterListMulti"
     [beforeFilter]="beforeFilter"
     (filterChange)="filterChangeMultiple($event)"
@@ -35,6 +36,7 @@
     [minWidth]="'100px'"
     [maxWidth]="'200px'"
     [filterable]="true"
+    [closeFilterWhenScroll]="true"
     [filterIconActive]="filterIconActive"
     [customFilterTemplate]="customFilterTemplate"
   ></d-column>
@@ -104,10 +106,10 @@
     </div>
     <div class="line"></div>
     <div>
-      <span class="button-style" style="border-right: 1px solid #e8f0fd; margin-left: 10px;" (click)="filterSource(dropdown)">CONFIRM</span>
+      <span class="button-style" style="border-right: 1px solid #e8f0fd; margin-left: 10px" (click)="filterSource(dropdown)">CONFIRM</span>
       <span class="button-style" (click)="cancelFilter(dropdown)">CANCEL</span>
     </div>
   </div>
 </ng-template>
-<p style="margin-top: 20px;">Current Sort parameters:</p>
+<p style="margin-top: 20px">Current Sort parameters:</p>
 <pre>{{ sortedColumn | json }}</pre>

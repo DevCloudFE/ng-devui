@@ -45,7 +45,7 @@ import { ScrollTargetComponent } from './scroll-target/scroll-target.component';
     HashComponent,
     ScrollTargetComponent
   ],
-
+  
 })
 export class AnchorDemoModule {
 }

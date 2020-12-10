@@ -66,10 +66,10 @@ export class TransferComponent implements OnInit, OnChanges, OnDestroy {
 
   constructor(private i18n: I18nService) {
     this.id = TransferComponent.ID_SEED++;
-    this.setI18nText();
   }
 
   ngOnInit() {
+    this.setI18nText();
     this.sourceDisplayOption = this.sourceOption;
     this.sourceDisplayOptionLen = this.sourceDisplayOption.length;
     this.targetDisplayOption = this.targetOption;

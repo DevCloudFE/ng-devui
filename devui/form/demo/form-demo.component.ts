@@ -88,6 +88,18 @@ export class FormDemoComponent {
       code: require('!!raw-loader!./validate-template/custom-message-show/custom-message-show.component.scss')
     },
   ];
+  DebounceTimeSource: Array<DevuiSourceData> = [
+    {
+      title: 'HTML',
+      language: 'xml',
+      code: require('!!raw-loader!./validate-template/debounce-time/debounce-time.component.html')
+    },
+    {
+      title: 'TS',
+      language: 'typescript',
+      code: require('!!raw-loader!./validate-template/debounce-time/debounce-time.component.ts')
+    }
+  ];
   ValidateTemplateForm: Array<DevuiSourceData> = [
     {
       title: 'HTML',

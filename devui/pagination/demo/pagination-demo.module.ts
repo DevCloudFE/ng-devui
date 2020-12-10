@@ -39,7 +39,7 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
     LiteComponent,
     WidgetsComponent
   ],
-
+  
 })
 export class PaginationDemoModule {
 }

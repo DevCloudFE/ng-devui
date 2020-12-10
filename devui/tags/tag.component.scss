@@ -1,5 +1,6 @@
 @import '../style/theme/color';
-@import '../style/core/_font';
+@import '../style/theme/corner';
+@import '../style/theme/_font';
 
 :host {
   display: inline-block;
@@ -13,7 +14,7 @@
   line-height: 20px;
   color: $devui-text;
   background-color: $devui-label-bg;
-  border-radius: 2px;
+  border-radius: $devui-border-radius;
   border-width: 0;
   border-style: solid;
   border-color: inherit;
@@ -24,6 +25,7 @@
 
   .content-wrapper {
     display: none;
+    pointer-events: none;
   }
 
   span {

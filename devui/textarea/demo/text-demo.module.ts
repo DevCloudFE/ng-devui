@@ -32,7 +32,7 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
     BasicComponent,
     ResizeComponent
   ],
-
+  
 })
 export class TextDemoModule {
 }

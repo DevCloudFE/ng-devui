@@ -1,0 +1,67 @@
+<table
+  *ngIf="data.position"
+  [attr.class]="'devui-time-axis ' + data.position"
+  [style.margin-left.px]="bottomPositionMarginLeft"
+  [style.margin-right.px]="-bottomPositionMarginLeft"
+>
+  <tr *ngFor="let listObj of data.list; let index = index">
+    <td
+      *ngIf="data.position === 'left'"
+      class="devui-axis-time-time {{ listObj.type }} {{ listObj.iconClass }} {{ listObj.status }}"
+      title="{{ listObj.time }}"
+    >
+      <span>
+        {{ listObj.time }}
+      </span>
+    </td>
+    <td
+      *ngIf="data.position === 'bottom'"
+      class="devui-axis-time-time {{ listObj.type }} {{ listObj.iconClass }} {{ listObj.status }}"
+      title="{{ listObj.time }}"
+    >
+      <div title="{{ listObj.time }}">
+        <span>
+          {{ listObj.time }}
+        </span>
+      </div>
+    </td>
+    <td
+      class="devui-time-axis-text"
+      [style.left.px]="bottomPositionTextLeft"
+      title="{{ listObj.text }}"
+      *ngIf="data.model === 'text' || data.model === ''"
+    >
+      <span>
+        {{ listObj.text }}
+      </span>
+    </td>
+    <td
+      class="devui-time-axis-text"
+      [style.left.px]="bottomPositionTextLeft"
+      *ngIf="data.model === 'html'"
+      [innerHTML]="listObj.text | safe: 'html'"
+    ></td>
+    <td class="devui-time-axis-text" *ngIf="data.model === 'template'" [style.left.px]="bottomPositionTextLeft">
+      <ng-template
+        [ngTemplateOutlet]="contentTemplate ? contentTemplate : default"
+        [ngTemplateOutletContext]="{ $implicit: this, index: index, data: listObj.data }"
+      ></ng-template>
+    </td>
+  </tr>
+</table>
+
+<table class="devui-time-axis devui-time-axis-h" *ngIf="data.direction == 'horizontal' && (data.model == '' || data.model == 'text')">
+  <tr>
+    <td
+      class="devui-time-axis-text"
+      class="{{ listObj.type }} {{ listObj.status }}  {{ listObj.iconClass }}"
+      *ngFor="let listObj of data.list"
+    >
+      {{ listObj.text }}
+    </td>
+  </tr>
+</table>
+
+<ng-template #default>
+  <table></table>
+</ng-template>

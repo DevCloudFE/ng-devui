@@ -8,6 +8,7 @@ import { MultipleUploadComponent } from './multiple-upload.component';
 import { UploadedFilesComponent } from './uploaded-files.component';
 import { SelectFiles } from './select-files.utils';
 import { FileDropDirective } from './file-drop.directive';
+import { UploadDirective } from './upload.directive';
 import { ButtonModule } from 'ng-devui/button';
 import { ToastModule } from 'ng-devui/toast';
 import { ProgressModule } from 'ng-devui/progress';
@@ -24,7 +25,8 @@ import { ProgressModule } from 'ng-devui/progress';
     SingleUploadComponent,
     MultipleUploadComponent,
     UploadedFilesComponent,
-    FileDropDirective
+    FileDropDirective,
+    UploadDirective
   ],
   declarations: [
     MultipleUploadViewComponent,
@@ -32,9 +34,10 @@ import { ProgressModule } from 'ng-devui/progress';
     SingleUploadComponent,
     MultipleUploadComponent,
     UploadedFilesComponent,
-    FileDropDirective
+    FileDropDirective,
+    UploadDirective
   ],
-
+  
   providers: [SelectFiles],
 })
 export class UploadModule {

@@ -2,63 +2,56 @@
   <d-demo-nav [navItems]="navItems"></d-demo-nav>
   <div class="demo-example" [dAnchor]="'standard-dialog'">
     <div class="demo-title">标准对话框</div>
-    <div class="demo-text">
-      使用dialogService可拖拽的标准对话框
-    </div>
+    <div class="demo-text">使用dialogService可拖拽的标准对话框</div>
     <d-codebox id="basic" [sourceData]="basicSource">
       <d-basic demo></d-basic>
     </d-codebox>
   </div>
   <div class="demo-example" [dAnchor]="'custom-dialog'">
     <div class="demo-title">自定义对话框</div>
-    <div class="demo-text">
-      使用modalService可以自定义对话框内的所有内容
-    </div>
+    <div class="demo-text">使用modalService可以自定义对话框内的所有内容</div>
     <d-codebox id="customize" [sourceData]="customizeSource">
       <d-customize demo></d-customize>
     </d-codebox>
   </div>
   <div class="demo-example" [dAnchor]="'intercept-dialog-closed'">
     <div class="demo-title">拦截对话框关闭</div>
-    <div class="demo-text">
-      通过 beforeHidden 设置在关闭弹出框时的拦截方法
-    </div>
+    <div class="demo-text">通过 beforeHidden 设置在关闭弹出框时的拦截方法</div>
     <d-codebox id="hide" [sourceData]="hideSource">
       <d-hide demo></d-hide>
     </d-codebox>
   </div>
   <div class="demo-example" [dAnchor]="'message-hint'">
     <div class="demo-title">信息提示</div>
-    <div class="demo-text">
-      各种类型的信息提示框
-    </div>
+    <div class="demo-text">各种类型的信息提示框</div>
     <d-codebox id="tips" [sourceData]="tipsSource">
       <d-tips demo></d-tips>
     </d-codebox>
   </div>
   <div class="demo-example" [dAnchor]="'warning-pop-up'">
     <div class="demo-title">警告弹出框</div>
-    <div class="demo-text">
-      标准警告弹出框
-    </div>
+    <div class="demo-text">标准警告弹出框</div>
     <d-codebox id="warning" [sourceData]="warningSource">
       <d-warning demo></d-warning>
     </d-codebox>
   </div>
+  <div class="demo-example" [dAnchor]="'update-button-options'">
+    <div class="demo-title">更新标准弹出框按钮状态</div>
+    <div class="demo-text">通过update方法来更新dialog配置的buttons配置</div>
+    <d-codebox id="autofocus" [sourceData]="basicUpdateSource">
+      <d-basic-update demo></d-basic-update>
+    </d-codebox>
+  </div>
   <div class="demo-example" [dAnchor]="'configure-button-to-get-focus-automatically'">
     <div class="demo-title">配置按钮自动获得焦点</div>
-    <div class="demo-text">
-      配置dialogService的buttons中的autofocus属性可以设置按钮自动获得焦点，可以通过回车直接触发按钮点击
-    </div>
+    <div class="demo-text">配置dialogService的buttons中的autofocus属性可以设置按钮自动获得焦点，可以通过回车直接触发按钮点击</div>
     <d-codebox id="autofocus" [sourceData]="autofocusSource">
       <d-autofocus demo></d-autofocus>
     </d-codebox>
   </div>
   <div class="demo-example" [dAnchor]="'template-content'">
     <div class="demo-title">自定义弹出框内容模板</div>
-    <div class="demo-text">
-      支持传入contentTemplate属性来配置弹出框内容模板
-    </div>
+    <div class="demo-text">支持传入contentTemplate属性来配置弹出框内容模板</div>
     <d-codebox id="autofocus" [sourceData]="templateSource">
       <d-template demo></d-template>
     </d-codebox>

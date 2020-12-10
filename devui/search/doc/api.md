@@ -7,6 +7,7 @@
 |   maxLength   | `number`  | Number.MAX_SAFE_INTEGER | 可选，输入框的 max-length               | [双向绑定](/components/search/demo#bidirectional-binding) |
 |     delay     | `number`  |           300           | 可选，debounceTime 的延迟               |
 |   disabled    | `boolean` |          false          | 可选，输入框是否可用                    |
+|   autoFocus    | `boolean` |          false          | 可选，输入框是否自动对焦               | [基本用法](/components/search/demo#basic-usage)       |
 | isKeyupSearch | `boolean` |          false          | 可选，是否支持输入值立即出发 searchFn   | [基本用法](/components/search/demo#basic-usage)           |
 | iconPosition  | `string` |          'right'          | 可选，搜索图标位置，有两种选择 'left'/'right'| [基本用法](/components/search/demo#basic-usage)
 |   cssClass    | `string`  |           ''            | 可选，支持传入类名到输入框上            |                                                          |

@@ -12,9 +12,10 @@
     color: isColorfulTag ? (checked ? '#fff' : customColor) : '',
     'background-color': isColorfulTag ? (checked ? customColor : '#fff') : ''
   }"
+  title="{{ titleContent ? titleContent : tag }}"
 >
   <div class="content-wrapper" [ngStyle]="{ 'background-color': colorMap[labelStyle] || customColor }"></div>
-  <span *ngIf="!customViewTemplate" title="{{ titleContent ? titleContent : tag }}">{{ tag }}</span>
+  <span *ngIf="!customViewTemplate">{{ tag }}</span>
   <ng-template *ngIf="customViewTemplate" [ngTemplateOutlet]="customViewTemplate" [ngTemplateOutletContext]="{ tag: tag }"></ng-template>
   <a class="remove-button" [ngClass]="{ 'default-button': !isColorfulTag }" *ngIf="deletable" (click)="removeTag($event, tag)">
     <svg

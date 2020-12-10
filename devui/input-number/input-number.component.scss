@@ -1,5 +1,6 @@
 @import '../style/theme/color';
-@import '../style/core/_font';
+@import '../style/theme/corner';
+@import '../style/theme/_font';
 
 :host {
   display: inline-block;
@@ -45,7 +46,7 @@
     padding: 5px 10px;
     font-size: $devui-font-size;
     vertical-align: middle;
-    border-radius: 2px;
+    border-radius: $devui-border-radius;
     outline: none;
     width: 100%;
     line-height: 20px;
@@ -75,7 +76,7 @@
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     line-height: 100%;
-    border-radius: 0 2px 2px 0;
+    border-radius: 0 $devui-border-radius $devui-border-radius 0;
 
     &.disabled {
       border-left-color: $devui-disabled-line;

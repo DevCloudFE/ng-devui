@@ -88,6 +88,8 @@ export class DialogService {
       modalRef.instance.hide();
     };
 
+    modalRef.instance.updateButtonOptions = buttonOptions => modalContainerRef.instance.updateButtonOptions(buttonOptions);
+
     modalRef.instance.onHidden = () => {
       if (!bodyScrollable && modalRef.instance.documentOverFlow) {
         this.renderer.removeStyle(document.body, 'top');

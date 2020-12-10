@@ -1,11 +1,12 @@
 @import '../style/theme/color';
+@import '../style/theme/corner';
 
 :host {
   display: flex;
   width: 100%;
   height: auto;
   position: relative;
-  border-radius: 2px;
+  border-radius: $devui-border-radius;
 
   &.devui-splitter-horizontal {
     flex-direction: row;

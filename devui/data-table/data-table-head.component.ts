@@ -259,6 +259,7 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
 
   onHeadClick(event: SortEventArg, column: DataTableColumnTmplComponent) {
     event.field = column.field;
+    delete event.th;
     this.headClickSortEvent.emit(event);
   }
 

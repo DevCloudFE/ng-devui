@@ -97,7 +97,7 @@ import { TableTdService } from './table/body/td/td.service';
     TableTbodyComponent,
     TableTdComponent
   ],
-
+  
   providers: [ TableTdService ],
 })
 export class DataTableModule {

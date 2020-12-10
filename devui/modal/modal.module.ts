@@ -12,10 +12,9 @@ import {
 } from './modal.directive';
 import { ModalHeaderComponent } from './modal-header.component';
 import { ModalFooterComponent } from './modal-footer.component';
-import { ModalAlertComponent } from './modal-alert.component';
 import { DialogService } from './dialog.service';
 import { DocumentRef } from 'ng-devui/window-ref';
-import {ButtonModule} from 'ng-devui/button';
+import { ButtonModule } from 'ng-devui/button';
 import { MovableDirective } from './movable.directive';
 
 @NgModule({
@@ -31,7 +30,6 @@ import { MovableDirective } from './movable.directive';
     ModalContentDirective,
     ModalHeaderComponent,
     ModalFooterComponent,
-    ModalAlertComponent,
     MovableDirective
   ],
   exports: [
@@ -39,7 +37,6 @@ import { MovableDirective } from './movable.directive';
     ModalContainerComponent,
     ModalHeaderComponent,
     ModalFooterComponent,
-    ModalAlertComponent,
     MovableDirective
   ],
   providers: [
@@ -47,7 +44,7 @@ import { MovableDirective } from './movable.directive';
     DialogService,
     DocumentRef,
   ],
-
+  
 })
 export class ModalModule {
 }

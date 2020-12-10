@@ -1,5 +1,7 @@
 @import '../../devui/style/theme/color';
 @import '../../devui/style/core/font';
+@import '../../devui/style/theme/font';
+@import '../../devui/style/theme/shadow';
 
 body {
   background: $devui-base-bg;
@@ -78,7 +80,7 @@ body {
     width: 100%;
     height: 50px;
     background: $devui-base-bg;
-    box-shadow: 0 2px 4px 0 $devui-shadow;
+    box-shadow: $devui-shadow-length-base $devui-shadow;
 
     a {
       line-height: $line-height-base;

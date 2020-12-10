@@ -149,5 +149,8 @@ export default {
     weeksLater: '周后',
     monthsLater: '个月后',
     yearsLater: '年后',
+  },
+  tagsInput: {
+    tagsReachMaxLength: '您输入的标签已达到最大长度限制',
   }
 };

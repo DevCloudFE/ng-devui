@@ -108,6 +108,13 @@
       <d-datatable-demo-maxheight demo></d-datatable-demo-maxheight>
     </d-codebox>
   </div>
+  <div class="demo-example" [dAnchor]="'fixed-virtual-scroll'">
+    <div class="demo-title">表头固定虚拟滚动</div>
+    <div class="demo-text">使用fixHeader设置表头固定，并启动虚拟滚动，高度自适应</div>
+    <d-codebox id="table-max" [sourceData]="fixHeightVirtualScrollSource">
+      <d-fix-header-virtual-scroll demo></d-fix-header-virtual-scroll>
+    </d-codebox>
+  </div>
   <div class="demo-example" [dAnchor]="'header-grouping'">
     <div class="demo-title">表头分组</div>
     <div class="demo-text">

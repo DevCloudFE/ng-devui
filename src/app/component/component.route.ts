@@ -3,7 +3,6 @@ import { GetStartedComponent } from './get-started.component';
 import { ColorComponent } from './color/color.component';
 import { ThemeGuideComponent } from './theme-guide.component';
 
-
 export const routesConfig = [
   {
     path: '',
@@ -110,6 +109,18 @@ export const routesConfig = [
       cnName: '面包屑',
       description: '导航辅助，显示当前页面层级，可快速返回任意页面',
       tmw: `用户需要了解当前出于什么层级时；用户需要快速返回之前的层级时；用户需要导航至与指定层级相同的任意页面时；`,
+    },
+  },
+  {
+    path: 'back-top',
+    component: ExamplePanelComponent,
+    loadChildren: () => import('../../../devui/back-top/demo/back-top-demo.module').then((m) => m.BackTopDemoModule),
+    data: {
+      type: '导航',
+      name: 'BackTop',
+      cnName: '回到顶部',
+      description: '返回页面顶部的操作按钮',
+      tmw: `当页面内容区域比较长，用户需要频繁返回顶部查看相关内容时；`,
     },
   },
   {
@@ -500,6 +511,18 @@ export const routesConfig = [
     },
   },
   {
+    path: 'time-axis',
+    component: ExamplePanelComponent,
+    loadChildren: () => import('../../../devui/time-axis/demo/time-axis-demo.module').then((m) => m.TimeAxisDemoModule),
+    data: {
+      type: '数据展示',
+      name: 'TimeAxis',
+      cnName: '时间轴',
+      description: '时间轴展示组件',
+      tmw: `当需要向用户展示时间进度和每个时间点的事件状态时。`,
+    },
+  },
+  {
     path: 'toast',
     component: ExamplePanelComponent,
     loadChildren: () => import('../../../devui/toast/demo/toast-demo.module').then((m) => m.ToastDemoModule),
@@ -548,7 +571,6 @@ export const routesConfig = [
         '文件夹、组织架构、生物分类、国家地区等等，世间万物的大多数结构都是树形结构。使用树控件可以完整展现其中的层级关系，并具有展开收起选择等交互功能。',
     },
   },
-
   {
     path: 'upload',
     component: ExamplePanelComponent,
@@ -639,7 +661,7 @@ export const routesConfig = [
     loadChildren: () => import('../../../devui/text-input/demo/text-input-demo.module').then((m) => m.TextInputDemoModule),
     data: {
       type: '数据录入',
-      name: 'Text-input',
+      name: 'TextInput',
       cnName: '文本框',
       description: '文本域是用户可以录入、编辑文本时的区域。它允许用户在界面中输入文本，常出现在列表和对话框中。',
       tmw: `需要手动输入文字使用`,

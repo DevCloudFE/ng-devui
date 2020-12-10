@@ -49,6 +49,7 @@ export class SearchComponent implements ControlValueAccessor, OnInit, OnDestroy,
   @Input() disabled = false;
   @Input() cssClass: string;
   @Input() iconPosition = 'right';
+  @Input() autoFocus = false;
   @Output() searchFn = new EventEmitter<string>();
   @ViewChild('filterInput', { static: true }) filterInputElement: ElementRef;
   @ViewChild('line') lineElement: ElementRef;

@@ -1,0 +1,252 @@
+@import '../style/theme/color';
+
+/* TODO: table修改为ul后，宽度可向下继承，以解决自定义模板中中无法使用相对宽度问题 */
+table {
+  background-color: transparent;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.devui-time-axis td {
+  vertical-align: top;
+  padding: 6px 6px 20px 6px;
+}
+
+.devui-time-axis.bottom td:not(.devui-time-axis-text) {
+  padding: 6px 6px 40px 40px;
+}
+
+/* TODO: table变更为ul后，采用margin-left，不占用实际空间 */
+.devui-time-axis.bottom td.devui-time-axis-text {
+  position: relative;
+}
+
+.devui-time-axis .primary,
+.devui-time-axis .success,
+.devui-time-axis .danger,
+.devui-time-axis .warning {
+  position: relative;
+}
+
+.left.devui-time-axis {
+  .primary,
+  .success,
+  .danger,
+  .warning {
+    padding: 6px 35px 10px 0;
+    text-align: right;
+  }
+}
+
+.devui-time-axis .primary::before,
+.devui-time-axis .success::before,
+.devui-time-axis .danger::before,
+.devui-time-axis .warning::before {
+  position: absolute;
+  top: 0.4em;
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 50%;
+  line-height: 1.5em;
+  text-align: center;
+  z-index: 3;
+  color: white;
+  background-color: white;
+  box-sizing: border-box;
+}
+
+.devui-time-axis.left {
+  .primary,
+  .success,
+  .danger,
+  .warning {
+    &::before {
+      right: 5px;
+    }
+  }
+}
+
+.devui-time-axis.bottom {
+  .primary,
+  .success,
+  .danger,
+  .warning {
+    &::before {
+      left: 0;
+    }
+  }
+}
+
+.devui-time-axis .primary::before {
+  content: '';
+  border: 2px solid $devui-placeholder;
+}
+
+.devui-time-axis .success::before {
+  content: '\2713';
+  background-color: $devui-success;
+}
+
+.devui-time-axis .danger::before {
+  content: '\2715';
+  background-color: $devui-danger;
+}
+
+.devui-time-axis .warning::before {
+  content: '!';
+  background-color: $devui-warning;
+  font-weight: 700;
+}
+
+.devui-time-axis .primary::after,
+.devui-time-axis .success::after,
+.devui-time-axis .danger::after,
+.devui-time-axis .warning::after {
+  position: absolute;
+  content: '';
+  width: 2px;
+  border-left: 1px solid #cccccc;
+  z-index: 2;
+}
+
+.devui-time-axis.left {
+  .primary,
+  .success,
+  .danger,
+  .warning {
+    &::after {
+      right: calc(0.75em + 4px);
+    }
+  }
+}
+
+.devui-time-axis.bottom {
+  .primary,
+  .success,
+  .danger,
+  .warning {
+    &::after {
+      left: 0.75em;
+    }
+  }
+}
+
+.devui-time-axis.left .primary::after,
+.devui-time-axis.left .success::after,
+.devui-time-axis.left .danger::after,
+.devui-time-axis.left .warning::after {
+  height: calc(100% - 2.2em);
+  top: 2.2em;
+}
+
+.devui-time-axis.bottom .primary::after,
+.devui-time-axis.bottom .success::after,
+.devui-time-axis.bottom .danger::after,
+.devui-time-axis.bottom .warning::after {
+  height: calc(100% - 4em);
+  top: 4em;
+}
+
+.devui-time-axis.bottom .devui-axis-time-time > div {
+  width: 100%;
+  display: inline-flex;
+  justify-content: center;
+  position: relative;
+  left: calc(-50% - 30px);
+  top: 20px;
+}
+
+.devui-time-axis-h .primary,
+.devui-time-axis-h .success,
+.devui-time-axis-h .danger,
+.devui-time-axis-h .warning {
+  width: 20%;
+  position: relative;
+  padding: 6px 0 10px 35px;
+}
+
+.devui-time-axis-h .primary,
+.devui-time-axis-h .success,
+.devui-time-axis-h .danger,
+.devui-time-axis-h .warning {
+  padding: 2em 0 0;
+  text-align: center;
+}
+
+.devui-time-axis-h .primary::before,
+.devui-time-axis-h .success::before,
+.devui-time-axis-h .danger::before,
+.devui-time-axis-h .warning::before {
+  left: calc(50% - 10px);
+}
+
+.devui-time-axis-h .primary::after,
+.devui-time-axis-h .success::after,
+.devui-time-axis-h .danger::after,
+.devui-time-axis-h .warning::after {
+  top: 1.1em;
+  width: 100%;
+  left: -50%;
+  border-bottom: 1px solid #cccccc;
+  height: 1px;
+}
+
+.devui-time-axis-h .runned::after {
+  border-bottom-width: 2px;
+  border-bottom-color: $devui-success;
+}
+
+.devui-time-axis-h .running::after {
+  border-bottom-width: 2px;
+  border-bottom-style: dotted;
+  animation: devui-time-axis-running2 1.5s linear infinite;
+}
+
+@keyframes devui-time-axis-running2 {
+  0% {
+    color: $devui-success;
+    border-color: $devui-success;
+  }
+
+  50% {
+    color: $devui-success;
+    border-color: $devui-success;
+  }
+
+  100% {
+    color: $devui-success;
+    border-color: $devui-success;
+  }
+}
+
+@keyframes devui-time-axis-running {
+  0% {
+    transform: rotate(0deg);
+    color: $devui-success;
+    border-color: $devui-success;
+  }
+
+  50% {
+    transform: rotate(180deg);
+    color: $devui-success;
+    border-color: $devui-success;
+  }
+
+  100% {
+    transform: rotate(360deg);
+    color: $devui-success;
+    border-color: $devui-success;
+  }
+}
+
+.devui-time-axis-h tr:first-of-type > td:first-of-type::after {
+  width: 0;
+}
+
+.devui-time-axis .running::before {
+  color: $devui-success;
+  border: 2px solid $devui-success;
+  line-height: 14px;
+  content: '\21BB';
+  animation: devui-time-axis-running 1.5s linear infinite;
+}

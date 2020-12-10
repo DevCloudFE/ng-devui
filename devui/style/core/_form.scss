@@ -1,5 +1,7 @@
 @import '../theme/color.scss';
-@import './font';
+@import '../theme/shadow';
+@import '../theme/corner';
+@import '../theme/shadow';
 
 @mixin border-position-radius($position: left) {
   border-top-#{$position}-radius: 0;
@@ -25,7 +27,7 @@
   color: $devui-text;
   vertical-align: middle;
   border: 1px solid $devui-form-control-line;
-  border-radius: 2px;
+  border-radius: $devui-border-radius;
   outline: none;
   background-color: $devui-base-bg;
 
@@ -66,7 +68,7 @@
 
 .devui-input-group-addon {
   border: 1px solid $devui-form-control-line;
-  border-radius: 2px;
+  border-radius: $devui-border-radius;
   display: table-cell;
   padding: 0 10px;
   text-align: center;
@@ -88,7 +90,7 @@
   outline: none;
   background-color: $devui-base-bg;
   border: 1px solid $devui-form-control-line;
-  border-radius: 2px;
+  border-radius: $devui-border-radius;
   padding: 5px 10px;
   line-height: 16px; // 解决ie中文字不居中，由于height28px，有10px的padding和2px的border，剩余16px，使用其他的会使文字不居中
   font-size: $devui-font-size;
@@ -187,7 +189,7 @@
   display: block;
   width: 100%;
   height: 28px;
-  border-radius: 2px;
+  border-radius: $devui-border-radius;
   outline: 0;
 
   &[disabled],
@@ -231,17 +233,17 @@
     border-color: $devui-form-control-line-active;
 
     &:not(.devui-select-underlined-border):not(.devui-dropdown-no-border) {
-      box-shadow: 0 2px 5px 0 $devui-shadow;
+      box-shadow: $devui-shadow-length-connected-overlay $devui-shadow;
     }
   }
 
   > .devui-dropdown-origin.devui-dropdown-origin-open:not([disabled]):not(.disabled):not(.devui-disabled) {
     outline: none;
     border-color: $devui-connected-overlay-line;
-    border-radius: 2px 2px 0 0;
+    border-radius: $devui-border-radius $devui-border-radius 0 0;
 
     &:not(.devui-select-underlined-border):not(.devui-dropdown-no-border) {
-      box-shadow: 0 2px 5px 0 $devui-shadow;
+      box-shadow: $devui-shadow-length-connected-overlay $devui-shadow;
     }
   }
 
@@ -272,7 +274,7 @@
       border-top-color: $devui-dividing-line;
 
       &:not(.devui-select-underlined-border) {
-        box-shadow: 0 2px 5px 0 $devui-shadow;
+        box-shadow: $devui-shadow-length-connected-overlay $devui-shadow;
       }
 
       &::after {
@@ -301,7 +303,7 @@
 
   &:not(.devui-select-underlined-border) {
     border: 1px solid $devui-form-control-line;
-    border-radius: 2px;
+    border-radius: $devui-border-radius;
   }
 
   .devui-form-control,

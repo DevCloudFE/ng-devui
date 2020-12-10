@@ -53,6 +53,10 @@
           ></d-toggle>
           <span>跟随系统</span>
         </div>
+        <div class="prefers-color-scheme">
+          <d-toggle class="theme-follow-toggle" [(ngModel)]="protectEye" (ngModelChange)="themeFontSizeChange()"></d-toggle>
+          <span>大字号模式</span>
+        </div>
       </div>
     </section>
   </div>

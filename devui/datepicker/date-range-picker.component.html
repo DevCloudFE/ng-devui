@@ -1,0 +1,54 @@
+<div class="devui-date-range-picker">
+  <d-datepicker-range-single
+    [locale]="locale || i18nLocale"
+    class="devui-date-picker"
+    [cssClass]="cssClass"
+    [disabled]="disabled"
+    [dateConverter]="dateConverter"
+    (rangeSelected)="rangeChange($event)"
+    [dateConfig]="dateConfig"
+    [maxDate]="maxDate"
+    [minDate]="minDate"
+    (hoverOnDate)="selectingDate($event)"
+    [rangePicker]="true"
+    [selectedRange]="[rangeStart, rangeEnd]"
+    (rangeSelecting)="syncRangeStart($event, rightPicker)"
+    (syncPickerPair)="syncPickerPair($event, 'left')"
+    [currentCalendars]="currentCalendars"
+    [showTime]="showTime"
+    #leftPicker
+  ></d-datepicker-range-single>
+  <d-datepicker-range-single
+    [locale]="locale || i18nLocale"
+    class="devui-date-picker"
+    [cssClass]="cssClass"
+    [disabled]="disabled"
+    [dateConverter]="dateConverter"
+    (rangeSelected)="rangeChange($event)"
+    [dateConfig]="dateConfig"
+    [maxDate]="maxDate"
+    [minDate]="minDate"
+    (hoverOnDate)="selectingDate($event)"
+    [rangePicker]="true"
+    [selectedRange]="[rangeStart, rangeEnd]"
+    (rangeSelecting)="syncRangeStart($event, leftPicker)"
+    (syncPickerPair)="syncPickerPair($event, 'right')"
+    [isAuxiliary]="true"
+    [currentCalendars]="currentCalendars"
+    [showTime]="showTime"
+    (consolidateTime)="consolidateTime()"
+    #rightPicker
+  ></d-datepicker-range-single>
+</div>
+<div class="devui-date-range-custom" *ngIf="customViewTemplate" #templateWrap>
+  <ng-template
+    [ngTemplateOutlet]="customViewTemplate"
+    [ngTemplateOutletContext]="{
+      $implicit: this,
+      clearAll: clearAll,
+      chooseDate: chooseDate,
+      rangeStart: rangeStart,
+      rangeEnd: rangeEnd
+    }"
+  ></ng-template>
+</div>

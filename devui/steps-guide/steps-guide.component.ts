@@ -43,13 +43,7 @@ export class StepsGuideComponent implements OnInit, AfterViewInit, OnDestroy {
     private positionService: PositionService,
     private elm: ElementRef,
     private i18n: I18nService
-  ) {
-    this.subScriber = fromEvent(window, 'resize')
-      .pipe(debounceTime(this.SCROLL_REFRESH_INTERVAL))
-      .subscribe((event) => {
-        this.updatePosition();
-      });
-  }
+  ) { }
 
   ngOnInit() {
     this.dots = new Array(this.stepsCount);
@@ -58,6 +52,12 @@ export class StepsGuideComponent implements OnInit, AfterViewInit, OnDestroy {
     const i18nSubscription = this.i18n.langChange().subscribe((data) => {
       this.i18nCommonText = data.stepsGuide;
     });
+
+    this.subScriber = fromEvent(window, 'resize')
+      .pipe(debounceTime(this.SCROLL_REFRESH_INTERVAL))
+      .subscribe((event) => {
+        this.updatePosition();
+      });
     this.subScriber.add(i18nSubscription);
   }
 
@@ -73,7 +73,7 @@ export class StepsGuideComponent implements OnInit, AfterViewInit, OnDestroy {
       .subscribe((event) => {
         this.updatePosition();
       });
-      this.subScriber.add(scrollSubscriber);
+    this.subScriber.add(scrollSubscriber);
   }
 
   ngOnDestroy() {

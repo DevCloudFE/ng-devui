@@ -1,10 +1,7 @@
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  ModalDemoComponent,
-
-} from './modal-demo.component';
+import { ModalDemoComponent } from './modal-demo.component';
 import { ModalAlertComponent } from './customize/modal-alert.component';
 import { ModalModule } from '../modal.module';
 import { ButtonModule } from 'ng-devui/button';
@@ -24,7 +21,7 @@ import { TemplateComponent } from './template/template.component';
 import { DialogContentComponent } from './template/dialog-content/dialog-content.component';
 import { ModalContentComponent } from './template/modal-content/modal-content.component';
 import { TextInputModule } from 'ng-devui/text-input';
-
+import { BasicUpdateComponent } from './basic-update/basic-update.component';
 
 @NgModule({
   imports: [
@@ -58,9 +55,10 @@ import { TextInputModule } from 'ng-devui/text-input';
     AutofocusComponent,
     TemplateComponent,
     DialogContentComponent,
-    ModalContentComponent
+    ModalContentComponent,
+    BasicUpdateComponent,
   ],
-
+  
 })
 export class ModalDemoModule {
 }

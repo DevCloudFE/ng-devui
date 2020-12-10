@@ -33,7 +33,7 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
     BasicComponent,
     CustomComponent,
   ],
-
+  
 })
 export class TagsDemoModule {
 }

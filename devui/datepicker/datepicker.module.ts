@@ -9,6 +9,7 @@ import { DatepickerDirective } from './datepicker.directive';
 import { ButtonModule } from 'ng-devui/button';
 import { DatePickerAppendToBodyComponent } from './datepicker-cdk-overlay.component';
 import { DateRangePickerComponent } from './date-range-picker.component';
+import { DateRangePickerDirective } from './date-range-picker.directive';
 import { SingleDateRangePickerComponent } from './single-date-range-picker.component';
 import { TwoDatePickerComponent } from './two-datepicker/two-datepicker.component';
 import { TwoDatepickerSingleComponent } from './two-datepicker/two-datepicker-single.component';
@@ -27,6 +28,7 @@ import { TwoDatePickerEndDirective } from './two-datepicker/two-datepicker-end.d
     DatepickerDirective,
     DatePickerAppendToBodyComponent,
     DateRangePickerComponent,
+    DateRangePickerDirective,
     SingleDateRangePickerComponent,
     TwoDatePickerComponent,
     TwoDatepickerSingleComponent,
@@ -38,13 +40,14 @@ import { TwoDatePickerEndDirective } from './two-datepicker/two-datepicker-end.d
     DatepickerDirective,
     DatePickerAppendToBodyComponent,
     DateRangePickerComponent,
+    DateRangePickerDirective,
     SingleDateRangePickerComponent,
     TwoDatePickerComponent,
     TwoDatepickerSingleComponent,
     TwoDatePickerStartDirective,
     TwoDatePickerEndDirective
   ],
-
+  
   providers: [DatePickerConfigService]
 })
 export class DatepickerModule {

@@ -11,7 +11,7 @@ import {
   forwardRef,
   SimpleChanges,
   OnChanges,
-  OnInit
+  OnInit,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { of, Observable } from 'rxjs';
@@ -21,11 +21,13 @@ import { AutoCompletePopupComponent, AutoCompleteDirective } from 'ng-devui/auto
   selector: 'd-multi-auto-complete',
   templateUrl: './multi-auto-complete.component.html',
   styleUrls: ['multi-auto-complete.component.scss'],
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => MultiAutoCompleteComponent),
-    multi: true
-  }],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => MultiAutoCompleteComponent),
+      multi: true,
+    },
+  ],
   preserveWhitespaces: false,
 })
 export class MultiAutoCompleteComponent implements OnInit, OnChanges, ControlValueAccessor {
@@ -41,6 +43,7 @@ export class MultiAutoCompleteComponent implements OnInit, OnChanges, ControlVal
   @Input() disabled = false;
   @Input() source: any[];
   @Input() latestSource: any[]; // 最近输入
+  @Input() width: number;
   // @Input() isOpen: boolean;   // 未使用
   // @Input() term: string; // 未使用
   @Input() itemTemplate: TemplateRef<any>;
@@ -61,22 +64,22 @@ export class MultiAutoCompleteComponent implements OnInit, OnChanges, ControlVal
   multipleLabelClassNameSuffix: string = this.overview;
   inputEdit = false;
   multipleLabelClassNameConfig: any = {
-    'border': {
-      'focus': 'border',
-      'blur': 'border'
+    border: {
+      focus: 'border',
+      blur: 'border',
     },
-    'none': {
-      'focus': 'border',
-      'blur': 'none'
+    none: {
+      focus: 'border',
+      blur: 'none',
     },
-    'multiline': {
-      'focus': 'multiline',
-      'blur': 'multiline'
+    multiline: {
+      focus: 'multiline',
+      blur: 'multiline',
     },
-    'single': {
-      'focus': 'single-focus',
-      'blur': 'single'
-    }
+    single: {
+      focus: 'single-focus',
+      blur: 'single',
+    },
   };
   id: number;
   clonePlaceholder: string = this.placeholder;
@@ -95,9 +98,8 @@ export class MultiAutoCompleteComponent implements OnInit, OnChanges, ControlVal
   private onChange = (_: any) => null;
   private onTouched = () => null;
 
-  constructor(
-    private changeDetectorRef: ChangeDetectorRef) {
-    this.formatter = (item) => item ? (item.label || item.toString()) : '';
+  constructor(private changeDetectorRef: ChangeDetectorRef) {
+    this.formatter = (item) => (item ? item.label || item.toString() : '');
     this.valueParser = (item) => item;
     this.id = MultiAutoCompleteComponent.ID_SEED++;
   }
@@ -115,8 +117,8 @@ export class MultiAutoCompleteComponent implements OnInit, OnChanges, ControlVal
   ngOnInit() {
     if (this.source && !this.searchFn) {
       this.searchFn = (term) => {
-        return of(this.source
-          .filter(lang => this.multiItems.indexOf(lang) === -1 && lang.toLowerCase().indexOf(term.toLowerCase()) !== -1)
+        return of(
+          this.source.filter((lang) => this.multiItems.indexOf(lang) === -1 && lang.toLowerCase().indexOf(term.toLowerCase()) !== -1)
         );
       };
     }
@@ -162,7 +164,7 @@ export class MultiAutoCompleteComponent implements OnInit, OnChanges, ControlVal
       if (!inArray) {
         this.multiItems.push(item);
       } else {
-        this.multiItems = this.multiItems.filter(data => {
+        this.multiItems = this.multiItems.filter((data) => {
           if (data.label) {
             return data.label !== item.label;
           } else {
@@ -185,7 +187,7 @@ export class MultiAutoCompleteComponent implements OnInit, OnChanges, ControlVal
 
   public removeLabel(label: any) {
     if (this.multiItems.indexOf(label) !== -1) {
-      this.multiItems = this.multiItems.filter(item => item !== label);
+      this.multiItems = this.multiItems.filter((item) => item !== label);
     }
     this.setSinglePlaceholder();
     this.autoSubmit.emit(this.multiItems);
@@ -198,7 +200,8 @@ export class MultiAutoCompleteComponent implements OnInit, OnChanges, ControlVal
     this.setSinglePlaceholder();
     if ($event.focus) {
       this.multipleLabelClassNameSuffix = this.multipleLabelClassNameConfig[this.overview]['focus'];
-      setTimeout(() => { // 这里需要等待一会才能聚焦
+      setTimeout(() => {
+        // 这里需要等待一会才能聚焦
         this.multiAutoCompleteInputElement.nativeElement.focus();
       }, 0);
     } else {

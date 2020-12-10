@@ -101,14 +101,13 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
   };
   private i18nSubscription: Subscription;
   public i18nCommonText: I18nInterface['common'];
+  public i18nTagsInputText: I18nInterface['tagsInput'];
   // 下拉选中suggestionList的item索引
   selectIndex = 0;
   private onChange = (_: any) => null;
   private onTouch = () => null;
 
-  constructor(private i18n: I18nService) {
-    this.setI18nText();
-  }
+  constructor(private i18n: I18nService) {}
 
   writeValue(value: any): void {
     if (!value) {
@@ -154,6 +153,7 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
   }
 
   ngOnInit() {
+    this.setI18nText();
     this.newTag = '';
     this.searchFn = (term: any) => {
       return of((this.suggestionList ? this.suggestionList : [])
@@ -179,8 +179,10 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
 
   private setI18nText() {
     this.i18nCommonText = this.i18n.getI18nText().common;
+    this.i18nTagsInputText = this.i18n.getI18nText().tagsInput;
     this.i18nSubscription = this.i18n.langChange().subscribe((data) => {
       this.i18nCommonText = data.common;
+      this.i18nTagsInputText = data.tagsInput;
     });
   }
 

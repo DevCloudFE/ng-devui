@@ -1,0 +1,29 @@
+<d-splitter class="splitter-wrapper" orientation="vertical">
+  <d-splitter-pane minSize="200px" (sizeChange)="updateScrollSize()">
+    <d-data-table
+      #dataTable
+      [dataSource]="dataSource"
+      fixHeader="true"
+      [containFixHeaderHeight]="true"
+      [virtualScroll]="true"
+      tableHeight="100%"
+      scrollable="true"
+    >
+      <thead dTableHead>
+        <tr dTableRow>
+          <th dHeadCell *ngFor="let colOption of dataTableOptions.columns">{{ colOption.header }}</th>
+        </tr>
+      </thead>
+      <tbody dTableBody>
+        <ng-template let-rowItem="rowItem" let-rowIndex="rowIndex">
+          <tr dTableRow>
+            <td dTableCell *ngFor="let colOption of dataTableOptions.columns">
+              {{ colOption.fieldType === 'date' ? (rowItem[colOption.field] | i18nDate: 'short':false) : rowItem[colOption.field] }}
+            </td>
+          </tr>
+        </ng-template>
+      </tbody>
+    </d-data-table>
+  </d-splitter-pane>
+  <d-splitter-pane minSize="20px"> 调整分割线高度，table自适应高度 </d-splitter-pane>
+</d-splitter>

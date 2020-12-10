@@ -58,16 +58,16 @@
         </td>
         <td colspan="3" class="devui-dropdown">
           <span class="devui-date-title" (click)="toggle($event, 'year')">{{ i18nText?.yearDisplay(currentYear) }}</span>
-          <span class="devui-date-title" (click)="toggle($event, 'month')">{{ (i18nText?.monthsOfYear)[currentMonth] }}</span>
+          <span class="devui-date-title" (click)="toggle($event, 'month')">{{ (i18nText?.monthsOfYear)[currentMonthIndex] }}</span>
           <ul class="devui-monthOption text-center" [style.display]="openChooseMonth ? 'block' : 'none'">
             <li
               *ngFor="let month of availableMonths"
-              (mouseover)="changeHoverMonth(month.title)"
+              (mouseover)="changeHoverMonth(month.index)"
               (mouseleave)="changeHoverMonth(null)"
-              [ngClass]="{ active: currentMonth == month.title, disabled: month.disabled }"
+              [ngClass]="{ active: currentMonthIndex == month.index, disabled: month.disabled }"
               (click)="onSelectMonth(month)"
             >
-              {{ month.title + 1 }}<span *ngIf="i18nLocale === 'zh-cn'">月</span>
+              {{ month.title }}
             </li>
           </ul>
           <ul class="devui-yearOption text-center" [style.display]="openChooseYear ? 'block' : 'none'">
@@ -148,7 +148,8 @@
             'devui-out-of-month': !day.inMonth,
             'devui-in-month-day': day.inMonth,
             active: isSelectDay(day.date),
-            disabled: isDisabledDay(day.date)
+            disabled: isDisabledDay(day.date),
+            'devui-today': day.isToday
           }"
           (click)="onSelectDate($event, day.date)"
         >

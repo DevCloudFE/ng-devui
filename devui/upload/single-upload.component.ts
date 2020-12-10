@@ -1,28 +1,11 @@
-import {
-  Component,
-  ViewChild,
-  TemplateRef,
-  HostBinding,
-  OnDestroy,
-} from '@angular/core';
-import {
-  Input,
-  Output,
-  EventEmitter,
-} from '@angular/core';
-import {
-  UploadStatus,
-  IUploadOptions,
-  IFileOptions
-} from './file-uploader.types';
+import { Component, ViewChild, TemplateRef, OnDestroy, OnInit } from '@angular/core';
+import { Input, Output, EventEmitter } from '@angular/core';
+import { UploadStatus, IUploadOptions, IFileOptions } from './file-uploader.types';
 import { SingleUploadViewComponent } from './single-upload-view.component';
-import {
-  SelectFiles
-} from './select-files.utils';
+import { SelectFiles } from './select-files.utils';
 import { last, map } from 'rxjs/operators';
 import { Observable, Subscription } from 'rxjs';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
-
 
 @Component({
   selector: 'd-single-upload',
@@ -31,7 +14,7 @@ import { I18nInterface, I18nService } from 'ng-devui/i18n';
   styleUrls: ['./upload-view.component.scss'],
   preserveWhitespaces: false,
 })
-export class SingleUploadComponent implements OnDestroy {
+export class SingleUploadComponent implements OnDestroy , OnInit {
   dSingleUploadView;
   @Input() uploadOptions: IUploadOptions;
   @Input() fileOptions: IFileOptions;
@@ -45,8 +28,8 @@ export class SingleUploadComponent implements OnDestroy {
   @Input() placeholderText: string;
   @Input() uploadText: string;
   /**
-  * @deprecated
-  */
+   * @deprecated
+   */
   @Input() confirmText: string;
   @Input() beforeUpload: (file) => boolean | Promise<boolean> | Observable<boolean>;
   @Input() enableDrop = false;
@@ -63,9 +46,10 @@ export class SingleUploadComponent implements OnDestroy {
   i18nCommonText: I18nInterface['common'];
   i18nSubscription: Subscription;
   errorMsg = [];
-  constructor(
-    private i18n: I18nService,
-    private selectFiles: SelectFiles) {
+  constructor(private i18n: I18nService, private selectFiles: SelectFiles) {
+
+  }
+  ngOnInit(): void {
     this.i18nText = this.i18n.getI18nText().upload;
     this.i18nCommonText = this.i18n.getI18nText().common;
     this.i18nSubscription = this.i18n.langChange().subscribe((data) => {
@@ -75,25 +59,29 @@ export class SingleUploadComponent implements OnDestroy {
   }
 
   _dealFiles(observale) {
-    observale.pipe(map(file => {
-      this.singleUploadViewComponent.addFile(<File>file);
-      return file;
-    })).subscribe(
-      () => {
-        this.singleUploadViewComponent.uploadedFilesComponent.cleanUploadedFiles();
-        this.checkValid();
-        if (this.autoUpload) {
-          this.upload();
+    observale
+      .pipe(
+        map((file) => {
+          this.singleUploadViewComponent.addFile(<File>file);
+          return file;
+        })
+      )
+      .subscribe(
+        () => {
+          this.singleUploadViewComponent.uploadedFilesComponent.cleanUploadedFiles();
+          this.checkValid();
+          if (this.autoUpload) {
+            this.upload();
+          }
+        },
+        (error: Error) => {
+          this.alertMsg(error.message);
         }
-      },
-      (error: Error) => {
-        this.alertMsg(error.message);
-      }
-    );
+      );
   }
 
   checkValid() {
-    this.singleUploadViewComponent.fileUploaders.forEach(fileUploader => {
+    this.singleUploadViewComponent.fileUploaders.forEach((fileUploader) => {
       const checkResult = this.selectFiles._validateFiles(fileUploader.file, this.fileOptions.accept, fileUploader.uploadOptions);
       if (checkResult.checkError) {
         this.singleUploadViewComponent.deletePreUploadFile(fileUploader.file);
@@ -103,15 +91,17 @@ export class SingleUploadComponent implements OnDestroy {
   }
 
   onClick($event) {
-    if (this.disabled || (this.singleUploadViewComponent.fileUploaders[0] &&
-      this.singleUploadViewComponent.fileUploaders[0].status === UploadStatus.uploading)) {
+    if (
+      this.disabled ||
+      (this.singleUploadViewComponent.fileUploaders[0] && this.singleUploadViewComponent.fileUploaders[0].status === UploadStatus.uploading)
+    ) {
       return;
     }
     this._dealFiles(this.selectFiles.triggerSelectFiles(this.fileOptions, this.uploadOptions));
   }
 
   get filename() {
-    return (this.singleUploadViewComponent.getFiles()[0] || {} as File).name || '';
+    return (this.singleUploadViewComponent.getFiles()[0] || ({} as File)).name || '';
   }
 
   onFileDrop(files) {
@@ -132,10 +122,9 @@ export class SingleUploadComponent implements OnDestroy {
       }
       this.singleUploadViewComponent
         .upload()
-        .pipe(
-          last()
-        ).subscribe(
-          (results: Array<{ file: File, response: any }>) => {
+        .pipe(last())
+        .subscribe(
+          (results: Array<{ file: File; response: any }>) => {
             this.successEvent.emit(results);
             results.forEach((result) => {
               this.singleUploadViewComponent.deleteFile(result.file);
@@ -143,7 +132,9 @@ export class SingleUploadComponent implements OnDestroy {
             });
           },
           (error) => {
-            this.singleUploadViewComponent.fileUploaders[0].percentage = 0;
+            if (this.singleUploadViewComponent.fileUploaders[0]) {
+              this.singleUploadViewComponent.fileUploaders[0].percentage = 0;
+            }
             this.singleUploadViewComponent.uploadedFilesComponent.cleanUploadedFiles();
             this.errorEvent.emit(error);
           }
@@ -154,7 +145,7 @@ export class SingleUploadComponent implements OnDestroy {
   canUpload() {
     let uploadResult = Promise.resolve(true);
     if (this.beforeUpload) {
-      const result: any = this.beforeUpload(this.singleUploadViewComponent.getFullFiles()[0] || {} as File);
+      const result: any = this.beforeUpload(this.singleUploadViewComponent.getFullFiles()[0] || ({} as File));
       if (typeof result !== 'undefined') {
         if (result.then) {
           uploadResult = result;
@@ -177,12 +168,11 @@ export class SingleUploadComponent implements OnDestroy {
     this.singleUploadViewComponent.deleteFile(files[0]);
   }
   alertMsg(errorMsg) {
-    this.errorMsg = [{ severity: 'warn', summary: this.i18nText.warning, detail: errorMsg }];
+    this.errorMsg = [{ severity: 'warn', detail: errorMsg }];
   }
   ngOnDestroy() {
     if (this.i18nSubscription) {
       this.i18nSubscription.unsubscribe();
-
     }
   }
 }

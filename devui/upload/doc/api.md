@@ -59,6 +59,26 @@
 |       errorEvent        | `EventEmitter<any>` | 上传错误时的回调函数，返回上传失败的错误信息                                                                           | [多文件上传](/components/upload/demo#multi-files) |
 | deleteUploadedFileEvent | `EventEmitter<any>` | 删除上传文件的回调函数，返回删除文件的路径信息                                                                         | [多文件上传](/components/upload/demo#multi-files) |
 
+## dUpload 指令
+
+|       参数       |                         类型                         |    默认    | 说明                                                                                     | 跳转 Demo                                       |
+| :--------------: | :--------------------------------------------------: | :--------: | :--------------------------------------------------------------------------------------- | ----------------------------------------------- |
+|   fileOptions    |           `IFileOptions`，参考下方 options           |     --     | 必选，待上传文件配置                                                                     | [任意区域上传](/components/upload/demo#customize-area-upload) |
+|  uploadOptions   |          `IUploadOptions`，参考下方 options          |     --     | 必选，上传配置                                                                           | [任意区域上传](/components/upload/demo#customize-area-upload) |
+|  uploadedFiles   |                   `Array <Object>`                   |     []     | 可选，获取已上传的文件列表                                                               | [任意区域上传](/components/upload/demo#customize-area-upload) |
+|  fileUploaders   |                   `Array <Object>`                    |   []    | 可选，获取已选择的文件列表                                                                       | [任意区域上传](/components/upload/demo#customize-area-upload) |
+|    enableDrop    |                      `boolean`                       |   false    | 可选，是否支持拖拽                                                                       | [任意区域上传](/components/upload/demo#customize-area-upload) |
+
+## dUpload 事件
+
+|          参数           |        类型         | 说明                                                                                                                   | 跳转 Demo                                         |
+| :---------------------: | :-----------------: | :--------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
+|        fileOver         | `EventEmitter<any>` | 支持拖拽上传时，文件移动到可拖放区域触发事件,可拖动的元素移出放置目标时返回`false`，元素正在拖动到放置目标时返回`true` | [任意区域上传](/components/upload/demo#customize-area-upload) |
+|        fileDrop         | `EventEmitter<any>` | 支持拖拽上传时，当前拖拽的文件列表回调，单文件上传默认返回第一个文件                                                   | [任意区域上传](/components/upload/demo#customize-area-upload) |
+|      successEvent       | `EventEmitter<any>` | 上传成功时的回调函数,返回文件及 xhr 的响应信息                                                                         | [任意区域上传](/components/upload/demo#customize-area-upload) |
+|       errorEvent        | `EventEmitter<any>` | 上传错误时的回调函数，返回上传失败的错误信息                                                                           | [任意区域上传](/components/upload/demo#customize-area-upload) |
+|      alertMsgEvent      | `EventEmitter<any>` | 上传文件不符合上传文件配置uploadOptions时的回调函数，返回错误提示信息息                                                                         | [任意区域上传](/components/upload/demo#customize-area-upload) |
+
 ### options
 
 ```js

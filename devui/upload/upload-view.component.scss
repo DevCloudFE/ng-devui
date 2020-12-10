@@ -1,12 +1,15 @@
 @import '../style/theme/color';
 @import '../style/theme/variables';
 @import '../style/mixins/index';
-@import '../style/core/_font';
+@import '../style/theme/corner';
+@import '../style/theme/_font';
 
 .devui-input-group {
   position: relative;
-  display: table;
+  display: flex;
+  align-items: center;
   border-collapse: separate;
+  width: 100%;
 }
 
 .devui-input-group:not(.disabled):hover .devui-input-group-addon {
@@ -27,22 +30,38 @@
 }
 
 .devui-input-group .devui-input-group-addon {
-  width: 1%;
+  width: 36px;
   white-space: nowrap;
-  vertical-align: middle;
   font-size: $devui-font-size-icon;
   font-weight: normal;
   line-height: 1;
   color: $devui-text;
-  text-align: center;
   background-color: $devui-area;
   border-top: 1px solid $devui-form-control-line;
   border-bottom: 1px solid $devui-form-control-line;
   border-right: 1px solid $devui-form-control-line;
-  border-radius: 0 2px 2px 0;
-  display: table-cell;
+  border-radius: 0 $devui-border-radius $devui-border-radius 0;
   transition: border-color ease-in-out 0.15s;
   cursor: pointer;
+  height: 100%;
+  position: relative;
+  display: inline-block;
+
+  svg {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.devui-input-group .devui-upload-placeholder {
+  max-height: 28px;
+  max-width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: $devui-placeholder;
 }
 
 .devui-input-group .devui-form-control {
@@ -57,7 +76,7 @@
   color: $devui-text;
   background-image: none;
   border: 1px solid $devui-form-control-line;
-  border-radius: 2px 0 0 2px;
+  border-radius: $devui-border-radius 0 0 $devui-border-radius;
   transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 
   &.devui-files-list {
@@ -65,6 +84,7 @@
     padding: 2px 2px 0 2px;
     overflow-x: hidden;
     overflow-y: auto;
+    max-width: 100%;
 
     .devui-file-item {
       height: 22px;
@@ -74,13 +94,16 @@
     .devui-file-tag {
       position: relative;
       background-color: $devui-label-bg;
-      border-radius: 2px;
+      border-radius: $devui-border-radius;
+      max-width: 100%;
 
       .devui-filename {
         height: 100%;
         display: inline-block;
         vertical-align: middle;
+        max-width: 100%;
         overflow: hidden;
+        white-space: nowrap;
         text-overflow: ellipsis;
       }
 
@@ -109,7 +132,8 @@
       }
 
       &:hover {
-        .devui-upload-progress {
+        .devui-upload-progress,
+        .icon-right {
           display: none;
         }
 

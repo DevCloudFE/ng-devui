@@ -1,7 +1,9 @@
 @import '../style/theme/color';
 @import '../style/theme/variables';
 @import '../style/mixins/index';
-@import '../style/core/_font';
+@import '../style/theme/shadow';
+@import '../style/theme/corner';
+@import '../style/theme/_font';
 
 :host.devui-popover {
   font-size: $devui-font-size;
@@ -10,7 +12,7 @@
   left: 0;
   line-height: 1.5;
   border: none;
-  border-radius: 4px;
+  border-radius: $devui-border-radius-feedback;
   z-index: 1060;
   background-color: $devui-feedback-overlay-bg;
   color: $devui-feedback-overlay-text;
@@ -68,22 +70,22 @@
 
   &.top {
     margin-top: -10px;
-    box-shadow: -5px 5px 20px 0 $devui-shadow;
+    box-shadow: $devui-shadow-length-feedback-overlay $devui-shadow;
   }
 
   &.bottom {
     margin-top: 10px;
-    box-shadow: 5px -5px 20px 0 $devui-shadow;
+    box-shadow: $devui-shadow-length-feedback-overlay $devui-shadow;
   }
 
   &.left {
     margin-left: -10px;
-    box-shadow: 5px -5px 20px 0 $devui-shadow;
+    box-shadow: $devui-shadow-length-feedback-overlay $devui-shadow;
   }
 
   &.right {
     margin-left: 10px;
-    box-shadow: -5px 5px 20px 0 $devui-shadow;
+    box-shadow: $devui-shadow-length-feedback-overlay $devui-shadow;
   }
 }
 
