@@ -16,7 +16,9 @@ import { CustomizeComponent } from './customize/customize.component';
 import { UploadAutoComponent } from './auto/auto.component';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 import { DynamicUploadOptionsComponent } from './dynamic-upload-options/dynamic-upload-options.component';
-
+import { CustomizeAreaUploadComponent } from './customize-area-upload/customize-area-upload.component';
+import { ToastModule } from 'ng-devui/toast';
+import { ProgressModule } from 'ng-devui/progress';
 
 @NgModule({
   imports: [
@@ -29,6 +31,8 @@ import { DynamicUploadOptionsComponent } from './dynamic-upload-options/dynamic-
     HttpClientModule,
     ButtonModule,
     DDemoNavModule,
+    ToastModule,
+    ProgressModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo' },
       { path: 'demo', component: UploadDemoComponent},
@@ -44,9 +48,10 @@ import { DynamicUploadOptionsComponent } from './dynamic-upload-options/dynamic-
     MultiComponent,
     CustomizeComponent,
     UploadAutoComponent,
-    DynamicUploadOptionsComponent
+    DynamicUploadOptionsComponent,
+    CustomizeAreaUploadComponent
   ],
-
+  
   providers: [],
 })
 export class UploadDemoModule {

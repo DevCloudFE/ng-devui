@@ -1,5 +1,7 @@
 @import '../style/mixins/index';
 @import '../style/theme/color';
+@import '../style/theme/shadow';
+@import '../style/theme/corner';
 
 :host {
   display: block;
@@ -19,11 +21,11 @@
   background: $devui-base-bg;
   width: 100%;
   overflow-y: auto;
-  border-radius: 2px;
+  border-radius: $devui-border-radius;
   height: 100%;
 
   &.devui-accordion-menu-normal {
-    box-shadow: 0 2px 4px 0 $devui-shadow;
+    box-shadow: $devui-shadow-length-base $devui-shadow;
   }
 
   & > .devui-accordion-list {

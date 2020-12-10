@@ -13,7 +13,7 @@
       [dValidateRules]="{ message: '表单校验不通过，请检查' }"
       [layout]="'vertical'"
       #planForm="dValidateRules"
-      (ngSubmit)="submitPlanForm()"
+      (dSubmit)="submitPlanForm($event)"
     >
       <div [ngModelGroup]="'textGroup'">
         <d-form-item>
@@ -24,7 +24,10 @@
               autocomplete="off"
               name="planName"
               [(ngModel)]="planFormData.planName"
-              [dValidateRules]="[{ required: true, message: '计划名不能为空' }]"
+              [dValidateRules]="{
+                validators: [{ required: true, message: '计划名不能为空' }],
+                asyncValidators: [{ sameName: this.checkName.bind(this), message: '当前计划名已存在' }]
+              }"
             />
           </d-form-control>
         </d-form-item>

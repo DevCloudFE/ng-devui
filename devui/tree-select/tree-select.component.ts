@@ -438,10 +438,9 @@ export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterV
     event.preventDefault();
     event.stopPropagation();
     if (this.multiple) {
-      const curValue: Array<any> = this.value as Array<any>;
       this.tree.treeFactory.checkNodesById(item.id, false);
-      curValue.splice(index, 1);
-      this.value = curValue;
+      const curValue = this.tree.treeFactory.getCheckedNodes();
+      this.value = curValue.map(node => node.data.originItem);
     } else {
       this.clearAll();
     }

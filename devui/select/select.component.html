@@ -1,7 +1,7 @@
 <div
-  class="devui-drop{{ popDirection === 'bottom' ? 'down' : 'up' }} {{
-    size ? 'devui-select-' + size : ''
-  }} devui-dropdown-origin-wrapper devui-dropdown-origin"
+  class="devui-drop{{ popDirection === 'bottom' ? 'down' : 'up' }} 
+  {{ size ? 'devui-select-' + size : '' }} 
+  devui-dropdown-origin-wrapper devui-dropdown-origin"
   [ngClass]="[isOpen ? 'open' : '', overview === 'underlined' ? 'devui-select-underlined-border' : '', disabled ? 'disabled' : '']"
   #selectWrapper
 >
@@ -162,6 +162,7 @@
       [showLoading]="showLoading"
       positionType="relative"
       [message]="i18nCommonText?.loading"
+      [loadingTemplateRef]="loadingTemplateRef"
       [backdrop]="true"
       class="devui-dropdown-menu-wrap {{ size ? 'devui-dropdown-menu-' + size : '' }}"
       (click)="$event.stopPropagation(); $event.preventDefault()"
@@ -249,7 +250,7 @@
         <ng-container *ngIf="!filter">{{ i18nCommonText?.noData }}</ng-container>
         <ng-container *ngIf="filter">{{ i18nCommonText?.noRecordsFound }}</ng-container>
       </li>
-      <li *ngIf="availableOptions.length === 0 && noResultItemTemplate">
+      <li *ngIf="availableOptions.length === 0 && noResultItemTemplate" class="devui-no-data-tip">
         <ng-template [ngTemplateOutlet]="noResultItemTemplate" [ngTemplateOutletContext]="{ options: options }"></ng-template>
       </li>
     </ul>
@@ -269,7 +270,7 @@
       width: '100%',
       'max-height': scrollHight
     }"
-    [itemSize]="getVirtualScrollItemSize(size)"
+    [itemSize]="realVirtualScrollItemSize"
     class="viewport-wrapper devui-select-list-unstyled devui-scrollbar"
     #dropdownUl
   >

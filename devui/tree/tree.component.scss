@@ -1,7 +1,8 @@
 @import '../style/theme/color';
 @import '../style/theme/variables';
 @import '../style/mixins/index';
-@import '../style/core/_font';
+@import '../style/theme/corner';
+@import '../style/theme/_font';
 
 $keyframe-blue: #5e7ce0;
 
@@ -70,7 +71,7 @@ $keyframe-blue: #5e7ce0;
     margin-left: 5px;
     display: inline-block;
     border: 1px dashed transparent;
-    border-radius: 2px;
+    border-radius: $devui-border-radius;
     max-width: 100%;
 
     &:not(.disabled) {

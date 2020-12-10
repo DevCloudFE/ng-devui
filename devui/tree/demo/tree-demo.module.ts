@@ -24,6 +24,8 @@ import { SafePipeModule } from 'ng-devui/utils';
 import { TooltipModule } from 'ng-devui/tooltip';
 import { SearchModule } from 'ng-devui/search';
 import { DropDownModule } from 'ng-devui/dropdown';
+import { MergeNodeComponent } from './merge-node/merge-node.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -58,9 +60,10 @@ import { DropDownModule } from 'ng-devui/dropdown';
     SearchFilterComponent,
     CheckControlComponent,
     VirtualScrollComponent,
-    CustomLoadingComponent
+    CustomLoadingComponent,
+    MergeNodeComponent
   ],
-
+  
 })
 export class TreeDemoModule {
 }

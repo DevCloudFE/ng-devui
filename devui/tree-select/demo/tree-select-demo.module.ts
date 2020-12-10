@@ -68,7 +68,7 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
     TreeSelectKeysComponent,
     TreeSelectIconParentComponent
   ],
-
+  
   providers: [],
 })
 export class TreeSelectDemoModule {

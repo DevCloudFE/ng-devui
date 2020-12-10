@@ -64,7 +64,7 @@ export class SelectDemoComponent {
     {title: 'TS', language: 'typescript', code:
       require('!!raw-loader!./lazy-load-virtual-scroll/lazy-load-virtual-scroll.component.ts')},
     {title: 'SCSS', language: 'css', code:
-      require('!!raw-loader!./lazy-load-virtual-scroll/lazy-load-virtual-scroll.component.css')},
+      require('!!raw-loader!./lazy-load-virtual-scroll/lazy-load-virtual-scroll.component.scss')},
   ];
   LoadingComponent: Array<DevuiSourceData> = [
     {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./loading/loading.component.html')},

@@ -15,8 +15,15 @@ export class PanelDemoComponent {
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./type/type.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./type/type.component.ts') },
   ];
+
+  conditionChangeSource: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./condition-change/condition-change.component.html') },
+    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./condition-change/condition-change.component.ts') },
+  ];
+
   navItems = [
-    { dAnchorLink: 'basic-usage', value: '基本用法'},
-    { dAnchorLink: 'multiple-types', value: '多种类型'}
+    { dAnchorLink: 'basic-usage', value: '基本用法' },
+    { dAnchorLink: 'multiple-types', value: '多种类型' },
+    { dAnchorLink: 'condition-change', value: '根据条件阻止折叠' }
   ];
 }

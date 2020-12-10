@@ -1,4 +1,6 @@
 @import '../style/theme/color';
+@import '../style/theme/shadow';
+@import '../style/theme/corner';
 
 .devui-dropdown-overlay {
   position: relative;
@@ -8,11 +10,11 @@
 
 .devui-date-range-wrapper {
   display: inline-flex !important;
-  box-shadow: 0 4px 8px 0 $devui-shadow;
+  box-shadow: $devui-shadow-length-connected-overlay $devui-shadow;
   background-color: $devui-connected-overlay-bg;
   transform: perspective(1px) translate3d(0, 0, 0);
   flex-direction: column;
-  border-radius: 2px;
+  border-radius: $devui-border-radius;
 
   .devui-date-range-picker {
     display: inline-flex !important;

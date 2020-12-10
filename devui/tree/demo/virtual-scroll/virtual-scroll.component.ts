@@ -207,5 +207,7 @@ export class VirtualScrollComponent implements OnInit {
   onDrop(data) {
     this.transferData = data.event.dataTransfer.getData('Text');
   }
-
+  afterTreeInit(event) {
+    console.log('finished', event);
+  }
 }

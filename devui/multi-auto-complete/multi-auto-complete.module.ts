@@ -10,7 +10,7 @@ import { AutoCompleteModule } from 'ng-devui/auto-complete';
   exports: [MultiAutoCompleteComponent],
   declarations: [MultiAutoCompleteComponent],
   providers: [],
-
+  
 })
 export class MultiAutoCompleteModule {
 }

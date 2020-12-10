@@ -105,4 +105,7 @@ export interface I18nInterface {
     monthsLater: string;
     yearsLater: string;
   };
+  tagsInput: {
+    tagsReachMaxLength: string;
+  };
 }

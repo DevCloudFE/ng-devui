@@ -44,13 +44,10 @@ export class BasicComponent implements OnInit {
     }
   ];
 
-  constructor(private stepService: StepsGuideService) {
-    this.stepService.currentIndex.subscribe(index => {
-      this.currentStep = index;
-    });
-  }
+  constructor(private stepService: StepsGuideService) { }
 
   ngOnInit() {
+    this.stepService.currentIndex.subscribe(index => this.currentStep = index);
     /* 由于整个demo是在一个页面内显示多个操作指引序列，因此需要在初始化时重置显示状态 */
     localStorage.setItem('devui_guide_step-custom-demo', '0'); /* 设置第二个序列为不显示状态 */
     localStorage.removeItem('devui_guide_step-basic-demo'); /* 设置第一个序列为显示状态 */

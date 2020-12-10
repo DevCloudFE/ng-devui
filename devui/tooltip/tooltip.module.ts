@@ -17,7 +17,7 @@ import {PositioningModule} from 'ng-devui/position';
   providers: [
     OverlayContainerRef,
   ],
-
+  
 })
 export class TooltipModule {
 }

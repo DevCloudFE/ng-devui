@@ -145,6 +145,8 @@ export class FullscreenComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnDestroy() {
     document.removeEventListener('fullscreenchange', this.onFullScreenChange);
+    document.removeEventListener('MSFullscreenChange', this.onFullScreenChange);
+    document.removeEventListener('webkitfullscreenchange', this.onFullScreenChange);
     document.removeEventListener('keydown', this.handleKeyDown);
     const btnLaunch = this.elementRef.nativeElement.querySelector('[fullscreen-launch]');
     if (btnLaunch) { btnLaunch.removeEventListener('click', this.handleFullscreen); }

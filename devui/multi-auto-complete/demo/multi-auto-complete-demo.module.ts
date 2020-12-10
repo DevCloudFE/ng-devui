@@ -42,6 +42,6 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
     MultiAutoCompleteDemoDisabledComponent,
   ],
   providers: [],
-
+  
 })
 export class MultiAutoCompleteDemoModule { }

@@ -20,6 +20,7 @@ import { LoadingModule } from 'ng-devui/loading';
 import { I18nModule } from 'ng-devui/i18n';
 import { DataTableModule } from 'ng-devui/data-table';
 import { ClipboardDemoComponent } from './clipboard/clipboard.component';
+import { TextInputModule } from 'ng-devui/text-input';
 
 @NgModule({
   imports: [
@@ -35,6 +36,7 @@ import { ClipboardDemoComponent } from './clipboard/clipboard.component';
     LoadingModule,
     I18nModule,
     DataTableModule,
+    TextInputModule,
     RouterModule.forChild([
       { path: '', redirectTo: 'demo' },
       { path: 'demo', component: CommonDemoComponent },

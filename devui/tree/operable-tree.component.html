@@ -17,6 +17,7 @@
     [minBufferPx]="minBufferPx"
     [maxBufferPx]="maxBufferPx"
     [itemSize]="itemSize"
+    (afterTreeInit)="initTreeFinishEvent($event)"
   >
   </d-tree>
   <div
@@ -183,7 +184,7 @@
             (input)="onInputChange($event.target.value, treeNode)"
             dPopover
             [content]="treeNode.data.errTips"
-            [position]="'top'"
+            [position]="treeNode.data.errTipsPosition"
             [appendToBody]="true"
             [visible]="!!treeNode.data.errTips"
             [popType]="'error'"
@@ -427,7 +428,7 @@
             (input)="onInputChange($event.target.value, treeNode)"
             dPopover
             [content]="treeNode.data.errTips"
-            [position]="'top'"
+            [position]="treeNode.data.errTipsPosition"
             [appendToBody]="true"
             [visible]="!!treeNode.data.errTips"
             [popType]="'error'"

@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { DevUIModule } from 'ng-devui';
+import { SplitterModule } from 'ng-devui/splitter';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
@@ -38,6 +39,7 @@ import { CheckOptionsColumnComponent } from './check-options-column/check-option
 import { InteractionColumnComponent } from './interaction-column/interaction-column.component';
 import { VirtualScrollComponent } from './virtual-scroll/virtual-scroll.component';
 import { MutilStylesComponent } from './mutil-styles/mutil-styles.component';
+import { FixHeightVirtualScrollComponent } from './fix-height-virtual-scroll/fix-height-virtual-scroll.component';
 
 @NgModule({
   imports: [
@@ -52,6 +54,7 @@ import { MutilStylesComponent } from './mutil-styles/mutil-styles.component';
     I18nModule,
     DDemoNavModule,
     LoadingModule,
+    SplitterModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo' },
       { path: 'demo', component: DataTableDemoComponent},
@@ -87,10 +90,11 @@ import { MutilStylesComponent } from './mutil-styles/mutil-styles.component';
     CheckOptionsColumnComponent,
     InteractionColumnComponent,
     VirtualScrollComponent,
-    MutilStylesComponent
+    MutilStylesComponent,
+    FixHeightVirtualScrollComponent,
   ],
   providers: [],
-
+  
 })
 export class DataTableDemoModule {
 }

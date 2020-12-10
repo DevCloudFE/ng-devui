@@ -131,6 +131,11 @@ export class DataTableDemoComponent {
     {title: 'TS', language: 'typescript', code: require('!!raw-loader!./mutil-styles/mutil-styles.component.ts')},
     {title: 'mock-data', language: 'typescript', code: require('!!raw-loader!./mock-data')}
   ];
+  fixHeightVirtualScrollSource: Array<DevuiSourceData> = [
+    {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./fix-height-virtual-scroll/fix-height-virtual-scroll.component.html')},
+    {title: 'TS', language: 'typescript', code: require('!!raw-loader!./fix-height-virtual-scroll/fix-height-virtual-scroll.component.ts')},
+    {title: 'mock-data', language: 'typescript', code: require('!!raw-loader!./mock-data')}
+  ];
 
   navItems = [
     { dAnchorLink: 'basic-usage', value: '基本用法'},
@@ -141,6 +146,7 @@ export class DataTableDemoComponent {
     { dAnchorLink: 'lazy-loading-of-list-data', value: '懒加载'},
     { dAnchorLink: 'virtual-scroll', value: '虚拟滚动'},
     { dAnchorLink: 'table-fixing', value: '表头固定'},
+    { dAnchorLink: 'fixed-virtual-scroll', value: '表头固定虚拟滚动'},
     { dAnchorLink: 'header-grouping', value: '表头分组'},
     { dAnchorLink: 'edit-cell', value: '编辑单元格'},
     { dAnchorLink: 'expand-row', value: '扩展行'},

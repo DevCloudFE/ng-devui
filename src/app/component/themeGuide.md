@@ -45,7 +45,7 @@ ieSupport：是否打开 ie 支持，目前使用 css-var-ponyfill 方案支持 
 ## 使用自定义主题
 
 可以通过给 ThemeServiceInit 传参支持自定义主题。
-可以通过 new Theme 新建一个主题，并从默认主题里面改色。
+可以通过 new Theme 新建一个主题，并从默认主题里面改变颜色、字号、圆角、阴影值等。
 
 ```typescript
 // my-theme.ts

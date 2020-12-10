@@ -45,7 +45,7 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
     VerticalComponent,
     CustomComponent,
   ],
-
+  
 })
 export class RadioDemoModule {
 }

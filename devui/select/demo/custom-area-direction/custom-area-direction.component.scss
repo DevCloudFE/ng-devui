@@ -24,7 +24,7 @@
 .custom-single {
   background: $devui-brand;
   color: $devui-light-text;
-  border-radius: 2px;
+  border-radius: $devui-border-radius;
   text-align: center;
   padding: 8px;
   display: inline-block;

@@ -2,7 +2,7 @@ import { map, takeUntil } from 'rxjs/operators';
 import { Pipe, PipeTransform, OnDestroy } from '@angular/core';
 import { I18nService } from 'ng-devui/i18n';
 import * as datefns from 'date-fns';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, of } from 'rxjs';
 
 @Pipe({
   name: 'dRelativeTime'
@@ -12,6 +12,9 @@ export class RelativeTimePipe implements PipeTransform, OnDestroy {
   constructor(private i18n: I18nService) {}
 
   transform(value: string | number | Date, limit: number): Observable<string | number | Date> {
+    if (!value) {
+      return of('');
+    }
     const threshold = {
       month: 3, // at least 3 months using year.
       week: 4, // at least 4 weeks using month.
@@ -70,8 +73,10 @@ export class RelativeTimePipe implements PipeTransform, OnDestroy {
           return absDiffHours + (diffHours > 0 ? i18nCommonText.hoursAgo : i18nCommonText.hoursLater);
         } else if (absDiffMinutes > 0 && absDiffSeconds > threshold.second) {
           return absDiffMinutes + (diffMinutes > 0 ? i18nCommonText.minutesAgo : i18nCommonText.minutesLater);
-        } else {
+        } else if (diffSeconds) {
           return diffSeconds > 0 ? i18nCommonText.justnow : i18nCommonText.later;
+        } else {
+          return '';
         }
       }),
       takeUntil(this._destroyed$)

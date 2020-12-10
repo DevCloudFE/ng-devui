@@ -1,5 +1,6 @@
 @import '../style/theme/color';
-@import '../style/core/_font';
+@import '../style/theme/corner';
+@import '../style/theme/_font';
 
 .devui-loading-wrapper {
   display: flex;
@@ -13,7 +14,7 @@
 
 .devui-message-wrapper {
   background: $devui-base-bg;
-  border-radius: 5px;
+  border-radius: $devui-border-radius-card;
 }
 
 .devui-fix-loading-position {

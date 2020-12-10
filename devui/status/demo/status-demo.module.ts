@@ -32,7 +32,7 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
     StatusDemoComponent,
     BasicComponent
   ],
-
+  
 })
 export class StatusDemoModule { }
 

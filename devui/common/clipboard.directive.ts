@@ -8,7 +8,8 @@ import {
   ComponentRef,
   ComponentFactoryResolver,
   ElementRef,
-  TemplateRef
+  TemplateRef,
+  OnInit
 } from '@angular/core';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { OverlayContainerRef } from 'ng-devui/overlay-container';
@@ -20,7 +21,7 @@ import { Subscription } from 'rxjs';
 @Directive({
   selector: '[dClipboard]'
 })
-export class ClipboardDirective implements OnDestroy {
+export class ClipboardDirective implements OnInit , OnDestroy {
   @Input('dClipboard') devuiTargetElm: HTMLInputElement | HTMLTextAreaElement | undefined | '';
   @Input() container: HTMLElement;
   @Input() content: string | undefined;
@@ -29,7 +30,7 @@ export class ClipboardDirective implements OnDestroy {
   @Input() tipContent: string | HTMLElement | TemplateRef<any>;
   @Output() copyResultEvent = new EventEmitter<any>();
   popoverComponentRef: ComponentRef<PopoverComponent>;
-  i18nText: I18nInterface['common'];
+  i18nCommonText: I18nInterface['common'];
   i18nSubscription: Subscription;
 
   constructor(
@@ -37,10 +38,16 @@ export class ClipboardDirective implements OnDestroy {
     private clipboard: Clipboard,
     private i18n: I18nService,
     private overlayContainerRef: OverlayContainerRef,
-    private componentFactoryResolver: ComponentFactoryResolver) {
-    this.i18nText = this.i18n.getI18nText().common;
+    private componentFactoryResolver: ComponentFactoryResolver) {}
+
+  ngOnInit(): void {
+    this.setI18nText();
+  }
+
+  setI18nText() {
+    this.i18nCommonText = this.i18n.getI18nText().common;
     this.i18nSubscription = this.i18n.langChange().subscribe((data) => {
-      this.i18nText = data.common;
+      this.i18nCommonText = data.common;
     });
   }
 
@@ -51,7 +58,7 @@ export class ClipboardDirective implements OnDestroy {
     if (isSupported && this.content) {
       isSucceeded = this.clipboard.copy(this.content);
       if (isSucceeded) {
-        this.tipContent = this.tipContent || this.i18nText.copied;
+        this.tipContent = this.tipContent || this.i18nCommonText.copied;
         this.createPopover();
       }
       const result = { isSupported: isSupported, isSucceeded: isSucceeded, content: this.content };

@@ -45,6 +45,7 @@
 |              inputItemTemplate               |                    `TemplateRef`                    |                        --                        | 可选,自定义模板，若传入，会忽略 ContentChild               |                                                                                                                      |
 |            ~~~notAutoScroll~~~               |                      `boolean`                      |                      false                       | `待改名`~~~可选，自动聚焦的时候，自动滚动到select位置~~~ |
 |              templateItemSize                |                      `number`                       |                      false                       | `待完善`可选，模板单条高度, appendToBody必须为true |
+| loadingTemplateRef |      `TemplateRef<any>`      |           --           | 可选，自定义 loading 模板                                           | [虚拟滚动 或 懒加载](/components/select/demo#lazy-load-virtual-scroll) |
 
 ### d-select 事件
 

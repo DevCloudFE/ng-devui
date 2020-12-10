@@ -27,7 +27,7 @@ export class BasicComponent {
         {
           cssClass: 'primary',
           text: '确定',
-          disabled: true,
+          disabled: false,
           handler: ($event: Event) => {
             results.modalInstance.hide();
           },

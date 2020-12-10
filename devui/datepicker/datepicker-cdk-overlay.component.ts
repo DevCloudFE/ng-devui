@@ -45,7 +45,7 @@ import { Subscription } from 'rxjs';
       <d-datepicker [@cornerFadeInOut]="isOpen ? datepickerPosition : 'void'" [locale]="locale || i18nLocale"
                       [showTime]="showTime" [cssClass]="cssClass" [selectedDate]="selectedDate"
                       [disabled]="disabled" [dateConverter]="dateConverter" (selectedDateChange)="timeChange($event)"
-                      [dateFormat]="dateFormat" [dateConfig]="dateConfig"
+                      [dateConfig]="dateConfig"
                       [customViewTemplate]="customViewTemplate" [maxDate]="maxDate" (cmpClicking)="cmpClicking($event)"
                       [minDate]="minDate" class="devui-datepicker devui-dropdown-overlay"></d-datepicker>
     </ng-template>
@@ -170,6 +170,7 @@ export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDes
               private cdr: ChangeDetectorRef) {
     this._dateConfig = datePickerConfig['dateConfig'];
     this.dateConverter = datePickerConfig['dateConfig'].dateConverter || new DefaultDateConverter();
+    this.setI18nText();
   }
 
   checkDateConfig(dateConfig: any) {
@@ -184,7 +185,6 @@ export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDes
     this._minDate = this.minDate ? new Date(this.minDate) : new Date(this.dateConfig.min, 0, 1, 0, 0, 0);
     this._maxDate = this.maxDate ? new Date(this.maxDate) : new Date(this.dateConfig.max, 11, 31, 23, 59, 59);
     this.setPositions();
-    this.setI18nText();
     this.updateCdkConnectedOverlayOrigin();
     if (this.autoOpen) {
       this.isOpen = true;
@@ -235,24 +235,28 @@ export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDes
     }
   }
 
-  pickOutBoolean(arr: any[]) {
-    return arr.find(i => typeof i === 'boolean');
-  }
-
-  toggle(...args) {
-    let clickShow;
-    if (args.length) {
-      clickShow = this.pickOutBoolean(args);
-    }
+  toggle(clickShow?: boolean) {
     if (clickShow === undefined) {
-      this.isOpen = !this.isOpen;
+      if (this.isOpen) {
+        this.hide();
+      } else {
+        this.show();
+      }
     } else {
-      this.isOpen = clickShow;
+      if (clickShow) {
+        this.show();
+      } else {
+        this.hide();
+      }
     }
   }
 
   hide() {
     this.isOpen = false;
+  }
+
+  show() {
+    this.isOpen = true;
   }
 
   formWithDropDown() {
@@ -276,8 +280,6 @@ export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDes
     if (selectDateObj && typeof selectDateObj === 'object' && selectDateObj.hasOwnProperty('selectedDate')) {
       selectDate = selectDateObj.selectedDate;
       dateReason = selectDateObj.reason;
-    } else {
-      selectDate = selectDateObj;
     }
     if (selectDate) {
       selectDate = new Date(selectDate);

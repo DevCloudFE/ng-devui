@@ -69,7 +69,7 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
     TwoDatepickerBasicComponent,
     TwoDatepickerFormatComponent,
   ],
-
+  
   providers: [],
 })
 export class DatepickerDemoModule { }

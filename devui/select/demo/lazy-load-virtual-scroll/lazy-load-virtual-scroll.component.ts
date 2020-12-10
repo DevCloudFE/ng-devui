@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 @Component({
     selector: 'd-lazy-load-virtual-scroll',
     templateUrl: './lazy-load-virtual-scroll.component.html',
-    styleUrls: ['./lazy-load-virtual-scroll.component.css']
+    styleUrls: ['./lazy-load-virtual-scroll.component.scss']
 })
 export class LazyLoadVirtualScrollComponent {
   options = ['选项1', '选项2', '选项3', '选项4', '选项5', '选项6', '选项7', '选项8',

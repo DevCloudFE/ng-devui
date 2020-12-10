@@ -1,5 +1,5 @@
 <div class="devui-data-table {{ cssClass }}">
-  <div class="devui-table-view" #tableView>
+  <div class="devui-table-view {{ containFixHeaderHeight ? 'contain-fix-height' : '' }}" #tableView>
     <div
       *ngIf="fixHeader"
       #fixHeaderContainerRef
@@ -96,6 +96,7 @@
 
 <ng-template #scrollViewTpl>
   <cdk-virtual-scroll-viewport
+    #cdkVirtualScrollViewport
     dLazyLoad
     [enableLazyLoad]="lazy"
     (loadMore)="onLoadMore($event)"

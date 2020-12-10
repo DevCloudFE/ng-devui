@@ -47,7 +47,7 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
     UndestroyableComponent,
     DrawerContentComponent
   ],
-
+  
 })
 export class DrawerDemoModule {
 }

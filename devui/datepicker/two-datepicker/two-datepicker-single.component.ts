@@ -55,6 +55,7 @@ export class TwoDatepickerSingleComponent extends SingleDatepickerComponent impl
     protected i18n: I18nService
   ) {
     super(elementRef, renderer, datePickerConfig, changeDetectorRef, i18n);
+    this.setI18nText();
   }
 
   ngOnInit() {
@@ -64,14 +65,12 @@ export class TwoDatepickerSingleComponent extends SingleDatepickerComponent impl
       this.onSelectDateChanged();
       this.onDisplayWeeksChange();
       this.initDatePicker();
-      this.setI18nText();
     } else if (this.isAuxiliary && !this.rangeEnd) {
       // 副面板，未选择结束日期的情况
       this.onSelectDateChanged();
       this.initDatePicker();
       this.onNextMonth('init');
-      this.selectedDate = new Date(this.currentYear, this.currentMonth);
-      this.setI18nText();
+      this.selectedDate = new Date(this.currentYear, this.currentMonthIndex);
 
     } else if (!this.isAuxiliary && this.rangeStart) {
       // 主面板，已选择开始日期的情况
@@ -82,7 +81,7 @@ export class TwoDatepickerSingleComponent extends SingleDatepickerComponent impl
       const rangeStart = this.convertDate(this.rangeStart);
       const rangeEnd = this.convertDate(this.rangeEnd);
       this.currentYear = rangeEnd.getFullYear();
-      this.currentMonth = rangeEnd.getMonth();
+      this.currentMonthIndex = rangeEnd.getMonth();
       this.selectedDate = this.rangeEnd;
       super.ngOnInit();
       // 处理选择的日期范围开始和结束在同一个月的情况
@@ -90,7 +89,7 @@ export class TwoDatepickerSingleComponent extends SingleDatepickerComponent impl
         rangeStart.getMonth() === rangeEnd.getMonth()) {
         this.onNextMonth('init');
       }
-      this.selectedDate = new Date(this.currentYear, this.currentMonth);
+      this.selectedDate = new Date(this.currentYear, this.currentMonthIndex);
     }
     if (!this.selectedRange.every(curDate => !!curDate)) {
       this.selectingRange = true;
@@ -129,7 +128,7 @@ export class TwoDatepickerSingleComponent extends SingleDatepickerComponent impl
   }
 
   convertDate(date) {
-    return date ? this.dateConverter.parse(date, this.dateFormat, this.locale) : null;
+    return date ? this.dateConverter.parse(date) : null;
   }
 
   selectRange(date, passive = false) {
@@ -387,7 +386,7 @@ export class TwoDatepickerSingleComponent extends SingleDatepickerComponent impl
   protected notifyCalenderChange() {
     this.syncPickerPair.emit({
       year: this.currentYear,
-      month: this.currentMonth
+      month: this.currentMonthIndex
     });
   }
 
@@ -409,8 +408,13 @@ export class TwoDatepickerSingleComponent extends SingleDatepickerComponent impl
     if (date.getTime() > this.maxDate.getTime()) {
       date = this.maxDate;
     }
+    if (!this.isAuxiliary && this.rangeEnd && !this.rangeStart) {
+      date = new Date(this.rangeEnd);
+      date.setMonth(date.getMonth() - 1);
+    }
+    this.selectedDate = this.selectedDate || date;
     this.currentYear = date.getFullYear();
-    this.currentMonth = date.getMonth();
+    this.currentMonthIndex = date.getMonth();
     if (!this.showTime) { return; }
     switch (this.isAuxiliary) {
       case false:

@@ -13,6 +13,12 @@ export class ModalDemoComponent {
     { title: 'ModalTestComponent HTML', language: 'xml', code: require('!!raw-loader!./basic/modal-test.component.html') },
     { title: 'ModalTestComponent TS', language: 'typescript', code: require('!!raw-loader!./basic/modal-test.component.ts') }
   ];
+  basicUpdateSource: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./basic-update/basic-update.component.html') },
+    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic-update/basic-update.component.ts') },
+    { title: 'ModalTestComponent HTML', language: 'xml', code: require('!!raw-loader!./basic-update/modal-test.component.html') },
+    { title: 'ModalTestComponent TS', language: 'typescript', code: require('!!raw-loader!./basic-update/modal-test.component.ts') }
+  ];
   customizeSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./customize/customize.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./customize/customize.component.ts') },
@@ -60,6 +66,7 @@ export class ModalDemoComponent {
     { dAnchorLink: 'intercept-dialog-closed', value: '拦截对话框关闭'},
     { dAnchorLink: 'message-hint', value: '信息提示'},
     { dAnchorLink: 'warning-pop-up', value: '警告弹出框'},
+    { dAnchorLink: 'update-button-options', value: '更新弹出框按钮状态'},
     { dAnchorLink: 'configure-button-to-get-focus-automatically', value: '配置按钮自动获得焦点'},
     { dAnchorLink: 'template-content', value: '配置弹出框内容模板'}
   ];

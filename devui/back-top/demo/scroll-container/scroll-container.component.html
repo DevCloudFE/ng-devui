@@ -1,0 +1,8 @@
+<section width="50%">
+  <div class="devui-scroll-container">
+    <li class="item" *ngFor="let item of list; let index = index">
+      {{ index + 1 + '. ' + item }}
+    </li>
+  </div>
+  <d-back-top [scrollTarget]="scrollElement" [right]="'80px'" (backTopEvent)="backTop($event)"></d-back-top>
+</section>

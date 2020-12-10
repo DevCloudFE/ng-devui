@@ -3,13 +3,13 @@ import {
   Input,
   ContentChild,
   Output,
-  EventEmitter,
-  ChangeDetectionStrategy
+  EventEmitter
 } from '@angular/core';
-
+import { Observable } from 'rxjs';
 import { PanelType } from './panel.types';
 import { PanelHeaderComponent } from './panel-header.component';
 import { PanelFooterComponent } from './panel-footer.component';
+
 
 @Component({
   selector: 'd-panel',
@@ -20,14 +20,39 @@ export class PanelComponent {
   @Input() type: PanelType = 'default';
   @Input() cssClass: string;
   @Input() isCollapsed: boolean;
+  @Input() beforeToggle: (value) => boolean | Promise<boolean> | Observable<boolean>;
   @Output() toggle: EventEmitter<boolean> = new EventEmitter<boolean>();
   @ContentChild(PanelHeaderComponent) panelHeader;
   @ContentChild(PanelFooterComponent) panelFooter;
 
   toggleBody() {
-    if (this.isCollapsed !== undefined) {
-      this.isCollapsed = !this.isCollapsed;
-      this.toggle.emit(this.isCollapsed);
+    this.canToggle().then(val => {
+      if (!val) {
+        return;
+      }
+      if (this.isCollapsed !== undefined) {
+        this.isCollapsed = !this.isCollapsed;
+        this.toggle.emit(this.isCollapsed);
+      }
+    });
+  }
+
+  canToggle() {
+    let changeResult = Promise.resolve(true);
+
+    if (this.beforeToggle) {
+      const result: any = this.beforeToggle(this.isCollapsed);
+      if (typeof result !== 'undefined') {
+        if (result.then) {
+          changeResult = result;
+        } else if (result.subscribe) {
+          changeResult = (result as Observable<boolean>).toPromise();
+        } else {
+          changeResult = Promise.resolve(result);
+        }
+      }
     }
+
+    return changeResult;
   }
 }

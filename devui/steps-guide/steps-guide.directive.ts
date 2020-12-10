@@ -26,8 +26,25 @@ export class StepsGuideDirective implements OnInit, OnDestroy {
   @Input() steps: Array<StepItem> = [];
   // 该步骤所属序号
   @Input() stepIndex: number;
+
   // 弹出位置 top|bottom|bottom-left|left|right
-  @Input() position: StepsGuidePositionType = 'top';
+  _dStepsGuidePosition: StepsGuidePositionType;
+  @Input() set dStepsGuidePosition(pos: StepsGuidePositionType) {
+    this._dStepsGuidePosition = pos;
+  }
+  get dStepsGuidePosition(): StepsGuidePositionType {
+    return this._dStepsGuidePosition || 'top';
+  }
+
+  /**
+  * @deprecated Use dStepsGuidePosition to replace.
+  */
+  @Input() set position(pos: StepsGuidePositionType) {
+    if (!this._dStepsGuidePosition) {
+      this.dStepsGuidePosition = pos;
+    }
+  }
+
   // 可选，用于修正引导位置
   @Input() leftFix = 0;
   @Input() topFix = 0;
@@ -102,7 +119,7 @@ export class StepsGuideDirective implements OnInit, OnDestroy {
             content: currentStep.content,
             stepsCount: this.steps.length,
             stepIndex: this.stepIndex,
-            position: this.position,
+            position: this.dStepsGuidePosition,
             leftFix: this.leftFix,
             topFix: this.topFix,
             zIndex: this.zIndex

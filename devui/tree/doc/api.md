@@ -23,14 +23,15 @@
 
 ## d-tree 事件
 
-|       参数       |        类型         | 说明                                                                     | 跳转 Demo                                                  |
-| :--------------: | :-----------------: | :----------------------------------------------------------------------- | ---------------------------------------------------------- |
-|   nodeSelected   | `EventEmitter<any>` | 可选，节点选中的回调函数，返回当前选中节点的数据                         | [基本用法](/components/tree/demo#basic-usage)              |
-|  nodeDblClicked  | `EventEmitter<any>` | 可选，节点双击时的回调函数，返回当前操作的节点的数据                     | [自定显示字段](/components/tree/demo#custom-display-field) |
-| nodeRightClicked | `EventEmitter<any>` | 可选，节点鼠标右键点击时的回调函数，返回当前操作的节点的数据以及鼠标事件 | [自定显示字段](/components/tree/demo#custom-display-field) |
-|   nodeToggled    | `EventEmitter<any>` | 可选，节点展开收起的回调函数，返回当前操作的节点的数据                   | [基本用法](/components/tree/demo#basic-usage)              |
+|       参数       |        类型         | 说明                                                                                                         | 跳转 Demo                                                  |
+| :--------------: | :-----------------: | :----------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
+|   nodeSelected   | `EventEmitter<any>` | 可选，节点选中的回调函数，返回当前选中节点的数据                                                             | [基本用法](/components/tree/demo#basic-usage)              |
+|  nodeDblClicked  | `EventEmitter<any>` | 可选，节点双击时的回调函数，返回当前操作的节点的数据                                                         | [自定显示字段](/components/tree/demo#custom-display-field) |
+| nodeRightClicked | `EventEmitter<any>` | 可选，节点鼠标右键点击时的回调函数，返回当前操作的节点的数据以及鼠标事件                                     | [自定显示字段](/components/tree/demo#custom-display-field) |
+|   nodeToggled    | `EventEmitter<any>` | 可选，节点展开收起的回调函数，返回当前操作的节点的数据                                |                                    | [基本用法](/components/tree/demo#basic-usage)              |
+|  afterTreeInit  | `EventEmitter<any>` | 可选，树节点生成完毕后的回调事件，返回当前树的所有节点信息，多用于大数据量情况下需要渲染完成后执行特定操作 | 与d-operable-tree的[大数据量可操作树](/components/tree/demo#virtual-scroll)使用一致  
 
-## d-operableTree 参数
+## d-operable-tree 参数
 
 ##### 鼠标滑过或者选中支持增删改按钮操作
 
@@ -66,9 +67,9 @@
 |  virtualScrollHeight  |                   `string`                   |     '800px'     |                                                  可选，设置虚拟滚动时树的高度                                                  | [大数据量可操作树](/components/tree/demo#virtual-scroll)        |
 |      minBufferPx      |                   `number`                   |       760       | 可选，设置虚拟滚动时的最小 buffer 尺寸，参考https://material.angular.io/cdk/scrolling/overview#scrolling-over-fixed-size-items | [大数据量可操作树](/components/tree/demo#virtual-scroll)        |
 |      maxBufferPx      |                   `number`                   |      1140       | 可选，设置虚拟滚动时的最大 buffer 尺寸，参考https://material.angular.io/cdk/scrolling/overview#scrolling-over-fixed-size-items | [大数据量可操作树](/components/tree/demo#virtual-scroll)        |
-|      disableMouseEvent      |                   `boolean`                   |      false       | 可选，设置是否禁用鼠标的移入移出事件，主要用于兼容使用appendTobody时无法悬停到下拉框内容的情况 | [自定义图标](/components/tree/demo#custom-icon)        |
+|   disableMouseEvent   |                  `boolean`                   |      false      |                可选，设置是否禁用鼠标的移入移出事件，主要用于兼容使用 appendTobody 时无法悬停到下拉框内容的情况                | [自定义图标](/components/tree/demo#custom-icon)                 |
 
-## d-operableTree 事件
+## d-operable-tree 事件
 
 |        参数        |        类型         | 说明                                                                                                                 | 跳转 Demo                                            |
 | :----------------: | :-----------------: | :------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
@@ -80,8 +81,9 @@
 |    nodeChecked     | `EventEmitter<any>` | 可选，节点选中事件回调，返回所有选中的节点数据                                                                       | [可勾选树](/components/tree/demo#checkable-tree)     |
 | currentNodeChecked | `EventEmitter<any>` | 可选，节点选中事件回调，返回当前选中的节点数据                                                                       | [可勾选树](/components/tree/demo#checkable-tree)     |
 |     nodeEdited     | `EventEmitter<any>` | 可选，节点 title 编辑事件回调，返回当前编辑的节点数据                                                                | [操作按钮](/components/tree/demo#operation-button)   |
-|  editValueChange   | `EventEmitter<any>` | 可选，节点编辑中数据变化的回调函数，返回校验后的值                                                                   | [操作按钮](/components/tree/demo#operation-button)   |
+|  editValueChange   | `EventEmitter<any>` | 可选，节点编辑中数据变化的回调函数，返回校验后的值；可通过对返回值中的callback函数的调用实现校验错误提示(callback接收两个参数，`errTips`为错误信息，`errTipsPosition`为信息弹出位置)                                                                 | [操作按钮](/components/tree/demo#operation-button)   |
 |     nodeOnDrop     | `EventEmitter<any>` | 可选，节点 onDrop 事件回调(任意可拖动元素 drop)，返回拖拽事件，释放位置的节点数据，放置类型（`prev`,`inner`,`next`） | [可拖拽树](/components/tree/demo#drag-and-drop-tree) |
+|  afterTreeInit  | `EventEmitter<any>` | 可选，树节点生成完毕后的回调事件，返回当前树的所有节点信息，多用于大数据量情况下需要渲染完成后执行特定操作 |  [大数据量可操作树](/components/tree/demo#virtual-scroll)              |
 
 ##### **注意**
 
@@ -152,6 +154,7 @@ export interface IDropType {
 `search`: 搜索树（可设置过滤或高亮）
 `deactivateAllNodes`: 取消选择所有节点
 `checkAllNodes`: 传入`true`或`false`,check 所有节点或取消 check 所有节点
+`mergeTreeNodes`: 传入需要合并显示的节点，默认为整个树，此操作将合并只有一个子节点的父节点，用于优化树形显示
 
 #### 自定义模板
 

@@ -114,19 +114,6 @@ export class InteractionComponent implements OnInit {
   }
 
   onSortChange(event: SortEventArg, field) {
-    switch (field) {
-      case 'Gender':
-        this.lastNameSortDirection = SortDirection.default;
-        this.genderSortDirecticon = event.direction;
-      break;
-      case 'lastName':
-        this.genderSortDirecticon = SortDirection.default;
-        this.lastNameSortDirection = event.direction;
-        break;
-      default:
-        break;
-    }
-
     this.sortParams = {
       field: field,
       direction: event.direction

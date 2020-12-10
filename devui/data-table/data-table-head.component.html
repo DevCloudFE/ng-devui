@@ -3,7 +3,7 @@
   </ng-template>
   <ng-template
     [ngTemplateOutlet]="AdvancedHeadTmpl"
-    [ngTemplateOutletContext]="{ $implicit: this, rows: rowCountArray  }"
+    [ngTemplateOutletContext]="{ $implicit: this, rows: rowCountArray }"
     *ngIf="rowCount > 0"
   >
   </ng-template>
@@ -65,6 +65,7 @@
       [sortDirection]="getSortDirection(column.field)"
       (sortChange)="onHeadClick($event, column)"
       [filterable]="canFilterable(column)"
+      [closeFilterWhenScroll]="column.closeFilterWhenScroll"
       [filterList]="column.filterList"
       [column]="column"
       [filterMultiple]="column.filterMultiple"
@@ -176,6 +177,7 @@
         [sortDirection]="getSortDirection(column.field)"
         (sortChange)="onHeadClick($event, column)"
         [filterable]="canFilterable(column) && rowIndex === column.advancedHeader.length - 1"
+        [closeFilterWhenScroll]="column.closeFilterWhenScroll"
         [filterList]="column.filterList"
         [column]="column"
         [filterMultiple]="column.filterMultiple"
@@ -226,6 +228,7 @@
         [sortDirection]="getSortDirection(column.field)"
         (sortChange)="onHeadClick($event, column)"
         [filterable]="canFilterable(column)"
+        [closeFilterWhenScroll]="column.closeFilterWhenScroll"
         [filterList]="column.filterList"
         [column]="column"
         [filterMultiple]="column.filterMultiple"

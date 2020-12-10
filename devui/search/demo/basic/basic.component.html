@@ -1,6 +1,6 @@
 <section>
   <h5 class="text-muted">小尺寸</h5>
-  <d-search style="width: 200px;" [size]="'sm'" (searchFn)="onSearch($event)"></d-search>
+  <d-search style="width: 200px" [size]="'sm'" (searchFn)="onSearch($event)"></d-search>
   <h5 class="text-muted">标准尺寸</h5>
   <d-search [isKeyupSearch]="true" (searchFn)="onSearch($event)"></d-search>
   <h5 class="text-muted">大尺寸</h5>
@@ -9,4 +9,6 @@
   <d-search [isKeyupSearch]="true" (searchFn)="onSearch($event)" [disabled]="true"></d-search>
   <h5 class="text-muted">搜索图标左置</h5>
   <d-search [iconPosition]="'left'" [isKeyupSearch]="true" (searchFn)="onSearch($event)"></d-search>
+  <h5 class="text-muted">自动对焦</h5>
+  <d-search [size]="'sm'" [autoFocus]="true" (searchFn)="onSearch($event)"></d-search>
 </section>

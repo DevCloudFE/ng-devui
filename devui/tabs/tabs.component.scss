@@ -1,7 +1,8 @@
 @import '../style/theme/color';
 @import '../style/theme/variables';
 @import '../style/mixins/index';
-@import '../style/core/font';
+@import '../style/theme/font';
+@import '../style/theme/corner';
 
 :host {
   display: block;
@@ -67,7 +68,7 @@
   font-size: $devui-font-size;
   background: transparent;
   border: none;
-  border-radius: 1px;
+  border-radius: $devui-border-radius;
 
   > li {
     cursor: pointer;
@@ -78,11 +79,11 @@
 
     &:first-child {
       border-left-width: 1px;
-      border-radius: 2px 0 0 2px;
+      border-radius: $devui-border-radius 0 0 $devui-border-radius;
     }
 
     &:last-child {
-      border-radius: 0 2px 2px 0;
+      border-radius: 0 $devui-border-radius $devui-border-radius 0;
     }
 
     & > a {

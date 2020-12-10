@@ -46,6 +46,7 @@ import { UserRegisterComponent } from './validate-template/user-register/user-re
 import { ValidateSyncComponent } from './validate-sync/validate-sync.component';
 import { ValidateCrossComponentComponent } from './validate-cross-component/validate-cross-component.component';
 import { CrossComponentComponent } from './validate-template/validate-cross-component/validate-cross-component.component';
+import { DebounceTimeComponent } from './validate-template/debounce-time/debounce-time.component';
 
 import { ValidateReactiveComponent } from './validate-reactive/validate-reactive.component';
 import { ValidateCoordinatedComponent } from './validate-coordinated/validate-coordinated.component';
@@ -120,7 +121,8 @@ import { CustomStatusComponent } from './custom-status/custom-status.component';
     CrossComponentComponent,
     ChildFormComponent,
     CustomStatusComponent,
+    DebounceTimeComponent,
   ],
-
+  
 })
 export class FormDemoModule {}

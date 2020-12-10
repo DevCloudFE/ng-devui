@@ -1,8 +1,6 @@
 import {
   Component,
-  Input,
-  Output,
-  EventEmitter,
+  Input
 } from '@angular/core';
 
 @Component({

@@ -46,4 +46,10 @@ export class ModalContainerComponent implements OnInit {
   close(event) {
     this.onClose(event);
   }
+
+  updateButtonOptions(buttonOptions = []) {
+    this.buttons = this.buttons.map((button, index) => {
+      return {...button, ...buttonOptions[index]};
+    });
+  }
 }

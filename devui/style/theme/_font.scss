@@ -11,3 +11,11 @@ $devui-font-size-icon: var(--devui-font-size-icon, 16px);     //图标大小
 $devui-font-size-sm: var(--devui-font-size-sm, 12px);  //当组件size为'sm'时使用此字号大小
 $devui-font-size-md: var(--devui-font-size-md, 12px);  //当组件size为''时使用此字号大小
 $devui-font-size-lg: var(--devui-font-size-lg, 14px);  //当组件size为'lg'时使用此字号大小
+
+$devui-font-title-weight: bold; //标题文字粗细
+$devui-font-content-weight: normal; //内容文字粗细
+$devui-line-height-base: 1.5; //规范行高
+
+$font-title-weight: bold;
+$font-content-weight: normal;
+$line-height-base: 1.5;

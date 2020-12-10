@@ -1,13 +1,15 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, flush, fakeAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { Component } from '@angular/core';
 
 import { PanelModule } from './panel.module';
 import { PanelComponent } from './panel.component';
+import { Observable, of } from 'rxjs';
 
 @Component({
   template: `
-  <d-panel #panel [type]="type" [cssClass]="cssClass" [isCollapsed]="isCollapsed" (toggle)="togglePanel($event)">
+  <d-panel #panel
+    [type]="type" [cssClass]="cssClass" [isCollapsed]="isCollapsed" [beforeToggle]="beforeToggle" (toggle)="togglePanel($event)">
     <d-panel-header>Panel with header and footer</d-panel-header>
     <d-panel-body>This is body</d-panel-body>
     <d-panel-footer>This is footer</d-panel-footer>
@@ -19,6 +21,7 @@ class TestPanelComponent {
   cssClass = '';
   isCollapsed = true;
   panelState: any;
+  beforeToggle: () => boolean | Promise<boolean> | Observable<boolean>;
   togglePanel($event) {
     this.panelState = $event;
   }
@@ -99,19 +102,29 @@ describe('panel', () => {
     });
 
     describe('panel isCollapsed', () => {
-      it('Panel should close', () => {
-        const closeElement = panelElement.querySelector('.devui-panel-heading');
+      it('Panel should close', fakeAsync(() => {
+        testComponent.isCollapsed = true;
+        fixture.detectChanges();
+
+        const closeElement: HTMLElement = panelElement.querySelector('.devui-panel-heading');
         closeElement.dispatchEvent(new Event('click'));
+        fixture.detectChanges();
+        flush();
         fixture.detectChanges();
         expect(panelElement.querySelector('.devui-panel-body')).toEqual(null);
-      });
+      }));
 
-      it('Panel should activate closeEvent', () => {
-        const closeElement = panelElement.querySelector('.devui-panel-heading');
+      it('Panel should activate closeEvent', fakeAsync(() => {
+        testComponent.isCollapsed = true;
+        fixture.detectChanges();
+
+        const closeElement: HTMLElement = panelElement.querySelector('.devui-panel-heading');
         closeElement.dispatchEvent(new Event('click'));
         fixture.detectChanges();
+        flush();
+        fixture.detectChanges();
         expect(testComponent.panelState).toBe(false);
-      });
+      }));
 
       it('isCollapsed could be undefined', () => {
         testComponent.isCollapsed = undefined;
@@ -123,6 +136,45 @@ describe('panel', () => {
 
         expect(panelElement.querySelector('.devui-panel-body')).not.toEqual(null);
       });
+
+      it('Panel avoid by beforeToggle', fakeAsync(() => {
+        testComponent.isCollapsed = true;
+        testComponent.beforeToggle = () => false;
+        fixture.detectChanges();
+
+        const closeElement: HTMLElement = panelElement.querySelector('.devui-panel-heading');
+        closeElement.dispatchEvent(new Event('click'));
+        fixture.detectChanges();
+        flush();
+        fixture.detectChanges();
+        expect(panelElement.querySelector('.devui-panel-body')).not.toEqual(null);
+      }));
+
+      it('Promise beforeToggle should work', fakeAsync(() => {
+        testComponent.isCollapsed = true;
+        testComponent.beforeToggle = () => Promise.resolve(false);
+        fixture.detectChanges();
+
+        const closeElement: HTMLElement = panelElement.querySelector('.devui-panel-heading');
+        closeElement.dispatchEvent(new Event('click'));
+        fixture.detectChanges();
+        flush();
+        fixture.detectChanges();
+        expect(panelElement.querySelector('.devui-panel-body')).not.toEqual(null);
+      }));
+
+      it('Observable beforeToggle should work', fakeAsync(() => {
+        testComponent.isCollapsed = true;
+        testComponent.beforeToggle = () => of(false);
+        fixture.detectChanges();
+
+        const closeElement: HTMLElement = panelElement.querySelector('.devui-panel-heading');
+        closeElement.dispatchEvent(new Event('click'));
+        fixture.detectChanges();
+        flush();
+        fixture.detectChanges();
+        expect(panelElement.querySelector('.devui-panel-body')).not.toEqual(null);
+      }));
     });
   });
 });

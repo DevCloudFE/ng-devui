@@ -53,7 +53,11 @@ export class ModalComponent implements OnInit, OnDestroy {
 
   contentTemplate: TemplateRef<any>;
 
-  constructor(private documentRef: DocumentRef, private renderer: Renderer2) {
+  constructor(
+    private elementRef: ElementRef,
+    private documentRef: DocumentRef,
+    private renderer: Renderer2
+  ) {
     this.backdropCloseable = isUndefined(this.backdropCloseable)
       ? true
       : this.backdropCloseable;
@@ -68,7 +72,7 @@ export class ModalComponent implements OnInit, OnDestroy {
       }));
     }
 
-    const handle = document.getElementById('d-modal-header');
+    const handle = this.elementRef.nativeElement.querySelector('#d-modal-header');
     if (handle) {
       this.draggableHandleEl = handle;
     }
@@ -76,6 +80,9 @@ export class ModalComponent implements OnInit, OnDestroy {
 
   // Will overwrite this method in modal service
   onHidden() {
+  }
+
+  updateButtonOptions<T>(buttonOptions: Array<T>) {
   }
 
 

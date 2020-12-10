@@ -1,6 +1,7 @@
 <div class="devui-search">
   <input
     #filterInput
+    [dAutoFocus]="autoFocus"
     (keydown.enter)="keydownEnter($event, filterInput.value)"
     [placeholder]="placeholder || i18nCommonText?.searchPlaceholder"
     (change)="inputChange(filterInput.value, $event)"

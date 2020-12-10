@@ -1,4 +1,6 @@
 @import '../theme/color.scss';
+@import '../theme/shadow';
+@import '../theme/corner';
 
 .devui-dropdown {
   position: relative;
@@ -12,7 +14,7 @@
   .devui-dropdown-toggle.devui-dropdown-default {
     line-height: 1.5;
     padding: 4px 10px;
-    border-radius: 2px;
+    border-radius: $devui-border-radius;
     text-align: center;
     cursor: pointer;
     outline: 0;
@@ -50,20 +52,15 @@
   min-width: calc(min(100%, 102px));
   padding-bottom: 5px;
   background-clip: padding-box;
-  border-radius: 2px;
+  border-radius: $devui-border-radius;
   list-style: none;
   background-color: $devui-connected-overlay-bg;
-  box-shadow: 0 2px 5px 0 $devui-shadow;
+  box-shadow: $devui-shadow-length-connected-overlay $devui-shadow;
   outline: none;
 
   &.devui-dropdown-overlay,
   &.devui-dropdown-overlay.popper-container {
     border: 1px solid $devui-brand;
-  }
-
-  &.devui-dropdown-overlay.popper-container {
-    margin-top: -1px;
-    margin-bottom: -1px;
   }
 
   .open > & {
@@ -157,7 +154,7 @@
   min-width: calc(min(100%, 102px));
   line-height: 1.5;
   padding: 4px 10px;
-  border-radius: 2px;
+  border-radius: $devui-border-radius;
   text-align: center;
   outline: 0;
   background-image: none;
@@ -196,7 +193,7 @@
 
   .devui-dropdown-menu {
     background: $devui-connected-overlay-bg;
-    box-shadow: 0 2px 5px 0 $devui-shadow;
+    box-shadow: $devui-shadow-length-connected-overlay $devui-shadow;
 
     > li > a:not(.disabled) {
       color: $devui-text;

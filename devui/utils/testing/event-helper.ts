@@ -114,3 +114,24 @@ export function createMouseEvent(type: string, x: number = 0, y: number = 0, but
   );
   return event;
 }
+
+export function dateToStrWithArr(date: Date, arr = ['yy', 'mm', 'dd'], splitter = '/') {
+  const padZero = (value) => {
+    return (value + '').padStart(2, '0');
+  };
+  const newArr = [];
+  arr.forEach((type) => {
+    switch (type) {
+      case 'yy':
+        newArr.push(date.getFullYear());
+        break;
+      case 'mm':
+        newArr.push(padZero(date.getMonth() + 1));
+        break;
+      case 'dd':
+        newArr.push(padZero(date.getDate()));
+        break;
+    }
+  });
+  return newArr.join(splitter);
+}

@@ -1,7 +1,7 @@
 @import '../style/mixins/index';
 @import '../style/theme/color';
-@import '../style/theme/shadow';
-@import '../style/core/_font';
+@import '../style/theme/corner';
+@import '../style/theme/_font';
 
 :host {
   display: block;
@@ -13,13 +13,14 @@
   border: 1px solid transparent;
   padding: 10px;
   line-height: 20px;
-  border-radius: 2px;
+  border-radius: $devui-border-radius;
   padding-left: 16px;
+  word-break: normal;
+  word-wrap: break-word;
 
   button.devui-close {
     color: $devui-text;
     opacity: 1;
-    box-shadow: none;
 
     & > svg path {
       fill: $devui-light-text;
@@ -36,7 +37,6 @@
     background-color: $devui-success-bg;
     border-color: $devui-success-line;
     color: $devui-text;
-    box-shadow: $hwc-shadow-success;
 
     button.devui-close {
       & > svg path {
@@ -49,7 +49,6 @@
     background-color: $devui-info-bg;
     border-color: $devui-info-line;
     color: $devui-text;
-    box-shadow: $hwc-shadow-prompt;
 
     button.devui-close {
       & > svg path {
@@ -62,7 +61,6 @@
     background-color: $devui-warning-bg;
     border-color: $devui-warning-line;
     color: $devui-text;
-    box-shadow: $hwc-shadow-warn;
 
     button.devui-close {
       & > svg path {
@@ -75,7 +73,6 @@
     background-color: $devui-danger-bg;
     border-color: $devui-danger-line;
     color: $devui-text;
-    box-shadow: $hwc-shadow-error;
 
     button.devui-close {
       & > svg path {

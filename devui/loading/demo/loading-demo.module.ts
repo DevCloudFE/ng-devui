@@ -43,7 +43,7 @@ import { ShowLoadingComponent } from './show-loading/show-loading.component';
     SubscriptionComponent,
     ShowLoadingComponent
   ],
-
+  
 })
 export class LoadingDemoModule {
 }

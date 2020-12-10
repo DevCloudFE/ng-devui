@@ -22,7 +22,7 @@ import { ImagePreviewDirective } from './image-preview.directive';
   exports: [
     ImagePreviewDirective
   ],
-
+  
 })
 
 export class ImagePreviewModule { }

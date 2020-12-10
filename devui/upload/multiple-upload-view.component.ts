@@ -6,6 +6,7 @@ import {
   Output,
   EventEmitter,
   OnDestroy,
+  OnInit,
 } from '@angular/core';
 
 import {
@@ -22,7 +23,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './multiple-upload-view.component.html',
   preserveWhitespaces: false,
 })
-export class MultipleUploadViewComponent extends UploadComponent implements OnDestroy {
+export class MultipleUploadViewComponent extends UploadComponent implements OnDestroy , OnInit {
   @ViewChild('dUploadedFiles', { static: true }) uploadedFilesComponent: UploadedFilesComponent;
   @Input() uploadOptions: IUploadOptions;
   @Input() preloadFilesRef: TemplateRef<any>;
@@ -37,6 +38,8 @@ export class MultipleUploadViewComponent extends UploadComponent implements OnDe
   i18nSubscription: Subscription;
   constructor(private i18n: I18nService) {
     super();
+  }
+  ngOnInit(): void {
     this.i18nText = this.i18n.getI18nText().upload;
     this.i18nSubscription = this.i18n.langChange().subscribe((data) => {
       this.i18nText = data.upload;

@@ -67,6 +67,7 @@
 | 方法名 | 参数  | 默认值 |   说明    | 跳转 Demo |          
 | :----: | :---: | :----- | :-------: | :-------: |
 |  hide  |  --   | --     | 关闭modal | [标准对话框](/components/modal/demo#standard-dialog) |
+|  updateButtonOptions  |  buttons   | []     | 动态更新dialog里边的button配置项，比如disabled | [更新弹出框按钮状态](/components/modal/demo#update-button-options) |
 
 ### buttons 类型定义
 
@@ -86,6 +87,6 @@ buttons: Array<{
 
 |   参数    |     类型      | 默认  | 说明                                                | 跳转 Demo |
 | :-------: | :-----------: | :---: | :-------------------------------------------------- | --------- |
-| dMoveable |   `boolean`   | false | 可选，是否启用拖动移动功能                          |
-|  handle   | `HTMLElement` |  --   | 可选，可以拖动的元素                                |
-|  moveEl   | `HTMLElement` |  --   | 可选，被拖动的区块，默认为使用 dMoveable 指令的元素 |
+| dMoveable |   `boolean`   | false | 可选，是否启用拖动移动功能                          |[自定义对话框](/components/modal/demo#custom-dialog)|
+|  handle   | `HTMLElement` |  --   | 可选，可以拖动的元素                               |[自定义对话框](/components/modal/demo#custom-dialog)|
+|  moveEl   | `HTMLElement` |  --   | 可选，被拖动的区块，默认为使用 dMoveable 指令的元素 |[自定义对话框](/components/modal/demo#custom-dialog)|

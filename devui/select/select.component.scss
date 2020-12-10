@@ -1,5 +1,7 @@
 @import '../style/theme/color';
-@import '../style/core/_font';
+@import '../style/theme/shadow';
+@import '../style/theme/corner';
+@import '../style/theme/_font';
 
 .devui-dropdown-menu {
   &:not(.devui-dropdown-menu-cdk) {
@@ -257,7 +259,7 @@ div.devui-dropdown-menu {
   // margin-bottom: 5px;
   cursor: pointer;
   min-width: auto;
-  box-shadow: 0 4px 8px 0 $devui-shadow;
+  box-shadow: $devui-shadow-length-connected-overlay $devui-shadow;
 }
 
 div.devui-dropdown-menu .devui-select-list-unstyled,
@@ -340,13 +342,13 @@ div.devui-dropdown-menu.devui-dropdown-menu-multiple > ul.devui-list-unstyled li
 
 .devui-form-control,
 .devui-form-group .devui-form-control {
-  border-radius: 2px;
+  border-radius: $devui-border-radius;
   box-shadow: none;
 }
 
 .devui-form-control.no-radius,
 .devui-form-group .devui-form-control.no-radius {
-  border-radius: 1px 1px 0 0;
+  border-radius: $devui-border-radius $devui-border-radius 0 0;
 }
 
 .devui-select-underlined-border {
@@ -445,7 +447,7 @@ div.devui-dropdown-menu.devui-dropdown-menu-multiple > ul.devui-list-unstyled li
     padding: 0 4px;
     min-height: 22px;
     max-height: 22px;
-    border-radius: 2px;
+    border-radius: $devui-border-radius;
     color: $devui-text;
     background: $devui-label-bg;
     max-width: 100%;

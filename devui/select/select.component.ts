@@ -20,12 +20,15 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { fromEvent, BehaviorSubject, Observable, Subscription, of } from 'rxjs';
-import { tap, map, debounceTime, filter, switchMap } from 'rxjs/operators';
+import { map, debounceTime, filter, switchMap } from 'rxjs/operators';
 import { WindowRef } from 'ng-devui/window-ref';
 import { I18nService, I18nInterface } from 'ng-devui/i18n';
-import { VerticalConnectionPos, ConnectedOverlayPositionChange, CdkOverlayOrigin,
-  CdkConnectedOverlay, ConnectedPosition } from '@angular/cdk/overlay';
+import {
+  VerticalConnectionPos, ConnectedOverlayPositionChange, CdkOverlayOrigin,
+  CdkConnectedOverlay, ConnectedPosition
+} from '@angular/cdk/overlay';
 import { fadeInOut, AppendToBodyDirection, AppendToBodyDirectionsConfig } from 'ng-devui/utils';
+import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 
 @Component({
   selector: 'd-select',
@@ -121,9 +124,9 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
    * 【可选】是否appendToBody
    */
   @Input() appendToBody = false;
-    /**
-   * 【可选】cdk模式overlay Positions的控制
-   */
+  /**
+ * 【可选】cdk模式overlay Positions的控制
+ */
   @Input() appendToBodyDirections: Array<AppendToBodyDirection | ConnectedPosition> = [
     'rightDown', 'leftDown', 'rightUp', 'leftUp'
   ];
@@ -173,7 +176,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
    */
   @Input() allowClear = false;
 
-  get isClearIconShow () {
+  get isClearIconShow() {
     return this.allowClear && !this.multiple && !this.disabled && this.value;
   }
 
@@ -247,7 +250,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
   @Input() customViewDirection: 'bottom' | 'right' | 'left' = 'bottom';
   @Input() autoFocus = false;
   @Input() notAutoScroll = false; // 自动聚焦的时候，自动滚动到select位置
-
+  @Input() loadingTemplateRef: TemplateRef<any>;
   @ViewChild('selectWrapper', { static: true }) selectWrapper: ElementRef;
   @ViewChild('selectInput') selectInputElement: ElementRef;
   @ViewChild('selectMenu') selectMenuElement: ElementRef;
@@ -257,7 +260,8 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
   @ViewChild('filterInput') filterInputElement: ElementRef;
   @ViewChild('dropdownUl') dropdownUl: ElementRef;
   @ViewChild(CdkConnectedOverlay) connectedOverlay: CdkConnectedOverlay;
-
+  @ViewChild(CdkVirtualScrollViewport) virtualScrollViewport: CdkVirtualScrollViewport;
+  virtualScrollViewportSizeMightChange = false;
   showLoading = false;
   _isOpen = false;
   menuPosition: VerticalConnectionPos = 'bottom';
@@ -277,10 +281,10 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
 
   selectIndex = -1;
   _inputValue: any;
-  virtualScrollItemSize: any = { // sm对应是30px，默认36px高，lg对应是44px
-    sm: 30,
-    normal: 36,
-    lg: 44
+  virtualScrollItemSize: any = {
+    sm: 34,
+    normal: 38,
+    lg: 50
   };
 
   cdkConnectedOverlayOrigin: CdkOverlayOrigin;
@@ -353,6 +357,10 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
   ngOnChanges(changes: SimpleChanges): void {
     if (changes && (changes.searchFn || changes.options)) {
       this.resetSource();
+      if (this.virtualScroll && this.virtualScrollViewport) {
+        this.virtualScrollViewportSizeMightChange = true;
+        this.virtualScrollViewport.checkViewportSize();
+      }
     }
     if (changes['appendToBodyDirections']) {
       this.setPositions();
@@ -394,8 +402,8 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
     }
   }
 
-  getVirtualScrollItemSize(size) {
-    return this.templateItemSize ? this.templateItemSize : this.virtualScrollItemSize[size ? size : 'normal'];
+  get realVirtualScrollItemSize() {
+    return this.templateItemSize || this.virtualScrollItemSize[this.size || 'normal'];
   }
 
   resetSource() {
@@ -426,17 +434,17 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
           }
         });
       }
-       // 显示数据变更，需要判断全选半选状态
+      // 显示数据变更，需要判断全选半选状态
       if (this.isSelectAll) {
-          const selectedItemForFilterOptions = [];
-          this.multiItems.forEach(item => {
+        const selectedItemForFilterOptions = [];
+        this.multiItems.forEach(item => {
           this.availableOptions.forEach(option => {
-             if (item['id'] === option['id']) {
+            if (item['id'] === option['id']) {
               selectedItemForFilterOptions.push(item);
-             }
-            });
+            }
           });
-          this.setChecked(selectedItemForFilterOptions);
+        });
+        this.setChecked(selectedItemForFilterOptions);
       }
       if (!this.multiple && (!this.value || this.availableOptions && !this.availableOptions.find(option => option.option === this.value))) {
         this.selectIndex = this.filter && this.availableOptions && this.availableOptions.length > 0 ? 0 : -1;
@@ -458,15 +466,15 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
       this.filterInputElement.nativeElement.focus();
       if (!this.filterSubscription || this.appendToBody) { // 避免重复订阅
         this.filterSubscription = fromEvent(this.filterInputElement.nativeElement, 'input')
-        .pipe(
-          map((e: any) => e.target.value),
-          filter(term => !this.disabled && this.searchFn && term.length >= 0),
-          debounceTime(300) // hard code need refactory
-        )
-        .subscribe(term => {
-          this.selectIndex = -1;
-          return this.sourceSubscription.next(term);
-        });
+          .pipe(
+            map((e: any) => e.target.value),
+            filter(term => !this.disabled && this.searchFn && term.length >= 0),
+            debounceTime(300) // hard code need refactory
+          )
+          .subscribe(term => {
+            this.selectIndex = -1;
+            return this.sourceSubscription.next(term);
+          });
       }
     }
   }
@@ -623,11 +631,19 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
       }
     }
     this.isOpen = !this.isOpen;
-
-    const that = this;
-    setTimeout(function () {
-      that.searchInputValueChangeEvent();
-    }, 100);
+    if (this.virtualScrollViewportSizeMightChange) { // 解决虚拟滚动更新options长度展开前无法获取正确高度影响
+      setTimeout(() => {
+        if (this.virtualScrollViewportSizeMightChange) {
+          this.virtualScrollViewportSizeMightChange = false;
+          this.virtualScrollViewport.checkViewportSize();
+        }
+      }, 0);
+    }
+    if (this.isSearch && this.isOpen) { // 条件外移减少setTimeout
+      setTimeout(() => {
+        this.searchInputValueChangeEvent();
+      }, 100);
+    }
   }
 
   isBottomRectEnough() {
@@ -787,6 +803,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
 
   loadStart() {
     this.showLoading = true;
+    this.changeDetectorRef.markForCheck();
   }
 
   onPositionChange(position: ConnectedOverlayPositionChange) {
@@ -873,7 +890,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
       this.availableOptions[this.activeIndex].isChecked = false;
     }
     this.activeIndex = -1;
-    this.selectIndex  = -1;
+    this.selectIndex = -1;
     this.changeDetectorRef.markForCheck();
   }
 

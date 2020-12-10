@@ -8,8 +8,7 @@ import {
   trim,
   values
 } from 'lodash-es';
-import { BehaviorSubject, interval } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
 export interface Dictionary<T> {
   [id: number]: T;
 }
@@ -543,6 +542,28 @@ export class TreeFactory {
     };
     flatTree(this.treeRoot);
     return flattenTree;
+  }
+
+  public mergeTreeNodes(targetNode = this.treeRoot) {
+    const mergeToNode = (node) => {
+      if (node.data.children?.length === 1 && node.data.children[0]?.data?.children?.length !== 0) {
+        node.data.title = node.data.title + ' / ' + node.data.children[0]?.data?.title;
+        node.data.children = node.data.children[0]?.data?.children;
+        mergeToNode(node);
+      }
+      if (node.data.children?.length > 1) {
+        node.data.children.forEach(element => {
+          mergeToNode(element);
+        });
+      }
+    };
+    if (targetNode === this.treeRoot) {
+      this.treeRoot.forEach(element => {
+        mergeToNode(element);
+      });
+    } else {
+      mergeToNode(targetNode);
+    }
   }
 
   public renderFlattenTree() {

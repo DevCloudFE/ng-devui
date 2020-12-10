@@ -29,7 +29,6 @@ export class DescendantRegisterService<T> {
     return this._result.concat([]);
   }
 }
-
 @Directive()
 // tslint:disable-next-line
 export class DescendantChildren<T> implements OnInit, OnDestroy {
@@ -60,4 +59,5 @@ export class DescendantRoot<T> extends QueryList<T> {
     }
   }
 }
+
 

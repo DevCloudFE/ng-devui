@@ -39,7 +39,11 @@
 + DevUI表单验证基于[Angular Form](https://angular.io/guide/forms-overview)，完全兼容响应式表单与模板驱动表单。旨在封装与简化表单校验逻辑，你只需配置简单规则，验证消息与验证状态管理全交由DevUI Form自动完成。
 
 ## 如何使用
-+ 当你使用了响应式表单或模板驱动表单（均需引入`Angular FormsModule`）。在你的元素上绑定`dValidateRules`并传入你需要配置的规则即可（*虽在模板中可直接使用字面量传入规则，但考虑了变更检测，我们推荐你在组件控制器中声明规则再绑定到模板中*）。如：
++ 当你使用了响应式表单或模板驱动表单（均需在你的模块中引入`Angular FormsModule`）:
+```ts
+import { FormsModule } from '@angular/forms'
+```
++ 在你的元素上绑定`dValidateRules`并传入你需要配置的规则即可（*虽在模板中可直接使用字面量传入规则，但考虑了变更检测，我们推荐你在组件控制器中声明规则再绑定到模板中*）。如：
 ```html
 <input [(ngModel)]="name" [dValidateRules]="yourRules">
 ```
@@ -76,13 +80,16 @@ export type DValidateRules = {
 
   asyncValidators ?: DAsyncValidateRule[]; // 异步校验规则
 
+  asyncDebounceTime ?: number; // 异步校验器debounceTime（单位ms），默认为300
+
   errorStrategy ?: DValidationErrorStrategy; // error更新策略，默认为'dirty'
 
   message ?: string; // 统一配置的message，如果你的某一条校验规则未配置message，将取统一message
 
   messageShowType ?: 'popover' | 'text' | 'none' // 消息自动显示策略（当前仅单个表单组件下生效），(popover | d-form-item容器内部显示 | 不显示)
 
-  popPosition ?: 'top' | 'right' | 'bottom' | 'left' | ('top' | 'right' | 'bottom' | 'left')[]; // 消息显示为popover时，设置popover的内容弹出方向，默认为['right', 'bottom']
+  // 消息显示为popover时，设置popover的内容弹出方向，默认为['right', 'bottom']
+  popPosition ?: 'top' | 'right' | 'bottom' | 'left' | ('top' | 'right' | 'bottom' | 'left')[];
 
 } | DValidateRule[];  // 若只需设置同步校验规则，可传同步校验规则数组
 ```
@@ -142,7 +149,7 @@ export type DAsyncValidatorFn = (value: any) => Observable<boolean | string | nu
 #### ruleReservedWords规则对象保留字
 + 定义DevUI Rule规则的保留字，如果你的key不为保留字，则可作为你当前rule id使用（默认校验器id或自定义校验器id）
 ```TS
-export const ruleReservedWords = ['id', 'validator', 'message', 'errorStrategy', 'priority', 'isNgValidator', 'updateOn', 'popPosition'];
+export const ruleReservedWords = ['id', 'validator', 'message', 'errorStrategy', 'priority', 'isNgValidator', 'popPosition', 'asyncDebounceTime'];
 ```
 
 #### dDefaultValidators默认校验器

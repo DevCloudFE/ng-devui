@@ -25,11 +25,13 @@ import { I18nService, I18nInterface } from 'ng-devui/i18n';
   templateUrl: './editable-select.component.html',
   styleUrls: ['./editable-select.component.scss'],
   exportAs: 'editable-select',
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => EditableSelectComponent),
-    multi: true
-  }],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => EditableSelectComponent),
+      multi: true,
+    },
+  ],
   preserveWhitespaces: false,
 })
 export class EditableSelectComponent implements ControlValueAccessor, OnInit, OnChanges, OnDestroy {
@@ -48,6 +50,7 @@ export class EditableSelectComponent implements ControlValueAccessor, OnInit, On
   @Input() disabledKey: string;
   @Input() searchFn: (term: string) => Observable<any[]>;
   @Input() enableLazyLoad = false;
+  @Input() width: number;
   @Output() loadMore = new EventEmitter<any>();
   @ViewChild(AutoCompleteDirective, { static: true }) autoCompleteDirective: AutoCompleteDirective;
   @ViewChild('editableSelectBox', { static: true }) editableSelectBox: ElementRef;
