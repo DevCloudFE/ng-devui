@@ -1,5 +1,5 @@
+import { ComponentFactoryResolver, Injector, TemplateRef, Type } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Type, ComponentFactoryResolver, Injector, TemplateRef } from '@angular/core';
 
 export interface IModalOptions {
   id?: string;

@@ -1,8 +1,8 @@
+import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { Component, ElementRef, Input, TemplateRef, ViewChild } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
-import { AutoCompleteConfig } from './auto-complete-config';
 import { fadeInOut } from 'ng-devui/utils';
-import { CdkOverlayOrigin } from '@angular/cdk/overlay';
+import { AutoCompleteConfig } from './auto-complete-config';
 
 @Component({
   selector: 'd-auto-complete-popup',

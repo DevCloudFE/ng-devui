@@ -1,16 +1,16 @@
 <section>
   <h4>simulate &lt;a&gt; tag : open url in new tab</h4>
-  <div style="padding: 5px 10px;">
+  <div style="padding: 5px 10px">
     使用函数：
     <d-button bsStyle="stress" circled="true" (btnClick)="goto()" #btn> 新标签页打开angular官网</d-button>
   </div>
-  <div style="padding: 5px 10px;">
+  <div style="padding: 5px 10px">
     使用指令：
     <d-button bsStyle="common" circled="true" dSimulateATag [href]="'https://angular.io'" [target]="'_blank'">
       新标签页打开angular官网
     </d-button>
   </div>
-  <div style="padding: 5px 10px;">
+  <div style="padding: 5px 10px">
     回调中使用方法（非调用HelperUtils）：
     <d-button bsStyle="stress" circled="true" (btnClick)="timeoutGoto()"> 新标签页打开angular官网</d-button>
   </div>

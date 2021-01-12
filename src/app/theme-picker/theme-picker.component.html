@@ -1,6 +1,6 @@
 <div dDropDown appendToBody [appendToBodyDirections]="['leftDown', 'leftUp', 'rightDown', 'rightUp']" [closeScope]="'blank'">
   <div dDropDownToggle class="theme-toggle">
-    主题
+    {{ 'themePicker.theme' | translate }}
     <div class="theme-block">
       <span class="brand-color"></span>
       <span class="background-color"></span>
@@ -8,7 +8,7 @@
   </div>
   <div dDropDownMenu class="theme-menu">
     <section>
-      <div class="title">主题颜色</div>
+      <div class="title">{{ 'themePicker.color' | translate }}</div>
       <div class="content theme-color">
         <div
           class="theme-brand"
@@ -39,11 +39,11 @@
       </div>
     </section>
     <section>
-      <div class="title">主题模式</div>
+      <div class="title">{{ 'themePicker.mode' | translate }}</div>
       <div class="content">
         <d-radio-group class="theme-select-radio" [(ngModel)]="themeMode" (change)="themesChange()" [ngModelOptions]="{ standalone: true }">
-          <d-radio [value]="'light'" [disabled]="themePrefersColorScheme">{{ '浅色模式' }}</d-radio>
-          <d-radio [value]="'dark'" [disabled]="themePrefersColorScheme">{{ '深色模式' }}</d-radio>
+          <d-radio [value]="'light'" [disabled]="themePrefersColorScheme">{{ 'themePicker.light' | translate }}</d-radio>
+          <d-radio [value]="'dark'" [disabled]="themePrefersColorScheme">{{ 'themePicker.dark' | translate }}</d-radio>
         </d-radio-group>
         <div class="prefers-color-scheme">
           <d-toggle
@@ -51,11 +51,11 @@
             [(ngModel)]="themePrefersColorScheme"
             (ngModelChange)="themePrefersColorSchemeChange($event)"
           ></d-toggle>
-          <span>跟随系统</span>
+          <span>{{ 'themePicker.follow' | translate }}</span>
         </div>
         <div class="prefers-color-scheme">
           <d-toggle class="theme-follow-toggle" [(ngModel)]="protectEye" (ngModelChange)="themeFontSizeChange()"></d-toggle>
-          <span>大字号模式</span>
+          <span>{{ 'themePicker.largeSize' | translate }}</span>
         </div>
       </div>
     </section>

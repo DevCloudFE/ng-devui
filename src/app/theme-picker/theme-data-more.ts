@@ -1,4 +1,4 @@
-import { Theme, devuiLightTheme, devuiDarkTheme } from 'ng-devui/theme';
+import { devuiDarkTheme, devuiLightTheme, Theme } from 'ng-devui/theme';
 export const greenLightTheme: Theme = new Theme({
   id: 'green-light-theme',
   name: 'Light Mode',
@@ -40,6 +40,8 @@ export const greenLightTheme: Theme = new Theme({
     'devui-primary-bg': '#f3fef9',
     'devui-default-line': '#3DCCA6',
     'devui-default-bg': '#f3f8f7',
+    'devui-primary-disabled': '#C5F0E5',
+    'devui-icon-fill-active-disabled': '#C5F0E5',
   }),
   isDark: false,
   extends: 'devui-dark-theme',
@@ -78,6 +80,8 @@ export const greenDarkTheme: Theme = new Theme({
     'devui-primary-bg': '#3f4241',
     'devui-default-line': '#3DCCA6',
     'devui-default-bg': '#383838',
+    'devui-primary-disabled': '#28544B',
+    'devui-icon-fill-active-disabled': '#28544B',
   }),
   isDark: true,
   extends: 'devui-dark-theme',

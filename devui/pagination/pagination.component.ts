@@ -1,3 +1,4 @@
+import { ConnectedPosition } from '@angular/cdk/overlay';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -13,10 +14,9 @@ import {
   SimpleChanges,
   ViewChild
 } from '@angular/core';
-import { fromEvent, Subscription } from 'rxjs';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { AppendToBodyDirection } from 'ng-devui/utils';
-import { ConnectedPosition } from '@angular/cdk/overlay';
+import { fromEvent, Subscription } from 'rxjs';
 @Component({
   selector: 'd-pagination',
   styleUrls: ['./pagination.component.scss'],
@@ -87,7 +87,6 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy,
   totalPage = 1;
   _total = 0;
   jumpPage = null;
-
 
   @Input() totalItemText: string;
   @Input() goToText: string;

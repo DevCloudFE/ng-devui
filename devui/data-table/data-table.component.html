@@ -11,7 +11,7 @@
       [style.width]="!maxWidth ? tableWidth : null"
     >
       <table
-        class="devui-table {{ borderType ? 'table-' + borderType : '' }} {{ fixHeader ? 'table-fix-header' : '' }} {{
+        class="devui-table devui-table-{{ size }} {{ borderType ? 'table-' + borderType : '' }} {{ fixHeader ? 'table-fix-header' : '' }} {{
           headerBg ? 'header-bg' : ''
         }} {{ striped ? 'table-striped' : '' }}"
         [style.table-layout]="tableLayout"
@@ -41,9 +41,9 @@
     >
       <table
         #tableBody
-        class="devui-table {{ borderType ? 'table-' + borderType : '' }} {{ rowHoveredHighlight ? 'table-hover' : '' }} {{
-          headerBg ? 'header-bg' : ''
-        }} {{ striped ? 'table-striped' : '' }}"
+        class="devui-table devui-table-{{ size }} {{ borderType ? 'table-' + borderType : '' }} {{
+          rowHoveredHighlight ? 'table-hover' : ''
+        }} {{ headerBg ? 'header-bg' : '' }} {{ striped ? 'table-striped' : '' }}"
         [style.table-layout]="tableLayout"
         [style.height]="minHeight ? minHeight : null"
       >
@@ -114,9 +114,9 @@
   >
     <table
       #tableBody
-      class="devui-table {{ borderType ? 'table-' + borderType : '' }} {{ rowHoveredHighlight ? 'table-hover' : '' }} {{
-        headerBg ? 'header-bg' : ''
-      }} {{ striped ? 'table-striped' : '' }}"
+      class="devui-table devui-table-{{ size }} {{ borderType ? 'table-' + borderType : '' }} {{
+        rowHoveredHighlight ? 'table-hover' : ''
+      }} {{ headerBg ? 'header-bg' : '' }} {{ striped ? 'table-striped' : '' }}"
       [style.table-layout]="tableLayout"
       [style.height]="minHeight ? minHeight : null"
     >

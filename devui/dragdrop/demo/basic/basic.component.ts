@@ -45,4 +45,3 @@ export class BasicComponent {
     console.log(...v);
   }
 }
-

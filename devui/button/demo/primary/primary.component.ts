@@ -10,5 +10,4 @@ export class PrimaryComponent implements OnInit {
   ngOnInit() {
   }
 
-
 }

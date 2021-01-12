@@ -2,8 +2,8 @@ import {
   Component,
   OnInit
 } from '@angular/core';
-import { timer } from 'rxjs';
 import { LoadingType } from 'ng-devui/loading';
+import { timer } from 'rxjs';
 
 @Component({
   selector: 'd-custom',

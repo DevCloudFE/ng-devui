@@ -1,19 +1,21 @@
 import {
-    AfterViewInit,
-    Component,
-    ElementRef,
-    QueryList,
-    ViewChildren
-  } from '@angular/core';
-  import { ActivatedRoute } from '@angular/router';
-  import * as hljs from 'highlight.js/lib/highlight';
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Input, OnInit,
+  QueryList,
+  ViewChildren
+} from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import * as hljs from 'highlight.js/lib/core';
 
-  ['bash', 'typescript', 'json'].forEach((langName) => {
+['bash', 'typescript', 'json'].forEach((langName) => {
     const langModule = require(`highlight.js/lib/languages/${langName}`);
     hljs.registerLanguage(langName, langModule);
   });
 
-  @Component({
+@Component({
     template: `
       <div class="get-start">
       <div class="readme">
@@ -29,17 +31,44 @@ import {
         `
     ],
   })
-  export class ThemeGuideComponent implements AfterViewInit {
-    readMe: HTMLElement = require('!html-loader!markdown-loader!./themeGuide.md');
+  export class ThemeGuideComponent implements OnInit, AfterViewInit {
+    _readMe: HTMLElement;
+    @Input() set readMe(readMe: HTMLElement) {
+      this._readMe = readMe;
+      setTimeout(() => {
+        this.refreshView();
+      });
+    }
+
+    get readMe () {
+      return this._readMe;
+    }
+
     @ViewChildren('documentation') documentation: QueryList<ElementRef>;
 
-    constructor(private route: ActivatedRoute) {
+    constructor(private route: ActivatedRoute, private translate: TranslateService) {
+    }
+
+    ngOnInit() {
+      const lang = localStorage.getItem('lang');
+      this.setReadMe(lang);
+      this.translate.onLangChange.subscribe((event: TranslationChangeEvent) => {
+        this.setReadMe(event.lang);
+      });
+    }
+
+    setReadMe(lang) {
+      const currLang = lang === 'en-us' ? 'en' : 'cn';
+      this.readMe = require(`!html-loader!markdown-loader!./themeGuide-${currLang}.md`);
     }
 
     ngAfterViewInit(): void {
+      this.refreshView();
+    }
+
+    refreshView() {
       Array.from<HTMLElement>(document.querySelectorAll('pre code')).forEach((block) => {
         hljs.highlightBlock(block);
       });
     }
   }
-

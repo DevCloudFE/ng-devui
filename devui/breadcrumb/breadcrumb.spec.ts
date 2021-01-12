@@ -1,18 +1,17 @@
-import { ComponentFixture, TestBed, tick, fakeAsync, flush } from '@angular/core/testing';
-import { Component, ViewChild, DebugElement } from '@angular/core';
-import { BreadCrumbComponent } from './breadcrumb.component';
-import { BreadcrumbModule } from './breadcrumb.module';
-import { BreadCrumbItemComponent } from './breadcrumb-item/breadcrumb-item.component';
-import { DomHelper } from '../utils/testing/dom-helper';
-import { RouterTestingModule } from '@angular/router/testing';
+import { Component, DebugElement, ViewChild } from '@angular/core';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterTestingModule } from '@angular/router/testing';
+import { DomHelper } from '../utils/testing/dom-helper';
 import { createKeyBoardEvent } from '../utils/testing/event-helper';
-
+import { BreadCrumbItemComponent } from './breadcrumb-item/breadcrumb-item.component';
+import { BreadCrumbComponent } from './breadcrumb.component';
+import { BreadcrumbModule } from './breadcrumb.module';
 @Component({
     template: `<d-breadcrumb #breadcrumb>
     <d-breadcrumb-item #breadcrumbItem>
-      <a routerLink="/components/get-start">DevUI</a>
+      <a routerLink="/components/zh-cn/get-start">DevUI</a>
     </d-breadcrumb-item>
     <d-breadcrumb-item>
       <span>面包屑</span>
@@ -24,16 +23,15 @@ import { createKeyBoardEvent } from '../utils/testing/event-helper';
 class TestBreadCrumbComponent {
     @ViewChild('breadcrumb') breadcrumb: BreadCrumbComponent;
     @ViewChild('breadcrumbItem') breadcrumbItem: BreadCrumbItemComponent;
-    source = [{ title: 'DevUI', showMenu: false, link: '/components/get-start' },
+    source = [{ title: 'DevUI', showMenu: false, link: '/components/zh-cn/get-start' },
     {
-        title: '面包屑', showMenu: true, link: '/components/breadcrumb/demo', noNavigation: true, isSearch: true,
+        title: '面包屑', showMenu: true, link: '/components/zh-cn/breadcrumb/demo', noNavigation: true, isSearch: true,
         menuList: [
             { name: '锚点', link: 'http://devui.huawei.com/components/anchor/demo', target: '_blank' },
             { name: '按钮', link: '/', linkType: 'routerLink' } // 测试是否进入navigateTo方法处理routerLink的情况
         ]
     }];
 }
-
 
 describe('breadcrumb basic', () => {
     beforeEach(() => {

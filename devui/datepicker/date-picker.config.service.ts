@@ -12,4 +12,6 @@ export class DatePickerConfigService {
       time: 'y/MM/dd HH:mm:ss'
     }
   };
+
+  defaultFormat = 'y/MM/dd';
 }

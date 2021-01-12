@@ -1,5 +1,5 @@
-import { Directive, Input, HostBinding, Self, Output, EventEmitter, Optional, ContentChildren, QueryList } from '@angular/core';
-import { ControlContainer, AbstractControlDirective, AbstractControl, NgForm } from '@angular/forms';
+import { ContentChildren, Directive, EventEmitter, HostBinding, Input, Optional, Output, QueryList, Self } from '@angular/core';
+import { AbstractControl, AbstractControlDirective, ControlContainer, NgForm } from '@angular/forms';
 import { filter, startWith, take } from 'rxjs/operators';
 import { DFormControlRuleDirective, DFormGroupRuleDirective } from './validator-directive/form-control-rules.directive';
 
@@ -55,7 +55,7 @@ export class FormDirective {
     return this.labelSize === 'sm';
   }
 
-  updateOnSubmit($event?) {
+  updateOnSubmit($event?, data?: any) {
     this._operateAllControl(this._cd.control, (cd: AbstractControl) => {
       cd.markAsDirty();
       cd.updateValueAndValidity();
@@ -77,11 +77,13 @@ export class FormDirective {
             this.dSubmit.emit({
               valid: this._dValidateRuleDir.isReady,
               directive: this._dValidateRuleDir,
+              data: data
             });
           } else {
             this.dSubmit.emit({
               valid: this._cd.valid,
               directive: this._cd,
+              data: data
             });
           }
         }

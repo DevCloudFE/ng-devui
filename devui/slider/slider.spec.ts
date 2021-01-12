@@ -1,14 +1,13 @@
-import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { ComponentFixture, TestBed, async, fakeAsync, tick } from '@angular/core/testing';
 import { Component, DebugElement, ViewChild } from '@angular/core';
-import { By } from '@angular/platform-browser';
+import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-
-import { SliderModule } from './slider.module';
+import { By } from '@angular/platform-browser';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { PopoverModule } from '../popover/popover.module';
 import { DomHelper } from '../utils/testing/dom-helper';
-import { mouseMoveTrigger, dispatchMouseEvent } from '../utils/testing/event-helper';
+import { dispatchMouseEvent, mouseMoveTrigger } from '../utils/testing/event-helper';
 import { SliderComponent } from './slider.component';
+import { SliderModule } from './slider.module';
 
 @Component({
   template: `
@@ -53,7 +52,7 @@ describe('slider', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [SliderModule, FormsModule, NoopAnimationsModule, PopoverModule],
-      declarations: [TestSliderBasicComponent],
+      declarations: [TestSliderBasicComponent]
     }).compileComponents();
   }));
 

@@ -1,0 +1,32 @@
+<section>
+  <div class="row">
+    <h5>传入模板</h5>
+    <div class="col-md-6">
+      <div class="devui-input-group devui-dropdown-origin-wrapper devui-dropdown-origin">
+        <input
+          class="devui-input devui-form-control"
+          placeholder="y/MM/dd"
+          autocomplete="off"
+          dTimePicker
+          [(ngModel)]="selectedTime1"
+          (focus)="timePicker1.toggle()"
+          #timePicker1="timePicker"
+          (selectedTimeChange)="timeChange($event)"
+          (ngModelChange)="modelChange($event)"
+          [customViewTemplate]="myCustomView"
+        />
+        <div *ngIf="selectedTime1" class="devui-input-group-addon icon-close-wrapper" (click)="timePicker1.clearAll()">
+          <i class="icon icon-close"></i>
+        </div>
+        <div class="devui-input-group-addon" (click)="timePicker1.toggle()">
+          <i class="icon icon-time"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #myCustomView let-chooseTime="chooseTime" let-confirmTime="confirmTime" let-hide="hide" let-timePicker>
+    <a class="devui-link" (click)="choose(timePicker1)">选择现在chooseTime</a>
+    <br />
+    <a class="devui-link" (click)="confirmTime({ time: '22', type: 'hh' })">选择22点</a>
+  </ng-template>
+</section>

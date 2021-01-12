@@ -1,18 +1,18 @@
 import {
   Component,
-  Input,
-  Output,
-  EventEmitter,
-  OnChanges,
-  SimpleChanges,
-  OnInit,
   ContentChild,
-  TemplateRef,
-  OnDestroy
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  Output,
+  SimpleChanges,
+  TemplateRef
 } from '@angular/core';
-import { Subscription, Observable } from 'rxjs';
-import { TransferDirection, TransferDataFormat } from './transfer.types';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
+import { Observable, Subscription } from 'rxjs';
+import { TransferDataFormat, TransferDirection } from './transfer.types';
 
 @Component({
   selector: 'd-transfer',

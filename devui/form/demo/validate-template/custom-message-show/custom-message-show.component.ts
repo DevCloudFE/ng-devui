@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 
-
 @Component({
   selector: 'd-form-demo-custom-message-show',
   templateUrl: './custom-message-show.component.html',

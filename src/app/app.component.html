@@ -65,13 +65,13 @@
       </h1>
       <div class="main-nav">
         <a class="main-nav-item" target="_self" href="/design-cn" routerLinkActive="active">
-          <span>设计体系</span>
+          <span>{{ currentLang === 'zh-cn' ? '设计体系' : 'DevUI Design' }}</span>
         </a>
-        <a class="main-nav-item" routerLink="components" routerLinkActive="active">
-          <span>组件</span>
+        <a class="main-nav-item" [routerLink]="['components', currentLang]" routerLinkActive="active">
+          <span>{{ currentLang === 'zh-cn' ? '组件' : 'Components' }}</span>
         </a>
         <a class="main-nav-item" target="_self" href="/icon" routerLinkActive="active">
-          <span>图标库</span>
+          <span>{{ currentLang === 'zh-cn' ? '图标库' : 'Icon Sets' }}</span>
         </a>
         <a
           class="main-nav-item"
@@ -80,7 +80,7 @@
           href="https://github.com/DevCloudFE/ng-devui/releases"
           routerLinkActive="active"
         >
-          <span>版本历程</span>
+          <span>{{ currentLang === 'zh-cn' ? '版本历程' : 'Versions' }}</span>
         </a>
         <span class="main-nav-item">
           <d-select

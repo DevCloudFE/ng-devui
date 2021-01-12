@@ -1,7 +1,7 @@
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { GanttScaleUnit, GanttService, GanttTaskInfo } from 'ng-devui/gantt';
 import { Subscription } from 'rxjs';
-import { basicData } from './../mock-data';
-import { Component, OnInit, OnDestroy, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
-import { GanttService, GanttScaleUnit, GanttTaskInfo } from 'ng-devui/gantt';
+import { basicData, curYear } from './../mock-data';
 
 @Component({
   selector: 'd-basic',
@@ -22,9 +22,8 @@ export class BasicComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(private ganttService: GanttService) { }
 
   ngOnInit() {
-    const curDate = new Date();
-    this.ganttStartDate = new Date(curDate.getFullYear(), 4, 1);
-    this.ganttEndDate = new Date(curDate.getFullYear(), 10, 15);
+    this.ganttStartDate = new Date(curYear, 4, 1);
+    this.ganttEndDate = new Date(curYear, 10, 15);
     this.ganttService.setScaleConfig({
       startDate: this.ganttStartDate,
       endDate: this.ganttEndDate,

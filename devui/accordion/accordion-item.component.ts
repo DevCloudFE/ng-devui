@@ -1,7 +1,7 @@
-import { AccordionComponent } from './accordion.component';
-import { Component, ViewEncapsulation, HostListener } from '@angular/core';
-import { AccordionBaseItem } from './accordion.type';
+import { Component, HostListener, ViewEncapsulation } from '@angular/core';
 import { AccordionBaseItemComponent } from './accordion-base-item-component.class';
+import { AccordionComponent } from './accordion.component';
+import { AccordionBaseItem } from './accordion.type';
 
 @Component({
   selector: 'd-accordion-item',

@@ -1,11 +1,10 @@
 import { Component, DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { CardComponent } from './card.component';
-import { CardModule } from 'ng-devui/card/card.module';
 import { AvatarModule } from 'ng-devui/avatar/avatar.module';
+import { CardModule } from 'ng-devui/card/card.module';
 import { DomHelper } from '../utils/testing/dom-helper';
-
+import { CardComponent } from './card.component';
 @Component({
   template: `
     <d-card>

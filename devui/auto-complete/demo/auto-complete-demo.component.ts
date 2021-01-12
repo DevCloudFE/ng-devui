@@ -1,11 +1,13 @@
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
-import { Component } from '@angular/core';
+import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'd-auto-complete-demo',
-  templateUrl: './auto-complete-demo.component.html'
+  templateUrl: './auto-complete-demo.component.html',
 })
-export class AutoCompleteDemoComponent {
+export class AutoCompleteDemoComponent implements OnInit, OnDestroy {
   AutoCompleteDemoBasic: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./basic/auto-complete-demo-basic.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/auto-complete-demo-basic.component.ts') },
@@ -45,12 +47,39 @@ export class AutoCompleteDemoComponent {
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./lazy-load/auto-complete-demo-lazy-load.component.ts') },
   ];
 
-  navItems = [
-    { dAnchorLink: 'basic-usage', value: '基本用法'},
-    { dAnchorLink: 'auto-object', value: '自定义数据匹配方法'},
-    { dAnchorLink: 'auto-custom', value: '自定义模板展示'},
-    { dAnchorLink: 'auto-disable', value: '设置禁用'},
-    { dAnchorLink: 'auto-latest', value: '最近输入'},
-    { dAnchorLink: 'auto-lazy-load', value: '启用懒加载'}
-  ];
+  navItems = [];
+  subs: Subscription = new Subscription();
+  constructor(private translate: TranslateService) {}
+
+  ngOnInit() {
+    this.subs.add(
+      this.translate.get('components.auto-complete.anchorLinkValues').subscribe((res) => {
+        this.setNavValues(res);
+      })
+    );
+
+    this.subs.add(
+      this.translate.onLangChange.subscribe((event: TranslationChangeEvent) => {
+        const values = this.translate.instant('components.auto-complete.anchorLinkValues');
+        this.setNavValues(values);
+      })
+    );
+  }
+
+  setNavValues(values) {
+    this.navItems = [
+      { dAnchorLink: 'basic-usage', value: values['basic-usage'] },
+      { dAnchorLink: 'auto-object', value: values['auto-object'] },
+      { dAnchorLink: 'auto-custom', value: values['auto-custom'] },
+      { dAnchorLink: 'auto-disable', value: values['auto-disable'] },
+      { dAnchorLink: 'auto-latest', value: values['auto-latest'] },
+      { dAnchorLink: 'auto-lazy-load', value: values['auto-lazy-load'] },
+    ];
+  }
+
+  ngOnDestroy() {
+    if (this.subs) {
+      this.subs.unsubscribe();
+    }
+  }
 }

@@ -19,8 +19,8 @@
     min-width: 32px;
     line-height: 32px;
     background: $devui-base-bg;
-    box-shadow: 0 2px 10px 0 rgba(41, 48, 64, 0.1);
-    border-radius: 2px;
+    box-shadow: $devui-shadow-length-base rgba(41, 48, 64, 0.1);
+    border-radius: $devui-border-radius;
     cursor: pointer;
     text-align: center;
   }

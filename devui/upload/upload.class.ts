@@ -1,5 +1,5 @@
-import { toArray } from 'rxjs/operators';
 import { from, merge } from 'rxjs';
+import { toArray } from 'rxjs/operators';
 
 import {
   FileUploader

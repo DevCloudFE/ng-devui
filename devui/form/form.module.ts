@@ -1,14 +1,14 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PopoverModule } from 'ng-devui/popover';
+import { FormControlComponent } from './form-control.component';
 import { FormItemComponent } from './form-item.component';
 import { FormLabelComponent } from './form-label.component';
-import { FormControlComponent } from './form-control.component';
-import { FormOperationComponent, DFormSubmitDirective, DFormResetDirective } from './form-operation.component';
+import { DFormResetDirective, DFormSubmitDirective, FormOperationComponent } from './form-operation.component';
 import { FormDirective } from './form.directive';
-import { DFormControlRuleDirective, DFormGroupRuleDirective } from './validator-directive/form-control-rules.directive';
 import { DValidateSyncDirective } from './validator-directive/d-validate-sync.directive';
+import { DFormControlRuleDirective, DFormGroupRuleDirective } from './validator-directive/form-control-rules.directive';
 
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule, FormsModule, PopoverModule],

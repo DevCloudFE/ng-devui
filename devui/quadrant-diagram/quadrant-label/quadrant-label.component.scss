@@ -1,15 +1,19 @@
+@import '../../style/theme/shadow';
+@import '../../style/theme/_font';
+@import '../../style/theme/corner';
+
 .devui-list-style {
-  font-size: 14px;
+  font-size: $devui-font-size-card-title;
   color: #293040;
   background: #ffffff;
-  box-shadow: 0 0 1px 0 rgba(41, 48, 64, 0.25), 0 1px 2px 0 rgba(41, 48, 64, 0.2);
-  border-radius: 1px;
+  box-shadow: $devui-shadow-length-base rgba(41, 48, 64, 0.25), $devui-shadow-length-base rgba(41, 48, 64, 0.2);
+  border-radius: $devui-border-radius;
   z-index: 10;
   cursor: grabbing;
 
   &:hover {
     color: #5170ff;
-    box-shadow: 0 4px 8px 0 rgba(41, 48, 64, 0.25);
+    box-shadow: $devui-shadow-length-hover rgba(41, 48, 64, 0.25);
   }
 }
 
@@ -60,5 +64,5 @@
   color: #5e6678;
   line-height: 20px;
   padding: 5px;
-  font-size: 12px;
+  font-size: $devui-font-size;
 }

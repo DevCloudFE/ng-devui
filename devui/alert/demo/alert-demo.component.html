@@ -1,9 +1,9 @@
 <div class="demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 60, bottom: 0 }">
   <d-demo-nav [navItems]="navItems">></d-demo-nav>
   <div class="demo-example" [dAnchor]="'basic-usage'">
-    <div class="demo-title">基本用法</div>
+    <div class="demo-title">{{ 'components.alert.basicDemo.title' | translate }}</div>
     <div class="demo-text">
-      共有四种样式：success、danger、warning、info
+      {{ 'components.alert.basicDemo.description' | translate }}
     </div>
     <d-codebox id="components-tabs-default" [sourceData]="basicSource">
       <d-alert-basic demo></d-alert-basic>
@@ -11,9 +11,9 @@
   </div>
 
   <div class="demo-example" [dAnchor]="'tips-to-close'">
-    <div class="demo-title">可关闭的提示</div>
+    <div class="demo-title">{{ 'components.alert.closableDemo.title' | translate }}</div>
     <div class="demo-text">
-      显示关闭按钮，点击可关闭提示。
+      {{ 'components.alert.closableDemo.description' | translate }}
     </div>
     <d-codebox id="components-tabs-close" [sourceData]="closeSource">
       <d-alert-close demo></d-alert-close>

@@ -1,25 +1,24 @@
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import {
   Component,
-  forwardRef,
-  OnInit,
-  Input,
-  Output,
-  EventEmitter,
   ElementRef,
-  ViewChild,
-  OnDestroy,
-  TemplateRef,
+  EventEmitter,
+  forwardRef,
+  Input,
   OnChanges,
-  SimpleChanges
+  OnDestroy,
+  OnInit,
+  Output,
+  SimpleChanges,
+  TemplateRef,
+  ViewChild
 } from '@angular/core';
-import { DateConverter } from 'ng-devui/utils';
-import { SelectDateRangeChangeEventArgs, SelectDateRangeChangeReason } from './date-range-change-event-args.model';
-import { DatePickerConfigService as DatePickerConfig } from './date-picker.config.service';
-import { I18nService, I18nInterface } from 'ng-devui/i18n';
-import { DefaultDateConverter } from 'ng-devui/utils';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { I18nInterface, I18nService } from 'ng-devui/i18n';
+import { DateConverter, DefaultDateConverter } from 'ng-devui/utils';
 import { Subject, Subscription } from 'rxjs';
 import { distinctUntilChanged } from 'rxjs/operators';
+import { DatePickerConfigService as DatePickerConfig } from './date-picker.config.service';
+import { SelectDateRangeChangeEventArgs, SelectDateRangeChangeReason } from './date-range-change-event-args.model';
 
 @Component({
   selector: 'd-date-range-picker',
@@ -138,8 +137,12 @@ export class DateRangePickerComponent implements OnChanges, OnInit, ControlValue
   writeValue(selectedRange): void {
     if (selectedRange) {
       this.selectedRange = selectedRange;
-      this.leftPicker['selectedRange'] = selectedRange;
-      this.rightPicker['selectedRange'] = selectedRange;
+      if (this.leftPicker) {
+        this.leftPicker['selectedRange'] = selectedRange;
+      }
+      if (this.rightPicker) {
+        this.rightPicker['selectedRange'] = selectedRange;
+      }
       [this.rangeStart, this.rangeEnd] = this.selectedRange;
     }
   }
@@ -221,7 +224,7 @@ export class DateRangePickerComponent implements OnChanges, OnInit, ControlValue
   }
 
   ngOnDestroy(): void {
-    if(this.i18nSubscription) {
+    if (this.i18nSubscription) {
       this.i18nSubscription.unsubscribe();
     }
   }

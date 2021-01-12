@@ -1,16 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { ExamplePanelComponent } from './example-panel.component';
-import { AppContentComponent } from './app-content.component';
-import { routesConfig } from './component.route';
-import { GetStartedComponent } from './get-started.component';
 import { DevUIModule } from 'ng-devui';
-
-import xml from 'highlight.js/lib/languages/xml';
+import { SafePipeModule } from 'ng-devui/utils';
+import { TranslateModule } from '@ngx-translate/core';
 import scss from 'highlight.js/lib/languages/scss';
 import typescript from 'highlight.js/lib/languages/typescript';
-import { SafePipeModule } from 'ng-devui/utils';
+import xml from 'highlight.js/lib/languages/xml';
+import { AppContentComponent } from './app-content.component';
+import { routesConfig } from './component.route';
+import { ExamplePanelComponent } from './example-panel.component';
+import { GetStartedComponent } from './get-started.component';
 import { ColorComponent } from './color/color.component';
 import { ThemeGuideComponent } from './theme-guide.component';
 
@@ -33,6 +33,7 @@ export function hljsLanguages() {
   imports: [
     CommonModule,
     SafePipeModule,
+    TranslateModule,
     DevUIModule.forRoot(),
     RouterModule.forChild([
       {

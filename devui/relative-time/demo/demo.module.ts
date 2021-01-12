@@ -1,18 +1,20 @@
-import { RouterModule } from '@angular/router';
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DemoComponent } from './demo.component';
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { DataTableModule } from 'ng-devui/data-table';
-import { RelativeTimeModule } from '../relative-time.module';
 import { I18nModule } from 'ng-devui/i18n';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
-import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
+import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
+import { TranslateModule } from '@ngx-translate/core';
+import { RelativeTimeModule } from '../relative-time.module';
 import { BasicComponent } from './basic/basic.component';
+import { DemoComponent } from './demo.component';
 
 @NgModule({
   declarations: [DemoComponent, BasicComponent],
   imports: [
+    TranslateModule,
     CommonModule,
     DataTableModule,
     RelativeTimeModule,
@@ -24,11 +26,14 @@ import { BasicComponent } from './basic/basic.component';
       { path: 'demo', component: DemoComponent },
 
       {
-        path: 'api', component: DevUIApiComponent, data: {
-          api: require('!html-loader!markdown-loader!../doc/api.md')
-        }
-      }
-    ])
-  ]
+        path: 'api',
+        component: DevUIApiComponent,
+        data: {
+          'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),
+          'en-us': require('!html-loader!markdown-loader!../doc/api-en.md'),
+        },
+      },
+    ]),
+  ],
 })
-export class DemoModule { }
+export class DemoModule {}

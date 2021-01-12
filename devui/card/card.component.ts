@@ -1,12 +1,11 @@
 import {
-  Component,
-  ViewEncapsulation,
   ChangeDetectionStrategy,
+  Component,
   Directive,
+  HostBinding,
   Input,
-  HostBinding
+  ViewEncapsulation
 } from '@angular/core';
-
 
 @Directive({
   selector: 'd-card-content, [dCardContent]'
@@ -15,7 +14,6 @@ export class CardContentDirective {
   @HostBinding('class.devui-card-content') default = true;
 
 }
-
 
 @Directive({
   selector: `d-card-title, [dCardTitle]`
@@ -31,7 +29,6 @@ export class CardTitleDirective {
 export class CardSubtitleDirective {
   @HostBinding('class.devui-card-subtitle') default = true;
 }
-
 
 @Directive({
   selector: 'd-card-actions,[dCardActions]',
@@ -50,7 +47,6 @@ export class CardActionsDirective {
   }
 }
 
-
 @Directive({
   selector: '[dCardMeta]',
   exportAs: 'dCardMeta'
@@ -58,7 +54,6 @@ export class CardActionsDirective {
 export class CardMetaDirective {
   @HostBinding('class.devui-card-meta') default = true;
 }
-
 
 @Directive({
   selector: '[dCardAvatar]'
@@ -78,7 +73,6 @@ export class CardAvatarDirective {
 export class CardComponent {
   @HostBinding('class.devui-card') default = true;
 }
-
 
 @Component({
   selector: 'd-card-header',
@@ -100,5 +94,3 @@ export class CardHeaderComponent {
 export class CardExtendComponent {
   @HostBinding('class.devui-card-extend') default = true;
 }
-
-

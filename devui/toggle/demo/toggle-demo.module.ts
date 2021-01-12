@@ -1,41 +1,43 @@
-import { RouterModule } from '@angular/router';
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-
-import { ToggleModule } from '..';
-import { ToggleDemoComponent } from './toggle-demo.component';
-import { BasicComponent } from './basic/basic.component';
-import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
+import { RouterModule } from '@angular/router';
+import { ModalModule } from 'ng-devui/modal';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
-import { ModalModule } from 'ng-devui/modal';
+import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
+import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
+import { ToggleModule } from '..';
+import { BasicComponent } from './basic/basic.component';
+import { ToggleDemoComponent } from './toggle-demo.component';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        FormsModule,
-        DevUICodeboxModule,
-        DevUIApiModule,
-        ToggleModule,
-        ModalModule,
-        DDemoNavModule,
-        RouterModule.forChild([
-          { path: '',  redirectTo: 'demo' },
-          { path: 'demo', component: ToggleDemoComponent},
-          { path: 'api', component: DevUIApiComponent, data: {
-            api: require('!html-loader!markdown-loader!../doc/api.md')
-          }}
-        ])
-        ],
-    exports: [ToggleDemoComponent],
-    declarations: [
-        ToggleDemoComponent,
-        BasicComponent
-    ],
-    
-    providers: [],
+  imports: [
+    TranslateModule,
+    CommonModule,
+    FormsModule,
+    DevUICodeboxModule,
+    DevUIApiModule,
+    ToggleModule,
+    ModalModule,
+    DDemoNavModule,
+    RouterModule.forChild([
+      { path: '', redirectTo: 'demo' },
+      { path: 'demo', component: ToggleDemoComponent },
+      {
+        path: 'api',
+        component: DevUIApiComponent,
+        data: {
+          'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),
+          'en-us': require('!html-loader!markdown-loader!../doc/api-en.md'),
+        },
+      },
+    ]),
+  ],
+  exports: [ToggleDemoComponent],
+  declarations: [ToggleDemoComponent, BasicComponent],
+  
+  providers: [],
 })
-export class ToggleDemoModule {
-}
+export class ToggleDemoModule {}

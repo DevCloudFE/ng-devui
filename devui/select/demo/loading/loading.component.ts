@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
-import { timer, of } from 'rxjs';
 import { SelectComponent } from 'ng-devui/select';
+import { of, timer } from 'rxjs';
 
 @Component({
   selector: 'd-loading',

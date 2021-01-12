@@ -1,11 +1,11 @@
 import {
+  ChangeDetectorRef,
   Component,
-  Renderer2,
-  OnInit,
   ElementRef,
+  HostBinding,
   Input,
-  TemplateRef,
-  ChangeDetectorRef, HostBinding
+  OnInit,
+  Renderer2, TemplateRef
 } from '@angular/core';
 import { DFormControlStatus } from './validator-directive/validate.type';
 

@@ -1,28 +1,23 @@
 import { Component, DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { TagsModule } from './tags.module';
 import { By } from '@angular/platform-browser';
+import { TagsModule } from './tags.module';
 
 @Component({
   template: `
     <section>
-      <d-tags
-        [tags]="tagList"
-        [displayProperty]="'name'"
-        [deletable]="deletable"
-        [titleProperty]="'id'"
-        (tagDelete)="deleteTag($event.index)"
-      >
+      <d-tags [tags]="tagList" [displayProperty]="'name'" [mode]="'closeable'" [titleProperty]="'id'" (tagDelete)="deleteTag($event.index)">
       </d-tags>
     </section>
   `,
 })
 class TestTagsComponent {
   tagList: any = [
-    { id: 918, name: '标签颜色1', labelStyle: 'blue-w98' }, { id: 1769, name: '标签颜色2', labelStyle: 'green-w98' },
-     { id: 555, name: '标签颜色3', labelStyle: 'yellow-w98' }, { id: 668, name: '标签颜色4', labelStyle: 'orange-w98' }
-    ];
-  deletable = true;
+    { id: 918, name: '标签颜色1', labelStyle: 'blue-w98' },
+    { id: 1769, name: '标签颜色2', labelStyle: 'green-w98' },
+    { id: 555, name: '标签颜色3', labelStyle: 'yellow-w98' },
+    { id: 668, name: '标签颜色4', labelStyle: 'orange-w98' },
+  ];
   labelStyle = 'purple-w98';
   constructor() {}
   deleteTag = jasmine.createSpy('delete assign tag');
@@ -36,7 +31,7 @@ describe('tag', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [TagsModule],
-      declarations: [TestTagsComponent],
+      declarations: [TestTagsComponent]
     }).compileComponents();
   }));
 

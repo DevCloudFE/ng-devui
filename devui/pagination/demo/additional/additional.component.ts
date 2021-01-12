@@ -1,8 +1,8 @@
 import {
-    Component
-  } from '@angular/core';
+  Component
+} from '@angular/core';
 
-  @Component({
+@Component({
     selector: 'd-additional',
     templateUrl: './additional.component.html',
     styleUrls: ['./additional.component.css']
@@ -14,8 +14,8 @@ import {
       pageSize: 10
     };
     pager2 = {
-      total: 10,
-      pageIndex: 3,
+      total: 0,
+      pageIndex: 1,
       pageSize: 10
     };
     pager3 = {
@@ -24,7 +24,14 @@ import {
       pageSize: 10
     };
     setTotal(number) {
+      this.pager2.total = number;
+    }
+    setLiteTotal(number) {
       this.pager3.total = number;
     }
-  }
 
+    setIndex(number: number) {
+      this.pager3.pageIndex = number;
+      console.log(this.pager3.pageIndex);
+    }
+  }

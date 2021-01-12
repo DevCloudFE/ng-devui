@@ -1,7 +1,6 @@
-import { Component, OnInit, HostBinding, ViewChild, ElementRef, AfterContentInit } from '@angular/core';
-import { originSource, SourceType } from '../mock-data';
+import { AfterContentInit, Component, ElementRef, HostBinding, OnInit, ViewChild } from '@angular/core';
 import { TableWidthConfig } from 'ng-devui/data-table';
-
+import { originSource, SourceType } from '../mock-data';
 
 @Component({
   selector: 'd-expand-row',
@@ -86,7 +85,6 @@ export class ExpandRowComponent implements OnInit, AfterContentInit {
   quickRowCancel() {
     this.headerNewForm = false;
   }
-
 
   subRowAdded(index, item) {
     this.basicDataSource[index].$expandConfig.expand = false;

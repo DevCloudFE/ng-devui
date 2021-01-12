@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { SourceType, originSource } from '../mock-data';
 import { TableWidthConfig } from 'ng-devui/data-table';
+import { originSource, SourceType } from '../mock-data';
 
 @Component({
   selector: 'd-header-grouping',

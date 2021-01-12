@@ -121,7 +121,7 @@ export class GanttBarComponent implements OnInit, OnChanges, AfterViewInit, OnDe
       this.checkStepValue();
     }
 
-    if (changes['progressRate'] && this.progressRate > 0) {
+    if (changes['progressRate'] && this.progressRate >= 0) {
       this.updateTrackAndHandle();
     }
 
@@ -492,7 +492,7 @@ export class GanttBarComponent implements OnInit, OnChanges, AfterViewInit, OnDe
   }
 
   private subscribeMouseActions(mouseActions: string[] = ['start', 'move', 'end'],
-  events: string[] = ['barMove', 'barResize', 'progress']): void {
+                                events: string[] = ['barMove', 'barResize', 'progress']): void {
     if (mouseActions.indexOf('start') !== -1 && this.dragProgressStartListener && !this.dragProgressStartHandler
     && events.indexOf('progress') !== -1) {
       this.dragProgressStartHandler = this.dragProgressStartListener.subscribe(this.progressStartDrag.bind(this));
@@ -523,7 +523,7 @@ export class GanttBarComponent implements OnInit, OnChanges, AfterViewInit, OnDe
   }
 
   private unsubscribeMouseActions(dragStages: string[] = ['start', 'move', 'end'],
-  events: string[] = ['barMove', 'barResize', 'progress']): void {
+                                  events: string[] = ['barMove', 'barResize', 'progress']): void {
     if (dragStages.indexOf('start') !== -1 && events.indexOf('progress') !== -1 && this.dragProgressStartHandler) {
       this.dragProgressStartHandler.unsubscribe();
       this.dragProgressStartHandler = null;

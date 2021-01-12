@@ -1,7 +1,6 @@
-import { Component, OnInit, HostBinding, ViewChild, ElementRef, AfterContentInit } from '@angular/core';
-import { originSource, SourceType } from '../mock-data';
+import { AfterContentInit, Component, ElementRef, HostBinding, OnInit, ViewChild } from '@angular/core';
 import { TableExpandConfig } from 'ng-devui/data-table';
-
+import { originSource, SourceType } from '../mock-data';
 
 @Component({
   selector: 'd-expand-row-old',
@@ -68,7 +67,6 @@ export class ExpandRowOldComponent implements OnInit, AfterContentInit {
     this.headerExpandConfig.expandTemplateRef = this.quickAddRowTip;
   }
 
-
   subRowAdded(index, item) {
     this.basicDataSource[index].$expandConfig.expand = false;
     const newData = { ...this.defaultRowData };
@@ -78,5 +76,7 @@ export class ExpandRowOldComponent implements OnInit, AfterContentInit {
   subRowCancel(index) {
     this.basicDataSource[index].$expandConfig.expand = false;
   }
-
+  toggle(event) {
+    console.log(event);
+  }
 }

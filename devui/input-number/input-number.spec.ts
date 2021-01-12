@@ -1,10 +1,9 @@
-import { By } from '@angular/platform-browser';
-import { InputNumberModule } from './input-number.module';
-import { FormsModule } from '@angular/forms';
-import { ComponentFixture, TestBed, tick, fakeAsync } from '@angular/core/testing';
 import { Component, DebugElement, ViewChild } from '@angular/core';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
+import { By } from '@angular/platform-browser';
 import { createKeyBoardEvent } from '../utils/testing/event-helper';
-
+import { InputNumberModule } from './input-number.module';
 @Component({
   template: `
     <d-input-number
@@ -56,7 +55,7 @@ describe('input-number', () => {
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [FormsModule, InputNumberModule],
-        declarations: [TestInputNumberComponent],
+        declarations: [TestInputNumberComponent]
       });
     });
 

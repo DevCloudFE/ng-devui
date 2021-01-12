@@ -1,0 +1,27 @@
+<div class="demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 60, bottom: 0 }">
+  <d-demo-nav [navItems]="navItems"></d-demo-nav>
+
+  <div class="demo-example" [dAnchor]="'basic-usage'">
+    <div class="demo-title">{{ 'components.time-picker.basicDemo.basic' | translate }}</div>
+    <div class="demo-text"></div>
+    <d-codebox id="components-time-picker-basic-demo" [sourceData]="TimePickerDemoBasicComponent">
+      <d-basic-demo demo></d-basic-demo>
+    </d-codebox>
+  </div>
+
+  <div class="demo-example" [dAnchor]="'format'">
+    <div class="demo-title">{{ 'components.time-picker.formatDemo.title' | translate }}</div>
+    <div class="demo-text"></div>
+    <d-codebox id="components-time-picker-format-demo" [sourceData]="TimePickerDemoFormatComponent">
+      <d-format-demo demo></d-format-demo>
+    </d-codebox>
+  </div>
+
+  <div class="demo-example" [dAnchor]="'custom'">
+    <div class="demo-title">{{ 'components.time-picker.customDemo.template' | translate }}</div>
+    <div class="demo-text"></div>
+    <d-codebox id="components-time-picker-custom-demo" [sourceData]="TimePickerDemoCustomComponent">
+      <d-custom-demo demo></d-custom-demo>
+    </d-codebox>
+  </div>
+</div>

@@ -1,9 +1,9 @@
 import {
+  ChangeDetectionStrategy,
   Component,
-  OnInit,
-  ChangeDetectionStrategy
+  OnInit
 } from '@angular/core';
-import { SourceType, originSource } from '../mock-data';
+import { originSource, SourceType } from '../mock-data';
 
 @Component({
     selector: 'd-datatable-demo-multiheader',
@@ -30,7 +30,6 @@ export class DatatableDemoMultiHeaderComponent implements OnInit {
         console.log('row');
         console.log(e);
     }
-
 
   ngOnInit() {
   }

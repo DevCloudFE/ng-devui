@@ -3,8 +3,6 @@ import {
   OnInit
 } from '@angular/core';
 
-
-
 @Component({
   selector: 'd-disable-data-with-source',
   templateUrl: './disable-data-with-source.component.html',

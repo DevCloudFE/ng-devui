@@ -1,16 +1,15 @@
 import {
-  Component,
-  OnInit,
-  QueryList,
-  ContentChildren,
-  Input,
-  Output,
-  EventEmitter,
   AfterContentInit,
+  Component,
+  ContentChildren,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  QueryList,
 } from '@angular/core';
-import { TabComponent } from './tab.component';
 import { Observable } from 'rxjs';
-
+import { TabComponent } from './tab.component';
 
 @Component({
   selector: 'd-tabs',

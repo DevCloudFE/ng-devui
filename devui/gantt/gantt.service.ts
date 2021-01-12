@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject, ReplaySubject } from 'rxjs';
+import { ReplaySubject, Subject } from 'rxjs';
 import { GanttBarStatus, GanttScaleConfig, GanttScaleUnit } from './gantt.model';
 
 @Injectable()

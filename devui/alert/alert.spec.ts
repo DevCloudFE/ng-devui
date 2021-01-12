@@ -1,9 +1,8 @@
-import { ComponentFixture, TestBed, fakeAsync, tick, async, discardPeriodicTasks, flush } from '@angular/core/testing';
-import { AlertModule } from './alert.module';
-import { Component, DebugElement } from '@angular/core';
-import { AlertComponent } from './alert.component';
+import { Component } from '@angular/core';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { doesNotThrow } from 'assert';
+import { AlertComponent } from './alert.component';
+import { AlertModule } from './alert.module';
 @Component({
   template: `
   <d-alert [type]="type" [showIcon]= "showIcon" (closeEvent)="handleClose($event)" [cssClass]="cssClass">
@@ -39,7 +38,7 @@ describe('alert', () => {
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [AlertModule],
-        declarations: [TestAlertComponent]
+        declarations: [TestAlertComponent],
       }).compileComponents();
     });
 
@@ -173,4 +172,3 @@ describe('alert', () => {
     });
   });
 });
-

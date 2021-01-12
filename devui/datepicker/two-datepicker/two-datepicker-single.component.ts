@@ -1,21 +1,21 @@
 import {
-  Component,
-  Input,
-  Output,
-  forwardRef,
-  ElementRef,
-  Renderer2,
-  EventEmitter,
   ChangeDetectorRef,
-  SimpleChanges,
+  Component,
+  ElementRef,
+  EventEmitter,
+  forwardRef,
+  Input,
   OnChanges,
-  OnInit
+  OnInit,
+  Output,
+  Renderer2,
+  SimpleChanges
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { DatepickerComponent as SingleDatepickerComponent } from '../datepicker.component';
-import { DatePickerConfigService as DatePickerConfig } from '../date-picker.config.service';
 import { I18nService } from 'ng-devui/i18n';
+import { DatePickerConfigService as DatePickerConfig } from '../date-picker.config.service';
 import { SelectDateRangeChangeEventArgs, SelectDateRangeChangeReason } from '../date-range-change-event-args.model';
+import { DatepickerComponent as SingleDatepickerComponent } from '../datepicker.component';
 import { SimpleDate } from '../single-date-range-picker.component';
 
 @Component({
@@ -132,10 +132,6 @@ export class TwoDatepickerSingleComponent extends SingleDatepickerComponent impl
   }
 
   selectRange(date, passive = false) {
-    if (this.disabled) {
-      return;
-    }
-    this.setTime(date);
     if (this.whichOpen === 'start') {
       if (!this.rangeEnd) {
         this.rangeEnd = null;
@@ -394,12 +390,6 @@ export class TwoDatepickerSingleComponent extends SingleDatepickerComponent impl
     this.consolidateTime.emit();
   }
 
-  private setTime(date: any) {
-    this.currentHour = this.showTime && date ? date.getHours() : 0;
-    this.currentMinute = this.showTime && date ? date.getMinutes() : 0;
-    this.currentSecond = this.showTime && date ? date.getSeconds() : 0;
-  }
-
   protected onSelectDateChanged() {
     let date = this.selectedDate || new Date();
     if (date.getTime() < this.minDate.getTime()) {
@@ -415,28 +405,5 @@ export class TwoDatepickerSingleComponent extends SingleDatepickerComponent impl
     this.selectedDate = this.selectedDate || date;
     this.currentYear = date.getFullYear();
     this.currentMonthIndex = date.getMonth();
-    if (!this.showTime) { return; }
-    switch (this.isAuxiliary) {
-      case false:
-        // Left panel
-        this.currentHour = this.rangeStart ? this.rangeStart.getHours() : 0;
-        this.currentMinute = this.rangeStart ? this.rangeStart.getMinutes() : 0;
-        this.currentSecond = this.rangeStart ? this.rangeStart.getSeconds() : 0;
-        break;
-      case true:
-        // Right panel
-        this.currentHour = this.rangeEnd ? this.rangeEnd.getHours() : 0;
-        this.currentMinute = this.rangeEnd ? this.rangeEnd.getMinutes() : 0;
-        this.currentSecond = this.rangeEnd ? this.rangeEnd.getSeconds() : 0;
-        break;
-    }
-  }
-
-  get currentTime () {
-    return {
-      hour: this.currentHour,
-      minute: this.currentMinute,
-      second: this.currentSecond
-    };
   }
 }

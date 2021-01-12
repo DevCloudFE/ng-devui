@@ -1,16 +1,14 @@
 // tslint:disable: max-line-length
-import { ComponentFixture, TestBed, async, fakeAsync, tick } from '@angular/core/testing';
-import { DebugElement, Component, ViewChild, TemplateRef, ElementRef } from '@angular/core';
+import { Component, DebugElement, ElementRef, ViewChild } from '@angular/core';
+import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
+import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-
+import enUS from 'ng-devui/i18n/en-us';
+import zhCN from 'ng-devui/i18n/zh-cn';
 import { DomHelper } from '../utils/testing/dom-helper';
 import * as EventHelper from '../utils/testing/event-helper';
-
 import { DatepickerModule } from './datepicker.module';
-import zhCN from 'ng-devui/i18n/zh-cn';
-import enUS from 'ng-devui/i18n/en-us';
-import { By } from '@angular/platform-browser';
 
 class CommonFunctions {
   static i18nConfig = {
@@ -73,7 +71,7 @@ class CommonFunctions {
 }
 
 class TestFunctions {
-  static testNgModelAndYearMonth(fixture, wrapperEle, component) {
+  static testNgModelAndYearMonth(fixture, wrapperEle, component, isInput = true) {
     CommonFunctions.openDatePicker(fixture);
 
     const commonEles = {
@@ -153,6 +151,8 @@ class TestFunctions {
       }
     }
 
+    const valueParam = isInput ? 'value' : 'innerText';
+
     let leftDayListEle = wrapperEle.querySelectorAll('tbody')[0];
     let rightDayListEle = wrapperEle.querySelectorAll('tbody')[1];
     let leftCurrentDayInListEle = leftDayListEle.querySelectorAll('.devui-day')[7];
@@ -160,51 +160,146 @@ class TestFunctions {
     let leftCurrentDay = leftCurrentDayInListEle.querySelector('.devui-calendar-date').textContent.trim();
     let rightCurrentDay = rightCurrentDayInListEle.querySelector('.devui-calendar-date').textContent.trim();
     CommonFunctions.tickEvent(leftCurrentDayInListEle, new Event('click'), fixture);
-    CommonFunctions.tickEvent(rightCurrentDayInListEle, new Event('hover'), fixture);
+    CommonFunctions.tickEvent(rightCurrentDayInListEle, new Event('mouseover'), fixture);
     CommonFunctions.tickEvent(rightCurrentDayInListEle, new Event('click'), fixture);
     expect(component.getValue).toHaveBeenCalled();
-    expect(component.leftInputEle.nativeElement.value).toBe(`${CommonFunctions.strDateOrFromNow([0, 0, 0], leftCurrentDay)}`);
-    expect(component.rightInputEle.nativeElement.value).toBe(`${CommonFunctions.strDateOrFromNow([0, 1, 0], rightCurrentDay)}`);
+    expect(component.leftInputEle.nativeElement[valueParam]).toBe(`${CommonFunctions.strDateOrFromNow([0, 0, 0], leftCurrentDay)}`);
+    expect(component.rightInputEle.nativeElement[valueParam]).toBe(`${CommonFunctions.strDateOrFromNow([0, 1, 0], rightCurrentDay)}`);
     expect(component.rangeStart).toEqual(new Date(new Date().getFullYear(), new Date().getMonth(), leftCurrentDay));
     expect(component.rangeEnd).toEqual(new Date(new Date().getFullYear(), new Date().getMonth() + 1, rightCurrentDay));
     CommonFunctions.closeDatePicker(fixture);
 
-    component.rangeStart = new Date();
-    component.rangeEnd = new Date(new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDate());
+    component.rangeStart = component.rangeEnd = undefined;
+    fixture.detectChanges();
+    tick();
+    fixture.detectChanges();
+    CommonFunctions.openDatePicker(fixture, 'right');
+    rightDayListEle = wrapperEle.querySelectorAll('tbody')[1];
+    rightCurrentDayInListEle = rightDayListEle.querySelectorAll('.devui-day')[7];
+    rightCurrentDay = rightCurrentDayInListEle.querySelector('.devui-calendar-date').textContent.trim();
+    CommonFunctions.tickEvent(rightCurrentDayInListEle, new Event('click'), fixture);
+    expect(component.getValue).toHaveBeenCalled();
+    expect(component.rightInputEle.nativeElement[valueParam]).toBe(`${CommonFunctions.strDateOrFromNow([0, 1, 0], rightCurrentDay)}`);
+    CommonFunctions.openDatePicker(fixture);
+    leftDayListEle = wrapperEle.querySelectorAll('tbody')[0];
+    leftCurrentDayInListEle = leftDayListEle.querySelectorAll('.devui-day')[7];
+    leftCurrentDay = leftCurrentDayInListEle.querySelector('.devui-calendar-date').textContent.trim();
+    CommonFunctions.tickEvent(leftCurrentDayInListEle, new Event('click'), fixture);
+    expect(component.leftInputEle.nativeElement[valueParam]).toBe(`${CommonFunctions.strDateOrFromNow([0, 0, 0], leftCurrentDay)}`);
+    expect(component.rangeStart).toEqual(new Date(new Date().getFullYear(), new Date().getMonth(), leftCurrentDay));
+    expect(component.rangeEnd).toEqual(new Date(new Date().getFullYear(), new Date().getMonth() + 1, rightCurrentDay));
+    CommonFunctions.closeDatePicker(fixture);
+
+    component.rangeStart = component.rangeEnd = undefined;
     fixture.detectChanges();
     tick();
     fixture.detectChanges();
     CommonFunctions.openDatePicker(fixture);
-    leftDayListEle = wrapperEle.querySelectorAll('tbody')[0];
     rightDayListEle = wrapperEle.querySelectorAll('tbody')[1];
-    leftCurrentDayInListEle = leftDayListEle.querySelector('.active');
-    rightCurrentDayInListEle = rightDayListEle.querySelector('.active');
-    leftCurrentDay = leftCurrentDayInListEle.querySelector('.devui-calendar-date').textContent.trim();
+    rightCurrentDayInListEle = rightDayListEle.querySelectorAll('.devui-day')[7];
     rightCurrentDay = rightCurrentDayInListEle.querySelector('.devui-calendar-date').textContent.trim();
-    expect(component.leftInputEle.nativeElement.value).toBe(`${CommonFunctions.strDateOrFromNow([0, 0, 0])}`);
-    expect(component.rightInputEle.nativeElement.value).toBe(`${CommonFunctions.strDateOrFromNow([0, 1, 0])}`);
-    expect(Number(leftCurrentDay)).toBe(new Date().getDate());
-    expect(Number(rightCurrentDay)).toBe(new Date(CommonFunctions.strDateOrFromNow([0, 1, 0])).getDate());
+    CommonFunctions.tickEvent(rightCurrentDayInListEle, new Event('click'), fixture);
+    expect(component.getValue).toHaveBeenCalled();
+    expect(component.leftInputEle.nativeElement[valueParam]).toBe(`${CommonFunctions.strDateOrFromNow([0, 1, 0], rightCurrentDay)}`);
+    leftDayListEle = wrapperEle.querySelectorAll('tbody')[0];
+    leftCurrentDayInListEle = leftDayListEle.querySelectorAll('.devui-day')[7];
+    leftCurrentDay = leftCurrentDayInListEle.querySelector('.devui-calendar-date').textContent.trim();
+    CommonFunctions.tickEvent(leftCurrentDayInListEle, new Event('click'), fixture);
+    expect(component.leftInputEle.nativeElement[valueParam]).toBe(``);
+    expect(component.rightInputEle.nativeElement[valueParam]).toBe(`${CommonFunctions.strDateOrFromNow([0, 0, 0], leftCurrentDay)}`);
+    expect(component.rangeEnd).toEqual(new Date(new Date().getFullYear(), new Date().getMonth(), leftCurrentDay));
     CommonFunctions.closeDatePicker(fixture);
 
-    component.leftInputEle.nativeElement.value = `${CommonFunctions.strDateOrFromNow([0, 0, 0], '05')}`;
-    component.rightInputEle.nativeElement.value = `${CommonFunctions.strDateOrFromNow([0, 1, 0], '05')}`;
-    CommonFunctions.tickEvent(component.leftInputEle.nativeElement, new Event('input'), fixture, 1000);
-    CommonFunctions.tickEvent(component.leftInputEle.nativeElement, new Event('blur'), fixture, 1000);
-    CommonFunctions.tickEvent(component.rightInputEle.nativeElement, new Event('input'), fixture, 1000);
-    CommonFunctions.tickEvent(component.rightInputEle.nativeElement, new Event('blur'), fixture, 1000);
-    CommonFunctions.openDatePicker(fixture);
+    component.rangeStart = component.rangeEnd = undefined;
+    fixture.detectChanges();
+    tick();
+    fixture.detectChanges();
+    CommonFunctions.openDatePicker(fixture, 'right');
     leftDayListEle = wrapperEle.querySelectorAll('tbody')[0];
-    rightDayListEle = wrapperEle.querySelectorAll('tbody')[1];
-    leftCurrentDayInListEle = leftDayListEle.querySelector('.active');
-    rightCurrentDayInListEle = rightDayListEle.querySelector('.active');
+    leftCurrentDayInListEle = leftDayListEle.querySelectorAll('.devui-day')[7];
     leftCurrentDay = leftCurrentDayInListEle.querySelector('.devui-calendar-date').textContent.trim();
+    CommonFunctions.tickEvent(leftCurrentDayInListEle, new Event('click'), fixture);
+    expect(component.getValue).toHaveBeenCalled();
+    expect(component.rightInputEle.nativeElement[valueParam]).toBe(`${CommonFunctions.strDateOrFromNow([0, 0, 0], leftCurrentDay)}`);
+    CommonFunctions.openDatePicker(fixture);
+    rightDayListEle = wrapperEle.querySelectorAll('tbody')[1];
+    rightCurrentDayInListEle = rightDayListEle.querySelectorAll('.devui-day')[8];
     rightCurrentDay = rightCurrentDayInListEle.querySelector('.devui-calendar-date').textContent.trim();
-    expect(component.rangeStart).toEqual(new Date(new Date().getFullYear(), new Date().getMonth(), 5));
-    expect(component.rangeEnd).toEqual(new Date(new Date().getFullYear(), new Date().getMonth() + 1, 5));
-    expect(leftCurrentDay).toBe('05');
-    expect(rightCurrentDay).toBe('05');
+    CommonFunctions.tickEvent(rightCurrentDayInListEle, new Event('click'), fixture);
+    expect(component.leftInputEle.nativeElement[valueParam]).toBe(`${CommonFunctions.strDateOrFromNow([0, 0, 0], rightCurrentDay)}`);
+    expect(component.rightInputEle.nativeElement[valueParam]).toBe(``);
+    expect(component.rangeStart).toEqual(new Date(new Date().getFullYear(), new Date().getMonth(), rightCurrentDay));
     CommonFunctions.closeDatePicker(fixture);
+
+    if (isInput) {
+      component.rangeStart = new Date();
+      component.rangeEnd = new Date(new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDate());
+      fixture.detectChanges();
+      tick();
+      fixture.detectChanges();
+      CommonFunctions.openDatePicker(fixture);
+      leftDayListEle = wrapperEle.querySelectorAll('tbody')[0];
+      rightDayListEle = wrapperEle.querySelectorAll('tbody')[1];
+      leftCurrentDayInListEle = leftDayListEle.querySelector('.active');
+      rightCurrentDayInListEle = rightDayListEle.querySelector('.active');
+      leftCurrentDay = leftCurrentDayInListEle.querySelector('.devui-calendar-date').textContent.trim();
+      rightCurrentDay = rightCurrentDayInListEle.querySelector('.devui-calendar-date').textContent.trim();
+      expect(component.leftInputEle.nativeElement[valueParam]).toBe(`${CommonFunctions.strDateOrFromNow([0, 0, 0])}`);
+      expect(component.rightInputEle.nativeElement[valueParam]).toBe(`${CommonFunctions.strDateOrFromNow([0, 1, 0])}`);
+      expect(Number(leftCurrentDay)).toBe(new Date().getDate());
+      expect(Number(rightCurrentDay)).toBe(new Date(CommonFunctions.strDateOrFromNow([0, 1, 0])).getDate());
+      CommonFunctions.closeDatePicker(fixture);
+      component.leftInputEle.nativeElement.value = `${CommonFunctions.strDateOrFromNow([0, 0, 0], '05')}`;
+      component.rightInputEle.nativeElement.value = `${CommonFunctions.strDateOrFromNow([0, 1, 0], '05')}`;
+      CommonFunctions.tickEvent(component.leftInputEle.nativeElement, new KeyboardEvent('keyup', {key: 'Enter'}), fixture, 1000);
+      CommonFunctions.tickEvent(component.leftInputEle.nativeElement, new Event('blur'), fixture, 1000);
+      CommonFunctions.tickEvent(component.rightInputEle.nativeElement, new KeyboardEvent('keyup', {key: 'Enter'}), fixture, 1000);
+      CommonFunctions.tickEvent(component.rightInputEle.nativeElement, new Event('blur'), fixture, 1000);
+      CommonFunctions.openDatePicker(fixture);
+      leftDayListEle = wrapperEle.querySelectorAll('tbody')[0];
+      rightDayListEle = wrapperEle.querySelectorAll('tbody')[1];
+      leftCurrentDayInListEle = leftDayListEle.querySelector('.active');
+      rightCurrentDayInListEle = rightDayListEle.querySelector('.active');
+      leftCurrentDay = leftCurrentDayInListEle.querySelector('.devui-calendar-date').textContent.trim();
+      rightCurrentDay = rightCurrentDayInListEle.querySelector('.devui-calendar-date').textContent.trim();
+      expect(component.rangeStart).toEqual(new Date(new Date().getFullYear(), new Date().getMonth(), 5));
+      expect(component.rangeEnd).toEqual(new Date(new Date().getFullYear(), new Date().getMonth() + 1, 5));
+      expect(leftCurrentDay).toBe('05');
+      expect(rightCurrentDay).toBe('05');
+      CommonFunctions.closeDatePicker(fixture);
+
+      component.leftInputEle.nativeElement.value = `${CommonFunctions.strDateOrFromNow([0, 0, 0], '05')}`;
+      component.rightInputEle.nativeElement.value = `${CommonFunctions.strDateOrFromNow([0, 1, 0], '05')}`;
+
+      CommonFunctions.tickEvent(component.leftInputEle.nativeElement, new KeyboardEvent('keyup', {key: 'Enter'}), fixture, 1000);
+      CommonFunctions.tickEvent(component.leftInputEle.nativeElement, new Event('blur'), fixture, 1000);
+      CommonFunctions.tickEvent(component.rightInputEle.nativeElement, new KeyboardEvent('keyup', {key: 'Enter'}), fixture, 1000);
+      CommonFunctions.tickEvent(component.rightInputEle.nativeElement, new Event('blur'), fixture, 1000);
+      fixture.detectChanges();
+      tick();
+      fixture.detectChanges();
+      expect(component.leftInputEle.nativeElement.value).toBe(`${CommonFunctions.strDateOrFromNow([0, 0, 0], '05')}`);
+      expect(component.rightInputEle.nativeElement.value).toBe(`${CommonFunctions.strDateOrFromNow([0, 1, 0], '05')}`);
+
+      component.leftInputEle.nativeElement.value = '';
+      component.rightInputEle.nativeElement.value = '';
+      CommonFunctions.tickEvent(component.leftInputEle.nativeElement, new Event('input'), fixture, 1000);
+      CommonFunctions.tickEvent(component.leftInputEle.nativeElement, new Event('blur'), fixture, 1000);
+      CommonFunctions.tickEvent(component.rightInputEle.nativeElement, new Event('input'), fixture, 1000);
+      CommonFunctions.tickEvent(component.rightInputEle.nativeElement, new Event('blur'), fixture, 1000);
+      expect(component.leftInputEle.nativeElement.value).toBe('');
+      expect(component.rightInputEle.nativeElement.value).toBe('');
+      expect(component.getValue).toHaveBeenCalled();
+
+      component.leftInputEle.nativeElement.value = '';
+      component.rightInputEle.nativeElement.value = '';
+      CommonFunctions.tickEvent(component.leftInputEle.nativeElement, new Event('input'), fixture, 1000);
+      CommonFunctions.tickEvent(component.leftInputEle.nativeElement, new Event('blur'), fixture, 1000);
+      CommonFunctions.tickEvent(component.rightInputEle.nativeElement, new Event('input'), fixture, 1000);
+      CommonFunctions.tickEvent(component.rightInputEle.nativeElement, new Event('blur'), fixture, 1000);
+      expect(component.leftInputEle.nativeElement.value).toBe('');
+      expect(component.rightInputEle.nativeElement.value).toBe('');
+    }
   }
 
   static testInputParam(fixture, wrapperEle, component) {
@@ -236,6 +331,21 @@ class TestFunctions {
     CommonFunctions.tickEvent(rightCurrentDayInListEle, new Event('click'), fixture);
     expect(component.getValue).toHaveBeenCalled();
     expect(component.leftInputEle.nativeElement.value).toBe(`${CommonFunctions.strDateOrFromNow([0, 0, 0], undefined, ['mm', 'dd', 'yy'], '.')}`);
+    expect(component.rightInputEle.nativeElement.value).toBe(`${CommonFunctions.strDateOrFromNow([0, 1, 0], undefined, ['mm', 'dd', 'yy'], '.')}`);
+    CommonFunctions.closeDatePicker(fixture);
+
+    // 今天不在minDate、maxDate之中
+    component.minDate.setDate(component.minDate - 2);
+    component.maxDate = component.minDate;
+    fixture.detectChanges();
+    tick();
+    fixture.detectChanges();
+    CommonFunctions.openDatePicker(fixture);
+    const footer = document.querySelector('.devui-two-date-footer');
+    const todayBtn = footer.querySelector('a');
+    CommonFunctions.tickEvent(todayBtn, new Event('click'), fixture);
+    expect(component.leftInputEle.nativeElement.value).toBe(`${CommonFunctions.strDateOrFromNow([0, 0, 0], undefined, ['mm', 'dd', 'yy'], '.')}`);
+    CommonFunctions.tickEvent(todayBtn, new Event('click'), fixture);
     expect(component.rightInputEle.nativeElement.value).toBe(`${CommonFunctions.strDateOrFromNow([0, 1, 0], undefined, ['mm', 'dd', 'yy'], '.')}`);
 
     CommonFunctions.closeDatePicker(fixture);
@@ -301,9 +411,11 @@ class TestFunctions {
 
 @Component({
   template: `
+    <div class="place-holder" (click)="twoDatePicker.toggle()" [style.height]="placeHolderHeight ? '900px' : '0'">this is place holder</div>
     <div
       class="two-date-wrapper"
       dTwoDatePicker
+      #twoDatePicker="twoDatePicker"
       [cssClass]="cssClass"
       [disabled]="disabled"
       [hideOnRangeSelected]="hideOnRangeSelected"
@@ -324,7 +436,7 @@ class TestFunctions {
           (click)="startPicker.toggle()"
           #leftInputEle
         />
-        <div *ngIf="rangeStart" class="devui-input-group-addon icon-close-wrapper" (click)="startPicker.clear()">
+        <div [style.display]="rangeStart ? 'block' : 'none'" class="devui-input-group-addon icon-close-wrapper" (click)="startPicker.clear()">
           <i class="icon icon-close"></i>
         </div>
         <div class="devui-input-group-addon" (click)="startPicker.toggle()">
@@ -342,7 +454,7 @@ class TestFunctions {
           (click)="endPicker.toggle()"
           #rightInputEle
         />
-        <div *ngIf="rangeEnd" class="devui-input-group-addon icon-close-wrapper" (click)="endPicker.clear()">
+        <div [style.display]="rangeEnd ? 'block' : 'none'" class="devui-input-group-addon icon-close-wrapper" (click)="endPicker.clear()">
           <i class="icon icon-close"></i>
         </div>
         <div class="devui-input-group-addon" (click)="endPicker.toggle()">
@@ -372,6 +484,45 @@ class TestTwoDatePickerComponent {
   constructor() {}
 }
 
+@Component({
+  template: `
+    <div
+      class="two-date-wrapper"
+      dTwoDatePicker
+      #twoDatePicker="twoDatePicker"
+      (selectedRangeChange)="getValue('range', $event)"
+    >
+      <div
+        dTwoDatePickerStart
+        #startPicker="twoDatePickerStart"
+        [(ngModel)]="rangeStart"
+        (selectStart)="getValue('start', $event)"
+        (click)="startPicker.toggle()"
+        #leftInputEle
+      >{{rangeStart || 'Start'}}</div>
+      <div
+        dTwoDatePickerEnd
+        #endPicker="twoDatePickerEnd"
+        [(ngModel)]="rangeEnd"
+        (selectEnd)="getValue('end', $event)"
+        (click)="endPicker.toggle()"
+        #rightInputEle
+      >{{rangeEnd || 'End'}}</div>
+    </div>
+  `,
+})
+class TestTwoDatePickerDivComponent {
+  rangeStart = null;
+  rangeEnd = null;
+
+  @ViewChild('leftInputEle', { read: ElementRef }) leftInputEle: ElementRef;
+  @ViewChild('rightInputEle', { read: ElementRef }) rightInputEle: ElementRef;
+
+  getValue = jasmine.createSpy('get value');
+
+  constructor() {}
+}
+
 describe('twoDatePicker', () => {
   let fixture: ComponentFixture<TestTwoDatePickerComponent>;
   let debugEl: DebugElement;
@@ -381,8 +532,7 @@ describe('twoDatePicker', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [DatepickerModule, NoopAnimationsModule, FormsModule],
-      declarations: [TestTwoDatePickerComponent],
-      providers: [],
+      declarations: [TestTwoDatePickerComponent]
     }).compileComponents();
   }));
 
@@ -427,6 +577,15 @@ describe('twoDatePicker', () => {
       CommonFunctions.openDatePicker(fixture);
       twoDatePicker = document.querySelector('.devui-two-date-wrapper');
       expect(twoDatePicker).toBeFalsy();
+      // 触发twoDatePicker的toggle打开面板
+      CommonFunctions.tickEvent(debugEl.query(By.css('.place-holder')).nativeElement, new Event('click'), fixture);
+      twoDatePicker = document.querySelector('.devui-two-date-wrapper');
+      expect(twoDatePicker).toBeTruthy();
+      // 点击日期内部不关闭面板
+      CommonFunctions.tickEvent(debugEl.query(By.css('.devui-two-date-wrapper')).nativeElement, new Event('click'), fixture);
+      twoDatePicker = document.querySelector('.devui-two-date-wrapper');
+      expect(twoDatePicker).toBeTruthy();
+      CommonFunctions.closeDatePicker(fixture);
 
       CommonFunctions.openDatePicker(fixture);
       CommonFunctions.closeDatePicker(fixture);
@@ -465,18 +624,28 @@ describe('twoDatePicker', () => {
 
       const leftDayListEle = document.querySelectorAll('tbody')[0];
       const rightDayListEle = document.querySelectorAll('tbody')[1];
+      const leftCurrentDayInListEle = leftDayListEle.querySelectorAll('.devui-day')[7];
+      const rightCurrentDayInListEle = rightDayListEle.querySelectorAll('.devui-day')[7];
       leftDayListEle.querySelectorAll('.devui-in-month-day').forEach((dayEl) => {
         expect(dayEl.classList).toContain('disabled');
       });
       rightDayListEle.querySelectorAll('.devui-in-month-day').forEach((dayEl) => {
         expect(dayEl.classList).toContain('disabled');
       });
+      CommonFunctions.tickEvent(leftCurrentDayInListEle, new Event('click'), fixture);
+      CommonFunctions.tickEvent(rightCurrentDayInListEle, new Event('click'), fixture);
+      expect(component.leftInputEle.nativeElement.value).toBe(``);
+      expect(component.rightInputEle.nativeElement.value).toBe(``);
+      expect(component.rangeStart).toBeFalsy();
+      expect(component.rangeEnd).toBeFalsy();
+
+      CommonFunctions.closeDatePicker(fixture);
     }));
 
     it('should default buttons works', fakeAsync(() => {
       CommonFunctions.openDatePicker(fixture);
       let footer = document.querySelector('.devui-two-date-footer');
-      const todayBtn = footer.querySelector('a');
+      let todayBtn = footer.querySelector('a');
 
       CommonFunctions.tickEvent(todayBtn, new Event('click'), fixture);
       expect(component.leftInputEle.nativeElement.value).toBe(`${CommonFunctions.strDateOrFromNow([0, 0, 0])}`);
@@ -490,6 +659,19 @@ describe('twoDatePicker', () => {
       CommonFunctions.tickEvent(clearBtn, new Event('click'), fixture);
       expect(component.leftInputEle.nativeElement.value).toBe('');
       CommonFunctions.tickEvent(clearBtn, new Event('click'), fixture);
+      expect(component.rightInputEle.nativeElement.value).toBe('');
+      CommonFunctions.closeDatePicker(fixture);
+
+      CommonFunctions.openDatePicker(fixture);
+      CommonFunctions.tickEvent(todayBtn, new Event('click'), fixture);
+      CommonFunctions.tickEvent(todayBtn, new Event('click'), fixture);
+      const leftClearBtn = debugEl.queryAll(By.css('.icon-close-wrapper'))[0].nativeElement;
+      const rightClearBtn = debugEl.queryAll(By.css('.icon-close-wrapper'))[1].nativeElement;
+      footer = document.querySelector('.devui-two-date-footer');
+      todayBtn = footer.querySelector('a');
+      CommonFunctions.tickEvent(leftClearBtn, new Event('click'), fixture);
+      expect(component.leftInputEle.nativeElement.value).toBe('');
+      CommonFunctions.tickEvent(rightClearBtn, new Event('click'), fixture);
       expect(component.rightInputEle.nativeElement.value).toBe('');
       CommonFunctions.closeDatePicker(fixture);
     }));
@@ -545,5 +727,48 @@ describe('twoDatePicker', () => {
         TestFunctions.testDateConfig(fixture, document, component, year, false);
       }));
     });
+  });
+});
+
+describe('twoDatePickerDiv', () => {
+  let fixture: ComponentFixture<TestTwoDatePickerDivComponent>;
+  let debugEl: DebugElement;
+  let component: TestTwoDatePickerDivComponent;
+  let domHelper: DomHelper<TestTwoDatePickerDivComponent>;
+
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      imports: [DatepickerModule, NoopAnimationsModule, FormsModule],
+      declarations: [TestTwoDatePickerDivComponent],
+      providers: [],
+    }).compileComponents();
+  }));
+
+  describe('basic param', () => {
+    beforeEach(() => {
+      fixture = TestBed.createComponent(TestTwoDatePickerDivComponent);
+      debugEl = fixture.debugElement;
+      component = debugEl.componentInstance;
+
+      domHelper = new DomHelper(fixture);
+      fixture.detectChanges();
+    });
+
+    it('should datePicker show, should hideOnRangeSelected works', fakeAsync(() => {
+      expect(component.leftInputEle.nativeElement.innerText).toBe('Start');
+      expect(component.rightInputEle.nativeElement.innerText).toBe('End');
+
+      CommonFunctions.openDatePicker(fixture, 'left');
+      let twoDatePicker = document.querySelector('.devui-two-date-wrapper');
+      expect(twoDatePicker).toBeTruthy();
+
+      CommonFunctions.closeDatePicker(fixture);
+      twoDatePicker = document.querySelector('.devui-two-date-wrapper');
+      expect(twoDatePicker).toBeFalsy();
+    }));
+
+    it('test ngModel', fakeAsync(() => {
+      TestFunctions.testNgModelAndYearMonth(fixture, document, component, false);
+    }));
   });
 });

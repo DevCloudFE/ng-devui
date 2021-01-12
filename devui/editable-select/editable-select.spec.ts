@@ -1,11 +1,10 @@
-import { of } from 'rxjs';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
-import { EditableSelectModule } from './editable-select.module';
-import { ComponentFixture, TestBed, tick, fakeAsync } from '@angular/core/testing';
 import { Component, DebugElement } from '@angular/core';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
-
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { of } from 'rxjs';
+import { EditableSelectModule } from './editable-select.module';
 @Component({
   template: `
     <d-editable-select [source]="languages" [searchFn]="onSearchLocal" [maxHeight]="300" [(ngModel)]="selectItem1" name="multiple-auto">
@@ -27,7 +26,7 @@ describe('editable-select', () => {
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [FormsModule, EditableSelectModule, NoopAnimationsModule],
-        declarations: [TestEditableSelectComponent],
+        declarations: [TestEditableSelectComponent]
       });
     });
 

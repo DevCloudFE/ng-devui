@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ElementRef, ChangeDetectorRef } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef } from '@angular/core';
 import { DialogService } from 'ng-devui/modal';
 import { TabsTransferComponent } from './tabs-transfer/tabs-transfer.component';
 @Component({
@@ -39,8 +39,6 @@ export class ConfigurableComponent {
         content: '这是Tab6的内容'
     }];
     leftOffset = 202;
-
-
 
     constructor(private dialogService: DialogService, private el: ElementRef, private changeRef: ChangeDetectorRef) {
     }

@@ -1,16 +1,16 @@
 import {
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
-    Renderer2,
-    OnInit,
+    ContentChild,
     ElementRef,
-    HostBinding,
-    ChangeDetectionStrategy, Input, ContentChild, ChangeDetectorRef, Host, Optional, SkipSelf
+    Host, HostBinding, Input, OnInit, Optional, Renderer2, SkipSelf
   } from '@angular/core';
 import { FormControlComponent } from './form-control.component';
 import { FormLabelComponent } from './form-label.component';
 import { DFormControlStatus } from './validator-directive/validate.type';
 
-  @Component({
+@Component({
     selector: 'd-form-item',
     template: `
     <ng-content></ng-content>

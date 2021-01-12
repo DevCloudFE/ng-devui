@@ -1,11 +1,11 @@
 import {
   Component,
-  Input,
-  TemplateRef,
-  Output,
   EventEmitter,
+  Input,
   OnDestroy,
   OnInit,
+  Output,
+  TemplateRef,
 } from '@angular/core';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { Subscription } from 'rxjs';

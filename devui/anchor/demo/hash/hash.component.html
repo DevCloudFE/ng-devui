@@ -4,7 +4,7 @@
     dAnchorHashSupport
     [view]="{ top: 60, bottom: 0 }"
     class="mymain"
-    style="position: relative;"
+    style="position: relative"
     [updateUrlWhenAnchorActive]="updateUrlWhenAnchorActive"
     [scrollToAnchorByHashOnlyInit]="scrollToAnchorByHashOnlyInit"
   >
@@ -14,9 +14,7 @@
           <li [dAnchorLink]="'base-info'" anchorActive="active">基本信息</li>
           <li [dAnchorLink]="'issue-list'" anchorActive="active">需求列表</li>
           <li [dAnchorLink]="'case-list'" anchorActive="active" id="case_list_anchor">用例列表</li>
-          <li [dAnchorLink]="'quality-result'" anchorActive="active">
-            质量评估
-          </li>
+          <li [dAnchorLink]="'quality-result'" anchorActive="active">质量评估</li>
         </ul>
       </d-sticky>
     </div>

@@ -1,22 +1,22 @@
 <div class="demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 60, bottom: 0 }">
   <d-demo-nav [navItems]="navItems"></d-demo-nav>
   <div class="demo-example" [dAnchor]="'basic-usage'">
-    <div class="demo-title">基本用法</div>
+    <div class="demo-title">{{ 'components.panel.basicDemo.title' | translate }}</div>
     <div class="demo-text"></div>
     <d-codebox id="components-panel-basic" [sourceData]="basicSource">
       <d-basic demo></d-basic>
     </d-codebox>
   </div>
   <div class="demo-example" [dAnchor]="'multiple-types'">
-    <div class="demo-title">多种类型</div>
-    <div class="demo-text">'default'|'primary'| 'success' | 'danger' | 'warning' | 'info';</div>
+    <div class="demo-title">{{ 'components.panel.typeDemo.title' | translate }}</div>
+    <div class="demo-text">'{{ 'components.panel.typeDemo.description' | translate }}</div>
     <d-codebox id="components-panel-multiple-types" [sourceData]="typeSource">
       <d-type demo></d-type>
     </d-codebox>
   </div>
   <div class="demo-example" [dAnchor]="'condition-change'">
-    <div class="demo-title">根据条件阻止折叠</div>
-    <div class="demo-text">根据条件判断，当panel展开时，点击阻止折叠，将无法折叠panel。当panel折叠时不影响操作。</div>
+    <div class="demo-title">{{ 'components.panel.conditionChangeDemo.title' | translate }}</div>
+    <div class="demo-text">{{ 'components.panel.conditionChangeDemo.description' | translate }}</div>
     <d-codebox id="components-panel-condition-change" [sourceData]="conditionChangeSource">
       <d-condition-change demo></d-condition-change>
     </d-codebox>

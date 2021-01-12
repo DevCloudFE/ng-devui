@@ -1,4 +1,4 @@
-import { Component, Input, ContentChild, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ContentChild, Input } from '@angular/core';
 import { TabContentDirective } from './tab-content.directive';
 import { TabTitleDirective } from './tab-title.directive';
 
@@ -9,7 +9,7 @@ import { TabTitleDirective } from './tab-title.directive';
 })
 export class TabComponent {
   @Input() tabId?: string;
-  @Input() id: number |string;
+  @Input() id: number | string;
   @Input() title: string;
   @Input() disabled = false;
   @ContentChild(TabContentDirective) contentTpl: TabContentDirective;

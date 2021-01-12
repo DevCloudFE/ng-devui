@@ -1,5 +1,5 @@
 <section class="markdown api-container">
   <ng-container *ngIf="api">
-    <div [innerHtml]="api"></div>
+    <div [innerHTML]="api | safe: 'html'"></div>
   </ng-container>
 </section>

@@ -1,4 +1,4 @@
-import {animate, AnimationTriggerMetadata, state, style, transition, trigger} from '@angular/animations';
+import { animate, AnimationTriggerMetadata, state, style, transition, trigger } from '@angular/animations';
 
 export const directionFadeInOut: AnimationTriggerMetadata = trigger('directionFadeInOut', [
   state('void', style({opacity: 0})),
@@ -8,7 +8,7 @@ export const directionFadeInOut: AnimationTriggerMetadata = trigger('directionFa
   state('left', style({opacity: 1})),
   state('right', style({opacity: 1})),
   transition('* => bottom', [
-    style({transform: 'translateY(-5px)', opacity: 0}),
+    style({transform: 'translateY(-5px)', opacity: 0, pointerEvents: 'none'}),
     animate('.3s cubic-bezier(0.23, 1, 0.32, 1)', style({transform: 'translateY(0)', opacity: 1}))
   ]),
   transition('bottom => void', [
@@ -16,7 +16,7 @@ export const directionFadeInOut: AnimationTriggerMetadata = trigger('directionFa
     animate('.3s cubic-bezier(0.755, 0.05, 0.855, 0.06)', style({transform: 'translateY(-5px)', opacity: 0}))
   ]),
   transition('* => top', [
-    style({transform: 'translateY(5px)', opacity: 0}),
+    style({transform: 'translateY(5px)', opacity: 0, pointerEvents: 'none'}),
     animate('.3s cubic-bezier(0.23, 1, 0.32, 1)', style({transform: 'translateY(0)', opacity: 1}))
   ]),
   transition('top => void', [
@@ -24,7 +24,7 @@ export const directionFadeInOut: AnimationTriggerMetadata = trigger('directionFa
     animate('.3s cubic-bezier(0.755, 0.05, 0.855, 0.06)', style({transform: 'translateY(5px)', opacity: 0}))
   ]),
   transition('* => left', [
-    style({transform: 'translateX(5px)', opacity: 0}),
+    style({transform: 'translateX(5px)', opacity: 0, pointerEvents: 'none'}),
     animate('.3s cubic-bezier(0.23, 1, 0.32, 1)', style({transform: 'translateX(0)', opacity: 1}))
   ]),
   transition('left => void', [
@@ -32,7 +32,7 @@ export const directionFadeInOut: AnimationTriggerMetadata = trigger('directionFa
     animate('.3s cubic-bezier(0.755, 0.05, 0.855, 0.06)', style({transform: 'translateX(5px)', opacity: 0}))
   ]),
   transition('* => right', [
-    style({transform: 'translateX(-5px)', opacity: 0}),
+    style({transform: 'translateX(-5px)', opacity: 0, pointerEvents: 'none'}),
     animate('.3s cubic-bezier(0.23, 1, 0.32, 1)', style({transform: 'translateX(0)', opacity: 1}))
   ]),
   transition('right => void', [

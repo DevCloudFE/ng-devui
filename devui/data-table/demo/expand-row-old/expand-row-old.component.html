@@ -9,6 +9,7 @@
     [headerExpandConfig]="headerExpandConfig"
     [fixHeader]="true"
     [scrollable]="true"
+    (detialToggle)="toggle($event)"
   >
     <d-column field="$index" header="#" [width]="'50px'"></d-column>
     <d-column field="firstName" header="First Name" [width]="'150px'" [editable]="true"></d-column>
@@ -37,7 +38,7 @@
     <div class="input-block">
       <input class="devui-form-control" [(ngModel)]="defaultRowData.lastName" placeholder="lastName" type="text" />
     </div>
-    <d-button style="margin-right: 5px;" (click)="quickRowAdded()">确定</d-button>
+    <d-button style="margin-right: 5px" (click)="quickRowAdded()">确定</d-button>
     <d-button bsStyle="common" (click)="quickRowCancel()">取消</d-button>
   </div>
 </ng-template>
@@ -49,7 +50,7 @@
     <div class="input-block">
       <input class="devui-form-control" [(ngModel)]="defaultRowData.lastName" placeholder="lastName" type="text" />
     </div>
-    <d-button style="margin-right: 5px;" (click)="subRowAdded(rowIndex, rowItem)">确定</d-button>
+    <d-button style="margin-right: 5px" (click)="subRowAdded(rowIndex, rowItem)">确定</d-button>
     <d-button bsStyle="common" (click)="subRowCancel(rowIndex, rowItem)">取消</d-button>
   </div>
 </ng-template>

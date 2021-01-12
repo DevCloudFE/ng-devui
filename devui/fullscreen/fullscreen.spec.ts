@@ -1,10 +1,10 @@
-import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { Component, DebugElement, ViewChild } from '@angular/core';
-import { FullscreenModule } from './fullscreen.module';
-import { ButtonModule } from '../button/button.module';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { ButtonModule } from '../button/button.module';
 import { DomHelper } from '../utils/testing/dom-helper';
 import { FullscreenComponent } from './fullscreen.component';
+import { FullscreenModule } from './fullscreen.module';
 @Component({
   template: `
     <d-fullscreen

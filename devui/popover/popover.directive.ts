@@ -5,13 +5,13 @@ import {
   ElementRef,
   Injector,
   Input,
-  OnInit,
   OnDestroy,
-  ViewContainerRef,
-  TemplateRef } from '@angular/core';
+  OnInit,
+  TemplateRef,
+  ViewContainerRef } from '@angular/core';
 import { OverlayContainerRef } from 'ng-devui/overlay-container';
+import { fromEvent, merge,  Subscription } from 'rxjs';
 import { PopoverComponent } from './popover.component';
-import { fromEvent, Subscription,  merge } from 'rxjs';
 import { PopoverType, PositionType, TriggerType } from './popover.types';
 
 @Directive({
@@ -93,7 +93,6 @@ export class PopoverDirective implements OnInit, OnDestroy {
               private injector: Injector,
               private componentFactoryResolver: ComponentFactoryResolver) {
   }
-
 
   onDocumentClick = (event) => {
     event.stopPropagation();

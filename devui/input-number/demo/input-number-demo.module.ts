@@ -1,24 +1,24 @@
-import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
-
-import { InputNumberDemoComponent } from './input-number-demo.component';
 import { CommonModule } from '@angular/common';
-import { InputNumberModule } from 'ng-devui/input-number';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { InputNumberModule } from 'ng-devui/input-number';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
-
+import { TranslateModule } from '@ngx-translate/core';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 import { InputNumberBasicComponent } from './basic/input-number-basic.component';
+import { DecimalLimitAutoFocusComponent } from './decimalLimitAndAutoFocus/decimal-limit-auto-focus.component';
 import { InputNumberDisabledComponent } from './disabled/input-number-disabled.component';
 import { InputNumberEmptyComponent } from './empty/input-number-empty.component';
+import { InputNumberDemoComponent } from './input-number-demo.component';
 import { InputNumberPlaceholderAndMaxLengthComponent } from './placeholderAndMaxLength/input-number-placeholder-maxLength.component';
 import { InputNumberRegComponent } from './reg/input-number-reg.component';
-import { DecimalLimitAutoFocusComponent } from './decimalLimitAndAutoFocus/decimal-limit-auto-focus.component';
-import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 
 @NgModule({
   imports: [
+    TranslateModule,
     CommonModule,
     DevUIApiModule,
     DevUICodeboxModule,
@@ -29,11 +29,14 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
       { path: '', redirectTo: 'demo' },
       { path: 'demo', component: InputNumberDemoComponent },
       {
-        path: 'api', component: DevUIApiComponent, data: {
-          api: require('!html-loader!markdown-loader!../doc/api.md'),
-        }
-      }
-    ])
+        path: 'api',
+        component: DevUIApiComponent,
+        data: {
+          'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),
+          'en-us': require('!html-loader!markdown-loader!../doc/api-en.md'),
+        },
+      },
+    ]),
   ],
   exports: [InputNumberDemoComponent],
   declarations: [
@@ -43,9 +46,7 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
     InputNumberEmptyComponent,
     InputNumberPlaceholderAndMaxLengthComponent,
     InputNumberRegComponent,
-    DecimalLimitAutoFocusComponent
+    DecimalLimitAutoFocusComponent,
   ],
 })
-export class InputNumberDemoModule {
-}
-
+export class InputNumberDemoModule {}

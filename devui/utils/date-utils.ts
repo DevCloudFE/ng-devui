@@ -1,6 +1,6 @@
+import * as dateFormat_ from 'date-fns/format';
 import * as isDate_ from 'date-fns/is_date';
 import * as dateParse_ from 'date-fns/parse';
-import * as dateFormat_ from 'date-fns/format';
 const isDate: any = isDate_;
 const dateParse: any = dateParse_;
 const dateFormat: any = dateFormat_;

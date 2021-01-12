@@ -8,6 +8,15 @@
   </d-tabs>
 </div>
 <div class="handle-group">
+  表格大小：<d-tabs type="options" [(activeTab)]="activeSize" [showContent]="false">
+    <d-tab *ngFor="let item of sizeItems" [id]="item.id">
+      <ng-template dTabTitle>
+        {{ item.title }}
+      </ng-template>
+    </d-tab>
+  </d-tabs>
+</div>
+<div class="handle-group">
   表格布局：<d-tabs type="options" [(activeTab)]="activeLayout" [showContent]="false" (activeTabChange)="layoutChange($event)">
     <d-tab *ngFor="let item of layoutItems" [id]="item.id">
       <ng-template dTabTitle>
@@ -25,6 +34,7 @@
   [borderType]="activeBorder"
   [headerBg]="headerBk"
   [striped]="striped"
+  [size]="activeSize"
   [tableLayout]="activeLayout"
 >
   <thead dTableHead>

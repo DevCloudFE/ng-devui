@@ -1,21 +1,21 @@
+import { Clipboard } from '@angular/cdk/clipboard';
 import {
+  ComponentFactoryResolver,
+  ComponentRef,
   Directive,
-  OnDestroy,
-  Input,
-  Output,
+  ElementRef,
   EventEmitter,
   HostListener,
-  ComponentRef,
-  ComponentFactoryResolver,
-  ElementRef,
-  TemplateRef,
-  OnInit
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+  TemplateRef
 } from '@angular/core';
-import { Clipboard } from '@angular/cdk/clipboard';
+import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { OverlayContainerRef } from 'ng-devui/overlay-container';
 import { PopoverComponent } from 'ng-devui/popover';
 import { PositionType } from 'ng-devui/tooltip';
-import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { Subscription } from 'rxjs';
 
 @Directive({

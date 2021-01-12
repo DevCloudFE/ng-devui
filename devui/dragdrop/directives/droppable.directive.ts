@@ -1,21 +1,21 @@
-import { distinctUntilChanged, filter } from 'rxjs/operators';
 import {
+  AfterViewInit,
   Directive,
   ElementRef,
+  EventEmitter,
   HostListener,
   Input,
-  Output,
-  EventEmitter,
-  Renderer2,
-  OnInit,
-  AfterViewInit,
+  NgZone,
   OnDestroy,
-  NgZone
+  OnInit,
+  Output,
+  Renderer2
 } from '@angular/core';
-import { DropEvent } from '../shared/drop-event.model';
+import { fromEvent, Subject, Subscription } from 'rxjs';
+import { distinctUntilChanged, filter } from 'rxjs/operators';
 import { DragDropService } from '../services/drag-drop.service';
+import { DropEvent } from '../shared/drop-event.model';
 import { Utils } from '../shared/utils';
-import { Subscription, fromEvent, Subject } from 'rxjs';
 import { DraggableDirective } from './draggable.directive';
 import { DragPlaceholderInsertionEvent, DragPlaceholderInsertionIndexEvent } from './placeholder-insertion-event.type';
 
@@ -168,7 +168,7 @@ export class DroppableDirective implements OnInit, AfterViewInit, OnDestroy {
         this.dragPartEventSub.add(fromEvent<DragEvent>(this.el.nativeElement, 'dragover')
           .pipe(
             filter(event => this.allowDrop(event)),
-            distinctUntilChanged( (prev , current) => {
+            distinctUntilChanged((prev , current) => {
                 const bool = (prev.clientX === current.clientX && prev.clientY === current.clientY && prev.target === current.target);
                 if (bool) { current.preventDefault(); current.stopPropagation(); }
                 return bool;
@@ -304,7 +304,7 @@ export class DroppableDirective implements OnInit, AfterViewInit, OnDestroy {
       const draggedElIdentity = this.dragDropService.draggedElIdentity;
       this.dragDropService.draggedElIdentity = undefined; // 需要提前清除，避免新生成的节点复用了id 刷新了dragOriginPlaceholder
       let batchDraggble: Array<DraggableDirective> = [];
-      if (this.dragDropService.batchDragData && this.dragDropService.batchDragData.length > 1 ) {
+      if (this.dragDropService.batchDragData && this.dragDropService.batchDragData.length > 1) {
         batchDraggble = this.dragDropService.batchDragData.map(dragData => dragData.draggable)
           .filter(draggable => draggable && draggable.el.nativeElement !== this.dragDropService.draggedEl);
       }
@@ -448,7 +448,7 @@ export class DroppableDirective implements OnInit, AfterViewInit, OnDestroy {
         || value.nextElementSibling === moveElement
         && value.nextElementSibling.classList.contains('drag-origin-placeholder'))
       );
-    if ( this.switchWhileCrossEdge && !this.allowDropOnItem && childEls.length
+    if (this.switchWhileCrossEdge && !this.allowDropOnItem && childEls.length
       && -1 !== positionIndex
       && currentIndex > -1
     ) { // 越过元素边界立即交换位置算法
@@ -550,7 +550,6 @@ export class DroppableDirective implements OnInit, AfterViewInit, OnDestroy {
     return overElement;
   }
 
-
   private calcPosition(event: any, targetElement: any) {
     const rect = targetElement.getBoundingClientRect();
     const relY = event.clientY - (rect.y || rect.top);
@@ -569,7 +568,7 @@ export class DroppableDirective implements OnInit, AfterViewInit, OnDestroy {
 
       if (this.sortDirectionZMode) {
         const slashPosition = (relY / dropOnItemEdge.height + relX / dropOnItemEdge.width);
-        if ( slashPosition > 0.3 &&  slashPosition <= 0.7) {
+        if (slashPosition > 0.3 &&  slashPosition <= 0.7) {
           return 'inside';
         } else if (slashPosition > 0.7) {
           const slashPositionNesting = (
@@ -586,7 +585,7 @@ export class DroppableDirective implements OnInit, AfterViewInit, OnDestroy {
         //  高度的中间1/4 - 3/4 属于drop到元素自己
         return 'inside';
       } else if ((this.sortDirection === 'v' && relY > threeQuartersOfHeight
-          && relY <= (rect.height - AQuarterOfHeight) ) ||
+          && relY <= (rect.height - AQuarterOfHeight)) ||
           (this.sortDirection !== 'v' && relX > threeQuartersOfWidth
           &&  relX <= (rect.width - AQuarterOfWidth)))  {
         // 内嵌列表后中间区域都属于inside
@@ -595,7 +594,7 @@ export class DroppableDirective implements OnInit, AfterViewInit, OnDestroy {
     }
 
     if (this.sortDirectionZMode) {
-      if ((relY / rect.height + relX / rect.width) < 1 ) {
+      if ((relY / rect.height + relX / rect.width) < 1) {
         return 'before';
       }
       return 'after';
@@ -614,8 +613,8 @@ export class DroppableDirective implements OnInit, AfterViewInit, OnDestroy {
     const relX = event.clientX - (rect.x || rect.left);
 
     if (this.sortDirectionZMode) {
-      if ((this.sortDirection === 'v' && (relY < 0 || (relY < rect.height && relX < 0 ) ))
-        || ( this.sortDirection !== 'v' && (relX < 0 || (relX < rect.width && relY < 0 ) ))
+      if ((this.sortDirection === 'v' && (relY < 0 || (relY < rect.height && relX < 0)))
+        || (this.sortDirection !== 'v' && (relX < 0 || (relX < rect.width && relY < 0)))
       ) {
         return 'before';
       }

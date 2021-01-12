@@ -1,9 +1,9 @@
-import { ComponentFixture, TestBed, fakeAsync } from '@angular/core/testing';
-import { TooltipModule } from './tooltip.module';
 import { Component, DebugElement } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { ButtonModule } from '../button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ButtonModule } from '../button';
+import { TooltipModule } from './tooltip.module';
 
 @Component({
   template: `
@@ -71,4 +71,3 @@ describe('tooltip', () => {
   });
 
 });
-

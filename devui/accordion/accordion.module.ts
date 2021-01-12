@@ -1,12 +1,12 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { AccordionComponent } from './accordion.component';
-import { AccordionListComponent } from './accordion-list.component';
-import { AccordionItemRouterlinkComponent } from './accordion-item-routerlink.component';
 import { AccordionItemHreflinkComponent } from './accordion-item-hreflink.component';
+import { AccordionItemRouterlinkComponent } from './accordion-item-routerlink.component';
 import { AccordionItemComponent } from './accordion-item.component';
+import { AccordionListComponent } from './accordion-list.component';
 import { AccordionMenuComponent } from './accordion-menu.component';
+import { AccordionComponent } from './accordion.component';
 
 @NgModule({
   imports: [

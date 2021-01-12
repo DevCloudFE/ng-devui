@@ -24,7 +24,6 @@ export class LabelHorizontalComponent implements OnInit {
 
   disabled: false;
 
-
   labelList = [{
     id: 1,
     label: '选项1'
@@ -52,9 +51,6 @@ export class LabelHorizontalComponent implements OnInit {
     id: 3,
     label: '选项3'
   }];
-
-
-
 
   radioOptions = [{
       id: 1,

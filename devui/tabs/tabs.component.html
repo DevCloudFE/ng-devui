@@ -6,7 +6,13 @@
   role="tablist"
 >
   <ng-container *ngFor="let tab of tabs">
-    <li role="presentation" [class.disabled]="tab.disabled" [id]="tab.tabId" [class.active]="tab.id == activeTab" (click)="select(tab.id)">
+    <li
+      role="presentation"
+      [class.disabled]="tab.disabled"
+      [id]="tab.tabId === undefined ? '' : tab.tabId"
+      [class.active]="tab.id == activeTab"
+      (click)="select(tab.id)"
+    >
       <a
         role="tab"
         data-toggle="tab"

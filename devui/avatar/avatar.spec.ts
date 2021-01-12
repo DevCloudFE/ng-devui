@@ -1,9 +1,8 @@
-import { ComponentFixture, TestBed, flush, fakeAsync } from '@angular/core/testing';
-import { Component, ViewChild, DebugElement } from '@angular/core';
+import { Component, DebugElement, ViewChild } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { AvatarComponent } from './avatar.component';
 import { AvatarModule } from './avatar.module';
-import { By } from '@angular/platform-browser';
-
 @Component({
   template: ` <d-avatar #comp [name]="name" [gender]="gender" [width]="width"></d-avatar> `,
 })

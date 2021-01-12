@@ -3,9 +3,7 @@
   <div class="row">
     <div class="col-sm-3">
       <div class="card" dDroppable [dropScope]="'default-css'" (dropEvent)="onDrop($event, list1)">
-        <div class="card-header">
-          从这里拖，源占位符在放置之后<strong>直接</strong>消失
-        </div>
+        <div class="card-header">从这里拖，源占位符在放置之后<strong>直接</strong>消失</div>
         <div class="card-block">
           <ul class="list-group drop-el" dSortable>
             <li
@@ -33,9 +31,7 @@
         (dropEvent)="onDrop($event, list2)"
         [placeholderStyle]="{}"
       >
-        <div class="card-header">
-          从这里拖，源占位符在放置之后<strong>延迟</strong>消失
-        </div>
+        <div class="card-header">从这里拖，源占位符在放置之后<strong>延迟</strong>消失</div>
         <div class="card-block">
           <ul class="list-group drop-el" dSortable>
             <li
@@ -63,9 +59,7 @@
         (dropEvent)="onDrop($event, list3)"
         [placeholderStyle]="{}"
       >
-        <div class="card-header">
-          从这里拖，源占位符在放置之后<strong>动画</strong>消失
-        </div>
+        <div class="card-header">从这里拖，源占位符在放置之后<strong>动画</strong>消失</div>
         <div class="card-block">
           <ul class="list-group drop-el list-3" dSortable>
             <li

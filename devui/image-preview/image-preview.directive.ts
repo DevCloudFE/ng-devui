@@ -1,7 +1,7 @@
-import { Directive, ElementRef, HostListener, HostBinding, Input, OnInit, OnDestroy } from '@angular/core';
+import { Directive, ElementRef, HostBinding, HostListener, Input, OnDestroy, OnInit } from '@angular/core';
 import { ModalService } from 'ng-devui/modal';
-import { DImagePreviewComponent } from './image-preview.component';
 import { Subject } from 'rxjs';
+import { DImagePreviewComponent } from './image-preview.component';
 @Directive({
   selector: '[dImagePreview]',
 })

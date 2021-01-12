@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { originSource, SourceType } from '../mock-data';
 import { TableWidthConfig } from 'ng-devui/data-table';
+import { originSource, SourceType } from '../mock-data';
 
 @Component({
   selector: 'd-mutil-styles',
@@ -24,6 +24,22 @@ export class MutilStylesComponent implements OnInit {
     {
       id: 'bordered',
       title: '全边框'
+    }
+  ];
+
+  activeSize = 'sm';
+  sizeItems = [
+    {
+      id: 'sm',
+      title: '标准尺寸'
+    },
+    {
+      id: 'md',
+      title: '中尺寸'
+    },
+    {
+      id: 'lg',
+      title: '大尺寸'
     }
   ];
 

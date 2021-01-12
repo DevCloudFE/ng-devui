@@ -11,7 +11,6 @@ export class I18nFormat {
   private static readonly DATE_FORMAT_ZH = 'y/MM/dd';
   private static readonly DATE_FORMAT_RU = 'dd.MM.y';
 
-
   private static readonly localFormat = {
     'zh-cn': {full: I18nFormat.DATETIME_FORMAT_ZH, short: I18nFormat.DATE_FORMAT_ZH},
     'en-us': {full: I18nFormat.DATETIME_FORMAT_EN, short: I18nFormat.DATE_FORMAT_EN},

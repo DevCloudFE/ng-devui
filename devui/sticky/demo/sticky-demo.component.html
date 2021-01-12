@@ -1,14 +1,14 @@
 <div class="demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 60, bottom: 0 }">
   <d-demo-nav [navItems]="navItems"></d-demo-nav>
   <div class="demo-example" [dAnchor]="'basic-usage'">
-    <div class="demo-title">基本用法</div>
+    <div class="demo-title">{{ 'components.sticky.basicDemo.title' | translate }}</div>
     <div class="demo-text"></div>
     <d-codebox id="components-tabs-default" [sourceData]="basicSource">
       <d-basic demo></d-basic>
     </d-codebox>
   </div>
   <div class="demo-example" [dAnchor]="'scroll-target'">
-    <div class="demo-title">更换滚动容器</div>
+    <div class="demo-title">{{ 'components.sticky.scrollTargetDemo.title' | translate }}</div>
     <div class="demo-text"></div>
     <d-codebox id="components-tabs-scroll-target" [sourceData]="ScrollTargetSource">
       <d-scroll-target demo></d-scroll-target>

@@ -10,5 +10,4 @@ export class SizeComponent implements OnInit {
   ngOnInit() {
   }
 
-
 }

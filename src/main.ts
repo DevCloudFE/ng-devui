@@ -4,11 +4,11 @@ import { ThemeServiceInit, devuiLightTheme, devuiDarkTheme } from 'ng-devui/them
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
 import { greenLightTheme,
-  greenDarkTheme,
-  devuiLightLargeTheme,
-  devuiDarkLargeTheme,
-  greenLightLargeTheme,
-  greenDarkLargeTheme } from './app/theme-picker/theme-data-more';
+   greenDarkTheme,
+   devuiLightLargeTheme,
+   devuiDarkLargeTheme,
+   greenLightLargeTheme,
+   greenDarkLargeTheme } from './app/theme-picker/theme-data-more';
 ThemeServiceInit({
   'devui-light-theme': devuiLightTheme,
   'devui-dark-theme': devuiDarkTheme,

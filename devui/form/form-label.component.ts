@@ -1,14 +1,13 @@
 import {
+    ChangeDetectorRef,
     Component,
     ElementRef,
-    Renderer2,
-    Input,
-    ChangeDetectorRef, HostBinding
+    HostBinding,
+    Input, Renderer2
   } from '@angular/core';
 import { DFormControlStatus } from './validator-directive/validate.type';
 
-
-  @Component({
+@Component({
     selector: 'd-form-label',
     templateUrl: './form-label.component.html',
     styleUrls: ['./form-label.component.scss'],

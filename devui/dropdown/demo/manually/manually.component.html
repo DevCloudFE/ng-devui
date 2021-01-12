@@ -1,0 +1,30 @@
+<section>
+  <div
+    class="btn-group g-dropdown"
+    dDropDown
+    (toggleEvent)="onToggle($event)"
+    [trigger]="'manually'"
+    [isOpen]="isOpen"
+    #myDropdown="d-dropdown"
+    [closeScope]="clickOutsideClose ? 'blank' : 'none'"
+  >
+    <input type="text" dTextInput dDropDownToggle class="devui-dropdown-origin" />
+    <ul dDropDownMenu class="devui-dropdown-menu devui-dropdown-overlay" role="menu">
+      <li role="menuitem">
+        <a class="devui-dropdown-item">菜单一</a>
+      </li>
+      <li class="disabled" role="menuitem">
+        <a class="devui-dropdown-item disabled">菜单二</a>
+      </li>
+    </ul>
+  </div>
+  <div class="control">
+    <div>
+      <d-button (btnClick)="myDropdown.toggle()">使用toggle函数</d-button>
+    </div>
+    <div>
+      <d-button (btnClick)="toggleIsOpen()">使用isOpen</d-button>
+    </div>
+    <div><d-toggle [(ngModel)]="clickOutsideClose"></d-toggle> 允许点击外部关闭</div>
+  </div>
+</section>

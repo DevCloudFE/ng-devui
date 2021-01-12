@@ -1,34 +1,34 @@
 import {
+  CdkConnectedOverlay, CdkOverlayOrigin, ConnectedOverlayPositionChange,
+  ConnectedPosition, VerticalConnectionPos
+} from '@angular/cdk/overlay';
+import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
+import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   ContentChild,
   ElementRef,
   EventEmitter,
-  forwardRef,
-  Input, NgZone,
+  forwardRef, HostListener,
+  Input,
+  NgZone,
   OnChanges,
   OnDestroy,
   OnInit,
   Output,
-  AfterViewInit,
   Renderer2,
   SimpleChanges,
   TemplateRef,
-  ViewChild,
-  HostListener
+  ViewChild
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { fromEvent, BehaviorSubject, Observable, Subscription, of } from 'rxjs';
-import { map, debounceTime, filter, switchMap } from 'rxjs/operators';
+import { I18nInterface, I18nService } from 'ng-devui/i18n';
+import { AppendToBodyDirection, AppendToBodyDirectionsConfig, fadeInOut } from 'ng-devui/utils';
 import { WindowRef } from 'ng-devui/window-ref';
-import { I18nService, I18nInterface } from 'ng-devui/i18n';
-import {
-  VerticalConnectionPos, ConnectedOverlayPositionChange, CdkOverlayOrigin,
-  CdkConnectedOverlay, ConnectedPosition
-} from '@angular/cdk/overlay';
-import { fadeInOut, AppendToBodyDirection, AppendToBodyDirectionsConfig } from 'ng-devui/utils';
-import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
+import { BehaviorSubject, fromEvent, Observable, of, Subscription } from 'rxjs';
+import { debounceTime, filter, map, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'd-select',
@@ -633,7 +633,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
     this.isOpen = !this.isOpen;
     if (this.virtualScrollViewportSizeMightChange) { // 解决虚拟滚动更新options长度展开前无法获取正确高度影响
       setTimeout(() => {
-        if (this.virtualScrollViewportSizeMightChange) {
+        if (this.virtualScrollViewportSizeMightChange && this.virtualScrollViewport) {
           this.virtualScrollViewportSizeMightChange = false;
           this.virtualScrollViewport.checkViewportSize();
         }

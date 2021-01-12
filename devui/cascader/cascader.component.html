@@ -1,0 +1,163 @@
+<div
+  [ngStyle]="{ width: width + 'px' }"
+  dDropDown
+  appendToBody
+  [trigger]="'click'"
+  [closeScope]="'blank'"
+  #mainDropdown="d-dropdown"
+  (toggleEvent)="onToggle($event)"
+  [appendToBodyDirections]="subMenuDirections"
+>
+  <input
+    *ngIf="!multiple"
+    [placeholder]="placeholder"
+    type="text"
+    class="devui-form-control devui-select-input devui-input"
+    [ngClass]="{ 'devui-search-cascader': allowSearch }"
+    [readonly]="!allowSearch"
+    dDropDownToggle
+    [disabled]="disabled"
+    [ngModel]="showTextValue"
+    (ngModelChange)="valueChanges($event)"
+  />
+  <div class="devui-tags-input-wrapper" dDropDownToggle *ngIf="multiple">
+    <div class="devui-tags-input">
+      <d-tag
+        *ngFor="let item of multipleValueList; let index = index"
+        [tag]="item.label"
+        [deletable]="true"
+        (tagDelete)="deleteTag($event, item)"
+      ></d-tag>
+      <input
+        #innerInput
+        *ngIf="allowSearch"
+        dTextInput
+        class="inner-input"
+        [placeholder]="multipleValueList.length ? '' : placeholder"
+        [ngModel]="showTextValue"
+        (ngModelChange)="valueChanges($event)"
+      />
+      <span *ngIf="!multipleValueList.length && !allowSearch" class="devui-dropdown-placeholder">{{ placeholder }}</span>
+    </div>
+    <div class="devui-drop-icon-wrapper" [ngClass]="{ 'dropdown-show-clear': allowClear }">
+      <span class="devui-drop-icon">
+        <svg
+          width="8px"
+          height="5px"
+          viewBox="0 0 8 5"
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+        >
+          <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <g transform="translate(-4.000000, -6.000000)">
+              <polygon points="4 6 12 6 8 11"></polygon>
+            </g>
+          </g>
+        </svg>
+      </span>
+      <span class="devui-cascader-close-icon" (click)="clearTags()">
+        <svg
+          width="12px"
+          height="12px"
+          viewBox="0 0 12 12"
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+        >
+          <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <path
+              id="Combined-Shape"
+              d="M8.86785321,3.13214679 C9.02624037,3.29053395 9.02624037,3.54733027 8.86785321,3.70571743 L6.573,6 L8.86785321,8.29428257 C9.02624037,8.45266973 9.02624037,8.70946605 8.86785321,8.86785321 C8.70946605,9.02624037 8.45266973,9.02624037 8.29428257,8.86785321 L6,6.573 L3.70571743,8.86785321 C3.54733027,9.02624037 3.29053395,9.02624037 3.13214679,8.86785321 C2.97375963,8.70946605 2.97375963,8.45266973 3.13214679,8.29428257 L5.427,6 L3.13214679,3.70571743 C2.97375963,3.54733027 2.97375963,3.29053395 3.13214679,3.13214679 C3.29053395,2.97375963 3.54733027,2.97375963 3.70571743,3.13214679 L6,5.427 L8.29428257,3.13214679 C8.45266973,2.97375963 8.70946605,2.97375963 8.86785321,3.13214679 Z"
+              fill-rule="nonzero"
+            ></path>
+          </g>
+        </svg>
+      </span>
+    </div>
+  </div>
+  <div class="devui-single-drop-icon-wrapper" *ngIf="!multiple" [ngClass]="{ 'dropdown-show-clear': allowClear }">
+    <span class="devui-drop-icon">
+      <svg
+        width="8px"
+        height="5px"
+        viewBox="0 0 8 5"
+        version="1.1"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+      >
+        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+          <g transform="translate(-4.000000, -6.000000)">
+            <polygon points="4 6 12 6 8 11"></polygon>
+          </g>
+        </g>
+      </svg>
+    </span>
+    <span class="devui-cascader-close-icon" (click)="clearTags()">
+      <svg
+        width="12px"
+        height="12px"
+        viewBox="0 0 12 12"
+        version="1.1"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+      >
+        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+          <path
+            id="Combined-Shape"
+            d="M8.86785321,3.13214679 C9.02624037,3.29053395 9.02624037,3.54733027 8.86785321,3.70571743 L6.573,6 L8.86785321,8.29428257 C9.02624037,8.45266973 9.02624037,8.70946605 8.86785321,8.86785321 C8.70946605,9.02624037 8.45266973,9.02624037 8.29428257,8.86785321 L6,6.573 L3.70571743,8.86785321 C3.54733027,9.02624037 3.29053395,9.02624037 3.13214679,8.86785321 C2.97375963,8.70946605 2.97375963,8.45266973 3.13214679,8.29428257 L5.427,6 L3.13214679,3.70571743 C2.97375963,3.54733027 2.97375963,3.29053395 3.13214679,3.13214679 C3.29053395,2.97375963 3.54733027,2.97375963 3.70571743,3.13214679 L6,5.427 L8.29428257,3.13214679 C8.45266973,2.97375963 8.70946605,2.97375963 8.86785321,3.13214679 Z"
+            fill-rule="nonzero"
+          ></path>
+        </g>
+      </svg>
+    </span>
+  </div>
+
+  <div dDropDownMenu class="devui-drop-menu-wrapper {{ dropdownPanelClass }}">
+    <ng-container *ngIf="!showSearchPanel">
+      <ul
+        *ngFor="let optionList of columnList; let i = index"
+        class="devui-cascader-list"
+        [ngClass]="{ 'devui-drop-no-data': !options.length }"
+        [ngStyle]="{ width: dropdownWidth - 2 + 'px' }"
+        role="menu"
+        (click)="$event.stopPropagation()"
+      >
+        <ng-container *ngIf="optionList.length">
+          <d-cascader-li
+            *ngFor="let option of optionList"
+            [option]="option"
+            [trigger]="trigger"
+            [width]="dropdownWidth"
+            [multiple]="multiple"
+            [colIndex]="i"
+            [dropDownItemTemplate]="dropDownItemTemplate"
+            [isLazyLoad]="isLazyLoad"
+            [canSelectParent]="canSelectParent"
+            [checkboxRelation]="checkboxRelation"
+          ></d-cascader-li>
+        </ng-container>
+
+        <span *ngIf="!optionList.length">{{ i18nCommonText.noData }}</span>
+      </ul>
+    </ng-container>
+
+    <ng-container *ngIf="showSearchPanel">
+      <ul
+        class="devui-cascader-list"
+        [style.minWidth]="dropdownWidth - 2 + 'px'"
+        [ngClass]="{ 'devui-drop-no-data': !searchResultList.length }"
+      >
+        <li
+          *ngFor="let item of searchResultList"
+          class="devui-cascader-list-item"
+          [ngClass]="{ 'active-li': item.checked }"
+          (click)="chooseSearchResult(item)"
+        >
+          {{ item.label }}
+        </li>
+        <span *ngIf="!searchResultList.length">{{ i18nCommonText.noData }}</span>
+      </ul>
+    </ng-container>
+  </div>
+</div>

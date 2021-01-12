@@ -13,7 +13,7 @@ export class LoadingComponent implements OnInit {
 
   toggleLoading() {
     this.showLoading = true;
-      setTimeout(() => {
+    setTimeout(() => {
           this.showLoading = false;
       }, 1000);
   }

@@ -1,7 +1,5 @@
 import { AbstractControl, ValidationErrors } from '@angular/forms';
 
-
-
 export class DValidators {
 
   /* Failed if only has whitespace */

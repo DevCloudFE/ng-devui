@@ -1,6 +1,6 @@
 import { ComponentFactoryResolver, Injectable } from '@angular/core';
-import { assign, isUndefined } from 'lodash-es';
 import { OverlayContainerRef } from 'ng-devui/overlay-container';
+import { assign, isUndefined } from 'lodash-es';
 import { DrawerComponent } from './drawer.component';
 import { IDrawerOpenResult, IDrawerOptions } from './drawer.types';
 
@@ -29,7 +29,7 @@ export class DrawerService {
     beforeHidden,
     destroyOnHide = true,
     position = 'right',
-    bodyScrollable
+    bodyScrollable = true
   }: IDrawerOptions): IDrawerOpenResult {
     const componentFactoryResolver_ = componentFactoryResolver || this.componentFactoryResolver;
     const drawerRef = this.overlayContainerRef.createComponent(

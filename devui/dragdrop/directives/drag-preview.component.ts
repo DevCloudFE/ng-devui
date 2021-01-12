@@ -1,4 +1,4 @@
-import {  Component, TemplateRef, ElementRef, ChangeDetectorRef } from '@angular/core';
+import {  ChangeDetectorRef, Component, ElementRef, TemplateRef } from '@angular/core';
 
 @Component({
   selector: 'd-drag-preview',

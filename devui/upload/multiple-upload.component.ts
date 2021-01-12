@@ -1,27 +1,27 @@
 import {
   Component,
-  TemplateRef,
-  ViewChild,
   OnDestroy,
   OnInit,
+  TemplateRef,
+  ViewChild,
 } from '@angular/core';
 import {
+  EventEmitter,
   Input,
   Output,
-  EventEmitter,
 } from '@angular/core';
+import { I18nInterface, I18nService } from 'ng-devui/i18n';
+import { Observable, Subscription } from 'rxjs';
+import { debounceTime, last, map } from 'rxjs/operators';
 import {
-  IUploadOptions,
   IFileOptions,
+  IUploadOptions,
   UploadStatus
 } from './file-uploader.types';
 import { MultipleUploadViewComponent } from './multiple-upload-view.component';
 import {
   SelectFiles
 } from './select-files.utils';
-import { map, last, debounceTime } from 'rxjs/operators';
-import { Observable, Subscription } from 'rxjs';
-import { I18nInterface, I18nService } from 'ng-devui/i18n';
 
 @Component({
   selector: 'd-multiple-upload',
@@ -66,9 +66,7 @@ export class MultipleUploadComponent implements OnDestroy, OnInit {
   uploadTips: string;
   constructor(
     private selectFiles: SelectFiles,
-    private i18n: I18nService, ) {
-
-  }
+    private i18n: I18nService) { }
   ngOnInit(): void {
     this.i18nText = this.i18n.getI18nText().upload;
     this.i18nCommonText = this.i18n.getI18nText().common;
@@ -246,4 +244,3 @@ export class MultipleUploadComponent implements OnDestroy, OnInit {
     }
   }
 }
-

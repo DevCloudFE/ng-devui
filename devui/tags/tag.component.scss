@@ -33,7 +33,7 @@
     vertical-align: 0;
   }
 
-  &:hover:not(.devui-colorful-tag):not(.devui-selected-tag) {
+  &:hover:not(.devui-colorful-tag):not(.devui-selected-tag).devui-checkable-tag {
     color: $devui-brand-hover;
 
     .remove-button svg polygon {
@@ -41,7 +41,7 @@
     }
   }
 
-  &:hover.devui-colorful-tag {
+  &:hover.devui-checkable-tag {
     .content-wrapper {
       display: block;
       position: absolute;

@@ -12,6 +12,7 @@
       #dateRangePicker="dateRangePicker"
       (selectedRangeChange)="getValue($event)"
       [showTime]="true"
+      [dateFormat]="'y-MM-dd HH:mm:ss'"
     />
     <div *ngIf="everyRange(dateRange)" class="devui-input-group-addon icon-close-wrapper" (click)="dateRangePicker.clearAll()">
       <i class="icon icon-close"></i>

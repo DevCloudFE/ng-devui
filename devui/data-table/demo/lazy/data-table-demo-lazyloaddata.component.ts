@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 
+import { DataTableComponent } from 'ng-devui/data-table';
 import {LoadingType} from 'ng-devui/loading';
 import { EMPTY } from 'rxjs';
-import { DataTableComponent } from 'ng-devui/data-table';
 import { originSource } from './../mock-data';
 @Component({
     selector: 'd-datatable-demo-lazyloaddata',

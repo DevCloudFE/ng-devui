@@ -20,7 +20,7 @@
         [minWidth]="'100px'"
         [maxWidth]="'200px'"
         [sortable]="true"
-        [sortDirection]="lastNameSortDirection"
+        [(sortDirection)]="lastNameSortDirection"
         (sortChange)="onSortChange($event, 'lastName')"
         [filterable]="true"
         [closeFilterWhenScroll]="true"
@@ -34,7 +34,7 @@
       <th
         dHeadCell
         [sortable]="true"
-        [sortDirection]="genderSortDirecticon"
+        [(sortDirection)]="genderSortDirecticon"
         (sortChange)="onSortChange($event, 'Gender')"
         [filterable]="true"
         [filterMultiple]="false"

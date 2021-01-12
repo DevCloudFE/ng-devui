@@ -6,7 +6,6 @@ import { PortalModule } from 'ng-devui/portal';
 import { DrawerComponent, DrawerContentDirective } from './drawer.component';
 import { DrawerService } from './drawer.service';
 
-
 @NgModule({
   imports: [
     CommonModule,

@@ -1,10 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
+
 import { StepsGuideService } from 'ng-devui/steps-guide';
 
 @Component({
   selector: 'd-basic',
   templateUrl: './basic.component.html',
-  styles: [`d-button { margin:0 4px 8px 0 }`]
+  styleUrls: ['./basic.component.scss']
 })
 export class BasicComponent implements OnInit {
   currentStep: any;

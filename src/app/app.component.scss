@@ -1,6 +1,5 @@
 @import '../../devui/style/theme/color';
 @import '../../devui/style/core/font';
-@import '../../devui/style/theme/font';
 @import '../../devui/style/theme/shadow';
 
 body {
@@ -83,7 +82,7 @@ body {
     box-shadow: $devui-shadow-length-base $devui-shadow;
 
     a {
-      line-height: $line-height-base;
+      line-height: $devui-line-height-base;
       color: $devui-text;
       text-decoration: none;
     }
@@ -98,7 +97,7 @@ body {
   h1.title {
     font-size: $devui-font-size-page-title;
     margin: 0;
-    font-weight: $font-title-weight;
+    font-weight: $devui-font-title-weight;
     padding: 9px 20px;
     box-sizing: border-box;
 
@@ -159,7 +158,7 @@ body {
 
     & > span {
       font-size: $devui-font-size-page-title;
-      line-height: $line-height-base;
+      line-height: $devui-line-height-base;
     }
 
     &.version-label {

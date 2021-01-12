@@ -1,26 +1,22 @@
 import {
   Component,
+  ContentChild,
+  ElementRef,
   EventEmitter,
   Input,
-  Output,
-  ViewChild,
-  ContentChild,
-  AfterViewInit,
-  ViewChildren,
-  ElementRef,
-  QueryList,
   OnDestroy,
+  OnInit,
+  Output,
+  QueryList,
   TemplateRef,
-  OnInit
+  ViewChild,
+  ViewChildren
 } from '@angular/core';
-import {
-  ITreeItem,
-  TreeNode
-} from './tree-factory.class';
+import { I18nInterface, I18nService } from 'ng-devui/i18n';
+import { Subscription } from 'rxjs';
+import { ITreeItem, TreeNode } from './tree-factory.class';
 import { TreeComponent } from './tree.component';
 import { ICheckboxInput, IDropType } from './tree.types';
-import { I18nService, I18nInterface } from 'ng-devui/i18n';
-import { Subscription } from 'rxjs';
 @Component({
   selector: 'd-operable-tree',
   templateUrl: './operable-tree.component.html',
@@ -115,9 +111,7 @@ export class OperableTreeComponent implements OnInit, OnDestroy {
   }
 
   contextmenuEvent(event, node) {
-    if (event.button === this.mouseRightButton) {
-      this.nodeRightClicked.emit({ node: node, event: event });
-    }
+    this.nodeRightClicked.emit({ node: node, event: event });
   }
 
   onDragstart(event, treeNode) {
@@ -374,7 +368,6 @@ export class OperableTreeComponent implements OnInit, OnDestroy {
   editNodeProxy = (event, treeNode: TreeNode) => {
     this.editNode(event, treeNode);
   }
-
 
   public checkNodeById(checked: boolean, id: number | string) {
     const results = this.treeFactory.checkNodesById(id, checked, this.checkableRelation);

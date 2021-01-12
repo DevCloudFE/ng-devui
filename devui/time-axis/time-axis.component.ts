@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, TemplateRef } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnChanges, TemplateRef } from '@angular/core';
 
 @Component({
   selector: 'd-time-axis',
@@ -8,7 +8,7 @@ import { AfterViewInit, Component, ElementRef, Input, TemplateRef } from '@angul
   preserveWhitespaces: false,
 })
 
-export class TimeAxisComponent implements AfterViewInit {
+export class TimeAxisComponent implements AfterViewInit, OnChanges {
   @Input() data: any = {
       direction: '', // vertical/horizontal
       position: '', // 如果为bottom时，才生效；
@@ -25,6 +25,13 @@ export class TimeAxisComponent implements AfterViewInit {
   ) { }
 
   ngAfterViewInit() {
+    Promise.resolve(null).then(() => {
+      this.viewRenderComplete = true;
+    });
+  }
+
+  ngOnChanges() {
+    this.viewRenderComplete = false;
     Promise.resolve(null).then(() => {
       this.viewRenderComplete = true;
     });

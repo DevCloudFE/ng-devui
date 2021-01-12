@@ -44,7 +44,6 @@ export interface AccordionMenuItem
 
 export type AccordionMenuType = Array<AccordionMenuItem>;
 
-
 /* 基础事件类型 */
 export interface AccordionMenuToggleEvent {
   item: any;

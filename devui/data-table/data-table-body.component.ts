@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges, SimpleChanges, TemplateRef } from '@angular/core';
 import { DataTableComponent } from './data-table.component';
+import { TableExpandConfig, TableWidthConfig } from './data-table.model';
 import { DataTableColumnTmplComponent } from './tmpl/data-table-column-tmpl.component';
-import { TableWidthConfig, TableExpandConfig } from './data-table.model';
 
 @Component({
   selector: 'd-data-table-body, [dDataTableBody]',

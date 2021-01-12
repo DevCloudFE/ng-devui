@@ -1,7 +1,9 @@
-import { Component, ElementRef, EventEmitter, HostBinding, HostListener, Input, NgZone,
-    OnDestroy, Output, Renderer2, TemplateRef, ChangeDetectorRef, OnChanges, SimpleChanges } from '@angular/core';
+import {
+  ChangeDetectorRef, Component, ElementRef, EventEmitter, HostBinding, HostListener, Input,
+  NgZone, OnChanges, OnDestroy, Output, Renderer2, SimpleChanges, TemplateRef
+} from '@angular/core';
 import { fromEvent, Observable, Subscription } from 'rxjs';
-import { FilterConfig, SortEventArg, SortDirection } from '../../../data-table.model';
+import { FilterConfig, SortDirection, SortEventArg } from '../../../data-table.model';
 
 @Component({
   selector: '[dHeadCell]',
@@ -32,6 +34,7 @@ export class TableThComponent implements OnChanges, OnDestroy {
 
   @Input() sortable: boolean;
   @Input() sortDirection: SortDirection;
+  @Output() sortDirectionChange = new EventEmitter<SortDirection>();
   @Output() sortChange = new EventEmitter<SortEventArg>();
 
   @Input() colDraggable: boolean;
@@ -164,6 +167,7 @@ export class TableThComponent implements OnChanges, OnDestroy {
     } else {
       this.sortActiveClass = true;
     }
+    this.sortDirectionChange.emit(event.direction);
     this.sortChange.emit({ ...event, th: this });
   }
 

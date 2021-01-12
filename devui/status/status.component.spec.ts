@@ -1,9 +1,9 @@
+import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { Component } from '@angular/core';
 
-import { StatusModule } from './status.module';
 import { StatusComponent } from './status.component';
+import { StatusModule } from './status.module';
 
 @Component({
   template: `

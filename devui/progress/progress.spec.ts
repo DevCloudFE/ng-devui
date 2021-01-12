@@ -1,9 +1,8 @@
+import { Component, DebugElement, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component, ViewChild, DebugElement } from '@angular/core';
+import { By } from '@angular/platform-browser';
 import { ProgressComponent } from './progress.component';
 import { ProgressModule } from './progress.module';
-import { By } from '@angular/platform-browser';
-
 @Component({
     template: `<d-progress #progress [percentage]="percentage" [percentageText]="percentageText"> </d-progress>`,
 })
@@ -28,7 +27,7 @@ describe('progress basic', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [ProgressModule],
-            declarations: [TestProgressComponent, TestCircleProgressComponent],
+            declarations: [TestProgressComponent, TestCircleProgressComponent]
         }).compileComponents();
     });
 
@@ -51,7 +50,6 @@ describe('progress basic', () => {
                 expect(debugEl.query(By.css('.devui-progress span')).nativeElement.textContent).toBe(component.percentageText);
             });
         });
-
 
     });
     describe('should circle-progress display correctly', () => {

@@ -1,5 +1,5 @@
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { Directive, HostListener, Input } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams, HttpResponse, HttpErrorResponse } from '@angular/common/http';
 
 declare type HttpObserve = 'body' | 'events' | 'response';
 declare type ResponseType = 'arraybuffer' | 'blob' | 'json' | 'text';
@@ -196,11 +196,10 @@ export class HelperUtils {
       }
     };
 
-
     httpClient.request(requestMethod, requestUrl, requestOption).subscribe((res: HttpResponse<any>) => {
       const disposition = (<HttpHeaders>res.headers).get('content-disposition');
       const contentType = (<HttpHeaders>res.headers).get('content-type');
-      if (/^attachment/i.test(disposition) || option.downloadWithoutDispositionHeader ) {
+      if (/^attachment/i.test(disposition) || option.downloadWithoutDispositionHeader) {
         const downloadFilename = option.filename || disposition && getFilenameFromDisposition(disposition) || url ;
         downloadFileFromArrayBuffer(res.body, downloadFilename, contentType);
         if (onSuccess) {
@@ -261,6 +260,3 @@ export class SimulateATagDirective {
         HelperUtils.jumpOuterUrl(this.href, this.target);
     }
 }
-
-
-

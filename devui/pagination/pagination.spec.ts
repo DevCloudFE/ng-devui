@@ -1,11 +1,10 @@
-import { ComponentFixture, TestBed, fakeAsync, tick, flush } from '@angular/core/testing';
-import { Component, ViewChild, DebugElement } from '@angular/core';
+import { Component, DebugElement, ViewChild } from '@angular/core';
+import { ComponentFixture, fakeAsync, flush, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { PaginationModule } from './pagination.module';
-import { PaginationComponent } from './pagination.component';
 import { DomHelper } from '../utils/testing/dom-helper';
 import { createKeyBoardEvent } from '../utils/testing/event-helper';
-
+import { PaginationComponent } from './pagination.component';
+import { PaginationModule } from './pagination.module';
 @Component({
     template: `
     <d-pagination
@@ -52,12 +51,11 @@ class TestLitePaginationComponent {
     };
 }
 
-
 describe('pagination basic', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [PaginationModule],
-            declarations: [TestPaginationComponent, TestLitePaginationComponent],
+            declarations: [TestPaginationComponent, TestLitePaginationComponent]
         }).compileComponents();
     });
 
@@ -96,7 +94,6 @@ describe('pagination basic', () => {
                 expect(debugEl.nativeElement.querySelector('.devui-pagination-list.devui-pagination-sm li:nth-child(1)').classList)
                     .toContain('disabled');
 
-
                 const nextLink = debugEl.nativeElement
                     .querySelector('.devui-pagination-list.devui-pagination-sm li:nth-child(7) .devui-pagination-link');
                 nextLink.dispatchEvent(new Event('click'));
@@ -121,7 +118,6 @@ describe('pagination basic', () => {
                     .toContain('disabled');
             }));
 
-
             it('should jump correctly when click ellipsis', fakeAsync(() => {
                 component.pager.total = 306;
                 tick(300);
@@ -142,8 +138,8 @@ describe('pagination basic', () => {
                 component.pager.total = undefined;
                 tick(300);
                 fixture.detectChanges();
+                expect(component.pagination.total).toEqual(0);
             }));
-
 
             it('should change input to jump', fakeAsync(() => {
                 const inputEl = debugEl.query(By.css('.devui-pagination .devui-jump-container input.devui-input')).nativeElement;
@@ -197,4 +193,3 @@ describe('pagination basic', () => {
     });
 
 });
-

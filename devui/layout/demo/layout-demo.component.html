@@ -1,22 +1,23 @@
-<div class="demo-container">
-  <div class="demo-example">
-    <div class="demo-title">基本用法</div>
+<div class="demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 60, bottom: 0 }">
+  <d-demo-nav [navItems]="navItems"></d-demo-nav>
+  <div class="demo-example" [dAnchor]="'basic-usage'">
+    <div class="demo-title">{{ 'components.layout.basicDemo.title' | translate }}</div>
     <d-codebox id="layout-component" [sourceData]="LayoutBasic">
       <d-layout-basic demo></d-layout-basic>
     </d-codebox>
   </div>
 
-  <div class="demo-example">
-    <div class="demo-title">应用场景1</div>
-    <div class="demo-text">常用上中下布局</div>
+  <div class="demo-example" [dAnchor]="'application-scenario1'">
+    <div class="demo-title">{{ 'components.layout.appDemo1.title' | translate }}</div>
+    <div class="demo-text">{{ 'components.layout.appDemo1.description' | translate }}</div>
     <d-codebox id="layout-component" [sourceData]="LayoutTop">
       <d-layout-top demo></d-layout-top>
     </d-codebox>
   </div>
 
-  <div class="demo-example">
-    <div class="demo-title">应用场景2</div>
-    <div class="demo-text">常用上中下布局及侧边栏布局</div>
+  <div class="demo-example" [dAnchor]="'application-scenario2'">
+    <div class="demo-title">{{ 'components.layout.appDemo2.title' | translate }}</div>
+    <div class="demo-text">{{ 'components.layout.appDemo2.description' | translate }}</div>
     <d-codebox id="layout-component" [sourceData]="LayoutTopAside">
       <d-layout-top-aside demo></d-layout-top-aside>
     </d-codebox>

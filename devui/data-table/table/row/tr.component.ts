@@ -1,6 +1,6 @@
-import { Component, OnInit, ContentChildren, QueryList, AfterContentInit, EventEmitter, Input, Output} from '@angular/core';
-import { TableThComponent } from '../head/th/th.component';
+import { AfterContentInit, Component, ContentChildren, EventEmitter, Input, OnInit, Output, QueryList} from '@angular/core';
 import { RowCheckChangeEventArg, TableCheckOptions } from '../../data-table.model';
+import { TableThComponent } from '../head/th/th.component';
 
 @Component({
   selector: '[dTableRow]',

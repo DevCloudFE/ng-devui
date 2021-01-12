@@ -1,28 +1,30 @@
-import { RouterModule } from '@angular/router';
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
-import { DragDropModule } from '../drag-drop.module';
-import { DragDropDemoComponent } from './dragdrop-demo.component';
-import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
-import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
-import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { ButtonModule } from 'ng-devui/button';
+import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
+import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
+import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
 import { ToggleModule } from 'ng-devui/toggle';
-import { BasicComponent } from './basic/basic.component';
-import { TreeComponent } from './tree/tree.component';
-import { FollowComponent } from './follow/follow.component';
-import { BatchDragComponent } from './batch-drag/batch-drag.component';
-import { DropScrollComponent } from './drop-scroll/drop-scroll.component';
-import { SwitchComponent } from './switch/switch.component';
-import { PositionComponent } from './position/position.component';
-import { OriginPlaceholderComponent } from './origin-placeholder/origin-placeholder.component';
-import { CrossDimensionComponent } from './cross-dimension/cross-dimension.component';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
+import { DragDropModule } from '../drag-drop.module';
+import { BasicComponent } from './basic/basic.component';
+import { BatchDragComponent } from './batch-drag/batch-drag.component';
+import { CrossDimensionComponent } from './cross-dimension/cross-dimension.component';
+import { DragDropDemoComponent } from './dragdrop-demo.component';
+import { DropScrollComponent } from './drop-scroll/drop-scroll.component';
+import { FollowComponent } from './follow/follow.component';
+import { OriginPlaceholderComponent } from './origin-placeholder/origin-placeholder.component';
+import { PositionComponent } from './position/position.component';
+import { SwitchComponent } from './switch/switch.component';
+import { TreeComponent } from './tree/tree.component';
 
 @NgModule({
   imports: [
+    TranslateModule,
     CommonModule,
     FormsModule,
     DragDropModule,
@@ -35,7 +37,8 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
       { path: '',  redirectTo: 'demo' },
       { path: 'demo', component: DragDropDemoComponent},
       { path: 'api', component: DevUIApiComponent, data: {
-        api: require('!html-loader!markdown-loader!../doc/api.md')
+        'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),
+        'en-us': require('!html-loader!markdown-loader!../doc/api-en.md')
       }}
     ])
   ],
@@ -56,4 +59,3 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 })
 export class DragDropDemoModule {
 }
-

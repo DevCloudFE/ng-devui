@@ -1,10 +1,9 @@
-import { AfterViewInit, Component, ElementRef, HostBinding, HostListener, Input, OnDestroy, Renderer2,
-  ChangeDetectionStrategy } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, HostBinding, HostListener, Input, OnDestroy,
+  Renderer2 } from '@angular/core';
 import { PositionService } from 'ng-devui/position';
-import { fromEvent, Subscription } from 'rxjs';
 import { directionFadeInOut } from 'ng-devui/utils';
+import { fromEvent, Subscription } from 'rxjs';
 import { PositionType } from './tooltip.types';
-
 
 @Component({
   selector: 'd-tooltip',
@@ -39,7 +38,6 @@ export class TooltipComponent implements AfterViewInit, OnDestroy {
   @HostBinding('@directionFadeInOut') get state() {
     return this.animateState;
   }
-
 
   _onScroll: Subscription;
 
@@ -84,7 +82,6 @@ export class TooltipComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-
   updatePosition() {
     // 解决tooltip自身大小导致出现滚动条，影响位置计算
     this.renderer2.setStyle(this.tooltip.nativeElement, 'visibility', 'hidden');
@@ -101,4 +98,3 @@ export class TooltipComponent implements AfterViewInit, OnDestroy {
     this.renderer2.removeStyle(this.tooltip.nativeElement, 'transform');
   }
 }
-

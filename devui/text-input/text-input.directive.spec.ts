@@ -1,8 +1,8 @@
-import { ComponentFixture, async, TestBed } from '@angular/core/testing';
+import { DebugElement } from '@angular/core';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { BasicComponent } from './demo/basic/basic.component';
 import { TextDirective } from './text-input.directive';
-import { DebugElement } from '@angular/core';
-import { By } from '@angular/platform-browser';
 
 describe('text-input', () => {
   let fixture: ComponentFixture<BasicComponent>;

@@ -1,4 +1,4 @@
-import {  Component, ElementRef, ChangeDetectorRef, Input, AfterViewInit, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
+import {  AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
 import { DragDropService } from '../services/drag-drop.service';
 
 @Component({
@@ -46,7 +46,7 @@ export class DragPreviewCloneDomRefComponent implements AfterViewInit, OnChanges
   }
   destroyView() {
     if (this.cloneNode) {
-      if ( this.el.nativeElement.contains(this.cloneNode)) {
+      if (this.el.nativeElement.contains(this.cloneNode)) {
         this.el.nativeElement.removeChild(this.cloneNode);
       }
       this.cloneNode = undefined;

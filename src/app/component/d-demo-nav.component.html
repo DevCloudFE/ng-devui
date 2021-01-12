@@ -1,7 +1,7 @@
 <div class="demo-nav">
   <d-sticky [container]="demoDocViewerMain">
     <div>
-      <div class="fast-forward">快速前往</div>
+      <div class="fast-forward">{{ 'public.goTo' | translate }}</div>
       <ul class="step-nav">
         <li *ngFor="let navitem of navItems" dAnchorLink="{{ navitem.dAnchorLink }}" anchorActive="active">
           {{ navitem.value }}

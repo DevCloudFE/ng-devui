@@ -8,7 +8,7 @@ export class DragDropSyncService {
 
   dropSortSyncList: QueryList<DropSortSyncDirective>;
 
-  public updateDragSyncList(list: QueryList<DragSyncDirective> ) {
+  public updateDragSyncList(list: QueryList<DragSyncDirective>) {
     this.dragSyncList = list;
   }
   public getDragSyncByGroup(groupName: string) {
@@ -18,7 +18,7 @@ export class DragDropSyncService {
     return this.dragSyncList ? this.dragSyncList.filter(dragSync => dragSync.dragSyncGroup === groupName) : [];
   }
 
-  public updateDropSyncList(list: QueryList<DropSortSyncDirective> ) {
+  public updateDropSyncList(list: QueryList<DropSortSyncDirective>) {
     this.dropSortSyncList = list;
   }
   public getDropSyncByGroup(groupName: string) {

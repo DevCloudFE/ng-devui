@@ -17,7 +17,6 @@ import {
 export class WithSourceComponent implements OnInit {
   selectItem1;
 
-
   languages = ['C#', 'C', 'C++', 'CPython', 'Java', 'JavaScript', 'Go', 'Python', 'Ruby', 'F#', 'TypeScript', 'SQL',
     'LiveScript', 'CoffeeScript'];
 

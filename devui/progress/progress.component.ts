@@ -1,12 +1,12 @@
 import {
-  Component,
-  Input,
-  SimpleChanges,
-  ContentChild,
-  TemplateRef,
-  OnInit,
-  OnChanges,
   ChangeDetectionStrategy,
+  Component,
+  ContentChild,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+  TemplateRef,
 } from '@angular/core';
 
 @Component({

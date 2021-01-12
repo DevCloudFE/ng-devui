@@ -8,7 +8,7 @@
   <section class="code-box-meta markdown">
     <span
       dTooltip
-      [content]="expanded ? '收起代码' : '展开代码'"
+      [content]="expanded ? ('codebox.hideCode' | translate) : ('codebox.showCode' | translate)"
       [position]="'bottom'"
       alt="expand code"
       class="collapse"
@@ -39,7 +39,7 @@
                 <span
                   *ngIf="!_copied"
                   dTooltip
-                  [content]="'复制代码'"
+                  [content]="'codebox.copyCode' | translate"
                   [position]="'bottom'"
                   (click)="copyCode(source.code.default || source.code)"
                 >
@@ -52,7 +52,7 @@
                 <span
                   *ngIf="_copied"
                   dTooltip
-                  [content]="'复制成功'"
+                  [content]="'codebox.success' | translate"
                   [position]="'bottom'"
                   (click)="copyCode(source.code.default || source.code)"
                 >

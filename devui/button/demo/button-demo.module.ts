@@ -1,28 +1,30 @@
-import { LeftRightComponent } from './left-right/left-right.component';
-import { RouterModule } from '@angular/router';
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-
-import { ButtonModule } from '../button.module';
-import { ButtonDemoComponent } from './button-demo.component';
+import { RouterModule } from '@angular/router';
+import { DropDownModule } from 'ng-devui/dropdown';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
+import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
+import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
+import { TranslateModule } from '@ngx-translate/core';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
+import { ButtonModule } from '../button.module';
+import { AutofocusComponent } from './autofocus/autofocus.component';
+import { ButtonDemoComponent } from './button-demo.component';
+import { CombinationComponent } from './combination/combination.component';
 import { CommonComponent } from './common/common.component';
+import { DangerComponent } from './danger/danger.component';
+import { GroupsComponent } from './groups/groups.component';
 import { IconComponent } from './icon/icon.component';
+import { LeftRightComponent } from './left-right/left-right.component';
 import { LoadingComponent } from './loading/loading.component';
 import { PrimaryComponent } from './primary/primary.component';
-import { DangerComponent } from './danger/danger.component';
-import { TextComponent } from './text/text.component';
-import { CombinationComponent } from './combination/combination.component';
-import { AutofocusComponent } from './autofocus/autofocus.component';
 import { SizeComponent } from './size/size.component';
-import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
-import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
-import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
-import { GroupsComponent } from './groups/groups.component';
-import { DropDownModule } from 'ng-devui/dropdown';
+import { TextComponent } from './text/text.component';
+
 @NgModule({
   imports: [
+    TranslateModule,
     CommonModule,
     FormsModule,
     ButtonModule,
@@ -34,7 +36,8 @@ import { DropDownModule } from 'ng-devui/dropdown';
       { path: '',  redirectTo: 'demo' },
       { path: 'demo', component: ButtonDemoComponent},
       { path: 'api', component: DevUIApiComponent, data: {
-        api: require('!html-loader!markdown-loader!../doc/api.md')
+        'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),
+        'en-us': require('!html-loader!markdown-loader!../doc/api-en.md')
       }}
     ])
   ],
@@ -57,4 +60,3 @@ import { DropDownModule } from 'ng-devui/dropdown';
 })
 export class ButtonDemoModule {
 }
-

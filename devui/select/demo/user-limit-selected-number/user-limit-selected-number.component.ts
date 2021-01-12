@@ -42,7 +42,7 @@ export class UserLimitSelectedNumberComponent {
   }];
 
   checkSelectionNumber (selection: Array<any>, originOptions: Array<any>, singleMaxNumber: number,
-      equalNumberFn: () => void, exccedNumberFn: () => void, restoreFn: () => void, exculeAllSelected = true) {
+                        equalNumberFn: () => void, exccedNumberFn: () => void, restoreFn: () => void, exculeAllSelected = true) {
     if (exculeAllSelected && selection && selection.length === originOptions.length) {// 全选
       restoreFn();
     } else  if (selection && selection.length === singleMaxNumber) {
@@ -66,7 +66,7 @@ export class UserLimitSelectedNumberComponent {
   // exccedNumberFn
   acceptOptionByNumber = (selection: Array<any>, originOptions: Array<any>, maxNumber: number, disabledKey: string) => {
     this.currentOption1 =  // 此处需要手动改外部变量的地址
-    selection = selection.filter(( _, index) => (index < maxNumber));
+    selection = selection.filter((_, index) => (index < maxNumber));
     this.disabledOthers(selection, originOptions, disabledKey);
   }
 

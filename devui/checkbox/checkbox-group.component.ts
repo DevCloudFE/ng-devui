@@ -1,13 +1,13 @@
 import {
   Component,
-  Input,
-  Output,
   EventEmitter,
   forwardRef,
-  ViewEncapsulation,
-  TemplateRef,
+  Input,
   OnChanges,
+  Output,
   SimpleChanges,
+  TemplateRef,
+  ViewEncapsulation,
 } from '@angular/core';
 import {
   ControlValueAccessor,

@@ -1,22 +1,22 @@
 <div class="demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 60, bottom: 0 }">
   <d-demo-nav [navItems]="navItems"></d-demo-nav>
   <div class="demo-example" [dAnchor]="'back-top-basic'">
-    <div class="demo-title">基本用法</div>
-    <div class="demo-text">回到顶部按钮的默认样式，距离底部50px, 右侧30px。</div>
+    <div class="demo-title">{{ 'components.back-top.basicDemo.title' | translate }}</div>
+    <div class="demo-text">{{ 'components.back-top.basicDemo.description' | translate }}</div>
     <d-codebox id="components-button-primary" [sourceData]="basicSource">
       <d-back-top-basic demo></d-back-top-basic>
     </d-codebox>
   </div>
   <div class="demo-example" [dAnchor]="'back-top-customize'">
-    <div class="demo-title">自定义</div>
+    <div class="demo-title">{{ 'components.back-top.customizeDemo.title' | translate }}</div>
     <div class="demo-text"></div>
     <d-codebox id="components-button-primary" [sourceData]="customizeSource">
       <d-back-top-customize demo></d-back-top-customize>
     </d-codebox>
   </div>
   <div class="demo-example" [dAnchor]="'back-top-scroll-container'">
-    <div class="demo-title">滚动容器</div>
-    <div class="demo-text">通过设置scrollTarget参数，可对特定容器进行返回顶部操作</div>
+    <div class="demo-title">{{ 'components.back-top.scrollDemo.title' | translate }}</div>
+    <div class="demo-text">{{ 'components.back-top.scrollDemo.description' | translate }}</div>
     <d-codebox id="components-button-primary" [sourceData]="scrollContainerSource">
       <d-back-top-scroll-container demo></d-back-top-scroll-container>
     </d-codebox>

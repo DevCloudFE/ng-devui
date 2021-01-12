@@ -1,10 +1,9 @@
-import { ComponentFixture, TestBed, fakeAsync, tick, async, discardPeriodicTasks, flush } from '@angular/core/testing';
-import { RateModule } from './rate.module';
-import { FormsModule } from '@angular/forms';
 import { Component, DebugElement } from '@angular/core';
-import { RateComponent } from './rate.component';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
-
+import { RateComponent } from './rate.component';
+import { RateModule } from './rate.module';
 @Component({
   template: `
     <d-rate [(ngModel)]="value" [icon]="'icon-star-o'"></d-rate>
@@ -158,4 +157,3 @@ describe('rate', () => {
     });
   });
 });
-

@@ -1,11 +1,10 @@
+import { Component, DebugElement } from '@angular/core';
+import { async, ComponentFixture, fakeAsync, flush, TestBed, tick } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
+import { By } from '@angular/platform-browser';
 import { of } from 'rxjs';
 import { RadioComponent } from './radio.component';
-import { Component, DebugElement } from '@angular/core';
-import { ComponentFixture, TestBed, flush, fakeAsync, async, tick } from '@angular/core/testing';
-import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { RadioModule } from './radio.module';
-import { By } from '@angular/platform-browser';
-
 @Component({
   template: `
     <section>
@@ -44,7 +43,7 @@ describe('radio', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [RadioModule, FormsModule],
-      declarations: [TestRadioComponent],
+      declarations: [TestRadioComponent]
     }).compileComponents();
   }));
 

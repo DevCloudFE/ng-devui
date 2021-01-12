@@ -1,19 +1,14 @@
 import {
-  Input,
-  ViewContainerRef,
-  Component,
-  OnInit,
+  AfterViewInit, Component,
   ComponentFactoryResolver,
-  ViewChild,
-  ViewChildren,
-  QueryList,
-  ElementRef,
-  AfterViewInit
+  ElementRef, Input,
+  OnInit,
+  QueryList, ViewChildren
 } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IExampleData } from 'ng-devui/shared/helpers';
-
-import * as hljs from 'highlight.js/lib/highlight';
-import { Router, ActivatedRoute } from '@angular/router';
+import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import * as hljs from 'highlight.js/lib/core';
 
 ['javascript', 'typescript'].forEach((langName) => {
   // Using require() here because import() support hasn't landed in Webpack yet
@@ -70,26 +65,34 @@ export class ExamplePanelComponent implements OnInit, AfterViewInit {
   @ViewChildren('documentation') documentation: QueryList<ElementRef>;
   componentName: string;
   componentTab: string;
-
+  description: string;
+  tmw: string;
+  componentPath: string;
   constructor(private componentFactoryResolver: ComponentFactoryResolver,
-    private router: Router, private route: ActivatedRoute) {
+              private router: Router, private route: ActivatedRoute, private translate: TranslateService) {
   }
 
   ngOnInit(): void {
+    const array = this.router.url.split('/');
+    this.componentPath  = array[array.length - 2];
+    this.getData(this.translate.translations[this.translate.currentLang]);
+    this.translate.onLangChange.subscribe((event: TranslationChangeEvent) => {
+        this.getData(event.translations);
+    });
     this.route.url.subscribe(UrlSegments => {
-      const names = UrlSegments[0].path.split('-').map((urlSegment) => {
-        return `${urlSegment.charAt(0).toUpperCase()}${urlSegment.slice(1)}`;
-      });
-      this.componentName = names.join(' ');
       const fragmentIndex = this.router.url.split('/').pop().indexOf('#');
       this.componentTab = fragmentIndex === -1
         ? this.router.url.split('/').pop() : this.router.url.split('/').pop().slice(0, fragmentIndex);
     });
+  }
 
-    this.route.data.subscribe((data: IExampleData) => {
-      this.data = data;
-    });
-
+  getData (translations) {
+    if (translations && translations['components'].hasOwnProperty(this.componentPath)) {
+      const component = translations['components'][this.componentPath];
+      this.componentName = component.name;
+      this.description = component.description;
+      this.tmw = component.tmw;
+    }
   }
 
   activeTabChange(tab: string) {
@@ -122,4 +125,3 @@ export class ExamplePanelComponent implements OnInit, AfterViewInit {
     });
   }
 }
-

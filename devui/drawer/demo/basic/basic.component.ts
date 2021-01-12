@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { DrawerContentComponent } from '../drawerContent/drawer-content.component';
-import { IDrawerOpenResult, DrawerService } from 'ng-devui/drawer';
+import { DrawerService, IDrawerOpenResult } from 'ng-devui/drawer';
 import { DialogService } from 'ng-devui/modal';
+import { DrawerContentComponent } from '../drawerContent/drawer-content.component';
 
 @Component({
   selector: 'd-basic',

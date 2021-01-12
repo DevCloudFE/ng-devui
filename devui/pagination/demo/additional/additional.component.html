@@ -1,18 +1,33 @@
 <section>
-  <div>
-    <d-pagination
-      [size]="'sm'"
-      [total]="pager1.total"
-      [(pageSize)]="pager1.pageSize"
-      [(pageIndex)]="pager1.pageIndex"
-      [canViewTotal]="true"
-      [canChangePageSize]="true"
-      [canJumpPage]="true"
-      [maxItems]="5"
-      [showTruePageIndex]="true"
-    >
-    </d-pagination>
-  </div>
+  <h4>传入的pageIndex超过最大页码时, 开启showTruePageIndex, 显示至传入的pageIndex</h4>
+  <d-pagination
+    [size]="'sm'"
+    [total]="pager1.total"
+    [(pageSize)]="pager1.pageSize"
+    [(pageIndex)]="pager1.pageIndex"
+    [canViewTotal]="true"
+    [canChangePageSize]="true"
+    [canJumpPage]="true"
+    [maxItems]="5"
+    [showTruePageIndex]="true"
+  >
+  </d-pagination>
+  <h4>传入的pageIndex超过最大页码时, 关闭showTruePageIndex, 只显示至最大页码</h4>
+  <d-pagination
+    [size]="'sm'"
+    [total]="pager1.total"
+    [(pageSize)]="pager1.pageSize"
+    [(pageIndex)]="pager1.pageIndex"
+    [canViewTotal]="true"
+    [canChangePageSize]="true"
+    [canJumpPage]="true"
+    [maxItems]="5"
+    [showTruePageIndex]="false"
+  >
+  </d-pagination>
+</section>
+<section>
+  <h4>普通模式下不同total数目的显示</h4>
   <div>
     <d-pagination
       [size]="'sm'"
@@ -23,27 +38,31 @@
       [canChangePageSize]="true"
       [canJumpPage]="true"
       [maxItems]="5"
-      [showTruePageIndex]="true"
-    >
-    </d-pagination>
-  </div>
-</section>
-<section>
-  <h4>total is 0</h4>
-  <div>
-    <d-pagination
-      [size]="'sm'"
-      [total]="pager3.total"
-      [(pageSize)]="pager3.pageSize"
-      [(pageIndex)]="pager3.pageIndex"
-      [canViewTotal]="true"
-      [canChangePageSize]="true"
-      [canJumpPage]="true"
-      [maxItems]="5"
     >
     </d-pagination>
     <d-button bsStyle="stress" circled="true" size="sm" (btnClick)="setTotal(0)">设置total为0</d-button>
     <d-button bsStyle="stress" circled="true" size="sm" (btnClick)="setTotal(5)">设置total为5</d-button>
     <d-button bsStyle="stress" circled="true" size="sm" (btnClick)="setTotal(15)">设置total为15</d-button>
+  </div>
+</section>
+<section>
+  <h4>极简模式下不同total数目的显示</h4>
+  <div style="margin-bottom: 40px">
+    <d-pagination
+      [total]="pager3.total"
+      [(pageSize)]="pager3.pageSize"
+      [totalItemText]="'总条数'"
+      [(pageIndex)]="pager3.pageIndex"
+      [canViewTotal]="true"
+      [canChangePageSize]="true"
+      [lite]="true"
+    >
+    </d-pagination>
+    <d-button bsStyle="stress" circled="true" size="sm" (click)="setLiteTotal(0)">设置total为0</d-button>
+    <d-button bsStyle="stress" circled="true" size="sm" (click)="setLiteTotal(20)">设置total为20</d-button>
+    <d-button bsStyle="stress" circled="true" size="sm" (click)="setLiteTotal(30000)">设置total为30000</d-button>
+    <d-button bsStyle="stress" circled="true" size="sm" (click)="setLiteTotal(100000)">设置total为100000</d-button>
+    <d-button bsStyle="stress" circled="true" size="sm" (click)="setIndex(2)">设置index为2</d-button>
+    <d-button bsStyle="stress" circled="true" size="sm" (click)="setIndex(3)">设置index为3</d-button>
   </div>
 </section>

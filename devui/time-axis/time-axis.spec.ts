@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { TimeAxisModule } from './time-axis.module';
+import { Component } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { TimeAxisComponent } from './time-axis.component';
-import { Component } from '@angular/core';
+import { TimeAxisModule } from './time-axis.module';
 
 @Component({
   template: `<d-time-axis [data]="time_axis_data"></d-time-axis> `,
@@ -32,7 +32,7 @@ describe('time-axis base', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [TimeAxisModule],
-      declarations: [TestTimeAxisComponent],
+      declarations: [TestTimeAxisComponent]
     }).compileComponents();
   });
 

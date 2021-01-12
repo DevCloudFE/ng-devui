@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
-import { of } from 'rxjs';
 import { SelectComponent } from 'ng-devui/select';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'd-custom-search',

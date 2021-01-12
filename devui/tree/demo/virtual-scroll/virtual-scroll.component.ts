@@ -1,5 +1,5 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
-import { TreeNode, OperableTreeComponent, ITreeItem } from 'ng-devui/tree';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ITreeItem, OperableTreeComponent, TreeNode } from 'ng-devui/tree';
 
 @Component({
   selector: 'd-virtual-scroll',
@@ -136,7 +136,6 @@ export class VirtualScrollComponent implements OnInit {
       }, 1000);
     });
   }
-
 
   onOperableNodeChecked(checkedNodes: Array<ITreeItem>) {
     console.log('checked: ', checkedNodes);

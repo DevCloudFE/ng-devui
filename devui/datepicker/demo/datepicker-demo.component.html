@@ -1,7 +1,7 @@
 <div class="demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 60, bottom: 0 }">
   <d-demo-nav [navItems]="navItems"></d-demo-nav>
   <div class="demo-example" [dAnchor]="'datepicker-default'">
-    <div class="demo-title">基本用法</div>
+    <div class="demo-title">{{ 'components.datepicker.basicDemo.title' | translate }}</div>
     <div class="demo-text"></div>
     <d-codebox id="components-datepicker-default" [sourceData]="basicSource">
       <d-basic demo></d-basic>
@@ -9,7 +9,7 @@
   </div>
 
   <div class="demo-example" [dAnchor]="'datepicker-min-max'">
-    <div class="demo-title">限制最大最小日期</div>
+    <div class="demo-title">{{ 'components.datepicker.limitDemo.title' | translate }}</div>
     <div class="demo-text"></div>
     <d-codebox id="components-datepicker-min-max" [sourceData]="minMaxSource">
       <d-min-max demo></d-min-max>
@@ -17,7 +17,7 @@
   </div>
 
   <div class="demo-example" [dAnchor]="'datepicker-append-to-body'">
-    <div class="demo-title">附着在body上</div>
+    <div class="demo-title">{{ 'components.datepicker.appendToBodyDemo.title' | translate }}</div>
     <div class="demo-text"></div>
     <d-codebox id="components-append-to-body" [sourceData]="appendToBodySource">
       <d-append-to-body demo></d-append-to-body>
@@ -25,9 +25,9 @@
   </div>
 
   <div class="demo-example" [dAnchor]="'datepicker-range'">
-    <div class="demo-title">范围日期选择器</div>
+    <div class="demo-title">{{ 'components.datepicker.rangeDemo.title' | translate }}</div>
     <div class="demo-text">
-      与单日日期选择器相同，范围日期选择器展开时默认选中当前日期。范围日期选择器包含开始日期选择器和结束日期选择器，用户可以选择一段日期。
+      {{ 'components.datepicker.rangeDemo.description' | translate }}
     </div>
     <d-codebox id="components-datepicker-range" [sourceData]="rangeSource">
       <d-datepicker-range demo></d-datepicker-range>
@@ -35,7 +35,7 @@
   </div>
 
   <div class="demo-example" [dAnchor]="'datepicker-range-basic'">
-    <div class="demo-title">日期范围选择器 集成模式</div>
+    <div class="demo-title">{{ 'components.datepicker.rangePickerDemo.title' | translate }}</div>
     <div class="demo-text"></div>
     <d-codebox id="d-datepicker-range-basic" [sourceData]="rangePickerSource">
       <d-datepicker-range-basic demo></d-datepicker-range-basic>
@@ -43,7 +43,9 @@
   </div>
 
   <div class="demo-example" [dAnchor]="'datepicker-range-format'">
-    <div class="demo-title">日期范围选择器 格式化</div>
+    <div class="demo-title">
+      {{ 'components.datepicker.rangeFormatDemo.title' | translate }}
+    </div>
     <div class="demo-text"></div>
     <d-codebox id="d-datepicker-range-format" [sourceData]="rangePickerFormat">
       <d-datepicker-range-format demo></d-datepicker-range-format>
@@ -51,17 +53,15 @@
   </div>
 
   <div class="demo-example" [dAnchor]="'datepicker-range-disabled'">
-    <div class="demo-title">日期范围选择器 禁止输入态</div>
-    <div class="demo-text">
-      禁止输入只提供一种思路，datepicker本身自带disabled状态不可选，请根据业务情况自行操作。
-    </div>
+    <div class="demo-title">{{ 'components.datepicker.rangeDisableDemo.title' | translate }}</div>
+    <div class="demo-text">{{ 'components.datepicker.rangeDisableDemo.description' | translate }}</div>
     <d-codebox id="d-datepicker-range-disabled" [sourceData]="rangePickerDisabled">
       <d-datepicker-range-disabled demo></d-datepicker-range-disabled>
     </d-codebox>
   </div>
 
   <div class="demo-example" [dAnchor]="'datepicker-range-restricted-range'">
-    <div class="demo-title">日期范围选择器 可选范围</div>
+    <div class="demo-title">{{ 'components.datepicker.rangeRestrictedDemo.title' | translate }}</div>
     <div class="demo-text"></div>
     <d-codebox id="d-datepicker-range-restricted-range" [sourceData]="rangePickerRestricted">
       <d-datepicker-range-restricted-range demo></d-datepicker-range-restricted-range>
@@ -69,7 +69,9 @@
   </div>
 
   <div class="demo-example" [dAnchor]="'datepicker-range-time'">
-    <div class="demo-title">日期范围选择器 选择时间</div>
+    <div class="demo-title">
+      {{ 'components.datepicker.rangeTimeDemo.title' | translate }}
+    </div>
     <div class="demo-text"></div>
     <d-codebox id="d-datepicker-range-time" [sourceData]="rangePickerTime">
       <d-datepicker-range-time demo></d-datepicker-range-time>
@@ -77,9 +79,11 @@
   </div>
 
   <div class="demo-example" [dAnchor]="'datepicker-clear-button'">
-    <div class="demo-title">日期范围选择器 自定义操作区及清除按钮</div>
+    <div class="demo-title">
+      {{ 'components.datepicker.rangeClearDemo.title' | translate }}
+    </div>
     <div class="demo-text">
-      通过 clearAll 清除选择的日期
+      {{ 'components.datepicker.rangeClearDemo.description' | translate }}
     </div>
     <d-codebox id="components-datepicker-clear-button" [sourceData]="rangeClearButtonSource">
       <d-range-clear-button demo></d-range-clear-button>
@@ -87,29 +91,27 @@
   </div>
 
   <div class="demo-example" [dAnchor]="'datepicker-range-today'">
-    <div class="demo-title">日期范围选择器 自定义操作选择日期</div>
-    <div class="demo-text">
-      通过 chooseDate 结合 rangeStart 和 rangeEnd 设置自定义日期
+    <div class="demo-title">
+      {{ 'components.datepicker.rangeTodayDemo.title' | translate }}
     </div>
+    <div class="demo-text">{{ 'components.datepicker.rangeTodayDemo.description' | translate }}</div>
     <d-codebox id="components-datepicker-range-today" [sourceData]="rangeTodaySource">
       <d-range-today demo></d-range-today>
     </d-codebox>
   </div>
 
   <div class="demo-example" [dAnchor]="'datepicker-format'">
-    <div class="demo-title">格式化</div>
-    <div class="demo-text">
-      通过dateFormat设置日期的格式
-    </div>
+    <div class="demo-title">{{ 'components.datepicker.formatDemo.title' | translate }}</div>
+    <div class="demo-text">{{ 'components.datepicker.formatDemo.description' | translate }}</div>
     <d-codebox id="components-datepicker-format" [sourceData]="formatSource">
       <d-datepicker-format demo></d-datepicker-format>
     </d-codebox>
   </div>
 
   <div class="demo-example" [dAnchor]="'custom-view-template'">
-    <div class="demo-title">自定义操作区</div>
+    <div class="demo-title">{{ 'components.datepicker.templateDemo.title' | translate }}</div>
     <div class="demo-text">
-      通过 customViewTemplate 自定义快捷设置日期或自定义操作区内容， 可以通过chooseDate(dateString: string)来设置日期
+      {{ 'components.datepicker.templateDemo.description' | translate }}
     </div>
     <d-codebox id="d-custom-view-template" [sourceData]="customViewTemplateSource">
       <d-custom-view-template demo></d-custom-view-template>
@@ -117,9 +119,9 @@
   </div>
 
   <div class="demo-example" [dAnchor]="'date-picker-clear-button'">
-    <div class="demo-title">自定义清除按钮</div>
+    <div class="demo-title">{{ 'components.datepicker.clearButtonDemo.title' | translate }}</div>
     <div class="demo-text">
-      通过 customViewTemplate 增加清除按钮， 可以通过clearAll()来触发
+      {{ 'components.datepicker.clearButtonDemo.description' | translate }}
     </div>
     <d-codebox id="d-date-picker-clear-button" [sourceData]="clearButtonSource">
       <d-clear-button demo></d-clear-button>
@@ -127,17 +129,15 @@
   </div>
 
   <div class="demo-example" [dAnchor]="'date-picker-button'">
-    <div class="demo-title">日期选择按钮</div>
-    <div class="demo-text">
-      可以通过按钮唤出Datepicker
-    </div>
+    <div class="demo-title">{{ 'components.datepicker.buttonDemo.title' | translate }}</div>
+    <div class="demo-text">{{ 'components.datepicker.buttonDemo.description' | translate }}</div>
     <d-codebox id="d-date-picker-button" [sourceData]="buttonSource">
       <d-datepicker-button demo></d-datepicker-button>
     </d-codebox>
   </div>
 
   <div class="demo-example" [dAnchor]="'two-date-picker-basic'">
-    <div class="demo-title">双日期选择器</div>
+    <div class="demo-title">{{ 'components.datepicker.twoDatePickerDemo.title' | translate }}</div>
     <div class="demo-text"></div>
     <d-codebox id="d-two-date-picker-basic" [sourceData]="twoDatepickerBasic">
       <d-two-datepicker-basic demo></d-two-datepicker-basic>
@@ -145,7 +145,9 @@
   </div>
 
   <div class="demo-example" [dAnchor]="'two-date-picker-format'">
-    <div class="demo-title">双日期选择器 格式化</div>
+    <div class="demo-title">
+      {{ 'components.datepicker.twoDatepickerFormatDemo.title' | translate }}
+    </div>
     <div class="demo-text"></div>
     <d-codebox id="d-two-date-picker-format" [sourceData]="twoDatepickerFormat">
       <d-two-datepicker-format demo></d-two-datepicker-format>

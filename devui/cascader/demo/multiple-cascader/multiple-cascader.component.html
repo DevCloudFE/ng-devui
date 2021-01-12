@@ -1,0 +1,15 @@
+<div>
+  <h4>多选模式</h4>
+  <d-cascader
+    [options]="options"
+    [placeholder]="'请选择'"
+    [(ngModel)]="value1"
+    (ngModelChange)="onChanges($event)"
+    [trigger]="'click'"
+    [width]="300"
+    [dropdownWidth]="200"
+    [multiple]="true"
+    [allowClear]="true"
+  >
+  </d-cascader>
+</div>

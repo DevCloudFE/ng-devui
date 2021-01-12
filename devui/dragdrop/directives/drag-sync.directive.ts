@@ -1,10 +1,10 @@
-import { Directive, Input, Self, OnInit, Optional, OnDestroy, ElementRef, Inject } from '@angular/core';
+import { Directive, ElementRef, Inject, Input, OnDestroy, OnInit, Optional, Self } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { DescendantChildren } from '../services/drag-drop-desc-reg.service';
+import { DragSyncDescendantRegisterService } from '../services/drag-drop-descendant-sync.service';
 import { DragDropSyncService } from '../services/drag-drop-sync.service';
 import { DragDropService } from '../services/drag-drop.service';
 import { DraggableDirective } from './draggable.directive';
-import { DescendantChildren } from '../services/drag-drop-desc-reg.service';
-import { DragSyncDescendantRegisterService } from '../services/drag-drop-descendant-sync.service';
 
 @Directive({
   selector: '[dDragSync]',

@@ -1,11 +1,11 @@
-import { Directive, Input, ElementRef, Optional, Self, OnInit, OnDestroy } from '@angular/core';
+import { Directive, ElementRef, Input, OnDestroy, OnInit, Optional, Self } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { DroppableDirective } from './droppable.directive';
-import { DragDropSyncService } from '../services/drag-drop-sync.service';
-import { Utils } from '../shared/utils';
-import { DragPlaceholderInsertionEvent, DragPlaceholderInsertionIndexEvent } from './placeholder-insertion-event.type';
 import { DescendantChildren } from '../services/drag-drop-desc-reg.service';
 import { DropSortSyncDescendantRegisterService } from '../services/drag-drop-descendant-sync.service';
+import { DragDropSyncService } from '../services/drag-drop-sync.service';
+import { Utils } from '../shared/utils';
+import { DroppableDirective } from './droppable.directive';
+import { DragPlaceholderInsertionEvent, DragPlaceholderInsertionIndexEvent } from './placeholder-insertion-event.type';
 
 @Directive({
   selector: '[dDropSortSync]',

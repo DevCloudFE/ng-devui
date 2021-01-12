@@ -1,10 +1,10 @@
 import {
-  Directive,
-  HostListener,
-  Input,
   ComponentFactoryResolver,
   ComponentRef,
+  Directive,
   ElementRef,
+  HostListener,
+  Input,
   OnDestroy,
 } from '@angular/core';
 import { OverlayContainerRef } from 'ng-devui/overlay-container';

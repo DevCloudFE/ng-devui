@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, Input, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { DevuiSourceData } from './devui-source-data';
 
 @Component({
@@ -49,7 +49,7 @@ export class DevuiCodeboxComponent implements OnInit {
       }
     );
 
-    return ( promise );
+    return (promise);
 
   }
 

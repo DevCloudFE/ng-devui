@@ -1,16 +1,16 @@
-import { Directive, Input, Self, OnChanges, SimpleChanges, Host, Optional } from '@angular/core';
-import { Output, SkipSelf, ComponentFactoryResolver, ElementRef, ComponentRef, OnInit, OnDestroy } from '@angular/core';
-import { NgControl, AbstractControlDirective, AbstractControl, ValidatorFn, AsyncValidatorFn } from '@angular/forms';
-import { ValidationErrors, ControlContainer } from '@angular/forms';
-import { Observable, fromEvent, merge, Subject, Subscription, timer } from 'rxjs';
-import { map, switchMap, takeUntil } from 'rxjs/operators';
+import { Directive, Host, Input, OnChanges, Optional, Self, SimpleChanges } from '@angular/core';
+import { ComponentFactoryResolver, ComponentRef, ElementRef, OnDestroy, OnInit, Output, SkipSelf } from '@angular/core';
 import { EventEmitter } from '@angular/core';
+import { AbstractControl, AbstractControlDirective, AsyncValidatorFn, NgControl, ValidatorFn } from '@angular/forms';
+import { ControlContainer, ValidationErrors } from '@angular/forms';
+import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { OverlayContainerRef } from 'ng-devui/overlay-container';
 import { PopoverComponent } from 'ng-devui/popover';
+import { fromEvent, merge, Observable, Subject, Subscription, timer } from 'rxjs';
+import { map, switchMap, takeUntil } from 'rxjs/operators';
 import { FormItemComponent } from '../form-item.component';
 import { DAsyncValidateRule, dDefaultValidators, DFormControlStatus, DValidateErrorStatus } from './validate.type';
 import { DValidateRule, DValidateRules, DValidationErrorStrategy, ruleReservedWords } from './validate.type';
-import { I18nInterface, I18nService } from 'ng-devui/i18n';
 
 @Directive()
 export abstract class DAbstractControlRuleDirective implements OnChanges {

@@ -1,21 +1,21 @@
 <div class="demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 60, bottom: 0 }">
   <d-demo-nav [navItems]="navItems"></d-demo-nav>
   <div class="demo-example" [dAnchor]="'basic-usage'">
-    <div class="demo-title">基本用法</div>
-    <div class="demo-text">通过 position 配置时间点位置，通过 direction 配置时间线排列方向</div>
+    <div class="demo-title">{{ "components.time-axis.allStatesDemo.title" | translate }}</div>
+    <div class="demo-text">{{ "components.time-axis.allStatesDemo.description" | translate }}</div>
     <d-codebox [sourceData]="basicSource">
       <d-demo-time-axis-all-states demo></d-demo-time-axis-all-states>
     </d-codebox>
   </div>
   <div class="demo-example" [dAnchor]="'content-with-html'">
-    <div class="demo-title">内容使用html</div>
+    <div class="demo-title">{{ "components.time-axis.htmlContentDemo.title" | translate }}</div>
     <div class="demo-text"></div>
     <d-codebox id="components-time-axis-html-content" [sourceData]="htmlSource">
       <d-demo-time-axis-html-content demo></d-demo-time-axis-html-content>
     </d-codebox>
   </div>
   <div class="demo-example" [dAnchor]="'content-with-template'">
-    <div class="demo-title">内容使用模板自定义</div>
+    <div class="demo-title">{{ "components.time-axis.templateDemo.title" | translate }}</div>
     <div class="demo-text"></div>
     <d-codebox id="components-time-axis-template-content" [sourceData]="templateSource">
       <d-demo-time-axis-template-content demo></d-demo-time-axis-template-content>

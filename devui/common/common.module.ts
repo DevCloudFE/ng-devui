@@ -1,12 +1,12 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { ClipboardModule } from '@angular/cdk/clipboard';
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
-import { DatePipe } from './date-pipe';
 import { AutoFocusDirective } from './auto-focus.directive';
+import { ClipboardDirective } from './clipboard.directive';
+import { DatePipe } from './date-pipe';
 import { SimulateATagDirective } from './helper-utils';
 import { IframeEventPropagateDirective } from './iframe-event-propagate.directive';
-import { ClipboardDirective } from './clipboard.directive';
 
 @NgModule({
   imports: [

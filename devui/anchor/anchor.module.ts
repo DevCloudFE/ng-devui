@@ -1,12 +1,12 @@
 
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
-import { AnchorDirective } from './anchor.directive';
+import { RouterModule } from '@angular/router';
+import { AnchorBoxHashSupportDirective } from './anchor-box-hash.directive';
 import { AnchorBoxDirective } from './anchor-box.directive';
 import { AnchorLinkDirective } from './anchor-link.directive';
-import { AnchorBoxHashSupportDirective } from './anchor-box-hash.directive';
-import { RouterModule } from '@angular/router';
+import { AnchorDirective } from './anchor.directive';
 
 @NgModule({
     imports: [

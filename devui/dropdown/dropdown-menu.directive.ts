@@ -1,8 +1,8 @@
+import { animate, AnimationBuilder, AnimationMetadata, AnimationPlayer, style } from '@angular/animations';
 import { Directive, ElementRef, Host, HostBinding, HostListener, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { WindowRef } from 'ng-devui/window-ref';
 import { fromEvent, Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
-import { animate, AnimationBuilder, AnimationMetadata, AnimationPlayer, style } from '@angular/animations';
-import { WindowRef } from 'ng-devui/window-ref';
 import { DropDownDirective } from './dropdown.directive';
 
 @Directive({
@@ -24,7 +24,7 @@ export class DropDownMenuDirective implements OnInit, OnDestroy {
   popDirectionCache: 'top' | 'bottom';
   private currentValue: any = false;
   constructor(@Host() private dropdown: DropDownDirective, private el: ElementRef, private render: Renderer2,
-    private windowRef: WindowRef, private builder: AnimationBuilder) {
+              private windowRef: WindowRef, private builder: AnimationBuilder) {
 
   }
 

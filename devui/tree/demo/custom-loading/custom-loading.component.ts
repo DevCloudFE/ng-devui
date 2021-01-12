@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { TreeComponent, TreeNode, ITreeItem } from 'ng-devui/tree';
+import { ITreeItem, TreeComponent, TreeNode } from 'ng-devui/tree';
 import { customLoadingSvg } from './custom-loading-svg';
 @Component({
   selector: 'd-custom-loading',

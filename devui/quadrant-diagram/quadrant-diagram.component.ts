@@ -1,11 +1,10 @@
 import {
-  Component, Input, ChangeDetectionStrategy, TemplateRef, Output,
-  EventEmitter, OnChanges, SimpleChanges, OnInit, HostBinding, ElementRef, Renderer2
+  ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostBinding,
+  Input, OnChanges, OnInit, Output, Renderer2, SimpleChanges, TemplateRef
 } from '@angular/core';
-import { IAxisConfigs, IQuadrantConfigs, ILabelDataConfigs, labelSize, IViewConfigs } from './quadrant-diagram.type';
-import { ICON_EXPAND, ICON_CONTRACT, LABEL_SIZE, DEFAULT_AXIS_CONFIGS, DEFAULT_QUADRANT_CONFIGS } from './quadrant.config';
 import { QuadrantDiagramService } from './quadrant-diagram.service';
-
+import { IAxisConfigs, ILabelDataConfigs, IQuadrantConfigs, IViewConfigs, labelSize } from './quadrant-diagram.type';
+import { DEFAULT_AXIS_CONFIGS, DEFAULT_QUADRANT_CONFIGS, ICON_CONTRACT, ICON_EXPAND, LABEL_SIZE } from './quadrant.config';
 
 @Component({
   selector: 'd-quadrant-diagram',
@@ -134,4 +133,3 @@ export class QuadrantDiagramComponent implements OnInit, OnChanges {
     this.quadrantDiagramService.hideAxisLine(this.diagramId);
   }
 }
-
