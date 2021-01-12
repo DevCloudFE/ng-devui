@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { DataTableComponent, TableCheckOptions, TableWidthConfig } from 'ng-devui/data-table';
 import { originSource, SourceType } from '../mock-data';
-import { TableWidthConfig, TableCheckOptions, DataTableComponent } from 'ng-devui/data-table';
 
 @Component({
   selector: 'd-check-options-column',

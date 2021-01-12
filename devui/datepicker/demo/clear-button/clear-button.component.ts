@@ -1,8 +1,8 @@
 import {
-  Component,
-  OnInit,
   ChangeDetectionStrategy,
-  HostBinding
+  Component,
+  HostBinding,
+  OnInit
 } from '@angular/core';
 import { SelectDateChangeReason } from 'ng-devui/datepicker';
 

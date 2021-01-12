@@ -1,14 +1,14 @@
 <div class="demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 60, bottom: 0 }">
   <d-demo-nav [navItems]="navItems"></d-demo-nav>
   <div class="demo-example" [dAnchor]="'basic-usage'">
-    <div class="demo-title">基本用法</div>
+    <div class="demo-title">{{ 'components.textarea.basicDemo.title' | translate }}</div>
     <div class="demo-text"></div>
     <d-codebox id="text-basic" [sourceData]="basicSource">
       <d-basic demo></d-basic>
     </d-codebox>
   </div>
   <div class="demo-example" [dAnchor]="'resize'">
-    <div class="demo-title">调整大小</div>
+    <div class="demo-title">{{ 'components.textarea.resizeDemo.title' | translate }}</div>
     <div class="demo-text"></div>
     <d-codebox id="text-resize" [sourceData]="resizeSource">
       <d-resize demo></d-resize>

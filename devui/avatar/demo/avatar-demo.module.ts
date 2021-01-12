@@ -1,21 +1,21 @@
-import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
-import { AvatarDemoComponent } from './avatar-demo.component';
-import { AvatarModule } from '../avatar.module';
-import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
-import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
+import { RouterModule } from '@angular/router';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
-import { BasicComponent } from './basic/basic.component';
-import { SpecialComponent } from './special/special.component';
-import { ConfigComponent } from './config/config.component';
+import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
+import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
+import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
-
-
+import { AvatarModule } from '../avatar.module';
+import { AvatarDemoComponent } from './avatar-demo.component';
+import { BasicComponent } from './basic/basic.component';
+import { ConfigComponent } from './config/config.component';
+import { SpecialComponent } from './special/special.component';
 
 @NgModule({
   imports: [
+    TranslateModule,
     CommonModule,
     FormsModule,
     DevUICodeboxModule,
@@ -27,7 +27,8 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
       { path: 'demo', component: AvatarDemoComponent },
       {
         path: 'api', component: DevUIApiComponent, data: {
-          api: require('!html-loader!markdown-loader!../doc/api.md')
+          'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),
+          'en-us': require('!html-loader!markdown-loader!../doc/api-en.md')
         }
       }
     ])

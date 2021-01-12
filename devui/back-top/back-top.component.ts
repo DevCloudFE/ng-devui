@@ -1,7 +1,9 @@
-import { Component, OnInit, OnChanges, OnDestroy, Input, Output, TemplateRef, EventEmitter } from '@angular/core';
-import { ChangeDetectionStrategy, ChangeDetectorRef, SimpleChanges } from '@angular/core';
-import { fromEvent, Subject } from 'rxjs';
-import { debounceTime, takeUntil } from 'rxjs/operators';
+import {
+  ChangeDetectionStrategy, ChangeDetectorRef, Component,
+  ElementRef, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, TemplateRef
+} from '@angular/core';
+import { fromEvent, Subscription } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'd-back-top',
@@ -20,10 +22,10 @@ export class BackTopComponent implements OnInit, OnChanges, OnDestroy {
 
   currScrollTop = 0;
   isVisible = false;
-  private destroy$ = new Subject();
   SCROLL_REFRESH_INTERVAL = 100;
   target: HTMLElement | Window;
-  constructor(private cdr: ChangeDetectorRef) {}
+  subs: Subscription = new Subscription();
+  constructor(private cdr: ChangeDetectorRef, private el: ElementRef) {}
 
   ngOnInit() {
     this.addScrollEvent();
@@ -32,21 +34,30 @@ export class BackTopComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['scrollTarget']) {
+      if (this.subs) {
+        this.subs.unsubscribe();
+      }
+      this.subs = new Subscription();
       this.addScrollEvent();
     }
   }
 
   addScrollEvent() {
-    this.destroy$.next();
-    fromEvent(this.getScrollTarget(), 'scroll')
-    .pipe(debounceTime(this.SCROLL_REFRESH_INTERVAL), takeUntil(this.destroy$))
-    .subscribe(() => {
-      this.showButton();
-      this.cdr.detectChanges();
-    });
+    this.subs.add(
+      fromEvent(this.getScrollTarget(), 'scroll')
+      .pipe(debounceTime(this.SCROLL_REFRESH_INTERVAL))
+      .subscribe(() => {
+        this.showButton();
+        this.cdr.detectChanges();
+      })
+    );
   }
 
   getScrollTarget() {
+    if (this.scrollTarget) {
+      this.el.nativeElement.querySelector('.devui-backtop').style.position = 'absolute';
+      this.scrollTarget.parentElement.style.position = 'relative';
+    }
     this.target = this.scrollTarget || window;
     return this.target;
   }
@@ -61,8 +72,8 @@ export class BackTopComponent implements OnInit, OnChanges, OnDestroy {
 
   goTop() {
     if (this.target === window) {
-      document.documentElement.scrollTop = 0;
-      document.body.scrollTop = 0;
+      document.documentElement.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
+      document.body.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
     } else {
       this.scrollTarget.style.scrollBehavior = 'smooth';
       this.scrollTarget.scrollTop = 0;
@@ -71,7 +82,8 @@ export class BackTopComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
+    if (this.subs) {
+      this.subs.unsubscribe();
+    }
   }
 }

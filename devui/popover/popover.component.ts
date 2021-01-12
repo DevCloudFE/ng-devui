@@ -1,7 +1,9 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { AfterContentChecked, AfterViewInit, Component, ElementRef,
-  HostBinding, HostListener, Input, OnDestroy, OnInit, Renderer2, TemplateRef,
-  ChangeDetectorRef} from '@angular/core';
+import {
+  AfterContentChecked, AfterViewInit, ChangeDetectorRef, Component,
+  ElementRef, HostBinding, HostListener, Input, OnDestroy, OnInit, Renderer2,
+  TemplateRef
+} from '@angular/core';
 import { PositionService } from 'ng-devui/position';
 import { PositionType } from 'ng-devui/tooltip';
 import { fromEvent, Subscription } from 'rxjs';
@@ -29,6 +31,7 @@ export class PopoverComponent
   @Input() triggerElementRef: ElementRef;
   @Input() position: PositionType | PositionType[];
   currentPosition: PositionType;
+  connectionBias: string;
   @Input() content: string | HTMLElement | TemplateRef<any>;
   @Input() showAnimate = false;
   @Input() scrollElement: Element;
@@ -42,7 +45,7 @@ export class PopoverComponent
     return this.content ? 'block' : 'none';
   }
   @HostBinding('class') get class() {
-    return 'devui-popover ' + this.currentPosition + ' devui-popover-' + this.popType;
+    return 'devui-popover ' + this.currentPosition + ' ' + this.connectionBias + ' devui-popover-' + this.popType;
   }
   @HostBinding('@state') get state() {
     return this.animateState;
@@ -67,7 +70,9 @@ export class PopoverComponent
   }
 
   ngAfterViewInit() {
-    this.updatePosition();
+    setTimeout(() => {
+      this.updatePosition();
+    });
 
     if (this.appendToBody) {
       if (!this.scrollElement) {
@@ -128,6 +133,14 @@ export class PopoverComponent
       this.appendToBody
     );
     this.currentPosition = rect.placementPrimary;
+    this.connectionBias = `bias-${rect.placementSecondary}`;
+    if (rect.placementSecondary === 'center') {
+      if (rect.placementPrimary === 'left' || rect.placementPrimary === 'right') {
+        this.connectionBias = 'bias-vertical-center';
+      } else {
+        this.connectionBias = 'bias-horizontal-center';
+      }
+    }
     this.renderer.setStyle(
       this.elementRef.nativeElement,
       'left',

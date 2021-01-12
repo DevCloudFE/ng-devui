@@ -1,7 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { DataTableComponent } from 'ng-devui/data-table';
 
-
 interface SourceType {
   id: number;
   firstName: string;

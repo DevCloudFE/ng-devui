@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { SortEventArg, SortDirection } from '../../../../data-table.model';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { SortDirection, SortEventArg } from '../../../../data-table.model';
 
 @Component({
   selector: 'd-table-sort',

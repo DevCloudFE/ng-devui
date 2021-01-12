@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { of, Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
-
 
 @Component({
   selector: 'd-form-demo-validate-template-form',
@@ -56,8 +55,8 @@ export class ValidateTemplateFormComponent {
     );
   }
 
-  submitPlanForm({valid, directive}) {
-    console.log('Valid:', valid, 'Directive:', directive);
+  submitPlanForm({valid, directive, data}) {
+    console.log('Valid:', valid, 'Directive:', directive, 'data', data);
     if (valid) {
       // do something
     } else {

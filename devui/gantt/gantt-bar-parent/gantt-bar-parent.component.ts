@@ -1,7 +1,7 @@
-import { Component, OnInit, Input, TemplateRef, ViewChild, ElementRef, ChangeDetectorRef, OnDestroy,
-  SimpleChanges, OnChanges, AfterViewInit } from '@angular/core';
-import { GanttService } from '../gantt.service';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, OnChanges, OnDestroy, OnInit,
+  SimpleChanges, TemplateRef, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { GanttService } from '../gantt.service';
 
 @Component({
   selector: 'd-gantt-bar-parent',

@@ -2,22 +2,29 @@
   class="devui-tag-item {{ labelStyle }}"
   [style.display]="deleteTag ? 'none' : 'block'"
   [ngClass]="{
-    'devui-operable-tag': deletable,
     'devui-colorful-tag': isColorfulTag,
     'devui-selected-tag': checked,
-    'devui-deletable-tag': deletable
+    'devui-deletable-tag': mode === 'closeable' || deletable,
+    'devui-checkable-tag': mode === 'checkable'
   }"
   [ngStyle]="{
     'border-color': customColor,
+    'background-color': isColorfulTag ? (checked ? customColor : '#fff') : '',
     color: isColorfulTag ? (checked ? '#fff' : customColor) : '',
-    'background-color': isColorfulTag ? (checked ? customColor : '#fff') : ''
+    cursor: this.mode === 'checkable' ? 'pointer' : ''
   }"
   title="{{ titleContent ? titleContent : tag }}"
+  (click)="tagClick()"
 >
   <div class="content-wrapper" [ngStyle]="{ 'background-color': colorMap[labelStyle] || customColor }"></div>
   <span *ngIf="!customViewTemplate">{{ tag }}</span>
   <ng-template *ngIf="customViewTemplate" [ngTemplateOutlet]="customViewTemplate" [ngTemplateOutletContext]="{ tag: tag }"></ng-template>
-  <a class="remove-button" [ngClass]="{ 'default-button': !isColorfulTag }" *ngIf="deletable" (click)="removeTag($event, tag)">
+  <a
+    class="remove-button"
+    [ngClass]="{ 'default-button': !isColorfulTag }"
+    *ngIf="mode === 'closeable' || deletable"
+    (click)="removeTag($event, tag)"
+  >
     <svg
       *ngIf="isColorfulTag"
       width="12px"

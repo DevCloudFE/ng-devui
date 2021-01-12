@@ -5,9 +5,9 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CheckBoxModule } from 'ng-devui/checkbox';
 import { LoadingModule } from 'ng-devui/loading';
+import { LazyLoadModule } from 'ng-devui/utils';
 import { WindowRefModule } from 'ng-devui/window-ref';
 import { SelectComponent } from './select.component';
-import { LazyLoadModule } from 'ng-devui/utils';
 
 @NgModule({
   imports: [

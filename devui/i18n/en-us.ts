@@ -88,7 +88,7 @@ export default {
     getBeyondMaximalFileSizeMsg(filename, maximalSize) {
       return `Maximum file size (MB): ${maximalSize}. Files whose size exceeds the maximum value: ${filename}`;
     },
-    getAllFilesBeyondMaximalFileSizeMsg( maximalSize) {
+    getAllFilesBeyondMaximalFileSizeMsg(maximalSize) {
       return `Maximum file size (MB): ${maximalSize}. The selected files exceed the maximum value`;
     },
     getExistSameNameFilesMsg(sameNames) {

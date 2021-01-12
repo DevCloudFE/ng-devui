@@ -1,0 +1,41 @@
+.demo-scroll-container {
+  overflow-x: auto;
+}
+
+.top-group {
+  margin-left: 50px;
+  min-width: 400px;
+
+  d-button {
+    margin-right: 5px;
+  }
+}
+
+.left-group {
+  float: left;
+  width: 80px;
+
+  d-button {
+    margin-top: 5px;
+  }
+}
+
+.right-group {
+  width: 80px;
+  margin-left: 310px;
+
+  d-button {
+    margin-top: 5px;
+  }
+}
+
+.bottom-group {
+  min-width: 400px;
+  margin-left: 50px;
+  clear: both;
+
+  d-button {
+    margin-top: 5px;
+    margin-right: 5px;
+  }
+}

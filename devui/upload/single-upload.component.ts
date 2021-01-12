@@ -1,11 +1,11 @@
-import { Component, ViewChild, TemplateRef, OnDestroy, OnInit } from '@angular/core';
-import { Input, Output, EventEmitter } from '@angular/core';
-import { UploadStatus, IUploadOptions, IFileOptions } from './file-uploader.types';
-import { SingleUploadViewComponent } from './single-upload-view.component';
-import { SelectFiles } from './select-files.utils';
-import { last, map } from 'rxjs/operators';
-import { Observable, Subscription } from 'rxjs';
+import { Component, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { EventEmitter, Input, Output } from '@angular/core';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
+import { Observable, Subscription } from 'rxjs';
+import { last, map } from 'rxjs/operators';
+import { IFileOptions, IUploadOptions, UploadStatus } from './file-uploader.types';
+import { SelectFiles } from './select-files.utils';
+import { SingleUploadViewComponent } from './single-upload-view.component';
 
 @Component({
   selector: 'd-single-upload',

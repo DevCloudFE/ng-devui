@@ -1,0 +1,12 @@
+<h4>点击加载子菜单</h4>
+<d-cascader
+  [options]="options"
+  [placeholder]="'请选择'"
+  [(ngModel)]="value"
+  [trigger]="'click'"
+  (ngModelChange)="onChanges($event)"
+  [showPath]="true"
+  [allowClear]="true"
+  [dropdownWidth]="120"
+  [loadChildrenFn]="loadChildren"
+></d-cascader>

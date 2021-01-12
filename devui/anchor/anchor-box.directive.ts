@@ -1,8 +1,8 @@
-import { ContentChildren, Directive, Input, QueryList, OnInit, OnDestroy } from '@angular/core';
+import { ContentChildren, Directive, Input, OnDestroy, OnInit, QueryList } from '@angular/core';
 import { Subject, Subscription} from 'rxjs';
-import { AnchorActiveChangeSource, IAnchorBox } from './anchor.type';
-import { AnchorDirective } from './anchor.directive';
 import { filter } from 'rxjs/operators';
+import { AnchorDirective } from './anchor.directive';
+import { AnchorActiveChangeSource, IAnchorBox } from './anchor.type';
 
 @Directive({
   selector: '[dAnchorBox]'

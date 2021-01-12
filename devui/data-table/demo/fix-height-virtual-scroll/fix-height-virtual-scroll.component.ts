@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DataTableComponent } from 'ng-devui/data-table';
-import { SourceType, originSource } from '../mock-data';
+import { originSource, SourceType } from '../mock-data';
 
 @Component({
   selector: 'd-fix-header-virtual-scroll',

@@ -9,13 +9,21 @@ import {
   OnInit,
   Output
 } from '@angular/core';
+
 import { throttle } from 'lodash-es';
 import { Subscription } from 'rxjs';
-import { StepsGuideService } from './steps-guide.service';
-import { StepsGuideComponent } from './steps-guide.component';
-import { OverlayContainerRef } from 'ng-devui/overlay-container';
-import { StepItem, ExtraConfig, GuideOptions, OperateResponse, StepsGuidePositionType } from './steps-guide.types';
 
+import { OverlayContainerRef } from 'ng-devui/overlay-container';
+
+import { StepsGuideComponent } from './steps-guide.component';
+import { StepsGuideService } from './steps-guide.service';
+import {
+  ExtraConfig,
+  GuideOptions,
+  OperateResponse,
+  StepItem,
+  StepsGuidePositionType
+} from './steps-guide.types';
 
 @Directive({
   selector: '[dStepsGuide]'
@@ -50,7 +58,8 @@ export class StepsGuideDirective implements OnInit, OnDestroy {
   @Input() topFix = 0;
   @Input() zIndex = 1100;
   // 引导显示的目标dom,如果指定，不在使用指令所在的dom作为目标dom
-  @Input() targetElement;
+  @Input() targetElement: any;
+  @Input() scrollElement: any;
   // 是否自动滚动页面至目标
   @Input() scrollToTargetSwitch = true;
   // 引导向扩展配置
@@ -104,7 +113,7 @@ export class StepsGuideDirective implements OnInit, OnDestroy {
       if (currentStep && this.toggle && this.stepIndex === this.currentIndex) {
         const targetDom = this.targetElement || this.elm.nativeElement;
         if (this.scrollToTargetSwitch) {
-          targetDom.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
+          targetDom.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
         }
         // 如果该步骤设置了监听dom和监听实例，重启监听
         if (this._observerDom && this.observer) {
@@ -114,6 +123,7 @@ export class StepsGuideDirective implements OnInit, OnDestroy {
         setTimeout(() => {
           this.insert({
             triggerElement: targetDom,
+            scrollElement: this.scrollElement,
             pageName: this.pageName,
             title: currentStep.title,
             content: currentStep.content,

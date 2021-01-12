@@ -1,11 +1,11 @@
-import { Component, ElementRef, EventEmitter, HostListener, Input,
-  OnChanges, OnDestroy, OnInit, Output, SimpleChanges, ViewChild, forwardRef } from '@angular/core';
+import { Component, ElementRef, EventEmitter, forwardRef, HostListener,
+  Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { isEmpty } from 'lodash-es';
 import { BehaviorSubject, fromEvent, Observable, of } from 'rxjs';
-import { debounceTime, map, switchMap } from 'rxjs/operators';
-import { I18nService, I18nInterface } from 'ng-devui/i18n';
 import { Subscription } from 'rxjs';
+import { debounceTime, map, switchMap } from 'rxjs/operators';
 @Component({
   selector: 'd-tags-input',
   templateUrl: './tags.input.component.html',
@@ -172,7 +172,7 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
         this.sourceSubscription.next('');
       }
     }
-    if (changes && changes.tags && changes.tags.currentValue ) {
+    if (changes && changes.tags && changes.tags.currentValue) {
       this.reduceSuggestionList();
     }
   }
@@ -216,7 +216,7 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
     }
     if (this.suggestionList.length > 0 && this.tags.length > 0) {
       this.isReduce = true;
-      this.suggestionList = this.suggestionList.filter( suggestion => {
+      this.suggestionList = this.suggestionList.filter(suggestion => {
         return this.tags.findIndex(tag => this.caseSensitivity ?
           tag[this.displayProperty] === suggestion[this.displayProperty] :
           tag[this.displayProperty].toLowerCase() === suggestion[this.displayProperty].toLowerCase()) === -1;

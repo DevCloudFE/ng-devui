@@ -1,11 +1,11 @@
-import { ChangeDetectionStrategy, Component, ElementRef, Host,
-   HostBinding, Input, OnInit, Renderer2, OnDestroy, AfterViewInit, ChangeDetectorRef, SkipSelf } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component,
+   ElementRef, Host, HostBinding, Input, OnDestroy, OnInit, Renderer2, SkipSelf } from '@angular/core';
+import { I18nService } from 'ng-devui/i18n';
 import { Subscription } from 'rxjs';
-import { map, switchMap, takeUntil, tap, filter } from 'rxjs/operators';
+import { filter, map, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { ResizeDirective } from './resize.directive';
 import { SplitterService } from './splitter.service';
 import { SplitterOrientation } from './splitter.types';
-import { I18nService } from 'ng-devui/i18n';
 
 @Component({
   selector: 'd-splitter-bar',
@@ -69,11 +69,11 @@ export class SplitterBarComponent implements OnInit, AfterViewInit, OnDestroy {
   )
 
   constructor(private el: ElementRef,
-    private splitter: SplitterService,
-    private renderer: Renderer2,
-    @Host() private resize: ResizeDirective,
-    @SkipSelf() private cdr: ChangeDetectorRef,
-    private i18n: I18nService
+              private splitter: SplitterService,
+              private renderer: Renderer2,
+              @Host() private resize: ResizeDirective,
+              @SkipSelf() private cdr: ChangeDetectorRef,
+              private i18n: I18nService
   ) {
     this.splitter.paneChangeSubject.subscribe(() => {
       this.initialCollapseStatus();

@@ -10,5 +10,4 @@ export class TextComponent implements OnInit {
   ngOnInit() {
   }
 
-
 }

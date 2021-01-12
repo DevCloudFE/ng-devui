@@ -1,10 +1,7 @@
-
-
-
-import { IEventBus, EventBus, StorageService, ContextService, IStorageService, IContextService } from './utils/index';
-import { Theme } from './theme';
 import { THEME_KEY } from './key-config';
 import { PrefersColorSchemeMediaQuery } from './media-query';
+import { Theme } from './theme';
+import { ContextService, EventBus, IContextService, IEventBus, IStorageService, StorageService } from './utils/index';
 
 /**
  * 负责CSS变量主题的装卸，主题元数据转换成主题数据
@@ -79,7 +76,7 @@ export class ThemeService {
     this.currentTheme = theme;
     if (!this.contentElement) {
       const styleElement = document.getElementById(THEME_KEY.styleElementId);
-      if ( styleElement) {
+      if (styleElement) {
         this.contentElement = <HTMLStyleElement>styleElement;
       } else {
         this.contentElement = document.createElement('style');
@@ -98,7 +95,7 @@ export class ThemeService {
 
     // 通知外部主题变更
     this.notify(theme, 'themeChanged');
-    setTimeout( () => {this.removeColorTransition(); }, 500 );
+    setTimeout(() => {this.removeColorTransition(); }, 500);
   }
 
   saveCustomTheme(customTheme: Theme) {

@@ -1,6 +1,6 @@
 
 export class I18nUtil {
-  private static readonly supportLanguages = ['zh-cn', 'en-us', 'ru-ru'];
+  private static readonly supportLanguages = ['zh-cn', 'en-us'];
 
   public static getCurrentLanguage() {
     let lang = localStorage.getItem('lang');

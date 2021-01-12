@@ -1,0 +1,26 @@
+<h4>hover展开模式</h4>
+<d-cascader [options]="options" [placeholder]="'请选择'" [(ngModel)]="value1" (ngModelChange)="onChanges($event)"></d-cascader>
+
+<h4>click展开模式</h4>
+<d-cascader
+  [options]="options"
+  [placeholder]="'请选择'"
+  [(ngModel)]="value2"
+  [trigger]="'click'"
+  (ngModelChange)="onChanges($event)"
+  [showPath]="true"
+  [allowClear]="true"
+  [dropdownWidth]="120"
+></d-cascader>
+
+<h4>数据为空</h4>
+<d-cascader
+  [options]="[]"
+  [placeholder]="'请选择'"
+  [(ngModel)]="value3"
+  [trigger]="'click'"
+  (ngModelChange)="onChanges($event)"
+></d-cascader>
+
+<h4>禁用模式</h4>
+<d-cascader [options]="[]" [placeholder]="'请选择'" [(ngModel)]="value4" [trigger]="'click'" [disabled]="true"></d-cascader>

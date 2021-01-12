@@ -1,15 +1,14 @@
 import {
   Component,
-  Input,
   ContentChild,
-  Output,
-  EventEmitter
+  EventEmitter,
+  Input,
+  Output
 } from '@angular/core';
 import { Observable } from 'rxjs';
-import { PanelType } from './panel.types';
-import { PanelHeaderComponent } from './panel-header.component';
 import { PanelFooterComponent } from './panel-footer.component';
-
+import { PanelHeaderComponent } from './panel-header.component';
+import { PanelType } from './panel.types';
 
 @Component({
   selector: 'd-panel',

@@ -1,8 +1,8 @@
-import { map, takeUntil } from 'rxjs/operators';
-import { Pipe, PipeTransform, OnDestroy } from '@angular/core';
+import { OnDestroy, Pipe, PipeTransform } from '@angular/core';
 import { I18nService } from 'ng-devui/i18n';
 import * as datefns from 'date-fns';
-import { Observable, Subject, of } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
+import { map, takeUntil } from 'rxjs/operators';
 
 @Pipe({
   name: 'dRelativeTime'
@@ -11,7 +11,7 @@ export class RelativeTimePipe implements PipeTransform, OnDestroy {
   private _destroyed$ = new Subject();
   constructor(private i18n: I18nService) {}
 
-  transform(value: string | number | Date, limit: number): Observable<string | number | Date> {
+  transform(value: string | number | Date, limit: number, weekStartsOn = 1): Observable<string | number | Date> {
     if (!value) {
       return of('');
     }
@@ -36,8 +36,8 @@ export class RelativeTimePipe implements PipeTransform, OnDestroy {
     const diffMonths = datefns.differenceInMonths(startOfMonthForToday, startOfMonthForTarget);
     const absDiffMonths = Math.abs(diffMonths);
 
-    const startOfWeekForTarget = datefns.startOfWeek(value);
-    const startOfWeekForToday = datefns.startOfWeek(now);
+    const startOfWeekForTarget = datefns.startOfWeek(value, { weekStartsOn });
+    const startOfWeekForToday = datefns.startOfWeek(now, { weekStartsOn });
     const diffWeeks = datefns.differenceInWeeks(startOfWeekForToday, startOfWeekForTarget);
     const absDiffWeeks = Math.abs(diffWeeks);
 

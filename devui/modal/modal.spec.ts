@@ -1,19 +1,17 @@
-import { ComponentFixture, TestBed, async, fakeAsync, tick } from '@angular/core/testing';
-import { DebugElement, Component, ViewChild, TemplateRef, Input } from '@angular/core';
+import { Component, DebugElement, Input, TemplateRef, ViewChild } from '@angular/core';
+import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ButtonModule } from '../button/button.module';
-
 import { DomHelper } from '../utils/testing/dom-helper';
 import * as EventHelper from '../utils/testing/event-helper';
-import { IDialogOptions, IModalOptions } from './modal.types';
-
-import { ModalModule } from './modal.module';
-import { DialogService } from './dialog.service';
 import { ModalTestComponent } from './demo/basic/modal-test.component';
-import { ModalService } from './modal.service';
 import { ModalAlertComponent } from './demo/customize/modal-alert.component';
+import { DialogService } from './dialog.service';
+import { ModalModule } from './modal.module';
+import { ModalService } from './modal.service';
+import { IDialogOptions, IModalOptions } from './modal.types';
 
 @Component({
   template: `
@@ -84,7 +82,10 @@ describe('dialog', () => {
       TestBed.configureTestingModule({
         imports: [ModalModule, NoopAnimationsModule, ButtonModule],
         declarations: [TestDialogComponent, ModalTestComponent],
-        providers: [DialogService],
+        providers: [
+          DialogService
+        ],
+
       }).overrideModule(BrowserDynamicTestingModule, {
         set: {
           

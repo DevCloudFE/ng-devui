@@ -1,29 +1,34 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, DebugElement, ViewChild } from '@angular/core';
-import { TreeModule } from './tree.module';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DomHelper } from '../utils/testing/dom-helper';
+import { ITreeItem } from './tree-factory.class';
 import { TreeComponent } from './tree.component';
+import { TreeModule } from './tree.module';
 
 @Component({
   template: `
     <d-tree
       #basicTree
       [tree]="treeItems"
+      [virtualScroll]="virtualScroll"
       (nodeSelected)="onNodeSelected($event)"
       (nodeToggled)="onNodeToggled($event)"
       (nodeDblClicked)="onDblClick($event)"
+      (nodeRightClicked)="onRightClicked($event)"
     >
     </d-tree>
   `
 })
 class TestTreeComponent {
   @ViewChild('basicTree') basicTree: TreeComponent;
-  treeItems = [
+  virtualScroll = false;
+  treeItems: Array<ITreeItem> = [
     {
       id: 'parent1',
       title: '父节点1 - 展开',
       open: true,
+      disableToggle: false,
       items: [
         {
           id: 'child11',
@@ -70,6 +75,7 @@ class TestTreeComponent {
   onDblClick = jasmine.createSpy('double click');
   onNodeSelected = jasmine.createSpy('node selected');
   onNodeToggled = jasmine.createSpy('node toggle');
+  onRightClicked = jasmine.createSpy('node right clicked');
 }
 
 describe('tree', () => {
@@ -152,6 +158,52 @@ describe('tree', () => {
         component.basicTree.appendTreeItems(testNode, 'unknown');
       }).toThrowError('parent node does not exist.');
     });
+  });
+
+  it('should virtual scroll work correctly', () => {
+    component.virtualScroll = true;
+    fixture.detectChanges();
+    const virtualScrollTreeEl: HTMLElement = debugEl.query(By.css('d-tree cdk-virtual-scroll-viewport')).nativeElement;
+    expect(virtualScrollTreeEl).not.toBeNull();
+  });
+
+  it('should contextmenu work correctly', () => {
+    const treeEl: HTMLElement = debugEl.query(By.css('.devui-tree-node__title')).nativeElement;
+    treeEl.dispatchEvent(new Event('contextmenu'));
+    expect(component.onRightClicked).toHaveBeenCalled();
+  });
+
+  it('should disableToggle work correctly', () => {
+    component.treeItems = [
+      {
+        id: 'newNode',
+        title: 'New Node',
+        open: false,
+        disableToggle: true,
+        isParent: true
+      }
+    ];
+    fixture.detectChanges();
+    const folderIconEl: HTMLElement = debugEl.query(By.css('.devui-tree-node__folder')).nativeElement;
+    folderIconEl.dispatchEvent(new Event('click'));
+    expect(component.onNodeToggled).not.toHaveBeenCalled();
+  });
+
+  it('should view update when tree data changed', () => {
+    component.treeItems = [
+      {
+        id: 'newNode',
+        title: 'New Node',
+        open: false,
+        disableToggle: false,
+        items: []
+      }
+    ];
+    fixture.detectChanges();
+    const newNodeEl: HTMLElement = debugEl
+    .query(By.css('d-tree d-tree-nodes .devui-tree-node__content .devui-tree-node__title')).nativeElement;
+    expect(newNodeEl.textContent).toEqual('New Node');
+
   });
 });
 

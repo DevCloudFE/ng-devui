@@ -3,12 +3,12 @@
 
 @mixin font-content() {
   font-size: $devui-font-size;
-  font-weight: $font-content-weight;
-  line-height: $line-height-base;
+  font-weight: $devui-font-content-weight;
+  line-height: $devui-line-height-base;
 }
 
 @mixin font-title($font-size: $devui-font-size-page-title) {
   font-size: $font-size;
-  font-weight: $font-title-weight;
-  line-height: $line-height-base;
+  font-weight: $devui-font-title-weight;
+  line-height: $devui-line-height-base;
 }

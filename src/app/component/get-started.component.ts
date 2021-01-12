@@ -2,12 +2,13 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
-  QueryList,
+  Input,
+  OnInit, QueryList,
   ViewChildren
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import * as hljs from 'highlight.js/lib/highlight';
-
+import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import * as hljs from 'highlight.js/lib/core';
 ['bash', 'typescript', 'json'].forEach((langName) => {
   const langModule = require(`highlight.js/lib/languages/${langName}`);
   hljs.registerLanguage(langName, langModule);
@@ -29,16 +30,43 @@ import * as hljs from 'highlight.js/lib/highlight';
       `
   ],
 })
-export class GetStartedComponent implements AfterViewInit {
-  readMe: HTMLElement = require('!html-loader!markdown-loader!./getStarted.md');
-  @ViewChildren('documentation') documentation: QueryList<ElementRef>;
-
-  constructor(private route: ActivatedRoute) {
+export class GetStartedComponent implements OnInit, AfterViewInit {
+  _readMe: HTMLElement;
+  @Input() set readMe(readMe: HTMLElement) {
+    this._readMe = readMe;
+    setTimeout(() => {
+      this.refreshView();
+    });
   }
 
-  ngAfterViewInit(): void {
+  get readMe () {
+    return this._readMe;
+  }
+
+  @ViewChildren('documentation') documentation: QueryList<ElementRef>;
+
+  constructor(private route: ActivatedRoute, private translate: TranslateService) {
+  }
+  ngOnInit(): void {
+    const lang = localStorage.getItem('lang');
+    this.setReadMe(lang);
+    this.translate.onLangChange.subscribe((event: TranslationChangeEvent) => {
+      this.setReadMe(event.lang);
+    });
+  }
+
+  setReadMe(lang) {
+    const currLang = lang === 'en-us' ? 'en' : 'cn';
+    this.readMe = require(`!html-loader!markdown-loader!./getStarted-${currLang}.md`);
+  }
+
+  refreshView() {
     Array.from<HTMLElement>(document.querySelectorAll('pre code')).forEach((block) => {
       hljs.highlightBlock(block);
     });
+  }
+
+  ngAfterViewInit(): void {
+    this.refreshView();
   }
 }

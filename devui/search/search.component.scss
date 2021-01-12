@@ -29,8 +29,11 @@ svg.svg-icon-search path {
     text-overflow: ellipsis;
 
     &.devui-icon-left {
-      border: none;
       padding-left: 32px;
+    }
+
+    &.devui-search-no-border {
+      border: none;
     }
 
     &.devui-clear-exit {

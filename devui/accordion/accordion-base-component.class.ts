@@ -1,4 +1,4 @@
-import { Input, HostBinding, Directive } from '@angular/core';
+import { Directive, HostBinding, Input } from '@angular/core';
 import { AccordionBase, AccordionOptions } from './accordion.type';
 
 @Directive()

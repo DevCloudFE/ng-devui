@@ -1,18 +1,18 @@
 import {
-  Injectable,
   ComponentFactoryResolver,
+  Injectable,
   Renderer2, RendererFactory2
 } from '@angular/core';
-import { ModalComponent } from './modal.component';
 import { OverlayContainerRef } from 'ng-devui/overlay-container';
-import {assign, isUndefined} from 'lodash-es';
+import { assign, isUndefined } from 'lodash-es';
+import { ModalComponent } from './modal.component';
 import { IModalOptions } from './modal.types';
 
 @Injectable()
 export class ModalService {
   private renderer: Renderer2;
   constructor(private componentFactoryResolver: ComponentFactoryResolver,
-    private overlayContainerRef: OverlayContainerRef, private rendererFactory: RendererFactory2) {
+              private overlayContainerRef: OverlayContainerRef, private rendererFactory: RendererFactory2) {
       this.renderer = this.rendererFactory.createRenderer(null, null);
   }
 
@@ -32,7 +32,7 @@ export class ModalService {
     placement = 'center',
     offsetX,
     offsetY,
-    bodyScrollable,
+    bodyScrollable = true,
     contentTemplate,
     escapable = true
   }: IModalOptions) {
@@ -65,10 +65,11 @@ export class ModalService {
     }
 
     modalRef.instance.onHidden = () => {
-      if (!bodyScrollable && modalRef.instance.documentOverFlow) {
+      if (modalRef.instance.documentOverFlow) {
         this.renderer.removeStyle(document.body, 'top');
         this.renderer.removeStyle(document.body, 'left');
         this.renderer.removeClass(document.body, 'devui-body-scrollblock');
+        this.renderer.removeClass(document.body, 'devui-body-overflow-hidden');
         document.documentElement.scrollTop = modalRef.instance.scrollTop;
         document.body.scrollTop = modalRef.instance.scrollTop;
         document.documentElement.scrollLeft = modalRef.instance.scrollLeft;

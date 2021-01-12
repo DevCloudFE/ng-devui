@@ -1,7 +1,7 @@
-import {Component, Host, OnInit, Input, OnChanges, SimpleChanges, ViewEncapsulation, ElementRef, ViewChild} from '@angular/core';
 import {
-  ConnectedPosition, CdkOverlayOrigin, ConnectedOverlayPositionChange, VerticalConnectionPos, CdkConnectedOverlay
+  CdkConnectedOverlay, CdkOverlayOrigin, ConnectedOverlayPositionChange, ConnectedPosition, VerticalConnectionPos
 } from '@angular/cdk/overlay';
+import {Component, ElementRef, Host, Input, OnChanges, OnInit, SimpleChanges, ViewChild, ViewEncapsulation} from '@angular/core';
 import {AppendToBodyDirection, AppendToBodyDirectionsConfig } from 'ng-devui/utils';
 import {fadeInOut} from 'ng-devui/utils';
 import {DropDownDirective} from './dropdown.directive';
@@ -76,7 +76,7 @@ export class DropDownAppendToBodyComponent implements OnInit, OnChanges {
   }
 
   reposition(): void {
-    if (this.overlay && this.overlay.overlayRef ) {
+    if (this.overlay && this.overlay.overlayRef) {
       setTimeout(() => {
         this.setPositions();
         this.overlay.overlayRef.updatePosition();
@@ -89,7 +89,7 @@ export class DropDownAppendToBodyComponent implements OnInit, OnChanges {
       case 'top':
       case 'center':
         this.menuPosition = 'bottom';
-      break;
+        break;
       case 'bottom':
         this.menuPosition = 'top';
     }

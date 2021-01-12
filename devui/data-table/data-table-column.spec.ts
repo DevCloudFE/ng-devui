@@ -1,22 +1,21 @@
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { SelectModule } from 'ng-devui/select';
-import { InputNumberModule, InputNumberComponent } from 'ng-devui/input-number';
-import { DatepickerModule, DatepickerComponent } from 'ng-devui/datepicker';
-import { DataTableComponent, DataTableRowComponent, DataTableHeadComponent } from 'ng-devui/data-table';
-import { ComponentFixture, TestBed, tick, fakeAsync, flush } from '@angular/core/testing';
-import { Component, DebugElement, ViewChild, ChangeDetectorRef, OnInit } from '@angular/core';
-import { SourceType, originSource, genderSource, editableOriginSource, treeDataSource } from './demo/mock-data';
-import { DataTableModule } from './data-table.module';
-import { By } from '@angular/platform-browser';
-import { I18nModule } from '../i18n';
+import { ChangeDetectorRef, Component, DebugElement, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ComponentFixture, fakeAsync, flush, TestBed, tick } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { CheckBoxModule } from 'ng-devui/checkbox';
-import { TooltipModule } from 'ng-devui/tooltip';
-import { DropDownToggleDirective, DropDownMenuDirective } from 'ng-devui/dropdown';
+import { By } from '@angular/platform-browser';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { AvatarModule } from 'ng-devui/avatar';
-import { createMouseEvent } from '../utils/testing/event-helper';
+import { CheckBoxModule } from 'ng-devui/checkbox';
+import { DataTableComponent, DataTableHeadComponent, DataTableRowComponent, TableCheckOptions } from 'ng-devui/data-table';
+import { DatepickerComponent, DatepickerModule } from 'ng-devui/datepicker';
+import { DropDownMenuDirective, DropDownToggleDirective } from 'ng-devui/dropdown';
+import { InputNumberComponent, InputNumberModule } from 'ng-devui/input-number';
+import { SelectModule } from 'ng-devui/select';
+import { TooltipModule } from 'ng-devui/tooltip';
 import { LoadingType } from '..';
-
+import { I18nModule } from '../i18n';
+import { createMouseEvent } from '../utils/testing/event-helper';
+import { DataTableModule } from './data-table.module';
+import { editableOriginSource, genderSource, originSource, SourceType, treeDataSource } from './demo/mock-data';
 const dataTableOptions = {
   columns: [
     {
@@ -24,24 +23,28 @@ const dataTableOptions = {
       header: 'First Name',
       fieldType: 'text',
       sortable: true,
+      order: 1
     },
     {
       field: 'lastName',
       header: 'Last Name',
       fieldType: 'text',
       sortable: true,
+      order: 2
     },
     {
       field: 'gender',
       header: 'gender',
       fieldType: 'text',
       sortable: true,
+      order: 3
     },
     {
       field: 'dob',
       header: 'Date of birth',
       fieldType: 'date',
       sortable: true,
+      order: 4
     },
   ],
 };
@@ -49,13 +52,15 @@ const dataTableOptions = {
 // column: basic & checkable
 @Component({
   template: `
-    <d-data-table #datatable [checkable]="checkable" [dataSource]="basicDataSource" [type]="'striped'" [generalRowHoveredData]="true">
+    <d-data-table #datatable [checkable]="checkable" [dataSource]="basicDataSource" [type]="'striped'"
+    [checkOptions]="checkOptions" [generalRowHoveredData]="true">
       <d-column field="$index" header="#" [width]="'50px'"></d-column>
       <d-column
         *ngFor="let colOption of dataTableOptions.columns"
         [field]="colOption.field"
         [header]="colOption.header"
         [fieldType]="colOption.fieldType"
+        [order]="colOption.order"
         [width]="'150px'"
       >
       </d-column>
@@ -67,6 +72,18 @@ class TestDataTableColumnBasicComponent {
   basicDataSource: Array<SourceType> = JSON.parse(JSON.stringify(originSource.slice(0, 6)));
   dataTableOptions = dataTableOptions;
   checkable = false;
+  checkTotalData = jasmine.createSpy('call totalData function');
+
+  checkOptions: TableCheckOptions[] = [
+    {
+      label: '全选所有数据',
+      onChecked: this.checkTotalData.bind(this)
+    },
+    {
+      label: '全选当前页数据',
+      onChecked: undefined
+    }
+  ];
 }
 
 // column: checkable, sortable, filterable
@@ -74,7 +91,7 @@ class TestDataTableColumnBasicComponent {
   template: `
     <d-data-table
       [dataSource]="sortableDataSource"
-      [onlyOneColumnSort]="true"
+      [onlyOneColumnSort]="onlyOneColumnSort"
       [(multiSort)]="sortedColumn"
       (multiSortChange)="multiSortChange($event)"
       [scrollable]="true"
@@ -156,6 +173,7 @@ class TestDataTableAdvancedColumnComponent implements OnInit {
   @ViewChild(DataTableComponent) datatable: DataTableComponent;
   pagerSource = JSON.parse(JSON.stringify(originSource));
   sortableDataSource: Array<SourceType> = JSON.parse(JSON.stringify(originSource.slice(0, 6)));
+  onlyOneColumnSort = true;
   sortedColumn = [
     {
       field: 'lastName',
@@ -529,6 +547,51 @@ class TestDataTableColumnDragComponent {
   basicDataSource: Array<SourceType> = JSON.parse(JSON.stringify(originSource.slice()));
 }
 
+// expand row
+@Component({
+  template: `
+    <d-data-table
+    #dataTable
+    [dataSource]="basicDataSource"
+    [checkable]="true"
+    [showExpandToggle]="true"
+    [scrollable]="true"
+    (detialToggle)="toggleChange($event)"
+  >
+    <d-column field="$index" header="#" [width]="'50px'"></d-column>
+    <d-column field="firstName" header="First Name" [width]="'150px'"></d-column>
+    <d-column field="lastName" header="Last Name" [width]="'150px'"></d-column>
+    <d-column field="gender" header="Gender" [width]="'100px'"></d-column>
+  </d-data-table>
+  <ng-template #addSubRowContent let-rowIndex="rowIndex" let-rowItem="rowItem">
+    <div class="edit-padding-fix">
+      <div class="input-block">
+        <input class="devui-form-control" [(ngModel)]="defaultRowData.firstName" placeholder="firstName" type="text" />
+      </div>
+      <div class="input-block">
+        <input class="devui-form-control" [(ngModel)]="defaultRowData.lastName" placeholder="lastName" type="text" />
+      </div>
+    </div>
+  </ng-template>
+  `,
+})
+class TestDataTableExpandComponent implements OnInit {
+  @ViewChild('addSubRowContent', { static: true }) addSubRowContent: ElementRef;
+  basicDataSource: Array<SourceType> = JSON.parse(JSON.stringify(originSource.slice(0, 6)));
+  defaultRowData = {
+    firstName: '',
+    lastName: '',
+    gender: 'Female',
+    dob: new Date(1991, 3, 1),
+  };
+  toggleChange = jasmine.createSpy('detail content toggle change');
+  ngOnInit() {
+    this.basicDataSource[0].$expandConfig = { expand: false, expandTemplateRef: this.addSubRowContent };
+    this.basicDataSource[1]['$isDetailOpen'] = true;
+    this.basicDataSource[1].detail = 'show detail';
+  }
+}
+
 describe('data-table column', () => {
   describe('basic & checkable', () => {
     let fixture: ComponentFixture<TestDataTableColumnBasicComponent>;
@@ -628,6 +691,34 @@ describe('data-table column', () => {
         expect(tbodyRows[i].componentInstance.rowItem.$checked).toBeTruthy();
       }
     }));
+
+    it('should change column order', fakeAsync(() => {
+      fixture.detectChanges();
+      component.dataTableOptions.columns[0].order = 5;
+      fixture.detectChanges();
+      flush();
+      const thTitle = debugEl.query(By.css('table th:nth-child(5) span.title span'));
+      expect(thTitle.nativeElement.textContent).toEqual('#');
+    }));
+
+    it('should set header checkOptions work', fakeAsync(() => {
+      component.checkable = true;
+      fixture.detectChanges();
+      const dropdownElement = debugEl.query(By.css('table .devui-checkable-cell .select-options'));
+      dropdownElement.nativeElement.dispatchEvent(new MouseEvent('mouseenter', {'bubbles': false, 'cancelable': false}));
+      fixture.detectChanges();
+      tick(50); // debounce time
+      fixture.detectChanges();
+      tick(); // animation time
+      fixture.detectChanges();
+      const dropdownMenuElement = debugEl.query(By.directive(DropDownMenuDirective));
+      expect(dropdownMenuElement).toBeTruthy();
+      const items = dropdownMenuElement.nativeElement.querySelectorAll('ul.devui-dropdown-menu li');
+      items[0].dispatchEvent(new Event('click'));
+      tick();
+      fixture.detectChanges();
+      expect(component.checkTotalData).toHaveBeenCalled();
+    }));
   });
 
   describe('advanced', () => {
@@ -638,7 +729,7 @@ describe('data-table column', () => {
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [DataTableModule, FormsModule, CheckBoxModule, TooltipModule, AvatarModule, NoopAnimationsModule],
-        declarations: [TestDataTableAdvancedColumnComponent],
+        declarations: [TestDataTableAdvancedColumnComponent]
       });
     });
 
@@ -646,6 +737,20 @@ describe('data-table column', () => {
       fixture = TestBed.createComponent(TestDataTableAdvancedColumnComponent);
       debugEl = fixture.debugElement;
       component = fixture.componentInstance;
+    });
+
+    describe('hideColumn', () => {
+      it('should data-table hide columns work', () => {
+        component.hideColumn = [];
+        fixture.detectChanges();
+        let thList = debugEl.queryAll(By.css('table th'));
+        expect(thList.length).toEqual(7);
+
+        component.hideColumn = ['hidden', 'gender'];
+        fixture.detectChanges();
+        thList = debugEl.queryAll(By.css('table th'));
+        expect(thList.length).toEqual(5);
+      });
     });
 
     describe('sortable', () => {
@@ -662,9 +767,9 @@ describe('data-table column', () => {
 
         sortClickEl.nativeElement.dispatchEvent(new Event('click'));
         fixture.detectChanges();
-
         sortIcon = sortClickEl.query(By.css('.datatable-svg.sort-icon-desc'));
         expect(sortIcon).toBeTruthy();
+
         sortClickEl.nativeElement.dispatchEvent(new Event('click'));
         fixture.detectChanges();
         sortIcon = sortClickEl.query(By.css('.datatable-svg.sort-icon-asc'));
@@ -672,6 +777,22 @@ describe('data-table column', () => {
         sortIcon = sortClickEl.query(By.css('.datatable-svg.sort-icon-desc'));
         expect(sortIcon).toBeNull();
         expect(component.multiSortChange).toHaveBeenCalledTimes(2);
+
+        sortClickEl.nativeElement.dispatchEvent(new Event('click'));
+        fixture.detectChanges();
+        sortIcon = sortClickEl.query(By.css('.datatable-svg.sort-icon-asc'));
+        expect(sortIcon).toBeTruthy();
+      });
+
+      it('should sortable can be change type', () => {
+        // multi sort
+        component.onlyOneColumnSort = false;
+        fixture.detectChanges();
+        const sortClickEl = debugEl.query(By.css('.devui-table thead tr th:nth-child(3) .sort-clickable'));
+        sortClickEl.nativeElement.dispatchEvent(new Event('click'));
+        fixture.detectChanges();
+        const sortIcon = debugEl.query(By.css('.devui-table thead tr th:nth-child(4) .sort-clickable .datatable-svg.sort-icon-asc'));
+        expect(sortIcon).toBeTruthy();
       });
     });
 
@@ -862,6 +983,13 @@ describe('data-table column', () => {
         rowEl.nativeElement.dispatchEvent(new Event('click'));
         flush();
         expect(component.testRowClickEvent).not.toBeNull();
+        fixture.detectChanges();
+        component.testRowClickEvent = null;
+        // click twice
+        rowEl.nativeElement.dispatchEvent(new Event('click'));
+        rowEl.nativeElement.dispatchEvent(new Event('click'));
+        expect(component.testRowClickEvent).toBeNull();
+        flush();
       }));
 
       it('should row dblclick work', fakeAsync(() => {
@@ -881,7 +1009,7 @@ describe('data-table column', () => {
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [FormsModule, DataTableModule, I18nModule, DatepickerModule, InputNumberModule, SelectModule, NoopAnimationsModule],
-        declarations: [TestDataTableColumnEditComponent],
+        declarations: [TestDataTableColumnEditComponent]
       });
     });
 
@@ -1020,7 +1148,7 @@ describe('data-table column', () => {
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [DataTableModule],
-        declarations: [TestDataTableColumnWithChildrenComponent],
+        declarations: [TestDataTableColumnWithChildrenComponent]
       });
     });
 
@@ -1154,7 +1282,7 @@ describe('data-table column', () => {
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [DataTableModule, I18nModule, NoopAnimationsModule],
-        declarations: [TestDataTableColumnMultiHeaderComponent],
+        declarations: [TestDataTableColumnMultiHeaderComponent]
       });
     });
 
@@ -1266,7 +1394,7 @@ describe('data-table column', () => {
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [DataTableModule, NoopAnimationsModule],
-        declarations: [TestDataTableColumnDragComponent],
+        declarations: [TestDataTableColumnDragComponent]
       });
     });
 
@@ -1292,6 +1420,49 @@ describe('data-table column', () => {
       tick();
       fixture.detectChanges();
       headerDrag(fixture);
+    }));
+  });
+
+  describe('expand detail', () => {
+    let fixture: ComponentFixture<TestDataTableExpandComponent>;
+    let debugEl: DebugElement;
+    let component: TestDataTableExpandComponent;
+
+    beforeEach(() => {
+      TestBed.configureTestingModule({
+        imports: [DataTableModule, NoopAnimationsModule, FormsModule],
+        declarations: [TestDataTableExpandComponent],
+      });
+    });
+
+    beforeEach(() => {
+      fixture = TestBed.createComponent(TestDataTableExpandComponent);
+      debugEl = fixture.debugElement;
+      component = fixture.componentInstance;
+    });
+
+    it('should create correctly', () => {
+      fixture.detectChanges();
+      const detailCell = debugEl.query(By.css('table.devui-table tbody tr td.devui-detail-cell'));
+      expect(detailCell).toBeTruthy();
+    });
+
+    it('should show detail when click icon', fakeAsync(() => {
+      fixture.detectChanges();
+      const detailCell = debugEl.query(By.css('table.devui-table tbody tr td.devui-detail-cell div'));
+      detailCell.nativeElement.dispatchEvent(new Event('click'));
+      tick();
+      fixture.detectChanges();
+      expect(component.toggleChange).toHaveBeenCalled();
+      const svgIcon = detailCell.nativeElement.querySelector('svg #chevron-up');
+      expect(svgIcon).toBeTruthy();
+      // test other detail row
+      fixture.detectChanges();
+      const detailCell2 = debugEl.query(By.css('table.devui-table tbody tr:nth-child(3) td.devui-detail-cell div'));
+      detailCell2.nativeElement.dispatchEvent(new Event('click'));
+      tick();
+      fixture.detectChanges();
+      expect(component.toggleChange).toHaveBeenCalled();
     }));
   });
 });

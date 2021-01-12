@@ -1,28 +1,28 @@
+import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import {
+  AfterViewInit,
   Component,
+  ElementRef,
   EventEmitter,
   Input,
+  OnChanges,
+  OnDestroy,
   OnInit,
   Output,
-  TemplateRef,
-  SimpleChanges,
-  OnChanges,
-  AfterViewInit,
-  ViewChildren,
   QueryList,
-  ElementRef,
-  OnDestroy,
-  ViewChild
+  SimpleChanges,
+  TemplateRef,
+  ViewChild,
+  ViewChildren
 } from '@angular/core';
+import { I18nInterface, I18nService } from 'ng-devui/i18n';
+import { Subject, Subscription } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import {
   ITreeItem,
   TreeFactory,
   TreeNode
 } from './tree-factory.class';
-import { I18nService, I18nInterface } from 'ng-devui/i18n';
-import { Subscription, Subject } from 'rxjs';
-import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
-import { takeUntil, throttleTime } from 'rxjs/operators';
 @Component({
   selector: 'd-tree',
   templateUrl: './tree.component.html',
@@ -58,7 +58,6 @@ export class TreeComponent implements OnInit, OnChanges, AfterViewInit, OnDestro
   i18nCommonText: I18nInterface['common'];
   i18nSubscription: Subscription;
   treeNodes = [];
-  private mouseRightButton = 2;
   destroy$ = new Subject();
   constructor(private i18n: I18nService) {
 
@@ -101,13 +100,9 @@ export class TreeComponent implements OnInit, OnChanges, AfterViewInit, OnDestro
   ngAfterViewInit() {
   }
 
-
   contextmenuEvent(event, node) {
-    if (event.button === this.mouseRightButton) {
-      this.nodeRightClicked.emit({ node: node, event: event });
-    }
+    this.nodeRightClicked.emit({ node: node, event: event });
   }
-
 
   selectNode(event, treeNode: TreeNode) {
     if (!this.isSelectableRegion(event.target)) {

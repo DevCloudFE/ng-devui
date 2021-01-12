@@ -1,12 +1,12 @@
 import {
-  Component, OnInit, Input, Output, EventEmitter, TemplateRef, ChangeDetectorRef,
-  OnChanges, SimpleChanges, OnDestroy, ViewChild
+  ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit,
+  Output, SimpleChanges, TemplateRef, ViewChild
 } from '@angular/core';
 import { DropDownDirective } from 'ng-devui/dropdown';
-import { FilterConfig } from '../../../../data-table.model';
-import { Observable, Subscription, fromEvent, BehaviorSubject, of } from 'rxjs';
-import { map, debounceTime, switchMap } from 'rxjs/operators';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
+import { BehaviorSubject, fromEvent, Observable, of, Subscription } from 'rxjs';
+import { debounceTime, map, switchMap } from 'rxjs/operators';
+import { FilterConfig } from '../../../../data-table.model';
 import { TableThComponent } from '../th.component';
 
 @Component({
@@ -159,10 +159,10 @@ export class FilterComponent implements OnInit, OnChanges, OnDestroy {
       const tableViewElement = this.thComponent.tableViewRefElement.nativeElement.querySelector('.devui-scrollbar.scroll-view');
       if ($event) {
         document.addEventListener('scroll', this.onContainerScroll);
-        tableViewElement.addEventListener('scroll', this.onContainerScroll);
+        tableViewElement?.addEventListener('scroll', this.onContainerScroll);
       } else {
         document.removeEventListener('scroll', this.onContainerScroll);
-        tableViewElement.removeEventListener('scroll', this.onContainerScroll);
+        tableViewElement?.removeEventListener('scroll', this.onContainerScroll);
       }
     }
     this.searchText = '';

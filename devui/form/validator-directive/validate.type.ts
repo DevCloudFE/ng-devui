@@ -29,7 +29,7 @@ export interface DValidateRule {
   priority ?: number;
   isNgValidator ?: boolean;
   validateLevel?: 'error' | 'warning'; // 校验级别
-  [id: string]: boolean | number | string | RegExp | DValidatorFn | ValidatorFn; // 万能key
+  [id: string]: boolean | number | string | RegExp | DValidatorFn | ValidatorFn | undefined; // 万能key
 }
 export interface DAsyncValidateRule {
   id ?: string;
@@ -39,7 +39,7 @@ export interface DAsyncValidateRule {
   priority ?: number;
   isNgValidator ?: boolean;
   validateLevel?: 'error' | 'warning'; // 校验级别
-  [id: string]: boolean | number | string | RegExp | DAsyncValidatorFn | AsyncValidatorFn; // 万能key
+  [id: string]: boolean | number | string | RegExp | DAsyncValidatorFn | AsyncValidatorFn | undefined; // 万能key
 }
 
 export interface DValidateErrorStatus {
@@ -86,7 +86,6 @@ function isEmptyInputValue(value: any): boolean {
 function hasValidLength(value: any): boolean {
   return value != null && typeof value.length === 'number';
 }
-
 
 /* pristine: 抛出error包括pristine状态
 ** dirty: 抛出error需在dirty状态

@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, TemplateRef, OnDestroy } from '@angular/core';
-import { AccordionMenuType, AccordionMenuToggleEvent, AccordionItemClickEvent, AccordionOptions} from './accordion.type';
-import { I18nService, I18nInterface } from 'ng-devui/i18n';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, TemplateRef } from '@angular/core';
+import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { Subscription } from 'rxjs';
+import { AccordionItemClickEvent, AccordionMenuToggleEvent, AccordionMenuType, AccordionOptions} from './accordion.type';
 
 @Component({
   selector: 'd-accordion',
@@ -81,7 +81,7 @@ export class AccordionComponent implements AccordionOptions, OnChanges, OnInit, 
   private flatten(arr: Array<any>, childrenKey = 'children', includeParent = false, includeLeaf = true) {
     return arr.reduce((acc, cur) => {
       const children = cur[childrenKey];
-      if ( children === undefined) {
+      if (children === undefined) {
         if (includeLeaf) {
           acc.push(cur);
         }

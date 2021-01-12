@@ -1,7 +1,7 @@
 import { AfterViewChecked, ChangeDetectionStrategy, Component, ElementRef, EventEmitter,
-  HostBinding, Input, Output, Renderer2, OnChanges, SimpleChanges } from '@angular/core';
-import { SplitterOrientation, CollapseDirection } from './splitter.types';
+  HostBinding, Input, OnChanges, Output, Renderer2, SimpleChanges } from '@angular/core';
 import { SplitterService } from './splitter.service';
+import { CollapseDirection, SplitterOrientation } from './splitter.types';
 @Component({
   selector: 'd-splitter-pane',
   templateUrl: './splitter-pane.component.html',

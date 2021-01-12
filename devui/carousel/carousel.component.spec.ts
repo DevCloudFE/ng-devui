@@ -1,11 +1,8 @@
-import { Component, ViewChildren, ViewChild } from '@angular/core';
-import { async, ComponentFixture, TestBed, fakeAsync, tick, flush, discardPeriodicTasks, flushMicrotasks } from '@angular/core/testing';
+import { Component, ViewChild } from '@angular/core';
+import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { CarouselComponent } from './carousel.component';
 import { CarouselModule } from './carousel.module';
-import { By } from '@angular/platform-browser';
-
-
-
 @Component({
   template: `
     <section>
@@ -44,7 +41,7 @@ describe('CarouselComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [CarouselModule],
-      declarations: [ TestCarouselComponent ]
+      declarations: [ TestCarouselComponent ],
     })
     .compileComponents();
   }));

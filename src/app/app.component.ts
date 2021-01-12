@@ -1,6 +1,7 @@
-import { Component, NgZone, OnDestroy, OnInit, Renderer2, ViewEncapsulation } from '@angular/core';
-import { Router } from '@angular/router';
-import { I18nService } from 'ng-devui/i18n';
+import { Component, Inject, NgZone, OnDestroy, OnInit, Renderer2, ViewEncapsulation } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
+import { DEVUI_LANG, EN_US, I18nService, ZH_CN } from 'ng-devui/i18n';
+import { TranslateService } from '@ngx-translate/core';
 import { fromEvent, Subscription } from 'rxjs';
 import { VERSION } from '../../devui/version';
 
@@ -16,9 +17,12 @@ export class AppComponent implements OnInit, OnDestroy {
   currentLang: string;
   versionOptions = [];
   currentOption;
-  constructor(private renderer2: Renderer2, private ngZone: NgZone, private router: Router, private i18n: I18nService) {
+  constructor(private renderer2: Renderer2, private ngZone: NgZone, private router: Router, private translate: TranslateService,
+              private i18n: I18nService, @Inject(DEVUI_LANG) private appLang) {
+    translate.addLangs([ZH_CN, EN_US]);
+    translate.setDefaultLang(this.appLang ? this.appLang : ZH_CN);
     const oldHandler = this.router.errorHandler;
-    this.router.errorHandler =  (err: any) => {
+    this.router.errorHandler = (err: any) => {
       // 加载失败的时候刷新重试一次
       if (err.stack && err.stack.indexOf('Error: Loading chunk') >= 0) {
         if (localStorage.getItem('lastChunkError') !== err.stack) {
@@ -32,7 +36,26 @@ export class AppComponent implements OnInit, OnDestroy {
     };
   }
   ngOnInit(): void {
+    this.currentLang = localStorage.getItem('lang') || this.appLang;
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        const pathArray = this.router.url.split('/');
+        const langParam = pathArray[2];
+        if (!this.i18n.i18nConfig.hasOwnProperty(langParam)) {
+          this.currentLang = this.i18n.DEFAULT_LANG;
+          localStorage.setItem('lang', this.i18n.DEFAULT_LANG);
+          pathArray[2] = this.i18n.DEFAULT_LANG;
+          this.router.navigateByUrl(pathArray.join('/'));
+        } else {
+          this.currentLang = langParam;
+          document.body.setAttribute('ui-lang', langParam);
+          this.i18n.toggleLang(langParam);
+          this.translate.use(langParam);
+        }
+      }
+    });
     this.version = VERSION.full;
+    const versionArr = this.version.split('.');
     this.versionOptions = [
       { name: this.version, link: '/components/get-start', target: '_self' },
       { name: '9.3.0', link: '/9.3.0/', target: '_self' },
@@ -59,11 +82,13 @@ export class AppComponent implements OnInit, OnDestroy {
         }
       }));
     });
-    this.currentLang = localStorage.getItem('lang') || 'zh-cn';
   }
   toggleLanguage() {
-    this.currentLang === 'zh-cn' ? this.currentLang = 'en-us' : this.currentLang = 'zh-cn';
-    this.i18n.toggleLang(this.currentLang);
+    this.currentLang === ZH_CN ? this.currentLang = EN_US : this.currentLang = ZH_CN;
+    const url = this.router.url;
+    const pathArray = url.split('/');
+    pathArray[2] = this.currentLang;
+    this.router.navigateByUrl(pathArray.join('/'));
   }
   ngOnDestroy(): void {
     if (this.clickSub) {

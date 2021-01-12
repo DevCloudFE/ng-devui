@@ -1,13 +1,13 @@
 import {
-  Injectable,
   ApplicationRef,
-  Injector,
-  ElementRef,
-  ViewRef,
-  EmbeddedViewRef,
-  TemplateRef,
   ComponentFactory,
-  ComponentRef
+  ComponentRef,
+  ElementRef,
+  EmbeddedViewRef,
+  Injectable,
+  Injector,
+  TemplateRef,
+  ViewRef
 } from '@angular/core';
 
 import { DocumentRef } from 'ng-devui/window-ref';
@@ -19,7 +19,6 @@ export class OverlayContainerRef {
               private documentRef: DocumentRef,
               private _injector: Injector) {
   }
-
 
   insert(viewRef: ViewRef): ViewRef {
     this._appRef.attachView(viewRef);

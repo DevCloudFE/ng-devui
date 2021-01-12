@@ -10,7 +10,7 @@ export class FileUploader {
   public percentage = 0;
 
   constructor(public file: File,
-    public uploadOptions: IUploadOptions) {
+              public uploadOptions: IUploadOptions) {
     this.file = file;
     this.uploadOptions = uploadOptions;
     this.status = UploadStatus.preLoad;
@@ -26,7 +26,8 @@ export class FileUploader {
         authTokenHeader,
         additionalParameter,
         fileFieldName,
-        withCredentials
+        withCredentials,
+        responseType
       } = this.uploadOptions;
       const authTokenHeader_ = authTokenHeader || 'Authorization';
       const fileFieldName_ = fileFieldName || 'file';
@@ -36,6 +37,10 @@ export class FileUploader {
 
       if (withCredentials) {
         this.xhr.withCredentials = withCredentials;
+      }
+
+      if (responseType) {
+        this.xhr.responseType = responseType;
       }
 
       if (authToken) {
@@ -52,11 +57,9 @@ export class FileUploader {
         this.percentage = Math.round(e.loaded * 100 / e.total);
       };
 
-
       const formData = uploadFiles && uploadFiles.length ?
         this.oneTimeUploadFiles(fileFieldName_, additionalParameter, uploadFiles) :
         this.parallelUploadFiles(fileFieldName_, additionalParameter);
-
 
       this.xhr.send(formData);
       this.status = UploadStatus.uploading;

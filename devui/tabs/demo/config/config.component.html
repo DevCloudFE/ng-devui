@@ -11,7 +11,7 @@
     </d-tab>
   </d-tabs>
 
-  <h4 style="margin-top: 20px;">竖向排列:</h4>
+  <h4 style="margin-top: 20px">竖向排列:</h4>
   <d-tabs [(activeTab)]="tabActiveId2" type="pills" [vertical]="true">
     <d-tab *ngFor="let item of tabItems" [id]="item.id">
       <ng-template dTabTitle>
@@ -24,7 +24,7 @@
   </d-tabs>
 </section>
 <section>
-  <h4 style="margin-top: 20px;">Option tabs:</h4>
+  <h4 style="margin-top: 20px">Option tabs:</h4>
 
   <d-tabs [(activeTab)]="tabActiveId" type="options">
     <d-tab *ngFor="let item of tabItems" [id]="item.id" [disabled]="item.disabled">
@@ -36,7 +36,7 @@
       </ng-template>
     </d-tab>
   </d-tabs>
-  <h4 style="margin-top: 20px;">Option tabs with fix width 100px:</h4>
+  <h4 style="margin-top: 20px">Option tabs with fix width 100px:</h4>
 
   <d-tabs [(activeTab)]="tabActiveId2" type="options" customWidth="100px">
     <d-tab *ngFor="let item of tabItems" [id]="item.id" [disabled]="item.disabled">

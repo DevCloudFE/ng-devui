@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { DFormGroupRuleDirective, DValidateRules } from 'ng-devui/form';
 import { of } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
-import { DFormGroupRuleDirective, DValidateRules } from 'ng-devui/form';
-import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'd-form-demo-validate-cross-component',

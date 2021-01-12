@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { OperableTreeComponent, TreeNode, ITreeItem, ICheckboxInput } from 'ng-devui/tree';
-
+import { ICheckboxInput, ITreeItem, OperableTreeComponent, TreeNode } from 'ng-devui/tree';
 
 @Component({
   selector: 'd-checkable',
@@ -60,7 +59,6 @@ export class CheckableComponent implements OnInit {
       'title': '子节点5-2'
     }]
   }];
-
 
   ngOnInit() {
     setTimeout(() => this.getCheckedNote(this.operableTreeComponent), 0);

@@ -1,23 +1,23 @@
 import {
   Component,
-  Input,
-  ViewChild,
-  TemplateRef,
-  Output,
   EventEmitter,
+  Input,
   OnDestroy,
   OnInit,
+  Output,
+  TemplateRef,
+  ViewChild,
 } from '@angular/core';
 
+import { I18nInterface, I18nService } from 'ng-devui/i18n';
+import { Subscription } from 'rxjs';
+import { FileUploader } from './file-uploader.class';
 import {
   IUploadOptions,
   UploadStatus
 } from './file-uploader.types';
 import { UploadComponent } from './upload.class';
-import { FileUploader } from './file-uploader.class';
 import { UploadedFilesComponent } from './uploaded-files.component';
-import { I18nInterface, I18nService } from 'ng-devui/i18n';
-import { Subscription } from 'rxjs';
 @Component({
   selector: 'd-multiple-upload-view',
   templateUrl: './multiple-upload-view.component.html',
@@ -83,4 +83,3 @@ export class MultipleUploadViewComponent extends UploadComponent implements OnDe
     }
   }
 }
-

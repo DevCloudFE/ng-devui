@@ -1,4 +1,4 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 
 @Component({
   selector: 'd-cross-dimension',
@@ -84,7 +84,6 @@ export class CrossDimensionComponent {
       done: this.lists.listC3
     },
   };
-
 
   constructor(private cdr: ChangeDetectorRef) {}
 

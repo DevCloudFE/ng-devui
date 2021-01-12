@@ -9,7 +9,7 @@ export class DropEvent {
   dropOnItem?: boolean;
   dropOnOrigin?: boolean;
   constructor(event: any, data: any, dropSubject: Subject<any>, dropIndex?: number, dragFromIndex?: number, dropOnItem?: boolean,
-    dropOnOrigin?: boolean, batchDragData?: Array<any>) {
+              dropOnOrigin?: boolean, batchDragData?: Array<any>) {
     this.nativeEvent = event;
     this.dragData = data;
     this.dropSubject = dropSubject;

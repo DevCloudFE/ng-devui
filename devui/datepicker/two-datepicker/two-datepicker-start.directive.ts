@@ -1,7 +1,8 @@
-import { Directive, OnInit, OnDestroy, Host, HostListener, ElementRef, forwardRef, Renderer2, EventEmitter, Output } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, forwardRef, HostListener, OnDestroy, OnInit, Output, Renderer2 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { fromEvent, Subscription } from 'rxjs';
+import { debounceTime, map } from 'rxjs/operators';
 import { TwoDatePickerComponent } from './two-datepicker.component';
-import { Subscription } from 'rxjs';
 
 @Directive({
   selector: '[dTwoDatePickerStart]',
@@ -19,11 +20,12 @@ export class TwoDatePickerStartDirective implements OnInit, OnDestroy, ControlVa
   userHtml;
   private switchOriginSub: Subscription;
   private twoDateSub: Subscription;
+  private valueChangeSubscrip: Subscription;
 
   private onChange = (_: any) => null;
 
   constructor(private twoDatePicker: TwoDatePickerComponent, private renderer: Renderer2,
-   private el: ElementRef) {
+              private el: ElementRef) {
     this.twoDateSub = this.twoDatePicker.selectDateSubject.subscribe(data => {
       if (data.side === 'start') {
         if (this.el.nativeElement.tagName === 'INPUT') {
@@ -52,11 +54,23 @@ export class TwoDatePickerStartDirective implements OnInit, OnDestroy, ControlVa
 
   @HostListener('blur', ['$event'])
   onBlur($event) {
-    this.transUserInputToDatePicker();
+    if (!this.validDate(this.el.nativeElement.value)) {
+      this.resetValue();
+    }
   }
 
   ngOnInit() {
     this.userHtml = this.el.nativeElement.innerHTML;
+    this.initInputChanges();
+  }
+
+  initInputChanges(): void {
+    this.valueChangeSubscrip = fromEvent(this.el.nativeElement, 'keyup').pipe(
+      map((e: any) => e.target.value),
+      debounceTime(300)
+    ).subscribe(value => {
+      this.transUserInputToDatePicker(value);
+    });
   }
 
   registerOnChange(fn: any): void {
@@ -80,26 +94,43 @@ export class TwoDatePickerStartDirective implements OnInit, OnDestroy, ControlVa
     this.twoDatePicker.clear('start');
   }
 
-  transUserInputToDatePicker() {
+  transUserInputToDatePicker(value?: string) {
     if (!this.twoDatePicker.showTime) {
-      const value = this.el.nativeElement.value;
-      if (!value && !this.twoDatePicker.rangeStart) {
-        return;
-      }
-      if (!value) {
+      const _value = value || this.el.nativeElement.value;
+      if (!_value && !this.twoDatePicker.rangeStart || !_value) {
         this.clear();
         return;
       }
-      const valueDate = new Date(value);
-      const valueFormat = this.twoDatePicker.dateConverter.format(valueDate, this.twoDatePicker.dateFormat, this.twoDatePicker.locale);
-      if (new Date(valueFormat).getTime() === new Date(this.twoDatePicker.rangeStart).getTime()) {
-        return;
-      }
-      if (value && value === valueFormat) {
+      const valueDate = new Date(_value);
+      if (_value && this.validDate(_value)) {
         this.twoDatePicker.selectStart(valueDate);
         [this.twoDatePicker.rangeStart, this.twoDatePicker.rangeEnd] = this.twoDatePicker.selectedRange;
       }
     } else {
+      this.resetValue();
+    }
+  }
+
+  validDate(value) {
+    if (!value) {
+      return true;
+    }
+    const valueDate = new Date(value);
+    const valueFormat = valueDate && !isNaN(valueDate.getTime()) &&
+      this.twoDatePicker.dateConverter.format(valueDate, this.twoDatePicker.dateFormat, this.twoDatePicker.locale);
+    if (
+      !valueDate || value !== valueFormat ||
+      (value === valueFormat &&
+      (valueDate.getTime() < this.twoDatePicker.minDate.getTime() || valueDate.getTime() > this.twoDatePicker.maxDate.getTime()))
+    ) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  resetValue() {
+    if (this.twoDatePicker.rangeStart) {
       this.el.nativeElement.value =
        this.twoDatePicker.dateConverter.format(
          this.twoDatePicker.rangeStart,
@@ -116,5 +147,7 @@ export class TwoDatePickerStartDirective implements OnInit, OnDestroy, ControlVa
     if (this.switchOriginSub) {
       this.switchOriginSub.unsubscribe();
     }
+
+    this.valueChangeSubscrip?.unsubscribe();
   }
 }

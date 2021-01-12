@@ -1,9 +1,11 @@
+@import '../../style/theme/_font';
+
 .devui-quadrant-region {
   position: absolute;
 }
 
 .devui-quadrant-title {
-  font-size: 24px;
+  font-size: $devui-font-size-data-overview;
   line-height: 32px;
   margin: 20px;
   user-select: none;

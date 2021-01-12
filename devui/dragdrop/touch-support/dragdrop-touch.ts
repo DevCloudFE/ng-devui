@@ -57,7 +57,7 @@ export class DragDropTouch {
       }
     });
     // listen to touch events
-    if ( DragDropTouch.isTouchDevice()) {
+    if (DragDropTouch.isTouchDevice()) {
       // 能响应触摸事件
       const d = document;
       const ts = this.touchstart;
@@ -88,14 +88,14 @@ export class DragDropTouch {
     const d: Document = document;
     const w: Window = window;
     let bool;
-    if ( 'ontouchstart' in d  // normal mobile device
+    if ('ontouchstart' in d  // normal mobile device
       || 'ontouchstart' in w
       || navigator.maxTouchPoints > 0
       || navigator.msMaxTouchPoints > 0
-      || window['DocumentTouch'] && document instanceof window['DocumentTouch'] ) {
+      || window['DocumentTouch'] && document instanceof window['DocumentTouch']) {
       bool = true;
     } else {
-      const fakeBody = document.createElement( 'fakebody' );
+      const fakeBody = document.createElement('fakebody');
       fakeBody.innerHTML += `
       <style>
         @media (touch-enabled),(-webkit-touch-enabled),(-moz-touch-enabled),(-o-touch-enabled){
@@ -105,10 +105,10 @@ export class DragDropTouch {
           }
         }
       </style>`;
-      document.documentElement.appendChild( fakeBody );
-      const touchTestNode = document.createElement( 'div' );
+      document.documentElement.appendChild(fakeBody);
+      const touchTestNode = document.createElement('div');
       touchTestNode.id = 'touch_test';
-      fakeBody.appendChild( touchTestNode );
+      fakeBody.appendChild(touchTestNode);
       bool = touchTestNode.offsetTop === 42;
       fakeBody.parentElement.removeChild(fakeBody);
     }
@@ -336,20 +336,20 @@ export class DragDropTouch {
       this.destroyImage();
     }
     // create drag image from custom element or drag source
-    const src = this.imgCustom || this.dragSource;
-    this.img = src.cloneNode(true);
-    this.copyStyle(src, this.img);
-    this.img.style.top = this.img.style.left = '-9999px';
+     const src = this.imgCustom || this.dragSource;
+     this.img = src.cloneNode(true);
+     this.copyStyle(src, this.img);
+     this.img.style.top = this.img.style.left = '-9999px';
     // if creating from drag source, apply offset and opacity
-    if (!this.imgCustom) {
+     if (!this.imgCustom) {
         const rc = src.getBoundingClientRect();
         const pt = this.getPoint(e);
         this.imgOffset = { x: pt.x - rc.left, y: pt.y - rc.top };
         this.img.style.opacity = DragDropTouch.OPACITY.toString();
     }
     // add image to document
-    this.moveImage(e);
-    document.body.appendChild(this.img);
+     this.moveImage(e);
+     document.body.appendChild(this.img);
   }
   // dispose of drag image element
   destroyImage() {
@@ -396,7 +396,7 @@ export class DragDropTouch {
     }
     // copy canvas content for nested canvas element
     const srcCanvases = src.querySelectorAll('canvas');
-    if (srcCanvases.length > 0 ) {
+    if (srcCanvases.length > 0) {
       const dstCanvases = dst.querySelectorAll('canvas');
       for (let i = 0; i < dstCanvases.length; i++) {
         const cSrc = srcCanvases[i];

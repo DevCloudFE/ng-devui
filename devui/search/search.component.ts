@@ -1,22 +1,22 @@
-import { fromEvent, Subscription } from 'rxjs';
 import {
-  ChangeDetectionStrategy,
-  Component,
-  OnInit,
-  OnDestroy,
-  Input,
-  Output,
-  forwardRef,
   AfterViewInit,
-  EventEmitter,
-  ViewChild,
-  ElementRef,
-  Renderer2,
+  ChangeDetectionStrategy,
   ChangeDetectorRef,
+  Component,
+  ElementRef,
+  EventEmitter,
+  forwardRef,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+  Renderer2,
+  ViewChild
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { map, debounceTime } from 'rxjs/operators';
-import { I18nService, I18nInterface } from 'ng-devui/i18n';
+import { I18nInterface, I18nService } from 'ng-devui/i18n';
+import { fromEvent, Subscription } from 'rxjs';
+import { debounceTime, map } from 'rxjs/operators';
 
 @Component({
   selector: 'd-search',
@@ -49,6 +49,7 @@ export class SearchComponent implements ControlValueAccessor, OnInit, OnDestroy,
   @Input() disabled = false;
   @Input() cssClass: string;
   @Input() iconPosition = 'right';
+  @Input() noBorder = false;
   @Input() autoFocus = false;
   @Output() searchFn = new EventEmitter<string>();
   @ViewChild('filterInput', { static: true }) filterInputElement: ElementRef;

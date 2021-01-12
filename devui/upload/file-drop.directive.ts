@@ -1,5 +1,4 @@
-import { Directive, EventEmitter, ElementRef, HostListener, Input, Output } from '@angular/core';
-
+import { Directive, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
 
 @Directive({
   selector: '[d-file-drop]' // tslint:disable-line
@@ -43,7 +42,6 @@ export class FileDropDirective {
       return;
     }
 
-    transfer.dropEffect = 'move';
     this._preventAndStop(event);
     this.fileOver.emit(true);
   }

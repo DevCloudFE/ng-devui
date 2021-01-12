@@ -1,12 +1,12 @@
-import { of } from 'rxjs';
 import { Component, DebugElement } from '@angular/core';
+import { async, ComponentFixture, fakeAsync, flush, TestBed, tick } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { ComponentFixture, TestBed, async, fakeAsync, flush, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { RadioModule } from './radio.module';
+import { of } from 'rxjs';
 import { DomHelper } from '../utils/testing/dom-helper';
 import { RadioGroupComponent } from './radio-group.component';
 import { RadioComponent } from './radio.component';
+import { RadioModule } from './radio.module';
 
 @Component({
   template: `

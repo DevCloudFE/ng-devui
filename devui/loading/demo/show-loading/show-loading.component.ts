@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 
-
-
 @Component({
   selector: 'd-show-loading',
   templateUrl: './show-loading.component.html',
@@ -17,7 +15,6 @@ export class ShowLoadingComponent {
   constructor() {
 
   }
-
 
   controlLoading() {
     this.showLoading = true;

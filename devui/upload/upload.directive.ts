@@ -1,11 +1,11 @@
-import { Directive, HostListener, Input, Output, EventEmitter, ElementRef, OnDestroy } from '@angular/core';
-import { UploadComponent } from './upload.class';
-import { FileUploader } from './file-uploader.class';
-import { IUploadOptions, IFileOptions } from './file-uploader.types';
-import { SelectFiles } from './select-files.utils';
-import { map, debounceTime, last } from 'rxjs/operators';
-import { Subscription } from 'rxjs';
+import { Directive, ElementRef, EventEmitter, HostListener, Input, OnDestroy, Output } from '@angular/core';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
+import { Subscription } from 'rxjs';
+import { debounceTime, last, map } from 'rxjs/operators';
+import { FileUploader } from './file-uploader.class';
+import { IFileOptions, IUploadOptions } from './file-uploader.types';
+import { SelectFiles } from './select-files.utils';
+import { UploadComponent } from './upload.class';
 @Directive({
   selector: '[dUpload]',
   exportAs: 'dUpload'
@@ -126,7 +126,6 @@ export class UploadDirective extends UploadComponent implements OnDestroy {
       return;
     }
 
-    transfer.dropEffect = 'move';
     this._preventAndStop(event);
     this.fileOver.emit(true);
   }

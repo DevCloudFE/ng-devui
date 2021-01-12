@@ -1,17 +1,17 @@
 import {NgModule} from '@angular/core';
 
-import { MultipleUploadViewComponent } from './multiple-upload-view.component';
 import { CommonModule } from '@angular/common';
+import { ButtonModule } from 'ng-devui/button';
+import { ProgressModule } from 'ng-devui/progress';
+import { ToastModule } from 'ng-devui/toast';
+import { FileDropDirective } from './file-drop.directive';
+import { MultipleUploadViewComponent } from './multiple-upload-view.component';
+import { MultipleUploadComponent } from './multiple-upload.component';
+import { SelectFiles } from './select-files.utils';
 import { SingleUploadViewComponent } from './single-upload-view.component';
 import { SingleUploadComponent } from './single-upload.component';
-import { MultipleUploadComponent } from './multiple-upload.component';
-import { UploadedFilesComponent } from './uploaded-files.component';
-import { SelectFiles } from './select-files.utils';
-import { FileDropDirective } from './file-drop.directive';
 import { UploadDirective } from './upload.directive';
-import { ButtonModule } from 'ng-devui/button';
-import { ToastModule } from 'ng-devui/toast';
-import { ProgressModule } from 'ng-devui/progress';
+import { UploadedFilesComponent } from './uploaded-files.component';
 @NgModule({
   imports: [
     CommonModule,

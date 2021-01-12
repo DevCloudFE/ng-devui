@@ -1,4 +1,4 @@
-import { Input, Component, OnInit, ElementRef } from '@angular/core';
+import { Component, ElementRef, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'd-modal-alert',

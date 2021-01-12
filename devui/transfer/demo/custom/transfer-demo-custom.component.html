@@ -1,5 +1,5 @@
 <section>
-  <div style="width: 700px;">
+  <div style="width: 700px">
     <d-transfer
       [customSourceCheckedLen]="sourceCheckedLen"
       [customTargetCheckedLen]="targetCheckedLen"
@@ -8,11 +8,9 @@
       [titles]="{ source: '源标题', target: '目标标题' }"
     >
       <ng-template #sourceTemplate>
-        <div class="title">
-          自定义头部
-        </div>
+        <div class="title">自定义头部</div>
         <div class="line"></div>
-        <div class="content" style="height: 320px; overflow: auto;">
+        <div class="content" style="height: 320px; overflow: auto">
           <d-data-table
             #sourceTable
             [dataSource]="basicDataSource"
@@ -36,11 +34,9 @@
         </div>
       </ng-template>
       <ng-template #targetTemplate>
-        <div class="title">
-          自定义头部
-        </div>
+        <div class="title">自定义头部</div>
         <div class="line"></div>
-        <div class="content" style="height: 320px; overflow: auto;">
+        <div class="content" style="height: 320px; overflow: auto">
           <d-data-table
             #targetTable
             [dataSource]="basicTargetSource"

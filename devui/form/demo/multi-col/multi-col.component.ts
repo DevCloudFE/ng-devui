@@ -22,7 +22,6 @@ export class MultiColComponent implements OnInit {
   multipleSelectDemoConfig3: any;
   singleDateDemoConfig2: any;
 
-
   labelList = [{
     id: 1,
     label: '选项1'
@@ -50,7 +49,6 @@ export class MultiColComponent implements OnInit {
     id: 3,
     label: '选项3'
   }];
-
 
   radioOptions = [{
     id: 1,
@@ -105,5 +103,3 @@ export class MultiColComponent implements OnInit {
     };
   }
 }
-
-

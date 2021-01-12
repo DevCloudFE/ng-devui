@@ -1,5 +1,5 @@
-import { Component, Input, Output, EventEmitter, TemplateRef, ContentChild } from '@angular/core';
-
+import { Component, ContentChild, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
+import { ITagMode } from './tag.component';
 @Component({
   selector: 'd-tags',
   templateUrl: './tags.component.html',
@@ -7,18 +7,22 @@ import { Component, Input, Output, EventEmitter, TemplateRef, ContentChild } fro
   exportAs: 'Tags',
   preserveWhitespaces: false,
 })
-
 export class TagsComponent {
   /**
-  * 【必选】记录输入的标签
-  */
+   * 【必选】记录输入的标签
+   */
   @Input() tags = [];
   /**
    * 【可选】使用的属性名
    */
   @Input() displayProperty = '';
 
+  /**
+   * @deprecated
+   */
   @Input() deletable = false;
+
+  @Input() mode: ITagMode = 'default';
 
   @Input() titleProperty = '';
 
@@ -31,5 +35,4 @@ export class TagsComponent {
   removeTag($event, tag, index) {
     this.tagDelete.emit({ tag: tag, index: index, event: $event });
   }
-
 }

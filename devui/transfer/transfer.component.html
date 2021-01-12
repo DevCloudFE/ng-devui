@@ -18,7 +18,7 @@
         <div class="content" [class.disabled]="disabled">
           <div class="search" *ngIf="isSearch">
             <d-search
-              style="width: 100%;"
+              style="width: 100%"
               [placeholder]="i18nCommonText?.searchPlaceholder"
               [size]="'sm'"
               [(ngModel)]="sourceSearchText"
@@ -75,7 +75,7 @@
         </div>
       </ng-container>
       <ng-container *ngIf="sourceCustomViewTemplate">
-        <ng-template [ngTemplateOutlet]="sourceCustomViewTemplate" [ngTemplateOutletContext]="{$implicit: this}"></ng-template>
+        <ng-template [ngTemplateOutlet]="sourceCustomViewTemplate" [ngTemplateOutletContext]="{ $implicit: this }"></ng-template>
       </ng-container>
     </div>
   </div>
@@ -134,7 +134,7 @@
         </g>
       </svg>
     </div>
-    <div class="transfer-op" style="margin-top: 10px;">
+    <div class="transfer-op" style="margin-top: 10px">
       <svg
         width="36px"
         *ngIf="!targetCanTransfer"
@@ -208,7 +208,7 @@
         <div class="content" [class.disabled]="disabled">
           <div class="search" *ngIf="isSearch" [class.disabled]="disabled">
             <d-search
-              style="width: 100%;"
+              style="width: 100%"
               [placeholder]="i18nCommonText?.searchPlaceholder"
               [size]="'sm'"
               [(ngModel)]="targetSearchText"
@@ -264,7 +264,7 @@
         </div>
       </ng-container>
       <ng-container *ngIf="targetCustomViewTemplate">
-        <ng-template [ngTemplateOutlet]="targetCustomViewTemplate" [ngTemplateOutletContext]="{$implicit: this}"></ng-template>
+        <ng-template [ngTemplateOutlet]="targetCustomViewTemplate" [ngTemplateOutletContext]="{ $implicit: this }"></ng-template>
       </ng-container>
     </div>
   </div>

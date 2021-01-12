@@ -1,15 +1,12 @@
 // tslint:disable: max-line-length
-import { ComponentFixture, TestBed, async, fakeAsync, tick } from '@angular/core/testing';
-import { DebugElement, Component, ViewChild, TemplateRef, ElementRef } from '@angular/core';
+import { Component, DebugElement, ElementRef, TemplateRef, ViewChild } from '@angular/core';
+import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
+import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-
 import { DomHelper } from '../utils/testing/dom-helper';
 import * as EventHelper from '../utils/testing/event-helper';
-
 import { DatepickerModule } from './datepicker.module';
-import { By } from '@angular/platform-browser';
-import { DateRangePickerComponent } from '.';
 
 @Component({
   template: `
@@ -102,7 +99,6 @@ class TestDateRangePickerOriginComponent {
   template: `
     <d-date-range-picker
       [dateConfig]="dateConfig"
-      [dateFormat]="dateFormat"
       [selectedRange]="selectedRange"
       [customViewTemplate]="customViewTemplate"
     ></d-date-range-picker>
@@ -114,7 +110,6 @@ class TestDateRangePickerOriginComponent {
 })
 class TestDateRangePickerCmpComponent {
   dateConfig;
-  dateFormat;
   selectedRange;
   customViewTemplate;
   reason;
@@ -134,8 +129,7 @@ describe('dateRangePicker', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [DatepickerModule, NoopAnimationsModule, FormsModule],
-      declarations: [TestDateRangePickerComponent],
-      providers: [],
+      declarations: [TestDateRangePickerComponent]
     }).compileComponents();
   }));
 
@@ -286,8 +280,7 @@ describe('dateRangePickerOrigin', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [DatepickerModule, NoopAnimationsModule, FormsModule],
-      declarations: [TestDateRangePickerOriginComponent],
-      providers: [],
+      declarations: [TestDateRangePickerOriginComponent]
     }).compileComponents();
   }));
 
@@ -332,8 +325,7 @@ describe('dateRangePickerComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [DatepickerModule, NoopAnimationsModule, FormsModule],
-      declarations: [TestDateRangePickerCmpComponent],
-      providers: [],
+      declarations: [TestDateRangePickerCmpComponent]
     }).compileComponents();
   }));
 
@@ -351,7 +343,6 @@ describe('dateRangePickerComponent', () => {
       component.selectedRange = [new Date(), new Date()];
       fixture.detectChanges();
       expect(debugEl.queryAll(By.css('.active.devui-in-month-day')).length).toBe(1);
-
 
     }));
 
@@ -572,7 +563,7 @@ function testNgModelAndYearMonth(fixture, wrapperEle, component) {
   expect(component.dateRange).toEqual(
     [
       new Date(new Date().getFullYear(), new Date().getMonth(), leftCurrentDay),
-      new Date(new Date().getFullYear(), new Date().getMonth() + 1, rightCurrentDay)
+      new Date(new Date().getFullYear(), new Date().getMonth() + 1, rightCurrentDay, 23, 59, 59)
     ]
   );
   closeDatePicker(fixture);
@@ -596,7 +587,7 @@ function testNgModelAndYearMonth(fixture, wrapperEle, component) {
   closeDatePicker(fixture);
 
   component.inputEle.nativeElement.value = `${strDate(0, 0, 0, '05')}${component.splitter}${strDate(0, 1, 0, '05')}`;
-  tickEvent(component.inputEle.nativeElement, new Event('input'), fixture, 1000);
+  tickEvent(component.inputEle.nativeElement, new KeyboardEvent('keyup', {key: 'Enter'}), fixture, 1000);
   tickEvent(component.inputEle.nativeElement, new Event('blur'), fixture, 1000);
   openDatePicker(fixture);
   leftDayListEle = wrapperEle.querySelectorAll('tbody')[0];

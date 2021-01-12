@@ -1,3 +1,4 @@
+import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 import {
   ChangeDetectorRef,
   ComponentFactoryResolver,
@@ -6,26 +7,25 @@ import {
   ElementRef,
   EventEmitter,
   forwardRef,
+  HostBinding,
   HostListener,
   Injector,
   Input,
+  OnChanges,
   OnDestroy,
   OnInit,
   Output,
+  Renderer2,
+  SimpleChanges,
   TemplateRef,
   ViewContainerRef,
-  HostBinding,
-  SimpleChanges,
-  OnChanges,
-  Renderer2,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { fromEvent, Observable, Subscription, of } from 'rxjs';
-import { map, filter, debounceTime, switchMap, tap } from 'rxjs/operators';
 import { PositionService } from 'ng-devui/position';
-import { AutoCompletePopupComponent } from './auto-complete-popup.component';
+import { fromEvent, Observable, of, Subscription } from 'rxjs';
+import { debounceTime, filter, map, switchMap, tap } from 'rxjs/operators';
 import { AutoCompleteConfig } from './auto-complete-config';
-import { CdkOverlayOrigin } from '@angular/cdk/overlay';
+import { AutoCompletePopupComponent } from './auto-complete-popup.component';
 
 @Directive({
   selector: '[dAutoComplete]',

@@ -1,0 +1,30 @@
+<div>
+  <h4>单选搜索</h4>
+  <d-cascader
+    [options]="options"
+    [placeholder]="'请选择'"
+    [(ngModel)]="value1"
+    (ngModelChange)="onChanges($event)"
+    [trigger]="'click'"
+    [width]="300"
+    [dropdownWidth]="200"
+    [allowClear]="true"
+    [allowSearch]="true"
+  >
+  </d-cascader>
+
+  <h4>多选搜索</h4>
+  <d-cascader
+    [options]="options"
+    [placeholder]="'请选择'"
+    [(ngModel)]="value2"
+    (ngModelChange)="onChanges($event)"
+    [trigger]="'click'"
+    [width]="300"
+    [dropdownWidth]="200"
+    [multiple]="true"
+    [allowClear]="true"
+    [allowSearch]="true"
+  >
+  </d-cascader>
+</div>

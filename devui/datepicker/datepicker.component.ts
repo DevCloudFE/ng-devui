@@ -1,27 +1,26 @@
 import {
+  ChangeDetectorRef,
   Component,
-  OnInit,
+  ElementRef,
+  EventEmitter,
+  forwardRef,
+  HostListener,
+  Input,
   OnChanges,
   OnDestroy,
-  Input,
+  OnInit,
   Output,
-  forwardRef,
-  ElementRef,
   Renderer2,
-  EventEmitter,
-  ChangeDetectorRef,
-  HostListener,
-  TemplateRef,
-  SimpleChanges
+  SimpleChanges,
+  TemplateRef
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-
-import { DatePickerConfigService as DatePickerConfig } from './date-picker.config.service';
-import { DateConverter } from 'ng-devui/utils';
-import { SelectDateChangeEventArgs, SelectDateChangeReason } from './date-change-event-args.model';
-import { DefaultDateConverter, unshiftString } from 'ng-devui/utils';
-import { I18nService, I18nInterface } from 'ng-devui/i18n';
+import { I18nInterface, I18nService } from 'ng-devui/i18n';
+import { DateConverter, DefaultDateConverter, unshiftString } from 'ng-devui/utils';
 import { Subscription } from 'rxjs';
+import { SelectDateChangeEventArgs, SelectDateChangeReason } from './date-change-event-args.model';
+import { DatePickerConfigService as DatePickerConfig } from './date-picker.config.service';
+
 @Component({
   selector: 'd-datepicker',
   templateUrl: './datepicker.component.html',
@@ -46,7 +45,6 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
   @Input() disabled = false;
   @Input() customViewTemplate: TemplateRef<any>;
   @Input() selectedDate: Date;
-  @Output() cmpClicking = new EventEmitter<boolean>();
   yearNumber = 12;
   _yearNumber = 12;
   _dateConfig: any;
@@ -69,7 +67,6 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
   i18nLocale: I18nInterface['locale'];
   i18nCommonText: I18nInterface['common'];
   i18nSubscription: Subscription;
-  isClickingCmp = false;
 
   protected onChange = (_: any) => null;
   protected onTouched = () => null;
@@ -108,18 +105,6 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
     if (changes && changes['selectedDate'] && changes['selectedDate'].currentValue) {
       this.writeValue(this.selectedDate);
     }
-  }
-
-  @HostListener('document:mousedown', ['$event'])
-  onMouseDown($event) {
-    this.isClickingCmp = this.elementRef.nativeElement.contains($event.target);
-    this.cmpClicking.emit(this.isClickingCmp);
-  }
-
-  @HostListener('document:mouseup', ['$event'])
-  onMouseUp($event) {
-    this.isClickingCmp = false;
-    this.cmpClicking.emit(this.isClickingCmp);
   }
 
   @HostListener('document:click', ['$event'])
@@ -454,6 +439,9 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
   }
 
   isDisabledDay(date) {
+    if (!date) {
+      return false;
+    }
     const minDate = new Date(this.minDate.getFullYear(), this.minDate.getMonth(), this.minDate.getDate());
     const maxDate = new Date(this.maxDate.getFullYear(), this.maxDate.getMonth(), this.maxDate.getDate(), 23, 59, 59);
     const dis = date.getTime() < minDate.getTime();
@@ -613,6 +601,7 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
 
   clearAll = (reason?: SelectDateChangeReason) => {
     this.writeValue(null);
+    this.selectedDate = null;
     const currentReason = typeof reason === 'number' ? reason : SelectDateChangeReason.custom;
     const dateObj = {
       reason: currentReason,

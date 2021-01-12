@@ -1,0 +1,90 @@
+@import '../style/theme/color';
+@import '../style/theme/shadow';
+
+.devui-dropdown-overlay {
+  border: 1px solid $devui-connected-overlay-line;
+  box-shadow: $devui-shadow-length-connected-overlay $devui-shadow;
+}
+
+.devui-dropdown-menu-cdk {
+  position: static;
+  display: block;
+  width: 100%;
+
+  &.devui-dropdown-cdk-top {
+    margin-bottom: -1px;
+  }
+
+  &.devui-dropdown-cdk-bottom {
+    margin-top: -1px;
+  }
+}
+
+.devui-time-picker-wrapper {
+  width: 100%;
+  min-width: 184px; // 60px宽度+1px外边框*2+1px内边框*2
+  background-color: $devui-connected-overlay-bg;
+}
+
+.devui-time-picker {
+  display: flex;
+  height: 248px; // 24px高度*8+8px间距*7+1px底边框
+  overflow: hidden;
+  border-bottom: 1px solid $devui-dividing-line;
+
+  .devui-time-list {
+    flex: 1;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+
+    &:hover {
+      overflow-y: scroll;
+      overflow-y: overlay;
+    }
+
+    &:not(:last-child) {
+      border-right: 1px solid $devui-dividing-line;
+    }
+
+    .devui-time-item {
+      width: 100%;
+      height: 24px;
+      line-height: 24px;
+      text-align: center;
+      cursor: pointer;
+
+      &:hover {
+        color: $devui-list-item-hover-text;
+        background-color: $devui-list-item-hover-bg;
+      }
+
+      &.active {
+        color: $devui-list-item-active-text;
+        background-color: $devui-list-item-active-bg;
+      }
+
+      &.disabled {
+        color: $devui-disabled-text;
+        background-color: $devui-disabled-bg;
+      }
+
+      &:not(:last-child) {
+        margin-bottom: 8px;
+      }
+
+      &:last-child {
+        margin-bottom: 224px; // 24px高度*7+8px间距*7
+      }
+    }
+  }
+}
+
+.devui-time-footer {
+  padding: 8px 16px;
+  overflow: hidden;
+
+  .devui-btn-wrapper {
+    float: right;
+  }
+}

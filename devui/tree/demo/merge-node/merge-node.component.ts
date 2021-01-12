@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { TreeNode, TreeComponent } from 'ng-devui/tree';
+import { TreeComponent, TreeNode } from 'ng-devui/tree';
 
 @Component({
   selector: 'd-merge-node',
@@ -83,8 +83,6 @@ export class MergeNodeComponent implements AfterViewInit {
       ]
     }
   ];
-
-
 
   constructor() { }
 

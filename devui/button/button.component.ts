@@ -1,5 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef} from '@angular/core';
-import { EventEmitter, Input, Output, ViewChild, HostListener } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostListener, Input, Output, ViewChild } from '@angular/core';
 
 export type IButtonType = 'button' | 'submit' | 'reset';
 export type IButtonStyle = 'common' | 'primary' | 'text' | 'text-dark' | 'danger';

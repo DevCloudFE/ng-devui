@@ -1,8 +1,8 @@
-import { Component, ViewEncapsulation, HostBinding } from '@angular/core';
+import { Component, HostBinding, ViewEncapsulation } from '@angular/core';
 import { AccordionBaseComponent } from './accordion-base-component.class';
-import { AccordionBaseMenu, AccordionMenuItem } from './accordion.type';
 import { AccordionListComponent } from './accordion-list.component';
 import { AccordionComponent } from './accordion.component';
+import { AccordionBaseMenu, AccordionMenuItem } from './accordion.type';
 
 @Component({
   selector: 'd-accordion-menu',

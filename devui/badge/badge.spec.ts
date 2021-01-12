@@ -1,9 +1,8 @@
 import { Component, DebugElement } from '@angular/core';
-import { By } from '@angular/platform-browser';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { BadgeComponent } from './badge.component';
+import { By } from '@angular/platform-browser';
 import { BadgeModule } from 'ng-devui/badge/badge.module';
-
+import { BadgeComponent } from './badge.component';
 @Component({
     template: `
         <d-badge [count]="count" [status]="status" [badgePos]="badgePos" [showDot]="showDot" [maxCount]="maxCount">
@@ -37,7 +36,7 @@ describe('badge', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [BadgeModule],
-            declarations: [HasContentBadgeComponent, NoContentBadgeComponent]
+            declarations: [HasContentBadgeComponent, NoContentBadgeComponent],
         });
     });
 

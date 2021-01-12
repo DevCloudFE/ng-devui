@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, Component, Input, ContentChildren, QueryList, HostBinding,
-  OnChanges, AfterContentInit, SimpleChanges, ElementRef, OnDestroy, ChangeDetectorRef } from '@angular/core';
-import { SplitterPaneComponent } from './splitter-pane.component';
-import { SplitterOrientation } from './splitter.types';
-import { SplitterService } from './splitter.service';
+import { AfterContentInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, ElementRef,
+  HostBinding, Input, OnChanges, OnDestroy, QueryList, SimpleChanges } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { SplitterPaneComponent } from './splitter-pane.component';
+import { SplitterService } from './splitter.service';
+import { SplitterOrientation } from './splitter.types';
 @Component({
   selector: 'd-splitter',
   exportAs: 'dSplitter',

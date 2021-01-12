@@ -1,3 +1,5 @@
+export const curYear = new Date().getFullYear();
+
 export interface SourceType {
   id?: string;
   title?: string;
@@ -23,36 +25,36 @@ export const basicData = [
   {
     id: '1',
     title: 'title1',
-    startDate: new Date(2020, 4, 5),
-    endDate: new Date(2020, 4, 10),
+    startDate: new Date(curYear, 4, 5),
+    endDate: new Date(curYear, 4, 10),
     progressRate: 30
   },
   {
     id: '2',
     title: 'title2',
-    startDate: new Date(2020, 4, 6),
-    endDate: new Date(2020, 4, 9),
+    startDate: new Date(curYear, 4, 6),
+    endDate: new Date(curYear, 4, 9),
     progressRate: 30
   },
   {
     id: '3',
     title: 'title3',
-    startDate: new Date(2020, 4, 10),
-    endDate: new Date(2020, 4, 12),
+    startDate: new Date(curYear, 4, 10),
+    endDate: new Date(curYear, 4, 12),
     progressRate: 30
   },
   {
     id: '4',
     title: 'title4',
-    startDate: new Date(2020, 4, 7),
-    endDate: new Date(2020, 4, 10),
+    startDate: new Date(curYear, 4, 7),
+    endDate: new Date(curYear, 4, 10),
     progressRate: 30
   },
   {
     id: '5',
     title: 'title5',
-    startDate: new Date(2020, 4, 8),
-    endDate: new Date(2020, 4, 12),
+    startDate: new Date(curYear, 4, 8),
+    endDate: new Date(curYear, 4, 12),
     progressRate: 30
   }
 ];
@@ -63,8 +65,8 @@ export const treeDataSource: SourceType[] = [
       title: 'table title0',
       lastName: 'Mark',
       status: 'done',
-      startDate: new Date(2020, 4, 5),
-      endDate: new Date(2020, 4, 10),
+      startDate: new Date(curYear, 4, 5),
+      endDate: new Date(curYear, 4, 10),
       ganttType: 'parentProgress',
       $isChildTableOpen: true,
       progressRate: 30,
@@ -75,8 +77,8 @@ export const treeDataSource: SourceType[] = [
             title: 'table title01',
             lastName: 'Mark',
             status: 'done',
-            startDate: new Date(2020, 4, 5),
-            endDate: new Date(2020, 4, 10),
+            startDate: new Date(curYear, 4, 5),
+            endDate: new Date(curYear, 4, 10),
             ganttType: 'progress',
             progressRate: 30,
             $isChildTableOpen: true
@@ -88,8 +90,8 @@ export const treeDataSource: SourceType[] = [
       title: 'table title1',
       lastName: 'Mark',
       status: 'done',
-      startDate: new Date(2020, 4, 4),
-      endDate: new Date(2020, 4, 8),
+      startDate: new Date(curYear, 4, 4),
+      endDate: new Date(curYear, 4, 8),
       ganttType: 'progress',
   },
   {
@@ -97,8 +99,8 @@ export const treeDataSource: SourceType[] = [
       title: 'table title2',
       lastName: 'Mark',
       status: 'done',
-      startDate: new Date(2020, 4, 6),
-      endDate: new Date(2020, 4, 9),
+      startDate: new Date(curYear, 4, 6),
+      endDate: new Date(curYear, 4, 9),
       ganttType: 'progress',
   },
   {
@@ -107,8 +109,8 @@ export const treeDataSource: SourceType[] = [
       lastName: 'Mark',
       status: 'done',
       detail: '这是一个行详情',
-      startDate: new Date(2020, 4, 7),
-      endDate: new Date(2020, 4, 10),
+      startDate: new Date(curYear, 4, 7),
+      endDate: new Date(curYear, 4, 10),
       ganttType: 'progress',
   },
   {
@@ -117,8 +119,8 @@ export const treeDataSource: SourceType[] = [
     ganttType: 'milestone',
     lastName: 'Mark',
     status: 'done',
-    startDate: new Date(2020, 4, 10),
-    endDate: new Date(2020, 4, 10),
+    startDate: new Date(curYear, 4, 10),
+    endDate: new Date(curYear, 4, 10),
   },
   {
       id: '10',
@@ -126,7 +128,7 @@ export const treeDataSource: SourceType[] = [
       lastName: 'Mark',
       status: 'done',
       ganttType: 'progress',
-      startDate: new Date(2020, 5, 1),
-      endDate: new Date(2020, 5, 3),
+      startDate: new Date(curYear, 5, 1),
+      endDate: new Date(curYear, 5, 3),
   }
 ];

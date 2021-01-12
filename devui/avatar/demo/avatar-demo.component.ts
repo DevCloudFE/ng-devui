@@ -1,35 +1,59 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
+import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'd-avatar-demo',
-  templateUrl: './avatar-demo.component.html'
+  templateUrl: './avatar-demo.component.html',
 })
-
-export class AvatarDemoComponent  {
+export class AvatarDemoComponent implements OnInit, OnDestroy {
   basicSource: Array<DevuiSourceData> = [
-    {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./basic/basic.component.html')},
-    {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./basic/basic.component.ts')},
-    {title: 'SCSS', language: 'css', code:  require('!!raw-loader!./basic/basic.component.css')}
+    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./basic/basic.component.html') },
+    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/basic.component.ts') },
+    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./basic/basic.component.css') },
   ];
   specialSource: Array<DevuiSourceData> = [
-    {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./special/special.component.html')},
-    {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./special/special.component.ts')},
-    {title: 'SCSS', language: 'css', code:  require('!!raw-loader!./special/special.component.css')}
+    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./special/special.component.html') },
+    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./special/special.component.ts') },
+    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./special/special.component.css') },
   ];
   configSource: Array<DevuiSourceData> = [
-    {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./config/config.component.html')},
-    {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./config/config.component.ts')},
-    {title: 'SCSS', language: 'css', code:  require('!!raw-loader!./config/config.component.css')}
+    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./config/config.component.html') },
+    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./config/config.component.ts') },
+    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./config/config.component.css') },
   ];
 
-  navItems = [
-    { dAnchorLink: 'basic-rules', value: '头像显示的基本规则'},
-    { dAnchorLink: 'basic-configuration', value: '头像的基础配置'},
-    { dAnchorLink: 'special-display', value: '头像的特殊显示'}
-  ];
+  navItems = [];
+  subs: Subscription = new Subscription();
+  constructor(private translate: TranslateService) {}
 
-  constructor() {
+  ngOnInit() {
+    this.subs.add(
+      this.translate.get('components.avatar.anchorLinkValues').subscribe((res) => {
+        this.setNavValues(res);
+      })
+    );
+
+    this.subs.add(
+      this.translate.onLangChange.subscribe((event: TranslationChangeEvent) => {
+        const values = this.translate.instant('components.avatar.anchorLinkValues');
+        this.setNavValues(values);
+      })
+    );
   }
 
+  setNavValues(values) {
+    this.navItems = [
+      { dAnchorLink: 'basic-rules', value: values['basic-rules'] },
+      { dAnchorLink: 'basic-configuration', value: values['basic-configuration'] },
+      { dAnchorLink: 'special-display', value: values['special-display'] },
+    ];
+  }
+
+  ngOnDestroy() {
+    if (this.subs) {
+      this.subs.unsubscribe();
+    }
+  }
 }

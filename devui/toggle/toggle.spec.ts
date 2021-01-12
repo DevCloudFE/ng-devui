@@ -1,9 +1,9 @@
-import { Observable, of } from 'rxjs';
-import { By } from '@angular/platform-browser';
-import { ToggleModule } from './toggle.module';
 import { Component, DebugElement, ViewChild } from '@angular/core';
-import { TestBed, ComponentFixture, tick, fakeAsync } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { of } from 'rxjs';
 import { ToggleComponent } from './toggle.component';
+import { ToggleModule } from './toggle.module';
 
 @Component({
   template: `

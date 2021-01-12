@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ILabelDataConfigs } from 'ng-devui/quadrant-diagram';
 
-
 @Component({
   selector: 'd-basic',
   templateUrl: './basic.component.html',
@@ -43,4 +42,3 @@ export class BasicComponent implements OnInit {
     this.labelData.push(label); // 将拖拽的数据放到象限图上显示
   }
 }
-

@@ -1,12 +1,11 @@
-import { timer } from 'rxjs';
 import { Component, DebugElement, OnInit } from '@angular/core';
-import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { LoadingModule } from './loading.module';
-import { LoadingDirective } from './loading.directive';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { timer } from 'rxjs';
+import { LoadingDirective } from './loading.directive';
+import { LoadingModule } from './loading.module';
 import { LoadingType } from './loading.types';
-
 @Component({
   template: `
     <div
@@ -53,7 +52,7 @@ describe('loading', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [LoadingModule, NoopAnimationsModule],
-      declarations: [TestLoadingComponent, TestLoadingTemplateComponent],
+      declarations: [TestLoadingComponent, TestLoadingTemplateComponent]
     }).compileComponents();
   });
 

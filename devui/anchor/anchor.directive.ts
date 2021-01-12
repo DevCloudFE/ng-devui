@@ -23,7 +23,7 @@ export class AnchorDirective implements AfterViewInit, OnDestroy {
 
   element: HTMLElement;
   _boxElement: IAnchorBox;
-  set boxElement( box: IAnchorBox) {
+  set boxElement(box: IAnchorBox) {
     this._boxElement = box;
     this.updateScrollListenTarget();
   }

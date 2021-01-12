@@ -31,6 +31,7 @@ export const routesConfig = [
     loadChildren: () => import('../../../devui/accordion/demo/accordion-demo.moudule').then((m) => m.AccordionDemoModule),
     data: {
       type: '导航',
+      enType: 'Navigation',
       name: 'Accordion',
       cnName: '手风琴',
       description: '手风琴，用于需要分组的层级菜单',
@@ -43,6 +44,7 @@ export const routesConfig = [
     loadChildren: () => import('../../../devui/alert/demo/alert-demo.module').then((m) => m.AlertDemoModule),
     data: {
       type: '反馈',
+      enType: 'Feedback',
       name: 'Alert',
       cnName: '警告',
       description: '用于向用户显示警告的信息。',
@@ -55,6 +57,7 @@ export const routesConfig = [
     loadChildren: () => import('../../../devui/anchor/demo/anchor-demo.module').then((m) => m.AnchorDemoModule),
     data: {
       type: '导航',
+      enType: 'Navigation',
       name: 'Anchor',
       cnName: '锚点',
       description: '用于跳转到页面指定位置。',
@@ -68,6 +71,7 @@ export const routesConfig = [
       import('../../../devui/auto-complete/demo/auto-complete-demo.module').then((m) => m.AutoCompleteDemoModule),
     data: {
       type: '数据录入',
+      enType: 'Data Entry',
       name: 'AutoComplete',
       cnName: '自动补全',
       description: '在用户进行输入时联想用户可能需要的输入结果。',
@@ -80,6 +84,7 @@ export const routesConfig = [
     loadChildren: () => import('../../../devui/avatar/demo/avatar-demo.module').then((m) => m.AvatarDemoModule),
     data: {
       type: '数据展示',
+      enType: 'Data Display',
       name: 'Avatar',
       cnName: '头像',
       description: '设置头像',
@@ -93,6 +98,7 @@ export const routesConfig = [
       import('../../../devui/image-preview/demo/image-preview-demo.module').then((m) => m.ImagePreviewDemoModule),
     data: {
       type: '数据展示',
+      enType: 'Data Display',
       name: 'ImagePreview',
       cnName: '图片预览',
       description: '对一张或多张图片进行预览',
@@ -105,6 +111,7 @@ export const routesConfig = [
     loadChildren: () => import('../../../devui/breadcrumb/demo/breadcrumb-demo.module').then((m) => m.BreadCrumbDemoModule),
     data: {
       type: '导航',
+      enType: 'Navigation',
       name: 'Breadcrumb',
       cnName: '面包屑',
       description: '导航辅助，显示当前页面层级，可快速返回任意页面',
@@ -117,6 +124,7 @@ export const routesConfig = [
     loadChildren: () => import('../../../devui/back-top/demo/back-top-demo.module').then((m) => m.BackTopDemoModule),
     data: {
       type: '导航',
+      enType: 'Navigation',
       name: 'BackTop',
       cnName: '回到顶部',
       description: '返回页面顶部的操作按钮',
@@ -140,6 +148,7 @@ export const routesConfig = [
     loadChildren: () => import('../../../devui/badge/demo/badge-demo.module').then((m) => m.BadgeDemoModule),
     data: {
       type: '数据展示',
+      enType: 'Data Display',
       name: 'Badge',
       cnName: '徽标',
       description: '图标右上角的数字状态徽标',
@@ -152,6 +161,7 @@ export const routesConfig = [
     loadChildren: () => import('../../../devui/card/demo/card-demo.module').then((m) => m.CardDemoModule),
     data: {
       type: '数据展示',
+      enType: 'Data Display',
       name: 'Card',
       cnName: '卡片',
       description: '通用卡片容器。当一个模块的同类信息不能自然形成区块感，可借助 Card 组件将信息整合，帮助界面信息模块感更强。',
@@ -163,6 +173,7 @@ export const routesConfig = [
     loadChildren: () => import('../../../devui/carousel/demo/carousel-demo.module').then((m) => m.CarouselDemoModule),
     data: {
       type: '数据展示',
+      enType: 'Data Display',
       name: 'Carousel',
       cnName: '走马灯',
       description: '一组轮播的区域，用于展示图片或者卡片。',
@@ -175,6 +186,7 @@ export const routesConfig = [
     loadChildren: () => import('../../../devui/checkbox/demo/checkbox-demo.module').then((m) => m.CheckBoxDemoModule),
     data: {
       type: '数据录入',
+      enType: 'Data Entry',
       name: 'CheckBox',
       cnName: '复选框',
       description: '允许用户从一个数据集中选择多个选项。',
@@ -199,6 +211,7 @@ export const routesConfig = [
     loadChildren: () => import('../../../devui/data-table/demo/data-table-demo.module').then((m) => m.DataTableDemoModule),
     data: {
       type: '数据展示',
+      enType: 'Data Display',
       name: 'DataTable',
       cnName: '表格',
       description: '展示行列数据。',
@@ -212,6 +225,7 @@ export const routesConfig = [
     loadChildren: () => import('../../../devui/datepicker/demo/datepicker-demo.module').then((m) => m.DatepickerDemoModule),
     data: {
       type: '数据录入',
+      enType: 'Data Entry',
       name: 'DatePicker',
       cnName: '日期选择器',
       description: '输入或选择日期的控件。',
@@ -225,6 +239,7 @@ export const routesConfig = [
       import('../../../devui/multi-auto-complete/demo/multi-auto-complete-demo.module').then((m) => m.MultiAutoCompleteDemoModule),
     data: {
       type: '数据录入',
+      enType: 'Data Entry',
       name: 'MultiAutoComplete',
       cnName: '多项自动补全',
       description: '用于在若干选项中选择数个作为输入，通过联想为用户匹配可能的选项输入。',
@@ -237,6 +252,7 @@ export const routesConfig = [
     loadChildren: () => import('../../../devui/form/demo/form-demo.module').then((m) => m.FormDemoModule),
     data: {
       type: '数据录入',
+      enType: 'Data Entry',
       name: 'Form',
       cnName: '表单',
       description: '表单具备数据收集、数据校验、数据提交功能，在业务中被大量使用，并且布局方式很多，包括单列、多列、向导式、Tab页式。',
@@ -260,6 +276,7 @@ export const routesConfig = [
     loadChildren: () => import('../../../devui/transfer/demo/transfer-demo.module').then((m) => m.TransferDemoModule),
     data: {
       type: '数据录入',
+      enType: 'Data Entry',
       name: 'Transfer',
       cnName: '穿梭框',
       description: '双栏穿梭选择框',
@@ -283,6 +300,7 @@ export const routesConfig = [
     loadChildren: () => import('../../../devui/drawer/demo/drawer-demo.module').then((m) => m.DrawerDemoModule),
     data: {
       type: '反馈',
+      enType: 'Feedback',
       name: 'Drawer',
       cnName: '抽屉板',
       description: '屏幕边缘滑出的浮层面板。',
@@ -297,6 +315,7 @@ export const routesConfig = [
     loadChildren: () => import('../../../devui/dropdown/demo/dropdown-demo.module').then((m) => m.DropdownDemoModule),
     data: {
       type: '导航',
+      enType: 'Navigation',
       name: 'DropDown',
       cnName: '下拉菜单',
       description: '按向下弹出的列表。',
@@ -310,6 +329,7 @@ export const routesConfig = [
       import('../../../devui/editable-select/demo/editable-select-demo.module').then((m) => m.EditableSelectDemoModule),
     data: {
       type: '数据录入',
+      enType: 'Data Entry',
       name: 'EditableSelect',
       cnName: '可输入下拉选择框',
       description: '同时支持输入和下拉选择的输入框。',
@@ -322,6 +342,7 @@ export const routesConfig = [
     loadChildren: () => import('../../../devui/loading/demo/loading-demo.module').then((m) => m.LoadingDemoModule),
     data: {
       type: '反馈',
+      enType: 'Feedback',
       name: 'Loading',
       cnName: '加载提示',
       description: '提示用户页面正在执行指令，需要等待。',
@@ -334,6 +355,7 @@ export const routesConfig = [
     loadChildren: () => import('../../../devui/modal/demo/modal-demo.module').then((m) => m.ModalDemoModule),
     data: {
       type: '反馈',
+      enType: 'Feedback',
       name: 'Modal',
       cnName: '模态弹窗',
       description: '弹窗即模态对话框，整个程序只有弹窗区域获得焦点，用户必须处理弹窗内容才可以做其他操作。',
@@ -347,6 +369,7 @@ export const routesConfig = [
     loadChildren: () => import('../../../devui/pagination/demo/pagination-demo.module').then((m) => m.PaginationDemoModule),
     data: {
       type: '导航',
+      enType: 'Navigation',
       name: 'Pagination',
       cnName: '分页',
       description: '采用分页的形式分隔长列表，每次只加载一个页面。',
@@ -370,6 +393,7 @@ export const routesConfig = [
     loadChildren: () => import('../../../devui/popover/demo/popover-demo.module').then((m) => m.PopoverDemoModule),
     data: {
       type: '反馈',
+      enType: 'Feedback',
       name: 'Popover',
       cnName: '悬浮提示',
       description: '简单的文字提示气泡框。popover用来通知用户非关键性问题或提示某控件处于某特殊情况。',
@@ -382,6 +406,7 @@ export const routesConfig = [
     loadChildren: () => import('../../../devui/progress/demo/progress-demo.module').then((m) => m.ProgressDemoModule),
     data: {
       type: '数据展示',
+      enType: 'Data Display',
       name: 'Progress',
       cnName: '进度条',
       description: '进度条，用来展示操作的当前进度。',
@@ -398,7 +423,8 @@ export const routesConfig = [
         (m) => m.QuadrantDiagramDemoModule
       ),
     data: {
-      type: '演进中',
+      type: '数据展示',
+      enType: 'Data Display',
       name: 'Quadrant Diagram',
       cnName: '象限图',
       description: '象限图，根据需求对事务进行区域划分与价值排序',
@@ -411,6 +437,7 @@ export const routesConfig = [
     loadChildren: () => import('../../../devui/radio/demo/radio-demo.module').then((m) => m.RadioDemoModule),
     data: {
       type: '数据录入',
+      enType: 'Data Entry',
       name: 'Radio',
       cnName: '单选框',
       description: '单选框。',
@@ -423,6 +450,7 @@ export const routesConfig = [
     loadChildren: () => import('../../../devui/rate/demo/rate-demo.module').then((m) => m.RateDemoModule),
     data: {
       type: '数据展示',
+      enType: 'Data Display',
       name: 'Rate',
       cnName: '等级评估',
       description: '等级评估',
@@ -446,10 +474,24 @@ export const routesConfig = [
     loadChildren: () => import('../../../devui/select/demo/select-demo.module').then((m) => m.SelectDemoModule),
     data: {
       type: '数据录入',
+      enType: 'Data Entry',
       name: 'Select',
       cnName: '下拉选择框',
       description: '下拉选择框。',
       tmw: `用户可以从多个选项中选择一项或几项；仅支持用户在下拉选项中选择和搜索系统提供的选项，不支持输入。`,
+    },
+  },
+  {
+    path: 'cascader',
+    component: ExamplePanelComponent,
+    loadChildren: () => import('../../../devui/cascader/demo/cascader-demo.module').then((m) => m.CascaderDemoModule),
+    data: {
+      type: '数据录入',
+      enType: 'Data Entry',
+      name: 'Cascader',
+      cnName: '级联菜单',
+      description: '下拉级联菜单。',
+      tmw: `当用户需要展示层级可选择信息时可以使用。`,
     },
   },
   {
@@ -480,6 +522,7 @@ export const routesConfig = [
     loadChildren: () => import('../../../devui/tabs/demo/tabs-demo.module').then((m) => m.TabsDemoModule),
     data: {
       type: '导航',
+      enType: 'Navigation',
       name: 'Tabs',
       cnName: '选项卡切换',
       description: '选项卡切换组件。',
@@ -492,6 +535,7 @@ export const routesConfig = [
     loadChildren: () => import('../../../devui/tags/demo/tags-demo.module').then((m) => m.TagsDemoModule),
     data: {
       type: '数据展示',
+      enType: 'Data Display',
       name: 'Tags',
       cnName: '标签',
       description: '标签展示组件。',
@@ -504,6 +548,7 @@ export const routesConfig = [
     loadChildren: () => import('../../../devui/tags-input/demo/tags.input-demo.module').then((m) => m.TagsInputDemoModule),
     data: {
       type: '数据录入',
+      enType: 'Data Entry',
       name: 'TagsInput',
       cnName: '标签输入',
       description: '用于输入多个标签。',
@@ -516,6 +561,7 @@ export const routesConfig = [
     loadChildren: () => import('../../../devui/time-axis/demo/time-axis-demo.module').then((m) => m.TimeAxisDemoModule),
     data: {
       type: '数据展示',
+      enType: 'Data Display',
       name: 'TimeAxis',
       cnName: '时间轴',
       description: '时间轴展示组件',
@@ -528,6 +574,7 @@ export const routesConfig = [
     loadChildren: () => import('../../../devui/toast/demo/toast-demo.module').then((m) => m.ToastDemoModule),
     data: {
       type: '反馈',
+      enType: 'Feedback',
       name: 'Toast',
       cnName: '全局通知',
       description: '全局信息提示组件。',
@@ -540,9 +587,10 @@ export const routesConfig = [
     loadChildren: () => import('../../../devui/tooltip/demo/tooltip-demo.module').then((m) => m.TooltipDemoModule),
     data: {
       type: '反馈',
+      enType: 'Feedback',
       name: 'Tooltip',
       cnName: '提示',
-      description: '文字提示组件',
+      description: '文字提示组件。',
       tmw: `用户鼠标移动到文字上，需要进一步的提示时使用。`,
     },
   },
@@ -552,6 +600,7 @@ export const routesConfig = [
     loadChildren: () => import('../../../devui/toggle/demo/toggle-demo.module').then((m) => m.ToggleDemoModule),
     data: {
       type: '数据录入',
+      enType: 'Data Entry',
       name: 'Toggle',
       cnName: '开关',
       description: '开/关切换组件',
@@ -564,6 +613,7 @@ export const routesConfig = [
     loadChildren: () => import('../../../devui/tree/demo/tree-demo.module').then((m) => m.TreeDemoModule),
     data: {
       type: '数据展示',
+      enType: 'Data Display',
       name: 'Tree',
       cnName: '树',
       description: '树型选择组件。',
@@ -577,6 +627,7 @@ export const routesConfig = [
     loadChildren: () => import('../../../devui/upload/demo/upload-demo.module').then((m) => m.UploadDemoModule),
     data: {
       type: '数据录入',
+      enType: 'Data Entry',
       name: 'Upload',
       cnName: '上传',
       description: '文件上传组件',
@@ -589,6 +640,7 @@ export const routesConfig = [
     loadChildren: () => import('../../../devui/input-number/demo/input-number-demo.module').then((m) => m.InputNumberDemoModule),
     data: {
       type: '数据录入',
+      enType: 'Data Entry',
       name: 'InputNumber',
       cnName: '数字输入框',
       description: '通过鼠标或键盘，输入范围内的数值',
@@ -601,6 +653,7 @@ export const routesConfig = [
     loadChildren: () => import('../../../devui/tree-select/demo/tree-select-demo.module').then((m) => m.TreeSelectDemoModule),
     data: {
       type: '数据录入',
+      enType: 'Data Entry',
       name: 'TreeSelect',
       cnName: '树形选择框',
       description: '树形选择框',
@@ -613,6 +666,7 @@ export const routesConfig = [
     loadChildren: () => import('../../../devui/slider/demo/slider-demo.module').then((m) => m.SliderDemoModule),
     data: {
       type: '数据录入',
+      enType: 'Data Entry',
       name: 'Slider',
       cnName: '滑动输入条',
       description: '滑动输入条可以更直观地展示当前值和可选范围。',
@@ -625,6 +679,7 @@ export const routesConfig = [
     loadChildren: () => import('../../../devui/splitter/demo/splitter-demo.module').then((m) => m.SplitterDemoModule),
     data: {
       type: '布局',
+      enType: 'Layout',
       name: 'Splitter',
       cnName: '分割器',
       description: 'Splitter将页面拆分为多个部分，并允许用户控制页面布局。',
@@ -637,6 +692,7 @@ export const routesConfig = [
     loadChildren: () => import('../../../devui/layout/demo/layout-demo.module').then((m) => m.LayoutDemoModule),
     data: {
       type: '布局',
+      enType: 'Layout',
       name: 'Layout',
       cnName: '布局',
       description: '支持多种布局类型，协助用户进行页面的整体布局',
@@ -648,7 +704,8 @@ export const routesConfig = [
     component: ExamplePanelComponent,
     loadChildren: () => import('../../../devui/gantt/demo/gantt-demo.module').then((m) => m.GanttDemoModule),
     data: {
-      type: '演进中',
+      type: '数据展示',
+      enType: 'Data Display',
       name: 'Gantt',
       cnName: '甘特图',
       description: '',
@@ -661,6 +718,7 @@ export const routesConfig = [
     loadChildren: () => import('../../../devui/text-input/demo/text-input-demo.module').then((m) => m.TextInputDemoModule),
     data: {
       type: '数据录入',
+      enType: 'Data Entry',
       name: 'TextInput',
       cnName: '文本框',
       description: '文本域是用户可以录入、编辑文本时的区域。它允许用户在界面中输入文本，常出现在列表和对话框中。',
@@ -673,6 +731,7 @@ export const routesConfig = [
     loadChildren: () => import('../../../devui/textarea/demo/text-demo.module').then((m) => m.TextDemoModule),
     data: {
       type: '数据录入',
+      enType: 'Data Entry',
       name: 'Textarea',
       cnName: '多行文本框',
       description: '文本域是用户可以录入、编辑文本时的区域。它允许用户在界面中输入文本，常出现在列表和对话框中。',
@@ -685,10 +744,25 @@ export const routesConfig = [
     loadChildren: () => import('../../../devui/steps-guide/demo/steps-guide-demo.module').then((m) => m.StepsGuideDemoModule),
     data: {
       type: '导航',
+      enType: 'Navigation',
       name: 'StepsGuide',
       cnName: '操作指引',
       description: '在需要指引的业务逻辑元素上绑定，通过按顺序弹出引导用户了解业务使用逻辑。',
       tmw: `业务推出新特性，或复杂的业务逻辑需要指引用户使用`,
+    },
+  },
+  {
+    path: 'time-picker',
+    component: ExamplePanelComponent,
+    loadChildren: () =>
+      import('../../../devui/time-picker/demo/time-picker-demo.module').then((m) => m.TimePickerDemoModule),
+    data: {
+      type: '数据录入',
+      enType: 'Data Entry',
+      name: 'TimePicker',
+      cnName: '时间选择器',
+      description: '输入或选择时间的控件。',
+      tmw: '当用户需要输入一个时间，可以点击标准输入框，弹出面板进行选择。',
     },
   },
   {
@@ -698,10 +772,11 @@ export const routesConfig = [
       import('../../../devui/relative-time/demo/demo.module').then((m) => m.DemoModule),
     data: {
       type: '数据展示',
+      enType: 'Data Display',
       name: 'RelativeTime',
       cnName: '人性化时间转换',
-      description: '',
-      tmw: ''
+      description: '具体时间转换为相对时间的pipe',
+      tmw: '当用户需要将具体时间转换为相对当前的时间时使用'
     }
   }
 ];

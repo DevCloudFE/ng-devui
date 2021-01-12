@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
+import { DFormGroupRuleDirective, DValidateRules } from 'ng-devui/form';
 import { of } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
-import { DFormGroupRuleDirective, DValidateRules } from 'ng-devui/form';
 
 @Component({
   selector: 'd-form-demo-template-cross-component',

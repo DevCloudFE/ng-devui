@@ -1,7 +1,6 @@
 @import '../theme/color.scss';
 @import '../theme/shadow';
 @import '../theme/corner';
-@import '../theme/shadow';
 
 @mixin border-position-radius($position: left) {
   border-top-#{$position}-radius: 0;

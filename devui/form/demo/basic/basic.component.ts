@@ -58,7 +58,6 @@ export class BasicComponent implements OnInit {
     label: '选项3'
   }];
 
-
   radioOptions = [{
     id: 1,
     label: '手工执行'
@@ -121,4 +120,3 @@ export class BasicComponent implements OnInit {
     this.disabled = event;
   }
 }
-

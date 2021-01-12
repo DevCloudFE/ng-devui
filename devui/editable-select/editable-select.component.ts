@@ -1,24 +1,24 @@
 import {
-  Component,
-  Input,
-  TemplateRef,
-  OnInit,
-  OnChanges,
-  ViewChild,
   ChangeDetectorRef,
-  SimpleChanges,
-  forwardRef,
-  Output,
-  EventEmitter,
-  OnDestroy,
-  HostListener,
+  Component,
   ElementRef,
+  EventEmitter,
+  forwardRef,
+  HostListener,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  Output,
+  SimpleChanges,
+  TemplateRef,
+  ViewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
 
 import { AutoCompleteDirective } from 'ng-devui/auto-complete';
-import { I18nService, I18nInterface } from 'ng-devui/i18n';
+import { I18nInterface, I18nService } from 'ng-devui/i18n';
 
 @Component({
   selector: 'd-editable-select',

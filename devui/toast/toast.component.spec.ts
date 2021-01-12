@@ -1,9 +1,8 @@
-import { ComponentFixture, TestBed, fakeAsync, tick, flush } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
 import { Component, DebugElement } from '@angular/core';
-
-import { ToastModule } from './toast.module';
+import { ComponentFixture, fakeAsync, flush, TestBed, tick } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { ToastComponent } from './toast.component';
+import { ToastModule } from './toast.module';
 
 @Component({
   template: `

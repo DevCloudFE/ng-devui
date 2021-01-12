@@ -10,5 +10,4 @@ export class CommonComponent implements OnInit {
   ngOnInit() {
   }
 
-
 }

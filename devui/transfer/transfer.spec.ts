@@ -1,14 +1,11 @@
-import { source } from './../tree/demo/check-control/check-control.component';
-import { TransferComponent } from './transfer.component';
-import { TransferModule } from './transfer.module';
-import { LoadingComponent } from './../loading/loading.component';
-import { Component, DebugElement, ViewChild } from '@angular/core';
-import { ComponentFixture, TestBed, async, fakeAsync, flush, discardPeriodicTasks, tick, flushMicrotasks } from '@angular/core/testing';
+import { Component, DebugElement } from '@angular/core';
+import { ComponentFixture, discardPeriodicTasks, fakeAsync, flush, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { ToggleModule } from '../toggle';
 import { CheckBoxComponent } from '../checkbox';
+import { ToggleModule } from '../toggle';
 import { createDragEvent } from '../utils/testing/event-helper';
+import { TransferModule } from './transfer.module';
 
 @Component({
   selector: 'd-transfer-demo-base',
@@ -77,7 +74,7 @@ describe('transfer', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [TransferModule, NoopAnimationsModule, ToggleModule],
-      declarations: [TransferDemoBaseComponent],
+      declarations: [TransferDemoBaseComponent]
     }).compileComponents();
   });
 
@@ -116,7 +113,6 @@ describe('transfer', () => {
       sourceOption.forEach((t, i) => {
         expect(t.query(By.css('label')).nativeElement.textContent).toEqual(testComponent.sourceOption[i].name);
       });
-
 
       const targetContent = contents[1];
       const targetOption = targetContent.queryAll(By.directive(CheckBoxComponent));
@@ -175,7 +171,6 @@ describe('transfer', () => {
       fixture.detectChanges();
       flush();
       fixture.detectChanges();
-
 
       const toRightButton = debugEle.queryAll(By.css('.transfer-op'))[1];
       toRightButton.query(By.css('svg')).nativeElement.dispatchEvent(new Event('click'));
@@ -271,7 +266,7 @@ describe('transfer', () => {
       const firstIconRect = iconList[0].nativeElement.getBoundingClientRect();
       const dropPlaceRect = dropPlace.getBoundingClientRect();
       fixture.detectChanges();
-      iconList[0].nativeElement.dispatchEvent((new MouseEvent('mouseover', { bubbles: true }) ));
+      iconList[0].nativeElement.dispatchEvent((new MouseEvent('mouseover', { bubbles: true })));
       fixture.detectChanges();
 
       const dragstartEvent = createDragEvent('dragstart', {
@@ -315,7 +310,7 @@ describe('transfer', () => {
       const firstIconRect = iconList[0].nativeElement.getBoundingClientRect();
       const dropPlaceRect = dropPlace.getBoundingClientRect();
       fixture.detectChanges();
-      iconList[0].nativeElement.dispatchEvent((new MouseEvent('mouseover', { bubbles: true }) ));
+      iconList[0].nativeElement.dispatchEvent((new MouseEvent('mouseover', { bubbles: true })));
       fixture.detectChanges();
 
       const dragstartEvent = createDragEvent('dragstart', {

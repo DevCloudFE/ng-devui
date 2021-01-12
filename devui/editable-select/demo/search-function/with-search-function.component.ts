@@ -4,7 +4,6 @@ import {
 } from '@angular/core';
 import { of } from 'rxjs';
 
-
 @Component({
   selector: 'd-with-search-function',
   templateUrl: './with-search-function.component.html',

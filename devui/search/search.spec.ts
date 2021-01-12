@@ -1,9 +1,9 @@
-import { ComponentFixture, TestBed, async, fakeAsync, flush, tick } from '@angular/core/testing';
-import { SearchModule } from './search.module';
 import { Component, DebugElement } from '@angular/core';
-import { By } from '@angular/platform-browser';
+import { async, ComponentFixture, fakeAsync, flush, TestBed, tick } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
+import { By } from '@angular/platform-browser';
 import { DomHelper } from '../utils/testing/dom-helper';
+import { SearchModule } from './search.module';
 
 @Component({
   template: ` <d-search [size]="size" [(ngModel)]="searchText" [maxLength]="maxLen" (searchFn)="onSearch($event)"></d-search> `,
@@ -29,7 +29,7 @@ describe('search', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [SearchModule, FormsModule],
-      declarations: [TestSearchComponent],
+      declarations: [TestSearchComponent]
     }).compileComponents();
   }));
 

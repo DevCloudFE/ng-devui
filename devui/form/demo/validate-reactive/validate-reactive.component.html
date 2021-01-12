@@ -23,7 +23,7 @@
       [dValidateRules]="formRules.rule"
       [layout]="'vertical'"
       #userForm="dValidateRules"
-      (dSubmit)="submitForm()"
+      (dSubmit)="submitForm($event)"
     >
       <d-form-item>
         <d-form-label [required]="true" [hasHelp]="true" [helpTips]="'填写一个你喜欢的用户名吧'">用户名</d-form-label>
@@ -58,7 +58,13 @@
         </d-form-control>
       </d-form-item>
       <d-form-operation>
-        <d-button class="mr-element-spacing" [title]="userForm.errorMessage || ''" circled="true" style="margin-right: 8px" dFormSubmit
+        <d-button
+          class="mr-element-spacing"
+          [title]="userForm.errorMessage || ''"
+          circled="true"
+          style="margin-right: 8px"
+          dFormSubmit
+          [dFormSubmitData]="'register-button'"
           >注册</d-button
         >
         <d-button bsStyle="common" circled="true" dFormReset>重置</d-button>

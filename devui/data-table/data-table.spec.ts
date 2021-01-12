@@ -1,24 +1,26 @@
+import { ChangeDetectorRef, Component, DebugElement, ViewChild } from '@angular/core';
+import { ComponentFixture, fakeAsync, flush, TestBed, tick } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
+import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { SelectModule } from 'ng-devui/select';
-import { InputNumberModule } from 'ng-devui/input-number';
-import { DatepickerModule } from 'ng-devui/datepicker';
+import { CheckBoxModule } from 'ng-devui/checkbox';
 import {
   DataTableComponent,
-  TableWidthConfig,
   EditableTip,
+  TableCheckOptions,
+  TableWidthConfig
 } from 'ng-devui/data-table';
-import { ComponentFixture, TestBed, tick, fakeAsync, flush } from '@angular/core/testing';
-import { Component, DebugElement, ViewChild, ChangeDetectorRef } from '@angular/core';
-import { SourceType, originSource, genderSource, editableOriginSource, treeDataSource } from './demo/mock-data';
-import { DataTableModule } from './data-table.module';
-import { By } from '@angular/platform-browser';
-import { DomHelper } from '../utils/testing/dom-helper';
-import { I18nModule } from '../i18n';
-import { FormsModule } from '@angular/forms';
-import { CheckBoxModule } from 'ng-devui/checkbox';
+import { DatepickerModule } from 'ng-devui/datepicker';
+import { DropDownMenuDirective, DropDownModule } from 'ng-devui/dropdown';
+import { InputNumberModule } from 'ng-devui/input-number';
+import { SelectModule } from 'ng-devui/select';
 import { TooltipModule } from 'ng-devui/tooltip';
-import { DropDownModule } from 'ng-devui/dropdown';
-
+import { Observable } from 'rxjs';
+import { of } from 'rxjs/internal/observable/of';
+import { I18nModule } from '../i18n';
+import { DomHelper } from '../utils/testing/dom-helper';
+import { DataTableModule } from './data-table.module';
+import { editableOriginSource, genderSource, originSource, SourceType, treeDataSource } from './demo/mock-data';
 // basic
 @Component({
   template: `
@@ -96,7 +98,7 @@ class TestDataTableBasicComponent {
 @Component({
   template: `
     <d-data-table [dataSource]="sortableDataSource" [scrollable]="true" [tableWidthConfig]="tableWidthConfig" [onlyOneColumnSort]="true">
-      <thead dTableHead [checkable]="true">
+      <thead dTableHead [checkable]="true" [checkOptions]="checkOptions">
         <tr dTableRow>
           <th dHeadCell>#</th>
           <th
@@ -218,6 +220,18 @@ class TestDataTableAdvancedComponent {
   ];
 
   onSortChange = jasmine.createSpy('on sort change');
+  checkTotalData = jasmine.createSpy('call totalData function');
+
+  checkOptions: TableCheckOptions[] = [
+    {
+      label: '全选所有数据',
+      onChecked: this.checkTotalData.bind(this)
+    },
+    {
+      label: '全选当前页数据',
+      onChecked: undefined
+    }
+  ];
 
   constructor(private ref: ChangeDetectorRef) {}
 
@@ -254,7 +268,8 @@ class TestDataTableAdvancedComponent {
       <tbody dTableBody>
         <ng-template let-rowItem="rowItem" let-rowIndex="rowIndex">
           <tr dTableRow>
-            <td dTableCell [editable]="true" [editableTip]="editableTip" (editStatusEvent)="onEditing($event, rowItem, 'nameEdit')">
+            <td dTableCell [editable]="true" [editableTip]="editableTip" [beforeEditStart]="beforeEditStart"
+            [beforeEditEnd]="beforeEditEnd" (editStatusEvent)="onEditing($event, rowItem, 'nameEdit')">
               <span *ngIf="!rowItem['nameEdit']">{{ rowItem?.lastName }}</span>
               <form *ngIf="rowItem['nameEdit']" class="form-inline edit-padding-fix">
                 <div class="devui-form-group">
@@ -293,7 +308,7 @@ class TestDataTableAdvancedComponent {
               </form>
             </td>
             <td dTableCell [editable]="true" (editStatusEvent)="onEditing($event, rowItem, 'ageEdit')">
-              <span *ngIf="!rowItem['ageEdit']">{{ rowItem?.age }}</span>
+              <span class="input-number" *ngIf="!rowItem['ageEdit']">{{ rowItem?.age }}</span>
               <div *ngIf="rowItem['ageEdit']" class="edit-padding-fix">
                 <d-input-number [(ngModel)]="rowItem.age"></d-input-number>
               </div>
@@ -326,12 +341,19 @@ class TestDataTableEditComponent {
   basicDataSource: Array<SourceType> = JSON.parse(JSON.stringify(editableOriginSource.slice(0, 6)));
 
   editableTip = EditableTip.btn;
-  nameEditing: boolean;
 
   thisCellEditEnd = jasmine.createSpy('cellEditEnd');
 
   onEditing(editing, rowItem, editField) {
     rowItem[editField] = editing;
+  }
+
+  beforeEditStart = (rowItem, field): Boolean | Promise<boolean> | Observable<boolean> => {
+    return Promise.resolve(true);
+  }
+
+  beforeEditEnd = (rowItem, field): Boolean | Promise<boolean> | Observable<boolean> => {
+    return Promise.resolve(true);
   }
 }
 
@@ -471,6 +493,123 @@ class TestDataTableMultiHeaderComponent {
   basicDataSource: Array<SourceType> = JSON.parse(JSON.stringify(originSource.slice(0, 6)));
 }
 
+// data-table: fixed column
+@Component({
+  template: `
+    <d-data-table [dataSource]="basicDataSource" [scrollable]="true" [tableWidthConfig]="tableWidthConfig">
+  <thead dTableHead [checkable]="true">
+    <tr dTableRow>
+      <th
+        dHeadCell
+        *ngFor="let colOption of dataTableOptions.columns"
+        [fixedLeft]="colOption.fixedLeft"
+        [fixedRight]="colOption.fixedRight"
+      >
+        {{ colOption.header }}
+      </th>
+    </tr>
+  </thead>
+  <tbody dTableBody>
+    <ng-template let-rowItem="rowItem" let-rowIndex="rowIndex">
+      <tr dTableRow>
+        <td
+          dTableCell
+          *ngFor="let colOption of dataTableOptions.columns"
+          [fixedLeft]="colOption.fixedLeft"
+          [fixedRight]="colOption.fixedRight"
+        >
+          {{ colOption.fieldType === 'date' ? (rowItem[colOption.field] | i18nDate: 'short':false) : rowItem[colOption.field] }}
+        </td>
+      </tr>
+    </ng-template>
+  </tbody>
+</d-data-table>
+  `,
+})
+class TestDataFixedColumnComponent {
+  basicDataSource: Array<SourceType> = JSON.parse(JSON.stringify(originSource.slice(0, 6)));
+  dataTableOptions = {
+    columns: [
+        {
+            field: 'firstName',
+            header: 'First Name',
+            fieldType: 'text',
+            fixedLeft: '0px'
+        },
+        {
+            field: 'lastName',
+            header: 'Last Name',
+            fieldType: 'text'
+        },
+        {
+            field: 'gender',
+            header: 'gender',
+            fieldType: 'text'
+        },
+        {
+            field: 'dob',
+            header: 'Date of birth',
+            fieldType: 'date'
+        },
+        {
+          field: 'dob',
+          header: 'Date of birth',
+          fieldType: 'date'
+        },
+        {
+          field: 'dob',
+          header: 'Date of birth',
+          fieldType: 'date'
+        },
+        {
+          field: 'dob',
+          header: 'Date of birth',
+          fieldType: 'date'
+        },
+        {
+          field: 'dob',
+          header: 'Date of birth',
+          fieldType: 'date',
+          fixedRight: '0px'
+        }
+    ]
+  };
+
+  tableWidthConfig: TableWidthConfig[] = [
+    {
+      field: 'firstName',
+      width: '150px'
+    },
+    {
+      field: 'lastName',
+      width: '150px'
+    },
+    {
+      field: 'gender',
+      width: '150px'
+    },
+    {
+      field: 'dob',
+      width: '150px'
+    },
+    {
+      field: 'dob',
+      width: '150px'
+    },
+    {
+      field: 'dob',
+      width: '150px'
+    },
+    {
+      field: 'dob',
+      width: '150px'
+    },
+    {
+      field: 'dob',
+      width: '150px'
+    }
+  ];
+}
 describe('data-table', () => {
   describe('basic', () => {
     let fixture: ComponentFixture<TestDataTableBasicComponent>;
@@ -481,7 +620,7 @@ describe('data-table', () => {
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [DataTableModule, I18nModule, NoopAnimationsModule],
-        declarations: [TestDataTableBasicComponent],
+        declarations: [TestDataTableBasicComponent]
       });
     });
 
@@ -496,6 +635,12 @@ describe('data-table', () => {
     it('should data table can be created', () => {
       expect(component).toBeTruthy();
     });
+
+    it('should data table can be created without dataSource', () => {
+      component.basicDataSource = null;
+      fixture.detectChanges();
+      expect(component).toBeTruthy();
+    });
   });
 
   describe('checkable', () => {
@@ -506,7 +651,7 @@ describe('data-table', () => {
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [FormsModule, DataTableModule, CheckBoxModule, TooltipModule, I18nModule, DropDownModule, NoopAnimationsModule],
-        declarations: [TestDataTableAdvancedComponent],
+        declarations: [TestDataTableAdvancedComponent]
       });
     });
 
@@ -598,6 +743,29 @@ describe('data-table', () => {
       );
       expect(halfChecked).toBeTruthy();
     }));
+
+    it('should set header checkOptions work', fakeAsync(() => {
+      const dropdownElement = debugEl.query(By.css('.devui-data-table .devui-table .devui-checkable-cell .select-options'));
+      dropdownElement.nativeElement.dispatchEvent(new MouseEvent('mouseenter', {'bubbles': false, 'cancelable': false}));
+      fixture.detectChanges();
+      tick(50); // debounce time
+      fixture.detectChanges();
+      tick(); // animation time
+      fixture.detectChanges();
+      const dropdownMenuElement = debugEl.query(By.directive(DropDownMenuDirective));
+      expect(dropdownMenuElement).toBeTruthy();
+      const items = dropdownMenuElement.nativeElement.querySelectorAll('ul.devui-dropdown-menu li');
+      // empty handler
+      items[1].dispatchEvent(new Event('click'));
+      tick();
+      fixture.detectChanges();
+      expect(debugEl.query(By.css('.devui-data-table .devui-table .devui-checkable-cell .devui-checkbox.unchecked'))).toBeTruthy();
+      // select all handler
+      items[0].dispatchEvent(new Event('click'));
+      tick();
+      fixture.detectChanges();
+      expect(component.checkTotalData).toHaveBeenCalled();
+    }));
   });
 
   describe('edit', () => {
@@ -608,7 +776,7 @@ describe('data-table', () => {
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [FormsModule, DataTableModule, DatepickerModule, I18nModule, InputNumberModule, SelectModule, NoopAnimationsModule],
-        declarations: [TestDataTableEditComponent],
+        declarations: [TestDataTableEditComponent]
       });
     });
 
@@ -651,6 +819,183 @@ describe('data-table', () => {
       row1Column1 = debugEl.query(By.css('table.devui-table tbody tr td .cell-container .cell-container-inner span'));
       expect(row1Column1.nativeElement.textContent).toBe('Otto_test');
     }));
+
+    it('should beforeEditStart work', fakeAsync(() => {
+      fixture.detectChanges();
+      const editIconRow1Column1 = debugEl.query(By.css('table.devui-table tbody tr td span.cell-modify'));
+      // boolean能够拦截
+      component.beforeEditStart = (rowItem, field) => {
+        return true;
+      };
+      fixture.detectChanges();
+      editIconRow1Column1.nativeElement.dispatchEvent(new Event('click'));
+      tick();
+      fixture.detectChanges();
+      const inputRow1Column1 = debugEl.query(
+        By.css('table.devui-table tbody tr td .devui-input-group input.devui-form-control')
+      );
+      expect(inputRow1Column1).toBeTruthy();
+      document.dispatchEvent(new Event('click'));
+      tick();
+      fixture.detectChanges();
+      flush();
+      // observable能够拦截
+      component.beforeEditStart = (rowItem, field) => {
+        return of(true);
+      };
+      fixture.detectChanges();
+      debugEl.query(By.css('table.devui-table tbody tr td span.cell-modify')).nativeElement.dispatchEvent(new Event('click'));
+      tick();
+      fixture.detectChanges();
+      const inputRow1Column12 = debugEl.query(
+        By.css('table.devui-table tbody tr td .devui-input-group input.devui-form-control')
+      );
+      expect(inputRow1Column12).toBeTruthy();
+      document.dispatchEvent(new Event('click'));
+      tick();
+      fixture.detectChanges();
+    }));
+
+    it('should beforeEditEnd observable value work', fakeAsync(() => {
+      component.beforeEditEnd = (rowItem, field) => {
+        return true;
+      };
+      fixture.detectChanges();
+      debugEl.query(By.css('table.devui-table tbody tr td span.cell-modify')).nativeElement.dispatchEvent(new Event('click'));
+      tick();
+      fixture.detectChanges();
+      document.dispatchEvent(new Event('click'));
+      tick();
+      fixture.detectChanges();
+      const inputRow1Column1 = debugEl.query(
+        By.css('table.devui-table tbody tr td .devui-input-group input.devui-form-control')
+      );
+      expect(inputRow1Column1).toBeFalsy();
+      flush();
+      // observable test
+      component.beforeEditEnd = (rowItem, field) => {
+        return of(true);
+      };
+      fixture.detectChanges();
+      debugEl.query(By.css('table.devui-table tbody tr td span.cell-modify')).nativeElement.dispatchEvent(new Event('click'));
+      tick();
+      fixture.detectChanges();
+      document.dispatchEvent(new Event('click'));
+      tick();
+      fixture.detectChanges();
+      const inputRow1Column12 = debugEl.query(
+        By.css('table.devui-table tbody tr td .devui-input-group input.devui-form-control')
+      );
+      expect(inputRow1Column12).toBeFalsy();
+    }));
+
+    it('should beforeEditStart null or return undefined edit also work', fakeAsync(() => {
+      component.beforeEditStart = null;
+      fixture.detectChanges();
+      debugEl.query(By.css('table.devui-table tbody tr td span.cell-modify')).nativeElement.dispatchEvent(new Event('click'));
+      tick();
+      fixture.detectChanges();
+      const inputRow1Column1 = debugEl.query(
+        By.css('table.devui-table tbody tr td .devui-input-group input.devui-form-control')
+      );
+      expect(inputRow1Column1).toBeTruthy();
+      document.dispatchEvent(new Event('click'));
+      tick();
+      fixture.detectChanges();
+      flush();
+      // test return undefined
+      component.beforeEditStart = (rowItem, field) => {
+        return undefined;
+      };
+      fixture.detectChanges();
+      debugEl.query(By.css('table.devui-table tbody tr td span.cell-modify')).nativeElement.dispatchEvent(new Event('click'));
+      tick();
+      fixture.detectChanges();
+      const inputRow1Column12 = debugEl.query(
+        By.css('table.devui-table tbody tr td .devui-input-group input.devui-form-control')
+      );
+      expect(inputRow1Column12).toBeTruthy();
+    }));
+    it('should beforeEditStart return false edit not work', fakeAsync(() => {
+      component.beforeEditStart = (rowItem, field) => {
+        return false;
+      };
+      fixture.detectChanges();
+      debugEl.query(By.css('table.devui-table tbody tr td span.cell-modify')).nativeElement.dispatchEvent(new Event('click'));
+      tick();
+      fixture.detectChanges();
+      const inputRow1Column1 = debugEl.query(
+        By.css('table.devui-table tbody tr td .devui-input-group input.devui-form-control')
+      );
+      expect(inputRow1Column1).toBeFalsy();
+    }));
+
+    it('should beforeEditEnd null or return undefined edit also work', fakeAsync(() => {
+      component.beforeEditEnd = null;
+      fixture.detectChanges();
+      debugEl.query(By.css('table.devui-table tbody tr td span.cell-modify')).nativeElement.dispatchEvent(new Event('click'));
+      tick();
+      fixture.detectChanges();
+      document.dispatchEvent(new Event('click'));
+      tick();
+      fixture.detectChanges();
+      const inputRow1Column1 = debugEl.query(
+        By.css('table.devui-table tbody tr td .devui-input-group input.devui-form-control')
+      );
+      expect(inputRow1Column1).toBeFalsy();
+      flush();
+      // test return undefined
+      component.beforeEditEnd = (rowItem, field) => {
+        return undefined;
+      };
+      fixture.detectChanges();
+      debugEl.query(By.css('table.devui-table tbody tr td span.cell-modify')).nativeElement.dispatchEvent(new Event('click'));
+      tick();
+      fixture.detectChanges();
+      document.dispatchEvent(new Event('click'));
+      tick();
+      fixture.detectChanges();
+      const inputRow1Column12 = debugEl.query(
+        By.css('table.devui-table tbody tr td .devui-input-group input.devui-form-control')
+      );
+      expect(inputRow1Column12).toBeFalsy();
+    }));
+
+    it('should beforeEditEnd return false edit not finish', fakeAsync(() => {
+      component.beforeEditEnd = (rowItem, field) => {
+        return false;
+      };
+      fixture.detectChanges();
+      debugEl.query(By.css('table.devui-table tbody tr td span.cell-modify')).nativeElement.dispatchEvent(new Event('click'));
+      tick();
+      fixture.detectChanges();
+      document.dispatchEvent(new Event('click'));
+      tick();
+      fixture.detectChanges();
+      const inputRow1Column1 = debugEl.query(
+        By.css('table.devui-table tbody tr td .devui-input-group input.devui-form-control')
+      );
+      expect(inputRow1Column1).toBeTruthy();
+    }));
+
+    it('should finish edit after click other td element', fakeAsync(() => {
+      fixture.detectChanges();
+      debugEl.query(By.css('table.devui-table tbody tr td:nth-child(3) div.cell-editable')).nativeElement.dispatchEvent(new Event('click'));
+      tick();
+      fixture.detectChanges();
+      const inputRow1Column1 = debugEl.query(
+        By.css('table.devui-table tbody tr td:nth-child(3) d-input-number')
+      );
+      expect(inputRow1Column1).toBeTruthy();
+      flush();
+      debugEl.query(By.css('table.devui-table tbody tr td span.cell-modify')).nativeElement.dispatchEvent(new Event('click'));
+      tick();
+      fixture.detectChanges();
+      const inputRow1Column12 = debugEl.query(
+        By.css('table.devui-table tbody tr td:nth-child(3) d-input-number')
+      );
+      expect(inputRow1Column12).toBeFalsy();
+    }));
   });
 
   describe('sortable & filterable', () => {
@@ -661,7 +1006,7 @@ describe('data-table', () => {
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [FormsModule, DataTableModule, CheckBoxModule, TooltipModule, I18nModule, DropDownModule, NoopAnimationsModule],
-        declarations: [TestDataTableAdvancedComponent],
+        declarations: [TestDataTableAdvancedComponent]
       });
     });
 
@@ -732,7 +1077,7 @@ describe('data-table', () => {
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [DataTableModule, CheckBoxModule, FormsModule, TooltipModule],
-        declarations: [TestDataTableWithChildrenComponent],
+        declarations: [TestDataTableWithChildrenComponent]
       });
     });
 
@@ -816,7 +1161,7 @@ describe('data-table', () => {
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [DataTableModule, I18nModule],
-        declarations: [TestDataTableMultiHeaderComponent],
+        declarations: [TestDataTableMultiHeaderComponent]
       });
     });
 
@@ -845,6 +1190,29 @@ describe('data-table', () => {
       const nameWidth = thsOfRow1[2].nativeElement.getBoundingClientRect().width;
 
       expect(Math.round(firstNameWidth + lastNameWidth)).toBe(Math.round(nameWidth));
+    });
+  });
+  describe('fixed column', () => {
+    let fixture: ComponentFixture<TestDataFixedColumnComponent>;
+    let debugEl: DebugElement;
+    let component: TestDataFixedColumnComponent;
+
+    beforeEach(() => {
+      TestBed.configureTestingModule({
+        imports: [DataTableModule, I18nModule],
+        declarations: [TestDataFixedColumnComponent],
+      });
+    });
+
+    beforeEach(() => {
+      fixture = TestBed.createComponent(TestDataFixedColumnComponent);
+      debugEl = fixture.debugElement;
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    });
+
+    it('should create correctly', () => {
+      expect(component).toBeTruthy();
     });
   });
 });

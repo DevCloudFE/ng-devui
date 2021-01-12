@@ -1,18 +1,18 @@
 import {
   Component,
+  EventEmitter,
   Input,
+  Output,
   TemplateRef,
   ViewChild,
-  Output,
-  EventEmitter,
 } from '@angular/core';
 
+import {FileUploader} from './file-uploader.class';
 import {
   IUploadOptions,
   UploadStatus
 } from './file-uploader.types';
 import {UploadComponent} from './upload.class';
-import {FileUploader} from './file-uploader.class';
 import {UploadedFilesComponent} from './uploaded-files.component';
 
 @Component({
@@ -56,4 +56,3 @@ export class SingleUploadViewComponent extends UploadComponent {
     this.deleteUploadedFileEvent.emit(filePath);
   }
 }
-

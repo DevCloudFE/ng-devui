@@ -1,9 +1,8 @@
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
-import { treeDataSource, SourceType } from '../mock-data';
-import { GanttScaleUnit, GanttMilestone, GanttTaskInfo } from 'ng-devui/gantt';
-import { GanttService } from 'ng-devui/gantt';
-import { ColumnResizeEventArg, ColumnAdjustStrategy } from 'ng-devui/data-table';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ColumnAdjustStrategy, ColumnResizeEventArg } from 'ng-devui/data-table';
+import { GanttMilestone, GanttScaleUnit, GanttService, GanttTaskInfo } from 'ng-devui/gantt';
 import { Subscription } from 'rxjs';
+import { curYear, SourceType, treeDataSource } from '../mock-data';
 
 @Component({
   selector: 'd-table-gantt',
@@ -46,12 +45,9 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   ];
 
-
-
   ngOnInit() {
-    const curDate = new Date();
-    this.ganttStartDate = new Date(curDate.getFullYear(), 4, 1);
-    this.ganttEndDate = new Date(curDate.getFullYear(), 10, 15);
+    this.ganttStartDate = new Date(curYear, 4, 1);
+    this.ganttEndDate = new Date(curYear, 10, 15);
     this.ganttService.setScaleConfig({
       startDate: this.ganttStartDate,
       endDate: this.ganttEndDate,

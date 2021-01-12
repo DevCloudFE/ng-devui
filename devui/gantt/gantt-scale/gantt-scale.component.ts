@@ -1,7 +1,7 @@
-import { Component, OnInit, Input, OnDestroy, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
-import { GanttService } from '../gantt.service';
-import { GanttBarStatus, GanttScaleDateInfo, GanttScaleUnit, GanttMilestone } from '../gantt.model';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { GanttBarStatus, GanttMilestone, GanttScaleDateInfo, GanttScaleUnit } from '../gantt.model';
+import { GanttService } from '../gantt.service';
 
 @Component({
   selector: 'd-gantt-scale',
@@ -71,7 +71,6 @@ export class GanttScaleComponent implements OnInit, OnChanges, OnDestroy {
     return new Date(nextDayDate);
   }
 
-
   private generateDateInfo(date: Date): GanttScaleDateInfo {
     const dateInfo = {
       dayOfMonthLabel: '',
@@ -102,7 +101,7 @@ export class GanttScaleComponent implements OnInit, OnChanges, OnDestroy {
     dateInfo.monthLabel = month + '';
     const year = date.getFullYear();
     dateInfo.yearLabel = year + '';
-    if (this.ganttService.isSomeDate(date, new Date()) ) {
+    if (this.ganttService.isSomeDate(date, new Date())) {
       dateInfo.today = true;
     }
 

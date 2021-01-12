@@ -49,7 +49,6 @@ export class ModalOneComponent implements OnInit {
     label: '选项3'
   }];
 
-
   radioOptions = [{
     id: 1,
     label: '手工执行'
@@ -100,5 +99,3 @@ export class ModalOneComponent implements OnInit {
     };
   }
 }
-
-

@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy, OnInit, OnChanges, SimpleChanges, ElementRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { IAxisConfigs, IViewConfigs } from '../quadrant-diagram.type';
 import { AXIS_TITLE_SPACE } from '../quadrant.config';
 

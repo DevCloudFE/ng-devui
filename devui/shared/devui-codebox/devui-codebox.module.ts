@@ -1,9 +1,10 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DevuiCodeboxComponent } from './devui-codebox.component';
-import { DevUIHighlightModule } from '../devui-highlight/devui-highlight.module';
-import { TooltipModule } from 'ng-devui/tooltip';
+import { NgModule } from '@angular/core';
 import { TabsModule } from 'ng-devui/tabs';
+import { TooltipModule } from 'ng-devui/tooltip';
+import { TranslateModule } from '@ngx-translate/core';
+import { DevUIHighlightModule } from '../devui-highlight/devui-highlight.module';
+import { DevuiCodeboxComponent } from './devui-codebox.component';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { TabsModule } from 'ng-devui/tabs';
     CommonModule,
     DevUIHighlightModule,
     TooltipModule,
-    TabsModule
+    TabsModule,
+    TranslateModule
   ],
   declarations: [DevuiCodeboxComponent],
   exports: [DevuiCodeboxComponent]

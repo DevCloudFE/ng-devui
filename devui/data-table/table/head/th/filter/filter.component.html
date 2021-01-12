@@ -105,6 +105,7 @@
     <div class="filter-options" role="menu">
       <div class="normal-filter-list-container devui-scrollbar" role="menuitem" [style.maxHeight]="filterBoxHeight ? 'none' : '350px'">
         <div
+          [title]="item.name"
           *ngFor="let item of filterListRadio"
           class="drop-down-item"
           [ngClass]="{ 'filter-item-active': selectedItem === item }"

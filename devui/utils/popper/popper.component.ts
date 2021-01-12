@@ -83,7 +83,7 @@ export class PopperComponent implements AfterViewInit, OnDestroy {
   }
 
   constructor(protected el: ElementRef, protected renderer: Renderer2, protected ngZone: NgZone,
-    protected changeDetectorRef: ChangeDetectorRef) {
+              protected changeDetectorRef: ChangeDetectorRef) {
   }
 
   show() {
@@ -284,7 +284,6 @@ export class PopperComponent implements AfterViewInit, OnDestroy {
     const nodeParent = document.querySelector(targetSelector);
     this.attachPopperContainerToNode(nodeParent);
   }
-
 
   ngAfterViewInit(): void {
     // Detach popper container once view initialized.

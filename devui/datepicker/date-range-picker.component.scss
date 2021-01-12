@@ -4,7 +4,8 @@
 
 .devui-dropdown-overlay {
   position: relative;
-  left: -1px;
+  margin-top: -1px;
+  margin-bottom: -1px;
   border: 1px solid $devui-connected-overlay-line;
 }
 

@@ -1,4 +1,4 @@
-import {Directive, HostListener, ElementRef, OnInit, Input, OnChanges, SimpleChanges} from '@angular/core';
+import {Directive, ElementRef, HostListener, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 
 @Directive({
   selector: '[dMovable]'
@@ -60,7 +60,7 @@ export class MovableDirective implements OnInit, OnChanges {
         let currentLeft = event.clientX - this.leftStart;
         // 计算上下距离，按照parentNode的位置计算偏移量，后续parentNode存在偏移量，需要考虑偏移量
         const maxTop = window.innerHeight - parentRect.top - modalRect.height;
-        currentTop = ((parentRect.top + currentTop) <= 0  && -parentRect.top) || ((maxTop - currentTop <= 0 ) && maxTop) || currentTop;
+        currentTop = ((parentRect.top + currentTop) <= 0  && -parentRect.top) || ((maxTop - currentTop <= 0) && maxTop) || currentTop;
         const halfWidth = (window.innerWidth - modalRect.width) / 2;
         // 计算左右距离，默认居中，后续parentNode存在偏移量，需要考虑偏移量
         currentLeft = ((currentLeft + halfWidth) <= 0 && -halfWidth) || ((halfWidth - currentLeft) <= 0 && halfWidth) || currentLeft;
@@ -85,8 +85,8 @@ export class MovableDirective implements OnInit, OnChanges {
     @HostListener('document:touchmove', ['$event'])
     onTouchMove(event: any) {
       if (this.md && this._allowDrag) {
-        this.element.style.top = ( event.changedTouches[0].clientY - this.topStart ) + 'px';
-        this.element.style.left = ( event.changedTouches[0].clientX - this.leftStart ) + 'px';
+        this.element.style.top = (event.changedTouches[0].clientY - this.topStart) + 'px';
+        this.element.style.left = (event.changedTouches[0].clientX - this.leftStart) + 'px';
       }
       event.stopPropagation();
     }

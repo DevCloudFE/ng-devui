@@ -2,7 +2,7 @@
   <d-demo-nav [navItems]="navItems"></d-demo-nav>
 
   <div class="demo-example" [dAnchor]="'checkbox-basic'">
-    <div class="demo-title">基本用法</div>
+    <div class="demo-title">{{ 'components.checkbox.basicDemo.title' | translate }}</div>
     <div class="demo-text"></div>
     <d-codebox id="components-checkbox-basic" [sourceData]="checkboxDemoBasic">
       <d-demo-checkbox-basic demo></d-demo-checkbox-basic>
@@ -10,7 +10,7 @@
   </div>
 
   <div class="demo-example" [dAnchor]="'tabs-group'">
-    <div class="demo-title">使用CheckBoxGroup</div>
+    <div class="demo-title">{{ 'components.checkbox.groupDemo.use' | translate }}</div>
     <div class="demo-text"></div>
     <d-codebox id="components-tabs-group" [sourceData]="checkboxDemoGroup">
       <d-checkbox-group-basic demo></d-checkbox-group-basic>
@@ -18,15 +18,15 @@
   </div>
 
   <div class="demo-example" [dAnchor]="'condition-change'">
-    <div class="demo-title">checkbox根据条件终止切换状态</div>
-    <div class="demo-text">根据条件判断，label为'条件判断回调禁止选中'的checkbox终止切换状态</div>
+    <div class="demo-title">{{ 'components.checkbox.conditionChangeDemo.title' | translate }}</div>
+    <div class="demo-text">{{ 'components.checkbox.conditionChangeDemo.description' | translate }}</div>
     <d-codebox id="components-condition-change" [sourceData]="conditionChangeSource">
       <d-demo-condition-change demo></d-demo-condition-change>
     </d-codebox>
   </div>
 
   <div class="demo-example" [dAnchor]="'condition-group'">
-    <div class="demo-title">checkbox-group根据条件终止切换状态</div>
+    <div class="demo-title">{{ 'components.checkbox.conditionGroupDemo.title' | translate }}</div>
     <d-codebox id="components-condition-group" [sourceData]="conditionGroupSource">
       <d-checkbox-condition-group demo></d-checkbox-condition-group>
     </d-codebox>

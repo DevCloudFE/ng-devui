@@ -1,6 +1,6 @@
-import { Component, ViewChild, OnInit, ChangeDetectorRef } from '@angular/core';
-import { LoadingType } from 'ng-devui/loading';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { DataTableComponent } from 'ng-devui/data-table';
+import { LoadingType } from 'ng-devui/loading';
 import { originSource, SourceType } from '../mock-data';
 
 @Component({

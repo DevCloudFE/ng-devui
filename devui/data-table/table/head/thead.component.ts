@@ -1,7 +1,7 @@
-import { Component, OnInit, QueryList, ContentChildren, AfterContentInit, Input, EventEmitter, OnDestroy } from '@angular/core';
-import { TableTrComponent } from '../row/tr.component';
-import { TableCheckStatusArg, TableCheckOptions } from '../../data-table.model';
+import { AfterContentInit, Component, ContentChildren, EventEmitter, Input, OnDestroy, OnInit, QueryList } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { TableCheckOptions, TableCheckStatusArg } from '../../data-table.model';
+import { TableTrComponent } from '../row/tr.component';
 import { TableThComponent } from './th/th.component';
 
 @Component({

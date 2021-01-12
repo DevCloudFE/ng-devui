@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, NgZone, OnInit, Output, HostBinding } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, HostBinding, Input, NgZone, OnInit, Output } from '@angular/core';
 import { DataTableComponent } from './data-table.component';
 import { ForceUpdateReason } from './force-update-reason.model';
 import { DataTableColumnTmplComponent } from './tmpl/data-table-column-tmpl.component';
@@ -34,7 +34,7 @@ export class DataTableRowComponent implements OnInit {
   timeoutId; // 延时id
 
   constructor(public dt: DataTableComponent, private changeDetectorRef: ChangeDetectorRef,
-    private rowRef: ElementRef, private ngZone: NgZone) {
+              private rowRef: ElementRef, private ngZone: NgZone) {
   }
 
   ngOnInit(): void {

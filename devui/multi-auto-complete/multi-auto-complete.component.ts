@@ -1,21 +1,21 @@
 import {
+  ChangeDetectorRef,
   Component,
-  Input,
-  Output,
-  TemplateRef,
+  ComponentRef,
   ElementRef,
   EventEmitter,
-  ComponentRef,
-  ViewChild,
-  ChangeDetectorRef,
   forwardRef,
-  SimpleChanges,
+  Input,
   OnChanges,
   OnInit,
+  Output,
+  SimpleChanges,
+  TemplateRef,
+  ViewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { of, Observable } from 'rxjs';
-import { AutoCompletePopupComponent, AutoCompleteDirective } from 'ng-devui/auto-complete';
+import { AutoCompleteDirective, AutoCompletePopupComponent } from 'ng-devui/auto-complete';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'd-multi-auto-complete',

@@ -206,10 +206,6 @@
 
         & .header-container {
           position: relative;
-          display: -webkit-box;
-          display: -moz-box;
-          display: -ms-flexbox;
-          display: -webkit-flex;
           display: flex;
           align-items: center;
           padding-left: 2px;
@@ -295,6 +291,20 @@
   .resizeable:hover {
     .resize-handle {
       border-right: 3px solid $devui-line;
+    }
+  }
+}
+
+.devui-table {
+  &.devui-table-md ::ng-deep {
+    tbody > tr > td {
+      padding: 11px 8px 12px 20px;
+    }
+  }
+
+  &.devui-table-lg ::ng-deep {
+    tbody > tr > td {
+      padding: 15px 8px 16px 20px;
     }
   }
 }

@@ -1,69 +1,30 @@
 import {
   Component,
-  ViewEncapsulation,
-  OnInit,
-  OnDestroy,
+  NgZone, OnDestroy, OnInit,
   Renderer2,
-  NgZone
+  ViewChild, ViewEncapsulation
 } from '@angular/core';
-import { cloneDeep } from 'lodash-es';
 import { Routes } from '@angular/router';
-import { groupBy, map } from 'lodash-es';
+import { SearchComponent } from 'ng-devui';
+import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { cloneDeep, groupBy, map } from 'lodash-es';
+import { fromEvent, Subscription } from 'rxjs';
 import { routesConfig } from './component.route';
-import { Subscription, fromEvent } from 'rxjs';
-
 @Component({
   selector: 'cd-app-content', // tslint:disable-line
   templateUrl: './app-content.component.html',
   encapsulation: ViewEncapsulation.None,
 })
 export class AppContentComponent implements OnInit, OnDestroy {
-  type = '通用';
-  types = ['通用'];
   routes: Routes = [];
-  groupedRoutes: any;
   componentsData = [];
   clickSub: Subscription = new Subscription();
-  componentsDataDisplay: any;
-  constructor(private renderer2: Renderer2, private ngZone: NgZone) {
-    const routesWithData = map(routesConfig, (route) => {
-      if (!route.data) {
-        route.data = {};
-      }
-      return route;
+  componentsDataDisplay = [];
+  constructor(private renderer2: Renderer2, private ngZone: NgZone, private translate: TranslateService) {
+    this.generateSideBar(localStorage.getItem('lang'));
+    this.translate.onLangChange.subscribe((event: TranslationChangeEvent) => {
+      this.generateSideBar(localStorage.getItem('lang'));
     });
-    const groupedRoutesObj = groupBy(routesWithData,
-      (route) => {
-        return (route as any).data.type || '通用';
-      });
-    this.groupedRoutes = [];
-    for (const key in groupedRoutesObj) {
-      if (key) {
-        const group = groupedRoutesObj[key].map((item) => {
-          if (item.data.name) {
-            return {
-              title: item.data.name + ' ' + item.data.cnName,
-              link: item.path,
-            };
-          } else {
-            return {};
-          }
-        }
-        ).filter((item) => Object.keys(item).length !== 0)
-          .sort(function (s1, s2) {
-            const prev = (s1.title).toUpperCase();
-            const next = (s2.title).toUpperCase();
-            if (prev < next) {
-              return -1;
-            }
-            if (prev > next) {
-              return 1;
-            }
-            return 0;
-          });
-        this.componentsData.push({ title: key, children: group, open: true });
-      }
-    }
   }
   ngOnInit(): void {
     this.ngZone.runOutsideAngular(() => {
@@ -87,7 +48,6 @@ export class AppContentComponent implements OnInit, OnDestroy {
         }
       }));
     });
-    this.onSearch('');
   }
 
   onSearch(event) {
@@ -99,10 +59,60 @@ export class AppContentComponent implements OnInit, OnDestroy {
     });
   }
 
+  generateSideBar(lang) {
+    this.componentsData = [];
+    const routesWithData = map(routesConfig, (route) => {
+      if (!route.data) {
+        route.data = {};
+      }
+      return route;
+    });
+    const groupedRoutesObj = groupBy(routesWithData,
+      (route) => {
+        if (lang === 'en-us') {
+          return (route as any).data.enType || 'General';
+        }
+        return (route as any).data.type || '通用';
+      });
+    for (const key in groupedRoutesObj) {
+      if (key) {
+        const group = groupedRoutesObj[key].map((item) => {
+          if (item.data.name) {
+            if (lang === 'en-us') {
+              return {
+                title: item.data.name,
+                link: item.path,
+              };
+            }
+            return {
+              title: item.data.name + ' ' + item.data.cnName,
+              link: item.path,
+            };
+          } else {
+            return {};
+          }
+        }
+        ).filter((item) => Object.keys(item).length !== 0)
+          .sort(function (s1, s2) {
+            const prev = (s1.title).toUpperCase();
+            const next = (s2.title).toUpperCase();
+            if (prev < next) {
+              return -1;
+            }
+            if (prev > next) {
+              return 1;
+            }
+            return 0;
+          });
+        this.componentsData.push({ title: key, children: group, open: true });
+      }
+    }
+    this.onSearch('');
+  }
+
   ngOnDestroy(): void {
     if (this.clickSub) {
       this.clickSub.unsubscribe();
     }
   }
 }
-

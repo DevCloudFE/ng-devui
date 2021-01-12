@@ -1,10 +1,10 @@
-import { ComponentFixture, TestBed, flush, fakeAsync } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
 import { Component } from '@angular/core';
+import { ComponentFixture, fakeAsync, flush, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 
-import { PanelModule } from './panel.module';
-import { PanelComponent } from './panel.component';
 import { Observable, of } from 'rxjs';
+import { PanelComponent } from './panel.component';
+import { PanelModule } from './panel.module';
 
 @Component({
   template: `

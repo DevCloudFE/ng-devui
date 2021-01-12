@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { DFormGroupRuleDirective, DValidateRules } from 'ng-devui/form';
-import { delay, map } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { delay, map } from 'rxjs/operators';
 
 @Component({
   selector: 'd-form-demo-validate-reactive',
@@ -26,7 +26,6 @@ export class ValidateReactiveComponent implements OnInit {
     password: new FormControl(this.formData.password),
     confirmPassword: new FormControl(this.formData.confirmPassword)
   });
-
 
   singleSelectRules: DValidateRules = {
     validators: [
@@ -89,7 +88,8 @@ export class ValidateReactiveComponent implements OnInit {
     });
   }
 
-  submitForm() {
+  submitForm({ valid, directive, data }) {
+    console.log('Valid:', valid, 'Directive:', directive, 'data', data);
     // do something for submitting
     if (this.userFormDir.isReady) {
       console.log(this.formData);

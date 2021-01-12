@@ -1,43 +1,45 @@
 <div class="demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 60, bottom: 0 }">
   <d-demo-nav [navItems]="navItems"></d-demo-nav>
   <div class="demo-example" [dAnchor]="'basic-usage'">
-    <div class="demo-title">基本用法</div>
-    <div class="demo-text">单文件上传、拖动文件上传、自动上传</div>
+    <div class="demo-title">{{ 'components.upload.basicDemo.title' | translate }}</div>
+    <div class="demo-text">{{ 'components.upload.basicDemo.description' | translate }}</div>
     <d-codebox id="basic" [sourceData]="basicSource">
       <d-basic demo></d-basic>
     </d-codebox>
   </div>
   <div class="demo-example" [dAnchor]="'multi-files'">
-    <div class="demo-title">多文件上传</div>
-    <div class="demo-text">多文件上传，支持拖动文件上传</div>
+    <div class="demo-title">{{ 'components.upload.multiDemo.title' | translate }}</div>
+    <div class="demo-text">{{ 'components.upload.multiDemo.description' | translate }}</div>
     <d-codebox id="multi" [sourceData]="multiSource">
       <d-multi demo></d-multi>
     </d-codebox>
   </div>
   <div class="demo-example" [dAnchor]="'auto-upload'">
-    <div class="demo-title">自动上传</div>
-    <div class="demo-text">通过 autoUpload 设置自动上传</div>
+    <div class="demo-title">{{ 'components.upload.autoDemo.title' | translate }}</div>
+    <div class="demo-text">{{ 'components.upload.autoDemo.description' | translate }}</div>
     <d-codebox id="customize" [sourceData]="autoSource">
       <d-auto demo></d-auto>
     </d-codebox>
   </div>
   <div class="demo-example" [dAnchor]="'custom'">
-    <div class="demo-title">自定义</div>
-    <div class="demo-text">自定义上传按钮，通过 preloadFilesRef 设置已选择文件列表模板， 通过 uploadedFilesRef 设置已上传文件列表模版</div>
+    <div class="demo-title">{{ 'components.upload.customizeDemo.title' | translate }}</div>
+    <div class="demo-text">
+      {{ 'components.upload.customizeDemo.description' | translate }}
+    </div>
     <d-codebox id="customize" [sourceData]="customizeSource">
       <d-customize demo></d-customize>
     </d-codebox>
   </div>
   <div class="demo-example" [dAnchor]="'dynamic-upload-options'">
-    <div class="demo-title">动态变更上传参数</div>
-    <div class="demo-text">用户可通过beforeUpload动态修改上传参数</div>
+    <div class="demo-title">{{ 'components.upload.dynamicDemo.title' | translate }}</div>
+    <div class="demo-text">{{ 'components.upload.dynamicDemo.description' | translate }}</div>
     <d-codebox id="dynamicUploadOptions" [sourceData]="dynamicUploadOptionsSource">
       <d-dynamic-upload-options demo></d-dynamic-upload-options>
     </d-codebox>
   </div>
   <div class="demo-example" [dAnchor]="'customize-area-upload'">
-    <div class="demo-title">任意区域上传</div>
-    <div class="demo-text">用户可通过dUpload指令支持文件任意区域上传</div>
+    <div class="demo-title">{{ 'components.upload.areaDemo.title' | translate }}</div>
+    <div class="demo-text">{{ 'components.upload.areaDemo.description' | translate }}</div>
     <d-codebox id="customizeAreaUpload" [sourceData]="customizeAreaUploadSource">
       <d-customize-area-upload demo></d-customize-area-upload>
     </d-codebox>

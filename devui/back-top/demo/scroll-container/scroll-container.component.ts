@@ -9,14 +9,14 @@ import { Component, OnInit } from '@angular/core';
 export class ScrollContainerComponent implements OnInit {
   scrollElement;
   list = [];
-  sentence = 'all work and no play make jack a dull boy';
+  sentence = 'You know some birds are not meant to be caged, their feathers are just too bright.';
   constructor() {}
 
   ngOnInit() {
     for (let i = 0; i < 20; i++) {
       this.list.push(this.sentence);
     }
-    this.scrollElement = document.querySelector('.devui-scroll-container');
+    this.scrollElement = document.querySelector('.devui-scroll-content');
   }
 
   backTop(event) {

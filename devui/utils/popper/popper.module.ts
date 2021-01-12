@@ -1,6 +1,6 @@
+import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {PopperComponent} from './popper.component';
-import {CommonModule} from '@angular/common';
 
 @NgModule({
   imports: [CommonModule],

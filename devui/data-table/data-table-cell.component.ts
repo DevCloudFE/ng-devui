@@ -1,10 +1,10 @@
 import { ChangeDetectorRef, Component, ComponentFactoryResolver, ElementRef, Input, NgZone, OnChanges,
   OnDestroy, OnInit, SimpleChange, ViewChild } from '@angular/core';
-import { Subscription } from 'rxjs';
 import { InputNumberComponent } from 'ng-devui/input-number';
 import { SelectComponent } from 'ng-devui/select';
 import { TreeSelectComponent } from 'ng-devui/tree-select';
 import { stopPropagationIfExist } from 'ng-devui/utils';
+import { Subscription } from 'rxjs';
 import { DataTableRowComponent } from './data-table-row.component';
 import { DataTableComponent } from './data-table.component';
 import { EditorDirective } from './editor-host.directive';
@@ -37,8 +37,8 @@ export class DataTableCellComponent implements OnInit, OnChanges, OnDestroy {
   dynamicEditorActive: boolean; // 动态生成的编辑控件激活
 
   constructor(public dt: DataTableComponent, private changeDetectorRef: ChangeDetectorRef,
-    private componentFactoryResolver: ComponentFactoryResolver,
-    public rowComponent: DataTableRowComponent, private cellRef: ElementRef, private ngZone: NgZone) {
+              private componentFactoryResolver: ComponentFactoryResolver,
+              public rowComponent: DataTableRowComponent, private cellRef: ElementRef, private ngZone: NgZone) {
 
   }
 
@@ -174,7 +174,6 @@ export class DataTableCellComponent implements OnInit, OnChanges, OnDestroy {
       sbscription = null;
     }
   }
-
 
   creatCellEditor() {
     let componentFactory;

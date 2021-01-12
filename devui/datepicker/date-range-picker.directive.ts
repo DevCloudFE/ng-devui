@@ -1,27 +1,27 @@
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import {
-  Component,
-  forwardRef,
-  OnInit,
-  Input,
-  Output,
-  EventEmitter,
-  ElementRef,
-  Renderer2,
-  HostListener,
-  ViewChild,
-  OnDestroy,
-  TemplateRef,
-  ChangeDetectorRef,
-  ComponentRef
-} from '@angular/core';
-import { DateConverter } from 'ng-devui/utils';
 import { CdkOverlayOrigin, ConnectedOverlayPositionChange, VerticalConnectionPos } from '@angular/cdk/overlay';
-import { SelectDateRangeChangeEventArgs, SelectDateRangeChangeReason } from './date-range-change-event-args.model';
+import {
+  ChangeDetectorRef,
+  Component,
+  ComponentRef,
+  ElementRef,
+  EventEmitter,
+  forwardRef,
+  HostListener,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+  Renderer2,
+  TemplateRef,
+  ViewChild
+} from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { I18nInterface, I18nService } from 'ng-devui/i18n';
+import { cornerFadeInOut, DateConverter, DefaultDateConverter } from 'ng-devui/utils';
+import { fromEvent, Subscription } from 'rxjs';
+import { debounceTime, filter, map } from 'rxjs/operators';
 import { DatePickerConfigService as DatePickerConfig } from './date-picker.config.service';
-import { I18nService, I18nInterface } from 'ng-devui/i18n';
-import { DefaultDateConverter, cornerFadeInOut } from 'ng-devui/utils';
-import { Subscription } from 'rxjs';
+import { SelectDateRangeChangeEventArgs, SelectDateRangeChangeReason } from './date-range-change-event-args.model';
 import { DateRangePickerComponent } from './date-range-picker.component';
 
 @Component({
@@ -60,7 +60,9 @@ export class DateRangePickerDirective implements OnInit, ControlValueAccessor, O
   public cdkConnectedOverlayOrigin: any;
   public i18nLocale: I18nInterface['locale'];
   private i18nSubscription: Subscription;
+  private valueChangeSubscrip: Subscription;
   datepickerPosition: VerticalConnectionPos = 'bottom';
+  valueList = [];
   private onChange = (_: any) => null;
   private onTouched = () => null;
 
@@ -126,7 +128,7 @@ export class DateRangePickerDirective implements OnInit, ControlValueAccessor, O
   }
 
   get dateFormat() {
-    return this._dateFormat;
+    return this._dateFormat || this.datePickerConfig.defaultFormat;
   }
 
   set rangeStart(rangeStart: Date) {
@@ -185,6 +187,14 @@ export class DateRangePickerDirective implements OnInit, ControlValueAccessor, O
     this.setI18nText();
   }
 
+  @HostListener('blur', ['$event'])
+  onBlur($event) {
+    this.onTouched();
+    if (!this.validateDate(this.elementRef.nativeElement.value)) {
+      this.resetValue();
+    }
+  }
+
   checkDateConfig(dateConfig: any) {
     if (!dateConfig) { return false; }
     if (typeof(dateConfig.timePicker) !== 'boolean' || !dateConfig.max || !dateConfig.min || !dateConfig.format) {
@@ -195,6 +205,7 @@ export class DateRangePickerDirective implements OnInit, ControlValueAccessor, O
 
   ngOnInit() {
     this.updateCdkConnectedOverlayOrigin();
+    this.initInputChanges();
   }
 
   registerOnChange(fn: any): void {
@@ -203,6 +214,16 @@ export class DateRangePickerDirective implements OnInit, ControlValueAccessor, O
 
   registerOnTouched(fn: any): void {
     this.onTouched = fn;
+  }
+
+  initInputChanges(): void {
+    this.valueChangeSubscrip = fromEvent(this.elementRef.nativeElement, 'keyup').pipe(
+      map((e: any) => e.target.value),
+      filter(() => !this.disabled),
+      debounceTime(300)
+    ).subscribe(value => {
+      this.transUserInputToDatepicker(value);
+    });
   }
 
   writeValue(selectedRange): void {
@@ -234,7 +255,7 @@ export class DateRangePickerDirective implements OnInit, ControlValueAccessor, O
 
   updateCdkConnectedOverlayOrigin() {
     if (this.elementRef.nativeElement) {
-      this.cdkConnectedOverlayOrigin = new CdkOverlayOrigin(this.elementRef.nativeElement);
+      this.cdkConnectedOverlayOrigin = new CdkOverlayOrigin(this.formWithDropDown() || this.elementRef.nativeElement);
     }
   }
 
@@ -281,11 +302,6 @@ export class DateRangePickerDirective implements OnInit, ControlValueAccessor, O
         this.dateConverter.format(date, this.dateFormat, this.locale || this.i18nLocale) :
         ['Start', 'End'][i]);
     }).join(this.splitter);
-  }
-
-  @HostListener('blur', ['$event'])
-  onBlur($event) {
-    this.transUserInputToDatepicker();
   }
 
   onDocumentClick = ($event) => {
@@ -341,64 +357,81 @@ export class DateRangePickerDirective implements OnInit, ControlValueAccessor, O
     if (!this.showTime && this.hideOnRangeSelected) { this.hide(); }
   }
 
-  private transUserInputToDatepicker() {
+  private transUserInputToDatepicker(value?: string) {
     if (!this.showTime && !this.disabled) {
-      const value = this.elementRef.nativeElement.value;
-      if (!value && !this.selectedRange.every(val => !!val)) {
-        return;
-      }
-      if (!value) {
+      const _value: string = value || this.elementRef.nativeElement.value;
+      if (!_value && !this.selectedRange.every(val => !!val)) {
         this.clearAll(undefined, false);
         return;
       }
-      let valueList = value.split(this.splitter);
-      let valueFormat;
-      // 如果拆出来6个，则为日期间分隔符和年月日间分隔符相同的情况，此情况允许
-      if (valueList.length === 6 && valueList.every(val => !!val)) {
-        const curValueList = [];
-        valueList.forEach((val, index) => {
-          // 根据下标，前三个组装在一起，后三个组装在一起，不需要考虑分隔符，后面会format
-          if ((index + 1) % 3 === 1) {
-            curValueList.push(val);
-          } else {
-            curValueList[Math.ceil(index / 3) - 1] = curValueList[Math.ceil(index / 3) - 1] + '-' + val;
-          }
-        });
-        valueList = curValueList;
-      }
-      // 不管拆出来是6还是2个，都需要组装成2个日期
-      if (
-        valueList.length === 2 &&
-        valueList.every(val => !!val) &&
-        valueList.every((val, index) => new Date(val).getTime() === new Date(this.selectedRange[index]).getTime())
-      ) {
+      if (!_value) {
+        this.clearAll(undefined, false);
         return;
       }
-      if (valueList.length === 2 && valueList.every(val => !!val)) {
-        const valueTimeList = valueList.map(val => (new Date(`${val} 00:00:00`)).getTime());
-        valueFormat = this.formatDateRange(valueList.map(numValue => new Date(numValue)));
-        if (
-          value === valueFormat &&
-          !valueTimeList.every((val) => {
-            return (val >= this.minDate.getTime() && val <= this.maxDate.getTime());
-          })
-        ) {
-          // 判断前后俩日期是否小于最小或大于最大，若是则不合法，恢复之前的
-          this.writeValue(this.selectedRange);
-          return;
-        } else {
-          // 判断前后俩日期是否大于最小，小于最大，若是则合法，进行如下操作
-          // 此时包括value为NaN既日期格式不正确的情况，对其进行处理下方判断会过滤掉
-          valueList = valueList.map(val => new Date(val).getTime()).sort((a, b) => a - b).map(numValue => new Date(numValue));
-        }
-        if (valueFormat && value === valueFormat) {
-          this.chooseDate(valueList, undefined, false);
-        }
-      } else {
-        this.writeValue(this.selectedRange);
+      if (this.validateDate(_value)) {
+        this.chooseDate(this.valueList, undefined, false);
       }
     } else {
-      this.writeValue(this.selectedRange);
+      this.resetValue();
+    }
+  }
+
+  resetValue(): void {
+    this.writeValue(this.selectedRange);
+  }
+
+  validateDate(value: string): boolean {
+    if (!value) {
+      return true;
+    }
+    this.valueList = value.split(this.splitter);
+    let valueFormat;
+    // 如果拆出来6个，则为日期间分隔符和年月日间分隔符相同的情况，此情况允许
+    if (this.valueList.length === 6 && this.valueList.every(val => !!val)) {
+      const curValueList = [];
+      this.valueList.forEach((val, index) => {
+        // 根据下标，前三个组装在一起，后三个组装在一起，不需要考虑分隔符，后面会format
+        if ((index + 1) % 3 === 1) {
+          curValueList.push(val);
+        } else {
+          curValueList[Math.ceil(index / 3) - 1] = curValueList[Math.ceil(index / 3) - 1] + '-' + val;
+        }
+      });
+      this.valueList = curValueList;
+    }
+    // 不管拆出来是6还是2个，都需要组装成2个日期
+    if (
+      this.valueList.length === 2 &&
+      this.valueList.every(val => !!val) &&
+      this.valueList.every((val, index) => new Date(val).getTime() === new Date(this.selectedRange[index]).getTime())
+    ) {
+      this.valueList = this.valueList.map(t => new Date(t));
+      return true;
+    }
+    if (!this.valueList.every(val => new Date(val).getTime())) {
+      return false;
+    }
+    if (this.valueList.length === 2 && this.valueList.every(val => !!val)) {
+      const valueTimeList = this.valueList.map(val => (new Date(`${val} 00:00:00`)).getTime());
+      valueFormat = this.formatDateRange(this.valueList.map(numValue => new Date(numValue)));
+      if (
+        value === valueFormat &&
+        !valueTimeList.every((val) => {
+          return (val >= this.minDate.getTime() && val <= this.maxDate.getTime());
+        })
+      ) {
+        return false;
+      } else {
+        // 判断前后俩日期是否大于最小，小于最大，若是则合法，进行如下操作
+        // 此时包括value为NaN既日期格式不正确的情况，对其进行处理下方判断会过滤掉
+        this.valueList = this.valueList.map(val => new Date(val).getTime()).sort((a, b) => a - b).map(numValue => new Date(numValue));
+      }
+      if (valueFormat && value === valueFormat) {
+        return true;
+      }
+      return false;
+    } else {
+      return false;
     }
   }
 
@@ -407,6 +440,7 @@ export class DateRangePickerDirective implements OnInit, ControlValueAccessor, O
     if (this.i18nSubscription) {
       this.i18nSubscription.unsubscribe();
     }
+    this.valueChangeSubscrip?.unsubscribe();
     document.removeEventListener('click', this.onDocumentClick);
   }
 

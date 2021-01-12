@@ -2,7 +2,7 @@
   <d-demo-nav [navItems]="navItems"></d-demo-nav>
 
   <div class="demo-example" [dAnchor]="'card-basic'">
-    <div class="demo-title">基本用法</div>
+    <div class="demo-title">{{ 'components.card.basicDemo.title' | translate }}</div>
     <div class="demo-text"></div>
     <d-codebox id="components-card-basic" [sourceData]="CardDemoBasic">
       <d-basic demo></d-basic>
@@ -10,7 +10,7 @@
   </div>
 
   <div class="demo-example" [dAnchor]="'card-with-media'">
-    <div class="demo-title">使用图片</div>
+    <div class="demo-title">{{ 'components.card.customDemo.title' | translate }}</div>
     <div class="demo-text"></div>
     <d-codebox id="components-card-with-media" [sourceData]="CardDemoWithMedia">
       <d-with-media demo></d-with-media>
@@ -18,7 +18,7 @@
   </div>
 
   <div class="demo-example" [dAnchor]="'card-custom'">
-    <div class="demo-title">自定义区域</div>
+    <div class="demo-title">{{ 'components.card.mediaDemo.title' | translate }}</div>
     <div class="demo-text"></div>
     <d-codebox id="components-card-custom" [sourceData]="CardDemoCustom">
       <d-custom demo></d-custom>

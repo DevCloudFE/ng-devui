@@ -1,10 +1,10 @@
-import { DropScrollSpeedFunction, DropScrollSpeed, DropScrollEnhanceTimingFunctionGroup, DropScrollDirection,
-  DropScrollAreaOffset, DropScrollOrientation, DropScrollTriggerEdge } from './drop-scroll-enhance.type';
-import { Directive, ElementRef, Input, NgZone, OnDestroy, AfterViewInit } from '@angular/core';
-import { fromEvent, Subscription, merge as mergeStatic } from 'rxjs';
-import { throttleTime, tap } from 'rxjs/operators';
+import { AfterViewInit, Directive, ElementRef, Input, NgZone, OnDestroy } from '@angular/core';
+import { fromEvent, merge as mergeStatic, Subscription } from 'rxjs';
+import { tap, throttleTime } from 'rxjs/operators';
 import { DragDropService } from '../services/drag-drop.service';
 import { Utils } from '../shared/utils';
+import { DropScrollAreaOffset, DropScrollDirection, DropScrollEnhanceTimingFunctionGroup, DropScrollOrientation,
+  DropScrollSpeed, DropScrollSpeedFunction, DropScrollTriggerEdge } from './drop-scroll-enhance.type';
 
 @Directive({
   selector: '[dDropScrollEnhanced]',
@@ -97,7 +97,7 @@ export class DropScrollEnhancedDirective implements AfterViewInit, OnDestroy {
       );
       // dragEnd或drop的时候结束了拖拽，滚动区域影藏起来
       this.subscription.add(
-          mergeStatic( this.dragDropService.dragEndEvent, this.dragDropService.dropEvent)
+          mergeStatic(this.dragDropService.dragEndEvent, this.dragDropService.dropEvent)
           .subscribe(() => {
             this.forwardScrollArea.style.display = 'none';
             this.backwardScrollArea.style.display = 'none';
@@ -115,7 +115,7 @@ export class DropScrollEnhancedDirective implements AfterViewInit, OnDestroy {
   }
 
   createScrollFn(direction: DropScrollDirection, orientation: DropScrollOrientation,
-      speedFn: DropScrollSpeedFunction) {
+                 speedFn: DropScrollSpeedFunction) {
     const scrollAttr = (direction === 'v') ? 'scrollTop' : 'scrollLeft';
     const eventAttr = (direction === 'v') ? 'clientY' : 'clientX';
     const scrollWidthAttr = (direction === 'v') ? 'scrollHeight' : 'scrollWidth';

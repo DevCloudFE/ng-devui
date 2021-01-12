@@ -1,8 +1,8 @@
-import { IFileOptions, IUploadOptions } from './file-uploader.types';
-import { Observable, from, Subscription } from 'rxjs';
-import {  mergeMap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
+import { from, Observable, Subscription } from 'rxjs';
+import {  mergeMap } from 'rxjs/operators';
+import { IFileOptions, IUploadOptions } from './file-uploader.types';
 
 @Injectable()
 export class SelectFiles {
@@ -86,7 +86,6 @@ export class SelectFiles {
     const { multiple, accept } = fileOptions;
     return from(this.selectFiles({ multiple, accept })).pipe(mergeMap(file => <any>file));
   }
-
 
   triggerDropFiles = (fileOptions: IFileOptions, uploadOptions: IUploadOptions, files: any) => {
     return new Observable(observer => observer.next(files)).pipe(mergeMap(file => <any>file));

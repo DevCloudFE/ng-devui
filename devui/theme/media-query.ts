@@ -1,9 +1,8 @@
 import * as enquire from 'enquire.js';
 import { ReplaySubject } from 'rxjs';
 
-
 export class PrefersColorSchemeMediaQuery {
-  static enquire = enquire;
+  static enquire = enquire; // prevent code optimization excluding enquire out
   private prefersColorSchemeSubject = new ReplaySubject<PrefersColorSchemeMediaQuery.Value>(1);
   public prefersColorSchemeChange = this.prefersColorSchemeSubject.asObservable();
 

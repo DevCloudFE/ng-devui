@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'd-tree-select-leaf-only',
@@ -159,5 +159,7 @@ export class TreeSelectLeafOnlyComponent {
 
   showSelected($event: Event) {
     console.log('event emitted: ', $event);
+    console.log(this.value2);
+
   }
 }

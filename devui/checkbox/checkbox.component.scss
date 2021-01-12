@@ -197,10 +197,10 @@
     }
 
     .devui-checkbox-material {
-      border-color: $devui-disabled-line;
+      border-color: $devui-icon-fill-active-disabled;
 
       .devui-checkbox-bg {
-        background-color: $devui-disabled-bg;
+        background-color: $devui-icon-fill-active-disabled;
         opacity: 1;
       }
     }
@@ -231,7 +231,7 @@
 
     &.active {
       svg polygon {
-        fill: $devui-disabled-text;
+        fill: $devui-light-text;
       }
     }
   }

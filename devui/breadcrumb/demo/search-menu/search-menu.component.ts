@@ -5,12 +5,12 @@ templateUrl: './search-menu.component.html'
 })
 export class SearchMenuComponent implements OnInit {
 
-  breadData = [{ label: 'DevUI', showMenu: false, link: '/components/get-start' },
+  breadData = [{ label: 'DevUI', showMenu: false, link: '/components/zh-cn/get-start' },
   {
     label: '面包屑', showMenu: true, isSearch: true,
     menuList: [
-      { name: '锚点', link: '/components/anchor/demo' },
-      { name: '按钮', link: '/components/button/demo' }
+      { name: '锚点', link: '/components/zh-cn/anchor/demo' },
+      { name: '按钮', link: '/components/zh-cn/button/demo' }
     ]
   }];
   constructor() {

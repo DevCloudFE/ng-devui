@@ -4,15 +4,15 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
+  EventEmitter,
   forwardRef,
   Input,
   OnChanges,
   OnDestroy,
   OnInit,
-  SimpleChanges,
-  ViewChild,
   Output,
-  EventEmitter
+  SimpleChanges,
+  ViewChild
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { fromEvent, Observable, Subscription } from 'rxjs';
@@ -97,7 +97,7 @@ export class SliderComponent implements OnInit, OnChanges, ControlValueAccessor,
   }
 
   writeValue(newValue: number): void {
-    this.setValue(this.ensureValueInRange(newValue));
+    this.setValue(this.ensureValueInRange(newValue), false);
   }
 
   private onTouchedCallback = () => {
@@ -262,12 +262,14 @@ export class SliderComponent implements OnInit, OnChanges, ControlValueAccessor,
     }
   }
 
-  private setValue(value: number | null): void {
+  private setValue(value: number | null, triggerOnChanges = true): void {
     if (this.value !== value) {
       this.value = value;
       this.updateTrackAndHandle();
     }
-    this.onChangeCallback(this.value);
+    if (triggerOnChanges) {
+      this.onChangeCallback(this.value);
+    }
   }
 
   private ensureValueInRange(value: number | null): number {

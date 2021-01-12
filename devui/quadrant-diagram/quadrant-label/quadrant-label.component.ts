@@ -1,7 +1,7 @@
-import { Component, Input, TemplateRef, OnChanges, SimpleChanges } from '@angular/core';
-import { IAxisConfigs, IViewConfigs } from '../quadrant-diagram.type';
-import { SMALL_LABEL_SIZE_CENTER_POINT, LARGE_LABEL_SIZE_CENTER_POINT, NORMAL_LABEL_SIZE_CENTER_POINT } from '../quadrant.config';
+import { Component, Input, OnChanges, SimpleChanges, TemplateRef } from '@angular/core';
 import { QuadrantDiagramService } from '../quadrant-diagram.service';
+import { IAxisConfigs, IViewConfigs } from '../quadrant-diagram.type';
+import { LARGE_LABEL_SIZE_CENTER_POINT, NORMAL_LABEL_SIZE_CENTER_POINT, SMALL_LABEL_SIZE_CENTER_POINT } from '../quadrant.config';
 @Component({
   selector: 'd-quadrant-label',
   templateUrl: './quadrant-label.component.html',

@@ -1,6 +1,6 @@
-import { Subscription, fromEvent, Subject } from 'rxjs';
-import { AfterViewInit, Directive, ElementRef, EventEmitter, HostBinding,
-  Input, NgZone, OnDestroy, OnInit, Output, Renderer2, Host, Self, Optional } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, EventEmitter, Host,
+  HostBinding, Input, NgZone, OnDestroy, OnInit, Optional, Output, Renderer2, Self } from '@angular/core';
+import { fromEvent, Subject, Subscription } from 'rxjs';
 import { DragDropService } from '../services/drag-drop.service';
 import { Utils } from '../shared/utils';
 import { PreserveNextEventEmitter } from './../shared/preserve-next-event-emitter';
@@ -74,7 +74,6 @@ export class DraggableDirective implements OnInit, AfterViewInit, OnDestroy {
   }
   private _disabled: boolean;
 
-
   @Input() enableDragFollow = false; // 默认false使用浏览器H5API拖拽, 否则使用原dom定位偏移
   @Input() dragFollowOptions: {
       appendToBody?: boolean;
@@ -102,7 +101,7 @@ export class DraggableDirective implements OnInit, AfterViewInit, OnDestroy {
   public beforeDragStartEvent = new Subject<boolean>();
 
   constructor(public el: ElementRef, private renderer: Renderer2, private dragDropService: DragDropService, private ngZone: NgZone,
-    @Optional() @Self() public dragPreviewDirective: DragPreviewDirective
+              @Optional() @Self() public dragPreviewDirective: DragPreviewDirective
     ) {
   }
 
@@ -195,7 +194,7 @@ export class DraggableDirective implements OnInit, AfterViewInit, OnDestroy {
       if (this.batchDraggable) {
         if (this.batchDraggable.dragData) {
           // 有dragData证明被加入到了group里
-          if (this.dragDropService.batchDragData && this.dragDropService.batchDragData.length > 1 ) {
+          if (this.dragDropService.batchDragData && this.dragDropService.batchDragData.length > 1) {
             this.dragDropService.batchDragging = true;
             this.dragDropService.batchDragStyle = this.batchDraggable.batchDragStyle;
           }
@@ -204,7 +203,7 @@ export class DraggableDirective implements OnInit, AfterViewInit, OnDestroy {
             .map(key => e[key])
             .some(eventKey => eventKey === true);
           if (batchActiveAble) {
-            if (this.dragDropService.batchDragData && this.dragDropService.batchDragData.length > 0 ) {
+            if (this.dragDropService.batchDragData && this.dragDropService.batchDragData.length > 0) {
               this.batchDraggable.active();
               if (!this.batchDraggable.dragData) {
                 // 如果用户没做任何处理把项目加到组里则加到组里
@@ -246,7 +245,7 @@ export class DraggableDirective implements OnInit, AfterViewInit, OnDestroy {
         this.insertOriginPlaceholder(false);
       }
       if (this.dragDropService.batchDragging
-        && this.dragDropService.batchDragData && this.dragDropService.batchDragData.length > 1 ) {
+        && this.dragDropService.batchDragData && this.dragDropService.batchDragData.length > 1) {
         this.dragDropService.batchDragData.map(dragData => dragData.draggable)
           .filter(draggable => draggable &&　draggable !== this)
           .forEach((draggable) => {
@@ -292,7 +291,7 @@ export class DraggableDirective implements OnInit, AfterViewInit, OnDestroy {
       if (this.dragDropService.dragOriginPlaceholder) {
         this.removeOriginPlaceholder();
       }
-      if (this.dragDropService.batchDragging && this.dragDropService.batchDragData && this.dragDropService.batchDragData.length > 1 ) {
+      if (this.dragDropService.batchDragging && this.dragDropService.batchDragData && this.dragDropService.batchDragData.length > 1) {
         this.dragDropService.batchDragData.map(dragData => dragData.draggable)
           .filter(draggable => draggable &&　draggable !== this)
           .forEach((draggable) => {
@@ -302,7 +301,7 @@ export class DraggableDirective implements OnInit, AfterViewInit, OnDestroy {
             } else {
               draggable.el.nativeElement.style.display = '';
             }
-          } );
+          });
       }
       if (this.batchDraggable && !this.batchDraggable.batchDragActive) {
         this.batchDraggable.removeFromBatchGroup();
@@ -465,7 +464,7 @@ export class DraggableDirective implements OnInit, AfterViewInit, OnDestroy {
     } else {
       if (this.dragDropService.batchDragData
         .map(dragData => dragData.draggable && dragData.draggable.el.nativeElement)
-        .indexOf(currentNextSibling) > -1 ) {
+        .indexOf(currentNextSibling) > -1) {
         currentNextSibling = currentNextSibling.nextSibling;
       }
       return currentNextSibling;

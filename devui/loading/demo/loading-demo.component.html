@@ -1,48 +1,38 @@
 <div class="demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 60, bottom: 0 }">
   <d-demo-nav [navItems]="navItems"></d-demo-nav>
   <div class="demo-example" [dAnchor]="'basic-usage'">
-    <div class="demo-title">基本用法</div>
-    <div class="demo-text">
-      展示加载表格数据的场景中的基本使用方法
-    </div>
+    <div class="demo-title">{{ 'components.loading.basicDemo.title' | translate }}</div>
+    <div class="demo-text">{{ 'components.loading.basicDemo.description' | translate }}</div>
     <d-codebox id="components-loading-basic" [sourceData]="basicSource">
       <d-basic demo></d-basic>
     </d-codebox>
   </div>
 
   <div class="demo-example" [dAnchor]="'custom-style'">
-    <div class="demo-title">自定义样式</div>
-    <div class="demo-text">
-      通过 templateRef 自定义loading样式
-    </div>
+    <div class="demo-title">{{ 'components.loading.customDemo.title' | translate }}</div>
+    <div class="demo-text">{{ 'components.loading.customDemo.description' | translate }}</div>
     <d-codebox id="components-loading-custom" [sourceData]="customSource">
       <d-custom demo></d-custom>
     </d-codebox>
   </div>
 
   <div class="demo-example" [dAnchor]="'multi-promise'">
-    <div class="demo-title">多promise</div>
-    <div class="demo-text">
-      支持多个promise
-    </div>
+    <div class="demo-title">{{ 'components.loading.promiseDemo.title' | translate }}</div>
+    <div class="demo-text">{{ 'components.loading.promiseDemo.description' | translate }}</div>
     <d-codebox id="components-loading-promise" [sourceData]="promiseSource">
       <d-promise demo></d-promise>
     </d-codebox>
   </div>
   <div class="demo-example" [dAnchor]="'use-subscription-mode'">
-    <div class="demo-title">使用Subscription方式</div>
-    <div class="demo-text">
-      使用Subscription方式控制loading的显示
-    </div>
+    <div class="demo-title">{{ 'components.loading.subscriptionDemo.title' | translate }}</div>
+    <div class="demo-text">{{ 'components.loading.subscriptionDemo.description' | translate }}</div>
     <d-codebox id="components-loading-subscription" [sourceData]="loadingDemoSubscriptionSource">
       <d-subscription demo></d-subscription>
     </d-codebox>
   </div>
   <div class="demo-example" [dAnchor]="'show-loading'">
-    <div class="demo-title">使用showLoading控制</div>
-    <div class="demo-text">
-      使用showLoading的true或false控制loading的显示
-    </div>
+    <div class="demo-title">{{ 'components.loading.showLoadingDemo.title' | translate }}</div>
+    <div class="demo-text">{{ 'components.loading.showLoadingDemo.description' | translate }}</div>
     <d-codebox id="components-loading-subscription" [sourceData]="showLoadingSource">
       <d-show-loading demo></d-show-loading>
     </d-codebox>
