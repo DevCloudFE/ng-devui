@@ -6,11 +6,11 @@
 
 使用方式参照下方的 StackBlitz 演示，推荐`Fork`本例来进行`Bug Report`，注意不要在实际工程中这样使用。
 
-<a class="devui-link" href="https://stackblitz.com/edit/ng-devui-10" target="_blank">ng-devui stackblitz</a>
+<a class="devui-link" href="https://stackblitz.com/edit/ng-devui-11" target="_blank">ng-devui stackblitz</a>
 
 ### Angular版本
 
-当前支持的Angular版本 <font color=red>`^10.0.0`</font>
+当前支持的Angular版本 <font color=red>`^11.0.0`</font>
 
 ### 1. 创建一个项目
 
