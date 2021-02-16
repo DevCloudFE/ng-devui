@@ -1,13 +1,13 @@
-import { ComponentFixture, TestBed, fakeAsync, tick, discardPeriodicTasks } from '@angular/core/testing';
 import { Component, DebugElement, ViewChild } from '@angular/core';
-import { TreeModule } from './tree.module';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { OperableTreeComponent } from './operable-tree.component';
-import { TreeNode } from './tree-factory.class';
-import { DomHelper } from '../utils/testing/dom-helper';
 import { OverlayContainerRef } from '../overlay-container';
 import { PopoverDirective } from '../popover';
+import { DomHelper } from '../utils/testing/dom-helper';
 import { createDragEvent } from '../utils/testing/event-helper';
+import { OperableTreeComponent } from './operable-tree.component';
+import { ITreeItem, TreeNode } from './tree-factory.class';
+import { TreeModule } from './tree.module';
 
 @Component({
   template: `
@@ -16,6 +16,7 @@ import { createDragEvent } from '../utils/testing/event-helper';
       [tree]="treeItems"
       [treeNodeIdKey]="'id'"
       [treeNodeChildrenKey]="'children'"
+      [virtualScroll]="virtualScroll"
       (nodeDeleted)="onOperableNodeDeleted($event)"
       (nodeSelected)="onOperableNodeSelected($event)"
       (nodeToggled)="onOperableNodeToggled($event)"
@@ -24,27 +25,31 @@ import { createDragEvent } from '../utils/testing/event-helper';
       (nodeDblClicked)="onNodeDblClicked($event)"
       [canActivateNode]="activeNode"
       [canActivateParentNode]="activeParentNode"
+      (nodeRightClicked)="onRightClicked($event)"
       [postAddNode]="postAddNode"
       [addable]="true"
       [editable]="true"
       [deletable]="true"
+      (editValueChange)="editValueChange($event)"
     >
     </d-operable-tree>
   `
 })
 class TestOperableTreeComponent {
   @ViewChild('operableTree') operableTree: OperableTreeComponent;
-
-  treeItems = [
+  virtualScroll = false;
+  treeItems: Array<ITreeItem> = [
     {
       id: 'test',
       title: '父节点1'
     },
     {
       title: '父节点2',
+      id: 'parent2',
       children: [
         {
           title: '子节点2-1',
+          id: 'child1',
           children: [
             {
               title: '子节点2-1-1'
@@ -69,6 +74,62 @@ class TestOperableTreeComponent {
   nodeDeleted = jasmine.createSpy('node delete');
   onOperableNodeDeleted = jasmine.createSpy('delete node');
   onOperableNodeChecked = jasmine.createSpy('operable node checked');
+  onRightClicked = jasmine.createSpy('node right clicked');
+
+  editValueChange(event) {
+    if (event.value === '') {
+      event.callback({
+        errTips: '节点名不能为空!',
+        errTipsPosition: 'right'
+      });
+    } else {
+      event.callback();
+    }
+  }
+}
+
+@Component({
+  template: `
+    <d-operable-tree
+      #operableTree
+      [tree]="treeItems"
+      [treeNodeIdKey]="'id'"
+      [treeNodeChildrenKey]="'children'"
+      [virtualScroll]="true"
+    >
+    </d-operable-tree>
+  `
+})
+class TestVirtualScrollTreeComponent {
+  @ViewChild('operableTree') operableTree: OperableTreeComponent;
+  virtualScroll = false;
+  treeItems = [
+    { 'title': '节点加载-1' },
+    { 'title': '节点加载-1' },
+    { 'title': '节点加载-1' },
+    { 'title': '节点加载-1' },
+    { 'title': '节点加载-1' },
+    { 'title': '节点加载-1' },
+    { 'title': '节点加载-1' },
+    { 'title': '节点加载-1' },
+    { 'title': '节点加载-1' },
+    { 'title': '节点加载-1' },
+    { 'title': '节点加载-1' },
+    { 'title': '节点加载-1' },
+    { 'title': '节点加载-1' },
+    { 'title': '节点加载-1' },
+    { 'title': '节点加载-1' },
+    { 'title': '节点加载-1' },
+    { 'title': '节点加载-1' },
+    { 'title': '节点加载-1' },
+    { 'title': '节点加载-1' },
+    { 'title': '节点加载-1' },
+    { 'title': '节点加载-1' },
+    { 'title': '节点加载-1' },
+    { 'title': '节点加载-1' },
+    { 'title': '节点加载-1' },
+  ];
+
 }
 
 @Component({
@@ -134,7 +195,38 @@ class TestDragDropTreeComponent {
       resolve();
     });
   }
+
 }
+
+describe('virtualScroll Tree', () => {
+  let fixture: ComponentFixture<TestVirtualScrollTreeComponent>;
+  let debugEl: DebugElement;
+  let component: TestVirtualScrollTreeComponent;
+  let domHelper: DomHelper<TestVirtualScrollTreeComponent>;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [TreeModule],
+      providers: [PopoverDirective, OverlayContainerRef],
+      declarations: [TestVirtualScrollTreeComponent]
+    });
+  });
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(TestVirtualScrollTreeComponent);
+    debugEl = fixture.debugElement;
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+    domHelper = new DomHelper(fixture);
+  });
+
+  describe('basic', () => {
+    it('should be created correctly', () => {
+      expect(component).toBeTruthy();
+      expect(component.operableTree.nodes).not.toBeNull();
+    });
+  });
+});
 
 describe('operable tree', () => {
   let fixture: ComponentFixture<TestOperableTreeComponent>;
@@ -161,6 +253,8 @@ describe('operable tree', () => {
   describe('basic', () => {
     it('should be created correctly', () => {
       expect(component).toBeTruthy();
+      expect(component.operableTree.nodes).not.toBeNull();
+
     });
 
     it('shuold have correct style classes', () => {
@@ -240,6 +334,12 @@ describe('operable tree', () => {
         expect(insertedIcons.length).toBe(3);
       });
 
+      it('should contextmenu work correctly', () => {
+        const treeEl: HTMLElement = debugEl.query(By.css('.devui-tree-node__title')).nativeElement;
+        treeEl.dispatchEvent(new Event('contextmenu'));
+        expect(component.onRightClicked).toHaveBeenCalled();
+      });
+
       it('should edit icon button work', fakeAsync(() => {
         const editBtnIconEl = insertedIcons[1].nativeElement;
         editBtnIconEl.dispatchEvent(new Event('click'));
@@ -292,7 +392,10 @@ describe('operable tree', () => {
       }));
 
       it('should postAddNode work', fakeAsync(() => {
+        let testNode;
         component.postAddNode = (node: TreeNode) => {
+          node.data.title = 'newNode';
+          testNode = node;
           return new Promise((resolve, reject) => {
             resolve(node);
           });
@@ -309,7 +412,65 @@ describe('operable tree', () => {
         const inputEl: HTMLInputElement = debugEl.query(By.css('.devui-form-control.devui-input-sm')).nativeElement;
         inputEl.dispatchEvent(new Event('blur'));
         fixture.detectChanges();
+        expect(component.operableTree.treeFactory.nodes[testNode.id].data.title).toEqual('newNode');
       }));
+    });
+  });
+
+  describe('tree factory', () => {
+    it('should checkableRelation work correctly', () => {
+      const treeFactory = component.operableTree.treeFactory;
+      treeFactory.checkNodesById('parent2', true, 'none');
+      expect(treeFactory.getNodeById('child1').isChecked).not.toBeTruthy();
+      expect(treeFactory.getNodeById('parent2').isChecked).toBeTruthy();
+
+      treeFactory.checkNodesById('parent2', false);
+      treeFactory.checkNodesById('child1', false);
+      treeFactory.checkNodesById('parent2', true, 'upward');
+      expect(treeFactory.getNodeById('child1').isChecked).not.toBeTruthy();
+      expect(treeFactory.getNodeById('parent2').isChecked).toBeTruthy();
+
+      treeFactory.checkNodesById('parent2', false);
+      treeFactory.checkNodesById('child1', false);
+      treeFactory.checkNodesById('child1', true, 'upward');
+      expect(treeFactory.getNodeById('child1').isChecked).toBeTruthy();
+      expect(treeFactory.getNodeById('parent2').isChecked).toBeTruthy();
+
+      treeFactory.checkNodesById('parent2', false);
+      treeFactory.checkNodesById('child1', false);
+      treeFactory.checkNodesById('child1', true, 'downward');
+      expect(treeFactory.getNodeById('child1').isChecked).toBeTruthy();
+      expect(treeFactory.getNodeById('parent2').isChecked).not.toBeTruthy();
+
+      treeFactory.checkNodesById('parent2', false);
+      treeFactory.checkNodesById('child1', false);
+      treeFactory.checkNodesById('parent2', true, 'downward');
+      expect(treeFactory.getNodeById('child1').isChecked).toBeTruthy();
+      expect(treeFactory.getNodeById('parent2').isChecked).toBeTruthy();
+    });
+
+    it('should activeNodeById work correctly', () => {
+      const treeFactory = component.operableTree.treeFactory;
+      treeFactory.activeNodeById('parent2');
+      expect(treeFactory.getNodeById('parent2').isActive).toBeTruthy();
+    });
+
+    it('should getCompleteNodeById work correctly', () => {
+      const treeFactory = component.operableTree.treeFactory;
+      expect(treeFactory.getCompleteNodeById('parent2').id).toEqual('parent2');
+    });
+
+    it('should checkAllNodes work correctly', () => {
+      const treeFactory = component.operableTree.treeFactory;
+      treeFactory.checkAllNodes(true);
+      expect(treeFactory.getCheckedNodes().length).toEqual(Object.values(treeFactory.nodes).length);
+    });
+
+    it('should hideNodeById work correctly', () => {
+      const treeFactory = component.operableTree.treeFactory;
+      treeFactory.hideNodeById('test', true);
+      fixture.detectChanges();
+      expect(document.getElementById('devui-tree-node-test')).toBeNull();
     });
   });
 
@@ -329,7 +490,7 @@ describe('operable tree', () => {
       }
     });
 
-    it('should append items to a void parent throw error', () => {
+    it('should append children to a void parent throw error', () => {
       const appendItem = [{ title: '叶子节点11' }];
       expect(() => {
         component.operableTree.appendTreeItems(appendItem, 'unknown');
@@ -452,4 +613,5 @@ describe('operable tree drag & drop', () => {
 
     expect(component.onDrop).toHaveBeenCalledTimes(0); // drop
   }));
+
 });

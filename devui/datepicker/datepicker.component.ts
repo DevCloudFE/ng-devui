@@ -1,27 +1,26 @@
 import {
+  ChangeDetectorRef,
   Component,
-  OnInit,
+  ElementRef,
+  EventEmitter,
+  forwardRef,
+  HostListener,
+  Input,
   OnChanges,
   OnDestroy,
-  Input,
+  OnInit,
   Output,
-  forwardRef,
-  ElementRef,
   Renderer2,
-  EventEmitter,
-  ChangeDetectorRef,
-  HostListener,
-  TemplateRef,
-  SimpleChanges
+  SimpleChanges,
+  TemplateRef
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-
-import { DatePickerConfigService as DatePickerConfig } from './date-picker.config.service';
-import { DateConverter } from 'ng-devui/utils';
-import { SelectDateChangeEventArgs, SelectDateChangeReason } from './date-change-event-args.model';
-import { DefaultDateConverter, unshiftString } from 'ng-devui/utils';
-import { I18nService, I18nInterface } from 'ng-devui/i18n';
+import { I18nInterface, I18nService } from 'ng-devui/i18n';
+import { DateConverter, DefaultDateConverter, unshiftString } from 'ng-devui/utils';
 import { Subscription } from 'rxjs';
+import { SelectDateChangeEventArgs, SelectDateChangeReason } from './date-change-event-args.model';
+import { DatePickerConfigService as DatePickerConfig } from './date-picker.config.service';
+
 @Component({
   selector: 'd-datepicker',
   templateUrl: './datepicker.component.html',
@@ -39,7 +38,6 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
   protected _minDate: Date;
   protected nowMinYear: number;
   protected nowMaxYear: number;
-  protected _dateFormat: string;
   @Input() cssClass: string;
   @Input() dateConverter: DateConverter;
   @Input() locale: string;
@@ -47,12 +45,11 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
   @Input() disabled = false;
   @Input() customViewTemplate: TemplateRef<any>;
   @Input() selectedDate: Date;
-  @Output() cmpClicking = new EventEmitter<boolean>();
   yearNumber = 12;
   _yearNumber = 12;
   _dateConfig: any;
   currentYear: number;
-  currentMonth: number;
+  currentMonthIndex: number;
   _currentHour: number | string;
   _currentMinute: number | string;
   _currentSecond: number | string;
@@ -70,7 +67,6 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
   i18nLocale: I18nInterface['locale'];
   i18nCommonText: I18nInterface['common'];
   i18nSubscription: Subscription;
-  isClickingCmp = false;
 
   protected onChange = (_: any) => null;
   protected onTouched = () => null;
@@ -85,6 +81,7 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
     this._dateConfig = datePickerConfig['dateConfig'];
     this.dateConverter = datePickerConfig['dateConfig'].dateConverter || new DefaultDateConverter();
     this.renderer2.setStyle(this.elementRef.nativeElement, 'display', 'inline-block');
+    this.setI18nText();
   }
 
   ngOnInit() {
@@ -93,11 +90,11 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
 
     this.hourOptions = new Array(24).fill(0).map((value, index) => this.fillLeft(index));
     this.minuteOptions = new Array(60).fill(0).map((value, index) => this.fillLeft(index));
-    this.nowMinYear = (new Date()).getFullYear() - Math.floor(this._yearNumber / 2) < this.minDate.getFullYear() ?
-      this.minDate.getFullYear() : (new Date()).getFullYear() - Math.floor(this._yearNumber / 2);
-    this.nowMaxYear = (new Date()).getFullYear() + Math.floor(this._yearNumber / 2) > this.maxDate.getFullYear() ?
-      this.maxDate.getFullYear() : (new Date()).getFullYear() + Math.floor(this._yearNumber / 2);
-    this.setI18nText();
+    const nowDate = this.selectedDate || new Date();
+    this.nowMinYear = (nowDate).getFullYear() - Math.floor(this._yearNumber / 2) < this.minDate.getFullYear() ?
+      this.minDate.getFullYear() : (nowDate).getFullYear() - Math.floor(this._yearNumber / 2);
+    this.nowMaxYear = (nowDate).getFullYear() + Math.floor(this._yearNumber / 2) > this.maxDate.getFullYear() ?
+      this.maxDate.getFullYear() : (nowDate).getFullYear() + Math.floor(this._yearNumber / 2);
     this.onSelectDateChanged();
     this.onDisplayWeeksChange();
     this.onYearRangeChange();
@@ -108,18 +105,6 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
     if (changes && changes['selectedDate'] && changes['selectedDate'].currentValue) {
       this.writeValue(this.selectedDate);
     }
-  }
-
-  @HostListener('document:mousedown', ['$event'])
-  onMouseDown($event) {
-    this.isClickingCmp = this.elementRef.nativeElement.contains($event.target);
-    this.cmpClicking.emit(this.isClickingCmp);
-  }
-
-  @HostListener('document:mouseup', ['$event'])
-  onMouseUp($event) {
-    this.isClickingCmp = false;
-    this.cmpClicking.emit(this.isClickingCmp);
   }
 
   @HostListener('document:click', ['$event'])
@@ -149,7 +134,6 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
     } else {
       this._dateConfig = this.datePickerConfig.dateConfig;
     }
-    this._dateFormat = this.showTime ? this._dateConfig.format.time : this._dateConfig.format.date;
   }
 
   get dateConfig() {
@@ -158,14 +142,14 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
 
   checkDateConfig(dateConfig: any) {
     if (!dateConfig) { return false; }
-    if (typeof(dateConfig.timePicker) !== 'boolean' || !dateConfig.max || !dateConfig.min || !dateConfig.format) {
+    if (typeof(dateConfig.timePicker) !== 'boolean' || !dateConfig.max || !dateConfig.min) {
       return false;
     }
     return true;
   }
 
   @Input() set minDate(date: Date | any) {
-    const parseDate = this.dateConverter.parse(date, this.dateFormat, this.locale || this.i18nLocale);
+    const parseDate = this.dateConverter.parse(date);
     if (parseDate) {
       this._minDate = parseDate;
       this.onYearRangeChange();
@@ -173,7 +157,7 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
   }
 
   @Input() set maxDate(date: Date | any) {
-    const parseDate = this.dateConverter.parse(date, this.dateFormat, this.locale || this.i18nLocale);
+    const parseDate = this.dateConverter.parse(date);
     if (parseDate) {
       this._maxDate = parseDate;
       this.onYearRangeChange();
@@ -186,16 +170,6 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
 
   get minDate() {
     return this._minDate;
-  }
-
-  @Input() set dateFormat(dateFormat: string) {
-    if (dateFormat && this._dateFormat !== dateFormat) {
-      this._dateFormat = dateFormat;
-    }
-  }
-
-  get dateFormat() {
-    return this._dateFormat;
   }
 
   set currentHour(hour: number | string) {
@@ -236,7 +210,16 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
     if (!this.nowMinYear || !this.nowMaxYear) {
       return;
     }
-    const baseYear = this.selectedDate ? this.selectedDate.getFullYear() : (new Date()).getFullYear();
+    let baseYear = Math.round((this.nowMinYear + this.nowMaxYear) / 2);
+    if (this.nowMaxYear - this.nowMinYear < this._yearNumber - 1) {
+      if (this.nowMinYear === this.minDate.getFullYear() && this.nowMaxYear === this.maxDate.getFullYear()) {
+        baseYear = this.nowMinYear + Math.round((this.nowMaxYear - this.nowMinYear) / 2);
+      } else if (this.nowMinYear === this.minDate.getFullYear()) {
+        baseYear = this.nowMaxYear - this._yearNumber / 2 + 1;
+      } else if (this.nowMaxYear === this.maxDate.getFullYear()) {
+        baseYear = this.nowMinYear + this._yearNumber / 2;
+      }
+    }
     this.yearOptions = new Array(this._yearNumber).fill(0).map((value, index) => {
       const title = baseYear - this._yearNumber / 2 + index;
       return {
@@ -259,8 +242,7 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
     if (!obj) {
       return;
     }
-    this.selectedDate = obj ?
-      this.dateConverter.parse(obj, this.dateFormat, this.locale || this.i18nLocale) : null;
+    this.selectedDate = this.dateConverter.parse(obj);
     this.onSelectDateChanged();
     this.onDisplayWeeksChange();
     this.availableMonths = this.onDisplayMonthsChange();
@@ -278,7 +260,7 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
   hasPreMonth() {
     if (this.currentYear > this.minDate.getFullYear()) {
       return true;
-    } else if (this.currentYear === this.minDate.getFullYear() && this.currentMonth > this.minDate.getMonth()) {
+    } else if (this.currentYear === this.minDate.getFullYear() && this.currentMonthIndex > this.minDate.getMonth()) {
       return true;
     } else {
       return false;
@@ -290,9 +272,9 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
       return;
     }
 
-    const date = new Date(this.currentYear, this.currentMonth);
+    const date = new Date(this.currentYear, this.currentMonthIndex);
     date.setMonth(date.getMonth() - 1);
-    this.currentMonth = date.getMonth();
+    this.currentMonthIndex = date.getMonth();
     this.currentYear = date.getFullYear();
     this.onDisplayWeeksChange();
   }
@@ -300,7 +282,7 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
   hasNextMonth() {
     if (this.currentYear < this.maxDate.getFullYear()) {
       return true;
-    } else if (this.currentYear === this.maxDate.getFullYear() && this.currentMonth < this.maxDate.getMonth()) {
+    } else if (this.currentYear === this.maxDate.getFullYear() && this.currentMonthIndex < this.maxDate.getMonth()) {
       return true;
     } else {
       return false;
@@ -315,10 +297,10 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
     if (currentDate) {
       date = new Date(currentDate.getTime());
     } else {
-      date = new Date(this.currentYear, this.currentMonth);
+      date = new Date(this.currentYear, this.currentMonthIndex);
     }
     date.setMonth(date.getMonth() + 1);
-    this.currentMonth = date.getMonth();
+    this.currentMonthIndex = date.getMonth();
     this.currentYear = date.getFullYear();
     this.onDisplayWeeksChange();
   }
@@ -399,14 +381,15 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
       date = this.maxDate;
     }
     this.currentYear = date.getFullYear();
-    this.currentMonth = date.getMonth();
+    this.currentMonthIndex = date.getMonth();
     this.currentHour = this.showTime ? date.getHours() : 0;
     this.currentMinute = this.showTime ? date.getMinutes() : 0;
     this.currentSecond = this.showTime ? date.getSeconds() : 0;
   }
 
   public onDisplayWeeksChange() {
-    const firstDayOfMonth = new Date(this.currentYear, this.currentMonth, 1);
+    const today = new Date();
+    const firstDayOfMonth = new Date(this.currentYear, this.currentMonthIndex, 1);
     const weekOfDay = firstDayOfMonth.getDay();
     const startDate = new Date(firstDayOfMonth.getTime() - weekOfDay * DatepickerComponent.DAY_DURATION);
     const displayWeeks = [];
@@ -417,7 +400,10 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
         return {
           day: this.fillLeft(currentDate.getDate()),
           date: currentDate,
-          inMonth: currentDate.getMonth().toString() === this.currentMonth.toString()
+          inMonth: currentDate.getMonth().toString() === this.currentMonthIndex.toString(),
+          isToday: currentDate.getFullYear() === today.getFullYear() &&
+            currentDate.getMonth() === today.getMonth() &&
+            currentDate.getDate() === today.getDate()
         };
       });
       displayWeeks.push(weekDays);
@@ -428,7 +414,8 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
   public onDisplayMonthsChange() {
     const all = new Array(12).fill(0).map((value, index) => {
       return {
-        title: index,
+        index: index,
+        title: this.i18nText.monthsOfYear[index],
         disabled: false
       };
     });
@@ -438,11 +425,11 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
     }
 
     if (this.currentYear === this.minDate.getFullYear()) {
-      all.map(month => month.disabled = month.title < this.minDate.getMonth());
+      all.map(month => month.disabled = month.index < this.minDate.getMonth());
     }
 
     if (this.currentYear === this.maxDate.getFullYear()) {
-      all.map(month => month.disabled = month.title > this.maxDate.getMonth());
+      all.map(month => month.disabled = month.index > this.maxDate.getMonth());
     }
     return all;
   }
@@ -452,6 +439,9 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
   }
 
   isDisabledDay(date) {
+    if (!date) {
+      return false;
+    }
     const minDate = new Date(this.minDate.getFullYear(), this.minDate.getMonth(), this.minDate.getDate());
     const maxDate = new Date(this.maxDate.getFullYear(), this.maxDate.getMonth(), this.maxDate.getDate(), 23, 59, 59);
     const dis = date.getTime() < minDate.getTime();
@@ -494,11 +484,11 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
       this.onChange(dateObj);
       this.selectedDateChange.emit(dateObj);
     }
-    if (this.currentMonth !== this.selectedDate.getMonth() ||
+    if (this.currentMonthIndex !== this.selectedDate.getMonth() ||
       this.currentYear !== this.selectedDate.getFullYear()
     ) {
       this.currentYear = this.selectedDate.getFullYear();
-      this.currentMonth = this.selectedDate.getMonth();
+      this.currentMonthIndex = this.selectedDate.getMonth();
       this.onDisplayWeeksChange();
     }
   }
@@ -611,6 +601,7 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
 
   clearAll = (reason?: SelectDateChangeReason) => {
     this.writeValue(null);
+    this.selectedDate = null;
     const currentReason = typeof reason === 'number' ? reason : SelectDateChangeReason.custom;
     const dateObj = {
       reason: currentReason,
@@ -675,7 +666,7 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
     if (month.disabled) {
       return;
     }
-    this.currentMonth = month.title;
+    this.currentMonthIndex = month.index;
     this.onDisplayWeeksChange();
     this.openChooseMonth = false;
   }
@@ -689,7 +680,7 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
   }
 
   chooseDate = (date: string, event = {}, reason = SelectDateChangeReason.custom) => {
-    const parseDate = this.dateConverter.parse(date, this.dateFormat, this.locale || this.i18nLocale);
+    const parseDate = this.dateConverter.parse(date);
     this.selectedDate = parseDate || new Date();
     this.onSelectDateChanged();
     this.onSelectDate(event, parseDate, undefined, reason);

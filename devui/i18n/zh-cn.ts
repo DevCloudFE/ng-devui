@@ -88,7 +88,7 @@ export default {
     getBeyondMaximalFileSizeMsg(filename, maximalSize) {
       return `最大支持上传${maximalSize}MB的文件, 您上传的文件"${filename}"超过可上传文件大小`;
     },
-    getAllFilesBeyondMaximalFileSizeMsg( maximalSize) {
+    getAllFilesBeyondMaximalFileSizeMsg(maximalSize) {
       return `最大支持上传${maximalSize}MB的文件, 您本次上传的所有文件超过可上传文件大小`;
     },
     getExistSameNameFilesMsg(sameNames) {
@@ -149,5 +149,8 @@ export default {
     weeksLater: '周后',
     monthsLater: '个月后',
     yearsLater: '年后',
+  },
+  tagsInput: {
+    tagsReachMaxLength: '您输入的标签已达到最大长度限制',
   }
 };

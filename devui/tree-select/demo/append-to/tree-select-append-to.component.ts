@@ -264,11 +264,9 @@ export class TreeSelectAppendToComponent {
 
   }
 
-
   showSelected($event: Event) {
     console.log('event emitted: ', $event);
   }
-
 
   openModal() {
     const results = this.modalService.open({

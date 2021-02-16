@@ -1,10 +1,8 @@
 
-
-import { ChangeDetectionStrategy, Component, Input, TemplateRef, OnInit, Output, EventEmitter } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
 import { BreadCrumbComponent } from '../breadcrumb.component';
-import { MenuConfig } from '../breadcrumb.type';
 import { BreadCrumbService } from '../breadcrumb.service';
-
+import { MenuConfig } from '../breadcrumb.type';
 
 @Component({
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -15,7 +13,6 @@ import { BreadCrumbService } from '../breadcrumb.service';
     preserveWhitespaces: false,
 })
 export class BreadCrumbItemComponent implements OnInit {
-
 
     @Input() showMenu = false;
     @Input() customMenuTemplate: TemplateRef<any>;

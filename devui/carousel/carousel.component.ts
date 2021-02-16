@@ -1,19 +1,19 @@
 import {
   AfterContentInit,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ContentChildren,
   ElementRef,
+  EventEmitter,
   Input,
+  OnChanges,
+  OnDestroy,
   OnInit,
+  Output,
   QueryList,
   Renderer2,
-  SimpleChanges,
-  OnChanges,
-  ChangeDetectorRef,
-  OnDestroy,
-  Output,
-  EventEmitter
+  SimpleChanges
 } from '@angular/core';
 import { CarouselItemComponent } from './carousel-item.component';
 

@@ -1,4 +1,4 @@
-import { Directive, ElementRef, AfterViewInit, Input } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, Input } from '@angular/core';
 @Directive({
   selector: '[dIframeEventPropagate]'
 })
@@ -11,14 +11,14 @@ export class IframeEventPropagateDirective implements AfterViewInit {
 
   ngAfterViewInit() {
     this.element.addEventListener('DOMSubtreeModified', this.AddIframeContentDocumentClickListener);
-    if (this.element.querySelector('iframe') !== null ) {
+    if (this.element.querySelector('iframe') !== null) {
         this.AddIframeContentDocumentClickListener();
     }
   }
   AddIframeContentDocumentClickListener = () => {
       const iframe = this.element.querySelector('iframe');
 
-      if (iframe !== null ) {
+      if (iframe !== null) {
         if (iframe.contentDocument !== null) {
           iframe.contentDocument.addEventListener(this.event, this.dispatchClickEvent);
         } else {

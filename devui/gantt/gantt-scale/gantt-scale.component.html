@@ -29,9 +29,9 @@
   </div>
   <div class="devui-scale-unit">
     <div *ngIf="highlight && data.highlightStart" class="scale-highlight" [style.minWidth]="highlightMinWidth + 'px'">
-      <div style="float: left;">{{ highlightStartText }}</div>
-      <div style="float: right;">{{ highlightEndText }}</div>
-      <div style="clear: both;"></div>
+      <div style="float: left">{{ highlightStartText }}</div>
+      <div style="float: right">{{ highlightEndText }}</div>
+      <div style="clear: both"></div>
     </div>
     <ng-container *ngIf="!highlight || !data.highlight">
       <div *ngIf="unit === 'day'" class="border-left" [ngClass]="{ today: data.today }">

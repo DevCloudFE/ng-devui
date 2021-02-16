@@ -1,47 +1,49 @@
 <div class="demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 60, bottom: 0 }">
   <d-demo-nav [navItems]="navItems"></d-demo-nav>
   <div class="demo-example">
-    <div class="demo-title">表单项d-form-item</div>
-    <div class="demo-text">表单项，包含表单Label和具体表单输入组件。</div>
+    <div class="demo-title">{{ 'components.form.basicDemo.d-form-item-title' | translate }}</div>
+    <div class="demo-text">{{ 'components.form.basicDemo.d-form-item-description' | translate }}</div>
   </div>
   <div class="demo-example">
-    <div class="demo-title">表单项d-form-label</div>
-    <div class="demo-text">表单项Label，描述该项表单关键字，包括帮助信息、是否必填等功能。</div>
+    <div class="demo-title">{{ 'components.form.basicDemo.d-form-label-title' | translate }}</div>
+    <div class="demo-text">{{ 'components.form.basicDemo.d-form-label-description' | translate }}</div>
   </div>
   <div class="demo-example">
-    <div class="demo-title">控件容器d-form-control</div>
-    <div class="demo-text">表单项控件容器，里面容纳不同的表单输入组件。</div>
+    <div class="demo-title">{{ 'components.form.basicDemo.d-form-control-title' | translate }}</div>
+    <div class="demo-text">{{ 'components.form.basicDemo.d-form-control-description' | translate }}</div>
   </div>
   <div class="demo-example">
-    <div class="demo-title">操作区容器d-form-operation</div>
-    <div class="demo-text">操作区域容器，用来放置按钮等元素。</div>
+    <div class="demo-title">{{ 'components.form.basicDemo.d-form-operation-title' | translate }}</div>
+    <div class="demo-text">{{ 'components.form.basicDemo.d-form-operation-description' | translate }}</div>
   </div>
 
   <div class="demo-example">
-    <div class="demo-title">基本用法</div>
-    <div class="demo-text">基本用法当中，Label是在数据框的上面。</div>
+    <div class="demo-title">{{ 'components.form.basicDemo.title' | translate }}</div>
+    <div class="demo-text">{{ 'components.form.basicDemo.description' | translate }}</div>
     <d-codebox id="form-base" [sourceData]="BasicSource">
       <d-form-demo-base demo></d-form-demo-base>
     </d-codebox>
   </div>
   <div class="demo-example" [dAnchor]="'demo-label-horizontal'">
-    <div class="demo-title">label横向排列</div>
-    <div class="demo-text">Label左右布局方式</div>
+    <div class="demo-title">{{ 'components.form.labelHorizontalDemo.title' | translate }}</div>
+    <div class="demo-text">{{ 'components.form.labelHorizontalDemo.description' | translate }}</div>
     <d-codebox id="form-label-horizontal" [sourceData]="LabelHorizontalSource">
       <d-form-demo-label-horizontal demo></d-form-demo-label-horizontal>
     </d-codebox>
   </div>
   <div class="demo-example" [dAnchor]="'demo-modal'">
-    <div class="demo-title">弹框表单</div>
-    <div class="demo-text">弹框表单，弹框建议是400px，550px，700px，900px，建议宽高比是16:9、3：2</div>
+    <div class="demo-title">{{ 'components.form.modalDemo.title' | translate }}</div>
+    <div class="demo-text">
+      {{ 'components.form.modalDemo.description' | translate }}
+    </div>
     <d-codebox id="form-modal" [sourceData]="ModalSource">
       <d-form-demo-modal demo></d-form-demo-modal>
     </d-codebox>
   </div>
 
   <div class="demo-example" [dAnchor]="'demo-multi-col'">
-    <div class="demo-title">多列表单</div>
-    <div class="demo-text">多列表单</div>
+    <div class="demo-title">{{ 'components.form.multiColDemo.title' | translate }}</div>
+    <div class="demo-text">{{ 'components.form.multiColDemo.description' | translate }}</div>
     <d-codebox id="form-multi-col" [sourceData]="MultiColSource">
       <d-form-demo-multi-col demo></d-form-demo-multi-col>
     </d-codebox>
@@ -50,8 +52,8 @@
   <hr class="split-line" />
 
   <div class="demo-example" [dAnchor]="'demo-validate-template'">
-    <div class="demo-title">模板驱动表单验证</div>
-    <div class="demo-text">模板中绑定<code>ngModel、ngGroupModel、ngForm</code>的元素，可使用<code>dValidateRules</code>配置校验规则。</div>
+    <div class="demo-title">{{ 'components.form.innerValidatorDemo.title' | translate }}</div>
+    <div class="demo-text" [innerHTML]="'components.form.innerValidatorDemo.description' | translate"></div>
     <div id="demo-validate-template">
       <d-codebox id="inner-validator" [sourceData]="InnerValidatorSource">
         <d-form-demo-inner-validator demo></d-form-demo-inner-validator>
@@ -65,6 +67,9 @@
       <d-codebox id="custom-message-show" [sourceData]="CustomMessageShowSource">
         <d-form-demo-custom-message-show demo></d-form-demo-custom-message-show>
       </d-codebox>
+      <d-codebox id="debounce-time" [sourceData]="DebounceTimeSource">
+        <d-form-demo-debounce-time demo></d-form-demo-debounce-time>
+      </d-codebox>
       <d-codebox id="validate-template-form" [sourceData]="ValidateTemplateForm">
         <d-form-demo-validate-template-form demo></d-form-demo-validate-template-form>
       </d-codebox>
@@ -74,8 +79,8 @@
     </div>
   </div>
   <div class="demo-example" [dAnchor]="'demo-validate-reactive'">
-    <div class="demo-title">响应式表单验证</div>
-    <div class="demo-text">
+    <div class="demo-title">{{ 'components.form.validateReactiveDemo.title' | translate }}</div>
+    <div class="demo-text" [innerHTML]="'components.form.validateReactiveDemo.description' | translate">
       模板中绑定<code>formGroup、formControlName、formControl</code>，使用<code>dValidateRules</code>配置校验规则。
       <p>推荐阅读<a href="https://angular.cn/guide/reactive-forms" target="_blank">【Angular响应式表单】</a></p>
     </div>
@@ -85,8 +90,8 @@
   </div>
 
   <div class="demo-example" [dAnchor]="'demo-custom-status'">
-    <div class="demo-title">指定表单Feedback状态</div>
-    <div class="demo-text">
+    <div class="demo-title">{{ 'components.form.customStatusDemo.title' | translate }}</div>
+    <div class="demo-text" [innerHTML]="'components.form.customStatusDemo.description' | translate">
       你可通过对<code>d-form-control</code>设置<code>feedbackStatus</code>手动指定反馈状态。
       当前已支持状态：<code>success、error、pending</code>。
     </div>
@@ -96,8 +101,8 @@
   </div>
 
   <div class="demo-example" [dAnchor]="'demo-validate-sync'">
-    <div class="demo-title">表单协同验证</div>
-    <div class="demo-text">
+    <div class="demo-title">{{ 'components.form.validateSyncDemo.title' | translate }}</div>
+    <div class="demo-text" [innerHTML]="'components.form.validateSyncDemo.description' | translate">
       在一些场景下，你的多个表单组件互相依赖，需共同校验（如注册场景中的密码输入与确认密码），此时你需要用协同验证指令<code>dValidateSyncKey</code>来为需要系统校验的组件指定相同的<code
         >key</code
       >
@@ -113,19 +118,8 @@
   </div>
 
   <div class="demo-example" [dAnchor]="'demo-validate-cross-component'">
-    <div class="demo-title">跨组件验证</div>
-    <div class="demo-text">
-      <ul>
-        <li>
-          当前<code>Angular Form</code
-          >默认暂不支持跨组件共享表单校验状态，对于响应式表单，你可使用统一管理<code>model</code>，向下透传的方式进行组件组织。
-        </li>
-        <li>
-          针对模板驱动表单，你可使用在子组件声明时进行容器注入的方式，将你需要的<code>ngModelGroup</code>或<code>NgForm</code>容器进行注入，
-          以供模板中表单元素自动获取父容器。
-        </li>
-      </ul>
-    </div>
+    <div class="demo-title">{{ 'components.form.validateCrossComponentDemo.title' | translate }}</div>
+    <div class="demo-text" [innerHTML]="'components.form.validateCrossComponentDemo.description' | translate"></div>
     <div id="demo-validate-cross-component">
       <d-codebox [sourceData]="ReactiveFormCrossComponent">
         <d-form-demo-validate-cross-component demo></d-form-demo-validate-cross-component>
@@ -135,22 +129,4 @@
       </d-codebox>
     </div>
   </div>
-  <!-- <div class="demo-example" [dAnchor]="'demo-validate-coordinated'">
-    <div class="demo-title">表单联动</div>
-    <div class="demo-text">
-      表单联动
-    </div>
-    <d-codebox id="form-validate-coordinated" [sourceData]="ValidateCoordinatedSource">
-      <d-form-demo-validate-coordinated demo></d-form-demo-validate-coordinated>
-    </d-codebox>
-  </div>
-  <div class="demo-example" [dAnchor]="'demo-validate-dynamic-rule'">
-    <div class="demo-title">动态校验规则</div>
-    <div class="demo-text">
-      动态校验规则
-    </div>
-    <d-codebox id="form-multi-col" [sourceData]="ValidateDynamicRuleSource">
-      <d-form-demo-validate-dynamic-rule demo></d-form-demo-validate-dynamic-rule>
-    </d-codebox>
-  </div> -->
 </div>

@@ -17,8 +17,6 @@ export class FilterComponent implements OnInit {
 
   isShowFilterPannel = false;
 
-
-
   listOfControls: Array<CheckedDataFormat> = [
     { name: 'userName1', label: '计划名1' },
     { name: 'userName2', label: '计划名2' },
@@ -88,4 +86,3 @@ export class FilterComponent implements OnInit {
     this.isShowFilterPannel = !this.isShowFilterPannel;
   }
 }
-

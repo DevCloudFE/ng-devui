@@ -1,24 +1,82 @@
 @import '~ng-devui/styles-var/devui-var.scss';
+$len: 170px;
+$time: 1800ms;
 
-.devui-loading-demo {
-  margin-top: 50px;
+d-button {
+  margin-right: 16px;
 }
 
-.custom-loader {
-  border: 5px solid $devui-line;
-  border-top: 5px solid $devui-contrast;
-  border-radius: 50%;
-  width: 80px;
-  height: 80px;
-  animation: spin 0.5s linear infinite;
+.devui-infinity-loading {
+  svg {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
 }
 
-@keyframes spin {
+#infinity-outline {
+  stroke-dasharray: $len * 0.01, $len;
+  stroke-dashoffset: 0;
+  animation: anim $time linear infinite;
+  opacity: 1;
+}
+
+#infinity-bg {
+  stroke: #3b5885;
+}
+
+@keyframes anim {
   0% {
-    transform: rotate(0deg);
+    stroke-dasharray: $len * 0, $len;
+    stroke-dashoffset: -$len * 0;
+  }
+
+  55% {
+    stroke-dasharray: $len * 0.24, $len;
+    stroke-dashoffset: -$len * 0.36;
   }
 
   100% {
-    transform: rotate(360deg);
+    stroke-dasharray: -$len * 0.93, $len;
+    stroke-dashoffset: -$len * 0.93;
   }
+}
+
+.devui-circle-loading-container {
+  position: absolute;
+  top: 5px;
+}
+
+.devui-circle-loading-container-2 {
+  position: absolute;
+  right: -20px;
+  top: 0;
+}
+
+.devui-circle-loading {
+  animation: loadingCircle 1s linear infinite;
+}
+
+@keyframes loadingCircle {
+  0% {
+    stroke-dasharray: 1, 50;
+    stroke-dashoffset: 0;
+  }
+
+  60% {
+    stroke-dasharray: 30, 50;
+    stroke-dashoffset: -30;
+  }
+
+  100% {
+    stroke-dasharray: 1, 50;
+    stroke-dashoffset: -50;
+  }
+}
+
+.loading-container {
+  height: 150px;
 }

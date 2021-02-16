@@ -1,7 +1,7 @@
-import { AccordionComponent } from './accordion.component';
-import { Component, ViewEncapsulation, HostBinding, ViewChild, HostListener, SimpleChanges, OnChanges} from '@angular/core';
+import { Component, HostBinding, HostListener, OnChanges, SimpleChanges, ViewChild, ViewEncapsulation} from '@angular/core';
+import { Params, Router, RouterLinkActive, UrlTree } from '@angular/router';
 import { AccordionBaseLinkComponent } from './accordion-base-link-component.class';
-import { RouterLinkActive, Router, UrlTree, Params } from '@angular/router';
+import { AccordionComponent } from './accordion.component';
 
 @Component({
   selector: 'd-accordion-item-routerlink',

@@ -1,6 +1,5 @@
-import { Input, Component, OnInit, ViewEncapsulation, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-
-import * as HighLight from 'highlight.js/lib/highlight';
+import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import * as HighLight from 'highlight.js/lib/core';
 
 ['xml', 'css', 'typescript'].forEach((langName) => {
   // Using require() here because import() support hasn't landed in Webpack yet

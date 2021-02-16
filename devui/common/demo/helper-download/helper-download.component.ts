@@ -1,5 +1,5 @@
-import { Component, HostBinding } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Component, HostBinding } from '@angular/core';
 import { HelperUtils } from '../../helper-utils';
 
 @Component({

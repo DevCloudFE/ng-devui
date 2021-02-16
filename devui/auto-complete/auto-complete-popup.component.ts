@@ -1,24 +1,18 @@
-import {
-  Component,
-  ElementRef,
-  Input,
-  TemplateRef,
-  ViewChild
-} from '@angular/core';
-import { ControlValueAccessor } from '@angular/forms';
-import { AutoCompleteConfig } from './auto-complete-config';
-import { fadeInOut } from 'ng-devui/utils';
 import { CdkOverlayOrigin } from '@angular/cdk/overlay';
+import { Component, ElementRef, Input, TemplateRef, ViewChild } from '@angular/core';
+import { ControlValueAccessor } from '@angular/forms';
+import { fadeInOut } from 'ng-devui/utils';
+import { AutoCompleteConfig } from './auto-complete-config';
 
 @Component({
   selector: 'd-auto-complete-popup',
   templateUrl: './auto-complete-popup.component.html',
   styleUrls: ['auto-complete-popup.component.scss'],
   animations: [fadeInOut],
-  preserveWhitespaces: false
+  preserveWhitespaces: false,
 })
 export class AutoCompletePopupComponent implements ControlValueAccessor {
-  @Input() width;
+  @Input() width: number;
   @Input() cssClass: string;
   @Input() maxHeight: number;
   @Input() disabled: boolean;
@@ -48,10 +42,7 @@ export class AutoCompletePopupComponent implements ControlValueAccessor {
   private onChange = (_: any) => null;
   private onTouched = () => null;
 
-  constructor(
-    private autoCompleteConfig: AutoCompleteConfig,
-    public elementRef: ElementRef
-    ) {
+  constructor(private autoCompleteConfig: AutoCompleteConfig, public elementRef: ElementRef) {
     this.formatter = this.autoCompleteConfig.autoComplete.formatter;
     this.maxHeight = 300;
   }
@@ -78,7 +69,8 @@ export class AutoCompletePopupComponent implements ControlValueAccessor {
       event.stopPropagation();
       return;
     }
-    if (this.overview === 'single') { // 单选场景和单行场景不需要冒泡
+    if (this.overview === 'single') {
+      // 单选场景和单行场景不需要冒泡
       event.preventDefault();
       event.stopPropagation();
     }
@@ -102,20 +94,17 @@ export class AutoCompletePopupComponent implements ControlValueAccessor {
 
   scrollToActive(): void {
     const that = this;
-    setTimeout(_ => {
-      try {
-        const selectIndex = that.activeIndex;
-        const scrollPane: any = that.dropdownUl.nativeElement.children[selectIndex];
-        if (scrollPane.scrollIntoViewIfNeeded) {
-          scrollPane.scrollIntoViewIfNeeded(false);
-        } else {
-          const containerInfo = that.dropdownUl.nativeElement.getBoundingClientRect();
-          const elementInfo = scrollPane.getBoundingClientRect();
-          if (elementInfo.bottom > containerInfo.bottom || elementInfo.top < containerInfo.top) {
-            scrollPane.scrollIntoView(false);
-          }
+    setTimeout(() => {
+      const selectIndex = that.activeIndex;
+      const scrollPane: any = that.dropdownUl.nativeElement.children[selectIndex];
+      if (scrollPane.scrollIntoViewIfNeeded) {
+        scrollPane.scrollIntoViewIfNeeded(false);
+      } else {
+        const containerInfo = that.dropdownUl.nativeElement.getBoundingClientRect();
+        const elementInfo = scrollPane.getBoundingClientRect();
+        if (elementInfo.bottom > containerInfo.bottom || elementInfo.top < containerInfo.top) {
+          scrollPane.scrollIntoView(false);
         }
-      } catch (e) {
       }
     });
   }

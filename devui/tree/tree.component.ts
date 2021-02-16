@@ -1,28 +1,28 @@
+import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import {
+  AfterViewInit,
   Component,
+  ElementRef,
   EventEmitter,
   Input,
+  OnChanges,
+  OnDestroy,
   OnInit,
   Output,
-  TemplateRef,
-  SimpleChanges,
-  OnChanges,
-  AfterViewInit,
-  ViewChildren,
   QueryList,
-  ElementRef,
-  OnDestroy,
-  ViewChild
+  SimpleChanges,
+  TemplateRef,
+  ViewChild,
+  ViewChildren
 } from '@angular/core';
+import { I18nInterface, I18nService } from 'ng-devui/i18n';
+import { Subject, Subscription } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import {
   ITreeItem,
   TreeFactory,
   TreeNode
 } from './tree-factory.class';
-import { I18nService, I18nInterface } from 'ng-devui/i18n';
-import { Subscription, Subject } from 'rxjs';
-import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
-import { takeUntil, throttleTime } from 'rxjs/operators';
 @Component({
   selector: 'd-tree',
   templateUrl: './tree.component.html',
@@ -52,22 +52,23 @@ export class TreeComponent implements OnInit, OnChanges, AfterViewInit, OnDestro
   @Output() nodeDblClicked: EventEmitter<any> = new EventEmitter<any>();
   @Output() nodeRightClicked: EventEmitter<any> = new EventEmitter<any>();
   @Output() nodeToggled: EventEmitter<any> = new EventEmitter<any>();
+  @Output() afterTreeInit: EventEmitter<any> = new EventEmitter<any>();
   @ViewChildren('treeNodeContent') treeNodeContent: QueryList<ElementRef>; // 获取content以取得tree宽度
   @ViewChild(CdkVirtualScrollViewport) viewPort: CdkVirtualScrollViewport;
   i18nCommonText: I18nInterface['common'];
   i18nSubscription: Subscription;
   treeNodes = [];
-  private mouseRightButton = 2;
   destroy$ = new Subject();
   constructor(private i18n: I18nService) {
-    this.i18nCommonText = this.i18n.getI18nText().common;
-    this.i18nSubscription = this.i18n.langChange().subscribe((data) => {
-      this.i18nCommonText = data.common;
-    });
+
   }
 
   ngOnInit() {
     this.initTree();
+    this.i18nCommonText = this.i18n.getI18nText().common;
+    this.i18nSubscription = this.i18n.langChange().subscribe((data) => {
+      this.i18nCommonText = data.common;
+    });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -93,23 +94,18 @@ export class TreeComponent implements OnInit, OnChanges, AfterViewInit, OnDestro
       });
       this.treeFactory.getFlattenNodes();
     }
+    this.afterTreeInit.emit(this.treeFactory.nodes);
   }
 
   ngAfterViewInit() {
   }
 
-
   contextmenuEvent(event, node) {
-    if (event.button === this.mouseRightButton) {
-      this.nodeRightClicked.emit({ node: node, event: event });
-    }
+    this.nodeRightClicked.emit({ node: node, event: event });
   }
 
-
   selectNode(event, treeNode: TreeNode) {
-    if (!event.target.classList.contains('devui-tree-node__content--value-wrapper')
-      && !event.target.classList.contains('devui-tree-node__content')
-      && !event.target.classList.contains('devui-tree-node__title')) {
+    if (!this.isSelectableRegion(event.target)) {
       return;
     }
     this.nodeSelected.emit(treeNode);
@@ -145,6 +141,17 @@ export class TreeComponent implements OnInit, OnChanges, AfterViewInit, OnDestro
   }
   public nodeDblClick(event, node) {
     this.nodeDblClicked.emit(node);
+  }
+
+  public isSelectableRegion(ele) {
+    if (!ele.classList.contains('devui-tree-node__content--value-wrapper')
+      && !ele.classList.contains('devui-tree-node__content')
+      && !ele.classList.contains('devui-tree-node__title')
+      && ele.tagName !== 'D-HIGHLIGHT'
+      && ele.parentNode.tagName !== 'D-HIGHLIGHT') {
+      return false;
+    }
+    return true;
   }
 
   ngOnDestroy() {

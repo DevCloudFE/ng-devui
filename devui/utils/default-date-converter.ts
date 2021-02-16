@@ -1,6 +1,6 @@
+import { I18nFormat } from 'ng-devui/i18n';
 import { DateConverter } from './date-converter';
 import { parseDate } from './date-utils';
-import { I18nFormat } from 'ng-devui/i18n';
 
 export class DefaultDateConverter implements DateConverter {
 

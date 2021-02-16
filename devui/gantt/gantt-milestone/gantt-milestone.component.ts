@@ -1,6 +1,6 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
-import { GanttService } from '../gantt.service';
+import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { GanttService } from '../gantt.service';
 
 @Component({
   selector: 'd-gantt-milestone',

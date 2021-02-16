@@ -1,5 +1,3 @@
-
-
 export type ThemeId = string;
 
 export class Theme {
@@ -43,4 +41,3 @@ export class Theme {
     this.isExtendable = theme.isExtendable || true;
   }
 }
-

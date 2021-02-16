@@ -1,10 +1,10 @@
-import { Directive, OnDestroy, AfterViewInit, OnInit } from '@angular/core';
+import { AfterViewInit, Directive, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { DescendantRoot } from '../services/drag-drop-desc-reg.service';
+import { DragSyncDescendantRegisterService, DropSortSyncDescendantRegisterService } from '../services/drag-drop-descendant-sync.service';
 import { DragDropSyncService } from '../services/drag-drop-sync.service';
 import { DragSyncDirective } from './drag-sync.directive';
 import { DropSortSyncDirective } from './drop-sort-sync.directive';
-import { DescendantRoot } from '../services/drag-drop-desc-reg.service';
-import { DragSyncDescendantRegisterService, DropSortSyncDescendantRegisterService } from '../services/drag-drop-descendant-sync.service';
 
 @Directive({
   selector: '[dDragDropSyncBox]',
@@ -22,8 +22,8 @@ export class DragDropSyncBoxDirective implements OnInit, AfterViewInit, OnDestro
   // @ContentChildren(DropSortSyncDirective, {descendants: true})
   dropSyncList: DescendantRoot<DropSortSyncDirective>;
   constructor(private dragDropSyncService: DragDropSyncService,
-      private dragSyncDrs: DragSyncDescendantRegisterService,
-      private dropSortSyncDrs: DropSortSyncDescendantRegisterService) {
+              private dragSyncDrs: DragSyncDescendantRegisterService,
+              private dropSortSyncDrs: DropSortSyncDescendantRegisterService) {
     }
 
   ngOnInit() {

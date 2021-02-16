@@ -1,7 +1,7 @@
-import { Component, OnInit, OnDestroy, Input, Inject, ElementRef, Output, EventEmitter, AfterViewInit } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Inject, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { DEFAULT_MODE, DEFAULT_ZINDEX, ESC_KEYCODE } from './fullscreen.config';
 import { FullscreenMode } from './fullscreen.type';
-import { DEFAULT_ZINDEX, DEFAULT_MODE, ESC_KEYCODE } from './fullscreen.config';
 
 @Component({
   selector: 'd-fullscreen',
@@ -145,6 +145,8 @@ export class FullscreenComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnDestroy() {
     document.removeEventListener('fullscreenchange', this.onFullScreenChange);
+    document.removeEventListener('MSFullscreenChange', this.onFullScreenChange);
+    document.removeEventListener('webkitfullscreenchange', this.onFullScreenChange);
     document.removeEventListener('keydown', this.handleKeyDown);
     const btnLaunch = this.elementRef.nativeElement.querySelector('[fullscreen-launch]');
     if (btnLaunch) { btnLaunch.removeEventListener('click', this.handleFullscreen); }

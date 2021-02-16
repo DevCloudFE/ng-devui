@@ -1,9 +1,9 @@
 import {
+    ApplicationRef,
     Component,
     EmbeddedViewRef,
-    ViewChild,
     TemplateRef,
-    ApplicationRef,
+    ViewChild,
 } from '@angular/core';
 
 import {forEach} from 'lodash-es';

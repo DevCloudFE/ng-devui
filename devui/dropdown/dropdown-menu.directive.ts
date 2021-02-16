@@ -1,20 +1,21 @@
-import {Directive, ElementRef, Host, HostBinding, HostListener, OnInit, Renderer2} from '@angular/core';
-import {fromEvent, Subscription} from 'rxjs';
-import {filter} from 'rxjs/operators';
-import {animate, AnimationBuilder, AnimationMetadata, AnimationPlayer, style} from '@angular/animations';
-import {WindowRef} from 'ng-devui/window-ref';
-import {DropDownDirective} from './dropdown.directive';
+import { animate, AnimationBuilder, AnimationMetadata, AnimationPlayer, style } from '@angular/animations';
+import { Directive, ElementRef, Host, HostBinding, HostListener, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { WindowRef } from 'ng-devui/window-ref';
+import { fromEvent, Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
+import { DropDownDirective } from './dropdown.directive';
 
 @Directive({
   selector: '[dDropDownMenu]',
   exportAs: 'd-dropdown-menu',
 })
-export class DropDownMenuDirective implements OnInit {
+export class DropDownMenuDirective implements OnInit, OnDestroy {
   player: AnimationPlayer;
   @HostBinding('style.display') diplay = 'none';
   @HostBinding('attr.tabIndex') tabIndex = -1;
   @HostBinding('class.devui-dropdown-menu') addClass = true;
   @HostBinding('class.devui-dropdown-overlay') addDropDownClass = true;
+  subscription: Subscription;
   keydownEscapeEvent$ = fromEvent(document.body, 'keydown').pipe(
     // chrome 为 Escape , ie 11为Esc
     filter(event => (<KeyboardEvent>event).key === 'Escape' || (<KeyboardEvent>event).key === 'Esc')
@@ -23,8 +24,13 @@ export class DropDownMenuDirective implements OnInit {
   popDirectionCache: 'top' | 'bottom';
   private currentValue: any = false;
   constructor(@Host() private dropdown: DropDownDirective, private el: ElementRef, private render: Renderer2,
-  private windowRef: WindowRef, private builder: AnimationBuilder) {
-    this.dropdown.visibleSubject.subscribe(value => {
+              private windowRef: WindowRef, private builder: AnimationBuilder) {
+
+  }
+
+  ngOnInit() {
+    this.dropdown.dropDownMenu = this;
+    this.subscription = this.dropdown.visibleSubject.subscribe(value => {
       if (value !== this.currentValue) {
         this.currentValue = value;
         if (this.keydownEscapeSub) {
@@ -32,7 +38,7 @@ export class DropDownMenuDirective implements OnInit {
         }
         if (value) {
           this.keydownEscapeSub = this.keydownEscapeEvent$.subscribe(event => {
-            if (event.defaultPrevented) {return; }
+            if (event.defaultPrevented) { return; }
             this.hide(event);
           });
         }
@@ -65,8 +71,13 @@ export class DropDownMenuDirective implements OnInit {
     });
   }
 
-  ngOnInit() {
-    this.dropdown.dropDownMenu = this;
+  ngOnDestroy() {
+    if (this.keydownEscapeSub) {
+      this.keydownEscapeSub.unsubscribe();
+    }
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
   calcPopDirection(value) {
@@ -129,29 +140,29 @@ export class DropDownMenuDirective implements OnInit {
   public mouseLeave(event: MouseEvent) {
     event.stopPropagation();
     if ((this.dropdown.appendToBody && this.dropdown.trigger === 'hover')
-    || (this.dropdown.trigger === 'click' && this.dropdown.closeOnMouseLeaveMenu)) {
-    if (this.dropdown.toggleEl.nativeElement.contains(event.relatedTarget)
-      || this.dropdown.dropdownChildren.some(
-        children =>
-          children.menuEl !== this.el
-          && children.menuEl.nativeElement.parentElement
-          && children.menuEl.nativeElement.parentElement.contains(event.relatedTarget))) {
-      return;
-    } else {
-      if (this.dropdown.trigger === 'hover') {
-        this.dropdown.simulateEventDispatch(event);
+      || (this.dropdown.trigger === 'click' && this.dropdown.closeOnMouseLeaveMenu)) {
+      if (this.dropdown.toggleEl.nativeElement.contains(event.relatedTarget)
+        || this.dropdown.dropdownChildren.some(
+          children =>
+            children.menuEl !== this.el
+            && children.menuEl.nativeElement.parentElement
+            && children.menuEl.nativeElement.parentElement.contains(event.relatedTarget))) {
+        return;
       } else {
-        const relatedTarget = event['originEvent'] &&　event['originEvent'].relatedTarget;
-        if (relatedTarget && (
+        if (this.dropdown.trigger === 'hover') {
+          this.dropdown.simulateEventDispatch(event);
+        } else {
+          const relatedTarget = event['originEvent'] && event['originEvent'].relatedTarget;
+          if (relatedTarget && (
             this.dropdown.toggleEl.nativeElement.contains(relatedTarget)
             || this.dropdown.dropdownChildren.some(children => children.menuEl.nativeElement.contains(relatedTarget))
           )) {
-          return;
+            return;
+          }
+          this.dropdown.isOpen = false;
         }
-        this.dropdown.isOpen = false;
       }
     }
-  }
     return false;
   }
 
@@ -159,17 +170,17 @@ export class DropDownMenuDirective implements OnInit {
     switch (direction) {
       case 'top':
         return [
-          style({transform: 'translateZ(0) scaleY(0)', opacity: 0, transformOrigin: '0% 100%'}),
+          style({ transform: 'translateZ(0) scaleY(0)', opacity: 0, transformOrigin: '0% 100%' }),
           animate('200ms cubic-bezier(0.23, 1, 0.32, 1)',
-            style({transform: 'translateZ(0) scaleY(1)', opacity: 1, transformOrigin: '0% 100%'})
+            style({ transform: 'translateZ(0) scaleY(1)', opacity: 1, transformOrigin: '0% 100%' })
           ),
         ];
       case 'bottom':
       default:
         return [
-          style({transform: 'translateZ(0) scaleY(0)', opacity: 0, transformOrigin: '0% 0%'}),
+          style({ transform: 'translateZ(0) scaleY(0)', opacity: 0, transformOrigin: '0% 0%' }),
           animate('200ms cubic-bezier(0.23, 1, 0.32, 1)',
-            style({transform: 'translateZ(0) scaleY(1)', opacity: 1, transformOrigin: '0% 0%'})
+            style({ transform: 'translateZ(0) scaleY(1)', opacity: 1, transformOrigin: '0% 0%' })
           ),
         ];
     }
@@ -183,17 +194,17 @@ export class DropDownMenuDirective implements OnInit {
     switch (direction) {
       case 'top':
         return [
-          style({transform: 'translateZ(0) scaleY(1)', opacity: 1, transformOrigin: '0% 100%'}),
+          style({ transform: 'translateZ(0) scaleY(1)', opacity: 1, transformOrigin: '0% 100%' }),
           animate('200ms cubic-bezier(0.755, 0.05, 0.855, 0.06)',
-            style({transform: 'translateZ(0) scaleY(0)', opacity: 0, transformOrigin: '0% 100%'})
+            style({ transform: 'translateZ(0) scaleY(0)', opacity: 0, transformOrigin: '0% 100%' })
           )
         ];
       case 'bottom':
       default:
         return [
-          style({transform: 'translateZ(0) scaleY(1)', opacity: 1, transformOrigin: '0% 0%'}),
+          style({ transform: 'translateZ(0) scaleY(1)', opacity: 1, transformOrigin: '0% 0%' }),
           animate('200ms cubic-bezier(0.755, 0.05, 0.855, 0.06)',
-            style({transform: 'translateZ(0) scaleY(0)', opacity: 0, transformOrigin: '0% 0%'})
+            style({ transform: 'translateZ(0) scaleY(0)', opacity: 0, transformOrigin: '0% 0%' })
           )
         ];
     }

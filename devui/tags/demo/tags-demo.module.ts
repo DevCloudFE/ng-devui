@@ -1,40 +1,39 @@
-import { RouterModule } from '@angular/router';
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { TagsModule } from '../tags.module';
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
-import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
-
-import { TagsDemoComponent } from './tags-demo.component';
+import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
+import { TranslateModule } from '@ngx-translate/core';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
+import { TagsModule } from '../tags.module';
 import { BasicComponent } from './basic/basic.component';
 import { CustomComponent } from './custom/custom.component';
-import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
+import { TagsDemoComponent } from './tags-demo.component';
 
 @NgModule({
   imports: [
+    TranslateModule,
     CommonModule,
     TagsModule,
     DevUICodeboxModule,
     DevUIApiModule,
     DDemoNavModule,
     RouterModule.forChild([
-      { path: '',  redirectTo: 'demo' },
-      { path: 'demo', component: TagsDemoComponent},
-      { path: 'api', component: DevUIApiComponent, data: {
-        api: require('!html-loader!markdown-loader!../doc/api.md')
-      }}
-    ])
+      { path: '', redirectTo: 'demo' },
+      { path: 'demo', component: TagsDemoComponent },
+      {
+        path: 'api',
+        component: DevUIApiComponent,
+        data: {
+          'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),
+          'en-us': require('!html-loader!markdown-loader!../doc/api-en.md'),
+        },
+      },
+    ]),
   ],
   exports: [TagsDemoComponent],
-  declarations: [
-    TagsDemoComponent,
-    BasicComponent,
-    CustomComponent,
-  ],
-
+  declarations: [TagsDemoComponent, BasicComponent, CustomComponent],
+  
 })
-export class TagsDemoModule {
-}
-
+export class TagsDemoModule {}

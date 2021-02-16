@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { treeDataSource, SourceType } from '../mock-data';
 import { CheckableRelation, DataTableComponent, TableWidthConfig } from 'ng-devui/data-table';
-
+import { SourceType, treeDataSource } from '../mock-data';
 
 @Component({
   selector: 'd-tree-data',

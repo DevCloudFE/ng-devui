@@ -1,28 +1,29 @@
 import {
   Component,
-  Input,
-  ViewChild,
-  TemplateRef,
-  Output,
   EventEmitter,
+  Input,
   OnDestroy,
+  OnInit,
+  Output,
+  TemplateRef,
+  ViewChild,
 } from '@angular/core';
 
+import { I18nInterface, I18nService } from 'ng-devui/i18n';
+import { Subscription } from 'rxjs';
+import { FileUploader } from './file-uploader.class';
 import {
   IUploadOptions,
   UploadStatus
 } from './file-uploader.types';
 import { UploadComponent } from './upload.class';
-import { FileUploader } from './file-uploader.class';
 import { UploadedFilesComponent } from './uploaded-files.component';
-import { I18nInterface, I18nService } from 'ng-devui/i18n';
-import { Subscription } from 'rxjs';
 @Component({
   selector: 'd-multiple-upload-view',
   templateUrl: './multiple-upload-view.component.html',
   preserveWhitespaces: false,
 })
-export class MultipleUploadViewComponent extends UploadComponent implements OnDestroy {
+export class MultipleUploadViewComponent extends UploadComponent implements OnDestroy , OnInit {
   @ViewChild('dUploadedFiles', { static: true }) uploadedFilesComponent: UploadedFilesComponent;
   @Input() uploadOptions: IUploadOptions;
   @Input() preloadFilesRef: TemplateRef<any>;
@@ -37,6 +38,8 @@ export class MultipleUploadViewComponent extends UploadComponent implements OnDe
   i18nSubscription: Subscription;
   constructor(private i18n: I18nService) {
     super();
+  }
+  ngOnInit(): void {
     this.i18nText = this.i18n.getI18nText().upload;
     this.i18nSubscription = this.i18n.langChange().subscribe((data) => {
       this.i18nText = data.upload;
@@ -80,4 +83,3 @@ export class MultipleUploadViewComponent extends UploadComponent implements OnDe
     }
   }
 }
-

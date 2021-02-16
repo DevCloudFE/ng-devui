@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, HostListener } from '@angular/core';
+import { Component, HostListener, ViewEncapsulation } from '@angular/core';
 import { AccordionBaseLinkComponent } from './accordion-base-link-component.class';
 import { AccordionComponent } from './accordion.component';
 

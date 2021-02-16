@@ -1,6 +1,6 @@
 import { Component, ContentChild, Input, OnInit, TemplateRef } from '@angular/core';
-import { TableTrComponent } from '../row/tr.component';
 import { TableWidthConfig } from '../../data-table.model';
+import { TableTrComponent } from '../row/tr.component';
 
 @Component({
   selector: '[dTableBody]',

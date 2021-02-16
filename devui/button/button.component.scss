@@ -1,26 +1,30 @@
 @import '../style/mixins/index';
 @import '../style/theme/color';
 @import '../style/theme/variables';
-@import '../style/core/font';
+@import '../style/theme/font';
+@import '../style/theme/corner';
 
 $devui-btn-loading-color: $devui-text;
 $devui-btn-xs-padding: 1px 5px;
 $devui-btn-xs-height: 24px;
+$devui-btn-icon-xs-min-width: 24px;
 $devui-btn-xs-min-width: 48px;
 $devui-btn-sm-padding: 1px 15px;
 $devui-btn-sm-min-width: 56px;
+$devui-btn-icon-sm-min-width: 24px;
 $devui-btn-sm-height: 24px;
 $devui-btn-min-width: 64px;
 $devui-btn-height: 28px;
 $devui-btn-padding: 3px 20px;
 $devui-btn-lg-padding: 5px 23px;
 $devui-btn-lg-min-width: 72px;
+$devui-btn-icon-lg-min-width: 32px;
 $devui-btn-lg-height: 32px;
 $devui-btn-xs-font-size: $devui-font-size-sm;
 $devui-btn-sm-font-size: $devui-font-size-sm;
 $devui-btn-font-size: $devui-font-size-md;
 $devui-btn-lg-font-size: $devui-font-size-lg;
-$devui-btn-line-height: $line-height-base;
+$devui-btn-line-height: $devui-line-height-base;
 
 $devui-btn-normal-config: (
   text: (
@@ -71,13 +75,13 @@ $devui-btn-normal-config: (
     min-width: $devui-btn-lg-min-width,
   ),
   left: (
-    border-radius: 2px 0 0 2px,
+    border-radius: $devui-border-radius 0 0 $devui-border-radius,
   ),
   right: (
-    border-radius: 0 2px 2px 0,
+    border-radius: 0 $devui-border-radius $devui-border-radius 0,
   ),
   default: (
-    border-radius: 2px,
+    border-radius: $devui-border-radius,
   )
 );
 
@@ -164,7 +168,7 @@ $devui-btn-pseudo-config: (
   font-size: $devui-btn-font-size;
   height: $devui-btn-height;
   line-height: $devui-btn-line-height;
-  border-radius: 2px;
+  border-radius: $devui-border-radius;
   border-width: 1px;
   border-color: transparent;
   background-color: transparent;
@@ -197,9 +201,9 @@ $devui-btn-pseudo-config: (
 
   &.devui-btn-primary {
     &:disabled {
-      color: $devui-disabled-text;
-      background: $devui-disabled-bg;
-      border: 1px solid $devui-disabled-line;
+      color: $devui-light-text;
+      background: $devui-primary-disabled;
+      border: none;
     }
   }
 
@@ -327,6 +331,27 @@ $devui-btn-pseudo-config: (
     padding: 7px 8px;
     line-height: 1em;
     border: 1px solid transparent;
+
+    &.devui-btn-xs,
+    &.devui-btn-sm {
+      padding: 5px;
+    }
+
+    &.devui-btn-xs {
+      min-width: $devui-btn-icon-xs-min-width;
+    }
+
+    &.devui-btn-sm {
+      min-width: $devui-btn-icon-sm-min-width;
+    }
+
+    &.devui-btn-lg {
+      .icon {
+        font-size: $devui-font-size-icon;
+      }
+
+      min-width: $devui-btn-icon-lg-min-width;
+    }
   }
 
   &:not(.d-btn-icon) {

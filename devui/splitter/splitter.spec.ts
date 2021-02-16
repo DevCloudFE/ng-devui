@@ -1,10 +1,10 @@
-import { ComponentFixture, TestBed, fakeAsync } from '@angular/core/testing';
+import { Component } from '@angular/core';
+import { ComponentFixture, fakeAsync, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { mouseMoveTrigger } from '../utils/testing/event-helper';
 import { SplitterComponent } from './splitter.component';
 import { SplitterModule } from './splitter.module';
 import { SplitterService } from './splitter.service';
-import { Component } from '@angular/core';
-import { mouseMoveTrigger } from '../utils/testing/event-helper';
 @Component({
   template: `
     <section>
@@ -187,7 +187,7 @@ describe('splitter', () => {
       mouseMoveTrigger(spliterBarElement,
         {x: rect.right, y: rect.height },
         {x: rect.right - 2000, y: rect.height});
-        fixture.detectChanges();
+      fixture.detectChanges();
       expect(leftPaneElement.clientWidth).toEqual(Math.round(service.toPixels('20%')));
     }));
 
@@ -200,8 +200,8 @@ describe('splitter', () => {
       mouseMoveTrigger(spliterBarElement,
         {x: rect.right, y: rect.height },
         {x: rect.right + 5000, y: rect.height});
-        fixture.detectChanges();
-        expect(leftPaneElement.clientWidth).toEqual(Math.round(service.toPixels('60%')));
+      fixture.detectChanges();
+      expect(leftPaneElement.clientWidth).toEqual(Math.round(service.toPixels('60%')));
     }));
 
     // 测试拖动时size最小边界
@@ -213,7 +213,7 @@ describe('splitter', () => {
       touchEventTrigger(spliterBarElement,
         {x: rect.right, y: rect.height },
         {x: rect.right - 2000, y: rect.height});
-        fixture.detectChanges();
+      fixture.detectChanges();
       expect(leftPaneElement.clientWidth).toEqual(Math.round(service.toPixels('20%')));
     }));
 
@@ -227,7 +227,7 @@ describe('splitter', () => {
         {x: rect.right, y: rect.height },
         {x: rect.right - 2000, y: rect.height},
         2);
-        fixture.detectChanges();
+      fixture.detectChanges();
       expect(leftPaneElement.clientWidth).toEqual(Math.round(service.toPixels('30%')));
     }));
 
@@ -264,8 +264,8 @@ describe('splitter', () => {
       mouseMoveTrigger(spliterBarElement,
         {x: rect.right, y: rect.height },
         {x: rect.right, y: rect.height - 200});
-        fixture.detectChanges();
-        expect((<HTMLElement>rightPaneElement).style.flexBasis).toEqual('200px');
+      fixture.detectChanges();
+      expect((<HTMLElement>rightPaneElement).style.flexBasis).toEqual('200px');
     }));
   });
 

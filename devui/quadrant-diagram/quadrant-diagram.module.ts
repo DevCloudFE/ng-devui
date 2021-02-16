@@ -1,18 +1,17 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
-import { QuadrantDiagramComponent } from './quadrant-diagram.component';
 import { QuadrantDiagramAxisComponent } from './quadrant-axis/quadrant-axis.component';
+import { QuadrantDiagramComponent } from './quadrant-diagram.component';
 
 import { DragDropModule } from 'ng-devui/dragdrop';
-import { ProgressModule } from 'ng-devui/progress';
-import { PopoverModule } from 'ng-devui/popover';
 import { FullscreenModule } from 'ng-devui/fullscreen';
-import { QuadrantLabelComponent } from './quadrant-label/quadrant-label.component';
+import { PopoverModule } from 'ng-devui/popover';
+import { ProgressModule } from 'ng-devui/progress';
 import { SafePipeModule } from 'ng-devui/utils';
-import { QuadrantRegionComponent } from './quadrant-region/quadrant-region.component';
 import { QuadrantDiagramService } from './quadrant-diagram.service';
-
+import { QuadrantLabelComponent } from './quadrant-label/quadrant-label.component';
+import { QuadrantRegionComponent } from './quadrant-region/quadrant-region.component';
 
 @NgModule({
   imports: [

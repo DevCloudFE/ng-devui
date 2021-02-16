@@ -2,9 +2,10 @@
   <d-tag
     *ngFor="let tag of tags; let index = index"
     [tag]="displayProperty ? tag[displayProperty] : tag"
+    [mode]="mode"
     [deletable]="deletable"
-    [labelStyle]="tag['labelStyle']"
     [checked]="tag['checked']"
+    [labelStyle]="tag['labelStyle']"
     [customColor]="tag['customColor']"
     [titleContent]="titleProperty ? tag[titleProperty] : displayProperty ? tag[displayProperty] : tag"
     [customViewTemplate]="customViewTemplate"

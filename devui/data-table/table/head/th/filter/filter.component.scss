@@ -1,9 +1,10 @@
 @import '../../../../../style/theme/color';
-@import '../../../../../style/core/_font';
+@import '../../../../../style/theme/corner';
+@import '../../../../../style/theme/_font';
 
 .data-table-column-filter-content {
   background: $devui-connected-overlay-bg;
-  border-radius: 2px;
+  border-radius: $devui-border-radius;
 
   .drop-down-item {
     white-space: nowrap;

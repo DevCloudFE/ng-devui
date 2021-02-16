@@ -2,29 +2,25 @@
   <div class="demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 60, bottom: 0 }">
     <d-demo-nav [navItems]="navItems"></d-demo-nav>
     <div class="demo-example" [dAnchor]="'basic-usage'">
-      <div class="demo-title">基本用法</div>
+      <div class="demo-title">{{ 'components.slider.basicDemo.title' | translate }}</div>
       <d-codebox id="components-slider-default" [sourceData]="SliderBasicComponent">
         <d-slider-basic demo></d-slider-basic>
       </d-codebox>
     </div>
 
     <div class="demo-example" [dAnchor]="'slider-disabled'">
-      <div class="demo-title">禁止输入态</div>
-      <div class="demo-text">
-        当 disabled 为 true 的时候是禁止用户输入的状态。
-      </div>
+      <div class="demo-title">{{ 'components.slider.disabledDemo.title' | translate }}</div>
+      <div class="demo-text">{{ 'components.slider.disabledDemo.description' | translate }}</div>
       <d-codebox id="components-slider-disabled" [sourceData]="SliderDisabledComponent">
         <d-slider-disabled demo></d-slider-disabled>
       </d-codebox>
     </div>
 
-    <div class="demo-example" [dAnchor]="'slider-formatter'">
-      <div class="demo-title">定制Popover的显示内容</div>
-      <div class="demo-text">
-        通过 tipsRenderer 参数传入函数定制Popover内的显示内容。
-      </div>
-      <d-codebox id="components-slider-formatter" [sourceData]="SliderCustomFormatterComponent">
-        <d-slider-formatter demo></d-slider-formatter>
+    <div class="demo-example" [dAnchor]="'slider-custom'">
+      <div class="demo-title">{{ 'components.slider.customDemo.title' | translate }}</div>
+      <div class="demo-text">{{ 'components.slider.customDemo.description' | translate }}</div>
+      <d-codebox id="components-slider-custom" [sourceData]="SliderCustomFormatterComponent">
+        <d-slider-custom demo></d-slider-custom>
       </d-codebox>
     </div>
   </div>

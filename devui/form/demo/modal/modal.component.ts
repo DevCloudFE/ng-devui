@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { DialogService } from 'ng-devui/modal';
 import { ModalOneComponent } from '../modal-one/modal-one.component';
 
-
-
 @Component({
   selector: 'd-form-demo-modal',
   templateUrl: './modal.component.html',
@@ -12,7 +10,6 @@ import { ModalOneComponent } from '../modal-one/modal-one.component';
 
 })
 export class ModalComponent implements OnInit {
-
 
   constructor(private dialogService: DialogService) {
   }
@@ -59,6 +56,5 @@ export class ModalComponent implements OnInit {
       },
     });
   }
-
 
 }

@@ -10,3 +10,58 @@
     <d-select [enableLazyLoad]="true" (loadMore)="loadMore($event)" [placeholder]="'Small Input'" [options]="options1"></d-select>
   </div>
 </div>
+
+<h5 class="text-muted">滚动到底部使用自定义loading模板懒加载数据</h5>
+<div class="row">
+  <div class="col-md-5">
+    <d-select
+      [enableLazyLoad]="true"
+      (loadMore)="loadMore($event)"
+      [loadingTemplateRef]="loadingTemplateRef"
+      [placeholder]="'Small Input'"
+      [options]="options1"
+    ></d-select>
+  </div>
+</div>
+<ng-template #loadingTemplateRef>
+  <div class="devui-infinity-loading">
+    <svg
+      width="64px"
+      height="64px"
+      viewBox="0 0 64 64"
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+    >
+      <defs>
+        <linearGradient x1="-5.25355109%" y1="50%" x2="105.311016%" y2="50%" id="devui-loading-infinity-linearGradient">
+          <stop stop-color="#1186FF" offset="0%"></stop>
+          <stop stop-color="#1186FF" offset="13.2017232%"></stop>
+          <stop stop-color="#FF5AB1" offset="87.0821974%"></stop>
+          <stop stop-color="#FF5AB1" offset="100%"></stop>
+        </linearGradient>
+      </defs>
+      <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+        <path
+          d="M32.8273356,32.0651475 C38.9215537,24.0217158 44.200047,20 48.6627517,20 C55.4764195,20 61,25.5964615 61,32.4999677 C61,39.4036031 55.4764195,45 48.6627517,45 C44.258896,45 39.0606745,41.0837108 33.0680872,33.2510678 L31.8765067,31.6765806 C25.9073188,23.8921935 20.7275235,20 16.3372483,20 C9.52358054,20 4,25.5964615 4,32.4999677 C4,39.4036031 9.52358054,45 16.3372483,45 C20.7979128,45 26.0734732,40.9820956 32.164057,32.9462221 L32.8273356,32.0651475 Z"
+          id="infinity-bg"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-miterlimit="10"
+          stroke="#3B5885"
+          stroke-width="5"
+          opacity="0.200000003"
+        ></path>
+        <path
+          d="M32.8273356,32.0651475 C38.9215537,24.0217158 44.200047,20 48.6627517,20 C55.4764195,20 61,25.5964615 61,32.4999677 C61,39.4036031 55.4764195,45 48.6627517,45 C44.258896,45 39.0606745,41.0837108 33.0680872,33.2510678 L31.8765067,31.6765806 C25.9073188,23.8921935 20.7275235,20 16.3372483,20 C9.52358054,20 4,25.5964615 4,32.4999677 C4,39.4036031 9.52358054,45 16.3372483,45 C20.7979128,45 26.0734732,40.9820956 32.164057,32.9462221 L32.8273356,32.0651475 Z"
+          stroke="url(#devui-loading-infinity-linearGradient)"
+          stroke-width="5"
+          id="infinity-outline"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-miterlimit="10"
+        ></path>
+      </g>
+    </svg>
+  </div>
+</ng-template>

@@ -1,31 +1,34 @@
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { CdkOverlayOrigin, ConnectedOverlayPositionChange, ConnectedPosition, VerticalConnectionPos } from '@angular/cdk/overlay';
 import {
+  ChangeDetectorRef,
   Component,
-  forwardRef,
-  OnInit,
-  Input,
-  TemplateRef,
-  Output,
-  EventEmitter,
   ElementRef,
-  ViewContainerRef,
-  Renderer2,
+  EventEmitter,
+  forwardRef,
   HostListener,
+  Input,
   OnChanges,
-  SimpleChanges,
   OnDestroy,
-  ChangeDetectorRef
+  OnInit,
+  Output,
+  Renderer2,
+  SimpleChanges,
+  TemplateRef,
+  ViewContainerRef
 } from '@angular/core';
-import { CdkOverlayOrigin, ConnectedPosition, ConnectedOverlayPositionChange, VerticalConnectionPos } from '@angular/cdk/overlay';
-
-import { AppendToBodyDirection, AppendToBodyDirectionsConfig } from 'ng-devui/utils';
-import { DateConverter } from 'ng-devui/utils';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { I18nInterface, I18nService } from 'ng-devui/i18n';
+import {
+  AppendToBodyDirection,
+  AppendToBodyDirectionsConfig,
+  cornerFadeInOut,
+  DateConverter,
+  DefaultDateConverter
+} from 'ng-devui/utils';
+import { fromEvent, Observable, Subscription } from 'rxjs';
+import { debounceTime, filter, map } from 'rxjs/operators';
 import { SelectDateChangeEventArgs, SelectDateChangeReason } from './date-change-event-args.model';
 import { DatePickerConfigService as DatePickerConfig } from './date-picker.config.service';
-import { I18nService, I18nInterface } from 'ng-devui/i18n';
-import { DefaultDateConverter } from 'ng-devui/utils';
-import { cornerFadeInOut } from 'ng-devui/utils';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: '[dDatepicker][appendToBody]',
@@ -45,8 +48,8 @@ import { Subscription } from 'rxjs';
       <d-datepicker [@cornerFadeInOut]="isOpen ? datepickerPosition : 'void'" [locale]="locale || i18nLocale"
                       [showTime]="showTime" [cssClass]="cssClass" [selectedDate]="selectedDate"
                       [disabled]="disabled" [dateConverter]="dateConverter" (selectedDateChange)="timeChange($event)"
-                      [dateFormat]="dateFormat" [dateConfig]="dateConfig"
-                      [customViewTemplate]="customViewTemplate" [maxDate]="maxDate" (cmpClicking)="cmpClicking($event)"
+                      [dateConfig]="dateConfig"
+                      [customViewTemplate]="customViewTemplate" [maxDate]="maxDate"
                       [minDate]="minDate" class="devui-datepicker devui-dropdown-overlay"></d-datepicker>
     </ng-template>
   `,
@@ -73,11 +76,12 @@ export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDes
   _dateConfig: any;
   positions: ConnectedPosition[];
   datepickerPosition: VerticalConnectionPos = 'bottom';
-  isClickingCmp = false;
   private _dateFormat: string;
   private _maxDate: Date;
   private _minDate: Date;
   private _showTime: boolean;
+  private valueChanges: Observable<any>;
+  private userInputSubscription: Subscription;
   private i18nSubscription: Subscription;
   public i18nLocale: I18nInterface['locale'];
 
@@ -115,7 +119,7 @@ export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDes
   }
 
   get dateFormat() {
-    return this._dateFormat;
+    return this._dateFormat || this.datePickerConfig.defaultFormat;
   }
 
   @Input() set maxDate(date: Date | any) {
@@ -170,6 +174,16 @@ export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDes
               private cdr: ChangeDetectorRef) {
     this._dateConfig = datePickerConfig['dateConfig'];
     this.dateConverter = datePickerConfig['dateConfig'].dateConverter || new DefaultDateConverter();
+    this.setI18nText();
+  }
+
+  @HostListener('blur', ['$event'])
+  onBlur($event) {
+    this.onTouched();
+    const value = this.elementRef.nativeElement.value;
+    if (!this.validateDate(value)) {
+      this.resetValue();
+    }
   }
 
   checkDateConfig(dateConfig: any) {
@@ -184,11 +198,12 @@ export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDes
     this._minDate = this.minDate ? new Date(this.minDate) : new Date(this.dateConfig.min, 0, 1, 0, 0, 0);
     this._maxDate = this.maxDate ? new Date(this.maxDate) : new Date(this.dateConfig.max, 11, 31, 23, 59, 59);
     this.setPositions();
-    this.setI18nText();
     this.updateCdkConnectedOverlayOrigin();
     if (this.autoOpen) {
       this.isOpen = true;
     }
+    this.valueChanges = this.registerInputEvent();
+    this.userInputSubscription = this.valueChanges.subscribe((source) => this.transUserInputToDatepicker(source));
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -203,6 +218,14 @@ export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDes
 
   registerOnTouched(fn: any): void {
     this.onTouched = fn;
+  }
+
+  registerInputEvent() {
+    return fromEvent(this.elementRef.nativeElement, 'keyup').pipe(
+      map((e: any) => e.target.value),
+      filter(() => !this.disabled),
+      debounceTime(300)
+    );
   }
 
   writeValue(obj: any): void {
@@ -235,24 +258,28 @@ export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDes
     }
   }
 
-  pickOutBoolean(arr: any[]) {
-    return arr.find(i => typeof i === 'boolean');
-  }
-
-  toggle(...args) {
-    let clickShow;
-    if (args.length) {
-      clickShow = this.pickOutBoolean(args);
-    }
+  toggle(clickShow?: boolean) {
     if (clickShow === undefined) {
-      this.isOpen = !this.isOpen;
+      if (this.isOpen) {
+        this.hide();
+      } else {
+        this.show();
+      }
     } else {
-      this.isOpen = clickShow;
+      if (clickShow) {
+        this.show();
+      } else {
+        this.hide();
+      }
     }
   }
 
   hide() {
     this.isOpen = false;
+  }
+
+  show() {
+    this.isOpen = true;
   }
 
   formWithDropDown() {
@@ -276,8 +303,6 @@ export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDes
     if (selectDateObj && typeof selectDateObj === 'object' && selectDateObj.hasOwnProperty('selectedDate')) {
       selectDate = selectDateObj.selectedDate;
       dateReason = selectDateObj.reason;
-    } else {
-      selectDate = selectDateObj;
     }
     if (selectDate) {
       selectDate = new Date(selectDate);
@@ -292,22 +317,11 @@ export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDes
     });
   }
 
-  @HostListener('blur', ['$event'])
-  onBlur($event) {
-    if (!this.isClickingCmp) {
-      this.transUserInputToDatepicker();
-    }
-  }
-
   onDocumentClick = ($event) => {
     if (this.elementRef.nativeElement !== $event.target) {
       this.isOpen = false;
       this.cdr.markForCheck();
     }
-  }
-
-  cmpClicking(isClickingCmp) {
-    this.isClickingCmp = isClickingCmp;
   }
 
   onPositionChange(position: ConnectedOverlayPositionChange) {
@@ -353,8 +367,7 @@ export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDes
     }
   }
 
-  private transUserInputToDatepicker() {
-    const value = this.elementRef.nativeElement.value;
+  private transUserInputToDatepicker(value) {
     if (!value && !this.selectedDate) {
       return;
     }
@@ -363,20 +376,13 @@ export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDes
       return;
     }
     const valueDate = new Date(value);
-    const valueFormat = valueDate instanceof Date && !isNaN(valueDate.getTime()) &&
+    const valueFormat = valueDate && !isNaN(valueDate.getTime()) &&
       this.dateConverter.format(valueDate, this.dateFormat, this.locale || this.i18nLocale);
-    if (new Date(valueFormat).getTime() === new Date(this.selectedDate).getTime()) {
+    if (new Date(valueFormat).getTime() === new Date(this.selectedDate).getTime() || !this.validateDate(value)) {
       return;
     }
-    if (
-      this.showTime || this.disabled || !valueDate || value !== valueFormat ||
-      (value === valueFormat && (valueDate.getTime() < this.minDate.getTime() || valueDate.getTime() > this.maxDate.getTime()))
-    ) {
-      if (this.selectedDate) {
-        this.writeValue(this.selectedDate);
-      } else {
-        this.elementRef.nativeElement.value = '';
-      }
+    if (this.showTime || this.disabled) {
+      this.resetValue();
     } else {
       this.selectedDate = valueDate;
       this.writeModelValue({
@@ -386,11 +392,33 @@ export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDes
     }
   }
 
+  validateDate(value: string) {
+    const valueDate = new Date(value);
+    const valueFormat = valueDate && !isNaN(valueDate.getTime()) &&
+      this.dateConverter.format(valueDate, this.dateFormat, this.locale || this.i18nLocale);
+    if (
+      !valueDate || value !== valueFormat ||
+      (value === valueFormat && (valueDate.getTime() < this.minDate.getTime() || valueDate.getTime() > this.maxDate.getTime()))
+    ) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  resetValue() {
+    const resDate = this.selectedDate ?
+      this.dateConverter.format(this.selectedDate, this.dateFormat, this.locale || this.i18nLocale) :
+      '';
+    this.elementRef.nativeElement.value = resDate;
+  }
+
   clearAll = (reason?: SelectDateChangeReason) => {
     if (this.disabled) {
       return;
     }
     this.writeValue(null);
+    this.selectedDate = null;
     this.onChange(null);
     this.onTouched();
     const currentReason = typeof reason === 'number' ? reason : SelectDateChangeReason.custom;
@@ -403,6 +431,9 @@ export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDes
   ngOnDestroy() {
     if (this.i18nSubscription) {
       this.i18nSubscription.unsubscribe();
+    }
+    if (this.userInputSubscription) {
+      this.userInputSubscription.unsubscribe();
     }
     document.removeEventListener('click', this.onDocumentClick);
   }

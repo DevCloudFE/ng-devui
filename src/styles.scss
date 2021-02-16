@@ -1,6 +1,6 @@
 @import '../devui/style/devui';
 @import '~@devui-design/icons/icomoon/devui-icon.css';
-@import '../devui/style/core/_font';
+@import '../devui/style/theme/_font';
 
 .markdown {
   color: $devui-text;
@@ -79,6 +79,16 @@ section {
 
   p {
     margin: 1em 0;
+  }
+
+  a code {
+    text-decoration: underline;
+  }
+
+  pre code {
+    font-size: $devui-font-size;
+    padding: 0.5em;
+    background-color: $devui-area;
   }
 }
 
@@ -159,5 +169,9 @@ code {
   h3 {
     // font-weight: 300;
     margin: 0;
+  }
+
+  pre code {
+    padding: 0.5em;
   }
 }

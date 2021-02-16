@@ -6,6 +6,7 @@ import { DValidators } from './validators';
 export type DValidateRules = {
   validators ?: DValidateRule[];
   asyncValidators ?: DAsyncValidateRule[];
+  asyncDebounceTime ?: number; // 异步校验器debounceTime
   errorStrategy ?: DValidationErrorStrategy; // error更新策略
   message ?: string; // 统一配置的message
   updateOn ?: 'change'|'blur'|'submit'; // model更新策略
@@ -28,7 +29,7 @@ export interface DValidateRule {
   priority ?: number;
   isNgValidator ?: boolean;
   validateLevel?: 'error' | 'warning'; // 校验级别
-  [id: string]: boolean | number | string | RegExp | DValidatorFn | ValidatorFn; // 万能key
+  [id: string]: boolean | number | string | RegExp | DValidatorFn | ValidatorFn | undefined; // 万能key
 }
 export interface DAsyncValidateRule {
   id ?: string;
@@ -38,7 +39,7 @@ export interface DAsyncValidateRule {
   priority ?: number;
   isNgValidator ?: boolean;
   validateLevel?: 'error' | 'warning'; // 校验级别
-  [id: string]: boolean | number | string | RegExp | DAsyncValidatorFn | AsyncValidatorFn; // 万能key
+  [id: string]: boolean | number | string | RegExp | DAsyncValidatorFn | AsyncValidatorFn | undefined; // 万能key
 }
 
 export interface DValidateErrorStatus {
@@ -54,7 +55,16 @@ export type DValidatorFn = (value: any) => boolean | string | null;
 export type DAsyncValidatorFn = (value: any) => Observable<boolean | string | null>;
 
 /* TODO: 这里是否需要导出 */
-export const ruleReservedWords = ['id', 'validator', 'message', 'errorStrategy', 'priority', 'isNgValidator', 'updateOn'];
+export const ruleReservedWords = [
+  'id',
+  'validator',
+  'message',
+  'errorStrategy',
+  'priority',
+  'isNgValidator',
+  'popPosition',
+  'asyncDebounceTime'
+];
 
 // 这里要考虑如果可全局添加默认
 export const dDefaultValidators = {
@@ -76,7 +86,6 @@ function isEmptyInputValue(value: any): boolean {
 function hasValidLength(value: any): boolean {
   return value != null && typeof value.length === 'number';
 }
-
 
 /* pristine: 抛出error包括pristine状态
 ** dirty: 抛出error需在dirty状态

@@ -1,5 +1,7 @@
 @import '../style/theme/color';
-@import '../style/core/_font';
+@import '../style/theme/shadow';
+@import '../style/theme/corner';
+@import '../style/theme/_font';
 
 :host-context(.devui-tooltip) {
   position: absolute;
@@ -29,7 +31,7 @@
   &.top {
     margin-top: -5px;
     padding: 0;
-    box-shadow: -5px 5px 20px 0 rgba($devui-text, 0.2);
+    box-shadow: $devui-shadow-length-feedback-overlay rgba($devui-text, 0.2);
 
     & .devui-tooltip-arrow {
       bottom: -5px;
@@ -43,7 +45,7 @@
   &.bottom {
     margin-top: 5px;
     padding: 0;
-    box-shadow: 5px -5px 20px 0 rgba($devui-text, 0.2);
+    box-shadow: $devui-shadow-length-feedback-overlay rgba($devui-text, 0.2);
 
     & .devui-tooltip-arrow {
       top: -5px;
@@ -57,7 +59,7 @@
   &.left {
     margin-left: -5px;
     padding: 0;
-    box-shadow: 5px -5px 20px 0 rgba($devui-text, 0.2);
+    box-shadow: $devui-shadow-length-feedback-overlay rgba($devui-text, 0.2);
 
     & .devui-tooltip-arrow {
       top: 50%;
@@ -71,7 +73,7 @@
   &.right {
     margin-left: 5px;
     padding: 0;
-    box-shadow: -5px 5px 20px 0 rgba($devui-text, 0.2);
+    box-shadow: $devui-shadow-length-feedback-overlay rgba($devui-text, 0.2);
 
     & .devui-tooltip-arrow {
       top: 50%;
@@ -95,7 +97,7 @@
     word-break: normal;
     word-wrap: break-word;
     text-align: start;
-    border-radius: 4px;
+    border-radius: $devui-border-radius-feedback;
   }
 
   .devui-tooltip-arrow {

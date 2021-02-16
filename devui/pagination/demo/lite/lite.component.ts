@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'd-lite',
@@ -17,7 +17,7 @@ export class LiteComponent {
     pageSize: 10
   };
   pager3 = {
-    total: 0,
+    total: 306,
     pageIndex: 1,
     pageSize: 10
   };

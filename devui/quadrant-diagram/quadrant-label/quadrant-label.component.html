@@ -1,8 +1,9 @@
 <ng-template
   [ngTemplateOutlet]="currentLabelTemplate ? currentLabelTemplate : defaultLabel"
   [ngTemplateOutletContext]="{
-  $implicit: this,labelData:labelData
-}"
+    $implicit: this,
+    labelData: labelData
+  }"
 >
 </ng-template>
 <ng-template #defaultLabel let-labelData="labelData">
@@ -26,7 +27,7 @@
   >
     <div *ngIf="currentLabelSize !== 'small'" class="devui-label-style">{{ item?.title }}</div>
     <ng-container *ngIf="currentLabelSize === 'large'">
-      <d-progress style="margin-top: -4px;" [percentage]="item?.progress" [percentageText]="''" [barbgcolor]="'#3ECCA6'" [height]="'4px'">
+      <d-progress style="margin-top: -4px" [percentage]="item?.progress" [percentageText]="''" [barbgcolor]="'#3ECCA6'" [height]="'4px'">
       </d-progress>
     </ng-container>
   </div>

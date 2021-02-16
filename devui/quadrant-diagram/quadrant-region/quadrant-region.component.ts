@@ -1,5 +1,5 @@
-import { Component, OnInit,  Input, TemplateRef, OnChanges, SimpleChanges } from '@angular/core';
-import { IQuadrantConfigs, IAxisConfigs, IViewConfigs } from '../quadrant-diagram.type';
+import { Component, Input,  OnChanges, OnInit, SimpleChanges, TemplateRef } from '@angular/core';
+import { IAxisConfigs, IQuadrantConfigs, IViewConfigs } from '../quadrant-diagram.type';
 
 @Component({
   selector: 'd-quadrant-region',

@@ -1,20 +1,20 @@
 import {
-  Component,
-  Input,
-  Output,
-  forwardRef,
-  EventEmitter,
-  ContentChildren,
-  QueryList,
-  OnChanges,
-  SimpleChanges,
   AfterViewInit,
+  Component,
+  ContentChildren,
+  EventEmitter,
+  forwardRef,
   HostListener,
+  Input,
+  OnChanges,
+  Output,
+  QueryList,
+  SimpleChanges,
 } from '@angular/core';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { RadioComponent } from './radio.component';
 import { Observable } from 'rxjs';
+import { RadioComponent } from './radio.component';
 
 @Component({
   selector: 'd-radio-group',

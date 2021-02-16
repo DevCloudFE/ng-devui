@@ -1,14 +1,12 @@
-// 用于阴影
-$hwc-shadow-1: var(--hwc-shadow-1, 0 1px 3px 0 rbga(0, 0, 0, 0.1));
-$hwc-shadow-2: var(--hwc-shadow-2, 0 2px 5px 0 rgba(0, 0, 0, 0.2));
-$hwc-shadow-3: var(--hwc-shadow-3, 0 4px 8px 0 rgba(0, 0, 0, 0.2));
-$hwc-shadow-4: var(--hwc-shadow-4, 0 2px 8px 0 rgba(94, 124, 224, 0.3));
-$hwc-shadow-5: var(--hwc-shadow-5, 0 0 6px 0 rgba(0, 0, 0, 0.1));
-$hwc-shadow-6: var(--hwc-shadow-6, 0 8px 6px -4px rgba(199, 54, 54, 0.4));
-$hwc-shadow-7: var(--hwc-shadow-7, 0 10px 40px 0 rgba(0, 0, 0, 0.1));
-$hwc-shadow-8: var(--hwc-shadow-8, 0 1px 2px 0 rgba(57, 71, 166, 0.5));
-$hwc-shadow-error: var(--hwc-shadow-error, 0 1px 3px 0 rgba(199, 54, 54, 0.25));
-$hwc-shadow-warn: var(--hwc-shadow-warn, 0 1px 3px 0 rgba(204, 100, 20, 0.25));
-$hwc-shadow-prompt: var(--hwc-shadow-prompt, 0 1px 3px 0 rgba(70, 94, 184, 0.25));
-$hwc-shadow-success: var(--hwc-shadow-success, 0 1px 3px 0 rgba(39, 176, 128, 0.25));
-$hwc-shadow-dark: var(--hwc-shadow-dark, 0 5px 8px 0 rgba(70, 77, 110, 0.25));
+//阴影变量
+
+$devui-shadow-length-base: var(--devui-shadow-length-base, 0 1px 4px 0); //直接铺陈在页面上方的元素 (card等)
+
+$devui-shadow-length-slide-left: var(--devui-shadow-length-slide-left, -2px 0 8px 0); //向左滑动时出现在右侧边缘的阴影 (dataTable固定右侧列向左滑动)
+$devui-shadow-length-slide-right: var(--devui-shadow-length-slide-right, 2px 0 8px 0); //向右滑动时出现在左侧边缘的阴影 (dataTable固定左侧列向右滑动)
+$devui-shadow-length-connected-overlay : var(--devui-shadow-connected-overlay, 0 2px 8px 0); //有连接点的弹出(覆盖)层 (DatePicker Cascader Select TagsInput Pagination的下拉菜单等)
+
+$devui-shadow-length-hover : var(--devui-shadow-length-hover, 0 4px 16px 0); //涉及到hover的地方
+$devui-shadow-length-feedback-overlay : var(--devui-shadow-length-feedback-overlay, 0 4px 16px 0); //信息提示反馈类 (PopOver Tooltip Toast StepsGuide等)
+
+$devui-shadow-length-fullscreen-overlay: var(--devui-shadow-fullscreen-overlay, 0 8px 40px 0); //无连接点的弹出(覆盖)层 (Drawer Modal ImagePreview等)

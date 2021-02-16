@@ -1,31 +1,33 @@
 import { Component } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { TagsModule } from './tags.module';
 import { By } from '@angular/platform-browser';
 import { TagComponent } from './tag.component';
+import { TagsModule } from './tags.module';
 
 @Component({
   template: `
     <section>
-    <d-tag
-      [tag]="tagName"
-      [deletable]="deletable"
-      (tagDelete)="deleteTag($event)"
-      [labelStyle]="labelStyle"
-      [customViewTemplate]="customTag">
-    </d-tag>
-    <ng-template #customTag let-tag="tag">
-      <span class="icon-bug" style="vertical-align: middle;"></span>
-      <span class="tag-value" title="{{ tag }}">{{ tag }}</span>
-    </ng-template>
+      <d-tag
+        [tag]="tagName"
+        [mode]="'closeable'"
+        (tagDelete)="deleteTag($event)"
+        [labelStyle]="labelStyle"
+        [customColor]="customColor"
+        [customViewTemplate]="customTag"
+      >
+      </d-tag>
+      <ng-template #customTag let-tag="tag">
+        <span class="icon-bug" style="vertical-align: middle;"></span>
+        <span class="tag-value" title="{{ tag }}">{{ tag }}</span>
+      </ng-template>
     </section>
   `,
 })
 class TestTagComponent {
   tagName = 'bug';
-  deletable = true;
   labelStyle = 'purple-w98';
+  customColor = '#f50';
   constructor() {}
   deleteTag = jasmine.createSpy('delete tag');
 }
@@ -71,6 +73,12 @@ describe('tag', () => {
       removeButton.click();
       fixture.detectChanges();
       expect(testComponent.deleteTag).toHaveBeenCalledTimes(1);
+    });
+
+    it('should can use custom color', () => {
+      testComponent.labelStyle = '';
+      fixture.detectChanges();
+      expect(tagElement.querySelector('.devui-colorful-tag')).not.toBeNull();
     });
   });
 });

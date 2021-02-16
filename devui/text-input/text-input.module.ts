@@ -1,5 +1,5 @@
-import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
+import {NgModule} from '@angular/core';
 import {TextDirective} from './text-input.directive';
 
 @NgModule({

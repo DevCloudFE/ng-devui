@@ -1,46 +1,50 @@
-import { LoadingModule } from 'ng-devui/loading';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { DevUIModule } from 'ng-devui';
+import { AutoCompleteModule } from 'ng-devui/auto-complete';
+import { DataTableModule } from 'ng-devui/data-table';
+import { I18nModule } from 'ng-devui/i18n';
+import { LoadingModule } from 'ng-devui/loading';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
-import { DataTableModule } from 'ng-devui/data-table';
-import { DatatableDemoBasicComponent } from './basic/data-table-demo-basic.component';
-import { DataTableDemoComponent } from './data-table-demo.component';
-import { DatatableDemoAsyncComponent } from './async/data-table-demo-async.component';
+import { SplitterModule } from 'ng-devui/splitter';
 import { TooltipModule } from 'ng-devui/tooltip';
-import { AutoCompleteModule } from 'ng-devui/auto-complete';
-import { DatatableDemoMaxheightComponent } from './max-height/data-table-demo-maxheight.component';
-import { DatatableDemoLazyloadDataComponent } from './lazy/data-table-demo-lazyloaddata.component';
-import { DatatableDemoMultiHeaderComponent } from './multi-header/data-table-demo-multiheader.component';
-import { DatatableDemoEditableComponent } from './editable/data-table-demo-editable.component';
-import { TreeDataComponent } from './tree-table/tree-data.component';
-import { ExpandRowComponent } from './expand-row/expand-row.component';
-import { FixColumnComponent } from './fix-column/fix-column.component';
-import { DragColumnComponent } from './drag-column/drag-column.component';
-import { I18nModule } from 'ng-devui/i18n';
+import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
-import { CellMergeComponent } from './cell-merge/cell-merge.component';
-import { DragRowComponent } from './drag-row/drag-row.component';
-import { InteractionComponent } from './interaction/interaction.component';
+import { DatatableDemoAsyncComponent } from './async/data-table-demo-async.component';
 import { BasicOldComponent } from './basic-old/basic-old.component';
-import { HeaderGroupingComponent } from './header-grouping/header-grouping.component';
-import { EditableOldComponent } from './editable-old/editable-old.component';
-import { ExpandRowOldComponent } from './expand-row-old/expand-row-old.component';
-import { TreeTableOldComponent } from './tree-table-old/tree-table-old.component';
-import { FixColumnOldComponent } from './fix-column-old/fix-column-old.component';
-import { MutiDragRowComponent } from './muti-drag-row/muti-drag-row.component';
-import { CheckOptionsComponent } from './check-options/check-options.component';
+import { DatatableDemoBasicComponent } from './basic/data-table-demo-basic.component';
+import { CellMergeComponent } from './cell-merge/cell-merge.component';
 import { CheckOptionsColumnComponent } from './check-options-column/check-options-column.component';
+import { CheckOptionsComponent } from './check-options/check-options.component';
+import { DataTableDemoComponent } from './data-table-demo.component';
+import { DragColumnComponent } from './drag-column/drag-column.component';
+import { DragRowComponent } from './drag-row/drag-row.component';
+import { EditableOldComponent } from './editable-old/editable-old.component';
+import { DatatableDemoEditableComponent } from './editable/data-table-demo-editable.component';
+import { ExpandRowOldComponent } from './expand-row-old/expand-row-old.component';
+import { ExpandRowComponent } from './expand-row/expand-row.component';
+import { FixColumnOldComponent } from './fix-column-old/fix-column-old.component';
+import { FixColumnComponent } from './fix-column/fix-column.component';
+import { FixHeightVirtualScrollComponent } from './fix-height-virtual-scroll/fix-height-virtual-scroll.component';
+import { HeaderGroupingComponent } from './header-grouping/header-grouping.component';
 import { InteractionColumnComponent } from './interaction-column/interaction-column.component';
-import { VirtualScrollComponent } from './virtual-scroll/virtual-scroll.component';
+import { InteractionComponent } from './interaction/interaction.component';
+import { DatatableDemoLazyloadDataComponent } from './lazy/data-table-demo-lazyloaddata.component';
+import { DatatableDemoMaxheightComponent } from './max-height/data-table-demo-maxheight.component';
+import { DatatableDemoMultiHeaderComponent } from './multi-header/data-table-demo-multiheader.component';
+import { MutiDragRowComponent } from './muti-drag-row/muti-drag-row.component';
 import { MutilStylesComponent } from './mutil-styles/mutil-styles.component';
+import { TreeTableOldComponent } from './tree-table-old/tree-table-old.component';
+import { TreeDataComponent } from './tree-table/tree-data.component';
+import { VirtualScrollComponent } from './virtual-scroll/virtual-scroll.component';
 
 @NgModule({
   imports: [
+    TranslateModule,
     CommonModule,
     DevUIModule,
     FormsModule,
@@ -52,11 +56,13 @@ import { MutilStylesComponent } from './mutil-styles/mutil-styles.component';
     I18nModule,
     DDemoNavModule,
     LoadingModule,
+    SplitterModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo' },
       { path: 'demo', component: DataTableDemoComponent},
       { path: 'api', component: DevUIApiComponent, data: {
-        api: require('!html-loader!markdown-loader!../doc/api.md')
+        'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),
+        'en-us': require('!html-loader!markdown-loader!../doc/api-en.md')
       }}
     ])
   ],
@@ -87,10 +93,11 @@ import { MutilStylesComponent } from './mutil-styles/mutil-styles.component';
     CheckOptionsColumnComponent,
     InteractionColumnComponent,
     VirtualScrollComponent,
-    MutilStylesComponent
+    MutilStylesComponent,
+    FixHeightVirtualScrollComponent,
   ],
   providers: [],
-
+  
 })
 export class DataTableDemoModule {
 }

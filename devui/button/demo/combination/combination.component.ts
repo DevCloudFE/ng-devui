@@ -11,5 +11,4 @@ export class CombinationComponent implements OnInit {
   ngOnInit() {
   }
 
-
 }

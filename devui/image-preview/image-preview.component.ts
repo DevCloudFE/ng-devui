@@ -1,6 +1,6 @@
-import { Component, OnInit, Input, ElementRef, HostListener, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, HostListener, Input, OnDestroy, OnInit } from '@angular/core';
+import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { Subscription } from 'rxjs';
-import { I18nService, I18nInterface } from 'ng-devui/i18n';
 import { TransformableElement } from './transformable-element';
 
 @Component({

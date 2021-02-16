@@ -13,15 +13,15 @@ import {
   Output,
   Renderer2,
   SimpleChanges,
-  ViewChild,
-  TemplateRef
+  TemplateRef,
+  ViewChild
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { ICheckboxInput, ITreeItem, OperableTreeComponent } from 'ng-devui/tree';
-import DefaultIcons from './tree-default-icons';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { I18nService, I18nInterface } from 'ng-devui/i18n';
 import { Subscription } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import DefaultIcons from './tree-default-icons';
 
 @Component({
   selector: 'd-tree-select',
@@ -179,6 +179,7 @@ export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterV
     if (this.directionSubscription) {
       this.directionSubscription.unsubscribe();
     }
+    this.isOpen = false; // 销毁Popper
   }
 
   ngOnInit(): void {
@@ -236,18 +237,6 @@ export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterV
       this.userAgent = 'firefox';
     } else {
       this.userAgent = 'chrome';
-    }
-  }
-
-  private expandAllNodes(treeNode) {
-    if (Array.isArray(treeNode)) {
-      return treeNode.map(node => this.expandAllNodes(node));
-    } else if (treeNode instanceof Object) {
-      if (treeNode.hasOwnProperty(this.treeNodeChildrenKey)) {
-        treeNode.open = true;
-        treeNode[this.treeNodeChildrenKey] = this.expandAllNodes(treeNode[this.treeNodeChildrenKey]);
-      }
-      return treeNode;
     }
   }
 
@@ -426,22 +415,13 @@ export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterV
     });
   }
 
-  private scrollToSelected() {
-    if (this.multiple) { return; }
-    const selectedNode = this.optionsContainer.nativeElement.querySelector('.tree-node.operable-tree-node.selected');
-    const scrollableContainer = this.optionsContainer.nativeElement.parentNode;
-    if (!selectedNode || !scrollableContainer) { return; }
-    const scrollOffset = selectedNode.offsetTop;
-    scrollableContainer.scrollTo({ top: (scrollOffset - scrollableContainer.scrollTop) });
-  }
   clearValue(event, item, index?) {
     event.preventDefault();
     event.stopPropagation();
     if (this.multiple) {
-      const curValue: Array<any> = this.value as Array<any>;
       this.tree.treeFactory.checkNodesById(item.id, false);
-      curValue.splice(index, 1);
-      this.value = curValue;
+      const curValue = this.tree.treeFactory.getCheckedNodes();
+      this.value = curValue.map(node => node.data.originItem);
     } else {
       this.clearAll();
     }

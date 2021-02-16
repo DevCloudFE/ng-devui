@@ -2,7 +2,7 @@
   <td [attr.colspan]="tableWidthConfig.length">
     <ng-template
       [ngTemplateOutlet]="headerExpandConfig?.expandTemplateRef || default"
-      [ngTemplateOutletContext]="{$implicit: this, columns: columns}"
+      [ngTemplateOutletContext]="{ $implicit: this, columns: columns }"
     >
     </ng-template>
     <ng-template #default>
@@ -24,7 +24,7 @@
 
 <ng-template #trTable let-rowIndex="rowIndex" let-rowItem="rowItem">
   <tr
-    *ngIf="!rowItem['$draggable']"
+    *ngIf="!rowItem?.$draggable"
     dDataTableRow
     [generalRowHoveredData]="generalRowHoveredData"
     [resizeable]="resizeable"
@@ -43,7 +43,7 @@
     [ngClass]="{ 'table-row-selected': rowItem.$checked }"
   ></tr>
   <tr
-    *ngIf="rowItem['$draggable']"
+    *ngIf="rowItem?.$draggable"
     dDataTableRow
     dDraggable
     [generalRowHoveredData]="generalRowHoveredData"
@@ -62,16 +62,16 @@
     class="{{ rowItem.$rowClass ? rowItem.$rowClass : '' }}"
     [ngClass]="{ 'table-row-selected': rowItem.$checked }"
     [dragData]="{ data: rowItem }"
-    [dragScope]="rowItem['$draggable']['scope']"
-    [dragOverClass]="rowItem['$draggable']['class']"
-    [dragHandle]="rowItem['$draggable']['handler']"
+    [dragScope]="rowItem?.$draggable['scope']"
+    [dragOverClass]="rowItem?.$draggable['class']"
+    [dragHandle]="rowItem?.$draggable['handler']"
   ></tr>
   <tr *ngIf="rowItem['$isDetailOpen'] && rowItem.detail">
     <td [attr.colspan]="checkable ? 2 : 1"></td>
     <td [attr.colspan]="columns.length" class="detail-content" [style.padding]="'13px'">
       <ng-template
         [ngTemplateOutlet]="detailTemplateRef || default"
-        [ngTemplateOutletContext]="{$implicit: this, detail:rowItem.detail, rowIndex:rowIndex, rowItem:rowItem}"
+        [ngTemplateOutletContext]="{ $implicit: this, detail: rowItem.detail, rowIndex: rowIndex, rowItem: rowItem }"
       >
       </ng-template>
       <ng-template #default let-detail="detail" let-rowIndex="rowIndex" let-rowItem="rowItem">
@@ -85,7 +85,7 @@
     <td [attr.colspan]="columns.length">
       <ng-template
         [ngTemplateOutlet]="rowItem.$expandConfig?.expandTemplateRef || default"
-        [ngTemplateOutletContext]="{$implicit: this, columns: columns, rowIndex:rowIndex, rowItem:rowItem}"
+        [ngTemplateOutletContext]="{ $implicit: this, columns: columns, rowIndex: rowIndex, rowItem: rowItem }"
       >
       </ng-template>
       <ng-template #default>

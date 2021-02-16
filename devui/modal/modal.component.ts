@@ -1,5 +1,5 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, ElementRef, Input, OnDestroy, OnInit, Renderer2, ViewChild, TemplateRef } from '@angular/core';
+import { Component, ElementRef, Input, OnDestroy, OnInit, Renderer2, TemplateRef, ViewChild } from '@angular/core';
 import { DocumentRef } from 'ng-devui/window-ref';
 import { isUndefined } from 'lodash-es';
 import { fromEvent, Observable, Subscription } from 'rxjs';
@@ -37,7 +37,7 @@ export class ModalComponent implements OnInit, OnDestroy {
   @Input() placement: 'center' | 'top' | 'bottom' = 'center';
   @Input() offsetX: string;
   @Input() offsetY: string;
-  @Input() bodyScrollable: boolean; // 打开弹窗body是否可滚动
+  @Input() bodyScrollable = true; // 打开弹窗body是否可滚动
   @Input() escapable: boolean; // 是否支持esc键关闭弹窗
   @ViewChild(ModalContainerDirective, { static: true }) modalContainerHost: ModalContainerDirective;
   @ViewChild('dialog', { static: true }) dialogElement: ElementRef;
@@ -53,7 +53,11 @@ export class ModalComponent implements OnInit, OnDestroy {
 
   contentTemplate: TemplateRef<any>;
 
-  constructor(private documentRef: DocumentRef, private renderer: Renderer2) {
+  constructor(
+    private elementRef: ElementRef,
+    private documentRef: DocumentRef,
+    private renderer: Renderer2
+  ) {
     this.backdropCloseable = isUndefined(this.backdropCloseable)
       ? true
       : this.backdropCloseable;
@@ -68,7 +72,7 @@ export class ModalComponent implements OnInit, OnDestroy {
       }));
     }
 
-    const handle = document.getElementById('d-modal-header');
+    const handle = this.elementRef.nativeElement.querySelector('#d-modal-header');
     if (handle) {
       this.draggableHandleEl = handle;
     }
@@ -78,6 +82,8 @@ export class ModalComponent implements OnInit, OnDestroy {
   onHidden() {
   }
 
+  updateButtonOptions<T>(buttonOptions: Array<T>) {
+  }
 
   canHideModel() {
     let hiddenResult = Promise.resolve(true);
@@ -129,15 +135,16 @@ export class ModalComponent implements OnInit, OnDestroy {
   }
 
   show() {
-    if (!this.bodyScrollable) {
-      if (document.documentElement.scrollHeight > document.documentElement.clientHeight) {
-        this.documentOverFlow = true;
-        this.scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-        this.scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft;
-        this.renderer.addClass(this.documentRef.body, 'devui-body-scrollblock');
-        this.renderer.setStyle(this.documentRef.body, 'top', `-${this.scrollTop}px`);
-        this.renderer.setStyle(this.documentRef.body, 'left', `-${this.scrollLeft}px`);
-      }
+    if (document.documentElement.scrollHeight > document.documentElement.clientHeight) {
+      this.documentOverFlow = true;
+      this.scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+      this.scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft;
+      this.renderer.addClass(this.documentRef.body, 'devui-body-scrollblock');
+      this.renderer.setStyle(this.documentRef.body, 'top', `-${this.scrollTop}px`);
+      this.renderer.setStyle(this.documentRef.body, 'left', `-${this.scrollLeft}px`);
+    }
+    if (!this.bodyScrollable && this.documentOverFlow) {
+      this.renderer.addClass(document.body, 'devui-body-overflow-hidden');
     }
 
     this.dialogElement.nativeElement.focus();

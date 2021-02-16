@@ -5,11 +5,11 @@ import {
   EventEmitter,
   forwardRef,
   Input,
+  OnChanges,
   Output,
-  TemplateRef,
-  ViewEncapsulation,
   SimpleChanges,
-  OnChanges
+  TemplateRef,
+  ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Observable } from 'rxjs';

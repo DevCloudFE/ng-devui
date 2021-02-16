@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { of, Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
-
 
 @Component({
   selector: 'd-form-demo-validate-template-form',
@@ -14,6 +13,8 @@ export class ValidateTemplateFormComponent {
     planExerciseDate: [{ 'id': '1', 'label': '周一'}],
     planVerifier: null,
   };
+
+  existPlanNames = ['123', '123456', 'DevUI'];
 
   checkboxOptions = [
     { 'id': '1', 'label': '周一'},
@@ -33,6 +34,14 @@ export class ValidateTemplateFormComponent {
     { 'id': '6', 'name': '管理员6'},
   ];
 
+  checkName(value) {
+    let res = true;
+    if (this.existPlanNames.indexOf(value) !== -1) {
+      res = false;
+    }
+    return of(res).pipe(delay(500));
+  }
+
   validateDate(value): Observable<string | null> {
     let message = null;
     for (const item of value) {
@@ -42,13 +51,17 @@ export class ValidateTemplateFormComponent {
     }
     // 模拟后端接口返回
     return of(message).pipe(
-      delay(500)
+      delay(300)
     );
   }
 
-  submitPlanForm() {
-    // do something for submitting
-    console.log(this.planFormData);
+  submitPlanForm({valid, directive, data}) {
+    console.log('Valid:', valid, 'Directive:', directive, 'data', data);
+    if (valid) {
+      // do something
+    } else {
+      // error tip
+    }
   }
 
   resetPlanForm() {

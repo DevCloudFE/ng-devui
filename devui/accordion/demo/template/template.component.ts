@@ -48,7 +48,7 @@ export class TemplateComponent {
   ];
 
   itemClick(event) {
-    event.item.clicktimes = ( event.item.clicktimes || 0 ) + 1;
+    event.item.clicktimes = (event.item.clicktimes || 0) + 1;
   }
 
   menuToggle(event) {

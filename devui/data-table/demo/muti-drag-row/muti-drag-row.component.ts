@@ -1,6 +1,6 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { SourceType, originSource } from '../mock-data';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { TableWidthConfig } from 'ng-devui/data-table';
+import { originSource, SourceType } from '../mock-data';
 
 @Component({
   selector: 'd-muti-drag-row',

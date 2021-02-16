@@ -1,13 +1,13 @@
 <div
-  [style.display]="withoutBtn ? '' : '-webkit-inline-box'"
   d-file-drop
   [enableDrop]="enableDrop"
   (fileDrop)="onFileDrop($event)"
   (fileOver)="onFileOver($event)"
   [ngStyle]="{ border: isDropOVer ? '1px solid #15bf15' : '0' }"
+  style="display: flex"
 >
   <div class="devui-input-group" [class.disabled]="disabled" (click)="onClick($event)">
-    <div *ngIf="dMultipleUploadView.fileUploaders.length === 0" class="devui-form-control" style="max-height: 28px">
+    <div *ngIf="dMultipleUploadView.fileUploaders.length === 0" class="devui-form-control devui-upload-placeholder">
       {{ placeholderText ? placeholderText : i18nText?.chooseFile }}
     </div>
     <ul *ngIf="dMultipleUploadView.fileUploaders.length > 0" class="devui-form-control devui-files-list">
@@ -15,6 +15,7 @@
         *ngFor="let fileUploader of dMultipleUploadView.fileUploaders; let index = index"
         class="devui-file-item devui-file-tag"
         style="display: inline-block; margin: 0 2px 2px 0"
+        title="{{ fileUploader.file.name }}"
       >
         <span class="devui-filename {{ fileUploader.status === UploadStatus.failed ? 'devui-failed-color' : '' }}">
           {{ fileUploader.file.name }}

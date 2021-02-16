@@ -1,8 +1,25 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, Renderer2, HostBinding } from '@angular/core';
-import { fromEvent, Subscription } from 'rxjs';
-import { debounceTime, throttleTime } from 'rxjs/operators';
-import { I18nInterface, I18nService } from 'ng-devui/i18n';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  HostBinding,
+  OnDestroy,
+  OnInit,
+  Renderer2
+} from '@angular/core';
+import {
+  I18nInterface,
+  I18nService
+} from 'ng-devui/i18n';
 import { PositionService } from 'ng-devui/position';
+import {
+  fromEvent,
+  Subscription
+} from 'rxjs';
+import {
+  debounceTime,
+  throttleTime
+} from 'rxjs/operators';
 import { StepsGuideService } from './steps-guide.service';
 import { ExtraConfig } from './steps-guide.types';
 
@@ -21,6 +38,7 @@ export class StepsGuideComponent implements OnInit, AfterViewInit, OnDestroy {
     return 'block';
   }
   triggerElement: HTMLElement;
+  scrollElement: HTMLElement;
   pageName: string; // 页面名称，用于标记当页帮助信息是否关闭
   title: string; // 引导标题
   content: string; // 引导介绍内容
@@ -29,7 +47,6 @@ export class StepsGuideComponent implements OnInit, AfterViewInit, OnDestroy {
   position = 'top';
   leftFix: number;
   topFix: number;
-  scrollElement: Element;
   zIndex = 1100;
   extraConfig: ExtraConfig;
   dots: Array<undefined> = [];
@@ -43,13 +60,7 @@ export class StepsGuideComponent implements OnInit, AfterViewInit, OnDestroy {
     private positionService: PositionService,
     private elm: ElementRef,
     private i18n: I18nService
-  ) {
-    this.subScriber = fromEvent(window, 'resize')
-      .pipe(debounceTime(this.SCROLL_REFRESH_INTERVAL))
-      .subscribe((event) => {
-        this.updatePosition();
-      });
-  }
+  ) { }
 
   ngOnInit() {
     this.dots = new Array(this.stepsCount);
@@ -58,22 +69,27 @@ export class StepsGuideComponent implements OnInit, AfterViewInit, OnDestroy {
     const i18nSubscription = this.i18n.langChange().subscribe((data) => {
       this.i18nCommonText = data.stepsGuide;
     });
+
+    this.subScriber = fromEvent(window, 'resize')
+      .pipe(debounceTime(this.SCROLL_REFRESH_INTERVAL))
+      .subscribe(() => {
+        this.updatePosition();
+      });
     this.subScriber.add(i18nSubscription);
   }
 
   ngAfterViewInit() {
     this.updatePosition();
     if (!this.scrollElement) {
-      this.scrollElement = this.positionService.getScrollParent(this.triggerElement);
+      const currentScrollElement = this.positionService.getScrollParent(this.triggerElement);
+      this.scrollElement = currentScrollElement === document.body ? window : currentScrollElement;
     }
-    const scrollSubscriber = fromEvent(window, 'scroll')
-      .pipe(
-        throttleTime(this.SCROLL_REFRESH_INTERVAL, undefined, { leading: true, trailing: true })
-      )
-      .subscribe((event) => {
+    const scrollSubscriber = fromEvent(this.scrollElement, 'scroll')
+      .pipe(throttleTime(this.SCROLL_REFRESH_INTERVAL, undefined, { leading: true, trailing: true }))
+      .subscribe(() => {
         this.updatePosition();
       });
-      this.subScriber.add(scrollSubscriber);
+    this.subScriber.add(scrollSubscriber);
   }
 
   ngOnDestroy() {
@@ -86,10 +102,7 @@ export class StepsGuideComponent implements OnInit, AfterViewInit, OnDestroy {
     const calcPosition = this.position === 'left' ? 'left-top' : this.position === 'right' ? 'right-top' : this.position;
     const rect = this.positionService.positionElements(this.triggerElement,
       this.elm.nativeElement, calcPosition, true);
-    // 修正bottom-right位置，位置计算是按照弹出框来计算的
-    if (this.position === 'bottom-right' || this.position === 'top-right') {
-      rect.left = rect.left - 400;
-    }
+
     this.renderer.setStyle(this.elm.nativeElement, 'left', `${rect.left}px`);
     this.renderer.setStyle(this.elm.nativeElement, 'top', `${rect.top}px`);
     if (this.leftFix !== undefined) {

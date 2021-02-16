@@ -1,5 +1,5 @@
 @import '../../../style/theme/color';
-@import '../../../style/core/_font';
+@import '~ng-devui/styles-var/devui-var.scss';
 
 input[type='text'] {
   width: 300px;
@@ -10,7 +10,7 @@ input[type='text'] {
   color: $devui-text;
   vertical-align: middle;
   border: 1px solid $devui-dividing-line;
-  border-radius: 3px;
+  border-radius: $devui-border-radius;
   outline: none;
   background-color: $devui-base-bg;
 }

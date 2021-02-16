@@ -1,7 +1,7 @@
 <section>
   <h5 class="text-muted">Standard: Single Select</h5>
   <div class="row">
-    <div class="col-md-5" style="font-size: 0;">
+    <div class="col-md-5" style="font-size: 0">
       <d-tree-select
         placeholder="Standard Input"
         [treeData]="data1"
@@ -9,16 +9,14 @@
         [(ngModel)]="value1"
         (ngModelChange)="showSelected($event)"
         [searchable]="true"
-        style="width: 280px;"
+        style="width: 280px"
       >
       </d-tree-select>
     </div>
   </div>
-  <h5 class="text-muted" style="margin-top: 20px;">
-    Standard: Multiple Select
-  </h5>
+  <h5 class="text-muted" style="margin-top: 20px">Standard: Multiple Select</h5>
   <div class="row">
-    <div class="col-md-5" style="font-size: 0;">
+    <div class="col-md-5" style="font-size: 0">
       <d-tree-select
         placeholder="Standard Input"
         [treeData]="data2"
@@ -27,7 +25,7 @@
         [(ngModel)]="value2"
         (ngModelChange)="showSelected($event)"
         [searchable]="true"
-        style="width: 280px;"
+        style="width: 280px"
       ></d-tree-select>
     </div>
   </div>

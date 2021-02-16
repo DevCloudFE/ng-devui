@@ -1,5 +1,5 @@
-import { Subscription, fromEvent, of } from 'rxjs';
-import { throttleTime, tap, delay } from 'rxjs/operators';
+import { fromEvent, of, Subscription } from 'rxjs';
+import { delay, tap, throttleTime } from 'rxjs/operators';
 
 export class TransformableElement {
   private _element: HTMLElement;
@@ -151,10 +151,10 @@ export class TransformableElement {
   }
 
   setElementTransform(target?,
-    zoom= this.zoom,
-    translateX = this.translateX,
-    translateY = this.translateY,
-    turn = this.turn
+                      zoom= this.zoom,
+                      translateX = this.translateX,
+                      translateY = this.translateY,
+                      turn = this.turn
     ) {
     if (!target) { target = this.element; }
     target.style.transform = `translate(${translateX}px, ${translateY}px) scale(${zoom}) rotate(${turn}turn)`;

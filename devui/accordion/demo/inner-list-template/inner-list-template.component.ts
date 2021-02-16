@@ -17,7 +17,7 @@ export class InnerListTemplateComponent {
   }];
 
   itemClick(event) {
-    event.clicktimes = ( event.clicktimes || 0 ) + 1;
+    event.clicktimes = (event.clicktimes || 0) + 1;
   }
 
   menuToggle(event) {

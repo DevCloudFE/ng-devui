@@ -1,30 +1,27 @@
-import { RouterModule } from '@angular/router';
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { TabsModule } from '../tabs.module';
-import { TabsDemoComponent } from './tabs-demo.component';
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { DropDownModule } from 'ng-devui/dropdown';
+import { ModalModule } from 'ng-devui/modal';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
-import { BasicComponent } from './basic/basic.component';
-import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
-import { WithoutContentComponent } from './without-content/without-content.component';
+import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
+import { TransferModule } from 'ng-devui/transfer';
+import { TranslateModule } from '@ngx-translate/core';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
+import { TabsModule } from '../tabs.module';
+import { BasicComponent } from './basic/basic.component';
 import { CustomizeTmpComponent } from './before-change/before-change.component';
+import { ConfigComponent } from './config/config.component';
 import { ConfigurableComponent } from './configurable-tabs/configurable-tabs.component';
 import { TabsTransferComponent } from './configurable-tabs/tabs-transfer/tabs-transfer.component';
 import { CustomComponent } from './custom/custom.component';
-import { ConfigComponent } from './config/config.component';
-import { TransferModule } from 'ng-devui/transfer';
-import { DropDownModule } from 'ng-devui/dropdown';
-import { ModalModule } from 'ng-devui/modal';
-import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
-
-
-
-
+import { TabsDemoComponent } from './tabs-demo.component';
+import { WithoutContentComponent } from './without-content/without-content.component';
 
 @NgModule({
   imports: [
+    TranslateModule,
     CommonModule,
     TabsModule,
     DropDownModule,
@@ -37,7 +34,8 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
       { path: '',  redirectTo: 'demo' },
       { path: 'demo', component: TabsDemoComponent},
       { path: 'api', component: DevUIApiComponent, data: {
-        api: require('!html-loader!markdown-loader!../doc/api.md')
+        'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),
+        'en-us': require('!html-loader!markdown-loader!../doc/api-en.md')
       }}
     ])
   ],
@@ -52,8 +50,7 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
     CustomComponent,
     ConfigComponent
   ],
-
+  
 })
 export class TabsDemoModule {
 }
-

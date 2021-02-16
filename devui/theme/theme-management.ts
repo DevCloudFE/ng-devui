@@ -1,9 +1,11 @@
-import { ThemeService } from './theme-service';
-import { devuiLightTheme, devuiDarkTheme } from './theme-data';
-import { Subscription } from 'rxjs';
-import { Theme } from './theme';
-import { THEME_KEY } from './key-config';
 import cssVars from 'css-vars-ponyfill';
+import { Subscription } from 'rxjs';
+import { THEME_KEY } from './key-config';
+import { Theme } from './theme';
+import { devuiDarkTheme, devuiLightTheme } from './theme-data';
+import { ThemeService } from './theme-service';
+import { EventBus } from './utils';
+
 /**
  * usage
  * main.ts
@@ -22,14 +24,15 @@ export function ThemeServiceInit(
         [cssVarName: string]: string
       }
     }},
-    ieSupport = true
+    ieSupport = false // TODO：css-var-ponyflll 仍有一些问题待定位
   ) {
   window[THEME_KEY.themeCollection] = themes || {
     'devui-light-theme': devuiLightTheme,
     'devui-dark-theme': devuiDarkTheme,
   };
   window[THEME_KEY.currentTheme] = defaultThemeName || 'devui-light-theme';
-  const themeService = new ThemeService();
+  const eventBus = window['globalEventBus'] || new EventBus(); // window.globalEventBus 为 框架的事件总线
+  const themeService = new ThemeService(eventBus);
   window[THEME_KEY.themeService] = themeService;
 
   themeService.setExtraData(extraData || {

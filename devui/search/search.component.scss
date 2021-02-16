@@ -1,7 +1,7 @@
 @import '../style/theme/color';
 @import '../style/theme/variables';
 @import '../style/mixins/index';
-@import '../style/core/_font';
+@import '../style/theme/_font';
 
 .devui-search {
   .devui-serach-line {
@@ -29,8 +29,11 @@ svg.svg-icon-search path {
     text-overflow: ellipsis;
 
     &.devui-icon-left {
-      border: none;
       padding-left: 32px;
+    }
+
+    &.devui-search-no-border {
+      border: none;
     }
 
     &.devui-clear-exit {

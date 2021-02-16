@@ -1,5 +1,7 @@
 @import '../style/theme/color';
-@import '../style/core/_font';
+@import '../style/theme/shadow';
+@import '../style/theme/corner';
+@import '../style/theme/_font';
 
 .devui-date-header {
   height: 38px;
@@ -10,8 +12,8 @@
   font-size: $devui-font-size;
   width: 240px;
   text-align: center;
-  box-shadow: 0 4px 8px 0 $devui-shadow;
-  border-radius: 2px;
+  box-shadow: $devui-shadow-length-connected-overlay $devui-shadow;
+  border-radius: $devui-border-radius;
   position: relative;
 }
 
@@ -153,7 +155,7 @@
   text-align: center;
   display: inline-block;
   background: $devui-base-bg;
-  border-radius: 2px;
+  border-radius: $devui-border-radius;
 }
 
 .devui-yearOption li:hover,
@@ -220,14 +222,14 @@
         vertical-align: middle;
         padding: 4px;
         border-top: none;
-        border-radius: 2px;
+        border-radius: $devui-border-radius;
 
         &.devui-day-start {
-          border-radius: 2px 0 0 2px;
+          border-radius: $devui-border-radius 0 0 $devui-border-radius;
         }
 
         &.devui-day-end {
-          border-radius: 0 2px 2px 0;
+          border-radius: 0 $devui-border-radius $devui-border-radius 0;
         }
 
         &:not(.disabled) {
@@ -244,6 +246,12 @@
 
           & > .devui-calendar-date {
             color: $devui-light-text;
+          }
+        }
+
+        &.devui-day:not(.disabled):not(.active):not(.devui-out-of-month):not(:hover).devui-today {
+          .devui-calendar-date {
+            color: $devui-brand;
           }
         }
 

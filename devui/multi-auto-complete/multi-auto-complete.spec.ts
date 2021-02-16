@@ -1,13 +1,12 @@
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
-import { MultiAutoCompleteModule } from './multi-auto-complete.module';
-import { ComponentFixture, TestBed, tick, fakeAsync } from '@angular/core/testing';
 import { Component, DebugElement, ViewChild } from '@angular/core';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
-import { createKeyBoardEvent } from '../utils/testing/event-helper';
-
-import { MultiAutoCompleteComponent } from './multi-auto-complete.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { HighlightComponent } from '../utils/highlight/highlight.component';
+import { createKeyBoardEvent } from '../utils/testing/event-helper';
+import { MultiAutoCompleteComponent } from './multi-auto-complete.component';
+import { MultiAutoCompleteModule } from './multi-auto-complete.module';
 
 @Component({
   template: `
@@ -53,7 +52,7 @@ describe('multi-auto-complete', () => {
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [MultiAutoCompleteModule, FormsModule, NoopAnimationsModule],
-        declarations: [TestMultiAutoCompleteComponent],
+        declarations: [TestMultiAutoCompleteComponent]
       });
     });
 

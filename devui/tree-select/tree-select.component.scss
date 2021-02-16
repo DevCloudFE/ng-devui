@@ -1,5 +1,6 @@
 @import '../style/theme/color';
-@import '../style/core/font';
+@import '../style/theme/font';
+@import '../style/theme/corner';
 
 .edge,
 .ie,
@@ -153,7 +154,7 @@
   color: $devui-text;
   line-height: 1.5;
   background-color: $devui-label-bg;
-  border-radius: 2px;
+  border-radius: $devui-border-radius;
   border: 1px solid $devui-label-bg;
   display: inline-block;
   max-width: 100%;

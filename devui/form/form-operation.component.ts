@@ -1,8 +1,20 @@
-import { Component, Renderer2, OnInit, ElementRef, Directive, HostBinding } from '@angular/core';
-import { Optional, Host, Input, AfterViewInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
-import { FormDirective } from './form.directive';
-import { Subject, fromEvent } from 'rxjs';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  Directive,
+  ElementRef,
+  Host,
+  HostBinding,
+  Input,
+  OnDestroy,
+  OnInit,
+  Optional,
+  Renderer2
+} from '@angular/core';
+import { fromEvent, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { FormDirective } from './form.directive';
 
 @Component({
   selector: 'd-form-operation',
@@ -33,7 +45,6 @@ export class FormOperationComponent implements OnInit {
   ngOnInit() {}
 }
 
-
 @Directive({
   selector: '[dFormSubmit]',
 })
@@ -49,14 +60,13 @@ export class DFormSubmitDirective implements AfterViewInit, OnDestroy {
     }
   }
 
+  @Input('dFormSubmitData') data: any;
+
   private destroy$ = new Subject();
 
   // TODO：这里是否需要接管如果所关联的表单校验不通过，切换到disabled状态
 
-  constructor(
-    private elementRef: ElementRef,
-    @Optional() @Host() private _dForm: FormDirective,
-  ) {}
+  constructor(private elementRef: ElementRef, @Optional() @Host() private _dForm: FormDirective) {}
 
   ngAfterViewInit() {
     this.registerEvent();
@@ -69,15 +79,14 @@ export class DFormSubmitDirective implements AfterViewInit, OnDestroy {
 
   registerEvent() {
     this.destroy$.next();
-    fromEvent(this.elementRef.nativeElement, this._eventName).pipe(
-      takeUntil(this.destroy$)
-    ).subscribe(($event) => {
-      if (this._dForm) {
-        this._dForm.updateOnSubmit($event);
-      }
-    });
+    fromEvent(this.elementRef.nativeElement, this._eventName)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(($event) => {
+        if (this._dForm) {
+          this._dForm.updateOnSubmit($event, this.data);
+        }
+      });
   }
-
 }
 
 @Directive({
@@ -89,7 +98,7 @@ export class DFormResetDirective implements AfterViewInit, OnDestroy {
   // TODO: emit now form
   // TODO: Abstract a parent class
   _eventName = 'click';
-  @Input('dFormSubmit')
+  @Input('dFormReset')
   set eventName(eventName) {
     if (eventName) {
       this._eventName = eventName;
@@ -99,10 +108,7 @@ export class DFormResetDirective implements AfterViewInit, OnDestroy {
 
   private destroy$ = new Subject();
 
-  constructor(
-    private elementRef: ElementRef,
-    @Optional() @Host() private _dForm: FormDirective,
-  ) {}
+  constructor(private elementRef: ElementRef, @Optional() @Host() private _dForm: FormDirective) {}
 
   ngAfterViewInit() {
     this.registerEvent();
@@ -115,15 +121,12 @@ export class DFormResetDirective implements AfterViewInit, OnDestroy {
 
   registerEvent() {
     this.destroy$.next();
-    fromEvent(this.elementRef.nativeElement, this._eventName).pipe(
-      takeUntil(this.destroy$)
-    ).subscribe(() => {
-      if (this._dForm) {
-        this._dForm.updateOnReset();
-      }
-    });
+    fromEvent(this.elementRef.nativeElement, this._eventName)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
+        if (this._dForm) {
+          this._dForm.updateOnReset();
+        }
+      });
   }
 }
-
-
-

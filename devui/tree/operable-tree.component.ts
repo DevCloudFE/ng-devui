@@ -1,25 +1,22 @@
 import {
   Component,
+  ContentChild,
+  ElementRef,
   EventEmitter,
   Input,
-  Output,
-  ViewChild,
-  ContentChild,
-  AfterViewInit,
-  ViewChildren,
-  ElementRef,
-  QueryList,
   OnDestroy,
-  TemplateRef
+  OnInit,
+  Output,
+  QueryList,
+  TemplateRef,
+  ViewChild,
+  ViewChildren
 } from '@angular/core';
-import {
-  ITreeItem,
-  TreeNode
-} from './tree-factory.class';
+import { I18nInterface, I18nService } from 'ng-devui/i18n';
+import { Subscription } from 'rxjs';
+import { ITreeItem, TreeNode } from './tree-factory.class';
 import { TreeComponent } from './tree.component';
 import { ICheckboxInput, IDropType } from './tree.types';
-import { I18nService, I18nInterface } from 'ng-devui/i18n';
-import { Subscription } from 'rxjs';
 @Component({
   selector: 'd-operable-tree',
   templateUrl: './operable-tree.component.html',
@@ -27,7 +24,7 @@ import { Subscription } from 'rxjs';
   exportAs: 'dOperableTreeComponent',
   preserveWhitespaces: false,
 })
-export class OperableTreeComponent implements AfterViewInit, OnDestroy {
+export class OperableTreeComponent implements OnInit, OnDestroy {
   @Input() tree: Array<ITreeItem>;
   @Input() treeNodeIdKey: string;
   @Input() treeNodeChildrenKey: string;
@@ -72,6 +69,7 @@ export class OperableTreeComponent implements AfterViewInit, OnDestroy {
   @Output() nodeEdited: EventEmitter<any> = new EventEmitter<any>();
   @Output() editValueChange: EventEmitter<any> = new EventEmitter<any>();
   @Output() nodeOnDrop: EventEmitter<any> = new EventEmitter<any>();
+  @Output() afterTreeInit: EventEmitter<any> = new EventEmitter<any>();
   @ViewChild('operableTree', { static: true }) operableTree: TreeComponent;
   @ViewChild('operableTreeContainer', { static: true }) operableTreeEle: ElementRef;
   @ViewChild('treeDropIndicator') treeDropIndicator: ElementRef;
@@ -103,19 +101,17 @@ export class OperableTreeComponent implements AfterViewInit, OnDestroy {
   };
 
   constructor(private i18n: I18nService) {
+
+  }
+  ngOnInit(): void {
     this.i18nCommonText = this.i18n.getI18nText().common;
     this.i18nSubscription = this.i18n.langChange().subscribe((data) => {
       this.i18nCommonText = data.common;
     });
   }
-  ngAfterViewInit() {
-
-  }
 
   contextmenuEvent(event, node) {
-    if (event.button === this.mouseRightButton) {
-      this.nodeRightClicked.emit({ node: node, event: event });
-    }
+    this.nodeRightClicked.emit({ node: node, event: event });
   }
 
   onDragstart(event, treeNode) {
@@ -291,9 +287,7 @@ export class OperableTreeComponent implements AfterViewInit, OnDestroy {
   }
 
   selectNode(event, treeNode: TreeNode) {
-    if (!event.target.classList.contains('devui-tree-node__content--value-wrapper')
-      && !event.target.classList.contains('devui-tree-node__content')
-      && !event.target.classList.contains('devui-tree-node__title')) {
+    if (!this.operableTree.isSelectableRegion(event.target)) {
       return;
     }
     if (treeNode.data.disableSelect) {
@@ -375,7 +369,6 @@ export class OperableTreeComponent implements AfterViewInit, OnDestroy {
     this.editNode(event, treeNode);
   }
 
-
   public checkNodeById(checked: boolean, id: number | string) {
     const results = this.treeFactory.checkNodesById(id, checked, this.checkableRelation);
     this.nodeChecked.emit(results);
@@ -394,9 +387,11 @@ export class OperableTreeComponent implements AfterViewInit, OnDestroy {
       value: currentValue, callback: (validateInfo) => {
         if (validateInfo && validateInfo.errTips) {
           treeNode.data.errTips = validateInfo.errTips;
+          treeNode.data.errTipsPosition = validateInfo.errTipsPosition || 'top';
         } else {
           if (treeNode.data.errTips) {
             delete treeNode.data.errTips;
+            delete treeNode.data.errTipsPosition;
           }
         }
       }
@@ -491,6 +486,10 @@ export class OperableTreeComponent implements AfterViewInit, OnDestroy {
   }
   public nodeDblClick(event, node) {
     this.nodeDblClicked.emit(node);
+  }
+
+  initTreeFinishEvent($event) {
+    this.afterTreeInit.emit($event);
   }
 
   ngOnDestroy() {

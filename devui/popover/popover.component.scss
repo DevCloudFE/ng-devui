@@ -1,7 +1,9 @@
 @import '../style/theme/color';
 @import '../style/theme/variables';
 @import '../style/mixins/index';
-@import '../style/core/_font';
+@import '../style/theme/shadow';
+@import '../style/theme/corner';
+@import '../style/theme/_font';
 
 :host.devui-popover {
   font-size: $devui-font-size;
@@ -10,7 +12,7 @@
   left: 0;
   line-height: 1.5;
   border: none;
-  border-radius: 4px;
+  border-radius: $devui-border-radius-feedback;
   z-index: 1060;
   background-color: $devui-feedback-overlay-bg;
   color: $devui-feedback-overlay-text;
@@ -35,7 +37,6 @@
   }
 
   &.top > .arrow {
-    left: 50%;
     margin-left: -7px;
     border-bottom-width: 0;
     border-top-color: $devui-feedback-overlay-bg;
@@ -43,7 +44,6 @@
   }
 
   &.right > .arrow {
-    top: 50%;
     left: -8px;
     margin-top: -8px;
     border-left-width: 0;
@@ -51,7 +51,6 @@
   }
 
   &.bottom > .arrow {
-    left: 50%;
     margin-left: -7px;
     border-top-width: 0;
     border-bottom-color: $devui-feedback-overlay-bg;
@@ -59,31 +58,54 @@
   }
 
   &.left > .arrow {
-    top: 50%;
     right: -8px;
     margin-top: -8px;
     border-right-width: 0;
     border-left-color: $devui-feedback-overlay-bg;
   }
 
+  &.bias-left > .arrow {
+    left: 14px;
+  }
+
+  &.bias-right > .arrow {
+    right: 14px;
+  }
+
+  &.bias-top > .arrow {
+    top: 13px;
+  }
+
+  &.bias-bottom > .arrow {
+    bottom: 5px;
+  }
+
+  &.bias-horizontal-center > .arrow {
+    left: 50%;
+  }
+
+  &.bias-vertical-center > .arrow {
+    top: 50%;
+  }
+
   &.top {
     margin-top: -10px;
-    box-shadow: -5px 5px 20px 0 $devui-shadow;
+    box-shadow: $devui-shadow-length-feedback-overlay $devui-shadow;
   }
 
   &.bottom {
     margin-top: 10px;
-    box-shadow: 5px -5px 20px 0 $devui-shadow;
+    box-shadow: $devui-shadow-length-feedback-overlay $devui-shadow;
   }
 
   &.left {
     margin-left: -10px;
-    box-shadow: 5px -5px 20px 0 $devui-shadow;
+    box-shadow: $devui-shadow-length-feedback-overlay $devui-shadow;
   }
 
   &.right {
     margin-left: 10px;
-    box-shadow: -5px 5px 20px 0 $devui-shadow;
+    box-shadow: $devui-shadow-length-feedback-overlay $devui-shadow;
   }
 }
 

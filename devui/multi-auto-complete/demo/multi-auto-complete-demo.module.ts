@@ -1,21 +1,23 @@
-import { RouterModule } from '@angular/router';
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
-import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
-import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
+import { RouterModule } from '@angular/router';
 import { DevUIModule } from 'ng-devui';
 import { DataTableModule } from 'ng-devui/data-table';
 import { MultiAutoCompleteModule } from 'ng-devui/multi-auto-complete';
-import { MultiAutoCompleteDemoComponent } from './multi-auto-complete-demo.component';
-import { MultiAutoCompleteDemoDefaultComponent } from './default/multi-auto-complete-demo-default.component';
-import { MultiAutoCompleteDemoArrayComponent } from './array/multi-auto-complete-demo-array.component';
-import { MultiAutoCompleteDemoDisabledComponent } from './disabled/multi-auto-complete-demo-disabled.component';
+import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
+import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
+import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
+import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
+import { MultiAutoCompleteDemoArrayComponent } from './array/multi-auto-complete-demo-array.component';
+import { MultiAutoCompleteDemoDefaultComponent } from './default/multi-auto-complete-demo-default.component';
+import { MultiAutoCompleteDemoDisabledComponent } from './disabled/multi-auto-complete-demo-disabled.component';
+import { MultiAutoCompleteDemoComponent } from './multi-auto-complete-demo.component';
 
 @NgModule({
   imports: [
+    TranslateModule,
     CommonModule,
     MultiAutoCompleteModule,
     FormsModule,
@@ -28,11 +30,14 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
       { path: '', redirectTo: 'demo' },
       { path: 'demo', component: MultiAutoCompleteDemoComponent },
       {
-        path: 'api', component: DevUIApiComponent, data: {
-          api: require('!html-loader!markdown-loader!../doc/api.md')
-        }
-      }
-    ])
+        path: 'api',
+        component: DevUIApiComponent,
+        data: {
+          'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),
+          'en-us': require('!html-loader!markdown-loader!../doc/api-en.md'),
+        },
+      },
+    ]),
   ],
   exports: [MultiAutoCompleteDemoComponent],
   declarations: [
@@ -42,6 +47,6 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
     MultiAutoCompleteDemoDisabledComponent,
   ],
   providers: [],
-
+  
 })
-export class MultiAutoCompleteDemoModule { }
+export class MultiAutoCompleteDemoModule {}

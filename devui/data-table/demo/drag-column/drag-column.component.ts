@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SourceType, originSource } from '../mock-data';
+import { originSource, SourceType } from '../mock-data';
 
 @Component({
     moduleId: module.id,

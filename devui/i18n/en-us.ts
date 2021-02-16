@@ -88,7 +88,7 @@ export default {
     getBeyondMaximalFileSizeMsg(filename, maximalSize) {
       return `Maximum file size (MB): ${maximalSize}. Files whose size exceeds the maximum value: ${filename}`;
     },
-    getAllFilesBeyondMaximalFileSizeMsg( maximalSize) {
+    getAllFilesBeyondMaximalFileSizeMsg(maximalSize) {
       return `Maximum file size (MB): ${maximalSize}. The selected files exceed the maximum value`;
     },
     getExistSameNameFilesMsg(sameNames) {
@@ -149,5 +149,8 @@ export default {
     weeksLater: ' weeks later',
     monthsLater: ' months later',
     yearsLater: ' years later',
+  },
+  tagsInput: {
+    tagsReachMaxLength: 'The length of tags has reached maxTags',
   }
 };

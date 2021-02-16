@@ -1,8 +1,9 @@
 @import '../style/theme/color';
+@import '../style/theme/corner';
 
 .devui-datepicker {
   transform: perspective(1px) translate3d(0, 0, 0);
-  border-radius: 2px;
+  border-radius: $devui-border-radius;
 }
 
 .devui-dropdown-overlay {

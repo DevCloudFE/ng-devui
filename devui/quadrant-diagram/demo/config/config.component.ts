@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {
-  ILabelDataConfigs,
   IAxisConfigs,
+  ILabelDataConfigs,
   IQuadrantConfigs,
   IViewConfigs
 } from 'ng-devui/quadrant-diagram';
-
 
 @Component({
   selector: 'd-config',
@@ -117,4 +116,3 @@ export class ConfigComponent implements OnInit {
   }
 
 }
-

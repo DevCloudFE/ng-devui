@@ -1,13 +1,13 @@
 import {
-  Component,
   AfterViewInit,
+  ChangeDetectorRef,
+  Component,
   ElementRef,
   Input,
-  ChangeDetectorRef,
   ViewChild
 } from '@angular/core';
 
-import { BadgeStatusType, BadgePositionType } from './badge.types';
+import { BadgePositionType, BadgeStatusType } from './badge.types';
 
 @Component({
   selector: 'd-badge',

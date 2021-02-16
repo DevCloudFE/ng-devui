@@ -1,19 +1,20 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { OverlayModule } from '@angular/cdk/overlay';
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { DatePickerConfigService } from './date-picker.config.service';
 
+import { ButtonModule } from 'ng-devui/button';
+import { DateRangePickerComponent } from './date-range-picker.component';
+import { DateRangePickerDirective } from './date-range-picker.directive';
+import { DatePickerAppendToBodyComponent } from './datepicker-cdk-overlay.component';
 import { DatepickerComponent } from './datepicker.component';
 import { DatepickerDirective } from './datepicker.directive';
-import { ButtonModule } from 'ng-devui/button';
-import { DatePickerAppendToBodyComponent } from './datepicker-cdk-overlay.component';
-import { DateRangePickerComponent } from './date-range-picker.component';
 import { SingleDateRangePickerComponent } from './single-date-range-picker.component';
-import { TwoDatePickerComponent } from './two-datepicker/two-datepicker.component';
+import { TwoDatePickerEndDirective } from './two-datepicker/two-datepicker-end.directive';
 import { TwoDatepickerSingleComponent } from './two-datepicker/two-datepicker-single.component';
 import { TwoDatePickerStartDirective } from './two-datepicker/two-datepicker-start.directive';
-import { TwoDatePickerEndDirective } from './two-datepicker/two-datepicker-end.directive';
+import { TwoDatePickerComponent } from './two-datepicker/two-datepicker.component';
 
 @NgModule({
   imports: [
@@ -27,6 +28,7 @@ import { TwoDatePickerEndDirective } from './two-datepicker/two-datepicker-end.d
     DatepickerDirective,
     DatePickerAppendToBodyComponent,
     DateRangePickerComponent,
+    DateRangePickerDirective,
     SingleDateRangePickerComponent,
     TwoDatePickerComponent,
     TwoDatepickerSingleComponent,
@@ -38,13 +40,14 @@ import { TwoDatePickerEndDirective } from './two-datepicker/two-datepicker-end.d
     DatepickerDirective,
     DatePickerAppendToBodyComponent,
     DateRangePickerComponent,
+    DateRangePickerDirective,
     SingleDateRangePickerComponent,
     TwoDatePickerComponent,
     TwoDatepickerSingleComponent,
     TwoDatePickerStartDirective,
     TwoDatePickerEndDirective
   ],
-
+  
   providers: [DatePickerConfigService]
 })
 export class DatepickerModule {

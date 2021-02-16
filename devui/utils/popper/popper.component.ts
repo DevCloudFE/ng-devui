@@ -11,7 +11,7 @@ import {
   Renderer2,
   ViewChild,
 } from '@angular/core';
-import Popper, {PopperOptions} from 'popper.js';
+import { createPopper } from '@popperjs/core';
 import { Observable, Subject } from 'rxjs';
 
 interface ExtraSetConfig {
@@ -49,7 +49,7 @@ export class PopperComponent implements AfterViewInit, OnDestroy {
   @Input() fluidPopper = true;
   @Input() appendTo = 'body';
   @Input() extraConfig: ExtraSetConfig;
-  protected popper: Popper = null;
+  protected popper = null;
   protected _isOpen: any = false;
   protected animate: boolean;
   protected popperDirection: string;
@@ -94,7 +94,7 @@ export class PopperComponent implements AfterViewInit, OnDestroy {
         if (this.extraConfig && this.extraConfig.extraWidth) {
           popperWidth = popperWidth + this.extraConfig.extraWidth;
         }
-        const firstEle =  this.popperContainer.nativeElement.firstElementChild;
+        const firstEle = this.popperContainer.nativeElement.firstElementChild;
         if (firstEle.classList.contains('devui-search-container')) {
           for (const child of this.popperContainer.nativeElement.children) {
             child.style.width = `${popperWidth}px`;
@@ -107,7 +107,7 @@ export class PopperComponent implements AfterViewInit, OnDestroy {
     } else {
       this.attachPopperContainerToNode(this.popperParent);
     }
-    this.popper = this.createPopper();
+    this.popper = this.createCustomPopper();
     this.renderer.setStyle(this.popperContainer.nativeElement, 'display', 'block');
   }
 
@@ -158,9 +158,9 @@ export class PopperComponent implements AfterViewInit, OnDestroy {
     });
   }
 
-  private applyTransitionStyle(data: Popper.Data) {
+  private applyTransitionStyle = (data) => {
     const optionsContainer = this.popperContainer.nativeElement;
-    this.updateContainerTransitionDirection(data.flipped);
+    this.updateContainerTransitionDirection(data?.state?.modifiersData?.flip?._skip);
     if (this.animate) {
       // perspective(1px) solves pixel shift caused by webkit transform
       this.renderer.setStyle(optionsContainer, 'transform',
@@ -205,27 +205,39 @@ export class PopperComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  private createPopper() {
-    return new Popper(this.popperActivator.nativeElement, this.popperContainer.nativeElement, {
+  private createCustomPopper() {
+    return createPopper(this.popperActivator.nativeElement, this.popperContainer.nativeElement, {
       placement: 'bottom-start',
-      modifiers: {
-        preventOverflow: {
-          // Do not stick to the window edge
-          escapeWithReference: true,
-          // boundariesElement: 'viewport'
+      modifiers: [
+        {
+          name: 'preventOverflow',
+          options: {
+            mainAxis: true, // true by default
+          },
         },
-        applyReactStyle: {
-          enabled: true,
-          // Apply extra transition and transform to popper
-          fn: this.applyTransitionStyle.bind(this),
+        {
+          name: 'applyReactStyle',
+          phase: 'afterWrite',
+          enabled: true, // true by default
+          fn: this.applyTransitionStyle
         },
-        offset: {
-          // Set vertical offset 5px
-          offset: this.extraConfig && this.extraConfig.offset ? this.extraConfig.offset : '0, 5px'
-        }
-      },
-      positionFixed: !!this.appendTo
-    } as PopperOptions);
+        {
+          name: 'offset',
+          options: {
+            offset: this.extraConfig && this.extraConfig.offset
+              ? [parseInt(this.extraConfig.offset.split(',')[0], 10), parseInt(this.extraConfig.offset.split(',')[1], 10)]
+              : [0, 5], // true by default
+          },
+        },
+        {
+          name: 'flip',
+          options: {
+            flipVariations: true, // true by default
+          },
+        },
+        ],
+      strategy: !!this.appendTo ? 'fixed' : 'absolute',
+    });
   }
 
   private setTransition(command = null) {
@@ -243,7 +255,7 @@ export class PopperComponent implements AfterViewInit, OnDestroy {
 
   public update() {
     PopperComponent.nextTick(() => {
-      if (this.popper) { this.popper.update(); }
+      if (this.popper) { this.popper.forceUpdate(); }
     });
   }
 
@@ -272,7 +284,6 @@ export class PopperComponent implements AfterViewInit, OnDestroy {
     const nodeParent = document.querySelector(targetSelector);
     this.attachPopperContainerToNode(nodeParent);
   }
-
 
   ngAfterViewInit(): void {
     // Detach popper container once view initialized.

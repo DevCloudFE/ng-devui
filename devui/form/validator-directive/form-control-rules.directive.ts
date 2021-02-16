@@ -1,20 +1,19 @@
-import { Directive, Input, Self, OnChanges, SimpleChanges, Host, Optional } from '@angular/core';
-import { Output, SkipSelf, ComponentFactoryResolver, ElementRef, ComponentRef, OnInit, OnDestroy } from '@angular/core';
-import { NgControl, AbstractControlDirective, AbstractControl, ValidatorFn, AsyncValidatorFn } from '@angular/forms';
-import { ValidationErrors, ControlContainer } from '@angular/forms';
-import { Observable, fromEvent, merge, Subject, Subscription } from 'rxjs';
-import { map, takeUntil } from 'rxjs/operators';
+import { Directive, Host, Input, OnChanges, Optional, Self, SimpleChanges } from '@angular/core';
+import { ComponentFactoryResolver, ComponentRef, ElementRef, OnDestroy, OnInit, Output, SkipSelf } from '@angular/core';
 import { EventEmitter } from '@angular/core';
+import { AbstractControl, AbstractControlDirective, AsyncValidatorFn, NgControl, ValidatorFn } from '@angular/forms';
+import { ControlContainer, ValidationErrors } from '@angular/forms';
+import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { OverlayContainerRef } from 'ng-devui/overlay-container';
 import { PopoverComponent } from 'ng-devui/popover';
+import { fromEvent, merge, Observable, Subject, Subscription, timer } from 'rxjs';
+import { map, switchMap, takeUntil } from 'rxjs/operators';
 import { FormItemComponent } from '../form-item.component';
 import { DAsyncValidateRule, dDefaultValidators, DFormControlStatus, DValidateErrorStatus } from './validate.type';
 import { DValidateRule, DValidateRules, DValidationErrorStrategy, ruleReservedWords } from './validate.type';
-import { I18nInterface, I18nService } from 'ng-devui/i18n';
 
 @Directive()
 export abstract class DAbstractControlRuleDirective implements OnChanges {
-
   /* mode is _cd.control */
   public readonly _cd: AbstractControlDirective; // model is _cd.control
 
@@ -28,7 +27,7 @@ export abstract class DAbstractControlRuleDirective implements OnChanges {
   private _errorStrategy: DValidationErrorStrategy = 'dirty'; // 统一设置错误抛出策略
 
   /* rules map */
-  private _messageOpts: {[key: string]: DValidateRule | DAsyncValidateRule};
+  private _messageOpts: { [key: string]: DValidateRule | DAsyncValidateRule };
 
   /* 是否已经注册监听 */
   private _registered = false;
@@ -41,12 +40,12 @@ export abstract class DAbstractControlRuleDirective implements OnChanges {
   private _warning: boolean;
 
   /* 内置国际化text */
-  private i18nFormText: I18nInterface['form'];
-  private i18nSubscription: Subscription;
+  i18nFormText: I18nInterface['form'];
 
   public get errorMessage() {
-    return (this._cd && this._cd.control.invalid) ?
-      (this._errorMessage || this._rules && (this._rules as {message: string}).message) : null;
+    return this._cd && this._cd.control.invalid
+      ? this._errorMessage || (this._rules && (this._rules as { message: string }).message)
+      : null;
   }
 
   public set errorMessage(msg: string) {
@@ -59,17 +58,9 @@ export abstract class DAbstractControlRuleDirective implements OnChanges {
 
   @Output() dRulesStatusChange = new EventEmitter<DValidateErrorStatus>();
 
-  constructor(
-    cd: AbstractControlDirective,
-    parent: DAbstractControlRuleDirective,
-    i18n: I18nService
-    ) {
+  constructor(cd: AbstractControlDirective, parent: DAbstractControlRuleDirective) {
     this._cd = cd;
     this._parent = parent;
-    this.i18nFormText = i18n.getI18nText().form;
-    this.i18nSubscription = i18n.langChange().subscribe((data) => {
-      this.i18nFormText = data.form;
-    });
   }
 
   get isReady() {
@@ -82,19 +73,24 @@ export abstract class DAbstractControlRuleDirective implements OnChanges {
 
   /* 包含继承自父级的rule */
   get fullRules(): DValidateRules {
-    const keysCanInherit = ['messageShowType', 'errorStrategy', 'messageToView', 'updateOn', 'popPosition'];
+    const keysCanInherit = ['messageShowType', 'errorStrategy', 'messageToView', 'popPosition', 'asyncDebounceTime'];
     const resRules = { ...this._rules };
-    keysCanInherit.forEach(key => {
+    keysCanInherit.forEach((key) => {
       if (this._parent && this._parent.fullRules) {
-        resRules[key] = resRules[key] || this._parent.fullRules[key];
+        resRules[key] = resRules[key] !== undefined ? resRules[key] : this._parent.fullRules[key];
       }
     });
-
     return resRules;
   }
 
+  get asyncValidatorDebounceTime(): number {
+    const time = (this.fullRules as { asyncDebounceTime: number }).asyncDebounceTime;
+    return time === undefined ? 300 : time;
+  }
+
   ngOnChanges(changes: SimpleChanges): void {
-    if ('rules' in changes && !this._rules) { // TODO：提供外部调用可手动更新rule方法
+    if ('rules' in changes && !this._rules) {
+      // TODO：提供外部调用可手动更新rule方法
       this._rules = changes['rules'].currentValue;
       this.setupOrUpdateRules();
     }
@@ -103,7 +99,6 @@ export abstract class DAbstractControlRuleDirective implements OnChanges {
       this._registerOnStatusChange();
     }
   }
-
 
   public setupOrUpdateRules(): void {
     // TODO：校验rules规则是否合法
@@ -118,8 +113,10 @@ export abstract class DAbstractControlRuleDirective implements OnChanges {
         this._updateValidators(validators);
       }
       if (this._rules.asyncValidators) {
-        const asyncValidators: AsyncValidatorFn[] =
-          this._transformValidatorsToFnArray(this._rules.asyncValidators, true) as AsyncValidatorFn[];
+        const asyncValidators: AsyncValidatorFn[] = this._transformValidatorsToFnArray(
+          this._rules.asyncValidators,
+          true
+        ) as AsyncValidatorFn[];
         this._updateAsyncValidators(asyncValidators);
       }
     } else {
@@ -129,8 +126,10 @@ export abstract class DAbstractControlRuleDirective implements OnChanges {
     this._updateValueAndValidity();
   }
 
-  private _transformValidatorsToFnArray
-  (validators: DValidateRule[] | DAsyncValidateRule[], async = false):  ValidatorFn[] | AsyncValidatorFn[] {
+  private _transformValidatorsToFnArray(
+    validators: DValidateRule[] | DAsyncValidateRule[],
+    async = false
+  ): ValidatorFn[] | AsyncValidatorFn[] {
     const resultFns = [];
     validators.forEach((validatorRule: DValidateRule) => {
       // TODO: 提供可全局统一注册方法
@@ -159,6 +158,16 @@ export abstract class DAbstractControlRuleDirective implements OnChanges {
       }
 
       if (validator) {
+        if (async && this.asyncValidatorDebounceTime) {
+          const oldValidator = validator;
+          validator = (control: AbstractControl): Observable<ValidationErrors | null> => {
+            return timer(this.asyncValidatorDebounceTime).pipe(
+              switchMap(() => {
+                return oldValidator(control);
+              })
+            );
+          };
+        }
         resultFns.push(validator);
         this._messageOpts[validatorId] = validatorRule;
       }
@@ -166,20 +175,21 @@ export abstract class DAbstractControlRuleDirective implements OnChanges {
       //   // TODO: 抛出错误
       // }
     });
-    return resultFns as (AsyncValidatorFn[] | ValidatorFn[]);
+    return resultFns as AsyncValidatorFn[] | ValidatorFn[];
   }
 
   private _findNgValidatorInDefault(validatorRule: DValidateRule) {
     for (const key in dDefaultValidators) {
       if (validatorRule.hasOwnProperty(key)) {
-        return {id: key, ngValidator: this._generateValidatorFnFromDefault(key, validatorRule[key])};
+        return { id: key, ngValidator: this._generateValidatorFnFromDefault(key, validatorRule[key]) };
       }
     }
     return null;
   }
 
   private _generateValidatorFnFromDefault(key, value) {
-    if (typeof value === 'boolean' && value) {  // boolean无需再执行函数进行传值
+    if (typeof value === 'boolean' && value) {
+      // boolean无需再执行函数进行传值
       return dDefaultValidators[key];
     } else if (typeof value !== 'boolean') {
       return dDefaultValidators[key](value);
@@ -188,14 +198,14 @@ export abstract class DAbstractControlRuleDirective implements OnChanges {
   }
 
   private _transformRuleToNgValidator(id, validatorFn, message) {
-    return (control: AbstractControl): ValidationErrors|null => {
+    return (control: AbstractControl): ValidationErrors | null => {
       const res = validatorFn(control.value);
       return this._transValidatorResultToNgError(id, res, message);
     };
   }
 
   private _transformRuleToNgAsyncValidator(id, validator, message) {
-    return (control: AbstractControl): Observable<ValidationErrors|null> => {
+    return (control: AbstractControl): Observable<ValidationErrors | null> => {
       return (validator(control.value) as Observable<boolean>).pipe(
         map((res) => {
           return this._transValidatorResultToNgError(id, res, message);
@@ -246,7 +256,8 @@ export abstract class DAbstractControlRuleDirective implements OnChanges {
     }
   }
 
-  get dClassSuccess() { // COMMENT: 暂不默认提供
+  get dClassSuccess() {
+    // COMMENT: 暂不默认提供
     if (this._rules['errorStrategy'] === 'dirty') {
       return this._cd.control ? this._cd.control.valid && this._cd.control.dirty : false;
     } else if (!this._rules['errorStrategy']) {
@@ -268,31 +279,32 @@ export abstract class DAbstractControlRuleDirective implements OnChanges {
     if (this._cd && this._cd.control) {
       this._cd.control.statusChanges.subscribe((status) => {
         this._parseErrors(this._cd.control.errors);
-        this._updateParent();  // update error message to parent directive
+        this._updateParent(); // update error message to parent directive
         this.updateStatusAndMessageToView(status);
       });
       this._registered = true;
     }
   }
 
-  private _parseErrors(errors: {[key: string]: any}): void {
+  private _parseErrors(errors: { [key: string]: any }): void {
     if (!errors) {
       this._errorMessage = null;
     } else {
       /* if a rule did not have a message, we will try to get a message from errors by id */
       const { resId, resRule } = this._getARuleByErrors(errors);
       this._errorStrategy = this._getErrorStrategy(resRule);
-      this._errorMessage = resRule &&
-        (
-          resRule.message || this._getMessageFormErrorsById(errors, resId) || this._getDefaultErrorMessage(resRule, resId)
-          || (this._rules as {message: string}).message
-        );
+      this._errorMessage =
+        resRule &&
+        (resRule.message ||
+          this._getMessageFormErrorsById(errors, resId) ||
+          this._getDefaultErrorMessage(resRule, resId) ||
+          (this._rules as { message: string }).message);
     }
 
     this.dRulesStatusChange.emit({
       showError: this.showError,
       errorMessage: this._errorMessage,
-      errors: errors
+      errors: errors,
     });
   }
 
@@ -301,10 +313,10 @@ export abstract class DAbstractControlRuleDirective implements OnChanges {
   }
 
   private _getErrorStrategy(rule?) {
-    return rule && rule.errorStrategy || this._rules['errorStrategy'] || 'dirty';
+    return (rule && rule.errorStrategy) || this._rules['errorStrategy'] || 'dirty';
   }
 
-  private _getMessageFormErrorsById(errors: {[key: string]: any}, id: string): string | null {
+  private _getMessageFormErrorsById(errors: { [key: string]: any }, id: string): string | null {
     if (errors[id] && typeof errors[id] === 'string') {
       return errors[id];
     } else {
@@ -312,7 +324,7 @@ export abstract class DAbstractControlRuleDirective implements OnChanges {
     }
   }
 
-  private _getARuleByErrors(errors: {[key: string]: any}) {
+  private _getARuleByErrors(errors: { [key: string]: any }) {
     // TODO：处理errors为null
     let resId: string;
     let resRule = null;
@@ -340,9 +352,7 @@ export abstract class DAbstractControlRuleDirective implements OnChanges {
   }
 
   private _setUpdateStrategy(): void {
-    if (!Array.isArray(this._rules) &&
-    typeof this._rules === 'object' &&
-    this._rules.updateOn) {
+    if (!Array.isArray(this._rules) && typeof this._rules === 'object' && this._rules.updateOn) {
       (this._cd.control as any)._updateOn = this._rules.updateOn;
     }
   }
@@ -353,13 +363,13 @@ export abstract class DAbstractControlRuleDirective implements OnChanges {
     }
   }
 
-  private _updateValidators(newValidator: ValidatorFn|ValidatorFn[]|null): void {
+  private _updateValidators(newValidator: ValidatorFn | ValidatorFn[] | null): void {
     if (this._cd && this._cd.control) {
       this._cd.control.setValidators(newValidator);
     }
   }
 
-  private _updateAsyncValidators(newValidator: AsyncValidatorFn|AsyncValidatorFn[]|null): void {
+  private _updateAsyncValidators(newValidator: AsyncValidatorFn | AsyncValidatorFn[] | null): void {
     if (this._cd && this._cd.control) {
       this._cd.control.setAsyncValidators(newValidator);
     }
@@ -379,19 +389,31 @@ const dControlErrorStatusHost = {
           [dValidateRules][formGroup],[dValidateRules]form:not([ngNoForm]),[dValidateRules][ngForm]`,
   // tslint:disable-next-line: no-host-metadata-property
   host: dControlErrorStatusHost,
-  exportAs: 'dValidateRules'
+  exportAs: 'dValidateRules',
 })
-
-export class DFormGroupRuleDirective extends DAbstractControlRuleDirective implements OnChanges {
+export class DFormGroupRuleDirective extends DAbstractControlRuleDirective implements OnInit, OnChanges, OnDestroy {
   @Input('dValidateRules') rules: DValidateRules;
   @Output() dRulesStatusChange: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor(
-    @Self() cd: ControlContainer,
-    @Optional() @Host() @SkipSelf() parentDir: DFormGroupRuleDirective,
-    i18n: I18nService
-  ) {
-    super(cd, parentDir, i18n);
+  private destroy$ = new Subject();
+
+  constructor(@Self() cd: ControlContainer, @Optional() @Host() @SkipSelf() parentDir: DFormGroupRuleDirective, private i18n: I18nService) {
+    super(cd, parentDir);
+  }
+
+  ngOnInit(): void {
+    this.i18nFormText = this.i18n.getI18nText().form;
+    this.i18n
+      .langChange()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data) => {
+        this.i18nFormText = data.form;
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   setErrorMessageByChild(msg: string) {
@@ -409,55 +431,62 @@ export class DFormGroupRuleDirective extends DAbstractControlRuleDirective imple
   selector: '[dValidateRules][formControlName],[dValidateRules][ngModel],[dValidateRules][formControl]',
   // tslint:disable-next-line: no-host-metadata-property
   host: dControlErrorStatusHost,
-  exportAs: 'dValidateRules'
+  exportAs: 'dValidateRules',
 })
-
 export class DFormControlRuleDirective extends DAbstractControlRuleDirective implements OnInit, OnChanges, OnDestroy {
   @Input('dValidateRules') rules: DValidateRules;
   @Output() dRulesStatusChange: EventEmitter<any> = new EventEmitter<any>();
 
   popoverComponentRef: ComponentRef<PopoverComponent>;
   private destroy$ = new Subject();
-  popMessage: string;  // 最终显示的message
+  popMessage: string; // 最终显示的message
 
   get showType() {
-    return (this.fullRules as {messageShowType: string}).messageShowType || 'popover';
+    return (this.fullRules as { messageShowType: string }).messageShowType || 'popover';
   }
 
   get popPosition() {
-    return (this.fullRules as {popPosition: any}).popPosition || ['right', 'bottom'];
+    return (this.fullRules as { popPosition: any }).popPosition || ['right', 'bottom'];
   }
 
   constructor(
     @Self() cd: NgControl,
     @Optional() @Host() private dFormItem: FormItemComponent,
     @Optional() @Host() @SkipSelf() parentDir: DFormGroupRuleDirective,
-    i18n: I18nService,
+    private i18n: I18nService,
     public triggerElementRef: ElementRef,
     private overlayContainerRef: OverlayContainerRef,
     private componentFactoryResolver: ComponentFactoryResolver
   ) {
-    super(cd, parentDir, i18n);
+    super(cd, parentDir);
   }
 
   ngOnInit(): void {
+    this.setI18nText();
     this._registerFocusChange();
   }
 
+  setI18nText() {
+    this.i18nFormText = this.i18n.getI18nText().form;
+    this.i18n
+      .langChange()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data) => {
+        this.i18nFormText = data.form;
+      });
+  }
+
   _registerFocusChange() {
-    merge(
-      fromEvent(this.triggerElementRef.nativeElement, 'focusin'),
-      fromEvent(this.triggerElementRef.nativeElement, 'focusout')
-    ).pipe(
-      takeUntil(this.destroy$)
-    ).subscribe((event: Event) => {
-      if (event.type === 'focusin') {
-        this.showPopMessage();
-      }
-      if (event.type === 'focusout') {
-        this.hidePopMessage();
-      }
-    });
+    merge(fromEvent(this.triggerElementRef.nativeElement, 'focusin'), fromEvent(this.triggerElementRef.nativeElement, 'focusout'))
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((event: Event) => {
+        if (event.type === 'focusin') {
+          this.showPopMessage();
+        }
+        if (event.type === 'focusout') {
+          this.hidePopMessage();
+        }
+      });
   }
 
   _updateFormContainer(status, message: string): void {
@@ -470,7 +499,8 @@ export class DFormControlRuleDirective extends DAbstractControlRuleDirective imp
     this.popMessage = status === 'error' ? message : null; // 暂不提供除errorMessage外提示
     if (this.popoverComponentRef) {
       this.popoverComponentRef.instance.content = message;
-      setTimeout(() => { // TODO: popover使用onPush后，可去除当前setTimeout
+      setTimeout(() => {
+        // TODO: popover使用onPush后，可去除当前setTimeout
         if (this.popoverComponentRef) {
           this.popoverComponentRef.instance.updatePositionAndDetectChange();
         }
@@ -479,7 +509,8 @@ export class DFormControlRuleDirective extends DAbstractControlRuleDirective imp
   }
 
   updateStatusAndMessageToView(status: any): void {
-    let controlStatus = null, message = null;
+    let controlStatus = null,
+      message = null;
     if (this.showStatus) {
       [controlStatus, message] = this.getFormControlStatusAndMessage(status);
     }
@@ -517,7 +548,7 @@ export class DFormControlRuleDirective extends DAbstractControlRuleDirective imp
       popType: type,
       popMaxWidth: 200,
       appendToBody: true,
-      zIndex: 1060
+      zIndex: 1060,
     });
   }
 

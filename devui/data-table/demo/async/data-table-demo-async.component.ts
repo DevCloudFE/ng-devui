@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { Observable, timer } from 'rxjs';
 import { LoadingType } from 'ng-devui/loading';
+import { Observable, timer } from 'rxjs';
 import { originSource, SourceType } from '../mock-data';
 
 @Component({
@@ -71,7 +71,6 @@ export class DatatableDemoAsyncComponent implements OnInit {
     }
     this.colChanged = !this.colChanged;
   }
-
 
   ngOnInit() {
   }

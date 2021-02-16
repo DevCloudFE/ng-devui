@@ -1,10 +1,10 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, DebugElement, ViewChild } from '@angular/core';
-import { FullscreenModule } from './fullscreen.module';
-import { ButtonModule } from '../button/button.module';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { ButtonModule } from '../button/button.module';
 import { DomHelper } from '../utils/testing/dom-helper';
 import { FullscreenComponent } from './fullscreen.component';
+import { FullscreenModule } from './fullscreen.module';
 @Component({
   template: `
     <d-fullscreen
@@ -106,6 +106,31 @@ describe('fullscreen', () => {
       expect(document.fullscreenElement !== null).toBe(false);
     });
 
-    // TODO: fullscreen无法触发浏览器原生全屏，待解决
+    // fullscreen无法自动触发浏览器原生全屏，该用例无法测试
+    xit('Click can immersive full-screen display content', fakeAsync(() => {
+      fixture.detectChanges();
+      const buttonEle = debugEl.query(By.css('.fullscreen-button'));
+      buttonEle.triggerEventHandler('click', {}); // 未生效
+      // buttonEle.nativeElement.dispatchEvent(new Event('click'));
+      tick();
+      fixture.detectChanges();
+      // 点击后全屏显示
+      const classes = [
+        '.fullscreen-container',
+        '.fullscreen',
+        '.icon-frame-contract'
+      ];
+      expect(domHelper.judgeStyleClasses(classes)).toBeTruthy();
+      expect(document.fullscreenElement !== null).toBe(false);
+      buttonEle.triggerEventHandler('click', {});
+      fixture.detectChanges();
+      expect(debugEl.query(By.css('.fullscreen'))).toBeNull();
+      const closeClasses = [
+        '.fullscreen-container',
+        '.icon-frame-expand'
+      ];
+      expect(domHelper.judgeStyleClasses(closeClasses)).toBeTruthy();
+      expect(document.fullscreenElement !== null).toBe(false);
+    }));
   });
 });

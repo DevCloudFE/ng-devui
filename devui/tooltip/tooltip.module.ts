@@ -1,10 +1,10 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TooltipComponent } from './tooltip.component';
-import { PortalModule } from 'ng-devui/portal';
-import { TooltipDirective } from './tooltip.directive';
+import { NgModule } from '@angular/core';
 import { OverlayContainerRef } from 'ng-devui/overlay-container';
+import { PortalModule } from 'ng-devui/portal';
 import {PositioningModule} from 'ng-devui/position';
+import { TooltipComponent } from './tooltip.component';
+import { TooltipDirective } from './tooltip.directive';
 
 @NgModule({
   imports: [
@@ -17,7 +17,7 @@ import {PositioningModule} from 'ng-devui/position';
   providers: [
     OverlayContainerRef,
   ],
-
+  
 })
 export class TooltipModule {
 }

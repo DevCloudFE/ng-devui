@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IUploadOptions, IFileOptions } from 'ng-devui/upload';
+import { IFileOptions, IUploadOptions } from 'ng-devui/upload';
 @Component({
   selector: 'd-dynamic-upload-options',
   templateUrl: './dynamic-upload-options.component.html'

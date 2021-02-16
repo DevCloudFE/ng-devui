@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { of, Observable } from 'rxjs';
-import { delay, map } from 'rxjs/operators';
 import { DValidateRules } from 'ng-devui/form';
+import { Observable, of } from 'rxjs';
+import { delay, map } from 'rxjs/operators';
 
 @Component({
   selector: 'd-form-demo-user-register',

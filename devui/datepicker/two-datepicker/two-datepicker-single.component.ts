@@ -1,21 +1,21 @@
 import {
-  Component,
-  Input,
-  Output,
-  forwardRef,
-  ElementRef,
-  Renderer2,
-  EventEmitter,
   ChangeDetectorRef,
-  SimpleChanges,
+  Component,
+  ElementRef,
+  EventEmitter,
+  forwardRef,
+  Input,
   OnChanges,
-  OnInit
+  OnInit,
+  Output,
+  Renderer2,
+  SimpleChanges
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { DatepickerComponent as SingleDatepickerComponent } from '../datepicker.component';
-import { DatePickerConfigService as DatePickerConfig } from '../date-picker.config.service';
 import { I18nService } from 'ng-devui/i18n';
+import { DatePickerConfigService as DatePickerConfig } from '../date-picker.config.service';
 import { SelectDateRangeChangeEventArgs, SelectDateRangeChangeReason } from '../date-range-change-event-args.model';
+import { DatepickerComponent as SingleDatepickerComponent } from '../datepicker.component';
 import { SimpleDate } from '../single-date-range-picker.component';
 
 @Component({
@@ -55,6 +55,7 @@ export class TwoDatepickerSingleComponent extends SingleDatepickerComponent impl
     protected i18n: I18nService
   ) {
     super(elementRef, renderer, datePickerConfig, changeDetectorRef, i18n);
+    this.setI18nText();
   }
 
   ngOnInit() {
@@ -64,14 +65,12 @@ export class TwoDatepickerSingleComponent extends SingleDatepickerComponent impl
       this.onSelectDateChanged();
       this.onDisplayWeeksChange();
       this.initDatePicker();
-      this.setI18nText();
     } else if (this.isAuxiliary && !this.rangeEnd) {
       // 副面板，未选择结束日期的情况
       this.onSelectDateChanged();
       this.initDatePicker();
       this.onNextMonth('init');
-      this.selectedDate = new Date(this.currentYear, this.currentMonth);
-      this.setI18nText();
+      this.selectedDate = new Date(this.currentYear, this.currentMonthIndex);
 
     } else if (!this.isAuxiliary && this.rangeStart) {
       // 主面板，已选择开始日期的情况
@@ -82,7 +81,7 @@ export class TwoDatepickerSingleComponent extends SingleDatepickerComponent impl
       const rangeStart = this.convertDate(this.rangeStart);
       const rangeEnd = this.convertDate(this.rangeEnd);
       this.currentYear = rangeEnd.getFullYear();
-      this.currentMonth = rangeEnd.getMonth();
+      this.currentMonthIndex = rangeEnd.getMonth();
       this.selectedDate = this.rangeEnd;
       super.ngOnInit();
       // 处理选择的日期范围开始和结束在同一个月的情况
@@ -90,7 +89,7 @@ export class TwoDatepickerSingleComponent extends SingleDatepickerComponent impl
         rangeStart.getMonth() === rangeEnd.getMonth()) {
         this.onNextMonth('init');
       }
-      this.selectedDate = new Date(this.currentYear, this.currentMonth);
+      this.selectedDate = new Date(this.currentYear, this.currentMonthIndex);
     }
     if (!this.selectedRange.every(curDate => !!curDate)) {
       this.selectingRange = true;
@@ -129,14 +128,10 @@ export class TwoDatepickerSingleComponent extends SingleDatepickerComponent impl
   }
 
   convertDate(date) {
-    return date ? this.dateConverter.parse(date, this.dateFormat, this.locale) : null;
+    return date ? this.dateConverter.parse(date) : null;
   }
 
   selectRange(date, passive = false) {
-    if (this.disabled) {
-      return;
-    }
-    this.setTime(date);
     if (this.whichOpen === 'start') {
       if (!this.rangeEnd) {
         this.rangeEnd = null;
@@ -387,18 +382,12 @@ export class TwoDatepickerSingleComponent extends SingleDatepickerComponent impl
   protected notifyCalenderChange() {
     this.syncPickerPair.emit({
       year: this.currentYear,
-      month: this.currentMonth
+      month: this.currentMonthIndex
     });
   }
 
   confirmTime() {
     this.consolidateTime.emit();
-  }
-
-  private setTime(date: any) {
-    this.currentHour = this.showTime && date ? date.getHours() : 0;
-    this.currentMinute = this.showTime && date ? date.getMinutes() : 0;
-    this.currentSecond = this.showTime && date ? date.getSeconds() : 0;
   }
 
   protected onSelectDateChanged() {
@@ -409,30 +398,12 @@ export class TwoDatepickerSingleComponent extends SingleDatepickerComponent impl
     if (date.getTime() > this.maxDate.getTime()) {
       date = this.maxDate;
     }
-    this.currentYear = date.getFullYear();
-    this.currentMonth = date.getMonth();
-    if (!this.showTime) { return; }
-    switch (this.isAuxiliary) {
-      case false:
-        // Left panel
-        this.currentHour = this.rangeStart ? this.rangeStart.getHours() : 0;
-        this.currentMinute = this.rangeStart ? this.rangeStart.getMinutes() : 0;
-        this.currentSecond = this.rangeStart ? this.rangeStart.getSeconds() : 0;
-        break;
-      case true:
-        // Right panel
-        this.currentHour = this.rangeEnd ? this.rangeEnd.getHours() : 0;
-        this.currentMinute = this.rangeEnd ? this.rangeEnd.getMinutes() : 0;
-        this.currentSecond = this.rangeEnd ? this.rangeEnd.getSeconds() : 0;
-        break;
+    if (!this.isAuxiliary && this.rangeEnd && !this.rangeStart) {
+      date = new Date(this.rangeEnd);
+      date.setMonth(date.getMonth() - 1);
     }
-  }
-
-  get currentTime () {
-    return {
-      hour: this.currentHour,
-      minute: this.currentMinute,
-      second: this.currentSecond
-    };
+    this.selectedDate = this.selectedDate || date;
+    this.currentYear = date.getFullYear();
+    this.currentMonthIndex = date.getMonth();
   }
 }

@@ -1,7 +1,7 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
-  selector: 'd-slider-formatter',
+  selector: 'd-slider-custom',
   templateUrl: './slider-custom-formatter.component.html',
 })
 export class SliderCustomFormatterComponent {

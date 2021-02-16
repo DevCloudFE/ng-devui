@@ -1,13 +1,13 @@
 import {
   Component,
   Input,
-  ViewChild,
   OnInit,
   TemplateRef,
+  ViewChild,
 } from '@angular/core';
-import {ModalContentDirective} from './modal.directive';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ModalComponent } from './modal.component';
+import {ModalContentDirective} from './modal.directive';
 @Component({
   selector: 'd-modal-container',
   templateUrl: './modal-container.component.html',
@@ -45,5 +45,11 @@ export class ModalContainerComponent implements OnInit {
 
   close(event) {
     this.onClose(event);
+  }
+
+  updateButtonOptions(buttonOptions = []) {
+    this.buttons = this.buttons.map((button, index) => {
+      return {...button, ...buttonOptions[index]};
+    });
   }
 }

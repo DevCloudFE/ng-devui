@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Host, OnInit, HostBinding, HostListener, Input, AfterViewInit } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, Host, HostBinding, HostListener, Input, OnInit } from '@angular/core';
 import { DropDownDirective } from './dropdown.directive';
 
 @Directive({
@@ -36,7 +36,7 @@ export class DropDownToggleDirective implements OnInit, AfterViewInit {
 
   @HostListener('click', ['$event'])
   toggleDropdown(event: MouseEvent) {
-    if (!this.disabled) {
+    if (!this.disabled && this.dropdown.trigger !== 'manually') {
       this.dropdown.toggle();
     }
     return false;
@@ -58,7 +58,7 @@ export class DropDownToggleDirective implements OnInit, AfterViewInit {
   }
   @HostListener('keydown.enter', ['$event'])
   public toggle(event) {
-    if (event.defaultPrevented) {return; }
+    if (this.disabled || this.dropdown.trigger === 'manually' || event.defaultPrevented) {return; }
     this.dropdown.toggle();
   }
 }

@@ -1,7 +1,5 @@
 <section>
-  <span>
-    正常状态
-  </span>
+  <span> 正常状态 </span>
   <d-tags-input
     (click)="$event.stopPropagation()"
     id="issue-tags"
@@ -19,12 +17,10 @@
     [checkBeforeAdd]="customCheck"
   >
   </d-tags-input>
-  <pre style="margin: 10px 0;">{{ tagList | json }}</pre>
+  <pre style="margin: 10px 0">{{ tagList | json }}</pre>
 </section>
 <section>
-  <span>
-    disabled状态
-  </span>
+  <span> disabled状态 </span>
   <d-tags-input
     (click)="$event.stopPropagation()"
     id="issue-tags"

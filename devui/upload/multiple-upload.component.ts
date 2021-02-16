@@ -1,26 +1,27 @@
 import {
   Component,
+  OnDestroy,
+  OnInit,
   TemplateRef,
   ViewChild,
-  OnDestroy,
 } from '@angular/core';
 import {
+  EventEmitter,
   Input,
   Output,
-  EventEmitter,
 } from '@angular/core';
+import { I18nInterface, I18nService } from 'ng-devui/i18n';
+import { Observable, Subscription } from 'rxjs';
+import { debounceTime, last, map } from 'rxjs/operators';
 import {
-  IUploadOptions,
   IFileOptions,
+  IUploadOptions,
   UploadStatus
 } from './file-uploader.types';
 import { MultipleUploadViewComponent } from './multiple-upload-view.component';
 import {
   SelectFiles
 } from './select-files.utils';
-import { map, last, debounceTime } from 'rxjs/operators';
-import { Observable, Subscription } from 'rxjs';
-import { I18nInterface, I18nService } from 'ng-devui/i18n';
 
 @Component({
   selector: 'd-multiple-upload',
@@ -29,7 +30,7 @@ import { I18nInterface, I18nService } from 'ng-devui/i18n';
   styleUrls: ['./upload-view.component.scss'],
   preserveWhitespaces: false,
 })
-export class MultipleUploadComponent implements OnDestroy {
+export class MultipleUploadComponent implements OnDestroy, OnInit {
   @Input() uploadOptions: IUploadOptions;
   @Input() fileOptions: IFileOptions;
   @Input() autoUpload = false;
@@ -65,7 +66,8 @@ export class MultipleUploadComponent implements OnDestroy {
   uploadTips: string;
   constructor(
     private selectFiles: SelectFiles,
-    private i18n: I18nService, ) {
+    private i18n: I18nService) { }
+  ngOnInit(): void {
     this.i18nText = this.i18n.getI18nText().upload;
     this.i18nCommonText = this.i18n.getI18nText().common;
     this.i18nSubscription = this.i18n.langChange().subscribe((data) => {
@@ -146,8 +148,8 @@ export class MultipleUploadComponent implements OnDestroy {
         return;
       }
       const uploadObservable = this.oneTimeUpload ?
-      this.multipleUploadViewComponent.oneTimeUpload() :
-      this.multipleUploadViewComponent.upload(fileUploader);
+        this.multipleUploadViewComponent.oneTimeUpload() :
+        this.multipleUploadViewComponent.upload(fileUploader);
       uploadObservable
         .pipe(
           last()
@@ -194,12 +196,12 @@ export class MultipleUploadComponent implements OnDestroy {
   }
 
   alertMsg(errorMsg) {
-    this.errorMsg = [{ severity: 'warn', summary: this.i18nText.warning, detail: errorMsg }];
+    this.errorMsg = [{ severity: 'warn', detail: errorMsg }];
   }
 
   getStatus() {
     let uploadingCount = 0;
-    let uploadedCount  = 0;
+    let uploadedCount = 0;
     let failedCount = 0;
     const filesCount = this.multipleUploadViewComponent.fileUploaders.length;
     this.multipleUploadViewComponent.fileUploaders.forEach((fileUploader) => {
@@ -230,9 +232,9 @@ export class MultipleUploadComponent implements OnDestroy {
 
   cancelUpload() {
     this.multipleUploadViewComponent.fileUploaders.filter((fileUploader) => fileUploader.status === UploadStatus.uploading)
-    .forEach((fileUploader) => {
-      fileUploader.status = UploadStatus.failed;
-    });
+      .forEach((fileUploader) => {
+        fileUploader.status = UploadStatus.failed;
+      });
   }
 
   ngOnDestroy() {
@@ -242,4 +244,3 @@ export class MultipleUploadComponent implements OnDestroy {
     }
   }
 }
-

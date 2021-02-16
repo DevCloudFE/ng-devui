@@ -1,11 +1,10 @@
-import { Directive, OnInit, OnDestroy, AfterViewInit, Input, SimpleChanges } from '@angular/core';
-import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
+import { AfterViewInit, Directive, Input, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Subscription} from 'rxjs';
 import { debounceTime, filter } from 'rxjs/operators';
 import { AnchorBoxDirective } from './anchor-box.directive';
-import { AnchorDirective } from './anchor.directive';
 import { AnchorLinkDirective } from './anchor-link.directive';
-
+import { AnchorDirective } from './anchor.directive';
 
 @Directive({
   selector: '[dAnchorBox][dAnchorHashSupport]'
@@ -39,11 +38,10 @@ export class AnchorBoxHashSupportDirective implements OnInit, AfterViewInit, OnD
   }
 
   ngOnDestroy(): void {
-    if ( this.sub ) {
+    if (this.sub) {
       this.sub.unsubscribe();
     }
   }
-
 
   navigateToHash = (targetAnchor: AnchorDirective) => {
     if (targetAnchor.activeChangeBy === 'initial') { return; }
@@ -56,7 +54,7 @@ export class AnchorBoxHashSupportDirective implements OnInit, AfterViewInit, OnD
       this.manual = false;
       return;
     }
-    if ( this.scrollToAnchorByHashOnlyInit) { return; }
+    if (this.scrollToAnchorByHashOnlyInit) { return; }
     const frag = this.router.parseUrl(event.url).fragment;
     this.scrollToFragment(frag);
   }

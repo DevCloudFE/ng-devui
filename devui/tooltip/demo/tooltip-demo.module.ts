@@ -1,18 +1,19 @@
-import { RouterModule } from '@angular/router';
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TooltipModule } from '../tooltip.module';
-import { TooltipDemoComponent } from './tooltip-demo.component';
-import { BasicComponent } from './basic/basic.component';
-import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { ButtonModule } from 'ng-devui/button';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
-import { ButtonModule } from 'ng-devui/button';
+import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
+import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
-
+import { TooltipModule } from '../tooltip.module';
+import { BasicComponent } from './basic/basic.component';
+import { TooltipDemoComponent } from './tooltip-demo.component';
 
 @NgModule({
   imports: [
+    TranslateModule,
     CommonModule,
     TooltipModule,
     DevUICodeboxModule,
@@ -23,7 +24,8 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
       { path: '',  redirectTo: 'demo' },
       { path: 'demo', component: TooltipDemoComponent},
       { path: 'api', component: DevUIApiComponent, data: {
-        api: require('!html-loader!markdown-loader!../doc/api.md')
+        'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),
+        'en-us': require('!html-loader!markdown-loader!../doc/api-en.md')
       }}
     ])
   ],
@@ -32,8 +34,7 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
     TooltipDemoComponent,
     BasicComponent
   ],
-
+  
 })
 export class TooltipDemoModule {
 }
-

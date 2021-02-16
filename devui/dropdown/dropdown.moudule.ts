@@ -1,11 +1,11 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { DropDownDirective } from './dropdown.directive';
-import { DropDownToggleDirective } from './dropdown-toggle.directive';
-import { DropDownMenuDirective } from './dropdown-menu.directive';
-import { DropDownAppendToBodyComponent } from './dropdown.component';
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { WindowRefModule } from 'ng-devui/window-ref';
+import { DropDownMenuDirective } from './dropdown-menu.directive';
+import { DropDownToggleDirective } from './dropdown-toggle.directive';
+import { DropDownAppendToBodyComponent } from './dropdown.component';
+import { DropDownDirective } from './dropdown.directive';
 
 @NgModule({
   imports: [
@@ -25,7 +25,7 @@ import { WindowRefModule } from 'ng-devui/window-ref';
     DropDownToggleDirective,
     DropDownAppendToBodyComponent
   ],
-
+  
 })
 export class DropDownModule {
 }

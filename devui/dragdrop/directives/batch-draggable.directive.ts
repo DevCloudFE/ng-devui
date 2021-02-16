@@ -1,4 +1,4 @@
-import { Directive, Input, OnChanges, SimpleChanges, Self, OnDestroy, OnInit, AfterViewInit, Output, EventEmitter } from '@angular/core';
+import { AfterViewInit, Directive, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, Self, SimpleChanges } from '@angular/core';
 import { DragDropService } from '../services/drag-drop.service';
 import { DraggableDirective } from './draggable.directive';
 export type BatchDragStyle = 'badge' | 'stack' | string;
@@ -85,7 +85,6 @@ export class BatchDraggableDirective implements OnInit, OnChanges, OnDestroy, Af
     draggable.el.nativeElement.style.display = 'none';
   }
 
-
   allowAddToBatchGroup() {
     if (!this.dragDropService.batchDragGroup) {
       return true;
@@ -123,7 +122,6 @@ export class BatchDraggableDirective implements OnInit, OnChanges, OnDestroy, Af
     }
     return array;
   }
-
 
   private deleteFromArrayIfExist(array: any[], target: any) {
     if (!array) { return; }

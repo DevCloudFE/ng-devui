@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { WindowRef } from 'ng-devui/window-ref';
-import { DocumentRef } from 'ng-devui/window-ref';
+import { DocumentRef, WindowRef } from 'ng-devui/window-ref';
 
 @Injectable()
 export class PositionService {
@@ -78,7 +77,7 @@ export class PositionService {
     if (style.position === 'fixed') {
       return this.documentRef.body;
     }
-    for ( let parent = element; (parent = parent.parentElement); parent.parentElement !== this.documentRef.body) {
+    for (let parent = element; (parent = parent.parentElement); parent.parentElement !== this.documentRef.body) {
       style = getComputedStyle(parent);
       if (excludeStaticParent && style.position === 'static') {
         continue;
@@ -130,23 +129,27 @@ export class PositionService {
       case 'top':
         targetElPosition.top = hostElPosition.top - targetElement.offsetHeight;
         targetElPosition.bottom += hostElPosition.top - targetElement.offsetHeight;
-        targetElPosition.left = shiftWidth[placementSecondary];
+        targetElPosition.left = placementSecondary === 'right'
+          ? shiftWidth[placementSecondary] - targetElement.offsetWidth : shiftWidth[placementSecondary];
         targetElPosition.right += shiftWidth[placementSecondary];
         break;
       case 'bottom':
         targetElPosition.top = shiftHeight[placementPrimary];
         targetElPosition.bottom += shiftHeight[placementPrimary];
-        targetElPosition.left = shiftWidth[placementSecondary];
+        targetElPosition.left = placementSecondary === 'right'
+          ? shiftWidth[placementSecondary] - targetElement.offsetWidth : shiftWidth[placementSecondary];
         targetElPosition.right += shiftWidth[placementSecondary];
         break;
       case 'left':
-        targetElPosition.top = shiftHeight[placementSecondary];
+        targetElPosition.top = placementSecondary === 'bottom'
+          ? shiftHeight[placementSecondary] - targetElement.offsetHeight : shiftHeight[placementSecondary];
         targetElPosition.bottom += shiftHeight[placementSecondary];
         targetElPosition.left = hostElPosition.left - targetElement.offsetWidth;
         targetElPosition.right += hostElPosition.left - targetElement.offsetWidth;
         break;
       case 'right':
-        targetElPosition.top = shiftHeight[placementSecondary];
+        targetElPosition.top = placementSecondary === 'bottom'
+          ? shiftHeight[placementSecondary] - targetElement.offsetHeight : shiftHeight[placementSecondary];
         targetElPosition.bottom += shiftHeight[placementSecondary];
         targetElPosition.left = shiftWidth[placementPrimary];
         targetElPosition.right += shiftWidth[placementPrimary];
@@ -162,7 +165,6 @@ export class PositionService {
 
     return targetElPosition;
   }
-
 
   // 根据传入数组选取第一个合适的位置
   private getPlacement(hostElement: HTMLElement, targetElement: HTMLElement, placement: string[]) {
@@ -190,18 +192,22 @@ export class PositionService {
       switch (placementPrimaryTemp) {
         case 'top':
           top = hostElPosition.top - targetElement.offsetHeight;
-          left = shiftWidth[placementSecondaryTemp];
+          left = placementSecondaryTemp === 'right'
+          ? shiftWidth[placementSecondaryTemp] - targetElement.offsetWidth : shiftWidth[placementSecondary];
           break;
         case 'bottom':
           top = shiftHeight[placementPrimaryTemp];
-          left = shiftWidth[placementSecondaryTemp];
+          left = placementSecondaryTemp === 'right'
+          ? shiftWidth[placementSecondaryTemp] - targetElement.offsetWidth : shiftWidth[placementSecondary];
           break;
         case 'left':
-          top = shiftHeight[placementSecondaryTemp];
+          top = placementSecondaryTemp === 'bottom'
+            ? shiftHeight[placementSecondaryTemp] - targetElement.offsetHeight : shiftHeight[placementSecondary];
           left = hostElPosition.left - targetElement.offsetWidth;
           break;
         case 'right':
-          top = shiftHeight[placementSecondaryTemp];
+          top = placementSecondaryTemp === 'bottom'
+            ? shiftHeight[placementSecondaryTemp] - targetElement.offsetHeight : shiftHeight[placementSecondary];
           left = shiftWidth[placementPrimaryTemp];
           break;
       }

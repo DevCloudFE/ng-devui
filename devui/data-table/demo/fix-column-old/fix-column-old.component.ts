@@ -1,9 +1,9 @@
 import {
+  ChangeDetectionStrategy,
   Component,
-  OnInit,
-  ChangeDetectionStrategy
+  OnInit
 } from '@angular/core';
-import { SourceType, originSource } from '../mock-data';
+import { originSource, SourceType } from '../mock-data';
 
 @Component({
     selector: 'd-fix-column-old',
@@ -58,7 +58,6 @@ export class FixColumnOldComponent implements OnInit {
         }
     ]
 };
-
 
   ngOnInit() {
   }

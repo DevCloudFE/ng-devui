@@ -36,9 +36,14 @@
       [ngClass]="{ 'invalid-tag': !newTagValid }"
       type="text"
       [style.display]="disabled ? 'none' : 'block'"
+      [disabled]="tags.length >= maxTags"
+      [title]="tags.length >= maxTags ? i18nTagsInputText.tagsReachMaxLength : ''"
     />
   </div>
-  <div class="devui-tags-autocomplete devui-dropdown-menu devui-dropdown-overlay" *ngIf="showSuggestionList && availableOptions?.length">
+  <div
+    class="devui-tags-autocomplete devui-dropdown-menu devui-dropdown-overlay"
+    *ngIf="showSuggestionList && availableOptions?.length && !(tags.length >= maxTags)"
+  >
     <ul class="devui-suggestion-list">
       <li
         class="devui-suggestion-item"
@@ -50,7 +55,10 @@
       </li>
     </ul>
   </div>
-  <div class="devui-tags-autocomplete devui-dropdown-menu devui-dropdown-overlay" *ngIf="showSuggestionList && !availableOptions?.length">
+  <div
+    class="devui-tags-autocomplete devui-dropdown-menu devui-dropdown-overlay"
+    *ngIf="showSuggestionList && !availableOptions?.length && !(tags.length >= maxTags)"
+  >
     <ul class="devui-suggestion-list">
       <li class="devui-suggestion-item devui-disabled">
         {{ i18nCommonText.noData }}

@@ -1,13 +1,12 @@
-import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
-import { DebugElement, Component } from '@angular/core';
-import { By } from '@angular/platform-browser';
-import { DropDownModule } from './dropdown.moudule';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { DropDownToggleDirective } from './dropdown-toggle.directive';
-import { DropDownMenuDirective } from './dropdown-menu.directive';
-import { DropDownDirective } from './dropdown.directive';
 import { CommonModule } from '@angular/common';
-
+import { Component, DebugElement } from '@angular/core';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { DropDownMenuDirective } from './dropdown-menu.directive';
+import { DropDownToggleDirective } from './dropdown-toggle.directive';
+import { DropDownDirective } from './dropdown.directive';
+import { DropDownModule } from './dropdown.moudule';
 @Component({
   template: `
 <div class="height-expand" *ngIf="expand"></div>
@@ -57,7 +56,7 @@ styles: [`
 `]
 })
 class TestDropdownComponent {
-  trigger: 'hover'| 'click' = 'click';
+  trigger: 'hover'| 'click'| 'manually' = 'click';
   count = 0;
   isOpen: boolean;
   disabled: boolean;
@@ -108,7 +107,7 @@ class TestDropdownComponent {
  `]
 })
 class TestDropdownAppendToBodyComponent {
-  trigger: 'hover'| 'click' = 'click';
+  trigger: 'hover'| 'click' | 'manually' = 'click';
   alignOriginFlag = false;
   directions = ['rightDown'];
   closeOnMouseLeaveMenu;
@@ -345,6 +344,31 @@ describe('dropdown', () => {
           expect(dropdownMenuElement.styles['display']).toBe('none');
         }));
       });
+      describe('complete manually control', () => {
+        beforeEach(fakeAsync(() => {
+          component.trigger = 'manually';
+          fixture.detectChanges();
+        }));
+        it('click should not show menu', fakeAsync(() => {
+          expect(dropdownMenuElement.styles['display']).toBe('none');
+          dropdownToggleElement.nativeElement.dispatchEvent(new MouseEvent('click', {'bubbles': true, 'cancelable': true}));
+          fixture.detectChanges();
+          tick(); // animation time
+          expect(dropdownMenuElement.styles['display']).toBe('none');
+        }));
+        it('set isOpen should show menu', fakeAsync(() => {
+          component.defaultOpen = true;
+          fixture.detectChanges();
+          tick(); // animation time
+          fixture.detectChanges();
+          expect(dropdownMenuElement.styles['display']).toBe('block');
+          component.defaultOpen = false;
+          fixture.detectChanges();
+          tick(); // animation time
+          fixture.detectChanges();
+          expect(dropdownMenuElement.styles['display']).toBe('none');
+        }));
+      });
     });
     describe('dropdown isOpen', () => {
       it('isOpen true, should open menu, set to false should close', fakeAsync(() => {
@@ -526,7 +550,7 @@ describe('dropdown', () => {
         fixture.detectChanges();
         tick(); // animation time
         fixture.detectChanges();
-        expect(component.count).toBe( count + 2);
+        expect(component.count).toBe(count + 2);
         expect(component.isOpen).toBe(false);
       }));
     });
@@ -893,7 +917,7 @@ describe('dropdown', () => {
         const originRect = dropdownToggleElement.nativeElement.getBoundingClientRect();
         const menuRect =  dropdownMenuElement.nativeElement.getBoundingClientRect();
         const verticalBorderOverlayWidth = 1; // 有个重叠的线的效果
-        expect((originRect.x + ( originRect.width / 2 )) - ((menuRect.x + menuRect.width / 2 ))).toBeLessThan(1);
+        expect((originRect.x + (originRect.width / 2)) - ((menuRect.x + menuRect.width / 2))).toBeLessThan(1);
         expect(originRect.y + originRect.height - verticalBorderOverlayWidth).toBeCloseTo(menuRect.y);
       }));
       it('rightUp should in the right place', fakeAsync(() => {
@@ -929,7 +953,7 @@ describe('dropdown', () => {
         const originRect = dropdownToggleElement.nativeElement.getBoundingClientRect();
         const menuRect =  dropdownMenuElement.nativeElement.getBoundingClientRect();
         const verticalBorderOverlayWidth = 1; // 有个重叠的线的效果
-        expect((originRect.x + ( originRect.width / 2 )) - ((menuRect.x + menuRect.width / 2 ))).toBeLessThan(1);
+        expect((originRect.x + (originRect.width / 2)) - ((menuRect.x + menuRect.width / 2))).toBeLessThan(1);
         expect(originRect.y).toBeCloseTo(menuRect.y + menuRect.height - verticalBorderOverlayWidth);
       }));
     });
@@ -1399,5 +1423,3 @@ describe('dropdown', () => {
     });
   });
 });
-
-

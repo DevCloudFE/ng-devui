@@ -1,12 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DevuiSourceData } from 'ng-devui/shared/devui-codebox/devui-source-data';
+import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'd-form-demo',
   templateUrl: './form-demo.component.html',
   styleUrls: ['./form-demo.component.scss'],
 })
-export class FormDemoComponent {
+export class FormDemoComponent implements OnInit, OnDestroy {
   BasicSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./basic/basic.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/basic.component.ts') },
@@ -39,99 +41,111 @@ export class FormDemoComponent {
     {
       title: 'HTML',
       language: 'xml',
-      code: require('!!raw-loader!./validate-template/inner-validator/inner-validator.component.html')
+      code: require('!!raw-loader!./validate-template/inner-validator/inner-validator.component.html'),
     },
     {
       title: 'TS',
       language: 'typescript',
-      code: require('!!raw-loader!./validate-template/inner-validator/inner-validator.component.ts')
+      code: require('!!raw-loader!./validate-template/inner-validator/inner-validator.component.ts'),
     },
   ];
   CustomValidatorSource: Array<DevuiSourceData> = [
     {
       title: 'HTML',
       language: 'xml',
-      code: require('!!raw-loader!./validate-template/custom-validator/custom-validator.component.html')
+      code: require('!!raw-loader!./validate-template/custom-validator/custom-validator.component.html'),
     },
     {
       title: 'TS',
       language: 'typescript',
-      code: require('!!raw-loader!./validate-template/custom-validator/custom-validator.component.ts')
+      code: require('!!raw-loader!./validate-template/custom-validator/custom-validator.component.ts'),
     },
   ];
   ErrorStrategySource: Array<DevuiSourceData> = [
     {
       title: 'HTML',
       language: 'xml',
-      code: require('!!raw-loader!./validate-template/error-strategy/error-strategy.component.html')
+      code: require('!!raw-loader!./validate-template/error-strategy/error-strategy.component.html'),
     },
     {
       title: 'TS',
       language: 'typescript',
-      code: require('!!raw-loader!./validate-template/error-strategy/error-strategy.component.ts')
+      code: require('!!raw-loader!./validate-template/error-strategy/error-strategy.component.ts'),
     },
   ];
   CustomMessageShowSource: Array<DevuiSourceData> = [
     {
       title: 'HTML',
       language: 'xml',
-      code: require('!!raw-loader!./validate-template/custom-message-show/custom-message-show.component.html')
+      code: require('!!raw-loader!./validate-template/custom-message-show/custom-message-show.component.html'),
     },
     {
       title: 'TS',
       language: 'typescript',
-      code: require('!!raw-loader!./validate-template/custom-message-show/custom-message-show.component.ts')
+      code: require('!!raw-loader!./validate-template/custom-message-show/custom-message-show.component.ts'),
     },
     {
       title: 'SCSS',
       language: 'css',
-      code: require('!!raw-loader!./validate-template/custom-message-show/custom-message-show.component.scss')
+      code: require('!!raw-loader!./validate-template/custom-message-show/custom-message-show.component.scss'),
+    },
+  ];
+  DebounceTimeSource: Array<DevuiSourceData> = [
+    {
+      title: 'HTML',
+      language: 'xml',
+      code: require('!!raw-loader!./validate-template/debounce-time/debounce-time.component.html'),
+    },
+    {
+      title: 'TS',
+      language: 'typescript',
+      code: require('!!raw-loader!./validate-template/debounce-time/debounce-time.component.ts'),
     },
   ];
   ValidateTemplateForm: Array<DevuiSourceData> = [
     {
       title: 'HTML',
       language: 'xml',
-      code: require('!!raw-loader!./validate-template/validate-template-form/validate-template-form.component.html')
+      code: require('!!raw-loader!./validate-template/validate-template-form/validate-template-form.component.html'),
     },
     {
       title: 'TS',
       language: 'typescript',
-      code: require('!!raw-loader!./validate-template/validate-template-form/validate-template-form.component.ts')
+      code: require('!!raw-loader!./validate-template/validate-template-form/validate-template-form.component.ts'),
     },
   ];
   UserRegisterShowSource: Array<DevuiSourceData> = [
     {
       title: 'HTML',
       language: 'xml',
-      code: require('!!raw-loader!./validate-template/user-register/user-register.component.html')
+      code: require('!!raw-loader!./validate-template/user-register/user-register.component.html'),
     },
     {
       title: 'TS',
       language: 'typescript',
-      code: require('!!raw-loader!./validate-template/user-register/user-register.component.ts')
+      code: require('!!raw-loader!./validate-template/user-register/user-register.component.ts'),
     },
   ];
   ValidateTemplateCrossComponent: Array<DevuiSourceData> = [
     {
       title: 'HTML',
       language: 'xml',
-      code: require('!!raw-loader!./validate-template/validate-cross-component/validate-cross-component.component.html')
+      code: require('!!raw-loader!./validate-template/validate-cross-component/validate-cross-component.component.html'),
     },
     {
       title: 'TS',
       language: 'typescript',
-      code: require('!!raw-loader!./validate-template/validate-cross-component/validate-cross-component.component.ts')
+      code: require('!!raw-loader!./validate-template/validate-cross-component/validate-cross-component.component.ts'),
     },
     {
       title: 'child-group.html',
       language: 'xml',
-      code: require('!!raw-loader!./validate-template/validate-cross-component/child-form/child-form.component.html')
+      code: require('!!raw-loader!./validate-template/validate-cross-component/child-form/child-form.component.html'),
     },
     {
       title: 'child-group.ts',
       language: 'typescript',
-      code: require('!!raw-loader!./validate-template/validate-cross-component/child-form/child-form.component.ts')
+      code: require('!!raw-loader!./validate-template/validate-cross-component/child-form/child-form.component.ts'),
     },
   ];
 
@@ -139,22 +153,22 @@ export class FormDemoComponent {
     {
       title: 'HTML',
       language: 'xml',
-      code: require('!!raw-loader!./validate-cross-component/validate-cross-component.component.html')
+      code: require('!!raw-loader!./validate-cross-component/validate-cross-component.component.html'),
     },
     {
       title: 'TS',
       language: 'typescript',
-      code: require('!!raw-loader!./validate-cross-component/validate-cross-component.component.ts')
+      code: require('!!raw-loader!./validate-cross-component/validate-cross-component.component.ts'),
     },
     {
       title: 'child.html',
       language: 'xml',
-      code: require('!!raw-loader!./validate-cross-component/child-control/child-user.component.html')
+      code: require('!!raw-loader!./validate-cross-component/child-control/child-user.component.html'),
     },
     {
       title: 'child.ts',
       language: 'typescript',
-      code: require('!!raw-loader!./validate-cross-component/child-control/child-user.component.ts')
+      code: require('!!raw-loader!./validate-cross-component/child-control/child-user.component.ts'),
     },
   ];
 
@@ -176,25 +190,50 @@ export class FormDemoComponent {
 
   ValidateCoordinatedSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./validate-coordinated/validate-coordinated.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./validate-coordinated/validate-coordinated.component.ts') }
+    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./validate-coordinated/validate-coordinated.component.ts') },
   ];
   ValidateDynamicRuleSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./validate-dynamic-rule/validate-dynamic-rule.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./validate-dynamic-rule/validate-dynamic-rule.component.ts') }
+    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./validate-dynamic-rule/validate-dynamic-rule.component.ts') },
   ];
-  navItems = [
-    { dAnchorLink: 'basic-usage', value: '基本用法' },
-    { dAnchorLink: 'demo-label-horizontal', value: 'label横向排列' },
-    { dAnchorLink: 'demo-modal', value: '弹框表单' },
-    { dAnchorLink: 'demo-multi-col', value: '多列表单' },
-    { dAnchorLink: 'demo-filter', value: '表单过滤' },
-    { dAnchorLink: 'demo-validate-template', value: '模板驱动表单验证（推荐）' },
-    { dAnchorLink: 'demo-validate-reactive', value: '响应式表单验证' },
-    { dAnchorLink: 'demo-custom-status', value: '指定表单状态' },
-    { dAnchorLink: 'demo-validate-sync', value: '表单协同验证' },
-    { dAnchorLink: 'demo-validate-cross-component', value: '跨组件表单验证' },
-    // { dAnchorLink: 'demo-validate-coordinated', value: '表单联动' },
-    // { dAnchorLink: 'demo-validate-dynamic-rule', value: '动态校验规则' },
-  ];
-  constructor() {}
+
+  navItems = [];
+  subs: Subscription = new Subscription();
+  constructor(private translate: TranslateService) {}
+
+  ngOnInit() {
+    this.subs.add(
+      this.translate.get('components.form.anchorLinkValues').subscribe((res) => {
+        this.setNavValues(res);
+      })
+    );
+
+    this.subs.add(
+      this.translate.onLangChange.subscribe((event: TranslationChangeEvent) => {
+        const values = this.translate.instant('components.form.anchorLinkValues');
+        this.setNavValues(values);
+      })
+    );
+  }
+
+  setNavValues(values) {
+    this.navItems = [
+      { dAnchorLink: 'basic-usage', value: values['basic-usage'] },
+      { dAnchorLink: 'demo-label-horizontal', value: values['demo-label-horizontal'] },
+      { dAnchorLink: 'demo-modal', value: values['demo-modal'] },
+      { dAnchorLink: 'demo-multi-col', value: values['demo-multi-col'] },
+      { dAnchorLink: 'demo-filter', value: values['demo-filter'] },
+      { dAnchorLink: 'demo-validate-template', value: values['demo-validate-template'] },
+      { dAnchorLink: 'demo-validate-reactive', value: values['demo-validate-reactive'] },
+      { dAnchorLink: 'demo-custom-status', value: values['demo-custom-status'] },
+      { dAnchorLink: 'demo-validate-sync', value: values['demo-validate-sync'] },
+      { dAnchorLink: 'demo-validate-cross-component', value: values['demo-validate-cross-component'] },
+    ];
+  }
+
+  ngOnDestroy() {
+    if (this.subs) {
+      this.subs.unsubscribe();
+    }
+  }
 }

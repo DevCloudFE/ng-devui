@@ -1,9 +1,9 @@
-import { Observable } from 'rxjs';
 import {
-  Type,
   ComponentFactoryResolver,
-  Injector
+  Injector,
+  Type
 } from '@angular/core';
+import { Observable } from 'rxjs';
 import { DrawerComponent } from './drawer.component';
 
 export interface IDrawerOptions {

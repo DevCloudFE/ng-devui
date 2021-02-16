@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, ContentChild, TemplateRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ContentChild, TemplateRef } from '@angular/core';
 
 @Component({
   selector: 'd-cell-edit',

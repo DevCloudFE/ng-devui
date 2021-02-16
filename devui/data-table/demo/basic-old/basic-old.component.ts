@@ -36,7 +36,6 @@ export class BasicOldComponent implements OnInit {
         ]
     };
 
-
     ngOnInit() {
     }
 }

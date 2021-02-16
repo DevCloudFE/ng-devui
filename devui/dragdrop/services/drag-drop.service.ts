@@ -1,9 +1,9 @@
 import { Injectable, NgZone } from '@angular/core';
 import { Observable, Subject, Subscription } from 'rxjs';
+import { DragPreviewDirective } from '../directives/drag-preview.directive';
+import { Utils } from '../shared/utils';
 import { DragDropTouch } from '../touch-support/dragdrop-touch';
 import { DraggableDirective } from './../directives/draggable.directive';
-import { Utils } from '../shared/utils';
-import { DragPreviewDirective } from '../directives/drag-preview.directive';
 
 @Injectable()
 export class DragDropService {

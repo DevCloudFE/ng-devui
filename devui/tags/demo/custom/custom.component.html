@@ -13,8 +13,13 @@
   <d-tag [tag]="'自定义颜色#F50'" [customColor]="'#f50'"></d-tag>
   <d-tag [tag]="'自定义标签样式'" [labelStyle]="'tag-custom'" [titleContent]="'hello'"></d-tag>
   <h4>单个可删除标签</h4>
-  <d-tag [tag]="deleteTagName1" [deletable]="true" (tagDelete)="getTagValue($event); deleteTag($event)"></d-tag>
-  <d-tag [tag]="deleteTagName2" [deletable]="true" [labelStyle]="'purple-w98'" (tagDelete)="getTagValue($event); deleteTag($event)"></d-tag>
+  <d-tag [tag]="deleteTagName1" [mode]="'closeable'" (tagDelete)="getTagValue($event); deleteTag($event)"></d-tag>
+  <d-tag
+    [tag]="deleteTagName2"
+    [mode]="'closeable'"
+    [labelStyle]="'purple-w98'"
+    (tagDelete)="getTagValue($event); deleteTag($event)"
+  ></d-tag>
   <h4>单个自定义标签</h4>
   <d-tag [tag]="tagName" (tagDelete)="getTagValue($event); deleteTag($event)" [customViewTemplate]="customTag"> </d-tag>
   <d-tag [tag]="tagName" (tagDelete)="getTagValue($event); deleteTag($event)" [labelStyle]="'purple-w98'" [customViewTemplate]="customTag">
@@ -22,11 +27,12 @@
   <h4>可选中标签</h4>
   <d-tag
     *ngFor="let tag of tagList; let i = index"
+    [mode]="'checkable'"
+    [(checked)]="tag.checked"
     [tag]="tag.name"
     [labelStyle]="tag.type"
-    [checked]="tag.checked"
-    (click)="changeChekced(tag)"
     [customColor]="tag.custumColor"
+    (checkedChange)="changeChecked($event)"
   ></d-tag>
   <ng-template #customTag let-tag="tag">
     <span class="icon-bug" style="vertical-align: text-top"></span>

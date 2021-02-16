@@ -1,5 +1,5 @@
 @import '../../../devui/style/theme/color';
-@import '../../../devui/style/core/font';
+@import '../../../devui/style/theme/font';
 
 :host {
   display: none;
@@ -56,7 +56,7 @@
   font-size: $devui-font-size;
   line-height: 1.5;
   width: 180px;
-  height: 220px;
+  height: 240px;
 
   .title {
     font-weight: bold;
@@ -78,6 +78,7 @@ d-select {
 
 .theme-select-radio {
   padding-left: 4px;
+  padding-right: 0;
 }
 
 .theme-follow-toggle {

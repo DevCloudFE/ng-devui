@@ -19,6 +19,8 @@ export class IUploadOptions {
   checkSameName?: boolean;
   // 指示了是否该使用类似cookies,authorization headers(头部授权)或者TLS客户端证书这一类资格证书来创建一个跨站点访问控制（cross-site Access-Control）请求
   withCredentials?: boolean;
+  //  手动设置返回数据类型
+  responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
 }
 
 export class IFileOptions {

@@ -1,5 +1,7 @@
 @import '../style/theme/color';
-@import '../style/core/_font';
+@import '../style/theme/shadow';
+@import '../style/theme/corner';
+@import '../style/theme/_font';
 
 :host {
   display: block;
@@ -14,6 +16,15 @@
     border: none;
     position: relative;
     height: 100%;
+
+    &.contain-fix-height {
+      display: flex;
+      flex-direction: column;
+
+      .scroll-view {
+        flex: 1;
+      }
+    }
 
     .scroll-view {
       overflow-y: auto;
@@ -148,7 +159,7 @@
 
         &:hover,
         &.hover {
-          border-radius: 2px 0 0 2px;
+          border-radius: $devui-border-radius 0 0 $devui-border-radius;
 
           .filter-icon {
             visibility: visible;
@@ -165,7 +176,7 @@
 
         &.sindu_handle:hover,
         &.sindu_handle.hover {
-          border-radius: 2px 0 0 2px;
+          border-radius: $devui-border-radius 0 0 $devui-border-radius;
 
           .drag-icon {
             visibility: visible;
@@ -195,10 +206,6 @@
 
         & .header-container {
           position: relative;
-          display: -webkit-box;
-          display: -moz-box;
-          display: -ms-flexbox;
-          display: -webkit-flex;
           display: flex;
           align-items: center;
           padding-left: 2px;
@@ -208,12 +215,12 @@
 
       .sort-active {
         background: $devui-list-item-hover-bg;
-        border-radius: 2px 0 0 2px;
+        border-radius: $devui-border-radius 0 0 $devui-border-radius;
       }
 
       .filter-active {
         background: $devui-list-item-hover-bg;
-        border-radius: 2px 0 0 2px;
+        border-radius: $devui-border-radius 0 0 $devui-border-radius;
       }
 
       .check-box-all {
@@ -284,6 +291,20 @@
   .resizeable:hover {
     .resize-handle {
       border-right: 3px solid $devui-line;
+    }
+  }
+}
+
+.devui-table {
+  &.devui-table-md ::ng-deep {
+    tbody > tr > td {
+      padding: 11px 8px 12px 20px;
+    }
+  }
+
+  &.devui-table-lg ::ng-deep {
+    tbody > tr > td {
+      padding: 15px 8px 16px 20px;
     }
   }
 }
@@ -407,7 +428,7 @@
   tr,
   th {
     .devui-sticky-left-cell {
-      box-shadow: rgba(0, 0, 0, 0.05) 6px 6px 6px 0;
+      box-shadow: rgba(0, 0, 0, 0.05) $devui-shadow-length-slide-right;
     }
   }
 }
@@ -417,7 +438,7 @@
   tr,
   th {
     .devui-sticky-right-cell {
-      box-shadow: rgba(0, 0, 0, 0.05) -6px 6px 6px 0;
+      box-shadow: rgba(0, 0, 0, 0.05) $devui-shadow-length-slide-left;
     }
   }
 }
@@ -438,7 +459,7 @@
 
   /* filter: alpha(opacity=80); */
   background-color: white;
-  box-shadow: 0 2px 4px 0 var(--dark-1-boxshadow, rgba(41, 48, 64, 0.2));
+  box-shadow: $devui-shadow-length-connected-overlay var(--dark-1-boxshadow, rgba(41, 48, 64, 0.2));
   list-style: none;
 }
 

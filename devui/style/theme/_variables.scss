@@ -1,9 +1,9 @@
 @import './color';
 @import '../core/font';
+@import '../theme/font';
 
 $text-color: $devui-text;
-$font-family: 'Helvetica Neue', helvetica, arial, 'PingFang SC', 'Hiragino Sans GB', 'Heiti SC', 'Microsoft YaHei', 'WenQuanYi Micro Hei',
-  sans-serif;
+$font-family: 'HuaweiFont', helvetica, arial, 'PingFang', 'Microsoft YaHei', 'Hiragino Sans GB', 'Microsoft JhengHei', sans-serif;
 $font-variant-base: tabular-nums;
 $body-background: $devui-base-bg;
 $devui-font-size: $devui-font-size; // 12px

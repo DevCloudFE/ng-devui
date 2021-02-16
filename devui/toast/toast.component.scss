@@ -1,7 +1,8 @@
 @import '../style/mixins/index';
 @import '../style/theme/color';
 @import '../style/theme/shadow';
-@import '../style/core/_font';
+@import '../style/theme/corner';
+@import '../style/theme/_font';
 
 :host::ng-deep a {
   &:link,
@@ -30,8 +31,8 @@
   margin: 0 0 10px 0;
   opacity: 0.95;
   filter: alpha(opacity=95);
-  box-shadow: $hwc-shadow-3;
-  border-radius: 4px;
+  box-shadow: $devui-shadow-length-feedback-overlay $devui-shadow;
+  border-radius: $devui-border-radius-feedback;
   color: $devui-feedback-overlay-text;
   transition: all 0.3s;
   background-color: $devui-feedback-overlay-bg;
@@ -112,6 +113,14 @@
 
 .devui-toast-message {
   margin-left: 20px;
+
+  p {
+    padding: 0 8px 0 4px;
+  }
+
+  span.devui-toast-title + p {
+    padding: 0;
+  }
 }
 
 .devui-toast-message-common .devui-toast-message {

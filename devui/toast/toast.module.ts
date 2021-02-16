@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ToastComponent } from './toast.component';
+import { NgModule } from '@angular/core';
 import { SafePipeModule } from 'ng-devui/utils';
+import { ToastComponent } from './toast.component';
 
 @NgModule({
   imports: [

@@ -1,0 +1,24 @@
+@import '../style/theme/color';
+
+.devui-backtop {
+  width: 40px;
+  height: 40px;
+  position: fixed;
+  cursor: pointer;
+  z-index: 1;
+
+  &-content {
+    width: 40px;
+    height: 40px;
+    background-color: $devui-text-weak;
+    opacity: 0.4;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}

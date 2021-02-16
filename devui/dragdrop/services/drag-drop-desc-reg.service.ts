@@ -1,5 +1,5 @@
-import { OnInit, QueryList, Injectable, OnDestroy, Directive } from '@angular/core';
-import { Subject, BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { Directive, Injectable, OnDestroy, OnInit, QueryList } from '@angular/core';
+import { BehaviorSubject, Observable, Subject, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
 @Injectable()
@@ -12,7 +12,7 @@ export class DescendantRegisterService<T> {
   public register(t: T) {
     if (!t) {return; }
     const index = this._result.indexOf(t);
-    if (index === -1 ) {
+    if (index === -1) {
       this._result.push(t);
       this.changeSubject.next(this._result);
     }
@@ -20,7 +20,7 @@ export class DescendantRegisterService<T> {
   public unregister(t: T) {
     if (!t) {return; }
     const index = this._result.indexOf(t);
-    if (index > -1 ) {
+    if (index > -1) {
       this._result.splice(index, 1);
       this.changeSubject.next(this._result);
     }
@@ -60,4 +60,3 @@ export class DescendantRoot<T> extends QueryList<T> {
     }
   }
 }
-

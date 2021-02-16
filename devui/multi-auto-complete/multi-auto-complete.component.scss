@@ -1,6 +1,7 @@
 @import '../style/mixins/index';
 @import '../style/theme/color';
-@import '../style/core/_font';
+@import '../style/theme/corner';
+@import '../style/theme/_font';
 
 .form-group label {
   cursor: pointer;
@@ -18,7 +19,7 @@
   display: block;
   list-style: none;
   background-color: $devui-connected-overlay-bg;
-  border-radius: 2px;
+  border-radius: $devui-border-radius;
   padding: 1px 2px 0 2px;
   min-height: 28px;
 }
@@ -102,7 +103,7 @@
   position: relative;
   margin: 0 1px 1px 1px;
   border: 1px solid $devui-label-bg;
-  border-radius: 2px;
+  border-radius: $devui-border-radius;
   vertical-align: middle;
 
   .label-item {
@@ -180,12 +181,12 @@
 }
 
 .multiple-label-auto-complete ul li .label-text {
-  border-radius: 2px 0 0 2px;
+  border-radius: $devui-border-radius 0 0 $devui-border-radius;
 }
 
 .multiple-label-auto-complete ul li .label-close {
   cursor: pointer;
-  border-radius: 0 2px 2px 0;
+  border-radius: 0 $devui-border-radius $devui-border-radius 0;
 }
 
 .multiple-label-auto-complete-single ul li .label-text,

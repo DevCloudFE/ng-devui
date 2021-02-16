@@ -1,14 +1,14 @@
 import * as enquire from 'enquire.js';
 import { ReplaySubject } from 'rxjs';
 
-
 export class PrefersColorSchemeMediaQuery {
+  static enquire = enquire; // prevent code optimization excluding enquire out
   private prefersColorSchemeSubject = new ReplaySubject<PrefersColorSchemeMediaQuery.Value>(1);
   public prefersColorSchemeChange = this.prefersColorSchemeSubject.asObservable();
 
   register() {
-    enquire
-    .register(PrefersColorSchemeMediaQuery.Query.light, {
+    PrefersColorSchemeMediaQuery.enquire
+    .register.bind(enquire)(PrefersColorSchemeMediaQuery.Query.light, {
       match: () => {
         this.handleColorSchemeChange('light');
       }
@@ -22,7 +22,7 @@ export class PrefersColorSchemeMediaQuery {
   }
 
   unregister() {
-    enquire
+    PrefersColorSchemeMediaQuery.enquire
     .unregister(PrefersColorSchemeMediaQuery.Query.light)
     .unregister(PrefersColorSchemeMediaQuery.Query.dark);
     this.prefersColorSchemeSubject.complete();

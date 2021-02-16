@@ -1,14 +1,20 @@
-import { AfterContentInit, Component, ContentChild, ContentChildren, ElementRef, EventEmitter,
-  Input, NgZone, OnDestroy, OnInit, Output, QueryList, Renderer2, TemplateRef, ViewChild, OnChanges,
-  SimpleChanges, AfterViewInit, HostBinding} from '@angular/core';
-import { Subscription } from 'rxjs';
-import { CellSelectedEventArg, CheckableRelation, ColumnResizeEventArg, RowCheckChangeEventArg,
-  RowSelectedEventArg, SortEventArg, TableExpandConfig, ColumnAdjustStrategy, TableCheckStatusArg,
-  TableWidthConfig, TableCheckOptions} from './data-table.model';
-import { DataTableColumnTmplComponent } from './tmpl/data-table-column-tmpl.component';
+import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
+import {
+  AfterContentInit, AfterViewInit, Component, ContentChild, ContentChildren, ElementRef,
+  EventEmitter, HostBinding, Input, NgZone, OnChanges, OnDestroy, OnInit, Output, QueryList, Renderer2,
+  SimpleChanges, TemplateRef, ViewChild
+} from '@angular/core';
+import { merge, Subscription } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
+import {
+  CellSelectedEventArg, CheckableRelation, ColumnResizeEventArg, RowCheckChangeEventArg,
+  RowSelectedEventArg, SortEventArg, TableCheckOptions, TableCheckStatusArg,
+  TableExpandConfig, TableWidthConfig
+} from './data-table.model';
+import { TableTbodyComponent } from './table/body/tbody.component';
 import { TableThComponent } from './table/head/th/th.component';
 import { TableTheadComponent } from './table/head/thead.component';
-import { TableTbodyComponent } from './table/body/tbody.component';
+import { DataTableColumnTmplComponent } from './tmpl/data-table-column-tmpl.component';
 
 @Component({
   selector: 'd-data-table',
@@ -86,6 +92,10 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
    * 表格高度
    */
   @Input() tableHeight: string;
+  /**
+   * 固定表头指定高度是否包含表头的高度，`tableHeight`设置的高度默认是表格body的高度
+   */
+  @Input() containFixHeaderHeight = false;
   /**
    * 【可选】是否限制多列排序的输出限制为一项
    */
@@ -242,6 +252,11 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
 
   @Input() minHeight: string;
 
+  /**
+   * 表格尺寸，sm对应行高40px， md对应行高48px，lg对应行高56px
+   */
+  @Input() size: 'sm' | 'md' | 'lg' = 'sm';
+
   @ContentChildren(DataTableColumnTmplComponent) columns: QueryList<DataTableColumnTmplComponent>;
   @ContentChild(TableTheadComponent) innerHeader: TableTheadComponent;
   @ContentChild(TableTbodyComponent) innerBody: TableTbodyComponent;
@@ -249,6 +264,8 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
   @ContentChild('noResultTemplateRef') noResultTemplate: TemplateRef<any>;
   @ViewChild('fixHeaderContainerRef') fixHeaderContainerRefElement: ElementRef;
   @ViewChild('tableView', { static: true }) tableViewRefElement: ElementRef;
+  @ViewChild('cdkVirtualScrollViewport') virtualScrollViewport: CdkVirtualScrollViewport;
+
   @HostBinding('style.height') get hostHeight() {
     return this.tableHeight;
   }
@@ -299,8 +316,8 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
     return this._dataSource;
   }
 
-  @Input() set hideColumn(hideColume: string[]) {
-    this._hideColumn = hideColume;
+  @Input() set hideColumn(hideColumn: string[]) {
+    this._hideColumn = hideColumn;
     if (this._columns) {
       this.updateColumns();
     }
@@ -420,6 +437,17 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
         th.tableViewRefElement = this.tableViewRefElement;
       });
     });
+    if (this.onlyOneColumnSort) {
+      this.resetThSortOrder();
+    }
+  }
+
+  private resetThSortOrder() {
+     this.thList.changes.pipe(
+      switchMap(() => merge(...this.thList.map(th => th.sortChange)))
+    ).subscribe((sortEvent: SortEventArg) => {
+      this.thList.filter(th => th !== sortEvent.th).forEach(th => th.clearSortOrder());
+    });
   }
 
   private updateColumns() {
@@ -447,15 +475,7 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
   }
 
   onHandleSort(column: SortEventArg) {
-    // set column direction
-    for (let i = 0; i < this.multiSort.length; i++) {
-      if (this.multiSort[i].field === column.field) {
-        this.multiSort[i].direction = column.direction;
-        break;
-      }
-    }
-
-    if (this.multiSort) {
+    if (this.multiSort && this.multiSort.length > 0) {
       const multiSortIndex = this.multiSort.findIndex(item => item.field === column.field);
       if (multiSortIndex !== -1) {
         this.multiSort.splice(multiSortIndex, 1);
@@ -880,5 +900,10 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
     if (this.innerHeader) {
       this.innerHeader.setHeaderCheckStatus({pageAllChecked: this._pageAllChecked, pageHalfChecked: this.halfChecked});
     }
+  }
+
+  // 更新cdk虚拟滚动viewport size并重新渲染，解决父层高度变化渲染数据size没有更新问题
+  updateVirtualScrollSize() {
+    this.virtualScrollViewport.checkViewportSize();
   }
 }

@@ -1,7 +1,7 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild, HostListener,
-    ElementRef, AfterViewInit , OnDestroy, HostBinding} from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, HostBinding, HostListener, Input,
+    OnDestroy, OnInit , Output, ViewChild} from '@angular/core';
 import { fromEvent, Subscription } from 'rxjs';
-import { throttleTime, filter } from 'rxjs/operators';
+import { filter, throttleTime } from 'rxjs/operators';
 
 export type StickyStatus =  'normal' | 'follow' | 'stay' | 'remain';
 
@@ -55,7 +55,7 @@ export class StickyComponent implements OnInit, AfterViewInit, OnDestroy {
 
     ngOnInit() {
         this.parentNode = this.el.nativeElement.parentNode;
-        if ( !this.container) {
+        if (!this.container) {
             this.container = this.parentNode;
         }
     }
@@ -99,7 +99,7 @@ export class StickyComponent implements OnInit, AfterViewInit, OnDestroy {
               const viewOffset = this.scrollTarget && this.scrollTarget !== window ? this.scrollTarget.getBoundingClientRect().top : 0;
               this.wrapper.nativeElement.style.top =
                 + viewOffset
-                + (this.view && this.view.top || 0 ) + 'px';
+                + (this.view && this.view.top || 0) + 'px';
               this.wrapper.nativeElement.style.left = this.wrapper.nativeElement.getBoundingClientRect().left + 'px';
               this.wrapper.nativeElement.style.position = 'fixed';
               break;
@@ -110,7 +110,7 @@ export class StickyComponent implements OnInit, AfterViewInit, OnDestroy {
               this.wrapper.nativeElement.style.position = 'relative';
               break;
           case 'remain':
-              if ( this.wrapper.nativeElement.style.position !== 'fixed' || this.wrapper.nativeElement.style.position !== 'absolute') {
+              if (this.wrapper.nativeElement.style.position !== 'fixed' || this.wrapper.nativeElement.style.position !== 'absolute') {
                   this.wrapper.nativeElement.style.top =
                       this.calculateRelativePosition(this.wrapper.nativeElement, this.parentNode, 'top') + 'px';
                   this.wrapper.nativeElement.style.left = 'auto';

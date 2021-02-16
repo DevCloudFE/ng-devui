@@ -1,7 +1,7 @@
 <div class="demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 60, bottom: 0 }">
   <d-demo-nav [navItems]="navItems"></d-demo-nav>
   <div class="demo-example" [dAnchor]="'basic-usage'">
-    <div class="demo-title">基本用法</div>
+    <div class="demo-title">{{ 'components.tags-input.basicDemo.title' | translate }}</div>
     <div class="demo-text"></div>
     <d-codebox id="components-tags-input-default" [sourceData]="basicSource">
       <d-tags-input-basic demo></d-tags-input-basic>
@@ -9,7 +9,7 @@
   </div>
 
   <div class="demo-example" [dAnchor]="'ng-model'">
-    <div class="demo-title">双向绑定</div>
+    <div class="demo-title">{{ 'components.tags-input.ngmodelDemo.title' | translate }}</div>
     <div class="demo-text"></div>
     <d-codebox id="components-tags-input-ngmodel" [sourceData]="ngModelSource">
       <d-tags-input-ngmodel demo></d-tags-input-ngmodel>
@@ -17,7 +17,7 @@
   </div>
 
   <div class="demo-example" [dAnchor]="'async-input'">
-    <div class="demo-title">异步数据源</div>
+    <div class="demo-title">{{ 'components.tags-input.asyncDemo.title' | translate }}</div>
     <div class="demo-text"></div>
     <d-codebox id="components-tags-input-async" [sourceData]="asyncSource">
       <d-tags-input-async demo></d-tags-input-async>

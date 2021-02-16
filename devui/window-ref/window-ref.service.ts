@@ -1,4 +1,4 @@
-import { Injectable, ElementRef } from '@angular/core';
+import { ElementRef, Injectable } from '@angular/core';
 import { DocumentRef } from './document-ref.service';
 
 @Injectable()

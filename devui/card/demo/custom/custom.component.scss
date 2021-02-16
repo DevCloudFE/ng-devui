@@ -16,6 +16,6 @@
 
 d-card {
   &:hover {
-    box-shadow: 0 4px 16px 0 $devui-light-shadow;
+    box-shadow: $devui-shadow-length-hover $devui-light-shadow;
   }
 }

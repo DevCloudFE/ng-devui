@@ -3,7 +3,7 @@ import { AfterViewInit, ChangeDetectorRef, Component, DoCheck, ElementRef, Event
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { DataTableComponent } from './data-table.component';
-import { SortEventArg, SortDirection, TableCheckOptions } from './data-table.model';
+import { SortDirection, SortEventArg, TableCheckOptions } from './data-table.model';
 import { DataTableColumnTmplComponent } from './tmpl/data-table-column-tmpl.component';
 
 const documentElement = document.documentElement;
@@ -108,12 +108,12 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
   private i18nSubscription: Subscription;
   checkedListForFilter = [];
   constructor(public dt: DataTableComponent,
-    private zone: NgZone,
-    private element: ElementRef,
-    private differs: KeyValueDiffers,
-    private iterableDiffers: IterableDiffers,
-    private ref: ChangeDetectorRef,
-    private i18n: I18nService) {
+              private zone: NgZone,
+              private element: ElementRef,
+              private differs: KeyValueDiffers,
+              private iterableDiffers: IterableDiffers,
+              private ref: ChangeDetectorRef,
+              private i18n: I18nService) {
       this.i18nCommonText = this.i18n.getI18nText().common;
   }
 
@@ -259,6 +259,7 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
 
   onHeadClick(event: SortEventArg, column: DataTableColumnTmplComponent) {
     event.field = column.field;
+    delete event.th;
     this.headClickSortEvent.emit(event);
   }
 

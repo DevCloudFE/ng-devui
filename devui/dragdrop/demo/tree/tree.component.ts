@@ -32,7 +32,7 @@ export class TreeComponent implements OnInit {
 
     // 同表排序的情况下index会有变化, 跨表不会有变化
     let index = dropIndex;
-    if ( target === parent && dropIndex > fromIndex) {
+    if (target === parent && dropIndex > fromIndex) {
       index--;
     }
     // 源数组移除

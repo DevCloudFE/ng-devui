@@ -1,7 +1,8 @@
-import { DataTableColumnTmplComponent } from './tmpl/data-table-column-tmpl.component';
-import { DataTableRowComponent } from './data-table-row.component';
-import { DataTableCellComponent } from './data-table-cell.component';
 import { ElementRef } from '@angular/core';
+import { DataTableCellComponent } from './data-table-cell.component';
+import { DataTableRowComponent } from './data-table-row.component';
+import { TableThComponent } from './table/head/th/th.component';
+import { DataTableColumnTmplComponent } from './tmpl/data-table-column-tmpl.component';
 
 export interface CellSelectedEventArg {
   rowIndex: number;
@@ -23,6 +24,7 @@ export interface SortEventArg {
   field?: string;
   direction: SortDirection;
   column?: DataTableColumnTmplComponent;
+  th?: TableThComponent;
 }
 
 export interface RowCheckChangeEventArg {

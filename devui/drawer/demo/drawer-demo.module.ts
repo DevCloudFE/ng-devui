@@ -1,29 +1,23 @@
-import { RouterModule } from '@angular/router';
-import {
-  NgModule,
-} from '@angular/core';
-
-import {
-  DrawerDemoComponent
-} from './drawer-demo.component';
-import { DrawerModule } from '../drawer.moudule';
 import { CommonModule } from '@angular/common';
-
-import { ModalModule } from '../../modal';
-import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { ButtonModule } from 'ng-devui/button';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
+import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
+import { TextInputModule } from 'ng-devui/text-input';
+import { TranslateModule } from '@ngx-translate/core';
+import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
+import { ModalModule } from '../../modal';
+import { DrawerModule } from '../drawer.moudule';
 import { BasicComponent } from './basic/basic.component';
+import { DrawerDemoComponent } from './drawer-demo.component';
 import { DrawerContentComponent } from './drawerContent/drawer-content.component';
 import { UndestroyableComponent } from './undestroyable/undestroyable.component';
-import { ButtonModule } from 'ng-devui/button';
-
-import { TextInputModule } from 'ng-devui/text-input';
-import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
-
 
 @NgModule({
   imports: [
+    TranslateModule,
     DrawerModule,
     CommonModule,
     ButtonModule,
@@ -33,21 +27,20 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
     DDemoNavModule,
     TextInputModule,
     RouterModule.forChild([
-    { path: '',  redirectTo: 'demo' },
-    { path: 'demo', component: DrawerDemoComponent},
-    { path: 'api', component: DevUIApiComponent, data: {
-      api: require('!html-loader!markdown-loader!../doc/api.md')
-    }}
-    ])
+      { path: '', redirectTo: 'demo' },
+      { path: 'demo', component: DrawerDemoComponent },
+      {
+        path: 'api',
+        component: DevUIApiComponent,
+        data: {
+          'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),
+          'en-us': require('!html-loader!markdown-loader!../doc/api-en.md'),
+        },
+      },
+    ]),
   ],
   exports: [],
-  declarations: [
-    DrawerDemoComponent,
-    BasicComponent,
-    UndestroyableComponent,
-    DrawerContentComponent
-  ],
-
+  declarations: [DrawerDemoComponent, BasicComponent, UndestroyableComponent, DrawerContentComponent],
+  
 })
-export class DrawerDemoModule {
-}
+export class DrawerDemoModule {}

@@ -1,3 +1,4 @@
+import { ConnectedPosition } from '@angular/cdk/overlay';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -8,14 +9,14 @@ import {
   Input,
   OnChanges,
   OnDestroy,
+  OnInit,
   Output,
   SimpleChanges,
   ViewChild
 } from '@angular/core';
-import { fromEvent, Subscription } from 'rxjs';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { AppendToBodyDirection } from 'ng-devui/utils';
-import { ConnectedPosition } from '@angular/cdk/overlay';
+import { fromEvent, Subscription } from 'rxjs';
 @Component({
   selector: 'd-pagination',
   styleUrls: ['./pagination.component.scss'],
@@ -24,7 +25,7 @@ import { ConnectedPosition } from '@angular/cdk/overlay';
   changeDetection: ChangeDetectionStrategy.OnPush,
   preserveWhitespaces: false,
 })
-export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy {
+export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy, OnInit {
   static EFFECT_PAGE_RANGE_KEYS = ['total', 'pageSize', 'pageIndex', 'maxItems'];
 
   /**
@@ -87,7 +88,6 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
   _total = 0;
   jumpPage = null;
 
-
   @Input() totalItemText: string;
   @Input() goToText: string;
   /**
@@ -114,6 +114,10 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
   i18nLocale: I18nInterface['locale'];
   i18nSubscription: Subscription;
   constructor(private ref: ChangeDetectorRef, private i18n: I18nService) {
+
+    this.constructLitePaginatorOptions();
+  }
+  ngOnInit(): void {
     this.i18nText = this.i18n.getI18nText().pagination;
     this.i18nLocale = this.i18n.getI18nText().locale;
     this.i18nSubscription = this.i18n.langChange().subscribe((data) => {
@@ -121,7 +125,6 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
       this.i18nLocale = data.locale;
       this.ref.markForCheck();
     });
-    this.constructLitePaginatorOptions();
   }
 
   @Input() set total(total: any) {

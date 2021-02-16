@@ -1,0 +1,13 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
+.btn-group {
+  display: inline-block;
+}
+
+.control {
+  margin-top: 80px;
+
+  & > div + div {
+    margin-top: 8px;
+  }
+}

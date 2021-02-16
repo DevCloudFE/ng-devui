@@ -1,4 +1,5 @@
 @import '../style/theme/color';
+@import '../style/theme/shadow';
 
 $component-scope: 'devui-image-preview';
 
@@ -39,9 +40,9 @@ $component-scope: 'devui-image-preview';
   cursor: pointer;
   width: 36px;
   height: 36px;
-  border-radius: 18px;
+  border-radius: (36px/2);
   background: $devui-highlight-overlay;
-  box-shadow: 0 0 8px 0 $devui-light-shadow;
+  box-shadow: $devui-shadow-length-base $devui-light-shadow;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -95,7 +96,7 @@ path {
   align-items: center;
   justify-content: center;
   background: $devui-highlight-overlay;
-  box-shadow: 0 0 3px 0 $devui-light-shadow;
+  box-shadow: $devui-shadow-length-fullscreen-overlay $devui-light-shadow;
   position: fixed;
   bottom: 0;
   left: 0;

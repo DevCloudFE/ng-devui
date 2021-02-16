@@ -1,19 +1,20 @@
-import { RouterModule } from '@angular/router';
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-
-import { ProgressModule } from '../progress.module';
-import { ProgressDemoComponent } from './progress-demo.component';
+import { RouterModule } from '@angular/router';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
-import { BasicComponent } from './basic/basic.component';
-import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
-import {  CircleComponent } from './circle/circle.component';
+import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
+import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
+import { ProgressModule } from '../progress.module';
+import { BasicComponent } from './basic/basic.component';
+import { CircleComponent } from './circle/circle.component';
+import { ProgressDemoComponent } from './progress-demo.component';
 
 @NgModule({
   imports: [
+    TranslateModule,
     CommonModule,
     FormsModule,
     ProgressModule,
@@ -24,7 +25,8 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
       { path: '',  redirectTo: 'demo' },
       { path: 'demo', component: ProgressDemoComponent},
       { path: 'api', component: DevUIApiComponent, data: {
-        api: require('!html-loader!markdown-loader!../doc/api.md')
+        'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),
+        'en-us': require('!html-loader!markdown-loader!../doc/api-en.md')
       }}
     ])
   ],
@@ -34,8 +36,7 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
     BasicComponent,
     CircleComponent,
   ],
-
+  
 })
 export class ProgressDemoModule {
 }
-

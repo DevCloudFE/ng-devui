@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-
 export interface TabsDataFormat {
     tabId: string;
     id: number | string;

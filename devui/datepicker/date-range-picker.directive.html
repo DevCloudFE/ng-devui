@@ -1,0 +1,25 @@
+<ng-template
+  cdk-connected-overlay
+  [cdkConnectedOverlayOrigin]="cdkConnectedOverlayOrigin"
+  [cdkConnectedOverlayOpen]="isOpen"
+  (backdropClick)="isOpen=false"
+  (positionChange)="onPositionChange($event)"
+>
+  <div [@cornerFadeInOut]="isOpen ? datepickerPosition : 'void'" class="devui-date-range-wrapper devui-dropdown-overlay">
+    <d-date-range-picker
+      #dateRangePicker
+      [locale]="locale"
+      [cssClass]="cssClass"
+      [disabled]="disabled"
+      [dateConverter]="dateConverter"
+      [customViewTemplate]="customViewTemplate"
+      [minDate]="minDate"
+      [maxDate]="maxDate"
+      [showTime]="showTime"
+      [selectedRange]="selectedRange"
+      (selectedRangeChange)="notifyValueChange($event)"
+      (hide)="hide($event)"
+      [(ngModel)]="_selectedRange"
+    ></d-date-range-picker>
+  </div>
+</ng-template>

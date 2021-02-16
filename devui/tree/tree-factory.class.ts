@@ -8,8 +8,7 @@ import {
   trim,
   values
 } from 'lodash-es';
-import { BehaviorSubject, interval } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
 export interface Dictionary<T> {
   [id: number]: T;
 }
@@ -72,8 +71,8 @@ export interface ITreeInput {
 
 export class TreeNode implements ITreeNodeData {
   constructor(public id,
-    public parentId,
-    public data) {
+              public parentId,
+              public data) {
   }
 }
 
@@ -104,7 +103,7 @@ export class TreeFactory {
     treeFactory.mapTreeItems({
       treeItems, parentId: undefined, treeNodeChildrenKey, treeNodeIdKey, checkboxDisabledKey,
       selectDisabledKey, toggleDisabledKey, treeNodeTitleKey
-    });
+    }, false);
     return treeFactory;
   }
 
@@ -123,7 +122,7 @@ export class TreeFactory {
     selectDisabledKey = 'disableSelect',
     toggleDisabledKey = 'disableToggle',
     treeNodeTitleKey = 'title'
-  }: ITreeInput) => {
+  }: ITreeInput,  renderTree = true) => {
     forEach(treeItems, (item: ITreeItem) => {
       const node = this.addNode({
         id: item[treeNodeIdKey],
@@ -146,7 +145,7 @@ export class TreeFactory {
         disableEdit: !!item.disableEdit,
         disableDelete: !!item.disableDelete,
         children: []
-      }, undefined, false);
+      }, undefined, renderTree);
 
       if (!!item.isChecked) {
         this._checked.add(node);
@@ -169,10 +168,15 @@ export class TreeFactory {
     if (this.nodes.hasOwnProperty(treeNode.id)) {
       throw new Error(`Duplicated id: ${treeNode.id} detected, please specify unique ids in the tree.`);
     }
-    this.nodes = {
-      ...this.nodes,
-      [treeNode.id]: treeNode
-    };
+    // TODO: 兼容当前用户外部直接调用addNode方法创建节点时视图即时更新,后续充分测试后可移除renderTree的判断
+    if (renderTree) {
+      this.nodes = {
+        ...this.nodes,
+        [treeNode.id]: treeNode
+      };
+    } else {
+      this.nodes[treeNode.id] = treeNode;
+    }
 
     this.addChildNode(this.nodes[parentId], treeNode, index);
     // 兼容当前用户外部直接调用addNode方法创建节点
@@ -272,7 +276,7 @@ export class TreeFactory {
   }
 
   checkNodesById(id: number | string, checked: boolean,
-    checkableRelation: 'upward' | 'downward' | 'both' | 'none' = 'both'): Array<Object> {
+                 checkableRelation: 'upward' | 'downward' | 'both' | 'none' = 'both'): Array<Object> {
     this.nodes[id].data.halfChecked = false;
     this.nodes[id].data.isChecked = checked;
     switch (checkableRelation) {
@@ -387,7 +391,6 @@ export class TreeFactory {
     this.nodes[id].data.loading = false;
   }
 
-
   /*
   * @deprecated
   */
@@ -399,6 +402,10 @@ export class TreeFactory {
 
   getNodeById(id: number | string): any {
     return this.nodes[id].data;
+  }
+
+  getCompleteNodeById(id: number | string): any {
+    return this.nodes[id];
   }
 
   hideNodeById(id: number | string, hide: boolean) {
@@ -543,6 +550,28 @@ export class TreeFactory {
     };
     flatTree(this.treeRoot);
     return flattenTree;
+  }
+
+  public mergeTreeNodes(targetNode = this.treeRoot) {
+    const mergeToNode = (node) => {
+      if (node.data.children?.length === 1 && node.data.children[0]?.data?.children?.length !== 0) {
+        node.data.title = node.data.title + ' / ' + node.data.children[0]?.data?.title;
+        node.data.children = node.data.children[0]?.data?.children;
+        mergeToNode(node);
+      }
+      if (node.data.children?.length > 1) {
+        node.data.children.forEach(element => {
+          mergeToNode(element);
+        });
+      }
+    };
+    if (targetNode === this.treeRoot) {
+      this.treeRoot.forEach(element => {
+        mergeToNode(element);
+      });
+    } else {
+      mergeToNode(targetNode);
+    }
   }
 
   public renderFlattenTree() {

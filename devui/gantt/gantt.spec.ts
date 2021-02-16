@@ -1,13 +1,13 @@
 import { Component, DebugElement, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { GanttBarComponent, GanttModule, GanttScaleComponent, GanttScaleUnit,
-    GanttService, GanttTaskInfo } from 'ng-devui/gantt';
+import {
+    GanttBarComponent, GanttModule, GanttScaleComponent, GanttScaleUnit,
+    GanttService, GanttTaskInfo
+} from 'ng-devui/gantt';
 import { I18nModule } from 'ng-devui/i18n';
 import { Subscription } from 'rxjs';
 import { DomHelper } from '../utils/testing/dom-helper';
-
-
 
 @Component({
     template: `
@@ -52,11 +52,12 @@ import { DomHelper } from '../utils/testing/dom-helper';
 })
 class TestGanttComponent implements OnInit, OnDestroy {
     @ViewChild('ganttContainer') ganttContainer: ElementRef;
+    curYear = 2020;
     list = [{
         id: '1',
         title: 'title1',
-        startDate: new Date(2020, 4, 5),
-        endDate: new Date(2020, 4, 10),
+        startDate: new Date(this.curYear, 4, 5),
+        endDate: new Date(this.curYear, 4, 10),
         progressRate: 30
       }];
     ganttStartDate: Date;
@@ -69,9 +70,8 @@ class TestGanttComponent implements OnInit, OnDestroy {
     constructor(private ganttService: GanttService) { }
 
     ngOnInit() {
-        const curDate = new Date();
-        this.ganttStartDate = new Date(curDate.getFullYear(), 4, 1);
-        this.ganttEndDate = new Date(curDate.getFullYear(), 5, 1);
+        this.ganttStartDate = new Date(this.curYear, 4, 1);
+        this.ganttEndDate = new Date(this.curYear, 5, 1);
         this.ganttService.setScaleConfig({
             startDate: this.ganttStartDate,
             endDate: this.ganttEndDate,
@@ -106,7 +106,6 @@ class TestGanttComponent implements OnInit, OnDestroy {
     onGanttBarResizing(info: GanttTaskInfo) {
         this.currentAction = 'onGanttBarResizing';
     }
-
 
     onGanttBarMove(info: GanttTaskInfo) {
         this.updateData(info);

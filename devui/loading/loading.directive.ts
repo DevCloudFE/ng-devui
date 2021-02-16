@@ -1,22 +1,22 @@
 import {
-  Directive,
   ComponentFactoryResolver,
   ComponentRef,
+  Directive,
   ElementRef,
-  Input,
-  ViewContainerRef,
-  Injector,
-  ViewRef,
   EmbeddedViewRef,
-  TemplateRef,
-  HostBinding, OnChanges, SimpleChanges
+  HostBinding,
+  Injector,
+  Input,
+  OnChanges,
+  SimpleChanges,
+  TemplateRef, ViewContainerRef, ViewRef
 } from '@angular/core';
+import { forkJoin, from, Observable, Subscription } from 'rxjs';
+import { throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { LoadingBackdropComponent } from './loading-backdrop.component';
 import { LoadingComponent } from './loading.component';
-import { Observable, from, forkJoin, Subscription } from 'rxjs';
 import { LoadingType } from './loading.types';
-import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
 @Directive({
   selector: '[dLoading]',
   exportAs: 'dLoading'

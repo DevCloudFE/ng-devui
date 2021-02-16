@@ -23,4 +23,3 @@ export * from './table/body/td/td.component';
 export * from './table/body/td/td.service';
 export * from './table/body/tbody.component';
 export * from './table/row/tr.component';
-

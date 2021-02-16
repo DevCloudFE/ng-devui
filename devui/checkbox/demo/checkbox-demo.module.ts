@@ -1,22 +1,24 @@
-import { RouterModule } from '@angular/router';
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CheckBoxDemoComponent } from './checkbox-demo.component';
+import { RouterModule } from '@angular/router';
 import { CheckBoxModule } from 'ng-devui/checkbox';
 import { SelectModule } from 'ng-devui/select';
-import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
-import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
+import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
+import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
+import { TranslateModule } from '@ngx-translate/core';
+import { CheckBoxDemoComponent } from './checkbox-demo.component';
 
-import { CheckboxBasicComponent } from './basic/checkbox-basic.component';
-import { CheckboxGroupBasicComponent} from './group/checkbox-group-basic.component';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
+import { CheckboxBasicComponent } from './basic/checkbox-basic.component';
 import { CheckboxConditionChangeComponent } from './condition-change/condition-change.component';
 import { CheckboxConditionGroupComponent } from './condition-group/condition-group.component';
+import { CheckboxGroupBasicComponent} from './group/checkbox-group-basic.component';
 
 @NgModule({
   imports: [
+    TranslateModule,
     CommonModule,
     FormsModule,
     CheckBoxModule,
@@ -28,7 +30,8 @@ import { CheckboxConditionGroupComponent } from './condition-group/condition-gro
       { path: '',  redirectTo: 'demo' },
       { path: 'demo', component: CheckBoxDemoComponent},
       { path: 'api', component: DevUIApiComponent, data: {
-        api: require('!html-loader!markdown-loader!../doc/api.md'),
+        'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),
+        'en-us': require('!html-loader!markdown-loader!../doc/api-en.md')
       }}
     ])
   ],
@@ -40,8 +43,7 @@ import { CheckboxConditionGroupComponent } from './condition-group/condition-gro
     CheckboxConditionChangeComponent,
     CheckboxConditionGroupComponent
   ],
-
+  
 })
 export class CheckBoxDemoModule {
 }
-

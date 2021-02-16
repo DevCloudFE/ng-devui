@@ -1,12 +1,14 @@
 @import '../style/theme/color';
-@import '../style/core/_font';
+@import '../style/theme/shadow';
+@import '../style/theme/corner';
+@import '../style/theme/_font';
 
 :host.devui-step-item {
   width: 400px;
   min-height: 160px;
   background: $devui-brand;
-  box-shadow: 0 2px 16px 0 rgba(81, 112, 255, 0.3);
-  border-radius: 6px;
+  box-shadow: $devui-shadow-length-feedback-overlay rgba(81, 112, 255, 0.3);
+  border-radius: $devui-border-radius-feedback;
   font-size: $devui-font-size;
   color: $devui-light-text;
   padding: 20px;
@@ -107,7 +109,7 @@
     background: $devui-brand;
     width: 6px;
     height: 6px;
-    border-radius: 6px;
+    border-radius: $devui-border-radius-feedback;
   }
 
   &.left > .devui-shining-dot,
@@ -204,7 +206,7 @@
         > div {
           color: $devui-light-text;
           background: rgba(255, 255, 255, 0.1);
-          border-radius: 4px;
+          border-radius: $devui-border-radius;
           padding: 5px 15px;
           cursor: pointer;
           margin-left: 10px;

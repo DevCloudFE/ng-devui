@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, Input } from '@angular/core';
+import { Component, ElementRef, Input, OnInit } from '@angular/core';
 import { ModalComponent } from 'ng-devui/modal';
 
 @Component({

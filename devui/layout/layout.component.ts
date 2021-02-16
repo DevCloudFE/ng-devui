@@ -1,4 +1,4 @@
-import { Component, HostBinding, QueryList, ContentChildren } from '@angular/core';
+import { Component, ContentChildren, HostBinding, QueryList } from '@angular/core';
 import { AsideComponent } from './elements/aside.component';
 
 @Component({

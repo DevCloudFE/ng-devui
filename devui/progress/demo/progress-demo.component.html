@@ -1,19 +1,15 @@
 <div class="demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 60, bottom: 0 }">
   <d-demo-nav [navItems]="navItems"></d-demo-nav>
-  <div class="demo-example" [dAnchor]="'basic-usage1'">
-    <div class="demo-title">基本用法</div>
-    <div class="demo-text">
-      基本的进度和文字配置。
-    </div>
+  <div class="demo-example" [dAnchor]="'basic-usage'">
+    <div class="demo-title">{{ 'components.progress.basicDemo.title' | translate }}</div>
+    <div class="demo-text">{{ 'components.progress.basicDemo.description' | translate }}</div>
     <d-codebox id="components-tabs-default" [sourceData]="basicSource">
       <d-basic demo></d-basic>
     </d-codebox>
   </div>
-  <div class="demo-example" [dAnchor]="'basic-usage2'">
-    <div class="demo-title">基本用法</div>
-    <div class="demo-text">
-      基本的进度和文字配置。
-    </div>
+  <div class="demo-example" [dAnchor]="'circle-usage'">
+    <div class="demo-title">{{ 'components.progress.circleDemo.title' | translate }}</div>
+    <div class="demo-text">{{ 'components.progress.basicDemo.description' | translate }}</div>
     <d-codebox id="components-tabs-default" [sourceData]="circleSource">
       <d-circle demo></d-circle>
     </d-codebox>

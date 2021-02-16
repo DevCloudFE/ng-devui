@@ -1,8 +1,8 @@
 <div class="demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 60, bottom: 0 }">
   <d-demo-nav [navItems]="navItems"></d-demo-nav>
   <div class="demo-example" [dAnchor]="'lazy-load'">
-    <div class="demo-title">懒加载指令</div>
-    <div class="demo-text">引入util模块中的LazyLoadModule，使用dLazyLoad指令在滚到到容器底部时响应loadMore事件实现懒加载</div>
+    <div class="demo-title">{{ 'components.common.lazyLoadDemo.title' | translate }}</div>
+    <div class="demo-text">{{ 'components.common.lazyLoadDemo.description' | translate }}</div>
     <d-codebox id="common-lazy-load" [sourceData]="lazyLoadSource">
       <d-lazy-load demo></d-lazy-load>
     </d-codebox>
@@ -16,7 +16,7 @@
   </div>
 
   <div class="demo-example" [dAnchor]="'helper-utils'">
-    <div class="demo-title">Helper Utils</div>
+    <div class="demo-title">{{ 'components.common.anchorLinkValues.helper-utils' | translate }}</div>
 
     <div class="demo-text"></div>
     <d-codebox id="common-helper-jump" [sourceData]="helperJumpSource">
@@ -38,7 +38,7 @@
   </div>
 
   <div class="demo-example" [dAnchor]="'clipboard'">
-    <div class="demo-title">复制到剪贴板指令</div>
+    <div class="demo-title">{{ 'components.common.clipboardDemo.title' | translate }}</div>
 
     <div class="demo-text"></div>
     <d-codebox id="common-clipboard" [sourceData]="clipboardSource">

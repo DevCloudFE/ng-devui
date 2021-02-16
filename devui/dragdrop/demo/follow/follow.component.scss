@@ -19,7 +19,7 @@
 }
 
 .box-shadow {
-  box-shadow: 0 4px 8px 0 rgba(41, 48, 64, 0.2);
+  box-shadow: $devui-shadow-length-hover $devui-shadow;
   border-right: 10px red solid;
   border-bottom: 12px red solid;
 }

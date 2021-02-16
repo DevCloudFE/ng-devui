@@ -17,10 +17,10 @@ export class DisabledComponent implements OnInit {
   opt3 = this.options3.filter(item => item.value.indexOf('选项6') === 0);
   ngOnInit() {
     this.options2.filter(item => item.value.indexOf('disabled') > 0)
-      .forEach( item => { item.disabled = true; });
+      .forEach(item => { item.disabled = true; });
     this.options3.filter(item => item.value.indexOf('disabled') > 0)
-      .forEach( item => { item.disabled = true; item.immutable = true; });
+      .forEach(item => { item.disabled = true; item.immutable = true; });
     this.options3.filter(item => item.value.indexOf('选项13') === 0)
-      .forEach( item => { item.disabled = false; });
+      .forEach(item => { item.disabled = false; });
   }
 }

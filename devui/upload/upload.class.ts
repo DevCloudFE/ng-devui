@@ -1,5 +1,5 @@
-import { toArray } from 'rxjs/operators';
 import { from, merge } from 'rxjs';
+import { toArray } from 'rxjs/operators';
 
 import {
   FileUploader
@@ -51,8 +51,10 @@ export class UploadComponent {
       oneFile.percentage = 0;
       uploads.push(from(oneFile.send()));
     } else {
-      uploads = this.fileUploaders.filter((fileUploader) => fileUploader.status !== UploadStatus.uploaded)
-      .map((fileUploader) => {
+      const preFiles = this.fileUploaders.filter((fileUploader) => (fileUploader.status === UploadStatus.preLoad));
+      const failedFiles = this.fileUploaders.filter((fileUploader) => (fileUploader.status === UploadStatus.failed));
+      const uploadFiles = preFiles.length > 0 ? preFiles : failedFiles;
+      uploads =  uploadFiles.map((fileUploader) => {
         fileUploader.percentage = 0;
         return from(fileUploader.send());
       });

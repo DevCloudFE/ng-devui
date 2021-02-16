@@ -1,11 +1,12 @@
 @import '../style/theme/color';
-@import '../style/core/_font';
+@import '../style/theme/_font';
 
 .devui-star-align {
   float: left;
   font-size: $devui-font-size-icon;
   margin-right: 5px;
   position: relative;
+  line-height: 1;
 }
 
 .devui-pointer {

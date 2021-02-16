@@ -1,7 +1,7 @@
-import { Directive, Input, TemplateRef, ComponentFactoryResolver } from '@angular/core';
+import { ComponentFactoryResolver, Directive, Input, TemplateRef } from '@angular/core';
 import { OverlayContainerRef } from 'ng-devui/overlay-container';
-import { DragPreviewComponent } from './drag-preview.component';
 import { DragDropService } from '../services/drag-drop.service';
+import { DragPreviewComponent } from './drag-preview.component';
 
 @Directive({
   selector: '[dDraggable][dDragPreview]',
@@ -16,7 +16,7 @@ export class DragPreviewDirective {
   };
   public previewRef;
   constructor(private componentFactoryResolver: ComponentFactoryResolver,
-    private overlayContainerRef: OverlayContainerRef, private dragDropService: DragDropService) {
+              private overlayContainerRef: OverlayContainerRef, private dragDropService: DragDropService) {
   }
 
   public createPreview() {

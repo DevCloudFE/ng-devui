@@ -13,8 +13,8 @@ export function centerWindowPosition(elementRef: ElementRef, windowRef: WindowRe
   const winWidth = windowRef.innerWidth;
 
   return {
-    left: ( winWidth - elmWidth) / 2,
-    top: ( winHeight - elmHeight) / 2
+    left: (winWidth - elmWidth) / 2,
+    top: (winHeight - elmHeight) / 2
   };
 }
 

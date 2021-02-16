@@ -1,6 +1,6 @@
 import { Component, ElementRef } from '@angular/core';
-import { JPGTESTIMG, JPGTESTIMG2 } from '../fakedata';
 import { Subject } from 'rxjs';
+import { JPGTESTIMG, JPGTESTIMG2 } from '../fakedata';
 
 @Component({
   selector: 'd-image-preview-custom-open',
@@ -20,6 +20,5 @@ export class CustomOpenComponent {
   open() {
     this.customSub.next(this.elementRef.nativeElement.querySelector('img'));
   }
-
 
 }

@@ -1,12 +1,11 @@
-import { of } from 'rxjs';
-import { ComponentFixture, TestBed, tick, fakeAsync, flush } from '@angular/core/testing';
-import { DebugElement, Component, ViewChild } from '@angular/core';
-import { CheckBoxComponent } from './checkbox.component';
-import { DomHelper } from '../utils/testing/dom-helper';
-import { By } from '@angular/platform-browser';
-import { CheckBoxModule } from './checkbox.module';
+import { Component, DebugElement, ViewChild } from '@angular/core';
+import { ComponentFixture, fakeAsync, flush, TestBed, tick } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-
+import { By } from '@angular/platform-browser';
+import { of } from 'rxjs';
+import { DomHelper } from '../utils/testing/dom-helper';
+import { CheckBoxComponent } from './checkbox.component';
+import { CheckBoxModule } from './checkbox.module';
 @Component({
   template: `<d-checkbox
     #comp

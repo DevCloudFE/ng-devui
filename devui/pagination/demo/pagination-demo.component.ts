@@ -1,41 +1,63 @@
-import {
-  Component,
-  HostBinding
-} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
-
+import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { Subscription } from 'rxjs';
 @Component({
-    selector: 'd-demo-pagination',
-    templateUrl: './pagination-demo.component.html'
+  selector: 'd-demo-pagination',
+  templateUrl: './pagination-demo.component.html',
 })
-export class PaginationDemoComponent {
+export class PaginationDemoComponent implements OnInit, OnDestroy {
   basicSource: Array<DevuiSourceData> = [
-    {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./basic/basic.component.html')},
-    {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./basic/basic.component.ts')}
+    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./basic/basic.component.html') },
+    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/basic.component.ts') },
   ];
 
   additionalSource: Array<DevuiSourceData> = [
-    {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./additional/additional.component.html')},
-    {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./additional/additional.component.ts')},
-    {title: 'SCSS', language: 'css', code:  require('!!raw-loader!./additional/additional.component.css')}
+    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./additional/additional.component.html') },
+    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./additional/additional.component.ts') },
+    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./additional/additional.component.css') },
   ];
   liteSource: Array<DevuiSourceData> = [
-    {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./lite/lite.component.html')},
-    {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./lite/lite.component.ts')},
-    {title: 'SCSS', language: 'css', code:  require('!!raw-loader!./lite/lite.component.scss')}
+    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./lite/lite.component.html') },
+    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./lite/lite.component.ts') },
+    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./lite/lite.component.scss') },
   ];
   widgetsSource: Array<DevuiSourceData> = [
-    {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./widgets/widgets.component.html')},
-    {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./widgets/widgets.component.ts')}
+    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./widgets/widgets.component.html') },
+    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./widgets/widgets.component.ts') },
   ];
 
-  navItems = [
-    { dAnchorLink: 'basic-usage', value: '基本用法'},
-    { dAnchorLink: 'minimalist-model', value: '极简模式'},
-    { dAnchorLink: 'multiple-configurations', value: '多种配置'},
-    { dAnchorLink: 'exceptional-case', value: '特殊情况'}
-  ];
-  constructor() {
+  navItems = [];
+  subs: Subscription = new Subscription();
+  constructor(private translate: TranslateService) {}
 
+  ngOnInit() {
+    this.subs.add(
+      this.translate.get('components.pagination.anchorLinkValues').subscribe((res) => {
+        this.setNavValues(res);
+      })
+    );
+
+    this.subs.add(
+      this.translate.onLangChange.subscribe((event: TranslationChangeEvent) => {
+        const values = this.translate.instant('components.pagination.anchorLinkValues');
+        this.setNavValues(values);
+      })
+    );
+  }
+
+  setNavValues(values) {
+    this.navItems = [
+      { dAnchorLink: 'basic-usage', value: values['basic-usage'] },
+      { dAnchorLink: 'minimalist-model', value: values['minimalist-model'] },
+      { dAnchorLink: 'multiple-configurations', value: values['multiple-configurations'] },
+      { dAnchorLink: 'exceptional-case', value: values['exceptional-case'] },
+    ];
+  }
+
+  ngOnDestroy() {
+    if (this.subs) {
+      this.subs.unsubscribe();
+    }
   }
 }

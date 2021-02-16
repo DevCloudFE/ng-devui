@@ -1,11 +1,10 @@
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
-import { ImagePreviewModule } from './image-preview.module';
-import { ComponentFixture, TestBed, tick, fakeAsync } from '@angular/core/testing';
 import { Component, DebugElement } from '@angular/core';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { createMouseEvent } from '../utils/testing/event-helper';
-
+import { ImagePreviewModule } from './image-preview.module';
 @Component({
   template: `
     <div dImagePreview>

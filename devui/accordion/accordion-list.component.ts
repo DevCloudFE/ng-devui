@@ -1,8 +1,8 @@
-import { AccordionComponent } from './accordion.component';
-import { Component, Input, ViewEncapsulation, ViewChildren, QueryList, Optional, Host, SkipSelf, OnInit, OnDestroy } from '@angular/core';
-import { AccordionMenuItem } from './accordion.type';
+import { Component, Host, Input, OnDestroy, OnInit, Optional, QueryList, SkipSelf, ViewChildren, ViewEncapsulation } from '@angular/core';
 import { AccordionItemRouterlinkComponent } from './accordion-item-routerlink.component';
 import { AccordionMenuComponent } from './accordion-menu.component';
+import { AccordionComponent } from './accordion.component';
+import { AccordionMenuItem } from './accordion.type';
 
 @Component({
   selector: 'd-accordion-list',
@@ -17,7 +17,7 @@ export class AccordionListComponent implements OnInit, OnDestroy {
   @ViewChildren(AccordionMenuComponent) accordionMenuQueryList: QueryList<AccordionMenuComponent>;
   @ViewChildren(AccordionItemRouterlinkComponent) accordionItemRouterlinkQueryList: QueryList<AccordionItemRouterlinkComponent>;
   constructor(@Optional() @Host() @SkipSelf() private parentComponent: AccordionMenuComponent,
-   private accordion: AccordionComponent) {}
+              private accordion: AccordionComponent) {}
 
   ngOnInit(): void {
     if (this.parentComponent) {

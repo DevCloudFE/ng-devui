@@ -2,8 +2,7 @@ import {
   Component,
   OnInit
 } from '@angular/core';
-import { of, timer, Observable } from 'rxjs';
-
+import { Observable, of, timer } from 'rxjs';
 
 @Component({
   selector: 'd-async-data-with-function',
@@ -18,7 +17,6 @@ import { of, timer, Observable } from 'rxjs';
 })
 export class AsyncDataWithFuncitionComponent implements OnInit {
   selectItem4;
-
 
   loading4 = false;
 

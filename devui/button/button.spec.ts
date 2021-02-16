@@ -1,17 +1,27 @@
+import { Component, DebugElement } from '@angular/core';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { ButtonModule } from 'ng-devui/button';
 import { LoadingComponent } from './../loading/loading.component';
 import { ButtonComponent } from './button.component';
-import { Component, DebugElement } from '@angular/core';
-import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { ButtonModule } from 'ng-devui/button/button.module';
 
 @Component({
   template: `
-    <d-button [bsStyle]="bsStyle" (btnClick)="increment()" [disabled]="isDisabled" [icon]="icon" [showLoading]="loading">{{text}}</d-button>
+    <d-button
+      [bsStyle]="bsStyle"
+      [bsPosition]="bsPosition"
+      (btnClick)="increment()"
+      [disabled]="isDisabled"
+      [icon]="icon"
+      [showLoading]="loading"
+    >
+      {{text}}
+    </d-button>
   `
 })
 class TestButtonComponent {
   bsStyle = 'primary';
+  bsPosition = 'default';
   clickCount = 0;
   isDisabled = false;
   icon = '';
@@ -37,7 +47,7 @@ describe('Button', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [ButtonModule],
-      declarations: [TestButtonComponent, TestButtonAutoFocusComponent]
+      declarations: [TestButtonComponent, TestButtonAutoFocusComponent],
     }).compileComponents();
   }));
 
@@ -60,6 +70,7 @@ describe('Button', () => {
       it('Button should apply css classes', () => {
         expect(buttonInsideNativeElement.classList.contains('devui-btn')).toBe(true);
         expect(buttonInsideNativeElement.classList.contains('devui-btn-primary')).toBe(true);
+        expect(buttonInsideNativeElement.classList.contains('devui-btn-default')).toBe(true);
       });
 
       it('Button should render text', () => {
@@ -158,6 +169,24 @@ describe('Button', () => {
         const loadingElement: HTMLElement = loadingDebugElement.nativeElement.firstElementChild;
         expect(loadingElement.classList.contains('devui-loading-wrapper')).toBe(true);
       });
+      it('Button loading should not response to click', () => {
+        buttonInsideNativeElement.click();
+        fixture.detectChanges();
+        expect(testComponent.clickCount).toBe(0, 'loading Expected not response to click');
+      });
+    });
+
+    describe('button position', () => {
+      it('Button position should be left', () => {
+        testComponent.bsStyle = 'left';
+        fixture.detectChanges();
+        expect(buttonInsideNativeElement.classList.contains('devui-btn-left')).toBe(true);
+      });
+      it('Button position should be right', () => {
+        testComponent.bsPosition = 'right';
+        fixture.detectChanges();
+        expect(buttonInsideNativeElement.classList.contains('devui-btn-right')).toBe(true);
+      });
     });
   });
 
@@ -183,5 +212,3 @@ describe('Button', () => {
   });
 
 });
-
-

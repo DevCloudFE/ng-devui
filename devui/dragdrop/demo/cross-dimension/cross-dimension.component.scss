@@ -22,7 +22,7 @@
       width: 285px;
       margin: 0 5px;
       background-color: $devui-base-bg;
-      box-shadow: 1px 2px 4px 0 $devui-shadow;
+      box-shadow: $devui-shadow-length-base $devui-shadow;
     }
   }
 

@@ -8,7 +8,7 @@
   position: relative;
   display: inline-block;
   background: $devui-primary;
-  border-radius: 0 1px 1px 0;
+  border-radius: 0 $devui-border-radius $devui-border-radius 0;
   color: $devui-light-text;
   height: 28px;
   width: 28px;

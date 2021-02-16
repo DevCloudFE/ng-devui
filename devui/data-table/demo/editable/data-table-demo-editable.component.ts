@@ -20,14 +20,16 @@ export class DatatableDemoEditableComponent implements OnInit {
     rowItem[field] = false;
   }
 
-  beforeEditStart(rowItem, field) {
-    console.log('beforeEditStart');
+  beforeEditStart = (rowItem, field) => {
+    return true;
   }
 
-  beforeEditEnd(rowItem, field) {
+  beforeEditEnd = (rowItem, field) => {
     console.log('beforeEditEnd');
     if (rowItem && rowItem[field].length < 3) {
       return false;
+    } else {
+      return true;
     }
   }
 }

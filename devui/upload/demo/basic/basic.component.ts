@@ -1,8 +1,7 @@
 // 注意需要在使用的NgModule中 import { HttpClientModule  } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 import { Component, ViewChild } from '@angular/core';
-import { IFileOptions, IUploadOptions } from 'ng-devui/upload';
-import { SingleUploadComponent } from 'ng-devui/upload';
+import { IFileOptions, IUploadOptions, SingleUploadComponent } from 'ng-devui/upload';
 
 @Component({
   selector: 'd-basic',
@@ -34,7 +33,9 @@ export class BasicComponent {
     additionalParameter: this.additionalParameter,
     maximumSize: 0.5,
     method: 'POST',
-    fileFieldName: 'dFile'
+    fileFieldName: 'dFile',
+    withCredentials: true,
+    responseType: 'json'
   };
 
   constructor(private http: HttpClient) {

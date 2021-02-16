@@ -1,13 +1,10 @@
+import { Component, DebugElement } from '@angular/core';
+import { ComponentFixture, fakeAsync, flush, TestBed, tick } from '@angular/core/testing';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ButtonModule } from 'ng-devui/button';
-import { ComponentFixture, TestBed, tick, fakeAsync, flush } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-
 import { DrawerModule, DrawerService, IDrawerOpenResult, IDrawerOptions } from 'ng-devui/drawer';
-import { DebugElement, Component } from '@angular/core';
 import { DrawerContentComponent } from './demo/drawerContent/drawer-content.component';
-
 @Component({
   selector: 'd-basic',
   template: `
@@ -66,10 +63,10 @@ describe('Drawer', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [DrawerModule, ButtonModule, NoopAnimationsModule],
-      declarations: [TestDrawerComponent, DrawerContentComponent],
+      declarations: [TestDrawerComponent, DrawerContentComponent]
     }).overrideModule(BrowserDynamicTestingModule, {
       set: {
-
+        
       }
     })
       .compileComponents();

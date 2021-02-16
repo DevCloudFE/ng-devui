@@ -1,4 +1,5 @@
 @import '../style/theme/color';
+@import '../style/theme/shadow';
 
 @mixin fixed-arrow-button() {
   position: absolute;
@@ -7,9 +8,9 @@
   cursor: pointer;
   width: 36px;
   height: 36px;
-  border-radius: 18px;
+  border-radius: (36px/2);
   background: $devui-highlight-overlay;
-  box-shadow: 0 0 8px 0 $devui-light-shadow;
+  box-shadow: $devui-shadow-length-hover $devui-light-shadow;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -80,7 +81,7 @@
     .dot-item {
       width: 6px;
       height: 6px;
-      border-radius: 3px;
+      border-radius: (6px/2);
       margin-right: 8px;
       background: $devui-icon-fill;
 

@@ -1,6 +1,6 @@
-import { Directive, forwardRef, HostListener, Inject, Input, OnDestroy, OnInit, HostBinding } from '@angular/core';
-import { AnchorDirective } from './anchor.directive';
+import { Directive, forwardRef, HostBinding, HostListener, Inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { AnchorBoxDirective } from './anchor-box.directive';
+import { AnchorDirective } from './anchor.directive';
 import { AnchorActiveChangeSource } from './anchor.type';
 
 @Directive({
@@ -8,7 +8,7 @@ import { AnchorActiveChangeSource } from './anchor.type';
 })
 export class AnchorLinkDirective implements OnInit, OnDestroy {
   @HostBinding('class') get anchorActiveClass() {
-    return (this.anchorBlock && this.anchorBlock.isActive) ? (this.anchorActive || '') : '';
+    return this.anchorBlock && this.anchorBlock.isActive ? this.anchorActive || '' : '';
   }
   private _anchorName;
   @Input('dAnchorLink')
@@ -16,7 +16,9 @@ export class AnchorLinkDirective implements OnInit, OnDestroy {
     this._anchorName = anchor;
     this.bindAnchorAfterBoxReady();
   }
-  get anchorName() { return this._anchorName; }
+  get anchorName() {
+    return this._anchorName;
+  }
 
   @Input() anchorActive: string;
 
@@ -26,17 +28,17 @@ export class AnchorLinkDirective implements OnInit, OnDestroy {
   subscription;
 
   constructor(@Inject(forwardRef(() => AnchorBoxDirective)) box: AnchorBoxDirective) {
-      this.boxElement = box;
+    this.boxElement = box;
   }
 
   ngOnInit() {
-      this.subscribeAnchorMapChange();
+    this.subscribeAnchorMapChange();
   }
 
   ngOnDestroy() {
-      if ( this.subscription) {
-          this.subscription.unsubscribe();
-      }
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
   subscribeAnchorMapChange() {
@@ -53,15 +55,17 @@ export class AnchorLinkDirective implements OnInit, OnDestroy {
 
   bindAnchorAfterBoxReady = () => {
     if (this.boxElement.anchorMap) {
-      setTimeout(() => {this.anchorBlock = this.boxElement.anchorMap[this.anchorName]; }, 0);
+      setTimeout(() => {
+        this.anchorBlock = this.boxElement.anchorMap[this.anchorName];
+      }, 0);
     } else {
       this.bindingAnchorTimer = setTimeout(this.bindAnchorAfterBoxReady, 500);
     }
   }
 
-  @HostListener ('click')
+  @HostListener('click')
   scrollToAnchor(activeChangeBy?: AnchorActiveChangeSource) {
-    if ( !this.anchorBlock) {
+    if (!this.anchorBlock) {
       return;
     }
     const callback = () => {
@@ -80,12 +84,15 @@ export class AnchorLinkDirective implements OnInit, OnDestroy {
       this.scrollAnimate(
         container,
         containerScrollTop,
-        (containerScrollTop + anchor.getBoundingClientRect().top
-        - containerOffsetTop
-        - (this.boxElement.view && this.boxElement.view.top || 0)),
-        undefined, undefined, callback
+        containerScrollTop +
+          anchor.getBoundingClientRect().top -
+          containerOffsetTop -
+          ((this.boxElement.view && this.boxElement.view.top) || 0),
+        undefined,
+        undefined,
+        callback
       );
-    })( this.boxElement.scrollTarget || document.documentElement, this.anchorBlock.element);
+    })(this.boxElement.scrollTarget || document.documentElement, this.anchorBlock.element);
     this.boxElement.isScrollingToTarget = true;
   }
 
@@ -93,14 +100,14 @@ export class AnchorLinkDirective implements OnInit, OnDestroy {
     const startTimeStamp = Date.now();
     const drawAnimateFrame = () => {
       const currentTime = Date.now() - startTimeStamp;
-      if (currentTime - timeGap > scrollTime ) {
+      if (currentTime - timeGap > scrollTime) {
         target.scrollTop = targetTopValue;
         if (target === document.documentElement) {
           // 兼容写法，老浏览器/老API模式需要document.body滚动，新的需要documentElement滚动
           document.body.scrollTop = targetTopValue;
         }
         if (callback) {
-            callback();
+          callback();
         }
       } else {
         const tempTopValue = this.easeInOutCubic(currentTime, currentTopValue, targetTopValue, scrollTime);
@@ -108,7 +115,9 @@ export class AnchorLinkDirective implements OnInit, OnDestroy {
         if (target === document.documentElement) {
           document.body.scrollTop = tempTopValue;
         }
-        setTimeout(() => {requestAnimationFrame(drawAnimateFrame); }, timeGap);
+        setTimeout(() => {
+          requestAnimationFrame(drawAnimateFrame);
+        }, timeGap);
       }
     };
     requestAnimationFrame(drawAnimateFrame);
@@ -118,9 +127,9 @@ export class AnchorLinkDirective implements OnInit, OnDestroy {
     const cc = c - b;
     let tt = t / (d / 2);
     if (tt < 1) {
-      return cc / 2 * tt * tt * tt + b;
+      return (cc / 2) * tt * tt * tt + b;
     } else {
-      return cc / 2 * ((tt -= 2) * tt * tt + 2) + b;
+      return (cc / 2) * ((tt -= 2) * tt * tt + 2) + b;
     }
   }
 }

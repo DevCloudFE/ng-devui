@@ -2,20 +2,22 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { ButtonModule } from 'ng-devui/button';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
+import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 import { CarouselModule } from '../carousel.module';
-import { CarouselDemoComponent } from './carousel-demo.component';
-import { CarouselDemoBasicComponent } from './basic/carousel-demo-basic.component';
-import { CarouselDemoTriggerComponent } from './trigger/carousel-demo-trigger.component';
 import { CarouselDemoAutoPlayComponent } from './autoplay/carousel-demo-autoplay.component';
-import { ButtonModule } from 'ng-devui/button';
+import { CarouselDemoBasicComponent } from './basic/carousel-demo-basic.component';
+import { CarouselDemoComponent } from './carousel-demo.component';
 import { CarouselDemoCustomComponent } from './custom/carousel-demo-custom.component';
+import { CarouselDemoTriggerComponent } from './trigger/carousel-demo-trigger.component';
 
 @NgModule({
   imports: [
+    TranslateModule,
     CommonModule,
     DevUICodeboxModule,
     DevUIApiModule,
@@ -28,7 +30,8 @@ import { CarouselDemoCustomComponent } from './custom/carousel-demo-custom.compo
       {path: 'demo', component: CarouselDemoComponent},
       {
         path: 'api', component: DevUIApiComponent, data: {
-          api: require('!html-loader!markdown-loader!../doc/api.md'),
+          'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),
+          'en-us': require('!html-loader!markdown-loader!../doc/api-en.md')
         }
       }
     ])
@@ -44,4 +47,3 @@ import { CarouselDemoCustomComponent } from './custom/carousel-demo-custom.compo
 })
 export class CarouselDemoModule {
 }
-

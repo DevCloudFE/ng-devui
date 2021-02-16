@@ -1,44 +1,65 @@
-import {
-    Component, OnInit
-  } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
+import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { Subscription } from 'rxjs';
 
-  @Component({
-    selector: 'd-demo-breadcrumb',
-    templateUrl: './breadcrumb-demo.component.html'
-  })
+@Component({
+  selector: 'd-demo-breadcrumb',
+  templateUrl: './breadcrumb-demo.component.html',
+})
+export class BreadCrumbDemoComponent implements OnInit, OnDestroy {
+  BasicSource: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./basic/basic.component.html') },
+    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/basic.component.ts') },
+  ];
 
-  export class BreadCrumbDemoComponent {
-    BasicSource: Array<DevuiSourceData> = [
-      {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./basic/basic.component.html')},
-      {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./basic/basic.component.ts')}
-    ];
+  CustomSource: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./custom/custom.component.html') },
+    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./custom/custom.component.ts') },
+    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./custom/custom.component.scss') },
+  ];
 
-    CustomSource: Array<DevuiSourceData> = [
-      {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./custom/custom.component.html')},
-      {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./custom/custom.component.ts')},
-      {title: 'SCSS', language: 'css', code:  require('!!raw-loader!./custom/custom.component.scss')}
-    ];
+  MenuSource: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./menu/menu.component.html') },
+    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./menu/menu.component.ts') },
+  ];
 
-    MenuSource: Array<DevuiSourceData> = [
-      {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./menu/menu.component.html')},
-      {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./menu/menu.component.ts')}
-    ];
+  SearchMenuSource: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./search-menu/search-menu.component.html') },
+    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./search-menu/search-menu.component.ts') },
+  ];
 
-    SearchMenuSource: Array<DevuiSourceData> = [
-      {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./search-menu/search-menu.component.html')},
-      {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./search-menu/search-menu.component.ts')}
-    ];
+  navItems = [];
+  subs: Subscription = new Subscription();
+  constructor(private translate: TranslateService) {}
 
-    navItems = [
-      { dAnchorLink: 'basic-breadcrumbs', value: '基础面包屑'},
-      { dAnchorLink: 'drop-down-breadcrumbs', value: '可下拉的面包屑'},
-      { dAnchorLink: 'with-search-drop-down-breadcrumbs', value: '带搜索下拉的面包屑'},
-      { dAnchorLink: 'self-defined-breadcrumbs', value: '自定义下拉列表和分隔符的面包屑'}
-    ];
+  ngOnInit() {
+    this.subs.add(
+      this.translate.get('components.breadcrumb.anchorLinkValues').subscribe((res) => {
+        this.setNavValues(res);
+      })
+    );
 
-    constructor() {
-
-    }
+    this.subs.add(
+      this.translate.onLangChange.subscribe((event: TranslationChangeEvent) => {
+        const values = this.translate.instant('components.breadcrumb.anchorLinkValues');
+        this.setNavValues(values);
+      })
+    );
   }
 
+  setNavValues(values) {
+    this.navItems = [
+      { dAnchorLink: 'basic-breadcrumbs', value: values['basic-breadcrumbs'] },
+      { dAnchorLink: 'drop-down-breadcrumbs', value: values['drop-down-breadcrumbs'] },
+      { dAnchorLink: 'with-search-drop-down-breadcrumbs', value: values['with-search-drop-down-breadcrumbs'] },
+      { dAnchorLink: 'self-defined-breadcrumbs', value: values['self-defined-breadcrumbs'] },
+    ];
+  }
+
+  ngOnDestroy() {
+    if (this.subs) {
+      this.subs.unsubscribe();
+    }
+  }
+}

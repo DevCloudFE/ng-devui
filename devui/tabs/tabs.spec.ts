@@ -1,10 +1,10 @@
-import { ComponentFixture, TestBed, tick, fakeAsync } from '@angular/core/testing';
-import { Component, ViewChild, DebugElement } from '@angular/core';
+import { Component, DebugElement, ViewChild } from '@angular/core';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { of } from 'rxjs';
+import { DomHelper } from '../utils/testing/dom-helper';
 import { TabsComponent } from './tabs.component';
 import { TabsModule } from './tabs.module';
-import { By } from '@angular/platform-browser';
-import { DomHelper } from '../utils/testing/dom-helper';
-import { of } from 'rxjs';
 @Component({
     template: `<d-tabs #tabs [type]="'tabs'" [(activeTab)]="activeTab" [beforeChange]="beforeChange"
     (activeTabChange)="activeTabChange($event)">
@@ -107,7 +107,7 @@ describe('tabs', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [TabsModule],
-            declarations: [TestTabsComponent],
+            declarations: [TestTabsComponent]
         }).compileComponents();
     });
 
@@ -154,8 +154,7 @@ describe('tabs', () => {
                 fixture.detectChanges();
                 tabEl.dispatchEvent(new Event('click'));
                 tick(300);
-                activeTabTest( component, 'tab4',  false);
-
+                activeTabTest(component, 'tab4',  false);
 
                 component.beforeChange = () => {
                     return true;
@@ -163,8 +162,7 @@ describe('tabs', () => {
                 fixture.detectChanges();
                 tabEl.dispatchEvent(new Event('click'));
                 tick(300);
-                activeTabTest( component, 'tab4');
-
+                activeTabTest(component, 'tab4');
 
             }));
             it('should beforeChange work as observable', fakeAsync(() => {
@@ -192,7 +190,7 @@ describe('tabs', () => {
                 fixture.detectChanges();
                 tabEl.dispatchEvent(new Event('click'));
                 tick(300);
-                activeTabTest( component, 'tab4',  false);
+                activeTabTest(component, 'tab4',  false);
                 component.beforeChange = () => {
                     return Promise.resolve(true);
                 };
@@ -206,14 +204,13 @@ describe('tabs', () => {
 
     });
 
-
 });
 
 describe('should different type has different class', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [TabsModule],
-            declarations: [TestTabsTypeComponent],
+            declarations: [TestTabsTypeComponent]
         }).compileComponents();
     });
     describe('should tabs display differently accordion to type', () => {
@@ -239,12 +236,11 @@ describe('should different type has different class', () => {
 
         });
 
-
     });
 
 });
 
-function activeTabTest( component, itemClicked, canChange: boolean = true) {
+function activeTabTest(component, itemClicked, canChange: boolean = true) {
     if (canChange) {
         expect(component.activeTabChange).toHaveBeenCalled();
         expect(component.activeTab).toBe(itemClicked);

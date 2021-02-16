@@ -1,7 +1,8 @@
-import { Directive, OnInit, OnDestroy, Host, HostListener, ElementRef, forwardRef, Renderer2, Output, EventEmitter } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, forwardRef, HostListener, OnDestroy, OnInit, Output, Renderer2 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { fromEvent, Subscription } from 'rxjs';
+import { debounceTime, map } from 'rxjs/operators';
 import { TwoDatePickerComponent } from './two-datepicker.component';
-import { Subscription } from 'rxjs';
 
 @Directive({
   selector: '[dTwoDatePickerEnd]',
@@ -17,13 +18,14 @@ export class TwoDatePickerEndDirective implements OnInit, OnDestroy, ControlValu
   @Output() selectEnd = new EventEmitter<any>();
 
   userHtml;
-  private switchSub: Subscription;
+  private switchOriginSub: Subscription;
   private twoDateSub: Subscription;
+  private valueChangeSubscrip: Subscription;
 
   private onChange = (_: any) => null;
 
   constructor(private twoDatePicker: TwoDatePickerComponent, private renderer: Renderer2,
-   private el: ElementRef) {
+              private el: ElementRef) {
     this.twoDateSub = this.twoDatePicker.selectDateSubject.subscribe(data => {
       if (data.side === 'end') {
         if (this.el.nativeElement.tagName === 'INPUT') {
@@ -37,32 +39,41 @@ export class TwoDatePickerEndDirective implements OnInit, OnDestroy, ControlValu
         }
       }
     });
-    this.switchSub = this.twoDatePicker.switchOpenSub.subscribe(side => {
-      if (this.el.nativeElement.tagName === 'INPUT') {
-        if (side === 'end') {
-          if (!this.el.nativeElement.classList.contains('devui-input-focus')) {
-            this.el.nativeElement.classList.add('devui-input-focus');
-          }
-        } else {
-          this.el.nativeElement.classList.remove('devui-input-focus');
-        }
+    this.switchOriginSub = this.twoDatePicker.switchOriginPositionSub.subscribe(side => {
+      if (side === 'end') {
+        this.twoDatePicker.changeFormWithDropDown(this.el);
+      } else {
+        this.twoDatePicker.removeClass(this.el);
       }
     });
   }
 
-  @HostListener('click', ['$event'])
-  public toggleEndPicker(event: MouseEvent) {
-    event.stopPropagation();
-    this.twoDatePicker.toggle(event, 'end');
+  public toggle(event?: MouseEvent) {
+    this.twoDatePicker.toggle('end');
   }
 
   @HostListener('blur', ['$event'])
   onBlur($event) {
-    this.transUserInputToDatePicker();
+    if (!this.validDate(this.el.nativeElement.value)) {
+      this.resetValue();
+    }
   }
 
   ngOnInit() {
     this.userHtml = this.el.nativeElement.innerHTML;
+    this.initInputChanges();
+  }
+
+  initInputChanges(): void {
+    this.valueChangeSubscrip = fromEvent(this.el.nativeElement, 'keyup').pipe(
+      map((e: any) => {
+        console.log(e);
+        return e.target.value;
+      }),
+      debounceTime(300)
+    ).subscribe(value => {
+      this.transUserInputToDatePicker(value);
+    });
   }
 
   registerOnChange(fn: any): void {
@@ -82,32 +93,49 @@ export class TwoDatePickerEndDirective implements OnInit, OnDestroy, ControlValu
     this.twoDatePicker.selectEnd(selectedEnd, true);
   }
 
-  clearEnd = () => {
-    this.twoDatePicker.selectEnd(null);
+  clear = () => {
+    this.twoDatePicker.clear('end');
   }
 
-  transUserInputToDatePicker() {
+  transUserInputToDatePicker(value?: string) {
     if (!this.twoDatePicker.showTime) {
-      const value = this.el.nativeElement.value;
-      if (!value && !this.twoDatePicker.rangeEnd) {
+      const _value = value || this.el.nativeElement.value;
+      if (!_value && !this.twoDatePicker.rangeEnd || !_value) {
+        this.clear();
         return;
       }
-      if (!value) {
-        this.clearEnd();
-        return;
-      }
-      const valueDate = new Date(value);
-      const valueFormat = this.twoDatePicker.dateConverter.format(valueDate, this.twoDatePicker.dateFormat, this.twoDatePicker.locale);
-      if (new Date(valueFormat).getTime() === new Date(this.twoDatePicker.rangeEnd).getTime()) {
-        return;
-      }
-      if (value && value === valueFormat) {
+      const valueDate = new Date(_value);
+      if (_value && this.validDate(_value)) {
         this.twoDatePicker.selectEnd(valueDate);
         [this.twoDatePicker.rangeStart, this.twoDatePicker.rangeEnd] = this.twoDatePicker.selectedRange;
       }
     } else {
+      this.resetValue();
+    }
+  }
+
+  validDate(value) {
+    if (!value) {
+      return true;
+    }
+    const valueDate = new Date(value);
+    const valueFormat = valueDate && !isNaN(valueDate.getTime()) &&
+      this.twoDatePicker.dateConverter.format(valueDate, this.twoDatePicker.dateFormat, this.twoDatePicker.locale);
+    if (
+      !valueDate || value !== valueFormat ||
+      (value === valueFormat &&
+      (valueDate.getTime() < this.twoDatePicker.minDate.getTime() || valueDate.getTime() > this.twoDatePicker.maxDate.getTime()))
+    ) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  resetValue() {
+    if (this.twoDatePicker.rangeEnd) {
       this.el.nativeElement.value =
-       this.twoDatePicker.dateConverter.format(this.twoDatePicker.rangeEnd, this.twoDatePicker.dateFormat, this.twoDatePicker.locale);
+        this.twoDatePicker.dateConverter.format(this.twoDatePicker.rangeEnd, this.twoDatePicker.dateFormat, this.twoDatePicker.locale);
     }
   }
 
@@ -115,8 +143,10 @@ export class TwoDatePickerEndDirective implements OnInit, OnDestroy, ControlValu
     if (this.twoDateSub) {
       this.twoDateSub.unsubscribe();
     }
-    if (this.switchSub) {
-      this.switchSub.unsubscribe();
+    if (this.switchOriginSub) {
+      this.switchOriginSub.unsubscribe();
     }
+
+    this.valueChangeSubscrip?.unsubscribe();
   }
 }

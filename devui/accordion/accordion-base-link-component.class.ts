@@ -1,6 +1,6 @@
-import { HostListener, Directive } from '@angular/core';
-import { AccordionLinkableItem, AccordionOptions } from './accordion.type';
+import { Directive, HostListener } from '@angular/core';
 import { AccordionBaseItemComponent } from './accordion-base-item-component.class';
+import { AccordionLinkableItem, AccordionOptions } from './accordion.type';
 
 @Directive()
 // tslint:disable-next-line: directive-class-suffix

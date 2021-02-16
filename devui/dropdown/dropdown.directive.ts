@@ -1,10 +1,10 @@
-import { Directive, OnDestroy, Input, Output, HostBinding, EventEmitter, ElementRef,
-  SimpleChanges, OnChanges, AfterContentInit, Optional, SkipSelf, ContentChildren,
-  QueryList
-} from '@angular/core';
 import { CdkOverlayOrigin} from '@angular/cdk/overlay';
-import { Subject, Observable, merge, fromEvent, Subscription } from 'rxjs';
-import { debounceTime, mapTo, filter, tap } from 'rxjs/operators';
+import { AfterContentInit, ContentChildren, Directive, ElementRef, EventEmitter, HostBinding, Input,
+  OnChanges, OnDestroy, Optional, Output, QueryList, SimpleChanges,
+  SkipSelf
+} from '@angular/core';
+import { fromEvent, merge, Observable, Subject, Subscription } from 'rxjs';
+import { debounceTime, filter, mapTo, tap } from 'rxjs/operators';
 import { DropDownService } from './dropdown.service';
 
 @Directive({
@@ -54,7 +54,7 @@ export class DropDownDirective implements OnDestroy, OnChanges, AfterContentInit
   /**
    * dropdown触发方式
    */
-  @Input() trigger: 'click' | 'hover' = 'click';
+  @Input() trigger: 'click' | 'hover' | 'manually' = 'click';
   /**
    * 关闭区域，默认点击菜单链接也会关闭，blank点击其他空白区域才关闭
    */
@@ -96,7 +96,7 @@ export class DropDownDirective implements OnDestroy, OnChanges, AfterContentInit
   }
 
   constructor(private dropdownService: DropDownService, public el: ElementRef,
-    @Optional() @SkipSelf() public parentDropdown: DropDownDirective) {
+              @Optional() @SkipSelf() public parentDropdown: DropDownDirective) {
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -170,7 +170,7 @@ export class DropDownDirective implements OnDestroy, OnChanges, AfterContentInit
                     children =>
                       children !== this
                       // appendToBody的时候可能会没有实例化不在document上需要做判断有没有parentElement
-                      && ( children.menuEl.nativeElement.parentElement
+                      && (children.menuEl.nativeElement.parentElement
                       && children.menuEl.nativeElement.parentElement.contains(event.relatedTarget)
                       || children.menuEl.nativeElement.contains(relatedTarget))
                   ))
@@ -192,7 +192,7 @@ export class DropDownDirective implements OnDestroy, OnChanges, AfterContentInit
     }
   }
 
-  simulateEventDispatch($event, target? ) {
+  simulateEventDispatch($event, target?) {
     const event = document.createEvent('MouseEvents');
     event.initEvent($event.type, true, true);
     event['originEvent'] = $event['originEvent'] || $event;

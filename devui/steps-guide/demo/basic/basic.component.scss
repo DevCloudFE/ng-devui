@@ -1,0 +1,24 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
+section {
+  display: flex;
+  flex-wrap: nowrap;
+
+  div {
+    padding: 8px 16px;
+    overflow-y: auto;
+
+    &:first-child {
+      border: solid 1px $devui-dividing-line;
+      width: 60%;
+      height: 150px;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
+
+d-button {
+  margin: 0 4px 8px 0;
+  width: min-content;
+}
