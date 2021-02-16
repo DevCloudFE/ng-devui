@@ -388,7 +388,7 @@ export const routesConfig = [
       ),
     data: {
       type: '演进中',
-      name: 'Quadrant Diagram',
+      name: 'QuadrantDiagram',
       cnName: '象限图',
       description: '象限图，根据需求对事务进行区域划分与价值排序',
       tmw: `可用于管理事务的优先级`,
