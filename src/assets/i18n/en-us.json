@@ -2762,10 +2762,9 @@
         "title": "regular restriction",
         "description": "Regular or regular character strings are allowed to be input. The input regular character string is matched first. If no regular character string is input, the input regular character string is not restricted."
       },
-      "decimalLimitAndAutoFocusDemo": {
-        "title": "Limit decimals and automatically get focus",
-        "Limit Decimal": "Limit Decimal",
-        "Automatically get focus": "Automatically get focus"
+      "decimalLimitDemo": {
+        "title": "Limit decimals",
+        "Limit Decimal": "Limit Decimal"
       },
       "anchorLinkValues": {
         "number-basic": "Basic Usage",
@@ -2773,7 +2772,7 @@
         "number-empty": "Null allowed",
         "number-placeholder-maxlength": "placeholder and maxLength",
         "number-reg": "regular restriction",
-        "decimal-limit-auto-focus": "Limit decimals and automatically get focus"
+        "decimal-limit": "Limit decimals"
       }
     },
     "tree-select": {

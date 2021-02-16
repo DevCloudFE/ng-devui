@@ -2763,10 +2763,9 @@
         "title": "正则限制",
         "description": "允许传入正则或正则字符串限制输入，输入时会优先匹配传入的正则，不输入则不限制。"
       },
-      "decimalLimitAndAutoFocusDemo": {
-        "title": "限制小数和自动获取焦点",
-        "Limit Decimal": "限制小数",
-        "Automatically get focus": "自动获取焦点"
+      "decimalLimitDemo": {
+        "title": "限制小数",
+        "Limit Decimal": "限制小数"
       },
       "anchorLinkValues": {
         "number-basic": "基本用法",
@@ -2774,7 +2773,7 @@
         "number-empty": "允许空值",
         "number-placeholder-maxlength": "placeholder和maxLength",
         "number-reg": "正则限制",
-        "decimal-limit-auto-focus": "限制小数和自动获取焦点"
+        "decimal-limit": "限制小数"
       }
     },
     "tree-select": {

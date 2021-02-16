@@ -49,10 +49,10 @@ export class InputNumberDemoComponent implements OnInit, OnDestroy {
     { title: 'SCSS', language: 'css', code: require('!!raw-loader!./reg/input-number-reg.component.css') },
   ];
 
-  DecimalLimitAndAutoFocus: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./decimalLimitAndAutoFocus/decimal-limit-auto-focus.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./decimalLimitAndAutoFocus/decimal-limit-auto-focus.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./decimalLimitAndAutoFocus/decimal-limit-auto-focus.component.css') },
+  DecimalLimit: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./decimal-limit/decimal-limit.component.html') },
+    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./decimal-limit/decimal-limit.component.ts') },
+    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./decimal-limit/decimal-limit.component.css') },
   ];
 
   navItems = [];
@@ -81,7 +81,7 @@ export class InputNumberDemoComponent implements OnInit, OnDestroy {
       { dAnchorLink: 'number-empty', value: values['number-empty'] },
       { dAnchorLink: 'number-placeholder-maxlength', value: values['number-placeholder-maxlength'] },
       { dAnchorLink: 'number-reg', value: values['number-reg'] },
-      { dAnchorLink: 'decimal-limit-auto-focus', value: values['decimal-limit-auto-focus'] },
+      { dAnchorLink: 'decimal-limit', value: values['decimal-limit'] },
     ];
   }
 

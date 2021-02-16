@@ -10,8 +10,8 @@
 |   disabled   |     `boolean`      |          false          | 可选，禁止输入态开关                 | [禁止输入态](demo#number-disabled)                            |
 |     size     |  `''\|'sm'\|'lg'`  |           ''            | 可选，组件大小                       | [基本用法](demo#number-basic)                                 |
 |   ngModel    |      `number`      |           --            | 可选，组件的值                       | [基本用法](demo#number-basic)                                 |
-| decimalLimit |      `number`      |           --            | 可选，限制小数点后的位数             | [限制小数和自动获取焦点](demo#decimal-limit-auto-focus)      |
-|  autoFocus   |     `boolean`      |          false          | 可选，自动获取焦点                   | [限制小数和自动获取焦点](demo#decimal-limit-auto-focus)      |
+| decimalLimit |      `number`      |           --            | 可选，限制小数点后的位数             | [限制小数](demo#decimal-limit)      |
+|  autoFocus   |     `boolean`      |          false          | 可选，自动获取焦点                   | --      |
 |  allowEmpty  |     `boolean`      |          false          | 可选，是否允许值为空                 | [允许空值](demo#number-empty)                                 |
 | placeholder  |      `string`      |           --            | 可选，要显示的 placeholder           | [placeholder 和 maxLength](demo#number-placeholder-maxlength) |
 |  maxLength   |      `number`      |            0            | 可选，限制最大输入的长度，0 为不限制 | [placeholder 和 maxLength](demo#number-placeholder-maxlength) |
