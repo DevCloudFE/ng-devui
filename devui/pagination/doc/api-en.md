@@ -1,4 +1,20 @@
-### d-pagination parameter
+# How to use
+
+Import into module:
+
+```ts
+import { PaginationModule } from 'ng-devui/pagination';
+```
+
+In the page:
+
+```html
+<d-pagination></d-pagination>
+```
+# d-pagination
+
+
+## d-pagination parameter
 
 | Parameter | Type | Default | Description | Jump to Demo |
 | :---------------: | :-------------------------------------------------: | :------------------------: | :-------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
@@ -23,9 +39,34 @@
 | haveConfigMenu | `boolean` | false | Optional. Whether to display the configuration in simplified mode | [Simplified mode](demo#minimalist-model) |
 | autoFixPageIndex | `boolean` | true | Optional. Indicates whether to automatically correct the page number when the page size is changed. If the pageIndex is processed in the `pageSizeChange` event, you are advised to set the value to `false` | [Simplified Mode](demo#minimalist-model) |.
 
-### d-pagination event
+## d-pagination event
 
 | Parameter | Type | Description | Jump to Demo |
 | :-------------: | :--------------------: | :--------------------------------------------------------- | --------------------------------------------------------------- |
 | pageIndexChange | `EventEmitter<number>` | Optional. Callback of page number change, which returns the current page number. | [Multiple configurations](demo#multiple-configurations) |
 | pageSizeChange | `EventEmitter<number>` |Optional. Callback function when the maximum number of items on each page changes. | [Multiple configurations](demo#multiple-configurations) |
+
+# Interface & Type Definition
+
+### AppendToBodyDirection
+
+```ts
+export type AppendToBodyDirection = 'rightDown' | 'rightUp' | 'leftUp' | 'leftDown' | 'centerDown' | 'centerUp';
+```
+
+### ConnectedPosition
+
+```ts
+export interface ConnectedPosition {
+  originX: 'start' | 'center' | 'end';
+  originY: 'top' | 'center' | 'bottom';
+
+  overlayX: 'start' | 'center' | 'end';
+  overlayY: 'top' | 'center' | 'bottom';
+
+  weight?: number;
+  offsetX?: number;
+  offsetY?: number;
+  panelClass?: string | string[];
+}
+```

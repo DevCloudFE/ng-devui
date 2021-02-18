@@ -1,13 +1,10 @@
 <div class="devui-tree-select {{ userAgent }}">
   <d-popper-component
+    [poppoverAppendDirection]="customViewDirection"
     [(open)]="isOpen"
     [fluidPopper]="!width"
     (openChange)="responsePopperChange($event)"
     [appendTo]="appendTo"
-    [extraConfig]="{
-      extraWidth: -2,
-      offset: '1, -1'
-    }"
     #popper
   >
     <div
@@ -98,7 +95,12 @@
         </svg>
       </span>
     </div>
-    <div class="devui-tree-select devui-options-container" #optionsContainer popper-container [ngStyle]="{ width: width }">
+    <div
+      class="devui-tree-select devui-options-container"
+      #optionsContainer
+      popper-container
+      [ngStyle]="{ width: width, maxHeight: validVirtualScrollHeight === undefined ? '300px' : validVirtualScrollHeight + 'px' }"
+    >
       <d-operable-tree
         #tree
         [style.display]="treeData && treeData.length > 0 && !noRecord ? 'block' : 'none'"
@@ -118,6 +120,12 @@
         [iconLeaf]="iconLeaf"
         [treeNodeTitleKey]="treeNodeTitleKey"
         [iconTemplatePosition]="iconTemplatePosition"
+        [virtualScroll]="virtualScroll"
+        [itemSize]="virtualScrollItemSize"
+        [minBufferPx]="virtualScrollMinBufferPx"
+        [maxBufferPx]="virtualScrollMaxBufferPx"
+        [virtualScrollHeight]="validVirtualScrollHeight + 'px'"
+        (afterTreeInit)="afterTreeInit()"
         class="devui-tree"
       >
         <ng-template *ngIf="iconTemplateInput || iconTemplatePassThrough" #iconTemplate let-node="node">
@@ -131,6 +139,11 @@
       <div *ngIf="noRecord" class="devui-no-data-tip">
         {{ i18nCommonText?.noRecordsFound }}
       </div>
+    </div>
+
+    <!-- 自定义区域 -->
+    <div popper-append *ngIf="customViewTemplate">
+      <ng-template [ngTemplateOutlet]="customViewTemplate" [ngTemplateOutletContext]="{ $implicit: this }"></ng-template>
     </div>
   </d-popper-component>
   <div [ngClass]="{ disabled: disabled, clear: allowClear }" (click)="$event.stopPropagation(); $event.preventDefault(); clearAll()"></div>

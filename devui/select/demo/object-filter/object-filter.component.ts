@@ -6,16 +6,16 @@ import { Component } from '@angular/core';
 })
 export class ObjectFilterComponent {
   options2 = [{
-    name: '选项1',
+    name: 'Option 1',
     value: 1
   }, {
-    name: '选项2',
+    name: 'Option 2',
     value: 2
   }, {
-    name: '选项3',
+    name: 'Option 3',
     value: 3
   }, {
-    name: '选项4',
+    name: 'Option 4',
     value: 4
   }];
   currentOption4 = {};

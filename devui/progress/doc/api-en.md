@@ -1,3 +1,15 @@
+# How To Use
+Import in module：
+```ts
+import { ProgressModule } from 'ng-devui/progress';
+```
+In the page：
+```html
+<d-progress></d-progress>
+```
+
+# d-progress
+
 ## d-progress parameter
 
 | Parameter | Type | Default | Description | Jump to Demo |

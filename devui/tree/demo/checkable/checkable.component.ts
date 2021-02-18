@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ICheckboxInput, ITreeItem, OperableTreeComponent, TreeNode } from 'ng-devui/tree';
+import { ITreeItem, OperableTreeComponent, TreeNode } from 'ng-devui/tree';
 
 @Component({
   selector: 'd-checkable',
@@ -13,50 +13,50 @@ export class CheckableComponent implements OnInit {
 
   // checkboxInput: ICheckboxInput = { color: '#5170ff' };
   data3 = [{
-    'title': '父节点1'
+    'title': 'parent node 1'
   }, {
-    'title': '父节点2',
+    'title': 'parent node 2',
     'open': true,
     'children': [{
-      'title': '子节点2-1',
+      'title': 'leaf node 2-1',
       'children': [{
-        'title': '子节点2-1-1'
+        'title': 'leaf node 2-1-1'
       }, {
-        'title': '子节点2-1-2'
+        'title': 'leaf node 2-1-2'
       }]
     }, {
-      'title': '子节点2-2',
+      'title': 'leaf node 2-2',
       'open': true,
       'children': [{
-        'title': '子节点2-2-1',
+        'title': 'leaf node 2-2-1',
         'disabled': true,
         'isChecked': true
       }, {
-        'title': '子节点2-2-2',
+        'title': 'leaf node 2-2-2',
         'disableSelect': true
       }]
     }]
   }, {
-    'title': '父节点3',
+    'title': 'parent node 3',
     'disableToggle': true,
     'children': [{
-      'title': '子节点3-1',
+      'title': 'leaf node 3-1',
     }, {
-      'title': '子节点3-2',
+      'title': 'leaf node 3-2',
     }],
   }, {
-    'title': '父节点4',
+    'title': 'parent node 4',
     'children': [{
-      'title': '子节点4-1'
+      'title': 'leaf node 4-1'
     }, {
-      'title': '子节点4-2'
+      'title': 'leaf node 4-2'
     }]
   }, {
-    'title': '父节点5',
+    'title': 'parent node 5',
     'children': [{
-      'title': '子节点5-1'
+      'title': 'leaf node 5-1'
     }, {
-      'title': '子节点5-2'
+      'title': 'leaf node 5-2'
     }]
   }];
 

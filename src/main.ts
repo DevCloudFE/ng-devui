@@ -9,6 +9,8 @@ import { greenLightTheme,
    devuiDarkLargeTheme,
    greenLightLargeTheme,
    greenDarkLargeTheme } from './app/theme-picker/theme-data-more';
+import { deepTheme, infinityTheme, provenceTheme, sweetTheme } from 'ng-devui/theme-collection';
+
 ThemeServiceInit({
   'devui-light-theme': devuiLightTheme,
   'devui-dark-theme': devuiDarkTheme,
@@ -17,7 +19,11 @@ ThemeServiceInit({
   'devui-light-large-theme': devuiLightLargeTheme,
   'devui-dark-large-theme': devuiDarkLargeTheme,
   'green-light-large-theme': greenLightLargeTheme,
-  'green-dark-large-theme': greenDarkLargeTheme
+  'green-dark-large-theme': greenDarkLargeTheme,
+  'infinity-theme': infinityTheme,
+  'provence-theme': provenceTheme,
+  'sweet-theme': sweetTheme,
+  'deep-theme': deepTheme
 });
 
 if (environment.production) {

@@ -1,13 +1,13 @@
 <section>
-  <h4>单选</h4>
+  <h4>Single Selection<!--单选--></h4>
   <div class="row">
     <div class="col-md-5">
-      <h5>只在列表使用模板</h5>
+      <h5>Use templates only for lists<!--只在列表使用模板--></h5>
       <d-select [options]="languages2" [filterKey]="'name'" [(ngModel)]="currentOption4" [placeholder]="'Search'">
         <ng-template let-option="option" let-filterKey="filterKey"> Do you agree? {{ option[filterKey] }} </ng-template>
       </d-select>
 
-      <h5>在列表和选中项使用相同模板</h5>
+      <h5>Use the same template in the list and selected items<!--在列表和选中项使用相同模板--></h5>
       <d-select
         [options]="languages2"
         [filterKey]="'name'"
@@ -18,7 +18,7 @@
         <ng-template let-option="option" let-filterKey="filterKey"> Do you agree? {{ option[filterKey] }} </ng-template>
       </d-select>
 
-      <h5>在列表和选中项使用不同模板</h5>
+      <h5>Use different templates in lists and selected items<!--在列表和选中项使用不同模板--></h5>
       <d-select
         [options]="languages2"
         [filterKey]="'name'"
@@ -42,10 +42,10 @@
   </div>
 </section>
 <section>
-  <h4>多选</h4>
+  <h4>Multiple Selection<!--多选--></h4>
   <div class="row">
     <div class="col-md-5">
-      <h5>只在列表使用模板</h5>
+      <h5>Use templates only for lists<!--只在列表使用模板--></h5>
       <d-select [options]="languages3" [filterKey]="'name'" [(ngModel)]="currentOption5" [placeholder]="'Search'" [multiple]="true">
         <ng-template let-option="option" let-filterKey="filterKey" let-checked="checked">
           <ng-container *ngIf="!checked">[ ]</ng-container>
@@ -54,7 +54,7 @@
         </ng-template>
       </d-select>
 
-      <h5>在列表和选中项使用不同模板</h5>
+      <h5>Use different templates in lists and selected items<!--在列表和选中项使用不同模板--></h5>
       <d-select
         [options]="languages3"
         [filterKey]="'name'"
@@ -67,11 +67,11 @@
           <ng-container *ngIf="position === 'result'">
             <ng-container *ngIf="option?.length === languages3.length"> Agree With All</ng-container>
             <ng-container *ngIf="option?.length !== languages3.length">
-              Agrre with
+              Agree with
               <ng-container *ngFor="let op of option; let index = index">
                 <ng-container *ngIf="index !== 0">, </ng-container>{{ op[filterKey] }} </ng-container
               >.
-              <!-- -->
+              <!--TODO-->
             </ng-container>
           </ng-container>
           <ng-container *ngIf="position === 'list'">
@@ -81,7 +81,9 @@
           </ng-container>
         </ng-template>
       </d-select>
-      <h5>在列表和选中项使用不同模板， 某些情况下使用内置模板</h5>
+      <h5>
+        Use different templates for lists and selected items, and in some cases use built-in templates.<!--在列表和选中项使用不同模板， 某些情况下使用内置模板-->
+      </h5>
       <d-select
         [options]="languages3"
         [filterKey]="'name'"
@@ -94,7 +96,7 @@
           <ng-container *ngIf="position === 'result'">
             <ng-container *ngIf="option?.length === languages3.length"> Agree With All</ng-container>
             <ng-container *ngIf="option?.length !== languages3.length">
-              Agrre with
+              Agree with
               <ng-container *ngFor="let op of option; let index = index">
                 <ng-container *ngIf="index !== 0">, </ng-container>{{ op[filterKey] }} </ng-container
               >.

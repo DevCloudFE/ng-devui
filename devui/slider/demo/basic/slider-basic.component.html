@@ -1,13 +1,22 @@
 <section>
-  <h5>基本用法</h5>
-  <d-slider [(ngModel)]="inputValue" [min]="minValue" [max]="maxValue" class="slider" (afterChange)="afterChange($event)"></d-slider>
-  <h5>双向绑定</h5>
-  <div class="composite-slider">
+  <div class="slider-wrapper">
+    <d-slider [(ngModel)]="inputValue" [min]="minValue" [max]="maxValue" class="slider" (afterChange)="afterChange($event)"></d-slider>
+    <span>{{ minValue }}</span>
+    <span>{{ maxValue }}</span>
+  </div>
+  <h5>Bidirectional Binding</h5>
+  <div class="composite-slider slider-wrapper">
     <d-slider [(ngModel)]="inputValue2" [min]="minValue" [max]="maxValue" class="slider" (ngModelChange)="showVal($event)"></d-slider>
     <div class="snapshot-value">
       <input [(ngModel)]="inputValue2" style="width: 40px" class="devui-input" />
     </div>
+    <span>{{ minValue }}</span>
+    <span>{{ maxValue }}</span>
   </div>
-  <h5>限制步长</h5>
-  <d-slider [(ngModel)]="inputValue3" [min]="minValue" [max]="maxValue" [step]="step" class="slider"></d-slider>
+  <h5>Limit Step</h5>
+  <div class="slider-wrapper">
+    <d-slider [(ngModel)]="inputValue3" [min]="minValue" [max]="maxValue" [step]="step" class="slider"></d-slider>
+    <span>{{ minValue }}</span>
+    <span>{{ maxValue }}</span>
+  </div>
 </section>

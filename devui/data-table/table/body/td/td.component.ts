@@ -37,6 +37,7 @@ export class TableTdComponent implements OnInit, OnChanges, OnDestroy {
 
   private documentClickSubscription: Subscription;
   private tdClickSubscription: Subscription;
+  private currentEditing = false;
   constructor(private elementRef: ElementRef, private tdService: TableTdService) { }
 
   ngOnInit() {}
@@ -61,6 +62,10 @@ export class TableTdComponent implements OnInit, OnChanges, OnDestroy {
         this.stickyRightStyle = null;
       }
     }
+
+    if (changes['editing'] && changes['editing'].currentValue && !this.currentEditing) {
+      this.bindEditClickEvent();
+    }
   }
 
   startEditing(event) {
@@ -83,28 +88,42 @@ export class TableTdComponent implements OnInit, OnChanges, OnDestroy {
     beforePromise.then((canStart) => {
       if (canStart) {
         this.editing = true;
+        this.currentEditing = true;
         this.editingChange.emit(true);
         this.editStatusEvent.emit(true);
         this.tdService.tableCellClickEvent.emit(event);
-        setTimeout(() => {
-          this.documentClickSubscription = fromEvent(document, 'click').pipe(
-            tap((e: Event) => {
-              e.stopPropagation();
-            })
-          ).subscribe((clickEvent) => {
-            if (!this.elementRef.nativeElement.contains(clickEvent.target)) {
-              this.finishCellEdit();
-            }
-          });
-
-          this.tdClickSubscription = this.tdService.tableCellClickEvent.subscribe((clickEvent) => {
-            if (!this.elementRef.nativeElement.contains(clickEvent.target)) {
-              this.finishCellEdit();
-            }
-          });
-        });
+        this.bindEditClickEvent();
       }
     });
+  }
+
+  bindEditClickEvent() {
+    this.documentClickSubscription = fromEvent(document, 'click').pipe(
+      tap((e: Event) => {
+        e.stopPropagation();
+      })
+    ).subscribe((clickEvent) => {
+      if (!this.elementRef.nativeElement.contains(clickEvent.target)) {
+        this.finishCellEdit();
+      }
+    });
+
+    this.tdClickSubscription = this.tdService.tableCellClickEvent.subscribe((clickEvent) => {
+      if (!this.elementRef.nativeElement.contains(clickEvent.target)) {
+        this.finishCellEdit();
+      }
+    });
+  }
+
+  removeEditClickEvent() {
+    if (this.documentClickSubscription) {
+      this.documentClickSubscription.unsubscribe();
+      this.documentClickSubscription = null;
+    }
+    if (this.tdClickSubscription) {
+      this.tdClickSubscription.unsubscribe();
+      this.tdClickSubscription = null;
+    }
   }
 
   finishCellEdit() {
@@ -124,16 +143,10 @@ export class TableTdComponent implements OnInit, OnChanges, OnDestroy {
     beforePromise.then((canEnd) => {
       if (canEnd) {
         this.editing = false;
+        this.currentEditing = false;
         this.editingChange.emit(false);
         this.editStatusEvent.emit(false);
-        if (this.documentClickSubscription) {
-          this.documentClickSubscription.unsubscribe();
-          this.documentClickSubscription = null;
-        }
-        if (this.tdClickSubscription) {
-          this.tdClickSubscription.unsubscribe();
-          this.tdClickSubscription = null;
-        }
+        this.removeEditClickEvent();
       }
     });
   }

@@ -336,6 +336,10 @@ body {
 
   &:not(.devui-menu-item-selected):hover {
     background-color: $devui-list-item-hover-bg;
+
+    a {
+      color: $devui-list-item-hover-text;
+    }
   }
 }
 
@@ -348,12 +352,9 @@ body {
 }
 
 .devui-menu-item-selected {
-  color: $devui-brand;
-  background-color: $devui-list-item-selected-bg;
-  border-right: 2px solid $devui-brand;
-
   a {
-    color: inherit;
+    color: $devui-brand-active;
+    font-weight: 700;
   }
 }
 

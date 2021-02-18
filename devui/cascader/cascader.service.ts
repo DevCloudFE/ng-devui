@@ -17,6 +17,11 @@ export class CascaderService implements OnDestroy {
 
   canSelectParent = false;
 
+  isMultiple = false;
+
+  isLazyLoad = false;
+  lazyloadCache = {};
+
   loadChildrenFn: (value: CascaderItem) => Promise<CascaderItem[]> | Observable<CascaderItem[]>;
 
   set currentValue(value: Array<string | number>) {
@@ -43,9 +48,11 @@ export class CascaderService implements OnDestroy {
   readonly currentValueChange = new Subject<Array<string | number>>();
   readonly resetStatus = new Subject<void>();
   readonly openDrawer = new Subject<void>();
+  readonly updateShowText = new Subject<void>();
   readonly updateTagList = new Subject<{
     isAdd: boolean,
-    option: CascaderItem
+    option: CascaderItem,
+    isEmit: boolean // 是否触发onchanges,对外发出值
   }>();
 
   initOptions(options: CascaderItem[]): void {
@@ -56,7 +63,7 @@ export class CascaderService implements OnDestroy {
     this.columnList.push(this.options);
   }
 
-  openColumn(option: CascaderItem, colIndex: number, islazyLoad: boolean): void {
+  openColumn(option: CascaderItem, colIndex: number, islazyLoad: boolean, reload = false): void {
     this.clearTargetActive(this.columnList[colIndex].find(t => t.active));
     option.active = true;
     this.columnList.splice(colIndex + 1);
@@ -76,6 +83,16 @@ export class CascaderService implements OnDestroy {
           option._loading = false;
           this.columnList.push(res || []);
           this.openDrawer.next();
+
+          if (this.isMultiple) {
+            this.updateOptionCheckedStatus(option.value, option.checked, true, true, !reload);
+          }
+          if (reload) {
+            if (!this.isMultiple) {
+              this.updateOptionByValue();
+            }
+            this.updateShowText.next();
+          }
         });
       } else {
         (fn as Observable<CascaderItem[]>).subscribe(res => {
@@ -84,6 +101,17 @@ export class CascaderService implements OnDestroy {
           option._loading = false;
           this.columnList.push(res || []);
           this.openDrawer.next();
+
+          if (this.isMultiple) {
+            this.updateOptionCheckedStatus(option.value, option.checked, true, true, !reload);
+          }
+
+          if (reload) {
+            if (!this.isMultiple) {
+              this.updateOptionByValue();
+            }
+            this.updateShowText.next();
+          }
         });
       }
     }
@@ -107,16 +135,26 @@ export class CascaderService implements OnDestroy {
     this.resetNodeStatus();
     this.columnList = [this.options];
     for (let index = 0; index < this.currentValue.length; index++) {
-      const target = this.columnList[index].find(listItem => listItem.value === this.currentValue[index]);
+      const target = this.columnList[index]?.find(listItem => listItem.value === this.currentValue[index]);
 
       if (target) {
         target['active'] = true;
-        if (target.children && target.children.length) {
+        if (target.children && target.children.length) { // 有子菜单展开子菜单
           this.columnList.push(target.children);
+        } else if (this.isLazyLoad) { // 懒加载没有子菜单的情况下，非叶子节点执行展开，叶子节点执行选中
+          this.openColumn(target, index, !target.isLeaf, !target.isLeaf);
+          break;
         }
       } else {
         break;
       }
+    }
+  }
+
+  lazyloadMultipleChild(target: CascaderItem, index: number) {
+    if (!this.lazyloadCache[target.value]) {
+      this.lazyloadCache[target.value] = true;
+      this.openColumn(target, index, true, true);
     }
   }
 
@@ -132,14 +170,14 @@ export class CascaderService implements OnDestroy {
   }
 
   // 在多选模式下，更新节点树的checked状态
-  updateOptionCheckedStatus(targetValue: string | number, checked: boolean, upward = true, downward = true): void {
+  updateOptionCheckedStatus(targetValue: string | number, checked: boolean, upward = true, downward = true, isEmit = true): void {
     let targetNode = this.options.find(t => t.value === targetValue);
     // 当主下拉列表包含了目标，即目标无父节点
     if (targetNode) {
       targetNode['checked'] = checked;
       targetNode['halfChecked'] = false;
       if (targetNode.children && downward) {
-        this.updateChildrenChecked(targetNode, checked);
+        this.updateChildrenChecked(targetNode, checked, isEmit);
       }
     } else { // 当存在父节点时，需要检查同级节点来确定父节点状态
       const parentNode = this.getParentNode(targetValue);
@@ -148,33 +186,35 @@ export class CascaderService implements OnDestroy {
       targetNode['checked'] = checked;
       targetNode['halfChecked'] = false;
       if (targetNode.children && downward) {
-        this.updateChildrenChecked(targetNode, checked);
+        this.updateChildrenChecked(targetNode, checked, isEmit);
       }
       if (upward) {
-        this.updateParentChecked(parentNode);
+        this.updateParentChecked(parentNode, isEmit);
       }
     }
   }
 
   // 子节点按父节点状态更新
-  updateChildrenChecked(node: CascaderItem, checked: boolean) {
+  updateChildrenChecked(node: CascaderItem, checked: boolean, isEmit: boolean) {
     let hasDisable = false;
-    node.children.forEach(t => {
-      if (!t.disabled) {
-        t['checked'] = checked;
-        t['halfChecked'] = false;
-        if (t.children && t.children.length) {
+    node.children.forEach(child => {
+      if (!child.disabled) {
+        child['checked'] = checked;
+        child['halfChecked'] = false;
+        if (child.children && child.children.length) {
           if (this.canSelectParent) {
             this.updateTagList.next({
               isAdd: checked,
-              option: t
+              option: child,
+              isEmit
             });
           }
-          this.updateChildrenChecked(t, checked);
+          this.updateChildrenChecked(child, checked, isEmit);
         } else {
           this.updateTagList.next({
             isAdd: checked,
-            option: t
+            option: child,
+            isEmit
           });
         }
       } else {
@@ -183,12 +223,12 @@ export class CascaderService implements OnDestroy {
     });
 
     if (hasDisable && !this.canSelectParent) {
-      this.updateParentChecked(node);
+      this.updateParentChecked(node, isEmit);
     }
   }
 
   // 父节点按所有子节点状态更新
-  updateParentChecked(node: CascaderItem) {
+  updateParentChecked(node: CascaderItem, isEmit: boolean) {
     const checkedChild = node.children.find(t => t['checked']);
     const halfcheckedChild = node.children.find(t => t['halfChecked']);
     const uncheckedChild = node.children.find(t => !t['halfChecked'] && !t['checked']);
@@ -207,13 +247,14 @@ export class CascaderService implements OnDestroy {
     if (this.canSelectParent) {
       this.updateTagList.next({
         isAdd: node['checked'],
-        option: node
+        option: node,
+        isEmit
       });
     }
 
     // 如果此节点非根节点，则继续找它的父节点进行更新
     if (!node['isRoot']) {
-      this.updateParentChecked(this.getParentNode(node.value));
+      this.updateParentChecked(this.getParentNode(node.value), isEmit);
     }
   }
 

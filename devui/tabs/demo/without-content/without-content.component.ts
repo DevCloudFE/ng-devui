@@ -11,6 +11,6 @@ export class WithoutContentComponent implements OnInit {
   ngOnInit() {
   }
   activeTabChange(event) {
-    console.log('当前切换至', event);
+    console.log('switch to', event);
   }
 }

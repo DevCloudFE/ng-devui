@@ -1,5 +1,5 @@
 <section>
-  <h4>单选自定搜索方法</h4>
+  <h4>Single Selection Custom Search<!--单选自定搜索方法--></h4>
   <div class="row">
     <div class="col-md-5">
       <d-select
@@ -7,7 +7,7 @@
         [(ngModel)]="currentOption1"
         [searchFn]="onSelectObject"
         [isSearch]="true"
-        [searchPlaceholder]="'搜索我的选项'"
+        [searchPlaceholder]="'search options'"
       >
       </d-select>
     </div>
@@ -19,7 +19,7 @@
   </div>
 </section>
 <section>
-  <h4>多选自定搜索方法</h4>
+  <h4>Multiple Selection Custom Search<!--多选自定搜索方法--></h4>
   <div class="row">
     <div class="col-md-5">
       <d-select
@@ -28,9 +28,9 @@
         [searchFn]="onSelectObject"
         [isSearch]="true"
         [multiple]="true"
-        [searchPlaceholder]="'搜索我的选项'"
+        [searchPlaceholder]="'search options'"
         [ngModelOptions]="{ updateOn: 'blur' }"
-        [dValidateRules]="[{ minlength: 3, message: '请至少选择三个选项' }]"
+        [dValidateRules]="[{ minlength: 3, message: 'at least select 3 options' }]"
       >
       </d-select>
     </div>

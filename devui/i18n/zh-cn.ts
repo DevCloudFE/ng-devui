@@ -13,6 +13,9 @@ export default {
     btnClickMe: '点击我',
     copied: '复制成功'
   },
+  autoComplete: {
+    latestInput: '最近输入'
+  },
   datePicker: {
     today: '今天',
     clear: '清除',
@@ -63,11 +66,47 @@ export default {
       return '值不能全为空格';
     }
   },
+  gantt: {
+    today: '今天',
+    monthsOfYear: [
+      '1月',
+      '2月',
+      '3月',
+      '4月',
+      '5月',
+      '6月',
+      '7月',
+      '8月',
+      '9月',
+      '10月',
+      '11月',
+      '12月'
+    ],
+    yearDisplay(year) {
+      return `${year}年`;
+    },
+    monthDisplay(strMonthIndex: string) {
+      return this.monthsOfYear[Number(strMonthIndex) - 1];
+    },
+    yearAndMonthDisplay(year: string, strMonthIndex: string) {
+      return this.yearDisplay(year) + this.monthDisplay(strMonthIndex);
+    },
+  },
   pagination: {
     totalItem: '所有条目',
     goTo: '跳至',
     pageSize: '每页条数',
     page: '页',
+  },
+  quadrant: {
+    xAxisLabel: '紧急度',
+    yAxisLabel: '重要度',
+    defaultTitleConf: [
+      { title: '重要紧急' },
+      { title: '重要不紧急' },
+      { title: '不重要不紧急' },
+      { title: '不重要紧急' }
+    ]
   },
   upload: {
     warning: '提醒',
@@ -135,20 +174,36 @@ export default {
     expand: '展开'
   },
   relativeTime: {
-    yearsAgo: '年前',
-    monthsAgo: '个月前',
-    weeksAgo: '周前',
-    daysAgo: '天前',
+    yearsAgo(num: number) {
+      return num === 1 ?  '去年' : `${num}年前`;
+    },
+    monthsAgo(num: number) {
+      return num === 1 ? '上个月' : `${num}个月前`;
+    } ,
+    weeksAgo(num: number) {
+      return num === 1 ? '上周' : `${num}周前`;
+    },
+    daysAgo(num: number) {
+      return num === 1 ? '昨天' : `${num}天前`;
+    },
+    daysLater(num: number) {
+      return num === 1 ? '明天' : `${num}天后`;
+    },
+    weeksLater(num: number) {
+      return num === 1 ? '下周' : `${num}周后`;
+    },
+    monthsLater(num: number) {
+      return num === 1 ? '下个月' : `${num}个月后`;
+    },
+    yearsLater(num: number) {
+      return num === 1 ? '明年' : `${num}年后`;
+    },
     hoursAgo: '小时前',
     minutesAgo: '分钟前',
     justnow: '刚刚',
     later: '稍后',
     minutesLater: '分钟后',
     hoursLater: '小时后',
-    daysLater: '天后',
-    weeksLater: '周后',
-    monthsLater: '个月后',
-    yearsLater: '年后',
   },
   tagsInput: {
     tagsReachMaxLength: '您输入的标签已达到最大长度限制',

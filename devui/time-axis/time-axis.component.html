@@ -1,5 +1,5 @@
 <table
-  *ngIf="data.position"
+  *ngIf="data.position && data.direction !== 'horizontal'"
   [attr.class]="'devui-time-axis ' + data.position"
   [style.margin-left.px]="bottomPositionMarginLeft"
   [style.margin-right.px]="-bottomPositionMarginLeft"
@@ -50,14 +50,34 @@
   </tr>
 </table>
 
-<table class="devui-time-axis devui-time-axis-h" *ngIf="data.direction == 'horizontal' && (data.model == '' || data.model == 'text')">
-  <tr>
+<table class="devui-time-axis devui-time-axis-h" *ngIf="data.direction == 'horizontal'">
+  <tr *ngIf="data.model == '' || data.model == 'text'">
     <td
+      *ngFor="let listObj of data.list"
       class="devui-time-axis-text"
       class="{{ listObj.type }} {{ listObj.status }}  {{ listObj.iconClass }}"
-      *ngFor="let listObj of data.list"
     >
       {{ listObj.text }}
+    </td>
+  </tr>
+  <tr *ngIf="data.model === 'html'">
+    <td
+      class="devui-time-axis-text"
+      *ngFor="let listObj of data.list"
+      class="{{ listObj.type }} {{ listObj.status }}  {{ listObj.iconClass }}"
+      [innerHTML]="listObj.text | safe: 'html'"
+    ></td>
+  </tr>
+  <tr *ngIf="data.model === 'template'">
+    <td
+      class="devui-time-axis-text"
+      *ngFor="let listObj of data.list; let index = index"
+      class="{{ listObj.type }} {{ listObj.status }}  {{ listObj.iconClass }}"
+    >
+      <ng-template
+        [ngTemplateOutlet]="contentTemplate ? contentTemplate : default"
+        [ngTemplateOutletContext]="{ $implicit: this, index: index, data: listObj.data }"
+      ></ng-template>
     </td>
   </tr>
 </table>

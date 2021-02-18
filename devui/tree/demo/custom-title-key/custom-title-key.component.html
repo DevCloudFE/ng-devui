@@ -1,13 +1,11 @@
-<section>
-  <h4>Basic Tree</h4>
-  <d-operable-tree
-    [tree]="data1"
-    [treeNodeTitleKey]="'name'"
-    [treeNodeIdKey]="'id'"
-    [treeNodeChildrenKey]="'children'"
-    [checkboxDisabledKey]="'checkboxDisabled'"
-    (nodeDblClicked)="onOperableNodeDblClicked($event)"
-    (nodeRightClicked)="onOperableNodeRightClicked($event)"
-  >
-  </d-operable-tree>
-</section>
+<h4>Basic Tree</h4>
+<d-operable-tree
+  [tree]="data1"
+  [treeNodeTitleKey]="'name'"
+  [treeNodeIdKey]="'id'"
+  [treeNodeChildrenKey]="'children'"
+  [checkboxDisabledKey]="'checkboxDisabled'"
+  (nodeDblClicked)="onOperableNodeDblClicked($event)"
+  (nodeRightClicked)="onOperableNodeRightClicked($event)"
+>
+</d-operable-tree>

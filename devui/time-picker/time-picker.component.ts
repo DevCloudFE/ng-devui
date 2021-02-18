@@ -18,10 +18,17 @@ import {
   ViewContainerRef
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
-import { AppendToBodyDirection, AppendToBodyDirectionsConfig, cornerFadeInOut, unshiftString } from 'ng-devui/utils';
-import { fromEvent, Observable, Subscription, } from 'rxjs';
+import {
+  addClassToOrigin,
+  AppendToBodyDirection,
+  AppendToBodyDirectionsConfig,
+  fadeInOut,
+  formWithDropDown,
+  removeClassFromOrigin,
+  unshiftString
+} from 'ng-devui/utils';
+import { fromEvent, Observable, Subscription } from 'rxjs';
 import { debounceTime, filter, map } from 'rxjs/operators';
 
 interface TimeObj {
@@ -41,7 +48,7 @@ interface TimeObj {
   exportAs: 'timePicker',
   templateUrl: 'time-picker.component.html',
   animations: [
-    cornerFadeInOut
+    fadeInOut
   ],
   styleUrls: ['./time-picker.component.scss']
 })
@@ -54,6 +61,7 @@ export class TimePickerComponent implements OnChanges, OnInit, OnDestroy, Contro
   @Input() autoOpen = false;
   origin: CdkOverlayOrigin | undefined; // 暂不开放
   splitter = ':'; // 暂不开放
+  startAnimation = false;
   @Output() selectedTimeChange = new EventEmitter<string>();
   @ViewChild('timePicker') timePicker;
   public cdkConnectedOverlayOrigin: any;
@@ -110,7 +118,7 @@ export class TimePickerComponent implements OnChanges, OnInit, OnDestroy, Contro
   }
 
   @Input() set format(format) {
-    if (this._format !== format) {
+    if (this._format !== format && format) {
       this._format = format.toLocaleLowerCase();
       this.firstList.length = 0;
       this.secondList.length = 0;
@@ -138,16 +146,9 @@ export class TimePickerComponent implements OnChanges, OnInit, OnDestroy, Contro
     if (this._isOpen !== open) {
       this._isOpen = open;
       if (!open) {
-        const ele = this.formWithDropDown();
-        if (ele && ele.classList.contains('devui-dropdown-origin-open')) {
-          ele.classList.remove('devui-dropdown-origin-open');
-        }
-        if (ele && ele.classList.contains('devui-dropdown-origin-top')) {
-          ele.classList.remove('devui-dropdown-origin-top');
-        }
-        if (ele && ele.classList.contains('devui-dropdown-origin-bottom')) {
-          ele.classList.remove('devui-dropdown-origin-bottom');
-        }
+        this.startAnimation = false;
+        removeClassFromOrigin(this.elementRef);
+        document.removeEventListener('click', this.onDocumentClick);
       } else {
         if (this.timePickerWidth !== undefined) {
           this.originWidth = this.timePickerWidth;
@@ -156,12 +157,17 @@ export class TimePickerComponent implements OnChanges, OnInit, OnDestroy, Contro
           if (this.origin) {
             currentOrigin = this.origin;
           } else if (this.elementRef.nativeElement) {
-            currentOrigin = this.formWithDropDown() || this.elementRef.nativeElement;
+            currentOrigin = formWithDropDown(this.elementRef) || this.elementRef.nativeElement;
           }
           if (currentOrigin) {
             this.originWidth = currentOrigin.offsetWidth;
           }
         }
+        setTimeout(() => {
+          this.startAnimation = true;
+          document.addEventListener('click', this.onDocumentClick);
+        });
+        addClassToOrigin(this.elementRef);
       }
     }
   }
@@ -229,7 +235,7 @@ export class TimePickerComponent implements OnChanges, OnInit, OnDestroy, Contro
     this.setI18nText();
     this.updateCdkConnectedOverlayOrigin();
     if (this.autoOpen) {
-      this.isOpen = true;
+      this.toggle(true);
     }
     this.valueChanges = this.registerInputEvent();
     this.userInputSubscription = this.valueChanges.subscribe((source) => this.transUserInputToTimePicker(source));
@@ -270,26 +276,79 @@ export class TimePickerComponent implements OnChanges, OnInit, OnDestroy, Contro
     );
   }
 
+  isMinuteInRange(minute: string) {
+    const curTime = this.elementRef.nativeElement.value;
+    const hourIndex = this.format.split(':').findIndex(t => t === 'hh');
+    const curHour = hourIndex !== -1 ? curTime.split(':')[hourIndex] : null;
+
+    // 不存在小时时直接依据最值判定
+    if (!curHour) {
+      return minute <= this._maxTimeMin && minute >= this._minTimeMin;
+    }
+
+    // 存在小时时，依据小时是否在临界点进行判断
+    if (curHour < this._maxTimeHour && curHour > this._minTimeHour) {
+      return true;
+    } else if (curHour === this._maxTimeHour) {
+      return minute <= this._maxTimeMin;
+    } else if (curHour === this._minTimeHour) {
+      return minute >= this._minTimeMin;
+    } else {
+      return true;
+    }
+  }
+
+  isSecondInRange(second: string) {
+    const curTime = this.elementRef.nativeElement.value;
+    const hourIndex = this.format.split(':').findIndex(t => t === 'hh');
+    const minIndex = this.format.split(':').findIndex(t => t === 'mm');
+    const curHour = hourIndex !== -1 ? curTime.split(':')[hourIndex] : null;
+    const curMin = minIndex !== -1 ? curTime.split(':')[minIndex] : null;
+
+    // 当不存在分钟时，直接依据最值判定
+    if (!curMin) {
+      return second <= this._maxTimeSec && second >= this._minTimeSec;
+    }
+
+    // 当存在分钟时，依据分钟是否在临界点进行判断
+    if (this.isMinuteInRangeNotBoundary(curHour, curMin)) {
+      return true;
+    } else if (curMin === this._maxTimeMin) {
+      return second <= this._maxTimeSec;
+    } else if (curMin === this._minTimeMin) {
+      return second >= this._minTimeSec;
+    } else {
+      return true;
+    }
+  }
+
+  // 判断当前的分钟是否在范围内但不在边界上
+  isMinuteInRangeNotBoundary(hour: string, min: string): boolean {
+    return (hour && hour < this._maxTimeHour && hour > this._minTimeHour) // 小时在范围内
+      || (min < this._maxTimeMin && min > this._minTimeMin); // 分钟在范围内
+  }
+
   validateTime(time: string, type?: string) {
     if (!time && time !== '') {
       return false;
     }
     const timeArr = time.split(':');
     if (type && timeArr.length === 1) {
-      let curType;
+      let valid;
       switch (type) {
         case 'hh':
-          curType = 'Hour';
+          valid = (time <= this._maxTimeHour && time >= this._minTimeHour);
           break;
         case 'mm':
-          curType = 'Min';
+          valid = this.isMinuteInRange(time);
           break;
         case 'ss':
-          curType = 'Sec';
+          valid = this.isSecondInRange(time);
           break;
       }
-      return time <= this[`_maxTime${curType}`] && time >= this[`_minTime${curType}`];
+      return valid;
     }
+
     if (timeArr.length !== 3) {
       if (timeArr.length === this.format.split(':').length) {
         return true;
@@ -322,7 +381,7 @@ export class TimePickerComponent implements OnChanges, OnInit, OnDestroy, Contro
     if (this.origin) {
       currentOrigin = this.origin;
     } else if (this.elementRef.nativeElement) {
-      currentOrigin = this.formWithDropDown() || this.elementRef.nativeElement;
+      currentOrigin = formWithDropDown(this.elementRef) || this.elementRef.nativeElement;
     }
     this.cdkConnectedOverlayOrigin = new CdkOverlayOrigin(currentOrigin);
   }
@@ -335,27 +394,16 @@ export class TimePickerComponent implements OnChanges, OnInit, OnDestroy, Contro
         this.isOpen = !this.isOpen;
       }
     } else {
-      this.isOpen = clickShow;
+      if (this.disabled) {
+        this.isOpen = false;
+      } else {
+        this.isOpen = clickShow;
+      }
     }
   }
 
   hide = () => {
     this.isOpen = false;
-  }
-
-  formWithDropDown() {
-    if (this.elementRef) {
-      if (!this.elementRef.nativeElement.classList.contains('devui-dropdown-origin')) {
-        const parentEle = this.elementRef.nativeElement.parentElement;
-        if (parentEle && parentEle.classList.contains('devui-dropdown-origin')) {
-          return this.elementRef.nativeElement.parentElement;
-        } else {
-          return;
-        }
-      } else {
-        return this.elementRef.nativeElement;
-      }
-    }
   }
 
   private writeModelValue(selectTimeObj: any, noEmit = false) {
@@ -380,29 +428,6 @@ export class TimePickerComponent implements OnChanges, OnInit, OnDestroy, Contro
         break;
       case 'bottom':
         this.timePickerPosition = 'top';
-    }
-    this.changeAppendToBodyFormDropDownDirection(position.connectionPair.overlayY);
-  }
-
-  changeAppendToBodyFormDropDownDirection(position) {
-    const ele = this.formWithDropDown();
-    const menuEle = this.timePicker && this.timePicker.nativeElement;
-    let formBorder;
-    if (ele && !ele.classList.contains('devui-dropdown-origin-open')) {
-      ele.classList.add('devui-dropdown-origin-open');
-    }
-    if (position === 'bottom') {
-      formBorder = 'top';
-    } else {
-      formBorder = 'bottom';
-    }
-    if (ele && !ele.classList.contains(`devui-dropdown-origin-${formBorder}`)) {
-      ele.classList.add(`devui-dropdown-origin-${formBorder}`);
-      ele.classList.remove(`devui-dropdown-origin-${position}`);
-    }
-    if (menuEle && !menuEle.classList.contains(`devui-dropdown-cdk-${formBorder}`)) {
-      menuEle.classList.add(`devui-dropdown-cdk-${formBorder}`);
-      menuEle.classList.remove(`devui-dropdown-cdk-${position}`);
     }
   }
 
@@ -495,12 +520,25 @@ export class TimePickerComponent implements OnChanges, OnInit, OnDestroy, Contro
         }
       );
     }
+    if (!this.disabled) {
+      this.fixTimeInRange(this[`${whichList}List`]);
+    }
+  }
+
+  // 当存在值选中的是不可选选项时，进行修正
+  fixTimeInRange(list) {
+    const curActive = list.find(item => item.active);
+    if (curActive.disabled) {
+      this.selectTime(list.find(item => !item.disabled));
+    }
   }
 
   setScroll(whichList, index, justScroll?) {
     const scroll = (24 + 8) * index;
     const duration = justScroll ? 0 : 150;
-    this.scrollTo(this.timePicker.nativeElement.querySelector(`.devui-${whichList}-list`), scroll, duration);
+    if (this.timePicker) {
+      this.scrollTo(this.timePicker.nativeElement.querySelector(`.devui-${whichList}-list`), scroll, duration);
+    }
   }
 
   scrollTo(element: HTMLElement, to: number, duration: number): void {
@@ -524,15 +562,8 @@ export class TimePickerComponent implements OnChanges, OnInit, OnDestroy, Contro
   }
 
   animationEnd(event) {
-    if (this.isOpen) {
+    if (this.isOpen && event.toState !== 'void') {
       this.setTimeArr(true);
-      document.addEventListener('click', this.onDocumentClick);
-    } else {
-      if (this.timePicker && this.timePicker.nativeElement) {
-        this.timePicker.nativeElement.classList.remove(`devui-dropdown-cdk-top`);
-        this.timePicker.nativeElement.classList.remove(`devui-dropdown-cdk-bottom`);
-      }
-      document.removeEventListener('click', this.onDocumentClick);
     }
   }
 

@@ -134,9 +134,18 @@
       </span>
       <div class="devui-toast-message">
         <span *ngIf="!!msg.summary" class="devui-toast-title">{{ msg.summary }}</span>
-        <p *ngIf="msg.detail" [innerHTML]="msg.detail | safe: 'html'"></p>
+        <ng-template
+          *ngIf="msg.content; else detailTemplate"
+          [ngTemplateOutlet]="isTemplate(msg.content) || plainText"
+          [ngTemplateOutletContext]="{ msg: msg }"
+        ></ng-template>
+        <ng-template #plainText>
+          <p>{{ msg.content }}</p>
+        </ng-template>
+        <ng-template #detailTemplate>
+          <p *ngIf="msg.detail" [innerHTML]="msg.detail | safe: 'html'"></p>
+        </ng-template>
       </div>
-      <div style="clear: both"></div>
     </div>
   </div>
 </div>

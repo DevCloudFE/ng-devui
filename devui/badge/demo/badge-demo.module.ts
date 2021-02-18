@@ -10,7 +10,9 @@ import { BadgeModule } from '../badge.module';
 import { BadgeDemoComponent } from './badge-demo.component';
 import { BasicComponent } from './basic/basic.component';
 import { CountComponent } from './count/count.component';
+import { CustomComponent } from './custom/custom.component';
 import { DotComponent } from './dot/dot.component';
+import { PositionComponent } from './position/position.component';
 import { StatusComponent } from './status/status.component';
 
 @NgModule({
@@ -35,7 +37,9 @@ import { StatusComponent } from './status/status.component';
     BasicComponent,
     DotComponent,
     CountComponent,
-    StatusComponent
+    StatusComponent,
+    PositionComponent,
+    CustomComponent
   ]
 })
 export class BadgeDemoModule { }

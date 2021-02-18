@@ -1,9 +1,23 @@
-## Accordion 使用说明
+# 如何使用
+
+在 module 中引入：
+
+```typescript
+import { AccordionModule } from 'ng-devui/accordion';
+```
+
+在页面中使用:
+
+```html
+<d-accordion [data]="data"></d-accordion>
+```
+
+## Accordion
 
 ### d-accordion 参数
 
-|        参数        |                         类型                          |    默认    |                                                                                                                  说明                                                                                                                  | 跳转 Demo                                                                            |
-| :----------------: | :---------------------------------------------------: | :--------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | ------------------------------------------------------------------------------------ |
+|        参数        |                         类型                          |    默认    |                                                                                                                  说明                                                                                                                  | 跳转 Demo                                                      |
+| :----------------: | :---------------------------------------------------: | :--------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | -------------------------------------------------------------- |
 |        data        |           `Array<any> \| AccordionMenuType`           |     --     |                                                                                     必选，数据源，可以自定义数组或者使用预设的`AccordionMenuType`                                                                                      | [基本用法](demo#basic-usage)                                   |
 |      titleKey      |                       `string`                        |  'title'   |                                                                                    可选，标题的属性名，item[titleKey]类型为`string`，为标题显示内容                                                                                    | [改变键值](demo#change-values)                                 |
 |     loadingKey     |                       `string`                        | 'loading'  |                                                                                  可选，子菜单是否加载中的判断属性名，item[loadingKey]类型为`boolean`                                                                                   | [改变键值](demo#change-values)                                 |
@@ -24,14 +38,15 @@
 | linkDefaultTarget  |                       `string`                        |  '\_self'  |                                                                   可选，不设置 target 的时候 target 默认值为`'_self'`，用于链接类型, 取值等同于 a 链接的 target 属性                                                                   | [内置路由和链接类型](demo#use-built-in-routing-and-link-types) |
 | autoOpenActiveMenu |                       `boolean`                       |   false    |                                                                                                  可选，是否自动展开带有活跃子项的菜单                                                                                                  | [复合层级和自动展开](demo#compound-level-and-auto-expand)      |
 |   accordionType    |                  `'normal'\|'embed'`                  |  'normal'  |                                                                                           可选，菜单形式是普通（带阴影）还是内嵌（不带阴影）                                                                                           | [基本用法](demo#basic-usage)                                   |
+|   showAnimation    |    `boolean`                  |           true         |   可选，是否展示动画         | [内置路由和链接类型](demo#use-built-in-routing-and-link-types)   |
 
 ### d-accordion 事件
 
-|        事件        |                   类型                   |                                                                            说明                                                                            | 跳转 Demo                                          |
-| :----------------: | :--------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------: | -------------------------------------------------- |
-|    (menuToggle)    | `EventEmitter<AccordionMenuToggleEvent>` | 可选，可展开菜单展开事件，返回对象里属性 item 为点击的对象数据，open 为 true 则将要展开 false 则将要关闭， parent 为父对象数据，event 为点击事件的原生事件 | [基本用法](demo#basic-usage) |
-|    (itemClick)     | `EventEmitter<AccordionItemClickEvent>`  |     可选，可点击菜单点击事件，返回对象里属性 item 为点击的对象数据，preActive 对象为上一次展开的对象， parent 为父对象数据，event 为点击事件的原生事件     | [基本用法](demo#basic-usage) |
-| (activeItemChange) |           `EventEmitter<any>`            |                                                        可选，子项切换的时候会发出新激活的子项的数据                                                        | [基本用法](demo#basic-usage) |
+|       事件       |                                   类型                                    |                                                                            说明                                                                            | 跳转 Demo                    |
+| :--------------: | :-----------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------: | ---------------------------- |
+|    menuToggle    | `EventEmitter<`[`AccordionMenuToggleEvent`](#accordionmenutoggleevent)`>` | 可选，可展开菜单展开事件，返回对象里属性 item 为点击的对象数据，open 为 true 则将要展开 false 则将要关闭， parent 为父对象数据，event 为点击事件的原生事件 | [基本用法](demo#basic-usage) |
+|    itemClick     |  `EventEmitter<`[`AccordionItemClickEvent`](#accordionitemclickevent)`>`  |     可选，可点击菜单点击事件，返回对象里属性 item 为点击的对象数据，preActive 对象为上一次展开的对象， parent 为父对象数据，event 为点击事件的原生事件     | [基本用法](demo#basic-usage) |
+| activeItemChange |                            `EventEmitter<any>`                            |                                                        可选，子项切换的时候会发出新激活的子项的数据                                                        | [基本用法](demo#basic-usage) |
 
 ### AccordionMenuType 定义
 
@@ -65,19 +80,6 @@ export interface AccordionMenuItem extends AccordionBase, IAccordionActiveable, 
 
 export type AccordionMenuType = Array<AccordionMenuItem>;
 
-/* 基础事件类型 */
-export type AccordionMenuToggleEvent = {
-  item: any;
-  open: boolean;
-  parent: any;
-  event: MouseEvent;
-};
-export type AccordionItemClickEvent = {
-  item: any;
-  prevActiveItem?: any;
-  parent: any;
-  event: MouseEvent;
-};
 /* 通用公共配置数据类型 */
 interface AccordionMenuKeyGroup {
   titleKey?: string;
@@ -104,6 +106,28 @@ interface AccordionConfigOptions {
   linkType: 'routerLink' | 'hrefLink' | 'dependOnLinkTypeKey' | '';
 }
 export interface AccordionOptions extends AccordionConfigOptions, AccordionMenuKeyGroup, AccordionTemplateRefGroup {}
+```
+
+## AccordionMenuToggleEvent
+
+``` typescript
+export type AccordionMenuToggleEvent = {
+  item: any;
+  open: boolean;
+  parent: any;
+  event: MouseEvent;
+};
+```
+
+## AccordionItemClickEvent
+
+``` typescript
+export type AccordionItemClickEvent = {
+  item: any;
+  prevActiveItem?: any;
+  parent: any;
+  event: MouseEvent;
+};
 ```
 
 ### 模板可以用变量值

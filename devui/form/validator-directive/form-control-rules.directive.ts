@@ -1,16 +1,45 @@
-import { Directive, Host, Input, OnChanges, Optional, Self, SimpleChanges } from '@angular/core';
-import { ComponentFactoryResolver, ComponentRef, ElementRef, OnDestroy, OnInit, Output, SkipSelf } from '@angular/core';
-import { EventEmitter } from '@angular/core';
-import { AbstractControl, AbstractControlDirective, AsyncValidatorFn, NgControl, ValidatorFn } from '@angular/forms';
-import { ControlContainer, ValidationErrors } from '@angular/forms';
+import {
+  ComponentFactoryResolver,
+  ComponentRef,
+  Directive,
+  ElementRef,
+  EventEmitter,
+  Host,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  Optional,
+  Output,
+  Self,
+  SimpleChanges,
+  SkipSelf
+} from '@angular/core';
+import {
+  AbstractControl,
+  AbstractControlDirective,
+  AsyncValidatorFn,
+  ControlContainer,
+  NgControl,
+  ValidationErrors,
+  ValidatorFn
+} from '@angular/forms';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { OverlayContainerRef } from 'ng-devui/overlay-container';
 import { PopoverComponent } from 'ng-devui/popover';
-import { fromEvent, merge, Observable, Subject, Subscription, timer } from 'rxjs';
+import { fromEvent, merge, Observable, Subject, timer } from 'rxjs';
 import { map, switchMap, takeUntil } from 'rxjs/operators';
 import { FormItemComponent } from '../form-item.component';
-import { DAsyncValidateRule, dDefaultValidators, DFormControlStatus, DValidateErrorStatus } from './validate.type';
-import { DValidateRule, DValidateRules, DValidationErrorStrategy, ruleReservedWords } from './validate.type';
+import {
+  DAsyncValidateRule,
+  dDefaultValidators,
+  DFormControlStatus,
+  DValidateErrorStatus,
+  DValidateRule,
+  DValidateRules,
+  DValidationErrorStrategy,
+  ruleReservedWords
+} from './validate.type';
 
 @Directive()
 export abstract class DAbstractControlRuleDirective implements OnChanges {
@@ -498,13 +527,8 @@ export class DFormControlRuleDirective extends DAbstractControlRuleDirective imp
   _updatePopMessage(status: DFormControlStatus, message: string): void {
     this.popMessage = status === 'error' ? message : null; // 暂不提供除errorMessage外提示
     if (this.popoverComponentRef) {
-      this.popoverComponentRef.instance.content = message;
-      setTimeout(() => {
-        // TODO: popover使用onPush后，可去除当前setTimeout
-        if (this.popoverComponentRef) {
-          this.popoverComponentRef.instance.updatePositionAndDetectChange();
-        }
-      });
+      this.hidePopMessage();
+      this.showPopMessage();
     }
   }
 

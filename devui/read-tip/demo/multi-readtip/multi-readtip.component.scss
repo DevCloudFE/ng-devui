@@ -1,0 +1,34 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
+.readtip-container {
+  padding: 10px;
+  background-color: $devui-area;
+}
+
+.first-content {
+  color: $devui-brand;
+  font-weight: bold;
+  margin-bottom: 4px;
+  cursor: pointer;
+}
+
+.second-content {
+  color: $devui-brand-active;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.third-content {
+  color: $devui-brand-foil;
+
+  &:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}
+
+.data-display {
+  color: $devui-link-light;
+  font-weight: bold;
+  cursor: pointer;
+}

@@ -112,7 +112,8 @@ export class CascaderLiComponent implements OnInit, OnDestroy {
   updateValue(checked: boolean): void {
     this.cascaderSrv.updateTagList.next({
       isAdd: checked,
-      option: this.option
+      option: this.option,
+      isEmit: true
     });
   }
 

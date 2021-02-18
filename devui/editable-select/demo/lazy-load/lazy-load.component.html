@@ -1,11 +1,10 @@
-<section>
-  <d-editable-select
-    [source]="languages"
-    [maxHeight]="300"
-    [(ngModel)]="selectItem"
-    [enableLazyLoad]="true"
-    (loadMore)="loadMore($event)"
-    name="multiple-auto"
-  >
-  </d-editable-select>
-</section>
+<d-editable-select
+  [source]="languages"
+  [maxHeight]="300"
+  [(ngModel)]="selectItem"
+  [enableLazyLoad]="true"
+  (loadMore)="loadMore($event)"
+  name="multiple-auto"
+  placeholder="Search"
+>
+</d-editable-select>

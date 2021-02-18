@@ -16,7 +16,7 @@ export class BasicComponent {
   openDrawer() {
     this.results = this.drawerService.open({
       drawerContentComponent: DrawerContentComponent,
-      width: '50%',
+      width: '300px',
       zIndex: 1000,
       isCover: true,
       fullScreen: true,
@@ -58,7 +58,6 @@ export class BasicComponent {
         width: '300px',
         zIndex: 1050,
         maxHeight: '600px',
-        showAnimate: false,
         title: 'Close?',
         content: 'Are you sure to Close?',
         backdropCloseable: false,
@@ -66,7 +65,7 @@ export class BasicComponent {
         buttons: [
           {
             cssClass: 'stress',
-            text: '确定',
+            text: 'Ok',
             handler: ($event: Event) => {
               results.modalInstance.hide();
               resolve(true);
@@ -75,7 +74,7 @@ export class BasicComponent {
           {
             id: 'btn-cancel',
             cssClass: 'common',
-            text: '取消',
+            text: 'Cancel',
             handler: ($event: Event) => {
               results.modalInstance.hide();
               resolve(false);

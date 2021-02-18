@@ -1,4 +1,20 @@
-### d-data-table parameter
+# How to use
+
+Import the following information into the module:
+
+```ts
+import {DataTableModule} from' ng-devui/data-table';
+```
+
+On the page:
+
+```html
+<d-data-table></d-data-table>
+```
+
+# d-data-table
+
+## d-data-table parameter
 | Parameter name | Type | Default value | Description | Jump to Demo |
 | :-------------------: | :---------------------------: | :----- | :----------------------------------------------------------------------------------------------: | ---------------------------------------------------------------------- |
 | dataSource | `any[]` | -- | Required. Data source, used to render table data | [Basic usage](demo#basic-usage) |
@@ -13,36 +29,37 @@
 | tableWidth | `string` | 100% | Optional. Table width |
 | tableHeight | `string` | -- | Optional. Table height. The value 100% depends on the height of the table parent container. | [Virtual scrolling](demo#virtual-scroll) |
 | containFixHeaderHeight | `boolean` | false | Optional. whether the height specified by the fixed header includes the height of the header, the height set by tableHeight is the height of the table body by default | [Fixed table header virtual scrolling](demo#fixed-virtual-scroll) |
-| checkableRelation | `CheckableRelation` | -- | Optional. This parameter specifies whether the parent and child selections in the tree table are associated. | [Tree table](demo#tree-form) |
+| checkableRelation | [`CheckableRelation`](#checkablerelation) | -- | Optional. This parameter specifies whether the parent and child selections in the tree table are associated. | [Tree table](demo#tree-form) |
 | loadChildrenTable | `Promise` | -- | Optional. It is the callback of subtable expansion, which is used to asynchronously load subtables. | [Tree table](demo#tree-form) |
 | loadAllChildrenTable | `Promise` | -- | Optional. It is the callback for expanding all subtables in the table header. It is used to asynchronously load all subtables. | [Tree table](demo#tree-form) |
 | colDraggable | `boolean` | false | Optional. Whether columns can be dragged or sorted | [Column dragging](demo#column-dragging) |
 | colDropFreezeTo | `number` | 0 | Optional. The first n columns cannot be dragged when the table columns can be sorted. | [Column dragging](demo#column-dragging) |
 | virtualScroll | `boolean` | false | Optional. Specifies whether to enable virtual scrolling. | [Virtual scrolling](demo#virtual-scroll) |
-| virtualItemSize | `number` | 40 | Optional. Height of each row during virtual scrolling. The default value is 40px. | [Virtual scrolling](demo#virtual-scroll) |
+| virtualItemSize | `number` | 40 | Optional. Height of each row during virtual scrolling. The default value is 40`px`. | [Virtual scrolling](demo#virtual-scroll) |
 | virtualMinBufferPx | `number` | 80 | Optional. Minimum pixel height of the buffer during virtual scrolling. If the pixel height is less than this value, the new structure is loaded. | [Virtual scrolling](demo#virtual-scroll) |
 | virtualMaxBufferPx | `number` | 200 | Optional. Maximum pixel height of the buffer during virtual scrolling | [virtual scrolling](demo#virtual-scroll) |
-| tableWidthConfig | `TableWidthConfig[]` | [] | Optional. It is used to configure the column width of the table. | [Basic usage](demo#basic-usage) |
+| tableWidthConfig | [`TableWidthConfig[]`](#tablewidthconfig) | [] | Optional. It is used to configure the column width of the table. | [Basic usage](demo#basic-usage) |
 | checkable | `boolean` | -- | Optional. Whether the Datatable provides the function of selecting rows. | [Table interaction](demo#table-interaction) |
-| checkOptions | `TableCheckOptions[]` | -- | Optional. drop-down list box in the table header and operations | [Customized table selection](demo#table-check-options) |
+| checkOptions | [`TableCheckOptions[]`](#tablecheckoptions) | -- | Optional. drop-down list box in the table header and operations | [Customized table selection](demo#table-check-options) |
 | headerCheckDisabled | `boolean` | -- | Optional. Indicates whether the header checkbox is disabled. |
 | headerCheckVisible | `boolean` | true | Optional. Indicates whether the checkbox in the header is visible. |
 | showExpandToggle | `boolean` | -- |: Indicates whether to display extended rows. If the value is true, an operation button is generated before the row where extended rows are configured. | [Extended row](demo#expand-row) |
 | showSortIcon | `boolean` | true | Optional. Indicates whether to display the inactive sorting icon. The icon is displayed by default. | [Table interaction](demo#table-interaction) |
+| showOperationArea | `boolean` | false | Optional. Indicates whether to display the operation area when the table header operation is not activated. Not displayed by default. | [Table interaction](demo#table-interaction) |
 | hideColumn | `string[]` | -- | Optional. Used to hide columns |
 | pageAllChecked | `boolean` | -- | Optional. Select all rows on the current page. |
 | onlyOneColumnSort | `boolean` | -- | Optional. Whether to restrict the output of multi-column sorting to one item | [Table interaction](demo#table-interaction) |
-| multiSort | `SortEventArg` [] | [] | Optional. It is a multi-column selection array, which is used to guide the columns to be sorted. | [Table interaction](demo#table-interaction) |
+| multiSort | [`SortEventArg[]`](#sorteventarg) | [] | Optional. It is a multi-column selection array, which is used to guide the columns to be sorted. | [Table interaction](demo#table-interaction) |
 | resizeable | `boolean` | -- | Optional. Whether the column width can be adjusted by dragging. | [Table interaction](demo#table-interaction) |
-| timeout | `number` | 300 | Optional. This parameter is used to distinguish the click interval when the click and double-click events are bound at the same time. The default value is 300 ms. You can set this parameter to 0 when the two events are used at the same time. |
-| headerExpandConfig | `TableExpandConfig` | -- | Optional. Extra content under the header | [Extended line](demo#expand-row) |
+| timeout | `number` | 300 | Optional. This parameter is used to distinguish the click interval when the click and double-click events are bound at the same time. The default value is 300`ms`. You can set this parameter to 0 when the two events are used at the same time. |
+| headerExpandConfig | [`TableExpandConfig`](#tableexpandconfig) | -- | Optional. Extra content under the header | [Extended line](demo#expand-row) |
 | beforeCellEdit | `Promise` | -- | Optional. Interception method before cell editing. <br>resolve(extraOptions) updates extraOptions of the column. | [edit cell](demo#edit-cell) |
 | headerBg | `boolean` | false | Optional. Indicating whether to display the background color in the table header | [Table style](demo#mutil-styles) |
-| tableLayout | `fixed','auto'` | `fixed'` | Optional. Table layout | [Table style](demo#mutil-styles) |
-| borderType | `', 'bordered', 'borderless'` | ``` | Optional. Table border type. The default value is row border. The options are bordered (full border) and borderless (no border). | [Table style](demo#mutil-styles) |
+| tableLayout | `'fixed'\|'auto'` | 'fixed' | Optional. Table layout | [Table style](demo#mutil-styles) |
+| borderType | `''\|'bordered'\|'borderless'` | '' | Optional. Table border type. The default value is row border. The options are bordered (full border) and borderless (no border). | [Table style](demo#mutil-styles) |
 | striped | `boolean` | false | Optional. Whether to display the table with zebra stripes. | [Table style](demo#mutil-styles)                      |
 
-### d-data-table event
+## d-data-table event
 
 | Event | Type | Description | Jump to Demo |
 | :-------------------: | :------------------------------------: | :------------------------------------------------------: | :------------------------------------------------------: |
@@ -61,18 +78,18 @@
 | cellEditEnd | `EventEmitter<CellSelectedEventArg>` | Table cell editing end event. Cell information is returned. | [Edit cell](demo#edit-cell) |
 | tableScrollEvent | `EventEmitter<Event>` | Table Internal Rolling Event |
 
-### d-data-table public method
+## d-data-table public method
 
 | Method name | Parameter | Default value | Description | Jump to Demo |
 | :--------------------------: | :-----------------------: | :----- | :------------------------------------------------------------------: | :------------------------------------------------------: |
 | getCheckedRows | -- | -- | Obtain the data of the selected row. | [Table interaction](demo#table-interaction) |
-| setRowCheckStatus | `RowCheckChangeEventArg` | -- | Sets the selection status of a row, and can process the selection relationship between table headers and parent-child tables. | [Table interaction](demo#table-interaction) |
-| setTableCheckStatus | `TableCheckStatusArg` | -- | Sets the status of all or half selection of the current table. |
-| setRowChildToggleStatus | `RowToggleStatusEventArg` | -- | Sets the expanded or collapsed status of a subtable in a row. This command is invoked to process the selected status of the subtable in asynchronous loading mode. | [Tree table](demo#tree-form) |
+| setRowCheckStatus | [`RowCheckChangeEventArg`](#rowcheckchangeeventarg) | -- | Sets the selection status of a row, and can process the selection relationship between table headers and parent-child tables. | [Table interaction](demo#table-interaction) |
+| setTableCheckStatus | [`TableCheckStatusArg`](#tablecheckstatusarg) | -- | Sets the status of all or half selection of the current table. |
+| setRowChildToggleStatus | [`RowToggleStatusEventArg`](#RowToggleStatusEventArg) | -- | Sets the expanded or collapsed status of a subtable in a row. This command is invoked to process the selected status of the subtable in asynchronous loading mode. | [Tree table](demo#tree-form) |
 | setTableChildrenToggleStatus | `open: boolean` | -- | Sets the expansion and collapse status of all subtables in the current table. | [Tree table](demo#tree-form) |
 | cancelEditingStatus | -- | -- | Cancel the editing status of the cell being edited. | [Editing cell](demo#edit-cell) |
 
-### rowItem parameter (rowItem is the array element of dataSource. You can initialize the following fields to configure the table behavior.)
+## rowItem parameter (rowItem is the array element of dataSource. You can initialize the following fields to configure the table behavior.)
 
 | Parameter | Type | Default value | Description | Jump to Demo |
 | :---------------: | :-------: | :----- | :--------------------------: | :------------------------------------------------------: |
@@ -83,7 +100,9 @@
 | $checkDisabled | `boolean` | false | Optional. Whether to disable this row | [Table interaction](demo#table-interaction) |
 | $checkBoxTips | `string` | -- | Optional. Configure the checkbox prompt for this row. | [Table interaction](demo#table-interaction) |
 
-### dTableHead Parameter
+# dTableHead
+
+## dTableHead Parameter
 
 | Parameter name | Type | Default value | Description | Jump to Demo |
 | :-----------: | :-------------------: | :----- | :------------------------------------------------------------------: | :------------------------------------------------------------------- |
@@ -91,22 +110,23 @@
 | checkOptions | `TableCheckOptions[]` | -- | Optional. Drop-down list box in the table header and operations | [Customized table selection](demo#table-check-options) |
 | checkDisabled | `boolean` | -- | Optional. Indicates whether the header checkbox is disabled. |
 
-### dHeadCell Parameter
+## dHeadCell Parameter
 
 | Parameter name | Type | Default value | Description | Jump to Demo |
 | :------------------: | :----------------------------------------: | :----- | :-----------------------------------------------------------: | :------------------------------------------------------- |
 | resizeEnabled | `boolean` | -- | Optional. Whether the column width can be adjusted | [Table interaction](demo#table-interaction) |
-| maxWidth | `string px` | -- | Optional. Maximum width during width adjustment |
-| minWidth | `string px` | -- | Optional. Minimum width for adjusting the width. |
+| maxWidth | `string` | -- | Optional. Maximum width during width adjustment. Unit: `px`|
+| minWidth | `string` | -- | Optional. Minimum width for adjusting the width. Unit: `px`|
 | filterable | `boolean` | -- | Optional. Whether the column width can be filtered. | [Table interaction](demo#table-interaction) |
 | closeFilterWhenScroll | `boolean` | -- | Optional. Specifies whether to close the filter box when a table or body is scrolled. | [Table interaction](demo#table-interaction) |
 | customFilterTemplate | `TemplateRef` | -- | Optional. This parameter specifies the customized template for filtering pop-up boxes. | [Table interaction](demo#table-interaction) |
+| extraFilterTemplate | `TemplateRef` | -- | Optional. This parameter specifies the extra template for filtering pop-up boxes. | [Table interaction](demo#table-interaction) |
 | searchFn | `(term: string) => Observable<Array<any>>` | | Optional. The matching method of input keywords when filtering |
 | filterList | `array` | -- | Optional. Filter list. This parameter is mandatory when filterable is set to true. | [Table interaction](demo#table-interaction) |
 | filterMultiple | `boolean` | -- | Optional. Sets the column to be selected. true indicates that multiple choices are selected, and false indicates that only one choice is selected. | [Table interaction](demo#table-interaction) |
 | filterBoxWidth | `string` | -- | Optional. Width of the filter dialog box, for example, 300px. |
 | filterBoxHeight | `string` | -- | Optional. Height of the filter dialog box, for example, 400px. |
-| beforeFilter | `function, Promise, Observable` | -- | Optional. Callback function before the table filtering dialog box is displayed. If false is returned, the dialog box is blocked. | [Table interaction](demo#table-interaction) |
+| beforeFilter | `function\|Promise\|Observable` | -- | Optional. Callback function before the table filtering dialog box is displayed. If false is returned, the dialog box is blocked. | [Table interaction](demo#table-interaction) |
 | sortable | `boolean` | -- | Optional. Whether the column can be sorted | [Table interaction](demo#table-interaction) |
 | sortDirection | `SortDirection` | -- | Optional. Sets the sorting status of the column. | [Table interaction](demo#table-interaction) |
 | nestedColumn | `boolean` | -- | Optional. Indicates whether to display the expand or collapse icon of the table header in the tree table. | [Tree table](demo#tree-form) |
@@ -115,7 +135,7 @@
 | fixedLeft | `string` | -- | Optional. The value is fixed to the left of the column, for example, 100px. | [Fixed column](demo#fixed-column) |
 | fixedRight | `string` | -- | Optional. The value is fixed to the right of the column, for example, 100px | [fixed column](demo#fixed-column) |
 
-### dHeadCell Event
+## dHeadCell Event
 
 | Event | Type | Description | Jump to Demo |
 | :----------------------: | :-----------------: | :-------------------------------------------------: | :------------------------------------------------------- |
@@ -126,17 +146,19 @@
 | resizeEndEvent | `{width: string}` | Event when the column width adjustment ends | [Table interaction](demo#table-interaction) |
 | toggleChildrenTableEvent | `boolean` | Event for expanding and collapsing all subtables. The value true indicates expanding, and the value false indicates collapse. |
 
-### dTableCell Parameter
+# dTableCell
+
+## dTableCell Parameter
 
 | Parameter name | Type | Default value | Description | Jump to Demo |
 | :-------------: | :-----------------------------: | :----- | :------------------------------------------------------------: | :------------------------------------------------- |
 | editable | `boolean` | -- | Optional. Whether a cell can be edited | [edit cell](demo#edit-cell) |
-| editableTip | `hover', 'btn'` | -- | Optional. This parameter indicates the editing prompt. The background color of the hover changes. The edit button is displayed in the btn. | [edit cell](demo#edit-cell) |
+| editableTip | `'hover'\|'btn'` | -- | Optional. This parameter indicates the editing prompt. The background color of the hover changes. The edit button is displayed in the btn. | [edit cell](demo#edit-cell) |
 | nestedColumn | `boolean` | -- | Optional. Display the expansion and collapse icons when the row in the tree table contains subtables. | [Tree table](demo#tree-form) |
 | nestedLayer | `number` | | Layer in a tree table. This parameter is mandatory when nestedColumn is set to true. | [Tree table](demo#tree-form) |
 | rowItem | `array` | -- | Row data. This parameter is mandatory when nestedColumn is set to true and can also be used as the callback parameter for cell editing. | [Tree table](demo#tree-form) |
-| beforeEditStart | `function, Promise, Observable` | -- | Optional. Callback before the cell starts editing. If false is returned, the cell starts editing. | [Edit cell](demo#edit-cell) |
-| beforeEditEnd | `function, Promise, Observable` | -- | Optional. Callback function before the cell edit ends. If false is returned, the cell edit stops. | [Edit cell](demo#edit-cell) |
+| beforeEditStart | `function\|Promise\|Observable` | -- | Optional. Callback before the cell starts editing. If false is returned, the cell starts editing. | [Edit cell](demo#edit-cell) |
+| beforeEditEnd | `function\|Promise\|Observable` | -- | Optional. Callback function before the cell edit ends. If false is returned, the cell edit stops. | [Edit cell](demo#edit-cell) |
 | iconFoldTable | `DOMString` | -- | Optional. Customize the collapse icon of the tree table | [Tree table](demo#tree-form) |
 | iconUnFoldTable | `DOMString` | -- | Optional. Customize the expansion icon of the tree table | [Tree table](demo#tree-form) |
 | fixedLeft | `string` | -- | Optional. The value is fixed to the left of the column, for example, 100px. | [Fixed column](demo#fixed-column) |
@@ -144,7 +166,7 @@
 | editing | `boolean` | -- | Optional. Use [(editing)] to obtain and control the cell editing status. | [editing cell](demo#edit-cell) |
 | field | `string` | -- | Field in the column to which the cell belongs, which is used as the parameter beforeEditStart and beforeEditEnd. | [Edit cell](demo#edit-cell) |
 
-### dTableCell Event
+## dTableCell Event
 
 | Event | Type | Description | Jump to Demo |
 | :-------------------: | :-------: | :-----------------------------------------------------: | :------------------------------------------------- |
@@ -154,7 +176,8 @@
 #### Configure the row template of the dTableBody when the user-defined template is used.
 
 For details, see (demo#tree-form)**.
-``` xml
+
+``` html
 <ng-template
 let-rowItem="rowItem"
 let-rowIndex="rowIndex"
@@ -167,11 +190,16 @@ let-nestedIndex="nestedIndex">
 // nestedLayer: level of the table to which the row belongs in the tree table, which is generated by the component. The outermost table is 0 and increases ascending order.
 // nestedIndex: row index in the tree table, which is generated by the component.
 ```
+
 #### Template for prompting that the configuration data is empty
+
 The table accepts the `#noResultTemplateRef` template. For details, see **[Asynchronous data loading](demo#async-loading)**.
+
 #### Custom Filter dialog box
+
 For details, see (demo#table-interaction)**.
-``` xml
+
+``` html
 <ng-template
 let-filterList ="filterListDisplay"
 let-dropdown="dropdown"
@@ -182,57 +210,106 @@ let-column="column">
 // dropdown: Obtains the dropdown reference, which is used to control whether to enable or disable the pop-up dialog box.
 // column: metadata of the current column, which is implemented using the column configuration, corresponding to the DataTableColumnTmplComponent class.
 ```
-#### DataTable Type Definition
-``` javascript
+
+## CheckableRelation
+
+``` ts
 export interface CheckableRelation {
-upward: boolean; // Select the child association parent.
-downward: boolean; // Select the parent associated child.
-}
-export interface TableWidthConfig {
-field: string; // Column name
-width: string; // Width, in px.
-}
-export interface RowCheckChangeEventArg {
-rowIndex: number; // Row No.
-nestedIndex: string; // Row index in the tree table, which is generated by the component.
-rowItem: any; // Row data
-checked: boolean; // Indicates whether to select the check box.
-}
-export interface TableCheckStatusArg {
-pageAllChecked?: boolean; // Select all.
-pageHalfChecked?: boolean; // Partially selected
-}
-export interface RowToggleStatusEventArg {
-rowItem: any; // Row data
-open: boolean; // Indicates whether to expand the subtable.
-}
-export interface FilterConfig {
-id: number | string;
-name: string;
-value: any;
-checked?: boolean;
-}
-export interface SortEventArg {
-field?: string; // Column name
-direction: SortDirection; // Sequence
-}
-export enum SortDirection {
-ASC = 'ASC',
-DESC = 'DESC',
-default =''
-}
-export interface TableCheckOptions {
-label: string;
-onChecked: Function;
-}
-export interface TableExpandConfig {
-expand? : boolean, // Whether to expand
-expandTemplateRef? : ElementRef, // Custom template
-description? : string // Simple description
+  upward: boolean; // Select the child association parent.
+  downward: boolean; // Select the parent associated child.
 }
 ```
-### The following table describes the parameters and methods that are available only when a table is implemented by configuring columns.
-### d-column parameter
+
+## TableWidthConfig
+
+```ts
+export interface TableWidthConfig {
+  field: string; // Column name
+  width: string; // Width, in px.
+}
+```
+
+## TableCheckOptions
+
+```ts
+export interface TableCheckOptions {
+  label: string;
+  onChecked: Function;
+}
+```
+
+## SortEventArg
+
+```ts
+export interface SortEventArg {
+  field?: string; // Column name
+  direction: SortDirection; // Sequence
+}
+```
+
+## TableExpandConfig
+
+```ts
+export interface TableExpandConfig {
+    expand ? : boolean, // Whether to expand
+    expandTemplateRef ? : ElementRef, // Custom template
+    description ? : string // Simple description
+}
+```
+
+## RowCheckChangeEventArg
+
+```ts
+export interface RowCheckChangeEventArg {
+  rowIndex: number; // Row No.
+  nestedIndex: string; // Row index in the tree table, which is generated by the component.
+  rowItem: any; // Row data
+  checked: boolean; // Indicates whether to select the check box.
+}
+```
+
+## TableCheckStatusArg
+
+```ts
+export interface TableCheckStatusArg {
+  pageAllChecked?: boolean; // Select all.
+  pageHalfChecked?: boolean; // Partially selected
+}
+```
+
+## RowToggleStatusEventArg
+
+```ts
+export interface RowToggleStatusEventArg {
+  rowItem: any; // Row data
+  open: boolean; // Indicates whether to expand the subtable.
+}
+```
+
+## FilterConfig
+
+```ts
+export interface FilterConfig {
+  id: number | string;
+  name: string;
+  value: any;
+  checked?: boolean;
+}
+```
+
+## SortDirection
+
+```ts
+export enum SortDirection {
+  ASC = 'ASC',
+  DESC = 'DESC',
+  default = ''
+}
+```
+
+# The following table describes the parameters and methods that are available only when a table is implemented by configuring columns.
+
+## d-column parameter
 | Parameter | Type | Default value | Description | Jump to Demo |
 | :-------------------------------: | :-----------------------------: | :---------------- | :-------------------------------------------------------------------------------------: | :------------------------------------------------------- |
 | editable | `boolean` | false | Optional. Specifies whether the column can be edited on the d-column. | [edit cell](demo#edit-cell) |
@@ -254,6 +331,7 @@ description? : string // Simple description
 | filterList | `array` | -- | Optional. Transfer the filtering list to be operated. This parameter is mandatory when filterable is set to true. | [Table interaction](demo#table-interaction) |
 | filterMultiple | `boolean` | true | Optional. The options are as follows: true: multi-choice; false: single-choice. | [Table interaction](demo#table-interaction) |
 | customFilterTemplate | `TemplateRef` | -- | Optional. This parameter specifies the customized template of the table filtering dialog box. For details, see the "Customized Filtering Dialog Box" in the DOC. | [Table Interaction](demo#table-interaction) |
+| extraFilterTemplate | `TemplateRef` | -- | Optional. This parameter specifies the extra template of the table filtering dialog box. | [Table Interaction](demo#table-interaction) |
 | beforeFilter | `function, Promise, Observable` | -- | Optional. Callback function before the table filtering dialog box is displayed. If false is returned, the dialog box is blocked. | [Table interaction](demo#table-interaction) |
 | cellClass | `string` | -- | Optional. Custom class of the cell in the column |
 | fixedLeft | `string` | -- | Optional. Fixed distance from the column to the left, for example, '100px' | [Fixed column](demo#fixed-column) |
@@ -261,18 +339,18 @@ description? : string // Simple description
 | filterBoxWidth | `any` | -- | Optional. Width of the filter dialog box, for example, 300px. |
 | filterBoxHeight | `any` | -- | Optional. Height of the filter dialog box, for example, 400px. |
 
-### d-column event
+## d-column event
 
 | Event | Type | Description | Jump to Demo |
 | :----------: | :--------------: | :----------------------------------: | :------------------------------------------------------- |
 | filterChange | `FilterConfig[]` | Callback event for confirming the filtering and returning the selected filtering array. | [Table interaction](demo#table-interaction) |
 
-### rowItem parameter
+## rowItem parameter
 
 | Parameter | Type | Default value | Description |
 | :---------------: | :-----------------: | :----- | :-------------------------------------------------------------------------------------------------------: |
 | $editDeniedConfig | `array` | -- | Optional. This parameter is used with column to configure the edit permission on some cells in the row. For example, if this parameter is set to ['age'], the cell whose field is age cannot be edited. |
-| $expandConfig | `TableExpandConfig` | -- | Optional. Configure additional content in this line. |
+| $expandConfig | [`TableExpandConfig`](#tableexpandconfig) | -- | Optional. Configure additional content in this line. |
 | $rowClass | `string` | -- | Optional. Configure the user-defined class of the line. |
 | $hovered | `boolean` | false | The value is true when the cursor moves over the element in the row, and false when <br> leaves the row. |
 

@@ -1,86 +1,84 @@
-<section>
-  <div>
-    <h4>传入对象数组</h4>
-    <d-checkbox-group
-      [(ngModel)]="values1"
-      [name]="'City'"
-      [options]="options1"
-      [filterKey]="'name'"
-      [labelTemplate]="mylabel"
-      [isShowTitle]="true"
-      (change)="onCheckbox1Change($event)"
-    >
-      <ng-template #mylabel let-disabled="disabled" let-label="label">
-        <span class="icon-collapse" style="margin-top: 2px"></span>
-        <span>{{ label }}</span>
-      </ng-template>
-    </d-checkbox-group>
-  </div>
-  <div>
-    <h4>传入字符串数组</h4>
-    <d-checkbox-group
-      [(ngModel)]="values2"
-      [name]="'City'"
-      [options]="options2"
-      [direction]="'row'"
-      [isShowTitle]="true"
-      (change)="onCheckbox2Change($event)"
-    >
-    </d-checkbox-group>
-  </div>
+<div>
+  <h4>Input Object Array</h4>
+  <d-checkbox-group
+    [(ngModel)]="values1"
+    [name]="'City'"
+    [options]="options1"
+    [filterKey]="'name'"
+    [labelTemplate]="mylabel"
+    [isShowTitle]="true"
+    (change)="onCheckbox1Change($event)"
+  >
+    <ng-template #mylabel let-disabled="disabled" let-label="label">
+      <span class="icon-collapse" style="margin-top: 2px"></span>
+      <span>{{ label }}</span>
+    </ng-template>
+  </d-checkbox-group>
+</div>
+<div>
+  <h4>Input String Array</h4>
+  <d-checkbox-group
+    [(ngModel)]="values2"
+    [name]="'City'"
+    [options]="options2"
+    [direction]="'row'"
+    [isShowTitle]="true"
+    (change)="onCheckbox2Change($event)"
+  >
+  </d-checkbox-group>
+</div>
 
-  <div>
-    <h4>整组禁用</h4>
-    <d-checkbox-group
-      [(ngModel)]="values6"
-      [options]="options6"
-      [direction]="'row'"
-      [isShowTitle]="true"
-      [disabled]="true"
-      (change)="onCheckbox6Change($event)"
-    >
-    </d-checkbox-group>
-  </div>
+<div>
+  <h4>[<code>disabled</code>]="true"</h4>
+  <d-checkbox-group
+    [(ngModel)]="values6"
+    [options]="options6"
+    [direction]="'row'"
+    [isShowTitle]="true"
+    [disabled]="true"
+    (change)="onCheckbox6Change($event)"
+  >
+  </d-checkbox-group>
+</div>
 
-  <div>
-    <h4>自定义选中颜色</h4>
-    <d-checkbox-group
-      [(ngModel)]="values3"
-      [color]="'RGB(255, 193, 7)'"
-      [name]="'demo3'"
-      [options]="options3"
-      [direction]="'row'"
-      [isShowTitle]="true"
-      (change)="onCheckbox3Change($event)"
-    >
-    </d-checkbox-group>
-  </div>
+<div>
+  <h4>Custom Selected Color</h4>
+  <d-checkbox-group
+    [(ngModel)]="values3"
+    [color]="'RGB(255, 193, 7)'"
+    [name]="'demo3'"
+    [options]="options3"
+    [direction]="'row'"
+    [isShowTitle]="true"
+    (change)="onCheckbox3Change($event)"
+  >
+  </d-checkbox-group>
+</div>
 
-  <div>
-    <h4>选中状态-关闭动效</h4>
-    <d-checkbox-group
-      [(ngModel)]="values4"
-      [showAnimation]="false"
-      [name]="'demo3'"
-      [options]="options4"
-      [direction]="'row'"
-      [isShowTitle]="true"
-      (change)="onCheckbox3Change($event)"
-    >
-    </d-checkbox-group>
-  </div>
+<div>
+  <h4>Selected Status - Disabled</h4>
+  <d-checkbox-group
+    [(ngModel)]="values4"
+    [showAnimation]="false"
+    [name]="'demo3'"
+    [options]="options4"
+    [direction]="'row'"
+    [isShowTitle]="true"
+    (change)="onCheckbox3Change($event)"
+  >
+  </d-checkbox-group>
+</div>
 
-  <div>
-    <h4>多行checkbox</h4>
-    <d-checkbox-group
-      [(ngModel)]="values5"
-      [itemWidth]="64"
-      [name]="'demo5'"
-      [options]="options5"
-      [direction]="'row'"
-      [isShowTitle]="true"
-      (change)="onCheckbox2Change($event)"
-    >
-    </d-checkbox-group>
-  </div>
-</section>
+<div>
+  <h4>Multi-line Checkbox</h4>
+  <d-checkbox-group
+    [(ngModel)]="values5"
+    [itemWidth]="64"
+    [name]="'demo5'"
+    [options]="options5"
+    [direction]="'row'"
+    [isShowTitle]="true"
+    (change)="onCheckbox2Change($event)"
+  >
+  </d-checkbox-group>
+</div>

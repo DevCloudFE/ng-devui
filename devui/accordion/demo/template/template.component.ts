@@ -7,44 +7,44 @@ import { Component } from '@angular/core';
 })
 export class TemplateComponent {
   menu = [{
-    title: '内容一',
+    title: 'Content 1',
     open: true,
     children: [
-      {title: '子内容1'},
-      {title: '子内容2'},
+      {title: 'Child Content 1'},
+      {title: 'Child Content 2'},
     ]
   }, {
-    title: '内容二',
+    title: 'Content 2',
     children: [
-      {title: '子内容1'},
-      {title: '子内容2'},
-      {title: '子内容3'},
-      {title: '子内容4'},
+      {title: 'Child Content 1'},
+      {title: 'Child Content 2'},
+      {title: 'Child Content 3'},
+      {title: 'Child Content 4'},
     ]
   }, {
-    title: '内容三',
+    title: 'Content 3',
     children: [
-      {title: '子内容1(禁用)', disabled: true},
-      {title: '子内容2'},
-      {title: '子内容3'},
+      {title: 'Child Content 1 (disabled)', disabled: true},
+      {title: 'Child Content 2'},
+      {title: 'Child Content 3'},
     ]
   }, {
-    title: '内容四（自定义无数据模板）',
+    title: 'Content 4 (Custom No Data Template)',
     children: [] // 可展开菜单节点必须有children非undefined
   }, {
-    title: '内容五（自定义加载中模板）',
+    title: 'Content 5 (Custom loading Template)',
     needLoadChildren: true,
     loading: false,
     children: []
   }];
   childrenData = [
-    {title: '子内容1'},
-    {title: '子内容2'},
-    {title: '子内容3'},
-    {title: '子内容4'},
-    {title: '子内容5'},
-    {title: '子内容6'},
-    {title: '子内容7'},
+    {title: 'Child Content 1'},
+    {title: 'Child Content 2'},
+    {title: 'Child Content 3'},
+    {title: 'Child Content 4'},
+    {title: 'Child Content 5'},
+    {title: 'Child Content 6'},
+    {title: 'Child Content 7'},
   ];
 
   itemClick(event) {

@@ -1,59 +1,57 @@
-<section>
-  <h3>多层树状拖拽</h3>
-  <div class="row">
-    <div class="col-sm-3">
-      <div class="card">
-        <div class="card-header">备选区</div>
-        <div class="card-block">
-          <ul class="list-group">
-            <li
-              *ngFor="let item of list1; let i = index"
-              dDraggable
-              [dragScope]="'drop-area'"
-              [dragData]="{ item: item, parentList: list1, index: i }"
-              class="list-group-item"
-            >
-              <div class="name">{{ item.name }}</div>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-3">
-      <div
-        class="card card-outline-primary mb-3"
-        dDroppable
-        [dropScope]="'drop-area'"
-        [allowDropOnItem]="true"
-        [nestingTargetRect]="{ height: 30 }"
-        [dragOverItemClass]="'dragover-item'"
-        (dropEvent)="onDrop($event, list2)"
-      >
-        <div class="card-header">树状排序区</div>
-        <div class="card-block">
-          <ul class="list-group d-drop-el" dSortable>
-            <li
-              *ngFor="let item of list2; let i = index"
-              dDraggable
-              [dragScope]="'drop-area'"
-              [dragHandleClass]="'drag-handle'"
-              [dragData]="{ item: item, parentList: list2, index: i }"
-            >
-              <div class="name">
-                {{ item.name }}
-              </div>
-              <ng-template
-                *ngIf="item.children && item.children.length > 0"
-                [ngTemplateOutlet]="childlist"
-                [ngTemplateOutletContext]="{ item: item }"
-              ></ng-template>
-            </li>
-          </ul>
-        </div>
+<h3>Multi-level Tree Drag d-demo-dragdrop</h3>
+<div class="row">
+  <div class="col-sm-3">
+    <div class="card">
+      <div class="card-header">Draggable Items</div>
+      <div class="card-block">
+        <ul class="list-group">
+          <li
+            *ngFor="let item of list1; let i = index"
+            dDraggable
+            [dragScope]="'drop-area'"
+            [dragData]="{ item: item, parentList: list1, index: i }"
+            class="list-group-item"
+          >
+            <div class="name">{{ item.name }}</div>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
-</section>
+  <div class="col-sm-3">
+    <div
+      class="card card-outline-primary mb-3"
+      dDroppable
+      [dropScope]="'drop-area'"
+      [allowDropOnItem]="true"
+      [nestingTargetRect]="{ height: 30 }"
+      [dragOverItemClass]="'dragover-item'"
+      (dropEvent)="onDrop($event, list2)"
+    >
+      <div class="card-header">Tree Sortable Area</div>
+      <div class="card-block">
+        <ul class="list-group d-drop-el" dSortable>
+          <li
+            *ngFor="let item of list2; let i = index"
+            dDraggable
+            [dragScope]="'drop-area'"
+            [dragHandleClass]="'drag-handle'"
+            [dragData]="{ item: item, parentList: list2, index: i }"
+          >
+            <div class="name">
+              {{ item.name }}
+            </div>
+            <ng-template
+              *ngIf="item.children && item.children.length > 0"
+              [ngTemplateOutlet]="childlist"
+              [ngTemplateOutletContext]="{ item: item }"
+            ></ng-template>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
 
 <ng-template #childlist let-parent="item">
   <ul

@@ -3,12 +3,12 @@
     <span></span>
   </div>
   <div class="devui-components-search">
-    <d-search #dSearch [isKeyupSearch]="true" [placeholder]="'请输入您的关键字'" (searchFn)="onSearch($event)"></d-search>
+    <d-search #dSearch [isKeyupSearch]="true" (searchFn)="onSearch($event)"></d-search>
   </div>
   <div class="sidebar">
     <ul class="devui-menu" style="margin-bottom: 0">
       <li class="devui-menu-item" routerLinkActive="devui-menu-item-selected">
-        <a routerLink="get-start">快速开始</a>
+        <a routerLink="get-start">{{ 'public.start' | translate }}</a>
       </li>
       <li class="devui-menu-item" routerLinkActive="devui-menu-item-selected">
         <a routerLink="color" style="position: relative"

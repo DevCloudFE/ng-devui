@@ -381,7 +381,7 @@ describe('Select', () => {
       describe('open', () => {
         it('click should open', fakeAsync(() => {
           menuElement = debugEl.query(By.css('d-select > div >div.devui-dropdown-menu'));
-          expect(menuElement.nativeElement.getBoundingClientRect().height).toBe(0);
+          expect(menuElement.nativeElement.classList).toContain('devui-dropdopwn-hidden');
           openMenu();
           expect(menuElement.nativeElement.getBoundingClientRect().height).toBeGreaterThan(0);
         }));
@@ -432,7 +432,7 @@ describe('Select', () => {
       describe('open', () => {
         it('click should open', fakeAsync(() => {
           menuElement = debugEl.query(By.css('d-select > div >div.devui-dropdown-menu'));
-          expect(menuElement.nativeElement.getBoundingClientRect().height).toBe(0);
+          expect(menuElement.nativeElement.classList).toContain('devui-dropdopwn-hidden');
           openMenu();
           expect(menuElement.nativeElement.getBoundingClientRect().height).toBeGreaterThan(0);
         }));
@@ -646,7 +646,7 @@ describe('Select', () => {
         describe('single', () => {
           it('disabled should not open menu', fakeAsync(() => {
             openMenu();
-            expect(menuElement.nativeElement.getBoundingClientRect().height).toBe(0); // 面板没展开
+            expect(menuElement.nativeElement.classList).toContain('devui-dropdopwn-hidden'); // 面板没展开
           }));
         });
         describe('multiple', () => {
@@ -655,7 +655,7 @@ describe('Select', () => {
             fixture.detectChanges();
             tick(); fixture.detectChanges();
             openMenu();
-            expect(menuElement.nativeElement.getBoundingClientRect().height).toBe(0); // 面板没展开
+            expect(menuElement.nativeElement.classList).toContain('devui-dropdopwn-hidden'); // 面板没展开
           }));
         });
       });
@@ -788,8 +788,8 @@ describe('Select', () => {
         menuElement = debugEl.query(By.css('d-select > div >div.devui-dropdown-menu'));
         const toggleRect = toggleElement.nativeElement.parentElement.getBoundingClientRect();
         const menuRect = menuElement.nativeElement.getBoundingClientRect();
-        const verticalBorderOverlayWidth = 1; // 有个重叠的线的效果
-        expect(menuRect.y + menuRect.height).toEqual(toggleRect.y + verticalBorderOverlayWidth);
+        const verticalBorderOverlayWidth = 4; // 有个间距
+        expect(menuRect.y + menuRect.height).toEqual(toggleRect.y - verticalBorderOverlayWidth);
         expect(menuRect.x).toEqual(toggleRect.x);
       }));
       it('down', fakeAsync(() => {
@@ -800,8 +800,8 @@ describe('Select', () => {
         menuElement = debugEl.query(By.css('d-select > div >div.devui-dropdown-menu'));
         const toggleRect = toggleElement.nativeElement.parentElement.getBoundingClientRect();
         const menuRect = menuElement.nativeElement.getBoundingClientRect();
-        const verticalBorderOverlayWidth = 2; // 有个重叠的线的效果// TODO: 为什么往下重叠线的效果是2
-        expect(menuRect.y).toEqual(toggleRect.y + toggleRect.height - verticalBorderOverlayWidth);
+        const verticalBorderOverlayWidth = 4; // 有个间距
+        expect(menuRect.y).toEqual(toggleRect.y + toggleRect.height + verticalBorderOverlayWidth);
         expect(menuRect.x).toEqual(toggleRect.x);
       }));
       describe('auto', () => {
@@ -815,8 +815,8 @@ describe('Select', () => {
           menuElement = debugEl.query(By.css('d-select > div >div.devui-dropdown-menu'));
           const toggleRect = toggleElement.nativeElement.parentElement.getBoundingClientRect();
           const menuRect = menuElement.nativeElement.getBoundingClientRect();
-          const verticalBorderOverlayWidth = 2; // 有个重叠的线的效果 // TODO: 为什么往下重叠线的效果是2
-          expect(menuRect.y).toEqual(toggleRect.y + toggleRect.height - verticalBorderOverlayWidth);
+          const verticalBorderOverlayWidth = 4; // 有个间距
+          expect(menuRect.y).toEqual(toggleRect.y + toggleRect.height + verticalBorderOverlayWidth);
           expect(menuRect.x).toEqual(toggleRect.x);
         }));
         it('auto up', fakeAsync(() => {
@@ -826,8 +826,8 @@ describe('Select', () => {
           menuElement = debugEl.query(By.css('d-select > div >div.devui-dropdown-menu'));
           const toggleRect = toggleElement.nativeElement.parentElement.getBoundingClientRect();
           const menuRect = menuElement.nativeElement.getBoundingClientRect();
-          const verticalBorderOverlayWidth = 1; // 有个重叠的线的效果
-          expect(menuRect.y + menuRect.height).toEqual(toggleRect.y + verticalBorderOverlayWidth);
+          const verticalBorderOverlayWidth = 4; // 有个间距
+          expect(menuRect.y + menuRect.height).toEqual(toggleRect.y - verticalBorderOverlayWidth);
           expect(menuRect.x).toEqual(toggleRect.x);
         }));
       });
@@ -996,7 +996,7 @@ describe('Select', () => {
             tick(); fixture.detectChanges();
             const listElement = debugEl.query(By.css('.devui-select-tag-list'));
             const containerHeight = listElement.nativeElement.getBoundingClientRect().height;
-            expect(containerHeight).toEqual(24);
+            expect(containerHeight).toEqual(26);
             expect(window.getComputedStyle(listElement.nativeElement).overflowY).toEqual('hidden');
           }));
           it('scroll-y', fakeAsync(() => {
@@ -1005,7 +1005,7 @@ describe('Select', () => {
             tick(); fixture.detectChanges();
             const listElement = debugEl.query(By.css('.devui-select-tag-list'));
             const containerHeight = listElement.nativeElement.getBoundingClientRect().height;
-            expect(containerHeight).toEqual(24);
+            expect(containerHeight).toEqual(26);
             expect(window.getComputedStyle(listElement.nativeElement).overflowY).toEqual('auto');
           }));
           describe('multiple-line', () => {
@@ -1383,9 +1383,9 @@ describe('Select', () => {
         menuElement = document.querySelector('div.devui-dropdown-menu');
         const originRect = toggleElement.nativeElement.parentElement.getBoundingClientRect();
         const menuRect = menuElement.getBoundingClientRect();
-        const verticalBorderOverlayWidth = 1; // 有个重叠的线的效果
+        const verticalBorderOverlayWidth = 4; // 有个间距
         expect(originRect.x === menuRect.x).toBe(true);
-        expect(originRect.y + originRect.height - verticalBorderOverlayWidth).toBeCloseTo(menuRect.y, 1);
+        expect(originRect.y + originRect.height + verticalBorderOverlayWidth).toBeCloseTo(menuRect.y, 1);
       }));
       it('leftDown should in the right place', fakeAsync(() => {
         component.appendToBodyDirections = ['leftDown'];
@@ -1394,9 +1394,9 @@ describe('Select', () => {
         menuElement = document.querySelector('div.devui-dropdown-menu');
         const originRect = toggleElement.nativeElement.parentElement.getBoundingClientRect();
         const menuRect = menuElement.getBoundingClientRect();
-        const verticalBorderOverlayWidth = 1; // 有个重叠的线的效果
+        const verticalBorderOverlayWidth = 4; // 有个间距
         expect(originRect.x + originRect.width).toBeCloseTo(menuRect.x + menuRect.width, 0);
-        expect(originRect.y + originRect.height - verticalBorderOverlayWidth).toBeCloseTo(menuRect.y, 1);
+        expect(originRect.y + originRect.height + verticalBorderOverlayWidth).toBeCloseTo(menuRect.y, 1);
       }));
       it('centerDown should in the right place', fakeAsync(() => {
         component.appendToBodyDirections = ['centerDown'];
@@ -1405,9 +1405,9 @@ describe('Select', () => {
         menuElement = document.querySelector('div.devui-dropdown-menu');
         const originRect = toggleElement.nativeElement.parentElement.getBoundingClientRect();
         const menuRect = menuElement.getBoundingClientRect();
-        const verticalBorderOverlayWidth = 1; // 有个重叠的线的效果
+        const verticalBorderOverlayWidth = 4; // 有个间距
         expect((originRect.x + (originRect.width / 2)) - ((menuRect.x + menuRect.width / 2))).toBeLessThan(1);
-        expect(originRect.y + originRect.height - verticalBorderOverlayWidth).toBeCloseTo(menuRect.y);
+        expect(originRect.y + originRect.height + verticalBorderOverlayWidth).toBeCloseTo(menuRect.y);
       }));
       it('rightUp should in the right place', fakeAsync(() => {
         component.appendToBodyDirections = ['rightUp'];
@@ -1416,9 +1416,9 @@ describe('Select', () => {
         menuElement = document.querySelector('div.devui-dropdown-menu');
         const originRect = toggleElement.nativeElement.parentElement.getBoundingClientRect();
         const menuRect = menuElement.getBoundingClientRect();
-        const verticalBorderOverlayWidth = 1; // 有个重叠的线的效果
+        const verticalBorderOverlayWidth = 4; // 有个间距
         expect(originRect.x === menuRect.x).toBe(true);
-        expect(originRect.y).toBeCloseTo(menuRect.y + menuRect.height - verticalBorderOverlayWidth);
+        expect(originRect.y).toBeCloseTo(menuRect.y + menuRect.height + verticalBorderOverlayWidth);
       }));
       it('leftUp should in the right place', fakeAsync(() => {
         component.appendToBodyDirections = ['leftUp'];
@@ -1427,9 +1427,9 @@ describe('Select', () => {
         menuElement = document.querySelector('div.devui-dropdown-menu');
         const originRect = toggleElement.nativeElement.parentElement.getBoundingClientRect();
         const menuRect = menuElement.getBoundingClientRect();
-        const verticalBorderOverlayWidth = 1; // 有个重叠的线的效果
+        const verticalBorderOverlayWidth = 4; // 有个间距
         expect(originRect.x + originRect.width).toBeCloseTo(menuRect.x + menuRect.width, 0);
-        expect(originRect.y).toBeCloseTo(menuRect.y + menuRect.height - verticalBorderOverlayWidth, 0);
+        expect(originRect.y).toBeCloseTo(menuRect.y + menuRect.height + verticalBorderOverlayWidth, 0);
       }));
       it('centerUp should in the right place', fakeAsync(() => {
         component.appendToBodyDirections = ['centerUp'];
@@ -1438,9 +1438,9 @@ describe('Select', () => {
         menuElement = document.querySelector('div.devui-dropdown-menu');
         const originRect = toggleElement.nativeElement.parentElement.getBoundingClientRect();
         const menuRect = menuElement.getBoundingClientRect();
-        const verticalBorderOverlayWidth = 1; // 有个重叠的线的效果
+        const verticalBorderOverlayWidth = 4; // 有个间距
         expect((originRect.x + (originRect.width / 2)) - ((menuRect.x + menuRect.width / 2))).toBeLessThan(1);
-        expect(originRect.y).toBeCloseTo(menuRect.y + menuRect.height - verticalBorderOverlayWidth);
+        expect(originRect.y).toBeCloseTo(menuRect.y + menuRect.height + verticalBorderOverlayWidth);
       }));
       it('custom direction should placed to the left of toggle element', fakeAsync(() => {
         // 完全自定义方向
@@ -1450,8 +1450,8 @@ describe('Select', () => {
         menuElement = document.querySelector('div.devui-dropdown-menu');
         const originRect = toggleElement.nativeElement.parentElement.getBoundingClientRect();
         const menuRect = menuElement.getBoundingClientRect();
-        const verticalBorderOverlayWidth = 1; // 有个重叠的线的效果， 左右自定义不应该有这条线
-        expect(originRect.y).toBeCloseTo(menuRect.y + verticalBorderOverlayWidth, 1);
+        const verticalBorderOverlayWidth = 4; // 有个间距
+        expect(originRect.y).toBeCloseTo(menuRect.y - verticalBorderOverlayWidth, 1);
         expect(originRect.x).toBeCloseTo(menuRect.x + menuRect.width, 1);
       }));
     });

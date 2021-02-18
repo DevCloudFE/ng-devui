@@ -12,6 +12,32 @@
 }
 
 .popper-container {
+  &.devui-popover-container-right,
+  &.devui-popover-container-left {
+    display: flex !important;
+
+    & > .devui-dropdown-menu-wrap {
+      display: inline-block;
+    }
+
+    & > .popper-append-area {
+      display: inline-block;
+      overflow: auto;
+    }
+
+    .popper-append-area {
+      border-left: 1px solid $devui-dividing-line;
+
+      &::before {
+        display: none;
+      }
+    }
+  }
+
+  &.devui-popover-container-left .popper-append-area {
+    order: -1;
+  }
+
   display: none;
   z-index: 1051;
   position: absolute;
@@ -23,7 +49,6 @@
   border-radius: $devui-border-radius;
 
   .popper-container-scrollable {
-    max-height: 300px;
     min-height: 40px;
     width: 100%;
     overflow-y: auto;

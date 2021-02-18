@@ -1,6 +1,6 @@
 {
   "name": "ng-devui",
-  "version": "10.2.0",
+  "version": "11.0.0",
   "license": "MIT",
   "description": "DevUI components based on Angular",
   "keywords": [
@@ -17,7 +17,7 @@
     "url": "https://github.com/DevCloudFE/ng-devui/issues"
   },
   "dependencies": {
-    "@angular/cdk": "^10.0.0",
+    "@angular/cdk": "^11.0.0",
     "date-fns": "^1.30.1",
     "lodash-es": "^4.17.11",
     "@popperjs/core": "^2.5.4",
@@ -26,9 +26,9 @@
     "tslib": "^2.0.0"
   },
   "peerDependencies": {
-    "@angular/animations": "^10.0.0",
-    "@angular/common": "^10.0.0",
-    "@angular/core": "^10.0.0",
-    "@angular/forms": "^10.0.0"
+    "@angular/animations": "^11.0.0",
+    "@angular/common": "^11.0.0",
+    "@angular/core": "^11.0.0",
+    "@angular/forms": "^11.0.0"
   }
 }

@@ -1,4 +1,4 @@
-<div class="modal-backdrop" [@backdropAnimation]="animateState"></div>
+<div class="modal-backdrop" [ngStyle]="{ 'z-index': backDropZIndex }" [@backdropAnimation]="animateState"></div>
 <div
   class="modal in"
   [ngStyle]="{ 'z-index': zIndex }"
@@ -16,6 +16,7 @@
     }"
     [ngStyle]="{ width: width }"
     [@modalAnimation]="animateState"
+    (@modalAnimation.done)="onAnimationEnd()"
     tabindex="1"
     #dialog
   >

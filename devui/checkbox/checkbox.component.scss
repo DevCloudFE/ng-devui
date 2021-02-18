@@ -42,30 +42,47 @@
     }
   }
 
-  &.active {
+  &.active:not(.disabled) {
     .devui-checkbox-material {
-      & > .devui-checkbox-bg {
-        opacity: 1;
-        transform: scale(1);
-        transition: transform 0.2s ease-in-out;
+      background-size: 100% 100%;
+      transition: background-size 0.2s ease-in-out, border-color 0.2s ease-in-out;
+    }
+  }
+
+  &.unchecked:not(.disabled) {
+    .devui-checkbox-material:not(.custom-color) {
+      background-size: 0% 0%;
+      transition: background-size 0.2s ease-in-out, border-color 0.2s ease-in-out;
+
+      &:hover {
+        border-color: $devui-icon-fill-active;
       }
     }
   }
 
-  &.unchecked {
-    .devui-checkbox-material {
-      & > .devui-checkbox-bg {
-        transform: scale(0);
-        transition: transform 0.15s cubic-bezier(0.755, 0.05, 0.855, 0.06), opacity 0.2s cubic-bezier(0.755, 0.05, 0.855, 0.06);
+  &.unchecked:not(.disabled) {
+    .devui-checkbox-material.custom-color {
+      background-size: 0% 0%;
+      transition: background-size 0.2s ease-in-out, border-color 0.2s ease-in-out;
+    }
+  }
+
+  &.halfchecked {
+    .devui-checkbox-material:not(.custom-color) {
+      background-color: $devui-brand;
+
+      & > .devui-checkbox-halfchecked-bg {
+        opacity: 1;
+        transform: scale(0.4288);
+        transition: transform 0.2s cubic-bezier(0.755, 0.05, 0.855, 0.06);
+        background-color: $devui-light-text;
       }
     }
   }
 
   &.halfchecked {
-    .devui-checkbox-material {
-      background-color: $devui-brand;
-
-      & > .devui-checkbox-bg {
+    .devui-checkbox-material.custom-color {
+      & > .devui-checkbox-halfchecked-bg {
         opacity: 1;
         transform: scale(0.4288);
         transition: transform 0.2s cubic-bezier(0.755, 0.05, 0.855, 0.06);
@@ -82,6 +99,7 @@
     user-select: none;
     border: 1px solid $devui-line;
     border-radius: $devui-border-radius;
+    background: linear-gradient($devui-brand, $devui-brand) no-repeat center/0%;
     margin-right: 8px;
     vertical-align: text-bottom;
 
@@ -89,57 +107,22 @@
       margin-right: 0;
     }
 
-    & > .devui-checkbox-bg {
+    & > .devui-checkbox-halfchecked-bg {
       display: inline-block;
       position: absolute;
       content: '';
-      background-color: $devui-brand;
+      background-color: $devui-light-text;
       top: 0;
       left: 0;
       height: 100%;
       width: 100%;
-      transform: scale(0);
+      transform: scale(1);
       opacity: 0;
     }
 
     & > svg {
       width: 14px;
       height: 14px;
-    }
-  }
-
-  &:not(.disabled) {
-    .devui-checkbox-material:not(.custom-color) {
-      &:hover {
-        border: 1px solid $devui-icon-fill-active;
-        transition: border-color 0.2s ease-in-out;
-      }
-
-      &:active,
-      &:focus {
-        border: 1px solid $devui-icon-fill-active-hover;
-        transition: border-color 0.2s ease-in-out;
-      }
-    }
-  }
-
-  &:not(.disabled):not(.halfchecked) {
-    .devui-checkbox-material:not(.custom-color) {
-      &:hover {
-        & > .devui-checkbox-bg {
-          background-color: $devui-icon-fill-active;
-        }
-      }
-
-      // 激活状态深色
-      &:active,
-      &:focus,
-      &:hover:active,
-      &:hover:focus {
-        & > .devui-checkbox-bg {
-          background-color: $devui-icon-fill-active-hover;
-        }
-      }
     }
   }
 
@@ -198,22 +181,13 @@
 
     .devui-checkbox-material {
       border-color: $devui-icon-fill-active-disabled;
-
-      .devui-checkbox-bg {
-        background-color: $devui-icon-fill-active-disabled;
-        opacity: 1;
-      }
+      background-color: $devui-icon-fill-active-disabled;
     }
 
     &.unchecked {
       .devui-checkbox-material {
         border-color: $devui-disabled-line;
         background-color: $devui-disabled-bg;
-
-        .devui-checkbox-bg {
-          opacity: 0;
-          transform: scale(1);
-        }
       }
     }
 
@@ -221,7 +195,7 @@
       .devui-checkbox-material {
         background-color: $devui-disabled-bg;
 
-        .devui-checkbox-bg {
+        .devui-checkbox-halfchecked-bg {
           transform: scale(0.4288);
           background-color: $devui-disabled-text;
           opacity: 1;

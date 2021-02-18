@@ -2,114 +2,105 @@ import { Component, OnInit } from '@angular/core';
 
 export const source = [
   {
-    name: '父节点1 - 展开',
+    name: 'parent node 1 - expanded',
     open: true,
     items: [
       {
-        name: '父节点11 - 折叠',
+        name: 'parent node 11 - folded',
         items: [
           {
-            name: '叶子节点111'
+            name: 'leaf node 111'
           },
           {
-            name: '叶子节点112'
+            name: 'leaf node 112'
           },
           {
-            name: '叶子节点113'
+            name: 'leaf node 113'
           },
           {
-            name: '叶子节点114'
+            name: 'leaf node 114'
           }
         ]
       },
       {
-        name: '父节点12 - 折叠',
+        name: 'parent node 12 - folded',
         items: [
           {
-            name: '叶子节点121'
+            name: 'leaf node 121'
           },
           {
-            name: '叶子节点122'
+            name: 'leaf node 122'
           },
           {
-            name: '叶子节点123'
+            name: 'leaf node 123'
           },
           {
-            name: '叶子节点124'
+            name: 'leaf node 124'
           }
         ]
       },
       {
-        name: '父节点13 - 没有子节点',
-        isParent: true
+        name: 'parent node 13 - without children',
+        isparent: true
       }
     ]
   },
   {
-    name: '父节点2 - 折叠',
+    name: 'parent node 2 - folded',
     items: [
       {
-        name: '父节点21 - 展开',
+        name: 'parent node 21 - expanded',
         open: true,
         items: [
           {
-            name: '叶子节点211'
+            name: 'leaf node 211'
           },
           {
-            name: '叶子节点212'
+            name: 'leaf node 212'
           },
           {
-            name: '叶子节点213'
+            name: 'leaf node 213'
           },
           {
-            name: '叶子节点214'
+            name: 'leaf node 214'
           }
         ]
       },
       {
-        name: '父节点22 - 折叠',
+        name: 'parent node 22 - folded',
         items: [
           {
-            name: '叶子节点221'
+            name: 'leaf node 221'
           },
           {
-            name: '叶子节点222'
+            name: 'leaf node 222'
           },
           {
-            name: '叶子节点223'
+            name: 'leaf node 223'
           },
           {
-            name: '叶子节点224'
+            name: 'leaf node 224'
           }
         ]
       },
       {
-        name: '父节点23 - 折叠',
+        name: 'parent node 23 - folded',
         items: [
           {
-            name: '叶子节点231'
+            name: 'leaf node 231'
           },
           {
-            name: '叶子节点232'
+            name: 'leaf node 232'
           },
           {
-            name: '叶子节点233'
+            name: 'leaf node 233'
           },
           {
-            name: '叶子节点234'
+            name: 'leaf node 234'
           }
         ]
       }
     ]
-  },
-  {
-    id: 'hello,dddd',
-    name: '父节点3 - 没有子节点',
-    isParent: true,
-    data: {
-      id: '1123213',
-      name: '456'
-    }
   }
 ];
 

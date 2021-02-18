@@ -3,58 +3,38 @@ import { ChangeDetectorRef, Component } from '@angular/core';
 @Component({
   selector: 'd-batch-drag',
   templateUrl: './batch-drag.component.html',
-  styleUrls: ['./batch-drag.component.scss']
+  styleUrls: ['./batch-drag.component.scss'],
 })
 export class BatchDragComponent {
   lists = [
     {
       name: 'IDE',
-      list:   [
-        { name: 'Visual Studio Code' },
-        { name: 'WebStorm' },
-        { name: 'Sublime Text' },
-        { name: 'Atom' },
-        { name: 'Notepad++' },
-      ]
+      list: [{ name: 'Visual Studio Code' }, { name: 'WebStorm' }, { name: 'Sublime Text' }, { name: 'Atom' }, { name: 'Notepad++' }],
     },
     {
       name: 'Browser',
-      list:   [
+      list: [
         { name: 'Chrome' },
         { name: 'Firefox' },
         { name: 'Opera' },
         { name: 'Edge' },
         { name: 'Internet Explorer' },
         { name: 'Safari' },
-      ]
+      ],
     },
     {
       name: 'OS',
-      list: [
-        {name: 'Linux'},
-        {name: 'Windows'},
-        {name: 'Mac OS'},
-        {name: 'DOS'},
-        {name: 'Chrome OS'},
-      ]
+      list: [{ name: 'Linux' }, { name: 'Windows' }, { name: 'Mac OS' }, { name: 'DOS' }, { name: 'Chrome OS' }],
     },
     {
       name: 'Mobile OS',
-      list:  [
-        {name: 'Android'},
-        {name: 'IOS'},
-        {name: 'BlackBerry'},
-        {name: 'Symbian'},
-      ]
+      list: [{ name: 'Android' }, { name: 'IOS' }, { name: 'BlackBerry' }, { name: 'Symbian' }],
     },
     {
       name: 'Whatever',
-      list:   [
-      ]
+      list: [],
     },
   ];
-  showOriginPlaceholder = false;
-  switchWhileCrossEdge = false;
   constructor(private cdr: ChangeDetectorRef) {}
 
   onDrop(e: any, targetArray: Array<any>) {
@@ -70,7 +50,9 @@ export class BatchDragComponent {
     const parentArray = e.dragData.parent;
     const item = e.dragData.item;
     if (-1 !== index) {
-      if (-1 !== fromIndex && index > fromIndex) { index--; }
+      if (-1 !== fromIndex && index > fromIndex) {
+        index--;
+      }
       targetArray.splice(index, 0, fromIndex === -1 ? item : targetArray.splice(fromIndex, 1)[0]);
     } else {
       targetArray.push(item);
@@ -82,16 +64,18 @@ export class BatchDragComponent {
 
   batchDrop(e, targetArray: Array<any>) {
     let fromIndexLessThanDropIndexCount = 0;
-    e.batchDragData.map((dragData) => {
-      const index = targetArray.indexOf(dragData.item);
-      if (index > -1 && index < e.dropIndex) {
-        fromIndexLessThanDropIndexCount++;
-      }
-      return dragData;
-    }).forEach((dragData) => {
-      this.removeItem(dragData.item, dragData.parent);
-    });
-    targetArray.splice(e.dropIndex - fromIndexLessThanDropIndexCount, 0, ...(e.batchDragData.map(batchitem => batchitem.item)));
+    e.batchDragData
+      .map((dragData) => {
+        const index = targetArray.indexOf(dragData.item);
+        if (index > -1 && index < e.dropIndex) {
+          fromIndexLessThanDropIndexCount++;
+        }
+        return dragData;
+      })
+      .forEach((dragData) => {
+        this.removeItem(dragData.item, dragData.parent);
+      });
+    targetArray.splice(e.dropIndex - fromIndexLessThanDropIndexCount, 0, ...e.batchDragData.map((batchitem) => batchitem.item));
     return;
   }
 
@@ -111,8 +95,6 @@ export class BatchDragComponent {
   }
 
   cleanBatch() {
-    this.lists.forEach(list => list.list.forEach(
-      item => item['isSelected'] = false
-    ));
+    this.lists.forEach((list) => list.list.forEach((item) => (item['isSelected'] = false)));
   }
 }

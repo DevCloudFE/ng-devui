@@ -58,12 +58,12 @@
         </td>
         <td colspan="3" class="devui-dropdown">
           <span class="devui-date-title" (click)="toggle($event, 'year')">{{ i18nText?.yearDisplay(currentYear) }}</span>
-          <span class="devui-date-title" (click)="toggle($event, 'month')">{{ (i18nText?.monthsOfYear)[currentMonthIndex] }}</span>
+          <span class="devui-date-title" (click)="toggle($event, 'month')" *ngIf="mode !== 'year'">{{
+            (i18nText?.monthsOfYear)[currentMonthIndex]
+          }}</span>
           <ul class="devui-monthOption text-center" [style.display]="openChooseMonth ? 'block' : 'none'">
             <li
               *ngFor="let month of availableMonths"
-              (mouseover)="changeHoverMonth(month.index)"
-              (mouseleave)="changeHoverMonth(null)"
               [ngClass]="{ active: currentMonthIndex == month.index, disabled: month.disabled }"
               (click)="onSelectMonth(month)"
             >
@@ -73,8 +73,6 @@
           <ul class="devui-yearOption text-center" [style.display]="openChooseYear ? 'block' : 'none'">
             <li
               *ngFor="let item of yearOptions"
-              (mouseover)="changeHoverYear(item.title)"
-              (mouseleave)="changeHoverYear(null)"
               [ngClass]="{ active: currentYear == item.title, disabled: item.disabled }"
               (click)="onSelectYear(item, $event)"
             >

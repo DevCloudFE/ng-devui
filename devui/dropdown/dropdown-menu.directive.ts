@@ -1,5 +1,6 @@
 import { animate, AnimationBuilder, AnimationMetadata, AnimationPlayer, style } from '@angular/animations';
 import { Directive, ElementRef, Host, HostBinding, HostListener, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { easeInQuint, easeOutQuint } from 'ng-devui/utils';
 import { WindowRef } from 'ng-devui/window-ref';
 import { fromEvent, Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
@@ -11,10 +12,9 @@ import { DropDownDirective } from './dropdown.directive';
 })
 export class DropDownMenuDirective implements OnInit, OnDestroy {
   player: AnimationPlayer;
-  @HostBinding('style.display') diplay = 'none';
+  @HostBinding('style.display') display = 'none';
   @HostBinding('attr.tabIndex') tabIndex = -1;
   @HostBinding('class.devui-dropdown-menu') addClass = true;
-  @HostBinding('class.devui-dropdown-overlay') addDropDownClass = true;
   subscription: Subscription;
   keydownEscapeEvent$ = fromEvent(document.body, 'keydown').pipe(
     // chrome 为 Escape , ie 11为Esc
@@ -43,7 +43,8 @@ export class DropDownMenuDirective implements OnInit, OnDestroy {
           });
         }
         if (this.dropdown.appendToBody) {
-          this.render.setStyle(this.el.nativeElement, 'display', 'block');
+          this.render.setStyle(this.el.nativeElement, 'display', 'block'); // 立马生效不等host binding绑定
+          this.display = 'block';
           return;
         }
         if (this.player) { // 此处保留一个防止点击过快
@@ -51,6 +52,7 @@ export class DropDownMenuDirective implements OnInit, OnDestroy {
         }
         if (value) {
           this.render.setStyle(this.el.nativeElement, 'display', 'block');
+          this.display = 'block';
         }
         const direction = this.calcPopDirection(value);
         const metadata = value ? this.fadeIn(direction) : this.fadeOut(direction);
@@ -60,10 +62,16 @@ export class DropDownMenuDirective implements OnInit, OnDestroy {
         this.player.onDone(() => {
           if (!value) {
             this.render.setStyle(this.el.nativeElement, 'display', 'none');
+            this.display = 'none';
           }
           player.destroy();
           if (this.player === player) {
             this.player = undefined;
+          }
+        });
+        this.player.onStart(() => {
+          if (value) {
+            this.render.setStyle(this.el.nativeElement, 'display', 'block');
           }
         });
         this.player.play();
@@ -89,49 +97,15 @@ export class DropDownMenuDirective implements OnInit, OnDestroy {
       return this.popDirectionCache;
     } else {
       if (!isBottomEnough) {
-        this.render.setStyle(dropdownMenuElement, 'bottom', 'calc(100% - 1px)');
+        this.render.setStyle(dropdownMenuElement, 'bottom', '100%');
         this.render.setStyle(dropdownMenuElement, 'top', 'auto');
         this.popDirectionCache = 'top';
-        this.changeFormWithDropDown(this.popDirectionCache);
         return 'top';
       } else {
         this.render.removeStyle(dropdownMenuElement, 'bottom');
         this.render.removeStyle(dropdownMenuElement, 'top');
         this.popDirectionCache = 'bottom';
-        this.changeFormWithDropDown(this.popDirectionCache);
         return 'bottom';
-      }
-    }
-  }
-
-  changeFormWithDropDown(position) {
-    const ele = this.formWithDropDown();
-    let formBorder;
-    if (ele && !ele.classList.contains('devui-dropdown-origin-open')) {
-      ele.classList.add('devui-dropdown-origin-open');
-    }
-    if (position === 'bottom') {
-      formBorder = 'top';
-    } else {
-      formBorder = 'bottom';
-    }
-    if (ele && !ele.classList.contains(`devui-dropdown-origin-${position}`)) {
-      ele.classList.add(`devui-dropdown-origin-${position}`);
-      ele.classList.remove(`devui-dropdown-origin-${formBorder}`);
-    }
-  }
-
-  formWithDropDown() {
-    if (this.dropdown && this.dropdown.toggleEl) {
-      if (!this.dropdown.toggleEl.nativeElement.classList.contains('devui-dropdown-origin')) {
-        const parentEle = this.dropdown.toggleEl.nativeElement.parentElement;
-        if (parentEle && parentEle.classList.contains('devui-dropdown-origin')) {
-          return this.dropdown.toggleEl.nativeElement.parentElement;
-        } else {
-          return this.dropdown.toggleEl.nativeElement;
-        }
-      } else {
-        return this.dropdown.toggleEl.nativeElement;
       }
     }
   }
@@ -141,12 +115,11 @@ export class DropDownMenuDirective implements OnInit, OnDestroy {
     event.stopPropagation();
     if ((this.dropdown.appendToBody && this.dropdown.trigger === 'hover')
       || (this.dropdown.trigger === 'click' && this.dropdown.closeOnMouseLeaveMenu)) {
-      if (this.dropdown.toggleEl.nativeElement.contains(event.relatedTarget)
+      if (this.dropdown.toggleEl?.nativeElement.contains(event.relatedTarget)
         || this.dropdown.dropdownChildren.some(
           children =>
             children.menuEl !== this.el
-            && children.menuEl.nativeElement.parentElement
-            && children.menuEl.nativeElement.parentElement.contains(event.relatedTarget))) {
+            && children.menuEl?.nativeElement.parentElement?.contains(event.relatedTarget))) {
         return;
       } else {
         if (this.dropdown.trigger === 'hover') {
@@ -154,8 +127,8 @@ export class DropDownMenuDirective implements OnInit, OnDestroy {
         } else {
           const relatedTarget = event['originEvent'] && event['originEvent'].relatedTarget;
           if (relatedTarget && (
-            this.dropdown.toggleEl.nativeElement.contains(relatedTarget)
-            || this.dropdown.dropdownChildren.some(children => children.menuEl.nativeElement.contains(relatedTarget))
+            this.dropdown.toggleEl?.nativeElement.contains(relatedTarget)
+            || this.dropdown.dropdownChildren.some(children => children.menuEl?.nativeElement.contains(relatedTarget))
           )) {
             return;
           }
@@ -170,18 +143,16 @@ export class DropDownMenuDirective implements OnInit, OnDestroy {
     switch (direction) {
       case 'top':
         return [
-          style({ transform: 'translateZ(0) scaleY(0)', opacity: 0, transformOrigin: '0% 100%' }),
-          animate('200ms cubic-bezier(0.23, 1, 0.32, 1)',
-            style({ transform: 'translateZ(0) scaleY(1)', opacity: 1, transformOrigin: '0% 100%' })
-          ),
+          style({transform: 'scaleY(0.8) translateY(4px)', opacity: 0.8, transformOrigin: '0% 100%'}),
+          animate(`200ms ${easeOutQuint}`,
+            style({transform: 'scaleY(0.9999) translateY(0)', opacity: 1, transformOrigin: '0% 100%'})),
         ];
       case 'bottom':
       default:
         return [
-          style({ transform: 'translateZ(0) scaleY(0)', opacity: 0, transformOrigin: '0% 0%' }),
-          animate('200ms cubic-bezier(0.23, 1, 0.32, 1)',
-            style({ transform: 'translateZ(0) scaleY(1)', opacity: 1, transformOrigin: '0% 0%' })
-          ),
+          style({transform: 'scaleY(0.8)  translateY(-4px)', opacity: 0.8, transformOrigin: '0% 0%'}),
+          animate(`200ms ${easeOutQuint}`,
+            style({transform: 'scaleY(0.9999)  translateY(0)', opacity: 1, transformOrigin: '0% 0%'})),
         ];
     }
   }
@@ -194,18 +165,16 @@ export class DropDownMenuDirective implements OnInit, OnDestroy {
     switch (direction) {
       case 'top':
         return [
-          style({ transform: 'translateZ(0) scaleY(1)', opacity: 1, transformOrigin: '0% 100%' }),
-          animate('200ms cubic-bezier(0.755, 0.05, 0.855, 0.06)',
-            style({ transform: 'translateZ(0) scaleY(0)', opacity: 0, transformOrigin: '0% 100%' })
-          )
+          style({transform: 'scaleY(0.9999)  translateY(0)', opacity: 1, transformOrigin: '0% 100%'}),
+          animate(`160ms ${easeInQuint}`,
+            style({transform: 'scaleY(0.8)  translateY(4px)', opacity: 0.8, transformOrigin: '0% 100%'}))
         ];
       case 'bottom':
       default:
         return [
-          style({ transform: 'translateZ(0) scaleY(1)', opacity: 1, transformOrigin: '0% 0%' }),
-          animate('200ms cubic-bezier(0.755, 0.05, 0.855, 0.06)',
-            style({ transform: 'translateZ(0) scaleY(0)', opacity: 0, transformOrigin: '0% 0%' })
-          )
+          style({transform: 'scaleY(0.9999)  translateY(0)', opacity: 1, transformOrigin: '0% 0%'}),
+          animate(`160ms ${easeInQuint}`,
+            style({transform: 'scaleY(0.8)  translateY(-4px)', opacity: 0.8, transformOrigin: '0% 0%'}))
         ];
     }
   }

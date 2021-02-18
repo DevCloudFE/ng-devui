@@ -13,6 +13,11 @@ export class DatepickerDemoComponent implements OnInit, OnDestroy {
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/basic.component.ts') },
     { title: 'SCSS', language: 'css', code: require('!!raw-loader!./basic/basic.component.scss') },
   ];
+  setModeSource: Array<DevuiSourceData> = [
+    {title: 'HTML', language: 'html', code: require('!!raw-loader!./set-mode/set-mode.component.html')},
+    {title: 'TS', language: 'typescript', code: require('!!raw-loader!./set-mode/set-mode.component.ts')},
+    {title: 'SCSS', language: 'css', code: require('!!raw-loader!./set-mode/set-mode.component.scss')},
+  ];
   minMaxSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'html', code: require('!!raw-loader!./min-max/min-max.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./min-max/min-max.component.ts') },
@@ -200,6 +205,7 @@ export class DatepickerDemoComponent implements OnInit, OnDestroy {
   setNavValues(values) {
     this.navItems = [
       { dAnchorLink: 'datepicker-default', value: values['datepicker-default'] },
+      { dAnchorLink: 'datepicker-set-mode', value: values['datepicker-set-mode'] },
       { dAnchorLink: 'datepicker-min-max', value: values['datepicker-min-max'] },
       { dAnchorLink: 'datepicker-append-to-body', value: values['datepicker-append-to-body'] },
       { dAnchorLink: 'datepicker-range', value: values['datepicker-range'] },

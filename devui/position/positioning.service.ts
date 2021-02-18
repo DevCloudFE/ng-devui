@@ -121,8 +121,8 @@ export class PositionService {
       placementPrimary = targetPlacement[0];
       placementSecondary = targetPlacement[1];
     } else {
-      placementPrimary = placement.split('-')[0] || 'top';
-      placementSecondary = placement.split('-')[1] || 'center';
+      placementPrimary = placement?.split('-')[0] || 'top';
+      placementSecondary = placement?.split('-')[1] || 'center';
     }
 
     switch (placementPrimary) {

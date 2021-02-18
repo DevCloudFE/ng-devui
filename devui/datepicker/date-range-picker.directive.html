@@ -5,7 +5,11 @@
   (backdropClick)="isOpen=false"
   (positionChange)="onPositionChange($event)"
 >
-  <div [@cornerFadeInOut]="isOpen ? datepickerPosition : 'void'" class="devui-date-range-wrapper devui-dropdown-overlay">
+  <div
+    [@fadeInOut]="(isOpen && startAnimation) ? datepickerPosition : 'void'"
+    class="devui-date-range-wrapper"
+    [class.devui-dropdopwn-hidden]="!startAnimation"
+  >
     <d-date-range-picker
       #dateRangePicker
       [locale]="locale"

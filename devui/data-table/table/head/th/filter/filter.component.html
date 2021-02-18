@@ -31,7 +31,7 @@
   </span>
   <div
     dDropDownMenu
-    class="devui-dropdown-menu devui-dropdown-overlay"
+    class="devui-dropdown-menu"
     [ngClass]="{ 'filter-content-hidden': isFilterHidden }"
     [style.width]="filterBoxWidth || '250px'"
     [ngStyle]="{ 'min-height': filterBoxHeight ? filterBoxHeight : '60px' }"
@@ -63,13 +63,20 @@
     </div>
     <div class="filter-options">
       <d-checkbox
-        style="display: block"
+        style="display: inline-block"
         [label]="i18nCommonText?.checkAll"
         (change)="filterCheckAll($event)"
         [halfchecked]="filterHalfChecked"
         [(ngModel)]="filterAllChecked"
       >
       </d-checkbox>
+      <ng-container *ngIf="extraFilterTemplate">
+        <ng-template
+          [ngTemplateOutlet]="extraFilterTemplate"
+          [ngTemplateOutletContext]="{ checked: filterAllChecked, halfChecked: filterHalfChecked }"
+        >
+        </ng-template>
+      </ng-container>
       <div class="line"></div>
       <cdk-virtual-scroll-viewport
         itemSize="30"

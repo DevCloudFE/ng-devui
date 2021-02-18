@@ -1,4 +1,4 @@
-<d-button (btnClick)="getCheckedRows()">获取选中行</d-button>
+<d-button (btnClick)="getCheckedRows()">Get CheckedRows</d-button>
 <d-data-table
   [dataSource]="sortableDataSource"
   [onlyOneColumnSort]="true"
@@ -26,6 +26,7 @@
     [closeFilterWhenScroll]="true"
     [filterList]="filterListMulti"
     [beforeFilter]="beforeFilter"
+    [extraFilterTemplate]="extraFilterTemplate"
     (filterChange)="filterChangeMultiple($event)"
   ></d-column>
   <d-column
@@ -87,6 +88,9 @@
   ></d-column>
   <d-column field="hidden" header="hidden" [width]="'100px'">hidden</d-column>
 </d-data-table>
+<ng-template #extraFilterTemplate let-checked="checked" let-halfChecked="halfChecked">
+  <span>{{ checked ? 'All selected' : halfChecked ? 'Some selected' : ' None selected' }}</span>
+</ng-template>
 <ng-template #customFilterTemplate let-filterList="filterListDisplay" let-dropdown="dropdown" let-column="column">
   <div class="custom-filter-content">
     <div class="filter-options">

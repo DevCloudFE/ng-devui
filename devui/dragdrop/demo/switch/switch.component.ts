@@ -10,10 +10,12 @@ export class SwitchComponent {
 
   ];
 
-  list2 = [    { name: 'Visual Studio Code' },
-  { name: 'WebStorm' },
-  { name: 'Sublime' },
-  { name: 'Atom' }];
+  list2 = [
+    { name: 'Visual Studio Code' },
+    { name: 'WebStorm' },
+    { name: 'Sublime' },
+    { name: 'Atom' }
+  ];
 
   onDrop(e: any) {
     console.log(e);

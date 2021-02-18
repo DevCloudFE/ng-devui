@@ -1,47 +1,35 @@
-<section>
-  <d-checkbox [label]="'选中状态'" [isShowTitle]="false" (change)="onCheckbox1Change($event)" [ngModel]="true"> </d-checkbox>
-  <d-checkbox [label]="'未选中状态'" [isShowTitle]="false" (change)="onCheckbox1Change($event)" [ngModel]="false"> </d-checkbox>
-  <d-checkbox [label]="'自定义title'" [isShowTitle]="true" [title]="'我的title'" (change)="onCheckbox1Change($event)" [ngModel]="false">
+<div>
+  <d-checkbox [label]="'Checked'" [isShowTitle]="false" (change)="onCheckbox1Change($event)" [ngModel]="true"> </d-checkbox>
+  <d-checkbox [label]="'Not checked'" [isShowTitle]="false" (change)="onCheckbox1Change($event)" [ngModel]="false"> </d-checkbox>
+  <d-checkbox [label]="'Custom title'" [isShowTitle]="true" [title]="'my title'" (change)="onCheckbox1Change($event)" [ngModel]="false">
+  </d-checkbox>
+  <d-checkbox [label]="'No Animation'" [isShowTitle]="false" [showAnimation]="false" (change)="onCheckbox1Change($event)" [ngModel]="true">
+  </d-checkbox>
+  <d-checkbox [name]="'checkbox-username'" [label]="'Disabled'" [disabled]="true" [ngModel]="true" (change)="onCheckbox2Change($event)">
+  </d-checkbox>
+  <d-checkbox [name]="'checkbox-username'" [label]="'Disabled'" [disabled]="true" [ngModel]="false" (change)="onCheckbox2Change($event)">
   </d-checkbox>
   <d-checkbox
-    [label]="'选中状态-关闭动效'"
-    [isShowTitle]="false"
-    [showAnimation]="false"
-    (change)="onCheckbox1Change($event)"
-    [ngModel]="true"
-  >
-  </d-checkbox>
-  <d-checkbox
-    [name]="'checkbox-username'"
-    [label]="'选中状态下禁用'"
-    [disabled]="true"
-    [ngModel]="true"
-    (change)="onCheckbox2Change($event)"
-  >
-  </d-checkbox>
-  <d-checkbox
-    [name]="'checkbox-username'"
-    [label]="'未选中状态下禁用'"
-    [disabled]="true"
-    [ngModel]="false"
-    (change)="onCheckbox2Change($event)"
-  >
-  </d-checkbox>
-  <d-checkbox
-    [label]="'半选状态'"
+    [label]="'Half-checked'"
     [isShowTitle]="false"
     (change)="onHalfCheckboxChange($event)"
     [halfchecked]="halfCheck"
     [(ngModel)]="allCheck"
   >
   </d-checkbox>
-  <d-checkbox [label]="'半选状态下禁用'" [isShowTitle]="false" [disabled]="true" (change)="onCheckbox1Change($event)" [halfchecked]="true">
+  <d-checkbox
+    [label]="'Half-checked disabled'"
+    [isShowTitle]="false"
+    [disabled]="true"
+    (change)="onCheckbox1Change($event)"
+    [halfchecked]="true"
+  >
   </d-checkbox>
-  <d-checkbox [name]="'checkbox-username'" [label]="'数据双向绑定'" [(ngModel)]="checked" (change)="onCheckbox2Change($event)">
+  <d-checkbox [name]="'checkbox-username'" [label]="'Two-way binding'" [(ngModel)]="checked" (change)="onCheckbox2Change($event)">
   </d-checkbox>
   <d-checkbox
     [name]="'checkbox-username'"
-    [label]="'自定义选中颜色'"
+    [label]="'Custom color'"
     [color]="'RGB(255, 193, 7)'"
     [ngModel]="false"
     (change)="onCheckbox2Change($event)"
@@ -50,7 +38,7 @@
   <d-checkbox
     [name]="'checkbox-custom-color'"
     [halfchecked]="halfCheck2"
-    [label]="'自定义半选颜色'"
+    [label]="'Custom color'"
     [color]="'RGB(255, 193, 7)'"
     [(ngModel)]="allCheck2"
     (change)="onHalfCheckboxChange2($event)"
@@ -67,7 +55,7 @@
         class="inline-block"
         (click)="$event.preventDefault(); $event.stopPropagation()"
       ></d-select>
-      自定义label模板
+      Custom label template
     </div>
   </ng-template>
-</section>
+</div>

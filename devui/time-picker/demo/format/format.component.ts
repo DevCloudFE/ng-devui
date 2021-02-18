@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   templateUrl: './format.component.html'
 })
 export class FormatComponent {
-  selectedTime1 = '22:32:58';
+  selectedTime1 = '12:27:50';
   formatOptions = ['hh:mm:ss', 'mm:HH:SS', 'hh:mm', 'MM:ss'];
   format = 'hh:mm:ss';
 

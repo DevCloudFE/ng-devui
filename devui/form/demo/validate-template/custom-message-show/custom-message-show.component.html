@@ -1,24 +1,4 @@
 <section class="demo-section">
-  <h5>验证单个元素，自定义管理消息提示</h5>
-  <ul>
-    <li>配置<code>messageShowType</code>可选择消息自动提示的方式，默认为<code>popover</code>。</li>
-    <li>设置为<code>popover</code>错误信息将在元素聚焦时以<code>popover</code>形式呈现。</li>
-    <li>设置为<code>text</code>错误信息将自动以文本方式显示在元素下方(需要与表单控件容器配合使用)。</li>
-    <li>
-      设置为<code>none</code>错误信息将不会自动呈现到视图，
-      可在模板中获取<code>message</code>或通过监听<code>messageChange</code>事件获取错误<code>message</code>， 或在模板中直接通过引用获取。
-    </li>
-    <li>此配置可继承。</li>
-  </ul>
-  <ul>
-    <li>
-      配置<code>popPosition</code>可在消息提示方式为<code>popover</code>时，自定义<code>popover</code>内容弹出方向。 默认为<code
-        >['right', 'bottom']</code
-      >。
-    </li>
-
-    <li>此配置可继承。</li>
-  </ul>
   <div>
     <input
       #inputValidate="dValidateRules"
@@ -26,14 +6,15 @@
       autocomplete="off"
       name="singleInput"
       maxlength="11"
+      placeholder="Input"
       [(ngModel)]="singleInputData"
       [dValidateRules]="{
         messageShowType: 'none',
         validators: [
-          { required: true, message: '输入不能为空' },
-          { minlength: 3, message: '最小长度为3' },
-          { maxlength: 10, message: '最大长度不能超过10' },
-          { pattern: isAlphabetPattern, message: '请勿包含大小写字母以外其他字符' }
+          { required: true },
+          { minlength: 3 },
+          { maxlength: 10 },
+          { pattern: isAlphabetPattern, message: 'The password must contain only letters and digits.' }
         ]
       }"
       (dRulesStatusChange)="inputErrorChange($event)"
@@ -46,14 +27,15 @@
       autocomplete="off"
       name="singleInput1"
       maxlength="11"
+      placeholder="Input"
       [(ngModel)]="singleInputData1"
       [dValidateRules]="{
         popPosition: 'bottom',
         validators: [
-          { required: true, message: '输入不能为空' },
-          { minlength: 3, message: '最小长度为3' },
-          { maxlength: 10, message: '最大长度不能超过10' },
-          { pattern: isAlphabetPattern, message: '请勿包含大小写字母以外其他字符' }
+          { required: true },
+          { minlength: 3 },
+          { maxlength: 10 },
+          { pattern: isAlphabetPattern, message: 'The password must contain only letters and digits.' }
         ]
       }"
     />

@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
-import { DateConverter, DefaultDateConverter } from 'ng-devui/utils';
+import { addClassToOrigin, DateConverter, DefaultDateConverter, removeClassFromOrigin } from 'ng-devui/utils';
 import { fromEvent, Observable, Subscription } from 'rxjs';
 import { debounceTime, filter, map } from 'rxjs/operators';
 import { SelectDateChangeEventArgs, SelectDateChangeReason } from './date-change-event-args.model';
@@ -35,6 +35,7 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
   @Input() locale: string;
   @Input() cssClass: string;
   @Input() disabled: boolean;
+  @Input() mode: 'year'|'month'|'date' = 'date';
   @Input() dateConverter: DateConverter;
   yearNumber = 12;
   @Input() direction: 'up' | 'down' = 'down';
@@ -61,10 +62,12 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
   set isOpen(val) {
     this._isOpen = val;
     if (val) {
+      addClassToOrigin(this.elementRef);
       setTimeout(() => {
         document.addEventListener('click', this.onDocumentClick);
       });
     } else {
+      removeClassFromOrigin(this.elementRef);
       document.removeEventListener('click', this.onDocumentClick);
     }
   }
@@ -222,12 +225,12 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
 
   private applyPopupStyling(nativeElement: any) {
     this.renderer2.addClass(nativeElement, 'devui-dropdown-menu');
-    this.renderer2.addClass(nativeElement, 'devui-dropdown-overlay');
     this.renderer2.setStyle(nativeElement, 'padding', '0px');
     this.renderer2.setStyle(nativeElement, 'left', '-1px');
+    this.renderer2.setStyle(nativeElement, 'top', 'calc(100% + 1px)');
     if (this.direction === 'up') {
       this.renderer2.setStyle(nativeElement, 'top', 'auto');
-      this.renderer2.setStyle(nativeElement, 'bottom', 'calc(100% - 1px)');
+      this.renderer2.setStyle(nativeElement, 'bottom', 'calc(100% + 1px)');
     }
   }
 
@@ -273,36 +276,10 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
     this.fillPopupData();
     const playAnimation = this.isOpen !== true;
     this.isOpen = true;
-    const ele = this.formWithDropDown();
-    let formPosition;
-    if (this.direction === 'down') {
-      formPosition = 'bottom';
-    } else {
-      formPosition = 'top';
-    }
-    if (ele && !ele.classList.contains('devui-dropdown-origin-open')) {
-      ele.classList.add('devui-dropdown-origin-open');
-    }
-    if (ele && !ele.classList.contains(`devui-dropdown-origin-${formPosition}`)) {
-      ele.classList.add(`devui-dropdown-origin-${formPosition}`);
-    }
     if (playAnimation) {
-      this.playAnimation();
-    }
-  }
-
-  formWithDropDown() {
-    if (this.elementRef) {
-      if (!this.elementRef.nativeElement.classList.contains('devui-dropdown-origin')) {
-        const parentEle = this.elementRef.nativeElement.parentElement;
-        if (parentEle && parentEle.classList.contains('devui-dropdown-origin')) {
-          return this.elementRef.nativeElement.parentElement;
-        } else {
-          return;
-        }
-      } else {
-        return this.elementRef.nativeElement;
-      }
+      setTimeout(() => {
+        this.playAnimation();
+      });
     }
   }
 
@@ -323,7 +300,7 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
   }
 
   private fillPopupData() {
-    ['showTime', 'maxDate', 'minDate', 'cssClass', 'disabled', 'dateConverter', 'locale', 'dateFormat', 'yearNumber', 'dateConfig',
+    ['showTime', 'maxDate', 'minDate', 'cssClass', 'disabled', 'dateConverter', 'locale', 'dateFormat', 'yearNumber', 'dateConfig', 'mode',
     'customViewTemplate']
       .forEach(key => {
         if (this[key] !== undefined) {
@@ -351,16 +328,16 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
     switch (direction) {
       case 'top':
         return [
-          style({transform: 'perspective(1px) scale(0.9)', opacity: 0, transformOrigin: '0% 100%', display: 'inline-block'}),
+          style({transform: 'scaleY(0.8) translateY(4px)', opacity: 0.8, transformOrigin: '0% 100%', display: 'block'}),
           animate(`${animationDuration} ${easeOutQuint}`,
-            style({transform: 'perspective(1px) scale(1)', opacity: 1, transformOrigin: '0% 100%'})),
+            style({transform: 'scaleY(0.9999) translateY(0)', opacity: 1, transformOrigin: '0% 100%', display: 'block'})),
         ];
       case 'bottom':
       default:
         return [
-          style({transform: 'perspective(1px) scale(0.9)', opacity: 0, transformOrigin: '0% 0%', display: 'inline-block'}),
+          style({transform: 'scaleY(0.8)  translateY(-4px)', opacity: 0.8, transformOrigin: '0% 0%', display: 'block'}),
           animate(`${animationDuration} ${easeOutQuint}`,
-            style({transform: 'perspective(1px) scale(1)', opacity: 1, transformOrigin: '0% 0%'})),
+            style({transform: 'scaleY(0.9999)  translateY(0)', opacity: 1, transformOrigin: '0% 0%', display: 'block'})),
         ];
     }
   }
@@ -369,16 +346,16 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
     switch (direction) {
       case 'top':
         return [
-          style({transform: 'perspective(1px) scale(1)', opacity: 1, transformOrigin: '0% 100%'}),
-          animate(`${animationDuration} ${easeInQuint}`,
-            style({transform: 'perspective(1px) scale(0.9)', opacity: 0, transformOrigin: '0% 100%'}))
+          style({transform: 'scaleY(0.9999)  translateY(0)', opacity: 1, transformOrigin: '0% 100%', display: 'block'}),
+          animate(`160ms ${easeInQuint}`,
+            style({transform: 'scaleY(0.8)  translateY(4px)', opacity: 0.8, transformOrigin: '0% 100%', display: 'block'}))
         ];
       case 'bottom':
       default:
         return [
-          style({transform: 'perspective(1px) scale(1)', opacity: 1, transformOrigin: '0% 0%'}),
-          animate(`${animationDuration} ${easeInQuint}`,
-            style({transform: 'perspective(1px) scale(0.9)', opacity: 0, transformOrigin: '0% 0%'}))
+          style({transform: 'scaleY(0.9999)  translateY(0)', opacity: 1, transformOrigin: '0% 0%', display: 'block'}),
+          animate(`160ms ${easeInQuint}`,
+            style({transform: 'scaleY(0.8)  translateY(-4px)', opacity: 0.8, transformOrigin: '0% 0%', display: 'block'}))
         ];
     }
   }
@@ -400,22 +377,12 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
     }
     const metadata = this.isOpen ? this.popIn(direction) : this.popOut(direction);
     const factory = this.builder.build(metadata);
-    this.renderer2.setStyle(this.cmpRef.location.nativeElement, 'display', 'inline-block');
     this.player = factory.create(this.cmpRef.location.nativeElement);
+    this.renderer2.setStyle(this.cmpRef.location.nativeElement, 'display', 'block');
     this.player.onDone(() => {
       if (!this.isOpen) {
         const targetElement = this.cmpRef.location.nativeElement;
         this.renderer2.setStyle(targetElement, 'display', 'none');
-        const ele = this.formWithDropDown();
-        if (ele && ele.classList.contains('devui-dropdown-origin-open')) {
-          ele.classList.remove('devui-dropdown-origin-open');
-        }
-        if (ele && ele.classList.contains('devui-dropdown-origin-top')) {
-          ele.classList.remove('devui-dropdown-origin-top');
-        }
-        if (ele && ele.classList.contains('devui-dropdown-origin-bottom')) {
-          ele.classList.remove('devui-dropdown-origin-bottom');
-        }
       }
     });
     this.player.play();

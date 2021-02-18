@@ -48,6 +48,11 @@ export class DropdownDemoComponent implements OnInit, OnDestroy {
     { title: 'SCSS', language: 'css', code: require('!!raw-loader!./multi-level/multi-level.component.css') },
   ];
 
+  dropdownDemoSetIsOpen: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./set-is-open/dropdown-set-is-open.component.html') },
+    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./set-is-open/dropdown-set-is-open.component.ts') },
+    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./set-is-open/dropdown-set-is-open.component.scss') },
+  ];
   navItems = [];
   subs: Subscription = new Subscription();
   constructor(private translate: TranslateService) {}
@@ -73,6 +78,7 @@ export class DropdownDemoComponent implements OnInit, OnDestroy {
       { dAnchorLink: 'turn-off-trigger-point-settings', value: values['turn-off-trigger-point-settings'] },
       { dAnchorLink: 'suspension-drop-down', value: values['suspension-drop-down'] },
       { dAnchorLink: 'manually-control', value: values['manually-control'] },
+      { dAnchorLink: 'dropdown-set-is-open', value: values['dropdown-set-is-open'] },
       { dAnchorLink: 'auto-expand-and-auto-focus', value: values['auto-expand-and-auto-focus'] },
       { dAnchorLink: 'when-using-appendtobody', value: values['when-using-appendtobody'] },
       { dAnchorLink: 'add-icon', value: values['add-icon'] },

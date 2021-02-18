@@ -1,10 +1,9 @@
 import {
   CdkConnectedOverlay, CdkOverlayOrigin, ConnectedOverlayPositionChange, ConnectedPosition, VerticalConnectionPos
 } from '@angular/cdk/overlay';
-import {Component, ElementRef, Host, Input, OnChanges, OnInit, SimpleChanges, ViewChild, ViewEncapsulation} from '@angular/core';
-import {AppendToBodyDirection, AppendToBodyDirectionsConfig } from 'ng-devui/utils';
-import {fadeInOut} from 'ng-devui/utils';
-import {DropDownDirective} from './dropdown.directive';
+import { Component, ElementRef, Host, Input, OnChanges, OnInit, SimpleChanges, ViewChild, ViewEncapsulation } from '@angular/core';
+import { AppendToBodyDirection, AppendToBodyDirectionsConfig, fadeInOut } from 'ng-devui/utils';
+import { DropDownDirective } from './dropdown.directive';
 
 @Component({
   selector: '[dDropDown][appendToBody]',
@@ -16,7 +15,8 @@ import {DropDownDirective} from './dropdown.directive';
       [cdkConnectedOverlayPositions]="positions"
       (backdropClick)="dropDown.isOpen=false"
       (positionChange)="onPositionChange($event)">
-      <div [@fadeInOut]="(dropDown.isOpen ? menuPosition : 'void')" #dropDownWrapper>
+      <div [@fadeInOut]="(dropDown.isOpen && dropDown.startAnimation) ? menuPosition : 'void'" #dropDownWrapper
+        [class.devui-dropdopwn-hidden]="!dropDown.startAnimation">
         <ng-content select="[dDropDownMenu]"></ng-content>
       </div>
     </ng-template>
@@ -92,44 +92,6 @@ export class DropDownAppendToBodyComponent implements OnInit, OnChanges {
         break;
       case 'bottom':
         this.menuPosition = 'top';
-    }
-    this.changeFormWithDropDown(position.connectionPair.overlayY);
-  }
-
-  changeFormWithDropDown(position) {
-    const ele = this.formWithDropDown();
-    const wrapperEle = this.dropDownWrapper && this.dropDownWrapper.nativeElement;
-    let formBorder;
-    if (ele && !ele.classList.contains('devui-dropdown-origin-open')) {
-      ele.classList.add('devui-dropdown-origin-open');
-    }
-    if (position === 'bottom') {
-      formBorder = 'top';
-    } else {
-      formBorder = 'bottom';
-    }
-    if (ele && !ele.classList.contains(`devui-dropdown-origin-${formBorder}`)) {
-      ele.classList.add(`devui-dropdown-origin-${formBorder}`);
-      ele.classList.remove(`devui-dropdown-origin-${position}`);
-    }
-    if (wrapperEle && !wrapperEle.classList.contains(`devui-dropdown-${formBorder}`)) {
-      wrapperEle.classList.add(`devui-dropdown-${formBorder}`);
-      wrapperEle.classList.remove(`devui-dropdown-${position}`);
-    }
-  }
-
-  formWithDropDown() {
-    if (this.dropDown && this.dropDown.toggleEl) {
-      if (!this.dropDown.toggleEl.nativeElement.classList.contains('devui-dropdown-origin')) {
-        const parentEle = this.dropDown.toggleEl.nativeElement.parentElement;
-        if (parentEle && parentEle.classList.contains('devui-dropdown-origin')) {
-          return this.dropDown.toggleEl.nativeElement.parentElement;
-        } else {
-          return this.dropDown.toggleEl.nativeElement;
-        }
-      } else {
-        return this.dropDown.toggleEl.nativeElement;
-      }
     }
   }
 }

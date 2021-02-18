@@ -14,6 +14,7 @@
         class="devui-table devui-table-{{ size }} {{ borderType ? 'table-' + borderType : '' }} {{ fixHeader ? 'table-fix-header' : '' }} {{
           headerBg ? 'header-bg' : ''
         }} {{ striped ? 'table-striped' : '' }}"
+        [ngClass]="{ 'area-active': showOperationArea }"
         [style.table-layout]="tableLayout"
       >
         <colgroup>
@@ -44,6 +45,7 @@
         class="devui-table devui-table-{{ size }} {{ borderType ? 'table-' + borderType : '' }} {{
           rowHoveredHighlight ? 'table-hover' : ''
         }} {{ headerBg ? 'header-bg' : '' }} {{ striped ? 'table-striped' : '' }}"
+        [ngClass]="{ 'area-active': showOperationArea }"
         [style.table-layout]="tableLayout"
         [style.height]="minHeight ? minHeight : null"
       >
@@ -117,6 +119,7 @@
       class="devui-table devui-table-{{ size }} {{ borderType ? 'table-' + borderType : '' }} {{
         rowHoveredHighlight ? 'table-hover' : ''
       }} {{ headerBg ? 'header-bg' : '' }} {{ striped ? 'table-striped' : '' }}"
+      [ngClass]="{ 'area-active': showOperationArea }"
       [style.table-layout]="tableLayout"
       [style.height]="minHeight ? minHeight : null"
     >

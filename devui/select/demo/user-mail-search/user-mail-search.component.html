@@ -1,5 +1,5 @@
 <section>
-  <h4>搜索支持名字和邮箱搜索</h4>
+  <h4>Search by name or email address<!--搜索支持名字和邮箱搜索--></h4>
   <div class="row">
     <div class="col-md-5">
       <d-select
@@ -12,8 +12,14 @@
         [isSearch]="true"
       >
         <ng-template let-option="option" let-filterKey="filterKey">
-          <div>名称：{{ option['name'] }}</div>
-          <div>邮箱：{{ option['email'] }}</div>
+          <div>
+            name：
+            <!--名称：-->{{ option['name'] }}
+          </div>
+          <div>
+            email:
+            <!--邮箱：-->{{ option['email'] }}
+          </div>
         </ng-template>
       </d-select>
     </div>

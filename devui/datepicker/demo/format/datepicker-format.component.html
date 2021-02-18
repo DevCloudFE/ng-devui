@@ -4,7 +4,7 @@
   </div>
   <div class="row">
     <div class="col-md-6">
-      <div class="devui-input-group devui-dropdown-origin-wrapper devui-dropdown-origin">
+      <div class="devui-input-group devui-dropdown-origin">
         <input
           class="devui-input devui-form-control"
           [placeholder]="dateFormat"
@@ -19,9 +19,9 @@
           placement="top-left"
           [minDate]="'2010-12-30'"
           [maxDate]="'2018-02-27'"
-          (focus)="datePicker2.toggle()"
+          (click)="datePicker2.toggle()"
         />
-        <div *ngIf="selectedDate3" class="devui-input-group-addon icon-close-wrapper" (click)="datePicker2.clearAll()">
+        <div *ngIf="selectedDate3" class="devui-input-group-addon close-icon-wrapper" (click)="datePicker2.clearAll()">
           <i class="icon icon-close"></i>
         </div>
         <div class="devui-input-group-addon" (click)="datePicker2.toggle()">
@@ -30,7 +30,7 @@
       </div>
     </div>
     <div class="col-md-1">
-      <d-button bsStyle="primary" (click)="datePicker2.clearAll()">重置</d-button>
+      <d-button bsStyle="primary" (click)="datePicker2.clearAll()">reset</d-button>
     </div>
   </div>
 </section>

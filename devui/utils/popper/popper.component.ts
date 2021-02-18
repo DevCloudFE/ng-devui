@@ -9,10 +9,11 @@ import {
   OnDestroy,
   Output,
   Renderer2,
-  ViewChild,
+  ViewChild
 } from '@angular/core';
 import { createPopper } from '@popperjs/core';
 import { Observable, Subject } from 'rxjs';
+import { easeInQuint, easeOutQuint } from '../animations/fade-in-out';
 
 interface ExtraSetConfig {
   extraWidth?: number;
@@ -47,6 +48,7 @@ export class PopperComponent implements AfterViewInit, OnDestroy {
     });
   }
   @Input() fluidPopper = true;
+  @Input() poppoverAppendDirection = 'bottom';
   @Input() appendTo = 'body';
   @Input() extraConfig: ExtraSetConfig;
   protected popper = null;
@@ -118,14 +120,14 @@ export class PopperComponent implements AfterViewInit, OnDestroy {
     if (popperContainer.style.transform.match(/scale3d\(1, 1, 1\)/)) {
       // Replace transform open state with close state
       this.renderer.setStyle(popperContainer, 'transform',
-        popperContainer.style.transform.replace('scale3d(1, 1, 1)', 'scale3d(1, 0, 1)'));
+        popperContainer.style.transform.replace('scale3d(1, 1, 1)', 'scale3d(1, 0.8, 1)'));
     } else {
       // perspective(1px) solves pixel shift caused by webkit transform
       this.renderer.setStyle(popperContainer, 'transform',
-        popperContainer.style.transform + ` scale3d(1, 0, 1) perspective(1px)`);
+        popperContainer.style.transform + ` scale3d(1, 0.8, 1) perspective(1px)`);
     }
     // Set container to transparent
-    this.renderer.setStyle(popperContainer, 'opacity', 0);
+    this.renderer.setStyle(popperContainer, 'opacity', 0.8);
 
     // Can't use bind(this) since it calls itself
     const that = this;
@@ -164,7 +166,8 @@ export class PopperComponent implements AfterViewInit, OnDestroy {
     if (this.animate) {
       // perspective(1px) solves pixel shift caused by webkit transform
       this.renderer.setStyle(optionsContainer, 'transform',
-        optionsContainer.style.transform + ` scale3d(1, 0, 1) perspective(1px)`);
+        optionsContainer.style.transform +
+        ` scale3d(1, 0.8, 1) perspective(1px) ${this.popperDirection === 'bottom' ? 'translateY(-4px)' : 'translateY(4px)'}`);
       // Set container init state to transparent as beginning of the transition.
       this.renderer.setStyle(optionsContainer, 'opacity', 0);
       PopperComponent.nextTick(() => {
@@ -178,14 +181,19 @@ export class PopperComponent implements AfterViewInit, OnDestroy {
 
         optionsContainer.addEventListener('transitionend', handler);
         this.renderer.setStyle(optionsContainer, 'transform',
-          optionsContainer.style.transform.replace('scale3d(1, 0, 1)', 'scale3d(1, 1, 1)'));
+          optionsContainer.style.transform.replace('scale3d(1, 0.8, 1)', 'scale3d(1, 1, 1)'));
+        this.popperDirection === 'bottom' ?
+        this.renderer.setStyle(optionsContainer, 'transform',
+          optionsContainer.style.transform.replace('translateY(-4px)', 'translateY(0)')) :
+        this.renderer.setStyle(optionsContainer, 'transform',
+          optionsContainer.style.transform.replace('translateY(4px)', 'translateY(0)'));
         this.renderer.setStyle(optionsContainer, 'opacity', 1);
         this.animate = false;
       });
     } else {
       // handle popper re-rendering, incoming transform doesn't have scale info
       this.renderer.setStyle(optionsContainer, 'transform',
-        optionsContainer.style.transform + (this.open ? ' scale3d(1, 1, 1)' : ' scale3d(1, 0, 1)') + ' perspective(1px)');
+        optionsContainer.style.transform + (this.open ? ' scale3d(1, 1, 1)' : ' scale3d(1, 0.8, 1)') + ' perspective(1px)');
     }
   }
 
@@ -244,9 +252,9 @@ export class PopperComponent implements AfterViewInit, OnDestroy {
     const popperContainer = this.popperContainer.nativeElement;
     if (this.animate && command) {
       if (command === 'open') {
-        this.renderer.setStyle(popperContainer, 'transition', 'transform .2s cubic-bezier(0.23, 1, 0.32, 1)');
+        this.renderer.setStyle(popperContainer, 'transition', `all .2s ${easeOutQuint}`);
       } else if (command === 'close') {
-        popperContainer.style.transition = 'all .15s cubic-bezier(0.755, 0.05, 0.855, 0.06)';
+        popperContainer.style.transition = `all .16s ${easeInQuint}`;
       }
     } else {
       this.renderer.setStyle(popperContainer, 'transition', null);

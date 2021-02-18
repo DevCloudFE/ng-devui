@@ -1,42 +1,40 @@
-<section>
-  <form class="form">
-    <div class="row">
-      <div class="col-sm-6" style="width: 280px; margin-right: 4px; margin-bottom: 20px; float: left">
-        <div class="devui-form-group">
-          <input
-            dTextInput
-            type="text"
-            class="devui-form-control devui-dropdown-origin"
-            name="language"
-            id="language5"
-            [minLength]="0"
-            [disabled]="isDisabled"
-            [(ngModel)]="selectItem1"
-            dAutoComplete
-            [searchFn]="onSearchLocal.bind(this)"
-          />
-        </div>
-      </div>
-      <div class="col-sm-4">
-        <d-button (click)="isDisabled = !isDisabled">
-          {{ isDisabled ? 'Enable AutoComplete' : 'Disable AutoComplete' }}
-        </d-button>
-      </div>
+<form class="form">
+  <div class="row">
+    <div class="col-sm-6" style="width: 280px; margin-right: 4px; margin-bottom: 20px; float: left">
       <div class="devui-form-group">
         <input
           dTextInput
           type="text"
           class="devui-form-control devui-dropdown-origin"
           name="language"
-          id="language5"
+          placeholder="Search"
           [minLength]="0"
-          [disabledKey]="'disable'"
-          [source]="languages1"
-          [formatter]="formatter"
+          [disabled]="isDisabled"
+          [(ngModel)]="selectItem1"
           dAutoComplete
-          [tipsText]="'搜索结果'"
+          [searchFn]="onSearchLocal.bind(this)"
         />
       </div>
     </div>
-  </form>
-</section>
+    <div class="col-sm-4">
+      <d-button (click)="isDisabled = !isDisabled">
+        {{ isDisabled ? 'Enable AutoComplete' : 'Disable AutoComplete' }}
+      </d-button>
+    </div>
+    <div class="devui-form-group">
+      <input
+        dTextInput
+        type="text"
+        class="devui-form-control devui-dropdown-origin"
+        name="language"
+        placeholder="Search"
+        [minLength]="0"
+        [disabledKey]="'disable'"
+        [source]="languages1"
+        [formatter]="formatter"
+        dAutoComplete
+        [tipsText]="'search result'"
+      />
+    </div>
+  </div>
+</form>

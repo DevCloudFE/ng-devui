@@ -1,5 +1,5 @@
 <section>
-  <h5>与区域对齐 使用左下（右对齐下），左上（右对齐上方显示）</h5>
+  <h5>Change Align Origin</h5>
   <div
     class="btn-group g-dropdown"
     dDropDown
@@ -9,28 +9,28 @@
     (toggleEvent)="onToggle($event)"
   >
     <div class="align-origin" #origin>
-      对齐区域
+      Align Area
       <a dDropDownToggle class="devui-dropdown-default">
-        下拉按钮
+        Dropdown
         <span class="icon-chevron-down"></span>
       </a>
     </div>
 
-    <ul dDropDownMenu class="devui-dropdown-menu devui-scrollbar devui-dropdown-overlay" role="menu">
+    <ul dDropDownMenu class="devui-dropdown-menu devui-scrollbar" role="menu">
       <li class="disabled" role="menuitem">
-        <a class="devui-dropdown-item disabled">禁用选项</a>
+        <a class="devui-dropdown-item disabled">Disabled Option</a>
       </li>
       <li role="menuitem">
-        <a class="devui-dropdown-item">新建</a>
+        <a class="devui-dropdown-item">New </a>
       </li>
       <li role="menuitem">
-        <a class="devui-dropdown-item">删除</a>
+        <a class="devui-dropdown-item">Delete </a>
       </li>
     </ul>
   </div>
 </section>
 <section>
-  <h5>使用居中显示</h5>
+  <h5>Align Center</h5>
   <div
     class="btn-group g-dropdown"
     dDropDown
@@ -38,16 +38,16 @@
     [appendToBodyDirections]="['centerDown', 'centerUp']"
     (toggleEvent)="onToggle($event)"
   >
-    <d-button icon="icon-add" bsStyle="text-dark" title="添加" dDropDownToggle></d-button>
-    <ul dDropDownMenu class="devui-dropdown-menu devui-dropdown-overlay" role="menu">
+    <d-button icon="icon-add" bsStyle="text-dark" title="Add" dDropDownToggle></d-button>
+    <ul dDropDownMenu class="devui-dropdown-menu" role="menu">
       <li class="disabled" role="menuitem">
-        <a class="devui-dropdown-item disabled">禁用选项</a>
+        <a class="devui-dropdown-item disabled">Disabled Options</a>
       </li>
       <li role="menuitem">
-        <a class="devui-dropdown-item">新建内容操作</a>
+        <a class="devui-dropdown-item">New </a>
       </li>
       <li role="menuitem">
-        <a class="devui-dropdown-item">删除内容等等等</a>
+        <a class="devui-dropdown-item">Delete</a>
       </li>
     </ul>
   </div>

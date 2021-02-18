@@ -1,5 +1,5 @@
-import { Directive, Input, OnDestroy, OnInit, Self } from '@angular/core';
-import { AbstractControl, NgControl } from '@angular/forms';
+import { Directive, Input, OnChanges, OnDestroy, Self } from '@angular/core';
+import { NgControl } from '@angular/forms';
 import { DValidateSyncService } from '../services/d-validate-sync.service';
 
 @Directive({
@@ -10,24 +10,24 @@ import { DValidateSyncService } from '../services/d-validate-sync.service';
   exportAs: 'dValidateSync'
 })
 
-export class DValidateSyncDirective implements OnInit, OnDestroy {
-  _control: AbstractControl;
+export class DValidateSyncDirective implements OnChanges, OnDestroy {
+
+  private _added = false;
 
   @Input('dValidateSyncKey') key: string;
 
-  constructor(@Self() cd: NgControl, private syncService: DValidateSyncService) {
-    this._control = cd.control;
-  }
+  constructor(@Self() private _cd: NgControl, private syncService: DValidateSyncService) {}
 
-  ngOnInit(): void {
-    if (this.key && this._control) {
-      this.syncService.addControl(this.key, this._control);
+  ngOnChanges() {
+    if (this.key && this._cd.control && !this._added) {
+      this.syncService.addControl(this.key, this._cd.control);
+      this._added = true;
     }
   }
 
   ngOnDestroy(): void {
-    if (this.key && this._control) {
-      this.syncService.removeControl(this.key, this._control);
+    if (this.key && this._cd.control) {
+      this.syncService.removeControl(this.key, this._cd.control);
     }
   }
 }

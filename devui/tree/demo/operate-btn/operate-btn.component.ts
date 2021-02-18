@@ -9,44 +9,44 @@ export class OperateBtnComponent {
   currentSelectedNode;
   @ViewChild('operableTree', { static: true }) operableTree: OperableTreeComponent;
   data = [{
-    'title': '父节点1'
+    'title': 'parent node 1'
   }, {
-    'title': '父节点2',
+    'title': 'parent node 2',
     'children': [{
-      'title': '子节点2-1',
+      'title': 'leaf node 2-1',
       'children': [{
-        'title': '子节点2-1-1'
+        'title': 'leaf node 2-1-1'
       }, {
-        'title': '子节点2-1-2'
+        'title': 'leaf node 2-1-2'
       }]
     }, {
-      'title': '子节点2-2',
+      'title': 'leaf node 2-2',
       'children': [{
-        'title': '子节点2-2-1'
+        'title': 'leaf node 2-2-1'
       }, {
-        'title': '子节点2-2-2'
+        'title': 'leaf node 2-2-2'
       }]
     }]
   }, {
-    'title': '父节点3',
+    'title': 'parent node 3',
     'children': [{
-      'title': '子节点3-1',
+      'title': 'leaf node 3-1',
     }, {
-      'title': '子节点3-2',
+      'title': 'leaf node 3-2',
     }],
   }, {
-    'title': '父节点4',
+    'title': 'parent node 4',
     'children': [{
-      'title': '子节点4-1'
+      'title': 'leaf node 4-1'
     }, {
-      'title': '子节点4-2'
+      'title': 'leaf node 4-2'
     }]
   }, {
-    'title': '父节点5',
+    'title': 'parent node 5',
     'children': [{
-      'title': '子节点5-1'
+      'title': 'leaf node 5-1'
     }, {
-      'title': '子节点5-2'
+      'title': 'leaf node 5-2'
     }]
   }];
   onOperableNodeDeleted(treeNode: TreeNode) {
@@ -93,7 +93,7 @@ export class OperateBtnComponent {
   beforeAddNode(node) {
     console.log('beforeAddNode', node);
     return new Promise((resolve, reject) => {
-      resolve({ title: '新节点', index: 0 });
+      resolve({ title: 'new  node ', index: 0 });
     }).catch(err => console.error(err));
   }
 
@@ -123,7 +123,7 @@ export class OperateBtnComponent {
     // 标记态校验节点，可通过传入errTips控制报错信息，errTipsPosition控制报错信息的弹出位置
     if (event.value === '') {
       event.callback({
-        errTips: '节点名不能为空！',
+        errTips: 'The node name cannot be null!',
         errTipsPosition: 'right'
       });
     } else {

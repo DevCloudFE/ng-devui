@@ -5,6 +5,9 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'd-editable-select-demo',
   templateUrl: './editable-select-demo.component.html',
+  styleUrls: [
+    './editable-select-demo.component.scss'
+  ]
 })
 export class EditableSelectDemoComponent implements OnInit, OnDestroy {
   BasicSource: Array<DevuiSourceData> = [

@@ -11,6 +11,7 @@ import { basicData, curYear } from './../mock-data';
 })
 export class BasicComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('ganttContainer', { static: true }) ganttContainer: ElementRef;
+  curYear = curYear;
   list = basicData;
   ganttStartDate: Date;
   ganttEndDate: Date;

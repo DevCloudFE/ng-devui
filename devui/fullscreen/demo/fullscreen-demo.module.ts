@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ButtonModule } from 'ng-devui/button';
@@ -14,6 +15,7 @@ import { FullscreenDemoNormalComponent } from './normal/normal.component';
 
 @NgModule({
   imports: [
+    CommonModule,
     TranslateModule,
     ButtonModule,
     TooltipModule,

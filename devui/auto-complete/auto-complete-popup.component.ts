@@ -15,7 +15,7 @@ export class AutoCompletePopupComponent implements ControlValueAccessor {
   @Input() width: number;
   @Input() cssClass: string;
   @Input() maxHeight: number;
-  @Input() disabled: boolean;
+  @Input() disabled = false;
   @Input() disabledKey: string;
   @Input() source: any[];
   @Input() position: any;
@@ -32,6 +32,7 @@ export class AutoCompletePopupComponent implements ControlValueAccessor {
   @Input() selectWidth: any;
   @Input() enableLazyLoad: boolean;
   @Input() appendToBody = false;
+  @Input() cdkOverlayOffsetY = 0;
   @Input() origin: CdkOverlayOrigin | undefined;
   @ViewChild('selectMenuElement') selectMenuElement: ElementRef;
   @ViewChild('dropdownUl') dropdownUl: ElementRef;
@@ -140,7 +141,9 @@ export class AutoCompletePopupComponent implements ControlValueAccessor {
   animationEnd($event) {
     if (!this.isOpen && this.selectMenuElement) {
       const targetElement = this.selectMenuElement.nativeElement;
-      targetElement.style.display = 'none';
+      setTimeout(() => {
+        targetElement.style.display = 'none';
+      });
     }
   }
 

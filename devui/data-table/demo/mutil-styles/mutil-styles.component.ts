@@ -15,15 +15,15 @@ export class MutilStylesComponent implements OnInit {
   borderItems = [
     {
       id: '',
-      title: '正常'
+      title: 'Normal'
     },
     {
       id: 'borderless',
-      title: '无边框'
+      title: 'Borderless'
     },
     {
       id: 'bordered',
-      title: '全边框'
+      title: 'Bordered'
     }
   ];
 
@@ -31,15 +31,15 @@ export class MutilStylesComponent implements OnInit {
   sizeItems = [
     {
       id: 'sm',
-      title: '标准尺寸'
+      title: 'Normal'
     },
     {
       id: 'md',
-      title: '中尺寸'
+      title: 'Middle'
     },
     {
       id: 'lg',
-      title: '大尺寸'
+      title: 'Large'
     }
   ];
 

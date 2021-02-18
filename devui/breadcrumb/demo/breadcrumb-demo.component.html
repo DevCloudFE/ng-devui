@@ -7,18 +7,18 @@
       <d-basic demo></d-basic>
     </d-codebox>
   </div>
+  <div class="demo-example" [dAnchor]="'source-config-breadcrumbs'">
+    <div class="demo-title">{{ 'components.breadcrumb.sourceDemo.title' | translate }}</div>
+    <div class="demo-text"></div>
+    <d-codebox id="components-breadcrumb-source-config" [sourceData]="SourceConfigSource">
+      <d-source-config demo></d-source-config>
+    </d-codebox>
+  </div>
   <div class="demo-example" [dAnchor]="'drop-down-breadcrumbs'">
     <div class="demo-title">{{ 'components.breadcrumb.menuDemo.title' | translate }}</div>
     <div class="demo-text"></div>
     <d-codebox id="components-breadcrumb-menu" [sourceData]="MenuSource">
       <d-menu demo></d-menu>
-    </d-codebox>
-  </div>
-  <div class="demo-example" [dAnchor]="'with-search-drop-down-breadcrumbs'">
-    <div class="demo-title">{{ 'components.breadcrumb.searchDemo.title' | translate }}</div>
-    <div class="demo-text"></div>
-    <d-codebox id="components-breadcrumb-search-menu" [sourceData]="SearchMenuSource">
-      <d-search-menu demo></d-search-menu>
     </d-codebox>
   </div>
   <div class="demo-example" [dAnchor]="'self-defined-breadcrumbs'">

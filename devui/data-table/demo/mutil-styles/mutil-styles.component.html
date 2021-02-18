@@ -1,5 +1,5 @@
 <div class="handle-group">
-  表框样式：<d-tabs type="options" [(activeTab)]="activeBorder" [showContent]="false">
+  Style：<d-tabs type="options" [(activeTab)]="activeBorder" [showContent]="false">
     <d-tab *ngFor="let item of borderItems" [id]="item.id">
       <ng-template dTabTitle>
         {{ item.title }}
@@ -8,7 +8,7 @@
   </d-tabs>
 </div>
 <div class="handle-group">
-  表格大小：<d-tabs type="options" [(activeTab)]="activeSize" [showContent]="false">
+  Size：<d-tabs type="options" [(activeTab)]="activeSize" [showContent]="false">
     <d-tab *ngFor="let item of sizeItems" [id]="item.id">
       <ng-template dTabTitle>
         {{ item.title }}
@@ -17,7 +17,7 @@
   </d-tabs>
 </div>
 <div class="handle-group">
-  表格布局：<d-tabs type="options" [(activeTab)]="activeLayout" [showContent]="false" (activeTabChange)="layoutChange($event)">
+  Table Layout：<d-tabs type="options" [(activeTab)]="activeLayout" [showContent]="false" (activeTabChange)="layoutChange($event)">
     <d-tab *ngFor="let item of layoutItems" [id]="item.id">
       <ng-template dTabTitle>
         {{ item.title }}
@@ -25,8 +25,8 @@
     </d-tab>
   </d-tabs>
 </div>
-<div class="handle-group">表头背景：<d-toggle [(ngModel)]="headerBk"></d-toggle></div>
-<div class="handle-group">斑马纹：<d-toggle [(ngModel)]="striped"></d-toggle></div>
+<div class="handle-group">Header background：<d-toggle [(ngModel)]="headerBk"></d-toggle></div>
+<div class="handle-group">Stripes：<d-toggle [(ngModel)]="striped"></d-toggle></div>
 <d-data-table
   [dataSource]="basicDataSource"
   [scrollable]="true"

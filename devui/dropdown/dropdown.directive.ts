@@ -1,9 +1,11 @@
-import { CdkOverlayOrigin} from '@angular/cdk/overlay';
-import { AfterContentInit, ContentChildren, Directive, ElementRef, EventEmitter, HostBinding, Input,
+import { CdkOverlayOrigin } from '@angular/cdk/overlay';
+import {
+  AfterContentInit, ChangeDetectorRef, ContentChildren, Directive, ElementRef, EventEmitter, HostBinding, Input,
   OnChanges, OnDestroy, Optional, Output, QueryList, SimpleChanges,
   SkipSelf
 } from '@angular/core';
-import { fromEvent, merge, Observable, Subject, Subscription } from 'rxjs';
+import { addClassToOrigin, formWithDropDown, removeClassFromOrigin } from 'ng-devui/utils';
+import { fromEvent, merge, Observable, ReplaySubject, Subscription } from 'rxjs';
 import { debounceTime, filter, mapTo, tap } from 'rxjs/operators';
 import { DropDownService } from './dropdown.service';
 
@@ -28,25 +30,24 @@ export class DropDownDirective implements OnDestroy, OnChanges, AfterContentInit
       this.visibleSubject.next(true);
       this.focusToggleElement();
       this.dropdownService.open(this);
+      addClassToOrigin(this.toggleEl);
+      setTimeout(() => {
+        this.startAnimation = true;
+        this.cdr.detectChanges();
+      });
     } else {
+      this.startAnimation = false;
       this.visibleSubject.next(false);
       this.dropdownService.close(this);
-      const ele = this.formWithDropDown();
-      if (ele && ele.classList.contains('devui-dropdown-origin-open')) {
-        ele.classList.remove('devui-dropdown-origin-open');
-      }
-      if (ele && ele.classList.contains('devui-dropdown-origin-top')) {
-        ele.classList.remove('devui-dropdown-origin-top');
-      }
-      if (ele && ele.classList.contains('devui-dropdown-origin-bottom')) {
-        ele.classList.remove('devui-dropdown-origin-bottom');
-      }
+      removeClassFromOrigin(this.toggleEl);
     }
     this.toggleEvent.emit(this.isOpen);
   }
   get isOpen(): boolean {
     return this._isOpen;
   }
+
+  startAnimation = false;
 
   @HostBinding('class.devui-dropdown') addClass = true;
   @Input() disabled = false;
@@ -63,7 +64,7 @@ export class DropDownDirective implements OnDestroy, OnChanges, AfterContentInit
 
   @Output() toggleEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  visibleSubject = new Subject<boolean>();
+  visibleSubject = new ReplaySubject<boolean>(1);
 
   private _isOpen = false;
 
@@ -95,9 +96,12 @@ export class DropDownDirective implements OnDestroy, OnChanges, AfterContentInit
     this.updateCdkConnectedOverlayOrigin();
   }
 
-  constructor(private dropdownService: DropDownService, public el: ElementRef,
-              @Optional() @SkipSelf() public parentDropdown: DropDownDirective) {
-  }
+  constructor(
+    private dropdownService: DropDownService,
+    private cdr: ChangeDetectorRef,
+    public el: ElementRef,
+    @Optional() @SkipSelf() public parentDropdown: DropDownDirective
+    ) { }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.hasOwnProperty('trigger')) {
@@ -126,7 +130,9 @@ export class DropDownDirective implements OnDestroy, OnChanges, AfterContentInit
 
   updateCdkConnectedOverlayOrigin() {
     if (this.toggleEl && this.appendToBody === true) {
-      this.cdkConnectedOverlayOrigin = new CdkOverlayOrigin(this.toggleEl);
+      this.cdkConnectedOverlayOrigin = new CdkOverlayOrigin(
+        formWithDropDown(this.toggleEl) || this.toggleEl.nativeElement
+      );
     } else {
       this.cdkConnectedOverlayOrigin = undefined;
     }
@@ -162,17 +168,16 @@ export class DropDownDirective implements OnDestroy, OnChanges, AfterContentInit
               // menu（子） -> toggle（父） 冒泡模拟的用于离开菜单的时候判断不判断overlay的div层，即只判断menuEl.nativeElement
               // toggle（父） -> menu（子） 离开元素本身的需要判断是否落入了overlay的div层，即只判断menuEl.nativeElement.parentElement
               const relatedTarget = event.relatedTarget || (event['originEvent'] && event['originEvent'].relatedTarget);
-              return  !(this.menuEl.nativeElement && relatedTarget &&
-                  (this.menuEl.nativeElement.parentElement.contains(event.relatedTarget)
-                  || this.menuEl.nativeElement.parentElement.parentElement.contains(event.relatedTarget) // 套了两层div增加判断
-                  || this.menuEl.nativeElement.contains(relatedTarget)
+              return  !(this.menuEl?.nativeElement && relatedTarget &&
+                  (this.menuEl?.nativeElement.parentElement?.contains(event.relatedTarget)
+                  || this.menuEl?.nativeElement.parentElement?.parentElement?.contains(event.relatedTarget) // 套了两层div增加判断
+                  || this.menuEl?.nativeElement.contains(relatedTarget)
                   || this.dropdownChildren.some(
                     children =>
                       children !== this
                       // appendToBody的时候可能会没有实例化不在document上需要做判断有没有parentElement
-                      && (children.menuEl.nativeElement.parentElement
-                      && children.menuEl.nativeElement.parentElement.contains(event.relatedTarget)
-                      || children.menuEl.nativeElement.contains(relatedTarget))
+                      && (children.menuEl?.nativeElement.parentElement?.contains(event.relatedTarget)
+                      || children.menuEl?.nativeElement.contains(relatedTarget))
                   ))
               );
             } else {
@@ -203,20 +208,4 @@ export class DropDownDirective implements OnDestroy, OnChanges, AfterContentInit
 
     target.dispatchEvent(event);
   }
-
-  formWithDropDown() {
-    if (this.toggleEl) {
-      if (!this.toggleEl.nativeElement.classList.contains('devui-dropdown-origin')) {
-        const parentEle = this.toggleEl.nativeElement.parentElement;
-        if (parentEle && parentEle.classList.contains('devui-dropdown-origin')) {
-          return this.toggleEl.nativeElement.parentElement;
-        } else {
-          return this.toggleEl.nativeElement;
-        }
-      } else {
-        return this.toggleEl.nativeElement;
-      }
-    }
-  }
-
 }

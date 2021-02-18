@@ -11,10 +11,11 @@ import {
   Output,
   SimpleChanges,
   TemplateRef,
-  ViewChild,
+  ViewChild
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { AutoCompleteDirective, AutoCompletePopupComponent } from 'ng-devui/auto-complete';
+import { addClassToOrigin, removeClassFromOrigin } from 'ng-devui/utils';
 import { Observable, of } from 'rxjs';
 
 @Component({
@@ -233,29 +234,9 @@ export class MultiAutoCompleteComponent implements OnInit, OnChanges, ControlVal
 
   changePopUp(open) {
     if (open) {
-      this.openPopup();
+      addClassToOrigin(this.multiAutoCompleteWrapperElement);
     } else {
-      this.hidePopup();
-    }
-  }
-
-  openPopup() {
-    const ele = this.multiAutoCompleteWrapperElement && this.multiAutoCompleteWrapperElement.nativeElement;
-    if (ele && !ele.classList.contains('devui-dropdown-origin-open')) {
-      ele.classList.add('devui-dropdown-origin-open');
-    }
-    if (ele && !ele.classList.contains('devui-dropdown-origin-bottom')) {
-      ele.classList.add('devui-dropdown-origin-bottom');
-    }
-  }
-
-  hidePopup() {
-    const ele = this.multiAutoCompleteWrapperElement && this.multiAutoCompleteWrapperElement.nativeElement;
-    if (ele && ele.classList.contains('devui-dropdown-origin-open')) {
-      ele.classList.remove('devui-dropdown-origin-open');
-    }
-    if (ele && ele.classList.contains('devui-dropdown-origin-bottom')) {
-      ele.classList.remove('devui-dropdown-origin-bottom');
+      removeClassFromOrigin(this.multiAutoCompleteWrapperElement);
     }
   }
 

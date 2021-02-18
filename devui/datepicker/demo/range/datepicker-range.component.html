@@ -2,13 +2,13 @@
   <div class="col-md-6" style="margin-right: 10px">
     <div class="row">
       <div class="col-md-6">
-        <div class="devui-input-group devui-dropdown-origin-wrapper devui-dropdown-origin">
+        <div class="devui-input-group devui-dropdown-origin">
           <input
             class="devui-input devui-form-control"
             placeholder="y/MM/dd"
             name="dp"
             [(ngModel)]="startDate"
-            (focus)="datePicker1.toggle()"
+            (click)="datePicker1.toggle()"
             autocomplete="off"
             dDatepicker
             appendToBody
@@ -16,7 +16,7 @@
             (selectedDateChange)="getValue($event)"
             [customViewTemplate]="myCustomview"
           />
-          <div *ngIf="startDate" class="devui-input-group-addon icon-close-wrapper" (click)="datePicker1.clearAll()">
+          <div *ngIf="startDate" class="devui-input-group-addon close-icon-wrapper" (click)="datePicker1.clearAll()">
             <i class="icon icon-close"></i>
           </div>
           <div class="devui-input-group-addon" (click)="datePicker1.toggle()">
@@ -27,8 +27,7 @@
     </div>
     <ng-template #myCustomview let-chooseDate="chooseDate" let-datePicker>
       <div class="box">
-        <a class="date-link" (click)="chooseDate(getDay(0))">选择今天</a>
-        <a class="date-link">选择迭代开始日期</a>
+        <a class="date-link" (click)="chooseDate(getDay(0))">select today</a>
       </div>
     </ng-template>
   </div>
@@ -36,13 +35,13 @@
   <div class="col-md-6">
     <div class="row">
       <div class="col-md-6">
-        <div class="devui-input-group devui-dropdown-origin-wrapper devui-dropdown-origin">
+        <div class="devui-input-group devui-dropdown-origin">
           <input
             class="devui-input devui-form-control"
             placeholder="y/MM/dd"
             name="dp"
             [(ngModel)]="endDate"
-            (focus)="datePicker2.toggle()"
+            (click)="datePicker2.toggle()"
             autocomplete="off"
             dDatepicker
             appendToBody
@@ -50,7 +49,7 @@
             (selectedDateChange)="getValue($event)"
             [customViewTemplate]="myCustomview1"
           />
-          <div *ngIf="endDate" class="devui-input-group-addon icon-close-wrapper" (click)="datePicker2.clearAll()">
+          <div *ngIf="endDate" class="devui-input-group-addon close-icon-wrapper" (click)="datePicker2.clearAll()">
             <i class="icon icon-close"></i>
           </div>
           <div class="devui-input-group-addon" (click)="datePicker2.toggle()">
@@ -61,8 +60,7 @@
     </div>
     <ng-template #myCustomview1 let-chooseDate="chooseDate" let-datePicker>
       <div class="box">
-        <a class="date-link" (click)="chooseDate(getNextWeekday(7))">选择一周后</a>
-        <a class="date-link">选择迭代结束日期</a>
+        <a class="date-link" (click)="chooseDate(getNextWeekday(7))">after a week</a>
       </div>
     </ng-template>
   </div>

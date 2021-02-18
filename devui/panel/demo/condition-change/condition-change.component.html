@@ -2,18 +2,12 @@
   <d-panel [type]="'primary'" #panel [isCollapsed]="isCollapsed" [beforeToggle]="beforeToggle">
     <d-panel-header>
       Panel with foldable
-      <em
-        class="icon"
-        [ngClass]="{
-          'icon-chevron-up': panel.isCollapsed,
-          'icon-chevron-down': !panel.isCollapsed
-        }"
-      ></em>
+      <em class="icon icon-chevron-down" [ngClass]="{ open: panel.isCollapsed }"></em>
     </d-panel-header>
     <d-panel-body>This is body</d-panel-body>
   </d-panel>
   <br /><br />
   <d-button (btnClick)="panelToggle = !panelToggle" bsClass="d-btn d-btn-primary">
-    {{ panelToggle ? '阻止折叠' : '允许折叠' }}
+    {{ panelToggle ? 'No collapsing' : 'Allow collapsing' }}
   </d-button>
 </section>

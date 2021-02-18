@@ -1,7 +1,7 @@
-<section>
+<div>
   <d-button (click)="openTempleteDialog()">Dialog</d-button>
   <d-button (click)="openTempleteModal()">Modal</d-button>
-</section>
+</div>
 
 <ng-template #dialogContent let-modalInstance="modalInstance" let-modalContentInstance="modalContentInstance">
   <d-dialog-content [data]="dialogData" [modalInstance]="modalInstance" [modalContentInstance]="modalContentInstance"></d-dialog-content>

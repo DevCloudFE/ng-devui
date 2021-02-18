@@ -1,6 +1,6 @@
 @import '../style/core/layout';
 @import '../style/theme/color';
-@import '../style/theme/_font';
+@import '../style/core/_font';
 
 .devui-form-horizontal :host.devui-form-controls {
   flex: 1 1 auto;
@@ -113,8 +113,37 @@
   }
 }
 
-:host.devui-form-control-has-feedback .devui-form-control-container {
-  position: relative;
+:host.devui-form-control-has-feedback,
+:host.devui-form-control-has-suffix {
+  .devui-form-control-container {
+    position: relative;
+  }
+}
+
+:host.devui-form-control-has-suffix {
+  .devui-form-item-suffix {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    z-index: 1;
+    width: 32px;
+    height: 16px;
+    margin-top: -7px;
+    line-height: 16px;
+    text-align: center;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .suffix {
+    cursor: pointer;
+  }
+}
+
+:host.devui-form-control-has-feedback.devui-form-control-has-suffix {
+  .devui-form-item-icon {
+    right: 32px;
+  }
 }
 
 @keyframes devui-loading-keyframes {

@@ -1,6 +1,6 @@
 @import '../style/theme/color';
 @import '../style/theme/corner';
-@import '../style/theme/_font';
+@import '../style/core/_font';
 
 :host {
   display: inline-block;
@@ -211,7 +211,7 @@
   }
 }
 
-.pink-w98 {
+.red-w98 {
   color: #f66f6a;
   background-color: $devui-base-bg;
   border-width: 1px;
@@ -226,7 +226,7 @@
   }
 }
 
-.red-w98 {
+.pink-w98 {
   color: #f3689a;
   background-color: $devui-base-bg;
   border-width: 1px;

@@ -44,6 +44,6 @@ export class MultiAutoCompleteDemoArrayComponent implements OnInit {
     document.execCommand('Copy'); // 执行浏览器复制命令
     tempInput.style.display = 'none';
     document.body.removeChild(tempInput);
-    this.msgs = [{ severity: 'success', summary: '复制成功', detail: '数据已成功复制至剪切板' }];
+    this.msgs = [{ severity: 'success', summary: 'Copy success', detail: 'The data has been successfully copied to the clipboard.' }];
   }
 }

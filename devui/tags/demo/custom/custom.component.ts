@@ -14,33 +14,33 @@ export class CustomComponent {
     {
       checked: false,
       type: 'blue-w98',
-      name: '标签颜色1',
+      name: 'label color1',
     },
     {
       checked: false,
       type: 'aqua-w98',
-      name: '标签颜色2',
+      name: 'label color2',
     },
     {
       checked: false,
       type: 'olivine-w98',
-      name: '标签颜色3',
+      name: 'label color3',
     },
     {
       checked: false,
       type: 'green-w98',
-      name: '标签颜色4',
+      name: 'label color4',
     },
     {
       checked: false,
       type: 'yellow-w98',
-      name: '标签颜色5',
+      name: 'label color5',
     },
     {
       checked: false,
       type: '',
       custumColor: '#f50',
-      name: '自定义颜色#F50',
+      name: 'custom color#F50',
     },
   ];
 

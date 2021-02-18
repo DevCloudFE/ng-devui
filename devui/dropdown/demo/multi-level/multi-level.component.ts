@@ -12,22 +12,24 @@ export class DropDownDemoMultiLevelComponent {
     originY: 'top',
     overlayX: 'start',
     overlayY: 'top',
+    offsetY: -4 // margin:2px刚好让子菜单第一项对齐父菜单
   }, {
     originX: 'end',
     originY: 'bottom',
     overlayX: 'start',
     overlayY: 'bottom',
-    offsetY: 5, // 菜单底部有个padding: 5px，刚好让菜单对齐父菜单
+    offsetY: 9, // 菜单底部有个padding: 5px，margin:2px刚好让菜单对齐父菜单
   }, {
     originX: 'start',
     originY: 'top',
     overlayX: 'end',
     overlayY: 'top',
+    offsetY: -4
   }, {
     originX: 'start',
     originY: 'bottom',
     overlayX: 'end',
     overlayY: 'bottom',
-    offsetY: 5,
+    offsetY: 9,
   }];
 }

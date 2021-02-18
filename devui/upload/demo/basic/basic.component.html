@@ -1,26 +1,26 @@
-<section style="width: 50%">
-  <h4>单文件</h4>
+<div style="width: 50%">
+  <h4>Basic Usage</h4>
   <d-single-upload
     #singleupload
     [fileOptions]="fileOptions"
     [uploadedFiles]="uploadedFiles"
     [uploadOptions]="uploadOptions"
-    [uploadText]="'点击上传'"
     [filePath]="'name'"
     [beforeUpload]="beforeUpload"
+    [dynamicUploadOptionsFn]="dynamicUploadOptionsFn"
     (successEvent)="onSuccess($event)"
     (deleteUploadedFileEvent)="deleteUploadedFile($event)"
     (errorEvent)="onError($event)"
   >
   </d-single-upload>
-  <h4>单文件支持拖动上传</h4>
+  <h4>Dragdrop</h4>
   <d-single-upload
     #singleuploadDrag
     [enableDrop]="true"
     [fileOptions]="fileOptions2"
     [uploadedFiles]="uploadedFiles"
     [uploadOptions]="uploadOptions"
-    [placeholderText]="'请拖动文件上传'"
+    [placeholderText]="'Drag files'"
     [withoutBtn]="true"
     [filePath]="'name'"
     [beforeUpload]="beforeUploadFn"
@@ -32,25 +32,36 @@
   >
   </d-single-upload>
   <div [style.margin-top.px]="10">
-    <d-button (btnClick)="customUploadEvent()">点我上传</d-button>
+    <d-button (btnClick)="customUploadEvent()">Upload</d-button>
   </div>
-  <h4>自动上传</h4>
-  <d-single-upload
-    [fileOptions]="fileOptions3"
-    [uploadOptions]="uploadOptions"
-    (successEvent)="onSuccess($event)"
-    (errorEvent)="onError($event)"
-    [autoUpload]="true"
-    [showTip]="true"
-  >
-  </d-single-upload>
-  <h4>单文件禁止上传状态</h4>
+  <h4>ngModel</h4>
   <d-single-upload
     #singleupload
     [fileOptions]="fileOptions"
     [uploadedFiles]="uploadedFiles"
     [uploadOptions]="uploadOptions"
-    [uploadText]="'点击上传'"
+    [filePath]="'name'"
+    [beforeUpload]="beforeUpload"
+    (successEvent)="onSuccess($event)"
+    (deleteUploadedFileEvent)="deleteUploadedFile($event)"
+    (errorEvent)="onError($event)"
+    (fileSelect)="fileSelect($event)"
+    [(ngModel)]="selectedFiles"
+  >
+  </d-single-upload>
+  <div [style.margin-top.px]="10">
+    <d-button style="margin-right: 10px">
+      <label for="fileInput" style="cursor: pointer">Select Files</label>
+    </d-button>
+    <input type="file" id="fileInput" style="visibility: hidden" />
+  </div>
+  <h4>Disabled</h4>
+  <d-single-upload
+    #singleupload
+    [fileOptions]="fileOptions"
+    [uploadedFiles]="uploadedFiles"
+    [uploadOptions]="uploadOptions"
+    [uploadText]="'Upload'"
     [filePath]="'name'"
     [beforeUpload]="beforeUpload"
     (successEvent)="onSuccess($event)"
@@ -59,7 +70,4 @@
     [disabled]="true"
   >
   </d-single-upload>
-  <div [style.margin-top.px]="10">
-    <pre>singleupload uploadOptions: {{ singleupload.uploadOptions | json }}</pre>
-  </div>
-</section>
+</div>

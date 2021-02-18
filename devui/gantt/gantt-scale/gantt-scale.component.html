@@ -21,8 +21,8 @@
       {{
         data.scaleStartVisable && (first || data.monthStart)
           ? unit === 'month'
-            ? data.yearLabel + '年'
-            : data.yearLabel + '年' + data.monthLabel + '月'
+            ? i18nText?.yearDisplay(data.yearLabel)
+            : i18nText?.yearAndMonthDisplay(data.yearLabel, data.monthLabel)
           : ''
       }}
     </ng-container>
@@ -35,17 +35,17 @@
     </div>
     <ng-container *ngIf="!highlight || !data.highlight">
       <div *ngIf="unit === 'day'" class="border-left" [ngClass]="{ today: data.today }">
-        {{ data.today ? '今天' : data.dayOfMonthLabel }}
+        {{ data.today ? i18nText?.today : data.dayOfMonthLabel }}
       </div>
       <div *ngIf="unit === 'week'" [ngClass]="{ 'border-left': first || data.weekend }">
         {{ first || data.weekend ? data.dayOfMonthLabel : '' }}
       </div>
       <div *ngIf="unit === 'month'" [ngClass]="{ 'border-left': first || data.monthStart }">
-        {{ first || data.monthStart ? data.monthLabel + '月' : '' }}
+        {{ first || data.monthStart ? i18nText?.monthDisplay(data.monthLabel) : '' }}
       </div>
     </ng-container>
   </div>
-  <div class="milestone-new {{ unit }}" title="版本里程碑" (click)="addMilestone(data)">
+  <div class="milestone-new {{ unit }}" title="milestone" (click)="addMilestone(data)">
     <div class="icon-add"></div>
   </div>
 </div>

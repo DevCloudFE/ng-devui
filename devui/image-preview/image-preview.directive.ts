@@ -15,6 +15,8 @@ export class ImagePreviewDirective implements OnInit, OnDestroy {
   @Input() customSub: Subject<HTMLElement>;
   @Input() disableDefault = false;
   // TODO: 提供用户可定制选择器
+  @Input() zIndex: number;
+  @Input() backDropZIndex: number;
 
   @HostBinding('class.devui-image-preview-container')
   get defaultClasses() {
@@ -49,6 +51,9 @@ export class ImagePreviewDirective implements OnInit, OnDestroy {
     const modalRef = this.modalService.open({
       id: 'devui-image-preview-modal',
       component: DImagePreviewComponent,
+      zIndex: this.zIndex,
+      backDropZIndex: this.backDropZIndex,
+      showAnimate: false,
       data: {
         targetImage: imageHTMLElement,
         images: Array.from(this.elementRef.nativeElement.querySelectorAll('img')),

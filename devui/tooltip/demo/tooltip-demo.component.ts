@@ -15,7 +15,11 @@ export class TooltipDemoComponent implements OnInit, OnDestroy {
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/basic.component.ts') },
     { title: 'SCSS', language: 'css', code: require('!!raw-loader!./basic/basic.component.css') },
   ];
-
+  delaySource: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./delay/delay.component.html') },
+    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./delay/delay.component.ts') },
+    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./delay/delay.component.css') },
+  ];
   navItems = [];
   subs: Subscription = new Subscription();
   constructor(private translate: TranslateService) {}
@@ -36,7 +40,10 @@ export class TooltipDemoComponent implements OnInit, OnDestroy {
   }
 
   setNavValues(values) {
-    this.navItems = [{ dAnchorLink: 'basic-usage', value: values['basic-usage'] }];
+    this.navItems = [
+      { dAnchorLink: 'basic-usage', value: values['basic-usage'] },
+      { dAnchorLink: 'delay-trigger', value: values['delay-trigger'] },
+    ];
   }
 
   ngOnDestroy() {

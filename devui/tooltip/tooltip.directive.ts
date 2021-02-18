@@ -1,13 +1,16 @@
 import {
+  AfterViewInit,
   ComponentFactoryResolver,
   ComponentRef,
   Directive,
   ElementRef,
   HostListener,
   Input,
-  OnDestroy,
+  OnDestroy
 } from '@angular/core';
 import { OverlayContainerRef } from 'ng-devui/overlay-container';
+import { fromEvent, Subject } from 'rxjs';
+import { debounceTime, filter, map, takeUntil } from 'rxjs/operators';
 import { TooltipComponent } from './tooltip.component';
 import { PositionType } from './tooltip.types';
 
@@ -15,24 +18,24 @@ import { PositionType } from './tooltip.types';
   selector: '[dTooltip]',
   exportAs: 'dTooltip',
 })
-export class TooltipDirective implements OnDestroy {
+export class TooltipDirective implements AfterViewInit, OnDestroy {
   @Input() content: string;
   @Input() position: PositionType | PositionType[] = ['top', 'right', 'bottom', 'left'];
   @Input() showAnimate: boolean;
+  // 防止每次鼠标不小心经过目标元素就会显示出Tooltip的内容，所以增加适当的延迟。
+  @Input() mouseEnterDelay = 150;
+  // 因为鼠标移出之后如果立刻消失会很突然，所以增加略小一些的延迟，使得既不突然也反应灵敏
+  @Input() mouseLeaveDelay = 100;
+  isEnter: boolean;
+  unsubscribe$ = new Subject();
+  unsubscribeT$ = new Subject();
   tooltipComponentRef: ComponentRef<TooltipComponent>;
 
-  constructor(private triggerElementRef: ElementRef,
-              private overlayContainerRef: OverlayContainerRef,
-              private componentFactoryResolver: ComponentFactoryResolver
+  constructor(
+    private triggerElementRef: ElementRef,
+    private overlayContainerRef: OverlayContainerRef,
+    private componentFactoryResolver: ComponentFactoryResolver
   ) {}
-
-  @HostListener('mouseenter') onMouseEnter() {
-    this.show();
-  }
-
-  @HostListener('mouseleave') onMouseLeave() {
-    this.hide();
-  }
 
   @HostListener('focus') onFocus() {
     this.show();
@@ -53,6 +56,41 @@ export class TooltipDirective implements OnDestroy {
       showAnimate: this.showAnimate,
       triggerElementRef: this.triggerElementRef,
     });
+
+    // 对创建的ToolTip组件添加鼠标移入和移出的监听事件
+    if (this.tooltipComponentRef.instance['tooltip'].nativeElement) {
+      this.bindMouseEvent();
+    }
+  }
+  bindMouseEvent() {
+    fromEvent(this.tooltipComponentRef.instance['tooltip'].nativeElement, 'mouseenter')
+      .pipe(
+        map((event) => {
+          this.isEnter = true;
+          return event;
+        }),
+        debounceTime(0),
+        filter((event) => this.isEnter),
+        takeUntil(this.unsubscribeT$)
+      )
+      .subscribe(() => {
+        if (!this.tooltipComponentRef) {
+          this.show();
+        }
+      });
+    fromEvent(this.tooltipComponentRef.instance['tooltip'].nativeElement, 'mouseleave')
+      .pipe(
+        map((event) => {
+          this.isEnter = false;
+          return event;
+        }),
+        debounceTime(this.mouseLeaveDelay),
+        filter((event) => !this.isEnter),
+        takeUntil(this.unsubscribeT$)
+      )
+      .subscribe(() => {
+        this.hide();
+      });
   }
 
   show() {
@@ -75,6 +113,10 @@ export class TooltipDirective implements OnDestroy {
       this.tooltipComponentRef.destroy();
       this.tooltipComponentRef = null;
     }
+    if (this.unsubscribeT$) {
+      this.unsubscribeT$.next();
+      this.unsubscribeT$.complete();
+    }
   }
 
   hide() {
@@ -88,9 +130,50 @@ export class TooltipDirective implements OnDestroy {
         this.destroy();
       };
     }
+    if (this.unsubscribeT$) {
+      this.unsubscribeT$.next();
+      this.unsubscribeT$.complete();
+    }
   }
-
+  ngAfterViewInit() {
+    if (this.triggerElementRef.nativeElement) {
+      fromEvent(this.triggerElementRef.nativeElement, 'mouseenter')
+        .pipe(
+          map((event) => {
+            this.isEnter = true;
+            return event;
+          }),
+          debounceTime(this.mouseEnterDelay),
+          filter((event) => this.isEnter),
+          takeUntil(this.unsubscribe$)
+        )
+        .subscribe(() => {
+          if (!this.tooltipComponentRef) {
+            this.show();
+          }
+        });
+      fromEvent(this.triggerElementRef.nativeElement, 'mouseleave')
+        .pipe(
+          map((event) => {
+            this.isEnter = false;
+            return event;
+          }),
+          debounceTime(this.mouseLeaveDelay),
+          filter((event) => !this.isEnter),
+          takeUntil(this.unsubscribe$)
+        )
+        .subscribe(() => {
+          this.hide();
+        });
+    }
+  }
   ngOnDestroy() {
+    if (this.unsubscribeT$) {
+      this.unsubscribeT$.next();
+      this.unsubscribeT$.complete();
+    }
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
     this.destroy();
   }
 }

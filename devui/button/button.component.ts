@@ -1,5 +1,7 @@
-import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostListener, Input, Output, ViewChild } from '@angular/core';
-
+import {
+  ChangeDetectionStrategy, Component, ElementRef,
+  EventEmitter, HostListener, Input, Output, TemplateRef, ViewChild
+} from '@angular/core';
 export type IButtonType = 'button' | 'submit' | 'reset';
 export type IButtonStyle = 'common' | 'primary' | 'text' | 'text-dark' | 'danger';
 export type IButtonPosition = 'left' | 'right' | 'default';
@@ -24,7 +26,8 @@ export class ButtonComponent {
   @Input() showLoading = false;
   @Input() width?: string;
   @Input() autofocus = false;
-  @Output() btnClick = new EventEmitter<any>();
+  @Input() loadingTemplateRef: TemplateRef<any>;
+  @Output() btnClick = new EventEmitter<MouseEvent>();
   @ViewChild('buttonContent', { static: true }) buttonContent: ElementRef;
 
   @HostListener('click', ['$event'])
@@ -38,7 +41,7 @@ export class ButtonComponent {
   constructor() {
   }
 
-  // 新增click事件，解决直接在host上使用click，IE在disabled状态下还能触发事件
+  // 新增click事件，解决直接在host上使用click，在disabled状态下还能触发事件
   onClick(event) {
     if (!this.showLoading) {
       this.btnClick.emit(event);

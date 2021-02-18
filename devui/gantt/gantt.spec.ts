@@ -2,8 +2,8 @@ import { Component, DebugElement, ElementRef, OnDestroy, OnInit, ViewChild } fro
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import {
-    GanttBarComponent, GanttModule, GanttScaleComponent, GanttScaleUnit,
-    GanttService, GanttTaskInfo
+  GanttBarComponent, GanttModule, GanttScaleComponent, GanttScaleUnit,
+  GanttService, GanttTaskInfo
 } from 'ng-devui/gantt';
 import { I18nModule } from 'ng-devui/i18n';
 import { Subscription } from 'rxjs';

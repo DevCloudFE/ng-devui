@@ -38,24 +38,24 @@ export class LoadingComponent {
       this.dataLoaded = true;
       this.selectComponent.loadFinish();
       this.options = [{
-        name: '选项1',
+        name: 'Option 1',
         value: 1
       }, {
-        name: '选项2',
+        name: 'Option 2',
         value: 2
       }, {
-        name: '选项3',
+        name: 'Option 3',
         value: 3
       }, {
-        name: '选项4',
+        name: 'Option 4',
         value: 4
       }];
 
       this.currentOption = [{
-        name: '选项3',
+        name: 'Option 3',
         value: 3
       }, {
-        name: '选项4',
+        name: 'Option 4',
         value: 4
       }];
     });
@@ -66,16 +66,16 @@ export class LoadingComponent {
       console.log('done');
       this.dataLoaded1 = true;
       this.options2 = [{
-        name: '选项1',
+        name: 'Option 1',
         value: 1
       }, {
-        name: '选项2',
+        name: 'Option 2',
         value: 2
       }, {
-        name: '选项3',
+        name: 'Option 3',
         value: 3
       }, {
-        name: '选项4',
+        name: 'Option 4',
         value: 4
       }];
       this.selectComponent1.forceSearchNext();

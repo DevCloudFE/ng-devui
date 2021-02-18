@@ -2,6 +2,7 @@ import { Component, DebugElement, OnInit, ViewChild } from '@angular/core';
 import { ComponentFixture, discardPeriodicTasks, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { DomHelper } from '../utils/testing/dom-helper';
 import { createKeyBoardEvent } from '../utils/testing/event-helper';
 import { TagsInputComponent } from './tags.input.component';
@@ -51,7 +52,7 @@ describe('tags input', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [FormsModule],
+      imports: [FormsModule, NoopAnimationsModule],
       declarations: [TestTagsInputComponent, TagsInputComponent]
     }).compileComponents();
   });

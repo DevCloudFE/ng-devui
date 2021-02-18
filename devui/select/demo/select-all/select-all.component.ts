@@ -12,7 +12,7 @@ import { Component } from '@angular/core';
 })
 
 export class SelectAllComponent {
-  options = ['选项1', '选项2', '选项3', '选项4', '选项5', '选项6', '选项7', '选项8',
-    '选项9', '选项10', '选项11', '选项12', '选项13', '选项14'];
-  select2 = ['选项8', '选项3'];
+  options = ['Option 1', 'Option 2', 'Option 3', 'Option 4', 'Option 5', 'Option 6', 'Option 7', 'Option 8',
+    'Option 9', 'Option 10', 'Option 11', 'Option 12', 'Option 13', 'Option 14'];
+  select2 = ['Option 8', 'Option 3'];
 }

@@ -1,5 +1,5 @@
-<h4>全部禁用</h4>
 <section>
+  <h4>Disable all<!--全部禁用--></h4>
   <div class="row">
     <div class="col-md-5">
       <d-select [disabled]="true" [options]="options" [direction]="'auto'" [ngModel]="'选项6'"></d-select>
@@ -7,7 +7,7 @@
   </div>
 </section>
 <section>
-  <h4>禁用某一项</h4>
+  <h4>Disable one option<!--禁用某一项--></h4>
   <div class="row">
     <div class="col-md-5">
       <d-select [options]="options2" [direction]="'auto'" [filterKey]="'value'" [optionDisabledKey]="'disabled'"></d-select>
@@ -15,7 +15,9 @@
   </div>
 </section>
 <section>
-  <h4>禁用某一项, 标签不可单独操作，全选仍可以选中和取消</h4>
+  <h4>
+    Disabled one option, you cannot perform operations on the item independently, but you can still select or deselect all items.<!--禁用某一项, 标签不可单独操作，全选仍可以选中和取消-->
+  </h4>
   <div class="row">
     <div class="col-md-5">
       <d-select
@@ -34,7 +36,9 @@
   </div>
 </section>
 <section>
-  <h4>禁用某一项, 使用immutable禁止变更，全选不可选中和取消</h4>
+  <h4>
+    Disable an option. Use immutable to prevent changes. Select all items and deselect them can affect the option.<!--禁用某一项, 使用immutable禁止变更，全选不可选中和取消-->
+  </h4>
   <div class="row">
     <div class="col-md-5">
       <d-select
@@ -51,5 +55,7 @@
       ></d-select>
     </div>
   </div>
-  immutable只控制不能变更，不会显示为禁用状态，禁用状态请使用disabled。
+  <!-- immutable只控制不能变更，不会显示为禁用状态，禁用状态请使用disabled。 -->
+  The immutable only make sure option won't be changed and is will not display as disabled. To disable the immutable option, use the
+  disabled.
 </section>

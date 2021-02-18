@@ -1,0 +1,14 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
+.slider-wrapper {
+  position: relative;
+
+  span {
+    position: absolute;
+    top: 15px;
+
+    &:last-child {
+      right: 10%;
+    }
+  }
+}

@@ -1,37 +1,37 @@
-<section width="50%">
-  <ng-container *ngIf="fileUploaders.length > 0">
-    <div *ngFor="let fileUploader of fileUploaders" class="devui-add-images">
-      <div
-        class="devui-add-items {{ fileUploader.status === 3 ? 'devui-upload-failed' : '' }} 
-        {{ fileUploader.status === 2 ? 'devui-upload-success' : '' }}"
-      >
-        <span class="filename">{{ fileUploader.file.name }}</span>
-        <div *ngIf="fileUploader.status === 1" class="devui-loading">
-          <d-progress [percentage]="fileUploader.percentage" [height]="'5px'" [barbgcolor]="'#50D4AB'"></d-progress>
-          <span (click)="deleteFile(fileUploader)" class="devui-cancel-upload">{{ CANCELUPLOAD }}</span>
-        </div>
-        <span *ngIf="fileUploader.status === 2 || fileUploader.status === 3" class="icon-file"></span>
+<ng-container *ngIf="fileUploaders.length > 0">
+  <div *ngFor="let fileUploader of fileUploaders" class="devui-add-images">
+    <div
+      class="devui-add-items {{ fileUploader.status === 3 ? 'devui-upload-failed' : '' }} 
+      {{ fileUploader.status === 2 ? 'devui-upload-success' : '' }}"
+    >
+      <span class="filename">{{ fileUploader.file.name }}</span>
+      <div *ngIf="fileUploader.status === 1" class="devui-loading">
+        <d-progress [percentage]="fileUploader.percentage" [height]="'5px'" [barbgcolor]="'#50D4AB'"></d-progress>
+        <span (click)="deleteFile(fileUploader)" class="devui-cancel-upload">{{ CANCELUPLOAD }}</span>
       </div>
-      <span class="icon icon-delete {{ fileUploader.status === 3 ? 'devui-failed-icon' : '' }}" (click)="deleteFile(fileUploader)"></span>
-      <span *ngIf="fileUploader.status === 3" class="icon icon-running" (click)="dUpload.upload(fileUploader)"></span>
+      <span *ngIf="fileUploader.status === 2 || fileUploader.status === 3" class="icon-file"></span>
     </div>
-  </ng-container>
-  <div
-    dUpload
-    #dUpload="dUpload"
-    class="devui-add-images devui-upload {{ isDropOver ? 'devui-upload-dropover' : '' }}"
-    [enableDrop]="true"
-    [fileOptions]="fileOptions"
-    [uploadOptions]="uploadOptions"
-    [uploadedFiles]="uploadedFiles"
-    [fileUploaders]="fileUploaders"
-    (successEvent)="onSuccess($event)"
-    (errorEvent)="onError($event)"
-    (alertMsgEvent)="alertMsg($event)"
-    (fileDrop)="fileDrop($event)"
-    (fileOver)="fileOver($event)"
-  >
-    <span class="icon-op-add"></span>
+    <span class="icon icon-delete {{ fileUploader.status === 3 ? 'devui-failed-icon' : '' }}" (click)="deleteFile(fileUploader)"></span>
+    <span *ngIf="fileUploader.status === 3" class="icon icon-running" (click)="dUpload.uploadFiles(fileUploader)"></span>
   </div>
-  <d-toast [value]="message"></d-toast>
-</section>
+</ng-container>
+<div
+  dUpload
+  #dUpload="dUpload"
+  class="devui-add-images devui-upload {{ isDropOver ? 'devui-upload-dropover' : '' }}"
+  [enableDrop]="true"
+  [fileOptions]="fileOptions"
+  [uploadOptions]="uploadOptions"
+  [uploadedFiles]="uploadedFiles"
+  [fileUploaders]="fileUploaders"
+  (successEvent)="onSuccess($event)"
+  (errorEvent)="onError($event)"
+  (alertMsgEvent)="alertMsg($event)"
+  (fileDrop)="fileDrop($event)"
+  (fileOver)="fileOver($event)"
+  (fileSelect)="fileSelect($event)"
+  [dynamicUploadOptionsFn]="dynamicUploadOptionsFn"
+>
+  <span class="icon-op-add"></span>
+</div>
+<d-toast [value]="message"></d-toast>
