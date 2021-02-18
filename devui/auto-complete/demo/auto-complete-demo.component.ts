@@ -6,6 +6,9 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'd-auto-complete-demo',
   templateUrl: './auto-complete-demo.component.html',
+  styleUrls: [
+    './auto-complete-demo.component.scss'
+  ]
 })
 export class AutoCompleteDemoComponent implements OnInit, OnDestroy {
   AutoCompleteDemoBasic: Array<DevuiSourceData> = [

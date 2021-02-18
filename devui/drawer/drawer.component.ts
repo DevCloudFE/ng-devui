@@ -21,16 +21,38 @@ export class DrawerContentDirective {
   styleUrls: ['./drawer.component.scss'],
   animations: [
     trigger('fadeInOut', [
-      state('void', style({display: 'block', opacity: 0})),
-      state('in', style({display: 'block', opacity: 0.6})),
-      transition('* => *', animate('300ms ease')),
+      state('void', style({ display: 'block', opacity: 0 })),
+      state('in', style({ display: 'block', opacity: 1 })),
+      transition('void => in', animate('100ms cubic-bezier(.0,.0,.1,.1)')),
+      transition('in => void', animate('100ms 200ms cubic-bezier(.0,.0,.1,.1)'))
     ]),
     trigger('flyInOut', [
-      state('left-void', style({transform: 'translateX(-100%)', left: 0})),
-      state('left-in', style({transform: 'none', left: 0})),
-      state('right-void', style({transform: 'translateX(100%)', right: 0})),
-      state('right-in', style({transform: 'none', right: 0})),
-      transition('* => *', animate('300ms ease')),
+      state('left-void', style({ transform: 'translateX(-100%)', left: 0, opacity: 0.8 })),
+      state('left-in', style({ transform: 'translateX(0)', left: 0, opacity: 1 })),
+      state('right-void', style({ transform: 'translateX(100%)', right: 0, opacity: 0.8})),
+      state('right-in', style({ transform: 'translateX(0)', right: 0, opacity: 1 })),
+      // 解决初始化动效为'void'而非'left/right-void'
+      transition('void => left-in', [
+        style({ transform: 'translateX(-100%)', left: 0, opacity: 0.8 }),
+        animate('300ms cubic-bezier(0.16,0.75,0.5,1)', style({ transform: 'translateX(0)', left: 0, opacity: 1 }))
+      ]),
+      transition('void => right-in', [
+        style({ transform: 'translateX(100%)', right: 0, opacity: 0.8 }),
+        animate('300ms cubic-bezier(0.16,0.75,0.5,1)', style({ transform: 'translateX(0)', right: 0, opacity: 1 }))
+      ]),
+      transition('left-void => left-in', [
+        animate('300ms cubic-bezier(0.16,0.75,0.5,1)')
+      ]),
+      transition('right-void => right-in', [
+        animate('300ms cubic-bezier(0.16,0.75,0.5,1)')
+      ]),
+      transition('left-in => left-void', [
+        animate('300ms cubic-bezier(0.5,0,0.84,0.25)')
+      ]),
+      transition('right-in => right-void', [
+        animate('300ms cubic-bezier(0.5,0,0.84,0.25)')
+      ]),
+
     ]),
   ],
   preserveWhitespaces: false,
@@ -52,7 +74,7 @@ export class DrawerComponent implements OnInit, OnDestroy {
   @Input() clickDoms: any = [];
   // Will overwrite by drawer service
   @Input() afterOpened: Function;
-  @Input() position: 'right' | 'left';
+  @Input() position: 'right' | 'left' = 'left';
   @Input() bodyScrollable = true; // drawer打开body是否可滚动
   _width: string;
   // 全屏时用来记录之前的宽度，因为没遮罩的情况下width不能是百分比
@@ -81,7 +103,6 @@ export class DrawerComponent implements OnInit, OnDestroy {
       this.onAnimationEnd(event);
     });
   }
-
   setWidth(width: string) {
     if (width.indexOf('%') >= 0) {
       const widthStr = trim(width, '%');
@@ -137,7 +158,7 @@ export class DrawerComponent implements OnInit, OnDestroy {
     }
     this.animateState = 'in';
     const activeElement = document.activeElement;
-    if (activeElement && typeof(activeElement['blur']) === 'function') {
+    if (activeElement && typeof (activeElement['blur']) === 'function') {
       activeElement['blur']();
     }
     this.isCover = this.isCover === undefined ? true : this.isCover;
@@ -190,7 +211,7 @@ export class DrawerComponent implements OnInit, OnDestroy {
   }
 
   // Will overwrite by drawer service
-    destroy() {}
+  destroy() { }
 
   isHaveDialogOrUpload() {
     const dialog: any = document.getElementsByClassName('modal-dialog');

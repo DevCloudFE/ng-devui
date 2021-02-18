@@ -3,7 +3,7 @@
     <div class="grid">
       <div class="u-1-3">
         <d-form-item>
-          <d-form-label [required]="true" [hasHelp]="true" [helpTips]="'这是计划名，计划名字，计划名'">计划名</d-form-label>
+          <d-form-label [required]="true" [hasHelp]="true" [helpTips]="'This is the plan name.'">Name</d-form-label>
           <d-form-control class="form-control-width">
             <input dTextInput name="userName" />
           </d-form-control>
@@ -11,7 +11,7 @@
       </div>
       <div class="u-1-3">
         <d-form-item>
-          <d-form-label [required]="true" [hasHelp]="true" [helpTips]="'这是计划名，计划名字，计划名'">计划名</d-form-label>
+          <d-form-label [required]="true" [hasHelp]="true" [helpTips]="'This is the plan name.'">Name</d-form-label>
           <d-form-control class="form-control-width">
             <input dTextInput name="userName" />
           </d-form-control>
@@ -19,7 +19,7 @@
       </div>
       <div class="u-1-3">
         <d-form-item>
-          <d-form-label [required]="true" [hasHelp]="true" [helpTips]="'这是计划名，计划名字，计划名'">计划名</d-form-label>
+          <d-form-label [required]="true" [hasHelp]="true" [helpTips]="'This is the plan name.'">Name</d-form-label>
           <d-form-control class="form-control-width">
             <input dTextInput name="userName" />
           </d-form-control>
@@ -27,7 +27,7 @@
       </div>
       <div class="u-1-3">
         <d-form-item>
-          <d-form-label [required]="true" [hasHelp]="true" [helpTips]="'这是计划名，计划名字，计划名'">计划名</d-form-label>
+          <d-form-label [required]="true" [hasHelp]="true" [helpTips]="'This is the plan name.'">Name</d-form-label>
           <d-form-control class="form-control-width">
             <input dTextInput name="userName" />
           </d-form-control>
@@ -35,7 +35,7 @@
       </div>
       <div class="u-1-3">
         <d-form-item>
-          <d-form-label [required]="true" [hasHelp]="true" [helpTips]="'这是计划名，计划名字，计划名'">计划名</d-form-label>
+          <d-form-label [required]="true" [hasHelp]="true" [helpTips]="'This is the plan name.'">Name</d-form-label>
           <d-form-control class="form-control-width">
             <input dTextInput name="userName" />
           </d-form-control>
@@ -43,7 +43,7 @@
       </div>
       <div class="u-1-3">
         <d-form-item>
-          <d-form-label [required]="true" [hasHelp]="true" [helpTips]="'这是计划名，计划名字，计划名'">计划名</d-form-label>
+          <d-form-label [required]="true" [hasHelp]="true" [helpTips]="'This is the plan name.'">Name</d-form-label>
           <d-form-control class="form-control-width">
             <input dTextInput name="userName" />
           </d-form-control>
@@ -51,7 +51,7 @@
       </div>
       <div class="u-1-3">
         <d-form-item>
-          <d-form-label [required]="true">单选框</d-form-label>
+          <d-form-label [required]="true">Select</d-form-label>
           <d-form-control class="form-control-width">
             <d-select [options]="selectOptions" name="select1" [filterKey]="'label'" [(ngModel)]="formData.selectValue"></d-select>
           </d-form-control>
@@ -59,7 +59,7 @@
       </div>
       <div class="u-1-3">
         <d-form-item>
-          <d-form-label>多选框</d-form-label>
+          <d-form-label>Multiple options</d-form-label>
           <d-form-control class="form-control-width">
             <d-select
               name="multiSelect"
@@ -77,15 +77,14 @@
       </div>
       <div class="u-1-3">
         <d-form-item>
-          <d-form-label class="mul-col-label-withTips" [hasHelp]="true" [helpTips]="'这是计划名，计划名字，计划名'">标签选项</d-form-label>
+          <d-form-label>Tags</d-form-label>
           <d-form-control class="form-control-width">
             <d-tags-input
               name="tag"
               (click)="$event.stopPropagation()"
-              id="tagsInputId"
               [displayProperty]="'label'"
               [tags]="addedLabelList"
-              [placeholder]="'标签'"
+              [placeholder]="'Tags'"
               [suggestionList]="labelList"
             >
             </d-tags-input>
@@ -94,10 +93,20 @@
       </div>
       <div class="u-1-3">
         <d-form-item>
-          <d-form-label>单选框</d-form-label>
+          <d-form-label>Execution day</d-form-label>
+          <d-form-control class="form-control-width">
+            <div class="single-checkbox" *ngFor="let option of checkboxOptions">
+              <d-checkbox name="runDay" [label]="option.label" [isShowTitle]="false" [ngModel]="option.checked"></d-checkbox>
+            </div>
+          </d-form-control>
+        </d-form-item>
+      </div>
+      <div class="u-1-3">
+        <d-form-item>
+          <d-form-label>Radio</d-form-label>
           <d-form-control class="form-control-width">
             <d-radio-group name="schedule" [cssStyle]="'column'" [(ngModel)]="formData.radioValue">
-              <d-radio *ngFor="let option of radioOptions" [value]="option">
+              <d-radio *ngFor="let option of radioOptions" [name]="'schedule'" [value]="option.id">
                 {{ option.label }}
               </d-radio>
             </d-radio-group>
@@ -106,26 +115,16 @@
       </div>
       <div class="u-1-3">
         <d-form-item>
-          <d-form-label>开关</d-form-label>
+          <d-form-label>Switch</d-form-label>
           <d-form-control class="form-control-width">
             <d-toggle name="anonymous" [(ngModel)]="formData.toggleValue"></d-toggle>
           </d-form-control>
         </d-form-item>
       </div>
-      <div class="u-1-3">
-        <d-form-item>
-          <d-form-label>执行日</d-form-label>
-          <d-form-control class="form-control-width">
-            <div class="single-checkbox" *ngFor="let option of checkboxOptions">
-              <d-checkbox name="runDay" [label]="option.label" [isShowTitle]="false" [ngModel]="option.checked"></d-checkbox>
-            </div>
-          </d-form-control>
-        </d-form-item>
-      </div>
     </div>
     <d-form-operation>
-      <d-button bsStyle="stress" class="mr-element-spacing" circled="true" style="margin-right: 4px !important">提交</d-button>
-      <d-button bsStyle="common" circled="true">取消</d-button>
+      <d-button bsStyle="stress" class="mr-element-spacing" circled="true" style="margin-right: 4px !important">Submit</d-button>
+      <d-button bsStyle="common" circled="true">Cancel</d-button>
     </d-form-operation>
   </form>
 </section>

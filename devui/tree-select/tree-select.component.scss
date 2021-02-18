@@ -133,7 +133,8 @@
 .devui-tree-select.devui-options-container {
   width: 100%;
   color: $devui-text;
-  padding: 4px 0 4px 8px;
+  margin: 4px 0;
+  padding-left: 8px;
 
   .devui-no-data-tip {
     user-select: none;
@@ -234,15 +235,6 @@ svg.svg-icon-search path {
 :host {
   display: inline-block;
   width: 100%;
-}
-
-.devui-select-input.devui-form-control.devui-tree-select-input.devui-dropdown-origin.devui-dropdown-origin-open {
-  &.devui-dropdown-origin-bottom,
-  &.devui-dropdown-origin-top {
-    &::after {
-      display: none;
-    }
-  }
 }
 
 .devui-select-input.devui-tree-select-input.disabled {

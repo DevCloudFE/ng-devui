@@ -65,4 +65,7 @@ export class MultiComponent {
   fileOver(event) {
     console.log(event);
   }
+  fileSelect(files) {
+    console.log(files);
+  }
 }

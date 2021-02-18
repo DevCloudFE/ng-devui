@@ -1,17 +1,4 @@
 <section class="demo-section">
-  <h5>验证单个元素，自定义校验器</h5>
-  <ul>
-    <li>
-      一个校验器需要一个唯一的<code>id</code>标识，你可显式声明此<code>id</code>，
-      也可声明一个与保留字不冲突的<code>key</code>，此<code>key</code>将被识别为<code>id</code>， 其<code>value</code>作为校验器。
-    </li>
-    <li>
-      自定义校验器，你可以简单返回<code>true | false </code>来标识当前校验是否通过， 也可以返回<code>string | null</code
-      >，来标识当前是否错误并返回错误消息，适用于动态错误提示。
-    </li>
-    <li>如果是异步校验器，你需要将你的值以<code>Observable</code>对象方式返回。</li>
-    <li>更多地，<code>DevUI</code>兼容原生<code>angular</code>校验器， 你可将<code>isNgValidator</code>设置为<code>true</code>。</li>
-  </ul>
   <div>
     <d-select
       [options]="verifierOptions"
@@ -19,8 +6,9 @@
       [multiple]="true"
       [name]="'singleSelect1'"
       [filterKey]="'name'"
+      [placeholder]="'Select'"
       [dValidateRules]="{
-        validators: [{ maxUser: maxUsers(3), message: '请不要选择超过三个管理员' }],
+        validators: [{ maxUser: maxUsers(3), message: 'Do not select more than three administrators.' }],
         asyncValidators: [{ isUserBusy: isUserBusy }]
       }"
     >

@@ -28,7 +28,6 @@ export class TemplateComponent implements OnInit {
       id: 'template',
       width: '346px',
       maxHeight: '600px',
-      showAnimate: true,
       title: 'Dialog Template Content',
       contentTemplate: this.dialogContent,
       backdropCloseable: true,
@@ -38,7 +37,7 @@ export class TemplateComponent implements OnInit {
       buttons: [
         {
           cssClass: 'primary',
-          text: '确定',
+          text: 'Ok',
           handler: ($event: Event) => {
             results.modalInstance.hide();
           },
@@ -46,7 +45,7 @@ export class TemplateComponent implements OnInit {
         {
           id: 'btn-cancel',
           cssClass: 'common',
-          text: '取消',
+          text: 'Cancel',
           handler: ($event: Event) => {
             results.modalInstance.hide();
           },
@@ -60,7 +59,6 @@ export class TemplateComponent implements OnInit {
       id: 'modal-modal',
       width: '300px',
       backdropCloseable: false,
-      showAnimate: false,
       contentTemplate: this.modalContent,
       onClose: () => {
         console.log('on modal closed.');

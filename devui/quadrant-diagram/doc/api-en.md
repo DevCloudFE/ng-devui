@@ -25,7 +25,7 @@ import {QuadrantDiagramModule} from' ng-devui/experimental/quadrant-diagram';
 ### d-quadrant-diagram event
 
 | Parameter | Type | Description | Jump to Demo |
-| :-------------: | :-----------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| :-------------: | :-----------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------- |:-----------------: |
 | dropEvent | `EventEmitter<any>` | Optional. Triggered event when a tag is dragged. The return value is `{dragData: e.dragData, xAxisValue: xAxisValue, yAxisValue: yAxisValue}`, which corresponds to the current tag data, x value of the tag, and y value of the tag. | [Basic Usage](demo#basic-usage) |
 | zoomOutEvent | `EventEmitter<any>` | Optional. Triggering event when the zoom-in button is clicked. The return value is the current label size. |
 | zoomInEvent | `EventEmitter<any>` | OptionaL. Triggering event when the zoom-in button is clicked. The return value is the current label size. |

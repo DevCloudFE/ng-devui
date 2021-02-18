@@ -1,15 +1,24 @@
 @import '../style/theme/color';
 @import '../style/theme/corner';
-@import '../style/theme/_font';
+@import '../style/core/_font';
 
 .devui-loading-wrapper {
   display: flex;
   flex: 1 1 auto;
 }
 
+.devui-loading-wrapper.devui-loading-full {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 1001;
+}
+
 .devui-spinner-wrapper {
   position: absolute;
   z-index: 1001;
+  width: max-content;
+  max-width: 100%;
 }
 
 .devui-message-wrapper {

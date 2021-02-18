@@ -1,122 +1,126 @@
 @import '../style/theme/color';
 
-:host {
+:host ::ng-deep {
   display: block;
-}
 
-::ng-deep .devui-panel {
-  d-panel-body {
+  .devui-panel {
     line-height: 1.5;
-    padding: 15px;
-    background: $devui-base-bg;
-    flex: 1;
-  }
+    background-color: $devui-base-bg;
 
-  .devui-panel-body-collapse {
-    d-panel-body {
-      border-left: 2px solid $devui-dividing-line;
+    .devui-panel-heading {
+      padding: 12px 20px;
+      color: $devui-text;
+
+      d-panel-header {
+        line-height: 1.5;
+      }
     }
-  }
 
-  &.devui-panel-primary {
-    .devui-panel-body-collapse {
+    .devui-panel-body {
+      display: flex;
+      position: relative;
+      border-top: 1px solid $devui-dividing-line;
+
       d-panel-body {
-        border-color: $devui-primary-line;
+        line-height: 1.5;
+        padding: 15px;
+        background: $devui-base-bg;
+        flex: 1;
+      }
+
+      &.devui-panel-body-collapse {
+        &::before {
+          content: '';
+          width: 30px;
+          height: 100%;
+        }
+
+        d-panel-body {
+          border-left: 2px solid $devui-dividing-line;
+        }
       }
     }
-  }
 
-  &.devui-panel-info {
-    .devui-panel-body-collapse {
-      d-panel-body {
-        border-color: $devui-info-line;
+    .devui-panel-footer {
+      padding: 10px 15px;
+      color: $devui-text;
+      background-color: $devui-area;
+
+      d-panel-footer {
+        line-height: 1.5;
       }
     }
-  }
 
-  &.devui-panel-success {
-    .devui-panel-body-collapse {
-      d-panel-body {
-        border-color: $devui-success-line;
+    &.devui-panel-default {
+      .devui-panel-heading,
+      .devui-panel-body {
+        background-color: $devui-default-bg;
       }
     }
-  }
 
-  &.devui-panel-warning {
-    .devui-panel-body-collapse {
-      d-panel-body {
-        border-color: $devui-warning-line;
+    &.devui-panel-primary {
+      .devui-panel-heading,
+      .devui-panel-body {
+        background-color: $devui-primary-bg;
+      }
+
+      .devui-panel-body-collapse {
+        d-panel-body {
+          border-color: $devui-primary-line;
+        }
       }
     }
-  }
 
-  &.devui-panel-danger {
-    .devui-panel-body-collapse {
-      d-panel-body {
-        border-color: $devui-danger-line;
+    &.devui-panel-info {
+      .devui-panel-heading,
+      .devui-panel-body {
+        background-color: $devui-info-bg;
+      }
+
+      .devui-panel-body-collapse {
+        d-panel-body {
+          border-color: $devui-info-line;
+        }
       }
     }
-  }
-}
 
-.devui-panel {
-  line-height: 1.5;
-  background-color: $devui-base-bg;
+    &.devui-panel-success {
+      .devui-panel-heading,
+      .devui-panel-body {
+        background-color: $devui-success-bg;
+      }
 
-  .devui-panel-heading {
-    padding: 12px 20px;
-    color: $devui-text;
-
-    d-panel-header {
-      line-height: 1.5;
-    }
-  }
-
-  .devui-panel-body {
-    display: flex;
-    position: relative;
-    border-top: 1px solid $devui-dividing-line;
-
-    &.devui-panel-body-collapse {
-      &::before {
-        content: '';
-        width: 30px;
-        height: 100%;
+      .devui-panel-body-collapse {
+        d-panel-body {
+          border-color: $devui-success-line;
+        }
       }
     }
-  }
 
-  .devui-panel-footer {
-    padding: 10px 15px;
-    color: $devui-text;
-    background-color: $devui-area;
+    &.devui-panel-warning {
+      .devui-panel-heading,
+      .devui-panel-body {
+        background-color: $devui-warning-bg;
+      }
 
-    d-panel-footer {
-      line-height: 1.5;
+      .devui-panel-body-collapse {
+        d-panel-body {
+          border-color: $devui-warning-line;
+        }
+      }
     }
-  }
 
-  &.devui-panel-default {
-    background-color: $devui-default-bg;
-  }
+    &.devui-panel-danger {
+      .devui-panel-heading,
+      .devui-panel-body {
+        background-color: $devui-danger-bg;
+      }
 
-  &.devui-panel-primary {
-    background-color: $devui-primary-bg;
-  }
-
-  &.devui-panel-info {
-    background-color: $devui-info-bg;
-  }
-
-  &.devui-panel-success {
-    background-color: $devui-success-bg;
-  }
-
-  &.devui-panel-warning {
-    background-color: $devui-warning-bg;
-  }
-
-  &.devui-panel-danger {
-    background-color: $devui-danger-bg;
+      .devui-panel-body-collapse {
+        d-panel-body {
+          border-color: $devui-danger-line;
+        }
+      }
+    }
   }
 }

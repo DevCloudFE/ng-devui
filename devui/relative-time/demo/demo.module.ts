@@ -9,10 +9,11 @@ import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.
 import { TranslateModule } from '@ngx-translate/core';
 import { RelativeTimeModule } from '../relative-time.module';
 import { BasicComponent } from './basic/basic.component';
+import { CustomTimeComponent } from './custom-time/custom-time.component';
 import { DemoComponent } from './demo.component';
 
 @NgModule({
-  declarations: [DemoComponent, BasicComponent],
+  declarations: [DemoComponent, BasicComponent, CustomTimeComponent],
   imports: [
     TranslateModule,
     CommonModule,

@@ -1,55 +1,52 @@
-<section>
-  <h3>拖拽实体元素跟随</h3>
-  <div class="row">
-    <div class="col-sm-3">
-      <div class="card">
-        <div class="card-header">可拖拽项</div>
-        <div class="card-block">
-          <ul class="list-group">
-            <li
-              dDraggable
-              [enableDragFollow]="true"
-              [dragFollowOptions]="{ appendToBody: appendToBody }"
-              [dragOverClass]="'box-shadow'"
-              *ngFor="let item of list1"
-              [dragScope]="'default-css'"
-              [dragData]="item"
-              class="list-group-item over-flow-ellipsis"
-            >
-              {{ item.name }}
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-3">
-      <div class="card card-outline-primary mb-3" dDroppable [dropScope]="'default-css'" (dropEvent)="onDrop($event)">
-        <div class="card-header">放置排序区</div>
-        <div class="card-block">
-          <ul class="list-group d-drop-el" dSortable>
-            <li
-              dDraggable
-              [enableDragFollow]="true"
-              [dragFollowOptions]="{ appendToBody: appendToBody }"
-              [dragOverClass]="'box-shadow'"
-              *ngFor="let item of list2"
-              [dragScope]="'default-css'"
-              [dragHandleClass]="'drag-handle'"
-              [dragData]="item"
-              class="list-group-item over-flow-ellipsis"
-            >
-              {{ item.name }}
-            </li>
-          </ul>
-        </div>
+<h3>Drag Element with Real Entity(not ghost) followed</h3>
+<div class="row">
+  <div class="col-sm-3">
+    <div class="card">
+      <div class="card-header">Draggable Items</div>
+      <div class="card-block">
+        <ul class="list-group">
+          <li
+            dDraggable
+            [enableDragFollow]="true"
+            [dragFollowOptions]="{ appendToBody: appendToBody }"
+            [dragOverClass]="'box-shadow'"
+            *ngFor="let item of list1"
+            [dragScope]="'default-css'"
+            [dragData]="item"
+            class="list-group-item over-flow-ellipsis"
+          >
+            {{ item.name }}
+          </li>
+        </ul>
       </div>
     </div>
   </div>
-  <div class="option">
-    <d-toggle [(ngModel)]="appendToBody"></d-toggle>克隆实体附着到body上
-    <p>
-      dragFollowOptions的appendToBody使用场景说明： 当拖拽离开后源位置的父对象会被销毁的话，需要把克隆体附着到body上防止被销毁。
-      默认会通过复制样式保证克隆到body的实体的样式是正确的，但部分深度依赖DOM节点位置的样式和属性可能会失败，需要手动调整部分样式。
-    </p>
+  <div class="col-sm-3">
+    <div class="card card-outline-primary mb-3" dDroppable [dropScope]="'default-css'" (dropEvent)="onDrop($event)">
+      <div class="card-header">Drop Area with Sortable</div>
+      <div class="card-block">
+        <ul class="list-group d-drop-el" dSortable>
+          <li
+            dDraggable
+            [enableDragFollow]="true"
+            [dragFollowOptions]="{ appendToBody: appendToBody }"
+            [dragOverClass]="'box-shadow'"
+            *ngFor="let item of list2"
+            [dragScope]="'default-css'"
+            [dragHandleClass]="'drag-handle'"
+            [dragData]="item"
+            class="list-group-item over-flow-ellipsis"
+          >
+            {{ item.name }}
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
-</section>
+</div>
+<div class="option">
+  <div class="option-toggle">
+    <d-toggle [(ngModel)]="appendToBody"></d-toggle>
+    <span style="margin-left: 8px">appendToBody</span>
+  </div>
+</div>

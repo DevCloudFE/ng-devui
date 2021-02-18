@@ -1,14 +1,4 @@
-<section>
-  <d-alert [type]="'success'" (closeEvent)="handleClose($event)">
-    <span>success</span>
-  </d-alert>
-  <d-alert [type]="'warning'" (closeEvent)="handleClose($event)">
-    <span>danger</span>
-  </d-alert>
-  <d-alert [type]="'danger'" (closeEvent)="handleClose($event)">
-    <span>warning</span>
-  </d-alert>
-  <d-alert [type]="'info'" (closeEvent)="handleClose($event)">
-    <span>info</span>
-  </d-alert>
-</section>
+<d-alert [type]="'success'" (closeEvent)="handleClose($event)"> success </d-alert>
+<d-alert [type]="'danger'" (closeEvent)="handleClose($event)"> danger </d-alert>
+<d-alert [type]="'warning'" (closeEvent)="handleClose($event)"> warning </d-alert>
+<d-alert [type]="'info'" (closeEvent)="handleClose($event)"> info </d-alert>

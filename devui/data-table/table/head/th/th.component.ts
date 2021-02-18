@@ -23,6 +23,7 @@ export class TableThComponent implements OnChanges, OnDestroy {
   @Input() filterable: boolean;
   @Input() beforeFilter: (value) => boolean | Promise<boolean> | Observable<boolean>;
   @Input() customFilterTemplate: TemplateRef<any>;
+  @Input() extraFilterTemplate: TemplateRef<any>;
   @Input() searchFn: (term: string) => Observable<Array<any>>;
   @Input() filterList: Array<FilterConfig>;
   @Input() filterIconActive: boolean;
@@ -61,7 +62,6 @@ export class TableThComponent implements OnChanges, OnDestroy {
   resizeNodeEvent: any;
   resizeOverlay: HTMLElement;
   nextElement: any;
-  moveCount: number;
   initialWidth: number;
   totalWidth: number;
   mouseDownScreenX: number;
@@ -178,7 +178,6 @@ export class TableThComponent implements OnChanges, OnDestroy {
 
   @HostListener('mousedown', ['$event'])
   onMousedown(event: MouseEvent): void {
-    this.moveCount = 0;
     const isHandle = (<HTMLElement>event.target).classList.contains('resize-handle');
 
     if (isHandle) {
@@ -255,10 +254,6 @@ export class TableThComponent implements OnChanges, OnDestroy {
   }
 
   move(event: MouseEvent): void {
-    this.moveCount++;
-    if (this.moveCount % 2 === 0) {
-      return;
-    }
 
     const movementX = event.clientX - this.mouseDownScreenX;
     const newWidth = this.initialWidth + movementX;

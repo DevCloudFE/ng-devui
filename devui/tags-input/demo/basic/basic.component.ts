@@ -18,7 +18,7 @@ export class TagsInputDemoBasicComponent implements OnInit {
             maxLength: 25,
             minLength: 1,
             maxTags: 25,
-            placeholder: '添加一个标签',
+            placeholder: 'Add a tag',
             spellcheck: false,
             caseSensitivity: false,
             isAddBySpace: true

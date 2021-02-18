@@ -1,36 +1,15 @@
 @import '~ng-devui/styles-var/devui-var.scss';
 
-.container {
-  margin: 20px 0;
+.devui-backtop-custom {
+  text-align: center;
+  border-radius: 50%;
+  background-color: $devui-brand;
+  width: 40px;
+  height: 40px;
 
-  .devui-backtop-custom {
-    text-align: center;
-    border-radius: 50%;
-    background-color: $devui-brand;
-    width: 40px;
-    height: 40px;
-
-    .icon-arrow-up {
-      font-size: 16px;
-      color: $devui-light-text;
-      line-height: 40px;
-    }
-  }
-
-  .devui-backtop-basic {
-    width: 40px;
-    height: 40px;
-    background-color: $devui-text-weak;
-    opacity: 0.4;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .toggle {
-    margin: 20px 0;
-    display: flex;
-    align-items: center;
+  .icon-chevron-up {
+    font-size: 16px;
+    color: $devui-light-text;
+    line-height: 40px;
   }
 }

@@ -175,3 +175,8 @@ code {
     padding: 0.5em;
   }
 }
+
+[dTextInput]::-ms-clear,
+[dTextInput]::-ms-reveal {
+  display: none;
+}

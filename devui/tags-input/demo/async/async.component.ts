@@ -18,7 +18,7 @@ export class TagsInputDemoAsyncComponent implements OnInit {
             maxLength: 25,
             minLength: 1,
             maxTags: 3,
-            placeholder: '添加一个标签'
+            placeholder: 'Add a tag'
         };
         setTimeout(() => {
             this.suggestionList = [

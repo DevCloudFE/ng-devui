@@ -6,6 +6,9 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'd-multi-auto-complete-demo',
   templateUrl: './multi-auto-complete-demo.component.html',
+  styleUrls: [
+    './multi-auto-complete-demo.component.scss'
+  ]
 })
 export class MultiAutoCompleteDemoComponent implements OnInit, OnDestroy {
   MultiAutoCompleteDemoDefault: Array<DevuiSourceData> = [

@@ -1,3 +1,17 @@
+# How to use
+
+Import into module:
+
+```
+import {TimePickerModule} from' ng-devui/time-picker';
+```
+In the page:
+```
+<input dTimePicker (focus)="timePicker3.toggle()" #timePicker3="timePicker" />
+```
+
+# TimePicker
+
 ## TimePicker Parameters
 
 | Parameter | Type | Default | Description | Jump to Demo |
@@ -8,7 +22,7 @@
 | format | `string` | 'hh:mm:ss' | Optional. The input format is used to control the time format. | [Format](demo#format) |
 | minTime | `string` | '00:00:00' | Optional. The minimum available time is limited. | [formatting](demo#format) |
 | maxTime | `string` | '23:59:59' | Optional. The maximum time allowed is limited. | [formatting](demo#format) |
-| customViewTemplate | `template` | -- | Optional. Customize the time or content in the operation area. | [Input template](demo#custom) |
+| customViewTemplate | `TemplateRef` | -- | Optional. Customize the time or content in the operation area. | [Input template](demo#custom) |
 | appendToBodyDirections | `Array<AppendToBodyDirection \| ConnectedPosition>` | ` ['rightDown','leftDown','rightUp','leftUp']` | The first position in the array is preferred for the direction array. | -- |
 
 ## TimePicker Event
@@ -17,7 +31,7 @@
 | :----------------: | :--------------------: | :------------------------------------------: | :------------------------------------------------------------------|
 | selectedTimeChange | `EventEmitter<string>` |: optional. When you confirm it, the data of the newly activated subitem is sent. | [Basic usage](demo#basic-usage) |
 
-### Internal methods that can be invoked
+## Internal methods that can be invoked
 
 For details, see(demo#custom).
 

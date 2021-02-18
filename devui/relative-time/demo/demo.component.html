@@ -1,7 +1,16 @@
-<div class="demo-example">
-  <div class="demo-title">{{ 'components.relative-time.basicDemo.title' | translate }}</div>
-  <div class="demo-text">{{ 'components.relative-time.basicDemo.description' | translate }}</div>
-  <d-codebox [sourceData]="basicSource">
-    <d-basic demo></d-basic>
-  </d-codebox>
+<div class="demo-container">
+  <div class="demo-example">
+    <div class="demo-title">{{ 'components.relative-time.basicDemo.title' | translate }}</div>
+    <div class="demo-text">{{ 'components.relative-time.basicDemo.description' | translate }}</div>
+    <d-codebox [sourceData]="basicSource">
+      <d-basic demo></d-basic>
+    </d-codebox>
+  
+    <div class="demo-title">{{ 'components.relative-time.customDemo.title' | translate }}</div>
+    <div class="demo-text">{{ 'components.relative-time.customDemo.description' | translate }}</div>
+    <d-codebox [sourceData]="customSource">
+      <d-custom-time demo></d-custom-time>
+    </d-codebox>
+  </div>
 </div>
+

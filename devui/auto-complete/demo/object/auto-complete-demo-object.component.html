@@ -1,18 +1,16 @@
-<section>
-  <form class="form">
-    <div class="devui-form-group">
-      <input
-        dTextInput
-        type="text"
-        class="devui-form-control devui-dropdown-origin"
-        name="language"
-        id="language3"
-        [minLength]="0"
-        [(ngModel)]="selectItem3"
-        dAutoComplete
-        [searchFn]="onSearchObject.bind(this)"
-      />
-    </div>
-    <pre>{{ (selectItem3 | json) || 'No language select!' }}</pre>
-  </form>
-</section>
+<form class="form">
+  <div class="devui-form-group">
+    <input
+      dTextInput
+      type="text"
+      class="devui-form-control devui-dropdown-origin"
+      name="language"
+      placeholder="Search"
+      [minLength]="0"
+      [(ngModel)]="selectItem3"
+      dAutoComplete
+      [searchFn]="onSearchObject.bind(this)"
+    />
+  </div>
+  <pre>{{ (selectItem3 | json) || 'No language select!' }}</pre>
+</form>

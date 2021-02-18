@@ -14,115 +14,115 @@ export class CustomLoadingComponent {
   customLoadingSvg = customLoadingSvg;
   data1 = [
     {
-      title: '父节点1 - 展开',
+      title: 'parent node 1 - expanded',
       open: true,
       disabled: true,
       items: [
         {
-          title: '父节点11 - 折叠',
+          title: 'parent node 11 - folded',
           items: [
             {
-              title: '叶子节点111'
+              title: 'leaf node 111'
             },
             {
-              title: '叶子节点112'
+              title: 'leaf node 112'
             },
             {
-              title: '叶子节点113'
+              title: 'leaf node 113'
             },
             {
-              title: '叶子节点114'
+              title: 'leaf node 114'
             }
           ]
         },
         {
-          title: '父节点12 - 折叠',
+          title: 'parent node 12 - folded',
           disableToggle: true,
           items: [
             {
-              title: '叶子节点121'
+              title: 'leaf node 121'
             },
             {
-              title: '叶子节点122'
+              title: 'leaf node 122'
             },
             {
-              title: '叶子节点123'
+              title: 'leaf node 123'
             },
             {
-              title: '叶子节点124'
+              title: 'leaf node 124'
             }
           ]
         },
         {
-          title: '父节点13 - 没有子节点 - 动态加载',
+          title: 'parent node 13 - without children - dynamic loading',
           isParent: true
         }
       ]
     },
     {
-      title: '父节点2 - 折叠',
+      title: 'parent node 2 - folded',
       items: [
         {
-          title: '父节点21 - 展开',
+          title: 'parent node 21 - expanded',
           open: true,
           items: [
             {
-              title: '叶子节点211'
+              title: 'leaf node 211'
             },
             {
-              title: '叶子节点212'
+              title: 'leaf node 212'
             },
             {
-              title: '叶子节点213'
+              title: 'leaf node 213'
             },
             {
-              title: '叶子节点214'
+              title: 'leaf node 214'
             }
           ]
         },
         {
-          title: '父节点22 - 折叠',
+          title: 'parent node 22 - folded',
           items: [
             {
-              title: '叶子节点221'
+              title: 'leaf node 221'
             },
             {
-              title: '叶子节点222'
+              title: 'leaf node 222'
             },
             {
-              title: '叶子节点223'
+              title: 'leaf node 223'
             },
             {
-              title: '叶子节点224'
+              title: 'leaf node 224'
             }
           ]
         },
         {
-          title: '父节点23 - 折叠',
+          title: 'parent node 23 - folded',
           items: [
             {
-              title: '叶子节点231'
+              title: 'leaf node 231'
             },
             {
-              title: '叶子节点232'
+              title: 'leaf node 232'
             },
             {
-              title: '叶子节点233'
+              title: 'leaf node 233'
             },
             {
-              title: '叶子节点234'
+              title: 'leaf node 234'
             }
           ]
         }
       ]
     },
     {
-      id: 'hello,dddd',
-      title: '父节点3 - 没有子节点 - 动态加载',
+      id: 'dynamicNode',
+      title: 'parent node 3 - without children - dynamic loading',
       isParent: true,
       data: {
-        id: '1123213',
-        name: '456'
+        id: 'newChildNode',
+        name: 'new child node'
       }
     }
   ];
@@ -137,12 +137,12 @@ export class CustomLoadingComponent {
 
   changeTree() {
     this.data1 = [{
-      id: 'h21111',
-      title: '父节点4 - 动态加载',
+      id: 'dynamicNode2',
+      title: 'parent node 4 - dynamic loading',
       isParent: true,
       data: {
-        id: '1123ccc213',
-        name: '456'
+        id: 'newChildNode2',
+        name: 'new child node 2'
       }
     }];
   }
@@ -172,27 +172,27 @@ export class CustomLoadingComponent {
       setTimeout(() => {
         resolve([
           {
-            title: '叶子节点311',
+            title: 'leaf node 311',
             data: {
-              id: '我是额外数据id',
-              name: '我是额外的数据名称'
+              id: 'extraNode',
+              name: 'extra node'
             }
           },
           {
-            title: '叶子节点312',
+            title: 'leaf node 312',
           },
           {
-            title: '叶子节点313--展开',
+            title: 'leaf node 313--expanded',
             open: true,
             items: [
               {
-                title: '叶子节点313-1',
+                title: 'leaf node 313-1',
               },
               {
-                title: '叶子节点313-2',
+                title: 'leaf node 313-2',
               },
               {
-                title: '叶子节点313-3',
+                title: 'leaf node 313-3',
               }
             ]
           }

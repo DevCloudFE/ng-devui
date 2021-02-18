@@ -22,8 +22,8 @@ export class ModalComponent implements OnInit {
     const results = this.dialogService.open({
       id: 'dialog-service',
       width: '700px',
-      maxHeight: '467px',
-      title: '弹框表单',
+      maxHeight: '500px',
+      title: 'Bullet Form',
       content: ModalOneComponent,
       backdropCloseable: true,
       dialogtype: dialogtype,
@@ -33,7 +33,7 @@ export class ModalComponent implements OnInit {
       buttons: [
         {
           cssClass: 'stress',
-          text: '确定',
+          text: 'Confirm',
           handler: ($event: Event) => {
             results.modalInstance.hide();
           },
@@ -42,7 +42,7 @@ export class ModalComponent implements OnInit {
         {
           id: 'btn-cancel',
           cssClass: 'common',
-          text: '取消',
+          text: 'Cancel',
           handler: ($event: Event) => {
             results.modalInstance.hide();
           },

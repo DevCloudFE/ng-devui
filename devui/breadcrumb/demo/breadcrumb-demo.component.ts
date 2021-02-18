@@ -13,6 +13,11 @@ export class BreadCrumbDemoComponent implements OnInit, OnDestroy {
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/basic.component.ts') },
   ];
 
+  SourceConfigSource: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./source-config/source-config.component.html') },
+    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./source-config/source-config.component.ts') },
+  ];
+
   CustomSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./custom/custom.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./custom/custom.component.ts') },
@@ -22,11 +27,6 @@ export class BreadCrumbDemoComponent implements OnInit, OnDestroy {
   MenuSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./menu/menu.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./menu/menu.component.ts') },
-  ];
-
-  SearchMenuSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./search-menu/search-menu.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./search-menu/search-menu.component.ts') },
   ];
 
   navItems = [];
@@ -51,9 +51,9 @@ export class BreadCrumbDemoComponent implements OnInit, OnDestroy {
   setNavValues(values) {
     this.navItems = [
       { dAnchorLink: 'basic-breadcrumbs', value: values['basic-breadcrumbs'] },
+      { dAnchorLink: 'source-config-breadcrumbs', value: values['source-config-breadcrumbs'] },
       { dAnchorLink: 'drop-down-breadcrumbs', value: values['drop-down-breadcrumbs'] },
-      { dAnchorLink: 'with-search-drop-down-breadcrumbs', value: values['with-search-drop-down-breadcrumbs'] },
-      { dAnchorLink: 'self-defined-breadcrumbs', value: values['self-defined-breadcrumbs'] },
+      { dAnchorLink: 'self-defined-breadcrumbs', value: values['self-defined-breadcrumbs'] }
     ];
   }
 

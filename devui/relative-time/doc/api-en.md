@@ -1,3 +1,14 @@
+# How to use
+
+Import into the module:
+
+```ts
+import { RelativeTimeModule } from 'ng-devui/relative-time';
+```
+on the page：
+```
+<div>{{ value | dRelativeTime: limit }}</div>
+```
 ## Conversion Rule
 
 ```javascript
@@ -15,5 +26,6 @@ The limit parameter is accepted. When the time difference exceeds the limit, no 
 | Parameter | Type | Default | Description |
 | :------------------: | :----------------: | :-----: | :------------------------------------------------------------- |
 | value | `'string' \| 'number' \| 'Date'` | - | Value converted by pipe |
-| limit | number | - | pipe indicates the timestamp of the maximum limit. If the timestamp is exceeded, the absolute time is returned. |
-| weekStartsOn | `1 \| 2 \| 3 \| 4 \| 5 \| 6 \| 0` | 1 | Index of the start date of a week. The value 0 indicates Sunday. |
+| limit | number | - | The first parameter of pipe indicates the timestamp of the maximum limit. If the timestamp is exceeded, the absolute time is returned. |
+| compareDate | `'string' \| 'number' \| 'Date'` | - | pipe second parameter, which is optional. The value is the time when the comparison is performed. The default value is the current time. |
+| weekStartsOn | `1 \| 2 \| 3 \| 4 \| 5 \| 6 \| 0` | 1 | pipe third parameter, which is optional. It indicates the index of the start date of a week. The value 0 indicates Sunday. |

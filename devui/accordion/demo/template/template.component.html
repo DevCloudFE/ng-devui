@@ -12,20 +12,24 @@
 <ng-template #menutemplate let-item="item">
   {{ item.title }}
   <span class="badge" *ngIf="item.children?.length">{{ item.children.length }}</span>
-  <span class="operation-clear" *ngIf="item.needLoadChildren === false" (click)="clearChildrenData($event, item)">重置</span>
+  <span class="operation-clear" *ngIf="item.needLoadChildren === false" (click)="clearChildrenData($event, item)"
+    >reset
+    <!--重置--></span
+  >
 </ng-template>
 <ng-template #itemtemplate let-item="item">
-  {{ item.title }}<span class="info">（点击次数：{{ item.clicktimes || '0' }}）</span>
+  {{ item.title }}<span class="info">(Click Count: {{ item.clicktimes || '0' }})</span>
 </ng-template>
 <ng-template #noContentTemplate let-deepth="deepth">
   <li class="devui-accordion-item disabled">
     <div class="devui-accordion-item-title devui-over-flow-ellipsis disabled" [style.textIndent]="deepth * 20 + 'px'">
-      尚未开放，敬请期待...
+      Not available yet. Please wait.
+      <!--尚未开放，敬请期待...-->
     </div>
   </li>
 </ng-template>
 <ng-template #loadingTemplate let-item="item">
   <li class="devui-accordion-item">
-    <div class="loading"><span class="circle-spinner"></span>正在用力地加载中...</div>
+    <div class="loading"><span class="circle-spinner"></span> loading...<!--正在用力地加载中...--></div>
   </li>
 </ng-template>

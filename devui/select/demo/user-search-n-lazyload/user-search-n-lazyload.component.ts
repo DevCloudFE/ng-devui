@@ -15,58 +15,58 @@ export class UserSearchNLazyLoadComponent {
 
   options2 = [
     {
-      name: '这是一个用来测试的比较长的选项1',
+      name: 'This is the first option which is very very long to test whether the style setting works.',
       value: 1
     }, {
-      name: '选项2',
+      name: 'Option 2',
       value: 2
     }, {
-      name: '选项3',
+      name: 'Option 3',
       value: 3
     }, {
-      name: '选项4',
+      name: 'Option 4',
       value: 4
     }
   ];
 
   options = [
     {
-      name: '这是一个用来测试的非常长的选项1(This is the first option which is very very long to test whether the style setting works.)',
+      name: 'Option 1(This is the first option which is very very long to test whether the style setting works.)',
       value: 1
     }, {
-      name: '选项2',
+      name: 'Option 2',
       value: 2
     }, {
-      name: '选项3',
+      name: 'Option 3',
       value: 3
     }, {
-      name: '选项4',
+      name: 'Option 4',
       value: 4
     },
     {
-      name: '这是一个用来测试的非常长的选项5(This is the fifth option which is very very long to test whether the style setting works.)',
+      name: 'Option 5(This is the fifth option which is very very long to test whether the style setting works.)',
       value: 5
     }, {
-      name: '选项6',
+      name: 'Option 6',
       value: 6
     }, {
-      name: '选项7',
+      name: 'Option 7',
       value: 7
     }, {
-      name: '选项8',
+      name: 'Option 8',
       value: 8
     },
     {
-      name: '这是一个用来测试的非常长的选项9(This is the ninth option which is very very long to test whether the style setting works.)',
+      name: 'Option 9(This is the ninth option which is very very long to test whether the style setting works.)',
       value: 9
     }, {
-      name: '选项10',
+      name: 'Option 10',
       value: 10
     }, {
-      name: '选项11',
+      name: 'Option 11',
       value: 11
     }, {
-      name: '选项12',
+      name: 'Option 12',
       value: 12
     },
   ];
@@ -86,7 +86,7 @@ export class UserSearchNLazyLoadComponent {
       const newIndex = ++this.currentIndex;
 
       this.options = this.options.concat([{
-        name: `新增选项 ${newIndex}`,
+        name: `New option ${newIndex}`,
         value: newIndex
       }]);
       setTimeout(() => this.selectComponent.loadFinish(), 500);

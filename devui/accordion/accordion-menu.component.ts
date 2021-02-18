@@ -1,14 +1,15 @@
 import { Component, HostBinding, ViewEncapsulation } from '@angular/core';
+import { collapseMotion } from 'ng-devui/utils';
 import { AccordionBaseComponent } from './accordion-base-component.class';
 import { AccordionListComponent } from './accordion-list.component';
 import { AccordionComponent } from './accordion.component';
 import { AccordionBaseMenu, AccordionMenuItem } from './accordion.type';
-
 @Component({
   selector: 'd-accordion-menu',
   templateUrl: './accordion-menu.component.html',
   encapsulation: ViewEncapsulation.None,
   preserveWhitespaces: false,
+  animations: [collapseMotion]
 })
 export class AccordionMenuComponent extends AccordionBaseComponent<AccordionBaseMenu<AccordionMenuItem>> {
   @HostBinding('class.devui-accordion-menu-item')
@@ -18,6 +19,10 @@ export class AccordionMenuComponent extends AccordionBaseComponent<AccordionBase
 
   get menuItemTemplate() {
     return this.accordion.menuItemTemplate;
+  }
+
+  get showAnimate() {
+    return this.accordion.showAnimation;
   }
 
   @HostBinding('class.open')

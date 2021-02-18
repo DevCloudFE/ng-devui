@@ -2,16 +2,16 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
-
 import { ButtonModule } from 'ng-devui/button';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
+import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 import { LoadingModule } from '../loading.module';
 import { BasicComponent } from './basic/basic.component';
 import { CustomComponent } from './custom/custom.component';
+import { FullScreenComponent } from './full-screen/full-screen.component';
 import { LoadingDemoComponent } from './loading-demo.component';
 import { PromiseComponent } from './promise/promise.component';
 import { ShowLoadingComponent } from './show-loading/show-loading.component';
@@ -43,7 +43,8 @@ import { SubscriptionComponent } from './subscription/subscription.component';
     CustomComponent,
     PromiseComponent,
     SubscriptionComponent,
-    ShowLoadingComponent
+    ShowLoadingComponent,
+    FullScreenComponent
   ],
   
 })

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'd-inner-list-template',
@@ -7,13 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InnerListTemplateComponent {
   menu = [{
-    title: '内容一',
+    title: 'Content 1',
     children: [],
-    content: '内容一的内容'
+    content: 'Child Content of Content 1'
   }, {
-    title: '内容二',
+    title: 'Content 2',
     children: [],
-    content: '内容二的内容'
+    content: 'Child Content of Content 2'
   }];
 
   itemClick(event) {

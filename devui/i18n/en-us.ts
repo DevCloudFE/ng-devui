@@ -13,6 +13,9 @@ export default {
     btnClickMe: 'click me!',
     copied: 'Copied'
   },
+  autoComplete: {
+    latestInput: 'Latest input'
+  },
   datePicker: {
     today: 'Today',
     clear: 'Clear',
@@ -63,11 +66,47 @@ export default {
       return 'The value cannot only has whitespace.';
     }
   },
+  gantt: {
+    today: 'today',
+    monthsOfYear: [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December'
+    ],
+    yearDisplay(year) {
+      return `${year}`;
+    },
+    monthDisplay(strMonthIndex: string) {
+      return this.monthsOfYear[Number(strMonthIndex) - 1];
+    },
+    yearAndMonthDisplay(year: string, strMonthIndex: string) {
+      return this.yearDisplay(year) + this.monthDisplay(strMonthIndex);
+    },
+  },
   pagination: {
     totalItem: 'Total Records',
     goTo: 'Go To',
     pageSize: 'Page Size',
     page: 'Page',
+  },
+  quadrant: {
+    xAxisLabel: 'Urgency',
+    yAxisLabel: 'Importance',
+    defaultTitleConf: [
+      { title: 'Important and urgent' },
+      { title: 'Important not urgent' },
+      { title: 'Not important not urgent' },
+      { title: 'Not important urgent' }
+    ]
   },
   upload: {
     warning: 'Warning',
@@ -135,20 +174,36 @@ export default {
     expand: 'Expand'
   },
   relativeTime: {
-    yearsAgo: ' years ago',
-    monthsAgo: ' months ago',
-    weeksAgo: ' weeks ago',
-    daysAgo: ' days ago',
+    yearsAgo(num: number) {
+      return num === 1 ?  'last year' : `${num} years ago`;
+    },
+    monthsAgo(num: number) {
+      return num === 1 ? 'last month' : `${num} months ago`;
+    } ,
+    weeksAgo(num: number) {
+      return num === 1 ? 'last week' : `${num} weeks ago`;
+    },
+    daysAgo(num: number) {
+      return num === 1 ? 'yesterday' : `${num} days ago`;
+    },
+    daysLater(num: number) {
+      return num === 1 ? 'tomorrow' : `${num} days later`;
+    },
+    weeksLater(num: number) {
+      return num === 1 ? 'next week' : `${num} weeks later`;
+    },
+    monthsLater(num: number) {
+      return num === 1 ? 'next month' : `${num} months later`;
+    },
+    yearsLater(num: number) {
+      return num === 1 ? 'next year' : `${num} years later`;
+    },
     hoursAgo: ' hours ago',
     minutesAgo: ' minutes ago',
     justnow: 'just now',
     later: 'later',
     minutesLater: ' minutes later',
     hoursLater: ' hours later',
-    daysLater: ' days later',
-    weeksLater: ' weeks later',
-    monthsLater: ' months later',
-    yearsLater: ' years later',
   },
   tagsInput: {
     tagsReachMaxLength: 'The length of tags has reached maxTags',

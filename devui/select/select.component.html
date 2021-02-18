@@ -1,7 +1,7 @@
 <div
   class="devui-drop{{ popDirection === 'bottom' ? 'down' : 'up' }} 
   {{ size ? 'devui-select-' + size : '' }} 
-  devui-dropdown-origin-wrapper devui-dropdown-origin"
+  devui-dropdown-origin"
   [ngClass]="[isOpen ? 'open' : '', overview === 'underlined' ? 'devui-select-underlined-border' : '', disabled ? 'disabled' : '']"
   #selectWrapper
 >
@@ -20,7 +20,7 @@
       #selectInput
       [placeholder]="placeholder"
       [disabled]="disabled"
-      [ngClass]="[size ? 'devui-select-input-' + size : '', isOpen ? 'no-radius' : '']"
+      [ngClass]="[size ? 'devui-select-input-' + size : '']"
       type="text"
       class="devui-form-control devui-select-input devui-input"
       [minLength]="0"
@@ -36,7 +36,6 @@
     <div
       #selectInputWithTemplate
       class="devui-select-list-wrapper devui-form-control {{ size ? 'devui-select-input-' + size : '' }}"
-      [ngClass]="[isOpen ? 'no-radius' : '']"
       *ngIf="extraConfig?.selectedItemWithTemplate?.enable && (inputItemTemplate || itemTemplate) && !extraConfig?.labelization?.enable"
     >
       <div class="devui-select-placeholder" *ngIf="!_inputValue">
@@ -59,7 +58,6 @@
     <div
       #selectInputWithLabel
       class="devui-select-list-wrapper devui-form-control {{ size ? 'devui-select-input-' + size : '' }}"
-      [ngClass]="[isOpen ? 'no-radius' : '']"
       *ngIf="extraConfig?.labelization?.enable && multiple"
     >
       <div class="devui-select-placeholder" *ngIf="multiItems.length === 0">
@@ -147,14 +145,15 @@
 <ng-template #selectDropdownTpl>
   <div
     #selectMenu
-    class="devui-dropdown-menu devui-dropdown-overlay"
+    class="devui-dropdown-menu"
     [ngClass]="{
       'devui-dropdown-menu-cdk': appendToBody,
       'devui-custom-right': customViewTemplate && customViewDirection === 'right',
       'devui-custom-left': customViewTemplate && customViewDirection === 'left',
-      'devui-dropdown-menu-multiple': multiple
+      'devui-dropdown-menu-multiple': multiple,
+      'devui-dropdopwn-hidden': !startAnimation
     }"
-    [@fadeInOut]="isOpen ? (appendToBody ? menuPosition : popDirection) : 'void'"
+    [@fadeInOut]="isOpen && startAnimation ? (appendToBody ? menuPosition : popDirection) : 'void'"
     (@fadeInOut.done)="animationEnd($event)"
   >
     <ul

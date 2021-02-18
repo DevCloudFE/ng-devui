@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { TimeAxisData } from 'ng-devui/time-axis';
 @Component({
     selector: 'd-demo-time-axis-all-states',
     templateUrl: './time-axis-all-states.component.html'
 })
 export class TimeAxisAllStatesComponent implements OnInit {
-    time_axis_data_left: any = [];
-    time_axis_data_bottom: any = [];
-    time_axis_data_horizontal: any = [];
+    time_axis_data_left: TimeAxisData;
+    time_axis_data_bottom: TimeAxisData;
 
     constructor() {
     }
@@ -16,10 +16,10 @@ export class TimeAxisAllStatesComponent implements OnInit {
             position: 'left',
             model: 'text',
             list: [
-                { time: '2017-07-25', text: '这是2017-07-25发生的事件', type: 'success' },
-                { time: '2017-07-27', text: '这是2017-07-27发生的事件', type: 'success' },
-                { time: '2017-07-28', text: '这是2017-07-28发生的事件', type: 'success' },
-                { time: '2017-07-29', text: '这是2017-07-29发生的事件', type: 'success' }
+                { time: '2017-07-25', text: 'some events in 2017-07-25', type: 'success' },
+                { time: '2017-07-27', text: 'some events in 2017-07-27', type: 'success' },
+                { time: '2017-07-28', text: 'some events in 2017-07-28', type: 'success' },
+                { time: '2017-07-29', text: 'some events in 2017-07-29', type: 'success' }
             ]
         };
 
@@ -27,22 +27,10 @@ export class TimeAxisAllStatesComponent implements OnInit {
             position: 'bottom',
             model: 'text',
             list: [
-                { time: '2017-07-25', text: '这是2017-07-25发生的事件', type: 'primary' },
-                { time: '2017-07-27', text: '这是2017-07-27发生的事件', type: 'primary' },
-                { time: '2017-07-28', text: '这是2017-07-28发生的事件', type: 'primary' },
-                { time: '2017-07-29', text: '这是2017-07-29发生的事件', type: 'primary' }
-            ]
-        };
-
-        this.time_axis_data_horizontal = {
-            direction: 'horizontal',
-            model: 'text',
-            list: [
-                {text: 'Download', type: 'success', status: 'runned'},
-                {text: 'Check', type: 'danger', status: 'runned'},
-                {text: 'Build', type: 'primary', status: 'running'},
-                {text: 'Depoy', type: 'primary', status: ''},
-                {text: 'End', type: 'primary', status: ''}
+                { time: '2017-07-25', text: 'some events in 2017-07-25', type: 'success' },
+                { time: '2017-07-27', text: 'some events in 2017-07-27', type: 'success' },
+                { time: '2017-07-28', text: 'some events in 2017-07-28', type: 'success' },
+                { time: '2017-07-29', text: 'some events in 2017-07-29', type: 'success' }
             ]
         };
     }

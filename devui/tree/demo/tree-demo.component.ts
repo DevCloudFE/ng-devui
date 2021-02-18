@@ -12,6 +12,10 @@ export class TreeDemoComponent implements OnInit, OnDestroy {
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./basic/basic.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/basic.component.ts') },
   ];
+  treeFactorySource: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./tree-factory/tree-factory.component.html') },
+    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./tree-factory/tree-factory.component.ts') },
+  ];
   MergeNodeSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./merge-node/merge-node.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./merge-node/merge-node.component.ts') },
@@ -60,6 +64,10 @@ export class TreeDemoComponent implements OnInit, OnDestroy {
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./virtual-scroll/virtual-scroll.component.ts') },
     { title: 'SCSS', language: 'css', code: require('!!raw-loader!./virtual-scroll/virtual-scroll.component.css') },
   ];
+  withoutAnimationSource: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./without-animation/without-animation.component.html') },
+    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./without-animation/without-animation.component.ts') },
+  ];
 
   navItems = [];
   subs: Subscription = new Subscription();
@@ -92,7 +100,9 @@ export class TreeDemoComponent implements OnInit, OnDestroy {
       { dAnchorLink: 'custom-icon', value: values['custom-icon'] },
       { dAnchorLink: 'drag-and-drop-tree', value: values['drag-and-drop-tree'] },
       { dAnchorLink: 'check-control-tree', value: values['check-control-tree'] },
+      { dAnchorLink: 'tree-factory', value: values['tree-factory'] },
       { dAnchorLink: 'virtual-scroll', value: values['virtual-scroll'] },
+      { dAnchorLink: 'without-animation', value: values['without-animation'] },
     ];
   }
 

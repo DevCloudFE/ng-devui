@@ -17,16 +17,17 @@ export class DialogService {
 
   constructor(private componentFactoryResolver: ComponentFactoryResolver,
               private overlayContainerRef: OverlayContainerRef, private rendererFactory: RendererFactory2) {
-      this.renderer = this.rendererFactory.createRenderer(null, null);
+    this.renderer = this.rendererFactory.createRenderer(null, null);
   }
 
   open({
     id,
     width,
     zIndex,
+    backDropZIndex,
     backdropCloseable,
     maxHeight,
-    showAnimate,
+    showAnimate = true,
     title,
     content,
     html,
@@ -56,6 +57,7 @@ export class DialogService {
       id,
       width,
       zIndex,
+      backDropZIndex,
       showAnimate,
       beforeHidden,
       // set backdropCloseable default value "true" when not passing it
@@ -70,17 +72,17 @@ export class DialogService {
 
     const modalContainerRef = modalRef.instance.modalContainerHost.viewContainerRef
       .createComponent(finalComponentFactoryResolver.resolveComponentFactory(ModalContainerComponent), 0, injector);
-    assign(modalContainerRef.instance, {title, buttons, maxHeight, dialogtype, showCloseBtn});
+    assign(modalContainerRef.instance, { title, buttons, maxHeight, dialogtype, showCloseBtn });
 
     if (contentTemplate) {
-      assign(modalContainerRef.instance, {contentTemplate});
+      assign(modalContainerRef.instance, { contentTemplate });
     } else {
       if (typeof content === 'string') {
-        assign(modalContainerRef.instance, {content, html});
+        assign(modalContainerRef.instance, { content, html });
       } else {
         this.contentRef = modalContainerRef.instance.modalContentHost.viewContainerRef
           .createComponent(finalComponentFactoryResolver.resolveComponentFactory(content));
-        assign(this.contentRef.instance, {data}, dialogtype);
+        assign(this.contentRef.instance, { data }, dialogtype);
       }
     }
 

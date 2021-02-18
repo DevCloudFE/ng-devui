@@ -1,4 +1,4 @@
-import { animate, state, style, transition, trigger } from '@angular/animations';
+import { animate, group, state, style, transition, trigger } from '@angular/animations';
 import { Component, ElementRef, Input, OnDestroy, OnInit, Renderer2, TemplateRef, ViewChild } from '@angular/core';
 import { DocumentRef } from 'ng-devui/window-ref';
 import { isUndefined } from 'lodash-es';
@@ -13,14 +13,20 @@ import { ModalContainerDirective } from './modal.directive';
     trigger('backdropAnimation', [
       state('void', style({ opacity: 0 })),
       state('in', style({ opacity: 0.2 })),
-      transition('void => in', animate('400ms  cubic-bezier(0.23, 1, 0.32, 1)')),
-      transition('in => void', animate('300ms cubic-bezier(0.755, 0.05, 0.855, 0.06)')),
+      transition('void => in', animate('100ms linear')),
+      transition('in => void', animate('100ms linear')),
     ]),
     trigger('modalAnimation', [
-      state('void', style({ opacity: 0, transform: 'scale(0.9)' })),
-      state('in', style({ opacity: 1, transform: 'scale(1)' })),
-      transition('void => in', animate('400ms  cubic-bezier(0.23, 1, 0.32, 1)')),
-      transition('in => void', animate('300ms cubic-bezier(0.755, 0.05, 0.855, 0.06)')),
+      state('void', style({ opacity: 0.2, transform: 'translateY(-24px)' })),
+      state('in', style({ opacity: 1, transform: 'translateY(0)' })),
+      transition('void => in', group([
+        animate('100ms cubic-bezier(0.16,0.75,0.5,1)', style({ opacity: 1})),
+        animate('100ms linear', style({ transform: 'translateY(0)'}))
+      ])),
+      transition('in => void', group([
+        animate('100ms cubic-bezier(0.5,0,0.84,0.25)', style({ opacity: 0.2})),
+        animate('100ms linear', style({ transform: 'translateY(-24px)'}))
+      ])),
     ])
   ],
   preserveWhitespaces: false,
@@ -28,9 +34,10 @@ import { ModalContainerDirective } from './modal.directive';
 export class ModalComponent implements OnInit, OnDestroy {
 
   @Input() id: string;
-  @Input() showAnimate: boolean;
+  @Input() showAnimate = true;
   @Input() width: string;
   @Input() zIndex: number;
+  @Input() backDropZIndex: number;
   @Input() backdropCloseable: boolean;
   @Input() beforeHidden: () => boolean | Promise<boolean> | Observable<boolean>;
   @Input() draggable: boolean;
@@ -41,7 +48,7 @@ export class ModalComponent implements OnInit, OnDestroy {
   @Input() escapable: boolean; // 是否支持esc键关闭弹窗
   @ViewChild(ModalContainerDirective, { static: true }) modalContainerHost: ModalContainerDirective;
   @ViewChild('dialog', { static: true }) dialogElement: ElementRef;
-  animateState =  '';
+  animateState = '';
   draggableHandleEl: HTMLElement;
   scrollTop: number;
   scrollLeft: number;
@@ -130,8 +137,13 @@ export class ModalComponent implements OnInit, OnDestroy {
       }
 
       this.animateState = 'void';
-      this.onHidden();
     });
+  }
+
+  onAnimationEnd() {
+    if (this.animateState === 'void') {
+      this.onHidden();
+    }
   }
 
   show() {

@@ -1,3 +1,24 @@
+# How to use
+
+Import into module:
+
+```ts
+import { CardModule } from 'ng-devui/card';
+```
+
+In the page:
+
+```xml
+<d-card>
+  <d-card-header>
+    <d-card-title></d-card-title>
+    <d-card-subtitle></d-card-subtitle>
+  </d-card-header>
+  <d-card-content> </d-card-content>
+  <d-card-actions></d-card-actions>
+</d-card>
+```
+# d-card
 ## d-card Block Division
 
 |      Tag     |                                       Description                                               |

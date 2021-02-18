@@ -1,8 +1,8 @@
 <div>
-  <h4>模板类型</h4>
+  <h4>template</h4>
   <d-cascader
     [options]="options"
-    [placeholder]="'请选择'"
+    [placeholder]="'please select'"
     [(ngModel)]="value1"
     [trigger]="'click'"
     (ngModelChange)="onChanges($event)"
@@ -12,6 +12,6 @@
   ></d-cascader>
 
   <ng-template #dropItem let-label="label">
-    <span><b style="color: #f50">自定义：</b>{{ label }}</span>
+    <span><b style="color: #f50">Custom：</b>{{ label }}</span>
   </ng-template>
 </div>

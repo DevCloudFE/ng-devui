@@ -10,8 +10,8 @@ export class IframPropagateDemoComponent implements AfterViewInit {
   ngAfterViewInit() {
     const divElement = document.createElement('div');
     divElement.innerHTML = `
-        <p>Child container: iframe<br>子容器：iframe</p>
-        <p>点击iframe区域内容触发宿主元素的click事件（改变背景颜色）</p>
+        <p>Child container: iframe</p>
+        <p>Click iframe to trigger parent's click event, which will change the background color</p>
     `;
     this.el.nativeElement.querySelector('iframe.content-box').contentDocument.body.appendChild(divElement);
   }

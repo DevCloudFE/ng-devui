@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { DialogService } from 'ng-devui/modal';
 
 @Component({
@@ -14,7 +14,6 @@ export class TipsComponent {
       id: 'dialog-service',
       width: '346px',
       maxHeight: '600px',
-      showAnimate: false,
       title: '',
       content: 'Delete [Git] repository successfully.',
       backdropCloseable: true,
@@ -22,7 +21,7 @@ export class TipsComponent {
       buttons: [
         {
           cssClass: 'primary',
-          text: '确定',
+          text: 'Ok',
           handler: ($event: Event) => {
             results.modalInstance.hide();
           },
@@ -36,7 +35,6 @@ export class TipsComponent {
       id: 'dialog-service',
       width: '346px',
       maxHeight: '600px',
-      showAnimate: false,
       title: '',
       content: 'It is failed. if you want to resolve it,please contact the supportor.',
       backdropCloseable: true,
@@ -44,7 +42,7 @@ export class TipsComponent {
       buttons: [
         {
           cssClass: 'primary',
-          text: '确定',
+          text: 'Ok',
           handler: ($event: Event) => {
             results.modalInstance.hide();
           }
@@ -58,10 +56,9 @@ export class TipsComponent {
       id: 'dialog-service',
       width: '400px',
       maxHeight: '600px',
-      showAnimate: false,
       title: '',
       html: true,
-      content: '即将离开此页!',
+      content: 'Leaving this page!',
       backdropCloseable: true,
       dialogtype: dialogtype,
       buttons: [
@@ -82,7 +79,6 @@ export class TipsComponent {
       zIndex: 1050,
       width: '346px',
       maxHeight: '600px',
-      showAnimate: false,
       title: '',
       content: ' You signed in with another tab or window. Reload to refresh your session.',
       backdropCloseable: true,
@@ -90,7 +86,7 @@ export class TipsComponent {
       buttons: [
         {
           cssClass: 'primary',
-          text: '确定',
+          text: 'Ok',
           handler: ($event: Event) => {
             results.modalInstance.hide();
           }

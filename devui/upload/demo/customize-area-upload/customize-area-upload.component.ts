@@ -27,6 +27,17 @@ export class CustomizeAreaUploadComponent {
     this.UPLOADED = '上传成功';
     this.CANCELUPLOAD = '取消上传';
   }
+  dynamicUploadOptionsFn(file, options) {
+    let uploadOptions = options;
+    if (file.type  === 'image/png') {
+      uploadOptions = {
+        uri: '/upload',
+        maximumSize: 0.5,
+        checkSameName: true
+      };
+    }
+    return uploadOptions;
+  }
   onSuccess(event) {
     console.log(event);
   }
@@ -40,6 +51,9 @@ export class CustomizeAreaUploadComponent {
   fileOver(event) {
     this.isDropOver = event;
     console.log(event);
+  }
+  fileSelect(files) {
+    console.log(files);
   }
   alertMsg(event) {
     this.message = event;

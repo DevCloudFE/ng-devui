@@ -1,24 +1,10 @@
 @import '../style/theme/color';
 
-.cdk-overlay-pane > div {
-  > .devui-dropdown-menu {
-    position: relative;
-    top: 0; // initial; ie11不认识initial
-    left: 0; //initial;
-    border: none;
-  }
-
-  &.devui-dropdown-top > .devui-dropdown-menu {
-    top: 1px;
-  }
-
-  &.devui-dropdown-bottom > .devui-dropdown-menu {
-    top: -1px;
-  }
-
-  > .devui-dropdown-menu.devui-dropdown-overlay {
-    border: 1px solid $devui-connected-overlay-line;
-  }
+.cdk-overlay-pane > div > .devui-dropdown-menu {
+  position: relative;
+  top: 0; // initial; ie11不认识initial
+  left: 0; //initial;
+  border: none;
 }
 
 .devui-dropdown span.icon-chevron-down {

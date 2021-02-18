@@ -1,3 +1,24 @@
+# 如何使用
+
+在module中引入：
+
+```ts
+import { CardModule } from 'ng-devui/card';
+```
+
+在页面中使用：
+
+```xml
+<d-card>
+  <d-card-header>
+    <d-card-title></d-card-title>
+    <d-card-subtitle></d-card-subtitle>
+  </d-card-header>
+  <d-card-content> </d-card-content>
+  <d-card-actions></d-card-actions>
+</d-card>
+```
+# d-card
 ## d-card 区块划分
 
 |      标签      |                                              描述                                              |
@@ -17,6 +38,6 @@
 
 ## d-card-actions 参数
 
-| 参数  |   类型   | 默认  |      说明       | 跳转 Demo |
+| 参数  |   类型   | 默认值  |      描述       | 跳转 Demo |
 | :---: | :------: | :---: | :-------------: | --------- |
 | align | `'start' \| 'end' \|'spaceBetween'` | 'start'   | 可选，操作区域对齐方式，分别对应起始对齐，尾部对齐，拉伸对齐 | [基本用法](demo#card-basic) |

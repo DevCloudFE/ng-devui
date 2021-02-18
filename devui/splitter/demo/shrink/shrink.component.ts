@@ -21,32 +21,32 @@ export class SplitterDemoMenuFoldComponent implements OnInit {
 
   menu: Array<IMenuType> = [
     {
-      title: '内容一',
+      title: 'item1',
       active: false,
       children: [
-        { title: '子内容1', active: false },
-        { title: '子内容2', active: false },
-        { title: '子内容3', active: false },
+        { title: 'child1', active: false },
+        { title: 'child2', active: false },
+        { title: 'child3', active: false },
       ],
       icon: 'icon-share',
     },
     {
-      title: '内容二',
+      title: 'item2',
       icon: 'icon-gps',
       active: false,
     },
     {
-      title: '内容三',
+      title: 'item3',
       icon: 'icon-go-module',
       active: false,
     },
     {
-      title: '内容四',
+      title: 'item4',
       icon: 'icon-layout',
       active: false,
     },
     {
-      title: '内容五',
+      title: 'item5',
       icon: 'icon-op-delete',
       active: false,
     },

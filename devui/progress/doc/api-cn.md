@@ -1,6 +1,18 @@
+# 如何使用
+在module中引入：
+```ts
+import { ProgressModule } from 'ng-devui/progress';
+```
+在页面中使用：
+```html
+<d-progress></d-progress>
+```
+
+# d-progress
+
 ## d-progress 参数
 
-|      参数      |   类型    |   默认    | 说明                                                     | 跳转 Demo                                      |
+|      参数      |   类型    |   默认值    | 描述                                                     | 跳转 Demo                                      |
 | :------------: | :-------: | :-------: | :------------------------------------------------------- | ---------------------------------------------- |
 |   percentage   | `number`  |     0     | 可选，进度条的值最大为 100                               | [基本用法](demo#basic-usage) |
 | percentageText | `string`  |    --     | 可选，进度条当前值的文字说明比如：'30%' \| '4/5'         | [基本用法](demo#basic-usage) |

@@ -11,7 +11,6 @@
     content: '*';
     color: red;
     display: inline-block;
-    vertical-align: middle;
     margin-right: 8px;
     margin-left: -12px;
   }
@@ -39,37 +38,31 @@
   max-width: 200px;
 }
 
-.devui-form-lg.devui-form-horizontal :host.devui-form-label {
-  flex: 0 0 150px;
+.devui-form-horizontal :host.devui-form-label {
+  flex: 0 0 100px;
   justify-content: flex-end;
-  text-align: right;
+  text-align: left;
   align-self: flex-start;
 
   .devui-form-span {
     line-height: 28px;
   }
+}
+
+.devui-form-lg.devui-form-horizontal :host.devui-form-label {
+  flex: 0 0 150px;
 }
 
 .devui-form-sm.devui-form-horizontal :host.devui-form-label {
   flex: 0 0 80px;
-  justify-content: flex-end;
-  text-align: right;
-  align-self: flex-start;
-
-  .devui-form-span {
-    line-height: 28px;
-  }
 }
 
-.devui-form-horizontal :host.devui-form-label {
-  flex: 0 0 100px;
-  justify-content: flex-end;
-  text-align: right;
-  align-self: flex-start;
+.devui-form-horizontal.devui-form-label-align-center :host.devui-form-label {
+  text-align: center;
+}
 
-  .devui-form-span {
-    line-height: 28px;
-  }
+.devui-form-horizontal.devui-form-label-align-end :host.devui-form-label {
+  text-align: right;
 }
 
 .devui-form-vertical :host.devui-form-label {

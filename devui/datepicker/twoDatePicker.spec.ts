@@ -1,6 +1,6 @@
 // tslint:disable: max-line-length
 import { Component, DebugElement, ElementRef, ViewChild } from '@angular/core';
-import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -425,7 +425,7 @@ class TestFunctions {
       [maxDate]="maxDate"
       (selectedRangeChange)="getValue('range', $event)"
     >
-      <div class="devui-input-group devui-dropdown-origin-wrapper devui-dropdown-origin">
+      <div class="devui-input-group devui-dropdown-origin">
         <input
           class="devui-input devui-form-control"
           placeholder="y/MM/dd"
@@ -436,14 +436,14 @@ class TestFunctions {
           (click)="startPicker.toggle()"
           #leftInputEle
         />
-        <div [style.display]="rangeStart ? 'block' : 'none'" class="devui-input-group-addon icon-close-wrapper" (click)="startPicker.clear()">
+        <div [style.display]="rangeStart ? 'block' : 'none'" class="devui-input-group-addon close-icon-wrapper" (click)="startPicker.clear()">
           <i class="icon icon-close"></i>
         </div>
         <div class="devui-input-group-addon" (click)="startPicker.toggle()">
           <i class="icon icon-calendar"></i>
         </div>
       </div>
-      <div class="devui-input-group devui-dropdown-origin-wrapper devui-dropdown-origin">
+      <div class="devui-input-group devui-dropdown-origin">
         <input
           class="devui-input devui-form-control"
           placeholder="y/MM/dd"
@@ -454,7 +454,7 @@ class TestFunctions {
           (click)="endPicker.toggle()"
           #rightInputEle
         />
-        <div [style.display]="rangeEnd ? 'block' : 'none'" class="devui-input-group-addon icon-close-wrapper" (click)="endPicker.clear()">
+        <div [style.display]="rangeEnd ? 'block' : 'none'" class="devui-input-group-addon close-icon-wrapper" (click)="endPicker.clear()">
           <i class="icon icon-close"></i>
         </div>
         <div class="devui-input-group-addon" (click)="endPicker.toggle()">
@@ -529,7 +529,7 @@ describe('twoDatePicker', () => {
   let component: TestTwoDatePickerComponent;
   let domHelper: DomHelper<TestTwoDatePickerComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [DatepickerModule, NoopAnimationsModule, FormsModule],
       declarations: [TestTwoDatePickerComponent]
@@ -549,7 +549,7 @@ describe('twoDatePicker', () => {
     it('should datePicker show, should hideOnRangeSelected works', fakeAsync(() => {
       CommonFunctions.openDatePicker(fixture, 'right');
       const classList = [
-        '.devui-two-date-wrapper', '.devui-dropdown-overlay', '.devui-two-date-picker', '.devui-date-picker',
+        '.devui-two-date-wrapper', '.devui-two-date-picker', '.devui-date-picker',
         '.devui-month-view', '.devui-month-view-table',
         '.devui-calender-header', '.devui-week-header',
         '.devui-day', '.devui-out-of-month', '.devui-in-month-day', '.devui-calendar-date'
@@ -665,8 +665,8 @@ describe('twoDatePicker', () => {
       CommonFunctions.openDatePicker(fixture);
       CommonFunctions.tickEvent(todayBtn, new Event('click'), fixture);
       CommonFunctions.tickEvent(todayBtn, new Event('click'), fixture);
-      const leftClearBtn = debugEl.queryAll(By.css('.icon-close-wrapper'))[0].nativeElement;
-      const rightClearBtn = debugEl.queryAll(By.css('.icon-close-wrapper'))[1].nativeElement;
+      const leftClearBtn = debugEl.queryAll(By.css('.close-icon-wrapper'))[0].nativeElement;
+      const rightClearBtn = debugEl.queryAll(By.css('.close-icon-wrapper'))[1].nativeElement;
       footer = document.querySelector('.devui-two-date-footer');
       todayBtn = footer.querySelector('a');
       CommonFunctions.tickEvent(leftClearBtn, new Event('click'), fixture);
@@ -736,7 +736,7 @@ describe('twoDatePickerDiv', () => {
   let component: TestTwoDatePickerDivComponent;
   let domHelper: DomHelper<TestTwoDatePickerDivComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [DatepickerModule, NoopAnimationsModule, FormsModule],
       declarations: [TestTwoDatePickerDivComponent],

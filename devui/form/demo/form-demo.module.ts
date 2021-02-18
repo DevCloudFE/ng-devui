@@ -32,13 +32,11 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 import { StickyModule } from '../../sticky';
 import { BasicComponent } from './basic/basic.component';
 import { CustomStatusComponent } from './custom-status/custom-status.component';
-import { FilterComponent } from './filter/filter.component';
 import { FormDemoComponent } from './form-demo.component';
 import { LabelHorizontalComponent } from './label-horizontal/label-horizontal.component';
 import { ModalOneComponent } from './modal-one/modal-one.component';
 import { ModalComponent } from './modal/modal.component';
 import { MultiColComponent } from './multi-col/multi-col.component';
-import { ValidateCoordinatedComponent } from './validate-coordinated/validate-coordinated.component';
 import { ChildUserComponent } from './validate-cross-component/child-control/child-user.component';
 import { ValidateCrossComponentComponent } from './validate-cross-component/validate-cross-component.component';
 import { ValidateDynamicRuleComponent } from './validate-dynamic-rule/validate-dynamic-rule.component';
@@ -105,7 +103,6 @@ import { ValidateTemplateFormComponent } from './validate-template/validate-temp
     ModalComponent,
     ModalOneComponent,
     MultiColComponent,
-    FilterComponent,
     InnerValidatorComponent,
     CustomValidatorComponent,
     ErrorStrategyComponent,
@@ -113,7 +110,6 @@ import { ValidateTemplateFormComponent } from './validate-template/validate-temp
     ValidateTemplateFormComponent,
     UserRegisterComponent,
     ValidateReactiveComponent,
-    ValidateCoordinatedComponent,
     ValidateDynamicRuleComponent,
     ValidateSyncComponent,
     ValidateCrossComponentComponent,

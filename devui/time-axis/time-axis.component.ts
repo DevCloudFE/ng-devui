@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ElementRef, Input, OnChanges, TemplateRef } from '@angular/core';
+import { TimeAxisData } from './time-axis.type';
 
 @Component({
   selector: 'd-time-axis',
@@ -9,10 +10,9 @@ import { AfterViewInit, Component, ElementRef, Input, OnChanges, TemplateRef } f
 })
 
 export class TimeAxisComponent implements AfterViewInit, OnChanges {
-  @Input() data: any = {
-      direction: '', // vertical/horizontal
-      position: '', // 如果为bottom时，才生效；
-      model: '', // text/html/template
+  @Input() data: TimeAxisData = {
+      position: 'bottom', // 如果为bottom时，才生效；
+      model: 'text', // text/html/template
       list: []
   };
 
@@ -45,6 +45,6 @@ export class TimeAxisComponent implements AfterViewInit, OnChanges {
 
   get bottomPositionTextLeft() {
     const timeElement = this.elementRef.nativeElement.querySelector('.devui-time-axis.bottom .devui-axis-time-time');
-    return timeElement ? -timeElement.offsetWidth / 2 : 0;
+    return timeElement && this.viewRenderComplete ? -timeElement.offsetWidth / 2 : 0;
   }
 }

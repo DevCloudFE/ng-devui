@@ -18,7 +18,7 @@ export class BackTopComponent implements OnInit, OnChanges, OnDestroy {
   @Input() bottom = '50px';
   @Input() right = '30px';
   @Input() scrollTarget: HTMLElement;
-  @Output() backTopEvent: EventEmitter<any> = new EventEmitter<any>();
+  @Output() backTopEvent =  new EventEmitter<boolean>();
 
   currScrollTop = 0;
   isVisible = false;

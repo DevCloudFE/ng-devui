@@ -1,38 +1,37 @@
-<section>
-  <ng-template #customizeItemTemplate let-item="item" let-formatter="formatter" let-$index="$index" let-source="source" let-term="term">
-    <span><em class="icon {{ getIcon($index) }}"></em>&nbsp;{{ $index + 1 }}: {{ formatter(item) }}</span>
-  </ng-template>
-  <ng-template #noResultItemTemplate let-term="term">
-    <span
-      >No any results match <strong>{{ term }}</strong></span
-    >
-  </ng-template>
-  <ng-template #searchingTemplate let-term="term">
-    <span
-      >Searching <strong>{{ term }}</strong></span
-    >
-  </ng-template>
-  <form class="form">
-    <div class="devui-form-group">
-      <input
-        dTextInput
-        type="text"
-        class="devui-form-control devui-dropdown-origin"
-        name="language"
-        id="language-customizeItemTemplate"
-        [isSearching]="isSearching"
-        [delay]="1000"
-        [minLength]="0"
-        [(ngModel)]="selectItem4"
-        dAutoComplete
-        [appendToBody]="true"
-        [allowEmptyValueSearch]="true"
-        [searchFn]="onSearchLocal.bind(this)"
-        [itemTemplate]="customizeItemTemplate"
-        [noResultItemTemplate]="noResultItemTemplate"
-        [searchingTemplate]="searchingTemplate"
-      />
-    </div>
-    <pre>{{ (selectItem4 | json) || 'No language select!' }}</pre>
-  </form>
-</section>
+<ng-template #customizeItemTemplate let-item="item" let-formatter="formatter" let-$index="$index" let-source="source" let-term="term">
+  <span><em class="icon {{ getIcon($index) }}"></em>&nbsp;{{ $index + 1 }}: {{ formatter(item) }}</span>
+</ng-template>
+<ng-template #noResultItemTemplate let-term="term">
+  <span
+    >No any results match <strong>{{ term }}</strong></span
+  >
+</ng-template>
+<ng-template #searchingTemplate let-term="term">
+  <span
+    >Searching <strong>{{ term }}</strong></span
+  >
+</ng-template>
+<form class="form">
+  <div class="devui-form-group">
+    <input
+      dTextInput
+      type="text"
+      class="devui-form-control devui-dropdown-origin"
+      name="language"
+      id="language-customizeItemTemplate"
+      [isSearching]="isSearching"
+      [delay]="1000"
+      [minLength]="0"
+      [(ngModel)]="selectItem4"
+      dAutoComplete
+      placeholder="Search"
+      [appendToBody]="true"
+      [allowEmptyValueSearch]="true"
+      [searchFn]="onSearchLocal.bind(this)"
+      [itemTemplate]="customizeItemTemplate"
+      [noResultItemTemplate]="noResultItemTemplate"
+      [searchingTemplate]="searchingTemplate"
+    />
+  </div>
+  <pre>{{ (selectItem4 | json) || 'No language select!' }}</pre>
+</form>

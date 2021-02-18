@@ -1,40 +1,31 @@
-<section>
-  <h3>默认树拖拽</h3>
-  <d-operable-tree
-    [tree]="data"
-    [treeNodeIdKey]="'id'"
-    [treeNodeChildrenKey]="'children'"
-    [checkable]="false"
-    [draggable]="true"
-    (nodeOnDrop)="onDrop($event)"
-    [beforeNodeDrop]="beforeNodeDrop"
-    (nodeToggled)="showNode($event)"
-  >
-  </d-operable-tree>
-  <h3>支持树的拖拽排序</h3>
-  <d-operable-tree
-    [tree]="data"
-    [treeNodeIdKey]="'id'"
-    [treeNodeChildrenKey]="'children'"
-    [checkable]="false"
-    [draggable]="true"
-    [dropType]="dropType"
-    (nodeOnDrop)="onDrop($event)"
-    [beforeNodeDrop]="beforeNodeDrop"
-    (nodeToggled)="showNode($event)"
-  >
-  </d-operable-tree>
-  <span
-    style="display: inline-block; padding: 10px 5px; margin: 5px 0; border: 1px solid #405dff; cursor: move"
-    id="draggableEl"
-    draggable="true"
-    >将我拖动树节点上</span
-  >
-  <pre>transferData:{{ transferData }}</pre>
+<h3>Default</h3>
+<d-operable-tree
+  [tree]="data"
+  [treeNodeIdKey]="'id'"
+  [treeNodeChildrenKey]="'children'"
+  [checkable]="false"
+  [draggable]="true"
+  (nodeOnDrop)="onDrop($event)"
+  [beforeNodeDrop]="beforeNodeDrop"
+  (nodeToggled)="showNode($event)"
+>
+</d-operable-tree>
+<h3>Sortable</h3>
+<d-operable-tree
+  [tree]="data"
+  [treeNodeIdKey]="'id'"
+  [treeNodeChildrenKey]="'children'"
+  [checkable]="false"
+  [draggable]="true"
+  [dropType]="dropType"
+  (nodeOnDrop)="onDrop($event)"
+  [beforeNodeDrop]="beforeNodeDrop"
+  (nodeToggled)="showNode($event)"
+>
+</d-operable-tree>
 
-  <div class="drop-area" (dragover)="dragOver($event)" (drop)="drop($event)">
-    <div class="drop-item" *ngFor="let item of dropItems">
-      <span>{{ item }}</span>
-    </div>
+<div class="drop-area" (dragover)="dragOver($event)" (drop)="drop($event)">
+  <div class="drop-item" *ngFor="let item of dropItems">
+    <span>{{ item }}</span>
   </div>
-</section>
+</div>

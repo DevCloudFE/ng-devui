@@ -31,11 +31,6 @@ export class FormDemoComponent implements OnInit, OnDestroy {
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./multi-col/multi-col.component.ts') },
     { title: 'SCSS', language: 'css', code: require('!!raw-loader!./multi-col/multi-col.component.css') },
   ];
-  FilterSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./filter/filter.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./filter/filter.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./filter/filter.component.scss') },
-  ];
 
   InnerValidatorSource: Array<DevuiSourceData> = [
     {
@@ -188,10 +183,6 @@ export class FormDemoComponent implements OnInit, OnDestroy {
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./validate-sync/validate-sync.component.ts') },
   ];
 
-  ValidateCoordinatedSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./validate-coordinated/validate-coordinated.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./validate-coordinated/validate-coordinated.component.ts') },
-  ];
   ValidateDynamicRuleSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./validate-dynamic-rule/validate-dynamic-rule.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./validate-dynamic-rule/validate-dynamic-rule.component.ts') },
@@ -222,7 +213,6 @@ export class FormDemoComponent implements OnInit, OnDestroy {
       { dAnchorLink: 'demo-label-horizontal', value: values['demo-label-horizontal'] },
       { dAnchorLink: 'demo-modal', value: values['demo-modal'] },
       { dAnchorLink: 'demo-multi-col', value: values['demo-multi-col'] },
-      { dAnchorLink: 'demo-filter', value: values['demo-filter'] },
       { dAnchorLink: 'demo-validate-template', value: values['demo-validate-template'] },
       { dAnchorLink: 'demo-validate-reactive', value: values['demo-validate-reactive'] },
       { dAnchorLink: 'demo-custom-status', value: values['demo-custom-status'] },

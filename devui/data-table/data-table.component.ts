@@ -125,6 +125,10 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
    */
   @Input() timeout = 300;
   /**
+   * 【可选】配置表头操作未激活状态下是否显示操作区域，默认不显示
+   */
+  @Input() showOperationArea = false;
+  /**
    * 【可选】是否显示排序未激活图标，默认显示,
    */
   @Input() showSortIcon = true;
@@ -443,7 +447,7 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
   }
 
   private resetThSortOrder() {
-     this.thList.changes.pipe(
+    this.thList.changes.pipe(
       switchMap(() => merge(...this.thList.map(th => th.sortChange)))
     ).subscribe((sortEvent: SortEventArg) => {
       this.thList.filter(th => th !== sortEvent.th).forEach(th => th.clearSortOrder());
@@ -635,15 +639,17 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
     }
   }
 
-  private setCheckedStatus(data, checked) {
+  private setCheckedStatus(data, checked, toggle?: boolean) {
     return data.map(item => {
       if (!(item.$checkDisabled || item.$disabled)) {
-        item.$checked = checked;
-        item.$halfChecked = false;
+        if ((toggle && item.$checked === undefined) || !toggle) {
+          item.$checked = checked;
+          item.$halfChecked = false;
+        }
       }
 
       if (item.children) {
-        item.children = this.setCheckedStatus(item.children, checked);
+        item.children = this.setCheckedStatus(item.children, checked, toggle);
       }
       return item;
     });
@@ -666,8 +672,36 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
     this.loadMore.emit(this);
   }
 
+  private updateColumnsWidth() {
+    this.tableWidthConfig = [];
+    if (this.showExpandToggle) {
+      const expandWidth = this.elementRef.nativeElement.querySelector('.devui-detail-cell').clientWidth;
+      this.tableWidthConfig.push({field: 'expand', width: expandWidth + 'px'});
+    }
+    if (this.checkable) {
+      const checkboxWidth = this.elementRef.nativeElement.querySelector('.devui-checkable-cell').clientWidth;
+      this.tableWidthConfig.push({field: 'checkbox', width: checkboxWidth + 'px'});
+
+    }
+    this._columns.forEach((col) => {
+      this.tableWidthConfig.push({field: col.field, width: col.width});
+    });
+  }
+
   beginResizeHandlerEvent($event) {
-    this.onDocumentClick($event);
+    const thRenderWidthList = $event.thRenderWidthList;
+    if (thRenderWidthList.length > 0) {
+      // 兼容d-column表头分组场景
+      const reverseThList = thRenderWidthList.reverse();
+      this._columns.forEach(column => {
+        const thItem = reverseThList.find(th => th.field === column.field);
+        if (thItem) {
+          column.width = thItem.width + 'px';
+        }
+      });
+      this.updateColumnsWidth();
+    }
+    this.onDocumentClick($event.event);
   }
 
   onResizingFixedHandler({ field, width }) {
@@ -804,7 +838,7 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
       loadChildrenResult.then(() => {
         // 异步加载子表格是检查选中状态
         if (rowItem.$checked && this.checkableRelation.downward) {
-          this.setCheckedStatus(rowItem.children, rowItem.$checked);
+          this.setCheckedStatus(rowItem.children, rowItem.$checked, true);
         }
       });
     } else {
@@ -842,7 +876,7 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
       loadAllChildrenResult.then(() => {
         this.dataSource.forEach(item => {
           if (item.$checked && item.children) {
-            this.setCheckedStatus(item.children, true);
+            this.setCheckedStatus(item.children, true, true);
           }
         });
         this.travelChildrenToggleStatus(this.dataSource, open);

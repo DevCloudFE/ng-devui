@@ -1,0 +1,185 @@
+@import '../style/theme/color';
+@import '../style/theme/variables';
+@import '../style/mixins/index';
+@import '../style/theme/shadow';
+@import '../style/theme/corner';
+@import '../style/core/_font';
+
+:host.devui-popover {
+  font-size: $devui-font-size;
+  position: absolute;
+  top: 0;
+  left: 0;
+  line-height: 1.5;
+  border: none;
+  border-radius: $devui-border-radius-feedback;
+  z-index: 1060;
+  background-color: $devui-feedback-overlay-bg;
+  color: $devui-feedback-overlay-text;
+  overflow-wrap: break-word;
+
+  > .arrow {
+    border-width: 8px;
+
+    &,
+    &::after {
+      position: absolute;
+      display: block;
+      width: 0;
+      height: 0;
+      border-color: transparent;
+      border-style: solid;
+    }
+
+    &::after {
+      content: '';
+    }
+  }
+
+  &.top > .arrow {
+    margin-left: -7px;
+    border-bottom-width: 0;
+    border-top-color: $devui-feedback-overlay-bg;
+    bottom: -8px;
+  }
+
+  &.right > .arrow {
+    left: -8px;
+    margin-top: -8px;
+    border-left-width: 0;
+    border-right-color: $devui-feedback-overlay-bg;
+  }
+
+  &.bottom > .arrow {
+    margin-left: -7px;
+    border-top-width: 0;
+    border-bottom-color: $devui-feedback-overlay-bg;
+    top: -8px;
+  }
+
+  &.left > .arrow {
+    right: -8px;
+    margin-top: -8px;
+    border-right-width: 0;
+    border-left-color: $devui-feedback-overlay-bg;
+  }
+
+  &.bias-left > .arrow {
+    left: 14px;
+  }
+
+  &.bias-right > .arrow {
+    right: 14px;
+  }
+
+  &.bias-top > .arrow {
+    top: 13px;
+  }
+
+  &.bias-bottom > .arrow {
+    bottom: 5px;
+  }
+
+  &.bias-horizontal-center > .arrow {
+    left: 50%;
+  }
+
+  &.bias-vertical-center > .arrow {
+    top: 50%;
+  }
+
+  &.top {
+    margin-top: -10px;
+    box-shadow: $devui-shadow-length-feedback-overlay $devui-shadow;
+  }
+
+  &.bottom {
+    margin-top: 10px;
+    box-shadow: $devui-shadow-length-feedback-overlay $devui-shadow;
+  }
+
+  &.left {
+    margin-left: -10px;
+    box-shadow: $devui-shadow-length-feedback-overlay $devui-shadow;
+  }
+
+  &.right {
+    margin-left: 10px;
+    box-shadow: $devui-shadow-length-feedback-overlay $devui-shadow;
+  }
+}
+
+.devui-popover-content {
+  padding: 5px 14px;
+
+  .read-tip-container {
+    .title {
+      font-size: $devui-font-size-page-title;
+    }
+
+    .content {
+      font-size: $devui-font-size;
+    }
+  }
+}
+
+.devui-popover-icon {
+  display: block;
+  position: absolute;
+  left: 10px;
+  top: 6px;
+
+  svg.devui-icon {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.devui-popover-main-content.with-icon {
+  text-indent: 20px;
+}
+
+.devui-icon.devui-icon-success > g {
+  & > path {
+    fill: $devui-success;
+  }
+
+  & > circle,
+  & > polygon {
+    fill: $devui-light-text;
+  }
+}
+
+.devui-icon.devui-icon-warning > g {
+  & > polygon {
+    fill: $devui-light-text;
+  }
+
+  & > path {
+    fill: $devui-warning;
+  }
+}
+
+.devui-icon.devui-icon-info > g {
+  & > g {
+    fill: $devui-info;
+  }
+
+  & > circle {
+    fill: $devui-light-text;
+  }
+}
+
+.devui-icon.devui-icon-error > g {
+  & > path {
+    fill: $devui-danger;
+  }
+
+  & > circle {
+    fill: $devui-light-text;
+  }
+}
+
+.devui-popover-content {
+  padding: 5px 14px;
+}

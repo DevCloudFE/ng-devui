@@ -1,8 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, TemplateRef } from '@angular/core';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { Subscription } from 'rxjs';
-import { AccordionItemClickEvent, AccordionMenuToggleEvent, AccordionMenuType, AccordionOptions} from './accordion.type';
-
+import { AccordionItemClickEvent, AccordionMenuToggleEvent, AccordionMenuType, AccordionOptions } from './accordion.type';
 @Component({
   selector: 'd-accordion',
   templateUrl: './accordion.component.html',
@@ -43,11 +42,11 @@ export class AccordionComponent implements AccordionOptions, OnChanges, OnInit, 
   @Input() linkDefaultTarget = '_self'; // 不设置target的时候target默认值
 
   @Input() accordionType: 'normal' | 'embed' = 'normal';
+  @Input() showAnimation = true;
 
   activeItem; // 记录用户点击的激活菜单项
   i18nCommonText: I18nInterface['common'];
   i18nSubscription: Subscription;
-
   constructor(private i18n: I18nService) {
   }
 

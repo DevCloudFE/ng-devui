@@ -24,4 +24,13 @@
       margin-left: 12px;
     }
   }
+
+  h5 {
+    margin-top: 24px;
+    margin-bottom: 8px;
+  }
+}
+
+#form-label-horizontal ::ng-deep d-form-demo-label-horizontal form {
+  width: 550px;
 }

@@ -1,12 +1,25 @@
-<h4>点击加载子菜单</h4>
 <d-cascader
   [options]="options"
-  [placeholder]="'请选择'"
+  [placeholder]="'please select'"
   [(ngModel)]="value"
   [trigger]="'click'"
   (ngModelChange)="onChanges($event)"
   [showPath]="true"
   [allowClear]="true"
-  [dropdownWidth]="120"
+  [width]="300"
   [loadChildrenFn]="loadChildren"
+></d-cascader>
+
+<h4>Multiple Mode:</h4>
+<d-cascader
+  [options]="options"
+  [placeholder]="'please select'"
+  [(ngModel)]="value2"
+  [trigger]="'click'"
+  (ngModelChange)="onChanges($event)"
+  [showPath]="true"
+  [allowClear]="true"
+  [width]="300"
+  [loadChildrenFn]="loadChildren"
+  [multiple]="true"
 ></d-cascader>

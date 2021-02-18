@@ -16,14 +16,13 @@ export class CustomizeComponent {
       id: 'modal-modal',
       width: '300px',
       backdropCloseable: false,
-      showAnimate: false,
       component: ModalAlertComponent,
       onClose: () => {
         console.log('on modal closed.');
       },
       data: {
         content: 'Error: This is an error message, please take a look.',
-        cancelBtnText: '确定',
+        cancelBtnText: 'Ok',
         onClose: (event) => {
           results.modalInstance.hide();
         },

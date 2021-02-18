@@ -1,17 +1,6 @@
-<section>
-  <div class="btn-group">
-    <d-button
-      dPopover
-      [popType]="'default'"
-      [content]="'hoverDelayTime'"
-      [position]="'top'"
-      [controlled]="true"
-      [showAnimate]="true"
-      [appendToBody]="false"
-      [trigger]="'hover'"
-      [hoverDelayTime]="5000"
-    >
-      hoverDelayTime
-    </d-button>
-  </div>
-</section>
+<d-button dPopover [trigger]="'hover'" [controlled]="true" [mouseEnterDelay]="500" [content]="' Mouse enter 500ms later. <br> Show me '">
+  MouseEnter delay 500ms
+</d-button>
+<d-button dPopover [trigger]="'hover'" [controlled]="true" [mouseLeaveDelay]="2000" [content]="' Mouse leave 2000ms later. <br> Hide me'">
+  MouseLeave delay 2000ms
+</d-button>

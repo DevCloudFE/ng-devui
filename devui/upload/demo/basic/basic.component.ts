@@ -1,13 +1,13 @@
 // 注意需要在使用的NgModule中 import { HttpClientModule  } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { IFileOptions, IUploadOptions, SingleUploadComponent } from 'ng-devui/upload';
 
 @Component({
   selector: 'd-basic',
   templateUrl: './basic.component.html'
 })
-export class BasicComponent {
+export class BasicComponent implements OnInit {
   @ViewChild('singleuploadDrag', { static: true }) singleuploadDrag: SingleUploadComponent;
   public beforeUploadFn: Function;
   additionalParameter = {
@@ -22,10 +22,6 @@ export class BasicComponent {
     multiple: false,
     accept: '.png,.zip',
   };
-  fileOptions3: IFileOptions = {
-    multiple: false,
-    accept: 'application/json,image/*,.csv',
-  };
   uploadedFiles: Array<Object> = [];
   uploadOptions: IUploadOptions = {
     uri: '/upload',
@@ -38,8 +34,32 @@ export class BasicComponent {
     responseType: 'json'
   };
 
+  selectedFiles: any;
+
   constructor(private http: HttpClient) {
     this.beforeUploadFn = this.beforeUpload2.bind(this);
+  }
+
+  dynamicUploadOptionsFn(file, options) {
+    let uploadOptions = options;
+    if (file.type  === 'application/pdf') {
+      uploadOptions = {
+        uri: '/upload',
+        headers: {},
+        additionalParameter: this.additionalParameter,
+        maximumSize: 50,
+        method: 'POST',
+        fileFieldName: 'dFile',
+        withCredentials: true,
+        responseType: 'json'
+      };
+    }
+    return uploadOptions;
+  }
+  ngOnInit() {
+    document.getElementById('fileInput').addEventListener('change', event => {
+      this.selectedFiles = (event.target as HTMLInputElement).files;
+    });
   }
 
   onSuccess(result) {
@@ -66,14 +86,24 @@ export class BasicComponent {
     this.http.delete(`/files/${filePath}`).subscribe(() => {
       console.log(`delete ${filePath}`);
     });
+    setTimeout(() => {
+      console.log(this.selectedFiles);
+    });
   }
 
   fileDrop(files) {
     console.log(files);
   }
+
   fileOver(event) {
     console.log(event);
   }
+
+  fileSelect(files) {
+    console.log(files);
+    console.log(this.selectedFiles);
+  }
+
   customUploadEvent() {
     this.singleuploadDrag.upload();
   }

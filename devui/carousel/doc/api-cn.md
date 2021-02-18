@@ -1,6 +1,20 @@
+# 如何使用
+在module中引入：
+```ts
+import { CarouselModule } from 'ng-devui/carousel';
+```
+在页面中使用：
+```html
+<d-carousel>
+  <d-carousel-item></d-carousel-item>
+</d-carousel>
+```
+
+# d-carousel
+
 ## d-carousel 参数
 
-|     参数     |             类型             |   默认   | 说明                                            | 跳转 Demo                                        |
+|     参数     |             类型             |   默认值   | 描述                                            | 跳转 Demo                                        |
 | :----------: | :--------------------------: | :------: | :---------------------------------------------- | ------------------------------------------------ |
 | arrowTrigger | `'hover'\|'never'\|'always'` | 'hover'  | 可选，指定切换箭头显示方式                      | [指示器&切换箭头](demo#trigger-usage)  |
 |   autoplay   |          `boolean`           |  false   | 可选，是否自动轮播                              | [自动轮播](demo#autoplay-usage) |
@@ -13,13 +27,13 @@
 
 ## d-carousel 事件
 
-|      事件          |          类型           |                    说明                     | 跳转 Demo                                                     |
+|      事件          |          类型           |                    描述                     | 跳转 Demo                                                     |
 | :----------------: | :---------------------: | :-----------------------------------------: | -------------------------------------------------            |
 |      activeIndexChange    | `EventEmitter<number>`  | 卡片切换时，返回当前卡片的索引，从0开始    | [基本用法](demo#basic-usage)             |
 
 ## d-carousel 方法
 
-|    方法     | 说明                                | 跳转 Demo                       |
+|    方法     | 描述                                | 跳转 Demo                       |
 | :---------: | :---------------------------------- | :----------------------------- |
 |   prev()    | 切换到上一张卡片                    | [自定义操作](demo#custom-usage)   |
 |   next()    | 切换到下一张卡片                    | [自定义操作](demo#custom-usage)   |

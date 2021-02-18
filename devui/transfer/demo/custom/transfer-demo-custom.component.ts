@@ -52,7 +52,7 @@ export class TransferDemoCustomComponent {
       lastName: 'lang',
       gender: 'Male',
       dob: new Date(1991, 3, 1),
-      detail: '这是一个行详情',
+      detail: 'This is a line detail',
     },
     {
       id: 6,
@@ -81,7 +81,7 @@ export class TransferDemoCustomComponent {
       lastName: 'Yu',
       gender: 'Female',
       dob: new Date(1991, 3, 1),
-      detail: '这是另外一个行详情'
+      detail: 'This is another line detail'
     },
     {
       id: 10,
@@ -156,7 +156,7 @@ export class TransferDemoCustomComponent {
 
     this.targetCheckedLen = checkedRows.length;
 
-    // 要置0
+    // Set this parameter to 0.
     this.sourceCheckedLen = 0;
   }
 
@@ -171,7 +171,7 @@ export class TransferDemoCustomComponent {
     this.originSource = this.basicDataSource.concat(checkedRows);
     this.basicDataSource = JSON.parse(JSON.stringify(this.originSource));
     this.sourceCheckedLen = checkedRows.length;
-    // 要置0
+    // Set this parameter to 0.
     this.targetCheckedLen = 0;
   }
 

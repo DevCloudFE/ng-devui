@@ -1,5 +1,5 @@
 import { ContentChildren, Directive, EventEmitter, HostBinding, Input, Optional, Output, QueryList, Self } from '@angular/core';
-import { AbstractControl, AbstractControlDirective, ControlContainer, NgForm } from '@angular/forms';
+import { AbstractControl, AbstractControlDirective, ControlContainer, NgForm, ValidationErrors } from '@angular/forms';
 import { filter, startWith, take } from 'rxjs/operators';
 import { DFormControlRuleDirective, DFormGroupRuleDirective } from './validator-directive/form-control-rules.directive';
 
@@ -16,6 +16,7 @@ export enum FormLayout {
 export class FormDirective {
   @Input() layout = FormLayout.Horizontal;
   @Input() labelSize: 'sm' | '' | 'lg' = '';
+  @Input() labelAlign: 'start' | 'center' | 'end' = 'start';
 
   /**
    * @deprecated Use dHasFeedback to replace, No longer support for label
@@ -55,6 +56,21 @@ export class FormDirective {
     return this.labelSize === 'sm';
   }
 
+  @HostBinding('class.devui-form-label-align-start')
+  get labelAlignStart() {
+    return this.labelAlign === 'start';
+  }
+
+  @HostBinding('class.devui-form-label-align-center')
+  get labelAlignCenter() {
+    return this.labelAlign === 'center';
+  }
+
+  @HostBinding('class.devui-form-label-align-end')
+  get labelAlignEnd() {
+    return this.labelAlign === 'end';
+  }
+
   updateOnSubmit($event?, data?: any) {
     this._operateAllControl(this._cd.control, (cd: AbstractControl) => {
       cd.markAsDirty();
@@ -77,13 +93,15 @@ export class FormDirective {
             this.dSubmit.emit({
               valid: this._dValidateRuleDir.isReady,
               directive: this._dValidateRuleDir,
-              data: data
+              data: data,
+              errors: this._getAllErrors(this._cd.control)
             });
           } else {
             this.dSubmit.emit({
               valid: this._cd.valid,
               directive: this._cd,
-              data: data
+              data: data,
+              errors: this._getAllErrors(this._cd.control)
             });
           }
         }
@@ -119,6 +137,21 @@ export class FormDirective {
         }
       }
     }
+  }
+
+  private _getAllErrors(control: AbstractControl) {
+    const res: {[key: string]: ValidationErrors} = {};
+    if (control) {
+      res.errors = control.errors;
+      const controls = (control as any).controls;
+      if (controls) {
+        for (const key of Object.keys(controls)) {
+          res[key] = this._getAllErrors(controls[key]);
+        }
+      }
+    }
+
+    return res;
   }
 
   constructor(@Optional() @Self() cd: ControlContainer, @Optional() @Self() dValidateRuleDir: DFormGroupRuleDirective) {

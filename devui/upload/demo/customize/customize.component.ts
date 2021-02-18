@@ -30,12 +30,12 @@ export class CustomizeComponent {
   UPLOAD: string;
 
   constructor() {
-    this.UPLOAD = '上传';
-    this.PRELOAD = '预加载';
-    this.UPLOADING = '上传中';
-    this.UPLOADED = '已上传';
-    this.FAILED = '上传失败';
-    this.DELETE = '删除';
+    this.UPLOAD = 'Upload';
+    this.PRELOAD = 'preLoad';
+    this.UPLOADING = 'Uploading';
+    this.UPLOADED = 'Uploaded';
+    this.FAILED = 'Upload Failed';
+    this.DELETE = 'Delete';
   }
 
   onSuccess3(result) {
@@ -50,7 +50,7 @@ export class CustomizeComponent {
     console.log(`delete ${filePath}`);
   }
   setCustomUploadOptions(file, options) {
-    let uploadOptions;
+    let uploadOptions = options;
     if (file.type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
       uploadOptions = {
         uri: '/upload',

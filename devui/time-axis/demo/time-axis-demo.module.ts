@@ -8,6 +8,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 import { TimeAxisModule } from '../time-axis.module';
 import { TimeAxisAllStatesComponent } from './all-states/time-axis-all-states.component';
+import { TimeAxisDirectionComponent } from './direction/time-axis-direction.component';
 import { TimeAxisHtmlContentComponent } from './html-content/time-axis-html-content.component';
 import { TimeAxisTemplateContentComponent } from './template-content/time-axis-template-content.component';
 import { TimeAxisDemoComponent } from './time-axis-demo.component';
@@ -33,6 +34,7 @@ import { TimeAxisDemoComponent } from './time-axis-demo.component';
   declarations: [
       TimeAxisDemoComponent,
       TimeAxisAllStatesComponent,
+      TimeAxisDirectionComponent,
       TimeAxisHtmlContentComponent,
       TimeAxisTemplateContentComponent
       ],

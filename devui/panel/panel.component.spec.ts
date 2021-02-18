@@ -1,20 +1,37 @@
 import { Component } from '@angular/core';
-import { ComponentFixture, fakeAsync, flush, TestBed } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  fakeAsync,
+  flush,
+  TestBed,
+  tick
+} from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
-import { Observable, of } from 'rxjs';
+import {
+  Observable,
+  of
+} from 'rxjs';
+
 import { PanelComponent } from './panel.component';
 import { PanelModule } from './panel.module';
 
 @Component({
   template: `
-  <d-panel #panel
-    [type]="type" [cssClass]="cssClass" [isCollapsed]="isCollapsed" [beforeToggle]="beforeToggle" (toggle)="togglePanel($event)">
+    <d-panel
+      #panel
+      [type]="type"
+      [cssClass]="cssClass"
+      [isCollapsed]="isCollapsed"
+      [beforeToggle]="beforeToggle"
+      (toggle)="togglePanel($event)"
+    >
     <d-panel-header>Panel with header and footer</d-panel-header>
     <d-panel-body>This is body</d-panel-body>
     <d-panel-footer>This is footer</d-panel-footer>
   </d-panel>
-  `
+  `,
 })
 class TestPanelComponent {
   type = 'primary';
@@ -35,8 +52,8 @@ describe('panel', () => {
 
     beforeEach(() => {
       TestBed.configureTestingModule({
-        imports: [PanelModule],
-        declarations: [TestPanelComponent]
+        imports: [PanelModule, NoopAnimationsModule],
+        declarations: [TestPanelComponent],
       }).compileComponents();
     });
 
@@ -109,8 +126,9 @@ describe('panel', () => {
         const closeElement: HTMLElement = panelElement.querySelector('.devui-panel-heading');
         closeElement.dispatchEvent(new Event('click'));
         fixture.detectChanges();
-        flush();
+        tick();
         fixture.detectChanges();
+        flush();
         expect(panelElement.querySelector('.devui-panel-body')).toEqual(null);
       }));
 
@@ -122,7 +140,6 @@ describe('panel', () => {
         closeElement.dispatchEvent(new Event('click'));
         fixture.detectChanges();
         flush();
-        fixture.detectChanges();
         expect(testComponent.panelState).toBe(false);
       }));
 
@@ -146,7 +163,6 @@ describe('panel', () => {
         closeElement.dispatchEvent(new Event('click'));
         fixture.detectChanges();
         flush();
-        fixture.detectChanges();
         expect(panelElement.querySelector('.devui-panel-body')).not.toEqual(null);
       }));
 
@@ -159,7 +175,6 @@ describe('panel', () => {
         closeElement.dispatchEvent(new Event('click'));
         fixture.detectChanges();
         flush();
-        fixture.detectChanges();
         expect(panelElement.querySelector('.devui-panel-body')).not.toEqual(null);
       }));
 
@@ -172,7 +187,6 @@ describe('panel', () => {
         closeElement.dispatchEvent(new Event('click'));
         fixture.detectChanges();
         flush();
-        fixture.detectChanges();
         expect(panelElement.querySelector('.devui-panel-body')).not.toEqual(null);
       }));
     });

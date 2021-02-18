@@ -1,5 +1,5 @@
-import {Component, Input} from '@angular/core';
-import {ModalService} from 'ng-devui/modal';
+import { Component, Input } from '@angular/core';
+import { ModalService } from 'ng-devui/modal';
 
 @Component({
   selector: 'd-tree-select-modal',
@@ -13,7 +13,7 @@ import {ModalService} from 'ng-devui/modal';
           bsStyle="stress"
           circled="true"
         >
-          好了
+          Ok
         </d-button>
       </div>
     </div>
@@ -280,7 +280,7 @@ export class TreeSelectAppendToComponent {
       },
       data: {
         content: 'Error: This is an error message, please take a look.',
-        cancelBtnText: '我知道了',
+        cancelBtnText: 'got it',
         onClose: (event) => {
           results.modalInstance.hide();
         },

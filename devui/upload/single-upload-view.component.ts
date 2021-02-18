@@ -4,16 +4,15 @@ import {
   Input,
   Output,
   TemplateRef,
-  ViewChild,
+  ViewChild
 } from '@angular/core';
-
-import {FileUploader} from './file-uploader.class';
+import { FileUploader } from './file-uploader.class';
 import {
   IUploadOptions,
   UploadStatus
 } from './file-uploader.types';
-import {UploadComponent} from './upload.class';
-import {UploadedFilesComponent} from './uploaded-files.component';
+import { UploadComponent } from './upload.class';
+import { UploadedFilesComponent } from './uploaded-files.component';
 
 @Component({
   selector: 'd-single-upload-view',
@@ -27,6 +26,7 @@ export class SingleUploadViewComponent extends UploadComponent {
   @Input() uploadedFiles: Array<Object> = [];
   @Input() uploadedFilesRef: TemplateRef<any>;
   @Input() filePath: string;
+  @Input() dynamicUploadOptionsFn: (files, uploadOptions) => IUploadOptions;
   @Output() deleteUploadedFileEvent: EventEmitter<any> = new EventEmitter<any>();
   @ViewChild('dUploadedFiles', { static: true }) uploadedFilesComponent: UploadedFilesComponent;
 
@@ -35,7 +35,11 @@ export class SingleUploadViewComponent extends UploadComponent {
 
   addFile(file: File) {
     this.fileUploaders = [];
-    super.addFile(file, this.uploadOptions);
+    let uploadOptions = this.uploadOptions;
+    if (this.dynamicUploadOptionsFn) {
+      uploadOptions = this.dynamicUploadOptionsFn(file, this.uploadOptions);
+    }
+    super.addFile(file, uploadOptions);
   }
 
   deleteFile(file: File) {

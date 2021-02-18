@@ -1,6 +1,7 @@
 import { Component, DebugElement, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { DomHelper } from '../utils/testing/dom-helper';
 import { ITreeItem } from './tree-factory.class';
 import { TreeComponent } from './tree.component';
@@ -86,7 +87,7 @@ describe('tree', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [TreeModule],
+      imports: [TreeModule, NoopAnimationsModule],
       declarations: [TestTreeComponent]
     });
   });
@@ -214,7 +215,7 @@ describe('tree factory', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [TreeModule],
+      imports: [TreeModule, NoopAnimationsModule],
       declarations: [TestTreeComponent]
     }).compileComponents();
   });

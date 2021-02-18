@@ -22,7 +22,6 @@ a.date-link:hover {
 
 .devui-input-group-addon {
   vertical-align: middle;
-  padding-top: 4px;
 }
 
 .devui-input-group {
@@ -33,9 +32,8 @@ a.date-link:hover {
   color: $devui-brand-active;
 }
 
-.icon-close-wrapper {
-  padding-right: 0;
-  padding-top: 0;
+.close-icon-wrapper {
+  padding: 0;
 }
 
 .icon-close {

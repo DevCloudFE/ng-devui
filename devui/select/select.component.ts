@@ -25,7 +25,14 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
-import { AppendToBodyDirection, AppendToBodyDirectionsConfig, fadeInOut } from 'ng-devui/utils';
+import {
+  addClassToOrigin,
+  AppendToBodyDirection,
+  AppendToBodyDirectionsConfig,
+  fadeInOut,
+  formWithDropDown,
+  removeClassFromOrigin
+} from 'ng-devui/utils';
 import { WindowRef } from 'ng-devui/window-ref';
 import { BehaviorSubject, fromEvent, Observable, of, Subscription } from 'rxjs';
 import { debounceTime, filter, map, switchMap } from 'rxjs/operators';
@@ -61,22 +68,14 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
     if (this.selectWrapper) {
       this.dropDownWidth = this.width ? this.width : (this.selectWrapper.nativeElement.offsetWidth);
     }
-    const ele = this.selectWrapper && this.selectWrapper.nativeElement;
-    let position = 'bottom';
-    if (this.popDirection === 'bottom') {
-      position = 'top';
-    }
     if (value) {
-      if (ele && !ele.classList.contains('devui-dropdown-origin-open')) {
-        ele.classList.add('devui-dropdown-origin-open');
-      }
-      if (!this.appendToBody) {
-        if (ele && !ele.classList.contains(`devui-dropdown-origin-${this.popDirection}`)) {
-          ele.classList.add(`devui-dropdown-origin-${this.popDirection}`);
-          ele.classList.remove(`devui-dropdown-origin-${position}`);
-        }
-      }
+      addClassToOrigin(this.selectWrapper);
+      setTimeout(() => {
+        this.startAnimation = true;
+        this.changeDetectorRef.detectChanges();
+      });
     } else {
+      removeClassFromOrigin(this.selectWrapper);
       this.onTouch();
     }
   }
@@ -269,6 +268,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
   allChecked = false;
   isMouseEvent = false;
   dropDownWidth: number;
+  startAnimation = false;
 
   filter = '';
   activeIndex = -1;
@@ -578,7 +578,9 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
 
   updateCdkConnectedOverlayOrigin() {
     if (this.selectWrapper.nativeElement) {
-      this.cdkConnectedOverlayOrigin = new CdkOverlayOrigin(this.selectWrapper.nativeElement);
+      this.cdkConnectedOverlayOrigin = new CdkOverlayOrigin(
+        formWithDropDown(this.selectWrapper) || this.selectWrapper.nativeElement
+      );
     }
   }
 
@@ -808,46 +810,16 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
 
   onPositionChange(position: ConnectedOverlayPositionChange) {
     this.menuPosition = position.connectionPair.originY;
-    this.changeAppendToBodyFormDropDownDirection(position.connectionPair.overlayY);
-  }
-
-  changeAppendToBodyFormDropDownDirection(position) {
-    const ele = this.selectWrapper && this.selectWrapper.nativeElement;
-    const menuEle = this.selectMenuElement && this.selectMenuElement.nativeElement;
-    let formBorder = 'bottom';
-    if (position === 'bottom') {
-      formBorder = 'top';
-    }
-    if (ele && !ele.classList.contains(`devui-dropdown-origin-${formBorder}`)) {
-      ele.classList.add(`devui-dropdown-origin-${formBorder}`);
-      ele.classList.remove(`devui-dropdown-origin-${position}`);
-    }
-    if (menuEle && !menuEle.classList.contains(`devui-dropdown-cdk-${formBorder}`)) {
-      menuEle.classList.add(`devui-dropdown-cdk-${formBorder}`);
-      menuEle.classList.remove(`devui-dropdown-cdk-${position}`);
-    }
   }
 
   animationEnd($event) {
     if (!this.isOpen && this.selectMenuElement) {
       const targetElement = this.selectMenuElement.nativeElement;
+      this.startAnimation = false;
       setTimeout(() => {
         // 动画会覆盖导致display还是block， 所以要等动画覆盖完
         this.renderer.setStyle(targetElement, 'display', 'none');
       });
-    }
-    if (!this.isOpen) {
-      const ele = this.selectWrapper && this.selectWrapper.nativeElement;
-      const menuEle = this.selectMenuElement && this.selectMenuElement.nativeElement;
-      if (ele) {
-        ele.classList.remove('devui-dropdown-origin-open');
-        ele.classList.remove('devui-dropdown-origin-top');
-        ele.classList.remove('devui-dropdown-origin-bottom');
-      }
-      if (menuEle) {
-        menuEle.classList.remove(`devui-dropdown-cdk-top`);
-        menuEle.classList.remove(`devui-dropdown-cdk-bottom`);
-      }
     }
   }
 

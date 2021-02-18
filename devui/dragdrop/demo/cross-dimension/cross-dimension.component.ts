@@ -44,44 +44,44 @@ export class CrossDimensionComponent {
     };
     owners = [ {
       id: 'not-assign',
-      name: '待分配',
+      name: 'Not Assign',
       collapse: false
     }, {
-      id: 'huahua',
-      name: '林花花',
+      id: 'available',
+      name: 'Available',
       collapse: false
     }, {
-      id: 'xiaoming',
-      name: '王小明',
+      id: 'not-available',
+      name: 'Not Available',
       collapse: false
     }];
     listCol = [
       {
-        id: 'todo',
-        name: '新建'
+        id: 'group1',
+        name: 'Group 1'
       }, {
-        id: 'doing',
-        name: '进行中'
+        id: 'group2',
+        name: 'Group 2'
       }, {
-        id: 'done',
-        name: '已完成'
+        id: 'group3',
+        name: 'Group 3'
       }
     ];
   ownerListMap = {
     'not-assign': {
-      todo: this.lists.listA1,
-      doing: this.lists.listA2,
-      done: this.lists.listA3
+      group1: this.lists.listA1,
+      group2: this.lists.listA2,
+      group3: this.lists.listA3
     },
-    'huahua': {
-      todo: this.lists.listB1,
-      doing: this.lists.listB2,
-      done: this.lists.listB3
+    'available': {
+      group1: this.lists.listB1,
+      group2: this.lists.listB2,
+      group3: this.lists.listB3
     },
-    'xiaoming': {
-      todo: this.lists.listC1,
-      doing: this.lists.listC2,
-      done: this.lists.listC3
+    'not-available': {
+      group1: this.lists.listC1,
+      group2: this.lists.listC2,
+      group3: this.lists.listC3
     },
   };
 

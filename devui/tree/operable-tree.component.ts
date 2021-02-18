@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   Component,
   ContentChild,
   ElementRef,
@@ -13,8 +14,9 @@ import {
   ViewChildren
 } from '@angular/core';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
+import { treeCollapseMotion } from 'ng-devui/utils';
 import { Subscription } from 'rxjs';
-import { ITreeItem, TreeNode } from './tree-factory.class';
+import { Dictionary, ITreeItem, ITreeNodeData, TreeNode } from './tree-factory.class';
 import { TreeComponent } from './tree.component';
 import { ICheckboxInput, IDropType } from './tree.types';
 @Component({
@@ -23,8 +25,9 @@ import { ICheckboxInput, IDropType } from './tree.types';
   styleUrls: ['./operable-tree.component.scss'],
   exportAs: 'dOperableTreeComponent',
   preserveWhitespaces: false,
+  animations: [treeCollapseMotion]
 })
-export class OperableTreeComponent implements OnInit, OnDestroy {
+export class OperableTreeComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() tree: Array<ITreeItem>;
   @Input() treeNodeIdKey: string;
   @Input() treeNodeChildrenKey: string;
@@ -55,21 +58,22 @@ export class OperableTreeComponent implements OnInit, OnDestroy {
   @Input() iconTemplatePosition: string;
   @Input() virtualScroll = false;
   @Input() virtualScrollHeight = '800px';
-  @Input() itemSize = 38;
-  @Input() minBufferPx = 760;
-  @Input() maxBufferPx = 1140;
+  @Input() showAnimation = true;
+  @Input() itemSize = 30;
+  @Input() minBufferPx = 600;
+  @Input() maxBufferPx = 900;
   @Input() checkableRelation: 'upward' | 'downward' | 'both' | 'none' = 'both';
-  @Output() nodeSelected: EventEmitter<any> = new EventEmitter<any>();
-  @Output() nodeDblClicked: EventEmitter<any> = new EventEmitter<any>();
-  @Output() nodeRightClicked: EventEmitter<any> = new EventEmitter<any>();
-  @Output() nodeDeleted: EventEmitter<any> = new EventEmitter<any>();
-  @Output() nodeToggled: EventEmitter<any> = new EventEmitter<any>();
-  @Output() nodeChecked: EventEmitter<any> = new EventEmitter<any>();
-  @Output() currentNodeChecked: EventEmitter<any> = new EventEmitter<any>();
-  @Output() nodeEdited: EventEmitter<any> = new EventEmitter<any>();
-  @Output() editValueChange: EventEmitter<any> = new EventEmitter<any>();
-  @Output() nodeOnDrop: EventEmitter<any> = new EventEmitter<any>();
-  @Output() afterTreeInit: EventEmitter<any> = new EventEmitter<any>();
+  @Output() nodeSelected = new EventEmitter<TreeNode>();
+  @Output() nodeDblClicked = new EventEmitter<TreeNode>();
+  @Output() nodeRightClicked = new EventEmitter<{ node: TreeNode, event: MouseEvent }>();
+  @Output() nodeToggled = new EventEmitter<TreeNode>();
+  @Output() afterTreeInit = new EventEmitter<Dictionary<TreeNode>>();
+  @Output() nodeDeleted = new EventEmitter<TreeNode>();
+  @Output() nodeChecked = new EventEmitter<any>();
+  @Output() currentNodeChecked = new EventEmitter<{ id: string | number, data: ITreeNodeData }>();
+  @Output() nodeEdited = new EventEmitter<TreeNode>();
+  @Output() editValueChange = new EventEmitter<{ value: string, callback: Function }>();
+  @Output() nodeOnDrop = new EventEmitter<{ event: DragEvent, treeNode: TreeNode, dropType: IDropType }>();
   @ViewChild('operableTree', { static: true }) operableTree: TreeComponent;
   @ViewChild('operableTreeContainer', { static: true }) operableTreeEle: ElementRef;
   @ViewChild('treeDropIndicator') treeDropIndicator: ElementRef;
@@ -99,7 +103,7 @@ export class OperableTreeComponent implements OnInit, OnDestroy {
     indicatorLeft: 0,
     indicatorWidth: 0
   };
-
+  afterInitAnimate = true;
   constructor(private i18n: I18nService) {
 
   }
@@ -107,6 +111,12 @@ export class OperableTreeComponent implements OnInit, OnDestroy {
     this.i18nCommonText = this.i18n.getI18nText().common;
     this.i18nSubscription = this.i18n.langChange().subscribe((data) => {
       this.i18nCommonText = data.common;
+    });
+  }
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.afterInitAnimate = false;
     });
   }
 
@@ -309,8 +319,8 @@ export class OperableTreeComponent implements OnInit, OnDestroy {
     if (treeNode.data.disableToggle) {
       return;
     }
-    this.nodeToggled.emit(treeNode);
     this.treeFactory.toggleNodeById(treeNode.id);
+    this.nodeToggled.emit(treeNode);
   }
 
   deleteNodes(event, treeNode: TreeNode) {

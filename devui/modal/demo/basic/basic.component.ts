@@ -15,7 +15,6 @@ export class BasicComponent {
       id: 'dialog-service',
       width: '346px',
       maxHeight: '600px',
-      showAnimate: true,
       title: 'Start Snapshot Version',
       content: ModalTestComponent,
       backdropCloseable: true,
@@ -26,7 +25,7 @@ export class BasicComponent {
       buttons: [
         {
           cssClass: 'primary',
-          text: '确定',
+          text: 'Ok',
           disabled: false,
           handler: ($event: Event) => {
             results.modalInstance.hide();
@@ -35,7 +34,47 @@ export class BasicComponent {
         {
           id: 'btn-cancel',
           cssClass: 'common',
-          text: '取消',
+          text: 'Cancel',
+          handler: ($event: Event) => {
+            results.modalInstance.hide();
+          },
+        },
+      ],
+      data: {
+        name: 'Tom',
+        age: 10,
+        address: 'Chengdu',
+      },
+    });
+    console.log(results.modalContentInstance);
+  }
+
+  openDialogWithoutAnimation(dialogtype?: string) {
+    const results = this.dialogService.open({
+      id: 'dialog-service',
+      width: '346px',
+      maxHeight: '600px',
+      title: 'Start Snapshot Version',
+      showAnimate: false,
+      content: ModalTestComponent,
+      backdropCloseable: true,
+      dialogtype: dialogtype,
+      onClose: () => {
+        console.log('on dialog closed');
+      },
+      buttons: [
+        {
+          cssClass: 'primary',
+          text: 'Ok',
+          disabled: false,
+          handler: ($event: Event) => {
+            results.modalInstance.hide();
+          },
+        },
+        {
+          id: 'btn-cancel',
+          cssClass: 'common',
+          text: 'Cancel',
           handler: ($event: Event) => {
             results.modalInstance.hide();
           },

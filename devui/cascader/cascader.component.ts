@@ -1,7 +1,7 @@
 import { ConnectedPosition } from '@angular/cdk/overlay';
 import {
-  Component, ElementRef, forwardRef, Input,
-  OnChanges, OnDestroy, OnInit, SimpleChanges, TemplateRef, ViewChild
+  Component, ElementRef, EventEmitter, forwardRef, Input,
+  OnChanges, OnDestroy, OnInit, Output, SimpleChanges, TemplateRef, ViewChild
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DropDownAppendToBodyComponent, DropDownDirective } from 'ng-devui/dropdown';
@@ -52,6 +52,7 @@ export class CascaderComponent implements OnInit, OnDestroy, OnChanges, ControlV
       this.cascaderSrv.loadChildrenFn = fn;
     }
   }
+  @Output() toggleEvent = new EventEmitter<boolean>();
 
   subMenuDirections: ConnectedPosition[] = [{
     originX: 'start',
@@ -75,6 +76,7 @@ export class CascaderComponent implements OnInit, OnDestroy, OnChanges, ControlV
   searchValueChange = new Subject<string>();
 
   multipleValueList: CascaderItem[] = [];
+  lazyloadValue = [];
 
   showTextValue;
   showSearchPanel: boolean;
@@ -98,10 +100,17 @@ export class CascaderComponent implements OnInit, OnDestroy, OnChanges, ControlV
   ) {
   }
 
+  // 获取整颗树的公共方法
+  public getOptionTree(): CascaderItem[] {
+    return this.cascaderSrv.options;
+  }
+
   ngOnInit() {
     this.dropdownWidth = this.dropdownWidth ? this.dropdownWidth : this.width;
     this.cascaderSrv.canSelectParent = this.canSelectParent;
     this.cascaderSrv.initOptions(this.options);
+    this.cascaderSrv.isMultiple = this.multiple;
+    this.cascaderSrv.isLazyLoad = this.isLazyLoad;
     this.initObservale();
     this.initI18n();
   }
@@ -134,7 +143,7 @@ export class CascaderComponent implements OnInit, OnDestroy, OnChanges, ControlV
       this.writeValue([...this.cascaderSrv.multipleValue, option.valueList]);
       this.onChange(this.cascaderSrv.multipleValue);
       this.mainDropdown.updateCdkConnectedOverlayOrigin();
-      this.innerInput.nativeElement.focus();
+      this.innerInput?.nativeElement.focus();
     } else {
       this.writeValue(option.valueList);
       this.onChange(option.valueList);
@@ -177,7 +186,9 @@ export class CascaderComponent implements OnInit, OnDestroy, OnChanges, ControlV
           this.multipleValueList.splice(targetIndex, 1);
         }
 
-        this.onChange(this.cascaderSrv.currentMultipleValue);
+        if (res.isEmit) {
+          this.onChange(this.cascaderSrv.currentMultipleValue);
+        }
 
         // 当taglist变化导致input高度变化时，更新相对位置
         setTimeout(() => {
@@ -198,11 +209,25 @@ export class CascaderComponent implements OnInit, OnDestroy, OnChanges, ControlV
         }
 
         if (this.multiple) {
-          this.innerInput.nativeElement.focus();
+          this.innerInput?.nativeElement.focus();
         }
         this.cascaderSrv.searchResultList = [];
         this.cascaderSrv.searchByString(value);
         this.showSearchPanel = true;
+      });
+    }
+
+    if (this.isLazyLoad) {
+      this.cascaderSrv.updateShowText.pipe(
+        takeUntil(this.unsubscribe$)
+      ).subscribe(() => {
+        if (this.multiple) {
+          this.multipleValueList = this.getMultipleValueFromValueList(this.lazyloadValue);
+          this.cascaderSrv.multipleValue = this.lazyloadValue;
+        } else {
+          this.showTextValue = this.showPath ?
+            this.getPathLabelFormValue(this.cascaderSrv._currentValue) : this.getLabelFromValue(this.cascaderSrv._currentValue);
+        }
       });
     }
   }
@@ -240,6 +265,7 @@ export class CascaderComponent implements OnInit, OnDestroy, OnChanges, ControlV
         this.multipleValueList = [];
       } else {
         this.cascaderSrv.currentMultipleValue = value as Array<number | string>[];
+        this.lazyloadValue = value;
         this.multipleValueList = this.getMultipleValueFromValueList(value as Array<number | string>[]);
       }
     }
@@ -250,12 +276,17 @@ export class CascaderComponent implements OnInit, OnDestroy, OnChanges, ControlV
     const targetList = [];
     valueList.forEach(value => {
       let cur: CascaderItem;
-      let list = this.options;
-      value.forEach(t => {
-        cur = list.find(l => l.value === t);
-        list = (cur && cur.children) || [];
-      });
-      if (cur) {
+      let list = this.cascaderSrv.options;
+      for (let i = 0; i < value.length; i++) {
+        cur = list.find(l => l.value === value[i]);
+        if (this.isLazyLoad && cur && !cur.children?.length && !cur.isLeaf) {
+          this.cascaderSrv.lazyloadMultipleChild(cur, i);
+          break;
+        } else {
+          list = (cur && cur.children) || [];
+        }
+      }
+      if (cur && cur.isLeaf) {
         targetList.push(cur);
         this.cascaderSrv.updateOptionCheckedStatus(cur.value, true, this.checkboxRelation.upward, this.checkboxRelation.downward);
       }
@@ -281,10 +312,12 @@ export class CascaderComponent implements OnInit, OnDestroy, OnChanges, ControlV
     let cur;
     let list = this.cascaderSrv.options;
 
-    value.map(item => {
+    value.map((item, index) => {
       cur = list.find(t => t.value === item) || '';
       if (cur) {
         path = path === '' ? path + cur.label : path + ' / ' + cur.label;
+      } else if (this.cascaderSrv.columnList.length === index + 1) {
+        path = path === '' ? path + item : path + ' / ' + item;
       }
       list = cur.children || [];
     });
@@ -305,10 +338,11 @@ export class CascaderComponent implements OnInit, OnDestroy, OnChanges, ControlV
   }
 
   onToggle(isOpen: boolean): void {
+    this.toggleEvent.emit(isOpen);
     if (isOpen && this.multiple) {
       this.cascaderSrv.clearTargetActive(this.cascaderSrv.options.find(t => t.active));
       this.cascaderSrv.columnList.splice(1);
-      this.innerInput.nativeElement.focus();
+      this.innerInput?.nativeElement.focus();
     }
 
     if (!isOpen && this.allowSearch) {

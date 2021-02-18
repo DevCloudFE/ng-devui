@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 @Component({
-    selector: 'd-append-to-body',
-    templateUrl: './append-to-body.component.html',
-    styleUrls: ['./append-to-body.component.css']
+  selector: 'd-append-to-body',
+  templateUrl: './append-to-body.component.html',
+  styleUrls: ['./append-to-body.component.css']
 })
 export class AppendToBodyComponent {
-  options = ['选项1', '选项2', '选项3', '选项4', '选项5', '选项6', '选项7', '选项8',
-    '选项9', '选项10', '选项11', '选项12', '选项13', '选项14'];
+  options = ['Option 1', 'Option 2', 'Option 3', 'Option 4', 'Option 5', 'Option 6', 'Option 7', 'Option 8',
+    'Option 9', 'Option 0', 'Option 11', 'Option 12', 'Option 13', 'Option 14'];
 }

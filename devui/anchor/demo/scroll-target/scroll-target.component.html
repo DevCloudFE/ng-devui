@@ -1,4 +1,4 @@
-<section class="my-section" #scrollTarget>
+<div class="container" #scrollTarget>
   <div
     dAnchorBox
     [scrollTarget]="scrollTarget"
@@ -10,31 +10,30 @@
     <div class="mysidebar">
       <d-sticky [scrollTarget]="scrollTarget">
         <ul class="step-nav">
-          <li [dAnchorLink]="'base-info'" anchorActive="active">基本信息</li>
-          <li [dAnchorLink]="'issue-list'" anchorActive="active">需求列表</li>
-          <li [dAnchorLink]="'case-list'" anchorActive="active">用例列表</li>
-          <li [dAnchorLink]="'quality-result'" anchorActive="active">质量评估</li>
+          <li [dAnchorLink]="'base-info'" anchorActive="active">Basic Infomation</li>
+          <li [dAnchorLink]="'issue-list'" anchorActive="active">Demand List</li>
+          <li [dAnchorLink]="'case-list'" anchorActive="active">Case List</li>
+          <li [dAnchorLink]="'quality-result'" anchorActive="active">Quality Assessment</li>
         </ul>
       </d-sticky>
     </div>
     <div class="mycontent">
       <div [dAnchor]="'base-info'" class="section-block">
-        <h3>基本信息</h3>
-        这里显示基本信息。
+        <h3>Basic Infomation</h3>
+        Show basic infomation here.
       </div>
       <div [dAnchor]="'issue-list'" class="section-block">
-        <h3>需求列表</h3>
-        这里显示需求列表。
+        <h3>Demand List</h3>
+        Show demand list here.
       </div>
       <div [dAnchor]="'case-list'" class="section-block">
-        <h3>用例列表</h3>
-        这里显示用例列表。
+        <h3>Case List</h3>
+        Show case list here.
       </div>
       <div [dAnchor]="'quality-result'" class="section-block">
-        <h3>质量评估</h3>
-        这里显示质量评估。
+        <h3>Quality Assessment</h3>
+        Show quality assessment here.
       </div>
     </div>
   </div>
-  <p>组件仅实现了锚点的功能，可搭配sticky使用，跟随滚动效果请参考sticky</p>
-</section>
+</div>

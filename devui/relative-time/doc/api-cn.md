@@ -1,3 +1,17 @@
+# 如何使用
+
+在module中引入：
+
+```ts
+import { RelativeTimeModule } from 'ng-devui/relative-time';
+```
+在页面中以pipe方式使用：
+```
+<div>{{ value | dRelativeTime: limit }}</div>
+```
+
+# dRelativeTime
+
 ## 转换规则
 ```javascript
 跟当前时间相比：
@@ -11,8 +25,9 @@
 ```
 
 ## pipe 参数
-|         参数         |        类型        |  默认   | 说明                                                           |
+|         参数         |        类型        |  默认值   | 描述                                                           |
 | :------------------: | :----------------: | :-----: | :------------------------------------------------------------- |
 |       value        | `'string' \| 'number' \| 'Date'` | - |   pipe转换的值                                 |
-|       limit        |  number |   -    | pipe参数，为最大限制的时间戳，超过这个时间戳就返回绝对时间  |
-|       weekStartsOn        |  `1 \| 2 \| 3 \| 4 \| 5 \| 6 \| 0` |   1    | 每周起始日期的index，0为周日  |
+|       limit        |  number |   -    | pipe第一个参数，为最大限制的时间戳，超过这个时间戳就返回绝对时间  |
+|       compareDate  | `'string' \| 'number' \| 'Date'` | - | pipe第二个参数，非必选， 传入被比较时间，默认被比较时间为当前时间 |
+|       weekStartsOn        |  `1 \| 2 \| 3 \| 4 \| 5 \| 6 \| 0` |   1    | pipe第三个参数，非必选，每周起始日期的index，0为周日  |

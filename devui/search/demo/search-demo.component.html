@@ -16,11 +16,27 @@
     </d-codebox>
   </div>
 
+  <div class="demo-example" [dAnchor]="'search-no-border'">
+    <div class="demo-title">{{ 'components.search.no-borderDemo.title' | translate }}</div>
+    <div class="demo-text"></div>
+    <d-codebox id="components-search-no-border" [sourceData]="searchDemoNoBorder">
+      <d-demo-search-no-border demo></d-demo-search-no-border>
+    </d-codebox>
+  </div>
+
   <div class="demo-example" [dAnchor]="'bidirectional-binding'">
     <div class="demo-title">{{ 'components.search.ngModelDemo.title' | translate }}</div>
     <div class="demo-text"></div>
     <d-codebox id="components-search-ngmodel" [sourceData]="ngmodelDemoSource">
       <d-ngmodel demo></d-ngmodel>
+    </d-codebox>
+  </div>
+
+  <div class="demo-example" [dAnchor]="'auto-focus'">
+    <div class="demo-title">{{ 'components.search.autoFocusDemo.title' | translate }}</div>
+    <div class="demo-text"></div>
+    <d-codebox id="components-search-auto-focus" [sourceData]="autoFocusDemoSource">
+      <d-auto-focus demo></d-auto-focus>
     </d-codebox>
   </div>
 </div>

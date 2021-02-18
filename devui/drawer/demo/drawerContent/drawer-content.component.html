@@ -1,8 +1,8 @@
 <div class="drawer-menu">
   <div [style.margin]="'20px 20px 0 0'" [style.text-align]="'right'" [style.cursor]="'pointer'">
-    <span [style.margin-right]="'13px'" title="更多操作" class="icon icon-more-operate"> </span>
-    <span [style.margin-right]="'7px'" title="全屏" (click)="fullScreen($event)" class="icon icon-maxmize"> </span>
-    <span (click)="close($event)" title="关闭" class="icon icon-close"> </span>
+    <span [style.margin-right]="'13px'" title="More" class="icon icon-more-operate"> </span>
+    <span [style.margin-right]="'7px'" title="Fullscreen" (click)="fullScreen($event)" class="icon icon-maxmize"> </span>
+    <span (click)="close($event)" title="Close" class="icon icon-close"> </span>
   </div>
   <ul class="list-group" [style.margin-top.px]="20">
     <li class="list-group-item" *ngFor="let item of items; let i = index">
@@ -11,6 +11,6 @@
   </ul>
   <div class="operation-area">
     <input #widthInput placeholder="Please input a number" dTextInput type="text" />
-    <d-button (btnClick)="changeWidth(widthInput.value)">改变宽度</d-button>
+    <d-button (btnClick)="changeWidth(widthInput.value)">Change Width</d-button>
   </div>
 </div>

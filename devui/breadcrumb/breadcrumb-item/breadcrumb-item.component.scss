@@ -1,5 +1,5 @@
 @import '../../style/theme/color';
-@import '../../style/theme/_font';
+@import '../../style/core/_font';
 
 .devui-breadcrumb-font-style {
   font-size: $devui-font-size;
@@ -76,7 +76,6 @@
     padding: 0 15px;
     font-size: $devui-font-size;
     line-height: 36px;
-    width: 200px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;

@@ -1,28 +1,21 @@
-<h4>基本样式</h4>
+<h4>Small</h4>
+<div>
+  <d-toggle [checked]="true" [size]="'sm'"></d-toggle>
+</div>
+
+<h4>Middle</h4>
 <div>
   <d-toggle></d-toggle>
   <d-toggle [checked]="true"></d-toggle>
 </div>
 
-<h4>禁用状态</h4>
+<h4>Large</h4>
+<div>
+  <d-toggle [checked]="true" [size]="'lg'"></d-toggle>
+</div>
+
+<h4>disabled</h4>
 <div>
   <d-toggle [disabled]="true"></d-toggle>
   <d-toggle [checked]="true" [disabled]="true"></d-toggle>
-</div>
-
-<h4>双向绑定(小尺寸)</h4>
-<div>
-  <d-toggle [(ngModel)]="enable" [beforeChange]="beforeChange" (change)="onChange2($event)" [size]="'sm'"></d-toggle>
-  {{ enable }}
-</div>
-
-<h4>回调事件(标准)</h4>
-<div>
-  <d-toggle (change)="onChange($event)"></d-toggle>
-  <div>Change count: {{ count }}</div>
-</div>
-
-<h4>自定义样式(大尺寸)</h4>
-<div>
-  <d-toggle [checked]="true" [size]="'lg'" [color]="'#FECC55'"></d-toggle>
 </div>

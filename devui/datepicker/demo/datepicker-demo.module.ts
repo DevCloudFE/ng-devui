@@ -26,9 +26,9 @@ import { DateRangePickerRestrictedRangeComponent } from './range-picker-restrict
 import { DateRangePickerTimeComponent } from './range-picker-time/date-range-picker-time.component';
 import { RangePickerTodayComponent } from './range-today/range-today.component';
 import { DatepickerRangeComponent } from './range/datepicker-range.component';
+import { SetModeComponent } from './set-mode/set-mode.component';
 import { TwoDatepickerBasicComponent } from './two-datepicker-basic/two-datepicker-basic.component';
 import { TwoDatepickerFormatComponent } from './two-datepicker-format/two-datepicker-format.component';
-
 @NgModule({
   imports: [
     TranslateModule,
@@ -53,6 +53,7 @@ import { TwoDatepickerFormatComponent } from './two-datepicker-format/two-datepi
   declarations: [
     DatepickerDemoComponent,
     DatepickerDemoBasicComponent,
+    SetModeComponent,
     DatepickerRangeComponent,
     DatepickerFormatComponent,
     DateRangePickerDisabledComponent,

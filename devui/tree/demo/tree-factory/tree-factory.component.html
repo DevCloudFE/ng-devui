@@ -1,0 +1,18 @@
+<d-operable-tree #operableTree [tree]="data1"> </d-operable-tree>
+<h4>For all nodes</h4>
+<d-checkbox [label]="'check all'" (change)="checkAllNodes($event)" [ngModel]="false"> </d-checkbox>
+<d-checkbox [label]="'disable all nodes check'" (change)="disableAllNodesCheck($event)" [ngModel]="false"> </d-checkbox>
+<d-checkbox [label]="'disable all nodes select'" (change)="disableAllNodesSelect($event)" [ngModel]="false"> </d-checkbox>
+<d-checkbox [label]="'disable all nodes toggle'" (change)="disableAllNodesToggle($event)" [ngModel]="false"> </d-checkbox>
+<h4>For a specified node</h4>
+<d-checkbox [label]="'hide leaf node 112'" (change)="hideNodeById('4', $event)" [ngModel]="false"> </d-checkbox>
+<d-checkbox [label]="'parent node 1 showLoading'" (change)="loading('1', $event)" [ngModel]="false"></d-checkbox>
+<d-checkbox [label]="'toggle parent node 2'" (change)="toggleNodeById('12')" [ngModel]="false"> </d-checkbox>
+<br />
+<d-button bsStyle="common" (btnClick)="activeNodeById('1')"> active parent node 1</d-button>
+<d-button bsStyle="common" (btnClick)="deleteNodeById('4')">delete leaf node 112 </d-button>
+<d-button bsStyle="common" (btnClick)="editNodeById('1')">edit parent node 1 </d-button>
+<d-button bsStyle="common" (btnClick)="disabledNodesById('3')">disableChecked of leaf node 111</d-button>
+<d-button bsStyle="common" (btnClick)="getNodeById('3')">get data of leaf node 111</d-button>
+<d-button bsStyle="common" (btnClick)="getCompleteNodeById('3')">get complete data of node 111</d-button>
+<pre>data: {{ treeNodeData | json }}</pre>

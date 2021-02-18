@@ -7,8 +7,6 @@ import { Component } from '@angular/core';
 })
 
 export class CustomizeComponent {
-  isShow1 = false;
-  isShow2 = false;
   constructor() {}
 
   backTop(event) {

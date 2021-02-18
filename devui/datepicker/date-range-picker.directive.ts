@@ -17,7 +17,14 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
-import { cornerFadeInOut, DateConverter, DefaultDateConverter } from 'ng-devui/utils';
+import {
+  addClassToOrigin,
+  DateConverter,
+  DefaultDateConverter,
+  fadeInOut,
+  formWithDropDown,
+  removeClassFromOrigin
+} from 'ng-devui/utils';
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime, filter, map } from 'rxjs/operators';
 import { DatePickerConfigService as DatePickerConfig } from './date-picker.config.service';
@@ -35,7 +42,7 @@ import { DateRangePickerComponent } from './date-range-picker.component';
   templateUrl: './date-range-picker.directive.html',
   styleUrls: ['./date-range-picker.component.scss'],
   animations: [
-    cornerFadeInOut
+    fadeInOut
   ],
   preserveWhitespaces: false,
 })
@@ -63,6 +70,7 @@ export class DateRangePickerDirective implements OnInit, ControlValueAccessor, O
   private valueChangeSubscrip: Subscription;
   datepickerPosition: VerticalConnectionPos = 'bottom';
   valueList = [];
+  startAnimation = false;
   private onChange = (_: any) => null;
   private onTouched = () => null;
 
@@ -150,20 +158,15 @@ export class DateRangePickerDirective implements OnInit, ControlValueAccessor, O
         this.rangeStart = null;
       }
       if (!isOpen) {
+        this.startAnimation = false;
+        removeClassFromOrigin(this.elementRef);
         document.removeEventListener('click', this.onDocumentClick);
-        const ele = this.formWithDropDown();
-        if (ele && ele.classList.contains('devui-dropdown-origin-open')) {
-          ele.classList.remove('devui-dropdown-origin-open');
-        }
-        if (ele && ele.classList.contains('devui-dropdown-origin-top')) {
-          ele.classList.remove('devui-dropdown-origin-top');
-        }
-        if (ele && ele.classList.contains('devui-dropdown-origin-bottom')) {
-          ele.classList.remove('devui-dropdown-origin-bottom');
-        }
       } else {
         setTimeout(() => {
+          addClassToOrigin(this.elementRef);
           document.addEventListener('click', this.onDocumentClick);
+          this.startAnimation = true;
+          this.cdr.detectChanges();
         });
       }
     }
@@ -255,7 +258,9 @@ export class DateRangePickerDirective implements OnInit, ControlValueAccessor, O
 
   updateCdkConnectedOverlayOrigin() {
     if (this.elementRef.nativeElement) {
-      this.cdkConnectedOverlayOrigin = new CdkOverlayOrigin(this.formWithDropDown() || this.elementRef.nativeElement);
+      this.cdkConnectedOverlayOrigin = new CdkOverlayOrigin(
+        formWithDropDown(this.elementRef) || this.elementRef.nativeElement
+      );
     }
   }
 
@@ -270,21 +275,6 @@ export class DateRangePickerDirective implements OnInit, ControlValueAccessor, O
   public hide(event?) {
     if (event !== false) {
       this.isOpen = false;
-    }
-  }
-
-  formWithDropDown() {
-    if (this.elementRef) {
-      if (!this.elementRef.nativeElement.classList.contains('devui-dropdown-origin')) {
-        const parentEle = this.elementRef.nativeElement.parentElement;
-        if (parentEle && parentEle.classList.contains('devui-dropdown-origin')) {
-          return this.elementRef.nativeElement.parentElement;
-        } else {
-          return;
-        }
-      } else {
-        return this.elementRef.nativeElement;
-      }
     }
   }
 
@@ -325,24 +315,6 @@ export class DateRangePickerDirective implements OnInit, ControlValueAccessor, O
         break;
       case 'bottom':
         this.datepickerPosition = 'top';
-    }
-    this.changeFormWithDropDown(position.connectionPair.overlayY);
-  }
-
-  changeFormWithDropDown(position) {
-    const ele = this.formWithDropDown();
-    let formBorder;
-    if (ele && !ele.classList.contains('devui-dropdown-origin-open')) {
-      ele.classList.add('devui-dropdown-origin-open');
-    }
-    if (position === 'bottom') {
-      formBorder = 'top';
-    } else {
-      formBorder = 'bottom';
-    }
-    if (ele && !ele.classList.contains(`devui-dropdown-origin-${formBorder}`)) {
-      ele.classList.add(`devui-dropdown-origin-${formBorder}`);
-      ele.classList.remove(`devui-dropdown-origin-${position}`);
     }
   }
 
