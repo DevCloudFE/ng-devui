@@ -45,6 +45,7 @@
     "@devui-design/icons": "^1.1.0",
     "@ngx-translate/core": "^13.0.0",
     "@ngx-translate/http-loader": "^6.0.0",
+    "@popperjs/core": "^2.5.4",
     "@types/lodash-es": "^4.17.3",
     "@types/marked": "^1.1.0",
     "bootstrap": "^4.5.2",
@@ -55,8 +56,7 @@
     "enquire.js": "^2.1.6",
     "fastestsmallesttextencoderdecoder": "1.0.14",
     "lodash-es": "^4.17.15",
-    "marked": "^1.2.0",
-    "@popperjs/core": "^2.5.4",
+    "marked": "^2.0.0",
     "web-animations-js": "^2.3.2",
     "zone.js": "~0.10.2"
   },
