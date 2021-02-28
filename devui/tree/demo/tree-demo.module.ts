@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ButtonModule } from 'ng-devui/button';
+import { CheckBoxModule } from 'ng-devui/checkbox';
 import { DropDownModule } from 'ng-devui/dropdown';
 import { LoadingModule } from 'ng-devui/loading';
 import { SearchModule } from 'ng-devui/search';
@@ -25,7 +26,9 @@ import { MergeNodeComponent } from './merge-node/merge-node.component';
 import { OperateBtnComponent } from './operate-btn/operate-btn.component';
 import { SearchFilterComponent } from './search-filter/search-filter.component';
 import { TreeDemoComponent } from './tree-demo.component';
+import { OperationForAllNodesComponent } from './tree-factory/tree-factory.component';
 import { VirtualScrollComponent } from './virtual-scroll/virtual-scroll.component';
+import { WithoutAnimationComponent } from './without-animation/without-animation.component';
 
 @NgModule({
   imports: [
@@ -35,6 +38,7 @@ import { VirtualScrollComponent } from './virtual-scroll/virtual-scroll.componen
     ButtonModule,
     FormsModule,
     LoadingModule,
+    CheckBoxModule,
     DevUICodeboxModule,
     DevUIApiModule,
     DDemoNavModule,
@@ -64,9 +68,11 @@ import { VirtualScrollComponent } from './virtual-scroll/virtual-scroll.componen
     CheckControlComponent,
     VirtualScrollComponent,
     CustomLoadingComponent,
-    MergeNodeComponent
+    MergeNodeComponent,
+    OperationForAllNodesComponent,
+    WithoutAnimationComponent
   ],
-  
+
 })
 export class TreeDemoModule {
 }

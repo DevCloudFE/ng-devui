@@ -1,5 +1,5 @@
 <section style="width: 100%">
-  <h5>双日期选择器 格式化</h5>
+  <h5>format:</h5>
   <div class="input-group" style="margin-bottom: 10px; width: 200px">
     <d-select [size]="'sm'" [(ngModel)]="dateFormat" [options]="dateFormatOptions"></d-select>
   </div>
@@ -11,7 +11,7 @@
     [minDate]="'2010-12-30'"
     [maxDate]="'2018-02-27'"
   >
-    <div class="devui-input-group devui-dropdown-origin-wrapper devui-dropdown-origin">
+    <div class="devui-input-group devui-dropdown-origin">
       <input
         class="devui-input devui-form-control"
         placeholder="y/MM/dd"
@@ -19,16 +19,16 @@
         dTwoDatePickerStart
         #startPicker="twoDatePickerStart"
         (selectStart)="selectStart($event)"
-        (focus)="startPicker.toggle()"
+        (click)="startPicker.toggle()"
       />
-      <div *ngIf="rangeStart1" class="devui-input-group-addon icon-close-wrapper" (click)="startPicker.clear()">
+      <div *ngIf="rangeStart1" class="devui-input-group-addon close-icon-wrapper" (click)="startPicker.clear()">
         <i class="icon icon-close"></i>
       </div>
       <div class="devui-input-group-addon" (click)="startPicker.toggle()">
         <i class="icon icon-calendar"></i>
       </div>
     </div>
-    <div class="devui-input-group devui-dropdown-origin-wrapper devui-dropdown-origin">
+    <div class="devui-input-group devui-dropdown-origin">
       <input
         class="devui-input devui-form-control"
         placeholder="y/MM/dd"
@@ -36,9 +36,9 @@
         dTwoDatePickerEnd
         #endPicker="twoDatePickerEnd"
         (selectEnd)="selectEnd($event)"
-        (focus)="endPicker.toggle()"
+        (click)="endPicker.toggle()"
       />
-      <div *ngIf="rangeEnd1" class="devui-input-group-addon icon-close-wrapper" (click)="endPicker.clear()">
+      <div *ngIf="rangeEnd1" class="devui-input-group-addon close-icon-wrapper" (click)="endPicker.clear()">
         <i class="icon icon-close"></i>
       </div>
       <div class="devui-input-group-addon" (click)="endPicker.toggle()">
@@ -46,7 +46,7 @@
       </div>
     </div>
   </div>
-  <h5>双日期选择器 设置dateConfig</h5>
+  <h5>dateConfig:</h5>
   <div
     class="two-date-wrapper"
     dTwoDatePicker
@@ -55,7 +55,7 @@
     (selectedRangeChange)="selectRange($event)"
     [dateConfig]="dateConfig"
   >
-    <div class="devui-input-group devui-dropdown-origin-wrapper devui-dropdown-origin">
+    <div class="devui-input-group devui-dropdown-origin">
       <input
         class="devui-input devui-form-control"
         placeholder="y/MM/dd"
@@ -63,16 +63,16 @@
         dTwoDatePickerStart
         #startPicker2="twoDatePickerStart"
         (selectStart)="selectStart($event)"
-        (focus)="startPicker2.toggle()"
+        (click)="startPicker2.toggle()"
       />
-      <div *ngIf="rangeStart2" class="devui-input-group-addon icon-close-wrapper" (click)="startPicker2.clear()">
+      <div *ngIf="rangeStart2" class="devui-input-group-addon close-icon-wrapper" (click)="startPicker2.clear()">
         <i class="icon icon-close"></i>
       </div>
       <div class="devui-input-group-addon" (click)="startPicker2.toggle()">
         <i class="icon icon-calendar"></i>
       </div>
     </div>
-    <div class="devui-input-group devui-dropdown-origin-wrapper devui-dropdown-origin">
+    <div class="devui-input-group devui-dropdown-origin">
       <input
         class="devui-input devui-form-control"
         placeholder="y/MM/dd"
@@ -80,9 +80,9 @@
         dTwoDatePickerEnd
         #endPicker2="twoDatePickerEnd"
         (selectEnd)="selectEnd($event)"
-        (focus)="endPicker2.toggle()"
+        (click)="endPicker2.toggle()"
       />
-      <div *ngIf="rangeEnd2" class="devui-input-group-addon icon-close-wrapper" (click)="endPicker2.clear()">
+      <div *ngIf="rangeEnd2" class="devui-input-group-addon close-icon-wrapper" (click)="endPicker2.clear()">
         <i class="icon icon-close"></i>
       </div>
       <div class="devui-input-group-addon" (click)="endPicker2.toggle()">

@@ -12,7 +12,7 @@ import { BasicComponent } from './basic/basic.component';
 import { BreadCrumbDemoComponent } from './breadcrumb-demo.component';
 import { CustomComponent } from './custom/custom.component';
 import { MenuComponent } from './menu/menu.component';
-import { SearchMenuComponent } from './search-menu/search-menu.component';
+import { SourceConfigComponent } from './source-config/source-config.component';
 
 @NgModule({
   imports: [
@@ -37,14 +37,14 @@ import { SearchMenuComponent } from './search-menu/search-menu.component';
     BasicComponent,
     MenuComponent,
     CustomComponent,
-    SearchMenuComponent
+    SourceConfigComponent
   ],
   declarations: [
     BreadCrumbDemoComponent,
     BasicComponent,
     MenuComponent,
     CustomComponent,
-    SearchMenuComponent
+    SourceConfigComponent
   ]
 })
 export class BreadCrumbDemoModule { }

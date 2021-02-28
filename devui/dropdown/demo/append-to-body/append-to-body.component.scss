@@ -6,8 +6,13 @@
   min-height: 50px;
   line-height: 50px;
   display: inline-block;
+  padding-left: 10px;
 }
 
 .devui-dropdown-menu {
   overflow-y: auto;
+}
+
+.devui-dropdown-default {
+  margin-left: 4px;
 }

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 export interface IModalOptions {
   id?: string;
   zIndex?: number;
+  backDropZIndex?: number;
   component?: Type<any>;
   width?: string;
   showAnimate?: boolean;
@@ -26,6 +27,7 @@ export interface IDialogOptions {
   id?: string;
   title: string;
   zIndex?: number;
+  backDropZIndex?: number;
   content?: string | Type<any>;
   html?: boolean;
   buttons: Array<{

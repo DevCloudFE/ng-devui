@@ -1,6 +1,6 @@
 // tslint:disable: max-line-length
 import { Component, DebugElement, ElementRef, TemplateRef, ViewChild } from '@angular/core';
-import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -10,7 +10,7 @@ import { DatepickerModule } from './datepicker.module';
 
 @Component({
   template: `
-    <div class="devui-input-group devui-dropdown-origin-wrapper devui-dropdown-origin">
+    <div class="devui-input-group devui-dropdown-origin">
       <input
         class="devui-input devui-form-control"
         dDateRangePicker
@@ -32,7 +32,7 @@ import { DatepickerModule } from './datepicker.module';
         [hideOnRangeSelected]="hideOnRangeSelected"
         #inputEle
       />
-      <div *ngIf="everyRange(dateRange)" class="devui-input-group-addon icon-close-wrapper" (click)="dateRangePicker.clearAll()">
+      <div *ngIf="everyRange(dateRange)" class="devui-input-group-addon close-icon-wrapper" (click)="dateRangePicker.clearAll()">
         <i class="icon icon-close"></i>
       </div>
       <div class="devui-input-group-addon" (click)="$event.stopPropagation();dateRangePicker.toggle(toggle);toggle=!toggle" #icon>
@@ -126,7 +126,7 @@ describe('dateRangePicker', () => {
   let component: TestDateRangePickerComponent;
   let domHelper: DomHelper<TestDateRangePickerComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [DatepickerModule, NoopAnimationsModule, FormsModule],
       declarations: [TestDateRangePickerComponent]
@@ -146,7 +146,7 @@ describe('dateRangePicker', () => {
     it('should datePicker show, should hideOnRangeSelected works', fakeAsync(() => {
       openDatePicker(fixture);
       const classList = [
-        '.devui-date-range-wrapper', '.devui-dropdown-overlay', '.devui-date-range-picker', '.devui-date-picker',
+        '.devui-date-range-wrapper', '.devui-date-range-picker', '.devui-date-picker',
         '.devui-month-view', '.devui-month-view-table',
         '.devui-calender-header', '.devui-week-header', '.devui-date-title',
         '.devui-day', '.devui-out-of-month', '.devui-in-month-day', '.devui-calendar-date'
@@ -277,7 +277,7 @@ describe('dateRangePickerOrigin', () => {
   let debugEl: DebugElement;
   let component: TestDateRangePickerOriginComponent;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [DatepickerModule, NoopAnimationsModule, FormsModule],
       declarations: [TestDateRangePickerOriginComponent]
@@ -322,7 +322,7 @@ describe('dateRangePickerComponent', () => {
   let debugEl: DebugElement;
   let component: TestDateRangePickerCmpComponent;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [DatepickerModule, NoopAnimationsModule, FormsModule],
       declarations: [TestDateRangePickerCmpComponent]

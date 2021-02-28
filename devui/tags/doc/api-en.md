@@ -1,4 +1,16 @@
-### d-tag parameter
+# How to use
+Import into module:
+```ts
+import { TagsModule } from 'ng-devui/tags';
+```
+
+In the page:
+```html
+<d-tag [tag]="'Default Tags Color'"></d-tag>
+```
+# Tags
+
+## d-tag parameter
 
 |          Parameter          |     Type      | Default | Description                                                                                                                                                           | Jump to Demo                                     |
 | :-------------------------: | :-----------: | :-----: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
@@ -10,13 +22,13 @@
 |           checked           |   `boolean`   |  false  | Optional. Initial status of a tag. selected.                                                                                                                           | [Single Tag](demo#single-tag)   |
 |         customColor         |   `string`    |   ''    | Optional. Enter a color string (for example, '#f50') and customize the color label.                                                                                   | [Single Tag](demo#single-tag) |
 
-### d-tag event
+## d-tag event
 
 | Event name |                   Type                   | Description                           | Jump to Demo                                   |
 | :--------: | :--------------------------------------: | :------------------------------------ | ---------------------------------------------- |
 | tagDelete  | `EventEmitter<{tag: tag, event: event}>` | Event triggered when a tag is deleted. | [Single Tag](demo#single-tag) |
 
-### d-tags parameter
+## d-tags parameter
 
 |    Parameter    |   Type    | Default | Description                                                                                         | Jump to Demo                                  |
 | :-------------: | :-------: | :-----: | :-------------------------------------------------------------------------------------------------- | --------------------------------------------- |
@@ -25,7 +37,7 @@
 |   deleteable    | `boolean` |  false  | Optional. Specifies whether a tag can be deleted.                                                   | [Tag Group](demo#tags-group) |
 |  titleProperty  | `string`  |   ''    | Optional. Sets the attribute name. When the cursor is hovered, the value of the title is displayed. | [Tag Group](demo#tags-group) |
 
-### d-tags event
+## d-tags event
 
 | Event name |                          Type                          | Description                           | Jump to Demo                                  |
 | :--------: | :----------------------------------------------------: | :------------------------------------ | --------------------------------------------- |

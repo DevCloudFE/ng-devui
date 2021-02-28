@@ -63,7 +63,8 @@ export class CommonDemoComponent implements OnInit, OnDestroy {
     this.navItems = [
       { dAnchorLink: 'lazy-load', value: values['lazy-load'] },
       { dAnchorLink: 'date-pipe', value: values['date-pipe'] },
-      { dAnchorLink: 'helper-utils', value: values['helper-utils'] },
+      { dAnchorLink: 'open-url', value: values['open-url'] },
+      { dAnchorLink: 'download-file', value: values['download-file'] },
       { dAnchorLink: 'iframe-propagate', value: values['iframe-propagate'] },
       { dAnchorLink: 'clipboard', value: values['clipboard'] },
     ];

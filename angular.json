@@ -13,6 +13,13 @@
         "build": {
           "builder": "@angular-builders/custom-webpack:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "date-fns",
+              "highlight.js",
+              "codemirror",
+              "xss",
+              "enquire.js"
+            ],
             "customWebpackConfig": {
               "path": "scripts/extra-webpack.config.js"
             },
@@ -23,7 +30,8 @@
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/assets/i18n"
             ],
             "styles": [
               "node_modules/highlight.js/styles/an-old-hope.css",
@@ -103,7 +111,8 @@
             "scripts": [],
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/assets/i18n"
             ]
           }
         },
@@ -156,7 +165,7 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "devui/tsconfig.lib.json",
             "project": "devui/ng-package.json"

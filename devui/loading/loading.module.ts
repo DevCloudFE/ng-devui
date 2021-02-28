@@ -4,7 +4,7 @@ import { LoadingBackdropComponent } from './loading-backdrop.component';
 import { LoadingComponent } from './loading.component';
 
 import { LoadingDirective } from './loading.directive';
-
+import { LoadingService } from './loading.service';
 @NgModule({
   imports: [CommonModule],
   exports: [
@@ -17,8 +17,8 @@ import { LoadingDirective } from './loading.directive';
     LoadingBackdropComponent,
     LoadingComponent
   ],
-  
-  providers: [],
+
+  providers: [LoadingService],
 })
 export class LoadingModule {
 }

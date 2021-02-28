@@ -142,7 +142,7 @@ export class TreeSelectBasicComponent {
     'id': 15
   },
   {
-    'title': '懒加载节点',
+    'title': 'LazyLoad Parent',
     'isParent': true,
     'isOpen': false,
     'id': 20
@@ -165,16 +165,20 @@ export class TreeSelectBasicComponent {
   showSelected($event: Event) {
     console.log('event emitted: ', $event);
   }
+
+  valueChanged($event) {
+    console.log('value changed:', $event);
+  }
   nodeToggleEvent(node) {
     if (node.id === 20 && !node.data.isOpen) {
       this.data2[5].children = [{
-        'title': '懒加载节点-1',
+        'title': 'LazyLoad leaf-1',
         'id': 21
       }, {
-        'title': '懒加载节点-2',
+        'title': 'LazyLoad leaf-2',
         'id': 22
       }, {
-        'title': '懒加载节点-3',
+        'title': 'LazyLoad leaf-3',
         'id': 23
       }];
       this.data2 = [...this.data2];

@@ -11,7 +11,9 @@ export class RelativeTimePipe implements PipeTransform, OnDestroy {
   private _destroyed$ = new Subject();
   constructor(private i18n: I18nService) {}
 
-  transform(value: string | number | Date, limit: number, weekStartsOn = 1): Observable<string | number | Date> {
+  transform(
+    value: string | number | Date, limit: number, compareDate?: string | number | Date, weekStartsOn = 1
+  ): Observable<string | number | Date> {
     if (!value) {
       return of('');
     }
@@ -24,7 +26,7 @@ export class RelativeTimePipe implements PipeTransform, OnDestroy {
       second: 59 // at least 59 seconds using minute.
     };
 
-    const now = Date.now();
+    const now = compareDate ? new Date(compareDate) : Date.now();
 
     const startOfYearForTarget = datefns.startOfYear(value);
     const startOfYearForToday = datefns.startOfYear(now);
@@ -62,13 +64,13 @@ export class RelativeTimePipe implements PipeTransform, OnDestroy {
         }
         const i18nCommonText = data['relativeTime'];
         if (absDiffYears > 0 && absDiffMonths > threshold.month) {
-          return absDiffYears + (diffYears > 0 ? i18nCommonText.yearsAgo : i18nCommonText.yearsLater);
-        } else if (absDiffMonths > 0 && absDiffWeeks > threshold.week) {
-          return absDiffMonths + (diffMonths > 0 ? i18nCommonText.monthsAgo : i18nCommonText.monthsLater);
+          return  diffYears > 0 ? i18nCommonText.yearsAgo(absDiffYears) : i18nCommonText.yearsLater(absDiffYears);
+        } else if (absDiffMonths > 0 && absDiffWeeks >= threshold.week) {
+          return  diffMonths > 0 ? i18nCommonText.monthsAgo(absDiffMonths) : i18nCommonText.monthsLater(absDiffMonths);
         } else if (absDiffWeeks > 0 && absDiffDays > threshold.day) {
-          return absDiffWeeks + (diffWeeks > 0 ? i18nCommonText.weeksAgo : i18nCommonText.weeksLater);
+          return  diffWeeks > 0 ? i18nCommonText.weeksAgo(absDiffWeeks) : i18nCommonText.weeksLater(absDiffWeeks);
         } else if (absDiffDays > 0 && absDiffHours > threshold.hour) {
-          return absDiffDays + (diffDays > 0 ? i18nCommonText.daysAgo : i18nCommonText.daysLater);
+          return  diffDays > 0 ? i18nCommonText.daysAgo(absDiffDays) : i18nCommonText.daysLater(absDiffDays);
         } else if (absDiffHours > 0 && absDiffMinutes > threshold.minute) {
           return absDiffHours + (diffHours > 0 ? i18nCommonText.hoursAgo : i18nCommonText.hoursLater);
         } else if (absDiffMinutes > 0 && absDiffSeconds > threshold.second) {

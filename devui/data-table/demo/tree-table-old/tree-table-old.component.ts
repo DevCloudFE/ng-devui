@@ -65,7 +65,7 @@ export class TreeTableOldComponent implements OnInit {
         dob: new Date(1991, 3, 1)
     });
     return new Promise((resolve) => {
-      resolve();
+      resolve(true);
     });
   }
 

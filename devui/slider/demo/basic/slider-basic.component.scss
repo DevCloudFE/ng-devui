@@ -1,15 +1,20 @@
 @import '~ng-devui/styles-var/devui-var.scss';
 
-.input {
-  box-sizing: border-box;
-  padding: 5px 10px;
-  font-size: $devui-font-size-card-title;
-  color: $devui-text;
-  vertical-align: middle;
-  border: 1px solid $devui-line;
-  border-radius: $devui-border-radius;
-  outline: none;
-  background-color: $devui-base-bg;
+h5 {
+  margin-top: 25px;
+}
+
+.slider-wrapper {
+  position: relative;
+
+  span {
+    position: absolute;
+    top: 15px;
+
+    &:last-child {
+      right: 10%;
+    }
+  }
 }
 
 .snapshot-value {
@@ -22,7 +27,6 @@
 }
 
 .composite-slider {
-  margin-top: 20px;
   display: flex;
   align-items: center;
 }

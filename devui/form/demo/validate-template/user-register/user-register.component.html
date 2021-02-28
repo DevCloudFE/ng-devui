@@ -1,50 +1,38 @@
 <section class="demo-section">
   <d-toast [value]="msgs"></d-toast>
-  <h5>Form验证与提交，用户注册场景</h5>
-  <ul>
-    <li>针对表单场景复杂的校验规则，我们推荐在控制器中组织，可更好地组织与复用你的校验规则。</li>
-    <li>对于自动错误提示的方式，在<code>form</code>中， 建议在<code>dForm</code>层统一设置<code>messageShowType</code>。</li>
-    <li>
-      对于由<code>dFormSubmit</code>触发的提交事件， 你可在<code>dForm</code>层绑定<code>dSubmit</code>监听，
-      可获取到当前<code>form</code>验证状态与对应的<code>directive</code>引用。
-    </li>
-    <li>
-      若表单在提交时，已不在视觉中心，那么你可以使用一个提示来引导用户视觉，对于表单提交时的提示，我们推荐使用<code>d-toast</code>显示。
-    </li>
-  </ul>
   <div>
     <form dForm ngForm [dValidateRules]="formRules.rule" [layout]="'vertical'" #userForm="dValidateRules" (dSubmit)="submitForm($event)">
       <d-form-item>
-        <d-form-label [required]="true">用户名</d-form-label>
+        <d-form-label [required]="true">UserName</d-form-label>
         <d-form-control>
           <input
             dTextInput
             autocomplete="off"
             name="username"
-            placeholder="填写一个你喜欢的用户名吧"
+            placeholder="Enter a user name you like"
             [(ngModel)]="formData.userName"
             [dValidateRules]="formRules.usernameRules"
           />
         </d-form-control>
       </d-form-item>
       <d-form-item>
-        <d-form-label [required]="true">密码</d-form-label>
+        <d-form-label [required]="true">Password</d-form-label>
         <d-form-control>
           <input
             dTextInput
             type="password"
             name="password"
             [(ngModel)]="formData.password"
-            placeholder="请设置6-15位密码"
+            placeholder="Enter a password of 6 to 15 characters"
             [dValidateRules]="formRules.passwordRules"
           />
         </d-form-control>
       </d-form-item>
       <d-form-operation>
         <d-button class="mr-element-spacing" [title]="userForm.errorMessage || ''" circled="true" style="margin-right: 8px" dFormSubmit
-          >注册</d-button
+          >Register</d-button
         >
-        <d-button bsStyle="common" circled="true" dFormReset>重置</d-button>
+        <d-button bsStyle="common" circled="true" dFormReset>Reset</d-button>
       </d-form-operation>
     </form>
   </div>

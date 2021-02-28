@@ -1,7 +1,9 @@
 <section>
-  <d-button (click)="fetchCustomLoading1()">loading样式2</d-button>
-  <d-button dLoading [loading]="loading2" [loadingTemplateRef]="loadingTemplateRef3" (click)="fetchCustomLoading2()">loading样式3</d-button>
-  <span dLoading [showLoading]="showLoading" [loadingTemplateRef]="loadingTemplateRef4">文字加载</span>
+  <d-button (click)="fetchCustomLoading1()">Loading Style 2</d-button>
+  <d-button dLoading [loading]="loading2" [loadingTemplateRef]="loadingTemplateRef3" (click)="fetchCustomLoading2()"
+    >Loading Style 3</d-button
+  >
+  <span dLoading [showLoading]="showLoading" [loadingTemplateRef]="loadingTemplateRef4">Text loading</span>
   <div class="loading-container" dLoading [loading]="loading1" [loadingTemplateRef]="loadingTemplateRef2"></div>
   <ng-template #loadingTemplateRef2>
     <div class="devui-infinity-loading">

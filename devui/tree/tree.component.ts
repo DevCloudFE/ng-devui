@@ -16,9 +16,11 @@ import {
   ViewChildren
 } from '@angular/core';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
+import { treeCollapseMotion } from 'ng-devui/utils';
 import { Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import {
+  Dictionary,
   ITreeItem,
   TreeFactory,
   TreeNode
@@ -28,6 +30,7 @@ import {
   templateUrl: './tree.component.html',
   styleUrls: ['./tree.component.scss'],
   preserveWhitespaces: false,
+  animations: [treeCollapseMotion]
 })
 export class TreeComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
   treeFactory: TreeFactory;
@@ -45,20 +48,22 @@ export class TreeComponent implements OnInit, OnChanges, AfterViewInit, OnDestro
   @Input() toggleDisabledKey = 'disableToggle';
   @Input() virtualScroll = false;
   @Input() virtualScrollHeight = '800px';
-  @Input() minBufferPx = 760;
-  @Input() maxBufferPx = 1140;
-  @Input() itemSize = 38;
-  @Output() nodeSelected: EventEmitter<any> = new EventEmitter<any>();
-  @Output() nodeDblClicked: EventEmitter<any> = new EventEmitter<any>();
-  @Output() nodeRightClicked: EventEmitter<any> = new EventEmitter<any>();
-  @Output() nodeToggled: EventEmitter<any> = new EventEmitter<any>();
-  @Output() afterTreeInit: EventEmitter<any> = new EventEmitter<any>();
+  @Input() showAnimation = true;
+  @Input() minBufferPx = 600;
+  @Input() maxBufferPx = 900;
+  @Input() itemSize = 30;
+  @Output() nodeSelected = new EventEmitter<TreeNode>();
+  @Output() nodeDblClicked = new EventEmitter<TreeNode>();
+  @Output() nodeRightClicked = new EventEmitter<{ node: TreeNode, event: MouseEvent }>();
+  @Output() nodeToggled = new EventEmitter<TreeNode>();
+  @Output() afterTreeInit = new EventEmitter<Dictionary<TreeNode>>();
   @ViewChildren('treeNodeContent') treeNodeContent: QueryList<ElementRef>; // 获取content以取得tree宽度
   @ViewChild(CdkVirtualScrollViewport) viewPort: CdkVirtualScrollViewport;
   i18nCommonText: I18nInterface['common'];
   i18nSubscription: Subscription;
   treeNodes = [];
   destroy$ = new Subject();
+  afterInitAnimate = true;
   constructor(private i18n: I18nService) {
 
   }
@@ -98,6 +103,9 @@ export class TreeComponent implements OnInit, OnChanges, AfterViewInit, OnDestro
   }
 
   ngAfterViewInit() {
+    setTimeout(() => {
+      this.afterInitAnimate = false;
+    });
   }
 
   contextmenuEvent(event, node) {

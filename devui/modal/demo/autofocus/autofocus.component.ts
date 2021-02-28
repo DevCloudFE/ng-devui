@@ -14,16 +14,15 @@ export class AutofocusComponent {
       id: 'dialog-service',
       width: '400px',
       maxHeight: '600px',
-      showAnimate: false,
       title: '',
       html: true,
-      content: '<div style="color:#8a6d3b;">回车直接关闭</div>',
+      content: '<div style="color:#8a6d3b;">Press Enter to close</div>',
       backdropCloseable: true,
       dialogtype: dialogtype,
       buttons: [
         {
           cssClass: 'primary',
-          text: '关闭',
+          text: 'Close',
           autofocus: true,
           handler: ($event: Event) => {
             results.modalInstance.hide();
@@ -33,7 +32,7 @@ export class AutofocusComponent {
         {
           id: 'btn-cancel',
           cssClass: 'common',
-          text: '取消',
+          text: 'Cancel',
           handler: ($event: Event) => {
             results.modalInstance.hide();
             console.log('cancel');

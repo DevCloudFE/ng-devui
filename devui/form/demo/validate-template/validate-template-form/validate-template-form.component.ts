@@ -10,28 +10,28 @@ export class ValidateTemplateFormComponent {
   planFormData = {
     planName: '',
     planDescription: '',
-    planExerciseDate: [{ 'id': '1', 'label': '周一'}],
+    planExerciseDate: [{ 'id': '1', 'label': 'Mon'}],
     planVerifier: null,
   };
 
   existPlanNames = ['123', '123456', 'DevUI'];
 
   checkboxOptions = [
-    { 'id': '1', 'label': '周一'},
-    { 'id': '2', 'label': '周二'},
-    { 'id': '3', 'label': '周三'},
-    { 'id': '4', 'label': '周四'},
-    { 'id': '5', 'label': '周五'},
-    { 'id': '6', 'label': '周六'},
+    { 'id': '1', 'label': 'Mon' },
+    { 'id': '2', 'label': 'Tue' },
+    { 'id': '3', 'label': 'Wed' },
+    { 'id': '4', 'label': 'Thur' },
+    { 'id': '5', 'label': 'Fri' },
+    { 'id': '6', 'label': 'Sat' },
   ];
 
   verifierOptions = [
-    { 'id': '1', 'name': '管理员1'},
-    { 'id': '2', 'name': '管理员2'},
-    { 'id': '3', 'name': '管理员3'},
-    { 'id': '4', 'name': '管理员4'},
-    { 'id': '5', 'name': '管理员5'},
-    { 'id': '6', 'name': '管理员6'},
+    { 'id': '1', 'name': 'Administrator1'},
+    { 'id': '2', 'name': 'Administrator2'},
+    { 'id': '3', 'name': 'Administrator3'},
+    { 'id': '4', 'name': 'Administrator4'},
+    { 'id': '5', 'name': 'Administrator5'},
+    { 'id': '6', 'name': 'Administrator6'},
   ];
 
   checkName(value) {
@@ -46,17 +46,17 @@ export class ValidateTemplateFormComponent {
     let message = null;
     for (const item of value) {
       if (item.id === '2') {
-        message = '当前执行日（星期二）任务队列已满';
+        message = 'The task queue on the current execution day (Tuesday) is full.';
       }
     }
-    // 模拟后端接口返回
+    // Returned by the simulated backend interface
     return of(message).pipe(
       delay(300)
     );
   }
 
-  submitPlanForm({valid, directive, data}) {
-    console.log('Valid:', valid, 'Directive:', directive, 'data', data);
+  submitPlanForm({valid, directive, data, errors}) {
+    console.log('Valid:', valid, 'Directive:', directive, 'data', data, 'errors', errors);
     if (valid) {
       // do something
     } else {

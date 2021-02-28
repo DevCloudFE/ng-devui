@@ -1,39 +1,35 @@
-<section>
-  <span> 正常状态 </span>
-  <d-tags-input
-    (click)="$event.stopPropagation()"
-    id="issue-tags"
-    [tags]="tagList"
-    [displayProperty]="taskTagConfig.displayProperty"
-    [placeholder]="taskTagConfig.placeholder"
-    [minLength]="taskTagConfig.minLength"
-    [maxLength]="taskTagConfig.maxLength"
-    [maxTags]="taskTagConfig.maxTags"
-    [suggestionList]="suggestionList"
-    [spellcheck]="taskTagConfig.spellcheck"
-    [caseSensitivity]="taskTagConfig.caseSensitivity"
-    [isAddBySpace]="taskTagConfig.isAddBySpace"
-    (valueChange)="getTagValue($event)"
-    [checkBeforeAdd]="customCheck"
-  >
-  </d-tags-input>
-  <pre style="margin: 10px 0">{{ tagList | json }}</pre>
-</section>
-<section>
-  <span> disabled状态 </span>
-  <d-tags-input
-    (click)="$event.stopPropagation()"
-    id="issue-tags"
-    [tags]="tagList"
-    [displayProperty]="taskTagConfig.displayProperty"
-    [placeholder]="taskTagConfig.placeholder"
-    [minLength]="taskTagConfig.minLength"
-    [maxLength]="taskTagConfig.maxLength"
-    [maxTags]="taskTagConfig.maxTags"
-    [suggestionList]="suggestionList"
-    (valueChange)="getTagValue($event)"
-    [checkBeforeAdd]="customCheck"
-    [disabled]="true"
-  >
-  </d-tags-input>
-</section>
+<h4>Normal</h4>
+<d-tags-input
+  (click)="$event.stopPropagation()"
+  id="issue-tags"
+  [tags]="tagList"
+  [displayProperty]="taskTagConfig.displayProperty"
+  [placeholder]="taskTagConfig.placeholder"
+  [minLength]="taskTagConfig.minLength"
+  [maxLength]="taskTagConfig.maxLength"
+  [maxTags]="taskTagConfig.maxTags"
+  [suggestionList]="suggestionList"
+  [spellcheck]="taskTagConfig.spellcheck"
+  [caseSensitivity]="taskTagConfig.caseSensitivity"
+  [isAddBySpace]="taskTagConfig.isAddBySpace"
+  (valueChange)="getTagValue($event)"
+  [checkBeforeAdd]="customCheck"
+>
+</d-tags-input>
+<pre style="margin: 10px 0">{{ tagList | json }}</pre>
+<h4>Disabled</h4>
+<d-tags-input
+  (click)="$event.stopPropagation()"
+  id="issue-tags"
+  [tags]="tagList"
+  [displayProperty]="taskTagConfig.displayProperty"
+  [placeholder]="taskTagConfig.placeholder"
+  [minLength]="taskTagConfig.minLength"
+  [maxLength]="taskTagConfig.maxLength"
+  [maxTags]="taskTagConfig.maxTags"
+  [suggestionList]="suggestionList"
+  (valueChange)="getTagValue($event)"
+  [checkBeforeAdd]="customCheck"
+  [disabled]="true"
+>
+</d-tags-input>

@@ -10,7 +10,10 @@ import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 import { ToggleModule } from '..';
 import { BasicComponent } from './basic/basic.component';
+import { CallbackComponent } from './callback/callback.component';
+import { CustomComponent } from './custom/custom.component';
 import { ToggleDemoComponent } from './toggle-demo.component';
+import { TwoBindingComponent } from './two-binding/two-binding.component';
 
 @NgModule({
   imports: [
@@ -36,8 +39,14 @@ import { ToggleDemoComponent } from './toggle-demo.component';
     ]),
   ],
   exports: [ToggleDemoComponent],
-  declarations: [ToggleDemoComponent, BasicComponent],
-  
+  declarations: [
+    ToggleDemoComponent,
+    BasicComponent,
+    TwoBindingComponent,
+    CallbackComponent,
+    CustomComponent
+  ],
+
   providers: [],
 })
 export class ToggleDemoModule {}

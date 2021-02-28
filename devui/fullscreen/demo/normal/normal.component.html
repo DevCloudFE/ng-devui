@@ -1,8 +1,5 @@
-<section>
-  <d-fullscreen mode="normal" (fullscreenLaunch)="launchFullscreen($event)" [zIndex]="100">
-    <div fullscreen-target>
-      <d-button fullscreen-launch [icon]="btnIcon" bsStyle="text-dark" dTooltip [content]="btnContent"> </d-button>
-      <div>普通全屏</div>
-    </div>
-  </d-fullscreen>
-</section>
+<d-fullscreen mode="normal" (fullscreenLaunch)="launchFullscreen($event)" [zIndex]="100">
+  <div fullscreen-target>
+    <d-button fullscreen-launch [icon]="btnIcon" bsStyle="text-dark" dTooltip [content]="btnContent"> </d-button>
+  </div>
+</d-fullscreen>

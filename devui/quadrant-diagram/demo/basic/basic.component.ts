@@ -10,10 +10,10 @@ export class BasicComponent implements OnInit {
 
   labelData: Array<ILabelDataConfigs> = [];
   list = [
-    { title: '一级目标', content: '<p>一级目标</p><p>价值度：3</p><p>紧急度：3</p><p>优先级：3</p>', progress: 40 },
-    { title: '特性目标', content: '<p>特性目标</p><p>价值度：3</p><p>紧急度：3</p><p>优先级：3</p>', progress: 30 },
-    { title: '二级目标', content: '<p>二级目标</p><p>价值度：3</p><p>紧急度：3</p><p>优先级：3</p>', progress: 20 },
-    { title: '三级目标', content: '<p>三级目标</p><p>价值度：3</p><p>紧急度：3</p><p>优先级：3</p>', progress: 10 }
+    { title: 'First level', content: '<p>First level target</p><p>Value 3</p><p>Urgency 3</p><p>Priority 3</p>', progress: 40 },
+    { title: 'Feature target', content: '<p>Feature target</p><p>Value 3</p><p>Urgency 3</p><p>Priority 3</p>', progress: 30 },
+    { title: 'Secondary', content: '<p>Secondary target</p><p>Value：3</p><p>Urgency 3</p><p>Priority 3</p>', progress: 20 },
+    { title: 'Three-level', content: '<p>Three-level target</p><p>Value：3</p><p>Urgency 3</p><p>Priority 3</p>', progress: 10 }
   ];
 
   constructor() { }
@@ -39,6 +39,6 @@ export class BasicComponent implements OnInit {
     if (labelIndex !== -1) {
       this.labelData.splice(labelIndex, 1);
     }
-    this.labelData.push(label); // 将拖拽的数据放到象限图上显示
+    this.labelData.push(label); // Place the dragged data on the quadrant graph to display
   }
 }

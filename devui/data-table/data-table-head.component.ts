@@ -1,9 +1,12 @@
-import { AfterViewInit, ChangeDetectorRef, Component, DoCheck, ElementRef, EventEmitter, Input,
-  IterableDiffers, KeyValueDiffers, NgZone, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
+import {
+  AfterViewInit, ChangeDetectorRef, Component, DoCheck, ElementRef, EventEmitter, Input,
+  IterableDiffers, KeyValueDiffers, NgZone, OnChanges, OnDestroy, OnInit, Output, QueryList, SimpleChanges, ViewChildren
+} from '@angular/core';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { DataTableComponent } from './data-table.component';
 import { SortDirection, SortEventArg, TableCheckOptions } from './data-table.model';
+import { TableThComponent } from './table/head/th/th.component';
 import { DataTableColumnTmplComponent } from './tmpl/data-table-column-tmpl.component';
 
 const documentElement = document.documentElement;
@@ -40,6 +43,8 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
   @Output() beginResizeHandlerEvent = new EventEmitter<any>();
   @Output() resizingHandlerEvent = new EventEmitter<any>();
   @Output() dragTableEndEvent = new EventEmitter<any>();
+
+  @ViewChildren(TableThComponent) thList: QueryList<TableThComponent>;
 
   objDiffer: {};
 
@@ -302,7 +307,11 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
   }
 
   onBeginResize($event) {
-    this.beginResizeHandlerEvent.emit($event);
+    const thRenderWidthList = [];
+    this.thList.forEach(th => {
+      thRenderWidthList.push({field: th.element.getAttribute('field'), width: th.element.clientWidth});
+    });
+    this.beginResizeHandlerEvent.emit({event: $event, thRenderWidthList});
   }
 
   onResizing($event, column) {

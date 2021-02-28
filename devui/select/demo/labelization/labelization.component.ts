@@ -6,55 +6,55 @@ import { Component } from '@angular/core';
 })
 export class LabelizationComponent {
   options3 = [{
-    name: '这是一个超长的选项1',
+    name: 'This is a long long displayed option 1',
     value: 1
   }, {
-    name: '选项2',
+    name: 'option 2',
     value: 2
   }, {
-    name: '这是一个超长的选项3',
+    name: 'This is a long long displayed option 3',
     value: 3
   }, {
-    name: '选项4',
+    name: 'option 4',
     value: 4
   }, {
-    name: '这是一个超长的选项5',
+    name: 'This is a long long displayed option 5',
     value: 5
   }, {
-    name: '这是一个超长的选项6',
+    name: 'This is a long long displayed option 6',
     value: 6
   }, {
-    name: '这是一个超长的选项7',
+    name: 'This is a long long displayed option 7',
     value: 7
   }, {
-    name: '选项8',
+    name: 'option 8',
     value: 8
   }, {
-    name: '选项9',
+    name: 'option 9',
     value: 9
   }];
   select1 = [{
-    name: '这是一个超长的选项1',
+    name: 'This is a long long displayed option 1',
     value: 1
   }, {
-    name: '选项2',
+    name: 'option 2',
     value: 2
   }];
   select2 = [{
-    name: '这是一个超长的选项1',
+    name: 'This is a long long displayed option 1',
     value: 1
   }, {
-    name: '这是一个超长的选项3',
+    name: 'This is a long long displayed option 3',
     value: 3
   }];
   select3 = [{
-    name: '这是一个超长的选项1',
+    name: 'This is a long long displayed option 1',
     value: 1
   }, {
-    name: '这是一个超长的选项3',
+    name: 'This is a long long displayed option 3',
     value: 3
   }, {
-    name: '选项4',
+    name: 'option 4',
     value: 4
   }];
   select4 = [];
@@ -63,10 +63,10 @@ export class LabelizationComponent {
   changeSelect1() {
     this.select1 = [
     {
-      name: '选项2',
+      name: 'option 2',
       value: 2
     }, {
-      name: '选项4',
+      name: 'option 4',
       value: 4
     }];
   }

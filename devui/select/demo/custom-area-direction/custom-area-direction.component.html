@@ -1,5 +1,5 @@
 <section>
-  <h5 class="text-muted">自定义区域方向和选中</h5>
+  <h5 class="text-muted">Custom View Position and custom select<!--自定义区域方向和选中--></h5>
   <div class="row">
     <div class="col-md-5">
       <d-select
@@ -14,7 +14,7 @@
   </div>
 </section>
 <section>
-  <h5 class="text-muted">自定义区域和通过appendToBody改变宽度对齐</h5>
+  <h5 class="text-muted">Custom View and align with appendToBody option<!--自定义区域和通过appendToBody改变宽度对齐--></h5>
   <div class="row">
     <div class="col-md-3">
       <d-select
@@ -32,7 +32,7 @@
 </section>
 <ng-template #myTemplate let-selectComponent let-choose="choose">
   <div class="custom-wrapper">
-    <div class="custom-title">最近选择</div>
+    <div class="custom-title">Recently<!--最近选择--></div>
     <ul class="custom-box">
       <li class="custom-list" *ngFor="let recent of recently; let i = index">
         <div class="custom-single" (click)="chooseRecent($event, i, choose)">

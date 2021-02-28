@@ -2,7 +2,6 @@ import {
   Component,
   OnInit
 } from '@angular/core';
-
 import { StepsGuideService } from 'ng-devui/steps-guide';
 
 @Component({

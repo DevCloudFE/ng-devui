@@ -27,6 +27,16 @@ export class BadgeDemoComponent implements OnInit, OnDestroy {
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./status/status.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./status/status.component.ts') },
   ];
+  positionSource: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./position/position.component.html') },
+    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./position/position.component.ts') },
+    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./position/position.component.scss') },
+  ];
+  customSource: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./custom/custom.component.html') },
+    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./custom/custom.component.ts') },
+    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./custom/custom.component.scss') },
+  ];
 
   navItems = [];
   subs: Subscription = new Subscription();
@@ -53,6 +63,8 @@ export class BadgeDemoComponent implements OnInit, OnDestroy {
       { dAnchorLink: 'badge-dot', value: values['badge-dot'] },
       { dAnchorLink: 'badge-count', value: values['badge-count'] },
       { dAnchorLink: 'badge-status', value: values['badge-status'] },
+      { dAnchorLink: 'position', value: values['position'] },
+      { dAnchorLink: 'custom', value: values['custom'] }
     ];
   }
 

@@ -1,8 +1,8 @@
 <div>
-  <h4>单选搜索</h4>
+  <h4>single mode search</h4>
   <d-cascader
     [options]="options"
-    [placeholder]="'请选择'"
+    [placeholder]="'please select'"
     [(ngModel)]="value1"
     (ngModelChange)="onChanges($event)"
     [trigger]="'click'"
@@ -13,10 +13,10 @@
   >
   </d-cascader>
 
-  <h4>多选搜索</h4>
+  <h4>multiple mode search</h4>
   <d-cascader
     [options]="options"
-    [placeholder]="'请选择'"
+    [placeholder]="'please select'"
     [(ngModel)]="value2"
     (ngModelChange)="onChanges($event)"
     [trigger]="'click'"

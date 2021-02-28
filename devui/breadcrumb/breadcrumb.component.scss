@@ -1,5 +1,6 @@
 :host {
-  display: block;
+  display: flex;
+  -webkit-align-items: center;
 
   ::ng-deep d-breadcrumb-item:last-child {
     .devui-breadcrumb-separator {

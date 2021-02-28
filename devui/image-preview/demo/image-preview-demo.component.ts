@@ -16,6 +16,10 @@ export class DImagePreviewDemoComponent implements OnInit, OnDestroy {
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./custom-open/custom-open.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./custom-open/custom-open.component.ts') },
   ];
+  zIndexSource: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./z-index/z-index.component.html') },
+    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./z-index/z-index.component.ts') }
+  ];
 
   navItems = [];
   subs: Subscription = new Subscription();
@@ -40,6 +44,7 @@ export class DImagePreviewDemoComponent implements OnInit, OnDestroy {
     this.navItems = [
       { dAnchorLink: 'basic-usage', value: values['basic-usage'] },
       { dAnchorLink: 'custom-usage', value: values['custom-usage'] },
+      { dAnchorLink: 'z-index-usage', value: values['z-index-usage'] },
     ];
   }
 

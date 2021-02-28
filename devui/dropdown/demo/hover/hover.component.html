@@ -1,12 +1,10 @@
-<section>
-  <div class="btn-group" dDropDown [trigger]="'hover'" (toggleEvent)="onToggle($event)" appendToBody>
-    <span dDropDownToggle class="icon icon-setup devui-dropdown-origin"></span>
-    <ul dDropDownMenu class="devui-dropdown-menu devui-scrollbar devui-dropdown-overlay" role="menu">
-      <li class="disabled" role="menuitem">
-        <a class="devui-dropdown-item disabled">菜单一</a>
-      </li>
-      <li role="menuitem"><a class="devui-dropdown-item">菜单二</a></li>
-      <li role="menuitem"><a class="devui-dropdown-item">菜单三</a></li>
-    </ul>
-  </div>
-</section>
+<div class="btn-group" dDropDown [trigger]="'hover'" (toggleEvent)="onToggle($event)" appendToBody>
+  <span dDropDownToggle class="icon icon-setup devui-dropdown-origin"></span>
+  <ul dDropDownMenu class="devui-dropdown-menu devui-scrollbar" role="menu">
+    <li class="disabled" role="menuitem">
+      <a class="devui-dropdown-item disabled">Item 1</a>
+    </li>
+    <li role="menuitem"><a class="devui-dropdown-item">Item 2</a></li>
+    <li role="menuitem"><a class="devui-dropdown-item">Item 3</a></li>
+  </ul>
+</div>

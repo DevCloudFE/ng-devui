@@ -14,8 +14,8 @@ export class SearchDemoComponent implements OnInit, OnDestroy {
   ];
 
   iconLeftSource: Array<DevuiSourceData> = [
-    {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./icon-left/icon-left.component.html')},
-    {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./icon-left/icon-left.component.ts')}
+    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./icon-left/icon-left.component.html') },
+    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./icon-left/icon-left.component.ts') },
   ];
 
   ngmodelDemoSource: Array<DevuiSourceData> = [
@@ -24,6 +24,16 @@ export class SearchDemoComponent implements OnInit, OnDestroy {
     { title: 'SCSS', language: 'css', code: require('!!raw-loader!./ngmodel/ngmodel.component.css') },
   ];
 
+  autoFocusDemoSource: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./auto-focus/auto-focus.component.html') },
+    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./auto-focus/auto-focus.component.ts') },
+  ];
+
+  searchDemoNoBorder: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./no-border/search-no-border.component.html') },
+    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./no-border/search-no-border.component.ts') },
+    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./no-border/search-no-border.component.scss') },
+  ];
   navItems = [];
   subs: Subscription = new Subscription();
   constructor(private translate: TranslateService) {}
@@ -46,8 +56,10 @@ export class SearchDemoComponent implements OnInit, OnDestroy {
   setNavValues(values) {
     this.navItems = [
       { dAnchorLink: 'basic-usage', value: values['basic-usage'] },
-      { dAnchorLink: 'icon-left', value: values['icon-left']},
+      { dAnchorLink: 'icon-left', value: values['icon-left'] },
+      { dAnchorLink: 'search-no-border', value: values['search-no-border'] },
       { dAnchorLink: 'bidirectional-binding', value: values['bidirectional-binding'] },
+      { dAnchorLink: 'auto-focus', value: values['auto-focus'] },
     ];
   }
 

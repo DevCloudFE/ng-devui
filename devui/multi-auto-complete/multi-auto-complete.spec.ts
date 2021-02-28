@@ -163,6 +163,8 @@ describe('multi-auto-complete', () => {
       dropDownItem.nativeElement.dispatchEvent(new Event('click'));
       tick();
       fixture.detectChanges();
+      tick();
+      fixture.detectChanges();
       const labelItems = debugEl.queryAll(
         By.css('.multi-auto-complete label.multiple-label-auto-complete .devui-dropdown-origin li .label-item')
       );

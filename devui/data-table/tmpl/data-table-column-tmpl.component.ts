@@ -52,6 +52,7 @@ export class DataTableColumnTmplComponent implements OnChanges, OnDestroy, OnIni
   @ContentChild(DataTableCellEditTmplComponent) cellEditCmp: DataTableCellEditTmplComponent;
   @ContentChild(DataTableHeadCellTmplComponent) headCellTmpl: DataTableHeadCellTmplComponent;
   @Input() customFilterTemplate: TemplateRef<any>;
+  @Input() extraFilterTemplate: TemplateRef<any>;
   @Input() searchFn: (term: string) => Observable<Array<any>>;
   orderChange = new EventEmitter<SimpleChanges>();
   widthChange = new EventEmitter<SimpleChanges>();

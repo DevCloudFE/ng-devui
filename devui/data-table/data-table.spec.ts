@@ -289,7 +289,7 @@ class TestDataTableAdvancedComponent {
               <span *ngIf="!rowItem['dateEdit']">{{ rowItem?.dob | i18nDate: 'short':false }}</span>
               <form *ngIf="rowItem['dateEdit']" class="form-inline edit-padding-fix">
                 <div class="devui-form-group">
-                  <div class="devui-input-group devui-dropdown-origin-wrapper devui-dropdown-origin">
+                  <div class="devui-input-group devui-dropdown-origin">
                     <input
                       class="devui-form-control search"
                       name="date"

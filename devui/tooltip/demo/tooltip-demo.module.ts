@@ -9,6 +9,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 import { TooltipModule } from '../tooltip.module';
 import { BasicComponent } from './basic/basic.component';
+import { DelayComponent } from './delay/delay.component';
 import { TooltipDemoComponent } from './tooltip-demo.component';
 
 @NgModule({
@@ -32,9 +33,10 @@ import { TooltipDemoComponent } from './tooltip-demo.component';
   exports: [TooltipDemoComponent],
   declarations: [
     TooltipDemoComponent,
-    BasicComponent
+    BasicComponent,
+    DelayComponent
   ],
-  
+
 })
 export class TooltipDemoModule {
 }

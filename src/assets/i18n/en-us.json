@@ -12,7 +12,13 @@
     "light": "Light Theme",
     "dark": "Dark Theme",
     "follow": "Follow System",
-    "largeSize": "Large FontSize"
+    "largeSize": "Large FontSize",
+    "default":"Default",
+    "extend":"Extend",
+    "infinity": "Infinity",
+    "sweet": "Sweet",
+    "deep": "Deep",
+    "provence": "Provence"
   },
   "public": {
     "start": "Getting Started",
@@ -32,8 +38,8 @@
       "name": "Accordion",
       "type": "Navigation",
       "path": "accordion",
-      "description": "Accordion, which is used for hierarchical menus that need to be grouped.",
-      "tmw": "This parameter is used when the grouping menu is used.",
+      "description": "Navigation for your websites.",
+      "tmw": "Accordion is used when you need to set a menu list navigation.",
       "basicDemo": {
         "title": "Basic Usage",
         "description": "Transfer a menu to listen to the open/close event (menuToggle) or click event (itemClick) of an expandable menu that contains sub-items. By default, the open attribute is used for expandable menus, the active attribute is used for clicking menus, and the disabled attribute is used for disabled items. Set restrictOneOpen to specify whether to display only one level-1 menu.",
@@ -68,7 +74,7 @@
       },
       "linkDemo": {
         "title": "Built-in route and link type",
-        "description": "Set linkType to switch the built-in route and link type. The default type is ''; Route type'routerLink' External link type:'hrefLink'; Determine the route or link type based on data: 'dependOnLinkTypeKey'",
+        "description": "Set linkType to switch the built-in route and link type. The default type is ''; Route type'routerLink' External link type:'hrefLink'; Determine the route or link type based on data: 'dependOnLinkTypeKey'.",
         "Route Link (Recommended)": "Route Link (Recommended)",
         "Native hyperlink (used in cross-site scenarios)": "Native hyperlink (used in cross-site scenarios)",
         "Hybrid link (used in some cross-site scenarios)": "Hybrid link (used in some cross-site scenarios)",
@@ -136,8 +142,8 @@
       "name": "Alert",
       "type": "Feedback",
       "path": "alert",
-      "description": "Information used to display warnings to users.",
-      "tmw": "When the page needs to send a warning message to the user.",
+      "description": "Display warnings to users.",
+      "tmw": "When the page needs to send a warning message to users.",
       "basicDemo": {
         "title": "Basic Usage",
         "description": "There are 4 types of Alert: success, danger, warning, info."
@@ -146,17 +152,22 @@
         "title": "Closable Prompt",
         "description": "The close button is displayed. Click to close the prompt."
       },
+      "withoutIconDemo": {
+        "title": "Without Icon",
+        "description": "Without default icon."
+      },
       "anchorLinkValues": {
         "basic-usage": "Basic Usage",
-        "tips-to-close": "Closable Prompt"
+        "tips-to-close": "Closable Prompt",
+        "without-icon": "Without Icon"
       }
     },
     "anchor": {
       "name": "Anchor",
       "type": "Navigation",
       "path": "anchor",
-      "description": "Used to jump to a specified position on the page.",
-      "tmw": "When you need to quickly jump between parts of a page.",
+      "description": "Go to one part of the page that in a specified location of a page.",
+      "tmw": "When you need to quickly jump to parts of a page.",
       "basicDemo": {
         "title": "Basic Usage",
         "description": "For details about the scrolling effect, see sticky.",
@@ -171,7 +182,7 @@
         "The quality assessment is displayed here.": "The quality assessment is displayed here."
       },
       "asyncDemo": {
-        "title": "Asynchronous loading",
+        "title": "Asynchronous Loading",
         "description": "Asynchronous loading is supported. You can load menus or contents first, and then click the button to switch the loading.",
         "Click to switch to asynchronous loading content.": "Click to switch to asynchronous loading content.",
         "Asynchronous loading menu": "Asynchronous loading menu",
@@ -186,8 +197,8 @@
         "The quality assessment is displayed here.": "The quality assessment is displayed here."
       },
       "hashDemo": {
-        "title": "URL Anchor",
-        "description": "Hash link for URL anchors and update hash",
+        "title": "URL Hash Anchor",
+        "description": "Hash link for URL anchors and update hash.",
         "base-info": "Basic Information",
         "issue-list": "Requirement List",
         "case-list": "Test Case List",
@@ -206,8 +217,8 @@
         "Jump to the Requirement List via Hash": "Jump to the Requirement List via Hash"
       },
       "scrollTargetDemo": {
-        "title": "Replace rolling container",
-        "description": "Replacing a Rolling Container Using ScrollTarget",
+        "title": "Replace Rolling Container",
+        "description": "Replacing a Rolling Container Using ScrollTarget.",
         "base-info": "Basic Information",
         "issue-list": "Requirement List",
         "case-list": "Test Case List",
@@ -219,17 +230,17 @@
       },
       "anchorLinkValues": {
         "basic-usage": "Basic Usage",
-        "asynchronous-loading": "Asynchronous loading",
-        "scroll-target": "Replace rolling container",
-        "support-hash": "URL Anchor"
+        "asynchronous-loading": "Asynchronous Loading",
+        "scroll-target": "Replace Rolling Container",
+        "support-hash": "URL Hash Anchor"
       }
     },
     "auto-complete": {
       "name": "AutoComplete",
       "type": "Data entry",
       "path": "auto-complete",
-      "description": "Associate the input results that users may need when entering.",
-      "tmw": "You can deduce what a user may want to enter from some of the characters that the user enters.",
+      "description": "Guess what users may need when entering.",
+      "tmw": "When you need to deduce the content that a user may want to enter according to some characters entered by the user.",
       "basicDemo": {
         "title": "Basic usage",
         "description": "Set source to the data source that is automatically completed."
@@ -268,8 +279,8 @@
       "name": "Markdown",
       "type": "Data entry",
       "path": "editormd",
-      "description": "Markdown Editor",
-      "tmw": "<div> Edit Markdown. </div>",
+      "description": "Markdown Editor.",
+      "tmw": "When you need to edit Markdown files.",
       "defaultDemo": {
         "title": "Basic usage",
         "description": "Displays the default basic functions of editor-md and supports bidirectional binding.",
@@ -300,7 +311,7 @@
       },
       "renderDemo": {
         "title": "Render md text separately",
-        "description": "Render md text separately.",
+        "description": "Render md text separately.The content added by CustomParse will not enter the XSS filtering.",
         "This is the input content.": "This is the input content.",
         "Defines a custom attribute.": "A custom attribute is defined here. This attribute is added to the custom trustlist in XSS. You can see that this attribute is rendered when you view the elements on the console.",
         "Another custom property": "Another custom attribute is defined here. This attribute is not added to the XSS trustlist. The console displays that this attribute is not rendered.",
@@ -318,7 +329,7 @@
       },
       "imageDemo": {
         "title": "Configure image file upload",
-        "description": "Configuring Image File Upload.",
+        "description": "Configuring Image File Upload.After setting imageUploadToServer, the editor will also monitor the paste operation, and if there are pictures, the imageUpload event will also be triggered.",
         "Select an image to upload.": "Select an image and upload it to the server.",
         "After imageUploadToServer is set": "After imageUploadToServer is set, the editor listens on the paste operation. If an image exists, the imageUpload event is triggered.",
         "Open the file upload entry.": "Open the file upload entry.",
@@ -372,11 +383,11 @@
       "name": "Avatar",
       "type": "Data display",
       "path": "avatar",
-      "description": "Setting a profile picture.",
-      "tmw": "The profile picture can be displayed based on the characters entered by the user.",
+      "description": "Display user's avatar.",
+      "tmw": "When users want to display their own profile avatar.",
       "basicDemo": {
         "title": "Basic Rules",
-        "description": "When the profile picture gadget transfers the name attribute, the profile picture fields are displayed based on the following rules:",
+        "description": "When the profile picture gadget transfers the name attribute, the profile picture field is displayed based on certain rules. For details, please see API.",
         "cnStart": "If the value starts with Chinese, the last two characters are used.",
         "enStart": "If the value starts with English, the first two characters are used.",
         "multi": "If there are multiple English names, use the first two letters of the name.",
@@ -391,7 +402,7 @@
       },
       "specialDemo": {
         "title": "Special Display",
-        "description": "The profile picture component processes the following special cases:",
+        "description": "The avatar component processes some special situations, for example, the user does not exist or the default avatar is displayed. For details, please see API.",
         "notExist": "If name, customText, and imgSrc are not transferred, the user who uses the avatar does not exist.",
         "beNull": "If the values of name, customText, and imgSrc are empty, the user who uses the avatar does not have a nickname and the default avatar is used."
       },
@@ -405,7 +416,7 @@
       "name": "ImagePreview",
       "type": "Data display",
       "path": "ImagePreview",
-      "description": "Preview one or more pictures",
+      "description": "Preview one or more pictures.",
       "tmw": "Preview images or images in containers based on user input.",
       "basicDemo": {
         "title": "Basic Usage",
@@ -413,20 +424,28 @@
       },
       "customDemo": {
         "title": "Customizing the preview window",
-        "description": "Transfer the customized opening moment of the subject.",
+        "description": "Transfer subject to enable preview when next is triggered.",
+        "previewImage": "Preview Picture"
+      },
+      "zIndexDemo": {
+        "title": "Setting zIndex",
+        "description1": "Set zIndex to control the level of the pop-up effect.Set backDropZIndex to control the level of the back drop effect of the pop-up.",
+        "description2": "When zIndex is set to a value smaller than backDropZIndex, imagePreview is displayed below the back drop.",
+        "description3": "You can disable imagePreview by Esc.",
         "previewImage": "Preview Picture"
       },
       "anchorLinkValues": {
         "basic-usage": "Basic Usage",
-        "custom-usage": "Customizing the preview window"
+        "custom-usage": "Customizing the preview window",
+        "z-index-usage": "Setting zIndex"
       }
     },
     "breadcrumb": {
       "name": "Breadcrumb",
       "type": "Navigation",
       "path": "breadcrumb",
-      "description": "Navigation assistance, displaying the current page level, and quickly returning to any page.",
-      "tmw": "The user needs to know the current level. The user needs to quickly return to the previous level. The user needs to navigate to any page at the same level as the specified level.",
+      "description": "Show the current hierarchy of pages.",
+      "tmw": "<div>1. When users want to know the current hierarchy.</div> <div>2. When Users want to quickly return to the previous page.</div> <div>3. When users want to navigate to any page at the same level.</div>",
       "basicDemo": {
         "title": "Basic Breadcrumbs",
         "itemText": "Define the display content through d-breadcrumb-item.",
@@ -436,19 +455,19 @@
       "menuDemo": {
         "title": "Breadcrumbs with Dropdown menu"
       },
-      "searchDemo": {
-        "title": "Breadcrumbs with searchable Dropdown menu"
-      },
       "customDemo": {
         "title": "Customize",
         "breadText": "breadcrumbs",
         "anchorText": "Anchor",
         "btnText": "Button"
       },
+      "sourceDemo": {
+        "title": "Source Config"
+      },
       "anchorLinkValues": {
         "basic-breadcrumbs": "Basic Breadcrumbs",
+        "source-config-breadcrumbs": "Source Config",
         "drop-down-breadcrumbs": "Breadcrumbs with Dropdown menu",
-        "with-search-drop-down-breadcrumbs": "Breadcrumbs with searchable Dropdown menu",
         "self-defined-breadcrumbs": "Customize"
       }
     },
@@ -456,8 +475,8 @@
       "name": "BackTop",
       "type": "Navigation",
       "path": "back-top",
-      "description": "Operation button on the top of the page.",
-      "tmw": "When the content area of the page is long, the user needs to frequently return to the top to view related content.",
+      "description": "A button for returning to the top of the page.",
+      "tmw": "When the page is too long, and the user wants to frequently return to the top to view related content.",
       "basicDemo": {
         "title": "Basic Usage",
         "description": "Returns to the default style of the top button, 50px from the bottom, 30px on the right.",
@@ -466,6 +485,7 @@
       },
       "customizeDemo": {
         "title": "Customize",
+        "description": "You can customize the button style for the backTop. The width and height are limited to 40 px * 40 px. In addition, you can set the scrolling height of the button by setting visibleHeight.",
         "customizeStyle": "Customize the style of the back to top button. The width and height are limited to 40px * 40px.",
         "text": "Enable the switch and slide down the scroll bar to display the button.",
         "scrollHeight": "When the scrolling height reaches the value of visibleHeight, the button is displayed to the top."
@@ -484,8 +504,8 @@
       "name": "Button",
       "type": "General",
       "path": "button",
-      "description": "The button is used to start an instant operation, initiate a command, and obtain the result. A specific button is used in a specific scenario.",
-      "tmw": "Marks or encapsulates a group of operation commands, responds to user clicks, and triggers the corresponding service logic.",
+      "description": "The button is used to start an instant operation.",
+      "tmw": "When users want to mark or encapsulate a group of operation commands that respond to user clicks, and trigger the corresponding logic.",
       "button-primary": {
         "title": "Primary Buttons",
         "ok": "Confirm",
@@ -498,7 +518,7 @@
       },
       "button-primary-and-common": {
         "title": "Combinations of Primary & Common Buttons",
-        "description": "When the primary button and the common button are combined, the primary button is placed on the left. ",
+        "description": "When a primary button is combined with a secondary button, a scene usually has only one primary button.",
         "ok": "ok",
         "cancel": "cancels",
         "last": "Previous",
@@ -517,7 +537,7 @@
       },
       "button-danger": {
         "title": "Danger Buttons",
-        "description": "Applicable to scenarios such as purchase.",
+        "description": "Indicates key operations in the system, such as purchase scenarios.",
         "purchase": "Buy"
       },
       "button-loading": {
@@ -552,7 +572,7 @@
       },
       "button-groups": {
         "title": "Button Group",
-        "description": "Put multiple buttons as a group into the button group container.",
+        "description": "Put multiple buttons as a group into the button group container. The size of the button group can be set by size and mixed with the drop-down menu.",
         "text": "The button group has four sizes. You can set the size of all elements by setting the size.",
         "filter": "filtration",
         "new": "Newly created",
@@ -580,8 +600,8 @@
       "name": "Badge",
       "type": "Data display",
       "path": "badge",
-      "description": "Number status logo in the upper right corner of the icon",
-      "tmw": "This icon is usually displayed in the upper right corner of the icon or on the right of the list item. A message needs to be processed by using different status colors.",
+      "description": "Round logo of number in the upper right corner of the icon.",
+      "tmw": "The badge is appeared at the upper right corner of the icon or the right of a list item. It's usually an icon that shows a message with a number to tell user what need to be handled.",
       "basicDemo": {
         "title": "Basic Badge",
         "description": "Basic badge type. When there is a package element, the badge and number are displayed in the upper right corner.",
@@ -608,30 +628,42 @@
         "title": "Status Badge",
         "description": "When the badge is used independently, does not contain any elements, and the showDot parameter is set to true, the badge is a status badge. Different color dots are displayed for different statuses."
       },
+      "positionDemo": {
+        "title": "Badge Position",
+        "description": "Set badgePos to set the badge position."
+      },
+      "customDemo": {
+        "title": "Custom",
+        "description": "The bgColor parameter is used to set the badge status color (the badge status color specified by status is invalid). The offsetXY parameter is used to set the badge offset relative to the badgePos.Customizing text and background colors using textColor and bgColor."
+      },
       "anchorLinkValues": {
         "badge-basic": "Basic Badge",
         "badge-dot": "Dotted Badge",
         "badge-count": "Count Badge",
-        "badge-status": "Status Badge"
+        "badge-status": "Status Badge",
+        "position": "Badge Position",
+        "custom": "Custom"
       }
     },
     "card": {
       "name": "Card",
       "type": "Data display",
       "path": "card",
-      "description": "Universal card container. If the same type of information in a module cannot form a sense of block, you can use the Card component to integrate the information to enhance the sense of module information on the interface.",
+      "description": "Card container.",
+      "tmw": "This is a basic card container, which can contain text, list, picture, and paragraph. Generally used for overview.",
       "basicDemo": {
         "title": "Basic Usage",
         "cardTitle": "DEVUI best practice course",
         "cardContent": "DEVUI is an open-source, free-of-charge common solution for enterprise mid- and back-end products. Its design is based on \"simplicity\", \"immersive\", \"flexibility\", natural and humanistic combination."
       },
       "customDemo": {
-        "title": "With Images",
+        "title": "Customize Area",
         "cardTitle": "DEVUI best practice course",
         "text": "Updated on July 31 15:55"
       },
       "mediaDemo": {
-        "title": "Customize Area",
+        "title": "With Images",
+        "description": "You can use align to set the alignment mode of the d-card-actions operation area: start alignment, end alignment, and stretch alignment.",
         "cardTitle": "DEVUI best practice course",
         "cardContent": "DEVUI is an open-source, free-of-charge common solution for enterprise mid- and back-end products. Its design is based on \"simplicity\", \"immersive\", \"flexibility\", natural and humanistic combination."
       },
@@ -645,13 +677,14 @@
       "name": "Carousel",
       "type": "Data display",
       "path": "carousel",
-      "description": "A group of rotation areas, which are used to display pictures or cards.",
-      "tmw": "<div>It is usually used for a group of pictures or cards to be played in rotation mode. When the space is insufficient, the content can be collected and displayed in rotation mode. </div>",
+      "description": "An area of carousel.",
+      "tmw": "Used to display images or cards.",
       "basicDemo": {
         "title": "Basic Usage"
       },
       "triggerDemo": {
-        "title": "Indicator & Toggle Arrow"
+        "title": "Indicator & Toggle Arrow",
+        "description": "If arrowTrigger is set to always, the arrow is permanently displayed. If dotTrigger is set to hover, it will switched when hover to the dots."
       },
       "autoplayDemo": {
         "title": "Automatic NVOD"
@@ -670,8 +703,8 @@
       "name": "CheckBox",
       "type": "Data entry",
       "path": "checkbox",
-      "description": "Allows users to select multiple options from a dataset.",
-      "tmw": "<div>1. Select multiple options from a group of options. </div> <div> 2. This operation can be used independently to switch between two states. This operation must be combined with the commit operation. </div>",
+      "description": "Checkbox.",
+      "tmw": "<div>1. Select multiple options from a group of options. </div> <div> 2. This operation can be used independently to switch between two states, which can be combined with the commit operation. </div>",
       "basicDemo": {
         "title": "Basic Usage",
         "selected": "Selected",
@@ -688,7 +721,7 @@
         "Customizing a Label Template": "Customizing a Label Template"
       },
       "groupDemo": {
-        "use": "Using CheckBoxGroup",
+        "title": "Checkbox Group",
         "Input object array": "Input object array",
         "Input string array": "Input string array",
         "Disable Entire Group": "Disable Entire Group",
@@ -697,41 +730,43 @@
         "Multi-line checkbox": "Multi-line checkbox"
       },
       "conditionChangeDemo": {
-        "title": "Checkbox Callback Switching",
+        "title": "Stop Checkbox Switching",
         "description": "The switch status of the checkbox whose label is \"condition-based call-back forbidden\" is terminated based on the condition.",
         "Conditional Callback Allowed": "Conditional Callback Allowed",
         "Conditional judgment callback interception selected": "Conditional judgment callback interception selected"
       },
       "conditionGroupDemo": {
-        "title": "Checkbox-Group Callback Switching",
+        "title": "Stop Checkbox Group Switching",
+        "description": "The checkbox with the 'block' field cannot switch the status.",
         "stateNotSwitch": "The checkbox with the \"block\" field cannot switch the status.",
         "intercepts": "intercepts"
       },
       "anchorLinkValues": {
         "checkbox-basic": "Basic Usage",
-        "tabs-group": "Using CheckBoxGroup",
-        "condition-change": "Checkbox Callback Switching",
-        "condition-group": "Checkbox-Group Callback Switching"
+        "tabs-group": "Checkbox Group",
+        "condition-change": "Stop Checkbox Switching",
+        "condition-group": "Stop Checkbox Group Switching"
       }
     },
     "common": {
       "name": "Common",
       "type": "General",
       "path": "common",
-      "description": "Provides some common functions.",
-      "tmw": "Processes date string conversion, file download, a tag simulation, and lazy loading.",
+      "description": "Provide some common functions.",
+      "tmw": "Can be used to deal with date string conversion, file download, a tag simulation, and lazy loading.",
       "lazyLoadDemo": {
-        "title": "lazy loading instruction",
+        "title": "Lazyload Directive",
         "description": "LazyLoadModule in the util module is introduced. The dLazyLoad instruction is used to respond to the loadMore event when the container is rolled to the bottom to implement lazy loading."
       },
       "pipeDemo": {
-        "title": "(No Chinese) DatePipe"
+        "title": "DatePipe"
       },
-      "helperUtilsDemo": {
-        "title": "(No Chinese)Helper Utils"
+      "openURLDemo": {
+        "title": "Open URL in A New Tag"
       },
       "iframePropagateDemo": {
-        "title": "(No Chinese) Iframe event propagate API"
+        "title": "iframe Event Propagate API",
+        "description": "Click event of iframe will pass to the parent element."
       },
       "clipboardDemo": {
         "title": "Copy to Clipboard Directive"
@@ -740,10 +775,11 @@
         "title": "Download File"
       },
       "anchorLinkValues": {
-        "lazy-load": "lazy loading instruction",
+        "lazy-load": "Lazyload Directive",
         "date-pipe": "Datepipe",
-        "helper-utils": "Helper Utils",
-        "iframe-propagate": "Iframe Event Propagate API",
+        "open-url": "Open URL in A New Tag",
+        "download-file": "Download File",
+        "iframe-propagate": "iframe Event Propagate API",
         "clipboard": "Copy to Clipboard Directive"
       }
     },
@@ -751,8 +787,8 @@
       "name": "ColorPicker",
       "type": "Evolving",
       "path": "color-picker",
-      "description": "Control for entering or selecting colors.",
-      "tmw": "You can enter a color or select a color in the color selection panel. The color picker saves the latest data used by the user locally.",
+      "description": "A panel to enter or select colors.",
+      "tmw": "When user want to select a color.",
       "basicDemo": {
         "title": "Basic Usage"
       },
@@ -768,8 +804,8 @@
       "name": "CommonStyles",
       "type": "Extended service",
       "path": "common-styles",
-      "description": "Component Library Common Style Specifications and Usage",
-      "tmw": "",
+      "description": "Common style specifications of ng-devui.",
+      "tmw": "When you want to query ng-devui related styles, scenario related styles, and changes of styles.",
       "hrefDemo": {
         "title": "Link",
         "description1": "1. Verify that the devui style sheet (devui.min.css) has been imported globally.",
@@ -811,18 +847,18 @@
       "name": "CodeMirror",
       "type": "Extended service",
       "path": "codemirror",
-      "description": "Used to display logs and shell scripts or compile codes.",
-      "tmw": "",
+      "description": "Code display.",
+      "tmw": "Used to display logs, shell scripts or compile code.",
       "basicDemo": {
         "title": "Basic Usage",
-        "description": "Configuring themes and patterns"
+        "description": "Configuring themes and patterns."
       },
       "eventDemo": {
-        "title": "Event listening"
+        "title": "Event Listening"
       },
       "anchorLinkValues": {
         "basic": "Basic Usage",
-        "event": "Event listening"
+        "event": "Event Listening"
       }
     },
     "datatable": {
@@ -830,7 +866,7 @@
       "type": "Data display",
       "path": "datatable",
       "description": "Displays row and column data.",
-      "tmw": "<div>1. When a large amount of structured data needs to be displayed</div> <div>2. When complex operations such as data sorting, filtering, and customization are required, </div>",
+      "tmw": "<div>1. When a large amount of structured data need to be displayed.</div> <div>2. When complex operations such as data sorting, filtering, and customization are required.</div>",
       "basicDemo": {
         "title": "Basic Usage",
         "description": "Simple table, displaying list data\nTwo implementation modes are supported. Method 1 is implemented by customizing the head and body templates and the rows and cells in the templates. Method 2 is implemented by configuring columns."
@@ -935,8 +971,8 @@
       "name": "DatePicker",
       "type": "Data entry",
       "path": "datepicker",
-      "description": "Control for entering or selecting a date.",
-      "tmw": "To enter a date, click the standard input box. The date panel is displayed.",
+      "description": "Enter or select a date.",
+      "tmw": "When users want to enter a date or click the input box to select a date.",
       "basicDemo": {
         "title": "Basic Usage",
         "basic": "Basic Usage",
@@ -944,11 +980,10 @@
         "disableTitle": "In the disabled state, you can use this effect or set the value by referring to the dateRangePicker parameter."
       },
       "clearButtonDemo": {
-        "clearButtonTitle": "The clearAll() parameter can be transferred to define different reasons.",
         "clear": "purging",
         "today": "Today",
         "title": "Custom Clear Button",
-        "description": "The clear button is added to customViewTemplate. The clearAll() button is used to trigger the clear operation."
+        "description": "The clear button is added to customViewTemplate. The clearAll() button is used to trigger the clear operation.The clearAll() parameter can be transferred to define different reasons."
       },
       "templateDemo": {
         "selectYesterday": "Select Yesterday",
@@ -967,6 +1002,12 @@
         "limit": "limit",
         "limitTogether": "simultaneous restriction"
       },
+      "setModeDemo": {
+        "title": "Set Mode ",
+        "yearPicker": "Set year datePicker by mode='year'",
+        "monthPicker": "Set year/month datePicker by mode='month'",
+        "description": "Only the year or month or date can be selected. The specific day may not be required. For example, the year can be 1999, August 1994, or August 15th of 1994. If this parameter is not set, the default is date. There are two mode which are year and month."
+      },
       "rangeDemo": {
         "selectToday": "Choose Today",
         "selectStart": "Select the iteration start date.",
@@ -979,7 +1020,7 @@
         "clearTitle": "Date range selector: A parameter can be transferred to clearAll() to define different reasons. The everyRange method is for reference only. The business needs to process the parameter based on the site requirements.",
         "clear": "purging",
         "title": "Date Range Selector Custom Operation Area and Clear Button",
-        "description": "Click clearAll to clear the selected date."
+        "description": "Date range selector: A parameter can be transferred to clearAll() to define different reasons. The everyRange method is for reference only. The business needs to process the parameter based on the site requirements."
       },
       "rangePickerDemo": {
         "rangePicker": "Date Range Selector (auto-hide when selected):",
@@ -1037,6 +1078,7 @@
       },
       "anchorLinkValues": {
         "datepicker-default": "Basic Usage",
+        "datepicker-set-mode": "Set Mode",
         "datepicker-min-max": "Max. and Min. Date Limit",
         "datepicker-append-to-body": "Attached to the body",
         "datepicker-range": "Range Date Picker",
@@ -1059,13 +1101,13 @@
       "name": "Echarts",
       "type": "Extended service",
       "path": "echarts",
-      "description": "Chart visualization component.",
-      "tmw": "This command is used to display statistics intuitively and visually.",
+      "description": "Chart visualization.",
+      "tmw": "Used to display statistics intuitively and visually.",
       "changeBgDemo": {
         "changeBg": "Modify Background Color",
         "clickChange": "Click to switch the background of the pie chart.",
         "title": "Changing the Chart Background Color",
-        "description": "Real-time background color change"
+        "description": "Real-time background color change."
       },
       "instanceDemo": {
         "listener": "Listening event",
@@ -1075,7 +1117,7 @@
       },
       "basicDemo": {
         "title": "Render a pie chart",
-        "description": "Simple usage, rendering a pie chart"
+        "description": "Simple usage, rendering a pie chart."
       },
       "anchorLinkValues": {
         "render-pie": "Render a pie chart",
@@ -1087,11 +1129,11 @@
       "name": "Jsmind",
       "type": "Extended service",
       "path": "jsmind",
-      "description": "Mind map gadget.",
-      "tmw": "When you need to display some horizontal structure hierarchy to users,",
+      "description": "Mind map.",
+      "tmw": "When you want to display some horizontal structure to others",
       "basicDemo": {
         "title": "Basic Usage",
-        "description": "Render a basic mind map"
+        "description": "Render a basic mind map."
       },
       "anchorLinkValues": {
         "basic-usage": "Basic Usage"
@@ -1101,8 +1143,8 @@
       "name": "MultiAutoComplete",
       "type": "Data entry",
       "path": "multi-auto-complete",
-      "description": "Selects several options as input and matches possible options for the user through association.",
-      "tmw": "You need to select multiple options.",
+      "description": "Match possible options of input.",
+      "tmw": "When users want to select multiple options.",
       "defaultDemo": {
         "title": "Basic Usage",
         "description": "Set the data source through source.",
@@ -1133,8 +1175,8 @@
       "name": "Form",
       "type": "Data entry",
       "path": "form",
-      "description": "The form provides the functions of data collection, data verification, and data submission. It is widely used in services and has many layout modes, including single-column, multi-column, wizard, and tab page.",
-      "tmw": "Forms are widely used in filtering, creating, and editing scenarios.",
+      "description": "A form that supports data collection, verification, and submission, including check boxes, option boxes, text boxes, and drop-down list boxes.",
+      "tmw": "Used for data collection, data verification, and data submission.",
       "basicDemo": {
         "title": "Basic usage",
         "description": "In basic usage, the label is above the data box.",
@@ -1231,9 +1273,37 @@
         "Sunday": "Sunday",
         "Option (Multiple Choices with Delete)": "Option (Multiple Choices with Delete)"
       },
-      "innerValidatorDemo": {
+      "templateValidateDemo": {
         "title": "Template driven form validation",
         "description": "To bind <code>ngModel, ngGroupModel, and ngForm</code> elements to the template, you can use <code>dValidateRules</code> to configure validation rules."
+      },
+      "innerValidatorDemo": {
+        "title": "Verify a single element by using a built-in validator",
+        "description": "<p> Currently, <code>DevUI</code> supports the following built-in validators: <code>required, minlength, maxlength, min, max, requiredTrue, email, pattern, and whitespace</code>. </p><p>If the user input cannot contain only spaces, use <code>whitespace</code>built-in validator</p><p>If the user input length needs to be restricted, it is a good idea to set the maximum limit to the actual verification value <code>+1</code>. In addition to <code>pattern</code>, other built-in validators also provide built-in error messages. If you do not customize a message, the default message is used. </p>"
+      },
+      "customerValidatorDemo": {
+        "title": "Verify a single element and customize a validator",
+        "description": "<ul><li>A validator requires a unique <code>id</code> identifier. You can explicitly declare this <code>id</code> or declare a <code>key</code> that does not conflict with the reserved word, the <code>key</code> is identified as <code>id</code>, and <code>value</code> functions as a validator. </li><li>customized validator. You can return <code>true | false </code> to indicate whether the current validation is successful or return <code>string | null</code> to indicate whether the current validation is successful and return an error message. This method applies to dynamic error prompts. </li><li>If the validator is an asynchronous validator, you need to return your value as an <code>Observable</code> object. More, DevUI is compatible with the native <code>angular</code> validator. You can set <code>isNgValidator</code> to true. </li></ul>"
+      },
+      "customErrorStrategyDemo": {
+        "title": "Verify a single element. The update policy errorStrategy is incorrectly configured and the validation moment updateOn is incorrectly configured.",
+        "description": "<ul> <li> Specifies whether to display an error message if the verification of the <code>errorStrategy</code> element fails during initialization. The default value is <code>dirty</code>. If you want to display an error during initialization, set this parameter to <code>prisine</code>. </li> <li><code>errorStrategy</code> can be inherited. </li> <li> Set <code>updateOn</code> to specify the verification moment. The validator <code>updateOn</code> is set based on the <code>updateOn</code> of the bound model. You can specify the validator by using <code>ngModelOptions</code> in the template. The default value is <code>change</code>, the options are as follows: <code>blur</code> and <code>submit</code>. If <code>submit</code> is set, validation is triggered when the form where the element is located is submitted. </li> </ul>"
+      },
+      "customMessageShowDemo": {
+        "title": "Verify a single element and customize management message prompts",
+        "description": "<ul> <li>Set <code>messageShowType</code> to select the message automatic prompt mode. The default value is <code>popover</code>. </li> <li>If <code>popover</code> is set to <code>popover</code>, error information will be displayed as <code>popover</code> when the element is focused. If </li> is set to <code>text</code>, error information is automatically displayed under the element in text mode (used with the form control container). If </li> is set to <code>none</code>, error information is not automatically displayed in the view, you can obtain <code>message</code> from the template, or obtain the error <code>message</code> by listening to the <code>messageChange</code> event, or directly obtain the error <code>message</code> from the template by reference. </li> <li> This configuration can be inherited. The </li> </ul> <ul> <li> can customize the pop-up direction when the message prompt mode is set to <code>popover</code>. The default value is <code >['right','bottom']</code >. </li> <li> This configuration can be inherited. </li> </ul>"
+      },
+      "debounceTimeDemo": {
+        "title": "Verify a single element and customize asyncDebounceTime",
+        "description": "<ul> <li> The default value of <code>300ms debounce time</code> is provided for the asynchronous validator. </li> <li> You can also set <code>asyncDebounceTime</code> in <code>dValidateRules</code>. </li> If your synchronization validator also needs <code>debounce time</code>, the verification is asynchronous and you can convert it to an asynchronous validator. </li> <li> This configuration can be inherited. </li> </ul>"
+      },
+      "validateTemplateForm": {
+        "title": "Form Validation and Submission",
+        "description": "<ul> <li><code>dValidateRules</code> can also be used on the ngForm and ngModelGroup elements that have been bound to the elements to manage form status and error messages in a unified manner. </li> <li> For non-frame elements, you are advised to set <code>dHasFeedback</code> to true in the <code>d-form-item</code> container to provide error feedback. </li> <li> For <code>dForm</code>, the <code>dFormSubmit and dFormReset</code> instructions can be used to associate elements that will trigger the commit and reset operations. </li> <li> If asynchronous validation is set for the form, the <code>loading</code> button can be associated with the <code>pending</code> status of the form. </li> </ul>"
+      },
+      "userRegisterDemo": {
+        "title": "Form verification and submission, user registration scenario",
+        "description": "<ul> <li> For complex validation rules in form scenarios, it is recommended that you organize them in the controller to better organize and reuse your validation rules. </li> <li> For automatic error prompt mode, it is recommended that you set <code>messageShowType</code> in <code>dForm</code>. </li> <li> For the submission event triggered by <code>dFormSubmit</code>, you can bind <code>dSubmit</code> to the <code>dForm</code> layer, you can obtain the current <code>form</code> validation status and the corresponding <code>directive</code> reference. </li> <li> If the form is not in the visual center when it is submitted, you can use a prompt to guide the user visually. For the prompt when the form is submitted, it is recommended that <code>d-toast</code> be displayed. </li> </ul>"
       },
       "validateReactiveDemo": {
         "title": "Reactive form validation",
@@ -1250,6 +1320,12 @@
       "validateCrossComponentDemo": {
         "title": "Cross-component verification",
         "description": "<ul><li>Current <code>Angular By default, Form</code> does not support cross-component form verification status sharing. For response forms, you can use <code>model</code> to centrally manage and transparently transmit components. </li><li>For template-driven forms, you can inject the required <code>ngModelGroup</code> or <code>NgForm</code> container by using container injection during subcomponent declaration, for form elements in the template to automatically obtain the parent container. </li></ul>"
+      },
+      "reactiveCrossComponent": {
+        "title": "Responsive form cross-component validation"
+      },
+      "templateCrossComponent": {
+        "title": "Template-driven form cross-component verification"
       },
       "anchorLinkValues": {
         "basic-usage": "Basic usage",
@@ -1268,17 +1344,17 @@
       "name": "Fullscreen",
       "type": "General",
       "path": "fullscreen",
-      "description": "Fullscreen component.",
-      "tmw": "When a user wants to display an area in full screen mode,",
+      "description": "Fullscreen.",
+      "tmw": "When users want to display an area with fullscreen mode.",
       "immersiveDemo": {
         "title": "Immersive full screen",
-        "description": "Immersive full screen display",
+        "description": "Immersive full screen display.",
         "fullscreen": "Full screen",
         "exitFullscreen": "Exit Full Screen"
       },
       "normalDemo": {
         "title": "Common full screen",
-        "description": "Full screen of the current browser window",
+        "description": "Full screen of the current browser window.",
         "fullscreen": "Full screen",
         "exitFullscreen": "Exit Full Screen"
       },
@@ -1291,11 +1367,11 @@
       "name": "Transfer",
       "type": "Data entry",
       "path": "transfer",
-      "description": "Double-column shuttle selection box",
-      "tmw": "You need to select multiple options. The shuttle selection box can move data in both columns in a care-only manner to complete the selection behavior. The left column indicates source, and the right column indicates target. The data in the two columns is returned for developers.",
+      "description": "Double-column selection box.",
+      "tmw": "When you need to select multiple options, the tranfer can move data in both columns to complete the selection behavior. The left column means source, and the right column means target. The data in the two columns is returned for developers.",
       "basicDemo": {
         "title": "Basic Usage",
-        "description": "Basic Usage of Shuttle Boxes",
+        "description": "Basic Usage of Shuttle Boxes.",
         "sourceTitle": "Source Title",
         "targetTitle": "Target Title",
         "disabled:": "Disabled:",
@@ -1414,11 +1490,11 @@
       "name": "DragDrop",
       "type": "General",
       "path": "dragdrop",
-      "description": "Drag a component.",
-      "tmw": "When multiple steps are required and the sequence of the steps needs to be adjusted flexibly",
+      "description": "Drag and drop.",
+      "tmw": "When multiple steps are required and the sequence of the steps needs to be adjusted flexibly.",
       "basicDemo": {
         "title": "Basic Usage",
-        "description": "Dragging a container to another container and sorting",
+        "description": "Dragging a container to another container and sorting.",
         "Default dragging": "Default dragging",
         "Dragable Item": "Dragable Item",
         "Place Sort Area": "Place Sort Area",
@@ -1434,7 +1510,7 @@
       },
       "followDemo": {
         "title": "Drag Entity Elements to Follow",
-        "description": "Allow non-transparent elements to follow when dragging",
+        "description": "Allow non-transparent elements to follow when dragging. You can also use appendToBody: If the parent object in the source position is destroyed after dragging it away, you need to attach the clone to the body to prevent it from being destroyed. By default, the style of the entity to be cloned is copied to ensure that the style of the entity to be cloned is correct. However, some styles and attributes that depend on the DOM node location may fail. You need to manually adjust some styles.",
         "Drag Entity Elements to Follow": "Drag Entity Elements to Follow",
         "Dragable Item": "Dragable Item",
         "Place Sort Area": "Place Sort Area",
@@ -1505,8 +1581,8 @@
       "name": "Drawer",
       "type": "Feedback",
       "path": "drawer",
-      "description": "The floating layer panel slides out of the screen edge.",
-      "tmw": "<div>1. The drawer slides in from the edge of the parent window to cover part of the parent window. You do not need to leave the current task when performing operations in the drawer. After the operations are complete, you can smoothly return to the original task. </div> <div> 2. When an additional panel is required to control the content of the parent form, the panel is called out when needed. For example, you can control the display style of the page and add content to the page. </div> <div> 3. Create or preview additional content when you need to insert a temporary task into the current task flow. For example, display agreement terms and create child objects. </div>",
+      "description": "The floating layer panel that slides out from the screen edge.",
+      "tmw": "<div>1. The drawer slides in from the edge of the parent window to cover part of the parent window, and you don't have to leave the current task. After the operations are complete, you can smoothly return to the original task. </div> <div> 2. When an additional panel is required to control the content of the parent form, the panel is called out when needed. For example, you can control the display style of the page and add content to the page. </div> <div> 3. Create or preview additional content when you need to insert a temporary task into the current task flow. For example, display agreement terms and create child objects. </div>",
       "basicDemo": {
         "title": "Basic Usage",
         "description": "Basic usage to control full screen, close, and set width."
@@ -1527,11 +1603,11 @@
       "name": "DropDown menu",
       "type": "Navigation",
       "path": "dropdown",
-      "description": "Press down to display the list.",
-      "tmw": "When there are too many operation commands on the page, this component can be used to store operation elements. Touch or move the touch to a drop-down menu. You can select a value from the list and run the corresponding command.",
+      "description": "Press to display the list.",
+      "tmw": "When there are too many operation commands on the page, this component can be used to contain operation elements. When you click or move into a drop-down menu, You can select a value from the dropdown list.",
       "basicDemo": {
         "title": "Basic Usage",
-        "description": "test",
+        "description": "test.",
         "More Operations": "More Operations",
         "Text box": "Text box",
         "Disable Options": "Disable Options",
@@ -1552,7 +1628,7 @@
       },
       "focusDemo": {
         "title": "Automatically expanded during focus and automatically focused during initialization",
-        "description": "Pass toggleOnFocus Sets the tab key to automatically expand when the focus is performed. Pass autoFocus Set the auto focus during initialization. the two may be used in combination or separately",
+        "description": "Pass toggleOnFocus Sets the tab key to automatically expand when the focus is performed. Pass autoFocus Set the auto focus during initialization. the two may be used in combination or separately.",
         "When you press Tab to navigate to the dropdown Toggle object, the menu is automatically expanded.": "When you press Tab to navigate to the dropdown Toggle object, the menu is automatically expanded.",
         "More Operations": "More Operations",
         "Disable Options": "Disable Options",
@@ -1582,7 +1658,7 @@
       },
       "appendToBodyDemo": {
         "title": "When appendToBody is used, set the expansion position and change the alignment object.",
-        "description": "Pass appendToBodyDirections Set the priority list of the expanded position. Pass alignOrigin Change Default Alignment Object",
+        "description": "Pass appendToBodyDirections Set the priority list of the expanded position. Pass alignOrigin Change Default Alignment Object.",
         "Align with regions Use bottom left (right aligned below), top left (right aligned above display)": "Align with regions Use bottom left (right aligned below), top left (right aligned above display)",
         "Align the area.": "Align the area.",
         "Drop-down button": "Drop-down button",
@@ -1597,9 +1673,12 @@
         "title": "Manual pull-down control",
         "description": "Sets the manual pull-down control by using the trigger."
       },
+      "set-is-openDemo": {
+        "title": "Control dropdown meanu with isOpen"
+      },
       "addIconDemo": {
         "title": "Adding icons",
-        "description": "test",
+        "description": "test.",
         "Newly created": "Newly created",
         "Delete": "Delete",
         "Menu 1": "Menu 1",
@@ -1609,7 +1688,7 @@
       },
       "multiLevelDemo": {
         "title": "Multi-level drop-down menu",
-        "description": "test",
+        "description": "test.",
         "Click": "Click",
         "More options": "More options",
         "Content 1": "Content 1",
@@ -1628,6 +1707,7 @@
         "turn-off-trigger-point-settings": "Close Trigger Point Settings",
         "suspension-drop-down": "Hover dropdown",
         "manually-control": "Manual pull-down control",
+        "dropdown-set-is-open": "Control Dropdown Meanu with IsOpen",
         "auto-expand-and-auto-focus": "Auto-expand and auto-focus",
         "when-using-appendtobody": "Set the expansion position processing",
         "add-icon": "Adding icons",
@@ -1639,7 +1719,7 @@
       "type": "Data entry",
       "path": "editable-select",
       "description": "You can enter or select a value from the drop-down list box.",
-      "tmw": "The input association function is added when users need to enter and select existing data at the same time.",
+      "tmw": "You can use it easily when you want to search existed data.",
       "basicDemo": {
         "title": "Basic usage",
         "description": "Set source to a data source."
@@ -1672,51 +1752,51 @@
       "name": "EditorX",
       "type": "Data entry",
       "path": "editorx",
-      "description": "Rich Text Editor",
-      "tmw": "<div>This topic describes how to edit the rich text content. </div>",
+      "description": "Rich Text Editor.",
+      "tmw": "You can use it easily when you need to edit rich text.",
       "defaultDemo": {
         "title": "Default Example",
-        "description": "Displaying the default functions of EditorX"
+        "description": "Displaying the default functions of EditorX."
       },
       "customToolbarDemo": {
         "title": "Custom Toolbar",
-        "description": "Custom toolbar + complete example"
+        "description": "Complete functions + Custom toolbar grouping + Collapse of tools that are not commonly used."
       },
       "readOnlyModeDemo": {
         "title": "Read-only Mode",
-        "description": "Read-only mode, no toolbar, no word count"
+        "description": "Read-only mode, no toolbar, no word count. You can press the Save button or Ctrl+S to change the mode to read-only. You can press the Edit button to change the mode to edit."
       },
       "expandToolbarDemo": {
         "title": "Expand Toolbar",
-        "description": "Adding a toolbar, custom triggering event, and operating an editor object"
+        "description": "Adding a toolbar, custom triggering event, and operating an editor object."
       },
       "initWithObjDemo": {
         "title": "Init With Obj",
-        "description": "Use the object format object to initialize the editor (instead of the default HTML format). The object format is more suitable for persistent storage and is recommended for storage in the background"
+        "description": "Use the object format object to initialize the editor (instead of the default HTML format). The object format is more suitable for persistent storage and is recommended for storage in the background."
       },
       "uploadDemo": {
         "title": "Image And File Upload",
-        "description": "To upload images and files to the server, you need to replace the upload interface in the example with the actual background interface"
+        "description": "To upload images and files to the server, you need to replace the upload interface in the example with the actual background interface."
       },
       "charStatisticsDemo": {
         "title": "Character Statistics",
-        "description": "Collects statistics on the number of characters, words, and HTML characters that are currently entered, and customizes the display template"
+        "description": "Collects statistics on the number of characters, words, and HTML characters that are currently entered, and customizes the display template."
       },
       "customFullScreenDemo": {
         "title": "Customizing The Full-Screen Mode",
-        "description": "The default value is immersive full-screen. You can set the value to common full-screen and customize the full-screen hierarchy"
+        "description": "The default value is immersive full-screen. You can set the value to common full-screen and customize the full-screen hierarchy."
       },
       "globalHrefDemo": {
         "title": "Global Links",
-        "description": "Global Links"
+        "description": "Global Links."
       },
       "richTextInDrawerDemo": {
         "title": "Rich Text in Drawer",
-        "description": "Using the Rich Text Editor in the Drawer "
+        "description": "Using the Rich Text Editor in the Drawer. "
       },
       "xssDemo": {
         "title": "XSS",
-        "description": "XSS"
+        "description": "XSS."
       },
       "anchorLinkValues": {
         "default-example": "Default Example",
@@ -1736,8 +1816,8 @@
       "name": "Loading",
       "type": "Feedback",
       "path": "loading",
-      "description": "A message is displayed, indicating that the command is being executed and the system needs to wait.",
-      "tmw": "When the command execution takes a long time (more than several seconds), the system displays the command execution status to the user.",
+      "description": "Tell user that some command is now being executed.",
+      "tmw": "When the command execution takes a long time (more than several seconds), use loading to tell user.",
       "basicDemo": {
         "title": "Basic Usage",
         "description": "The basic scenario where table data is loaded.",
@@ -1760,7 +1840,7 @@
       },
       "subscriptionDemo": {
         "title": "Using The Subscription Mode",
-        "description": "Using subscription to control the display of loading information",
+        "description": "Using subscription to control the display of loading information.",
         "click": "click"
       },
       "showLoadingDemo": {
@@ -1771,20 +1851,25 @@
         "LastName": "LastName",
         "UserName": "UserName"
       },
+      "fullScreenDemo": {
+        "title": "Service function",
+        "description": "Load the loading component in full screen mode or on a specified host using services."
+      },
       "anchorLinkValues": {
         "basic-usage": "Basic Usage",
         "custom-style": "Custom Style",
         "multi-promise": "Multipromise",
         "use-subscription-mode": "Using The Subscription Mode",
-        "show-loading": "Using ShowLoading"
+        "show-loading": "Using ShowLoading",
+        "full-screen": "Service function"
       }
     },
     "modal": {
       "name": "Modal",
       "type": "Feedback",
       "path": "modal",
-      "description": "A pop-up window is a modal dialog box. Only the pop-up area can be focused. Users can perform other operations only after processing the pop-up window content.",
-      "tmw": "<div>1. If a user needs to process a transaction but does not want to jump to a page to interrupt the workflow, you can use Modal to open a floating layer in the middle of the current page to carry the corresponding operation. </div> <div> 2. The pop-up window is used to interact with users. Users can enter information, read prompts, and set options in the dialog box. </div>",
+      "description": "Modal.",
+      "tmw": "<div>1. If you want to process a transaction but do not want to jump to another page to interrupt the workflow, you can use modal to open a floating layer in the middle of the current page to carry the corresponding operation. </div> <div> 2. The pop-up window is used to interact with users. Users can enter information, read prompts, and set options in the dialog box. </div>",
       "basicDemo": {
         "title": "Standard Dialog Box",
         "description": "Standard dialog boxes that can be dragged using the dialogService."
@@ -1837,11 +1922,11 @@
       "name": "Pagination",
       "type": "Navigation",
       "path": "pagination",
-      "description": "The long list is separated by page, and only one page is loaded at a time.",
-      "tmw": "When loading/rendering all the data takes a long time, you can switch between pages to browse the data.",
+      "description": "Pagination.",
+      "tmw": "When loading/rendering all the data takes a long time, you can use pagination to split the data.",
       "basicDemo": {
         "title": "Basic Usage",
-        "description": "test",
+        "description": "test.",
         "Standard Size": "Standard Size",
         "Medium size": "Medium size",
         "Large size": "Large size",
@@ -1872,7 +1957,7 @@
       },
       "additionalDemo": {
         "title": "Special Circumstances",
-        "description": "Pager display in special scenarios",
+        "description": "Pager display in special scenarios.",
         "Set total to 0.": "Set total to 0.",
         "Set total to 5.": "Set total to 5.",
         "Set total to 15.": "Set total to 15."
@@ -1895,11 +1980,11 @@
       },
       "typeDemo": {
         "title": "Multiple types",
-        "description": "default'|'primary'|'success' |'danger' |'warning' |'info';"
+        "description": "There are six panels like default, primary, success, danger, warning, and info."
       },
       "conditionChangeDemo": {
         "title": "Prevent Collapse Based on Conditions",
-        "description": "When a panel is expanded, if you click Block Collapse, the panel cannot be collapsed. When the panel is folded, operations are not affected.",
+        "description": "When a panel is expanded, if you click folding block button, the panel cannot be collapsed. When the panel is folded, operations are not affected.",
         "Prevent Folding": "Prevent Folding"
       },
       "anchorLinkValues": {
@@ -1912,14 +1997,14 @@
       "name": "Popover",
       "type": "Feedback",
       "path": "popover",
-      "description": "Simple text prompt box. Popover is used to notify users of non-critical problems or to indicate that a control is in a special situation.",
-      "tmw": "When you click a control, a message is displayed. When you click a blank area, the message disappears. The bubble floating layer does not carry complex text or operations.",
+      "description": "Simple text prompt box.",
+      "tmw": "Used to notify users of non-critical problems or to indicate that a control is in a special situation.",
       "basicDemo": {
         "title": "Basic Usage"
       },
       "manualDemo": {
         "title": "Manual Control Display",
-        "description": "Displaying the pop-up dialog box through the visible interface to verify the form",
+        "description": "Displaying the pop-up dialog box through the visible interface to verify the form. To use the visible control function, set controlled to the default value false.",
         "nameErrMsg": "The value must contain at least four characters."
       },
       "customizeDemo": {
@@ -1935,8 +2020,8 @@
         "description": "ScrollElement configuration. The default value is window. This parameter is optional by default. It is required only when the page scrolling is not in the window."
       },
       "hoverDelayTimeDemo": {
-        "title": "Mouse Out Delay",
-        "description": "hoverDelayTime setting"
+        "title": "Delay Trigger",
+        "description": "Only when the trigger type is hover. This event is triggered only when the mouse pointer is moved in for more than [mouseEnterDelay] milliseconds. The default value is 150 ms to prevent flashing caused by unintentional strokes. The toolTip component is hidden only after [mouseLeaveDelay] milliseconds after the cursor is moved out. The default value is 100 milliseconds."
       },
       "positionDemo": {
         "title": "Position",
@@ -1947,7 +2032,7 @@
         "manual-control-display": "Manual Control Display",
         "custom-prompt-content": "Custom Tips",
         "parent-container-settings": "Parent Container Settings",
-        "hover-delay-time": "Mouse Out Delay",
+        "hover-delay-time": "Delay Trigger",
         "position": "Position"
       }
     },
@@ -1955,8 +2040,8 @@
       "name": "Progress",
       "type": "Data display",
       "path": "progress",
-      "description": "The progress bar displays the current operation progress.",
-      "tmw": "<div>1. If the operation takes a long time, the system displays the operation progress. </div> <div> 2. It takes a long time to interrupt the current interface or background operation. </div> <div>3. To display the percentage of completed operations or the number of completed steps/total steps, run the following command: </div>",
+      "description": "Progress bar.",
+      "tmw": "<div>1. When the operation takes a long time. </div> <div> 2. When an operation takes a long time to interrupt the current interface or background operation. </div> <div>3. To display the percentage of completed operations or the number of completed steps/total steps.</div>",
       "basicDemo": {
         "title": "Basic Usage",
         "description": "Basic progress and text configuration."
@@ -1974,8 +2059,8 @@
       "name": "Quadrant Diagram",
       "type": "Evolving",
       "path": "quadrant-diagram",
-      "description": "Quadrant chart, which divides areas and sorts transactions based on requirements.",
-      "tmw": "Priority that can be used to manage transactions.",
+      "description": "Quadrant.",
+      "tmw": "To manage the priority of transactions.",
       "basicDemo": {
         "title": "Basic Usage"
       },
@@ -1992,21 +2077,21 @@
       "name": "Radio",
       "type": "Data entry",
       "path": "radio",
-      "description": "Radio option button.",
-      "tmw": "If you want to select a single option from a dataset and view all options side by side, the option button is recommended. The number of options ranges from 2 to 7.",
+      "description": "Radio button.",
+      "tmw": "The user selects a single option from a dataset and can view all options.",
       "basicDemo": {
-        "title": "Independent Single Options"
+        "title": "Independent Radios"
       },
       "conditionChangeDemo": {
-        "title": "Condition Switching.",
+        "title": "Switch with Condition",
         "description": "The second item cannot be redirected based on the condition."
       },
       "conditionRadioGroupDemo": {
-        "title": "Conditional Switching of Radio Groups.",
+        "title": "Switch With Condition in A Radio Group",
         "description": "The second radio group is not allowed to jump."
       },
       "disabledDemo": {
-        "title": "Disabled"
+        "title": "Disabled Radio"
       },
       "horizontalDemo": {
         "title": "Horizontal Arrangement"
@@ -2015,25 +2100,25 @@
         "title": "Vertical Arrangement"
       },
       "customDemo": {
-        "title": "Custom Single Option",
+        "title": "Custom Radios",
         "description": "The array source can be a common array or an object array."
       },
       "anchorLinkValues": {
-        "basic-usage": "Independent Single Options",
-        "condition-change": "Condition Switching",
-        "condition-radio-group": "Conditional Switching of Radio Groups",
-        "disabled": "Disabled",
+        "basic-usage": "Independent Radios",
+        "condition-change": "Switch with Condition",
+        "condition-radio-group": "Switch With Condition in A Radio Group",
+        "disabled": "Disabled Radio",
         "horizontal": "Horizontal Arrangement",
-        "vertical": "vertical Arrangement",
-        "custom": "Custom Single Option"
+        "vertical": "Vertical Arrangement",
+        "custom": "Custom Radios"
       }
     },
     "rate": {
       "name": "Rate",
       "type": "Data display",
       "path": "rate",
-      "description": "Level Evaluation",
-      "tmw": "A user can rate a product in read-only or dynamic rating mode.",
+      "description": "Rate.",
+      "tmw": "When you expect users to rate a product.",
       "basicDemo": {
         "title": "Dynamic Mode",
         "currentStar": "Currently 2 stars"
@@ -2076,17 +2161,25 @@
       "leftIconDemo": {
         "title": "Left Search Icon"
       },
+      "autoFocusDemo": {
+        "title": "Auto Focus"
+      },
+      "no-borderDemo": {
+        "title": "No Border"
+      },
       "anchorLinkValues": {
         "basic-usage": "Basic Usage",
         "bidirectional-binding": "Two-way Binding",
-        "icon-left": "Left Search Icon"
+        "icon-left": "Left Search Icon",
+        "auto-focus": "Auto Focus",
+        "search-no-border": "No Border"
       }
     },
     "select": {
       "name": "Select",
       "type": "Data entry",
       "path": "select",
-      "description": "Select a value from the drop-down list box.",
+      "description": "Drop-down list box.",
       "tmw": "The user can select one or more options from multiple options. Only options provided by the system can be selected and searched from the drop-down list box.",
       "SelectBasicDemo": {
         "title": "Basic Usage",
@@ -2109,7 +2202,7 @@
       },
       "SelectAllDemo": {
         "title": "Select All",
-        "description": "Select multiple options from the drop-down list box. isSelectAll Enable Select All",
+        "description": "Select multiple options from the drop-down list box. isSelectAll Enable Select All.",
         "Current Select": "Current Select",
         "Option": "Option"
       },
@@ -2125,19 +2218,19 @@
       },
       "AllowClearValueDemo": {
         "title": "Allow clearing values",
-        "description": "test",
+        "description": "test.",
         "test": "Option"
       },
       "CustomAreaDemo": {
         "title": "Custom Area",
-        "description": "Use customViewTemplate Defining a Custom Area",
+        "description": "Use customViewTemplate Defining a Custom Area.",
         "Custom Area": "Custom Area",
         "Selected xx items": "Selected xx items",
         "Option": "Option"
       },
       "CustomAreaDirectionDemo": {
         "title": "Customizing Area Orientation and Selecting",
-        "description": "test",
+        "description": "test.",
         "Customizing Area Orientation and Selecting": "Customizing Area Orientation and Selecting",
         "Customize the region and change the width alignment by appendToBody.": "Customize the region and change the width alignment by appendToBody.",
         "Recent Selections": "Recent Selections",
@@ -2172,7 +2265,7 @@
       },
       "ObjectFilterDemo": {
         "title": "Use object",
-        "description": "Using an array of objects, through filterKey Configuration Object Display Field",
+        "description": "Using an array of objects, through filterKey Configuration Object Display Field.",
         "Current Select": "Current Select",
         "Option": "Option",
         "Search": "Search"
@@ -2189,14 +2282,14 @@
       },
       "LoadingDemo": {
         "title": "Asynchronous loading: loading",
-        "description": "test",
+        "description": "test.",
         "Lazy loading: Change the options mode.": "Lazy loading: Change the options mode.",
         "Lazy loading: The searchFn mode is used.": "Lazy loading: The searchFn mode is used.",
         "Option": "Option"
       },
       "UserLimitSelectedNumberDemo": {
         "title": "User scenario: The number of selected users is limited.",
-        "description": "test",
+        "description": "test.",
         "maxselectnumber:2,disabled:1": "max select number:2, disabled:1",
         "Option": "Option"
       },
@@ -2208,7 +2301,7 @@
       },
       "UserSearchNLazyLoadDemo": {
         "title": "User scenario: lazy loading of custom search",
-        "description": "test",
+        "description": "test.",
         "Search and lazy loading are used together.": "Search and lazy loading are used together.",
         "Current Select": "Current Select",
         "This is a longer option for testing.": "This is a longer option for testing.",
@@ -2217,7 +2310,7 @@
       },
       "UserMailSearchDemo": {
         "title": "User scenario: Combine customized search and template Email search",
-        "description": "test",
+        "description": "test.",
         "Search by name or email address": "Search by name or email address",
         "Name:": "Name:",
         "E-mail address:": "E-mail address:",
@@ -2225,7 +2318,7 @@
       },
       "ModelValueDemo": {
         "title": "ngModel Value Processing",
-        "description": "test",
+        "description": "test.",
         "Current Select": "Current Select",
         "Option": "Option"
       },
@@ -2254,8 +2347,8 @@
       "name": "Cascader",
       "type": "Evolving",
       "path": "cascader",
-      "description": "Drop-down cascading menu.",
-      "tmw": "Drop-down cascading menu.",
+      "description": "Cascading menu.",
+      "tmw": "<div>1. When you want to select data from a set of associated data, such as province/city, company level, and transaction classification.</div> <div>2. When select data from a large data set, you can separate the data by multi-level classification.</div>",
       "basicDemo": {
         "hoverMode": "Hover expansion mode",
         "select": "Please select",
@@ -2308,7 +2401,7 @@
       "name": "Status",
       "type": "General",
       "path": "status",
-      "description": "The status conveys the result of interaction between components or interactive elements on the page.",
+      "description": "Pass interaction results.",
       "tmw": "Indicates the execution result of a task.",
       "basicDemo": {
         "title": "Basic Usage",
@@ -2328,7 +2421,7 @@
       "name": "Sticky",
       "type": "General",
       "path": "sticky",
-      "description": "The page content is fixed in the visible area.",
+      "description": "Sticky.",
       "tmw": "When the user scrolls the screen, the content of an area is visible in the paragraph or the viewable area of the browser.",
       "basicDemo": {
         "title": "Basic Usage",
@@ -2349,7 +2442,8 @@
         "container": "The container command can be used to switch the containers that determine the scrolling status."
       },
       "scrollTargetDemo": {
-        "title": "Replace rolling container",
+        "title": "Replace Rolling Container",
+        "description": "You can change the scrolling container by setting scrollTarget.",
         "Global Text": "Global text. Change the container to the container where the scroll bar is located. When displayed, you can always touch the top of the screen.",
         "Global Button": "Global Button",
         "base-info": "Basic Information",
@@ -2368,37 +2462,37 @@
       },
       "anchorLinkValues": {
         "basic-usage": "Basic Usage",
-        "scroll-target": "Replace rolling container"
+        "scroll-target": "Replace Rolling Container"
       }
     },
     "tabs": {
       "name": "Tabs",
       "type": "Navigation",
       "path": "tabs",
-      "description": "Tab switch component.",
-      "tmw": "Subscribers need to store and display large pieces of content in areas at the same level to ensure that the GUI is neat.",
+      "description": "Tabs switch.",
+      "tmw": "When users want to collect and display large pieces of content in areas at the same level to keep the GUI neat.",
       "basicDemo": {
         "title": "Basic Usage",
-        "description": "test",
+        "description": "test.",
         "Here's what Tab1 says.": "Here's what Tab1 says.",
         "This is Tab2.": "This is Tab2.",
         "This is Tab3.": "This is Tab3."
       },
       "withoutContentDemo": {
         "title": "No Content",
-        "description": "test",
+        "description": "test.",
         "activeID": "activeID"
       },
       "customDemo": {
         "title": "Customizing a Template",
-        "description": "test",
+        "description": "test.",
         "Here's what Tab1 says.": "Here's what Tab1 says.",
         "This is Tab2.": "This is Tab2.",
         "This is Tab3.": "This is Tab3."
       },
       "configDemo": {
         "title": "Configuration Type and Arrangement",
-        "description": "test",
+        "description": "test.",
         "Here's what Tab1 says.": "Here's what Tab1 says.",
         "This is Tab2.": "This is Tab2.",
         "This is Tab3.": "This is Tab3.",
@@ -2408,7 +2502,7 @@
       },
       "beforeChangeDemo": {
         "title": "Intercept Tab Switching",
-        "description": "Using beforeChange to intercept tab switchover",
+        "description": "Using beforeChange to intercept tab switchover.",
         "Here's what Tab1 says.": "Here's what Tab1 says.",
         "This is Tab2.": "This is Tab2.",
         "This is Tab3.": "This is Tab3."
@@ -2431,7 +2525,7 @@
       "name": "Tags",
       "type": "Data display",
       "path": "tags",
-      "description": "Tag display gadget.",
+      "description": "Tags.",
       "tmw": "When multiple tags need to be displayed,",
       "customDemo": {
         "title": "Single Tag",
@@ -2451,7 +2545,7 @@
       "type": "Data entry",
       "path": "tags-input",
       "description": "Enter multiple tags.",
-      "tmw": "You need to enter multiple tags.",
+      "tmw": "When you need to enter multiple tags.",
       "basicDemo": {
         "title": "Basic Usage"
       },
@@ -2471,17 +2565,20 @@
       "name": "TimeAxis",
       "type": "Data display",
       "path": "time-axis",
-      "description": "Timeline display component",
-      "tmw": "The time progress and event status at each time point need to be displayed to users.",
+      "description": "Display timeline.",
+      "tmw": "When you want to show what shoud be done in what time point.",
       "allStatesDemo": {
         "timeLeft": "The time point is on the left.",
         "timeBottom": "The time point is at the bottom.",
-        "horizontal": "Horizontal arrangement",
         "title": "Basic Usage",
-        "description": "Use position to configure the time point position, and use direction to configure the direction of the time line."
+        "description": "Use position to configure the time point position."
+      },
+      "directionDemo": {
+        "title": "Setting direction parameters",
+        "description": "Use direction to configure the direction of the time line."
       },
       "templateDemo": {
-        "description": "Description",
+        "description": "Description.",
         "title": "Customizing Content Using a Template"
       },
       "htmlContentDemo": {
@@ -2489,6 +2586,7 @@
       },
       "anchorLinkValues": {
         "basic-usage": "Basic Usage",
+        "direction": "Setting direction parameters",
         "content-with-html": "Content Use HTML",
         "content-with-template": "Customizing Content Using a Template"
       }
@@ -2497,8 +2595,8 @@
       "name": "Toast",
       "type": "Feedback",
       "path": "toast",
-      "description": "Global information notification component.",
-      "tmw": "This command is used to display global prompt information to users. The prompt information disappears after several seconds.",
+      "description": "Information notification.",
+      "tmw": "This is used to display a prompt information to users and will disappear after several seconds.",
       "basicDemo": {
         "title": "Basic Usage",
         "description": "The icon is not displayed in common mode."
@@ -2508,34 +2606,67 @@
         "description": "If the timeout interval is set and no title is set, the title and close button are not displayed."
       },
       "singleDemo": {
-        "title": "Each message uses a separate timeout interval.",
+        "title": "Each message uses a separate timeout interval",
         "description": "When the timeout mode is set to single, each message uses its own lifetime as the timeout interval. If the timeout interval is not set, the system determines the timeout interval based on severity. If the timeout interval is not set, the default timeout interval is 5000 ms."
       },
       "anchorLinkValues": {
         "basic-usage": "Basic Usage",
         "life": "Timeout interval",
-        "single": "Each message uses a separate timeout interval."
+        "single": "Each message uses a separate timeout interval"
       }
     },
     "tooltip": {
       "name": "Tooltip",
       "type": "Feedback",
       "path": "tooltip",
-      "description": "Text notification component.",
-      "tmw": "When the user moves the cursor to a text, the user can use this function to prompt the user.",
+      "description": "Text notification.",
+      "tmw": "When users move the cursor to a text, they can see what should do next.",
       "basicDemo": {
         "title": "Basic Usage"
       },
+      "delayDemo": {
+        "title": "Delay Trigger",
+        "description": "This event is triggered only when the mouse pointer is moved in for more than [mouseEnterDelay] milliseconds. The default value is 150 ms to prevent flashing caused by unintentional strokes. The toolTip component is hidden only after [mouseLeaveDelay] milliseconds after the cursor is moved out. The default value is 100 milliseconds."
+      },
       "anchorLinkValues": {
-        "basic-usage": "Basic Usage"
+        "basic-usage": "Basic Usage",
+        "delay-trigger": "Delay Trigger"
+      }
+    },
+    "read-tip": {
+      "name": "ReadTip reading tips",
+      "type": "Feedback",
+      "path": "read-tip",
+      "description": "Reading notification component.",
+      "tmw": "When you need to prompt for specific content in the html document.",
+      "basicDemo": {
+        "title": "Basic Usage",
+        "description": "Set selector to select the element to be displayed in the readtip, and transfer title and content to set the content to be displayed."
+      },
+      "multiDemo": {
+        "title": "Include Multiple Readtip",
+        "description": "Set the readtip display mode for different elements when multiple rules are transferred."
+      },
+      "templateDemo": {
+        "title": "Display Content with Template",
+        "description": "You can specify the content to be displayed by importing template. When importing template, you do not need to specify title and content."
+      },
+      "asyncDemo": {
+        "title": "Get Data Asynchronous"
+      },
+      "anchorLinkValues": {
+        "basic-usage": "Basic Usage",
+        "multi-usage": "Include Multiple Readtip",
+        "template-usage": "Display Content with Template",
+        "async-usage": "Get Data Asynchronous"
       }
     },
     "toggle": {
       "name": "Toggle",
       "type": "Data entry",
       "path": "toggle",
-      "description": "Switchover component",
-      "tmw": "When the two states need to be switched back and forth, for example, enabled/disabled.",
+      "description": "Toggle.",
+      "tmw": "When there are two states need to be switched, for example, enabled/disabled.",
       "basicDemo": {
         "title": "Basic Usage",
         "basic": "Basic Style",
@@ -2546,19 +2677,31 @@
         "sure": "ok",
         "cancel": "cancels"
       },
+      "twoBindingDemo": {
+        "title": "Two-way Binding"
+      },
+      "customDemo": {
+        "title": "Custom Style"
+      },
+      "callbackDemo": {
+        "title": "Callback Event"
+      },
       "anchorLinkValues": {
-        "basic-usage": "Basic Usage"
+        "basic-usage": "Basic Usage",
+        "two-binding": "Two-way Binding",
+        "callback": "Callback Event",
+        "custom": "Custom Style"
       }
     },
     "tree": {
       "name": "Tree",
       "type": "Data display",
       "path": "tree",
-      "description": "A way of representing nested structures.",
-      "tmw": "Folders, organizational structures, taxonomy, countries, regions, and so on, most of the structures of everything in the world are tree-shaped. The tree control can display the hierarchical relationship completely and provide interactive functions such as expanding, folding, and selecting.",
+      "description": "A kind of structure.",
+      "tmw": "Folders, organizational structures, taxonomy, countries, regions, and so on, most of the structures in the world are tree-shaped. The tree can display the hierarchical relationship completely and provide interactive functions such as expanding, folding, and selecting.",
       "basicDemo": {
         "title": "Basic Usage",
-        "description": "The basic usage of tree component",
+        "description": "The basic usage of tree component.",
         "Parent node": "Parent node",
         "unfold": "unfold",
         "Leaf node": "Leaf node",
@@ -2576,9 +2719,13 @@
         "Dynamic loading": "Dynamic loading",
         "folding": "folding"
       },
+      "treeFactoryDemo": {
+        "title": "Common treeFactory functions",
+        "description": ""
+      },
       "checkableDemo": {
         "title": "Checkable Tree",
-        "description": "Tree that can be checked",
+        "description": "Tree that can be checked.",
         "Subnode": "Subnode",
         "Parent node": "Parent node"
       },
@@ -2602,7 +2749,7 @@
       },
       "customizeDemo": {
         "title": "Custom Icon",
-        "description": "Customizing operation buttons and node icons",
+        "description": "Customizing operation buttons and node icons.",
         "Parent node": "Parent node",
         "Subnode": "Subnode",
         "Status": "Status"
@@ -2648,6 +2795,10 @@
         "Leaf node": "Leaf node",
         "unfold": "unfold"
       },
+      "withoutAnimationDemo": {
+        "title": "Without Animation",
+        "description": "Indicates whether to display animations for the showAnimation attribute."
+      },
       "anchorLinkValues": {
         "basic-usage": "Basic Usage",
         "merge-node": "Merging Nodes",
@@ -2658,16 +2809,18 @@
         "search-filtering": "Search Filtering",
         "custom-icon": "Custom Icon",
         "drag-and-drop-tree": "Dragable tree",
+        "tree-factory": "Common treeFactory functions",
         "check-control-tree": "Controlling the Parent-Child Check Relationship",
-        "virtual-scroll": "Operation tree of large data volume"
+        "virtual-scroll": "Operation tree of large data volume",
+        "without-animation": "Without Animation"
       }
     },
     "typography": {
       "name": "Typography",
       "type": "Evolving",
       "path": "typography",
-      "description": "Text type setting.",
-      "tmw": "Set the title, paragraph, and help text.",
+      "description": "Text formatting.",
+      "tmw": "When you want to format the title, paragraph, help or anything else.",
       "titleDemo": {
         "title": "Title Usage",
         "description": "Defining the title style through the d-title tag."
@@ -2690,11 +2843,11 @@
       "name": "Upload",
       "type": "Data entry",
       "path": "upload",
-      "description": "File upload component.",
-      "tmw": "This section describes how to upload files to a backend server.",
+      "description": "File upload.",
+      "tmw": "When you want to upload files to a backend server.",
       "basicDemo": {
         "title": "Basic Usage",
-        "description": "Single file upload, drag file upload, and automatic upload.",
+        "description": "Single file upload, drag file upload, ngModel and disabled.",
         "singleText": "Single file",
         "clickToUpload": "Click Upload.",
         "dragable": "Dragging a single file to upload",
@@ -2704,7 +2857,7 @@
       },
       "multiDemo": {
         "title": "Upload Multiple Files",
-        "description": "Multiple files can be uploaded by dragging files.",
+        "description": "Multiple files upload, drag file upload, customize and disabled.",
         "multiText": "Uploading multiple files",
         "dragable": "Multiple files can be dragged and uploaded.",
         "multiList": "Displaying multiple files in a list",
@@ -2716,7 +2869,7 @@
       },
       "customizeDemo": {
         "title": "Customize",
-        "description": "Click to customize the upload button.  Use preloadFilesRef to set selectedFilesList Template, and use uploadedFilesRef to  Set the template of the uploadedFilesList"
+        "description": "Click to customize the upload button.  Use preloadFilesRef to set selectedFilesList Template, and use uploadedFilesRef to  Set the template of the uploadedFilesList."
       },
       "dynamicDemo": {
         "title": "Dynamic Upload Parameters",
@@ -2740,50 +2893,50 @@
       "name": "InputNumber",
       "type": "Data entry",
       "path": "input-number",
-      "description": "Enter a value in the range using the mouse or keyboard.",
-      "tmw": "This parameter is used to obtain the standard value.",
+      "description": "Enter a number.",
+      "tmw": "Used to obtain the standard value.",
       "basicDemo": {
         "title": "Basic Usage",
         "description": "Transfer the value of size. The value can be customized."
       },
       "disabledDemo": {
-        "title": "Forbidden state",
+        "title": "Disabled",
         "description": "When disabled is set to true, user input is not allowed."
       },
       "emptyDemo": {
-        "title": "Null allowed",
+        "title": "Allow Null",
         "description": "When allowEmpty is set to true, the value of the input box can be empty. If the value is empty, null is returned. The input data can be undefined or null."
       },
       "placeholderAndMaxLengthDemo": {
-        "title": "placeholder and maxLength",
+        "title": "Set Placeholder and Maxlength",
         "description": "The placeholder prompt can be transferred or maxLength can be used to limit the maximum input length."
       },
       "regDemo": {
-        "title": "regular restriction",
+        "title": "Using Regular Expression",
         "description": "Regular or regular character strings are allowed to be input. The input regular character string is matched first. If no regular character string is input, the input regular character string is not restricted."
       },
       "decimalLimitDemo": {
-        "title": "Limit decimals",
+        "title": "Avoid Decimal",
         "Limit Decimal": "Limit Decimal"
       },
       "anchorLinkValues": {
         "number-basic": "Basic Usage",
-        "number-disabled": "Forbidden state",
-        "number-empty": "Null allowed",
-        "number-placeholder-maxlength": "placeholder and maxLength",
-        "number-reg": "regular restriction",
-        "decimal-limit": "Limit decimals"
+        "number-disabled": "Disabled",
+        "number-empty": "Allow Null",
+        "number-placeholder-maxlength": "Set Placeholder and Maxlength",
+        "number-reg": "Using Regular Expression",
+        "decimal-limit": "Avoid Decimal"
       }
     },
     "tree-select": {
       "name": "TreeSelect",
       "type": "Data entry",
       "path": "tree-select",
-      "description": "Tree selection box",
+      "description": "Tree-shaped selection box.",
       "tmw": "Folders, organizational structures, taxonomy, countries, regions, and so on, most of the structures of everything in the world are tree-shaped. The tree control can display the hierarchical relationship completely and provide interactive functions such as expanding, folding, and selecting.",
       "basicDemo": {
         "title": "Basic Usage",
-        "description": "test",
+        "description": "test.",
         "Standard: Single Select": "Standard: Single Select",
         "Standard: Multiple Select": "Standard: Multiple Select",
         "Custom Width: Single Select": "Custom Width: Single Select",
@@ -2791,7 +2944,7 @@
       },
       "labelizationDemo": {
         "title": "Tag-based configuration",
-        "description": "test",
+        "description": "test.",
         "Standard: Single Select": "Standard: Single Select",
         "Standard: Multiple Select": "Standard: Multiple Select",
         "AllowClear:SingleSelect(allowUnselectparametermustbetrueandenablelabelizationDemomustbefalse, whichisthedefaultvalue)": "AllowClear:SingleSelect(allowUnselectparametermustbetrueandenablelabelizationDemomustbefalse, whichisthedefaultvalue)",
@@ -2799,24 +2952,24 @@
       },
       "leafOnlyDemo": {
         "title": "Only leaf nodes can be selected.",
-        "description": "test",
+        "description": "test.",
         "Leaf Only: Single Select": "Leaf Only: Single Select",
         "Leaf Only: Multiple Select": "Leaf Only: Multiple Select"
       },
       "hooksDemo": {
         "title": "Hook called upon completion of initialization",
-        "description": "test",
+        "description": "test.",
         "Open on init: Single Select": "Open on init: Single Select"
       },
       "searchableDemo": {
         "title": "Easy search tree",
-        "description": "test",
+        "description": "test.",
         "Standard: Single Select": "Standard: Single Select",
         "Standard: Multiple Select": "Standard: Multiple Select"
       },
       "appendToDemo": {
         "title": "Append To Element Capability",
-        "description": "test",
+        "description": "test.",
         "Standard: Single Select Append To Body": "Standard: Single Select Append To Body",
         "Standard: Multiple Select Append To Body": "Standard: Multiple Select Append To Body",
         "Custom Width: Single Select Append To Body": "Custom Width: Single Select Append To Body",
@@ -2824,21 +2977,28 @@
       },
       "customIconDemo": {
         "title": "Customizing icons",
-        "description": "test",
+        "description": "test.",
         "Standard: iconTemplatePosition": "Standard: iconTemplatePosition",
         "Standard: iconTemplateInput": "Standard: iconTemplateInput"
       },
+      "customTemplateDemo": {
+        "title": "Custom Area",
+        "description": "Use customViewTemplate Defining a Custom Area."
+      },
       "keysDemo": {
         "title": "Custom key",
-        "description": "test",
+        "description": "test.",
         "Standard: treeNodeIdKey": "Standard: treeNodeIdKey",
         "Standard: treeNodeChildrenKey": "Standard: treeNodeChildrenKey",
         "Standard: treeNodeTitleKey": "Standard: treeNodeTitleKey"
       },
       "iconParentDemo": {
         "title": "Customizing the node expansion and closing icon",
-        "description": "test",
+        "description": "test.",
         "Standard: iconParent": "Standard: iconParent"
+      },
+      "virtualScrollDemo": {
+        "title": "Virtual scroll"
       },
       "anchorLinkValues": {
         "basic-usage": "Basic Usage",
@@ -2849,15 +3009,17 @@
         "append-to-element": "Append To Element Capability",
         "custom-icon": "Customizing icons",
         "keys": "Custom key",
-        "icon-parent": "Expand and close the icon."
+        "custom-template": "Custom Area",
+        "icon-parent": "Expand and close the icon.",
+        "virtual-scroll": "Virtual scroll"
       }
     },
     "slider": {
       "name": "Slider",
       "type": "Data entry",
       "path": "slider",
-      "description": "Slide the input bar to display the current value and the range of options.",
-      "tmw": "This parameter is used when you need to select a value range.",
+      "description": "Slider.",
+      "tmw": "Used when you need to select a value from a specific range.",
       "basicDemo": {
         "title": "Basic Usage",
         "ngModel": "Bidirectional binding",
@@ -2881,8 +3043,8 @@
       "name": "Splitter",
       "type": "layouts",
       "path": "splitter",
-      "description": "Splitter splits the page into multiple sections and allows users to control the page layout.",
-      "tmw": "Select this option when you need to dynamically adjust the size of different page layout areas.",
+      "description": "Split page.",
+      "tmw": "When you want to dynamically adjust the size of different page layout areas.",
       "basicDemo": {
         "title": "Basic Usage",
         "leftPane": "Left panel",
@@ -2911,7 +3073,7 @@
         "bottomPaneContent2": "Height adaptation"
       },
       "directionDemo": {
-        "title": "Specifies the folding direction.",
+        "title": "Specifies the folding direction",
         "leftPane": "Left panel",
         "leftPaneContent": "Content area on the left. The width is 30% and the minimum width is 20%.",
         "midPane": "Middle panel",
@@ -2944,8 +3106,8 @@
       "name": "Layout",
       "type": "layout",
       "path": "layout",
-      "description": "Multiple layout types are supported to help users layout the entire page.",
-      "tmw": "",
+      "description": "Page Layout.",
+      "tmw": "When user want to use some existed layout.",
       "basicDemo": {
         "title": "Basic Usage"
       },
@@ -2967,8 +3129,8 @@
       "name": "Gantt",
       "type": "Evolving",
       "path": "gantt",
-      "description": "",
-      "tmw": "",
+      "description": "Gantt.",
+      "tmw": "When user want to use a bar-shaped chart to display the internal relationship of project, progress, and other time-related system progress over time.",
       "basicDemo": {
         "title": "Basic Usage",
         "description1": "The d-gantt-scale container functions as the location parent element of the time axis. The position or table, td, th, and body elements must be set.",
@@ -2988,22 +3150,26 @@
       "name": "Text-input",
       "type": "Data entry",
       "path": "text-input",
-      "description": "A text field is an area where users can enter and edit text. It allows the user to enter text in the interface, often in lists and dialog boxes.",
-      "tmw": "You need to manually enter text.",
+      "description": "Text input box.",
+      "tmw": "When you want to manually enter text.",
       "basicDemo": {
         "title": "Basic Usage",
         "placeholder": "Please enter the content."
       },
+      "passwordVisibleDemo": {
+        "title": "Password Input"
+      },
       "anchorLinkValues": {
-        "basic-usage": "Basic Usage"
+        "basic-usage": "Basic Usage",
+        "password-input": "Password Input"
       }
     },
     "textarea": {
       "name": "Textarea",
       "type": "Data entry",
       "path": "textarea",
-      "description": "A text field is an area where users can enter and edit text. It allows the user to enter text in the interface, often in lists and dialog boxes.",
-      "tmw": "You need to manually enter text.",
+      "description": "A text area.",
+      "tmw": "It is used when a large number of text need to be entered.",
       "basicDemo": {
         "title": "Basic Usage",
         "placeholder": "Please enter the content."
@@ -3021,8 +3187,8 @@
       "name": "StepsGuide",
       "type": "Navigation",
       "path": "steps-guide",
-      "description": "Bind service logic elements to guide users to understand service usage logic by pop-ups in sequence.",
-      "tmw": "New features are introduced or complex service logic needs to guide users.",
+      "description": "Guide user to understand logic.",
+      "tmw": "When there are some new features and is required to tell user how to use it.",
       "basicDemo": {
         "title": "Basic Usage",
         "description": "Sets the sequence of displaying a group of operation instructions.",
@@ -3031,19 +3197,43 @@
       },
       "customDemo": {
         "title": "Custom",
-        "description": "Customizing the Position and Elements of the Operation Guide"
+        "description": "Customizing the Position and Elements of the Operation Guide."
       },
       "anchorLinkValues": {
         "basic-usage": "Basic Usage",
         "custom": "Custom"
       }
     },
+    "polyfill": {
+      "name": "Polyfills",
+      "type": "Extended service",
+      "path": "polyfill",
+      "description": "Polyfill.",
+      "tmw": "To solve the method that is not supported by the browser of an earlier version.",
+      "basicDemo": {
+        "title": "Usage",
+        "description": "Currently, there are few implementation methods and are mainly used by the rich text component. Therefore, the putty script file is stored in the rich text module. When using the devcloud project or the project created by the Angular CLI, you can insert the following information into src/polyfills.ts: import' ng-devui/add-ons/editorx/polyfill '; The putty script is only a piece of JS code that is independently executed. You can also insert a static resource into the page for use.",
+        "name": "Polyfills",
+        "license": "License",
+        "size": "Size",
+        "browser": "Browser",
+        "des": "Description",
+        "remove": "Removes an object from the DOM tree to which it belongs",
+        "matches": "Check whether the specified selector string is matched. Browsers of earlier versions implement the MatchesSelector method with their own prefix. For example, msMatchesSelector",
+        "closest": "The ancestor element that matches a particular selector and is closest to the current element(or the current element itself)",
+        "event": "Events that occur in the DOM",
+        "forEach": "Method of sequentially traversing the collection of nodes"
+      },
+      "anchorLinkValues": {
+        "basic-usage": "Usage"
+      }
+    },
     "time-picker": {
       "name": "TimePicker",
       "type": "Evolving",
       "path": "time-picker",
-      "description": "Control for entering or selecting a time.",
-      "tmw": "If you need to enter a time, you can click the standard input box and select a time from the displayed panel.",
+      "description": "Enter or select a time.",
+      "tmw": "If you need to enter a time, click the standard input box and select a time from the displayed panel.",
       "basicDemo": {
         "basic": "Basic Usage",
         "defaultValue": "Sets the initial value. This function is enabled by default.",
@@ -3070,13 +3260,17 @@
       "name": "RelativeTime",
       "type": "Data display",
       "path": "relative-time",
-      "description": "",
-      "tmw": "",
+      "description": "Show relative time.",
+      "tmw": "When you want to display the relative time based on the current time.",
       "basicDemo": {
         "beforeTrans": "Before Conversion",
         "afterTrans": "After Conversion",
         "title": "Conversion Example",
         "description": "Introduce the RelativeTimeModule and use the dRelativeTime pipe to convert the date."
+      },
+      "customDemo": {
+        "title": "customizing comparison time demo",
+        "description": "Do not compare the current time with the current time. Customize the comparison time. For example, compare the comparison time with 2015-05-20 12:00:00."
       }
     }
   }

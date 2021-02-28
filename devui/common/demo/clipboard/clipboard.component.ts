@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./clipboard.component.scss']
 })
 export class ClipboardDemoComponent {
-  value = '这里是被复制的内容';
+  value = 'Copied Content';
   result: any;
 
   copyResultEvent(event) {

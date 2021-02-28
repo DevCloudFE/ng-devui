@@ -1,8 +1,8 @@
 <div>
-  <h4>单选</h4>
+  <h4>single select</h4>
   <d-cascader
     [options]="options"
-    [placeholder]="'请选择'"
+    [placeholder]="'please select'"
     [(ngModel)]="value1"
     (ngModelChange)="onChanges($event)"
     [trigger]="'click'"
@@ -13,10 +13,10 @@
   >
   </d-cascader>
 
-  <h4>多选父子独立</h4>
+  <h4>multiple mode: no checkboxRelation</h4>
   <d-cascader
     [options]="options"
-    [placeholder]="'请选择'"
+    [placeholder]="'please select'"
     [(ngModel)]="value2"
     (ngModelChange)="onChanges($event)"
     [trigger]="'click'"
@@ -29,10 +29,10 @@
   >
   </d-cascader>
 
-  <h4>多选向子项关联</h4>
+  <h4>multiple mode: downward checkboxRelation</h4>
   <d-cascader
     [options]="options"
-    [placeholder]="'请选择'"
+    [placeholder]="'please select'"
     [(ngModel)]="value3"
     (ngModelChange)="onChanges($event)"
     [trigger]="'click'"
@@ -45,10 +45,10 @@
   >
   </d-cascader>
 
-  <h4>多选向父项关联</h4>
+  <h4>multiple mode: upward checkboxRelation</h4>
   <d-cascader
     [options]="options"
-    [placeholder]="'请选择'"
+    [placeholder]="'please select'"
     [(ngModel)]="value4"
     (ngModelChange)="onChanges($event)"
     [trigger]="'click'"

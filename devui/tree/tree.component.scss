@@ -2,7 +2,7 @@
 @import '../style/theme/variables';
 @import '../style/mixins/index';
 @import '../style/theme/corner';
-@import '../style/theme/_font';
+@import '../style/core/_font';
 
 $keyframe-blue: #5e7ce0;
 
@@ -28,6 +28,8 @@ $keyframe-blue: #5e7ce0;
     font-size: $devui-font-size;
     padding-right: 10px;
     width: 100%;
+    border-radius: $devui-border-radius;
+    padding-left: 6px;
 
     &.active {
       background-color: $devui-list-item-selected-bg;
@@ -43,7 +45,7 @@ $keyframe-blue: #5e7ce0;
   .devui-tree-node__content--value-wrapper {
     display: inline-flex;
     align-items: center;
-    height: 38px;
+    height: 30px;
     width: 100%;
   }
 
@@ -55,7 +57,7 @@ $keyframe-blue: #5e7ce0;
     }
 
     .devui-tree-node {
-      margin-left: 14px;
+      margin-left: 8px;
       content: '';
       position: relative;
 
@@ -251,7 +253,7 @@ $keyframe-blue: #5e7ce0;
     &::before {
       content: '';
       width: 1px;
-      height: calc(100% - 19px); // 父级总高度减去半个content的高度
+      height: calc(100% - 15px); // 父级总高度减去半个content的高度
       background-color: $devui-dividing-line;
       position: absolute;
       left: calc(10px - 1px); // 父级10px的padding减去自身1px宽度
@@ -268,7 +270,7 @@ $keyframe-blue: #5e7ce0;
         height: 1px;
         background-color: $devui-dividing-line;
         position: absolute;
-        left: calc(-1px - 14px); // 对接左侧灰线，自身margin为1.2em加上1px的线宽
+        left: calc(-1px - 8px); // 对接左侧灰线，自身margin为1.2em加上1px的线宽
         top: 50%;
       }
     }

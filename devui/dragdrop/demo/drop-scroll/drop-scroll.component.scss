@@ -30,6 +30,10 @@
   vertical-align: top;
   width: 180px;
   padding-bottom: 10px;
+
+  &:last-of-type {
+    margin-right: 10px;
+  }
 }
 
 .show-drop-area ::ng-deep .dropover-scroll-area,
@@ -98,4 +102,14 @@
   background-color: $devui-brand;
   display: flex;
   align-items: center;
+}
+
+.option-toggle {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+
+  span {
+    margin-left: 4px;
+  }
 }

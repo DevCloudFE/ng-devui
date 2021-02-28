@@ -1,0 +1,15 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
+.readtip-container {
+  padding: 10px;
+  background-color: $devui-area;
+}
+
+.readtip-target {
+  color: $devui-aide-text-stress;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

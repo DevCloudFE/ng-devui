@@ -19,6 +19,7 @@ export class AppContentComponent implements OnInit, OnDestroy {
   routes: Routes = [];
   componentsData = [];
   clickSub: Subscription = new Subscription();
+  @ViewChild('dSearch', { static: true }) dSearch: SearchComponent;
   componentsDataDisplay = [];
   constructor(private renderer2: Renderer2, private ngZone: NgZone, private translate: TranslateService) {
     this.generateSideBar(localStorage.getItem('lang'));

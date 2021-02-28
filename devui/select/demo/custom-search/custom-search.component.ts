@@ -14,16 +14,16 @@ export class CustomSearchComponent {
   currentOption2 = [];
   currentOption3 = '';
   options1 = [{
-    name: '选项1',
+    name: 'option 1',
     value: 1
   }, {
-    name: '选项2',
+    name: 'option 2',
     value: 2
   }, {
-    name: '选项3',
+    name: 'option 3',
     value: 3
   }, {
-    name: '选项4',
+    name: 'option 4',
     value: 4
   }];
   options2 = [{

@@ -4,13 +4,15 @@
 @import '../style/theme/font';
 @import '../style/theme/corner';
 
+$devui-tab-options-bg: $devui-list-item-hover-bg;
+
 :host {
   display: block;
 }
 
 .devui-nav-tabs,
 .devui-nav-pills {
-  font-size: $devui-font-size-card-title;
+  font-size: $devui-font-size;
   background: transparent;
   font-weight: bold;
 
@@ -18,7 +20,7 @@
     cursor: pointer;
     border: 2px solid transparent;
 
-    & > a {
+    & a {
       cursor: pointer;
       border: none;
       line-height: 30px;
@@ -27,9 +29,9 @@
       color: $devui-text;
     }
 
-    & > a:hover,
-    & > a:focus,
-    & > a:active {
+    & a:hover,
+    & a:focus,
+    & a:active {
       outline: none;
     }
 
@@ -42,7 +44,7 @@
 
     &.active,
     &:hover:not(.disabled) {
-      & > a {
+      & a {
         color: $devui-brand;
       }
     }
@@ -119,16 +121,6 @@
           background: transparent;
         }
       }
-
-      &:not(:first-child)::before {
-        content: '';
-        display: block;
-        top: -1px;
-        left: -1px;
-        width: 1px;
-        height: 'calc(100% + 2px)';
-        position: absolute;
-      }
     }
 
     &.active {
@@ -155,9 +147,158 @@
   }
 }
 
+.devui-nav-slider {
+  font-size: $devui-font-size;
+  border: none;
+  border-radius: $devui-border-radius;
+  background: $devui-tab-options-bg;
+  width: fit-content;
+  display: flex !important;
+  align-items: center;
+  position: relative;
+
+  > li {
+    cursor: pointer;
+    margin: 2px;
+    float: left;
+    position: relative;
+    z-index: 1;
+
+    &:first-child {
+      border-left-width: 1px;
+      border-radius: $devui-border-radius 0 0 $devui-border-radius;
+    }
+
+    &:last-child {
+      border-radius: 0 $devui-border-radius $devui-border-radius 0;
+    }
+
+    & a {
+      cursor: pointer;
+      border: none;
+      color: $devui-text;
+      line-height: 28px;
+      padding: 0 15px;
+
+      &:hover,
+      &:focus,
+      &:active {
+        outline: none;
+      }
+    }
+
+    &.disabled {
+      border-color: $devui-disabled-line;
+
+      a {
+        color: $devui-disabled-text;
+        cursor: not-allowed;
+      }
+    }
+
+    &.active,
+    &:hover:not(.disabled) {
+      & a {
+        color: $devui-brand-active;
+
+        &:hover {
+          color: $devui-brand-active;
+          background: transparent;
+        }
+      }
+
+      &:not(:first-child)::before {
+        content: '';
+        display: block;
+        top: -1px;
+        left: -1px;
+        width: 1px;
+        height: 'calc(100% + 2px)';
+        position: absolute;
+      }
+    }
+
+    &.active {
+      text-shadow: 0 0 0.7px $devui-brand;
+
+      &:not(:first-child)::before {
+        background-color: $devui-brand;
+      }
+
+      & + li::before {
+        background-color: $devui-brand;
+      }
+    }
+
+    &:hover:not(.active):not(.disabled) {
+      color: $devui-brand-active;
+
+      &:not(:first-child)::before {
+        background-color: $devui-brand-active;
+      }
+    }
+  }
+}
+
+.devui-nav-wrapped {
+  font-size: $devui-font-size;
+  background: transparent;
+  border-bottom: 1px solid $devui-dividing-line;
+  background-color: $devui-base-bg;
+
+  > li {
+    cursor: pointer;
+    float: left;
+    position: relative;
+    padding: 8px 16px;
+
+    & a {
+      cursor: pointer;
+      border: none;
+      color: $devui-text;
+      border-radius: $devui-border-radius $devui-border-radius 0 0;
+
+      &:hover,
+      &:focus,
+      &:active {
+        outline: none;
+      }
+    }
+
+    &.disabled {
+      border-color: $devui-disabled-line;
+
+      a {
+        color: $devui-disabled-text;
+        cursor: not-allowed;
+      }
+    }
+
+    &.active {
+      border: 1px solid $devui-dividing-line;
+      background: $devui-global-bg;
+      border-radius: $devui-border-radius $devui-border-radius 0 0;
+      font-weight: 700;
+      // 以下覆盖父元素的底部边框,解决多1px的边框造成的抖动
+      margin: -1px;
+      border-bottom-color: transparent;
+
+      & a {
+        color: $devui-brand-active;
+      }
+    }
+
+    &:hover:not(.active):not(.disabled) {
+      a {
+        color: $devui-brand;
+      }
+    }
+  }
+}
+
 .devui-nav {
   li {
-    > a.custom-width {
+    a.custom-width {
       display: inline-block;
       padding: 0;
       text-align: center;
@@ -202,4 +343,15 @@
 
 .devui-tab-content {
   margin-top: 20px;
+}
+
+.devui-nav-slider-animation {
+  position: absolute;
+  z-index: 0;
+  background-color: $devui-base-bg;
+  border-radius: $devui-border-radius;
+  box-shadow: 0 2px 4px 0 $devui-light-shadow;
+  top: 1px;
+  height: 30px;
+  transition: left 0.3s cubic-bezier(0.645, 0.045, 0.355, 1), width 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
 }

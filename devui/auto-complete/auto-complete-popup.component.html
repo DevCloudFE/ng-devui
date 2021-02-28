@@ -3,7 +3,8 @@
     cdk-connected-overlay
     [cdkConnectedOverlayOrigin]="origin"
     [cdkConnectedOverlayWidth]="width"
-    [cdkConnectedOverlayOpen]="isOpen"
+    [cdkConnectedOverlayOpen]="isOpen && !disabled"
+    [cdkConnectedOverlayOffsetY]="cdkOverlayOffsetY"
   >
     <ng-template [ngTemplateOutlet]="popTpl"> </ng-template>
   </ng-template>
@@ -15,11 +16,11 @@
 
 <ng-template #popTpl>
   <div
-    class="devui-dropdown-menu devui-dropdown-overlay"
-    [style.display]="isOpen && (source?.length || noResultItemTemplate) ? 'inline-block' : 'none'"
+    class="devui-dropdown-menu"
+    [style.display]="isOpen && (source?.length || noResultItemTemplate) && !disabled ? 'inline-block' : 'none'"
     [style.top]="overview === 'multiline' ? (position?.top < labelMinHeight ? '50%' : '100%') : '100%'"
     [style.left]="overview === 'multiline' ? position?.left + 'px' : '0'"
-    [@fadeInOut]="isOpen ? 'bottom' : 'void'"
+    [@fadeInOut]="isOpen && !disabled ? 'bottom' : 'void'"
     (@fadeInOut.done)="animationEnd($event)"
     #selectMenuElement
     dLoading

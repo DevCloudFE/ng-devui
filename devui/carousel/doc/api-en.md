@@ -1,3 +1,17 @@
+# How To Use
+Import in module：
+```ts
+import { CarouselModule } from 'ng-devui/carousel';
+```
+In the page：
+```html
+<d-carousel>
+  <d-carousel-item></d-carousel-item>
+</d-carousel>
+```
+
+# d-carousel
+
 ## d-carousel parameter
 
 |   Parameter   |             Type             | Default | Description | Jump to Demo |

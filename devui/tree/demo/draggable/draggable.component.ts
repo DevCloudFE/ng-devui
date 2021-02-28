@@ -9,49 +9,49 @@ export class DraggableComponent implements OnInit {
 
   transferData: string;
   data = [{
-    'title': '父节点1'
+    'title': 'parent node 1'
   }, {
-    'title': '父节点2',
+    'title': 'parent node 2',
     'open': true,
     'children': [{
-      'title': '子节点2-1',
+      'title': 'leaf node 2-1',
       'open': true,
       'children': [{
-        'title': '子节点2-1-1'
+        'title': 'leaf node 2-1-1'
       }, {
-        'title': '子节点2-1-2'
+        'title': 'leaf node 2-1-2'
       }]
     }, {
-      'title': '子节点2-2',
+      'title': 'leaf node 2-2',
       'children': [{
-        'title': '子节点2-2-1'
+        'title': 'leaf node 2-2-1'
       }, {
-        'title': '子节点2-2-2'
+        'title': 'leaf node 2-2-2'
       }]
     }]
   }, {
-    'title': '父节点3',
+    'title': 'parent node 3',
     'open': true,
     'children': [{
-      'title': '子节点3-1',
+      'title': 'leaf node 3-1',
     }, {
-      'title': '子节点3-2',
+      'title': 'leaf node 3-2',
     }],
   }, {
-    'title': '父节点4',
+    'title': 'parent node 4',
     'open': true,
     'children': [{
-      'title': '子节点4-1'
+      'title': 'leaf node 4-1'
     }, {
-      'title': '子节点4-2'
+      'title': 'leaf node 4-2'
     }]
   }, {
-    'title': '父节点5',
+    'title': 'parent node 5',
     'open': true,
     'children': [{
-      'title': '子节点5-1'
+      'title': 'leaf node 5-1'
     }, {
-      'title': '子节点5-2'
+      'title': 'leaf node 5-2'
     }]
   }];
   dropItems = [];
@@ -63,9 +63,6 @@ export class DraggableComponent implements OnInit {
   constructor(private changeDetectorRef: ChangeDetectorRef) { }
 
   ngOnInit() {
-    document.getElementById('draggableEl').ondragstart = function (event) {
-      event.dataTransfer.setData('Text', '外部可拖动元素');
-    };
   }
 
   beforeNodeDrop = (dragNodeId, dropNodeId, dropType) => {

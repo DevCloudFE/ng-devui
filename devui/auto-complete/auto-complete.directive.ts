@@ -18,12 +18,14 @@ import {
   Renderer2,
   SimpleChanges,
   TemplateRef,
-  ViewContainerRef,
+  ViewContainerRef
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { PositionService } from 'ng-devui/position';
-import { fromEvent, Observable, of, Subscription } from 'rxjs';
-import { debounceTime, filter, map, switchMap, tap } from 'rxjs/operators';
+import { addClassToOrigin, removeClassFromOrigin } from 'ng-devui/utils';
+import { fromEvent, Observable, of, Subject, Subscription } from 'rxjs';
+import { debounceTime, filter, map, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { AutoCompleteConfig } from './auto-complete-config';
 import { AutoCompletePopupComponent } from './auto-complete-popup.component';
 
@@ -61,6 +63,7 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
   }
 
   @Input() appendToBody = false;
+  @Input() cdkOverlayOffsetY = 0; // 内部使用不开放
   @Input() dAutoCompleteWidth: number;
   @Input() formatter: (item: any) => string;
   @Input() sceneType = ''; // sceneType使用场景：select(下拉框) suggest(联想)
@@ -88,6 +91,8 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
   KEYBOARD_EVENT_NOT_REFRESH = ['escape', 'enter', 'arrowup', 'arrowdown', /*ie 10 edge */ 'esc', 'up', 'down'];
   popupRef: ComponentRef<AutoCompletePopupComponent>;
 
+  private destroy$ = new Subject();
+  i18nText: I18nInterface['autoComplete'];
   popTipsText = '';
   position: any;
   focus = false;
@@ -107,7 +112,8 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
     private renderer: Renderer2,
     private injector: Injector,
     private positionService: PositionService,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
+    private i18n: I18nService
   ) {
     this.minLength = this.autoCompleteConfig.autoComplete.minLength;
     this.itemTemplate = this.autoCompleteConfig.autoComplete.itemTemplate;
@@ -117,6 +123,7 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
   }
 
   ngOnInit() {
+    this.setI18nText();
     this.valueChanges = this.registerInputEvent(this.elementRef);
     // 调用时机：input keyup
     this.subscription = this.valueChanges.subscribe((source) => this.onSourceChange(source));
@@ -159,6 +166,18 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
     }
   }
 
+  setI18nText() {
+    this.i18nText = this.i18n.getI18nText().autoComplete;
+    // this.i18nLang = this.i18n.getI18nText().locale; // 如果需要获取当前语言
+    this.i18n
+      .langChange()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data) => {
+        this.i18nText = data.autoComplete;
+        // this.i18nLang = data.locale; // 如果需要获取当前语言
+      });
+  }
+
   restLatestSource() {
     if (this.latestSource && this.latestSource.length > 0) {
       this.writeValue('');
@@ -196,7 +215,7 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
 
         const pop = this.popupRef.instance;
         pop.reset();
-        this.popTipsText = '最近输入';
+        this.popTipsText = this.i18nText.latestInput;
         this.fillPopup(tempSource);
         this.openPopup();
         this.changeDetectorRef.markForCheck();
@@ -226,15 +245,10 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
   }
 
   public openPopup(activeIndex = 0) {
-    const ele = this.elementRef && this.elementRef.nativeElement;
     this.popupRef.instance.activeIndex = activeIndex;
     this.popupRef.instance.isOpen = true;
-    if (ele && !ele.classList.contains('devui-dropdown-origin-open')) {
-      ele.classList.add('devui-dropdown-origin-open');
-    }
-    if (ele && !ele.classList.contains('devui-dropdown-origin-bottom')) {
-      ele.classList.add('devui-dropdown-origin-bottom');
-    }
+    this.popupRef.instance.disabled = this.disabled;
+    addClassToOrigin(this.elementRef);
     this.changeDropDownStatus.emit(true);
   }
 
@@ -261,6 +275,8 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
 
   ngOnDestroy() {
     this.unSubscription();
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   @HostListener('focus', ['$event'])
@@ -353,13 +369,7 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
   public hidePopup() {
     if (this.popupRef) {
       this.popupRef.instance.isOpen = false;
-      const ele = this.elementRef && this.elementRef.nativeElement;
-      if (ele && ele.classList.contains('devui-dropdown-origin-open')) {
-        ele.classList.remove('devui-dropdown-origin-open');
-      }
-      if (ele && ele.classList.contains('devui-dropdown-origin-bottom')) {
-        ele.classList.remove('devui-dropdown-origin-bottom');
-      }
+      removeClassFromOrigin(this.elementRef);
       this.changeDropDownStatus.emit(false);
     }
   }
@@ -372,10 +382,12 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
     pop.term = term;
     pop.disabledKey = this.disabledKey;
     pop.enableLazyLoad = this.enableLazyLoad;
+    pop.disabled = this.disabled;
     if (this.appendToBody) {
       pop.appendToBody = true;
       pop.origin = new CdkOverlayOrigin(this.elementRef);
       pop.width = this.dAutoCompleteWidth ? this.dAutoCompleteWidth : this.elementRef.nativeElement.offsetWidth;
+      pop.cdkOverlayOffsetY = this.cdkOverlayOffsetY;
     } else {
       pop.appendToBody = false;
     }
@@ -410,16 +422,13 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
   }
 
   private registerInputEvent(elementRef: ElementRef) {
-    return fromEvent(elementRef.nativeElement, 'keyup').pipe(
-      filter((e: KeyboardEvent) => {
-        return this.KEYBOARD_EVENT_NOT_REFRESH.indexOf(e.key.toLocaleLowerCase()) === -1;
-      }),
-      map((e: any) => e.target.value),
-      tap((term) => this.onTouched()),
-      filter((term) => !this.disabled && this.searchFn && term.length >= 0),
-      debounceTime(this.delay),
-      tap((term) => this.onTermChange(term)),
-      switchMap((term) => this.searchFn(term, this))
-    );
+    return fromEvent(elementRef.nativeElement, 'input').pipe(
+        map((e: any) => e.target.value),
+        filter((term) => !this.disabled && this.searchFn && term.length >= 0),
+        debounceTime(this.delay),
+        tap((term) => this.onTermChange(term)),
+        switchMap((term) => this.searchFn(term, this))
+      );
+
   }
 }

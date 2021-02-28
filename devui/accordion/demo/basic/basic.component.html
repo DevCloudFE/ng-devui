@@ -7,5 +7,7 @@
   (activeItemChange)="log($event)"
   [accordionType]="accordionTypeEmbed ? 'embed' : 'normal'"
 ></d-accordion>
-<div class="option"><d-toggle [(ngModel)]="restrictOneOpen"></d-toggle> 限制只能展开一个一级菜单</div>
-<div class="option"><d-toggle [(ngModel)]="accordionTypeEmbed"></d-toggle> 内嵌菜单形式（无阴影）</div>
+<div class="option">
+  <d-toggle [(ngModel)]="restrictOneOpen"></d-toggle> Only one level-1 menu can be expanded.<!--限制只能展开一个一级菜单-->
+</div>
+<div class="option"><d-toggle [(ngModel)]="accordionTypeEmbed"></d-toggle> Embedded menu (no shadow)<!--内嵌菜单形式（无阴影）--></div>

@@ -1,3 +1,15 @@
+# How to use
+Import into module:
+```ts
+import { RateModule } from 'ng-devui/rate';
+```
+
+In the page:
+```html
+<d-rate [ngModel]="value" [count]="5"></d-rate>
+```
+# Rate
+
 ## d-rate parameter
 
 | Parameter | Type | Default | Description | Jump to Demo |

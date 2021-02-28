@@ -12,18 +12,18 @@ export class CustomComponent {
         {
           id: 'tab1',
           title: 'Tab1',
-          content: `这是Tab1的内容`
+          content: `Tab1 Content`
         },
         {
           id: 'tab2',
           title: 'Tab2',
-          content: `这是Tab2的内容`,
+          content: `Tab2 Content`,
           disabled: true
         },
         {
           id: 'tab3',
           title: 'Tab3',
-          content: `这是Tab3的内容`
+          content: `Tab3 Content`
         },
       ];
 

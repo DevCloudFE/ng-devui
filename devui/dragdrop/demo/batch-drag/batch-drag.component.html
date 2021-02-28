@@ -1,55 +1,41 @@
-<section>
-  <h3>支持批量拖拽，请用ctrl按键和鼠标选中多个并进行拖拽</h3>
-  <div
-    class="drop-row devui-scrollbar"
-    [ngClass]="{ 'show-origin': showOriginPlaceholder }"
-    dDropScrollEnhanced
-    [direction]="'h'"
-    [dropScrollScope]="['mutiple-group', 'drag-follow']"
-  >
-    <div class="drop-col" *ngFor="let list of lists">
-      <div
-        class="card card-outline-primary mb-3"
-        dDroppable
-        [dropScope]="'mutiple-group'"
-        (dropEvent)="onDrop($event, list.list)"
-        [switchWhileCrossEdge]="switchWhileCrossEdge"
-      >
-        <div class="card-header">{{ list.name }}</div>
-        <div class="card-block">
-          <ul
-            class="list-group drop-el devui-scrollbar"
-            dSortable
-            dDropScrollEnhanced
-            [direction]="'v'"
-            [responseEdgeWidth]="'20px'"
-            [dropScrollScope]="'mutiple-group'"
+<div class="drop-row devui-scrollbar" dDropScrollEnhanced [direction]="'h'" [dropScrollScope]="['mutiple-group', 'drag-follow']">
+  <div class="drop-col" *ngFor="let list of lists">
+    <div class="card card-outline-primary mb-3" dDroppable [dropScope]="'mutiple-group'" (dropEvent)="onDrop($event, list.list)">
+      <div class="card-header">{{ list.name }}</div>
+      <div class="card-block">
+        <ul
+          class="list-group drop-el devui-scrollbar"
+          dSortable
+          dDropScrollEnhanced
+          [direction]="'v'"
+          [responseEdgeWidth]="'20px'"
+          [dropScrollScope]="'mutiple-group'"
+        >
+          <li
+            *ngFor="let item of list.list"
+            class="list-group-item over-flow-ellipsis"
+            dDraggable
+            [dragScope]="'mutiple-group'"
+            [dragHandleClass]="'drag-handle'"
+            [originPlaceholder]="{
+              removeDelay: 300
+            }"
+            [dragData]="{ item: item, parent: list.list }"
+            [enableDragFollow]="true"
+            (click)="batchSelectCheck($event, item)"
+            batchDrag
+            [batchDragActive]="item.isSelected"
+            (batchDragActiveEvent)="batchSelect(item)"
+            [ngClass]="{ selected: item.isSelected }"
           >
-            <li
-              *ngFor="let item of list.list"
-              class="list-group-item over-flow-ellipsis"
-              dDraggable
-              [dragScope]="'mutiple-group'"
-              [dragHandleClass]="'drag-handle'"
-              [originPlaceholder]="{
-                show: showOriginPlaceholder,
-                removeDelay: 300
-              }"
-              [dragData]="{ item: item, parent: list.list }"
-              [enableDragFollow]="true"
-              (click)="batchSelectCheck($event, item)"
-              batchDrag
-              [batchDragActive]="item.isSelected"
-              (batchDragActiveEvent)="batchSelect(item)"
-              [ngClass]="{ selected: item.isSelected }"
-            >
-              {{ item.name }}
-            </li>
-          </ul>
-        </div>
+            {{ item.name }}
+          </li>
+        </ul>
       </div>
     </div>
   </div>
-  <d-toggle [(ngModel)]="showOriginPlaceholder"></d-toggle> 显示源占位符 <d-toggle [(ngModel)]="switchWhileCrossEdge"></d-toggle> 越边交换
-  <d-button (btnClick)="cleanBatch()">清空已选</d-button>
-</section>
+</div>
+<d-button (btnClick)="cleanBatch()"
+  >clean all selected
+  <!--清空已选--></d-button
+>

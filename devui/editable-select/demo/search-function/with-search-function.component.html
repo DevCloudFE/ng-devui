@@ -1,4 +1,3 @@
-<section>
-  <d-editable-select [(ngModel)]="selectItem2" [searchFn]="onSearchLocal" name="multiple-auto"> </d-editable-select>
-  <pre>{{ (selectItem2 | json) || 'No language select!' }}</pre>
-</section>
+<d-editable-select [(ngModel)]="selectItem2" [searchFn]="onSearchLocal" name="multiple-auto" placeholder="Search"> </d-editable-select>
+
+<pre>{{ (selectItem2 | json) || 'No language select!' }}</pre>

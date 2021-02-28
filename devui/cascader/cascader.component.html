@@ -119,7 +119,7 @@
         *ngFor="let optionList of columnList; let i = index"
         class="devui-cascader-list"
         [ngClass]="{ 'devui-drop-no-data': !options.length }"
-        [ngStyle]="{ width: dropdownWidth - 2 + 'px' }"
+        [ngStyle]="{ width: dropdownWidth + 'px' }"
         role="menu"
         (click)="$event.stopPropagation()"
       >

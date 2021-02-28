@@ -22,7 +22,7 @@ const OPTION = [
           {
             label: '测试1-1-1',
             value : 8,
-            children: []
+            isLeaf: true
           },
           {
             label: '测试1-1-2',
@@ -726,7 +726,6 @@ describe('cascader', () => {
 
       const liList = fixture.debugElement.query(By.css('.devui-cascader-list')).queryAll(By.css('.devui-cascader-list-item'));
       expect(liList.length).toBe(3);
-
       liList[0].nativeElement.dispatchEvent(new Event('click'));
       fixture.detectChanges();
       tick(200);

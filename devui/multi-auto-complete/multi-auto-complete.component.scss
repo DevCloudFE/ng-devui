@@ -1,7 +1,7 @@
 @import '../style/mixins/index';
 @import '../style/theme/color';
 @import '../style/theme/corner';
-@import '../style/theme/_font';
+@import '../style/core/_font';
 
 .form-group label {
   cursor: pointer;
@@ -238,7 +238,7 @@
 }
 
 :host ::ng-deep .multiple-label-auto-complete-border ul li .devui-dropdown-menu {
-  margin-top: 2px;
+  margin-top: 7px;
 }
 
 :host ::ng-deep .multiple-label-auto-complete-multiline ul li .devui-dropdown-menu {

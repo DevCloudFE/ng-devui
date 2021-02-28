@@ -82,7 +82,7 @@
   <div class="option">
     <div class="transfer-op">
       <svg
-        *ngIf="!sourceCanTransfer"
+        *ngIf="!sourceCanTransfer || disabled"
         width="36px"
         height="36px"
         viewBox="0 0 36 36"
@@ -108,7 +108,7 @@
         </g>
       </svg>
       <svg
-        *ngIf="sourceCanTransfer"
+        *ngIf="sourceCanTransfer && !disabled"
         [class.disabled]="disabled"
         (click)="transferTo(transferDirection.SOURCE)"
         width="36px"
@@ -137,7 +137,7 @@
     <div class="transfer-op" style="margin-top: 10px">
       <svg
         width="36px"
-        *ngIf="!targetCanTransfer"
+        *ngIf="!targetCanTransfer || disabled"
         height="36px"
         viewBox="0 0 36 36"
         class="default-svg"
@@ -161,7 +161,7 @@
       <svg
         width="36px"
         [class.disabled]="disabled"
-        *ngIf="targetCanTransfer"
+        *ngIf="targetCanTransfer && !disabled"
         (click)="transferTo(transferDirection.TARGET)"
         height="36px"
         viewBox="0 0 36 36"

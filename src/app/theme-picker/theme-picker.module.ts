@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { ToggleModule, DropDownModule, RadioModule } from 'ng-devui';
+import { ToggleModule, DropDownModule, RadioModule, TabsModule } from 'ng-devui';
 import { TranslateModule } from '@ngx-translate/core';
 import { ThemePickerComponent } from './theme-picker.component';
 
@@ -15,7 +15,8 @@ import { ThemePickerComponent } from './theme-picker.component';
     TranslateModule,
     ToggleModule,
     DropDownModule,
-    RadioModule
+    RadioModule,
+    TabsModule
   ],
   exports: [
     ThemePickerComponent,

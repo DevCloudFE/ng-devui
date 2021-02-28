@@ -1,13 +1,11 @@
-<section>
-  <d-tree
-    #basicTree
-    [loadingTemplateRef]="loadingTemplateRef"
-    [tree]="data1"
-    (nodeSelected)="onNodeSelected($event)"
-    (nodeToggled)="onNodeToggled($event)"
-  >
-  </d-tree>
-  <ng-template #loadingTemplateRef>
-    <div style="margin-left: 10px" [innerHTML]="customLoadingSvg | safe: 'html'"></div>
-  </ng-template>
-</section>
+<d-tree
+  #basicTree
+  [loadingTemplateRef]="loadingTemplateRef"
+  [tree]="data1"
+  (nodeSelected)="onNodeSelected($event)"
+  (nodeToggled)="onNodeToggled($event)"
+>
+</d-tree>
+<ng-template #loadingTemplateRef>
+  <div style="margin-left: 10px" [innerHTML]="customLoadingSvg | safe: 'html'"></div>
+</ng-template>

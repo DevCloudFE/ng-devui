@@ -1,11 +1,19 @@
 import {
+  transition,
+  trigger
+} from '@angular/animations';
+import {
   Component,
   ContentChild,
   EventEmitter,
   Input,
   Output
 } from '@angular/core';
+
 import { Observable } from 'rxjs';
+
+import { openClose } from 'ng-devui/utils';
+
 import { PanelFooterComponent } from './panel-footer.component';
 import { PanelHeaderComponent } from './panel-header.component';
 import { PanelType } from './panel.types';
@@ -14,6 +22,7 @@ import { PanelType } from './panel.types';
   selector: 'd-panel',
   templateUrl: './panel.component.html',
   styleUrls: ['./panel.component.scss'],
+  animations: [trigger('noAnimation', [transition(':enter', [])]), openClose],
 })
 export class PanelComponent {
   @Input() type: PanelType = 'default';
@@ -25,7 +34,7 @@ export class PanelComponent {
   @ContentChild(PanelFooterComponent) panelFooter;
 
   toggleBody() {
-    this.canToggle().then(val => {
+    this.canToggle().then((val) => {
       if (!val) {
         return;
       }

@@ -1,5 +1,5 @@
 import { Component, DebugElement, Input, TemplateRef, ViewChild } from '@angular/core';
-import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -78,7 +78,7 @@ describe('dialog', () => {
     let component: TestDialogComponent;
     let domHelper: DomHelper<TestDialogComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
         imports: [ModalModule, NoopAnimationsModule, ButtonModule],
         declarations: [TestDialogComponent, ModalTestComponent],
@@ -88,7 +88,7 @@ describe('dialog', () => {
 
       }).overrideModule(BrowserDynamicTestingModule, {
         set: {
-          
+
         }
       }).compileComponents();
     }));
@@ -135,12 +135,14 @@ describe('dialog', () => {
       }
 
       closeDialog(fixture);
+      tick();
     }));
 
     it('should buttons/handler works', fakeAsync(() => {
       debugEl.query(By.css('.devui-btn')).nativeElement.dispatchEvent(new Event('click'));
       fixture.detectChanges();
       closeDialog(fixture);
+      tick();
       expect(document.querySelector('.modal')).toBeFalsy();
     }));
 
@@ -174,6 +176,7 @@ describe('dialog', () => {
       document.querySelector('.modal').dispatchEvent(new Event('click'));
       tick();
       fixture.detectChanges();
+      tick();
       expect(document.querySelector('.modal')).toBeFalsy();
     }));
 
@@ -195,6 +198,7 @@ describe('dialog', () => {
       document.querySelector('.modal').dispatchEvent(new Event('click'));
       tick();
       fixture.detectChanges();
+      tick();
       expect(document.querySelector('.modal')).toBeFalsy();
     }));
 
@@ -212,6 +216,7 @@ describe('dialog', () => {
       };
       fixture.detectChanges();
       closeDialog(fixture);
+      tick();
       expect(document.querySelector('.modal')).toBeFalsy();
     }));
 
@@ -303,6 +308,7 @@ describe('dialog', () => {
       expect(body.classList).not.toContain('devui-body-scrollblock');
 
       closeDialog(fixture);
+      tick();
       expect(component.dialogConfig.onClose).toHaveBeenCalled();
     }));
   });
@@ -362,14 +368,14 @@ describe('modal', () => {
     let component: TestModalComponent;
     let domHelper: DomHelper<TestModalComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
         imports: [ModalModule, NoopAnimationsModule, ButtonModule],
         declarations: [TestModalComponent, OpenModalComponent],
         providers: [ModalService],
       }).overrideModule(BrowserDynamicTestingModule, {
         set: {
-          
+
         }
       }).compileComponents();
     }));
@@ -390,6 +396,7 @@ describe('modal', () => {
       expect(document.querySelector('.modal')).toBeTruthy();
 
       closeModal(fixture);
+      tick();
 
       expect(document.querySelector('.modal')).toBeFalsy();
     }));
@@ -405,6 +412,7 @@ describe('modal', () => {
       expect(component.modalConfig.handler).toHaveBeenCalled();
 
       closeModal(fixture);
+      tick();
     }));
   });
 
@@ -414,14 +422,14 @@ describe('modal', () => {
     let component: TestModalComponent;
     let domHelper: DomHelper<TestModalComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
         imports: [ModalModule, NoopAnimationsModule, ButtonModule],
         declarations: [TestModalComponent, ModalAlertComponent],
         providers: [ModalService],
       }).overrideModule(BrowserDynamicTestingModule, {
         set: {
-          
+
         }
       }).compileComponents();
     }));
@@ -450,6 +458,7 @@ describe('modal', () => {
 
       const buttonEle = document.querySelector('.modal-footer').querySelector('d-button');
       buttonEle.dispatchEvent(new Event('click'));
+      tick();
       fixture.detectChanges();
       tick();
       fixture.detectChanges();

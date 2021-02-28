@@ -1,7 +1,23 @@
+# 如何使用
+
+在 module 中引入：
+
+```typescript
+import { SelectModule } from 'ng-devui/select';
+```
+
+在页面中使用:
+
+```html
+<d-select [options]="options" [(ngModel)]="value"></d-select>
+```
+
+## d-select
+
 ### d-select 参数
 
-|                       参数                       |                        类型                         |                       默认                       | 说明                                                                                                                                                                                | 跳转 Demo                                                                      |
-| :----------------------------------------------: | :-------------------------------------------------: | :----------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+|                       参数                       |                        类型                         |                       默认                       | 说明                                                                                                                                                                                | 跳转 Demo                                                   |
+| :----------------------------------------------: | :-------------------------------------------------: | :----------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------- |
 |                     options                      |                       `array`                       |                        []                        | 可选, 和 searchFn 互斥，两者必须有且只有一个。下拉选项资源`string` `object`                                                                                                         | [基本用法](demo#basic-usage)                                |
 |                     isSearch                     |                      `boolean`                      |                      false                       | 可选,是否支持过滤搜索                                                                                                                                                               | [使用对象](demo#object-filter)                              |
 |                   scrollHight                    |                      `string`                       |                     '300px'                      | 可选,下拉菜单高度,建议使用 px 作为高度单位                                                                                                                                          |
@@ -17,7 +33,7 @@
 |                     searchFn                     |                     `function`                      |                        --                        | 可选,搜索函数,当需要自定义下拉选择过滤规则时可以使用                                                                                                                                | [自定义搜索功能](demo#custom-search)                        |
 |                   valueParser                    |                     `function`                      |                        --                        | 可选,决定选择框文字如何显示,默认显示 filterKey 字段或者本身的值                                                                                                                     |
 |                    formatter                     |                     `function`                      |                        --                        | 可选,决定下拉框每项文字如何显示,默认显示 filterKey 字段或者本身的值                                                                                                                 |
-|                    direction                     |              `'up'`,`'down'`,`'auto'`               |                        ''                        | 可选,下拉选框尺寸,有三种选择`'up'`,`'down'`,`'auto'`                                                                                                                                | [禁用](demo#disabled)                                       |
+|                    direction                     |               `'up'\|'down'\|'auto'`                |                        ''                        | 可选,下拉选框尺寸,有三种选择`'up'`,`'down'`,`'auto'`                                                                                                                                | [禁用](demo#disabled)                                       |
 |                     overview                     |                      `string`                       |                     'border'                     | 可选,决定选择框样式显示,默认有边框`'border'`,`'underlined'`                                                                                                                         | [基本用法](demo#basic-usage)                                |
 |                  enableLazyLoad                  |                      `boolean`                      |                      false                       | 可选,是否支持数据懒加载，用于滚动到底部时动态请求数据                                                                                                                               | [虚拟滚动 或 懒加载](demo#lazy-load-virtual-scroll)         |
 |                   extraConfig                    |                      `object`                       |                       N/A                        | 可选, 可输入配置项 参考示例                                                                                                                                                         | [自定义模板](demo#select-template)                          |
@@ -42,15 +58,15 @@
 |                      width                       |                      `number`                       |                        --                        | 可选，搭配 appendToBody 使用，设置下拉宽度                                                                                                                                          | [自定义区域方向和选中](demo#custom-area-direction)          |
 |                  virtualScroll                   |                      `boolean`                      |                      false                       | 可选，是否虚拟滚动，大数据量场景试用                                                                                                                                                | [虚拟滚动 或 懒加载](demo#lazy-load-virtual-scroll)         |
 |                    allowClear                    |                      `boolean`                      |                      false                       | 可选, 配置是否允许清空选值，仅单选场景适用                                                                                                                                          | [允许清空值](demo#allow-clear-value)                        |
-|                inputItemTemplate                 |                    `TemplateRef`                    |                        --                        | 可选,自定义模板，若传入，会忽略 ContentChild                                                                                                                                        |                                                                                |
+|                inputItemTemplate                 |                    `TemplateRef`                    |                        --                        | 可选,自定义模板，若传入，会忽略 ContentChild                                                                                                                                        |                                                             |
 |               ~~~notAutoScroll~~~                |                      `boolean`                      |                      false                       | `待改名`~~~可选，自动聚焦的时候，自动滚动到 select 位置~~~                                                                                                                          |
 |                 templateItemSize                 |                      `number`                       |                      false                       | `待完善`可选，模板单条高度, appendToBody 必须为 true                                                                                                                                |
 |                loadingTemplateRef                |                 `TemplateRef<any>`                  |                        --                        | 可选，自定义 loading 模板                                                                                                                                                           | [虚拟滚动 或 懒加载](demo#lazy-load-virtual-scroll)         |
 
 ### d-select 事件
 
-|     事件     |                              类型                               | 说明                                                                                                                                   | 跳转 Demo                                                              |
-| :----------: | :-------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+|     事件     |                              类型                               | 说明                                                                                                                                   | 跳转 Demo                                           |
+| :----------: | :-------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- |
 | valueChange  |                 `EventEmitter<Array<any>\|any>`                 | 可选,输出函数,当选中某个选项项后,将会调用此函数,参数为当前选择项的值                                                                   |
 | toggleChange |                     `EventEmitter<boolean>`                     | 可选,输出函数,下拉打开关闭 toggle 事件                                                                                                 | [异步加载显示加载中](demo#async-loading)            |
 |   loadMore   | `EventEmitter<{instance: SelectComponent, event: ScrollEvent}>` | 懒加载触发事件，配合`enableLazyLoad`使用，使用`$event.instance.loadFinish()`结束本次加载, event 为懒加载监听的滚动事件，参考 dLazyLoad | [虚拟滚动 或 懒加载](demo#lazy-load-virtual-scroll) |

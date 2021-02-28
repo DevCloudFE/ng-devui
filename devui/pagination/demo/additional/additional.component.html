@@ -1,5 +1,8 @@
 <section>
-  <h4>传入的pageIndex超过最大页码时, 开启showTruePageIndex, 显示至传入的pageIndex</h4>
+  <h4>
+    When the value of <code>pageIndex</code> exceeds the maximum page number, enable <code>showTruePageIndex</code> to display the value of
+    <code>pageIndex</code>.
+  </h4>
   <d-pagination
     [size]="'sm'"
     [total]="pager1.total"
@@ -12,7 +15,10 @@
     [showTruePageIndex]="true"
   >
   </d-pagination>
-  <h4>传入的pageIndex超过最大页码时, 关闭showTruePageIndex, 只显示至最大页码</h4>
+  <h4>
+    When the value of <code>pageIndex</code> exceeds the maximum page number, the <code>showTruePageIndex</code> function is disabled and
+    only the maximum page number is displayed.
+  </h4>
   <d-pagination
     [size]="'sm'"
     [total]="pager1.total"
@@ -27,7 +33,7 @@
   </d-pagination>
 </section>
 <section>
-  <h4>普通模式下不同total数目的显示</h4>
+  <h4>Default Mode</h4>
   <div>
     <d-pagination
       [size]="'sm'"
@@ -40,29 +46,29 @@
       [maxItems]="5"
     >
     </d-pagination>
-    <d-button bsStyle="stress" circled="true" size="sm" (btnClick)="setTotal(0)">设置total为0</d-button>
-    <d-button bsStyle="stress" circled="true" size="sm" (btnClick)="setTotal(5)">设置total为5</d-button>
-    <d-button bsStyle="stress" circled="true" size="sm" (btnClick)="setTotal(15)">设置total为15</d-button>
+    <d-button bsStyle="stress" circled="true" size="sm" (btnClick)="setTotal(0)">total = 0</d-button>
+    <d-button bsStyle="stress" circled="true" size="sm" (btnClick)="setTotal(5)">total = 5</d-button>
+    <d-button bsStyle="stress" circled="true" size="sm" (btnClick)="setTotal(15)">total = 15</d-button>
   </div>
 </section>
 <section>
-  <h4>极简模式下不同total数目的显示</h4>
+  <h4>Simple Mode</h4>
   <div style="margin-bottom: 40px">
     <d-pagination
       [total]="pager3.total"
       [(pageSize)]="pager3.pageSize"
-      [totalItemText]="'总条数'"
+      [totalItemText]="'total'"
       [(pageIndex)]="pager3.pageIndex"
       [canViewTotal]="true"
       [canChangePageSize]="true"
       [lite]="true"
     >
     </d-pagination>
-    <d-button bsStyle="stress" circled="true" size="sm" (click)="setLiteTotal(0)">设置total为0</d-button>
-    <d-button bsStyle="stress" circled="true" size="sm" (click)="setLiteTotal(20)">设置total为20</d-button>
-    <d-button bsStyle="stress" circled="true" size="sm" (click)="setLiteTotal(30000)">设置total为30000</d-button>
-    <d-button bsStyle="stress" circled="true" size="sm" (click)="setLiteTotal(100000)">设置total为100000</d-button>
-    <d-button bsStyle="stress" circled="true" size="sm" (click)="setIndex(2)">设置index为2</d-button>
-    <d-button bsStyle="stress" circled="true" size="sm" (click)="setIndex(3)">设置index为3</d-button>
+    <d-button bsStyle="stress" circled="true" size="sm" (click)="setLiteTotal(0)">total = 0</d-button>
+    <d-button bsStyle="stress" circled="true" size="sm" (click)="setLiteTotal(20)">total = 20</d-button>
+    <d-button bsStyle="stress" circled="true" size="sm" (click)="setLiteTotal(30000)">total = 30000</d-button>
+    <d-button bsStyle="stress" circled="true" size="sm" (click)="setLiteTotal(100000)">total = 100000</d-button>
+    <d-button bsStyle="stress" circled="true" size="sm" (click)="setIndex(2)">index = 2</d-button>
+    <d-button bsStyle="stress" circled="true" size="sm" (click)="setIndex(3)">index = 3</d-button>
   </div>
 </section>

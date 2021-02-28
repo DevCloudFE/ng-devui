@@ -7,6 +7,13 @@
       <d-demo-time-axis-all-states demo></d-demo-time-axis-all-states>
     </d-codebox>
   </div>
+  <div class="demo-example" [dAnchor]="'direction'">
+    <div class="demo-title">{{ "components.time-axis.directionDemo.title" | translate }}</div>
+    <div class="demo-text">{{ "components.time-axis.directionDemo.description" | translate }}</div>
+    <d-codebox [sourceData]="directionSource">
+      <d-demo-time-axis-direction demo></d-demo-time-axis-direction>
+    </d-codebox>
+  </div>
   <div class="demo-example" [dAnchor]="'content-with-html'">
     <div class="demo-title">{{ "components.time-axis.htmlContentDemo.title" | translate }}</div>
     <div class="demo-text"></div>

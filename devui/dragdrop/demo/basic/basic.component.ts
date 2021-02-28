@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'd-basic',
@@ -10,7 +10,7 @@ export class BasicComponent {
     { name: 'Visual Studio Code' },
     { name: 'WebStorm' },
     { name: 'Sublime' },
-    { name: 'Atom(禁止拖拽)', disabled: true }
+    { name: 'Atom (disable dragging)', disabled: true }
   ];
 
   list2 = [];

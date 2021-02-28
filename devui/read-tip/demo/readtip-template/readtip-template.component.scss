@@ -1,0 +1,40 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
+.readtip-container {
+  padding: 10px;
+  background-color: $devui-area;
+}
+
+.readtip-target {
+  color: $devui-aide-text-stress;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.card-icon {
+  cursor: pointer;
+  font-size: $devui-font-size-icon;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.card-icon + span {
+  vertical-align: middle;
+}
+
+.card-block {
+  margin-right: 16px;
+}
+
+d-card {
+  box-shadow: none;
+
+  d-card-title,
+  d-card-subtitle,
+  d-card-content {
+    color: $devui-light-text;
+  }
+}

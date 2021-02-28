@@ -19,3 +19,18 @@ d-card {
     box-shadow: $devui-shadow-length-hover $devui-light-shadow;
   }
 }
+
+.custom-avatar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+
+  .custom-star-action {
+    font-size: 20px;
+    cursor: pointer;
+  }
+}
+
+d-avatar {
+  vertical-align: middle;
+}

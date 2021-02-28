@@ -32,6 +32,11 @@ export class LoadingDemoComponent implements OnInit, OnDestroy {
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./show-loading/show-loading.component.ts') },
     { title: 'SCSS', language: 'typescript', code: require('!!raw-loader!./show-loading/show-loading.component.scss') },
   ];
+  fullScreenSource: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./full-screen/full-screen.component.html') },
+    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./full-screen/full-screen.component.ts') },
+    { title: 'SCSS', language: 'typescript', code: require('!!raw-loader!./full-screen/full-screen.component.scss') },
+  ];
 
   navItems = [];
   subs: Subscription = new Subscription();
@@ -59,6 +64,7 @@ export class LoadingDemoComponent implements OnInit, OnDestroy {
       { dAnchorLink: 'multi-promise', value: values['multi-promise'] },
       { dAnchorLink: 'use-subscription-mode', value: values['use-subscription-mode'] },
       { dAnchorLink: 'show-loading', value: values['show-loading'] },
+      { dAnchorLink: 'full-screen', value: values['full-screen'] },
     ];
   }
 

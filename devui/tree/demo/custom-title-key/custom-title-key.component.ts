@@ -7,129 +7,129 @@ export class CustomTitleKeyComponent {
   data1 = [
     {
       id: '1',
-      name: '父节点1 - 展开',
+      name: 'parent node 1 - expanded',
       open: true,
       children: [
         {
           id: '2',
-          name: '父节点11 - 折叠',
+          name: 'parent node 11 - folded',
           checkboxDisabled: true,
           children: [
             {
               id: '3',
-              name: '叶子节点111'
+              name: 'leaf node 111'
             },
             {
               id: '4',
-              name: '叶子节点112'
+              name: 'leaf node 112'
             },
             {
               id: '5',
-              name: '叶子节点113'
+              name: 'leaf node 113'
             },
             {
               id: '6',
-              name: '叶子节点114'
+              name: 'leaf node 114'
             }
           ]
         },
         {
           id: '7',
-          name: '父节点12 - 折叠',
+          name: 'parent node 12 - folded',
           children: [
             {
               id: '8',
-              name: '叶子节点121'
+              name: 'leaf node 121'
             },
             {
               id: '9',
-              name: '叶子节点122'
+              name: 'leaf node 122'
             },
             {
               id: '10',
-              name: '叶子节点123'
+              name: 'leaf node 123'
             },
             {
               id: '11',
-              name: '叶子节点124'
+              name: 'leaf node 124'
             }
           ]
         },
         {
           id: '12',
-          name: '父节点13 - 没有子节点',
+          name: 'parent node 13 - without children',
           isParent: true
         }
       ]
     },
     {
       id: '13',
-      name: '父节点2 - 折叠',
+      name: 'parent node 2 - folded',
       children: [
         {
           id: '14',
-          name: '父节点21 - 展开',
+          name: 'parent node 21 - expanded',
           open: true,
           children: [
             {
               id: '15',
-              name: '叶子节点211'
+              name: 'leaf node 211'
             },
             {
               id: '16',
-              name: '叶子节点212'
+              name: 'leaf node 212'
             },
             {
               id: '17',
-              name: '叶子节点213'
+              name: 'leaf node 213'
             },
             {
               id: '18',
-              name: '叶子节点214'
+              name: 'leaf node 214'
             }
           ]
         },
         {
           id: '19',
-          name: '父节点22 - 折叠',
+          name: 'parent node 22 - folded',
           children: [
             {
               id: '20',
-              name: '叶子节点221'
+              name: 'leaf node 221'
             },
             {
               id: '21',
-              name: '叶子节点222'
+              name: 'leaf node 222'
             },
             {
               id: '22',
-              name: '叶子节点223'
+              name: 'leaf node 223'
             },
             {
               id: '23',
-              name: '叶子节点224'
+              name: 'leaf node 224'
             }
           ]
         },
         {
           id: '24',
-          name: '父节点23 - 折叠',
+          name: 'parent node 23 - folded',
           children: [
             {
               id: '25',
-              name: '叶子节点231'
+              name: 'leaf node 231'
             },
             {
               id: '26',
-              name: '叶子节点232'
+              name: 'leaf node 232'
             },
             {
               id: '27',
-              name: '叶子节点233'
+              name: 'leaf node 233'
             },
             {
               id: '28',
-              name: '叶子节点234'
+              name: 'leaf node 234'
             }
           ]
         }
@@ -137,7 +137,7 @@ export class CustomTitleKeyComponent {
     },
     {
       id: '29',
-      name: '父节点3 - 没有子节点',
+      name: 'parent node 3 - without children',
       isParent: true,
       data: {
         id: '30',

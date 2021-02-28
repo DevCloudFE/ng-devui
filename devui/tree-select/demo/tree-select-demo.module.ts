@@ -22,7 +22,9 @@ import { TreeSelectKeysComponent } from '../demo/keys/tree-select-keys.component
 import { LabelizationComponent } from '../demo/labelization/labelization.component';
 import { TreeSelectLeafOnlyComponent } from '../demo/leaf-only/tree-select-leaf-only.component';
 import { TreeSelectSearchableComponent } from '../demo/searchable/tree-select-searchable.component';
+import { TreeSelectCustomTemplateComponent } from './item-template/custom-template.component';
 import { TreeSelectDemoComponent } from './tree-select-demo.component';
+import { TreeSelectVirtualScrollComponent } from './virtual-scroll/tree-select-virtual-scroll.component';
 
 @NgModule({
   imports: [
@@ -66,11 +68,13 @@ import { TreeSelectDemoComponent } from './tree-select-demo.component';
     TreeSelectAppendToComponent,
     TreeSelectModalComponent,
     TreeSelectCustomIconComponent,
+    TreeSelectCustomTemplateComponent,
     LabelizationComponent,
     TreeSelectKeysComponent,
-    TreeSelectIconParentComponent
+    TreeSelectIconParentComponent,
+    TreeSelectVirtualScrollComponent
   ],
-  
+
   providers: [],
 })
 export class TreeSelectDemoModule {

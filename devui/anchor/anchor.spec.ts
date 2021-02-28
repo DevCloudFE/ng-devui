@@ -19,7 +19,7 @@ import { AnchorModule } from './anchor.module';
         <div class="mysidebar">
           <d-sticky [view]="view">
             <ul class="step-nav">
-              <li [dAnchorLink]="dAnchorLink" [anchorActive]="anchorActive">基本信息</li>
+              <li [dAnchorLink]="dAnchorLink" anchorActive="active">基本信息</li>
               <li [dAnchorLink]="'issue-list'" anchorActive="active">需求列表</li>
               <li [dAnchorLink]="'case-list'" anchorActive="active">用例列表</li>
               <li [dAnchorLink]="'quarlity-result'" anchorActive="active">质量评估</li>
@@ -47,20 +47,12 @@ import { AnchorModule } from './anchor.module';
       </div>
     </div>
   `,
-  styles: [
-    `
-      .my-container {
-        height: 200px;
-        overflow: scroll;
-      }
-    `,
-  ],
+  styleUrls: ['./demo/scroll-target/scroll-target.component.scss'],
 })
 class TestAnchorComponent {
   view = { top: 60, bottom: 0 };
   anchor = 'base-info';
   dAnchorLink;
-  anchorActive = 'active';
 }
 
 @Component({
@@ -112,8 +104,12 @@ class TestHashAnchorComponent {
   updateUrlWhenAnchorActive = true;
   scrollToAnchorByHashOnlyInit = false;
 
-  get takePath() {
+  get path() {
     return this.router.url;
+  }
+
+  set path(url: string) {
+    this.router.navigateByUrl(url);
   }
 }
 
@@ -144,8 +140,8 @@ describe('anchor', () => {
 
     it('should created successfully', () => {
       expect(component).toBeTruthy();
-      expect(anchorElements[0]).toBeTruthy();
-      expect(anchorLinkElements[0]).toBeTruthy();
+      expect(anchorElements.length).toEqual(4);
+      expect(anchorLinkElements.length).toEqual(4);
       expect(anchorBoxElement).toBeTruthy();
     });
 
@@ -157,11 +153,19 @@ describe('anchor', () => {
         expect(anchorElements[3].classes['section-block']).toBe(true);
       });
 
-      it('should content block have click-inside style when clicked', fakeAsync(() => {
+      it('should anchor be activated by click', fakeAsync(() => {
         anchorElements[0].nativeElement.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
         fixture.detectChanges();
         tick();
         expect(anchorElements[0].classes['anchor-active-by-click-inside']).toBe(true);
+      }));
+
+      it('should scroll to avtive anchor', fakeAsync(() => {
+        const boxElement: HTMLElement = anchorBoxElement.nativeElement;
+        boxElement.dispatchEvent(new Event('scroll', { bubbles: true, cancelable: false }));
+        fixture.detectChanges();
+        tick(100);
+        expect(anchorElements[0].classes['anchor-active-by-scroll']).toBe(true);
       }));
 
       it('should one anchor be deactivated when another anchor clicked', fakeAsync(() => {
@@ -190,6 +194,18 @@ describe('anchor', () => {
         fixture.detectChanges();
         tick(650);
         expect(dir.isScrollingToTarget).toBe(false);
+      }));
+
+      it('should highlight anchor link', fakeAsync(() => {
+        component.dAnchorLink = 'base-info';
+        fixture.detectChanges();
+        tick();
+        const linkElement: HTMLElement = anchorLinkElements[0].nativeElement;
+        expect(anchorElements[0].classes['active']).toBeUndefined();
+        linkElement.click();
+        fixture.detectChanges();
+        tick(650);
+        expect(anchorElements[0].classes['active']).toBe(true);
       }));
 
       it('should not set scrolling to target when there is no anchorblock', fakeAsync(() => {
@@ -229,8 +245,8 @@ describe('anchor hash box', () => {
 
     it('should created successfully', () => {
       expect(component).toBeTruthy();
-      expect(anchorElements[0]).toBeTruthy();
-      expect(anchorLinkElements[0]).toBeTruthy();
+      expect(anchorElements.length).toEqual(4);
+      expect(anchorLinkElements.length).toEqual(4);
       expect(anchorHashBoxElement).toBeTruthy();
     });
 
@@ -238,7 +254,40 @@ describe('anchor hash box', () => {
       anchorElements[1].nativeElement.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
       fixture.detectChanges();
       tick(650);
-      expect(component.takePath).toEqual('/#issue-list');
+      expect(component.path).toEqual('/#issue-list');
+    }));
+
+    it('should hash change when click another anchor', fakeAsync(() => {
+      anchorElements[0].nativeElement.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
+      fixture.detectChanges();
+      tick(650);
+      expect(component.path).toEqual('/#base-info');
+      anchorElements[2].nativeElement.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
+      fixture.detectChanges();
+      tick(650);
+      expect(component.path).toEqual('/#case-list');
+    }));
+
+    // TODO: Check whether scrollToFragment has been executed correctly.
+    it('should anchor activated by fragment', fakeAsync(() => {
+      fixture.ngZone.run(() => {
+        component.path = '/#case-list';
+      });
+      tick();
+      const dir = anchorHashBoxElement.injector.get(AnchorBoxHashSupportDirective) as AnchorBoxHashSupportDirective;
+      spyOn(dir, 'scrollToFragment');
+      dir.ngAfterViewInit();
+      tick(120);
+      expect(dir.scrollToFragment).toHaveBeenCalled();
+    }));
+
+    it('should not update url hash when updateUrlWhenAnchorActive is false', fakeAsync(() => {
+      component.updateUrlWhenAnchorActive = false;
+      fixture.detectChanges();
+      anchorElements[0].nativeElement.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
+      fixture.detectChanges();
+      tick(650);
+      expect(component.path).toEqual('/');
     }));
   });
 });

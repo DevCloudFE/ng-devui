@@ -45,8 +45,8 @@ export class TagComponent {
     'green-w98': '#a6dd82',
     'yellow-w98': '#fac20a',
     'orange-w98': '#fa9841',
-    'pink-w98': '#f66f6a',
-    'red-w98': '#f3689a',
+    'red-w98': '#f66f6a',
+    'pink-w98': '#f3689a',
     'purple-w98': '#a97af8',
   };
 

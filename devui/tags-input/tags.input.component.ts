@@ -1,10 +1,12 @@
-import { Component, ElementRef, EventEmitter, forwardRef, HostListener,
-  Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import {
+  Component, ElementRef, EventEmitter, forwardRef, HostListener,
+  Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, ViewChild
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
+import { addClassToOrigin, fadeInOut, removeClassFromOrigin } from 'ng-devui/utils';
 import { isEmpty } from 'lodash-es';
-import { BehaviorSubject, fromEvent, Observable, of } from 'rxjs';
-import { Subscription } from 'rxjs';
+import { BehaviorSubject, fromEvent, Observable, of, Subscription } from 'rxjs';
 import { debounceTime, map, switchMap } from 'rxjs/operators';
 @Component({
   selector: 'd-tags-input',
@@ -16,6 +18,9 @@ import { debounceTime, map, switchMap } from 'rxjs/operators';
       useExisting: forwardRef(() => TagsInputComponent),
       multi: true,
     },
+  ],
+  animations: [
+    fadeInOut
   ],
   exportAs: 'TagsInput',
   preserveWhitespaces: false
@@ -128,24 +133,11 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
 
   set showSuggestionList(val) {
     this._showSuggestionList = val;
-    const ele = this.inputBox && this.inputBox.nativeElement;
-    if (ele) {
-      if (val) {
-        if (!ele.classList.contains('devui-dropdown-origin-open')) {
-          ele.classList.add('devui-dropdown-origin-open');
-        }
-        if (!ele.classList.contains('devui-dropdown-origin-bottom')) {
-          ele.classList.add('devui-dropdown-origin-bottom');
-        }
-      } else {
-        if (ele.classList.contains('devui-dropdown-origin-open')) {
-          ele.classList.remove('devui-dropdown-origin-open');
-        }
-        if (ele.classList.contains('devui-dropdown-origin-bottom')) {
-          ele.classList.remove('devui-dropdown-origin-bottom');
-        }
-        this.onTouch();
-      }
+    if (val) {
+      addClassToOrigin(this.inputBox);
+    } else {
+      removeClassFromOrigin(this.inputBox);
+      this.onTouch();
     }
   }
   get showSuggestionList() {

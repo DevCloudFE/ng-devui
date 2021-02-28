@@ -12,7 +12,7 @@ import {
   ViewChild
 } from '@angular/core';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
-import { cornerFadeInOut, DateConverter, DefaultDateConverter } from 'ng-devui/utils';
+import { DateConverter, DefaultDateConverter, fadeInOut } from 'ng-devui/utils';
 import { Subject, Subscription } from 'rxjs';
 import { distinctUntilChanged } from 'rxjs/operators';
 import { DatePickerConfigService as DatePickerConfig } from '../date-picker.config.service';
@@ -23,7 +23,7 @@ import { DatePickerConfigService as DatePickerConfig } from '../date-picker.conf
   templateUrl: 'two-datepicker.component.html',
   styleUrls: ['./two-datepicker.component.scss'],
   animations: [
-    cornerFadeInOut
+    fadeInOut
   ]
 })
 export class TwoDatePickerComponent implements OnInit, OnDestroy {
@@ -51,7 +51,7 @@ export class TwoDatePickerComponent implements OnInit, OnDestroy {
   i18nText: I18nInterface['datePicker'];
   i18nLocale: I18nInterface['locale'];
   i18nSubscription: Subscription;
-  datepickerPosition: VerticalConnectionPos = 'bottom';
+  startAnimation = false;
 
   public currentCalendars = [null, null];
   public cdkConnectedOverlayOrigin: CdkOverlayOrigin;
@@ -94,9 +94,12 @@ export class TwoDatePickerComponent implements OnInit, OnDestroy {
   set isOpen(isOpen: boolean) {
     this._isOpen = isOpen;
     if (!isOpen) {
+      this.startAnimation = false;
       document.removeEventListener('click', this.onDocumentClick);
     } else {
       setTimeout(() => {
+        this.startAnimation = true;
+        this.cdr.detectChanges();
         document.addEventListener('click', this.onDocumentClick);
       });
     }
@@ -186,19 +189,6 @@ export class TwoDatePickerComponent implements OnInit, OnDestroy {
     }
   }
 
-  formWithDropDown(el) {
-    if (!el.nativeElement.classList.contains('devui-dropdown-origin')) {
-      const parentEle = el.nativeElement.parentElement;
-      if (parentEle && parentEle.classList.contains('devui-dropdown-origin')) {
-        return el.nativeElement.parentElement;
-      } else {
-        return el.nativeElement;
-      }
-    } else {
-      return el.nativeElement;
-    }
-  }
-
   onPositionChange(position: ConnectedOverlayPositionChange) {
     switch (position.connectionPair.overlayY) {
       case 'top':
@@ -209,42 +199,6 @@ export class TwoDatePickerComponent implements OnInit, OnDestroy {
         this.datePosition = 'top';
     }
     this.switchOriginPositionSub.next(this.whichOpen);
-  }
-
-  changeFormWithDropDown(el: ElementRef) {
-    const ele = this.formWithDropDown(el);
-    if (ele.classList.contains('devui-dropdown-origin')) {
-      if (this.isOpen) {
-        let formBorder;
-        if (!ele.classList.contains('devui-dropdown-origin-open')) {
-          ele.classList.add('devui-dropdown-origin-open');
-        }
-        if (this.datePosition === 'bottom') {
-          formBorder = 'top';
-        } else {
-          formBorder = 'bottom';
-        }
-        if (ele && !ele.classList.contains(`devui-dropdown-origin-${this.datePosition}`)) {
-          ele.classList.add(`devui-dropdown-origin-${this.datePosition}`);
-          ele.classList.remove(`devui-dropdown-origin-${formBorder}`);
-        }
-      }
-    }
-  }
-
-  removeClass(el: ElementRef) {
-    const ele = this.formWithDropDown(el);
-    if (ele.classList.contains('devui-dropdown-origin')) {
-      if (ele.classList.contains('devui-dropdown-origin-open')) {
-        ele.classList.remove('devui-dropdown-origin-open');
-      }
-      if (ele.classList.contains('devui-dropdown-origin-top')) {
-        ele.classList.remove('devui-dropdown-origin-top');
-      }
-      if (ele.classList.contains('devui-dropdown-origin-bottom')) {
-        ele.classList.remove('devui-dropdown-origin-bottom');
-      }
-    }
   }
 
   convertDate(date) {

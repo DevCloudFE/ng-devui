@@ -1,32 +1,30 @@
-<section>
-  <d-toast [value]="msgs"></d-toast>
-  <div class="control-container">
-    <d-multi-auto-complete
-      [(ngModel)]="multiItems2"
-      [searchFn]="onSearchMultiple2.bind(this)"
-      [ngModelOptions]="{ updateOn: 'blur' }"
-      [dValidateRules]="[{ minlength: 3, message: '请至少选择三个选项' }]"
-      (autoSubmit)="autoSubmit($event)"
-      name="multiple-auto"
-    >
-    </d-multi-auto-complete>
-    <div class="button-group">
-      <d-button
-        icon="icon-close"
-        bsStyle="text-dark"
-        title="清空"
-        (btnClick)="clear()"
-        [disabled]="!(multiItems2 && multiItems2.length)"
-      ></d-button>
-      <d-button
-        icon="icon-copy"
-        bsStyle="text-dark"
-        title="复制"
-        (btnClick)="copy()"
-        [disabled]="!(multiItems2 && multiItems2.length)"
-      ></d-button>
-    </div>
+<d-toast [value]="msgs"></d-toast>
+<div class="control-container">
+  <d-multi-auto-complete
+    [(ngModel)]="multiItems2"
+    [searchFn]="onSearchMultiple2.bind(this)"
+    [ngModelOptions]="{ updateOn: 'blur' }"
+    [dValidateRules]="[{ minlength: 3 }]"
+    (autoSubmit)="autoSubmit($event)"
+    name="multiple-auto"
+  >
+  </d-multi-auto-complete>
+  <div class="button-group">
+    <d-button
+      icon="icon-close"
+      bsStyle="text-dark"
+      title="Clear"
+      (btnClick)="clear()"
+      [disabled]="!(multiItems2 && multiItems2.length)"
+    ></d-button>
+    <d-button
+      icon="icon-copy"
+      bsStyle="text-dark"
+      title="Copy"
+      (btnClick)="copy()"
+      [disabled]="!(multiItems2 && multiItems2.length)"
+    ></d-button>
   </div>
+</div>
 
-  <pre>{{ multiItems2 | json }}</pre>
-</section>
+<pre>{{ multiItems2 | json }}</pre>

@@ -1,14 +1,23 @@
-import { Directive, ElementRef, EventEmitter, HostListener, Input, OnDestroy, Output } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, forwardRef, HostListener, Input, OnDestroy, Output } from '@angular/core';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
-import { Subscription } from 'rxjs';
-import { debounceTime, last, map } from 'rxjs/operators';
+import { Message } from 'ng-devui/toast';
+import { from, Subscription } from 'rxjs';
+import { debounceTime, last, map, mergeMap } from 'rxjs/operators';
 import { FileUploader } from './file-uploader.class';
-import { IFileOptions, IUploadOptions } from './file-uploader.types';
+import { IFileOptions, IUploadOptions, UploadStatus } from './file-uploader.types';
 import { SelectFiles } from './select-files.utils';
 import { UploadComponent } from './upload.class';
 @Directive({
   selector: '[dUpload]',
-  exportAs: 'dUpload'
+  exportAs: 'dUpload',
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => UploadDirective),
+      multi: true
+    }
+  ],
 })
 export class UploadDirective extends UploadComponent implements OnDestroy {
   @Input() uploadOptions: IUploadOptions;
@@ -16,23 +25,46 @@ export class UploadDirective extends UploadComponent implements OnDestroy {
   @Input() uploadedFiles: Array<Object> = [];
   @Input() fileUploaders: Array<FileUploader> = [];
   @Input() enableDrop = false;
-  @Output() public fileOver: EventEmitter<any> = new EventEmitter<any>();
-  @Output() public fileDrop: EventEmitter<File[]> = new EventEmitter<File[]>();
-  @Output() successEvent: EventEmitter<any> = new EventEmitter<any>();
-  @Output() errorEvent: EventEmitter<any> = new EventEmitter<any>();
-  @Output() alertMsgEvent: EventEmitter<any> = new EventEmitter<any>();
+  @Input() dynamicUploadOptionsFn: (files, uploadOptions) => IUploadOptions;
+  @Output() public fileOver: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() public fileDrop: EventEmitter<any> = new EventEmitter<any>();
+  @Output() successEvent: EventEmitter<Array<{ file: File; response: any }>> = new EventEmitter<Array<{ file: File; response: any }>>();
+  @Output() errorEvent: EventEmitter<{ file: File; response: any }> = new EventEmitter<{ file: File; response: any }>();
+  @Output() alertMsgEvent: EventEmitter<Message[]> = new EventEmitter<Message[]>();
+  @Output() fileSelect: EventEmitter<File[]> = new EventEmitter<File[]>();
 
   errorMsg = [];
   protected element: ElementRef;
   i18nText: I18nInterface['upload'];
   i18nSubscription: Subscription;
-
+  private onChange = (_: any) => null;
+  private onTouched = () => null;
   constructor(private selectFiles: SelectFiles, private i18n: I18nService, element: ElementRef) {
     super();
     this.element = element;
     this.i18nText = this.i18n.getI18nText().upload;
     this.i18nSubscription = this.i18n.langChange().subscribe((data) => {
       this.i18nText = data.upload;
+    });
+  }
+  writeValue(files: any): void {
+    if (files) {
+      const simulateFiles = from(this.simulateSelectFiles(files)).pipe(mergeMap(file => <any>file));
+      this._dealFiles(simulateFiles);
+    }
+  }
+
+  registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: any): void {
+    this.onTouched = fn;
+  }
+
+  simulateSelectFiles(files) {
+    return  new Promise((resolve) => {
+      resolve(Array.prototype.slice.call(files));
     });
   }
 
@@ -45,28 +77,40 @@ export class UploadDirective extends UploadComponent implements OnDestroy {
     super.resetSameNameFiles();
     observale.pipe(
       map(file => {
-        super.addFile(file, this.uploadOptions);
+        let uploadOptions = this.uploadOptions;
+        if (this.dynamicUploadOptionsFn) {
+          uploadOptions = this.dynamicUploadOptionsFn(file, this.uploadOptions);
+        }
+        super.addFile(file, uploadOptions);
       }),
       debounceTime(100)
     )
       .subscribe(
         () => {
           this.checkValid();
-          const sameNameFiles = super.getSameNameFiles();
+          this.checkSameName();
+          const selectedFiles = this.fileUploaders
+          .filter(fileUploader =>  fileUploader.status === UploadStatus.preLoad)
+          .map(fileUploader =>  fileUploader.file);
+          this.onFileSelect(selectedFiles);
           this.uploadFiles();
-          if (this.uploadOptions.checkSameName && sameNameFiles.length) {
-            this.errorMsg = [{
-              severity: 'warn',
-              detail: this.i18nText.getExistSameNameFilesMsg(sameNameFiles)
-            }];
-            this.alertMsgEvent.emit(this.errorMsg);
-          }
         },
         (error: Error) => {
           this.errorMsg = [{severity: 'warn', detail: error.message}];
           this.alertMsgEvent.emit(this.errorMsg);
         }
       );
+  }
+
+  checkSameName() {
+    const sameNameFiles = super.getSameNameFiles();
+    if (this.uploadOptions.checkSameName && sameNameFiles.length) {
+      this.errorMsg = [{
+        severity: 'warn',
+        detail: this.i18nText.getExistSameNameFilesMsg(sameNameFiles)
+      }];
+      this.alertMsgEvent.emit(this.errorMsg);
+    }
   }
 
   // 文件大小、类型是否符合上传条件
@@ -100,6 +144,10 @@ export class UploadDirective extends UploadComponent implements OnDestroy {
           this.errorEvent.emit(error);
         }
       );
+  }
+
+  onFileSelect(files) {
+    this.fileSelect.emit(files);
   }
 
   @HostListener('drop', [ '$event' ])

@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="col-md-5" style="font-size: 0">
+    <d-tree-select
+      placeholder="Standard Input"
+      [treeData]="data"
+      [multiple]="true"
+      [expandTree]="true"
+      [(ngModel)]="value2"
+      (ngModelChange)="showSelected($event)"
+      [searchable]="true"
+      [virtualScroll]="true"
+      [virtualScrollHeightPx]="500"
+      [virtualScrollMinBufferPx]="900"
+      [virtualScrollMaxBufferPx]="1800"
+      style="width: 280px"
+    ></d-tree-select>
+  </div>
+</div>

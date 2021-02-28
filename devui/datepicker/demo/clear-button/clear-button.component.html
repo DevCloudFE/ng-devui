@@ -1,21 +1,20 @@
 <section>
-  <span>可给clearAll()传入参数以定义不同reason</span>
   <div class="row">
     <div class="col-md-6">
-      <div class="devui-input-group devui-dropdown-origin-wrapper devui-dropdown-origin">
+      <div class="devui-input-group devui-dropdown-origin">
         <input
           class="devui-input devui-form-control"
           placeholder="y/MM/dd"
           name="dp"
           [(ngModel)]="selectedDate2"
-          (focus)="datePicker1.toggle()"
+          (click)="datePicker1.toggle()"
           autocomplete="off"
           dDatepicker
           #datePicker1="datepicker"
           (selectedDateChange)="getValue($event)"
           [customViewTemplate]="myCustomview"
         />
-        <div *ngIf="selectedDate2" class="devui-input-group-addon icon-close-wrapper" (click)="datePicker1.clearAll()">
+        <div *ngIf="selectedDate2" class="devui-input-group-addon close-icon-wrapper" (click)="datePicker1.clearAll()">
           <i class="icon icon-close"></i>
         </div>
         <div class="devui-input-group-addon" (click)="datePicker1.toggle()">
@@ -26,8 +25,8 @@
   </div>
   <ng-template #myCustomview let-chooseDate="chooseDate" let-clearAll="clearAll" let-datePicker>
     <div class="box">
-      <d-button bsStyle="common" (btnClick)="clearAll(changeReason.button)" bsSize="sm"> 清除 </d-button>
-      <d-button bsStyle="common" (btnClick)="chooseDate(getDay(0))" bsSize="sm"> 今天 </d-button>
+      <d-button bsStyle="common" (btnClick)="clearAll(changeReason.button)" bsSize="sm"> clear </d-button>
+      <d-button bsStyle="common" (btnClick)="chooseDate(getDay(0))" bsSize="sm"> today </d-button>
     </div>
   </ng-template>
 </section>

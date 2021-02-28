@@ -15,7 +15,7 @@ export class DebounceTimeComponent {
     let message = null;
 
     if (value === 'DevUI') {
-      message = '当前字段已存在';
+      message = 'The field already exists.';
     }
 
     return of(message).pipe(

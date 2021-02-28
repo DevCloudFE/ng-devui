@@ -9,9 +9,11 @@ import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.
 import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 import { SearchModule } from '../search.module';
+import { AutoFocusComponent } from './auto-focus/auto-focus.component';
 import { BasicComponent } from './basic/basic.component';
 import { IconLeftComponent } from './icon-left/icon-left.component';
 import { NgmodelComponent } from './ngmodel/ngmodel.component';
+import { SearchNoBorderComponent } from './no-border/search-no-border.component';
 import { SearchDemoComponent } from './search-demo.component';
 
 @NgModule({
@@ -39,8 +41,10 @@ import { SearchDemoComponent } from './search-demo.component';
     BasicComponent,
     IconLeftComponent,
     NgmodelComponent,
+    AutoFocusComponent,
+    SearchNoBorderComponent
   ],
-  
+
 })
 export class SearchDemoModule {
 }

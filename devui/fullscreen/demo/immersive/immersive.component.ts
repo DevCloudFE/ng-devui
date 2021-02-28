@@ -2,16 +2,16 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'd-fullscreen-demo-immersive',
-  templateUrl: './immersive.component.html'
+  templateUrl: './immersive.component.html',
 })
 export class FullscreenDemoImmersiveComponent {
-  btnContent = '全屏';
+  btnContent = 'FullScreen';
 
-  launchFullscreen({isFullscreen}) {
+  launchFullscreen({ isFullscreen }) {
     if (isFullscreen) {
-      this.btnContent = '退出全屏';
+      this.btnContent = 'Exit';
     } else {
-      this.btnContent = '全屏';
+      this.btnContent = 'FullScreen';
     }
   }
 }

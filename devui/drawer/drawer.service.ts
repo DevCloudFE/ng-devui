@@ -9,7 +9,7 @@ export class DrawerService {
   constructor(
     private overlayContainerRef: OverlayContainerRef,
     private componentFactoryResolver: ComponentFactoryResolver
-  ) {}
+  ) { }
 
   open({
     drawerContentComponent,

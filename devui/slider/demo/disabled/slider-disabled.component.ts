@@ -1,8 +1,9 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'd-slider-disabled',
-  templateUrl: './slider-disabled.component.html'
+  templateUrl: './slider-disabled.component.html',
+  styleUrls: ['./slider-disabled.component.scss']
 })
 export class SliderDisabledComponent {
   inputValue = 2;

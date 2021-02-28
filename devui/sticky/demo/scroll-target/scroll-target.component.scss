@@ -18,9 +18,17 @@
 
 .tip-content {
   width: 180px;
+  padding: 10px;
 }
 
-.my-section {
+.container {
   height: 450px;
   overflow-y: auto;
+}
+
+.sticky-content {
+  width: 180px;
+  height: 100px;
+  background-color: white;
+  padding: 10px;
 }

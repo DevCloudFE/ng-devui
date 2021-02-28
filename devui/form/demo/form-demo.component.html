@@ -17,7 +17,7 @@
     <div class="demo-text">{{ 'components.form.basicDemo.d-form-operation-description' | translate }}</div>
   </div>
 
-  <div class="demo-example">
+  <div class="demo-example" [dAnchor]="'basic-usage'">
     <div class="demo-title">{{ 'components.form.basicDemo.title' | translate }}</div>
     <div class="demo-text">{{ 'components.form.basicDemo.description' | translate }}</div>
     <d-codebox id="form-base" [sourceData]="BasicSource">
@@ -52,27 +52,41 @@
   <hr class="split-line" />
 
   <div class="demo-example" [dAnchor]="'demo-validate-template'">
-    <div class="demo-title">{{ 'components.form.innerValidatorDemo.title' | translate }}</div>
-    <div class="demo-text" [innerHTML]="'components.form.innerValidatorDemo.description' | translate"></div>
+    <div class="demo-title">{{ 'components.form.templateValidateDemo.title' | translate }}</div>
+    <div class="demo-text" [innerHTML]="'components.form.templateValidateDemo.description' | translate"></div>
     <div id="demo-validate-template">
+      <h5>{{ 'components.form.innerValidatorDemo.title' | translate }}</h5>
+      <div [innerHTML]="'components.form.innerValidatorDemo.description' | translate"></div>
       <d-codebox id="inner-validator" [sourceData]="InnerValidatorSource">
         <d-form-demo-inner-validator demo></d-form-demo-inner-validator>
       </d-codebox>
+      <h5>{{ 'components.form.customerValidatorDemo.title' | translate }}</h5>
+      <div [innerHTML]="'components.form.customerValidatorDemo.description' | translate"></div>
       <d-codebox id="custom-validator" [sourceData]="CustomValidatorSource">
         <d-form-demo-custom-validator demo></d-form-demo-custom-validator>
       </d-codebox>
+      <h5>{{ 'components.form.customErrorStrategyDemo.title' | translate }}</h5>
+      <div [innerHTML]="'components.form.customErrorStrategyDemo.description' | translate"></div>
       <d-codebox id="error-strategy" [sourceData]="ErrorStrategySource">
         <d-form-demo-error-strategy demo></d-form-demo-error-strategy>
       </d-codebox>
+      <h5>{{ 'components.form.customMessageShowDemo.title' | translate }}</h5>
+      <div [innerHTML]="'components.form.customMessageShowDemo.description' | translate"></div>
       <d-codebox id="custom-message-show" [sourceData]="CustomMessageShowSource">
         <d-form-demo-custom-message-show demo></d-form-demo-custom-message-show>
       </d-codebox>
+      <h5>{{ 'components.form.debounceTimeDemo.title' | translate }}</h5>
+      <div [innerHTML]="'components.form.debounceTimeDemo.description' | translate"></div>
       <d-codebox id="debounce-time" [sourceData]="DebounceTimeSource">
         <d-form-demo-debounce-time demo></d-form-demo-debounce-time>
       </d-codebox>
+      <h5>{{ 'components.form.validateTemplateForm.title' | translate }}</h5>
+      <div [innerHTML]="'components.form.validateTemplateForm.description' | translate"></div>
       <d-codebox id="validate-template-form" [sourceData]="ValidateTemplateForm">
         <d-form-demo-validate-template-form demo></d-form-demo-validate-template-form>
       </d-codebox>
+      <h5>{{ 'components.form.userRegisterDemo.title' | translate }}</h5>
+      <div [innerHTML]="'components.form.userRegisterDemo.description' | translate"></div>
       <d-codebox id="user-register" [sourceData]="UserRegisterShowSource">
         <d-form-demo-user-register demo></d-form-demo-user-register>
       </d-codebox>
@@ -80,10 +94,7 @@
   </div>
   <div class="demo-example" [dAnchor]="'demo-validate-reactive'">
     <div class="demo-title">{{ 'components.form.validateReactiveDemo.title' | translate }}</div>
-    <div class="demo-text" [innerHTML]="'components.form.validateReactiveDemo.description' | translate">
-      模板中绑定<code>formGroup、formControlName、formControl</code>，使用<code>dValidateRules</code>配置校验规则。
-      <p>推荐阅读<a href="https://angular.cn/guide/reactive-forms" target="_blank">【Angular响应式表单】</a></p>
-    </div>
+    <div class="demo-text" [innerHTML]="'components.form.validateReactiveDemo.description' | translate"></div>
     <d-codebox id="form-validate-reactive" [sourceData]="ValidateReactiveSource">
       <d-form-demo-validate-reactive demo></d-form-demo-validate-reactive>
     </d-codebox>
@@ -91,10 +102,7 @@
 
   <div class="demo-example" [dAnchor]="'demo-custom-status'">
     <div class="demo-title">{{ 'components.form.customStatusDemo.title' | translate }}</div>
-    <div class="demo-text" [innerHTML]="'components.form.customStatusDemo.description' | translate">
-      你可通过对<code>d-form-control</code>设置<code>feedbackStatus</code>手动指定反馈状态。
-      当前已支持状态：<code>success、error、pending</code>。
-    </div>
+    <div class="demo-text" [innerHTML]="'components.form.customStatusDemo.description' | translate"></div>
     <d-codebox id="form-custom-status" [sourceData]="ValidateCustomStatus">
       <d-form-custom-status demo></d-form-custom-status>
     </d-codebox>
@@ -102,14 +110,7 @@
 
   <div class="demo-example" [dAnchor]="'demo-validate-sync'">
     <div class="demo-title">{{ 'components.form.validateSyncDemo.title' | translate }}</div>
-    <div class="demo-text" [innerHTML]="'components.form.validateSyncDemo.description' | translate">
-      在一些场景下，你的多个表单组件互相依赖，需共同校验（如注册场景中的密码输入与确认密码），此时你需要用协同验证指令<code>dValidateSyncKey</code>来为需要系统校验的组件指定相同的<code
-        >key</code
-      >
-      <code>dValidateSyncKey</code>指令支持模板驱动表单与响应式表单，以下示例以模板驱动表单为例：
-      <code>password</code>与<code>confirmPassword</code>设置相同的<code>dValidateSyncKey</code>值，
-      在其中一个组件值变更时，另一个组件也将进行校验。
-    </div>
+    <div class="demo-text" [innerHTML]="'components.form.validateSyncDemo.description' | translate"></div>
     <div id="demo-validate-sync">
       <d-codebox [sourceData]="ValidateSyncSource">
         <d-form-demo-validate-sync demo></d-form-demo-validate-sync>
@@ -121,9 +122,11 @@
     <div class="demo-title">{{ 'components.form.validateCrossComponentDemo.title' | translate }}</div>
     <div class="demo-text" [innerHTML]="'components.form.validateCrossComponentDemo.description' | translate"></div>
     <div id="demo-validate-cross-component">
+      <h5>{{ 'components.form.reactiveCrossComponent.title' | translate }}</h5>
       <d-codebox [sourceData]="ReactiveFormCrossComponent">
         <d-form-demo-validate-cross-component demo></d-form-demo-validate-cross-component>
       </d-codebox>
+      <h5>{{ 'components.form.templateCrossComponent.title' | translate }}</h5>
       <d-codebox [sourceData]="ValidateTemplateCrossComponent">
         <d-form-demo-template-cross-component demo></d-form-demo-template-cross-component>
       </d-codebox>

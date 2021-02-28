@@ -13,6 +13,7 @@ import { ImagePreviewModule } from '../image-preview.module';
 import { BasicComponent } from './basic/basic.component';
 import { CustomOpenComponent } from './custom-open/custom-open.component';
 import { DImagePreviewDemoComponent } from './image-preview-demo.component';
+import { ZIndexComponent } from './z-index/z-index.component';
 
 @NgModule({
   imports: [
@@ -38,8 +39,9 @@ import { DImagePreviewDemoComponent } from './image-preview-demo.component';
   declarations: [
     DImagePreviewDemoComponent,
     BasicComponent,
-    CustomOpenComponent
+    CustomOpenComponent,
+    ZIndexComponent
   ],
-  
+
 })
 export class ImagePreviewDemoModule { }

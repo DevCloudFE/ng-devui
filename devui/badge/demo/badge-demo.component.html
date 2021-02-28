@@ -32,4 +32,20 @@
       <d-badge-status demo></d-badge-status>
     </d-codebox>
   </div>
+
+  <div class="demo-example" [dAnchor]="'position'">
+    <div class="demo-title">{{ 'components.badge.positionDemo.title' | translate }}</div>
+    <div class="demo-text">{{ 'components.badge.positionDemo.description' | translate }}</div>
+    <d-codebox id="components-button-primary" [sourceData]="positionSource">
+      <d-position demo></d-position>
+    </d-codebox>
+  </div>
+
+  <div class="demo-example" [dAnchor]="'custom'">
+    <div class="demo-title">{{ 'components.badge.customDemo.title' | translate }}</div>
+    <div class="demo-text">{{ 'components.badge.customDemo.description' | translate }}</div>
+    <d-codebox id="components-button-primary" [sourceData]="customSource">
+      <d-custom demo></d-custom>
+    </d-codebox>
+  </div>
 </div>

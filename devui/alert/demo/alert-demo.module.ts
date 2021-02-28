@@ -11,6 +11,7 @@ import { AlertModule } from '../alert.module';
 import { AlertDemoComponent } from './alert-demo.component';
 import { BasicComponent } from './basic/basic.component';
 import { CloseComponent } from './close/close.component';
+import { WithoutIconComponent } from './withoutIcon/withoutIcon.component';
 
 @NgModule({
   imports: [
@@ -35,8 +36,9 @@ import { CloseComponent } from './close/close.component';
     AlertDemoComponent,
     BasicComponent,
     CloseComponent,
+    WithoutIconComponent
   ],
-  
+
 })
 export class AlertDemoModule {
 }

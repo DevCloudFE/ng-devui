@@ -1,59 +1,59 @@
-<section>
-  <h5 class="text-muted">Standard: Single Select</h5>
-  <div class="row">
-    <div class="col-md-5" style="font-size: 0">
-      <d-tree-select
-        placeholder="Standard Input"
-        [treeData]="data1"
-        [expandTree]="true"
-        [(ngModel)]="value1"
-        (ngModelChange)="showSelected($event)"
-        style="width: 280px"
-      ></d-tree-select>
-    </div>
+<h5 class="text-muted">Standard: Single Select</h5>
+<div class="row">
+  <div class="col-md-5" style="font-size: 0">
+    <d-tree-select
+      placeholder="Standard Input"
+      [treeData]="data1"
+      [expandTree]="true"
+      [(ngModel)]="value1"
+      (valueChanged)="valueChanged($event)"
+      (ngModelChange)="showSelected($event)"
+      style="width: 280px"
+    ></d-tree-select>
   </div>
-  <h5 class="text-muted" style="margin-top: 20px">Standard: Multiple Select</h5>
-  <div class="row">
-    <div class="col-md-5" style="font-size: 0">
-      <d-tree-select
-        placeholder="Standard Input"
-        [treeData]="data2"
-        [multiple]="true"
-        [expandTree]="true"
-        [(ngModel)]="value2"
-        (ngModelChange)="showSelected($event)"
-        (nodeToggleEvent)="nodeToggleEvent($event)"
-        style="width: 280px"
-      ></d-tree-select>
-    </div>
+</div>
+<h5 class="text-muted" style="margin-top: 20px">Standard: Multiple Select</h5>
+<div class="row">
+  <div class="col-md-5" style="font-size: 0">
+    <d-tree-select
+      placeholder="Standard Input"
+      [treeData]="data2"
+      [multiple]="true"
+      [expandTree]="true"
+      [(ngModel)]="value2"
+      (ngModelChange)="showSelected($event)"
+      (valueChanged)="valueChanged($event)"
+      (nodeToggleEvent)="nodeToggleEvent($event)"
+      style="width: 280px"
+    ></d-tree-select>
   </div>
-  <h5 class="text-muted">Custom Width: Single Select</h5>
-  <div class="row">
-    <div class="col-md-5" style="font-size: 0">
-      <d-tree-select
-        placeholder="Standard Input"
-        [treeData]="data1"
-        [expandTree]="true"
-        [(ngModel)]="value1"
-        (ngModelChange)="showSelected($event)"
-        width="auto"
-        style="width: 280px"
-      ></d-tree-select>
-    </div>
+</div>
+<h5 class="text-muted">Custom Width: Single Select</h5>
+<div class="row">
+  <div class="col-md-5" style="font-size: 0">
+    <d-tree-select
+      placeholder="Standard Input"
+      [treeData]="data1"
+      [expandTree]="true"
+      [(ngModel)]="value1"
+      (ngModelChange)="showSelected($event)"
+      width="auto"
+      style="width: 280px"
+    ></d-tree-select>
   </div>
-  <h5 class="text-muted">Disabled: Single Select</h5>
-  <div class="row">
-    <div class="col-md-5" style="font-size: 0">
-      <d-tree-select
-        placeholder="Standard Input"
-        [treeData]="data1"
-        [expandTree]="true"
-        [(ngModel)]="value1"
-        (ngModelChange)="showSelected($event)"
-        width="auto"
-        [disabled]="true"
-        style="width: 280px"
-      ></d-tree-select>
-    </div>
+</div>
+<h5 class="text-muted">Disabled: Single Select</h5>
+<div class="row">
+  <div class="col-md-5" style="font-size: 0">
+    <d-tree-select
+      placeholder="Standard Input"
+      [treeData]="data1"
+      [expandTree]="true"
+      [(ngModel)]="value1"
+      (ngModelChange)="showSelected($event)"
+      width="auto"
+      [disabled]="true"
+      style="width: 280px"
+    ></d-tree-select>
   </div>
-</section>
+</div>

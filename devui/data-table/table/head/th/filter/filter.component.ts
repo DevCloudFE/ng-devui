@@ -17,6 +17,7 @@ import { TableThComponent } from '../th.component';
 export class FilterComponent implements OnInit, OnChanges, OnDestroy {
   @Input() beforeFilter: (value) => boolean | Promise<boolean> | Observable<boolean>;
   @Input() customFilterTemplate: TemplateRef<any>;
+  @Input() extraFilterTemplate: TemplateRef<any>;
   @Input() searchFn: (term: string) => Observable<Array<any>>;
   @Input() filterList: Array<FilterConfig>;
   @Input() filterIconActive: boolean;

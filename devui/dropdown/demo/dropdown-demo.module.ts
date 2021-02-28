@@ -19,6 +19,7 @@ import { DropDownDemoFocusComponent } from './focus/focus.component';
 import { DropDownDemoHoverComponent } from './hover/hover.component';
 import { DropDownDemoManuallyComponent } from './manually/manually.component';
 import { DropDownDemoMultiLevelComponent } from './multi-level/multi-level.component';
+import { DropdownSetIsOpenComponent } from './set-is-open/dropdown-set-is-open.component';
 
 @NgModule({
   imports: [
@@ -51,8 +52,9 @@ import { DropDownDemoMultiLevelComponent } from './multi-level/multi-level.compo
     DropDownDemoAddIconComponent,
     DropDownDemoMultiLevelComponent,
     DropDownDemoManuallyComponent,
+    DropdownSetIsOpenComponent,
   ],
-  
+
 })
 export class DropdownDemoModule {
 }

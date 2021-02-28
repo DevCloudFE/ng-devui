@@ -30,7 +30,7 @@ import { DatePickerConfigService as DatePickerConfig } from './date-picker.confi
     useExisting: forwardRef(() => DatepickerComponent),
     multi: true
   }],
-  preserveWhitespaces: false,
+  preserveWhitespaces: false
 })
 export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, ControlValueAccessor {
   static DAY_DURATION = 24 * 60 * 60 * 1000;
@@ -45,6 +45,7 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
   @Input() disabled = false;
   @Input() customViewTemplate: TemplateRef<any>;
   @Input() selectedDate: Date;
+  @Input() mode: 'year'|'month'|'date' = 'date';
   yearNumber = 12;
   _yearNumber = 12;
   _dateConfig: any;
@@ -60,8 +61,6 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
   yearOptions: any[];
   openChooseYear: boolean;
   openChooseMonth: boolean;
-  hoverYear: number;
-  hoverMonth: number;
   availableMonths: any[];
   i18nText: I18nInterface['datePicker'];
   i18nLocale: I18nInterface['locale'];
@@ -99,6 +98,19 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
     this.onDisplayWeeksChange();
     this.onYearRangeChange();
     this.initDatePicker();
+    this.initMode();
+  }
+
+  initMode() {
+    if (this.mode === 'year') {
+      this.openChooseYear = true;
+      this.openChooseMonth = false;
+    } else if (this.mode === 'month') {
+      this.openChooseYear = false;
+      this.openChooseMonth = true;
+    } else {
+      this.openChooseYear = this.openChooseMonth = false;
+    }
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -197,6 +209,7 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
   }
 
   protected resetYearOptions() {
+    this.initMode();
     const baseYear = this.selectedDate ? this.selectedDate.getFullYear() : (new Date()).getFullYear();
     this.currentYear = baseYear;
     this.nowMinYear = baseYear - Math.floor(this._yearNumber / 2) < this.minDate.getFullYear() ?
@@ -367,9 +380,18 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
       return;
     }
     this.currentYear = yearTitle;
-    this.onDisplayWeeksChange();
-    this.availableMonths = this.onDisplayMonthsChange();
-    this.openChooseYear = false;
+    if (this.mode === 'year') {
+      this.onSelectDate($event, new Date(yearTitle, 0, 1));
+    } else if (this.mode === 'month') {
+      this.openChooseYear = false;
+      this.currentMonthIndex = null;
+      this.openChooseMonth = true;
+    } else {
+      this.onDisplayWeeksChange();
+      this.availableMonths = this.onDisplayMonthsChange();
+      this.openChooseYear = false;
+      this.openChooseMonth = !!$event;
+    }
   }
 
   protected onSelectDateChanged() {
@@ -615,9 +637,20 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
   toggle($event: Event, which) {
     $event.stopPropagation();
     if (which === 'year') {
-      this.openChooseYear = !this.openChooseYear;
-      this.openChooseMonth = false;
+      if (this.mode === 'year') {
+        return ;
+      } else if (this.mode === 'month') {
+        this.openChooseYear = true;
+        this.openChooseMonth = false;
+        return ;
+      } else {
+        this.openChooseYear = !this.openChooseYear;
+        this.openChooseMonth = false;
+      }
     } else {
+      if (this.mode === 'month') {
+        return ;
+      }
       this.openChooseMonth = !this.openChooseMonth;
       this.openChooseYear = false;
     }
@@ -667,16 +700,12 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
       return;
     }
     this.currentMonthIndex = month.index;
-    this.onDisplayWeeksChange();
-    this.openChooseMonth = false;
-  }
-
-  changeHoverYear(item: number) {
-    this.hoverYear = item;
-  }
-
-  changeHoverMonth(item: number) {
-    this.hoverMonth = item;
+    if (this.mode === 'month') {
+      this.onSelectDate({} , new Date(this.currentYear, this.currentMonthIndex, 1));
+    } else {
+      this.onDisplayWeeksChange();
+      this.openChooseMonth = false;
+    }
   }
 
   chooseDate = (date: string, event = {}, reason = SelectDateChangeReason.custom) => {

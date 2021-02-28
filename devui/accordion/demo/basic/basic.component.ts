@@ -9,37 +9,37 @@ export class BasicComponent {
   restrictOneOpen = false;
   accordionTypeEmbed = false;
   menu = [{
-    title: '内容一',
+    title: 'Content 1',
     children: [
-      {title: '子内容1'},
-      {title: '子内容2'},
-      {title: '子内容3'},
+      {title: 'Child Content 1'},
+      {title: 'Child Content 2'},
+      {title: 'Child Content '},
     ]
   }, {
-    title: '内容二（超长长长长长长长长长长长长长长内容测试）',
+    title: 'Content 2（This is a long sentence for option display.）',
     children: [
-      {title: '子内容1（超长长长长长长长长长长长长长长内容测试'},
-      {title: '子内容2'},
-      {title: '子内容3'},
+      {title: 'Child Content 1 (This is a long sentence for option display.)'},
+      {title: 'Child Content 2'},
+      {title: 'Child Content 3'},
     ]
   }, {
-    title: '内容三（默认展开）',
+    title: 'Content 3 (Default Open)',
     open: true,
     children: [
-      {title: '子内容1(禁用)', disabled: true},
-      {title: '子内容2(默认激活)', active: true},
-      {title: '子内容3'},
+      {title: 'Child Content 1 (Disabled)', disabled: true},
+      {title: 'Child Content 2 (Default Active)', active: true},
+      {title: 'Child Content 3'},
     ]
   }, {
-    title: '内容四（没有子项）',
+    title: 'Content 4 (No Child)',
     children: []
   }, {
-    title: '内容五（禁用）',
+    title: 'Content 5 (Disabled)',
     disabled: true,
     children: [
     ]
   }, {
-    title: '内容六（动态加载）',
+    title: 'Content 6 (Dynamic Content)',
     needLoadChildren: true,
     loading: false,
     children: [
@@ -56,8 +56,8 @@ export class BasicComponent {
       event.item.loading = true;
       setTimeout(() => {
         event.item.children = [
-          {title: '子内容1'},
-          {title: '子内容2'}
+          {title: 'Child Content 1'},
+          {title: 'Child Content 2'}
         ];
         event.item.needLoadChildren = false;
         event.item.loading = false;
