@@ -2,7 +2,7 @@
 @import '../style/theme/variables';
 @import '../style/mixins/index';
 @import '../style/theme/corner';
-@import '../style/theme/_font';
+@import '../style/core/_font';
 
 .devui-input-group {
   position: relative;
@@ -55,15 +55,6 @@
   }
 }
 
-.devui-input-group .devui-upload-placeholder {
-  max-height: 28px;
-  max-width: 100%;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  color: $devui-placeholder;
-}
-
 .devui-input-group .devui-form-control {
   cursor: pointer;
   display: block;
@@ -73,7 +64,6 @@
   padding: 5px 10px;
   font-size: $devui-font-size;
   line-height: 1.5;
-  color: $devui-text;
   background-image: none;
   border: 1px solid $devui-form-control-line;
   border-radius: $devui-border-radius 0 0 $devui-border-radius;
@@ -145,6 +135,23 @@
   }
 }
 
+.devui-input-group {
+  &.disabled {
+    .devui-upload-placeholder {
+      color: $devui-disabled-text;
+    }
+  }
+
+  .devui-upload-placeholder {
+    max-height: 28px;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: $devui-placeholder;
+  }
+}
+
 :host ::ng-deep .devui-progress-circle {
   width: 16px;
   height: 16px;
@@ -154,6 +161,8 @@
 .devui-input-group.disabled .devui-input-group-addon {
   cursor: not-allowed;
   background-color: $devui-disabled-bg;
+  border-color: $devui-disabled-line;
+  color: $devui-disabled-text;
 }
 
 svg.svg-icon-dot > path {

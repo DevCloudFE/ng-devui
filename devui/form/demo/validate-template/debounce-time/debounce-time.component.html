@@ -1,16 +1,10 @@
 <section class="demo-section">
-  <h5>验证单个元素，自定义asyncDebounceTime</h5>
-  <ul>
-    <li>我们对于异步校验器，提供默认<code>300ms debounce time</code>。</li>
-    <li>也可在<code>dValidateRules</code>中设置<code>asyncDebounceTime</code>显示设置（单位<code>ms</code>）。</li>
-    <li>若你的同步校验器也需要<code>debounce time</code>，则其表现已为异步校验，你可将其转换为异步校验器。</li>
-    <li>此配置可继承。</li>
-  </ul>
   <div>
     <input
       dTextInput
       autocomplete="off"
       name="singleInput"
+      placeholder="Input"
       [(ngModel)]="singleInputData"
       [dValidateRules]="{
         asyncDebounceTime: 500,

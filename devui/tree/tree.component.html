@@ -21,7 +21,7 @@
   [treeFactory]="treeFactory"
 >
 </d-tree-nodes>
-
+<!-- TODO: 虚拟滚动支持动效 -->
 <ng-template #virtualScrollRef let-treeNode="treeNode" let-treeFactory="treeFactory">
   <div
     class="devui-tree-node"
@@ -36,7 +36,7 @@
       class="devui-tree-vertical-line"
       *ngFor="let item of treeNode.data.depth | transferToArrayPipe; let i = index"
       [style.marginLeft.px]="i === 0 ? -16 : -16 - 24 * i"
-      [ngStyle]="{ height: i === 0 && treeNode.data.isLast && !treeNode.data.isOpen ? '19px' : '38px' }"
+      [ngStyle]="{ height: i === 0 && treeNode.data.isLast && !treeNode.data.isOpen ? '15px' : '30px' }"
     ></div>
     <div
       *ngIf="treeNode.data.depth"
@@ -194,7 +194,12 @@
         </span>
       </div>
     </div>
-    <div class="devui-tree-node__children" *ngIf="treeNode.data.isOpen">
+    <div
+      *ngIf="treeNode.data.isOpen"
+      class="devui-tree-node__children"
+      [@treeCollapseState]="treeNode.data.isOpen ? '' : 'void'"
+      [@.disabled]="afterInitAnimate || !showAnimation"
+    >
       <d-tree-nodes [treeList]="treeNode.data.children || []" [treeNodesRef]="default" [treeFactory]="treeFactory"> </d-tree-nodes>
     </div>
   </div>

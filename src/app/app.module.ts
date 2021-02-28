@@ -27,23 +27,21 @@ export function HttpLoaderFactory(http: HttpClient) {
     FormsModule,
     ThemePickerModule,
     HttpClientModule,
-    RouterModule.forRoot(
-      [
-        {
-          path: '',
-          redirectTo: 'components/zh-cn',
-          pathMatch: 'full'
-        },
-        {
-          path: 'components/:lang',
-          loadChildren: () => import('./component/app-content.module').then(m => m.AppContentModule)
-        },
-        {
-          path: '**',
-          redirectTo: 'components/zh-cn'
-        }
-      ]
-    ),
+    RouterModule.forRoot([
+    {
+        path: '',
+        redirectTo: 'components/zh-cn',
+        pathMatch: 'full'
+    },
+    {
+        path: 'components/:lang',
+        loadChildren: () => import('./component/app-content.module').then(m => m.AppContentModule)
+    },
+    {
+        path: '**',
+        redirectTo: 'components/zh-cn'
+    }
+], { relativeLinkResolution: 'legacy' }),
     TranslateModule.forRoot({
       loader: {
           provide: TranslateLoader,

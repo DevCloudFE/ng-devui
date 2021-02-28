@@ -21,9 +21,6 @@ export class WithSourceComponent implements OnInit {
     'LiveScript', 'CoffeeScript'];
 
   constructor() {
-    for (let i = 0; i < 1000; i++) {
-      this.languages.push('Test' + i);
-    }
   }
 
   ngOnInit() {

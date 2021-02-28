@@ -8,9 +8,11 @@ import {
   OnDestroy,
   OnInit,
   TemplateRef,
-  ViewContainerRef } from '@angular/core';
+  ViewContainerRef
+} from '@angular/core';
 import { OverlayContainerRef } from 'ng-devui/overlay-container';
-import { fromEvent, merge,  Subscription } from 'rxjs';
+import { fromEvent, Subject, Subscription } from 'rxjs';
+import { debounceTime, filter, map, takeUntil } from 'rxjs/operators';
 import { PopoverComponent } from './popover.component';
 import { PopoverType, PositionType, TriggerType } from './popover.types';
 
@@ -22,9 +24,6 @@ export class PopoverDirective implements OnInit, OnDestroy {
   popoverComponentRef: ComponentRef<PopoverComponent>;
   _content: string | HTMLElement | TemplateRef<any>;
   private subscription: Subscription = new Subscription();
-  private blurSub: Subscription = new Subscription();
-  private blurSubscription: Subscription = new Subscription();
-  private hideTimer;
   /**
    * popover内容
    */
@@ -71,9 +70,23 @@ export class PopoverDirective implements OnInit, OnDestroy {
   // 是否可以移入popover内部
   @Input() hoverToContent = false; // 废弃
 
-  // 触发移入popover内部的延迟时间
-  @Input() hoverDelayTime = 0;
+  /**
+   * @deprecated Use mouseLeaveDelay to replace.
+   * 曾经是触发移入popover内部的延迟时间
+   * 废弃,现在使用参数mouseLeaveDelay代替
+   */
+  @Input() set hoverDelayTime(delayTime: any) {
+    this.mouseLeaveDelay = delayTime;
+  }
 
+  // 防止每次鼠标不小心经过目标元素就会显示出PopOver的内容，所以增加适当的延迟。
+  @Input() mouseEnterDelay = 150;
+
+  // 因为鼠标移出之后如果立刻消失会很突然，所以增加略小一些的延迟，使得既不突然也反应灵敏
+  @Input() mouseLeaveDelay = 100;
+  isEnter: boolean;
+  unsubscribe$ = new Subject();
+  unsubscribeP$ = new Subject();
   @Input() set visible(_isShow: boolean) {
     if (_isShow) {
       // when set value and create component at the same time，should wait after ng2 dirty check done
@@ -87,12 +100,13 @@ export class PopoverDirective implements OnInit, OnDestroy {
     return this.appendToBody || this.triggerElementRef.nativeElement.style.position === 'fixed';
   }
 
-  constructor(private triggerElementRef: ElementRef,
-              private overlayContainerRef: OverlayContainerRef,
-              private viewContainerRef: ViewContainerRef,
-              private injector: Injector,
-              private componentFactoryResolver: ComponentFactoryResolver) {
-  }
+  constructor(
+    private triggerElementRef: ElementRef,
+    private overlayContainerRef: OverlayContainerRef,
+    private viewContainerRef: ViewContainerRef,
+    private injector: Injector,
+    private componentFactoryResolver: ComponentFactoryResolver
+  ) {}
 
   onDocumentClick = (event) => {
     event.stopPropagation();
@@ -123,8 +137,44 @@ export class PopoverDirective implements OnInit, OnDestroy {
       popMaxWidth: this.popMaxWidth,
       scrollElement: this.scrollElement,
       appendToBody: this.eleAppendToBody,
-      zIndex: this.zIndex
+      zIndex: this.zIndex,
     });
+
+    // 对创建的ToolTip组件添加鼠标移入和移出的监听事件
+    if (this.popoverComponentRef.instance.elementRef.nativeElement && this.trigger === 'hover') {
+      this.addMouseEvent();
+    }
+  }
+  addMouseEvent() {
+    const el = this.popoverComponentRef.instance.elementRef.nativeElement;
+    fromEvent(el, 'mouseenter')
+      .pipe(
+        map((event) => {
+          this.isEnter = true;
+          return event;
+        }),
+        debounceTime(0),
+        filter((event) => this.isEnter),
+        takeUntil(this.unsubscribeP$)
+      )
+      .subscribe(() => {
+        if (!this.popoverComponentRef) {
+          this.show();
+        }
+      });
+    fromEvent(el, 'mouseleave')
+      .pipe(
+        map((event) => {
+          this.isEnter = false;
+          return event;
+        }),
+        debounceTime(this.mouseLeaveDelay),
+        filter((event) => !this.isEnter),
+        takeUntil(this.unsubscribeP$)
+      )
+      .subscribe(() => {
+        this.hide();
+      });
   }
 
   show() {
@@ -137,15 +187,6 @@ export class PopoverDirective implements OnInit, OnDestroy {
       this.popoverComponentRef.instance.show();
     }
     document.addEventListener('click', this.onDocumentClick);
-    if (this.trigger === 'hover' && this.hoverDelayTime) {
-      this.blurSubscription = fromEvent(this.popoverComponentRef.instance.elementRef.nativeElement, 'mouseleave')
-      .subscribe((event: MouseEvent) => {
-        if (event.type === 'mouseleave' && this.controlled) {
-          this.hide();
-        }
-      });
-      this.blurSub.add(this.blurSubscription);
-    }
   }
 
   destroy() {
@@ -154,57 +195,69 @@ export class PopoverDirective implements OnInit, OnDestroy {
       this.popoverComponentRef = null;
     }
     document.removeEventListener('click', this.onDocumentClick);
+    if (this.unsubscribeP$) {
+      this.unsubscribeP$.next();
+      this.unsubscribeP$.complete();
+    }
   }
 
   ngOnInit() {
     const element = this.triggerElementRef.nativeElement;
     if (this.trigger === 'click') {
-      this.subscription.add(fromEvent(element, 'click').subscribe(event => {
-        if (this.controlled) {
-          this.show();
-        }
-      }));
-    } else if (this.trigger === 'hover') {
       this.subscription.add(
-        merge(
-          fromEvent(element, 'mouseenter'),
-          fromEvent(element, 'mouseleave')
-        ).subscribe((event: MouseEvent) => {
-          if (event.type === 'mouseenter' && this.controlled) {
+        fromEvent(element, 'click').subscribe((event) => {
+          if (this.controlled) {
             this.show();
-          }
-          if (event.type === 'mouseleave' && this.controlled) {
-            if (this.hoverDelayTime) {
-              clearTimeout(this.hideTimer);
-              this.hideTimer = setTimeout(() => {
-                const relatedTarget = event.relatedTarget;
-                if (!this.triggerElementRef.nativeElement.contains(relatedTarget) &&
-                !(this.popoverComponentRef && this.popoverComponentRef.instance.elementRef.nativeElement.contains(relatedTarget))) {
-                  this.hide();
-                }
-              }, this.hoverDelayTime);
-            } else {
-              this.hide();
-            }
           }
         })
       );
+    } else if (this.trigger === 'hover') {
+      fromEvent(element, 'mouseenter')
+        .pipe(
+          map((event) => {
+            this.isEnter = true;
+            return event;
+          }),
+          debounceTime(this.mouseEnterDelay),
+          filter((event) => this.isEnter),
+          takeUntil(this.unsubscribe$)
+        )
+        .subscribe(() => {
+          if (!this.popoverComponentRef && this.controlled) {
+            this.show();
+          }
+        });
+
+      fromEvent(element, 'mouseleave')
+        .pipe(
+          map((event) => {
+            this.isEnter = false;
+            return event;
+          }),
+          debounceTime(this.mouseLeaveDelay),
+          filter((event) => !this.isEnter),
+          takeUntil(this.unsubscribe$)
+        )
+        .subscribe(() => {
+          if (this.controlled) {
+            this.hide();
+          }
+        });
     }
   }
 
   ngOnDestroy() {
+    if (this.unsubscribeP$) {
+      this.unsubscribeP$.next();
+      this.unsubscribeP$.complete();
+    }
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
     this.destroy();
     this.subscription.unsubscribe();
-    if (this.blurSub) {
-      this.blurSub.unsubscribe();
-    }
   }
 
   hide() {
-    if (this.blurSubscription) {
-      this.blurSubscription.unsubscribe();
-      this.blurSub.remove(this.blurSubscription);
-    }
     if (this.popoverComponentRef) {
       if (!this.showAnimate) {
         this.destroy();
@@ -215,6 +268,10 @@ export class PopoverDirective implements OnInit, OnDestroy {
       this.popoverComponentRef.instance.onHidden = () => {
         this.destroy();
       };
+    }
+    if (this.unsubscribeP$) {
+      this.unsubscribeP$.next();
+      this.unsubscribeP$.complete();
     }
   }
 }

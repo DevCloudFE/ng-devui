@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {LoadingType} from 'ng-devui/loading';
+import { LoadingType } from 'ng-devui/loading';
 import { pullAt, random } from 'lodash-es';
 import { from } from 'rxjs';
 import { tap } from 'rxjs/operators';

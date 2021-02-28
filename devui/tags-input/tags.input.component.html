@@ -40,11 +40,8 @@
       [title]="tags.length >= maxTags ? i18nTagsInputText.tagsReachMaxLength : ''"
     />
   </div>
-  <div
-    class="devui-tags-autocomplete devui-dropdown-menu devui-dropdown-overlay"
-    *ngIf="showSuggestionList && availableOptions?.length && !(tags.length >= maxTags)"
-  >
-    <ul class="devui-suggestion-list">
+  <div [@fadeInOut]="'bottom'" *ngIf="showSuggestionList" class="devui-tags-autocomplete devui-dropdown-menu">
+    <ul class="devui-suggestion-list" *ngIf="showSuggestionList && availableOptions?.length && !(tags.length >= maxTags)">
       <li
         class="devui-suggestion-item"
         *ngFor="let item of availableOptions; let index = index"
@@ -54,12 +51,7 @@
         {{ item[displayProperty] }}
       </li>
     </ul>
-  </div>
-  <div
-    class="devui-tags-autocomplete devui-dropdown-menu devui-dropdown-overlay"
-    *ngIf="showSuggestionList && !availableOptions?.length && !(tags.length >= maxTags)"
-  >
-    <ul class="devui-suggestion-list">
+    <ul class="devui-suggestion-list" *ngIf="showSuggestionList && !availableOptions?.length && !(tags.length >= maxTags)">
       <li class="devui-suggestion-item devui-disabled">
         {{ i18nCommonText.noData }}
       </li>

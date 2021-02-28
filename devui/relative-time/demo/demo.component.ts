@@ -13,6 +13,11 @@ export class DemoComponent implements OnInit, OnDestroy {
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/basic.component.ts') },
   ];
 
+  customSource: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./custom-time/custom-time.component.html') },
+    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./custom-time/custom-time.component.ts') },
+  ];
+
   navItems = [];
   subs: Subscription = new Subscription();
   constructor(private translate: TranslateService) {}

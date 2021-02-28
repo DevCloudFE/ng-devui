@@ -1,3 +1,18 @@
+# How To Use
+Import in module：
+```ts
+import { SplitterModule } from 'ng-devui/splitter';
+```
+In the page：
+```html
+<d-splitter>
+  <d-splitter-pane></d-splitter-pane>
+  <d-splitter-pane></d-splitter-pane>
+</d-splitter>
+```
+
+# d-splitter
+
 ## d-splitter parameters
 
 | Parameter | Type | Default | Description | Jump to Demo |
@@ -6,6 +21,8 @@
 | splitBarSize | `string` | '2px' | Optional. The default value is 2px. | [Basic usage](demo#basic-usage) |
 | disabledBarSize | `string` | '1px' | Optional. This parameter is valid when the unadjustable width is set for the panel. | [Vertical layout usage](demo#vertical-layout) |
 | showCollapseButton | `boolean` | true | Optional. Whether to display the collapse/expand button | [Collapse and collapse menu](demo#shrink-show-menu) |
+
+# d-splitter-pane
 
 ## d-splitter-pane parameters
 

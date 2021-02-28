@@ -12,6 +12,10 @@ export class TimeAxisDemoComponent implements OnInit, OnDestroy {
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./all-states/time-axis-all-states.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./all-states/time-axis-all-states.component.ts') },
   ];
+  directionSource: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./direction/time-axis-direction.component.html') },
+    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./direction/time-axis-direction.component.ts') },
+  ];
   htmlSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./html-content/time-axis-html-content.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./html-content/time-axis-html-content.component.ts') },
@@ -43,6 +47,7 @@ export class TimeAxisDemoComponent implements OnInit, OnDestroy {
   setNavValues(values) {
     this.navItems = [
       { dAnchorLink: 'basic-usage', value: values['basic-usage'] },
+      { dAnchorLink: 'direction', value: values['direction'] },
       { dAnchorLink: 'content-with-html', value: values['content-with-html'] },
       { dAnchorLink: 'content-with-template', value: values['content-with-template'] },
     ];

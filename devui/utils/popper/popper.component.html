@@ -2,11 +2,24 @@
   <div class="popper-activator" #popperActivator>
     <ng-content select="[popper-activator]"></ng-content>
   </div>
-  <div class="popper-container" #popperContainer [ngClass]="{ fluid: fluidPopper && !appendTo }">
-    <ng-content select="[popper-prepend]"></ng-content>
-    <div class="popper-container-scrollable devui-scrollbar">
-      <ng-content select="[popper-container]"></ng-content>
+
+  <div
+    class="popper-container"
+    #popperContainer
+    [ngClass]="{
+      fluid: fluidPopper && !appendTo,
+      'devui-popover-container-right': poppoverAppendDirection === 'right',
+      'devui-popover-container-left': poppoverAppendDirection === 'left'
+    }"
+  >
+    <div class="devui-dropdown-menu-wrap">
+      <ng-content select="[popper-prepend]"></ng-content>
+      <div class="popper-container-scrollable devui-scrollbar">
+        <ng-content select="[popper-container]"></ng-content>
+      </div>
     </div>
-    <ng-content select="[popper-append]"></ng-content>
+    <div class="popper-append-area">
+      <ng-content select="[popper-append]"></ng-content>
+    </div>
   </div>
 </div>

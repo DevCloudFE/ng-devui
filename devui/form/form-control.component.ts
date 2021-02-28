@@ -1,12 +1,4 @@
-import {
-  ChangeDetectorRef,
-  Component,
-  ElementRef,
-  HostBinding,
-  Input,
-  OnInit,
-  Renderer2, TemplateRef
-} from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, HostBinding, Input, OnInit, Renderer2, TemplateRef } from '@angular/core';
 import { DFormControlStatus } from './validator-directive/validate.type';
 
 @Component({
@@ -24,8 +16,14 @@ export class FormControlComponent implements OnInit {
   errorMessage: string;
   @Input() feedbackStatus: DFormControlStatus | null;
 
+  @Input() suffixTemplate: TemplateRef<any>;
+
   @HostBinding('class.devui-form-control-has-feedback') get status() {
     return !!this.feedbackStatus;
+  }
+
+  @HostBinding('class.devui-form-control-has-suffix') get suffix() {
+    return !!this.suffixTemplate;
   }
 
   /**
@@ -36,17 +34,11 @@ export class FormControlComponent implements OnInit {
     return !!this.elementRef.nativeElement.querySelector('.devui-dropdown-origin-open');
   }
 
-  constructor(
-    private elementRef: ElementRef,
-    renderer: Renderer2,
-    private cdr: ChangeDetectorRef,
-  ) {
+  constructor(private elementRef: ElementRef, renderer: Renderer2, private cdr: ChangeDetectorRef) {
     renderer.addClass(elementRef.nativeElement, 'devui-form-controls');
   }
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
   public updateErrorMessage(message: string) {
     this.errorMessage = message;

@@ -1,16 +1,11 @@
-<section>
-  <h4>默认选中方式</h4>
-  <d-operable-tree [tree]="data1" [treeNodeTitleKey]="'name'"> </d-operable-tree>
-</section>
-<section>
-  <h4>选中父不选中子，选中子，父会变为半选</h4>
-  <d-operable-tree [tree]="data2" [treeNodeTitleKey]="'name'" [checkableRelation]="'upward'"> </d-operable-tree>
-</section>
-<section>
-  <h4>选中子不选中父，选中父，子也会选中</h4>
-  <d-operable-tree [tree]="data3" [treeNodeTitleKey]="'name'" [checkableRelation]="'downward'"> </d-operable-tree>
-</section>
-<section>
-  <h4>选中项为独立的，不受父子关系影响</h4>
-  <d-operable-tree [tree]="data4" [treeNodeTitleKey]="'name'" [checkableRelation]="'none'"> </d-operable-tree>
-</section>
+<h4>checkableRelation = "both"</h4>
+<d-operable-tree [tree]="data1" [treeNodeTitleKey]="'name'"> </d-operable-tree>
+
+<h4>checkableRelation = "upward"</h4>
+<d-operable-tree [tree]="data2" [treeNodeTitleKey]="'name'" [checkableRelation]="'upward'"> </d-operable-tree>
+
+<h4>checkableRelation = "downward"</h4>
+<d-operable-tree [tree]="data3" [treeNodeTitleKey]="'name'" [checkableRelation]="'downward'"> </d-operable-tree>
+
+<h4>checkableRelation = "none"</h4>
+<d-operable-tree [tree]="data4" [treeNodeTitleKey]="'name'" [checkableRelation]="'none'"> </d-operable-tree>

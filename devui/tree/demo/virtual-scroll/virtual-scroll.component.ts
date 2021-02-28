@@ -11,45 +11,45 @@ export class VirtualScrollComponent implements OnInit {
   transferData: string;
   @ViewChild('operableTree', { static: true }) operableTree: OperableTreeComponent;
   data = [{
-    'title': '父节点1'
+    'title': 'parent node 1'
   },
   {
-    title: '试试动态懒加载',
+    title: 'dynamic loading',
     isParent: true
   },
   {
-    'title': '父节点2',
+    'title': 'parent node 2',
     'children': [{
-      'title': '子节点2-1',
+      'title': 'leaf node 2-1',
       'children': [{
-        'title': '子节点2-1-1'
+        'title': 'leaf node 2-1-1'
       }, {
-        'title': '子节点2-1-2'
+        'title': 'leaf node 2-1-2'
       }]
     }, {
-      'title': '子节点2-2',
+      'title': 'leaf node 2-2',
       'children': [{
-        'title': '子节点2-2-1'
+        'title': 'leaf node 2-2-1'
       }, {
-        'title': '子节点2-2-2'
+        'title': 'leaf node 2-2-2'
       }]
     }]
   }, {
-    'title': '拥有1000子节点的父节点',
+    'title': 'parent node with 1000 leaf nodes',
     'children': [],
   }, {
-    'title': '父节点4',
+    'title': 'parent node 4',
     'children': [{
-      'title': '子节点4-1'
+      'title': 'leaf node 4-1'
     }, {
-      'title': '子节点4-2'
+      'title': 'leaf node 4-2'
     }]
   }, {
-    'title': '父节点5',
+    'title': 'parent node 5',
     'children': [{
-      'title': '子节点5-1'
+      'title': 'leaf node 5-1'
     }, {
-      'title': '子节点5-2'
+      'title': 'leaf node 5-2'
     }]
   }];
   dropType = {
@@ -59,10 +59,10 @@ export class VirtualScrollComponent implements OnInit {
   };
   constructor() {
     for (let i = 0; i < 2000; i++) {
-      this.data.push({ 'title': '节点加载-' + (i + 1) });
+      this.data.push({ 'title': 'new node -' + (i + 1) });
     }
     for (let i = 0; i < 1000; i++) {
-      this.data[3].children.push({ 'title': '子节点加载-' + (i + 1), children: [] });
+      this.data[3].children.push({ 'title': 'new leaf node 加载-' + (i + 1), children: [] });
     }
   }
   ngOnInit(): void {
@@ -108,27 +108,27 @@ export class VirtualScrollComponent implements OnInit {
       setTimeout(() => {
         resolve([
           {
-            title: '叶子节点311',
+            title: 'leaf node 311',
             data: {
-              id: '我是额外数据id',
-              name: '我是额外的数据名称'
+              id: 'extraNode',
+              name: 'extra node'
             }
           },
           {
-            title: '叶子节点312',
+            title: 'leaf node 312',
           },
           {
-            title: '叶子节点313--展开',
+            title: 'leaf node 313--expanded',
             open: true,
             items: [
               {
-                title: '叶子节点313-1',
+                title: 'leaf node 313-1',
               },
               {
-                title: '叶子节点313-2',
+                title: 'leaf node 313-2',
               },
               {
-                title: '叶子节点313-3',
+                title: 'leaf node 313-3',
               }
             ]
           }
@@ -143,7 +143,7 @@ export class VirtualScrollComponent implements OnInit {
 
   addNode() {
     if (this.currentSelectedNode) {
-      const node = this.operableTree.treeFactory.addNode({ parentId: this.currentSelectedNode.id, title: '新增一个节点' });
+      const node = this.operableTree.treeFactory.addNode({ parentId: this.currentSelectedNode.id, title: 'add a node' });
       this.currentSelectedNode.data.isOpen = true;
       console.log(node);
     }
@@ -164,7 +164,7 @@ export class VirtualScrollComponent implements OnInit {
   beforeAddNode(node) {
     console.log('beforeAddNode', node);
     return new Promise((resolve, reject) => {
-      resolve({ title: '新节点', index: 0 });
+      resolve({ title: 'new added node', index: 0 });
     }).catch(err => console.error(err));
   }
 

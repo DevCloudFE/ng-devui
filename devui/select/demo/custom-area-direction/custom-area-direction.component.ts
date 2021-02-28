@@ -5,9 +5,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./custom-area-direction.component.scss']
 })
 export class CustomAreaDirectionComponent {
-  options = ['选项1', '选项2', '选项3', '选项4', '选项5', '选项6', '选项7', '选项8',
-    '选项9', '选项10', '选项11', '选项12', '选项13', '选项14'];
-  recently = ['选项1', '选项9', '选项12'];
+  options = ['Option 1', 'Option 2', 'Option 3', 'Option 4', 'Option 5', 'Option 6', 'Option 7', 'Option 8',
+    'Option 9', 'Option 0', 'Option 11', 'Option 12', 'Option 13', 'Option 14'];
+
+  recently = ['Option 1', 'Option 9', 'Option 12'];
 
   chooseRecent(e, index, choose) {
     e.stopPropagation();

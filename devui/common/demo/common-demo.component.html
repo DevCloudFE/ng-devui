@@ -8,20 +8,23 @@
     </d-codebox>
   </div>
   <div class="demo-example" [dAnchor]="'date-pipe'">
-    <div class="demo-title">DatePipe</div>
+    <div class="demo-title">{{ 'components.common.pipeDemo.title' | translate }}</div>
     <div class="demo-text"></div>
     <d-codebox id="common-basic-usage" [sourceData]="pipeSource">
       <d-common-pipe demo></d-common-pipe>
     </d-codebox>
   </div>
 
-  <div class="demo-example" [dAnchor]="'helper-utils'">
-    <div class="demo-title">{{ 'components.common.anchorLinkValues.helper-utils' | translate }}</div>
+  <div class="demo-example" [dAnchor]="'open-url'">
+    <div class="demo-title">{{ 'components.common.openURLDemo.title' | translate }}</div>
 
-    <div class="demo-text"></div>
     <d-codebox id="common-helper-jump" [sourceData]="helperJumpSource">
       <d-common-helper-jump demo></d-common-helper-jump>
     </d-codebox>
+  </div>
+
+  <div class="demo-example" [dAnchor]="'download-file'">
+    <div class="demo-title">{{ 'components.common.helperDownloadDemo.title' | translate }}</div>
 
     <d-codebox id="common-helper-download" [sourceData]="helperDownloadSource">
       <d-common-helper-download demo></d-common-helper-download>
@@ -29,9 +32,9 @@
   </div>
 
   <div class="demo-example" [dAnchor]="'iframe-propagate'">
-    <div class="demo-title">Iframe event propagate API</div>
+    <div class="demo-title">{{ 'components.common.iframePropagateDemo.title' | translate }}</div>
 
-    <div class="demo-text"></div>
+    <div class="demo-text">{{ 'components.common.iframePropagateDemo.description' | translate }}</div>
     <d-codebox id="common-iframe-propagate" [sourceData]="iframePropagateSource">
       <d-common-iframe-propagate demo></d-common-iframe-propagate>
     </d-codebox>

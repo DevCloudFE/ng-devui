@@ -1,8 +1,8 @@
-import { Component, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Input, OnDestroy, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
-import { Observable, Subscription } from 'rxjs';
-import { last, map } from 'rxjs/operators';
+import { from, Observable, Subscription } from 'rxjs';
+import { last, map, mergeMap } from 'rxjs/operators';
 import { IFileOptions, IUploadOptions, UploadStatus } from './file-uploader.types';
 import { SelectFiles } from './select-files.utils';
 import { SingleUploadViewComponent } from './single-upload-view.component';
@@ -12,9 +12,16 @@ import { SingleUploadViewComponent } from './single-upload-view.component';
   templateUrl: './single-upload.component.html',
   exportAs: 'dSingleUpload',
   styleUrls: ['./upload-view.component.scss'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => SingleUploadComponent),
+      multi: true
+    }
+  ],
   preserveWhitespaces: false,
 })
-export class SingleUploadComponent implements OnDestroy , OnInit {
+export class SingleUploadComponent implements OnDestroy , OnInit, ControlValueAccessor {
   dSingleUploadView;
   @Input() uploadOptions: IUploadOptions;
   @Input() fileOptions: IFileOptions;
@@ -32,13 +39,15 @@ export class SingleUploadComponent implements OnDestroy , OnInit {
    */
   @Input() confirmText: string;
   @Input() beforeUpload: (file) => boolean | Promise<boolean> | Observable<boolean>;
+  @Input() dynamicUploadOptionsFn: (files, uploadOptions) => IUploadOptions;
   @Input() enableDrop = false;
   @Input() disabled = false;
-  @Output() successEvent: EventEmitter<any> = new EventEmitter<any>();
-  @Output() errorEvent: EventEmitter<any> = new EventEmitter<any>();
-  @Output() deleteUploadedFileEvent: EventEmitter<any> = new EventEmitter<any>();
+  @Output() successEvent: EventEmitter<Array<{ file: File; response: any }>> = new EventEmitter<Array<{ file: File; response: any }>>();
+  @Output() errorEvent: EventEmitter<{ file: File; response: any }> = new EventEmitter<{ file: File; response: any }>();
+  @Output() deleteUploadedFileEvent: EventEmitter<string> = new EventEmitter<string>();
   @Output() fileDrop: EventEmitter<any> = new EventEmitter<any>();
-  @Output() fileOver: EventEmitter<any> = new EventEmitter<any>();
+  @Output() fileOver: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() fileSelect: EventEmitter<File> = new EventEmitter<File>();
   @ViewChild('dSingleUploadView', { static: true }) singleUploadViewComponent: SingleUploadViewComponent;
   UploadStatus = UploadStatus;
   isDropOVer = false;
@@ -46,9 +55,32 @@ export class SingleUploadComponent implements OnDestroy , OnInit {
   i18nCommonText: I18nInterface['common'];
   i18nSubscription: Subscription;
   errorMsg = [];
+  private onChange = (_: any) => null;
+  private onTouched = () => null;
   constructor(private i18n: I18nService, private selectFiles: SelectFiles) {
-
   }
+
+  writeValue(files: any): void {
+    if (files) {
+      const simulateFiles = from(this.simulateSelectFiles(files)).pipe(mergeMap(file => <any>file));
+      this._dealFiles(simulateFiles);
+    }
+  }
+
+  registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: any): void {
+    this.onTouched = fn;
+  }
+
+  simulateSelectFiles(files) {
+    return  new Promise((resolve) => {
+      resolve(Array.prototype.slice.call(files));
+    });
+  }
+
   ngOnInit(): void {
     this.i18nText = this.i18n.getI18nText().upload;
     this.i18nCommonText = this.i18n.getI18nText().common;
@@ -70,6 +102,11 @@ export class SingleUploadComponent implements OnDestroy , OnInit {
         () => {
           this.singleUploadViewComponent.uploadedFilesComponent.cleanUploadedFiles();
           this.checkValid();
+          const file = this.singleUploadViewComponent.fileUploaders[0]?.file;
+          this.onChange(file);
+          if (file) {
+            this.onFileSelect(file);
+          }
           if (this.autoUpload) {
             this.upload();
           }
@@ -113,6 +150,10 @@ export class SingleUploadComponent implements OnDestroy , OnInit {
   onFileOver(event) {
     this.isDropOVer = event;
     this.fileOver.emit(event);
+  }
+
+  onFileSelect(file) {
+    this.fileSelect.emit(file);
   }
 
   upload() {
@@ -161,15 +202,19 @@ export class SingleUploadComponent implements OnDestroy , OnInit {
 
   _onDeleteUploadedFile(filePath: string) {
     this.deleteUploadedFileEvent.emit(filePath);
+    this.onChange(null);
   }
+
   deleteFile($event) {
     $event.stopPropagation();
     const files = this.singleUploadViewComponent.getFiles();
     this.singleUploadViewComponent.deleteFile(files[0]);
   }
+
   alertMsg(errorMsg) {
     this.errorMsg = [{ severity: 'warn', detail: errorMsg }];
   }
+
   ngOnDestroy() {
     if (this.i18nSubscription) {
       this.i18nSubscription.unsubscribe();

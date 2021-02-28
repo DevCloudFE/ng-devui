@@ -1,5 +1,5 @@
 <section>
-  <h5 class="text-muted">自定义区域</h5>
+  <h5 class="text-muted">Custom Area<!--自定义区域--></h5>
   <div class="row">
     <div class="col-md-5">
       <d-select [placeholder]="'Standard Input'" [options]="options" [multiple]="true" [customViewTemplate]="myTemplate"></d-select>
@@ -8,5 +8,6 @@
 </section>
 
 <ng-template #myTemplate let-selectComponent>
-  <div class="total">已选 {{ selectComponent?.multiItems?.length || 0 }} 项</div>
+  <!-- <div class="total">已选 {{ selectComponent?.multiItems?.length || 0 }} 项</div> -->
+  <div class="total">Already select {{ selectComponent?.multiItems?.length || 0 }} item(s)</div>
 </ng-template>

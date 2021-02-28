@@ -1,6 +1,7 @@
 import { Component, DebugElement, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { OverlayContainerRef } from '../overlay-container';
 import { PopoverDirective } from '../popover';
 import { DomHelper } from '../utils/testing/dom-helper';
@@ -206,7 +207,7 @@ describe('virtualScroll Tree', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [TreeModule],
+      imports: [TreeModule, NoopAnimationsModule],
       providers: [PopoverDirective, OverlayContainerRef],
       declarations: [TestVirtualScrollTreeComponent]
     });
@@ -236,7 +237,7 @@ describe('operable tree', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [TreeModule],
+      imports: [TreeModule, NoopAnimationsModule],
       providers: [PopoverDirective, OverlayContainerRef],
       declarations: [TestOperableTreeComponent]
     });
@@ -506,7 +507,7 @@ describe('operable tree drag & drop', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [TreeModule],
+      imports: [TreeModule, NoopAnimationsModule],
       declarations: [TestDragDropTreeComponent]
     });
   });

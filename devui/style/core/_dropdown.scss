@@ -44,12 +44,13 @@
 
 .devui-dropdown-menu {
   position: absolute;
-  float: left;
-  top: calc(100% - 1px);
+  // float: left;
+  // top: calc(100% - 1px);
   left: 0;
   z-index: 1000;
   display: none;
   min-width: calc(min(100%, 102px));
+  margin: 4px 0;
   padding-bottom: 5px;
   background-clip: padding-box;
   border-radius: $devui-border-radius;
@@ -57,11 +58,6 @@
   background-color: $devui-connected-overlay-bg;
   box-shadow: $devui-shadow-length-connected-overlay $devui-shadow;
   outline: none;
-
-  &.devui-dropdown-overlay,
-  &.devui-dropdown-overlay.popper-container {
-    border: 1px solid $devui-brand;
-  }
 
   .open > & {
     display: block;
@@ -94,7 +90,7 @@
   }
 
   .devui-dropdown-item:not(.disabled) {
-    &:hover:not(:active) {
+    &:hover:not(:active):not(.selected):not(.active) {
       background-color: $devui-list-item-hover-bg;
       color: $devui-list-item-hover-text;
     }

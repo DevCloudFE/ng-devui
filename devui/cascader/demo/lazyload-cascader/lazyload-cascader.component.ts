@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { of } from 'rxjs';
 import { CascaderItem } from '../../cascader.type';
 
 @Component({
@@ -9,15 +8,15 @@ import { CascaderItem } from '../../cascader.type';
 export class LazyloadCascaderComponent {
   options = [
     {
-      label: '测试1',
+      label: 'option1',
       value : 1,
     },
     {
-      label: '测试2',
+      label: 'option2',
       value : 2,
     },
     {
-      label: '测试3',
+      label: 'option3',
       value : 3,
       children: [],
       isLeaf: true,
@@ -27,22 +26,22 @@ export class LazyloadCascaderComponent {
 
   children1 = [
     {
-      label: '测试1-1',
+      label: 'option1-1',
       value : 4,
       isLeaf: true
     },
     {
-      label: '测试1-2',
+      label: 'option1-2',
       value : 41,
       isLeaf: true
     },
     {
-      label: '测试1-3',
+      label: 'option1-3',
       value : 42,
       isLeaf: true
     },
     {
-      label: '测试1-4',
+      label: 'option1-4',
       value : 43,
       isLeaf: true
     }
@@ -50,16 +49,16 @@ export class LazyloadCascaderComponent {
 
   children2 = [
     {
-      label: '测试2-1',
+      label: 'option2-1',
       value : 5,
     },
     {
-      label: '测试2-2',
+      label: 'option2-2',
       value : 6,
       isLeaf: true
     },
     {
-      label: '测试2-3',
+      label: 'option2-3',
       value : 712,
       isLeaf: true
     }
@@ -67,19 +66,20 @@ export class LazyloadCascaderComponent {
 
   children3 = [
     {
-      label: '测试2-1-1',
+      label: 'option2-1-1',
       value : 51,
       isLeaf: true
     },
     {
-      label: '测试2-1-2',
+      label: 'option2-1-2',
       value : 61,
       isLeaf: true,
       disabled: true
     }
   ];
 
-  value: Array<string | number>;
+  value: Array<string | number> = [1, 41];
+  value2: Array<string | number>[] = [];
 
   onChanges(value: any) {
     console.log(value);
@@ -99,7 +99,11 @@ export class LazyloadCascaderComponent {
         }, 1000);
       });
     } else {
-      return of(this.children3);
+      return new Promise((resolve, rject) => {
+        setTimeout(() => {
+          resolve(this.children3);
+        }, 1000);
+      });
     }
   }
 }

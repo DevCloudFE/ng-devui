@@ -1,3 +1,7 @@
 <section>
-  <d-slider [(ngModel)]="inputValue" [min]="minValue" [max]="maxValue" style="width: 90%; display: block" disabled></d-slider>
+  <div class="slider-wrapper">
+    <d-slider [(ngModel)]="inputValue" [min]="minValue" [max]="maxValue" style="width: 90%; display: block" disabled></d-slider>
+    <span>{{ minValue }}</span>
+    <span>{{ maxValue }}</span>
+  </div>
 </section>

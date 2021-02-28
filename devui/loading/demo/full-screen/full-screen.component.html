@@ -1,0 +1,5 @@
+<d-button bsStyle="primary" (click)="openFullScreen()">click me show full screen loading!</d-button>
+<d-button *ngIf="!isShow" bsStyle="common" (click)="openTargetLoading()">click me show loading in target!</d-button>
+<d-button *ngIf="isShow" bsStyle="primary" (click)="closeTargetLoading()">click me close loading in target!</d-button>
+
+<div id="me">loading will show here</div>

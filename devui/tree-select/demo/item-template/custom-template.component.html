@@ -1,0 +1,44 @@
+<h5 class="text-muted">Custom Area</h5>
+<d-tree-select
+  [customViewTemplate]="myTemplate1"
+  placeholder="Standard Input"
+  [treeData]="data"
+  [multiple]="true"
+  [expandTree]="true"
+  [(ngModel)]="value"
+  (ngModelChange)="showSelected($event)"
+  style="width: 280px"
+>
+</d-tree-select>
+<ng-template #myTemplate1 let-selectComponent>
+  <div class="total">
+    <span>{{ selectComponent?.value?.length || 0 }} items are selected</span>
+  </div>
+</ng-template>
+<section>
+  <h5 class="text-muted">Customizing Area Direction and Selected items</h5>
+  <d-tree-select
+    [customViewTemplate]="myTemplate2"
+    [customViewDirection]="'right'"
+    placeholder="Standard Input"
+    [treeData]="data"
+    [multiple]="true"
+    [expandTree]="true"
+    [(ngModel)]="value"
+    (ngModelChange)="showSelected($event)"
+    style="width: 280px"
+  >
+  </d-tree-select>
+</section>
+<ng-template #myTemplate2>
+  <div class="custom-wrapper">
+    <div class="custom-title">Recently Selected</div>
+    <ul class="custom-box">
+      <li class="custom-list" *ngFor="let recent of recently; let i = index">
+        <div class="custom-single" (click)="chooseRecent($event, i)">
+          {{ recent.title }}
+        </div>
+      </li>
+    </ul>
+  </div>
+</ng-template>

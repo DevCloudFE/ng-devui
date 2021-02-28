@@ -11,8 +11,7 @@ import {
   SimpleChanges,
   TemplateRef, ViewContainerRef, ViewRef
 } from '@angular/core';
-import { forkJoin, from, Observable, Subscription } from 'rxjs';
-import { throwError } from 'rxjs';
+import { forkJoin, from, Observable, Subscription, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { LoadingBackdropComponent } from './loading-backdrop.component';
 import { LoadingComponent } from './loading.component';
@@ -36,7 +35,7 @@ export class LoadingDirective implements OnChanges {
   @Input() showLoading;
 
   @Input() loading: LoadingType;
-
+  @Input() zIndex: number ;
   backdropRef: ComponentRef<any>;
   loadingRef: ComponentRef<any>;
   active = true;
@@ -50,7 +49,7 @@ export class LoadingDirective implements OnChanges {
   ) { }
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['showLoading'] || changes['loading'] || changes['backdrop'] || changes['loadingTemplateRef']
-      || changes['message'] || changes['positionType'] || changes['view']) {
+      || changes['message'] || changes['positionType'] || changes['view']  || changes['zIndex']) {
       if (this.showLoading !== undefined) {
         this.showLoadingChangeEvent(this.showLoading);
       }
@@ -110,7 +109,6 @@ export class LoadingDirective implements OnChanges {
       if (this.backdrop) {
         this.createLoadingBackdrop();
       }
-
       this.loadingRef = this.viewContainerRef.createComponent(
         this.componentFactoryResolver.resolveComponentFactory(LoadingComponent),
         null,
@@ -124,7 +122,8 @@ export class LoadingDirective implements OnChanges {
         loadingTemplateRef: this.loadingTemplateRef,
         top: this.view ? this.view.top : '50%',
         left: this.view ? this.view.left : '50%',
-        isCustomPosition: !!this.view
+        isCustomPosition: !!this.view,
+        zIndex: this.zIndex ? this.zIndex : '',
       });
     }
   }
@@ -154,7 +153,8 @@ export class LoadingDirective implements OnChanges {
 
     Object.assign(this.backdropRef.instance, {
       triggerElementRef: this.triggerElementRef,
-      backdrop: this.backdrop
+      backdrop: this.backdrop,
+      zIndex: this.zIndex ? this.zIndex : ''
     });
   }
 

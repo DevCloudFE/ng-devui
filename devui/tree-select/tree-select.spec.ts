@@ -2,6 +2,7 @@ import { Component, DebugElement, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { TreeSelectModule } from 'ng-devui/tree-select';
 import { DomHelper } from '../utils/testing/dom-helper';
 import { TreeSelectComponent } from './tree-select.component';
@@ -210,7 +211,7 @@ class TestMultipleTreeSelectComponent {
 describe('TreeSelect', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
-            imports: [TreeSelectModule, FormsModule],
+            imports: [TreeSelectModule, FormsModule, NoopAnimationsModule],
             declarations: [TestSingleTreeSelectComponent, TestMultipleTreeSelectComponent]
         });
     });
@@ -377,7 +378,7 @@ describe('TreeSelect', () => {
             tick(200);
             fixture.detectChanges();
             const searchInputEl = debugEl
-                .query(By.css('body > div > div.devui-tree-select.devui-search-container.devui-form-group.devui-has-feedback > input'))
+                .query(By.css('body > div> div > div.devui-tree-select.devui-search-container.devui-form-group.devui-has-feedback > input'))
                 .nativeElement;
             searchInputEl.dispatchEvent(new Event('focus'));
             searchInputEl.value = '1';

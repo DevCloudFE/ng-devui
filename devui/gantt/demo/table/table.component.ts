@@ -11,6 +11,7 @@ import { curYear, SourceType, treeDataSource } from '../mock-data';
   providers: [GanttService]
 })
 export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
+  curYear = curYear;
   basicDataSource: Array<SourceType> = treeDataSource;
   @ViewChild('datatable', { read: ElementRef, static: true }) datatableElementRef: ElementRef;
   ganttScaleWidth: string;

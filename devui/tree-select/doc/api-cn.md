@@ -1,9 +1,24 @@
-## dTreeSelect 参数
+# 如何使用
+
+在 module 中引入：
+
+```ts
+import { TreeSelectModule } from 'ng-devui/treeSelect';
+```
+
+在页面中使用：
+
+```html
+<d-tree-select [treeData]="data"></d-tree-select>
+```
+# d-tree-select
+
+## d-tree-select 参数
 
 |         参数         |                  类型                   |                  默认                   | 说明                                                                                                                      | 跳转 Demo                                            |
 | :------------------: | :-------------------------------------: | :-------------------------------------: | :------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------- |
-|     placeholder      |                `string`                 |                   --                    | 可选，占位字符串                                                                                                          | [基本用法](demo#basic-usage)       |
 |       treeData       |                 `Array`                 |                   --                    | 必选，需要展示的源数据                                                                                                    | [基本用法](demo#basic-usage)       |
+|     placeholder      |                `string`                 |                   --                    | 可选，占位字符串                                                                                                          | [基本用法](demo#basic-usage)       |
 |       disabled       |                `boolean`                |                  false                  | 可选，禁止输入态                                                                                                          | [基本用法](demo#basic-usage)       |
 |      expandTree      |                `boolean`                |                  false                  | 可选，是否自动展开树                                                                                                      | [基本用法](demo#basic-usage)       |
 |       multiple       |                `boolean`                |                  false                  | 可选，多选开关                                                                                                            | [基本用法](demo#basic-usage)       |
@@ -26,11 +41,46 @@
 |      allowClear      |                `boolean`                |                  false                  | 可选，是否允许单选模式下点击输入框上的清除按钮来清空已选中的项目。`allowUnselect`必须为`true`，否则将破坏体验一致性规则。`enableLabelization`为`false`时才会生效 | [基本用法](demo#basic-usage)       |
 |  enableLabelization  |                `boolean`                |                  true                   | 可选，是否启用标签化展示效果，配合公有云视觉默认启用。 | [不使用标签化](demo#labelization)       |
 |  iconTemplateInput   |               `TemplateRef`             |                   --                    | 可选，自定义 icon 的 template                                                                                               | [自定义icon能力](demo#custom-icon)       |
+|  customViewTemplate   |               `TemplateRef`           |          --                 | 可选,支持自定义区域显示内容定制                   | [自定义区域](demo#custom-template)       |
+|  customViewDirection   |               `'bottom' \| 'right'\| 'left'`           |          'bottom'                 | 可选, customViewTemplate 所处的相对下拉列表的位置 | [自定义区域](demo#custom-template)       |
+|  virtualScroll  |                `boolean`                |                  false                   | 可选，是否开启虚拟滚动，常用于大数据量场景 | [虚拟滚动](demo#virtual-scroll)       |
+|  virtualScrollHeightPx   |               `number`             |                   300                   | 可选，设置虚拟滚动内容区域的高度 ，单位为`px`                                                                                             | [虚拟滚动](demo#virtual-scroll)       |
+|  virtualScrollMinBufferPx   |               `number`           |          600                 | 可选,设置虚拟滚动时的最小 buffer 尺寸，单位为`px` ，参考https://material.angular.io/cdk/scrolling/overview#scrolling-over-fixed-size-items                 | [虚拟滚动](demo#virtual-scroll)       |
+|  virtualScrollMaxBufferPx   |               `number`           |          900                 | 可选, 设置虚拟滚动时的最大 buffer 尺寸，单位为`px` ，参考https://material.angular.io/cdk/scrolling/overview#scrolling-over-fixed-size-items  | [虚拟滚动](demo#virtual-scroll)       |
+|  virtualScrollItemSize   |               `number`           |          30                | 可选, 设置虚拟滚动内元素的尺寸，单位为`px` ，参考https://material.angular.io/cdk/scrolling/overview#scrolling-over-fixed-size-items  | [虚拟滚动](demo#virtual-scroll)       |
 
-
-## dTreeSelect 事件
+## d-tree-select 事件
 
 |      事件      |      类型      |                  说明                  | 跳转 Demo |
 | :------------: | :------------: | :------------------------------------: | --------- |
-| (valueChanged) | `EventEmitter` | 选择节点时触发的变化，参数为数组或对象 | [基本用法](demo#basic-usage)       |
-| (nodeToggleEvent) | `EventEmitter` | 展开收起节点时触发，参数为触发的节点 | [基本用法](demo#basic-usage)       |
+| valueChanged | `EventEmitter<Array<`[`TreeNode`](#treenode)`>>` | 可选，选择节点时触发的变化，返回值为当前选中的节点 | [基本用法](demo#basic-usage)       |
+| nodeToggleEvent | `EventEmitter<`[`TreeNode`](#treenode)`>` | 可选，展开收起节点时触发，返回值为触发的节点 | [基本用法](demo#basic-usage)       |
+
+# 接口 & 类型定义
+
+### TreeNode
+
+```ts
+export class TreeNode implements ITreeNodeData {
+  constructor(public id, public parentId, public data) {}
+}
+
+export interface ITreeNodeData {
+  id?: number | string;
+  parentId?: number | string;
+  title?: string;
+  isOpen?: boolean;
+  data?: any;
+  isParent?: boolean;
+  loading?: boolean;
+  isMatch?: boolean;
+  isHide?: boolean;
+  isActive?: boolean;
+  isChecked?: boolean;
+  disabled?: boolean;
+
+  [prop: string]: any;
+
+  children?: [];
+}
+```

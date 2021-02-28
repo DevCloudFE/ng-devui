@@ -3,6 +3,7 @@
   [enableDrop]="enableDrop"
   (fileDrop)="onFileDrop($event)"
   (fileOver)="onFileOver($event)"
+  (fileSelect)="onFileSelect($event)"
   [ngStyle]="{ border: isDropOVer ? '1px solid #15bf15' : '0' }"
   style="display: flex"
 >

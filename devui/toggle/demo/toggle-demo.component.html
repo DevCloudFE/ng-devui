@@ -7,4 +7,28 @@
       <d-basic demo></d-basic>
     </d-codebox>
   </div>
+
+  <div class="demo-example" [dAnchor]="'two-binding'">
+    <div class="demo-title">{{ 'components.toggle.twoBindingDemo.title' | translate }}</div>
+    <div class="demo-text"></div>
+    <d-codebox id="two-binding" [sourceData]="twoBindingSource">
+      <d-two-binding demo></d-two-binding>
+    </d-codebox>
+  </div>
+
+  <div class="demo-example" [dAnchor]="'callback'">
+    <div class="demo-title">{{ 'components.toggle.callbackDemo.title' | translate }}</div>
+    <div class="demo-text"></div>
+    <d-codebox id="callback" [sourceData]="callbackSource">
+      <d-callback demo></d-callback>
+    </d-codebox>
+  </div>
+
+  <div class="demo-example" [dAnchor]="'custom'">
+    <div class="demo-title">{{ 'components.toggle.customDemo.title' | translate }}</div>
+    <div class="demo-text"></div>
+    <d-codebox id="custom" [sourceData]="customSource">
+      <d-custom demo></d-custom>
+    </d-codebox>
+  </div>
 </div>

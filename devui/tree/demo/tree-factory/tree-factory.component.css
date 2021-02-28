@@ -1,0 +1,14 @@
+d-checkbox {
+  margin: 8px 8px 0 0;
+  display: inline-block;
+  width: 200px;
+}
+
+d-button {
+  margin: 8px 8px 0 0;
+}
+
+d-operable-tree {
+  height: 380px;
+  overflow-y: auto;
+}

@@ -1,30 +1,27 @@
-<section>
-  <h3>鼠标越过元素边缘发生交换</h3>
-  <div class="row">
-    <div class="col-sm-3">
-      <div
-        class="card card-outline-primary mb-3"
-        dDroppable
-        [switchWhileCrossEdge]="true"
-        [dropScope]="'default-switch'"
-        (dropEvent)="onDrop($event)"
-      >
-        <div class="card-header">拖拽排序交换</div>
-        <div class="card-block">
-          <ul class="list-group drop-el" dSortable>
-            <li
-              dDraggable
-              *ngFor="let item of list2"
-              [dragScope]="'default-switch'"
-              [dragHandleClass]="'drag-handle'"
-              [dragData]="item"
-              class="list-group-item over-flow-ellipsis"
-            >
-              {{ item.name }}
-            </li>
-          </ul>
-        </div>
+<div class="row">
+  <div class="col-sm-3">
+    <div
+      class="card card-outline-primary mb-3"
+      dDroppable
+      [switchWhileCrossEdge]="true"
+      [dropScope]="'default-switch'"
+      (dropEvent)="onDrop($event)"
+    >
+      <div class="card-header">Drag Drop Sort Area</div>
+      <div class="card-block">
+        <ul class="list-group drop-el" dSortable>
+          <li
+            dDraggable
+            *ngFor="let item of list2"
+            [dragScope]="'default-switch'"
+            [dragHandleClass]="'drag-handle'"
+            [dragData]="item"
+            class="list-group-item over-flow-ellipsis"
+          >
+            {{ item.name }}
+          </li>
+        </ul>
       </div>
     </div>
   </div>
-</section>
+</div>

@@ -3,8 +3,8 @@
     <form dForm ngForm [layout]="'horizontal'" [labelSize]="''">
       <d-form-item>
         <d-form-label>Input Pending</d-form-label>
-        <d-form-control [feedbackStatus]="'pending'">
-          <input dTextInput name="inputText" />
+        <d-form-control [feedbackStatus]="inputStatus">
+          <input dTextInput name="inputText" placeholder="Input" />
         </d-form-control>
       </d-form-item>
       <d-form-item>
@@ -23,6 +23,7 @@
             [multiple]="true"
             [name]="'singleSelect'"
             [filterKey]="'name'"
+            [placeholder]="'Select'"
           >
           </d-select>
         </d-form-control>

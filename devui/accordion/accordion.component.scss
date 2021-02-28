@@ -107,6 +107,10 @@
   }
 }
 
+:host ::ng-deep .devui-accordion-menu-item {
+  overflow-y: hidden;
+}
+
 /* 展开图标相关 */
 :host ::ng-deep .devui-accordion-menu-item > .devui-accordion-item-title {
   position: relative;
@@ -187,17 +191,46 @@
     }
   }
 
+  .devui-accordion-splitter::before {
+    content: '';
+    display: block;
+    width: 2px;
+    height: 18px;
+    background-color: $devui-form-control-line-active;
+    position: absolute;
+    top: 11px;
+    left: 0;
+    opacity: 0;
+  }
+
   &.devui-router-active,
   &.active {
     &:not(.open) .devui-accordion-splitter::before {
-      content: '';
-      display: block;
-      width: 2px;
-      height: 18px;
-      background: $devui-form-control-line-active;
-      position: absolute;
-      top: 11px;
-      left: 0;
+      opacity: 1;
+    }
+  }
+}
+
+:host ::ng-deep .devui-accordion-show-animate .devui-accordion-item-title {
+  transition: font-weight ease-in-out 0.3s;
+
+  &:not(.disabled) {
+    &.devui-router-active,
+    &.active:not(.open) {
+      transition: font-weight ease-in-out 0.3s;
+    }
+  }
+
+  .devui-accordion-splitter::before {
+    transform: scaleY(0);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  &.devui-router-active,
+  &.active {
+    &:not(.open) .devui-accordion-splitter::before {
+      transform: scaleY(1);
+      transition: transform 0.3s ease-in-out;
     }
   }
 }

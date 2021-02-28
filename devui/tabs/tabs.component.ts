@@ -1,12 +1,17 @@
 import {
   AfterContentInit,
+  AfterViewInit,
   Component,
   ContentChildren,
+  ElementRef,
   EventEmitter,
   Input,
+  OnChanges,
   OnInit,
   Output,
   QueryList,
+  SimpleChanges,
+  ViewChild
 } from '@angular/core';
 import { Observable } from 'rxjs';
 import { TabComponent } from './tab.component';
@@ -18,8 +23,9 @@ import { TabComponent } from './tab.component';
   exportAs: 'tabs',
   preserveWhitespaces: false,
 })
-export class TabsComponent implements OnInit, AfterContentInit {
-  @Input() type: 'tabs' | 'pills' | 'options' = 'tabs';
+export class TabsComponent implements OnInit, AfterContentInit, OnChanges, AfterViewInit {
+  static ID_SEED = 0;
+  @Input() type: 'tabs' | 'pills' | 'options' | 'wrapped' | 'slider' = 'tabs';
   @Input() showContent = true;
   @Input() activeTab: number | string;
   @Input() vertical = false;
@@ -29,7 +35,29 @@ export class TabsComponent implements OnInit, AfterContentInit {
   @Output() activeTabChange = new EventEmitter<number | string>();
   @Input() beforeChange: (value) => boolean | Promise<boolean> | Observable<boolean>;
   @Input() reactivable = false;
+  @ViewChild('tabsEle') tabsEle: ElementRef;
+  offsetLeft;
+  offsetWidth;
+  id;
   constructor() {
+    this.id = 'devuiTabs' + TabsComponent.ID_SEED++;
+  }
+  ngAfterViewInit(): void {
+    if (this.type === 'slider' && this.activeTab === undefined && this.tabs.length > 0 && this.tabs[0]) {
+      this.select(this.tabs.first.id, this.tabsEle.nativeElement.getElementById(this.tabs[0].tabId));
+    }
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.type === 'slider' && changes['activeTab']) {
+      // 延时等待active样式切换至正确的tab
+      setTimeout(() => {
+        const tabEle = this.tabsEle.nativeElement.querySelector('#' + this.id + ' li.active');
+        if (tabEle) {
+          this.offsetLeft = tabEle.getBoundingClientRect().left - this.tabsEle.nativeElement.getBoundingClientRect().left;
+          this.offsetWidth = tabEle.getBoundingClientRect().width;
+        }
+      });
+    }
   }
 
   ngOnInit() {
@@ -53,12 +81,12 @@ export class TabsComponent implements OnInit, AfterContentInit {
     return changeResult;
   }
   ngAfterContentInit(): void {
-    if (this.activeTab === undefined && this.tabs.length > 0) {
+    if (this.type !== 'slider' && this.activeTab === undefined && this.tabs.length > 0) {
       this.select(this.tabs.first.id);
     }
   }
 
-  select(id: number | string) {
+  select(id: number | string, tabEl?) {
     if (!this.reactivable && this.activeTab === id) {
       return;
     }
@@ -69,6 +97,10 @@ export class TabsComponent implements OnInit, AfterContentInit {
       const tab = this.tabs.find(item => item.id === id);
       if (tab && !tab.disabled) {
         this.activeTab = id;
+        if (this.type === 'slider' && tabEl && this.tabsEle) {
+          this.offsetLeft = tabEl.getBoundingClientRect().left - this.tabsEle.nativeElement.getBoundingClientRect().left;
+          this.offsetWidth = tabEl.getBoundingClientRect().width;
+        }
         this.activeTabChange.emit(id);
       }
     });

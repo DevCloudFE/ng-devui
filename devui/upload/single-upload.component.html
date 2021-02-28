@@ -4,6 +4,7 @@
   [isSingle]="true"
   (fileDrop)="onFileDrop($event)"
   (fileOver)="onFileOver($event)"
+  (fileSelect)="onFileSelect($event)"
   [ngStyle]="{ border: isDropOVer ? '1px solid #15bf15' : '0' }"
   style="display: flex"
 >
@@ -44,7 +45,7 @@
         </div>
         <span *ngIf="dSingleUploadView.fileUploaders[0]?.status === UploadStatus.failed" class="icon icon-running" (click)="upload()">
         </span>
-        <span *ngIf="dSingleUploadView.fileUploaders[0]?.status === UploadStatus.uploaded" class="icon icon-right"> </span>
+        <span *ngIf="dSingleUploadView.fileUploaders[0]?.status === UploadStatus.uploaded" class="icon icon-right"></span>
       </div>
     </div>
     <span class="devui-input-group-addon">
@@ -100,6 +101,7 @@
   [uploadedFiles]="uploadedFiles"
   [uploadedFilesRef]="uploadedFilesRef"
   [preloadFilesRef]="preloadFilesRef"
+  [dynamicUploadOptionsFn]="dynamicUploadOptionsFn"
   (deleteUploadedFileEvent)="_onDeleteUploadedFile($event)"
 >
 </d-single-upload-view>

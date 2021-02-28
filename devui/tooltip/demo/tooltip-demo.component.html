@@ -7,4 +7,12 @@
       <d-basic demo></d-basic>
     </d-codebox>
   </div>
+  <div class="demo-example" [dAnchor]="'delay-trigger'">
+    <div class="demo-title">{{ 'components.tooltip.delayDemo.title' | translate }}</div>
+    <div class="demo-text">{{ 'components.tooltip.delayDemo.description' | translate }}</div>
+    <div class="demo-text"></div>
+    <d-codebox id="tooltip-delay" [sourceData]="delaySource">
+      <d-delay demo></d-delay>
+    </d-codebox>
+  </div>
 </div>

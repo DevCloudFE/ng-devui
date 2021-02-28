@@ -20,16 +20,18 @@
     />
     <span
       class="devui-checkbox-material"
-      [ngStyle]="{ 'border-color': (checked || halfchecked) && color ? color : '', 'background-color': color && halfchecked ? color : '' }"
-      [ngClass]="{ 'custom-color': color, 'devui-checkbox-no-label': !label && !labelTemplate }"
+      [ngStyle]="{
+        'border-color': (checked || halfchecked) && color ? color : '',
+        'background-image': (color && halfchecked) || color ? 'linear-gradient(' + color + ', ' + color + ')' : '',
+        'background-color': color && halfchecked ? color : ''
+      }"
+      [ngClass]="{
+        'custom-color': color,
+        'devui-checkbox-no-label': !label && !labelTemplate,
+        'devui-no-animation': !showAnimation || !animationUnlocked
+      }"
     >
-      <span
-        class="devui-checkbox-bg"
-        [ngStyle]="{ 'background-color': color && !halfchecked ? color : '' }"
-        [ngClass]="{
-          'devui-no-animation': !showAnimation || !animationUnlocked
-        }"
-      ></span>
+      <span class="devui-checkbox-halfchecked-bg"></span>
       <svg
         viewBox="0 0 16 16"
         version="1.1"

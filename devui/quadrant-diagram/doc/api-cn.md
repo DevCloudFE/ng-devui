@@ -8,7 +8,7 @@ import { QuadrantDiagramModule } from 'ng-devui/experimental/quadrant-diagram';
 
 ### d-quadrant-diagram 参数
 
-|        参数         |            类型            |                  默认                  | 说明                                                                                                                                           | 跳转 Demo                                          |
+|        参数         |            类型            |                  默认值                  | 描述                                                                                                                                           | 跳转 Demo                                          |
 | :-----------------: | :------------------------: | :------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
 |        view         |       `IViewConfigs`       |         {height:900,width:950}         | 可选，指定象限图所占宽高，由于需要计算坐标轴及象限区域，值必须为具体数字，若需要根据容器大小变更，建议使用 document 相关方法计算出实际值后传入 | [配置自定义象限图](demo#custom-quadrant) |
 |     axisConfigs     |       `IAxisConfigs`       |     参考下方`DEFAULT_AXIS_CONFIGS`     | 可选，设置坐标轴相关属性，具体配置参数意义参考下方`IAxisConfigs`                                                                               | [配置自定义象限图](demo#custom-quadrant) |
@@ -24,12 +24,12 @@ import { QuadrantDiagramModule } from 'ng-devui/experimental/quadrant-diagram';
 
 ### d-quadrant-diagram 事件
 
-|      参数       |        类型         | 说明                                                                                                                                                                 |跳转 Demo |
-| :-------------: | :-----------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|      参数       |        类型         | 描述                                                                                                                                                                 |跳转 Demo |
+| :-------------: | :-----------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------- |:-----------------: |
 |    dropEvent    | `EventEmitter<any>` | 可选，拖拽放置时的触发事件，返回值`{ dragData: e.dragData, xAxisValue: xAxisValue, yAxisValue: yAxisValue }` ,分别对应当前标签数据，标签放置的 x 值，标签放置的 y 值 | [基本用法](demo#basic-usage) |
-|  zoomOutEvent   | `EventEmitter<any>` | 可选，点击缩小按钮的触发事件，返回值为当前的标签尺寸                                                                                                                 |
-|   zoomInEvent   | `EventEmitter<any>` | 可选，点击放大按钮的触发事件，返回值为当前的标签尺寸                                                                                                                 |
-| fullScreenEvent | `EventEmitter<any>` | 可选，点击全屏按钮的触发事件，返回值为当前的是否是全屏状态                                                                                                           |
+|  zoomOutEvent   | `EventEmitter<any>` | 可选，点击缩小按钮的触发事件，返回值为当前的标签尺寸                                                                                                                 | |
+|   zoomInEvent   | `EventEmitter<any>` | 可选，点击放大按钮的触发事件，返回值为当前的标签尺寸                                                                                                                 | |
+| fullScreenEvent | `EventEmitter<any>` | 可选，点击全屏按钮的触发事件，返回值为当前的是否是全屏状态                                                                                                           | |
 
 ### d-quadrant-diagram 相关类型定义及默认值如下
 

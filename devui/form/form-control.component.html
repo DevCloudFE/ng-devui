@@ -1,5 +1,9 @@
 <div class="devui-form-control-container">
   <ng-content></ng-content>
+  <span *ngIf="suffixTemplate" class="devui-form-item-suffix suffix">
+    <ng-template [ngTemplateOutlet]="suffixTemplate"></ng-template>
+  </span>
+
   <span [attr.class]="'devui-form-item-icon devui-form-item-icon-' + feedbackStatus" *ngIf="feedbackStatus">
     <svg *ngIf="feedbackStatus === 'error'" width="14px" height="14px" viewBox="0 0 16 16">
       <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">

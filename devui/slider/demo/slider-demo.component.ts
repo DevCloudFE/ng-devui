@@ -15,10 +15,12 @@ export class SliderDemoComponent implements OnInit, OnDestroy {
   SliderDisabledComponent = [
     { title: 'HTML', language: 'html', code: require('!!raw-loader!./disabled/slider-disabled.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./disabled/slider-disabled.component.ts') },
+    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./disabled/slider-disabled.component.scss') },
   ];
   SliderCustomFormatterComponent = [
     { title: 'HTML', language: 'html', code: require('!!raw-loader!./custom-formatter/slider-custom-formatter.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./custom-formatter/slider-custom-formatter.component.ts') },
+    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./custom-formatter/slider-custom-formatter.component.scss') },
   ];
   list = ['基本用法', '禁止输入态', '定制Popover的显示内容'];
 

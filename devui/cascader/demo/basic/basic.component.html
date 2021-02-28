@@ -1,10 +1,16 @@
-<h4>hover展开模式</h4>
-<d-cascader [options]="options" [placeholder]="'请选择'" [(ngModel)]="value1" (ngModelChange)="onChanges($event)"></d-cascader>
-
-<h4>click展开模式</h4>
+<h4>hover mode</h4>
 <d-cascader
   [options]="options"
-  [placeholder]="'请选择'"
+  [placeholder]="'please select'"
+  [(ngModel)]="value1"
+  (ngModelChange)="onChanges($event)"
+  [dropdownPanelClass]="'custom-class'"
+></d-cascader>
+
+<h4>click mode</h4>
+<d-cascader
+  [options]="options"
+  [placeholder]="'please select'"
   [(ngModel)]="value2"
   [trigger]="'click'"
   (ngModelChange)="onChanges($event)"
@@ -13,14 +19,14 @@
   [dropdownWidth]="120"
 ></d-cascader>
 
-<h4>数据为空</h4>
+<h4>data empty</h4>
 <d-cascader
   [options]="[]"
-  [placeholder]="'请选择'"
+  [placeholder]="'please select'"
   [(ngModel)]="value3"
   [trigger]="'click'"
   (ngModelChange)="onChanges($event)"
 ></d-cascader>
 
-<h4>禁用模式</h4>
-<d-cascader [options]="[]" [placeholder]="'请选择'" [(ngModel)]="value4" [trigger]="'click'" [disabled]="true"></d-cascader>
+<h4>disabled</h4>
+<d-cascader [options]="[]" [placeholder]="'please select'" [(ngModel)]="value4" [trigger]="'click'" [disabled]="true"></d-cascader>

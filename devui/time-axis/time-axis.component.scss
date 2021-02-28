@@ -160,17 +160,9 @@ table {
 .devui-time-axis-h .success,
 .devui-time-axis-h .danger,
 .devui-time-axis-h .warning {
-  width: 20%;
-  position: relative;
-  padding: 6px 0 10px 35px;
-}
-
-.devui-time-axis-h .primary,
-.devui-time-axis-h .success,
-.devui-time-axis-h .danger,
-.devui-time-axis-h .warning {
-  padding: 2em 0 0;
+  padding: 2em 12px;
   text-align: center;
+  position: relative;
 }
 
 .devui-time-axis-h .primary::before,

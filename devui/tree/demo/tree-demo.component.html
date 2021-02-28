@@ -71,11 +71,25 @@
       <d-check-control demo></d-check-control>
     </d-codebox>
   </div>
+  <div class="demo-example" [dAnchor]="'tree-factory'">
+    <div class="demo-title">{{ 'components.tree.treeFactoryDemo.title' | translate }}</div>
+    <div class="demo-text">{{ 'components.tree.treeFactoryDemo.description' | translate }}</div>
+    <d-codebox id="basic" [sourceData]="treeFactorySource">
+      <d-tree-factory demo></d-tree-factory>
+    </d-codebox>
+  </div>
   <div class="demo-example" [dAnchor]="'virtual-scroll'">
     <div class="demo-title">{{ 'components.tree.virtualScrollDemo.title' | translate }}</div>
     <div class="demo-text">{{ 'components.tree.virtualScrollDemo.description' | translate }}</div>
     <d-codebox id="virtual-scroll" [sourceData]="virtualScrollSource">
       <d-virtual-scroll demo></d-virtual-scroll>
+    </d-codebox>
+  </div>
+  <div class="demo-example" [dAnchor]="'without-animation'">
+    <div class="demo-title">{{ 'components.tree.withoutAnimationDemo.title' | translate }}</div>
+    <div class="demo-text">{{ 'components.tree.withoutAnimationDemo.description' | translate }}</div>
+    <d-codebox id="without-animation" [sourceData]="withoutAnimationSource">
+      <d-without-animation demo></d-without-animation>
     </d-codebox>
   </div>
 </div>

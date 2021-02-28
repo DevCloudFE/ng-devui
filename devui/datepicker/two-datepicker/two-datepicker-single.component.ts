@@ -94,6 +94,7 @@ export class TwoDatepickerSingleComponent extends SingleDatepickerComponent impl
     if (!this.selectedRange.every(curDate => !!curDate)) {
       this.selectingRange = true;
     }
+    this.availableMonths = this.onDisplayMonthsChange();
     this.notifyCalenderChange();
   }
 
@@ -295,7 +296,14 @@ export class TwoDatepickerSingleComponent extends SingleDatepickerComponent impl
 
   hasPreYearOption() {
     let hasPrevYear = true;
-    if (this.currentCalendars[0] && this.currentCalendars[1]) {
+    if (this.openChooseYear) {
+      if (!this.isAuxiliary) {
+        hasPrevYear = this.nowMinYear > this.minDate.getFullYear();
+      } else {
+        hasPrevYear = this.nowMinYear > this.minDate.getFullYear() &&
+          this.isBeforeMoreThanOneYear(this.currentCalendars[0], {year: this.nowMinYear, month: this.currentCalendars[1].month});
+      }
+    } else if (this.currentCalendars[0] && this.currentCalendars[1]) {
       // 主面板只用考虑minDate的影响
       if (!this.isAuxiliary) {
         hasPrevYear = this.currentCalendars[0].year > this.minDate.getFullYear();
@@ -309,7 +317,14 @@ export class TwoDatepickerSingleComponent extends SingleDatepickerComponent impl
 
   hasNextYearOption() {
     let hasNextYear = true;
-    if (this.currentCalendars[0] && this.currentCalendars[1]) {
+    if (this.openChooseYear) {
+      if (this.isAuxiliary) {
+        hasNextYear = this.nowMaxYear < this.maxDate.getFullYear();
+      } else {
+        hasNextYear = this.nowMaxYear < this.maxDate.getFullYear() &&
+          this.isAfterMoreThanOneYear(this.currentCalendars[1], {year: this.nowMaxYear, month: this.currentCalendars[0].month});
+      }
+    } else if (this.currentCalendars[0] && this.currentCalendars[1]) {
       // 副面板只用考虑maxDate的影响
       if (this.isAuxiliary) {
         hasNextYear = this.currentCalendars[1].year < this.maxDate.getFullYear();
@@ -322,17 +337,41 @@ export class TwoDatepickerSingleComponent extends SingleDatepickerComponent impl
   }
 
   onPreYear() {
-    if (this.hasPreYearOption()) {
-      this.onSelectYear(this.currentYear - 1);
-      this.notifyCalenderChange();
+    if (!this.hasPreYearOption()) {
+      return;
     }
+    if (this.openChooseYear) {
+      if (this.nowMinYear - this._yearNumber >= this.minDate.getFullYear()) {
+        this.nowMaxYear = this.nowMinYear - 1;
+        this.nowMinYear = this.nowMinYear - this._yearNumber;
+      } else {
+        this.nowMaxYear = this.nowMinYear - 1;
+        this.nowMinYear = this.minDate.getFullYear();
+      }
+      this.onYearRangeChange();
+    } else {
+      this.onSelectYear(Number(this.currentYear) - 1);
+    }
+    this.notifyCalenderChange();
   }
 
   onNextYear() {
-    if (this.hasNextYearOption()) {
-      this.onSelectYear(this.currentYear + 1);
-      this.notifyCalenderChange();
+    if (!this.hasNextYearOption()) {
+      return;
     }
+    if (this.openChooseYear) {
+      if (this.nowMaxYear + this._yearNumber <= this.maxDate.getFullYear()) {
+        this.nowMinYear = this.nowMaxYear + 1;
+        this.nowMaxYear = this.nowMaxYear + this._yearNumber;
+      } else {
+        this.nowMinYear = this.nowMaxYear + 1;
+        this.nowMaxYear = this.maxDate.getFullYear();
+      }
+      this.onYearRangeChange();
+    } else {
+      this.onSelectYear(Number(this.currentYear) + 1);
+    }
+    this.notifyCalenderChange();
   }
 
   isBeforeMoreThanOneMonth(dateA: SimpleDate, dateB: SimpleDate) {
@@ -377,6 +416,70 @@ export class TwoDatepickerSingleComponent extends SingleDatepickerComponent impl
 
     // 处理A日期比B日期大1年同时A日期月份小于B日期月份的情况
     return (!(dateA.year - dateB.year === 1 && dateA.month <= dateB.month));
+  }
+
+  isYearDisable(year: number): boolean {
+    if (this.isAuxiliary) {
+      // 先判定主面板是否比附面板小一年以上，是的话disabled为false;
+      return !(this.isBeforeMoreThanOneYear(this.currentCalendars[0], { year: year + 1, month: this.currentCalendars[1].month}) ||
+        // 主附面板在同一年时，判断主附面板月是否在临界值；
+        (this.currentCalendars[0].year === year && this.currentCalendars[0].month !== 11));
+    } else {
+      return !(this.isAfterMoreThanOneYear(this.currentCalendars[1], {year: year - 1, month: this.currentCalendars[0].month}) ||
+        (this.currentCalendars[1].year === year && this.currentCalendars[1].month !== 0));
+    }
+  }
+
+  isMonthDisable(month: string): boolean {
+    if (this.isAuxiliary) {
+      return !this.isBeforeMoreThanOneMonth(
+        this.currentCalendars[0], {year: this.currentCalendars[1].year, month: parseInt(month, 10) - 1 + 1}
+      );
+    } else {
+      return !this.isAfterMoreThanOneMonth(
+        this.currentCalendars[1], {year: this.currentCalendars[0].year, month: parseInt(month, 10) - 1 - 1}
+      );
+    }
+
+  }
+
+  onSelectMonth(month) {
+    if (month.disabled || this.isMonthDisable(month.title)) {
+      return;
+    }
+    this.currentMonthIndex = month.index;
+    this.onDisplayWeeksChange();
+    this.openChooseMonth = false;
+    this.isAuxiliary ? this.currentCalendars[1].month = this.currentMonthIndex : this.currentCalendars[0].month = this.currentMonthIndex;
+  }
+
+  onSelectYear(year, $event?: Event) {
+    if ($event) {
+      $event.stopPropagation();
+    }
+    const yearDisabled = typeof year === 'object' ? year.disabled : false;
+    const yearTitle = typeof year === 'object' ? year.title : year;
+    if (yearDisabled || this.isYearDisable(year.title)) {
+      return;
+    }
+    this.currentYear = yearTitle;
+    this.onDisplayWeeksChange();
+    this.availableMonths = this.onDisplayMonthsChange();
+    this.openChooseYear = false;
+    if (!$event) {
+      this.isAuxiliary ? this.currentCalendars[1].year = this.currentYear : this.currentCalendars[0].year = this.currentYear;
+      return;
+    }
+    this.openChooseMonth = true;
+    if (this.isAuxiliary) {
+      this.currentCalendars[1].year = this.currentYear;
+      this.currentCalendars[1].month = 11;
+      this.currentMonthIndex = 11;
+    } else {
+      this.currentCalendars[0].year = this.currentYear;
+      this.currentCalendars[0].month = 0;
+      this.currentMonthIndex = 0;
+    }
   }
 
   protected notifyCalenderChange() {

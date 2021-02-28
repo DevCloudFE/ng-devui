@@ -55,6 +55,8 @@ export interface ITreeItem {
   disableAdd?: boolean;
   disableEdit?: boolean;
   disableDelete?: boolean;
+  disableSelect?: boolean;
+  disableToggle?: boolean;
 }
 
 export interface ITreeInput {
@@ -479,7 +481,7 @@ export class TreeFactory {
     });
   }
 
-  public searchTree(target, hideUnmatched = false, keyword?, pattern?) {
+  public searchTree(target: string, hideUnmatched = false, keyword?, pattern?) {
     this.searchItem = target;
     target = trim(target);
     this.resetSearchResults();
@@ -494,7 +496,7 @@ export class TreeFactory {
       this.nodes[id].data.isActive = false;
     }
   }
-  public checkAllNodes(checked) {
+  public checkAllNodes(checked: boolean) {
     for (const id of Object.keys(this.nodes)) {
       if (!this.nodes[id].data.disabled) {
         this.nodes[id].data.isChecked = checked;
@@ -579,5 +581,23 @@ export class TreeFactory {
       return;
     }
     this.getFlattenNodes();
+  }
+
+  public disableAllNodesChecked(disabled = true) {
+    for (const id of Object.keys(this.nodes)) {
+      this.nodes[id].data.disabled = disabled;
+    }
+  }
+
+  public disableAllNodesSelected(disabled = true) {
+    for (const id of Object.keys(this.nodes)) {
+      this.nodes[id].data.disableSelect = disabled;
+    }
+  }
+
+  public disableAllNodesToggled(disabled = true) {
+    for (const id of Object.keys(this.nodes)) {
+      this.nodes[id].data.disableToggle = disabled;
+    }
   }
 }

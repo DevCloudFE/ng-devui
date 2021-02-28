@@ -1,12 +1,13 @@
 @import '../style/theme/color';
 @import '../style/theme/shadow';
 @import '../style/theme/corner';
-@import '../style/theme/_font';
+@import '../style/core/_font';
 
 .devui-dropdown-menu {
   &:not(.devui-dropdown-menu-cdk) {
     width: calc(100% + 2px);
     left: -1px;
+    margin: 5px 0;
   }
 
   &.devui-custom-right,
@@ -29,7 +30,6 @@
 
     & > .devui-select-custom-area {
       width: 50%;
-      border-left: 1px solid $devui-dividing-line;
 
       &::before {
         display: none;
@@ -37,8 +37,13 @@
     }
   }
 
-  &.devui-custom-left .devui-select-custom-area {
+  &.devui-custom-left > .devui-select-custom-area {
+    border-right: 1px solid $devui-dividing-line;
     order: -1;
+  }
+
+  &.devui-custom-right > .devui-select-custom-area {
+    border-left: 1px solid $devui-dividing-line;
   }
 
   .devui-dropdown-menu-wrap {
@@ -50,14 +55,6 @@
   position: static;
   display: block;
   width: 100%;
-  // border: none;
-  &.devui-dropdown-cdk-top {
-    margin-bottom: -1px;
-  }
-
-  &.devui-dropdown-cdk-bottom {
-    margin-top: -1px;
-  }
 }
 
 .devui-form-group.devui-has-feedback[tabindex] {
@@ -165,9 +162,12 @@
 
 .devui-select-sm {
   font-size: $devui-font-size-sm;
-  min-height: 26px;
   line-height: 14px;
   height: unset;
+
+  &.devui-dropdown-origin:not(d-button):not(.icon):not([class^='icon-']) {
+    min-height: 26px;
+  }
 
   .devui-form-control:not(.devui-select-list-wrapper) {
     height: 24px;
@@ -346,11 +346,6 @@ div.devui-dropdown-menu.devui-dropdown-menu-multiple > ul.devui-list-unstyled li
   box-shadow: none;
 }
 
-.devui-form-control.no-radius,
-.devui-form-group .devui-form-control.no-radius {
-  border-radius: $devui-border-radius $devui-border-radius 0 0;
-}
-
 .devui-select-underlined-border {
   border: 0;
   border-bottom: 1px solid $devui-line;
@@ -415,7 +410,7 @@ div.devui-dropdown-menu.devui-dropdown-menu-multiple > ul.devui-list-unstyled li
   }
 
   .devui-select-tag-list {
-    height: 24px;
+    height: 26px;
     margin: 0;
     padding: 0;
     list-style-type: none;
@@ -443,10 +438,8 @@ div.devui-dropdown-menu.devui-dropdown-menu-multiple > ul.devui-list-unstyled li
 
   .devui-select-tag-item {
     display: inline-block;
-    margin: 1px 1px 0;
+    margin: 1px;
     padding: 0 4px;
-    min-height: 22px;
-    max-height: 22px;
     border-radius: $devui-border-radius;
     color: $devui-text;
     background: $devui-label-bg;
@@ -536,8 +529,6 @@ div.devui-dropdown-menu.devui-dropdown-menu-multiple > ul.devui-list-unstyled li
     .devui-select-tag-item {
       margin: 5px 3px 0;
       padding: 0 5px;
-      min-height: 32px;
-      max-height: 32px;
 
       .over-flow-ellipsis {
         height: 30px;
@@ -552,7 +543,7 @@ div.devui-dropdown-menu.devui-dropdown-menu-multiple > ul.devui-list-unstyled li
     .devui-select-selected-item-with-template,
     .devui-select-placeholder,
     .devui-select-tag-list {
-      height: 22px;
+      height: 24px;
 
       &.multiple-line {
         max-height: 48px;
@@ -566,10 +557,8 @@ div.devui-dropdown-menu.devui-dropdown-menu-multiple > ul.devui-list-unstyled li
     }
 
     .devui-select-tag-item {
-      margin: 1px 1px 0;
+      margin: 1px;
       padding: 0 5px;
-      min-height: 20px;
-      max-height: 20px;
 
       .over-flow-ellipsis {
         height: 18px;
@@ -616,8 +605,8 @@ li.disabled ::ng-deep .devui-checkbox.disabled label {
   color: $devui-disabled-text;
 }
 
-.devui-dropdown-origin-wrapper.disabled,
-.devui-dropdown-origin-wrapper.disabled:hover {
+.devui-dropdown-origin.disabled,
+.devui-dropdown-origin.disabled:hover {
   cursor: not-allowed;
   background-color: $devui-disabled-bg;
   border-color: $devui-disabled-line;
@@ -635,8 +624,8 @@ li.disabled ::ng-deep .devui-checkbox.disabled label {
   }
 }
 
-.devui-dropdown-origin-wrapper,
-.devui-dropdown-origin-wrapper:hover {
+.devui-dropdown-origin,
+.devui-dropdown-origin:hover {
   &.disabled .devui-select-tag-list .devui-select-tag-item,
   .devui-select-tag-list .devui-select-tag-item.disabled {
     background-color: $devui-disabled-bg;

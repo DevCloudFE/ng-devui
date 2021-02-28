@@ -19,6 +19,12 @@ export class AlertDemoComponent implements OnInit, OnDestroy {
     {title: 'SCSS', language: 'css', code:  require('!!raw-loader!./close/close.component.css')}
   ];
 
+  withoutIconSource: Array<DevuiSourceData> = [
+    {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./withoutIcon/withoutIcon.component.html')},
+    {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./withoutIcon/withoutIcon.component.ts')},
+    {title: 'SCSS', language: 'css', code:  require('!!raw-loader!./withoutIcon/withoutIcon.component.css')}
+  ];
+
   navItems = [];
   subs: Subscription = new Subscription();
   constructor(private translate: TranslateService) {
@@ -43,7 +49,8 @@ export class AlertDemoComponent implements OnInit, OnDestroy {
   setNavValues(values) {
     this.navItems = [
       { dAnchorLink: 'basic-usage', value: values['basic-usage'] },
-      { dAnchorLink: 'tips-to-close', value: values['tips-to-close'] }
+      { dAnchorLink: 'tips-to-close', value: values['tips-to-close'] },
+      { dAnchorLink: 'without-icon', value: values['without-icon'] }
     ];
   }
 

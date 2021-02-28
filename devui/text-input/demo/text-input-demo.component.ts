@@ -9,7 +9,13 @@ export class TextInputDemoComponent implements OnInit, OnDestroy {
   basicSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./basic/basic.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/basic.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./basic/basic.component.css') },
+    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./basic/basic.component.scss') },
+  ];
+
+  passwordVisibleSource: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./password-visible/password-visible.component.html') },
+    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./password-visible/password-visible.component.ts') },
+    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./password-visible/password-visible.component.scss') },
   ];
 
   navItems = [];
@@ -32,7 +38,13 @@ export class TextInputDemoComponent implements OnInit, OnDestroy {
   }
 
   setNavValues(values) {
-    this.navItems = [{ dAnchorLink: 'basic-usage', value: values['basic-usage'] }];
+    this.navItems = [
+      { dAnchorLink: 'basic-usage', value: values['basic-usage'] },
+      {
+        dAnchorLink: 'password-input',
+        value: values['password-input'],
+      },
+    ];
   }
 
   ngOnDestroy() {

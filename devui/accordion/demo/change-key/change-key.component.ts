@@ -14,14 +14,14 @@ export class ChangeKeyComponent {
     childrenKey: 'subs',
   };
   menu = [{
-    value: '内容一',
+    value: 'Content 1',
   }, {
-    value: '内容二（展开）',
+    value: 'Content 2 (expended)',
     $show: true,
     subs: [
-      {value: '子内容1（禁用）', forbidden: true},
-      {value: '子内容2（选中）', $selected: true},
-      {value: '子内容3'},
+      { value: 'Child Content 1 (disabled)', forbidden: true },
+      { value: 'Child Content 2 (active)', $selected: true },
+      { value: 'Child Content 3' },
     ]
   }];
 }

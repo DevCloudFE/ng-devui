@@ -12,6 +12,18 @@ export class ToggleDemoComponent implements OnInit, OnDestroy {
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/basic.component.ts') },
     { title: 'SCSS', language: 'css', code: require('!!raw-loader!./basic/basic.component.css') },
   ];
+  twoBindingSource: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./two-binding/two-binding.component.html') },
+    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./two-binding/two-binding.component.ts') }
+  ];
+  callbackSource: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./callback/callback.component.html') },
+    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./callback/callback.component.ts') }
+  ];
+  customSource: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./custom/custom.component.html') },
+    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./custom/custom.component.ts') }
+  ];
 
   navItems = [];
   subs: Subscription = new Subscription();
@@ -33,7 +45,12 @@ export class ToggleDemoComponent implements OnInit, OnDestroy {
   }
 
   setNavValues(values) {
-    this.navItems = [{ dAnchorLink: 'basic-usage', value: values['basic-usage'] }];
+    this.navItems = [
+      { dAnchorLink: 'basic-usage', value: values['basic-usage'] },
+      { dAnchorLink: 'two-binding', value: values['two-binding'] },
+      { dAnchorLink: 'callback', value: values['callback'] },
+      { dAnchorLink: 'custom', value: values['custom'] }
+    ];
   }
 
   ngOnDestroy() {

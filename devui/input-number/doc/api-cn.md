@@ -1,6 +1,17 @@
-## InputNumber 使用说明
+# 如何使用
 
-### d-input-number 参数
+在module中引入：
+```ts
+import { InputNumberModule } from 'ng-devui';
+```
+
+在页面中使用：
+```html
+<d-input-number></d-input-number>
+```
+
+# d-input-number
+## d-input-number 参数
 
 |     参数     |        类型        |          默认           | 说明                                 | 跳转 Demo                                                                              |
 | :----------: | :----------------: | :---------------------: | :----------------------------------- | -------------------------------------------------------------------------------------- |
@@ -8,7 +19,7 @@
 |     min      |      `number`      | Number.MIN_SAFE_INTEGER | 可选，最小值                         | [基本用法](demo#number-basic)                                 |
 |     step     |      `number`      |            1            | 可选，步进值                         | [基本用法](demo#number-basic)                                 |
 |   disabled   |     `boolean`      |          false          | 可选，禁止输入态开关                 | [禁止输入态](demo#number-disabled)                            |
-|     size     |  `''\|'sm'\|'lg'`  |           ''            | 可选，组件大小                       | [基本用法](demo#number-basic)                                 |
+|     size     |  `'' \| 'sm' \| 'lg'`  |           ''            | 可选，组件大小                       | [基本用法](demo#number-basic)                                 |
 |   ngModel    |      `number`      |           --            | 可选，组件的值                       | [基本用法](demo#number-basic)                                 |
 | decimalLimit |      `number`      |           --            | 可选，限制小数点后的位数             | [限制小数和自动获取焦点](demo#decimal-limit-auto-focus)      |
 |  autoFocus   |     `boolean`      |          false          | 可选，自动获取焦点                   | [限制小数和自动获取焦点](demo#decimal-limit-auto-focus)      |
@@ -17,7 +28,7 @@
 |  maxLength   |      `number`      |            0            | 可选，限制最大输入的长度，0 为不限制 | [placeholder 和 maxLength](demo#number-placeholder-maxlength) |
 |     reg      | `RegExp \| string` |           --            | 可选，用于限制输入的正则或正则字符串 | [正则限制](demo#number-reg)                                   |
 
-### d-input-number 事件
+## d-input-number 事件
 
 |        事件        |          类型          | 说明                                                      | 跳转 Demo                                              |
 | :----------------: | :--------------------: | :-------------------------------------------------------- | ------------------------------------------------------ |

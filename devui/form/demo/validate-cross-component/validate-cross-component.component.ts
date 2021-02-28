@@ -6,10 +6,9 @@ import { delay, map } from 'rxjs/operators';
 
 @Component({
   selector: 'd-form-demo-validate-cross-component',
-  templateUrl: './validate-cross-component.component.html'
+  templateUrl: './validate-cross-component.component.html',
 })
 export class ValidateCrossComponentComponent implements OnInit {
-
   formData = {
     userName: '',
     childUser: null,
@@ -20,19 +19,20 @@ export class ValidateCrossComponentComponent implements OnInit {
     childUser: new FormControl(this.formData.childUser),
   });
 
-  formRules: {[key: string]: DValidateRules} = {
-    rule: { message: '表单校验不通过，请检查' },
+  formRules: { [key: string]: DValidateRules } = {
+    rule: { message: 'The form verification failed, please check.' },
     usernameRules: {
       validators: [
-        { required: true, message: '用户名不能为空' },
-        { minlength: 3, message: '用户名长度至少为3' },
-        { maxlength: 128, message: '用户名长度不能超过128' },
-        { pattern: /^[a-zA-Z0-9]+(\s+[a-zA-Z0-9]+)*$/, message: '用户名请勿包含大小写字母以外其他字符' }
+        { required: true },
+        { minlength: 3 },
+        { maxlength: 128 },
+        {
+          pattern: /^[a-zA-Z0-9]+(\s+[a-zA-Z0-9]+)*$/,
+          message: 'Please do not include characters other than uppercase and lowercase letters.',
+        },
       ],
-      asyncValidators: [
-        { sameName: this.checkName.bind(this), message: '当前用户名已存在' }
-      ]
-    }
+      asyncValidators: [{ sameName: this.checkName.bind(this), message: 'Duplicate name.' }],
+    },
   };
 
   existUsernames = ['123', '123456', 'DevUI'];
@@ -41,7 +41,7 @@ export class ValidateCrossComponentComponent implements OnInit {
 
   msgs: Array<Object> = [];
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
     this.userFormGroup.valueChanges.subscribe((val) => {
@@ -53,16 +53,18 @@ export class ValidateCrossComponentComponent implements OnInit {
     // do something for submitting
     if (this.userFormDir.isReady) {
       console.log(this.formData);
-      of(this.formData).pipe(
-        map((val) => 'success'),  // 模拟接口处理
-        delay(500)
-      ).subscribe((res) => {
-        if (res === 'success') {
-          this.showToast('success', '成功', '注册成功');
-        }
-      });
+      of(this.formData)
+        .pipe(
+          map((val) => 'success'),
+          delay(500)
+        )
+        .subscribe((res) => {
+          if (res === 'success') {
+            this.showToast('success', 'Success', 'registration success.');
+          }
+        });
     } else {
-      this.showToast('error', '错误', '请检查所有校验项是否通过');
+      this.showToast('error', 'Error', 'Please check whether all verification items are passed.');
     }
   }
   checkName(value) {

@@ -1,3 +1,16 @@
+# 如何使用
+
+在module中引入：
+
+```
+import { TimePickerModule } from 'ng-devui/time-picker';
+```
+在页面中使用：
+```
+<input dTimePicker (focus)="timePicker3.toggle()" #timePicker3="timePicker" />
+```
+# TimePicker
+
 ## TimePicker参数
 
 | 参数                      | 类型            | 默认       |   说明                                      | 跳转Demo                                                           |
@@ -8,7 +21,7 @@
 |           format          |    `string`    | 'hh:mm:ss' | 可选，传入格式化，控制时间格式                 |[格式化](demo#format)                      |
 |          minTime          |    `string`    | '00:00:00' | 可选，限制最小可选时间                        |[格式化](demo#format)                      |
 |          maxTime          |    `string`    | '23:59:59' | 可选，限制最大可选时间                        |[格式化](demo#format)                      |
-|    customViewTemplate     |   `template`   |     --     | 可选，自定义快捷设置时间或自定义操作区内容      |[传入模板](demo#custom)                    |
+|    customViewTemplate     |   `TemplateRef`   |     --     | 可选，自定义快捷设置时间或自定义操作区内容      |[传入模板](demo#custom)                    |
 |  appendToBodyDirections   | `Array<AppendToBodyDirection \| ConnectedPosition>` | `['rightDown', 'leftDown', 'rightUp', 'leftUp']` | 方向数组优先采用数组里靠前的位置 |  --  |
 
 ## TimePicker事件
@@ -17,7 +30,7 @@
 | :----------------: | :--------------------: | :------------------------------------------: | :------------------------------------------------------------------|
 | selectedTimeChange | `EventEmitter<string>` | 可选，确定的时候会发出新激活的子项的数据         |[基本用法](demo#basic-usage)                 |
 
-### 可调用的组件内部方法
+## 可调用的组件内部方法
 
 详情参见[传入模板](demo#custom)
 

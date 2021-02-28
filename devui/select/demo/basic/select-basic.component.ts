@@ -11,15 +11,15 @@ import { Component } from '@angular/core';
   ]
 })
 export class SelectBasicComponent {
-  options = ['选项1', '选项2', '选项3', '选项4', '选项5', '选项6', '选项7', '选项8',
-    '选项9', '选项10', '选项11', '选项12', '选项13', '选项14'];
+  options = ['Option 1', 'Option 2', 'Option 3', 'Option 4', 'Option 5', 'Option 6', 'Option 7', 'Option 8',
+    'Option 9', 'Option 0', 'Option 11', 'Option 12', 'Option 13', 'Option 14'];
   constructor() {
-    for (let i = 0; i < 1000; i++) {
-      this.options.push('新增选项' + i);
+    for (let i = 0; i < 100; i++) {
+      this.options.push('new option' + i);
     }
   }
   loadMore(data) {
-    const moreData = ['异步选项1', '异步选项2', '异步选项3', '异步选项4', '异步选项5'];
+    const moreData = ['async option 1', 'async option 2', 'async option 3', 'async option 4', 'async option 5'];
     // 模拟接口延时
     setTimeout(() => {
       this.options = [...this.options, ...moreData];

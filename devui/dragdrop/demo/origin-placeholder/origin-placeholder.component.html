@@ -1,83 +1,82 @@
-<section>
-  <h3>Default CSS Demo</h3>
-  <div class="row">
-    <div class="col-sm-3">
-      <div class="card" dDroppable [dropScope]="'default-css'" (dropEvent)="onDrop($event, list1)">
-        <div class="card-header">从这里拖，源占位符在放置之后<strong>直接</strong>消失</div>
-        <div class="card-block">
-          <ul class="list-group drop-el" dSortable>
-            <li
-              dDraggable
-              *ngFor="let item of list1"
-              [dragScope]="'default-css'"
-              [dragData]="{ item: item, parent: list1 }"
-              class="list-group-item over-flow-ellipsis"
-              [originPlaceholder]="{
-                text: '源占位符号自定义样式和文字',
-                style: { backgroundColor: '#ffe6e6', textAlign: 'center' }
-              }"
-            >
-              {{ item.name }}
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-3">
-      <div
-        class="card card-outline-primary mb-3"
-        dDroppable
-        [dropScope]="'default-css'"
-        (dropEvent)="onDrop($event, list2)"
-        [placeholderStyle]="{}"
-      >
-        <div class="card-header">从这里拖，源占位符在放置之后<strong>延迟</strong>消失</div>
-        <div class="card-block">
-          <ul class="list-group drop-el" dSortable>
-            <li
-              dDraggable
-              *ngFor="let item of list2"
-              [dragScope]="'default-css'"
-              [dragHandleClass]="'drag-handle'"
-              [dragData]="{ item: item, parent: list2 }"
-              class="list-group-item over-flow-ellipsis"
-              [originPlaceholder]="{
-                removeDelay: 100
-              }"
-            >
-              {{ item.name }}
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-3">
-      <div
-        class="card card-outline-primary mb-3"
-        dDroppable
-        [dropScope]="'default-css'"
-        (dropEvent)="onDrop($event, list3)"
-        [placeholderStyle]="{}"
-      >
-        <div class="card-header">从这里拖，源占位符在放置之后<strong>动画</strong>消失</div>
-        <div class="card-block">
-          <ul class="list-group drop-el list-3" dSortable>
-            <li
-              dDraggable
-              *ngFor="let item of list3"
-              [dragScope]="'default-css'"
-              [dragHandleClass]="'drag-handle'"
-              [dragData]="{ item: item, parent: list3 }"
-              class="list-group-item over-flow-ellipsis"
-              [originPlaceholder]="{
-                removeDelay: 300
-              }"
-            >
-              {{ item.name }}
-            </li>
-          </ul>
-        </div>
+<div class="row">
+  <div class="col-sm-3">
+    <div class="card" dDroppable [dropScope]="'default-css'" (dropEvent)="onDrop($event, list1)">
+      <div class="card-header">Drag from here，origin placeholder disappear <strong>directly</strong> after dropped</div>
+      <div class="card-block">
+        <ul class="list-group drop-el" dSortable>
+          <li
+            dDraggable
+            *ngFor="let item of list1"
+            [dragScope]="'default-css'"
+            [dragData]="{ item: item, parent: list1 }"
+            class="list-group-item over-flow-ellipsis"
+            [originPlaceholder]="{
+              text: 'Origin placeholder custom text and style',
+              style: { backgroundColor: '#ffe6e6', textAlign: 'center' }
+            }"
+          >
+            {{ item.name }}
+          </li>
+        </ul>
       </div>
     </div>
   </div>
-</section>
+  <div class="col-sm-3">
+    <div
+      class="card card-outline-primary mb-3"
+      dDroppable
+      [dropScope]="'default-css'"
+      (dropEvent)="onDrop($event, list2)"
+      [placeholderStyle]="{}"
+    >
+      <div class="card-header">Drag from here，origin placeholder <strong>delay to</strong> disappear after dropped</div>
+      <div class="card-block">
+        <ul class="list-group drop-el" dSortable>
+          <li
+            dDraggable
+            *ngFor="let item of list2"
+            [dragScope]="'default-css'"
+            [dragHandleClass]="'drag-handle'"
+            [dragData]="{ item: item, parent: list2 }"
+            class="list-group-item over-flow-ellipsis"
+            [originPlaceholder]="{
+              removeDelay: 100
+            }"
+          >
+            {{ item.name }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-3">
+    <div
+      class="card card-outline-primary mb-3"
+      dDroppable
+      [dropScope]="'default-css'"
+      (dropEvent)="onDrop($event, list3)"
+      [placeholderStyle]="{}"
+    >
+      <div class="card-header">
+        Drag from here，origin placeholder <strong>delay to</strong> disappear after dropped <strong>with animation</strong>
+      </div>
+      <div class="card-block">
+        <ul class="list-group drop-el list-3" dSortable>
+          <li
+            dDraggable
+            *ngFor="let item of list3"
+            [dragScope]="'default-css'"
+            [dragHandleClass]="'drag-handle'"
+            [dragData]="{ item: item, parent: list3 }"
+            class="list-group-item over-flow-ellipsis"
+            [originPlaceholder]="{
+              removeDelay: 300
+            }"
+          >
+            {{ item.name }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

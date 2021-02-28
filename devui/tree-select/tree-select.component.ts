@@ -19,8 +19,9 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { ICheckboxInput, ITreeItem, OperableTreeComponent } from 'ng-devui/tree';
-import { Subscription } from 'rxjs';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { addClassToOrigin, removeClassFromOrigin } from 'ng-devui/utils';
+import { Subject, Subscription } from 'rxjs';
+import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import DefaultIcons from './tree-default-icons';
 
 @Component({
@@ -64,11 +65,10 @@ export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterV
     if (this._isOpen !== value) {
       this._isOpen = value;
       if (!value) {
-        const ele = this.selectHost && this.selectHost.nativeElement;
-        const dropDownEle = this.popper && this.popper.popperContainer && this.popper.popperContainer.nativeElement;
-        this.removeClass(ele, this.inputEleCls);
-        this.removeClass(dropDownEle, this.dropEleCls);
+        removeClassFromOrigin(this.selectHost);
         this.onTouch();
+      } else {
+        addClassToOrigin(this.selectHost);
       }
       this.changeDetectorRef.detectChanges();
     }
@@ -118,6 +118,8 @@ export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterV
   @Input() iconTemplatePosition: string;
   @Input() iconTemplateInput: TemplateRef<any>;
   @Input() enableLabelization = true;
+  @Input() customViewTemplate: TemplateRef<any>;
+  @Input() customViewDirection: 'bottom' | 'right' | 'left' = 'bottom';
   @ViewChild('selectHost', { static: true }) selectHost: ElementRef;
   @ViewChild('optionsContainer', { static: true }) optionsContainer: ElementRef;
   @ViewChild('tree', { static: true }) tree: OperableTreeComponent;
@@ -127,34 +129,29 @@ export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterV
   @ContentChild('iconTemplate') iconTemplatePassThrough;
   @Output() nodeToggleEvent = new EventEmitter<any>();
   @Output() valueChanged = new EventEmitter<any>();
+  @Input() virtualScroll = false;
+  @Input() virtualScrollItemSize = 30;
+  @Input() virtualScrollMinBufferPx = 300;
+  @Input() virtualScrollMaxBufferPx = 600;
+  @Input() virtualScrollHeightPx = 300;
   checkboxInput: ICheckboxInput;
   _treeData: Array<ITreeItem> = [];
   currentActiveNode: ITreeItem;
   searchString: string = null;
   i18nCommonText: I18nInterface['common'];
   i18nSubscription: Subscription;
-  directionSubscription: Subscription;
   noRecord = false;
   valueType: 'array' | 'object' | undefined;
   displayValue: string | Array<string>;
   valueLength: number;
   userAgent: string;
+  destroy$ = new Subject();
+  validVirtualScrollHeight: number;
   private _value: object | Array<any>;
   private _isOpen = false;
   private _sourceTree = [];
   private _allowClear: boolean;
   private timer: any;
-  private inputEleCls = [
-    'devui-dropdown-origin-open',
-    'devui-dropdown-origin-top',
-    'devui-dropdown-origin-bottom'
-  ];
-  private dropEleCls = [
-    'devui-dropdown-menu',
-    'devui-dropdown-overlay',
-    'devui-dropdown-overlay-top',
-    'devui-dropdown-overlay-bottom'
-  ];
   @Input() readyEvent = (treeSelect: TreeSelectComponent) => {
   }
 
@@ -176,18 +173,23 @@ export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterV
     if (this.i18nSubscription) {
       this.i18nSubscription.unsubscribe();
     }
-    if (this.directionSubscription) {
-      this.directionSubscription.unsubscribe();
-    }
     this.isOpen = false; // 销毁Popper
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   ngOnInit(): void {
     this.setI18nText();
-    this.directionSubscription = this.popper.directionChange().subscribe(data => {
-      this.changeFormWithDropDown(data);
-    });
     this.queryMedia();
+  }
+
+  afterTreeInit() {
+    if (this.virtualScroll) {
+      this.tree.treeFactory.flattenNodes.pipe(takeUntil(this.destroy$)).subscribe(data => {
+        const treeNodeOnDisplay = data.filter(node => !(node.data.isHide || node.data.hideInVirtualScroll));
+        this.validVirtualScrollHeight = Math.min(treeNodeOnDisplay.length * this.virtualScrollItemSize, this.virtualScrollHeightPx);
+      });
+    }
   }
 
   registerOnChange(fn: any): void {
@@ -403,6 +405,7 @@ export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterV
     } else if (Array.isArray(searchRes)) {
       this.noRecord = searchRes.every(res => !res);
     }
+    this.tree.treeFactory.getFlattenNodes();
     this.popper.update();
   }
 
@@ -439,52 +442,5 @@ export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterV
       this.popper.update();
     }
     this.nodeToggleEvent.emit($event);
-  }
-
-  changeFormWithDropDown(position) {
-    const ele = this.selectHost && this.selectHost.nativeElement;
-    const dropDownEle = this.popper && this.popper.popperContainer && this.popper.popperContainer.nativeElement;
-    let otherPosition;
-    if (position === 'bottom') {
-      otherPosition = 'top';
-    } else {
-      otherPosition = 'bottom';
-    }
-    this.addClass(ele, ['devui-dropdown-origin-open', `devui-dropdown-origin-${position}`]);
-    this.removeClass(ele, `devui-dropdown-origin-${otherPosition}`);
-    this.addClass(dropDownEle, ['devui-dropdown-menu', 'devui-dropdown-overlay', `devui-dropdown-overlay-${position}`]);
-    this.removeClass(dropDownEle, `devui-dropdown-overlay-${otherPosition}`);
-  }
-
-  addClass(eleAdd, clsAdd: string | string[]) {
-    const curAdd = (curEle, curCls: string) => {
-      if (!curEle.classList.contains(curCls)) {
-        curEle.classList.add(curCls);
-      }
-    };
-    if (eleAdd) {
-      if (Array.isArray(clsAdd)) {
-        clsAdd.forEach(cla => {
-          curAdd(eleAdd, cla);
-        });
-      } else {
-        curAdd(eleAdd, clsAdd);
-      }
-    }
-  }
-
-  removeClass(eleRemove, clsRemove: string | string[]) {
-    const curRemove = (curEle, curCls: string) => {
-      curEle.classList.remove(curCls);
-    };
-    if (eleRemove) {
-      if (Array.isArray(clsRemove)) {
-        clsRemove.forEach(cla => {
-          curRemove(eleRemove, cla);
-        });
-      } else {
-        curRemove(eleRemove, clsRemove);
-      }
-    }
   }
 }

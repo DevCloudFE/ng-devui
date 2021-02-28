@@ -22,7 +22,7 @@ import { DropDownModule } from './dropdown.moudule';
     更多操作
     <span class="icon icon-chevron-down"></span>
   </a>
-  <ul dDropDownMenu class="devui-dropdown-overlay">
+  <ul dDropDownMenu>
     <li role="menuitem">
       <a class="devui-dropdown-item">菜单一</a>
     </li>
@@ -82,7 +82,7 @@ class TestDropdownComponent {
       更多操作
       <span class="icon icon-chevron-down"></span>
     </a>
-    <ul dDropDownMenu class="devui-dropdown-overlay">
+    <ul dDropDownMenu>
       <li role="menuitem">
         <a class="devui-dropdown-item">菜单一</a>
       </li>
@@ -121,7 +121,7 @@ class TestDropdownAppendToBodyComponent {
       更多操作
       <span class="icon icon-chevron-down"></span>
     </a>
-    <ul dDropDownMenu class="devui-dropdown-overlay">
+    <ul dDropDownMenu>
       <li role="menuitem">
         <a class="devui-dropdown-item">菜单一</a>
       </li>
@@ -153,13 +153,13 @@ class TestDropdownToggleComponent {
       <span class="icon icon-chevron-down"></span>
     </a>
 
-    <ul id="menu1" dDropDownMenu class="devui-dropdown-menu devui-scrollbar devui-dropdown-overlay" role="menu">
+    <ul id="menu1" dDropDownMenu class="devui-dropdown-menu devui-scrollbar" role="menu">
       <li role="menuitem" dDropDown appendToBody [trigger]="trigger2" [appendToBodyDirections]="subMenuDirections">
         <a class="devui-dropdown-item" dDropDownToggle id="item-1">内容1 <span class="icon icon-chevron-right"></span></a>
-        <ul id="menu2" dDropDownMenu class="devui-dropdown-menu devui-scrollbar devui-dropdown-overlay" role="menu">
+        <ul id="menu2" dDropDownMenu class="devui-dropdown-menu devui-scrollbar" role="menu">
           <li role="menuitem" dDropDown appendToBody [trigger]="trigger2" [appendToBodyDirections]="subMenuDirections">
             <a class="devui-dropdown-item" dDropDownToggle id="item-11">内容1-1 <span class="icon icon-chevron-right"></span></a>
-            <ul id="menu3" dDropDownMenu class="devui-dropdown-menu devui-scrollbar devui-dropdown-overlay" role="menu">
+            <ul id="menu3" dDropDownMenu class="devui-dropdown-menu devui-scrollbar" role="menu">
               <li role="menuitem">
                 <a class="devui-dropdown-item" id="item-111">内容1-1-1</a>
               </li>
@@ -173,7 +173,7 @@ class TestDropdownToggleComponent {
           </li>
           <li role="menuitem" dDropDown appendToBody [trigger]="trigger2" [appendToBodyDirections]="subMenuDirections">
             <a class="devui-dropdown-item" dDropDownToggle id="item-12">内容1-2 <span class="icon icon-chevron-right"></span></a>
-            <ul id="menu5" dDropDownMenu class="devui-dropdown-menu devui-scrollbar devui-dropdown-overlay" role="menu">
+            <ul id="menu5" dDropDownMenu class="devui-dropdown-menu devui-scrollbar" role="menu">
               <li role="menuitem">
                 <a class="devui-dropdown-item" id="item-121">内容1-2-1</a>
               </li>
@@ -186,7 +186,7 @@ class TestDropdownToggleComponent {
       </li>
       <li role="menuitem" dDropDown appendToBody [trigger]="trigger2" [appendToBodyDirections]="subMenuDirections">
         <a class="devui-dropdown-item" dDropDownToggle id="item-2">内容2 <span class="icon icon-chevron-right"></span></a>
-        <ul id="menu4" dDropDownMenu class="devui-dropdown-menu devui-scrollbar devui-dropdown-overlay" role="menu">
+        <ul id="menu4" dDropDownMenu class="devui-dropdown-menu devui-scrollbar" role="menu">
           <li role="menuitem">
             <a class="devui-dropdown-item" id="item-21">内容2-1</a>
           </li>
@@ -861,9 +861,9 @@ describe('dropdown', () => {
         dropdownMenuElement = debugEl.query(By.directive(DropDownMenuDirective));
         const originRect = dropdownToggleElement.nativeElement.getBoundingClientRect();
         const menuRect =  dropdownMenuElement.nativeElement.getBoundingClientRect();
-        const verticalBorderOverlayWidth = 1; // 有个重叠的线的效果
+        const verticalBorderOverlayWidth = 4; // 有个间距
         expect(originRect.x === menuRect.x).toBe(true);
-        expect(originRect.y + originRect.height - verticalBorderOverlayWidth).toBeCloseTo(menuRect.y);
+        expect(originRect.y + originRect.height + verticalBorderOverlayWidth).toBeCloseTo(menuRect.y);
       }));
       it('align to area', fakeAsync(() => {
         component.alignOriginFlag = true;
@@ -873,9 +873,9 @@ describe('dropdown', () => {
         dropdownMenuElement = debugEl.query(By.directive(DropDownMenuDirective));
         const originRect = debugEl.nativeElement.querySelector('.area').getBoundingClientRect();
         const menuRect =  dropdownMenuElement.nativeElement.getBoundingClientRect();
-        const verticalBorderOverlayWidth = 1; // 有个重叠的线的效果
+        const verticalBorderOverlayWidth = 4; // 有个间距
         expect(originRect.x === menuRect.x).toBe(true);
-        expect(originRect.y + originRect.height - verticalBorderOverlayWidth).toBeCloseTo(menuRect.y);
+        expect(originRect.y + originRect.height + verticalBorderOverlayWidth).toBeCloseTo(menuRect.y);
       }));
     });
     describe('dropdown appendToBodyDirections', () => {
@@ -892,9 +892,9 @@ describe('dropdown', () => {
         dropdownMenuElement = debugEl.query(By.directive(DropDownMenuDirective));
         const originRect = dropdownToggleElement.nativeElement.getBoundingClientRect();
         const menuRect =  dropdownMenuElement.nativeElement.getBoundingClientRect();
-        const verticalBorderOverlayWidth = 1; // 有个重叠的线的效果
+        const verticalBorderOverlayWidth = 4; // 有个间距
         expect(originRect.x === menuRect.x).toBe(true);
-        expect(originRect.y + originRect.height - verticalBorderOverlayWidth).toBeCloseTo(menuRect.y);
+        expect(originRect.y + originRect.height + verticalBorderOverlayWidth).toBeCloseTo(menuRect.y);
       }));
       it('leftDown should in the right place', fakeAsync(() => {
         component.directions = ['leftDown'];
@@ -904,9 +904,9 @@ describe('dropdown', () => {
         dropdownMenuElement = debugEl.query(By.directive(DropDownMenuDirective));
         const originRect = dropdownToggleElement.nativeElement.getBoundingClientRect();
         const menuRect =  dropdownMenuElement.nativeElement.getBoundingClientRect();
-        const verticalBorderOverlayWidth = 1; // 有个重叠的线的效果
+        const verticalBorderOverlayWidth = 4; // 有个间距
         expect(originRect.x + originRect.width).toBeCloseTo(menuRect.x + menuRect.width, 0);
-        expect(originRect.y + originRect.height - verticalBorderOverlayWidth).toBeCloseTo(menuRect.y);
+        expect(originRect.y + originRect.height + verticalBorderOverlayWidth).toBeCloseTo(menuRect.y);
       }));
       it('centerDown should in the right place', fakeAsync(() => {
         component.directions = ['centerDown'];
@@ -916,9 +916,9 @@ describe('dropdown', () => {
         dropdownMenuElement = debugEl.query(By.directive(DropDownMenuDirective));
         const originRect = dropdownToggleElement.nativeElement.getBoundingClientRect();
         const menuRect =  dropdownMenuElement.nativeElement.getBoundingClientRect();
-        const verticalBorderOverlayWidth = 1; // 有个重叠的线的效果
+        const verticalBorderOverlayWidth = 4; // 有个间距
         expect((originRect.x + (originRect.width / 2)) - ((menuRect.x + menuRect.width / 2))).toBeLessThan(1);
-        expect(originRect.y + originRect.height - verticalBorderOverlayWidth).toBeCloseTo(menuRect.y);
+        expect(originRect.y + originRect.height + verticalBorderOverlayWidth).toBeCloseTo(menuRect.y);
       }));
       it('rightUp should in the right place', fakeAsync(() => {
         component.directions = ['rightUp'];
@@ -928,9 +928,9 @@ describe('dropdown', () => {
         dropdownMenuElement = debugEl.query(By.directive(DropDownMenuDirective));
         const originRect = dropdownToggleElement.nativeElement.getBoundingClientRect();
         const menuRect =  dropdownMenuElement.nativeElement.getBoundingClientRect();
-        const verticalBorderOverlayWidth = 1; // 有个重叠的线的效果
+        const verticalBorderOverlayWidth = 4; // 有个间距
         expect(originRect.x === menuRect.x).toBe(true);
-        expect(originRect.y).toBeCloseTo(menuRect.y + menuRect.height - verticalBorderOverlayWidth);
+        expect(originRect.y).toBeCloseTo(menuRect.y + menuRect.height + verticalBorderOverlayWidth);
       }));
       it('leftUp should in the right place', fakeAsync(() => {
         component.directions = ['leftUp'];
@@ -940,9 +940,9 @@ describe('dropdown', () => {
         dropdownMenuElement = debugEl.query(By.directive(DropDownMenuDirective));
         const originRect = dropdownToggleElement.nativeElement.getBoundingClientRect();
         const menuRect =  dropdownMenuElement.nativeElement.getBoundingClientRect();
-        const verticalBorderOverlayWidth = 1; // 有个重叠的线的效果
+        const verticalBorderOverlayWidth = 4; // 有个间距
         expect(originRect.x + originRect.width).toBeCloseTo(menuRect.x + menuRect.width, 0);
-        expect(originRect.y).toBeCloseTo(menuRect.y + menuRect.height - verticalBorderOverlayWidth, 0);
+        expect(originRect.y).toBeCloseTo(menuRect.y + menuRect.height + verticalBorderOverlayWidth, 0);
       }));
       it('centerUp should in the right place', fakeAsync(() => {
         component.directions = ['centerUp'];
@@ -952,9 +952,9 @@ describe('dropdown', () => {
         dropdownMenuElement = debugEl.query(By.directive(DropDownMenuDirective));
         const originRect = dropdownToggleElement.nativeElement.getBoundingClientRect();
         const menuRect =  dropdownMenuElement.nativeElement.getBoundingClientRect();
-        const verticalBorderOverlayWidth = 1; // 有个重叠的线的效果
+        const verticalBorderOverlayWidth = 4; // 有个间距
         expect((originRect.x + (originRect.width / 2)) - ((menuRect.x + menuRect.width / 2))).toBeLessThan(1);
-        expect(originRect.y).toBeCloseTo(menuRect.y + menuRect.height - verticalBorderOverlayWidth);
+        expect(originRect.y).toBeCloseTo(menuRect.y + menuRect.height + verticalBorderOverlayWidth);
       }));
     });
   });
@@ -1334,9 +1334,9 @@ describe('dropdown', () => {
         fixture.detectChanges();
         const originRect = dropdownToggleElement.nativeElement.getBoundingClientRect();
         const menuRect =  dropdownMenuElement.nativeElement.getBoundingClientRect();
-        const verticalBorderOverlayWidth = 1; // 有个重叠的线的效果
+        const verticalBorderOverlayWidth = 4; // 有个间距
         expect(originRect.x === menuRect.x).toBe(true);
-        expect(originRect.y + originRect.height - verticalBorderOverlayWidth === menuRect.y).toBe(true);
+        expect(originRect.y + originRect.height + verticalBorderOverlayWidth === menuRect.y).toBe(true);
         clickToggle();
         expect(dropdownMenuElement.styles['display']).toBe('none');
       }));
@@ -1347,9 +1347,9 @@ describe('dropdown', () => {
         fixture.detectChanges();
         const originRect = dropdownToggleElement.nativeElement.getBoundingClientRect();
         const menuRect =  dropdownMenuElement.nativeElement.getBoundingClientRect();
-        const verticalBorderOverlayWidth = 1; // 有个重叠的线的效果
+        const verticalBorderOverlayWidth = 4; // 有个间距
         expect(originRect.x === menuRect.x).toBe(true);
-        expect(originRect.y === menuRect.y + menuRect.height - verticalBorderOverlayWidth).toBe(true);
+        expect(originRect.y === menuRect.y + menuRect.height + verticalBorderOverlayWidth).toBe(true);
         clickToggle(); // to test fadeout function (Branches coverage)
         expect(dropdownMenuElement.styles['display']).toBe('none');
       }));

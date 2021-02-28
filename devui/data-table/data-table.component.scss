@@ -1,7 +1,7 @@
 @import '../style/theme/color';
 @import '../style/theme/shadow';
 @import '../style/theme/corner';
-@import '../style/theme/_font';
+@import '../style/core/_font';
 
 :host {
   display: block;
@@ -240,7 +240,7 @@
     > td {
       background-clip: padding-box;
       vertical-align: middle;
-      padding: 7px 8px 8px 20px;
+      padding: 7px 20px 8px;
       border-top: none;
       word-wrap: break-word;
       word-break: normal;
@@ -295,16 +295,32 @@
   }
 }
 
+.devui-table.area-active ::ng-deep {
+  thead > tr > th {
+    &.operable {
+      background-color: $devui-list-item-hover-bg;
+
+      .filter-icon {
+        visibility: visible;
+      }
+
+      .sort-icon-default {
+        visibility: visible;
+      }
+    }
+  }
+}
+
 .devui-table {
   &.devui-table-md ::ng-deep {
     tbody > tr > td {
-      padding: 11px 8px 12px 20px;
+      padding: 11px 20px 12px;
     }
   }
 
   &.devui-table-lg ::ng-deep {
     tbody > tr > td {
-      padding: 15px 8px 16px 20px;
+      padding: 15px 20px 16px;
     }
   }
 }
@@ -389,9 +405,6 @@
 }
 
 :host ::ng-deep .table-view-selector {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
   cursor: col-resize;
 }

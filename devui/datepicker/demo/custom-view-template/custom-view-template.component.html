@@ -1,20 +1,20 @@
 <section>
   <div class="row">
     <div class="col-md-6">
-      <div class="devui-input-group devui-dropdown-origin-wrapper devui-dropdown-origin">
+      <div class="devui-input-group devui-dropdown-origin">
         <input
           class="devui-input devui-form-control"
           placeholder="y/MM/dd"
           name="dp"
           [(ngModel)]="selectedDate2"
-          (focus)="datePicker1.toggle()"
+          (click)="datePicker1.toggle()"
           autocomplete="off"
           dDatepicker
           #datePicker1="datepicker"
           (selectedDateChange)="getValue($event)"
           [customViewTemplate]="myCustomview"
         />
-        <div *ngIf="selectedDate2" class="devui-input-group-addon icon-close-wrapper" (click)="datePicker1.clearAll()">
+        <div *ngIf="selectedDate2" class="devui-input-group-addon close-icon-wrapper" (click)="datePicker1.clearAll()">
           <i class="icon icon-close"></i>
         </div>
         <div class="devui-input-group-addon" (click)="datePicker1.toggle()">
@@ -25,10 +25,10 @@
   </div>
   <ng-template #myCustomview let-chooseDate="chooseDate" let-datePicker>
     <div class="box">
-      <a class="date-link" (click)="chooseDate(getDay(-1))">选择昨天</a>
-      <a class="date-link" (click)="chooseDate(getDay(1))">选择明天</a>
+      <a class="date-link" (click)="chooseDate(getDay(-1))">yesterday</a>
+      <a class="date-link" (click)="chooseDate(getDay(1))">tomorrow</a>
       <br />
-      <a class="date-link" (click)="chooseDate('2018-12-20')">选择2018-12-20</a>
+      <a class="date-link" (click)="chooseDate('2018-12-20')">choose 2018-12-20</a>
     </div>
   </ng-template>
 </section>

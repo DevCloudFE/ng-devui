@@ -8,34 +8,34 @@ import { Component } from '@angular/core';
 export class UserLimitSelectedNumberComponent {
   currentOption1;
   options2 = [{
-    name: '选项1',
+    name: 'Option 1',
     value: 1
   }, {
-    name: '选项2',
+    name: 'Option 2',
     value: 2
   }, {
-    name: '选项3',
+    name: 'Option 3',
     value: 3
   }, {
-    name: '选项4',
+    name: 'Option 4',
     value: 4
   }, {
-    name: '选项5',
+    name: 'Option 5',
     value: 5
   }, {
-    name: '选项6',
+    name: 'Option 6',
     value: 6
   }, {
-    name: '选项7',
+    name: 'Option 7',
     value: 7
   }, {
-    name: '选项8',
+    name: 'Option 8',
     value: 8
   }, {
-    name: '选项9',
+    name: 'Option 9',
     value: 9
   }, {
-    name: '选项10',
+    name: 'Option 10',
     value: 10,
     disabled : true,
     disabledAlways: true

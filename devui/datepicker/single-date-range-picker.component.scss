@@ -10,6 +10,10 @@
         background-color: $devui-list-item-hover-bg;
         color: $devui-text;
         border-radius: 0;
+
+        &:hover {
+          background-color: $devui-range-item-hover-bg;
+        }
       }
 
       &.disabled:not(.active) {

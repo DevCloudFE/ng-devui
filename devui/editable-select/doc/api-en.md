@@ -1,5 +1,5 @@
 # How to use
-Import the following information into the module
+Import into module
 ```ts
 import { EditableSelectModule } from' ng-devui/editable-select';
 ```

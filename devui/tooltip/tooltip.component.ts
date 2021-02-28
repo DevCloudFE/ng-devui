@@ -1,5 +1,7 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, HostBinding, HostListener, Input, OnDestroy,
-  Renderer2 } from '@angular/core';
+import {
+  AfterViewInit, Component, ElementRef, HostBinding, HostListener, Input, OnDestroy,
+  Renderer2
+} from '@angular/core';
 import { PositionService } from 'ng-devui/position';
 import { directionFadeInOut } from 'ng-devui/utils';
 import { fromEvent, Subscription } from 'rxjs';

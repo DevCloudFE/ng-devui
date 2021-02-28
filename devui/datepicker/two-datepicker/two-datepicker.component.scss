@@ -2,12 +2,6 @@
 @import '../../style/theme/shadow';
 @import '../../style/theme/corner';
 
-.devui-dropdown-overlay {
-  border: 1px solid $devui-connected-overlay-line;
-  margin-top: -1px;
-  margin-bottom: -1px;
-}
-
 .devui-two-date-wrapper {
   display: inline-flex !important;
   box-shadow: $devui-shadow-length-connected-overlay $devui-shadow;
@@ -15,6 +9,7 @@
   transform: perspective(1px) translate3d(0, 0, 0);
   flex-direction: column;
   border-radius: $devui-border-radius;
+  margin: 4px 0;
 
   .devui-two-date-picker {
     display: inline-flex !important;

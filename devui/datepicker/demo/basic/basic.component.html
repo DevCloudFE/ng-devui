@@ -1,12 +1,12 @@
 <section>
   <div class="row">
-    <h5>基本用法</h5>
+    <h5>basic</h5>
     <div class="col-md-6">
-      <div class="devui-input-group devui-dropdown-origin-wrapper devui-dropdown-origin">
+      <div class="devui-input-group devui-dropdown-origin">
         <input
           class="devui-input devui-form-control"
           placeholder="y/MM/dd"
-          (focus)="datePicker1.toggle()"
+          (click)="datePicker1.toggle()"
           name="dp"
           [(ngModel)]="selectedDate1"
           autocomplete="off"
@@ -14,7 +14,7 @@
           #datePicker1="datepicker"
           (selectedDateChange)="getValue($event)"
         />
-        <div *ngIf="selectedDate1" class="devui-input-group-addon icon-close-wrapper" (click)="datePicker1.clearAll()">
+        <div *ngIf="selectedDate1" class="devui-input-group-addon close-icon-wrapper" (click)="datePicker1.clearAll()">
           <i class="icon icon-close"></i>
         </div>
         <div class="devui-input-group-addon" (click)="datePicker1.toggle()">
@@ -24,13 +24,13 @@
     </div>
   </div>
   <div class="row">
-    <h5>设置cssClass</h5>
+    <h5>set cssClass</h5>
     <div class="col-md-6">
-      <div class="devui-input-group devui-dropdown-origin-wrapper devui-dropdown-origin">
+      <div class="devui-input-group devui-dropdown-origin">
         <input
           class="devui-input devui-form-control"
           placeholder="y/MM/dd"
-          (focus)="datePicker2.toggle()"
+          (click)="datePicker2.toggle()"
           name="dp"
           [(ngModel)]="selectedDate2"
           autocomplete="off"
@@ -39,7 +39,7 @@
           (selectedDateChange)="getValue($event)"
           [cssClass]="'custom-css-class'"
         />
-        <div *ngIf="selectedDate2" class="devui-input-group-addon icon-close-wrapper" (click)="datePicker2.clearAll()">
+        <div *ngIf="selectedDate2" class="devui-input-group-addon close-icon-wrapper" (click)="datePicker2.clearAll()">
           <i class="icon icon-close"></i>
         </div>
         <div class="devui-input-group-addon" (click)="datePicker2.toggle()">
@@ -49,13 +49,13 @@
     </div>
   </div>
   <div class="row">
-    <h5>disabled态，可采用本效果，或是参考下方dateRangePicker自行设置的效果</h5>
+    <h5>disabled</h5>
     <div class="col-md-6">
-      <div class="devui-input-group devui-dropdown-origin-wrapper devui-dropdown-origin" style="width: 210px; margin-bottom: 20px">
+      <div class="devui-input-group devui-dropdown-origin" style="width: 210px; margin-bottom: 20px">
         <input
           class="devui-input devui-form-control"
           placeholder="y/MM/dd"
-          (focus)="datePicker3.toggle()"
+          (click)="datePicker3.toggle()"
           name="dp"
           [(ngModel)]="selectedDate3"
           autocomplete="off"
@@ -65,7 +65,7 @@
           [disabled]="disabled"
           [dateConfig]="dateConfig"
         />
-        <div *ngIf="selectedDate3" class="devui-input-group-addon icon-close-wrapper" (click)="datePicker3.clearAll()">
+        <div *ngIf="selectedDate3" class="devui-input-group-addon close-icon-wrapper" (click)="datePicker3.clearAll()">
           <i class="icon icon-close"></i>
         </div>
         <div class="devui-input-group-addon" (click)="datePicker3.toggle()">

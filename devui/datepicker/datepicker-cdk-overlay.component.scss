@@ -2,12 +2,6 @@
 @import '../style/theme/corner';
 
 .devui-datepicker {
-  transform: perspective(1px) translate3d(0, 0, 0);
   border-radius: $devui-border-radius;
-}
-
-.devui-dropdown-overlay {
-  position: relative;
-  left: -1px;
-  border: 1px solid $devui-connected-overlay-line;
+  margin: 4px 0;
 }

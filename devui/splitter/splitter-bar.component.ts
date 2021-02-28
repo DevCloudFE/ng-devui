@@ -73,11 +73,13 @@ export class SplitterBarComponent implements OnInit, AfterViewInit, OnDestroy {
               private renderer: Renderer2,
               @Host() private resize: ResizeDirective,
               @SkipSelf() private cdr: ChangeDetectorRef,
+              private cdrSelf: ChangeDetectorRef,
               private i18n: I18nService
   ) {
     this.splitter.paneChangeSubject.subscribe(() => {
       this.initialCollapseStatus();
       this.cdr.detectChanges();
+      this.cdrSelf.detectChanges();
     });
     this.splitterText = this.i18n.getI18nText().splitter;
     this.subscriptions.add(this.i18n.langChange().subscribe(data => {

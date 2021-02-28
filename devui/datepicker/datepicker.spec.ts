@@ -1,5 +1,5 @@
 import { Component, DebugElement, ElementRef, TemplateRef, ViewChild } from '@angular/core';
-import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -27,7 +27,7 @@ class CommonFunctions {
 
 @Component({
   template: `
-    <div class="devui-input-group devui-dropdown-origin-wrapper devui-dropdown-origin">
+    <div class="devui-input-group devui-dropdown-origin">
       <input
         #inputEle
         class="devui-input devui-form-control"
@@ -48,7 +48,7 @@ class CommonFunctions {
         [autoOpen]="autoOpen"
         [customViewTemplate]="customViewTemplate"
       />
-      <div *ngIf="selectedDate1" class="devui-input-group-addon icon-close-wrapper" (click)="datePicker1.clearAll()">
+      <div *ngIf="selectedDate1" class="devui-input-group-addon close-icon-wrapper" (click)="datePicker1.clearAll()">
         <i class="icon icon-close"></i>
       </div>
       <div class="devui-input-group-addon" (click)="datePicker1.toggle(toggle); toggle = !toggle" #icon>
@@ -86,7 +86,7 @@ class TestDatePickerDirectiveComponent {
 
 @Component({
   template: `
-    <div class="devui-input-group devui-dropdown-origin-wrapper devui-dropdown-origin">
+    <div class="devui-input-group devui-dropdown-origin">
       <input
         #inputEle
         class="devui-input devui-form-control"
@@ -108,7 +108,7 @@ class TestDatePickerDirectiveComponent {
         [autoOpen]="autoOpen"
         [customViewTemplate]="customViewTemplate"
       />
-      <div *ngIf="selectedDate1" class="devui-input-group-addon icon-close-wrapper" (click)="datePicker1.clearAll()">
+      <div *ngIf="selectedDate1" class="devui-input-group-addon close-icon-wrapper" (click)="datePicker1.clearAll()">
         <i class="icon icon-close"></i>
       </div>
       <div class="devui-input-group-addon" (click)="datePicker1.toggle(toggle); toggle = !toggle" #icon>
@@ -183,7 +183,7 @@ describe('datePicker', () => {
     let component: TestDatePickerDirectiveComponent;
     let domHelper: DomHelper<TestDatePickerDirectiveComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
         imports: [DatepickerModule, NoopAnimationsModule, FormsModule],
         declarations: [TestDatePickerDirectiveComponent]
@@ -244,6 +244,8 @@ describe('datePicker', () => {
         });
 
         it('should autoOpen/direction works', fakeAsync(() => {
+          fixture.detectChanges();
+          tick();
           fixture.detectChanges();
           const datePicker = debugEl.nativeElement.querySelector('d-datepicker');
 
@@ -306,7 +308,7 @@ describe('datePicker', () => {
     let component: TestDatePickerAppendToBodyComponent;
     let domHelper: DomHelper<TestDatePickerAppendToBodyComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
         imports: [DatepickerModule, NoopAnimationsModule, FormsModule],
         declarations: [TestDatePickerAppendToBodyComponent]
@@ -433,7 +435,7 @@ describe('datePicker', () => {
     let component: TestDatePickerCmpComponent;
     let domHelper: DomHelper<TestDatePickerCmpComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
         imports: [DatepickerModule, NoopAnimationsModule, FormsModule],
         declarations: [TestDatePickerCmpComponent]
@@ -920,6 +922,8 @@ function testNgModelAndYearMonth(fixture, wrapperEle, component) {
   lastYearEle = wrapperEle.querySelector('.devui-date-header').querySelectorAll('.devui-btn-link')[0];
   lastYearEle.dispatchEvent(new Event('click'));
   fixture.detectChanges();
+  tick();
+  fixture.detectChanges();
   yearEle = wrapperEle.querySelectorAll('.devui-date-title')[0];
 
   expect(yearEle.innerText.trim().slice(0, 4)).toBe(new Date().getFullYear() - 1 + '');
@@ -943,7 +947,8 @@ function testNgModelAndYearMonth(fixture, wrapperEle, component) {
   fixture.detectChanges();
   component.inputEle.nativeElement.dispatchEvent(new Event('focus'));
   fixture.detectChanges();
-
+  tick();
+  fixture.detectChanges();
   dayListEle = wrapperEle.querySelector('tbody');
   currentDayInListEle = dayListEle.querySelector('.active');
   currentDay = currentDayInListEle.querySelector('.devui-calendar-date').innerText.trim();

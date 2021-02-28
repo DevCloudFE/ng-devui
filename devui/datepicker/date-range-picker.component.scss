@@ -2,13 +2,6 @@
 @import '../style/theme/shadow';
 @import '../style/theme/corner';
 
-.devui-dropdown-overlay {
-  position: relative;
-  margin-top: -1px;
-  margin-bottom: -1px;
-  border: 1px solid $devui-connected-overlay-line;
-}
-
 .devui-date-range-wrapper {
   display: inline-flex !important;
   box-shadow: $devui-shadow-length-connected-overlay $devui-shadow;
@@ -16,16 +9,13 @@
   transform: perspective(1px) translate3d(0, 0, 0);
   flex-direction: column;
   border-radius: $devui-border-radius;
+  margin: 4px 0;
+  user-select: none;
+}
 
-  .devui-date-range-picker {
-    display: inline-flex !important;
-    user-select: none;
-  }
-
-  .devui-date-range-custom {
-    width: 500px;
-    border-top: 1px solid $devui-line;
-  }
+.devui-date-range-custom {
+  width: 500px;
+  border-top: 1px solid $devui-line;
 }
 
 .devui-date-picker:not(:last-child) {

@@ -1,5 +1,6 @@
 import { Directive, ElementRef, EventEmitter, forwardRef, HostListener, OnDestroy, OnInit, Output, Renderer2 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { addClassToOrigin, removeClassFromOrigin } from 'ng-devui/utils';
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime, map } from 'rxjs/operators';
 import { TwoDatePickerComponent } from './two-datepicker.component';
@@ -41,9 +42,9 @@ export class TwoDatePickerStartDirective implements OnInit, OnDestroy, ControlVa
     });
     this.switchOriginSub = this.twoDatePicker.switchOriginPositionSub.subscribe(side => {
       if (side === 'start') {
-        this.twoDatePicker.changeFormWithDropDown(this.el);
+        addClassToOrigin(this.el);
       } else {
-        this.twoDatePicker.removeClass(this.el);
+        removeClassFromOrigin(this.el);
       }
     });
   }

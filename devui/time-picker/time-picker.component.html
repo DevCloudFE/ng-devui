@@ -8,10 +8,11 @@
   (positionChange)="onPositionChange($event)"
 >
   <div
-    [@cornerFadeInOut]="isOpen ? timePickerPosition : 'void'"
-    (@cornerFadeInOut.done)="animationEnd($event)"
-    class="devui-time-picker-wrapper devui-dropdown-overlay devui-dropdown-menu-cdk"
+    [@fadeInOut]="isOpen && startAnimation ? timePickerPosition : 'void'"
+    (@fadeInOut.done)="animationEnd($event)"
+    class="devui-time-picker-wrapper devui-dropdown-menu"
     #timePicker
+    [class.devui-dropdopwn-hidden]="!startAnimation"
   >
     <div class="devui-time-picker">
       <ul *ngIf="firstList.length" class="devui-time-list devui-first-list">

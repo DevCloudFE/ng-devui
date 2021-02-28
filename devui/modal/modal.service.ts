@@ -13,7 +13,7 @@ export class ModalService {
   private renderer: Renderer2;
   constructor(private componentFactoryResolver: ComponentFactoryResolver,
               private overlayContainerRef: OverlayContainerRef, private rendererFactory: RendererFactory2) {
-      this.renderer = this.rendererFactory.createRenderer(null, null);
+    this.renderer = this.rendererFactory.createRenderer(null, null);
   }
 
   open({
@@ -22,9 +22,10 @@ export class ModalService {
     injector,
     width,
     zIndex,
+    backDropZIndex,
     data,
     handler,
-    showAnimate,
+    showAnimate = true,
     backdropCloseable,
     componentFactoryResolver,
     onClose,
@@ -46,6 +47,7 @@ export class ModalService {
       id,
       width,
       zIndex,
+      backDropZIndex,
       showAnimate,
       beforeHidden,
       backdropCloseable: isUndefined(backdropCloseable) ? true : backdropCloseable,
@@ -60,7 +62,7 @@ export class ModalService {
     let modalContentInstance;
     if (component) {
       modalContentInstance = modalRef.instance.modalContainerHost.viewContainerRef
-      .createComponent(finalComponentFactoryResolver.resolveComponentFactory(component), 0, injector);
+        .createComponent(finalComponentFactoryResolver.resolveComponentFactory(component), 0, injector);
       assign(modalContentInstance.instance, { data, handler });
     }
 

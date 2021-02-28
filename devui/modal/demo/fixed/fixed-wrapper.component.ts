@@ -22,7 +22,6 @@ export class FixedWrapperComponent {
       id: 'dialog-service',
       width: '346px',
       maxHeight: '600px',
-      showAnimate: true,
       title: 'Start Snapshot Version',
       content: ModalTestComponent,
       backdropCloseable: true,
@@ -34,7 +33,7 @@ export class FixedWrapperComponent {
       buttons: [
         {
           cssClass: 'primary',
-          text: '确定',
+          text: 'Ok',
           disabled: false,
           handler: ($event: Event) => {
             results.modalInstance.hide();
@@ -43,7 +42,7 @@ export class FixedWrapperComponent {
         {
           id: 'btn-cancel',
           cssClass: 'common',
-          text: '取消',
+          text: 'Cancel',
           handler: ($event: Event) => {
             results.modalInstance.hide();
           },

@@ -1,12 +1,5 @@
-<div class="container">
-  <span>设置宽度，高度小于30px时，只显示一个字符：</span>
+<div style="display: flex; align-items: center">
   <d-avatar [name]="'Avatar'" [width]="28" [height]="28"></d-avatar>
-</div>
-<div class="container">
-  <span>传入自定义头像显示字段customText：</span>
-  <d-avatar [customText]="'自定义'" [width]="80" [height]="80" [isRound]="false"></d-avatar>
-</div>
-<div class="container">
-  <span>传入imgSrc：</span>
-  <d-avatar style="vertical-align: middle" [imgSrc]="imgSrc" [width]="100" [height]="100"></d-avatar>
+  <d-avatar [customText]="'DevUI'" [width]="80" [height]="80" [isRound]="false"></d-avatar>
+  <d-avatar [imgSrc]="imgSrc" [width]="100" [height]="100" [isRound]="false"></d-avatar>
 </div>

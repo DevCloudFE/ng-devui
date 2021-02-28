@@ -1,0 +1,15 @@
+<h4>Tree</h4>
+<d-tree #basicTree [tree]="data1" [showAnimation]="false" (nodeSelected)="onNodeSelected($event)" (nodeToggled)="onNodeToggled($event)">
+</d-tree>
+<h4>Operate Tree</h4>
+<d-operable-tree
+  [tree]="data2"
+  [treeNodeTitleKey]="'name'"
+  [treeNodeIdKey]="'id'"
+  [treeNodeChildrenKey]="'children'"
+  [checkboxDisabledKey]="'checkboxDisabled'"
+  [showAnimation]="false"
+  (nodeDblClicked)="onOperableNodeDblClicked($event)"
+  (nodeRightClicked)="onOperableNodeRightClicked($event)"
+>
+</d-operable-tree>

@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ManualComponent implements OnInit {
   name;
-  nameErrMsg = '输入长度不能小于4个字符!';
+  nameErrMsg = 'The value must contain at least four characters!';
   constructor() { }
 
   ngOnInit() {

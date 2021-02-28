@@ -1,5 +1,5 @@
 import { Component, DebugElement } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ButtonModule } from '../button';
@@ -49,7 +49,7 @@ describe('tooltip', () => {
       });
 
       /* 四个方向均能正常显示 */
-      it('Mouse event should open or hide the tooltip', () => {
+      it('Mouse event should open or hide the tooltip', fakeAsync(() => {
         const config = ['left', 'right', 'bottom', 'top'];
         const buttonEle = debugEle.query(By.css('d-button')).nativeElement;
 
@@ -58,12 +58,13 @@ describe('tooltip', () => {
           fixture.detectChanges();
           buttonEle.dispatchEvent(new Event('mouseenter'));
           fixture.detectChanges();
-
+          tick(150);
           expect(document.querySelector('d-tooltip.' + key + ' .devui-tooltip-inner').textContent).toBe(key);
           buttonEle.dispatchEvent(new Event('mouseleave'));
+          tick(100);
           fixture.detectChanges();
         }
-      });
+      }));
 
       //  TODO: mouseleave/blur状态下，元素已destroy且不可见，但单元测试仍能检测到元素，单元测试与实际情况有差异，暂时不做测试
 

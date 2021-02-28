@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef } from '@angular/core';
 import { DialogService } from 'ng-devui/modal';
 import { TabsTransferComponent } from './tabs-transfer/tabs-transfer.component';
 @Component({
@@ -11,32 +11,32 @@ export class ConfigurableComponent {
     tabsDisplay = [{
         id: 1,
         name: 'Tab1',
-        content: '这是Tab1的内容'
+        content: 'Tab1 Content'
     },
     {
         id: 2,
         name: 'Tab2',
-        content: '这是Tab2的内容'
+        content: 'Tab2 Content'
     },
     {
         id: 3,
         name: 'Tab3',
-        content: '这是Tab3的内容'
+        content: 'Tab3 Content'
     }];
     tabsHidden = [{
         id: 4,
         name: 'Tab4',
-        content: '这是Tab4的内容'
+        content: 'Tab4 Content'
     },
     {
         id: 5,
         name: 'Tab5',
-        content: '这是Tab5的内容'
+        content: 'Tab5 Content'
     },
     {
         id: 6,
         name: 'Tab6',
-        content: '这是Tab6的内容'
+        content: 'Tab6 Content'
     }];
     leftOffset = 202;
 

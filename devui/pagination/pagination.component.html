@@ -136,6 +136,7 @@
   <div *ngIf="canJumpPage" class="devui-jump-container">
     {{ goToText ? goToText : i18nText?.goTo }}
     <input
+      dTextInput
       type="text"
       autocomplete="off"
       class="devui-input {{ size ? 'devui-input-' + size : '' }}"

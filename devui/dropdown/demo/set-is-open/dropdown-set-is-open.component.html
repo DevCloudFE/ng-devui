@@ -1,0 +1,16 @@
+<div class="btn-group g-dropdown" dDropDown [isOpen]="isOpen" [trigger]="'manually'" #myDropdown="d-dropdown" [closeScope]="'blank'">
+  <input type="text" dTextInput dDropDownToggle class="devui-dropdown-origin" />
+  <ul dDropDownMenu class="devui-dropdown-menu" role="menu">
+    <li role="menuitem">
+      <a class="devui-dropdown-item">Item 1</a>
+    </li>
+    <li class="disabled" role="menuitem">
+      <a class="devui-dropdown-item disabled">Item 2</a>
+    </li>
+  </ul>
+</div>
+<div class="control">
+  <div>
+    <d-button (btnClick)="toggleIsOpen()">Set isOpen</d-button>
+  </div>
+</div>

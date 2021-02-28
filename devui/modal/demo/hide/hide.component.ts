@@ -16,7 +16,6 @@ export class HideComponent {
       id: 'dialog-service',
       width: '500px',
       maxHeight: '500px',
-      showAnimate: false,
       title: 'This is title',
       content: ModalFormComponent,
       dialogtype: 'standard',
@@ -25,7 +24,7 @@ export class HideComponent {
       buttons: [
         {
           cssClass: 'primary',
-          text: '保存',
+          text: 'Save',
           handler: ($event: Event) => {
             results.modalInstance.hide();
           }
@@ -40,15 +39,14 @@ export class HideComponent {
         id: 'dialog-service',
         width: '300px',
         maxHeight: '600px',
-        showAnimate: false,
         title: '',
-        content: '关闭页面前是否保存修改内容？',
+        content: 'Do you want to save the modification before closing the page?',
         backdropCloseable: false,
         dialogtype: 'warning',
         buttons: [
           {
             cssClass: 'primary',
-            text: '保存',
+            text: 'Save',
             handler: ($event: Event) => {
               results.modalInstance.hide();
               resolve(true);
@@ -57,7 +55,7 @@ export class HideComponent {
           {
             id: 'btn-cancel',
             cssClass: 'common',
-            text: '不保存',
+            text: 'Cancel',
             handler: ($event: Event) => {
               results.modalInstance.hide();
               resolve(true);

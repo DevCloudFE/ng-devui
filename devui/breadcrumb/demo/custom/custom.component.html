@@ -1,25 +1,23 @@
-<section>
-  <d-breadcrumb [separatorIcon]="separatorIcon">
-    <d-breadcrumb-item>
-      <a routerLink="/components/zh-cn/get-start">DevUI</a>
-    </d-breadcrumb-item>
-    <d-breadcrumb-item [showMenu]="true" [customMenuTemplate]="menuTpl">
-      <span>面包屑</span>
-    </d-breadcrumb-item>
-  </d-breadcrumb>
-  <ng-template #menuTpl>
-    <div class="breadcrumb-dropdown-menu">
-      <li>
-        <span class="icon-arrow-right"></span>
-        <a href="/components/zh-cn/anchor/demo">锚点</a>
-      </li>
-      <li>
-        <span class="icon-arrow-right"></span>
-        <a href="/components/zh-cn/button/demo">按钮</a>
-      </li>
-    </div>
-  </ng-template>
-  <ng-template #separatorIcon>
-    <span class="icon-arrow-right"></span>
-  </ng-template>
-</section>
+<d-breadcrumb [separatorIcon]="separatorIcon">
+  <d-breadcrumb-item>
+    <a routerLink="/components/zh-cn/get-start">DevUI</a>
+  </d-breadcrumb-item>
+  <d-breadcrumb-item [showMenu]="true" [customMenuTemplate]="menuTpl">
+    <span>Breadcrumb</span>
+  </d-breadcrumb-item>
+</d-breadcrumb>
+<ng-template #menuTpl>
+  <div class="breadcrumb-dropdown-menu">
+    <li>
+      <span class="icon-arrow-right"></span>
+      <a href="/components/zh-cn/anchor/demo">Anchor</a>
+    </li>
+    <li>
+      <span class="icon-arrow-right"></span>
+      <a href="/components/zh-cn/button/demo">Button</a>
+    </li>
+  </div>
+</ng-template>
+<ng-template #separatorIcon>
+  <span class="icon-arrow-right"></span>
+</ng-template>

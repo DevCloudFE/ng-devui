@@ -1,10 +1,10 @@
 <section>
-  <h4>普通极简模式</h4>
+  <h4>Simple Mode</h4>
   <div style="margin-bottom: 40px">
     <d-pagination
       [total]="pager3.total"
       [(pageSize)]="pager3.pageSize"
-      [totalItemText]="'总条数'"
+      [totalItemText]="'Total'"
       [(pageIndex)]="pager3.pageIndex"
       [canViewTotal]="true"
       [canChangePageSize]="true"
@@ -12,7 +12,7 @@
     >
     </d-pagination>
   </div>
-  <h4>超极简模式</h4>
+  <h4>Super Simple Mode</h4>
   <div style="margin-bottom: 40px">
     <d-pagination
       [size]="'sm'"
@@ -25,7 +25,7 @@
     >
     </d-pagination>
   </div>
-  <h4>带可拓展设置的设置下拉菜单</h4>
+  <h4>[haveConfigMenu] = "true"</h4>
   <div>
     <d-pagination
       [size]="'sm'"
@@ -38,11 +38,11 @@
       [haveConfigMenu]="true"
     >
       <div class="pagination-config-item">
-        <div class="config-item-title">显示字段</div>
-        <div class="config-item-words">点击设置</div>
+        <div class="config-item-title">show field</div>
+        <div class="config-item-words">setting</div>
       </div>
       <div class="pagination-config-item">
-        <div class="config-item-title">显示方式</div>
+        <div class="config-item-title">display method</div>
         <div style="padding-left: 10px; margin-top: 4px">
           <i class="icon-list-view"></i>
           <i class="icon-veIcon-briefcase"></i>

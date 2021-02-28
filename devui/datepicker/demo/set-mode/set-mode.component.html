@@ -1,0 +1,57 @@
+<section>
+  <div class="row">
+    <h5>mode="year"</h5>
+    <div class="col-md-6">
+      <div class="devui-input-group devui-dropdown-origin-wrapper devui-dropdown-origin">
+        <!-- 根据需要的返回值格式设置不同的dateFormat 比如这里这里设置 'y' 就返回2020  -->
+        <input
+          [mode]="'year'"
+          [dateFormat]="'y'"
+          class="devui-input devui-form-control"
+          placeholder="year"
+          (click)="datePicker1.toggle()"
+          name="dp"
+          [(ngModel)]="selectedDate1"
+          autocomplete="off"
+          dDatepicker
+          #datePicker1="datepicker"
+          (selectedDateChange)="getValue($event)"
+        />
+        <div *ngIf="selectedDate1" class="devui-input-group-addon icon-close-wrapper" (click)="datePicker1.clearAll()">
+          <i class="icon icon-close"></i>
+        </div>
+        <div class="devui-input-group-addon" (click)="datePicker1.toggle()">
+          <i class="icon icon-calendar"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <h5>mode="month"</h5>
+    <div class="col-md-6">
+      <div class="devui-input-group devui-dropdown-origin-wrapper devui-dropdown-origin">
+        <!-- 根据需要的返回值格式设置不同的dateFormat 比如这里设置 'y-MM' 就返回2020-10  -->
+        <input
+          [mode]="'month'"
+          [dateFormat]="'y-MM'"
+          class="devui-input devui-form-control"
+          placeholder="year-month"
+          (click)="datePicker2.toggle()"
+          name="dp"
+          [(ngModel)]="selectedDate2"
+          autocomplete="off"
+          dDatepicker
+          #datePicker2="datepicker"
+          (selectedDateChange)="getValue($event)"
+          [cssClass]="'custom-css-class'"
+        />
+        <div *ngIf="selectedDate2" class="devui-input-group-addon icon-close-wrapper" (click)="datePicker2.clearAll()">
+          <i class="icon icon-close"></i>
+        </div>
+        <div class="devui-input-group-addon" (click)="datePicker2.toggle()">
+          <i class="icon icon-calendar"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

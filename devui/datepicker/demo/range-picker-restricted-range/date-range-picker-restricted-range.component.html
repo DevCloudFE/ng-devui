@@ -1,12 +1,12 @@
 <section style="width: 100%">
-  <span>日期范围选择器 限制开始和截止范围，everyRange方法仅提供参考，具体请业务自行处理:</span>
-  <div class="devui-input-group devui-dropdown-origin-wrapper devui-dropdown-origin">
+  <span> limit start and end:</span>
+  <div class="devui-input-group devui-dropdown-origin">
     <input
       class="devui-input devui-form-control"
       placeholder="y/MM/dd  -  y/MM/dd"
       name="dp"
       [(ngModel)]="dateRange1"
-      (focus)="dateRangePicker1.toggle()"
+      (click)="dateRangePicker1.toggle()"
       autocomplete="off"
       dDateRangePicker
       #dateRangePicker1="dateRangePicker"
@@ -14,7 +14,7 @@
       [minDate]="minDate"
       [maxDate]="maxDate"
     />
-    <div *ngIf="everyRange(dateRange1)" class="devui-input-group-addon icon-close-wrapper" (click)="dateRangePicker1.clearAll()">
+    <div *ngIf="everyRange(dateRange1)" class="devui-input-group-addon close-icon-wrapper" (click)="dateRangePicker1.clearAll()">
       <i class="icon icon-close"></i>
     </div>
     <div class="devui-input-group-addon" (click)="dateRangePicker1.toggle()">
@@ -22,21 +22,21 @@
     </div>
   </div>
 
-  <span>日期范围选择器 限制开始范围:</span>
-  <div class="devui-input-group devui-dropdown-origin-wrapper devui-dropdown-origin">
+  <span> limit start:</span>
+  <div class="devui-input-group devui-dropdown-origin">
     <input
       class="devui-input devui-form-control"
       placeholder="y/MM/dd  -  y/MM/dd"
       name="dp"
       [(ngModel)]="dateRange2"
-      (focus)="dateRangePicker2.toggle()"
+      (click)="dateRangePicker2.toggle()"
       autocomplete="off"
       dDateRangePicker
       #dateRangePicker2="dateRangePicker"
       (selectedRangeChange)="getValue($event)"
       [minDate]="minDate"
     />
-    <div *ngIf="everyRange(dateRange2)" class="devui-input-group-addon icon-close-wrapper" (click)="dateRangePicker2.clearAll()">
+    <div *ngIf="everyRange(dateRange2)" class="devui-input-group-addon close-icon-wrapper" (click)="dateRangePicker2.clearAll()">
       <i class="icon icon-close"></i>
     </div>
     <div class="devui-input-group-addon" (click)="dateRangePicker2.toggle()">
@@ -44,21 +44,21 @@
     </div>
   </div>
 
-  <span>日期范围选择器 限制截止范围:</span>
-  <div class="devui-input-group devui-dropdown-origin-wrapper devui-dropdown-origin">
+  <span> limit end:</span>
+  <div class="devui-input-group devui-dropdown-origin">
     <input
       class="devui-input devui-form-control"
       placeholder="y/MM/dd  -  y/MM/dd"
       name="dp"
       [(ngModel)]="dateRange3"
-      (focus)="dateRangePicker3.toggle()"
+      (click)="dateRangePicker3.toggle()"
       autocomplete="off"
       dDateRangePicker
       #dateRangePicker3="dateRangePicker"
       (selectedRangeChange)="getValue($event)"
       [maxDate]="maxDate"
     />
-    <div *ngIf="everyRange(dateRange3)" class="devui-input-group-addon icon-close-wrapper" (click)="dateRangePicker3.clearAll()">
+    <div *ngIf="everyRange(dateRange3)" class="devui-input-group-addon close-icon-wrapper" (click)="dateRangePicker3.clearAll()">
       <i class="icon icon-close"></i>
     </div>
     <div class="devui-input-group-addon" (click)="dateRangePicker3.toggle()">

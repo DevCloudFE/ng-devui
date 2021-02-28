@@ -1,5 +1,6 @@
 @import '../../../devui/style/theme/color';
 @import '../../../devui/style/theme/font';
+@import '../../../devui/style/theme/corner';
 
 :host {
   display: none;
@@ -55,8 +56,7 @@
   padding: 8px 12px;
   font-size: $devui-font-size;
   line-height: 1.5;
-  width: 180px;
-  height: 240px;
+  width: 182px;
 
   .title {
     font-weight: bold;
@@ -125,4 +125,29 @@ d-select {
 
 .devui-tick {
   fill: $devui-light-text;
+}
+
+.extend-theme-image {
+  background-repeat: no-repeat;
+  height: 40px;
+  margin-bottom: 8px;
+  border-radius: $devui-border-radius;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.extend-theme-title {
+  margin: 0 8px;
+  color: $devui-light-text;
+}
+
+.active-theme {
+  color: $devui-light-text;
+  margin-right: 8px;
+  background-color: $devui-brand;
+  border-radius: 50%;
+  opacity: 0.6;
+  padding: 4px;
 }

@@ -6,10 +6,10 @@ import { Component } from '@angular/core';
     styleUrls: ['./lazy-load-virtual-scroll.component.scss']
 })
 export class LazyLoadVirtualScrollComponent {
-  options = ['选项1', '选项2', '选项3', '选项4', '选项5', '选项6', '选项7', '选项8',
-    '选项9', '选项10', '选项11', '选项12', '选项13', '选项14'];
-  options1 = ['选项1', '选项2', '选项3', '选项4', '选项5', '选项6', '选项7', '选项8',
-    '选项9', '选项10', '选项11', '选项12', '选项13', '选项14'];
+  options = ['option 1', 'option 2', 'option 3', 'option 4', 'option 5', 'option 6', 'option 7', 'option 8',
+    'option 9', 'option 10', 'option 11', 'option 12', 'option 13', 'option 14'];
+  options1 = ['option 1', 'option 2', 'option 3', 'option 4', 'option 5', 'option 6', 'option 7', 'option 8',
+    'option 9', 'option 10', 'option 11', 'option 12', 'option 13', 'option 14'];
 
   constructor() {
     for (let i = 0; i < 1000; i++) {
@@ -18,7 +18,7 @@ export class LazyLoadVirtualScrollComponent {
   }
 
   loadMore(data) {
-    const moreData = ['异步选项1', '异步选项2', '异步选项3', '异步选项4', '异步选项5'];
+    const moreData = ['async option 1', 'async option 2', 'async option 3', 'async option 4', 'async option 5'];
 
     // 模拟接口延时
     setTimeout(() => {

@@ -8,7 +8,7 @@ import { GanttModule } from 'ng-devui/experimental/gantt';
 
 ### d-gantt-scale 参数
 
-|             参数              |        类型        | 默认  | 说明                                       | 跳转 Demo                                                                  |
+|             参数              |        类型        | 默认值  | 描述                                       | 跳转 Demo                                                                  |
 | :---------------------------: | :----------------: | :---: | :----------------------------------------- | -------------------------------------------------------------------------- |
 |         milestoneList         | `GanttMilestone[]` |  []   | 可选，版本里程碑列表                       | [与datatable组件结合的甘特图](demo#gantt-with-datatable) |
 | ganttScaleContainerOffsetLeft |      `number`      |   0   | 可选，甘特图时间轴容器左偏移像素           | [与datatable组件结合的甘特图](demo#gantt-with-datatable) |
@@ -16,7 +16,7 @@ import { GanttModule } from 'ng-devui/experimental/gantt';
 
 ### d-gantt-bar 参数
 
-|       参数        |        类型        |    默认    | 说明                                                              | 跳转 Demo                                                                  |
+|       参数        |        类型        |    默认值    | 描述                                                              | 跳转 Demo                                                                  |
 | :---------------: | :----------------: | :--------: | :---------------------------------------------------------------- | -------------------------------------------------------------------------- |
 |     startDate     |       `Date`       |    null    | 必选，开始时间                                                    | [与datatable组件结合的甘特图](demo#gantt-with-datatable) |
 |      endDate      |       `Date`       |    null    | 必选，结束时间                                                    | [与datatable组件结合的甘特图](demo#gantt-with-datatable) |
@@ -30,7 +30,7 @@ import { GanttModule } from 'ng-devui/experimental/gantt';
 
 ### d-gantt-bar 事件
 
-|        事件         |             类型              |             说明             | 跳转 Demo                                                                  |
+|        事件         |             类型              |             描述             | 跳转 Demo                                                                  |
 | :-----------------: | :---------------------------: | :--------------------------: | -------------------------------------------------------------------------- |
 |  barMoveStartEvent  | `EventEmitter<GanttTaskInfo>` |   工作项时间条开始拖动事件   | [与datatable组件结合的甘特图](demo#gantt-with-datatable) |
 |   barMovingEvent    | `EventEmitter<GanttTaskInfo>` |    工作项时间条拖动中事件    | [与datatable组件结合的甘特图](demo#gantt-with-datatable) |
@@ -42,7 +42,7 @@ import { GanttModule } from 'ng-devui/experimental/gantt';
 
 
 ### d-gantt-milestone 参数
-|       参数        |        类型        |    默认    | 说明                                                              | 跳转 Demo                                                                  |
+|       参数        |        类型        |    默认值    | 描述                                                              | 跳转 Demo                                                                  |
 | :---------------: | :----------------: | :--------: | :---------------------------------------------------------------- | -------------------------------------------------------------------------- |
 |     startDate     |       `Date`       |    null    | 必选，开始时间                                                    | [与datatable组件结合的甘特图](demo#gantt-with-datatable) |
 |        id         |      `string`      |    null    | 可选，支持传入 id                                                 | [与datatable组件结合的甘特图](demo#gantt-with-datatable) |
@@ -50,7 +50,7 @@ import { GanttModule } from 'ng-devui/experimental/gantt';
 
 
 ### d-gantt-bar-parent 参数
-|       参数        |        类型        |    默认    | 说明                                                              | 跳转 Demo                                                                  |
+|       参数        |        类型        |    默认值    | 描述                                                              | 跳转 Demo                                                                  |
 | :---------------: | :----------------: | :--------: | :---------------------------------------------------------------- | -------------------------------------------------------------------------- |
 |     startDate     |       `Date`       |    null    | 必选，开始时间                                                    | [与datatable组件结合的甘特图](demo#gantt-with-datatable) |
 |      endDate      |       `Date`       |    null    | 必选，结束时间                                                    | [与datatable组件结合的甘特图](demo#gantt-with-datatable) |
@@ -60,7 +60,7 @@ import { GanttModule } from 'ng-devui/experimental/gantt';
 
 ### GanttService 公共方法
 
-|         方法         |               参数               | 返回值类型 |              说明              | 跳转 Demo                                                                  |
+|         方法         |               参数               | 返回值类型 |              描述              | 跳转 Demo                                                                  |
 | :------------------: | :------------------------------: | :--------: | :----------------------------: | -------------------------------------------------------------------------- |
 |    setScaleConfig    |        `GanttScaleConfig`        |    void    |           配置时间轴           | [与datatable组件结合的甘特图](demo#gantt-with-datatable) |
 |   getDurationWidth   | `startDate: Date, endDate: Date` |   number   |  获取起止时间在时间轴上的宽度  | [与datatable组件结合的甘特图](demo#gantt-with-datatable) |

@@ -12,32 +12,27 @@
   background: $devui-global-bg;
 
   &-item {
-    a {
-      position: relative;
-      padding: 8px 16px;
-      display: block;
+    position: relative;
+    padding: 8px 16px;
+    display: block;
 
-      .right-badge {
-        left: 80px;
-        top: 0;
-      }
-
-      .item-title {
-        color: $devui-text;
-        font-size: $devui-font-size-card-title;
-      }
+    .right-badge {
+      position: absolute;
+      right: 20px;
+      top: 12px;
     }
 
-    a:hover {
-      background-color: $devui-list-item-selected-bg;
-
-      .item-title {
-        color: $devui-list-item-hover-text;
-      }
+    .item-title {
+      color: $devui-text;
+      font-size: $devui-font-size-card-title;
     }
   }
-}
 
-.span-space {
-  left: 5px;
+  li:hover {
+    background-color: $devui-list-item-selected-bg;
+
+    .item-title {
+      color: $devui-list-item-hover-text;
+    }
+  }
 }

@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
+import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { Subscription } from 'rxjs';
 import { GanttBarStatus, GanttMilestone, GanttScaleDateInfo, GanttScaleUnit } from '../gantt.model';
 import { GanttService } from '../gantt.service';
-
 @Component({
   selector: 'd-gantt-scale',
   templateUrl: './gantt-scale.component.html',
@@ -27,9 +27,22 @@ export class GanttScaleComponent implements OnInit, OnChanges, OnDestroy {
   @Input() ganttScaleContainerOffsetLeft: number;
   @Input() milestoneList: GanttMilestone[];
   @Output() addMilestoneEvent = new EventEmitter<GanttScaleDateInfo>();
-  constructor(private ganttService: GanttService) { }
+
+  i18nText: I18nInterface['gantt'];
+  i18nLocale: I18nInterface['locale'];
+  i18nCommonText: I18nInterface['common'];
+  i18nSubscription: Subscription;
+  constructor(private ganttService: GanttService, private i18n: I18nService) { }
 
   ngOnInit() {
+    this.i18nText = this.i18n.getI18nText().gantt;
+    this.i18nCommonText = this.i18n.getI18nText().common;
+    this.i18nLocale = this.i18n.getI18nText().locale;
+    this.i18nSubscription = this.i18n.langChange().subscribe((data) => {
+      this.i18nText = data.gantt;
+      this.i18nCommonText = data.common;
+      this.i18nLocale = data.locale;
+    });
     this.ganttBarStatusHandler = this.ganttService.ganttBarStatusChange.subscribe((status) => {
       this.ganttBarStatusChange(status);
     });

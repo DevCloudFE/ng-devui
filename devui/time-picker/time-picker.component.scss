@@ -1,29 +1,14 @@
 @import '../style/theme/color';
 @import '../style/theme/shadow';
-
-.devui-dropdown-overlay {
-  border: 1px solid $devui-connected-overlay-line;
-  box-shadow: $devui-shadow-length-connected-overlay $devui-shadow;
-}
-
-.devui-dropdown-menu-cdk {
-  position: static;
-  display: block;
-  width: 100%;
-
-  &.devui-dropdown-cdk-top {
-    margin-bottom: -1px;
-  }
-
-  &.devui-dropdown-cdk-bottom {
-    margin-top: -1px;
-  }
-}
+@import '../style/theme/corner';
 
 .devui-time-picker-wrapper {
   width: 100%;
   min-width: 184px; // 60px宽度+1px外边框*2+1px内边框*2
   background-color: $devui-connected-overlay-bg;
+  box-shadow: $devui-shadow-length-connected-overlay $devui-shadow;
+  display: block;
+  position: unset;
 }
 
 .devui-time-picker {
@@ -31,6 +16,7 @@
   height: 248px; // 24px高度*8+8px间距*7+1px底边框
   overflow: hidden;
   border-bottom: 1px solid $devui-dividing-line;
+  border-radius: $devui-border-radius $devui-border-radius 0 0;
 
   .devui-time-list {
     flex: 1;

@@ -1,4 +1,7 @@
-import { Component, Host, Input, OnDestroy, OnInit, Optional, QueryList, SkipSelf, ViewChildren, ViewEncapsulation } from '@angular/core';
+import {
+  Component, Host, HostBinding, Input, OnDestroy, OnInit,
+  Optional, QueryList, SkipSelf, ViewChildren, ViewEncapsulation
+} from '@angular/core';
 import { AccordionItemRouterlinkComponent } from './accordion-item-routerlink.component';
 import { AccordionMenuComponent } from './accordion-menu.component';
 import { AccordionComponent } from './accordion.component';
@@ -18,7 +21,6 @@ export class AccordionListComponent implements OnInit, OnDestroy {
   @ViewChildren(AccordionItemRouterlinkComponent) accordionItemRouterlinkQueryList: QueryList<AccordionItemRouterlinkComponent>;
   constructor(@Optional() @Host() @SkipSelf() private parentComponent: AccordionMenuComponent,
               private accordion: AccordionComponent) {}
-
   ngOnInit(): void {
     if (this.parentComponent) {
       setTimeout(() => {this.parentComponent.accordionListFromView = this; });
@@ -28,6 +30,10 @@ export class AccordionListComponent implements OnInit, OnDestroy {
     if (this.parentComponent) {
       this.parentComponent.accordionListFromView = undefined;
     }
+  }
+
+  @HostBinding('class.devui-accordion-show-animate') get animateState() {
+    return this.accordion.showAnimation;
   }
 
   get loading() {

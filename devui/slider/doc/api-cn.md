@@ -1,6 +1,16 @@
-## Slider 使用说明
+# 如何使用
+在module中引入：
+```ts
+import { SliderModule } from 'ng-devui/slider';
+```
+在页面中使用：
+```html
+<d-slider></d-slider>
+```
 
-### d-slider 参数
+# d-slider
+
+## d-slider 参数
 
 |     参数     |        类型        |           默认           | 说明                                                                | 跳转 Demo                                           |
 | :----------: | :----------------: | :----------------------: | :------------------------------------------------------------------ | --------------------------------------------------- |
@@ -10,7 +20,7 @@
 |   disabled   |     `boolean`      |          false           | 可选，值为 true 时禁止用户输入                                      | [禁止输入态](demo#slider-disabled)  |
 | tipsRenderer | `function \| null` | (value) => String(value) | 可选，渲染 Popover 内容的函数，传入 null 时不显示 Popover           | [异定制Popover的显示内容](demo#slider-custom) |
 
-### d-slider 事件
+## d-slider 事件
 
 |      事件          |          类型           |                    说明                     | 跳转 Demo                                                    |
 | :----------------: | :---------------------: | :-----------------------------------------: | -------------------------------------------------           |

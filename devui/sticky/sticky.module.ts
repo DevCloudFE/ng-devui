@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
-
 import { StickyComponent } from './sticky.component';
+
 @NgModule({
     imports: [
 

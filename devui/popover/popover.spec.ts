@@ -1,5 +1,5 @@
 import { Component, DebugElement } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ButtonModule } from '../button';
@@ -104,10 +104,11 @@ describe('popover', () => {
       });
 
       //  hover可正常显示、可正常变更、可触发mouseleave
-      it('Mouse hover can open popover content', () => {
+      it('Mouse hover can open popover content', fakeAsync(() => {
         const buttonEle = debugEle.queryAll(By.css('d-button'))[1].nativeElement;
 
         buttonEle.dispatchEvent(new Event('mouseenter'));
+        tick(150);
         fixture.detectChanges();
 
         expect(debugEle.query(By.css('d-popover .devui-popover-content')).nativeElement.textContent).toBe('hover');
@@ -117,6 +118,7 @@ describe('popover', () => {
         expect(debugEle.query(By.css('d-popover .devui-popover-content')).nativeElement.textContent).toBe('hover1');
 
         buttonEle.dispatchEvent(new Event('mouseleave'));
+        tick(100);
         fixture.detectChanges();
 
         document.dispatchEvent(new Event('click'));
@@ -128,11 +130,12 @@ describe('popover', () => {
         testComponent.hoverDelayTime = 100;
         fixture.detectChanges();
         buttonEle.dispatchEvent(new Event('mouseenter'));
+        tick(150);
         fixture.detectChanges();
         expect(debugEle.query(By.css('d-popover .devui-popover-content')).nativeElement.textContent).toBe('hover1');
         //  TODO: mouseleave/blur/visible=false状态下，元素已destroy且不可见，但单元测试仍能检测到元素，单元测试与实际情况有差异，暂时不做测试
         // expect(debugEle.query(By.css('d-popover .devui-popover-content')).nativeElement.textContent).toBe('hover1');
-      });
+      }));
 
     });
   });

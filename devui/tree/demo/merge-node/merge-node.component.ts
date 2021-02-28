@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { TreeComponent, TreeNode } from 'ng-devui/tree';
 
 @Component({
@@ -9,20 +9,20 @@ export class MergeNodeComponent implements AfterViewInit {
   @ViewChild('basicTree') basicTree: TreeComponent;
   data1 = [
     {
-      title: '父节点1',
+      title: 'parent node 1',
       items: [
         {
-          title: '父节点11',
+          title: 'parent node 11',
           open: true,
           items: [
             {
-              title: '父节点节点111',
+              title: 'parent node 111',
               items: [
                 {
-                  title: '父节点1111',
+                  title: 'parent node 1111',
                   items: [
                     {
-                      title: '叶子节点11111'
+                      title: 'leaf node 11111'
                     }
                   ]
                 }
@@ -33,52 +33,52 @@ export class MergeNodeComponent implements AfterViewInit {
       ]
     },
     {
-      title: '父节点2',
+      title: 'parent node 2',
       items: [
         {
-          title: '父节点21',
+          title: 'parent node 21',
           open: true,
           items: [
             {
-              title: '叶子节点211'
+              title: 'leaf node 211'
             },
             {
-              title: '叶子节点212'
+              title: 'leaf node 212'
             },
             {
-              title: '叶子节点213'
+              title: 'leaf node 213'
             },
             {
-              title: '叶子节点214'
+              title: 'leaf node 214'
             },
             {
-              title: '叶子节点215'
+              title: 'leaf node 215'
             },
           ]
         },
       ]
     },
     {
-      title: '父节点3',
+      title: 'parent node 3',
       items: [
         {
-          title: '叶子节点31',
+          title: 'leaf node 31',
           items: [
             {
-              title: '叶子节点311',
+              title: 'leaf node 311',
               items: [
                 {
-                  title: '叶子节点3111'
+                  title: 'leaf node 3111'
                 }
               ]
             }
           ]
         },
         {
-          title: '叶子节点32'
+          title: 'leaf node 32'
         },
         {
-          title: '叶子节点33'
+          title: 'leaf node 33'
         }
       ]
     }

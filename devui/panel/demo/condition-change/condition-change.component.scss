@@ -1,0 +1,7 @@
+em.icon-chevron-down {
+  transition: transform 0.3s;
+
+  &.open {
+    transform: rotate(180deg);
+  }
+}
