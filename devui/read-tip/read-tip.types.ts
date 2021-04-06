@@ -22,6 +22,7 @@ export interface ReadTipOptions {
   mouseleaveTime?: number;
   position?: PositionType | PositionType[];
   overlayClassName?: string;
+  appendToBody?: boolean;
   rules: ReadTipRules;
 }
 
@@ -38,5 +39,9 @@ export interface ReadTipRule {
   mouseleaveTime?: number;
   position?: PositionType | PositionType[];
   overlayClassName?: string;
-  dataFn?: ({ element, rule: ReadTipRule }) => Observable<{ title?: string; content?: string; template?: TemplateRef<any> }>;
+  appendToBody?: boolean;
+  dataFn?: ({
+    element,
+    rule: ReadTipRule,
+  }) => Observable<{ title?: string; content?: string; template?: TemplateRef<any>; customData?: any }>;
 }

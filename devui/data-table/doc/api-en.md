@@ -15,8 +15,8 @@ On the page:
 # d-data-table
 
 ## d-data-table parameter
-| Parameter name | Type | Default value | Description | Jump to Demo |
-| :-------------------: | :---------------------------: | :----- | :----------------------------------------------------------------------------------------------: | ---------------------------------------------------------------------- |
+| Parameter name | Type | Default value | Description | Jump to Demo |Global Config| 
+| :----------------: | :-------------------: | :---------------------------: | :----- | :----------------------------------------------------------------------------------------------: | ---------------------------------------------------------------------- |
 | dataSource | `any[]` | -- | Required. Data source, used to render table data | [Basic usage](demo#basic-usage) |
 | lazy | `boolean` | -- | Optional. Indicating whether to lazy load data | [Low load list data](demo#lazy-loading-of-list-data) |
 | scrollable | `boolean` | -- | Optional. Whether the table content can be viewed by scrolling when the table exceeds the container. | [Table interaction](demo#table-interaction) |
@@ -29,6 +29,7 @@ On the page:
 | tableWidth | `string` | 100% | Optional. Table width |
 | tableHeight | `string` | -- | Optional. Table height. The value 100% depends on the height of the table parent container. | [Virtual scrolling](demo#virtual-scroll) |
 | containFixHeaderHeight | `boolean` | false | Optional. whether the height specified by the fixed header includes the height of the header, the height set by tableHeight is the height of the table body by default | [Fixed table header virtual scrolling](demo#fixed-virtual-scroll) |
+| fixHeader | `boolean` | false | Optional. Whether the table header is fixed | [Fixed table header virtual scrolling](demo#fixed-virtual-scroll) |
 | checkableRelation | [`CheckableRelation`](#checkablerelation) | -- | Optional. This parameter specifies whether the parent and child selections in the tree table are associated. | [Tree table](demo#tree-form) |
 | loadChildrenTable | `Promise` | -- | Optional. It is the callback of subtable expansion, which is used to asynchronously load subtables. | [Tree table](demo#tree-form) |
 | loadAllChildrenTable | `Promise` | -- | Optional. It is the callback for expanding all subtables in the table header. It is used to asynchronously load all subtables. | [Tree table](demo#tree-form) |
@@ -38,15 +39,16 @@ On the page:
 | virtualItemSize | `number` | 40 | Optional. Height of each row during virtual scrolling. The default value is 40`px`. | [Virtual scrolling](demo#virtual-scroll) |
 | virtualMinBufferPx | `number` | 80 | Optional. Minimum pixel height of the buffer during virtual scrolling. If the pixel height is less than this value, the new structure is loaded. | [Virtual scrolling](demo#virtual-scroll) |
 | virtualMaxBufferPx | `number` | 200 | Optional. Maximum pixel height of the buffer during virtual scrolling | [virtual scrolling](demo#virtual-scroll) |
-| tableWidthConfig | [`TableWidthConfig[]`](#tablewidthconfig) | [] | Optional. It is used to configure the column width of the table. | [Basic usage](demo#basic-usage) |
+| tableWidthConfig | [`TableWidthConfig[]`](#tablewidthconfig) | [] | Optional. It is used to configure the column width of the table.This parameter is mandatory when subtables such as tree tables are included. | [Basic usage](demo#basic-usage) |
 | checkable | `boolean` | -- | Optional. Whether the Datatable provides the function of selecting rows. | [Table interaction](demo#table-interaction) |
 | checkOptions | [`TableCheckOptions[]`](#tablecheckoptions) | -- | Optional. drop-down list box in the table header and operations | [Customized table selection](demo#table-check-options) |
 | headerCheckDisabled | `boolean` | -- | Optional. Indicates whether the header checkbox is disabled. |
 | headerCheckVisible | `boolean` | true | Optional. Indicates whether the checkbox in the header is visible. |
 | showExpandToggle | `boolean` | -- |: Indicates whether to display extended rows. If the value is true, an operation button is generated before the row where extended rows are configured. | [Extended row](demo#expand-row) |
-| showSortIcon | `boolean` | true | Optional. Indicates whether to display the inactive sorting icon. The icon is displayed by default. | [Table interaction](demo#table-interaction) |
+| showSortIcon | `boolean` | false | Optional. Indicates whether to display the inactive sorting icon. The icon is not displayed by default. | [Table interaction](demo#table-interaction) |
+| showFilterIcon | `boolean` | false | Optional. Indicates whether to display the inactive filter icon. The icon is not displayed by default. | [Table interaction](demo#table-interaction) |
 | showOperationArea | `boolean` | false | Optional. Indicates whether to display the operation area when the table header operation is not activated. Not displayed by default. | [Table interaction](demo#table-interaction) |
-| hideColumn | `string[]` | -- | Optional. Used to hide columns |
+| hideColumn | `string[]` | -- | Optional. Used to hide columns, Transfer the corresponding field. |
 | pageAllChecked | `boolean` | -- | Optional. Select all rows on the current page. |
 | onlyOneColumnSort | `boolean` | -- | Optional. Whether to restrict the output of multi-column sorting to one item | [Table interaction](demo#table-interaction) |
 | multiSort | [`SortEventArg[]`](#sorteventarg) | [] | Optional. It is a multi-column selection array, which is used to guide the columns to be sorted. | [Table interaction](demo#table-interaction) |
@@ -134,6 +136,8 @@ On the page:
 | iconUnFoldTable | `DOMString` | -- | Optional. Customize the expansion icon of the tree table | [Tree table](demo#tree-form) |
 | fixedLeft | `string` | -- | Optional. The value is fixed to the left of the column, for example, 100px. | [Fixed column](demo#fixed-column) |
 | fixedRight | `string` | -- | Optional. The value is fixed to the right of the column, for example, 100px | [fixed column](demo#fixed-column) |
+| showSortIcon | `boolean` | false | Optional. Indicates whether to display the inactive sorting icon. The icon is not displayed by default. | [Table interaction](demo#table-interaction) |
+| showFilterIcon | `boolean` | false | Optional. Indicates whether to display the inactive filter icon. The icon is not displayed by default. | [Table interaction](demo#table-interaction) |
 
 ## dHeadCell Event
 
@@ -150,7 +154,7 @@ On the page:
 
 ## dTableCell Parameter
 
-| Parameter name | Type | Default value | Description | Jump to Demo |
+| Parameter name | Type | Default value | Description | Jump to Demo |Global Config| 
 | :-------------: | :-----------------------------: | :----- | :------------------------------------------------------------: | :------------------------------------------------- |
 | editable | `boolean` | -- | Optional. Whether a cell can be edited | [edit cell](demo#edit-cell) |
 | editableTip | `'hover'\|'btn'` | -- | Optional. This parameter indicates the editing prompt. The background color of the hover changes. The edit button is displayed in the btn. | [edit cell](demo#edit-cell) |

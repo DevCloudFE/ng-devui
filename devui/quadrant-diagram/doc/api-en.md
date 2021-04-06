@@ -1,15 +1,14 @@
-## Import
-
-The current component is an experimental component and needs to be introduced as required. The path is as follows:
-
+# How To Use
+Import in module：
+```ts
+import { QuadrantDiagramModule } from 'ng-devui/quadrant-diagram';
 ```
-import {QuadrantDiagramModule} from' ng-devui/experimental/quadrant-diagram';
-```
+
 
 ### d-quadrant-diagram parameter
 
-| Parameter | Type | Default | Description | Jump to Demo |
-| :-----------------: | :------------------------: | :------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
+| Parameter | Type | Default | Description | Jump to Demo |Global Config| 
+| :----------------: | :-----------------: | :------------------------: | :------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
 | view | `IViewConfigs` | {height:900,width:950} | Optional. Specifies the width and height of the quadrant map. The value must be a specific number because the coordinate axis and quadrant area need to be calculated. If you need to change the value based on the container size, you are advised to use the document method to calculate the actual value and then transfer the value. | [Customize](demo#custom-quadrant) |
 | axisConfigs | `IAxisConfigs` | Set the attributes of the coordinate axis by referring to `DEFAULT_AXIS_CONFIGS` | For details about the configuration parameters, see `IAxisConfigs` | [Customize](demo#custom-quadrant) |
 | showQuadrants | `boolean` | true | Optional. Indicates whether to display four quadrants. |

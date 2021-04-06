@@ -12,8 +12,8 @@ In the page：
 
 ## d-progress parameter
 
-| Parameter | Type | Default | Description | Jump to Demo |
-| :------------: | :-------: | :-------: | :------------------------------------------------------- | ---------------------------------------------- |
+| Parameter | Type | Default | Description | Jump to Demo |Global Config| 
+| :----------------: | :------------: | :-------: | :-------: | :------------------------------------------------------- | ---------------------------------------------- |
 | percentage | `number` | 0 | Optional. The maximum value of the progress bar is 100. | [Basic Usage](demo#basic-usage) |
 | percentageText | `string` | -- | Optional. Text description of the current value of the progress bar, for example, '30%'\| '4/5' | [Basic Usage](demo#basic-usage) |
 | barbgcolor | `string` | '#5170ff' | Optional. Color of the progress bar. The default value is sky blue. | [Basic Usage](demo#basic-usage) |

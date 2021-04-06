@@ -1,13 +1,26 @@
-import { Component, DebugElement, ViewChild } from '@angular/core';
-import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import {
+  Component,
+  DebugElement,
+  ViewChild
+} from '@angular/core';
+import {
+  ComponentFixture,
+  fakeAsync,
+  TestBed,
+  tick
+} from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+
 import { OverlayContainerRef } from '../overlay-container';
 import { PopoverDirective } from '../popover';
 import { DomHelper } from '../utils/testing/dom-helper';
 import { createDragEvent } from '../utils/testing/event-helper';
 import { OperableTreeComponent } from './operable-tree.component';
-import { ITreeItem, TreeNode } from './tree-factory.class';
+import {
+  ITreeItem,
+  TreeNode
+} from './tree-factory.class';
 import { TreeModule } from './tree.module';
 
 @Component({
@@ -193,7 +206,7 @@ class TestDragDropTreeComponent {
 
   beforeNodeDrop = _ => {
     return new Promise(resolve => {
-      resolve();
+      resolve(undefined);
     });
   }
 

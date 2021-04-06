@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { I18nService } from 'ng-devui/i18n';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
@@ -16,7 +16,7 @@ export class DevUIApiComponent implements OnInit, AfterViewInit, OnDestroy {
   apiData: any;
 
   constructor(private router: Router, private translate: TranslateService, private route: ActivatedRoute,
-              private i18n: I18nService, private elementRef: ElementRef) { }
+              private i18n: I18nService, private elementRef: ElementRef, private renderer: Renderer2) { }
 
   ngOnInit() {
     this.subs.add(
@@ -31,6 +31,8 @@ export class DevUIApiComponent implements OnInit, AfterViewInit, OnDestroy {
         this.setApi(event.lang);
       })
     );
+
+    this.renderer.setStyle(document.querySelector('html'), 'scroll-behavior', 'smooth');
   }
 
   setApi(lang) {
@@ -89,6 +91,7 @@ export class DevUIApiComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnDestroy() {
     this.subs.unsubscribe();
+    this.renderer.removeStyle(document.querySelector('html'), 'scroll-behavior');
   }
 
   get baseUrl() {

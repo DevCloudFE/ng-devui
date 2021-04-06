@@ -11,6 +11,7 @@ import {
   TemplateRef,
   ViewContainerRef,
 } from '@angular/core';
+import { OverlayContainerRef } from 'ng-devui/overlay-container';
 import { of } from 'rxjs';
 import { ReadTipComponent } from './read-tip.component';
 import { ReadTipOptions, ReadTipRule } from './read-tip.types';
@@ -31,6 +32,7 @@ export class ReadTipDirective implements OnInit, OnDestroy {
     mouseleaveTime: 100,
     position: 'top',
     overlayClassName: '',
+    appendToBody: true,
     rules: { selector: null },
   };
 
@@ -49,6 +51,7 @@ export class ReadTipDirective implements OnInit, OnDestroy {
   onMouseOver(event: MouseEvent) {
     this.findElementIndex(event.target, this.readTipOptions.rules, 'hover').subscribe((elementInfo) => {
       if (elementInfo?.shouldTrigger) {
+        this.hide();
         if (!this.readTipComponentRef) {
           const target = new ElementRef(event.target);
           setTimeout(() => {
@@ -100,6 +103,7 @@ export class ReadTipDirective implements OnInit, OnDestroy {
   constructor(
     private el: ElementRef,
     private componentFactoryResolver: ComponentFactoryResolver,
+    private overlayContainerRef: OverlayContainerRef,
     private inject: Injector,
     private viewContainerRef: ViewContainerRef
   ) {}
@@ -125,17 +129,23 @@ export class ReadTipDirective implements OnInit, OnDestroy {
   }
 
   createReadTip(target, rule?: ReadTipRule) {
-    this.readTipComponentRef = this.viewContainerRef.createComponent(
-      this.componentFactoryResolver.resolveComponentFactory(ReadTipComponent),
-      this.viewContainerRef.length,
-      this.inject
-    );
+    if (rule.appendToBody) {
+      this.readTipComponentRef = this.overlayContainerRef.createComponent(
+        this.componentFactoryResolver.resolveComponentFactory(ReadTipComponent)
+      );
+    } else {
+      this.readTipComponentRef = this.viewContainerRef.createComponent(
+        this.componentFactoryResolver.resolveComponentFactory(ReadTipComponent),
+        this.viewContainerRef.length,
+        this.inject
+      );
+    }
 
     if (this.contentTemplate) {
       Object.assign(this.readTipComponentRef.instance, {
         content: this.contentTemplate,
         triggerElementRef: target,
-        appendToBody: false,
+        appendToBody: rule.appendToBody,
         position: rule.position,
         overlayClassName: rule.overlayClassName,
       });
@@ -144,9 +154,10 @@ export class ReadTipDirective implements OnInit, OnDestroy {
         rule.dataFn({ element: target.nativeElement, rule }).subscribe((data) => {
           if (data.template) {
             Object.assign(this.readTipComponentRef.instance, {
-              content: this.contentTemplate,
+              content: data.template,
+              customData: data.customData,
               triggerElementRef: target,
-              appendToBody: false,
+              appendToBody: rule.appendToBody,
               position: rule.position,
               overlayClassName: rule.overlayClassName,
             });
@@ -155,7 +166,7 @@ export class ReadTipDirective implements OnInit, OnDestroy {
               content: data.content,
               title: data.title,
               triggerElementRef: target,
-              appendToBody: false,
+              appendToBody: rule.appendToBody,
               position: rule.position,
               overlayClassName: rule.overlayClassName,
             });
@@ -166,7 +177,7 @@ export class ReadTipDirective implements OnInit, OnDestroy {
           content: rule.content,
           title: rule.title,
           triggerElementRef: target,
-          appendToBody: false,
+          appendToBody: rule.appendToBody,
           position: rule.position,
           overlayClassName: rule.overlayClassName,
         });
@@ -209,22 +220,16 @@ export class ReadTipDirective implements OnInit, OnDestroy {
   }
 
   findElementIndex(element, rules, trigger) {
-    const keysCanInherit = ['trigger', 'showAnimate', 'mouseenterTime', 'mouseleaveTime', 'position', 'overlayClassName'];
-    const pattern = new RegExp('[A-Za-z]');
+    const keysCanInherit = ['trigger', 'showAnimate', 'mouseenterTime', 'mouseleaveTime', 'position', 'overlayClassName', 'appendToBody'];
     if (rules instanceof Array) {
-      const elementArray = rules.map((rule) => {
-        if (pattern.test(rule.selector[0])) {
-          return rule.selector;
-        } else {
-          return rule.selector.substr(1);
-        }
-      });
+      let elementIndex = -1;
 
-      const elementIndex = element.classList.value
-        ? elementArray.indexOf(element.classList.value) === -1
-          ? elementArray.indexOf(element.id)
-          : elementArray.indexOf(element.classList.value)
-        : elementArray.indexOf(element.localName);
+      for (let i = 0; i < rules.length; i++) {
+        if (this.isCorrectElement(rules[i].selector, element)) {
+          elementIndex = i;
+          break;
+        }
+      }
 
       keysCanInherit.forEach((key) => {
         if (rules[elementIndex]) {
@@ -232,8 +237,7 @@ export class ReadTipDirective implements OnInit, OnDestroy {
         }
       });
       return of({
-        shouldTrigger:
-          rules[elementIndex]?.trigger === trigger && element === this.el.nativeElement.querySelector(rules[elementIndex]?.selector),
+        shouldTrigger: rules[elementIndex]?.trigger === trigger && this.isCorrectElement(rules[elementIndex]?.selector, element),
         rule: rules[elementIndex],
       });
     } else {
@@ -243,9 +247,19 @@ export class ReadTipDirective implements OnInit, OnDestroy {
         }
       });
       return of({
-        shouldTrigger: rules?.trigger === trigger && element === this.el.nativeElement.querySelector(rules?.selector),
+        shouldTrigger: rules?.trigger === trigger && this.isCorrectElement(rules?.selector, element),
         rule: rules,
       });
     }
+  }
+
+  isCorrectElement(selector: string, element) {
+    const elementsArray = this.el.nativeElement.querySelectorAll(selector);
+    for (let i = 0; i < elementsArray.length; i++) {
+      if (elementsArray[i] === element) {
+        return true;
+      }
+    }
+    return false;
   }
 }

@@ -888,12 +888,12 @@ function testTimePickerBtn(btnWrapperEle, fixture, timeEvent, inputEle, componen
   const inBtnEle = btnWrapperEle.querySelector('.btn-up');
   const deBtnEle = btnWrapperEle.querySelector('.btn-down');
   tickEvent(inBtnEle, new Event('click'), fixture);
-
+  tick(300);
   expect(inputEle.value).toBe(padZero(Number(timeEvent) + 1));
   expect(component.getValue).toHaveBeenCalled();
 
   tickEvent(deBtnEle, new Event('click'), fixture);
-
+  tick(300);
   expect(inputEle.value).toBe(padZero(timeEvent));
   expect(component.getValue).toHaveBeenCalled();
 }

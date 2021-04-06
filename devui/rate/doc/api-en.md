@@ -12,8 +12,8 @@ In the page:
 
 ## d-rate parameter
 
-| Parameter | Type | Default | Description | Jump to Demo |
-| :-------: | :-----------------------------: | :---: | :------------------------------------------------------- | ------------------------------------------------------ |
+| Parameter | Type | Default | Description | Jump to Demo |Global Config| 
+| :----------------: | :-------: | :-----------------------------: | :---: | :------------------------------------------------------- | ------------------------------------------------------ |
 | read | `boolean` | false | Optional. This parameter specifies whether to enable read-only mode. In read-only mode, interaction is not supported. | [Read-only Mode](demo#read-only-mode) |
 | count | `number` | 5 | Optional. Sets the total number of levels. | [Read-only Mode](demo#read-only-mode) |
 | type | `'success'\|'warning'\|'error'` | -- | Optional. Set the current rating type. Different types correspond to different colors. | [Use the type parameter](demo#using-the-type-parameter) |

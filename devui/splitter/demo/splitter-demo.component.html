@@ -1,33 +1,33 @@
 <div>
-  <div class="demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 60, bottom: 0 }">
+  <div class="devui-demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 180, bottom: 0 }">
     <d-demo-nav [navItems]="navItems"></d-demo-nav>
-    <div class="demo-example" [dAnchor]="'basic-usage'">
-      <div class="demo-title">{{ 'components.splitter.basicDemo.title' | translate }}</div>
+    <div class="devui-demo-example" [dAnchor]="'basic-usage'">
+      <div class="devui-demo-title">{{ 'components.splitter.basicDemo.title' | translate }}</div>
       <d-codebox id="components-splitter-default" [sourceData]="SplitterBasicComponent">
         <d-splitter-demo-basic demo></d-splitter-demo-basic>
       </d-codebox>
     </div>
-    <div class="demo-example" [dAnchor]="'vertical-layout'">
-      <div class="demo-title">{{ 'components.splitter.verticalDemo.title' | translate }}</div>
+    <div class="devui-demo-example" [dAnchor]="'vertical-layout'">
+      <div class="devui-demo-title">{{ 'components.splitter.verticalDemo.title' | translate }}</div>
       <d-codebox id="components-splitter-vertical" [sourceData]="SplitterVerticalComponent">
         <d-splitter-demo-vertical demo></d-splitter-demo-vertical>
       </d-codebox>
     </div>
-    <div class="demo-example" [dAnchor]="'combine-layout'">
-      <div class="demo-title">{{ 'components.splitter.combineDemo.title' | translate }}</div>
+    <div class="devui-demo-example" [dAnchor]="'combine-layout'">
+      <div class="devui-demo-title">{{ 'components.splitter.combineDemo.title' | translate }}</div>
       <d-codebox id="components-splitter-multi" [sourceData]="SplitterMultiComponent">
         <d-splitter-demo-multi demo></d-splitter-demo-multi>
       </d-codebox>
     </div>
-    <div class="demo-example" [dAnchor]="'certain-unfold-direction'">
-      <div class="demo-title">{{ 'components.splitter.directionDemo.title' | translate }}</div>
+    <div class="devui-demo-example" [dAnchor]="'certain-unfold-direction'">
+      <div class="devui-demo-title">{{ 'components.splitter.directionDemo.title' | translate }}</div>
       <d-codebox id="components-splitter-direction" [sourceData]="SplitterDirectionComponent">
         <d-splitter-demo-direction demo></d-splitter-demo-direction>
       </d-codebox>
     </div>
 
-    <div class="demo-example" [dAnchor]="'shrink-show-menu'">
-      <div class="demo-title">{{ 'components.splitter.shrinkDemo.title' | translate }}</div>
+    <div class="devui-demo-example" [dAnchor]="'shrink-show-menu'">
+      <div class="devui-demo-title">{{ 'components.splitter.shrinkDemo.title' | translate }}</div>
       <d-codebox id="components-splitter-direction" [sourceData]="SplitterFoldedMenuComponent">
         <d-splitter-demo-shrink demo></d-splitter-demo-shrink>
       </d-codebox>

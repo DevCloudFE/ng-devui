@@ -1,8 +1,8 @@
 <section>
-  <d-panel [type]="'primary'" #panel [isCollapsed]="isCollapsed">
+  <d-panel [type]="'primary'" #panel [isCollapsed]="isCollapsed" [showAnimation]="true">
     <d-panel-header>
       Panel with foldable
-      <em class="icon icon-chevron-down" [ngClass]="{ 'open': panel.isCollapsed }"></em>
+      <em class="icon icon-chevron-down" [ngClass]="{ open: panel.isCollapsed }"></em>
     </d-panel-header>
     <d-panel-body>This is body</d-panel-body>
   </d-panel>

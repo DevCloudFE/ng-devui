@@ -39,8 +39,8 @@ Note: Components passed to drawerContentComponent in the API need to be register
 
 ## IDrawerOptions Parameter
 
-| Attribute | Type | Default | Description | Jump to Demo |
-| :----------------------: | :------------------------: | :------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------: | -------------------------------------------------------------------- |
+| Attribute | Type | Default | Description | Jump to Demo |Global Config|
+| :----------------: | :----------------------: | :------------------------: | :------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------: | -------------------------------------------------------------------- |
 | drawerContentComponent | `Type<any>` | -- | Required. The user-defined component is transferred. | [Basic Usage](demo#basic-usage) |
 | componentFactoryResolver | `ComponentFactoryResolver` | Built-in | Optional. Generally this parameter is not required. |
 | injector | `Injector` | -- | Optional. You do not need to set this parameter. |
@@ -56,7 +56,8 @@ Note: Components passed to drawerContentComponent in the API need to be register
 | clickDoms | `array` | [] | Optional. When isCover is set to false, click Dom to close the side slide bar. | [Do not destroy after being closed](demo#do-not-destroy-after-closing) |
 | destroyOnHide | `boolean` | true | Optional. Whether to destroy the drawer component when the drawer is disabled. The default value is yes. | [Do not destroy after being closed](demo#do-not-destroy-after-closing) |
 | position | `string` | 'right' | Optional. The value can be left or right. | [Basic Usage](demo#basic-usage) |
-| bodyScrollable | `boolean` | true | Optional. Whether the body can be scrolled when the drawer opens. The default value is false. If the scroll bar is hidden, the scroll bar may jitter. You need to resolve the problem in the page layout. |
+| bodyScrollable | `boolean` | true | Optional. Whether the body can be scrolled when the drawer opens. The default value is false. If the scroll bar is hidden, the scroll bar may jitter. You need to resolve the problem in the page layout. |s
+| showAnimation | `boolean` | true | optional. Whether to enable animation. |
 
 ## IDrawerOpenResult Parameter
 

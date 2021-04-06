@@ -29,7 +29,7 @@ export class DrawerContentDirective {
     trigger('flyInOut', [
       state('left-void', style({ transform: 'translateX(-100%)', left: 0, opacity: 0.8 })),
       state('left-in', style({ transform: 'translateX(0)', left: 0, opacity: 1 })),
-      state('right-void', style({ transform: 'translateX(100%)', right: 0, opacity: 0.8})),
+      state('right-void', style({ transform: 'translateX(100%)', right: 0, opacity: 0.8 })),
       state('right-in', style({ transform: 'translateX(0)', right: 0, opacity: 1 })),
       // 解决初始化动效为'void'而非'left/right-void'
       transition('void => left-in', [
@@ -67,6 +67,7 @@ export class DrawerComponent implements OnInit, OnDestroy {
   @deprecated
   */
   @Input() fullScreen = false;
+  @Input() showAnimation = true;
   @ViewChild(DrawerContentDirective, { static: true }) drawerContentHost: DrawerContentDirective;
   @Input() backdropCloseable: boolean;
   @Input() escKeyCloseable: boolean;
@@ -76,6 +77,7 @@ export class DrawerComponent implements OnInit, OnDestroy {
   @Input() afterOpened: Function;
   @Input() position: 'right' | 'left' = 'left';
   @Input() bodyScrollable = true; // drawer打开body是否可滚动
+  @ViewChild('drawerContainer', { static: true }) drawerContainer: ElementRef;
   _width: string;
   // 全屏时用来记录之前的宽度，因为没遮罩的情况下width不能是百分比
   oldWidth: string;
@@ -239,9 +241,12 @@ export class DrawerComponent implements OnInit, OnDestroy {
   }
 
   private _setFullScreen(fullScreen?: boolean) {
+    const drawerContainerEle = this.drawerContainer.nativeElement;
     if (this._width === this.oldWidth) {
       if (fullScreen === true || fullScreen === undefined) {
         this._width = this._isCover ? '100%' : window.innerWidth + 'px';
+        this.renderer.setStyle(drawerContainerEle, 'transition',
+          this.showAnimation ? `width .3s cubic-bezier(0.5, 0.05, 0.5, 0.95)` : 'none');
         if (!this._isCover) {
           const resizeEv = fromEvent(window, 'resize');
           const result = resizeEv.pipe(debounceTime(100));

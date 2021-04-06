@@ -12,8 +12,8 @@ import { TransferModule } from 'ng-devui/transfer';
 
 ## d-transfer 参数
 
-|       参数        |  类型   | 默认  | 说明                       | 跳转 Demo                                                    |
-| :---------------: | :-----: | :---: | :------------------------- | ------------------------------------------------------------ |
+|       参数        |  类型   | 默认  | 说明                       | 跳转 Demo                                                    |全局配置项| 
+| :----------------: | :---------------: | :-----: | :---: | :------------------------- | ------------------------------------------------------------ |
 |   sourceOption    |  `array`  |  []   | 可选参数，穿梭框源数据     | [基本用法](demo#transfer-demo-base)     |
 |   targetOption    |  `array`  |  []   | 可选参数，穿梭框目标数据   | [基本用法](demo#transfer-demo-base)     |
 |      titles       |  `array`  |  []   | 可选参数，穿梭框标题       | [基本用法](demo#transfer-demo-base)     |
@@ -26,7 +26,21 @@ import { TransferModule } from 'ng-devui/transfer';
 
 ## d-transfer 事件
 
-|       事件       |          类型          |                说明                | 跳转 Demo                                                |
-| :--------------: | :--------------------: | :--------------------------------: | -------------------------------------------------------- |
-| transferToSource | 返回穿梭框源和目标数据 | 当点击右穿梭时，返回源和目标数据； | [基本用法](demo#transfer-demo-base) |
-| transferToTarget | 返回穿梭框源和目标数据 | 当点击左穿梭时，返回源和目标数据； | [基本用法](demo#transfer-demo-base) |
+|       事件       |                  类型                   |                说明                      | 跳转 Demo                                                |
+| :--------------: | :------------------------------------: | :--------------------------------------: | -------------------------------------------------------- |
+| transferToSource | `EventEmitter<{sourceOption, targetOption}>` | 当点击右穿梭时，返回穿梭框源和目标数据；     | [基本用法](demo#transfer-demo-base) |
+| transferToTarget | `EventEmitter<{sourceOption, targetOption}>` | 当点击左穿梭时，返回穿梭框源和目标数据；          | [基本用法](demo#transfer-demo-base) |
+|     searching    | `EventEmitter<{direction, keyword}>`         | 当搜索时触发，返回目标穿梭框和搜索文字，不设置此事件则会使用默认方法； | [搜索穿梭框](demo#transfer-demo-search) |
+|   transferring   | `EventEmitter<TransferDirection>` | 当穿梭时触发，返回目标穿梭框，不设置此事件则会使用默认方法； | [搜索穿梭框](demo#transfer-demo-search) |
+|  afterTransfer   | `EventEmitter<TransferDirection>` | 当穿梭完成后，返回目标穿梭框，不设置transferEvent才会触发； | [搜索穿梭框](demo#transfer-demo-search) |
+
+### TransferDirection 类型
+
+引入：
+```ts
+import { TransferDirection } from 'ng-devui';
+```
+结构：
+```ts
+enum TransferDirection { SOURCE, TARGET }
+```

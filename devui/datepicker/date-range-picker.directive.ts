@@ -25,6 +25,7 @@ import {
   formWithDropDown,
   removeClassFromOrigin
 } from 'ng-devui/utils';
+import { DevConfigService, WithConfig } from 'ng-devui/utils/globalConfig';
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime, filter, map } from 'rxjs/operators';
 import { DatePickerConfigService as DatePickerConfig } from './date-picker.config.service';
@@ -55,6 +56,7 @@ export class DateRangePickerDirective implements OnInit, ControlValueAccessor, O
   @Input() hideOnRangeSelected = false;
   @Input() customViewTemplate: TemplateRef<any>;
   @Input() splitter = '  -  ';
+  @Input() @WithConfig() showAnimation = true;
   @Output() selectedRangeChange = new EventEmitter<SelectDateRangeChangeEventArgs>();
   @ViewChild('dateRangePicker') dateRangePicker: ComponentRef<DateRangePickerComponent>;
   private _maxDate: Date;
@@ -181,7 +183,8 @@ export class DateRangePickerDirective implements OnInit, ControlValueAccessor, O
     private renderer: Renderer2,
     private datePickerConfig: DatePickerConfig,
     private i18n: I18nService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private devConfigService: DevConfigService
   ) {
     this._dateConfig = datePickerConfig['dateConfig'];
     this.dateConverter = datePickerConfig['dateConfig'].dateConverter || new DefaultDateConverter();

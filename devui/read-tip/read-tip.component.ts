@@ -35,6 +35,7 @@ export class ReadTipComponent implements OnInit, AfterViewInit, AfterContentChec
   @Input() triggerElementRef: ElementRef;
   @Input() position: PositionType | PositionType[] = 'top';
   @Input() content: string | HTMLElement | TemplateRef<any>;
+  @Input() customData: any;
   @Input() title: string | HTMLElement;
   @Input() showAnimate = false;
   @Input() scrollElement: Element;

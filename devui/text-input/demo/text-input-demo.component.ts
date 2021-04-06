@@ -18,6 +18,10 @@ export class TextInputDemoComponent implements OnInit, OnDestroy {
     { title: 'SCSS', language: 'css', code: require('!!raw-loader!./password-visible/password-visible.component.scss') },
   ];
 
+  sizeSource: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./size/text-input-size.component.html') },
+    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./size/text-input-size.component.ts') }
+  ];
   navItems = [];
   subs: Subscription = new Subscription();
   constructor(private translate: TranslateService) {}
@@ -40,6 +44,7 @@ export class TextInputDemoComponent implements OnInit, OnDestroy {
   setNavValues(values) {
     this.navItems = [
       { dAnchorLink: 'basic-usage', value: values['basic-usage'] },
+      { dAnchorLink: 'size', value: values['size']},
       {
         dAnchorLink: 'password-input',
         value: values['password-input'],

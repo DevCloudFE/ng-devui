@@ -2,7 +2,7 @@
 @import '../style/theme/corner';
 @import '../style/core/_font';
 
-.container {
+.devui-transfer-container {
   width: 100%;
   display: flex;
   flex-wrap: warp;
@@ -16,22 +16,22 @@
   -o-align-items: center;
 }
 
-.source,
-.target {
+.devui-transfer-source,
+.devui-transfer-target {
   width: 48%;
   border: 1px solid $devui-line;
   border-radius: $devui-border-radius;
 }
 
-.option {
+.devui-transfer-option {
   padding: 0 10px;
 }
 
-.search {
+.devui-transfer-search {
   margin: 0 15px 10px 20px;
 }
 
-.num {
+.devui-transfer-num {
   flex: 1;
   text-align: right;
   align-self: center;
@@ -60,8 +60,8 @@
   }
 }
 
-.transfer-op {
-  .default-svg {
+.devui-transfer-op {
+  .devui-transfer-default-svg {
     circle {
       fill: $devui-disabled-bg;
       stroke: $devui-disabled-line;
@@ -72,7 +72,7 @@
     }
   }
 
-  .active-svg {
+  .devui-transfer-active-svg {
     circle {
       fill: $devui-icon-fill-active;
       stroke: devui-icon-fill-active;
@@ -84,15 +84,15 @@
   }
 }
 
-.content {
+.devui-transfer-content {
   padding-top: 10px;
 }
 
-.content ul {
+.devui-transfer-content ul {
   overflow: auto;
 }
 
-.content li {
+.devui-transfer-content li {
   display: flex;
   align-items: center;
   -moz-align-items: center;
@@ -108,26 +108,30 @@
     }
   }
 
-  .drag-ico {
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    line-height: 16px;
-    margin-right: 5px;
+  .devui-transfer-drag-wrap {
+    width: 21px;
+    height: 80%;
+    padding-right: 5px;
+    display: inline-flex;
+    align-items: center;
   }
 
   svg {
     opacity: 0;
     display: inline-block;
+
+    * {
+      pointer-events: none;
+    }
   }
 
-  .drag-handle {
+  .devui-transfer-drag-ico {
     width: 16px;
     height: 16px;
   }
 }
 
-.title {
+.devui-transfer-title {
   display: flex;
   height: 40px;
   line-height: 40px;
@@ -139,7 +143,7 @@
   margin-left: 20px;
 }
 
-.line {
+.devui-transfer-line {
   height: 1px;
   background: $devui-dividing-line;
 }

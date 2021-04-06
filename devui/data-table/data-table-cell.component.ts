@@ -1,10 +1,24 @@
-import { ChangeDetectorRef, Component, ComponentFactoryResolver, ElementRef, Input, NgZone, OnChanges,
-  OnDestroy, OnInit, SimpleChange, ViewChild } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  ComponentFactoryResolver,
+  ElementRef,
+  Input,
+  NgZone,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  SimpleChange,
+  ViewChild
+} from '@angular/core';
+
+import { Subscription } from 'rxjs';
+
 import { InputNumberComponent } from 'ng-devui/input-number';
 import { SelectComponent } from 'ng-devui/select';
 import { TreeSelectComponent } from 'ng-devui/tree-select';
 import { stopPropagationIfExist } from 'ng-devui/utils';
-import { Subscription } from 'rxjs';
+
 import { DataTableRowComponent } from './data-table-row.component';
 import { DataTableComponent } from './data-table.component';
 import { EditorDirective } from './editor-host.directive';
@@ -220,7 +234,7 @@ export class DataTableCellComponent implements OnInit, OnChanges, OnDestroy {
   cellEditing($event) {
     $event.stopPropagation();
     $event.preventDefault();
-    let beforeEdit = Promise.resolve();
+    let beforeEdit = Promise.resolve(undefined);
     if (this.dt.beforeCellEdit) {
       beforeEdit = this.dt.beforeCellEdit(this.rowItem, this.column);
     }

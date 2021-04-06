@@ -14,8 +14,8 @@ In the page:
 # dTextarea
 ## dTextarea Parameter
 
-|  Parameter  |          Type         |           Default           |          Description          |         Jump to Demo         |
-| :---------: | :-----------------------------------------: | :---: | :----------------------------------------------------------------------------------: | --------------------------------------------- |
+|  Parameter  |          Type         |           Default           |          Description          |         Jump to Demo         |Global Config| 
+| :----------------: | :---------: | :-----------------------------------------: | :---: | :----------------------------------------------------------------------------------: | --------------------------------------------- |
 | id          |                        `string`                            |    --    | Optional. Textarea ID |  [Basic Usage](demo#basic-usage) |
 | placeholder |                        `string`                            |    --    | Optional. Textarea placeholder | [Basic Usage](demo#basic-usage) |
 |   disabled  |                        `boolean`                           |   false  | Optional. Indicating whether the textarea is disabled | [Basic Usage](demo#basic-usage) |

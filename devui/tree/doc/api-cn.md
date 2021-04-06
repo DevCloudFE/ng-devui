@@ -18,8 +18,8 @@ import { TreeModule } from 'ng-devui/tree';
 
 ##### 基本的树，没有增删改查等操作
 
-|        参数         |                 类型                 |      默认值       |                                                              描述                                                              | 跳转 Demo                                  |
-| :-----------------: | :----------------------------------: | :-------------: | :----------------------------------------------------------------------------------------------------------------------------: | ------------------------------------------ |
+|        参数         |                 类型                 |      默认值       |                                                              描述                                                              | 跳转 Demo                                  |全局配置项| 
+| :----------------: | :-----------------: | :----------------------------------: | :-------------: | :----------------------------------------------------------------------------------------------------------------------------: | ------------------------------------------ |
 |        tree         | `Array<`[`ITreeItem`](#itreeitem)`>` |       --        |                                                必选，根据传入的数据进行树的渲染                                                | [基本用法](demo#basic-usage)               |
 |    treeNodeIdKey    |               `string`               |      'id'       |                                             可选，id 键值名，用来标识节点的唯一性                                              | [自定显示字段](demo#custom-display-field)  |
 | treeNodeChildrenKey |               `string`               |     'items'     |                                                    可选，子节点数组的键值名                                                    | [自定显示字段](demo#custom-display-field)  |
@@ -36,7 +36,7 @@ import { TreeModule } from 'ng-devui/tree';
 | virtualScrollHeight |               `string`               |     '800px'     |                                                  可选，设置虚拟滚动时树的高度                                                  | [大数据量可操作树](demo#virtual-scroll)    |
 |     minBufferPx     |               `number`               |       600       | 可选，设置虚拟滚动时的最小 buffer 尺寸，参考https://material.angular.io/cdk/scrolling/overview#scrolling-over-fixed-size-items | [大数据量可操作树](demo#virtual-scroll)    |
 |     maxBufferPx     |               `number`               |      900       | 可选，设置虚拟滚动时的最大 buffer 尺寸，参考https://material.angular.io/cdk/scrolling/overview#scrolling-over-fixed-size-items | [大数据量可操作树](demo#virtual-scroll)    |
-|   showAnimation    |    `boolean`                  |           true         |   可选，是否展示动画         | [无动画](demo#without-animation)   |
+|   showAnimation    |    `boolean`                  |           true         |   可选，是否展示动画         | [无动画](demo#without-animation)   | ✔ |
 
 ## d-tree 事件
 
@@ -54,8 +54,8 @@ import { TreeModule } from 'ng-devui/tree';
 
 ##### 鼠标滑过或者选中支持增删改按钮操作
 
-|         参数          |                     类型                     |      默认值       |                                                              描述                                                              | 跳转 Demo                                      |
-| :-------------------: | :------------------------------------------: | :-------------: | :----------------------------------------------------------------------------------------------------------------------------: | ---------------------------------------------- |
+|         参数          |                     类型                     |      默认值       |                                                              描述                                                              | 跳转 Demo                                      |全局配置项| 
+| :----------------: | :-------------------: | :------------------------------------------: | :-------------: | :----------------------------------------------------------------------------------------------------------------------------: | ---------------------------------------------- |
 |         tree          |     `Array<`[`ITreeItem`](#itreeitem)`>`     |       --        |                                                必选，根据传入的数据进行树的渲染                                                | [可勾选树](demo#checkable-tree)                |
 |     treeNodeIdKey     |                   `string`                   |      'id'       |                                             可选，id 键值名，用来标识节点的唯一性                                              | [可勾选树](demo#checkable-tree)                |
 |  treeNodeChildrenKey  |                   `string`                   |     'items'     |                                                    可选，子节点数组的键值名                                                    | [可勾选树](demo#checkable-tree)                |
@@ -85,9 +85,9 @@ import { TreeModule } from 'ng-devui/tree';
 |     virtualScroll     |                  `boolean`                   |      false      |                                         可选，是否开启虚拟滚动，用于处理大数据量的情形                                         | [大数据量可操作树](demo#virtual-scroll)        |
 |  virtualScrollHeight  |                   `string`                   |     '800px'     |                                                  可选，设置虚拟滚动时树的高度                                                  | [大数据量可操作树](demo#virtual-scroll)        |
 |      minBufferPx      |                   `number`                   |       600       | 可选，设置虚拟滚动时的最小 buffer 尺寸，参考https://material.angular.io/cdk/scrolling/overview#scrolling-over-fixed-size-items | [大数据量可操作树](demo#virtual-scroll)        |
-|      maxBufferPx      |                   `number`                   |      900       | 可选，设置虚拟滚动时的最大 buffer 尺寸，参考https://material.angular.io/cdk/scrolling/overview#scrolling-over-fixed-size-items | [大数据量可操作树](demo#virtual-scroll)        |
+|      maxBufferPx      |                   `number`                   |       900       | 可选，设置虚拟滚动时的最大 buffer 尺寸，参考https://material.angular.io/cdk/scrolling/overview#scrolling-over-fixed-size-items | [大数据量可操作树](demo#virtual-scroll)        |
 |   disableMouseEvent   |                  `boolean`                   |      false      |                可选，设置是否禁用鼠标的移入移出事件，主要用于兼容使用 appendTobody 时无法悬停到下拉框内容的情况                | [自定义图标](demo#custom-icon)                 |
-|   showAnimation    |    `boolean`                  |           true         |   可选，是否展示动画      | [无动画](demo#without-animation)   |
+|   showAnimation    |    `boolean`                  |           true         |   可选，是否展示动画      | [无动画](demo#without-animation)   | ✔ |
 
 ## d-operable-tree 事件
 
@@ -118,7 +118,7 @@ import { TreeModule } from 'ng-devui/tree';
 ## TreeFactoryAPI
 
 组件提供一个 TreeFactory，你可以从 TreeFactory 的实例上拿到下列方法来进行操作:
-参考：[常用TreeFactory函数](demo#tree-factory)
+参考：[常用 TreeFactory 函数](demo#tree-factory)
 
 ```ts
 
@@ -143,7 +143,7 @@ import { TreeModule } from 'ng-devui/tree';
 
 `disabledNodesById(id: number | string)`: 根据 id 使某个节点的 checkbox 变为不可选
 
-`checkNodesById(id: number | string, checked: boolean, checkableRelation: 'upward' | 'downward' | 'both' | 'none' = 'both'): Array<Object> `: 
+`checkNodesById(id: number | string, checked: boolean, checkableRelation: 'upward' | 'downward' | 'both' | 'none' = 'both'): Array<Object> `:
  根据 id 决定指定节点的check状态，可传入checkableRelation控制父子节点选中关系，返回所有选中节点
 
 `getCheckedNodes()`: 返回所有check状态为true的节点
@@ -158,7 +158,7 @@ import { TreeModule } from 'ng-devui/tree';
 
 `endLoading(id: number | string)`: 根据id关闭指定节点加载状态
 
-`searchTree(target: string, hideUnmatched = false, keyword='title', pattern?:RegExp)`: 
+`searchTree(target: string, hideUnmatched = false, keyword='title', pattern?:RegExp)`:
  在树中搜索是否存在匹配target字段的节点. hideUnmatched控制是否隐藏不匹配的节点；keyword控制在指定关键字中搜索；pattern控制与target匹配的方式
 
 `hideNodeById(id: number | string, hide: boolean)`: 根据 id 选择隐藏或显示节点
@@ -179,19 +179,27 @@ import { TreeModule } from 'ng-devui/tree';
 
 `disableAllNodesToggled(disable:boolean = true)`: 禁止所有节点的展开收起状态修改
 
+`transferToTreeNode(originNode, parentId = undefined,
+    treeNodeChildrenKey?,
+    treeNodeIdKey?,
+    checkboxDisabledKey?,
+    selectDisabledKey?,
+    toggleDisabledKey?,
+    treeNodeTitleKey?)`: 将原始节点转化为树节点
+
 ```
 
 ## 自定义模板
 
 自定义额外图标相关参数如下
 
-|         参数         |        类型        |       默认值        |           描述           |                                                跳转 Demo                                                |
-| :------------------: | :----------------: | :---------------: | :----------------------: | :-----------------------------------------------------------------------------------------------------: | 
-| iconTemplatePosition | `'before-checkbox' \| 'after-checkbox'` |     'after-checkbox'     | 可选，设置 icon 放置的位置，`before-checkbox`为放置在 checkbox 前，`after-checkbox`为放置在 checkbox 后 | [自定义图标](demo#custom-icon) |
-|     iconTemplate     | `TemplateRef<any>` |        --         |  可选，自定义图标的展示  |                                     [自定义图标](demo#custom-icon)                                      |
-|     nodeTemplate     | `TemplateRef<any>` |        --         | 可选，自定义树节点的显示 |                                     [自定义图标](demo#custom-icon)                                      |
-|   operatorTemplate   | `TemplateRef<any>` |        --         | 可选，自定义操作图标区域 |                                     [自定义图标](demo#custom-icon)                                      |
-|    statusTemplate    | `TemplateRef<any>` |        --         |  可选，自定义状态等信息  |                                     [自定义图标](demo#custom-icon)                                      |
+|         参数         |                  类型                   |      默认值      |                                                  描述                                                   |           跳转 Demo            |
+| :------------------: | :-------------------------------------: | :--------------: | :-----------------------------------------------------------------------------------------------------: | :----------------------------: |
+| iconTemplatePosition | `'before-checkbox' \| 'after-checkbox'` | 'after-checkbox' | 可选，设置 icon 放置的位置，`before-checkbox`为放置在 checkbox 前，`after-checkbox`为放置在 checkbox 后 | [自定义图标](demo#custom-icon) |
+|     iconTemplate     |           `TemplateRef<any>`            |        --        |                                         可选，自定义图标的展示                                          | [自定义图标](demo#custom-icon) |
+|     nodeTemplate     |           `TemplateRef<any>`            |        --        |                                        可选，自定义树节点的显示                                         | [自定义图标](demo#custom-icon) |
+|   operatorTemplate   |           `TemplateRef<any>`            |        --        |                                        可选，自定义操作图标区域                                         | [自定义图标](demo#custom-icon) |
+|    statusTemplate    |           `TemplateRef<any>`            |        --        |                                         可选，自定义状态等信息                                          | [自定义图标](demo#custom-icon) |
 
 ```xml
 <ng-template #iconTemplate let-node="node" let-completeNode="completeNode">
@@ -203,6 +211,7 @@ import { TreeModule } from 'ng-devui/tree';
 <ng-template #statusTemplate let-node="node">
 </ng-template>
 ```
+
 **Note**
 The `node` parameter in `let-node="node"` in iconTemplate and nodeTemplate does not include id and parentId. Use `completeNode` in `let-completeNode="completeNode"`
 

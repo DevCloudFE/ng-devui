@@ -25,6 +25,7 @@ export class TableThComponent implements OnChanges, OnDestroy {
   @Input() customFilterTemplate: TemplateRef<any>;
   @Input() extraFilterTemplate: TemplateRef<any>;
   @Input() searchFn: (term: string) => Observable<Array<any>>;
+  @Input() showFilterIcon = false;
   @Input() filterList: Array<FilterConfig>;
   @Input() filterIconActive: boolean;
   @Input() filterMultiple = true;
@@ -35,6 +36,7 @@ export class TableThComponent implements OnChanges, OnDestroy {
 
   @Input() sortable: boolean;
   @Input() sortDirection: SortDirection;
+  @Input() showSortIcon = false;
   @Output() sortDirectionChange = new EventEmitter<SortDirection>();
   @Output() sortChange = new EventEmitter<SortEventArg>();
 

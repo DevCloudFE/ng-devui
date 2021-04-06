@@ -113,10 +113,8 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy,
   i18nText: I18nInterface['pagination'];
   i18nLocale: I18nInterface['locale'];
   i18nSubscription: Subscription;
-  constructor(private ref: ChangeDetectorRef, private i18n: I18nService) {
+  constructor(private ref: ChangeDetectorRef, private i18n: I18nService) {  }
 
-    this.constructLitePaginatorOptions();
-  }
   ngOnInit(): void {
     this.i18nText = this.i18n.getI18nText().pagination;
     this.i18nLocale = this.i18n.getI18nText().locale;
@@ -125,6 +123,9 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy,
       this.i18nLocale = data.locale;
       this.ref.markForCheck();
     });
+    if (this.lite && this.showPageSelector) {
+      this.constructLitePaginatorOptions();
+    }
   }
 
   @Input() set total(total: any) {
@@ -198,12 +199,13 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy,
 
   onPageIndexChange(pageIndex: number) {
     if (this.pageIndex !== pageIndex) {
-      this.litePaginatorIndex = Object.assign({}, {
-        value: this.pageIndex,
-        label: `${this.pageIndex}/${this.totalPage}`
-      });
+      if (this.lite) {
+        this.litePaginatorIndex = Object.assign({}, {
+          value: this.pageIndex,
+          label: `${this.pageIndex}/${this.totalPage}`
+        });
+      }
       this.pageIndexChange.emit(pageIndex);
-
     }
   }
 
@@ -239,7 +241,9 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy,
       }
       this.jumpPage = this.pageIndex;
       this.updateShowPageRange();
-      this.constructLitePaginatorOptions();
+      if (this.lite && this.showPageSelector) {
+        this.constructLitePaginatorOptions();
+      }
       this.adjustPaginatorWidth();
     }
   }

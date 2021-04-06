@@ -234,16 +234,6 @@ $keyframe-blue: #5e7ce0;
   &.devui-tree-node__open {
     & > .devui-tree-node__content {
       position: relative;
-
-      &::after {
-        content: '';
-        width: 1px;
-        height: 4px; // 总高38px减去图标高14px为24px，取下半边12px，灰线举例图标8px，得出高度4px
-        background-color: $devui-dividing-line;
-        position: absolute;
-        left: 9px; // 距离最左边9px
-        top: calc(100% - 4px); // 参考上面高度计算
-      }
     }
   }
 
@@ -312,4 +302,8 @@ $keyframe-blue: #5e7ce0;
   color: $devui-disabled-text !important;
   cursor: not-allowed !important;
   background-color: transparent !important;
+}
+
+.devui-tree-node__content {
+  transition: color cubic-bezier(0.645, 0.045, 0.355, 1) 0.1s, background-color cubic-bezier(0.645, 0.045, 0.355, 1) 0.1s;
 }

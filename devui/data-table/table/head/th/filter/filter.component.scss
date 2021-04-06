@@ -143,6 +143,10 @@
       fill: $devui-icon-fill-active-hover;
     }
   }
+
+  &-visiable {
+    visibility: visible;
+  }
 }
 
 .filter-icon-active {

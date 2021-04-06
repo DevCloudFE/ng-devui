@@ -12,7 +12,14 @@
         { whitespace: true },
         { minlength: 3 },
         { maxlength: 10 },
-        { pattern: isAlphabetPattern, message: 'The value cannot contain characters except uppercase and lowercase letters.' }
+        {
+          pattern: isAlphabetPattern,
+          message: {
+            'zh-cn': '只能包含数字与大小写字符',
+            'en-us': 'The value cannot contain characters except uppercase and lowercase letters.',
+            default: '只能包含数字与大小写字符'
+          }
+        }
       ]"
     />
   </div>

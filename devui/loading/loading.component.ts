@@ -8,13 +8,13 @@ import {
 } from '@angular/core';
 @Component({
   selector: 'd-loading',
-  template: `<div class="devui-loading-wrapper" [ngClass]="{ 'devui-loading-full': targetName === 'BODY' }">
+  template: `<div class="devui-loading-wrapper" [ngClass]="{ 'devui-loading-full': targetName === 'BODY' }" >
                 <ng-container *ngTemplateOutlet="loadingTemplateRef ? loadingTemplateRef : default;">
                 </ng-container>
                 <ng-template #default>
                     <div class="devui-spinner-wrapper"
                          [ngClass]="{'devui-fix-loading-position': !customPosition,'devui-message-wrapper':!!message}"
-                         [ngStyle]="{ 'z-index': zIndex,'top': top ,'left': left }">
+                         [ngStyle]="{'z-index':zIndex, 'top': top ,'left': left }">
                         <div class="devui-busy-default-sign">
                             <div class="devui-busy-default-spinner">
                                 <div class="devui-loading-bar1"></div>

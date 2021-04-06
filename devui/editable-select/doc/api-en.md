@@ -10,8 +10,8 @@ On the page
 # d-editable-select
 ## d-editable-select parameter
 
-| Parameter | Type | Default | Description | Jump to Demo |
-| :------------------: | :------------: | :---------------------------------: | :--------------------------------------------- | ------------------------------------------------------------------------- |
+| Parameter | Type | Default | Description | Jump to Demo |Global Config| 
+| :----------------: | :------------------: | :------------: | :---------------------------------: | :--------------------------------------------- | ------------------------------------------------------------------------- |
 | appendToBody | `boolean` | false | Optional. Whether to appendToBody in the drop-down list box | [Basic usage](demo#basic-usage) |
 | width | `number` | -- | Optional. Controls the width of the drop-down list box. This parameter is used with appendToBody (`px`) |
 | ngModel | `any` | -- | Optional. Selected objects can be bound in both directions. | [Basic usage](demo#basic-usage) |
@@ -24,6 +24,7 @@ On the page
 | maxHeight | `number` | -- | Optional. Maximum height of the drop-down list box (`px`) | [Basic usage](demo#basic-usage) |
 | searchFn | `(term: string) => Observable<any[]>` | [`defaultSearchFn`](#defaultsearchfn) | Optional. User-defined search function | [Customized data matching method](demo#with-search-function) |
 | enableLazyLoad | `boolean` | false | Optional. Whether lazy loading is allowed | [Enable lazy load](demo#lazy-load) |
+| showAnimation | `boolean` | true | optional. Whether to enable animation. |   | ✔ |
 
 ## d-editable-select event
 

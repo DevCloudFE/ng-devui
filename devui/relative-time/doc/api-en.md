@@ -23,8 +23,8 @@ The limit parameter is accepted. When the time difference exceeds the limit, no 
 ```
 
 ## pipe parameters
-| Parameter | Type | Default | Description |
-| :------------------: | :----------------: | :-----: | :------------------------------------------------------------- |
+| Parameter | Type | Default | Description |Global Config| 
+| :----------------: | :------------------: | :----------------: | :-----: | :------------------------------------------------------------- |
 | value | `'string' \| 'number' \| 'Date'` | - | Value converted by pipe |
 | limit | number | - | The first parameter of pipe indicates the timestamp of the maximum limit. If the timestamp is exceeded, the absolute time is returned. |
 | compareDate | `'string' \| 'number' \| 'Date'` | - | pipe second parameter, which is optional. The value is the time when the comparison is performed. The default value is the current time. |

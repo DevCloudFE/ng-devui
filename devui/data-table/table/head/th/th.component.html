@@ -66,9 +66,10 @@
   <span class="title">
     <ng-content></ng-content>
   </span>
-  <d-table-sort *ngIf="sortable" [sortDirection]="sortDirection" (sortEvent)="onSort($event)"></d-table-sort>
+  <d-table-sort *ngIf="sortable" [sortDirection]="sortDirection" [showSortIcon]="showSortIcon" (sortEvent)="onSort($event)"></d-table-sort>
   <d-table-filter
     *ngIf="filterable"
+    [showFilterIcon]="showFilterIcon"
     [beforeFilter]="beforeFilter"
     [customFilterTemplate]="customFilterTemplate"
     [extraFilterTemplate]="extraFilterTemplate"

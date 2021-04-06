@@ -1,39 +1,39 @@
-<div class="demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 60, bottom: 0 }">
+<div class="devui-demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 180, bottom: 0 }">
   <d-demo-nav [navItems]="navItems"></d-demo-nav>
-  <div class="demo-example">
-    <div class="demo-title">{{ 'components.form.basicDemo.d-form-item-title' | translate }}</div>
-    <div class="demo-text">{{ 'components.form.basicDemo.d-form-item-description' | translate }}</div>
+  <div class="devui-demo-example">
+    <div class="devui-demo-title">{{ 'components.form.basicDemo.d-form-item-title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.form.basicDemo.d-form-item-description' | translate }}</div>
   </div>
-  <div class="demo-example">
-    <div class="demo-title">{{ 'components.form.basicDemo.d-form-label-title' | translate }}</div>
-    <div class="demo-text">{{ 'components.form.basicDemo.d-form-label-description' | translate }}</div>
+  <div class="devui-demo-example">
+    <div class="devui-demo-title">{{ 'components.form.basicDemo.d-form-label-title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.form.basicDemo.d-form-label-description' | translate }}</div>
   </div>
-  <div class="demo-example">
-    <div class="demo-title">{{ 'components.form.basicDemo.d-form-control-title' | translate }}</div>
-    <div class="demo-text">{{ 'components.form.basicDemo.d-form-control-description' | translate }}</div>
+  <div class="devui-demo-example">
+    <div class="devui-demo-title">{{ 'components.form.basicDemo.d-form-control-title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.form.basicDemo.d-form-control-description' | translate }}</div>
   </div>
-  <div class="demo-example">
-    <div class="demo-title">{{ 'components.form.basicDemo.d-form-operation-title' | translate }}</div>
-    <div class="demo-text">{{ 'components.form.basicDemo.d-form-operation-description' | translate }}</div>
+  <div class="devui-demo-example">
+    <div class="devui-demo-title">{{ 'components.form.basicDemo.d-form-operation-title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.form.basicDemo.d-form-operation-description' | translate }}</div>
   </div>
 
-  <div class="demo-example" [dAnchor]="'basic-usage'">
-    <div class="demo-title">{{ 'components.form.basicDemo.title' | translate }}</div>
-    <div class="demo-text">{{ 'components.form.basicDemo.description' | translate }}</div>
+  <div class="devui-demo-example" [dAnchor]="'basic-usage'">
+    <div class="devui-demo-title">{{ 'components.form.basicDemo.title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.form.basicDemo.description' | translate }}</div>
     <d-codebox id="form-base" [sourceData]="BasicSource">
       <d-form-demo-base demo></d-form-demo-base>
     </d-codebox>
   </div>
-  <div class="demo-example" [dAnchor]="'demo-label-horizontal'">
-    <div class="demo-title">{{ 'components.form.labelHorizontalDemo.title' | translate }}</div>
-    <div class="demo-text">{{ 'components.form.labelHorizontalDemo.description' | translate }}</div>
+  <div class="devui-demo-example" [dAnchor]="'demo-label-horizontal'">
+    <div class="devui-demo-title">{{ 'components.form.labelHorizontalDemo.title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.form.labelHorizontalDemo.description' | translate }}</div>
     <d-codebox id="form-label-horizontal" [sourceData]="LabelHorizontalSource">
       <d-form-demo-label-horizontal demo></d-form-demo-label-horizontal>
     </d-codebox>
   </div>
-  <div class="demo-example" [dAnchor]="'demo-modal'">
-    <div class="demo-title">{{ 'components.form.modalDemo.title' | translate }}</div>
-    <div class="demo-text">
+  <div class="devui-demo-example" [dAnchor]="'demo-modal'">
+    <div class="devui-demo-title">{{ 'components.form.modalDemo.title' | translate }}</div>
+    <div class="devui-demo-text">
       {{ 'components.form.modalDemo.description' | translate }}
     </div>
     <d-codebox id="form-modal" [sourceData]="ModalSource">
@@ -41,9 +41,9 @@
     </d-codebox>
   </div>
 
-  <div class="demo-example" [dAnchor]="'demo-multi-col'">
-    <div class="demo-title">{{ 'components.form.multiColDemo.title' | translate }}</div>
-    <div class="demo-text">{{ 'components.form.multiColDemo.description' | translate }}</div>
+  <div class="devui-demo-example" [dAnchor]="'demo-multi-col'">
+    <div class="devui-demo-title">{{ 'components.form.multiColDemo.title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.form.multiColDemo.description' | translate }}</div>
     <d-codebox id="form-multi-col" [sourceData]="MultiColSource">
       <d-form-demo-multi-col demo></d-form-demo-multi-col>
     </d-codebox>
@@ -51,9 +51,9 @@
 
   <hr class="split-line" />
 
-  <div class="demo-example" [dAnchor]="'demo-validate-template'">
-    <div class="demo-title">{{ 'components.form.templateValidateDemo.title' | translate }}</div>
-    <div class="demo-text" [innerHTML]="'components.form.templateValidateDemo.description' | translate"></div>
+  <div class="devui-demo-example" [dAnchor]="'demo-validate-template'">
+    <div class="devui-demo-title">{{ 'components.form.templateValidateDemo.title' | translate }}</div>
+    <div class="devui-demo-text" [innerHTML]="'components.form.templateValidateDemo.description' | translate"></div>
     <div id="demo-validate-template">
       <h5>{{ 'components.form.innerValidatorDemo.title' | translate }}</h5>
       <div [innerHTML]="'components.form.innerValidatorDemo.description' | translate"></div>
@@ -92,25 +92,25 @@
       </d-codebox>
     </div>
   </div>
-  <div class="demo-example" [dAnchor]="'demo-validate-reactive'">
-    <div class="demo-title">{{ 'components.form.validateReactiveDemo.title' | translate }}</div>
-    <div class="demo-text" [innerHTML]="'components.form.validateReactiveDemo.description' | translate"></div>
+  <div class="devui-demo-example" [dAnchor]="'demo-validate-reactive'">
+    <div class="devui-demo-title">{{ 'components.form.validateReactiveDemo.title' | translate }}</div>
+    <div class="devui-demo-text" [innerHTML]="'components.form.validateReactiveDemo.description' | translate"></div>
     <d-codebox id="form-validate-reactive" [sourceData]="ValidateReactiveSource">
       <d-form-demo-validate-reactive demo></d-form-demo-validate-reactive>
     </d-codebox>
   </div>
 
-  <div class="demo-example" [dAnchor]="'demo-custom-status'">
-    <div class="demo-title">{{ 'components.form.customStatusDemo.title' | translate }}</div>
-    <div class="demo-text" [innerHTML]="'components.form.customStatusDemo.description' | translate"></div>
+  <div class="devui-demo-example" [dAnchor]="'demo-custom-status'">
+    <div class="devui-demo-title">{{ 'components.form.customStatusDemo.title' | translate }}</div>
+    <div class="devui-demo-text" [innerHTML]="'components.form.customStatusDemo.description' | translate"></div>
     <d-codebox id="form-custom-status" [sourceData]="ValidateCustomStatus">
       <d-form-custom-status demo></d-form-custom-status>
     </d-codebox>
   </div>
 
-  <div class="demo-example" [dAnchor]="'demo-validate-sync'">
-    <div class="demo-title">{{ 'components.form.validateSyncDemo.title' | translate }}</div>
-    <div class="demo-text" [innerHTML]="'components.form.validateSyncDemo.description' | translate"></div>
+  <div class="devui-demo-example" [dAnchor]="'demo-validate-sync'">
+    <div class="devui-demo-title">{{ 'components.form.validateSyncDemo.title' | translate }}</div>
+    <div class="devui-demo-text" [innerHTML]="'components.form.validateSyncDemo.description' | translate"></div>
     <div id="demo-validate-sync">
       <d-codebox [sourceData]="ValidateSyncSource">
         <d-form-demo-validate-sync demo></d-form-demo-validate-sync>
@@ -118,9 +118,9 @@
     </div>
   </div>
 
-  <div class="demo-example" [dAnchor]="'demo-validate-cross-component'">
-    <div class="demo-title">{{ 'components.form.validateCrossComponentDemo.title' | translate }}</div>
-    <div class="demo-text" [innerHTML]="'components.form.validateCrossComponentDemo.description' | translate"></div>
+  <div class="devui-demo-example" [dAnchor]="'demo-validate-cross-component'">
+    <div class="devui-demo-title">{{ 'components.form.validateCrossComponentDemo.title' | translate }}</div>
+    <div class="devui-demo-text" [innerHTML]="'components.form.validateCrossComponentDemo.description' | translate"></div>
     <div id="demo-validate-cross-component">
       <h5>{{ 'components.form.reactiveCrossComponent.title' | translate }}</h5>
       <d-codebox [sourceData]="ReactiveFormCrossComponent">

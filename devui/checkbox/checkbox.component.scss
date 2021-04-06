@@ -2,10 +2,6 @@
 @import '../style/theme/color';
 @import '../style/theme/corner';
 
-:host {
-  display: inline-block;
-}
-
 .devui-checkbox {
   position: relative;
   display: flex;
@@ -102,6 +98,10 @@
     background: linear-gradient($devui-brand, $devui-brand) no-repeat center/0%;
     margin-right: 8px;
     vertical-align: text-bottom;
+
+    &.devui-checkbox-default-background {
+      background-color: $devui-base-bg;
+    }
 
     &.devui-checkbox-no-label {
       margin-right: 0;

@@ -8,10 +8,10 @@ import {
   OnChanges,
   Output,
   SimpleChanges,
-  TemplateRef,
-  ViewEncapsulation
+  TemplateRef
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { DevConfigService, WithConfig } from 'ng-devui/utils/globalConfig';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -19,13 +19,12 @@ import { Observable } from 'rxjs';
   templateUrl: './checkbox.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./checkbox.component.scss'],
-  encapsulation: ViewEncapsulation.None,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => CheckBoxComponent),
-      multi: true
-    }
+      multi: true,
+    },
   ],
   preserveWhitespaces: false,
 })
@@ -40,7 +39,7 @@ export class CheckBoxComponent implements ControlValueAccessor, OnChanges {
   @Input() title;
   @Input() labelTemplate: TemplateRef<any>;
   @Input() halfchecked = false;
-  @Input() showAnimation = true;
+  @Input() @WithConfig() showAnimation = true;
   @Input() beforeChange: (value) => boolean | Promise<boolean> | Observable<boolean>;
   @Output() change: EventEmitter<boolean> = new EventEmitter<boolean>();
   public animationUnlocked = false;
@@ -49,7 +48,10 @@ export class CheckBoxComponent implements ControlValueAccessor, OnChanges {
   private onChange = (_: any) => null;
   private onTouch = () => null;
 
-  constructor(private changeDetectorRef: ChangeDetectorRef) {
+  constructor(
+    private changeDetectorRef: ChangeDetectorRef,
+    private devConfigService: DevConfigService
+    ) {
     this.id = CheckBoxComponent.ID_SEED++;
   }
 
@@ -70,7 +72,7 @@ export class CheckBoxComponent implements ControlValueAccessor, OnChanges {
   }
 
   toggle($event) {
-    this.canChange().then(val => {
+    this.canChange().then((val) => {
       if (this.disabled || !val) {
         return;
       }

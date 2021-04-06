@@ -273,7 +273,6 @@ export class TreeSelectAppendToComponent {
       id: 'modal-modal',
       width: '300px',
       backdropCloseable: false,
-      showAnimate: false,
       component: TreeSelectModalComponent,
       onClose: () => {
         console.log('on modal closed.');

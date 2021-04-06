@@ -24,6 +24,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { PositionService } from 'ng-devui/position';
 import { addClassToOrigin, removeClassFromOrigin } from 'ng-devui/utils';
+import { DevConfigService, WithConfig } from 'ng-devui/utils/globalConfig';
 import { fromEvent, Observable, of, Subject, Subscription } from 'rxjs';
 import { debounceTime, filter, map, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { AutoCompleteConfig } from './auto-complete-config';
@@ -79,6 +80,7 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
   @Input() dropdown: boolean;
   @Input() maxHeight = 300;
   @Input() disabledKey: string;
+  @Input() @WithConfig() showAnimation = true;
   /**
    *  【可选】启用数据懒加载，默认不启用
    */
@@ -113,7 +115,8 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
     private injector: Injector,
     private positionService: PositionService,
     private changeDetectorRef: ChangeDetectorRef,
-    private i18n: I18nService
+    private i18n: I18nService,
+    private devConfigService: DevConfigService
   ) {
     this.minLength = this.autoCompleteConfig.autoComplete.minLength;
     this.itemTemplate = this.autoCompleteConfig.autoComplete.itemTemplate;
@@ -391,7 +394,8 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
     } else {
       pop.appendToBody = false;
     }
-    ['formatter', 'itemTemplate', 'noResultItemTemplate', 'cssClass', 'dropdown', 'popTipsText', 'position', 'overview'].forEach((key) => {
+    ['formatter', 'itemTemplate', 'noResultItemTemplate', 'cssClass', 'dropdown',
+      'popTipsText', 'position', 'overview', 'showAnimation'].forEach((key) => {
       if (this[key] !== undefined) {
         pop[key] = this[key];
       }

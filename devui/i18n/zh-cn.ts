@@ -11,10 +11,10 @@ export default {
     btnCancel: '取消',
     btnClose: '关闭',
     btnClickMe: '点击我',
-    copied: '复制成功'
+    copied: '复制成功',
   },
   autoComplete: {
-    latestInput: '最近输入'
+    latestInput: '最近输入',
   },
   datePicker: {
     today: '今天',
@@ -38,8 +38,34 @@ export default {
     endDate: '结束日期',
     yearDisplay(year) {
       return `${year}年`;
-    }
+    },
   },
+  datePickerPro: {
+    placeholder: '请选择日期',
+    startPlaceholder: '请选择开始日期',
+    endPlaceholder: '请选择结束日期',
+    daysOfWeek: ['日', '一', '二', '三', '四', '五', '六'],
+    monthsOfYear: [
+      '1月',
+      '2月',
+      '3月',
+      '4月',
+      '5月',
+      '6月',
+      '7月',
+      '8月',
+      '9月',
+      '10月',
+      '11月',
+      '12月'
+    ],
+    getYearMonthStr(year, month) {
+      return `${year}年${month}月`;
+    },
+    hour: '时',
+    min: '分',
+    second: '秒'
+ },
   form: {
     required(val): string {
       return '值不能为空';
@@ -64,7 +90,7 @@ export default {
     },
     whitespace(val): string {
       return '值不能全为空格';
-    }
+    },
   },
   gantt: {
     today: '今天',
@@ -106,7 +132,7 @@ export default {
       { title: '重要不紧急' },
       { title: '不重要不紧急' },
       { title: '不重要紧急' }
-    ]
+    ],
   },
   upload: {
     warning: '提醒',
@@ -167,19 +193,19 @@ export default {
   stepsGuide: {
     previous: '上一步',
     next: '我知道啦，继续',
-    finish: '我知道啦'
+    finish: '我知道啦',
   },
   splitter: {
     collapse: '收起',
-    expand: '展开'
+    expand: '展开',
   },
   relativeTime: {
     yearsAgo(num: number) {
-      return num === 1 ?  '去年' : `${num}年前`;
+      return num === 1 ? '去年' : `${num}年前`;
     },
     monthsAgo(num: number) {
       return num === 1 ? '上个月' : `${num}个月前`;
-    } ,
+    },
     weeksAgo(num: number) {
       return num === 1 ? '上周' : `${num}周前`;
     },
@@ -207,5 +233,24 @@ export default {
   },
   tagsInput: {
     tagsReachMaxLength: '您输入的标签已达到最大长度限制',
-  }
+  },
+  categorySearch: {
+    confirm: '确定',
+    cancel: '取消',
+    selectFilterCondition: '请选择筛选条件',
+    getFindingMessage(msg) {
+      return `在 '${msg}' 中查找`;
+    },
+    getSearchMessage(type) {
+      return `仅搜索关键字 '${type}'`;
+    },
+    saveFilter: '保存过滤器',
+    filterTitle: '过滤器标题',
+    placeholder: '请输入...',
+    searchPlaceholder: '点击此处添加筛选条件',
+    noFilterConditions: '没有筛选条件',
+    clearFilterCondition: '清空',
+    seeMore: '查看全部过滤条件',
+    selected: '已选择'
+  },
 };

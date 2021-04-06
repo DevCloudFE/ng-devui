@@ -28,9 +28,9 @@ export class TooltipComponent implements AfterViewInit, OnDestroy {
   }
   currentPosition: PositionType;
   @Input() triggerElementRef: ElementRef;
-  @Input() showAnimate = false;
+  @Input()  showAnimation  = true;
   scrollElement: Element;
-  animateState: string = this.showAnimate ? 'void' : 'visible';
+  animateState: string ;
 
   @HostBinding('style.display') display = 'block';
   @HostBinding('class') get class() {
@@ -40,7 +40,9 @@ export class TooltipComponent implements AfterViewInit, OnDestroy {
   @HostBinding('@directionFadeInOut') get state() {
     return this.animateState;
   }
-
+  @HostBinding('@.disabled') get disabled() {
+    return !this.showAnimation;
+  }
   _onScroll: Subscription;
 
   constructor(

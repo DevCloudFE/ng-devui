@@ -16,8 +16,8 @@ import { CascaderModule } from 'ng-devui/cascader';
 
 ## d-cascader 参数
 
-|         参数         |                                       类型                                       |               默认               | 说明                                                                                | 跳转 Demo                          |
-| :------------------: | :------------------------------------------------------------------------------: | :------------------------------: | :---------------------------------------------------------------------------------- | ---------------------------------- |
+|         参数         |                                       类型                                       |               默认               | 说明                                                                                | 跳转 Demo                          |全局配置项| 
+| :----------------: | :------------------: | :------------------------------------------------------------------------------: | :------------------------------: | :---------------------------------------------------------------------------------- | ---------------------------------- |
 |       trigger        |                                `'hover'\|'click'`                                |             'hover'              | 可选，指定展开次级菜单的方式                                                        | [基本用法](demo#basic-usage)       |
 |       options        |                       [`CascaderItem`](#cascaderitem)`[]`                        |                []                | 必选，级联器的菜单信息                                                              | [基本用法](demo#basic-usage)       |
 |     placeholder      |                                     `string`                                     |                ''                | 可选，没有选择时的输入框展示信息                                                    | [基本用法](demo#basic-usage)       |
@@ -33,6 +33,7 @@ import { CascaderModule } from 'ng-devui/cascader';
 | dropDownItemTemplate |                                `TemplateRef<any>`                                |              false               | 可选，传入一个渲染 dropItem 的固定模板                                              | [模板类型](demo#template-cascader) |
 |    loadChildrenFn    | `(value: CascaderItem) => Promise<CascaderItem[]> \| Observable<CascaderItem[]>` |               null               | 可选，传入懒加载的加载子节点的函数                                                  | [点击加载](demo#lazyload-cascader) |
 |  dropdownPanelClass  |                                     `string`                                     |                -                 | 下拉面板的 class,用于用户选中某个面板                                               | [基本用法](demo#basic-usage)       |
+|  showAnimation   |             `boolean`              |                                 true                                  |  可选，是否开启动画 |   | ✔ |
 
 ## d-cascader 事件
 

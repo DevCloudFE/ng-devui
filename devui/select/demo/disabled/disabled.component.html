@@ -10,7 +10,13 @@
   <h4>Disable one option<!--禁用某一项--></h4>
   <div class="row">
     <div class="col-md-5">
-      <d-select [options]="options2" [direction]="'auto'" [filterKey]="'value'" [optionDisabledKey]="'disabled'"></d-select>
+      <d-select
+        [options]="options2"
+        [direction]="'auto'"
+        [filterKey]="'value'"
+        [optionDisabledKey]="'disabled'"
+        [(ngModel)]="opt1"
+      ></d-select>
     </div>
   </div>
 </section>

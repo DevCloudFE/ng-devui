@@ -1,14 +1,21 @@
+import { ColorComponent } from './color/color.component';
 import { ExamplePanelComponent } from './example-panel.component';
 import { GetStartedComponent } from './get-started.component';
-import { ColorComponent } from './color/color.component';
+import { GlobalConfigComponent } from './global-config.component';
+import { ComponentsOverviewComponent } from './overview.component';
 import { ThemeGuideComponent } from './theme-guide.component';
 
 export const routesConfig = [
   {
     path: '',
-    redirectTo: 'get-start',
+    redirectTo: 'overview',
     pathMatch: 'full',
     data: {},
+  },
+  {
+    path: 'overview',
+    component: ComponentsOverviewComponent,
+    data: { nodisplay: true },
   },
   {
     path: 'get-start',
@@ -23,6 +30,11 @@ export const routesConfig = [
   {
     path: 'theme-guide',
     component: ThemeGuideComponent,
+    data: { nodisplay: true },
+  },
+  {
+    path: 'global-config',
+    component: GlobalConfigComponent,
     data: { nodisplay: true },
   },
   {
@@ -444,6 +456,17 @@ export const routesConfig = [
     },
   },
   {
+    path: 'nav-sprite',
+    component: ExamplePanelComponent,
+    loadChildren: () => import('../../../devui/nav-sprite/demo/nav-sprite-demo.module').then((m) => m.NavSpriteDemoModule),
+    data: {
+      type: '导航',
+      enType: 'Navigation',
+      name: 'NavSprite',
+      cnName: '导航精灵',
+    },
+  },
+  {
     path: 'tags',
     component: ExamplePanelComponent,
     loadChildren: () => import('../../../devui/tags/demo/tags-demo.module').then((m) => m.TagsDemoModule),
@@ -663,6 +686,18 @@ export const routesConfig = [
       enType: 'Data Display',
       name: 'RelativeTime',
       cnName: '人性化时间转换',
+    },
+  },
+  {
+    path: 'category-search',
+    component: ExamplePanelComponent,
+    loadChildren: () =>
+      import('../../../devui/category-search/demo/category-search-demo.module').then((m) => m.CategorySearchDemoModule),
+    data: {
+      type: '数据录入',
+      enType: 'Data Entry',
+      name: 'CategorySearch',
+      cnName: '分类搜索',
     },
   },
 ];

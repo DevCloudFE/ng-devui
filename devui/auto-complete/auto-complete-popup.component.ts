@@ -34,6 +34,7 @@ export class AutoCompletePopupComponent implements ControlValueAccessor {
   @Input() appendToBody = false;
   @Input() cdkOverlayOffsetY = 0;
   @Input() origin: CdkOverlayOrigin | undefined;
+  @Input() showAnimation = true;
   @ViewChild('selectMenuElement') selectMenuElement: ElementRef;
   @ViewChild('dropdownUl') dropdownUl: ElementRef;
   activeIndex = 0;

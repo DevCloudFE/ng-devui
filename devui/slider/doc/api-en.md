@@ -12,8 +12,8 @@ In the page：
 
 ## d-slider parameter
 
-| Parameter | Type | Default | Description | Jump to Demo |
-| :----------: | :----------------: | :----------------------: | :------------------------------------------------------------------ | --------------------------------------------------- |
+| Parameter | Type | Default | Description | Jump to Demo |Global Config| 
+| :----------------: | :----------: | :----------------: | :----------------------: | :------------------------------------------------------------------ | --------------------------------------------------- |
 | min | `number` | 0 | Optional. Minimum value of the sliding input bar | [Basic Usage](demo#basic-usage) |
 | max | `number` | 100 | Optional. Maximum value of the sliding input bar | [Basic Usage](demo#basic-usage) |
 | step | `number` | 1 | Optional. Step of the sliding input bar. The value must be greater than or equal to 0 and must be divisible by (max-min). | [Basic Usage](demo#basic-usage) |

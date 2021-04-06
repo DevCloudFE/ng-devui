@@ -16,8 +16,8 @@ In the page:
 
 ## dDatepicker parameter
 
-|                           Parameter                            |                                          Type                                          |             Default             |                                               Description                                               | Jump to Demo                                           |
-| :------------------------------------------------------------: | :------------------------------------------------------------------------------------: | :-----------------------------: | :-----------------------------------------------------------------------------------------------------: | ------------------------------------------------------ |
+|                           Parameter                            |                                          Type                                          |             Default             |                                               Description                                               | Jump to Demo                                           |Global Config| 
+| :----------------: | :------------------------------------------------------------: | :------------------------------------------------------------------------------------: | :-----------------------------: | :-----------------------------------------------------------------------------------------------------: | ------------------------------------------------------ |
 |                            cssClass                            |                                        `string`                                        |               --                |                                      Optional, user-defined class                                       | [Basic usage](demo#datepicker-default)                 |
 |                              mode                              |                             `'year' \| 'month' \| 'date'`                              |             'date'              |               Optional, Mode, Formatting based on the value of the `dateFormat` parameter               | [Set Mode](demo#datepicker-set-mode)                   |
 | locale (This parameter is invalid after internationalization.) |                                        `string`                                        |             'zh-cn'             |                                           Optional, Time zone                                           |
@@ -31,6 +31,7 @@ In the page:
 |                            maxDate                             |                                         `Date`                                         | new Date('11/31/2099 23:59:59') |                       Optional, The maximum number of available dates is limited.                       | [Maximum and minimum dates](demo#datepicker-min-max)   |
 |                            autoOpen                            |                                       `boolean`                                        |              false              |                      Optional, indicating whether to expand during initialization.                      | [Maximum and minimum dates](demo#datepicker-min-max)   |
 |                       customViewTemplate                       |                                       `template`                                       |               --                |          Optional, Customize the date or content in the operation area. For details, see demo           | [Customized operation area](demo#custom-view-template) |
+| showAnimation | `boolean` | true | optional. Whether to enable animation. |   | ✔ |
 
 ## dDatepicker Event
 
@@ -130,8 +131,8 @@ interface DateConfig{
 
 ## dDateRangePicker Parameter
 
-|                           Parameter                            |                                          Type                                          |              Default              | Description                                                                          | Jump to Demo                                                                      |
-| :------------------------------------------------------------: | :------------------------------------------------------------------------------------: | :-------------------------------: | :----------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+|                           Parameter                            |                                          Type                                          |              Default              | Description                                                                          | Jump to Demo                                                                      |Global Config| 
+| :----------------: | :------------------------------------------------------------: | :------------------------------------------------------------------------------------: | :-------------------------------: | :----------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
 |                            cssClass                            |                                        `string`                                        |                --                 | Optional, customized class                                                           | [Integration mode of the range date selector](demo#datepicker-range-basic)        |
 | locale (This parameter is invalid after internationalization.) |                                        `string`                                        |              'zh-cn'              | Optional, Time zone                                                                  |
 |                            showTime                            |                                       `boolean`                                        |               false               | Optional, indicating whether to display the hour, minute, and second.                | [Time selected by the date range selector](demo#datepicker-range-time)            |
@@ -145,6 +146,7 @@ interface DateConfig{
 |                         selectedRange                          |                                     `[Date, Date]`                                     |          `[null, null]`           | Optional, Date selected when                                                         | [Integration mode of the range date selector](demo#datepicker-range-basic)        |
 |                       customViewTemplate                       |                                       `template`                                       |                --                 | Optional, Customize the date or content in the operation area. For details, see demo | [Customized operation area](demo#datepicker-clear-button)                         |
 |                      hideOnRangeSelected                       |                                       `boolean`                                        |               false               | Optional, Whether to hide the panel after selecting a date                           | [Integration mode of the range date selector](demo#datepicker-range-basic)        |
+| showAnimation | `boolean` | true | optional. Whether to enable animation. |   | ✔ |
 
 ## dDateRangePicker Event
 
@@ -186,8 +188,8 @@ SelectDateRangeChangeReason is used in the same way as above
 
 ## dTwoDatePicker Parameter
 
-|                           Parameter                            |                                          Type                                          |              Default              | Description                                                    | Jump to Demo                                                 |
-| :------------------------------------------------------------: | :------------------------------------------------------------------------------------: | :-------------------------------: | :------------------------------------------------------------- | ------------------------------------------------------------ |
+|                           Parameter                            |                                          Type                                          |              Default              | Description                                                    | Jump to Demo                                                 |Global Config| 
+| :----------------: | :------------------------------------------------------------: | :------------------------------------------------------------------------------------: | :-------------------------------: | :------------------------------------------------------------- | ------------------------------------------------------------ |
 |                            cssClass                            |                                        `string`                                        |                --                 | Optional, custom class                                         | [Dual date selector](demo#two-date-picker-basic)             |
 | locale (This parameter is invalid after internationalization.) |                                        `string`                                        |              'zh-cn'              | Optional, Time zone                                            |
 |                            disabled                            |                                       `boolean`                                        |               false               | Optional, The selection is disabled.                           | [Dual date selector](demo#two-date-picker-basic)             |
@@ -197,6 +199,7 @@ SelectDateRangeChangeReason is used in the same way as above
 |                            minDate                             |                                         `Date`                                         | `new Date('01/01/1900 00:00:00')` | Optional, The minimum date can be selected.                    | [Dual-date selector formatting](demo#two-date-picker-format) |
 |                            maxDate                             |                                         `Date`                                         | `new Date('11/31/2099 23:59:59')` | Optional, The maximum date that can be selected is restricted. | [Dual-date selector formatting](demo#two-date-picker-format) |
 |                      hideOnRangeSelected                       |                                       `boolean`                                        |               true                | Optional, Whether to hide the panel after a date is selected.  | [Dual-date selector](demo#two-date-picker-basic)             |
+| showAnimation | `boolean` | true | optional. Whether to enable animation. |   | ✔ |
 
 ## dTwoDatePicker Event
 

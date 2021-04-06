@@ -1,15 +1,15 @@
 import {
   Component,
-  NgZone, OnDestroy, OnInit,
-  Renderer2,
-  ViewChild, ViewEncapsulation
+  OnDestroy,
+  OnInit,
+  ViewEncapsulation
 } from '@angular/core';
 import { Routes } from '@angular/router';
-import { SearchComponent } from 'ng-devui';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
-import { cloneDeep, groupBy, map } from 'lodash-es';
-import { fromEvent, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
+import { ComponentDataService } from './component.data.service';
 import { routesConfig } from './component.route';
+import { resolveRoutesConfig } from './resolve-routes-config.service';
 @Component({
   selector: 'cd-app-content', // tslint:disable-line
   templateUrl: './app-content.component.html',
@@ -18,97 +18,37 @@ import { routesConfig } from './component.route';
 export class AppContentComponent implements OnInit, OnDestroy {
   routes: Routes = [];
   componentsData = [];
+  sideMenuList = [
+    {path: 'overview', name: '组件总览', linkType: 'routerLink' },
+    {path: 'get-start', name: '快速开始', linkType: 'routerLink' },
+    {path: 'color', name: '颜色变量', linkType: 'routerLink' },
+    {path: 'theme-guide', name: '主题化使用指南', linkType: 'routerLink' },
+    {path: 'global-config', name: '全局设置', linkType: 'routerLink' }
+  ];
   clickSub: Subscription = new Subscription();
-  @ViewChild('dSearch', { static: true }) dSearch: SearchComponent;
+  // @ViewChild('dSearch', { static: true }) dSearch: SearchComponent;
   componentsDataDisplay = [];
-  constructor(private renderer2: Renderer2, private ngZone: NgZone, private translate: TranslateService) {
-    this.generateSideBar(localStorage.getItem('lang'));
+  constructor(private translate: TranslateService, private comDataService: ComponentDataService) {
+    this.componentsDataDisplay = resolveRoutesConfig(localStorage.getItem('lang') || 'zh-cn', routesConfig);
+    this.comDataService.comData = this.componentsDataDisplay;
+    this.generateSideMenuList(localStorage.getItem('lang') || 'zh-cn');
     this.translate.onLangChange.subscribe((event: TranslationChangeEvent) => {
-      this.generateSideBar(localStorage.getItem('lang'));
+      this.componentsDataDisplay = resolveRoutesConfig(localStorage.getItem('lang'), routesConfig);
+      this.comDataService.comData = this.componentsDataDisplay;
+
+      const values = this.translate.instant('public');
+      this.generateSideMenuList(values);
     });
   }
   ngOnInit(): void {
-    this.ngZone.runOutsideAngular(() => {
-      const menuLink = document.querySelector('#menuLink');
-      const wrapper = menuLink.parentNode;
-      const containerNode = document.querySelector('.app-container');
-      const sideBarNode = wrapper.querySelector('.sidebar');
-      this.clickSub.add(fromEvent(menuLink, 'click').subscribe(e => {
-        if (menuLink.classList.contains('active')) {
-          this.renderer2.removeClass(menuLink, 'active');
-          this.renderer2.removeClass(wrapper, 'active');
-        } else {
-          this.renderer2.addClass(menuLink, 'active');
-          this.renderer2.addClass(wrapper, 'active');
-        }
-      }));
-      this.clickSub.add(fromEvent(containerNode, 'click').subscribe(e => {
-        if (menuLink.classList.contains('active') && !(<any>sideBarNode).contains(e.target) && !(<any>menuLink).contains(e.target)) {
-          this.renderer2.removeClass(menuLink, 'active');
-          this.renderer2.removeClass(wrapper, 'active');
-        }
-      }));
-    });
   }
 
-  onSearch(event) {
-    this.componentsDataDisplay = cloneDeep(this.componentsData).filter(catalog => {
-      catalog.children = catalog.children.filter(item => {
-        return item.title.toLowerCase().includes(event.toLowerCase());
-      });
-      return catalog.children.length;
-    });
-  }
-
-  generateSideBar(lang) {
-    this.componentsData = [];
-    const routesWithData = map(routesConfig, (route) => {
-      if (!route.data) {
-        route.data = {};
-      }
-      return route;
-    });
-    const groupedRoutesObj = groupBy(routesWithData,
-      (route) => {
-        if (lang === 'en-us') {
-          return (route as any).data.enType || 'General';
-        }
-        return (route as any).data.type || '通用';
-      });
-    for (const key in groupedRoutesObj) {
-      if (key) {
-        const group = groupedRoutesObj[key].map((item) => {
-          if (item.data.name) {
-            if (lang === 'en-us') {
-              return {
-                title: item.data.name,
-                link: item.path,
-              };
-            }
-            return {
-              title: item.data.name + ' ' + item.data.cnName,
-              link: item.path,
-            };
-          } else {
-            return {};
-          }
-        }
-        ).filter((item) => Object.keys(item).length !== 0)
-          .sort(function (s1, s2) {
-            const prev = (s1.title).toUpperCase();
-            const next = (s2.title).toUpperCase();
-            if (prev < next) {
-              return -1;
-            }
-            if (prev > next) {
-              return 1;
-            }
-            return 0;
-          });
-        this.componentsData.push({ title: key, children: group, open: true });
-      }
-    }
-    this.onSearch('');
+  generateSideMenuList(values) {
+    this.sideMenuList[0].name = values['overview']?.title;
+    this.sideMenuList[1].name = values['start'];
+    this.sideMenuList[2].name = values['color'];
+    this.sideMenuList[3].name = values['themeDoc'];
+    this.sideMenuList[4].name = values['globalDoc'];
   }
 
   ngOnDestroy(): void {

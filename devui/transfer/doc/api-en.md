@@ -12,8 +12,8 @@ In the page：
 
 ## d-transfer parameter
 
-| Parameter | Type | Default | Description | Jump to Demo |
-| :---------------: | :-----: | :---: | :------------------------- | ------------------------------------------------------------ |
+| Parameter | Type | Default | Description | Jump to Demo |Global Config| 
+| :----------------: | :---------------: | :-----: | :---: | :------------------------- | ------------------------------------------------------------ |
 | sourceOption | `array` | [] | Optional. This parameter indicates the source data of the shuttle box. | [Basic Usage](demo#transfer-demo-base) |
 | targetOption | `array` | [] | Optional. This parameter indicates the target data of the shuttle box. | [Basic Usage](demo#transfer-demo-base) |
 | titles | `array` | [] | Optional. Title of the shuttle box. | [Basic Usage](demo#transfer-demo-base) |
@@ -28,5 +28,19 @@ In the page：
 
 | Event | Type | Description | Jump to Demo |
 | :--------------: | :--------------------: | :--------------------------------: | -------------------------------------------------------- |
-| transferToSource | Return the source and target data in the shuttle box. | When you click the right button, the source and target data are returned. | [Basic Usage](demo#transfer-demo-base) |
-| transferToTarget | Return the source and target data in the shuttle box. | When you click the left button, the source and target data are returned. | [Basic Usage](demo#transfer-demo-base) |
+| transferToSource | `EventEmitter<{sourceOption, targetOption}>` | When you click the transfer to source button, the shuttle box and target data are returned. | [Basic Usage](demo#transfer-demo-base) |
+| transferToTarget | `EventEmitter<{sourceOption, targetOption}>` | When you click the transfer to target button, the shuttle box and target data are returned. | [Basic Usage](demo#transfer-demo-base) |
+|    searching     | `EventEmitter<{direction, keyword}>` | Triggered during search. Return the shuttle box and the search text. If this event is not set, the default function is used. | [Search Shuttle Box](demo#transfer-demo-search) |
+|   transferring   | `EventEmitter<TransferDirection>` | Triggered during transfer. Return the shuttle box. If this event is not set, the default function is used. | [Search Shuttle Box](demo#transfer-demo-search) |
+|  afterTransfer   | `EventEmitter<TransferDirection>` | Triggered after transfer. Return the shuttle box. This event will not trigger when transferEvent is not set. | [Search Shuttle Box](demo#transfer-demo-search) |
+
+### TransferDirection Type
+
+Import：
+```ts
+import { TransferDirection } from 'ng-devui';
+```
+Structure：
+```ts
+enum TransferDirection { SOURCE, TARGET }
+```

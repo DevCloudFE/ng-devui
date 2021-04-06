@@ -6,9 +6,9 @@ import {
   QueryList, ViewChildren
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IExampleData } from 'ng-devui/shared/helpers';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import * as hljs from 'highlight.js/lib/core';
+import { IExampleData } from 'ng-devui/shared/helpers';
 
 ['javascript', 'typescript'].forEach((langName) => {
   // Using require() here because import() support hasn't landed in Webpack yet
@@ -18,44 +18,9 @@ import * as hljs from 'highlight.js/lib/core';
 
 @Component({
   selector: 'app-demo-cell',
-  styles: [`
-:host ::ng-deep section h4,
-:host ::ng-deep section h5 {
-    font-weight: bold;
-    color: $devui-text-weak;
-}
-
-:host ::ng-deep section {
-  margin-bottom: 50px;
-}
-
-.examples-viewer-title {
-  display: flex;
-  padding: 8px 20px;
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.examples {
-  position: relative;
-  padding: 30px;
-  background: #fff;
-}
-
-div.html, div.typescript, div.markdown {
-  padding: 0;
-}
-
-.html pre, .typescript pre, .markdown pre {
-  padding: 26.5px;
-}
-
-:host ::ng-deep pre table {
-    width: 100%;
-    max-width: 100%;
-    margin-bottom: 20px;
-}
-`],
+  styleUrls: [
+    './example-panel.component.scss'
+  ],
   templateUrl: './example-panel.component.html'
 })
 export class ExamplePanelComponent implements OnInit, AfterViewInit {

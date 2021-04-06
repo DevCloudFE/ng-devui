@@ -13,17 +13,25 @@
     "dark": "深色模式",
     "follow": "跟随系统",
     "largeSize": "大字号模式",
-    "default":"默认主题",
-    "extend":"扩展主题",
+    "default": "默认主题",
+    "extend": "扩展主题",
     "infinity": "无限",
     "sweet": "蜜糖",
     "deep": "深邃夜空",
     "provence": "普罗旺斯"
   },
   "public": {
+    "overview": {
+      "title": "组件总览",
+      "description": "DevUI 为 Web 应用提供了丰富的基础 UI 组件，我们还将持续探索企业级应用的最佳 UI 实践，欢迎尝试使用 DevUI。",
+      "placeholder": "请输入你想查找的组件",
+      "newChange": "有更新"
+    },
     "start": "快速开始",
     "themeDoc": "主题化使用指南",
-    "plus": "DevUI Plus组件库",
+    "globalDoc": "全局设置",
+    "color": "颜色变量",
+    "versions": "版本历程",
     "whenToUse": "何时使用",
     "goTo": "快速前往"
   },
@@ -93,7 +101,7 @@
         "Home page (external link and open this window)": "首页(外链且本窗口打开)"
       },
       "multiLevelDemo": {
-        "title": "复合层级和自动展",
+        "title": "复合层级和自动展开",
         "description": "支持多层级和不限制嵌套层级。可以独立使用autoOpenActiveMenu使得激活的菜单的父层级自动展开。",
         "Automatically expand activated menus": "自动展开激活的菜单",
         "Content 1 (menu only)": "内容一（仅菜单）",
@@ -288,7 +296,10 @@
         "Switching Modes": "切换mode",
         "The input cannot be empty.": "你的输入不能为空",
         "Initialization Title": "初始化标题，不使用双向绑定进行传值",
-        "Bidirectional binding": "双向绑定"
+        "Bidirectional binding": "双向绑定",
+        "preview": "预览",
+        "edit": "编辑",
+        "changeMode": "切换模式"
       },
       "toolbarDemo": {
         "title": "自定义工具栏",
@@ -356,6 +367,17 @@
         "Level-5 Title": "五级标题",
         "Level 6 Title": "六级标题"
       },
+      "mermaidDemo": {
+        "title": "mermaid 渲染",
+        "description": "支持mermaid流程图、甘特图、时序图等一些可视图的渲染。",
+        "flowChart": "流程图",
+        "ganttChart": "甘特图",
+        "sequenceChart": "时序图"
+      },
+      "tocDemo": {
+        "title": "TOC 渲染",
+        "description": "支持生成TOC目录"
+      },
       "enormousTextDemo": {
         "title": "大数据量场景处理",
         "description": "手动获取内容，而非通过事件实时回传，当前可保证编辑无卡顿，渲染会进行延迟渲染（实验功能）。",
@@ -376,6 +398,8 @@
         "img-upload": "配置图片文件上传",
         "quick-suggestion": "快速提示(@用户等)",
         "single-render-md": "单独渲染md文本",
+        "mermaid-render": "Mermaid渲染",
+        "toc-render": "TOC渲染",
         "big-data-process": "大数据量场景处理"
       }
     },
@@ -967,6 +991,13 @@
         "muti-drag-row": "批量行拖拽"
       }
     },
+    "datepickerPro": {
+      "name": "DatePickerPro 日期选择器",
+      "type": "数据录入",
+      "path": "datepickerPro",
+      "description": "输入或选择日期的组件。",
+      "tmw": "当用户需要输入一个日期时；需要点击标准输入框，弹出日期面板进行选择时。"
+    },
     "datepicker": {
       "name": "DatePicker 日期选择器",
       "type": "数据录入",
@@ -1278,8 +1309,8 @@
         "description": "模板中绑定<code>ngModel、ngGroupModel、ngForm</code>的元素，可使用<code>dValidateRules</code>配置校验规则。"
       },
       "innerValidatorDemo": {
-        "title": "验证单个元素，使用内置校验器",
-        "description": "<p> 当前<code>DevUI</code>支持的内置校验器有：<code>required、minlength、maxlength、min、max、requiredTrue、email、pattern、whitespace</code>。</p><p>若需限制用户输入不能全为空格，可使用<code>whitespace</code>内置校验器</p><p>若需限制用户输入长度，将最大限制设置为实际校验值<code>+1</code>是一个好的办法。</p><p>除<code>pattern</code>外，其他内置校验器我们也提供了内置的错误提示信息，在你未自定义提示消息时，我们将使用默认的提示信息。</p>"
+        "title": "验证单个元素，使用内置校验器，配置error message",
+        "description": "<p> 当前<code>DevUI</code>支持的内置校验器有：<code>required、minlength、maxlength、min、max、requiredTrue、email、pattern、whitespace</code>。</p><p>若需限制用户输入不能全为空格，可使用<code>whitespace</code>内置校验器</p><p>若需限制用户输入长度，将最大限制设置为实际校验值<code>+1</code>是一个好的办法。</p><p>除<code>pattern</code>外，其他内置校验器我们也提供了内置的错误提示信息，在你未自定义提示消息时，我们将使用默认的提示信息。</p><p><code>message</code>配置支持<code>string</code>与<code>object</code>两种形式（支持国际化词条配置，如<code>'zh-cn'</code>，默认将取<code>'default'</code>）。</p>"
       },
       "customerValidatorDemo": {
         "title": "验证单个元素，自定义校验器",
@@ -1548,7 +1579,7 @@
       },
       "batchDragDemo": {
         "title": "批量拖拽",
-        "description": "使用batchDrag指令标记可以批量拖拽。",
+        "description": "使用batchDrag指令标记可以批量拖拽，请用ctrl按键和鼠标选中多个并进行拖拽",
         "Batch dragging is supported. Press Ctrl to select multiple items and drag them.": "支持批量拖拽，请用ctrl按键和鼠标选中多个并进行拖拽",
         "Show Source Placeholders": "显示源占位符",
         "crossover exchange": "越边交换",
@@ -2465,6 +2496,20 @@
         "scroll-target": "更换滚动容器"
       }
     },
+    "nav-sprite": {
+      "name": "NavSprite 导航精灵",
+      "type": "导航",
+      "path": "nav-sprite",
+      "description": "导航精灵组件",
+      "tmw": "针对某块阅读区域生成阅读目录，提高阅读效率。",
+      "basicDemo": {
+        "title": "基本用法",
+        "description": ""
+      },
+      "anchorLinkValues": {
+        "basic-usage": "基本用法"
+      }
+    },
     "tabs": {
       "name": "Tabs 选项卡切换",
       "type": "导航",
@@ -2601,6 +2646,9 @@
         "title": "基本用法",
         "description": "common时不展示图标。"
       },
+      "styleDemo": {
+        "title": "自定义样式"
+      },
       "lifeDemo": {
         "title": "超时时间",
         "description": "当设置超时时间、没有标题时，则不展示标题和关闭按钮。"
@@ -2609,9 +2657,15 @@
         "title": "每个消息使用单独的超时时间",
         "description": "当设置超时时间模式为single时，每个消息使用自身的life作为超时时间，如果未设置则按severity判断，severity也未设置时默认超时时间为5000毫秒。"
       },
+      "serviceDemo": {
+        "title": "服务方式调用",
+        "description": "使用服务的方式创建toast全局通知。"
+      },
       "anchorLinkValues": {
         "basic-usage": "基本用法",
         "life": "超时时间",
+        "style": "自定义样式",
+        "toast-service": "服务方式调用",
         "single": "每个消息使用单独的超时时间"
       }
     },
@@ -2913,10 +2967,9 @@
         "title": "正则限制",
         "description": "允许传入正则或正则字符串限制输入，输入时会优先匹配传入的正则，不输入则不限制。"
       },
-      "decimalLimitAndAutoFocusDemo": {
+      "decimalLimitDemo": {
         "title": "限制小数和自动获取焦点",
-        "Limit Decimal": "限制小数",
-        "Automatically get focus": "自动获取焦点"
+        "Limit Decimal": "限制小数"
       },
       "anchorLinkValues": {
         "number-basic": "基本用法",
@@ -2924,7 +2977,7 @@
         "number-empty": "允许空值",
         "number-placeholder-maxlength": "设置placeholder和最大长度",
         "number-reg": "正则限制",
-        "decimal-limit-auto-focus": "限制小数和自动获取焦点"
+        "decimal-limit": "限制小数"
       }
     },
     "tree-select": {
@@ -3155,11 +3208,15 @@
         "title": "基本用法",
         "placeholder": "请输入内容"
       },
+      "sizeDemo": {
+        "title": "尺寸"
+      },
       "passwordVisibleDemo": {
         "title": "密码框"
       },
       "anchorLinkValues": {
         "basic-usage": "基本用法",
+        "size": "尺寸",
         "password-input": "密码框"
       }
     },
@@ -3194,12 +3251,17 @@
         "Current Step": "当前步骤",
         "Operation Output": "操作输出"
       },
+      "positionDemo": {
+        "title": "弹出位置",
+        "description": "总共支持 8 个弹出位置。"
+      },
       "customDemo": {
         "title": "自定义",
         "description": "自定义操作指引信息弹出的位置和元素。"
       },
       "anchorLinkValues": {
         "basic-usage": "基本用法",
+        "position": "弹出位置",
         "custom": "自定义"
       }
     },
@@ -3270,6 +3332,62 @@
       "customDemo": {
         "title": "自定义比较时间示例",
         "description": "不与当前时间作比较，自定义比较时间,如下与'2015-5-20 12:00:00'时间作比较。"
+      }
+    },
+    "category-search": {
+      "name": "CategorySearch 分类搜索",
+      "type": "数据录入",
+      "path": "category-search",
+      "description": "按类型搜索组件",
+      "tmw": "需要结合单选，多选，日期选择，树形选择等多种类型辅助用户简单而精确的筛选所需数据。",
+      "basicDemo": {
+        "title": "基本用法",
+        "description": ""
+      },
+      "autoScrollDemo": {
+        "title": "大数据量优化展示",
+        "description": ""
+      },
+      "anchorLinkValues": {
+        "basicDemo": "基本用法",
+        "autoScrollDemo": "大数据量优化展示"
+      }
+    },
+    "datepicker-pro": {
+      "name": "DatepickerPro 日期选择",
+      "type": "演进中",
+      "path": "datepicker-pro",
+      "description": "输入或选择日期的组件。",
+      "tmw": "当用户需要输入一个日期时；需要点击标准输入框，弹出日期面板进行选择时。",
+      "basicDemo": {
+        "title": "基本用法"
+      },
+      "showTimeDemo": {
+        "title": "显示时间"
+      },
+      "templateDemo": {
+        "title": "自定义扩展区域"
+      },
+      "monthYearDemo": {
+        "title": "年月选择器"
+      },
+      "rangePickerDemo": {
+        "title": "范围选择器"
+      },
+      "hostTemplateDemo": {
+        "title": "自定义宿主"
+      },
+      "rangeTemplateDemo": {
+        "title": "范围模式的模板使用"
+      },
+      "anchorLinkValues": {
+        "basic-usage": "基本用法",
+        "show-time": "显示时间",
+        "template": "传入模板",
+        "monthYear": "年月选择器",
+        "rangePicker": "范围选择器",
+        "host-template": "自定义宿主",
+        "rangeTemplate": "范围模式的模板使用"
       }
     }
   }

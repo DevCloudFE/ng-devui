@@ -1,0 +1,9 @@
+<div class="header-version-switch">
+  <d-select
+    size="sm"
+    [options]="versionOptions"
+    [filterKey]="'name'"
+    [(ngModel)]="currentOption"
+    (valueChange)="jumpTo($event)">
+  </d-select>
+</div>

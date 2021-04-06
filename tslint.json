@@ -4,8 +4,17 @@
   ],
   "rules": {
     "arrow-return-shorthand": true,
+    "no-consecutive-blank-lines":true,
+    "space-within-parens":true,
     "callable-types": true,
     "class-name": true,
+    "ordered-imports": [
+      true,
+      {
+        "import-sources-order": "case-insensitive",
+        "named-imports-order": "case-insensitive"
+      }
+    ],
     "comment-format": [
       true,
       "check-space"
@@ -23,7 +32,8 @@
     "import-spacing": true,
     "indent": [
       true,
-      "spaces"
+      "spaces",
+      2
     ],
     "interface-over-type-literal": true,
     "label-position": true,
@@ -75,6 +85,11 @@
     "no-unused-expression": true,
     "no-var-keyword": true,
     "object-literal-sort-keys": false,
+    "align": [
+      true,
+      "parameters",
+      "statements"
+    ],
     "one-line": [
       true,
       "check-open-brace",
@@ -140,6 +155,6 @@
     "use-lifecycle-interface": true,
     "use-pipe-transform-interface": true,
     "component-class-suffix": true,
-    "directive-class-suffix": false
+    "directive-class-suffix": true
   }
 }

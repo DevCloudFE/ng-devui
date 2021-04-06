@@ -47,7 +47,7 @@ class TestDialogComponent {
     width: undefined,
     backdropCloseable: undefined,
     maxHeight: undefined,
-    showAnimate: undefined,
+    showAnimation: undefined,
     data: undefined,
     componentFactoryResolver: undefined,
     injector: undefined,

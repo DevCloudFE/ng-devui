@@ -49,8 +49,8 @@ Define an anchor point
 
 ## dAnchor Parameters
 
-|  Parameter   |   Type   | Default |                                              Description                                              | Jump to Demo                                       |
-| :----------: | :------: | :-----: | :---------------------------------------------------------------------------------------------------: | -------------------------------------------------- |
+|  Parameter   |   Type   | Default |                                              Description                                              | Jump to Demo                                       |Global Config| 
+| :----------------: | :----------: | :------: | :-----: | :---------------------------------------------------------------------------------------------------: | -------------------------------------------------- |
 |   dAnchor    | `string` |   --    |                                    Required. Sets an anchor name.                                     | [Basic Usage](demo#basic-usage) |
 | anchorActive | `string` |   --    | Optional. When the anchor is activated, the corresponding CSS class name takes effect for the module. | [Basic Usage](demo#basic-usage) |
 

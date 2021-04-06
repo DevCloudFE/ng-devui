@@ -13,6 +13,7 @@ export class DisabledComponent implements OnInit {
   options3 = ['Option 1', 'Option 2', 'Option 3', 'Option 4', 'Option 5', 'Option 6(disabled, immutable, selected)', 'Option 7', 'Option 8',
     'Option 9', 'Option 10', 'Option 11', 'Option 12', 'Option 13(immutable, not-disabled)', 'Option 14(disabled, immutable)']
     .map(item => ({value: item, disabled: false, immutable: false}));
+  opt1 = this.options2[5];
   opt2 = this.options2.filter(item => item.value.indexOf('Option 6') === 0);
   opt3 = this.options3.filter(item => item.value.indexOf('Option 6') === 0);
   ngOnInit() {

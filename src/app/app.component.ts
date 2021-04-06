@@ -1,8 +1,8 @@
 import { Component, Inject, NgZone, OnDestroy, OnInit, Renderer2, ViewEncapsulation } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { DEVUI_LANG, EN_US, I18nService, ZH_CN } from 'ng-devui/i18n';
 import { TranslateService } from '@ngx-translate/core';
-import { fromEvent, Subscription } from 'rxjs';
+import { DEVUI_LANG, EN_US, I18nService, ZH_CN } from 'ng-devui/i18n';
+import { fromEvent, Observable, Subscription } from 'rxjs';
 import { VERSION } from '../../devui/version';
 
 @Component({
@@ -17,6 +17,24 @@ export class AppComponent implements OnInit, OnDestroy {
   currentLang: string;
   versionOptions = [];
   currentOption;
+  innerMenuList = [
+    {
+      name: '设计规范',
+      enName: 'DevUI Design',
+      href: '/design-cn/start'
+    },
+    {
+      name: '组件',
+      enName: 'Components',
+      href: '/components/get-start',
+      target: '_self'
+    },
+    {
+      name: '版本历程',
+      enName: 'Changelog',
+      href: 'https://github.com/DevCloudFE/ng-devui/releases'
+    },
+  ];
   constructor(private renderer2: Renderer2, private ngZone: NgZone, private router: Router, private translate: TranslateService,
               private i18n: I18nService, @Inject(DEVUI_LANG) private appLang) {
     translate.addLangs([ZH_CN, EN_US]);
@@ -37,6 +55,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
   ngOnInit(): void {
     this.currentLang = localStorage.getItem('lang') || this.appLang;
+    this.innerMenuList[1].href = `/components/${this.currentLang}/get-start`;
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         const pathArray = this.router.url.split('/');
@@ -63,33 +82,15 @@ export class AppComponent implements OnInit, OnDestroy {
       { name: '8.2.0', link: '/8.2.0/', target: '_self' }
     ];
     this.currentOption = this.versionOptions[0];
-    this.ngZone.runOutsideAngular(() => {
-      const headerMenu = document.querySelector('#headerMenu');
-      const headerNode = headerMenu.parentNode;
-      const containerNode = document.querySelector('.app-container');
-      this.clickSub.add(fromEvent(headerMenu, 'click').subscribe(e => {
-        if (headerMenu.classList.contains('active')) {
-          this.renderer2.removeClass(headerMenu, 'active');
-          this.renderer2.removeClass(headerNode, 'active');
-        } else {
-          this.renderer2.addClass(headerMenu, 'active');
-          this.renderer2.addClass(headerNode, 'active');
-        }
-      }));
-      this.clickSub.add(fromEvent(containerNode, 'click').subscribe(e => {
-        if (headerMenu.classList.contains('active') && !(<any>headerNode).contains(e.target)) {
-          this.renderer2.removeClass(headerMenu, 'active');
-          this.renderer2.removeClass(headerNode, 'active');
-        }
-      }));
-    });
   }
-  toggleLanguage() {
-    this.currentLang === ZH_CN ? this.currentLang = EN_US : this.currentLang = ZH_CN;
+  toggleLanguage(lang) {
+    this.currentLang = lang;
     const url = this.router.url;
     const pathArray = url.split('/');
     pathArray[2] = this.currentLang;
     this.router.navigateByUrl(pathArray.join('/'));
+
+    this.innerMenuList[2].href = `/components/${this.currentLang}/get-start`;
   }
   ngOnDestroy(): void {
     if (this.clickSub) {

@@ -1,3 +1,5 @@
+/** @deprecated  use collapseForDomDestroy to replace */
+
 import {
   animate,
   AnimationTriggerMetadata,

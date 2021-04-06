@@ -29,7 +29,8 @@ export class DrawerService {
     beforeHidden,
     destroyOnHide = true,
     position = 'right',
-    bodyScrollable = true
+    bodyScrollable = true,
+    showAnimation = true
   }: IDrawerOptions): IDrawerOpenResult {
     const componentFactoryResolver_ = componentFactoryResolver || this.componentFactoryResolver;
     const drawerRef = this.overlayContainerRef.createComponent(
@@ -48,7 +49,8 @@ export class DrawerService {
       escKeyCloseable,
       position,
       backdropCloseable: isUndefined(backdropCloseable) ? true : backdropCloseable,
-      bodyScrollable
+      bodyScrollable,
+      showAnimation
     });
 
     const drawerContentRef = drawerRef.instance.drawerContentHost.viewContainerRef.createComponent(

@@ -17,8 +17,8 @@ In the page
 
 ## dLoading Parameters
 
-|     Parameter      |             Type              |         Default         | Description                                                                                                                                            | Jump to Demo                           |
-| :----------------: | :---------------------------: | :---------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
+|     Parameter      |             Type              |         Default         | Description                                                                                                                                            | Jump to Demo                           |Global Config| 
+| :----------------: | :----------------: | :---------------------------: | :---------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
 |      loading       | [`LoadingType`](#loadingtype) |           --            | Optional. Controlling the loading status                                                                                                               | [Basic Usage](demo#basic-usage)        |
 |      message       |           `string`            |           --            | Optional. Prompt message during loading                                                                                                                | [Multipromise](demo#multi-promise)     |
 | loadingTemplateRef |      `TemplateRef<any>`       |           --            | Optional. Custom loading template                                                                                                                      | [Custom Style](demo#custom-style)      |

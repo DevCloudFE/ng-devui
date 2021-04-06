@@ -1,0 +1,58 @@
+@import '../../../devui/style/theme/color';
+
+:host ::ng-deep section h4,
+:host ::ng-deep section h5 {
+  font-weight: bold;
+  color: $devui-text-weak;
+}
+
+:host ::ng-deep section {
+  margin-bottom: 50px;
+}
+
+.examples-viewer-title {
+  display: flex;
+  padding: 8px 20px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.examples {
+  position: relative;
+  padding: 30px;
+  background: $devui-base-bg;
+}
+
+div.html,
+div.typescript,
+div.markdown {
+  padding: 0;
+}
+
+.html pre,
+.typescript pre,
+.markdown pre {
+  padding: 26.5px;
+}
+
+:host ::ng-deep pre table {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 20px;
+}
+
+:host h1 {
+  position: sticky;
+  background: $devui-base-bg;
+  top: 50px;
+  z-index: 9;
+  margin-top: 0;
+  padding: 30px 0 20px 0;
+}
+
+.d-website-demo-tabs {
+  position: sticky;
+  top: 125px;
+  background: $devui-base-bg;
+  z-index: 9;
+}

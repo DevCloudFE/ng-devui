@@ -1,11 +1,11 @@
-<section class="code-box" [ngClass]="{ expand: expanded }">
-  <section class="code-box-demo">
+<section class="devui-code-box" [ngClass]="{ expand: expanded }">
+  <section class="devui-code-box-demo">
     <div>
       <ng-content select="[demo]"></ng-content>
     </div>
   </section>
 
-  <section class="code-box-meta markdown">
+  <section class="devui-code-box-meta markdown">
     <span
       dTooltip
       [content]="expanded ? ('codebox.hideCode' | translate) : ('codebox.showCode' | translate)"
@@ -29,8 +29,8 @@
       </svg>
     </span>
   </section>
-  <section class="highlight-wrapper" [ngClass]="{ 'highlight-wrapper-expand': expanded }">
-    <div style="padding: 0 20px">
+  <section class="devui-highlight-wrapper" [ngClass]="{ 'devui-highlight-wrapper-expand': expanded }">
+    <div style="padding: 30px 0">
       <d-tabs [(activeTab)]="codeTabID">
         <d-tab *ngFor="let source of sourceData" [title]="source.title" [id]="source.title">
           <ng-template dTabContent>

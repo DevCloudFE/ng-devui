@@ -12,7 +12,7 @@ $devui-tab-options-bg: $devui-list-item-hover-bg;
 
 .devui-nav-tabs,
 .devui-nav-pills {
-  font-size: $devui-font-size;
+  font-size: $devui-font-size-card-title;
   background: transparent;
   font-weight: bold;
 
@@ -241,7 +241,7 @@ $devui-tab-options-bg: $devui-list-item-hover-bg;
 }
 
 .devui-nav-wrapped {
-  font-size: $devui-font-size;
+  font-size: $devui-font-size-card-title;
   background: transparent;
   border-bottom: 1px solid $devui-dividing-line;
   background-color: $devui-base-bg;

@@ -104,6 +104,7 @@ describe('search', () => {
       fixture.detectChanges();
 
       searchInputEl.dispatchEvent(enterEvent);
+      tick(300);
       fixture.detectChanges();
       expect(testComponent.testSearchText).toBe(testText);
     }));

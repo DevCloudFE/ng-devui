@@ -6,13 +6,13 @@ import {
   OnChanges,
   Output,
   SimpleChanges,
-  TemplateRef,
-  ViewEncapsulation,
+  TemplateRef
 } from '@angular/core';
 import {
   ControlValueAccessor,
   NG_VALUE_ACCESSOR
 } from '@angular/forms';
+import { DevConfigService, WithConfig } from 'ng-devui/utils/globalConfig';
 import { isArray } from 'lodash-es';
 import { Observable } from 'rxjs';
 
@@ -39,14 +39,17 @@ export class CheckBoxGroupComponent implements OnChanges, ControlValueAccessor {
   @Input() options = [];
   @Input() filterKey: string;
   @Input() labelTemplate: TemplateRef<any>;
-  @Input() showAnimation = true;
+  @Input() @WithConfig() showAnimation = true;
   @Input() beforeChange: (value) => boolean | Promise<boolean> | Observable<boolean>;
   @Output() change: EventEmitter<boolean> = new EventEmitter<boolean>();
   values: any[] = [];
   options_display = [];
   private onChange = (_: any) => null;
   private onTouch = () => null;
-
+  constructor(
+    private devConfigService: DevConfigService
+    ) {
+  }
   ngOnChanges(changes: SimpleChanges) {
     if (changes['options']) {
       this.checkType();

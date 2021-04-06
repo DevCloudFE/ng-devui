@@ -15,7 +15,7 @@ function pathAlias(tsconfigPath) {
     }));
 }
 
-module.exports = function getTsconfigPathAlias(tsconfigPath = 'tsconfig.json') {
+module.exports = function getTsconfigPathAlias(tsconfigPath = 'tsconfig.base.json') {
   try {
     const rules = pathAlias(tsconfigPath);
     // 匹配的情况下给出文件

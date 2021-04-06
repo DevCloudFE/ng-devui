@@ -30,8 +30,13 @@
         >
         </span>
         <div *ngIf="fileUploader.status === UploadStatus.uploading" class="icon devui-upload-progress">
-          <d-progress [isCircle]="true" [percentage]="fileUploader.percentage" [barbgcolor]="'#50D4AB'" [strokeWidth]="8">
-            <ng-template let-percentage="percentage"></ng-template>
+          <d-progress
+            [isCircle]="true"
+            [percentage]="fileUploader.percentage"
+            [barbgcolor]="'#50D4AB'"
+            [strokeWidth]="8"
+            [showContent]="false"
+          >
           </d-progress>
         </div>
         <span *ngIf="fileUploader.status === UploadStatus.failed" class="icon icon-running" (click)="upload($event, fileUploader)"> </span>

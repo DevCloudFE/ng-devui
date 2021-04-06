@@ -20,6 +20,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { ICheckboxInput, ITreeItem, OperableTreeComponent } from 'ng-devui/tree';
 import { addClassToOrigin, removeClassFromOrigin } from 'ng-devui/utils';
+import { DevConfigService, WithConfig } from 'ng-devui/utils/globalConfig';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import DefaultIcons from './tree-default-icons';
@@ -93,10 +94,11 @@ export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterV
   constructor(
     protected renderer: Renderer2,
     protected changeDetectorRef: ChangeDetectorRef,
-    private i18n: I18nService
+    private i18n: I18nService,
+    private devConfigService: DevConfigService,
   ) {
   }
-
+  @Input() @WithConfig() showAnimation = true;
   @Input() placeholder = '';
   @Input() disabled = false;
   @Input() expandTree = false;

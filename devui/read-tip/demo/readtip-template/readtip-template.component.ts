@@ -10,7 +10,7 @@ export class ReadtipTemplateComponent implements OnInit {
     trigger: 'click',
     showAnimate: false,
     position: 'top-left',
-    rules: { selector: 'h4' },
+    rules: { selector: '.readtip-target' },
   };
 
   ngOnInit() {}

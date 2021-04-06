@@ -4,11 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
-import { DevUIModule } from 'ng-devui';
-import { DEVUI_LANG, ZH_CN } from 'ng-devui/i18n';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { DevUIModule } from 'ng-devui';
+import { DEVUI_LANG, ZH_CN } from 'ng-devui/i18n';
 import { environment } from 'src/environments/environment';
+import { DevuiCommonsModule } from '../../devui-commons/src';
 import { AppComponent } from './app.component';
 import { ThemePickerModule } from './theme-picker/theme-picker.module';
 
@@ -27,6 +28,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     FormsModule,
     ThemePickerModule,
     HttpClientModule,
+    DevuiCommonsModule,
     RouterModule.forRoot([
     {
         path: '',

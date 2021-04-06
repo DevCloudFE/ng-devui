@@ -39,8 +39,8 @@
             [percentage]="dSingleUploadView.fileUploaders[0].percentage"
             [barbgcolor]="'#50D4AB'"
             [strokeWidth]="8"
+            [showContent]="false"
           >
-            <ng-template let-percentage="percentage"></ng-template>
           </d-progress>
         </div>
         <span *ngIf="dSingleUploadView.fileUploaders[0]?.status === UploadStatus.failed" class="icon icon-running" (click)="upload()">

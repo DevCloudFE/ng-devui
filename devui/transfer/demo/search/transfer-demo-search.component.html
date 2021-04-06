@@ -1,6 +1,24 @@
 <div style="width: 700px">
-  <d-transfer [disabled]="disabled" [sourceOption]="sourceOption" [isSearch]="true" [titles]="{ source: 'Source', target: 'Target' }">
+  <d-transfer
+    [disabled]="disabled"
+    [sourceOption]="sourceOption1"
+    [isSearch]="true"
+    [titles]="{ source: 'Source', target: 'Target' }"
+    (afterTransfer)="afterTransfer($event)"
+  >
   </d-transfer>
 </div>
 <br />
 Disabled: <d-toggle (change)="onChange($event)"></d-toggle>
+
+<div style="width: 700px; margin-top: 20px">
+  <d-transfer
+    [sourceOption]="sourceOption2"
+    [targetOption]="targetOption2"
+    [isSearch]="true"
+    [titles]="{ source: 'Source', target: 'Target' }"
+    (searching)="search($event)"
+    (transferring)="transfer($event)"
+  >
+  </d-transfer>
+</div>

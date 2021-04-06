@@ -526,7 +526,7 @@
     </div>
     <div
       *ngIf="treeNode.data.isOpen"
-      [@treeCollapseState]="treeNode.data.isOpen ? '' : 'void'"
+      [@collapseForDomDestroy]="treeNode.data.isOpen ? 'expanded' : 'void'"
       [@.disabled]="afterInitAnimate || !showAnimation"
       class="devui-tree-node__children"
     >

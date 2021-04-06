@@ -1,0 +1,16 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
+.basic-demo-wrap {
+  position: inherit;
+
+  .page {
+    height: 400px;
+    overflow-y: auto;
+  }
+
+  d-nav-sprite {
+    position: absolute;
+    top: 20px;
+    right: 100px;
+  }
+}

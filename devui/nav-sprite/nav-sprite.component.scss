@@ -1,0 +1,103 @@
+@import '../style/theme/color';
+@import '../style/theme/variables';
+@import '../style/theme/shadow';
+
+.devui-is-sprite {
+  background-color: $devui-connected-overlay-bg;
+  box-shadow: $devui-shadow-length-connected-overlay $devui-shadow;
+  cursor: move;
+  padding: 0 16px 16px;
+  max-width: 300px;
+
+  &.is-min {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    padding: 0;
+
+    &:hover {
+      color: $devui-light-text;
+      background-color: $devui-brand;
+    }
+
+    i {
+      cursor: pointer;
+    }
+  }
+
+  .devui-nav-sprite-menus {
+    width: 100%;
+    height: 100%;
+    max-height: 240px;
+  }
+}
+
+.devui-nav-sprite-content {
+  padding: 0 12px 16px 12px;
+
+  .devui-nav-sprite-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    color: $devui-text;
+    line-height: 32px;
+    font-weight: bold;
+    font-size: $devui-font-size-card-title;
+    border-bottom: 1px solid $devui-dividing-line;
+
+    .devui-nav-spiri-close {
+      cursor: pointer;
+    }
+  }
+}
+
+.devui-nav-sprite-menus {
+  margin-top: 10px;
+  overflow-y: hidden;
+  height: calc(100% - 80px);
+
+  &:hover {
+    overflow-y: auto;
+  }
+
+  & > li {
+    list-style: none;
+    cursor: pointer;
+    height: 30px;
+    line-height: 30px;
+    font-size: $devui-font-size;
+    color: $devui-text;
+    position: relative;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+
+    a {
+      display: block;
+      width: 110px;
+      overflow: hidden;
+      color: $devui-text;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      -webkit-transition: all 0.3s ease;
+      transition: all 0.3s ease;
+    }
+
+    a.current {
+      color: $devui-link;
+    }
+
+    &.active {
+      color: $devui-link;
+    }
+  }
+}
+
+.devui-no-data {
+  line-height: 32px;
+  color: $devui-text;
+}

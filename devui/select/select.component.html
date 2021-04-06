@@ -105,7 +105,7 @@
 
     <span class="devui-form-control-feedback devui-input-group-addon" [ngClass]="{ 'devui-clear-icon-show': isClearIconShow }">
       <span class="devui-select-clear-icon" (mousedown)="$event.preventDefault()" (click)="valueClear($event)"> </span>
-      <span class="devui-select-chevron-icon">
+      <span class="devui-select-chevron-icon" [ngClass]="{ 'devui-select-chevron-icon-animation': showAnimation }">
         <svg
           width="8px"
           height="5px"
@@ -150,11 +150,11 @@
       'devui-dropdown-menu-cdk': appendToBody,
       'devui-custom-right': customViewTemplate && customViewDirection === 'right',
       'devui-custom-left': customViewTemplate && customViewDirection === 'left',
-      'devui-dropdown-menu-multiple': multiple,
-      'devui-dropdopwn-hidden': !startAnimation
+      'devui-dropdown-menu-multiple': multiple
     }"
     [@fadeInOut]="isOpen && startAnimation ? (appendToBody ? menuPosition : popDirection) : 'void'"
     (@fadeInOut.done)="animationEnd($event)"
+    [@.disabled]="!showAnimation"
   >
     <ul
       dLoading

@@ -38,6 +38,6 @@ In the page:
 
 ## d-card-actions Parameter
 
-| Parameter |       Type   |     Default      |       Description        | Jump to Demo |
-|   :---:   |         :------:        | :---: | :-------------: | --------- |
+| Parameter |       Type   |     Default      |       Description        | Jump to Demo |Global Config| 
+|   :----------------: | :---:   |         :------:        | :---: | :-------------: | --------- |
 |   align   |   `'start'\|'end'\|'spaceBetween'`  |        'start'      | Optional. Operation area alignment mode, which corresponds to start alignment, tail alignment, and stretch alignment | [Basic usage](demo#card-basic) |

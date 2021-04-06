@@ -5,11 +5,7 @@
   (backdropClick)="isOpen=false"
   (positionChange)="onPositionChange($event)"
 >
-  <div
-    [@fadeInOut]="(isOpen && startAnimation) ? datepickerPosition : 'void'"
-    class="devui-date-range-wrapper"
-    [class.devui-dropdopwn-hidden]="!startAnimation"
-  >
+  <div [@fadeInOut]="startAnimation ? datepickerPosition : 'void'" [@.disabled]="!showAnimation" class="devui-date-range-wrapper">
     <d-date-range-picker
       #dateRangePicker
       [locale]="locale"

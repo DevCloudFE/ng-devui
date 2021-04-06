@@ -20,8 +20,8 @@ In the page:
 # d-breadcrumb-item
 ## d-breadcrumb-item Parameter
 
-|      Parameter      |        Type        |      Default      |      Description         |         Jump to Demo          |
-| :----------------: | :-----------------: | :---: | :------------------------------------------------------ | -------------------------------------------------------------------------------------- |
+|      Parameter      |        Type        |      Default      |      Description         |         Jump to Demo          |Global Config| 
+| :----------------: | :----------------: | :-----------------: | :---: | :------------------------------------------------------ | -------------------------------------------------------------------------------------- |
 |       showMenu     |       `boolean`        |    false    |    Optional. Indicating whether to display the drop-down arrow and content in the drop-down list    |    [Breadcrumbs with Dropdown menu](demo#drop-down-breadcrumbs)    |
 |      menuList      |    [`Array<MenuConfig>`](#menuconfig) |      --     | Optional. This parameter is transferred when showMenu is set to true. Content displayed in the drop-down list box | [Breadcrumbs with Dropdown menu](demo#drop-down-breadcrumbs) |
 |      isSearch      |       `boolean`        |    false    | Optional. This parameter is transferred when showMenu is set to true. Whether the search function is required in the drop-down list box | [Breadcrumbs with Dropdown menu](demo#drop-down-breadcrumbs) |

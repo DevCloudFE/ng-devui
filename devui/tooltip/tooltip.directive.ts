@@ -9,6 +9,7 @@ import {
   OnDestroy
 } from '@angular/core';
 import { OverlayContainerRef } from 'ng-devui/overlay-container';
+import { DevConfigService, WithConfig } from 'ng-devui/utils/globalConfig';
 import { fromEvent, Subject } from 'rxjs';
 import { debounceTime, filter, map, takeUntil } from 'rxjs/operators';
 import { TooltipComponent } from './tooltip.component';
@@ -20,8 +21,14 @@ import { PositionType } from './tooltip.types';
 })
 export class TooltipDirective implements AfterViewInit, OnDestroy {
   @Input() content: string;
-  @Input() position: PositionType | PositionType[] = ['top', 'right', 'bottom', 'left'];
-  @Input() showAnimate: boolean;
+  @Input() position: PositionType | PositionType[] = 'top';
+  @Input() @WithConfig() showAnimation = true;
+  /**
+   * @deprecated Use showAnimation to replace.
+   */
+  @Input() set showAnimate(isShowAnimate: any) {
+    this.showAnimation = isShowAnimate;
+  }
   // 防止每次鼠标不小心经过目标元素就会显示出Tooltip的内容，所以增加适当的延迟。
   @Input() mouseEnterDelay = 150;
   // 因为鼠标移出之后如果立刻消失会很突然，所以增加略小一些的延迟，使得既不突然也反应灵敏
@@ -30,11 +37,11 @@ export class TooltipDirective implements AfterViewInit, OnDestroy {
   unsubscribe$ = new Subject();
   unsubscribeT$ = new Subject();
   tooltipComponentRef: ComponentRef<TooltipComponent>;
-
   constructor(
     private triggerElementRef: ElementRef,
     private overlayContainerRef: OverlayContainerRef,
-    private componentFactoryResolver: ComponentFactoryResolver
+    private componentFactoryResolver: ComponentFactoryResolver,
+    private devConfigService: DevConfigService,
   ) {}
 
   @HostListener('focus') onFocus() {
@@ -53,7 +60,7 @@ export class TooltipDirective implements AfterViewInit, OnDestroy {
     Object.assign(this.tooltipComponentRef.instance, {
       content: this.content,
       position: this.position,
-      showAnimate: this.showAnimate,
+      showAnimation: this.showAnimation,
       triggerElementRef: this.triggerElementRef,
     });
 
@@ -103,9 +110,8 @@ export class TooltipDirective implements AfterViewInit, OnDestroy {
     }
 
     this.createTooltip();
-    if (this.showAnimate) {
-      this.tooltipComponentRef.instance.onShow();
-    }
+    this.tooltipComponentRef.instance.onShow();
+
   }
 
   destroy() {
@@ -122,7 +128,7 @@ export class TooltipDirective implements AfterViewInit, OnDestroy {
   hide() {
     if (this.tooltipComponentRef) {
       this.tooltipComponentRef.instance.onHide();
-      if (!this.showAnimate) {
+      if (!this.showAnimation) {
         this.destroy();
         return;
       }

@@ -26,10 +26,17 @@ export class UserRegisterComponent {
         { maxlength: 128 },
         {
           pattern: /^[a-zA-Z0-9]+(\s+[a-zA-Z0-9]+)*$/,
-          message: 'The user name cannot contain characters except uppercase and lowercase letters.',
+          message: {
+            'zh-cn': '仅允许输入数字与大小写字母',
+            'en-us': 'The user name cannot contain characters except uppercase and lowercase letters.'
+          },
         },
       ],
-      asyncValidators: [{ sameName: this.checkName.bind(this), message: 'Duplicate name.' }],
+      asyncValidators: [{ sameName: this.checkName.bind(this), message: {
+        'zh-cn': '用户名重名',
+        'en-us': 'Duplicate name.'
+      }
+    }],
     },
     passwordRules: {
       validators: [{ required: true }, { minlength: 6 }, { maxlength: 15 }, { pattern: /^[a-zA-Z0-9]+(\s+[a-zA-Z0-9]+)*$/ }],

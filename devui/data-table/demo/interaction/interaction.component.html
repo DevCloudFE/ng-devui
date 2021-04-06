@@ -27,6 +27,7 @@
         [minWidth]="'100px'"
         [maxWidth]="'200px'"
         [sortable]="true"
+        [showSortIcon]="true"
         [(sortDirection)]="lastNameSortDirection"
         (sortChange)="onSortChange($event, 'lastName')"
         [filterable]="true"
@@ -41,6 +42,7 @@
       <th
         dHeadCell
         [sortable]="true"
+        [showSortIcon]="true"
         [(sortDirection)]="genderSortDirecticon"
         (sortChange)="onSortChange($event, 'Gender')"
         [filterable]="true"
@@ -51,11 +53,7 @@
         Gender
       </th>
       <th dHeadCell>Date of birth</th>
-      <th dHeadCell>Date of birth</th>
-      <th dHeadCell>Date of birth</th>
-      <th dHeadCell>Date of birth</th>
-      <th dHeadCell>Date of birth</th>
-      <th dHeadCell>Date of birth</th>
+      <th dHeadCell>description</th>
     </tr>
   </thead>
   <tbody dTableBody>
@@ -83,11 +81,7 @@
         <td dTableCell>{{ rowItem?.lastName }}</td>
         <td dTableCell>{{ rowItem?.gender }}</td>
         <td dTableCell>{{ rowItem?.dob | i18nDate: 'short':false }}</td>
-        <td dTableCell>{{ rowItem?.dob | i18nDate: 'short':false }}</td>
-        <td dTableCell>{{ rowItem?.dob | i18nDate: 'short':false }}</td>
-        <td dTableCell>{{ rowItem?.dob | i18nDate: 'short':false }}</td>
-        <td dTableCell>{{ rowItem?.dob | i18nDate: 'short':false }}</td>
-        <td dTableCell>{{ rowItem?.dob | i18nDate: 'short':false }}</td>
+        <td dTableCell>{{ rowItem?.description }}</td>
       </tr>
     </ng-template>
   </tbody>

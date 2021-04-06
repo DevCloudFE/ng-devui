@@ -13,17 +13,25 @@
     "dark": "Dark Theme",
     "follow": "Follow System",
     "largeSize": "Large FontSize",
-    "default":"Default",
-    "extend":"Extend",
+    "default": "Default",
+    "extend": "Extend",
     "infinity": "Infinity",
     "sweet": "Sweet",
     "deep": "Deep",
     "provence": "Provence"
   },
   "public": {
+    "overview": {
+      "title": "Components Overview",
+      "description": "DevUI provides rich basic UI components for web applications. We will continue to explore the best UI practices of enterprise-level applications. Welcome to DevUI.",
+      "placeholder": "Enter the component",
+      "newChange": "New"
+    },
     "start": "Getting Started",
     "themeDoc": "Customize Theme Docs",
-    "plus": "DevUI Plus",
+    "color": "Color Variables",
+    "globalDoc": "Customize global config",
+    "versions": "Changelog",
     "whenToUse": "When To Use",
     "goTo": "Go To"
   },
@@ -288,7 +296,10 @@
         "Switching Modes": "Switching Modes",
         "The input cannot be empty.": "The input cannot be empty.",
         "Initialization Title": "Initialize the header. Do not use bidirectional binding to transfer values.",
-        "Bidirectional binding": "Bidirectional binding"
+        "Bidirectional binding": "Bidirectional binding",
+        "preview": "preview",
+        "edit": "edit",
+        "changeMode": "Change mode."
       },
       "toolbarDemo": {
         "title": "Customized toolbar",
@@ -356,6 +367,17 @@
         "Level-5 Title": "Level-5 Title",
         "Level 6 Title": "Level 6 Title"
       },
+      "mermaidDemo": {
+        "title": "Mermaid rendering",
+        "description": "Suport rendering the flow chart , gantt chart, and sequence chart with mermaid.",
+        "flowChart": "Flow chart",
+        "gantt": "Gantt chart",
+        "sequence": "Sequence chart"
+      },
+      "tocDemo": {
+        "title": "TOC rendering",
+        "description": "Generating the TOC directory"
+      },
       "enormousTextDemo": {
         "title": "Processing a large amount of data",
         "description": "Manually obtain content, instead of sending back events in real time. Currently, no frame freezing occurs during editing. The rendering is delayed (experimental function).",
@@ -376,6 +398,8 @@
         "img-upload": "Configure image file upload",
         "quick-suggestion": "Quick tips (@user)",
         "single-render-md": "Render md text separately",
+        "mermaid-render": "Mermaid-render",
+        "toc-render": "TOC-render",
         "big-data-process": "Processing a large amount of data"
       }
     },
@@ -967,6 +991,13 @@
         "muti-drag-row": "Batch Row dragging"
       }
     },
+    "datepickerPro": {
+      "name": "DatePicker",
+      "type": "Data entry",
+      "path": "datepicker",
+      "description": "Enter or select a date.",
+      "tmw": "When users want to enter a date or click the input box to select a date."
+    },
     "datepicker": {
       "name": "DatePicker",
       "type": "Data entry",
@@ -1278,8 +1309,8 @@
         "description": "To bind <code>ngModel, ngGroupModel, and ngForm</code> elements to the template, you can use <code>dValidateRules</code> to configure validation rules."
       },
       "innerValidatorDemo": {
-        "title": "Verify a single element by using a built-in validator",
-        "description": "<p> Currently, <code>DevUI</code> supports the following built-in validators: <code>required, minlength, maxlength, min, max, requiredTrue, email, pattern, and whitespace</code>. </p><p>If the user input cannot contain only spaces, use <code>whitespace</code>built-in validator</p><p>If the user input length needs to be restricted, it is a good idea to set the maximum limit to the actual verification value <code>+1</code>. In addition to <code>pattern</code>, other built-in validators also provide built-in error messages. If you do not customize a message, the default message is used. </p>"
+        "title": "Verify a single element, use the built-in validator, and configure error message",
+        "description": "<p> Currently, <code>DevUI</code> supports the following built-in validators: <code>required, minlength, maxlength, min, max, requiredTrue, email, pattern, and whitespace</code>. </p><p>If the user input cannot contain only spaces, use <code>whitespace</code>built-in validator</p><p>If the user input length needs to be restricted, it is a good idea to set the maximum limit to the actual verification value <code>+1</code>. In addition to <code>pattern</code>, other built-in validators also provide built-in error messages. If you do not customize a message, the default message is used. The value of </p><p><code>message</code> can be in the following formats: <code>string</code>object</code>. (The internationalization string can be configured, for example, <code>'zh-cn'</code>. The default value is <code>'default'</code>).</p>"
       },
       "customerValidatorDemo": {
         "title": "Verify a single element and customize a validator",
@@ -1548,7 +1579,7 @@
       },
       "batchDragDemo": {
         "title": "Batch dragging",
-        "description": "You can use the batchDrag command to drag tags in batches.",
+        "description": "You can use the batchDrag command to drag multiple markers in batches. Press Ctrl to select multiple markers and drag them.",
         "Batch dragging is supported. Press Ctrl to select multiple items and drag them.": "Batch dragging is supported. Press Ctrl to select multiple items and drag them.",
         "Show Source Placeholders": "Show Source Placeholders",
         "crossover exchange": "crossover exchange",
@@ -2465,6 +2496,20 @@
         "scroll-target": "Replace Rolling Container"
       }
     },
+    "nav-sprite": {
+      "name": "NavSprite",
+      "type": "Navigation",
+      "path": "nav-sprite",
+      "description": "Nav spritee",
+      "tmw": "Generate a reading directory for a reading area to improve reading efficiency",
+      "basicDemo": {
+        "title": "Basic Usage",
+        "description": ""
+      },
+      "anchorLinkValues": {
+        "basic-usage": "Basic Usage"
+      }
+    },
     "tabs": {
       "name": "Tabs",
       "type": "Navigation",
@@ -2601,6 +2646,9 @@
         "title": "Basic Usage",
         "description": "The icon is not displayed in common mode."
       },
+      "styleDemo": {
+        "title": "Custom Style"
+      },
       "lifeDemo": {
         "title": "Timeout interval",
         "description": "If the timeout interval is set and no title is set, the title and close button are not displayed."
@@ -2609,9 +2657,15 @@
         "title": "Each message uses a separate timeout interval",
         "description": "When the timeout mode is set to single, each message uses its own lifetime as the timeout interval. If the timeout interval is not set, the system determines the timeout interval based on severity. If the timeout interval is not set, the default timeout interval is 5000 ms."
       },
+      "serviceDemo": {
+        "title": "Service Function",
+        "description": "Create a toast global notification using services."
+      },
       "anchorLinkValues": {
         "basic-usage": "Basic Usage",
         "life": "Timeout interval",
+        "style": "Custom Style",
+        "toast-service": "Service Function",
         "single": "Each message uses a separate timeout interval"
       }
     },
@@ -2915,10 +2969,9 @@
         "title": "Using Regular Expression",
         "description": "Regular or regular character strings are allowed to be input. The input regular character string is matched first. If no regular character string is input, the input regular character string is not restricted."
       },
-      "decimalLimitAndAutoFocusDemo": {
+      "decimalLimitDemo": {
         "title": "Avoid Decimal",
-        "Limit Decimal": "Limit Decimal",
-        "Automatically get focus": "Automatically get focus"
+        "Limit Decimal": "Limit Decimal"
       },
       "anchorLinkValues": {
         "number-basic": "Basic Usage",
@@ -2926,7 +2979,7 @@
         "number-empty": "Allow Null",
         "number-placeholder-maxlength": "Set Placeholder and Maxlength",
         "number-reg": "Using Regular Expression",
-        "decimal-limit-auto-focus": "Avoid Decimal"
+        "decimal-limit": "Avoid Decimal"
       }
     },
     "tree-select": {
@@ -3157,11 +3210,15 @@
         "title": "Basic Usage",
         "placeholder": "Please enter the content."
       },
+      "sizeDemo": {
+        "title": "Size"
+      },
       "passwordVisibleDemo": {
         "title": "Password Input"
       },
       "anchorLinkValues": {
         "basic-usage": "Basic Usage",
+        "size": "Size",
         "password-input": "Password Input"
       }
     },
@@ -3196,12 +3253,17 @@
         "Current Step": "Current Step",
         "Operation Output": "Operation Output"
       },
+      "positionDemo": {
+        "title": "Position",
+        "description": "A total of 8 pop-up positions are supported."
+      },
       "customDemo": {
         "title": "Custom",
         "description": "Customizing the Position and Elements of the Operation Guide."
       },
       "anchorLinkValues": {
         "basic-usage": "Basic Usage",
+        "position": "Position",
         "custom": "Custom"
       }
     },
@@ -3272,6 +3334,62 @@
       "customDemo": {
         "title": "customizing comparison time demo",
         "description": "Do not compare the current time with the current time. Customize the comparison time. For example, compare the comparison time with 2015-05-20 12:00:00."
+      }
+    },
+    "category-search": {
+      "name": "CategorySearch",
+      "type": "Data entry",
+      "path": "category-search",
+      "description": "Searching for a listing by field.",
+      "tmw": "Select multiple options, such as single-choice, multiple-choice, date selection, and tree selection, to help you filter required data easily and accurately",
+      "basicDemo": {
+        "title": "Basic Usage",
+        "description": ""
+      },
+      "autoScrollDemo": {
+        "title": "Large-scale data display optimization",
+        "description": ""
+      },
+      "anchorLinkValues": {
+        "basicDemo": "Basic Usage",
+        "autoScrollDemo": "Large-scale data display optimization"
+      }
+    },
+    "datepicker-pro": {
+      "name": "DatepickerPro",
+      "type": "Experimental",
+      "path": "datepicker-pro",
+      "description": "Component for entering or selecting a date.",
+      "tmw": "The user needs to enter a date. When you need to click the standard input box, the date panel is displayed for you to select.",
+      "basicDemo": {
+        "title": "Basic Usage"
+      },
+      "showTimeDemo": {
+        "title": "Show Time"
+      },
+      "templateDemo": {
+        "title": "Customizing an Extended Area"
+      },
+      "monthYearDemo": {
+        "title": "Month and Year picekr"
+      },
+      "rangePickerDemo": {
+        "title": "Range Picker"
+      },
+      "hostTemplateDemo": {
+        "title": "Custom Host"
+      },
+      "rangeTemplateDemo": {
+        "title": "Template Usage for Range Mode"
+      },
+      "anchorLinkValues": {
+        "basic-usage": "Basic Usage",
+        "show-time": "Show Time",
+        "template": "Customizing",
+        "monthYear": "Month & Year picker",
+        "rangePicker": "Range Picker",
+        "host-template": "Custom Host",
+        "rangeTemplate": "Template Usage for Range Mode"
       }
     }
   }

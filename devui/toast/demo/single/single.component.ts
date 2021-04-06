@@ -9,10 +9,10 @@ export class SingleComponent {
 
   showToast() {
     this.msgs = [
-      { life: 3000, summary: '普通', content: '详细信息，测试换行，测试换行，测试换行，测试换行，测试换行' },
-      { life: 6000, severity: 'info', summary: '摘要', content: '详细信息，测试换行，测试换行，测试换行，测试换行，测试换行' },
-      { severity: 'success', summary: '成功', content: '详细信息，测试换行，测试换行，测试换行，测试换行，测试换行' },
-      { severity: 'warn', summary: '警告', content: '详细信息，测试换行，测试换行，测试换行，测试换行，测试换行' },
+      { life: 3000, summary: 'Summary', content: 'This is a test text. This is a test text. This is a test text.' },
+      { life: 6000, severity: 'info', summary: 'Summary', content: 'This is a test text. This is a test text. This is a test text.' },
+      { severity: 'success', summary: 'Success', content: 'This is a test text. This is a test text. This is a test text.' },
+      { severity: 'warn', summary: 'Warn', content: 'This is a test text. This is a test text. This is a test text.' },
     ];
   }
 }

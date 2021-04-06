@@ -1,0 +1,31 @@
+:host ::ng-deep .custom-class {
+  .devui-toast-item {
+    color: #252b3a;
+    background-color: #ffffff;
+
+    .devui-toast-icon-close {
+      top: 10px;
+      right: 13px;
+
+      .devui-toast-close-icon {
+        fill: #252b3a;
+      }
+    }
+
+    .devui-toast-image {
+      top: 15px;
+    }
+
+    .devui-toast-message {
+      line-height: 23px;
+
+      .devui-toast-title {
+        font-size: 16px;
+      }
+
+      p {
+        font-size: 14px;
+      }
+    }
+  }
+}

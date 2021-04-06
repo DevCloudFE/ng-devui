@@ -15,8 +15,8 @@ In the page:
 
 ## d-tree-select Parameter
 
-| Parameter | Type | Default | Description | Jump to Demo |
-| :------------------: | :-------------------------------------: | :-------------------------------------: | :------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------- |
+| Parameter | Type | Default | Description | Jump to Demo |Global Config| 
+| :----------------: | :------------------: | :-------------------------------------: | :-------------------------------------: | :------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------- |
 | placeholder | `string` | -- | Optional. placeholder string | [Basic usage](demo#basic-usage) |
 | treeData | `Array` | -- | Required. Source data to be displayed. | [Basic usage](demo#basic-usage) |
 | disabled | `boolean` | false | Optional. The input state is forbidden. | [Basic usage](demo#basic-usage) |
@@ -48,6 +48,7 @@ In the page:
 | virtualScrollMinBufferPx | `number` | 600 | Optional. Set the minimum buffer size during virtual scrolling(`px`). For details, see https://material.angular.io/cdk/scrolling/overview#scrolling-over-fixed-size-items | [Virtual Scroll](demo#virtual-scroll) |
 | virtualScrollMaxBufferPx | `number` | 900 | Optional. Set the maximum buffer size during virtual scrolling.(`px`) For details, see https://material.angular.io/cdk/scrolling/overview#scrolling-over-fixed-size-items | [Virtual Scroll](demo#virtual-scroll) |
 | virtualScrollItemSize | `number` | 30 | Optional. Set the element size in the virtual scrolling(`px`). For details, see https://material.angular.io/cdk/scrolling/overview#scrolling-over-fixed-size-items | [Virtual Scroll](demo#virtual-scroll) |
+| showAnimation | `boolean` | true | optional. Whether to enable animation. |   | ✔ |
 
 ## d-tree-select Event
 

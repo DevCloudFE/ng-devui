@@ -47,11 +47,11 @@ In the page
 
 ## dForm Parameter
 
-| Parameter | Type | Default | Description | Jump to Demo |
-| :-------: | :-----------------------------------: | :----------: | :----------------------------------------------------------------------- | ------------------------------------------------------------- |
-| layout | `'horizontal'\|'vertical'\|'columns'` | 'horizontal' | Optional. Sets the form arrangement mode. | [Basic usage](demo#basic-usage) |
-| labelSize | `'sm' \| '' \| 'lg'` | '' | Optional. Sets the width of the label. If this parameter is not set, the default value is 100 px. 'sm' corresponds to 80 px, 'lg' corresponds to 150px | [Label horizontal arrangement](demo#demo-label-horizontal) |
-| labelAlign | `'start'\|'center'\|'end'` | 'start' | Optional. This parameter specifies the label alignment mode in horizontal layout mode. | [label horizontal arrangement](demo#demo-label-horizontal) |
+| Parameter | Type | Default | Description | Jump to Demo |Global Config| 
+| :----------------: | :-------: | :-----------------------------------: | :----------: | :----------------------------------------------------------------------- | ------------------------------------------------------------- |
+|   layout   | `'horizontal'\|'vertical'\|'columns'` | 'horizontal' | Optional. Sets the form arrangement mode.                                                                                                              | [Basic usage](demo#basic-usage)                            |
+| labelSize  |         `'sm' \| '' \| 'lg'`          |      ''      | Optional. Sets the width of the label. If this parameter is not set, the default value is 100 px. 'sm' corresponds to 80 px, 'lg' corresponds to 150px | [Label horizontal arrangement](demo#demo-label-horizontal) |
+| labelAlign |      `'start'\|'center'\|'end'`       |   'start'    | Optional. This parameter specifies the label alignment mode in horizontal layout mode.                                                                 | [label horizontal arrangement](demo#demo-label-horizontal) |
 
 ## dForm Event
 
@@ -135,6 +135,8 @@ import { Forms } from '@angular/forms';
 |   Parameter    |                Type                 | Default |                Description                 |                                  Jump to Demo                                  |
 | :------------: | :---------------------------------: | :-----: | :----------------------------------------: | :----------------------------------------------------------------------------: |
 | dValidateRules | [`DValidateRules`](#dvalidaterules) |   --    | Required. Configure the verification rule. | [Template-driven form verification (recommended)](demo#demo-validate-template) |
+| dValidatePopConfig | [`DPopConfig`](#dpopconfig) |  --  | Optional. popover hint config | [Template-driven form verification (recommended)](demo#demo-validate-template) |
+
 
 ## dValidateSyncKey Parameter
 
@@ -188,7 +190,7 @@ export type DValidateRules =
 
       errorStrategy?: DValidationErrorStrategy; // error update policy. The default value is'dirty'.
 
-      message?: string; // Unified message. If no message is configured for a verification rule, the unified message is used.
+      message?: string | { [key: string]: string }; // Unified message. If no message is configured for a verification rule, the unified message is used.
 
       messageShowType?: 'popover' | 'text' | 'none'; // Automatic message display policy (currently, this policy takes effect only for a single form component). (displayed in the popover | d-form-item container | not displayed)
 
@@ -203,20 +205,20 @@ export type DValidateRules =
 ```TS
 export interface DValidateRule {// Define a synchronization verification rule.
 
-id ? : string; // Current rule ID, which uniquely identifies the current rule. The form message mechanism uses this ID as the key.
+  id ? : string; // Current rule ID, which uniquely identifies the current rule. The form message mechanism uses this ID as the key.
 
-validator ?: DValidatorFn | ValidatorFn; // validator, which is compatible with the native Angular validator. (Set isNgValidator to true.)
+  validator ?: DValidatorFn | ValidatorFn; // validator, which is compatible with the native Angular validator. (Set isNgValidator to true.)
 
-message ? : string; // Message returned when the verification fails.
+  message ?: string | { [key: string]: string }; // Message returned when the verification fails. The internationalization string object can be returned. The key is the key of the corresponding language. The default key is 'default'.
 
-errorStrategy ?: DValidationErrorStrategy; // Error update policy of the current rule. The default value is'dirty'.
+  errorStrategy ?: DValidationErrorStrategy; // Error update policy of the current rule. The default value is'dirty'.
 
-priority ? : number; // Priority of the current rule. If the verification fails, the rule with a higher priority is displayed first. The default value is 0.
+  priority ? : number; // Priority of the current rule. If the verification fails, the rule with a higher priority is displayed first. The default value is 0.
 
-isNgValidator ?: boolean; //: indicates whether the current validator is an Angular native validator.
+  isNgValidator ?: boolean; //: indicates whether the current validator is an Angular native validator.
 
-// This is an all-purpose matching key. You can use the default validator key or quickly set your customized rule key. (If the key does not conflict with the default key or reserved word, the system identifies the current ID.)
-[id: string]: boolean | number | string | RegExp | DValidatorFn | ValidatorFn;
+  // This is an all-purpose matching key. You can use the default validator key or quickly set your customized rule key. (If the key does not conflict with the default key or reserved word, the system identifies the current ID.)
+  [id: string]: [id: string]: boolean | number | string | { [key: string]: string } | RegExp | DValidatorFn | ValidatorFn | undefined;
 }
 ```
 
@@ -224,13 +226,14 @@ isNgValidator ?: boolean; //: indicates whether the current validator is an Angu
 
 ```TS
 export interface DAsyncValidateRule {// Define an asynchronous verification rule.
-id ? : string;
-validator ?: DAsyncValidatorFn | AsyncValidatorFn;
-message ? : string;
-errorStrategy ?: DValidationErrorStrategy;
-priority ? : number;
-isNgValidator ? : boolean;
-[id: string]: boolean | number | string | RegExp | DAsyncValidatorFn | AsyncValidatorFn;
+  id ? : string;
+  validator ?: DAsyncValidatorFn | AsyncValidatorFn;
+  message ?: string | { [key: string]: string };
+  errorStrategy ?: DValidationErrorStrategy;
+  priority ? : number;
+  isNgValidator ? : boolean;
+  [id: string]: boolean | number | string | { [key: string]: string } | RegExp | DAsyncValidatorFn | AsyncValidatorFn | undefined;
+}
 ```
 
 ### DValidationErrorStrategy
@@ -247,7 +250,7 @@ export type DValidationErrorStrategy = 'pristine' | 'dirty';
 - If string|null is returned, null indicates that the check is passed. If no message is set for the current rule, the returned string is used as the current rule message.
 
 ```TS
-export type DValidatorFn = (value: any) => boolean | string | null;
+export type DValidatorFn = (value: any) => boolean | string | { [key: string]: string } | null;
 ```
 
 ### DAsyncValidatorFn
@@ -255,7 +258,7 @@ export type DValidatorFn = (value: any) => boolean | string | null;
 - Define DevUI Form asynchronous validator: Similar to the synchronous rule, the difference is that your function needs to return an Observable object.
 
 ```TS
-export type DAsyncValidatorFn = (value: any) => Observable<boolean | string | null>;
+export type DAsyncValidatorFn = (value: any) => Observable<boolean | string | { [key: string]: string } | null>;
 ```
 
 ### ruleReservedWords
@@ -280,4 +283,13 @@ export const dDefaultValidators = {
 'pattern': Validators.pattern, // Configure regular expression verification. The rule uses {pattern: RegExp}.
 'whitespace': DValidators.whiteSpace, // Indicates that the input cannot contain only spaces. The rule uses {whitespace: true}.
 };
+```
+
+### DPopConfig
+
+```TS
+export type DPopConfig = {
+  popMaxWidth?: number,
+  zIndex?: number,
+}
 ```

@@ -1,6 +1,6 @@
 <div class="arrow"></div>
 <div class="devui-popover-content {{ overlayClassName }}" [style.maxWidth.px]="popMaxWidth">
-  <ng-template [ngTemplateOutlet]="template || defaultTemplate"> </ng-template>
+  <ng-template [ngTemplateOutlet]="template || defaultTemplate" [ngTemplateOutletContext]="{ $implicit: customData }"> </ng-template>
   <ng-template #defaultTemplate>
     <div class="read-tip-container">
       <div class="title">

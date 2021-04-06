@@ -1,0 +1,230 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
+@mixin font-title($font-size: $devui-font-size-page-title) {
+  font-size: $font-size;
+  font-weight: $devui-font-title-weight;
+  line-height: $devui-line-height-base;
+}
+
+@mixin font-content() {
+  font-size: $devui-font-size;
+  font-weight: $devui-font-content-weight;
+  line-height: $devui-line-height-base;
+}
+
+//内容区布局样式
+.devui-content-layout {
+  top: 60px;
+  position: absolute;
+  padding: 0 20% 32px 13%;
+  margin-left: 260px;
+  width: calc(100% - 260px);
+  background-color: $devui-base-bg;
+}
+
+//内容区文档头样式
+.devui-docs-header {
+  h1 {
+    @include font-title($devui-font-size-data-overview);
+    margin: 32px 0 24px 0;
+  }
+
+  h3 {
+    @include font-title($devui-font-size-card-title);
+  }
+}
+
+//内容区文档卡片样式
+.devui-content-card {
+  margin-top: 12px;
+  padding: 20px 20px 32px 20px;
+  background-color: $devui-base-bg;
+}
+
+//demo及代码样式
+.devui-demo-container {
+  position: relative;
+  margin-top: 20px;
+}
+
+.devui-demo-example {
+  margin-bottom: 48px;
+}
+
+.devui-demo-title {
+  @include font-title($devui-font-size-page-title);
+
+  color: $devui-text;
+  margin-bottom: 12px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+}
+
+.devui-demo-text {
+  @include font-content();
+
+  color: $devui-text;
+}
+
+.devui-code-box {
+  display: inline-block;
+  width: 100%;
+  position: relative;
+  margin: 4px 0;
+  transition: all 0.2s;
+}
+
+.devui-code-copy {
+  fill: $devui-text;
+}
+
+.devui-code-box-demo {
+  border-bottom: 1px dashed $devui-dividing-line;
+  padding: 16px 0;
+}
+
+.devui-code-box-meta.markdown {
+  position: relative;
+  padding: 10px 40px;
+  border-radius: 0 0 4px 4px;
+  transition: background-color 0.4s;
+  width: 100%;
+  font-size: $devui-font-size;
+  margin-bottom: 0;
+}
+
+.devui-code-box.expand .devui-code-box-meta {
+  border-radius: 0;
+  // border-bottom: 1px dashed $devui-dividing-line;
+}
+
+.devui-code-box .devui-highlight-wrapper {
+  display: none;
+  overflow: auto;
+  border-radius: 0 0 4px 4px;
+}
+
+.devui-code-box .devui-highlight-wrapper-expand {
+  display: block;
+}
+
+.devui-code-box pre {
+  width: auto;
+  border: none;
+  margin: 10px 0 0;
+}
+
+.devui-code-box .collapse {
+  display: block; /* .collapse conflick with bootstrap */
+  position: absolute;
+  left: 20px;
+  // top: -9px;
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+  opacity: 0.55;
+  text-align: center;
+  transition: all 0.3s;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  & > svg > path {
+    fill: $devui-text;
+  }
+}
+
+.devui-new-code-copy {
+  margin-left: 10px;
+}
+
+.devui-code-box.expand .collapse {
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+//内容区导航样式
+.devui-content-nav {
+  width: 240px;
+  position: fixed;
+  top: 90px;
+  right: 0;
+  height: 100%;
+  z-index: 1;
+
+  .devui-fast-forward {
+    width: 130px;
+    font-size: $devui-font-size-card-title;
+    color: $devui-text;
+    line-height: 24px;
+    font-weight: bold;
+    padding-bottom: 10px;
+    margin-left: 20px;
+    border-bottom: 1px solid $devui-dividing-line;
+  }
+
+  .devui-step-nav {
+    margin-top: 10px;
+
+    & > li {
+      list-style: none;
+      padding-left: 20px;
+      cursor: pointer;
+      height: 30px;
+      line-height: 30px;
+      font-size: $devui-font-size;
+      color: $devui-text;
+      position: relative;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+
+      a {
+        display: block;
+        width: 110px;
+        overflow: hidden;
+        color: $devui-text;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        -webkit-transition: all .3s ease;
+        transition: all .3s ease;
+
+      }
+      a.current {
+        color: $devui-link;
+      }
+
+      &.active {
+        color: $devui-link;
+      }
+    }
+  }
+}
+
+@media (max-width: 1800px) {
+  .devui-content-nav {
+    width: 150px;
+  }
+
+  .devui-content-layout {
+    padding: 0 15% 0 8%;
+  }
+}
+
+
+@media (max-width: 1250px) {
+  .devui-content-nav {
+    display: none;
+  }
+}
+
+@media (max-width: 1024px) {
+  .devui-content-layout {
+    width: 100%;
+    margin-left: 0;
+    transition: all 0.2s ease-out;
+  }
+}

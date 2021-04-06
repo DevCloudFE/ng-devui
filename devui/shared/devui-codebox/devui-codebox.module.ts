@@ -6,7 +6,6 @@ import { TranslateModule } from '@ngx-translate/core';
 import { DevUIHighlightModule } from '../devui-highlight/devui-highlight.module';
 import { DevuiCodeboxComponent } from './devui-codebox.component';
 
-
 @NgModule({
   imports: [
     CommonModule,

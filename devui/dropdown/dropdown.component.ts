@@ -15,8 +15,8 @@ import { DropDownDirective } from './dropdown.directive';
       [cdkConnectedOverlayPositions]="positions"
       (backdropClick)="dropDown.isOpen=false"
       (positionChange)="onPositionChange($event)">
-      <div [@fadeInOut]="(dropDown.isOpen && dropDown.startAnimation) ? menuPosition : 'void'" #dropDownWrapper
-        [class.devui-dropdopwn-hidden]="!dropDown.startAnimation">
+      <div [@fadeInOut]="dropDown.startAnimation ? menuPosition : 'void'" #dropDownWrapper
+        [@.disabled]="!dropDown.showAnimation">
         <ng-content select="[dDropDownMenu]"></ng-content>
       </div>
     </ng-template>

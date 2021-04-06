@@ -13,8 +13,8 @@ In the page:
 
 ## d-time-axis parameter
 
-| Parameter | Type | Default | Description | Jump to Demo |
-| :------------: | :------: | :--: | :-------------------------------------------------------- | -------------------------------------------------------- |
+| Parameter | Type | Default | Description | Jump to Demo |Global Config| 
+| :----------------: | :------------: | :------: | :--: | :-------------------------------------------------------- | -------------------------------------------------------- |
 | data | `TimeAxisData` | -- | Optional, configuration data. It is an object. | [Basic usage](demo#basic-usage) |
 | contentTemplate | `TemplateRef` | -- | Optional, Content template. This parameter is left empty by default. This parameter is mandatory when model is set to `template`. | [Customize content using a template](demo#content-with-template) |
 

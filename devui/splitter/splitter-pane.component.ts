@@ -1,5 +1,7 @@
-import { AfterViewChecked, ChangeDetectionStrategy, Component, ElementRef, EventEmitter,
-  HostBinding, Input, OnChanges, Output, Renderer2, SimpleChanges } from '@angular/core';
+import {
+  AfterViewChecked, ChangeDetectionStrategy, Component, ElementRef, EventEmitter,
+  HostBinding, Input, OnChanges, Output, Renderer2, SimpleChanges
+} from '@angular/core';
 import { SplitterService } from './splitter.service';
 import { CollapseDirection, SplitterOrientation } from './splitter.types';
 @Component({

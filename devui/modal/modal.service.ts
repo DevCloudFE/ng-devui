@@ -4,6 +4,7 @@ import {
   Renderer2, RendererFactory2
 } from '@angular/core';
 import { OverlayContainerRef } from 'ng-devui/overlay-container';
+import { DevConfigService } from 'ng-devui/utils/globalConfig';
 import { assign, isUndefined } from 'lodash-es';
 import { ModalComponent } from './modal.component';
 import { IModalOptions } from './modal.types';
@@ -12,7 +13,8 @@ import { IModalOptions } from './modal.types';
 export class ModalService {
   private renderer: Renderer2;
   constructor(private componentFactoryResolver: ComponentFactoryResolver,
-              private overlayContainerRef: OverlayContainerRef, private rendererFactory: RendererFactory2) {
+              private overlayContainerRef: OverlayContainerRef, private rendererFactory: RendererFactory2,
+              private devConfigService: DevConfigService) {
     this.renderer = this.rendererFactory.createRenderer(null, null);
   }
 
@@ -25,7 +27,8 @@ export class ModalService {
     backDropZIndex,
     data,
     handler,
-    showAnimate = true,
+    showAnimation,
+    showAnimate,
     backdropCloseable,
     componentFactoryResolver,
     onClose,
@@ -43,12 +46,29 @@ export class ModalService {
       finalComponentFactoryResolver.resolveComponentFactory(ModalComponent),
       injector
     );
+    let showAnimateValue = true;
+    const componentConfig = this.devConfigService.getConfigForComponent('modal') || {};
+    const configValue = componentConfig['showAnimation'];
+    const apiConfig = this.devConfigService.getConfigForApi('showAnimation');
+    if (configValue !== undefined) {
+      showAnimateValue = configValue;
+    } else if (apiConfig !== undefined) {
+      showAnimateValue = apiConfig;
+    }
+
+    if (showAnimation !== undefined) {
+
+    } else if (showAnimate !== undefined) {
+      showAnimation = showAnimate ;
+    } else {
+      showAnimation = showAnimateValue;
+    }
     assign(modalRef.instance, {
       id,
       width,
       zIndex,
       backDropZIndex,
-      showAnimate,
+      showAnimation,
       beforeHidden,
       backdropCloseable: isUndefined(backdropCloseable) ? true : backdropCloseable,
       placement,

@@ -1,46 +1,46 @@
 <div>
-  <div class="demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 60, bottom: 0 }">
+  <div class="devui-demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 180, bottom: 0 }">
     <d-demo-nav [navItems]="navItems"></d-demo-nav>
-    <div class="demo-example" [dAnchor]="'number-basic'">
-      <div class="demo-title">{{ 'components.input-number.basicDemo.title' | translate }}</div>
-      <div class="demo-text">{{ 'components.input-number.basicDemo.description' | translate }}</div>
+    <div class="devui-demo-example" [dAnchor]="'number-basic'">
+      <div class="devui-demo-title">{{ 'components.input-number.basicDemo.title' | translate }}</div>
+      <div class="devui-demo-text">{{ 'components.input-number.basicDemo.description' | translate }}</div>
       <d-codebox id="components-input-number-default" [sourceData]="InputNumberBasic">
         <d-input-number-basic demo></d-input-number-basic>
       </d-codebox>
     </div>
-    <div class="demo-example" [dAnchor]="'number-disabled'">
-      <div class="demo-title">{{ 'components.input-number.disabledDemo.title' | translate }}</div>
-      <div class="demo-text">{{ 'components.input-number.disabledDemo.description' | translate }}</div>
+    <div class="devui-demo-example" [dAnchor]="'number-disabled'">
+      <div class="devui-demo-title">{{ 'components.input-number.disabledDemo.title' | translate }}</div>
+      <div class="devui-demo-text">{{ 'components.input-number.disabledDemo.description' | translate }}</div>
       <d-codebox id="components-input-number-disabled" [sourceData]="InputNumberDisabled">
         <d-input-number-disabled demo></d-input-number-disabled>
       </d-codebox>
     </div>
-    <div class="demo-example" [dAnchor]="'number-empty'">
-      <div class="demo-title">{{ 'components.input-number.emptyDemo.title' | translate }}</div>
-      <div class="demo-text">{{ 'components.input-number.emptyDemo.description' | translate }}</div>
+    <div class="devui-demo-example" [dAnchor]="'number-empty'">
+      <div class="devui-demo-title">{{ 'components.input-number.emptyDemo.title' | translate }}</div>
+      <div class="devui-demo-text">{{ 'components.input-number.emptyDemo.description' | translate }}</div>
       <d-codebox id="components-input-number-empty" [sourceData]="InputNumberEmpty">
         <d-input-number-empty demo></d-input-number-empty>
       </d-codebox>
     </div>
-    <div class="demo-example" [dAnchor]="'number-placeholder-maxlength'">
-      <div class="demo-title">{{ 'components.input-number.placeholderAndMaxLengthDemo.title' | translate }}</div>
-      <div class="demo-text">{{ 'components.input-number.placeholderAndMaxLengthDemo.description' | translate }}</div>
+    <div class="devui-demo-example" [dAnchor]="'number-placeholder-maxlength'">
+      <div class="devui-demo-title">{{ 'components.input-number.placeholderAndMaxLengthDemo.title' | translate }}</div>
+      <div class="devui-demo-text">{{ 'components.input-number.placeholderAndMaxLengthDemo.description' | translate }}</div>
       <d-codebox id="components-input-number-placeholder-maxLength" [sourceData]="InputNumberPlaceholderAndMaxLengthComponent">
         <d-input-number-placeholder-maxlength demo></d-input-number-placeholder-maxlength>
       </d-codebox>
     </div>
-    <div class="demo-example" [dAnchor]="'number-reg'">
-      <div class="demo-title">{{ 'components.input-number.regDemo.title' | translate }}</div>
-      <div class="demo-text">{{ 'components.input-number.regDemo.description' | translate }}</div>
+    <div class="devui-demo-example" [dAnchor]="'number-reg'">
+      <div class="devui-demo-title">{{ 'components.input-number.regDemo.title' | translate }}</div>
+      <div class="devui-demo-text">{{ 'components.input-number.regDemo.description' | translate }}</div>
       <d-codebox id="components-input-number-reg" [sourceData]="InputNumberReg">
         <d-input-number-reg demo></d-input-number-reg>
       </d-codebox>
     </div>
-    <div class="demo-example" [dAnchor]="'decimal-limit-auto-focus'">
-      <div class="demo-title">{{ 'components.input-number.decimalLimitAndAutoFocusDemo.title' | translate }}</div>
-      <div class="demo-text"></div>
-      <d-codebox id="components-input-number-decimal-limit-auto-focus" [sourceData]="DecimalLimitAndAutoFocus">
-        <d-decimal-limit-auto-focus demo></d-decimal-limit-auto-focus>
+    <div class="devui-demo-example" [dAnchor]="'decimal-limit'">
+      <div class="devui-demo-title">{{ 'components.input-number.DecimalLimitDemo.title' | translate }}</div>
+      <div class="devui-demo-text"></div>
+      <d-codebox id="components-input-number-decimal-limit" [sourceData]="DecimalLimit">
+        <d-decimal-limit demo></d-decimal-limit>
       </d-codebox>
     </div>
   </div>

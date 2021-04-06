@@ -14,7 +14,8 @@ import {
   ViewChildren
 } from '@angular/core';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
-import { treeCollapseMotion } from 'ng-devui/utils';
+import { collapseForDomDestroy } from 'ng-devui/utils';
+import { DevConfigService, WithConfig } from 'ng-devui/utils/globalConfig';
 import { Subscription } from 'rxjs';
 import { Dictionary, ITreeItem, ITreeNodeData, TreeNode } from './tree-factory.class';
 import { TreeComponent } from './tree.component';
@@ -25,7 +26,7 @@ import { ICheckboxInput, IDropType } from './tree.types';
   styleUrls: ['./operable-tree.component.scss'],
   exportAs: 'dOperableTreeComponent',
   preserveWhitespaces: false,
-  animations: [treeCollapseMotion]
+  animations: [collapseForDomDestroy]
 })
 export class OperableTreeComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() tree: Array<ITreeItem>;
@@ -58,7 +59,7 @@ export class OperableTreeComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() iconTemplatePosition: string;
   @Input() virtualScroll = false;
   @Input() virtualScrollHeight = '800px';
-  @Input() showAnimation = true;
+  @Input() @WithConfig() showAnimation = true;
   @Input() itemSize = 30;
   @Input() minBufferPx = 600;
   @Input() maxBufferPx = 900;
@@ -104,7 +105,7 @@ export class OperableTreeComponent implements OnInit, OnDestroy, AfterViewInit {
     indicatorWidth: 0
   };
   afterInitAnimate = true;
-  constructor(private i18n: I18nService) {
+  constructor(private i18n: I18nService, private devConfigService: DevConfigService) {
 
   }
   ngOnInit(): void {

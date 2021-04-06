@@ -18,11 +18,14 @@
   border-bottom: 1px solid $devui-dividing-line;
   border-radius: $devui-border-radius $devui-border-radius 0 0;
 
+  &-animation .devui-time-list {
+    scroll-behavior: smooth;
+  }
+
   .devui-time-list {
     flex: 1;
     overflow-y: hidden;
     overflow-x: hidden;
-    scroll-behavior: smooth;
 
     &:hover {
       overflow-y: scroll;

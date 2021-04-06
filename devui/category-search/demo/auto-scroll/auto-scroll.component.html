@@ -1,0 +1,24 @@
+<d-category-search
+  [category]="category"
+  [selectedTags]="selectedTags"
+  [defaultSearchField]="defaultSearchField"
+  [toggleEvent]="toggleEvent"
+  [tagMaxWidth]="100"
+  [allowShowMore]="true"
+  [toggleScrollToTail]="true"
+  [categoryInGroup]="true"
+  [groupOrderConfig]="groupOrderConfig"
+  (searchEvent)="searchEvent($event)"
+  (createFilterEvent)="createFilter($event)"
+  (searchKeyChange)="searchKeyChange($event)"
+  (selectedTagsChange)="selectedTagsChange($event)"
+  (clearAllEvent)="clearAllEvent($event)"
+></d-category-search>
+<div *ngIf="finalSearchItems && finalSearchItems.length" style="padding: 20px 0">
+  <p>The categories of the current search:</p>
+  >
+  <div *ngFor="let item of finalSearchItems">
+    <div>{{ item?.label }}: {{ (item?.value)[item.filterKey] || item?.value?.label }}</div>
+  </div>
+</div>
+<p *ngIf="finalSearchKey && finalSearchKey.length">The current search keyword: {{ finalSearchKey }}</p>

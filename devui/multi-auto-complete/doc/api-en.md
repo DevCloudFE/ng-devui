@@ -18,8 +18,8 @@ In the page:
 
 - This component is implemented based on dAutoComplete. The usage of parameters such as itemTemplate and noResultItemTemplate is the same as that of dAutoComplete. (For details about how to use the Demo to jump to such parameters, see dAutoComplete.)
 
-|      Parameter       |                 Type                  |                  Default                  | Description                                                                                                     | Jump to Demo                                           |
-| :------------------: | :-----------------------------------: | :---------------------------------------: | :-------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------ |
+|      Parameter       |                 Type                  |                  Default                  | Description                                                                                                     | Jump to Demo                                           |Global Config| 
+| :----------------: | :------------------: | :-----------------------------------: | :---------------------------------------: | :-------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------ |
 |     appendToBody     |               `boolean`               |                    --                     | Optional. AppendToBody                                                                                          | [Basic usage](demo#basic-usage)                        |
 |        width         |               `number`                |                    --                     | Optional. Controls the width of the drop-down list box. This parameter is used with appendToBody (`px`)         |
 |       disabled       |               `boolean`               |                    --                     | Optional. Indicating whether to disable it                                                                      | [Disabled](demo#auto-complete-disabled)                |
@@ -33,6 +33,7 @@ In the page:
 |       tipsText       |               `string`                |                    --                     | Optional. Prompt text                                                                                           | [Disabled](demo#auto-disable)                          |
 |     placeholder      |               `string`                |                    --                     | Optional. Placeholder                                                                                           | [Basic usage](demo#basic-usage)                        |
 |     latestSource     |             `Array<any>`              |                    --                     | Optional. Latest input                                                                                          | [Last input](demo#auto-latest)                         |
+| showAnimation | `boolean` | true | optional. Whether to enable animation. |   | ✔ |
 
 ## d-multi-auto-complete events
 

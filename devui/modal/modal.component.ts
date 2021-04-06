@@ -34,7 +34,13 @@ import { ModalContainerDirective } from './modal.directive';
 export class ModalComponent implements OnInit, OnDestroy {
 
   @Input() id: string;
-  @Input() showAnimate = true;
+  @Input() showAnimation = true;
+  /**
+   * @deprecated Use showAnimation to replace.
+   */
+  @Input() set showAnimate(isShowAnimate: any) {
+    this.showAnimation = isShowAnimate;
+  }
   @Input() width: string;
   @Input() zIndex: number;
   @Input() backDropZIndex: number;
@@ -63,7 +69,7 @@ export class ModalComponent implements OnInit, OnDestroy {
   constructor(
     private elementRef: ElementRef,
     private documentRef: DocumentRef,
-    private renderer: Renderer2
+    private renderer: Renderer2,
   ) {
     this.backdropCloseable = isUndefined(this.backdropCloseable)
       ? true
@@ -140,8 +146,8 @@ export class ModalComponent implements OnInit, OnDestroy {
     });
   }
 
-  onAnimationEnd() {
-    if (this.animateState === 'void') {
+  onAnimationEnd($event) {
+    if ($event.fromState !== 'void' && this.animateState === 'void') {
       this.onHidden();
     }
   }
@@ -160,7 +166,7 @@ export class ModalComponent implements OnInit, OnDestroy {
     }
 
     this.dialogElement.nativeElement.focus();
-    if (this.showAnimate) {
+    if (this.showAnimation) {
       this.animateState = 'in';
     }
   }

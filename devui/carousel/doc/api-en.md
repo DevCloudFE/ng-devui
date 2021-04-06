@@ -14,8 +14,8 @@ In the page：
 
 ## d-carousel parameter
 
-|   Parameter   |             Type             | Default | Description | Jump to Demo |
-| :-----------: | :--------------------------: | :-----: | :---------------------------------------------- | ------------------------------------------------ |
+|   Parameter   |             Type             | Default | Description | Jump to Demo |Global Config| 
+| :----------------: | :-----------: | :--------------------------: | :-----: | :---------------------------------------------- | ------------------------------------------------ |
 | arrowTrigger  | `'hover'\|'never'\|'always'` | 'hover' | Optional. Specifying the display mode of the switching arrow | [Indicator & Toggle Arrow](demo#trigger-usage) |
 |   autoplay    |          `boolean`           |  false  | Optional. Indicating whether to enable automatic NVOD. | [Automatic NVOD](demo#autoplay-usage) |
 | autoplaySpeed |          `number`            |  3000   | Optional. Automatic NVOD speed, in ms. This parameter is used together with `autoplay'. | [Automatic NVOD](demo#autoplay-usage) |

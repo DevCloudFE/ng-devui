@@ -93,12 +93,12 @@
 .devui-drop-icon {
   font-size: $devui-font-size;
 
-  svg {
-    transition: transform 0.3s;
+  svg polygon {
+    fill: $devui-text;
+  }
 
-    polygon {
-      fill: $devui-text;
-    }
+  &-animation svg {
+    transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
   }
 }
 

@@ -384,6 +384,7 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
       this.onSelectDate($event, new Date(yearTitle, 0, 1));
     } else if (this.mode === 'month') {
       this.openChooseYear = false;
+      this.availableMonths = this.onDisplayMonthsChange();
       this.currentMonthIndex = null;
       this.openChooseMonth = true;
     } else {

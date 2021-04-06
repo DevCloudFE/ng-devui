@@ -19,6 +19,7 @@ export const originSource = [
     lastName: 'Otto',
     dob: new Date(1990, 12, 1),
     gender: 'Male',
+    description: 'handsome man'
   },
   {
     id: 2,
@@ -26,6 +27,7 @@ export const originSource = [
     lastName: 'Thornton',
     gender: 'Female',
     dob: new Date(1989, 1, 1),
+    description: 'interesting man'
   },
   {
     id: 3,
@@ -33,6 +35,7 @@ export const originSource = [
     lastName: 'Chen',
     gender: 'Female',
     dob: new Date(1991, 3, 1),
+    description: 'pretty man',
     expandConfig: {description: 'Danni is here'}
   },
   {
@@ -40,6 +43,7 @@ export const originSource = [
     firstName: 'green',
     lastName: 'gerong',
     gender: 'Male',
+    description: 'interesting man',
     dob: new Date(1991, 3, 1),
   },
   {
@@ -56,6 +60,7 @@ export const originSource = [
     lastName: 'li',
     gender: 'Female',
     dob: new Date(1991, 3, 1),
+    description: 'pretty man',
   },
   {
     id: 7,

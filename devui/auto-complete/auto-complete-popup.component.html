@@ -22,6 +22,7 @@
     [style.left]="overview === 'multiline' ? position?.left + 'px' : '0'"
     [@fadeInOut]="isOpen && !disabled ? 'bottom' : 'void'"
     (@fadeInOut.done)="animationEnd($event)"
+    [@.disabled]="!showAnimation"
     #selectMenuElement
     dLoading
     [showLoading]="showLoading"

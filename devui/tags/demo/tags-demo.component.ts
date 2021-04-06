@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DevuiSourceData } from 'ng-devui/shared/devui-codebox/devui-source-data';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
@@ -6,7 +6,7 @@ import { Subscription } from 'rxjs';
   selector: 'd-demo-tags',
   templateUrl: './tags-demo.component.html',
 })
-export class TagsDemoComponent {
+export class TagsDemoComponent implements OnDestroy, OnInit {
   basicSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./basic/basic.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/basic.component.ts') },
@@ -20,7 +20,7 @@ export class TagsDemoComponent {
 
   navItems = [];
   subs: Subscription = new Subscription();
-  constructor(private translate: TranslateService) {}
+  constructor(private translate: TranslateService) { }
 
   ngOnInit() {
     this.subs.add(

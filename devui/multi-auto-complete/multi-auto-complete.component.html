@@ -4,7 +4,7 @@
     class="multiple-label-auto-complete multiple-label-auto-complete-{{ multipleLabelClassNameSuffix }}"
     [ngClass]="{ 'multiple-label-auto-complete-disabled': disabled }"
   >
-    <ul *ngIf="overview !== 'single'" class="devui-dropdown-origin devui-no-border" #multiAutoCompleteWrapper>
+    <ul *ngIf="overview !== 'single'" class="devui-dropdown-origin" #multiAutoCompleteWrapper>
       <li *ngFor="let item of multiItems">
         <ng-template
           [ngTemplateOutlet]="disabled || (overview === 'none' && !inputEdit) ? transparentTemplate : defaultTemplate"
@@ -39,6 +39,7 @@
           [delay]="delay"
           [dAutoCompleteWidth]="width"
           dAutoComplete
+          [showAnimation]="showAnimation"
           [searchFn]="searchFn"
           [appendToBody]="appendToBody"
           [cdkOverlayOffsetY]="3"

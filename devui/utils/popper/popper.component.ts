@@ -51,6 +51,7 @@ export class PopperComponent implements AfterViewInit, OnDestroy {
   @Input() poppoverAppendDirection = 'bottom';
   @Input() appendTo = 'body';
   @Input() extraConfig: ExtraSetConfig;
+  @Input() showAnimation = true;
   protected popper = null;
   protected _isOpen: any = false;
   protected animate: boolean;
@@ -144,8 +145,15 @@ export class PopperComponent implements AfterViewInit, OnDestroy {
       }
       e.currentTarget.removeEventListener(e.type, handler);
     };
-
-    this.popperContainer.nativeElement.addEventListener('transitionend', handler);
+    if (this.showAnimation) {
+      this.popperContainer.nativeElement.addEventListener('transitionend', handler);
+    } else {
+      that.renderer.setStyle(popperContainer, 'display', 'none');
+      that.animate = false;
+      that.popper.destroy();
+      that.popper = null;
+      that.detachPopperContainer();
+    }
   }
 
   setBlurListener() {
@@ -252,9 +260,9 @@ export class PopperComponent implements AfterViewInit, OnDestroy {
     const popperContainer = this.popperContainer.nativeElement;
     if (this.animate && command) {
       if (command === 'open') {
-        this.renderer.setStyle(popperContainer, 'transition', `all .2s ${easeOutQuint}`);
+        this.renderer.setStyle(popperContainer, 'transition', this.showAnimation ? `all .2s ${easeOutQuint}` : 'none');
       } else if (command === 'close') {
-        popperContainer.style.transition = `all .16s ${easeInQuint}`;
+        popperContainer.style.transition = this.showAnimation ? `all .16s ${easeInQuint}` : 'none';
       }
     } else {
       this.renderer.setStyle(popperContainer, 'transition', null);

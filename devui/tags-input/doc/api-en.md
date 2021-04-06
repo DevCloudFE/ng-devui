@@ -20,8 +20,8 @@ In the page:
 
 ## d-tags-input parameter
 
-|    Parameter    |              Type               |         Default         | Description                                                                                                                      | Jump to Demo                                           |
-| :-------------: | :-----------------------------: | :---------------------: | :------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------ |
+|    Parameter    |              Type               |         Default         | Description                                                                                                                      | Jump to Demo                                           |Global Config| 
+| :----------------: | :-------------: | :-----------------------------: | :---------------------: | :------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------ |
 |      tags       |             `Array`             |           []            | Required. This parameter records the entered tag and selected tag list.                                                          | [Basic Usage](demo#basic-usage) |
 | displayProperty |            `string`             |         'name'          | Optional. Attribute name used by a list item                                                                                     | [Basic Usage](demo#basic-usage) |
 |   placeholder   |            `boolean`            |           ''            | Optional. This parameter specifies the placeholder in the text box.                                                              | [Basic Usage](demo#basic-usage) |
@@ -34,6 +34,7 @@ In the page:
 | suggestionList  |             `Array`             |           []            | Optional. This parameter is a drop-down list box. The default tag list can be selected.                                          | [Basic Usage](demo#basic-usage) |
 | checkBeforeAdd  | `Function\|Promise\|Observable` |          None           | Optional. User-defined verification function whose type is (newTag: string) => boolean, Promise<boolean>, or Observable<boolean> | [Basic Usage](demo#basic-usage) |
 |    disabled     |            `boolean`            |          false          | Optional. Disabled is unavailable.                                                                                               | [Basic Usage](demo#basic-usage) |
+| showAnimation | `boolean` | true | optional. Whether to enable animation. |   | ✔ |
 
 Note: In addition to the "tags" mode, you can also use the "ngModel" mode to bind arrays. For details, see [Two-way Binding](demo#ng-model).
 

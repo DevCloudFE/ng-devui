@@ -1,8 +1,8 @@
-<div class="demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 60, bottom: 0 }">
+<div class="devui-demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 180, bottom: 0 }">
   <d-demo-nav [navItems]="navItems"></d-demo-nav>
-  <div class="demo-example" [dAnchor]="'basic-usage'">
-    <div class="demo-title">{{ 'components.datatable.basicDemo.title' | translate }}</div>
-    <div class="demo-text">
+  <div class="devui-demo-example" [dAnchor]="'basic-usage'">
+    <div class="devui-demo-title">{{ 'components.datatable.basicDemo.title' | translate }}</div>
+    <div class="devui-demo-text">
       {{ 'components.datatable.basicDemo.description' | translate }}
     </div>
     <d-tabs [type]="'tabs'">
@@ -22,22 +22,22 @@
       </d-tab>
     </d-tabs>
   </div>
-  <div class="demo-example" [dAnchor]="'mutil-styles'">
-    <div class="demo-title">{{ 'components.datatable.mutilStylesDemo.title' | translate }}</div>
+  <div class="devui-demo-example" [dAnchor]="'mutil-styles'">
+    <div class="devui-demo-title">{{ 'components.datatable.mutilStylesDemo.title' | translate }}</div>
     <d-codebox id="styels" [sourceData]="mutilStyles">
       <d-mutil-styles demo></d-mutil-styles>
     </d-codebox>
   </div>
-  <div class="demo-example" [dAnchor]="'async-loading'">
-    <div class="demo-title">{{ 'components.datatable.asyncDemo.title' | translate }}</div>
-    <div class="demo-text">{{ 'components.datatable.asyncDemo.description' | translate }}</div>
+  <div class="devui-demo-example" [dAnchor]="'async-loading'">
+    <div class="devui-demo-title">{{ 'components.datatable.asyncDemo.title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.datatable.asyncDemo.description' | translate }}</div>
     <d-codebox id="table-async" [sourceData]="asyncSource">
       <d-datatable-demo-async demo></d-datatable-demo-async>
     </d-codebox>
   </div>
-  <div class="demo-example" [dAnchor]="'table-interaction'">
-    <div class="demo-title">{{ 'components.datatable.interactionDemo.title' | translate }}</div>
-    <div class="demo-text">
+  <div class="devui-demo-example" [dAnchor]="'table-interaction'">
+    <div class="devui-demo-title">{{ 'components.datatable.interactionDemo.title' | translate }}</div>
+    <div class="devui-demo-text">
       {{ 'components.datatable.interactionDemo.description' | translate }}
     </div>
     <d-tabs [type]="'tabs'">
@@ -57,9 +57,9 @@
       </d-tab>
     </d-tabs>
   </div>
-  <div class="demo-example" [dAnchor]="'table-check-options'">
-    <div class="demo-title">{{ 'components.datatable.checkOptionsDemo.title' | translate }}</div>
-    <div class="demo-text">{{ 'components.datatable.checkOptionsDemo.description' | translate }}</div>
+  <div class="devui-demo-example" [dAnchor]="'table-check-options'">
+    <div class="devui-demo-title">{{ 'components.datatable.checkOptionsDemo.title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.datatable.checkOptionsDemo.description' | translate }}</div>
     <d-tabs [type]="'tabs'">
       <d-tab id="tab1" title="{{ 'components.datatable.allDemo.tab1' | translate }}" tabId="tab1">
         <ng-template dTabContent>
@@ -77,37 +77,37 @@
       </d-tab>
     </d-tabs>
   </div>
-  <div class="demo-example" [dAnchor]="'lazy-loading-of-list-data'">
-    <div class="demo-title">{{ 'components.datatable.lazyDemo.title' | translate }}</div>
-    <div class="demo-text">{{ 'components.datatable.lazyDemo.description' | translate }}</div>
+  <div class="devui-demo-example" [dAnchor]="'lazy-loading-of-list-data'">
+    <div class="devui-demo-title">{{ 'components.datatable.lazyDemo.title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.datatable.lazyDemo.description' | translate }}</div>
     <d-codebox id="table-lazy" [sourceData]="lazySource">
       <d-datatable-demo-lazyloaddata demo></d-datatable-demo-lazyloaddata>
     </d-codebox>
   </div>
-  <div class="demo-example" [dAnchor]="'virtual-scroll'">
-    <div class="demo-title">{{ 'components.datatable.virtualScrollDemo.title' | translate }}</div>
-    <div class="demo-text">{{ 'components.datatable.virtualScrollDemo.description' | translate }}</div>
+  <div class="devui-demo-example" [dAnchor]="'virtual-scroll'">
+    <div class="devui-demo-title">{{ 'components.datatable.virtualScrollDemo.title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.datatable.virtualScrollDemo.description' | translate }}</div>
     <d-codebox id="cell-merge" [sourceData]="virtualScrollSource">
       <d-virtual-scroll demo></d-virtual-scroll>
     </d-codebox>
   </div>
-  <div class="demo-example" [dAnchor]="'table-fixing'">
-    <div class="demo-title">{{ 'components.datatable.maxHeightDemo.title' | translate }}</div>
-    <div class="demo-text">{{ 'components.datatable.maxHeightDemo.description' | translate }}</div>
+  <div class="devui-demo-example" [dAnchor]="'table-fixing'">
+    <div class="devui-demo-title">{{ 'components.datatable.maxHeightDemo.title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.datatable.maxHeightDemo.description' | translate }}</div>
     <d-codebox id="table-max" [sourceData]="maxHeightSource">
       <d-datatable-demo-maxheight demo></d-datatable-demo-maxheight>
     </d-codebox>
   </div>
-  <div class="demo-example" [dAnchor]="'fixed-virtual-scroll'">
-    <div class="demo-title">{{ 'components.datatable.fixHeightVirtualScrollDemo.title' | translate }}</div>
-    <div class="demo-text">{{ 'components.datatable.fixHeightVirtualScrollDemo.description' | translate }}</div>
+  <div class="devui-demo-example" [dAnchor]="'fixed-virtual-scroll'">
+    <div class="devui-demo-title">{{ 'components.datatable.fixHeightVirtualScrollDemo.title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.datatable.fixHeightVirtualScrollDemo.description' | translate }}</div>
     <d-codebox id="table-max" [sourceData]="fixHeightVirtualScrollSource">
       <d-fix-header-virtual-scroll demo></d-fix-header-virtual-scroll>
     </d-codebox>
   </div>
-  <div class="demo-example" [dAnchor]="'header-grouping'">
-    <div class="demo-title">{{ 'components.datatable.headerGroupingDemo.title' | translate }}</div>
-    <div class="demo-text">
+  <div class="devui-demo-example" [dAnchor]="'header-grouping'">
+    <div class="devui-demo-title">{{ 'components.datatable.headerGroupingDemo.title' | translate }}</div>
+    <div class="devui-demo-text">
       <div>{{ 'components.datatable.headerGroupingDemo.description' | translate }}</div>
     </div>
     <d-tabs [type]="'tabs'">
@@ -128,9 +128,9 @@
       </d-tab>
     </d-tabs>
   </div>
-  <div class="demo-example" [dAnchor]="'edit-cell'">
-    <div class="demo-title">{{ 'components.datatable.editableDemo.title' | translate }}</div>
-    <div class="demo-text">
+  <div class="devui-demo-example" [dAnchor]="'edit-cell'">
+    <div class="devui-demo-title">{{ 'components.datatable.editableDemo.title' | translate }}</div>
+    <div class="devui-demo-text">
       <div>{{ 'components.datatable.editableDemo.description' | translate }}</div>
     </div>
     <d-tabs [type]="'tabs'">
@@ -150,9 +150,9 @@
       </d-tab>
     </d-tabs>
   </div>
-  <div class="demo-example" [dAnchor]="'expand-row'">
-    <div class="demo-title">{{ 'components.datatable.expandRowDemo.title' | translate }}</div>
-    <div class="demo-text">
+  <div class="devui-demo-example" [dAnchor]="'expand-row'">
+    <div class="devui-demo-title">{{ 'components.datatable.expandRowDemo.title' | translate }}</div>
+    <div class="devui-demo-text">
       <div>{{ 'components.datatable.expandRowDemo.description' | translate }}</div>
     </div>
     <d-tabs [type]="'tabs'">
@@ -172,9 +172,9 @@
       </d-tab>
     </d-tabs>
   </div>
-  <div class="demo-example" [dAnchor]="'tree-form'">
-    <div class="demo-title">{{ 'components.datatable.treeTableDemo.title' | translate }}</div>
-    <div class="demo-text">{{ 'components.datatable.treeTableDemo.description' | translate }}</div>
+  <div class="devui-demo-example" [dAnchor]="'tree-form'">
+    <div class="devui-demo-title">{{ 'components.datatable.treeTableDemo.title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.datatable.treeTableDemo.description' | translate }}</div>
     <d-tabs [type]="'tabs'">
       <d-tab id="tab1" title="{{ 'components.datatable.allDemo.tab1' | translate }}" tabId="tab1">
         <ng-template dTabContent>
@@ -192,9 +192,9 @@
       </d-tab>
     </d-tabs>
   </div>
-  <div class="demo-example" [dAnchor]="'fixed-column'">
-    <div class="demo-title">{{ 'components.datatable.fixColumnDemo.title' | translate }}</div>
-    <div class="demo-text">{{ 'components.datatable.fixColumnDemo.description' | translate }}</div>
+  <div class="devui-demo-example" [dAnchor]="'fixed-column'">
+    <div class="devui-demo-title">{{ 'components.datatable.fixColumnDemo.title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.datatable.fixColumnDemo.description' | translate }}</div>
     <d-tabs [type]="'tabs'">
       <d-tab id="tab1" title="{{ 'components.datatable.allDemo.tab1' | translate }}" tabId="tab1">
         <ng-template dTabContent>
@@ -212,30 +212,30 @@
       </d-tab>
     </d-tabs>
   </div>
-  <div class="demo-example" [dAnchor]="'column-dragging'">
-    <div class="demo-title">{{ 'components.datatable.dragColumnDemo.title' | translate }}</div>
-    <div class="demo-text">{{ 'components.datatable.dragColumnDemo.description' | translate }}</div>
+  <div class="devui-demo-example" [dAnchor]="'column-dragging'">
+    <div class="devui-demo-title">{{ 'components.datatable.dragColumnDemo.title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.datatable.dragColumnDemo.description' | translate }}</div>
     <d-codebox id="drag-column" [sourceData]="dragColumnSource">
       <d-drag-column demo></d-drag-column>
     </d-codebox>
   </div>
-  <div class="demo-example" [dAnchor]="'cell-merge'">
-    <div class="demo-title">{{ 'components.datatable.cellMergeDemo.title' | translate }}</div>
-    <div class="demo-text">{{ 'components.datatable.cellMergeDemo.description' | translate }}</div>
+  <div class="devui-demo-example" [dAnchor]="'cell-merge'">
+    <div class="devui-demo-title">{{ 'components.datatable.cellMergeDemo.title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.datatable.cellMergeDemo.description' | translate }}</div>
     <d-codebox id="cell-merge" [sourceData]="cellMergeSource">
       <d-cell-merge demo></d-cell-merge>
     </d-codebox>
   </div>
-  <div class="demo-example" [dAnchor]="'drag-row'">
-    <div class="demo-title">{{ 'components.datatable.dragRowDemo.title' | translate }}</div>
-    <div class="demo-text">{{ 'components.datatable.dragRowDemo.description' | translate }}</div>
+  <div class="devui-demo-example" [dAnchor]="'drag-row'">
+    <div class="devui-demo-title">{{ 'components.datatable.dragRowDemo.title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.datatable.dragRowDemo.description' | translate }}</div>
     <d-codebox id="cell-merge" [sourceData]="dragRowSource">
       <d-drag-row demo></d-drag-row>
     </d-codebox>
   </div>
-  <div class="demo-example" [dAnchor]="'muti-drag-row'">
-    <div class="demo-title">{{ 'components.datatable.batchDragRowDemo.title' | translate }}</div>
-    <div class="demo-text">{{ 'components.datatable.batchDragRowDemo.description' | translate }}</div>
+  <div class="devui-demo-example" [dAnchor]="'muti-drag-row'">
+    <div class="devui-demo-title">{{ 'components.datatable.batchDragRowDemo.title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.datatable.batchDragRowDemo.description' | translate }}</div>
     <d-codebox id="cell-merge" [sourceData]="mutiDragRowSource">
       <d-muti-drag-row demo></d-muti-drag-row>
     </d-codebox>

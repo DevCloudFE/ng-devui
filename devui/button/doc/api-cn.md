@@ -14,8 +14,8 @@ import { ButtonModule } from 'ng-devui/button';
 # d-button
 ## d-button 参数
 
-|    参数     |      类型      |  默认   | 说明                                                                           | 跳转 Demo                                            |
-| :---------: | :------------:  | :-----: | :---------------------------------------------------------------------------  |                                                     |
+|    参数     |      类型      |  默认   | 说明                                                                           | 跳转 Demo                                            |全局配置项| 
+| :----------------: | :---------: | :------------:  | :-----: | :---------------------------------------------------------------------------  |                                                     |
 |     id      |            `string`             |   --    | 可选，button id     |   [主要按钮](demo#button-primary)                                             |
 |    type     | [`IButtonType`](#ibuttontype)   | 'button'  | 可选，类型 `'button' \| 'submit' \| 'reset' ` |  [警示按钮](demo#button-danger)                                             |
 |   bsStyle   | [`IButtonStyle`](#ibuttonstyle)  | 'primary' | 可选，风格 `'primary' \| 'common' \| 'text' \| 'text-dark' \| 'danger'`      | [次要按钮](demo#button-common)   |
@@ -37,8 +37,8 @@ import { ButtonModule } from 'ng-devui/button';
 # d-button-group
 ## d-button-group 参数  
 
-|    参数     |      类型      |  默认   | 说明                                                                           | 跳转 Demo                                            |
-| :---------: | :------------:  | :-----: | :---------------------------------------------------------------------------  |                                                     |
+|    参数     |      类型      |  默认   | 说明                                                                           | 跳转 Demo                                            |全局配置项| 
+| :----------------: | :---------: | :------------:  | :-----: | :---------------------------------------------------------------------------  |                                                     |
 |     size      |    [`IButtonGroupSize`](#ibuttongroupsize)     |  'md'   | 可选，大小`'lg' \| 'md' \| 'sm' \| 'xs'` | [按钮组](demo#button-groups) |
 
 

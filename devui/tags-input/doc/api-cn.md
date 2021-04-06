@@ -20,8 +20,8 @@ import { TagsInputModule } from 'ng-devui/tags-input';
 
 ## d-tags-input 参数
 
-|      参数       |              类型               |          默认           | 说明                                                                                                  | 跳转 Demo                                           |
-| :-------------: | :-----------------------------: | :---------------------: | :---------------------------------------------------------------------------------------------------- | --------------------------------------------------- |
+|      参数       |              类型               |          默认           | 说明                                                                                                  | 跳转 Demo                                           |全局配置项| 
+| :----------------: | :-------------: | :-----------------------------: | :---------------------: | :---------------------------------------------------------------------------------------------------- | --------------------------------------------------- |
 |      tags       |             `Array`             |           []            | 必选，记录输入的标签和选择的标签列表                                                                  | [基本用法](demo#basic-usage) |
 | displayProperty |            `string`             |         'name'          | 可选，列表项使用的属性名                                                                              | [基本用法](demo#basic-usage) |
 |   placeholder   |            `boolean`            |           ''            | 可选，输入框的 placeholder                                                                            | [基本用法](demo#basic-usage) |
@@ -34,6 +34,7 @@ import { TagsInputModule } from 'ng-devui/tags-input';
 | suggestionList  |             `Array`             |           []            | 可选，下拉选项，默认可选择的标签列表                                                                  | [基本用法](demo#basic-usage) |
 | checkBeforeAdd  | `Function\|Promise\|Observable` |           无            | 可选，自定义校验函数，类型为(newTag: string) => boolean 或者 Promise<boolean>或者 Observable<boolean> | [基本用法](demo#basic-usage) |
 |    disabled     |            `boolean`            |          false          | 可选，disabled 灰化状态                                                                               | [基本用法](demo#basic-usage) |
+|  showAnimation   |             `boolean`              |                                 true                                  |  可选，是否开启动画 |   | ✔ |
 
 备注：除传入`tags`方式实现外，还可采用`ngModel`绑定数组的方式，详细使用示例参考[双向绑定](demo#ng-model)。
 

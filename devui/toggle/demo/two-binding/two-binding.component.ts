@@ -20,7 +20,6 @@ export class TwoBindingComponent implements OnInit {
         id: 'dialog-service',
         width: '300px',
         maxHeight: '600px',
-        showAnimate: false,
         title: 'Close?',
         content: 'Are you sure to change the state?',
         backdropCloseable: false,

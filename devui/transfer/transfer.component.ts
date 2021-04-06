@@ -41,6 +41,9 @@ export class TransferComponent implements OnInit, OnChanges, OnDestroy {
 
   @Output() transferToTarget = new EventEmitter<any>();
   @Output() transferToSource = new EventEmitter<any>();
+  @Output() searching = new EventEmitter<any>();
+  @Output() transferring = new EventEmitter<any>();
+  @Output() afterTransfer = new EventEmitter<any>();
 
   transferDirection: any = TransferDirection;
 
@@ -110,9 +113,9 @@ export class TransferComponent implements OnInit, OnChanges, OnDestroy {
 
     if (changes && (changes.sourceOption || changes.targetOption)) {
       this.sourceDisplayOption = this.sourceOption;
-      this.sourceDisplayOptionLen = this.sourceDisplayOption.length;
+      this.sourceDisplayOptionLen = this.sourceDisplayOption ? this.sourceDisplayOption.length : 0;
       this.targetDisplayOption = this.targetOption;
-      this.targetDisplayOptionLen = this.targetDisplayOption.length;
+      this.targetDisplayOptionLen = this.targetDisplayOption ? this.targetDisplayOption.length : 0;
     }
   }
 
@@ -126,8 +129,8 @@ export class TransferComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
-  listTotalCheck(direction: TransferDirection) {
-    if (direction === TransferDirection.SOURCE) {
+  listTotalCheck(direction?: TransferDirection) {
+    if (direction === TransferDirection.SOURCE || !direction) {
       const sourceLen = this.sourceDisplayOption.filter(item => item.checked).length;
       this.sourceCheckedLen = sourceLen;
       if (sourceLen === 0) {
@@ -142,7 +145,8 @@ export class TransferComponent implements OnInit, OnChanges, OnDestroy {
           this.sourceHalfChecked = false;
         }
       }
-    } else if (direction === TransferDirection.TARGET) {
+    }
+    if (direction === TransferDirection.TARGET || !direction) {
       const rightLen = this.targetDisplayOption.filter(item => item.checked).length;
       this.targetCheckedLen = rightLen;
       if (rightLen === 0) {
@@ -168,49 +172,54 @@ export class TransferComponent implements OnInit, OnChanges, OnDestroy {
         return;
       }
 
-      if (direction === TransferDirection.TARGET) {
-        const changeData = [];
-        // 对源数据更改
-        this.sourceDisplayOption.filter(item => item.checked === true).forEach(item => {
-          const tmp = { name: item.name, value: item.value, id: item.id, checked: false };
-          this.targetOption.push(tmp);
-          changeData.push(tmp);
-          this.sourceOption.splice(this.sourceOption.indexOf(item), 1);
-        });
-        this.targetCanTransfer = false;
+      if (this.transferring.observers.length) {
+        this.transferring.emit(direction);
+      } else {
+        if (direction === TransferDirection.TARGET) {
+          const changeData = [];
+          // 对源数据更改
+          this.sourceDisplayOption.filter(item => item.checked === true).forEach(item => {
+            const tmp = { name: item.name, value: item.value, id: item.id, checked: false };
+            this.targetOption.push(tmp);
+            changeData.push(tmp);
+            this.sourceOption.splice(this.sourceOption.indexOf(item), 1);
+          });
+          this.targetCanTransfer = false;
 
-        if (this.sourceCustomViewTemplate) {
-          this.transferToTarget.next();
-        } else {
-          this.transferToTarget.next({ sourceOption: this.sourceOption, targetOption: this.targetOption, changeData });
-        }
-        if (this.isSearch && this.sourceSearchText !== '') {
-          this.sourceSearchText = '';
-        }
-      } else if (direction === TransferDirection.SOURCE) {
-        const changeData = [];
-        this.targetDisplayOption.filter(item => item.checked === true).forEach(item => {
-          const tmp = { name: item.name, value: item.value, id: item.id, checked: false };
-          this.sourceOption.push(tmp);
-          changeData.push(tmp);
-          this.targetOption.splice(this.targetOption.indexOf(item), 1);
-        });
-        this.targetOption = this.targetOption.filter(item => item.checked !== true);
-        this.sourceCanTransfer = false;
-        if (this.targetCustomViewTemplate) {
-          this.transferToSource.next();
-        } else {
-          this.transferToSource.next({ sourceOption: this.sourceOption, targetOption: this.targetOption, changeData });
-        }
+          if (this.sourceCustomViewTemplate) {
+            this.transferToTarget.next();
+          } else {
+            this.transferToTarget.next({ sourceOption: this.sourceOption, targetOption: this.targetOption, changeData });
+          }
+          if (this.isSearch && this.sourceSearchText !== '') {
+            this.sourceSearchText = '';
+          }
+        } else if (direction === TransferDirection.SOURCE) {
+          const changeData = [];
+          this.targetDisplayOption.filter(item => item.checked === true).forEach(item => {
+            const tmp = { name: item.name, value: item.value, id: item.id, checked: false };
+            this.sourceOption.push(tmp);
+            changeData.push(tmp);
+            this.targetOption.splice(this.targetOption.indexOf(item), 1);
+          });
+          this.targetOption = this.targetOption.filter(item => item.checked !== true);
+          this.sourceCanTransfer = false;
+          if (this.targetCustomViewTemplate) {
+            this.transferToSource.next();
+          } else {
+            this.transferToSource.next({ sourceOption: this.sourceOption, targetOption: this.targetOption, changeData });
+          }
 
-        if (this.isSearch && this.targetSearchText !== '') {
-          this.targetSearchText = '';
+          if (this.isSearch && this.targetSearchText !== '') {
+            this.targetSearchText = '';
+          }
         }
+        this.targetDisplayOption = this.targetOption;
+        this.sourceDisplayOption = this.sourceOption;
+        this.listTotalCheck(TransferDirection.TARGET);
+        this.listTotalCheck(TransferDirection.SOURCE);
+        this.afterTransfer.emit(direction);
       }
-      this.targetDisplayOption = this.targetOption;
-      this.sourceDisplayOption = this.sourceOption;
-      this.listTotalCheck(TransferDirection.TARGET);
-      this.listTotalCheck(TransferDirection.SOURCE);
     });
   }
 
@@ -245,20 +254,24 @@ export class TransferComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   search(direction: TransferDirection, keyword: any) {
-    if (keyword !== '') {
-      if (direction === TransferDirection.SOURCE) {
-        this.sourceDisplayOption = this.sourceOption.filter(item => item.name.match(keyword) !== null);
-      } else if (direction === TransferDirection.TARGET) {
-        this.targetDisplayOption = this.targetOption.filter(item => item.name.match(keyword) !== null);
-      }
+    if (this.searching.observers.length) {
+      this.searching.emit({direction, keyword});
     } else {
-      if (direction === TransferDirection.SOURCE) {
-        this.sourceDisplayOption = this.sourceOption;
-      } else if (direction === TransferDirection.TARGET) {
-        this.targetDisplayOption = this.targetOption;
+      if (keyword !== '') {
+        if (direction === TransferDirection.SOURCE) {
+          this.sourceDisplayOption = this.sourceOption.filter(item => item.name.match(keyword) !== null);
+        } else if (direction === TransferDirection.TARGET) {
+          this.targetDisplayOption = this.targetOption.filter(item => item.name.match(keyword) !== null);
+        }
+      } else {
+        if (direction === TransferDirection.SOURCE) {
+          this.sourceDisplayOption = this.sourceOption;
+        } else if (direction === TransferDirection.TARGET) {
+          this.targetDisplayOption = this.targetOption;
+        }
       }
+      this.listTotalCheck(direction);
     }
-    this.listTotalCheck(direction);
   }
 
   onDrop(direction: TransferDirection, e: any) {

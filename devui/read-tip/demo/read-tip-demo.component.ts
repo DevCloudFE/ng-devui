@@ -5,8 +5,7 @@ import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'lib-read-tip-demo',
-  templateUrl: './read-tip-demo.component.html',
-  styleUrls: ['./read-tip-demo.component.css'],
+  templateUrl: './read-tip-demo.component.html'
 })
 export class ReadTipDemoComponent implements OnInit, OnDestroy {
   basicSource: Array<DevuiSourceData> = [

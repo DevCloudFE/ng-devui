@@ -16,7 +16,7 @@
     }"
     [ngStyle]="{ width: width }"
     [@modalAnimation]="animateState"
-    (@modalAnimation.done)="onAnimationEnd()"
+    (@modalAnimation.done)="onAnimationEnd($event)"
     tabindex="1"
     #dialog
   >

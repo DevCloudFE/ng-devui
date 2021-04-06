@@ -381,7 +381,7 @@ describe('Select', () => {
       describe('open', () => {
         it('click should open', fakeAsync(() => {
           menuElement = debugEl.query(By.css('d-select > div >div.devui-dropdown-menu'));
-          expect(menuElement.nativeElement.classList).toContain('devui-dropdopwn-hidden');
+          expect(menuElement.nativeElement.getBoundingClientRect().height).toBe(0);
           openMenu();
           expect(menuElement.nativeElement.getBoundingClientRect().height).toBeGreaterThan(0);
         }));
@@ -432,7 +432,7 @@ describe('Select', () => {
       describe('open', () => {
         it('click should open', fakeAsync(() => {
           menuElement = debugEl.query(By.css('d-select > div >div.devui-dropdown-menu'));
-          expect(menuElement.nativeElement.classList).toContain('devui-dropdopwn-hidden');
+          expect(menuElement.nativeElement.getBoundingClientRect().height).toBe(0);
           openMenu();
           expect(menuElement.nativeElement.getBoundingClientRect().height).toBeGreaterThan(0);
         }));
@@ -646,7 +646,7 @@ describe('Select', () => {
         describe('single', () => {
           it('disabled should not open menu', fakeAsync(() => {
             openMenu();
-            expect(menuElement.nativeElement.classList).toContain('devui-dropdopwn-hidden'); // 面板没展开
+            expect(menuElement.nativeElement.getBoundingClientRect().height).toBe(0);
           }));
         });
         describe('multiple', () => {
@@ -655,7 +655,7 @@ describe('Select', () => {
             fixture.detectChanges();
             tick(); fixture.detectChanges();
             openMenu();
-            expect(menuElement.nativeElement.classList).toContain('devui-dropdopwn-hidden'); // 面板没展开
+            expect(menuElement.nativeElement.getBoundingClientRect().height).toBe(0);
           }));
         });
       });

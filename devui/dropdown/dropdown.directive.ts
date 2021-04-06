@@ -5,6 +5,7 @@ import {
   SkipSelf
 } from '@angular/core';
 import { addClassToOrigin, formWithDropDown, removeClassFromOrigin } from 'ng-devui/utils';
+import { DevConfigService, WithConfig } from 'ng-devui/utils/globalConfig';
 import { fromEvent, merge, Observable, ReplaySubject, Subscription } from 'rxjs';
 import { debounceTime, filter, mapTo, tap } from 'rxjs/operators';
 import { DropDownService } from './dropdown.service';
@@ -51,7 +52,8 @@ export class DropDownDirective implements OnDestroy, OnChanges, AfterContentInit
 
   @HostBinding('class.devui-dropdown') addClass = true;
   @Input() disabled = false;
-
+  @HostBinding('class.devui-dropdown-animation')
+  @Input() @WithConfig() showAnimation = true;
   /**
    * dropdown触发方式
    */
@@ -100,6 +102,7 @@ export class DropDownDirective implements OnDestroy, OnChanges, AfterContentInit
     private dropdownService: DropDownService,
     private cdr: ChangeDetectorRef,
     public el: ElementRef,
+    private devConfigService: DevConfigService,
     @Optional() @SkipSelf() public parentDropdown: DropDownDirective
     ) { }
 

@@ -8,6 +8,7 @@ import { SortDirection, SortEventArg } from '../../../../data-table.model';
 })
 export class SortComponent implements OnInit {
   @Input() sortDirection: SortDirection;
+  @Input() showSortIcon = false;
   @Output() sortEvent = new EventEmitter<SortEventArg>();
 
   constructor() { }

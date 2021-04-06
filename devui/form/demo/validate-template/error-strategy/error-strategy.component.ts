@@ -31,7 +31,10 @@ export class ErrorStrategyComponent {
     if (Array.isArray(value)) {
       value.forEach((item) => {
         if (item.id === '2') {
-          message = `The current administrator ${item.id} is busy.`;
+          message = {
+            'zh-cn': `当前管理员${item.id}繁忙.`,
+            'en-us': `The current administrator ${item.id} is busy.`,
+          };
         }
       });
     }

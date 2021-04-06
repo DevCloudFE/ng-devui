@@ -47,17 +47,17 @@ import { FormsModule } from '@angular/forms';
 
 ## dForm 参数
 
-|   参数    |                 类型                  |     默认     | 说明                                                                       | 跳转 Demo                                    |
-| :-------: | :-----------------------------------: | :----------: | :------------------------------------------------------------------------- | -------------------------------------------- |
-|  layout   | `'horizontal'\|'vertical'\|'columns'` | 'horizontal' | 可选，设置表单的排列方式                                                   | [基本用法](demo#basic-usage)                 |
-| labelSize |         `'sm' \| '' \| 'lg'`          |      ''      | 可选，设置 label 的占宽，未设置默认为 100px，'sm'对应 80px，'lg'对应 150px | [label 横向排列](demo#demo-label-horizontal) |
-| labelAlign |     `'start' \| 'center' \| 'end'`   |    'start'   | 可选，设置水平布局方式下，label对齐方式 | [label 横向排列](demo#demo-label-horizontal) |
+|   参数    |                 类型                  |     默认     | 说明                                                                       | 跳转 Demo                                    |全局配置项| 
+| :----------------: | :-------: | :-----------------------------------: | :----------: | :------------------------------------------------------------------------- | -------------------------------------------- |
+|   layout   | `'horizontal'\|'vertical'\|'columns'` | 'horizontal' | 可选，设置表单的排列方式                                                   | [基本用法](demo#basic-usage)                 |
+| labelSize  |         `'sm' \| '' \| 'lg'`          |      ''      | 可选，设置 label 的占宽，未设置默认为 100px，'sm'对应 80px，'lg'对应 150px | [label 横向排列](demo#demo-label-horizontal) |
+| labelAlign |    `'start' \| 'center' \| 'end'`     |   'start'    | 可选，设置水平布局方式下，label 对齐方式                                   | [label 横向排列](demo#demo-label-horizontal) |
 
 ## dForm 事件
 
-|   参数   |        类型         | 说明                                                                                    | 跳转 Demo                                      |
-| :------: | :-----------------: | :-------------------------------------------------------------------------------------- | ---------------------------------------------- |
-| dSubmit | `EventEmitter<{valid: boolean, directive: `[`DFormGroupRuleDirective`](#dformgroupruledirective) `\| AbstractControlDirective}, errors: {[key: string]: ValidationErrors}>` | 可选，使用dFormSubmit绑定元素触发提交时，响应事件 | [模板驱动表单验证（推荐）](demo#demo-validate-template) |
+|  参数   |                                                                                    类型                                                                                     | 说明                                                | 跳转 Demo                                               |
+| :-----: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------- | ------------------------------------------------------- |
+| dSubmit | `EventEmitter<{valid: boolean, directive: `[`DFormGroupRuleDirective`](#dformgroupruledirective) `\| AbstractControlDirective}, errors: {[key: string]: ValidationErrors}>` | 可选，使用 dFormSubmit 绑定元素触发提交时，响应事件 | [模板驱动表单验证（推荐）](demo#demo-validate-template) |
 
 # d-form-item
 
@@ -135,6 +135,7 @@ import { FormsModule } from '@angular/forms';
 |      参数      |                类型                 | 默认 |          说明          |                        跳转 Demo                        |
 | :------------: | :---------------------------------: | :--: | :--------------------: | :-----------------------------------------------------: |
 | dValidateRules | [`DValidateRules`](#dvalidaterules) |  --  | 必选，配置你的校验规则 | [模板驱动表单验证（推荐）](demo#demo-validate-template) |
+| dValidatePopConfig | [`DPopConfig`](#dpopconfig) |  --  | 可选，popover提示配置 | [模板驱动表单验证（推荐）](demo#demo-validate-template) |
 
 ## dValidateSyncKey 参数
 
@@ -179,22 +180,22 @@ DFormGroupRuleDirective 为表单容器对应 dValidateRules 指令对象，以�
 
 ```ts
 export type DValidateRules =
-  | {
-      validators?: DValidateRule[]; // 同步校验规则
+  {
+    validators?: DValidateRule[]; // 同步校验规则
 
-      asyncValidators?: DAsyncValidateRule[]; // 异步校验规则
+    asyncValidators?: DAsyncValidateRule[]; // 异步校验规则
 
-      asyncDebounceTime?: number; // 异步校验器debounceTime（单位ms），默认为300
+    asyncDebounceTime?: number; // 异步校验器debounceTime（单位ms），默认为300
 
-      errorStrategy?: DValidationErrorStrategy; // error更新策略，默认为'dirty'
+    errorStrategy?: DValidationErrorStrategy; // error更新策略，默认为'dirty'
 
-      message?: string; // 统一配置的message，如果你的某一条校验规则未配置message，将取统一message
+    message?: string | { [key: string]: string }; // 统一配置的message，如果你的某一条校验规则未配置message，将取统一message
 
-      messageShowType?: 'popover' | 'text' | 'none'; // 消息自动显示策略（当前仅单个表单组件下生效），(popover | d-form-item容器内部显示 | 不显示)
+    messageShowType?: 'popover' | 'text' | 'none'; // 消息自动显示策略（当前仅单个表单组件下生效），(popover | d-form-item容器内部显示 | 不显示)
 
-      // 消息显示为popover时，设置popover的内容弹出方向，默认为['right', 'bottom']
-      popPosition?: 'top' | 'right' | 'bottom' | 'left' | ('top' | 'right' | 'bottom' | 'left')[];
-    }
+    // 消息显示为popover时，设置popover的内容弹出方向，默认为['right', 'bottom']
+    popPosition?: 'top' | 'right' | 'bottom' | 'left' | ('top' | 'right' | 'bottom' | 'left')[];
+  }
   | DValidateRule[]; // 若只需设置同步校验规则，可传同步校验规则数组
 ```
 
@@ -207,7 +208,7 @@ export interface DValidateRule { // 定义同步校验规则
 
   validator ?: DValidatorFn | ValidatorFn; // 校验器，兼容Angular原生校验器（需要设置isNgValidator为true）
 
-  message ?: string;  // 校验不通过时返回的提示消息
+  message ?: string | { [key: string]: string };  // 校验不通过时返回的提示消息，可返回国际化词条对象，key为对应语言key，默认key为'default'
 
   errorStrategy ?: DValidationErrorStrategy;  // 当前规则的error更新策略，默认为'dirty'
 
@@ -216,7 +217,7 @@ export interface DValidateRule { // 定义同步校验规则
   isNgValidator ?: boolean; // 标识当前校验器是否为Angular原生校验器
 
   // 这是一个万能的匹配key，你可使用默认提供的校验器key，或者快捷设置你的自定义rule key（不与默认key&保留字冲突即被识别为你当前id）
-  [id: string]: boolean | number | string | RegExp | DValidatorFn | ValidatorFn;
+  [id: string]: [id: string]: boolean | number | string | { [key: string]: string } | RegExp | DValidatorFn | ValidatorFn | undefined;
 }
 ```
 
@@ -226,11 +227,11 @@ export interface DValidateRule { // 定义同步校验规则
 export interface DAsyncValidateRule { // 定义异步校验规则
   id ?: string;
   validator ?: DAsyncValidatorFn | AsyncValidatorFn;
-  message ?: string;
+  message ?: string | { [key: string]: string };
   errorStrategy ?: DValidationErrorStrategy;
   priority ?: number;
   isNgValidator ?: boolean;
-  [id: string]: boolean | number | string | RegExp | DAsyncValidatorFn | AsyncValidatorFn;
+  [id: string]: boolean | number | string | { [key: string]: string } | RegExp | DAsyncValidatorFn | AsyncValidatorFn | undefined;
 ```
 
 ### DValidationErrorStrategy
@@ -247,7 +248,7 @@ export type DValidationErrorStrategy = 'pristine' | 'dirty';
 - 若返回 string|null，null 表示通过，若当前 rule 未设置 message，则返回的 string 将作为当前 rule message
 
 ```TS
-export type DValidatorFn = (value: any) => boolean | string | null;
+export type DValidatorFn = (value: any) => boolean | string | { [key: string]: string } | null;
 ```
 
 ### DAsyncValidatorFn
@@ -255,7 +256,7 @@ export type DValidatorFn = (value: any) => boolean | string | null;
 - 定义 DevUI Form 异步校验器：与同步规则类似，不同为需要你的函数需要返回一个 Observable 对象
 
 ```TS
-export type DAsyncValidatorFn = (value: any) => Observable<boolean | string | null>;
+export type DAsyncValidatorFn = (value: any) => Observable<boolean | string | { [key: string]: string } | null>;
 ```
 
 ### ruleReservedWords
@@ -280,4 +281,13 @@ export const dDefaultValidators = {
   'pattern': Validators.pattern, // 配置正则校验，rule中使用：{ pattern: RegExp }
   'whitespace': DValidators.whiteSpace, // 配置输入不能全为空格限制，rule中使用：{ whitespace: true }
 };
+```
+
+### DPopConfig
+
+```TS
+export type DPopConfig = {
+  popMaxWidth?: number,
+  zIndex?: number,
+}
 ```

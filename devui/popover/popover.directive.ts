@@ -11,6 +11,7 @@ import {
   ViewContainerRef
 } from '@angular/core';
 import { OverlayContainerRef } from 'ng-devui/overlay-container';
+import { DevConfigService, WithConfig } from 'ng-devui/utils/globalConfig';
 import { fromEvent, Subject, Subscription } from 'rxjs';
 import { debounceTime, filter, map, takeUntil } from 'rxjs/operators';
 import { PopoverComponent } from './popover.component';
@@ -49,7 +50,13 @@ export class PopoverDirective implements OnInit, OnDestroy {
   /**
    * 是否显示动画
    */
-  @Input() showAnimate: boolean;
+  @Input() @WithConfig() showAnimation = true;
+  /**
+   * @deprecated Use showAnimation to replace.
+   */
+  @Input() set showAnimate(isShowAnimate: any) {
+    this.showAnimation = isShowAnimate;
+  }
   /**
    * `scrollElement` 默认值是 `window `, 可以不传，只有当页面的滚动不在 window 且`appendToBody`属性为`true`上的时候才需要传递
    */
@@ -105,7 +112,8 @@ export class PopoverDirective implements OnInit, OnDestroy {
     private overlayContainerRef: OverlayContainerRef,
     private viewContainerRef: ViewContainerRef,
     private injector: Injector,
-    private componentFactoryResolver: ComponentFactoryResolver
+    private componentFactoryResolver: ComponentFactoryResolver,
+    private devConfigService: DevConfigService,
   ) {}
 
   onDocumentClick = (event) => {
@@ -138,6 +146,7 @@ export class PopoverDirective implements OnInit, OnDestroy {
       scrollElement: this.scrollElement,
       appendToBody: this.eleAppendToBody,
       zIndex: this.zIndex,
+      showAnimation: this.showAnimation,
     });
 
     // 对创建的ToolTip组件添加鼠标移入和移出的监听事件
@@ -183,9 +192,7 @@ export class PopoverDirective implements OnInit, OnDestroy {
       this.createPopover();
     }
 
-    if (this.showAnimate) {
-      this.popoverComponentRef.instance.show();
-    }
+    this.popoverComponentRef.instance.show();
     document.addEventListener('click', this.onDocumentClick);
   }
 
@@ -259,7 +266,7 @@ export class PopoverDirective implements OnInit, OnDestroy {
 
   hide() {
     if (this.popoverComponentRef) {
-      if (!this.showAnimate) {
+      if (!this.showAnimation) {
         this.destroy();
         return;
       }

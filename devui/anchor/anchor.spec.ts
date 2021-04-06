@@ -61,14 +61,14 @@ class TestAnchorComponent {
       <div
         dAnchorBox
         dAnchorHashSupport
-        [view]="{ top: 60, bottom: 0 }"
+        [view]="{ top: 140, bottom: 0 }"
         class="mymain"
         style="position: relative"
         [updateUrlWhenAnchorActive]="updateUrlWhenAnchorActive"
         [scrollToAnchorByHashOnlyInit]="scrollToAnchorByHashOnlyInit"
       >
         <div class="mysidebar">
-          <d-sticky [view]="{ top: 60, bottom: 0 }">
+          <d-sticky [view]="{ top: 140, bottom: 0 }">
             <ul class="step-nav">
               <li [dAnchorLink]="'base-info'" anchorActive="active">基本信息</li>
               <li [dAnchorLink]="'issue-list'" anchorActive="active">需求列表</li>

@@ -1,0 +1,186 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
+@mixin menu() {
+  position: fixed;
+  display: block;
+  font-size: $devui-font-size;
+  z-index: 5;
+  width: 4em;
+  height: 4em;
+  padding: 1em;
+  transition: all 0.2s ease-out;
+
+  span {
+    position: relative;
+    display: block;
+
+    &::before,
+    &::after {
+      position: absolute;
+      top: -0.55em;
+      content: ' ';
+    }
+
+    &::after {
+      top: 0.55em;
+    }
+
+    &,
+    &::before,
+    &::after {
+      background-color: $devui-text;
+      width: 100%;
+      height: 0.2em;
+      transition: all 0.4s;
+    }
+  }
+
+  &.active span {
+    background: transparent;
+
+    &::before {
+      transform: rotate(45deg) translate(0.5em, 0.4em);
+    }
+
+    &::after {
+      transform: rotate(-45deg) translate(0.4em, -0.3em);
+    }
+  }
+}
+
+.fixed-wapper {
+  width: 100%;
+  z-index: 1;
+}
+
+.header-wapper {
+  height: 60px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  background-color: $devui-base-bg;
+
+  .header-left {
+    display: flex;
+    align-items: center;
+
+    .slide-menu-link {
+      border-right: 1px solid $devui-dividing-line;
+
+      span {
+        background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAOAQMAAAAYFN70AAAABlBMVEUAAAAhKDGQazuIAAAAAXRSTlMAQObYZgAAABRJREFUCNdj+P//ABijAdzif8AYAMnZDu+UDPvPAAAAAElFTkSuQmCC)
+          no-repeat scroll 0 center;
+        display: block;
+        width: 18px;
+        height: 40px;
+        margin: 0 10px;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+
+    .header-gitStar {
+      vertical-align: text-bottom;
+      border: 0;
+      height: 20px;
+      width: 90px;
+      margin: 0 12px;
+    }
+  }
+
+  .header-avatar {
+    margin: 0 12px;
+  }
+
+  .header-collapse-menu {
+    right: 5px;
+    @include menu();
+
+    display: none;
+
+    span {
+      &,
+      &::before,
+      &::after {
+        background: $devui-text;
+      }
+    }
+  }
+}
+
+.header-fixed {
+  position: fixed;
+  z-index: 10;
+}
+
+.header-shadow {
+  box-shadow: $devui-shadow-length-connected-overlay $devui-light-shadow;
+}
+
+.header-maxwidth {
+  max-width: 1256px;
+}
+
+@media (max-width: 1360px) {
+  .header-left {
+    d-search {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: 1180px) {
+  .header-wapper {
+    flex-direction: column;
+    height: 60px;
+
+    .header-collapse-menu {
+      top: 16px;
+      display: block;
+    }
+
+    .header-left {
+      height: 60px;
+      d-search {
+        display: none;
+      }
+    }
+
+    .header-right {
+      display: none;
+    }
+
+    .header-right.active {
+      background-color: $devui-global-bg-normal;
+      height: 520px;
+      z-index: 3;
+
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      ::ng-deep .header-ecosystem {
+        margin-bottom: 12px;
+      }
+      ::ng-deep .header-version-switch {
+        margin-bottom: 12px;
+      }
+      ::ng-deep .header-theme-switch {
+        margin-bottom: 12px;
+      }
+      ::ng-deep .header-language-switch {
+        margin-bottom: 12px;
+      }
+      .header-gitStar {
+        margin-bottom: 12px;
+      }
+    }
+  }
+}
+
+:host d-search ::ng-deep input {
+  border-width: 0;
+}

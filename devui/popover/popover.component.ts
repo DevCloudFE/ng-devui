@@ -1,6 +1,4 @@
-import { animate, state, style, transition, trigger } from '@angular/animations';
 import {
-  AfterContentChecked,
   AfterViewInit,
   ChangeDetectorRef,
   Component,
@@ -8,13 +6,16 @@ import {
   HostBinding,
   HostListener,
   Input,
+  OnChanges,
   OnDestroy,
   OnInit,
   Renderer2,
-  TemplateRef,
+  SimpleChanges,
+  TemplateRef
 } from '@angular/core';
 import { PositionService } from 'ng-devui/position';
 import { PositionType } from 'ng-devui/tooltip';
+import { directionFadeInOut } from 'ng-devui/utils';
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { PopoverType } from './popover.types';
@@ -23,22 +24,39 @@ import { PopoverType } from './popover.types';
   selector: 'd-popover',
   templateUrl: './popover.component.html',
   styleUrls: [`./popover.component.scss`],
-  animations: [
-    trigger('state', [
-      state('void', style({ opacity: 0 })),
-      state('visible', style({ opacity: 1 })),
-      transition('* => visible', animate('150ms cubic-bezier(0.0, 0.0, 0.2, 1)')),
-      transition('visible => *', animate('150ms cubic-bezier(0.4, 0.0, 1, 1)')),
-    ]),
-  ],
+  animations: [directionFadeInOut],
 })
-export class PopoverComponent implements OnInit, AfterViewInit, AfterContentChecked, OnDestroy {
+export class PopoverComponent implements OnInit, AfterViewInit, OnDestroy, OnChanges {
   @Input() triggerElementRef: ElementRef;
-  @Input() position: PositionType | PositionType[] = 'top';
-  currentPosition: PositionType;
+  currentPosition = 'top';
   connectionBias: string;
+  _position: PositionType | PositionType[] = 'top';
+  @Input() get position() {
+    return this._position;
+  }
+  set position(pos) {
+    this._position = pos;
+    let placementPrimary: string;
+    let placementSecondary: string;
+    if (Array.isArray(pos)) {
+      placementPrimary = pos[0].split('-')[0] || 'top';
+      placementSecondary = pos[1].split('-')[1] || 'center';
+    } else {
+      placementPrimary = pos?.split('-')[0] || 'top';
+      placementSecondary = pos?.split('-')[1] || 'center';
+    }
+    this.currentPosition = placementPrimary;
+    this.connectionBias = `bias-${placementSecondary}`;
+    if (placementSecondary === 'center') {
+      if (placementPrimary === 'left' || placementPrimary === 'right') {
+        this.connectionBias = 'bias-vertical-center';
+      } else {
+        this.connectionBias = 'bias-horizontal-center';
+      }
+    }
+  }
   @Input() content: string | HTMLElement | TemplateRef<any>;
-  @Input() showAnimate = false;
+  @Input() showAnimation = true;
   @Input() scrollElement: Element;
   @Input() appendToBody: boolean;
   @Input() zIndex = 1060;
@@ -56,7 +74,7 @@ export class PopoverComponent implements OnInit, AfterViewInit, AfterContentChec
 
   // 因为鼠标移出之后如果立刻消失会很突然，所以增加略小一些的延迟，使得既不突然也反应灵敏
   @Input() mouseLeaveDelay = 100;
-  animateState: string = this.showAnimate ? 'void' : '';
+  animateState: string ;
 
   @HostBinding('style.display') get display() {
     return this.content ? 'block' : 'none';
@@ -64,10 +82,12 @@ export class PopoverComponent implements OnInit, AfterViewInit, AfterContentChec
   @HostBinding('class') get class() {
     return 'devui-popover ' + this.currentPosition + ' ' + this.connectionBias + ' devui-popover-' + this.popType;
   }
-  @HostBinding('@state') get state() {
+  @HostBinding('@directionFadeInOut') get state() {
     return this.animateState;
   }
-
+  @HostBinding('@.disabled') get disabled() {
+    return !this.showAnimation;
+  }
   get template() {
     return this.content instanceof TemplateRef ? this.content : null;
   }
@@ -87,10 +107,7 @@ export class PopoverComponent implements OnInit, AfterViewInit, AfterContentChec
   }
 
   ngAfterViewInit() {
-    setTimeout(() => {
-      this.updatePosition();
-    });
-
+    this.updatePosition();
     if (this.appendToBody) {
       if (!this.scrollElement) {
         this.scrollElement = this.positionService.getScrollParent(this.triggerElementRef.nativeElement);
@@ -112,12 +129,16 @@ export class PopoverComponent implements OnInit, AfterViewInit, AfterContentChec
     }
   }
 
-  ngAfterContentChecked() {
-    this.updatePosition();
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['content']) {
+      if (this.content !== undefined) {
+        this.updatePosition();
+      }
+    }
   }
 
   show() {
-    this.animateState = 'visible';
+    this.animateState = Array.isArray(this.position) ? this.position[0] : this.position;
   }
 
   hide() {
@@ -127,7 +148,7 @@ export class PopoverComponent implements OnInit, AfterViewInit, AfterContentChec
   // will be overwrite by directive
   onHidden() {}
 
-  @HostListener('@state.done', ['$event'])
+  @HostListener('@directionFadeInOut.done', ['$event'])
   onAnimationEnd(event) {
     if (event.toState === 'void') {
       this.onHidden();
@@ -147,15 +168,6 @@ export class PopoverComponent implements OnInit, AfterViewInit, AfterContentChec
       this.position,
       this.appendToBody
     );
-    this.currentPosition = rect.placementPrimary;
-    this.connectionBias = `bias-${rect.placementSecondary}`;
-    if (rect.placementSecondary === 'center') {
-      if (rect.placementPrimary === 'left' || rect.placementPrimary === 'right') {
-        this.connectionBias = 'bias-vertical-center';
-      } else {
-        this.connectionBias = 'bias-horizontal-center';
-      }
-    }
     this.renderer.setStyle(this.elementRef.nativeElement, 'left', `${rect.left}px`);
     this.renderer.setStyle(this.elementRef.nativeElement, 'top', `${rect.top}px`);
   }

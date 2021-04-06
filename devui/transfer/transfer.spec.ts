@@ -85,15 +85,15 @@ describe('transfer', () => {
       debugEle = fixture.debugElement;
       fixture.detectChanges();
 
-      titles = debugEle.queryAll(By.css('.title'));
-      contents = debugEle.queryAll(By.css('.content'));
+      titles = debugEle.queryAll(By.css('.devui-transfer-title'));
+      contents = debugEle.queryAll(By.css('.devui-transfer-content'));
     });
 
     it('should render success', () => {
       expect(debugEle).toBeTruthy();
-      expect(debugEle.query(By.css('.source'))).toBeTruthy();
-      expect(debugEle.query(By.css('.option'))).toBeTruthy();
-      expect(debugEle.query(By.css('.target'))).toBeTruthy();
+      expect(debugEle.query(By.css('.devui-transfer-source'))).toBeTruthy();
+      expect(debugEle.query(By.css('.devui-transfer-option'))).toBeTruthy();
+      expect(debugEle.query(By.css('.devui-transfer-target'))).toBeTruthy();
     });
 
     it('title should render correct', () => {
@@ -172,7 +172,7 @@ describe('transfer', () => {
       flush();
       fixture.detectChanges();
 
-      const toRightButton = debugEle.queryAll(By.css('.transfer-op'))[1];
+      const toRightButton = debugEle.queryAll(By.css('.devui-transfer-op'))[1];
       toRightButton.query(By.css('svg')).nativeElement.dispatchEvent(new Event('click'));
 
       tick();
@@ -191,7 +191,7 @@ describe('transfer', () => {
       flush();
       fixture.detectChanges();
 
-      const toLeftButton = debugEle.queryAll(By.css('.transfer-op'))[0];
+      const toLeftButton = debugEle.queryAll(By.css('.devui-transfer-op'))[0];
       toLeftButton.query(By.css('svg')).nativeElement.dispatchEvent(new Event('click'));
 
       tick();
@@ -260,7 +260,7 @@ describe('transfer', () => {
 
     it('drag and drop should work', () => {
       fixture.detectChanges();
-      const iconList = contents[0].queryAll(By.css('.drag-handle'));
+      const iconList = contents[0].queryAll(By.css('.devui-transfer-drag-handle'));
       const liList = contents[0].queryAll(By.css('li'));
       const dropPlace = liList[2].nativeElement;
       const firstIconRect = iconList[0].nativeElement.getBoundingClientRect();
@@ -304,7 +304,7 @@ describe('transfer', () => {
 
     it('target content drag and drop should work', () => {
       fixture.detectChanges();
-      const iconList = contents[1].queryAll(By.css('.drag-handle'));
+      const iconList = contents[1].queryAll(By.css('.devui-transfer-drag-handle'));
       const liList = contents[1].queryAll(By.css('li'));
       const dropPlace = liList[2].nativeElement;
       const firstIconRect = iconList[0].nativeElement.getBoundingClientRect();

@@ -12,12 +12,14 @@
     [style.left]="position === 'left' ? 0 : null"
     [style.right]="position === 'right' ? 0 : null"
   >
-    <div class="overlay-backdrop" [@fadeInOut]="animateState" (click)="backdropCloseable && hide()"></div>
+    <div class="overlay-backdrop" [@fadeInOut]="animateState" [@.disabled]="!showAnimation" (click)="backdropCloseable && hide()"></div>
     <div
+      #drawerContainer
       class="drawer-nav"
       [ngStyle]="{ width: _width }"
       [@flyInOut]="position + '-' + animateState"
       (@flyInOut.done)="animationDone.next($event)"
+      [@.disabled]="!showAnimation"
       [style.left]="position === 'left' ? 0 : null"
       [style.right]="position === 'right' ? 0 : null"
     >

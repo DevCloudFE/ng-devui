@@ -1,0 +1,55 @@
+<ng-container [ngTemplateOutlet]="currentTemp"></ng-container>
+
+<!-- 精灵模式模板 -->
+<ng-template #spriteTemp>
+  <div
+    class="devui-nav-sprite-content"
+    cdkDrag
+    [ngClass]="{ 'is-min': !isOpen }"
+    (cdkDragStarted)="cdkDragStarted()"
+    (cdkDragEnded)="cdkDragEnded()"
+  >
+    <ng-container *ngIf="isOpen; else minTemp">
+      <div class="devui-nav-sprite-header">
+        <div class="devui-nav-sprite-header-title">{{ title }}</div>
+        <d-button icon="icon-close" bsStyle="text-dark" title="close" (click)="hide()"></d-button>
+      </div>
+      <ng-container [ngTemplateOutlet]="defaultItemsTemp"></ng-container>
+    </ng-container>
+  </div>
+</ng-template>
+
+<!-- 默认模板 -->
+<ng-template #defaultTemp>
+  <div class="devui-nav-sprite-content">
+    <div class="devui-nav-sprite-header">{{ title }}</div>
+    <ng-container [ngTemplateOutlet]="defaultItemsTemp"></ng-container>
+  </div>
+</ng-template>
+
+<!-- 目录内容模板 -->
+<ng-template #defaultItemsTemp let-data>
+  <ul class="devui-nav-sprite-menus" *ngIf="navData?.length">
+    <li
+      #items
+      *ngFor="let item of navData; let i = index"
+      [style]="'text-indent:' + indent * (item?.level - 1) + 'em;'"
+      [ngClass]="{ active: i === activeMenu }"
+      (click)="navTo($event, item)"
+    >
+      <ng-container [ngTemplateOutlet]="navItemTemplate" [ngTemplateOutletContext]="{ item: item }"></ng-container>
+    </li>
+  </ul>
+</ng-template>
+
+<!-- 精灵模式最小化模板 -->
+<ng-template #minTemp>
+  <div class="devui-sprite-min">
+    <i class="icon-frame-contract" (click)="open()"></i>
+  </div>
+</ng-template>
+
+<!-- 单个目录模板 -->
+<ng-template #defaultNavItemTemplate let-item="item">
+  <span>{{ item?.label }}</span>
+</ng-template>

@@ -1,15 +1,15 @@
-<div class="docs-header">
-  <h1>{{ componentName }}</h1>
+<h1>{{ componentName }}</h1>
+<div class="devui-docs-header">
   <div style="margin-bottom: 40px">{{ description }}</div>
   <div *ngIf="tmw">
     <h3>{{ 'public.whenToUse' | translate }}</h3>
     <div style="margin-bottom: 20px" [innerHTML]="tmw"></div>
   </div>
-  <d-tabs [showContent]="false" [(activeTab)]="componentTab" (activeTabChange)="activeTabChange($event)">
-    <d-tab id="demo" title="Demo" tabId="demo"></d-tab>
-    <d-tab id="api" title="API" tabId="api"></d-tab>
-  </d-tabs>
 </div>
+<d-tabs class="d-website-demo-tabs" [showContent]="false" [(activeTab)]="componentTab" (activeTabChange)="activeTabChange($event)">
+  <d-tab id="demo" title="Demo" tabId="demo"></d-tab>
+  <d-tab id="api" title="API" tabId="api"></d-tab>
+</d-tabs>
 <div class="examples-viewer">
   <div class="examples-viewer-wrapper">
     <router-outlet></router-outlet>

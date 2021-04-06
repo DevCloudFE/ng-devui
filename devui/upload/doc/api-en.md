@@ -19,8 +19,8 @@ In the page:
 # d-single-upload
 ## d-single-upload Parameter
 
-| Parameter | Type | Default | Description |       Jump to Demo      |
-| :--------------: | :--------------------------------------------------: | :--------: | :--------------------------------------------------------------------------------------- | ----------------------------------------------- |
+| Parameter | Type | Default | Description |       Jump to Demo      |Global Config| 
+| :----------------: | :--------------: | :--------------------------------------------------: | :--------: | :--------------------------------------------------------------------------------------- | ----------------------------------------------- |
 | fileOptions |  [`IFileOptions`](#ifileoptions)   | -- | Required. Configuration of the file to be uploaded | [Basic Usage](demo#basic-usage) |
 | filePath | `string` | -- | Required. File path | [Basic Usage](demo#basic-usage) |
 | uploadOptions | [`IUploadOptions`](#iuploadoptions) | -- | Required. Upload configuration | [Basic Usage](demo#basic-usage) |
