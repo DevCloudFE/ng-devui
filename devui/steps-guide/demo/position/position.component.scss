@@ -1,0 +1,56 @@
+.demo-scroll-container {
+  overflow-x: auto;
+}
+
+:host ::ng-deep {
+  d-button {
+    margin-right: 4px;
+
+    .devui-btn {
+      min-width: 114px !important;
+    }
+
+    .ctrl-panel .devui-btn {
+      min-width: 64px !important;
+      margin-right: 4px;
+    }
+  }
+}
+
+.top-group {
+  margin-left: 57px;
+  min-width: 400px;
+}
+
+.left-group {
+  float: left;
+
+  d-button {
+    margin-top: 8px;
+    margin-right: 0;
+  }
+}
+
+.right-group {
+  margin-left: 350px;
+  position: relative;
+
+  d-button {
+    margin-top: 8px;
+  }
+}
+
+.bottom-group {
+  min-width: 400px;
+  margin-left: 57px;
+  clear: both;
+
+  d-button {
+    margin-top: 8px;
+  }
+}
+
+.ctrl-panel {
+  text-align: right;
+  max-width: 444px;
+}

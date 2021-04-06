@@ -25,6 +25,17 @@ export interface I18nInterface {
     endDate: string;
     yearDisplay(year): string;
   };
+  datePickerPro: {
+    placeholder: string;
+    startPlaceholder: string;
+    endPlaceholder: string;
+    daysOfWeek: string[];
+    monthsOfYear: string[];
+    hour: string;
+    min: string;
+    second: string;
+    getYearMonthStr(year, month): string;
+  };
   form: {
     required(val): string;
     minlength(len): string;
@@ -51,28 +62,28 @@ export interface I18nInterface {
   quadrant: {
     xAxisLabel: string;
     yAxisLabel: string;
-    defaultTitleConf: [{ title: string }]
+    defaultTitleConf: [{ title: string }];
   };
   upload: {
     warning: string;
-    upload: string,
-    chooseFile: string,
-    chooseFiles: string,
-    preload: string,
-    uploading: string,
-    uploaded: string,
-    uploadFailed: string,
-    uploadSuccess: string,
-    delete: string,
-    reUpload: string,
-    cancelUpload: string,
-    getNotAllowedFileTypeMsg(filename, scope): string,
-    getBeyondMaximalFileSizeMsg(filename, maximalSize): string,
-    getExistSameNameFilesMsg(sameNames): string,
-    getAllFilesBeyondMaximalFileSizeMsg(maximalSize): string,
-    getSelectedFilesCount(filesCount): string,
-    getUploadingFilesCount(uploadingCount, filesCount): string,
-    getFailedFilesCount(failedCount): string
+    upload: string;
+    chooseFile: string;
+    chooseFiles: string;
+    preload: string;
+    uploading: string;
+    uploaded: string;
+    uploadFailed: string;
+    uploadSuccess: string;
+    delete: string;
+    reUpload: string;
+    cancelUpload: string;
+    getNotAllowedFileTypeMsg(filename, scope): string;
+    getBeyondMaximalFileSizeMsg(filename, maximalSize): string;
+    getExistSameNameFilesMsg(sameNames): string;
+    getAllFilesBeyondMaximalFileSizeMsg(maximalSize): string;
+    getSelectedFilesCount(filesCount): string;
+    getUploadingFilesCount(uploadingCount, filesCount): string;
+    getFailedFilesCount(failedCount): string;
   };
   modal: {
     warning: string;
@@ -96,13 +107,13 @@ export interface I18nInterface {
     moreColors: string;
   };
   stepsGuide: {
-    previous: string,
-    next: string,
-    finish: string
+    previous: string;
+    next: string;
+    finish: string;
   };
   splitter: {
-    collapse: string,
-    expand: string
+    collapse: string;
+    expand: string;
   };
   relativeTime: {
     hoursAgo: string;
@@ -122,5 +133,20 @@ export interface I18nInterface {
   };
   tagsInput: {
     tagsReachMaxLength: string;
+  };
+  categorySearch: {
+    confirm: string;
+    cancel: string;
+    selectFilterCondition: string;
+    getFindingMessage: (msg: string) => string;
+    getSearchMessage: (msg: string) => string;
+    saveFilter: string;
+    filterTitle: string;
+    placeholder: string;
+    searchPlaceholder: string;
+    noFilterConditions: string;
+    clearFilterCondition: string;
+    seeMore: string;
+    selected: string;
   };
 }

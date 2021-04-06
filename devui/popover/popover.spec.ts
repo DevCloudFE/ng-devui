@@ -12,7 +12,7 @@ import { PopoverModule } from './popover.module';
       [content]="content"
       [position]="direction"
       [controlled]="true"
-      [showAnimate]="true"
+      [showAnimation]="true"
       [appendToBody]="true"
     >
       default
@@ -23,7 +23,7 @@ import { PopoverModule } from './popover.module';
       [popType]="'warning'"
       [position]="'top'"
       [controlled]="true"
-      [showAnimate]="true"
+      [showAnimation]="true"
       [trigger]="'hover'"
       [hoverDelayTime]="hoverDelayTime"
       [visible]="hoverVisible"

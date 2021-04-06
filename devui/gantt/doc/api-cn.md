@@ -1,15 +1,14 @@
-## 引入
-
-当前组件为实验性组件，需要按需引入，路径如下：
-
+# 如何使用
+在module中引入：
+```ts
+import { GanttModule } from 'ng-devui/gantt';
 ```
-import { GanttModule } from 'ng-devui/experimental/gantt';
-```
+
 
 ### d-gantt-scale 参数
 
-|             参数              |        类型        | 默认值  | 描述                                       | 跳转 Demo                                                                  |
-| :---------------------------: | :----------------: | :---: | :----------------------------------------- | -------------------------------------------------------------------------- |
+|             参数              |        类型        | 默认值  | 描述                                       | 跳转 Demo                                                                  |全局配置项| 
+| :----------------: | :---------------------------: | :----------------: | :---: | :----------------------------------------- | -------------------------------------------------------------------------- |
 |         milestoneList         | `GanttMilestone[]` |  []   | 可选，版本里程碑列表                       | [与datatable组件结合的甘特图](demo#gantt-with-datatable) |
 | ganttScaleContainerOffsetLeft |      `number`      |   0   | 可选，甘特图时间轴容器左偏移像素           | [与datatable组件结合的甘特图](demo#gantt-with-datatable) |
 |   ganttBarContainerElement    |     `Element`      | null  | 必选，甘特图时间条容器，用于显示甘特图标线 | [与datatable组件结合的甘特图](demo#gantt-with-datatable) |

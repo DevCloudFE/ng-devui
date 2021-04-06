@@ -16,8 +16,8 @@ In the page:
 
 ## dReadTip parameters
 
-|      Parameter       |                Type                 | Default | Description                                  | Jump to Demo                                           |
-| :------------------: | :---------------------------------: | :-----: | :------------------------------------------- | ------------------------------------------------------ |
+|      Parameter       |                Type                 | Default | Description                                  | Jump to Demo                                           |Global Config| 
+| :----------------: | :------------------: | :---------------------------------: | :-----: | :------------------------------------------- | ------------------------------------------------------ |
 |    readTipOptions    | [`ReadTipOptions`](#readtipoptions) |   --    | Required. Set readtip options.               | [Basic Usage](demo#basic-usage)                        |
 | readTipOptions.rules |   [`ReadTipRules`](#readtiprules)   |   --    | Option. Set the content of readtip           | [Include Multiple Readtip](demo#multi-readtip)         |
 |   contentTemplate    |         `TemplateRef<any>`          |   --    | Options. Using template to customize content | [Display Content with Template](demo#readtip-template) |
@@ -34,6 +34,7 @@ export interface ReadTipOptions {
   mouseleaveTime?: number; // default is 100
   position?: PositionType | PositionType[]; // default is 'top'
   overlayClassName?: string; // default is ''
+  appendToBody?: boolean; // defualt is true
   rules: ReadTipRules;
 }
 ```
@@ -54,6 +55,11 @@ export interface ReadTipRule {
   mouseleaveTime?: number; // can inherit from ReadTipOptions
   position?: PositionType | PositionType[]; // can inherit from ReadTipOptions
   overlayClassName?: string; // can inherit from ReadTipOptions
-  dataFn?: ({ element, rule: ReadTipRule }) => Observable<{ title?: string; content?: string; template?: TemplateRef<any> }>;
+  appendToBody?: boolean; // can inherit from ReadTipOptions
+  //customData should be used with template. The context of template is customData so that you can customize your template
+  dataFn?: ({
+    element,
+    rule: ReadTipRule,
+  }) => Observable<{ title?: string; content?: string; template?: TemplateRef<any>; customData?: any }>;
 }
 ```

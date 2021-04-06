@@ -26,6 +26,7 @@ export class FilterComponent implements OnInit, OnChanges, OnDestroy {
   @Input() filterBoxHeight: any;
   @Input() column: any; // 为配置column方式兼容自定义过滤模板context
   @Input() closeWhenScroll: boolean;
+  @Input() showFilterIcon = false;
 
   @Output() filterIconActiveChange = new EventEmitter<boolean>(true);
   @Output() filterChange = new EventEmitter<FilterConfig[]>();

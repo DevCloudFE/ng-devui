@@ -16,7 +16,8 @@ import {
   ViewChildren
 } from '@angular/core';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
-import { treeCollapseMotion } from 'ng-devui/utils';
+import { collapseForDomDestroy } from 'ng-devui/utils';
+import { DevConfigService, WithConfig } from 'ng-devui/utils/globalConfig';
 import { Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import {
@@ -30,7 +31,7 @@ import {
   templateUrl: './tree.component.html',
   styleUrls: ['./tree.component.scss'],
   preserveWhitespaces: false,
-  animations: [treeCollapseMotion]
+  animations: [collapseForDomDestroy]
 })
 export class TreeComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
   treeFactory: TreeFactory;
@@ -48,7 +49,7 @@ export class TreeComponent implements OnInit, OnChanges, AfterViewInit, OnDestro
   @Input() toggleDisabledKey = 'disableToggle';
   @Input() virtualScroll = false;
   @Input() virtualScrollHeight = '800px';
-  @Input() showAnimation = true;
+  @Input() @WithConfig() showAnimation = true;
   @Input() minBufferPx = 600;
   @Input() maxBufferPx = 900;
   @Input() itemSize = 30;
@@ -64,7 +65,7 @@ export class TreeComponent implements OnInit, OnChanges, AfterViewInit, OnDestro
   treeNodes = [];
   destroy$ = new Subject();
   afterInitAnimate = true;
-  constructor(private i18n: I18nService) {
+  constructor(private i18n: I18nService, private devConfigService: DevConfigService) {
 
   }
 

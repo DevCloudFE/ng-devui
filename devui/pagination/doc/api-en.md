@@ -16,8 +16,8 @@ In the page:
 
 ## d-pagination parameter
 
-| Parameter | Type | Default | Description | Jump to Demo |
-| :---------------: | :-------------------------------------------------: | :------------------------: | :-------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| Parameter | Type | Default | Description | Jump to Demo |Global Config| 
+| :----------------: | :---------------: | :-------------------------------------------------: | :------------------------: | :-------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
 | pageSize | `number` | 10 | Optional. Maximum number of entries displayed on each page | [Basic usage](demo#basic-usage) |
 | total | `number` | 0 | Optional. Total number of displayed items | [Basic usage](demo#basic-usage) |
 | pageSizeOptions | `number[]` | 10 | Optional. Data source of the drop-down list box for the maximum number of items on each page. The options are 5, 10, 20, and 50 by default. | [Multiple configurations](demo#multiple-configurations) |

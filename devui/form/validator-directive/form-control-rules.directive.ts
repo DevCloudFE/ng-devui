@@ -5,6 +5,7 @@ import {
   ElementRef,
   EventEmitter,
   Host,
+
   Input,
   OnChanges,
   OnDestroy,
@@ -34,6 +35,7 @@ import {
   DAsyncValidateRule,
   dDefaultValidators,
   DFormControlStatus,
+  DPopConfig,
   DValidateErrorStatus,
   DValidateRule,
   DValidateRules,
@@ -48,6 +50,9 @@ export abstract class DAbstractControlRuleDirective implements OnChanges {
 
   /* parent dValidateRuleDirective */
   private _parent: DAbstractControlRuleDirective;
+
+  /* 预置rules: originRules */
+  private _originRules: DValidateRules;
 
   /* rules */
   private _rules: DValidateRules;
@@ -71,6 +76,18 @@ export abstract class DAbstractControlRuleDirective implements OnChanges {
   /* 内置国际化text */
   i18nFormText: I18nInterface['form'];
 
+  /* language key */
+  _locale: string;
+  set locale (key: string) {
+    this._locale = key;
+    this._parseErrors(this._cd.control.errors);
+    this.updateStatusAndMessageToView(this._cd.control.status);
+  }
+
+  get locale(): string {
+    return this._locale;
+  }
+
   public get errorMessage() {
     return this._cd && this._cd.control.invalid
       ? this._errorMessage || (this._rules && (this._rules as { message: string }).message)
@@ -87,7 +104,9 @@ export abstract class DAbstractControlRuleDirective implements OnChanges {
 
   @Output() dRulesStatusChange = new EventEmitter<DValidateErrorStatus>();
 
-  constructor(cd: AbstractControlDirective, parent: DAbstractControlRuleDirective) {
+  constructor(
+    cd: AbstractControlDirective, parent: DAbstractControlRuleDirective
+    ) {
     this._cd = cd;
     this._parent = parent;
   }
@@ -120,13 +139,17 @@ export abstract class DAbstractControlRuleDirective implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if ('rules' in changes && !this._rules) {
       // TODO：提供外部调用可手动更新rule方法
-      this._rules = changes['rules'].currentValue;
+      this._rules = { ...this._originRules, ...this._translateRulesToObject(changes['rules'].currentValue) };
       this.setupOrUpdateRules();
     }
 
     if (!this._registered) {
       this._registerOnStatusChange();
     }
+  }
+
+  public setOriginRules (rules: DValidateRules): void {
+    this._originRules = this._translateRulesToObject(rules);
   }
 
   public setupOrUpdateRules(): void {
@@ -136,6 +159,7 @@ export abstract class DAbstractControlRuleDirective implements OnChanges {
   }
   private _transformRulesAndUpdateToModel(): void {
     this._messageOpts = {};
+
     if (!Array.isArray(this._rules)) {
       if (this._rules.validators) {
         const validators: ValidatorFn[] = this._transformValidatorsToFnArray(this._rules.validators) as ValidatorFn[];
@@ -207,6 +231,16 @@ export abstract class DAbstractControlRuleDirective implements OnChanges {
     return resultFns as AsyncValidatorFn[] | ValidatorFn[];
   }
 
+  private _translateRulesToObject(rules: DValidateRules) {
+    if (Array.isArray(rules)) {
+      return {
+        validators: rules
+      };
+    }
+
+    return rules;
+  }
+
   private _findNgValidatorInDefault(validatorRule: DValidateRule) {
     for (const key in dDefaultValidators) {
       if (validatorRule.hasOwnProperty(key)) {
@@ -248,7 +282,7 @@ export abstract class DAbstractControlRuleDirective implements OnChanges {
     if (typeof res === 'boolean' && !res) {
       error = {};
       error[id] = message;
-    } else if (typeof res === 'string') {
+    } else if (typeof res === 'string' || res && typeof res === 'object') { // 兼容国际化词条
       error = {};
       error[id] = res;
     }
@@ -348,6 +382,8 @@ export abstract class DAbstractControlRuleDirective implements OnChanges {
   private _getMessageFormErrorsById(errors: { [key: string]: any }, id: string): string | null {
     if (errors[id] && typeof errors[id] === 'string') {
       return errors[id];
+    } else if (errors[id] && typeof errors[id] === 'object' && (errors[id][this.locale] || errors[id]['default'])) {
+      return errors[id];
     } else {
       return null;
     }
@@ -426,17 +462,24 @@ export class DFormGroupRuleDirective extends DAbstractControlRuleDirective imple
 
   private destroy$ = new Subject();
 
-  constructor(@Self() cd: ControlContainer, @Optional() @Host() @SkipSelf() parentDir: DFormGroupRuleDirective, private i18n: I18nService) {
+  constructor(
+    @Self() cd: ControlContainer,
+    @Optional() @Host() @SkipSelf() parentDir: DFormGroupRuleDirective,
+    private i18n: I18nService
+    ) {
     super(cd, parentDir);
   }
 
   ngOnInit(): void {
     this.i18nFormText = this.i18n.getI18nText().form;
+    this.locale = this.i18n.getI18nText().locale;
+
     this.i18n
       .langChange()
       .pipe(takeUntil(this.destroy$))
-      .subscribe((data) => {
+      .subscribe((data: I18nInterface) => {
         this.i18nFormText = data.form;
+        this.locale = data.locale;
       });
   }
 
@@ -465,6 +508,8 @@ export class DFormGroupRuleDirective extends DAbstractControlRuleDirective imple
 export class DFormControlRuleDirective extends DAbstractControlRuleDirective implements OnInit, OnChanges, OnDestroy {
   @Input('dValidateRules') rules: DValidateRules;
   @Output() dRulesStatusChange: EventEmitter<any> = new EventEmitter<any>();
+
+  @Input('dValidatePopConfig') popConfig: DPopConfig;
 
   popoverComponentRef: ComponentRef<PopoverComponent>;
   private destroy$ = new Subject();
@@ -497,11 +542,14 @@ export class DFormControlRuleDirective extends DAbstractControlRuleDirective imp
 
   setI18nText() {
     this.i18nFormText = this.i18n.getI18nText().form;
+    this.locale = this.i18n.getI18nText().locale;
+
     this.i18n
       .langChange()
       .pipe(takeUntil(this.destroy$))
-      .subscribe((data) => {
+      .subscribe((data: I18nInterface) => {
         this.i18nFormText = data.form;
+        this.locale = data.locale;
       });
   }
 
@@ -539,6 +587,11 @@ export class DFormControlRuleDirective extends DAbstractControlRuleDirective imp
       [controlStatus, message] = this.getFormControlStatusAndMessage(status);
     }
 
+    /* 国际化适配 */
+    if (message && typeof message === 'object') {
+      message = message[this.locale] || message['default'] || null;
+    }
+
     if (this.showType === 'popover') {
       this._updatePopMessage(controlStatus, message);
       this._updateFormContainer(controlStatus, null);
@@ -570,9 +623,9 @@ export class DFormControlRuleDirective extends DAbstractControlRuleDirective imp
       triggerElementRef: this.triggerElementRef,
       position: this.popPosition,
       popType: type,
-      popMaxWidth: 200,
+      popMaxWidth: this.popConfig?.popMaxWidth || 200,
       appendToBody: true,
-      zIndex: 1060,
+      zIndex: this.popConfig?.zIndex || 1060,
     });
   }
 

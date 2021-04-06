@@ -15,8 +15,8 @@ In the page:
 
 ## d-badge Parameter
 
-| Parameter | Type | Default | Description | Jump to Demo |
-| :---------: | :------------: | :-----: | :--------------------------------------------------------------------------- | :--------------------------- |
+| Parameter | Type | Default | Description | Jump to Demo |Global Config| 
+| :----------------: | :---------: | :------------: | :-----: | :--------------------------------------------------------------------------- | :--------------------------- |
 | count | `number` | -- | Optional. Set the number of basic badges and count badges to be displayed. | [Basic Badge](demo#badge-basic) |
 | maxCount | `number` | 99 | Optional. Sets the maximum number of basic and counting badges that can be displayed. When count is greater than maxCount, maxCount+ is displayed. | [Basic Badge](demo#badge-basic) |
 | showDot | `boolean` | false | Optional. The value true indicates the dot badge (with package) or status badge (without package). The value false indicates the basic badge (with package) or count badge (without package). | [Dotted Badge](demo#badge-dot) |

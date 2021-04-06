@@ -12,8 +12,8 @@ In the page:
 
 ### d-toggle parameter
 
-| Parameter | Type | Default | Description | Jump to Demo |
-| :----------: | :-----------------------------: | :---: | :-------------------------------------------------------------------------- | ------------------------------------------- |
+| Parameter | Type | Default | Description | Jump to Demo |Global Config| 
+| :----------------: | :----------: | :-----------------------------: | :---: | :-------------------------------------------------------------------------- | ------------------------------------------- |
 | size | `'sm'\|''\|'lg'` |'' | Optional. Switch size. | [Basic Usage](demo#basic-usage) |
 | color | `string` | -- | Optional. Customized color when the switch is enabled. | [Custom Style](demo#custom) |
 | checked | `boolean` | false | Optional. Specifies whether to enable the function. The function is disabled by default. | [Basic Usage](demo#basic-usage) |

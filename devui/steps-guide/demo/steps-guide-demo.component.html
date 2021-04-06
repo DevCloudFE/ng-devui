@@ -1,16 +1,23 @@
-<div class="demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 60, bottom: 0 }">
+<div class="devui-demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 180, bottom: 0 }">
   <d-demo-nav [navItems]="navItems"></d-demo-nav>
-  <div class="demo-example" [dAnchor]="'basic-usage'">
-    <div class="demo-title">{{ 'components.steps-guide.basicDemo.title' | translate }}</div>
-    <div class="demo-text">{{ 'components.steps-guide.basicDemo.description' | translate }}</div>
-    <d-codebox id="components-toast-basic" [sourceData]="basicSource">
+  <div class="devui-demo-example" [dAnchor]="'basic-usage'">
+    <div class="devui-demo-title">{{ 'components.steps-guide.basicDemo.title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.steps-guide.basicDemo.description' | translate }}</div>
+    <d-codebox id="components-step-guide-basic" [sourceData]="basicSource">
       <d-basic demo></d-basic>
+    </d-codebox>
+  </div>
+  <div class="demo-example" [dAnchor]="'position'">
+    <div class="demo-title">{{ 'components.steps-guide.positionDemo.title' | translate }}</div>
+    <div class="demo-text">{{ 'components.steps-guide.positionDemo.description' | translate }}</div>
+    <d-codebox id="components-step-guide-custom" [sourceData]="positionSource">
+      <d-position demo></d-position>
     </d-codebox>
   </div>
   <div class="demo-example" [dAnchor]="'custom'">
     <div class="demo-title">{{ 'components.steps-guide.customDemo.title' | translate }}</div>
     <div class="demo-text">{{ 'components.steps-guide.customDemo.description' | translate }}</div>
-    <d-codebox id="components-toast-custom" [sourceData]="lifeSource">
+    <d-codebox id="components-step-guide-custom" [sourceData]="customSource">
       <d-custom demo></d-custom>
     </d-codebox>
   </div>

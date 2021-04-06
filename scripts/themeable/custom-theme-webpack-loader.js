@@ -97,41 +97,44 @@ function getThemeDefinition(fileContent, fileType) {
  * @param {} fallbackStrategy 策略
  */
 function cssReplaceVarValue(css, reg, replaceFn, fallBackHandler = null, fallbackStrategy = 'enforce') {
-  const replaceOriginValue = postcss.plugin('postcss-plugin-replace-var-value', () => {
-    return (root) => {
-      root.walkDecls(decl => {
-        if (decl.type !== 'comment' && decl.value && decl.value.match(reg)) {
-          var newDecl = decl.clone({value: decl.value.replace(reg, replaceFn)});
-          decl.replaceWith(newDecl);
-          if (fallBackHandler) {
-            var declPrev = newDecl.prev();
-            var regFallback = fallBackHandler.reg;
-            var replaceFnFallBack = fallBackHandler.replaceFn;
-            if (declPrev && declPrev.type !== 'comment' && declPrev.value
-              && declPrev.toString() === decl.clone({value: decl.value.replace(regFallback, replaceFnFallBack)}).toString()){
+  const replaceOriginValue = (reg,replaceFn,fallBackHandler,fallbackStrategy) => {
+    return {
+      postcssPlugin: 'postcss-plugin-replace-var-value',
+      Once(root, { result }) {
+        root.walkDecls(decl => {
+          if (decl.type !== 'comment' && decl.value && decl.value.match(reg)) {
+            var newDecl = decl.clone({ value: decl.value.replace(reg, replaceFn) });
+            decl.replaceWith(newDecl);
+            if (fallBackHandler) {
+              var declPrev = newDecl.prev();
+              var regFallback = fallBackHandler.reg;
+              var replaceFnFallBack = fallBackHandler.replaceFn;
+              if (declPrev && declPrev.type !== 'comment' && declPrev.value
+                && declPrev.toString() === decl.clone({ value: decl.value.replace(regFallback, replaceFnFallBack) }).toString()) {
                 if ('remove' === fallbackStrategy) {
                   declPrev.remove();
                 } else {
-                  declPrev.replaceWith(newDecl.clone({value: newDecl.value.replace(regFallback, replaceFnFallBack)}));
+                  declPrev.replaceWith(newDecl.clone({ value: newDecl.value.replace(regFallback, replaceFnFallBack) }));
                   if ('only' === fallbackStrategy) {
                     newDecl.remove();
                   }
                 }
 
-            } else {
-              if ('enforce' === fallbackStrategy || true === fallbackStrategy || 'only' === fallbackStrategy) {
-                newDecl.cloneBefore({value: newDecl.value.replace(regFallback, replaceFnFallBack)});
-                if ('only' === fallbackStrategy) {
-                  newDecl.remove();
+              } else {
+                if ('enforce' === fallbackStrategy || true === fallbackStrategy || 'only' === fallbackStrategy) {
+                  newDecl.cloneBefore({ value: newDecl.value.replace(regFallback, replaceFnFallBack) });
+                  if ('only' === fallbackStrategy) {
+                    newDecl.remove();
+                  }
                 }
               }
             }
           }
-        }
-      });
+        });
+      }
     }
-  });
-  return postcss([replaceOriginValue]).process(css).css;
+  }
+  return postcss([replaceOriginValue(reg,replaceFn,fallBackHandler,fallbackStrategy)]).process(css).css;
 }
 
 function process(source, map) {
@@ -141,18 +144,18 @@ function process(source, map) {
   const option = getOptionsFromConfig(this);
   const themeData = getThemeDefinition(option.theme, option.themeType);
   let newSource = source;
-  if ( Object.keys(themeData).length > 0) {
+  if (Object.keys(themeData).length > 0) {
     const themeDataVar = Object.keys(themeData).join('|');
     const reg = new RegExp(String.raw`(?<=var\(\-\-(${themeDataVar}),)(?:.*?)(?=\))`, 'g');
     const replaceFn = (match, varName, value) => themeData[varName];
     const fallbackReg = new RegExp(String.raw`var\(\-\-(?:${themeDataVar}),(.*?)\)`, 'g');
     const fallbackFn = (match, item) => item;
     const fallbackHandler = option.handleFallBack && option.handleFallBack !== 'nothing'
-      ? {reg: fallbackReg, replaceFn: fallbackFn}
+      ? { reg: fallbackReg, replaceFn: fallbackFn }
       : null;
 
     // 处理针对文件类型定位处理的位置
-    switch(option.loaderType) {
+    switch (option.loaderType) {
       case 'ng-lib-js':
         const styleGroup = locateNgComponentDecoratorStyleString(source);
         if (styleGroup) {
@@ -161,7 +164,7 @@ function process(source, map) {
             newContent: JSON.stringify(
               JSON.parse(content).map(partCss => cssReplaceVarValue(partCss, reg, replaceFn, fallbackHandler, option.handleFallBack))
             )
-          })).forEach(({content, newContent}) => {
+          })).forEach(({ content, newContent }) => {
             newSource = newSource.replace(content, newContent)
           });
         }
@@ -171,16 +174,14 @@ function process(source, map) {
         break;
       case 'other': // 不管源码内容直接替换, 暂不支持降级方案的处理
       default:
-        newSource = source.replace(reg, replaceFn);}
-
+        newSource = source.replace(reg, replaceFn);
     }
 
   }
-  // 返回结果
-  this.callback(null, newSource, map);
-  return newSource;
+
+}
+// 返回结果
+this.callback(null, newSource, map);
+return newSource;
 }
 exports.default = process;
-
-
-

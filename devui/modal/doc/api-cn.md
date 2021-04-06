@@ -15,7 +15,7 @@ openstandardDialog(dialogtype?: string) {
       id: 'dialog-service',
       width: '346px',
       maxHeight: '600px',
-      showAnimate: true,
+      showAnimation: true,
       title: 'Start Snapshot Version',
       content: ModalTestComponent,
       backdropCloseable: true,
@@ -38,8 +38,8 @@ openstandardDialog(dialogtype?: string) {
 
 ## IModalOptions 参数
 
-|           参数           |              类型               |   默认   | 说明                                           | 跳转 Demo                                                       |
-| :----------------------: | :-----------------------------: | :------: | :--------------------------------------------- | --------------------------------------------------------------- |
+|           参数           |              类型               |   默认   | 说明                                           | 跳转 Demo                                                       |全局配置项| 
+| :----------------: | :----------------------: | :-----------------------------: | :------: | :--------------------------------------------- | --------------------------------------------------------------- |
 |            id            |            `string`             |    --    | 必选，弹出框 id                                | [自定义对话框](demo#custom-dialog)            |
 |          width           |            `string`             |    --    | 可选，弹出框宽度(e.g '300px')                    | [自定义对话框](demo#custom-dialog)            |
 |          zIndex          |            `number`             |   1050   | 可选，弹出框 z-index 值                        |
@@ -47,7 +47,7 @@ openstandardDialog(dialogtype?: string) {
 |        component         |           `Type<any>`           |    --    | 可选，弹出框组件，弹出框会显示组件内容         | [自定义对话框](demo#custom-dialog)            |
 |         injector         |           `Injector`            |   true   | 可选，可以选择指定将用作组件的父级的注射器。   |
 |           data           |            `object`             |    --    | 可选，传入component实例中的属性                | [自定义对话框](demo#custom-dialog)            |
-|       showAnimate        |            `boolean`            |   true   | 可选，是否显示动画，                           | [自定义对话框](demo#custom-dialog)            |
+|       showAnimation        |            `boolean`            |   true   | 可选，是否显示动画，                           | [自定义对话框](demo#custom-dialog)            | ✔ |
 |    backdropCloseable     |            `boolean`            |   true   | 可选，点击空白处是否能关闭弹出框，             | [自定义对话框](demo#custom-dialog)            |
 | componentFactoryResolver |   `ComponentFactoryResolver`    |    --    | 可选，自定义动态渲染组件解析器，               |
 |         onClose          |           `Function`            |    --    | 可选，弹出框关闭之后回调的函数，               | [自定义对话框](demo#custom-dialog)            |
@@ -65,8 +65,8 @@ openstandardDialog(dialogtype?: string) {
 
 ## IDialogOptions 参数
 
-|           参数           |              类型               |    默认    | 说明                                                                     | 跳转 Demo                                                        |
-| :----------------------: | :-----------------------------: | :--------: | :----------------------------------------------------------------------- | ---------------------------------------------------------------- |
+|           参数           |              类型               |    默认    | 说明                                                                     | 跳转 Demo                                                        |全局配置项| 
+| :----------------: | :----------------------: | :-----------------------------: | :--------: | :----------------------------------------------------------------------- | ---------------------------------------------------------------- |
 |            id            |            `string`             |     --     | 必选，弹出框 id                                                          | [标准对话框](demo#standard-dialog)             |
 |          width           |            `string`             |     --     | 可选，弹出框宽度(e.g '300px')                                              | [标准对话框](demo#standard-dialog)             |
 |          zIndex          |            `number`             |    1050    | 可选，弹出框 z-index 值                                                  | [信息提示](demo#message-hint)                  |
@@ -78,7 +78,7 @@ openstandardDialog(dialogtype?: string) {
 |         injector         |           `Injector`            |    true    | 可选，可以选择指定将用作组件的父级的注射器。                             |
 |           data           |            `object`             |     --     | 可选，当content为Component时，传递到Component实例中的属性                | [标准对话框](demo#standard-dialog)             |
 |         buttons          |             `array`             |     --     | 可选，弹出框按钮，支持自定义文本、样式、禁用、点击事件                   | [标准对话框](demo#standard-dialog)             |
-|       showAnimate        |            `boolean`            |    true    | 可选，是否显示动画，                                                     | [拦截对话框关闭](demo#intercept-dialog-closed) |
+|       showAnimation        |            `boolean`            |    true    | 可选，是否显示动画，                                                     | [拦截对话框关闭](demo#intercept-dialog-closed) | ✔ |
 |    backdropCloseable     |            `boolean`            |    true    | 可选，点击空白处是否能关闭弹出框，                                       | [拦截对话框关闭](demo#intercept-dialog-closed) |
 | componentFactoryResolver |   `ComponentFactoryResolver`    |     --     | 可选，自定义动态渲染组件解析器，                                         |
 |         onClose          |           `Function`            |     --     | 可选，弹出框关闭之后回调的函数，                                         | [标准对话框](demo#standard-dialog)             |

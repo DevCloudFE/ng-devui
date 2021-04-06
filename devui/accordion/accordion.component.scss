@@ -125,7 +125,7 @@
     width: 16px;
     height: 16px;
     line-height: 16px;
-    transition: transform ease-out 0.3s;
+    transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
 
     & > svg {
       width: 16px;
@@ -212,14 +212,7 @@
 }
 
 :host ::ng-deep .devui-accordion-show-animate .devui-accordion-item-title {
-  transition: font-weight ease-in-out 0.3s;
-
-  &:not(.disabled) {
-    &.devui-router-active,
-    &.active:not(.open) {
-      transition: font-weight ease-in-out 0.3s;
-    }
-  }
+  transition: font-weight ease-in-out 0.3s, color cubic-bezier(0.645, 0.045, 0.355, 1) 0.1s, background-color cubic-bezier(0.645, 0.045, 0.355, 1) 0.1s;
 
   .devui-accordion-splitter::before {
     transform: scaleY(0);
@@ -230,7 +223,6 @@
   &.active {
     &:not(.open) .devui-accordion-splitter::before {
       transform: scaleY(1);
-      transition: transform 0.3s ease-in-out;
     }
   }
 }

@@ -14,8 +14,8 @@ In the page:
 # d-alert
 ## d-alert Parameter
 
-|    Attributes     |                   Type                   |  Default  | Description                                      |  Jump to Demo                                    |
-| :---------: | :--------------------------------------: | :----: | :---------------------------------------- | ------------------------------------------ |
+|    Attributes     |                   Type                   |  Default  | Description                                      |  Jump to Demo                                    |Global Config|
+| :----------------: | :---------: | :--------------------------------------: | :----: | :---------------------------------------- | ------------------------------------------ |
 |    type     | [`AlertType`](#alerttype) | 'info' | Required. Specify the style of the warning prompt                 | [Basic Usage](demo#basic-usage) |
 |  cssClass   |                 `string`                 |   --   | Optional. Customize className                     |
 |  closeable  |                `boolean`                 |  true  | Optional. The close button is displayed by default   | [Basic Usage](demo#tips-to-close) |

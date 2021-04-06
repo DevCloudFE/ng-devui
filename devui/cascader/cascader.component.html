@@ -6,6 +6,7 @@
   [closeScope]="'blank'"
   #mainDropdown="d-dropdown"
   (toggleEvent)="onToggle($event)"
+  [showAnimation]="showAnimation"
   [appendToBodyDirections]="subMenuDirections"
 >
   <input
@@ -40,7 +41,7 @@
       <span *ngIf="!multipleValueList.length && !allowSearch" class="devui-dropdown-placeholder">{{ placeholder }}</span>
     </div>
     <div class="devui-drop-icon-wrapper" [ngClass]="{ 'dropdown-show-clear': allowClear }">
-      <span class="devui-drop-icon">
+      <span class="devui-drop-icon" [ngClass]="{ 'devui-drop-icon-animation': showAnimation }">
         <svg
           width="8px"
           height="5px"
@@ -77,7 +78,7 @@
     </div>
   </div>
   <div class="devui-single-drop-icon-wrapper" *ngIf="!multiple" [ngClass]="{ 'dropdown-show-clear': allowClear }">
-    <span class="devui-drop-icon">
+    <span class="devui-drop-icon" [ngClass]="{ 'devui-drop-icon-animation': showAnimation }">
       <svg
         width="8px"
         height="5px"

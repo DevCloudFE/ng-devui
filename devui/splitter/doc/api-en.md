@@ -15,8 +15,8 @@ In the page：
 
 ## d-splitter parameters
 
-| Parameter | Type | Default | Description | Jump to Demo |
-| :----------------: | :------------------------: | :----------: | :---------------------------------------------------------- | ------------------------------------------------- |
+| Parameter | Type | Default | Description | Jump to Demo |Global Config| 
+| :----------------: | :----------------: | :------------------------: | :----------: | :---------------------------------------------------------- | ------------------------------------------------- |
 | orientation | `'vertical'\|'horizontal'` | 'horizontal' | Optional. It specifies the split direction of the splitter. The value can be'vertical'\|'horizontal' | [Basic usage](demo#basic-usage) |
 | splitBarSize | `string` | '2px' | Optional. The default value is 2px. | [Basic usage](demo#basic-usage) |
 | disabledBarSize | `string` | '1px' | Optional. This parameter is valid when the unadjustable width is set for the panel. | [Vertical layout usage](demo#vertical-layout) |
@@ -26,8 +26,8 @@ In the page：
 
 ## d-splitter-pane parameters
 
-| Parameter | Type | Default | Description | Jump to Demo |
-| :---------------: | :-------------------------: | :----: | :---------------------------------------------------- | ---------------------------------------------------------------------- |
+| Parameter | Type | Default | Description | Jump to Demo |Global Config| 
+| :---------------: | :---------------: | :-------------------------: | :----: | :---------------------------------------------------- | ---------------------------------------------------------------------- |
 | size | `string` | -- | Optional. Specifies the width of the pane and sets the pixel value or percentage. | [Basic usage](demo#basic-usage) |
 | minSize | `string` | -- | Optional. Specifies the minimum width of the pane and sets the pixel value or percentage. | [Basic usage](demo#basic-usage) |
 | maxSize | `string` | -- | Optional. This parameter specifies the maximum width of the pane and sets the pixel value or percentage. | [Basic usage](demo#basic-usage) |

@@ -47,6 +47,7 @@ export class SingleDateRangePickerComponent extends SingleDatepickerComponent im
   public rangeStart;
   public rangeEnd;
   public previewEnd;
+  private timer;
   protected selectingRange: boolean;
 
   constructor(
@@ -298,7 +299,11 @@ export class SingleDateRangePickerComponent extends SingleDatepickerComponent im
     if (/^(Digit|Numpad)\d$/.test(event.code) || event.keyCode === 8) {
       if (Number(value) >= min && Number(value) <= max) {
         this[timeType] = value;
-        this.timeChange();
+        // 防抖，防止提前校验导致错误的校验
+        clearTimeout(this.timer);
+        this.timer = setTimeout(() => {
+          this.timeChange();
+        }, 300);
       }
     }
   }
@@ -315,7 +320,7 @@ export class SingleDateRangePickerComponent extends SingleDatepickerComponent im
   }
 
   isSameDate(date1: Date, date2: Date): boolean {
-    return !!(date1.getFullYear() === date2.getFullYear() && date1.getMonth() === date2.getMonth() && date1.getDate() === date2.getDate());
+    return date1?.getFullYear() === date2?.getFullYear() && date1.getMonth() === date2.getMonth() && date1.getDate() === date2.getDate();
   }
 
   ngOnChanges(changes: SimpleChanges) {

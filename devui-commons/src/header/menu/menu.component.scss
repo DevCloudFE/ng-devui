@@ -1,0 +1,69 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
+.header-menu {
+    display: flex;
+    align-items: center;
+
+    .menu-item {
+        margin: 12px;
+        font-size: $devui-font-size-page-title;
+        .menu-link {
+            color: $devui-text;
+            &:hover {
+                color: $devui-list-item-hover-text;
+            }
+        }
+    }
+
+    .menu-selected-item {
+        margin: 12px;
+        font-weight: 600;
+        .menu-link {
+            color: $devui-brand;
+        }
+    }
+}
+
+.menu-list-wrapper {
+    display: flex !important;
+    padding: 12px 12px;
+
+    .menu-list {
+        .menu-list-title,
+        .menu-sublist-item {
+            font-size: $devui-font-size-card-title;
+            height: 34px;
+            line-height: 34px;
+            padding: 0 20px;
+        }
+
+        .menu-list-title {
+            font-weight: $devui-font-title-weight;
+        }
+
+        .menu-sublist {
+            .menu-sublist-item {
+                transition: background-color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+
+                a {   
+                    color: $devui-text;
+                    transition: color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+                }
+
+                &:hover {
+                    background-color: $devui-list-item-active-bg;
+
+                    a {
+                        color: $devui-list-item-active-text;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 1180px) {
+    .header-menu {
+        flex-direction: column;
+    }
+}

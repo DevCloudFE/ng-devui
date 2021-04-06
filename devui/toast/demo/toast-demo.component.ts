@@ -16,12 +16,22 @@ export class ToastDemoComponent implements OnInit, OnDestroy {
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./life/life.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./life/life.component.ts') },
   ];
+  styleSource: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./style/style.component.html') },
+    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./style/style.component.scss') },
+    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./style/style.component.ts') },
+  ];
   singleSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./single/single.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./single/single.component.ts') },
   ];
 
-  navItems = [];
+  ToastDemoService: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./service/toast-service.component.html') },
+    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./service/toast-service.component.ts') },
+    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./service/toast-service.component.scss') },
+  ];
+    navItems = [];
   subs: Subscription = new Subscription();
   constructor(private translate: TranslateService) {}
 
@@ -44,7 +54,9 @@ export class ToastDemoComponent implements OnInit, OnDestroy {
     this.navItems = [
       { dAnchorLink: 'basic-usage', value: values['basic-usage'] },
       { dAnchorLink: 'life', value: values['life'] },
+      { dAnchorLink: 'style', value: values['style'] },
       { dAnchorLink: 'single', value: values['single'] },
+      { dAnchorLink: 'toast-service', value: values['toast-service']},
     ];
   }
 

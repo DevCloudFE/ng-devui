@@ -1,0 +1,29 @@
+<div class="page">
+  <d-editor-md
+    [content]="content"
+    [editorContainerHeight]="350"
+    (contentChange)="contentChange()"
+    (afterEditorInit)="afterEditorInit()"
+  ></d-editor-md>
+</div>
+
+<div class="sprite-nav" *ngIf="mdInit">
+  <d-nav-sprite
+    [(isNavMin)]="isNavMin"
+    [target]="targetContainer"
+    [height]="300"
+    [width]="300"
+    [title]="'Getting Started'"
+    [mode]="'sprite'"
+    [navItemTemplate]="navItemTemp"
+    [spriteOption]="spriteOption"
+    (afterNavInit)="afterNavInit($event)"
+  ></d-nav-sprite>
+</div>
+
+<ng-template #navItemTemp let-item="item">
+  <div class="nav-item">
+    <span>{{ item.label }}</span>
+    <i class="icon icon-edit" (click)="edit(item); $event.stopPropagation()"></i>
+  </div>
+</ng-template>

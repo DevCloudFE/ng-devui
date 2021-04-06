@@ -18,8 +18,8 @@ import { MultiAutoCompleteModule } from 'ng-devui/multi-auto-complete';
 
 - 本组件基于 dAutoComplete 实现，itemTemplate、noResultItemTemplate 等参数使用方式与 dAutoComplete 一致（此类参数使用 Demo 跳转参考 dAutoComplete 使用）。
 
-|         参数         |                 类型                  |                   默认                    | 说明                                                                           | 跳转 Demo                                  |
-| :------------------: | :-----------------------------------: | :---------------------------------------: | :----------------------------------------------------------------------------- | ------------------------------------------ |
+|         参数         |                 类型                  |                   默认                    | 说明                                                                           | 跳转 Demo                                  |全局配置项| 
+| :----------------: | :------------------: | :-----------------------------------: | :---------------------------------------: | :----------------------------------------------------------------------------- | ------------------------------------------ |
 |     appendToBody     |               `boolean`               |                    --                     | 可选，是否 appendToBody                                                        | [基本用法](demo#basic-usage)               |
 |        width         |               `number`                |                    --                     | 可选，控制下拉框宽度，搭配 appendToBody 使用（`px`）                           |
 |       disabled       |               `boolean`               |                    --                     | 可选，是否禁用                                                                 | [使用禁用](demo#auto-complete-disabled)    |
@@ -33,6 +33,7 @@ import { MultiAutoCompleteModule } from 'ng-devui/multi-auto-complete';
 |       tipsText       |               `string`                |                    --                     | 可选，提示文字                                                                 | [设置禁用](demo#auto-disable)              |
 |     placeholder      |               `string`                |                    --                     | 可选，placeholder                                                              | [基本用法](demo#basic-usage)               |
 |     latestSource     |             `Array<any>`              |                    --                     | 可选， 最近输入                                                                | [最近输入](demo#auto-latest)               |
+|  showAnimation   |             `boolean`              |                                 true                                  |  可选，是否开启动画 |   | ✔ |
 
 ## d-multi-auto-complete 事件
 

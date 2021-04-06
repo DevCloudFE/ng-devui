@@ -1,25 +1,39 @@
-<div class="demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 60, bottom: 0 }">
+<div class="devui-demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 180, bottom: 0 }">
   <d-demo-nav [navItems]="navItems"></d-demo-nav>
-  <div class="demo-example" [dAnchor]="'basic-usage'">
-    <div class="demo-title">{{ 'components.toast.basicDemo.title' | translate }}</div>
-    <div class="demo-text">{{ 'components.toast.basicDemo.description' | translate }}</div>
+  <div class="devui-demo-example" [dAnchor]="'basic-usage'">
+    <div class="devui-demo-title">{{ 'components.toast.basicDemo.title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.toast.basicDemo.description' | translate }}</div>
     <d-codebox id="components-toast-basic" [sourceData]="basicSource">
       <d-basic demo></d-basic>
     </d-codebox>
   </div>
-  <div class="demo-example" [dAnchor]="'life'">
-    <div class="demo-title">{{ 'components.toast.lifeDemo.title' | translate }}</div>
-    <div class="demo-text">{{ 'components.toast.lifeDemo.description' | translate }}</div>
+  <div class="devui-demo-example" [dAnchor]="'life'">
+    <div class="devui-demo-title">{{ 'components.toast.lifeDemo.title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.toast.lifeDemo.description' | translate }}</div>
     <d-codebox id="components-toast-life" [sourceData]="lifeSource">
       <d-life demo></d-life>
     </d-codebox>
   </div>
-  <div class="demo-example" [dAnchor]="'single'">
-    <div class="demo-title">{{ 'components.toast.singleDemo.title' | translate }}</div>
-    <div class="demo-text">{{ 'components.toast.singleDemo.description' | translate }}
-    </div>
+  <div class="devui-demo-example" [dAnchor]="'style'">
+    <div class="devui-demo-title">{{ 'components.toast.styleDemo.title' | translate }}</div>
+    <d-codebox id="components-toast-style" [sourceData]="styleSource">
+      <d-style demo></d-style>
+    </d-codebox>
+  </div>
+  <div class="devui-demo-example" [dAnchor]="'single'">
+    <div class="devui-demo-title">{{ 'components.toast.singleDemo.title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.toast.singleDemo.description' | translate }}</div>
     <d-codebox id="components-toast-single" [sourceData]="singleSource">
       <d-single demo></d-single>
+    </d-codebox>
+  </div>
+
+  <div class="devui-demo-example" [dAnchor]="'toast-service'">
+    <div class="devui-demo-title">{{ 'components.toast.serviceDemo.title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.toast.serviceDemo.description' | translate }}</div>
+    <div class="devui-demo-text"></div>
+    <d-codebox id="components-toast-service" [sourceData]="ToastDemoService">
+      <d-demo-toast-service demo></d-demo-toast-service>
     </d-codebox>
   </div>
 </div>

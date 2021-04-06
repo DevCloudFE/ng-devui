@@ -1,8 +1,8 @@
-<div class="container">
-  <div class="source">
-    <div class="left">
+<div class="devui-transfer-container">
+  <div class="devui-transfer-source">
+    <div class="devui-transfer-left">
       <ng-container *ngIf="!sourceCustomViewTemplate">
-        <div class="title">
+        <div class="devui-transfer-title">
           <d-checkbox
             [label]="titles.source"
             [disabled]="disabled || sourceDisplayOptionLen === 0"
@@ -12,11 +12,11 @@
             [(ngModel)]="sourceAllChecked"
           >
           </d-checkbox>
-          <span class="num">{{ sourceCheckedLen }}/{{ sourceDisplayOptionLen }}</span>
+          <span class="devui-transfer-num">{{ sourceCheckedLen }}/{{ sourceDisplayOptionLen }}</span>
         </div>
-        <div class="line"></div>
-        <div class="content" [class.disabled]="disabled">
-          <div class="search" *ngIf="isSearch">
+        <div class="devui-transfer-line"></div>
+        <div class="devui-transfer-content" [class.disabled]="disabled">
+          <div class="devui-transfer-search" *ngIf="isSearch">
             <d-search
               style="width: 100%"
               [placeholder]="i18nCommonText?.searchPlaceholder"
@@ -36,16 +36,15 @@
             <li
               dDraggable
               [dragScope]="'transfer-source-' + id"
-              [dragHandle]="'.drag-handle'"
+              [dragHandle]="'.devui-transfer-drag-handle, .devui-transfer-drag-handle *'"
               [dragData]="item"
-              [dragHandleClass]="'drag-handle'"
               *ngFor="let item of sourceDisplayOption; let i = index"
             >
-              <span class="drag-ico">
+              <span class="devui-transfer-drag-wrap" [ngClass]="{ 'devui-transfer-drag-handle': isSourceDroppable }">
                 <svg
                   *ngIf="isSourceDroppable"
                   [class.disabled]="disabled"
-                  class="drag-handle"
+                  class="devui-transfer-drag-ico"
                   width="16px"
                   height="16px"
                   viewBox="0 0 16 16"
@@ -79,14 +78,14 @@
       </ng-container>
     </div>
   </div>
-  <div class="option">
-    <div class="transfer-op">
+  <div class="devui-transfer-option">
+    <div class="devui-transfer-op">
       <svg
         *ngIf="!sourceCanTransfer || disabled"
         width="36px"
         height="36px"
         viewBox="0 0 36 36"
-        class="default-svg"
+        class="devui-transfer-default-svg"
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"
         xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -113,7 +112,7 @@
         (click)="transferTo(transferDirection.SOURCE)"
         width="36px"
         height="36px"
-        class="active-svg"
+        class="devui-transfer-active-svg"
         viewBox="0 0 36 36"
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"
@@ -134,13 +133,13 @@
         </g>
       </svg>
     </div>
-    <div class="transfer-op" style="margin-top: 10px">
+    <div class="devui-transfer-op" style="margin-top: 10px">
       <svg
         width="36px"
         *ngIf="!targetCanTransfer || disabled"
         height="36px"
         viewBox="0 0 36 36"
-        class="default-svg"
+        class="devui-transfer-default-svg"
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"
         xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -166,7 +165,7 @@
         height="36px"
         viewBox="0 0 36 36"
         version="1.1"
-        class="active-svg"
+        class="devui-transfer-active-svg"
         xmlns="http://www.w3.org/2000/svg"
         xmlns:xlink="http://www.w3.org/1999/xlink"
       >
@@ -189,10 +188,10 @@
       </svg>
     </div>
   </div>
-  <div class="target">
-    <div class="right">
+  <div class="devui-transfer-target">
+    <div class="devui-transfer-right">
       <ng-container *ngIf="!targetCustomViewTemplate">
-        <div class="title">
+        <div class="devui-transfer-title">
           <d-checkbox
             [disabled]="disabled || targetDisplayOptionLen === 0"
             [label]="titles.target"
@@ -202,11 +201,11 @@
             [(ngModel)]="targetAllChecked"
           >
           </d-checkbox>
-          <span class="num">{{ targetCheckedLen }}/{{ targetDisplayOptionLen }}</span>
+          <span class="devui-transfer-num">{{ targetCheckedLen }}/{{ targetDisplayOptionLen }}</span>
         </div>
-        <div class="line"></div>
-        <div class="content" [class.disabled]="disabled">
-          <div class="search" *ngIf="isSearch" [class.disabled]="disabled">
+        <div class="devui-transfer-line"></div>
+        <div class="devui-transfer-content" [class.disabled]="disabled">
+          <div class="devui-transfer-search" *ngIf="isSearch" [class.disabled]="disabled">
             <d-search
               style="width: 100%"
               [placeholder]="i18nCommonText?.searchPlaceholder"
@@ -225,16 +224,15 @@
             <li
               dDraggable
               [dragScope]="'transfer-target-' + id"
-              [dragHandle]="'.drag-handle'"
+              [dragHandle]="'.devui-transfer-drag-handle, .devui-transfer-drag-handle *'"
               [dragData]="item"
-              [dragHandleClass]="'drag-handle'"
               *ngFor="let item of targetDisplayOption; let i = index"
             >
-              <span class="drag-ico">
+              <span class="devui-transfer-drag-wrap" [ngClass]="{ 'devui-transfer-drag-handle': isTargetDroppable }">
                 <svg
                   *ngIf="isTargetDroppable"
                   [class.disabled]="disabled"
-                  class="drag-handle"
+                  class="devui-transfer-drag-ico"
                   width="16px"
                   height="16px"
                   viewBox="0 0 16 16"

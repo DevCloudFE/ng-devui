@@ -133,21 +133,20 @@ body {
     margin-right: 20px;
   }
 
-  .header-menu {
-    right: 5px;
-    @include menu();
+  // .header-menu {
+  //   right: 5px;
+  //   @include menu();
 
-    display: none;
+  //   display: none;
 
-    span {
-      &,
-      &::before,
-      &::after {
-        background: $devui-text;
-      }
-    }
-  }
-
+  //   span {
+  //     &,
+  //     &::before,
+  //     &::after {
+  //       background: $devui-text;
+  //     }
+  //   }
+  // }
   .main-nav-item {
     display: flex;
     align-items: center;
@@ -191,70 +190,6 @@ body {
     &:active,
     &:focus {
       color: $devui-brand;
-    }
-  }
-
-  .wrapper {
-    position: absolute;
-    top: 50px;
-    left: 0;
-    right: 0;
-    bottom: 0;
-
-    .sidebar {
-      box-sizing: border-box;
-      position: fixed;
-      top: 120px;
-      bottom: 0;
-      left: 0;
-      width: 240px;
-      margin-left: -240px;
-      border-right: 1px solid $devui-dividing-line;
-      height: 100%;
-      overflow-y: hidden;
-      z-index: 2;
-      background: $devui-base-bg;
-      transition: all 0.2s ease-out;
-
-      &:hover {
-        overflow-y: auto;
-      }
-    }
-
-    .menu-link {
-      left: 0;
-      background: rgba(#000000, 0.7);
-      @include menu();
-    }
-
-    .doc-viewer-container {
-      width: 100%;
-      margin-left: 0;
-      transition: all 0.2s ease-out;
-
-      .main {
-        width: 100%;
-        padding: 0 20px;
-      }
-    }
-
-    &.active {
-      .sidebar {
-        overflow-y: auto;
-        left: 240px;
-      }
-
-      .devui-components-search {
-        margin-left: 0;
-      }
-
-      .doc-viewer-container {
-        margin-left: 240px;
-      }
-
-      .menu-link {
-        left: 240px;
-      }
     }
   }
 
@@ -518,8 +453,8 @@ body {
   }
 }
 
-.demo-example.active.anchor-active-by-anchor-link,
-.demo-example.active.anchor-active-by-fragment {
+.devui-demo-example.active.anchor-active-by-anchor-link,
+.devui-demo-example.active.anchor-active-by-fragment {
   animation: hightlight-and-disapear 1 3s linear;
   outline-offset: 8px;
 }

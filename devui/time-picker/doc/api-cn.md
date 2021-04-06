@@ -13,8 +13,8 @@ import { TimePickerModule } from 'ng-devui/time-picker';
 
 ## TimePicker参数
 
-| 参数                      | 类型            | 默认       |   说明                                      | 跳转Demo                                                           |
-| :-----------------------: | :------------: | :--------: | :-------------------------------------------| :-----------------------------------------------------------------|
+| 参数                      | 类型            | 默认       |   说明                                      | 跳转Demo                                                           |全局配置项| 
+| :----------------: | :-----------------------: | :------------: | :--------: | :-------------------------------------------| :-----------------------------------------------------------------|
 |          disabled         |    `boolean`   |   false    | 可选，禁用选择                               |[基本用法](demo#basic-usage)                |
 |       timePickerWidth       |    `number`    |     --     | 可选，下拉框的宽度                           |[基本用法](demo#basic-usage)                |
 |          autoOpen         |    `boolean`   |   false    | 可选，初始化是否直接展开                      |[基本用法](demo#basic-usage)                |
@@ -23,6 +23,7 @@ import { TimePickerModule } from 'ng-devui/time-picker';
 |          maxTime          |    `string`    | '23:59:59' | 可选，限制最大可选时间                        |[格式化](demo#format)                      |
 |    customViewTemplate     |   `TemplateRef`   |     --     | 可选，自定义快捷设置时间或自定义操作区内容      |[传入模板](demo#custom)                    |
 |  appendToBodyDirections   | `Array<AppendToBodyDirection \| ConnectedPosition>` | `['rightDown', 'leftDown', 'rightUp', 'leftUp']` | 方向数组优先采用数组里靠前的位置 |  --  |
+|  showAnimation   |             `boolean`              |                                 true                                  |  可选，是否开启动画 |   | ✔ |
 
 ## TimePicker事件
 

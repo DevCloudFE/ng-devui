@@ -33,6 +33,7 @@ import {
   formWithDropDown,
   removeClassFromOrigin
 } from 'ng-devui/utils';
+import { DevConfigService, WithConfig } from 'ng-devui/utils/globalConfig';
 import { WindowRef } from 'ng-devui/window-ref';
 import { BehaviorSubject, fromEvent, Observable, of, Subscription } from 'rxjs';
 import { debounceTime, filter, map, switchMap } from 'rxjs/operators';
@@ -250,6 +251,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
   @Input() autoFocus = false;
   @Input() notAutoScroll = false; // 自动聚焦的时候，自动滚动到select位置
   @Input() loadingTemplateRef: TemplateRef<any>;
+  @Input() @WithConfig() showAnimation = true;
   @ViewChild('selectWrapper', { static: true }) selectWrapper: ElementRef;
   @ViewChild('selectInput') selectInputElement: ElementRef;
   @ViewChild('selectMenu') selectMenuElement: ElementRef;
@@ -302,7 +304,8 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
     private windowRef: WindowRef,
     private changeDetectorRef: ChangeDetectorRef,
     private i18n: I18nService,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private devConfigService: DevConfigService,
   ) {
     this.valueParser = item => (typeof item === 'object' ? item[this.filterKey] || '' : (item + '') ? item.toString() : '');
     this.formatter = item => (typeof item === 'object' ? item[this.filterKey] || '' : (item + '') ? item.toString() : '');
@@ -335,8 +338,10 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
 
   ngAfterViewInit() {
     if (this.autoFocus && this.selectBoxElement) {
-      this.selectBoxElement.nativeElement.focus({
-        preventScroll: this.notAutoScroll
+      setTimeout(() => {
+        this.selectBoxElement.nativeElement.focus({
+          preventScroll: this.notAutoScroll
+        });
       });
     }
   }
@@ -611,7 +616,6 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
     if (!this.isOpen) {
       this.filter = '';
       this.resetSource();
-
       if (!this.appendToBody) {
         let direction = '';
         switch (this.direction) {
@@ -631,6 +635,8 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
       } else {
         this.updateCdkConnectedOverlayOrigin();
       }
+    } else if (!this.showAnimation) {
+      this.startAnimation = false;
     }
     this.isOpen = !this.isOpen;
     if (this.virtualScrollViewportSizeMightChange) { // 解决虚拟滚动更新options长度展开前无法获取正确高度影响
@@ -813,7 +819,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
   }
 
   animationEnd($event) {
-    if (!this.isOpen && this.selectMenuElement) {
+    if (!this.isOpen && this.selectMenuElement && this.showAnimation) {
       const targetElement = this.selectMenuElement.nativeElement;
       this.startAnimation = false;
       setTimeout(() => {

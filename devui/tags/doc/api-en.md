@@ -12,8 +12,8 @@ In the page:
 
 ## d-tag parameter
 
-|          Parameter          |     Type      | Default | Description                                                                                                                                                           | Jump to Demo                                     |
-| :-------------------------: | :-----------: | :-----: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
+|          Parameter          |     Type      | Default | Description                                                                                                                                                           | Jump to Demo                                     |Global Config| 
+| :----------------: | :-------------------------: | :-----------: | :-----: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
 |             tag             |   `string`    |   --    | Required. The entered tag and selected tag are recorded.                                                                                                              | [Single Tag](demo#single-tag)   |
 |        titleContent         |   `string`    |   --    | Optional. Sets the title displayed when the cursor is hovered.                                                                                                        | [Single Tag](demo#single-tag)   |
 |         labelStyle          |   `string`    |   ''    | Optional. The label can be blue-w98, aqua-w98, olivine-w98, green-w98, yellow-w98, orange-w98, pink-w98, red-w98, or purple-w98, you can also transfer a custom class. | [Single Tag](demo#single-tag)   | .   |

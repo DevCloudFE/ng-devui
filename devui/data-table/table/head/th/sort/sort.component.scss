@@ -26,6 +26,10 @@
       fill: $devui-icon-fill-active-hover;
     }
   }
+
+  &-visible {
+    visibility: visible;
+  }
 }
 
 .sort-icon-asc,

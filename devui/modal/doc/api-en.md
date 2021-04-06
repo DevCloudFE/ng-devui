@@ -15,7 +15,7 @@ openstandardDialog(dialogtype?: string) {
       id: 'dialog-service',
       width: '346px',
       maxHeight: '600px',
-      showAnimate: true,
+      showAnimation: true,
       title: 'Start Snapshot Version',
       content: ModalTestComponent,
       backdropCloseable: true,
@@ -38,8 +38,8 @@ openstandardDialog(dialogtype?: string) {
 
 ### IModalOptions 
 
-| Parameter | Type | Default | Description | Jump to Demo |
-| :----------------------: | :-----------------------------: | :------: | :--------------------------------------------- | --------------------------------------------------------------- |
+| Parameter | Type | Default | Description | Jump to Demo |Global Config| 
+| :----------------: | :----------------------: | :-----------------------------: | :------: | :--------------------------------------------- | --------------------------------------------------------------- |
 | id | `string` | -- | Required. ID of the dialog box displayed. | [Custom Dialog Box](demo#custom-dialog) |
 | width | `string` | -- | Optional. Width of the pop-up box (e.g '300px'). | [Custom Dialog Box](demo#custom-dialog) |
 | zIndex | `number` | 1050 | Optional. Z-index value in the dialog box displayed. |
@@ -47,7 +47,7 @@ openstandardDialog(dialogtype?: string) {
 | component | `Type<any>` | -- | Optional. Pop-up component. The component content is displayed in the pop-up box. | [Custom Dialog Box](demo#custom-dialog) |
 | injector | `Injector` | true | Optional. You can specify the syringe that will be used as the parent of the component. |
 | data | `object` | -- | Optional. The attribute of the component instance is transferred. | [Custom Dialog Box](demo#custom-dialog) |
-| showAnimate | `boolean` | true | Optional. Indicating whether to display animations. | [Custom Dialog Box](demo#custom-dialog) |
+| showAnimation | `boolean` | true | Optional. Indicating whether to display animations. | [Custom Dialog Box](demo#custom-dialog) | ✔ |
 | backdropCloseable | `boolean` | true | Optional. Can the dialog box be closed when you click a blank area? | [Custom Dialog Box](demo#custom-dialog) |
 | componentFactoryResolver | `ComponentFactoryResolver` | -- | Optional. Customized dynamic rendering component parser. |
 | onClose | `Function` | -- | Optional. Function called back after the dialog box is closed. | [Custom Dialog Box](demo#custom-dialog) |
@@ -65,8 +65,8 @@ openstandardDialog(dialogtype?: string) {
 
 ### IDialogOptions
 
-| Parameter | Type | Default | Description | Jump to Demo |
-| :----------------------: | :-----------------------------: | :--------: | :----------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| Parameter | Type | Default | Description | Jump to Demo |Global Config|
+| :----------------: | :----------------------: | :-----------------------------: | :--------: | :----------------------------------------------------------------------- | ---------------------------------------------------------------- |
 | id | `string` | -- | Required. The ID of the dialog box is displayed. | [Standard Dialog Box](demo#standard-dialog) |
 | width | `string` | -- | Optional. Width of the dialog box (e.g '300px'). | [Standard Dialog Box](demo#standard-dialog) |
 | zIndex | `number` | 1050 | Optional. Z-index value in the dialog box displayed. | [Information](demo#message-hint) |
@@ -78,7 +78,7 @@ openstandardDialog(dialogtype?: string) {
 | injector | `Injector` | true | Optional. You can specify the syringe that will be used as the parent of the component. |
 | data | `object` | -- | Optional. When content is set to Component, the attribute is transferred to the Component instance. | [Standard Dialog Box](demo#standard-dialog) |
 | buttons | `array` | -- | Optional. Pop-up box button, which supports custom text, style, disabling, and click events. | [Standard Dialog Box](demo#standard-dialog) |
-| showAnimate | `boolean` | true | Optional. Whether to display animation. | [Blocking dialog box closed](demo#intercept-dialog-closed) |
+| showAnimation | `boolean` | true | Optional. Whether to display animation. | [Blocking dialog box closed](demo#intercept-dialog-closed) | ✔ |
 | backdropCloseable | `boolean` | true | Optional. Can the dialog box be closed when you click a blank area? | [Blocking dialog box closed](demo#intercept-dialog-closed) |
 | componentFactoryResolver | `ComponentFactoryResolver` | -- | Optional. Customized dynamic rendering component parser. |
 | onClose | `Function` | -- | Optional, Function called back after the dialog box is closed. | [Standard Dialog Box](demo#standard-dialog) |

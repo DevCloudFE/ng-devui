@@ -1,6 +1,12 @@
 <div class="drop-row devui-scrollbar" dDropScrollEnhanced [direction]="'h'" [dropScrollScope]="['mutiple-group', 'drag-follow']">
   <div class="drop-col" *ngFor="let list of lists">
-    <div class="card card-outline-primary mb-3" dDroppable [dropScope]="'mutiple-group'" (dropEvent)="onDrop($event, list.list)">
+    <div
+      class="card card-outline-primary mb-3"
+      dDroppable
+      [dropScope]="'mutiple-group'"
+      (dropEvent)="onDrop($event, list.list)"
+      [switchWhileCrossEdge]="switchWhileCrossEdge"
+    >
       <div class="card-header">{{ list.name }}</div>
       <div class="card-block">
         <ul
@@ -18,6 +24,7 @@
             [dragScope]="'mutiple-group'"
             [dragHandleClass]="'drag-handle'"
             [originPlaceholder]="{
+              show: showOriginPlaceholder,
               removeDelay: 300
             }"
             [dragData]="{ item: item, parent: list.list }"
@@ -35,6 +42,10 @@
     </div>
   </div>
 </div>
+<d-toggle [(ngModel)]="showOriginPlaceholder"></d-toggle> show origin placeholder
+<!--显示源占位符-->
+<d-toggle [(ngModel)]="switchWhileCrossEdge"></d-toggle> cross edge switch
+<!--越边交换-->
 <d-button (btnClick)="cleanBatch()"
   >clean all selected
   <!--清空已选--></d-button

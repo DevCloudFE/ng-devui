@@ -1,18 +1,20 @@
-
-var postcss = require('postcss');
-
-var varStringJoinSperator = 'devui-(?:.*?)|' + 'hwc-(?:.*?)';
+var varStringJoinSperator = 'devui-(?:.*?)';
 var cssVarReg = new RegExp('var\\(\\-\\-(?:' + varStringJoinSperator + '),(.*?)\\)', 'g'); // 要用\\表示\
 
-module.exports = postcss.plugin('postcss-plugin-add-origin-varvalue', () => {
-  return (root) => {
-    root.walkDecls(decl => {
-      if (decl.type !== 'comment' && decl.value && decl.value.match(cssVarReg)) {
-        decl.cloneBefore({value: decl.value.replace(cssVarReg, (match, item) => item) });
-      }
-    });
+module.exports = () => {
+  return {
+    postcssPlugin: 'postcss-plugin-add-origin-varvalue',
+    Once(root, { result }) {
+      root.walkDecls(decl => {
+        if (decl.type !== 'comment' && decl.value && decl.value.match(cssVarReg)) {
+          decl.cloneBefore({ value: decl.value.replace(cssVarReg, (match, item) => item) });
+        }
+      });
+    }
   }
-});
+
+};
+module.exports.postcss = true;
 
 
 /**

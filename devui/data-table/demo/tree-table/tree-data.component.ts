@@ -1,6 +1,19 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { CheckableRelation, DataTableComponent, TableWidthConfig } from 'ng-devui/data-table';
-import { SourceType, treeDataSource } from '../mock-data';
+import {
+  Component,
+  OnInit,
+  ViewChild
+} from '@angular/core';
+
+import {
+  CheckableRelation,
+  DataTableComponent,
+  TableWidthConfig
+} from 'ng-devui/data-table';
+
+import {
+  SourceType,
+  treeDataSource
+} from '../mock-data';
 
 @Component({
   selector: 'd-tree-data',
@@ -82,7 +95,7 @@ export class TreeDataComponent implements OnInit {
             status: 'done',
             dob: new Date(1991, 3, 1)
         });
-        resolve();
+        resolve(undefined);
       }, 500);
     });
   }

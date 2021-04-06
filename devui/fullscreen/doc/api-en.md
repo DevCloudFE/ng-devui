@@ -16,8 +16,8 @@ In the page：
 
 ## d-fullscreen parameters
 
-| Parameter | Type | Default | Description | Jump to Demo |
-| :---------------: | :-----------------------: | :---------: | :------------------------------------: | --------------------------------------------------------- |
+| Parameter | Type | Default | Description | Jump to Demo |Global Config| 
+| :----------------: | :---------------: | :-----------------------: | :---------: | :------------------------------------: | --------------------------------------------------------- |
 | fullscreen-target | `HTMLElement` | -- | Required. Content projection, set the elements to be displayed in full screen. | [Immersive full screen](demo#immersive-full-screen) |
 | fullscreen-launch | `HTMLElement` | -- | Required. Content projection, set the button to trigger the full screen. | [Immersive full screen](demo#immersive-full-screen) |
 | mode | `'immersive' \|'normal'` | 'immersive' | Optional. Set the full-screen mode. | [Common full screen](demo#general-full-screen) |

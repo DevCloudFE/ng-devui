@@ -1,5 +1,7 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component,
-   ElementRef, Host, HostBinding, Input, OnDestroy, OnInit, Renderer2, SkipSelf } from '@angular/core';
+import {
+  AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component,
+  ElementRef, Host, HostBinding, Input, OnDestroy, OnInit, Renderer2, SkipSelf
+} from '@angular/core';
 import { I18nService } from 'ng-devui/i18n';
 import { Subscription } from 'rxjs';
 import { filter, map, switchMap, takeUntil, tap } from 'rxjs/operators';

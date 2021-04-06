@@ -7,6 +7,7 @@ export interface IModalOptions {
   backDropZIndex?: number;
   component?: Type<any>;
   width?: string;
+  showAnimation?: boolean;
   showAnimate?: boolean;
   data?: any;
   handler?: Function;
@@ -42,6 +43,7 @@ export interface IDialogOptions {
   width?: string;
   backdropCloseable?: boolean;
   maxHeight?: string;
+  showAnimation?: boolean;
   showAnimate?: boolean;
   data?: any;
   componentFactoryResolver?: ComponentFactoryResolver;

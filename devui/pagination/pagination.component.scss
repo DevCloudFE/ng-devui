@@ -351,6 +351,16 @@
   }
 }
 
+.devui-pagination {
+  .devui-pagination-list {
+    li {
+      a {
+        transition: background-color cubic-bezier(0.645, 0.045, 0.355, 1) 0.3s;
+      }
+    }
+  }
+}
+
 :host ::ng-deep .devui-input-sm {
   height: 24px;
   padding: 5px 5px;

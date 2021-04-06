@@ -9,7 +9,7 @@ import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
 import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 import { InputNumberBasicComponent } from './basic/input-number-basic.component';
-import { DecimalLimitAutoFocusComponent } from './decimalLimitAndAutoFocus/decimal-limit-auto-focus.component';
+import { DecimalLimitComponent } from './decimalLimit/decimal-limit.component';
 import { InputNumberDisabledComponent } from './disabled/input-number-disabled.component';
 import { InputNumberEmptyComponent } from './empty/input-number-empty.component';
 import { InputNumberDemoComponent } from './input-number-demo.component';
@@ -46,7 +46,7 @@ import { InputNumberRegComponent } from './reg/input-number-reg.component';
     InputNumberEmptyComponent,
     InputNumberPlaceholderAndMaxLengthComponent,
     InputNumberRegComponent,
-    DecimalLimitAutoFocusComponent,
+    DecimalLimitComponent,
   ],
 })
 export class InputNumberDemoModule {}

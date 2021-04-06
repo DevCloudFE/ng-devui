@@ -436,6 +436,38 @@
   }
 }
 
+:host ::ng-deep table {
+  &.table-fix-header thead tr {
+    th:first-child {
+      border-top-left-radius: $devui-border-radius;
+    }
+
+    th:last-child {
+      border-top-right-radius: $devui-border-radius;
+    }
+  }
+
+  thead tr {
+    th:first-child {
+      border-top-left-radius: $devui-border-radius;
+    }
+
+    th:last-child {
+      border-top-right-radius: $devui-border-radius;
+    }
+  }
+
+  tbody tr:last-child {
+    td:first-child {
+      border-bottom-left-radius: $devui-border-radius;
+    }
+
+    td:last-child {
+      border-bottom-right-radius: $devui-border-radius;
+    }
+  }
+}
+
 :host ::ng-deep .devui-talbe-scorll-middle,
 :host ::ng-deep .devui-talbe-scorll-right {
   tr,

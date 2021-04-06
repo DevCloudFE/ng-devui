@@ -11,8 +11,8 @@ import { AutoCompleteModule } from 'ng-devui/auto-complete';
 # dAutoComplete
 ## dAutoComplete 参数
 
-|         参数          |               类型                |                                默认                                 | 说明                                                                                                                                                      | 跳转 Demo                                                        |
-| :-------------------: | :-------------------------------: | :-----------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
+|         参数          |               类型                |                                默认                                 | 说明                                                                                                                                                      | 跳转 Demo                                                        |全局配置项| 
+| :----------------: | :-------------------: | :-------------------------------: | :-----------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
 |        source         |           `Array<any>`            |                                 --                                  | 必选，有 searchFn 的情况下可以不必选                                                                                                                      | [基本用法](demo#basic-usage)           |
 | allowEmptyValueSearch |             `boolean`             |                                false                                | 可选，在绑定的输入框 value 为空时，是否进行搜索提示操作                                                                                                   | [自定义模板展示](demo#auto-custom)     |
 |     appendToBody      |             `boolean`             |                                false                                | 可选，下拉弹出是否 append to body                                                                                                                         | [自定义模板展示](demo#auto-custom)     |
@@ -31,6 +31,7 @@ import { AutoCompleteModule } from 'ng-devui/auto-complete';
 |      valueParser      |            `(item: any) => any`             |                                 [`defaultValueParse`](#defaultvalueparse)                                  | 可选， 对选中后数据进行处理                                                                                                                               | [启用懒加载](demo#auto-lazy-load)      |
 |    enableLazyLoad     |             `boolean`             |                                false                                | 可选，是否允许懒加载                                                                                                                                      | [启用懒加载](demo#auto-lazy-load)      |
 |  dAutoCompleteWidth   |             `number`              |                                 --                                  | 可选，调整宽度（`px`）                                                                                                                                            |
+|  showAnimation   |             `boolean`              |                                 true                                  |  可选，是否开启动画 |   | ✔ |
 
 ## dAutoComplete 事件
 

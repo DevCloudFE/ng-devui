@@ -16,6 +16,7 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { AutoCompleteDirective, AutoCompletePopupComponent } from 'ng-devui/auto-complete';
 import { addClassToOrigin, removeClassFromOrigin } from 'ng-devui/utils';
+import { DevConfigService, WithConfig } from 'ng-devui/utils/globalConfig';
 import { Observable, of } from 'rxjs';
 
 @Component({
@@ -55,6 +56,7 @@ export class MultiAutoCompleteComponent implements OnInit, OnChanges, ControlVal
   @Input() searchFn: (term: string) => Observable<any[]>;
   @Input() formatter: (item: any) => string;
   @Input() valueParser: (item: any) => any;
+  @Input() @WithConfig() showAnimation = true;
   @Output() autoSubmit = new EventEmitter<any>(); // 失焦自动提交
 
   @ViewChild('multiAutoCompleteInput') multiAutoCompleteInputElement: ElementRef;
@@ -99,7 +101,7 @@ export class MultiAutoCompleteComponent implements OnInit, OnChanges, ControlVal
   private onChange = (_: any) => null;
   private onTouched = () => null;
 
-  constructor(private changeDetectorRef: ChangeDetectorRef) {
+  constructor(private changeDetectorRef: ChangeDetectorRef, private devConfigService: DevConfigService) {
     this.formatter = (item) => (item ? item.label || item.toString() : '');
     this.valueParser = (item) => item;
     this.id = MultiAutoCompleteComponent.ID_SEED++;

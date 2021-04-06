@@ -1,10 +1,11 @@
-const path = require('path');
+
 const { getOptions } = require('loader-utils');
 const validateOptions = require('schema-utils');
 const postcss = require('postcss');
 const postcssLessSyntax = require('postcss-less');
-
+// const replacePathAlias = require('./less-replace-path-alias')
 const loaderName = 'less-path-alias-replacer-loader';
+const path = require('path');
 const trailingSlashAndContent = /[/\\][^/\\]*?$/;
 const optionsSchema = {
   type: 'object',
@@ -39,24 +40,27 @@ function getOptionsFromConfig(config) {
  * @param {*} aliasMap 别名规则集合
  */
 function lessReplacePathAlias(css, aliasMap, sourcePath) {
-  const replacePathAlias = postcss.plugin('postcss-plugin-replace-path-alias', () => {
-    return (root) => {
-      root.walkAtRules(atRule => {
-        if (atRule.import && atRule.filename) {
-          const oFilename = atRule.filename.substring(1, atRule.filename.length - 1); // 去掉头尾单引号双引号 // TODO: 待改为正则
-          const rule = aliasMap.filter(rule => rule.aliasReg.test(oFilename)).pop();
-          if (rule) {
-            const prefix = rule.pathPrefixes[0];
-            const filename = path.resolve(prefix, oFilename.replace(rule.aliasReg, (item, match) => match));
-            const relativePath = path.relative(sourcePath.replace(trailingSlashAndContent, ""), filename).split(path.sep).join('/');
-            var realPathAtRule = atRule.clone({ params: (atRule.options || '' )  + " '" + relativePath + "'", filename: "'" + relativePath + "'"});
-            atRule.replaceWith(realPathAtRule);
+  const replacePathAlias = (aliasMap, sourcePath) => {
+    return {
+      postcssPlugin: 'postcss-plugin-replace-path-alias',
+      Once(root, { result }) {
+        root.walkAtRules(atRule => {
+          if (atRule.import && atRule.filename) {
+            const oFilename = atRule.filename.substring(1, atRule.filename.length - 1); // 去掉头尾单引号双引号 // TODO: 待改为正则
+            const rule = aliasMap.filter(rule => rule.aliasReg.test(oFilename)).pop();
+            if (rule) {
+              const prefix = rule.pathPrefixes[0];
+              const filename = path.resolve(prefix, oFilename.replace(rule.aliasReg, (item, match) => match));
+              const relativePath = path.relative(sourcePath.replace(trailingSlashAndContent, ""), filename).split(path.sep).join('/');
+              var realPathAtRule = atRule.clone({ params: (atRule.options || '') + " '" + relativePath + "'", filename: "'" + relativePath + "'" });
+              atRule.replaceWith(realPathAtRule);
+            }
           }
-        }
-      });
+        });
+      }
     }
-  });
-  return postcss([replacePathAlias]).process(css, { syntax: postcssLessSyntax }).css;
+  }
+  return postcss([replacePathAlias(aliasMap, sourcePath)]).process(css, { syntax: postcssLessSyntax }).css;
 }
 
 function process(source, map) {
@@ -72,5 +76,5 @@ function process(source, map) {
   this.callback(null, newSource, map);
   return newSource;
 }
-
 exports.default = process;
+module.exports.postcss = true

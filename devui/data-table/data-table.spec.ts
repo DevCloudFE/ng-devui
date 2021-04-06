@@ -1,8 +1,23 @@
-import { ChangeDetectorRef, Component, DebugElement, ViewChild } from '@angular/core';
-import { ComponentFixture, fakeAsync, flush, TestBed, tick } from '@angular/core/testing';
+import {
+  ChangeDetectorRef,
+  Component,
+  DebugElement,
+  ViewChild
+} from '@angular/core';
+import {
+  ComponentFixture,
+  fakeAsync,
+  flush,
+  TestBed,
+  tick
+} from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+
+import { Observable } from 'rxjs';
+import { of } from 'rxjs/internal/observable/of';
+
 import { CheckBoxModule } from 'ng-devui/checkbox';
 import {
   DataTableComponent,
@@ -11,16 +26,25 @@ import {
   TableWidthConfig
 } from 'ng-devui/data-table';
 import { DatepickerModule } from 'ng-devui/datepicker';
-import { DropDownMenuDirective, DropDownModule } from 'ng-devui/dropdown';
+import {
+  DropDownMenuDirective,
+  DropDownModule
+} from 'ng-devui/dropdown';
 import { InputNumberModule } from 'ng-devui/input-number';
 import { SelectModule } from 'ng-devui/select';
 import { TooltipModule } from 'ng-devui/tooltip';
-import { Observable } from 'rxjs';
-import { of } from 'rxjs/internal/observable/of';
+
 import { I18nModule } from '../i18n';
 import { DomHelper } from '../utils/testing/dom-helper';
 import { DataTableModule } from './data-table.module';
-import { editableOriginSource, genderSource, originSource, SourceType, treeDataSource } from './demo/mock-data';
+import {
+  editableOriginSource,
+  genderSource,
+  originSource,
+  SourceType,
+  treeDataSource
+} from './demo/mock-data';
+
 // basic
 @Component({
   template: `
@@ -448,7 +472,7 @@ class TestDataTableWithChildrenComponent {
             dob: new Date(1991, 3, 1),
           }
         );
-        resolve();
+        resolve(undefined);
       }, 500);
     });
   }

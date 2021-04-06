@@ -46,7 +46,10 @@ export class ValidateTemplateFormComponent {
     let message = null;
     for (const item of value) {
       if (item.id === '2') {
-        message = 'The task queue on the current execution day (Tuesday) is full.';
+        message = {
+          'zh-cn': `当前日期队列已满`,
+          'en-us': 'The task queue on the current execution day (Tuesday) is full.'
+        };
       }
     }
     // Returned by the simulated backend interface

@@ -18,8 +18,8 @@ In the page:
 
 ##### Basic tree, without adding, deleting, modifying, and querying
 
-|      Parameter      |                 Type                 |     Default     |                                                                             Description                                                                              | Jump to Demo                                               |
-| :-----------------: | :----------------------------------: | :-------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------: | ---------------------------------------------------------- | 
+|      Parameter      |                 Type                 |     Default     |                                                                             Description                                                                              | Jump to Demo                                               |Global Config| 
+| :----------------: | :-----------------: | :----------------------------------: | :-------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------: | ---------------------------------------------------------- | 
 |        tree         | `Array<`[`ITreeItem`](#itreeitem)`>` |       --        |                                                   Required. It is used to render the tree based on the input data.                                                   | [Basic Usage](demo#basic-usage)                            |
 |    treeNodeIdKey    |               `string`               |      'id'       |                                                    Optional. ID key value name, which uniquely identifies a node.                                                    | [Custom Display Fields](demo#custom-display-field)         |
 | treeNodeChildrenKey |               `string`               |     'items'     |                                                            Optional. key value name of the subnode array                                                             | [Custom Display Fields](demo#custom-display-field)         |
@@ -36,7 +36,7 @@ In the page:
 | virtualScrollHeight |               `string`               |     '800px'     |                                                       Optional. Sets the tree height during virtual scrolling.                                                       | [Operation tree of large data volume](demo#virtual-scroll) |
 |     minBufferPx     |               `number`               |       600       | Optional. Sets the minimum buffer size during virtual scrolling. For details, see https://material.angular.io/cdk/scrolling/overview#scrolling-over-fixed-size-items | [Operation tree of large data volume](demo#virtual-scroll) | .   |
 |     maxBufferPx     |               `number`               |      900       | Optional. Sets the maximum buffer size during virtual scrolling. For details, see https://material.angular.io/cdk/scrolling/overview#scrolling-over-fixed-size-items | [Operation tree of large data volume](demo#virtual-scroll) | .   |
-|   showAnimation    |    `boolean` |    true   |      Optional. Indicating whether to display animations.     | [Without Animation](demo#without-animation)     |
+|   showAnimation    |    `boolean` |    true   |      Optional. Indicating whether to display animations.     | [Without Animation](demo#without-animation)     | ✔ |
 
 ## d-tree Event
 
@@ -54,8 +54,8 @@ In the page:
 
 ##### Add, delete, and modify buttons when you move the mouse over or select them.
 
-|       Parameter       |                   Type                    |     Default     |                                                                                                  Description                                                                                                  | Jump to Demo                                                           |
-| :-------------------: | :---------------------------------------: | :-------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | ---------------------------------------------------------------------- | 
+|       Parameter       |                   Type                    |     Default     |                                                                                                  Description                                                                                                  | Jump to Demo                                                           |Global Config| 
+| :----------------: | :-------------------: | :---------------------------------------: | :-------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | ---------------------------------------------------------------------- | 
 |         tree          |   `Array<`[`ITreeItem`](#itreeitem)`>`    |       --        |                                                                              Required. Renders the tree based on the input data.                                                                              | [Checkable Tree](demo#checkable-tree)                                  |
 |     treeNodeIdKey     |                 `string`                  |      'id'       |                                                               Optional. ID key value name, which is used to identify the uniqueness of a node.                                                                | [Checkable Tree](demo#checkable-tree)                                  |
 |  treeNodeChildrenKey  |                 `string`                  |     'items'     |                                                                                 Optional. key value name of the subnode array                                                                                 | [Checkable Tree](demo#checkable-tree)                                  |
@@ -87,7 +87,7 @@ In the page:
 |      minBufferPx      |                 `number`                  |       600       |                     Optional. Sets the minimum buffer size during virtual scrolling. For details, see https://material.angular.io/cdk/scrolling/overview#scrolling-over-fixed-size-items                      | [Operation tree of large data volume](demo#virtual-scroll)             | .   |
 |      maxBufferPx      |                 `number`                  |      900       |                     Optional. Sets the maximum buffer size during virtual scrolling. For details, see https://material.angular.io/cdk/scrolling/overview#scrolling-over-fixed-size-items                      | [Operation tree of large data volume](demo#virtual-scroll)             | .   |
 |   disableMouseEvent   |                 `boolean`                 |      false      |             Optional. Sets whether to disable the mouse move-in event. This parameter is used when the appendTobody function is used and the content in the drop-down list box cannot be hovered.             | [Custom Icon](demo#custom-icon)                                        |
-|   showAnimation    |    `boolean` |    true   |      Optional. Indicating whether to display animations.     | [Without Animation](demo#without-animation)     |
+|   showAnimation    |    `boolean` |    true   |      Optional. Indicating whether to display animations.     | [Without Animation](demo#without-animation)     | ✔ |
 
 ## d-operable-tree event
 
@@ -178,6 +178,8 @@ The `checkAllNodes(checked:boolean)`: determines the check status of all nodes b
 `disableAllNodesSelected(disable:boolean = true)`:  Do not change the select status of all nodes.
 
 `disableAllNodesToggled(disable:boolean = true)`: Do not change the expand and collapse status of all nodes.
+
+`transferToTreeNode(originNode, parentId = undefined,treeNodeChildrenKey?,treeNodeIdKey?,checkboxDisabledKey?,selectDisabledKey?,toggleDisabledKey?,treeNodeTitleKey?)`: Transfer origin node data to the structure of the tree needed .
 
 ```
 

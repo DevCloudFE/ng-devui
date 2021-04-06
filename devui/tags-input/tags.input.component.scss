@@ -198,3 +198,11 @@
     }
   }
 }
+
+.devui-tags-autocomplete {
+  .devui-suggestion-list {
+    .devui-suggestion-item {
+      transition: color cubic-bezier(0.645, 0.045, 0.355, 1) 0.1s, background-color cubic-bezier(0.645, 0.045, 0.355, 1) 0.1s;
+    }
+  }
+}

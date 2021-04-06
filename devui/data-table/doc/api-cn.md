@@ -15,8 +15,8 @@ import { DataTableModule } from 'ng-devui/data-table';
 ## d-data-table
 
 ### d-data-table 参数
-|        参数名         |             类型              | 默认值 |                                               描述                                               | 跳转 Demo                                                              |
-| :-------------------: | :---------------------------: | :----- | :----------------------------------------------------------------------------------------------: | ---------------------------------------------------------------------- |
+|        参数名         |             类型              | 默认值 |                                               描述                                               | 跳转 Demo                                                              |全局配置项| 
+| :----------------: | :-------------------: | :---------------------------: | :----- | :----------------------------------------------------------------------------------------------: | ---------------------------------------------------------------------- |
 |      dataSource       |            `any[]`            | --     |                                     必选，数据源，用于渲染表格数据                                     | [基本用法](demo#basic-usage)                     |
 |         lazy          |           `boolean`           | --     |                                       可选，是否懒加载数据                                       | [列表数据懒加载](demo#lazy-loading-of-list-data) |
 |      scrollable       |           `boolean`           | --     |                       可选，表格在超出容器时，是否可以通过滚动查看表格内容                       | [表格交互](demo#table-interaction)               |
@@ -29,6 +29,7 @@ import { DataTableModule } from 'ng-devui/data-table';
 |      tableWidth       |           `string`            | 100%   |                                          可选，表格宽度                                          |
 |      tableHeight      |           `string`            | --     |                                          可选，表格高度，取值'100%'时依赖table父容器的高度                                          | [虚拟滚动](demo#virtual-scroll)                  |
 | containFixHeaderHeight |      `boolean`            | false |     可选，固定表头指定的高度是否包含表头高度，`tableHeight`设置的高度默认是表格body的高度    | [固定表头虚拟滚动](demo#fixed-virtual-scroll)                  |
+| fixHeader |      `boolean`            | false |     可选，表头是否固定    | [固定表头虚拟滚动](demo#fixed-virtual-scroll)                  |
 |   checkableRelation   |      [`CheckableRelation`](#checkablerelation)      | --     |                             可选，配置树形表格的父子选中是否互相关联                             | [树形表格](demo#tree-form)                       |
 |   loadChildrenTable   |           `Promise`           | --     |                            可选，展开子表格的回调，用于异步加载子表格                            | [树形表格](demo#tree-form)                       |
 | loadAllChildrenTable  |           `Promise`           | --     |                      可选，表头展开所有子表格的回调，用于异步加载所有子表格                      | [树形表格](demo#tree-form)                       |
@@ -38,15 +39,16 @@ import { DataTableModule } from 'ng-devui/data-table';
 |    virtualItemSize    |           `number`            | 40     |                       可选，虚拟滚动时每一行的高度，默认为表格默认行高40`px`                       | [虚拟滚动](demo#virtual-scroll)                  |
 |  virtualMinBufferPx   |           `number`            | 80     |                    可选，虚拟滚动时缓冲区最小像素高度，低于该值时将加载新结构                    | [虚拟滚动](demo#virtual-scroll)                  |
 |  virtualMaxBufferPx   |           `number`            | 200    |                                可选，虚拟滚动时缓冲区最大像素高度                                | [虚拟滚动](demo#virtual-scroll)                  |
-|   tableWidthConfig    |     [`TableWidthConfig[]`](#tablewidthconfig)      | []     |                                       可选，配置表格的列宽                                       | [基本用法](demo#basic-usage)                     |
+|   tableWidthConfig    |     [`TableWidthConfig[]`](#tablewidthconfig)      | []     |                                       可选，配置表格的列宽,在含有子表格如树形表格的情况下必选                                       | [基本用法](demo#basic-usage)                     |
 |       checkable       |           `boolean`           | --     |                               可选，Datatable是否提供勾选行的功能                                | [表格交互](demo#table-interaction)               |
 |     checkOptions      |     [`TableCheckOptions[]`](#tablecheckoptions)     | --     |                                   可选，表头选中的下拉项及操作                                   | [自定义表格选中操作](demo#table-check-options)   |
 |  headerCheckDisabled  |           `boolean`           | --     |                                  可选，表头checkbox是否disabled                                  |
 |  headerCheckVisible   |           `boolean`           | true   |                                    可选，表头checkbox是否可见                                    |
 |   showExpandToggle    |           `boolean`           | --     |            可选，是否提供显示扩展行的功能，为true则在配置了扩展行的行前面生成操作按钮            | [扩展行](demo#expand-row)                        |
-|     showSortIcon      |           `boolean`           | true   |                              可选，是否显示排序未激活图标，默认显示                              | [表格交互](demo#table-interaction)               |
+|     showSortIcon      |           `boolean`           | fasle   |                              可选，是否显示排序未激活图标，默认不显示                              | [表格交互](demo#table-interaction)               |
+|     showFilterIcon      |           `boolean`           | fasle   |                              可选，是否显示筛选未激活图标，默认不显示                              | [表格交互](demo#table-interaction)               |
 |  showOperationArea    |           `boolean`           | false   |                     可选，配置表头操作未激活状态下是否显示操作区域，默认不显示                              | [表格交互](demo#table-interaction)               |
-|      hideColumn       |          `string[]`           | --     |                                         可选，用于隐藏列                                         |
+|      hideColumn       |          `string[]`           | --     |                                         可选，用于隐藏列,传入对应的field字段                                         |
 |    pageAllChecked     |           `boolean`           | --     |                                     可选，选中当前页所有row                                      |
 |   onlyOneColumnSort   |           `boolean`           | --     |                              可选，是否限制多列排序的输出限制为一项                              | [表格交互](demo#table-interaction)               |
 |       multiSort       |       [`SortEventArg[]`](#sorteventarg)      | []     |                            可选，多列选择数组，用来指导那几列会被排序                            | [表格交互](demo#table-interaction)               |
@@ -136,6 +138,8 @@ import { DataTableModule } from 'ng-devui/data-table';
 |   iconUnFoldTable    |                `DOMString`                 | --     |                可选，自定义树形表格的展开图标                 | [树形表格](demo#tree-form)         |
 |      fixedLeft       |                  `string`                  | --     |            可选，该列固定到左侧的距离，如：‘100px’            | [固定列](demo#fixed-column)        |
 |      fixedRight      |                  `string`                  | --     |            可选，该列固定到右侧的距离，如：‘100px’            | [固定列](demo#fixed-column)        |
+|     showSortIcon      |           `boolean`           | fasle   |                              可选，是否显示排序未激活图标，默认不显示                              | [表格交互](demo#table-interaction)               |
+|     showFilterIcon      |           `boolean`           | fasle   |                              可选，是否显示筛选未激活图标，默认不显示                              | [表格交互](demo#table-interaction)               |
 
 ## dHeadCell 事件
 

@@ -90,6 +90,7 @@ describe('breadcrumb basic', () => {
                     code: 'Enter'
                 });
                 inputEl.dispatchEvent(enterEvent);
+                tick(300);
                 fixture.detectChanges();
                 const resultEl = debugEl.queryAll(By.css('.cdk-overlay-container .devui-dropdown-menu > ul > li'));
                 resultEl.forEach(ele => {

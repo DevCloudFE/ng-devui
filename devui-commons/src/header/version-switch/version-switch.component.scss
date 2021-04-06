@@ -1,0 +1,10 @@
+.header-version-switch {
+    width: 80px;
+    margin: 0 12px;
+}
+
+@media (max-width: 1450px) {
+    .header-version-switch {
+        width: 60px;
+    }
+}

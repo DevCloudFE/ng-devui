@@ -11,7 +11,9 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 import { ToastModule } from '../toast.module';
 import { BasicComponent } from './basic/basic.component';
 import { LifeComponent } from './life/life.component';
+import { ToastServiceComponent } from './service/toast-service.component';
 import { SingleComponent } from './single/single.component';
+import { StyleComponent } from './style/style.component';
 import { ToastDemoComponent } from './toast-demo.component';
 
 @NgModule({
@@ -38,7 +40,7 @@ import { ToastDemoComponent } from './toast-demo.component';
     ]),
   ],
   exports: [ToastDemoComponent],
-  declarations: [ToastDemoComponent, BasicComponent, LifeComponent, SingleComponent],
+  declarations: [ToastDemoComponent, BasicComponent, LifeComponent, SingleComponent, StyleComponent, ToastServiceComponent],
   
 })
 export class ToastDemoModule {}

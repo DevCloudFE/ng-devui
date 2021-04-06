@@ -16,8 +16,8 @@ In the page:
 # d-radio
 ## d-radio Parameters
 
-|  Parameter   |              Type               | Default | Description                                                                                                                                  | Jump to Demo                                   |
-| :----------: | :-----------------------------: | :-----: | :------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------- |
+|  Parameter   |              Type               | Default | Description                                                                                                                                  | Jump to Demo                                   |Global Config| 
+| :----------------: | :----------: | :-----------------------------: | :-----: | :------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------- |
 |     name     |            `string`             |   --    | Required. Single-option name                                                                                                                 | [Independent Radios](demo#basic-usage) |
 |    value     |            `string`             |   --    | Required. Single-option value                                                                                                                | [Independent Radios](demo#basic-usage) |
 |   disabled   |            `boolean`            |  false  | Optional. Whether to disable this option.                                                                                                    | [Disabled Radios](demo#disabled)                      |     |

@@ -129,9 +129,13 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
    */
   @Input() showOperationArea = false;
   /**
-   * 【可选】是否显示排序未激活图标，默认显示,
+   * 【可选】是否显示排序未激活图标，默认不显示,
    */
-  @Input() showSortIcon = true;
+  @Input() showSortIcon = false;
+    /**
+   * 【可选】是否显示筛选未激活图标，默认不显示,
+   */
+  @Input() showFilterIcon = false;
   /**
    * 多列选择Change事件，用来更新多列选择数组
    * */
@@ -417,9 +421,6 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
           this.updateColumns();
         });
       });
-      this.columns.changes.subscribe(() => {
-        this.updateColumns();
-      });
     }
 
     if (this.innerHeader) {
@@ -428,6 +429,10 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
       });
       this.headertoggleTableSubscription = this.innerHeader.headerChildrenTableToggleEvent.subscribe((status) => {
         this.onToggleAllChildrenTable(status);
+      });
+    } else {
+      this.columns.changes.subscribe(() => {
+        this.updateColumns();
       });
     }
   }

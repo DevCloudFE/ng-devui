@@ -25,6 +25,7 @@ export interface IDrawerOptions {
   position?: string;
   beforeHidden?: () => boolean | Promise<boolean> | Observable<boolean>;
   bodyScrollable?: boolean;
+  showAnimation?: boolean;
 }
 
 export interface IDrawerOpenResult {

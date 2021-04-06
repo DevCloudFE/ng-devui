@@ -600,4 +600,36 @@ export class TreeFactory {
       this.nodes[id].data.disableToggle = disabled;
     }
   }
+
+  public transferToTreeNode(originNode, parentId?,
+                            treeNodeChildrenKey = 'items',
+                            treeNodeIdKey = 'id',
+                            checkboxDisabledKey = 'disabled',
+                            selectDisabledKey = 'disableSelect',
+                            toggleDisabledKey = 'disableToggle',
+                            treeNodeTitleKey = 'title') {
+    const node = {
+      id: originNode[treeNodeIdKey],
+      parentId,
+      title: originNode[treeNodeTitleKey],
+      isOpen: !!originNode.open,
+      data: originNode.data || {},
+      originItem: originNode,
+      isParent: !!originNode.isParent || !!(originNode[treeNodeChildrenKey] && originNode[treeNodeChildrenKey].length > 0),
+      loading: !!originNode.loading,
+      isMatch: !!originNode.isMatch,
+      isHide: !!originNode.isHide,
+      isChecked: !!originNode.isChecked,
+      halfChecked: !!originNode.halfChecked,
+      isActive: !!originNode.isActive,
+      disabled: !!originNode[checkboxDisabledKey],
+      disableSelect: !!originNode[selectDisabledKey],
+      disableToggle: !!originNode[toggleDisabledKey],
+      disableAdd: !!originNode.disableAdd,
+      disableEdit: !!originNode.disableEdit,
+      disableDelete: !!originNode.disableDelete,
+      children: []
+    };
+    return new TreeNode(node.id, node.parentId, { ...node });
+  }
 }

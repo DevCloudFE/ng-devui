@@ -12,13 +12,14 @@ import { DropDownModule } from ' ng-devui/dropdown';
 
 ### dDropDown Parameter
 
-|       Parameter       |             Type              | Default |                                                                                        Description                                                                                        | Jump to Demo                                                         |
-| :-------------------: | :---------------------------: | :-----: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | -------------------------------------------------------------------- |
+|       Parameter       |             Type              | Default |                                                                                        Description                                                                                        | Jump to Demo                                                         |Global Config| 
+| :----------------: | :-------------------: | :---------------------------: | :-----: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | -------------------------------------------------------------------- |
 |        isOpen         |           `boolean`           |  false  |                                                                    Optional. It indicates whether dropdown is enabled.                                                                    | [Control dropdown meanu with isOpen](demo#dropdown-set-is-open)      |
 |       disabled        |           `boolean`           |  false  |                                                                 Optional. Set this parameter to true to disable dropdown.                                                                 |
 |        trigger        | `click'\|'hover'\|'manually'` | 'click' |                          Optional. Dropdown trigger mode. Click indicates click, hover indicates hover (including click), and manually indicates manual control.                          | [Hover dropdown](demo#suspension-drop-down)                          |
 |      closeScope       |   `'all'\|'blank'\|'none'`    |  'all'  | Optional. Click the blank area to close the blank area. Click all to close the blank area, the none menu can be closed either inside or outside. Only the drop-down button can be closed. | [Close Trigger Point Settings](demo#turn-off-trigger-point-settings) |
 | closeOnMouseLeaveMenu |           `boolean`           |  false  |                                                    Optional. Whether to close the menu when you exit the menu after entering the menu                                                     | [Multi-level drop-down menu](demo#multi-level-drop-down-menu)        |
+| showAnimation | `boolean` | true | optional. Whether to enable animation. |   | ✔ |
 
 ### dDropDown Event
 

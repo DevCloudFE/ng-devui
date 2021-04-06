@@ -1,14 +1,6 @@
 <section>
   <div class="btn-group">
-    <d-button
-      dPopover
-      [popType]="'default'"
-      [content]="'default!'"
-      [position]="'left'"
-      [controlled]="true"
-      [showAnimate]="true"
-      [appendToBody]="false"
-    >
+    <d-button dPopover [popType]="'default'" [content]="'default!'" [position]="'left'" [controlled]="true" [appendToBody]="false">
       default
     </d-button>
     <d-button
@@ -17,31 +9,14 @@
       [content]="'info!'"
       [position]="['top', 'right', 'bottom', 'left']"
       [controlled]="true"
-      [showAnimate]="true"
       [appendToBody]="false"
     >
       info
     </d-button>
-    <d-button
-      dPopover
-      [content]="'error!'"
-      [popType]="'error'"
-      [position]="'top'"
-      [controlled]="true"
-      [showAnimate]="true"
-      [appendToBody]="false"
-    >
+    <d-button dPopover [content]="'error!'" [popType]="'error'" [position]="'top'" [controlled]="true" [appendToBody]="false">
       error
     </d-button>
-    <d-button
-      dPopover
-      [content]="'warning!'"
-      [popType]="'warning'"
-      [position]="'bottom'"
-      [controlled]="true"
-      [showAnimate]="true"
-      [appendToBody]="false"
-    >
+    <d-button dPopover [content]="'warning!'" [popType]="'warning'" [position]="'bottom'" [controlled]="true" [appendToBody]="false">
       warning
     </d-button>
     <d-button
@@ -50,10 +25,10 @@
       [content]="'success!'"
       [position]="['bottom', 'right', 'top', 'left']"
       [controlled]="true"
-      [showAnimate]="true"
       [appendToBody]="true"
     >
       success
     </d-button>
+    <d-button dPopover [content]="'No Animation!'" [controlled]="true" [showAnimate]="false"> No Animation </d-button>
   </div>
 </section>

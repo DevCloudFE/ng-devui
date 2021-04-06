@@ -17,8 +17,8 @@ import { CheckBoxModule } from 'ng-devui';
 
 ## d-checkbox 参数
 
-|     参数      |              类型               | 默认  |                                         说明                                          | 跳转 Demo                         |
-| :-----------: | :-----------------------------: | :---: | :-----------------------------------------------------------------------------------: | --------------------------------- |
+|     参数      |              类型               | 默认  |                                         说明                                          | 跳转 Demo                         |全局配置项| 
+| :----------------: | :-----------: | :-----------------------------: | :---: | :-----------------------------------------------------------------------------------: | --------------------------------- |
 |     name      |            `string`             |  --   |                         可选，表单域名，input 原生 name 属性                          | [基本用法](demo#checkbox-basic)   |
 |     label     |            `string`             |  --   |                                    可选，显示标签                                     | [基本用法](demo#checkbox-basic)   |
 |  isShowTitle  |            `boolean`            | true  |                  可选，是否显示 title 提示，默认显示参数`label`的值                   | [基本用法](demo#checkbox-basic)   |
@@ -27,7 +27,7 @@ import { CheckBoxModule } from 'ng-devui';
 | labelTemplate |          `TemplateRef`          |  --   |                                可选，标签的自定义模板                                 | [基本用法](demo#checkbox-basic)   |
 |  halfchecked  |            `boolean`            | false |                                    可选，半选状态                                     | [基本用法](demo#checkbox-basic)   |
 |     color     |            `string`             |  --   |                                   可选，复选框颜色                                    | [基本用法](demo#checkbox-basic)   |
-| showAnimation |            `boolean`            | true  |                                可选，控制是否显示动画                                 | [基本用法](demo#checkbox-basic)   |
+| showAnimation |            `boolean`            | true  |                                可选，控制是否显示动画                                 | [基本用法](demo#checkbox-basic)   | ✔ |
 | beforeChange  | `Function\|Promise\|Observable` |  --   | 可选，checkbox 切换前的回调函数，返回 boolean 类型，返回 false 可以阻止 checkbox 切换 | [回调切换](demo#condition-change) |
 
 ## d-checkbox 事件
@@ -40,8 +40,8 @@ import { CheckBoxModule } from 'ng-devui';
 
 ## d-checkbox-group 参数
 
-|     参数      |              类型               |   默认   |                                            说明                                             | 跳转 Demo                             |
-| :-----------: | :-----------------------------: | :------: | :-----------------------------------------------------------------------------------------: | ------------------------------------- |
+|     参数      |              类型               |   默认   |                                            说明                                             | 跳转 Demo                             |全局配置项| 
+| :----------------: | :-----------: | :-----------------------------: | :------: | :-----------------------------------------------------------------------------------------: | ------------------------------------- |
 |     name      |            `string`             |    --    |                            可选，表单域名，input 原生 name 属性                             | [使用 CheckBoxGroup](demo#tabs-group) |
 |   direction   |        `'row'\|'column'`        | 'column' |                                       可选，显示方向                                        | [使用 CheckBoxGroup](demo#tabs-group) |
 |   itemWidth   |            `number`             |    --    |      可选，表示每一项 checkbox 的宽度（`px`）       | [使用 CheckBoxGroup](demo#tabs-group) |
@@ -51,7 +51,7 @@ import { CheckBoxModule } from 'ng-devui';
 | labelTemplate |          `TemplateRef`          |    --    |                                   可选，标签的自定义模板                                    | [使用 CheckBoxGroup](demo#tabs-group) |
 |  halfchecked  |            `boolean`            |  false   |                                       可选，半选状态                                        |                                       |
 |     color     |            `string`             |    --    |                                      可选，复选框颜色                                       | [使用 CheckBoxGroup](demo#tabs-group) |
-| showAnimation |            `boolean`            |   true   |                                   可选，控制是否显示动画                                    | [使用 CheckBoxGroup](demo#tabs-group) |
+| showAnimation |            `boolean`            |   true   |                                   可选，控制是否显示动画                                    | [使用 CheckBoxGroup](demo#tabs-group) |✔ |
 | beforeChange  | `Function\|Promise\|Observable` |    --    | 可选，checkbox 切换前的回调函数，返回 boolean 类型，返回 false 可以阻止 checkbox-group 切换 | [回调切换](demo#condition-change)     |
 |   disabled    |            `boolean`            |  false   |                                  可选，是否禁用整个按钮组                                   | [使用 CheckBoxGroup](demo#tabs-group) |
 

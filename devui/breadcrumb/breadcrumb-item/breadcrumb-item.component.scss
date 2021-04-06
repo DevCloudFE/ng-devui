@@ -119,3 +119,24 @@ d-search {
 .devui-breadcrumb-item-with-menu .devui-breadcrumb-item {
   cursor: pointer;
 }
+
+.devui-dropdown-open {
+  .devui-breadcrumb-down-icon {
+    transform: rotate(180deg);
+  }
+}
+
+.devui-breadcrumb-item {
+  ::ng-deep a,
+  ::ng-deep span {
+    transition: color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  }
+}
+
+.devui-breadcrumb-down-icon {
+  transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+
+  svg g polygon {
+    transition: fill 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  }
+}

@@ -1,0 +1,33 @@
+<div class="header-menu">
+  <div *ngFor="let item of menuList" class="menu-item" (click)="onSelect(item)" [ngClass]="{'menu-selected-item': item === selectedItem}">
+    <a *ngIf="item.href" class="menu-link" [href]="item.href" rel="noopener noreferrer" [target]="item.target ? item.target : '_blank'">
+      <span>{{curLanguage === 'zh-cn' ? item.name : item.enName}}</span>
+    </a>
+    <span
+      class="menu-link"
+      *ngIf="item.children"
+      dDropDown
+      appendToBody
+      [trigger]="'hover'"
+    >
+      <a dDropDownToggle>
+        {{curLanguage === 'zh-cn' ? item.name : item.enName}}
+        <span class="icon-chevron-down"></span>
+      </a>
+      <div dDropDownMenu class="devui-scrollbar menu-list-wrapper">
+        <div class="menu-list" *ngFor="let itemInList of item.children">
+          <div class="menu-list-title">
+            {{curLanguage === 'zh-cn' ? itemInList.name : itemInList.enName}}
+          </div>
+          <ul class="menu-sublist">
+            <li class="menu-sublist-item" *ngFor="let itemInSubList of itemInList.children">
+              <a *ngIf="itemInSubList.href" class="" [href]="itemInSubList.href" rel="noopener noreferrer" [target]="itemInSubList.target ? itemInSubList.target : '_blank'">
+                <span>{{curLanguage === 'zh-cn' ? itemInSubList.name : itemInSubList.enName}}</span>              
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>

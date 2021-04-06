@@ -587,6 +587,7 @@ div.devui-dropdown-menu > ul.devui-select-list-unstyled li.active.disabled,
 div.devui-dropdown-menu .devui-select-list-unstyled li.active.disabled:hover,
 div.devui-dropdown-menu > ul.devui-select-list-unstyled li.active.disabled:hover {
   background: $devui-disabled-bg;
+  color: $devui-disabled-text;
 }
 
 /* checkbox的label灰化 */
@@ -672,7 +673,10 @@ svg.svg-icon-search path {
 .devui-select-chevron-icon {
   display: inline-flex;
   vertical-align: middle;
-  transition: transform 0.3s;
+
+  &-animation {
+    transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  }
 }
 
 .devui-select-chevron-icon svg polygon {

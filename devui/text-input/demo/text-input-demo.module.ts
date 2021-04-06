@@ -10,6 +10,7 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 import { TextInputModule } from '../text-input.module';
 import { BasicComponent } from './basic/basic.component';
 import { PasswordVisibleComponent } from './password-visible/password-visible.component';
+import { TextInputSizeComponent } from './size/text-input-size.component';
 import { TextInputDemoComponent } from './text-input-demo.component';
 
 @NgModule({
@@ -35,7 +36,7 @@ import { TextInputDemoComponent } from './text-input-demo.component';
     FormModule,
   ],
   exports: [TextInputDemoComponent],
-  declarations: [TextInputDemoComponent, BasicComponent, PasswordVisibleComponent],
+  declarations: [TextInputDemoComponent, BasicComponent, PasswordVisibleComponent, TextInputSizeComponent],
   
 })
 export class TextInputDemoModule {}

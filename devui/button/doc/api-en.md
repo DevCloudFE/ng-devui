@@ -14,8 +14,8 @@ In the page:
 # d-button
 ## d-button Parameter
 
-|   Parameter    |   Type |  Default |      Description          |  Jump to Demo |
-| :---------: | :------------: | :-----: | :--------------------------------------------------------------------------- | |
+|   Parameter    |   Type |  Default |      Description          |  Jump to Demo |Global Config| 
+| :----------------: | :---------: | :------------: | :-----: | :--------------------------------------------------------------------------- | |
 |     id      |             `string`            |   --   | Optional. button ID | [Primary Buttons](demo#button-primary)|
 |     type    |  [`IButtonType`](#ibuttontype)  |  'button' | Optional. The type is `'button' \| 'submit' \| 'reset'` |[Danger Buttons](demo#button-danger)   |
 |   bsStyle   | [`IButtonStyle`](#ibuttonstyle) |  'primary' | Optional. The style is `'primary' \| 'common' \| 'text' \| 'text-dark' \| 'danger'` | [Common Buttons](demo#button-common) |
@@ -38,8 +38,8 @@ In the page:
 
 ## d-button-group parameter
 
-| Parameter | Type | Default | Description | Jump to Demo |
-| :---------: | :------------: | :-----: | :--------------------------------------------------------------------------- | |
+| Parameter | Type | Default | Description | Jump to Demo |Global Config| 
+| :----------------: | :---------: | :------------: | :-----: | :--------------------------------------------------------------------------- | |
 | size | [`IButtonGroupSize`](#ibuttongroupsize) | 'md' | Optional. The size is `'lg' \| 'md' \| 'sm' \| 'xs'` | [Button Group](demo#button-groups) |
 
 # Interface & Type Definition

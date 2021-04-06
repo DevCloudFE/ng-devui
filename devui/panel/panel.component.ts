@@ -9,11 +9,9 @@ import {
   Input,
   Output
 } from '@angular/core';
-
+import { collapseForDomDestroy } from 'ng-devui/utils';
+import { DevConfigService, WithConfig } from 'ng-devui/utils/globalConfig';
 import { Observable } from 'rxjs';
-
-import { openClose } from 'ng-devui/utils';
-
 import { PanelFooterComponent } from './panel-footer.component';
 import { PanelHeaderComponent } from './panel-header.component';
 import { PanelType } from './panel.types';
@@ -22,17 +20,18 @@ import { PanelType } from './panel.types';
   selector: 'd-panel',
   templateUrl: './panel.component.html',
   styleUrls: ['./panel.component.scss'],
-  animations: [trigger('noAnimation', [transition(':enter', [])]), openClose],
+  animations: [trigger('noAnimation', [transition(':enter', [])]), collapseForDomDestroy],
 })
 export class PanelComponent {
   @Input() type: PanelType = 'default';
   @Input() cssClass: string;
   @Input() isCollapsed: boolean;
+  @Input() @WithConfig() showAnimation = true;
   @Input() beforeToggle: (value) => boolean | Promise<boolean> | Observable<boolean>;
   @Output() toggle: EventEmitter<boolean> = new EventEmitter<boolean>();
   @ContentChild(PanelHeaderComponent) panelHeader;
   @ContentChild(PanelFooterComponent) panelFooter;
-
+  constructor(private devConfigService: DevConfigService) {  }
   toggleBody() {
     this.canToggle().then((val) => {
       if (!val) {

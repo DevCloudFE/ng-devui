@@ -35,6 +35,10 @@ export class BatchDragComponent {
       list: [],
     },
   ];
+
+  showOriginPlaceholder = false;
+  switchWhileCrossEdge = false;
+
   constructor(private cdr: ChangeDetectorRef) {}
 
   onDrop(e: any, targetArray: Array<any>) {

@@ -10,11 +10,19 @@ export class StepsGuideDemoComponent implements OnInit, OnDestroy {
   basicSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./basic/basic.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/basic.component.ts') },
+    { title: 'DATA', language: 'typescript', code: require('!!raw-loader!./fakeData.ts') },
   ];
 
-  lifeSource: Array<DevuiSourceData> = [
+  positionSource: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./position/position.component.html') },
+    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./position/position.component.ts') },
+    { title: 'DATA', language: 'typescript', code: require('!!raw-loader!./fakeData.ts') },
+  ];
+
+  customSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./custom/custom.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./custom/custom.component.ts') },
+    { title: 'DATA', language: 'typescript', code: require('!!raw-loader!./fakeData.ts') },
   ];
 
   navItems = [];
@@ -39,6 +47,7 @@ export class StepsGuideDemoComponent implements OnInit, OnDestroy {
   setNavValues(values) {
     this.navItems = [
       { dAnchorLink: 'basic-usage', value: values['basic-usage'] },
+      { dAnchorLink: 'position', value: values['position'] },
       { dAnchorLink: 'custom', value: values['custom'] },
     ];
   }

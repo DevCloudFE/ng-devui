@@ -16,8 +16,8 @@ import { ReadTipModule } from 'ng-devui/read-tip';
 
 ## dReadTip 参数
 
-|         参数         |                类型                 |            默认             | 说明                            | 跳转 Demo                                    |
-| :------------------: | :---------------------------------: | :-------------------------: | :------------------------------ | -------------------------------------------- |
+|         参数         |                类型                 |            默认             | 说明                            | 跳转 Demo                                    |全局配置项| 
+| :----------------: | :------------------: | :---------------------------------: | :-------------------------: | :------------------------------ | -------------------------------------------- |
 |    readTipOptions    | [`ReadTipOptions`](#readtipoptions) | [详见下方](#readtipoptions) | 必选，配置提示选项              | [基本用法](demo#basic)                       |
 | readTipOptions.rules |   [`ReadTipRules`](#readtiprules)   |             --              | 必选，配置 readtip 内容         | [包括多个提示的 readtip](demo#multi-readtip) |
 |   contentTemplate    |         `TemplateRef<any>`          |             --              | 可选，传入模板显示 readtip 内容 | [传入模板显示内容](demo#readtip-template)    |
@@ -34,6 +34,7 @@ export interface ReadTipOptions {
   mouseleaveTime?: number; // 默认值是 100
   position?: PositionType | PositionType[]; // 默认值是 'top'
   overlayClassName?: string; // 默认值为空字符串
+  appendToBody?: boolean; // 默认值为true
   rules: ReadTipRules;
 }
 ```
@@ -54,6 +55,11 @@ export interface ReadTipRule {
   mouseleaveTime?: number; // 可以继承自 ReadTipOptions
   position?: PositionType | PositionType[]; // 可以继承自 ReadTipOptions
   overlayClassName?: string; // 可以继承自 ReadTipOptions
-  dataFn?: ({ element, rule: ReadTipRule }) => Observable<{ title?: string; content?: string; template?: TemplateRef<any> }>;
+  appendToBody?: boolean; //可以继承自 ReadTipOtions
+  //customData与template搭配使用，customData为传入模板的上下文，可以自定义模板内容
+  dataFn?: ({
+    element,
+    rule: ReadTipRule,
+  }) => Observable<{ title?: string; content?: string; template?: TemplateRef<any>; customData?: any }>;
 }
 ```

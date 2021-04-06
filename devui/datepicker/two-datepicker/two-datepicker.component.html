@@ -6,11 +6,7 @@
   (backdropClick)="isOpen = false"
   (positionChange)="onPositionChange($event)"
 >
-  <div
-    [@fadeInOut]="isOpen && startAnimation ? datePosition : 'void'"
-    class="devui-two-date-wrapper"
-    [class.devui-dropdopwn-hidden]="!startAnimation"
-  >
+  <div [@fadeInOut]="startAnimation ? datePosition : 'void'" [@.disabled]="!showAnimation" class="devui-two-date-wrapper">
     <div class="devui-two-date-picker">
       <d-two-datepicker-single
         class="devui-date-picker"

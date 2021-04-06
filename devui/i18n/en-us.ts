@@ -11,10 +11,10 @@ export default {
     btnCancel: 'Cancel',
     btnClose: 'Close',
     btnClickMe: 'click me!',
-    copied: 'Copied'
+    copied: 'Copied',
   },
   autoComplete: {
-    latestInput: 'Latest input'
+    latestInput: 'Latest input',
   },
   datePicker: {
     today: 'Today',
@@ -32,13 +32,39 @@ export default {
       'September',
       'October',
       'November',
-      'December'
+      'December',
     ],
     startDate: 'Start Date',
     endDate: 'End Date',
     yearDisplay(year) {
       return `${year}`;
-    }
+    },
+  },
+  datePickerPro: {
+    placeholder: 'select date',
+    startPlaceholder: 'select start date',
+    endPlaceholder: 'select end date',
+    daysOfWeek: ['Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat'],
+    monthsOfYear: [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'June',
+      'July',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
+    ],
+    getYearMonthStr(year, month) {
+      return `${year} - ${month}`;
+    },
+    hour: 'Hr',
+    min: 'Min',
+    second: 'Sec'
   },
   form: {
     required(val): string {
@@ -64,7 +90,7 @@ export default {
     },
     whitespace(val): string {
       return 'The value cannot only has whitespace.';
-    }
+    },
   },
   gantt: {
     today: 'today',
@@ -80,7 +106,7 @@ export default {
       'September',
       'October',
       'November',
-      'December'
+      'December',
     ],
     yearDisplay(year) {
       return `${year}`;
@@ -105,8 +131,8 @@ export default {
       { title: 'Important and urgent' },
       { title: 'Important not urgent' },
       { title: 'Not important not urgent' },
-      { title: 'Not important urgent' }
-    ]
+      { title: 'Not important urgent' },
+    ],
   },
   upload: {
     warning: 'Warning',
@@ -141,7 +167,7 @@ export default {
     },
     getFailedFilesCount(failedCount) {
       return `${failedCount} files upload failed`;
-    }
+    },
   },
   modal: {
     warning: 'Warning',
@@ -167,19 +193,19 @@ export default {
   stepsGuide: {
     previous: 'Previous',
     next: 'Continue',
-    finish: 'OK'
+    finish: 'OK',
   },
   splitter: {
     collapse: 'Collapse',
-    expand: 'Expand'
+    expand: 'Expand',
   },
   relativeTime: {
     yearsAgo(num: number) {
-      return num === 1 ?  'last year' : `${num} years ago`;
+      return num === 1 ? 'last year' : `${num} years ago`;
     },
     monthsAgo(num: number) {
       return num === 1 ? 'last month' : `${num} months ago`;
-    } ,
+    },
     weeksAgo(num: number) {
       return num === 1 ? 'last week' : `${num} weeks ago`;
     },
@@ -207,5 +233,24 @@ export default {
   },
   tagsInput: {
     tagsReachMaxLength: 'The length of tags has reached maxTags',
-  }
+  },
+  categorySearch: {
+    confirm: 'Confirm',
+    cancel: 'Cancel',
+    selectFilterCondition: 'Please select a filter condition',
+    getFindingMessage(msg) {
+      return `find in '${msg}'`;
+    },
+    getSearchMessage(msg) {
+      return `only search '${msg}'`;
+    },
+    saveFilter: 'Save Filter',
+    filterTitle: 'Filter Title',
+    placeholder: 'Please enter...',
+    searchPlaceholder: 'Click here to choose a filter condition',
+    noFilterConditions: 'No filter conditions',
+    clearFilterCondition: 'Clear Filter Condition',
+    seeMore: 'See more',
+    selected: 'Selected'
+  },
 };

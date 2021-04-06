@@ -1,7 +1,7 @@
 import { Component, DebugElement } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ButtonModule } from '../button';
 import { TooltipModule } from './tooltip.module';
 
@@ -25,7 +25,7 @@ describe('tooltip', () => {
 
     beforeEach(() => {
       TestBed.configureTestingModule({
-        imports: [TooltipModule, ButtonModule, BrowserAnimationsModule],
+        imports: [TooltipModule, ButtonModule, BrowserAnimationsModule, NoopAnimationsModule],
         declarations: [TestTooltipBasicComponent]
       }).compileComponents();
     });

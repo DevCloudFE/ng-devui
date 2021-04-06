@@ -1,15 +1,14 @@
-## Import
-
-The current component is an experimental component and needs to be introduced as required. The path is as follows:
-
+# How To Use
+Import in module：
+```ts
+import {GanttModule} from' ng-devui/gantt';
 ```
-import {GanttModule} from' ng-devui/experimental/gantt';
-```
+
 
 ### d-gantt-scale parameter
 
-| Parameter | Type | Default | Description | Jump to Demo |
-| :---------------------------: | :----------------: | :---: | :----------------------------------------- | -------------------------------------------------------------------------- |
+| Parameter | Type | Default | Description | Jump to Demo |Global Config| 
+| :----------------: | :---------------------------: | :----------------: | :---: | :----------------------------------------- | -------------------------------------------------------------------------- |
 | milestoneList | `GanttMilestone[]` | [] | Optional. Version milestone list | [Combined With Datatable](demo#gantt-with-datatable) |
 | ganttScaleContainerOffsetLeft | `number` | 0 | Optional. Left offset pixel of the Gantt chart time axis container | [Combined With Datatable](demo#gantt-with-datatable) |
 | ganttBarContainerElement | `Element` | null | Time bar container of the Gantt chart, which is mandatory. It is used to display the Gantt chart lines. | [Combined With Datatable](demo#gantt-with-datatable) |

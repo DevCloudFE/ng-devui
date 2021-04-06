@@ -1,6 +1,16 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild
+} from '@angular/core';
+
 import { DataTableComponent } from 'ng-devui/data-table';
-import { editableOriginSource, genderSource, SourceType } from '../mock-data';
+
+import {
+  editableOriginSource,
+  genderSource,
+  SourceType
+} from '../mock-data';
 
 @Component({
   selector: 'd-editable-old',
@@ -21,7 +31,7 @@ export class EditableOldComponent implements OnInit {
   beforeCellEdit = () => {
     return new Promise((resolve) => {
       console.log('beforeCellEdit');
-      resolve();
+      resolve(undefined);
     });
   }
 

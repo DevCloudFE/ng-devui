@@ -48,12 +48,13 @@ import { DatePickerConfigService as DatePickerConfig } from './date-picker.confi
                  [cdkConnectedOverlayOpen]="isOpen"
                  (backdropClick)="isOpen=false"
                  (positionChange)="onPositionChange($event)">
-      <d-datepicker [@fadeInOut]="(isOpen && startAnimation) ? datepickerPosition : 'void'" [locale]="locale || i18nLocale"
+      <d-datepicker [@fadeInOut]="startAnimation ? datepickerPosition : 'void'"
+                      [locale]="locale || i18nLocale" [@.disabled]="!showAnimation"
                       [showTime]="showTime" [cssClass]="cssClass" [selectedDate]="selectedDate"
                       [disabled]="disabled" [dateConverter]="dateConverter" (selectedDateChange)="timeChange($event)"
                       [dateConfig]="dateConfig"
                       [customViewTemplate]="customViewTemplate" [maxDate]="maxDate"
-                      [minDate]="minDate" class="devui-datepicker" [class.devui-dropdopwn-hidden]="!startAnimation"></d-datepicker>
+                      [minDate]="minDate" class="devui-datepicker"></d-datepicker>
     </ng-template>
   `,
   animations: [
@@ -72,6 +73,7 @@ export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDes
   @Input() dateConverter: DateConverter;
   @Input() customViewTemplate: TemplateRef<any>;
   @Input() autoOpen = false;
+  @Input() showAnimation = true;
   @Output() selectedDateChange = new EventEmitter<SelectDateChangeEventArgs>();
   selectedDate: Date;
   _isOpen = false;

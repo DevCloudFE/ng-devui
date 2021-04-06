@@ -53,7 +53,7 @@ export class ImagePreviewDirective implements OnInit, OnDestroy {
       component: DImagePreviewComponent,
       zIndex: this.zIndex,
       backDropZIndex: this.backDropZIndex,
-      showAnimate: false,
+      showAnimation: false,
       data: {
         targetImage: imageHTMLElement,
         images: Array.from(this.elementRef.nativeElement.querySelectorAll('img')),

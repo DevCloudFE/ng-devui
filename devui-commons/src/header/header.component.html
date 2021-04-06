@@ -1,0 +1,38 @@
+<div class="fixed-wapper"
+  [ngClass]="{
+  'header-fixed': isFixed
+}">
+  <div class="header-wapper"
+    [ngClass]="{
+      'header-shadow': showShadow,
+      'header-maxwidth': hasMaxWidth
+    }">
+      <div class="header-left">
+        <div *ngIf="showSlideButton" class="slide-menu-link" (click)="clickSlideMenu($event)">
+          <span></span>
+        </div>
+        <ng-content select="d-header-logo"></ng-content>
+        <d-search *ngIf="showSearch" [isKeyupSearch]="true" [placeholder]="searchPlaceholder" (searchFn)="onSearch($event)"></d-search>
+      </div>
+      <div class="header-right" [ngClass]="{'active': collapseMenuActive}">
+        <ng-content select="d-header-menu"></ng-content>
+        <ng-content select="d-ecosystem"></ng-content>
+        <ng-content select="d-header-version-switch"></ng-content>
+        <ng-content select="d-header-theme-switch"></ng-content>
+        <ng-content select="d-header-language-switch"></ng-content>
+        <div *ngIf="showGitStar">
+          <iframe class="header-gitStar"
+            src="https://ghbtns.com/github-btn.html?user=DevCloudFE&repo=ng-devui&type=star&count=true"
+          ></iframe>
+        </div>  
+        <div *ngIf="showAvatar" class="header-avatar">
+          <d-avatar
+            [width]="'40'"
+            [height]="'40'"
+            [imgSrc]="userAvatar"
+          ></d-avatar>
+        </div>
+      </div>
+      <div id="headerCollapseMenu" class="header-collapse-menu" [ngClass]="{'active': collapseMenuActive}" (click)="toggleMenu($event)"><span></span></div>
+  </div>
+</div>

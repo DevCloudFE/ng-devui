@@ -6,8 +6,9 @@
   [stepIndex]="0"
   [dStepsGuidePosition]="'top'"
   (operateChange)="operateChange($event)"
+  (click)="reset(0)"
 >
-  Top
+  Step 1
 </d-button>
 <d-button
   bsStyle="common"
@@ -15,11 +16,11 @@
   [pageName]="'step-basic-demo'"
   [steps]="steps"
   [stepIndex]="1"
-  [zIndex]="1900"
-  [dStepsGuidePosition]="'top-left'"
+  [dStepsGuidePosition]="'top'"
   (operateChange)="operateChange($event)"
+  (click)="reset(1)"
 >
-  Top-Left
+  Step2
 </d-button>
 <d-button
   bsStyle="common"
@@ -27,68 +28,12 @@
   [pageName]="'step-basic-demo'"
   [steps]="steps"
   [stepIndex]="2"
-  [dStepsGuidePosition]="'top-right'"
+  [dStepsGuidePosition]="'top'"
   (operateChange)="operateChange($event)"
+  (click)="reset(2)"
 >
-  Top-Right
+  Step 3
 </d-button>
-<d-button
-  bsStyle="common"
-  dStepsGuide
-  [pageName]="'step-basic-demo'"
-  [steps]="steps"
-  [stepIndex]="3"
-  [dStepsGuidePosition]="'left'"
-  (operateChange)="operateChange($event)"
->
-  Left
-</d-button>
-<d-button
-  bsStyle="common"
-  dStepsGuide
-  [pageName]="'step-basic-demo'"
-  [steps]="steps"
-  [stepIndex]="4"
-  [dStepsGuidePosition]="'right'"
-  (operateChange)="operateChange($event)"
->
-  Right
-</d-button>
-<d-button
-  bsStyle="common"
-  dStepsGuide
-  [pageName]="'step-basic-demo'"
-  [steps]="steps"
-  [stepIndex]="5"
-  [dStepsGuidePosition]="'bottom'"
-  (operateChange)="operateChange($event)"
->
-  Bottom
-</d-button>
-<d-button
-  bsStyle="common"
-  dStepsGuide
-  [pageName]="'step-basic-demo'"
-  [steps]="steps"
-  [stepIndex]="6"
-  [dStepsGuidePosition]="'bottom-left'"
-  (operateChange)="operateChange($event)"
->
-  Bottom-Left
-</d-button>
-<d-button
-  bsStyle="common"
-  dStepsGuide
-  [pageName]="'step-basic-demo'"
-  [steps]="steps"
-  [stepIndex]="7"
-  [dStepsGuidePosition]="'bottom-right'"
-  (operateChange)="operateChange($event)"
->
-  Bottom-Right
-</d-button>
-<d-button (click)="reset()" bsStyle="primary"> show </d-button>
-<d-button (click)="close()" bsStyle="common"> close </d-button>
 <br />
 <br />
 <p>Current Step：{{ currentStep }}</p>

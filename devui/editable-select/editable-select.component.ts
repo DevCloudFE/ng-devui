@@ -12,13 +12,13 @@ import {
   Output,
   SimpleChanges,
   TemplateRef,
-  ViewChild,
+  ViewChild
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { Observable, Subscription } from 'rxjs';
-
 import { AutoCompleteDirective } from 'ng-devui/auto-complete';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
+import { DevConfigService, WithConfig } from 'ng-devui/utils/globalConfig';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'd-editable-select',
@@ -35,7 +35,8 @@ import { I18nInterface, I18nService } from 'ng-devui/i18n';
   preserveWhitespaces: false,
 })
 export class EditableSelectComponent implements ControlValueAccessor, OnInit, OnChanges, OnDestroy {
-  constructor(private changeDetectorRef: ChangeDetectorRef, private i18n: I18nService) {
+  constructor(private changeDetectorRef: ChangeDetectorRef, private i18n: I18nService,
+              private devConfigService: DevConfigService) {
     this.i18nCommonText = this.i18n.getI18nText().common;
   }
   @Input() appendToBody = false;
@@ -51,6 +52,7 @@ export class EditableSelectComponent implements ControlValueAccessor, OnInit, On
   @Input() searchFn: (term: string) => Observable<any[]>;
   @Input() enableLazyLoad = false;
   @Input() width: number;
+  @Input() @WithConfig() showAnimation = true;
   @Output() loadMore = new EventEmitter<any>();
   @ViewChild(AutoCompleteDirective, { static: true }) autoCompleteDirective: AutoCompleteDirective;
   @ViewChild('editableSelectBox', { static: true }) editableSelectBox: ElementRef;

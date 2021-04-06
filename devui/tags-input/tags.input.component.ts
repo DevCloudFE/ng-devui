@@ -5,6 +5,7 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { addClassToOrigin, fadeInOut, removeClassFromOrigin } from 'ng-devui/utils';
+import { DevConfigService, WithConfig } from 'ng-devui/utils/globalConfig';
 import { isEmpty } from 'lodash-es';
 import { BehaviorSubject, fromEvent, Observable, of, Subscription } from 'rxjs';
 import { debounceTime, map, switchMap } from 'rxjs/operators';
@@ -75,6 +76,7 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
   @Input() checkBeforeAdd: (newTag: string) => boolean | Promise<boolean> | Observable<boolean>;
 
   @Input() disabled = false;
+  @Input() @WithConfig() showAnimation = true;
   /**
  * 输出函数，当选中某个选项项后，将会调用此函数，参数为当前选择项的值。如果需要获取所有选择状态的值，请参考(ngModelChange)方法
  */
@@ -86,6 +88,10 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
 
   newTag = '';
   availableOptions = [];
+  /**
+  * 对于用户传入的suggestionList不做修改，数据的操作在_suggestionList上进行
+  */
+  _suggestionList = [];
   newTagValid = false;
   isReduce = false;
   searchFn: (term: string) => Observable<Array<{ id: string | number, option: any }>>;
@@ -107,12 +113,12 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
   private i18nSubscription: Subscription;
   public i18nCommonText: I18nInterface['common'];
   public i18nTagsInputText: I18nInterface['tagsInput'];
-  // 下拉选中suggestionList的item索引
+  // 下拉选中_suggestionList的item索引
   selectIndex = 0;
   private onChange = (_: any) => null;
   private onTouch = () => null;
 
-  constructor(private i18n: I18nService) {}
+  constructor(private i18n: I18nService, private devConfigService: DevConfigService) {}
 
   writeValue(value: any): void {
     if (!value) {
@@ -147,8 +153,9 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
   ngOnInit() {
     this.setI18nText();
     this.newTag = '';
+    this._suggestionList = this.suggestionList;
     this.searchFn = (term: any) => {
-      return of((this.suggestionList ? this.suggestionList : [])
+      return of((this._suggestionList ? this._suggestionList : [])
         .filter(item => term === '' ? true : this.caseSensitivity ?
         (item[this.displayProperty]).indexOf(term) !== -1 :
         (item[this.displayProperty]).toLowerCase().indexOf(term.toLowerCase()) !== -1)
@@ -159,6 +166,7 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes && changes.suggestionList && changes.suggestionList.currentValue) {
+      this._suggestionList = this.suggestionList;
       this.reduceSuggestionList();
       if (this.sourceSubscription && this.searchFn) {
         this.sourceSubscription.next('');
@@ -206,9 +214,10 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
     if (this.isReduce) {
       return;
     }
-    if (this.suggestionList.length > 0 && this.tags.length > 0) {
+    if (this.suggestionList.length > 0) {
       this.isReduce = true;
-      this.suggestionList = this.suggestionList.filter(suggestion => {
+      // 使用用户最初传入的数据来进行过滤
+      this._suggestionList = this.suggestionList.filter(suggestion => {
         return this.tags.findIndex(tag => this.caseSensitivity ?
           tag[this.displayProperty] === suggestion[this.displayProperty] :
           tag[this.displayProperty].toLowerCase() === suggestion[this.displayProperty].toLowerCase()) === -1;
@@ -256,8 +265,8 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
 
   select (index) {
     if (index < 0) {
-      index = this.suggestionList.length - 1;
-    } else if (index >= this.suggestionList.length) {
+      index = this._suggestionList.length - 1;
+    } else if (index >= this._suggestionList.length) {
         index = 0;
     }
     this.selectIndex = index;
@@ -287,10 +296,10 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
       this.tags.push(this.availableOptions[index]);
       this.onChange(this.tags);
       this.valueChange.emit(this.availableOptions[index]);
-      const suggestionListIndex = this.suggestionList.findIndex(item =>
+      const suggestionListIndex = this._suggestionList.findIndex(item =>
         this.caseSensitivity ? item[this.displayProperty]  === value[this.displayProperty] :
           item[this.displayProperty].toLowerCase() === value[this.displayProperty].toLowerCase());
-      this.suggestionList.splice(suggestionListIndex, 1);
+      this._suggestionList.splice(suggestionListIndex, 1);
       this.newTag = '';
       this.sourceSubscription.next(this.newTag);
     });
@@ -301,7 +310,7 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
       return;
     }
     this.availableOptions.push(this.tags[index]);
-    this.suggestionList = this.availableOptions;
+    this._suggestionList = this.availableOptions;
     const tag = this.tags[index];
     this.tags.splice(index, 1);
     this.onChange(this.tags);
@@ -313,7 +322,7 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
     const tmp = this.displayProperty;
     const result = tag && tag.length >= this.minLength
       && tag.length <= this.maxLength
-      && this.suggestionList.findIndex(item => this.caseSensitivity ? item[tmp] === tag
+      && this._suggestionList.findIndex(item => this.caseSensitivity ? item[tmp] === tag
           : item[tmp].toLowerCase() === tag.toLowerCase()) === -1
       && this.tags.findIndex(item => this.caseSensitivity ?  item[tmp] === tag
           : item[tmp].toLowerCase() === tag.toLowerCase()) === -1

@@ -8,8 +8,9 @@ import {
   OnInit,
   Output,
   TemplateRef,
-  ViewChild,
+  ViewChild
 } from '@angular/core';
+import { isEqual } from 'lodash-es';
 import { Subject, Subscription } from 'rxjs';
 import { throttleTime } from 'rxjs/operators';
 
@@ -31,7 +32,7 @@ export interface Message {
 export class ToastComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() sticky: boolean;
   @Input() life: number;
-  @Input() style: string;
+  @Input() style: object;
   @Input() styleClass: string;
   @Input() lifeMode: 'single' | 'global' = 'global';
   @Output() closeEvent: EventEmitter<any> = new EventEmitter<any>();
@@ -96,6 +97,15 @@ export class ToastComponent implements OnInit, AfterViewInit, OnDestroy {
         return 5000;
     }
   }
+  show() {
+    if (!this.container) {
+      this.container = <HTMLDivElement>this.containerViewChild.nativeElement;
+    }
+    this.handleValueChange();
+  }
+
+  // Will overwrite this method in modal service
+  close() {}
 
   handleValueChange() {
     this.zIndex++;
@@ -203,6 +213,21 @@ export class ToastComponent implements OnInit, AfterViewInit, OnDestroy {
 
   removeThrottle(index: number, msgItem: any) {
     this.clickSub.next({ index: index, dom: msgItem });
+  }
+  removeIndexThrottle(index: number) {
+    const doms = this.container.children;
+    if (index < doms.length) {
+      this.clickSub.next({ index: index, dom: doms[index] });
+    }
+  }
+  removeMsgThrottle(msg: any) {
+    const doms = this.container.children;
+    const index = this._value.findIndex((item) => {
+      return isEqual(item, msg);
+    });
+    if (index < doms.length && index > -1) {
+      this.clickSub.next({ index: index, dom: doms[index] });
+    }
   }
 
   removeReset(index?: number, msgItem?: any, msg?: any) {

@@ -1,6 +1,8 @@
 @import '../devui/style/devui';
 @import '~@devui-design/icons/icomoon/devui-icon.css';
 @import '../devui/style/theme/_font';
+@import '../devui-commons/src/devui-commons.scss';
+@import '../devui/theme-collection/extend-theme.scss';
 
 .markdown {
   color: $devui-text;
@@ -27,7 +29,7 @@ code[class*='language-'],
 pre[class*='language-'],
 pre code {
   white-space: pre;
-  font-family: Lucida Console, Consolas, Monaco, Andale Mono, Ubuntu Mono, monospace;
+  font-family: 'Menlo', 'DejaVu Sans Mono', 'Liberation Mono', 'Consolas', 'Ubuntu Mono', 'Courier New', 'andale mono', 'lucida console', monospace;
 }
 
 pre {
@@ -115,12 +117,16 @@ section {
   }
 }
 
+.markdown h1 {
+  font-size: $devui-font-size-price;
+}
+
 .markdown h2 {
-  font-size: 22px;
+  font-size: $devui-font-size-page-title;
 }
 
 .markdown h3 {
-  font-size: 18px;
+  font-size: $devui-font-size-card-title;
 }
 
 .markdown h2,

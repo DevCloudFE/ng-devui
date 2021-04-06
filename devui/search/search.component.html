@@ -2,7 +2,6 @@
   <input
     #filterInput
     [dAutoFocus]="autoFocus"
-    (keydown.enter)="keydownEnter($event, filterInput.value)"
     [placeholder]="placeholder || i18nCommonText?.searchPlaceholder"
     (change)="inputChange(filterInput.value, $event)"
     (keyup)="inputChange(filterInput.value, $event)"

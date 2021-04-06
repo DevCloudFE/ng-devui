@@ -1,5 +1,7 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, forwardRef, HostListener, Input,
-  Output } from '@angular/core';
+import {
+  Component, EventEmitter, forwardRef, HostListener, Input,
+  Output
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Observable } from 'rxjs';
 
@@ -24,7 +26,7 @@ export class ToggleComponent implements ControlValueAccessor {
   @Input() color: string;
   @Input() beforeChange: (value) => boolean | Promise<boolean> | Observable<boolean>;
   @Input() set checked(v: boolean) {
-    this._checked = v !== false;
+    this._checked = v === true;
   }
 
   get checked() {
@@ -32,7 +34,7 @@ export class ToggleComponent implements ControlValueAccessor {
   }
 
   @Input() set disabled(v: boolean) {
-    this._disabled = v !== false;
+    this._disabled = v === true;
   }
 
   get disabled() {

@@ -44,8 +44,8 @@ In the page:
 
 ## dLzayLoad Parameters
 
-|    Parameter   |   Type    |Default|     Description      | Jump to Demo                 |
-| :------------: | :-------: | :---: | :------------------: | ---------------------------- |
+|    Parameter   |   Type    |Default|     Description      | Jump to Demo                 |Global Config| 
+| :----------------: | :------------: | :-------: | :---: | :------------------: | ---------------------------- |
 | enableLazyLoad | `boolean` | false | Optional. Whether to use lazyload | [Lazyload Directive](demo#lazy-load) |
 
 ## dLazyLoad Event

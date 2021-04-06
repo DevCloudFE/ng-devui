@@ -5,7 +5,8 @@
   <div
     class="devui-panel-body"
     [ngClass]="{ 'devui-panel-body-collapse': isCollapsed !== undefined }"
-    [@openClose]="isCollapsed === undefined || isCollapsed ? 'open' : 'void'"
+    [@collapseForDomDestroy]="isCollapsed === undefined || isCollapsed ? 'expanded' : 'void'"
+    [@.disabled]="!showAnimation"
     *ngIf="isCollapsed === undefined || isCollapsed"
   >
     <ng-content select="d-panel-body"></ng-content>

@@ -11,6 +11,7 @@ import { ButtonModule } from 'ng-devui/button';
 import { CardModule } from 'ng-devui/card';
 import { CarouselModule } from 'ng-devui/carousel';
 import { CascaderModule } from 'ng-devui/cascader';
+import { CategorySearchModule } from 'ng-devui/category-search';
 import { CheckBoxModule } from 'ng-devui/checkbox';
 import { DCommonModule } from 'ng-devui/common';
 import { DataTableModule } from 'ng-devui/data-table';
@@ -28,6 +29,7 @@ import { LayoutModule } from 'ng-devui/layout';
 import { LoadingModule } from 'ng-devui/loading';
 import { ModalModule } from 'ng-devui/modal';
 import { MultiAutoCompleteModule } from 'ng-devui/multi-auto-complete';
+import { NavSpriteModule } from 'ng-devui/nav-sprite';
 import { PaginationModule } from 'ng-devui/pagination';
 import { PanelModule } from 'ng-devui/panel';
 import { PopoverModule } from 'ng-devui/popover';
@@ -35,6 +37,7 @@ import { ProgressModule } from 'ng-devui/progress';
 import { QuadrantDiagramModule } from 'ng-devui/quadrant-diagram';
 import { RadioModule } from 'ng-devui/radio';
 import { RateModule } from 'ng-devui/rate';
+import { ReadTipModule } from 'ng-devui/read-tip';
 import { SearchModule } from 'ng-devui/search';
 import { SelectModule } from 'ng-devui/select';
 import { SliderModule } from 'ng-devui/slider';
@@ -69,6 +72,7 @@ export * from 'ng-devui/button';
 export * from 'ng-devui/card';
 export * from 'ng-devui/carousel';
 export * from 'ng-devui/cascader';
+export * from 'ng-devui/category-search';
 export * from 'ng-devui/checkbox';
 export * from 'ng-devui/common';
 export * from 'ng-devui/data-table';
@@ -86,6 +90,7 @@ export * from 'ng-devui/layout';
 export * from 'ng-devui/loading';
 export * from 'ng-devui/modal';
 export * from 'ng-devui/multi-auto-complete';
+export * from 'ng-devui/nav-sprite';
 export * from 'ng-devui/pagination';
 export * from 'ng-devui/panel';
 export * from 'ng-devui/popover';
@@ -93,6 +98,7 @@ export * from 'ng-devui/progress';
 export * from 'ng-devui/quadrant-diagram';
 export * from 'ng-devui/radio';
 export * from 'ng-devui/rate';
+export * from 'ng-devui/read-tip';
 export * from 'ng-devui/search';
 export * from 'ng-devui/select';
 export * from 'ng-devui/slider';
@@ -177,9 +183,12 @@ export * from './version';
     GanttModule,
     QuadrantDiagramModule,
     TimePickerModule,
-    CascaderModule
+    CascaderModule,
+    CategorySearchModule,
+    NavSpriteModule,
+    ReadTipModule,
   ],
-  declarations: []
+  declarations: [],
 })
 export class DevUIModule {
   static forRoot(): ModuleWithProviders<DevUIModule> {

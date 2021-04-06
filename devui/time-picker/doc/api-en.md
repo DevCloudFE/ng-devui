@@ -14,8 +14,8 @@ In the page:
 
 ## TimePicker Parameters
 
-| Parameter | Type | Default | Description | Jump to Demo |
-| :-----------------------: | :------------: | :--------: | :-------------------------------------------| :-----------------------------------------------------------------|
+| Parameter | Type | Default | Description | Jump to Demo |Global Config| 
+| :----------------: | :-----------------------: | :------------: | :--------: | :-------------------------------------------| :-----------------------------------------------------------------|
 | disabled | `boolean` | false | Optional. Disable selection. | [Basic usage](demo#basic-usage) |
 | timePickerWidth | `number` | -- | Optional, width of the drop-down list box | [Basic usage](demo#basic-usage) |
 | autoOpen | `boolean` | false | Optional, indicating whether to expand the initialization directly. | [Basic usage](demo#basic-usage) |
@@ -24,6 +24,7 @@ In the page:
 | maxTime | `string` | '23:59:59' | Optional. The maximum time allowed is limited. | [formatting](demo#format) |
 | customViewTemplate | `TemplateRef` | -- | Optional. Customize the time or content in the operation area. | [Input template](demo#custom) |
 | appendToBodyDirections | `Array<AppendToBodyDirection \| ConnectedPosition>` | ` ['rightDown','leftDown','rightUp','leftUp']` | The first position in the array is preferred for the direction array. | -- |
+| showAnimation | `boolean` | true | optional. Whether to enable animation. |   | ✔ |
 
 ## TimePicker Event
 

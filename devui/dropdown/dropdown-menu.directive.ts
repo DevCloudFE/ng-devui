@@ -50,31 +50,33 @@ export class DropDownMenuDirective implements OnInit, OnDestroy {
         if (this.player) { // 此处保留一个防止点击过快
           this.player.finish();
         }
-        if (value) {
-          this.render.setStyle(this.el.nativeElement, 'display', 'block');
-          this.display = 'block';
+        if (this.dropdown.showAnimation) {
+          const direction = this.calcPopDirection(value);
+          const metadata = value ? this.fadeIn(direction) : this.fadeOut(direction);
+          const factory = this.builder.build(metadata);
+          this.player = factory.create(this.el.nativeElement);
+          const player = this.player;
+          this.player.onDone(() => {
+            if (!value) {
+              this.render.setStyle(this.el.nativeElement, 'display', 'none');
+              this.display = 'none';
+            }
+            player.destroy();
+            if (this.player === player) {
+              this.player = undefined;
+            }
+          });
+          this.player.onStart(() => {
+            if (value) {
+              this.render.setStyle(this.el.nativeElement, 'display', 'block');
+              this.display = 'block';
+            }
+          });
+          this.player.play();
+        } else {
+          this.render.setStyle(this.el.nativeElement, 'display', value ? 'block' : 'none');
+          this.display = value ? 'block' : 'none';
         }
-        const direction = this.calcPopDirection(value);
-        const metadata = value ? this.fadeIn(direction) : this.fadeOut(direction);
-        const factory = this.builder.build(metadata);
-        this.player = factory.create(this.el.nativeElement);
-        const player = this.player;
-        this.player.onDone(() => {
-          if (!value) {
-            this.render.setStyle(this.el.nativeElement, 'display', 'none');
-            this.display = 'none';
-          }
-          player.destroy();
-          if (this.player === player) {
-            this.player = undefined;
-          }
-        });
-        this.player.onStart(() => {
-          if (value) {
-            this.render.setStyle(this.el.nativeElement, 'display', 'block');
-          }
-        });
-        this.player.play();
       }
     });
   }

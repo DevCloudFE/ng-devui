@@ -5,6 +5,7 @@ import {
   Renderer2, RendererFactory2
 } from '@angular/core';
 import { OverlayContainerRef } from 'ng-devui/overlay-container';
+import { DevConfigService } from 'ng-devui/utils/globalConfig';
 import { assign, isUndefined } from 'lodash-es';
 import { ModalContainerComponent } from './modal-container.component';
 import { ModalComponent } from './modal.component';
@@ -16,7 +17,8 @@ export class DialogService {
   private renderer: Renderer2;
 
   constructor(private componentFactoryResolver: ComponentFactoryResolver,
-              private overlayContainerRef: OverlayContainerRef, private rendererFactory: RendererFactory2) {
+              private overlayContainerRef: OverlayContainerRef, private rendererFactory: RendererFactory2,
+              private devConfigService: DevConfigService) {
     this.renderer = this.rendererFactory.createRenderer(null, null);
   }
 
@@ -27,7 +29,8 @@ export class DialogService {
     backDropZIndex,
     backdropCloseable,
     maxHeight,
-    showAnimate = true,
+    showAnimation,
+    showAnimate,
     title,
     content,
     html,
@@ -53,12 +56,29 @@ export class DialogService {
       finalComponentFactoryResolver.resolveComponentFactory(ModalComponent),
       injector
     );
+    let showAnimateValue = true;
+    const componentConfig = this.devConfigService.getConfigForComponent('modal') || {};
+    const configValue = componentConfig['showAnimation'];
+    const apiConfig = this.devConfigService.getConfigForApi('showAnimation');
+    if (configValue !== undefined) {
+      showAnimateValue = configValue;
+    } else if (apiConfig !== undefined) {
+      showAnimateValue = apiConfig;
+    }
+
+    if (showAnimation !== undefined) {
+
+    } else if (showAnimate !== undefined) {
+      showAnimation = showAnimate ;
+    } else {
+      showAnimation = showAnimateValue;
+    }
     assign(modalRef.instance, {
       id,
       width,
       zIndex,
       backDropZIndex,
-      showAnimate,
+      showAnimation,
       beforeHidden,
       // set backdropCloseable default value "true" when not passing it
       backdropCloseable: isUndefined(backdropCloseable) ? true : backdropCloseable,

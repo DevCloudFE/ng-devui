@@ -1,93 +1,93 @@
-<div class="demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 60, bottom: 0 }">
+<div class="devui-demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 180, bottom: 0 }">
   <d-demo-nav [navItems]="navItems"></d-demo-nav>
-  <div class="demo-example" [dAnchor]="'basic-usage'">
-    <div class="demo-title">{{ 'components.tree.basicDemo.title' | translate }}</div>
-    <div class="demo-text">{{ 'components.tree.basicDemo.description' | translate }}</div>
+  <div class="devui-demo-example" [dAnchor]="'basic-usage'">
+    <div class="devui-demo-title">{{ 'components.tree.basicDemo.title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.tree.basicDemo.description' | translate }}</div>
     <d-codebox id="basic" [sourceData]="basicSource">
       <d-basic demo></d-basic>
     </d-codebox>
   </div>
-  <div class="demo-example" [dAnchor]="'merge-node'">
-    <div class="demo-title">{{ 'components.tree.mergeNodeDemo.title' | translate }}</div>
-    <div class="demo-text">{{ 'components.tree.mergeNodeDemo.description' | translate }}</div>
+  <div class="devui-demo-example" [dAnchor]="'merge-node'">
+    <div class="devui-demo-title">{{ 'components.tree.mergeNodeDemo.title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.tree.mergeNodeDemo.description' | translate }}</div>
     <d-codebox id="basic" [sourceData]="MergeNodeSource">
       <d-merge-node demo></d-merge-node>
     </d-codebox>
   </div>
-  <div class="demo-example" [dAnchor]="'custom-loading'">
-    <div class="demo-title">{{ 'components.tree.customLoadingDemo.title' | translate }}</div>
+  <div class="devui-demo-example" [dAnchor]="'custom-loading'">
+    <div class="devui-demo-title">{{ 'components.tree.customLoadingDemo.title' | translate }}</div>
     <d-codebox id="custom-loading" [sourceData]="customLoadingSource">
       <d-custom-loading demo></d-custom-loading>
     </d-codebox>
   </div>
-  <div class="demo-example" [dAnchor]="'custom-display-field'">
-    <div class="demo-title">{{ 'components.tree.customTitleKeyDemo.title' | translate }}</div>
-    <div class="demo-text">{{ 'components.tree.customTitleKeyDemo.description' | translate }}</div>
+  <div class="devui-demo-example" [dAnchor]="'custom-display-field'">
+    <div class="devui-demo-title">{{ 'components.tree.customTitleKeyDemo.title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.tree.customTitleKeyDemo.description' | translate }}</div>
     <d-codebox id="custom-title-key" [sourceData]="customTitleKeySource">
       <d-custom-title-key demo></d-custom-title-key>
     </d-codebox>
   </div>
-  <div class="demo-example" [dAnchor]="'checkable-tree'">
-    <div class="demo-title">{{ 'components.tree.checkableDemo.title' | translate }}</div>
-    <div class="demo-text">{{ 'components.tree.checkableDemo.description' | translate }}</div>
+  <div class="devui-demo-example" [dAnchor]="'checkable-tree'">
+    <div class="devui-demo-title">{{ 'components.tree.checkableDemo.title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.tree.checkableDemo.description' | translate }}</div>
     <d-codebox id="checkable" [sourceData]="checkableSource">
       <d-checkable demo></d-checkable>
     </d-codebox>
   </div>
-  <div class="demo-example" [dAnchor]="'operation-button'">
-    <div class="demo-title">{{ 'components.tree.operateBtnDemo.title' | translate }}</div>
-    <div class="demo-text">{{ 'components.tree.operateBtnDemo.description' | translate }}</div>
+  <div class="devui-demo-example" [dAnchor]="'operation-button'">
+    <div class="devui-demo-title">{{ 'components.tree.operateBtnDemo.title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.tree.operateBtnDemo.description' | translate }}</div>
     <d-codebox id="operateBtn" [sourceData]="operateBtnSource">
       <d-operate-btn demo></d-operate-btn>
     </d-codebox>
   </div>
-  <div class="demo-example" [dAnchor]="'search-filtering'">
-    <div class="demo-title">{{ 'components.tree.searchFilterDemo.title' | translate }}</div>
-    <div class="demo-text">{{ 'components.tree.searchFilterDemo.description' | translate }}</div>
+  <div class="devui-demo-example" [dAnchor]="'search-filtering'">
+    <div class="devui-demo-title">{{ 'components.tree.searchFilterDemo.title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.tree.searchFilterDemo.description' | translate }}</div>
     <d-codebox id="search-filter" [sourceData]="searchFilterSource">
       <d-search-filter demo></d-search-filter>
     </d-codebox>
   </div>
-  <div class="demo-example" [dAnchor]="'custom-icon'">
-    <div class="demo-title">{{ 'components.tree.customizeDemo.title' | translate }}</div>
-    <div class="demo-text">{{ 'components.tree.customizeDemo.description' | translate }}</div>
+  <div class="devui-demo-example" [dAnchor]="'custom-icon'">
+    <div class="devui-demo-title">{{ 'components.tree.customizeDemo.title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.tree.customizeDemo.description' | translate }}</div>
     <d-codebox id="customize" [sourceData]="customizeSource">
       <d-customize demo></d-customize>
     </d-codebox>
   </div>
-  <div class="demo-example" [dAnchor]="'drag-and-drop-tree'">
-    <div class="demo-title">{{ 'components.tree.draggableDemo.title' | translate }}</div>
-    <div class="demo-text">
+  <div class="devui-demo-example" [dAnchor]="'drag-and-drop-tree'">
+    <div class="devui-demo-title">{{ 'components.tree.draggableDemo.title' | translate }}</div>
+    <div class="devui-demo-text">
       {{ 'components.tree.draggableDemo.description' | translate }}
     </div>
     <d-codebox id="draggable" [sourceData]="draggableSource">
       <d-draggable demo></d-draggable>
     </d-codebox>
   </div>
-  <div class="demo-example" [dAnchor]="'check-control-tree'">
-    <div class="demo-title">{{ 'components.tree.checkControlDemo.title' | translate }}</div>
-    <div class="demo-text">{{ 'components.tree.checkControlDemo.description' | translate }}</div>
+  <div class="devui-demo-example" [dAnchor]="'check-control-tree'">
+    <div class="devui-demo-title">{{ 'components.tree.checkControlDemo.title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.tree.checkControlDemo.description' | translate }}</div>
     <d-codebox id="draggable" [sourceData]="checkControlSource">
       <d-check-control demo></d-check-control>
     </d-codebox>
   </div>
-  <div class="demo-example" [dAnchor]="'tree-factory'">
-    <div class="demo-title">{{ 'components.tree.treeFactoryDemo.title' | translate }}</div>
-    <div class="demo-text">{{ 'components.tree.treeFactoryDemo.description' | translate }}</div>
+  <div class="devui-demo-example" [dAnchor]="'tree-factory'">
+    <div class="devui-demo-title">{{ 'components.tree.treeFactoryDemo.title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.tree.treeFactoryDemo.description' | translate }}</div>
     <d-codebox id="basic" [sourceData]="treeFactorySource">
       <d-tree-factory demo></d-tree-factory>
     </d-codebox>
   </div>
-  <div class="demo-example" [dAnchor]="'virtual-scroll'">
-    <div class="demo-title">{{ 'components.tree.virtualScrollDemo.title' | translate }}</div>
-    <div class="demo-text">{{ 'components.tree.virtualScrollDemo.description' | translate }}</div>
+  <div class="devui-demo-example" [dAnchor]="'virtual-scroll'">
+    <div class="devui-demo-title">{{ 'components.tree.virtualScrollDemo.title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.tree.virtualScrollDemo.description' | translate }}</div>
     <d-codebox id="virtual-scroll" [sourceData]="virtualScrollSource">
       <d-virtual-scroll demo></d-virtual-scroll>
     </d-codebox>
   </div>
-  <div class="demo-example" [dAnchor]="'without-animation'">
-    <div class="demo-title">{{ 'components.tree.withoutAnimationDemo.title' | translate }}</div>
-    <div class="demo-text">{{ 'components.tree.withoutAnimationDemo.description' | translate }}</div>
+  <div class="devui-demo-example" [dAnchor]="'without-animation'">
+    <div class="devui-demo-title">{{ 'components.tree.withoutAnimationDemo.title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.tree.withoutAnimationDemo.description' | translate }}</div>
     <d-codebox id="without-animation" [sourceData]="withoutAnimationSource">
       <d-without-animation demo></d-without-animation>
     </d-codebox>

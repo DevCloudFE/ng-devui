@@ -40,7 +40,7 @@
   }
 
   &.left > .devui-arrow {
-    top: 20px;
+    top: 23px;
     right: -6px;
     margin-top: -3px;
     border-right-width: 0;
@@ -58,20 +58,20 @@
   }
 
   &.top > .devui-arrow {
-    left: 50%;
+    left: calc(50% - 4px);
   }
 
   &.top-left > .devui-arrow {
-    left: 20px;
+    left: 23px;
   }
 
   &.top-right > .devui-arrow {
-    right: 20px;
+    right: 23px;
     transform: rotate(-135deg);
   }
 
   &.right > .devui-arrow {
-    top: 20px;
+    top: 23px;
     left: -6px;
     margin-top: -3px;
     border-left-width: 0;
@@ -89,17 +89,17 @@
   }
 
   &.bottom > .devui-arrow {
-    left: 50%;
+    left: calc(50% - 4px);
     transform: rotate(-135deg);
   }
 
   &.bottom-right > .devui-arrow {
-    right: 20px;
+    right: 23px;
     transform: rotate(135deg);
   }
 
   &.bottom-left > .devui-arrow {
-    left: 20px;
+    left: 23px;
     transform: rotate(-135deg);
   }
 
@@ -126,38 +126,38 @@
 
   &.top > .devui-shining-dot,
   &.top > .devui-shining-plus {
-    left: 203px;
+    left: calc(50% - 3px);
     bottom: -30px;
   }
 
   &.top-left > .devui-shining-dot,
   &.top-left > .devui-shining-plus {
-    left: 23px;
+    left: 21px;
     bottom: -30px;
   }
 
   &.top-right > .devui-shining-dot,
   &.top-right > .devui-shining-plus {
-    right: 23px;
+    right: 21px;
     bottom: -30px;
   }
 
   &.bottom > .devui-shining-dot,
   &.bottom > .devui-shining-plus {
+    left: calc(50% - 3px);
     top: -30px;
-    left: 203px;
   }
 
   &.bottom-right > .devui-shining-dot,
   &.bottom-right > .devui-shining-plus {
     top: -30px;
-    right: 23px;
+    right: 21px;
   }
 
   &.bottom-left > .devui-shining-dot,
   &.bottom-left > .devui-shining-plus {
     top: -30px;
-    left: 25px;
+    left: 21px;
   }
 
   .devui-shining-plus {

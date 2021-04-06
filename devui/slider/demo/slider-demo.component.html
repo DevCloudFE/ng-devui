@@ -1,24 +1,24 @@
 <div>
-  <div class="demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 60, bottom: 0 }">
+  <div class="devui-demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 180, bottom: 0 }">
     <d-demo-nav [navItems]="navItems"></d-demo-nav>
-    <div class="demo-example" [dAnchor]="'basic-usage'">
-      <div class="demo-title">{{ 'components.slider.basicDemo.title' | translate }}</div>
+    <div class="devui-demo-example" [dAnchor]="'basic-usage'">
+      <div class="devui-demo-title">{{ 'components.slider.basicDemo.title' | translate }}</div>
       <d-codebox id="components-slider-default" [sourceData]="SliderBasicComponent">
         <d-slider-basic demo></d-slider-basic>
       </d-codebox>
     </div>
 
-    <div class="demo-example" [dAnchor]="'slider-disabled'">
-      <div class="demo-title">{{ 'components.slider.disabledDemo.title' | translate }}</div>
-      <div class="demo-text">{{ 'components.slider.disabledDemo.description' | translate }}</div>
+    <div class="devui-demo-example" [dAnchor]="'slider-disabled'">
+      <div class="devui-demo-title">{{ 'components.slider.disabledDemo.title' | translate }}</div>
+      <div class="devui-demo-text">{{ 'components.slider.disabledDemo.description' | translate }}</div>
       <d-codebox id="components-slider-disabled" [sourceData]="SliderDisabledComponent">
         <d-slider-disabled demo></d-slider-disabled>
       </d-codebox>
     </div>
 
-    <div class="demo-example" [dAnchor]="'slider-custom'">
-      <div class="demo-title">{{ 'components.slider.customDemo.title' | translate }}</div>
-      <div class="demo-text">{{ 'components.slider.customDemo.description' | translate }}</div>
+    <div class="devui-demo-example" [dAnchor]="'slider-custom'">
+      <div class="devui-demo-title">{{ 'components.slider.customDemo.title' | translate }}</div>
+      <div class="devui-demo-text">{{ 'components.slider.customDemo.description' | translate }}</div>
       <d-codebox id="components-slider-custom" [sourceData]="SliderCustomFormatterComponent">
         <d-slider-custom demo></d-slider-custom>
       </d-codebox>

@@ -1,5 +1,5 @@
 @import '../../style/theme/color';
 
-.devui-match-highlight {
+:host ::ng-deep .devui-match-highlight {
   font-weight: 600;
 }

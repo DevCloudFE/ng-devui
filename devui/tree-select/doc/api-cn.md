@@ -15,8 +15,8 @@ import { TreeSelectModule } from 'ng-devui/treeSelect';
 
 ## d-tree-select 参数
 
-|         参数         |                  类型                   |                  默认                   | 说明                                                                                                                      | 跳转 Demo                                            |
-| :------------------: | :-------------------------------------: | :-------------------------------------: | :------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------- |
+|         参数         |                  类型                   |                  默认                   | 说明                                                                                                                      | 跳转 Demo                                            |全局配置项| 
+| :----------------: | :------------------: | :-------------------------------------: | :-------------------------------------: | :------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------- |
 |       treeData       |                 `Array`                 |                   --                    | 必选，需要展示的源数据                                                                                                    | [基本用法](demo#basic-usage)       |
 |     placeholder      |                `string`                 |                   --                    | 可选，占位字符串                                                                                                          | [基本用法](demo#basic-usage)       |
 |       disabled       |                `boolean`                |                  false                  | 可选，禁止输入态                                                                                                          | [基本用法](demo#basic-usage)       |
@@ -48,6 +48,7 @@ import { TreeSelectModule } from 'ng-devui/treeSelect';
 |  virtualScrollMinBufferPx   |               `number`           |          600                 | 可选,设置虚拟滚动时的最小 buffer 尺寸，单位为`px` ，参考https://material.angular.io/cdk/scrolling/overview#scrolling-over-fixed-size-items                 | [虚拟滚动](demo#virtual-scroll)       |
 |  virtualScrollMaxBufferPx   |               `number`           |          900                 | 可选, 设置虚拟滚动时的最大 buffer 尺寸，单位为`px` ，参考https://material.angular.io/cdk/scrolling/overview#scrolling-over-fixed-size-items  | [虚拟滚动](demo#virtual-scroll)       |
 |  virtualScrollItemSize   |               `number`           |          30                | 可选, 设置虚拟滚动内元素的尺寸，单位为`px` ，参考https://material.angular.io/cdk/scrolling/overview#scrolling-over-fixed-size-items  | [虚拟滚动](demo#virtual-scroll)       |
+|  showAnimation   |             `boolean`              |                                 true                                  |  可选，是否开启动画 |   | ✔ |
 
 ## d-tree-select 事件
 

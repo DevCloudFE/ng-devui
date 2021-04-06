@@ -28,6 +28,7 @@ import {
   removeClassFromOrigin,
   unshiftString
 } from 'ng-devui/utils';
+import { DevConfigService, WithConfig } from 'ng-devui/utils/globalConfig';
 import { fromEvent, Observable, Subscription } from 'rxjs';
 import { debounceTime, filter, map } from 'rxjs/operators';
 
@@ -59,6 +60,7 @@ export class TimePickerComponent implements OnChanges, OnInit, OnDestroy, Contro
   @Input() disabled: boolean;
   @Input() customViewTemplate: TemplateRef<any>;
   @Input() autoOpen = false;
+  @Input() @WithConfig() showAnimation = true;
   origin: CdkOverlayOrigin | undefined; // 暂不开放
   splitter = ':'; // 暂不开放
   startAnimation = false;
@@ -203,7 +205,8 @@ export class TimePickerComponent implements OnChanges, OnInit, OnDestroy, Contro
     private viewContainerRef: ViewContainerRef,
     private renderer2: Renderer2,
     private i18n: I18nService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private devConfigService: DevConfigService,
   ) {}
 
   @HostListener('blur', ['$event'])
@@ -269,8 +272,10 @@ export class TimePickerComponent implements OnChanges, OnInit, OnDestroy, Contro
   }
 
   registerInputEvent() {
-    return fromEvent(this.elementRef.nativeElement, 'keyup').pipe(
-      map((e: any) => e.target.value),
+    return fromEvent(this.elementRef.nativeElement, 'input').pipe(
+      map((e: any) => {
+        return e.target.value;
+      }),
       filter(() => !this.disabled),
       debounceTime(300)
     );
@@ -535,7 +540,7 @@ export class TimePickerComponent implements OnChanges, OnInit, OnDestroy, Contro
 
   setScroll(whichList, index, justScroll?) {
     const scroll = (24 + 8) * index;
-    const duration = justScroll ? 0 : 150;
+    const duration = (justScroll || !this.showAnimation) ? 0 : 150;
     if (this.timePicker) {
       this.scrollTo(this.timePicker.nativeElement.querySelector(`.devui-${whichList}-list`), scroll, duration);
     }

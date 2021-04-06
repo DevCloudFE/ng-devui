@@ -56,7 +56,6 @@ export class ConfigurableComponent {
             id: 'tabs-dialog',
             width: '800px',
             maxHeight: '600px',
-            showAnimate: false,
             title: 'Tabs显示配置',
             content: TabsTransferComponent,
             backdropCloseable: true,

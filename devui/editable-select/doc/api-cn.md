@@ -10,8 +10,8 @@ import { EditableSelectModule } from 'ng-devui/editable-select';
 # d-editable-select
 ## d-editable-select 参数
 
-|         参数         |      类型      |                默认                 | 说明                                           | 跳转 Demo                                                                 |
-| :------------------: | :------------: | :---------------------------------: | :--------------------------------------------- | ------------------------------------------------------------------------- |
+|         参数         |      类型      |                默认                 | 说明                                           | 跳转 Demo                                                                 |全局配置项| 
+| :----------------: | :------------------: | :------------: | :---------------------------------: | :--------------------------------------------- | ------------------------------------------------------------------------- |
 |     appendToBody     |   `boolean`    |                false                | 可选，下拉是否 appendToBody                    | [基本用法](demo#basic-usage)                  |
 |        width         |    `number`    |                 --                  | 可选，控制下拉框宽度，搭配 appendToBody 使用（`px`）   |
 |       ngModel        |     `any`      |                 --                  | 可选，绑定选中对象，可双向绑定                 | [基本用法](demo#basic-usage)                  |
@@ -24,6 +24,7 @@ import { EditableSelectModule } from 'ng-devui/editable-select';
 |      maxHeight       |    `number`    |                 --                  | 可选，下拉菜单的最大高度（`px`）                       | [基本用法](demo#basic-usage)                  |
 |       searchFn       |            `(term: string) => Observable<any[]>`             | [`defaultSearchFn`](#defaultsearchfn) | 可选，自定义搜索函数                           | [自定义匹配方法](demo#with-search-function)   |
 |    enableLazyLoad    |   `boolean`    |                false                | 可选，是否允许懒加载                           | [数据懒加载](demo#lazy-load)                  |
+|  showAnimation   |             `boolean`              |                                 true                                  |  可选，是否开启动画 |   | ✔ |
 
 ## d-editable-select 事件
 

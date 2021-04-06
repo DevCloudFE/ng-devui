@@ -40,7 +40,7 @@
       [title]="tags.length >= maxTags ? i18nTagsInputText.tagsReachMaxLength : ''"
     />
   </div>
-  <div [@fadeInOut]="'bottom'" *ngIf="showSuggestionList" class="devui-tags-autocomplete devui-dropdown-menu">
+  <div [@fadeInOut]="'bottom'" [@.disabled]="!showAnimation" *ngIf="showSuggestionList" class="devui-tags-autocomplete devui-dropdown-menu">
     <ul class="devui-suggestion-list" *ngIf="showSuggestionList && availableOptions?.length && !(tags.length >= maxTags)">
       <li
         class="devui-suggestion-item"

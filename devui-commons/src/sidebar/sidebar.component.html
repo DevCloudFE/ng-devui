@@ -1,0 +1,19 @@
+<div class="sidebar-wrapper">
+  <ul class="sidebar-menu">
+    <li *ngFor="let item of sideMenuList" class="sidebar-menu-item" routerLinkActive="sidebar-menu-item-selected">
+      <a
+        *ngIf="item.linkType === 'routerLink'"
+        [routerLink]="item.path">
+        {{ item.name }}
+      </a>
+      <a
+        *ngIf="item.linkType === 'href'"
+        [href]="item.path">
+        {{ item.name }}
+      </a>
+    </li>
+  </ul>
+  <nav class="sidebar-nav">
+    <d-accordion [data]="componentsDataDisplay" [linkType]="linkType"></d-accordion>
+  </nav>
+</div>

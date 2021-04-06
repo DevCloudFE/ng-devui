@@ -10,6 +10,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 import { BasicComponent } from './basic/basic.component';
 import { CustomComponent } from './custom/custom.component';
+import { PositionComponent } from './position/position.component';
 import { StepsGuideDemoComponent } from './steps-guide-demo.component';
 
 @NgModule({
@@ -34,7 +35,7 @@ import { StepsGuideDemoComponent } from './steps-guide-demo.component';
       },
     ]),
   ],
-  exports: [StepsGuideDemoComponent, BasicComponent, CustomComponent],
-  declarations: [StepsGuideDemoComponent, BasicComponent, CustomComponent],
+  exports: [StepsGuideDemoComponent, BasicComponent, CustomComponent, PositionComponent],
+  declarations: [StepsGuideDemoComponent, BasicComponent, CustomComponent, PositionComponent],
 })
 export class StepsGuideDemoModule {}

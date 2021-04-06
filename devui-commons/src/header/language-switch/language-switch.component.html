@@ -1,0 +1,5 @@
+<div class="header-language-switch">
+  <ng-container *ngIf="languageArr.length === 2">
+    <span (click)="changeLanguage()">{{currentLang === 'zh-cn' ? languageArr[1] : languageArr[0]}}</span>
+  </ng-container>
+</div>

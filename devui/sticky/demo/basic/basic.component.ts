@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BasicComponent implements OnInit {
   stickyView = {
-    top: 60,
+    top: 160,
     bottom: 0
   };
   demoDocViewerMain;

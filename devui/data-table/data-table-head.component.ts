@@ -28,6 +28,7 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
   @Input() resizeable: boolean;
   @Input() maxHeight: string;
   @Input() showSortIcon: boolean;
+  @Input() showFilterIcon: boolean;
   @Input() colDropFreezeTo: number;
   @Input() colDraggable: boolean;
   @Input() fixHeader: boolean;

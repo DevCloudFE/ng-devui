@@ -11,12 +11,12 @@ import {
   OnInit,
   Output,
   Renderer2,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
-import { fromEvent, Subscription } from 'rxjs';
-import { debounceTime, map } from 'rxjs/operators';
+import { fromEvent, Subject, Subscription } from 'rxjs';
+import { debounceTime, filter, map, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'd-search',
@@ -34,7 +34,9 @@ import { debounceTime, map } from 'rxjs/operators';
   ],
 })
 export class SearchComponent implements ControlValueAccessor, OnInit, OnDestroy, AfterViewInit {
-  constructor(private renderer: Renderer2, private i18n: I18nService, private cdr: ChangeDetectorRef, private el: ElementRef) {}
+  constructor(private renderer: Renderer2, private i18n: I18nService, private cdr: ChangeDetectorRef, private el: ElementRef) {
+  }
+
   /**
    * 【可选】下拉选框尺寸
    */
@@ -59,8 +61,7 @@ export class SearchComponent implements ControlValueAccessor, OnInit, OnDestroy,
   i18nSubscription: Subscription;
   clearIconExit = false;
   width: number;
-  private subscription: Subscription;
-  private enterKeyCodeCN = 229; // 229表示：中文输入法下按enter键后触发事件的keyCode值
+  destroy$ = new Subject();
   private onChange = (_: any) => null;
   private onTouch = () => null;
 
@@ -83,10 +84,12 @@ export class SearchComponent implements ControlValueAccessor, OnInit, OnDestroy,
 
   setI18nText() {
     this.i18nCommonText = this.i18n.getI18nText().common;
-    this.i18nSubscription = this.i18n.langChange().subscribe((data) => {
-      this.i18nCommonText = data.common;
-      this.cdr.markForCheck();
-    });
+    this.i18nSubscription = this.i18n.langChange()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data) => {
+        this.i18nCommonText = data.common;
+        this.cdr.markForCheck();
+      });
   }
 
   clearText() {
@@ -108,28 +111,30 @@ export class SearchComponent implements ControlValueAccessor, OnInit, OnDestroy,
     this.onTouch();
   }
 
-  keydownEnter(event, term) {
-    if (event.keyCode !== this.enterKeyCodeCN) {
-      this.searchFn.emit(term);
-    }
-  }
-
   clickSearch(term) {
     this.searchFn.emit(term);
   }
 
   registerFilterChange() {
-    this.subscription = fromEvent(this.filterInputElement.nativeElement, 'input')
+    fromEvent(this.filterInputElement.nativeElement, 'input')
       .pipe(
+        takeUntil(this.destroy$),
         map((e: any) => e.target.value),
-        debounceTime(this.delay)
-      )
+        debounceTime(this.delay))
       .subscribe((value) => {
         this.onChange(value);
         if (this.isKeyupSearch) {
           this.searchFn.emit(value);
         }
       });
+
+    fromEvent(this.filterInputElement.nativeElement, 'keydown').pipe(
+      takeUntil(this.destroy$),
+      filter((keyEvent: KeyboardEvent) => keyEvent.key === 'Enter'),
+      debounceTime(this.delay),
+    ).subscribe((keyEvent) => {
+      this.searchFn.emit(this.filterInputElement.nativeElement.value);
+    });
   }
 
   ngAfterViewInit() {
@@ -147,11 +152,6 @@ export class SearchComponent implements ControlValueAccessor, OnInit, OnDestroy,
   }
 
   ngOnDestroy() {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
-    if (this.i18nSubscription) {
-      this.i18nSubscription.unsubscribe();
-    }
+    this.destroy$.next(true);
   }
 }

@@ -78,24 +78,8 @@ export class InteractionComponent implements OnInit {
       width: '100px'
     },
     {
-      field: 'dob',
-      width: '100px'
-    },
-    {
-      field: 'dob',
-      width: '100px'
-    },
-    {
-      field: 'dob',
-      width: '100px'
-    },
-    {
-      field: 'dob',
-      width: '100px'
-    },
-    {
-      field: 'dob',
-      width: '100px'
+      field: 'description',
+      width: '150px'
     }
   ];
 

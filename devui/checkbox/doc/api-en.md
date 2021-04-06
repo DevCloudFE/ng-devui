@@ -17,8 +17,8 @@ In the page：
 
 ## d-checkbox Parameters
 
-|       Parameter        |              Type               | Default |                                                             Description                                                             | Jump to Demo                                         |
-| :--------------------: | :-----------------------------: | :-----: | :---------------------------------------------------------------------------------------------------------------------------------: | ---------------------------------------------------- |
+|       Parameter        |              Type               | Default |                                                             Description                                                             | Jump to Demo                                         |Global Config| 
+| :----------------: | :--------------------: | :-----------------------------: | :-----: | :---------------------------------------------------------------------------------------------------------------------------------: | ---------------------------------------------------- |
 |          name          |            `string`             |   --    |                                   Optional. Form domain name. The native name attribute is input.                                   | [Basic usage](demo#checkbox-basic)                   |
 |         label          |            `string`             |   --    |                                                      Optional. Display labels.                                                      | [Basic usage](demo#checkbox-basic)                   |
 |      isShowTitle       |            `boolean`            |  true   |        Optional. Indicates whether to display the title prompt. The value of the `label` parameter is displayed by default.         | [Basic usage](demo#checkbox-basic)                   |
@@ -27,7 +27,7 @@ In the page：
 | labelTemplate Template |          `TemplateRef`          |   --    |                                               Optional. Custom template of the label                                                | [Basic usage](demo#checkbox-basic)                   |
 |      halfchecked       |            `boolean`            |  false  |                                                    Optional. Half-selected state                                                    | [Basic usage](demo#checkbox-basic)                   |
 |         color          |            `string`             |   --    |                                                      Optional. Check box color                                                      | [Basic usage](demo#checkbox-basic)                   |
-|     showAnimation      |            `boolean`            |  true   |                                          Optional. Controls whether to display animations.                                          | [Basic usage](demo#checkbox-basic)                   |
+|     showAnimation      |            `boolean`            |  true   |                                          Optional. Controls whether to display animations.                                          | [Basic usage](demo#checkbox-basic)                   | ✔ |
 |      beforeChange      | `Function\|Promise\|Observable` |   --    | Callback function before checkbox switching, which returns the boolean type. If false is returned, checkbox switching is prevented. | [Stop Checkbox Switching](demo#condition-change) |
 
 ## d-checkbox Event
@@ -40,8 +40,8 @@ In the page：
 
 ## d-checkbox-group Parameters
 
-|       Parameter        |              Type               | Default  |                                                                  Description                                                                  | Jump to Demo                                         |
-| :--------------------: | :-----------------------------: | :------: | :-------------------------------------------------------------------------------------------------------------------------------------------: | ---------------------------------------------------- |
+|       Parameter        |              Type               | Default  |                                                                  Description                                                                  | Jump to Demo                                         |Global Config| 
+| :----------------: | :--------------------: | :-----------------------------: | :------: | :-------------------------------------------------------------------------------------------------------------------------------------------: | ---------------------------------------------------- |
 |          name          |            `string`             |    --    |                                        Optional. Form domain name. The native name attribute is input.                                        | [Checkbox Group](demo#tabs-group)               |
 |       direction        |        `'row'\|'column'`        | 'column' |                                                          Optional. Display direction                                                          | [Checkbox Group](demo#tabs-group)               |
 |       itemWidth        |            `number`             |    --    | Optional. Indicating the width of each checkbox (`px`). | [Checkbox Group](demo#tabs-group)               |
@@ -51,7 +51,7 @@ In the page：
 | labelTemplate |          `TemplateRef`          |    --    |                                                    Optional. Custom template of the label                                                     | [Checkbox Group](demo#tabs-group)               |
 |      halfchecked       |            `boolean`            |  false   |                                                            Optional. Half-selected                                                            |                                                      |
 |         color          |            `string`             |    --    |                                                           Optional. Check box color                                                           | [Checkbox Group](demo#tabs-group)               |
-|     showAnimation      |            `boolean`            |   true   |                                               Optional. Controls whether to display animations.                                               | [Checkbox Group](demo#tabs-group)               |
+|     showAnimation      |            `boolean`            |   true   |                                               Optional. Controls whether to display animations.                                               | [Checkbox Group](demo#tabs-group)               |✔ |
 |      beforeChange      | `Function\|Promise\|Observable` |    --    |   Callback function before checkbox switching, which returns the boolean type. If false is returned, checkbox-group switching is prevented.   | [Stop Checkbox Switching](demo#condition-change) |
 |        disabled        |            `boolean`            |  false   |                                             Optional. Whether to disable the entire button group.                                             | [Checkbox Group](demo#tabs-group)               |
 

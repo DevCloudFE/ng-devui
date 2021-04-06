@@ -27,24 +27,24 @@ export class BasicComponent {
     switch (type) {
       case 'link':
         this.msgs = [
-          { severity: 'info', summary: '相对地址', detail: `<a href="/home" target="_blank">返回首页</a>` },
-          { severity: 'info', summary: '绝对地址', content: this.customTemplate, myInfo: ' ng-devui 组件' },
+          { severity: 'info', summary: 'Relative', detail: `<a href="/home" target="_blank">Back to Home Page</a>` },
+          { severity: 'info', summary: 'Absolute', content: this.customTemplate, myInfo: 'Devui' },
         ];
         break;
       case 'multiple':
         this.msgs = [
-          { severity: 'info', summary: '摘要', content: '详细信息，测试换行，测试换行，测试换行，测试换行，测试换行' },
-          { severity: 'info', summary: '摘要', content: '详细信息，测试换行，测试换行，测试换行，测试换行，测试换行' },
+          { severity: 'info', summary: 'Summary', content: 'This is a test text. This is a test text. This is a test text.' },
+          { severity: 'info', summary: 'Summary', content: 'This is a test text. This is a test text. This is a test text.' },
         ];
         break;
       case 'noTitle':
-        this.msgs = [{ severity: 'warn', content: '详细信息测试换行测试换行测试换行测试换行测试换行测试换行测试换行测试换行测试换行' }];
+        this.msgs = [{ severity: 'warn', content: 'This is a test text. This is a test text. This is a test text.' }];
         break;
       case 'plainText':
-        this.msgs = [{ severity: 'info', content: '数据内容：<id:gc5aa71bfd86943db9e3e8f34dc347a15><label:测试换行>' }];
+        this.msgs = [{ severity: 'info', content: 'data：<id:gc5aa71bfd86943db9e3e8f34dc347a15><label:content>' }];
         break;
       default:
-        this.msgs = [{ severity: type, summary: '摘要', content: '详细信息，测试换行，测试换行，测试换行，测试换行，测试换行' }];
+        this.msgs = [{ severity: type, summary: 'Summary', content: 'This is a test text. This is a test text. This is a test text.' }];
     }
   }
 }

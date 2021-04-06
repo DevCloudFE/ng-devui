@@ -1,0 +1,42 @@
+<div class="devui-overview-wrapper">
+  <div class="d-overview-introduce">
+    <h1>
+      {{ overviewText.title }}
+    </h1>
+    <p class="d-overview-introduce-description">
+      {{ overviewText.description }}
+    </p>
+    <d-search [size]="'lg'" [isKeyupSearch]="true" [placeholder]="overviewText.placeholder" (searchFn)="searchComponent($event)"></d-search>
+  </div>
+  <ul class="d-overview-components" *ngIf="componentsDataDisplay.length">
+    <li class="d-overview-components-list" *ngFor="let components of componentsDataDisplay">
+      <div class="d-overview-component-title">
+        <h2>
+          {{ components.title }}
+        </h2>
+        <span class="d-overview-component-count">
+          {{ components.children.length }}
+        </span>
+      </div>
+      <div class="d-overview-component-wrapper">
+        <d-card *ngFor="let component of components.children" (click)="jumpToComponent(component.link)">
+          <div class="d-overview-card-wrapper">
+            <div class="d-overview-card-new" *ngIf="scopeList.includes(component.lowerName)">
+              {{ overviewText.newChange }}
+            </div>
+            <div class="d-overview-card-icon">
+              <img src="{{ imgPrefix + component.enType + '/' + component.name + '.png' }}" alt="" />
+            </div>
+            <p class="d-overview-card-title">
+              {{ component.title }}
+            </p>
+          </div>
+        </d-card>
+        <div class="d-component-place-holder" *ngFor="let placeHolder of flexPlaceHolders"></div>
+      </div>
+    </li>
+  </ul>
+  <div class="d-overview-no-data" *ngIf="!componentsDataDisplay.length">
+    <img src="./{{ srcPrefix }}/no-data{{ darkMode }}.png" alt="no-data" />
+  </div>
+</div>

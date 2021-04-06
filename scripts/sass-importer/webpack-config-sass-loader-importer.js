@@ -9,7 +9,7 @@ function getAngularCompilerTsConfigPath(config) {
   return undefined;
 }
 function webpackConfigSassImporterAlias(config) {
-  const tsconfigPath = getAngularCompilerTsConfigPath(config) || 'tsconfig.json';
+  const tsconfigPath = getAngularCompilerTsConfigPath(config) || 'tsconfig.base.json';
   [{
     ruleTest: /\.scss$|\.sass$/,
     loaderName: 'sass-loader'

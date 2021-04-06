@@ -1,25 +1,8 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  HostBinding,
-  OnDestroy,
-  OnInit,
-  Renderer2
-} from '@angular/core';
-import {
-  I18nInterface,
-  I18nService
-} from 'ng-devui/i18n';
+import { AfterViewInit, Component, ElementRef, HostBinding, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { PositionService } from 'ng-devui/position';
-import {
-  fromEvent,
-  Subscription
-} from 'rxjs';
-import {
-  debounceTime,
-  throttleTime
-} from 'rxjs/operators';
+import { fromEvent, Subscription } from 'rxjs';
+import { debounceTime, throttleTime } from 'rxjs/operators';
 import { StepsGuideService } from './steps-guide.service';
 import { ExtraConfig } from './steps-guide.types';
 
@@ -53,6 +36,8 @@ export class StepsGuideComponent implements OnInit, AfterViewInit, OnDestroy {
   subScriber: Subscription;
   SCROLL_REFRESH_INTERVAL = 100;
   i18nCommonText: I18nInterface['stepsGuide'];
+  DOT_HORIZONTAL_MARGIN = 27;
+  DOT_VERTICAL_MARGIN = 22;
 
   constructor(
     private stepService: StepsGuideService,
@@ -60,7 +45,7 @@ export class StepsGuideComponent implements OnInit, AfterViewInit, OnDestroy {
     private positionService: PositionService,
     private elm: ElementRef,
     private i18n: I18nService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.dots = new Array(this.stepsCount);
@@ -100,27 +85,60 @@ export class StepsGuideComponent implements OnInit, AfterViewInit, OnDestroy {
 
   updatePosition() {
     const calcPosition = this.position === 'left' ? 'left-top' : this.position === 'right' ? 'right-top' : this.position;
-    const rect = this.positionService.positionElements(this.triggerElement,
-      this.elm.nativeElement, calcPosition, true);
+    const rect = this.positionService.positionElements(this.triggerElement, this.elm.nativeElement, calcPosition, true);
+    const targetRect = this.triggerElement.getBoundingClientRect();
+    let left = rect.left;
+    let top = rect.top;
 
-    this.renderer.setStyle(this.elm.nativeElement, 'left', `${rect.left}px`);
-    this.renderer.setStyle(this.elm.nativeElement, 'top', `${rect.top}px`);
-    if (this.leftFix !== undefined) {
+    switch (rect.placementPrimary) {
+      case 'top':
+        left = targetRect.left + this.triggerElement.clientWidth / 2 - this.elm.nativeElement.clientWidth / 2;
+        top = top + this.triggerElement.clientHeight / 2 - this.DOT_HORIZONTAL_MARGIN;
+        break;
+      case 'bottom':
+        left = targetRect.left + this.triggerElement.clientWidth / 2 - this.elm.nativeElement.clientWidth / 2;
+        top = top + this.DOT_HORIZONTAL_MARGIN / 2;
+        break;
+      case 'left':
+        left = left + this.triggerElement.clientWidth / 2 - this.DOT_HORIZONTAL_MARGIN;
+        top = top + this.triggerElement.clientHeight / 2 - this.DOT_VERTICAL_MARGIN;
+        break;
+      case 'right':
+        left = left - this.triggerElement.clientWidth / 2 + this.DOT_HORIZONTAL_MARGIN;
+        top = top + this.triggerElement.clientHeight / 2 - this.DOT_VERTICAL_MARGIN;
+        break;
+      default:
+    }
+
+    switch (rect.placementSecondary) {
+      case 'left':
+        left = targetRect.left + this.triggerElement.clientWidth / 2 - this.DOT_VERTICAL_MARGIN;
+        break;
+      case 'right':
+        left = targetRect.left + this.triggerElement.clientWidth / 2 - this.elm.nativeElement.clientWidth + this.DOT_VERTICAL_MARGIN;
+        break;
+      default:
+    }
+
+    this.renderer.setStyle(this.elm.nativeElement, 'left', `${left}px`);
+    this.renderer.setStyle(this.elm.nativeElement, 'top', `${top}px`);
+
+    if (this.leftFix) {
       this.renderer.setStyle(this.elm.nativeElement, 'marginLeft', `${this.leftFix}px`);
     }
-    if (this.topFix !== undefined) {
+    if (this.topFix) {
       this.renderer.setStyle(this.elm.nativeElement, 'marginTop', `${this.topFix}px`);
     }
   }
 
   next() {
-    const newStep = this.stepIndex + 1 < this.stepsCount && this.stepIndex + 1 || this.stepsCount - 1;
+    const newStep = (this.stepIndex + 1 < this.stepsCount && this.stepIndex + 1) || this.stepsCount - 1;
     this.stepService.setCurrentIndex(newStep);
     this.close(newStep, 'next');
   }
 
   prev() {
-    const newStep = this.stepIndex - 1 > 0 && this.stepIndex - 1 || 0;
+    const newStep = (this.stepIndex - 1 > 0 && this.stepIndex - 1) || 0;
     this.stepService.setCurrentIndex(newStep);
     this.close(newStep, 'prev');
   }
@@ -130,5 +148,5 @@ export class StepsGuideComponent implements OnInit, AfterViewInit, OnDestroy {
     this.close(this.stepService.getCurrentStep(), 'close');
   }
 
-  close(step, type?) { }
+  close(step, type?) {}
 }

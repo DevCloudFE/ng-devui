@@ -44,8 +44,7 @@
 
 .devui-dropdown-menu {
   position: absolute;
-  // float: left;
-  // top: calc(100% - 1px);
+  top: 100%;
   left: 0;
   z-index: 1000;
   display: none;
@@ -209,5 +208,11 @@
         background-color: transparent;
       }
     }
+  }
+}
+
+.devui-dropdown-menu {
+  .devui-dropdown-item {
+    transition: color cubic-bezier(0.645, 0.045, 0.355, 1) 0.1s, background-color cubic-bezier(0.645, 0.045, 0.355, 1) 0.1s;
   }
 }

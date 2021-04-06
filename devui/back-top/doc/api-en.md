@@ -14,8 +14,8 @@ In the page:
 # d-back-top
 ## d-back-top Parameter
 
-|    Parameter   |   Type   |      Default        |       Description      |           Jump to Demo         |
-| :---------: | :------------: | :-----: | :--------------------------------------------------------------------------- | |
+|    Parameter   |   Type   |      Default        |       Description      |           Jump to Demo         |Global Config| 
+| :----------------: | :---------: | :------------: | :-----: | :--------------------------------------------------------------------------- | |
 | customTemplate | `TemplateRef<any>` | -- | Optional. Custom button style | [Customize](demo#back-top-customize) |
 | bottom | `string` | '50px' | Optional. Position between the button and the bottom of the page | [Customize](demo#back-top-customize) |
 | right | `string` | '30px' | Optional. It is the right margin between the button and the page | [Customize](demo#back-top-customize) |

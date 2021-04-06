@@ -9,12 +9,9 @@ import {
   OnInit,
   Output
 } from '@angular/core';
-
+import { OverlayContainerRef } from 'ng-devui/overlay-container';
 import { throttle } from 'lodash-es';
 import { Subscription } from 'rxjs';
-
-import { OverlayContainerRef } from 'ng-devui/overlay-container';
-
 import { StepsGuideComponent } from './steps-guide.component';
 import { StepsGuideService } from './steps-guide.service';
 import {

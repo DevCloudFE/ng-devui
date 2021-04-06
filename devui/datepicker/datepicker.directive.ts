@@ -12,6 +12,7 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { addClassToOrigin, DateConverter, DefaultDateConverter, removeClassFromOrigin } from 'ng-devui/utils';
+import { DevConfigService, WithConfig } from 'ng-devui/utils/globalConfig';
 import { fromEvent, Observable, Subscription } from 'rxjs';
 import { debounceTime, filter, map } from 'rxjs/operators';
 import { SelectDateChangeEventArgs, SelectDateChangeReason } from './date-change-event-args.model';
@@ -41,6 +42,7 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
   @Input() direction: 'up' | 'down' = 'down';
   @Input() customViewTemplate: TemplateRef<any>;
   @Input() autoOpen = false;
+  @Input() @WithConfig() showAnimation = true;
   @Output() selectedDateChange = new EventEmitter<SelectDateChangeEventArgs>();
   selectedDate: Date;
   private _isOpen = false;
@@ -132,7 +134,8 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
   constructor(private elementRef: ElementRef, private viewContainerRef: ViewContainerRef,
               private componentFactoryResolver: ComponentFactoryResolver, private renderer2: Renderer2,
               private injector: Injector, private datePickerConfig: DatePickerConfig, private i18n: I18nService,
-              private builder: AnimationBuilder, private cdr: ChangeDetectorRef) {
+              private builder: AnimationBuilder, private cdr: ChangeDetectorRef,
+              private devConfigService: DevConfigService) {
     this._dateConfig = datePickerConfig['dateConfig'];
     this.dateConverter = datePickerConfig['dateConfig'].dateConverter || new DefaultDateConverter();
     this.selectedDate = null;
@@ -375,17 +378,21 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
       default:
         direction = 'bottom';
     }
-    const metadata = this.isOpen ? this.popIn(direction) : this.popOut(direction);
-    const factory = this.builder.build(metadata);
-    this.player = factory.create(this.cmpRef.location.nativeElement);
-    this.renderer2.setStyle(this.cmpRef.location.nativeElement, 'display', 'block');
-    this.player.onDone(() => {
-      if (!this.isOpen) {
-        const targetElement = this.cmpRef.location.nativeElement;
-        this.renderer2.setStyle(targetElement, 'display', 'none');
-      }
-    });
-    this.player.play();
+    if (this.showAnimation) {
+      const metadata = this.isOpen ? this.popIn(direction) : this.popOut(direction);
+      const factory = this.builder.build(metadata);
+      this.player = factory.create(this.cmpRef.location.nativeElement);
+      this.renderer2.setStyle(this.cmpRef.location.nativeElement, 'display', 'block');
+      this.player.onDone(() => {
+        if (!this.isOpen) {
+          const targetElement = this.cmpRef.location.nativeElement;
+          this.renderer2.setStyle(targetElement, 'display', 'none');
+        }
+      });
+      this.player.play();
+    } else {
+      this.renderer2.setStyle(this.cmpRef.location.nativeElement, 'display', this.isOpen ? 'block' : 'none');
+    }
   }
 
   private transUserInputToDatepicker(value) {

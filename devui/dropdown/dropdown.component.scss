@@ -9,8 +9,11 @@
 
 .devui-dropdown span.icon-chevron-down {
   display: inline-block;
-  transition: transform 0.3s;
   vertical-align: text-top;
+}
+
+.devui-dropdown-animation span.icon-chevron-down {
+  transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 
 .devui-dropdown.open span.icon-chevron-down {

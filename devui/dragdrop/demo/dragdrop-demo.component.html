@@ -1,68 +1,68 @@
-<div class="demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 60, bottom: 0 }">
+<div class="devui-demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 180, bottom: 0 }">
   <d-demo-nav [navItems]="navItems"></d-demo-nav>
-  <div class="demo-example" [dAnchor]="'basic-usage'">
-    <div class="demo-title">{{ 'components.dragdrop.basicDemo.title' | translate }}</div>
-    <div class="demo-text">{{ 'components.dragdrop.basicDemo.description' | translate }}</div>
+  <div class="devui-demo-example" [dAnchor]="'basic-usage'">
+    <div class="devui-demo-title">{{ 'components.dragdrop.basicDemo.title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.dragdrop.basicDemo.description' | translate }}</div>
     <d-codebox id="components-dragdrop-default" [sourceData]="basicSource">
       <d-basic demo></d-basic>
     </d-codebox>
   </div>
 
-  <div class="demo-example" [dAnchor]="'multi-level-tree-drag'">
-    <div class="demo-title">{{ 'components.dragdrop.treeDemo.title' | translate }}</div>
-    <div class="demo-text">{{ 'components.dragdrop.treeDemo.description' | translate }}</div>
+  <div class="devui-demo-example" [dAnchor]="'multi-level-tree-drag'">
+    <div class="devui-demo-title">{{ 'components.dragdrop.treeDemo.title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.dragdrop.treeDemo.description' | translate }}</div>
     <d-codebox id="components-dragdrop-tree" [sourceData]="treeSource">
       <d-tree demo></d-tree>
     </d-codebox>
   </div>
 
-  <div class="demo-example" [dAnchor]="'drag-entity-elements-to-follow'">
-    <div class="demo-title">{{ 'components.dragdrop.followDemo.title' | translate }}</div>
-    <div class="demo-text">{{ 'components.dragdrop.followDemo.description' | translate }}</div>
+  <div class="devui-demo-example" [dAnchor]="'drag-entity-elements-to-follow'">
+    <div class="devui-demo-title">{{ 'components.dragdrop.followDemo.title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.dragdrop.followDemo.description' | translate }}</div>
     <d-codebox id="components-dragdrop-follow" [sourceData]="followSource">
       <d-follow demo></d-follow>
     </d-codebox>
   </div>
-  <div class="demo-example" [dAnchor]="'cross-edge-switching'">
-    <div class="demo-title">{{ 'components.dragdrop.switchDemo.title' | translate }}</div>
-    <div class="demo-text">{{ 'components.dragdrop.switchDemo.description' | translate }}</div>
+  <div class="devui-demo-example" [dAnchor]="'cross-edge-switching'">
+    <div class="devui-demo-title">{{ 'components.dragdrop.switchDemo.title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.dragdrop.switchDemo.description' | translate }}</div>
     <d-codebox id="components-dragdrop-switch" [sourceData]="switchSource">
       <d-switch demo></d-switch>
     </d-codebox>
   </div>
-  <div class="demo-example" [dAnchor]="'external-location'">
-    <div class="demo-title">{{ 'components.dragdrop.positionDemo.title' | translate }}</div>
-    <div class="demo-text">
+  <div class="devui-demo-example" [dAnchor]="'external-location'">
+    <div class="devui-demo-title">{{ 'components.dragdrop.positionDemo.title' | translate }}</div>
+    <div class="devui-demo-text">
       {{ 'components.dragdrop.positionDemo.description' | translate }}
     </div>
     <d-codebox id="components-dragdrop-position" [sourceData]="positionSource">
       <d-position demo></d-position>
     </d-codebox>
   </div>
-  <div class="demo-example" [dAnchor]="'drag-and-roll-container-enhancement'">
-    <div class="demo-title">{{ 'components.dragdrop.dropScrollDemo.title' | translate }}</div>
-    <div class="demo-text">{{ 'components.dragdrop.dropScrollDemo.description' | translate }}</div>
+  <div class="devui-demo-example" [dAnchor]="'drag-and-roll-container-enhancement'">
+    <div class="devui-demo-title">{{ 'components.dragdrop.dropScrollDemo.title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.dragdrop.dropScrollDemo.description' | translate }}</div>
     <d-codebox id="components-dragdrop-drop-scroll" [sourceData]="dropScrollSource">
       <d-drop-scroll demo></d-drop-scroll>
     </d-codebox>
   </div>
-  <div class="demo-example" [dAnchor]="'source-placeholder'">
-    <div class="demo-title">{{ 'components.dragdrop.originPlaceholderDemo.title' | translate }}</div>
-    <div class="demo-text">{{ 'components.dragdrop.originPlaceholderDemo.description' | translate }}</div>
+  <div class="devui-demo-example" [dAnchor]="'source-placeholder'">
+    <div class="devui-demo-title">{{ 'components.dragdrop.originPlaceholderDemo.title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.dragdrop.originPlaceholderDemo.description' | translate }}</div>
     <d-codebox id="components-dragdrop-origin-placeholder" [sourceData]="originPlaceholderSource">
       <d-origin-placeholder demo></d-origin-placeholder>
     </d-codebox>
   </div>
-  <div class="demo-example" [dAnchor]="'batch-drag-and-drop'">
-    <div class="demo-title">{{ 'components.dragdrop.batchDragDemo.title' | translate }}</div>
-    <div class="demo-text">{{ 'components.dragdrop.batchDragDemo.description' | translate }}</div>
+  <div class="devui-demo-example" [dAnchor]="'batch-drag-and-drop'">
+    <div class="devui-demo-title">{{ 'components.dragdrop.batchDragDemo.title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.dragdrop.batchDragDemo.description' | translate }}</div>
     <d-codebox id="components-dragdrop-batch-drag" [sourceData]="batchDragSource">
       <d-batch-drag demo></d-batch-drag>
     </d-codebox>
   </div>
-  <div class="demo-example" [dAnchor]="'2D-drag-and-drop-preview'">
-    <div class="demo-title">{{ 'components.dragdrop.crossDimensionDemo.title' | translate }}</div>
-    <div class="demo-text">
+  <div class="devui-demo-example" [dAnchor]="'2D-drag-and-drop-preview'">
+    <div class="devui-demo-title">{{ 'components.dragdrop.crossDimensionDemo.title' | translate }}</div>
+    <div class="devui-demo-text">
       {{ 'components.dragdrop.crossDimensionDemo.description' | translate }}
     </div>
     <d-codebox id="components-dragdrop-sync" [sourceData]="crossDimensionSource">

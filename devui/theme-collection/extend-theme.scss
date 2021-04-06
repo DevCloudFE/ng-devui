@@ -1,296 +1,316 @@
 @import '../styles-var/devui-var.scss';
 
-// TODO: 组件支持全局配置默认尺寸参数后删除
-// button default size change to '32px'
-.devui-btn:not(.devui-btn-xs):not(.devui-btn-sm):not(.devui-btn-lg) {
-  height: 32px;
-  line-height: 32px;
-}
+body[ui-theme='infinity-theme'],
+body[ui-theme='sweet-theme'],
+body[ui-theme='provence-theme'],
+body[ui-theme='deep-theme'] {
+  // TODO: 组件支持全局配置默认尺寸参数后删除
+  // button default size change to '32px'
+  .devui-btn:not(.devui-btn-xs):not(.devui-btn-sm):not(.devui-btn-lg) {
+    height: 32px;
+    line-height: 32px;
+  }
 
-// datepicker定制化处理高亮
-d-datepicker,
-d-date-range-picker,
-d-datepicker-range-single,
-d-two-datepicker-single {
-  --devui-list-item-active-bg: var(--devui-brand, #5e7ce0);
-  --devui-list-item-active-hover-bg: var(--devui-brand, #526ecc);
-  --devui-list-item-active-text: var(--devui-light-text, #ffffff);
-  --devui-font-size: var(--devui-font-size-sm, 12px);
-}
+  d-tabs .devui-nav {
+    display: inline;
 
-// TODO: 表单底层统一使用一致的input，全局修改该input尺寸默认值即可
-// input default size change to '32px'
-d-multi-auto-complete .multi-auto-complete label.multiple-label-auto-complete ul.devui-dropdown-origin {
-  padding: 3px 2px 0 2px;
-  min-height: 32px;
-}
+    --devui-font-size-card-title: 14px;
+  }
 
-d-search .devui-search {
-  .devui-input:not(.devui-input-sm):not(.devui-input-lg) {
+  d-tag {
+    --devui-font-size: var(--devui-font-size-sm, 12px);
+  }
+  // datepicker定制化处理高亮
+  d-datepicker,
+  d-date-range-picker,
+  d-datepicker-range-single,
+  d-two-datepicker-single {
+    --devui-list-item-active-bg: var(--devui-brand, #5e7ce0);
+    --devui-list-item-active-hover-bg: var(--devui-brand, #526ecc);
+    --devui-list-item-active-text: var(--devui-light-text, #ffffff);
+    --devui-font-size: var(--devui-font-size-sm, 12px);
+  }
+
+  // TODO: 表单底层统一使用一致的input，全局修改该input尺寸默认值即可
+  // input default size change to '32px'
+  d-multi-auto-complete .multi-auto-complete label.multiple-label-auto-complete ul.devui-dropdown-origin {
+    padding: 3px 2px 0 2px;
+    min-height: 32px;
+  }
+
+  d-search .devui-search {
+    .devui-input:not(.devui-input-sm):not(.devui-input-lg) {
+      height: 32px;
+    }
+
+    .devui-search-icon {
+      line-height: 32px;
+    }
+
+    .devui-search-clear:not(.devui-search-clear-lg):not(.devui-search-clear-sm) {
+      line-height: 32px;
+    }
+  }
+
+  d-select .devui-form-group {
+    .devui-form-control {
+      &.devui-select-input {
+        height: 30px;
+      }
+    }
+
+    .devui-select-list-wrapper.devui-form-control {
+      .devui-select-placeholder {
+        height: 28px;
+        line-height: 28px;
+      }
+
+      ul.devui-select-tag-list {
+        height: 28px;
+      }
+
+      .devui-select-tag-item {
+        margin: 3px 1px 0;
+      }
+    }
+  }
+
+  d-tree-select {
+    .devui-tree-select .popper .popper-activator .devui-select-input.devui-tree-select-input {
+      padding: 4px 10px;
+      min-height: 32px;
+      max-height: 64px;
+    }
+  }
+
+  input {
+    border-radius: $devui-border-radius;
+  }
+
+  [dTextInput] {
     height: 32px;
   }
 
-  .devui-search-icon {
-    line-height: 32px;
+  .devui-form-controls input[type='text'],
+  .devui-form-controls input[type='password'],
+  [dTextInput] {
+    height: 32px;
   }
 
-  .devui-search-clear:not(.devui-search-clear-lg):not(.devui-search-clear-sm) {
-    line-height: 32px;
-  }
-}
+  // select带有搜索存在两层ul
+  .devui-dropdown-menu > ul.devui-dropdown-menu-wrap {
+    // 存在搜索框时
+    & > li {
+      padding: 12px 12px 0 12px;
+    }
 
-d-select .devui-form-group {
-  .devui-form-control {
-    &.devui-select-input {
-      height: 30px;
+    ul {
+      padding: 12px;
+
+      li {
+        border-radius: $devui-border-radius;
+      }
     }
   }
 
-  .devui-select-list-wrapper.devui-form-control {
-    .devui-select-placeholder {
-      height: 28px;
-      line-height: 28px;
-    }
-
-    ul.devui-select-tag-list {
-      height: 28px;
-    }
-
-    .devui-select-tag-item {
-      margin: 3px 1px 0;
-    }
+  // TODO: 下拉专项整改增加offset设置
+  .devui-dropdown-menu {
+    margin-top: 8px !important;
+    margin-bottom: 8px !important;
   }
-}
 
-d-tree-select {
-  .devui-tree-select .popper .popper-activator .devui-select-input.devui-tree-select-input {
-    padding: 4px 10px;
-    min-height: 32px;
-    max-height: 64px;
-  }
-}
-
-input {
-  border-radius: $devui-border-radius;
-}
-
-[dTextInput] {
-  height: 32px;
-}
-
-.devui-form-controls input[type='text'],
-.devui-form-controls input[type='password'],
-[dTextInput] {
-  height: 32px;
-}
-
-// select带有搜索存在两层ul
-.devui-dropdown-menu > ul.devui-dropdown-menu-wrap {
-  // 存在搜索框时
-  & > li {
+  // breadcrumb dropdown menu
+  div.devui-search-container {
     padding: 12px 12px 0 12px;
   }
-
-  ul {
+  // autoComplete等
+  .devui-dropdown-menu > ul:not(.devui-dropdown-menu-wrap) {
     padding: 12px;
 
     li {
       border-radius: $devui-border-radius;
     }
   }
-}
+  // dropdown
+  ul.devui-dropdown-menu {
+    padding: 12px;
 
-// breadcrumb dropdown menu
-div.devui-search-container {
-  padding: 12px 12px 0 12px;
-}
-// autoComplete等
-.devui-dropdown-menu > ul:not(.devui-dropdown-menu-wrap) {
-  padding: 12px;
-
-  li {
-    border-radius: $devui-border-radius;
-  }
-}
-// dropdown
-ul.devui-dropdown-menu {
-  padding: 12px;
-
-  li .devui-dropdown-item {
-    border-radius: $devui-border-radius;
-  }
-}
-
-d-tags-input {
-  .devui-tags-autocomplete .devui-suggestion-list {
-    padding: 12px !important;
-  }
-}
-
-.devui-input-sm {
-  height: 24px;
-}
-
-.devui-input-lg {
-  height: 46px;
-}
-
-d-tabs .devui-nav {
-  display: block;
-
-  --devui-text: #71757f;
-  --devui-brand-active: #252b3a;
-  --devui-brand: #252b3a;
-
-  &.devui-nav-tabs,
-  &.devui-nav-pills {
-    li a {
-      line-height: 32px !important;
+    li .devui-dropdown-item {
+      border-radius: $devui-border-radius;
     }
   }
-}
 
-// 表单尺寸未统一，upload内部自定义了高度
-d-single-upload,
-d-multiple-upload {
-  .devui-input-group .devui-form-control {
-    min-height: 32px !important;
-
-    .devui-file-tag {
-      height: 26px !important;
+  d-tags-input {
+    .devui-tags-autocomplete .devui-suggestion-list {
+      padding: 12px !important;
     }
   }
-}
 
-div.popper-container div.popper-container-scrollable div.devui-tree-select.devui-options-container {
-  padding: 12px;
-}
-
-[ui-theme='provence-theme'] {
-  d-date-range-picker,
-  d-datepicker,
-  d-datepicker-range-single,
-  d-two-datepicker-single {
-    --devui-list-item-active-bg: #7b69ee;
-    --devui-list-item-active-hover-bg: #7b69ee;
-    --devui-list-item-active-text: #ffffff;
-    --devui-font-size: 12px;
-  }
-}
-
-[ui-theme='sweet-theme'] {
-  d-date-range-picker,
-  d-datepicker,
-  d-datepicker-range-single,
-  d-two-datepicker-single {
-    --devui-list-item-active-bg: #ec66ab;
-    --devui-list-item-active-hover-bg: #ffdcee;
-    --devui-list-item-active-text: #ffffff;
-    --devui-font-size: 12px;
+  .devui-input-sm {
+    height: 24px;
   }
 
-  --devui-list-item-selected-bg: #fdecf5;
-}
+  .devui-input-lg {
+    height: 46px;
+  }
 
-[ui-theme='deep-theme'] {
   d-tabs .devui-nav {
     display: block;
 
-    --devui-text: #71757f;
-    --devui-brand-active: #252b3a;
-    --devui-brand: #252b3a;
+    &.devui-nav-tabs,
+    &.devui-nav-pills {
+      li a {
+        line-height: 32px !important;
+      }
+    }
   }
-}
 
-// pagination样式修改
-d-pagination {
-  div.devui-pagination ul.devui-pagination-list li:not(.disabled) {
-    cursor: pointer;
+  // 表单尺寸未统一，upload内部自定义了高度
+  d-single-upload,
+  d-multiple-upload {
+    .devui-input-group .devui-form-control {
+      min-height: 32px !important;
 
-    a:hover,
-    span:hover,
-    a:focus,
-    span:focus {
-      background-color: transparent !important;
-      color: $devui-text !important;
-      border: 1px solid $devui-dividing-line !important;
-      box-shadow: 0 1px 3px 0 $devui-light-shadow !important;
+      .devui-file-tag {
+        height: 26px !important;
+      }
     }
+  }
 
-    a:active {
-      background-color: transparent !important;
-      color: $devui-text !important;
+  div.popper-container div.popper-container-scrollable div.devui-tree-select.devui-options-container {
+    padding: 12px;
+  }
+
+  div.popper-container div.devui-tree-select span.devui-form-control-feedback {
+    top: 12px;
+    right: 12px;
+  }
+
+  .table-row-selected {
+    td {
+      color: #ffffff !important;
     }
+  }
 
-    &.active a {
-      background-color: $devui-primary !important;
-      color: $devui-light-text !important;
-      cursor: pointer !important;
+  // pagination样式修改
+  d-pagination {
+    div.devui-pagination ul.devui-pagination-list li:not(.disabled) {
+      cursor: pointer;
 
-      &:hover {
+      a:hover,
+      span:hover,
+      a:focus,
+      span:focus {
+        background-color: transparent !important;
+        color: $devui-text !important;
+        border: 1px solid $devui-dividing-line !important;
+        box-shadow: 0 1px 3px 0 $devui-light-shadow !important;
+      }
+
+      a:active {
+        background-color: transparent !important;
+        color: $devui-text !important;
+      }
+
+      &.active a {
         background-color: $devui-primary !important;
         color: $devui-light-text !important;
-        border: 1px solid transparent !important;
-        box-shadow: none !important;
+        cursor: pointer !important;
+
+        &:hover {
+          background-color: $devui-primary !important;
+          color: $devui-light-text !important;
+          border: 1px solid transparent !important;
+          box-shadow: none !important;
+        }
+      }
+
+      a.devui-pagination-link:hover:not(:active) svg g polygon {
+        fill: $devui-text !important;
+      }
+
+      a.devui-pagination-link:active svg g polygon {
+        fill: $devui-text !important;
       }
     }
 
-    a.devui-pagination-link:hover:not(:active) svg g polygon {
-      fill: $devui-text !important;
+    ul.devui-pagination-list > li > a {
+      height: 28px !important;
+      min-width: 28px !important;
+      padding: 0 4px !important;
+      justify-content: center !important;
+      border: 1px solid transparent !important;
     }
 
-    a.devui-pagination-link:active svg g polygon {
-      fill: $devui-text !important;
+    ul.devui-pagination-sm > li > a {
+      height: 24px !important;
+      min-width: 24px !important;
+    }
+
+    ul.devui-pagination-lg > li > a {
+      height: 40px !important;
+      min-width: 40px !important;
+    }
+
+    .devui-pagination-list > li:first-child > a,
+    .devui-pagination-list > li:last-child > a {
+      padding: 0 !important;
+      height: 28px !important;
+      line-height: 28px !important;
+    }
+
+    .devui-pagination-sm > li:first-child > a,
+    .devui-pagination-sm > li:last-child > a {
+      height: 24px !important;
+      line-height: 24px !important;
+    }
+
+    .devui-pagination-lg > li:first-child > a,
+    .devui-pagination-lg > li:last-child > a {
+      height: 40px !important;
+      line-height: 40px !important;
+    }
+
+    .devui-pagination-link {
+      height: 28px !important;
+      line-height: 28px !important;
+    }
+
+    .devui-pagination-sm > li:first-child > a {
+      padding: 0 !important;
+    }
+
+    .devui-pagination-sm > li:last-child > a {
+      padding: 0 !important;
+    }
+  }
+}
+
+body[ui-theme='deep-theme'] {
+  .devui-tree-node__content.active {
+    .devui-tree-node__title {
+      color: #ffffff;
+    }
+
+    svg.svg-icon rect {
+      stroke: #ffffff !important;
+    }
+
+    svg.svg-icon rect:last-child {
+      fill: #ffffff !important;
     }
   }
 
-  ul.devui-pagination-list > li > a {
-    height: 28px !important;
-    min-width: 28px !important;
-    padding: 0 4px !important;
-    justify-content: center !important;
-    border: 1px solid transparent !important;
+  .table-row-selected {
+    td {
+      color: #ffffff !important;
+    }
   }
+}
 
-  ul.devui-pagination-sm > li > a {
-    height: 24px !important;
-    min-width: 24px !important;
-  }
-
-  ul.devui-pagination-lg > li > a {
-    height: 40px !important;
-    min-width: 40px !important;
-  }
-
-  .devui-pagination-list > li:first-child > a,
-  .devui-pagination-list > li:last-child > a {
-    padding: 0 !important;
-    height: 28px !important;
-    line-height: 28px !important;
-  }
-
-  .devui-pagination-sm > li:first-child > a,
-  .devui-pagination-sm > li:last-child > a {
-    height: 24px !important;
-    line-height: 24px !important;
-  }
-
-  .devui-pagination-lg > li:first-child > a,
-  .devui-pagination-lg > li:last-child > a {
-    height: 40px !important;
-    line-height: 40px !important;
-  }
-
-  .devui-pagination-link {
-    height: 28px !important;
-    line-height: 28px !important;
-  }
-
-  .devui-pagination-sm > li:first-child > a {
-    padding: 0 !important;
-  }
-
-  .devui-pagination-sm > li:last-child > a {
-    padding: 0 !important;
+body[ui-theme='infinity-theme'] {
+  d-tabs {
+    --devui-brand: #252b3a;
+    --devui-brand-active: #252b3a;
   }
 }

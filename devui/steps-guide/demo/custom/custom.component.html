@@ -3,11 +3,12 @@
   dStepsGuide
   [pageName]="'step-custom-demo'"
   [stepIndex]="0"
-  [leftFix]="-35"
-  [topFix]="-120"
+  [leftFix]="-95"
+  [topFix]="-74"
   [dStepsGuidePosition]="'top'"
+  (click)="reset(0)"
 >
-  custom position
+  Custom Position
 </d-button>
 <d-button
   bsStyle="common"
@@ -19,8 +20,9 @@
   [dStepsGuidePosition]="'bottom-left'"
   [zIndex]="2000"
   [extraConfig]="config"
+  (click)="reset(1)"
 >
-  custom target
+  Custom Target
 </d-button>
 <d-button
   bsStyle="common"
@@ -32,8 +34,7 @@
   [dStepsGuidePosition]="'bottom-right'"
   [zIndex]="2000"
   [observerDom]="observerDom"
+  (click)="reset(2)"
 >
-  observer dom
+  Observer Dom
 </d-button>
-<d-button (click)="reset()" bsStyle="primary"> show </d-button>
-<d-button (click)="close()" bsStyle="common"> close </d-button>

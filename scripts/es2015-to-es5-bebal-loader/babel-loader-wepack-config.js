@@ -17,7 +17,7 @@ function getTsconfigCompileTarget(tsconfigPath) {
 }
 
 function webpackConfigAddBabel2ES5(config, list = []) {
-  const tsconfigPath = getAngularCompilerTsConfigPath(config) || 'tsconfig.json';
+  const tsconfigPath = getAngularCompilerTsConfigPath(config) || 'tsconfig.base.json';
   const target = getTsconfigCompileTarget(tsconfigPath);
   if (target === ts.ScriptTarget.ES5) {
     config.module.rules.push({

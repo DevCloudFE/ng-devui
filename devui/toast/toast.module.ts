@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { SafePipeModule } from 'ng-devui/utils';
 import { ToastComponent } from './toast.component';
-
+import { ToastService } from './toast.service';
 @NgModule({
   imports: [
     CommonModule,
@@ -10,6 +10,6 @@ import { ToastComponent } from './toast.component';
   ],
   exports: [ToastComponent],
   declarations: [ToastComponent],
-  providers: []
+  providers: [ToastService]
 })
 export class ToastModule { }

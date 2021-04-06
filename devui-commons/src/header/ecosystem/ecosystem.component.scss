@@ -1,0 +1,17 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
+.header-ecosystem {
+    font-size: $devui-font-size-page-title;
+    margin: 0 12px;
+    cursor: pointer;
+    &:hover {
+        color: $devui-list-item-hover-text;
+    }
+}
+
+a {
+    color: $devui-text;
+    &:hover {
+        color: $devui-list-item-hover-text;
+    }
+}

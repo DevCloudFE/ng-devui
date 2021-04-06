@@ -40,7 +40,8 @@
 </div>
 <d-accordion-list
   class="devui-accordion-submenu"
-  [@collapseState]="!showAnimate ? '' : open ? 'expanded' : 'collapsed'"
+  [@collapse]="open ? 'expanded' : 'collapsed'"
+  [@.disabled]="!showAnimate"
   [ngClass]="{ 'devui-accordion-menu-hidden': !open && !showAnimate }"
   [deepth]="deepth + 1"
   [data]="children"

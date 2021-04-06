@@ -1,0 +1,12 @@
+.nav-item {
+  i {
+    visibility: hidden;
+    margin-left: 8px;
+  }
+
+  &:hover {
+    i {
+      visibility: visible;
+    }
+  }
+}
