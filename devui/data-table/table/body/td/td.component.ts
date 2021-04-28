@@ -1,7 +1,7 @@
 import {
-  Component, ElementRef, EventEmitter,
-  HostBinding, Input, OnChanges, OnDestroy, OnInit,
-  Output, SimpleChanges
+    Component, ElementRef, EventEmitter,
+    HostBinding, Input, OnChanges, OnDestroy, OnInit,
+    Output, SimpleChanges
 } from '@angular/core';
 import { fromEvent, Observable, Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -28,6 +28,7 @@ export class TableTdComponent implements OnInit, OnChanges, OnDestroy {
   @Input() fixedRight: string;
   @Input() iconFoldTable: string;
   @Input() iconUnFoldTable: string;
+  @Input() nestedColumnIndent = 16;
   @Input() beforeEditStart: (rowItem, field) => boolean | Promise<boolean> | Observable<boolean>;
   @Input() beforeEditEnd: (rowItem, field) => boolean | Promise<boolean> | Observable<boolean>;
   @Output() toggleChildTableEvent = new EventEmitter<boolean>();

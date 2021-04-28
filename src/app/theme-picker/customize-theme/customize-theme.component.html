@@ -1,0 +1,23 @@
+<div class="color-config">
+  <div class="inline-block" dDropDown [closeScope]="'blank'" (toggleEvent)="refreshColorPicker($event)">
+    <div class="color-cube" dDropDownToggle [ngStyle]="{ 'background-color': backgroundColor }"></div>
+    <!-- <d-color-picker
+      dDropDownMenu
+      [color]="backgroundColor"
+      (selectColor)="setColor($event)"
+      [refreshSignal]="refreshSignal"
+    ></d-color-picker> -->
+  </div>
+  <div class="inline-block">
+    <d-toggle size="sm" [(ngModel)]="customDark" (ngModelChange)="customApplyTheme()"></d-toggle>
+    <span style="margin-left: 4px">{{ 'themePicker.customizeDark' | translate }}</span>
+  </div>
+</div>
+<div class="download">
+  <d-button icon="icon-download" bsStyle="text-dark" (btnClick)="download()">
+    {{ 'themePicker.customizeDownloadConfig' | translate }}
+  </d-button>
+  <d-button bsStyle="text-dark" class="help" (btnClick)="goto()">
+    ( <i class="icon icon-helping"></i> {{ 'themePicker.customizeDownloadConfigHelp' | translate }} )
+  </d-button>
+</div>

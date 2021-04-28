@@ -3,9 +3,10 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { DropDownModule, RadioModule, TabsModule, ToggleModule } from 'ng-devui';
+import { ButtonModule, DropDownModule, RadioModule, TabsModule, ToggleModule } from 'ng-devui';
+import { CustomThemeService } from './customize-theme/custom-theme.service';
+import { CustomizeThemeComponent } from './customize-theme/customize-theme.component';
 import { ThemePickerComponent } from './theme-picker.component';
-
 @NgModule({
   imports: [
     CommonModule,
@@ -15,15 +16,18 @@ import { ThemePickerComponent } from './theme-picker.component';
     ToggleModule,
     DropDownModule,
     RadioModule,
-    TabsModule
+    TabsModule,
+    ButtonModule,
   ],
   exports: [
     ThemePickerComponent,
   ],
   declarations: [
     ThemePickerComponent,
+    CustomizeThemeComponent,
   ],
   providers: [
+    CustomThemeService
   ],
 })
 export class ThemePickerModule { }

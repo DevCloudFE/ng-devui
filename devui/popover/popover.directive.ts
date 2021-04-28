@@ -77,6 +77,9 @@ export class PopoverDirective implements OnInit, OnDestroy {
   // 是否可以移入popover内部
   @Input() hoverToContent = false; // 废弃
 
+  // 设置样式
+  @Input() popoverStyle: object;
+
   /**
    * @deprecated Use mouseLeaveDelay to replace.
    * 曾经是触发移入popover内部的延迟时间
@@ -147,6 +150,7 @@ export class PopoverDirective implements OnInit, OnDestroy {
       appendToBody: this.eleAppendToBody,
       zIndex: this.zIndex,
       showAnimation: this.showAnimation,
+      popoverStyle: this.popoverStyle,
     });
 
     // 对创建的ToolTip组件添加鼠标移入和移出的监听事件

@@ -1,4 +1,3 @@
-import { ColorComponent } from './color/color.component';
 import { ExamplePanelComponent } from './example-panel.component';
 import { GetStartedComponent } from './get-started.component';
 import { GlobalConfigComponent } from './global-config.component';
@@ -6,6 +5,67 @@ import { ComponentsOverviewComponent } from './overview.component';
 import { ThemeGuideComponent } from './theme-guide.component';
 
 export const routesConfig = [
+  {
+    path: 'design-color',
+    component: ExamplePanelComponent,
+    loadChildren: () => import('../../../devui/design-token/color/demo/design-color-demo.module').then((m) => m.DesignColorDemoModule),
+    data: {
+      type: 'Design Tokens',
+      enType: 'Design Tokens',
+      name: 'Color',
+      cnName: '颜色',
+      nodisplay: true,
+    },
+  },
+  {
+    path: 'design-link',
+    component: ExamplePanelComponent,
+    loadChildren: () => import('../../../devui/design-token/link/demo/design-link-demo.module').then((m) => m.DesignLinkDemoModule),
+    data: {
+      type: 'Design Tokens',
+      enType: 'Design Tokens',
+      name: 'Link',
+      cnName: '链接',
+      nodisplay: true,
+    },
+  },
+  {
+    path: 'design-shadow',
+    component: ExamplePanelComponent,
+    loadChildren: () => import('../../../devui/design-token/shadow/demo/design-shadow-demo.module').then((m) => m.DesignShadowDemoModule),
+    data: {
+      type: 'Design Tokens',
+      enType: 'Design Tokens',
+      name: 'Shadow',
+      cnName: '阴影',
+      nodisplay: true,
+    },
+  },
+  {
+    path: 'design-font',
+    component: ExamplePanelComponent,
+    loadChildren: () => import('../../../devui/design-token/font/demo/design-font-demo.module').then((m) => m.DesignFontDemoModule),
+    data: {
+      type: 'Design Tokens',
+      enType: 'Design Tokens',
+      name: 'Font',
+      cnName: '字体',
+      nodisplay: true,
+    },
+  },
+  {
+    path: 'design-border-radius',
+    component: ExamplePanelComponent,
+    loadChildren: () =>
+      import('../../../devui/design-token/border-radius/demo/design-border-radius-demo.module').then((m) => m.DesignBorderRadiusDemoModule),
+    data: {
+      type: 'Design Tokens',
+      enType: 'Design Tokens',
+      name: 'BorderRadius',
+      cnName: '圆角',
+      nodisplay: true,
+    },
+  },
   {
     path: '',
     redirectTo: 'overview',
@@ -21,11 +81,6 @@ export const routesConfig = [
     path: 'get-start',
     component: GetStartedComponent,
     data: { nodisplay: true },
-  },
-  {
-    path: 'color',
-    component: ColorComponent,
-    data: {nodisplay: true}
   },
   {
     path: 'theme-guide',
@@ -73,8 +128,7 @@ export const routesConfig = [
   {
     path: 'auto-complete',
     component: ExamplePanelComponent,
-    loadChildren: () =>
-      import('../../../devui/auto-complete/demo/auto-complete-demo.module').then((m) => m.AutoCompleteDemoModule),
+    loadChildren: () => import('../../../devui/auto-complete/demo/auto-complete-demo.module').then((m) => m.AutoCompleteDemoModule),
     data: {
       type: '数据录入',
       enType: 'Data Entry',
@@ -96,8 +150,7 @@ export const routesConfig = [
   {
     path: 'ImagePreview',
     component: ExamplePanelComponent,
-    loadChildren: () =>
-      import('../../../devui/image-preview/demo/image-preview-demo.module').then((m) => m.ImagePreviewDemoModule),
+    loadChildren: () => import('../../../devui/image-preview/demo/image-preview-demo.module').then((m) => m.ImagePreviewDemoModule),
     data: {
       type: '数据展示',
       enType: 'Data Display',
@@ -288,8 +341,7 @@ export const routesConfig = [
   {
     path: 'editable-select',
     component: ExamplePanelComponent,
-    loadChildren: () =>
-      import('../../../devui/editable-select/demo/editable-select-demo.module').then((m) => m.EditableSelectDemoModule),
+    loadChildren: () => import('../../../devui/editable-select/demo/editable-select-demo.module').then((m) => m.EditableSelectDemoModule),
     data: {
       type: '数据录入',
       enType: 'Data Entry',
@@ -535,6 +587,19 @@ export const routesConfig = [
     },
   },
   {
+    path: 'mention',
+    component: ExamplePanelComponent,
+    loadChildren: () => import('../../../devui/mention/demo/mention-demo.module').then((m) => m.MentionDemoModule),
+    data: {
+      type: '反馈',
+      enType: 'Feedback',
+      name: 'Mention',
+      cnName: '提及',
+      description: '提及组件。',
+      tmw: `用于在输入中提及某人或某事，常用于发布、聊天或评论功能。`,
+    },
+  },
+  {
     path: 'toggle',
     component: ExamplePanelComponent,
     loadChildren: () => import('../../../devui/toggle/demo/toggle-demo.module').then((m) => m.ToggleDemoModule),
@@ -691,8 +756,7 @@ export const routesConfig = [
   {
     path: 'category-search',
     component: ExamplePanelComponent,
-    loadChildren: () =>
-      import('../../../devui/category-search/demo/category-search-demo.module').then((m) => m.CategorySearchDemoModule),
+    loadChildren: () => import('../../../devui/category-search/demo/category-search-demo.module').then((m) => m.CategorySearchDemoModule),
     data: {
       type: '数据录入',
       enType: 'Data Entry',

@@ -1,0 +1,47 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
+.color-cube {
+  width: 30px;
+  height: 30px;
+  border: 1px solid $devui-line;
+  cursor: pointer;
+  border-radius: $devui-border-radius;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.inline-block + .inline-block {
+  margin-left: 16px;
+}
+
+.download {
+  margin-top: 8px;
+  text-align: center;
+
+  d-button + d-button {
+    margin-left: 4px;
+  }
+
+  .help {
+    transform: translateY(-2px);
+
+    ::ng-deep .button-content {
+      color: $devui-aide-text;
+      text-decoration: underline dashed;
+
+      &:hover {
+        color: $devui-list-item-hover-text;
+      }
+    }
+  }
+}
+
+.color-config {
+  text-align: center;
+
+  & > * {
+    text-align: left;
+  }
+}

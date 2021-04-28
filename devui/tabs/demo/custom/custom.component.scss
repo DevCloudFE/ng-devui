@@ -1,5 +1,7 @@
 @import '~ng-devui/styles-var/devui-var.scss';
 
 .custom-tabs {
-  background-color: $devui-list-item-selected-bg !important;
+  .custom-title {
+    transition: color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  }
 }

@@ -4,7 +4,7 @@ import {
   devuiDarkTheme, devuiLightTheme,
   ThemeServiceInit
 } from 'ng-devui/theme';
-import { deepTheme, infinityTheme, provenceTheme, sweetTheme } from 'ng-devui/theme-collection';
+import { deepTheme, galaxyTheme, infinityTheme, provenceTheme, sweetTheme } from 'ng-devui/theme-collection';
 import { AppModule } from './app/app.module';
 import {
   devuiDarkLargeTheme, devuiLightLargeTheme,
@@ -25,8 +25,9 @@ ThemeServiceInit({
   'infinity-theme': infinityTheme,
   'provence-theme': provenceTheme,
   'sweet-theme': sweetTheme,
-  'deep-theme': deepTheme
-});
+  'deep-theme': deepTheme,
+  'galaxy-theme': galaxyTheme
+}, null, null, null, true);
 
 if (environment.production) {
   enableProdMode();

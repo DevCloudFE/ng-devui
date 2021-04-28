@@ -14,6 +14,7 @@ import {
   ViewChild,
   ViewChildren
 } from '@angular/core';
+import { cloneDeep, isEqual } from 'lodash-es';
 import { DateRangePickerComponent } from 'ng-devui/datepicker';
 import { DropDownDirective } from 'ng-devui/dropdown';
 import { DValidateRules } from 'ng-devui/form';
@@ -21,7 +22,6 @@ import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { ITreeItem } from 'ng-devui/tree';
 import { DefaultIcons } from 'ng-devui/tree-select';
 import { DateConverter, DefaultDateConverter } from 'ng-devui/utils';
-import { cloneDeep, isEqual } from 'lodash-es';
 import { fromEvent, Observable, Subject } from 'rxjs';
 import { debounceTime, takeUntil, tap } from 'rxjs/operators';
 import { CreateFilterEvent, ICategorySearchTagItem, SearchEvent, SelectedTagsEvent } from './category-search.type';
@@ -160,7 +160,6 @@ export class CategorySearchComponent implements OnInit, OnChanges, OnDestroy, Af
   setValue(data) {
     if (data && Array.isArray(data) && data.length) {
       data.forEach((item) => {
-        item.title = item.title || `${item.label}：`;
         const preValue = item.type === 'numberRange' || item.type === 'treeSelect' ? { value: [] } : { value: undefined };
         preValue[item.filterKey || 'label'] = undefined;
         item.value = item.value || preValue;
@@ -170,8 +169,17 @@ export class CategorySearchComponent implements OnInit, OnChanges, OnDestroy, Af
         if (item.type === 'treeSelect' && item.options && item.options.length) {
           item.value.options = cloneDeep(item.options);
         }
+        const result =
+          (item.type === 'checkbox' || item.type === 'label') && this.getItemValue(item.value.value, item.filterKey || 'label');
+        item.title = this.setTitle(item, item.type, result);
       });
     }
+  }
+
+  setTitle(tag: ICategorySearchTagItem, type: string, result?: string) {
+    return type === 'checkbox' || type === 'label'
+      ? `${tag.label}: ${result || ''}`
+      : `${tag.label}: ${(tag.value && tag.value[tag.filterKey || 'label']) || ''}`;
   }
 
   initCategoryDisplay() {
@@ -182,10 +190,12 @@ export class CategorySearchComponent implements OnInit, OnChanges, OnDestroy, Af
       const keys = this.groupOrderConfig || Object.keys(groupObj);
       this.categoryDisplay = [];
       keys.forEach((key) => {
-        const groupItem = <ICategorySearchTagItem>{};
-        groupItem.groupName = key;
-        groupItem.groupLength = groupObj[key].length;
-        this.categoryDisplay.push(groupItem, ...groupObj[key]);
+        if (groupObj[key]) {
+          const groupItem = <ICategorySearchTagItem>{};
+          groupItem.groupName = key;
+          groupItem.groupLength = groupObj[key].length;
+          this.categoryDisplay.push(groupItem, ...groupObj[key]);
+        }
       });
     } else {
       this.categoryDisplay =
@@ -474,7 +484,7 @@ export class CategorySearchComponent implements OnInit, OnChanges, OnDestroy, Af
     this.afterDropdownClosed();
     tag.value = chooseItem;
     tag.value.cache = tag.value.value;
-    tag.title = `${tag.label}：${tag.value[tag.filterKey || 'label']}`;
+    tag.title = this.setTitle(tag, 'radio');
     this.updateSelectedTags(tag);
   }
 
@@ -489,7 +499,7 @@ export class CategorySearchComponent implements OnInit, OnChanges, OnDestroy, Af
       tag.value[tag.filterKey || 'label'] = tag.showTime
         ? this.dateConverter.formatDateTime(startDate) + ' - ' + this.dateConverter.formatDateTime(endDate)
         : this.dateConverter.format(startDate) + ' - ' + this.dateConverter.format(endDate);
-      tag.title = `${tag.label}：${tag.value[tag.filterKey || 'label']}`;
+      tag.title = this.setTitle(tag, 'dateRange');
       this.updateSelectedTags(tag);
     }
   }
@@ -499,7 +509,7 @@ export class CategorySearchComponent implements OnInit, OnChanges, OnDestroy, Af
     this.afterDropdownClosed();
     const result = this.getItemValue(tag.value.value, tag.filterKey || 'label');
     if (result) {
-      tag.title = `${tag.label}：${result}`;
+      tag.title = this.setTitle(tag, 'checkbox', result);
       tag.value[tag.filterKey || 'label'] = result;
       tag.value.cache = cloneDeep(tag.value.value);
       this.updateSelectedTags(tag);
@@ -576,7 +586,7 @@ export class CategorySearchComponent implements OnInit, OnChanges, OnDestroy, Af
   getTextInputValue(tag) {
     this.afterDropdownClosed();
     tag.value[tag.filterKey || 'label'] = tag.value.cache = tag.value.value;
-    tag.title = `${tag.label}：${tag.value[tag.filterKey || 'label']}`;
+    tag.title = this.setTitle(tag, 'textInput');
     this.updateSelectedTags(tag);
   }
 
@@ -588,7 +598,7 @@ export class CategorySearchComponent implements OnInit, OnChanges, OnDestroy, Af
     tag.value.value = [startNum, endNum];
     tag.value.cache = [startNum, endNum];
     tag.value[tag.filterKey || 'label'] = `${startNum} - ${endNum}`;
-    tag.title = `${tag.label}：${tag.value[tag.filterKey || 'label']}`;
+    tag.title = this.setTitle(tag, 'numberRange');
     this.updateSelectedTags(tag);
   }
 
@@ -607,7 +617,7 @@ export class CategorySearchComponent implements OnInit, OnChanges, OnDestroy, Af
       tag.value.options = cloneDeep(tag.options);
       tag.value.cache = cloneDeep(tag.value.value);
       tag.value[tag.filterKey || 'label'] = result.join(',');
-      tag.title = `${tag.label}：${tag.value[tag.filterKey || 'label']}`;
+      tag.title = this.setTitle(tag, 'treeSelect');
       this.updateTreeData(tag, tag.value.options, selectedIds, halfCheckedIds);
       this.updateSelectedTags(tag);
     } else {

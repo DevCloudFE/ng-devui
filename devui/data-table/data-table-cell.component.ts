@@ -11,14 +11,11 @@ import {
   SimpleChange,
   ViewChild
 } from '@angular/core';
-
-import { Subscription } from 'rxjs';
-
 import { InputNumberComponent } from 'ng-devui/input-number';
 import { SelectComponent } from 'ng-devui/select';
 import { TreeSelectComponent } from 'ng-devui/tree-select';
 import { stopPropagationIfExist } from 'ng-devui/utils';
-
+import { Subscription } from 'rxjs';
 import { DataTableRowComponent } from './data-table-row.component';
 import { DataTableComponent } from './data-table.component';
 import { EditorDirective } from './editor-host.directive';

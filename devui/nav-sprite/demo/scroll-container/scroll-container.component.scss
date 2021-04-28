@@ -1,0 +1,12 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
+.page {
+  max-height: 200px;
+  overflow-y: auto;
+
+  .page-header {
+    position: sticky;
+    top: 0;
+    background-color: $devui-base-bg;
+  }
+}

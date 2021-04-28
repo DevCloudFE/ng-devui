@@ -15,22 +15,28 @@
     "largeSize": "Large FontSize",
     "default": "Default",
     "extend": "Extend",
+    "customize": "Customize",
+    "customizeDark": "Dark",
+    "customizeDownloadConfig": "Download Theme Config",
+    "customizeDownloadConfigHelp": "Usage",
     "infinity": "Infinity",
     "sweet": "Sweet",
     "deep": "Deep",
-    "provence": "Provence"
+    "provence": "Provence",
+    "galaxy": "Galaxy"
   },
   "public": {
     "overview": {
       "title": "Components Overview",
       "description": "DevUI provides rich basic UI components for web applications. We will continue to explore the best UI practices of enterprise-level applications. Welcome to DevUI.",
       "placeholder": "Enter the component",
-      "newChange": "New"
+      "newChange": "New",
+      "lookingCmp": "Is the components you're looking for?",
+      "suggestCmp": "Recommended Components"
     },
     "start": "Getting Started",
     "themeDoc": "Customize Theme Docs",
-    "color": "Color Variables",
-    "globalDoc": "Customize global config",
+    "globalDoc": "Customize Global Config",
     "versions": "Changelog",
     "whenToUse": "When To Use",
     "goTo": "Go To"
@@ -542,7 +548,7 @@
       },
       "button-primary-and-common": {
         "title": "Combinations of Primary & Common Buttons",
-        "description": "When a primary button is combined with a secondary button, a scene usually has only one primary button.",
+        "description": "When the primary and the common is used at the same time, a scene usually has only one primary button.",
         "ok": "ok",
         "cancel": "cancels",
         "last": "Previous",
@@ -780,7 +786,7 @@
       "tmw": "Can be used to deal with date string conversion, file download, a tag simulation, and lazy loading.",
       "lazyLoadDemo": {
         "title": "Lazyload Directive",
-        "description": "LazyLoadModule in the util module is introduced. The dLazyLoad instruction is used to respond to the loadMore event when the container is rolled to the bottom to implement lazy loading."
+        "description": "Import the LazyLoadModule in the util module. The dLazyLoad instruction is used to respond to the loadMore event when the container is rolled to the bottom to implement lazy loading."
       },
       "pipeDemo": {
         "title": "DatePipe"
@@ -824,10 +830,10 @@
         "with-dropdown": "Used with Dropdown"
       }
     },
-    "common-styles": {
-      "name": "CommonStyles",
-      "type": "Extended service",
-      "path": "common-styles",
+    "design-link": {
+      "name": "Link",
+      "type": "Design Tokens",
+      "path": "design-link",
       "description": "Common style specifications of ng-devui.",
       "tmw": "When you want to query ng-devui related styles, scenario related styles, and changes of styles.",
       "hrefDemo": {
@@ -835,35 +841,344 @@
         "description1": "1. Verify that the devui style sheet (devui.min.css) has been imported globally.",
         "description2": "2. Use class=\"devui-link\" to modify the style of <a>."
       },
+      "anchorLinkValues": {
+        "href-a": "Link"
+      }
+    },
+    "design-color": {
+      "name": "Color",
+      "type": "Design Tokens",
+      "path": "design-color",
+      "description": "Common style specifications of ng-devui.",
+      "tmw": "When you want to query ng-devui related styles, scenario related styles, and changes of styles.",
       "colorDemo": {
         "title": "Color",
         "description1": "1. DevUI sorts color specifications, including common color values and dark mode color values, and lists the usage scenarios of these colors. To better control and display, DevUI classifies colors and names semantic variables.",
         "description2": "2. By `@import' ~ng-devui/styles-var/devui-var.scss '; `.The color variable can be used after being introduced.",
-        "description3": "3. If the style sheet is a less file, '@import' ~ng-devui/styles-var/devui-var.less '; `, and change the variable prefix '$' to '@'."
+        "description3": "3. If the style sheet is a less file, '@import' ~ng-devui/styles-var/devui-var.less '; `, and change the variable prefix '$' to '@'.",
+        "instance": {
+          "title": "Instances",
+          "description": "In this example, color variables are used, and the color blocks change with the theme switching.",
+          "defaultTable": {
+            "tab": "Default theme color comparison table",
+            "colorVar": "Color variable",
+            "normalColor": "Normal color value",
+            "darkColor": "Dark Black Value",
+            "description": "Description"
+          },
+          "oldTable": {
+            "tab": "Old theme color comparison table",
+            "colorVar": "Color variable",
+            "newVar": "New Variable",
+            "normalColor": "Normal color value",
+            "darkColor": "Dark Black Value",
+            "description": "Description"
+          },
+          "colorSource": {
+            "devui-global-bg": "Global background with background color",
+            "devui-global-bg-normal": "Global white background",
+            "devui-base-bg": "Base block background white",
+            "devui-base-bg-dark": "Base Block Background Dark (Fixed)",
+            "devui-brand": "Brand color",
+            "devui-brand-foil": "brand color auxiliary color, positive color",
+            "devui-brand-hover": "Brand color highlight (highlight)",
+            "devui-brand-active": "Brand color active (dark)",
+            "devui-brand-active-focus": "Brand color focus (heavy darkening)",
+            "devui-contrast": "Brand color contrast, contrast, contrast, second brand color",
+            "devui-text": "Body Text",
+            "devui-text-weak": "Weakened text information (accordion subitem, table header)",
+            "devui-aide-text": "auxiliary text, help information (breadcrumb)",
+            "devui-aide-text-stress": "Accent color in auxiliary text and help information",
+            "devui-placeholder": "Placeholder",
+            "devui-light-text": "Font color on colored dark background (fixed)",
+            "devui-dark-text": "Font color on tinted light background (fixed)",
+            "devui-link": "Link text color",
+            "devui-link-active": "Link text hover/active color",
+            "devui-link-light": "Link text color on a dark background",
+            "devui-link-light-active": "Link text hover/activate color on dark background",
+            "devui-line": "Border divider, which is used only for borders.",
+            "devui-dividing-line": "Content separation line, which is used to separate contents.",
+            "devui-block": "Background color of a large non-collapsed block (for example, top navigation background color)",
+            "devui-area": "Background color of the collapsible block (color of the expanded area)",
+            "devui-danger": "Failure, Error, Alarm",
+            "devui-warning": "Warning, caution type prompt",
+            "devui-waiting": "Waiting",
+            "devui-success": "Success, Correct",
+            "devui-info": "Notification, General Prompt, Executing",
+            "devui-initial": "Initialized, Not executed",
+            "devui-unavailable": "Unavailable or Disabled",
+            "devui-shadow": "shadow color",
+            "devui-light-shadow": "Weak shadow color",
+            "devui-icon-text": "Text icon color, which is the same as the text color.",
+            "devui-icon-bg": "svg Icon Background Color",
+            "devui-icon-fill": "Grey fill color of the svg icon",
+            "devui-icon-fill-hover": "svg Icon Gray Fill Color Hover Feedback Color",
+            "devui-icon-fill-active": "svg Icon Highlight Fill Color (Active)",
+            "devui-icon-fill-active-hover": "svg Icon Highlight Fill Color Hover Feedback Color",
+            "devui-form-control-line": "Form control border color, which is the same as the border divider.",
+            "devui-form-control-line-hover": "Form Control Border Hover Feedback Color",
+            "devui-form-control-line-active": "Form Control Border Activation Color for Focus",
+            "devui-form-control-line-active-hover": "Form Control Border Activation Color for Focus and Hover",
+            "devui-list-item-active-bg": "List Type: Select Background",
+            "devui-list-item-active-text": "List Type: Select the background and text, which is the same as the font color (fixed) on a colored dark background",
+            "devui-list-item-active-hover-bg": "List Type: Select Background Hover Feedback Color (only for pagination)",
+            "devui-list-item-hover-bg": "List Type Common Options Hover Background",
+            "devui-list-item-hover-text": "List Type Normal Options Hover Background with Text",
+            "devui-list-item-selected-bg": "List type: Select the selected row color. This parameter is used only for the table type.",
+            "devui-list-item-strip-bg": "list type zebra color, used only for table classes",
+            "devui-disabled-bg": "disabled Background Color",
+            "devui-disabled-line": "disabled Border Color",
+            "devui-disabled-text": "disabled Text Color",
+            "devui-primary-disabled": "Text color of the main button in disabled state",
+            "devui-icon-fill-active-disabled": "svg Icon Activation State Disable Color",
+            "devui-label-bg": "Default labeling option background color",
+            "devui-connected-overlay-bg": "Single-layer background color of the pop-up menu with connection points",
+            "devui-connected-overlay-line": "Single-layer border color of the pop-up menu with connection points",
+            "devui-fullscreen-overlay-bg": "background color of the pop-up content layer in full screen mode (modal pop-up window)",
+            "devui-feedback-overlay-bg": ": background color of the floating layer of the feedback type (toast or popover)",
+            "devui-feedback-overlay-text": "Information Prompt Feedback Type Floating Layer Background Color with Text Color",
+            "devui-embed-search-bg": "Background color of the nested search box without borders",
+            "devui-embed-search-bg-hover": "Background color of the nested search box without borders",
+            "devui-float-block-shadow": "special floating layer background color (to be corrected)",
+            "devui-highlight-overlay": "Locally translucent global floating layer background color (such as bottom)",
+            "devui-range-item-hover-bg": "Background color of the hover in the range (for example, the hover in the middle of the datepicker range)",
+            "devui-primary": "Main button, same brand color",
+            "devui-primary-hover": "Primary button hover",
+            "devui-primary-active": "Primary button active",
+            "devui-contrast-hover": "Hover the highlight button",
+            "devui-contrast-active": "Highlight button active",
+            "devui-danger-line": "Failure Border",
+            "devui-danger-bg": "Failure background color",
+            "devui-warning-line": "Warning Border",
+            "devui-warning-bg": "Warning background color",
+            "devui-info-line": "Notification Border",
+            "devui-info-bg": "Notification background color",
+            "devui-success-line": "Success border",
+            "devui-success-bg": "Success background color",
+            "devui-primary-line": "primary border",
+            "devui-primary-bg": "Primary background color",
+            "devui-default-line": "Default border",
+            "devui-default-bg": "Default background color"
+          },
+          "catalogs": {
+            "basic": "Basic variable",
+            "icon": "Icon",
+            "form": "Form",
+            "list": "List",
+            "disable": "Disable",
+            "specialBackground": "Special background color",
+            "button": "Button",
+            "status": "Status"
+          },
+          "colors": {
+            "global-bg": "Body with a light gray background",
+            "bg-white": "Top navigation color, background color",
+            "base-bg-white": "White background body",
+            "block-bg-white": "Used in areas such as buttons and alert bar. In dark mode, the entire area is different from the common background color.",
+            "brand-1": "Control Color",
+            "brand-2": "Click the control color",
+            "brand-3": "Select content background color, such as drop-down menu and table",
+            "brand-4": "For light loading background color",
+            "dark-1": "Main Information",
+            "dark-2": "Help information, prompt information",
+            "dark-3": "Placeholder",
+            "dark-1-boxshadow-light": "Shadow Effect",
+            "dark-1-boxshadow": "Shadow Effect",
+            "dark-1-3": "In-table operation icon",
+            "dividing": "Separation line color. The color is the same as gray-2.",
+            "dropdown-overlay": "Used in the white area of the drop-down menu block. In dark mode, the color is slightly different from the common background color.",
+            "font-dark": "Dark fonts for colored light backgrounds",
+            "font-white": "For colored background",
+            "full-screen-overlay": "Used for full-screen pop-up layers such as modal",
+            "gray-1": "Main dividers, such as borders",
+            "gray-2": "Minor divider",
+            "gray-3": "Expand area color",
+            "highlight-overlay": "Used for the bottom floating layer operation layer",
+            "hover-control": "Mouse hover control",
+            "hover-control-light": "Mouse-over control on a dark background",
+            "hover-content": "Hover the mouse background color to enter the drop-down list and table.",
+            "huawei-bg": "Top navigation color, background color",
+            "huawei-red": "Top Menu Selection",
+            "icon-gray-bg": "Gray background for the header buttons",
+            "link": "Used for a label or link",
+            "link-light": "Used for a tag or link on a dark background",
+            "status-red": "Error, failure, and dangerous operation alarm color",
+            "status-yellow": "Prompt",
+            "status-waiting": "Waiting information",
+            "status-green": "Success, Approved",
+            "status-blue": "Running, Normal",
+            "status-initial": "Initialization",
+            "status-unavaliable": "Invalid, wait, rollback, and abort. The color is $gray-1.",
+            "strip-color": "For table indirect rows",
+            "tag-label-bgcolor": "Label type",
+            "hwc-status-danger-border": "is used to notify alerts and synchronize the HUAWEI CLOUD official website specifications.",
+            "hwc-status-danger-background": "is used to notify alerts and synchronize the HUAWEI CLOUD official website specifications.",
+            "hwc-status-warning-border": "is used to notify alerts and synchronize the HUAWEI CLOUD official website specifications.",
+            "hwc-status-warning-background": "is used to notify alerts and synchronize the HUAWEI CLOUD official website specifications.",
+            "hwc-status-info-border": "is used to notify alerts and synchronize the HUAWEI CLOUD official website specifications.",
+            "hwc-status-info-background": "is used to notify alerts and synchronize the HUAWEI CLOUD official website specifications.",
+            "hwc-status-success-border": "is used to notify alerts and synchronize the HUAWEI CLOUD official website specifications.",
+            "hwc-status-success-background": "is used to notify alerts and synchronize the HUAWEI CLOUD official website specifications.",
+            "hwc-feedback-overlay-background": "is used for tooltips, popover, global toast in the upper right corner, and synchronization of HUAWEI CLOUD official website specifications",
+            "hwc-feedback-overlay-font-color": "is used for tooltips, popover, global toast in the upper right corner, and synchronization of HUAWEI CLOUD official website specifications",
+            "color-bg-primary": "For important buttons",
+            "color-bg-primary-hover": "For important buttons",
+            "color-bg-primary-active": "For important buttons",
+            "hwc-drop-down-search": "Used for drop-down search box",
+            "hwc-drop-down-search-hover": "is used to drop-down search box",
+            "disabled-bg": "disabled background color",
+            "disabled-border": "disabled border color",
+            "disabled-content": "disabled content color"
+          }
+        }
       },
+      "anchorLinkValues": {
+        "color": "Color"
+      }
+    },
+    "design-shadow": {
+      "name": "Shadow",
+      "type": "Design Tokens",
+      "path": "design-shadow",
+      "description": "Common style specifications of ng-devui.",
+      "tmw": "When you want to query ng-devui related styles, scenario related styles, and changes of styles.",
       "shadowDemo": {
         "title": "Shadow",
         "description1": "1. The component library provides shadow variables for users in different scenarios. The following table lists the names, values, and application scenarios of these variables.",
         "description2": "2. By `@import' ~ng-devui/styles-var/devui-var.scss '; `.The shadow variable can be used after being introduced. ",
-        "description3": "3. If the style sheet is a less file, '@import' ~ng-devui/styles-var/devui-var.less '; `, and change the variable prefix '$' to '@'."
+        "description3": "3. If the style sheet is a less file, '@import' ~ng-devui/styles-var/devui-var.less '; `, and change the variable prefix '$' to '@'.",
+        "instance": {
+          "title": "Instance",
+          "description": "Shading table",
+          "defaultTable": {
+            "tab": "Default Theme Shadow Table",
+            "shadowName": "shadow variable name",
+            "shadowValue": "shadow variable value",
+            "description": "Description"
+          },
+          "oldTable": {
+            "tab": "Old Theme Shadow Comparison Table",
+            "shadowName": "shadow variable name",
+            "newShadowName": "New variable name",
+            "shadowValue": "shadow variable value",
+            "description": "Description"
+          },
+          "shadows": {
+            "devui-shadow-length-base": "Elements (such as cards) directly on the top of the page",
+            "devui-shadow-length-slide-left": "Shadow that appears on the right edge when slides leftward (dataTable fixed right column slides leftward)",
+            "devui-shadow-length-slide-right": "Shadow that appears on the left edge when slides rightward (dataTable fixes that the left column slides rightward)",
+            "devui-shadow-length-connected-overlay": "Pop-up (overlay) layer with connection points (Drop-down menu for DatePicker Cascader Select TagsInput Pagination, etc.)",
+            "devui-shadow-length-hover": "Where hover is involved",
+            "devui-shadow-length-feedback-overlay": "Information Prompt Feedback Class (PopOver Tooltip Toast StepsGuide, etc.)",
+            "devui-shadow-length-fullscreen-overlay": "Pop-up (overlay) layer without connection points (Drawer Modal ImagePreview, etc.)"
+          },
+          "oldShadows": {
+            "hwc-shadow-1": "Card, Warning",
+            "hwc-shadow-2": "Drop-down menu",
+            "hwc-shadow-3": "tips, global prompt",
+            "hwc-shadow-4": "Card component, floating",
+            "hwc-shadow-5": "Buy Floating Layer",
+            "hwc-shadow-6": "Button",
+            "hwc-shadow-7": "Popup window",
+            "hwc-shadow-8": "slider",
+            "hwc-shadow-error": "Error message",
+            "hwc-shadow-warn": "Alarm warning",
+            "hwc-shadow-prompt": "Prompt",
+            "hwc-shadow-success": "Success prompt",
+            "hwc-shadow-dark": "Dark background shadow"
+          }
+        }
       },
+      "anchorLinkValues": {
+        "shadow": "Shadow"
+      }
+    },
+    "design-font": {
+      "name": "Font",
+      "type": "Design Tokens",
+      "path": "design-font",
+      "description": "Common style specifications of ng-devui.",
+      "tmw": "When you want to query ng-devui related styles, scenario related styles, and changes of styles.",
       "fontDemo": {
         "title": "Font",
         "description1": "1. The component library provides font variables for users in different scenarios. The following table lists the names, values, and application scenarios of these variables.",
         "description2": "2. By `@import' ~ng-devui/styles-var/devui-var.scss '; `.The font variable can be used after being introduced.",
-        "description3": "3. If the style sheet is a less file, '@import' ~ng-devui/styles-var/devui-var.less '; `, and change the variable prefix '$' to '@'."
+        "description3": "3. If the style sheet is a less file, '@import' ~ng-devui/styles-var/devui-var.less '; `, and change the variable prefix '$' to '@'.",
+        "instance": {
+          "title": "Instance",
+          "description1": "I'm a page or card title.",
+          "description2": "I am the body, help information, supplementary information",
+          "tableTitle": "Font-related variable comparison table",
+          "defaultTable": {
+            "tab": "Default font-related variables",
+            "fontName": "Font-related variable name",
+            "fontValue": "Font-related variable values",
+            "description": "Description"
+          },
+          "oldTable": {
+            "tab": "Variants related to old fonts",
+            "fontName": "Variable name of the old font",
+            "newFontName": "Variable name related to the new font",
+            "fontValue": "Font-related variable values",
+            "description": "Description"
+          },
+          "fonts": {
+            "devui-font-size-data-overview": "Data Overview",
+            "devui-font-size-price": "Purchase price",
+            "devui-font-size-modal-title": "pop-up window title and number",
+            "devui-font-size-page-title": "Page Title",
+            "devui-font-size-card-title": "Card Title",
+            "devui-font-size": "Body, Help, Supplementary Information",
+            "devui-font-size-icon": "Icon Size",
+            "devui-font-size-sm": "Small Control Text Size",
+            "devui-font-size-md": "Medium Control Text Size",
+            "devui-font-size-lg": "Large Control Text Size",
+            "devui-font-title-weight": "Title text weight",
+            "devui-font-content-weight": "Content Text Thickness",
+            "devui-line-height-base": "Standard row height"
+          },
+          "oldFonts": {
+            "font-size-modal-title": "Title of the dialog box",
+            "font-size-primary": "Page Title, Level-1 Card Title",
+            "font-size-secondary-card-title": "Level-2 Card Title",
+            "font-size-base": "Body, Help, Supplementary Information",
+            "font-title-weight": "Title text weight",
+            "font-content-weight": "Content text weight",
+            "line-height-base": "Standard row height"
+          }
+        }
       },
+      "anchorLinkValues": {
+        "font": "Font"
+      }
+    },
+    "design-border-radius": {
+      "name": "BorderRadius",
+      "type": "Design Tokens",
+      "path": "design-border-radius",
+      "description": "Common style specifications of ng-devui.",
+      "tmw": "When you want to query ng-devui related styles, scenario related styles, and changes of styles.",
       "cornerDemo": {
         "title": "border-radius",
         "description1": "1. The component library provides border-radius variables for users in different scenarios. The following table lists the names, values, and application scenarios of these variables.",
         "description2": "2. By `@import' ~ng-devui/styles-var/devui-var.scss '; `.The border-radius variable can be used after being introduced.",
-        "description3": "3. If the style sheet is a less file, '@import' ~ng-devui/styles-var/devui-var.less '; `, and change the variable prefix '$' to '@'."
+        "description3": "3. If the style sheet is a less file, '@import' ~ng-devui/styles-var/devui-var.less '; `, and change the variable prefix '$' to '@'.",
+        "instance": {
+          "title": "Instance",
+          "tableTitle": "Round Corner Variable Comparison Table",
+          "table": {
+            "cornerName": "Round variable name",
+            "cornerValue": "Round variable value",
+            "description": "Description"
+          },
+          "borderRadius": {
+            "devui-border-radius": "General round corner",
+            "devui-border-radius-feedback": " Feedback Fillet",
+            "devui-border-radius-card": "Card fillet"
+          }
+        }
       },
       "anchorLinkValues": {
-        "href-a": "Link",
-        "color": "Color",
-        "shadow": "Shadow",
-        "font": "Font",
         "border-radius": "border-radius"
       }
     },
@@ -1549,7 +1864,7 @@
         "AppendToBody of dragFollowOptions is used in the following scenarios: If the parent object in the source location is destroyed after being dragged out, attach the clone to the body to prevent it from being destroyed. By default, the style of the cloned body is copied to ensure that the style of the cloned body is correct. However, some styles and attributes that depend on the DOM node location may fail. In this case, you need to manually adjust some styles.": "AppendToBody of dragFollowOptions is used in the following scenarios: If the parent object in the source location is destroyed after being dragged out, attach the clone to the body to prevent it from being destroyed. By default, the style of the cloned body is copied to ensure that the style of the cloned body is correct. However, some styles and attributes that depend on the DOM node location may fail. In this case, you need to manually adjust some styles."
       },
       "switchDemo": {
-        "title": "crossover exchange",
+        "title": "Crossover Exchange",
         "description": "Sets switchWhileCrossEdge to allow switching when crossing the edge. Note: This parameter cannot be used together with dropOnItem. This parameter is invalid when dropOnItem is set to true.",
         "Move the mouse over the edge of the element.": "Move the mouse over the edge of the element.",
         "Drag-and-drop sorting exchange": "Drag-and-drop sorting exchange"
@@ -1578,7 +1893,7 @@
         "Drag from here, the source placeholder disappears after it is placed. <strong> Animation</strong>": "Drag from here, the source placeholder disappears after it is placed. <strong> Animation</strong>"
       },
       "batchDragDemo": {
-        "title": "Batch dragging",
+        "title": "Batch Drag",
         "description": "You can use the batchDrag command to drag multiple markers in batches. Press Ctrl to select multiple markers and drag them.",
         "Batch dragging is supported. Press Ctrl to select multiple items and drag them.": "Batch dragging is supported. Press Ctrl to select multiple items and drag them.",
         "Show Source Placeholders": "Show Source Placeholders",
@@ -1586,8 +1901,8 @@
         "Clear Selected": "Clear Selected"
       },
       "crossDimensionDemo": {
-        "title": "Two-dimensional dragging And Dragging and previewing",
-        "description": "Use the dDragDropSyncBox, dDragSync, and dDropSync instructions to implement two-dimensional dragging. Use dDragPreview Configure drag and drop preview. Use the d-drag-preview-clone-dom-ref to clone a dragged node.",
+        "title": "2D Drag And Prewview Drag",
+        "description": "Use the dDragDropSyncBox, dDragSync, and dDropSync instructions to implement 2D drag. Use dDragPreview Configure drag and drop preview. Use the d-drag-preview-clone-dom-ref to clone a dragged node.",
         "Owner": "Owner",
         "To be allocated": "To be allocated",
         "Lin Huahua": "Lin Huahua",
@@ -2187,7 +2502,7 @@
         "insertKey": "Enter a keyword."
       },
       "ngModelDemo": {
-        "title": "Two-way Binding"
+        "title": "NgModel"
       },
       "leftIconDemo": {
         "title": "Left Search Icon"
@@ -2200,7 +2515,7 @@
       },
       "anchorLinkValues": {
         "basic-usage": "Basic Usage",
-        "bidirectional-binding": "Two-way Binding",
+        "bidirectional-binding": "NgModel",
         "icon-left": "Left Search Icon",
         "auto-focus": "Auto Focus",
         "search-no-border": "No Border"
@@ -2506,8 +2821,18 @@
         "title": "Basic Usage",
         "description": ""
       },
+      "spriteDemo": {
+        "title": "Sprite Usage",
+        "description": ""
+      },
+      "scrollDemo": {
+        "title": "Scroll Usage",
+        "description": "Specifying the Rolling Container."
+      },
       "anchorLinkValues": {
-        "basic-usage": "Basic Usage"
+        "basic-usage": "Basic Usage",
+        "sprite-usage": "Sprite Usage",
+        "scroll-usage": "Scroll Usage"
       }
     },
     "tabs": {
@@ -2535,15 +2860,33 @@
         "This is Tab2.": "This is Tab2.",
         "This is Tab3.": "This is Tab3."
       },
-      "configDemo": {
-        "title": "Configuration Type and Arrangement",
+      "typePillsDemo": {
+        "title": "Type Pills",
         "description": "test.",
         "Here's what Tab1 says.": "Here's what Tab1 says.",
         "This is Tab2.": "This is Tab2.",
-        "This is Tab3.": "This is Tab3.",
-        "Vertical arrangement:": "Vertical arrangement:",
-        "Option tabs:": "Option tabs:",
-        "Optiontabswithfixwidth100px:": "Optiontabswithfixwidth100px:"
+        "This is Tab3.": "This is Tab3."
+      },
+      "typeOptionsDemo": {
+        "title": "Type Options",
+        "description": "test.",
+        "Here's what Tab1 says.": "Here's what Tab1 says.",
+        "This is Tab2.": "This is Tab2.",
+        "This is Tab3.": "This is Tab3."
+      },
+      "typeSliderDemo": {
+        "title": "Type Slider",
+        "description": "test.",
+        "Here's what Tab1 says.": "Here's what Tab1 says.",
+        "This is Tab2.": "This is Tab2.",
+        "This is Tab3.": "This is Tab3."
+      },
+      "typeWrappedDemo": {
+        "title": "Type Wrapped",
+        "description": "test.",
+        "Here's what Tab1 says.": "Here's what Tab1 says.",
+        "This is Tab2.": "This is Tab2.",
+        "This is Tab3.": "This is Tab3."
       },
       "beforeChangeDemo": {
         "title": "Intercept Tab Switching",
@@ -2561,7 +2904,10 @@
         "basic-usage": "Basic Usage",
         "no-set-content": "No Content",
         "custom-template": "Customizing a Template",
-        "configuration-type-and-arrangement": "Configuration Type and Arrangement",
+        "type-pills": "Type Pills",
+        "type-options": "Type Options",
+        "type-slider": "Type Slider",
+        "type-wrapped": "Type Wrapped",
         "intercept-tab-switch": "Intercept Tab Switching",
         "custom-tabs-display-and-arrangement": "Customizing Tabs Display and Arrange"
       }
@@ -2598,11 +2944,11 @@
         "title": "Asynchronous data source"
       },
       "ngmodelDemo": {
-        "title": "Two-way Binding"
+        "title": "NgModel"
       },
       "anchorLinkValues": {
         "basic-usage": "Basic Usage",
-        "ng-model": "Two-way Binding",
+        "ng-model": "NgModel",
         "async-input": "Asynchronous data source"
       }
     },
@@ -2715,6 +3061,35 @@
         "async-usage": "Get Data Asynchronous"
       }
     },
+    "mention": {
+      "name": "Mention",
+      "type": "Feedback",
+      "path": "mention",
+      "description": "mention component",
+      "tmw": "When need to mention someone or something.",
+      "basicDemo": {
+        "title": "Basic Usage",
+        "description": "Associate a piece of information in the specified information list."
+      },
+      "asyncDemo": {
+        "title": "Async",
+        "description": "Associate asynchronous data."
+      },
+      "prefixDemo": {
+        "title": "Custom Prefix",
+        "description": "Custom Prefix"
+      },
+      "customDemo": {
+        "title": "Custom Template",
+        "description": "Customize a template for displaying a single record in the list."
+      },
+      "anchorLinkValues": {
+        "basic-usage": "Basic Usage",
+        "async-usage": "Async Usage",
+        "custom-prefix": "Custom Prefix",
+        "custom-template": "Custom Template"
+      }
+    },
     "toggle": {
       "name": "Toggle",
       "type": "Data entry",
@@ -2732,7 +3107,7 @@
         "cancel": "cancels"
       },
       "twoBindingDemo": {
-        "title": "Two-way Binding"
+        "title": "NgModel"
       },
       "customDemo": {
         "title": "Custom Style"
@@ -2742,7 +3117,7 @@
       },
       "anchorLinkValues": {
         "basic-usage": "Basic Usage",
-        "two-binding": "Two-way Binding",
+        "two-binding": "NgModel",
         "callback": "Callback Event",
         "custom": "Custom Style"
       }
@@ -2941,6 +3316,24 @@
         "custom": "Customize",
         "dynamic-upload-options": "Dynamic Upload Parameters",
         "customize-area-upload": "Customize Area to Upload"
+      }
+    },
+    "user-guide": {
+      "name": "UserGuide",
+      "type": "Navigation",
+      "path": "user-guide",
+      "description": "A user guide that can remotely orchestrate steps. Multiple sets of guides can be orchestrated and interact with users in addition to basic visual instructions.",
+      "basicDemo": {
+        "title": "Component Mode",
+        "description": "This component is introduced on the page to be used. The user guide floating entrance is displayed in the lower left corner of the page. Click this component and select the tutorial you want to experience to start the guide."
+      },
+      "serviceWayDemo": {
+        "title": "Service Mode",
+        "description": "Use the user-guide as a service. The interface is exposed to users. The entrance to a tutorial can be customized. In this mode, UserGuideCmdService needs to be introduced to the component that uses the user-guide."
+      },
+      "anchorLinkValues": {
+        "user-guide-basic": "Component Mode",
+        "user-guide-service-way": "Service Mode"
       }
     },
     "input-number": {
@@ -3267,30 +3660,6 @@
         "custom": "Custom"
       }
     },
-    "polyfill": {
-      "name": "Polyfills",
-      "type": "Extended service",
-      "path": "polyfill",
-      "description": "Polyfill.",
-      "tmw": "To solve the method that is not supported by the browser of an earlier version.",
-      "basicDemo": {
-        "title": "Usage",
-        "description": "Currently, there are few implementation methods and are mainly used by the rich text component. Therefore, the putty script file is stored in the rich text module. When using the devcloud project or the project created by the Angular CLI, you can insert the following information into src/polyfills.ts: import' ng-devui/add-ons/editorx/polyfill '; The putty script is only a piece of JS code that is independently executed. You can also insert a static resource into the page for use.",
-        "name": "Polyfills",
-        "license": "License",
-        "size": "Size",
-        "browser": "Browser",
-        "des": "Description",
-        "remove": "Removes an object from the DOM tree to which it belongs",
-        "matches": "Check whether the specified selector string is matched. Browsers of earlier versions implement the MatchesSelector method with their own prefix. For example, msMatchesSelector",
-        "closest": "The ancestor element that matches a particular selector and is closest to the current element(or the current element itself)",
-        "event": "Events that occur in the DOM",
-        "forEach": "Method of sequentially traversing the collection of nodes"
-      },
-      "anchorLinkValues": {
-        "basic-usage": "Usage"
-      }
-    },
     "time-picker": {
       "name": "TimePicker",
       "type": "Evolving",
@@ -3346,12 +3715,17 @@
         "title": "Basic Usage",
         "description": ""
       },
+      "customDemo": {
+        "title": "Customize drop-down list box",
+        "description": "Use a template to customize the drop-down list box"
+      },
       "autoScrollDemo": {
         "title": "Large-scale data display optimization",
         "description": ""
       },
       "anchorLinkValues": {
         "basicDemo": "Basic Usage",
+        "customDemo": "Customize drop-down list box",
         "autoScrollDemo": "Large-scale data display optimization"
       }
     },

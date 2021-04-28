@@ -36,6 +36,7 @@
 }
 
 .devui-nav-sprite-content {
+  width: 100%;
   padding: 0 12px 16px 12px;
 
   .devui-nav-sprite-header {
@@ -77,21 +78,14 @@
     overflow: hidden;
 
     a {
-      display: block;
-      width: 110px;
-      overflow: hidden;
       color: $devui-text;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      -webkit-transition: all 0.3s ease;
-      transition: all 0.3s ease;
-    }
-
-    a.current {
-      color: $devui-link;
     }
 
     &.active {
+      a {
+        color: $devui-link;
+      }
+
       color: $devui-link;
     }
   }

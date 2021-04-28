@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
+import { ToastService } from 'ng-devui/toast';
 import { from, Observable, Subscription } from 'rxjs';
 import { debounceTime, last, map, mergeMap } from 'rxjs/operators';
 import {
@@ -75,7 +76,8 @@ export class MultipleUploadComponent implements OnDestroy, OnInit {
 
   constructor(
     private selectFiles: SelectFiles,
-    private i18n: I18nService) { }
+    private i18n: I18nService,
+    private toastService: ToastService) { }
   ngOnInit(): void {
     this.i18nText = this.i18n.getI18nText().upload;
     this.i18nCommonText = this.i18n.getI18nText().common;
@@ -101,7 +103,7 @@ export class MultipleUploadComponent implements OnDestroy, OnInit {
   }
 
   simulateSelectFiles(files) {
-    return  new Promise((resolve) => {
+    return new Promise((resolve) => {
       resolve(Array.prototype.slice.call(files));
     });
   }
@@ -119,10 +121,10 @@ export class MultipleUploadComponent implements OnDestroy, OnInit {
           if (this.uploadOptions.checkSameName && sameNameFiles.length) {
             this.alertMsg(this.i18nText.getExistSameNameFilesMsg(sameNameFiles));
           }
-          this.onChange(this.multipleUploadViewComponent.fileUploaders.map(fileUploader =>  fileUploader.file));
+          this.onChange(this.multipleUploadViewComponent.fileUploaders.map(fileUploader => fileUploader.file));
           const selectedFiles = this.multipleUploadViewComponent.fileUploaders
-          .filter(fileUploader =>  fileUploader.status === UploadStatus.preLoad)
-          .map(fileUploader =>  fileUploader.file);
+            .filter(fileUploader => fileUploader.status === UploadStatus.preLoad)
+            .map(fileUploader => fileUploader.file);
           this.onFileSelect(selectedFiles);
           if (this.autoUpload) {
             this.upload();
@@ -227,7 +229,7 @@ export class MultipleUploadComponent implements OnDestroy, OnInit {
 
   _onDeleteUploadedFile(filePath: string) {
     this.deleteUploadedFileEvent.emit(filePath);
-    this.onChange(this.multipleUploadViewComponent.fileUploaders.map(fileUploader =>  fileUploader.file));
+    this.onChange(this.multipleUploadViewComponent.fileUploaders.map(fileUploader => fileUploader.file));
   }
 
   deleteFile($event, file) {
@@ -236,7 +238,9 @@ export class MultipleUploadComponent implements OnDestroy, OnInit {
   }
 
   alertMsg(errorMsg) {
-    this.errorMsg = [{ severity: 'warn', detail: errorMsg }];
+    this.toastService.open({
+      value: [{ severity: 'warn', content: errorMsg }],
+    });
   }
 
   getStatus() {

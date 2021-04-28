@@ -1,4 +1,6 @@
-@import '../../../devui/style/theme/color';
+@import '~ng-devui/styles-var/devui-var.scss';
+
+$header-z-index: 9;
 
 :host ::ng-deep section h4,
 :host ::ng-deep section h5 {
@@ -45,14 +47,18 @@ div.markdown {
   position: sticky;
   background: $devui-base-bg;
   top: 50px;
-  z-index: 9;
+  z-index: $header-z-index;
   margin-top: 0;
   padding: 30px 0 20px 0;
+}
+
+.devui-docs-header {
+  z-index: $header-z-index;
 }
 
 .d-website-demo-tabs {
   position: sticky;
   top: 125px;
   background: $devui-base-bg;
-  z-index: 9;
+  z-index: $header-z-index;
 }

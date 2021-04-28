@@ -1,0 +1,10 @@
+<textarea
+  dTextarea
+  placeholder="Please Enter"
+  id="textArea"
+  dMention
+  [mentionSuggestions]="suggestions"
+  [mentionTrigger]="prefixes"
+  [mentionPosition]="'top'"
+  (mentionSearchChange)="searchChangeHandler($event)"
+></textarea>

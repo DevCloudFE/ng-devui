@@ -2,6 +2,9 @@
   <div class="d-overview-introduce">
     <h1>
       {{ overviewText.title }}
+      <span class="d-overview-total-components">
+        {{ totalNumComponents }}
+      </span>
     </h1>
     <p class="d-overview-introduce-description">
       {{ overviewText.description }}
@@ -10,33 +13,86 @@
   </div>
   <ul class="d-overview-components" *ngIf="componentsDataDisplay.length">
     <li class="d-overview-components-list" *ngFor="let components of componentsDataDisplay">
-      <div class="d-overview-component-title">
-        <h2>
-          {{ components.title }}
-        </h2>
-        <span class="d-overview-component-count">
-          {{ components.children.length }}
-        </span>
-      </div>
-      <div class="d-overview-component-wrapper">
-        <d-card *ngFor="let component of components.children" (click)="jumpToComponent(component.link)">
-          <div class="d-overview-card-wrapper">
-            <div class="d-overview-card-new" *ngIf="scopeList.includes(component.lowerName)">
-              {{ overviewText.newChange }}
-            </div>
-            <div class="d-overview-card-icon">
-              <img src="{{ imgPrefix + component.enType + '/' + component.name + '.png' }}" alt="" />
-            </div>
-            <p class="d-overview-card-title">
-              {{ component.title }}
-            </p>
-          </div>
-        </d-card>
-        <div class="d-component-place-holder" *ngFor="let placeHolder of flexPlaceHolders"></div>
-      </div>
+      <ng-container *ngIf="!components.nodisplay">
+        <div class="d-overview-component-title">
+          <h2>
+            {{ components.title }}
+          </h2>
+          <span class="d-overview-component-count">
+            {{ components.children.length }}
+          </span>
+        </div>
+        <div class="d-overview-component-wrapper">
+          <ng-container *ngFor="let component of components.children">
+            <d-card *ngIf="!component.nodisplay" (click)="jumpToComponent(component.link)">
+              <div class="d-overview-card-wrapper">
+                <div class="d-overview-card-new" *ngIf="newScopeList.includes(component.lowerName)">
+                  {{ overviewText.newChange }}
+                </div>
+                <div class="d-overview-card-icon">
+                  <img
+                    src="{{ imgPrefix + component.folderName + '/' + component.lowerName + '.png' }}"
+                    alt=""
+                    (error)="imgError($event)"
+                  />
+                </div>
+                <p class="d-overview-card-title">
+                  {{ component.title }}
+                </p>
+              </div>
+            </d-card>
+          </ng-container>
+          <div class="d-component-place-holder" *ngFor="let placeHolder of flexPlaceHolders"></div>
+        </div>
+      </ng-container>
     </li>
   </ul>
   <div class="d-overview-no-data" *ngIf="!componentsDataDisplay.length">
-    <img src="./{{ srcPrefix }}/no-data{{ darkMode }}.png" alt="no-data" />
+    <img class="d-overview-no-data-img" src="./{{ srcPrefix }}/no-data{{ darkMode }}.svg" alt="no-data" />
+    <div class="d-overview-no-data-wrap">
+      <div *ngIf="componentsLooking && componentsLooking.length">
+        <h2 class="d-overview-no-data-title">
+          {{ overviewText.lookingCmp }}
+        </h2>
+        <div class="d-overview-no-data-list d-overview-component-wrapper">
+          <d-card *ngFor="let component of componentsLooking" (click)="jumpToComponent(component.link)">
+            <div class="d-overview-card-wrapper">
+              <div class="d-overview-card-new" *ngIf="newScopeList.includes(component.lowerName)">
+                {{ overviewText.newChange }}
+              </div>
+              <div class="d-overview-card-icon">
+                <img src="{{ imgPrefix + component.folderName + '/' + component.lowerName + '.png' }}" alt="" (error)="imgError($event)" />
+              </div>
+              <p class="d-overview-card-title">
+                {{ component.title }}
+              </p>
+            </div>
+          </d-card>
+          <div class="d-component-place-holder" *ngFor="let placeHolder of flexPlaceHolders"></div>
+        </div>
+      </div>
+
+      <div *ngIf="componentsSuggest && componentsSuggest.length">
+        <h2 class="d-overview-no-data-title">
+          {{ overviewText.suggestCmp }}
+        </h2>
+        <div class="d-overview-no-data-list d-overview-component-wrapper">
+          <d-card *ngFor="let component of componentsSuggest" (click)="jumpToComponent(component.link)">
+            <div class="d-overview-card-wrapper">
+              <div class="d-overview-card-new" *ngIf="newScopeList.includes(component.lowerName)">
+                {{ overviewText.newChange }}
+              </div>
+              <div class="d-overview-card-icon">
+                <img src="{{ imgPrefix + component.folderName + '/' + component.lowerName + '.png' }}" alt="" (error)="imgError($event)" />
+              </div>
+              <p class="d-overview-card-title">
+                {{ component.title }}
+              </p>
+            </div>
+          </d-card>
+          <div class="d-component-place-holder" *ngFor="let placeHolder of flexPlaceHolders"></div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

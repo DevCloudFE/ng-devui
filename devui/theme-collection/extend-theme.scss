@@ -3,7 +3,8 @@
 body[ui-theme='infinity-theme'],
 body[ui-theme='sweet-theme'],
 body[ui-theme='provence-theme'],
-body[ui-theme='deep-theme'] {
+body[ui-theme='deep-theme'],
+body[ui-theme='galaxy-theme'] {
   // TODO: 组件支持全局配置默认尺寸参数后删除
   // button default size change to '32px'
   .devui-btn:not(.devui-btn-xs):not(.devui-btn-sm):not(.devui-btn-lg) {
@@ -11,7 +12,7 @@ body[ui-theme='deep-theme'] {
     line-height: 32px;
   }
 
-  d-tabs .devui-nav {
+  d-tabs {
     display: inline;
 
     --devui-font-size-card-title: 14px;
@@ -309,8 +310,25 @@ body[ui-theme='deep-theme'] {
 }
 
 body[ui-theme='infinity-theme'] {
-  d-tabs {
+  d-tabs .devui-nav {
     --devui-brand: #252b3a;
     --devui-brand-active: #252b3a;
+  }
+}
+
+body[ui-theme='galaxy-theme'] {
+  d-tabs .devui-nav-slider {
+    --devui-tab-slider-bg: #313131;
+    --devui-text: #a3a3a3;
+    --devui-brand-active: #ffffff;
+    --devui-base-bg: #3f3f3f;
+  }
+
+  d-button .devui-btn-common {
+    --devui-block: transparent;
+  }
+
+  d-button .devui-btn-primary:disabled {
+    --devui-light-text: #838383;
   }
 }

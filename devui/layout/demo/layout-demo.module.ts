@@ -1,14 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 import { AccordionModule } from 'ng-devui/accordion';
 import { BreadcrumbModule } from 'ng-devui/breadcrumb';
+import { LayoutModule } from 'ng-devui/layout';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
-import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
-import { LayoutModule } from '../layout.module';
 import { LayoutBasicComponent } from './basic/layout-basic.component';
 import { LayoutDemoComponent } from './layout-demo.component';
 import { LayoutTopAsideComponent } from './top-aside/top-aside.component';

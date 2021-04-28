@@ -36,7 +36,7 @@ In the page:
 |    disabled     |            `boolean`            |          false          | Optional. Disabled is unavailable.                                                                                               | [Basic Usage](demo#basic-usage) |
 | showAnimation | `boolean` | true | optional. Whether to enable animation. |   | ✔ |
 
-Note: In addition to the "tags" mode, you can also use the "ngModel" mode to bind arrays. For details, see [Two-way Binding](demo#ng-model).
+Note: In addition to the "tags" mode, you can also use the "ngModel" mode to bind arrays. For details, see [NgModel](demo#ng-model).
 
 ## d-tags-input event
 

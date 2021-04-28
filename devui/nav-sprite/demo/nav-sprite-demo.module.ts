@@ -1,14 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+import { NavSpriteModule } from 'ng-devui/nav-sprite';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
-import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
-import { NavSpriteModule } from '../nav-sprite.module';
 import { BasicComponent } from './basic/basic.component';
 import { NavSpriteDemoComponent } from './nav-sprite-demo.component';
+import { ScrollContainerComponent } from './scroll-container/scroll-container.component';
 
 @NgModule({
   imports: [
@@ -31,6 +32,6 @@ import { NavSpriteDemoComponent } from './nav-sprite-demo.component';
       },
     ]),
   ],
-  declarations: [NavSpriteDemoComponent, BasicComponent]
+  declarations: [NavSpriteDemoComponent, BasicComponent, ScrollContainerComponent]
 })
 export class NavSpriteDemoModule { }

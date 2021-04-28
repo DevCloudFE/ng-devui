@@ -254,8 +254,9 @@ d-tag {
     padding: 4px 4px 0;
 
     li {
+      display: flex;
       flex-grow: 0;
-      white-space: nowrap;
+      flex-flow: row wrap;
 
       &:first-child {
         margin-left: 0;
@@ -292,11 +293,17 @@ d-tag {
 }
 
 ::ng-deep {
-  .cdk-overlay-container d-datepicker[id='devui-category-search-date-picker'] .devui-month-view {
-    box-shadow: none !important;
+  .cdk-overlay-container {
+    d-datepicker[id='devui-category-search-date-picker'] .devui-month-view {
+      box-shadow: none !important;
 
-    tfoot {
-      display: none;
+      tfoot {
+        display: none;
+      }
+    }
+
+    .devui-selected-tags-list ul li .remove-button {
+      right: 8px;
     }
   }
 

@@ -44,7 +44,7 @@ export class ThemeService {
     this.context = context === undefined ? new ContextService() : context;
   }
 
-  initializeTheme(specificThemeId?: string) {
+  initializeTheme(specificThemeId?: string, allowDynamicTheme?: boolean) {
     const themeId = specificThemeId
                 || this.storage.tryGetLocalStorage(THEME_KEY.userLastPreferTheme)
                 || this.context.getDataFromNameSpace(THEME_KEY.currentTheme);
@@ -62,6 +62,9 @@ export class ThemeService {
       data: {}
     };
     this.createColorTransition();
+    if (!theme && allowDynamicTheme) {
+      return;
+    }
     this.applyTheme(this.currentTheme);
   }
 

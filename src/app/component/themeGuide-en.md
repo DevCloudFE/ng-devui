@@ -4,9 +4,9 @@
 
 No action is required.
 
-## Enable theme
+## Enable the theme
 
-Angular CLI project, which can be imported in main.ts
+If the project is built with Angular CLI, it's allowed to importing the theme in main.ts
 
 ```typescript
 // main.ts
@@ -30,7 +30,7 @@ ThemeServiceInit(
 ): ThemeService;
 ```
 
-themes: All the themes map objects that can be switched to. The key value is the theme name, and the value value is the theme instance.
+themes: All the themes map objects that can be switched to. The key is the theme name, and the value is the theme instance.
 
 defaultThemeName: Default theme name, which is one of themes. If the previous theme name is not specified in localStorage, defaultThemeName is used.
 

@@ -2,11 +2,16 @@
   <d-tabs [(activeTab)]="tabActiveId" [cssClass]="'custom-tabs'">
     <d-tab *ngFor="let item of tabItems" [disabled]="item?.disabled" [id]="item.id">
       <ng-template dTabTitle>
-        {{ item.title }}
+        <div class="custom-title">
+          <i class="{{ item.icon }}"></i>
+          {{ item.title }}
+        </div>
       </ng-template>
       <ng-template dTabContent>
-        {{ item.content }}
-        <hr />
+        <div class="custom-content">
+          {{ item.content }}
+          <hr />
+        </div>
       </ng-template>
     </d-tab>
   </d-tabs>

@@ -1,4 +1,4 @@
-import { devuiLightTheme, Theme } from 'ng-devui/theme';
+import { devuiDarkTheme, devuiLightTheme, Theme } from 'ng-devui/theme';
 export const infinityTheme: Theme = new Theme({
     id: 'infinity-theme',
     name: '无限主题',
@@ -166,4 +166,50 @@ export const deepTheme: Theme = new Theme({
     },
     extends: 'infinity-theme',
     isDark: false
+});
+
+export const galaxyTheme: Theme = new Theme({
+    id: 'galaxy-theme',
+    name: '追光主题',
+    data: {
+        ...devuiDarkTheme.data,
+        'devui-brand-foil': '#F2F2F3',
+        'devui-global-bg': '#000000',
+        'devui-base-bg': '#1F1F1F',
+        'devui-text': '#F5F5F5',
+        'devui-aide-text': '#A3A3A3',
+        'devui-placeholder': '#616161',
+        'devui-disabled-text': '#838383',
+        'devui-disabled-bg': '#3F3F3F',
+        'devui-line': '#565656',
+        'devui-dividing-line': '#303030',
+        'devui-list-item-hover-bg': '#313131',
+        'devui-list-item-active-bg': '#30333D',
+        'devui-list-item-active-hover-bg': '#30333D',
+        'devui-list-item-selected-bg': '#30333D',
+        'devui-list-item-hover-text': '#F5F5F5',
+        'devui-list-item-active-text': '#526ECC',
+        'devui-primary-disabled': '#3f3f3f',
+        'devui-form-control-line': '#565656',
+        'devui-icon-text': '#A3A3A3',
+        'devui-connected-overlay-bg': '#282828',
+        'devui-fullscreen-overlay-bg': '#282828',
+        'devui-warning-line': '#a2622a',
+        'devui-warning-bg': '#4b2e14',
+        'devui-success-line': '#27846b ',
+        'devui-success-bg': '#123d32',
+        'devui-danger-line': '#9f4844',
+        'devui-danger-bg': '#4a2120',
+        'devui-info-line': '#3c5091',
+        'devui-info-bg': '#1c2543',
+        'devui-default-bg': '#313131',
+        'devui-border-radius': '4px',
+        'devui-font-size': '14px',
+        'devui-font-size-md': '14px',
+        'devui-font-size-card-title': '16px',
+        'devui-shadow-length-fullscreen-overlay': '0 0 6px 0',
+        'devui-border-radius-card': '4px'
+    },
+    extends: 'devui-dark-theme',
+    isDark: true
 });

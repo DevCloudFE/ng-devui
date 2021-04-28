@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
-import { TranslateModule } from '@ngx-translate/core';
+import { TimeAxisModule } from 'ng-devui/time-axis';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
-import { TimeAxisModule } from '../time-axis.module';
 import { TimeAxisAllStatesComponent } from './all-states/time-axis-all-states.component';
 import { TimeAxisDirectionComponent } from './direction/time-axis-direction.component';
 import { TimeAxisHtmlContentComponent } from './html-content/time-axis-html-content.component';
@@ -38,7 +38,7 @@ import { TimeAxisDemoComponent } from './time-axis-demo.component';
       TimeAxisHtmlContentComponent,
       TimeAxisTemplateContentComponent
       ],
-  
+
   providers: [],
 })
 export class TimeAxisDemoModule {

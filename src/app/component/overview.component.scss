@@ -6,6 +6,22 @@
   .d-overview-introduce {
     h1 {
       margin: 32px 0;
+      display: flex;
+      align-items: center;
+
+      .d-overview-total-components {
+        display: inline-block;
+        margin-left: 8px;
+        width: 16px;
+        height: 16px;
+        line-height: 16px;
+        text-align: center;
+        font-size: $devui-font-size;
+        color: $devui-disabled-text;
+        border: 1px solid $devui-disabled-line;
+        border-radius: $devui-border-radius;
+        background-color: $devui-disabled-bg;
+      }
     }
 
     .d-overview-introduce-description {
@@ -42,76 +58,71 @@
           background-color: $devui-disabled-bg;
         }
       }
+    }
+  }
 
-      .d-overview-component-wrapper {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
+  .d-overview-component-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 
-        .d-component-place-holder,
-        d-card {
-          width: 320px;
-          height: 0;
+    .d-component-place-holder,
+    d-card {
+      width: 320px;
+      height: 0;
+    }
+
+    d-card {
+      height: 230px;
+      margin-bottom: 18px;
+      cursor: pointer;
+      transition: box-shadow 0.3s cubic-bezier(0.645, 0.045, 0.355, 1), transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+
+      &:hover {
+        box-shadow: $devui-shadow-length-hover $devui-light-shadow;
+        transform: translateY(-5px);
+      }
+
+      .d-overview-card-wrapper {
+        text-align: center;
+        position: relative;
+
+        .d-overview-card-new {
+          position: absolute;
+          top: 0;
+          right: 0;
+          padding: 0 4px;
+          color: $devui-warning;
+          font-size: $devui-font-size;
+          border-radius: $devui-border-radius;
+          background-color: $devui-warning-bg;
+          border: 1px solid $devui-warning-line;
         }
 
-        d-card {
-          height: 230px;
-          margin-bottom: 18px;
-          cursor: pointer;
-          transition: box-shadow 0.3s cubic-bezier(0.645, 0.045, 0.355, 1), transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+        .d-overview-card-icon {
+          padding: 20px 0 32px 0;
+          height: 162px;
 
-          &:hover {
-            box-shadow: $devui-shadow-length-hover $devui-light-shadow;
-            transform: translateY(-5px);
+          img {
+            width: 110px;
+            height: 110px;
           }
+        }
 
-          .d-overview-card-wrapper {
-            text-align: center;
-            position: relative;
-
-            .d-overview-card-new {
-              position: absolute;
-              top: 0;
-              right: 0;
-              width: 52px;
-              height: 18px;
-              color: $devui-warning;
-              font-size: $devui-font-size;
-              border-radius: $devui-border-radius;
-              background-color: $devui-warning-bg;
-              border: 1px solid $devui-warning-line;
-            }
-
-            .d-overview-card-icon {
-              padding: 20px 0 32px 0;
-              height: 162px;
-
-              img {
-                width: 110px;
-                height: 110px;
-              }
-            }
-
-            .d-overview-card-title {
-              font-size: $devui-font-size-card-title;
-              line-height: $devui-line-height-base;
-              color: $devui-aide-text;
-            }
-          }
+        .d-overview-card-title {
+          font-size: $devui-font-size-card-title;
+          line-height: $devui-line-height-base;
+          color: $devui-aide-text;
         }
       }
     }
   }
 
   .d-overview-no-data {
-    height: 300px;
-    position: relative;
-
-    img {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+    .d-overview-no-data-img {
+      transform: translateX(-50%);
+      margin: 20px 0;
+      margin-left: 50%;
     }
   }
 }

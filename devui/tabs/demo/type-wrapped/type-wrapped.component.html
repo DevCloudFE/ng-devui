@@ -1,0 +1,6 @@
+<section>
+  <d-tabs [(activeTab)]="tabActiveId" type="wrapped" (activeTabChange)="activeTabChange($event)">
+    <d-tab *ngFor="let item of tabItems" [id]="item.id" [title]="item.title"> </d-tab>
+  </d-tabs>
+  <div style="padding: 10px">当前激活的Tab:{{ activeTabData.title }}</div>
+</section>

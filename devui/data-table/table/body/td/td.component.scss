@@ -35,6 +35,7 @@ svg.svg-icon-arrow > g > polygon {
 .cell-container-inner {
   position: absolute;
   max-width: 100%;
+  min-height: 24px;
 
   &.modify-holder {
     padding-right: 20px;

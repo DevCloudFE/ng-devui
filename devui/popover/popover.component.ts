@@ -20,6 +20,10 @@ import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { PopoverType } from './popover.types';
 
+interface PopoverStyle {
+  backgroundColor?: string;
+}
+
 @Component({
   selector: 'd-popover',
   templateUrl: './popover.component.html',
@@ -62,6 +66,7 @@ export class PopoverComponent implements OnInit, AfterViewInit, OnDestroy, OnCha
   @Input() zIndex = 1060;
   @Input() popType: PopoverType;
   @Input() popMaxWidth: number;
+  @Input() popoverStyle: PopoverStyle;
   /**
    * @deprecated Use mouseLeaveDelay to replace.
    */

@@ -26,7 +26,7 @@ export class AppComponent implements OnInit, OnDestroy {
     {
       name: '组件',
       enName: 'Components',
-      href: '/components/get-start',
+      href: '/components/overview',
       target: '_self'
     },
     {
@@ -55,7 +55,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
   ngOnInit(): void {
     this.currentLang = localStorage.getItem('lang') || this.appLang;
-    this.innerMenuList[1].href = `/components/${this.currentLang}/get-start`;
+    this.innerMenuList[2].href = `/components/${this.currentLang}/overview`;
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         const pathArray = this.router.url.split('/');
@@ -90,7 +90,7 @@ export class AppComponent implements OnInit, OnDestroy {
     pathArray[2] = this.currentLang;
     this.router.navigateByUrl(pathArray.join('/'));
 
-    this.innerMenuList[2].href = `/components/${this.currentLang}/get-start`;
+    this.innerMenuList[2].href = `/components/${this.currentLang}/overview`;
   }
   ngOnDestroy(): void {
     if (this.clickSub) {

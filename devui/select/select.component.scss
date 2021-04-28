@@ -312,14 +312,6 @@ div.devui-dropdown-menu.devui-dropdown-menu-multiple > ul.devui-list-unstyled li
 
 .devui-has-feedback {
   z-index: 1;
-
-  .devui-dropdown-origin-open > & {
-    z-index: 1001;
-  }
-
-  .devui-form-control-feedback {
-    z-index: 1001;
-  }
 }
 
 .devui-dropdown-menu ul.devui-dropdown-menu-wrap .devui-form-group.devui-has-feedback {

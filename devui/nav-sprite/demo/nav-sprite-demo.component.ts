@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -13,6 +13,12 @@ export class NavSpriteDemoComponent implements OnInit, OnDestroy {
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./basic/basic.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/basic.component.ts') },
     { title: 'SCSS', language: 'css', code: require('!!raw-loader!./basic/basic.component.scss') },
+  ];
+
+  scrollSource: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./scroll-container/scroll-container.component.html') },
+    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./scroll-container/scroll-container.component.ts') },
+    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./scroll-container/scroll-container.component.scss') },
   ];
 
   navItems = [];
@@ -36,7 +42,9 @@ export class NavSpriteDemoComponent implements OnInit, OnDestroy {
 
   setNavValues(values) {
     this.navItems = [
-      { dAnchorLink: 'basic', value: values['basic-usage'] }
+      { dAnchorLink: 'basic', value: values['basic-usage'] },
+      { dAnchorLink: 'sprite', value: values['sprite-usage'] },
+      { dAnchorLink: 'scroll', value: values['scroll-usage'] },
     ];
   }
 

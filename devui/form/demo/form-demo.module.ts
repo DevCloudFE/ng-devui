@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 import {
   DatepickerModule,
   EditableSelectModule,
@@ -22,14 +23,13 @@ import { SelectModule } from 'ng-devui/select';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
+import { StickyModule } from 'ng-devui/sticky';
 import { TagsInputModule } from 'ng-devui/tags-input';
 import { TextInputModule } from 'ng-devui/text-input';
 import { TextareaModule } from 'ng-devui/textarea';
 import { ToastModule } from 'ng-devui/toast';
 import { ToggleModule } from 'ng-devui/toggle';
-import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
-import { StickyModule } from '../../sticky';
 import { BasicComponent } from './basic/basic.component';
 import { CustomStatusComponent } from './custom-status/custom-status.component';
 import { FormDemoComponent } from './form-demo.component';
@@ -119,6 +119,6 @@ import { ValidateTemplateFormComponent } from './validate-template/validate-temp
     CustomStatusComponent,
     DebounceTimeComponent,
   ],
-  
+
 })
 export class FormDemoModule {}

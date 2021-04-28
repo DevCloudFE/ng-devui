@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
-import { TranslateModule } from '@ngx-translate/core';
+import { TagsModule } from 'ng-devui/tags';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
-import { TagsModule } from '../tags.module';
 import { BasicComponent } from './basic/basic.component';
 import { CustomComponent } from './custom/custom.component';
 import { TagsDemoComponent } from './tags-demo.component';
@@ -34,6 +34,6 @@ import { TagsDemoComponent } from './tags-demo.component';
   ],
   exports: [TagsDemoComponent],
   declarations: [TagsDemoComponent, BasicComponent, CustomComponent],
-  
+
 })
 export class TagsDemoModule {}

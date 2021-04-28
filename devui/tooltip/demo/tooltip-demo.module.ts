@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 import { ButtonModule } from 'ng-devui/button';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
-import { TranslateModule } from '@ngx-translate/core';
+import { TooltipModule } from 'ng-devui/tooltip';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
-import { TooltipModule } from '../tooltip.module';
 import { BasicComponent } from './basic/basic.component';
 import { DelayComponent } from './delay/delay.component';
 import { TooltipDemoComponent } from './tooltip-demo.component';
@@ -36,7 +36,7 @@ import { TooltipDemoComponent } from './tooltip-demo.component';
     BasicComponent,
     DelayComponent
   ],
-  
+
 })
 export class TooltipDemoModule {
 }

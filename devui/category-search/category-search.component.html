@@ -134,7 +134,7 @@
               [placeholder]="placeholderText || i18nCategorySearchText?.searchPlaceholder"
               [(ngModel)]="searchKey"
               (ngModelChange)="searchKeyChangeEvent($event)"
-              (click)="$event.stopPropagation(); openMenu(inputDropdown, $event)"
+              (click)="openMenu(inputDropdown, $event)"
               (keyup)="checkInputSearching($event); openMenu(inputDropdown, $event)"
               (keydown.backspace)="backspaceEvent(inputDropdown)"
               (keydown.enter)="searchInputValue($event); closeMenu(inputDropdown)"
@@ -160,7 +160,7 @@
                 <div class="devui-no-data-text" *ngIf="categoryDisplay.length === 0">{{ i18nCategorySearchText?.noFilterConditions }}</div>
               </ul>
             </ng-container>
-            <ng-container *ngIf="enterSearch && !currentSelectTag">
+            <ng-container *ngIf="enterSearch">
               <li class="devui-dropdown-item devui-search-description" (click)="searchInputValue($event); closeMenu(inputDropdown)">
                 <a><span class="icon-search" style="margin: 0 4px"></span>{{ i18nCategorySearchText?.getSearchMessage(searchKey) }}</a>
               </li>

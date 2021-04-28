@@ -1,7 +1,14 @@
 <div class="drawer-menu">
   <div [style.margin]="'20px 20px 0 0'" [style.text-align]="'right'" [style.cursor]="'pointer'">
     <span [style.margin-right]="'13px'" title="More" class="icon icon-more-operate"> </span>
-    <span [style.margin-right]="'7px'" title="Fullscreen" (click)="fullScreen($event)" class="icon icon-maxmize"> </span>
+    <span
+      [style.margin-right]="'7px'"
+      title="Fullscreen"
+      (click)="toggleFullScreen()"
+      class="icon"
+      [ngClass]="{ 'icon-maxmize': !isFullScreen, 'icon-minimize': isFullScreen }"
+    >
+    </span>
     <span (click)="close($event)" title="Close" class="icon icon-close"> </span>
   </div>
   <ul class="list-group" [style.margin-top.px]="20">

@@ -35,8 +35,14 @@
     }
   }
 
-  &:hover:not(.disabled) svg .devui-outer {
-    stroke: $devui-form-control-line-active;
+  &:hover:not(.disabled) {
+    svg .devui-outer {
+      stroke: $devui-form-control-line-active;
+    }
+
+    .devui-radio-label {
+      color: $devui-primary-hover;
+    }
   }
 
   &:active:not(.disabled),
@@ -117,6 +123,7 @@
     color: $devui-text;
     margin-left: 8px;
     font-size: $devui-font-size;
+    transition: color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
   }
 
   .devui-radio-input {

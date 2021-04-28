@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
-import { TranslateModule } from '@ngx-translate/core';
+import { TextareaModule } from 'ng-devui/textarea';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
-import { TextareaModule } from '../textarea.module';
 import { BasicComponent } from './basic/basic.component';
 import { ResizeComponent } from './resize/resize.component';
 import { TextDemoComponent } from './text-demo.component';
@@ -34,7 +34,7 @@ import { TextDemoComponent } from './text-demo.component';
     BasicComponent,
     ResizeComponent
   ],
-  
+
 })
 export class TextDemoModule {
 }

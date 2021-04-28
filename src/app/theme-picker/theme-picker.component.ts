@@ -2,6 +2,8 @@ import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Theme, ThemeService, ThemeServiceFollowSystemOff, ThemeServiceFollowSystemOn } from 'ng-devui/theme';
 import { Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { CustomThemeService } from './customize-theme/custom-theme.service';
+import { createTheme } from './customize-theme/util';
 // import { greenLightTheme } from './theme-data-more';
 
 @Component({
@@ -24,11 +26,13 @@ export class ThemePickerComponent implements OnInit, OnDestroy {
   advancedThemeList = [{ value: 'infinity',  url: 'assets/infinity.png' },
   { value: 'sweet', url: 'assets/sweet.png' },
   { value: 'provence',  url: 'assets/provence.png' },
-  { value: 'deep',  url: 'assets/deep.png' }];
+  { value: 'deep',  url: 'assets/deep.png' },
+  { value: 'galaxy',  url: 'assets/galaxy.png' }];
   currentAdvancedTheme = 'infinity';
   assetsPrefix = './';
   constructor(
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private cts: CustomThemeService
   ) { }
 
   ngOnInit() {
@@ -53,7 +57,16 @@ export class ThemePickerComponent implements OnInit, OnDestroy {
     return (this.theme.split('-')[0] !== 'devui' || this.theme.split('-')[0] !== 'green') ? 'devui' : this.theme.split('-')[0];
   }
   initTheme() {
-    if (this.checkInitThemeType()) {
+    if (this.isCustomizeTheme()) {
+      this.activeThemeType = 'customizeTheme';
+      try {
+        const {brand, isDark} =  JSON.parse(localStorage.getItem('user-custom-theme-config'));
+        this.themeService.applyTheme(createTheme(brand, isDark, this.cts));
+      } catch (e) {
+        this.activeThemeType = 'devuiTheme';
+        this.themesChange();
+      }
+    } else if (this.checkInitThemeType()) {
       this.activeThemeType = 'advancedTheme';
       this.currentAdvancedTheme = localStorage.getItem('user-custom-theme')?.split('-')[0];
       this.advancedThemeChange(this.currentAdvancedTheme);
@@ -62,9 +75,12 @@ export class ThemePickerComponent implements OnInit, OnDestroy {
       this.themesChange();
     }
   }
+  isCustomizeTheme() {
+    return localStorage.getItem('user-custom-theme')?.startsWith('customize-theme');
+  }
 
   checkInitThemeType() {
-    const advancedThemePrefixList = ['infinity', 'sweet', 'provence', 'deep'];
+    const advancedThemePrefixList = ['infinity', 'sweet', 'provence', 'deep', 'galaxy'];
     return advancedThemePrefixList.some(item => localStorage.getItem('user-custom-theme').startsWith(item));
   }
 

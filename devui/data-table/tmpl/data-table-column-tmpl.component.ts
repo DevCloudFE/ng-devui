@@ -1,6 +1,6 @@
 import {
-  ChangeDetectionStrategy, Component, ContentChild, EventEmitter, Input, OnChanges,
-  OnDestroy, OnInit, Output, SimpleChanges, TemplateRef
+    ChangeDetectionStrategy, Component, ContentChild, EventEmitter, Input, OnChanges,
+    OnDestroy, OnInit, Output, SimpleChanges, TemplateRef
 } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FilterConfig } from '../data-table.model';
@@ -31,6 +31,7 @@ export class DataTableColumnTmplComponent implements OnChanges, OnDestroy, OnIni
   @Input() filterable: boolean;
   @Input() closeFilterWhenScroll: boolean;
   @Input() cellClass: string;
+  @Input() nestedColumnIndent = 16;
   @Input() width: string;
   // @Input() fixed?: boolean;
   @Input() fixedLeft?: string;

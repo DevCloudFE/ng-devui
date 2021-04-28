@@ -93,7 +93,7 @@
       height: 50%;
       line-height: 50%;
       border-width: 0 1px;
-      transition: transform 0.2s ease-in-out;
+      transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
       display: flex;
       justify-content: center;
       align-items: center;
