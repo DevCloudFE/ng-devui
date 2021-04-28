@@ -1,4 +1,4 @@
-<div class="devui-pagination">
+<div class="devui-pagination" [hidden]="!(autoHide && pageSizeOptions[0] < total)">
   <div *ngIf="canChangePageSize && !lite" class="devui-page-size {{ size ? 'devui-page-size-' + size : '' }}">
     <d-select
       [scrollHight]="'200px'"
