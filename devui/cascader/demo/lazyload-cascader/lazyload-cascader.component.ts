@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CascaderItem } from '../../cascader.type';
+import { CascaderItem } from 'ng-devui/cascader';
 
 @Component({
   selector: 'd-demo-lazyload-cascader',

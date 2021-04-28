@@ -16,16 +16,19 @@ import { EventBus } from './utils';
  *
 */
 export function ThemeServiceInit(
-    themes?: {[themeName: string]: Theme},
-    defaultThemeName?: string,
-    extraData?: {[themeName: string]: {
+  themes?: { [themeName: string]: Theme },
+  defaultThemeName?: string,
+  extraData?: {
+    [themeName: string]: {
       appendClasses?: Array<string>,
       cssVariables?: {
         [cssVarName: string]: string
       }
-    }},
-    ieSupport = false // TODO：css-var-ponyflll 仍有一些问题待定位
-  ) {
+    }
+  },
+  ieSupport = false, // TODO：css-var-ponyflll 仍有一些问题待定位
+  allowDynamicTheme = false
+) {
   window[THEME_KEY.themeCollection] = themes || {
     'devui-light-theme': devuiLightTheme,
     'devui-dark-theme': devuiDarkTheme,
@@ -40,14 +43,14 @@ export function ThemeServiceInit(
       appendClasses: ['dark-mode']
     }
   });
-  themeService.initializeTheme();
+  themeService.initializeTheme(null, allowDynamicTheme);
   if (ieSupport) {
     ieSupportCssVar();
   }
   return themeService;
 }
 
-export function ThemeServiceFollowSystemOn(themeConfig?: { lightThemeName: string, darkThemeName: string}): Subscription {
+export function ThemeServiceFollowSystemOn(themeConfig?: { lightThemeName: string, darkThemeName: string }): Subscription {
   const themeService: ThemeService = window[THEME_KEY.themeService];
   themeService.registerMediaQuery();
   return themeService.mediaQuery.prefersColorSchemeChange.subscribe(value => {
@@ -67,13 +70,13 @@ export function ThemeServiceFollowSystemOff(sub?: Subscription) {
 }
 
 export function ieSupportCssVar() {
-  const isNativeSupport =  window['CSS'] && CSS.supports && CSS.supports('(--a: 0)') || false;
-  if (isNativeSupport) {return; }
-  cssVars({ watch: true, silent: true});
-  const observer = new MutationObserver(function(mutations) {
-    mutations.forEach(function(mutation) {
-      cssVars({ watch: false, silent: true});
-      cssVars({ watch: true, silent: true});
+  const isNativeSupport = window['CSS'] && CSS.supports && CSS.supports('(--a: 0)') || false;
+  if (isNativeSupport) { return; }
+  cssVars({ watch: true, silent: true });
+  const observer = new MutationObserver(function (mutations) {
+    mutations.forEach(function (mutation) {
+      cssVars({ watch: false, silent: true });
+      cssVars({ watch: true, silent: true });
     });
   });
 

@@ -16,7 +16,7 @@ In the page:
 
 |   Parameter    |   Type |  Default |      Description          |  Jump to Demo |Global Config| 
 | :----------------: | :---------: | :------------: | :-----: | :--------------------------------------------------------------------------- | |
-|     id      |             `string`            |   --   | Optional. button ID | [Primary Buttons](demo#button-primary)|
+|     id      |             `string`            |   --   | Optional. ID of the button. | [Primary Buttons](demo#button-primary)|
 |     type    |  [`IButtonType`](#ibuttontype)  |  'button' | Optional. The type is `'button' \| 'submit' \| 'reset'` |[Danger Buttons](demo#button-danger)   |
 |   bsStyle   | [`IButtonStyle`](#ibuttonstyle) |  'primary' | Optional. The style is `'primary' \| 'common' \| 'text' \| 'text-dark' \| 'danger'` | [Common Buttons](demo#button-common) |
 |   bsSize    |  [`IButtonSize`](#ibuttonsize)   |   'md'  | Optional. The size is `'lg' \| 'md' \| 'sm' \| 'xs'` | [Button Size](demo#button-size) |

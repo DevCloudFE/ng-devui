@@ -355,7 +355,7 @@ export class TimePickerComponent implements OnChanges, OnInit, OnDestroy, Contro
     }
 
     if (timeArr.length !== 3) {
-      if (timeArr.length === this.format.split(':').length) {
+      if (timeArr.length === this.format.split(':').length && !timeArr.some(t => t !== unshiftString(Number(t) + '', 2, '0'))) {
         return true;
       } else {
         return false;

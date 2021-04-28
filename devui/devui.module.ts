@@ -27,6 +27,7 @@ import { ImagePreviewModule } from 'ng-devui/image-preview';
 import { InputNumberModule } from 'ng-devui/input-number';
 import { LayoutModule } from 'ng-devui/layout';
 import { LoadingModule } from 'ng-devui/loading';
+import { MentionModule } from 'ng-devui/mention';
 import { ModalModule } from 'ng-devui/modal';
 import { MultiAutoCompleteModule } from 'ng-devui/multi-auto-complete';
 import { NavSpriteModule } from 'ng-devui/nav-sprite';
@@ -88,6 +89,7 @@ export * from 'ng-devui/image-preview';
 export * from 'ng-devui/input-number';
 export * from 'ng-devui/layout';
 export * from 'ng-devui/loading';
+export * from 'ng-devui/mention';
 export * from 'ng-devui/modal';
 export * from 'ng-devui/multi-auto-complete';
 export * from 'ng-devui/nav-sprite';
@@ -185,6 +187,7 @@ export * from './version';
     TimePickerModule,
     CascaderModule,
     CategorySearchModule,
+    MentionModule,
     NavSpriteModule,
     ReadTipModule,
   ],

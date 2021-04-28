@@ -1,5 +1,16 @@
-<section class="markdown api-container">
+<section class="markdown api-container" #targetContainer>
   <ng-container *ngIf="api">
     <div [innerHTML]="api | safe: 'html'"></div>
   </ng-container>
 </section>
+
+<d-nav-sprite
+  [scrollTarget]="scrollContainer"
+  [target]="targetContainer"
+  [height]="300"
+  [indent]="1"
+  [hashSupport]="true"
+  [title]="'API'"
+  [view]="{ top: 160, bottom: 0 }"
+  (afterNavInit)="afterNavInit($event)"
+></d-nav-sprite>

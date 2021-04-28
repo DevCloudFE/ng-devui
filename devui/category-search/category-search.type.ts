@@ -36,7 +36,7 @@ export interface ICategorySearchTagItem {
   /**
   * 自定义下拉模板的展示内容
   */
-  customTemplate?: TemplateRef<any>;
+  customTemplate: TemplateRef<any>;
   /**
    * 已选中值
    */

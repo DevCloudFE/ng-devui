@@ -81,6 +81,9 @@ export class ToastComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.container) {
       this.handleValueChange();
     }
+    if (val?.length === 0) {
+      this.onHidden();
+    }
   }
 
   isTemplate(content) {
@@ -106,7 +109,8 @@ export class ToastComponent implements OnInit, AfterViewInit, OnDestroy {
 
   // Will overwrite this method in modal service
   close() {}
-
+  // Will overwrite by drawer service
+  onHidden() {}
   handleValueChange() {
     this.zIndex++;
     const doms = this.container.children;
@@ -149,6 +153,7 @@ export class ToastComponent implements OnInit, AfterViewInit, OnDestroy {
       if (this.container.querySelectorAll('.slide-in').length === 0) {
         this.value = [];
         this.valueChange.emit(this.value);
+        this.onHidden();
       } else {
         this.rest = this.rest.filter((item) => item !== msg);
         this.valueChange.emit(this.rest);
@@ -193,6 +198,9 @@ export class ToastComponent implements OnInit, AfterViewInit, OnDestroy {
       this.closeEvent.emit({ message: this.value[index] });
       this._value = this.value.filter((val, i) => i !== index);
       this.valueChange.emit(this._value);
+      if (this.container.querySelectorAll('.slide-in').length === 0) {
+        this.onHidden();
+      }
       if (this.lifeMode === 'global') {
         this.removeReset();
       }

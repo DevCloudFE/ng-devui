@@ -1,0 +1,7 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
+.modal {
+  height: 100px;
+  width: 100px;
+  box-shadow: $devui-shadow-length-fullscreen-overlay $devui-light-shadow;
+}

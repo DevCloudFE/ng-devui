@@ -80,7 +80,7 @@ export interface ICategorySearchTagItem {
   /**
    * Customize the content to be displayed in the drop-down list box.
    */
-  customTemplate?: TemplateRef<any>;
+  customTemplate: TemplateRef<any>;
   /**
    * Selected Value
    */

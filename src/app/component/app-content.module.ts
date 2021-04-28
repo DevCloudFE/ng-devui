@@ -7,9 +7,8 @@ import typescript from 'highlight.js/lib/languages/typescript';
 import xml from 'highlight.js/lib/languages/xml';
 import { DevUIModule } from 'ng-devui';
 import { SafePipeModule } from 'ng-devui/utils';
-import { DevuiCommonsModule } from '../../../devui-commons/src';
+import { DevuiCommonsModule } from '../../../devui-commons/src/public-api';
 import { AppContentComponent } from './app-content.component';
-import { ColorComponent } from './color/color.component';
 import { ComponentDataService } from './component.data.service';
 import { routesConfig } from './component.route';
 import { ExamplePanelComponent } from './example-panel.component';
@@ -32,7 +31,6 @@ export function hljsLanguages() {
     AppContentComponent,
     ComponentsOverviewComponent,
     GetStartedComponent,
-    ColorComponent,
     ThemeGuideComponent,
     GlobalConfigComponent
   ],

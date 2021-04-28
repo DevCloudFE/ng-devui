@@ -21,9 +21,8 @@ export class AppContentComponent implements OnInit, OnDestroy {
   sideMenuList = [
     {path: 'overview', name: '组件总览', linkType: 'routerLink' },
     {path: 'get-start', name: '快速开始', linkType: 'routerLink' },
-    {path: 'color', name: '颜色变量', linkType: 'routerLink' },
     {path: 'theme-guide', name: '主题化使用指南', linkType: 'routerLink' },
-    {path: 'global-config', name: '全局设置', linkType: 'routerLink' }
+    {path: 'global-config', name: '全局设置', linkType: 'routerLink' },
   ];
   clickSub: Subscription = new Subscription();
   // @ViewChild('dSearch', { static: true }) dSearch: SearchComponent;
@@ -46,9 +45,8 @@ export class AppContentComponent implements OnInit, OnDestroy {
   generateSideMenuList(values) {
     this.sideMenuList[0].name = values['overview']?.title;
     this.sideMenuList[1].name = values['start'];
-    this.sideMenuList[2].name = values['color'];
-    this.sideMenuList[3].name = values['themeDoc'];
-    this.sideMenuList[4].name = values['globalDoc'];
+    this.sideMenuList[2].name = values['themeDoc'];
+    this.sideMenuList[3].name = values['globalDoc'];
   }
 
   ngOnDestroy(): void {

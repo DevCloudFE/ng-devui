@@ -34,6 +34,7 @@ In the page:
 |       ~~showAnimate~~       |       `boolean`     |     true     | Optional. Whether to display animation （`deprecated，Use showAnimation`）  | [Basic Usage](demo#basic-usage)   |
 |  mouseEnterDelay  |                          `number`                          |                 150                  | Optional. Only when the type of trigger is hover. Delay for displaying Popover after the mouse is enter. The unit is `ms`  | [Delay Trigger](demo#hover-delay-time) |
 |  mouseLeaveDelay  |                          `number`                          |                 100                  | Optional. Only when the type of trigger is hover. Delay for hiding Tooltip after the mouse is leave. The unit is `ms`  | [Delay Trigger](demo#hover-delay-time) |
+|   popoverStyle    |               `{[klass:string]:any;}`                 |                  --                  | Optional. When you need to change the style of the pop-up layer, the same background color is applied to the arrows. Style. Refer to [ngStyle](https://angular.io/api/common/NgStyle) | [Custom Tips](demo#custom-prompt-content) |
 
 # Interface & Type Definition
 

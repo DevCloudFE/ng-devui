@@ -13,7 +13,15 @@
   [loadChildrenTable]="loadChildrenTable"
   [loadAllChildrenTable]="loadAllChildrenTable"
 >
-  <d-column [order]="1" field="title" header="title" [width]="'40%'" [nestedColumn]="true" [extraOptions]="extraOptions"></d-column>
+  <d-column
+    [order]="1"
+    field="title"
+    header="title"
+    [width]="'40%'"
+    [nestedColumn]="true"
+    [extraOptions]="extraOptions"
+    [nestedColumnIndent]="20"
+  ></d-column>
   <d-column [order]="2" field="lastName" header="name" [width]="'20%'"></d-column>
   <d-column [order]="3" field="status" header="status" [width]="'20%'"></d-column>
   <d-column

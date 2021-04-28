@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { HelperUtils } from '../../helper-utils';
+import { HelperUtils } from 'ng-devui';
 
 @Component({
   selector: 'd-common-helper-download',

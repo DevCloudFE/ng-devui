@@ -1,6 +1,6 @@
 import { ComponentFactoryResolver, Injectable, Injector, Renderer2, RendererFactory2, Type } from '@angular/core';
-import { OverlayContainerRef } from 'ng-devui/overlay-container';
 import { assign } from 'lodash-es';
+import { OverlayContainerRef } from 'ng-devui/overlay-container';
 import { Message, ToastComponent } from './toast.component';
 export interface IToastOptions {
   value?: Array<Message>;
@@ -65,6 +65,11 @@ export class ToastService {
             }
           }, 300);
         });
+      }
+    };
+    toastRef.instance.onHidden = () => {
+      if (toastRef?.hostView) {
+        toastRef.hostView.destroy();
       }
     };
     toastRef.instance.show();

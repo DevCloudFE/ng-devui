@@ -16,7 +16,7 @@ In the page:
 | :----------------: | :-----------: | :-------: | :---------------------: | :-------------------------------------- | ----------------------------------------------------- |
 | size | `string` |'' | Optional. Specifies the size of the search box. The options are lg, '', and sm. | [Basic Usage](demo#basic-usage) |
 | placeholder | `string` |'Please Input keywords' | Optional. This parameter specifies the placeholder in the input box. |
-| maxLength | `number` | Number.MAX_SAFE_INTEGER | Optional. Max-length of the text box. | [Two-way Binding](demo#bidirectional-binding) |
+| maxLength | `number` | Number.MAX_SAFE_INTEGER | Optional. Max-length of the text box. | [NgModel](demo#bidirectional-binding) |
 | delay | `number` | 300 | Optional. Delay of debounceTime. |
 | disabled | `boolean` | false | Optional. Indicating whether the text box is available. | [Basic Usage](demo#basic-usage)
 | autoFocus | `boolean` | false | Optional. Whether to enable autofocus for the text box. | [Auto Focus](demo#auto-focus) |

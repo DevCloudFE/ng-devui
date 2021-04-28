@@ -1,0 +1,18 @@
+<ul class="devui-mention-dropdown" dLoading [showLoading]="loading" [ngClass]="{ 'devui-mention-overlay-top': position === 'top' }">
+  <li
+    #items
+    class="devui-mention-dropdown-item"
+    *ngFor="let suggestion of suggestions; let i = index"
+    [class.focus]="i === activeIndex"
+    (mousedown)="$event.preventDefault()"
+    (click)="selectSuggestion(suggestion)"
+  >
+    <ng-container *ngIf="mentionItemTemplate; else defaultSuggestion">
+      <ng-container [ngTemplateOutlet]="mentionItemTemplate" [ngTemplateOutletContext]="{ $implicit: suggestion }"></ng-container>
+    </ng-container>
+    <ng-template #defaultSuggestion>{{ suggestion }}</ng-template>
+  </li>
+  <li class="devui-mention-dropdown-notfound devui-mention-dropdown-item" *ngIf="suggestions.length === 0">
+    <span *ngIf="!loading">{{ mentionNotFoundContent }}</span>
+  </li>
+</ul>

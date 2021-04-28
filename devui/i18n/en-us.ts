@@ -253,4 +253,11 @@ export default {
     seeMore: 'See more',
     selected: 'Selected'
   },
+  userGuide: {
+    guide: 'Guide',
+    prev: 'Prev',
+    next: 'Next',
+    finish: 'Finish',
+    autoFill: 'Click here to auto-populate'
+  }
 };

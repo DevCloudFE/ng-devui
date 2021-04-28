@@ -26,7 +26,7 @@ export class ToastServiceComponent {
       style: { width: '600px', color: 'red' },
       styleClass: 'myCustom-toast',
       life: 5000,
-      lifeMode: 'single ',
+      lifeMode: 'global',
     });
     /*
     接收发射过来的数据

@@ -27,9 +27,9 @@ In the page:
 | preLink | `string` | -- | Optional. Icon of the button on the previous page. The default value is the left arrow icon. | [Basic usage](demo#basic-usage) |
 | nextLink | `string` | -- | Optional. The icon is displayed on the next page. The default icon is the right arrow icon. | [Basic usage](demo#basic-usage) |
 | size | `number` |'' | Optional. Size of the pagination component. The options are lg, ``, and sm, indicating large, medium, and small respectively. | [Basic usage](demo#basic-usage) |
-| canJumpPage | `boolean` | true | Optional. Indicates whether to display pagination input jump. | [Basic usage](demo#basic-usage) |
+| canJumpPage | `boolean` | false | Optional. Indicates whether to display pagination input jump. | [Basic usage](demo#basic-usage) |
 | canChangePageSize | `boolean` | false | Optional. Display the drop-down list box for selecting the maximum number of entries on each page. | [Basic usage](demo#basic-usage) |
-| canViewTotal | `boolean` | true | Optional. Indicating whether to display the total number of entries. | [Basic usage](demo#basic-usage) |
+| canViewTotal | `boolean` | false | Optional. Indicating whether to display the total number of entries. | [Basic usage](demo#basic-usage) |
 | totalItemText | `string` |'All items' | Optional. Total item text | [Simplified mode](demo#minimalist-model) |
 | goToText | `string` |'Jump to' | Optional. Jump to text | [Basic usage](demo#basic-usage) |
 | showJumpButton | `boolean` | false | Optional. Whether to display the jump button | [Multiple configurations](demo#multiple-configurations) |

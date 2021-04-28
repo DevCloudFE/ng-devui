@@ -3,7 +3,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'd-customize',
-  templateUrl: './customize.component.html',
+  templateUrl: './customize.component.html'
 })
 export class CustomizeTmpComponent implements OnInit {
   content = this.domSanitizer.bypassSecurityTrustHtml(

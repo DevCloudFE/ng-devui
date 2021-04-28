@@ -9,7 +9,11 @@ export class DrawerContentComponent {
   @Input() fullScreen;
   @Input() close;
   @Input() changeWidth;
+  isFullScreen = false;
   constructor() {
   }
-
+  toggleFullScreen() {
+    this.isFullScreen = !this.isFullScreen;
+    this.fullScreen();
+  }
 }

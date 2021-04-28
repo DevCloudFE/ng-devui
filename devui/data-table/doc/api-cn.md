@@ -171,6 +171,7 @@ import { DataTableModule } from 'ng-devui/data-table';
 |   fixedRight    |            `string`             | --     |            可选，该列固定到右侧的距离，如：‘100px’             | [固定列](demo#fixed-column)  |
 |     editing     |            `boolean`            | --     |         可选，使用[(editing)]获取和控制单元格编辑状态          | [编辑单元格](demo#edit-cell) |
 |      field      |            `string`             | --     |  单元格所属列的字段，作为beforeEditStart、beforeEditEnd的参数  | [编辑单元格](demo#edit-cell) |
+| nestedColumnIndent|         `number`                | 16     |  单元格中子表格的缩进距离，单位px                              | [树形表格](demo#tree-form) |
 
 ## dTableCell 事件
 
@@ -346,6 +347,7 @@ export enum SortDirection {
 |            fixedRight             |            `string`             | --                |                            该列固定到右侧的距离，如：‘100px’                            | [固定列](demo#fixed-column)        |
 |          filterBoxWidth           |              `any`              | --                |                              过滤弹出框的宽度，如：‘300px’                              |
 |          filterBoxHeight          |              `any`              | --                |                              过滤弹出框的高度，如：‘400px’                              |
+|        nestedColumnIndent           |           `number`              | 16                |                            单元格中子表格的缩进距离，单位px                              | [树形表格](demo#tree-form) |
 
 ## d-column 事件
 

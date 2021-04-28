@@ -1454,7 +1454,7 @@ describe('data-table column', () => {
       tick();
       fixture.detectChanges();
       expect(component.toggleChange).toHaveBeenCalled();
-      const svgIcon = detailCell.nativeElement.querySelector('svg #chevron-up');
+      const svgIcon = detailCell.nativeElement.querySelector('svg');
       expect(svgIcon).toBeTruthy();
       // test other detail row
       fixture.detectChanges();

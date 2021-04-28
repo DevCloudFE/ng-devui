@@ -1,28 +1,37 @@
 import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { I18nService } from 'ng-devui/i18n';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import * as hljs from 'highlight.js/lib/core';
 import * as marked from 'marked/lib/marked';
+import { I18nService } from 'ng-devui/i18n';
 import { Subscription } from 'rxjs';
 @Component({
   selector: 'd-api',
   templateUrl: './devui-api.component.html',
+  styleUrls: ['./devui-api.component.scss'],
   preserveWhitespaces: false,
 })
 export class DevUIApiComponent implements OnInit, AfterViewInit, OnDestroy {
   subs: Subscription = new Subscription();
   @Input() api: any;
   apiData: any;
+  navSpriteInstance = null;
+  scrollContainer = document.documentElement;
 
-  constructor(private router: Router, private translate: TranslateService, private route: ActivatedRoute,
-              private i18n: I18nService, private elementRef: ElementRef, private renderer: Renderer2) { }
+  constructor(
+    private router: Router,
+    private translate: TranslateService,
+    private route: ActivatedRoute,
+    private i18n: I18nService,
+    private elementRef: ElementRef,
+    private renderer: Renderer2
+  ) {}
 
   ngOnInit() {
     this.subs.add(
-      this.route.data.subscribe(data => {
+      this.route.data.subscribe((data) => {
         this.apiData = data;
-        this.setApi((localStorage.getItem('lang') || 'zh-cn'));
+        this.setApi(localStorage.getItem('lang') || 'zh-cn');
       })
     );
 
@@ -31,8 +40,6 @@ export class DevUIApiComponent implements OnInit, AfterViewInit, OnDestroy {
         this.setApi(event.lang);
       })
     );
-
-    this.renderer.setStyle(document.querySelector('html'), 'scroll-behavior', 'smooth');
   }
 
   setApi(lang) {
@@ -87,11 +94,19 @@ export class DevUIApiComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngAfterViewInit() {
     this.refreshView();
+    setTimeout(() => {
+      if (this.navSpriteInstance) {
+        this.navSpriteInstance.getNavData();
+      }
+    }, 500);
   }
 
   ngOnDestroy() {
     this.subs.unsubscribe();
-    this.renderer.removeStyle(document.querySelector('html'), 'scroll-behavior');
+  }
+
+  afterNavInit(e) {
+    this.navSpriteInstance = e;
   }
 
   get baseUrl() {

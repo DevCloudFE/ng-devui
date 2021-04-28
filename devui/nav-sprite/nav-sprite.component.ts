@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   EventEmitter,
@@ -13,6 +14,7 @@ import {
   ViewChild,
   ViewChildren
 } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { Mode, NavMenu, SpriteOption } from './nav-sprite.type';
@@ -32,11 +34,20 @@ const DEFAULT_OPTIONS = {
 export class NavSpriteComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() target: HTMLElement; // 爬取目录的容器
 
+  @Input() scrollTarget: HTMLElement; // 指定滚动的DOM
+
+  @Input() view: {
+    top?: number;
+    bottom?: number;
+  } = { top: 0, bottom: 0 }; // 矫正参数
+
+  @Input() hashSupport = false; // 支持锚点
+
   @Input() mode: Mode = 'default'; // 模式
 
   @Input() maxLevel = 3; // 最大层级
 
-  @Input() title = 'menu';
+  @Input() title = 'menu'; // 名称
 
   @Input() indent = 2; // 缩进
 
@@ -44,12 +55,11 @@ export class NavSpriteComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @Input() height = 400; // 高度
 
-  @Input() isOpen = true;
+  @Input() isOpen = true; // sprite模式下的初始状态
 
-  // mode 为sprite模式下的初始位置
-  @Input() spriteOption: SpriteOption;
+  @Input() spriteOption: SpriteOption; // sprite模式下的初始位置
 
-  @Input() navItemTemplate: TemplateRef<any>; // 单条导航目录的传入模板
+  @Input() navItemTemplate: TemplateRef<any>; // 导航目录模板
 
   @ViewChild('spriteTemp', { static: true }) spriteTemp: TemplateRef<any>;
 
@@ -64,11 +74,11 @@ export class NavSpriteComponent implements OnInit, AfterViewInit, OnDestroy {
 
   currentTemp: TemplateRef<any>;
 
-  navData: NavMenu[] = [];
+  menus: NavMenu[] = [];
 
-  activeMenu = 0;
+  activeIndex = -1;
 
-  isToViewByNav = false;
+  isToViewByNav = false; // 区分是页面滚动还是点击目录事件
 
   contents;
 
@@ -76,112 +86,126 @@ export class NavSpriteComponent implements OnInit, AfterViewInit, OnDestroy {
 
   isDragging = false;
 
-  constructor(private render: Renderer2, private element: ElementRef) {}
+  mouseenterSub: Subscription;
+
+  itemsSub: Subscription;
+
+  get targetContainer(): HTMLElement {
+    return this.scrollTarget || this.target;
+  }
+
+  get baseUrl() {
+    return window.location.href.replace(window.location.hash, '');
+  }
+
+  constructor(
+    private render: Renderer2,
+    private element: ElementRef,
+    private router: Router,
+    private activeRout: ActivatedRoute,
+    private render2: Renderer2,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit() {
-    this.createNav();
+    this.currentTemp = this.mode === 'default' ? this.defaultTemp : this.spriteTemp; // 设置当前的模式
+    this.navItemTemplate = this.navItemTemplate || this.defaultNavItemTemplate; // 设置当前的目录模板
   }
 
-  ngAfterViewInit(): void {
-    this.scrollSub = fromEvent(this.target, 'scroll')
-      .pipe(debounceTime(100))
-      .subscribe(() => {
-        this.setActiveByScroll();
-      });
+  ngAfterViewInit() {
     this.initStyles();
-  }
-
-  // 生成导航
-  createNav() {
     this.getNavData();
-    this.currentTemp = this.mode === 'default' ? this.defaultTemp : this.spriteTemp;
-    this.navItemTemplate = this.navItemTemplate || this.defaultNavItemTemplate;
+    const container = this.targetContainer === document.documentElement ? window : this.targetContainer;
+    this.scrollSub = fromEvent(container, 'scroll')
+      .pipe(debounceTime(300))
+      .subscribe(() => {
+        this.scrollEventHandler();
+      });
+    this.itemsSub = this.items.changes.subscribe((items) => {
+      this.setActiveMenu();
+    });
   }
 
-  // 获取导航数据
-  getNavData() {
-    if (!this.target) {
-      return;
+  setActiveIndex() {
+    if (this.hashSupport && this.activeRout.snapshot.fragment) {
+      this.activeIndex = this.menus.findIndex((menu) => {
+        return menu.label === this.activeRout.snapshot.fragment;
+      });
+      this.isToViewByNav = true;
+      this.targetContainer.scrollTop = this.menus[this.activeIndex].scrollPosition?.startLine;
+      setTimeout(() => {
+        this.isToViewByNav = false;
+      }, 120);
+    } else {
+      this.activeIndex = this.menus.findIndex((i) => {
+        const scrollTop = this.targetContainer.scrollTop;
+        return scrollTop < i.scrollPosition.top;
+      });
     }
+    this.cdr.detectChanges();
+  }
+
+  getNavData() {
     const search = [];
     for (let i = 0; i < this.maxLevel; i++) {
       search.push(`h${i + 1}`);
     }
     this.contents = Array.from(this.target.querySelectorAll(search.join(',')));
-    this.navData = this.contents.map((i: HTMLElement) => {
+    this.menus = this.contents.map((i: HTMLElement) => {
       return {
         originEle: i,
         level: i.tagName.match(/\d+/)[0],
         label: i.innerText,
+        href: this.baseUrl + '#' + i.innerText,
         scrollPosition: this.getScrollPosition(i),
       };
     });
-    this.setDefaultActiveMenu();
+    this.setActiveIndex();
   }
 
-  // 设置每个导航目录的可视范围
+  // 设定目录范围
   getScrollPosition(ele) {
-    const containerTop = this.target.getBoundingClientRect().top;
-    const containerScrollTop = this.target.scrollTop;
-    const top = ele.getBoundingClientRect().bottom - containerTop + containerScrollTop;
-    const startLine = ele.getBoundingClientRect().top - containerTop + containerScrollTop;
-    return [top, startLine];
+    const containerTop = Math.max(this.targetContainer.getBoundingClientRect().top, 0);
+    const containerScrollTop = this.targetContainer.scrollTop;
+    const top = ele.getBoundingClientRect().bottom - containerTop + containerScrollTop - this.view.top + this.view.bottom;
+    const startLine = ele.getBoundingClientRect().top - containerTop + containerScrollTop - this.view.top + this.view.bottom;
+    return { top, startLine };
   }
 
-  // 根据滚动位置设置匹配选中目录
-  setActiveByScroll() {
-    if (this.isToViewByNav) {
-      return;
-    }
-    this.setDefaultActiveMenu();
-  }
-
-  // 设置默认选中
-  setDefaultActiveMenu() {
-    const target = this.navData.filter((i) => {
-      const scrollTop = this.target.scrollTop;
-      return scrollTop < i.scrollPosition[0];
-    });
-    if (target.length) {
-      this.setActiveMenu(target[0].originEle);
-    }
-  }
-
-  // 点击导航
-  navTo(e, item) {
-    e.preventDefault();
-    this.isToViewByNav = true;
-    const index: number = this.navData.findIndex((menu: NavMenu) => {
-      return menu.originEle === item.originEle;
-    });
-    const target = this.navData[index];
-    if (target) {
-      this.activeMenu = index;
-      scrollAnimate(this.target, this.target.scrollTop, target.scrollPosition[1], undefined, undefined, () => {
-        setTimeout(() => {
-          this.isToViewByNav = false;
-        }, 150);
+  // 监听页面滚动
+  scrollEventHandler() {
+    if (!this.isToViewByNav) {
+      const scrollTop = this.targetContainer.scrollTop;
+      const index = this.menus.findIndex((i) => {
+        return scrollTop < i.scrollPosition.top;
       });
+      if (this.activeIndex !== index) {
+        this.activeIndex = index;
+        this.menuScrollToTarget();
+        this.setUrlHash();
+      }
     }
   }
 
-  setActiveMenu(originEle) {
-    if (!this.items) { return; }
-    const index = this.navData.findIndex((i) => {
-      return i.originEle === originEle;
-    });
-    this.activeMenu = index;
-    const item = this.items.toArray()[index];
-    if (!item) {
-      return;
-    }
+  menuScrollToTarget() {
+    const item = this.items.toArray()[this.activeIndex];
     const menuContainer = this.element.nativeElement.querySelector('.devui-nav-sprite-menus');
     const start = menuContainer?.scrollTop;
     const end = item?.nativeElement.getBoundingClientRect().top - menuContainer.getBoundingClientRect().top;
-    scrollAnimate(menuContainer, start, end);
+    scrollAnimate(menuContainer, start, end, undefined, undefined, () => {
+      if (this.hashSupport) {
+        this.setUrlHash();
+      }
+    });
   }
 
-  // 设置样式
+  setActiveMenu() {
+    const item = this.items.toArray()[this.activeIndex];
+    const menuContainer = this.element.nativeElement.querySelector('.devui-nav-sprite-menus');
+    const top = item?.nativeElement.getBoundingClientRect().top - menuContainer.getBoundingClientRect().top;
+    menuContainer.scrollTop = top;
+  }
+
   initStyles() {
     if (this.mode === 'sprite') {
       const content = this.element.nativeElement.querySelector('.devui-nav-sprite-content');
@@ -195,6 +219,38 @@ export class NavSpriteComponent implements OnInit, AfterViewInit, OnDestroy {
     this.render.setStyle(this.element.nativeElement, 'height', this.height + 'px');
     this.render.setStyle(this.element.nativeElement, 'width', this.width + 'px');
     this.afterNavInit.emit(this);
+  }
+
+  // 设置hash
+  setUrlHash() {
+    const activeMenu = this.menus[this.activeIndex];
+    this.router.navigate([], { fragment: activeMenu.label, replaceUrl: true });
+  }
+
+  // addClass
+  setTargetActive() {
+    const target = this.menus[this.activeIndex];
+    this.menus.forEach((i) => {
+      if (i.originEle) {
+        this.render2.removeClass(i.originEle, 'nav-active');
+      }
+    });
+    this.render2.addClass(target?.originEle, 'nav-active');
+  }
+
+  navTo(index) {
+    if (this.activeIndex !== index) {
+      this.activeIndex = index;
+      const target = this.menus[index];
+      scrollAnimate(this.targetContainer, this.targetContainer.scrollTop, target.scrollPosition.startLine, undefined, undefined, () => {
+        this.setUrlHash();
+        this.setTargetActive();
+        setTimeout(() => {
+          this.isToViewByNav = false;
+        }, 160);
+      });
+      this.isToViewByNav = true;
+    }
   }
 
   cdkDragStarted() {
@@ -221,6 +277,14 @@ export class NavSpriteComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnDestroy() {
     if (this.scrollSub) {
       this.scrollSub.unsubscribe();
+    }
+
+    if (this.mouseenterSub) {
+      this.mouseenterSub.unsubscribe();
+    }
+
+    if (this.itemsSub) {
+      this.itemsSub.unsubscribe();
     }
   }
 }

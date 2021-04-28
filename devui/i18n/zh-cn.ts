@@ -253,4 +253,11 @@ export default {
     seeMore: '查看全部过滤条件',
     selected: '已选择'
   },
+  userGuide: {
+    guide: '指引',
+    prev: '上一步',
+    next: '下一步',
+    finish: '完成',
+    autoFill: '点击此处自动填充'
+  }
 };

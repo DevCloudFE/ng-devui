@@ -169,6 +169,7 @@ On the page:
 | fixedRight | `string` | -- | Optional. The value is fixed to the right of the column, for example, 100px | [fixed column](demo#fixed-column) |
 | editing | `boolean` | -- | Optional. Use [(editing)] to obtain and control the cell editing status. | [editing cell](demo#edit-cell) |
 | field | `string` | -- | Field in the column to which the cell belongs, which is used as the parameter beforeEditStart and beforeEditEnd. | [Edit cell](demo#edit-cell) |
+| nestedColumnIndent | `number` | 16 | Indentation distance of a subtable in a cell, in px | [tree table](demo#tree-form) |
 
 ## dTableCell Event
 
@@ -342,6 +343,7 @@ export enum SortDirection {
 | fixedRight | `string` | -- | Optional. Fixed distance from the column to the right, for example, '100px' | [Fixed column](demo#fixed-column) |
 | filterBoxWidth | `any` | -- | Optional. Width of the filter dialog box, for example, 300px. |
 | filterBoxHeight | `any` | -- | Optional. Height of the filter dialog box, for example, 400px. |
+| nestedColumnIndent | `number` | 16 | Indentation distance of a subtable in a cell, in px | [tree table](demo#tree-form) |
 
 ## d-column event
 

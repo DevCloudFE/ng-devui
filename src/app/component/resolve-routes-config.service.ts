@@ -17,24 +17,27 @@ export function resolveRoutesConfig(lang, routesConfig) {
     });
   for (const key in groupedRoutesObj) {
     if (key) {
+      let componentsNoDisplay = true;
       const group = groupedRoutesObj[key].map((item) => {
         if (item.data.name) {
-          if (lang === 'en-us') {
-            return {
-              title: item.data.name,
-              link: item.path,
-              enType: item.data.enType || 'General',
-              name: item.data.name,
-              lowerName: item.data.name.toLocaleLowerCase()
-            };
-          }
-          return {
-            title: item.data.name + ' ' + item.data.cnName,
+          const enType = item.data.enType || 'General';
+          const res: any = {
             link: item.path,
-            enType: item.data.enType || 'General',
+            enType: enType,
             name: item.data.name,
-            lowerName: item.data.name.toLocaleLowerCase()
+            lowerName: item.data.name.replace(/\W/g, '').toLocaleLowerCase(),
+            folderName: enType.replace(/\W/g, '-').toLocaleLowerCase(),
+            nodisplay: item.data.nodisplay || false
           };
+          if (lang === 'en-us') {
+            res.title = item.data.name;
+          } else {
+            res.title = item.data.name + ' ' + item.data.cnName;
+          }
+          if (!res.nodisplay && componentsNoDisplay) {
+            componentsNoDisplay = false;
+          }
+          return res;
         } else {
           return {};
         }
@@ -51,7 +54,7 @@ export function resolveRoutesConfig(lang, routesConfig) {
           }
           return 0;
         });
-      componentsDataDisplay.push({ title: key, children: group, open: true });
+      componentsDataDisplay.push({ title: key, children: group, open: true, nodisplay: componentsNoDisplay });
     }
   }
 

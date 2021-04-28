@@ -4,11 +4,13 @@ import {
   ElementRef,
   Input,
   OnInit, QueryList,
+  Renderer2,
   ViewChildren
 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import * as hljs from 'highlight.js/lib/core';
+import { I18nService } from 'ng-devui/i18n';
 ['bash', 'typescript', 'json'].forEach((langName) => {
   const langModule = require(`highlight.js/lib/languages/${langName}`);
   hljs.registerLanguage(langName, langModule);
@@ -45,7 +47,8 @@ export class GlobalConfigComponent implements OnInit, AfterViewInit {
 
   @ViewChildren('documentation') documentation: QueryList<ElementRef>;
 
-  constructor(private route: ActivatedRoute, private translate: TranslateService) {
+  constructor(private router: Router, private route: ActivatedRoute, private translate: TranslateService,
+              private i18n: I18nService, private elementRef: ElementRef, private renderer: Renderer2) {
   }
   ngOnInit(): void {
     const lang = localStorage.getItem('lang');
@@ -64,6 +67,16 @@ export class GlobalConfigComponent implements OnInit, AfterViewInit {
     Array.from<HTMLElement>(document.querySelectorAll('pre code')).forEach((block) => {
       hljs.highlightBlock(block);
     });
+    Array.from(this.elementRef.nativeElement.querySelectorAll('a')).forEach((link: HTMLElement) => {
+      let hrefValue = link.getAttribute('href');
+      if (hrefValue && hrefValue.indexOf('#') === 0) {
+          hrefValue = this.baseUrl + hrefValue;
+          link.setAttribute('href', hrefValue);
+        }
+      });
+  }
+  get baseUrl() {
+    return window.location.pathname.replace(window.location.hash, '');
   }
 
   ngAfterViewInit(): void {

@@ -1,6 +1,6 @@
 {
   "mainNav": {
-    "design": "设计体系",
+    "design": "Design Tokens",
     "components": "组件",
     "icons": "图标库",
     "versions": "版本历程"
@@ -15,22 +15,28 @@
     "largeSize": "大字号模式",
     "default": "默认主题",
     "extend": "扩展主题",
+    "customize": "定制主题",
+    "customizeDark": "深色",
+    "customizeDownloadConfig": "下载主题文件",
+    "customizeDownloadConfigHelp": "使用",
     "infinity": "无限",
     "sweet": "蜜糖",
     "deep": "深邃夜空",
-    "provence": "普罗旺斯"
+    "provence": "普罗旺斯",
+    "galaxy": "追光"
   },
   "public": {
     "overview": {
       "title": "组件总览",
       "description": "DevUI 为 Web 应用提供了丰富的基础 UI 组件，我们还将持续探索企业级应用的最佳 UI 实践，欢迎尝试使用 DevUI。",
       "placeholder": "请输入你想查找的组件",
-      "newChange": "有更新"
+      "newChange": "有更新",
+      "lookingCmp": "您要找的组件是不是？",
+      "suggestCmp": "推荐组件"
     },
     "start": "快速开始",
     "themeDoc": "主题化使用指南",
     "globalDoc": "全局设置",
-    "color": "颜色变量",
     "versions": "版本历程",
     "whenToUse": "何时使用",
     "goTo": "快速前往"
@@ -824,10 +830,10 @@
         "with-dropdown": "配合Dropdown使用"
       }
     },
-    "common-styles": {
-      "name": "CommonStyles 公共样式",
-      "type": "扩展服务",
-      "path": "common-styles",
+    "design-link": {
+      "name": "Link 链接",
+      "type": "Design Tokens",
+      "path": "design-link",
       "description": "组件库公共样式规范。",
       "tmw": "当需要查看组件库相关样式，使用场景以及变更时。",
       "hrefDemo": {
@@ -835,35 +841,344 @@
         "description1": "1. 确认已全局引入devui样式表（devui.min.css）；",
         "description2": "2. 使用 class=\"devui-link\" 修改a标签的样式。"
       },
+      "anchorLinkValues": {
+        "href-a": "链接a元素"
+      }
+    },
+    "design-color": {
+      "name": "Color 颜色",
+      "type": "Design Tokens",
+      "path": "design-color",
+      "description": "组件库公共样式规范。",
+      "tmw": "当需要查看组件库相关样式，使用场景以及变更时。",
       "colorDemo": {
         "title": "颜色",
         "description1": "1. DevUI整理了颜色规范，包括普通色值和暗黑模式色值，以及列出了这些颜色的使用场景，为了更好的精细化控制和显示，同时对颜色做了分类和语义化变量命名；",
         "description2": "2. 通过`@import '~ng-devui/styles-var/devui-var.scss';`引入颜色变量后即可使用；",
-        "description3": "3. 若样式表为less文件，则`@import '~ng-devui/styles-var/devui-var.less';`,并将变量前缀'$'改为'@'。"
+        "description3": "3. 若样式表为less文件，则`@import '~ng-devui/styles-var/devui-var.less';`,并将变量前缀'$'改为'@'。",
+        "instance": {
+          "title": "实例",
+          "description": "本实例采用颜色变量，色块会跟随主题化切换而随之变色",
+          "defaultTable": {
+            "tab": "默认主题颜色对照表",
+            "colorVar": "颜色变量",
+            "normalColor": "普通色值",
+            "darkColor": "暗黑色值",
+            "description": "描述"
+          },
+          "oldTable": {
+            "tab": "旧版主题颜色对照表",
+            "colorVar": "颜色变量",
+            "newVar": "新版变量",
+            "normalColor": "普通色值",
+            "darkColor": "暗黑色值",
+            "description": "描述"
+          },
+          "colorSource": {
+            "devui-global-bg": "全局带底色背景",
+            "devui-global-bg-normal": "全局白色背景",
+            "devui-base-bg": "基础区块背景白色",
+            "devui-base-bg-dark": "基础区块背景深色(固定)",
+            "devui-brand": "品牌色",
+            "devui-brand-foil": "品牌色辅助色、正衬色",
+            "devui-brand-hover": "品牌色高亮色（加亮）",
+            "devui-brand-active": "品牌色激活色（加深）",
+            "devui-brand-active-focus": "品牌色焦点色（重度加深）",
+            "devui-contrast": "品牌色撞色、对比色、反衬色、第二品牌色",
+            "devui-text": "正文文本",
+            "devui-text-weak": "弱化的正文信息（手风琴子项，表头）",
+            "devui-aide-text": "辅助文本、帮助信息（面包屑）",
+            "devui-aide-text-stress": "辅助文本、帮助信息里的强调色",
+            "devui-placeholder": "占位符",
+            "devui-light-text": "有色深色背景下字体颜色（固定）",
+            "devui-dark-text": "有色浅色背景下字体颜色（固定）",
+            "devui-link": "链接文本颜色",
+            "devui-link-active": "链接文本悬停/激活颜色",
+            "devui-link-light": "深色背景下链接文本颜色",
+            "devui-link-light-active": "深色背景下链接文本悬停/激活颜色",
+            "devui-line": "边框分割线，仅用于边框",
+            "devui-dividing-line": "内容分割线，用于内容之间的分割",
+            "devui-block": "大面积的不可折叠区块的背景色（例如顶部导航背景色）",
+            "devui-area": "可折叠区块的背景色（展开区域颜色）",
+            "devui-danger": "失败、错误、告警",
+            "devui-warning": "警告、需注意类型提示",
+            "devui-waiting": "等待中",
+            "devui-success": "成功、正确",
+            "devui-info": "通知、一般提示、执行中",
+            "devui-initial": "初始化、未执行",
+            "devui-unavailable": "不可用、禁用状态",
+            "devui-shadow": "阴影色",
+            "devui-light-shadow": "弱化阴影色",
+            "devui-icon-text": "文字图标颜色，同 正文颜色",
+            "devui-icon-bg": " svg图标 背景色",
+            "devui-icon-fill": " svg图标 灰色填充色",
+            "devui-icon-fill-hover": "svg图标 灰色填充色悬停反馈色",
+            "devui-icon-fill-active": "svg图标 高亮填充色（激活状态）",
+            "devui-icon-fill-active-hover": "svg图标 高亮填充色悬停反馈色",
+            "devui-form-control-line": "表单控件边框色，同 边框分割线",
+            "devui-form-control-line-hover": "表单控件边框悬停反馈色",
+            "devui-form-control-line-active": "表单控件边框激活色，用于获得焦点",
+            "devui-form-control-line-active-hover": "表单控件边框激活色，用于获得焦点且悬停",
+            "devui-list-item-active-bg": "列表类型单选选中背景",
+            "devui-list-item-active-text": "列表类型单选选中背景搭配文本，同 有色深色背景下字体颜色（固定）",
+            "devui-list-item-active-hover-bg": "列表类型单选选中背景悬停反馈色（仅用于分页等）",
+            "devui-list-item-hover-bg": "列表类型普通选项悬停背景",
+            "devui-list-item-hover-text": "列表类型普通选项悬停背景搭配文本",
+            "devui-list-item-selected-bg": "列表类型多选被选中的行色，仅用于表格类",
+            "devui-list-item-strip-bg": "列表类型斑马纹色，仅用于表格类",
+            "devui-disabled-bg": "disabled背景颜色",
+            "devui-disabled-line": "disabled边框颜色",
+            "devui-disabled-text": "disabled文字颜色",
+            "devui-primary-disabled": "主要按钮disabled状态文字颜色",
+            "devui-icon-fill-active-disabled": "svg图标激活状态禁用色",
+            "devui-label-bg": "默认标签化选项背景色",
+            "devui-connected-overlay-bg": "有连接点的弹出菜单层背景色",
+            "devui-connected-overlay-line": "有连接点的弹出菜单层边框色",
+            "devui-fullscreen-overlay-bg": "全屏类型的弹出内容层背景色（模态弹窗）",
+            "devui-feedback-overlay-bg": "信息提示反馈类型的漂浮层背景色（toast、popover）",
+            "devui-feedback-overlay-text": "信息提示反馈类型的漂浮层背景色搭配文本色",
+            "devui-embed-search-bg": "被嵌套的无边框搜索框背景色",
+            "devui-embed-search-bg-hover": "被嵌套的无边框搜索框背景色",
+            "devui-float-block-shadow": "特殊浮层背景色（待修正）",
+            "devui-highlight-overlay": "局部半透明全局浮层背景色（比如底部）",
+            "devui-range-item-hover-bg": "范围内状态下的hover背景色（比如datepicker范围中间日期的hover）",
+            "devui-primary": "主要按钮，同品牌色",
+            "devui-primary-hover": "主要按钮悬停",
+            "devui-primary-active": "主要按钮激活",
+            "devui-contrast-hover": "突出按钮悬停",
+            "devui-contrast-active": "突出按钮激活",
+            "devui-danger-line": "失败边框",
+            "devui-danger-bg": "失败底色",
+            "devui-warning-line": "警告边框",
+            "devui-warning-bg": "警告底色",
+            "devui-info-line": "通知边框",
+            "devui-info-bg": "通知底色",
+            "devui-success-line": "成功边框",
+            "devui-success-bg": "成功底色",
+            "devui-primary-line": "主要边框",
+            "devui-primary-bg": "主要底色",
+            "devui-default-line": "默认边框",
+            "devui-default-bg": "默认底色"
+          },
+          "catalogs": {
+            "basic": "基本变量",
+            "icon": "图标",
+            "form": "表单",
+            "list": "列表",
+            "disable": "禁用",
+            "specialBackground": "特殊背景色",
+            "button": "按钮",
+            "status": "状态"
+          },
+          "colors": {
+            "global-bg": "浅灰色背景body",
+            "bg-white": "顶部导航颜色，背景色",
+            "base-bg-white": "白色背景body",
+            "block-bg-white": "用于按钮和alert提醒条等区域区域，暗黑模式下整块区域别于普通底色",
+            "brand-1": "控件颜色",
+            "brand-2": "点击控件颜色",
+            "brand-3": "选中内容底色，如下拉菜单，表格",
+            "brand-4": "用于浅色的loading背景色",
+            "dark-1": "主要信息",
+            "dark-2": "帮助信息，提示性信息",
+            "dark-3": "占位符",
+            "dark-1-boxshadow-light": "阴影效果",
+            "dark-1-boxshadow": "阴影效果",
+            "dark-1-3": "用于表格内操作图标",
+            "dividing": "分割线颜色，颜色同gray-2",
+            "dropdown-overlay": "用于下拉菜单块白色区域，暗黑模式下稍区别于普通底色",
+            "font-dark": "用于有色浅色背景的深色字体",
+            "font-white": "用于有色背景",
+            "full-screen-overlay": "用于modal等全屏的弹出层",
+            "gray-1": "主要分隔线，如边框",
+            "gray-2": "次要分隔线",
+            "gray-3": "展开区域颜色",
+            "highlight-overlay": "用于底部浮层类操作层",
+            "hover-control": "鼠标悬停控件",
+            "hover-control-light": "深色背景下的鼠标悬停控件",
+            "hover-content": "鼠标悬停底色，入下拉菜单，表格",
+            "huawei-bg": "顶部导航颜色，背景色",
+            "huawei-red": "顶部菜单选中",
+            "icon-gray-bg": "用于表头按钮的灰色底色",
+            "link": "用于a标签或链接",
+            "link-light": "用于深色背景下的a标签或链接",
+            "status-red": "错误，失败，危险操作告警色",
+            "status-yellow": "提示信息",
+            "status-waiting": "等待信息",
+            "status-green": "成功，批准",
+            "status-blue": "运行中，正常",
+            "status-initial": "初始化",
+            "status-unavaliable": "失效，等待，回退， 中止，颜色等于$gray-1",
+            "strip-color": "用于表格类间接行",
+            "tag-label-bgcolor": "标签类型",
+            "hwc-status-danger-border": "用于alert提醒，同步华为云官网规范",
+            "hwc-status-danger-background": "用于alert提醒，同步华为云官网规范",
+            "hwc-status-warning-border": "用于alert提醒，同步华为云官网规范",
+            "hwc-status-warning-background": "用于alert提醒，同步华为云官网规范",
+            "hwc-status-info-border": "用于alert提醒，同步华为云官网规范",
+            "hwc-status-info-background": "用于alert提醒，同步华为云官网规范",
+            "hwc-status-success-border": "用于alert提醒，同步华为云官网规范",
+            "hwc-status-success-background": "用于alert提醒，同步华为云官网规范",
+            "hwc-feedback-overlay-background": "用于tooltips，popover，右上角全局toast，同步华为云官网规范",
+            "hwc-feedback-overlay-font-color": "用于tooltips，popover，右上角全局toast，同步华为云官网规范",
+            "color-bg-primary": "用于重要按钮",
+            "color-bg-primary-hover": "用于重要按钮",
+            "color-bg-primary-active": "用于重要按钮",
+            "hwc-drop-down-search": "用于下拉搜索框",
+            "hwc-drop-down-search-hover": "用于下拉搜索框",
+            "disabled-bg": "disabled背景颜色",
+            "disabled-border": "disabled边框颜色",
+            "disabled-content": "disabled内容颜色"
+          }
+        }
       },
+      "anchorLinkValues": {
+        "color": "颜色"
+      }
+    },
+    "design-shadow": {
+      "name": "Shadow 阴影",
+      "type": "Design Tokens",
+      "path": "design-shadow",
+      "description": "组件库公共样式规范。",
+      "tmw": "当需要查看组件库相关样式，使用场景以及变更时。",
       "shadowDemo": {
         "title": "阴影",
         "description1": "1. 组件库为用户们提供了阴影变量用于不同的场景，下表列出了这些变量的名称，对应的变量值以及使用场景；",
         "description2": "2. 通过`@import '~ng-devui/styles-var/devui-var.scss';`引入阴影变量后即可使用；",
-        "description3": "3. 若样式表为less文件，则`@import '~ng-devui/styles-var/devui-var.less';`,并将变量前缀'$'改为'@'。"
+        "description3": "3. 若样式表为less文件，则`@import '~ng-devui/styles-var/devui-var.less';`,并将变量前缀'$'改为'@'。",
+        "instance": {
+          "title": "实例",
+          "description": "阴影对照表",
+          "defaultTable": {
+            "tab": "默认主题阴影对照表",
+            "shadowName": "阴影变量名",
+            "shadowValue": "阴影变量值",
+            "description": "描述"
+          },
+          "oldTable": {
+            "tab": "旧版主题阴影对照表",
+            "shadowName": "阴影变量名",
+            "newShadowName": "新版变量名",
+            "shadowValue": "阴影变量值",
+            "description": "描述"
+          },
+          "shadows": {
+            "devui-shadow-length-base": "直接铺陈在页面上方的元素 (card等)",
+            "devui-shadow-length-slide-left": "向左滑动时出现在右侧边缘的阴影 (dataTable固定右侧列向左滑动)",
+            "devui-shadow-length-slide-right": "向右滑动时出现在左侧边缘的阴影 (dataTable固定左侧列向右滑动)",
+            "devui-shadow-length-connected-overlay": "有连接点的弹出(覆盖)层 (DatePicker Cascader Select TagsInput Pagination的下拉菜单等)",
+            "devui-shadow-length-hover": "涉及到hover的地方",
+            "devui-shadow-length-feedback-overlay": "信息提示反馈类 (PopOver Tooltip Toast StepsGuide等)",
+            "devui-shadow-length-fullscreen-overlay": "无连接点的弹出(覆盖)层 (Drawer Modal ImagePreview等)"
+          },
+          "oldShadows": {
+            "hwc-shadow-1": "卡片，警告提示",
+            "hwc-shadow-2": "下拉菜单",
+            "hwc-shadow-3": "tips，全局提示",
+            "hwc-shadow-4": "卡片组件，悬浮",
+            "hwc-shadow-5": "购买浮层",
+            "hwc-shadow-6": "按钮",
+            "hwc-shadow-7": "弹窗",
+            "hwc-shadow-8": "slider滑块",
+            "hwc-shadow-error": "错误提示",
+            "hwc-shadow-warn": "告警提示",
+            "hwc-shadow-prompt": "提示类",
+            "hwc-shadow-success": "成功提示",
+            "hwc-shadow-dark": "深色提示背景阴影"
+          }
+        }
       },
+      "anchorLinkValues": {
+        "shadow": "阴影"
+      }
+    },
+    "design-font": {
+      "name": "Font 字体",
+      "type": "Design Tokens",
+      "path": "design-font",
+      "description": "组件库公共样式规范。",
+      "tmw": "当需要查看组件库相关样式，使用场景以及变更时。",
       "fontDemo": {
         "title": "字体",
         "description1": "1. 组件库为用户们提供了字体相关变量用于不同的场景，下表列出了这些变量的名称，对应的变量值以及使用场景；",
         "description2": "2. 通过`@import '~ng-devui/styles-var/devui-var.scss';`引入字体变量后即可使用；",
-        "description3": "3. 若样式表为less文件，则`@import '~ng-devui/styles-var/devui-var.less';`,并将变量前缀'$'改为'@'。"
+        "description3": "3. 若样式表为less文件，则`@import '~ng-devui/styles-var/devui-var.less';`,并将变量前缀'$'改为'@'。",
+        "instance": {
+          "title": "实例",
+          "description1": "我是页面或卡片一级标题",
+          "description2": "我是正文，帮助信息，补充信息",
+          "tableTitle": "字体相关变量对照表",
+          "defaultTable": {
+            "tab": "默认字体相关变量对照表",
+            "fontName": "字体相关变量名",
+            "fontValue": "字体相关变量值",
+            "description": "描述"
+          },
+          "oldTable": {
+            "tab": "旧版字体相关变量对照表",
+            "fontName": "旧版字体相关变量名",
+            "newFontName": "新版字体相关变量名",
+            "fontValue": "字体相关变量值",
+            "description": "描述"
+          },
+          "fonts": {
+            "devui-font-size-data-overview": "数据总览",
+            "devui-font-size-price": "购买价格",
+            "devui-font-size-modal-title": "弹窗标题、数字",
+            "devui-font-size-page-title": "页面标题",
+            "devui-font-size-card-title": "卡片标题",
+            "devui-font-size": "正文，帮助信息，补充信息",
+            "devui-font-size-icon": "图标大小",
+            "devui-font-size-sm": "小控件文字大小",
+            "devui-font-size-md": "中控件文字大小",
+            "devui-font-size-lg": "大控件文字大小",
+            "devui-font-title-weight": "标题文字粗细",
+            "devui-font-content-weight": "内容文字粗细",
+            "devui-line-height-base": "规范行高"
+          },
+          "oldFonts": {
+            "font-size-modal-title": "弹框标题",
+            "font-size-primary": "页面标题，一级卡片标题",
+            "font-size-secondary-card-title": "二级卡片标题",
+            "font-size-base": "正文，帮助信息，补充信息",
+            "font-title-weight": "标题文字粗细",
+            "font-content-weight": "内容文字粗细",
+            "line-height-base": "规范行高"
+          }
+        }
       },
+      "anchorLinkValues": {
+        "font": "字体"
+      }
+    },
+    "design-border-radius": {
+      "name": "BorderRadius 圆角",
+      "type": "Design Tokens",
+      "path": "design-border-radius",
+      "description": "组件库公共样式规范。",
+      "tmw": "当需要查看组件库相关样式，使用场景以及变更时。",
       "cornerDemo": {
         "title": "圆角",
         "description1": "1. 组件库为用户们提供了圆角变量用于不同的场景，下表列出了这些变量的名称，对应的变量值以及使用场景；",
         "description2": "2. 通过`@import '~ng-devui/styles-var/devui-var.scss';`引入圆角变量后即可使用；",
-        "description3": "3. 若样式表为less文件，则`@import '~ng-devui/styles-var/devui-var.less';`,并将变量前缀'$'改为'@'。"
+        "description3": "3. 若样式表为less文件，则`@import '~ng-devui/styles-var/devui-var.less';`,并将变量前缀'$'改为'@'。",
+        "instance": {
+          "title": "实例",
+          "tableTitle": "圆角变量对照表",
+          "table": {
+            "cornerName": "圆角变量名",
+            "cornerValue": "圆角变量值",
+            "description": "描述"
+          },
+          "borderRadius": {
+            "devui-border-radius": "一般圆角",
+            "devui-border-radius-feedback": "反馈类圆角",
+            "devui-border-radius-card": "卡片圆角"
+          }
+        }
       },
       "anchorLinkValues": {
-        "href-a": "链接a元素",
-        "color": "颜色",
-        "shadow": "阴影",
-        "font": "字体",
         "border-radius": "圆角"
       }
     },
@@ -2506,8 +2821,18 @@
         "title": "基本用法",
         "description": ""
       },
+      "spriteDemo": {
+        "title": "精灵用法",
+        "description": ""
+      },
+      "scrollDemo": {
+        "title": "指定容器用法",
+        "description": "指定容器用法"
+      },
       "anchorLinkValues": {
-        "basic-usage": "基本用法"
+        "basic-usage": "基本用法",
+        "sprite-usage": "精灵用法",
+        "scroll-usage": "指定容器用法"
       }
     },
     "tabs": {
@@ -2535,15 +2860,33 @@
         "This is Tab2.": "这是Tab2的内容",
         "This is Tab3.": "这是Tab3的内容"
       },
-      "configDemo": {
-        "title": "配置类型与排列",
+      "typePillsDemo": {
+        "title": "Pills类型",
         "description": "",
         "Here's what Tab1 says.": "这是Tab1的内容",
         "This is Tab2.": "这是Tab2的内容",
-        "This is Tab3.": "这是Tab3的内容",
-        "Vertical arrangement:": "竖向排列:",
-        "Option tabs:": "Optiontabs:",
-        "Optiontabswithfixwidth100px:": "Optiontabswithfixwidth100px:"
+        "This is Tab3.": "这是Tab3的内容"
+      },
+      "typeOptionsDemo": {
+        "title": "Options类型",
+        "description": "",
+        "Here's what Tab1 says.": "这是Tab1的内容",
+        "This is Tab2.": "这是Tab2的内容",
+        "This is Tab3.": "这是Tab3的内容"
+      },
+      "typeSliderDemo": {
+        "title": "Slider类型",
+        "description": "",
+        "Here's what Tab1 says.": "这是Tab1的内容",
+        "This is Tab2.": "这是Tab2的内容",
+        "This is Tab3.": "这是Tab3的内容"
+      },
+      "typeWrappedDemo": {
+        "title": "Wrapped类型",
+        "description": "",
+        "Here's what Tab1 says.": "这是Tab1的内容",
+        "This is Tab2.": "这是Tab2的内容",
+        "This is Tab3.": "这是Tab3的内容"
       },
       "beforeChangeDemo": {
         "title": "拦截tab切换",
@@ -2561,7 +2904,10 @@
         "basic-usage": "基本用法",
         "no-set-content": "禁用选项卡",
         "custom-template": "自定义模板",
-        "configuration-type-and-arrangement": "配置类型与排列",
+        "type-pills": "Pills类型",
+        "type-options": "Options类型",
+        "type-slider": "Slider类型",
+        "type-wrapped": "Wrapped类型",
         "intercept-tab-switch": "拦截tab切换",
         "custom-tabs-display-and-arrangement": "自定义Tabs显示与排列"
       }
@@ -2713,6 +3059,35 @@
         "multi-usage": "包括多个提示的readtip",
         "template-usage": "传入模板显示内容",
         "async-usage": "异步获取数据"
+      }
+    },
+    "mention": {
+      "name": "Mention 提及",
+      "type": "反馈",
+      "path": "mention",
+      "description": "提及组件。",
+      "tmw": "用于在输入中提及某人或某事，常用于发布、聊天或评论功能。",
+      "basicDemo": {
+        "title": "基本用法",
+        "description": "关联给定信息列表里面的某条信息。"
+      },
+      "asyncDemo": {
+        "title": "异步用法",
+        "description": "关联异步数据。"
+      },
+      "prefixDemo": {
+        "title": "自定义前缀",
+        "description": "自定义前缀。"
+      },
+      "customDemo": {
+        "title": "自定义模板",
+        "description": "自定义列表单条展示模板。"
+      },
+      "anchorLinkValues": {
+        "basic-usage": "基本用法",
+        "async-usage": "异步用法",
+        "custom-prefix": "自定义前缀",
+        "custom-template": "自定义模板"
       }
     },
     "toggle": {
@@ -2939,6 +3314,24 @@
         "custom": "自定义",
         "dynamic-upload-options": "动态上传参数",
         "customize-area-upload": "任意区域上传"
+      }
+    },
+    "user-guide": {
+      "name": "UserGuide 用户指引",
+      "type": "导航",
+      "path": "user-guide",
+      "description": "可远程编排步骤的用户指南，支持编排多套指南，除基本的视觉指引提示外还可与用户进行交互。",
+      "basicDemo": {
+        "title": "组件方式",
+        "description": "在需要使用的页面引入该组件，页面左下角会显示用户指引悬浮入口，点击后选取想要体验的教程即可开始指引。"
+      },
+      "serviceWayDemo": {
+        "title": "服务方式",
+        "description": "以服务方式使用user-guide。将接口暴露给用户，开启某套教程的入口方式用户可自定义。此方式需要在使用user-guide的component中引入UserGuideCmdService。"
+      },
+      "anchorLinkValues": {
+        "user-guide-basic": "组件方式",
+        "user-guide-service-way": "服务方式"
       }
     },
     "input-number": {
@@ -3265,30 +3658,6 @@
         "custom": "自定义"
       }
     },
-    "polyfill": {
-      "name": "Polyfills 腻子脚本",
-      "type": "扩展服务",
-      "path": "polyfill",
-      "description": "用于实现一些低版本浏览器（主要是IE）不支持的API。",
-      "tmw": "需要解决低版本浏览器不支持的方法时。",
-      "basicDemo": {
-        "title": "使用方法",
-        "description": "目前由于实现方法较少，且主要供富文本组件使用，因此当前腻子脚本文件存放于富文本模块下。 使用时，devcloud 项目或 Angular cli 创建的项目可以在 src/polyfills.ts 中插入：import 'ng-devui/add-ons/editorx/polyfill'; 由于腻子脚本只是一段独立执行的js代码，也可以直接用静态资源的方式插入页面来使用。",
-        "name": "腻子脚本",
-        "license": "授权方式",
-        "size": "大小",
-        "browser": "浏览器",
-        "des": "描述",
-        "remove": "把对象从它所属的 DOM 树中删除",
-        "matches": "判断是否匹配指定选择器字符串，各低版本浏览器分别实现了带有自身前缀的MatchesSelector方法，比如 msMatchesSelector",
-        "closest": "匹配特定选择器且离当前元素最近的祖先元素（也可以是当前元素本身）",
-        "event": "在 DOM 中出现的事件",
-        "forEach": "顺序遍历节点的集合的方法"
-      },
-      "anchorLinkValues": {
-        "basic-usage": "使用方法"
-      }
-    },
     "time-picker": {
       "name": "TimePicker 时间选择器",
       "type": "演进中",
@@ -3344,12 +3713,17 @@
         "title": "基本用法",
         "description": ""
       },
+      "customDemo": {
+        "title": "自定义展示模板",
+        "description": "自定义类型及下拉列表展示内容模板"
+      },
       "autoScrollDemo": {
         "title": "大数据量优化展示",
         "description": ""
       },
       "anchorLinkValues": {
         "basicDemo": "基本用法",
+        "customDemo": "自定义类型",
         "autoScrollDemo": "大数据量优化展示"
       }
     },

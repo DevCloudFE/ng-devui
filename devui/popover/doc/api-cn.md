@@ -34,7 +34,7 @@ import { PopoverModule } from 'ng-devui/popover';
 |  ~~showAnimate~~  |        `boolean`        |      true   | 可选，是否显示动画（`已废弃，请使用showAnimation`）   | [基本用法](demo#basic-usage)                  |
 |  mouseEnterDelay  |                          `number`                          |                 150                  | 可选，仅需要在 trigger 为 hover 的时候，设置鼠标移入后延时多少才显示 Popover，单位是 `ms`  | [延时触发](demo#hover-delay-time) |
 |  mouseLeaveDelay  |                          `number`                          |                 100                  | 可选，仅需要在 trigger 为 hover 的时候，设置鼠标移出后延时多少才隐藏 popover，单位是 `ms`  | [延时触发](demo#hover-delay-time) |
-
+|   popoverStyle    |              `{[klass:string]:any;}`                  |                  --                  | 可选，在需要改变弹出层样式时设置，箭头会应用同样的背景色。样式，参见 [ngStyle](https://angular.cn/api/common/NgStyle)。  | [自定义提示内容](demo#custom-prompt-content) |
 
 # 接口 & 类型定义
 

@@ -3,14 +3,13 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-
 import { ButtonModule } from 'ng-devui/button';
+import { DragDropModule } from 'ng-devui/dragdrop';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
 import { ToggleModule } from 'ng-devui/toggle';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
-import { DragDropModule } from '../drag-drop.module';
 import { BasicComponent } from './basic/basic.component';
 import { BatchDragComponent } from './batch-drag/batch-drag.component';
 import { CrossDimensionComponent } from './cross-dimension/cross-dimension.component';
@@ -55,7 +54,7 @@ import { TreeComponent } from './tree/tree.component';
     DropScrollComponent,
     CrossDimensionComponent
   ],
-  
+
 })
 export class DragDropDemoModule {
 }

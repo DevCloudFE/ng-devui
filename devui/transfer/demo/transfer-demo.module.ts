@@ -1,14 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 import { DataTableModule } from 'ng-devui/data-table';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
 import { ToggleModule } from 'ng-devui/toggle';
-import { TranslateModule } from '@ngx-translate/core';
+import { TransferModule } from 'ng-devui/transfer';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
-import { TransferModule } from '../transfer.module';
 import { TransferDemoBaseComponent } from './basic/transfer-demo-base.component';
 import { TransferDemoCustomComponent } from './custom/transfer-demo-custom.component';
 import { TransferDemoSearchComponent } from './search/transfer-demo-search.component';

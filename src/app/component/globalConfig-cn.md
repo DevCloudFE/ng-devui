@@ -2,47 +2,70 @@
 
 ## 如何使用
 
-支持全局设置 showAnimation（是否展示动画效果），减少重复代码，不管组件库给任何默认设置，但是你可以自己定一个默认值。
+通过全局配置项功能定义组件的默认行为，可以减少重复的参数设置
+## 使用方法一
 
-## 开始使用
-
-Angular CLI 工程，可以在 src\app\app.module.ts 引入 DevUI_global_config 对象作为全局设置默认值的对象，这个对象的类型是 DevUIGlobalConfig ;
-
-```typescript
-// app.module.ts
-import { DevUIGlobalConfigToken, DevUI_global_config } from 'ng-devui/utils/globalConfig';
-  providers: [
-    {
-      provide: DevUIGlobalConfigToken,
-      useValue: DevUI_global_config
-    }
-  ],
-```
-
-DevUI_global_config 的对象定义如下：
+在根注入器中根据注入令牌 DevUIGlobalConfigToken 提供一个符合 `DevUIGlobalConfig`  接口的对象。例如：
 
 ```typescript
-// 举个例子
-export const DevUI_global_config: DevUIGlobalConfig = {
+// src/app/app.module.ts
+import { DevUIGlobalConfig, DevUIGlobalConfigToken } from 'ng-devui/utils';
+const custom_global_config: DevUIGlobalConfig = {
   global: {
     showAnimation: false,
   }
 };
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  providers: [
+    {
+      provide: DevUIGlobalConfigToken,
+      useValue: custom_global_config
+    }
+  ],
+  bootstrap: [AppComponent]
+})
 ```
 
-global 内设定的 showAnimation 为 false 会关闭所有组件的动效，等于批量改变了组件库内所有是showAnimation的参数的值为 false 。
+## 使用方法二
 
-## 调用this.devConfigService.set函数变更全局配置项
+动态变更全局配置项配置
 
 ```typescript
-import { DevConfigService } from 'ng-devui/utils/globalConfig';
+import { DevConfigService } from 'ng-devui/utils';
 
-  constructor(private devConfigService: DevConfigService) {}
-  // 比如在ngOnInit里调用 将会修改整个的全局配置。
-  ngOnInit() {
-    this.devConfigService.set('global', {
-      'showAnimation': false
-    })
-  }
+constructor(private devConfigService: DevConfigService) {}
+
+ngOnInit() {
+  this.devConfigService.set('global', {
+    'showAnimation': false
+  })
+}
 
 ```
+
+### 全局配置项的优先级
+对于支持全局配置的属性来说，属性值的生效优先级如下：
+
+###### 为组件的某个实例单独设置的值（通过指令，组件，或类似于 service.open 的方法） > &nbsp;  通过 custom_global_config 对象内针对组件提供的全局默认值（包括 set 方法） >  &nbsp; 通过 custom_global_config 对象内global键提供的全局默认值（包括 set 方法） >  &nbsp; DevUI组件库内置的默认值。
+
+例如，你想为 Tooltip 提示组件设置动效：
+
+ 1.使用 dTooltip 指令时传递参数 [showAnimation]="false" 
+
+ 2.通过 custom_global_config 设置 {tooltip: {showAnimation: true}}
+
+ 3.通过 custom_global_config 设置全局默认值 {global: {showAnimation: false}}
+
+ 4.DevUI组件库内置的默认值: showAnimation = true
+
+ 最终， 由于步骤1的优先级最高 Tooltip会关闭动画
+
+
+
+
+###  查看所有可用的全局配置项
+`DevUIGlobalConfig` 接口提供的类型定义信息能够帮助你找到所有支持全局配置项的组件和属性。另外，每个组件的API文档都会在`全局配置项`列指出哪些属性支持全局配置。
+

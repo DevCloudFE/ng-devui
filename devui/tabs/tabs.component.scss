@@ -1,10 +1,10 @@
 @import '../style/theme/color';
 @import '../style/theme/variables';
 @import '../style/mixins/index';
-@import '../style/theme/font';
+@import '../style/core/font';
 @import '../style/theme/corner';
 
-$devui-tab-options-bg: $devui-list-item-hover-bg;
+$devui-tab-slider-bg: $devui-list-item-hover-bg;
 
 :host {
   display: block;
@@ -78,13 +78,14 @@ $devui-tab-options-bg: $devui-list-item-hover-bg;
     border-left-width: 0;
     background-color: $devui-base-bg;
     float: left;
+    transition: background-color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
 
-    &:first-child {
+    &:first-of-type {
       border-left-width: 1px;
       border-radius: $devui-border-radius 0 0 $devui-border-radius;
     }
 
-    &:last-child {
+    &:last-of-type {
       border-radius: 0 $devui-border-radius $devui-border-radius 0;
     }
 
@@ -94,6 +95,7 @@ $devui-tab-options-bg: $devui-list-item-hover-bg;
       color: $devui-text;
       line-height: 26px;
       padding: 0 15px;
+      transition: color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
 
       &:hover,
       &:focus,
@@ -151,7 +153,7 @@ $devui-tab-options-bg: $devui-list-item-hover-bg;
   font-size: $devui-font-size;
   border: none;
   border-radius: $devui-border-radius;
-  background: $devui-tab-options-bg;
+  background: $devui-tab-slider-bg;
   width: fit-content;
   display: flex !important;
   align-items: center;

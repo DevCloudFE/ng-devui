@@ -1,0 +1,58 @@
+<h3>{{ 'components.design-shadow.shadowDemo.instance.title' | translate }}</h3>
+<div class="modal"></div>
+
+<h3>{{ 'components.design-shadow.shadowDemo.instance.description' | translate }}</h3>
+<d-tabs [type]="'tabs'" [(activeTab)]="activeTab">
+  <d-tab id="curShadow" title="{{ 'components.design-shadow.shadowDemo.instance.defaultTable.tab' | translate }}" tabId="curShadow">
+    <ng-template dTabContent>
+      <d-data-table #datatable [dataSource]="shadows" [scrollable]="true" [type]="'striped'">
+        <d-column
+          field="name"
+          header="{{ 'components.design-shadow.shadowDemo.instance.defaultTable.shadowName' | translate }}"
+          [width]="'150px'"
+        >
+        </d-column>
+        <d-column
+          field="value"
+          header="{{ 'components.design-shadow.shadowDemo.instance.defaultTable.shadowValue' | translate }}"
+          [width]="'150px'"
+        ></d-column>
+        <d-column
+          field="description"
+          header="{{ 'components.design-shadow.shadowDemo.instance.defaultTable.description' | translate }}"
+          [width]="'200px'"
+        >
+        </d-column>
+      </d-data-table>
+    </ng-template>
+  </d-tab>
+  <d-tab id="oldShadow" title="{{ 'components.design-shadow.shadowDemo.instance.oldTable.tab' | translate }}" tabId="oldShadow">
+    <ng-template dTabContent>
+      <d-data-table #datatable [dataSource]="oldShadows" [scrollable]="true" [type]="'striped'">
+        <d-column
+          field="name"
+          header="{{ 'components.design-shadow.shadowDemo.instance.oldTable.shadowName' | translate }}"
+          [width]="'150px'"
+        >
+        </d-column>
+        <d-column
+          field="newName"
+          header="{{ 'components.design-shadow.shadowDemo.instance.oldTable.newShadowName' | translate }}"
+          [width]="'150px'"
+        >
+        </d-column>
+        <d-column
+          field="value"
+          header="{{ 'components.design-shadow.shadowDemo.instance.oldTable.shadowValue' | translate }}"
+          [width]="'150px'"
+        ></d-column>
+        <d-column
+          field="description"
+          header="{{ 'components.design-shadow.shadowDemo.instance.oldTable.description' | translate }}"
+          [width]="'200px'"
+        >
+        </d-column>
+      </d-data-table>
+    </ng-template>
+  </d-tab>
+</d-tabs>

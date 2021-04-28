@@ -9,9 +9,18 @@
 >
   click me!
 </d-button>
-<d-button dPopover [content]="customTemplate" [position]="'right'" [trigger]="'hover'" [controlled]="true"> hover me! </d-button>
+<d-button
+  dPopover
+  [content]="customTemplate"
+  [position]="'right'"
+  [trigger]="'hover'"
+  [controlled]="true"
+  [popoverStyle]="{ backgroundColor: 'white', color: 'black' }"
+>
+  hover me!
+</d-button>
 
 <ng-template #customTemplate>
   <h1>Custom Tips</h1>
-  <p>This is a custom tip.</p>
+  <h4>This is a custom tip.</h4>
 </ng-template>

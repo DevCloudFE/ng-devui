@@ -1,12 +1,12 @@
 import { Component, EventEmitter, forwardRef, Input, OnDestroy, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
+import { ToastService } from 'ng-devui/toast';
 import { from, Observable, Subscription } from 'rxjs';
 import { last, map, mergeMap } from 'rxjs/operators';
 import { IFileOptions, IUploadOptions, UploadStatus } from './file-uploader.types';
 import { SelectFiles } from './select-files.utils';
 import { SingleUploadViewComponent } from './single-upload-view.component';
-
 @Component({
   selector: 'd-single-upload',
   templateUrl: './single-upload.component.html',
@@ -21,7 +21,7 @@ import { SingleUploadViewComponent } from './single-upload-view.component';
   ],
   preserveWhitespaces: false,
 })
-export class SingleUploadComponent implements OnDestroy , OnInit, ControlValueAccessor {
+export class SingleUploadComponent implements OnDestroy, OnInit, ControlValueAccessor {
   dSingleUploadView;
   @Input() uploadOptions: IUploadOptions;
   @Input() fileOptions: IFileOptions;
@@ -57,7 +57,7 @@ export class SingleUploadComponent implements OnDestroy , OnInit, ControlValueAc
   errorMsg = [];
   private onChange = (_: any) => null;
   private onTouched = () => null;
-  constructor(private i18n: I18nService, private selectFiles: SelectFiles) {
+  constructor(private i18n: I18nService, private selectFiles: SelectFiles, private toastService: ToastService) {
   }
 
   writeValue(files: any): void {
@@ -76,7 +76,7 @@ export class SingleUploadComponent implements OnDestroy , OnInit, ControlValueAc
   }
 
   simulateSelectFiles(files) {
-    return  new Promise((resolve) => {
+    return new Promise((resolve) => {
       resolve(Array.prototype.slice.call(files));
     });
   }
@@ -212,7 +212,9 @@ export class SingleUploadComponent implements OnDestroy , OnInit, ControlValueAc
   }
 
   alertMsg(errorMsg) {
-    this.errorMsg = [{ severity: 'warn', detail: errorMsg }];
+    this.toastService.open({
+      value: [{ severity: 'warn', content: errorMsg }],
+    });
   }
 
   ngOnDestroy() {

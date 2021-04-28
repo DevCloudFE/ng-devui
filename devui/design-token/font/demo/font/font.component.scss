@@ -1,0 +1,13 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
+.page-first-card-title {
+  font-size: $devui-font-size-page-title;
+  line-height: $devui-line-height-base;
+  font-weight: $devui-font-title-weight;
+}
+
+.content {
+  font-size: $devui-font-size;
+  line-height: $devui-line-height-base;
+  font-weight: $devui-font-content-weight;
+}

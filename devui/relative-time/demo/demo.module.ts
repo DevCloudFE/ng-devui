@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 import { DataTableModule } from 'ng-devui/data-table';
 import { I18nModule } from 'ng-devui/i18n';
+import { RelativeTimeModule } from 'ng-devui/relative-time';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
-import { TranslateModule } from '@ngx-translate/core';
-import { RelativeTimeModule } from '../relative-time.module';
 import { BasicComponent } from './basic/basic.component';
 import { CustomTimeComponent } from './custom-time/custom-time.component';
 import { DemoComponent } from './demo.component';

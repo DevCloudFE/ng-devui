@@ -61,7 +61,7 @@
                 ></d-toggle>
                 <span>{{ 'themePicker.follow' | translate }}</span>
               </div>
-              <div class="prefers-color-scheme">
+              <div>
                 <d-toggle class="theme-follow-toggle" [(ngModel)]="protectEye" (ngModelChange)="themeFontSizeChange()"></d-toggle>
                 <span>{{ 'themePicker.largeSize' | translate }}</span>
               </div>
@@ -71,19 +71,26 @@
       </d-tab>
       <d-tab id="advancedTheme" title="{{ 'themePicker.extend' | translate }}" tabId="advancedTheme">
         <ng-template dTabContent>
-          <div
-            *ngFor="let item of advancedThemeList"
-            class="extend-theme-image"
-            [style.background-image]="'url(' + assetsPrefix + item.url + ')'"
-            (click)="advancedThemeChange(item.value)"
-          >
-            <span class="extend-theme-title" [style.color]="item.value === 'infinity' ? 'var(--devui-text)' : null">{{
-              'themePicker.' + item.value | translate
-            }}</span>
-            <i *ngIf="currentAdvancedTheme === item.value" class="icon-right active-theme"></i>
+          <div style="width: 180px; margin: 0 auto">
+            <div
+              *ngFor="let item of advancedThemeList"
+              class="extend-theme-image"
+              [style.background-image]="'url(' + assetsPrefix + item.url + ')'"
+              (click)="advancedThemeChange(item.value)"
+            >
+              <span class="extend-theme-title" [style.color]="item.value === 'infinity' ? '#252b3a' : null">{{
+                'themePicker.' + item.value | translate
+              }}</span>
+              <i *ngIf="currentAdvancedTheme === item.value" class="icon-right active-theme"></i>
+            </div>
           </div>
         </ng-template>
       </d-tab>
+      <!-- <d-tab id="customizeTheme" title="{{ 'themePicker.customize' | translate }}" tabId="customizeTheme">
+        <ng-template dTabContent>
+          <app-theme-picker-customize></app-theme-picker-customize>
+        </ng-template>
+      </d-tab> -->
     </d-tabs>
   </div>
 </div>

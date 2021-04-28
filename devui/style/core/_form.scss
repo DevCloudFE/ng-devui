@@ -360,6 +360,28 @@ d-editable-select:not([disabled]):not(.disabled):not(.devui-disabled).devui-erro
   }
 }
 
+d-datepicker-pro:not([disabled]):not(.disabled):not(.devui-disabled).devui-error {
+  .devui-datepicker-pro-wrapper:not([disabled]):not(.disabled):not(.devui-disabled) .devui-dropdown-toggle .devui-single-picker {
+    border-color: $devui-danger-line;
+    background-color: $devui-danger-bg;
+
+    .devui-input:not(.devui-disabled) {
+      background-color: $devui-danger-bg;
+    }
+  }
+}
+
+d-range-datepicker-pro:not([disabled]):not(.disabled):not(.devui-disabled).devui-error {
+  .devui-datepicker-pro-wrapper:not([disabled]):not(.disabled):not(.devui-disabled) .devui-dropdown-toggle .devui-range-picker {
+    border-color: $devui-danger-line;
+    background-color: $devui-danger-bg;
+
+    .devui-input:not(.devui-disabled) {
+      background-color: $devui-danger-bg;
+    }
+  }
+}
+
 d-input-number:not([disabled]):not(.disabled):not(.devui-disabled).devui-error {
   .input-box:not(:disabled) {
     border-color: $devui-danger-line;

@@ -54,7 +54,7 @@
   padding: 8px 12px;
   font-size: $devui-font-size;
   line-height: 1.5;
-  width: 182px;
+  width: 200px; // 根据tab页动态宽度
 
   .title {
     font-weight: bold;

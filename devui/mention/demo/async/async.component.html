@@ -1,0 +1,9 @@
+<textarea
+  dTextarea
+  placeholder="Please Enter"
+  id="textArea"
+  dMention
+  [mentionSuggestions]="suggestions"
+  [mentionLoading]="loading"
+  (mentionSearchChange)="onSearchChange($event)"
+></textarea>

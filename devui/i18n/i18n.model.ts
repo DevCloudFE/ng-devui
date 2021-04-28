@@ -149,4 +149,11 @@ export interface I18nInterface {
     seeMore: string;
     selected: string;
   };
+  userGuide: {
+    guide: string;
+    prev: string;
+    next: string;
+    finish: string;
+    autoFill: string;
+  };
 }

@@ -29,13 +29,13 @@
 
 <!-- 目录内容模板 -->
 <ng-template #defaultItemsTemp let-data>
-  <ul class="devui-nav-sprite-menus" *ngIf="navData?.length">
+  <ul class="devui-nav-sprite-menus" *ngIf="menus?.length">
     <li
       #items
-      *ngFor="let item of navData; let i = index"
+      *ngFor="let item of menus; let i = index"
       [style]="'text-indent:' + indent * (item?.level - 1) + 'em;'"
-      [ngClass]="{ active: i === activeMenu }"
-      (click)="navTo($event, item)"
+      [ngClass]="{ active: i === activeIndex }"
+      (click)="navTo(i)"
     >
       <ng-container [ngTemplateOutlet]="navItemTemplate" [ngTemplateOutletContext]="{ item: item }"></ng-container>
     </li>
@@ -44,12 +44,13 @@
 
 <!-- 精灵模式最小化模板 -->
 <ng-template #minTemp>
-  <div class="devui-sprite-min">
+  <div class="devui-sprite-min" dTooltip [content]="title">
     <i class="icon-frame-contract" (click)="open()"></i>
   </div>
 </ng-template>
 
 <!-- 单个目录模板 -->
 <ng-template #defaultNavItemTemplate let-item="item">
-  <span>{{ item?.label }}</span>
+  <a [href]="item.href" *ngIf="hashSupport">{{ item?.label }}</a>
+  <span *ngIf="!hashSupport">{{ item?.label }}</span>
 </ng-template>

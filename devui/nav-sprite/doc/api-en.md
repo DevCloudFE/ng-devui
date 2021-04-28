@@ -19,6 +19,9 @@ In the page:：
 |         Parameter        |                Type                  |            Default             | Description                            | Jump to Demo                                    |
 | :------------------:| :---------------------------------: | :-------------------------: | :------------------------------ | -------------------------------------------- |
 |    target  |   `HTMLElement`                     |           --               |         Required. Location of the generated directory    |         [Basic usage](demo#basic)                |
+|    scrollTarget         |     `HTMLElement`             |              --              |           Optional. Specifies the scrolling container.            |      [Scroll Usage](demo#scroll)  |
+|     view      | `{top?:number,bottom?:number}` |            {top:0,bottom:0}             |                                                   Optional. It is used to adjust the visible region, for example, the head with a fixed position on the top. The value corresponds to the height of the blocked top or bottom.                                                   | [Scroll Usage](demo#scroll)                    |
+|    hashSupport         |     `boolean`             |             `false`              |           Optional. Specifies whether to support anchors           |                    --  |
 |    mode             |     [`Mode`](#Mode)            |           'default'           |          Optional. mode`default \| sprite`                   |                    [mode](demo#sprite)  |
 |    maxLevel         |     `number`                          |           3                 |           Optional. Maximum level of the generated directory               |                    [maxLevel](demo#sprite)  |
 |    title         |     `string`                          |              'menu'              |           Optional. title               |                    [title](demo#basic)  |

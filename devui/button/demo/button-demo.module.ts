@@ -2,13 +2,13 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+import { ButtonModule } from 'ng-devui/button';
 import { DropDownModule } from 'ng-devui/dropdown';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
-import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
-import { ButtonModule } from '../button.module';
 import { AutofocusComponent } from './autofocus/autofocus.component';
 import { ButtonDemoComponent } from './button-demo.component';
 import { CombinationComponent } from './combination/combination.component';
@@ -56,7 +56,7 @@ import { TextComponent } from './text/text.component';
     SizeComponent,
     GroupsComponent,
   ],
-  
+
 })
 export class ButtonDemoModule {
 }

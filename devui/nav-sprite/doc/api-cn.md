@@ -19,6 +19,9 @@ import { NavSpriteModule } from 'ng-devui/nav-sprite';
 |         参数        |                类型                  |            默认             | 说明                            | 跳转 Demo                                    |
 | :------------------:| :---------------------------------: | :-------------------------: | :------------------------------ | -------------------------------------------- |
 |    target  |   `HTMLElement`                     |           --               |         必选，目录存放的位置    |         [基本用法](demo#basic)                |
+|    scrollTarget         |     `HTMLElement`             |              --              |           可选，指定滚动容器            |       [指定容器用法](demo#scroll)   |
+|     view      | `{top?:number,bottom?:number}` |            {top:0,bottom:0}             |     可选，用于可视区域的调整，比如顶部有固定位置的头部等，数值对应被遮挡的顶部或底部的高度     |   [指定容器用法](demo#scroll)  |
+|    hashSupport         |     `boolean`             |              `false`              |           可选，是否支持锚点            |                    --  |
 |    mode             |     [`Mode`](#Mode)            |           'default'           |          可选，模式`default \| sprite`                   |                    [模式](demo#sprite)  |
 |    maxLevel         |     `number`                          |           3                 |           可选，生成目录的最大层级               |                    [最大层级](demo#sprite)  |
 |    title         |     `string`                          |              'menu'              |           可选，名称               |                    [名称](demo#basic)  |
