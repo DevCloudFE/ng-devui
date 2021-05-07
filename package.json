@@ -18,7 +18,7 @@
     "e2e": "ng e2e",
     "postinstall": "patch-package && ngcc --tsconfig tsconfig.base.json",
     "lint:devui": "tslint -p devui/tsconfig.lint.json -c devui/tslint.json \"devui/**/*.ts\"",
-    "lint:devui:fix": "tslint --fix -p devui/tsconfig.lint.json -c devui/tslint.json \"*.ts\"",
+    "lint:devui:fix": "tslint --fix -p devui/tsconfig.lint.json -c devui/tslint.json \"devui/**/*.ts\"",
     "prettier": "prettier --config ./.prettierrc --write \"{devui,src}/**/*.html\"",
     "stylelint": "stylelint \"{devui,src}/**/*.{scss,css}\"  --fix",
     "build:devui": "node ./node_modules/@angular/cli/bin/ng build devui-lib --configuration production",
