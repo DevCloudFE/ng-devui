@@ -1,0 +1,9 @@
+**/*.md
+**/*.svg
+**/test.ts
+
+node_modules/
+.vscode/
+coverage/
+
+package.json

@@ -1,0 +1,17 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=827846 to learn about workspace recommendations.
+  // Extension identifier format: ${publisher}.${name}. Example: vscode.csharp
+
+  // List of extensions which should be recommended for users of this workspace.
+  "recommendations": [
+    "angular.ng-template",
+    "cyrilletuzi.angular-schematics",
+    "esbenp.prettier-vscode",
+    "stylelint.vscode-stylelint",
+    "ms-vscode.vscode-typescript-tslint-plugin",
+    // The following extensions are useful.
+    //"aaron-bond.better-comments",
+    //"coenraads.bracket-pair-colorizer",
+    //"gruntfuggly.todo-tree",
+  ],
+}
