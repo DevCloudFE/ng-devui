@@ -26,7 +26,7 @@ import { fromEvent, Subscription } from 'rxjs';
   preserveWhitespaces: false,
 })
 export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy, OnInit {
-  static EFFECT_PAGE_RANGE_KEYS = ['total', 'pageSize', 'pageIndex', 'maxItems'];
+  static EFFECT_PAGE_RANGE_KEYS = ['total', 'pageSize', 'pageIndex', 'maxItems', 'pageSizeOptions'];
 
   /**
    * 【可选】每页显示最大条目数量，默认10条
@@ -107,6 +107,7 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy,
    * 是否自动隐藏
    */
   @Input() autoHide = false;
+  minPageSizeOptions: number;
   litePaginatorIndex: { value: number, label: string } | null;
   litePaginatorOptions: any[] = [];
   private litePaginatorOptionsLengthCache = 0;
@@ -239,6 +240,7 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy,
   ngOnChanges(changes: SimpleChanges): void {
     const shouldUpdateRanges = PaginationComponent.EFFECT_PAGE_RANGE_KEYS.some(key => !!changes[key]);
     if (shouldUpdateRanges) {
+      this.minPageSizeOptions = Math.min(...this.pageSizeOptions);
       this.totalPage = this.getTotalPage();
       if (!this.showTruePageIndex) {
         this.pageIndex = Math.max(Math.min(this.pageIndex, this.totalPage), 1);

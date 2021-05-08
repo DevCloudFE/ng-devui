@@ -37,7 +37,7 @@ import { PaginationModule } from 'ng-devui/pagination';
 | showPageSelector  |                                                 `boolean`                                                 |            true            | 可选，`极简模式`下是否显示页码下拉                                                                       | [极简模式](demo#minimalist-model)        |
 |  haveConfigMenu   |                                                 `boolean`                                                 |           false            | 可选，`极简模式`下是否显示配置                                                                           | [极简模式](demo#minimalist-model)        |
 | autoFixPageIndex  |                                                 `boolean`                                                 |            true            | 可选，改变 pageSize 时是否自动修正页码，若`pageSizeChange`事件中会对`pageIndex`做处理，建议设置为`false` | [极简模式](demo#minimalist-model)        |
-| autoHide          |             `boolean`               |            false           | 可选，是否自动隐藏, autoHide为 true 并且 pageSizeOptions[0] > total 不展示分页                                     | [极简模式](demo#minimalist-model)        |
+| autoHide          |             `boolean`               |            false           | 可选，是否自动隐藏, autoHide为 true 并且 pageSizeOptions最小值 > total 不展示分页                                     | [极简模式](demo#minimalist-model)        |
 
 ## d-pagination 事件
 
