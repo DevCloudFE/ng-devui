@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { Subscription } from 'rxjs';
 @Component({
   selector: 'd-demo-radio',
@@ -25,7 +25,7 @@ export class RadioDemoComponent implements OnInit, OnDestroy {
   disabledSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./disabled/disabled.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./disabled/disabled.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./disabled/disabled.component.css') },
+    { title: 'CSS', language: 'css', code: require('!!raw-loader!./disabled/disabled.component.css') },
   ];
 
   horizontalSource: Array<DevuiSourceData> = [

@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { Subscription } from 'rxjs';
 @Component({
   selector: 'd-demo-pagination',
@@ -15,7 +15,7 @@ export class PaginationDemoComponent implements OnInit, OnDestroy {
   additionalSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./additional/additional.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./additional/additional.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./additional/additional.component.css') },
+    { title: 'CSS', language: 'css', code: require('!!raw-loader!./additional/additional.component.css') },
   ];
   liteSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./lite/lite.component.html') },
@@ -25,6 +25,7 @@ export class PaginationDemoComponent implements OnInit, OnDestroy {
   widgetsSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./widgets/widgets.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./widgets/widgets.component.ts') },
+    { title: 'CSS', language: 'css', code: require('!!raw-loader!./widgets/widgets.component.css') },
   ];
 
   navItems = [];

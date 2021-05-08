@@ -1,25 +1,22 @@
-import {
-  Component, OnDestroy, OnInit
-} from '@angular/core';
-import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'd-quadrant-diagram-demo',
-  templateUrl: './quadrant-diagram-demo.component.html'
+  templateUrl: './quadrant-diagram-demo.component.html',
 })
-
 export class QuadrantDiagramDemoComponent implements OnInit, OnDestroy {
   basicSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./basic/basic.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/basic.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./basic/basic.component.scss') }
+    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./basic/basic.component.scss') },
   ];
   configSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./config/config.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./config/config.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./config/config.component.scss') }
+    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./config/config.component.scss') },
   ];
 
   navItems = [];
@@ -53,5 +50,4 @@ export class QuadrantDiagramDemoComponent implements OnInit, OnDestroy {
       this.subs.unsubscribe();
     }
   }
-
 }

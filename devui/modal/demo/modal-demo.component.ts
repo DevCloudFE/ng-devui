@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -30,7 +30,7 @@ export class ModalDemoComponent implements OnInit, OnDestroy {
   tipsSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./tips/tips.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./tips/tips.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./tips/tips.component.css') },
+    { title: 'CSS', language: 'css', code: require('!!raw-loader!./tips/tips.component.css') },
   ];
   hideSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./hide/hide.component.html') },
@@ -50,22 +50,29 @@ export class ModalDemoComponent implements OnInit, OnDestroy {
   templateSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./template/template.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./template/template.component.ts') },
-    { title: 'Dialog Content HTML', language: 'xml',
-    code: require('!!raw-loader!./template/dialog-content/dialog-content.component.html') },
-    { title: 'Dialog Content TS', language: 'typescript',
-    code: require('!!raw-loader!./template/dialog-content/dialog-content.component.ts') },
-    { title: 'Modal Content HTML', language: 'xml',
-    code: require('!!raw-loader!./template/modal-content/modal-content.component.html') },
-    { title: 'Modal Content TS', language: 'typescript',
-    code: require('!!raw-loader!./template/modal-content/modal-content.component.ts') },
-    { title: 'Modal Content CSS', language: 'css',
-    code: require('!!raw-loader!./template/modal-content/modal-content.component.scss') }
+    {
+      title: 'Dialog Content HTML',
+      language: 'xml',
+      code: require('!!raw-loader!./template/dialog-content/dialog-content.component.html'),
+    },
+    {
+      title: 'Dialog Content TS',
+      language: 'typescript',
+      code: require('!!raw-loader!./template/dialog-content/dialog-content.component.ts'),
+    },
+    { title: 'Modal Content HTML', language: 'xml', code: require('!!raw-loader!./template/modal-content/modal-content.component.html') },
+    {
+      title: 'Modal Content TS',
+      language: 'typescript',
+      code: require('!!raw-loader!./template/modal-content/modal-content.component.ts'),
+    },
+    { title: 'Modal Content CSS', language: 'css', code: require('!!raw-loader!./template/modal-content/modal-content.component.scss') },
   ];
   fixedWrapperSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./fixed/fixed-wrapper.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./fixed/fixed-wrapper.component.ts') },
     { title: 'ModalTestComponent HTML', language: 'xml', code: require('!!raw-loader!./fixed/modal-test.component.html') },
-    { title: 'ModalTestComponent TS', language: 'typescript', code: require('!!raw-loader!./fixed/modal-test.component.ts') }
+    { title: 'ModalTestComponent TS', language: 'typescript', code: require('!!raw-loader!./fixed/modal-test.component.ts') },
   ];
 
   navItems = [];
@@ -97,7 +104,7 @@ export class ModalDemoComponent implements OnInit, OnDestroy {
       { dAnchorLink: 'update-button-options', value: values['update-button-options'] },
       { dAnchorLink: 'configure-button-to-get-focus-automatically', value: values['configure-button-to-get-focus-automatically'] },
       { dAnchorLink: 'template-content', value: values['template-content'] },
-      { dAnchorLink: 'template-fixed', value: values['template-fixed'] }
+      { dAnchorLink: 'template-fixed', value: values['template-fixed'] },
     ];
   }
 

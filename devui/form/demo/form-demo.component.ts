@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DevuiSourceData } from 'ng-devui/shared/devui-codebox/devui-source-data';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { DevuiSourceData } from 'ng-devui/shared/devui-codebox/devui-source-data';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -12,24 +12,24 @@ export class FormDemoComponent implements OnInit, OnDestroy {
   BasicSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./basic/basic.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/basic.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./basic/basic.component.css') },
+    { title: 'CSS', language: 'css', code: require('!!raw-loader!./basic/basic.component.css') },
   ];
   LabelHorizontalSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./label-horizontal/label-horizontal.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./label-horizontal/label-horizontal.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./label-horizontal/label-horizontal.component.css') },
+    { title: 'CSS', language: 'css', code: require('!!raw-loader!./label-horizontal/label-horizontal.component.css') },
   ];
   ModalSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./modal/modal.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./modal/modal.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./modal/modal.component.css') },
+    { title: 'CSS', language: 'css', code: require('!!raw-loader!./modal/modal.component.css') },
     { title: 'ModalOne HTML', language: 'xml', code: require('!!raw-loader!./modal-one/modal-one.component.html') },
     { title: 'ModalOne TS', language: 'typescript', code: require('!!raw-loader!./modal-one/modal-one.component.ts') },
   ];
   MultiColSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./multi-col/multi-col.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./multi-col/multi-col.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./multi-col/multi-col.component.css') },
+    { title: 'CSS', language: 'css', code: require('!!raw-loader!./multi-col/multi-col.component.css') },
   ];
 
   InnerValidatorSource: Array<DevuiSourceData> = [

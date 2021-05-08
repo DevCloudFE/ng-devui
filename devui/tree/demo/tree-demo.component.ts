@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -62,7 +62,7 @@ export class TreeDemoComponent implements OnInit, OnDestroy {
   virtualScrollSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./virtual-scroll/virtual-scroll.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./virtual-scroll/virtual-scroll.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./virtual-scroll/virtual-scroll.component.css') },
+    { title: 'CSS', language: 'css', code: require('!!raw-loader!./virtual-scroll/virtual-scroll.component.css') },
   ];
   withoutAnimationSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./without-animation/without-animation.component.html') },
