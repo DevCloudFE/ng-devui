@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'd-layout-top',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./top.component.scss'],
 })
 export class LayoutTopComponent {
-  logoSrc = 'https://res.hc-cdn.com/x-roma-components/1.0.10/assets/devui/logo.svg';
+  logoSrc = environment.deployPrefix + 'assets/logo.svg';
 }
