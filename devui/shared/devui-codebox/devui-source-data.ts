@@ -1,5 +1,5 @@
 export interface DevuiSourceData {
-  title?: string;
-  language?: string;
-  code?: any;
+  title: string;
+  language: 'html' | 'xml' | 'typescript' | 'css';
+  code: any;
 }
