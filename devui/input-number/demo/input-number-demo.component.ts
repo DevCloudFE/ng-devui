@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { Subscription } from 'rxjs';
 @Component({
   selector: 'd-demo-input-number',
@@ -10,19 +10,19 @@ export class InputNumberDemoComponent implements OnInit, OnDestroy {
   InputNumberBasic: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./basic/input-number-basic.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/input-number-basic.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./basic/input-number-basic.component.css') },
+    { title: 'CSS', language: 'css', code: require('!!raw-loader!./basic/input-number-basic.component.css') },
   ];
 
   InputNumberDisabled: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./disabled/input-number-disabled.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./disabled/input-number-disabled.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./disabled/input-number-disabled.component.css') },
+    { title: 'CSS', language: 'css', code: require('!!raw-loader!./disabled/input-number-disabled.component.css') },
   ];
 
   InputNumberEmpty: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./empty/input-number-empty.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./empty/input-number-empty.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./empty/input-number-empty.component.css') },
+    { title: 'CSS', language: 'css', code: require('!!raw-loader!./empty/input-number-empty.component.css') },
   ];
 
   InputNumberPlaceholderAndMaxLengthComponent: Array<DevuiSourceData> = [
@@ -46,13 +46,13 @@ export class InputNumberDemoComponent implements OnInit, OnDestroy {
   InputNumberReg: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./reg/input-number-reg.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./reg/input-number-reg.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./reg/input-number-reg.component.css') },
+    { title: 'CSS', language: 'css', code: require('!!raw-loader!./reg/input-number-reg.component.css') },
   ];
 
   DecimalLimit: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./decimalLimit/decimal-limit.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./decimalLimit/decimal-limit.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./decimalLimit/decimal-limit.component.css') },
+    { title: 'CSS', language: 'css', code: require('!!raw-loader!./decimalLimit/decimal-limit.component.css') },
   ];
 
   navItems = [];

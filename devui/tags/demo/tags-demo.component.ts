@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DevuiSourceData } from 'ng-devui/shared/devui-codebox/devui-source-data';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { DevuiSourceData } from 'ng-devui/shared/devui-codebox/devui-source-data';
 import { Subscription } from 'rxjs';
+
 @Component({
   selector: 'd-demo-tags',
   templateUrl: './tags-demo.component.html',
@@ -20,7 +21,7 @@ export class TagsDemoComponent implements OnDestroy, OnInit {
 
   navItems = [];
   subs: Subscription = new Subscription();
-  constructor(private translate: TranslateService) { }
+  constructor(private translate: TranslateService) {}
 
   ngOnInit() {
     this.subs.add(

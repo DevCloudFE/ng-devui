@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DevuiSourceData } from 'ng-devui/shared/devui-codebox/devui-source-data';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { DevuiSourceData } from 'ng-devui/shared/devui-codebox/devui-source-data';
 import { Subscription } from 'rxjs';
+
 @Component({
   selector: 'd-accordion-demo',
   templateUrl: './accordion-demo.component.html',
@@ -10,13 +11,13 @@ export class AccordionDemoComponent implements OnInit, OnDestroy {
   AccordionDemoBasic: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./basic/basic.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/basic.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./basic/basic.component.css') },
+    { title: 'CSS', language: 'css', code: require('!!raw-loader!./basic/basic.component.css') },
   ];
 
   AccordionDemolink: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./link/link.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./link/link.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./link/link.component.css') },
+    { title: 'CSS', language: 'css', code: require('!!raw-loader!./link/link.component.css') },
   ];
 
   AccordionDemoTemplate: Array<DevuiSourceData> = [
@@ -28,17 +29,17 @@ export class AccordionDemoComponent implements OnInit, OnDestroy {
   AccordionDemoInnerListTemplate: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./inner-list-template/inner-list-template.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./inner-list-template/inner-list-template.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./inner-list-template/inner-list-template.component.css') },
+    { title: 'CSS', language: 'css', code: require('!!raw-loader!./inner-list-template/inner-list-template.component.css') },
   ];
   AccordionDemoMultiLevel: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./multi-level/multi-level.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./multi-level/multi-level.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./multi-level/multi-level.component.css') },
+    { title: 'CSS', language: 'css', code: require('!!raw-loader!./multi-level/multi-level.component.css') },
   ];
   AccordionDemoChangeKey: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./change-key/change-key.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./change-key/change-key.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./change-key/change-key.component.css') },
+    { title: 'CSS', language: 'css', code: require('!!raw-loader!./change-key/change-key.component.css') },
   ];
 
   navItems = [];

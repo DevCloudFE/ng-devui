@@ -4,15 +4,14 @@ import { environment } from 'src/environments/environment';
 @Component({
   selector: 'd-custom',
   templateUrl: './custom.component.html',
-  styleUrls: ['./custom.component.scss']
+  styleUrls: ['./custom.component.scss'],
 })
 export class CustomComponent implements OnInit {
   imgSrc: string;
-  constructor() { }
+
+  constructor() {}
 
   ngOnInit(): void {
-    this.imgSrc = environment.production ? './components/assets/logo.svg' : './assets/logo.svg';
-
+    this.imgSrc = environment.deployPrefix + 'assets/logo.svg';
   }
-
 }

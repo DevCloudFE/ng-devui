@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -14,9 +14,9 @@ export class DatepickerDemoComponent implements OnInit, OnDestroy {
     { title: 'SCSS', language: 'css', code: require('!!raw-loader!./basic/basic.component.scss') },
   ];
   setModeSource: Array<DevuiSourceData> = [
-    {title: 'HTML', language: 'html', code: require('!!raw-loader!./set-mode/set-mode.component.html')},
-    {title: 'TS', language: 'typescript', code: require('!!raw-loader!./set-mode/set-mode.component.ts')},
-    {title: 'SCSS', language: 'css', code: require('!!raw-loader!./set-mode/set-mode.component.scss')},
+    { title: 'HTML', language: 'html', code: require('!!raw-loader!./set-mode/set-mode.component.html') },
+    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./set-mode/set-mode.component.ts') },
+    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./set-mode/set-mode.component.scss') },
   ];
   minMaxSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'html', code: require('!!raw-loader!./min-max/min-max.component.html') },
@@ -146,7 +146,7 @@ export class DatepickerDemoComponent implements OnInit, OnDestroy {
   buttonSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'html', code: require('!!raw-loader!./button/button.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./button/button.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./button/button.component.css') },
+    { title: 'CSS', language: 'css', code: require('!!raw-loader!./button/button.component.css') },
   ];
   twoDatepickerBasic = [
     {

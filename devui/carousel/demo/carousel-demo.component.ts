@@ -20,6 +20,7 @@ export class CarouselDemoComponent implements OnInit, OnDestroy {
   CarouselAutoplayComponent = [
     { title: 'HTML', language: 'html', code: require('!!raw-loader!./autoplay/carousel-demo-autoplay.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./autoplay/carousel-demo-autoplay.component.ts') },
+    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./autoplay/image-mock.ts') },
   ];
   CarouselCustomComponent = [
     { title: 'HTML', language: 'html', code: require('!!raw-loader!./custom/carousel-demo-custom.component.html') },

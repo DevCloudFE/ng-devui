@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -10,7 +10,7 @@ export class PopoverDemoComponent implements OnInit, OnDestroy {
   basicSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./basic/basic.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/basic.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./basic/basic.component.css') },
+    { title: 'CSS', language: 'css', code: require('!!raw-loader!./basic/basic.component.css') },
   ];
 
   positionSource: Array<DevuiSourceData> = [
@@ -37,6 +37,7 @@ export class PopoverDemoComponent implements OnInit, OnDestroy {
   hoverDelayTimeSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./hover-delay-time/hover-delay-time.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./hover-delay-time/hover-delay-time.component.ts') },
+    { title: 'CSS', language: 'css', code: require('!!raw-loader!./hover-delay-time/hover-delay-time.component.css') },
   ];
 
   navItems = [];
