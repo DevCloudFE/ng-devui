@@ -1,6 +1,15 @@
 import {
-  ChangeDetectionStrategy, Component, ElementRef,
-  EventEmitter, HostListener, Input, Output, TemplateRef, ViewChild
+  AfterContentChecked,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostListener,
+  Input,
+  Output,
+  TemplateRef,
+  ViewChild,
 } from '@angular/core';
 export type IButtonType = 'button' | 'submit' | 'reset';
 export type IButtonStyle = 'common' | 'primary' | 'text' | 'text-dark' | 'danger';
@@ -14,7 +23,7 @@ export type IButtonSize = 'lg' | 'md' | 'sm' | 'xs';
   changeDetection: ChangeDetectionStrategy.OnPush,
   preserveWhitespaces: false,
 })
-export class ButtonComponent {
+export class ButtonComponent implements AfterContentChecked {
   @Input() id: string;
   @Input() type: IButtonType = 'button';
   @Input() bsStyle: IButtonStyle = 'primary';
@@ -38,14 +47,17 @@ export class ButtonComponent {
     }
   }
 
-  constructor() {
-  }
+  constructor(private cd: ChangeDetectorRef) {}
 
   // 新增click事件，解决直接在host上使用click，在disabled状态下还能触发事件
   onClick(event) {
     if (!this.showLoading) {
       this.btnClick.emit(event);
     }
+  }
+
+  ngAfterContentChecked(): void {
+    this.cd.detectChanges();
   }
 
   hasContent() {
