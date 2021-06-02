@@ -1,17 +1,24 @@
 <div class="devui-demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 180, bottom: 0 }">
   <d-demo-nav [navItems]="navItems"></d-demo-nav>
-  <div class="devui-demo-example" [dAnchor]="'basic-usage'">
-    <div class="devui-demo-title">{{ "components.time-axis.allStatesDemo.title" | translate }}</div>
-    <div class="devui-demo-text">{{ "components.time-axis.allStatesDemo.description" | translate }}</div>
-    <d-codebox [sourceData]="basicSource">
-      <d-demo-time-axis-all-states demo></d-demo-time-axis-all-states>
-    </d-codebox>
-  </div>
   <div class="devui-demo-example" [dAnchor]="'direction'">
     <div class="devui-demo-title">{{ "components.time-axis.directionDemo.title" | translate }}</div>
     <div class="devui-demo-text">{{ "components.time-axis.directionDemo.description" | translate }}</div>
     <d-codebox [sourceData]="directionSource">
       <d-demo-time-axis-direction demo></d-demo-time-axis-direction>
+    </d-codebox>
+  </div>
+  <div class="devui-demo-example" [dAnchor]="'custom-dot'">
+    <div class="devui-demo-title">{{ "components.time-axis.customDotDemo.title" | translate }}</div>
+    <div class="devui-demo-text"></div>
+    <d-codebox id="components-time-axis-custom-dot" [sourceData]="customDotSource">
+      <d-demo-time-axis-custom-dot demo></d-demo-time-axis-custom-dot>
+    </d-codebox>
+  </div>
+  <div class="devui-demo-example" [dAnchor]="'content-with-template'">
+    <div class="devui-demo-title">{{ "components.time-axis.templateDemo.title" | translate }}</div>
+    <div class="devui-demo-text"></div>
+    <d-codebox id="components-time-axis-template-content" [sourceData]="templateSource">
+      <d-demo-time-axis-template-content demo></d-demo-time-axis-template-content>
     </d-codebox>
   </div>
   <div class="devui-demo-example" [dAnchor]="'content-with-html'">
@@ -21,11 +28,25 @@
       <d-demo-time-axis-html-content demo></d-demo-time-axis-html-content>
     </d-codebox>
   </div>
-  <div class="devui-demo-example" [dAnchor]="'content-with-template'">
-    <div class="devui-demo-title">{{ "components.time-axis.templateDemo.title" | translate }}</div>
+  <div class="devui-demo-example" [dAnchor]="'content-with-alternative-mode'">
+    <div class="devui-demo-title">{{ "components.time-axis.alternativeModeDemo.title" | translate }}</div>
     <div class="devui-demo-text"></div>
-    <d-codebox id="components-time-axis-template-content" [sourceData]="templateSource">
-      <d-demo-time-axis-template-content demo></d-demo-time-axis-template-content>
+    <d-codebox id="components-time-axis-customize-dot" [sourceData]="alternativeModeSource">
+      <d-demo-time-axis-alternative-mode demo></d-demo-time-axis-alternative-mode>
+    </d-codebox>
+  </div>
+  <div class="devui-demo-example" [dAnchor]="'basic-usage'">
+    <div class="devui-demo-title">{{ "components.time-axis.allStatesDemo.title" | translate }}</div>
+    <div class="devui-demo-text">{{ "components.time-axis.allStatesDemo.description" | translate }}</div>
+    <d-codebox [sourceData]="basicSource">
+      <d-demo-time-axis-all-states demo></d-demo-time-axis-all-states>
+    </d-codebox>
+  </div>
+  <div class="devui-demo-example" [dAnchor]="'seperate-way'">
+    <div class="devui-demo-title">{{ "components.time-axis.seperateWayDemo.title" | translate }}</div>
+    <div class="devui-demo-text"></div>
+    <d-codebox id="components-time-axis-seperate-way" [sourceData]="seperateWaySource">
+      <d-demo-time-axis-seperate-way demo></d-demo-time-axis-seperate-way>
     </d-codebox>
   </div>
 </div>

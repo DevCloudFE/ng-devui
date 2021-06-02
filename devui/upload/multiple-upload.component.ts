@@ -199,7 +199,6 @@ export class MultipleUploadComponent implements OnDestroy, OnInit {
           (results: Array<{ file: File, response: any }>) => {
             this.successEvent.emit(results);
             results.forEach((result) => {
-              this.multipleUploadViewComponent.deleteFile(result.file);
               this.multipleUploadViewComponent.uploadedFilesComponent.addFile(result.file);
             });
           },

@@ -1,6 +1,5 @@
-import { AfterViewInit, Component, ElementRef, Input, OnChanges, TemplateRef } from '@angular/core';
-import { TimeAxisData } from './time-axis.type';
-
+import { AfterContentInit, AfterViewInit, Component, ContentChildren, ElementRef, Input, QueryList, TemplateRef } from '@angular/core';
+import { TimeAxisItemComponent } from './time-axis-item/time-axis-item.component';
 @Component({
   selector: 'd-time-axis',
   templateUrl: './time-axis.component.html',
@@ -9,42 +8,67 @@ import { TimeAxisData } from './time-axis.type';
   preserveWhitespaces: false,
 })
 
-export class TimeAxisComponent implements AfterViewInit, OnChanges {
-  @Input() data: TimeAxisData = {
-      position: 'bottom', // 如果为bottom时，才生效；
-      model: 'text', // text/html/template
-      list: []
-  };
-
-  private viewRenderComplete = false;
-
+export class TimeAxisComponent implements AfterContentInit, AfterViewInit {
+  @ContentChildren(TimeAxisItemComponent) listOfItems!: QueryList<TimeAxisItemComponent>;
+  @Input() data;
   @Input() contentTemplate: TemplateRef<any>;
+  @Input() direction = 'vertical';
+  @Input() mode = 'normal';
+  @Input() widthMode = 'fitContent';
 
-  constructor(
-    private elementRef: ElementRef
-  ) { }
+  constructor(private elementRef: ElementRef) {
+
+  }
+
+  ngAfterContentInit() {
+    if (this.mode === 'alternative') {
+      this.updateAlternativePosition();
+    }
+  }
 
   ngAfterViewInit() {
-    Promise.resolve(null).then(() => {
-      this.viewRenderComplete = true;
-    });
+    if (this._direction === 'horizontal') {
+      const ulElement = this.elementRef.nativeElement.querySelector('.devui-time-axis-horizontal')  as HTMLElement;
+      const topElement = this.elementRef.nativeElement.querySelector('.devui-time-axis-item-data-horizontal-top')  as HTMLElement;
+      const bottomElement = this.elementRef.nativeElement.querySelector('.devui-time-axis-item-data-horizontal-bottom')  as HTMLElement;
+      ulElement.style.height = `${ Math.max(topElement.offsetHeight, bottomElement.offsetHeight) * 2 + 42}px`;
+    }
   }
 
-  ngOnChanges() {
-    this.viewRenderComplete = false;
-    Promise.resolve(null).then(() => {
-      this.viewRenderComplete = true;
-    });
+  get _direction() {
+    if (this.data !== undefined) {
+      return this.data.direction || 'vertical';
+    } else {
+      return this.direction;
+    }
   }
 
-  get bottomPositionMarginLeft() {
-    const timeElement = this.elementRef.nativeElement.querySelector('.devui-time-axis.bottom .devui-axis-time-time > div');
-    const ICON_WIDTH_PX = 20;
-    return timeElement && this.viewRenderComplete ? timeElement.offsetWidth / 2 - ICON_WIDTH_PX / 2 : 0;
+  get _widthMode() {
+    if (this.data !== undefined) {
+      return this.data.widthMode;
+    } else {
+      return this.widthMode;
+    }
   }
 
-  get bottomPositionTextLeft() {
-    const timeElement = this.elementRef.nativeElement.querySelector('.devui-time-axis.bottom .devui-axis-time-time');
-    return timeElement && this.viewRenderComplete ? -timeElement.offsetWidth / 2 : 0;
+  updateAlternativePosition() {
+    if (this.data === undefined) {
+      this.listOfItems.forEach((item, index) => {
+        if (this._direction === 'vertical') {
+          item.position = index % 2 === 0 ? 'left' : 'right';
+        } else {
+          item.position = index % 2 === 0 ? 'bottom' : 'top';
+        }
+      });
+    } else {
+      for (let i = 0; i < this.data.list.length; i++) {
+        if (this._direction === 'vertical') {
+          this.data.list[i].position = i % 2 === 0 ? 'left' : 'right';
+        } else {
+          this.data.list[i].position = i % 2 === 0 ? 'bottom' : 'top';
+        }
+      }
+    }
   }
+
 }

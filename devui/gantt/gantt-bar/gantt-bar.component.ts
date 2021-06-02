@@ -1,5 +1,18 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnChanges,
-  OnDestroy, OnInit, Output, SimpleChanges, TemplateRef, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  Output,
+  SimpleChanges,
+  TemplateRef,
+  ViewChild
+} from '@angular/core';
 import { fromEvent, Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged, map, pluck, takeUntil, tap } from 'rxjs/operators';
 import { GanttTaskInfo } from '../gantt.model';
@@ -8,7 +21,7 @@ import { GanttService } from '../gantt.service';
 @Component({
   selector: 'd-gantt-bar',
   templateUrl: './gantt-bar.component.html',
-  styleUrls: ['./gantt-bar.component.scss']
+  styleUrls: ['./gantt-bar.component.scss'],
 })
 export class GanttBarComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
   private moveBarStartListener: Observable<number>;
@@ -30,7 +43,7 @@ export class GanttBarComponent implements OnInit, OnChanges, AfterViewInit, OnDe
   mouseLeaveTimer: any = null;
 
   dragProgressStart: boolean;
-  private moveBarStart: boolean;
+  moveBarStart: boolean;
   private resizeBarLeftStart: boolean;
   private resizeBarRightStart: boolean;
 
@@ -63,7 +76,7 @@ export class GanttBarComponent implements OnInit, OnChanges, AfterViewInit, OnDe
   private max = 100;
   private min = 0;
   private step = 1;
-  private mouseEventDalay = 200;
+  private mouseEventDalay = 100;
 
   public duration: string;
   public tipHovered = false;
@@ -80,7 +93,19 @@ export class GanttBarComponent implements OnInit, OnChanges, AfterViewInit, OnDe
   @Input() tipTemplateRef: TemplateRef<any>;
   @Input() data: any;
 
+  @Input() originOffsetX = 0;
+
   @Input() id: string;
+
+  @Input() title: string;
+
+  @Input() showTitle = false;
+
+  @Input() customBarClass = '';
+
+  @Input() customBgClass = '';
+
+  @Input() customTitleClass = '';
 
   @Output() barMoveStartEvent = new EventEmitter<GanttTaskInfo>();
   @Output() barMovingEvent = new EventEmitter<GanttTaskInfo>();
@@ -92,7 +117,7 @@ export class GanttBarComponent implements OnInit, OnChanges, AfterViewInit, OnDe
 
   @Output() barProgressEvent = new EventEmitter<number>();
 
-  constructor(private cdr: ChangeDetectorRef, private ganttService: GanttService) {}
+  constructor(private cdr: ChangeDetectorRef, private ganttService: GanttService, private ele: ElementRef) {}
 
   ngOnInit() {
     this.checkRangeValues(this.min, this.max);
@@ -193,11 +218,9 @@ export class GanttBarComponent implements OnInit, OnChanges, AfterViewInit, OnDe
     this.setValue(this.ensureValueInRange(newValue));
   }
 
-  private onTouchedCallback = (v: any) => {
-  }
+  private onTouchedCallback = (v: any) => {};
 
-  private onChangeCallback = (v: any) => {
-  }
+  private onChangeCallback = (v: any) => {};
 
   private checkRangeValues(minValue, maxValue) {
     if (maxValue <= minValue) {
@@ -213,12 +236,7 @@ export class GanttBarComponent implements OnInit, OnChanges, AfterViewInit, OnDe
     }
   }
 
-  private ratioToValue(
-    ratio: number,
-    min: number,
-    max: number,
-    step: number
-  ): number {
+  private ratioToValue(ratio: number, min: number, max: number, step: number): number {
     let value = (max - min) * ratio + min;
     if (step > 0) {
       value = Math.round(value / step) * step;
@@ -251,7 +269,7 @@ export class GanttBarComponent implements OnInit, OnChanges, AfterViewInit, OnDe
         e.stopPropagation();
         e.preventDefault();
       }),
-      pluck<Event, number>('pageX'),
+      pluck<Event, number>('pageX')
     );
 
     this.dragProgressStartListener = fromEvent(this.ganttBarProgress.nativeElement, 'mousedown').pipe(
@@ -268,7 +286,7 @@ export class GanttBarComponent implements OnInit, OnChanges, AfterViewInit, OnDe
         e.stopPropagation();
         e.preventDefault();
       }),
-      pluck<Event, number>('pageX'),
+      pluck<Event, number>('pageX')
     );
 
     this.resizeBarRightStartListener = fromEvent(this.ganttBarDarggerRight.nativeElement, 'mousedown').pipe(
@@ -276,7 +294,7 @@ export class GanttBarComponent implements OnInit, OnChanges, AfterViewInit, OnDe
         e.stopPropagation();
         e.preventDefault();
       }),
-      pluck<Event, number>('pageX'),
+      pluck<Event, number>('pageX')
     );
 
     this.mouseEndListener = fromEvent(document, 'mouseup');
@@ -362,7 +380,7 @@ export class GanttBarComponent implements OnInit, OnChanges, AfterViewInit, OnDe
         return;
       }
 
-      const timeOffset = Math.round(offset / this.ganttService.getScaleUnitPixel() * GanttService.DAY_DURATION);
+      const timeOffset = Math.round((offset / this.ganttService.getScaleUnitPixel()) * GanttService.DAY_DURATION);
       this.startDate = new Date(this.originStartDate.getTime() + timeOffset);
       this.ganttService.roundDate(this.startDate);
       if (this.endDate < this.startDate) {
@@ -371,7 +389,7 @@ export class GanttBarComponent implements OnInit, OnChanges, AfterViewInit, OnDe
 
       const earlyDateTime = this.startDate.getTime() - this.EARLYOFFSET * GanttService.DAY_DURATION;
       if (offset < 0 && earlyDateTime < this.ganttService.scaleStartDate.getTime()) {
-        this.ganttService.setScaleConfig({startDate: new Date(earlyDateTime)});
+        this.ganttService.setScaleConfig({ startDate: new Date(earlyDateTime) });
         this.barOriginLeft = this.EARLYOFFSET * this.ganttService.getScaleUnitPixel() - Math.round(offset);
       }
       const finalLeft = this.barOriginLeft + Math.round(offset);
@@ -393,7 +411,7 @@ export class GanttBarComponent implements OnInit, OnChanges, AfterViewInit, OnDe
         return;
       }
 
-      const timeOffset = Math.round(offset / this.ganttService.getScaleUnitPixel() * GanttService.DAY_DURATION);
+      const timeOffset = Math.round((offset / this.ganttService.getScaleUnitPixel()) * GanttService.DAY_DURATION);
       this.endDate = new Date(this.originEndDate.getTime() + timeOffset);
       this.ganttService.roundDate(this.endDate);
       if (this.endDate < this.startDate) {
@@ -402,7 +420,7 @@ export class GanttBarComponent implements OnInit, OnChanges, AfterViewInit, OnDe
 
       const lateDateTime = this.endDate.getTime() + this.EARLYOFFSET * GanttService.DAY_DURATION;
       if (offset > 0 && lateDateTime > this.ganttService.scaleEndDate.getTime()) {
-        this.ganttService.setScaleConfig({endDate: new Date(lateDateTime)});
+        this.ganttService.setScaleConfig({ endDate: new Date(lateDateTime) });
       }
 
       this.width = finalWidth;
@@ -416,13 +434,13 @@ export class GanttBarComponent implements OnInit, OnChanges, AfterViewInit, OnDe
       this.mouseMoveOnBar = true;
       const offset = value - this.barMoveStartPageX;
 
-      const timeOffset = Math.round(Math.round(offset) / this.ganttService.getScaleUnitPixel() * GanttService.DAY_DURATION);
+      const timeOffset = Math.round((Math.round(offset) / this.ganttService.getScaleUnitPixel()) * GanttService.DAY_DURATION);
 
-      const newStartDate =  new Date(this.originStartDate.getTime() + timeOffset);
+      const newStartDate = new Date(this.originStartDate.getTime() + timeOffset);
       this.ganttService.roundDate(newStartDate);
       this.startDate = newStartDate;
 
-      const newEndDate =  new Date(this.originEndDate.getTime() + timeOffset);
+      const newEndDate = new Date(this.originEndDate.getTime() + timeOffset);
       this.ganttService.roundDate(newEndDate);
       this.endDate = newEndDate;
 
@@ -430,12 +448,12 @@ export class GanttBarComponent implements OnInit, OnChanges, AfterViewInit, OnDe
       const lateDateTime = this.endDate.getTime() + this.EARLYOFFSET * GanttService.DAY_DURATION;
 
       if (offset < 0 && earlyDateTime < this.ganttService.scaleStartDate.getTime()) {
-        this.ganttService.setScaleConfig({startDate: new Date(earlyDateTime)});
+        this.ganttService.setScaleConfig({ startDate: new Date(earlyDateTime) });
         this.barOriginLeft = this.EARLYOFFSET * this.ganttService.getScaleUnitPixel() - Math.round(offset);
       }
 
       if (offset > 0 && lateDateTime > this.ganttService.scaleEndDate.getTime()) {
-        this.ganttService.setScaleConfig({endDate: new Date(lateDateTime)});
+        this.ganttService.setScaleConfig({ endDate: new Date(lateDateTime) });
       }
 
       const finalLeft = this.barOriginLeft + Math.round(offset);
@@ -456,7 +474,9 @@ export class GanttBarComponent implements OnInit, OnChanges, AfterViewInit, OnDe
       startDate: this.startDate,
       endDate: this.endDate,
       duration: this.duration,
-      progress: progress
+      progress: progress,
+      left: this.left,
+      width: this.width,
     };
     return taskInfo;
   }
@@ -491,25 +511,43 @@ export class GanttBarComponent implements OnInit, OnChanges, AfterViewInit, OnDe
     this.cdr.markForCheck();
   }
 
-  private subscribeMouseActions(mouseActions: string[] = ['start', 'move', 'end'],
-                                events: string[] = ['barMove', 'barResize', 'progress']): void {
-    if (mouseActions.indexOf('start') !== -1 && this.dragProgressStartListener && !this.dragProgressStartHandler
-    && events.indexOf('progress') !== -1) {
+  private subscribeMouseActions(
+    mouseActions: string[] = ['start', 'move', 'end'],
+    events: string[] = ['barMove', 'barResize', 'progress']
+  ): void {
+    if (
+      mouseActions.indexOf('start') !== -1 &&
+      this.dragProgressStartListener &&
+      !this.dragProgressStartHandler &&
+      events.indexOf('progress') !== -1
+    ) {
       this.dragProgressStartHandler = this.dragProgressStartListener.subscribe(this.progressStartDrag.bind(this));
     }
 
-    if (mouseActions.indexOf('start') !== -1 && this.moveBarStartListener && !this.moveBarStartHandler
-    && events.indexOf('barMove') !== -1) {
+    if (
+      mouseActions.indexOf('start') !== -1 &&
+      this.moveBarStartListener &&
+      !this.moveBarStartHandler &&
+      events.indexOf('barMove') !== -1
+    ) {
       this.moveBarStartHandler = this.moveBarStartListener.subscribe(this.barStartMoving.bind(this));
     }
 
-    if (mouseActions.indexOf('start') !== -1 && this.resizeBarLeftStartListener && !this.resizeBarLeftStartHandler
-    && events.indexOf('barResize') !== -1) {
+    if (
+      mouseActions.indexOf('start') !== -1 &&
+      this.resizeBarLeftStartListener &&
+      !this.resizeBarLeftStartHandler &&
+      events.indexOf('barResize') !== -1
+    ) {
       this.resizeBarLeftStartHandler = this.resizeBarLeftStartListener.subscribe(this.barLeftStartResizing.bind(this));
     }
 
-    if (mouseActions.indexOf('start') !== -1 && this.resizeBarRightStartListener && !this.resizeBarRightStartHandler
-    && events.indexOf('barResize') !== -1) {
+    if (
+      mouseActions.indexOf('start') !== -1 &&
+      this.resizeBarRightStartListener &&
+      !this.resizeBarRightStartHandler &&
+      events.indexOf('barResize') !== -1
+    ) {
       this.resizeBarRightStartHandler = this.resizeBarRightStartListener.subscribe(this.barRightStartResizing.bind(this));
     }
 
@@ -522,8 +560,10 @@ export class GanttBarComponent implements OnInit, OnChanges, AfterViewInit, OnDe
     }
   }
 
-  private unsubscribeMouseActions(dragStages: string[] = ['start', 'move', 'end'],
-                                  events: string[] = ['barMove', 'barResize', 'progress']): void {
+  private unsubscribeMouseActions(
+    dragStages: string[] = ['start', 'move', 'end'],
+    events: string[] = ['barMove', 'barResize', 'progress']
+  ): void {
     if (dragStages.indexOf('start') !== -1 && events.indexOf('progress') !== -1 && this.dragProgressStartHandler) {
       this.dragProgressStartHandler.unsubscribe();
       this.dragProgressStartHandler = null;
@@ -622,8 +662,7 @@ export class GanttBarComponent implements OnInit, OnChanges, AfterViewInit, OnDe
       this.focused = this.focusController();
       this.dispatchGanttBarStatus();
       this.cdr.markForCheck();
-    }, 200);
-
+    }, this.mouseEventDalay);
   }
 
   ganttBarPopoverOnMouseLeave() {
@@ -674,15 +713,14 @@ export class GanttBarComponent implements OnInit, OnChanges, AfterViewInit, OnDe
   }
 
   private focusController() {
-    return this.dragProgressStart || this.moveBarStart || this.resizeBarLeftStart
-    || this.resizeBarRightStart ||  this.barHovering;
+    return this.dragProgressStart || this.moveBarStart || this.resizeBarLeftStart || this.resizeBarRightStart || this.barHovering;
   }
 
   dispatchGanttBarStatus() {
     const status = {
       focused: this.focused,
       startDate: this.startDate,
-      endDate: this.endDate
+      endDate: this.endDate,
     };
     this.ganttService.changeGanttBarStatus(status);
   }
@@ -696,5 +734,4 @@ export class GanttBarComponent implements OnInit, OnChanges, AfterViewInit, OnDe
       this.ganttScaleStatusHandler = null;
     }
   }
-
 }

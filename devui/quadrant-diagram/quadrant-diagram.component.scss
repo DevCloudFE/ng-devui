@@ -6,27 +6,43 @@
 }
 
 .devui-control-zoom-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8px;
   position: absolute;
-  top: 0;
+  top: -4px;
   height: 32px;
   width: 96px;
   box-shadow: $devui-shadow-length-base $devui-shadow;
-  background: #ffffff;
+  background: $devui-base-bg;
   z-index: 10;
 }
 
 .devui-icon-display {
-  line-height: 32px;
-  width: 32px;
-  display: inline-block;
-  text-align: center;
   cursor: pointer;
+
+  svg g polygon,
+  svg g g,
+  svg g path {
+    fill: $devui-icon-text;
+  }
+
+  &:hover {
+    svg g polygon,
+    svg g g,
+    svg g path {
+      fill: $devui-brand;
+    }
+  }
 }
 
 .disabled {
   cursor: not-allowed;
 
-  svg g polygon {
+  svg g polygon,
+  svg g g,
+  svg g path {
     fill: $devui-disabled-text;
   }
 }

@@ -21,7 +21,7 @@ import {
 import { fromEvent, Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { MentionComponent } from './mention.component';
-import { Mention, MentionOnSearchTypes, PostionType } from './mention.types';
+import { Mention, MentionOnSearchTypes, MentionPositionType } from './mention.types';
 import { DEFAULT_MENTION_BOTTOM_POSITIONS } from './position';
 import { getCaretCoordinates } from './utils';
 
@@ -48,7 +48,7 @@ export class MentionDirective implements OnInit, OnChanges, AfterViewInit, OnDes
 
   @Input() mentionTrigger = ['@'];
 
-  @Input() mentionPosition: PostionType = 'bottom';
+  @Input() mentionPosition: MentionPositionType = 'bottom';
 
   @Input() mentionItemTemplate: TemplateRef<any>;
 

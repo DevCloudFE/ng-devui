@@ -1,5 +1,6 @@
 @import '../style/theme/color';
 @import '../style/core/_font';
+@import '../style/core/animation';
 
 .devui-dropdown-menu {
   padding-bottom: 0;
@@ -91,14 +92,18 @@
 }
 
 .devui-drop-icon {
-  font-size: $devui-font-size;
+  width: 12px;
+  height: 12px;
+  display: inline-block;
+  line-height: 12px;
+  vertical-align: middle;
 
-  svg polygon {
+  svg path {
     fill: $devui-text;
   }
 
   &-animation svg {
-    transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    transition: transform $devui-animation-duration-slow $devui-animation-ease-in-smooth;
   }
 }
 

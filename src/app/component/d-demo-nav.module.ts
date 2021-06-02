@@ -1,10 +1,9 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DDemoNavComponent } from './d-demo-nav.component';
-import { StickyModule } from 'ng-devui/sticky';
-import { AnchorModule } from 'ng-devui/anchor';
+import { NgModule } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
-
+import { AnchorModule } from 'ng-devui/anchor';
+import { StickyModule } from 'ng-devui/sticky';
+import { DDemoNavComponent } from './d-demo-nav.component';
 
 @NgModule({
   imports: [
@@ -22,4 +21,4 @@ import { TranslateModule } from '@ngx-translate/core';
     AnchorModule
   ]
 })
-export class DDemoNavModule { }
+export class DDemoNavModule {}

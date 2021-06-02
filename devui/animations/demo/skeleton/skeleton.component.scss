@@ -1,0 +1,24 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
+.block {
+  height: 20px;
+  background-color: $devui-area;
+  margin: 20px 0;
+}
+
+.block-1 {
+  width: 50%;
+  margin: auto;
+}
+
+.block-2 {
+  width: 100%;
+}
+
+.block-3 {
+  width: 60%;
+}
+
+.block-4 {
+  width: 70%;
+}

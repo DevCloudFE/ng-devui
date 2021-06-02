@@ -1,4 +1,12 @@
-<div *ngIf="startDate && endDate" #ganttBar class="devui-gantt-bar-parent" [style.left]="left + 'px'" [style.width]="width + 'px'">
+<div
+  *ngIf="startDate && endDate"
+  #ganttBar
+  class="devui-gantt-bar-parent"
+  [style.left]="left + 'px'"
+  [style.width]="width + 'px'"
+  dTooltip
+  [content]="tip"
+>
   <div class="devui-gantt-bar-rail" #ganttBarRail></div>
   <div class="devui-gantt-bar-track" [ngClass]="{ head: percentage > 0, tail: percentage === 1 }" #ganttBarTrack></div>
 </div>

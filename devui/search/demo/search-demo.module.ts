@@ -2,12 +2,12 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
 import { FormModule } from 'ng-devui';
 import { SearchModule } from 'ng-devui/search';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
+import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 import { AutoFocusComponent } from './auto-focus/auto-focus.component';
 import { BasicComponent } from './basic/basic.component';
@@ -44,7 +44,7 @@ import { SearchDemoComponent } from './search-demo.component';
     AutoFocusComponent,
     SearchNoBorderComponent
   ],
-
+  
 })
 export class SearchDemoModule {
 }

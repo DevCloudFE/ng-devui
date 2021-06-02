@@ -75,7 +75,7 @@
 
   .devui-gantt-bar-track {
     position: absolute;
-    background-image: linear-gradient(90deg, $devui-brand 0%, $devui-brand 100%);
+    background-color: $devui-brand;
     box-shadow: $devui-shadow-length-base rgba(81, 112, 255, 0.4);
     border-radius: $devui-border-radius 0 0 $devui-border-radius;
     border-radius: $devui-border-radius 0 0 $devui-border-radius;
@@ -113,6 +113,16 @@
   &:hover .devui-gantt-bar-progress {
     display: block;
   }
+
+  .devui-gantt-bar-title {
+    position: absolute;
+    display: inline-flex;
+    align-items: center;
+    left: 100%;
+    height: 100%;
+    margin-left: 12px;
+    word-break: keep-all;
+  }
 }
 
 .devui-gantt-tips {
@@ -123,4 +133,13 @@
   border-radius: $devui-border-radius-card;
   padding: 15px;
   margin-top: 10px;
+}
+
+.moving-bg {
+  position: absolute;
+  height: 100%;
+  top: 0;
+  bottom: 0;
+  background: $devui-float-block-shadow;
+  opacity: 0.3;
 }

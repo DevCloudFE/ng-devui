@@ -12,7 +12,12 @@
     [style.left]="position === 'left' ? 0 : null"
     [style.right]="position === 'right' ? 0 : null"
   >
-    <div class="overlay-backdrop" [@fadeInOut]="animateState" [@.disabled]="!showAnimation" (click)="backdropCloseable && hide()"></div>
+    <div
+      class="overlay-backdrop"
+      [@backdropAnimation]="animateState"
+      [@.disabled]="!showAnimation"
+      (click)="backdropCloseable && hide()"
+    ></div>
     <div
       #drawerContainer
       class="drawer-nav"

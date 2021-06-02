@@ -3,12 +3,13 @@
 @import '../style/mixins/index';
 @import '../style/theme/shadow';
 @import '../style/theme/corner';
+@import '../style/theme/z-index';
 
 .drawer {
   position: fixed;
   top: 0;
   bottom: 0;
-  z-index: 1000;
+  z-index: $devui-z-index-drawer;
 }
 
 .overlay-wrapper {

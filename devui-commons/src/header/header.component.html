@@ -8,7 +8,7 @@
       'header-maxwidth': hasMaxWidth
     }">
       <div class="header-left">
-        <div *ngIf="showSlideButton" class="slide-menu-link" (click)="clickSlideMenu($event)">
+        <div *ngIf="showSlideButton" class="slide-menu-link" (click)="clickSlideMenu()">
           <span></span>
         </div>
         <ng-content select="d-header-logo"></ng-content>
@@ -22,7 +22,7 @@
         <ng-content select="d-header-language-switch"></ng-content>
         <div *ngIf="showGitStar">
           <iframe class="header-gitStar"
-            src="https://ghbtns.com/github-btn.html?user=DevCloudFE&repo=ng-devui&type=star&count=true"
+            [attr.src]="repoLink"
           ></iframe>
         </div>  
         <div *ngIf="showAvatar" class="header-avatar">

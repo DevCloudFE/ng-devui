@@ -1,0 +1,22 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
+.container {
+  height: 300px;
+  width: 100%;
+  margin-top: 20px;
+  position: relative;
+  background: $devui-global-bg;
+
+  d-button {
+    margin: auto;
+  }
+
+  .drawer {
+    position: absolute;
+    width: 200px;
+    height: 100%;
+    background: $devui-base-bg;
+    box-shadow: $devui-shadow-length-base $devui-shadow;
+    padding: 20px 10px;
+  }
+}

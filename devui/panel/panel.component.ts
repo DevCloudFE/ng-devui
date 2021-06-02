@@ -9,7 +9,7 @@ import {
   Input,
   Output
 } from '@angular/core';
-import { collapseForDomDestroy } from 'ng-devui/utils';
+import { expandCollapseForDomDestroy } from 'ng-devui/utils';
 import { DevConfigService, WithConfig } from 'ng-devui/utils/globalConfig';
 import { Observable } from 'rxjs';
 import { PanelFooterComponent } from './panel-footer.component';
@@ -20,7 +20,7 @@ import { PanelType } from './panel.types';
   selector: 'd-panel',
   templateUrl: './panel.component.html',
   styleUrls: ['./panel.component.scss'],
-  animations: [trigger('noAnimation', [transition(':enter', [])]), collapseForDomDestroy],
+  animations: [trigger('noAnimation', [transition(':enter', [])]), expandCollapseForDomDestroy],
 })
 export class PanelComponent {
   @Input() type: PanelType = 'default';

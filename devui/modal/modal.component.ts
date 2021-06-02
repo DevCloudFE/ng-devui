@@ -1,5 +1,5 @@
-import { animate, group, state, style, transition, trigger } from '@angular/animations';
 import { Component, ElementRef, Input, OnDestroy, OnInit, Renderer2, TemplateRef, ViewChild } from '@angular/core';
+import { backdropFadeInOut, wipeInOutAnimation } from 'ng-devui/utils';
 import { DocumentRef } from 'ng-devui/window-ref';
 import { isUndefined } from 'lodash-es';
 import { fromEvent, Observable, Subscription } from 'rxjs';
@@ -10,24 +10,8 @@ import { ModalContainerDirective } from './modal.directive';
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss'],
   animations: [
-    trigger('backdropAnimation', [
-      state('void', style({ opacity: 0 })),
-      state('in', style({ opacity: 0.2 })),
-      transition('void => in', animate('100ms linear')),
-      transition('in => void', animate('100ms linear')),
-    ]),
-    trigger('modalAnimation', [
-      state('void', style({ opacity: 0.2, transform: 'translateY(-24px)' })),
-      state('in', style({ opacity: 1, transform: 'translateY(0)' })),
-      transition('void => in', group([
-        animate('100ms cubic-bezier(0.16,0.75,0.5,1)', style({ opacity: 1})),
-        animate('100ms linear', style({ transform: 'translateY(0)'}))
-      ])),
-      transition('in => void', group([
-        animate('100ms cubic-bezier(0.5,0,0.84,0.25)', style({ opacity: 0.2})),
-        animate('100ms linear', style({ transform: 'translateY(-24px)'}))
-      ])),
-    ])
+    backdropFadeInOut,
+    wipeInOutAnimation
   ],
   preserveWhitespaces: false,
 })

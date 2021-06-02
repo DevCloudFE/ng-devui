@@ -17,7 +17,7 @@ export class CustomComponent implements OnInit {
     {name: 'Item3'}
   ];
 
-  choose3 = this.values3[2];
+  choose3 = this.values3[2].name;
   constructor() { }
 
   ngOnInit() {

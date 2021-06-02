@@ -1,4 +1,5 @@
 @import '../style/theme/color';
+@import '../style/core/animation';
 
 :host {
   display: block;
@@ -18,7 +19,7 @@
     background-color: $devui-area;
     height: 5px;
     width: 100%;
-    transition: background-color 0.2s ease-in-out;
+    transition: background-color $devui-animation-duration-base $devui-animation-ease-in-smooth;
     border-radius: 4px;
 
     &.disabled {

@@ -11,7 +11,7 @@ export class CustomComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.imgSrc = environment.production ? './components/assets/logo.svg' : './assets/logo.svg';
+    this.imgSrc = environment.deployPrefix + 'assets/logo.svg';
 
   }
 

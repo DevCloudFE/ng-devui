@@ -1,5 +1,5 @@
 import { Component, HostBinding, ViewEncapsulation } from '@angular/core';
-import { collapse } from 'ng-devui/utils';
+import { expandCollapse, expandCollapseForDomDestroy } from 'ng-devui/utils';
 import { AccordionBaseComponent } from './accordion-base-component.class';
 import { AccordionListComponent } from './accordion-list.component';
 import { AccordionComponent } from './accordion.component';
@@ -9,7 +9,7 @@ import { AccordionBaseMenu, AccordionMenuItem } from './accordion.type';
   templateUrl: './accordion-menu.component.html',
   encapsulation: ViewEncapsulation.None,
   preserveWhitespaces: false,
-  animations: [collapse]
+  animations: [expandCollapse, expandCollapseForDomDestroy]
 })
 export class AccordionMenuComponent extends AccordionBaseComponent<AccordionBaseMenu<AccordionMenuItem>> {
   @HostBinding('class.devui-accordion-menu-item')

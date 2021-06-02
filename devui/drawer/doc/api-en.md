@@ -76,5 +76,7 @@ Note: Components passed to drawerContentComponent in the API need to be register
 
 - **Trigger the drawer layer to be disabled**: drawerInstance.**hide**(): void. This function checks beforeHidden first. If true is returned, the function is disabled.
 
+- **Close drawer layer directly**：drawerInstance.**hideDirectly**(): void，Skip all hook functions and close directly.
+
 - **Trigger the destruction of the drawer layer**: drawerInstance.**destroy**(): void. When destroyOnHide is set to false and the drawer layer is disabled, the destroy method can be invoked to destroy the drawer layer.
 - **Set the width**: drawerInstance.**setWidth**(width: string): void

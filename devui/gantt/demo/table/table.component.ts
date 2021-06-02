@@ -4,16 +4,32 @@ import { GanttMilestone, GanttScaleUnit, GanttService, GanttTaskInfo } from 'ng-
 import { Subscription } from 'rxjs';
 import { curYear, SourceType, treeDataSource } from '../mock-data';
 
+const DEFAULT_WIDTH_CONFIG = [
+  {
+    field: 'title',
+    width: '200px',
+  },
+  {
+    field: 'name',
+    width: '100px',
+  },
+  {
+    field: 'status',
+    width: '100px',
+  },
+];
+
 @Component({
   selector: 'd-table-gantt',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
-  providers: [GanttService]
+  providers: [GanttService],
 })
 export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
   curYear = curYear;
   basicDataSource: Array<SourceType> = treeDataSource;
   @ViewChild('datatable', { read: ElementRef, static: true }) datatableElementRef: ElementRef;
+  @ViewChild('ganttscale', { read: ElementRef, static: true }) ganttscaleElementRef: ElementRef;
   ganttScaleWidth: string;
   ganttBarContainerElement: Element;
   resizeHandleContainerElement: Element;
@@ -23,28 +39,29 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
   unit = GanttScaleUnit.day;
   milestoneList: GanttMilestone[];
   ganttSacleConfigHandler: Subscription;
-  originOffsetLeft: number;
+  originOffsetLeft = 0;
   columnAdjustStrategy = ColumnAdjustStrategy.mousemove;
   tableScrollLeft = 0;
-  constructor(private ganttService: GanttService) { }
+  isFullScreen = false;
   tableWidthConfig = [
     {
-      field: 'title',
-      width: '200px'
-    },
-    {
-      field: 'name',
-      width: '100px'
-    },
-    {
-      field: 'status',
-      width: '100px'
-    },
-    {
       field: 'gantt',
-      width: null
-    }
+      width: null,
+    },
   ];
+  scrollView: HTMLElement;
+  startMove = false;
+  startMoveX = 0;
+  originOffsetX = 0;
+  scaleStep = 50;
+  expand = true;
+  private mouseDownHandler: Subscription | null;
+  private mouseMoveHandler: Subscription | null;
+  private mouseEndHandler: Subscription | null;
+
+  constructor(private ganttService: GanttService) {
+    this.tableWidthConfig = DEFAULT_WIDTH_CONFIG.concat(this.tableWidthConfig);
+  }
 
   ngOnInit() {
     this.ganttStartDate = new Date(curYear, 4, 1);
@@ -52,13 +69,13 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
     this.ganttService.setScaleConfig({
       startDate: this.ganttStartDate,
       endDate: this.ganttEndDate,
-      unit: this.unit
+      unit: this.unit,
     });
     this.ganttScaleWidth = this.ganttService.getDurationWidth(this.ganttStartDate, this.ganttEndDate) + 'px';
     this.tableWidthConfig[3].width = this.ganttScaleWidth;
     const milestone = {
       date: new Date(2020, 1, 8),
-      lable: 'V1.2'
+      lable: 'V1.2',
     };
     this.milestoneList = [];
     this.milestoneList.push(milestone);
@@ -72,7 +89,8 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
       }
       if (config.startDate || config.endDate) {
         this.ganttScaleWidth = this.ganttService.getDurationWidth(this.ganttStartDate, this.ganttEndDate) + 'px';
-        this.tableWidthConfig[3].width = this.ganttScaleWidth;
+        const len = this.tableWidthConfig.length;
+        this.tableWidthConfig[len - 1].width = this.ganttScaleWidth;
       }
     });
   }
@@ -82,27 +100,48 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
       if (this.datatableElementRef.nativeElement) {
         this.ganttBarContainerElement = this.datatableElementRef.nativeElement.getElementsByTagName('table')[1];
         this.resizeHandleContainerElement = this.datatableElementRef.nativeElement.getElementsByClassName('devui-table-view')[0];
-        this.ganttScaleContainerOffsetLeft = this.datatableElementRef.nativeElement.getElementsByTagName('th')[3].offsetLeft;
+        this.setOffset();
       }
+      this.scrollView = this.datatableElementRef.nativeElement.getElementsByClassName('scroll-view')[0];
+      this.ganttService.registContainerEvents(this.scrollView);
+      this.mouseDownHandler = this.ganttService.mouseDownListener.subscribe(this.onMousedown.bind(this));
+      this.mouseMoveHandler = this.ganttService.mouseMoveListener.subscribe(this.onMouseMove.bind(this));
+      this.mouseEndHandler = this.ganttService.mouseEndListener.subscribe(this.onMouseEnd.bind(this));
     });
+  }
+
+  onMousedown(pageX) {
+    this.startMove = true;
+    this.originOffsetLeft = this.scrollView.scrollLeft;
+    this.startMoveX = pageX;
+  }
+
+  onMouseMove(pageX) {
+    if (this.startMove) {
+      const moveOffset = this.startMoveX - pageX;
+      this.scrollView.scrollTo(this.originOffsetLeft + moveOffset, this.scrollView.scrollTop);
+    }
+  }
+
+  onMouseEnd() {
+    this.startMove = false;
   }
 
   goToday() {
     const today = new Date();
-    const offset = this.ganttService.getDatePostionOffset(today);
-    const scrollView = this.datatableElementRef.nativeElement.getElementsByClassName('scroll-view')[0];
-    if (scrollView) {
-      scrollView.scrollTo(offset, scrollView.scrollTop);
+    const offset = this.ganttService.getDatePostionOffset(today) - (this.scrollView.clientWidth - this.originOffsetX) / 2;
+    if (this.scrollView) {
+      this.scrollView.scrollTo(offset, this.scrollView.scrollTop);
     }
   }
 
   onTableResize(event: ColumnResizeEventArg) {
     if (this.datatableElementRef.nativeElement) {
-      this.ganttScaleContainerOffsetLeft = this.datatableElementRef.nativeElement.getElementsByTagName('th')[3].offsetLeft;
+      this.setOffset();
     }
   }
 
-  increaseUnit() {
+  onIncreaseUnit() {
     if (this.unit === GanttScaleUnit.month) {
       return;
     }
@@ -114,10 +153,11 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     this.ganttService.setScaleConfig({ unit: this.unit });
     this.ganttScaleWidth = this.ganttService.getDurationWidth(this.ganttStartDate, this.ganttEndDate) + 'px';
-    this.tableWidthConfig[3].width = this.ganttScaleWidth;
+    const len = this.tableWidthConfig.length;
+    this.tableWidthConfig[len - 1].width = this.ganttScaleWidth;
   }
 
-  reduceUnit() {
+  onReduceUnit() {
     if (this.unit === GanttScaleUnit.day) {
       return;
     }
@@ -129,7 +169,16 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     this.ganttService.setScaleConfig({ unit: this.unit });
     this.ganttScaleWidth = this.ganttService.getDurationWidth(this.ganttStartDate, this.ganttEndDate) + 'px';
-    this.tableWidthConfig[3].width = this.ganttScaleWidth;
+  }
+
+  onSwitchView(unit) {
+    this.unit = unit;
+    this.ganttService.setScaleConfig({ unit });
+    this.ganttScaleWidth = this.ganttService.getDurationWidth(this.ganttStartDate, this.ganttEndDate) + 'px';
+  }
+
+  launchFullscreen({ isFullscreen }) {
+    this.isFullScreen = isFullscreen;
   }
 
   onGanttBarMoveStart() {
@@ -149,10 +198,11 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   adjustScrollView(info: GanttTaskInfo) {
-    const moveOffset = info.moveOffset ? info.moveOffset : 0;
-    const scrollView = this.datatableElementRef.nativeElement.getElementsByClassName('scroll-view')[0];
-    if (scrollView) {
-      scrollView.scrollTo(this.originOffsetLeft + moveOffset, scrollView.scrollTop);
+    if (info.left + info.width > this.scrollView.scrollLeft + this.scrollView.clientWidth - this.originOffsetX) {
+      this.scrollView.scrollTo(this.scrollView.scrollLeft + this.scaleStep, this.scrollView.scrollTop);
+    }
+    if (info.left < this.scrollView.scrollLeft) {
+      this.scrollView.scrollTo(this.scrollView.scrollLeft - this.scaleStep, this.scrollView.scrollTop);
     }
   }
 
@@ -193,10 +243,27 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
 
   onResized(event) {
     const finalWidth = event.width + 'px';
-    this.tableWidthConfig[2].width = finalWidth;
+    const index = this.tableWidthConfig.findIndex((i) => i.field === 'status');
+    this.tableWidthConfig[index].width = finalWidth;
     setTimeout(() => {
-      this.ganttScaleContainerOffsetLeft = this.datatableElementRef.nativeElement.getElementsByTagName('th')[3].offsetLeft;
+      this.setOffset();
     });
+  }
+
+  onCollapse() {
+    this.expand = !this.expand;
+    this.expand
+      ? (this.tableWidthConfig = DEFAULT_WIDTH_CONFIG.concat(this.tableWidthConfig))
+      : (this.tableWidthConfig = this.tableWidthConfig.slice(3));
+    setTimeout(() => {
+      this.setOffset();
+    });
+  }
+
+  setOffset() {
+    const len = this.tableWidthConfig.length;
+    this.ganttScaleContainerOffsetLeft = this.datatableElementRef.nativeElement.getElementsByTagName('th')[len - 1].offsetLeft;
+    this.originOffsetX = this.ganttScaleContainerOffsetLeft + 20;
   }
 
   ngOnDestroy() {

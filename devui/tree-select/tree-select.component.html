@@ -147,24 +147,28 @@
       <ng-template [ngTemplateOutlet]="customViewTemplate" [ngTemplateOutletContext]="{ $implicit: this }"></ng-template>
     </div>
   </d-popper-component>
-  <div [ngClass]="{ disabled: disabled, clear: allowClear }" (click)="$event.stopPropagation(); $event.preventDefault(); clearAll()"></div>
+  <div
+    [ngClass]="{ disabled: disabled, clear: allowClear }"
+    (click)="$event.stopPropagation(); $event.preventDefault(); clearAll(); emitEvents()"
+  ></div>
   <span
     class="devui-select-chevron-icon"
     [class.open]="isOpen"
     [ngClass]="{ disabled: disabled, 'allow-clear': allowClear, 'devui-select-chevron-icon-animation': showAnimation }"
   >
     <svg
-      width="8px"
-      height="5px"
-      viewBox="0 0 8 5"
+      width="14px"
+      height="14px"
+      viewBox="0 0 16 16"
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"
       xmlns:xlink="http://www.w3.org/1999/xlink"
     >
       <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g transform="translate(-4.000000, -6.000000)">
-          <polygon points="4 6 12 6 8 11"></polygon>
-        </g>
+        <path
+          d="M12.1464466,6.85355339 L8.35355339,10.6464466 C8.15829124,10.8417088 7.84170876,10.8417088 7.64644661,10.6464466 L3.85355339,6.85355339 C3.65829124,6.65829124 3.65829124,6.34170876 3.85355339,6.14644661 C3.94732158,6.05267842 4.07449854,6 4.20710678,6 L11.7928932,6 C12.0690356,6 12.2928932,6.22385763 12.2928932,6.5 C12.2928932,6.63260824 12.2402148,6.7597852 12.1464466,6.85355339 Z"
+          fill-rule="nonzero"
+        ></path>
       </g>
     </svg>
   </span>

@@ -1,6 +1,8 @@
 @import '../style/theme/color';
 @import '../style/core/font';
 @import '../style/theme/corner';
+@import '../style/core/animation';
+@import '../style/theme/z-index';
 
 .edge,
 .ie,
@@ -87,24 +89,24 @@
 
   .devui-select-chevron-icon {
     right: 12px;
-    top: calc((100% - 6px) / 2);
+    top: calc((100% - 14px) / 2);
     position: absolute;
     user-select: none;
     pointer-events: none;
-    height: 6px;
-    line-height: 6px;
+    height: 14px;
+    line-height: 14px;
     z-index: 1;
 
-    svg polygon {
+    svg path {
       fill: $devui-text-weak;
     }
 
     &-animation svg {
-      transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+      transition: transform $devui-animation-duration-slow $devui-animation-ease-in-smooth;
     }
 
     &.open {
-      z-index: 1052;
+      z-index: $devui-z-index-dropdown;
 
       svg {
         transform: rotate(180deg);
@@ -116,7 +118,7 @@
     }
 
     &.disabled {
-      svg polygon {
+      svg path {
         fill: $devui-disabled-text;
       }
     }
@@ -125,7 +127,7 @@
   &:not(:hover) {
     .devui-select-chevron-icon:not(.disabled) {
       opacity: 1;
-      transition: opacity 0.1s linear;
+      transition: opacity $devui-animation-duration-fast $devui-animation-linear;
     }
   }
 }
@@ -210,7 +212,7 @@
     right: 10px;
     top: 50%;
     transform: translateY(-50%);
-    transition: transform 0.2s ease;
+    transition: transform $devui-animation-duration-base ease;
 
     svg path {
       fill: $devui-light-text;

@@ -11,17 +11,16 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
-import { addClassToOrigin, DateConverter, DefaultDateConverter, removeClassFromOrigin } from 'ng-devui/utils';
+import {
+  addClassToOrigin, AnimationCurves, AnimationDuration,
+  DateConverter, DefaultDateConverter, removeClassFromOrigin
+} from 'ng-devui/utils';
 import { DevConfigService, WithConfig } from 'ng-devui/utils/globalConfig';
 import { fromEvent, Observable, Subscription } from 'rxjs';
 import { debounceTime, filter, map } from 'rxjs/operators';
 import { SelectDateChangeEventArgs, SelectDateChangeReason } from './date-change-event-args.model';
 import { DatePickerConfigService as DatePickerConfig } from './date-picker.config.service';
 import { DatepickerComponent } from './datepicker.component';
-
-const easeInQuint = 'cubic-bezier(0.755, 0.05, 0.855, 0.06)';
-const easeOutQuint = 'cubic-bezier(0.23, 1, 0.32, 1)';
-const animationDuration = '200ms';
 
 @Directive({
   selector: '[dDatepicker]:not([appendToBody])',
@@ -36,7 +35,7 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
   @Input() locale: string;
   @Input() cssClass: string;
   @Input() disabled: boolean;
-  @Input() mode: 'year'|'month'|'date' = 'date';
+  @Input() mode: 'year' | 'month' | 'date' = 'date';
   @Input() dateConverter: DateConverter;
   yearNumber = 12;
   @Input() direction: 'up' | 'down' = 'down';
@@ -101,7 +100,7 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
   @Input() set dateFormat(dateFormat: string) {
     if (dateFormat && this._dateFormat !== dateFormat) {
       this._dateFormat = dateFormat;
-      this.writeModelValue({selectedDate: this.selectedDate, reason: SelectDateChangeReason.format});
+      this.writeModelValue({ selectedDate: this.selectedDate, reason: SelectDateChangeReason.format });
     }
   }
 
@@ -155,7 +154,7 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
 
   checkDateConfig(dateConfig: any) {
     if (!dateConfig) { return false; }
-    if (typeof(dateConfig.timePicker) !== 'boolean' || !dateConfig.max || !dateConfig.min || !dateConfig.format) {
+    if (typeof (dateConfig.timePicker) !== 'boolean' || !dateConfig.max || !dateConfig.min || !dateConfig.format) {
       return false;
     }
     return true;
@@ -179,7 +178,7 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
 
     component.selectedDateChange.subscribe((arg: SelectDateChangeEventArgs) => {
       if (arg.reason === SelectDateChangeReason.date && !this.showTime ||
-       arg.reason === SelectDateChangeReason.button) {
+        arg.reason === SelectDateChangeReason.button) {
         this.hide();
       }
     });
@@ -304,7 +303,7 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
 
   private fillPopupData() {
     ['showTime', 'maxDate', 'minDate', 'cssClass', 'disabled', 'dateConverter', 'locale', 'dateFormat', 'yearNumber', 'dateConfig', 'mode',
-    'customViewTemplate']
+      'customViewTemplate']
       .forEach(key => {
         if (this[key] !== undefined) {
           this.cmpRef.instance[key] = this[key];
@@ -331,16 +330,16 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
     switch (direction) {
       case 'top':
         return [
-          style({transform: 'scaleY(0.8) translateY(4px)', opacity: 0.8, transformOrigin: '0% 100%', display: 'block'}),
-          animate(`${animationDuration} ${easeOutQuint}`,
-            style({transform: 'scaleY(0.9999) translateY(0)', opacity: 1, transformOrigin: '0% 100%', display: 'block'})),
+          style({ transform: 'scaleY(0.8) translateY(4px)', opacity: 0.8, transformOrigin: '0% 100%', display: 'block' }),
+          animate(`${AnimationDuration.BASE} ${AnimationCurves.EASE_OUT}`,
+            style({ transform: 'scaleY(0.9999) translateY(0)', opacity: 1, transformOrigin: '0% 100%', display: 'block' })),
         ];
       case 'bottom':
       default:
         return [
-          style({transform: 'scaleY(0.8)  translateY(-4px)', opacity: 0.8, transformOrigin: '0% 0%', display: 'block'}),
-          animate(`${animationDuration} ${easeOutQuint}`,
-            style({transform: 'scaleY(0.9999)  translateY(0)', opacity: 1, transformOrigin: '0% 0%', display: 'block'})),
+          style({ transform: 'scaleY(0.8)  translateY(-4px)', opacity: 0.8, transformOrigin: '0% 0%', display: 'block' }),
+          animate(`${AnimationDuration.BASE}  ${AnimationCurves.EASE_OUT}`,
+            style({ transform: 'scaleY(0.9999)  translateY(0)', opacity: 1, transformOrigin: '0% 0%', display: 'block' })),
         ];
     }
   }
@@ -349,16 +348,16 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
     switch (direction) {
       case 'top':
         return [
-          style({transform: 'scaleY(0.9999)  translateY(0)', opacity: 1, transformOrigin: '0% 100%', display: 'block'}),
-          animate(`160ms ${easeInQuint}`,
-            style({transform: 'scaleY(0.8)  translateY(4px)', opacity: 0.8, transformOrigin: '0% 100%', display: 'block'}))
+          style({ transform: 'scaleY(0.9999)  translateY(0)', opacity: 1, transformOrigin: '0% 100%', display: 'block' }),
+          animate(`${AnimationDuration.BASE} ${AnimationCurves.EASE_IN}`,
+            style({ transform: 'scaleY(0.8)  translateY(4px)', opacity: 0.8, transformOrigin: '0% 100%', display: 'block' }))
         ];
       case 'bottom':
       default:
         return [
-          style({transform: 'scaleY(0.9999)  translateY(0)', opacity: 1, transformOrigin: '0% 0%', display: 'block'}),
-          animate(`160ms ${easeInQuint}`,
-            style({transform: 'scaleY(0.8)  translateY(-4px)', opacity: 0.8, transformOrigin: '0% 0%', display: 'block'}))
+          style({ transform: 'scaleY(0.9999)  translateY(0)', opacity: 1, transformOrigin: '0% 0%', display: 'block' }),
+          animate(`${AnimationDuration.BASE} ${AnimationCurves.EASE_IN}`,
+            style({ transform: 'scaleY(0.8)  translateY(-4px)', opacity: 0.8, transformOrigin: '0% 0%', display: 'block' }))
         ];
     }
   }

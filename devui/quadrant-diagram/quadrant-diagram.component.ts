@@ -1,10 +1,10 @@
 import {
-  ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostBinding,
-  Input, OnChanges, OnInit, Output, Renderer2, SimpleChanges, TemplateRef
+  ChangeDetectionStrategy, Component, EventEmitter, HostBinding,
+  Input, OnChanges, OnInit, Output, SimpleChanges, TemplateRef
 } from '@angular/core';
 import { QuadrantDiagramService } from './quadrant-diagram.service';
 import { IAxisConfigs, ILabelDataConfigs, IQuadrantConfigs, IViewConfigs, labelSize } from './quadrant-diagram.type';
-import { DEFAULT_AXIS_CONFIGS, DEFAULT_QUADRANT_CONFIGS, ICON_CONTRACT, ICON_EXPAND, LABEL_SIZE } from './quadrant.config';
+import { DEFAULT_AXIS_CONFIGS, DEFAULT_QUADRANT_CONFIGS, LABEL_SIZE } from './quadrant.config';
 
 @Component({
   selector: 'd-quadrant-diagram',
@@ -32,9 +32,10 @@ export class QuadrantDiagramComponent implements OnInit, OnChanges {
   @Output() zoomOutEvent: EventEmitter<any> = new EventEmitter<any>();
   @Output() fullScreenEvent: EventEmitter<any> = new EventEmitter<any>();
   @Input() dropScope = 'default';
+  @Input() showToolbar = true;
   private originHeight;
   private originWidth;
-  btnIcon = ICON_EXPAND;
+  isFullScreen = false;
   @HostBinding('attr.id')
   get id() {
     return this.diagramId;
@@ -61,14 +62,14 @@ export class QuadrantDiagramComponent implements OnInit, OnChanges {
 
   launchFullscreen({ isFullscreen }) {
     if (isFullscreen) {
-      this.btnIcon = ICON_CONTRACT;
+      this.isFullScreen = isFullscreen;
       this.view = {
         height: window.screen.height,
         width: window.screen.width
       };
       this.initAxisData();
     } else {
-      this.btnIcon = ICON_EXPAND;
+      this.isFullScreen = isFullscreen;
       this.view = {
         height: this.originHeight,
         width: this.originWidth

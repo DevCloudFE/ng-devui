@@ -1,6 +1,6 @@
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import {
-  AfterContentInit, AfterViewInit, Component, ContentChild, ContentChildren, ElementRef,
+  AfterContentInit, AfterViewInit, ChangeDetectorRef, Component, ContentChild, ContentChildren, ElementRef,
   EventEmitter, HostBinding, Input, NgZone, OnChanges, OnDestroy, OnInit, Output, QueryList, Renderer2,
   SimpleChanges, TemplateRef, ViewChild
 } from '@angular/core';
@@ -347,10 +347,13 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
     return this._pageAllChecked;
   }
 
+  fixHeaderBodyHeight: string;
+
   constructor(
     private elementRef: ElementRef,
     private ngZone: NgZone,
-    private renderer: Renderer2) {
+    private renderer: Renderer2,
+    private cdr: ChangeDetectorRef) {
       this.onDocumentClickListen = this.onDocumentClick.bind(this);
   }
 
@@ -448,6 +451,20 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
     });
     if (this.onlyOneColumnSort) {
       this.resetThSortOrder();
+    }
+
+    if (this.fixHeader) {
+      this.fixHeaderBodyHeight = this.getFixedBodyHeight();
+      this.cdr.detectChanges();
+    }
+  }
+
+  getFixedBodyHeight() {
+    if (this.tableHeight) {
+      return this.elementRef?.nativeElement.getBoundingClientRect().height -
+        this.fixHeaderContainerRefElement?.nativeElement.getBoundingClientRect().height + 'px';
+    } else {
+      return null;
     }
   }
 

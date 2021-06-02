@@ -24,7 +24,7 @@ In the page:
 |  bordered   |   `boolean`  |   false   | Optional. Indicating whether a border exists |  [Auto-focus Buttons](demo#button-auto-focus)|
 |    icon     |   `string`   |   --   | Optional. Customized button icon | [Icon Buttons](demo#button-icon) |
 | showLoading |   `boolean`  |   false   | Optional. Indicating whether to display the loading prompt | [Loading Buttons](demo#button-loading) |
-|    width    |   `number`   |     --    | Optional. Button width |[Combinations of Primary & Common Buttons](demo#button-primary-and-common) |
+|    width    |   `string`   |     --    | Optional. Button width |[Combinations of Primary & Common Buttons](demo#button-primary-and-common) |
 |  disabled   |   `boolean`  |   false   | Optional. Indicating whether to disable the button | [Primary Buttons](demo#button-primary) |
 |  autofocus  |   `boolean`  |   false   | Optional. Indicating whether to automatically obtain the focus during button loading | [Auto-focus Buttons](demo#button-auto-focus) |
 

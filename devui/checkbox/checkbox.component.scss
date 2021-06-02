@@ -177,6 +177,7 @@
   &.disabled {
     label {
       cursor: not-allowed;
+      color: $devui-disabled-text;
     }
 
     .devui-checkbox-material {

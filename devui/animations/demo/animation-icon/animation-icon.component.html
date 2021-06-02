@@ -1,0 +1,10 @@
+<div>
+  <h4>spin</h4>
+  <i class="icon-loading devui-icon-spin"></i>
+  <i style="margin-left: 20px" class="icon-refresh devui-icon-spin"></i>
+  <h4>click diffusion</h4>
+  <i class="icon-add" [ngClass]="{ 'devui-icon-diffusion': startDiffusion }" (click)="diffusion()"></i>
+  <h4>rotate</h4>
+  <i #rotateEle class="icon-arrow-up devui-icon-rotate"></i>
+  <d-button bsStyle="common" style="margin-left: 20px" (click)="rotate(rotateEle)">rotate 90°</d-button>
+</div>

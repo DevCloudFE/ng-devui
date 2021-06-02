@@ -16,7 +16,7 @@ import {
   ViewChildren
 } from '@angular/core';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
-import { collapseForDomDestroy } from 'ng-devui/utils';
+import { expandCollapseForDomDestroy } from 'ng-devui/utils';
 import { DevConfigService, WithConfig } from 'ng-devui/utils/globalConfig';
 import { Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -31,7 +31,7 @@ import {
   templateUrl: './tree.component.html',
   styleUrls: ['./tree.component.scss'],
   preserveWhitespaces: false,
-  animations: [collapseForDomDestroy]
+  animations: [expandCollapseForDomDestroy]
 })
 export class TreeComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
   treeFactory: TreeFactory;
@@ -114,6 +114,9 @@ export class TreeComponent implements OnInit, OnChanges, AfterViewInit, OnDestro
   }
 
   selectNode(event, treeNode: TreeNode) {
+    if (treeNode.data.disableSelect) {
+      return;
+    }
     if (!this.isSelectableRegion(event.target)) {
       return;
     }

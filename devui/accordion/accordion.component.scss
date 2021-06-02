@@ -2,6 +2,7 @@
 @import '../style/theme/color';
 @import '../style/theme/shadow';
 @import '../style/theme/corner';
+@import '../style/core/animation';
 
 :host {
   display: block;
@@ -125,13 +126,13 @@
     width: 16px;
     height: 16px;
     line-height: 16px;
-    transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    transition: transform $devui-animation-duration-slow $devui-animation-ease-in-smooth;
 
     & > svg {
       width: 16px;
       height: 16px;
 
-      polygon {
+      path {
         fill: $devui-text-weak;
       }
     }
@@ -139,21 +140,21 @@
 
   &:not(.open) {
     &.active {
-      svg polygon {
+      svg path {
         fill: $devui-icon-fill-active;
       }
     }
+  }
 
-    & > .devui-accordion-open-icon {
-      transform: rotate(-180deg);
-      transform-origin: center;
-    }
+  &.open > .devui-accordion-open-icon {
+    transform: rotate(180deg);
+    transform-origin: center;
   }
 
   &.disabled > .devui-accordion-open-icon {
     color: $devui-disabled-text;
 
-    svg polygon {
+    svg path {
       fill: $devui-disabled-text;
     }
   }
@@ -212,11 +213,13 @@
 }
 
 :host ::ng-deep .devui-accordion-show-animate .devui-accordion-item-title {
-  transition: font-weight ease-in-out 0.3s, color cubic-bezier(0.645, 0.045, 0.355, 1) 0.1s, background-color cubic-bezier(0.645, 0.045, 0.355, 1) 0.1s;
+  transition:
+    font-weight $devui-animation-duration-fast $devui-animation-ease-in-smooth,
+    background-color $devui-animation-duration-fast $devui-animation-ease-in-smooth;
 
   .devui-accordion-splitter::before {
     transform: scaleY(0);
-    transition: transform 0.3s ease-in-out;
+    transition: transform $devui-animation-duration-slow $devui-animation-ease-in-smooth;
   }
 
   &.devui-router-active,

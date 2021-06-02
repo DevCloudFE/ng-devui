@@ -22,7 +22,7 @@ In the page:：
 |    scrollTarget         |     `HTMLElement`             |              --              |           Optional. Specifies the scrolling container.            |      [Scroll Usage](demo#scroll)  |
 |     view      | `{top?:number,bottom?:number}` |            {top:0,bottom:0}             |                                                   Optional. It is used to adjust the visible region, for example, the head with a fixed position on the top. The value corresponds to the height of the blocked top or bottom.                                                   | [Scroll Usage](demo#scroll)                    |
 |    hashSupport         |     `boolean`             |             `false`              |           Optional. Specifies whether to support anchors           |                    --  |
-|    mode             |     [`Mode`](#Mode)            |           'default'           |          Optional. mode`default \| sprite`                   |                    [mode](demo#sprite)  |
+|    mode             |     [`SpriteMode`](#SpriteMode)            |           'default'           |          Optional. mode`default \| sprite`                   |                    [mode](demo#sprite)  |
 |    maxLevel         |     `number`                          |           3                 |           Optional. Maximum level of the generated directory               |                    [maxLevel](demo#sprite)  |
 |    title         |     `string`                          |              'menu'              |           Optional. title               |                    [title](demo#basic)  |
 |    isOpen         |     `boolean`            |              true              |           Optional. sprite mode. open menu           |                    -- |
@@ -33,12 +33,17 @@ In the page:：
 |    navItemTemplate         |     `TemplateRef<any>`             |              --              |           Optional. Single Catalog Template             |                    [template ](demo#sprite)  |
 
 
+## dNavSprite Event
+|         Parameter        |                Type              | Description                            | Jump to Demo                                    |
+| :------------------:| :---------------------------------: | :------------------------------ | -------------------------------------------- |
+|    afterNavInit  |   `EventEmitter<NavSpriteComponent>` |         Optional. NavSpriteComponent Instance.   |         [精灵用法](demo#sprite)                |
+
 # Interface & Type Definition
 
-## Mode
+## SpriteMode
 
 ```ts
-export type Mode = 'default' | 'sprite';
+export type SpriteMode = 'default' | 'sprite';
 
 ```
 

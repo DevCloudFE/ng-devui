@@ -79,5 +79,7 @@ openDrawer() {
 
 - **触发关闭 drawer 层**：drawerInstance.**hide**(): void， 该函数会先检查 beforeHidden，如果返回 true 才关闭
 
+- **直接关闭 drawer 层**：drawerInstance.**hideDirectly**(): void，跳过所有钩子函数直接关闭
+
 - **触发销毁 drawer 层**：drawerInstance.**destroy**(): void， destroyOnHide 为 false 且 drawer 层关闭时可以调用 destroy 方法销毁
 - **设置宽度**：drawerInstance.**setWidth**(width: string): void

@@ -14,6 +14,4 @@ export interface MentionPositions {
   y?: number;
 }
 
-export type Mode = 'default' | 'extend';
-
-export type PostionType = 'top' | 'bottom';
+export type MentionPositionType = 'top' | 'bottom';

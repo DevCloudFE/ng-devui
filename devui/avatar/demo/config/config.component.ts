@@ -7,5 +7,5 @@ import { environment } from 'src/environments/environment';
     templateUrl: './config.component.html'
 })
 export class ConfigComponent {
-    imgSrc = environment.production ? './components/assets/logo.svg' : './assets/logo.svg';
+    imgSrc = environment.deployPrefix + 'assets/logo.svg';
 }

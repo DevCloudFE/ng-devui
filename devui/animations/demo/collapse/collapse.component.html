@@ -1,0 +1,9 @@
+<div class="trigger" (click)="open = !open">
+  <span class="trigger-text">{{ open ? 'click to hide menu' : 'click to show menu' }}</span>
+</div>
+<div class="menu" *ngIf="open" @collapseForDomDestroy>
+  <div class="side-menu"></div>
+  <div class="content-container">
+    <d-skeleton></d-skeleton>
+  </div>
+</div>

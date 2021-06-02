@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
 import { DropDownModule } from 'ng-devui/dropdown';
 import { ModalModule } from 'ng-devui/modal';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
@@ -9,6 +8,7 @@ import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
 import { TabsModule } from 'ng-devui/tabs';
 import { TransferModule } from 'ng-devui/transfer';
+import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 import { BasicComponent } from './basic/basic.component';
 import { CustomizeTmpComponent } from './before-change/before-change.component';
@@ -56,7 +56,7 @@ import { WithoutContentComponent } from './without-content/without-content.compo
     TypeSliderComponent,
     TypeWrappedComponent
   ],
-
+  
 })
 export class TabsDemoModule {
 }

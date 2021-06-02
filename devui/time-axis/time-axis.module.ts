@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { SafePipeModule } from 'ng-devui/utils';
+import { TimeAxisItemComponent } from './time-axis-item/time-axis-item.component';
 import { TimeAxisComponent } from './time-axis.component';
 
 @NgModule({
@@ -12,9 +13,11 @@ import { TimeAxisComponent } from './time-axis.component';
   ],
   exports: [
     TimeAxisComponent,
+    TimeAxisItemComponent
   ],
   declarations: [
     TimeAxisComponent,
+    TimeAxisItemComponent
   ],
   providers: []
 })

@@ -1,7 +1,8 @@
 @import '~@angular/cdk/overlay-prebuilt';
+@import '../../style/theme/z-index';
 
 .cdk-overlay-container {
-  z-index: 1051; // 比modal z-index:1050;高
+  z-index: $devui-z-index-dropdown;
 }
 
 .cdk-global-scrollblock body {

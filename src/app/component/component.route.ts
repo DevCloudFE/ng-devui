@@ -8,7 +8,8 @@ export const routesConfig = [
   {
     path: 'design-color',
     component: ExamplePanelComponent,
-    loadChildren: () => import('../../../devui/design-token/color/demo/design-color-demo.module').then((m) => m.DesignColorDemoModule),
+    loadChildren: () =>
+      import('../../../devui/design-token/color/demo/design-color-demo.module').then((m) => m.DesignColorDemoModule),
     data: {
       type: 'Design Tokens',
       enType: 'Design Tokens',
@@ -20,7 +21,8 @@ export const routesConfig = [
   {
     path: 'design-link',
     component: ExamplePanelComponent,
-    loadChildren: () => import('../../../devui/design-token/link/demo/design-link-demo.module').then((m) => m.DesignLinkDemoModule),
+    loadChildren: () =>
+      import('../../../devui/design-token/link/demo/design-link-demo.module').then((m) => m.DesignLinkDemoModule),
     data: {
       type: 'Design Tokens',
       enType: 'Design Tokens',
@@ -32,7 +34,8 @@ export const routesConfig = [
   {
     path: 'design-shadow',
     component: ExamplePanelComponent,
-    loadChildren: () => import('../../../devui/design-token/shadow/demo/design-shadow-demo.module').then((m) => m.DesignShadowDemoModule),
+    loadChildren: () =>
+      import('../../../devui/design-token/shadow/demo/design-shadow-demo.module').then((m) => m.DesignShadowDemoModule),
     data: {
       type: 'Design Tokens',
       enType: 'Design Tokens',
@@ -44,7 +47,8 @@ export const routesConfig = [
   {
     path: 'design-font',
     component: ExamplePanelComponent,
-    loadChildren: () => import('../../../devui/design-token/font/demo/design-font-demo.module').then((m) => m.DesignFontDemoModule),
+    loadChildren: () =>
+      import('../../../devui/design-token/font/demo/design-font-demo.module').then((m) => m.DesignFontDemoModule),
     data: {
       type: 'Design Tokens',
       enType: 'Design Tokens',
@@ -57,7 +61,9 @@ export const routesConfig = [
     path: 'design-border-radius',
     component: ExamplePanelComponent,
     loadChildren: () =>
-      import('../../../devui/design-token/border-radius/demo/design-border-radius-demo.module').then((m) => m.DesignBorderRadiusDemoModule),
+      import('../../../devui/design-token/border-radius/demo/design-border-radius-demo.module').then(
+        (m) => m.DesignBorderRadiusDemoModule
+      ),
     data: {
       type: 'Design Tokens',
       enType: 'Design Tokens',
@@ -126,9 +132,21 @@ export const routesConfig = [
     },
   },
   {
+    path: 'animations',
+    component: ExamplePanelComponent,
+    loadChildren: () => import('../../../devui/animations/demo/animations-demo.module').then((m) => m.AnimationsDemoModule),
+    data: {
+      type: '扩展服务',
+      enType: 'Extended Service',
+      name: 'Animations',
+      cnName: '动效',
+    },
+  },
+  {
     path: 'auto-complete',
     component: ExamplePanelComponent,
-    loadChildren: () => import('../../../devui/auto-complete/demo/auto-complete-demo.module').then((m) => m.AutoCompleteDemoModule),
+    loadChildren: () =>
+      import('../../../devui/auto-complete/demo/auto-complete-demo.module').then((m) => m.AutoCompleteDemoModule),
     data: {
       type: '数据录入',
       enType: 'Data Entry',
@@ -150,7 +168,8 @@ export const routesConfig = [
   {
     path: 'ImagePreview',
     component: ExamplePanelComponent,
-    loadChildren: () => import('../../../devui/image-preview/demo/image-preview-demo.module').then((m) => m.ImagePreviewDemoModule),
+    loadChildren: () =>
+      import('../../../devui/image-preview/demo/image-preview-demo.module').then((m) => m.ImagePreviewDemoModule),
     data: {
       type: '数据展示',
       enType: 'Data Display',
@@ -341,7 +360,8 @@ export const routesConfig = [
   {
     path: 'editable-select',
     component: ExamplePanelComponent,
-    loadChildren: () => import('../../../devui/editable-select/demo/editable-select-demo.module').then((m) => m.EditableSelectDemoModule),
+    loadChildren: () =>
+      import('../../../devui/editable-select/demo/editable-select-demo.module').then((m) => m.EditableSelectDemoModule),
     data: {
       type: '数据录入',
       enType: 'Data Entry',
@@ -756,7 +776,8 @@ export const routesConfig = [
   {
     path: 'category-search',
     component: ExamplePanelComponent,
-    loadChildren: () => import('../../../devui/category-search/demo/category-search-demo.module').then((m) => m.CategorySearchDemoModule),
+    loadChildren: () =>
+      import('../../../devui/category-search/demo/category-search-demo.module').then((m) => m.CategorySearchDemoModule),
     data: {
       type: '数据录入',
       enType: 'Data Entry',

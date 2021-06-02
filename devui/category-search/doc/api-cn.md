@@ -19,6 +19,7 @@ import { CategorySearchModule } from 'ng-devui/category-search';
 |        category         | `ICategorySearchTagItem` |  --   | 必选，传入分类搜索源数据                                                                    | [基本用法](demo#basic-usage)         |
 |   defaultSearchField    |        `String[]`        |  []   | 可选，配置输入关键字时可在哪些分类中筛选                                                    | [基本用法](demo#basic-usage)         |
 |      selectedTags       | `ICategorySearchTagItem` |  --   | 可选，传入需要默认选中的分类数据                                                            | [基本用法](demo#basic-usage)         |
+|     placeholderText     |         `string`         |  --   | 可选， 自定义搜索输入框占位文字                                                             | [基本用法](demo#basic-usage)         |
 |        allowSave        |        `boolean`         | true  | 可选，是否显示保存当前过滤的按钮                                                            | [基本用法](demo#basic-usage)         |
 |       allowClear        |        `boolean`         | true  | 可选，是否显示清除当前过滤的按钮                                                            | [基本用法](demo#basic-usage)         |
 |      allowShowMore      |        `boolean`         | false | 可选，是否显示当前过滤条件下拉列表的按钮                                                    | [大数据量优化展示](demo#auto-scroll) |
@@ -80,7 +81,7 @@ export interface ICategorySearchTagItem {
   /**
    * 自定义下拉模板的展示内容
    */
-  customTemplate: TemplateRef<any>;
+  customTemplate?: TemplateRef<any>;
   /**
    * 已选中值
    */

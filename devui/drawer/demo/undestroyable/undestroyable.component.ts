@@ -28,6 +28,7 @@ export class UndestroyableComponent {
         width: '500px',
         clickDoms: this.doms,
         destroyOnHide: false,
+        position: 'left',
         onClose: () => {
           console.log('on drawer closed');
         },

@@ -11,7 +11,7 @@ export class WithMediaComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.imgSrc = environment.production ? './components/assets/image1.png' : './assets/image1.png';
+    this.imgSrc = environment.deployPrefix + 'assets/image1.png';
   }
 
 }

@@ -1,5 +1,7 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, OnChanges, OnDestroy, OnInit,
-  SimpleChanges, TemplateRef, ViewChild } from '@angular/core';
+import {
+  AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, OnChanges, OnDestroy, OnInit,
+  SimpleChanges, ViewChild
+} from '@angular/core';
 import { Subscription } from 'rxjs';
 import { GanttService } from '../gantt.service';
 
@@ -17,6 +19,7 @@ export class GanttBarParentComponent implements OnInit, OnDestroy, OnChanges, Af
   @Input() progressRate = 0;
   @Input() data: any;
   @Input() id: string;
+  @Input() tip: string;
 
   private ganttScaleStatusHandler: Subscription;
   public tipHovered = false;

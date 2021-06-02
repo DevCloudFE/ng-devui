@@ -29,7 +29,7 @@ export class DropDownService {
     if (!this.openScope) {
       return;
     }
-    const menuEl = this.openScope.menuEl.nativeElement;
+    const menuEl = this.openScope.menuEl?.nativeElement;
     if (event && this.openScope.menuEl &&
       ((/input|textarea/i.test((<any> event.target).tagName) && menuEl.contains(event.target))
       || this.openScope.closeScope === 'none'

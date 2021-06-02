@@ -1,6 +1,6 @@
 <div
   *ngIf="startDate && endDate"
-  class="devui-gantt-bar"
+  class="devui-gantt-bar {{ customBarClass }}"
   #ganttBar
   cdk-overlay-origin
   #progress="cdkOverlayOrigin"
@@ -44,6 +44,7 @@
       </g>
     </svg>
   </div>
+  <div class="devui-gantt-bar-title {{ customTitleClass }}" *ngIf="showTitle">{{ title }}</div>
   <ng-template
     *ngIf="tipTemplateRef"
     cdk-connected-overlay
@@ -56,3 +57,10 @@
     </div>
   </ng-template>
 </div>
+
+<div
+  *ngIf="moveBarStart"
+  class="moving-bg {{ customBgClass }}"
+  [style.left]="originOffsetX + left + 'px'"
+  [style.width]="width + 'px'"
+></div>

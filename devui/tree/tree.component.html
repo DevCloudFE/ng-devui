@@ -197,7 +197,7 @@
     <div
       *ngIf="treeNode.data.isOpen"
       class="devui-tree-node__children"
-      [@collapseForDomDestroy]="treeNode.data.isOpen ? 'expanded' : 'void'"
+      @collapseForDomDestroy
       [@.disabled]="afterInitAnimate || !showAnimation"
     >
       <d-tree-nodes [treeList]="treeNode.data.children || []" [treeNodesRef]="default" [treeFactory]="treeFactory"> </d-tree-nodes>

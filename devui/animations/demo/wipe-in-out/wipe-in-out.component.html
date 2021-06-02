@@ -1,0 +1,6 @@
+<d-button [width]="'100px'" (btnClick)="open = !open">{{ open ? 'hide' : 'show' }}</d-button>
+<div class="container">
+  <div class="modal" *ngIf="open" [@wipeInOutAnimation]="open ? 'in' : 'void'">
+    <d-skeleton></d-skeleton>
+  </div>
+</div>

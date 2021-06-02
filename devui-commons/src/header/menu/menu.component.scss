@@ -9,8 +9,36 @@
         font-size: $devui-font-size-page-title;
         .menu-link {
             color: $devui-text;
+            cursor: pointer;
             &:hover {
                 color: $devui-list-item-hover-text;
+            }
+
+            .devui-header-open-icon {
+              display: inline-block;
+              text-indent: 0;
+              pointer-events: none; /* 让鼠标穿透 */
+              width: 16px;
+              height: 16px;
+              line-height: 16px;
+              transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+              transform-origin: center;
+              vertical-align: text-top;
+
+              & > svg {
+                width: 16px;
+                height: 16px;
+          
+                polygon {
+                  fill: $devui-text-weak;
+                }
+              }
+            }
+
+            &:not(.devui-dropdown-open) {
+              .devui-header-open-icon {
+                transform: rotate(-180deg);
+              }
             }
         }
     }
@@ -31,30 +59,27 @@
     .menu-list {
         .menu-list-title,
         .menu-sublist-item {
-            font-size: $devui-font-size-card-title;
-            height: 34px;
-            line-height: 34px;
-            padding: 0 20px;
+            height: 36px;
+            line-height: 36px;
+            padding: 0 10px;
         }
 
         .menu-list-title {
+            font-size: $devui-font-size-card-title;
             font-weight: $devui-font-title-weight;
+        }
+
+        .menu-sublist-item {
+            font-size: $devui-font-size;
         }
 
         .menu-sublist {
             .menu-sublist-item {
-                transition: background-color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
-
-                a {   
+                a {
                     color: $devui-text;
                     transition: color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
-                }
-
-                &:hover {
-                    background-color: $devui-list-item-active-bg;
-
-                    a {
-                        color: $devui-list-item-active-text;
+                    &:hover {
+                        color: $devui-list-item-hover-text;
                     }
                 }
             }

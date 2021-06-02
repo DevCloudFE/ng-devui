@@ -120,6 +120,7 @@ export class HelperUtils {
       headers: {
         'Content-Type': requestHeaderContentType
       },
+      withCredentials: option.withCredentials,
       responseType: 'arraybuffer' as ResponseType
     }, {
       headers: option.header

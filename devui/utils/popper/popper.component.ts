@@ -13,7 +13,7 @@ import {
 } from '@angular/core';
 import { createPopper } from '@popperjs/core';
 import { Observable, Subject } from 'rxjs';
-import { easeInQuint, easeOutQuint } from '../animations/fade-in-out';
+import { AnimationCurves, AnimationDuration } from '../animations';
 
 interface ExtraSetConfig {
   extraWidth?: number;
@@ -191,10 +191,10 @@ export class PopperComponent implements AfterViewInit, OnDestroy {
         this.renderer.setStyle(optionsContainer, 'transform',
           optionsContainer.style.transform.replace('scale3d(1, 0.8, 1)', 'scale3d(1, 1, 1)'));
         this.popperDirection === 'bottom' ?
-        this.renderer.setStyle(optionsContainer, 'transform',
-          optionsContainer.style.transform.replace('translateY(-4px)', 'translateY(0)')) :
-        this.renderer.setStyle(optionsContainer, 'transform',
-          optionsContainer.style.transform.replace('translateY(4px)', 'translateY(0)'));
+          this.renderer.setStyle(optionsContainer, 'transform',
+            optionsContainer.style.transform.replace('translateY(-4px)', 'translateY(0)')) :
+          this.renderer.setStyle(optionsContainer, 'transform',
+            optionsContainer.style.transform.replace('translateY(4px)', 'translateY(0)'));
         this.renderer.setStyle(optionsContainer, 'opacity', 1);
         this.animate = false;
       });
@@ -251,7 +251,7 @@ export class PopperComponent implements AfterViewInit, OnDestroy {
             flipVariations: true, // true by default
           },
         },
-        ],
+      ],
       strategy: !!this.appendTo ? 'fixed' : 'absolute',
     });
   }
@@ -260,9 +260,10 @@ export class PopperComponent implements AfterViewInit, OnDestroy {
     const popperContainer = this.popperContainer.nativeElement;
     if (this.animate && command) {
       if (command === 'open') {
-        this.renderer.setStyle(popperContainer, 'transition', this.showAnimation ? `all .2s ${easeOutQuint}` : 'none');
+        this.renderer.setStyle(popperContainer, 'transition', this.showAnimation
+          ? `all ${AnimationDuration.BASE} ${AnimationCurves.EASE_OUT}` : 'none');
       } else if (command === 'close') {
-        popperContainer.style.transition = this.showAnimation ? `all .16s ${easeInQuint}` : 'none';
+        popperContainer.style.transition = this.showAnimation ? `all ${AnimationDuration.BASE} ${AnimationCurves.EASE_IN}` : 'none';
       }
     } else {
       this.renderer.setStyle(popperContainer, 'transition', null);

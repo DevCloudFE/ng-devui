@@ -2,4 +2,7 @@
   <ng-container *ngIf="contentTemplate">
     <ng-template [ngTemplateOutlet]="contentTemplate"></ng-template>
   </ng-container>
+  <ng-container *ngIf="!contentTemplate">
+    <theme-picker class="show-themable"></theme-picker>
+  </ng-container>
 </div>

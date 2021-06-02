@@ -1,9 +1,9 @@
 export interface UserInfo {
     displayNameCn: string;
-    uid?:string;
+    uid?: string;
     employeeNumber: string;
-    iconUrl:string;
-    docCount?:number;
-    questionCount?:number;
-    draftCount?:number;
-};
+    iconUrl: string;
+    docCount?: number;
+    questionCount?: number;
+    draftCount?: number;
+  }

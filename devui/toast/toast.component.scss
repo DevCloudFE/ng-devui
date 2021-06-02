@@ -3,6 +3,7 @@
 @import '../style/theme/shadow';
 @import '../style/theme/corner';
 @import '../style/core/_font';
+@import '../style/core/animation';
 
 :host::ng-deep a {
   &:link,
@@ -34,7 +35,7 @@
   box-shadow: $devui-shadow-length-feedback-overlay $devui-shadow;
   border-radius: $devui-border-radius-feedback;
   color: $devui-feedback-overlay-text;
-  transition: all 0.3s;
+  transition: all $devui-animation-duration-slow $devui-animation-ease-in-smooth;
   background-color: $devui-feedback-overlay-bg;
 
   &.slide-in {

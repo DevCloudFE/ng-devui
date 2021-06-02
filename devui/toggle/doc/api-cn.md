@@ -19,6 +19,8 @@ import { ToggleModule } from 'ng-devui/toggle';
 |   checked    |            `boolean`            | false | 可选，开关是否打开，默认关闭                                                | [基本用法](demo#basic-usage) |
 |  ngModel   |            `boolean`            | false | 可选，指定当前是否打开，可双向绑定                                          | [双向绑定](demo#two-binding) |
 |   disabled   |            `boolean`            | false | 可选，是否禁用开关                                                          | [基本用法](demo#basic-usage) |
+| checkedContent |      `string\|TemplateRef`    |  --   | 可选，开关打开时内部模板                                               | [自定义样式](demo#custom) |
+| uncheckedContent |    `string\|TemplateRef`    |  --   | 可选，开关关闭时内部模板                                             | [自定义样式](demo#custom) |
 | beforeChange | `Function\|Promise\|()=> Observable<boolean>` |  --   | 可选，开关变化前的回调函数,返回 boolean 类型，返回 false 可以阻止开关的变化 | [双向绑定](demo#two-binding) |
 
 ## d-toggle 事件

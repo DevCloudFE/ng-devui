@@ -20,7 +20,7 @@ import { QuadrantDiagramModule } from 'ng-devui/quadrant-diagram';
 | largeLabelTemplate | `TemplateRef<any>` | -- |: Optional. Customize the label style when `currentLabelSize='large'`. |
 | diagramId | `string` | 'devui-quadrant-diagram-'+current component sequence | Optional. Add the ID attribute to the quadrant component to distinguish different instances. | [Basic Usage](demo#basic-usage) |
 | dropScope | `string` | 'default' | Optional. This parameter specifies the drop position. The value must match the corresponding dragScope. For details, see `DragDropAPI` | [Customize](demo#custom-quadrant) |.
-
+|      showToolbar      |          `boolean`          |               true                | Optional. Whether to show the toolbar| [Customize](demo#custom-quadrant) |
 ### d-quadrant-diagram event
 
 | Parameter | Type | Description | Jump to Demo |

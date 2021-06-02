@@ -13,7 +13,9 @@ async function task() {
     '_color.scss',
     '_font.scss',
     '_shadow.scss',
-    '_corner.scss'
+    '_corner.scss',
+    '_animation.scss',
+    '_z-index.scss'
   ], dir)).join('\n');
   const targetDir ="publish/styles-var/"
 

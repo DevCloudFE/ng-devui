@@ -1,6 +1,6 @@
 import { Component, isDevMode, OnDestroy, OnInit } from '@angular/core';
-import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
+import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 @Component({
   selector: 'd-demo-tabs',
@@ -80,12 +80,12 @@ export class TabsDemoComponent implements OnInit, OnDestroy {
   setNavValues(values) {
     this.navItems = [
       { dAnchorLink: 'basic-usage', value: values['basic-usage'] },
-      { dAnchorLink: 'no-set-content', value: values['no-set-content'] },
-      { dAnchorLink: 'custom-template', value: values['custom-template'] },
       { dAnchorLink: 'type-pills', value: values['type-pills'] },
       { dAnchorLink: 'type-options', value: values['type-options'] },
       { dAnchorLink: 'type-slider', value: values['type-slider'] },
       { dAnchorLink: 'type-wrapped', value: values['type-wrapped'] },
+      { dAnchorLink: 'no-set-content', value: values['no-set-content'] },
+      { dAnchorLink: 'custom-template', value: values['custom-template'] },
       { dAnchorLink: 'intercept-tab-switch', value: values['intercept-tab-switch'] },
       { dAnchorLink: 'custom-tabs-display-and-arrangement', value: values['custom-tabs-display-and-arrangement'] },
     ];

@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
 import { ButtonModule } from 'ng-devui/button';
 import { CheckBoxModule } from 'ng-devui/checkbox';
 import { DropDownModule } from 'ng-devui/dropdown';
@@ -14,6 +13,7 @@ import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
 import { TooltipModule } from 'ng-devui/tooltip';
 import { TreeModule } from 'ng-devui/tree';
 import { SafePipeModule } from 'ng-devui/utils';
+import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 import { BasicComponent } from './basic/basic.component';
 import { CheckControlComponent } from './check-control/check-control.component';
@@ -72,7 +72,7 @@ import { WithoutAnimationComponent } from './without-animation/without-animation
     OperationForAllNodesComponent,
     WithoutAnimationComponent
   ],
-
+  
 })
 export class TreeDemoModule {
 }

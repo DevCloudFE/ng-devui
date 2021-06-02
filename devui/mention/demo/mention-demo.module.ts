@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
 import { TextareaModule } from 'ng-devui';
 import { AnchorModule } from 'ng-devui/anchor';
 import { AvatarModule } from 'ng-devui/avatar';
@@ -9,6 +8,7 @@ import { MentionModule } from 'ng-devui/mention';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
+import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 import { AsyncComponent } from './async/async.component';
 import { BasicComponent } from './basic/basic.component';
@@ -43,6 +43,6 @@ import { TargetComponent } from './target/target.component';
   ],
   declarations: [MentionDemoComponent, BasicComponent, AsyncComponent, CustomComponent, TargetComponent, PrefixComponent],
   exports: [MentionDemoComponent],
-
+  
 })
 export class MentionDemoModule {}

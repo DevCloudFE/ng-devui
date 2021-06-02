@@ -11,11 +11,27 @@
   .body {
     position: relative;
     min-height: 400px;
+    height: 100%;
 
     .item {
       height: 40px;
       padding-top: 8px;
     }
+  }
+}
+
+.tool {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  margin-left: 12px;
+  background-color: $devui-base-bg;
+  box-shadow: $devui-shadow-length-base rgba(81, 112, 255, 0.4);
+  cursor: pointer;
+
+  span {
+    border: 0 !important;
   }
 }
 
@@ -32,5 +48,13 @@
     font-size: $devui-font-size;
     color: $devui-text;
     line-height: 24px;
+  }
+}
+
+:host ::ng-deep {
+  .devui-btn {
+    height: 32px !important;
+    color: $devui-text !important;
+    padding: 0 6px !important;
   }
 }

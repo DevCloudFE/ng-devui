@@ -1,6 +1,6 @@
 {
   "mainNav": {
-    "design": "Design Tokens",
+    "design": "设计体系",
     "components": "组件",
     "icons": "图标库",
     "versions": "版本历程"
@@ -174,6 +174,39 @@
         "basic-usage": "基本用法",
         "tips-to-close": "可关闭的提示",
         "without-icon": "不使用默认图标"
+      }
+    },
+    "animations": {
+      "name": "动效",
+      "type": "扩展服务",
+      "path": "animations",
+      "description": "DevUI针对web端典型的交互场景，提供了顺滑，高效，简单的动效效果用于提升用户的交互体验",
+      "tmw": "1. 元素的出现或消失；2. 元素状态发生改变",
+      "collapsedDemo": {
+        "title": "Expand Collapse",
+        "description": "使用在处于页面内的元素的展开和收起，表现形式为容器尺寸的单轴变化，常用于手风琴，树形组件，折叠面板等组件"
+      },
+      "fadeInOutDemo": {
+        "title": "Fade In Out",
+        "description": "使用在堆叠于页面上且存在宿主的元素出现和消失，表现形式为内容区域的透明度变化+容器尺寸的单轴变化，常用于下拉选择框，日期选择等组件"
+      },
+      "flyInOutDemo": {
+        "title": "Fly In Out",
+        "description": "使用在堆叠于页面且覆盖整个页面的元素出现和消失，表现形式为内容区域透明度变化+内容区域的位移，常用于抽屉组件"
+      },
+      "wipeInOutDemo": {
+        "title": "Wipe In Out",
+        "description": "使用在堆叠于页面且未处于页面边缘的元素出现和消失，表现形式为内容区域透明度变化+内容区域基于y轴的微小位移，常用于弹窗组件"
+      },
+      "animationIconDemo": {
+        "title": "通过公共class添加icon动效"
+      },
+      "anchorLinkValues": {
+        "expand-collapse": "Expand Collapse",
+        "fade-in-out": "Fade In Out",
+        "fly-in-out": "Fly In Out",
+        "wipe-in-out": "Wipe In Out",
+        "icon-class": "class控制icon动效"
       }
     },
     "anchor": {
@@ -832,7 +865,7 @@
     },
     "design-link": {
       "name": "Link 链接",
-      "type": "Design Tokens",
+      "type": "Design tokens",
       "path": "design-link",
       "description": "组件库公共样式规范。",
       "tmw": "当需要查看组件库相关样式，使用场景以及变更时。",
@@ -847,7 +880,7 @@
     },
     "design-color": {
       "name": "Color 颜色",
-      "type": "Design Tokens",
+      "type": "Design tokens",
       "path": "design-color",
       "description": "组件库公共样式规范。",
       "tmw": "当需要查看组件库相关样式，使用场景以及变更时。",
@@ -864,6 +897,7 @@
             "colorVar": "颜色变量",
             "normalColor": "普通色值",
             "darkColor": "暗黑色值",
+            "themeValue": "当前主题色值",
             "description": "描述"
           },
           "oldTable": {
@@ -1038,7 +1072,7 @@
     },
     "design-shadow": {
       "name": "Shadow 阴影",
-      "type": "Design Tokens",
+      "type": "Design tokens",
       "path": "design-shadow",
       "description": "组件库公共样式规范。",
       "tmw": "当需要查看组件库相关样式，使用场景以及变更时。",
@@ -1054,6 +1088,7 @@
             "tab": "默认主题阴影对照表",
             "shadowName": "阴影变量名",
             "shadowValue": "阴影变量值",
+            "themeValue": "当前主题变量值",
             "description": "描述"
           },
           "oldTable": {
@@ -1095,7 +1130,7 @@
     },
     "design-font": {
       "name": "Font 字体",
-      "type": "Design Tokens",
+      "type": "Design tokens",
       "path": "design-font",
       "description": "组件库公共样式规范。",
       "tmw": "当需要查看组件库相关样式，使用场景以及变更时。",
@@ -1113,6 +1148,7 @@
             "tab": "默认字体相关变量对照表",
             "fontName": "字体相关变量名",
             "fontValue": "字体相关变量值",
+            "themeValue": "当前主题变量值",
             "description": "描述"
           },
           "oldTable": {
@@ -1154,7 +1190,7 @@
     },
     "design-border-radius": {
       "name": "BorderRadius 圆角",
-      "type": "Design Tokens",
+      "type": "Design tokens",
       "path": "design-border-radius",
       "description": "组件库公共样式规范。",
       "tmw": "当需要查看组件库相关样式，使用场景以及变更时。",
@@ -1169,6 +1205,7 @@
           "table": {
             "cornerName": "圆角变量名",
             "cornerValue": "圆角变量值",
+            "themeValue": "当前主题圆角值",
             "description": "描述"
           },
           "borderRadius": {
@@ -2961,12 +2998,20 @@
       "allStatesDemo": {
         "timeLeft": "时间点在左侧",
         "timeBottom": "时间点在底部",
-        "title": "基本用法",
-        "description": "通过 position 配置时间点位置。"
+        "title": "设置时间位置",
+        "description": "仅当direction 为 vertical 时定义时间参数位置。"
       },
       "directionDemo": {
         "title": "设置方向",
         "description": "通过 direction 配置时间线排列方向。"
+      },
+      "alternativeModeDemo": {
+        "title": "时间节点内容方向自定义",
+        "description": "时间节点内容方向自定义。"
+      },
+      "seperateWayDemo": {
+        "title": "时间节点单独使用",
+        "description": "支持每个时间节点独自定义。"
       },
       "templateDemo": {
         "description": "描述。",
@@ -2975,11 +3020,17 @@
       "htmlContentDemo": {
         "title": "内容使用html"
       },
+      "customDotDemo": {
+        "title": "时间点自定义"
+      },
       "anchorLinkValues": {
-        "basic-usage": "基本用法",
+        "basic-usage": "设置时间位置",
         "direction": "设置方向",
+        "custom-dot": "时间点自定义",
         "content-with-html": "内容使用html",
-        "content-with-template": "内容使用模板自定义"
+        "content-with-template": "内容使用模板自定义",
+        "content-with-alternative-mode": "时间节点内容方向自定义",
+        "seperate-way": "时间节点单独使用"
       }
     },
     "toast": {
@@ -3658,6 +3709,30 @@
         "custom": "自定义"
       }
     },
+    "polyfill": {
+      "name": "Polyfills 腻子脚本",
+      "type": "扩展服务",
+      "path": "polyfill",
+      "description": "用于实现一些低版本浏览器（主要是IE）不支持的API。",
+      "tmw": "需要解决低版本浏览器不支持的方法时。",
+      "basicDemo": {
+        "title": "使用方法",
+        "description": "目前由于实现方法较少，且主要供富文本组件使用，因此当前腻子脚本文件存放于富文本模块下。 使用时，devcloud 项目或 Angular cli 创建的项目可以在 src/polyfills.ts 中插入：import 'ng-devui/add-ons/editorx/polyfill'; 由于腻子脚本只是一段独立执行的js代码，也可以直接用静态资源的方式插入页面来使用。",
+        "name": "腻子脚本",
+        "license": "授权方式",
+        "size": "大小",
+        "browser": "浏览器",
+        "des": "描述",
+        "remove": "把对象从它所属的 DOM 树中删除",
+        "matches": "判断是否匹配指定选择器字符串，各低版本浏览器分别实现了带有自身前缀的MatchesSelector方法，比如 msMatchesSelector",
+        "closest": "匹配特定选择器且离当前元素最近的祖先元素（也可以是当前元素本身）",
+        "event": "在 DOM 中出现的事件",
+        "forEach": "顺序遍历节点的集合的方法"
+      },
+      "anchorLinkValues": {
+        "basic-usage": "使用方法"
+      }
+    },
     "time-picker": {
       "name": "TimePicker 时间选择器",
       "type": "演进中",
@@ -3754,14 +3829,24 @@
       "rangeTemplateDemo": {
         "title": "范围模式的模板使用"
       },
+      "static-panelDemo": {
+        "title": "日历面板模式",
+        "ensure": "确认"
+      },
+      "select-type": {
+        "title": "业务场景：select类型日期选择器",
+        "changeStart": "切换起始"
+      },
       "anchorLinkValues": {
         "basic-usage": "基本用法",
         "show-time": "显示时间",
-        "template": "传入模板",
+        "template": "自定义扩展区域",
         "monthYear": "年月选择器",
         "rangePicker": "范围选择器",
         "host-template": "自定义宿主",
-        "rangeTemplate": "范围模式的模板使用"
+        "rangeTemplate": "范围模式的模板使用",
+        "datepicker-pro-static-panel": "日历面板模式",
+        "select-type": "业务场景：select类型日期选择器"
       }
     }
   }

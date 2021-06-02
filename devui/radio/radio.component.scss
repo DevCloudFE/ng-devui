@@ -10,6 +10,10 @@
 .devui-radio {
   &.disabled {
     cursor: not-allowed;
+
+    .devui-radio-label {
+      color: $devui-disabled-text;
+    }
   }
 
   font-size: $devui-font-size;

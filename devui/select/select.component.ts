@@ -247,7 +247,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
   /**
    * customViewTemplate的方向，支持下方和右方
    */
-  @Input() customViewDirection: 'bottom' | 'right' | 'left' = 'bottom';
+  @Input() customViewDirection: 'bottom' | 'right' | 'left' | 'top' = 'bottom';
   @Input() autoFocus = false;
   @Input() notAutoScroll = false; // 自动聚焦的时候，自动滚动到select位置
   @Input() loadingTemplateRef: TemplateRef<any>;

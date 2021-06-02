@@ -19,6 +19,7 @@ export class RadioComponent implements OnInit, ControlValueAccessor {
   private _name: string;
   private _disabled: boolean;
   private inputValue: string;
+  id: string;
   @Input()
   get name(): string {
     return this._name;
@@ -46,6 +47,11 @@ export class RadioComponent implements OnInit, ControlValueAccessor {
 
   set value(value: any) {
     this.inputValue = value;
+    if (value instanceof Object) {
+      this.id = '';
+    } else {
+      this.id = `${this.name}-${value}`;
+    }
   }
 
   constructor() {}

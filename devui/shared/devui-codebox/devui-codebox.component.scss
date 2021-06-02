@@ -7,7 +7,7 @@
   width: 100%;
   position: relative;
   margin: 4px 0;
-  transition: all 0.2s;
+  transition: all $devui-animation-duration-slow $devui-animation-ease-in-smooth;
 
   /* overflow-x: auto; */
 }
@@ -25,7 +25,7 @@
   position: relative;
   padding: 10px 40px;
   border-radius: 0 0 4px 4px;
-  transition: background-color 0.4s;
+  transition: background-color $devui-animation-duration-slow $devui-animation-ease-in-smooth;
   width: 100%;
   font-size: $devui-font-size;
   margin-bottom: 0;
@@ -43,7 +43,7 @@
   color: #777777;
   border-radius: 4px 4px 0 0;
   background: $devui-base-bg;
-  transition: background-color 0.4s;
+  transition: background-color $devui-animation-duration-slow $devui-animation-ease-in-smooth;
 }
 
 .code-box-title > a {
@@ -65,7 +65,7 @@
   line-height: 16px;
   opacity: 0.55;
   text-align: center;
-  transition: all 0.3s;
+  transition: all $devui-animation-duration-slow $devui-animation-ease-in-smooth;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -113,7 +113,7 @@
   font-size: $devui-font-size-card-title;
   cursor: pointer;
   color: #222222;
-  transition: all 0.24s;
+  transition: all $devui-animation-duration-slow $devui-animation-ease-in-smooth;
   background: $devui-base-bg;
   width: 20px;
   height: 20px;

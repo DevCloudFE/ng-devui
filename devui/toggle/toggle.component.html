@@ -4,5 +4,15 @@
   [style.background]="checked && !disabled ? color : ''"
   [style.border-color]="checked && !disabled ? color : ''"
 >
+  <span class="devui-toggle-inner-wrapper">
+    <ng-template *ngIf="checked" [ngTemplateOutlet]="checkedTemplate || defaultCheckedTemplate"></ng-template>
+    <ng-template #defaultCheckedTemplate>
+      <div class="devui-toggle-inner" [innerHTML]="checkedContent"></div>
+    </ng-template>
+    <ng-template *ngIf="!checked" [ngTemplateOutlet]="uncheckedTemplate || defaultUncheckedTemplate"></ng-template>
+    <ng-template #defaultUncheckedTemplate>
+      <div class="devui-toggle-inner" [innerHTML]="uncheckedContent"></div>
+    </ng-template>
+  </span>
   <small></small>
 </span>

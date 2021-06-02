@@ -22,7 +22,8 @@ export class ToggleDemoComponent implements OnInit, OnDestroy {
   ];
   customSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./custom/custom.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./custom/custom.component.ts') }
+    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./custom/custom.component.ts') },
+    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./custom/custom.component.scss') }
   ];
 
   navItems = [];

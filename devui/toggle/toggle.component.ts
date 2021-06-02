@@ -1,6 +1,6 @@
 import {
   Component, EventEmitter, forwardRef, HostListener, Input,
-  Output
+  Output, TemplateRef
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -25,6 +25,14 @@ export class ToggleComponent implements ControlValueAccessor {
   @Input() size: 'sm' | '' | 'lg' = '';
   @Input() color: string;
   @Input() beforeChange: (value) => boolean | Promise<boolean> | Observable<boolean>;
+  @Input() checkedContent: string | TemplateRef<any>;
+  get checkedTemplate() {
+    return this.checkedContent instanceof TemplateRef ? this.checkedContent : null;
+  }
+  @Input() uncheckedContent: string | TemplateRef<any>;
+  get uncheckedTemplate() {
+    return this.uncheckedContent instanceof TemplateRef ? this.uncheckedContent : null;
+  }
   @Input() set checked(v: boolean) {
     this._checked = v === true;
   }

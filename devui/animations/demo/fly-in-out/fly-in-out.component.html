@@ -1,0 +1,6 @@
+<d-button [width]="'100px'" (btnClick)="open = !open"> {{ open ? 'hide' : 'show' }}</d-button>
+<div class="container">
+  <div class="drawer" [@flyInOut]="open ? 'left-in' : 'left-void'">
+    <d-skeleton></d-skeleton>
+  </div>
+</div>

@@ -1,8 +1,8 @@
 @import '../devui/style/devui';
 @import '~@devui-design/icons/icomoon/devui-icon.css';
-@import '../devui/style/theme/_font';
+@import '~ng-devui/styles-var/devui-var.scss';
 @import '../devui-commons/src/devui-commons.scss';
-@import '../devui/theme-collection/extend-theme.scss';
+@import '~ng-devui/theme-collection/extend-theme';
 
 .markdown {
   color: $devui-text;

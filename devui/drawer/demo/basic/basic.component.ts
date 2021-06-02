@@ -23,7 +23,7 @@ export class BasicComponent {
       backdropCloseable: true,
       escKeyCloseable: true,
       position: 'left',
-      beforeHidden: () => this.beforeHidden(),
+      // beforeHidden: () => this.beforeHidden(),
       onClose: () => {
         console.log('on drawer closed');
       },

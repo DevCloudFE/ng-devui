@@ -1,0 +1,6 @@
+<div class="container">
+  <input dTextInput placeholder="Click me..." (click)="open = !open" />
+  <div class="menu expand-bottom" [@fadeInOut]="open ? 'bottom' : 'void'">
+    <d-skeleton></d-skeleton>
+  </div>
+</div>

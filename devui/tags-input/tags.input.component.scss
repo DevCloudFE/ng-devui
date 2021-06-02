@@ -2,6 +2,8 @@
 @import '../style/theme/shadow';
 @import '../style/theme/corner';
 @import '../style/core/_font';
+@import '../style/core/animation';
+@import '../style/theme/z-index';
 
 :host {
   display: block;
@@ -157,7 +159,7 @@
 .devui-tags-autocomplete {
   position: absolute;
   padding-bottom: 5px;
-  z-index: 1000;
+  z-index: $devui-z-index-dropdown;
   width: 100%;
   background-color: $devui-connected-overlay-bg;
   box-shadow: $devui-shadow-length-connected-overlay $devui-shadow;
@@ -202,7 +204,7 @@
 .devui-tags-autocomplete {
   .devui-suggestion-list {
     .devui-suggestion-item {
-      transition: color cubic-bezier(0.645, 0.045, 0.355, 1) 0.1s, background-color cubic-bezier(0.645, 0.045, 0.355, 1) 0.1s;
+      transition: color $devui-animation-duration-fast $devui-animation-ease-in-smooth, background-color $devui-animation-duration-fast $devui-animation-ease-in-smooth;
     }
   }
 }

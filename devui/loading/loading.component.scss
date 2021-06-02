@@ -1,6 +1,7 @@
 @import '../style/theme/color';
 @import '../style/theme/corner';
 @import '../style/core/_font';
+@import '../style/core/z-index';
 
 .devui-loading-wrapper {
   display: flex;
@@ -13,12 +14,12 @@
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 1001;
+  z-index: $devui-z-index-full-page-overlay;
 }
 
 .devui-spinner-wrapper {
   position: absolute;
-  z-index: 1001;
+  z-index: $devui-z-index-full-page-overlay;
   width: max-content;
   max-width: 100%;
 }
@@ -35,7 +36,7 @@
 .devui-busy-default-sign {
   position: relative;
   display: inline-block;
-  z-index: 1001;
+  z-index: $devui-z-index-full-page-overlay;
   padding: 12px 14px;
   color: $devui-text;
 }

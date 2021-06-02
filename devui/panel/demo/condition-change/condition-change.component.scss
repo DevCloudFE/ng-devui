@@ -1,5 +1,7 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
 em.icon-chevron-down {
-  transition: transform 0.3s;
+  transition: transform $devui-animation-duration-slow $devui-animation-ease-in-smooth;
 
   &.open {
     transform: rotate(180deg);

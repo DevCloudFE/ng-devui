@@ -1,9 +1,9 @@
 import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { I18nService } from 'ng-devui/i18n';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import * as hljs from 'highlight.js/lib/core';
 import * as marked from 'marked/lib/marked';
-import { I18nService } from 'ng-devui/i18n';
 import { Subscription } from 'rxjs';
 @Component({
   selector: 'd-api',
@@ -38,6 +38,11 @@ export class DevUIApiComponent implements OnInit, AfterViewInit, OnDestroy {
     this.subs.add(
       this.translate.onLangChange.subscribe((event: TranslationChangeEvent) => {
         this.setApi(event.lang);
+        setTimeout(() => {
+          if (this.navSpriteInstance) {
+            this.navSpriteInstance.getNavData(false);
+          }
+        }, 500);
       })
     );
   }

@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { DevUIModule } from 'ng-devui';
 import { DataTableModule } from 'ng-devui/data-table';
+import { FullscreenModule } from 'ng-devui/fullscreen';
 import { GanttModule } from 'ng-devui/gantt';
 import { I18nModule } from 'ng-devui/i18n';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
@@ -26,6 +27,7 @@ import { TableComponent } from './table/table.component';
     I18nModule,
     DDemoNavModule,
     TranslateModule,
+    FullscreenModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo' },
       { path: 'demo', component: GanttDemoComponent},

@@ -15,8 +15,8 @@
       'place-at-center': placement === 'center'
     }"
     [ngStyle]="{ width: width }"
-    [@modalAnimation]="animateState"
-    (@modalAnimation.done)="onAnimationEnd($event)"
+    [@wipeInOutAnimation]="animateState"
+    (@wipeInOutAnimation.done)="onAnimationEnd($event)"
     tabindex="1"
     #dialog
   >

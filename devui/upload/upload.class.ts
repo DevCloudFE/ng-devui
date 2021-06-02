@@ -1,6 +1,5 @@
 import { from, merge } from 'rxjs';
 import { toArray } from 'rxjs/operators';
-
 import {
   FileUploader
 } from './file-uploader.class';
@@ -54,7 +53,7 @@ export class UploadComponent {
       const preFiles = this.fileUploaders.filter((fileUploader) => (fileUploader.status === UploadStatus.preLoad));
       const failedFiles = this.fileUploaders.filter((fileUploader) => (fileUploader.status === UploadStatus.failed));
       const uploadFiles = preFiles.length > 0 ? preFiles : failedFiles;
-      uploads =  uploadFiles.map((fileUploader) => {
+      uploads = uploadFiles.map((fileUploader) => {
         fileUploader.percentage = 0;
         return from(fileUploader.send());
       });
@@ -69,27 +68,27 @@ export class UploadComponent {
   oneTimeUpload() {
     const uploads = this.fileUploaders
       .filter((fileUploader) => fileUploader.status !== UploadStatus.uploaded);
-    uploads[0].send(uploads); // 触发文件上传
-    const finalUploads = uploads.map((file) => {
-      return from(this.dealUploadData(file, uploads[0]));
-    });
+    let finalUploads = [];
+    this.dealOneTimeUploadFiles(uploads).then(result => finalUploads = result);
     if (uploads.length > 0) {
-      return merge(...finalUploads).pipe(toArray());
+      return from(finalUploads);
     }
     return from(Promise.reject('no files'));
   }
 
-  // 根据standard的上传状态为其他file设置状态
-  dealUploadData(file, standard): Promise<{ file: File, response: any }> {
-    return new Promise((resolve, reject) => {
-      file.status = standard.status;
-      file.percentage = standard.percentage;
-      if (standard.status = UploadStatus.failed) {
-        reject({ file: file.file, response: standard.response });
-      } else {
-        resolve({ file: file.file, response: standard.response });
-      }
-    });
+  async dealOneTimeUploadFiles(uploads) {
+    // 触发文件上传
+    let finalUploads = [];
+    await uploads[0].send(uploads).finally(() =>
+      // 根据uploads[0]的上传状态为其他file设置状态
+      finalUploads = uploads.map((file) => {
+        file.status = uploads[0].status;
+        file.percentage = uploads[0].percentage;
+        return { file: file.file, response: uploads[0].response };
+      })
+    );
+
+    return finalUploads;
   }
 
   deleteFile(file) {

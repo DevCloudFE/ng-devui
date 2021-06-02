@@ -1,15 +1,19 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
+import { TagsModule } from 'ng-devui/tags';
 import { TimeAxisModule } from 'ng-devui/time-axis';
+import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 import { TimeAxisAllStatesComponent } from './all-states/time-axis-all-states.component';
+import { AlternativeModeComponent } from './alternative-mode/alternative-mode.component';
+import { CustomDotComponent } from './custom-dot/custom-dot.component';
 import { TimeAxisDirectionComponent } from './direction/time-axis-direction.component';
 import { TimeAxisHtmlContentComponent } from './html-content/time-axis-html-content.component';
+import { SeperateWayComponent } from './seperate-way/seperate-way.component';
 import { TimeAxisTemplateContentComponent } from './template-content/time-axis-template-content.component';
 import { TimeAxisDemoComponent } from './time-axis-demo.component';
 
@@ -18,6 +22,7 @@ import { TimeAxisDemoComponent } from './time-axis-demo.component';
     TranslateModule,
     CommonModule,
     TimeAxisModule,
+    TagsModule,
     DevUICodeboxModule,
     DevUIApiModule,
     DDemoNavModule,
@@ -36,9 +41,12 @@ import { TimeAxisDemoComponent } from './time-axis-demo.component';
       TimeAxisAllStatesComponent,
       TimeAxisDirectionComponent,
       TimeAxisHtmlContentComponent,
-      TimeAxisTemplateContentComponent
+      TimeAxisTemplateContentComponent,
+      AlternativeModeComponent,
+      SeperateWayComponent,
+      CustomDotComponent
       ],
-
+  entryComponents: [TimeAxisDemoComponent],
   providers: [],
 })
 export class TimeAxisDemoModule {

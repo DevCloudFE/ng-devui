@@ -20,6 +20,7 @@ import { QuadrantDiagramModule } from 'ng-devui/quadrant-diagram';
 | largeLabelTemplate  |     `TemplateRef<any>`     |                   --                   | 可选，自定义`currentLabelSize='large'`时的标签样式                                                                                             |
 |      diagramId      |          `string`          | 'devui-quadrant-diagram-'+当前组件顺序 | 可选，为象限图组件添加 id 属性，用于区分不同实例                                                                                               | [基本用法](demo#basic-usage)     |
 |      dropScope      |          `string`          |               'default'                | 可选， 限制 drop 的位置，必须匹配对应的 dragScope ，详情参考`DragDropAPI`                                                                      | [配置自定义象限图](demo#custom-quadrant) |
+|      showToolbar      |          `boolean`          |               true                | 可选，是否展示工具栏 | [配置自定义象限图](demo#custom-quadrant) |
 
 ### d-quadrant-diagram 事件
 

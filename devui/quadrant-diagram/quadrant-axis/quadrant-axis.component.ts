@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { ThemeService } from 'ng-devui/theme';
 import { IAxisConfigs, IViewConfigs } from '../quadrant-diagram.type';
 import { AXIS_TITLE_SPACE } from '../quadrant.config';
 
@@ -23,21 +24,38 @@ export class QuadrantDiagramAxisComponent implements OnInit, OnChanges {
     xAxisTicksNum: number;
     xTickSpacing: number;
     yTickSpacing: number;
+    private AXIS_COLOR;
+    private AXIS_LABEL_COLOR;
+    themeService: ThemeService;
     constructor(private elementRef: ElementRef) { }
     ngOnChanges(changes: SimpleChanges): void {
         if (changes && (changes['axisConfigs'] || changes['view'])) {
-            this.initAxisData();
-            this.setAxisData();
-            this.drawAxis();
-            this.drawAxisLabels();
+            this.resetAxis();
         }
     }
     ngOnInit(): void {
+        this.themeService = window['devuiThemeService'];
+        if (this.themeService && this.themeService.eventBus) {
+            this.themeService.eventBus.add('themeChanged', this.refreshColor);
+        }
+        this.refreshColor();
+    }
+
+    refreshColor = () => {
+        if (this.themeService) {
+            this.AXIS_COLOR = this.themeService.currentTheme.data['devui-dividing-line'];
+            this.AXIS_LABEL_COLOR = this.themeService.currentTheme.data['devui-aide-text'];
+        }
+        this.resetAxis();
+    }
+
+    resetAxis() {
         this.initAxisData();
         this.setAxisData();
         this.drawAxis();
         this.drawAxisLabels();
     }
+
     initAxisData() {
         this.quadrantAxis = this.elementRef.nativeElement.querySelector('d-quadrant-diagram#' + this.diagramId + ' canvas');
         this.quadrantAxis.width = this.view.width;
@@ -58,8 +76,8 @@ export class QuadrantDiagramAxisComponent implements OnInit, OnChanges {
     }
     drawAxis() {
         this.context.save();
-        this.context.fillStyle = '#CACFD8';
-        this.context.strokeStyle = '#CACFD8';
+        this.context.fillStyle = this.AXIS_COLOR;
+        this.context.strokeStyle = this.AXIS_COLOR;
         this.drawXAxis();
         this.drawYAxis();
         this.context.lineWidth = 0.5;
@@ -125,7 +143,7 @@ export class QuadrantDiagramAxisComponent implements OnInit, OnChanges {
     }
     drawAxisLabels() {
         this.context.save();
-        this.context.fillStyle = '#5E6678';
+        this.context.fillStyle = this.AXIS_LABEL_COLOR;
         this.drawXTicksLabels();
         this.drawYTicksLabels();
         this.context.restore();
@@ -134,6 +152,7 @@ export class QuadrantDiagramAxisComponent implements OnInit, OnChanges {
     drawAxisTitle() {
         this.context.font = '12px Microsoft YaHei';
         this.context.textAlign = 'left';
+        this.context.fillStyle = this.AXIS_LABEL_COLOR;
         const xLabelWidth = this.context.measureText(this.axisConfigs.xAxisLabel).width;
         this.rotateLabel(this.axisConfigs.xAxisLabel, this.axisRight + this.axisConfigs.axisMargin / 2,
             this.axisOrigin.y - xLabelWidth - AXIS_TITLE_SPACE);

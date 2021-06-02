@@ -14,7 +14,7 @@ import {
   ViewChildren
 } from '@angular/core';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
-import { collapseForDomDestroy } from 'ng-devui/utils';
+import { expandCollapseForDomDestroy } from 'ng-devui/utils';
 import { DevConfigService, WithConfig } from 'ng-devui/utils/globalConfig';
 import { Subscription } from 'rxjs';
 import { Dictionary, ITreeItem, ITreeNodeData, TreeNode } from './tree-factory.class';
@@ -26,7 +26,7 @@ import { ICheckboxInput, IDropType } from './tree.types';
   styleUrls: ['./operable-tree.component.scss'],
   exportAs: 'dOperableTreeComponent',
   preserveWhitespaces: false,
-  animations: [collapseForDomDestroy]
+  animations: [expandCollapseForDomDestroy]
 })
 export class OperableTreeComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() tree: Array<ITreeItem>;
@@ -298,10 +298,10 @@ export class OperableTreeComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   selectNode(event, treeNode: TreeNode) {
-    if (!this.operableTree.isSelectableRegion(event.target)) {
+    if (treeNode.data.disableSelect) {
       return;
     }
-    if (treeNode.data.disableSelect) {
+    if (!this.operableTree.isSelectableRegion(event.target)) {
       return;
     }
     if (!this.canActivateNode) {
