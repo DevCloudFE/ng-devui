@@ -6,7 +6,9 @@ import {
   ElementRef,
   HostListener,
   Input,
-  OnDestroy
+  OnChanges,
+  OnDestroy,
+  SimpleChanges,
 } from '@angular/core';
 import { OverlayContainerRef } from 'ng-devui/overlay-container';
 import { DevConfigService, WithConfig } from 'ng-devui/utils/globalConfig';
@@ -19,7 +21,7 @@ import { PositionType } from './tooltip.types';
   selector: '[dTooltip]',
   exportAs: 'dTooltip',
 })
-export class TooltipDirective implements AfterViewInit, OnDestroy {
+export class TooltipDirective implements OnChanges, AfterViewInit, OnDestroy {
   @Input() content: string;
   @Input() position: PositionType | PositionType[] = 'top';
   @Input() @WithConfig() showAnimation = true;
@@ -41,7 +43,7 @@ export class TooltipDirective implements AfterViewInit, OnDestroy {
     private triggerElementRef: ElementRef,
     private overlayContainerRef: OverlayContainerRef,
     private componentFactoryResolver: ComponentFactoryResolver,
-    private devConfigService: DevConfigService,
+    private devConfigService: DevConfigService
   ) {}
 
   @HostListener('focus') onFocus() {
@@ -57,18 +59,14 @@ export class TooltipDirective implements AfterViewInit, OnDestroy {
       this.componentFactoryResolver.resolveComponentFactory(TooltipComponent)
     );
 
-    Object.assign(this.tooltipComponentRef.instance, {
-      content: this.content,
-      position: this.position,
-      showAnimation: this.showAnimation,
-      triggerElementRef: this.triggerElementRef,
-    });
+    this.instanceAssignValue(['content', 'position', 'showAnimation', 'triggerElementRef']);
 
     // 对创建的ToolTip组件添加鼠标移入和移出的监听事件
     if (this.tooltipComponentRef.instance['tooltip'].nativeElement) {
       this.bindMouseEvent();
     }
   }
+
   bindMouseEvent() {
     fromEvent(this.tooltipComponentRef.instance['tooltip'].nativeElement, 'mouseenter')
       .pipe(
@@ -111,7 +109,6 @@ export class TooltipDirective implements AfterViewInit, OnDestroy {
 
     this.createTooltip();
     this.tooltipComponentRef.instance.onShow();
-
   }
 
   destroy() {
@@ -141,6 +138,29 @@ export class TooltipDirective implements AfterViewInit, OnDestroy {
       this.unsubscribeT$.complete();
     }
   }
+
+  instanceAssignValue(key: string | string[]): void {
+    const keyArr = typeof key === 'string' ? [key] : key;
+    const obj: any = {};
+    keyArr.forEach((item) => (obj[item] = this[item]));
+    Object.assign(this.tooltipComponentRef.instance, obj);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.tooltipComponentRef) {
+      const { content, position, showAnimation } = changes;
+      if (content) {
+        this.instanceAssignValue('content');
+      }
+      if (position) {
+        this.instanceAssignValue('position');
+      }
+      if (showAnimation) {
+        this.instanceAssignValue('showAnimation');
+      }
+    }
+  }
+
   ngAfterViewInit() {
     if (this.triggerElementRef.nativeElement) {
       fromEvent(this.triggerElementRef.nativeElement, 'mouseenter')
@@ -173,6 +193,7 @@ export class TooltipDirective implements AfterViewInit, OnDestroy {
         });
     }
   }
+
   ngOnDestroy() {
     if (this.unsubscribeT$) {
       this.unsubscribeT$.next();
