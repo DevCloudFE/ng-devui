@@ -37,7 +37,8 @@ In the page:
 | lite | `boolean` | false | Optional. Specifies Whether to switch to the simplified mode. | [Simplified mode](demo#minimalist-model) |
 | showPageSelector | `boolean` | true | Optional. Whether to display the page number drop-down list in simplified mode. | [Simplified mode](demo#minimalist-model) |
 | haveConfigMenu | `boolean` | false | Optional. Whether to display the configuration in simplified mode | [Simplified mode](demo#minimalist-model) |
-| autoFixPageIndex | `boolean` | true | Optional. Indicates whether to automatically correct the page number when the page size is changed. If the pageIndex is processed in the `pageSizeChange` event, you are advised to set the value to `false` | [Simplified Mode](demo#minimalist-model) |.
+| autoFixPageIndex | `boolean` | true | Optional. Indicates whether to automatically correct the page number when the page size is changed. If the pageIndex is processed in the `pageSizeChange` event, you are advised to set the value to `false` | [Simplified Mode](demo#minimalist-model) |
+| autoHide | `boolean` | false | Optional, whether to hide automatically, autoHide is true minimum value of pageSizeOptions > total do not show pagination | [Simplified Mode](demo#minimalist-model) |.
 
 ## d-pagination event
 
