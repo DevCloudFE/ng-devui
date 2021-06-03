@@ -1,20 +1,25 @@
 function webpackConfigAddThemeSupportForIE(config) {
     [{
-        ruleTest: /\.scss$|\.sass$/,
+        ruleTest: /\.(?:sass)$/i,
         loaderName: 'sass-loader'
-    }, {
-        ruleTest: /\.less$/,
+    },
+    {
+        ruleTest: /\.(?:scss)$/i,
+        loaderName: 'sass-loader'
+    },
+    {
+        ruleTest: /\.(?:less)$/i,
         loaderName: 'less-loader'
     }].forEach(({ ruleTest, loaderName }) => {
         config.module.rules.filter(rule => rule.test + '' === ruleTest + '').forEach((styleRule) => {
             if (styleRule) {
-                var insertPosition = styleRule.use.findIndex(loaderUse => loaderUse.loader === loaderName
+                var insertPosition = styleRule.rules[1].use.findIndex(loaderUse => loaderUse.loader === loaderName
                     || loaderUse.loader === require.resolve(loaderName));
                 if (insertPosition > -1) {
-                    styleRule.use.splice(insertPosition, 0, {
+                    styleRule.rules[1].use.splice(insertPosition, 0, {
                         loader: 'postcss-loader',
                         options: {
-                            sourceMap: styleRule.use[insertPosition].options.sourceMap,
+                            sourceMap: styleRule.rules[1].use[insertPosition].options.sourceMap,
                             postcssOptions: {
                                 plugins: [
                                     require('./add-origin-varvalue'),

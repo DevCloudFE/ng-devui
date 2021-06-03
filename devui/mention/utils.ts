@@ -40,9 +40,9 @@ const properties = [
 
 const isBrowser = typeof window !== 'undefined';
 const isFirefox = isBrowser && window['mozInnerScreenX'] != null;
-const _parseInt = value => {
+function _parseInt(value) {
   return parseInt(value, 10);
-};
+}
 
 export function getCaretCoordinates(element, position, options?) {
   if (!isBrowser) {

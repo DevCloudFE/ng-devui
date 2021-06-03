@@ -23,7 +23,7 @@ To see more in [devui.design](https://devui.design/home).
 
 ## Angular Support
 
-Now supports Angular <font color=red>`^11.0.0`</font>
+Now supports Angular <font color=red>`^12.0.0-beta.1`</font>
 
 ## Getting Started
 

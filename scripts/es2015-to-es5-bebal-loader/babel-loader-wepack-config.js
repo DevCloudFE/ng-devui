@@ -1,13 +1,13 @@
 const path = require('path');
 const ts = require('typescript');
-const AngularCompilerPlugin = require('@ngtools/webpack').AngularCompilerPlugin;
+const AngularCompilerPlugin = require('@ngtools/webpack').AngularWebpackPlugin;
 const readConfiguration = require('@angular/compiler-cli').readConfiguration;
 const ES6_ONLY_THIRD_PARTY_LIST = require('./es6-only-third-party-list');
 
 function getAngularCompilerTsConfigPath(config) {
   const angularCompilerPlugin = config.plugins.filter(plugin => plugin instanceof AngularCompilerPlugin).pop();
   if (angularCompilerPlugin) {
-    return angularCompilerPlugin.options.tsConfigPath;
+    return angularCompilerPlugin.pluginOptions.tsconfig;
   }
   return undefined;
 }
@@ -17,7 +17,7 @@ function getTsconfigCompileTarget(tsconfigPath) {
 }
 
 function webpackConfigAddBabel2ES5(config, list = []) {
-  const tsconfigPath = getAngularCompilerTsConfigPath(config) || 'tsconfig.base.json';
+  const tsconfigPath = getAngularCompilerTsConfigPath(config) || 'tsconfig.json';
   const target = getTsconfigCompileTarget(tsconfigPath);
   if (target === ts.ScriptTarget.ES5) {
     config.module.rules.push({
