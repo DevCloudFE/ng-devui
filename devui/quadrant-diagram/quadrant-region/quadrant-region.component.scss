@@ -1,4 +1,5 @@
 @import '../../style/core/_font';
+@import '../../style/theme/color';
 
 .devui-quadrant-region {
   position: absolute;
@@ -17,8 +18,8 @@
 
 .devui-quadrant-region-1 {
   background: rgba(246, 111, 106, 0.04);
-  border-bottom: 1px solid #e3e5e9;
-  border-left: 1px solid #e3e5e9;
+  border-bottom: 1px solid $devui-dividing-line;
+  border-left: 1px solid $devui-dividing-line;
 
   .devui-quadrant-title {
     color: rgba(246, 111, 106, 0.3);
@@ -27,7 +28,7 @@
 
 .devui-quadrant-region-2 {
   background: rgba(250, 194, 10, 0.04);
-  border-bottom: 1px solid #e3e5e9;
+  border-bottom: 1px solid $devui-dividing-line;
 
   .devui-quadrant-title {
     color: rgba(250, 194, 10, 0.3);
@@ -44,7 +45,7 @@
 
 .devui-quadrant-region-4 {
   background: rgba(81, 112, 255, 0.04);
-  border-left: 1px solid #e3e5e9;
+  border-left: 1px solid $devui-dividing-line;
 
   .devui-quadrant-title {
     color: rgba(81, 112, 255, 0.3);

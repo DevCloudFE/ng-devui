@@ -7,8 +7,9 @@
   max-width: 260px;
   height: 100%;
   overflow-y: hidden;
-  z-index: 10;
+  z-index: 1000;
   border-right: 1px solid $devui-dividing-line;
+  background-color: $devui-base-bg;
 
   &:hover {
     overflow-y: auto;

@@ -43,7 +43,7 @@ openstandardDialog(dialogtype?: string) {
 | id | `string` | -- | Required. ID of the dialog box displayed. | [Custom Dialog Box](demo#custom-dialog) |
 | width | `string` | -- | Optional. Width of the pop-up box (e.g '300px'). | [Custom Dialog Box](demo#custom-dialog) |
 | zIndex | `number` | 1050 | Optional. Z-index value in the dialog box displayed. |
-| backDropZIndex | `number` | 1040 | Optional. Z-index value in the back drop displayed of the dialog box. |
+| backDropZIndex | `number` | 1049 | Optional. Z-index value in the back drop displayed of the dialog box. |
 | component | `Type<any>` | -- | Optional. Pop-up component. The component content is displayed in the pop-up box. | [Custom Dialog Box](demo#custom-dialog) |
 | injector | `Injector` | true | Optional. You can specify the syringe that will be used as the parent of the component. |
 | data | `object` | -- | Optional. The attribute of the component instance is transferred. | [Custom Dialog Box](demo#custom-dialog) |
@@ -70,7 +70,7 @@ openstandardDialog(dialogtype?: string) {
 | id | `string` | -- | Required. The ID of the dialog box is displayed. | [Standard Dialog Box](demo#standard-dialog) |
 | width | `string` | -- | Optional. Width of the dialog box (e.g '300px'). | [Standard Dialog Box](demo#standard-dialog) |
 | zIndex | `number` | 1050 | Optional. Z-index value in the dialog box displayed. | [Information](demo#message-hint) |
-| backDropZIndex | `number` | 1040 | Optional. Z-index value in the back drop displayed of the dialog box. |
+| backDropZIndex | `number` | 1049 | Optional. Z-index value in the back drop displayed of the dialog box. |
 | maxHeight | `string` | -- | Optional. The maximum height of the dialog box (e.g '600px'). | [Standard Dialog Box](demo#standard-dialog) |
 | title | `string` | -- | Optional. Pop-up box title. | [Standard Dialog Box](demo#standard-dialog) |
 | content | `string\|Type<any>` | -- | Optional. Pop-up box content. Character strings and components are supported. | [Standard Dialog Box](demo#standard-dialog) |

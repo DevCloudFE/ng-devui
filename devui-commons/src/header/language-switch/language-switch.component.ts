@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DevuiCommonsService } from '../../devui-commons.service';
+import { I18nUtil } from '../../i18n/i18n.util';
 
 @Component({
   selector: 'd-header-language-switch',
@@ -13,8 +14,8 @@ export class LanguageSwitchComponent implements OnInit {
 
   constructor(private commonsService: DevuiCommonsService) { }
 
-  ngOnInit() {
-    this.currentLang = localStorage.getItem('lang') || 'zh-cn';
+  ngOnInit(): void {
+    this.currentLang = I18nUtil.getCurrentLanguage();
   }
 
   changeLanguage(): void {

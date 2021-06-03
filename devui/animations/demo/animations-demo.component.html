@@ -1,0 +1,47 @@
+<div class="devui-demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 180, bottom: 0 }">
+  <d-demo-nav [navItems]="navItems"></d-demo-nav>
+  <div class="devui-demo-example" [dAnchor]="'expand-collapse'">
+    <div class="devui-demo-title">{{ 'components.animations.collapsedDemo.title' | translate }}</div>
+    <div class="devui-demo-text">
+      {{ 'components.animations.collapsedDemo.description' | translate }}
+    </div>
+    <d-codebox id="components-animations-collapse" [sourceData]="collapseSource">
+      <d-collapse demo></d-collapse>
+    </d-codebox>
+  </div>
+  <div class="devui-demo-example" [dAnchor]="'fade-in-out'">
+    <div class="devui-demo-title">{{ 'components.animations.fadeInOutDemo.title' | translate }}</div>
+    <div class="devui-demo-text">
+      {{ 'components.animations.fadeInOutDemo.description' | translate }}
+    </div>
+    <d-codebox id="components-animations-collapse" [sourceData]="fadeInOutSource">
+      <d-fade-in-out demo></d-fade-in-out>
+    </d-codebox>
+  </div>
+  <div class="devui-demo-example" [dAnchor]="'wipe-in-out'">
+    <div class="devui-demo-title">{{ 'components.animations.wipeInOutDemo.title' | translate }}</div>
+    <div class="devui-demo-text">
+      {{ 'components.animations.wipeInOutDemo.description' | translate }}
+    </div>
+    <d-codebox id="components-animations-modal" [sourceData]="wipeInOutSource">
+      <d-wipe-in-out demo></d-wipe-in-out>
+    </d-codebox>
+  </div>
+  <div class="devui-demo-example" [dAnchor]="'fly-in-out'">
+    <div class="devui-demo-title">{{ 'components.animations.flyInOutDemo.title' | translate }}</div>
+    <div class="devui-demo-text">
+      {{ 'components.animations.flyInOutDemo.description' | translate }}
+    </div>
+    <d-codebox id="components-animations-modal" [sourceData]="flyInOutSource">
+      <d-fly-in-out demo></d-fly-in-out>
+    </d-codebox>
+  </div>
+  <div class="devui-demo-example" [dAnchor]="'icon-class'">
+    <div class="devui-demo-title">{{ 'components.animations.animationIconDemo.title' | translate }}</div>
+
+    <div class="devui-demo-text"></div>
+    <d-codebox id="common-clipboard" [sourceData]="animationIconSource">
+      <d-animation-icon demo></d-animation-icon>
+    </d-codebox>
+  </div>
+</div>

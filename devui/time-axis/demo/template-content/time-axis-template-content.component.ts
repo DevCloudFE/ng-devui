@@ -1,49 +1,53 @@
-import { Component, OnInit } from '@angular/core';
-import { TimeAxisData } from 'ng-devui/time-axis';
+import { AfterViewInit, Component, TemplateRef, ViewChild } from '@angular/core';
 @Component({
     selector: 'd-demo-time-axis-template-content',
     templateUrl: './time-axis-template-content.component.html'
 })
-export class TimeAxisTemplateContentComponent implements OnInit {
+export class TimeAxisTemplateContentComponent implements AfterViewInit {
+  @ViewChild('yearShow') yearShow: TemplateRef<any>;
+  timeAxisTemplate = {
+    direction: 'horizontal',
+    model: 'template',
+    list: [
+      {
+        text: 'hello',
+        type: 'success',
+        lineStyle: {style: 'dashed'},
+        extraElement: {},
+        data: { title: '第四季度交付版本1.0', date: '2019/11/01', status: '已发布', color: '#50d4ab'}
+      },
+      {
+        text: 'world',
+        type: 'danger',
+        lineStyle: {style: 'dashed'},
+        data: { title: '第一季度交付版本2.0', date: '2020/03/01', status: '未开始', color: '#f66f6a', backgroundColor: 'rgba(255, 230, 230, 0.2)'}
+      },
+      {
+        text: 'nihao',
+        type: 'warning',
+        lineStyle: {style: 'dashed'},
+        data: { title: '第二季度交付版本1.0', date: '2020/05/01', status: '进行中', color: '#fac20a'}
+      },
+      {
+        text: 'DevUI',
+        type: 'danger',
+        lineStyle: {style: 'dashed'},
+        data: { title: '第三季度交付版本1.0', date: '2020/09/01', status: '未开始', color: '#f66f6a'}
+      },
+      {
+        text: 'Awesome',
+        type: 'success',
+        lineStyle: {style: 'dashed'},
+        data: { title: '第三季度交付版本1.0', date: '2020/09/01', status: '已发布', color: '#50d4ab'}
+      },
+    ]
+  };
 
-    time_axis_template: TimeAxisData;
+  constructor() {
+  }
 
-    constructor() {
-    }
+  ngAfterViewInit() {
+    this.timeAxisTemplate.list[0].extraElement = this.yearShow;
+  }
 
-    ngOnInit() {
-        this.time_axis_template = {
-            position: 'left',
-            model: 'template',
-            list: [
-                {type: 'primary', status: 'running', data: [
-                    {name: '标题1', des: 'some events in 2017-07-25', createTime: '2017-08-08 12:30:20', endTime: '2017-08-08 12:30:20'},
-                    {name: '标题1', des: 'some events in 2017-07-25', createTime: '2017-08-08 12:30:20', endTime: '2017-08-08 12:30:20'},
-                    {name: '标题1', des: 'some events in 2017-07-25', createTime: '2017-08-08 12:30:20', endTime: '2017-08-08 12:30:20'},
-                    {name: '标题1', des: 'some events in 2017-07-25', createTime: '2017-08-08 12:30:20', endTime: '2017-08-08 12:30:20'},
-                    {name: '标题1', des: 'some events in 2017-07-25', createTime: '2017-08-08 12:30:20', endTime: '2017-08-08 12:30:20'}
-                ]},
-                {type: 'danger', data: [
-                    {name: '标题2', des: 'some events in 2017-07-27', createTime: '2017-08-08 12:30:20', endTime: '2017-08-08 12:30:20'},
-                    {name: '标题2', des: 'some events in 2017-07-27', createTime: '2017-08-08 12:30:20', endTime: '2017-08-08 12:30:20'},
-                    {name: '标题2', des: 'some events in 2017-07-27', createTime: '2017-08-08 12:30:20', endTime: '2017-08-08 12:30:20'},
-                    {name: '标题2', des: 'some events in 2017-07-27', createTime: '2017-08-08 12:30:20', endTime: '2017-08-08 12:30:20'},
-                    {name: '标题2', des: 'some events in 2017-07-27', createTime: '2017-08-08 12:30:20', endTime: '2017-08-08 12:30:20'}
-                ]},
-                {type: 'success', data: [
-                    {name: '标题3', des: 'some events in 2017-07-28', createTime: '2017-08-08 12:30:20', endTime: '2017-08-08 12:30:20'},
-                    {name: '标题3', des: 'some events in 2017-07-28', createTime: '2017-08-08 12:30:20', endTime: '2017-08-08 12:30:20'},
-                    {name: '标题3', des: 'some events in 2017-07-28', createTime: '2017-08-08 12:30:20', endTime: '2017-08-08 12:30:20'},
-                    {name: '标题3', des: 'some events in 2017-07-28', createTime: '2017-08-08 12:30:20', endTime: '2017-08-08 12:30:20'},
-                    {name: '标题3', des: 'some events in 2017-07-28', createTime: '2017-08-08 12:30:20', endTime: '2017-08-08 12:30:20'}
-                ]},
-                {type: 'primary', iconClass: 'stops', data: [
-                    {name: '标题4', des: 'some events in 2017-07-29', createTime: '2017-08-08 12:30:20', endTime: '2017-08-08 12:30:20'},
-                    {name: '标题4', des: 'some events in 2017-07-29', createTime: '2017-08-08 12:30:20', endTime: '2017-08-08 12:30:20'},
-                    {name: '标题4', des: 'some events in 2017-07-29', createTime: '2017-08-08 12:30:20', endTime: '2017-08-08 12:30:20'},
-                    {name: '标题4', des: 'some events in 2017-07-29', createTime: '2017-08-08 12:30:20', endTime: '2017-08-08 12:30:20'},
-                    {name: '标题4', des: 'some events in 2017-07-29', createTime: '2017-08-08 12:30:20', endTime: '2017-08-08 12:30:20'}
-                ]}
-            ]};
-    }
 }

@@ -1,4 +1,5 @@
 @import '../style/theme/color';
+@import '../style/core/animation';
 
 .cdk-overlay-pane > div > .devui-dropdown-menu {
   position: relative;
@@ -7,15 +8,24 @@
   border: none;
 }
 
-.devui-dropdown span.icon-chevron-down {
-  display: inline-block;
-  vertical-align: text-top;
+.devui-dropdown span {
+  &.icon-chevron-down,
+  &.icon-select-arrow {
+    display: inline-block;
+    vertical-align: text-top;
+  }
 }
 
-.devui-dropdown-animation span.icon-chevron-down {
-  transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+.devui-dropdown-animation span {
+  &.icon-chevron-down,
+  &.icon-select-arrow {
+    transition: transform $devui-animation-duration-slow $devui-animation-ease-in-smooth;
+  }
 }
 
-.devui-dropdown.open span.icon-chevron-down {
-  transform: rotate(180deg);
+.devui-dropdown.open span {
+  &.icon-chevron-down,
+  &.icon-select-arrow {
+    transform: rotate(180deg);
+  }
 }

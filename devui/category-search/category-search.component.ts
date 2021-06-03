@@ -14,7 +14,6 @@ import {
   ViewChild,
   ViewChildren
 } from '@angular/core';
-import { cloneDeep, isEqual } from 'lodash-es';
 import { DateRangePickerComponent } from 'ng-devui/datepicker';
 import { DropDownDirective } from 'ng-devui/dropdown';
 import { DValidateRules } from 'ng-devui/form';
@@ -22,6 +21,7 @@ import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { ITreeItem } from 'ng-devui/tree';
 import { DefaultIcons } from 'ng-devui/tree-select';
 import { DateConverter, DefaultDateConverter } from 'ng-devui/utils';
+import { cloneDeep, isEqual } from 'lodash-es';
 import { fromEvent, Observable, Subject } from 'rxjs';
 import { debounceTime, takeUntil, tap } from 'rxjs/operators';
 import { CreateFilterEvent, ICategorySearchTagItem, SearchEvent, SelectedTagsEvent } from './category-search.type';
@@ -163,9 +163,7 @@ export class CategorySearchComponent implements OnInit, OnChanges, OnDestroy, Af
         const preValue = item.type === 'numberRange' || item.type === 'treeSelect' ? { value: [] } : { value: undefined };
         preValue[item.filterKey || 'label'] = undefined;
         item.value = item.value || preValue;
-        if (item.value.value && item.value.value.length) {
-          item.value.cache = cloneDeep(item.value.value);
-        }
+        item.value.cache = (item.value.value && typeof item.value.value === 'object' && cloneDeep(item.value.value)) || item.value.value;
         if (item.type === 'treeSelect' && item.options && item.options.length) {
           item.value.options = cloneDeep(item.options);
         }
@@ -607,18 +605,20 @@ export class CategorySearchComponent implements OnInit, OnChanges, OnDestroy, Af
     this.afterDropdownClosed();
     const result = [];
     const selectedIds = [];
-    const halfCheckedIds = [];
     tag.value.value.forEach((item) => {
       result.push(item[tag.filterKey || tag.treeNodeTitleKey || 'title']);
       selectedIds.push(item[tag.treeNodeIdKey || 'id']);
     });
-    tree.nodes.forEach((item) => item.data.halfChecked && halfCheckedIds.push(item.id));
     if (result.length) {
       tag.value.options = cloneDeep(tag.options);
       tag.value.cache = cloneDeep(tag.value.value);
       tag.value[tag.filterKey || 'label'] = result.join(',');
       tag.title = this.setTitle(tag, 'treeSelect');
-      this.updateTreeData(tag, tag.value.options, selectedIds, halfCheckedIds);
+      if (tag.multiple) {
+        const halfCheckedIds = [];
+        tree.nodes.forEach((item) => item.data.halfChecked && halfCheckedIds.push(item.id));
+        this.updateTreeData(tag, tag.value.options, selectedIds, halfCheckedIds);
+      }
       this.updateSelectedTags(tag);
     } else {
       this.removeTag(tag);
@@ -637,8 +637,27 @@ export class CategorySearchComponent implements OnInit, OnChanges, OnDestroy, Af
     });
   }
 
-  onOperableNodeChecked(selectedNodes: ITreeItem[], tag) {
-    tag.value.value = selectedNodes.map((item) => item.data.originItem);
+  onOperableNodeChecked(selectedNodes: ITreeItem[], tag: ICategorySearchTagItem) {
+    const selectedValueExtractor = (nodes) => {
+      return tag.leafOnly
+        ? nodes.filter((node) => !node.data.isParent).map((node) => node.data.originItem)
+        : nodes.map((node) => node.data.originItem);
+    };
+    if (tag.multiple) {
+      tag.value.value = selectedValueExtractor(selectedNodes);
+    }
+  }
+
+  onOperableNodeSelected(selectedNode: ITreeItem, tag: ICategorySearchTagItem, tree) {
+    if (tag.multiple || (tag.leafOnly && selectedNode.data.isParent)) {
+      return;
+    }
+    if (selectedNode.data.isActive) {
+      tag.value.value = [selectedNode.data.originItem];
+      this.getTreeValue(tag, tree);
+    } else {
+      selectedNode.data.isActive = true;
+    }
   }
 
   treeSearch(tree, value) {

@@ -1,23 +1,25 @@
-<d-data-table #datatable [dataSource]="basicDataSource" [checkable]="true" [checkOptions]="checkOptions">
-  <d-column
-    *ngFor="let colOption of dataTableOptions.columns"
-    [field]="colOption.field"
-    [header]="colOption.header"
-    [fieldType]="colOption.fieldType"
-    [width]="'150px'"
+<div style="padding-bottom: 24px">
+  <d-data-table #datatable [dataSource]="basicDataSource" [checkable]="true" [checkOptions]="checkOptions">
+    <d-column
+      *ngFor="let colOption of dataTableOptions.columns"
+      [field]="colOption.field"
+      [header]="colOption.header"
+      [fieldType]="colOption.fieldType"
+      [width]="'150px'"
+    >
+    </d-column>
+  </d-data-table>
+  <d-pagination
+    class="page-nation"
+    [size]="'sm'"
+    [total]="pager.total"
+    [pageSize]="pager.pageSize"
+    [showPageSelector]="false"
+    [totalItemText]="'总条数'"
+    [(pageIndex)]="pager.pageIndex"
+    [canViewTotal]="true"
+    [lite]="true"
+    (pageIndexChange)="onPageIndexChange($event)"
   >
-  </d-column>
-</d-data-table>
-<d-pagination
-  class="page-nation"
-  [size]="'sm'"
-  [total]="pager.total"
-  [pageSize]="pager.pageSize"
-  [showPageSelector]="false"
-  [totalItemText]="'总条数'"
-  [(pageIndex)]="pager.pageIndex"
-  [canViewTotal]="true"
-  [lite]="true"
-  (pageIndexChange)="onPageIndexChange($event)"
->
-</d-pagination>
+  </d-pagination>
+</div>

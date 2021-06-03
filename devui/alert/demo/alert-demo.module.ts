@@ -2,11 +2,11 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
 import { AlertModule } from 'ng-devui/alert';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
+import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 import { AlertDemoComponent } from './alert-demo.component';
 import { BasicComponent } from './basic/basic.component';
@@ -38,7 +38,7 @@ import { WithoutIconComponent } from './withoutIcon/withoutIcon.component';
     CloseComponent,
     WithoutIconComponent
   ],
-
+  
 })
 export class AlertDemoModule {
 }

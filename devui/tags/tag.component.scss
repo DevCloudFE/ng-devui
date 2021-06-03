@@ -1,6 +1,7 @@
 @import '../style/theme/color';
 @import '../style/theme/corner';
 @import '../style/core/_font';
+@import '../style/core/animation';
 
 :host {
   display: inline-block;
@@ -268,14 +269,14 @@
 
 .devui-tag-item {
   &.devui-checkable-tag {
-    transition: color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1), background-color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    transition: color $devui-animation-duration-slow $devui-animation-ease-in-smooth, background-color $devui-animation-duration-slow $devui-animation-ease-in-smooth;
 
     .content-wrapper {
-      transition: opacity 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+      transition: opacity $devui-animation-duration-slow $devui-animation-ease-in-smooth;
     }
 
     .remove-button svg polygon {
-      transition: fill 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+      transition: fill $devui-animation-duration-slow $devui-animation-ease-in-smooth;
     }
   }
 }

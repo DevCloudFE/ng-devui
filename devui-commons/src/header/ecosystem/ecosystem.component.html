@@ -7,6 +7,16 @@
   >
     <span dDropDownToggle class="drop-down-span"
       >{{curLanguage === 'zh-cn' ? '生态' : 'Ecology'}}
+      <span class="devui-header-open-icon">
+        <svg viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <polygon
+              transform="translate(8.000000, 8.000000) scale(1, -1) rotate(-360.000000) translate(-8.000000, -8.000000) "
+              points="4 5.5 12 5.5 8 10.5"
+            ></polygon>
+          </g>
+        </svg>
+      </span>
     </span>
     <ul dDropDownMenu class="dropdown-menu devui-dropdown-menu devui-scrollbar" role="menu">
       <li role="menuitem" class="menuitem" *ngFor="let nav of navs">

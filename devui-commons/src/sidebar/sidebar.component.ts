@@ -9,7 +9,7 @@ import { DevuiCommonsService } from '../devui-commons.service';
 })
 export class SidebarComponent implements OnInit {
   @Input() sideMenuList;
-  @Input() linkType: string = 'routerLink';
+  @Input() linkType = 'routerLink';
   _navData;
   componentsDataDisplay;
 
@@ -24,13 +24,13 @@ export class SidebarComponent implements OnInit {
 
   constructor(private commonsService: DevuiCommonsService) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.commonsService.on<any>('searchEvent').subscribe(term => {
       this.filterData(term);
-    })
+    });
   }
 
-  filterData(event) {
+  filterData(event): void {
     this.componentsDataDisplay = cloneDeep(this.navData).filter(catalog => {
       catalog.children = catalog.children.filter(item => {
         return item.title.toLowerCase().includes(event.toLowerCase());

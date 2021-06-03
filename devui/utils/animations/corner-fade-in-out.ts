@@ -1,5 +1,8 @@
-import {animate, AnimationTriggerMetadata, style, transition, trigger} from '@angular/animations';
+import { animate, AnimationTriggerMetadata, style, transition, trigger } from '@angular/animations';
 
+/**
+ * @deprecated
+ */
 export const cornerFadeInOut: AnimationTriggerMetadata = trigger('cornerFadeInOut', [
   transition('void => bottom', [
     style({transform: 'scale(0.9)', opacity: 0, transformOrigin: '0% 0%', display: 'inline-block'}),

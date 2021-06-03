@@ -1,0 +1,20 @@
+<div class="tools-container" [style.position]="isFullScreen ? 'fixed' : 'absolute'">
+  <d-button bsStyle="text-dark" (click)="avtionHandle('today')" class="tool">{{ 'today' }}</d-button>
+  <div class="tool">
+    <span dDropDown [trigger]="'hover'" appendToBody class="switch-view">
+      <span dDropDownToggle class="devui-dropdown-origin">{{ currentUnit }} <span class="icon-chevron-down"></span></span>
+      <ul dDropDownMenu class="devui-dropdown-menu devui-scrollbar" role="menu">
+        <li role="menuItem" *ngFor="let menu of views" (click)="selectView(menu)">
+          <a class="devui-dropdown-item">{{ menu.label }}</a>
+        </li>
+      </ul>
+    </span>
+  </div>
+  <d-button bsStyle="text-dark" (click)="avtionHandle('reduce')" class="tool" [disabled]="unitRole[this.currentUnit] === unitRole.day">
+    <i class="icon icon-minus"></i>
+  </d-button>
+  <d-button bsStyle="text-dark" (click)="avtionHandle('increase')" class="tool" [disabled]="unitRole[this.currentUnit] === unitRole.month">
+    <i class="icon icon-add"></i>
+  </d-button>
+  <ng-content></ng-content>
+</div>

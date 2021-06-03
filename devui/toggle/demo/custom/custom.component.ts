@@ -1,14 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'd-custom',
-  templateUrl: './custom.component.html'
+  templateUrl: './custom.component.html',
+  styleUrls: ['./custom.component.scss']
 })
-export class CustomComponent implements OnInit {
-
+export class CustomComponent {
   constructor() { }
-
-  ngOnInit() {
-  }
-
 }

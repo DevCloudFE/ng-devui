@@ -1,5 +1,19 @@
 @import '~ng-devui/styles-var/devui-var.scss';
 
+section {
+  position: relative;
+
+  .operate-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 100%;
+    background: red;
+    z-index: 10;
+  }
+}
+
 .handler {
   position: absolute;
   top: 10px;
@@ -23,6 +37,25 @@
     border-radius: $devui-border-radius;
     cursor: pointer;
     text-align: center;
+  }
+}
+
+d-data-table {
+  height: calc(100% - 45px);
+}
+
+.tool {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  margin-left: 12px;
+  background-color: $devui-base-bg;
+  box-shadow: $devui-shadow-length-base rgba(81, 112, 255, 0.4);
+  cursor: pointer;
+
+  span {
+    border: 0 !important;
   }
 }
 
@@ -79,19 +112,63 @@
   visibility: hidden;
 }
 
-tr:hover {
-  & .reset-position {
-    visibility: visible;
+.table-collapse {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: 20px;
+  width: 30px;
+  height: 30px;
+  z-index: 6;
+  border-radius: 100%;
+  color: $devui-light-text;
+  cursor: pointer;
+  background-color: $devui-text-weak;
+  box-shadow: $devui-shadow-length-base rgba(41, 48, 64, 0.1);
+
+  .icon {
+    transform: rotate(-90deg);
+  }
+
+  .is-expand {
+    transform: rotate(90deg);
   }
 }
 
-:host ::ng-deep .resize-handle {
-  display: inline-block;
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 3px;
-  border-right: 3px solid $devui-line;
-  cursor: col-resize;
+:host ::ng-deep {
+  .resize-handle {
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    border-right: 3px solid $devui-line;
+    cursor: col-resize;
+    padding: 0 3px;
+  }
+
+  .devui-table {
+    .devui-table {
+      position: static !important;
+    }
+  }
+
+  .fullscreen {
+    .scroll-view,
+    .devui-table {
+      height: 100% !important;
+
+      .devui-table {
+        position: static !important;
+      }
+    }
+  }
+
+  .devui-btn {
+    height: 32px !important;
+    color: $devui-text !important;
+    padding: 0 6px !important;
+  }
 }

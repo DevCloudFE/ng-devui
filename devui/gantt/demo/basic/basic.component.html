@@ -1,32 +1,48 @@
-<div #ganttContainer class="gantt-container">
-  <div class="header" [style.width]="ganttScaleWidth">
-    <d-gantt-scale [ganttBarContainerElement]="ganttBody"></d-gantt-scale>
-  </div>
-  <div #ganttBody class="body" [style.width]="ganttScaleWidth">
-    <div class="item" *ngFor="let item of list">
-      <d-gantt-bar
-        [startDate]="item?.startDate"
-        [endDate]="item?.endDate"
-        [tipTemplateRef]="tipTemplate"
-        [id]="item?.id"
-        [progressRate]="item?.progressRate"
-        (barMoveStartEvent)="onGanttBarMoveStart($event)"
-        (barMovingEvent)="onGanttBarMoving($event)"
-        (barResizeStartEvent)="onGanttBarResizeStart($event)"
-        (barResizingEvent)="onGanttBarResizing($event)"
-        (barMoveEndEvent)="onGanttBarMove($event)"
-        (barResizeEndEvent)="onGanttBarResize($event)"
-        (barProgressEvent)="onBarProgressEvent($event)"
-      ></d-gantt-bar>
+<d-fullscreen [zIndex]="100" (fullscreenLaunch)="launchFullscreen($event)">
+  <div #ganttContainer class="gantt-container" fullscreen-target>
+    <div class="header" [style.width]="ganttScaleWidth">
+      <d-gantt-scale [ganttBarContainerElement]="ganttBody"></d-gantt-scale>
+    </div>
+    <d-gantt-tools
+      [currentUnit]="unit"
+      [isFullScreen]="isFullScreen"
+      (goToday)="goToday()"
+      (increaseUnit)="onIncreaseUnit()"
+      (reduceUnit)="onReduceUnit()"
+      (switchView)="onSwitchView($event)"
+    >
+      <d-button bsStyle="text-dark" fullscreen-launch class="tool">
+        <i class="icon" [ngClass]="{ 'icon-frame-contract': isFullScreen, 'icon-frame-expand': !isFullScreen }"></i>
+      </d-button>
+    </d-gantt-tools>
+    <div #ganttBody class="body" [style.width]="ganttScaleWidth">
+      <div class="item" *ngFor="let item of list">
+        <d-gantt-bar
+          [startDate]="item?.startDate"
+          [endDate]="item?.endDate"
+          [tipTemplateRef]="tipTemplate"
+          [id]="item?.id"
+          [title]="item?.title"
+          [progressRate]="item?.progressRate"
+          (barMoveStartEvent)="onGanttBarMoveStart($event)"
+          (barMovingEvent)="onGanttBarMoving($event)"
+          (barResizeStartEvent)="onGanttBarResizeStart($event)"
+          (barResizingEvent)="onGanttBarResizing($event)"
+          (barMoveEndEvent)="onGanttBarMove($event)"
+          (barResizeEndEvent)="onGanttBarResize($event)"
+          (barProgressEvent)="onBarProgressEvent($event)"
+        ></d-gantt-bar>
+        <div class="moving-bg" [style.left]="left + 'px'" [style.width]="width + 'px'"></div>
+      </div>
     </div>
   </div>
-</div>
-<ng-template #tipTemplate let-ganttInstance="ganttInstance" let-data="data">
-  <div class="title">{{ data?.title }}</div>
-  <div class="content">
-    <div>Duration: {{ ganttInstance?.duration }}</div>
-    <div>ProgressRate: {{ (ganttInstance?.progressRate || 0) + '%' }}</div>
-    <div>startDate: {{ ganttInstance?.startDate | i18nDate: 'short' }}</div>
-    <div>endDate: {{ ganttInstance?.endDate | i18nDate: 'short' }}</div>
-  </div>
-</ng-template>
+  <ng-template #tipTemplate let-ganttInstance="ganttInstance" let-data="data">
+    <div class="title">{{ data?.title }}</div>
+    <div class="content">
+      <div>Duration: {{ ganttInstance?.duration }}</div>
+      <div>ProgressRate: {{ (ganttInstance?.progressRate || 0) + '%' }}</div>
+      <div>startDate: {{ ganttInstance?.startDate | i18nDate: 'short' }}</div>
+      <div>endDate: {{ ganttInstance?.endDate | i18nDate: 'short' }}</div>
+    </div>
+  </ng-template>
+</d-fullscreen>

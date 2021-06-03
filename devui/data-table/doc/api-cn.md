@@ -99,7 +99,7 @@ import { DataTableModule } from 'ng-devui/data-table';
 |     $checked      | `boolean` | false  |      可选，该行是否选中      | [表格交互](demo#table-interaction) |
 |   $halfChecked    | `boolean` | false  |      可选，该行是否半选      | [表格交互](demo#table-interaction) |
 | $isChildTableOpen | `boolean` | false  | 可选，该行下的子表格是否展开 |     [树形表格](demo#tree-form)     |
-|     children      |   array   | --     |    配置该行的子table数据     |     [树形表格](demo#tree-form)     |
+|     children      |   `array`   | --     |    配置该行的子table数据     |     [树形表格](demo#tree-form)     |
 |  $checkDisabled   | `boolean` | false  |    可选，该行是否禁止选中    | [表格交互](demo#table-interaction) |
 |   $checkBoxTips   | `string`  | --     | 可选，配置该行checkbox的提示 | [表格交互](demo#table-interaction) |
 

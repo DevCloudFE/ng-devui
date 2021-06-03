@@ -2,6 +2,7 @@
 @import '../style/theme/shadow';
 @import '../style/theme/corner';
 @import '../style/core/_font';
+@import '../style/core/animation';
 
 .devui-date-header {
   height: 38px;
@@ -105,8 +106,6 @@
   line-height: 20px;
   background: transparent;
   text-align: center;
-  -webkit-transition: background 0.3s ease;
-  transition: background 0.3s ease;
   font-size: $devui-font-size;
   color: $devui-text;
 }
@@ -137,7 +136,6 @@
   text-align: center;
   position: absolute;
   margin-left: -13px;
-  z-index: 999;
 }
 
 .devui-yearOption,
@@ -147,15 +145,15 @@
   position: absolute;
   left: -68px;
   top: 30px;
-  z-index: 1;
   background: $devui-base-bg;
+  z-index: 1;
 }
 
 .devui-yearOption li,
 .devui-monthOption li {
   width: 60px;
-  height: 65px;
-  line-height: 65px;
+  height: 68px;
+  line-height: 68px;
   text-align: center;
   display: inline-block;
   background: $devui-base-bg;

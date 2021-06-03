@@ -1,87 +1,27 @@
-<table
-  *ngIf="data.position && data.direction !== 'horizontal'"
-  [attr.class]="'devui-time-axis ' + data.position"
-  [style.margin-left.px]="bottomPositionMarginLeft"
-  [style.margin-right.px]="-bottomPositionMarginLeft"
+<div
+  [class.devui-time-axis-horizontal]="_direction === 'horizontal'"
+  [class.devui-time-axis-vertical]="_direction === 'vertical'"
+  [class.devui-time-axis-horizontal-fullwidth]="_direction === 'horizontal' && _widthMode === 'fitWidth'"
 >
-  <tr *ngFor="let listObj of data.list; let index = index">
-    <td
-      *ngIf="data.position === 'left'"
-      class="devui-axis-time-time {{ listObj.type }} {{ listObj.iconClass }} {{ listObj.status }}"
-      title="{{ listObj.time }}"
+  <ng-container *ngIf="data !== undefined">
+    <d-time-axis-item
+      *ngFor="let list of data.list"
+      [model]="data.model"
+      [direction]="_direction"
+      [time]="list.time"
+      [timePosition]="data.position"
+      [position]="list.position"
+      [lineStyle]="list.lineStyle ? list.lineStyle : { style: 'solid' }"
+      [customDot]="list.customDot"
+      [iconClass]="list.iconClass"
+      [type]="list.type"
+      [status]="list.status"
+      [extraElement]="list.extraElement"
+      [text]="list.text"
+      [contentTemplate]="contentTemplate"
+      [data]="list"
     >
-      <span>
-        {{ listObj.time }}
-      </span>
-    </td>
-    <td
-      *ngIf="data.position === 'bottom'"
-      class="devui-axis-time-time {{ listObj.type }} {{ listObj.iconClass }} {{ listObj.status }}"
-      title="{{ listObj.time }}"
-    >
-      <div title="{{ listObj.time }}">
-        <span>
-          {{ listObj.time }}
-        </span>
-      </div>
-    </td>
-    <td
-      class="devui-time-axis-text"
-      [style.left.px]="bottomPositionTextLeft"
-      title="{{ listObj.text }}"
-      *ngIf="data.model === 'text' || data.model === ''"
-    >
-      <span>
-        {{ listObj.text }}
-      </span>
-    </td>
-    <td
-      class="devui-time-axis-text"
-      [style.left.px]="bottomPositionTextLeft"
-      *ngIf="data.model === 'html'"
-      [innerHTML]="listObj.text | safe: 'html'"
-    ></td>
-    <td class="devui-time-axis-text" *ngIf="data.model === 'template'" [style.left.px]="bottomPositionTextLeft">
-      <ng-template
-        [ngTemplateOutlet]="contentTemplate ? contentTemplate : default"
-        [ngTemplateOutletContext]="{ $implicit: this, index: index, data: listObj.data }"
-      ></ng-template>
-    </td>
-  </tr>
-</table>
-
-<table class="devui-time-axis devui-time-axis-h" *ngIf="data.direction == 'horizontal'">
-  <tr *ngIf="data.model == '' || data.model == 'text'">
-    <td
-      *ngFor="let listObj of data.list"
-      class="devui-time-axis-text"
-      class="{{ listObj.type }} {{ listObj.status }}  {{ listObj.iconClass }}"
-    >
-      {{ listObj.text }}
-    </td>
-  </tr>
-  <tr *ngIf="data.model === 'html'">
-    <td
-      class="devui-time-axis-text"
-      *ngFor="let listObj of data.list"
-      class="{{ listObj.type }} {{ listObj.status }}  {{ listObj.iconClass }}"
-      [innerHTML]="listObj.text | safe: 'html'"
-    ></td>
-  </tr>
-  <tr *ngIf="data.model === 'template'">
-    <td
-      class="devui-time-axis-text"
-      *ngFor="let listObj of data.list; let index = index"
-      class="{{ listObj.type }} {{ listObj.status }}  {{ listObj.iconClass }}"
-    >
-      <ng-template
-        [ngTemplateOutlet]="contentTemplate ? contentTemplate : default"
-        [ngTemplateOutletContext]="{ $implicit: this, index: index, data: listObj.data }"
-      ></ng-template>
-    </td>
-  </tr>
-</table>
-
-<ng-template #default>
-  <table></table>
-</ng-template>
+    </d-time-axis-item>
+  </ng-container>
+  <ng-content select="d-time-axis-item"></ng-content>
+</div>

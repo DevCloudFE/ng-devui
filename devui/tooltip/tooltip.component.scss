@@ -2,10 +2,11 @@
 @import '../style/theme/shadow';
 @import '../style/theme/corner';
 @import '../style/core/_font';
+@import '../style/theme/z-index';
 
 :host-context(.devui-tooltip) {
   position: absolute;
-  z-index: 1070;
+  z-index: $devui-z-index-pop-up;
   display: block;
   font-style: normal;
   font-weight: 400;

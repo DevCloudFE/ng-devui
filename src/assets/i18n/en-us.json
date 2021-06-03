@@ -166,14 +166,54 @@
         "title": "Closable Prompt",
         "description": "The close button is displayed. Click to close the prompt."
       },
-      "withoutIconDemo": {
+      "directionFadeInDemo": {
         "title": "Without Icon",
         "description": "Without default icon."
       },
+      "slideMenuDemo": {
+        "title": "Without Icon",
+        "description": "Without default icon."
+      },
+      "ModalDemo": {
+        "title": "Without Icon",
+        "description": "Without default icon."
+      },
+      "fadeInOutDemo": {
+        "title": "Without Icon",
+        "description": "Without default icon."
+      }
+    },
+    "animations": {
+      "name": "Animations",
+      "type": "Extended Service",
+      "path": "animations",
+      "description": "DevUI provides smooth, efficient, and simple animations for typical web interaction scenarios to improve user interaction experience.",
+      "tmw": "1. The appearance or disappearance of elements; 2. The element status changes.",
+      "collapsedDemo": {
+        "title": "Expand Collapse",
+        "description": "Used for expand and collapse of elements on a page. It is represented by uniaxial change of the container size. It is often used for components such as accordion, tree, and panel."
+      },
+      "fadeInOutDemo": {
+        "title": "Fade In Out",
+        "description": "Used for elements appear or disappear that are stacked on a page and have hosts , It is represented by the transparency change of the content area and uniaxial change of the container size. It is often used for components such as dropDown, select and datePicker."
+      },
+      "flyInOutDemo": {
+        "title": "Fly In Out",
+        "description": "Used for elements stacked on the page and covering the entire page appear and disappear, It is represented by the transparency change of the content area and displacement of the content area, It is often used for components such as drawer"
+      },
+      "wipeInOutDemo": {
+        "title": "Wipe In Out",
+        "description": "Used for elements that are stacked on the page but not at the page edge appear or disappear, It is represented by the transparency change of the content area and slight displacement of the content area based on the y-axis. It is often used for components such as modal"
+      },
+      "animationIconDemo": {
+        "title": "Adding an icon effect through a public class"
+      },
       "anchorLinkValues": {
-        "basic-usage": "Basic Usage",
-        "tips-to-close": "Closable Prompt",
-        "without-icon": "Without Icon"
+        "expand-collapse": "Expand Collapse",
+        "fade-in-out": "Fade In Out",
+        "fly-in-out": "Fly In Out",
+        "wipe-in-out": "Wipe In Out",
+        "icon-class": "Class control icon animation"
       }
     },
     "anchor": {
@@ -832,7 +872,7 @@
     },
     "design-link": {
       "name": "Link",
-      "type": "Design Tokens",
+      "type": "Design tokens",
       "path": "design-link",
       "description": "Common style specifications of ng-devui.",
       "tmw": "When you want to query ng-devui related styles, scenario related styles, and changes of styles.",
@@ -847,7 +887,7 @@
     },
     "design-color": {
       "name": "Color",
-      "type": "Design Tokens",
+      "type": "Design tokens",
       "path": "design-color",
       "description": "Common style specifications of ng-devui.",
       "tmw": "When you want to query ng-devui related styles, scenario related styles, and changes of styles.",
@@ -864,6 +904,7 @@
             "colorVar": "Color variable",
             "normalColor": "Normal color value",
             "darkColor": "Dark Black Value",
+            "themeValue": "Current Theme Color Value",
             "description": "Description"
           },
           "oldTable": {
@@ -1038,7 +1079,7 @@
     },
     "design-shadow": {
       "name": "Shadow",
-      "type": "Design Tokens",
+      "type": "Design tokens",
       "path": "design-shadow",
       "description": "Common style specifications of ng-devui.",
       "tmw": "When you want to query ng-devui related styles, scenario related styles, and changes of styles.",
@@ -1054,6 +1095,7 @@
             "tab": "Default Theme Shadow Table",
             "shadowName": "shadow variable name",
             "shadowValue": "shadow variable value",
+            "themeValue": "Variable values in current theme",
             "description": "Description"
           },
           "oldTable": {
@@ -1095,7 +1137,7 @@
     },
     "design-font": {
       "name": "Font",
-      "type": "Design Tokens",
+      "type": "Design tokens",
       "path": "design-font",
       "description": "Common style specifications of ng-devui.",
       "tmw": "When you want to query ng-devui related styles, scenario related styles, and changes of styles.",
@@ -1113,6 +1155,7 @@
             "tab": "Default font-related variables",
             "fontName": "Font-related variable name",
             "fontValue": "Font-related variable values",
+            "themeValue": "Variable values in current theme",
             "description": "Description"
           },
           "oldTable": {
@@ -1154,7 +1197,7 @@
     },
     "design-border-radius": {
       "name": "BorderRadius",
-      "type": "Design Tokens",
+      "type": "Design tokens",
       "path": "design-border-radius",
       "description": "Common style specifications of ng-devui.",
       "tmw": "When you want to query ng-devui related styles, scenario related styles, and changes of styles.",
@@ -1169,6 +1212,7 @@
           "table": {
             "cornerName": "Round variable name",
             "cornerValue": "Round variable value",
+            "themeValue": "Round variable value in current theme",
             "description": "Description"
           },
           "borderRadius": {
@@ -2962,7 +3006,7 @@
         "timeLeft": "The time point is on the left.",
         "timeBottom": "The time point is at the bottom.",
         "title": "Basic Usage",
-        "description": "Use position to configure the time point position."
+        "description": "Define time parameter position only when direction is vertical."
       },
       "directionDemo": {
         "title": "Setting direction parameters",
@@ -2972,14 +3016,28 @@
         "description": "Description.",
         "title": "Customizing Content Using a Template"
       },
+      "alternativeModeDemo": {
+        "title": "Customizing the Content Direction of a Time Node",
+        "description": "Customizing the Content Direction of a Time Node"
+      },
+      "seperateWayDemo": {
+        "title": "The time node is used independently",
+        "description": "Each time node can be defined independently."
+      },
       "htmlContentDemo": {
         "title": "Content Use HTML"
       },
+      "customDotDemo": {
+        "title": "Time Point Customization"
+      },
       "anchorLinkValues": {
-        "basic-usage": "Basic Usage",
-        "direction": "Setting direction parameters",
+        "basic-usage": "Setting Time Position",
+        "direction": "Setting Direction Parameters",
+        "custom-dot": "Time Point Customization",
         "content-with-html": "Content Use HTML",
-        "content-with-template": "Customizing Content Using a Template"
+        "content-with-template": "Customizing Content Using a Template",
+        "content-with-alternative-mode": "Customizing the Content Direction of a Time Node",
+        "seperate-way": "The time node is used independently"
       }
     },
     "toast": {
@@ -3660,6 +3718,30 @@
         "custom": "Custom"
       }
     },
+    "polyfill": {
+      "name": "Polyfills",
+      "type": "Extended service",
+      "path": "polyfill",
+      "description": "Polyfill.",
+      "tmw": "To solve the method that is not supported by the browser of an earlier version.",
+      "basicDemo": {
+        "title": "Usage",
+        "description": "Currently, there are few implementation methods and are mainly used by the rich text component. Therefore, the putty script file is stored in the rich text module. When using the devcloud project or the project created by the Angular CLI, you can insert the following information into src/polyfills.ts: import' ng-devui/add-ons/editorx/polyfill '; The putty script is only a piece of JS code that is independently executed. You can also insert a static resource into the page for use.",
+        "name": "Polyfills",
+        "license": "License",
+        "size": "Size",
+        "browser": "Browser",
+        "des": "Description",
+        "remove": "Removes an object from the DOM tree to which it belongs",
+        "matches": "Check whether the specified selector string is matched. Browsers of earlier versions implement the MatchesSelector method with their own prefix. For example, msMatchesSelector",
+        "closest": "The ancestor element that matches a particular selector and is closest to the current element(or the current element itself)",
+        "event": "Events that occur in the DOM",
+        "forEach": "Method of sequentially traversing the collection of nodes"
+      },
+      "anchorLinkValues": {
+        "basic-usage": "Usage"
+      }
+    },
     "time-picker": {
       "name": "TimePicker",
       "type": "Evolving",
@@ -3756,14 +3838,24 @@
       "rangeTemplateDemo": {
         "title": "Template Usage for Range Mode"
       },
+      "static-panelDemo": {
+        "title": "Calender Panel Mode",
+        "ensure": "Ensure"
+      },
+      "select-type": {
+        "title": "Service scenario: date selector of the select type",
+        "changeStart": "Change Side"
+      },
       "anchorLinkValues": {
         "basic-usage": "Basic Usage",
         "show-time": "Show Time",
-        "template": "Customizing",
+        "template": "Customizing an Extended Area",
         "monthYear": "Month & Year picker",
         "rangePicker": "Range Picker",
         "host-template": "Custom Host",
-        "rangeTemplate": "Template Usage for Range Mode"
+        "rangeTemplate": "Template Usage for Range Mode",
+        "datepicker-pro-static-panel": "Calender Panel Mode",
+        "select-type": "Service scenario: date selector of the select type"
       }
     }
   }

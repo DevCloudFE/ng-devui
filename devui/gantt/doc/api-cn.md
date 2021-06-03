@@ -26,6 +26,13 @@ import { GanttModule } from 'ng-devui/gantt';
 |  barMoveDisabled  |     `boolean`      |   false    | 可选，是否禁止 bar 拖动                                           | [与datatable组件结合的甘特图](demo#gantt-with-datatable) |
 | barResizeDisabled |     `boolean`      |   false    | 可选，是否禁止 bar 调整起止时间                                   | [与datatable组件结合的甘特图](demo#gantt-with-datatable) |
 | progressDisabled  |     `boolean`      |   false    | 可选，是否禁止 bar 调整进度                                       | [与datatable组件结合的甘特图](demo#gantt-with-datatable) |
+| originOffsetX   |     `number`      |   0    | 可选，相对父容器的横向偏移距离                                      | [与datatable组件结合的甘特图](demo#gantt-with-datatable) |
+| showTitle   |     `boolean`      |   --    | 可选，是否显示title                                      | [与datatable组件结合的甘特图](demo#gantt-with-datatable) |
+| title  |     `string`      |   --    | 可选，title                                       | [与datatable组件结合的甘特图](demo#gantt-with-datatable) |
+| customBarClass   |     `string`      |   --    | 可选，自定义拖拽bar的样式                                      | -- |
+| customBgClass   |     `string`      |   --    | 可选，拖拽bar在移动的时候的背景色                                     | -- |
+| customTitleClass   |     `string`      |   --    | 可选，自定义title样式                                     | -- |
+
 
 ### d-gantt-bar 事件
 
@@ -56,6 +63,23 @@ import { GanttModule } from 'ng-devui/gantt';
 |        id         |      `string`      |    null    | 可选，支持传入 id                                                 | [与datatable组件结合的甘特图](demo#gantt-with-datatable) |
 |       data        |      `object`      |    null    | 可选，支持传入任意数据                                            | [与datatable组件结合的甘特图](demo#gantt-with-datatable) |
 |   progressRate    |      `number`      |     0      | 可选，进度，例如 30 代表 30%进度                                  | [与datatable组件结合的甘特图](demo#gantt-with-datatable) |
+|   tip    |      `string`      |     0      | 可选，提示信息                                  | [与datatable组件结合的甘特图](demo#gantt-with-datatable) |
+
+
+### d-gantt-tools 参数
+|       参数        |        类型        |    默认值    | 描述                                                              | 跳转 Demo                                                                  |
+| :---------------: | :----------------: | :--------: | :---------------------------------------------------------------- | -------------------------------------------------------------------------- |
+|     currentUnit     |       `[currentUnit](# currentUnit)`       |    null    | 可选，当前视图单位                                                   | [与datatable组件结合的甘特图](demo#gantt-with-datatable) |
+|      isFullScreen       |       `Boolean`       |    false    | 可选，是否全屏                                                    | [与datatable组件结合的甘特图](demo#gantt-with-datatable) |
+
+### d-gantt-tools 事件
+|       参数        |        类型        |    默认值    | 描述                                                              | 跳转 Demo                                                                  |
+| :---------------: | :----------------: | :--------: | :---------------------------------------------------------------- | -------------------------------------------------------------------------- |
+|     goToday     |       `EventEmitter<any>`       |    null    | 可选，跳至今天                                                   | [与datatable组件结合的甘特图](demo#gantt-with-datatable) |
+|      reduceUnit       |       `EventEmitter<any>`       |    null    | 可选，视图单位+1                                                    | [与datatable组件结合的甘特图](demo#gantt-with-datatable) |
+|      increaseUnit       |       `EventEmitter<any>`       |    null    | 可选，视图单位-1                                                  | [与datatable组件结合的甘特图](demo#gantt-with-datatable) |
+|      switchView       |       `EventEmitter<currentUnit>`       |    null    | 可选，当前视图单位                                                    | [与datatable组件结合的甘特图](demo#gantt-with-datatable) |
+
 
 ### GanttService 公共方法
 
@@ -93,5 +117,11 @@ export enum GanttScaleUnit {
     day = 'day',
     week = 'week',
     month = 'month'
+}
+
+export enum UnitRole {
+  day = 10,
+  week = 20,
+  month = 30,
 }
 ```

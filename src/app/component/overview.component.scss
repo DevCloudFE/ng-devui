@@ -76,7 +76,7 @@
       height: 230px;
       margin-bottom: 18px;
       cursor: pointer;
-      transition: box-shadow 0.3s cubic-bezier(0.645, 0.045, 0.355, 1), transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+      transition: box-shadow $devui-animation-duration-slow $devui-animation-ease-in-smooth, transform $devui-animation-duration-slow $devui-animation-ease-in-smooth;
 
       &:hover {
         box-shadow: $devui-shadow-length-hover $devui-light-shadow;

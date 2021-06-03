@@ -2,13 +2,13 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
 import { FormModule } from 'ng-devui';
 import { ButtonModule } from 'ng-devui/button';
 import { SelectModule } from 'ng-devui/select';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
+import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 import { AllowClearValueComponent } from './allow-clear-value/allow-clear-value.component';
 import { AppendToBodyComponent } from './append-to-body/append-to-body.component';
@@ -44,17 +44,19 @@ import { UserSearchNLazyLoadComponent } from './user-search-n-lazyload/user-sear
     ButtonModule,
     DDemoNavModule,
     RouterModule.forChild([
-      { path: '',  redirectTo: 'demo' },
-      { path: 'demo', component: SelectDemoComponent},
-      { path: 'api', component: DevUIApiComponent, data: {
-        'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),
-        'en-us': require('!html-loader!markdown-loader!../doc/api-en.md')
-      }}
-    ])
+      { path: '', redirectTo: 'demo' },
+      { path: 'demo', component: SelectDemoComponent },
+      {
+        path: 'api',
+        component: DevUIApiComponent,
+        data: {
+          'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),
+          'en-us': require('!html-loader!markdown-loader!../doc/api-en.md'),
+        },
+      },
+    ]),
   ],
-  exports: [
-    SelectDemoComponent
-  ],
+  exports: [SelectDemoComponent],
   declarations: [
     SelectDemoComponent,
     SelectBasicComponent,
@@ -76,9 +78,9 @@ import { UserSearchNLazyLoadComponent } from './user-search-n-lazyload/user-sear
     UserMailSearchComponent,
     ModelValueComponent,
     MapToPipe,
-    ParseFromPipe
+    ParseFromPipe,
   ],
-
+  
   providers: [],
 })
-export class SelectDemoModule { }
+export class SelectDemoModule {}

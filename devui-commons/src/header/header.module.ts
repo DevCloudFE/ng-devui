@@ -7,6 +7,7 @@ import { HeaderComponent } from './header.component';
 import { LanguageSwitchComponent } from './language-switch/language-switch.component';
 import { LogoComponent } from './logo/logo.component';
 import { MenuComponent } from './menu/menu.component';
+import { ThemePickerComponent } from './theme-picker/theme-picker.component';
 import { ThemeSwitchComponent } from './theme-switch/theme-switch.component';
 import { VersionSwitchComponent } from './version-switch/version-switch.component';
 
@@ -21,6 +22,7 @@ import { VersionSwitchComponent } from './version-switch/version-switch.componen
     LogoComponent,
     MenuComponent,
     VersionSwitchComponent,
+    ThemePickerComponent,
     ThemeSwitchComponent,
     LanguageSwitchComponent,
     EcosystemComponent
@@ -30,6 +32,7 @@ import { VersionSwitchComponent } from './version-switch/version-switch.componen
     LogoComponent,
     MenuComponent,
     VersionSwitchComponent,
+    ThemePickerComponent,
     ThemeSwitchComponent,
     LanguageSwitchComponent,
     EcosystemComponent

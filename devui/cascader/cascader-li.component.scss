@@ -1,6 +1,7 @@
 @import '../style/theme/color';
 @import '../style/theme/shadow';
 @import '../style/core/_font';
+@import '../style/core/animation';
 
 .devui-dropdown-menu {
   padding-bottom: 0;
@@ -107,5 +108,5 @@
 }
 
 :host > li span {
-  transition: color cubic-bezier(0.645, 0.045, 0.355, 1) 0.1s, background-color cubic-bezier(0.645, 0.045, 0.355, 1) 0.1s;
+  transition: color $devui-animation-duration-fast $devui-animation-ease-in-smooth, background-color $devui-animation-duration-fast $devui-animation-ease-in-smooth;
 }

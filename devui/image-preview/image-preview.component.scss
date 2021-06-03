@@ -1,5 +1,6 @@
 @import '../style/theme/color';
 @import '../style/theme/shadow';
+@import '../style/core/z-index';
 
 $component-scope: 'devui-image-preview';
 
@@ -36,7 +37,7 @@ $component-scope: 'devui-image-preview';
 
 @mixin fixed-button() {
   position: fixed;
-  z-index: 1001;
+  z-index: $devui-z-index-modal;
   cursor: pointer;
   width: 36px;
   height: 36px;

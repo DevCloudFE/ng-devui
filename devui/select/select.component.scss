@@ -2,6 +2,7 @@
 @import '../style/theme/shadow';
 @import '../style/theme/corner';
 @import '../style/core/_font';
+@import '../style/core/animation';
 
 .devui-dropdown-menu {
   &:not(.devui-dropdown-menu-cdk) {
@@ -11,7 +12,8 @@
   }
 
   &.devui-custom-right,
-  &.devui-custom-left {
+  &.devui-custom-left,
+  &.devui-custom-top {
     min-width: 400px;
     display: flex !important;
 
@@ -24,17 +26,21 @@
       overflow: auto;
     }
 
-    & > .devui-dropdown-menu-wrap {
+    &:not(.devui-custom-top) > .devui-dropdown-menu-wrap {
       width: calc(50% - 1px);
     }
 
-    & > .devui-select-custom-area {
+    &:not(.devui-custom-top) > .devui-select-custom-area {
       width: 50%;
-
-      &::before {
-        display: none;
-      }
     }
+
+    & > .devui-select-custom-area::before {
+      display: none;
+    }
+  }
+
+  &.devui-custom-top {
+    flex-direction: column-reverse;
   }
 
   &.devui-custom-left > .devui-select-custom-area {
@@ -44,6 +50,10 @@
 
   &.devui-custom-right > .devui-select-custom-area {
     border-left: 1px solid $devui-dividing-line;
+  }
+
+  &.devui-custom-top > .devui-select-custom-area {
+    border-bottom: 1px solid $devui-dividing-line;
   }
 
   .devui-dropdown-menu-wrap {
@@ -640,7 +650,7 @@ li.disabled ::ng-deep .devui-checkbox.disabled label {
   background-color: $devui-disabled-bg;
 
   .devui-select-clear-icon svg path,
-  .devui-select-chevron-icon svg polygon {
+  .devui-select-chevron-icon svg path {
     fill: $devui-disabled-text;
   }
 }
@@ -667,16 +677,16 @@ svg.svg-icon-search path {
   vertical-align: middle;
 
   &-animation {
-    transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    transition: transform $devui-animation-duration-slow $devui-animation-ease-in-smooth;
   }
 }
 
-.devui-select-chevron-icon svg polygon {
+.devui-select-chevron-icon svg path {
   fill: $devui-icon-text;
 }
 
 .disabled {
-  .devui-select-chevron-icon svg polygon {
+  .devui-select-chevron-icon svg path {
     fill: $devui-disabled-text;
   }
 }

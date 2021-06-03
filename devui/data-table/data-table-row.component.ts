@@ -104,7 +104,7 @@ export class DataTableRowComponent implements OnInit {
 
   toggle() {
     if (this.rowItem['$isDetailOpen'] === undefined) {
-      this.rowItem['$isDetailOpen'] = this.rowItem.$expandConfig ? this.rowItem.$expandConfig.expand : !!this.rowItem.detail;
+      this.rowItem['$isDetailOpen'] = !!this.rowItem.$expandConfig?.expand;
     }
     this.rowItem['$isDetailOpen'] = !this.rowItem['$isDetailOpen'];
     if (this.rowItem.$expandConfig) {

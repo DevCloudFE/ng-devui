@@ -354,15 +354,7 @@ export class TimePickerComponent implements OnChanges, OnInit, OnDestroy, Contro
       return valid;
     }
 
-    if (timeArr.length !== 3) {
-      if (timeArr.length === this.format.split(':').length && !timeArr.some(t => t !== unshiftString(Number(t) + '', 2, '0'))) {
-        return true;
-      } else {
-        return false;
-      }
-    } else if (timeArr.some(t => t !== unshiftString(Number(t) + '', 2, '0'))) {
-      return false;
-    } else if (
+    if (
       timeArr.some(
         (t, i) => {
           return Number(t) > Number(this.maxTime.split(':')[i]) || Number(t) < Number(this.minTime.split(':')[i]);
@@ -371,6 +363,18 @@ export class TimePickerComponent implements OnChanges, OnInit, OnDestroy, Contro
     ) {
       return false;
     }
+
+    if (timeArr.length !== 3) {
+      if (timeArr.length === this.format.split(':').length &&
+        !timeArr.some(t => t.length > 2 || t !== unshiftString(Number(t) + '', 2, '0'))) {
+        return true;
+      } else {
+        return false;
+      }
+    } else if (timeArr.some(t => t !== unshiftString(Number(t) + '', 2, '0'))) {
+      return false;
+    }
+
     return true;
   }
 

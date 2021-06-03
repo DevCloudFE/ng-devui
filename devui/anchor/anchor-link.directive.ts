@@ -1,4 +1,5 @@
 import { Directive, forwardRef, HostBinding, HostListener, Inject, Input, OnDestroy, OnInit } from '@angular/core';
+import { scrollAnimate } from 'ng-devui/utils';
 import { AnchorBoxDirective } from './anchor-box.directive';
 import { AnchorDirective } from './anchor.directive';
 import { AnchorActiveChangeSource } from './anchor.type';
@@ -81,7 +82,7 @@ export class AnchorLinkDirective implements OnInit, OnDestroy {
         containerScrollTop += document.body.scrollTop; // scrollTop兼容性问题
         containerOffsetTop = 0; // offsettop抵消
       }
-      this.scrollAnimate(
+      scrollAnimate(
         container,
         containerScrollTop,
         containerScrollTop +
@@ -94,42 +95,5 @@ export class AnchorLinkDirective implements OnInit, OnDestroy {
       );
     })(this.boxElement.scrollTarget || document.documentElement, this.anchorBlock.element);
     this.boxElement.isScrollingToTarget = true;
-  }
-
-  scrollAnimate(target, currentTopValue, targetTopValue, timeGap: number = 40, scrollTime: number = 450, callback?) {
-    const startTimeStamp = Date.now();
-    const drawAnimateFrame = () => {
-      const currentTime = Date.now() - startTimeStamp;
-      if (currentTime - timeGap > scrollTime) {
-        target.scrollTop = targetTopValue;
-        if (target === document.documentElement) {
-          // 兼容写法，老浏览器/老API模式需要document.body滚动，新的需要documentElement滚动
-          document.body.scrollTop = targetTopValue;
-        }
-        if (callback) {
-          callback();
-        }
-      } else {
-        const tempTopValue = this.easeInOutCubic(currentTime, currentTopValue, targetTopValue, scrollTime);
-        target.scrollTop = tempTopValue;
-        if (target === document.documentElement) {
-          document.body.scrollTop = tempTopValue;
-        }
-        setTimeout(() => {
-          requestAnimationFrame(drawAnimateFrame);
-        }, timeGap);
-      }
-    };
-    requestAnimationFrame(drawAnimateFrame);
-  }
-
-  easeInOutCubic(t: number, b: number, c: number, d: number): number {
-    const cc = c - b;
-    let tt = t / (d / 2);
-    if (tt < 1) {
-      return (cc / 2) * tt * tt * tt + b;
-    } else {
-      return (cc / 2) * ((tt -= 2) * tt * tt + 2) + b;
-    }
   }
 }

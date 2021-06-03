@@ -37,7 +37,8 @@ export class HighlightComponent implements OnChanges {
   highlight(value: string, term: string) {
     const container = this.eleRef.nativeElement;
     this.emptyChildren(container);
-    const regExp = new RegExp('(' + term + ')', 'gi');
+    const reg = (str) => str.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
+    const regExp = new RegExp('(' + reg(term) + ')', 'gi');
     const temp = value.split(regExp);
     function createHighLight(text) {
       const spanDOM = document.createElement('span');

@@ -1,0 +1,22 @@
+<div dDropDown appendToBody [appendToBodyDirections]="['leftDown', 'leftUp', 'rightDown', 'rightUp']" [closeScope]="'blank'">
+  <div dDropDownToggle class="theme-toggle">
+    主题
+    <div class="theme-block">
+      <span class="brand-color"></span>
+      <span class="background-color"></span>
+    </div>
+  </div>
+  <div dDropDownMenu class="theme-menu">
+    <section>
+      <div class="title">主题模式</div>
+      <div class="content">
+        <d-radio-group class="theme-select-radio" [(ngModel)]="themeMode" (change)="themesChange()" [ngModelOptions]="{ standalone: true }">
+          <d-radio [value]="'light'">{{ '浅色模式' }}</d-radio>
+          <d-radio [value]="'dark'">{{ '深色模式' }}</d-radio>
+        </d-radio-group>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- <d-toggle [(ngModel)]="themePrefersColorScheme" (ngModelChange)="themePrefersColorSchemeChange($event)"></d-toggle> 主题跟随系统 -->

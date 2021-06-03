@@ -19,6 +19,7 @@
               <th dHeadCell>{{ 'components.design-color.colorDemo.instance.defaultTable.colorVar' | translate }}</th>
               <th dHeadCell>{{ 'components.design-color.colorDemo.instance.defaultTable.normalColor' | translate }}</th>
               <th dHeadCell>{{ 'components.design-color.colorDemo.instance.defaultTable.darkColor' | translate }}</th>
+              <th dHeadCell>{{ 'components.design-color.colorDemo.instance.defaultTable.themeValue' | translate }}</th>
               <th dHeadCell>{{ 'components.design-color.colorDemo.instance.defaultTable.description' | translate }}</th>
             </tr>
           </thead>
@@ -43,6 +44,12 @@
                     {{ rowItem?.dark }}
                   </div>
                   <div *ngIf="rowItem?.dark" class="color-cube" [ngStyle]="{ 'background-color': rowItem?.dark }"></div>
+                </td>
+                <td dTableCell>
+                  <div class="color-name">
+                    {{ rowItem?.themeValue }}
+                  </div>
+                  <div *ngIf="rowItem?.themeValue" class="color-cube" [ngStyle]="{ 'background-color': rowItem?.themeValue }"></div>
                 </td>
                 <td dTableCell>{{ rowItem?.description }}</td>
               </tr>

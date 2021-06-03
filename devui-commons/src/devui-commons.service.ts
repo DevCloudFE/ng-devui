@@ -18,7 +18,7 @@ export class DevuiCommonsService {
     this._eventBus = new Subject<CommonsEvent>();
   }
 
-  broadcast(key: any, data?: any) {
+  broadcast(key: any, data?: any): void {
     this._eventBus.next({key, data});
   }
 
@@ -26,6 +26,6 @@ export class DevuiCommonsService {
     return this._eventBus.asObservable().pipe(
       filter(event => event.key === key),
       map(event => <T>event.data)
-    )
+    );
   }
 }

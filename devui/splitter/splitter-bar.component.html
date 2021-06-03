@@ -1,8 +1,10 @@
 <div
   class="prev"
   *ngIf="showCollapseButton"
-  dTooltip
+  dPopover
   [content]="preTip"
+  [trigger]="'hover'"
+  [controlled]="true"
   [ngClass]="prevClass"
   (click)="collapsePrePane()"
   (touchstart)="collapsePrePane()"
@@ -11,8 +13,10 @@
 <div
   class="next"
   *ngIf="showCollapseButton"
-  dTooltip
+  dPopover
   [content]="nextTip"
+  [trigger]="'hover'"
+  [controlled]="true"
   [ngClass]="nextClass"
   (click)="collapseNextPane()"
   (touchstart)="collapseNextPane()"

@@ -51,6 +51,8 @@
 .fixed-wapper {
   width: 100%;
   z-index: 1;
+  position: absolute;
+  top: 0;
 }
 
 .header-wapper {
@@ -59,6 +61,7 @@
   display: flex;
   justify-content: space-between;
   background-color: $devui-base-bg;
+  position: relative;
 
   .header-left {
     display: flex;
@@ -114,7 +117,7 @@
 
 .header-fixed {
   position: fixed;
-  z-index: 10;
+  z-index: 1000;
 }
 
 .header-shadow {
@@ -126,14 +129,6 @@
 }
 
 @media (max-width: 1360px) {
-  .header-left {
-    d-search {
-      display: none;
-    }
-  }
-}
-
-@media (max-width: 1180px) {
   .header-wapper {
     flex-direction: column;
     height: 60px;
@@ -145,17 +140,17 @@
 
     .header-left {
       height: 60px;
-      d-search {
-        display: none;
-      }
     }
 
     .header-right {
       display: none;
+      position: absolute;
+      top: 60px;
     }
 
     .header-right.active {
       background-color: $devui-global-bg-normal;
+      box-shadow: $devui-shadow-length-connected-overlay $devui-light-shadow;
       height: 520px;
       z-index: 3;
 

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, TemplateRef } from '@angular/core';
 import { DevuiCommonsService } from '../../devui-commons.service';
+import { I18nUtil } from '../../i18n/i18n.util';
 
 @Component({
   selector: 'd-ecosystem',
@@ -12,12 +13,12 @@ export class EcosystemComponent implements OnInit {
 
   constructor(private commonsService: DevuiCommonsService) { }
 
-  ngOnInit() {
-    this.curLanguage = localStorage.getItem('lang') || 'zh-cn';
+  ngOnInit(): void {
+    this.curLanguage = I18nUtil.getCurrentLanguage();
     this.commonsService.on('languageEvent').subscribe(term => this.changeLanguage(term));
   }
 
-  changeLanguage(lang) {
+  changeLanguage(lang): void {
     this.curLanguage = lang;
   }
 

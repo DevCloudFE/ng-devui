@@ -1,0 +1,34 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
+.trigger {
+  background: $devui-info-bg;
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  cursor: pointer;
+
+  span {
+    margin-left: 16px;
+  }
+}
+
+.menu {
+  width: 100%;
+  height: 200px;
+
+  .side-menu {
+    width: 100px;
+    height: 100%;
+    display: block;
+    float: left;
+    background: $devui-info-bg;
+    border-right: 2px solid $devui-info-line;
+  }
+
+  .content-container {
+    float: left;
+    width: calc(100% - 100px);
+    display: block;
+    padding: 20px 50px;
+  }
+}

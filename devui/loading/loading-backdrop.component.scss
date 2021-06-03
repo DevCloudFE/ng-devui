@@ -1,8 +1,9 @@
 @import '../style/theme/color';
+@import '../style/core/z-index';
 
 .devui-loading-backdrop {
   position: absolute;
-  z-index: 1000;
+  z-index: calc(#{$devui-z-index-full-page-overlay} - 1);
   background-color: $devui-line;
   opacity: 0.3;
   left: 0;

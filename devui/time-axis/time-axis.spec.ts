@@ -9,14 +9,15 @@ import { TimeAxisModule } from './time-axis.module';
 })
 class TestTimeAxisComponent {
   time_axis_data = {
+    direction: 'vertical',
     position: 'left',
     model: 'text',
     list: [
       { time: '2017-07-25', text: '这是2017-07-25发生的事件', type: 'primary' },
       { time: '2017-07-27', text: '这是2017-07-27发生的事件', type: 'success' },
       { time: '2017-07-28', text: '这是2017-07-28发生的事件', type: 'danger' },
-      { time: '2017-07-29', text: '这是2017-07-29发生的事件', type: 'success', status: 'running' },
-      { time: '2017-07-29', text: '这是2017-07-29发生的事件', type: 'success', status: 'runned' },
+      { time: '2017-07-29', text: '这是2017-07-29发生的事件', type: 'warning' },
+      { time: '2017-07-29', text: '这是2017-07-29发生的事件', type: 'waiting' },
     ],
   };
 }
@@ -25,8 +26,8 @@ describe('time-axis base', () => {
   let fixture: ComponentFixture<TestTimeAxisComponent>;
   let testComponent: TestTimeAxisComponent;
   let timeAxisElement: HTMLElement;
-  let table: HTMLTableElement;
-  let tds: NodeListOf<HTMLTableDataCellElement>;
+  let ul: HTMLElement;
+  let lis: NodeListOf<HTMLElement>;
   let timeAxisDataList;
 
   beforeEach(() => {
@@ -47,8 +48,8 @@ describe('time-axis base', () => {
   describe('basic', () => {
     beforeEach(() => {
       fixture.detectChanges();
-      table = timeAxisElement.querySelector('table');
-      tds = table.querySelectorAll('td');
+      ul = timeAxisElement.querySelector('.devui-time-axis-vertical');
+      lis = ul.querySelectorAll('.devui-time-axis-item-vertical');
     });
 
     it('should be created successfully', () => {
@@ -56,39 +57,31 @@ describe('time-axis base', () => {
       expect(testComponent).toBeTruthy();
     });
 
-    it('should have correct text', () => {
-      for (let i = 0; i < timeAxisDataList.length; i++) {
-        expect(tds[2 * i + 1].textContent.trim()).toEqual(timeAxisDataList[i].text);
-      }
-    });
-
     it('should have correct className', () => {
-      expect(table.classList).toContain('devui-time-axis');
-      expect(table.classList).toContain('left');
+      expect(ul.classList).toContain('devui-time-axis-vertical');
 
-      // 每条数据包含两个td，带有样式的只有第一个td
       for (let i = 0; i < timeAxisDataList.length; i++) {
-        expect(tds[2 * i].classList).toContain(timeAxisDataList[i].type);
+        expect(lis[i].querySelector(`.devui-time-axis-item-type-${timeAxisDataList[i].type}`)).not.toBeNull();
       }
     });
 
     it('should have different position', () => {
       testComponent.time_axis_data.position = 'bottom';
       fixture.detectChanges();
-      expect(timeAxisElement.querySelector('.bottom')).not.toBeNull();
+      expect(timeAxisElement.querySelector('.devui-time-axis-item-data-time-bottom')).not.toBeNull();
     });
 
     it('should have different direction', () => {
       testComponent.time_axis_data['direction'] = 'horizontal';
       fixture.detectChanges();
-      expect(timeAxisElement.querySelector('.devui-time-axis-h')).not.toBeNull();
+      expect(timeAxisElement.querySelector('.devui-time-axis-item-horizontal')).not.toBeNull();
     });
 
     it('should status be ok', () => {
       fixture.detectChanges();
       // 最后两个tr元素中的状态样式
-      expect(tds[6].classList).toContain('running');
-      expect(tds[8].classList).toContain('runned');
+      expect(lis[3].querySelector('.devui-time-axis-item-dot')).not.toBeNull();
+      expect(lis[4].querySelector('.devui-time-axis-item-type-waiting')).not.toBeNull();
     });
   });
 });

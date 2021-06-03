@@ -1,9 +1,10 @@
 @import './assets/common';
+@import '../style/theme/z-index';
 
 .devui-mention-dropdown {
   position: absolute;
   color: $devui-text;
-  z-index: 1050;
+  z-index: $devui-z-index-dropdown;
   min-width: 120px;
   max-height: 250px;
   overflow-x: hidden;

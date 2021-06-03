@@ -26,6 +26,12 @@ import {GanttModule} from' ng-devui/gantt';
 | barMoveDisabled | `boolean` | false | Optional. Whether bar dragging is forbidden | [Combined With Datatable](demo#gantt-with-datatable) |
 | barResizeDisabled | `boolean` | false | Optional. Whether to forbid bar adjustment of the start time and end time. | [Combined With Datatable](demo#gantt-with-datatable) |
 | progressDisabled | `boolean` | false | Optional. Whether to disable bar adjustment progress | [Combined With Datatable](demo#gantt-with-datatable) |
+| originOffsetX   |     `number`      |   0    |Optional.Lateral offset distance from parent container.                                      | [[Combined With Datatable](demo#gantt-with-datatable) |
+| showTitle   |     `boolean`      |   --    |Optional.Indicates whether to display title.                                      | [[Combined With Datatable](demo#gantt-with-datatable) |
+| title  |     `string`      |   --    |Optional.title                                       | [[Combined With Datatable](demo#gantt-with-datatable) |
+| customBarClass   |     `string`      |   --    |Optional.Customizing the Style of the Gantt Bar.                                      | -- |
+| customBgClass   |     `string`      |   --    |Optional.Drag the background color when the Gantt bar is moved.  | -- |
+| customTitleClass   |     `string`      |   --    | Optional. Customizing the title style.                                     | -- |
 
 ### d-gantt-bar event
 
@@ -55,6 +61,24 @@ import {GanttModule} from' ng-devui/gantt';
 | id | `string` | null | Optional. Id is supported | [Combined With Datatable](demo#gantt-with-datatable) |
 | data | `object` | null | Optional. Any data can be transferred | [Combined With Datatable](demo#gantt-with-datatable) |
 | progressRate | `number` | 0 | Optional. Progress. For example, 30 indicates 30% progress | [Combined With Datatable](demo#gantt-with-datatable) |
+
+
+|   tip    |      `string`      |     0      | 可选，提示信息                                  | [Combined With Datatable](demo#gantt-with-datatable) |
+
+
+### d-gantt-tools parameter
+| Parameter | Type | Default | Description | Jump to Demo |
+| :---------------: | :----------------: | :--------: | :---------------------------------------------------------------- | -------------------------------------------------------------------------- |
+|     currentUnit     |       `[currentUnit](# currentUnit)`       |    null    | Optional.Current View Units.                                                   | [Combined With Datatable](demo#gantt-with-datatable) |
+|      isFullScreen       |       `Boolean`       |    false    | Optional.Is Full Screen.                                                | [Combined With Datatable](demo#gantt-with-datatable) |
+
+### d-gantt-tools parameter
+| Parameter | Type | Default | Description | Jump to Demo |
+| :---------------: | :----------------: | :--------: | :---------------------------------------------------------------- | -------------------------------------------------------------------------- |
+|     goToday     |       `EventEmitter<any>`       |    null    | Optional.Jump To Today                                                   | [Combined With Datatable](demo#gantt-with-datatable) |
+|      reduceUnit       |       `EventEmitter<any>`       |    null    | Optional.View Unit +1                                                    | [Combined With Datatable](demo#gantt-with-datatable) |
+|      increaseUnit       |       `EventEmitter<any>`       |    null    | Optional.View Unit -1                                                  | [Combined With Datatable](demo#gantt-with-datatable) |
+|      switchView       |       `EventEmitter<currentUnit>`       |    null    | Optional.Current View Units.
 
 ### GanttService Public Methods
 
@@ -92,5 +116,11 @@ export enum GanttScaleUnit {
   day = 'day',
   week = 'week',
   month ='month'
+}
+
+export enum UnitRole {
+  day = 10,
+  week = 20,
+  month = 30,
 }
 ```

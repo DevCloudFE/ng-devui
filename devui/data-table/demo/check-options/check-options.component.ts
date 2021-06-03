@@ -8,8 +8,8 @@ import { originSource, SourceType } from '../mock-data';
   styles: [`
   .page-nation {
     position: absolute;
-    right: 10px;
-    margin-top: -4px;
+    right: 12px;
+    margin-top: 4px;
   }
   `]
 })

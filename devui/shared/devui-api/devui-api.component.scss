@@ -8,3 +8,15 @@ d-nav-sprite {
   height: 100%;
   z-index: 1;
 }
+
+@media (max-width: 1800px) {
+  d-nav-sprite {
+    width: 150px !important;
+  }
+}
+
+@media (max-width: 1250px) {
+  d-nav-sprite {
+    display: none;
+  }
+}

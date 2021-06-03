@@ -3,6 +3,7 @@
 @import '../style/mixins/index';
 @import '../style/core/font';
 @import '../style/theme/corner';
+@import '../style/core/animation';
 
 $devui-tab-slider-bg: $devui-list-item-hover-bg;
 
@@ -57,7 +58,7 @@ $devui-tab-slider-bg: $devui-list-item-hover-bg;
     height: 2px;
     width: 0;
     background: transparent;
-    transition: width 0.3s ease-out, background-color 0.3s ease-out;
+    transition: width $devui-animation-duration-slow ease-out, background-color $devui-animation-duration-slow ease-out;
   }
 
   li.active::after {
@@ -78,7 +79,7 @@ $devui-tab-slider-bg: $devui-list-item-hover-bg;
     border-left-width: 0;
     background-color: $devui-base-bg;
     float: left;
-    transition: background-color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    transition: background-color $devui-animation-duration-slow $devui-animation-ease-in-smooth;
 
     &:first-of-type {
       border-left-width: 1px;
@@ -95,7 +96,7 @@ $devui-tab-slider-bg: $devui-list-item-hover-bg;
       color: $devui-text;
       line-height: 26px;
       padding: 0 15px;
-      transition: color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+      transition: color $devui-animation-duration-slow $devui-animation-ease-in-smooth;
 
       &:hover,
       &:focus,
@@ -355,5 +356,5 @@ $devui-tab-slider-bg: $devui-list-item-hover-bg;
   box-shadow: 0 2px 4px 0 $devui-light-shadow;
   top: 1px;
   height: 30px;
-  transition: left 0.3s cubic-bezier(0.645, 0.045, 0.355, 1), width 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition: left $devui-animation-duration-slow $devui-animation-ease-in-smooth, width $devui-animation-duration-slow $devui-animation-ease-in-smooth;
 }

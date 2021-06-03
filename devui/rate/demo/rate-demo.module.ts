@@ -2,11 +2,11 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
 import { RateModule } from 'ng-devui/rate';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
+import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 import { RateDemoBasicComponent } from './basic/basic.component';
 import { RateDemoCustomizeComponent } from './customize/customize.component';
@@ -38,6 +38,6 @@ import { TypeComponent } from './type/type.component';
   ],
   exports: [RateDemoComponent],
   declarations: [RateDemoComponent, RateDemoBasicComponent, RateDemoOnlyReadComponent, RateDemoCustomizeComponent, TypeComponent],
-
+  
 })
 export class RateDemoModule {}

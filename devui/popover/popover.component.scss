@@ -4,6 +4,7 @@
 @import '../style/theme/shadow';
 @import '../style/theme/corner';
 @import '../style/core/_font';
+@import '../style/theme/z-index';
 
 :host.devui-popover {
   font-size: $devui-font-size;
@@ -11,7 +12,7 @@
   left: 0;
   line-height: 1.5;
   border: none;
-  z-index: 1060;
+  z-index: $devui-z-index-pop-up;
   color: $devui-feedback-overlay-text;
   overflow-wrap: break-word;
 

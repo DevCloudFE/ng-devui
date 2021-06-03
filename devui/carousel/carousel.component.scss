@@ -1,5 +1,6 @@
 @import '../style/theme/color';
 @import '../style/theme/shadow';
+@import '../style/core/animation';
 
 @mixin fixed-arrow-button() {
   position: absolute;
@@ -93,7 +94,7 @@
       &.active {
         width: 24px;
         background: $devui-list-item-active-bg;
-        transition: all 0.5s ease;
+        transition: all $devui-animation-duration-slow $devui-animation-ease-in-smooth;
       }
     }
   }
@@ -103,7 +104,7 @@
   .devui-carousel-arrow {
     .arrow-left,
     .arrow-right {
-      transition: background-color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+      transition: background-color $devui-animation-duration-slow $devui-animation-ease-in-smooth;
     }
   }
 }

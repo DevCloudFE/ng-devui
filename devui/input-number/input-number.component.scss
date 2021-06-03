@@ -1,6 +1,7 @@
 @import '../style/theme/color';
 @import '../style/theme/corner';
 @import '../style/core/_font';
+@import '../style/core/animation';
 
 :host {
   display: inline-block;
@@ -93,7 +94,7 @@
       height: 50%;
       line-height: 50%;
       border-width: 0 1px;
-      transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+      transition: transform $devui-animation-duration-slow $devui-animation-ease-in-smooth;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -110,7 +111,7 @@
         bottom: 2px;
       }
 
-      svg polygon {
+      svg path {
         fill: $devui-text-weak;
       }
 
@@ -118,14 +119,14 @@
         cursor: pointer;
 
         &:hover {
-          & > svg polygon {
+          & > svg path {
             fill: $devui-icon-fill-active-hover;
           }
         }
       }
 
       &.disabled {
-        & > svg polygon {
+        & > svg path {
           fill: $devui-disabled-text;
         }
       }

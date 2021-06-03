@@ -3,7 +3,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
 import { ButtonModule } from 'ng-devui/button';
 import { DCommonModule } from 'ng-devui/common';
 import { DataTableModule } from 'ng-devui/data-table';
@@ -14,6 +13,7 @@ import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
 import { TextInputModule } from 'ng-devui/text-input';
 import { LazyLoadModule } from 'ng-devui/utils';
+import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 import { ClipboardDemoComponent } from './clipboard/clipboard.component';
 import { CommonDemoComponent } from './common-demo.component';
@@ -60,7 +60,7 @@ import { PipeDemoComponent } from './pipe/pipe.component';
     HelperDownloadDemoComponent,
     IframPropagateDemoComponent,
     LazyLoadComponent,
-    ClipboardDemoComponent,
+    ClipboardDemoComponent
   ],
 })
 export class CommonDemoModule {}

@@ -9,7 +9,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { DevUIModule } from 'ng-devui';
 import { DEVUI_LANG, ZH_CN } from 'ng-devui/i18n';
 import { environment } from 'src/environments/environment';
-import { DevuiCommonsModule } from '../../devui-commons/src';
+import { DevuiCommonsModule } from '../../devui-commons/src/public-api';
 import { AppComponent } from './app.component';
 import { ThemePickerModule } from './theme-picker/theme-picker.module';
 

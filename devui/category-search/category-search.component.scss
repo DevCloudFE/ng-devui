@@ -1,6 +1,7 @@
 @import '../style/theme/color';
 @import '../style/core/_font';
 @import '../style/theme/corner';
+@import '../style/core/animation';
 
 .devui-category-search-container {
   position: relative;
@@ -10,7 +11,7 @@
   display: flex;
   height: 32px;
   background: transparent;
-  transition: border 0.2s ease-in-out;
+  transition: border $devui-animation-duration-slow $devui-animation-ease-in-smooth;
   background-color: $devui-base-bg;
   border: 1px solid $devui-line;
   margin-bottom: 8px;
@@ -215,6 +216,34 @@ d-tag {
   .devui-save-filter-name {
     padding: 16px 20px;
 
+    & > form {
+      position: relative;
+
+      svg {
+        position: absolute;
+        right: 8px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+
+        path {
+          fill: $devui-icon-fill;
+        }
+
+        &:hover {
+          svg g path {
+            fill: $devui-icon-fill-hover;
+          }
+        }
+      }
+    }
+
+    & > span {
+      padding-bottom: 8px;
+      display: block;
+      line-height: 1em;
+    }
+
     & > input {
       width: 100%;
       height: 32px;
@@ -225,7 +254,7 @@ d-tag {
   }
 
   .devui-save-panel-operation-area {
-    padding-bottom: 16px;
+    padding-bottom: 11px;
     display: flex;
     justify-content: center;
 
@@ -252,6 +281,8 @@ d-tag {
     align-items: center;
     justify-content: flex-start;
     padding: 4px 4px 0;
+    max-height: 390px;
+    overflow: auto;
 
     li {
       display: flex;
@@ -362,6 +393,11 @@ d-tag {
       margin-bottom: -8px;
       padding: 4px 0 4px 8px;
     }
+
+    .devui-yearOption,
+    .devui-monthOption {
+      white-space: normal;
+    }
   }
 
   .devui-dropdown-menu-fix d-date-range-picker .devui-btn-wrapper {
@@ -415,10 +451,10 @@ d-tag {
 
     d-checkbox {
       .devui-checkbox {
-        transition: background-color cubic-bezier(0.645, 0.045, 0.355, 1) 0.1s;
+        transition: background-color $devui-animation-duration-fast $devui-animation-ease-in-smooth;
 
         label {
-          transition: color cubic-bezier(0.645, 0.045, 0.355, 1) 0.1s;
+          transition: color $devui-animation-duration-fast $devui-animation-ease-in-smooth;
         }
       }
     }

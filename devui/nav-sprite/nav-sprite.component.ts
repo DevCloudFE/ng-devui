@@ -15,10 +15,10 @@ import {
   ViewChildren
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { scrollAnimate } from 'ng-devui/utils';
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import { Mode, NavMenu, SpriteOption } from './nav-sprite.type';
-import { scrollAnimate } from './utils';
+import { NavMenu, SpriteMode, SpriteOption } from './nav-sprite.type';
 
 const DEFAULT_OPTIONS = {
   top: '30%',
@@ -43,7 +43,7 @@ export class NavSpriteComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @Input() hashSupport = false; // 支持锚点
 
-  @Input() mode: Mode = 'default'; // 模式
+  @Input() mode: SpriteMode = 'default'; // 模式
 
   @Input() maxLevel = 3; // 最大层级
 
@@ -80,7 +80,11 @@ export class NavSpriteComponent implements OnInit, AfterViewInit, OnDestroy {
 
   isToViewByNav = false; // 区分是页面滚动还是点击目录事件
 
+  itemsInit = false;
+
   contents;
+
+  targetContainer: HTMLElement;
 
   scrollSub: Subscription;
 
@@ -90,9 +94,7 @@ export class NavSpriteComponent implements OnInit, AfterViewInit, OnDestroy {
 
   itemsSub: Subscription;
 
-  get targetContainer(): HTMLElement {
-    return this.scrollTarget || this.target;
-  }
+  timeGap = 60;
 
   get baseUrl() {
     return window.location.href.replace(window.location.hash, '');
@@ -110,20 +112,25 @@ export class NavSpriteComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit() {
     this.currentTemp = this.mode === 'default' ? this.defaultTemp : this.spriteTemp; // 设置当前的模式
     this.navItemTemplate = this.navItemTemplate || this.defaultNavItemTemplate; // 设置当前的目录模板
+    this.targetContainer = this.scrollTarget || this.target;
   }
 
   ngAfterViewInit() {
-    this.initStyles();
-    this.getNavData();
-    const container = this.targetContainer === document.documentElement ? window : this.targetContainer;
-    this.scrollSub = fromEvent(container, 'scroll')
-      .pipe(debounceTime(300))
-      .subscribe(() => {
-        this.scrollEventHandler();
+    setTimeout(() => {
+      const container = this.targetContainer === document.documentElement ? window : this.targetContainer;
+      this.scrollSub = fromEvent(container, 'scroll')
+        .pipe(debounceTime(300))
+        .subscribe(() => {
+          this.scrollEventHandler();
+        });
+      this.itemsSub = this.items.changes.subscribe((items) => {
+        if (!this.itemsInit) {
+          this.itemsInit = true;
+          this.setActiveMenu();
+        }
       });
-    this.itemsSub = this.items.changes.subscribe((items) => {
-      this.setActiveMenu();
-    });
+      this.initStyles();
+    }, 0);
   }
 
   setActiveIndex() {
@@ -132,10 +139,18 @@ export class NavSpriteComponent implements OnInit, AfterViewInit, OnDestroy {
         return menu.label === this.activeRout.snapshot.fragment;
       });
       this.isToViewByNav = true;
-      this.targetContainer.scrollTop = this.menus[this.activeIndex].scrollPosition?.startLine;
-      setTimeout(() => {
-        this.isToViewByNav = false;
-      }, 120);
+      scrollAnimate(
+        this.targetContainer,
+        this.targetContainer.scrollTop,
+        this.menus[this.activeIndex].scrollPosition?.startLine,
+        undefined,
+        undefined,
+        () => {
+          setTimeout(() => {
+            this.isToViewByNav = false;
+          }, 160);
+        }
+      );
     } else {
       this.activeIndex = this.menus.findIndex((i) => {
         const scrollTop = this.targetContainer.scrollTop;
@@ -145,7 +160,7 @@ export class NavSpriteComponent implements OnInit, AfterViewInit, OnDestroy {
     this.cdr.detectChanges();
   }
 
-  getNavData() {
+  getNavData(setActive = true) {
     const search = [];
     for (let i = 0; i < this.maxLevel; i++) {
       search.push(`h${i + 1}`);
@@ -160,7 +175,9 @@ export class NavSpriteComponent implements OnInit, AfterViewInit, OnDestroy {
         scrollPosition: this.getScrollPosition(i),
       };
     });
-    this.setActiveIndex();
+    if (setActive) {
+      this.setActiveIndex();
+    }
   }
 
   // 设定目录范围
@@ -179,10 +196,9 @@ export class NavSpriteComponent implements OnInit, AfterViewInit, OnDestroy {
       const index = this.menus.findIndex((i) => {
         return scrollTop < i.scrollPosition.top;
       });
-      if (this.activeIndex !== index) {
+      if (index !== -1 && this.activeIndex !== index) {
         this.activeIndex = index;
         this.menuScrollToTarget();
-        this.setUrlHash();
       }
     }
   }
@@ -191,7 +207,7 @@ export class NavSpriteComponent implements OnInit, AfterViewInit, OnDestroy {
     const item = this.items.toArray()[this.activeIndex];
     const menuContainer = this.element.nativeElement.querySelector('.devui-nav-sprite-menus');
     const start = menuContainer?.scrollTop;
-    const end = item?.nativeElement.getBoundingClientRect().top - menuContainer.getBoundingClientRect().top;
+    const end = item?.nativeElement.getBoundingClientRect().top + start - menuContainer.getBoundingClientRect().top;
     scrollAnimate(menuContainer, start, end, undefined, undefined, () => {
       if (this.hashSupport) {
         this.setUrlHash();
@@ -203,7 +219,7 @@ export class NavSpriteComponent implements OnInit, AfterViewInit, OnDestroy {
     const item = this.items.toArray()[this.activeIndex];
     const menuContainer = this.element.nativeElement.querySelector('.devui-nav-sprite-menus');
     const top = item?.nativeElement.getBoundingClientRect().top - menuContainer.getBoundingClientRect().top;
-    menuContainer.scrollTop = top;
+    scrollAnimate(menuContainer, menuContainer.scrollTop, top, undefined, undefined);
   }
 
   initStyles() {
@@ -215,6 +231,8 @@ export class NavSpriteComponent implements OnInit, AfterViewInit, OnDestroy {
       this.render.setStyle(content, 'top', spriteOptions.top);
       this.render.setStyle(content, 'left', spriteOptions.left);
       this.render.setStyle(content, 'z-index', spriteOptions.zIndex);
+      this.render.setStyle(content, 'height', this.height + 'px');
+      this.render.setStyle(content, 'width', this.width + 'px');
     }
     this.render.setStyle(this.element.nativeElement, 'height', this.height + 'px');
     this.render.setStyle(this.element.nativeElement, 'width', this.width + 'px');
@@ -247,7 +265,7 @@ export class NavSpriteComponent implements OnInit, AfterViewInit, OnDestroy {
         this.setTargetActive();
         setTimeout(() => {
           this.isToViewByNav = false;
-        }, 160);
+        }, this.timeGap);
       });
       this.isToViewByNav = true;
     }

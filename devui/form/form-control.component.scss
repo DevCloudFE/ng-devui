@@ -61,14 +61,6 @@
   }
 }
 
-/**
-* @desc Compatible with z-index of components that include dropdown menu, will be remove.
-*/
-
-:host.devui-control-has-open-dropdown .devui-form-item-icon {
-  z-index: 1052;
-}
-
 .devui-form-item-icon {
   position: absolute;
   top: 50%;

@@ -11,7 +11,7 @@ import {
   OnInit,
   Output,
   Renderer2,
-  ViewChild,
+  ViewChild
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
@@ -143,10 +143,18 @@ export class SearchComponent implements ControlValueAccessor, OnInit, OnDestroy,
   }
 
   renderClearIcon() {
-    if (this.filterInputElement.nativeElement.value && this.lineElement && this.clearIconElement) {
-      this.clearIconExit = true;
-    } else if (this.lineElement && this.clearIconElement) {
-      this.clearIconExit = false;
+    if (this.iconPosition === 'right') {
+      if (this.filterInputElement.nativeElement.value && this.lineElement && this.clearIconElement) {
+        this.clearIconExit = true;
+      } else if (this.lineElement && this.clearIconElement) {
+        this.clearIconExit = false;
+      }
+    } else {
+      if (this.filterInputElement.nativeElement.value && this.clearIconElement) {
+        this.clearIconExit = true;
+      } else if (this.clearIconElement) {
+        this.clearIconExit = false;
+      }
     }
     this.cdr.markForCheck();
   }

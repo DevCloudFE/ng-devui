@@ -19,6 +19,8 @@ In the page:
 | checked | `boolean` | false | Optional. Specifies whether to enable the function. The function is disabled by default. | [Basic Usage](demo#basic-usage) |
 | ngModel | `boolean` | false | Optional. Specifies whether to enable the function. Bidirectional binding is supported. | [NgModel](demo#two-binding) |
 | disabled | `boolean` | false | Optional. Indicating whether to disable the function. | [Basic Usage](demo#basic-usage) |
+| checkedContent | `string\|TemplateRef` | -- | Optional. Customized inner template when the switch is enabled. | [Custom Style](demo#custom) |
+| uncheckedContent | `string\|TemplateRef` | -- | Optional. Customized inner template when the switch is unenabled. | [Custom Style](demo#custom) |
 | beforeChange | `Function\|Promise\|()=> Observable<boolean>` | -- |Optional. Callback function before a switch is changed. The return value is of the boolean type. If false is returned, the switch is not changed. | [NgModel](demo#two-binding) |
 
 ### d-toggle event

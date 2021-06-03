@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ReplaySubject, Subject } from 'rxjs';
+import { fromEvent, merge, Observable, ReplaySubject, Subject } from 'rxjs';
+import { pluck } from 'rxjs/operators';
 import { GanttBarStatus, GanttScaleConfig, GanttScaleUnit } from './gantt.model';
 
 @Injectable()
@@ -10,9 +11,25 @@ export class GanttService {
   scaleEndDate: Date;
   ganttBarStatusChange = new Subject<GanttBarStatus>();
   ganttScaleConfigChange = new ReplaySubject<GanttScaleConfig>(1);
-  constructor() { }
+
+  mouseDownListener: Observable<number>;
+  mouseMoveListener = new Observable();
+  mouseEndListener = new Observable();
+
+  constructor() {}
   changeGanttBarStatus(status: GanttBarStatus) {
     this.ganttBarStatusChange.next(status);
+  }
+
+  registContainerEvents(scrollContainer: HTMLElement) {
+    // 背景拖拽
+    this.mouseDownListener = fromEvent(scrollContainer, 'mousedown').pipe(pluck<Event, number>('pageX'));
+
+    this.mouseMoveListener = fromEvent(scrollContainer, 'mousemove').pipe(pluck<Event, number>('pageX'));
+
+    this.mouseEndListener = merge(fromEvent(scrollContainer, 'mouseup'), fromEvent(scrollContainer, 'mouseout')).pipe(
+      pluck<Event, number>('pageX')
+    );
   }
 
   changeGanttScaleConfig(status: GanttScaleConfig) {
@@ -50,23 +67,23 @@ export class GanttService {
 
   getDatePostionOffset(date: Date): number {
     if (date && this.scaleStartDate) {
-      const timeOffset =  date.getTime() - this.scaleStartDate.getTime();
-      const units =  timeOffset  / GanttService.DAY_DURATION;
+      const timeOffset = date.getTime() - this.scaleStartDate.getTime();
+      const units = timeOffset / GanttService.DAY_DURATION;
       return units * this.getScaleUnitPixel();
     }
   }
 
   getDuration(startDate: Date, endDate: Date): number {
     if (startDate && endDate) {
-      const timeOffset =  endDate.getTime() - startDate.getTime();
-      const duration =  timeOffset / GanttService.DAY_DURATION + 1;
+      const timeOffset = endDate.getTime() - startDate.getTime();
+      const duration = timeOffset / GanttService.DAY_DURATION + 1;
       return Math.round(duration);
     }
   }
 
   getDurationWidth(startDate: Date, endDate: Date): number {
     if (startDate && endDate) {
-      const duration =  this.getDuration(startDate, endDate);
+      const duration = this.getDuration(startDate, endDate);
       return duration * this.getScaleUnitPixel();
     }
   }
@@ -94,4 +111,6 @@ export class GanttService {
       date.setHours(0, 0, 0);
     }
   }
+
+  unRegistContainerEvents() {}
 }

@@ -1,5 +1,5 @@
 
-export type Mode = 'default' | 'sprite';
+export type SpriteMode = 'default' | 'sprite';
 
 export interface SpriteOption {
   top: string;

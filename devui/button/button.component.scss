@@ -3,6 +3,7 @@
 @import '../style/theme/variables';
 @import '../style/core/font';
 @import '../style/theme/corner';
+@import '../style/core/animation';
 
 $devui-btn-loading-color: $devui-text;
 $devui-btn-xs-padding: 1px 5px;
@@ -315,7 +316,10 @@ $devui-btn-pseudo-config: (
 }
 
 .devui-btn {
-  transition: background-color cubic-bezier(0.645, 0.045, 0.355, 1) 0.3s, border-color cubic-bezier(0.645, 0.045, 0.355, 1) 0.3s, color cubic-bezier(0.645, 0.045, 0.355, 1) 0.3s;
+  transition:
+    background-color $devui-animation-duration-slow $devui-animation-ease-in-smooth,
+    border-color $devui-animation-duration-slow $devui-animation-ease-in-smooth,
+    color $devui-animation-duration-slow $devui-animation-ease-in-smooth;
   border-style: solid;
   white-space: nowrap;
   display: flex;
@@ -364,6 +368,10 @@ $devui-btn-pseudo-config: (
 .devui-icon-fix {
   position: relative;
   font-size: $devui-font-size;
+
+  &::before {
+    transition: color $devui-animation-duration-slow $devui-animation-ease-in-smooth;
+  }
 }
 
 .devui-btn.devui-btn-common:not(:disabled) {

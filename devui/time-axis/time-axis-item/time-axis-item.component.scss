@@ -1,0 +1,299 @@
+@import '../../style/theme/color';
+
+.devui-time-axis-item-horizontal {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  .devui-time-axis-item-axis {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .devui-time-axis-item-dot {
+    width: 18px;
+    height: 18px;
+    border-radius: 9px;
+    border-width: 2px;
+    border-style: solid;
+  }
+
+  .devui-time-axis-item-custom-dot {
+    width: 18px;
+    height: 18px;
+    text-align: center;
+  }
+
+  .devui-time-axis-item-line {
+    position: relative;
+    min-width: 60px;
+    width: calc(100% - 18px);
+    border-bottom-width: 2px;
+    border-bottom-color: $devui-dividing-line;
+  }
+
+  .devui-time-axis-item-data-horizontal-top {
+    display: flex;
+    align-items: flex-end;
+    margin-right: 12px;
+    flex: 1;
+  }
+
+  .devui-time-axis-item-data-horizontal-bottom {
+    margin-right: 12px;
+    flex: 1;
+  }
+
+  .devui-time-axis-item-axis-padding-horizontal {
+    padding: 12px 0;
+  }
+
+  .devui-time-axis-line-style {
+    &-dashed {
+      border-bottom-style: dashed;
+    }
+
+    &-solid {
+      border-bottom-style: solid;
+    }
+
+    &-none {
+      border-bottom-style: none;
+    }
+  }
+
+  .devui-time-axis-middle-zone {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.devui-time-axis-item-vertical {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+
+  .devui-time-axis-item-axis {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .devui-time-axis-item-dot {
+    width: 18px;
+    height: 18px;
+    border-radius: 9px;
+    border-width: 2px;
+    border-style: solid;
+  }
+
+  .devui-time-axis-item-custom-dot {
+    width: 18px;
+    height: 18px;
+    text-align: center;
+  }
+
+  .devui-time-axis-item-line {
+    position: relative;
+    height: calc(100% - 18px);
+    border-left-width: 2px;
+    border-left-color: $devui-dividing-line;
+  }
+
+  .devui-time-axis-item-data-vertical-left {
+    text-align: end;
+    margin-bottom: 24px;
+    flex: 1;
+  }
+
+  .devui-time-axis-item-data-vertical-right {
+    margin-bottom: 24px;
+    flex: 1;
+  }
+
+  .devui-time-axis-item-axis-padding-vertical {
+    padding: 0 12px;
+  }
+
+  .devui-time-axis-line-style {
+    &-dashed {
+      border-left-style: dashed;
+    }
+
+    &-solid {
+      border-left-style: solid;
+    }
+
+    &-none {
+      border-left-style: none;
+    }
+  }
+
+  .devui-time-axis-middle-zone {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.devui-time-axis-item-vertical-time-bottom {
+  display: flex;
+
+  .devui-time-axis-item-axis {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .devui-time-axis-item-dot {
+    width: 18px;
+    height: 18px;
+    border-radius: 9px;
+    border-width: 2px;
+    border-style: solid;
+  }
+
+  .devui-time-axis-item-custom-dot {
+    width: 18px;
+    height: 18px;
+    text-align: center;
+  }
+
+  .devui-time-axis-item-line-time-bottom {
+    position: relative;
+    height: calc(100% - 36px);
+    border-left-width: 2px;
+    border-left-color: $devui-dividing-line;
+  }
+
+  .devui-time-axis-line-style {
+    &-dashed {
+      border-left-style: dashed;
+    }
+
+    &-solid {
+      border-left-style: solid;
+    }
+
+    &-none {
+      border-left-style: none;
+    }
+  }
+
+  .devui-time-axis-middle-zone {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .devui-time-axis-item-data-time-bottom {
+    margin-left: 12px;
+    margin-bottom: 40px;
+  }
+
+  .devui-time-axis-item-template {
+    margin-left: 12px;
+    margin-bottom: 24px;
+  }
+}
+
+.devui-time-axis-item-type {
+  &-info {
+    border-color: $devui-brand;
+  }
+
+  &-success {
+    border-color: $devui-success;
+  }
+
+  &-danger {
+    border-color: $devui-danger;
+  }
+
+  &-warning {
+    border-color: $devui-warning;
+  }
+
+  &-waiting {
+    border-color: $devui-waiting;
+  }
+
+  &-primary {
+    border-color: $devui-placeholder;
+  }
+
+  &-runned {
+    border-color: $devui-success;
+    color: $devui-light-text;
+    line-height: 16px;
+    text-align: center;
+    background-color: $devui-success;
+  }
+
+  &-running {
+    border-color: $devui-success;
+    line-height: 16px;
+    text-align: center;
+    animation: devui-time-axis-running 1.5s linear infinite;
+  }
+
+  &-error {
+    border-color: $devui-danger;
+    color: $devui-light-text;
+    line-height: 16px;
+    text-align: center;
+    background-color: $devui-danger;
+  }
+}
+
+@keyframes devui-time-axis-running {
+  0% {
+    transform: rotate(0deg);
+    color: $devui-success;
+    border-color: $devui-success;
+  }
+
+  50% {
+    transform: rotate(180deg);
+    color: $devui-success;
+    border-color: $devui-success;
+  }
+
+  100% {
+    transform: rotate(360deg);
+    color: $devui-success;
+    border-color: $devui-success;
+  }
+}
+
+.devui-time-axis-item-data-hidden {
+  visibility: hidden;
+}
+
+:host.devui-time-axis-item-horizontal-no-line {
+  width: auto !important;
+
+  .devui-time-axis-item-data-horizontal-top {
+    width: max-content;
+  }
+
+  .devui-time-axis-item-data-horizontal-bottom {
+    width: max-content;
+  }
+}
+
+:host.devui-time-axis-item-vertical-no-line {
+  .devui-time-axis-item-data-time-bottom {
+    margin-bottom: 0;
+  }
+
+  .devui-time-axis-item-data-vertical-left {
+    margin-bottom: 0;
+  }
+
+  .devui-time-axis-item-data-vertical-right {
+    margin-bottom: 0;
+  }
+}

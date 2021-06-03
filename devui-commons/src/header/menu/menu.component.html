@@ -12,7 +12,16 @@
     >
       <a dDropDownToggle>
         {{curLanguage === 'zh-cn' ? item.name : item.enName}}
-        <span class="icon-chevron-down"></span>
+        <span class="devui-header-open-icon">
+          <svg viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+              <polygon
+                transform="translate(8.000000, 8.000000) scale(1, -1) rotate(-360.000000) translate(-8.000000, -8.000000) "
+                points="4 5.5 12 5.5 8 10.5"
+              ></polygon>
+            </g>
+          </svg>
+        </span>
       </a>
       <div dDropDownMenu class="devui-scrollbar menu-list-wrapper">
         <div class="menu-list" *ngFor="let itemInList of item.children">
@@ -21,7 +30,7 @@
           </div>
           <ul class="menu-sublist">
             <li class="menu-sublist-item" *ngFor="let itemInSubList of itemInList.children">
-              <a *ngIf="itemInSubList.href" class="" [href]="itemInSubList.href" rel="noopener noreferrer" [target]="itemInSubList.target ? itemInSubList.target : '_blank'">
+              <a *ngIf="itemInSubList.href" [href]="itemInSubList.href" rel="noopener noreferrer" [target]="itemInSubList.target ? itemInSubList.target : '_blank'">
                 <span>{{curLanguage === 'zh-cn' ? itemInSubList.name : itemInSubList.enName}}</span>              
               </a>
             </li>

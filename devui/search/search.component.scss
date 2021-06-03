@@ -36,7 +36,7 @@ svg.svg-icon-search path {
       border: none;
     }
 
-    &.devui-clear-exit {
+    &.devui-clear-exit:not(.devui-icon-left) {
       padding-right: 60px;
     }
 
@@ -46,8 +46,8 @@ svg.svg-icon-search path {
       font-size: $devui-font-size;
       padding-right: 24px;
 
-      &.devui-clear-exit {
-        padding-right: 49px;
+      &.devui-clear-exit:not(.devui-icon-left) {
+        padding-right: 56px;
       }
     }
 
@@ -58,7 +58,7 @@ svg.svg-icon-search path {
       line-height: 24px;
       padding-right: 36px;
 
-      &.devui-clear-exit {
+      &.devui-clear-exit:not(.devui-icon-left) {
         padding-right: 71px;
       }
     }
@@ -147,6 +147,10 @@ svg.svg-icon-search path {
     font-size: $devui-font-size-lg;
     z-index: 2;
     display: none;
+
+    &.devui-icon-left {
+      right: 0;
+    }
 
     &.devui-clear-exit {
       display: block;

@@ -1,0 +1,12 @@
+// 临时层
+// 若存在遮罩，则遮罩基于对应z-index值-1
+$devui-z-index-full-page-overlay: var(--devui-z-index-full-page-overlay, 1080); // 全屏覆盖类元素
+$devui-z-index-dropdown: var(--devui-z-index-dropdown, 1052); // 下拉菜单，dropdown等
+$devui-z-index-pop-up: var(--devui-z-index-pop-up, 1060); // 提示类信息，popover，tooltip等
+$devui-z-index-modal: var(--devui-z-index-modal, 1050);// 弹窗,
+$devui-z-index-drawer: var(--devui-z-index-drawer, 1040);// 抽屉板
+$devui-z-index-framework: var(--devui-z-index-framework, 1000);// 框架类元素，header,sideMenu等
+
+// 内容层，根据需要设置，zIndex需小于临时层
+
+// 背景层，根据需要设置，zIndex需小于内容层

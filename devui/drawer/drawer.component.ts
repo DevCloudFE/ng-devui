@@ -1,8 +1,9 @@
-import { animate, AnimationEvent, state, style, transition, trigger } from '@angular/animations';
+import { AnimationEvent } from '@angular/animations';
 import {
   Component, Directive, ElementRef, HostListener, Input, OnDestroy,
   OnInit, Renderer2, ViewChild, ViewContainerRef
 } from '@angular/core';
+import { backdropFadeInOut, flyInOut } from 'ng-devui/utils';
 import { isNumber, parseInt, trim } from 'lodash-es';
 import { fromEvent, Observable, Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
@@ -20,40 +21,8 @@ export class DrawerContentDirective {
   templateUrl: './drawer.component.html',
   styleUrls: ['./drawer.component.scss'],
   animations: [
-    trigger('fadeInOut', [
-      state('void', style({ display: 'block', opacity: 0 })),
-      state('in', style({ display: 'block', opacity: 1 })),
-      transition('void => in', animate('100ms cubic-bezier(.0,.0,.1,.1)')),
-      transition('in => void', animate('100ms 200ms cubic-bezier(.0,.0,.1,.1)'))
-    ]),
-    trigger('flyInOut', [
-      state('left-void', style({ transform: 'translateX(-100%)', left: 0, opacity: 0.8 })),
-      state('left-in', style({ transform: 'translateX(0)', left: 0, opacity: 1 })),
-      state('right-void', style({ transform: 'translateX(100%)', right: 0, opacity: 0.8 })),
-      state('right-in', style({ transform: 'translateX(0)', right: 0, opacity: 1 })),
-      // 解决初始化动效为'void'而非'left/right-void'
-      transition('void => left-in', [
-        style({ transform: 'translateX(-100%)', left: 0, opacity: 0.8 }),
-        animate('300ms cubic-bezier(0.16,0.75,0.5,1)', style({ transform: 'translateX(0)', left: 0, opacity: 1 }))
-      ]),
-      transition('void => right-in', [
-        style({ transform: 'translateX(100%)', right: 0, opacity: 0.8 }),
-        animate('300ms cubic-bezier(0.16,0.75,0.5,1)', style({ transform: 'translateX(0)', right: 0, opacity: 1 }))
-      ]),
-      transition('left-void => left-in', [
-        animate('300ms cubic-bezier(0.16,0.75,0.5,1)')
-      ]),
-      transition('right-void => right-in', [
-        animate('300ms cubic-bezier(0.16,0.75,0.5,1)')
-      ]),
-      transition('left-in => left-void', [
-        animate('300ms cubic-bezier(0.5,0,0.84,0.25)')
-      ]),
-      transition('right-in => right-void', [
-        animate('300ms cubic-bezier(0.5,0,0.84,0.25)')
-      ]),
-
-    ]),
+    backdropFadeInOut,
+    flyInOut
   ],
   preserveWhitespaces: false,
 })
@@ -194,22 +163,30 @@ export class DrawerComponent implements OnInit, OnDestroy {
       if (!canHide) {
         return;
       }
-      if (this.documentOverFlow) {
-        this.renderer.removeStyle(document.body, 'top');
-        this.renderer.removeStyle(document.body, 'left');
-        this.renderer.removeClass(document.body, 'devui-body-scrollblock');
-        this.renderer.removeClass(document.body, 'devui-body-overflow-hidden');
-        document.documentElement.scrollTop = this.scrollTop;
-        document.body.scrollTop = this.scrollTop;
-        document.documentElement.scrollLeft = this.scrollLeft;
-        document.body.scrollLeft = this.scrollLeft;
-      }
-      this.animateState = 'void';
-      if (this.subscription) {
-        this.subscription.unsubscribe();
-        this.subscription = undefined;
-      }
+      this.hideOperation();
     });
+  }
+
+  hideDirectly() {
+    this.hideOperation();
+  }
+
+  private hideOperation() {
+    if (this.documentOverFlow) {
+      this.renderer.removeStyle(document.body, 'top');
+      this.renderer.removeStyle(document.body, 'left');
+      this.renderer.removeClass(document.body, 'devui-body-scrollblock');
+      this.renderer.removeClass(document.body, 'devui-body-overflow-hidden');
+      document.documentElement.scrollTop = this.scrollTop;
+      document.body.scrollTop = this.scrollTop;
+      document.documentElement.scrollLeft = this.scrollLeft;
+      document.body.scrollLeft = this.scrollLeft;
+    }
+    this.animateState = 'void';
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+      this.subscription = undefined;
+    }
   }
 
   // Will overwrite by drawer service

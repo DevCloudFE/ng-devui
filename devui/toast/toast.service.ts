@@ -1,6 +1,6 @@
 import { ComponentFactoryResolver, Injectable, Injector, Renderer2, RendererFactory2, Type } from '@angular/core';
-import { assign } from 'lodash-es';
 import { OverlayContainerRef } from 'ng-devui/overlay-container';
+import { assign } from 'lodash-es';
 import { Message, ToastComponent } from './toast.component';
 export interface IToastOptions {
   value?: Array<Message>;

@@ -13,7 +13,7 @@ import { filterData } from './resolve-routes-config.service';
   styleUrls: ['./overview.component.scss'],
 })
 export class ComponentsOverviewComponent implements OnInit, OnDestroy {
-  srcPrefix = 'assets';
+  srcPrefix = environment.deployPrefix + 'assets';
   imgPrefix = '';
   componentsLooking = [];
   componentsSuggest = [];
@@ -37,17 +37,15 @@ export class ComponentsOverviewComponent implements OnInit, OnDestroy {
     'dataTable'
   ];
   newScopeList: Array<string> | string = [
-    'mention',
-    'navSprite',
-    'cascader',
     'categorySearch',
-    'datatable',
-    'dragdrop',
-    'radio',
-    'tree',
+    'dataTable',
+    'drawer',
+    'timeAxis',
+    'search',
     'upload',
-    'popover',
-    'timePicker'
+    'quadrantDiagram',
+    'tree',
+    'datePicker'
   ];
 
   constructor(private translate: TranslateService, private router: Router, private comDataService: ComponentDataService) {
@@ -79,9 +77,6 @@ export class ComponentsOverviewComponent implements OnInit, OnDestroy {
   }
 
   setPrefix() {
-    if (environment.production) {
-      this.srcPrefix = 'components/assets';
-    }
     this.imgPrefix = './' + this.srcPrefix + '/overview/';
   }
 

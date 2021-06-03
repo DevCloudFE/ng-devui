@@ -1,4 +1,7 @@
-import {animate, AnimationTriggerMetadata, state, style, transition, trigger} from '@angular/animations';
+/**
+ * @deprecated
+ */
+import { animate, AnimationTriggerMetadata, state, style, transition, trigger } from '@angular/animations';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 ||
   window.navigator.userAgent.indexOf('Trident') > -1;

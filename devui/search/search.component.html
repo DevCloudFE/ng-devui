@@ -50,9 +50,13 @@
   <span
     #clearIcon
     (click)="clearText()"
-    *ngIf="iconPosition === 'right'"
     class="devui-search-clear"
-    [ngClass]="{ 'devui-search-clear-sm': size === 'sm', 'devui-search-clear-lg': size === 'lg', 'devui-clear-exit': clearIconExit }"
+    [ngClass]="{
+      'devui-search-clear-sm': size === 'sm',
+      'devui-search-clear-lg': size === 'lg',
+      'devui-clear-exit': clearIconExit,
+      'devui-icon-left': iconPosition === 'left'
+    }"
   >
     <svg
       width="10px"

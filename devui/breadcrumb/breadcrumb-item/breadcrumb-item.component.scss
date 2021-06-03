@@ -1,5 +1,6 @@
 @import '../../style/theme/color';
 @import '../../style/core/_font';
+@import '../../style/core/animation';
 
 .devui-breadcrumb-font-style {
   font-size: $devui-font-size;
@@ -34,12 +35,17 @@
   cursor: pointer;
   width: 16px;
   height: 16px;
+  line-height: 20px;
   margin-right: -5px;
   text-align: center;
   outline: none;
 
+  svg g path {
+    fill: $devui-icon-fill;
+  }
+
   &:hover {
-    svg g polygon {
+    svg g path {
       fill: $devui-icon-text;
     }
   }
@@ -53,7 +59,7 @@
     text-decoration: none;
   }
 
-  svg g polygon {
+  svg g path {
     fill: $devui-icon-text;
   }
 
@@ -129,14 +135,15 @@ d-search {
 .devui-breadcrumb-item {
   ::ng-deep a,
   ::ng-deep span {
-    transition: color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    transition: color $devui-animation-duration-slow $devui-animation-ease-in-smooth;
   }
 }
 
 .devui-breadcrumb-down-icon {
-  transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition: transform $devui-animation-duration-slow $devui-animation-ease-in-smooth;
+  transform-origin: center;
 
-  svg g polygon {
-    transition: fill 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  svg g path {
+    transition: fill $devui-animation-duration-slow $devui-animation-ease-in-smooth;
   }
 }

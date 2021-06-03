@@ -63,18 +63,24 @@ export class SingleDateRangePickerComponent extends SingleDatepickerComponent im
 
   ngOnInit() {
     [this.rangeStart, this.rangeEnd] = this.selectedRange;
+    const nowDate = this.selectedDate || new Date();
+    this.nowMinYear = (nowDate).getFullYear() - Math.floor(this._yearNumber / 2) < this.minDate.getFullYear() ?
+      this.minDate.getFullYear() : (nowDate).getFullYear() - Math.floor(this._yearNumber / 2);
+    this.nowMaxYear = (nowDate).getFullYear() + Math.floor(this._yearNumber / 2) > this.maxDate.getFullYear() ?
+      this.maxDate.getFullYear() : (nowDate).getFullYear() + Math.floor(this._yearNumber / 2);
     if (!this.isAuxiliary && !this.rangeStart) {
       // 主面板，未选择开始日期的情况
       this.onSelectDateChanged();
       this.onDisplayWeeksChange();
+      this.onYearRangeChange();
       this.initDatePicker();
     } else if (this.isAuxiliary && !this.rangeEnd) {
       // 副面板，未选择结束日期的情况
       this.onSelectDateChanged();
       this.initDatePicker();
+      this.onYearRangeChange();
       this.onNextMonth('init');
       this.selectedDate = new Date(this.currentYear, this.currentMonthIndex);
-
     } else if (!this.isAuxiliary && this.rangeStart) {
       // 主面板，已选择开始日期的情况
       this.selectedDate = this.rangeStart;

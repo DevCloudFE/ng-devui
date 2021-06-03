@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
 import {
   DatepickerModule,
   EditableSelectModule,
@@ -29,6 +28,7 @@ import { TextInputModule } from 'ng-devui/text-input';
 import { TextareaModule } from 'ng-devui/textarea';
 import { ToastModule } from 'ng-devui/toast';
 import { ToggleModule } from 'ng-devui/toggle';
+import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 import { BasicComponent } from './basic/basic.component';
 import { CustomStatusComponent } from './custom-status/custom-status.component';
@@ -119,6 +119,6 @@ import { ValidateTemplateFormComponent } from './validate-template/validate-temp
     CustomStatusComponent,
     DebounceTimeComponent,
   ],
-
+  
 })
 export class FormDemoModule {}

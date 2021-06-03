@@ -3,5 +3,5 @@
 </d-radio-group>
 
 <d-radio-group [cssStyle]="'row'" [(ngModel)]="choose3" (change)="log($event)">
-  <d-radio [name]="'customized-city1'" *ngFor="let value of values3" [value]="value"> The Radio value is: {{ value.name }} </d-radio>
+  <d-radio [name]="'customized-city1'" *ngFor="let value of values3" [value]="value.name"> The Radio value is: {{ value.name }} </d-radio>
 </d-radio-group>

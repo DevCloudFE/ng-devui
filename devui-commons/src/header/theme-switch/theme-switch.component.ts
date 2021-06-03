@@ -10,7 +10,5 @@ export class ThemeSwitchComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-  }
-
+  ngOnInit(): void {}
 }

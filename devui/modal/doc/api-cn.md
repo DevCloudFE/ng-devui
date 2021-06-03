@@ -43,7 +43,7 @@ openstandardDialog(dialogtype?: string) {
 |            id            |            `string`             |    --    | 必选，弹出框 id                                | [自定义对话框](demo#custom-dialog)            |
 |          width           |            `string`             |    --    | 可选，弹出框宽度(e.g '300px')                    | [自定义对话框](demo#custom-dialog)            |
 |          zIndex          |            `number`             |   1050   | 可选，弹出框 z-index 值                        |
-|      backDropZIndex      |            `number`             |   1040   | 可选，弹出框背景 z-index 值                    |
+|      backDropZIndex      |            `number`             |   1049   | 可选，弹出框背景 z-index 值                    |
 |        component         |           `Type<any>`           |    --    | 可选，弹出框组件，弹出框会显示组件内容         | [自定义对话框](demo#custom-dialog)            |
 |         injector         |           `Injector`            |   true   | 可选，可以选择指定将用作组件的父级的注射器。   |
 |           data           |            `object`             |    --    | 可选，传入component实例中的属性                | [自定义对话框](demo#custom-dialog)            |
@@ -70,7 +70,7 @@ openstandardDialog(dialogtype?: string) {
 |            id            |            `string`             |     --     | 必选，弹出框 id                                                          | [标准对话框](demo#standard-dialog)             |
 |          width           |            `string`             |     --     | 可选，弹出框宽度(e.g '300px')                                              | [标准对话框](demo#standard-dialog)             |
 |          zIndex          |            `number`             |    1050    | 可选，弹出框 z-index 值                                                  | [信息提示](demo#message-hint)                  |
-|      backDropZIndex      |            `number`             |    1040    | 可选，弹出框背景 z-index 值                                              |
+|      backDropZIndex      |            `number`             |    1049    | 可选，弹出框背景 z-index 值                                              |
 |        maxHeight         |            `string`             |     --     | 可选，弹出框最大高度(e.g '600px')                                          | [标准对话框](demo#standard-dialog)             |
 |          title           |            `string`             |     --     | 可选，弹出框 title                                                       | [标准对话框](demo#standard-dialog)             |
 |         content          |       `string\|Type<any>`       |     --     | 可选，弹出框内容，支持字符串和组件                                       | [标准对话框](demo#standard-dialog)             |

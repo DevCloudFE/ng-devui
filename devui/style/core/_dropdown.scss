@@ -1,6 +1,8 @@
 @import '../theme/color.scss';
 @import '../theme/shadow';
 @import '../theme/corner';
+@import '../core/animation';
+@import '../../style/theme/z-index';
 
 .devui-dropdown {
   position: relative;
@@ -37,8 +39,11 @@
     border-left: 4px solid transparent;
   }
 
-  &.devui-dropdown-open .devui-dropdown-toggle span.icon-chevron-down {
-    transform: rotate(180deg);
+  &.devui-dropdown-open .devui-dropdown-toggle span {
+    &.icon-chevron-down,
+    &.icon-select-arrow {
+      transform: rotate(180deg);
+    }
   }
 }
 
@@ -46,7 +51,7 @@
   position: absolute;
   top: 100%;
   left: 0;
-  z-index: 1000;
+  z-index: $devui-z-index-dropdown;
   display: none;
   min-width: calc(min(100%, 102px));
   margin: 4px 0;
@@ -155,7 +160,6 @@
   background-image: none;
   text-decoration: none;
   cursor: pointer;
-  background-color: $devui-connected-overlay-bg;
   color: $devui-text;
   display: flex;
   align-items: center;
@@ -213,6 +217,6 @@
 
 .devui-dropdown-menu {
   .devui-dropdown-item {
-    transition: color cubic-bezier(0.645, 0.045, 0.355, 1) 0.1s, background-color cubic-bezier(0.645, 0.045, 0.355, 1) 0.1s;
+    transition: color $devui-animation-duration-fast $devui-animation-ease-in-smooth, background-color $devui-animation-duration-fast $devui-animation-ease-in-smooth;
   }
 }

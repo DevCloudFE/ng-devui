@@ -12,11 +12,11 @@ export class VersionSwitchComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.currentOption = this.versionOptions[0];
   }
 
-  jumpTo($event) {
+  jumpTo($event): void {
     window.open($event.link, $event.target);
   }
 

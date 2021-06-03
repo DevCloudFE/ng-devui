@@ -51,6 +51,8 @@
 
 <!-- 单个目录模板 -->
 <ng-template #defaultNavItemTemplate let-item="item">
-  <a [href]="item.href" *ngIf="hashSupport">{{ item?.label }}</a>
-  <span *ngIf="!hashSupport">{{ item?.label }}</span>
+  <div class="nav-item" [title]="item?.label">
+    <a [href]="item.href" *ngIf="hashSupport">{{ item?.label }}</a>
+    <span *ngIf="!hashSupport">{{ item?.label }}</span>
+  </div>
 </ng-template>
