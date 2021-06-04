@@ -1,0 +1,33 @@
+{
+  "typescript.tsdk": "./node_modules/typescript/lib",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.tslint": true,
+    "source.fixAll.stylelint": true
+  },
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/node_modules/**": true,
+    "**/coverage/**": true
+  },
+  "files.associations": {
+    "*.json": "jsonc",
+    ".prettierrc": "jsonc",
+    ".stylelintrc": "jsonc"
+  },
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/coverage": true
+  },
+  "git.ignoreLimitWarning": true,
+  "[json]": {
+    "editor.formatOnSave": false
+  },
+  "[jsonc]": {
+    "editor.formatOnSave": false
+  },
+  "[markdown]": {
+    "editor.formatOnSave": false
+  }
+}
