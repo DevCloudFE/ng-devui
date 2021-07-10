@@ -1,0 +1,25 @@
+<div class="year-list-panel" (mouseleave)="curHoverDate = null">
+  <cdk-virtual-scroll-viewport #scrollList [itemSize]="48" class="devui-year-list" minBufferPx="400" maxBufferPx="600">
+    <div class="devui-year-list-item" *cdkVirtualFor="let years of yearList; let index = index">
+      <p
+        class="devui-year-title"
+        [ngClass]="{
+          'devui-this-year': isThisYear(year),
+          'devui-active-year': isActiveYear(year),
+          'devui-disabled': isDisable(year),
+          'devui-table-date-inrange': isDateInRange(year),
+          'devui-table-date-start': isStartDate(year),
+          'devui-table-date-end': isEndDate(year),
+          'devui-table-date-abandon-selected': isDateAbandon(year),
+          'devui-table-date-in-selected-range': isDateInSelectRange(year),
+          'devui-table-date-active-type': isActiveTypeDate(year)
+        }"
+        (click)="selectYear(year)"
+        (mouseenter)="setHoverTarget(year)"
+        *ngFor="let year of years"
+      >
+        {{ year }}
+      </p>
+    </div>
+  </cdk-virtual-scroll-viewport>
+</div>

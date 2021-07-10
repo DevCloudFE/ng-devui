@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { FormModule } from 'ng-devui/form';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
@@ -8,6 +9,7 @@ import { TextareaModule } from 'ng-devui/textarea';
 import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 import { BasicComponent } from './basic/basic.component';
+import { CountComponent } from './count/count.component';
 import { ResizeComponent } from './resize/resize.component';
 import { TextDemoComponent } from './text-demo.component';
 
@@ -19,6 +21,7 @@ import { TextDemoComponent } from './text-demo.component';
     DevUICodeboxModule,
     DevUIApiModule,
     DDemoNavModule,
+    FormModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo' },
       { path: 'demo', component: TextDemoComponent},
@@ -32,7 +35,8 @@ import { TextDemoComponent } from './text-demo.component';
   declarations: [
     TextDemoComponent,
     BasicComponent,
-    ResizeComponent
+    ResizeComponent,
+    CountComponent
   ],
   
 })

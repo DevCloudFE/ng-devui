@@ -5,7 +5,7 @@ declare type HttpObserve = 'body' | 'events' | 'response';
 declare type ResponseType = 'arraybuffer' | 'blob' | 'json' | 'text';
 export class HelperUtils {
   static jumpOuterUrl(url, target = '_blank') {
-       if (url !== undefined) {
+       if (url !== undefined && typeof document !== 'undefined') {
           const tempLink = document.createElement('a');
           tempLink.style.display = 'none';     // for IE 11
           tempLink.target = target;
@@ -28,6 +28,9 @@ export class HelperUtils {
       },
       onError?: (response) => void
   ) {
+      if (typeof document === 'undefined') {
+        return;
+      }
       if (document.querySelector('iframe[name=' + (option && option.iframename || 'download') + ']')) {
         document.body.removeChild(document.querySelector('iframe[name=' + (option && option.iframename || 'download') + ']'));
       }
@@ -162,6 +165,9 @@ export class HelperUtils {
     })(responseOption);
 
     const downloadFileFromArrayBuffer = (data: ArrayBuffer, filename: string, contentType: string) => {
+      if (typeof document === 'undefined' || typeof window === 'undefined') {
+        return;
+      }
       if (window.navigator && window.navigator.msSaveOrOpenBlob) { // IE11 support
           const blob = new Blob([data], {type: contentType});
           window.navigator.msSaveOrOpenBlob(blob, filename);

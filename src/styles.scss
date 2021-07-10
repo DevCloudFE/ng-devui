@@ -40,7 +40,7 @@ pre {
   word-break: break-all;
   word-wrap: break-word;
   border: 1px solid $devui-dividing-line;
-  border-radius: 1px;
+  border-radius: $devui-border-radius;
 }
 
 .hljs {
@@ -145,7 +145,7 @@ code {
   // font-size: 90%;
   color: #c7254e;
   background-color: $devui-area;
-  border-radius: 1px;
+  border-radius: $devui-border-radius;
 }
 
 .readme {
@@ -185,4 +185,8 @@ code {
 [dTextInput]::-ms-clear,
 [dTextInput]::-ms-reveal {
   display: none;
+}
+
+.devui-h3-title {
+  font-size: $devui-font-size-card-title;
 }

@@ -1,5 +1,7 @@
+import { DOCUMENT } from '@angular/common';
 import {
   ComponentFactoryResolver,
+  Inject,
   Injectable,
   Renderer2, RendererFactory2
 } from '@angular/core';
@@ -12,10 +14,14 @@ import { IModalOptions } from './modal.types';
 @Injectable()
 export class ModalService {
   private renderer: Renderer2;
+  document: Document;
+
   constructor(private componentFactoryResolver: ComponentFactoryResolver,
               private overlayContainerRef: OverlayContainerRef, private rendererFactory: RendererFactory2,
-              private devConfigService: DevConfigService) {
+              private devConfigService: DevConfigService,
+              @Inject(DOCUMENT) private doc: any) {
     this.renderer = this.rendererFactory.createRenderer(null, null);
+    this.document = this.doc;
   }
 
   open({
@@ -88,15 +94,15 @@ export class ModalService {
 
     modalRef.instance.onHidden = () => {
       if (modalRef.instance.documentOverFlow) {
-        this.renderer.removeStyle(document.body, 'top');
-        this.renderer.removeStyle(document.body, 'left');
-        this.renderer.removeClass(document.body, 'devui-body-scrollblock');
-        this.renderer.removeClass(document.body, 'devui-body-overflow-hidden');
-        document.documentElement.scrollTop = modalRef.instance.scrollTop;
-        document.body.scrollTop = modalRef.instance.scrollTop;
-        document.documentElement.scrollLeft = modalRef.instance.scrollLeft;
-        document.body.scrollLeft = modalRef.instance.scrollLeft;
-      }
+        this.renderer.removeStyle(this.document.body, 'top');
+        this.renderer.removeStyle(this.document.body, 'left');
+        this.renderer.removeClass(this.document.body, 'devui-body-scrollblock');
+        this.renderer.removeClass(this.document.body, 'devui-body-overflow-hidden');
+        this.document.documentElement.scrollTop = modalRef.instance.scrollTop;
+        this.document.body.scrollTop = modalRef.instance.scrollTop;
+        this.document.documentElement.scrollLeft = modalRef.instance.scrollLeft;
+        this.document.body.scrollLeft = modalRef.instance.scrollLeft;
+    }
       if (onClose) {
         onClose();
       }

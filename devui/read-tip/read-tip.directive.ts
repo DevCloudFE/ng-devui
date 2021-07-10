@@ -1,15 +1,17 @@
+import { DOCUMENT } from '@angular/common';
 import {
   ComponentFactoryResolver,
   ComponentRef,
   Directive,
   ElementRef,
   HostListener,
+  Inject,
   Injector,
   Input,
   OnDestroy,
   OnInit,
   TemplateRef,
-  ViewContainerRef,
+  ViewContainerRef
 } from '@angular/core';
 import { OverlayContainerRef } from 'ng-devui/overlay-container';
 import { of } from 'rxjs';
@@ -24,6 +26,7 @@ export class ReadTipDirective implements OnInit, OnDestroy {
   readTipComponentRef: ComponentRef<ReadTipComponent>;
 
   _prevTarget;
+  document: Document;
 
   defaultOptions: ReadTipOptions = {
     trigger: 'hover',
@@ -105,8 +108,11 @@ export class ReadTipDirective implements OnInit, OnDestroy {
     private componentFactoryResolver: ComponentFactoryResolver,
     private overlayContainerRef: OverlayContainerRef,
     private inject: Injector,
-    private viewContainerRef: ViewContainerRef
-  ) {}
+    private viewContainerRef: ViewContainerRef,
+    @Inject(DOCUMENT) private doc: any
+  ) {
+    this.document = this.doc;
+  }
 
   ngOnInit() {}
 
@@ -124,7 +130,7 @@ export class ReadTipDirective implements OnInit, OnDestroy {
       this.readTipComponentRef.instance.show();
     }
     if (rule.trigger === 'click') {
-      document.addEventListener('click', this.onDocumentClick);
+      this.document.addEventListener('click', this.onDocumentClick);
     }
   }
 
@@ -205,7 +211,7 @@ export class ReadTipDirective implements OnInit, OnDestroy {
       this.readTipComponentRef = null;
     }
     if (this.readTipOptions.trigger === 'click') {
-      document.removeEventListener('click', this.onDocumentClick);
+      this.document.removeEventListener('click', this.onDocumentClick);
     }
   }
 

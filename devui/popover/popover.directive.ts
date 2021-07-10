@@ -1,8 +1,10 @@
+import { DOCUMENT } from '@angular/common';
 import {
   ComponentFactoryResolver,
   ComponentRef,
   Directive,
   ElementRef,
+  Inject,
   Injector,
   Input,
   OnDestroy,
@@ -97,6 +99,7 @@ export class PopoverDirective implements OnInit, OnDestroy {
   isEnter: boolean;
   unsubscribe$ = new Subject();
   unsubscribeP$ = new Subject();
+  document: Document;
   @Input() set visible(_isShow: boolean) {
     if (_isShow) {
       // when set value and create component at the same time，should wait after ng2 dirty check done
@@ -117,7 +120,10 @@ export class PopoverDirective implements OnInit, OnDestroy {
     private injector: Injector,
     private componentFactoryResolver: ComponentFactoryResolver,
     private devConfigService: DevConfigService,
-  ) {}
+    @Inject(DOCUMENT) private doc: any
+  ) {
+    this.document = this.doc;
+  }
 
   onDocumentClick = (event) => {
     event.stopPropagation();
@@ -197,7 +203,7 @@ export class PopoverDirective implements OnInit, OnDestroy {
     }
 
     this.popoverComponentRef.instance.show();
-    document.addEventListener('click', this.onDocumentClick);
+    this.document.addEventListener('click', this.onDocumentClick);
   }
 
   destroy() {
@@ -205,7 +211,7 @@ export class PopoverDirective implements OnInit, OnDestroy {
       this.popoverComponentRef.destroy();
       this.popoverComponentRef = null;
     }
-    document.removeEventListener('click', this.onDocumentClick);
+    this.document.removeEventListener('click', this.onDocumentClick);
     if (this.unsubscribeP$) {
       this.unsubscribeP$.next();
       this.unsubscribeP$.complete();

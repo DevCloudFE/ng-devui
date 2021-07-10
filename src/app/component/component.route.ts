@@ -262,6 +262,18 @@ export const routesConfig = [
     },
   },
   {
+    path: 'datepickerPro',
+    component: ExamplePanelComponent,
+    loadChildren: () =>
+      import('../../../devui/datepicker-pro/demo/datepicker-pro-demo.module').then((m) => m.DatepickerProDemoModule),
+    data: {
+      type: '数据录入',
+      enType: 'Data Entry',
+      name: 'DatepickerPro',
+      cnName: '日期选择器',
+    },
+  },
+  {
     path: 'datatable',
     component: ExamplePanelComponent,
     loadChildren: () => import('../../../devui/data-table/demo/data-table-demo.module').then((m) => m.DataTableDemoModule),

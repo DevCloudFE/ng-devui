@@ -45,6 +45,7 @@ export class CascaderComponent implements OnInit, OnDestroy, OnChanges, ControlV
   @Input() canSelectParent = false;
   @Input() checkboxRelation = { upward: true, downward: true };
   @Input() dropDownItemTemplate: TemplateRef<any>;
+  @Input() dropdownHeaderTemplate: TemplateRef<any>;
   @Input() dropdownPanelClass = '';
   @Input() @WithConfig() showAnimation = true;
   @Input()
@@ -367,6 +368,9 @@ export class CascaderComponent implements OnInit, OnDestroy, OnChanges, ControlV
 
   // 防止位置超出overlay边界
   rePosition(): void {
+    if (typeof window === undefined) {
+      return;
+    }
     setTimeout(() => {
       this.dropdownComp.reposition();
       const width = this.dropdownComp.overlay.overlayRef?.overlayElement.clientWidth;

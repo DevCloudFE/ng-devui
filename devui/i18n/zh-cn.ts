@@ -251,7 +251,9 @@ export default {
     noFilterConditions: '没有筛选条件',
     clearFilterCondition: '清空',
     seeMore: '查看全部过滤条件',
-    selected: '已选择'
+    selected: '已选择',
+    switchToStart: '切换至开始时间',
+    switchToEnd: '切换至结束时间'
   },
   userGuide: {
     guide: '指引',

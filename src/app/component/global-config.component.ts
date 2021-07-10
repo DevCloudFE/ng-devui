@@ -1,7 +1,9 @@
+import { DOCUMENT } from '@angular/common';
 import {
   AfterViewInit,
   Component,
   ElementRef,
+  Inject,
   Input,
   OnInit, QueryList,
   Renderer2,
@@ -40,6 +42,7 @@ export class GlobalConfigComponent implements OnInit, AfterViewInit {
       this.refreshView();
     });
   }
+  document: Document;
 
   get readMe () {
     return this._readMe;
@@ -48,7 +51,9 @@ export class GlobalConfigComponent implements OnInit, AfterViewInit {
   @ViewChildren('documentation') documentation: QueryList<ElementRef>;
 
   constructor(private router: Router, private route: ActivatedRoute, private translate: TranslateService,
-              private i18n: I18nService, private elementRef: ElementRef, private renderer: Renderer2) {
+              private i18n: I18nService, private elementRef: ElementRef, private renderer: Renderer2,
+              @Inject(DOCUMENT) private doc: any) {
+    this.document = this.doc;
   }
   ngOnInit(): void {
     const lang = localStorage.getItem('lang');
@@ -64,7 +69,7 @@ export class GlobalConfigComponent implements OnInit, AfterViewInit {
   }
 
   refreshView() {
-    Array.from<HTMLElement>(document.querySelectorAll('pre code')).forEach((block) => {
+    Array.from<HTMLElement>(this.document.querySelectorAll('pre code')).forEach((block) => {
       hljs.highlightBlock(block);
     });
     Array.from(this.elementRef.nativeElement.querySelectorAll('a')).forEach((link: HTMLElement) => {
@@ -76,6 +81,9 @@ export class GlobalConfigComponent implements OnInit, AfterViewInit {
       });
   }
   get baseUrl() {
+    if (typeof window === 'undefined') {
+      return '';
+    }
     return window.location.pathname.replace(window.location.hash, '');
   }
 

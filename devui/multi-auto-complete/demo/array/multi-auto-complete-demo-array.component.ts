@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, Inject, OnInit } from '@angular/core';
 import { of } from 'rxjs';
 
 @Component({
@@ -16,6 +17,7 @@ export class MultiAutoCompleteDemoArrayComponent implements OnInit {
 
   msgs: Array<Object> = [];
 
+  constructor(@Inject(DOCUMENT) private doc: any) {}
   ngOnInit() {
     this.multiItems2 = this.multiItems1.map((lang, index) => ({ label: lang, id: index }));
   }
@@ -37,13 +39,13 @@ export class MultiAutoCompleteDemoArrayComponent implements OnInit {
   }
 
   copy() {
-    const tempInput = document.createElement('input');
+    const tempInput = this.doc.createElement('input');
     tempInput.value = this.multiItems2.map(item => item.label).join(', ');
-    document.body.appendChild(tempInput);
+    this.doc.body.appendChild(tempInput);
     tempInput.select(); // 选择对象
-    document.execCommand('Copy'); // 执行浏览器复制命令
+    this.doc.execCommand('Copy'); // 执行浏览器复制命令
     tempInput.style.display = 'none';
-    document.body.removeChild(tempInput);
+    this.doc.body.removeChild(tempInput);
     this.msgs = [{ severity: 'success', summary: 'Copy success', detail: 'The data has been successfully copied to the clipboard.' }];
   }
 }

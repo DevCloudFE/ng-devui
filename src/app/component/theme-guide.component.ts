@@ -1,7 +1,9 @@
+import { DOCUMENT } from '@angular/common';
 import {
   AfterViewInit,
   Component,
   ElementRef,
+  Inject,
   Input, OnInit,
   QueryList,
   ViewChildren
@@ -39,6 +41,7 @@ import * as hljs from 'highlight.js/lib/core';
         this.refreshView();
       });
     }
+    document: Document;
 
     get readMe () {
       return this._readMe;
@@ -46,7 +49,8 @@ import * as hljs from 'highlight.js/lib/core';
 
     @ViewChildren('documentation') documentation: QueryList<ElementRef>;
 
-    constructor(private route: ActivatedRoute, private translate: TranslateService) {
+    constructor(private route: ActivatedRoute, private translate: TranslateService, @Inject(DOCUMENT) private doc: any) {
+      this.document = this.doc;
     }
 
     ngOnInit() {
@@ -67,7 +71,7 @@ import * as hljs from 'highlight.js/lib/core';
     }
 
     refreshView() {
-      Array.from<HTMLElement>(document.querySelectorAll('pre code')).forEach((block) => {
+      Array.from<HTMLElement>(this.document.querySelectorAll('pre code')).forEach((block) => {
         hljs.highlightBlock(block);
       });
     }

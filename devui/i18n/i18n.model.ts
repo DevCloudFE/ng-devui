@@ -148,6 +148,9 @@ export interface I18nInterface {
     clearFilterCondition: string;
     seeMore: string;
     selected: string;
+    switchToStart: string;
+    switchToEnd: string;
+
   };
   userGuide: {
     guide: string;

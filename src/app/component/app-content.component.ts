@@ -10,6 +10,7 @@ import { Subscription } from 'rxjs';
 import { ComponentDataService } from './component.data.service';
 import { routesConfig } from './component.route';
 import { resolveRoutesConfig } from './resolve-routes-config.service';
+import { newScopeList, sunsetScopeList } from './scope-list';
 @Component({
   selector: 'cd-app-content', // tslint:disable-line
   templateUrl: './app-content.component.html',
@@ -27,19 +28,78 @@ export class AppContentComponent implements OnInit, OnDestroy {
   clickSub: Subscription = new Subscription();
   // @ViewChild('dSearch', { static: true }) dSearch: SearchComponent;
   componentsDataDisplay = [];
+  componentsText: any = {};
+  overviewText: any = {};
+  text: any;
   constructor(private translate: TranslateService, private comDataService: ComponentDataService) {
-    this.componentsDataDisplay = resolveRoutesConfig(localStorage.getItem('lang') || 'zh-cn', routesConfig);
-    this.comDataService.comData = this.componentsDataDisplay;
+    this.setI18n();
+    this.resolveRoutesConfig();
     this.generateSideMenuList(localStorage.getItem('lang') || 'zh-cn');
     this.translate.onLangChange.subscribe((event: TranslationChangeEvent) => {
-      this.componentsDataDisplay = resolveRoutesConfig(localStorage.getItem('lang'), routesConfig);
-      this.comDataService.comData = this.componentsDataDisplay;
+      this.setI18n();
+      this.resolveRoutesConfig();
 
       const values = this.translate.instant('public');
       this.generateSideMenuList(values);
     });
   }
   ngOnInit(): void {
+  }
+
+  setI18n() {
+    this.componentsText = this.translate.instant('components');
+    this.overviewText = this.translate.instant('public').overview;
+    this.text = {
+      new: this.overviewText.newChange,
+      sunset: this.overviewText.sunset
+    };
+  }
+
+  setDescription() {
+    this.componentsDataDisplay.map(componentsGroup => {
+      componentsGroup.children.map(component => {
+        const name = component.name.replace(' ', '').toLocaleLowerCase();
+        for (const key in this.componentsText) {
+          if (key.replace(/\-/g, '').toLocaleLowerCase() === name) {
+            component.description = this.componentsText[key].description.replace(/。/g, '');
+            break;
+          }
+        }
+      });
+    });
+  }
+
+  resolveRoutesConfig() {
+    this.componentsDataDisplay = resolveRoutesConfig(localStorage.getItem('lang') || 'zh-cn', routesConfig);
+
+    this.setDescription();
+
+    const newScopes = this.getScopList(newScopeList);
+    const sunsetScopes = this.getScopList(sunsetScopeList);
+    this.componentsDataDisplay.map(componentsGroup => {
+      componentsGroup.children.map(component => {
+        if (newScopes.includes(component.lowerName)) {
+          component.newChange = true;
+        }
+        if (sunsetScopes.includes(component.lowerName)) {
+          component.sunset = true;
+        }
+      });
+    });
+
+    this.comDataService.comData = this.componentsDataDisplay;
+  }
+
+  getScopList(list) {
+    let scopeList;
+    if (typeof list === 'string') {
+      scopeList = list.toLocaleLowerCase().match(/\* \*\*.+\:\*\*/g);
+    } else if (Array.isArray(list)) {
+      scopeList = list.map(scope => scope.toLocaleLowerCase());
+    } else {
+      scopeList = [];
+    }
+    return Array.from(new Set(scopeList.map(scope => scope.replace(/(\W|_|[0-9])*/g, ''))));
   }
 
   generateSideMenuList(values) {

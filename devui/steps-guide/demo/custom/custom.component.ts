@@ -1,10 +1,10 @@
+import { DOCUMENT } from '@angular/common';
 import {
   Component,
+  Inject,
   OnInit
 } from '@angular/core';
-
 import { StepsGuideService } from 'ng-devui/steps-guide';
-
 import { customData } from '../fakeData';
 
 @Component({
@@ -21,13 +21,13 @@ export class CustomComponent implements OnInit {
     hideStepNav: true,
   };
 
-  constructor(private stepService: StepsGuideService) {}
+  constructor(private stepService: StepsGuideService, @Inject(DOCUMENT) private doc: any) {}
 
   ngOnInit() {
-    this.targetElement = document.querySelector('.header-menu>div:first-child');
+    this.targetElement = this.doc.querySelector('.header-menu>div:first-child');
     /* 用于判断内容变化的dom，可选择最接近变化范围的容器，
     在angular组件或路由下可能不能正确触发，可选择更外层容器尝试 */
-    this.observerDom = document.querySelector('.header-menu');
+    this.observerDom = this.doc.querySelector('.header-menu');
   }
 
   reset(index = 0) {

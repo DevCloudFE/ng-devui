@@ -24,7 +24,7 @@
 .code-box-meta.markdown {
   position: relative;
   padding: 10px 40px;
-  border-radius: 0 0 4px 4px;
+  border-radius: 0 0 $devui-border-radius-feedback $devui-border-radius-feedback;
   transition: background-color $devui-animation-duration-slow $devui-animation-ease-in-smooth;
   width: 100%;
   font-size: $devui-font-size;
@@ -83,7 +83,7 @@
 .code-box .highlight-wrapper {
   display: none;
   overflow: auto;
-  border-radius: 0 0 4px 4px;
+  border-radius: 0 0 $devui-border-radius-feedback $devui-border-radius-feedback;
 }
 
 .code-box .highlight-wrapper-expand {

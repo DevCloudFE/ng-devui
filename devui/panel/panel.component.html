@@ -4,7 +4,7 @@
   </div>
   <div
     class="devui-panel-body"
-    [ngClass]="{ 'devui-panel-body-collapse': isCollapsed !== undefined }"
+    [ngClass]="{ 'devui-panel-body-collapse': isCollapsed !== undefined, 'has-left-padding': hasLeftPadding }"
     @collapseForDomDestroy
     [@.disabled]="!showAnimation"
     *ngIf="isCollapsed === undefined || isCollapsed"

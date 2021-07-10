@@ -1,4 +1,5 @@
-import { AfterViewInit, Component, ElementRef, HostBinding, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { AfterViewInit, Component, ElementRef, HostBinding, Inject, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { PositionService } from 'ng-devui/position';
 import { fromEvent, Subscription } from 'rxjs';
@@ -38,14 +39,18 @@ export class StepsGuideComponent implements OnInit, AfterViewInit, OnDestroy {
   i18nCommonText: I18nInterface['stepsGuide'];
   DOT_HORIZONTAL_MARGIN = 27;
   DOT_VERTICAL_MARGIN = 22;
+  document: Document;
 
   constructor(
     private stepService: StepsGuideService,
     private renderer: Renderer2,
     private positionService: PositionService,
     private elm: ElementRef,
-    private i18n: I18nService
-  ) {}
+    private i18n: I18nService,
+    @Inject(DOCUMENT) private doc: any
+  ) {
+    this.document = this.doc;
+  }
 
   ngOnInit() {
     this.dots = new Array(this.stepsCount);
@@ -67,7 +72,7 @@ export class StepsGuideComponent implements OnInit, AfterViewInit, OnDestroy {
     this.updatePosition();
     if (!this.scrollElement) {
       const currentScrollElement = this.positionService.getScrollParent(this.triggerElement);
-      this.scrollElement = currentScrollElement === document.body ? window : currentScrollElement;
+      this.scrollElement = currentScrollElement === this.document.body ? window : currentScrollElement;
     }
     const scrollSubscriber = fromEvent(this.scrollElement, 'scroll')
       .pipe(throttleTime(this.SCROLL_REFRESH_INTERVAL, undefined, { leading: true, trailing: true }))
@@ -112,10 +117,10 @@ export class StepsGuideComponent implements OnInit, AfterViewInit, OnDestroy {
 
     switch (rect.placementSecondary) {
       case 'left':
-        left = targetRect.left + this.triggerElement.clientWidth / 2 - this.DOT_VERTICAL_MARGIN;
+        left = targetRect.left;
         break;
       case 'right':
-        left = targetRect.left + this.triggerElement.clientWidth / 2 - this.elm.nativeElement.clientWidth + this.DOT_VERTICAL_MARGIN;
+        left = targetRect.left - this.elm.nativeElement.clientWidth + this.triggerElement.clientWidth;
         break;
       default:
     }

@@ -27,7 +27,7 @@ Go to your project folder and use npm to install DevUI.
 ```bash
 npm i ng-devui
 # Optional. Font icon library
-# npm i devui-assets
+# npm i @devui-design/icons
 ```
 
 ### 3. Import Modules

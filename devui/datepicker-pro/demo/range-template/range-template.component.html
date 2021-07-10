@@ -1,0 +1,21 @@
+<d-range-datepicker-pro [(ngModel)]="value1">
+  <ng-template #customTemplate>
+    <ul class="right-panel">
+      <li>
+        <d-button bsStyle="text" (click)="setDate(-30)">before a month</d-button>
+      </li>
+      <li>
+        <d-button bsStyle="text" (click)="setDate(-7)">before a week</d-button>
+      </li>
+      <li>
+        <d-button bsStyle="text" (click)="selectThisWeek()">this week</d-button>
+      </li>
+    </ul>
+  </ng-template>
+  <ng-template #footerTemplate>
+    <div class="footer-panel">
+      <d-button bsStyle="common" (click)="clearStart()">clear start</d-button>
+      <d-button bsStyle="common" (click)="clearEnd()">clear end</d-button>
+    </div>
+  </ng-template>
+</d-range-datepicker-pro>

@@ -1,0 +1,15 @@
+@import '../style/theme/color';
+
+.devui-custom-panel-wrapper {
+  display: inline-block;
+  vertical-align: top;
+  // width: 150px;
+  text-align: center;
+  height: 305px;
+  font-size: 12px;
+  border-left: 1px solid $devui-dividing-line;
+}
+
+:host {
+  font-size: 0;
+}

@@ -68,15 +68,13 @@ export class UploadComponent {
   oneTimeUpload() {
     const uploads = this.fileUploaders
       .filter((fileUploader) => fileUploader.status !== UploadStatus.uploaded);
-    let finalUploads = [];
-    this.dealOneTimeUploadFiles(uploads).then(result => finalUploads = result);
-    if (uploads.length > 0) {
-      return from(finalUploads);
-    }
-    return from(Promise.reject('no files'));
+    return from(this.dealOneTimeUploadFiles(uploads));
   }
 
   async dealOneTimeUploadFiles(uploads) {
+    if (!uploads || !uploads.length) {
+      return Promise.reject('no files');
+    }
     // 触发文件上传
     let finalUploads = [];
     await uploads[0].send(uploads).finally(() =>

@@ -1,4 +1,5 @@
 import { CdkOverlayOrigin, ConnectedOverlayPositionChange, VerticalConnectionPos } from '@angular/cdk/overlay';
+import { DOCUMENT } from '@angular/common';
 import {
   ChangeDetectorRef,
   Component,
@@ -7,6 +8,7 @@ import {
   EventEmitter,
   forwardRef,
   HostListener,
+  Inject,
   Input,
   OnDestroy,
   OnInit,
@@ -73,6 +75,7 @@ export class DateRangePickerDirective implements OnInit, ControlValueAccessor, O
   datepickerPosition: VerticalConnectionPos = 'bottom';
   valueList = [];
   startAnimation = false;
+  document: Document;
   private onChange = (_: any) => null;
   private onTouched = () => null;
 
@@ -162,11 +165,11 @@ export class DateRangePickerDirective implements OnInit, ControlValueAccessor, O
       if (!isOpen) {
         this.startAnimation = false;
         removeClassFromOrigin(this.elementRef);
-        document.removeEventListener('click', this.onDocumentClick);
+        this.document.removeEventListener('click', this.onDocumentClick);
       } else {
         setTimeout(() => {
           addClassToOrigin(this.elementRef);
-          document.addEventListener('click', this.onDocumentClick);
+          this.document.addEventListener('click', this.onDocumentClick);
           this.startAnimation = true;
           this.cdr.detectChanges();
         });
@@ -177,20 +180,21 @@ export class DateRangePickerDirective implements OnInit, ControlValueAccessor, O
   get isOpen() {
     return this._isOpen;
   }
-
   constructor(
     private elementRef: ElementRef,
     private renderer: Renderer2,
     private datePickerConfig: DatePickerConfig,
     private i18n: I18nService,
     private cdr: ChangeDetectorRef,
-    private devConfigService: DevConfigService
+    private devConfigService: DevConfigService,
+    @Inject(DOCUMENT) private doc: any
   ) {
     this._dateConfig = datePickerConfig['dateConfig'];
     this.dateConverter = datePickerConfig['dateConfig'].dateConverter || new DefaultDateConverter();
     this._minDate = this.minDate ? new Date(this.minDate) : new Date(this.dateConfig.min, 0, 1, 0, 0, 0);
     this._maxDate = this.maxDate ? new Date(this.maxDate) : new Date(this.dateConfig.max, 11, 31, 23, 59, 59);
     this.setI18nText();
+    this.document = this.doc;
   }
 
   @HostListener('blur', ['$event'])
@@ -416,7 +420,7 @@ export class DateRangePickerDirective implements OnInit, ControlValueAccessor, O
       this.i18nSubscription.unsubscribe();
     }
     this.valueChangeSubscrip?.unsubscribe();
-    document.removeEventListener('click', this.onDocumentClick);
+    this.document.removeEventListener('click', this.onDocumentClick);
   }
 
   clearAll = (reason?: SelectDateRangeChangeReason, hide?: boolean) => {

@@ -1,4 +1,5 @@
 import { CdkOverlayOrigin, ConnectedOverlayPositionChange, ConnectedPosition, VerticalConnectionPos } from '@angular/cdk/overlay';
+import { DOCUMENT } from '@angular/common';
 import {
   ChangeDetectorRef,
   Component,
@@ -6,6 +7,7 @@ import {
   EventEmitter,
   forwardRef,
   HostListener,
+  Inject,
   Input,
   OnChanges,
   OnDestroy,
@@ -91,6 +93,7 @@ export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDes
   public i18nLocale: I18nInterface['locale'];
 
   public cdkConnectedOverlayOrigin: any;
+  document: Document;
 
   private onChange = (_: any) => null;
   private onTouched = () => null;
@@ -153,13 +156,13 @@ export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDes
       if (!open) {
         this.startAnimation = false;
         removeClassFromOrigin(this.elementRef);
-        document.removeEventListener('click', this.onDocumentClick);
+        this.document.removeEventListener('click', this.onDocumentClick);
       } else {
         setTimeout(() => {
           this.startAnimation = true;
           this.cdr.detectChanges();
           addClassToOrigin(this.elementRef);
-          document.addEventListener('click', this.onDocumentClick);
+          this.document.addEventListener('click', this.onDocumentClick);
         });
       }
     }
@@ -171,10 +174,12 @@ export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDes
 
   constructor(private elementRef: ElementRef, private viewContainerRef: ViewContainerRef,
               private renderer2: Renderer2, private datePickerConfig: DatePickerConfig, private i18n: I18nService,
-              private cdr: ChangeDetectorRef) {
+              private cdr: ChangeDetectorRef,
+              @Inject(DOCUMENT) private doc: any) {
     this._dateConfig = datePickerConfig['dateConfig'];
     this.dateConverter = datePickerConfig['dateConfig'].dateConverter || new DefaultDateConverter();
     this.setI18nText();
+    this.document = this.doc;
   }
 
   @HostListener('blur', ['$event'])
@@ -404,6 +409,6 @@ export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDes
     if (this.userInputSubscription) {
       this.userInputSubscription.unsubscribe();
     }
-    document.removeEventListener('click', this.onDocumentClick);
+    this.document.removeEventListener('click', this.onDocumentClick);
   }
 }

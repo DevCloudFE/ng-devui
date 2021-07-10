@@ -27,6 +27,7 @@ import { TimeAxisModule } from 'ng-devui/time-axis';
 | direction |  `'vertical'\|'horizontal'`  |  ''  | 可选，设置时间轴方向      | [设置方向](demo#direction)           |
 | position  |     `'left'\|'bottom'`      |  ''  | 可选，仅当direction 为 `vertical` 时定义时间参数位置 | [设置时间位置](demo#basic-usage)           |
 | widthMode  |     `'fitContent'\|'fitWidth'`      |  `'fitContent'`  | 可选，仅当direction 为 `horizontal` 时，`widthMode='fitContent'`时间轴宽度由内容宽度自适应，`widthMode='fitWidth'`时间轴宽度撑满容器 | [时间点自定义](demo#custom-dot)           |
+| horizontalAlign  |     `'center'\|'left'`      |  `'center'`  | 可选，仅当direction 为 `horizontal` 时，设置内容对齐方式 | [内容使用模板自定义](demo#content-with-template)           |
 |   model   | `'text'\|'html'\|'template'` |  ''  | 可选，模型      | [内容使用html](demo#content-with-html)           |
 |   list    |      [`array`](#list)        |  []  | 可选，列表数据  | [设置方向](demo#direction)           |
 
@@ -34,13 +35,14 @@ import { TimeAxisModule } from 'ng-devui/time-axis';
 
 |  参数  |                    类型                     | 默认值 | 描述                                                     | 跳转 Demo                                              |
 | :----: | :-----------------------------------------: | :--: | :------------------------------------------------------- | ------------------------------------------------------ |
-|  time  |                  `string`                   |  --  | 可选，时间    | [设置时间位置](demo#basic-usage)           |
-|  text  |                  `string`                   |  --  | 可选，文本内容                                            | [设置时间位置](demo#basic-usage)           |
-|  type  | `'primary' \| 'success' \| 'danger' \| 'warning' \| 'waiting' \| 'info'` |  `'info'`   | 可选，时间点类型     | [设置方向](demo#direction)           |
-| ~~status~~ |         `'runned'\|'running'\|'error'`      |  --  | 可选，状态（`已废弃，建议使用type`） | [设置时间位置](demo#basic-usage)           |
+|  time  |                  `string`                   |  --  | 可选，时间    | [设置方向](demo#direction)           |
+|  text  |                  `string`                   |  --  | 可选，文本内容                                            | [设置方向](demo#direction)           |
+|  type  | `'primary' \| 'success' \| 'danger' \| 'warning'` |  `'primary'`  | 可选，时间点类型     | [设置时间位置](demo#basic-usage)           |
+| ~~status~~ |         `'runned'\|'running'\|''`      |  --  | 可选，状态（`已废弃，建议使用lineStyle`） | [设置时间位置](demo#basic-usage)           |
 |  data  |                   `array`                   |  --  | 可选，模板数据，当 model 设置为 template 时生效             | [内容使用模板自定义](demo#content-with-template) |
 |  position  | `'up'\|'bottom'\|'left'\|'right'` |  --  | 可选，text 或 data的位置，若有time则time位于相反位置   | [时间节点内容方向自定义](demo#content-with-alternative-mode) |
-|  lineStyle  | `{style: 'solid' \| 'dashed' \| 'none', color: string}`  | `{style: 'solid'}`  | 可选，设置时间轴线条样式   | [时间点自定义](demo#custom-dot) |
+|  lineStyle  | `{style: 'solid' \| 'dashed' \| 'dotted' \| 'none', color: string}`  | `{style: 'solid'}`  | 可选，设置时间轴线条样式   | [时间点自定义](demo#custom-dot) |
+|  dotColor  | `string` |  --  | 可选，自定义时间圈颜色   | [内容使用模板自定义](demo#content-with-template) |
 |  customDot  | `string\|HTMLElement\|TemplateRef` |  --  | 可选，自定义时间点   | [时间点自定义](demo#custom-dot) |
 |  extraElement  | `string\|HTMLElement\|TemplateRef` |  --  | 可选，自定义两个时间点间附加元素   | [内容使用模板自定义](demo#content-with-template) |
 
@@ -51,14 +53,16 @@ interface TimeAxisData {
   direction?:  'vertical' | 'horizontal' | '';
   position?: 'bottom' | 'left' | '';
   widthMode?: 'fitContent' | 'fitWidth';
+  horizontalAlign?: 'center'|'left';
   model: 'text' | 'html' | 'template' | '';
   list: Array<{
     time?: string;
     text?: string;
     lineStyle?: object;
+    dotColor?: string;
     customDot?: string | HTMLElement| TemplateRef<any>;
-    type?: 'primary' | 'success' | 'danger' | 'warning' | 'waiting' | 'info';
-    status?: 'runned' | 'running' | 'error';
+    type?: 'primary' | 'success' | 'danger' | 'warning';
+    status?: 'runned' | 'running' | '';
     position?: 'top' | 'bottom' | 'left' | 'right';
     extraElement?: string | HTMLElement| TemplateRef<any>;
     iconClass?: string;

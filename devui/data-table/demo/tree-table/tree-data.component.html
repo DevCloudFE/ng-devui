@@ -1,7 +1,7 @@
 <d-button class="demo-margin" (btnClick)="setUnCheckableRelation('downward')">选中父不再选中子</d-button>
-<d-button class="demo-margin" (btnClick)="setUnCheckableRelation('upward')">选中子不再选中父</d-button>
-<d-button class="demo-margin" (btnClick)="toggleIcon()">使用自定义展开/收起图标</d-button>
-<d-button class="demo-margin" (btnClick)="expandAll()">展开全部表格</d-button>
+<d-button bsStyle="common" class="demo-margin" (btnClick)="setUnCheckableRelation('upward')">选中子不再选中父</d-button>
+<d-button bsStyle="common" class="demo-margin" (btnClick)="toggleIcon()">使用自定义展开/收起图标</d-button>
+<d-button bsStyle="common" class="demo-margin" (btnClick)="expandAll()">展开全部表格</d-button>
 <d-data-table
   [dataSource]="basicDataSource"
   [tableWidthConfig]="tableWidthConfig"

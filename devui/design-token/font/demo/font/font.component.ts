@@ -21,11 +21,13 @@ export class FontComponent implements OnInit, OnDestroy {
   constructor(private translate: TranslateService) {}
 
   ngOnInit() {
-    this.themeService = window['devuiThemeService'];
-    if (this.themeService.eventBus) {
-      this.themeService.eventBus.add('themeChanged', this.changeValueInTable);
+    if (typeof window !== undefined) {
+      this.themeService = window['devuiThemeService'];
+      if (this.themeService.eventBus) {
+        this.themeService.eventBus.add('themeChanged', this.changeValueInTable);
+      }
+      this.setI18n();
     }
-    this.setI18n();
   }
 
   changeValueInTable = () => {

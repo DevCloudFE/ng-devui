@@ -122,7 +122,7 @@ export class AnchorDirective implements AfterViewInit, OnDestroy {
     if (this.scrollListenTarget) {
       return;
     }
-    if (this.boxElement) {
+    if (this.boxElement && typeof window !== 'undefined') {
       this.scrollListenTarget = this.boxElement.scrollTarget || window; // window有scroll事件，document.documentElement没有scroll事件
     }
     this.scrollListenTarget.addEventListener('scroll', this.throttle, { passive: true });

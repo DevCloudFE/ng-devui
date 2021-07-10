@@ -8,37 +8,39 @@ export class TimeAxisTemplateContentComponent implements AfterViewInit {
   timeAxisTemplate = {
     direction: 'horizontal',
     model: 'template',
+    horizontalAlign: 'left',
     list: [
       {
         text: 'hello',
-        type: 'success',
+        dotColor: 'var(--devui-success)',
         lineStyle: {style: 'dashed'},
         extraElement: {},
-        data: { title: '第四季度交付版本1.0', date: '2019/11/01', status: '已发布', color: '#50d4ab'}
+        data: { title: '第四季度交付版本1.0', date: '2019/11/01', status: '已发布', color: 'var(--devui-success)', position: 'bottom'}
       },
       {
         text: 'world',
-        type: 'danger',
+        dotColor: 'var(--devui-danger)',
         lineStyle: {style: 'dashed'},
-        data: { title: '第一季度交付版本2.0', date: '2020/03/01', status: '未开始', color: '#f66f6a', backgroundColor: 'rgba(255, 230, 230, 0.2)'}
+        data: { title: '第一季度交付版本2.0', date: '2020/03/01', status: '未开始', color: 'var(--devui-danger)',
+                  backgroundColor: 'rgba(255, 230, 230, 0.2)', position: 'top'}
       },
       {
         text: 'nihao',
-        type: 'warning',
+        dotColor: 'var(--devui-warning)',
         lineStyle: {style: 'dashed'},
-        data: { title: '第二季度交付版本1.0', date: '2020/05/01', status: '进行中', color: '#fac20a'}
+        data: { title: '第二季度交付版本1.0', date: '2020/05/01', status: '进行中', color: 'var(--devui-warning)', position: 'bottom'}
       },
       {
         text: 'DevUI',
-        type: 'danger',
+        dotColor: 'var(--devui-danger)',
         lineStyle: {style: 'dashed'},
-        data: { title: '第三季度交付版本1.0', date: '2020/09/01', status: '未开始', color: '#f66f6a'}
+        data: { title: '第三季度交付版本1.0', date: '2020/09/01', status: '未开始', color: 'var(--devui-danger)', position: 'top'}
       },
       {
         text: 'Awesome',
-        type: 'success',
+        dotColor: 'var(--devui-success)',
         lineStyle: {style: 'dashed'},
-        data: { title: '第三季度交付版本1.0', date: '2020/09/01', status: '已发布', color: '#50d4ab'}
+        data: { title: '第三季度交付版本1.0', date: '2020/09/01', status: '已发布', color: 'var(--devui-success)', position: 'bottom'}
       },
     ]
   };

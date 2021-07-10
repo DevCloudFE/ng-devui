@@ -14,11 +14,10 @@ import {
   TemplateRef
 } from '@angular/core';
 import { PositionService } from 'ng-devui/position';
-import { PositionType } from 'ng-devui/tooltip';
 import { directionFadeInOut } from 'ng-devui/utils';
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import { PopoverType } from './popover.types';
+import { PopoverType, PositionType } from './popover.types';
 
 interface PopoverStyle {
   backgroundColor?: string;
@@ -32,32 +31,15 @@ interface PopoverStyle {
 })
 export class PopoverComponent implements OnInit, AfterViewInit, OnDestroy, OnChanges {
   @Input() triggerElementRef: ElementRef;
-  currentPosition = 'top';
+  currentPosition: PositionType = 'top';
   connectionBias: string;
-  _position: PositionType | PositionType[] = 'top';
+  _position: PositionType | PositionType[] = ['top', 'left', 'bottom', 'right'];
   @Input() get position() {
     return this._position;
   }
   set position(pos) {
     this._position = pos;
-    let placementPrimary: string;
-    let placementSecondary: string;
-    if (Array.isArray(pos)) {
-      placementPrimary = pos[0].split('-')[0] || 'top';
-      placementSecondary = pos[1].split('-')[1] || 'center';
-    } else {
-      placementPrimary = pos?.split('-')[0] || 'top';
-      placementSecondary = pos?.split('-')[1] || 'center';
-    }
-    this.currentPosition = placementPrimary;
-    this.connectionBias = `bias-${placementSecondary}`;
-    if (placementSecondary === 'center') {
-      if (placementPrimary === 'left' || placementPrimary === 'right') {
-        this.connectionBias = 'bias-vertical-center';
-      } else {
-        this.connectionBias = 'bias-horizontal-center';
-      }
-    }
+    this.currentPosition = Array.isArray(pos) ? pos[0] : pos;
   }
   @Input() content: string | HTMLElement | TemplateRef<any>;
   @Input() showAnimation = true;
@@ -142,9 +124,7 @@ export class PopoverComponent implements OnInit, AfterViewInit, OnDestroy, OnCha
     }
   }
 
-  show() {
-    this.animateState = Array.isArray(this.position) ? this.position[0] : this.position;
-  }
+  show() {}
 
   hide() {
     this.animateState = 'void';
@@ -167,14 +147,32 @@ export class PopoverComponent implements OnInit, AfterViewInit, OnDestroy, OnCha
   }
 
   updatePosition() {
+    this.renderer.setStyle(this.elementRef.nativeElement, 'visibility', 'hidden');
+    this.renderer.setStyle(this.elementRef.nativeElement, 'transform', 'translate(0, -99999px)');
     const rect = this.positionService.positionElements(
       this.triggerElementRef.nativeElement,
       this.elementRef.nativeElement,
       this.position,
       this.appendToBody
     );
-    this.renderer.setStyle(this.elementRef.nativeElement, 'left', `${rect.left}px`);
-    this.renderer.setStyle(this.elementRef.nativeElement, 'top', `${rect.top}px`);
+    setTimeout(() => {
+      // 预防脏检查
+      this.currentPosition = rect.placementPrimary;
+      this.animateState = this.currentPosition;
+      this.connectionBias = `bias-${rect.placementSecondary}`;
+      if (rect.placementSecondary === 'center') {
+        if (rect.placementPrimary === 'left' || rect.placementPrimary === 'right') {
+          this.connectionBias = 'bias-vertical-center';
+        } else {
+          this.connectionBias = 'bias-horizontal-center';
+        }
+      }
+      this.renderer.setStyle(this.elementRef.nativeElement, 'left', `${rect.left}px`);
+      this.renderer.setStyle(this.elementRef.nativeElement, 'top', `${rect.top}px`);
+      // 移除样式
+      this.renderer.removeStyle(this.elementRef.nativeElement, 'visibility');
+      this.renderer.removeStyle(this.elementRef.nativeElement, 'transform');
+    });
   }
 
   public updatePositionAndDetectChange() {

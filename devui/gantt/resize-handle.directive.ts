@@ -1,4 +1,5 @@
-import { Directive, ElementRef, EventEmitter, HostListener, Input, NgZone, Output, Renderer2 } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Directive, ElementRef, EventEmitter, HostListener, Inject, Input, NgZone, Output, Renderer2 } from '@angular/core';
 import { fromEvent, Subscription } from 'rxjs';
 
 @Directive({
@@ -27,8 +28,11 @@ export class ResizeHandleDirective {
   resizeHandleLeave: any;
   resizeHandleClick: any;
   preventRemoveHandle = false;
-  constructor(element: ElementRef, private renderer2: Renderer2, private zone: NgZone) {
+  document: Document;
+
+  constructor(element: ElementRef, private renderer2: Renderer2, private zone: NgZone, @Inject(DOCUMENT) private doc: any) {
     this.element = element.nativeElement;
+    this.document = this.doc;
   }
 
   @HostListener('mouseenter', ['$event'])
@@ -37,8 +41,8 @@ export class ResizeHandleDirective {
       this.resizeHandle = this.renderer2.createElement('div');
       this.renderer2.appendChild(this.containerElement, this.resizeHandle);
       this.renderer2.addClass(this.resizeHandle, 'resize-handle');
-      const left = this.element.getBoundingClientRect().left - this.containerElement.getBoundingClientRect().left;
-      this.renderer2.setStyle(this.resizeHandle, 'left', left + this.element.clientWidth + 'px');
+      const left = this.element.getBoundingClientRect().right - this.containerElement.getBoundingClientRect().left;
+      this.renderer2.setStyle(this.resizeHandle, 'left', left + 'px');
       this.resizeHandleEnter = this.renderer2.listen(this.resizeHandle, 'mouseenter', this.onHandleMouseEnter.bind(this));
       this.resizeHandleLeave = this.renderer2.listen(this.resizeHandle, 'mouseleave', this.onHandleMouseLeave.bind(this));
       this.resizeHandleClick = this.renderer2.listen(this.resizeHandle, 'mousedown', this.onMousedown.bind(this));
@@ -104,7 +108,7 @@ export class ResizeHandleDirective {
     this.mouseUpSubscription = mouseup.subscribe((ev: MouseEvent) => this.onMouseup(ev));
 
     this.zone.runOutsideAngular(() => {
-      window.document.addEventListener('mousemove', this.bindMousemove);
+      this.document.addEventListener('mousemove', this.bindMousemove);
     });
   }
 
@@ -125,7 +129,7 @@ export class ResizeHandleDirective {
       this._destroySubscription();
     }
 
-    window.document.removeEventListener('mousemove', this.bindMousemove);
+    this.document.removeEventListener('mousemove', this.bindMousemove);
   }
 
   bindMousemove = (e) => {

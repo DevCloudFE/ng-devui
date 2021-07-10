@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Inject, Injectable } from '@angular/core';
 import { DropDownDirective } from './dropdown.directive';
 
 @Injectable()
@@ -6,12 +7,16 @@ export class DropDownService {
   private openScope: DropDownDirective;
 
   private closeDropdownBind: EventListener = this.closeDropdown.bind(this);
+  document: Document;
+  constructor(@Inject(DOCUMENT) private doc: any) {
+    this.document = this.doc;
+  }
 
   public open(dropdownScope: DropDownDirective) {
     if (!this.openScope) {
       // 延时绑定document事件，防止事件冒泡导致立即触发
       setTimeout(() => {
-        window.document.addEventListener('click', this.closeDropdownBind);
+        this.document.addEventListener('click', this.closeDropdownBind);
       });
     }
     this.openScope = dropdownScope;
@@ -22,7 +27,7 @@ export class DropDownService {
       return;
     }
     this.openScope = null;
-    window.document.removeEventListener('click', this.closeDropdownBind);
+    this.document.removeEventListener('click', this.closeDropdownBind);
   }
 
   private closeDropdown(event: MouseEvent) {

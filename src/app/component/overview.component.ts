@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { ComponentDataService } from './component.data.service';
 import { componentMap } from './component.map';
 import { filterData } from './resolve-routes-config.service';
+import { suggestScopeList } from './scope-list';
 
 @Component({
   selector: 'd-components-overview',
@@ -27,46 +28,40 @@ export class ComponentsOverviewComponent implements OnInit, OnDestroy {
   // 使用14个是因为将页面缩放至最小25%时,一行最多元素为15个,14个刚好可以将只有一个的元素顶到左边界处
   flexPlaceHolder = 14;
   flexPlaceHolders: Array<any>;
-
-  suggestScopeList: Array<string> = [
-    'categorySearch',
-    'datePickerPro',
-    'gantt',
-    'quadrantDiagram',
-    'navSprite',
-    'dataTable'
-  ];
-  newScopeList: Array<string> | string = [
-    'categorySearch',
-    'dataTable',
-    'drawer',
-    'timeAxis',
-    'search',
-    'upload',
-    'quadrantDiagram',
-    'tree',
-    'datePicker'
+  isOpensource = false;
+  nowFilter: string;
+  tagList: any = [
+    { title: '', name: 'newChangeCmps', checked: false },
+    { title: '', name: 'recentlySuggestCmps', checked: false }
   ];
 
   constructor(private translate: TranslateService, private router: Router, private comDataService: ComponentDataService) {
     this.comDataService.getComData().subscribe(value => this.componentsData = value);
     this.componentsDataDisplay = cloneDeep(this.componentsData);
-    this.overviewText = this.translate.instant('public').overview;
+    this.setI18n();
+
     this.translate.onLangChange.subscribe((event: TranslationChangeEvent) => {
       this.componentsDataDisplay = cloneDeep(this.componentsData);
-      const values = this.translate.instant('public');
-      this.overviewText = values.overview;
+      this.setI18n();
     });
   }
 
   ngOnInit() {
+    if (window.location.host === 'devui.design') {
+      this.isOpensource = true;
+    }
+
     this.calNumberOfComponents();
     this.setPrefix();
-    this.initScopeList();
     this.setTheme();
-    this.setComponentsSuggest();
+    this.setComponentsSuggest(suggestScopeList);
 
     this.flexPlaceHolders = new Array(this.flexPlaceHolder).fill(0);
+  }
+
+  setI18n() {
+    this.overviewText = this.translate.instant('public').overview;
+    this.tagList.map(tag => {tag.title = this.overviewText[tag.name]; });
   }
 
   calNumberOfComponents() {
@@ -80,20 +75,8 @@ export class ComponentsOverviewComponent implements OnInit, OnDestroy {
     this.imgPrefix = './' + this.srcPrefix + '/overview/';
   }
 
-  initScopeList() {
-    let scopeList;
-    if (typeof this.newScopeList === 'string') {
-      scopeList = this.newScopeList.toLocaleLowerCase().match(/\* \*\*.+\:\*\*/g);
-    } else if (Array.isArray(this.newScopeList)) {
-      scopeList = this.newScopeList.map(scope => scope.toLocaleLowerCase());
-    } else {
-      scopeList = [];
-    }
-    this.newScopeList = Array.from(new Set(scopeList.map(scope => scope.replace(/(\W|_|[0-9])*/g, ''))));
-  }
-
   setTheme() {
-    if (window['devuiThemeService']) {
+    if (typeof window !== 'undefined' && window['devuiThemeService']) {
       this.themeService = window['devuiThemeService'];
       if (window['devuiCurrentTheme']) {
         this.themeChange();
@@ -104,11 +87,13 @@ export class ComponentsOverviewComponent implements OnInit, OnDestroy {
     }
   }
 
-  setComponentsSuggest() {
+  setComponentsSuggest(type) {
     this.componentsSuggest = [];
     this.componentsData.map(cmpList => {
       cmpList.children.map(cmp => {
-        if (this.suggestScopeList.find(scope => scope.toLocaleLowerCase() === cmp.lowerName)) {
+        if (Array.isArray(type) && type.find(scope => scope.toLocaleLowerCase() === cmp.lowerName)) {
+          this.componentsSuggest.push(cloneDeep(cmp));
+        } else if (type === 'newChange' && cmp.newChange) {
           this.componentsSuggest.push(cloneDeep(cmp));
         }
       });
@@ -116,7 +101,7 @@ export class ComponentsOverviewComponent implements OnInit, OnDestroy {
   }
 
   themeChange = () => {
-    if (window['devuiCurrentTheme'] === 'devui-dark-theme') {
+    if (typeof window !== 'undefined' && window['devuiCurrentTheme'] === 'devui-dark-theme') {
       this.darkMode = '-dark';
     } else {
       this.darkMode = '';
@@ -124,6 +109,9 @@ export class ComponentsOverviewComponent implements OnInit, OnDestroy {
   }
 
   searchComponent(event) {
+    this.nowFilter = undefined;
+    this.tagList.map(tag => tag.checked = false);
+    this.setComponentsSuggest(suggestScopeList);
     this.componentsDataDisplay = filterData(event, this.componentsData);
     this.componentsLooking = [];
     if (!this.componentsDataDisplay || !this.componentsDataDisplay.length) {
@@ -144,8 +132,34 @@ export class ComponentsOverviewComponent implements OnInit, OnDestroy {
     }
   }
 
+  filter(type) {
+    const tagIndex = this.tagList.findIndex(tag => tag.name === type);
+    this.tagList.map(tag => tag.checked = false);
+    if (this.nowFilter !== type) {
+      this.nowFilter = type;
+      this.tagList[tagIndex].checked = true;
+      this.componentsDataDisplay = [];
+      if (type === 'newChangeCmps') {
+        this.setComponentsSuggest('newChange');
+      } else if (type === 'recentlySuggestCmps') {
+        this.setComponentsSuggest(suggestScopeList);
+      }
+    } else {
+      this.nowFilter = undefined;
+      this.componentsDataDisplay = cloneDeep(this.componentsData);
+      this.setComponentsSuggest(suggestScopeList);
+    }
+  }
+
   jumpToComponent(link) {
     this.router.navigate(['components', 'zh-cn', link]);
+  }
+
+  jumpToChangeLog(e) {
+    if (!this.isOpensource) {
+      e.stopPropagation();
+      window.open('http://3ms.huawei.com/hi/group/3945390/wiki_6319622.html', '_blank'); // TODO: 开源版本要改成changelog的链接
+    }
   }
 
   imgError(event) {

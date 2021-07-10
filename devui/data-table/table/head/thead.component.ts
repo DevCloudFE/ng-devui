@@ -1,4 +1,6 @@
-import { AfterContentInit, Component, ContentChildren, EventEmitter, Input, OnDestroy, OnInit, QueryList } from '@angular/core';
+import {
+  AfterContentInit, Component, ContentChildren, EventEmitter, Input, OnChanges, OnDestroy, OnInit, QueryList, SimpleChanges
+} from '@angular/core';
 import { Subscription } from 'rxjs';
 import { TableCheckOptions, TableCheckStatusArg } from '../../data-table.model';
 import { TableTrComponent } from '../row/tr.component';
@@ -8,7 +10,7 @@ import { TableThComponent } from './th/th.component';
   selector: '[dTableHead]',
   templateUrl: './thead.component.html'
 })
-export class TableTheadComponent implements OnInit, AfterContentInit, OnDestroy {
+export class TableTheadComponent implements OnInit, AfterContentInit, OnDestroy, OnChanges {
   @Input() checkable: boolean;
   @Input() checkDisabled: boolean;
   @Input() checkOptions: TableCheckOptions[];
@@ -45,6 +47,21 @@ export class TableTheadComponent implements OnInit, AfterContentInit, OnDestroy 
       this.thList.changes.subscribe((list) => {
         this.setNestedThToggle();
       });
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (
+      (changes['checkable'] && !changes['checkable'].isFirstChange()) ||
+      (changes['checkDisabled'] && !changes['checkDisabled'].isFirstChange()) ||
+      (changes['checkOptions'] && !changes['checkOptions'].isFirstChange())
+    ) {
+      if (this.headerFirstRow) {
+        this.headerFirstRow.headerRowspan = this.headerRowList.length;
+        this.headerFirstRow.headerCheckable = this.checkable;
+        this.headerFirstRow.headerCheckDisabled = this.checkDisabled;
+        this.headerFirstRow.headerCheckOptions = this.checkOptions;
+      }
     }
   }
 

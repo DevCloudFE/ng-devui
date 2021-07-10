@@ -35,6 +35,7 @@ svg.svg-icon-arrow > g > polygon {
 :host ::ng-deep .cell-container-inner {
   position: absolute;
   max-width: 100%;
+  width: 100%;
 
   &.modify-holder {
     padding-right: 20px;

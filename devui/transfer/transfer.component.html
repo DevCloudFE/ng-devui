@@ -62,6 +62,11 @@
                 </svg>
               </span>
               <d-checkbox
+                dPopover
+                [controlled]="showOptionTitle"
+                [trigger]="'hover'"
+                [content]="item['name']"
+                [popMaxWidth]="'400'"
                 [label]="item['name']"
                 [isShowTitle]="false"
                 [(ngModel)]="item['checked']"
@@ -249,6 +254,11 @@
                 </svg>
               </span>
               <d-checkbox
+                dPopover
+                [controlled]="showOptionTitle"
+                [trigger]="'hover'"
+                [content]="item['name']"
+                [popMaxWidth]="'400'"
                 [label]="item['name']"
                 [isShowTitle]="false"
                 [(ngModel)]="item['checked']"

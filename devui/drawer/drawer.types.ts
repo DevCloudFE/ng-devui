@@ -1,13 +1,14 @@
 import {
   ComponentFactoryResolver,
   Injector,
+  TemplateRef,
   Type
 } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DrawerComponent } from './drawer.component';
 
 export interface IDrawerOptions {
-  drawerContentComponent: Type<any>;
+  drawerContentComponent?: Type<any>;
   componentFactoryResolver?: ComponentFactoryResolver;
   injector?: Injector;
   id?: string;
@@ -26,6 +27,7 @@ export interface IDrawerOptions {
   beforeHidden?: () => boolean | Promise<boolean> | Observable<boolean>;
   bodyScrollable?: boolean;
   showAnimation?: boolean;
+  contentTemplate?: TemplateRef<any>;
 }
 
 export interface IDrawerOpenResult {

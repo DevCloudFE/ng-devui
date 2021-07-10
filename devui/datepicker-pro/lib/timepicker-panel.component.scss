@@ -1,0 +1,95 @@
+@import '../../style/theme/color';
+@import '../../style/theme/shadow';
+@import '../../style/theme/corner';
+
+:host {
+  display: inline-block;
+  vertical-align: top;
+  font-size: 12px;
+}
+
+.devui-timepicker-panel {
+  width: 114px;
+  height: 306px;
+  text-align: center;
+  border-left: 1px solid $devui-dividing-line;
+
+  .devui-time-header {
+    display: flex;
+    height: 30px;
+    padding: 0 6px;
+
+    &-item {
+      flex: 1;
+      line-height: 30px;
+      margin: 0 6px;
+    }
+  }
+
+  .devui-time-picker {
+    display: flex;
+    height: 276px;
+    width: 114px;
+    padding: 0 6px;
+    overflow: hidden;
+    border-radius: $devui-border-radius $devui-border-radius 0 0;
+
+    .devui-time-list {
+      flex: 1;
+      overflow-x: hidden;
+      overflow-y: scroll;
+      overflow-y: overlay;
+      scroll-behavior: auto;
+      padding: 0 6px;
+      scrollbar-width: none;
+
+      &::-webkit-scrollbar {
+        width: 0 !important;
+      }
+
+      &:hover {
+        scrollbar-width: thin;
+
+        &::-webkit-scrollbar {
+          width: 4px !important;
+        }
+      }
+
+      .devui-time-item {
+        width: 100%;
+        height: 22px;
+        line-height: 22px;
+        text-align: center;
+        cursor: pointer;
+
+        &:not(:last-child) {
+          margin-bottom: 8px;
+        }
+
+        &:last-child {
+          margin-bottom: 260px;
+        }
+      }
+    }
+
+    &:not(.devui-disabled) .devui-time-list .devui-time-item {
+      &:hover {
+        color: $devui-list-item-hover-text;
+        background-color: $devui-list-item-hover-bg;
+        border-radius: $devui-border-radius-feedback;
+      }
+
+      &.active {
+        color: $devui-list-item-active-text;
+        background-color: $devui-list-item-active-bg;
+        border-radius: $devui-border-radius-feedback;
+      }
+
+      &.disabled {
+        color: $devui-disabled-text;
+        background-color: $devui-disabled-bg;
+        border-radius: $devui-border-radius-feedback;
+      }
+    }
+  }
+}

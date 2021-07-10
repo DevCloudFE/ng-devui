@@ -35,25 +35,25 @@ export class ConfigComponent implements OnInit {
 
       title: 'Perfect',
       backgroundColor: 'rgba(232,240,253,0.4)',
-      color: 'rgba(81,112,255,0.3)'
+      color: 'rgba(81,112,255,0.5)'
     },
     {
 
       title: 'Excellent',
       backgroundColor: 'rgba(232,240,253,0.2)',
-      color: 'rgba(81,112,255,0.3)'
+      color: 'rgba(81,112,255,0.5)'
     },
     {
 
       title: 'Keep it up',
       backgroundColor: 'rgba(243,246,248,0.4)',
-      color: 'rgba(149,158,178,0.3)'
+      color: 'rgba(149,158,178,0.5)'
     },
     {
 
       title: 'Full of potential',
       backgroundColor: 'rgba(232,240,253,0.2)',
-      color: 'rgba(81,112,255,0.3)'
+      color: 'rgba(81,112,255,0.5)'
     },
   ];
   labelData = [{ title: 'Rose', x: 80, y: 20, content: '<p>Rose的能力</p><p>能力值：20</p><p>潜力值：80</p>', id: 'Rose' }];

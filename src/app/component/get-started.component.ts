@@ -1,7 +1,9 @@
+import { DOCUMENT } from '@angular/common';
 import {
   AfterViewInit,
   Component,
   ElementRef,
+  Inject,
   Input,
   OnInit, QueryList,
   ViewChildren
@@ -38,6 +40,7 @@ export class GetStartedComponent implements OnInit, AfterViewInit {
       this.refreshView();
     });
   }
+  document: Document;
 
   get readMe () {
     return this._readMe;
@@ -45,7 +48,8 @@ export class GetStartedComponent implements OnInit, AfterViewInit {
 
   @ViewChildren('documentation') documentation: QueryList<ElementRef>;
 
-  constructor(private route: ActivatedRoute, private translate: TranslateService) {
+  constructor(private route: ActivatedRoute, private translate: TranslateService, @Inject(DOCUMENT) private doc: any) {
+    this.document = this.doc;
   }
   ngOnInit(): void {
     const lang = localStorage.getItem('lang');
@@ -61,7 +65,7 @@ export class GetStartedComponent implements OnInit, AfterViewInit {
   }
 
   refreshView() {
-    Array.from<HTMLElement>(document.querySelectorAll('pre code')).forEach((block) => {
+    Array.from<HTMLElement>(this.document.querySelectorAll('pre code')).forEach((block) => {
       hljs.highlightBlock(block);
     });
   }

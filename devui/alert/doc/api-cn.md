@@ -34,5 +34,5 @@ import { AlertModule } from 'ng-devui/alert';
 默认值为'info'， 指定alert警告提示的类型
 
 ```ts
-export type AlertType = 'success' | 'danger' | 'warning' | 'info';
+export type AlertType = 'success' | 'danger' | 'warning' | 'info' | 'simple';
 ```

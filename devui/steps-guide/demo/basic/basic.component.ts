@@ -16,11 +16,11 @@ export class BasicComponent implements OnInit {
   ngOnInit() {
     this.stepService.currentIndex.subscribe((index) => (this.currentStep = index));
     /* 由于整个demo是在一个页面内显示多个操作指引序列，因此需要在初始化时重置显示状态 */
-    localStorage.setItem('devui_guide_step-position-demo', '0');
+    localStorage.setItem('devui_guide_step-position-demo', '0'); /* 设置第三个序列为不显示状态 */
     localStorage.setItem('devui_guide_step-custom-demo', '0'); /* 设置第二个序列为不显示状态 */
-    localStorage.removeItem('devui_guide_step-basic-demo'); /* 设置第一个序列为显示状态 */
     this.stepService.setSteps(this.steps); /* 将步骤数据设置为第一个序列的内容 */
     this.stepService.setCurrentIndex(0); /* 设置当前序列显示步骤为第一个步骤 */
+    this.stepService.showGuide(true); /* 显示当前序列 */
   }
 
   reset(index = 0) {
@@ -34,6 +34,14 @@ export class BasicComponent implements OnInit {
 
   close() {
     this.stepService.showGuide(false);
+  }
+
+  beforeChange = (currentIndex, targetIndex) => {
+    /* 当前步骤为第三步，切换至第二步时，阻止步骤显示，显示第一步 */
+    if (currentIndex === 2 && targetIndex === 1) {
+      this.stepService.setCurrentIndex(0);
+      return false;
+    }
   }
 
   operateChange(response) {

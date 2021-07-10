@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, ElementRef, HostListener, Input, OnDestroy, OnInit } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { ChangeDetectionStrategy, Component, ElementRef, HostListener, Inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { Subscription } from 'rxjs';
 import { TransformableElement } from './transformable-element';
@@ -37,6 +38,7 @@ export class DImagePreviewComponent implements OnInit, OnDestroy {
 
   i18nText: I18nInterface['imagePreview'];
   i18nSubscription: Subscription;
+  document: Document;
 
   get targetImageSrc(): string {
     // 防止targetImageIndex出现-1的情况
@@ -46,8 +48,11 @@ export class DImagePreviewComponent implements OnInit, OnDestroy {
 
   constructor(
     private elementRef: ElementRef,
-    private i18n: I18nService
-  ) { }
+    private i18n: I18nService,
+    @Inject(DOCUMENT) private doc: any
+  ) {
+    this.document = this.doc;
+  }
 
   @HostListener('click', ['$event'])
   click($event) {
@@ -124,11 +129,11 @@ export class DImagePreviewComponent implements OnInit, OnDestroy {
   }
 
   private addFullScreenStyle() {
-    document.querySelector('body').classList.add('devui-fullscreen');
+    this.document.querySelector('body').classList.add('devui-fullscreen');
   }
 
   private removeFullScreenStyle() {
-    document.querySelector('body').classList.remove('devui-fullscreen');
+    this.document.querySelector('body').classList.remove('devui-fullscreen');
   }
 
   private getImgElement(): HTMLElement {

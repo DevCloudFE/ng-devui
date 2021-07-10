@@ -1,0 +1,41 @@
+<div class="devui-datepicker-pro-panel">
+  <ng-container *ngIf="mode === 'date' || !mode">
+    <d-calendar-panel [isRangeType]="isRangeType"> </d-calendar-panel>
+    <d-timepicker-panel *ngIf="showTime"></d-timepicker-panel>
+
+    <div class="devui-custom-panel-wrapper" *ngIf="customTemplate">
+      <ng-template [ngTemplateOutlet]="customTemplate"> </ng-template>
+    </div>
+
+    <d-datepicker-footer-panel *ngIf="showTime || footerTemplate" [footerTemplate]="footerTemplate"></d-datepicker-footer-panel>
+  </ng-container>
+
+  <ng-container *ngIf="mode === 'month'">
+    <d-month-panel [isRangeType]="isRangeType"></d-month-panel>
+    <div class="devui-custom-panel-wrapper" *ngIf="customTemplate">
+      <ng-template [ngTemplateOutlet]="customTemplate"> </ng-template>
+    </div>
+
+    <d-datepicker-footer-panel *ngIf="footerTemplate" [footerTemplate]="footerTemplate"></d-datepicker-footer-panel>
+  </ng-container>
+
+  <ng-container *ngIf="mode === 'year'">
+    <d-year-panel [isRangeType]="isRangeType"></d-year-panel>
+
+    <div class="devui-custom-panel-wrapper" *ngIf="customTemplate">
+      <ng-template [ngTemplateOutlet]="customTemplate"> </ng-template>
+    </div>
+
+    <d-datepicker-footer-panel *ngIf="footerTemplate" [footerTemplate]="footerTemplate"></d-datepicker-footer-panel>
+  </ng-container>
+
+  <ng-container *ngIf="mode === 'week' && isRangeType === true">
+    <d-calendar-panel [isRangeType]="true" [isWeekSelect]="true"> </d-calendar-panel>
+
+    <div class="devui-custom-panel-wrapper" *ngIf="customTemplate">
+      <ng-template [ngTemplateOutlet]="customTemplate"> </ng-template>
+    </div>
+
+    <d-datepicker-footer-panel *ngIf="footerTemplate" [footerTemplate]="footerTemplate"></d-datepicker-footer-panel>
+  </ng-container>
+</div>

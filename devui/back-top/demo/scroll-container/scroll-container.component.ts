@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, Inject, OnInit } from '@angular/core';
 
 @Component({
   selector: 'd-back-top-scroll-container',
@@ -10,13 +11,13 @@ export class ScrollContainerComponent implements OnInit {
   scrollElement;
   list = [];
   sentence = 'You know some birds are not meant to be caged, their feathers are just too bright.';
-  constructor() {}
+  constructor(@Inject(DOCUMENT) private doc: any) {}
 
   ngOnInit() {
     for (let i = 0; i < 20; i++) {
       this.list.push(this.sentence);
     }
-    this.scrollElement = document.querySelector('.devui-scroll-content');
+    this.scrollElement = this.doc.querySelector('.devui-scroll-content');
   }
 
   backTop(event) {

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, Inject, OnInit } from '@angular/core';
 
 @Component({
   selector: 'd-scroll-target',
@@ -11,10 +12,10 @@ export class ScrollTargetComponent implements OnInit {
     bottom: 0
   };
   demoDocViewerMain;
-  constructor() { }
+  constructor(@Inject(DOCUMENT) private doc: any) { }
 
   ngOnInit() {
-    this.demoDocViewerMain = document.querySelector('.doc-viewer-container .main');
+    this.demoDocViewerMain = this.doc.querySelector('.doc-viewer-container .main');
   }
 
 }

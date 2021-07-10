@@ -10,6 +10,10 @@ import { DevuiCommonsService } from '../devui-commons.service';
 export class SidebarComponent implements OnInit {
   @Input() sideMenuList;
   @Input() linkType = 'routerLink';
+  @Input() text = {
+    new: 'New',
+    sunset: 'Sunset'
+  };
   _navData;
   componentsDataDisplay;
 

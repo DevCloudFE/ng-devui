@@ -1,0 +1,26 @@
+<d-cascader
+  [options]="options"
+  [placeholder]="'please select'"
+  [(ngModel)]="value1"
+  [width]="250"
+  (ngModelChange)="onChanges($event)"
+  [dropdownPanelClass]="'custom-class'"
+  [dropdownHeaderTemplate]="dropdownHeaderTemplate"
+>
+</d-cascader>
+
+<ng-template #dropdownHeaderTemplate let-index="index">
+  <div>
+    <d-tabs
+      *ngIf="index === 0"
+      [type]="'wrapped'"
+      [(activeTab)]="activeTab"
+      [showContent]="false"
+      (activeTabChange)="activeTabChange($event)"
+    >
+      <d-tab id="tab1" title="data1"> </d-tab>
+      <d-tab id="tab2" title="data2"> </d-tab>
+      <d-tab id="tab3" title="data3"> </d-tab>
+    </d-tabs>
+  </div>
+</ng-template>

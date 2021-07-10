@@ -18,11 +18,14 @@ In the page：
 | targetOption | `array` | [] | Optional. This parameter indicates the target data of the shuttle box. | [Basic Usage](demo#transfer-demo-base) |
 | titles | `array` | [] | Optional. Title of the shuttle box. | [Basic Usage](demo#transfer-demo-base) |
 | height | `string` | 320px | Optional. It indicates the height of the shuttle box. |
-| isSearch | `number` | false | Optional. Specifies whether to search. | [Search Shuttle Box](demo#transfer-demo-search) |
+| isSearch | `boolean` | false | Optional. Specifies whether to search. | [Search Shuttle Box](demo#transfer-demo-search) |
 | isSourceDroppable | `boolean` | false | Optional. Indicates whether the source can be dragged. |
 | isTargetDroppable | `boolean` | false | Optional. Indicates whether the object can be dragged. | [Sorting Shuttle Box](demo#transfer-demo-sort) |
 | disabled | `boolean` | false | Optional. The shuttle box cannot be used. | [Basic Usage](demo#transfer-demo-base) |
+|  showOptionTitle  | `boolean` | false | Optional. Indicates whether to display title when the cursor is hovered over data.    | [Search Shuttle Box](demo#transfer-demo-search) |
 | beforeTransfer | `(sourceOption, targetOption) => boolean \| Promise<boolean> \| Observable<boolean>` | - | Optional. Determines whether the transfer event can be triggered before the transfer event occurs. | [Basic Usage](demo#transfer-demo-base) |
+|customSourceCheckedLen|`number`|   0   |Optional. Determine whether the source can be shuttled when using a template.| [Custom Shuttle Box](demo#transfer-demo-custom) |
+|customTargetCheckedLen|`number`|   0   |Optional. Determine whether the target can be shuttled when using a template.| [Custom Shuttle Box](demo#transfer-demo-custom) |
 
 ## d-transfer event
 

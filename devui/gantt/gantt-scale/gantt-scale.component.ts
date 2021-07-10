@@ -1,15 +1,25 @@
-import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
+import {
+  Component, EventEmitter,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  Output,
+  SimpleChanges
+} from '@angular/core';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
-import { Subscription } from 'rxjs';
+import { fromEvent, Subscription } from 'rxjs';
 import { GanttBarStatus, GanttMilestone, GanttScaleDateInfo, GanttScaleUnit } from '../gantt.model';
 import { GanttService } from '../gantt.service';
 @Component({
   selector: 'd-gantt-scale',
   templateUrl: './gantt-scale.component.html',
-  styleUrls: ['./gantt-scale.component.scss']
+  styleUrls: ['./gantt-scale.component.scss'],
 })
 export class GanttScaleComponent implements OnInit, OnChanges, OnDestroy {
   scaleData: GanttScaleDateInfo[];
+  viewScaleRange = [0, 0];
+  viewSCaleData: GanttScaleDateInfo[] = [];
   ganttBarStatusHandler: Subscription;
   ganttSacleConfigHandler: Subscription;
   highlight: boolean;
@@ -19,6 +29,11 @@ export class GanttScaleComponent implements OnInit, OnChanges, OnDestroy {
 
   SCALE_START_LABLE_OFFSET = 7;
 
+  scaleWidth = {
+    day: 40,
+    week: 30,
+    month: 20,
+  };
   @Input() unit = GanttScaleUnit.day;
   @Input() height: number;
   @Input() startDate: Date;
@@ -26,7 +41,10 @@ export class GanttScaleComponent implements OnInit, OnChanges, OnDestroy {
   @Input() ganttBarContainerElement: HTMLElement;
   @Input() ganttScaleContainerOffsetLeft: number;
   @Input() milestoneList: GanttMilestone[];
+  @Input() scrollElement: HTMLElement;
   @Output() addMilestoneEvent = new EventEmitter<GanttScaleDateInfo>();
+
+  private scrollHandler: Subscription;
 
   i18nText: I18nInterface['gantt'];
   i18nLocale: I18nInterface['locale'];
@@ -56,24 +74,52 @@ export class GanttScaleComponent implements OnInit, OnChanges, OnDestroy {
       }
       if (config.startDate || config.endDate) {
         this.scaleData = this.generateScaleData(this.startDate, this.endDate);
+        this.getViewScaleData();
       }
       if (config.unit) {
         this.unit = config.unit;
+        this.getViewScaleData();
       }
     });
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    if (changes.hasOwnProperty('scrollElement')) {
+      this.registerScrollEvent();
+    }
+  }
+
+  registerScrollEvent () {
+    if (!this.scrollHandler && this.scrollElement) {
+      this.scrollHandler = fromEvent(this.scrollElement, 'scroll').subscribe(e => {
+        this.getViewScaleData();
+      });
+    }
+  }
+
+  getViewScaleData() {
+    if (this.scrollElement) {
+      const containerWidth = this.scrollElement.clientWidth;
+      const scrollLeft = this.scrollElement.scrollLeft;
+      const start = Math.floor(scrollLeft / this.scaleWidth[this.unit]);
+      const offset = Math.ceil(containerWidth / this.scaleWidth[this.unit]);
+      this.viewScaleRange = [start - 2, start + offset + 2];
+      this.viewSCaleData = this.scaleData.filter((i: GanttScaleDateInfo) => {
+        return i.index >= this.viewScaleRange[0] && i.index <= this.viewScaleRange[1];
+      });
+    }
   }
 
   private generateScaleData(startDate: Date, endDate: Date): GanttScaleDateInfo[] {
     if (startDate && endDate) {
       const scaleData = [];
       let handleDate = startDate;
+      let index = 0;
       while (!this.ganttService.isSomeDate(handleDate, endDate)) {
-        const dateInfo = this.generateDateInfo(handleDate);
+        const dateInfo = this.generateDateInfo(handleDate, index);
         scaleData.push(dateInfo);
         handleDate = this.getNextDay(new Date(handleDate));
+        index++;
       }
       return scaleData;
     }
@@ -84,7 +130,7 @@ export class GanttScaleComponent implements OnInit, OnChanges, OnDestroy {
     return new Date(nextDayDate);
   }
 
-  private generateDateInfo(date: Date): GanttScaleDateInfo {
+  private generateDateInfo(date: Date, index): GanttScaleDateInfo {
     const dateInfo = {
       dayOfMonthLabel: '',
       dayOfWeekLabel: '',
@@ -96,7 +142,8 @@ export class GanttScaleComponent implements OnInit, OnChanges, OnDestroy {
       today: false,
       milestone: '',
       highlightStart: false,
-      scaleStartVisable: true
+      scaleStartVisable: true,
+      index
     };
 
     const dayOfMonth = date.getDate();
@@ -166,8 +213,8 @@ export class GanttScaleComponent implements OnInit, OnChanges, OnDestroy {
 
       if (highlightData.length === 1) {
         const startData = highlightData[0];
-        this.highlightStartText = this.prefixZero(parseInt(startData.monthLabel, 10)) + '-' +
-        this.prefixZero(parseInt(startData.dayOfMonthLabel, 10));
+        this.highlightStartText =
+          this.prefixZero(parseInt(startData.monthLabel, 10)) + '-' + this.prefixZero(parseInt(startData.dayOfMonthLabel, 10));
         const highlightWidth = this.ganttService.getScaleUnitPixel();
         if (highlightWidth < 40) {
           this.highlightMinWidth = 40;
@@ -177,10 +224,10 @@ export class GanttScaleComponent implements OnInit, OnChanges, OnDestroy {
       } else {
         const startData = highlightData[0];
         const endData = highlightData[highlightData.length - 1];
-        this.highlightStartText = this.prefixZero(parseInt(startData.monthLabel, 10)) + '-' +
-        this.prefixZero(parseInt(startData.dayOfMonthLabel, 10));
-        this.highlightEndText = this.prefixZero(parseInt(endData.monthLabel, 10)) + '-' +
-        this.prefixZero(parseInt(endData.dayOfMonthLabel, 10));
+        this.highlightStartText =
+          this.prefixZero(parseInt(startData.monthLabel, 10)) + '-' + this.prefixZero(parseInt(startData.dayOfMonthLabel, 10));
+        this.highlightEndText =
+          this.prefixZero(parseInt(endData.monthLabel, 10)) + '-' + this.prefixZero(parseInt(endData.dayOfMonthLabel, 10));
         const highlightWidth = highlightData.length * this.ganttService.getScaleUnitPixel();
         if (highlightWidth < 80) {
           this.highlightMinWidth = 80;
@@ -207,6 +254,9 @@ export class GanttScaleComponent implements OnInit, OnChanges, OnDestroy {
     if (this.ganttSacleConfigHandler) {
       this.ganttSacleConfigHandler.unsubscribe();
       this.ganttSacleConfigHandler = null;
+    }
+    if (this.scrollHandler) {
+      this.scrollHandler.unsubscribe();
     }
   }
 }

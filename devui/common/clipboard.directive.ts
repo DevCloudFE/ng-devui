@@ -1,4 +1,5 @@
 import { Clipboard } from '@angular/cdk/clipboard';
+import { DOCUMENT } from '@angular/common';
 import {
   ComponentFactoryResolver,
   ComponentRef,
@@ -6,6 +7,7 @@ import {
   ElementRef,
   EventEmitter,
   HostListener,
+  Inject,
   Input,
   OnDestroy,
   OnInit,
@@ -32,13 +34,17 @@ export class ClipboardDirective implements OnInit , OnDestroy {
   popoverComponentRef: ComponentRef<PopoverComponent>;
   i18nCommonText: I18nInterface['common'];
   i18nSubscription: Subscription;
+  document: Document;
 
   constructor(
     private elm: ElementRef,
     private clipboard: Clipboard,
     private i18n: I18nService,
     private overlayContainerRef: OverlayContainerRef,
-    private componentFactoryResolver: ComponentFactoryResolver) {}
+    private componentFactoryResolver: ComponentFactoryResolver,
+    @Inject(DOCUMENT) private doc: any) {
+      this.document = this.doc;
+    }
 
   ngOnInit(): void {
     this.setI18nText();
@@ -54,7 +60,7 @@ export class ClipboardDirective implements OnInit , OnDestroy {
   @HostListener('click')
   onClickEvent() {
     let isSucceeded = false;
-    const isSupported = !!document.queryCommandSupported && !!document.queryCommandSupported('copy') && !!window;
+    const isSupported = !!this.document.queryCommandSupported && !!this.document.queryCommandSupported('copy') && !!window;
     if (isSupported && this.content) {
       isSucceeded = this.clipboard.copy(this.content);
       if (isSucceeded) {
@@ -82,7 +88,7 @@ export class ClipboardDirective implements OnInit , OnDestroy {
       appendToBody: true,
       zIndex: 1060
     });
-    document.addEventListener('click', this.onDocumentClick);
+    this.document.addEventListener('click', this.onDocumentClick);
     if (!this.sticky) {
       setTimeout(() => this.destroy(), 3000);
     }
@@ -93,7 +99,7 @@ export class ClipboardDirective implements OnInit , OnDestroy {
       this.popoverComponentRef.destroy();
       this.popoverComponentRef = null;
     }
-    document.removeEventListener('click', this.onDocumentClick);
+    this.document.removeEventListener('click', this.onDocumentClick);
   }
 
   onDocumentClick = (event) => {

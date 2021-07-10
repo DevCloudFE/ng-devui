@@ -1,19 +1,33 @@
+import { animate, AnimationBuilder, AnimationMetadata, AnimationPlayer, style } from '@angular/animations';
+import { DOCUMENT } from '@angular/common';
 import {
-  animate,
-  AnimationBuilder,
-  AnimationMetadata,
-  AnimationPlayer,
-  style
-} from '@angular/animations';
-import {
-  ChangeDetectorRef, ComponentFactoryResolver, ComponentRef, Directive, ElementRef, EventEmitter, forwardRef, HostListener, Injector,
-  Input, OnDestroy, OnInit, Output, Renderer2, TemplateRef, ViewContainerRef
+  ChangeDetectorRef,
+  ComponentFactoryResolver,
+  ComponentRef,
+  Directive,
+  ElementRef,
+  EventEmitter,
+  forwardRef,
+  HostListener,
+  Inject,
+  Injector,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+  Renderer2,
+  TemplateRef,
+  ViewContainerRef
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import {
-  addClassToOrigin, AnimationCurves, AnimationDuration,
-  DateConverter, DefaultDateConverter, removeClassFromOrigin
+  addClassToOrigin,
+  AnimationCurves,
+  AnimationDuration,
+  DateConverter,
+  DefaultDateConverter,
+  removeClassFromOrigin
 } from 'ng-devui/utils';
 import { DevConfigService, WithConfig } from 'ng-devui/utils/globalConfig';
 import { fromEvent, Observable, Subscription } from 'rxjs';
@@ -25,11 +39,13 @@ import { DatepickerComponent } from './datepicker.component';
 @Directive({
   selector: '[dDatepicker]:not([appendToBody])',
   exportAs: 'datepicker',
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => DatepickerDirective),
-    multi: true
-  }]
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => DatepickerDirective),
+      multi: true,
+    },
+  ],
 })
 export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAccessor {
   @Input() locale: string;
@@ -56,6 +72,7 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
   private userInputSubscription: Subscription;
   private i18nSubscription: Subscription;
   private i18nLocale: I18nInterface['locale'];
+  document: Document;
 
   private onChange = (_: any) => null;
   private onTouched = () => null;
@@ -65,11 +82,11 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
     if (val) {
       addClassToOrigin(this.elementRef);
       setTimeout(() => {
-        document.addEventListener('click', this.onDocumentClick);
+        this.document.addEventListener('click', this.onDocumentClick);
       });
     } else {
       removeClassFromOrigin(this.elementRef);
-      document.removeEventListener('click', this.onDocumentClick);
+      this.document.removeEventListener('click', this.onDocumentClick);
     }
   }
   get isOpen() {
@@ -130,17 +147,26 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
     return this._minDate;
   }
 
-  constructor(private elementRef: ElementRef, private viewContainerRef: ViewContainerRef,
-              private componentFactoryResolver: ComponentFactoryResolver, private renderer2: Renderer2,
-              private injector: Injector, private datePickerConfig: DatePickerConfig, private i18n: I18nService,
-              private builder: AnimationBuilder, private cdr: ChangeDetectorRef,
-              private devConfigService: DevConfigService) {
+  constructor(
+    private elementRef: ElementRef,
+    private viewContainerRef: ViewContainerRef,
+    private componentFactoryResolver: ComponentFactoryResolver,
+    private renderer2: Renderer2,
+    private injector: Injector,
+    private datePickerConfig: DatePickerConfig,
+    private i18n: I18nService,
+    private builder: AnimationBuilder,
+    private cdr: ChangeDetectorRef,
+    private devConfigService: DevConfigService,
+    @Inject(DOCUMENT) private doc: any
+  ) {
     this._dateConfig = datePickerConfig['dateConfig'];
     this.dateConverter = datePickerConfig['dateConfig'].dateConverter || new DefaultDateConverter();
     this.selectedDate = null;
     const factory = this.componentFactoryResolver.resolveComponentFactory(DatepickerComponent);
     this.cmpRef = this.viewContainerRef.createComponent(factory, this.viewContainerRef.length, this.injector);
     this.setI18nText();
+    this.document = this.doc;
   }
 
   @HostListener('blur', ['$event'])
@@ -153,8 +179,10 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
   }
 
   checkDateConfig(dateConfig: any) {
-    if (!dateConfig) { return false; }
-    if (typeof (dateConfig.timePicker) !== 'boolean' || !dateConfig.max || !dateConfig.min || !dateConfig.format) {
+    if (!dateConfig) {
+      return false;
+    }
+    if (typeof dateConfig.timePicker !== 'boolean' || !dateConfig.max || !dateConfig.min || !dateConfig.format) {
       return false;
     }
     return true;
@@ -171,14 +199,13 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
     this.fillPopupData();
     component.ngOnInit();
 
-    component.registerOnChange(selectedDateObj => {
+    component.registerOnChange((selectedDateObj) => {
       this.writeValue(selectedDateObj);
       this.onChange(selectedDateObj.selectedDate);
     });
 
     component.selectedDateChange.subscribe((arg: SelectDateChangeEventArgs) => {
-      if (arg.reason === SelectDateChangeReason.date && !this.showTime ||
-        arg.reason === SelectDateChangeReason.button) {
+      if ((arg.reason === SelectDateChangeReason.date && !this.showTime) || arg.reason === SelectDateChangeReason.button) {
         this.hide();
       }
     });
@@ -197,8 +224,7 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
     } else {
       curDate = obj;
     }
-    this.selectedDate = curDate ?
-      this.dateConverter.parse(curDate) : null;
+    this.selectedDate = curDate ? this.dateConverter.parse(curDate) : null;
     this.writeModelValue(obj);
   }
 
@@ -266,7 +292,7 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
     if (selectDateObj && typeof selectDateObj === 'object' && selectDateObj.hasOwnProperty('selectedDate')) {
       this.selectedDateChange.emit({
         reason: dateReason,
-        selectedDate: this.selectedDate
+        selectedDate: this.selectedDate,
       });
       this.onTouched();
     }
@@ -302,13 +328,24 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
   }
 
   private fillPopupData() {
-    ['showTime', 'maxDate', 'minDate', 'cssClass', 'disabled', 'dateConverter', 'locale', 'dateFormat', 'yearNumber', 'dateConfig', 'mode',
-      'customViewTemplate']
-      .forEach(key => {
-        if (this[key] !== undefined) {
-          this.cmpRef.instance[key] = this[key];
-        }
-      });
+    [
+      'showTime',
+      'maxDate',
+      'minDate',
+      'cssClass',
+      'disabled',
+      'dateConverter',
+      'locale',
+      'dateFormat',
+      'yearNumber',
+      'dateConfig',
+      'mode',
+      'customViewTemplate',
+    ].forEach((key) => {
+      if (this[key] !== undefined) {
+        this.cmpRef.instance[key] = this[key];
+      }
+    });
   }
 
   onDocumentClick = ($event) => {
@@ -331,15 +368,19 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
       case 'top':
         return [
           style({ transform: 'scaleY(0.8) translateY(4px)', opacity: 0.8, transformOrigin: '0% 100%', display: 'block' }),
-          animate(`${AnimationDuration.BASE} ${AnimationCurves.EASE_OUT}`,
-            style({ transform: 'scaleY(0.9999) translateY(0)', opacity: 1, transformOrigin: '0% 100%', display: 'block' })),
+          animate(
+            `${AnimationDuration.BASE} ${AnimationCurves.EASE_OUT}`,
+            style({ transform: 'scaleY(0.9999) translateY(0)', opacity: 1, transformOrigin: '0% 100%', display: 'block' })
+          ),
         ];
       case 'bottom':
       default:
         return [
           style({ transform: 'scaleY(0.8)  translateY(-4px)', opacity: 0.8, transformOrigin: '0% 0%', display: 'block' }),
-          animate(`${AnimationDuration.BASE}  ${AnimationCurves.EASE_OUT}`,
-            style({ transform: 'scaleY(0.9999)  translateY(0)', opacity: 1, transformOrigin: '0% 0%', display: 'block' })),
+          animate(
+            `${AnimationDuration.BASE}  ${AnimationCurves.EASE_OUT}`,
+            style({ transform: 'scaleY(0.9999)  translateY(0)', opacity: 1, transformOrigin: '0% 0%', display: 'block' })
+          ),
         ];
     }
   }
@@ -349,15 +390,19 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
       case 'top':
         return [
           style({ transform: 'scaleY(0.9999)  translateY(0)', opacity: 1, transformOrigin: '0% 100%', display: 'block' }),
-          animate(`${AnimationDuration.BASE} ${AnimationCurves.EASE_IN}`,
-            style({ transform: 'scaleY(0.8)  translateY(4px)', opacity: 0.8, transformOrigin: '0% 100%', display: 'block' }))
+          animate(
+            `${AnimationDuration.BASE} ${AnimationCurves.EASE_IN}`,
+            style({ transform: 'scaleY(0.8)  translateY(4px)', opacity: 0.8, transformOrigin: '0% 100%', display: 'block' })
+          ),
         ];
       case 'bottom':
       default:
         return [
           style({ transform: 'scaleY(0.9999)  translateY(0)', opacity: 1, transformOrigin: '0% 0%', display: 'block' }),
-          animate(`${AnimationDuration.BASE} ${AnimationCurves.EASE_IN}`,
-            style({ transform: 'scaleY(0.8)  translateY(-4px)', opacity: 0.8, transformOrigin: '0% 0%', display: 'block' }))
+          animate(
+            `${AnimationDuration.BASE} ${AnimationCurves.EASE_IN}`,
+            style({ transform: 'scaleY(0.8)  translateY(-4px)', opacity: 0.8, transformOrigin: '0% 0%', display: 'block' })
+          ),
         ];
     }
   }
@@ -403,7 +448,9 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
       return;
     }
     const valueDate = new Date(value);
-    const valueFormat = valueDate instanceof Date && !isNaN(valueDate.getTime()) &&
+    const valueFormat =
+      valueDate instanceof Date &&
+      !isNaN(valueDate.getTime()) &&
       this.dateConverter.format(valueDate, this.dateFormat, this.locale || this.i18nLocale);
     if (new Date(valueFormat).getTime() === new Date(this.selectedDate).getTime() || !this.validateDate(value)) {
       return;
@@ -417,10 +464,11 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
 
   validateDate(value: string) {
     const valueDate = new Date(value);
-    const valueFormat = valueDate && !isNaN(valueDate.getTime()) &&
-      this.dateConverter.format(valueDate, this.dateFormat, this.locale || this.i18nLocale);
+    const valueFormat =
+      valueDate && !isNaN(valueDate.getTime()) && this.dateConverter.format(valueDate, this.dateFormat, this.locale || this.i18nLocale);
     if (
-      !valueDate || value !== valueFormat ||
+      !valueDate ||
+      value !== valueFormat ||
       (value === valueFormat && (valueDate.getTime() < this.minDate.getTime() || valueDate.getTime() > this.maxDate.getTime()))
     ) {
       return false;
@@ -430,9 +478,7 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
   }
 
   resetValue() {
-    const resDate = this.selectedDate ?
-      this.dateConverter.format(this.selectedDate, this.dateFormat, this.locale || this.i18nLocale) :
-      '';
+    const resDate = this.selectedDate ? this.dateConverter.format(this.selectedDate, this.dateFormat, this.locale || this.i18nLocale) : '';
     this.elementRef.nativeElement.value = resDate;
   }
 
@@ -443,6 +489,6 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
     if (this.userInputSubscription) {
       this.userInputSubscription.unsubscribe();
     }
-    document.removeEventListener('click', this.onDocumentClick);
+    this.document.removeEventListener('click', this.onDocumentClick);
   }
 }

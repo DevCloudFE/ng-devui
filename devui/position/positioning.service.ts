@@ -222,15 +222,16 @@ export class PositionService {
 
   private isInViewPort(ele, {offsetLeft, offsetTop}) {
     const targetElBCR = ele.getBoundingClientRect();
-    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-    const viewPortWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+    const viewPortHeight = this.windowRef.innerHeight || this.documentRef.documentElement.clientHeight
+    || this.documentRef.body.clientHeight;
+    const viewPortWidth = this.windowRef.innerWidth || this.documentRef.documentElement.clientWidth || this.documentRef.body.clientWidth;
     const height = targetElBCR.height || targetElBCR.offsetHeight;
     const width = targetElBCR.width || targetElBCR.offsetWidth;
     offsetTop = offsetTop || ele.offsetTop;
-    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    const scrollTop = this.documentRef.documentElement.scrollTop || this.documentRef.body.scrollTop;
     const top = offsetTop - scrollTop;
     offsetLeft = offsetLeft || ele.offsetLeft;
-    const scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft;
+    const scrollLeft = this.documentRef.documentElement.scrollLeft || this.documentRef.body.scrollLeft;
     const left = offsetLeft - scrollLeft;
 
     return top + height <= viewPortHeight && top > 0 && left + width <= viewPortWidth && left > 0;

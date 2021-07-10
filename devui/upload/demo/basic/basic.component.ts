@@ -1,6 +1,7 @@
 // 注意需要在使用的NgModule中 import { HttpClientModule  } from '@angular/common/http';
+import { DOCUMENT } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { IFileOptions, IUploadOptions, SingleUploadComponent } from 'ng-devui/upload';
 
 @Component({
@@ -36,7 +37,7 @@ export class BasicComponent implements OnInit {
 
   selectedFiles: any;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, @Inject(DOCUMENT) private doc: any) {
     this.beforeUploadFn = this.beforeUpload2.bind(this);
   }
 
@@ -57,7 +58,7 @@ export class BasicComponent implements OnInit {
     return uploadOptions;
   }
   ngOnInit() {
-    document.getElementById('fileInput').addEventListener('change', event => {
+    this.doc.getElementById('fileInput').addEventListener('change', event => {
       this.selectedFiles = (event.target as HTMLInputElement).files;
     });
   }

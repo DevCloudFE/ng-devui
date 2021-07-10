@@ -1,12 +1,13 @@
+import { DOCUMENT } from '@angular/common';
 import {
-    ApplicationRef,
-    Component,
-    EmbeddedViewRef,
-    TemplateRef,
-    ViewChild,
+  ApplicationRef,
+  Component,
+  EmbeddedViewRef,
+  Inject,
+  TemplateRef,
+  ViewChild
 } from '@angular/core';
-
-import {forEach} from 'lodash-es';
+import { forEach } from 'lodash-es';
 
 @Component({
     selector: 'd-portal',
@@ -20,18 +21,20 @@ export class PortalComponent {
     viewRef: EmbeddedViewRef<any>;
     portalContainer: HTMLElement;
     @ViewChild('templateRef', { static: true }) templateRef: TemplateRef<any>;
+    document: Document;
 
-    constructor(private appRef: ApplicationRef) {
+    constructor(private appRef: ApplicationRef, @Inject(DOCUMENT) private doc: any) {
+      this.document = this.doc;
     }
 
     addContent() {
-        this.portalContainer = document.createElement('div');
+        this.portalContainer = this.document.createElement('div');
         this.viewRef = this.templateRef.createEmbeddedView(this);
         forEach(this.viewRef.rootNodes, (node) => {
             this.portalContainer.appendChild(node);
         });
         this.appRef.attachView(this.viewRef);
-        document.body.appendChild(this.portalContainer);
+        this.document.body.appendChild(this.portalContainer);
     }
 
     open() {
@@ -41,7 +44,7 @@ export class PortalComponent {
 
     close() {
         if (this.viewRef && this.portalContainer) {
-            document.body.removeChild(this.portalContainer);
+            this.document.body.removeChild(this.portalContainer);
             this.viewRef.destroy();
             this.viewRef = null;
             this.portalContainer = null;

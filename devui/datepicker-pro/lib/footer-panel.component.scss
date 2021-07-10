@@ -1,0 +1,12 @@
+@import '../../style/theme/color';
+
+.devui-datepicekr-pro-footer {
+  padding: 8px;
+  text-align: center;
+  // height: 44px;
+  border-top: 1px solid $devui-dividing-line;
+
+  .devui-cancel-button {
+    margin-left: 4px;
+  }
+}

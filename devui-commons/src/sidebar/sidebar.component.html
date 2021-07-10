@@ -14,6 +14,12 @@
     </li>
   </ul>
   <nav class="sidebar-nav">
-    <d-accordion [data]="componentsDataDisplay" [linkType]="linkType"></d-accordion>
+    <d-accordion [data]="componentsDataDisplay" [linkType]="linkType" [itemTemplate]="itemtemplate"></d-accordion>
+
+    <ng-template #itemtemplate let-item="item">
+      {{ item.title }}
+      <d-tag *ngIf="item.newChange" [tag]="text.new" [labelStyle]="'orange-w98'"></d-tag>
+      <d-tag *ngIf="item.sunset" [tag]="text.sunset" [labelStyle]="'yellow-w98'"></d-tag>
+    </ng-template>
   </nav>
 </div>

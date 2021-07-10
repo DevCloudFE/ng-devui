@@ -30,7 +30,6 @@
     }
 
     &.devui-tree-select-input {
-      color: $devui-line; //TODO: Color-Question
       font-size: $devui-font-size;
       padding: 2px 32px 2px 2px;
       height: unset;
@@ -39,6 +38,7 @@
       overflow-y: scroll;
       line-height: 22px;
       display: flex;
+      text-indent: 8px;
 
       &.devui-select-no-label {
         padding-left: 10px;
@@ -167,6 +167,7 @@
   margin: 1px;
   padding: 0 5px;
   position: relative;
+  text-indent: 0;
 
   &.devui-no-label-item {
     padding: 1px 0;
@@ -240,6 +241,8 @@ svg.svg-icon-search path {
 }
 
 .devui-select-input.devui-tree-select-input.disabled {
+  color: $devui-disabled-text;
+
   & .devui-select-item {
     background-color: $devui-disabled-bg;
     border-color: $devui-disabled-line;
@@ -271,6 +274,14 @@ svg.svg-icon-search path {
           fill: $devui-disabled-bg;
         }
       }
+    }
+  }
+}
+
+.devui-tree-select {
+  .devui-select-input.devui-tree-select-input {
+    &:not(.icon):not([class^=icon-]):not([disabled]):not(.disabled):not(.devui-disabled) { // 为了增加层级覆盖form的样式
+      color: $devui-placeholder;
     }
   }
 }

@@ -2,8 +2,8 @@ import { Component, DebugElement, ElementRef, OnDestroy, OnInit, ViewChild } fro
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import {
-  GanttBarComponent, GanttModule, GanttScaleComponent, GanttScaleUnit,
-  GanttService, GanttTaskInfo
+    GanttBarComponent, GanttModule, GanttScaleComponent, GanttScaleUnit,
+    GanttService, GanttTaskInfo
 } from 'ng-devui/gantt';
 import { I18nModule } from 'ng-devui/i18n';
 import { Subscription } from 'rxjs';
@@ -22,6 +22,7 @@ import { DomHelper } from '../utils/testing/dom-helper';
         [endDate]="item?.endDate"
         [tipTemplateRef]="tipTemplate"
         [id]="item?.id"
+        [scrollElement]="ganttContainer"
         [progressRate]="item?.progressRate"
         (barMoveStartEvent)="onGanttBarMoveStart($event)"
         (barMovingEvent)="onGanttBarMoving($event)"
@@ -163,30 +164,24 @@ describe('gantt', () => {
         it('should init ok', () => {
             expect(component).toBeTruthy();
             const header = debugEl.query(By.css('.header')).nativeElement;
-            expect(header.style.width).toBe('1600px');
+            expect(header.style.width).toBe('1280px');
             const body = debugEl.query(By.css('.body')).nativeElement;
-            expect(body.style.width).toBe('1600px');
+            expect(body.style.width).toBe('1280px');
 
             const ganttScale = debugEl.query(By.directive(GanttScaleComponent)).nativeElement;
-            expect(ganttScale.clientWidth).toBe(1600);
+            expect(ganttScale.clientWidth).toBe(1280);
 
             const scales = ganttScale.querySelectorAll('.devui-gantt-scale');
-            expect(scales.length).toBe(31);
+            expect(scales.length).toBe(0);
 
             const ganttBar = debugEl.query(By.directive(GanttBarComponent)).nativeElement;
             const ganttBarElement = ganttBar.querySelector('.devui-gantt-bar');
-            expect(ganttBarElement.style.width).toBe('300px');
-            expect(ganttBarElement.style.left).toBe('200px');
+            expect(ganttBarElement.style.width).toBe('240px');
+            expect(ganttBarElement.style.left).toBe('160px');
 
             const ganttBarTrack = ganttBar.querySelector('.devui-gantt-bar-track');
             expect(ganttBarTrack.style.width).toBe('30%');
 
-            const ganttMonthMark = debugEl.query(By.css('.devui-mark-line')).nativeElement;
-            expect(ganttMonthMark.style.left).toBe('0px');
-
-            const ganttMarkStripes = debugEl.queryAll(By.css('.devui-mark-stripe'));
-            expect(ganttMarkStripes.length).toBe(5);
-            expect(ganttMarkStripes[0].nativeElement.style.left).toBe('50px');
         });
 
         it('should mouse over&leave on bar ok', fakeAsync(() => {
@@ -196,25 +191,9 @@ describe('gantt', () => {
             tick(250);
             fixture.detectChanges();
 
-            let ganttTips = document.querySelector('.devui-gantt-tips');
+            const ganttTips = document.querySelector('.devui-gantt-tips');
             expect(ganttTips).toBeTruthy();
 
-            const ganttScale = debugEl.query(By.directive(GanttScaleComponent)).nativeElement;
-            let highLight = ganttScale.querySelector('.scale-highlight');
-            expect(highLight.clientWidth).toBe(300);
-
-            const hightLightFirstChild = highLight.firstElementChild;
-            expect(hightLightFirstChild.innerText).toBe('05-05');
-            expect(hightLightFirstChild.nextElementSibling.innerText).toBe('05-10');
-
-            ganttBarElement.dispatchEvent(new Event('mouseleave'));
-            tick(250);
-            fixture.detectChanges();
-            ganttTips = document.querySelector('.devui-gantt-tips');
-            expect(ganttTips).toBeNull();
-
-            highLight = ganttScale.querySelector('.scale-highlight');
-            expect(highLight).toBeNull();
         }));
 
         it('should drag progress ok', fakeAsync(() => {
@@ -231,7 +210,7 @@ describe('gantt', () => {
             fixture.detectChanges();
 
             const ganttBarTrack = ganttBar.querySelector('.devui-gantt-bar-track');
-            expect(ganttBarTrack.style.width).toBe('70%');
+            expect(ganttBarTrack.style.width).toBe('100%');
             expect(component.currentAction).toBe('onBarProgressEvent');
         }));
 
@@ -250,14 +229,10 @@ describe('gantt', () => {
             fixture.detectChanges();
 
             const ganttBarElement = ganttBar.querySelector('.devui-gantt-bar');
-            expect(ganttBarElement.style.left).toBe('650px');
+            expect(ganttBarElement.style.left).toBe('600px');
 
             const ganttScale = debugEl.query(By.directive(GanttScaleComponent)).nativeElement;
-            const highLight = ganttScale.querySelector('.scale-highlight');
-            const hightLightFirstChild = highLight.firstElementChild;
-            expect(hightLightFirstChild.innerText).toBe('05-14');
-            expect(hightLightFirstChild.nextElementSibling.innerText).toBe('05-19');
-            expect(Number(component.list[0].startDate)).toBe(1589385600000);
+            expect(Number(component.list[0].startDate)).toBe(1589558400000);
         }));
 
         it('should resize bar ok', fakeAsync(() => {
@@ -272,36 +247,28 @@ describe('gantt', () => {
             fixture.detectChanges();
             expect(component.currentAction).toBe('onGanttBarResizeStart');
 
-            document.dispatchEvent(new MouseEvent('mousemove', <MouseEventInit>{ clientX: 50 }));
+            document.dispatchEvent(new MouseEvent('mousemove', <MouseEventInit>{ clientX: 40 }));
             fixture.detectChanges();
             expect(component.currentAction).toBe('onGanttBarResizing');
 
             document.dispatchEvent(new MouseEvent('mouseup'));
             fixture.detectChanges();
-            expect(ganttBarElement.style.width).toBe('350px');
+            expect(ganttBarElement.style.width).toBe('280px');
             expect(Number(component.list[0].endDate)).toBe(1589126400000);
 
             draggerLeft.dispatchEvent(new MouseEvent('mousedown'));
             fixture.detectChanges();
             expect(component.currentAction).toBe('onGanttBarResizeStart');
 
-            document.dispatchEvent(new MouseEvent('mousemove', <MouseEventInit>{ clientX: -50 }));
+            document.dispatchEvent(new MouseEvent('mousemove', <MouseEventInit>{ clientX: -40 }));
             fixture.detectChanges();
             expect(component.currentAction).toBe('onGanttBarResizing');
 
             document.dispatchEvent(new MouseEvent('mouseup'));
             fixture.detectChanges();
-            expect(ganttBarElement.style.left).toBe('150px');
-            expect(ganttBarElement.style.width).toBe('400px');
+            expect(ganttBarElement.style.left).toBe('120px');
+            expect(ganttBarElement.style.width).toBe('320px');
             expect(Number(component.list[0].startDate)).toBe(1588521600000);
-
-            const ganttScale = debugEl.query(By.directive(GanttScaleComponent)).nativeElement;
-            const highLight = ganttScale.querySelector('.scale-highlight');
-            expect(highLight.clientWidth).toBe(400);
-
-            const hightLightFirstChild = highLight.firstElementChild;
-            expect(hightLightFirstChild.innerText).toBe('05-04');
-            expect(hightLightFirstChild.nextElementSibling.innerText).toBe('05-11');
         }));
     });
 });
