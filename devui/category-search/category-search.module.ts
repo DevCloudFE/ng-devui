@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'ng-devui/button';
 import { CheckBoxModule } from 'ng-devui/checkbox';
-import { DatepickerModule } from 'ng-devui/datepicker';
+import { DatepickerProModule } from 'ng-devui/datepicker-pro';
 import { DropDownModule } from 'ng-devui/dropdown';
 import { FormModule } from 'ng-devui/form';
 import { InputNumberModule } from 'ng-devui/input-number';
@@ -26,13 +26,13 @@ import { CategorySearchComponent } from './category-search.component';
     SearchModule,
     TagsModule,
     TagsModule,
-    DatepickerModule,
     ButtonModule,
     CheckBoxModule,
     InputNumberModule,
     LoadingModule,
     TreeModule,
     PopperModule,
+    DatepickerProModule
   ],
   exports: [CategorySearchComponent],
 })

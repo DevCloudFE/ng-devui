@@ -68,9 +68,10 @@ export class BasicComponent {
     console.log('clear all', event);
   }
 
-  toggleEvent(dropdown, tag) {
-    if (!dropdown.isOpen && tag) {
-      console.log(tag);
+  toggleEvent = (dropdown, tag, currentSelectTag) => {
+    if (dropdown.isOpen) {
+      console.log('selected and clicked tag:', tag);
+      console.log('unassigned tag:', currentSelectTag);
     }
   }
 }

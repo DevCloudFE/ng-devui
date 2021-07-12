@@ -75,3 +75,11 @@
 d-accordion ::ng-deep .devui-accordion-menu {
   box-shadow: none !important;
 }
+
+d-tag {
+  text-indent: 0;
+  
+  & + d-tag {
+  margin-left: 4px;
+  }
+}

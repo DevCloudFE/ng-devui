@@ -3,8 +3,8 @@
  */
 import { animate, AnimationTriggerMetadata, state, style, transition, trigger } from '@angular/animations';
 
-const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 ||
-  window.navigator.userAgent.indexOf('Trident') > -1;
+const isIE = typeof window !== 'undefined' && (window.navigator.userAgent.indexOf('MSIE ') > -1 ||
+  window.navigator.userAgent.indexOf('Trident') > -1);
 
 const ANIMATION = [
   state('void', style({transform: 'scale(0)', transformOrigin: '50% 50%'})),

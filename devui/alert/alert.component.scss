@@ -82,6 +82,17 @@
     }
   }
 
+  &.devui-alert-simple {
+    border-color: $devui-line;
+    color: $devui-text;
+
+    button.devui-close {
+      & > svg path {
+        fill: $devui-text-weak;
+      }
+    }
+  }
+
   svg.devui-icon {
     width: 16px;
     height: 16px;

@@ -34,5 +34,5 @@ In the page:
 The default value is 'info', which specifies the type of alert warning.
 
 ```ts
-export type AlertType = 'success' | 'danger' | 'warning' | 'info';
+export type AlertType = 'success' | 'danger' | 'warning' | 'info' | 'simple';
 ```

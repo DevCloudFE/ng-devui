@@ -41,7 +41,8 @@ Note: Components passed to drawerContentComponent in the API need to be register
 
 | Attribute | Type | Default | Description | Jump to Demo |Global Config|
 | :----------------: | :----------------------: | :------------------------: | :------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------: | -------------------------------------------------------------------- |
-| drawerContentComponent | `Type<any>` | -- | Required. The user-defined component is transferred. | [Basic Usage](demo#basic-usage) |
+| drawerContentComponent | `Type<any>` | -- | Optional. The user-defined component is transferred. | [Basic Usage](demo#basic-usage) |
+|     contentTemplate      |       `TemplateRef<any>`        |    --    | Optional. Customized template, incompatible with drawerContentComponent.       | [Custom Template](demo#template) |
 | componentFactoryResolver | `ComponentFactoryResolver` | Built-in | Optional. Generally this parameter is not required. |
 | injector | `Injector` | -- | Optional. You do not need to set this parameter. |
 | width | `string` | '300px' | Optional. Sets the width of the drawer. | [Basic Usage](demo#basic-usage) |

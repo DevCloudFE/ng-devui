@@ -1,4 +1,4 @@
-import { Directive, ElementRef, EventEmitter, HostListener, Input, OnChanges, OnDestroy, Output, SimpleChanges } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, Input, OnChanges, OnDestroy, Output, SimpleChanges } from '@angular/core';
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
@@ -7,6 +7,8 @@ export class LazyLoadDirective implements OnDestroy, OnChanges {
 
   // 启用懒加载，默认不启用
   @Input() enableLazyLoad = false;
+  // 滚动监听的目标，默认是宿主，
+  @Input() target: ElementRef;
   // 加载更多
   @Output() loadMore = new EventEmitter<any>();
 
@@ -18,9 +20,10 @@ export class LazyLoadDirective implements OnDestroy, OnChanges {
   constructor(private el: ElementRef) { }
 
   ngOnChanges(changes: SimpleChanges): void {
+    const element = this.target ? this.target : this.el.nativeElement;
     if (changes && changes['enableLazyLoad']) {
       if (changes.enableLazyLoad.currentValue) {
-        this.scrollSubscription = fromEvent(this.el.nativeElement, 'scroll').pipe(
+        this.scrollSubscription = fromEvent(element, 'scroll').pipe(
           debounceTime(300),
           distinctUntilChanged()
         ).subscribe(event => this.scrollList(event));
@@ -38,7 +41,7 @@ export class LazyLoadDirective implements OnDestroy, OnChanges {
   }
 
   scrollList(event) {
-    const targetEl = event.target;
+    const targetEl = event.target.scrollingElement ? event.target.scrollingElement : event.target;
     const clientHeight = targetEl.clientHeight;
     const scrollHeight = targetEl.scrollHeight;
     const scrollTop = targetEl.scrollTop;

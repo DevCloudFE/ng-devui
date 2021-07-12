@@ -1,4 +1,4 @@
 <d-button (click)="openToast()">click me show simplest toast!</d-button>
-<d-button *ngIf="!this.isShow" (click)="openToast2()">click me show customer toast!</d-button>
-<d-button *ngIf="this.isShow" (click)="closeToast2()" bsStyle="common">click me close customer toast!</d-button>
+<d-button *ngIf="!this.isShow" (click)="openToast2()" bsStyle="common">click me show customer toast!</d-button>
+<d-button *ngIf="this.isShow" (click)="closeToast2()">click me close customer toast!</d-button>
 <d-button *ngIf="this.isShow" (click)="closeToast3()" bsStyle="common">only close first customer toast!</d-button>

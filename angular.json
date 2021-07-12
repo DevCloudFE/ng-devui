@@ -31,7 +31,8 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/assets/i18n"
+              "src/assets/i18n",
+              "src/assets/overview/**/*"
             ],
             "styles": [
               "node_modules/highlight.js/styles/an-old-hope.css",

@@ -16,6 +16,7 @@ import { CheckBoxModule } from 'ng-devui/checkbox';
 import { DCommonModule } from 'ng-devui/common';
 import { DataTableModule } from 'ng-devui/data-table';
 import { DatepickerModule } from 'ng-devui/datepicker';
+import { DatepickerProModule } from 'ng-devui/datepicker-pro';
 import { DragDropModule } from 'ng-devui/dragdrop';
 import { DrawerModule } from 'ng-devui/drawer';
 import { DropDownModule } from 'ng-devui/dropdown';
@@ -78,6 +79,7 @@ export * from 'ng-devui/checkbox';
 export * from 'ng-devui/common';
 export * from 'ng-devui/data-table';
 export * from 'ng-devui/datepicker';
+export * from 'ng-devui/datepicker-pro';
 export * from 'ng-devui/dragdrop';
 export * from 'ng-devui/drawer';
 export * from 'ng-devui/dropdown';
@@ -187,6 +189,7 @@ export * from './version';
     TimePickerModule,
     CascaderModule,
     CategorySearchModule,
+    DatepickerProModule,
     MentionModule,
     NavSpriteModule,
     ReadTipModule,

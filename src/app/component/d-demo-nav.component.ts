@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'd-demo-nav',
@@ -8,9 +9,9 @@ import { Component, Input, OnInit } from '@angular/core';
 export class DDemoNavComponent implements OnInit {
   @Input() navItems: any;
   demoDocViewerMain;
-  constructor() {}
+  constructor(@Inject(DOCUMENT) private doc: any) {}
 
   ngOnInit() {
-    this.demoDocViewerMain = document.querySelector('.doc-viewer-container .main');
+    this.demoDocViewerMain = this.doc.querySelector('.doc-viewer-container .main');
   }
 }

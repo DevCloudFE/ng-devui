@@ -10,7 +10,7 @@ For details about how to use this function, see the following StackBlitz demonst
 
 ### Angular version
 
-The supported Angular version is <font color=red>`^12.0.0-beta.1`</font>.
+The supported Angular version is <font color=red>`^11.0.0`</font>.
 
 ### 1. Create a project
 
@@ -27,7 +27,7 @@ Go to your project folder and use npm to install DevUI.
 ```bash
 npm i ng-devui
 # Optional. Font icon library
-# npm i devui-assets
+# npm i @devui-design/icons
 ```
 
 ### 3. Import Modules

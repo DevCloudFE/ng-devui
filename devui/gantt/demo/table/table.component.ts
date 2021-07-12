@@ -29,7 +29,6 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
   curYear = curYear;
   basicDataSource: Array<SourceType> = treeDataSource;
   @ViewChild('datatable', { read: ElementRef, static: true }) datatableElementRef: ElementRef;
-  @ViewChild('ganttscale', { read: ElementRef, static: true }) ganttscaleElementRef: ElementRef;
   ganttScaleWidth: string;
   ganttBarContainerElement: Element;
   resizeHandleContainerElement: Element;
@@ -107,6 +106,7 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
       this.mouseDownHandler = this.ganttService.mouseDownListener.subscribe(this.onMousedown.bind(this));
       this.mouseMoveHandler = this.ganttService.mouseMoveListener.subscribe(this.onMouseMove.bind(this));
       this.mouseEndHandler = this.ganttService.mouseEndListener.subscribe(this.onMouseEnd.bind(this));
+      this.goToday();
     });
   }
 
@@ -185,10 +185,6 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
     this.originOffsetLeft = this.tableScrollLeft;
   }
 
-  onGanttBarMoving(info: GanttTaskInfo) {
-    this.adjustScrollView(info);
-  }
-
   onGanttBarResizeStart() {
     this.originOffsetLeft = this.tableScrollLeft;
   }
@@ -198,12 +194,7 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   adjustScrollView(info: GanttTaskInfo) {
-    if (info.left + info.width > this.scrollView.scrollLeft + this.scrollView.clientWidth - this.originOffsetX) {
-      this.scrollView.scrollTo(this.scrollView.scrollLeft + this.scaleStep, this.scrollView.scrollTop);
-    }
-    if (info.left < this.scrollView.scrollLeft) {
-      this.scrollView.scrollTo(this.scrollView.scrollLeft - this.scaleStep, this.scrollView.scrollTop);
-    }
+    console.log(info);
   }
 
   onGanttBarMove(info: GanttTaskInfo) {

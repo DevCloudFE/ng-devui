@@ -232,6 +232,9 @@ export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterV
   }
 
   private queryMedia() {
+    if (typeof window === 'undefined') {
+      return;
+    }
     const userAgent = window.navigator.userAgent;
     if (userAgent.indexOf('Edge') > -1) {
       this.userAgent = 'edge';
@@ -426,7 +429,8 @@ export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterV
     if (this.multiple) {
       this.tree.treeFactory.checkNodesById(item.id, false);
       const curValue = this.tree.treeFactory.getCheckedNodes();
-      this.value = curValue.map(node => node.data.originItem);
+      this.value = this.leafOnly
+        ? curValue.filter(node => !node.data.isParent).map(node => node.data.originItem) : curValue.map(node => node.data.originItem);
     } else {
       this.clearAll();
     }

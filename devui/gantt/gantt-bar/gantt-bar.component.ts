@@ -82,6 +82,13 @@ export class GanttBarComponent implements OnInit, OnChanges, AfterViewInit, OnDe
   public tipHovered = false;
   public mouseMoveOnBar = false;
   percentage: number;
+  private movedOut = false;
+  private mouseenterHandler: Subscription;
+  private mouseleaveHandler: Subscription;
+  private scrollTimer = null;
+  private SCROLL_STEP = 10;
+  private outDirection = 'right';
+  private scrollViewRange = [0, 0];
 
   @Input() barMoveDisabled = false;
   @Input() barResizeDisabled = false;
@@ -106,6 +113,8 @@ export class GanttBarComponent implements OnInit, OnChanges, AfterViewInit, OnDe
   @Input() customBgClass = '';
 
   @Input() customTitleClass = '';
+
+  @Input() scrollElement: HTMLElement;
 
   @Output() barMoveStartEvent = new EventEmitter<GanttTaskInfo>();
   @Output() barMovingEvent = new EventEmitter<GanttTaskInfo>();
@@ -340,6 +349,10 @@ export class GanttBarComponent implements OnInit, OnChanges, AfterViewInit, OnDe
   }
 
   private barStartMoving(value: number): void {
+    this.scrollViewRange = [
+      this.scrollElement.getBoundingClientRect().left + this.originOffsetX,
+      this.scrollElement.getBoundingClientRect().right,
+    ];
     this.moveBarStart = true;
     this.barMoveStartPageX = value;
     this.barOriginLeft = parseInt(this.ganttBar.nativeElement.style.left, 10);
@@ -431,6 +444,10 @@ export class GanttBarComponent implements OnInit, OnChanges, AfterViewInit, OnDe
     }
 
     if (this.moveBarStart) {
+      this.checkIsOut(value);
+      if (this.movedOut) {
+        return;
+      }
       this.mouseMoveOnBar = true;
       const offset = value - this.barMoveStartPageX;
 
@@ -446,16 +463,11 @@ export class GanttBarComponent implements OnInit, OnChanges, AfterViewInit, OnDe
 
       const earlyDateTime = this.startDate.getTime() - this.EARLYOFFSET * GanttService.DAY_DURATION;
       const lateDateTime = this.endDate.getTime() + this.EARLYOFFSET * GanttService.DAY_DURATION;
-
-      if (offset < 0 && earlyDateTime < this.ganttService.scaleStartDate.getTime()) {
+      if (earlyDateTime < this.ganttService.scaleStartDate.getTime()) {
         this.ganttService.setScaleConfig({ startDate: new Date(earlyDateTime) });
-        this.barOriginLeft = this.EARLYOFFSET * this.ganttService.getScaleUnitPixel() - Math.round(offset);
-      }
-
-      if (offset > 0 && lateDateTime > this.ganttService.scaleEndDate.getTime()) {
+      } else if (lateDateTime > this.ganttService.scaleEndDate.getTime()) {
         this.ganttService.setScaleConfig({ endDate: new Date(lateDateTime) });
       }
-
       const finalLeft = this.barOriginLeft + Math.round(offset);
       this.left = finalLeft;
 
@@ -464,6 +476,59 @@ export class GanttBarComponent implements OnInit, OnChanges, AfterViewInit, OnDe
       info.moveOffset = offset;
       this.barMovingEvent.emit(info);
     }
+  }
+
+  private checkIsOut(value) {
+    this.outDirection = value - this.barMoveStartPageX > 0 ? 'right' : 'left';
+    if (this.outDirection === 'left') {
+      this.movedOut = value < this.scrollViewRange[0];
+    } else {
+      this.movedOut = value > this.scrollViewRange[1];
+    }
+    if (this.movedOut) {
+      this.autoScroll();
+    } else if (this.scrollTimer) {
+      const left =
+        this.outDirection === 'left'
+          ? this.scrollElement.scrollLeft + (value - this.scrollElement.getBoundingClientRect().left) - this.originOffsetX
+          : this.scrollElement.scrollLeft + this.scrollElement.clientWidth - this.originOffsetX;
+      this.setLeft(Math.round(left));
+      this.stopAutoScroll();
+      this.barMoveStartPageX = value;
+    }
+  }
+
+  private autoScroll() {
+    if (!this.scrollTimer) {
+      this.scrollTimer = setInterval(() => {
+        this.outDirection === 'left'
+          ? (this.scrollElement.scrollLeft -= this.SCROLL_STEP)
+          : (this.scrollElement.scrollLeft += this.SCROLL_STEP);
+      }, 10);
+    }
+  }
+
+  private stopAutoScroll() {
+    clearInterval(this.scrollTimer);
+    this.scrollTimer = null;
+  }
+
+  private setLeft(left) {
+    const offset = left - this.left;
+    const timeOffset = (Math.round(offset) / this.ganttService.getScaleUnitPixel()) * GanttService.DAY_DURATION;
+
+    const newStartDate = new Date(this.startDate.getTime() + timeOffset);
+    this.ganttService.roundDate(newStartDate);
+    this.startDate = newStartDate;
+
+    const newEndDate = new Date(this.endDate.getTime() + timeOffset);
+    this.ganttService.roundDate(newEndDate);
+    this.endDate = newEndDate;
+
+    this.originStartDate = this.startDate;
+    this.originEndDate = this.endDate;
+    this.barOriginLeft = left;
+    this.left = left;
   }
 
   private getGanttTaskInfo(): GanttTaskInfo {
@@ -508,6 +573,7 @@ export class GanttBarComponent implements OnInit, OnChanges, AfterViewInit, OnDe
       this.barProgressEvent.emit(this.progressRate);
     }
     this.handleController(false);
+    this.stopAutoScroll();
     this.cdr.markForCheck();
   }
 

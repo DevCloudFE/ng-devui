@@ -1,0 +1,19 @@
+<h5>basic range picker</h5>
+
+<d-range-datepicker-pro [(ngModel)]="value1" (ngModelChange)="onChange($event)"></d-range-datepicker-pro>
+
+<h5>time range picker</h5>
+
+<d-range-datepicker-pro [(ngModel)]="value2" [showTime]="true" (ngModelChange)="onChange($event)"></d-range-datepicker-pro>
+
+<h5>week range picker</h5>
+
+<d-range-datepicker-pro [(ngModel)]="value5" [mode]="'week'" (ngModelChange)="onChange($event)"></d-range-datepicker-pro>
+
+<h5>month range picker</h5>
+
+<d-range-datepicker-pro [(ngModel)]="value3" [mode]="'month'"></d-range-datepicker-pro>
+
+<h5>year range picker</h5>
+
+<d-range-datepicker-pro [(ngModel)]="value4" [mode]="'year'"></d-range-datepicker-pro>

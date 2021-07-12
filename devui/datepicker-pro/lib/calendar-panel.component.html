@@ -1,0 +1,73 @@
+<div class="devui-canlender-panel">
+  <cdk-virtual-scroll-viewport #scrollList [itemSize]="30" class="devui-canlender-panel-year-list" minBufferPx="400" maxBufferPx="600">
+    <div
+      class="devui-canlender-panel-year-list-item"
+      [ngClass]="{ 'title-active': item.active }"
+      *cdkVirtualFor="let item of yearAndMonthList; let index = index"
+    >
+      <p class="devui-year-title" *ngIf="!item.isMonth && !isListCollopse" (click)="toggleListCollopse()">{{ item.year }}</p>
+      <p class="devui-year-title" *ngIf="!item.isMonth && isListCollopse" (click)="selectMonth(item.year, 0)">{{ item.year }}</p>
+      <p class="devui-month-title" *ngIf="item.isMonth" (click)="selectMonth(item.year, item.month)">
+        {{ i18nText.monthsOfYear[item.month] }}
+      </p>
+    </div>
+  </cdk-virtual-scroll-viewport>
+
+  <div class="devui-canlender-panel-main">
+    <table class="devui-table">
+      <thead>
+        <tr class="small text-center devui-week-header">
+          <td *ngFor="let item of i18nText?.daysOfWeek">{{ item }}</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td colspan="7">
+            <cdk-virtual-scroll-viewport
+              #scrollBody
+              [itemSize]="calendarItemSize"
+              class="devui-tbody-wrapper"
+              minBufferPx="400"
+              maxBufferPx="600"
+            >
+              <div *cdkVirtualFor="let month of allMonthList; let index = index">
+                <p class="devui-table-month-title">{{ i18nText?.getYearMonthStr(month.year, month.month + 1) }}</p>
+                <table
+                  class="devui-month-table"
+                  [ngClass]="{
+                    'devui-single-date': isSingleDate()
+                  }"
+                  (mouseleave)="curHoverDate = null; curWeekHoverDate = null"
+                >
+                  <tbody>
+                    <tr class="small text-center devui-week-header" *ngFor="let week of month.displayWeeks">
+                      <td
+                        [ngClass]="{
+                          'devui-table-date': day.inMonth,
+                          'devui-table-date-selected': isDateActive(day.date),
+                          'devui-table-date-abandon-selected': isDateAbandon(day.date),
+                          'devui-table-date-today': day.isToday,
+                          'devui-table-date-disable': day.isDisable,
+                          'devui-table-date-inrange': isDateInRange(day.date),
+                          'devui-table-date-start': isStartDate(day.date),
+                          'devui-table-date-end': isEndDate(day.date),
+                          'devui-table-date-in-selected-range': isDateInSelectRange(day.date),
+                          'devui-table-date-active-type': isActiveTypeDate(day.date)
+                        }"
+                        *ngFor="let day of week"
+                        (click)="selectDate(day)"
+                        (mouseenter)="setHoverTarget(day.date, day.inMonth)"
+                      >
+                        <span>{{ day.inMonth ? day.day : '' }}</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </cdk-virtual-scroll-viewport>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

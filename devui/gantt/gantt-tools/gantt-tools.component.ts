@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { GanttScaleUnit, UnitRole } from '../gantt.model';
+import { UnitRole } from '../gantt.model';
 
 @Component({
   selector: 'd-gantt-tools',
@@ -8,7 +8,15 @@ import { GanttScaleUnit, UnitRole } from '../gantt.model';
 })
 export class GanttToolsComponent {
 
-  @Input() currentUnit: GanttScaleUnit;
+  @Input('currentUnit') set currentUnit(val) {
+    this._currentUnit = val;
+    const data = this.views.filter(i => i.value === val);
+    this.currentUnitLabel = data.length > 0 ? data[0].label : '';
+  }
+
+  get currentUnit () {
+    return this._currentUnit;
+  }
 
   @Input() isFullScreen = false;
 
@@ -22,17 +30,21 @@ export class GanttToolsComponent {
 
   unitRole = UnitRole;
 
+  currentUnitLabel = '';
+
+  _currentUnit = '';
+
   views = [
     {
-      label: 'day',
+      label: 'Day',
       value: 'day'
     },
     {
-      label: 'week',
+      label: 'Week',
       value: 'week'
     },
     {
-      label: 'month',
+      label: 'Month',
       value: 'month'
     }
   ];
@@ -52,7 +64,6 @@ export class GanttToolsComponent {
   }
 
   selectView (menu) {
-    this.currentUnit = menu.value;
-    this.switchView.emit(this.currentUnit);
+    this.switchView.emit(menu.value);
   }
 }

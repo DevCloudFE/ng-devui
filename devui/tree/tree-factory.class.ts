@@ -192,7 +192,7 @@ export class TreeFactory {
     this.nodes[id].data.editable = true;
   }
 
-  deleteNodeById(id: number | string) {
+  deleteNodeById(id: number | string, renderTree = true) {
     const node = this.nodes[id];
     const parentNode = this.nodes[node.parentId];
     this.removeChildNode(parentNode, node);
@@ -211,7 +211,9 @@ export class TreeFactory {
     if (parentNode && (!parentNode.data.children || !parentNode.data.children.length)) {
       parentNode.data.isParent = false;
     }
-    this.renderFlattenTree();
+    if (renderTree) {
+      this.renderFlattenTree();
+    }
     return this;
   }
 

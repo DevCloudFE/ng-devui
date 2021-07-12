@@ -31,6 +31,9 @@
       <div class="drawer-content" cdkScrollable>
         <ng-template dDrawerContentHost></ng-template>
       </div>
+      <div *ngIf="contentTemplate" class="drawer-content" cdkScrollable>
+        <ng-template [ngTemplateOutlet]="contentTemplate"></ng-template>
+      </div>
     </div>
   </div>
 </div>

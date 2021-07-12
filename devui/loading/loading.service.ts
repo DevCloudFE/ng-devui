@@ -1,4 +1,5 @@
-import { ComponentFactoryResolver, ComponentRef, EmbeddedViewRef, Injectable, Renderer2, RendererFactory2 } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { ComponentFactoryResolver, ComponentRef, EmbeddedViewRef, Inject, Injectable, Renderer2, RendererFactory2 } from '@angular/core';
 import { OverlayContainerRef } from 'ng-devui/overlay-container';
 import { LoadingBackdropComponent } from './loading-backdrop.component';
 import { LoadingComponent } from './loading.component';
@@ -8,16 +9,20 @@ import { ILoadingOptions } from './loading.types';
 })
 export class LoadingService {
   private renderer: Renderer2;
+  document: Document;
+
   constructor(
     private overlayContainerRef: OverlayContainerRef,
     private componentFactoryResolver: ComponentFactoryResolver,
-    private rendererFactory: RendererFactory2
+    private rendererFactory: RendererFactory2,
+    @Inject(DOCUMENT) private doc: any
   ) {
     this.renderer = this.rendererFactory.createRenderer(null, null);
+    this.document = this.doc;
   }
   // loading 服务内的函数，外部就可以传入ILoadingOptions类型的参数调用它
   open({
-    target = document.body,
+    target = this.document.body,
     backdrop = true,
     message,
     loadingTemplateRef,
@@ -39,7 +44,7 @@ export class LoadingService {
       Object.assign(backdropRef.instance, {
         backdrop: backdrop,
         zIndex: zIndex,
-        target: target ? target : document.body,
+        target: target ? target : this.document.body,
       });
       const viewRef = backdropRef.hostView;
       (viewRef as EmbeddedViewRef<any>).rootNodes.forEach((node) => target.appendChild(node));
@@ -57,7 +62,7 @@ export class LoadingService {
       top: view ? view.top : '50%',
       left: view ? view.left : '50%',
       isCustomPosition: !!view,
-      target: target ? target : document.body,
+      target: target ? target : this.document.body,
     });
 
     this.renderer.setStyle(target, 'position', positionType);

@@ -1,7 +1,7 @@
 <d-fullscreen [zIndex]="100" (fullscreenLaunch)="launchFullscreen($event)">
   <div #ganttContainer class="gantt-container" fullscreen-target>
     <div class="header" [style.width]="ganttScaleWidth">
-      <d-gantt-scale [ganttBarContainerElement]="ganttBody"></d-gantt-scale>
+      <d-gantt-scale [ganttBarContainerElement]="ganttBody" [scrollElement]="ganttContainer"></d-gantt-scale>
     </div>
     <d-gantt-tools
       [currentUnit]="unit"
@@ -24,11 +24,12 @@
           [id]="item?.id"
           [title]="item?.title"
           [progressRate]="item?.progressRate"
+          [scrollElement]="ganttContainer"
           (barMoveStartEvent)="onGanttBarMoveStart($event)"
           (barMovingEvent)="onGanttBarMoving($event)"
           (barResizeStartEvent)="onGanttBarResizeStart($event)"
           (barResizingEvent)="onGanttBarResizing($event)"
-          (barMoveEndEvent)="onGanttBarMove($event)"
+          (barMoveEndEvent)="onGanttBarMoveEnd($event)"
           (barResizeEndEvent)="onGanttBarResize($event)"
           (barProgressEvent)="onBarProgressEvent($event)"
         ></d-gantt-bar>

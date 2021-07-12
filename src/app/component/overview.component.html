@@ -10,10 +10,22 @@
       {{ overviewText.description }}
     </p>
     <d-search [size]="'lg'" [isKeyupSearch]="true" [placeholder]="overviewText.placeholder" (searchFn)="searchComponent($event)"></d-search>
+    <div class="d-overview-filters">
+      <div class="d-overview-filters-title">{{ overviewText.filter }}:</div>
+      <d-tag
+        *ngFor="let tag of tagList; let i = index"
+        class="d-overview-filters-item"
+        [mode]="'checkable'"
+        [checked]="tag.checked"
+        [tag]="tag.title"
+        [titleContent]="tag.title"
+        (checkedChange)="filter(tag.name)"
+      ></d-tag>
+    </div>
   </div>
   <ul class="d-overview-components" *ngIf="componentsDataDisplay.length">
-    <li class="d-overview-components-list" *ngFor="let components of componentsDataDisplay">
-      <ng-container *ngIf="!components.nodisplay">
+    <ng-container *ngFor="let components of componentsDataDisplay">
+      <li class="d-overview-components-list" *ngIf="!components.nodisplay">
         <div class="d-overview-component-title">
           <h2>
             {{ components.title }}
@@ -26,9 +38,18 @@
           <ng-container *ngFor="let component of components.children">
             <d-card *ngIf="!component.nodisplay" (click)="jumpToComponent(component.link)">
               <div class="d-overview-card-wrapper">
-                <div class="d-overview-card-new" *ngIf="newScopeList.includes(component.lowerName)">
-                  {{ overviewText.newChange }}
-                </div>
+                <d-tag
+                  *ngIf="component.newChange"
+                  [ngClass]="isOpensource ? '' : 'd-overview-shadow'"
+                  [tag]="overviewText.newChange"
+                  [labelStyle]="'orange-w98'"
+                ></d-tag>
+                <d-tag
+                  *ngIf="component.sunset"
+                  [ngClass]="isOpensource ? '' : 'd-overview-shadow'"
+                  [tag]="overviewText.sunset"
+                  [labelStyle]="'yellow-w98'"
+                ></d-tag>
                 <div class="d-overview-card-icon">
                   <img
                     src="{{ imgPrefix + component.folderName + '/' + component.lowerName + '.png' }}"
@@ -39,16 +60,19 @@
                 <p class="d-overview-card-title">
                   {{ component.title }}
                 </p>
+                <p *ngIf="component.description" class="d-overview-card-description" [title]="component.description">
+                  {{ component.description }}
+                </p>
               </div>
             </d-card>
           </ng-container>
           <div class="d-component-place-holder" *ngFor="let placeHolder of flexPlaceHolders"></div>
         </div>
-      </ng-container>
-    </li>
+      </li>
+    </ng-container>
   </ul>
   <div class="d-overview-no-data" *ngIf="!componentsDataDisplay.length">
-    <img class="d-overview-no-data-img" src="./{{ srcPrefix }}/no-data{{ darkMode }}.svg" alt="no-data" />
+    <img *ngIf="!nowFilter" class="d-overview-no-data-img" src="./{{ srcPrefix }}/no-data{{ darkMode }}.svg" alt="no-data" />
     <div class="d-overview-no-data-wrap">
       <div *ngIf="componentsLooking && componentsLooking.length">
         <h2 class="d-overview-no-data-title">
@@ -57,14 +81,26 @@
         <div class="d-overview-no-data-list d-overview-component-wrapper">
           <d-card *ngFor="let component of componentsLooking" (click)="jumpToComponent(component.link)">
             <div class="d-overview-card-wrapper">
-              <div class="d-overview-card-new" *ngIf="newScopeList.includes(component.lowerName)">
-                {{ overviewText.newChange }}
-              </div>
+              <d-tag
+                *ngIf="component.newChange"
+                [ngClass]="isOpensource ? '' : 'd-overview-shadow'"
+                [tag]="overviewText.newChange"
+                [labelStyle]="'orange-w98'"
+              ></d-tag>
+              <d-tag
+                *ngIf="component.sunset"
+                [ngClass]="isOpensource ? '' : 'd-overview-shadow'"
+                [tag]="overviewText.sunset"
+                [labelStyle]="'yellow-w98'"
+              ></d-tag>
               <div class="d-overview-card-icon">
                 <img src="{{ imgPrefix + component.folderName + '/' + component.lowerName + '.png' }}" alt="" (error)="imgError($event)" />
               </div>
               <p class="d-overview-card-title">
                 {{ component.title }}
+              </p>
+              <p *ngIf="component.description" class="d-overview-card-description" [title]="component.description">
+                {{ component.description }}
               </p>
             </div>
           </d-card>
@@ -74,19 +110,37 @@
 
       <div *ngIf="componentsSuggest && componentsSuggest.length">
         <h2 class="d-overview-no-data-title">
-          {{ overviewText.suggestCmp }}
+          {{
+            nowFilter === 'newChangeCmps'
+              ? overviewText.newChangeCmps
+              : nowFilter === 'recentlySuggestCmps'
+              ? overviewText.recentlySuggestCmps
+              : overviewText.suggestCmp
+          }}
         </h2>
         <div class="d-overview-no-data-list d-overview-component-wrapper">
           <d-card *ngFor="let component of componentsSuggest" (click)="jumpToComponent(component.link)">
             <div class="d-overview-card-wrapper">
-              <div class="d-overview-card-new" *ngIf="newScopeList.includes(component.lowerName)">
-                {{ overviewText.newChange }}
-              </div>
+              <d-tag
+                *ngIf="component.newChange"
+                [ngClass]="isOpensource ? '' : 'd-overview-shadow'"
+                [tag]="overviewText.newChange"
+                [labelStyle]="'orange-w98'"
+              ></d-tag>
+              <d-tag
+                *ngIf="component.sunset"
+                [ngClass]="isOpensource ? '' : 'd-overview-shadow'"
+                [tag]="overviewText.sunset"
+                [labelStyle]="'yellow-w98'"
+              ></d-tag>
               <div class="d-overview-card-icon">
                 <img src="{{ imgPrefix + component.folderName + '/' + component.lowerName + '.png' }}" alt="" (error)="imgError($event)" />
               </div>
               <p class="d-overview-card-title">
                 {{ component.title }}
+              </p>
+              <p *ngIf="component.description" class="d-overview-card-description" [title]="component.description">
+                {{ component.description }}
               </p>
             </div>
           </d-card>

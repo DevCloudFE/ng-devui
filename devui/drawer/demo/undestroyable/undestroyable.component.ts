@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, Inject } from '@angular/core';
 import { DrawerService, IDrawerOpenResult } from 'ng-devui/drawer';
 import { DrawerContentComponent } from '../drawerContent/drawer-content.component';
 
@@ -10,8 +11,8 @@ export class UndestroyableComponent {
   results: IDrawerOpenResult;
   doms: any = [];
 
-  constructor(private drawerService: DrawerService) {
-    this.doms.push(document.getElementById('app-container'));
+  constructor(private drawerService: DrawerService, @Inject(DOCUMENT) private doc: any) {
+    this.doms.push(this.doc.getElementById('app-container'));
   }
 
   destroy() {

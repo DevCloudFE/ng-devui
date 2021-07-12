@@ -23,6 +23,11 @@ export class DrawerDemoComponent implements OnInit, OnDestroy {
     { title: 'drawerContent-css', language: 'css', code: require('!!raw-loader!./drawerContent/drawer-content.component.scss') },
   ];
 
+  templateSource: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./template/template.component.html') },
+    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./template/template.component.ts') }
+  ];
+
   navItems = [];
   subs: Subscription = new Subscription();
   constructor(private translate: TranslateService) {}
@@ -46,6 +51,7 @@ export class DrawerDemoComponent implements OnInit, OnDestroy {
     this.navItems = [
       { dAnchorLink: 'basic-usage', value: values['basic-usage'] },
       { dAnchorLink: 'do-not-destroy-after-closing', value: values['do-not-destroy-after-closing'] },
+      { dAnchorLink: 'template', value: values['template'] }
     ];
   }
 

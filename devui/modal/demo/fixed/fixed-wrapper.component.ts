@@ -57,7 +57,7 @@ export class FixedWrapperComponent {
   }
 
   setHtmlStyle() {
-    this.scrollTop = document.documentElement.scrollTop;
+    this.scrollTop = this.documentRef.documentElement.scrollTop;
     this.renderer.setStyle(this.documentRef.documentElement, 'top', `-${this.scrollTop}px`);
     this.renderer.setStyle(this.documentRef.documentElement, 'position', 'fixed');
     this.renderer.setStyle(this.documentRef.documentElement, 'width', `100%`);
@@ -69,6 +69,6 @@ export class FixedWrapperComponent {
     this.renderer.removeStyle(this.documentRef.documentElement, 'width');
     this.renderer.removeStyle(this.documentRef.documentElement, 'overflow');
     this.renderer.removeStyle(this.documentRef.documentElement, 'top');
-    document.documentElement.scrollTop = this.scrollTop;
+    this.documentRef.documentElement.scrollTop = this.scrollTop;
   }
 }

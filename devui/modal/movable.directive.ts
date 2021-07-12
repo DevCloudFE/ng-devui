@@ -1,4 +1,4 @@
-import {Directive, ElementRef, HostListener, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import { Directive, ElementRef, HostListener, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 
 @Directive({
   selector: '[dMovable]'
@@ -48,7 +48,7 @@ export class MovableDirective implements OnInit, OnChanges {
 
     @HostListener('document:mousemove', ['$event'])
     onMouseMove(event: MouseEvent) {
-      if (this.md && this._allowDrag) {
+      if (typeof window !== 'undefined' && this.md && this._allowDrag) {
         // 阻止拖动过程中文字被选中
         event.stopPropagation();
         event.preventDefault();

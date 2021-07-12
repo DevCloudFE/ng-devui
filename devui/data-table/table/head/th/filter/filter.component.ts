@@ -1,5 +1,6 @@
+import { DOCUMENT } from '@angular/common';
 import {
-  ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit,
+  ChangeDetectorRef, Component, EventEmitter, Inject, Input, OnChanges, OnDestroy, OnInit,
   Output, SimpleChanges, TemplateRef, ViewChild
 } from '@angular/core';
 import { DropDownDirective } from 'ng-devui/dropdown';
@@ -47,8 +48,11 @@ export class FilterComponent implements OnInit, OnChanges, OnDestroy {
   i18nCommonText: I18nInterface['common'];
   filterIconActiveInner: boolean;
   DEBONCE_TIME = 300;
-  constructor(private ref: ChangeDetectorRef, private i18n: I18nService, private thComponent: TableThComponent) {
+  document: Document;
+  constructor(private ref: ChangeDetectorRef, private i18n: I18nService, private thComponent: TableThComponent,
+              @Inject(DOCUMENT) private doc: any) {
     this.i18nCommonText = this.i18n.getI18nText().common;
+    this.document = this.doc;
   }
 
   ngOnInit() {
@@ -160,10 +164,10 @@ export class FilterComponent implements OnInit, OnChanges, OnDestroy {
     if (this.closeWhenScroll) {
       const tableViewElement = this.thComponent.tableViewRefElement.nativeElement.querySelector('.devui-scrollbar.scroll-view');
       if ($event) {
-        document.addEventListener('scroll', this.onContainerScroll);
+        this.document.addEventListener('scroll', this.onContainerScroll);
         tableViewElement?.addEventListener('scroll', this.onContainerScroll);
       } else {
-        document.removeEventListener('scroll', this.onContainerScroll);
+        this.document.removeEventListener('scroll', this.onContainerScroll);
         tableViewElement?.removeEventListener('scroll', this.onContainerScroll);
       }
     }
@@ -224,7 +228,7 @@ export class FilterComponent implements OnInit, OnChanges, OnDestroy {
   registerFilterChange(): void {
     this.sourceSubject = new BehaviorSubject<any>('');
     setTimeout(() => {
-      this.searchElement = document.querySelector('.data-table-column-filter-content input');
+      this.searchElement = this.document.querySelector('.data-table-column-filter-content input');
       this.searchInputValueChangeEvent();
     });
     this.sourceSubscription = this.sourceSubject.pipe(switchMap(term => this.searchFn(term))).subscribe(options => {

@@ -30,7 +30,8 @@ export class DrawerService {
     destroyOnHide = true,
     position = 'right',
     bodyScrollable = true,
-    showAnimation = true
+    showAnimation = true,
+    contentTemplate
   }: IDrawerOptions): IDrawerOpenResult {
     const componentFactoryResolver_ = componentFactoryResolver || this.componentFactoryResolver;
     const drawerRef = this.overlayContainerRef.createComponent(
@@ -50,15 +51,19 @@ export class DrawerService {
       position,
       backdropCloseable: isUndefined(backdropCloseable) ? true : backdropCloseable,
       bodyScrollable,
-      showAnimation
+      showAnimation,
+      contentTemplate
     });
 
-    const drawerContentRef = drawerRef.instance.drawerContentHost.viewContainerRef.createComponent(
-      componentFactoryResolver_.resolveComponentFactory(drawerContentComponent),
-      0,
-      injector
-    );
-    assign(drawerContentRef.instance, data);
+    let drawerContentRef;
+    if (drawerContentComponent) {
+      drawerContentRef = drawerRef.instance.drawerContentHost.viewContainerRef.createComponent(
+        componentFactoryResolver_.resolveComponentFactory(drawerContentComponent),
+        0,
+        injector
+      );
+      assign(drawerContentRef.instance, data);
+    }
 
     drawerRef.instance.onHidden = () => {
       if (onClose) {
@@ -80,7 +85,7 @@ export class DrawerService {
     drawerRef.instance.show();
     return {
       drawerInstance: drawerRef.instance,
-      drawerContentInstance: drawerContentRef.instance
+      drawerContentInstance: drawerContentRef ? drawerContentRef.instance : null
     };
   }
 }

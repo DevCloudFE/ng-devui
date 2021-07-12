@@ -16,22 +16,22 @@ export class AlternativeModeComponent implements OnInit {
         {
           text: 'Check',
           position: 'bottom',
-          type: 'success'
+          dotColor: 'var(--devui-success)'
         },
         {
           text: 'Build',
           position: 'top',
-          type: 'danger'
+          dotColor: 'var(--devui-danger)'
         },
         {
           text: 'Depoy',
           position: 'bottom',
-          type: 'warning'
+          dotColor: 'var(--devui-warning)'
         },
         {
           text: 'End',
           position: 'top',
-          type: 'waiting'
+          dotColor: 'var(--devui-waiting)'
         },
       ]
     };
@@ -44,19 +44,19 @@ export class AlternativeModeComponent implements OnInit {
         },
         {
           text: 'Check',
-          type: 'success'
+          dotColor: 'var(--devui-success)'
         },
         {
           text: 'Build',
-          type: 'danger'
+          dotColor: 'var(--devui-danger)'
         },
         {
           text: 'Depoy',
-          type: 'warning'
+          dotColor: 'var(--devui-warning)'
         },
         {
           text: 'End',
-          type: 'waiting'
+          dotColor: 'var(--devui-waiting)'
         },
       ]
     };

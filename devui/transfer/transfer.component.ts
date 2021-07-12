@@ -31,6 +31,7 @@ export class TransferComponent implements OnInit, OnChanges, OnDestroy {
   @Input() disabled = false;
   @Input() isSourceDroppable = false;
   @Input() isTargetDroppable = false;
+  @Input() showOptionTitle = false;
   @Input() beforeTransfer: (sourceOption, targetOption) => boolean | Promise<boolean> | Observable<boolean>;
 
   // 自定义
@@ -106,9 +107,11 @@ export class TransferComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes && (changes.customSourceCheckedLen || changes.customTargetCheckedLen)) {
-      this.targetCanTransfer = !!(changes.customSourceCheckedLen && changes.customSourceCheckedLen.currentValue > 0);
-      this.sourceCanTransfer = !!(changes.customTargetCheckedLen && changes.customTargetCheckedLen.currentValue > 0);
+    if (changes && changes.customSourceCheckedLen) {
+      this.targetCanTransfer = !!(this.customSourceCheckedLen > 0);
+    }
+    if (changes && changes.customTargetCheckedLen) {
+      this.sourceCanTransfer = !!(this.customTargetCheckedLen > 0);
     }
 
     if (changes && (changes.sourceOption || changes.targetOption)) {
@@ -174,9 +177,12 @@ export class TransferComponent implements OnInit, OnChanges, OnDestroy {
 
       if (this.transferring.observers.length) {
         this.transferring.emit(direction);
+        setTimeout(() => {
+          this.transferHandle(direction);
+        });
       } else {
+        const changeData = [];
         if (direction === TransferDirection.TARGET) {
-          const changeData = [];
           // 对源数据更改
           this.sourceDisplayOption.filter(item => item.checked === true).forEach(item => {
             const tmp = { name: item.name, value: item.value, id: item.id, checked: false };
@@ -184,18 +190,7 @@ export class TransferComponent implements OnInit, OnChanges, OnDestroy {
             changeData.push(tmp);
             this.sourceOption.splice(this.sourceOption.indexOf(item), 1);
           });
-          this.targetCanTransfer = false;
-
-          if (this.sourceCustomViewTemplate) {
-            this.transferToTarget.next();
-          } else {
-            this.transferToTarget.next({ sourceOption: this.sourceOption, targetOption: this.targetOption, changeData });
-          }
-          if (this.isSearch && this.sourceSearchText !== '') {
-            this.sourceSearchText = '';
-          }
         } else if (direction === TransferDirection.SOURCE) {
-          const changeData = [];
           this.targetDisplayOption.filter(item => item.checked === true).forEach(item => {
             const tmp = { name: item.name, value: item.value, id: item.id, checked: false };
             this.sourceOption.push(tmp);
@@ -203,24 +198,47 @@ export class TransferComponent implements OnInit, OnChanges, OnDestroy {
             this.targetOption.splice(this.targetOption.indexOf(item), 1);
           });
           this.targetOption = this.targetOption.filter(item => item.checked !== true);
-          this.sourceCanTransfer = false;
-          if (this.targetCustomViewTemplate) {
-            this.transferToSource.next();
-          } else {
-            this.transferToSource.next({ sourceOption: this.sourceOption, targetOption: this.targetOption, changeData });
-          }
-
-          if (this.isSearch && this.targetSearchText !== '') {
-            this.targetSearchText = '';
-          }
         }
-        this.targetDisplayOption = this.targetOption;
-        this.sourceDisplayOption = this.sourceOption;
-        this.listTotalCheck(TransferDirection.TARGET);
-        this.listTotalCheck(TransferDirection.SOURCE);
-        this.afterTransfer.emit(direction);
+
+        this.transferHandle(direction, changeData);
       }
     });
+  }
+
+  transferHandle(direction: TransferDirection, changeData?: object) {
+    if (direction === TransferDirection.TARGET) {
+      this.targetCanTransfer = false;
+
+      if (this.sourceCustomViewTemplate) {
+        this.transferToTarget.next();
+      } else {
+        changeData === undefined
+          ? this.transferToTarget.next({ sourceOption: this.sourceOption, targetOption: this.targetOption })
+          : this.transferToTarget.next({ sourceOption: this.sourceOption, targetOption: this.targetOption, changeData });
+      }
+      if (this.isSearch && this.sourceSearchText !== '') {
+        this.sourceSearchText = '';
+      }
+    } else if (direction === TransferDirection.SOURCE) {
+      this.sourceCanTransfer = false;
+
+      if (this.targetCustomViewTemplate) {
+        this.transferToSource.next();
+      } else {
+        changeData === undefined
+          ? this.transferToSource.next({ sourceOption: this.sourceOption, targetOption: this.targetOption })
+          : this.transferToSource.next({ sourceOption: this.sourceOption, targetOption: this.targetOption, changeData });
+      }
+      if (this.isSearch && this.targetSearchText !== '') {
+        this.targetSearchText = '';
+      }
+    }
+
+    this.targetDisplayOption = this.targetOption;
+    this.sourceDisplayOption = this.sourceOption;
+    this.listTotalCheck(TransferDirection.TARGET);
+    this.listTotalCheck(TransferDirection.SOURCE);
+    this.afterTransfer.emit(direction);
   }
 
   checkAll(direction: TransferDirection, event: any) {

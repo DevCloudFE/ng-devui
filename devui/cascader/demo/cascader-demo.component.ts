@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
@@ -37,6 +38,11 @@ export class CascaderDemoComponent implements OnInit, OnDestroy {
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./parent-select-cascader/parent-select-cascader.component.ts') },
   ];
 
+  CascaderDemoHeaderTemplate: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./header-template/cascader-header-template.component.html') },
+    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./header-template/cascader-header-template.component.ts') },
+    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./header-template/cascader-header-template.component.scss') },
+  ];
   navItems = [];
   subs: Subscription = new Subscription();
   constructor(private translate: TranslateService) {}
@@ -64,6 +70,7 @@ export class CascaderDemoComponent implements OnInit, OnDestroy {
       { dAnchorLink: 'parent-cascader', value: values['parent-cascader'] },
       { dAnchorLink: 'template-cascader', value: values['template-cascader'] },
       { dAnchorLink: 'lazyload-cascader', value: values['lazyload-cascader'] },
+      { dAnchorLink: 'cascader-header-template', value: values['cascader-header-template']},
     ];
   }
 

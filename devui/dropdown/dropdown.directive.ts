@@ -1,6 +1,7 @@
 import { CdkOverlayOrigin } from '@angular/cdk/overlay';
+import { DOCUMENT } from '@angular/common';
 import {
-  AfterContentInit, ChangeDetectorRef, ContentChildren, Directive, ElementRef, EventEmitter, HostBinding, Input,
+  AfterContentInit, ChangeDetectorRef, ContentChildren, Directive, ElementRef, EventEmitter, HostBinding, Inject, Input,
   OnChanges, OnDestroy, Optional, Output, QueryList, SimpleChanges,
   SkipSelf
 } from '@angular/core';
@@ -78,6 +79,7 @@ export class DropDownDirective implements OnDestroy, OnChanges, AfterContentInit
   public cdkConnectedOverlayOrigin: CdkOverlayOrigin;
 
   private _appendToBody: boolean;
+  document: Document;
 
   public set appendToBody(bool: boolean) {
     this._appendToBody = (bool === true);
@@ -103,8 +105,11 @@ export class DropDownDirective implements OnDestroy, OnChanges, AfterContentInit
     private cdr: ChangeDetectorRef,
     public el: ElementRef,
     private devConfigService: DevConfigService,
-    @Optional() @SkipSelf() public parentDropdown: DropDownDirective
-    ) { }
+    @Optional() @SkipSelf() public parentDropdown: DropDownDirective,
+    @Inject(DOCUMENT) private doc: any
+    ) {
+      this.document = this.doc;
+    }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.hasOwnProperty('trigger')) {
@@ -201,7 +206,7 @@ export class DropDownDirective implements OnDestroy, OnChanges, AfterContentInit
   }
 
   simulateEventDispatch($event, target?) {
-    const event = document.createEvent('MouseEvents');
+    const event = this.document.createEvent('MouseEvents');
     event.initEvent($event.type, true, true);
     event['originEvent'] = $event['originEvent'] || $event;
 

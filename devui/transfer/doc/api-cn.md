@@ -18,11 +18,14 @@ import { TransferModule } from 'ng-devui/transfer';
 |   targetOption    |  `array`  |  []   | 可选参数，穿梭框目标数据   | [基本用法](demo#transfer-demo-base)     |
 |      titles       |  `array`  |  []   | 可选参数，穿梭框标题       | [基本用法](demo#transfer-demo-base)     |
 |      height       | `string`  | 320px | 可选参数，穿梭框高度       |
-|     isSearch      | `number`  | false | 可选参数，是否可以搜索     | [搜索穿梭框](demo#transfer-demo-search) |
+|     isSearch      | `boolean` | false | 可选参数，是否可以搜索     | [搜索穿梭框](demo#transfer-demo-search) |
 | isSourceDroppable | `boolean` | false | 可选参数，源是否可以拖拽   |
 | isTargetDroppable | `boolean` | false | 可选参数，目标是否可以拖拽 | [排序穿梭框](demo#transfer-demo-sort)   |
 |     disabled      | `boolean` | false | 可选参数 穿梭框禁止使用    | [基本用法](demo#transfer-demo-base)     |
+|  showOptionTitle  | `boolean` | false | 可选，鼠标悬浮于数据是否显示title    | [搜索穿梭框](demo#transfer-demo-search) |
 |  beforeTransfer   | `(sourceOption, targetOption) => boolean \| Promise<boolean> \| Observable<boolean>` | - | 可选参数 在transfer事件发生前判断事件是否允许触发     | [基本用法](demo#transfer-demo-base)     |
+|customSourceCheckedLen|`number`|   0   |可选，使用模板时判断源是否可穿梭| [自定义穿梭框](demo#transfer-demo-custom) |
+|customTargetCheckedLen|`number`|   0   |可选，使用模板时判断目标是否可穿梭| [自定义穿梭框](demo#transfer-demo-custom) |
 
 ## d-transfer 事件
 

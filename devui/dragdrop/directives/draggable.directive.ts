@@ -1,5 +1,8 @@
-import { AfterViewInit, Directive, ElementRef, EventEmitter, Host,
-  HostBinding, Input, NgZone, OnDestroy, OnInit, Optional, Output, Renderer2, Self } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import {
+  AfterViewInit, Directive, ElementRef, EventEmitter,
+  HostBinding, Inject, Input, NgZone, OnDestroy, OnInit, Optional, Output, Renderer2, Self
+} from '@angular/core';
 import { fromEvent, Subject, Subscription } from 'rxjs';
 import { DragDropService } from '../services/drag-drop.service';
 import { Utils } from '../shared/utils';
@@ -99,10 +102,12 @@ export class DraggableDirective implements OnInit, AfterViewInit, OnDestroy {
   private dragOriginPlaceholderNextSibling;
   public dragElShowHideEvent = new Subject<boolean>();
   public beforeDragStartEvent = new Subject<boolean>();
+  document: Document;
 
   constructor(public el: ElementRef, private renderer: Renderer2, private dragDropService: DragDropService, private ngZone: NgZone,
-              @Optional() @Self() public dragPreviewDirective: DragPreviewDirective
+              @Optional() @Self() public dragPreviewDirective: DragPreviewDirective, @Inject(DOCUMENT) private doc: any
     ) {
+      this.document = this.doc;
   }
 
   ngOnInit() {
@@ -377,7 +382,7 @@ export class DraggableDirective implements OnInit, AfterViewInit, OnDestroy {
       this.delayRemoveOriginPlaceholderTimer = undefined;
     }
 
-    const node = document.createElement(this.originPlaceholder.tag || 'div');
+    const node = this.document.createElement(this.originPlaceholder.tag || 'div');
     const rect =  this.el.nativeElement.getBoundingClientRect();
     if (directShow) {
       node.style.display = 'block';
@@ -445,7 +450,7 @@ export class DraggableDirective implements OnInit, AfterViewInit, OnDestroy {
       delayOriginPlaceholder.classList.add('delay-deletion');
       this.delayRemoveOriginPlaceholderTimer = setTimeout(() => {
         delayOriginPlaceholder.parentElement.removeChild(delayOriginPlaceholder);
-        if (document.body.contains(this.el.nativeElement)) {
+        if (this.document.body.contains(this.el.nativeElement)) {
           this.el.nativeElement.style.display = '';
           this.dragDropService.dragElShowHideEvent.next(false);
         }
@@ -475,7 +480,7 @@ export class DraggableDirective implements OnInit, AfterViewInit, OnDestroy {
     if (!element.parentNode) { return null; }
     // 模拟一个元素测预测位置和最终位置是否符合，如果不符合则是有transform等造成的偏移
     const elementPosition = element.getBoundingClientRect();
-    const testEl = document.createElement('div');
+    const testEl = this.document.createElement('div');
     Utils.addElStyles(testEl, {
       opacity: '0',
       position: 'fixed',

@@ -34,11 +34,13 @@ export class QuadrantDiagramAxisComponent implements OnInit, OnChanges {
         }
     }
     ngOnInit(): void {
+      if (typeof window !== 'undefined') {
         this.themeService = window['devuiThemeService'];
         if (this.themeService && this.themeService.eventBus) {
             this.themeService.eventBus.add('themeChanged', this.refreshColor);
         }
         this.refreshColor();
+      }
     }
 
     refreshColor = () => {

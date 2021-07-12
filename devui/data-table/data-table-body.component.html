@@ -66,7 +66,7 @@
     [dragOverClass]="rowItem?.$draggable['class']"
     [dragHandle]="rowItem?.$draggable['handler']"
   ></tr>
-  <tr *ngIf="rowItem['$isDetailOpen'] && rowItem.detail">
+  <tr *ngIf="rowItem && rowItem['$isDetailOpen'] && rowItem.detail">
     <td [attr.colspan]="checkable ? 2 : 1"></td>
     <td [attr.colspan]="columns.length" class="detail-content" [style.padding]="'13px'">
       <ng-template

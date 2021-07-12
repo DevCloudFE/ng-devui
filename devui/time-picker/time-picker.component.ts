@@ -1,4 +1,5 @@
 import { CdkOverlayOrigin, ConnectedOverlayPositionChange, ConnectedPosition, VerticalConnectionPos } from '@angular/cdk/overlay';
+import { DOCUMENT } from '@angular/common';
 import {
   ChangeDetectorRef,
   Component,
@@ -6,6 +7,7 @@ import {
   EventEmitter,
   forwardRef,
   HostListener,
+  Inject,
   Input,
   OnChanges,
   OnDestroy,
@@ -97,6 +99,7 @@ export class TimePickerComponent implements OnChanges, OnInit, OnDestroy, Contro
   private _illegalTimeMin = '60';
   private _illegalTimeSec = '60';
   private correct = ['Hour', 'Min', 'Sec'];
+  document: Document;
 
   private onChange = (_: any) => null;
   private onTouched = () => null;
@@ -150,7 +153,7 @@ export class TimePickerComponent implements OnChanges, OnInit, OnDestroy, Contro
       if (!open) {
         this.startAnimation = false;
         removeClassFromOrigin(this.elementRef);
-        document.removeEventListener('click', this.onDocumentClick);
+        this.document.removeEventListener('click', this.onDocumentClick);
       } else {
         if (this.timePickerWidth !== undefined) {
           this.originWidth = this.timePickerWidth;
@@ -167,7 +170,7 @@ export class TimePickerComponent implements OnChanges, OnInit, OnDestroy, Contro
         }
         setTimeout(() => {
           this.startAnimation = true;
-          document.addEventListener('click', this.onDocumentClick);
+          this.document.addEventListener('click', this.onDocumentClick);
         });
         addClassToOrigin(this.elementRef);
       }
@@ -207,7 +210,10 @@ export class TimePickerComponent implements OnChanges, OnInit, OnDestroy, Contro
     private i18n: I18nService,
     private cdr: ChangeDetectorRef,
     private devConfigService: DevConfigService,
-  ) {}
+    @Inject(DOCUMENT) private doc: any
+  ) {
+    this.document = this.doc;
+  }
 
   @HostListener('blur', ['$event'])
   onBlur($event) {
@@ -251,7 +257,7 @@ export class TimePickerComponent implements OnChanges, OnInit, OnDestroy, Contro
     if (this.userInputSubscription) {
       this.userInputSubscription.unsubscribe();
     }
-    document.removeEventListener('click', this.onDocumentClick);
+    this.document.removeEventListener('click', this.onDocumentClick);
   }
 
   registerOnChange(fn: any): void {
@@ -551,6 +557,9 @@ export class TimePickerComponent implements OnChanges, OnInit, OnDestroy, Contro
   }
 
   scrollTo(element: HTMLElement, to: number, duration: number): void {
+    if (typeof window === 'undefined') {
+      return;
+    }
     if (duration <= 0) {
       element.scrollTop = to;
       return;

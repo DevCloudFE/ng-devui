@@ -251,7 +251,9 @@ export default {
     noFilterConditions: 'No filter conditions',
     clearFilterCondition: 'Clear Filter Condition',
     seeMore: 'See more',
-    selected: 'Selected'
+    selected: 'Selected',
+    switchToStart: 'Switch To Start',
+    switchToEnd: 'Switch To End'
   },
   userGuide: {
     guide: 'Guide',

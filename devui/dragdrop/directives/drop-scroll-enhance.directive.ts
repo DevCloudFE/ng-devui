@@ -1,10 +1,13 @@
-import { AfterViewInit, Directive, ElementRef, Input, NgZone, OnDestroy } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { AfterViewInit, Directive, ElementRef, Inject, Input, NgZone, OnDestroy } from '@angular/core';
 import { fromEvent, merge as mergeStatic, Subscription } from 'rxjs';
 import { tap, throttleTime } from 'rxjs/operators';
 import { DragDropService } from '../services/drag-drop.service';
 import { Utils } from '../shared/utils';
-import { DropScrollAreaOffset, DropScrollDirection, DropScrollEnhanceTimingFunctionGroup, DropScrollOrientation,
-  DropScrollSpeed, DropScrollSpeedFunction, DropScrollTriggerEdge } from './drop-scroll-enhance.type';
+import {
+  DropScrollAreaOffset, DropScrollDirection, DropScrollEnhanceTimingFunctionGroup, DropScrollOrientation,
+  DropScrollSpeed, DropScrollSpeedFunction, DropScrollTriggerEdge
+} from './drop-scroll-enhance.type';
 
 @Directive({
   selector: '[dDropScrollEnhanced]',
@@ -30,8 +33,12 @@ export class DropScrollEnhancedDirective implements AfterViewInit, OnDestroy {
   private backwardScrollFn: (event: DragEvent) => void;
   private lastScrollTime;
   private animationFrameId: number;
+  document: Document;
 
-  constructor(private el: ElementRef, private zone: NgZone, private dragDropService: DragDropService) {}
+  constructor(private el: ElementRef, private zone: NgZone, private dragDropService: DragDropService,
+              @Inject(DOCUMENT) private doc: any) {
+    this.document = this.doc;
+  }
 
   ngAfterViewInit() {
     // 设置父元素
@@ -116,6 +123,9 @@ export class DropScrollEnhancedDirective implements AfterViewInit, OnDestroy {
 
   createScrollFn(direction: DropScrollDirection, orientation: DropScrollOrientation,
                  speedFn: DropScrollSpeedFunction) {
+    if (typeof window === 'undefined') {
+      return;
+    }
     const scrollAttr = (direction === 'v') ? 'scrollTop' : 'scrollLeft';
     const eventAttr = (direction === 'v') ? 'clientY' : 'clientX';
     const scrollWidthAttr = (direction === 'v') ? 'scrollHeight' : 'scrollWidth';
@@ -182,7 +192,7 @@ export class DropScrollEnhancedDirective implements AfterViewInit, OnDestroy {
   }
 
   createScrollArea(direction: DropScrollDirection, orientation: DropScrollOrientation) {
-    const area = document.createElement('div');
+    const area = this.document.createElement('div');
     area.className = 'dropover-scroll-area ' + 'dropover-scroll-area-' + this.getCriticalEdge(direction, orientation);
     // 处理大小
     area.classList.add('active');
@@ -236,6 +246,9 @@ export class DropScrollEnhancedDirective implements AfterViewInit, OnDestroy {
   }
 
   getRelatedPosition(target, relatedTarget, edge: DropScrollTriggerEdge, offsetValue?: number) {
+    if (typeof window === 'undefined') {
+      return '0px';
+    }
     const relatedComputedStyle = window.getComputedStyle(relatedTarget);
     const relatedRect = relatedTarget.getBoundingClientRect();
     const selfRect = target.getBoundingClientRect();
@@ -288,7 +301,7 @@ export class DropScrollEnhancedDirective implements AfterViewInit, OnDestroy {
   }
 
   cleanLastScrollTime() {
-    if (this.animationFrameId) {
+    if (this.animationFrameId && typeof window !== 'undefined') {
       window.cancelAnimationFrame(this.animationFrameId);
       this.animationFrameId = undefined;
     }

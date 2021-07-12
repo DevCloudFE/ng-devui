@@ -1,14 +1,18 @@
-import { Injectable } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Inject, Injectable } from '@angular/core';
 
 @Injectable()
 export class QuadrantDiagramService {
+  document: Document;
 
-  constructor() { }
+  constructor(@Inject(DOCUMENT) private doc: any) {
+    this.document = this.doc;
+  }
   showAxisLine(x, y, diagramId, view, axisConfigs) {
-    const horizontalLine = document.querySelector('d-quadrant-diagram#' + diagramId + ' .devui-horizontal-line') as HTMLElement;
-    const verticalLine = document.querySelector('d-quadrant-diagram#' + diagramId + ' .devui-vertical-line') as HTMLElement;
-    const labelXAxisValue = document.querySelector('d-quadrant-diagram#' + diagramId + ' #devui-label-x-axis-value') as HTMLElement;
-    const labelYAxisValue = document.querySelector('d-quadrant-diagram#' + diagramId + ' #devui-label-y-axis-value') as HTMLElement;
+    const horizontalLine = this.document.querySelector('d-quadrant-diagram#' + diagramId + ' .devui-horizontal-line') as HTMLElement;
+    const verticalLine = this.document.querySelector('d-quadrant-diagram#' + diagramId + ' .devui-vertical-line') as HTMLElement;
+    const labelXAxisValue = this.document.querySelector('d-quadrant-diagram#' + diagramId + ' #devui-label-x-axis-value') as HTMLElement;
+    const labelYAxisValue = this.document.querySelector('d-quadrant-diagram#' + diagramId + ' #devui-label-y-axis-value') as HTMLElement;
     labelXAxisValue.textContent = this.getXAxisValue(view, axisConfigs, x);
     labelYAxisValue.textContent = this.getYAxisValue(view, axisConfigs, y);
     horizontalLine.style.top = y + 'px';
@@ -17,13 +21,13 @@ export class QuadrantDiagramService {
     verticalLine.style.display = '';
   }
   hideAxisLine(diagramId) {
-    const horizontalLine = document.querySelector('d-quadrant-diagram#' + diagramId + ' .devui-horizontal-line') as HTMLElement;
-    const verticalLine = document.querySelector('d-quadrant-diagram#' + diagramId + ' .devui-vertical-line') as HTMLElement;
+    const horizontalLine = this.document.querySelector('d-quadrant-diagram#' + diagramId + ' .devui-horizontal-line') as HTMLElement;
+    const verticalLine = this.document.querySelector('d-quadrant-diagram#' + diagramId + ' .devui-vertical-line') as HTMLElement;
     verticalLine.style.display = 'none';
     horizontalLine.style.display = 'none';
   }
   setListPointerEvents(diagramId, value) {
-    const ele = document.querySelectorAll('d-quadrant-diagram#' + diagramId + ' .devui-list-style');
+    const ele = this.document.querySelectorAll('d-quadrant-diagram#' + diagramId + ' .devui-list-style');
     ele.forEach(element => {
       (element as HTMLElement).style.pointerEvents = value;
     });

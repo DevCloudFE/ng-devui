@@ -1,0 +1,48 @@
+<div class="devui-timepicker-panel">
+  <div class="devui-time-header">
+    <span class="devui-time-header-item">{{ i18nText?.hour }}</span>
+    <span class="devui-time-header-item">{{ i18nText?.min }}</span>
+    <span class="devui-time-header-item">{{ i18nText?.second }}</span>
+  </div>
+  <div class="devui-time-picker">
+    <ul *ngIf="firstList.length" class="devui-time-list devui-first-list">
+      <li
+        *ngFor="let item of firstList; let i = index"
+        class="devui-time-item devui-first-item"
+        [ngClass]="{
+          active: item?.active,
+          disabled: item?.disabled
+        }"
+        (click)="chooseTime(item.type, i, true)"
+      >
+        {{ item?.time }}
+      </li>
+    </ul>
+    <ul *ngIf="secondList.length" class="devui-time-list devui-second-list">
+      <li
+        *ngFor="let item of secondList; let i = index"
+        class="devui-time-item devui-second-item"
+        [ngClass]="{
+          active: item?.active,
+          disabled: item?.disabled
+        }"
+        (click)="chooseTime(item.type, i, true)"
+      >
+        {{ item?.time }}
+      </li>
+    </ul>
+    <ul *ngIf="thirdList.length" class="devui-time-list devui-third-list">
+      <li
+        *ngFor="let item of thirdList; let i = index"
+        class="devui-time-item devui-third-item"
+        [ngClass]="{
+          active: item?.active,
+          disabled: item?.disabled
+        }"
+        (click)="chooseTime(item.type, i, true)"
+      >
+        {{ item?.time }}
+      </li>
+    </ul>
+  </div>
+</div>

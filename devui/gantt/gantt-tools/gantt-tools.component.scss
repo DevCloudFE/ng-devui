@@ -20,6 +20,10 @@
   box-shadow: $devui-shadow-length-base rgba(81, 112, 255, 0.4);
   cursor: pointer;
 
+  &.disabled {
+    opacity: 0.5;
+  }
+
   span {
     border: 0 !important;
   }
@@ -31,6 +35,11 @@
       color: $devui-link !important;
     }
   }
+}
+
+.devui-dropdown-menu {
+  top: 10px !important;
+  left: -6px !important;
 }
 
 :host ::ng-deep {

@@ -1,4 +1,5 @@
-import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { AfterViewInit, Component, ElementRef, Inject, Input, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { I18nService } from 'ng-devui/i18n';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
@@ -16,7 +17,8 @@ export class DevUIApiComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() api: any;
   apiData: any;
   navSpriteInstance = null;
-  scrollContainer = document.documentElement;
+  document: Document;
+  scrollContainer;
 
   constructor(
     private router: Router,
@@ -24,8 +26,12 @@ export class DevUIApiComponent implements OnInit, AfterViewInit, OnDestroy {
     private route: ActivatedRoute,
     private i18n: I18nService,
     private elementRef: ElementRef,
-    private renderer: Renderer2
-  ) {}
+    private renderer: Renderer2,
+    @Inject(DOCUMENT) private doc: any
+  ) {
+    this.document = this.doc;
+    this.scrollContainer = this.document.documentElement;
+  }
 
   ngOnInit() {
     this.subs.add(
@@ -57,7 +63,7 @@ export class DevUIApiComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   refreshView() {
-    Array.from<HTMLElement>(document.querySelectorAll('pre code')).forEach((block) => {
+    Array.from<HTMLElement>(this.document.querySelectorAll('pre code')).forEach((block) => {
       hljs.highlightBlock(block);
     });
     const that = this;
@@ -115,6 +121,9 @@ export class DevUIApiComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   get baseUrl() {
+    if (typeof window === 'undefined') {
+      return '';
+    }
     return window.location.pathname.replace(window.location.hash, '');
   }
 }

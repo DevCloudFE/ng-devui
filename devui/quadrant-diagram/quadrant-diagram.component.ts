@@ -61,7 +61,7 @@ export class QuadrantDiagramComponent implements OnInit, OnChanges {
   }
 
   launchFullscreen({ isFullscreen }) {
-    if (isFullscreen) {
+    if (typeof window !== 'undefined' && isFullscreen) {
       this.isFullScreen = isFullscreen;
       this.view = {
         height: window.screen.height,

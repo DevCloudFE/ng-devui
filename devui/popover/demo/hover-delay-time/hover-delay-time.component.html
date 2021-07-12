@@ -1,6 +1,13 @@
 <d-button dPopover [trigger]="'hover'" [controlled]="true" [mouseEnterDelay]="500" [content]="' Mouse enter 500ms later. <br> Show me '">
   MouseEnter delay 500ms
 </d-button>
-<d-button dPopover [trigger]="'hover'" [controlled]="true" [mouseLeaveDelay]="2000" [content]="' Mouse leave 2000ms later. <br> Hide me'">
+<d-button
+  dPopover
+  bsStyle="common"
+  [trigger]="'hover'"
+  [controlled]="true"
+  [mouseLeaveDelay]="2000"
+  [content]="' Mouse leave 2000ms later. <br> Hide me'"
+>
   MouseLeave delay 2000ms
 </d-button>

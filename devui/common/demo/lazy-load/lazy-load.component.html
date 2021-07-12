@@ -1,6 +1,15 @@
-<div class="container" dLoading [showLoading]="showLoading" backdrop="true">
+<div style="margin-bottom: 30px" class="container" dLoading [showLoading]="showLoading" backdrop="true">
+  <div class="devui-demo-text">{{ 'components.common.lazyLoadDemo.p1' | translate }}</div>
   <ul class="list" dLazyLoad enableLazyLoad="true" (loadMore)="onLoadMore($event)">
     <li class="item" *ngFor="let item of list; let index = index">
+      {{ index + 1 + '. ' + item }}
+    </li>
+  </ul>
+</div>
+<div class="container" dLoading [showLoading]="showLoading1" backdrop="true">
+  <div class="devui-demo-text">{{ 'components.common.lazyLoadDemo.p2' | translate }}</div>
+  <ul dLazyLoad enableLazyLoad="true" [target]="target" (loadMore)="onLoadMore1($event)">
+    <li class="item" *ngFor="let item of list1; let index = index">
       {{ index + 1 + '. ' + item }}
     </li>
   </ul>

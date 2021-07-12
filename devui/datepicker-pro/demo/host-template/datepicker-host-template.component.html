@@ -1,0 +1,26 @@
+<h5>single datepicker</h5>
+
+<d-datepicker-pro [(ngModel)]="value1" [showTime]="true" [width]="'150px'">
+  <ng-template #hostTemplate let-value="value">
+    <d-button class="devui-dropdown-origin" bsStyle="text-dark">
+      {{ value || 'select time' }}
+    </d-button>
+  </ng-template>
+</d-datepicker-pro>
+
+<d-button (click)="singlePicker.clear()" class="devui-dropdown-origin" bsStyle="common" style="margin-left: 28px"> clear </d-button>
+
+<h5>range datepicker</h5>
+
+<d-range-datepicker-pro [(ngModel)]="value2" [width]="'150px'">
+  <ng-template #hostTemplate let-values="values">
+    <d-button class="devui-dropdown-origin" bsStyle="text-dark" (click)="rangePicker.focusChange('start')">
+      {{ values[0] || 'start' }}
+    </d-button>
+    <span> -- </span>
+    <d-button (click)="rangePicker.focusChange('end')" class="devui-dropdown-origin" bsStyle="text-dark">
+      {{ values[1] || 'end' }}
+    </d-button>
+  </ng-template>
+</d-range-datepicker-pro>
+<d-button (click)="rangePicker.clear()" class="devui-dropdown-origin" bsStyle="common" style="margin-left: 28px"> clear </d-button>

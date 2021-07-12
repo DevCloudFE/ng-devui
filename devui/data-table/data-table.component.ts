@@ -1,11 +1,12 @@
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
+import { DOCUMENT } from '@angular/common';
 import {
   AfterContentInit, AfterViewInit, ChangeDetectorRef, Component, ContentChild, ContentChildren, ElementRef,
-  EventEmitter, HostBinding, Input, NgZone, OnChanges, OnDestroy, OnInit, Output, QueryList, Renderer2,
+  EventEmitter, HostBinding, Inject, Input, NgZone, OnChanges, OnDestroy, OnInit, Output, QueryList, Renderer2,
   SimpleChanges, TemplateRef, ViewChild
 } from '@angular/core';
 import { merge, Subscription } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, takeUntil } from 'rxjs/operators';
 import {
   CellSelectedEventArg, CheckableRelation, ColumnResizeEventArg, RowCheckChangeEventArg,
   RowSelectedEventArg, SortEventArg, TableCheckOptions, TableCheckStatusArg,
@@ -318,6 +319,10 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
     const hasUnChecked = this.dataSource.some(this.hasUnChecked);
     this._pageAllChecked = dataSource && dataSource.length > 0 && !hasUnChecked;
     this.halfChecked = hasChecked && hasUnChecked;
+
+    if (this.innerHeader) {
+      this.innerHeader.setHeaderCheckStatus({pageAllChecked: this._pageAllChecked, pageHalfChecked: this.halfChecked});
+    }
   }
 
   get dataSource() {
@@ -348,13 +353,15 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
   }
 
   fixHeaderBodyHeight: string;
-
+  document: Document;
   constructor(
     private elementRef: ElementRef,
     private ngZone: NgZone,
     private renderer: Renderer2,
-    private cdr: ChangeDetectorRef) {
+    private cdr: ChangeDetectorRef,
+    @Inject(DOCUMENT) private doc: any) {
       this.onDocumentClickListen = this.onDocumentClick.bind(this);
+      this.document = this.doc;
   }
 
   private getColumns() {
@@ -369,7 +376,7 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
   // life hook start
   ngOnInit() {
     this.ngZone.runOutsideAngular(() => {
-      document.addEventListener('click', this.onDocumentClickListen);
+      this.document.addEventListener('click', this.onDocumentClickListen);
     });
   }
 
@@ -469,6 +476,12 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
   }
 
   private resetThSortOrder() {
+    merge(...this.thList?.map(th => th.sortChange)).pipe(
+      takeUntil(this.thList.changes)
+    ).subscribe((sortEvent: SortEventArg) => {
+      this.thList.filter(th => th !== sortEvent.th).forEach(th => th.clearSortOrder());
+    });
+
     this.thList.changes.pipe(
       switchMap(() => merge(...this.thList.map(th => th.sortChange)))
     ).subscribe((sortEvent: SortEventArg) => {
@@ -497,7 +510,7 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
 
   ngOnDestroy(): void {
     this.unSubscription();
-    document.removeEventListener('click', this.onDocumentClickListen);
+    this.document.removeEventListener('click', this.onDocumentClickListen);
   }
 
   onHandleSort(column: SortEventArg) {

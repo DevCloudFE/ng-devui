@@ -1,3 +1,4 @@
+import { DOCUMENT } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectorRef,
@@ -5,6 +6,7 @@ import {
   ElementRef,
   EventEmitter,
   forwardRef,
+  Inject,
   Input,
   OnChanges,
   OnDestroy,
@@ -60,6 +62,7 @@ export class InputNumberComponent implements ControlValueAccessor, OnChanges, On
   disabledDec = false;
   lastEmittedValue: number;
   lastValue: number;
+  document: Document;
 
   @Input() set min(val) {
     if (val || val === 0) {
@@ -84,7 +87,10 @@ export class InputNumberComponent implements ControlValueAccessor, OnChanges, On
 
   private onChangeCallback = (v: any) => {
   }
-  constructor(private cdr: ChangeDetectorRef, private el: ElementRef, private renderer: Renderer2) {
+
+  constructor(private cdr: ChangeDetectorRef, private el: ElementRef, private renderer: Renderer2,
+              @Inject(DOCUMENT) private doc: any) {
+    this.document = this.doc;
   }
 
   registerOnChange(fn: any): void {
@@ -244,9 +250,19 @@ export class InputNumberComponent implements ControlValueAccessor, OnChanges, On
       } else {
         const decimals = this.getMaxDecimals(this.value);
         const floatValue = type === 'increase' ? (this.value + this.step) : (this.value - this.step);
-        this.updateValue(parseFloat(floatValue.toFixed(decimals)));
+        if (this.matchReg(floatValue + '')) {
+          this.updateValue(parseFloat(floatValue.toFixed(decimals)));
+        }
       }
       this.inputElement.nativeElement.focus();
+    }
+  }
+
+  private matchReg(value) {
+    if (this.reg && !value.match(new RegExp(this.reg))) {
+      return false;
+    } else {
+      return true;
     }
   }
 
@@ -346,7 +362,7 @@ export class InputNumberComponent implements ControlValueAccessor, OnChanges, On
       this.setValue(this.lastValue);
       return;
     }
-    if (this.reg && !value.match(new RegExp(this.reg))) {
+    if (!this.matchReg(value)) {
       this.setValue(this.lastValue);
       return;
     } else if (
@@ -426,7 +442,7 @@ export class InputNumberComponent implements ControlValueAccessor, OnChanges, On
   }
 
   registerBlurListener() {
-    document.addEventListener('click', this.emitBlurEvent.bind(this), {
+    this.document.addEventListener('click', this.emitBlurEvent.bind(this), {
       capture: true,
       once: true,
     });
@@ -434,7 +450,7 @@ export class InputNumberComponent implements ControlValueAccessor, OnChanges, On
 
   emitBlurEvent(event: MouseEvent) {
     if (!this.disabled && this.el.nativeElement !== event.target && !this.el.nativeElement.contains(event.target)) {
-      const blurEvt = document.createEvent('Event');
+      const blurEvt = this.document.createEvent('Event');
       blurEvt.initEvent('blur', false, true);
       this.el.nativeElement.dispatchEvent(blurEvt);
       this.onTouchedCallback();

@@ -11,15 +11,18 @@
       [time]="list.time"
       [timePosition]="data.position"
       [position]="list.position"
-      [lineStyle]="list.lineStyle ? list.lineStyle : { style: 'solid' }"
+      [lineStyle]="list.lineStyle"
       [customDot]="list.customDot"
+      [dotColor]="list.dotColor"
       [iconClass]="list.iconClass"
       [type]="list.type"
       [status]="list.status"
       [extraElement]="list.extraElement"
       [text]="list.text"
       [contentTemplate]="contentTemplate"
-      [data]="list"
+      [data]="list.data"
+      [horizontalAlign]="data.horizontalAlign || 'center'"
+      (statusChanged)="changeStatusLine($event)"
     >
     </d-time-axis-item>
   </ng-container>

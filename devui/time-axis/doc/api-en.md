@@ -26,6 +26,7 @@ In the page:
 | direction |  `'vertical'\|'horizontal'`  |  ''  | Optional. Sets the time axis direction.      | [Setting Direction Parameters](demo#direction)           |
 | position  |     `'left'\|'bottom'`      |  ''  | Optional. Defines the time parameter position only when direction is `vertical`. | [Setting Time Position](demo#basic-usage)           |
 | widthMode  |     `'fitContent'\|'fitWidth'`      |  `'fitContent'`  | Optional. Only when the direction is `horizontal`, `widthMode='fitContent'` The timeline width is adaptive to the content width, and `widthMode='fitWidth'` The timeline width fills the container. | [Time Point Customization](demo#custom-dot)           |
+| horizontalAlign  |     `'center'\|'left'`      |  `'center'`  | Optional. Only when the direction is `horizontal`, Set Content Alignment. | [Customizing Content Using a Template](demo#content-with-template)           |
 |   model   | `'text'\|'html'\|'template'` |  ''  | Optional. model.      | [Content Use HTML](demo#content-with-html)           |
 |   list    |      [`array`](#list)        |  []  | Optional. List Data.  | [Setting Direction Parameters](demo#direction)           |
 
@@ -33,13 +34,15 @@ In the page:
 
 | Parameter | Type | Default | Description | Jump to Demo |
 | :----: | :-----------------------------------------: | :--: | :----------------------------------------------------------- | ----------------------------------------------- |
-|  time  |                  `string`                   |  --  | Optional. Time.    | [Setting Time Position](demo#basic-usage)           |
-|  text  |                  `string`                   |  --  | Optional. Text Content.           | [Setting Time Position](demo#basic-usage)           |
-|  type  | `'primary'\|'success'\|'danger'\|'warning'\|'waiting'\|'info'` |  `info`  | Optional. Time Point Type.     | [Setting Direction Parameters](demo#direction)           |
-| ~~status~~ |         `'runned'\|'running'\|'error'`      |  --  | Optional. Status.(`Deprecated. You are advised to use type.`) | [Setting Time Position](demo#basic-usage)           |
+|  time  |                  `string`                   |  --  | Optional. Time.    | [Setting Direction Parameters](demo#direction)           |
+|  text  |                  `string`                   |  --  | Optional. Text Content.           | [Setting Direction Parameters](demo#direction)           |
+|  type  | `'primary' \| 'success' \| 'danger' \| 'warning'` |  `primary`  | Optional. Time Point Type.     | [Setting Time Position](demo#basic-usage)           |
+| ~~status~~ |         `'runned'\|'running'\|''`      |  --  | Optional. Status.(`Deprecated. You are advised to use lineStyle.`) | [Setting Time Position](demo#basic-usage)           |
 |  data  |                   `array`                   |  --  | Optional. Template data. This parameter is valid only when model is set to template.             | [Customizing Content Using a Template](demo#content-with-template) |
 |  position  | `'up'\|'bottom'\|'left'\|'right'` |  --  | Optional. Indicates the position of text or data. If time exists, the time is in the reverse position.   | [Customizing the Content Direction of a Time Node](demo#content-with-alternative-mode) |
-|  lineStyle  | `{style: 'solid' \| 'dashed' \| 'none', color: string}` |  `{style: 'solid'}`  | Optional. Setting the Timeline Line Style.   | [Time Point Customization](demo#custom-dot) |
+|  dotColor  | `string` |  --  | Optional. Custom Time Circle Color.   | [Customizing Content Using a Template](demo#content-with-template) |
+|  lineStyle  | `{style: 'solid' \| 'dashed' \| 'dotted' \| 'none', color: string}` |  `{style: 'solid'}`  | Optional. Setting the Timeline Line Style.   | [Time Point Customization](demo#custom-dot) |
+|  dotColor  | `string` |  --  | Optional. Custom Time Circle Color.   | [Customizing Content Using a Template](demo#content-with-template) |
 |  customDot  | `string\|HTMLElement\|TemplateRef` |  --  | Optional. User-defined time point.   | [Time Point Customization](demo#custom-dot) |
 |  extraElement  | `string\|HTMLElement\|TemplateRef` |  --  | Optional. Customizing Additional Elements Between Two Points in Time.   | [Customizing Content Using a Template](demo#content-with-template) |
 
@@ -50,14 +53,16 @@ interface TimeAxisData {
   direction?:  'vertical' | 'horizontal' | '';
   position?: 'bottom' | 'left' | '';
   widthMode?: 'fitContent' | 'fitWidth';
+  horizontalAlign?: 'center'|'left';
   model: 'text' | 'html' | 'template' | '';
   list: Array<{
     time?: string;
     text?: string;
     lineStyle?: object;
+    dotColor?: string;
     customDot?: string | HTMLElement| TemplateRef<any>;
-    type?: 'primary' | 'success' | 'danger' | 'warning' | 'waiting' | 'info';
-    status?: 'runned' | 'running' | 'error';
+    type?: 'primary' | 'success' | 'danger' | 'warning';
+    status?: 'runned' | 'running' | '';
     position?: 'top' | 'bottom' | 'left' | 'right';
     extraElement?: string | HTMLElement| TemplateRef<any>;
     iconClass?: string;

@@ -1,5 +1,5 @@
 <d-button (click)="getRemoteData()" style="margin-right: 5px">Request Data</d-button>
-<d-button (click)="toggleColOptions()">Config Columns</d-button>
+<d-button bsStyle="common" (click)="toggleColOptions()">Config Columns</d-button>
 <br />
 <br />
 <d-data-table dLoading [dataSource]="remoteDataSource" [backdrop]="true" [scrollable]="true" [showLoading]="showLoading">

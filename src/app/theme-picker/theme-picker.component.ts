@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { CustomThemeService } from './customize-theme/custom-theme.service';
 import { createTheme } from './customize-theme/util';
-// import { greenLightTheme } from './theme-data-more';
+import { LargeFontSize } from './theme-data-more';
 
 @Component({
   selector: 'app-theme-picker',
@@ -15,13 +15,13 @@ export class ThemePickerComponent implements OnInit, OnDestroy {
   themeService: ThemeService;
   themes;
   theme: string;
-  curTheme: Theme;
+  largeFontTheme: Theme;
   fontSize: 'normal' | 'large' = 'normal';
   themeMode: 'light' | 'dark' = 'light';
   themePrefix: 'devui' | 'green' | string = 'devui';
   themePrefersColorScheme: boolean;
   sub: Subscription;
-  protectEye = false;
+  largeFontSizeMode = false;
   activeThemeType = 'devuiTheme';
   advancedThemeList = [{ value: 'infinity',  url: 'assets/infinity.png' },
   { value: 'sweet', url: 'assets/sweet.png' },
@@ -29,32 +29,32 @@ export class ThemePickerComponent implements OnInit, OnDestroy {
   { value: 'deep',  url: 'assets/deep.png' },
   { value: 'galaxy',  url: 'assets/galaxy.png' }];
   currentAdvancedTheme = 'infinity';
-  assetsPrefix = './';
+  assetsPrefix = environment.deployPrefix;
   constructor(
     private cdr: ChangeDetectorRef,
     private cts: CustomThemeService
   ) { }
 
   ngOnInit() {
-    if (environment.production) {
-      this.assetsPrefix = './components/';
+    if (typeof window !== 'undefined') {
+      this.themeService = window['devuiThemeService'];
+      this.themes = window['devuiThemes'];
+      this.theme = window['devuiCurrentTheme'];
     }
-    this.themeService = window['devuiThemeService'];
-    this.themes = window['devuiThemes'];
-    this.theme = window['devuiCurrentTheme'];
     this.themePrefix = this.getThemePrefix();
     this.themeMode = this.themes[this.theme]?.isDark ? 'dark' : 'light';
-    this.protectEye = this.theme.split('-')[2] === 'large' ? true : false;
+    this.largeFontSizeMode = this.theme === 'devui-large-font-theme';
+    this.largeFontTheme = this.themes['devui-large-font-theme'];
     this.themePrefersColorScheme = this.getThemePrefersColorSchemeOn();
+    this.initTheme();
     this.cdr.detectChanges();
     if (this.themePrefersColorScheme) {
       this.themePrefersColorSchemeChange(true);
     }
-    this.initTheme();
   }
 
   getThemePrefix() {
-    return (this.theme.split('-')[0] !== 'devui' || this.theme.split('-')[0] !== 'green') ? 'devui' : this.theme.split('-')[0];
+    return (this.theme.split('-')[0] !== 'devui' && this.theme.split('-')[0] !== 'green') ? 'devui' : this.theme.split('-')[0];
   }
   initTheme() {
     if (this.isCustomizeTheme()) {
@@ -94,8 +94,9 @@ export class ThemePickerComponent implements OnInit, OnDestroy {
   }
 
   themesChange() {
-    if (this.protectEye) {
-      this.theme = `${this.themePrefix}-${this.themeMode}-large-theme`;
+    if (this.largeFontSizeMode) {
+      this.largeFontTheme.data = Object.assign({}, this.themes[`${this.themePrefix}-${this.themeMode}-theme`].data, LargeFontSize);
+      this.theme = `devui-large-font-theme`;
     } else {
       this.theme = `${this.themePrefix}-${this.themeMode}-theme`;
     }
@@ -109,7 +110,13 @@ export class ThemePickerComponent implements OnInit, OnDestroy {
   }
 
   themeFontSizeChange() {
-    this.themesChange();
+    if (typeof window !== 'undefined' && this.largeFontSizeMode) {
+     this.largeFontTheme.data = Object.assign({}, this.themes[window['devuiCurrentTheme']].data, LargeFontSize);
+     this.theme = `devui-large-font-theme`;
+    } else {
+      this.theme = `${this.themePrefix}-${this.themeMode}-theme`;
+    }
+    this.themeService.applyTheme(this.themes[this.theme]);
   }
 
   themeFontSizeSchemeChange(event: boolean) {

@@ -43,9 +43,9 @@
           >
             status
           </th>
-          <th dHeadCell>
+          <th dHeadCell style="padding-left: 20px">
             <d-gantt-scale
-              #ganttscale
+              [scrollElement]="scrollView"
               [milestoneList]="milestoneList"
               [ganttScaleContainerOffsetLeft]="ganttScaleContainerOffsetLeft"
               [ganttBarContainerElement]="ganttBarContainerElement"
@@ -207,6 +207,7 @@
             <td dTableCell>
               <d-gantt-bar
                 *ngIf="rowItem?.ganttType === 'progress'"
+                [scrollElement]="scrollView"
                 [startDate]="rowItem?.startDate"
                 [endDate]="rowItem?.endDate"
                 [tipTemplateRef]="tipTemplate"
@@ -218,7 +219,6 @@
                 [progressDisabled]="rowItem?.progressDisabled"
                 [progressRate]="rowItem?.progressRate"
                 (barMoveStartEvent)="onGanttBarMoveStart($event)"
-                (barMovingEvent)="onGanttBarMoving($event)"
                 (barResizeStartEvent)="onGanttBarResizeStart($event)"
                 (barResizingEvent)="onGanttBarResizing($event)"
                 (barMoveEndEvent)="onGanttBarMove($event)"

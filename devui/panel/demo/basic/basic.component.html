@@ -7,6 +7,14 @@
     <d-panel-body>This is body</d-panel-body>
   </d-panel>
   <br /><br />
+  <d-panel #anotherPanel [isCollapsed]="isCollapsed" [hasLeftPadding]="false" [showAnimation]="true">
+    <d-panel-header>
+      Panel has no left padding
+      <em class="icon icon-chevron-down" [ngClass]="{ open: anotherPanel.isCollapsed }"></em>
+    </d-panel-header>
+    <d-panel-body>This is body</d-panel-body>
+  </d-panel>
+  <br /><br />
   <d-panel>
     <d-panel-header>Panel with header and footer</d-panel-header>
     <d-panel-body>This is body</d-panel-body>

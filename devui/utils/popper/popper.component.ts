@@ -1,9 +1,11 @@
+import { DOCUMENT } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectorRef,
   Component,
   ElementRef,
   EventEmitter,
+  Inject,
   Input,
   NgZone,
   OnDestroy,
@@ -63,6 +65,7 @@ export class PopperComponent implements AfterViewInit, OnDestroy {
   protected popperNode;
   protected popperParent;
   private directionSubject = new Subject<string>();
+  document: Document;
 
   @Output() openChange = new EventEmitter<any>();
   @ViewChild('popperActivator', { static: true }) popperActivator: ElementRef;
@@ -86,7 +89,8 @@ export class PopperComponent implements AfterViewInit, OnDestroy {
   }
 
   constructor(protected el: ElementRef, protected renderer: Renderer2, protected ngZone: NgZone,
-              protected changeDetectorRef: ChangeDetectorRef) {
+              protected changeDetectorRef: ChangeDetectorRef, @Inject(DOCUMENT) private doc: any) {
+    this.document = this.doc;
   }
 
   show() {
@@ -159,10 +163,10 @@ export class PopperComponent implements AfterViewInit, OnDestroy {
   setBlurListener() {
     this.ngZone.runOutsideAngular(() => {
       if (this.open) {
-        document.addEventListener('click', this.onDocumentClick);
+        this.document.addEventListener('click', this.onDocumentClick);
         this.popperContainer.nativeElement.addEventListener('click', this.blockEvent);
       } else {
-        document.removeEventListener('click', this.onDocumentClick);
+        this.document.removeEventListener('click', this.onDocumentClick);
         this.popperContainer.nativeElement.removeEventListener('click', this.blockEvent);
       }
     });
@@ -298,7 +302,7 @@ export class PopperComponent implements AfterViewInit, OnDestroy {
   }
 
   private attachPopperContainerToSelector(targetSelector) {
-    const nodeParent = document.querySelector(targetSelector);
+    const nodeParent = this.document.querySelector(targetSelector);
     this.attachPopperContainerToNode(nodeParent);
   }
 

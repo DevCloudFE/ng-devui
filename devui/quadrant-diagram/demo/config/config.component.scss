@@ -68,7 +68,7 @@ section {
   font-size: $devui-font-size-card-title;
   color: $devui-text;
   background: $devui-base-bg;
-  box-shadow: $devui-shadow-length-base rgba(41, 48, 64, 0.25), $devui-shadow-length-base rgba(41, 48, 64, 0.2);
+  box-shadow: $devui-shadow-length-base $devui-light-shadow;
   border-radius: $devui-border-radius;
   width: 120px;
   margin: 10px;

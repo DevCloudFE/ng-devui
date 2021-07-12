@@ -1,13 +1,13 @@
 <div style="margin: 20px 0">
-  <d-button (btnClick)="setZIndex(1000)" style="margin-right: 10px">1000</d-button>
+  <d-button bsStyle="common" (btnClick)="setZIndex(1000)" style="margin-right: 10px">1000</d-button>
   <d-button (btnClick)="setZIndex(1050)" style="margin-right: 10px">default: 1050</d-button>
-  <d-button (btnClick)="setZIndex(1100)" style="margin-right: 10px">1100</d-button>
+  <d-button bsStyle="common" (btnClick)="setZIndex(1100)" style="margin-right: 10px">1100</d-button>
   zIndex: {{ zIndex }}
 </div>
 <div style="margin: 20px 0">
-  <d-button (btnClick)="setBackDropZIndex(900)" style="margin-right: 10px">900</d-button>
+  <d-button bsStyle="common" (btnClick)="setBackDropZIndex(900)" style="margin-right: 10px">900</d-button>
   <d-button (btnClick)="setBackDropZIndex(1040)" style="margin-right: 10px">default: 1040</d-button>
-  <d-button (btnClick)="setBackDropZIndex(1000)" style="margin-right: 10px">1000</d-button>
+  <d-button bsStyle="common" (btnClick)="setBackDropZIndex(1000)" style="margin-right: 10px">1000</d-button>
   backDropZIndex: {{ backDropZIndex }}
 </div>
 <div dImagePreview [zIndex]="zIndex" [backDropZIndex]="backDropZIndex">

@@ -1,0 +1,253 @@
+@import '../../style/theme/color';
+@import '../../style/theme/shadow';
+@import '../../style/theme/corner';
+
+.devui-canlender-panel {
+  text-align: center;
+  // border-right: 1px solid $devui-dividing-line;
+  font-size: 0;
+
+  &-collopse-button {
+    position: absolute;
+    top: 0;
+    left: 60px;
+    font-size: 16px;
+    z-index: 10;
+    cursor: pointer;
+    color: $devui-aide-text;
+  }
+
+  &-year-list {
+    padding: 8px 0;
+    display: inline-block;
+    width: 80px;
+    height: 305px;
+    overflow: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      width: 0 !important;
+    }
+
+    &-item {
+      background-color: $devui-global-bg;
+
+      .devui-year-title {
+        font-size: 14px;
+        font-weight: bold;
+        line-height: 30px;
+        cursor: pointer;
+      }
+
+      .devui-month-title {
+        font-size: 12px;
+        line-height: 30px;
+        cursor: pointer;
+      }
+
+      &.title-active {
+        background-color: $devui-base-bg;
+      }
+
+      &:hover:not(.title-active) {
+        background-color: $devui-list-item-selected-bg;
+      }
+    }
+  }
+
+  &-main {
+    width: 249px;
+    height: 305px;
+    padding: 4px;
+    display: inline-block;
+    font-size: 12px;
+  }
+}
+
+.devui-tbody-wrapper {
+  height: 270px;
+  width: 100%;
+  overflow-x: hidden;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    width: 0 !important;
+  }
+}
+
+.devui-table {
+  border-spacing: 0;
+
+  .devui-week-header td {
+    width: 34px;
+    height: 22px;
+  }
+
+  .devui-table-month-title {
+    text-align: start;
+    line-height: 26px;
+    color: $devui-aide-text;
+    padding-left: 8px;
+  }
+
+  .devui-month-table {
+    color: $devui-text;
+    border-spacing: 0 4px;
+    border-collapse: separate;
+
+    .devui-table-date {
+      padding: 0 4px;
+      width: 30px;
+
+      span {
+        cursor: pointer;
+        display: block;
+        width: 22px;
+        height: 22px;
+        line-height: 22px;
+        border-radius: $devui-border-radius-feedback;
+      }
+
+      &:not(.devui-table-date-disable):not(.devui-table-date-selected):hover {
+        span {
+          background-color: $devui-list-item-hover-bg;
+        }
+      }
+
+      &.devui-table-date-today {
+        span {
+          color: $devui-brand;
+        }
+      }
+
+      &.devui-table-date-selected {
+        position: relative;
+
+        span {
+          background: $devui-list-item-active-bg;
+          color: $devui-list-item-active-text;
+
+          &:hover {
+            box-shadow: none;
+            border-color: transparent;
+          }
+        }
+
+        &.devui-table-date-abandon-selected {
+          span {
+            background: $devui-primary-disabled;
+          }
+        }
+
+        &.devui-table-date-active-type:not(.devui-table-date-abandon-selected) span {
+          animation: 2s ease 0s infinite normal both breath-animation;
+          position: absolute;
+          top: 0;
+          right: 7px;
+          z-index: 2;
+        }
+
+        &.devui-table-date-active-type.devui-table-date-end:not(.devui-table-date-abandon-selected) span {
+          right: 8px;
+        }
+        @keyframes breath-animation {
+          0% {
+            box-shadow: 0 0 0 $devui-list-item-active-bg;
+          }
+
+          50% {
+            box-shadow: 0 0 8px $devui-list-item-active-bg;
+          }
+
+          to {
+            box-shadow: 0 0 0 $devui-list-item-active-bg;
+          }
+        }
+      }
+
+      &.devui-table-date-inrange {
+        background-color: $devui-list-item-hover-bg;
+
+        span:hover {
+          background-color: $devui-range-item-hover-bg;
+        }
+      }
+
+      &.devui-table-date-start:not(.devui-table-date-end) {
+        position: relative;
+
+        &::after {
+          content: '';
+          display: block;
+          position: absolute;
+          width: 8px;
+          height: 22px;
+          background-color: $devui-list-item-hover-bg;
+          right: 0;
+          top: 0;
+        }
+
+        &:not(:hover):not(.devui-table-date-selected)::after {
+          display: none;
+        }
+
+        span {
+          border-radius: $devui-border-radius-feedback 0 0 $devui-border-radius-feedback;
+        }
+      }
+
+      &.devui-table-date-end:not(.devui-table-date-start) {
+        position: relative;
+
+        &::after {
+          content: '';
+          display: block;
+          position: absolute;
+          width: 5px;
+          height: 22px;
+          background-color: $devui-list-item-hover-bg;
+          left: 0;
+          top: 0;
+        }
+
+        span {
+          border-radius: 0 $devui-border-radius-feedback $devui-border-radius-feedback 0;
+        }
+      }
+
+      &.devui-table-date-in-selected-range:not(.devui-table-date-inrange):not(:hover) {
+        background-color: $devui-disabled-bg;
+      }
+
+      &.devui-table-date-disable span {
+        cursor: not-allowed;
+        color: $devui-disabled-text;
+
+        &:hover {
+          box-shadow: none;
+          border-color: transparent;
+        }
+      }
+    }
+
+    &.devui-single-date .devui-table-date {
+      &.devui-table-date-start::after {
+        display: none;
+      }
+
+      &.devui-table-date-end::after {
+        display: none;
+      }
+    }
+  }
+
+  .devui-tbody-wrapper {
+    transform: none;
+  }
+}
+
+:host {
+  display: inline-block;
+}

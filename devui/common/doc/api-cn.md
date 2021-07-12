@@ -23,7 +23,7 @@ import { HelperUtils } from 'ng-devui';
 
 <!-- 日期解析器 -->
 <div>
-  <p>{{ date | d日期解析器: 'y/MM/dd' }}</p>
+  <p>{{ date | dDatePipe: 'y/MM/dd' }}</p>
 </div>
 
 <!-- SimulateATag -->
@@ -47,6 +47,7 @@ import { HelperUtils } from 'ng-devui';
 |      参数      |   类型    | 默认  |         说明         | 跳转 Demo                    |全局配置项| 
 | :----------------: | :------------: | :-------: | :---: | :------------------: | ---------------------------- |
 | enableLazyLoad | `boolean` | false | 可选，是否使用懒加载 | [懒加载指令](demo#lazy-load) |
+| target | `HTMLElement` | 宿主 | 可选，滚动监听的目标。 | [懒加载指令](demo#lazy-load) |
 
 ## dLazyLoad 事件
 
