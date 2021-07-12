@@ -9,9 +9,12 @@
     [class.devui-time-axis-item-data-vertical-left]="direction === 'vertical'"
   >
     <div *ngIf="time && (position === 'bottom' || position === 'right')">
-      {{ time }}
+      <div [class.devui-time-axis-item-horizontal-align-center]="position === 'bottom' && horizontalAlign === 'center'">{{ time }}</div>
     </div>
-    <div *ngIf="position === 'top' || position === 'left'">
+    <div
+      *ngIf="position === 'top' || position === 'left'"
+      [class.devui-time-axis-item-horizontal-align-center]="position === 'top' && horizontalAlign === 'center'"
+    >
       <div *ngIf="model !== 'template'" [innerHTML]="text | safe: 'html'"></div>
       <div *ngIf="model === 'template'">
         <ng-template [ngTemplateOutlet]="contentTemplate" [ngTemplateOutletContext]="{ $implicit: this, data: data }"></ng-template>
@@ -23,7 +26,11 @@
     [class.devui-time-axis-item-axis-padding-horizontal]="direction === 'horizontal'"
     [class.devui-time-axis-item-axis-padding-vertical]="direction === 'vertical'"
   >
-    <div *ngIf="!customDot" class="devui-time-axis-item-dot devui-time-axis-item-type-{{ type || 'info' }} {{ iconClass }}">
+    <div
+      *ngIf="!customDot"
+      [style.borderColor]="dotColor"
+      class="devui-time-axis-item-dot devui-time-axis-item-type-{{ _type || 'primary' }} {{ iconClass }}"
+    >
       {{ dotText }}
     </div>
     <div *ngIf="customDot" class="devui-time-axis-item-custom-dot">
@@ -33,12 +40,7 @@
       </ng-template>
     </div>
     <div *ngIf="time && timePosition === 'bottom'">{{ time }}</div>
-    <div
-      class="devui-time-axis-line-style-{{ lineStyle?.style || 'solid' }}"
-      [class.devui-time-axis-item-line]="timePosition !== 'bottom'"
-      [class.devui-time-axis-item-line-time-bottom]="timePosition === 'bottom'"
-      [style.borderColor]="lineStyle?.color"
-    >
+    <div class="{{ timeAxisLineClass }}" [style.borderColor]="lineStyle?.color">
       <div *ngIf="extraElement" class="devui-time-axis-middle-zone">
         <ng-template [ngTemplateOutlet]="extraTemplate || defaultTemplate"> </ng-template>
         <ng-template #defaultTemplate>
@@ -53,9 +55,12 @@
     [class.devui-time-axis-item-data-time-bottom]="timePosition === 'bottom'"
   >
     <div *ngIf="time && (position === 'top' || position === 'left')">
-      {{ time }}
+      <div [class.devui-time-axis-item-horizontal-align-center]="position === 'top' && horizontalAlign === 'center'">{{ time }}</div>
     </div>
-    <div *ngIf="position === 'bottom' || position === 'right'">
+    <div
+      *ngIf="position === 'bottom' || position === 'right'"
+      [class.devui-time-axis-item-horizontal-align-center]="position === 'bottom' && horizontalAlign === 'center'"
+    >
       <div *ngIf="model !== 'template'" [innerHTML]="text | safe: 'html'"></div>
       <div *ngIf="model === 'template'">
         <ng-template [ngTemplateOutlet]="contentTemplate" [ngTemplateOutletContext]="{ $implicit: this, data: data }"></ng-template>

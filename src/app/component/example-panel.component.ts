@@ -1,7 +1,8 @@
+import { DOCUMENT } from '@angular/common';
 import {
   AfterViewInit, Component,
   ComponentFactoryResolver,
-  ElementRef, Input,
+  ElementRef, Inject, Input,
   OnInit,
   QueryList, ViewChildren
 } from '@angular/core';
@@ -33,8 +34,11 @@ export class ExamplePanelComponent implements OnInit, AfterViewInit {
   description: string;
   tmw: string;
   componentPath: string;
+  document: Document;
   constructor(private componentFactoryResolver: ComponentFactoryResolver,
-              private router: Router, private route: ActivatedRoute, private translate: TranslateService) {
+              private router: Router, private route: ActivatedRoute, private translate: TranslateService,
+              @Inject(DOCUMENT) private doc: any) {
+    this.document = this.doc;
   }
 
   ngOnInit(): void {
@@ -68,7 +72,7 @@ export class ExamplePanelComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    document.body.scrollTop = document.documentElement.scrollTop = 0;
+    this.document.body.scrollTop = this.document.documentElement.scrollTop = 0;
     if ((this.typescript.last || {} as any).nativeElement) {
       hljs.highlightBlock(this.typescript.last.nativeElement);
     }

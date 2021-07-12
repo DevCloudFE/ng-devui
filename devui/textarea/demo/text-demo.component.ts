@@ -17,6 +17,11 @@ export class TextDemoComponent implements OnInit, OnDestroy {
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./resize/resize.component.ts') },
     { title: 'SCSS', language: 'css', code: require('!!raw-loader!./resize/resize.component.css') },
   ];
+  countSource: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./count/count.component.html') },
+    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./count/count.component.ts') },
+    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./count/count.component.scss') },
+  ];
 
   navItems = [];
   subs: Subscription = new Subscription();
@@ -41,6 +46,7 @@ export class TextDemoComponent implements OnInit, OnDestroy {
     this.navItems = [
       { dAnchorLink: 'basic-usage', value: values['basic-usage'] },
       { dAnchorLink: 'resize', value: values['resize'] },
+      { dAnchorLink: 'count', value: values['count'] },
     ];
   }
 

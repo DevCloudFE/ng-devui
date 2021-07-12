@@ -30,13 +30,23 @@
 
       &.devui-panel-body-collapse {
         &::before {
-          content: '';
-          width: 30px;
-          height: 100%;
+          content: none;
         }
 
         d-panel-body {
-          border-left: 2px solid $devui-dividing-line;
+          border-left: none;
+        }
+
+        &.has-left-padding {
+          &::before {
+            content: '';
+            width: 30px;
+            height: 100%;
+          }
+
+          d-panel-body {
+            border-left: 2px solid $devui-dividing-line;
+          }
         }
       }
     }

@@ -1,6 +1,7 @@
+import { DOCUMENT } from '@angular/common';
 import {
-  ChangeDetectorRef, Component, ElementRef, EventEmitter, HostBinding, HostListener, Input,
-  NgZone, OnChanges, OnDestroy, Output, Renderer2, SimpleChanges, TemplateRef
+    ChangeDetectorRef, Component, ElementRef, EventEmitter, HostBinding, HostListener, Inject, Input,
+    NgZone, OnChanges, OnDestroy, Output, Renderer2, SimpleChanges, TemplateRef
 } from '@angular/core';
 import { fromEvent, Observable, Subscription } from 'rxjs';
 import { FilterConfig, SortDirection, SortEventArg } from '../../../data-table.model';
@@ -74,9 +75,12 @@ export class TableThComponent implements OnChanges, OnDestroy {
   @Output() tapEvent = new EventEmitter<any>();
 
   @Input() column: any; // 为配置column方式兼容自定义过滤模板context
+  document: Document;
 
-  constructor(element: ElementRef, private renderer2: Renderer2, private zone: NgZone, private cdr: ChangeDetectorRef) {
+  constructor(element: ElementRef, private renderer2: Renderer2, private zone: NgZone, private cdr: ChangeDetectorRef,
+              @Inject(DOCUMENT) private doc: any) {
     this.element = element.nativeElement;
+    this.document = this.doc;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -214,11 +218,11 @@ export class TableThComponent implements OnChanges, OnDestroy {
 
       this.renderer2.addClass(this.element, 'hover-bg');
 
-      const mouseup = fromEvent(document, 'mouseup');
+      const mouseup = fromEvent(this.document, 'mouseup');
       this.subscription = mouseup.subscribe((ev: MouseEvent) => this.onMouseup(ev));
 
       this.zone.runOutsideAngular(() => {
-        window.document.addEventListener('mousemove', this.bindMousemove);
+        this.document.addEventListener('mousemove', this.bindMousemove);
       });
     }
   }
@@ -248,7 +252,7 @@ export class TableThComponent implements OnChanges, OnDestroy {
       this._destroySubscription();
     }
 
-    window.document.removeEventListener('mousemove', this.bindMousemove);
+    this.document.removeEventListener('mousemove', this.bindMousemove);
   }
 
   bindMousemove = (e) => {

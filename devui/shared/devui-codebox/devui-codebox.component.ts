@@ -1,4 +1,5 @@
-import { Component, ElementRef, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, ElementRef, Inject, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { DevuiSourceData } from './devui-source-data';
 
 @Component({
@@ -16,6 +17,7 @@ export class DevuiCodeboxComponent implements OnInit {
   componentCode: Array<any>;
   expanded = false;
   codeTabID = 'HTML';
+  document: Document;
 
   copyCode(code) {
     this.copy(code).then(() => {
@@ -32,14 +34,14 @@ export class DevuiCodeboxComponent implements OnInit {
       (resolve, reject): void => {
         let copyTextArea = null as HTMLTextAreaElement;
         try {
-          copyTextArea = document.createElement('textarea');
+          copyTextArea = this.document.createElement('textarea');
           copyTextArea.style.height = '0px';
           copyTextArea.style.opacity = '0';
           copyTextArea.style.width = '0px';
-          document.body.appendChild(copyTextArea);
+          this.document.body.appendChild(copyTextArea);
           copyTextArea.value = value;
           copyTextArea.select();
-          document.execCommand('copy');
+          this.document.execCommand('copy');
           resolve(value);
         } finally {
           if (copyTextArea && copyTextArea.parentNode) {
@@ -57,7 +59,8 @@ export class DevuiCodeboxComponent implements OnInit {
     this.expanded = !this.expanded;
   }
 
-  constructor(private _el: ElementRef) {
+  constructor(private _el: ElementRef, @Inject(DOCUMENT) private doc: any) {
+    this.document = this.doc;
   }
 
   ngOnInit() {

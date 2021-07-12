@@ -124,6 +124,10 @@
         role="menu"
         (click)="$event.stopPropagation()"
       >
+        <ng-container *ngIf="dropdownHeaderTemplate">
+          <ng-template [ngTemplateOutlet]="dropdownHeaderTemplate" [ngTemplateOutletContext]="{ index: i }"> </ng-template>
+        </ng-container>
+
         <ng-container *ngIf="optionList.length">
           <d-cascader-li
             *ngFor="let option of optionList"

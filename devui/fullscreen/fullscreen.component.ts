@@ -18,17 +18,20 @@ export class FullscreenComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() target: HTMLElement;
 
   @Output() fullscreenLaunch: EventEmitter<any> = new EventEmitter<any>();
+  document: Document;
 
   constructor(
     private elementRef: ElementRef,
     @Inject(DOCUMENT) private doc: any
-  ) { }
+  ) {
+    this.document = this.doc;
+  }
 
   ngOnInit() {
-    document.addEventListener('fullscreenchange', this.onFullScreenChange);
-    document.addEventListener('MSFullscreenChange', this.onFullScreenChange);
-    document.addEventListener('webkitfullscreenchange', this.onFullScreenChange);
-    document.addEventListener('keydown', this.handleKeyDown);
+    this.document.addEventListener('fullscreenchange', this.onFullScreenChange);
+    this.document.addEventListener('MSFullscreenChange', this.onFullScreenChange);
+    this.document.addEventListener('webkitfullscreenchange', this.onFullScreenChange);
+    this.document.addEventListener('keydown', this.handleKeyDown);
   }
 
   ngAfterViewInit() {
@@ -144,19 +147,19 @@ export class FullscreenComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnDestroy() {
-    document.removeEventListener('fullscreenchange', this.onFullScreenChange);
-    document.removeEventListener('MSFullscreenChange', this.onFullScreenChange);
-    document.removeEventListener('webkitfullscreenchange', this.onFullScreenChange);
-    document.removeEventListener('keydown', this.handleKeyDown);
+    this.document.removeEventListener('fullscreenchange', this.onFullScreenChange);
+    this.document.removeEventListener('MSFullscreenChange', this.onFullScreenChange);
+    this.document.removeEventListener('webkitfullscreenchange', this.onFullScreenChange);
+    this.document.removeEventListener('keydown', this.handleKeyDown);
     const btnLaunch = this.elementRef.nativeElement.querySelector('[fullscreen-launch]');
     if (btnLaunch) { btnLaunch.removeEventListener('click', this.handleFullscreen); }
   }
 
   private addFullScreenStyle() {
-    document.getElementsByTagName('html')[0].classList.add('devui-fullscreen');
+    this.document.getElementsByTagName('html')[0].classList.add('devui-fullscreen');
   }
 
   private removeFullScreenStyle() {
-    document.getElementsByTagName('html')[0].classList.remove('devui-fullscreen');
+    this.document.getElementsByTagName('html')[0].classList.remove('devui-fullscreen');
   }
 }

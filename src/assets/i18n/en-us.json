@@ -31,8 +31,12 @@
       "description": "DevUI provides rich basic UI components for web applications. We will continue to explore the best UI practices of enterprise-level applications. Welcome to DevUI.",
       "placeholder": "Enter the component",
       "newChange": "New",
+      "sunset": "Sunset",
       "lookingCmp": "Is the components you're looking for?",
-      "suggestCmp": "Recommended Components"
+      "suggestCmp": "Recommended Components",
+      "filter": "Filter",
+      "newChangeCmps": "Components with new changes",
+      "recentlySuggestCmps": "Recently suggest components"
     },
     "start": "Getting Started",
     "themeDoc": "Customize Theme Docs",
@@ -826,7 +830,9 @@
       "tmw": "Can be used to deal with date string conversion, file download, a tag simulation, and lazy loading.",
       "lazyLoadDemo": {
         "title": "Lazyload Directive",
-        "description": "Import the LazyLoadModule in the util module. The dLazyLoad instruction is used to respond to the loadMore event when the container is rolled to the bottom to implement lazy loading."
+        "description": "Import the LazyLoadModule in the util module. The dLazyLoad instruction is used to respond to the loadMore event when the container is rolled to the bottom to implement lazy loading.",
+        "p1": "Default Rolling Listening Host",
+        "p2": "Scroll monitoring uses other elements, such as window."
       },
       "pipeDemo": {
         "title": "DatePipe"
@@ -1984,9 +1990,14 @@
         "manualDestroy": "Manual Destroy",
         "closeManualDestroy": "If this function is disabled, it can be manually destroyed. If this function is enabled, it is invalid."
       },
+      "templateDemo": {
+        "title": "Custom Template",
+        "description": "Custom Drawer Template."
+      },
       "anchorLinkValues": {
         "basic-usage": "Basic Usage",
-        "do-not-destroy-after-closing": "Do not destroy after being closed"
+        "do-not-destroy-after-closing": "Do not destroy after being closed",
+        "template": "Custom Template"
       }
     },
     "dropdown": {
@@ -3687,9 +3698,13 @@
         "title": "Resizable",
         "placeholder": "Please enter the content."
       },
+      "countDemo": {
+        "title": "Listening input and maximum number of words"
+      },
       "anchorLinkValues": {
         "basic-usage": "Basic Usage",
-        "resize": "Resizable"
+        "resize": "Resizable",
+        "count": "Listening input and maximum number of words"
       }
     },
     "steps-guide": {
@@ -3856,6 +3871,20 @@
         "rangeTemplate": "Template Usage for Range Mode",
         "datepicker-pro-static-panel": "Calender Panel Mode",
         "select-type": "Service scenario: date selector of the select type"
+      }
+    },
+    "trend": {
+      "name": "Trend",
+      "type": "Data Enter",
+      "path": "trend",
+      "description": "Digital display with trends",
+      "tmw": "Displays individual data and its trend.",
+      "basicDemo": {
+        "title": "Basic Usage",
+        "description": ""
+      },
+      "anchorLinkValues": {
+        "basicDemo": "Basic Usage"
       }
     }
   }

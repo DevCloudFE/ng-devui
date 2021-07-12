@@ -1,5 +1,6 @@
-import { Injectable, NgZone } from '@angular/core';
-import { Observable, Subject, Subscription } from 'rxjs';
+import { DOCUMENT } from '@angular/common';
+import { Inject, Injectable, NgZone } from '@angular/core';
+import { Subject, Subscription } from 'rxjs';
 import { DragPreviewDirective } from '../directives/drag-preview.directive';
 import { Utils } from '../shared/utils';
 import { DragDropTouch } from '../touch-support/dragdrop-touch';
@@ -55,12 +56,14 @@ export class DragDropService {
   dragSyncGroupDirectives;
   /*预览功能 */
   dragPreviewDirective: DragPreviewDirective;
+  document: Document;
 
-  constructor(private ngZone: NgZone) {
+  constructor(private ngZone: NgZone, @Inject(DOCUMENT) private doc: any) {
     this.touchInstance = DragDropTouch.getInstance();
     // service not support OnInit, only support OnDestroy, so write in constructor
     // tslint:disable-next-line: max-line-length
     this.dragEmptyImage.src = 'data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=='; // safari的img必须要有src
+    this.document = this.doc;
   }
   newSubscription() {
     this.subscription.unsubscribe();
@@ -73,19 +76,19 @@ export class DragDropService {
       if (this.dragPreviewDirective && this.dragPreviewDirective.dragPreviewTemplate) {
         this.dragPreviewDirective.createPreview();
         this.dragCloneNode = this.dragPreviewDirective.getPreviewElement();
-        this.dragItemContainer = document.body;
+        this.dragItemContainer = this.document.body;
       } else {
         this.dragCloneNode = this.draggedEl.cloneNode(true);
       }
 
       this.dragCloneNode.style.margin = '0';
       if (this.dragFollowOptions && this.dragFollowOptions.appendToBody) {
-        this.dragItemContainer = document.body;
+        this.dragItemContainer = this.document.body;
         this.copyStyle(this.draggedEl, this.dragCloneNode);
       }
 
       if (this.dragItemChildrenName !== '') {
-        const parentElement = this.dragItemParentName === '' ? this.dragCloneNode : document.querySelector(this.dragItemParentName);
+        const parentElement = this.dragItemParentName === '' ? this.dragCloneNode : this.document.querySelector(this.dragItemParentName);
         const dragItemChildren = parentElement.querySelectorAll(this.dragItemChildrenName);
         this.interceptChildNode(parentElement, dragItemChildren);
       }
@@ -97,7 +100,7 @@ export class DragDropService {
       });
 
       this.ngZone.runOutsideAngular(() => {
-        document.addEventListener('dragover', this.followMouse4CloneNode, { capture: true, passive: true });
+        this.document.addEventListener('dragover', this.followMouse4CloneNode, { capture: true, passive: true });
       });
       this.dragCloneNode.style.width = this.dragOffset.width + 'px';
       this.dragCloneNode.style.height = this.dragOffset.height + 'px';
@@ -109,13 +112,13 @@ export class DragDropService {
         // 批量拖拽样式
         if (this.batchDragging && this.batchDragData && this.batchDragData.length > 1) {
           // 创建一个节点容器
-          const node = document.createElement('div');
+          const node = this.document.createElement('div');
           node.appendChild(this.dragCloneNode);
           node.classList.add('batch-dragged-node');
 
           /* 计数样式定位 */
           if (this.batchDragStyle && this.batchDragStyle.length && this.batchDragStyle.indexOf('badge') > -1) {
-            const badge = document.createElement('div');
+            const badge = this.document.createElement('div');
             badge.innerText = this.batchDragData.length + '';
             badge.classList.add('batch-dragged-node-count');
             node.style.position = 'relative';
@@ -190,7 +193,7 @@ export class DragDropService {
 
   disableDraggedCloneNodeFollowMouse() {
     if (this.dragCloneNode) {
-      document.removeEventListener('dragover', this.followMouse4CloneNode, { capture: true });
+      this.document.removeEventListener('dragover', this.followMouse4CloneNode, { capture: true });
       this.dragItemContainer.removeChild(this.dragCloneNode);
       this.draggedEl.style.display = '';
       this.dragElShowHideEvent.next(true);

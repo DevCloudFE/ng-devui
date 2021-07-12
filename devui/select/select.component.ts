@@ -3,6 +3,7 @@ import {
   ConnectedPosition, VerticalConnectionPos
 } from '@angular/cdk/overlay';
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
+import { DOCUMENT } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -12,6 +13,7 @@ import {
   ElementRef,
   EventEmitter,
   forwardRef, HostListener,
+  Inject,
   Input,
   NgZone,
   OnChanges,
@@ -296,6 +298,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
   private filterSubscription: Subscription;
   public value;
   private resetting = false;
+  document: Document;
 
   private onChange = (_: any) => null;
   private onTouch = () => null;
@@ -306,9 +309,11 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
     private i18n: I18nService,
     private ngZone: NgZone,
     private devConfigService: DevConfigService,
+    @Inject(DOCUMENT) private doc: any
   ) {
     this.valueParser = item => (typeof item === 'object' ? item[this.filterKey] || '' : (item + '') ? item.toString() : '');
     this.formatter = item => (typeof item === 'object' ? item[this.filterKey] || '' : (item + '') ? item.toString() : '');
+    this.document = this.doc;
   }
 
   ngOnInit(): void {
@@ -356,7 +361,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
     if (this.i18nSubscription) {
       this.i18nSubscription.unsubscribe();
     }
-    document.removeEventListener('click', this.onDocumentClick);
+    this.document.removeEventListener('click', this.onDocumentClick);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -685,9 +690,9 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
   setDocumentClickListener() {
     this.ngZone.runOutsideAngular(() => {
       if (this.isOpen) {
-        document.addEventListener('click', this.onDocumentClick);
+        this.document.addEventListener('click', this.onDocumentClick);
       } else {
-        document.removeEventListener('click', this.onDocumentClick);
+        this.document.removeEventListener('click', this.onDocumentClick);
       }
     });
   }

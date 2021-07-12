@@ -103,7 +103,7 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy,
   @Input() showPageSelector = true;
   @Input() haveConfigMenu = false;
   @Input() autoFixPageIndex = true;
-  /**
+   /**
    * 是否自动隐藏
    */
   @Input() autoHide = false;

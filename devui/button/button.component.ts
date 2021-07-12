@@ -9,7 +9,7 @@ import {
   Input,
   Output,
   TemplateRef,
-  ViewChild,
+  ViewChild
 } from '@angular/core';
 export type IButtonType = 'button' | 'submit' | 'reset';
 export type IButtonStyle = 'common' | 'primary' | 'text' | 'text-dark' | 'danger';
@@ -47,7 +47,8 @@ export class ButtonComponent implements AfterContentChecked {
     }
   }
 
-  constructor(private cd: ChangeDetectorRef) {}
+  constructor(private cd: ChangeDetectorRef) {
+  }
 
   // 新增click事件，解决直接在host上使用click，在disabled状态下还能触发事件
   onClick(event) {

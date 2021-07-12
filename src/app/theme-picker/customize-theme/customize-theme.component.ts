@@ -1,3 +1,4 @@
+import { DOCUMENT } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DEVUI_LANG } from 'ng-devui/i18n';
@@ -10,9 +11,12 @@ import { CustomThemeService } from './custom-theme.service';
   styleUrls: ['./customize-theme.component.scss'],
 })
 export class CustomizeThemeComponent implements OnInit {
-  constructor(private cts: CustomThemeService,
-              private route: Router, @Inject(DEVUI_LANG) private appLang) {
+  document: Document;
 
+  constructor(private cts: CustomThemeService,
+              private route: Router, @Inject(DEVUI_LANG) private appLang,
+              @Inject(DOCUMENT) private doc: any) {
+    this.document = this.doc;
   }
   themeService: ThemeService;
   customDark = false;
@@ -21,8 +25,10 @@ export class CustomizeThemeComponent implements OnInit {
 
   refreshSignal: boolean;
   ngOnInit() {
-    this.themeService = window['devuiThemeService'];
-    this.getCustomConfigColor();
+    if (typeof window !== 'undefined') {
+      this.themeService = window['devuiThemeService'];
+      this.getCustomConfigColor();
+    }
   }
   customApplyTheme() {
     this.themeService.applyTheme(new Theme({
@@ -91,18 +97,21 @@ export const myTheme: Theme = new Theme({
     return buf;
   }
   downloadFileFromArrayBuffer = (data: ArrayBuffer, filename: string, contentType: string) => {
+    if (typeof window === 'undefined') {
+      return;
+    }
     if (window.navigator && window.navigator.msSaveOrOpenBlob) { // IE11 support
       const blob = new Blob([data], { type: contentType });
       window.navigator.msSaveOrOpenBlob(blob, filename);
     } else {// other browsers
-      if ('download' in document.createElement('a')) {
+      if ('download' in this.document.createElement('a')) {
         const blob = new Blob([data], { type: contentType });
-        const link = document.createElement('a');
+        const link = this.document.createElement('a');
         link.href = URL.createObjectURL(blob);
         link.download = filename;
-        document.body.appendChild(link);
+        this.document.body.appendChild(link);
         link.click();
-        document.body.removeChild(link);
+        this.document.body.removeChild(link);
         URL.revokeObjectURL(link.href);
       } else {
         // not support tag a download attribute use file download, filename won't support

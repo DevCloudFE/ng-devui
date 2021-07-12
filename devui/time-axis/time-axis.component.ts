@@ -24,6 +24,8 @@ export class TimeAxisComponent implements AfterContentInit, AfterViewInit {
     if (this.mode === 'alternative') {
       this.updateAlternativePosition();
     }
+
+    this.vanishHorizontalLastLine();
   }
 
   ngAfterViewInit() {
@@ -71,4 +73,33 @@ export class TimeAxisComponent implements AfterContentInit, AfterViewInit {
     }
   }
 
+  vanishHorizontalLastLine() {
+    if (this._direction === 'horizontal') {
+      if (this.data === undefined) {
+        if (this.listOfItems.last.lineStyle === undefined) {
+          this.listOfItems.last.lineStyle = { style: 'none' };
+        }
+      } else {
+        if (this.data.list[this.data.list.length - 1].lineStyle === undefined) {
+          this.data.list[this.data.list.length - 1].lineStyle = { style: 'none' };
+        }
+      }
+    }
+  }
+
+  changeStatusLine(event) {
+    if (this.data !== undefined && this.data.direction === 'horizontal') {
+      setTimeout(() => {
+        this.data.list.forEach((item, index, array) => {
+          if (item.status === 'runned' && index > 0) {
+            array[index - 1].lineStyle = { style: 'solid', color: 'var(--devui-success)' };
+          } else if (item.status === 'running' && index > 0) {
+            array[index - 1].lineStyle = { style: 'dotted', color: 'var(--devui-success)' };
+          } else if (item.status === '' && index > 0) {
+            array[index - 1].lineStyle = { style: 'solid' };
+          }
+        });
+      });
+    }
+  }
 }

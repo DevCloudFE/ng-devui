@@ -13,6 +13,7 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 import { BasicComponent } from './basic/basic.component';
 import { DrawerDemoComponent } from './drawer-demo.component';
 import { DrawerContentComponent } from './drawerContent/drawer-content.component';
+import { TemplateComponent } from './template/template.component';
 import { UndestroyableComponent } from './undestroyable/undestroyable.component';
 
 @NgModule({
@@ -40,7 +41,7 @@ import { UndestroyableComponent } from './undestroyable/undestroyable.component'
     ]),
   ],
   exports: [],
-  declarations: [DrawerDemoComponent, BasicComponent, UndestroyableComponent, DrawerContentComponent],
+  declarations: [DrawerDemoComponent, BasicComponent, UndestroyableComponent, DrawerContentComponent, TemplateComponent],
   
 })
 export class DrawerDemoModule {}

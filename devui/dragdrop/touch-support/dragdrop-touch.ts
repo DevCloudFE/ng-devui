@@ -50,30 +50,31 @@ export class DragDropTouch {
     // detect passive event support
     // https://github.com/Modernizr/Modernizr/issues/1894
     let supportsPassive = false;
-    document.addEventListener('test', () => {}, {
-      get passive() {
-          supportsPassive = true;
-          return true;
+    if (typeof document !== 'undefined') {
+      document.addEventListener('test', () => {}, {
+        get passive() {
+            supportsPassive = true;
+            return true;
+        }
+      });
+      // listen to touch events
+      if (DragDropTouch.isTouchDevice()) {
+        // 能响应触摸事件
+        const d = document;
+        const ts = this.touchstart;
+        const tmod = this.touchmoveOnDocument;
+        const teod = this.touchendOnDocument;
+        const opt = supportsPassive ? { passive: false, capture: false } : false;
+        const optPassive = supportsPassive ? {passive: true} : false;
+        d.addEventListener('touchstart', ts, opt);
+        d.addEventListener('touchmove', tmod, optPassive);
+        d.addEventListener('touchend', teod);
+        d.addEventListener('touchcancel', teod);
+        this.touchmoveListener = this.touchmove;
+        this.touchendListener = this.touchend;
+        this.listenerOpt = opt;
       }
-    });
-    // listen to touch events
-    if (DragDropTouch.isTouchDevice()) {
-      // 能响应触摸事件
-      const d = document;
-      const ts = this.touchstart;
-      const tmod = this.touchmoveOnDocument;
-      const teod = this.touchendOnDocument;
-      const opt = supportsPassive ? { passive: false, capture: false } : false;
-      const optPassive = supportsPassive ? {passive: true} : false;
-      d.addEventListener('touchstart', ts, opt);
-      d.addEventListener('touchmove', tmod, optPassive);
-      d.addEventListener('touchend', teod);
-      d.addEventListener('touchcancel', teod);
-      this.touchmoveListener = this.touchmove;
-      this.touchendListener = this.touchend;
-      this.listenerOpt = opt;
     }
-
   }
   /**
    * Gets a reference to the @see:DragDropTouch singleton.
@@ -85,6 +86,9 @@ export class DragDropTouch {
     return DragDropTouch.instance;
   }
   static isTouchDevice() {
+    if (typeof window === 'undefined' || typeof document === 'undefined') {
+      return false;
+    }
     const d: Document = document;
     const w: Window = window;
     let bool;

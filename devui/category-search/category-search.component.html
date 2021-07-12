@@ -155,7 +155,9 @@
                     [ngTemplateOutlet]="customGroupNameTemplate || defaultGroupNameTemplate"
                     [ngTemplateOutletContext]="{ tag: item }"
                   ></ng-template>
-                  <a *ngIf="item && item.groupLength === undefined" class="devui-dropdown-item">{{ item?.label }}</a>
+                  <a *ngIf="item && item.groupLength === undefined" class="devui-dropdown-item" title="{{ item?.label }}">{{
+                    item?.label
+                  }}</a>
                 </li>
                 <div class="devui-no-data-text" *ngIf="categoryDisplay.length === 0">{{ i18nCategorySearchText?.noFilterConditions }}</div>
               </ul>
@@ -292,7 +294,7 @@
               [dValidateRules]="filterNameRules"
             />
             <svg
-              *ngIf="filterName.length"
+              *ngIf="showFilterNameClear"
               (click)="$event.preventDefault(); $event.stopPropagation(); filterName = ''"
               width="16px"
               height="16px"
@@ -393,24 +395,46 @@
   </div>
   <ul *ngIf="tagOption.options?.length" class="devui-dropdown-menu-template devui-tag-dropdown-menu devui-radio-template">
     <li *ngFor="let item of tagOption.options" (click)="chooseItem(tagOption, item)">
-      <a class="devui-dropdown-item" [ngClass]="{ active: tagOption?.value?.label === item[tagOption.filterKey || 'label'] }">{{
-        item[tagOption.filterKey || 'label']
-      }}</a>
+      <a
+        class="devui-dropdown-item"
+        [ngClass]="{ active: tagOption?.value?.label === item[tagOption.filterKey || 'label'] }"
+        title="{{ item[tagOption.filterKey || 'label'] }}"
+        >{{ item[tagOption.filterKey || 'label'] }}</a
+      >
     </li>
   </ul>
 </ng-template>
 
 <ng-template #dateRangeTemplate let-tagOption="tagOption" let-dropdown="dropdown">
-  <d-date-range-picker
-    #dDatepicker
-    [(ngModel)]="tagOption.value.value"
-    [selectedRange]="tagOption.value.value"
-    [showTime]="tagOption.showTime"
-  ></d-date-range-picker>
-  <div class="devui-date-picker-operation-area">
-    <d-button (btnClick)="getDate(tagOption, dDatepicker); closeMenu(dropdown)">{{ i18nCategorySearchText?.confirm }}</d-button>
-    <d-button bsStyle="common" (btnClick)="closeMenu(dropdown)">{{ i18nCategorySearchText?.cancel }}</d-button>
-  </div>
+  <d-datepicker-calendar
+    id="{{ tagOption.field }}"
+    style="overflow-x: hidden"
+    #dDatepickerPro
+    [isRangeType]="true"
+    [showTime]="true"
+    [activeRangeType]="activeType"
+    [ngModel]="tagOption.value.value"
+    (ngModelChange)="dateValueChange(tagOption, dDatepickerPro)"
+  >
+    <ng-template #footerTemplate>
+      <div class="devui-datepicker-footer">
+        <d-button
+          style="margin-right: 8px"
+          bsStyle="primary"
+          (btnClick)="confirmDate(tagOption); closeMenu(dropdown)"
+          [disabled]="!tagOption.value.value || tagOption.value.value.length < 2"
+        >
+          {{ i18nCategorySearchText?.confirm }}
+        </d-button>
+        <d-button *ngIf="activeType === 'start'" bsStyle="common" (btnClick)="switchType()">{{
+          i18nCategorySearchText?.switchToEnd
+        }}</d-button>
+        <d-button *ngIf="activeType === 'end'" bsStyle="common" (btnClick)="switchType()">{{
+          i18nCategorySearchText?.switchToStart
+        }}</d-button>
+      </div>
+    </ng-template>
+  </d-datepicker-calendar>
 </ng-template>
 
 <ng-template #checkboxTemplate let-tagOption="tagOption" let-dropdown="dropdown">
@@ -445,8 +469,8 @@
       [isShowTitle]="true"
     >
       <ng-template #labelContent let-label="label">
-        <span class="devui-color-block" [style.background]="splitLabel('color', label)"></span>
-        <span>{{ splitLabel('label', label) }}</span>
+        <span class="devui-color-block" [style.background]="splitLabel('color', label)" title="{{ splitLabel('label', label) }}"></span>
+        <span title="{{ splitLabel('label', label) }}">{{ splitLabel('label', label) }}</span>
       </ng-template>
     </d-checkbox-group>
   </div>

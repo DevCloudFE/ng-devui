@@ -70,7 +70,7 @@ export class DraggableComponent implements OnInit {
     return new Promise((resovle) => {
       console.log('dragNodeId: ' + dragNodeId);
       console.log('dropNodeId: ' + dropNodeId);
-      resovle();
+      resovle(undefined);
     });
   }
 

@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Inject, Injectable } from '@angular/core';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { from, Observable, Subscription } from 'rxjs';
-import {  mergeMap } from 'rxjs/operators';
+import { mergeMap } from 'rxjs/operators';
 import { IFileOptions, IUploadOptions } from './file-uploader.types';
 
 @Injectable()
@@ -10,7 +11,10 @@ export class SelectFiles {
   BEYOND_MAXIMAL_FILE_SIZE_MSG: string;
   i18nText: I18nInterface['upload'];
   i18nSubscription: Subscription;
-  constructor(private i18n: I18nService) {
+  document: Document;
+
+  constructor(private i18n: I18nService, @Inject(DOCUMENT) private doc: any) {
+    this.document = this.doc;
     this.i18nText = this.i18n.getI18nText().upload;
     this.i18nSubscription = this.i18n.langChange().subscribe((data) => {
       this.i18nText = data.upload;
@@ -19,11 +23,11 @@ export class SelectFiles {
 
   selectFiles = ({ multiple, accept }: IFileOptions): Promise<File[]> => {
     return new Promise((resolve) => {
-      const tempNode = document.getElementById('d-upload-temp');
+      const tempNode = this.document.getElementById('d-upload-temp');
       if (tempNode) {
-        document.body.removeChild(tempNode);
+        this.document.body.removeChild(tempNode);
       }
-      const input = document.createElement('input');
+      const input = this.document.createElement('input');
 
       input.style.position = 'fixed';
       input.style.left = '-2000px';
@@ -41,7 +45,7 @@ export class SelectFiles {
       input.addEventListener('change', event => {
         resolve(Array.prototype.slice.call((event.target as HTMLInputElement).files));
       });
-      document.body.appendChild(input); // Fix compatibility issue with Internet Explorer 11
+      this.document.body.appendChild(input); // Fix compatibility issue with Internet Explorer 11
       this.simulateClickEvent(input);
     });
   }
@@ -112,7 +116,7 @@ export class SelectFiles {
   }
 
   simulateClickEvent(input) {
-    const evt = document.createEvent('MouseEvents');
+    const evt = this.document.createEvent('MouseEvents');
     evt.initMouseEvent('click', true, true, window, 1, 0, 0, 0, 0, false, false, false, false, 0, null);
     input.dispatchEvent(evt);
   }

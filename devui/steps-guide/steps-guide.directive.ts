@@ -1,9 +1,11 @@
+import { DOCUMENT } from '@angular/common';
 import {
   ComponentFactoryResolver,
   ComponentRef,
   Directive,
   ElementRef,
   EventEmitter,
+  Inject,
   Input,
   OnDestroy,
   OnInit,
@@ -11,7 +13,7 @@ import {
 } from '@angular/core';
 import { OverlayContainerRef } from 'ng-devui/overlay-container';
 import { throttle } from 'lodash-es';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { StepsGuideComponent } from './steps-guide.component';
 import { StepsGuideService } from './steps-guide.service';
 import {
@@ -23,7 +25,7 @@ import {
 } from './steps-guide.types';
 
 @Directive({
-  selector: '[dStepsGuide]'
+  selector: '[dStepsGuide]',
 })
 export class StepsGuideDirective implements OnInit, OnDestroy {
   // 引导页面标示，用于记录不同页面的引导状态
@@ -77,6 +79,7 @@ export class StepsGuideDirective implements OnInit, OnDestroy {
       this.destroyMutationObserver(true);
     }
   }
+  @Input() beforeChange: (currentIndex, targetIndex) => boolean | Promise<boolean> | Observable<boolean>;
   // 点击引导操作触发，返回当前步骤和当前操作，比如上一步、下一步、关闭
   @Output() operateChange = new EventEmitter<OperateResponse>();
   _observerDom: any;
@@ -88,17 +91,26 @@ export class StepsGuideDirective implements OnInit, OnDestroy {
   // 监听dom变化的设置，监听属性变化和dom所属节点树变化
   MUTATION_OBSERVER_CONFIG = { attributes: true, subtree: true };
   MUTATION_OBSERVER_TIME = 500;
+  document: Document;
 
   constructor(
     private stepService: StepsGuideService,
     private elm: ElementRef,
     private componentFactoryResolver: ComponentFactoryResolver,
-    private overlayContainerRef: OverlayContainerRef
-  ) { }
+    private overlayContainerRef: OverlayContainerRef,
+    @Inject(DOCUMENT) private doc: any
+  ) {
+    this.document = this.doc;
+  }
 
   ngOnInit() {
     // 监听当前索引变化，决定显示步骤
     this.sub.add(this.stepService.currentIndex.subscribe(index => {
+      this.canChange(index).then((change) => {
+        if (!change) {
+          return;
+        }
+      });
       // 防止服务中的步骤被置空或默认为空
       const serviceSteps = this.stepService.getSteps() || [];
       this.steps = serviceSteps.length > 0 ? serviceSteps : this.steps;
@@ -129,7 +141,7 @@ export class StepsGuideDirective implements OnInit, OnDestroy {
             position: this.dStepsGuidePosition,
             leftFix: this.leftFix,
             topFix: this.topFix,
-            zIndex: this.zIndex
+            zIndex: this.zIndex,
           });
         });
       }
@@ -161,7 +173,7 @@ export class StepsGuideDirective implements OnInit, OnDestroy {
   }
 
   insert(option: GuideOptions) {
-    const bodyDoms = Array.from(document.body.childNodes);
+    const bodyDoms = Array.from(this.document.body.childNodes);
     const hasGuide = bodyDoms && bodyDoms.find((dom: HTMLElement) => dom.className && dom.className.indexOf('devui-step-item') >= 0);
     if (!hasGuide) {
       this.stepRef = this.overlayContainerRef.createComponent(
@@ -176,8 +188,11 @@ export class StepsGuideDirective implements OnInit, OnDestroy {
   }
 
   // 监听dom变化的回调方法，即dom发生变化时触发resize事件
-  mutationCallBack() {
-    const resizeEvt = document.createEvent('Event');
+  mutationCallBack = () => {
+    if (typeof window === 'undefined') {
+      return;
+    }
+    const resizeEvt = this.document.createEvent('Event');
     resizeEvt.initEvent('resize', true, true);
     window.dispatchEvent(resizeEvt);
   }
@@ -191,5 +206,23 @@ export class StepsGuideDirective implements OnInit, OnDestroy {
       this._observerDom = undefined;
       this.observer = undefined;
     }
+  }
+
+  canChange(index) {
+    let changeResult = Promise.resolve(true);
+    const currentIndex = this.currentIndex >= 0 ? this.currentIndex : this.stepIndex;
+    if (this.beforeChange) {
+      const result: any = this.beforeChange(currentIndex, index);
+      if (typeof result !== 'undefined') {
+        if (result.then) {
+          changeResult = result;
+        } else if (result.subscribe) {
+          changeResult = (result as Observable<boolean>).toPromise();
+        } else {
+          changeResult = Promise.resolve(result);
+        }
+      }
+    }
+    return changeResult;
   }
 }

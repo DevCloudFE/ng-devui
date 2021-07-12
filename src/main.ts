@@ -6,11 +6,7 @@ import {
 } from 'ng-devui/theme';
 import { deepTheme, galaxyTheme, infinityTheme, provenceTheme, sweetTheme } from 'ng-devui/theme-collection';
 import { AppModule } from './app/app.module';
-import {
-  devuiDarkLargeTheme, devuiLightLargeTheme,
-  greenDarkLargeTheme, greenDarkTheme,
-  greenLightLargeTheme, greenLightTheme
-} from './app/theme-picker/theme-data-more';
+import { devuiLargeFontTheme, greenDarkTheme, greenLightTheme } from './app/theme-picker/theme-data-more';
 import { environment } from './environments/environment';
 
 ThemeServiceInit({
@@ -18,10 +14,7 @@ ThemeServiceInit({
   'devui-dark-theme': devuiDarkTheme,
   'green-light-theme': greenLightTheme,
   'green-dark-theme': greenDarkTheme,
-  'devui-light-large-theme': devuiLightLargeTheme,
-  'devui-dark-large-theme': devuiDarkLargeTheme,
-  'green-light-large-theme': greenLightLargeTheme,
-  'green-dark-large-theme': greenDarkLargeTheme,
+  'devui-large-font-theme': devuiLargeFontTheme,
   'infinity-theme': infinityTheme,
   'provence-theme': provenceTheme,
   'sweet-theme': sweetTheme,

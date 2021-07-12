@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
-const resolvedPromise = (() => Promise.resolve(null))();
+function resolvedPromiseFunc() { return Promise.resolve(null); }
+const resolvedPromise = resolvedPromiseFunc();
 @Injectable({ providedIn: 'root' })
 export class DValidateSyncService {
 

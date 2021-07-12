@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, Inject, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
@@ -15,7 +16,11 @@ export class HighlightComponent implements OnChanges {
    * @deprecated
    */
   @Input() highlightClass = 'devui-match-highlight';
-  constructor(private translateHtml: DomSanitizer, private eleRef: ElementRef) {}
+  document: Document;
+
+  constructor(private translateHtml: DomSanitizer, private eleRef: ElementRef, @Inject(DOCUMENT) private doc: any) {
+    this.document = this.doc;
+  }
   ngOnChanges(changes: SimpleChanges): void {
     this.addDom(this.value, this.term);
   }
@@ -40,16 +45,16 @@ export class HighlightComponent implements OnChanges {
     const reg = (str) => str.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
     const regExp = new RegExp('(' + reg(term) + ')', 'gi');
     const temp = value.split(regExp);
-    function createHighLight(text) {
-      const spanDOM = document.createElement('span');
+    const createHighLight = (text) => {
+      const spanDOM = this.document.createElement('span');
       spanDOM.classList.add('devui-match-highlight');
       spanDOM.textContent = text;
       return spanDOM;
-    }
+    };
 
-    temp.forEach(function (element, index) {
+    temp.forEach((element, index) => {
       if (index % 2 === 0) {
-        container.appendChild(document.createTextNode(element));
+        container.appendChild(this.document.createTextNode(element));
       } else {
         container.appendChild(createHighLight(element));
       }

@@ -40,6 +40,9 @@ export class TransformableElement {
   }
 
   setElementListener() {
+    if (typeof window === 'undefined') {
+      return;
+    }
     if (this.eventSub) {
       this.eventSub.unsubscribe();
     }
@@ -60,6 +63,9 @@ export class TransformableElement {
   }
 
   mouseZoom($event) {
+    if (typeof document === 'undefined') {
+      return;
+    }
     this.zoomSub = of($event).pipe(
       throttleTime(300),
       tap((event) => {
@@ -102,7 +108,7 @@ export class TransformableElement {
   }
 
   mouseMove($event) {
-    if (this._mouseDown) {
+    if (this._mouseDown && typeof document !== 'undefined') {
       $event.stopPropagation();
       $event.preventDefault();
       this.translateX = this._originTranslateX + ($event['clientX'] - this._originMouseX);
@@ -114,9 +120,11 @@ export class TransformableElement {
   }
 
   mouseUp($event) {
-    this._mouseDown = false;
-    document.body.style.cursor = 'default';
-    this.element.style.cursor = 'grab';
+    if (typeof document !== 'undefined') {
+      this._mouseDown = false;
+      document.body.style.cursor = 'default';
+      this.element.style.cursor = 'grab';
+    }
   }
 
   zoomOut(step = 0.25) {

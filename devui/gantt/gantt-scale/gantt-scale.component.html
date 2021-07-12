@@ -1,7 +1,9 @@
 <div
   class="devui-gantt-scale {{ unit }}"
-  *ngFor="let data of scaleData; trackBy: trackByFn; let first = first; let last = last"
+  *ngFor="let data of viewSCaleData; trackBy: trackByFn; let first = first; let last = last"
   [ngClass]="{ today: data.today, milestone: data.milestone }"
+  [style.left]="scaleWidth[unit] * data.index + 'px'"
+  [style.width]="scaleWidth[unit] + 'px'"
   dGanttMarker
   [monthMark]="data.monthStart"
   [weekend]="data.weekend"

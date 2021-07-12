@@ -1,9 +1,11 @@
 import { CdkOverlayOrigin, ConnectedOverlayPositionChange, VerticalConnectionPos } from '@angular/cdk/overlay';
+import { DOCUMENT } from '@angular/common';
 import {
   ChangeDetectorRef,
   Component,
   ElementRef,
   EventEmitter,
+  Inject,
   Input,
   OnDestroy,
   OnInit,
@@ -63,6 +65,7 @@ export class TwoDatePickerComponent implements OnInit, OnDestroy {
   private _dateFormat: string;
   private _maxDate: Date;
   private _minDate: Date;
+  document: Document;
 
   @Input() set dateConfig(dateConfig: any) {
     if (this.checkDateConfig(dateConfig)) {
@@ -97,12 +100,12 @@ export class TwoDatePickerComponent implements OnInit, OnDestroy {
     this._isOpen = isOpen;
     if (!isOpen) {
       this.startAnimation = false;
-      document.removeEventListener('click', this.onDocumentClick);
+      this.document.removeEventListener('click', this.onDocumentClick);
     } else {
       setTimeout(() => {
         this.startAnimation = true;
         this.cdr.detectChanges();
-        document.addEventListener('click', this.onDocumentClick);
+        this.document.addEventListener('click', this.onDocumentClick);
       });
     }
   }
@@ -131,11 +134,13 @@ export class TwoDatePickerComponent implements OnInit, OnDestroy {
     protected datePickerConfig: DatePickerConfig,
     private i18n: I18nService,
     private cdr: ChangeDetectorRef,
-    private devConfigService: DevConfigService
+    private devConfigService: DevConfigService,
+    @Inject(DOCUMENT) private doc: any
   ) {
     this._dateConfig = datePickerConfig['dateConfig'];
     this.dateConverter = datePickerConfig['dateConfig'].dateConverter || new DefaultDateConverter();
     this.setI18nText();
+    this.document = this.doc;
   }
 
   checkDateConfig(dateConfig: any) {
@@ -347,6 +352,6 @@ export class TwoDatePickerComponent implements OnInit, OnDestroy {
     if (this.i18nSubscription) {
       this.i18nSubscription.unsubscribe();
     }
-    document.removeEventListener('click', this.onDocumentClick);
+    this.document.removeEventListener('click', this.onDocumentClick);
   }
 }

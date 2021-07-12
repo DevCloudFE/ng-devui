@@ -26,6 +26,7 @@ export class PanelComponent {
   @Input() type: PanelType = 'default';
   @Input() cssClass: string;
   @Input() isCollapsed: boolean;
+  @Input() hasLeftPadding = true;
   @Input() @WithConfig() showAnimation = true;
   @Input() beforeToggle: (value) => boolean | Promise<boolean> | Observable<boolean>;
   @Output() toggle: EventEmitter<boolean> = new EventEmitter<boolean>();

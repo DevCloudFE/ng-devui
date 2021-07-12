@@ -1,5 +1,6 @@
 import { animate, AnimationBuilder, AnimationMetadata, AnimationPlayer, style } from '@angular/animations';
-import { Directive, ElementRef, Host, HostBinding, HostListener, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Directive, ElementRef, Host, HostBinding, HostListener, Inject, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { AnimationCurves, AnimationDuration } from 'ng-devui/utils';
 import { WindowRef } from 'ng-devui/window-ref';
 import { fromEvent, Subscription } from 'rxjs';
@@ -16,16 +17,16 @@ export class DropDownMenuDirective implements OnInit, OnDestroy {
   @HostBinding('attr.tabIndex') tabIndex = -1;
   @HostBinding('class.devui-dropdown-menu') addClass = true;
   subscription: Subscription;
-  keydownEscapeEvent$ = fromEvent(document.body, 'keydown').pipe(
-    // chrome 为 Escape , ie 11为Esc
-    filter(event => (<KeyboardEvent>event).key === 'Escape' || (<KeyboardEvent>event).key === 'Esc')
-  );
+  keydownEscapeEvent$;
   keydownEscapeSub: Subscription;
   popDirectionCache: 'top' | 'bottom';
   private currentValue: any = false;
   constructor(@Host() private dropdown: DropDownDirective, private el: ElementRef, private render: Renderer2,
-              private windowRef: WindowRef, private builder: AnimationBuilder) {
-
+              private windowRef: WindowRef, private builder: AnimationBuilder, @Inject(DOCUMENT) private doc: any) {
+    this.keydownEscapeEvent$ = fromEvent(this.doc.body, 'keydown').pipe(
+      // chrome 为 Escape , ie 11为Esc
+      filter(event => (<KeyboardEvent>event).key === 'Escape' || (<KeyboardEvent>event).key === 'Esc')
+    );
   }
 
   ngOnInit() {

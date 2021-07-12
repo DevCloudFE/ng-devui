@@ -1,9 +1,11 @@
+import { DOCUMENT } from '@angular/common';
 import {
   AfterViewInit,
   Directive,
   ElementRef,
   EventEmitter,
   HostListener,
+  Inject,
   Input,
   NgZone,
   OnDestroy,
@@ -123,13 +125,15 @@ export class DroppableDirective implements OnInit, AfterViewInit, OnDestroy {
     /* 协同拖拽需要 */
     placeholderInsertionEvent = new Subject<DragPlaceholderInsertionEvent>();
     placeholderRenderEvent = new Subject<any>();
+    document: Document;
 
-    constructor(protected el: ElementRef, private renderer: Renderer2, private dragDropService: DragDropService, private ngZone: NgZone) {
-
+    constructor(protected el: ElementRef, private renderer: Renderer2, private dragDropService: DragDropService, private ngZone: NgZone,
+                @Inject(DOCUMENT) private doc: any) {
+      this.document = this.doc;
     }
 
     ngOnInit() {
-      this.placeholder = document.createElement(this.placeholderTag);
+      this.placeholder = this.document.createElement(this.placeholderTag);
       this.placeholder.className = 'drag-placeholder';
       this.placeholder.innerText = this.placeholderText;
       this.dragStartSubscription = this.dragDropService.dragStartEvent.subscribe(() => this.setPlaceholder());

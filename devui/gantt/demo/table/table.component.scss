@@ -143,10 +143,9 @@ d-data-table {
     left: 0;
     top: 0;
     bottom: 0;
-    width: 3px;
-    border-right: 3px solid $devui-line;
+    width: 6px;
+    border-left: 3px solid $devui-line;
     cursor: col-resize;
-    padding: 0 3px;
   }
 
   .devui-table {

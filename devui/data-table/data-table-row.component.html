@@ -15,7 +15,7 @@
         </g>
       </svg>
     </span>
-    <span [style.vertical-align]="'middle'" *ngIf="rowItem['$isDetailOpen'] || rowItem.$expandConfig?.expand">
+    <span [style.vertical-align]="'middle'" *ngIf="(rowItem && rowItem['$isDetailOpen']) || rowItem.$expandConfig?.expand">
       <svg
         class="svg-icon-arrow"
         width="16px"

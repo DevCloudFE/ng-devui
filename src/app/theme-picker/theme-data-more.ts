@@ -89,86 +89,23 @@ export const greenDarkTheme: Theme = new Theme({
   extends: 'devui-dark-theme',
 });
 
-export const devuiLightLargeTheme: Theme = new Theme({
-  id: 'devui-light-large-theme',
-  name: 'Light Large Mode',
-  cnName: '浅色大字号主题',
-  data: Object.assign({}, devuiLightTheme.data, {
-    'devui-font-size': '14px',
-    'devui-font-size-card-title': '16px',
-    'devui-font-size-page-title': '18px',
-    'devui-font-size-modal-title': '20px',
-    'devui-font-size-price': '22px',
-    'devui-font-size-data-overview': '26px',
-
-    'devui-font-size-icon': '18px',
-    'devui-font-size-sm': '14px',
-    'devui-font-size-md': '14px',
-    'devui-font-size-lg': '16px',
-  }),
-  isDark: false,
-  extends: 'devui-light-theme',
+export const devuiLargeFontTheme: Theme = new Theme({
+  id: 'devui-large-font-theme',
+  name: 'Large Font Mode',
+  cnName: '大字号主题',
+  data: {}
 });
 
-export const devuiDarkLargeTheme: Theme = new Theme({
-  id: 'devui-dark-large-theme',
-  name: 'Dark Large Mode',
-  cnName: '深色大字号主题',
-  data: Object.assign({}, devuiDarkTheme.data, {
-    'devui-font-size': '14px',
-    'devui-font-size-card-title': '16px',
-    'devui-font-size-page-title': '18px',
-    'devui-font-size-modal-title': '20px',
-    'devui-font-size-price': '22px',
-    'devui-font-size-data-overview': '26px',
+export const LargeFontSize = {
+  'devui-font-size': '14px',
+  'devui-font-size-card-title': '16px',
+  'devui-font-size-page-title': '18px',
+  'devui-font-size-modal-title': '20px',
+  'devui-font-size-price': '22px',
+  'devui-font-size-data-overview': '26px',
 
-    'devui-font-size-icon': '18px',
-    'devui-font-size-sm': '14px',
-    'devui-font-size-md': '14px',
-    'devui-font-size-lg': '16px',
-  }),
-  isDark: true,
-  extends: 'devui-dark-theme',
-});
-
-export const greenLightLargeTheme: Theme = new Theme({
-  id: 'green-light-large-theme',
-  name: 'Green Light Large Mode',
-  cnName: '绿浅色大字号主题',
-  data: Object.assign({}, greenLightTheme.data, {
-    'devui-font-size': '14px',
-    'devui-font-size-card-title': '16px',
-    'devui-font-size-page-title': '18px',
-    'devui-font-size-modal-title': '20px',
-    'devui-font-size-price': '22px',
-    'devui-font-size-data-overview': '26px',
-
-    'devui-font-size-icon': '18px',
-    'devui-font-size-sm': '14px',
-    'devui-font-size-md': '14px',
-    'devui-font-size-lg': '16px',
-  }),
-  isDark: true,
-  extends: 'devui-light-theme',
-});
-
-export const greenDarkLargeTheme: Theme = new Theme({
-  id: 'green-dark-large-theme',
-  name: 'Green Dark Large Mode',
-  cnName: '绿深色大字号主题',
-  data: Object.assign({}, greenDarkTheme.data, {
-    'devui-font-size': '14px',
-    'devui-font-size-card-title': '16px',
-    'devui-font-size-page-title': '18px',
-    'devui-font-size-modal-title': '20px',
-    'devui-font-size-price': '22px',
-    'devui-font-size-data-overview': '26px',
-
-    'devui-font-size-icon': '18px',
-    'devui-font-size-sm': '14px',
-    'devui-font-size-md': '14px',
-    'devui-font-size-lg': '16px',
-  }),
-  isDark: true,
-  extends: 'devui-dark-theme',
-});
+  'devui-font-size-icon': '18px',
+  'devui-font-size-sm': '14px',
+  'devui-font-size-md': '14px',
+  'devui-font-size-lg': '16px',
+};

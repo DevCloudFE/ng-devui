@@ -1,12 +1,5 @@
 <div class="devui-demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 180, bottom: 0 }">
   <d-demo-nav [navItems]="navItems"></d-demo-nav>
-  <div class="devui-demo-example" [dAnchor]="'lazy-load'">
-    <div class="devui-demo-title">{{ 'components.common.lazyLoadDemo.title' | translate }}</div>
-    <div class="devui-demo-text">{{ 'components.common.lazyLoadDemo.description' | translate }}</div>
-    <d-codebox id="common-lazy-load" [sourceData]="lazyLoadSource">
-      <d-lazy-load demo></d-lazy-load>
-    </d-codebox>
-  </div>
   <div class="devui-demo-example" [dAnchor]="'date-pipe'">
     <div class="devui-demo-title">{{ 'components.common.pipeDemo.title' | translate }}</div>
     <div class="devui-demo-text"></div>
@@ -46,6 +39,13 @@
     <div class="devui-demo-text"></div>
     <d-codebox id="common-clipboard" [sourceData]="clipboardSource">
       <d-common-clipboard demo></d-common-clipboard>
+    </d-codebox>
+  </div>
+  <div class="devui-demo-example" [dAnchor]="'lazy-load'">
+    <div class="devui-demo-title">{{ 'components.common.lazyLoadDemo.title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.common.lazyLoadDemo.description' | translate }}</div>
+    <d-codebox id="common-lazy-load" [sourceData]="lazyLoadSource">
+      <d-lazy-load demo></d-lazy-load>
     </d-codebox>
   </div>
 </div>

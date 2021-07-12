@@ -46,7 +46,7 @@ import { TimeAxisDemoComponent } from './time-axis-demo.component';
       SeperateWayComponent,
       CustomDotComponent
       ],
-  entryComponents: [TimeAxisDemoComponent],
+  
   providers: [],
 })
 export class TimeAxisDemoModule {

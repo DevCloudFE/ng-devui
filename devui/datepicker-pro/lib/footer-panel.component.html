@@ -1,0 +1,8 @@
+<div class="devui-datepicekr-pro-footer">
+  <ng-template [ngTemplateOutlet]="footerTemplate || default"> </ng-template>
+</div>
+
+<ng-template #default>
+  <d-button bsStyle="primary" [disabled]="confirmDisable" (click)="ensureDate()"> {{ i18nText.btnOk }} </d-button>
+  <d-button class="devui-cancel-button" bsStyle="common" *ngIf="isRange" (click)="close()"> {{ i18nText.btnCancel }} </d-button>
+</ng-template>

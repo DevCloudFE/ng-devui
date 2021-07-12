@@ -31,8 +31,12 @@
       "description": "DevUI 为 Web 应用提供了丰富的基础 UI 组件，我们还将持续探索企业级应用的最佳 UI 实践，欢迎尝试使用 DevUI。",
       "placeholder": "请输入你想查找的组件",
       "newChange": "有更新",
+      "sunset": "日落",
       "lookingCmp": "您要找的组件是不是？",
-      "suggestCmp": "推荐组件"
+      "suggestCmp": "推荐组件",
+      "filter": "过滤器",
+      "newChangeCmps": "有更新的",
+      "recentlySuggestCmps": "近期推荐"
     },
     "start": "快速开始",
     "themeDoc": "主题化使用指南",
@@ -819,7 +823,9 @@
       "tmw": "处理日期字符串转换、文件下载、a标签模拟、懒加载等。",
       "lazyLoadDemo": {
         "title": "懒加载指令",
-        "description": "引入util模块中的LazyLoadModule，使用dLazyLoad指令在滚到到容器底部时响应loadMore事件实现懒加载。"
+        "description": "引入util模块中的LazyLoadModule，使用dLazyLoad指令在滚到到容器底部时响应loadMore事件实现懒加载。",
+        "p1": "默认滚动监听使用宿主",
+        "p2": "滚动监听使用其他元素,比如window·"
       },
       "pipeDemo": {
         "title": "日期解析器"
@@ -1977,9 +1983,14 @@
         "manualDestroy": "手动销毁",
         "closeManualDestroy": "关闭后可手动销毁，打开状态调用无效"
       },
+      "templateDemo": {
+        "title": "自定义模板",
+        "description": "自定义抽屉板模板。"
+      },
       "anchorLinkValues": {
         "basic-usage": "基本用法",
-        "do-not-destroy-after-closing": "关闭后不销毁"
+        "do-not-destroy-after-closing": "关闭后不销毁",
+        "template": "自定义模板"
       }
     },
     "dropdown": {
@@ -2771,13 +2782,17 @@
         "select": "请选择",
         "custom": "自定义"
       },
+      "header-templateDemo": {
+        "title": "下拉头模板"
+      },
       "anchorLinkValues": {
         "basic-usage": "基本用法",
         "multiple-cascader": "多选类型",
         "search-cascader": "搜索类型",
         "parent-cascader": "父级可选",
         "template-cascader": "模板类型",
-        "lazyload-cascader": "点击加载"
+        "lazyload-cascader": "点击加载",
+        "cascader-header-template": "下拉头模板"
       }
     },
     "status": {
@@ -3412,7 +3427,7 @@
         "description": "允许传入正则或正则字符串限制输入，输入时会优先匹配传入的正则，不输入则不限制。"
       },
       "decimalLimitDemo": {
-        "title": "限制小数和自动获取焦点",
+        "title": "限制小数",
         "Limit Decimal": "限制小数"
       },
       "anchorLinkValues": {
@@ -3678,9 +3693,13 @@
         "title": "调整大小",
         "placeholder": "请输入内容"
       },
+      "countDemo": {
+        "title": "监听输入及最大字数"
+      },
       "anchorLinkValues": {
         "basic-usage": "基本用法",
-        "resize": "调整大小"
+        "resize": "调整大小",
+        "count": "监听输入及最大字数"
       }
     },
     "steps-guide": {
@@ -3847,6 +3866,23 @@
         "rangeTemplate": "范围模式的模板使用",
         "datepicker-pro-static-panel": "日历面板模式",
         "select-type": "业务场景：select类型日期选择器"
+      }
+    },
+    "trend": {
+      "name": "Trend 趋势",
+      "type": "数据录入",
+      "path": "trend",
+      "description": "带趋势的数字展示",
+      "tmw": "展示单个数据及其趋势。",
+      "basicDemo": {
+        "title": "基本用法"
+      },
+      "trend-icon-template": {
+        "title": "自定义趋势图标"
+      },
+      "anchorLinkValues": {
+        "basicDemo": "基本用法",
+        "trend-icon-template": "自定义趋势图标"
       }
     }
   }

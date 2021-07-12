@@ -17,7 +17,7 @@ class TestTimeAxisComponent {
       { time: '2017-07-27', text: '这是2017-07-27发生的事件', type: 'success' },
       { time: '2017-07-28', text: '这是2017-07-28发生的事件', type: 'danger' },
       { time: '2017-07-29', text: '这是2017-07-29发生的事件', type: 'warning' },
-      { time: '2017-07-29', text: '这是2017-07-29发生的事件', type: 'waiting' },
+      { time: '2017-07-29', text: '这是2017-07-29发生的事件', type: 'warning' },
     ],
   };
 }
@@ -81,7 +81,7 @@ describe('time-axis base', () => {
       fixture.detectChanges();
       // 最后两个tr元素中的状态样式
       expect(lis[3].querySelector('.devui-time-axis-item-dot')).not.toBeNull();
-      expect(lis[4].querySelector('.devui-time-axis-item-type-waiting')).not.toBeNull();
+      expect(lis[4].querySelector('.devui-time-axis-item-type-warning')).not.toBeNull();
     });
   });
 });

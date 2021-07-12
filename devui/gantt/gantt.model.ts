@@ -11,6 +11,7 @@ export interface GanttScaleDateInfo {
   highlightStart?: boolean;
   milestone?: string;
   scaleStartVisable?: boolean;
+  index?: number;
 }
 
 export enum GanttScaleUnit {

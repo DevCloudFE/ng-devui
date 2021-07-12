@@ -9,8 +9,9 @@ import {
   OnDestroy,
   OnInit,
   Output,
-  ViewChild,
+  ViewChild
 } from '@angular/core';
+import { WindowRef } from 'ng-devui/window-ref';
 import { fromEvent, Subscription } from 'rxjs';
 import { filter, throttleTime } from 'rxjs/operators';
 
@@ -61,7 +62,7 @@ export class StickyComponent implements OnInit, AfterViewInit, OnDestroy {
   private scrollTimer;
   subscription: Subscription;
 
-  constructor(private el: ElementRef) {}
+  constructor(private el: ElementRef, private windowRef: WindowRef) {}
 
   ngOnInit() {
     this.parentNode = this.el.nativeElement.parentNode;
@@ -71,18 +72,18 @@ export class StickyComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    this.scrollTarget = this.scrollTarget || window; // window有scroll事件，document.documentElement没有scroll事件
+    this.scrollTarget = this.scrollTarget || this.windowRef.window; // window有scroll事件，document.documentElement没有scroll事件
     this.scrollTarget.addEventListener('scroll', this.throttle);
     this.initScrollStatus(this.scrollTarget);
-    if (this.scrollTarget !== window) {
-      this.subscription = fromEvent<Event>(window, 'scroll')
+    if (this.scrollTarget !== this.windowRef.window) {
+      this.subscription = fromEvent<Event>(this.windowRef.window, 'scroll')
         .pipe(
           throttleTime(100, undefined, { leading: true, trailing: true }),
           filter(
             (event) =>
               event.target !== this.scrollTarget &&
-              (event.target === window ||
-                event.target === document || // fix ie11 document.contains is not defined
+              (event.target === this.windowRef.window ||
+                event.target === this.windowRef.document || // fix ie11 document.contains is not defined
                 ((<HTMLElement>event.target).contains && (<HTMLElement>event.target).contains(this.scrollTarget)))
           )
         )
@@ -107,7 +108,8 @@ export class StickyComponent implements OnInit, AfterViewInit, OnDestroy {
         this.wrapper.nativeElement.style.position = 'static';
         break;
       case 'follow':
-        const viewOffset = this.scrollTarget && this.scrollTarget !== window ? this.scrollTarget.getBoundingClientRect().top : 0;
+        const viewOffset = this.scrollTarget && this.scrollTarget !== this.windowRef.window ?
+          this.scrollTarget.getBoundingClientRect().top : 0;
         this.wrapper.nativeElement.style.top = +viewOffset + ((this.view && this.view.top) || 0) + 'px';
         this.wrapper.nativeElement.style.left = this.wrapper.nativeElement.getBoundingClientRect().left + 'px';
         this.wrapper.nativeElement.style.position = 'fixed';
@@ -165,8 +167,9 @@ export class StickyComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   scrollHandler = () => {
-    const viewOffsetTop = this.scrollTarget && this.scrollTarget !== window ? this.scrollTarget.getBoundingClientRect().top : 0;
-    const computedStyle = window.getComputedStyle(this.container);
+    const viewOffsetTop = this.scrollTarget && this.scrollTarget !== this.windowRef.window ?
+     this.scrollTarget.getBoundingClientRect().top : 0;
+    const computedStyle = this.windowRef.window.getComputedStyle(this.container);
     if (this.parentNode.getBoundingClientRect().top - viewOffsetTop > ((this.view && this.view.top) || 0)) {
       this.status = 'normal'; // 全局滑动（container!==parentNode）时候增加预判
     } else if (
@@ -200,8 +203,8 @@ export class StickyComponent implements OnInit, AfterViewInit, OnDestroy {
       left: ['left', 'Left'],
       top: ['top', 'Top'],
     };
-    if (window && window.getComputedStyle) {
-      const computedStyle = window.getComputedStyle(relativeElement);
+    if (this.windowRef.window && this.windowRef.window.getComputedStyle) {
+      const computedStyle = this.windowRef.window.getComputedStyle(relativeElement);
       return (
         element.getBoundingClientRect()[key[direction][0]] -
         relativeElement.getBoundingClientRect()[key[direction][0]] -
@@ -211,8 +214,8 @@ export class StickyComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
   calculateRemainPosition(element, relativeElement, container) {
-    if (window && window.getComputedStyle) {
-      const computedStyle = window.getComputedStyle(container);
+    if (this.windowRef.window && this.windowRef.window.getComputedStyle) {
+      const computedStyle = this.windowRef.window.getComputedStyle(container);
       const result =
         container.getBoundingClientRect().height -
         element.getBoundingClientRect().height +
@@ -227,7 +230,8 @@ export class StickyComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   initScrollStatus(target) {
-    const scrollTargets = target === window ? [document.documentElement, document.body] : [target];
+    const scrollTargets = target === this.windowRef.window ?
+     [this.windowRef.document.documentElement, this.windowRef.document.body] : [target];
     let flag = false;
     scrollTargets.forEach((scrollTarget) => {
       if (scrollTarget.scrollTop && scrollTarget.scrollTop > 0) {

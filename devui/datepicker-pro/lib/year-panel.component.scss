@@ -1,0 +1,109 @@
+@import '../../style/theme/color';
+@import '../../style/theme/corner';
+
+.year-list-panel {
+  width: 204px;
+  height: 200px;
+  padding: 8px 12px;
+
+  .devui-year-list {
+    width: 184px;
+    height: 186px;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      width: 0;
+    }
+
+    &:hover {
+      overflow-y: overlay;
+      scrollbar-width: thin;
+
+      &::-webkit-scrollbar {
+        width: 4px;
+      }
+    }
+
+    .devui-year-list-item {
+      padding: 4px 0;
+      height: 48px;
+    }
+
+    .devui-year-title {
+      width: 60px;
+      height: 40px;
+      float: left;
+      font-size: 12px;
+      display: block;
+      text-align: center;
+      line-height: 40px;
+      cursor: pointer;
+      border-radius: $devui-border-radius-feedback;
+
+      &:hover:not(.devui-active-year):not(.devui-disabled) {
+        background-color: $devui-list-item-hover-bg;
+      }
+
+      &.devui-this-year {
+        color: $devui-brand;
+      }
+
+      &.devui-active-year {
+        background: $devui-list-item-active-bg;
+        color: $devui-list-item-active-text;
+
+        &.devui-table-date-abandon-selected {
+          background: $devui-primary-disabled;
+        }
+      }
+
+      &.devui-table-date-inrange:not(.devui-active-year) {
+        background-color: $devui-list-item-hover-bg;
+        border-radius: 0;
+      }
+
+      &.devui-table-date-start:not(.devui-table-date-end) {
+        border-radius: $devui-border-radius-feedback 0 0 $devui-border-radius-feedback;
+      }
+
+      &.devui-table-date-end:not(.devui-table-date-start) {
+        border-radius: 0 $devui-border-radius-feedback $devui-border-radius-feedback 0;
+      }
+
+      &.devui-table-date-in-selected-range:not(.devui-table-date-inrange):not(:hover) {
+        background-color: $devui-disabled-bg;
+        border-radius: 0;
+      }
+
+      &.devui-table-date-active-type:not(.devui-table-date-abandon-selected) {
+        animation: 2s ease 0s infinite normal both breath-animation;
+      }
+      @keyframes breath-animation {
+        0% {
+          box-shadow: 0 0 0 $devui-list-item-active-bg;
+        }
+
+        50% {
+          box-shadow: 0 0 8px $devui-list-item-active-bg;
+        }
+
+        to {
+          box-shadow: 0 0 0 $devui-list-item-active-bg;
+        }
+      }
+
+      &.devui-disabled {
+        border-radius: 0;
+        cursor: not-allowed;
+
+        &:first-of-type {
+          border-radius: 4px 0 0 4px;
+        }
+
+        &:last-of-type {
+          border-radius: 0 4px 4px 0;
+        }
+      }
+    }
+  }
+}

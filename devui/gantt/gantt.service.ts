@@ -52,13 +52,13 @@ export class GanttService {
   getScaleUnitPixel() {
     switch (this.scaleUnit) {
       case GanttScaleUnit.day:
-        return 50;
+        return 40;
         break;
       case GanttScaleUnit.week:
-        return 20;
+        return 30;
         break;
       case GanttScaleUnit.month:
-        return 10;
+        return 20;
         break;
       default:
         break;

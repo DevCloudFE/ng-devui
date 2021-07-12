@@ -66,6 +66,9 @@ export class AnchorLinkDirective implements OnInit, OnDestroy {
 
   @HostListener('click')
   scrollToAnchor(activeChangeBy?: AnchorActiveChangeSource) {
+    if (typeof document === 'undefined') {
+      return;
+    }
     if (!this.anchorBlock) {
       return;
     }

@@ -64,7 +64,11 @@ export function resolveRoutesConfig(lang, routesConfig) {
 export function filterData(event, data) {
   const res = cloneDeep(data).filter(catalog => {
     catalog.children = catalog.children.filter(item => {
-      return item.title.toLowerCase().includes(event.toLowerCase());
+      if (typeof event === 'string') {
+        return item.title.toLowerCase().includes(event.toLowerCase());
+      } else if (Array.isArray(event)) {
+        return event.includes(item.title.toLowerCase());
+      }
     });
     return catalog.children.length;
   });

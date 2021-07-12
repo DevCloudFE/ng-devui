@@ -1,9 +1,11 @@
+import { DOCUMENT } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectorRef,
   Component,
   ElementRef,
   EventEmitter,
+  Inject,
   Input,
   OnDestroy,
   OnInit,
@@ -96,7 +98,12 @@ export class NavSpriteComponent implements OnInit, AfterViewInit, OnDestroy {
 
   timeGap = 60;
 
+  document: Document;
+
   get baseUrl() {
+    if (typeof window === 'undefined') {
+      return '';
+    }
     return window.location.href.replace(window.location.hash, '');
   }
 
@@ -106,8 +113,11 @@ export class NavSpriteComponent implements OnInit, AfterViewInit, OnDestroy {
     private router: Router,
     private activeRout: ActivatedRoute,
     private render2: Renderer2,
-    private cdr: ChangeDetectorRef
-  ) {}
+    private cdr: ChangeDetectorRef,
+    @Inject(DOCUMENT) private doc: any
+  ) {
+    this.document = this.doc;
+  }
 
   ngOnInit() {
     this.currentTemp = this.mode === 'default' ? this.defaultTemp : this.spriteTemp; // 设置当前的模式
@@ -117,7 +127,7 @@ export class NavSpriteComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngAfterViewInit() {
     setTimeout(() => {
-      const container = this.targetContainer === document.documentElement ? window : this.targetContainer;
+      const container = this.targetContainer === this.document.documentElement ? window : this.targetContainer;
       this.scrollSub = fromEvent(container, 'scroll')
         .pipe(debounceTime(300))
         .subscribe(() => {

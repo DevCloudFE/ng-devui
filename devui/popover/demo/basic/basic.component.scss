@@ -1,0 +1,16 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
+.btn-group > d-button {
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
+:host ::ng-deep .devui-btn-success {
+  background: $devui-success !important;
+  color: $devui-base-bg;
+}
+
+:host ::ng-deep .devui-btn-warning {
+  background: $devui-warning !important;
+  color: $devui-base-bg;
+}

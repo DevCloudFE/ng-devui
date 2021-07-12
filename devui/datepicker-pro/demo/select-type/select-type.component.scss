@@ -1,0 +1,35 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
+d-datepicker-calendar {
+  box-shadow: $devui-shadow-length-connected-overlay $devui-shadow;
+}
+
+.right-panel {
+  height: 100%;
+  width: 80px;
+  padding: 8px 16px;
+  text-align: left;
+  position: relative;
+
+  li {
+    position: absolute;
+    bottom: 50;
+
+    d-button {
+      width: 50px;
+    }
+
+    span {
+      margin-left: 8px;
+      color: #8a8e99;
+    }
+  }
+}
+
+.footer-panel {
+  text-align: right;
+
+  d-button {
+    margin-right: 4px;
+  }
+}

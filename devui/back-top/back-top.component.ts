@@ -1,6 +1,7 @@
+import { DOCUMENT } from '@angular/common';
 import {
   ChangeDetectionStrategy, ChangeDetectorRef, Component,
-  ElementRef, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, TemplateRef
+  ElementRef, EventEmitter, Inject, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, TemplateRef
 } from '@angular/core';
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
@@ -25,7 +26,10 @@ export class BackTopComponent implements OnInit, OnChanges, OnDestroy {
   SCROLL_REFRESH_INTERVAL = 100;
   target: HTMLElement | Window;
   subs: Subscription = new Subscription();
-  constructor(private cdr: ChangeDetectorRef, private el: ElementRef) {}
+  document: Document;
+  constructor(private cdr: ChangeDetectorRef, private el: ElementRef, @Inject(DOCUMENT) private doc: any) {
+    this.document = this.doc;
+  }
 
   ngOnInit() {
     this.addScrollEvent();
@@ -64,7 +68,7 @@ export class BackTopComponent implements OnInit, OnChanges, OnDestroy {
 
   showButton() {
     this.currScrollTop = this.target === window ?
-    (window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop) : this.scrollTarget.scrollTop;
+    (window.pageYOffset || this.document.documentElement.scrollTop || this.document.body.scrollTop) : this.scrollTarget.scrollTop;
     if (this.isVisible !== (this.currScrollTop >= this.visibleHeight)) {
       this.isVisible = !this.isVisible;
     }
@@ -72,8 +76,8 @@ export class BackTopComponent implements OnInit, OnChanges, OnDestroy {
 
   goTop() {
     if (this.target === window) {
-      document.documentElement.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
-      document.body.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
+      this.document.documentElement.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
+      this.document.body.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
     } else {
       this.scrollTarget.style.scrollBehavior = 'smooth';
       this.scrollTarget.scrollTop = 0;

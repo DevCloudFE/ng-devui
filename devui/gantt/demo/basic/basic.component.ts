@@ -54,7 +54,7 @@ export class BasicComponent implements OnInit, AfterViewInit, OnDestroy {
 
   goToday() {
     const today = new Date();
-    const offset = this.ganttService.getDatePostionOffset(today) - this.scrollElement.clientWidth / 2;
+    const offset = this.ganttService.getDatePostionOffset(today) - this.ganttService.getScaleUnitPixel() * 3;
     if (this.scrollElement) {
       this.scrollElement.scrollTo(offset, this.scrollElement.scrollTop);
     }
@@ -105,7 +105,10 @@ export class BasicComponent implements OnInit, AfterViewInit, OnDestroy {
     this.mouseDownHandler = this.ganttService.mouseDownListener.subscribe(this.onMousedown.bind(this));
     this.mouseMoveHandler = this.ganttService.mouseMoveListener.subscribe(this.onMouseMove.bind(this));
     this.mouseEndHandler = this.ganttService.mouseEndListener.subscribe(this.onMouseEnd.bind(this));
+    this.goToday();
   }
+
+  onGanttBarMoveEnd (e) {}
 
   onMousedown(pageX) {
     this.startMove = true;

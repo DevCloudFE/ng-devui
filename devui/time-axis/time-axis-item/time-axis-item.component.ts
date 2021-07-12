@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input, OnInit, TemplateRef } from '@angular/core';
+import { Component, EventEmitter, HostBinding, Input, OnInit, Output, TemplateRef } from '@angular/core';
 
 @Component({
   selector: 'd-time-axis-item',
@@ -11,28 +11,65 @@ export class TimeAxisItemComponent implements OnInit {
   @Input() time;
   @Input() timePosition; // direction为vertical时time的位置
   @Input() position;
-  @Input() type;
   @Input() lineStyle;
   @Input() customDot;
+  @Input() dotColor;
   @Input() iconClass;
   @Input() extraElement;
   @Input() text;
   @Input() contentTemplate: TemplateRef<any>;
   @Input() data;
+  @Input() horizontalAlign = 'center';
+  @Output() statusChanged = new EventEmitter<string>();
+  _type;
   dotText: string;
+
+  @Input()
+  set type(type) {
+    switch (type) {
+      case 'success':
+        this._type = 'success';
+        this.dotText = '✓';
+        break;
+
+      case 'danger':
+        this._type = 'danger';
+        this.dotText = '✕';
+        break;
+
+      case 'warning':
+        this._type = 'warning';
+        this.dotText = '!';
+        break;
+
+      case 'primary':
+        this._type = 'primary';
+        this.dotText = '';
+        break;
+
+      case 'running':
+        this._type = 'running';
+        this.dotText = '↻';
+        break;
+
+      default:
+        break;
+    }
+  }
 
   /**
   * @deprecated Use type to replace.
   */
   @Input()
   set status(status) {
+    if (status !== undefined) {
+      this.statusChanged.emit(status);
 
-    if (status === 'runned') {
-      this.type = 'runned';
-    } else if (status === 'running') {
-      this.type = 'running';
-    } else if (status === 'error') {
-      this.type = 'error';
+      if (status === 'running') {
+        this.type = 'running';
+      } else if (this._type === 'running' && status === '') {
+        this.type = 'primary';
+      }
     }
   }
 
@@ -50,14 +87,6 @@ export class TimeAxisItemComponent implements OnInit {
     if (this.position === undefined) {
       this.position = (this.direction === 'vertical' ? 'right' : 'bottom');
     }
-
-    if (this.type === 'runned') {
-      this.dotText = '✓';
-    } else if (this.type === 'running') {
-      this.dotText = '↻';
-    } else if (this.type === 'error') {
-      this.dotText = '✕';
-    }
   }
 
   get extraTemplate() {
@@ -66,6 +95,12 @@ export class TimeAxisItemComponent implements OnInit {
 
   get dotTemplate() {
     return this.customDot instanceof TemplateRef ? this.extraElement : null;
+  }
+
+  get timeAxisLineClass() {
+    let styleClass = `devui-time-axis-line-style-${ this.lineStyle?.style || 'solid' }`;
+    styleClass += this.timePosition !== 'bottom' ? ' devui-time-axis-item-line' : ' devui-time-axis-item-line-time-bottom';
+    return styleClass;
   }
 
 }

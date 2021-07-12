@@ -347,6 +347,9 @@ export class OperableTreeComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     addResult.then((nodeInfo) => {
+      if (!nodeInfo) {
+        return;
+      }
       const node = this.treeFactory.addNode({
         parentId: treeNode.id,
         title: nodeInfo['title'] ? nodeInfo['title'] : '新增节点',

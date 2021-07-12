@@ -1,8 +1,10 @@
+import { DOCUMENT } from '@angular/common';
 import {
   AfterViewInit,
   Component,
   ElementRef,
   EventEmitter,
+  Inject,
   Input,
   OnChanges,
   OnDestroy,
@@ -14,7 +16,7 @@ import {
   ViewChild,
   ViewChildren
 } from '@angular/core';
-import { DateRangePickerComponent } from 'ng-devui/datepicker';
+import { DatepickerProCalendarComponent } from 'ng-devui/datepicker-pro';
 import { DropDownDirective } from 'ng-devui/dropdown';
 import { DValidateRules } from 'ng-devui/form';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
@@ -49,7 +51,7 @@ export class CategorySearchComponent implements OnInit, OnChanges, OnDestroy, Af
   @Input() tagMaxWidth: number;
   @Input() filterNameRules: DValidateRules = [];
   @Input() beforeTagChange: (tag, searchKey, operation) => boolean | Promise<boolean> | Observable<boolean>;
-  @Input() toggleEvent: (dropdown, tag?) => void;
+  @Input() toggleEvent: (dropdown, tag?, currentSelectTag?) => void;
   @Output() searchEvent = new EventEmitter<SearchEvent>();
   @Output() selectedTagsChange = new EventEmitter<SelectedTagsEvent>();
   @Output() createFilterEvent = new EventEmitter<CreateFilterEvent>();
@@ -58,6 +60,8 @@ export class CategorySearchComponent implements OnInit, OnChanges, OnDestroy, Af
   @ViewChild('InputEle') inputEle: ElementRef;
   @ViewChild('ScrollBarContainer') scrollBarContainer: ElementRef;
   @ViewChildren('selectedDropdown') selectedDropdownList: QueryList<DropDownDirective>;
+  @ViewChildren(DatepickerProCalendarComponent) datePickers: QueryList<DatepickerProCalendarComponent>;
+  @ViewChildren(DatepickerProCalendarComponent, { read: ElementRef }) datePickerElements: QueryList<ElementRef>;
   public currentSelectTag = undefined;
   public currentTag: ICategorySearchTagItem;
   public searchField;
@@ -80,10 +84,16 @@ export class CategorySearchComponent implements OnInit, OnChanges, OnDestroy, Af
   scrollTimeout: any; // 如果标签在可视范围内则延时展开下拉的定时器
   scrollToTailFlag = true; // 是否在更新标签内容后滚动至输入框的开关
   DROPDOWN_ANIMATION_TIMEOUT = 200; // 下拉动画延迟
+  document: Document;
+  activeType = 'start';
+  get showFilterNameClear() {
+    return typeof this.filterName === 'string' && this.filterName.length > 0;
+  }
 
-  constructor(private i18n: I18nService, private elm: ElementRef) {
+  constructor(private i18n: I18nService, private elm: ElementRef, @Inject(DOCUMENT) private doc: any) {
     this.dateConverter = new DefaultDateConverter();
     this.id = CategorySearchComponent.ID_SEED++;
+    this.document = this.doc;
   }
 
   ngOnInit() {
@@ -140,9 +150,9 @@ export class CategorySearchComponent implements OnInit, OnChanges, OnDestroy, Af
   setTagsMaxWidth() {
     if (this.tagMaxWidth) {
       const rule = `.devui-category-search-id-${this.id} .devui-tag-container d-tag>.devui-tag-item>span{max-width:${this.tagMaxWidth}px}`;
-      const style = document.createElement('style');
+      const style = this.document.createElement('style');
       style.innerText = rule;
-      document.head.appendChild(style);
+      this.document.head.appendChild(style);
     }
   }
 
@@ -486,19 +496,27 @@ export class CategorySearchComponent implements OnInit, OnChanges, OnDestroy, Af
     this.updateSelectedTags(tag);
   }
 
-  // dateRange 时间范围 处理选中项方法
-  getDate(tag, dDatepicker: DateRangePickerComponent) {
-    if (dDatepicker.rangeStart || dDatepicker.rangeEnd) {
-      this.afterDropdownClosed();
-      const startDate = dDatepicker.rangeStart;
-      const endDate = dDatepicker.rangeEnd;
-      tag.value.value = [startDate, endDate];
-      tag.value.cache = cloneDeep(tag.value.value);
-      tag.value[tag.filterKey || 'label'] = tag.showTime
-        ? this.dateConverter.formatDateTime(startDate) + ' - ' + this.dateConverter.formatDateTime(endDate)
-        : this.dateConverter.format(startDate) + ' - ' + this.dateConverter.format(endDate);
-      tag.title = this.setTitle(tag, 'dateRange');
-      this.updateSelectedTags(tag);
+  confirmDate(tag) {
+    this.afterDropdownClosed();
+    this.activeType = 'start';
+    tag.value.cache = cloneDeep(tag.value.value);
+    tag.value[tag.filterKey || 'label'] = tag.showTime
+      ? this.dateConverter.formatDateTime(tag.value.value[0]) + ' - ' + this.dateConverter.formatDateTime(tag.value.value[1])
+      : this.dateConverter.format(tag.value.value[0]) + ' - ' + this.dateConverter.format(tag.value.value[1]);
+    tag.title = this.setTitle(tag, 'dateRange');
+    this.updateSelectedTags(tag);
+  }
+
+  switchType() {
+    this.activeType = this.activeType === 'start' ? 'end' : 'start';
+  }
+
+  dateValueChange(tag, datepickerpro: DatepickerProCalendarComponent) {
+    if (this.activeType === 'start') {
+      tag.value.value ? (tag.value.value[0] = datepickerpro.curActiveDate) : (tag.value.value = [datepickerpro.curActiveDate]);
+    }
+    if (this.activeType === 'end') {
+      tag.value.value[1] = datepickerpro.curActiveDate;
     }
   }
 
@@ -527,7 +545,7 @@ export class CategorySearchComponent implements OnInit, OnChanges, OnDestroy, Af
   // checkbox | label 当下拉菜单展开重置多选的选中状态
   resetContent(dropdown: DropDownDirective, tag?: any) {
     if (this.toggleEvent) {
-      this.toggleEvent(dropdown, tag);
+      this.toggleEvent(dropdown, tag, this.currentSelectTag);
     }
     if (!dropdown.isOpen) {
       return;
@@ -537,6 +555,14 @@ export class CategorySearchComponent implements OnInit, OnChanges, OnDestroy, Af
       if (!isEqual(tag.value.value, tag.value.cache)) {
         tag.value.value = cloneDeep(tag.value.cache);
         this.handleAccordingType(tag.type, tag.value.options);
+      }
+      if (tag.type === 'dateRange') {
+        // 由于datePicker无法初始化显示已有时间，需通过实例调用updateCurPosition方法渲染，因此通过field识别当前显示实例并调用
+        const datePickerItem =
+          this.datePickers.length > 1
+            ? this.datePickers.find((v, i) => this.datePickerElements.toArray()[i]?.nativeElement?.id === tag.field)
+            : this.datePickers.first;
+        datePickerItem.updateCurPosition();
       }
     } else if (this.currentSelectTag) {
       const isArrayType = this.currentSelectTag.type === 'numberRange' || this.currentSelectTag.type === 'treeSelect';
@@ -553,7 +579,7 @@ export class CategorySearchComponent implements OnInit, OnChanges, OnDestroy, Af
         break;
       case 'textInput':
         setTimeout(() => {
-          const inputDom: HTMLElement = document.querySelector('.devui-category-search-type-text-input');
+          const inputDom: HTMLElement = this.document.querySelector('.devui-category-search-type-text-input');
           inputDom?.focus();
         }, this.DROPDOWN_ANIMATION_TIMEOUT);
         break;

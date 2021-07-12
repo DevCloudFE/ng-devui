@@ -58,6 +58,10 @@
       border-bottom-style: solid;
     }
 
+    &-dotted {
+      border-bottom-style: dotted;
+    }
+
     &-none {
       border-bottom-style: none;
     }
@@ -124,6 +128,10 @@
 
     &-solid {
       border-left-style: solid;
+    }
+
+    &-dotted {
+      border-left-style: dotted;
     }
 
     &-none {
@@ -200,31 +208,11 @@
 }
 
 .devui-time-axis-item-type {
-  &-info {
-    border-color: $devui-brand;
-  }
-
-  &-success {
-    border-color: $devui-success;
-  }
-
-  &-danger {
-    border-color: $devui-danger;
-  }
-
-  &-warning {
-    border-color: $devui-warning;
-  }
-
-  &-waiting {
-    border-color: $devui-waiting;
-  }
-
   &-primary {
     border-color: $devui-placeholder;
   }
 
-  &-runned {
+  &-success {
     border-color: $devui-success;
     color: $devui-light-text;
     line-height: 16px;
@@ -232,19 +220,28 @@
     background-color: $devui-success;
   }
 
-  &-running {
-    border-color: $devui-success;
-    line-height: 16px;
-    text-align: center;
-    animation: devui-time-axis-running 1.5s linear infinite;
-  }
-
-  &-error {
+  &-danger {
     border-color: $devui-danger;
     color: $devui-light-text;
     line-height: 16px;
     text-align: center;
     background-color: $devui-danger;
+  }
+
+  &-warning {
+    border-color: $devui-warning;
+    color: $devui-light-text;
+    font-weight: 700;
+    line-height: 16px;
+    text-align: center;
+    background-color: $devui-warning;
+  }
+
+  &-running {
+    border-color: $devui-success;
+    line-height: 16px;
+    text-align: center;
+    animation: devui-time-axis-running 1.5s linear infinite;
   }
 }
 
@@ -296,4 +293,11 @@
   .devui-time-axis-item-data-vertical-right {
     margin-bottom: 0;
   }
+}
+
+.devui-time-axis-item-horizontal-align-center {
+  position: relative;
+  width: fit-content;
+  transform: translateX(-50%);
+  left: 8px;
 }

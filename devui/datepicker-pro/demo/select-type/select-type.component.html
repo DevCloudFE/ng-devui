@@ -1,0 +1,26 @@
+<div style="width: 300px; margin-bottom: 8px">
+  <d-select
+    [appendToBody]="true"
+    [options]="options"
+    [filterKey]="'name'"
+    [(ngModel)]="currentOption"
+    (ngModelChange)="onChange($event)"
+    [disabled]="showPanel"
+  ></d-select>
+</div>
+<d-datepicker-calendar
+  *ngIf="showPanel"
+  [isRangeType]="true"
+  [showTime]="true"
+  [(ngModel)]="options[3].value"
+  [activeRangeType]="activeType"
+>
+  <ng-template #footerTemplate>
+    <div class="footer-panel">
+      <d-button bsStyle="primary" (btnClick)="ensureDate()" [disabled]="options[3].value.length !== 2">{{
+        'components.datepicker-pro.static-panelDemo.ensure' | translate
+      }}</d-button>
+      <d-button bsStyle="common" (btnClick)="switchType()">{{ 'components.datepicker-pro.select-type.changeStart' | translate }}</d-button>
+    </div>
+  </ng-template>
+</d-datepicker-calendar>

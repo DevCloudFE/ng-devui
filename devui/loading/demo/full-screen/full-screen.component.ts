@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, Inject } from '@angular/core';
 import { LoadingService } from 'ng-devui/loading';
 @Component({
   selector: 'd-full-screen',
@@ -8,7 +9,7 @@ import { LoadingService } from 'ng-devui/loading';
 export class FullScreenComponent {
   resultTarget: any;
   isShow: boolean;
-  constructor(private loadingService: LoadingService) {}
+  constructor(private loadingService: LoadingService, @Inject(DOCUMENT) private doc: any) {}
 
   openFullScreen() {
     /*
@@ -23,7 +24,7 @@ export class FullScreenComponent {
   }
 
   openTargetLoading() {
-    const dm = document.querySelector('#me');
+    const dm = this.doc.querySelector('#me');
     this.resultTarget = this.loadingService.open({
       target: dm,
       message: 'One moment please...',

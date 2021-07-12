@@ -22,7 +22,13 @@
 }
 
 d-card {
+  cursor: pointer;
+  transition:
+    box-shadow $devui-animation-duration-slow $devui-animation-ease-in-smooth,
+    transform $devui-animation-duration-slow $devui-animation-ease-in-smooth;
+
   &:hover {
     box-shadow: $devui-shadow-length-hover $devui-light-shadow;
+    transform: translateY(-5px);
   }
 }

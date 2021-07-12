@@ -1,5 +1,6 @@
+import { DOCUMENT } from '@angular/common';
 import {
-  AfterViewInit, ChangeDetectorRef, Component, DoCheck, ElementRef, EventEmitter, Input,
+  AfterViewInit, ChangeDetectorRef, Component, DoCheck, ElementRef, EventEmitter, Inject, Input,
   IterableDiffers, KeyValueDiffers, NgZone, OnChanges, OnDestroy, OnInit, Output, QueryList, SimpleChanges, ViewChildren
 } from '@angular/core';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
@@ -9,7 +10,6 @@ import { SortDirection, SortEventArg, TableCheckOptions } from './data-table.mod
 import { TableThComponent } from './table/head/th/th.component';
 import { DataTableColumnTmplComponent } from './tmpl/data-table-column-tmpl.component';
 
-const documentElement = document.documentElement;
 @Component({
   selector: 'd-data-table-head,[dDataTableHead]',
   templateUrl: './data-table-head.component.html',
@@ -113,14 +113,19 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
   columnForFilter;
   private i18nSubscription: Subscription;
   checkedListForFilter = [];
+  document: Document;
+  documentElement: HTMLElement;
   constructor(public dt: DataTableComponent,
               private zone: NgZone,
               private element: ElementRef,
               private differs: KeyValueDiffers,
               private iterableDiffers: IterableDiffers,
               private ref: ChangeDetectorRef,
-              private i18n: I18nService) {
+              private i18n: I18nService,
+              @Inject(DOCUMENT) private doc: any) {
       this.i18nCommonText = this.i18n.getI18nText().common;
+      this.document = this.doc;
+      this.documentElement = this.doc.documentElement;
   }
 
   ngOnInit() {
@@ -216,14 +221,14 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
     if (this.colDraggable) {
       // set mirror container to table-wrap element
       this.mirrorContainer = this.element.nativeElement.parentNode.parentNode;
-      this.bodyOverflow = documentElement.style.overflow;
+      this.bodyOverflow = this.documentElement.style.overflow;
       this.detecteOriginTable();
       setTimeout(() => { // wait for table render ready
         this.renderFakeTable();
         this.el.style.display = 'none';
 
       });
-      documentElement.addEventListener('resize', this.renderFakeTable);
+      this.documentElement.addEventListener('resize', this.renderFakeTable);
       this.createCellMap();
       this.scrollViewEl = this.originTable.parentNode.parentNode;
       this.scrollViewRect = this.scrollViewEl.getBoundingClientRect();
@@ -256,7 +261,7 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
 
   ngOnDestroy() {
     if (this.colDraggable) {
-      documentElement.removeEventListener('resize', this.renderFakeTable);
+      this.documentElement.removeEventListener('resize', this.renderFakeTable);
     }
     if (this.i18nSubscription) {
       this.i18nSubscription.unsubscribe();
@@ -346,18 +351,18 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
     e.preventDefault();
     this.originCellIndex = this.findCellIndex(e);
     setTimeout(() => { // fix chrome bug, mousedown的时候会错误的触发mousemove
-      documentElement.addEventListener('mousemove', this.handleMousemove);
-      documentElement.addEventListener('mouseup', () => {
-        documentElement.removeEventListener('mousemove', this.handleMousemove);
+      this.documentElement.addEventListener('mousemove', this.handleMousemove);
+      this.documentElement.addEventListener('mouseup', () => {
+        this.documentElement.removeEventListener('mousemove', this.handleMousemove);
       });
     });
   }
 
   handleMousemove = (e) => {
     e.preventDefault();
-    documentElement.removeEventListener('mousemove', this.handleMousemove);
-    documentElement.addEventListener('mousedown', this.grab);
-    documentElement.addEventListener('mouseup', this.release);
+    this.documentElement.removeEventListener('mousemove', this.handleMousemove);
+    this.documentElement.addEventListener('mousedown', this.grab);
+    this.documentElement.addEventListener('mouseup', this.release);
     setTimeout(() => { // fix chrome bug, mousedown的时候会错误的触发mousemove
       this.dispatchMousedown();
     });
@@ -365,11 +370,11 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
 
   grab = (e) => {
     e.preventDefault();
-    documentElement.removeEventListener('mousedown', this.grab);
-    this.addClass(documentElement, 'gu-unselectable');
+    this.documentElement.removeEventListener('mousedown', this.grab);
+    this.addClass(this.documentElement, 'gu-unselectable');
     const context = this.canStart(e.target);
     this.grabbed = context;
-    documentElement.addEventListener('mousemove', this.startBecauseMouseMoved);
+    this.documentElement.addEventListener('mousemove', this.startBecauseMouseMoved);
   }
 
   startBecauseMouseMoved = (e) => {
@@ -377,8 +382,8 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
     if (!this.grabbed) {
       return;
     }
-    documentElement.removeEventListener('mousemove', this.startBecauseMouseMoved);
-    documentElement.addEventListener('mousemove', this.drag);
+    this.documentElement.removeEventListener('mousemove', this.startBecauseMouseMoved);
+    this.documentElement.addEventListener('mousemove', this.drag);
     this.source = this.grabbed.source;
     this.item = this.grabbed.item;
     this.initialSibling = this.currentSibling = this.nextEl(this.grabbed.item);
@@ -400,8 +405,8 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
   release = (e) => {
     e.preventDefault();
     this.grabbed = null;
-    documentElement.removeEventListener('mousemove', this.drag);
-    documentElement.removeEventListener('mouseup', this.release);
+    this.documentElement.removeEventListener('mousemove', this.drag);
+    this.documentElement.removeEventListener('mouseup', this.release);
     const to = Array.from(this.el.children).indexOf(this.item);
     this.removeMirrorImage();
     this.el.style.display = 'none';
@@ -411,8 +416,8 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
       this.fixOriginTable.style.display = 'table';
       this.fixFakeTableEl.style.position = 'absolute';
     }
-    documentElement.style.overflow = this.bodyOverflow;
-    documentElement.removeEventListener('mouseup', this.release);
+    this.documentElement.style.overflow = this.bodyOverflow;
+    this.documentElement.removeEventListener('mouseup', this.release);
     if (this.item) {
       this.rmClass(this.item, 'gu-transit');
     }
@@ -476,13 +481,13 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
     };
   }
   getScroll(scrollProp, offsetProp) {
-    if (typeof window[offsetProp] !== 'undefined') {
+    if (typeof window !== undefined && typeof window[offsetProp] !== 'undefined') {
       return window[offsetProp];
     }
-    if (documentElement.clientHeight) {
-      return documentElement[scrollProp];
+    if (this.documentElement.clientHeight) {
+      return this.documentElement[scrollProp];
     }
-    return document.body[scrollProp];
+    return this.document.body[scrollProp];
   }
 
   dispatchMousedown() {
@@ -493,9 +498,9 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
   getTouchyEvent() {
     let event;
     // This is true only for IE,firefox
-    if (document.createEvent) {
+    if (this.document.createEvent) {
       // To create a mouse event , first we need to create an event and then initialize it.
-      event = document.createEvent('MouseEvent');
+      event = this.document.createEvent('MouseEvent');
       event.initMouseEvent('mousedown', true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
     } else {
       event = new MouseEvent('mousedown', {
@@ -509,12 +514,12 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
 
   removeMirrorImage() {
     if (this.mirror) {
-      documentElement.removeEventListener('mousemove', this.grab);
+      this.documentElement.removeEventListener('mousemove', this.grab);
       this.getParent(this.mirror).removeChild(this.mirror);
       this.mirror = null;
       setTimeout(() => {
         this.rmClass(this.mirrorContainer, 'gu-unselectable');
-        this.rmClass(documentElement, 'gu-unselectable');
+        this.rmClass(this.documentElement, 'gu-unselectable');
       });
     }
   }
@@ -576,12 +581,12 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
     const fakeTable = this.buildFakeTable(this.originTable);
     this.fakeTable = fakeTable;
     const el = fakeTable.reduce((previous, current) => {
-      const li = document.createElement('li');
+      const li = this.document.createElement('li');
       if (current) {
         li.appendChild(current);
       }
       return previous.appendChild(li) && previous;
-    }, document.createElement('ul'));
+    }, this.document.createElement('ul'));
     this.el = el;
     this.renderEl(el, this.originTable, fakeTable);
   }
@@ -593,10 +598,10 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
     const fakeTable = this.buildFakeTable(this.fixOriginTable);
     this.mainFakeTable = fakeTable;
     const el = fakeTable.reduce((previous, current) => {
-      const li = document.createElement('li');
+      const li = this.document.createElement('li');
       li.appendChild(current);
       return previous.appendChild(li) && previous;
-    }, document.createElement('ul'));
+    }, this.document.createElement('ul'));
     this.fixFakeTableEl = el;
     this.renderEl(el, this.fixOriginTable, this.mainFakeTable);
   }
@@ -609,6 +614,9 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
   }
 
   renderEl(el, originEl, fakeTables) {
+    if (typeof window === undefined) {
+      return;
+    }
     this.sizeColumnFake(fakeTables, originEl);
     this.css(el, {
       position: 'absolute',
@@ -687,7 +695,7 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
     if (this.fixHeader) {
       const to = Array.from(this.el.children).indexOf(target);
       const fixTarget = this.fixFakeTableEl.children[to].children[0].cloneNode(true);
-      const fixTargetContainer = document.createElement('div');
+      const fixTargetContainer = this.document.createElement('div');
       const mirrorHeight = Math.min(parseInt(this.maxHeight, 10), getFixTableTotalHeight());
       fixTargetContainer.style.height = mirrorHeight + 'px';
       fixTargetContainer.style.overflow = 'hidden';
@@ -750,7 +758,7 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
       this.animationRequestId = null;
     }
     this.handleScroll(clientX, clientY, e);
-    documentElement.style.overflow = 'hidden';
+    this.documentElement.style.overflow = 'hidden';
 
     const x = clientX - this.offsetX;
     const y = clientY - this.offsetY;
@@ -838,7 +846,7 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
       }
       this.scrollViewEl.scrollTo(scrollLeft, 0);
       this.animationRequestId = requestAnimationFrame(scrollToLeft);
-      documentElement.dispatchEvent(e);
+      this.documentElement.dispatchEvent(e);
     };
 
     const scrollToRight = () => {
@@ -848,7 +856,7 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
       }
       this.scrollViewEl.scrollTo(scrollLeft, 0);
       this.animationRequestId = requestAnimationFrame(scrollToRight);
-      documentElement.dispatchEvent(e);
+      this.documentElement.dispatchEvent(e);
     };
     if (!this.fixHeader && (y < this.scrollViewRect.top || y > this.scrollViewRect.bottom)) {
       return;
@@ -870,7 +878,7 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
   }
 
   getParent(el) {
-    return el.parentNode === document ? null : el.parentNode;
+    return el.parentNode === this.document ? null : el.parentNode;
   }
 
   getEventHost(e) {
@@ -1055,7 +1063,7 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
     const state = p.className;
     let el;
     p.className += ' gu-hide';
-    el = document.elementFromPoint(x, y);
+    el = this.document.elementFromPoint(x, y);
     p.className = state;
     return el;
   }
@@ -1158,7 +1166,7 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
     while (immediate !== dropTarget && this.getParent(immediate) !== dropTarget) {
       immediate = this.getParent(immediate);
     }
-    if (immediate === documentElement || isElementDropFreeze(immediate)) {
+    if (immediate === this.documentElement || isElementDropFreeze(immediate)) {
       return null;
     }
     return immediate;

@@ -8,6 +8,7 @@
       margin: 32px 0;
       display: flex;
       align-items: center;
+      font-size: $devui-font-size-data-overview;
 
       .d-overview-total-components {
         display: inline-block;
@@ -31,6 +32,21 @@
     d-search {
       width: 100%;
     }
+
+    .d-overview-filters {
+      margin-top: 18px;
+      display: flex;
+
+      .d-overview-filters-title {
+        margin-right: 8px;
+        font-size: $devui-font-size-card-title;
+        font-weight: $devui-font-title-weight;
+      }
+
+      .d-overview-filters-item {
+        margin-right: 4px;
+      }
+    }
   }
 
   .d-overview-components {
@@ -43,6 +59,7 @@
         h2 {
           display: inline-block;
           margin: 0 8px 0 0;
+          font-size: $devui-font-size-page-title;
         }
 
         .d-overview-component-count {
@@ -87,21 +104,23 @@
         text-align: center;
         position: relative;
 
-        .d-overview-card-new {
+        d-tag {
           position: absolute;
           top: 0;
           right: 0;
-          padding: 0 4px;
-          color: $devui-warning;
-          font-size: $devui-font-size;
-          border-radius: $devui-border-radius;
-          background-color: $devui-warning-bg;
-          border: 1px solid $devui-warning-line;
+
+          & + d-tag {
+            top: 24px;
+          }
+
+          &.d-overview-shadow:hover {
+            box-shadow: $devui-shadow-length-connected-overlay $devui-shadow;
+          }
         }
 
         .d-overview-card-icon {
-          padding: 20px 0 32px 0;
-          height: 162px;
+          padding: 20px 0;
+          height: 150px;
 
           img {
             width: 110px;
@@ -112,17 +131,38 @@
         .d-overview-card-title {
           font-size: $devui-font-size-card-title;
           line-height: $devui-line-height-base;
+          color: $devui-text-weak;
+          font-weight: $devui-font-title-weight;
+          margin-bottom: 10px;
+        }
+
+        .d-overview-card-description {
           color: $devui-aide-text;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
       }
     }
   }
 
   .d-overview-no-data {
+    padding-top: 20px;
+
+    .d-overview-no-data-title {
+      font-size: $devui-font-size-page-title;
+    }
+
     .d-overview-no-data-img {
       transform: translateX(-50%);
       margin: 20px 0;
       margin-left: 50%;
     }
+  }
+}
+
+:host ::ng-deep d-tag {
+  .devui-tag-item {
+    cursor: pointer;
   }
 }

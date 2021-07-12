@@ -1,0 +1,35 @@
+<h5>right side template</h5>
+
+<d-datepicker-pro [(ngModel)]="value" [showTime]="true">
+  <ng-template #customTemplate>
+    <ul class="right-panel">
+      <li>
+        <d-button bsStyle="text" (click)="setDate(-30)">一个月前</d-button>
+        <span>{{ getDateString(-30) }}</span>
+      </li>
+      <li>
+        <d-button bsStyle="text" (click)="setDate(-14)">两周前</d-button>
+        <span>{{ getDateString(-14) }}</span>
+      </li>
+      <li>
+        <d-button bsStyle="text" (click)="setDate(-7)">一周前</d-button>
+        <span>{{ getDateString(-7) }}</span>
+      </li>
+      <li>
+        <d-button bsStyle="text" (click)="setDate(0)">今天</d-button>
+        <span>{{ getDateString(0) }}</span>
+      </li>
+    </ul>
+  </ng-template>
+</d-datepicker-pro>
+
+<h5>footer template</h5>
+
+<d-datepicker-pro #datepicker [(ngModel)]="value" [showTime]="true">
+  <ng-template #footerTemplate>
+    <div class="footer-panel">
+      <d-button bsStyle="common" (click)="setDate(0)">今天</d-button>
+      <d-button bsStyle="common" (click)="clear()">清除时间</d-button>
+    </div>
+  </ng-template>
+</d-datepicker-pro>

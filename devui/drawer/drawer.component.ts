@@ -1,7 +1,8 @@
 import { AnimationEvent } from '@angular/animations';
+import { DOCUMENT } from '@angular/common';
 import {
-  Component, Directive, ElementRef, HostListener, Input, OnDestroy,
-  OnInit, Renderer2, ViewChild, ViewContainerRef
+  Component, Directive, ElementRef, HostListener, Inject, Input, OnDestroy,
+  OnInit, Renderer2, TemplateRef, ViewChild, ViewContainerRef
 } from '@angular/core';
 import { backdropFadeInOut, flyInOut } from 'ng-devui/utils';
 import { isNumber, parseInt, trim } from 'lodash-es';
@@ -59,8 +60,12 @@ export class DrawerComponent implements OnInit, OnDestroy {
   documentOverFlow: boolean;
   scrollTop: number;
   scrollLeft: number;
+  document: Document;
 
-  constructor(private elementRef: ElementRef, private renderer: Renderer2) {
+  contentTemplate: TemplateRef<any>;
+
+  constructor(private elementRef: ElementRef, private renderer: Renderer2, @Inject(DOCUMENT) private doc: any) {
+    this.document = this.doc;
   }
 
   ngOnInit() {
@@ -75,6 +80,9 @@ export class DrawerComponent implements OnInit, OnDestroy {
     });
   }
   setWidth(width: string) {
+    if (typeof window === 'undefined') {
+      return;
+    }
     if (width.indexOf('%') >= 0) {
       const widthStr = trim(width, '%');
       const widthNum = parseInt(widthStr, 10);
@@ -116,19 +124,19 @@ export class DrawerComponent implements OnInit, OnDestroy {
   }
 
   show() {
-    if (document.documentElement.scrollHeight > document.documentElement.clientHeight) {
+    if (this.document.documentElement.scrollHeight > this.document.documentElement.clientHeight) {
       this.documentOverFlow = true;
-      this.scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-      this.scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft;
-      this.renderer.addClass(document.body, 'devui-body-scrollblock');
-      this.renderer.setStyle(document.body, 'top', `-${this.scrollTop}px`);
-      this.renderer.setStyle(document.body, 'left', `-${this.scrollLeft}px`);
+      this.scrollTop = this.document.documentElement.scrollTop || this.document.body.scrollTop;
+      this.scrollLeft = this.document.documentElement.scrollLeft || this.document.body.scrollLeft;
+      this.renderer.addClass(this.document.body, 'devui-body-scrollblock');
+      this.renderer.setStyle(this.document.body, 'top', `-${this.scrollTop}px`);
+      this.renderer.setStyle(this.document.body, 'left', `-${this.scrollLeft}px`);
     }
     if (!this.bodyScrollable && this.documentOverFlow) {
-      this.renderer.addClass(document.body, 'devui-body-overflow-hidden');
+      this.renderer.addClass(this.document.body, 'devui-body-overflow-hidden');
     }
     this.animateState = 'in';
-    const activeElement = document.activeElement;
+    const activeElement = this.document.activeElement;
     if (activeElement && typeof (activeElement['blur']) === 'function') {
       activeElement['blur']();
     }
@@ -149,7 +157,7 @@ export class DrawerComponent implements OnInit, OnDestroy {
         } else {
           const target: any = event.target;
           // 一定要document.contains(event.target)，因为event.target可能已经不在document里了，这个时候就不能进hide了
-          if (this.animateState === 'in' && (!this.elementRef.nativeElement.contains(target) && document.body.contains(target))
+          if (this.animateState === 'in' && (!this.elementRef.nativeElement.contains(target) && this.document.body.contains(target))
             && !this.isHaveDialogOrUpload()) {
             this.hide();
           }
@@ -173,14 +181,14 @@ export class DrawerComponent implements OnInit, OnDestroy {
 
   private hideOperation() {
     if (this.documentOverFlow) {
-      this.renderer.removeStyle(document.body, 'top');
-      this.renderer.removeStyle(document.body, 'left');
-      this.renderer.removeClass(document.body, 'devui-body-scrollblock');
-      this.renderer.removeClass(document.body, 'devui-body-overflow-hidden');
-      document.documentElement.scrollTop = this.scrollTop;
-      document.body.scrollTop = this.scrollTop;
-      document.documentElement.scrollLeft = this.scrollLeft;
-      document.body.scrollLeft = this.scrollLeft;
+      this.renderer.removeStyle(this.document.body, 'top');
+      this.renderer.removeStyle(this.document.body, 'left');
+      this.renderer.removeClass(this.document.body, 'devui-body-scrollblock');
+      this.renderer.removeClass(this.document.body, 'devui-body-overflow-hidden');
+      this.document.documentElement.scrollTop = this.scrollTop;
+      this.document.body.scrollTop = this.scrollTop;
+      this.document.documentElement.scrollLeft = this.scrollLeft;
+      this.document.body.scrollLeft = this.scrollLeft;
     }
     this.animateState = 'void';
     if (this.subscription) {
@@ -193,8 +201,8 @@ export class DrawerComponent implements OnInit, OnDestroy {
   destroy() { }
 
   isHaveDialogOrUpload() {
-    const dialog: any = document.getElementsByClassName('modal-dialog');
-    const upload: any = document.getElementById('d-upload-temp');
+    const dialog: any = this.document.getElementsByClassName('modal-dialog');
+    const upload: any = this.document.getElementById('d-upload-temp');
     return (dialog && dialog.length > 0) || upload;
   }
 
@@ -218,6 +226,9 @@ export class DrawerComponent implements OnInit, OnDestroy {
   }
 
   private _setFullScreen(fullScreen?: boolean) {
+    if (typeof window === 'undefined') {
+      return;
+    }
     const drawerContainerEle = this.drawerContainer.nativeElement;
     if (this._width === this.oldWidth) {
       if (fullScreen === true || fullScreen === undefined) {

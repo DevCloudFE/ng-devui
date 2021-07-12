@@ -1,12 +1,15 @@
-import { AfterViewInit, Directive, ElementRef, Input } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { AfterViewInit, Directive, ElementRef, Inject, Input } from '@angular/core';
 @Directive({
   selector: '[dIframeEventPropagate]'
 })
 export class IframeEventPropagateDirective implements AfterViewInit {
   @Input() event = 'click';
   element: HTMLSelectElement;
-  constructor(el: ElementRef) {
+  document: Document;
+  constructor(el: ElementRef, @Inject(DOCUMENT) private doc: any) {
     this.element = el.nativeElement;
+    this.document = this.doc;
   }
 
   ngAfterViewInit() {
@@ -34,7 +37,7 @@ export class IframeEventPropagateDirective implements AfterViewInit {
   }
 
   dispatchClickEvent = ($event) => {
-    const event = document.createEvent('MouseEvents');
+    const event = this.document.createEvent('MouseEvents');
     event.initEvent(this.event, true, true);
     event['originEvent'] = $event;
     this.element.dispatchEvent(event);

@@ -1,4 +1,7 @@
 export function scrollAnimate(target, currentTopValue, targetTopValue, timeGap: number = 40, scrollTime: number = 450, callback?) {
+  if (typeof document === 'undefined' || typeof window === 'undefined') {
+    return;
+  }
   const startTimeStamp = Date.now();
   const drawAnimateFrame = () => {
     const currentTime = Date.now() - startTimeStamp;

@@ -8,7 +8,7 @@ import {
   Input,
   OnChanges,
   OnDestroy,
-  SimpleChanges,
+  SimpleChanges
 } from '@angular/core';
 import { OverlayContainerRef } from 'ng-devui/overlay-container';
 import { DevConfigService, WithConfig } from 'ng-devui/utils/globalConfig';
@@ -145,7 +145,6 @@ export class TooltipDirective implements OnChanges, AfterViewInit, OnDestroy {
     keyArr.forEach((item) => (obj[item] = this[item]));
     Object.assign(this.tooltipComponentRef.instance, obj);
   }
-
   ngOnChanges(changes: SimpleChanges): void {
     if (this.tooltipComponentRef) {
       const { content, position, showAnimation } = changes;
