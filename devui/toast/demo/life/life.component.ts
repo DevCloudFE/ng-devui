@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styles: [
     `
       d-button {
-        margin-right: 5px;
+        margin-right: 4px;
       }
       :host ::ng-deep .devui-btn-success {
         background: #3dcca6 !important;

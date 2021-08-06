@@ -1,5 +1,5 @@
 <div style="margin-left: 40px">
-  <form dForm [layout]="'vertical'" ngForm>
+  <form dForm [layout]="layoutDirection" ngForm>
     <d-form-item>
       <d-form-label [required]="true" [hasHelp]="true" [helpTips]="'This is the plan name.'">Name</d-form-label>
       <d-form-control>
@@ -79,7 +79,7 @@
       </d-form-control>
     </d-form-item>
     <d-form-operation>
-      <d-button bsStyle="stress" class="mr-element-spacing" circled="true" style="margin-right: 4px">Submit</d-button>
+      <d-button bsStyle="primary" class="mr-element-spacing" circled="true" style="margin-right: 4px">Submit</d-button>
       <d-button bsStyle="common" circled="true">Cancel</d-button>
     </d-form-operation>
   </form>

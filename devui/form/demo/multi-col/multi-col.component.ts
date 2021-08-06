@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormLayout } from 'ng-devui/form';
 
 @Component({
   selector: 'd-form-demo-multi-col',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 
 })
 export class MultiColComponent implements OnInit {
+  layoutDirection: FormLayout = FormLayout.Columns;
   inputDemoConfig: any;
   textareaDemoConfig: any;
   selectDemoConfig: any;

@@ -218,8 +218,8 @@
                 [barResizeDisabled]="rowItem?.barResizeDisabled"
                 [progressDisabled]="rowItem?.progressDisabled"
                 [progressRate]="rowItem?.progressRate"
-                (barMoveStartEvent)="onGanttBarMoveStart($event)"
-                (barResizeStartEvent)="onGanttBarResizeStart($event)"
+                (barMoveStartEvent)="onGanttBarMoveStart()"
+                (barResizeStartEvent)="onGanttBarResizeStart()"
                 (barResizingEvent)="onGanttBarResizing($event)"
                 (barMoveEndEvent)="onGanttBarMove($event)"
                 (barResizeEndEvent)="onGanttBarResize($event)"
@@ -261,6 +261,7 @@
       <td
         *ngIf="expand"
         dTableCell
+        dResizeHandle
         [fixedLeft]="'300px'"
         [containerElement]="resizeHandleContainerElement"
         (resizeStartEvent)="onResizeStart($event)"

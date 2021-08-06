@@ -175,5 +175,7 @@ export class IFileOptions {
   accept?: string;
   // Multiple values can be selected for the input field.
   multiple?: boolean;
+  // let the user select directories instead of files.
+  webkitdirectory?:boolean
 }
 ```

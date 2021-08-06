@@ -50,8 +50,8 @@ export class AppContentComponent implements OnInit, OnDestroy {
     this.componentsText = this.translate.instant('components');
     this.overviewText = this.translate.instant('public').overview;
     this.text = {
-      new: this.overviewText.newChange,
-      sunset: this.overviewText.sunset
+      new: this.overviewText?.newChange,
+      sunset: this.overviewText?.sunset
     };
   }
 

@@ -7,7 +7,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 })
 export class CustomComponent {
 
-    tabActiveId = 'tab1';
+    tabActiveId: string | number = 'tab1';
     tabItems = [
         {
           id: 'tab1',

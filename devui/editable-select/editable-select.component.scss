@@ -4,7 +4,7 @@
 .devui-select-chevron-icon {
   display: inline-flex;
   vertical-align: middle;
-  transition: transform $devui-animation-duration-slow $devui-animation-ease-in-smooth;
+  transition: transform $devui-animation-duration-slow $devui-animation-ease-in-out-smooth;
 }
 
 .devui-select-open .devui-select-chevron-icon {
@@ -26,7 +26,7 @@ input::-ms-clear {
 
 .devui-form-control {
   outline: none;
-  padding-right: 22px;
+  padding-right: 24px;
 }
 
 .devui-form-group.devui-has-feedback > .devui-form-control-feedback {

@@ -87,10 +87,10 @@ interface TimeAxisData {
 |   model   | `'text'\|'html'\|'template'` |  ''  | Optional. model.      | [The time node is used independently](demo#seperate-way)           |
 |  time  |                  `string`                   |  --  | Optional. Time.    | [The time node is used independently](demo#seperate-way)           |
 |  text  |                  `string`                   |  --  | Optional. Text.                          | [The time node is used independently](demo#seperate-way)           |
-|  type  | `'primary' \| 'success' \| 'danger' \| 'warning' \| 'waiting' \| 'info'` |  `'info'` |  `'info'`    | Optional. Time Point Type.     | [The time node is used independently](demo#seperate-way)          |
+|  type  | `'primary' \| 'success' \| 'danger' \| 'warning'` |  `'primary'`  | Optional. Time Point Type.     | [The time node is used independently](demo#seperate-way)          |
 |  data  |                   `array`                   |  --  | Optional. This parameter is valid only when model is set to template.             | [The time node is used independently](demo#seperate-way) |
 |  contentTemplate  | `TemplateRef` |  --  | Optional. Content template. This parameter is left empty by default. This parameter needs to be set when model is set to `template`. | [The time node is used independently](demo#seperate-way) |
-|  lineStyle  | `{style: 'solid' \| 'dashed' \| 'none', color: string}`  | `{style: 'solid'}`  | Optional. Setting the Timeline Line Style.   | [The time node is used independently](demo#seperate-way) |
+|  lineStyle  | `{style: 'solid' \| 'dashed' \| 'dotted' \| 'none', color: string}`  | `{style: 'solid'}`  | Optional. Setting the Timeline Line Style.   | [The time node is used independently](demo#seperate-way) |
 |  customDot  | `string\|HTMLElement\|TemplateRef` |  --  | Optional. User-defined time point.   | [The time node is used independently](demo#seperate-way) |
 |  extraElement  | `string\|HTMLElement\|TemplateRef` |  --  | Optional. Customizing Additional Elements Between Two Points in Time.   | [The time node is used independently](demo#seperate-way) |
 |  position  | `'up'\|'bottom'\|'left'\|'right'` |  --  | Optional. Indicates the position of text or data. If time exists, the time is in the reverse position.   | [The time node is used independently](demo#seperate-way) |

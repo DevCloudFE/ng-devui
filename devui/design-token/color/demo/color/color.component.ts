@@ -20,7 +20,7 @@ export class ColorComponent implements OnInit, OnDestroy {
   themeService: ThemeService;
   subs: Subscription = new Subscription();
   headerExpandConfig: TableExpandConfig;
-  activeTab = 'tab1';
+  activeTab: string | number = 'tab1';
   colorSource = [];
   catalogs: CatalogConfig[] = [];
 

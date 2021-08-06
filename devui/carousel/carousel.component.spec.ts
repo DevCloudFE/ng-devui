@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
+import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { CarouselComponent } from './carousel.component';
 import { CarouselModule } from './carousel.module';
@@ -38,7 +38,7 @@ describe('CarouselComponent', () => {
   let fixture: ComponentFixture<TestCarouselComponent>;
   let carouselElement: HTMLElement;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [CarouselModule],
       declarations: [ TestCarouselComponent ],

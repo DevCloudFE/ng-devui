@@ -16,7 +16,7 @@
     </d-tree-select>
   </div>
 </div>
-<h5 class="text-muted">Standard: iconTemplateInput</h5>
+<h5 class="text-muted">Standard: itemTemplateInput + iconTemplateInput</h5>
 <div class="row">
   <div class="col-md-5" style="font-size: 0">
     <d-tree-select
@@ -26,8 +26,12 @@
       [(ngModel)]="value"
       (ngModelChange)="showSelected($event)"
       [iconTemplateInput]="iconTemplate"
+      [customItemTemplate]="itemTemplate"
       style="width: 280px"
     >
     </d-tree-select>
   </div>
 </div>
+<ng-template #itemTemplate let-item="item">
+  <span [ngClass]="{ 'my-icon': item?.data?.type }" class="{{ item?.data?.type }}">{{ item.title }}</span>
+</ng-template>

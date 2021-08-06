@@ -8,21 +8,19 @@
   display: inline-block;
   width: 16px;
   height: 16px;
-  border-radius: (16px/2);
+  border-radius: 8px;
   font-size: $devui-font-size;
-  line-height: 12px;
-  padding: 2px;
+  line-height: 16px;
   color: $devui-light-text;
   text-align: center;
   background: $devui-brand;
-  margin-top: -2px;
   font-weight: 400;
 }
 
 .loading {
   position: relative;
   line-height: 40px;
-  padding-left: 66px;
+  padding-left: 64px;
 }
 
 .circle-spinner {

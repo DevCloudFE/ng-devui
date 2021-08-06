@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SplitterOrientation } from 'ng-devui/splitter';
 
 @Component({
   selector: 'd-splitter-demo-basic',
@@ -7,7 +8,7 @@ import { Component } from '@angular/core';
 })
 export class SplitterDemoBasicComponent {
  // splitter input
-  orientation = 'horizontal';
+  orientation: SplitterOrientation = 'horizontal';
   splitBarSize = '2px';
   disabledBarSize = '1px';
 

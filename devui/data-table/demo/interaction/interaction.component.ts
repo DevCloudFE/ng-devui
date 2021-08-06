@@ -59,27 +59,27 @@ export class InteractionComponent implements OnInit {
     },
     {
       field: '$index',
-      width: '50px'
+      width: '20%'
     },
     {
       field: 'firstName',
-      width: '150px'
+      width: '20%'
     },
     {
       field: 'lastName',
-      width: '150px'
+      width: '20%'
     },
     {
       field: 'gender',
-      width: '100px'
+      width: '20%'
     },
     {
       field: 'dob',
-      width: '100px'
+      width: '20%'
     },
     {
       field: 'description',
-      width: '150px'
+      width: '20%'
     }
   ];
 

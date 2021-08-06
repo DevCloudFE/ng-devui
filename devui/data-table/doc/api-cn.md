@@ -119,8 +119,8 @@ import { DataTableModule } from 'ng-devui/data-table';
 |        参数名        |                    类型                    | 默认值 |                             描述                              | 跳转 Demo                                                |
 | :------------------: | :----------------------------------------: | :----- | :-----------------------------------------------------------: | :------------------------------------------------------- |
 |    resizeEnabled     |                 `boolean`                  | --     |                   可选，该列宽度是否可调整                    | [表格交互](demo#table-interaction) |
-|       maxWidth       |                `string`                 | --     |                  可选，调整宽度时的最大宽度，单位`px`                   |
-|       minWidth       |                `string`                 | --     |                  可选，调整宽度时的最小宽度，单位`px`                   |
+|       maxWidth       |                `string`                 | --     |                  可选，拖动调整宽度时的最大宽度，单位`px`                   |
+|       minWidth       |                `string`                 | --     |                  可选，拖动调整宽度时的最小宽度，单位`px`                   |
 |      filterable      |                 `boolean`                  | --     |                   可选，该列宽度是否可过滤                    | [表格交互](demo#table-interaction) |
 |  closeFilterWhenScroll   |            `boolean`            | --  |                   可选，表格或者body滚动时是否关闭过滤框       | [表格交互](demo#table-interaction) |
 | customFilterTemplate |               `TemplateRef`                | --     |                 可选，过滤弹出框的自定义模板                  | [表格交互](demo#table-interaction) |
@@ -322,8 +322,8 @@ export enum SortDirection {
 |               参数                |              类型               | 默认值            |                                          描述                                           | 跳转 Demo                                                |
 | :-------------------------------: | :-----------------------------: | :---------------- | :-------------------------------------------------------------------------------------: | :------------------------------------------------------- |
 |             editable              |            `boolean`            | false             |                          可选，在d-column上指定该列是否可编辑                           | [编辑单元格](demo#edit-cell)       |
-|             maxWidth              |           `string px`           | --                |                                     可选，最大宽度                                      |
-|             minWidth              |           `string px`           | --                |                                     可选，最小宽度                                      |
+|             maxWidth              |           `string px`           | --                |                                     可选，拖动调整宽度时的最大宽度                                      |
+|             minWidth              |           `string px`           | --                |                                     可选，拖动调整宽度时的最小宽度                                      |
 |               field               |            `string`             | --                |                                        该列字段                                         | [基本用法](demo#basic-usage)       |
 |              header               |            `string`             | --                |                                      该列表头文字                                       | [基本用法](demo#basic-usage)       |
 |             sortable              |            `boolean`            | --                |                                    可选，是否可排序                                     | [表格交互](demo#table-interaction) |

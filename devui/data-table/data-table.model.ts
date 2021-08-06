@@ -1,4 +1,4 @@
-import { ElementRef } from '@angular/core';
+import { TemplateRef } from '@angular/core';
 import { DataTableCellComponent } from './data-table-cell.component';
 import { DataTableRowComponent } from './data-table-row.component';
 import { TableThComponent } from './table/head/th/th.component';
@@ -40,7 +40,7 @@ export interface ColumnDefs {
 }
 
 export interface FilterConfig {
-  id: number | string;
+  id?: number | string;
   name: string;
   value: any;
   checked?: boolean; // for Multiple
@@ -54,7 +54,7 @@ export interface CheckableRelation {
 
 export interface TableExpandConfig {
   expand?: boolean;
-  expandTemplateRef?: ElementRef;
+  expandTemplateRef?: TemplateRef<any>;
   description?: string;
 }
 

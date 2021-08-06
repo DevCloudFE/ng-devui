@@ -89,10 +89,10 @@ interface TimeAxisData {
 |   model   | `'text'\|'html'\|'template'` |  ''  | 可选，模型      | [时间节点单独使用](demo#seperate-way)           |
 |  time  |                  `string`                   |  --  | 可选，时间    | [时间节点单独使用](demo#seperate-way)           |
 |  text  |                  `string`                   |  --  | 可选，文本内容                                            | [时间节点单独使用](demo#seperate-way)           |
-|  type  | `'primary' \| 'success' \| 'danger' \| 'warning' \| 'waiting' \| 'info'` |  `'info'`    | 可选，时间点类型     | [时间节点单独使用](demo#seperate-way)          |
+|  type  | `'primary' \| 'success' \| 'danger' \| 'warning'` |  `'primary'`  | 可选，时间点类型     | [时间节点单独使用](demo#seperate-way)          |
 |  data  |                   `array`                   |  --  | 可选，模板数据，当 model 设置为 template 时生效             | [时间节点单独使用](demo#seperate-way) |
 |  contentTemplate  | `TemplateRef` |  --  | 可选，内容模板，默认为空，当 model 为 `template` 时需要设置 | [时间节点单独使用](demo#seperate-way) |
-|  lineStyle  | `{style: 'solid' \| 'dashed' \| 'none', color: string}`  | `{style: 'solid'}`  | 可选，设置时间轴线条样式   | [时间节点单独使用](demo#seperate-way) |
+|  lineStyle  | `{style: 'solid' \| 'dashed' \| 'dotted' \| 'none', color: string}`  | `{style: 'solid'}`  | 可选，设置时间轴线条样式   | [时间节点单独使用](demo#seperate-way) |
 |  customDot  | `string\|HTMLElement\|TemplateRef` |  --  | 可选，自定义时间点   | [时间节点单独使用](demo#seperate-way) |
 |  extraElement  | `string\|HTMLElement\|TemplateRef` |  --  | 可选，自定义两个时间点间附加元素   | [时间节点单独使用](demo#seperate-way) |
 |  position  | `'up'\|'bottom'\|'left'\|'right'` |  --  | 可选，text 或 data的位置，若有time则time位于相反位置   | [时间节点单独使用](demo#seperate-way) |

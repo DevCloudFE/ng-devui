@@ -11,6 +11,6 @@
 ></textarea>
 
 <ng-template #customTemp let-suggestion>
-  <d-avatar style="text-align: right" [name]="suggestion.name" width="18" height="18"></d-avatar>
-  <span style="margin-left: 10px">{{ suggestion.name }} - {{ suggestion.id }}</span>
+  <d-avatar style="text-align: right" [name]="suggestion.name" [width]="18" [height]="18"></d-avatar>
+  <span style="margin-left: 8px">{{ suggestion.name }} - {{ suggestion.id }}</span>
 </ng-template>

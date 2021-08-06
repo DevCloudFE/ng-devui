@@ -12,11 +12,15 @@
   }
 
   .devui-time-axis-item-dot {
-    width: 18px;
-    height: 18px;
-    border-radius: 9px;
-    border-width: 2px;
-    border-style: solid;
+    &,
+    & > svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    & > i {
+      font-size: 18px;
+    }
   }
 
   .devui-time-axis-item-custom-dot {
@@ -86,11 +90,15 @@
   }
 
   .devui-time-axis-item-dot {
-    width: 18px;
-    height: 18px;
-    border-radius: 9px;
-    border-width: 2px;
-    border-style: solid;
+    &,
+    & > svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    & > i {
+      font-size: 18px;
+    }
   }
 
   .devui-time-axis-item-custom-dot {
@@ -156,11 +164,15 @@
   }
 
   .devui-time-axis-item-dot {
-    width: 18px;
-    height: 18px;
-    border-radius: 9px;
-    border-width: 2px;
-    border-style: solid;
+    &,
+    & > svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    & > i {
+      font-size: 18px;
+    }
   }
 
   .devui-time-axis-item-custom-dot {
@@ -209,39 +221,38 @@
 
 .devui-time-axis-item-type {
   &-primary {
-    border-color: $devui-placeholder;
+    border: 2px solid $devui-placeholder;
+    border-radius: 50%;
   }
 
-  &-success {
-    border-color: $devui-success;
-    color: $devui-light-text;
-    line-height: 16px;
-    text-align: center;
-    background-color: $devui-success;
+  &-right {
+    i {
+      color: $devui-success;
+    }
   }
 
   &-danger {
-    border-color: $devui-danger;
-    color: $devui-light-text;
-    line-height: 16px;
-    text-align: center;
-    background-color: $devui-danger;
+    path {
+      fill: $devui-danger;
+    }
+
+    circle {
+      fill: $devui-light-text;
+    }
   }
 
   &-warning {
-    border-color: $devui-warning;
-    color: $devui-light-text;
-    font-weight: 700;
-    line-height: 16px;
-    text-align: center;
-    background-color: $devui-warning;
+    i {
+      color: $devui-warning;
+    }
   }
 
   &-running {
-    border-color: $devui-success;
     line-height: 16px;
     text-align: center;
     animation: devui-time-axis-running 1.5s linear infinite;
+    border: 2px solid $devui-success;
+    border-radius: 50%;
   }
 }
 

@@ -1,7 +1,7 @@
 @import '~ng-devui/styles-var/devui-var.scss';
 
 .header {
-  padding: 30px 30px 0 30px;
+  padding: 32px 32px 0 32px;
   height: 56px;
   position: relative;
   border: none;
@@ -11,14 +11,14 @@
 }
 
 .body {
-  padding-top: 10px;
-  padding-right: 30px;
-  padding-bottom: 0;
-  padding-left: 30px;
+  padding-top: 20px;
+  padding-right: 32px;
+  padding-bottom: 20px;
+  padding-left: 32px;
 }
 
 .footer {
   border-top: none;
-  padding: 15px 0;
+  padding-bottom: 20px;
   text-align: center;
 }

@@ -317,9 +317,9 @@ $devui-btn-pseudo-config: (
 
 .devui-btn {
   transition:
-    background-color $devui-animation-duration-slow $devui-animation-ease-in-smooth,
-    border-color $devui-animation-duration-slow $devui-animation-ease-in-smooth,
-    color $devui-animation-duration-slow $devui-animation-ease-in-smooth;
+    background-color $devui-animation-duration-slow $devui-animation-ease-in-out-smooth,
+    border-color $devui-animation-duration-slow $devui-animation-ease-in-out-smooth,
+    color $devui-animation-duration-slow $devui-animation-ease-in-out-smooth;
   border-style: solid;
   white-space: nowrap;
   display: flex;
@@ -370,7 +370,7 @@ $devui-btn-pseudo-config: (
   font-size: $devui-font-size;
 
   &::before {
-    transition: color $devui-animation-duration-slow $devui-animation-ease-in-smooth;
+    transition: color $devui-animation-duration-slow $devui-animation-ease-in-out-smooth;
   }
 }
 
@@ -395,4 +395,10 @@ $devui-btn-pseudo-config: (
 
 .clear-right-5 {
   margin-right: 5px;
+}
+
+.devui-btn-more-text-omits {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }

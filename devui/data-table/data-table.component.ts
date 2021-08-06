@@ -274,6 +274,8 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
   @ViewChild('fixHeaderContainerRef') fixHeaderContainerRefElement: ElementRef;
   @ViewChild('tableView', { static: true }) tableViewRefElement: ElementRef;
   @ViewChild('cdkVirtualScrollViewport') virtualScrollViewport: CdkVirtualScrollViewport;
+  @ViewChild('normalScroll') normalScrollElement: ElementRef;
+  @ViewChild('scrollViewTpl') vitualScrollElement: TemplateRef<any>;
 
   @HostBinding('style.height') get hostHeight() {
     return this.tableHeight;
@@ -352,7 +354,6 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
     return this._pageAllChecked;
   }
 
-  fixHeaderBodyHeight: string;
   document: Document;
   constructor(
     private elementRef: ElementRef,
@@ -376,7 +377,7 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
   // life hook start
   ngOnInit() {
     this.ngZone.runOutsideAngular(() => {
-      this.document.addEventListener('click', this.onDocumentClickListen);
+      this.document.addEventListener('mousedown', this.onDocumentClickListen);
     });
   }
 
@@ -459,19 +460,14 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
     if (this.onlyOneColumnSort) {
       this.resetThSortOrder();
     }
-
-    if (this.fixHeader) {
-      this.fixHeaderBodyHeight = this.getFixedBodyHeight();
-      this.cdr.detectChanges();
-    }
+    this.initScrollClass();
   }
 
-  getFixedBodyHeight() {
-    if (this.tableHeight) {
-      return this.elementRef?.nativeElement.getBoundingClientRect().height -
-        this.fixHeaderContainerRefElement?.nativeElement.getBoundingClientRect().height + 'px';
-    } else {
-      return null;
+  // 初始化时判断是否存在横向滚动，并加上相应类名
+  initScrollClass() {
+    const ele = this.normalScrollElement?.nativeElement || this.vitualScrollElement?.elementRef?.nativeElement;
+    if (ele.clientWidth !== ele.scrollWidth) {
+      this.setScrollViewClass('left');
     }
   }
 

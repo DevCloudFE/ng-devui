@@ -11,7 +11,7 @@
 .devui-toggle {
   width: 36px;
   height: 18px;
-  border-radius: (20px/2);
+  border-radius: 10px;
   background: $devui-line;
   border: 1px solid $devui-line;
   position: relative;
@@ -21,7 +21,7 @@
   padding: 0;
   margin: 0;
   cursor: pointer;
-  transition: $devui-animation-duration-slow $devui-animation-ease-in-smooth all;
+  transition: $devui-animation-duration-slow $devui-animation-ease-in-out-smooth all;
 
   &:not(.devui-checked):hover {
     border-color: $devui-line;
@@ -63,7 +63,7 @@
     position: absolute;
     top: 1px;
     left: 1px;
-    transition: $devui-animation-duration-slow $devui-animation-ease-in-smooth all;
+    transition: $devui-animation-duration-slow $devui-animation-ease-in-out-smooth all;
   }
 
   &.devui-checked small {
@@ -73,7 +73,7 @@
   &.devui-toggle-lg {
     width: 58px;
     height: 30px;
-    border-radius: (32px/2);
+    border-radius: 16px;
 
     .devui-toggle-inner-wrapper {
       padding-left: 28px;
@@ -101,7 +101,7 @@
   &.devui-toggle-sm {
     width: 30px;
     height: 14px;
-    border-radius: (16px/2);
+    border-radius: 8px;
 
     .devui-toggle-inner-wrapper {
       padding-left: 12px;

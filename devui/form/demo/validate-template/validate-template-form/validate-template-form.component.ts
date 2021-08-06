@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormLayout } from 'ng-devui/form';
 import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
@@ -7,6 +8,7 @@ import { delay } from 'rxjs/operators';
   templateUrl: './validate-template-form.component.html'
 })
 export class ValidateTemplateFormComponent {
+  layoutDirection: FormLayout = FormLayout.Vertical;
   planFormData = {
     planName: '',
     planDescription: '',

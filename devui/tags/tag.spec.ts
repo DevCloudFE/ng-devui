@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { TagComponent } from './tag.component';
@@ -37,7 +37,7 @@ describe('tag', () => {
   let testComponent: TestTagComponent;
   let tagElement: HTMLElement;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [TagsModule, FormsModule],
       declarations: [TestTagComponent],

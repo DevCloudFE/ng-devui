@@ -1,6 +1,9 @@
 import {
-  CdkConnectedOverlay, CdkOverlayOrigin, ConnectedOverlayPositionChange,
-  ConnectedPosition, VerticalConnectionPos
+  CdkConnectedOverlay,
+  CdkOverlayOrigin,
+  ConnectedOverlayPositionChange,
+  ConnectedPosition,
+  VerticalConnectionPos
 } from '@angular/cdk/overlay';
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { DOCUMENT } from '@angular/common';
@@ -12,7 +15,8 @@ import {
   ContentChild,
   ElementRef,
   EventEmitter,
-  forwardRef, HostListener,
+  forwardRef,
+  HostListener,
   Inject,
   Input,
   NgZone,
@@ -59,7 +63,6 @@ import { debounceTime, filter, map, switchMap } from 'rxjs/operators';
   preserveWhitespaces: false,
 })
 export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewInit, OnDestroy, OnChanges {
-
   get isOpen() {
     return this._isOpen;
   }
@@ -219,13 +222,15 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
       enable: boolean; // 默认值为false
       overflow?: 'normal' | 'scroll-y' | 'multiple-line' | string; // 默认值为''
       containerMaxHeight?: string; // 默认值1.8em
-      containnerMaxHeight?: string;  // 默认值1.8em, 已废弃
+      containnerMaxHeight?: string; // 默认值1.8em, 已废弃
       labelMaxWidth?: string; // 默认100%
     };
     selectedItemWithTemplate?: {
       // 单选情况下，显示选项使用了template的情况下，顶部选中的内容是否也以template展示
       enable: boolean; // 默认值为false
     };
+    // 多选情况下，用户搜索后按回车默认操作结果的第一个选项，没有结果则关闭下拉列表
+    enableFocusFirstFilteredOption?: boolean;
     [feature: string]: any;
   };
 
@@ -285,10 +290,14 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
 
   selectIndex = -1;
   _inputValue: any;
+  document: Document;
+  scrollHeightNum: number;
+  minBuffer: number;
+  maxBuffer: number;
   virtualScrollItemSize: any = {
     sm: 34,
     normal: 38,
-    lg: 50
+    lg: 50,
   };
 
   cdkConnectedOverlayOrigin: CdkOverlayOrigin;
@@ -298,10 +307,10 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
   private filterSubscription: Subscription;
   public value;
   private resetting = false;
-  document: Document;
 
   private onChange = (_: any) => null;
   private onTouch = () => null;
+
   constructor(
     private renderer: Renderer2,
     private windowRef: WindowRef,
@@ -404,16 +413,17 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
         height += this.virtualScrollItemSize[size ? size : 'normal'];
       }
       const scrollHight = parseInt(this.scrollHight, 10);
-      if (height > scrollHight) {
-        return this.scrollHight;
-      } else {
-        return height + 'px';
-      }
+      this.scrollHeightNum = height > scrollHight ? scrollHight : height;
+      return `${this.scrollHeightNum}px`;
     }
   }
 
   get realVirtualScrollItemSize() {
-    return this.templateItemSize || this.virtualScrollItemSize[this.size || 'normal'];
+    const itemSize = this.templateItemSize || this.virtualScrollItemSize[this.size || 'normal'];
+    const num = Math.round(this.scrollHeightNum / itemSize) || 10;
+    this.minBuffer = num * 1.5 * itemSize;
+    this.maxBuffer = num * 2.5 * itemSize;
+    return itemSize;
   }
 
   resetSource() {
@@ -755,7 +765,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
     if (this.isOpen) {
       $event.preventDefault();
       $event.stopPropagation();
-      const item = this.availableOptions[this.selectIndex];
+      const item = this.getSelectedItem();
       if (item) {
         this.choose(item.option, item.id, $event);
       } else {
@@ -764,6 +774,12 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
     } else {
       this.toggle();
     }
+  }
+
+  getSelectedItem = () => {
+    return this.extraConfig?.enableFocusFirstFilteredOption && this.multiple && this.availableOptions.length
+      ? this.availableOptions[0]
+      : this.availableOptions[this.selectIndex];
   }
 
   removeItem(item, $event) {

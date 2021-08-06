@@ -1,6 +1,6 @@
 // tslint:disable: max-line-length
 import { Component, DebugElement, ElementRef, ViewChild } from '@angular/core';
-import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
+import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -529,7 +529,7 @@ describe('twoDatePicker', () => {
   let component: TestTwoDatePickerComponent;
   let domHelper: DomHelper<TestTwoDatePickerComponent>;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [DatepickerModule, NoopAnimationsModule, FormsModule],
       declarations: [TestTwoDatePickerComponent]
@@ -736,7 +736,7 @@ describe('twoDatePickerDiv', () => {
   let component: TestTwoDatePickerDivComponent;
   let domHelper: DomHelper<TestTwoDatePickerDivComponent>;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [DatepickerModule, NoopAnimationsModule, FormsModule],
       declarations: [TestTwoDatePickerDivComponent],

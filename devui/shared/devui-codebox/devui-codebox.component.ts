@@ -16,7 +16,7 @@ export class DevuiCodeboxComponent implements OnInit {
 
   componentCode: Array<any>;
   expanded = false;
-  codeTabID = 'HTML';
+  codeTabID: string | number = 'HTML';
   document: Document;
 
   copyCode(code) {

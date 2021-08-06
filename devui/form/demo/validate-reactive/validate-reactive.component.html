@@ -22,7 +22,7 @@
       dForm
       [formGroup]="userFormGroup"
       [dValidateRules]="formRules.rule"
-      [layout]="'vertical'"
+      [layout]="layoutDirection"
       #userForm="dValidateRules"
       (dSubmit)="submitForm($event)"
     >

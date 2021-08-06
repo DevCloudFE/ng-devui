@@ -13,6 +13,18 @@
     (fileSelect)="fileSelect($event)"
   >
   </d-multiple-upload>
+  <h4>Upload Directory</h4>
+  <d-multiple-upload
+    #multipleupload
+    [fileOptions]="fileOptions3"
+    [uploadedFiles]="uploadedFiles3"
+    [filePath]="'name'"
+    [uploadOptions]="uploadOptions3"
+    (successEvent)="onSuccess2($event)"
+    (errorEvent)="onError2($event)"
+    [showTip]="true"
+  >
+  </d-multiple-upload>
   <h4>Dragdrop</h4>
   <d-multiple-upload
     #multipleupload
@@ -57,7 +69,7 @@
           </td>
           <td>
             <d-button
-              bordered="true"
+              [bordered]="true"
               icon="trash"
               bsStyle="danger"
               bsSize="xs"

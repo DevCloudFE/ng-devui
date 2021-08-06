@@ -5,7 +5,7 @@ d-layout {
 }
 
 d-aside {
-  padding-left: 1px;
+  border-left: 1px solid transparent;
 }
 
 d-header {
@@ -25,7 +25,7 @@ d-header {
     line-height: 40px;
 
     .logo-devui {
-      margin-top: 7px;
+      margin-top: 8px;
     }
 
     .logo-devui,
@@ -61,5 +61,5 @@ d-content {
 d-footer {
   color: $devui-light-text;
   background-color: $devui-base-bg-dark;
-  padding: 9px 24px;
+  padding: 8px 24px;
 }

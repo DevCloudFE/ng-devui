@@ -30,7 +30,7 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
   basicDataSource: Array<SourceType> = treeDataSource;
   @ViewChild('datatable', { read: ElementRef, static: true }) datatableElementRef: ElementRef;
   ganttScaleWidth: string;
-  ganttBarContainerElement: Element;
+  ganttBarContainerElement: HTMLElement;
   resizeHandleContainerElement: Element;
   ganttScaleContainerOffsetLeft: number;
   ganttStartDate: Date;
@@ -72,7 +72,7 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
     });
     this.ganttScaleWidth = this.ganttService.getDurationWidth(this.ganttStartDate, this.ganttEndDate) + 'px';
     this.tableWidthConfig[3].width = this.ganttScaleWidth;
-    const milestone = {
+    const milestone: GanttMilestone = {
       date: new Date(2020, 1, 8),
       lable: 'V1.2',
     };

@@ -22,7 +22,7 @@ section {
 }
 
 .b-group {
-  margin-right: 5px;
+  margin-right: 4px;
   display: inline-block;
   vertical-align: middle;
 
@@ -71,7 +71,7 @@ d-data-table {
   & .icon {
     width: 22px;
     height: 24px;
-    margin-right: 5px;
+    margin-right: 4px;
   }
 }
 
@@ -81,7 +81,7 @@ d-data-table {
     color: $devui-text;
     line-height: 24px;
     font-weight: bold;
-    margin-bottom: 15px;
+    margin-bottom: 16px;
   }
 
   & .content {
@@ -168,6 +168,6 @@ d-data-table {
   .devui-btn {
     height: 32px !important;
     color: $devui-text !important;
-    padding: 0 6px !important;
+    padding: 0 8px !important;
   }
 }

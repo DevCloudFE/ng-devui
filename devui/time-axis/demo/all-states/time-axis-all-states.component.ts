@@ -18,9 +18,9 @@ export class TimeAxisAllStatesComponent implements OnInit {
             model: 'text',
             list: [
                 { time: '2017-07-25', text: 'some events in 2017-07-25', type: 'success' },
-                { time: '2017-07-27', text: 'some events in 2017-07-27', type: 'success' },
+                { time: '2017-07-27', text: 'some events in 2017-07-27', type: 'warning' },
                 { time: '2017-07-28', text: 'some events in 2017-07-28', type: 'danger' },
-                { time: '2017-07-29', text: 'some events in 2017-07-29', type: 'success' }
+                { time: '2017-07-29', text: 'some events in 2017-07-29', type: 'primary' }
             ]
         };
 

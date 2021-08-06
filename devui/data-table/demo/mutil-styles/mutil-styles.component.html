@@ -1,5 +1,5 @@
 <div class="handle-group">
-  Style：<d-tabs type="options" [(activeTab)]="activeBorder" [showContent]="false">
+  Style：<d-tabs type="options" [(activeTab)]="activeBorderTab" [showContent]="false">
     <d-tab *ngFor="let item of borderItems" [id]="item.id">
       <ng-template dTabTitle>
         {{ item.title }}
@@ -8,7 +8,7 @@
   </d-tabs>
 </div>
 <div class="handle-group">
-  Size：<d-tabs type="options" [(activeTab)]="activeSize" [showContent]="false">
+  Size：<d-tabs type="options" [(activeTab)]="activeSizeTab" [showContent]="false">
     <d-tab *ngFor="let item of sizeItems" [id]="item.id">
       <ng-template dTabTitle>
         {{ item.title }}
@@ -17,7 +17,7 @@
   </d-tabs>
 </div>
 <div class="handle-group">
-  Table Layout：<d-tabs type="options" [(activeTab)]="activeLayout" [showContent]="false" (activeTabChange)="layoutChange($event)">
+  Table Layout：<d-tabs type="options" [(activeTab)]="activeLayoutTab" [showContent]="false" (activeTabChange)="layoutChange($event)">
     <d-tab *ngFor="let item of layoutItems" [id]="item.id">
       <ng-template dTabTitle>
         {{ item.title }}
@@ -31,11 +31,11 @@
   [dataSource]="basicDataSource"
   [scrollable]="true"
   [tableWidthConfig]="tableWidthConfig"
-  [borderType]="activeBorder"
+  [borderType]="activeBorderTable"
   [headerBg]="headerBk"
   [striped]="striped"
-  [size]="activeSize"
-  [tableLayout]="activeLayout"
+  [size]="activeSizeTable"
+  [tableLayout]="activeLayoutTable"
 >
   <thead dTableHead>
     <tr dTableRow>

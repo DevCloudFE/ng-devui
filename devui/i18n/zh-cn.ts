@@ -253,7 +253,8 @@ export default {
     seeMore: '查看全部过滤条件',
     selected: '已选择',
     switchToStart: '切换至开始时间',
-    switchToEnd: '切换至结束时间'
+    switchToEnd: '切换至结束时间',
+    keyword: '关键字',
   },
   userGuide: {
     guide: '指引',

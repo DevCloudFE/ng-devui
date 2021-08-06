@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormLayout } from 'ng-devui/form';
 
 @Component({
   selector: 'd-form-demo-base',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./basic.component.css']
 })
 export class BasicComponent implements OnInit {
+  layoutDirection: FormLayout = FormLayout.Vertical;
 
   constructor() {
   }

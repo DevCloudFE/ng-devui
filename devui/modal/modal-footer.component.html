@@ -4,7 +4,7 @@
       *ngFor="let button of buttons"
       [attr.id]="button.id"
       (btnClick)="button.handler($event)"
-      bsStyle="{{ button.cssClass }}"
+      [bsStyle]="button.cssClass"
       circled="true"
       [width]="button.btnwidth"
       [autofocus]="button.autofocus"

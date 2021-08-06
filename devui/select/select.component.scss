@@ -56,6 +56,10 @@
     border-bottom: 1px solid $devui-dividing-line;
   }
 
+  &.devui-reset-min-width {
+    min-width: auto;
+  }
+
   .devui-dropdown-menu-wrap {
     position: initial;
   }
@@ -677,7 +681,7 @@ svg.svg-icon-search path {
   vertical-align: middle;
 
   &-animation {
-    transition: transform $devui-animation-duration-slow $devui-animation-ease-in-smooth;
+    transition: transform $devui-animation-duration-slow $devui-animation-ease-in-out-smooth;
   }
 }
 

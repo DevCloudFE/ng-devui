@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { DFormControlStatus, FormLayout } from 'ng-devui/form';
 
 @Component({
   selector: 'd-form-custom-status',
   templateUrl: './custom-status.component.html',
 })
 export class CustomStatusComponent implements OnInit {
+  layoutDirection: FormLayout = FormLayout.Horizontal;
   singleSelectData = null;
 
-  inputStatus = 'pending';
+  inputStatus: DFormControlStatus = 'pending';
 
   verifierOptions = [
     { 'id': '1', 'name': 'Administrator1'},

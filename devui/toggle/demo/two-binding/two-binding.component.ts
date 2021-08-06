@@ -13,7 +13,7 @@ export class TwoBindingComponent implements OnInit {
   ngOnInit() {
   }
 
-  beforeChange = (currentValue) => {
+  beforeChange: (value: any) =>  Promise<boolean> = (currentValue) => {
     console.log('currentValue: ' + currentValue);
     return new Promise((resolve) => {
       const results = this.dialogService.open({

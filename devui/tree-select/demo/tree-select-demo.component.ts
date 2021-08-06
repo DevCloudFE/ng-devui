@@ -42,8 +42,8 @@ export class TreeSelectDemoComponent implements OnInit, OnDestroy {
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./keys/tree-select-keys.component.ts') },
   ];
   TreeSelectCustomTemplateComponent: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./item-template/custom-template.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./item-template/custom-template.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./custom-template/custom-template.component.html') },
+    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./custom-template/custom-template.component.ts') },
   ];
   TreeSelectIconParentComponent: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./icon-parent/icon-parent.component.html') },

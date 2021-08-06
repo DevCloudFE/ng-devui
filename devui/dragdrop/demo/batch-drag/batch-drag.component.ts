@@ -9,26 +9,26 @@ export class BatchDragComponent {
   lists = [
     {
       name: 'IDE',
-      list: [{ name: 'Visual Studio Code' }, { name: 'WebStorm' }, { name: 'Sublime Text' }, { name: 'Atom' }, { name: 'Notepad++' }],
+      list: [{ name: 'Visual Studio Code', isSelected: false }, { name: 'WebStorm', isSelected: false }, { name: 'Sublime Text', isSelected: false }, { name: 'Atom', isSelected: false }, { name: 'Notepad++', isSelected: false }],
     },
     {
       name: 'Browser',
       list: [
-        { name: 'Chrome' },
-        { name: 'Firefox' },
-        { name: 'Opera' },
-        { name: 'Edge' },
-        { name: 'Internet Explorer' },
-        { name: 'Safari' },
+        { name: 'Chrome', isSelected: false },
+        { name: 'Firefox', isSelected: false },
+        { name: 'Opera', isSelected: false },
+        { name: 'Edge', isSelected: false },
+        { name: 'Internet Explorer', isSelected: false },
+        { name: 'Safari', isSelected: false },
       ],
     },
     {
       name: 'OS',
-      list: [{ name: 'Linux' }, { name: 'Windows' }, { name: 'Mac OS' }, { name: 'DOS' }, { name: 'Chrome OS' }],
+      list: [{ name: 'Linux', isSelected: false }, { name: 'Windows', isSelected: false }, { name: 'Mac OS', isSelected: false }, { name: 'DOS', isSelected: false }, { name: 'Chrome OS', isSelected: false }],
     },
     {
       name: 'Mobile OS',
-      list: [{ name: 'Android' }, { name: 'IOS' }, { name: 'BlackBerry' }, { name: 'Symbian' }],
+      list: [{ name: 'Android', isSelected: false }, { name: 'IOS', isSelected: false }, { name: 'BlackBerry', isSelected: false }, { name: 'Symbian', isSelected: false }],
     },
     {
       name: 'Whatever',

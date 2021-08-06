@@ -7,8 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BasicComponent implements OnInit {
 
-  tab1acticeID = 'tab2';
-  tab2acticeID = 'tab3';
+  tab1acticeID: string | number = 'tab2';
+  tab2acticeID: string | number = 'tab3';
   constructor() { }
 
   ngOnInit() {

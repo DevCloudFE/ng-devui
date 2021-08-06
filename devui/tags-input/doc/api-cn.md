@@ -28,9 +28,9 @@ import { TagsInputModule } from 'ng-devui/tags-input';
 |    minLength    |            `number`             |            3            | 可选，输入标签内容的最小长度                                                                          | [基本用法](demo#basic-usage) |
 |    maxLength    |            `number`             | Number.MAX_SAFE_INTEGER | 可选，输入标签内容的最大长度                                                                          | [基本用法](demo#basic-usage) |
 |     maxTags     |            `number`             | Number.MAX_SAFE_INTEGER | 可选，可输入标签的最大个数                                                                            | [基本用法](demo#basic-usage) |
-| caseSensitivity |            `boolean`            |          false          | 可选，大小写敏感，默认忽略大小                                                                        | [基本用法](demo#basic-usage) | 写         |
-|   spellcheck    |            `boolean`            |          true           | 可选，input 输入框是否开启拼写检查的                                                                                  | [基本用法](demo#basic-usage) | spellcheck |
-|  isAddBySpace   |            `boolean`            |          true           | 可选，是否支持空格键输入标                                                                            | [基本用法](demo#basic-usage) | 签         |
+| caseSensitivity |            `boolean`            |          false          | 可选，大小写敏感，默认忽略大小写                                                                       | [基本用法](demo#basic-usage) |          |
+|   spellcheck    |            `boolean`            |          true           | 可选，input 输入框是否开启拼写检查                                                                                  | [基本用法](demo#basic-usage) |  |
+|  isAddBySpace   |            `boolean`            |          true           | 可选，是否支持空格键输入标签                                                                            | [基本用法](demo#basic-usage) |          |
 | suggestionList  |             `Array`             |           []            | 可选，下拉选项，默认可选择的标签列表                                                                  | [基本用法](demo#basic-usage) |
 | checkBeforeAdd  | `Function\|Promise\|Observable` |           无            | 可选，自定义校验函数，类型为(newTag: string) => boolean 或者 Promise<boolean>或者 Observable<boolean> | [基本用法](demo#basic-usage) |
 |    disabled     |            `boolean`            |          false          | 可选，disabled 灰化状态                                                                               | [基本用法](demo#basic-usage) |

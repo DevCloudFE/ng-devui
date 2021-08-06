@@ -25,15 +25,14 @@
           [title]="item?.title"
           [progressRate]="item?.progressRate"
           [scrollElement]="ganttContainer"
-          (barMoveStartEvent)="onGanttBarMoveStart($event)"
+          (barMoveStartEvent)="onGanttBarMoveStart()"
           (barMovingEvent)="onGanttBarMoving($event)"
-          (barResizeStartEvent)="onGanttBarResizeStart($event)"
+          (barResizeStartEvent)="onGanttBarResizeStart()"
           (barResizingEvent)="onGanttBarResizing($event)"
           (barMoveEndEvent)="onGanttBarMoveEnd($event)"
           (barResizeEndEvent)="onGanttBarResize($event)"
           (barProgressEvent)="onBarProgressEvent($event)"
         ></d-gantt-bar>
-        <div class="moving-bg" [style.left]="left + 'px'" [style.width]="width + 'px'"></div>
       </div>
     </div>
   </div>

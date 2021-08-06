@@ -59,6 +59,7 @@ export class CategorySearchComponent implements OnInit, OnChanges, OnDestroy, Af
   @Output() searchKeyChange = new EventEmitter<String>();
   @ViewChild('InputEle') inputEle: ElementRef;
   @ViewChild('ScrollBarContainer') scrollBarContainer: ElementRef;
+  @ViewChild('PrimeContainer') PrimeContainerRef: ElementRef;
   @ViewChildren('selectedDropdown') selectedDropdownList: QueryList<DropDownDirective>;
   @ViewChildren(DatepickerProCalendarComponent) datePickers: QueryList<DatepickerProCalendarComponent>;
   @ViewChildren(DatepickerProCalendarComponent, { read: ElementRef }) datePickerElements: QueryList<ElementRef>;
@@ -69,6 +70,7 @@ export class CategorySearchComponent implements OnInit, OnChanges, OnDestroy, Af
   dateConverter: DateConverter;
   filterName = '';
   treeSearchKey = '';
+  searchKeyCache = '';
   enterSearch = false;
   isShowSavePanel = false;
   isHover = false;
@@ -85,7 +87,7 @@ export class CategorySearchComponent implements OnInit, OnChanges, OnDestroy, Af
   scrollToTailFlag = true; // 是否在更新标签内容后滚动至输入框的开关
   DROPDOWN_ANIMATION_TIMEOUT = 200; // 下拉动画延迟
   document: Document;
-  activeType = 'start';
+  activeType: 'start' | 'end' = 'start';
   get showFilterNameClear() {
     return typeof this.filterName === 'string' && this.filterName.length > 0;
   }
@@ -98,6 +100,7 @@ export class CategorySearchComponent implements OnInit, OnChanges, OnDestroy, Af
 
   ngOnInit() {
     this.setI18nText();
+    this.setSearchKeyTag();
     this.setTagsMaxWidth();
   }
 
@@ -154,6 +157,29 @@ export class CategorySearchComponent implements OnInit, OnChanges, OnDestroy, Af
       style.innerText = rule;
       this.document.head.appendChild(style);
     }
+  }
+
+  setSearchKeyTag() {
+    const result = this.selectedTags.filter((item) => item.field !== 'devuiCategorySearchKeyword');
+    if (this.searchKey && !this.currentSelectTag) {
+      const label = this.i18nCategorySearchText['keyword'];
+      const value = [{ label: this.searchKey }];
+      const searchKeyTag = {
+        options: [],
+        field: 'devuiCategorySearchKeyword',
+        label: label,
+        type: 'keyword',
+        title: `${label}:${this.searchKey}`,
+        value: {
+          label: this.searchKey,
+        },
+      };
+      this.updateSelectedTags(searchKeyTag, true, result);
+      this.searchKeyCache = this.searchKey;
+    }
+    this.searchKey = '';
+    setTimeout(() => (this.enterSearch = false), 300);
+    return result;
   }
 
   // 初始化数据
@@ -224,7 +250,8 @@ export class CategorySearchComponent implements OnInit, OnChanges, OnDestroy, Af
   }
 
   search() {
-    this.searchEvent.emit({ selectedTags: this.selectedTags, searchKey: this.searchKey });
+    const result = this.setSearchKeyTag();
+    this.searchEvent.emit({ selectedTags: result, searchKey: this.searchKeyCache });
     this.isFocus = true;
   }
 
@@ -239,8 +266,8 @@ export class CategorySearchComponent implements OnInit, OnChanges, OnDestroy, Af
   searchInputValue(event) {
     event.preventDefault();
     event.stopPropagation();
-    // this.inputEle.nativeElement.blur(); // enter后要保持聚焦
-    this.searchEvent.emit({ selectedTags: this.selectedTags, searchKey: this.searchKey });
+    const result = this.setSearchKeyTag();
+    this.searchEvent.emit({ selectedTags: result, searchKey: this.searchKeyCache });
   }
 
   chooseCategory(item, inputDropdown: DropDownDirective) {
@@ -258,7 +285,7 @@ export class CategorySearchComponent implements OnInit, OnChanges, OnDestroy, Af
     this.updateSelectedTags(item, false);
   }
 
-  updateSelectedTags(tag, valueChanged = true) {
+  updateSelectedTags(tag, valueChanged = true, result?: any) {
     this.canChange(tag, 'add').then((val) => {
       if (!val) {
         return;
@@ -275,7 +302,7 @@ export class CategorySearchComponent implements OnInit, OnChanges, OnDestroy, Af
         if (this.scrollToTailFlag) {
           setTimeout(() => this.scrollToTail());
         }
-        this.selectedTagsChange.emit({ selectedTags: this.selectedTags, currentChangeTag: tag, operation: 'add' });
+        this.selectedTagsChange.emit({ selectedTags: result || this.selectedTags, currentChangeTag: tag, operation: 'add' });
       }
     });
   }
@@ -328,8 +355,13 @@ export class CategorySearchComponent implements OnInit, OnChanges, OnDestroy, Af
       }
       tag = this.resetValue(tag);
       this.selectedTags = this.selectedTags.filter((item) => item.field !== tag.field);
-      this.selectedTagsChange.emit({ selectedTags: this.selectedTags, currentChangeTag: tag, operation: 'delete' });
-      this.resolveCategoryDisplay(tag, 'add');
+      if (tag.type !== 'keyword') {
+        this.selectedTagsChange.emit({ selectedTags: this.selectedTags, currentChangeTag: tag, operation: 'delete' });
+        this.resolveCategoryDisplay(tag, 'add');
+      } else {
+        this.searchKeyCache = '';
+        this.searchEvent.emit({ selectedTags: this.selectedTags, searchKey: '' });
+      }
       this.currentSelectTag = undefined;
     });
   }
@@ -416,8 +448,9 @@ export class CategorySearchComponent implements OnInit, OnChanges, OnDestroy, Af
       this.selectedTags.forEach((item) => this.resetValue(item));
       this.selectedTags = [];
     }
-    if (this.searchKey) {
+    if (this.searchKey || this.searchKeyCache) {
       this.searchKey = '';
+      this.searchKeyCache = '';
     }
     if (this.currentSelectTag) {
       this.currentSelectTag = undefined;
@@ -546,6 +579,11 @@ export class CategorySearchComponent implements OnInit, OnChanges, OnDestroy, Af
   resetContent(dropdown: DropDownDirective, tag?: any) {
     if (this.toggleEvent) {
       this.toggleEvent(dropdown, tag, this.currentSelectTag);
+    }
+    if (dropdown.isOpen && tag?.type === 'keyword') {
+      this.searchKey = this.searchKeyCache;
+      this.inputEle.nativeElement.focus();
+      dropdown.isOpen = false;
     }
     if (!dropdown.isOpen) {
       return;

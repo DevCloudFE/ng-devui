@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SplitterOrientation } from 'ng-devui/splitter';
 
 @Component({
   selector: 'd-splitter-demo-shrink',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SplitterDemoMenuFoldComponent implements OnInit {
   // splitter input
-  orientation = 'horizontal';
+  orientation: SplitterOrientation = 'horizontal';
   splitBarSize = '2px';
   disabledBarSize = '1px';
 

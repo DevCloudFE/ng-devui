@@ -38,6 +38,7 @@ export class AutoCompletePopupComponent implements ControlValueAccessor {
   @ViewChild('selectMenuElement') selectMenuElement: ElementRef;
   @ViewChild('dropdownUl') dropdownUl: ElementRef;
   activeIndex = 0;
+  hoverIndex = 0;
   showLoading = false;
   private value: any;
   labelMinHeight = 20; // position.top小于20px时候，表示光标在第一行
@@ -83,7 +84,8 @@ export class AutoCompletePopupComponent implements ControlValueAccessor {
   }
 
   selectCurrentItem(event) {
-    this.onSelect(event, this.source[this.activeIndex]);
+    this.activeIndex = this.hoverIndex;
+    this.onSelect(event, this.source[this.hoverIndex]);
   }
 
   onActiveIndexChange(index) {
@@ -92,12 +94,14 @@ export class AutoCompletePopupComponent implements ControlValueAccessor {
 
   reset() {
     this.activeIndex = 0;
+    this.hoverIndex = 0;
   }
 
-  scrollToActive(): void {
+  scrollToActive(index?): void {
     const that = this;
     setTimeout(() => {
-      const selectIndex = that.activeIndex;
+      const scrollIndex = index === undefined ? this.activeIndex : index;
+      const selectIndex = scrollIndex;
       const scrollPane: any = that.dropdownUl.nativeElement.children[selectIndex];
       if (scrollPane.scrollIntoViewIfNeeded) {
         scrollPane.scrollIntoViewIfNeeded(false);
@@ -113,25 +117,25 @@ export class AutoCompletePopupComponent implements ControlValueAccessor {
 
   next() {
     if (this.isOpen && this.source && this.source.length) {
-      if (this.activeIndex === this.source.length - 1) {
-        this.activeIndex = 0;
-        this.scrollToActive();
+      if (this.hoverIndex === this.source.length - 1) {
+        this.hoverIndex = 0;
+        this.scrollToActive(this.hoverIndex);
         return;
       }
-      this.activeIndex = this.activeIndex + 1;
-      this.scrollToActive();
+      this.hoverIndex = this.hoverIndex + 1;
+      this.scrollToActive(this.hoverIndex);
     }
   }
 
   prev() {
     if (this.isOpen && this.source && this.source.length) {
-      if (this.activeIndex === 0) {
-        this.activeIndex = this.source.length - 1;
-        this.scrollToActive();
+      if (this.hoverIndex === 0) {
+        this.hoverIndex = this.source.length - 1;
+        this.scrollToActive(this.hoverIndex);
         return;
       }
-      this.activeIndex = this.activeIndex - 1;
-      this.scrollToActive();
+      this.hoverIndex = this.hoverIndex - 1;
+      this.scrollToActive(this.hoverIndex);
     }
   }
 

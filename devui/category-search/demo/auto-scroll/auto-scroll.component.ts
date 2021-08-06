@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ICategorySearchTagItem } from 'ng-devui/category-search';
 import { demoData } from '../demo-data';
 
 @Component({
@@ -9,7 +10,7 @@ export class AutoScrollComponent {
   category = demoData.slice(0, -2);
   groupOrderConfig = ['Basic', 'Personnel-related', 'Time-related', 'User-defined'];
   defaultSearchField = ['creator', 'status'];
-  selectedTags = [
+  selectedTags: ICategorySearchTagItem[] = [
     {
       label: 'status',
       field: 'status',
@@ -199,7 +200,7 @@ export class AutoScrollComponent {
       type: 'textInput',
       group: 'Basic',
       value: {
-        value: '9.64.9-projectman',
+        value: ['9.64.9-projectman'],
         label: '9.64.9-projectman',
       },
       title: 'release version: 9.64.9-projectman',

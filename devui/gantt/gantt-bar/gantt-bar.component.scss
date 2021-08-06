@@ -27,7 +27,7 @@
     background: $devui-initial;
     box-shadow: $devui-shadow-length-base rgba(81, 112, 255, 0.19); // TODO: color not variable
     height: 20px;
-    margin-top: 2px;
+    margin-top: 4px;
     width: 100%;
     border-radius: $devui-border-radius;
 
@@ -40,6 +40,7 @@
     display: none;
     position: absolute;
     height: 24px;
+    top: 2px;
     left: -12px;
     border-radius: $devui-border-radius;
     background-color: $devui-connected-overlay-bg;
@@ -50,6 +51,8 @@
       width: 12px;
       height: 24px;
       cursor: col-resize;
+      display: flex;
+      align-items: center;
 
       &.left {
         left: 0;
@@ -64,7 +67,7 @@
         height: 14px;
         background: $devui-icon-fill;
         border-radius: $devui-border-radius;
-        margin: 5px 5px;
+        margin: 4px 4px;
 
         &.disabled {
           cursor: not-allowed;
@@ -80,7 +83,7 @@
     border-radius: $devui-border-radius 0 0 $devui-border-radius;
     border-radius: $devui-border-radius 0 0 $devui-border-radius;
     height: 20px;
-    margin-top: 2px;
+    margin-top: 4px;
     width: 0;
   }
 
@@ -89,7 +92,7 @@
     position: absolute;
     left: 0;
     bottom: -8px;
-    margin-left: -6px;
+    transform: translateX(-50%);
     cursor: pointer;
 
     & > svg {
@@ -131,8 +134,8 @@
   background: $devui-base-bg;
   box-shadow: $devui-shadow-length-feedback-overlay rgba(81, 112, 255, 0.1);
   border-radius: $devui-border-radius-card;
-  padding: 15px;
-  margin-top: 10px;
+  padding: 16px;
+  margin-top: 8px;
 }
 
 .moving-bg {

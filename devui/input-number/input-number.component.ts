@@ -339,7 +339,7 @@ export class InputNumberComponent implements ControlValueAccessor, OnChanges, On
     this.keyBoardControl(event);
   }
 
-  protectInput(event: InputEvent | ClipboardEvent) {
+  protectInput(event) {
     if (this.disabled) {
       return;
     }

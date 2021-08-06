@@ -117,8 +117,8 @@ On the page:
 | Parameter name | Type | Default value | Description | Jump to Demo |
 | :------------------: | :----------------------------------------: | :----- | :-----------------------------------------------------------: | :------------------------------------------------------- |
 | resizeEnabled | `boolean` | -- | Optional. Whether the column width can be adjusted | [Table interaction](demo#table-interaction) |
-| maxWidth | `string` | -- | Optional. Maximum width during width adjustment. Unit: `px`|
-| minWidth | `string` | -- | Optional. Minimum width for adjusting the width. Unit: `px`|
+| maxWidth | `string` | -- | Optional. Maximum width when you drag it to adjust the width. Unit: `px`.|
+| minWidth | `string` | -- | Optional. Minimum width when you drag it to adjust the width. Unit: `px`|
 | filterable | `boolean` | -- | Optional. Whether the column width can be filtered. | [Table interaction](demo#table-interaction) |
 | closeFilterWhenScroll | `boolean` | -- | Optional. Specifies whether to close the filter box when a table or body is scrolled. | [Table interaction](demo#table-interaction) |
 | customFilterTemplate | `TemplateRef` | -- | Optional. This parameter specifies the customized template for filtering pop-up boxes. | [Table interaction](demo#table-interaction) |
@@ -318,8 +318,8 @@ export enum SortDirection {
 | Parameter | Type | Default value | Description | Jump to Demo |
 | :-------------------------------: | :-----------------------------: | :---------------- | :-------------------------------------------------------------------------------------: | :------------------------------------------------------- |
 | editable | `boolean` | false | Optional. Specifies whether the column can be edited on the d-column. | [edit cell](demo#edit-cell) |
-| maxWidth | `string px` | -- | Optional. Maximum width |
-| minWidth | `string px` | -- | Optional. Minimum width |
+| maxWidth | `string px` | -- | Optional.  Maximum width when you drag it to adjust the width, Unit: `px` |
+| minWidth | `string px` | -- | Optional.  Minimum width when you drag it to adjust the width, Unit: `px` |
 | field | `string` | -- | Required. Fields in this column | [Basic usage](demo#basic-usage) |
 | header | `string` | -- | Text in the column header | [Basic usage](demo#basic-usage) |
 | sortable | `boolean` | -- | Optional. indicating whether to sort data | [Table interaction](demo#table-interaction) |

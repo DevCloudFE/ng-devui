@@ -85,7 +85,7 @@ export class LazyloadCascaderComponent {
     console.log(value);
   }
 
-  loadChildren = (val: CascaderItem) => {
+  loadChildren: (val: CascaderItem) => Promise<CascaderItem[]> = (val: CascaderItem) => {
     if (val.value === 1) {
       return new Promise((resolve, rject) => {
         setTimeout(() => {

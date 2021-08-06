@@ -18,7 +18,7 @@
       popper-activator
     >
       {{ !valueType ? placeholder : '' }}
-      <div class="devui-select-item" *ngIf="valueType === 'object' && enableLabelization">
+      <div class="devui-select-item" *ngIf="valueType === 'object' && enableLabelization && !customItemTemplate">
         <span class="devui-select-item-content">{{ value[treeNodeTitleKey] }}</span>
         <span *ngIf="!disabled" class="devui-select-item-clear-icon" (click)="clearValue($event, value)">
           <svg
@@ -39,10 +39,13 @@
           </svg>
         </span>
       </div>
-      <div class="devui-select-item devui-no-label-item" *ngIf="valueType === 'object' && !enableLabelization">
+      <div class="devui-select-item devui-no-label-item" *ngIf="valueType === 'object' && !enableLabelization && !customItemTemplate">
         {{ value[treeNodeTitleKey] }}
       </div>
-      <ul class="devui-select-list" *ngIf="valueType === 'array' && enableLabelization">
+      <div class="devui-select-item devui-no-label-item" *ngIf="valueType === 'object' && customItemTemplate">
+        <ng-template [ngTemplateOutlet]="customItemTemplate" [ngTemplateOutletContext]="{ item: value }"></ng-template>
+      </div>
+      <ul class="devui-select-list" *ngIf="valueType === 'array' && enableLabelization && !customItemTemplate">
         <li class="devui-select-item" *ngFor="let item of value; let i = index">
           <span class="devui-select-item-content">{{ item[treeNodeTitleKey] }}</span>
           <span *ngIf="!disabled" class="devui-select-item-clear-icon" (click)="clearValue($event, item, i)">
@@ -65,10 +68,15 @@
           </span>
         </li>
       </ul>
-      <ul class="devui-select-list" *ngIf="valueType === 'array' && !enableLabelization">
+      <ul class="devui-select-list" *ngIf="valueType === 'array' && !enableLabelization && !customItemTemplate">
         <li class="devui-select-item devui-no-label-item" *ngFor="let item of value; let i = index">
           {{ item[treeNodeTitleKey] }}
           <span *ngIf="valueLength && i < valueLength - 1">, </span>
+        </li>
+      </ul>
+      <ul class="devui-select-list" *ngIf="valueType === 'array' && customItemTemplate">
+        <li class="devui-select-item devui-no-label-item" *ngFor="let item of value">
+          <ng-template [ngTemplateOutlet]="customItemTemplate" [ngTemplateOutletContext]="{ item: item }"></ng-template>
         </li>
       </ul>
     </div>

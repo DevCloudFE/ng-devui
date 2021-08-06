@@ -1,0 +1,20 @@
+<h3 class="devui-h3-title">{{ 'components.design-animation.AnimationDemo.instance.tableTitle' | translate }}</h3>
+<d-data-table #datatable [dataSource]="animation" [scrollable]="true" [type]="'striped'">
+  <d-column
+    field="name"
+    header="{{ 'components.design-animation.AnimationDemo.instance.table.animationName' | translate }}"
+    [width]="'150px'"
+  >
+  </d-column>
+  <d-column
+    field="value"
+    header="{{ 'components.design-animation.AnimationDemo.instance.table.animationValue' | translate }}"
+    [width]="'150px'"
+  ></d-column>
+  <d-column
+    field="description"
+    header="{{ 'components.design-animation.AnimationDemo.instance.table.description' | translate }}"
+    [width]="'200px'"
+  >
+  </d-column>
+</d-data-table>

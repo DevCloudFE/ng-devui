@@ -1,5 +1,5 @@
 import { Component, DebugElement, Input, TemplateRef, ViewChild } from '@angular/core';
-import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
+import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -78,7 +78,7 @@ describe('dialog', () => {
     let component: TestDialogComponent;
     let domHelper: DomHelper<TestDialogComponent>;
 
-    beforeEach(waitForAsync(() => {
+    beforeEach(async(() => {
       TestBed.configureTestingModule({
         imports: [ModalModule, NoopAnimationsModule, ButtonModule],
         declarations: [TestDialogComponent, ModalTestComponent],
@@ -368,7 +368,7 @@ describe('modal', () => {
     let component: TestModalComponent;
     let domHelper: DomHelper<TestModalComponent>;
 
-    beforeEach(waitForAsync(() => {
+    beforeEach(async(() => {
       TestBed.configureTestingModule({
         imports: [ModalModule, NoopAnimationsModule, ButtonModule],
         declarations: [TestModalComponent, OpenModalComponent],
@@ -422,7 +422,7 @@ describe('modal', () => {
     let component: TestModalComponent;
     let domHelper: DomHelper<TestModalComponent>;
 
-    beforeEach(waitForAsync(() => {
+    beforeEach(async(() => {
       TestBed.configureTestingModule({
         imports: [ModalModule, NoopAnimationsModule, ButtonModule],
         declarations: [TestModalComponent, ModalAlertComponent],

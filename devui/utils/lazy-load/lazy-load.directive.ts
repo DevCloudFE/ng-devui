@@ -8,7 +8,7 @@ export class LazyLoadDirective implements OnDestroy, OnChanges {
   // 启用懒加载，默认不启用
   @Input() enableLazyLoad = false;
   // 滚动监听的目标，默认是宿主，
-  @Input() target: ElementRef;
+  @Input() target: ElementRef | Window;
   // 加载更多
   @Output() loadMore = new EventEmitter<any>();
 

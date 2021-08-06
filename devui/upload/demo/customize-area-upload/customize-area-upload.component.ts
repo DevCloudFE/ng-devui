@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IFileOptions, IUploadOptions } from 'ng-devui/upload';
+import { FileUploader, IFileOptions, IUploadOptions } from 'ng-devui/upload';
 
 @Component({
   selector: 'd-customize-area-upload',
@@ -10,7 +10,7 @@ import { IFileOptions, IUploadOptions } from 'ng-devui/upload';
 export class CustomizeAreaUploadComponent {
   message: Array<Object> = [];
   uploadedFiles: Array<Object> = [];
-  fileUploaders: Array<Object> = [];
+  fileUploaders: Array<FileUploader> = [];
   isDropOver = false;
   uploadOptions: IUploadOptions = {
     uri: '/upload',

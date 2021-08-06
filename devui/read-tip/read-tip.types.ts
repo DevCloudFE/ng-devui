@@ -1,7 +1,7 @@
 import { TemplateRef } from '@angular/core';
 import { Observable } from 'rxjs';
 
-export type PositionType =
+export type ReadTipPositionType =
   | 'left'
   | 'right'
   | 'top'
@@ -20,7 +20,7 @@ export interface ReadTipOptions {
   showAnimate?: boolean; // default is false
   mouseenterTime?: number;
   mouseleaveTime?: number;
-  position?: PositionType | PositionType[];
+  position?: ReadTipPositionType | ReadTipPositionType[];
   overlayClassName?: string;
   appendToBody?: boolean;
   rules: ReadTipRules;
@@ -37,7 +37,7 @@ export interface ReadTipRule {
   showAnimate?: boolean; // default is false
   mouseenterTime?: number;
   mouseleaveTime?: number;
-  position?: PositionType | PositionType[];
+  position?: ReadTipPositionType | ReadTipPositionType[];
   overlayClassName?: string;
   appendToBody?: boolean;
   dataFn?: ({

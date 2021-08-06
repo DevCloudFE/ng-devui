@@ -10,7 +10,7 @@ import { images } from '../image-mock';
 export class CustomOpenComponent {
   images = images;
 
-  customSub = new Subject();
+  customSub = new Subject<HTMLElement>();
   imageDatas = [
     { src: JPGTESTIMG},
     { src: JPGTESTIMG2 }

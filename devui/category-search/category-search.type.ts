@@ -1,6 +1,6 @@
 import { TemplateRef } from '@angular/core';
 
-export type CategorySearchTagType = 'radio' | 'checkbox' | 'dateRange' | 'label' | 'textInput' | 'numberRange' | 'treeSelect';
+export type CategorySearchTagType = 'radio' | 'checkbox' | 'dateRange' | 'label' | 'textInput' | 'numberRange' | 'treeSelect' | 'keyword';
 /**
  * 候选tag数据配置项
  */
@@ -16,7 +16,7 @@ export interface ICategorySearchTagItem {
   /**
    * 配置项可生产的tag类型
    */
-  type: CategorySearchTagType;
+  type?: CategorySearchTagType;
   /**
    * 配置项所属的分组
    */
@@ -24,11 +24,11 @@ export interface ICategorySearchTagItem {
   /**
    * tag 值的选择项数据
    */
-  options: Array<ITagOption>;
+  options?: Array<ITagOption>;
   /**
    * 用于显示的 tag 值的键值，如未设置默认取label
    */
-  filterKey?: 'label';
+  filterKey?: string | 'label';
   /**
    * 用于显示的label类型中色值的键值，如未设置默认取color
    */
@@ -42,8 +42,9 @@ export interface ICategorySearchTagItem {
    */
   value?: {
     label?: string;
-    value: Array<ITagOption>;
+    value?: Array<ITagOption|number|string>;
     cache?: Array<ITagOption>;
+    [propName: string]: any;
   };
   [propName: string]: any;
 }

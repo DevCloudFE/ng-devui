@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ICategorySearchTagItem } from 'ng-devui/category-search';
 import { demoData } from '../demo-data';
 
 @Component({
@@ -8,7 +9,7 @@ import { demoData } from '../demo-data';
 export class BasicComponent {
   category = demoData.slice(0, -2);
   defaultSearchField = ['creator', 'status'];
-  selectedTags = [
+  selectedTags: ICategorySearchTagItem[] = [
     {
       label: 'status',
       field: 'status',

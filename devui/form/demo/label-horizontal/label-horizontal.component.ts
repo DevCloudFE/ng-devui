@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormLayout } from 'ng-devui/form';
 
 @Component({
   selector: 'd-form-demo-label-horizontal',
@@ -7,6 +8,7 @@ styleUrls: ['./label-horizontal.component.css']
 
 })
 export class LabelHorizontalComponent implements OnInit {
+  layoutDirection: FormLayout = FormLayout.Horizontal;
   inputDemoConfig: any;
   textareaDemoConfig: any;
   selectDemoConfig: any;

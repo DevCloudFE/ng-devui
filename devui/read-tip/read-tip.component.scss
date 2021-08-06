@@ -38,7 +38,7 @@
   }
 
   &.top > .arrow {
-    margin-left: -7px;
+    transform: translateX(-50%);
     border-bottom-width: 0;
     border-top-color: $devui-feedback-overlay-bg;
     bottom: -8px;
@@ -52,7 +52,7 @@
   }
 
   &.bottom > .arrow {
-    margin-left: -7px;
+    transform: translateX(-50%);
     border-top-width: 0;
     border-bottom-color: $devui-feedback-overlay-bg;
     top: -8px;
@@ -90,28 +90,28 @@
   }
 
   &.top {
-    margin-top: -10px;
+    margin-top: -8px;
     box-shadow: $devui-shadow-length-feedback-overlay $devui-shadow;
   }
 
   &.bottom {
-    margin-top: 10px;
+    margin-top: 8px;
     box-shadow: $devui-shadow-length-feedback-overlay $devui-shadow;
   }
 
   &.left {
-    margin-left: -10px;
+    margin-left: -8px;
     box-shadow: $devui-shadow-length-feedback-overlay $devui-shadow;
   }
 
   &.right {
-    margin-left: 10px;
+    margin-left: 8px;
     box-shadow: $devui-shadow-length-feedback-overlay $devui-shadow;
   }
 }
 
 .devui-popover-content {
-  padding: 5px 14px;
+  padding: 4px 12px;
 
   .read-tip-container {
     .title {
@@ -182,5 +182,5 @@
 }
 
 .devui-popover-content {
-  padding: 5px 14px;
+  padding: 4px 12px;
 }

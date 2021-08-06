@@ -73,12 +73,15 @@ Triggered when the | dropdownToggle | `EventEmitter<boolean>` | -- | drop-down p
 | showTime | `boolean` | false | Optional. Indicates whether the time can be configured in date mode. | |
 | startIndexOfWeek | `number` | 0 |: start time of a week. The value 0 indicates Sunday and 6 indicates Saturday. The value is the same as that of Date.getDay(). | |
 | activeRangeType | `start' \| 'end'`|'start' | Optional. Activation start or end date in range mode | |
+| showRangeHeader | `boolean` | 'true' | Indicates whether to display the header to display the input of range switching in range mode. | |
+| Splitter | `string` | '-' | Optional, date separator in range mode | |
 
 ## d-datepicker-static-panel event
 
 | Parameter | Type | Default | Description | Jump to Demo |
 | :-------: | :-------: | :-------: | :-------: | :-------: |
 | confirmEvent | `EventEmitter<Date[]>` | -- | Triggered after the OK button is clicked. The current Date range is returned. | |
+| cancelEvent | `EventEmitter<void>` | -- | Triggered after the Cancel button is clicked | |
 
 # ngModel
 

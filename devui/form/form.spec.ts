@@ -1,5 +1,5 @@
 import { Component, DebugElement } from '@angular/core';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { FormDirective } from './form.directive';
 import { FormModule } from './form.module';
@@ -29,7 +29,7 @@ class TestFormComponent {
 }
 
 describe('dForm', () => {
-  beforeEach(waitForAsync(() => {
+  beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [FormModule],
       declarations: [TestFormComponent]

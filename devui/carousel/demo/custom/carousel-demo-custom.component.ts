@@ -1,4 +1,5 @@
-import { Component, ViewChildren } from '@angular/core';
+import { Component } from '@angular/core';
+import { ArrowTrigger } from 'ng-devui/carousel';
 
 @Component({
   selector: 'd-carousel-demo-custom',
@@ -9,5 +10,5 @@ export class CarouselDemoCustomComponent {
   array = [1, 2, 3, 4];
   height = '200px';
   showDots = true;
-  arrowTrigger = 'never';
+  arrowTrigger: ArrowTrigger = 'never';
 }

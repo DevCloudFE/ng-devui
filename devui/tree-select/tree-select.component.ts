@@ -18,7 +18,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
-import { ICheckboxInput, ITreeItem, OperableTreeComponent } from 'ng-devui/tree';
+import { ICheckboxInput, ITreeItem, OperableTreeComponent, TreeNode } from 'ng-devui/tree';
 import { addClassToOrigin, removeClassFromOrigin } from 'ng-devui/utils';
 import { DevConfigService, WithConfig } from 'ng-devui/utils/globalConfig';
 import { Subject, Subscription } from 'rxjs';
@@ -120,6 +120,7 @@ export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterV
   @Input() iconTemplatePosition: string;
   @Input() iconTemplateInput: TemplateRef<any>;
   @Input() enableLabelization = true;
+  @Input() customItemTemplate: TemplateRef<any>;
   @Input() customViewTemplate: TemplateRef<any>;
   @Input() customViewDirection: 'bottom' | 'right' | 'left' = 'bottom';
   @ViewChild('selectHost', { static: true }) selectHost: ElementRef;
@@ -149,7 +150,7 @@ export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterV
   userAgent: string;
   destroy$ = new Subject();
   validVirtualScrollHeight: number;
-  private _value: object | Array<any>;
+  private _value: object | Array<any> | any;
   private _isOpen = false;
   private _sourceTree = [];
   private _allowClear: boolean;
@@ -324,7 +325,7 @@ export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterV
     }
   }
 
-  onOperableNodeSelected(selectedNode: ITreeItem) {
+  onOperableNodeSelected(selectedNode: TreeNode) {
     if (!this.multiple) {
       if (this.leafOnly && selectedNode.data.isParent) {
         return;

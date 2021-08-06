@@ -4,7 +4,7 @@
 @import '../style/core/_font';
 
 .modal-header {
-  padding: 30px 30px 0 30px;
+  padding: 32px 32px 0 32px;
   height: 56px;
   position: relative;
   border: none; // 覆盖bootStrap默认样式
@@ -22,8 +22,8 @@
 
   button.close {
     position: absolute;
-    right: 16px;
-    top: 16px;
+    right: 20px;
+    top: 20px;
     font-size: $devui-font-size-icon;
     font-weight: bold;
     line-height: 1;
@@ -51,20 +51,36 @@
 .header-alert-icon {
   display: inline-block;
   vertical-align: middle;
-  margin-right: 5px;
+  margin-right: 8px;
   width: 24px;
   height: 24px;
-  line-height: 24px;
+  line-height: 16px;
   text-align: center;
-  margin-top: -2px; // 使图标对其
 
-  path.devui-icon-warning-outer {
-    fill: $devui-warning-line;
-  }
+  .devui-icon {
+    width: 24px;
+    height: 24px;
 
-  path.devui-icon-warning-inner {
-    fill: $devui-light-text;
-    stroke: $devui-light-text;
+    circle,
+    polygon {
+      fill: $devui-light-text;
+    }
+
+    &.devui-icon-success path {
+      fill: $devui-success;
+    }
+
+    &.devui-icon-warning path {
+      fill: $devui-warning-line;
+    }
+
+    &.devui-icon-info path {
+      fill: $devui-info;
+    }
+
+    &.devui-icon-error path {
+      fill: $devui-danger;
+    }
   }
 }
 

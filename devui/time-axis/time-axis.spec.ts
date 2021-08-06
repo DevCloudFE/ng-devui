@@ -61,7 +61,8 @@ describe('time-axis base', () => {
       expect(ul.classList).toContain('devui-time-axis-vertical');
 
       for (let i = 0; i < timeAxisDataList.length; i++) {
-        expect(lis[i].querySelector(`.devui-time-axis-item-type-${timeAxisDataList[i].type}`)).not.toBeNull();
+        const type = timeAxisDataList[i].type === 'success' ? 'right' : timeAxisDataList[i].type;
+        expect(lis[i].querySelector(`.devui-time-axis-item-type-${type}`)).not.toBeNull();
       }
     });
 

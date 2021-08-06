@@ -1,3 +1,91 @@
+@import '../style/theme/color';
+
 :host {
   display: inline-block;
+}
+
+.devui-calendar-header {
+  padding: 8px 16px;
+  border-bottom: 1px solid $devui-dividing-line;
+}
+
+.devui-range-picker {
+  padding: 0 8px;
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 24px;
+
+  .devui-input {
+    height: 26px;
+    padding: 4px 8px;
+    width: calc(50% - 18px);
+
+    &.devui-active-input {
+      color: $devui-brand;
+    }
+  }
+
+  .devui-date-input-active-bar {
+    display: block;
+    max-width: calc(50% - 48px);
+    height: 1px;
+    background-color: $devui-brand-foil;
+    position: absolute;
+    bottom: 0;
+
+    &.devui-start-side {
+      left: 35px;
+    }
+
+    &.devui-end-side {
+      left: calc(50% + 20px);
+    }
+  }
+
+  &-icon {
+    vertical-align: bottom;
+  }
+
+  .close-icon-wrapper {
+    padding: 0 8px;
+    visibility: hidden;
+    position: absolute;
+    right: 0;
+    top: 0;
+    line-height: 25px;
+
+    .close-icon {
+      background-color: $devui-line;
+      border-radius: 50%;
+      width: 12px;
+      height: 12px;
+      display: inline-block;
+      line-height: 12px;
+
+      svg path {
+        fill: $devui-light-text;
+      }
+
+      &:hover {
+        background-color: $devui-icon-fill-active;
+      }
+    }
+  }
+
+  &.devui-has-value:hover .close-icon-wrapper {
+    visibility: visible;
+  }
+
+  &:not(.devui-disabled) .close-icon-wrapper {
+    cursor: pointer;
+  }
+}
+
+.devui-input-group > .devui-input {
+  display: inline-block;
+
+  &::-ms-clear {
+    display: none;
+  }
 }

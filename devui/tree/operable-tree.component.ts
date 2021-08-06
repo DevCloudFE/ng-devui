@@ -396,9 +396,10 @@ export class OperableTreeComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-  onInputChange(currentValue, treeNode) {
+  onInputChange(event, treeNode) {
+    const targe = event.target as HTMLInputElement;
     this.editValueChange.emit({
-      value: currentValue, callback: (validateInfo) => {
+      value: targe.value, callback: (validateInfo) => {
         if (validateInfo && validateInfo.errTips) {
           treeNode.data.errTips = validateInfo.errTips;
           treeNode.data.errTipsPosition = validateInfo.errTipsPosition || 'top';

@@ -1,5 +1,5 @@
 import { Component, DebugElement } from '@angular/core';
-import { ComponentFixture, fakeAsync, flush, TestBed, tick, waitForAsync } from '@angular/core/testing';
+import { async, ComponentFixture, fakeAsync, flush, TestBed, tick } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { of } from 'rxjs';
@@ -54,7 +54,7 @@ describe('radio-group', () => {
   let radios: DebugElement[];
   let domHelper: DomHelper<TestRadioGroupComponent | TestRadioItemGroupComponent>;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [RadioModule, FormsModule],
       declarations: [TestRadioGroupComponent, TestRadioItemGroupComponent],

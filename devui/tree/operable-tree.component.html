@@ -181,7 +181,7 @@
             [(ngModel)]="treeNode.data.title"
             (blur)="onBlurEdit(treeNode)"
             (keyup.enter)="onBlurEdit(treeNode)"
-            (input)="onInputChange($event.target.value, treeNode)"
+            (input)="onInputChange($event, treeNode)"
             dPopover
             [content]="treeNode.data.errTips"
             [position]="treeNode.data.errTipsPosition"
@@ -425,7 +425,7 @@
             [(ngModel)]="treeNode.data.title"
             (blur)="onBlurEdit(treeNode)"
             (keyup.enter)="onBlurEdit(treeNode)"
-            (input)="onInputChange($event.target.value, treeNode)"
+            (input)="onInputChange($event, treeNode)"
             dPopover
             [content]="treeNode.data.errTips"
             [position]="treeNode.data.errTipsPosition"

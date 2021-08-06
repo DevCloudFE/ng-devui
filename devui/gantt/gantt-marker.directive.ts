@@ -10,7 +10,7 @@ export class GanttMarkerDirective implements OnChanges, OnDestroy {
   @Input() monthMark = false;
   @Input() weekend = false;
   @Input() today = false;
-  @Input() milestone = false;
+  @Input() milestone = '';
   @Input() unit: GanttScaleUnit;
   @Input() date: Date;
   @Input() last: boolean;

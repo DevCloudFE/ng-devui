@@ -14,10 +14,6 @@ import {
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-
-import { Observable } from 'rxjs';
-import { of } from 'rxjs/internal/observable/of';
-
 import { CheckBoxModule } from 'ng-devui/checkbox';
 import {
   DataTableComponent,
@@ -33,7 +29,8 @@ import {
 import { InputNumberModule } from 'ng-devui/input-number';
 import { SelectModule } from 'ng-devui/select';
 import { TooltipModule } from 'ng-devui/tooltip';
-
+import { Observable } from 'rxjs';
+import { of } from 'rxjs/internal/observable/of';
 import { I18nModule } from '../i18n';
 import { DomHelper } from '../utils/testing/dom-helper';
 import { DataTableModule } from './data-table.module';
@@ -837,7 +834,7 @@ describe('data-table', () => {
       tick();
       fixture.detectChanges();
 
-      document.dispatchEvent(new Event('click'));
+      document.dispatchEvent(new Event('mousedown'));
       tick();
       fixture.detectChanges();
       row1Column1 = debugEl.query(By.css('table.devui-table tbody tr td .cell-container .cell-container-inner span'));
@@ -888,7 +885,7 @@ describe('data-table', () => {
       debugEl.query(By.css('table.devui-table tbody tr td span.cell-modify')).nativeElement.dispatchEvent(new Event('click'));
       tick();
       fixture.detectChanges();
-      document.dispatchEvent(new Event('click'));
+      document.dispatchEvent(new Event('mousedown'));
       tick();
       fixture.detectChanges();
       const inputRow1Column1 = debugEl.query(
@@ -904,7 +901,7 @@ describe('data-table', () => {
       debugEl.query(By.css('table.devui-table tbody tr td span.cell-modify')).nativeElement.dispatchEvent(new Event('click'));
       tick();
       fixture.detectChanges();
-      document.dispatchEvent(new Event('click'));
+      document.dispatchEvent(new Event('mousedown'));
       tick();
       fixture.detectChanges();
       const inputRow1Column12 = debugEl.query(
@@ -923,7 +920,7 @@ describe('data-table', () => {
         By.css('table.devui-table tbody tr td .devui-input-group input.devui-form-control')
       );
       expect(inputRow1Column1).toBeTruthy();
-      document.dispatchEvent(new Event('click'));
+      document.dispatchEvent(new Event('mousedown'));
       tick();
       fixture.detectChanges();
       flush();
@@ -960,7 +957,7 @@ describe('data-table', () => {
       debugEl.query(By.css('table.devui-table tbody tr td span.cell-modify')).nativeElement.dispatchEvent(new Event('click'));
       tick();
       fixture.detectChanges();
-      document.dispatchEvent(new Event('click'));
+      document.dispatchEvent(new Event('mousedown'));
       tick();
       fixture.detectChanges();
       const inputRow1Column1 = debugEl.query(
@@ -976,7 +973,7 @@ describe('data-table', () => {
       debugEl.query(By.css('table.devui-table tbody tr td span.cell-modify')).nativeElement.dispatchEvent(new Event('click'));
       tick();
       fixture.detectChanges();
-      document.dispatchEvent(new Event('click'));
+      document.dispatchEvent(new Event('mousedown'));
       tick();
       fixture.detectChanges();
       const inputRow1Column12 = debugEl.query(
@@ -993,7 +990,7 @@ describe('data-table', () => {
       debugEl.query(By.css('table.devui-table tbody tr td span.cell-modify')).nativeElement.dispatchEvent(new Event('click'));
       tick();
       fixture.detectChanges();
-      document.dispatchEvent(new Event('click'));
+      document.dispatchEvent(new Event('mousedown'));
       tick();
       fixture.detectChanges();
       const inputRow1Column1 = debugEl.query(

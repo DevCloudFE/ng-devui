@@ -10,15 +10,21 @@
   cursor: pointer;
   display: block;
   width: 100%;
-  padding: 8px 10px;
+  padding: 8px 12px;
   clear: both;
   border: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  line-height: 14px;
+}
 
-  &.selected:not(.disabled) {
-    color: $devui-brand-active;
+.devui-dropdown-menu {
+  .devui-dropdown-item:not(.disabled) {
+    &.selected {
+      color: $devui-list-item-active-text;
+      background-color: $devui-list-item-active-bg;
+    }
   }
 }
 
@@ -26,7 +32,7 @@
 .devui-is-searching-template {
   display: block;
   width: 100%;
-  padding: 8px 10px;
+  padding: 8px 12px;
   clear: both;
   border: 0;
   overflow: hidden;
@@ -35,6 +41,7 @@
   cursor: not-allowed;
   background-color: $devui-disabled-bg;
   color: $devui-disabled-text;
+  line-height: 14px;
 
   &:hover,
   &:active,
@@ -61,5 +68,5 @@ ul.devui-list-unstyled {
 
 .devui-popup-tips {
   color: $devui-text-weak; // TODO: Color-Question
-  padding: 3px 1em;
+  padding: 4px 12px;
 }

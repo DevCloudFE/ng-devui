@@ -10,10 +10,7 @@ import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
 import { TreeSelectModule } from 'ng-devui/tree-select';
 import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
-import {
-  TreeSelectAppendToComponent,
-  TreeSelectModalComponent
-} from '../demo/append-to/tree-select-append-to.component';
+import { TreeSelectAppendToComponent, TreeSelectModalComponent } from '../demo/append-to/tree-select-append-to.component';
 import { TreeSelectBasicComponent } from '../demo/basic/tree-select-basic.component';
 import { TreeSelectCustomIconComponent } from '../demo/custom-icon/tree-select-custom-icon.component';
 import { TreeSelectHooksComponent } from '../demo/hooks/tree-select-hooks.component';
@@ -22,7 +19,7 @@ import { TreeSelectKeysComponent } from '../demo/keys/tree-select-keys.component
 import { LabelizationComponent } from '../demo/labelization/labelization.component';
 import { TreeSelectLeafOnlyComponent } from '../demo/leaf-only/tree-select-leaf-only.component';
 import { TreeSelectSearchableComponent } from '../demo/searchable/tree-select-searchable.component';
-import { TreeSelectCustomTemplateComponent } from './item-template/custom-template.component';
+import { TreeSelectCustomTemplateComponent } from './custom-template/custom-template.component';
 import { TreeSelectDemoComponent } from './tree-select-demo.component';
 import { TreeSelectVirtualScrollComponent } from './virtual-scroll/tree-select-virtual-scroll.component';
 
@@ -40,25 +37,24 @@ import { TreeSelectVirtualScrollComponent } from './virtual-scroll/tree-select-v
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'demo'
+        redirectTo: 'demo',
       },
       {
-        path: 'demo', component: TreeSelectDemoComponent
+        path: 'demo',
+        component: TreeSelectDemoComponent,
       },
       {
         path: 'api',
         component: DevUIApiComponent,
         data: {
           'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),
-          'en-us': require('!html-loader!markdown-loader!../doc/api-en.md')
-        }
-      }
+          'en-us': require('!html-loader!markdown-loader!../doc/api-en.md'),
+        },
+      },
     ]),
-    ModalModule
+    ModalModule,
   ],
-  exports: [
-    TreeSelectDemoComponent
-  ],
+  exports: [TreeSelectDemoComponent],
   declarations: [
     TreeSelectDemoComponent,
     TreeSelectBasicComponent,
@@ -72,10 +68,9 @@ import { TreeSelectVirtualScrollComponent } from './virtual-scroll/tree-select-v
     LabelizationComponent,
     TreeSelectKeysComponent,
     TreeSelectIconParentComponent,
-    TreeSelectVirtualScrollComponent
+    TreeSelectVirtualScrollComponent,
   ],
   
   providers: [],
 })
-export class TreeSelectDemoModule {
-}
+export class TreeSelectDemoModule {}

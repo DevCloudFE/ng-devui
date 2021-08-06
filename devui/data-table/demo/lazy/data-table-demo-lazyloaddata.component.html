@@ -1,12 +1,12 @@
 <d-data-table
   [dataSource]="lazyDataSource"
-  lazy="true"
+  [lazy]="true"
   (loadMore)="loadMore($event)"
-  scrollable="true"
+  [scrollable]="true"
   maxHeight="400px"
   dLoading
   [showLoading]="showLoading"
-  backdrop="true"
+  [backdrop]="true"
 >
   <thead dTableHead>
     <tr dTableRow>

@@ -253,7 +253,8 @@ export default {
     seeMore: 'See more',
     selected: 'Selected',
     switchToStart: 'Switch To Start',
-    switchToEnd: 'Switch To End'
+    switchToEnd: 'Switch To End',
+    keyword: 'Keyword',
   },
   userGuide: {
     guide: 'Guide',

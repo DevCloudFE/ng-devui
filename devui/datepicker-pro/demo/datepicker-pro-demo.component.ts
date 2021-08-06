@@ -85,6 +85,7 @@ export class DatepickerProDemoComponent implements OnInit, OnDestroy {
       { dAnchorLink: 'host-template', value: values['host-template']  },
       { dAnchorLink: 'datepicker-pro-static-panel', value: values['datepicker-pro-static-panel']},
       { dAnchorLink: 'select-type', value: values['select-type']  },
+      { dAnchorLink: 'datepicker-pro-tab-type', value: values['tab-typeDemo']}
     ];
   }
 

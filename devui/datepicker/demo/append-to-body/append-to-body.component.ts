@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { AppendToBodyDirection } from 'ng-devui/utils';
 
 @Component({
     selector: 'd-append-to-body',
@@ -8,7 +9,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 })
 export class DatepickerDemoAppendToBodyComponent {
   selectedDate1 = null;
-  appendToBodyDirections = ['centerDown', 'centerUp'];
+  appendToBodyDirections: AppendToBodyDirection[] = ['centerDown', 'centerUp'];
 
   getValue(value) {
     console.log(value);

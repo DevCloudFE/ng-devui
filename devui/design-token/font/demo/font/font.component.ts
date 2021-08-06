@@ -16,7 +16,7 @@ export class FontComponent implements OnInit, OnDestroy {
 
   oldFonts = [];
 
-  activeTab = 'curFont';
+  activeTab: string | number = 'curFont';
 
   constructor(private translate: TranslateService) {}
 

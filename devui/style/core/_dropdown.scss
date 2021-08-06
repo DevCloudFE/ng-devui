@@ -217,6 +217,6 @@
 
 .devui-dropdown-menu {
   .devui-dropdown-item {
-    transition: color $devui-animation-duration-fast $devui-animation-ease-in-smooth, background-color $devui-animation-duration-fast $devui-animation-ease-in-smooth;
+    transition: color $devui-animation-duration-fast $devui-animation-ease-in-out-smooth, background-color $devui-animation-duration-fast $devui-animation-ease-in-out-smooth;
   }
 }

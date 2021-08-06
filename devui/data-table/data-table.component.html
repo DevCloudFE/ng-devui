@@ -26,6 +26,7 @@
     </div>
 
     <div
+      #normalScroll
       cdkScrollable
       dLazyLoad
       [enableLazyLoad]="lazy"
@@ -33,7 +34,7 @@
       *ngIf="!virtualScroll; else scrollViewTpl"
       class="devui-scrollbar"
       [ngClass]="{ 'scroll-view': scrollable, 'table-wrap': !fixHeader }"
-      [style.height]="fixHeaderBodyHeight || tableHeight"
+      [style.height]="tableHeight ? tableHeight : null"
       [style.max-height]="maxHeight ? maxHeight : null"
       [style.max-width]="maxWidth ? maxWidth : null"
       [style.width]="!maxWidth ? tableWidth : null"
@@ -107,7 +108,7 @@
     [maxBufferPx]="virtualMaxBufferPx"
     class="devui-scrollbar viewport-wrapper"
     [ngClass]="{ 'scroll-view': scrollable, 'virtual-scroll-wrap': !fixHeader }"
-    [style.height]="fixHeaderBodyHeight || tableHeight"
+    [style.height]="tableHeight ? tableHeight : null"
     [style.max-height]="maxHeight ? maxHeight : null"
     [style.max-width]="maxWidth ? maxWidth : null"
     [style.width]="!maxWidth ? tableWidth : null"

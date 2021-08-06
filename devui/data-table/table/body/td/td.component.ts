@@ -1,7 +1,7 @@
 import {
-    Component, ElementRef, EventEmitter,
-    HostBinding, Input, OnChanges, OnDestroy, OnInit,
-    Output, SimpleChanges
+  Component, ElementRef, EventEmitter,
+  HostBinding, Input, OnChanges, OnDestroy, OnInit,
+  Output, SimpleChanges
 } from '@angular/core';
 import { fromEvent, Observable, Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -99,7 +99,7 @@ export class TableTdComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   bindEditClickEvent() {
-    this.documentClickSubscription = fromEvent(document, 'click').pipe(
+    this.documentClickSubscription = fromEvent(document, 'mousedown').pipe(
       tap((e: Event) => {
         e.stopPropagation();
       })

@@ -23,9 +23,9 @@ svg.svg-icon-search path {
 
   .devui-input {
     height: 28px;
-    padding: 5px 10px;
+    padding: 4px 8px;
     font-size: $devui-font-size;
-    padding-right: 30px;
+    padding-right: 28px;
     text-overflow: ellipsis;
 
     &.devui-icon-left {
@@ -42,7 +42,7 @@ svg.svg-icon-search path {
 
     &-sm {
       height: 26px;
-      padding: 5px 10px;
+      padding: 4px 8px;
       font-size: $devui-font-size;
       padding-right: 24px;
 
@@ -53,13 +53,13 @@ svg.svg-icon-search path {
 
     &-lg {
       height: 46px;
-      padding: 10px 16px;
+      padding: 12px 16px;
       font-size: $devui-font-size-lg;
       line-height: 24px;
       padding-right: 36px;
 
       &.devui-clear-exit:not(.devui-icon-left) {
-        padding-right: 71px;
+        padding-right: 72px;
       }
     }
 
@@ -91,7 +91,7 @@ svg.svg-icon-search path {
     cursor: pointer;
     height: 100%;
     line-height: 28px;
-    padding: 0 10px;
+    padding: 0 12px;
     top: 0;
     right: 0;
     z-index: 2;
@@ -115,6 +115,7 @@ svg.svg-icon-search path {
       width: 34px;
       height: 26px;
       line-height: 26px;
+      padding: 0 8px;
 
       > svg {
         height: 14px;
@@ -139,7 +140,7 @@ svg.svg-icon-search path {
     width: auto;
     top: 0;
     right: 36px;
-    padding: 0 10px;
+    padding: 0 8px;
     pointer-events: all;
     cursor: pointer;
     height: 100%;
@@ -164,7 +165,7 @@ svg.svg-icon-search path {
     &-lg {
       right: 46px;
       line-height: 46px;
-      padding: 0 10px;
+      padding: 0 8px;
     }
 
     &:hover {
