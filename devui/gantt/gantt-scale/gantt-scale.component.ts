@@ -131,7 +131,7 @@ export class GanttScaleComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   private generateDateInfo(date: Date, index): GanttScaleDateInfo {
-    const dateInfo = {
+    const dateInfo: GanttScaleDateInfo = {
       dayOfMonthLabel: '',
       dayOfWeekLabel: '',
       monthLabel: '',

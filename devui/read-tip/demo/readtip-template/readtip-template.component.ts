@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ReadTipOptions } from 'ng-devui/read-tip';
 
 @Component({
   selector: 'd-demo-template',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./readtip-template.component.scss'],
 })
 export class ReadtipTemplateComponent implements OnInit {
-  readTipOptions = {
+  readTipOptions: ReadTipOptions = {
     trigger: 'click',
     showAnimate: false,
     position: 'top-left',

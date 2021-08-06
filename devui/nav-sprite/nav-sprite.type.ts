@@ -9,7 +9,7 @@ export interface SpriteOption {
 export interface NavMenu {
   originEle: HTMLElement;
   label: string;
-  level: string;
+  level: number;
   scrollPosition: {
     top: number;
     startLine: number

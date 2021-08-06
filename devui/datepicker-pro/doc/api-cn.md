@@ -73,12 +73,15 @@ import { DatepickerProModule } from 'ng-devui/datepicker-pro';
 | showTime   |  `boolean` |  false |  可选，date模式下是否可配置时间   |  |
 | startIndexOfWeek | `number` | 0 |  周选择时候，每周的开始时间，0表示周日，6表示周六，与Date.getDay()相同 | |
 | activeRangeType   |  `'start' \| 'end'` |  'start' |  可选，范围模式下激活开始或者结束日期  |  |
+| showRangeHeader   |  `boolean` |  'true' |  可选，在范围模式下是否显示header头来展示范围切换的input  |  |
+| splitter   |  `string` |  '-' |  可选，在范围模式下的日期分隔符 |  |
 
 ## d-datepicker-static-panel 事件
 
 |     参数   |    类型     |     默认   |    说明   |   跳转 Demo   |
 | :-------:  | :-------: | :-------: | :-------: | :-------: |
 | confirmEvent   |  `EventEmitter<Date[]>` |  -- |  点击确定按钮后触发，返回当前的Date范围值   |  |
+| cancelEvent   |  `EventEmitter<void>` |  -- |  点击取消按钮后触发  |  |
 
 
 # ngModel

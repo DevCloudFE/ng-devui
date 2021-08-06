@@ -15,7 +15,7 @@
   &:hover {
     .input-box:not(.disabled) {
       border: 1px solid $devui-form-control-line-hover;
-      padding-right: 26px;
+      padding-right: 24px;
     }
 
     .input-control-buttons:not(.disabled) {
@@ -30,7 +30,7 @@
   &:focus-within {
     .input-box:not(.disabled) {
       border: 1px solid $devui-form-control-line-active;
-      padding-right: 26px;
+      padding-right: 24px;
     }
 
     .input-control-buttons:not(.disabled) {
@@ -44,7 +44,7 @@
 
   .input-box {
     box-sizing: border-box;
-    padding: 5px 10px;
+    padding: 4px 8px;
     font-size: $devui-font-size;
     vertical-align: middle;
     border-radius: $devui-border-radius;
@@ -66,7 +66,7 @@
     display: none;
     position: absolute;
     right: 0;
-    width: 25px;
+    width: 22px;
     height: 100%;
     flex-direction: column;
     justify-content: center;
@@ -94,7 +94,7 @@
       height: 50%;
       line-height: 50%;
       border-width: 0 1px;
-      transition: transform $devui-animation-duration-slow $devui-animation-ease-in-smooth;
+      transition: transform $devui-animation-duration-slow $devui-animation-ease-in-out-smooth;
       display: flex;
       justify-content: center;
       align-items: center;

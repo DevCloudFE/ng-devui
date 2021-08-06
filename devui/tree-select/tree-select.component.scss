@@ -102,7 +102,7 @@
     }
 
     &-animation svg {
-      transition: transform $devui-animation-duration-slow $devui-animation-ease-in-smooth;
+      transition: transform $devui-animation-duration-slow $devui-animation-ease-in-out-smooth;
     }
 
     &.open {

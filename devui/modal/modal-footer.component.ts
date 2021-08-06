@@ -2,6 +2,7 @@ import {
   Component,
   Input
 } from '@angular/core';
+import { IButtonStyle } from 'ng-devui/button';
 
 @Component({
   selector: 'd-modal-footer',
@@ -12,7 +13,7 @@ import {
 export class ModalFooterComponent {
   @Input() buttons: Array<{
     id?: string,
-    cssClass?: string,
+    cssClass?: IButtonStyle,
     text: string,
     handler: ($event: Event) => void,
     btnwidth?: string,

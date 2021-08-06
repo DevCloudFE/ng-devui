@@ -1,11 +1,11 @@
 <d-data-table
   [dataSource]="dataSource"
   tableHeight="360px"
-  scrollable="true"
+  [scrollable]="true"
   [virtualScroll]="true"
-  virtualItemSize="40"
-  virtualMinBufferPx="80"
-  virtualMaxBufferPx="200"
+  [virtualItemSize]="40"
+  [virtualMinBufferPx]="80"
+  [virtualMaxBufferPx]="200"
 >
   <thead dTableHead>
     <tr dTableRow>

@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
+import { SourceConfig } from 'ng-devui/breadcrumb';
 @Component({
   selector: 'd-source-config',
   templateUrl: './source-config.component.html'
 })
 export class SourceConfigComponent {
-  source = [{ title: 'DevUI', showMenu: false, link: '/components/zh-cn/get-start' },
+  source: SourceConfig[] = [{ title: 'DevUI', showMenu: false, link: '/components/zh-cn/get-start' },
   {
     title: 'Breadcrumb', showMenu: true, link: 'components/zh-cn/breadcrumb/demo', noNavigation: true,
     menuList: [

@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { FormLayout } from 'ng-devui/form';
 
 @Component({
   selector: 'd-form-demo-modal-one',
   templateUrl: './modal-one.component.html'
 })
 export class ModalOneComponent implements OnInit {
+  layoutDirection: FormLayout = FormLayout.Vertical;
   inputDemoConfig: any;
   textareaDemoConfig: any;
   selectDemoConfig: any;

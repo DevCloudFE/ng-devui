@@ -22,34 +22,29 @@ export class TimeAxisItemComponent implements OnInit {
   @Input() horizontalAlign = 'center';
   @Output() statusChanged = new EventEmitter<string>();
   _type;
-  dotText: string;
+  dotText = '↻';
 
   @Input()
   set type(type) {
     switch (type) {
       case 'success':
-        this._type = 'success';
-        this.dotText = '✓';
+        this._type = 'right';
         break;
 
       case 'danger':
         this._type = 'danger';
-        this.dotText = '✕';
         break;
 
       case 'warning':
         this._type = 'warning';
-        this.dotText = '!';
         break;
 
       case 'primary':
         this._type = 'primary';
-        this.dotText = '';
         break;
 
       case 'running':
         this._type = 'running';
-        this.dotText = '↻';
         break;
 
       default:

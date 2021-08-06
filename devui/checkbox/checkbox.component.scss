@@ -1,6 +1,7 @@
 @import '../style/mixins/index';
 @import '../style/theme/color';
 @import '../style/theme/corner';
+@import '../style/core/animation';
 
 .devui-checkbox {
   position: relative;
@@ -20,7 +21,7 @@
       opacity: 0;
       transform: scale(0);
       transform-origin: 50% 50%;
-      transition: stroke-dashoffset 0.2s ease-in-out, opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+      transition: stroke-dashoffset $devui-animation-duration-base $devui-animation-ease-in-out, opacity $devui-animation-duration-base $devui-animation-ease-in-out, transform $devui-animation-duration-base $devui-animation-ease-in-out;
     }
   }
 
@@ -28,7 +29,7 @@
     opacity: 1;
     stroke-dashoffset: 0;
     transform: scale(1);
-    transition: stroke-dashoffset 0.3s cubic-bezier(0.755, 0.05, 0.855, 0.06), opacity 0.2s cubic-bezier(0.755, 0.05, 0.855, 0.06);
+    transition: stroke-dashoffset $devui-animation-duration-slow $devui-animation-ease-in-out, opacity $devui-animation-duration-base $devui-animation-ease-in-out;
   }
 
   &.active,
@@ -41,14 +42,14 @@
   &.active:not(.disabled) {
     .devui-checkbox-material {
       background-size: 100% 100%;
-      transition: background-size 0.2s ease-in-out, border-color 0.2s ease-in-out;
+      transition: background-size$devui-animation-duration-base $devui-animation-ease-in-out, border-color $devui-animation-duration-base $devui-animation-ease-in-out;
     }
   }
 
   &.unchecked:not(.disabled) {
     .devui-checkbox-material:not(.custom-color) {
       background-size: 0% 0%;
-      transition: background-size 0.2s ease-in-out, border-color 0.2s ease-in-out;
+      transition: background-size $devui-animation-duration-base $devui-animation-ease-in-out, border-color $devui-animation-duration-base $devui-animation-ease-in-out;
 
       &:hover {
         border-color: $devui-icon-fill-active;
@@ -59,7 +60,7 @@
   &.unchecked:not(.disabled) {
     .devui-checkbox-material.custom-color {
       background-size: 0% 0%;
-      transition: background-size 0.2s ease-in-out, border-color 0.2s ease-in-out;
+      transition: background-size $devui-animation-duration-base $devui-animation-ease-in-out, border-color $devui-animation-duration-base $devui-animation-ease-in-out;
     }
   }
 
@@ -70,7 +71,7 @@
       & > .devui-checkbox-halfchecked-bg {
         opacity: 1;
         transform: scale(0.4288);
-        transition: transform 0.2s cubic-bezier(0.755, 0.05, 0.855, 0.06);
+        transition: transform $devui-animation-duration-base $devui-animation-ease-in-out;
         background-color: $devui-light-text;
       }
     }
@@ -81,7 +82,7 @@
       & > .devui-checkbox-halfchecked-bg {
         opacity: 1;
         transform: scale(0.4288);
-        transition: transform 0.2s cubic-bezier(0.755, 0.05, 0.855, 0.06);
+        transition: transform $devui-animation-duration-base $devui-animation-ease-in-out;
         background-color: $devui-light-text;
       }
     }

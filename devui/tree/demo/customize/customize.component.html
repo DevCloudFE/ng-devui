@@ -1,10 +1,11 @@
-<div style="width: 350px">
+<div style="width: 700px">
   <div class="tree-title">
     <h4>Node</h4>
     <h4>Status</h4>
   </div>
   <div>
     <d-operable-tree
+      #operableTree
       [tree]="data2"
       [treeNodeIdKey]="'id'"
       [treeNodeChildrenKey]="'children'"
@@ -18,8 +19,8 @@
       <ng-template #iconTemplate let-node="node">
         <span [ngClass]="{ 'my-icon': node?.data?.type }" class="{{ node?.data?.type }}"></span>
       </ng-template>
-      <ng-template #nodeTemplate let-node="node">
-        <span *ngIf="!node?.editable" style="margin: 0 10px">{{ node?.title }}</span>
+      <ng-template #nodeTemplate let-node="node" let-completeNode="completeNode">
+        <span *ngIf="!node?.editable" style="margin: 0 10px; cursor: pointer" (click)="activeNode(completeNode)">{{ node?.title }}</span>
         <span class="devui-tree-node__edit" *ngIf="node?.editable">
           <input [(ngModel)]="node.title" (blur)="onBlurEdit(node)" />
         </span>

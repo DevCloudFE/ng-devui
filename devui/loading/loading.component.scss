@@ -37,13 +37,13 @@
   position: relative;
   display: inline-block;
   z-index: $devui-z-index-full-page-overlay;
-  padding: 12px 14px;
+  padding: 12px 12px;
   color: $devui-text;
 }
 
 .devui-busy-default-text {
   display: inline-block;
-  margin-left: 6px;
+  margin-left: 8px;
   max-width: 400px;
   font-size: $devui-font-size;
   text-align: left;

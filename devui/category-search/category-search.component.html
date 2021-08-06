@@ -33,7 +33,7 @@
         dDropDown
         appendToBody
         dDropDownToggle
-        [appendToBodyDirections]="['rightDown', 'rightUp', 'leftDown', ' leftUp']"
+        [appendToBodyDirections]="['rightDown', 'rightUp', 'leftDown', 'leftUp']"
         [closeScope]="checkType(item)"
         (toggleEvent)="resetContent(selectedDropdown, item)"
       >
@@ -120,7 +120,7 @@
           dDropDown
           appendToBody
           [trigger]="'manually'"
-          [appendToBodyDirections]="['rightDown', 'rightUp', 'leftDown', ' leftUp']"
+          [appendToBodyDirections]="['rightDown', 'rightUp', 'leftDown', 'leftUp']"
           [closeScope]="checkType(currentSelectTag)"
           (toggleEvent)="resetContent(inputDropdown)"
         >
@@ -255,7 +255,7 @@
       #saveDropdown="d-dropdown"
       dDropDown
       appendToBody
-      [appendToBodyDirections]="['rightDown', 'rightUp', 'leftDown', ' leftUp']"
+      [appendToBodyDirections]="['rightDown', 'rightUp', 'leftDown', 'leftUp']"
       [closeScope]="'blank'"
       (toggleEvent)="createFilterInputAutoFocus(saveDropdown, createFilterInput, filterNameForm)"
     >
@@ -327,8 +327,8 @@
       #seeMoreDropdown="d-dropdown"
       dDropDown
       appendToBody
-      [alignOrigin]="PrimeContainer"
-      [appendToBodyDirections]="['rightDown', 'rightUp', 'leftDown', ' leftUp']"
+      [alignOrigin]="PrimeContainerRef"
+      [appendToBodyDirections]="['rightDown', 'rightUp', 'leftDown', 'leftUp']"
     >
       <svg
         width="16px"

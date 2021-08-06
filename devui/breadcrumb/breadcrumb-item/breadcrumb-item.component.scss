@@ -5,7 +5,7 @@
 .devui-breadcrumb-font-style {
   font-size: $devui-font-size;
   color: $devui-aide-text;
-  line-height: 20px;
+  line-height: 18px;
 }
 
 .devui-breadcrumb-item {
@@ -35,8 +35,8 @@
   cursor: pointer;
   width: 16px;
   height: 16px;
-  line-height: 20px;
-  margin-right: -5px;
+  line-height: 18px;
+  margin-right: -8px;
   text-align: center;
   outline: none;
 
@@ -71,15 +71,15 @@
 .devui-breadcrumb-separator {
   @extend.devui-breadcrumb-font-style;
 
-  margin: 0 3px;
+  margin: 0 4px;
 }
 
 .devui-breadcrumb-dropdown-menu {
-  padding: 10px 0;
+  padding: 8px 0;
   max-width: 200px;
 
   li {
-    padding: 0 15px;
+    padding: 0 16px;
     font-size: $devui-font-size;
     line-height: 36px;
     overflow: hidden;
@@ -135,15 +135,15 @@ d-search {
 .devui-breadcrumb-item {
   ::ng-deep a,
   ::ng-deep span {
-    transition: color $devui-animation-duration-slow $devui-animation-ease-in-smooth;
+    transition: color $devui-animation-duration-slow $devui-animation-ease-in-out-smooth;
   }
 }
 
 .devui-breadcrumb-down-icon {
-  transition: transform $devui-animation-duration-slow $devui-animation-ease-in-smooth;
+  transition: transform $devui-animation-duration-slow $devui-animation-ease-in-out-smooth;
   transform-origin: center;
 
   svg g path {
-    transition: fill $devui-animation-duration-slow $devui-animation-ease-in-smooth;
+    transition: fill $devui-animation-duration-slow $devui-animation-ease-in-out-smooth;
   }
 }

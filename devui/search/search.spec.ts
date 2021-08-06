@@ -1,5 +1,5 @@
 import { Component, DebugElement } from '@angular/core';
-import { ComponentFixture, fakeAsync, flush, TestBed, tick, waitForAsync } from '@angular/core/testing';
+import { async, ComponentFixture, fakeAsync, flush, TestBed, tick } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { DomHelper } from '../utils/testing/dom-helper';
@@ -26,7 +26,7 @@ describe('search', () => {
   let testComponent: TestSearchComponent;
   let dh: DomHelper<TestSearchComponent>;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [SearchModule, FormsModule],
       declarations: [TestSearchComponent]

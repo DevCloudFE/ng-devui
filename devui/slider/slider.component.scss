@@ -8,18 +8,20 @@
 .devui-slider {
   position: relative;
   width: 100%;
-  padding: 5px 0;
-  margin: 5px 0;
+  padding: 4px 0;
+  margin: 4px 0;
   cursor: pointer;
   box-sizing: border-box;
-  height: 15px;
+  height: 14px;
+  display: flex;
+  align-items: center;
 
   .devui-slider-rail {
     position: absolute;
     background-color: $devui-area;
     height: 5px;
     width: 100%;
-    transition: background-color $devui-animation-duration-base $devui-animation-ease-in-smooth;
+    transition: background-color $devui-animation-duration-base $devui-animation-ease-in-out-smooth;
     border-radius: 4px;
 
     &.disabled {
@@ -55,8 +57,6 @@
     width: 14px;
     height: 14px;
     border-radius: 50%;
-    margin-left: -7px;
-    margin-top: -5px;
     left: 0;
     transition: transform 0.2s ease-in-out;
     border: 2px solid $devui-brand;

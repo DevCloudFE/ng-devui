@@ -55,7 +55,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
   ngOnInit(): void {
     this.currentLang = localStorage.getItem('lang') || this.appLang;
-    this.innerMenuList[2].href = `/components/${this.currentLang}/overview`;
+    this.innerMenuList.find(menu => menu.href === '/components/overview').href = `/components/${this.currentLang}/overview`;
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         const pathArray = this.router.url.split('/');
@@ -77,6 +77,7 @@ export class AppComponent implements OnInit, OnDestroy {
     const versionArr = this.version.split('.');
     this.versionOptions = [
       { name: this.version, link: '/components/get-start', target: '_self' },
+      { name: '11.4.0', link: '/11.4.0/', target: '_self' },
       { name: '10.2.0', link: '/10.2.0/', target: '_self' },
       { name: '9.3.0', link: '/9.3.0/', target: '_self' },
       { name: '8.2.0', link: '/8.2.0/', target: '_self' }
@@ -90,7 +91,7 @@ export class AppComponent implements OnInit, OnDestroy {
     pathArray[2] = this.currentLang;
     this.router.navigateByUrl(pathArray.join('/'));
 
-    this.innerMenuList[2].href = `/components/${this.currentLang}/overview`;
+    this.innerMenuList.find(menu => menu.href === '/components/overview').href = `/components/${this.currentLang}/overview`;
   }
   ngOnDestroy(): void {
     if (this.clickSub) {

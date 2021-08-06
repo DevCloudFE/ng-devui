@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { TransferDataFormat } from 'ng-devui/transfer';
 
 export interface TabsDataFormat {
     tabId: string;
@@ -14,8 +15,8 @@ export interface TabsDataFormat {
 export class TabsTransferComponent implements OnInit {
 
     @Input() data: any;
-    sourceOption: Array<TabsDataFormat>;
-    targetOption: Array<TabsDataFormat>;
+    sourceOption: Array<TransferDataFormat>;
+    targetOption: Array<TransferDataFormat>;
     ngOnInit(): void {
         console.log(this.data);
         this.sourceOption = this.data.sourceOption;

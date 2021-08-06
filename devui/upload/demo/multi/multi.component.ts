@@ -29,8 +29,20 @@ export class MultiComponent {
   fileOptions2: IFileOptions = {
     multiple: true,
     accept: '.xls,.xlsx,.pages,.mp3,.png',
+    webkitdirectory: true
+  };
+  fileOptions3: IFileOptions = {
+    multiple: true,
+    webkitdirectory: true
+  };
+  uploadOptions3: IUploadOptions = {
+    uri: '/upload',
+    method: 'post',
+    maximumSize: 20,
+    checkSameName: true
   };
   uploadedFiles2: Array<Object> = [];
+  uploadedFiles3: Array<Object> = [];
   UPLOADED: string;
   FAILED: string;
   DELETE: string;

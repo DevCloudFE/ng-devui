@@ -144,7 +144,7 @@ export class SliderComponent implements OnInit, OnChanges, ControlValueAccessor,
   private updateStyle(percentage) {
     percentage = Math.min(1, Math.max(0, percentage));
     this.sliderTrack.nativeElement.style.width = `${percentage * 100}%`;
-    this.sliderHandle.nativeElement.style.left = `${percentage * 100}%`;
+    this.sliderHandle.nativeElement.style.left = `calc(${percentage * 100}% - 7px)`;
   }
 
   private registerMouseEventsListeners(): void {

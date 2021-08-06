@@ -12,8 +12,8 @@
     min-height: 24px;
 
     .devui-input {
-      height: 24px;
-      padding: 4px 10px;
+      height: 26px;
+      padding: 4px 8px;
       width: calc(50% - 18px);
 
       &.devui-active-input {
@@ -49,6 +49,23 @@
       right: 0;
       top: 0;
       line-height: 25px;
+
+      .close-icon {
+        background-color: $devui-line;
+        border-radius: 50%;
+        width: 12px;
+        height: 12px;
+        display: inline-block;
+        line-height: 12px;
+
+        svg path {
+          fill: $devui-light-text;
+        }
+
+        &:hover {
+          background-color: $devui-icon-fill-active;
+        }
+      }
     }
 
     &.devui-has-value:hover .close-icon-wrapper {

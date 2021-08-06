@@ -58,10 +58,10 @@
           <div *ngIf="rowItem['genderEdit']" class="customized-editor edit-padding-fix">
             <d-select
               [options]="genderSource"
-              isSearch="true"
+              [isSearch]="true"
               [filterKey]="'label'"
-              autoFocus="true"
-              toggleOnFocus="true"
+              [autoFocus]="true"
+              [toggleOnFocus]="true"
               [appendToBody]="true"
               [(ngModel)]="rowItem.gender"
               (ngModelChange)="onEditEnd(rowItem, 'genderEdit')"

@@ -6,7 +6,7 @@ import { Component, TemplateRef, ViewChild } from '@angular/core';
   styles: [
     `
       d-button {
-        margin-right: 5px;
+        margin-right: 4px;
       }
       :host ::ng-deep .devui-btn-success {
         background: #3dcca6 !important;
@@ -27,6 +27,10 @@ export class BasicComponent {
     switch (type) {
       case 'link':
         this.msgs = [
+          /*
+            TODO:
+            The detail parameter will be deleted in the next major version.
+          */
           { severity: 'info', summary: 'Relative', detail: `<a href="/home" target="_blank">Back to Home Page</a>` },
           { severity: 'info', summary: 'Absolute', content: this.customTemplate, myInfo: 'Devui' },
         ];

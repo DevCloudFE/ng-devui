@@ -31,7 +31,7 @@
     (fileOver)="fileOver($event)"
   >
   </d-single-upload>
-  <div [style.margin-top.px]="10">
+  <div [style.margin-top.px]="8">
     <d-button (btnClick)="customUploadEvent()">Upload</d-button>
   </div>
   <h4>ngModel</h4>
@@ -49,8 +49,8 @@
     [(ngModel)]="selectedFiles"
   >
   </d-single-upload>
-  <div [style.margin-top.px]="10">
-    <d-button style="margin-right: 10px">
+  <div [style.margin-top.px]="8">
+    <d-button style="margin-right: 8px">
       <label for="fileInput" style="cursor: pointer">Select Files</label>
     </d-button>
     <input type="file" id="fileInput" style="visibility: hidden" />

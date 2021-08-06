@@ -11,7 +11,7 @@
   display: flex;
   height: 32px;
   background: transparent;
-  transition: border $devui-animation-duration-slow $devui-animation-ease-in-smooth;
+  transition: border $devui-animation-duration-slow $devui-animation-ease-in-out-smooth;
   background-color: $devui-base-bg;
   border: 1px solid $devui-line;
   margin-bottom: 8px;
@@ -98,9 +98,8 @@
     outline: none;
   }
 
-  .devui-devui-color-block-split-line {
+  .devui-color-block-split-line {
     color: $devui-aide-text;
-    margin: 0 2px;
   }
 
   .devui-color-block-sm {
@@ -117,7 +116,7 @@
 
 .devui-tag-dropdown-menu > li > a {
   height: 32px;
-  padding: 0 10px;
+  padding: 0 12px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -254,7 +253,7 @@ d-tag {
   }
 
   .devui-save-panel-operation-area {
-    padding-bottom: 11px;
+    padding-bottom: 12px;
     display: flex;
     justify-content: center;
 
@@ -270,7 +269,7 @@ d-tag {
   max-width: 300px;
 
   .devui-category-search-group {
-    padding: 8px 10px 0;
+    padding: 8px 12px 0;
   }
 }
 
@@ -314,7 +313,7 @@ d-tag {
     white-space: nowrap;
     display: inline-block;
     vertical-align: bottom;
-    margin: 0 2px;
+    margin: 0 4px;
   }
 
   .devui-checkbox-column-margin {
@@ -342,22 +341,22 @@ d-tag {
   .devui-dropdown-bottom,
   .devui-dropdown-open {
     .devui-dropdown-menu-fix {
-      margin-bottom: 1px;
+      margin-bottom: 0;
     }
   }
 
   .devui-dropdown-menu-fix {
     min-width: 200px;
-    margin-left: -1px;
+    margin-left: 0;
     overflow-y: auto;
     white-space: nowrap;
 
     &.max-height {
-      max-height: 390px;
+      max-height: 405px;
     }
 
     .devui-checkbox-group {
-      padding: 10px 10px 0;
+      padding: 8px 12px 0;
 
       .devui-color-block {
         width: 12px;
@@ -400,8 +399,8 @@ d-tag {
     }
   }
 
-  .devui-dropdown-menu-fix d-date-range-picker .devui-btn-wrapper {
-    display: none !important;
+  .devui-dropdown-menu-fix d-datepicker-calendar {
+    display: block;
   }
 
   .devui-dropdown-menu-template .devui-checkbox-group {
@@ -411,8 +410,8 @@ d-tag {
 
     d-checkbox {
       .devui-checkbox {
-        margin: 0 -10px 0 -10px;
-        padding: 0 10px;
+        margin: 0 -8px 0 -8px;
+        padding: 0 8px;
 
         &:hover {
           background-color: $devui-list-item-hover-bg;
@@ -451,10 +450,10 @@ d-tag {
 
     d-checkbox {
       .devui-checkbox {
-        transition: background-color $devui-animation-duration-fast $devui-animation-ease-in-smooth;
+        transition: background-color $devui-animation-duration-fast $devui-animation-ease-in-out-smooth;
 
         label {
-          transition: color $devui-animation-duration-fast $devui-animation-ease-in-smooth;
+          transition: color $devui-animation-duration-fast $devui-animation-ease-in-out-smooth;
         }
       }
     }

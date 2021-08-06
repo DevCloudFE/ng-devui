@@ -1,5 +1,5 @@
 import { Component, DebugElement, ViewChild } from '@angular/core';
-import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
+import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -49,7 +49,7 @@ describe('slider', () => {
   let handleEl: HTMLElement;
   let handleRect;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [SliderModule, FormsModule, NoopAnimationsModule, PopoverModule],
       declarations: [TestSliderBasicComponent]
@@ -109,7 +109,7 @@ describe('slider', () => {
       tick();
       fixture.detectChanges();
 
-      expect(handleEl.style.left).toBe('20%');
+      expect(handleEl.style.left).toBe('calc(20% - 7px)');
       expect(debugEl.query(By.css('.devui-slider')).nativeElement.classList).toContain('disabled');
 
       const disabledRect = handleEl.getBoundingClientRect();
@@ -121,7 +121,7 @@ describe('slider', () => {
       fixture.detectChanges();
       tick();
       fixture.detectChanges();
-      expect(handleEl.style.left).toBe('20%');
+      expect(handleEl.style.left).toBe('calc(20% - 7px)');
       expect(testComponent.value).toEqual(20);
     }));
 

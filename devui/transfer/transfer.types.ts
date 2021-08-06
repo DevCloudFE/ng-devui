@@ -3,7 +3,7 @@ export enum TransferDirection { SOURCE, TARGET }
 export interface TransferDataFormat {
   name: string;
   value: any;
-  id?: string;
+  id?: number;
   checked?: boolean;
   disabled?: boolean;
 }

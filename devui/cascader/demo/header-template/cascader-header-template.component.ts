@@ -308,7 +308,7 @@ export class CascaderHeaderTemplateComponent {
 
   value1: Array<string | number>;
 
-  activeTab = 'tab1';
+  activeTab: string | number = 'tab1';
 
   onChanges(value: any) {
     console.log(value);

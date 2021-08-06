@@ -26,6 +26,7 @@ export class IUploadOptions {
 export class IFileOptions {
   accept?: string;
   multiple?: boolean;
+  webkitdirectory?: boolean;
 }
 
 export enum UploadStatus {

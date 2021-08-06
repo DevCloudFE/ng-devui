@@ -21,7 +21,7 @@ export class SelectFiles {
     });
   }
 
-  selectFiles = ({ multiple, accept }: IFileOptions): Promise<File[]> => {
+  selectFiles = ({ multiple, accept, webkitdirectory }: IFileOptions): Promise<File[]> => {
     return new Promise((resolve) => {
       const tempNode = this.document.getElementById('d-upload-temp');
       if (tempNode) {
@@ -40,6 +40,10 @@ export class SelectFiles {
       }
       if (accept) {
         input.setAttribute('accept', accept);
+      }
+
+      if (webkitdirectory) {
+        input.setAttribute('webkitdirectory', '');
       }
 
       input.addEventListener('change', event => {
@@ -87,8 +91,8 @@ export class SelectFiles {
   }
 
   triggerSelectFiles = (fileOptions: IFileOptions, uploadOptions: IUploadOptions) => {
-    const { multiple, accept } = fileOptions;
-    return from(this.selectFiles({ multiple, accept })).pipe(mergeMap(file => <any>file));
+    const { multiple, accept, webkitdirectory} = fileOptions;
+    return from(this.selectFiles({ multiple, accept , webkitdirectory})).pipe(mergeMap(file => <any>file));
   }
 
   triggerDropFiles = (fileOptions: IFileOptions, uploadOptions: IUploadOptions, files: any) => {

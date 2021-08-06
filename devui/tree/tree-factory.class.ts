@@ -36,7 +36,7 @@ export interface ITreeMap {
 }
 
 export interface ITreeItem {
-  title: string;
+  title?: string;
   open?: boolean;
   loading?: boolean;
   isMatch?: boolean;
@@ -501,11 +501,13 @@ export class TreeFactory {
   public checkAllNodes(checked: boolean) {
     for (const id of Object.keys(this.nodes)) {
       if (!this.nodes[id].data.disabled) {
+        this.nodes[id].data.halfChecked = false;
         this.nodes[id].data.isChecked = checked;
       }
       this.maintainCheckedNodeList(this.nodes[id], this.nodes[id].data.isChecked);
     }
   }
+
   public getNodeIndex(node: TreeNode) {
     let parentNode;
     let children;

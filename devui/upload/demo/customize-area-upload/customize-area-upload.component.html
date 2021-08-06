@@ -12,7 +12,7 @@
       <span *ngIf="fileUploader.status === 2 || fileUploader.status === 3" class="icon-file"></span>
     </div>
     <span class="icon icon-delete {{ fileUploader.status === 3 ? 'devui-failed-icon' : '' }}" (click)="deleteFile(fileUploader)"></span>
-    <span *ngIf="fileUploader.status === 3" class="icon icon-running" (click)="dUpload.uploadFiles(fileUploader)"></span>
+    <span *ngIf="fileUploader.status === 3" class="icon icon-running" (click)="dUpload.uploadFiles()"></span>
   </div>
 </ng-container>
 <div

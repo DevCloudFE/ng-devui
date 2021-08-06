@@ -1,5 +1,5 @@
 <div style="margin-left: 40px">
-  <form dForm [layout]="'horizontal'" [labelSize]="'sm'">
+  <form dForm [layout]="layoutDirection" [labelSize]="'sm'">
     <d-form-item>
       <d-form-label [required]="true">Name</d-form-label>
       <d-form-control
@@ -87,7 +87,7 @@
       </d-form-control>
     </d-form-item>
     <d-form-operation>
-      <d-button bsStyle="stress" class="mr-element-spacing" circled="true" style="margin-right: 4px">Submit</d-button>
+      <d-button bsStyle="primary" class="mr-element-spacing" circled="true" style="margin-right: 4px">Submit</d-button>
       <d-button bsStyle="common" circled="true">Cancel</d-button>
     </d-form-operation>
   </form>

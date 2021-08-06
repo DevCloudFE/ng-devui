@@ -23,7 +23,7 @@
 
       d-panel-body {
         line-height: 1.5;
-        padding: 15px;
+        padding: 20px;
         background: $devui-base-bg;
         flex: 1;
       }
@@ -52,7 +52,7 @@
     }
 
     .devui-panel-footer {
-      padding: 10px 15px;
+      padding: 12px 20px;
       color: $devui-text;
       background-color: $devui-area;
 
@@ -74,7 +74,7 @@
         background-color: $devui-primary-bg;
       }
 
-      .devui-panel-body-collapse {
+      .devui-panel-body-collapse.has-left-padding {
         d-panel-body {
           border-color: $devui-primary-line;
         }
@@ -87,7 +87,7 @@
         background-color: $devui-info-bg;
       }
 
-      .devui-panel-body-collapse {
+      .devui-panel-body-collapse.has-left-padding {
         d-panel-body {
           border-color: $devui-info-line;
         }
@@ -100,7 +100,7 @@
         background-color: $devui-success-bg;
       }
 
-      .devui-panel-body-collapse {
+      .devui-panel-body-collapse.has-left-padding {
         d-panel-body {
           border-color: $devui-success-line;
         }
@@ -113,7 +113,7 @@
         background-color: $devui-warning-bg;
       }
 
-      .devui-panel-body-collapse {
+      .devui-panel-body-collapse.has-left-padding {
         d-panel-body {
           border-color: $devui-warning-line;
         }
@@ -126,7 +126,7 @@
         background-color: $devui-danger-bg;
       }
 
-      .devui-panel-body-collapse {
+      .devui-panel-body-collapse.has-left-padding {
         d-panel-body {
           border-color: $devui-danger-line;
         }

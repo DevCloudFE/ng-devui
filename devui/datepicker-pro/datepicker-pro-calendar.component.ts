@@ -1,8 +1,10 @@
 import {
   AfterViewInit,
-  Component, ContentChild, EventEmitter, forwardRef, Input, OnDestroy, OnInit, Output, TemplateRef
+  Component, ContentChild, ElementRef, EventEmitter, forwardRef, Input, OnDestroy, OnInit, Output, TemplateRef, ViewChild
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { I18nInterface, I18nService } from 'ng-devui/i18n';
+import { DefaultDateConverter } from 'ng-devui/utils';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { DatepickerProService } from './datepicker-pro.service';
@@ -22,19 +24,11 @@ import { DatepickerProService } from './datepicker-pro.service';
   preserveWhitespaces: false,
 })
 export class DatepickerProCalendarComponent implements OnInit, AfterViewInit, OnDestroy {
-  @Input() isRangeType = false;
-  @Input() showTime = false;
-  @Input() mode: 'year' | 'month' | 'date' | 'week' = 'date';
-  @Input() startIndexOfWeek = 0;
   @Input() set activeRangeType(type: 'start' | 'end') {
     this.pickerSrv.currentActiveInput = type;
+    this.focusChange(type);
     this.pickerSrv.activeInputChange.next(type);
   }
-
-  @Output() confirmEvent = new EventEmitter<Date | Date[]>();
-
-  @ContentChild('customTemplate') customTemplate: TemplateRef<any>;
-  @ContentChild('footerTemplate') footerTemplate: TemplateRef<any>;
 
   get curActiveDate(): Date {
     if (this.pickerSrv.currentActiveInput === 'start') {
@@ -44,17 +38,78 @@ export class DatepickerProCalendarComponent implements OnInit, AfterViewInit, On
     }
   }
 
+  set currentActiveInput(value: 'start' | 'end') {
+    this.pickerSrv.currentActiveInput = value;
+  }
+  get currentActiveInput(): 'start' | 'end' {
+    return this.pickerSrv.currentActiveInput;
+  }
+
+  get dateValue() {
+    return this._dateValue;
+  }
+
+  set dateValue(value: string[]) {
+    this._dateValue = value;
+    this.getStrWidth();
+  }
+
+  get curFormat(): string {
+    if (this.mode === 'year') {
+      return 'y';
+    } else if (this.mode === 'month') {
+      return 'y-MM';
+    } else {
+      return  this.showTime ? 'y/MM/dd HH:mm:ss' :  'y/MM/dd';
+    }
+  }
+
+  constructor(
+    private pickerSrv: DatepickerProService,
+    private i18n: I18nService
+  ) {
+    this.i18nText = this.i18n.getI18nText().datePickerPro;
+    this.datepickerConvert = new DefaultDateConverter();
+  }
+  @Input() isRangeType = false;
+  @Input() showTime = false;
+  @Input() mode: 'year' | 'month' | 'date' | 'week' = 'date';
+  @Input() startIndexOfWeek = 0;
+  @Input() splitter = '-';
+  @Input() showRangeHeader = true;
+
+  @Output() confirmEvent = new EventEmitter<Date | Date[]>();
+  @Output() cancelEvent = new EventEmitter<void>();
+
+  @ContentChild('customTemplate') customTemplate: TemplateRef<any>;
+  @ContentChild('footerTemplate') footerTemplate: TemplateRef<any>;
+
+  @ViewChild('dateInputStart') datepickerInputStart: ElementRef;
+  @ViewChild('dateInputEnd') datepickerInputEnd: ElementRef;
+
+  strWidth = 0;
+
+  _dateValue = [];
+  i18nText;
+  datepickerConvert: DefaultDateConverter;
   unsubscribe$ = new Subject();
+  private i18nLocale: I18nInterface['locale'];
 
   private onChange = (_: any) => null;
   private onTouched = () => null;
 
-  constructor(
-    private pickerSrv: DatepickerProService
-  ) {
+  private setI18nText() {
+    this.i18nLocale = this.i18n.getI18nText().locale;
+    this.i18n.langChange().pipe(
+      takeUntil(this.unsubscribe$)
+    ).subscribe((data) => {
+      this.i18nLocale = data.locale;
+      this.i18nText = data.datePickerPro;
+    });
   }
 
   ngOnInit() {
+    this.setI18nText();
     this.initSrvStatus();
     this.initObservable();
   }
@@ -79,7 +134,9 @@ export class DatepickerProCalendarComponent implements OnInit, AfterViewInit, On
       seconds: null
     });
     if (this.isRangeType) {
+      this.dateValue = [];
       this.pickerSrv.curRangeDate = [];
+      this.currentActiveInput = 'start';
       this.onChange(this.pickerSrv.curRangeDate);
     } else {
       this.pickerSrv.curDate = null;
@@ -93,12 +150,20 @@ export class DatepickerProCalendarComponent implements OnInit, AfterViewInit, On
     this.pickerSrv.startIndexOfWeek = this.startIndexOfWeek;
   }
 
+  private formatDateToString(date: Date): string {
+    if (!date) {
+      return '';
+    }
+    return this.datepickerConvert.format(date, this.curFormat);
+  }
+
   private initObservable() {
     this.pickerSrv.selectedDateChange.pipe(
       takeUntil(this.unsubscribe$)
     ).subscribe(change => {
       if (this.isRangeType) {
         this.pickerSrv.curRangeDate = change.value as Date[];
+        this.dateValue = (change.value as Date[]).map(d => this.formatDateToString(d));
         this.onChange(this.pickerSrv.curRangeDate);
       } else {
         this.pickerSrv.curDate = change.value as Date;
@@ -117,12 +182,16 @@ export class DatepickerProCalendarComponent implements OnInit, AfterViewInit, On
           this.pickerSrv.curRangeDate[0] = curDate;
           if (this.isSameDateAndTimeWrong()) {
             this.pickerSrv.curRangeDate[1] = curDate;
+            this.dateValue[1] = this.formatDateToString(curDate);
           }
+          this.dateValue = [this.formatDateToString(curDate), this.dateValue[1]];
         } else {
           this.pickerSrv.curRangeDate[1] = curDate;
           if (this.isSameDateAndTimeWrong()) {
             this.pickerSrv.curRangeDate[0] = curDate;
+            this.dateValue[0] = this.formatDateToString(curDate);
           }
+          this.dateValue = [this.dateValue[0], this.formatDateToString(curDate)];
         }
         this.onChange(this.pickerSrv.curRangeDate);
       } else {
@@ -138,8 +207,24 @@ export class DatepickerProCalendarComponent implements OnInit, AfterViewInit, On
     ).subscribe(isConfirm => {
       if (isConfirm) {
         this.confirmEvent.emit(this.pickerSrv.curDate || this.pickerSrv.curRangeDate);
+      } else {
+        this.cancelEvent.emit();
       }
     });
+  }
+
+  focusChange(type: 'start' | 'end') {
+    this.currentActiveInput = type;
+    this.pickerSrv.activeInputChange.next(type);
+    if (type === 'start') {
+      setTimeout(() => {
+        this.datepickerInputStart?.nativeElement?.focus();
+      });
+    } else {
+      setTimeout(() => {
+        this.datepickerInputEnd?.nativeElement?.focus();
+      });
+    }
   }
 
   isSameDateAndTimeWrong(): boolean {
@@ -159,12 +244,17 @@ export class DatepickerProCalendarComponent implements OnInit, AfterViewInit, On
 
   writeRangeValue(value: Date[]) {
     if (!value || !value.length) {
+      this.clear();
       return;
     }
 
     if (value.find(t => !this.pickerSrv.dateInRange(t))) {
       return;
     }
+
+    this.dateValue = value.map(d => {
+      return d ? this.datepickerConvert.format(d, this.curFormat) : '';
+    });
 
     this.pickerSrv.curRangeDate = value;
     this.pickerSrv.updateDateValue.next({
@@ -174,10 +264,7 @@ export class DatepickerProCalendarComponent implements OnInit, AfterViewInit, On
   }
 
   writeSingleValue(value: Date) {
-    if (!value) {
-      return;
-    }
-    if (!this.pickerSrv.dateInRange(new Date(value))) {
+    if (!value || !this.pickerSrv.dateInRange(new Date(value))) {
       this.clear();
       return;
     }
@@ -207,5 +294,13 @@ export class DatepickerProCalendarComponent implements OnInit, AfterViewInit, On
   ngOnDestroy() {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
+  }
+
+  getStrWidth() {
+    let str = this.pickerSrv.currentActiveInput === 'start' ? this.dateValue[0] : this.dateValue[1];
+    if (!str || !str.length) {
+      str = this.pickerSrv.currentActiveInput === 'start' ? this.i18nText.startPlaceholder : this.i18nText.endPlaceholder;
+    }
+    this.strWidth = this.pickerSrv.mearsureStrWidth(str);
   }
 }

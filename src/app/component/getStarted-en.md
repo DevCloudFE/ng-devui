@@ -6,11 +6,11 @@ Guides: How to use DevUI in your project
 
 For details about how to use this function, see the following StackBlitz demonstration. You are advised to use the Fork example to perform the Bug Report. Do not use this function in an actual project.
 
-<a class="devui-link" href="https://stackblitz.com/edit/ng-devui-10" target="_blank">ng-devui stackblitz</a>
+<a class="devui-link" href="https://stackblitz.com/edit/ng-devui-12" target="_blank">ng-devui stackblitz</a>
 
 ### Angular version
 
-The supported Angular version is <font color=red>`^11.0.0`</font>.
+The supported Angular version is <font color=red>`^12.0.0`</font>.
 
 ### 1. Create a project
 

@@ -24,11 +24,11 @@
 }
 
 .devui-transfer-option {
-  padding: 0 10px;
+  padding: 0 12px;
 }
 
 .devui-transfer-search {
-  margin: 0 15px 10px 20px;
+  margin: 0 16px 8px 20px;
 }
 
 .devui-transfer-num {
@@ -41,7 +41,7 @@
   -o-align-self: center;
   font-size: $devui-font-size;
   color: $devui-aide-text;
-  margin-right: 10px;
+  margin-right: 12px;
 }
 
 .disable {
@@ -73,6 +73,8 @@
   }
 
   .devui-transfer-active-svg {
+    cursor: pointer;
+
     circle {
       fill: $devui-icon-fill-active;
       stroke: devui-icon-fill-active;
@@ -85,7 +87,7 @@
 }
 
 .devui-transfer-content {
-  padding-top: 10px;
+  padding-top: 8px;
 }
 
 .devui-transfer-content ul {
@@ -125,7 +127,7 @@
   .devui-transfer-drag-wrap {
     min-width: 21px;
     height: 80%;
-    padding-right: 5px;
+    padding-right: 4px;
     display: inline-flex;
     align-items: center;
   }

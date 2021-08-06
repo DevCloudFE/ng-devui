@@ -42,7 +42,7 @@
   border-bottom: 1px solid $devui-form-control-line;
   border-right: 1px solid $devui-form-control-line;
   border-radius: 0 $devui-border-radius $devui-border-radius 0;
-  transition: border-color $devui-animation-duration-slow $devui-animation-ease-in-smooth, background-color  $devui-animation-duration-slow $devui-animation-ease-in-smooth;
+  transition: border-color $devui-animation-duration-slow $devui-animation-ease-in-out-smooth, background-color  $devui-animation-duration-slow $devui-animation-ease-in-out-smooth;
   cursor: pointer;
   height: 100%;
   position: relative;
@@ -62,13 +62,13 @@
   width: 100%;
   min-height: 28px;
   height: unset;
-  padding: 5px 10px;
+  padding: 4px 8px;
   font-size: $devui-font-size;
   line-height: 1.5;
   background-image: none;
   border: 1px solid $devui-form-control-line;
   border-radius: $devui-border-radius 0 0 $devui-border-radius;
-  transition: border-color $devui-animation-duration-slow $devui-animation-ease-in-smooth, box-shadow $devui-animation-duration-slow $devui-animation-ease-in-smooth;
+  transition: border-color $devui-animation-duration-slow $devui-animation-ease-in-out-smooth, box-shadow $devui-animation-duration-slow $devui-animation-ease-in-out-smooth;
 
   &.devui-files-list {
     max-height: 52px;
@@ -79,7 +79,8 @@
 
     .devui-file-item {
       height: 22px;
-      padding: 2px 48px 2px 10px;
+      line-height: 22px;
+      padding: 0 48px 0 12px;
     }
 
     .devui-file-tag {

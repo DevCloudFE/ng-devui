@@ -152,7 +152,8 @@
       'devui-custom-right': customViewTemplate && customViewDirection === 'right',
       'devui-custom-left': customViewTemplate && customViewDirection === 'left',
       'devui-custom-top': customViewTemplate && customViewDirection === 'top',
-      'devui-dropdown-menu-multiple': multiple
+      'devui-dropdown-menu-multiple': multiple,
+      'devui-reset-min-width': width
     }"
     [@fadeInOut]="isOpen && startAnimation ? (appendToBody ? menuPosition : popDirection) : 'void'"
     (@fadeInOut.done)="animationEnd($event)"
@@ -272,6 +273,8 @@
       'max-height': scrollHight
     }"
     [itemSize]="realVirtualScrollItemSize"
+    [minBufferPx]="minBuffer"
+    [maxBufferPx]="maxBuffer"
     class="viewport-wrapper devui-select-list-unstyled devui-scrollbar"
     #dropdownUl
   >

@@ -306,7 +306,7 @@ $keyframe-blue: #5e7ce0;
 }
 
 .devui-tree-node__content {
-  transition: color $devui-animation-duration-fast $devui-animation-ease-in-smooth, background-color $devui-animation-duration-fast $devui-animation-ease-in-smooth;
+  transition: color $devui-animation-duration-fast $devui-animation-ease-in-out-smooth, background-color $devui-animation-duration-fast $devui-animation-ease-in-out-smooth;
 }
 
 ::ng-deep d-tree .cdk-virtual-scroll-content-wrapper {

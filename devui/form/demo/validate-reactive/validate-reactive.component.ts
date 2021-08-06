@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { DFormGroupRuleDirective, DValidateRules } from 'ng-devui/form';
+import { DFormGroupRuleDirective, DValidateRules, FormLayout } from 'ng-devui/form';
 import { of } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
 
@@ -10,6 +10,7 @@ import { delay, map } from 'rxjs/operators';
   styleUrls: ['./validate-reactive.component.scss'],
 })
 export class ValidateReactiveComponent implements OnInit {
+  layoutDirection: FormLayout = FormLayout.Vertical;
   singleSelectData = null;
 
   formData = {

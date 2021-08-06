@@ -19,7 +19,6 @@ $devui-tab-slider-bg: $devui-list-item-hover-bg;
 
   li {
     cursor: pointer;
-    border: 2px solid transparent;
 
     & a {
       cursor: pointer;
@@ -58,7 +57,7 @@ $devui-tab-slider-bg: $devui-list-item-hover-bg;
     height: 2px;
     width: 0;
     background: transparent;
-    transition: width $devui-animation-duration-slow ease-out, background-color $devui-animation-duration-slow ease-out;
+    transition: width $devui-animation-duration-slow $devui-animation-ease-in-out, background-color $devui-animation-duration-slow $devui-animation-ease-in-out;
   }
 
   li.active::after {
@@ -79,7 +78,7 @@ $devui-tab-slider-bg: $devui-list-item-hover-bg;
     border-left-width: 0;
     background-color: $devui-base-bg;
     float: left;
-    transition: background-color $devui-animation-duration-slow $devui-animation-ease-in-smooth;
+    transition: background-color $devui-animation-duration-slow $devui-animation-ease-in-out;
 
     &:first-of-type {
       border-left-width: 1px;
@@ -94,9 +93,9 @@ $devui-tab-slider-bg: $devui-list-item-hover-bg;
       cursor: pointer;
       border: none;
       color: $devui-text;
-      line-height: 26px;
-      padding: 0 15px;
-      transition: color $devui-animation-duration-slow $devui-animation-ease-in-smooth;
+      line-height: 30px;
+      padding: 0 16px;
+      transition: color $devui-animation-duration-slow $devui-animation-ease-in-out;
 
       &:hover,
       &:focus,
@@ -181,7 +180,7 @@ $devui-tab-slider-bg: $devui-list-item-hover-bg;
       border: none;
       color: $devui-text;
       line-height: 28px;
-      padding: 0 15px;
+      padding: 0 16px;
 
       &:hover,
       &:focus,
@@ -253,7 +252,8 @@ $devui-tab-slider-bg: $devui-list-item-hover-bg;
     cursor: pointer;
     float: left;
     position: relative;
-    padding: 8px 16px;
+    padding: 4px 20px;
+    line-height: 22px;
 
     & a {
       cursor: pointer;
@@ -310,12 +310,12 @@ $devui-tab-slider-bg: $devui-list-item-hover-bg;
 }
 
 .devui-nav-tabs:not(.devui-nav-stacked) {
-  border-bottom: 1px $devui-line solid;
+  border-bottom: 1px $devui-dividing-line solid;
 
   li {
     float: left;
     margin-left: 32px;
-    margin-bottom: -3px;
+    margin-bottom: -1px;
 
     &:first-child {
       margin-left: 0;
@@ -356,5 +356,5 @@ $devui-tab-slider-bg: $devui-list-item-hover-bg;
   box-shadow: 0 2px 4px 0 $devui-light-shadow;
   top: 1px;
   height: 30px;
-  transition: left $devui-animation-duration-slow $devui-animation-ease-in-smooth, width $devui-animation-duration-slow $devui-animation-ease-in-smooth;
+  transition: left $devui-animation-duration-slow $devui-animation-ease-in-out, width $devui-animation-duration-slow $devui-animation-ease-in-out;
 }

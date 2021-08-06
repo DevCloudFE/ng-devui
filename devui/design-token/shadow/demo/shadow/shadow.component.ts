@@ -15,7 +15,7 @@ export class ShadowComponent implements OnInit, OnDestroy {
   shadows = [];
   oldShadows = [];
 
-  activeTab = 'curShadow';
+  activeTab: string | number = 'curShadow';
 
   constructor(private translate: TranslateService) {}
 

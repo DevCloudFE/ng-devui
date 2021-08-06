@@ -13,8 +13,8 @@ section {
   float: left;
   position: relative;
   min-height: 1px;
-  padding-right: 15px;
-  padding-left: 15px;
+  padding-right: 16px;
+  padding-left: 16px;
   min-width: 220px;
   width: 220px;
 }
@@ -54,12 +54,12 @@ section {
 
 .card .card-header {
   font-size: $devui-font-size-modal-title;
-  padding: 10px;
+  padding: 8px;
 }
 
 .list-group {
   margin-bottom: 20px;
-  padding: 10px;
+  padding: 8px;
 }
 
 .list-group > li {
@@ -71,6 +71,6 @@ section {
   box-shadow: $devui-shadow-length-base $devui-light-shadow;
   border-radius: $devui-border-radius;
   width: 120px;
-  margin: 10px;
+  margin: 8px;
   text-align: center;
 }

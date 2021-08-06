@@ -380,6 +380,7 @@ export class RangeDatepickerProComponent implements OnInit, OnDestroy, AfterView
 
   writeValue(value: Date[]) {
     if (!value || !value.length) {
+      this.clear();
       return;
     }
 

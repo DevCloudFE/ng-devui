@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ArrowTrigger, DotTrigger } from 'ng-devui/carousel';
 
 @Component({
   selector: 'd-carousel-demo-trigger',
@@ -8,6 +9,6 @@ import { Component } from '@angular/core';
 export class CarouselDemoTriggerComponent {
   array = [1, 2, 3, 4];
   height = '200px';
-  dotTrigger = 'hover';
-  arrowTrigger = 'always';
+  dotTrigger: DotTrigger = 'hover';
+  arrowTrigger: ArrowTrigger = 'always';
 }

@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, ElementRef, HostBinding, OnInit, ViewChild } from '@angular/core';
+import { AfterContentInit, Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { TableExpandConfig } from 'ng-devui/data-table';
 import { originSource, SourceType } from '../mock-data';
 
@@ -27,9 +27,9 @@ import { originSource, SourceType } from '../mock-data';
   ]
 })
 export class ExpandRowOldComponent implements OnInit, AfterContentInit {
-  @ViewChild('quickAddRowTip', { static: true }) quickAddRowTip: ElementRef;
-  @ViewChild('quickAddRowContent', { static: true }) quickAddRowContent: ElementRef;
-  @ViewChild('addSubRowContent', { static: true }) addSubRowContent: ElementRef;
+  @ViewChild('quickAddRowTip', { static: true }) quickAddRowTip: TemplateRef<any>;
+  @ViewChild('quickAddRowContent', { static: true }) quickAddRowContent: TemplateRef<any>;
+  @ViewChild('addSubRowContent', { static: true }) addSubRowContent: TemplateRef<any>;
 
   basicDataSource: Array<SourceType> = JSON.parse(JSON.stringify(originSource.slice(0, 6)));
   headerExpandConfig: TableExpandConfig;

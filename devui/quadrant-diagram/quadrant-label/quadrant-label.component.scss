@@ -1,5 +1,5 @@
 @import '../../style/theme/shadow';
-@import '../../style/core/_font';
+@import '../../style/theme/_font';
 @import '../../style/theme/corner';
 @import '../../style/theme/color';
 
@@ -38,7 +38,7 @@
 }
 
 .devui-label-style {
-  padding: 0 10px;
+  padding: 0 12px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -64,6 +64,6 @@
 .devui-axis-value {
   color: $devui-aide-text;
   line-height: 20px;
-  padding: 5px;
+  padding: 4px;
   font-size: $devui-font-size;
 }

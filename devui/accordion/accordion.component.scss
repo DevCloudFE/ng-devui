@@ -30,7 +30,7 @@
   }
 
   & > .devui-accordion-list {
-    padding: 10px 0;
+    padding: 8px 0;
   }
 
   .devui-over-flow-ellipsis {
@@ -50,7 +50,7 @@
   display: block;
   height: 40px;
   width: 100%;
-  padding: 0 10px 0 20px;
+  padding: 0 12px 0 20px;
   font-weight: 400;
   line-height: 40px;
   color: $devui-text-weak;
@@ -103,7 +103,7 @@
     padding: 0;
 
     & > a {
-      padding: 0 10px 0 20px;
+      padding: 0 12px 0 20px;
     }
   }
 }
@@ -126,7 +126,7 @@
     width: 16px;
     height: 16px;
     line-height: 16px;
-    transition: transform $devui-animation-duration-slow $devui-animation-ease-in-smooth;
+    transition: transform $devui-animation-duration-slow $devui-animation-ease-in-out-smooth;
 
     & > svg {
       width: 16px;
@@ -162,7 +162,7 @@
 
 /* 可展开的菜单 */
 :host ::ng-deep .devui-accordion-menu-item > .devui-accordion-item-title {
-  padding-right: 30px;
+  padding-right: 28px;
 
   &.active:not(.open) {
     color: $devui-brand-active;
@@ -214,12 +214,12 @@
 
 :host ::ng-deep .devui-accordion-show-animate .devui-accordion-item-title {
   transition:
-    font-weight $devui-animation-duration-fast $devui-animation-ease-in-smooth,
-    background-color $devui-animation-duration-fast $devui-animation-ease-in-smooth;
+    font-weight $devui-animation-duration-fast $devui-animation-ease-in-out-smooth,
+    background-color $devui-animation-duration-fast $devui-animation-ease-in-out-smooth;
 
   .devui-accordion-splitter::before {
     transform: scaleY(0);
-    transition: transform $devui-animation-duration-slow $devui-animation-ease-in-smooth;
+    transition: transform $devui-animation-duration-slow $devui-animation-ease-in-out-smooth;
   }
 
   &.devui-router-active,

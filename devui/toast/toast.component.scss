@@ -29,13 +29,13 @@
 .devui-toast-item-container {
   position: relative;
   left: 150%;
-  margin: 0 0 10px 0;
+  margin: 0 0 8px 0;
   opacity: 0.95;
   filter: alpha(opacity=95);
   box-shadow: $devui-shadow-length-feedback-overlay $devui-shadow;
   border-radius: $devui-border-radius-feedback;
   color: $devui-feedback-overlay-text;
-  transition: all $devui-animation-duration-slow $devui-animation-ease-in-smooth;
+  transition: all $devui-animation-duration-slow $devui-animation-ease-in-out-smooth;
   background-color: $devui-feedback-overlay-bg;
 
   &.slide-in {
@@ -67,7 +67,7 @@
 
 .devui-toast-title {
   font-size: $devui-font-size-card-title;
-  padding: 0 0 calc(0.5em - 2px) 0;
+  padding: 0 0 4px 0;
   display: block;
   font-weight: 700;
 }
@@ -130,5 +130,5 @@
 
 .devui-toast-message p {
   font-size: $devui-font-size;
-  margin-top: 2px;
+  margin-top: 4px;
 }

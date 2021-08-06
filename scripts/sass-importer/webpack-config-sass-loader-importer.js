@@ -1,25 +1,29 @@
-const AngularCompilerPlugin = require('@ngtools/webpack').AngularCompilerPlugin;
+const AngularCompilerPlugin = require('@ngtools/webpack').AngularWebpackPlugin;
 const getTsConfigAlias = require('./get-tsconfig-alias');
 
 function getAngularCompilerTsConfigPath(config) {
   const angularCompilerPlugin = config.plugins.filter(plugin => plugin instanceof AngularCompilerPlugin).pop();
   if (angularCompilerPlugin) {
-    return angularCompilerPlugin.options.tsConfigPath;
+    return angularCompilerPlugin.pluginOptions.tsconfig;
   }
   return undefined;
 }
 function webpackConfigSassImporterAlias(config) {
   const tsconfigPath = getAngularCompilerTsConfigPath(config) || 'tsconfig.base.json';
   [{
-    ruleTest: /\.scss$|\.sass$/,
+    ruleTest: /\.(?:sass)$/i,
+    loaderName: 'sass-loader'
+  },
+  {
+    ruleTest: /\.(?:scss)$/i,
     loaderName: 'sass-loader'
   }].forEach(({ruleTest, loaderName}) => {
     config.module.rules.filter(rule => rule.test + '' === ruleTest + '').forEach((styleRule) => {
       if (styleRule) {
-        var insertPosition = styleRule.use.findIndex(loaderUse => loaderUse.loader === loaderName
+        var insertPosition = styleRule.rules[1].use.findIndex(loaderUse => loaderUse.loader === loaderName
           || loaderUse.loader === require.resolve(loaderName));
         if (insertPosition > -1) {
-          styleRule.use[insertPosition].options.sassOptions.importer = [
+          styleRule.rules[1].use[insertPosition].options.sassOptions.importer = [
             getTsConfigAlias(tsconfigPath)
           ];
         }

@@ -4,7 +4,7 @@ import { DialogService, ModalService } from 'ng-devui/modal';
 @Component({
   selector: 'd-template',
   templateUrl: './template.component.html',
-  styles: ['d-button { margin-right: 5px; }']
+  styles: ['d-button { margin-right: 8px; }']
 })
 export class TemplateComponent implements OnInit {
   @ViewChild('dialogContent', { static: true }) dialogContent: TemplateRef<any>;

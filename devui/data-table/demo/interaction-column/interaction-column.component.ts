@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
-import { DataTableComponent } from 'ng-devui/data-table';
+import { DataTableComponent, FilterConfig, SortDirection, SortEventArg } from 'ng-devui/data-table';
 import { LoadingType } from 'ng-devui/loading';
 import { originSource, SourceType } from '../mock-data';
 
@@ -13,7 +13,7 @@ export class InteractionColumnComponent implements OnInit {
   @ViewChild(DataTableComponent, { static: true }) datatable: DataTableComponent;
   pagerSource = JSON.parse(JSON.stringify(originSource));
   sortableDataSource: Array<SourceType> = JSON.parse(JSON.stringify(originSource.slice(0, 6)));
-  filterList2 = [
+  filterList2: FilterConfig[] = [
     {
       name: 'Clear',
       value: 'Clear',
@@ -52,9 +52,9 @@ export class InteractionColumnComponent implements OnInit {
     }
   ];
   filterListMulti = JSON.parse(JSON.stringify(originSource.slice(0, 6)));
-  sortedColumn = [{
+  sortedColumn: SortEventArg[] = [{
     field: 'lastName',
-    direction: 'ASC'
+    direction: SortDirection.ASC
   }];
   hideColumn = ['hidden'];
   total = 20;

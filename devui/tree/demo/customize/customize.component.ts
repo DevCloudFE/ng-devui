@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { TreeNode } from 'ng-devui/tree';
+import { Component, ViewChild } from '@angular/core';
+import { TreeComponent, TreeNode } from 'ng-devui/tree';
 
 @Component({
   selector: 'd-customize',
@@ -7,6 +7,7 @@ import { TreeNode } from 'ng-devui/tree';
   styleUrls: ['./customize.component.scss']
 })
 export class CustomizeComponent {
+  @ViewChild('operableTree', { static: true }) operableTree: TreeComponent;
   currentSelectedNode;
   iconParentOpen = '<span class="icon icon-chevron-down"></span>';
   iconParentClose = '<span class="icon icon-collapse"></span>';
@@ -92,5 +93,8 @@ export class CustomizeComponent {
       node.data.isHover = false;
       this.disableMouseEvent = false;
     }
+  }
+  activeNode(node) {
+    this.operableTree.treeFactory.activeNodeById(node.id);
   }
 }

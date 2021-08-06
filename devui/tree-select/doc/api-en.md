@@ -37,10 +37,11 @@ In the page:
 | readyEvent | `function` | (treeSelect: TreeSelectComponent) => {} | Optional. Hook function that can be called when the component initialization is complete | [Hook called upon completion of initialization](demo#init-hooks) |
 | appendTo | `string` | -- | Optional. Attach the drop-down list box to the DOM selector node of the input value. If the value is empty, the drop-down list box is in the component. | [Append To Element Capability](demo#append-to-element) |
 | allowUnselect | `boolean` | true | Optional. Whether to allow deselecting selected items in single-select mode. | [Basic usage](demo#basic-usage) |
-| iconTemplatePosition | `'before-checkbox' \|'after-checkbox'` | 'before-checkbox' | Optional. position of the customized template | [Customizing icons](demo#custom-icon) |
+| iconTemplatePosition | `'before-checkbox' \|'after-checkbox'` | 'before-checkbox' | Optional. position of the customized template | [Customizing icons and selected nodes](demo#custom-icon) |
 | allowClear | `boolean` | false | Optional. indicates whether to clear selected items by clicking the clear button in the text box in radio mode. The value of `allowUnselect` must be `true`. Otherwise, the experience consistency rule will be damaged. This parameter is valid only when the value of enableLabelization is false. | [Basic usage](demo#basic-usage) |
 | enableLabelization | `boolean` | true | Optional. Indicates whether to enable the tagged display effect. This parameter is enabled by default when the public cloud visual function is used. | [Tag-based configuration](demo#labelization) |
-| iconTemplateInput | `TemplateRef` | -- | Optional. Template of the customized icon | [Customizing icons](demo#custom-icon) |
+| iconTemplateInput | `TemplateRef` | -- | Optional. Template of the customized icon | [Customizing icons and selected nodes](demo#custom-icon) |
+| customItemTemplate  | `TemplateRef` | -- | Optional. The display content of selected nodes can be customized. | [Customizing icons and selected nodes](demo#custom-icon) |
 | customViewTemplate  | `TemplateRef` | -- | Optional. The display content of a customized region can be customized. | [Custom Area](demo#custom-template) |
 | customViewDirection | `'bottom' \| 'right'\| 'left'` | 'bottom' | Optional, relative position of the customViewTemplate drop-down list box | [Custom Area](demo#custom-template) |
 | virtualScroll | `boolean` | false | Optional. Specifies whether to enable virtual scrolling. This parameter is usually used in scenarios with a large amount of data. | [Virtual scrolling] (demo#virtual-scroll) |

@@ -232,6 +232,7 @@
 
   tbody > tr {
     background: $devui-base-bg;
+    user-select: auto;
 
     &.table-row-selected {
       background: $devui-list-item-selected-bg;

@@ -3,11 +3,12 @@ import {
   Input,
   OnInit,
   TemplateRef,
-  ViewChild,
+  ViewChild
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { IButtonStyle } from 'ng-devui/button';
 import { ModalComponent } from './modal.component';
-import {ModalContentDirective} from './modal.directive';
+import { ModalContentDirective } from './modal.directive';
 @Component({
   selector: 'd-modal-container',
   templateUrl: './modal-container.component.html',
@@ -21,7 +22,7 @@ export class ModalContainerComponent implements OnInit {
   @Input() content: string | HTMLElement;
   @Input() buttons: Array<{
     id?: string,
-    cssClass?: string,
+    cssClass?: IButtonStyle,
     text: string,
     handler: ($event: Event) => void,
     btnwidth?: string,

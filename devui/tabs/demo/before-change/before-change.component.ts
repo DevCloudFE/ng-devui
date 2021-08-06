@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './before-change.component.html',
 })
 export class CustomizeTmpComponent implements OnInit {
-  acticeTabId = 'tab2';
+  acticeTabId: string | number = 'tab2';
   tabItems = [
     {
       id: 'tab1',

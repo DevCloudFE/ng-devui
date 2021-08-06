@@ -168,7 +168,6 @@ export class SingleUploadComponent implements OnDestroy, OnInit, ControlValueAcc
           (results: Array<{ file: File; response: any }>) => {
             this.successEvent.emit(results);
             results.forEach((result) => {
-              this.singleUploadViewComponent.deleteFile(result.file);
               this.singleUploadViewComponent.uploadedFilesComponent.addAndOverwriteFile(result.file);
             });
           },

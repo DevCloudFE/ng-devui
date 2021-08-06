@@ -143,14 +143,15 @@
   .label-close,
   .label-text {
     font-size: $devui-font-size;
-    padding: 1px 10px;
+    line-height: 20px;
+    padding: 0 8px;
     color: $devui-text-weak;
     font-weight: 400;
     background-color: $devui-label-bg;
   }
 
   .label-close {
-    padding-left: 3px;
+    padding-left: 4px;
     display: flex;
     align-items: center;
 
@@ -238,7 +239,7 @@
 }
 
 :host ::ng-deep .multiple-label-auto-complete-border ul li .devui-dropdown-menu {
-  margin-top: 7px;
+  margin-top: 8px;
 }
 
 :host ::ng-deep .multiple-label-auto-complete-multiline ul li .devui-dropdown-menu {

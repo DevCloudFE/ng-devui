@@ -6,8 +6,8 @@ import {
   Input,
   ViewChild
 } from '@angular/core';
-
 import { BadgePositionType, BadgeStatusType } from './badge.types';
+
 
 @Component({
   selector: 'd-badge',
@@ -18,7 +18,7 @@ export class BadgeComponent implements AfterViewInit {
   hasContent = true;
 
   @ViewChild('contentProjection') contentProjection?: ElementRef;
-  @Input() count: number;
+  @Input() count: number | string;
   @Input() maxCount = 99;
   @Input() showDot = false;
   @Input() status: BadgeStatusType;

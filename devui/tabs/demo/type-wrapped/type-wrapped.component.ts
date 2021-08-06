@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TypeWrappedComponent implements OnInit {
 
-    tabActiveId = 'tab1';
+    tabActiveId: string | number = 'tab1';
     activeTabData;
     tabItems = [
         {

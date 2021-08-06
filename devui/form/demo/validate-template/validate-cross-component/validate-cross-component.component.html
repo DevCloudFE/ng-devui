@@ -1,7 +1,7 @@
 <section class="demo-section">
   <d-toast [value]="msgs"></d-toast>
   <div>
-    <form dForm ngForm [dValidateRules]="formRules.rule" [layout]="'vertical'" #userForm="dValidateRules" (dSubmit)="submitForm()">
+    <form dForm ngForm [dValidateRules]="formRules.rule" [layout]="layoutDirection" #userForm="dValidateRules" (dSubmit)="submitForm()">
       <d-form-item>
         <d-form-label [required]="true" [hasHelp]="true" [helpTips]="'Enter a user name you like'">UserName</d-form-label>
         <d-form-control>

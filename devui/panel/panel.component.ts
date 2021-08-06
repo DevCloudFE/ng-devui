@@ -25,7 +25,7 @@ import { PanelType } from './panel.types';
 export class PanelComponent {
   @Input() type: PanelType = 'default';
   @Input() cssClass: string;
-  @Input() isCollapsed: boolean;
+  @Input() isCollapsed: boolean | Event;
   @Input() hasLeftPadding = true;
   @Input() @WithConfig() showAnimation = true;
   @Input() beforeToggle: (value) => boolean | Promise<boolean> | Observable<boolean>;

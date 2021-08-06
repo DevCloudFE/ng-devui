@@ -10,7 +10,7 @@ import { ModalService } from 'ng-devui/modal';
       <div style="margin-top: 10px; text-align: center;">
         <d-button
           (btnClick)='close()'
-          bsStyle="stress"
+          bsStyle="primary"
           circled="true"
         >
           Ok

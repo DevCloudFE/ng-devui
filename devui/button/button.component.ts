@@ -12,7 +12,7 @@ import {
   ViewChild
 } from '@angular/core';
 export type IButtonType = 'button' | 'submit' | 'reset';
-export type IButtonStyle = 'common' | 'primary' | 'text' | 'text-dark' | 'danger';
+export type IButtonStyle = 'common' | 'primary' | 'text' | 'text-dark' | 'danger' | 'success' | 'warning';
 export type IButtonPosition = 'left' | 'right' | 'default';
 export type IButtonSize = 'lg' | 'md' | 'sm' | 'xs';
 

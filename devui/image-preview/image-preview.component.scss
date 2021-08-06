@@ -41,7 +41,7 @@ $component-scope: 'devui-image-preview';
   cursor: pointer;
   width: 36px;
   height: 36px;
-  border-radius: (36px/2);
+  border-radius: 18px;
   background: $devui-highlight-overlay;
   box-shadow: $devui-shadow-length-base $devui-light-shadow;
   display: inline-flex;

@@ -11,7 +11,8 @@ export class MutilStylesComponent implements OnInit {
   headerBk = false;
   striped = false;
 
-  activeBorder = '';
+  activeBorderTab: string | number = '';
+  activeBorderTable: '' | 'bordered' | 'borderless' = '';
   borderItems = [
     {
       id: '',
@@ -27,7 +28,8 @@ export class MutilStylesComponent implements OnInit {
     }
   ];
 
-  activeSize = 'sm';
+  activeSizeTab: string | number = 'sm';
+  activeSizeTable: 'sm' | 'md' | 'lg' = 'sm';
   sizeItems = [
     {
       id: 'sm',
@@ -43,7 +45,8 @@ export class MutilStylesComponent implements OnInit {
     }
   ];
 
-  activeLayout = 'fixed';
+  activeLayoutTab: string | number = 'fixed';
+  activeLayoutTable: 'fixed' | 'auto' = 'fixed';
   layoutItems = [
     {
       id: 'fixed',

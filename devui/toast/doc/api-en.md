@@ -40,7 +40,6 @@ In the page:
 export interface Message {
   severity?: string; // The preset values include common, success, error, warn, and info. For details about the timeout interval, see the life description. If the timeout interval is not set or is not set, the timeout interval is 5000 ms, and the warn and error are 10000 ms.
   summary?: string; // Message title. If the timeout interval is set but no title is set, the title and close button are not displayed.
-  detail?: string; // Message content, content replacement is recommended.
   content?: string | TemplateRef<any>; // Message content. Plain text and template are supported. Recommended.
   life?: number; // Timeout interval of a single message. Set lifeMode to single. Each message uses its own timeout interval. If this mode is enabled but is not set, the timeout interval is determined based on severity.
   id?: any; // Message ID.

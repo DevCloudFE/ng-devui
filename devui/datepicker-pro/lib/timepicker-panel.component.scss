@@ -9,7 +9,7 @@
 }
 
 .devui-timepicker-panel {
-  width: 114px;
+  width: 115px; // 有1px边框
   height: 306px;
   text-align: center;
   border-left: 1px solid $devui-dividing-line;
@@ -17,12 +17,16 @@
   .devui-time-header {
     display: flex;
     height: 30px;
-    padding: 0 6px;
+    padding: 0 12px;
 
     &-item {
       flex: 1;
       line-height: 30px;
-      margin: 0 6px;
+      margin-right: 12px;
+
+      &:last-child {
+        margin-right: 0;
+      }
     }
   }
 
@@ -30,7 +34,7 @@
     display: flex;
     height: 276px;
     width: 114px;
-    padding: 0 6px;
+    padding: 0 12px;
     overflow: hidden;
     border-radius: $devui-border-radius $devui-border-radius 0 0;
 
@@ -40,8 +44,12 @@
       overflow-y: scroll;
       overflow-y: overlay;
       scroll-behavior: auto;
-      padding: 0 6px;
+      padding-right: 12px;
       scrollbar-width: none;
+
+      &:last-child {
+        padding-right: 0;
+      }
 
       &::-webkit-scrollbar {
         width: 0 !important;

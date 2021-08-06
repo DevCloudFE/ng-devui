@@ -4,7 +4,7 @@
       dForm
       ngForm
       [dValidateRules]="{ message: 'The form verification failed, please check.' }"
-      [layout]="'vertical'"
+      [layout]="layoutDirection"
       #planForm="dValidateRules"
       (dSubmit)="submitPlanForm($event)"
     >

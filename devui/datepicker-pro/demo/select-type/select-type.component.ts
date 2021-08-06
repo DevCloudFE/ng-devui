@@ -11,7 +11,7 @@ const ONE_WEEK_TIME = ONE_DAY_TIME * 7;
 export class SelectDatepickerDemoComponent {
   value2 = [new Date('2021-4-5'), new Date('2021-4-8')];
 
-  activeType = 'start';
+  activeType: 'start' | 'end' = 'start';
 
   showPanel = false;
 
@@ -42,11 +42,13 @@ export class SelectDatepickerDemoComponent {
 
   ensureDate() {
     this.showPanel = false;
-    this.options[3].name = this.options[3].value.map(d => d.toLocaleDateString()).join(' - ');
+    this.options[3].name = this.options[3].value.map(d => d?.toLocaleDateString() || '').join(' - ');
     this.options = [...this.options];
   }
 
-  switchType() {
-    this.activeType = this.activeType === 'start' ? 'end' : 'start';
+  cancel() {
+    this.showPanel = false;
+    this.options[3].value = this.options[3].name.split(' - ').map(d => new Date(d));
+    this.options = [...this.options];
   }
 }

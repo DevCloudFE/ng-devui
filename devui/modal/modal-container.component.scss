@@ -1,7 +1,7 @@
 @import '../style/core/_font';
 
 .modal-body {
-  padding: 10px 30px 0 30px;
+  padding: 12px 32px 12px 32px;
 }
 
 .display-flex {
@@ -12,18 +12,10 @@
   max-width: 100%;
 }
 
-.alert-icon {
-  margin-right: 10px;
-}
-
 div.content {
   word-break: normal;
   word-wrap: break-word;
   width: 100%;
-}
-
-.alert-icon + div.content {
-  width: 'calc(100% - 60px)';
 }
 
 .flex-content ::ng-deep div.content {

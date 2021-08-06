@@ -121,7 +121,7 @@ export class WithoutAnimationComponent {
       }
     }
   ];
-  data2 = [
+  data2: ITreeItem[] = [
     {
       id: '1',
       name: 'parent node 1 - expanded',

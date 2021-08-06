@@ -3,6 +3,7 @@ import { DOCUMENT } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { IFileOptions, IUploadOptions, SingleUploadComponent } from 'ng-devui/upload';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'd-basic',
@@ -10,7 +11,7 @@ import { IFileOptions, IUploadOptions, SingleUploadComponent } from 'ng-devui/up
 })
 export class BasicComponent implements OnInit {
   @ViewChild('singleuploadDrag', { static: true }) singleuploadDrag: SingleUploadComponent;
-  public beforeUploadFn: Function;
+  public beforeUploadFn: (file: any) => boolean | Observable<boolean> | Promise<boolean>;
   additionalParameter = {
     name: 'tom',
     age: 11

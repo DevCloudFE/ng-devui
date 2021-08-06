@@ -14,13 +14,7 @@
   [showTime]="true"
   [(ngModel)]="options[3].value"
   [activeRangeType]="activeType"
+  (confirmEvent)="ensureDate()"
+  (cancelEvent)="cancel()"
 >
-  <ng-template #footerTemplate>
-    <div class="footer-panel">
-      <d-button bsStyle="primary" (btnClick)="ensureDate()" [disabled]="options[3].value.length !== 2">{{
-        'components.datepicker-pro.static-panelDemo.ensure' | translate
-      }}</d-button>
-      <d-button bsStyle="common" (btnClick)="switchType()">{{ 'components.datepicker-pro.select-type.changeStart' | translate }}</d-button>
-    </div>
-  </ng-template>
 </d-datepicker-calendar>

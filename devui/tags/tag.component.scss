@@ -9,7 +9,7 @@
 }
 
 .devui-tag-item {
-  padding: 0 10px;
+  padding: 0 8px;
   min-height: 20px;
   font-size: $devui-font-size;
   line-height: 20px;
@@ -110,7 +110,7 @@
 }
 
 .devui-deletable-tag {
-  padding-right: 28px;
+  padding-right: 32px;
 }
 
 .devui-colorful-tag {
@@ -269,14 +269,14 @@
 
 .devui-tag-item {
   &.devui-checkable-tag {
-    transition: color $devui-animation-duration-slow $devui-animation-ease-in-smooth, background-color $devui-animation-duration-slow $devui-animation-ease-in-smooth;
+    transition: color $devui-animation-duration-slow $devui-animation-ease-in-out-smooth, background-color $devui-animation-duration-slow $devui-animation-ease-in-out-smooth;
 
     .content-wrapper {
-      transition: opacity $devui-animation-duration-slow $devui-animation-ease-in-smooth;
+      transition: opacity $devui-animation-duration-slow $devui-animation-ease-in-out-smooth;
     }
 
     .remove-button svg polygon {
-      transition: fill $devui-animation-duration-slow $devui-animation-ease-in-smooth;
+      transition: fill $devui-animation-duration-slow $devui-animation-ease-in-out-smooth;
     }
   }
 }

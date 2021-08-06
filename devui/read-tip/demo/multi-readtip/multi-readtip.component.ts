@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ReadTipOptions } from 'ng-devui/read-tip';
 
 @Component({
   selector: 'd-demo-multi',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./multi-readtip.component.scss'],
 })
 export class MultiReadtipComponent implements OnInit {
-  multiReadTip = {
+  multiReadTip: ReadTipOptions = {
     trigger: 'click',
     showAnimate: false,
     mouseenterTime: 100,

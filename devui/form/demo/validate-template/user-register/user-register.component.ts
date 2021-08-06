@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DValidateRules } from 'ng-devui/form';
+import { DValidateRules, FormLayout } from 'ng-devui/form';
 import { of } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
 
@@ -8,6 +8,7 @@ import { delay, map } from 'rxjs/operators';
   templateUrl: './user-register.component.html',
 })
 export class UserRegisterComponent {
+  layoutDirection: FormLayout = FormLayout.Vertical;
   msgs: Array<Object> = [];
 
   existUsernames = ['123', '123456', 'DevUI'];

@@ -2,13 +2,14 @@
 @import '../theme/shadow';
 @import '../theme/corner';
 @import '../theme/font';
+@import './animation';
 
 @mixin border-position-radius($position: left) {
   border-top-#{$position}-radius: 0;
   border-bottom-#{$position}-radius: 0;
 }
 $border-change-time: 300ms;
-$border-change-function: cubic-bezier(0.645, 0.045, 0.355, 1);
+$border-change-function: $devui-animation-ease-in-out-smooth;
 
 @mixin border-transition {
   transition: border-color $border-change-time $border-change-function;

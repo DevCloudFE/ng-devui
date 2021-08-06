@@ -1,6 +1,6 @@
 // tslint:disable: max-line-length
 import { Component, DebugElement, ElementRef, TemplateRef, ViewChild } from '@angular/core';
-import { ComponentFixture, fakeAsync, flush, TestBed, tick, waitForAsync } from '@angular/core/testing';
+import { async, ComponentFixture, fakeAsync, flush, TestBed, tick } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { DomHelper } from '../utils/testing/dom-helper';
@@ -171,7 +171,7 @@ describe('timePicker', () => {
   let component: TestTimePickerComponent;
   let domHelper: DomHelper<TestTimePickerComponent>;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [TimePickerModule, NoopAnimationsModule, FormsModule],
       declarations: [TestTimePickerComponent]

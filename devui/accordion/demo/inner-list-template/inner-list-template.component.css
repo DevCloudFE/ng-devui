@@ -5,7 +5,7 @@
 .my-menu {
   min-height: 60px;
   line-height: 40px;
-  padding: 10px;
+  padding: 12px;
 }
 
 @media (max-width: 500px) {

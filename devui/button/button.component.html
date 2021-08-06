@@ -15,5 +15,5 @@
 >
   <span *ngIf="!!icon" class="devui-icon-fix icon {{ icon }}" [ngClass]="{ 'clear-right-5': hasContent() }"></span>
   <!--
-  --><span class="button-content" #buttonContent><ng-content></ng-content></span>
+  --><span class="button-content" [class.devui-btn-more-text-omits]="width !== undefined" #buttonContent><ng-content></ng-content></span>
 </button>

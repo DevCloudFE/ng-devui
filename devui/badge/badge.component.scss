@@ -38,10 +38,10 @@
     min-width: 16px;
     height: 16px;
     font-size: $devui-font-size;
-    line-height: 12px;
+    line-height: 16px;
     text-align: center;
-    padding: 2px 4px;
-    border-radius: (16px/2);
+    padding: 0 4px;
+    border-radius: 8px;
   }
 
   &-dot {
@@ -85,10 +85,10 @@
   min-width: 16px;
   height: 16px;
   font-size: $devui-font-size;
-  line-height: 12px;
+  line-height: 16px;
   text-align: center;
-  padding: 2px 4px;
-  border-radius: (16px/2);
+  padding: 0 4px;
+  border-radius: 8px;
   @include status-color;
 }
 

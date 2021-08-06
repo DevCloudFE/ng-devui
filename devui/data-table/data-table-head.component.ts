@@ -178,7 +178,7 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
     }
 
     if (this.colDraggable && changes['tableBodyEl'] && this.tableBodyEl) {
-      if (this.fixHeader && this.tableBodyEl) {
+      if (this.fixHeader && this.tableBodyEl && this.dataSource.length) {
         this.fixOriginTable = this.tableBodyEl.nativeElement;
         this.renderFixFakeTableEl();
         this.fixFakeTableEl.style.display = 'none';
@@ -557,7 +557,7 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
 
   rerenderTables = () => {
     this.dataSourceChange = true;
-    if (this.fixHeader && this.tableBodyEl) {
+    if (this.fixHeader && this.tableBodyEl && this.dataSource.length) {
       this.fixOriginTable = this.tableBodyEl.nativeElement;
       setTimeout(() => {
         this.renderFixFakeTableEl();

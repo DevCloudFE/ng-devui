@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './without-content.component.html'
 })
 export class WithoutContentComponent implements OnInit {
-  acticeTabId = 'tab2';
+  acticeTabId: string | number = 'tab2';
   constructor() { }
 
   ngOnInit() {

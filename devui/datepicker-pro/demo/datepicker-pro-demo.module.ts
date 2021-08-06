@@ -5,10 +5,14 @@ import { RouterModule } from '@angular/router';
 import { AutoCompleteModule } from 'ng-devui/auto-complete';
 import { ButtonModule } from 'ng-devui/button';
 import { DatepickerProModule } from 'ng-devui/datepicker-pro';
+import { DropDownModule } from 'ng-devui/dropdown';
+import { InputNumberModule } from 'ng-devui/input-number';
+import { RadioModule } from 'ng-devui/radio';
 import { SelectModule } from 'ng-devui/select';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
+import { TabsModule } from 'ng-devui/tabs';
 import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 import { BasicDatepickerProComponent } from './basic/basic-datepicker-pro.component';
@@ -31,6 +35,10 @@ import { DatepickerProTemplateComponent } from './template/datepicker-template.c
     DevUIApiModule,
     DevUICodeboxModule,
     ButtonModule,
+    DropDownModule,
+    TabsModule,
+    RadioModule,
+    InputNumberModule,
     SelectModule,
     DDemoNavModule,
     DatepickerProModule,

@@ -22,12 +22,12 @@ export class ThemePickerComponent implements OnInit, OnDestroy {
   themePrefersColorScheme: boolean;
   sub: Subscription;
   largeFontSizeMode = false;
-  activeThemeType = 'devuiTheme';
-  advancedThemeList = [{ value: 'infinity',  url: 'assets/infinity.png' },
+  activeThemeType: string | number = 'devuiTheme';
+  advancedThemeList = [{ value: 'infinity', url: 'assets/infinity.png' },
   { value: 'sweet', url: 'assets/sweet.png' },
-  { value: 'provence',  url: 'assets/provence.png' },
-  { value: 'deep',  url: 'assets/deep.png' },
-  { value: 'galaxy',  url: 'assets/galaxy.png' }];
+  { value: 'provence', url: 'assets/provence.png' },
+  { value: 'deep', url: 'assets/deep.png' },
+  { value: 'galaxy', url: 'assets/galaxy.png' }];
   currentAdvancedTheme = 'infinity';
   assetsPrefix = environment.deployPrefix;
   constructor(
@@ -60,7 +60,7 @@ export class ThemePickerComponent implements OnInit, OnDestroy {
     if (this.isCustomizeTheme()) {
       this.activeThemeType = 'customizeTheme';
       try {
-        const {brand, isDark} =  JSON.parse(localStorage.getItem('user-custom-theme-config'));
+        const { brand, isDark } = JSON.parse(localStorage.getItem('user-custom-theme-config'));
         this.themeService.applyTheme(createTheme(brand, isDark, this.cts));
       } catch (e) {
         this.activeThemeType = 'devuiTheme';
@@ -111,8 +111,8 @@ export class ThemePickerComponent implements OnInit, OnDestroy {
 
   themeFontSizeChange() {
     if (typeof window !== 'undefined' && this.largeFontSizeMode) {
-     this.largeFontTheme.data = Object.assign({}, this.themes[window['devuiCurrentTheme']].data, LargeFontSize);
-     this.theme = `devui-large-font-theme`;
+      this.largeFontTheme.data = Object.assign({}, this.themes[window['devuiCurrentTheme']].data, LargeFontSize);
+      this.theme = `devui-large-font-theme`;
     } else {
       this.theme = `${this.themePrefix}-${this.themeMode}-theme`;
     }

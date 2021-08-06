@@ -1,4 +1,6 @@
-export const demoData = [
+import { ICategorySearchTagItem } from 'ng-devui/category-search';
+
+export const demoData: ICategorySearchTagItem[] = [
   {
     label: 'status',
     field: 'status',
