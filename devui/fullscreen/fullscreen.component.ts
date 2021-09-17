@@ -99,7 +99,7 @@ export class FullscreenComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-  private handleFullscreen = async () => {
+  public handleFullscreen = async () => {
     const targetElement = this.elementRef.nativeElement.querySelector('[fullscreen-target]');
     let isFullscreen;
     if (this.mode === 'normal') {

@@ -31,5 +31,9 @@ export class DragColumnComponent {
             fieldType: 'date'
         }
     ]
-};
+  };
+
+  onDragEnd(dragData) {
+    console.log(dragData);
+  }
 }

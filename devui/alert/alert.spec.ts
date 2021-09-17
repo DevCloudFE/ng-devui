@@ -107,15 +107,15 @@ describe('alert', () => {
 
     describe('alert close', () => {
       it('Alert should close', () => {
-        const closeButton = alertElement.querySelector('button');
-        closeButton.click();
+        const closeButton = alertElement.querySelector('.devui-close');
+        closeButton.dispatchEvent(new Event('click'));
         fixture.detectChanges();
         expect(alertElement.querySelector('.devui-alert')).toBe(null);
       });
 
       it('Alert should activate closeEvent', () => {
-        const closeButton = alertElement.querySelector('button');
-        closeButton.click();
+        const closeButton = alertElement.querySelector('.devui-close');
+        closeButton.dispatchEvent(new Event('click'));
         fixture.detectChanges();
         expect(testComponent.clickCount).toBe(1);
       });

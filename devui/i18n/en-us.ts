@@ -233,6 +233,7 @@ export default {
   },
   tagsInput: {
     tagsReachMaxLength: 'The length of tags has reached maxTags',
+    tagsReachMaxNumber: 'Maximum number reached: ',
   },
   categorySearch: {
     confirm: 'Confirm',

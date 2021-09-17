@@ -67,7 +67,7 @@ export class AutoCompletePopupComponent implements ControlValueAccessor {
   }
 
   onSelect(event, item) {
-    if (this.disabledKey && item[this.disabledKey]) {
+    if (this.disabledKey && item && item[this.disabledKey]) {
       event.preventDefault();
       event.stopPropagation();
       return;

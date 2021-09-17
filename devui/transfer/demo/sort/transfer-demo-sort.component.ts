@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { TransferDataFormat } from 'ng-devui/transfer';
 
 @Component({
   selector: 'd-transfer-demo-sort',
@@ -20,7 +19,7 @@ export class TransferDemoSortComponent {
     { name: 'Option10', value: 3, id: 10, disabled: true },
   ];
 
-  targetOption: TransferDataFormat[] = [
+  targetOption = [
     { name: 'Option11', value: 3, id: 11 },
     { name: 'Option12', value: 3, id: 12 },
     { name: 'Option13', value: 3, id: 13 },

@@ -20,3 +20,4 @@ import { RateModule } from 'ng-devui/rate';
 |   color   |            `string`             |  --   | 可选，星星颜色                                           | [动态模式-自定义](demo#dynamic-mode-Custom)      |
 |   icon    |            `string`             |  --   | 可选，评分图标的样式，只支持 devUI 图标库中所有图标      | [动态模式](demo#dynamic-mode)             |
 | character |            `string`             |  --   | 可选，评分图标的样式，icon 与 character 只能设置其中一个 | [动态模式-自定义](demo#dynamic-mode-Custom)      |
+| allowHalf |            `boolean`             |  false   | 可选，动态模式下是否允许半选 | [半选模式](demo#rate-half)      |

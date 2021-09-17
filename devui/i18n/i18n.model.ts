@@ -133,6 +133,7 @@ export interface I18nInterface {
   };
   tagsInput: {
     tagsReachMaxLength: string;
+    tagsReachMaxNumber: string;
   };
   categorySearch: {
     confirm: string;

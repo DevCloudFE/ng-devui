@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DevuiSourceData } from 'ng-devui/shared/devui-codebox/devui-source-data';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { DevuiSourceData } from 'ng-devui/shared/devui-codebox/devui-source-data';
 import { Subscription } from 'rxjs';
 @Component({
   selector: 'd-datepicker-pro-demo',
@@ -19,7 +19,7 @@ export class DatepickerProDemoComponent implements OnInit, OnDestroy {
 
   templateSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./template/datepicker-template.component.html') },
-    { title: 'SCSS', language: 'scss', code: require('!!raw-loader!./template/datepicker-template.component.scss') },
+    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./template/datepicker-template.component.scss') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./template/datepicker-template.component.ts') },
   ];
 
@@ -35,6 +35,7 @@ export class DatepickerProDemoComponent implements OnInit, OnDestroy {
 
   rangeTemplateSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./range-template/range-template.component.html') },
+    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./range-template/range-template.component.scss') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./range-template/range-template.component.ts') },
   ];
 
@@ -55,7 +56,12 @@ export class DatepickerProDemoComponent implements OnInit, OnDestroy {
     { title: 'SCSS', language: 'css', code: require('!!raw-loader!./select-type/select-type.component.scss') },
   ];
 
-  navItems = [];
+  DatepickerProDemoTabType: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./tab-type/datepicker-pro-tab-type.component.html') },
+    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./tab-type/datepicker-pro-tab-type.component.ts') },
+    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./tab-type/datepicker-pro-tab-type.component.scss') },
+  ];
+    navItems = [];
   subs: Subscription = new Subscription();
   constructor(private translate: TranslateService) {}
 

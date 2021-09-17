@@ -13,7 +13,7 @@
   (click)="onClick($event)"
   [ngClass]="{ 'd-btn-icon': !!icon && !hasContent() && bsStyle !== 'primary', 'd-btn-icon-wrap': !!icon }"
 >
-  <span *ngIf="!!icon" class="devui-icon-fix icon {{ icon }}" [ngClass]="{ 'clear-right-5': hasContent() }"></span>
+  <span *ngIf="!!icon" class="devui-icon-fix icon {{ icon }}" [ngClass]="{ 'clear-right-4': hasContent() }"></span>
   <!--
   --><span class="button-content" [class.devui-btn-more-text-omits]="width !== undefined" #buttonContent><ng-content></ng-content></span>
 </button>

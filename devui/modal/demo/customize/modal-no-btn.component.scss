@@ -1,0 +1,21 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
+.modal-header {
+  line-height: 30px;
+  padding: 20px 32px 0 32px;
+  font-size: $devui-font-size-modal-title;
+  font-weight: bold;
+}
+
+.icon-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: $devui-font-size-icon;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $devui-list-item-hover-bg;
+    color: $devui-icon-fill-active;
+  }
+}

@@ -1,5 +1,5 @@
 import { Component, DebugElement } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { TagsModule } from './tags.module';
 
@@ -28,7 +28,7 @@ describe('tag', () => {
   let testComponent: TestTagsComponent;
   let tags: DebugElement[];
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [TagsModule],
       declarations: [TestTagsComponent]

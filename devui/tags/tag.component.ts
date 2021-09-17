@@ -40,11 +40,11 @@ export class TagComponent {
 
   colorMap = {
     'blue-w98': '#3383ff',
-    'aqua-w98': '#6cbfff',
-    'olivine-w98': '#50d4ab',
-    'green-w98': '#a6dd82',
-    'yellow-w98': '#fac20a',
-    'orange-w98': '#fa9841',
+    'aqua-w98': '#39afcc',
+    'olivine-w98': '#2fa898',
+    'green-w98': '#4eb15e',
+    'yellow-w98': '#b08d1a',
+    'orange-w98': '#d47f35',
     'red-w98': '#f66f6a',
     'pink-w98': '#f3689a',
     'purple-w98': '#a97af8',

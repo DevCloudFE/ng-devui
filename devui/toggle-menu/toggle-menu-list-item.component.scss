@@ -1,0 +1,50 @@
+@import '../style/theme/color';
+@import '../style/core/_font';
+
+:host {
+  li {
+    font-size: inherit;
+    min-height: inherit;
+    line-height: inherit;
+    padding: 11px 10px;
+    width: 100%;
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    border: 0;
+    cursor: pointer;
+
+    &.devui-toggle-menu-item.disabled {
+      cursor: not-allowed;
+      color: $devui-disabled-text;
+    }
+
+    &.devui-toggle-menu-item:not(.disabled) {
+      &.selected {
+        background-color: $devui-list-item-hover-bg;
+        color: $devui-list-item-hover-text;
+      }
+
+      &.active {
+        background-color: $devui-list-item-active-bg;
+        color: $devui-list-item-active-text;
+      }
+
+      &.active:hover {
+        background-color: $devui-list-item-active-hover-bg;
+        color: $devui-list-item-active-text;
+      }
+    }
+
+    &.devui-toggle-menu-multiple-item:not(.disabled) {
+      background-color: transparent;
+      color: $devui-text;
+
+      &:hover {
+        background-color: $devui-list-item-hover-bg;
+        color: $devui-list-item-hover-text;
+      }
+    }
+  }
+}

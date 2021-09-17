@@ -48,10 +48,6 @@ export const componentMap = [
     matches: ['treegrid']
   },
   {
-    name: 'jsmind',
-    matches: ['diagram']
-  },
-  {
     name: 'card',
     matches: ['kanban']
   },

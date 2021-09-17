@@ -417,9 +417,21 @@
         "ganttChart": "甘特图",
         "sequenceChart": "时序图"
       },
+      "checkedDemo": {
+        "title": "checkbox 渲染",
+        "description": "支持checkbox渲染。"
+      },
+      "latexDemo": {
+        "title": "数学公式渲染",
+        "description": "支持Latex格式渲染"
+      },
       "tocDemo": {
         "title": "TOC 渲染",
         "description": "支持生成TOC目录"
+      },
+      "plantumlDemo": {
+        "title": "Plantuml 渲染",
+        "description": "生成UML图"
       },
       "enormousTextDemo": {
         "title": "大数据量场景处理",
@@ -442,7 +454,10 @@
         "quick-suggestion": "快速提示(@用户等)",
         "single-render-md": "单独渲染md文本",
         "mermaid-render": "Mermaid渲染",
+        "checked-render": "checkbox渲染",
+        "latex-render": "数学公式渲染",
         "toc-render": "TOC渲染",
+        "uml-render": "UML渲染",
         "big-data-process": "大数据量场景处理"
       }
     },
@@ -1225,6 +1240,41 @@
         "border-radius": "圆角"
       }
     },
+    "design-animation": {
+      "name": "Animation 动效",
+      "type": "Design tokens",
+      "path": "design-animation",
+      "description": "组件库公共样式规范。",
+      "tmw": "当需要查看组件库相关样式，使用场景以及变更时。",
+      "AnimationDemo": {
+        "title": "动效",
+        "description1": "1. 组件库为用户们提供了圆角变量用于不同的场景，下表列出了这些变量的名称，对应的变量值以及使用场景；动效使用参考https://developer.mozilla.org/zh-CN/docs/Web/CSS/transition",
+        "description2": "2. 通过`@import '~ng-devui/styles-var/devui-var.scss';`引入圆角变量后即可使用；",
+        "description3": "3. 若样式表为less文件，则`@import '~ng-devui/styles-var/devui-var.less';`,并将变量前缀'$'改为'@'。",
+        "instance": {
+          "title": "Instance",
+          "tableTitle": "动效变量表",
+          "table": {
+            "animationName": "动效变量名",
+            "animationValue": "动效变量值",
+            "description": "描述"
+          },
+          "animation": {
+            "devui-animation-duration-slow": "动效时长参数，常用于大型元素出现消失，状态变化等场景",
+            "devui-animation-duration-base": "动效时长参数，常用于常规元素出现消失，状态变化等场景",
+            "devui-animation-duration-fast": "动效时长参数，常用于提示类小型元素出现消失，状态变化等场景",
+            "devui-animation-ease-in": "元素离场动效曲线，常用于元素消失的场景",
+            "devui-animation-ease-out": "元素入场动效曲线，常用于元素出现的场景",
+            "devui-animation-ease-in-out": "元素转场动效曲线，常用于内容切换场景",
+            "devui-animation-ease-in-out-smooth": "元素转场动效曲线，常用于悬浮，高亮等状态切换场景",
+            "devui-animation-linear": "线性动效曲线，常用于背景遮罩层出现消失的场景"
+          }
+        }
+      },
+      "anchorLinkValues": {
+        "animation": "animation"
+      }
+    },
     "codemirror": {
       "name": "CodeMirror 代码编辑器",
       "type": "扩展服务",
@@ -1276,7 +1326,7 @@
       "batchDragRowDemo": {
         "title": "批量行拖拽",
         "description": "支持使用DragDrop组件来实现表格的批量行拖拽功能，请用Ctrl按键和鼠标多选并进行拖拽，只能通过自定义head、body模板和其中的行、单元格来实现。"
-      },
+      },    
       "editableDemo": {
         "title": "编辑单元格",
         "description": "支持两种实现方式，方式一通过自定义body模板中的单元格来实现，方式二通过配置column来实现。"
@@ -1313,6 +1363,10 @@
         "title": "批量行拖拽",
         "description": "支持使用DragDrop组件来实现表格的批量行拖拽功能，请用Ctrl按键和鼠标多选并进行拖拽，只能通过自定义head、body模板和其中的行、单元格来实现。"
       },
+      "bigDataTreeTableDemo": {
+        "title": "大数据量树形表格",
+        "description": "当需要展示10000~100000条树形数据时，为使操作流畅，请使用这种表格。"
+      },
       "mutilStylesDemo": {
         "title": "表格样式"
       },
@@ -1346,7 +1400,8 @@
         "column-dragging": "列拖拽",
         "cell-merge": "单元格合并",
         "drag-row": "行拖拽",
-        "muti-drag-row": "批量行拖拽"
+        "muti-drag-row": "批量行拖拽",
+        "big-data-tree-table": "大数据树形表格"
       }
     },
     "datepickerPro": {
@@ -1512,20 +1567,6 @@
         "render-pie": "渲染一个饼图",
         "chart-bg": "修改chart背景色",
         "chart-ins": "获取echarts实例"
-      }
-    },
-    "jsmind": {
-      "name": "Jsmind 思维导图",
-      "type": "扩展服务",
-      "path": "jsmind",
-      "description": "思维导图组件。",
-      "tmw": "当需要向用户展示一些横向结构层次关系时。",
-      "basicDemo": {
-        "title": "基本用法",
-        "description": "渲染一个基本的思维导图。"
-      },
-      "anchorLinkValues": {
-        "basic-usage": "基本用法"
       }
     },
     "multi-auto-complete": {
@@ -1710,6 +1751,10 @@
         "title": "跨组件验证",
         "description": "<ul><li>当前<code>Angular Form</code>默认暂不支持跨组件共享表单校验状态，对于响应式表单，你可使用统一管理<code>model</code>，向下透传的方式进行组件组织。</li><li>针对模板驱动表单，你可使用在子组件声明时进行容器注入的方式，将你需要的<code>ngModelGroup</code>或<code>NgForm</code>容器进行注入，以供模板中表单元素自动获取父容器。</li></ul>"
       },
+      "validateUpdate": {
+        "title": "更新校验规则",
+        "description": "你可以调用<code>dValidateRules</code>指令提供的<code>updateRules</code>方法进行校验规则更新。"
+      },
       "reactiveCrossComponent": {
         "title": "响应式表单跨组件验证"
       },
@@ -1726,7 +1771,8 @@
         "demo-validate-reactive": "响应式表单验证",
         "demo-custom-status": "指定表单状态",
         "demo-validate-sync": "表单协同验证",
-        "demo-validate-cross-component": "跨组件表单验证"
+        "demo-validate-cross-component": "跨组件表单验证",
+        "demo-validate-update": "更新验证规则"
       }
     },
     "fullscreen": {
@@ -1868,11 +1914,15 @@
         "option20": "选项20",
         "option21": "选项21"
       },
+      "vitrualScrollDemo": {
+        "title": "虚拟滚动"
+      },
       "anchorLinkValues": {
         "transfer-demo-base": "基本用法",
         "transfer-demo-search": "搜索穿梭框",
         "transfer-demo-sort": "排序穿梭框",
-        "transfer-demo-custom": "自定义穿梭框"
+        "transfer-demo-custom": "自定义穿梭框",
+        "transfer-demo-virtual-scroll": "虚拟滚动"
       }
     },
     "dragdrop": {
@@ -2300,6 +2350,10 @@
         "title": "通过外层fixed同时避免滚动和抖动",
         "description": "通过外层fixed同时避免滚动和抖动，在使用这种方式时，页面内所有fixed元素需要给定具体的位置值，使用默认定位值会导致位置偏移。"
       },
+      "casesDemo": {
+        "title": "场景案例",
+        "description": "模拟真实场景。"
+      },
       "anchorLinkValues": {
         "standard-dialog": "标准对话框",
         "custom-dialog": "自定义对话框",
@@ -2309,7 +2363,8 @@
         "update-button-options": "更新弹出框按钮状态",
         "configure-button-to-get-focus-automatically": "配置按钮自动获得焦点",
         "template-content": "配置弹出框内容模板",
-        "template-fixed": "通过外层fixed同时避免滚动和抖动"
+        "template-fixed": "通过外层fixed同时避免滚动和抖动",
+        "cases": "场景案例"
       }
     },
     "pagination": {
@@ -2403,7 +2458,7 @@
       },
       "customizeDemo": {
         "title": "基本用法",
-        "description": "支持传入HTMLElement或TemplateRef类型。",
+        "description": "支持传入TemplateRef类型。",
         "customizeTip": "自定义提示",
         "isCustomizeTip": "这是一个自定义提示",
         "customizeTipLink": "自定义提示，带链接",
@@ -2523,6 +2578,9 @@
       "customizeDemo": {
         "title": "动态模式-自定义"
       },
+      "halfDemo": {
+        "title": "半选模式"
+      },
       "typeDemo": {
         "title": "使用type参数"
       },
@@ -2530,6 +2588,7 @@
         "read-only-mode": "只读模式",
         "dynamic-mode": "动态模式",
         "dynamic-mode-Custom": "动态模式-自定义",
+        "half-demo": "半选模式",
         "using-the-type-parameter": "使用type参数"
       }
     },
@@ -3487,10 +3546,10 @@
         "click me!": "clickme!"
       },
       "customIconDemo": {
-        "title": "自定义icon能力",
+        "title": "自定义列表选项的 icon 及已选中选项",
         "description": "",
         "Standard: iconTemplatePosition": "Standard: iconTemplatePosition",
-        "Standard: iconTemplateInput": "Standard: iconTemplateInput"
+        "Standard: iconTemplateInput": "Standard: itemTemplateInput + iconTemplateInput"
       },
       "keysDemo": {
         "title": "自定义key",
@@ -3518,7 +3577,7 @@
         "init-hooks": "初始化完成时调用的钩子",
         "simple-search": "可简易搜索树",
         "append-to-element": "Append To Element 能力",
-        "custom-icon": "自定义icon能力",
+        "custom-icon": "自定义列表选项的 icon 及已选中选项",
         "keys": "自定义key",
         "custom-template": "自定义区域",
         "icon-parent": "展开关闭icon",
@@ -3856,6 +3915,10 @@
         "title": "业务场景：select类型日期选择器",
         "changeStart": "切换起始"
       },
+      "tab-typeDemo": {
+        "title": "业务场景：tab切换多种选择类型",
+        "ensure": "确认"
+      },
       "anchorLinkValues": {
         "basic-usage": "基本用法",
         "show-time": "显示时间",
@@ -3865,7 +3928,8 @@
         "host-template": "自定义宿主",
         "rangeTemplate": "范围模式的模板使用",
         "datepicker-pro-static-panel": "日历面板模式",
-        "select-type": "业务场景：select类型日期选择器"
+        "select-type": "业务场景：select类型日期选择器",
+        "tab-typeDemo": "业务场景：tab切换多种选择类型"
       }
     },
     "trend": {

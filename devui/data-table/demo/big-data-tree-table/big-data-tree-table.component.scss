@@ -1,0 +1,24 @@
+.demo-margin {
+  margin: 5px 5px 0 0;
+}
+
+.tree-table-icon {
+  font-size: 16px;
+  cursor: pointer;
+  margin-right: 4px;
+  color: #8a8e99;
+}
+
+.cdk-scroll-container {
+  position: relative;
+  padding-top: 45px;
+
+  #big-data-tree-table {
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    right: 5px;
+    bottom: 0;
+  }
+}

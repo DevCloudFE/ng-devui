@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { Subscription } from 'rxjs';
 @Component({
   selector: 'd-datatable-demo',
@@ -122,6 +122,12 @@ export class DataTableDemoComponent implements OnInit, OnDestroy {
     { title: 'SCSS', language: 'css', code: require('!!raw-loader!./muti-drag-row/muti-drag-row.component.scss') },
     { title: 'mock-data', language: 'typescript', code: require('!!raw-loader!./mock-data') },
   ];
+  bigDataTreeTableSource: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./big-data-tree-table/big-data-tree-table.component.html') },
+    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./big-data-tree-table/big-data-tree-table.component.ts') },
+    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./big-data-tree-table/big-data-tree-table.component.scss') },
+    { title: 'mock-data', language: 'typescript', code: require('!!raw-loader!./big-data-tree-table/mock-data') },
+  ];
   virtualScrollSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('!!raw-loader!./virtual-scroll/virtual-scroll.component.html') },
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./virtual-scroll/virtual-scroll.component.ts') },
@@ -181,6 +187,7 @@ export class DataTableDemoComponent implements OnInit, OnDestroy {
       { dAnchorLink: 'cell-merge', value: values['cell-merge'] },
       { dAnchorLink: 'drag-row', value: values['drag-row'] },
       { dAnchorLink: 'muti-drag-row', value: values['muti-drag-row'] },
+      // { dAnchorLink: 'big-data-tree-table', value: values['big-data-tree-table'] },
     ];
   }
 

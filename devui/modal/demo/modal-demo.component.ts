@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -66,6 +66,12 @@ export class ModalDemoComponent implements OnInit, OnDestroy {
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./fixed/fixed-wrapper.component.ts') },
     { title: 'ModalTestComponent HTML', language: 'xml', code: require('!!raw-loader!./fixed/modal-test.component.html') },
     { title: 'ModalTestComponent TS', language: 'typescript', code: require('!!raw-loader!./fixed/modal-test.component.ts') }
+  ];
+  casesSource: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./cases/cases.component.html') },
+    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./cases/cases.component.ts') },
+    { title: 'ModalCasesComponent HTML', language: 'xml', code: require('!!raw-loader!./cases/modal-cases.component.html') },
+    { title: 'ModalCasesComponent TS', language: 'typescript', code: require('!!raw-loader!./cases/modal-cases.component.ts') }
   ];
 
   navItems = [];

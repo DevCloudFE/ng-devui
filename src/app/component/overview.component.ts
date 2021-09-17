@@ -1,7 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { cloneDeep } from 'lodash-es';
+import { I18nService } from 'ng-devui/i18n';
+import { Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ComponentDataService } from './component.data.service';
 import { componentMap } from './component.map';
@@ -34,8 +37,14 @@ export class ComponentsOverviewComponent implements OnInit, OnDestroy {
     { title: '', name: 'newChangeCmps', checked: false },
     { title: '', name: 'recentlySuggestCmps', checked: false }
   ];
+  currentLang: string;
+  body: any;
+  scrollSubscription: Subscription;
 
-  constructor(private translate: TranslateService, private router: Router, private comDataService: ComponentDataService) {
+  constructor(
+    private translate: TranslateService, private router: Router, private comDataService: ComponentDataService,
+    private i18n: I18nService, @Inject(DOCUMENT) public doc: any
+  ) {
     this.comDataService.getComData().subscribe(value => this.componentsData = value);
     this.componentsDataDisplay = cloneDeep(this.componentsData);
     this.setI18n();
@@ -61,13 +70,16 @@ export class ComponentsOverviewComponent implements OnInit, OnDestroy {
 
   setI18n() {
     this.overviewText = this.translate.instant('public').overview;
-    this.tagList.map(tag => {tag.title = this.overviewText[tag.name]; });
+    this.tagList.map(tag => {tag.title = this.overviewText ? this.overviewText[tag.name] : ''; });
+    this.currentLang = this.i18n.getI18nText().locale;
   }
 
   calNumberOfComponents() {
     this.totalNumComponents = 0;
     this.componentsData.map(components => {
-      this.totalNumComponents = this.totalNumComponents + components.children.length;
+      if (!components.nodisplay) {
+        this.totalNumComponents = this.totalNumComponents + components.children.length;
+      }
     });
   }
 
@@ -152,7 +164,7 @@ export class ComponentsOverviewComponent implements OnInit, OnDestroy {
   }
 
   jumpToComponent(link) {
-    this.router.navigate(['components', 'zh-cn', link]);
+    this.router.navigate(['components', this.currentLang, link]);
   }
 
   jumpToChangeLog(e) {

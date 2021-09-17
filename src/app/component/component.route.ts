@@ -19,6 +19,19 @@ export const routesConfig = [
     },
   },
   {
+      path: 'design-animation',
+      component: ExamplePanelComponent,
+      loadChildren: () =>
+        import('../../../devui/design-token/animation/demo/design-animation-demo.module').then((m) => m.DesignAnimationDemoModule),
+      data: {
+        type: 'Design Tokens',
+        enType: 'Design Tokens',
+        name: 'Animation',
+        cnName: '动效',
+        nodisplay: true,
+      },
+    },
+  {
     path: 'design-link',
     component: ExamplePanelComponent,
     loadChildren: () =>

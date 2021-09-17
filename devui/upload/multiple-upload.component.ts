@@ -1,7 +1,8 @@
+import { DOCUMENT } from '@angular/common';
 import {
   Component, EventEmitter,
 
-  forwardRef, Input, OnDestroy,
+  forwardRef, Inject, Input, OnDestroy,
 
   OnInit, Output, TemplateRef,
   ViewChild
@@ -70,14 +71,17 @@ export class MultipleUploadComponent implements OnDestroy, OnInit {
   errorMsg = [];
   UploadStatus = UploadStatus;
   uploadTips: string;
-
+  document: Document;
   private onChange = (_: any) => null;
   private onTouched = () => null;
 
   constructor(
     private selectFiles: SelectFiles,
     private i18n: I18nService,
-    private toastService: ToastService) { }
+    @Inject(DOCUMENT) private doc: any,
+    private toastService: ToastService) {
+      this.document = this.doc;
+    }
   ngOnInit(): void {
     this.i18nText = this.i18n.getI18nText().upload;
     this.i18nCommonText = this.i18n.getI18nText().common;
@@ -187,6 +191,10 @@ export class MultipleUploadComponent implements OnDestroy, OnInit {
       if (!canUpload) {
         this.multipleUploadViewComponent.removeFiles();
         return;
+      }
+      const tempNode = this.document.getElementById('d-upload-temp');
+      if (tempNode) {
+        this.document.body.removeChild(tempNode);
       }
       const uploadObservable = this.oneTimeUpload ?
         this.multipleUploadViewComponent.oneTimeUpload() :

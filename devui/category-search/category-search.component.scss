@@ -298,7 +298,7 @@ d-tag {
 .devui-radio-template {
   li a {
     display: block;
-    line-height: 36px;
+    line-height: 32px;
     border-radius: 4px;
     white-space: nowrap;
     overflow: hidden;
@@ -307,13 +307,17 @@ d-tag {
 }
 
 :host ::ng-deep {
-  .devui-tag-container d-tag > .devui-tag-item > span {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    display: inline-block;
-    vertical-align: bottom;
-    margin: 0 4px;
+  .devui-tag-container d-tag > .devui-tag-item {
+    display: block !important;
+
+    & > span {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      display: inline-block;
+      vertical-align: bottom;
+      margin: 0 4px;
+    }
   }
 
   .devui-checkbox-column-margin {
@@ -475,6 +479,7 @@ d-tag {
 
 .devui-dropdown-menu {
   margin-top: 4px;
+  padding-bottom: 0;
 }
 
 .devui-no-data-text {

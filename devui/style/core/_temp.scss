@@ -1,0 +1,76 @@
+@import '../theme/color.scss';
+@import './font.scss';
+@import '../theme/corner';
+
+ul.devui-dropdown-menu {
+  > li {
+    > a {
+      font-size: $devui-font-size;
+    }
+
+    > .dropdown-item {
+      font-size: $devui-font-size;
+    }
+  }
+}
+
+.devui-checkbox label,
+label,
+.devui-layout,
+div.devui-layout,
+input.form-control {
+  font-size: $devui-font-size;
+}
+
+d-data-table.g-table {
+  thead > tr > th {
+    line-height: $devui-line-height-base;
+  }
+}
+
+.devui-dropdown {
+  .devui-dropdown-default,
+  .devui-dropdown-no-border {
+    display: flex !important;
+    line-height: $devui-line-height-base !important;
+    padding: 4px 10px !important;
+    text-align: center !important;
+    font-size: $devui-font-size;
+    background-image: none;
+    // background-color: $devui-connected-overlay-bg;
+    text-decoration: none;
+    cursor: pointer;
+    min-height: 28px;
+    outline: 0;
+    border-radius: $devui-border-radius;
+    height: 28px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .devui-dropdown-default {
+    min-width: unset;
+    border-style: solid;
+    border-width: 1px;
+  }
+
+  .devui-dropdown-no-border {
+    min-width: calc(min(100%, 102px));
+    border-style: unset;
+    border-width: unset;
+    box-shadow: none;
+    border: none;
+    border-color: transparent;
+  }
+}
+
+ol,
+ul {
+  margin-bottom: 0;
+}
+
+input[type=text].devcloud-form-text,
+input[type=password].devcloud-form-text,
+textarea.devcloud-form-text {
+  font-size: $devui-font-size;
+}

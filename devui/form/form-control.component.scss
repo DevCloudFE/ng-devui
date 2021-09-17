@@ -32,14 +32,16 @@
   display: inline-block;
   font-size: $devui-font-size;
   min-height: 20px;
-  padding-left: 1px;
+  position: relative;
+  left: 1px;
   color: $devui-danger;
 
   .devui-form-message-text {
     display: inline-flex;
     align-items: center;
     line-height: 1.5;
-    padding: 1px 0;
+    border-top: 1px solid transparent;
+    border-bottom: 1px solid transparent;
 
     .devui-form-message-svg {
       line-height: 1;
@@ -68,11 +70,13 @@
   z-index: 1;
   width: 32px;
   height: 16px;
-  margin-top: -7px;
-  line-height: 16px;
   text-align: center;
   visibility: visible;
   pointer-events: none;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   &.devui-form-item-icon-error {
     svg circle {
@@ -120,11 +124,13 @@
     z-index: 1;
     width: 32px;
     height: 16px;
-    margin-top: -7px;
-    line-height: 16px;
     text-align: center;
     visibility: visible;
     pointer-events: auto;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .suffix {

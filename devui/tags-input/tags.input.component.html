@@ -1,59 +1,57 @@
-<div #selectBox class="devui-tags-host" tabindex="-1" (click)="host_click()">
-  <div #inputBox class="devui-tags devui-form-control devui-dropdown-origin" [ngClass]="{ 'devui-disabled': disabled }">
-    <ul class="devui-tag-list">
-      <li class="devui-tag-item" *ngFor="let tag of tags; let index = index">
-        <span>{{ tag[displayProperty] }}</span>
-        <a *ngIf="!disabled" class="remove-button" (click)="removeTag(index)">
-          <svg
-            width="12px"
-            height="12px"
-            viewBox="0 0 12 12"
-            version="1.1"
-            xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink"
-          >
-            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-              <path
-                d="M8.86785321,3.13214679 C9.02624037,3.29053395 9.02624037,3.54733027 8.86785321,3.70571743 L6.573,6 L8.86785321,8.29428257 C9.02624037,8.45266973 9.02624037,8.70946605 8.86785321,8.86785321 C8.70946605,9.02624037 8.45266973,9.02624037 8.29428257,8.86785321 L6,6.573 L3.70571743,8.86785321 C3.54733027,9.02624037 3.29053395,9.02624037 3.13214679,8.86785321 C2.97375963,8.70946605 2.97375963,8.45266973 3.13214679,8.29428257 L5.427,6 L3.13214679,3.70571743 C2.97375963,3.54733027 2.97375963,3.29053395 3.13214679,3.13214679 C3.29053395,2.97375963 3.54733027,2.97375963 3.70571743,3.13214679 L6,5.427 L8.29428257,3.13214679 C8.45266973,2.97375963 8.70946605,2.97375963 8.86785321,3.13214679 Z"
-                fill-rule="nonzero"
-              ></path>
-            </g>
-          </svg>
-        </a>
-      </li>
-    </ul>
-    <input
-      #tagInput
-      class="input devui-input"
-      [(ngModel)]="newTag"
-      (keydown)="input_keydown($event)"
-      (focus)="input_focus($event)"
-      (blur)="input_blur($event)"
-      (trim)="(false)"
-      [placeholder]="placeholder"
+<div #tagsInputWrapper class="devui-tags-host {{ multiline ? '' : 'init-inline' }}" tabindex="-1" (click)="host_click()">
+  <d-toggle-menu-container
+    [isOpen]="isOpen"
+    [appendToBody]="appendToBody"
+    [selectWrapper]="tagsInputWrapperItem"
+    [disabled]="disabled || selectedItems?.length >= maxTags"
+    [toggleOnFocus]="true"
+    [showAnimation]="showAnimation"
+    [closeScope]="'blank'"
+    (passEvent)="passEvent($event)"
+    (toggleChange)="toggleChangeFn($event)"
+  >
+    <d-toggle-menu-label
+      [multiItems]="selectedItems"
+      [mode]="'multiple-line'"
+      [valueParser]="valueParser"
+      [disabled]="disabled"
+      [maxHeight]="maxHeight"
+      (removeChange)="removeTag($event)"
+    ></d-toggle-menu-label>
+    <d-toggle-menu-search
+      *ngIf="!disabled"
+      [inputValue]="newTag"
+      [searchPlaceholder]="getPlaceHolder"
+      [searchFn]="searchFn"
       [spellcheck]="spellcheck"
-      [ngClass]="{ 'invalid-tag': !newTagValid }"
-      type="text"
-      [style.display]="disabled ? 'none' : 'block'"
-      [disabled]="tags.length >= maxTags"
-      [title]="tags.length >= maxTags ? i18nTagsInputText.tagsReachMaxLength : ''"
-    />
-  </div>
-  <div [@fadeInOut]="'bottom'" [@.disabled]="!showAnimation" *ngIf="showSuggestionList" class="devui-tags-autocomplete devui-dropdown-menu">
-    <ul class="devui-suggestion-list" *ngIf="showSuggestionList && availableOptions?.length && !(tags.length >= maxTags)">
-      <li
-        class="devui-suggestion-item"
-        *ngFor="let item of availableOptions; let index = index"
-        [ngClass]="{ selected: index === selectIndex }"
-        (mousedown)="addSuggestionByIndex(index, item)"
-      >
-        {{ item[displayProperty] }}
-      </li>
-    </ul>
-    <ul class="devui-suggestion-list" *ngIf="showSuggestionList && !availableOptions?.length && !(tags.length >= maxTags)">
-      <li class="devui-suggestion-item devui-disabled">
-        {{ i18nCommonText.noData }}
-      </li>
-    </ul>
-  </div>
+      [isShowSearchIcon]="false"
+      [disabled]="disabled || selectedItems?.length >= maxTags"
+      [inputWidth]="multiline ? '' : 'auto'"
+      [delay]="0"
+      (searchInputValueChange)="searchInputValueChange($event)"
+    ></d-toggle-menu-search>
+    <d-toggle-menu-list
+      [eventHandle]="inputEvent"
+      [options]="availableOptions"
+      [value]="selectedItems"
+      [hasSelectIndex]="true"
+      [isFiltering]="newTag?.length === 0"
+      [listItemTemplate]="listItem"
+      [closeScope]="'blank'"
+      (toggleChange)="toggleChangeFn($event)"
+      (valueChange)="setValue($event)"
+    >
+      <ng-template #listItem let-item="item" let-index="index" let-selectIndex="selectIndex" let-choose="choose">
+        <d-toggle-menu-list-item
+          [item]="item"
+          [index]="index"
+          [selectIndex]="selectIndex"
+          [highlightToggle]="false"
+          [customTemplate]="itemTemplate"
+          [filterKey]="displayProperty"
+          (chooseItem)="choose($event)"
+        ></d-toggle-menu-list-item>
+      </ng-template>
+    </d-toggle-menu-list>
+  </d-toggle-menu-container>
 </div>

@@ -50,7 +50,7 @@ In the page:
 | virtualScrollMaxBufferPx | `number` | 900 | Optional. Set the maximum buffer size during virtual scrolling.(`px`) For details, see https://material.angular.io/cdk/scrolling/overview#scrolling-over-fixed-size-items | [Virtual Scroll](demo#virtual-scroll) |
 | virtualScrollItemSize | `number` | 30 | Optional. Set the element size in the virtual scrolling(`px`). For details, see https://material.angular.io/cdk/scrolling/overview#scrolling-over-fixed-size-items | [Virtual Scroll](demo#virtual-scroll) |
 | showAnimation | `boolean` | true | optional. Whether to enable animation. |   | ✔ |
-
+|  checkableRelation   | `'upward' \| 'downward' \| 'both' \| 'none'` |     'both'      |                                                Optional. Sets the check rule of the parent-child                                                  | [Tree checkableRelation](http://devui.huawei.com/components/zh-cn/tree/demo#check-control-tree) |
 ## d-tree-select Event
 
 | Event | Type | Description | Jump to Demo |

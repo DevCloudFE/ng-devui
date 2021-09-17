@@ -21,6 +21,7 @@ In the page：
 | isSearch | `boolean` | false | Optional. Specifies whether to search. | [Search Shuttle Box](demo#transfer-demo-search) |
 | isSourceDroppable | `boolean` | false | Optional. Indicates whether the source can be dragged. |
 | isTargetDroppable | `boolean` | false | Optional. Indicates whether the object can be dragged. | [Sorting Shuttle Box](demo#transfer-demo-sort) |
+|  virtualScroll    | `boolean` | false | Optional. Indicates whether to scroll virtually.           | [Virtual Scroll](demo#transfer-demo-virtual-scroll) |
 | disabled | `boolean` | false | Optional. The shuttle box cannot be used. | [Basic Usage](demo#transfer-demo-base) |
 |  showOptionTitle  | `boolean` | false | Optional. Indicates whether to display title when the cursor is hovered over data.    | [Search Shuttle Box](demo#transfer-demo-search) |
 | beforeTransfer | `(sourceOption, targetOption) => boolean \| Promise<boolean> \| Observable<boolean>` | - | Optional. Determines whether the transfer event can be triggered before the transfer event occurs. | [Basic Usage](demo#transfer-demo-base) |

@@ -1,6 +1,6 @@
 // tslint:disable: max-line-length
 import { Component, DebugElement, ElementRef, TemplateRef, ViewChild } from '@angular/core';
-import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -126,7 +126,7 @@ describe('dateRangePicker', () => {
   let component: TestDateRangePickerComponent;
   let domHelper: DomHelper<TestDateRangePickerComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [DatepickerModule, NoopAnimationsModule, FormsModule],
       declarations: [TestDateRangePickerComponent]
@@ -277,7 +277,7 @@ describe('dateRangePickerOrigin', () => {
   let debugEl: DebugElement;
   let component: TestDateRangePickerOriginComponent;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [DatepickerModule, NoopAnimationsModule, FormsModule],
       declarations: [TestDateRangePickerOriginComponent]
@@ -322,7 +322,7 @@ describe('dateRangePickerComponent', () => {
   let debugEl: DebugElement;
   let component: TestDateRangePickerCmpComponent;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [DatepickerModule, NoopAnimationsModule, FormsModule],
       declarations: [TestDateRangePickerCmpComponent]

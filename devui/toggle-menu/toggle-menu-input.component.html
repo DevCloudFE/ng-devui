@@ -1,0 +1,26 @@
+<ng-container *ngIf="!isDisabledCustomTemplate; else defaultInputTemplate">
+  <div class="devui-toggle-menu-input-template-container">
+    <ng-template
+      [ngTemplateOutlet]="customTemplate"
+      [ngTemplateOutletContext]="{
+        option: value,
+        filterKey: filterKey,
+        position: 'result',
+        inputValue: inputValue
+      }"
+    ></ng-template>
+  </div>
+</ng-container>
+
+<ng-template #defaultInputTemplate>
+  <input
+    type="text"
+    class="devui-form-control devui-select-input devui-input"
+    autocomplete="off"
+    [disabled]="disabled"
+    [minLength]="0"
+    [tabindex]="-1"
+    [readonly]="readonly"
+    [value]="inputValue || ''"
+  />
+</ng-template>

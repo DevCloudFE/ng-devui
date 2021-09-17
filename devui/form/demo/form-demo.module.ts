@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 import {
   DatepickerModule,
   EditableSelectModule,
@@ -28,7 +29,6 @@ import { TextInputModule } from 'ng-devui/text-input';
 import { TextareaModule } from 'ng-devui/textarea';
 import { ToastModule } from 'ng-devui/toast';
 import { ToggleModule } from 'ng-devui/toggle';
-import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 import { BasicComponent } from './basic/basic.component';
 import { CustomStatusComponent } from './custom-status/custom-status.component';
@@ -51,6 +51,7 @@ import { UserRegisterComponent } from './validate-template/user-register/user-re
 import { ChildFormComponent } from './validate-template/validate-cross-component/child-form/child-form.component';
 import { CrossComponentComponent } from './validate-template/validate-cross-component/validate-cross-component.component';
 import { ValidateTemplateFormComponent } from './validate-template/validate-template-form/validate-template-form.component';
+import { ValidateUpdateComponent } from './validate-update/validate-update.component';
 
 @NgModule({
   imports: [
@@ -118,7 +119,8 @@ import { ValidateTemplateFormComponent } from './validate-template/validate-temp
     ChildFormComponent,
     CustomStatusComponent,
     DebounceTimeComponent,
+    ValidateUpdateComponent,
   ],
-  
+
 })
 export class FormDemoModule {}

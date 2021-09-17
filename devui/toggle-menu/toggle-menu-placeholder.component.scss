@@ -1,0 +1,12 @@
+@import '../style/theme/color';
+
+:host {
+  display: flex;
+  align-items: center;
+
+  .devui-placeholder {
+    color: $devui-placeholder;
+    line-height: inherit;
+    padding: 0 10px;
+  }
+}

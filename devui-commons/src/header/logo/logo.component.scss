@@ -29,3 +29,11 @@
     }
   }
 }
+
+@media (max-width: 360px) {
+  .header-logo {
+    .text {
+      display: none;
+    }
+  }
+}

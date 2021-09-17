@@ -1037,7 +1037,7 @@ describe('data-table column', () => {
       fixture.detectChanges();
 
       // emit global click, finish edit
-      document.dispatchEvent(new Event('mousedown'));
+      document.dispatchEvent(new Event('click'));
       fixture.detectChanges();
       flush();
       fixture.detectChanges();
@@ -1073,7 +1073,7 @@ describe('data-table column', () => {
       tick(); // wait for date confirm
       fixture.detectChanges();
 
-      document.dispatchEvent(new Event('mousedown'));
+      document.dispatchEvent(new Event('click'));
       fixture.detectChanges();
       flush();
       fixture.detectChanges();
@@ -1105,7 +1105,7 @@ describe('data-table column', () => {
       tick(); // wait for number change
       fixture.detectChanges();
 
-      document.dispatchEvent(new Event('mousedown'));
+      document.dispatchEvent(new Event('click'));
       flush();
       fixture.detectChanges();
       ageColumnDebugEl = debugEl.query(By.css('.devui-table tbody tr td:nth-child(3) .cell-editable'));

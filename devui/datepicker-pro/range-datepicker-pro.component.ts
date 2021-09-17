@@ -375,7 +375,9 @@ export class RangeDatepickerProComponent implements OnInit, OnDestroy, AfterView
     this.dateValue = [];
     this.pickerSrv.curRangeDate = [];
     this.currentActiveInput = 'start';
-    this.onChange(this.pickerSrv.curRangeDate);
+    if (event) {
+      this.onChange(this.pickerSrv.curRangeDate);
+    }
   }
 
   writeValue(value: Date[]) {

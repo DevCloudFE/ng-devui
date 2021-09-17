@@ -34,6 +34,7 @@ In the page:
 | dropdownHeaderTemplate | `TemplateRef<any>` | - | (Optional) Input a rendering template of the rendering drop-down header. You can obtain the index parameter | [Template type](demo#cascader-header-template) |.
 |    loadChildrenFn    | `(value: CascaderItem) => Promise<CascaderItem[]> \| Observable<CascaderItem[]>` |               null               | Optional, Transfer the function for loading subnodes in lazy loading                                                                                                                                                             | [Click to load](demo#lazyload-cascader)         |
 |  dropdownPanelClass  |                                     `string`                                     |                -                 | Class of the drop-down panel, which is used to select a panel.                                                                                                                                                                   | [Basic usage](demo#basic-usage)                 |
+|    appendToBody     |                                    `boolean`                                     |               true               |                                 Optional, attach the drop-down to the body                             |                                   |
 | showAnimation | `boolean` | true | optional. Whether to enable animation. |   | ✔ |
 
 ## d-cascader event

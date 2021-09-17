@@ -424,9 +424,21 @@
         "gantt": "Gantt chart",
         "sequence": "Sequence chart"
       },
+      "checkedDemo": {
+        "title": "checkbox rendering",
+        "description": "Support checkbox rendering。"
+      },
+      "latexDemo": {
+        "title": "Latex Rendering",
+        "description": "Mathematical Formula Rendering"
+      },
       "tocDemo": {
         "title": "TOC rendering",
         "description": "Generating the TOC directory"
+      },
+      "plantumlDemo": {
+        "title": "Plantuml rendering",
+        "description": "Generating UML Diagrams"
       },
       "enormousTextDemo": {
         "title": "Processing a large amount of data",
@@ -449,7 +461,10 @@
         "quick-suggestion": "Quick tips (@user)",
         "single-render-md": "Render md text separately",
         "mermaid-render": "Mermaid-render",
+        "checked-render": "checkbox-render",
+        "latex-render": "Latex-render",
         "toc-render": "TOC-render",
+        "uml-render": "UML-render",
         "big-data-process": "Processing a large amount of data"
       }
     },
@@ -1232,6 +1247,41 @@
         "border-radius": "border-radius"
       }
     },
+    "design-animation": {
+      "name": "Animation",
+      "type": "Design tokens",
+      "path": "design-animation",
+      "description": "Common style specifications of ng-devui.",
+      "tmw": "When you want to query ng-devui related styles, scenario related styles, and changes of styles.",
+      "AnimationDemo": {
+        "title": "Animation",
+        "description1": "1. The component library provides border-radius variables for users in different scenarios. The following table lists the names, values, and application scenarios of these variables.",
+        "description2": "2. By `@import' ~ng-devui/styles-var/devui-var.scss '; `.The animation variable can be used after being introduced.",
+        "description3": "3. If the style sheet is a less file, '@import' ~ng-devui/styles-var/devui-var.less '; `, and change the variable prefix '$' to '@'.",
+        "instance": {
+          "title": "Instance",
+          "tableTitle": "Animation Variable Comparison Table",
+          "table": {
+            "animationName": "Animation variable name",
+            "animationValue": "Animation variable value",
+            "description": "Description"
+          },
+          "animation": {
+            "devui-animation-duration-slow": " dynamic effect duration parameter, which is usually used in scenarios such as large elements disappear and status changes.",
+            "devui-animation-duration-base": " dynamic effect duration parameter, which is usually used in scenarios such as the disappearance of common elements and the status change.",
+            "devui-animation-duration-fast": " dynamic effect duration parameter, which is usually used in scenarios such as the disappearance of small elements of the prompt type and the status changes.",
+            "devui-animation-ease-in": "Element leaving effect curve, which is usually used in the scenario where an element disappears.",
+            "devui-animation-ease-out": "Element entry dynamic effect curve, which is usually used in the scenario where an element appears.",
+            "devui-animation-ease-in-out": " element transition dynamic effect curve, which is often used in content switching scenarios.",
+            "devui-animation-ease-in-out-smooth": " element transition dynamic effect curve, which is usually used in suspension and highlight state switching scenarios.",
+            "devui-animation-linear": "Linear dynamic effect curve, usually used in the scenario where the background mask layer disappears."
+          }
+        }
+      },
+      "anchorLinkValues": {
+        "animation": "animation"
+      }
+    },
     "codemirror": {
       "name": "CodeMirror",
       "type": "Extended service",
@@ -1353,7 +1403,8 @@
         "column-dragging": "Column dragging",
         "cell-merge": "Cell Merge",
         "drag-row": "Row dragging",
-        "muti-drag-row": "Batch Row dragging"
+        "muti-drag-row": "Batch Row dragging",
+        "big-data-tree-table": "Big Data Tree Table"
       }
     },
     "datepickerPro": {
@@ -1519,20 +1570,6 @@
         "render-pie": "Render a pie chart",
         "chart-bg": "Changing the Chart Background Color",
         "chart-ins": "Obtaining an Echarts Instance"
-      }
-    },
-    "jsmind": {
-      "name": "Jsmind",
-      "type": "Extended service",
-      "path": "jsmind",
-      "description": "Mind map.",
-      "tmw": "When you want to display some horizontal structure to others",
-      "basicDemo": {
-        "title": "Basic Usage",
-        "description": "Render a basic mind map."
-      },
-      "anchorLinkValues": {
-        "basic-usage": "Basic Usage"
       }
     },
     "multi-auto-complete": {
@@ -1717,6 +1754,10 @@
         "title": "Cross-component verification",
         "description": "<ul><li>Current <code>Angular By default, Form</code> does not support cross-component form verification status sharing. For response forms, you can use <code>model</code> to centrally manage and transparently transmit components. </li><li>For template-driven forms, you can inject the required <code>ngModelGroup</code> or <code>NgForm</code> container by using container injection during subcomponent declaration, for form elements in the template to automatically obtain the parent container. </li></ul>"
       },
+      "validateUpdate": {
+        "title": "Update Validation Rule",
+        "description": "You can invoke the <code>updateRules</code> method provided by the <code>dValidateRules</code> instruction to update validation rules."
+      },
       "reactiveCrossComponent": {
         "title": "Responsive form cross-component validation"
       },
@@ -1733,7 +1774,8 @@
         "demo-validate-reactive": "Reactive form validation",
         "demo-custom-status": "Specify form status",
         "demo-validate-sync": "Form collaboration verification",
-        "demo-validate-cross-component": "Cross-component form validation"
+        "demo-validate-cross-component": "Cross-component form validation",
+        "demo-validate-update": "Update validate rules"
       }
     },
     "fullscreen": {
@@ -1875,11 +1917,15 @@
         "option20": "Option 20",
         "option21": "Option 21"
       },
+      "vitrualScrollDemo": {
+        "title": "Virtual Scroll"
+      },
       "anchorLinkValues": {
         "transfer-demo-base": "Basic Usage",
         "transfer-demo-search": "Search Shuttle Box",
         "transfer-demo-sort": "Sorting Shuttle Box",
-        "transfer-demo-custom": "Custom Shuttle Box"
+        "transfer-demo-custom": "Custom Shuttle Box",
+        "transfer-demo-virtual-scroll": "Virtual Scroll"
       }
     },
     "dragdrop": {
@@ -2307,6 +2353,10 @@
         "title": "The outer layer is fixed to solve the jitter and scrolling problem.",
         "description": "The outer fixed value is used to avoid scrolling and jitter. In this mode, the position of all fixed elements on the page needs to be specified. If the default value is used, the position offset occurs."
       },
+      "casesDemo": {
+        "title": "Cases",
+        "description": "Simulate a real scene."
+      },
       "anchorLinkValues": {
         "standard-dialog": "Standard Dialog Box",
         "custom-dialog": "Custom Dialog Box",
@@ -2316,7 +2366,8 @@
         "update-button-options": "Update the button status in the pop-up dialog box",
         "configure-button-to-get-focus-automatically": "Configure button to automatically get focus",
         "template-content": "Customizing a pop-up box content template",
-        "template-fixed": "The outer layer is fixed to solve the jitter and scrolling problem"
+        "template-fixed": "The outer layer is fixed to solve the jitter and scrolling problem",
+        "cases": "Cases"
       }
     },
     "pagination": {
@@ -2530,6 +2581,9 @@
       "customizeDemo": {
         "title": "Dynamic Mode-Custom"
       },
+      "halfDemo": {
+        "title": "Half Star Mode"
+      },
       "typeDemo": {
         "title": "Use the type parameter"
       },
@@ -2537,6 +2591,7 @@
         "read-only-mode": "Read-only Mode",
         "dynamic-mode": "Dynamic Mode",
         "dynamic-mode-Custom": "Dynamic Mode-Custom",
+        "half-demo": "Half Star Mode",
         "using-the-type-parameter": "Use the type parameter"
       }
     },
@@ -3492,10 +3547,10 @@
         "click me!": "click me!"
       },
       "customIconDemo": {
-        "title": "Customizing icons",
+        "title": "Customizing icons and selected nodes",
         "description": "test.",
         "Standard: iconTemplatePosition": "Standard: iconTemplatePosition",
-        "Standard: iconTemplateInput": "Standard: iconTemplateInput"
+        "Standard: iconTemplateInput": "Standard: itemTemplateInput + iconTemplateInput"
       },
       "customTemplateDemo": {
         "title": "Custom Area",
@@ -3523,7 +3578,7 @@
         "init-hooks": "Hook called upon completion of initialization",
         "simple-search": "Easy search tree",
         "append-to-element": "Append To Element Capability",
-        "custom-icon": "Customizing icons",
+        "custom-icon": "Customizing icons and selected nodes",
         "keys": "Custom key",
         "custom-template": "Custom Area",
         "icon-parent": "Expand and close the icon.",
@@ -3861,6 +3916,10 @@
         "title": "Service scenario: date selector of the select type",
         "changeStart": "Change Side"
       },
+      "tab-typeDemo": {
+        "title": "Service scenario: Tab switching between multiple selection types",
+        "ensure": "Ensure"
+      },
       "anchorLinkValues": {
         "basic-usage": "Basic Usage",
         "show-time": "Show Time",
@@ -3870,7 +3929,8 @@
         "host-template": "Custom Host",
         "rangeTemplate": "Template Usage for Range Mode",
         "datepicker-pro-static-panel": "Calender Panel Mode",
-        "select-type": "Service scenario: date selector of the select type"
+        "select-type": "Service scenario: date selector of the select type",
+        "tab-typeDemo": "Service scenario: date selector of the select type"
       }
     },
     "trend": {

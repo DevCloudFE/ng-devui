@@ -125,8 +125,7 @@
   .devui-pagination-list > li > a {
     margin-left: 4px;
     padding: 0 8px;
-    height: 24px;
-    line-height: 1.5;
+    line-height: 24px;
     border-radius: $devui-border-radius;
     color: $devui-text-weak;
     display: flex;
@@ -137,39 +136,40 @@
   .devui-pagination-sm > li > a {
     padding: 0 4px;
     min-width: 18px;
-    height: 22px;
-    line-height: 1.5;
+    line-height: 22px;
     font-size: $devui-font-size-sm;
   }
 
   .devui-pagination-lg > li > a {
     padding: 0 12px;
-    height: 38px;
     font-size: $devui-font-size-lg;
-    line-height: 1.5;
+    line-height: 38px;
   }
 
   .devui-pagination-list > li:first-child > a,
   .devui-pagination-list > li:last-child > a {
-    width: 34px;
+    min-width: 34px;
     height: 32px;
     line-height: 32px;
+    padding: 0 8px;
   }
 
   .devui-pagination-sm > li:first-child > a,
   .devui-pagination-sm > li:last-child > a {
     border-radius: $devui-border-radius;
-    width: 20px;
+    min-width: 20px;
     height: 30px;
     line-height: 30px;
+    padding: 0 4px;
   }
 
   .devui-pagination-lg > li:first-child > a,
   .devui-pagination-lg > li:last-child > a {
     border-radius: $devui-border-radius;
-    width: 46px;
+    min-width: 46px;
     height: 46px;
     line-height: 46px;
+    padding: 0 16px;
   }
 
   .devui-jump-container {

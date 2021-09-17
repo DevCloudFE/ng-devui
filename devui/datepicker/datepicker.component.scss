@@ -254,7 +254,7 @@
         &.devui-day:not(.disabled):not(.active):not(.devui-out-of-month):not(:hover).devui-today {
           .devui-calendar-date {
             color: $devui-brand;
-            font-weight: 700;
+            font-weight: bold;
           }
         }
 

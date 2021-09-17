@@ -26,55 +26,18 @@
             ></d-search>
           </div>
           <ul
+            *ngIf="!virtualScroll; else sourceScrollViewTpl"
             [id]="'default-left-' + id"
             dDroppable
             [dropScope]="'transfer-source-' + id"
             (dropEvent)="onDrop(transferDirection.SOURCE, $event)"
             [ngStyle]="{ height: height }"
             dSortable
+            #sourceTransfer
           >
-            <li
-              dDraggable
-              [dragScope]="'transfer-source-' + id"
-              [dragHandle]="'.devui-transfer-drag-handle, .devui-transfer-drag-handle *'"
-              [dragData]="item"
-              *ngFor="let item of sourceDisplayOption; let i = index"
-            >
-              <span class="devui-transfer-drag-wrap" [ngClass]="{ 'devui-transfer-drag-handle': isSourceDroppable }">
-                <svg
-                  *ngIf="isSourceDroppable"
-                  [class.disabled]="disabled"
-                  class="devui-transfer-drag-ico"
-                  width="16px"
-                  height="16px"
-                  viewBox="0 0 16 16"
-                  version="1.1"
-                  xmlns="http://www.w3.org/2000/svg"
-                  xmlns:xlink="http://www.w3.org/1999/xlink"
-                >
-                  <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                    <g fill="#CACFD8" fill-rule="nonzero">
-                      <path
-                        d="M5.5,0 C6.32842712,-1.3527075e-16 7,0.596953667 7,1.33333333 C7,2.069713 6.32842712,2.66666667 5.5,2.66666667 C4.67157288,2.66666667 4,2.069713 4,1.33333333 C4,0.596953667 4.67157288,1.3527075e-16 5.5,0 Z M5.5,4.44444444 C6.32842712,4.44444444 7,5.04139811 7,5.77777778 C7,6.51415744 6.32842712,7.11111111 5.5,7.11111111 C4.67157288,7.11111111 4,6.51415744 4,5.77777778 C4,5.04139811 4.67157288,4.44444444 5.5,4.44444444 Z M5.5,8.88888889 C6.32842712,8.88888889 7,9.48584256 7,10.2222222 C7,10.9586019 6.32842712,11.5555556 5.5,11.5555556 C4.67157288,11.5555556 4,10.9586019 4,10.2222222 C4,9.48584256 4.67157288,8.88888889 5.5,8.88888889 Z M5.5,13.3333333 C6.32842712,13.3333333 7,13.930287 7,14.6666667 C7,15.4030463 6.32842712,16 5.5,16 C4.67157288,16 4,15.4030463 4,14.6666667 C4,13.930287 4.67157288,13.3333333 5.5,13.3333333 Z M10.5,0 C11.3284271,-1.3527075e-16 12,0.596953667 12,1.33333333 C12,2.069713 11.3284271,2.66666667 10.5,2.66666667 C9.67157288,2.66666667 9,2.069713 9,1.33333333 C9,0.596953667 9.67157288,1.3527075e-16 10.5,0 Z M10.5,4.44444444 C11.3284271,4.44444444 12,5.04139811 12,5.77777778 C12,6.51415744 11.3284271,7.11111111 10.5,7.11111111 C9.67157288,7.11111111 9,6.51415744 9,5.77777778 C9,5.04139811 9.67157288,4.44444444 10.5,4.44444444 Z M10.5,8.88888889 C11.3284271,8.88888889 12,9.48584256 12,10.2222222 C12,10.9586019 11.3284271,11.5555556 10.5,11.5555556 C9.67157288,11.5555556 9,10.9586019 9,10.2222222 C9,9.48584256 9.67157288,8.88888889 10.5,8.88888889 Z M10.5,13.3333333 C11.3284271,13.3333333 12,13.930287 12,14.6666667 C12,15.4030463 11.3284271,16 10.5,16 C9.67157288,16 9,15.4030463 9,14.6666667 C9,13.930287 9.67157288,13.3333333 10.5,13.3333333 Z"
-                      ></path>
-                    </g>
-                  </g>
-                </svg>
-              </span>
-              <d-checkbox
-                dPopover
-                [controlled]="showOptionTitle"
-                [trigger]="'hover'"
-                [content]="item['name']"
-                [popMaxWidth]="400"
-                [label]="item['name']"
-                [isShowTitle]="false"
-                [(ngModel)]="item['checked']"
-                [disabled]="item['disabled'] || disabled"
-                (change)="checkboxChange(transferDirection.SOURCE, $event)"
-              >
-              </d-checkbox>
-            </li>
+            <ng-container *ngFor="let item of sourceDisplayOption; let index = index; trackBy: trackByFn">
+              <ng-template [ngTemplateOutlet]="sourceItemTpl" [ngTemplateOutletContext]="{ item: item, index: index }"></ng-template>
+            </ng-container>
           </ul>
         </div>
       </ng-container>
@@ -219,54 +182,17 @@
             ></d-search>
           </div>
           <ul
+            *ngIf="!virtualScroll; else targetScrollViewTpl"
             dDroppable
             dSortable
             [dropScope]="'transfer-target-' + id"
             (dropEvent)="onDrop(transferDirection.TARGET, $event)"
             [ngStyle]="{ height: height }"
+            #targetTransfer
           >
-            <li
-              dDraggable
-              [dragScope]="'transfer-target-' + id"
-              [dragHandle]="'.devui-transfer-drag-handle, .devui-transfer-drag-handle *'"
-              [dragData]="item"
-              *ngFor="let item of targetDisplayOption; let i = index"
-            >
-              <span class="devui-transfer-drag-wrap" [ngClass]="{ 'devui-transfer-drag-handle': isTargetDroppable }">
-                <svg
-                  *ngIf="isTargetDroppable"
-                  [class.disabled]="disabled"
-                  class="devui-transfer-drag-ico"
-                  width="16px"
-                  height="16px"
-                  viewBox="0 0 16 16"
-                  version="1.1"
-                  xmlns="http://www.w3.org/2000/svg"
-                  xmlns:xlink="http://www.w3.org/1999/xlink"
-                >
-                  <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                    <g fill="#CACFD8" fill-rule="nonzero">
-                      <path
-                        d="M5.5,0 C6.32842712,-1.3527075e-16 7,0.596953667 7,1.33333333 C7,2.069713 6.32842712,2.66666667 5.5,2.66666667 C4.67157288,2.66666667 4,2.069713 4,1.33333333 C4,0.596953667 4.67157288,1.3527075e-16 5.5,0 Z M5.5,4.44444444 C6.32842712,4.44444444 7,5.04139811 7,5.77777778 C7,6.51415744 6.32842712,7.11111111 5.5,7.11111111 C4.67157288,7.11111111 4,6.51415744 4,5.77777778 C4,5.04139811 4.67157288,4.44444444 5.5,4.44444444 Z M5.5,8.88888889 C6.32842712,8.88888889 7,9.48584256 7,10.2222222 C7,10.9586019 6.32842712,11.5555556 5.5,11.5555556 C4.67157288,11.5555556 4,10.9586019 4,10.2222222 C4,9.48584256 4.67157288,8.88888889 5.5,8.88888889 Z M5.5,13.3333333 C6.32842712,13.3333333 7,13.930287 7,14.6666667 C7,15.4030463 6.32842712,16 5.5,16 C4.67157288,16 4,15.4030463 4,14.6666667 C4,13.930287 4.67157288,13.3333333 5.5,13.3333333 Z M10.5,0 C11.3284271,-1.3527075e-16 12,0.596953667 12,1.33333333 C12,2.069713 11.3284271,2.66666667 10.5,2.66666667 C9.67157288,2.66666667 9,2.069713 9,1.33333333 C9,0.596953667 9.67157288,1.3527075e-16 10.5,0 Z M10.5,4.44444444 C11.3284271,4.44444444 12,5.04139811 12,5.77777778 C12,6.51415744 11.3284271,7.11111111 10.5,7.11111111 C9.67157288,7.11111111 9,6.51415744 9,5.77777778 C9,5.04139811 9.67157288,4.44444444 10.5,4.44444444 Z M10.5,8.88888889 C11.3284271,8.88888889 12,9.48584256 12,10.2222222 C12,10.9586019 11.3284271,11.5555556 10.5,11.5555556 C9.67157288,11.5555556 9,10.9586019 9,10.2222222 C9,9.48584256 9.67157288,8.88888889 10.5,8.88888889 Z M10.5,13.3333333 C11.3284271,13.3333333 12,13.930287 12,14.6666667 C12,15.4030463 11.3284271,16 10.5,16 C9.67157288,16 9,15.4030463 9,14.6666667 C9,13.930287 9.67157288,13.3333333 10.5,13.3333333 Z"
-                      ></path>
-                    </g>
-                  </g>
-                </svg>
-              </span>
-              <d-checkbox
-                dPopover
-                [controlled]="showOptionTitle"
-                [trigger]="'hover'"
-                [content]="item['name']"
-                [popMaxWidth]="400"
-                [label]="item['name']"
-                [isShowTitle]="false"
-                [(ngModel)]="item['checked']"
-                [disabled]="item['disabled'] || disabled"
-                (change)="checkboxChange(transferDirection.TARGET, $event)"
-              >
-              </d-checkbox>
-            </li>
+            <ng-container *ngFor="let item of targetDisplayOption; let index = index; trackBy: trackByFn">
+              <ng-template [ngTemplateOutlet]="targetItemTpl" [ngTemplateOutletContext]="{ item: item, index: index }"></ng-template>
+            </ng-container>
           </ul>
         </div>
       </ng-container>
@@ -276,3 +202,129 @@
     </div>
   </div>
 </div>
+
+<!--Source Item模板-->
+<ng-template #sourceItemTpl let-item="item" let-index="index">
+  <li
+    dDraggable
+    [dragScope]="'transfer-source-' + id"
+    [dragHandle]="'.devui-transfer-drag-handle, .devui-transfer-drag-handle *'"
+    [dragData]="item"
+  >
+    <span class="devui-transfer-drag-wrap" [ngClass]="{ 'devui-transfer-drag-handle': isSourceDroppable }">
+      <svg
+        *ngIf="isSourceDroppable"
+        [class.disabled]="disabled"
+        class="devui-transfer-drag-ico"
+        width="16px"
+        height="16px"
+        viewBox="0 0 16 16"
+        version="1.1"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+      >
+        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+          <g fill="#CACFD8" fill-rule="nonzero">
+            <path
+              d="M5.5,0 C6.32842712,-1.3527075e-16 7,0.596953667 7,1.33333333 C7,2.069713 6.32842712,2.66666667 5.5,2.66666667 C4.67157288,2.66666667 4,2.069713 4,1.33333333 C4,0.596953667 4.67157288,1.3527075e-16 5.5,0 Z M5.5,4.44444444 C6.32842712,4.44444444 7,5.04139811 7,5.77777778 C7,6.51415744 6.32842712,7.11111111 5.5,7.11111111 C4.67157288,7.11111111 4,6.51415744 4,5.77777778 C4,5.04139811 4.67157288,4.44444444 5.5,4.44444444 Z M5.5,8.88888889 C6.32842712,8.88888889 7,9.48584256 7,10.2222222 C7,10.9586019 6.32842712,11.5555556 5.5,11.5555556 C4.67157288,11.5555556 4,10.9586019 4,10.2222222 C4,9.48584256 4.67157288,8.88888889 5.5,8.88888889 Z M5.5,13.3333333 C6.32842712,13.3333333 7,13.930287 7,14.6666667 C7,15.4030463 6.32842712,16 5.5,16 C4.67157288,16 4,15.4030463 4,14.6666667 C4,13.930287 4.67157288,13.3333333 5.5,13.3333333 Z M10.5,0 C11.3284271,-1.3527075e-16 12,0.596953667 12,1.33333333 C12,2.069713 11.3284271,2.66666667 10.5,2.66666667 C9.67157288,2.66666667 9,2.069713 9,1.33333333 C9,0.596953667 9.67157288,1.3527075e-16 10.5,0 Z M10.5,4.44444444 C11.3284271,4.44444444 12,5.04139811 12,5.77777778 C12,6.51415744 11.3284271,7.11111111 10.5,7.11111111 C9.67157288,7.11111111 9,6.51415744 9,5.77777778 C9,5.04139811 9.67157288,4.44444444 10.5,4.44444444 Z M10.5,8.88888889 C11.3284271,8.88888889 12,9.48584256 12,10.2222222 C12,10.9586019 11.3284271,11.5555556 10.5,11.5555556 C9.67157288,11.5555556 9,10.9586019 9,10.2222222 C9,9.48584256 9.67157288,8.88888889 10.5,8.88888889 Z M10.5,13.3333333 C11.3284271,13.3333333 12,13.930287 12,14.6666667 C12,15.4030463 11.3284271,16 10.5,16 C9.67157288,16 9,15.4030463 9,14.6666667 C9,13.930287 9.67157288,13.3333333 10.5,13.3333333 Z"
+            ></path>
+          </g>
+        </g>
+      </svg>
+    </span>
+    <d-checkbox
+      dPopover
+      [controlled]="showOptionTitle"
+      [trigger]="'hover'"
+      [content]="item['name']"
+      [popMaxWidth]="400"
+      [label]="item['name']"
+      [isShowTitle]="false"
+      [(ngModel)]="item['checked']"
+      [disabled]="item['disabled'] || disabled"
+      (change)="checkboxChange(transferDirection.SOURCE, $event)"
+    >
+    </d-checkbox>
+  </li>
+</ng-template>
+
+<!--Source虚拟滚动模板-->
+<ng-template #sourceScrollViewTpl>
+  <cdk-virtual-scroll-viewport
+    [ngStyle]="{
+      height: height,
+      width: '100%'
+    }"
+    [itemSize]="itemSize"
+    [minBufferPx]="minBuffer"
+    [maxBufferPx]="maxBuffer"
+    #sourceTransfer
+  >
+    <ng-container *cdkVirtualFor="let item of sourceDisplayOption; let index = index">
+      <ng-template [ngTemplateOutlet]="sourceItemTpl" [ngTemplateOutletContext]="{ item: item, index: index }"></ng-template>
+    </ng-container>
+  </cdk-virtual-scroll-viewport>
+</ng-template>
+
+<!--Target Item模板-->
+<ng-template #targetItemTpl let-item="item" let-index="index">
+  <li
+    dDraggable
+    [dragScope]="'transfer-target-' + id"
+    [dragHandle]="'.devui-transfer-drag-handle, .devui-transfer-drag-handle *'"
+    [dragData]="item"
+  >
+    <span class="devui-transfer-drag-wrap" [ngClass]="{ 'devui-transfer-drag-handle': isTargetDroppable }">
+      <svg
+        *ngIf="isTargetDroppable"
+        [class.disabled]="disabled"
+        class="devui-transfer-drag-ico"
+        width="16px"
+        height="16px"
+        viewBox="0 0 16 16"
+        version="1.1"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+      >
+        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+          <g fill="#CACFD8" fill-rule="nonzero">
+            <path
+              d="M5.5,0 C6.32842712,-1.3527075e-16 7,0.596953667 7,1.33333333 C7,2.069713 6.32842712,2.66666667 5.5,2.66666667 C4.67157288,2.66666667 4,2.069713 4,1.33333333 C4,0.596953667 4.67157288,1.3527075e-16 5.5,0 Z M5.5,4.44444444 C6.32842712,4.44444444 7,5.04139811 7,5.77777778 C7,6.51415744 6.32842712,7.11111111 5.5,7.11111111 C4.67157288,7.11111111 4,6.51415744 4,5.77777778 C4,5.04139811 4.67157288,4.44444444 5.5,4.44444444 Z M5.5,8.88888889 C6.32842712,8.88888889 7,9.48584256 7,10.2222222 C7,10.9586019 6.32842712,11.5555556 5.5,11.5555556 C4.67157288,11.5555556 4,10.9586019 4,10.2222222 C4,9.48584256 4.67157288,8.88888889 5.5,8.88888889 Z M5.5,13.3333333 C6.32842712,13.3333333 7,13.930287 7,14.6666667 C7,15.4030463 6.32842712,16 5.5,16 C4.67157288,16 4,15.4030463 4,14.6666667 C4,13.930287 4.67157288,13.3333333 5.5,13.3333333 Z M10.5,0 C11.3284271,-1.3527075e-16 12,0.596953667 12,1.33333333 C12,2.069713 11.3284271,2.66666667 10.5,2.66666667 C9.67157288,2.66666667 9,2.069713 9,1.33333333 C9,0.596953667 9.67157288,1.3527075e-16 10.5,0 Z M10.5,4.44444444 C11.3284271,4.44444444 12,5.04139811 12,5.77777778 C12,6.51415744 11.3284271,7.11111111 10.5,7.11111111 C9.67157288,7.11111111 9,6.51415744 9,5.77777778 C9,5.04139811 9.67157288,4.44444444 10.5,4.44444444 Z M10.5,8.88888889 C11.3284271,8.88888889 12,9.48584256 12,10.2222222 C12,10.9586019 11.3284271,11.5555556 10.5,11.5555556 C9.67157288,11.5555556 9,10.9586019 9,10.2222222 C9,9.48584256 9.67157288,8.88888889 10.5,8.88888889 Z M10.5,13.3333333 C11.3284271,13.3333333 12,13.930287 12,14.6666667 C12,15.4030463 11.3284271,16 10.5,16 C9.67157288,16 9,15.4030463 9,14.6666667 C9,13.930287 9.67157288,13.3333333 10.5,13.3333333 Z"
+            ></path>
+          </g>
+        </g>
+      </svg>
+    </span>
+    <d-checkbox
+      dPopover
+      [controlled]="showOptionTitle"
+      [trigger]="'hover'"
+      [content]="item['name']"
+      [popMaxWidth]="400"
+      [label]="item['name']"
+      [isShowTitle]="false"
+      [(ngModel)]="item['checked']"
+      [disabled]="item['disabled'] || disabled"
+      (change)="checkboxChange(transferDirection.TARGET, $event)"
+    >
+    </d-checkbox>
+  </li>
+</ng-template>
+
+<!--Target虚拟滚动模板-->
+<ng-template #targetScrollViewTpl>
+  <cdk-virtual-scroll-viewport
+    [ngStyle]="{
+      height: height,
+      width: '100%'
+    }"
+    [itemSize]="itemSize"
+    [minBufferPx]="minBuffer"
+    [maxBufferPx]="maxBuffer"
+    #targetTransfer
+  >
+    <ng-container *cdkVirtualFor="let item of targetDisplayOption; let index = index">
+      <ng-template [ngTemplateOutlet]="targetItemTpl" [ngTemplateOutletContext]="{ item: item, index: index }"></ng-template>
+    </ng-container>
+  </cdk-virtual-scroll-viewport>
+</ng-template>

@@ -1,3 +1,4 @@
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -8,7 +9,7 @@ import { SearchModule } from 'ng-devui/search';
 import { TransferComponent } from './transfer.component';
 
 @NgModule({
-  imports: [CommonModule, FormsModule, SearchModule, CheckBoxModule, DragDropModule, PopoverModule],
+  imports: [CommonModule, FormsModule, ScrollingModule, SearchModule, CheckBoxModule, DragDropModule, PopoverModule],
   exports: [TransferComponent],
   declarations: [TransferComponent],
   providers: []

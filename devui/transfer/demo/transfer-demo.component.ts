@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DevuiSourceData } from 'ng-devui/shared/devui-codebox/devui-source-data';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { DevuiSourceData } from 'ng-devui/shared/devui-codebox/devui-source-data';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -26,7 +26,12 @@ export class TransferDemoComponent implements OnInit, OnDestroy {
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./sort/transfer-demo-sort.component.ts') },
   ];
 
-  navItems = [];
+  TransferDemoVirtualScroll: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./virtual-scroll/transfer-virtual-scroll.component.html') },
+    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./virtual-scroll/transfer-virtual-scroll.component.ts') },
+    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./virtual-scroll/transfer-virtual-scroll.component.scss') },
+  ];
+    navItems = [];
   subs: Subscription = new Subscription();
   constructor(private translate: TranslateService) {}
 
@@ -51,6 +56,7 @@ export class TransferDemoComponent implements OnInit, OnDestroy {
       { dAnchorLink: 'transfer-demo-search', value: values['transfer-demo-search'] },
       { dAnchorLink: 'transfer-demo-sort', value: values['transfer-demo-sort'] },
       { dAnchorLink: 'transfer-demo-custom', value: values['transfer-demo-custom'] },
+      { dAnchorLink: 'transfer-demo-virtual-scroll', value: values['transfer-demo-virtual-scroll']},
     ];
   }
 

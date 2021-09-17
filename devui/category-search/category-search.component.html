@@ -43,14 +43,14 @@
             [deletable]="true"
             [tag]="item.label + ': ' + (item.value[item.filterKey || 'label'] || '')"
             [titleContent]="item.title"
-            (tagDelete)="removeTag(item)"
+            (tagDelete)="removeTag(item, $event.event)"
           ></d-tag>
           <d-tags
             *ngIf="item.type === 'label' || item.type === 'checkbox'"
             [deletable]="true"
             [tags]="[item]"
             [titleProperty]="'title'"
-            (tagDelete)="removeTag(item)"
+            (tagDelete)="removeTag(item, $event.event)"
           >
             <ng-template let-tag="tag">
               <span>
@@ -159,7 +159,7 @@
                     item?.label
                   }}</a>
                 </li>
-                <div class="devui-no-data-text" *ngIf="categoryDisplay.length === 0">{{ i18nCategorySearchText?.noFilterConditions }}</div>
+                <div class="devui-no-data-text" *ngIf="showNoDataTips">{{ i18nCategorySearchText?.noFilterConditions }}</div>
               </ul>
             </ng-container>
             <ng-container *ngIf="enterSearch">
@@ -355,14 +355,14 @@
                 *ngIf="item.type !== 'label' && item.type !== 'checkbox'"
                 [deletable]="true"
                 [tag]="item.label + ': ' + (item.value[item.filterKey || 'label'] || '')"
-                (tagDelete)="removeTag(item)"
+                (tagDelete)="removeTag(item, $event.event)"
               ></d-tag>
               <d-tags
                 *ngIf="item.type === 'label' || item.type === 'checkbox'"
                 [deletable]="true"
                 [tags]="[item]"
                 [titleProperty]="'title'"
-                (tagDelete)="removeTag(item)"
+                (tagDelete)="removeTag(item, $event.event)"
               >
                 <ng-template let-tag="tag">
                   <span>{{ tag.label }}: </span>
@@ -412,7 +412,6 @@
     #dDatepickerPro
     [isRangeType]="true"
     [showTime]="true"
-    [activeRangeType]="activeType"
     [ngModel]="tagOption.value.value"
     (ngModelChange)="dateValueChange(tagOption, dDatepickerPro)"
   >
@@ -426,12 +425,6 @@
         >
           {{ i18nCategorySearchText?.confirm }}
         </d-button>
-        <d-button *ngIf="activeType === 'start'" bsStyle="common" (btnClick)="switchType()">{{
-          i18nCategorySearchText?.switchToEnd
-        }}</d-button>
-        <d-button *ngIf="activeType === 'end'" bsStyle="common" (btnClick)="switchType()">{{
-          i18nCategorySearchText?.switchToStart
-        }}</d-button>
       </div>
     </ng-template>
   </d-datepicker-calendar>

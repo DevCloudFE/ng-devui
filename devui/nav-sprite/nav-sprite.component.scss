@@ -90,6 +90,19 @@
 
       color: $devui-link;
     }
+
+    &:not(.disabled):hover {
+      color: $devui-list-item-hover-text;
+    }
+
+    .nav-item {
+      a,
+      span {
+        &:hover {
+          color: $devui-list-item-hover-text;
+        }
+      }
+    }
   }
 }
 

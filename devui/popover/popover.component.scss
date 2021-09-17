@@ -28,31 +28,31 @@
   }
 
   > .arrow {
-    width: 12px;
-    height: 12px;
+    width: 8px;
+    height: 8px;
     transform: rotate(45deg);
     display: block;
     z-index: -1;
   }
 
   &.top > .arrow {
-    margin-left: -6px;
-    bottom: -6px;
+    margin-left: -4px;
+    bottom: -4px;
   }
 
   &.right > .arrow {
-    left: -6px;
-    margin-top: -6px;
+    left: -4px;
+    margin-top: -4px;
   }
 
   &.bottom > .arrow {
-    margin-left: -6px;
-    top: -6px;
+    margin-left: -4px;
+    top: -4px;
   }
 
   &.left > .arrow {
-    right: -6px;
-    margin-top: -6px;
+    right: -4px;
+    margin-top: -4px;
   }
 
   &.bias-left > .arrow {
@@ -80,19 +80,19 @@
   }
 
   &.top {
-    margin-top: -10px;
+    margin-top: -7px;
   }
 
   &.bottom {
-    margin-top: 10px;
+    margin-top: 7px;
   }
 
   &.left {
-    margin-left: -10px;
+    margin-left: -7px;
   }
 
   &.right {
-    margin-left: 10px;
+    margin-left: 7px;
   }
 }
 

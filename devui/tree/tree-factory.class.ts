@@ -156,7 +156,7 @@ export class TreeFactory {
       this.mapTreeItems({
         treeItems: item[treeNodeChildrenKey] || [], parentId: node.id, treeNodeChildrenKey, treeNodeIdKey,
         checkboxDisabledKey, treeNodeTitleKey
-      });
+      }, renderTree);
     });
     return this;
   }
@@ -170,16 +170,7 @@ export class TreeFactory {
     if (this.nodes.hasOwnProperty(treeNode.id)) {
       throw new Error(`Duplicated id: ${treeNode.id} detected, please specify unique ids in the tree.`);
     }
-    // TODO: 兼容当前用户外部直接调用addNode方法创建节点时视图即时更新,后续充分测试后可移除renderTree的判断
-    if (renderTree) {
-      this.nodes = {
-        ...this.nodes,
-        [treeNode.id]: treeNode
-      };
-    } else {
-      this.nodes[treeNode.id] = treeNode;
-    }
-
+    this.nodes[treeNode.id] = treeNode;
     this.addChildNode(this.nodes[parentId], treeNode, index);
     // 兼容当前用户外部直接调用addNode方法创建节点
     if (renderTree) {
@@ -189,6 +180,9 @@ export class TreeFactory {
   }
 
   editNodeTitle(id: number | string) {
+    if (!this.nodes[id]) {
+      return;
+    }
     this.nodes[id].data.editable = true;
   }
 
@@ -218,12 +212,18 @@ export class TreeFactory {
   }
 
   toggleNodeById(id: number | string) {
+    if (!this.nodes[id]) {
+      return;
+    }
     this.nodes[id].data.isOpen = !this.nodes[id].data.isOpen;
     this.renderFlattenTree();
     return this;
   }
 
   openNodesById(id: number | string) {
+    if (!this.nodes[id]) {
+      return;
+    }
     this.nodes[id].data.isOpen = true;
     if (this.nodes[id].parentId !== undefined) {
       this.openNodesById(this.nodes[id].parentId);
@@ -233,6 +233,9 @@ export class TreeFactory {
   }
 
   closeNodesById(id: number | string, closeChildren = false) {
+    if (!this.nodes[id]) {
+      return;
+    }
     this.nodes[id].data.isOpen = false;
     if (closeChildren) {
       if (this.nodes[id] && this.nodes[id].data.children) {
@@ -246,6 +249,9 @@ export class TreeFactory {
   }
 
   disabledNodesById(id: number | string) {
+    if (!this.nodes[id]) {
+      return;
+    }
     this.nodes[id].data.disabled = true;
 
     const parentId = this.nodes[id].parentId;
@@ -281,6 +287,9 @@ export class TreeFactory {
 
   checkNodesById(id: number | string, checked: boolean,
                  checkableRelation: 'upward' | 'downward' | 'both' | 'none' = 'both'): Array<Object> {
+    if (!this.nodes[id]) {
+      return;
+    }
     this.nodes[id].data.halfChecked = false;
     this.nodes[id].data.isChecked = checked;
     switch (checkableRelation) {
@@ -356,6 +365,9 @@ export class TreeFactory {
   }
 
   activeNodeById(id: number | string) {
+    if (!this.nodes[id]) {
+      return;
+    }
     this.deactivateAllNodes();
     this.nodes[id].data.isActive = !this.nodes[id].data.isActive;
   }
@@ -388,10 +400,16 @@ export class TreeFactory {
   }
 
   startLoading(id: number | string) {
+    if (!this.nodes[id]) {
+      return;
+    }
     this.nodes[id].data.loading = true;
   }
 
   endLoading(id: number | string) {
+    if (!this.nodes[id]) {
+      return;
+    }
     this.nodes[id].data.loading = false;
   }
 
@@ -405,6 +423,9 @@ export class TreeFactory {
   }
 
   getNodeById(id: number | string): any {
+    if (!this.nodes[id]) {
+      return;
+    }
     return this.nodes[id].data;
   }
 
@@ -413,6 +434,9 @@ export class TreeFactory {
   }
 
   hideNodeById(id: number | string, hide: boolean) {
+    if (!this.nodes[id]) {
+      return;
+    }
     this.nodes[id].data.isHide = hide;
     this.renderFlattenTree();
     return this;
@@ -636,4 +660,5 @@ export class TreeFactory {
     };
     return new TreeNode(node.id, node.parentId, { ...node });
   }
+
 }

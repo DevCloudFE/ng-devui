@@ -1,0 +1,47 @@
+<div
+  #selectBox
+  class="devui-toggle-menu-container devui-toggle-menu{{ size ? '-' + size : '' }} {{ disabled ? 'disabled' : '' }}"
+  [tabindex]="0"
+  (click)="toggle($event)"
+  (focus)="autoToggle($event); setPassEvent($event, 'focus')"
+  (blur)="setPassEvent($event, 'blur')"
+  (keydown.esc)="setPassEvent($event, 'keydown.esc')"
+  (keydown.ArrowUp)="setPassEvent($event, 'keydown.ArrowUp')"
+  (keydown.ArrowDown)="setPassEvent($event, 'keydown.ArrowDown')"
+  (keydown.enter)="setPassEvent($event, 'keydown.enter')"
+  (keydown)="setPassEvent($event, 'keydown')"
+>
+  <ng-content></ng-content>
+  <ng-container *ngIf="appendToBody; else selectDropdownTpl">
+    <ng-template
+      cdk-connected-overlay
+      [cdkConnectedOverlayOrigin]="cdkConnectedOverlayOrigin"
+      [cdkConnectedOverlayWidth]="dropDownWidth"
+      [cdkConnectedOverlayOpen]="isOpen"
+      [cdkConnectedOverlayPositions]="overlayPositions"
+      (positionChange)="onPositionChange($event)"
+      (backdropClick)="toggleChangeFn(false)"
+    >
+      <ng-template [ngTemplateOutlet]="selectDropdownTpl"></ng-template>
+    </ng-template>
+  </ng-container>
+  <ng-template #selectDropdownTpl>
+    <div
+      #selectMenu
+      class="devui-dropdown-menu"
+      [ngClass]="{
+        'devui-dropdown-menu-cdk': appendToBody,
+        'devui-custom-right': listInstance?.customViewDirection === 'right',
+        'devui-custom-left': listInstance?.customViewDirection === 'left',
+        'devui-custom-top': listInstance?.customViewDirection === 'top',
+        'devui-dropdown-menu-multiple': listInstance?.multiple,
+        'devui-reset-min-width': width
+      }"
+      [@fadeInOut]="isOpen && startAnimation ? (appendToBody ? menuPosition : popDirection) : 'void'"
+      (@fadeInOut.done)="animationEnd()"
+      [@.disabled]="!showAnimation"
+    >
+      <ng-content select="d-toggle-menu-list"></ng-content>
+    </div>
+  </ng-template>
+</div>

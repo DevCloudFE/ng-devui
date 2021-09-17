@@ -4,7 +4,7 @@
     class="devui-star-align devui-pointer"
     [ngClass]="{ 'devui-only-read': read }"
     (mouseover)="hoverToggle($event, i)"
-    (click)="selectValue(i)"
+    (click)="selectValue($event, i)"
   >
     <span class="devui-star-color {{ icon }}">
       {{ character }}

@@ -1,0 +1,88 @@
+<ul
+  class="devui-dropdown-menu-wrap {{ size ? 'devui-dropdown-menu-' + size : '' }}"
+  dLoading
+  positionType="relative"
+  [showLoading]="showLoading"
+  [message]="i18nCommonText?.loading"
+  [loadingTemplateRef]="loadingTemplateRef"
+  [backdrop]="true"
+  (click)="$event.stopPropagation(); $event.preventDefault()"
+>
+  <ng-content></ng-content>
+  <ul
+    #dropdownUl
+    *ngIf="!virtualScroll || enableLazyLoad; else scrollViewTpl"
+    class="devui-select-list-unstyled devui-scrollbar"
+    [ngStyle]="{ 'max-height': scrollHeight, width: '100%' }"
+    dLazyLoad
+    [enableLazyLoad]="enableLazyLoad"
+    (loadMore)="loadMoreEvent($event)"
+  >
+    <ng-template [ngTemplateOutlet]="selectAllTpl"></ng-template>
+    <ng-container *ngFor="let item of availableOptions; let index = index; trackBy: trackByFn">
+      <!--list-item 单个选项模板-->
+      <ng-template
+        [ngTemplateOutlet]="listItemTemplate"
+        [ngTemplateOutletContext]="{
+          item: item,
+          index: index,
+          selectIndex: selectIndex,
+          activeIndex: activeIndex,
+          choose: choose
+        }"
+      ></ng-template>
+    </ng-container>
+  </ul>
+  <li *ngIf="availableOptions?.length === 0" class="devui-no-data-tips">
+    <ng-container *ngIf="noResultItemTemplate; else noResultDefaultTpl">
+      <ng-template [ngTemplateOutlet]="noResultItemTemplate" [ngTemplateOutletContext]="{ options: options }"></ng-template>
+    </ng-container>
+  </li>
+</ul>
+<ng-container *ngIf="customViewTemplate">
+  <div class="devui-select-custom-area">
+    <ng-template [ngTemplateOutlet]="customViewTemplate" [ngTemplateOutletContext]="{ $implicit: this, choose: choose }"></ng-template>
+  </div>
+</ng-container>
+
+<!--虚拟滚动模板-->
+<ng-template #scrollViewTpl>
+  <cdk-virtual-scroll-viewport
+    [ngStyle]="{
+      height: getVirtualScrollHeight(availableOptions.length, size),
+      width: '100%',
+      'max-height': scrollHeight
+    }"
+    [itemSize]="realVirtualScrollItemSize"
+    [minBufferPx]="minBuffer"
+    [maxBufferPx]="maxBuffer"
+    class="viewport-wrapper devui-select-list-unstyled devui-scrollbar"
+    #dropdownUl
+  >
+    <ng-template [ngTemplateOutlet]="selectAllTpl"></ng-template>
+    <ng-container *cdkVirtualFor="let item of availableOptions; let index = index; trackBy: trackByFn">
+      <ng-template
+        [ngTemplateOutlet]="listItemTemplate"
+        [ngTemplateOutletContext]="{
+          item: item,
+          index: index,
+          selectIndex: selectIndex,
+          activeIndex: activeIndex,
+          choose: choose
+        }"
+      ></ng-template>
+    </ng-container>
+  </cdk-virtual-scroll-viewport>
+</ng-template>
+
+<!--全选模板-->
+<ng-template #selectAllTpl>
+  <li class="devui-dropdown-item" *ngIf="showSelectAll()" (click)="selectAll()">
+    <span>
+      <d-checkbox [label]="i18nCommonText.checkAll" [isShowTitle]="false" [halfchecked]="halfChecked" [(ngModel)]="allChecked"></d-checkbox>
+    </span>
+  </li>
+</ng-template>
+
+<!--无内容模板-->
+<ng-template #noResultDefaultTpl>{{ isFiltering ? i18nCommonText?.noRecordsFound : i18nCommonText?.noData }}</ng-template>

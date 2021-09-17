@@ -261,6 +261,8 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
 
   @Input() minHeight: string;
 
+  @Output() columnDragEnd = new EventEmitter<any>();
+
   /**
    * 表格尺寸，sm对应行高40px， md对应行高48px，lg对应行高56px
    */
@@ -377,7 +379,7 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
   // life hook start
   ngOnInit() {
     this.ngZone.runOutsideAngular(() => {
-      this.document.addEventListener('mousedown', this.onDocumentClickListen);
+      this.document.addEventListener('click', this.onDocumentClickListen);
     });
   }
 
@@ -767,6 +769,7 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
   }
 
   handleDragTable({ from, to }) {
+    this.columnDragEnd.emit({ from, to });
     const sortArray = (array, fromE, toE) => {
       if (fromE < toE) {
         const fromEData = array[fromE];
