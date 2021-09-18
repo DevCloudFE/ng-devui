@@ -122,7 +122,8 @@ export class DatepickerProCalendarComponent implements OnInit, AfterViewInit, On
     this.pickerSrv.toggleEvent.next(true);
   }
 
-  clear() {
+  clear(event?: MouseEvent) {
+    event?.stopPropagation();
     this.pickerSrv.updateDateValue.next({
       type: this.isRangeType ? 'range' : 'single',
       value: this.isRangeType ? [] : null
@@ -137,10 +138,14 @@ export class DatepickerProCalendarComponent implements OnInit, AfterViewInit, On
       this.dateValue = [];
       this.pickerSrv.curRangeDate = [];
       this.currentActiveInput = 'start';
-      this.onChange(this.pickerSrv.curRangeDate);
+      if (event) {
+        this.onChange(this.pickerSrv.curRangeDate);
+      }
     } else {
       this.pickerSrv.curDate = null;
-      this.onChange(this.pickerSrv.curDate);
+      if (event) {
+        this.onChange(this.pickerSrv.curDate);
+      }
     }
   }
 

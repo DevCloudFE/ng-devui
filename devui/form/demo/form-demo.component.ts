@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DevuiSourceData } from 'ng-devui/shared/devui-codebox/devui-source-data';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { DevuiSourceData } from 'ng-devui/shared/devui-codebox/devui-source-data';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -188,6 +188,11 @@ export class FormDemoComponent implements OnInit, OnDestroy {
     { title: 'TS', language: 'typescript', code: require('!!raw-loader!./validate-dynamic-rule/validate-dynamic-rule.component.ts') },
   ];
 
+  ValidateUpdate: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./validate-update/validate-update.component.html') },
+    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./validate-update/validate-update.component.ts') },
+  ];
+
   navItems = [];
   subs: Subscription = new Subscription();
   constructor(private translate: TranslateService) {}
@@ -218,6 +223,7 @@ export class FormDemoComponent implements OnInit, OnDestroy {
       { dAnchorLink: 'demo-custom-status', value: values['demo-custom-status'] },
       { dAnchorLink: 'demo-validate-sync', value: values['demo-validate-sync'] },
       { dAnchorLink: 'demo-validate-cross-component', value: values['demo-validate-cross-component'] },
+      { dAnchorLink: 'demo-validate-update', value: values['demo-validate-update'] },
     ];
   }
 

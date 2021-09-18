@@ -41,6 +41,7 @@ import DefaultIcons from './tree-default-icons';
 })
 
 export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterViewInit, OnDestroy, OnChanges {
+  @Input() checkableRelation: 'upward' | 'downward' | 'both' | 'none' = 'both';
   @Input() set allowClear(allowClear) { // 废弃
     this._allowClear = allowClear;
   }
@@ -428,7 +429,7 @@ export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterV
     event.preventDefault();
     event.stopPropagation();
     if (this.multiple) {
-      this.tree.treeFactory.checkNodesById(item.id, false);
+      this.tree.treeFactory.checkNodesById(item[this.treeNodeIdKey], false);
       const curValue = this.tree.treeFactory.getCheckedNodes();
       this.value = this.leafOnly
         ? curValue.filter(node => !node.data.isParent).map(node => node.data.originItem) : curValue.map(node => node.data.originItem);

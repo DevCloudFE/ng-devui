@@ -112,7 +112,9 @@ export class SearchComponent implements ControlValueAccessor, OnInit, OnDestroy,
   }
 
   clickSearch(term) {
-    this.searchFn.emit(term);
+    if (!this.disabled) {
+      this.searchFn.emit(term);
+    }
   }
 
   registerFilterChange() {

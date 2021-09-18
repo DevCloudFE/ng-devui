@@ -71,13 +71,16 @@
       border-right: 1px solid $devui-dividing-line;
 
       span {
-        background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAOAQMAAAAYFN70AAAABlBMVEUAAAAhKDGQazuIAAAAAXRSTlMAQObYZgAAABRJREFUCNdj+P//ABijAdzif8AYAMnZDu+UDPvPAAAAAElFTkSuQmCC)
-          no-repeat scroll 0 center;
+        line-height: 40px;
         display: block;
         width: 18px;
         height: 40px;
         margin: 0 10px;
         cursor: pointer;
+
+        #slide-button-inner {
+          fill: $devui-text;
+        }
       }
     }
   }
@@ -90,7 +93,7 @@
       vertical-align: text-bottom;
       border: 0;
       height: 20px;
-      width: 90px;
+      width: 100px;
       margin: 0 12px;
     }
   }
@@ -173,6 +176,12 @@
         margin-bottom: 12px;
       }
     }
+  }
+}
+
+@media (max-width: 380px) {
+  d-search {
+    width: 180px;
   }
 }
 

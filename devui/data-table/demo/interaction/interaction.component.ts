@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
-import { DataTableComponent, SortDirection, SortEventArg, TableWidthConfig } from 'ng-devui/data-table';
+import { DataTableComponent, FilterConfig, SortDirection, SortEventArg, TableWidthConfig } from 'ng-devui/data-table';
 import { originSource, SourceType } from '../mock-data';
 
 @Component({
@@ -10,7 +10,7 @@ import { originSource, SourceType } from '../mock-data';
 export class InteractionComponent implements OnInit {
   @ViewChild(DataTableComponent, { static: true }) datatable: DataTableComponent;
   sortableDataSource: Array<SourceType> = JSON.parse(JSON.stringify(originSource.slice(0, 6)));
-  filterListRadio = [
+  filterListRadio: FilterConfig[] = [
     {
       name: 'Clear',
       value: 'Clear',

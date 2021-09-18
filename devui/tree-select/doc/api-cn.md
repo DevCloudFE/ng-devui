@@ -50,6 +50,7 @@ import { TreeSelectModule } from 'ng-devui/treeSelect';
 |  virtualScrollMaxBufferPx   |               `number`           |          900                 | 可选, 设置虚拟滚动时的最大 buffer 尺寸，单位为`px` ，参考https://material.angular.io/cdk/scrolling/overview#scrolling-over-fixed-size-items  | [虚拟滚动](demo#virtual-scroll)       |
 |  virtualScrollItemSize   |               `number`           |          30                | 可选, 设置虚拟滚动内元素的尺寸，单位为`px` ，参考https://material.angular.io/cdk/scrolling/overview#scrolling-over-fixed-size-items  | [虚拟滚动](demo#virtual-scroll)       |
 |  showAnimation   |             `boolean`              |                                 true                                  |  可选，是否开启动画 |   | ✔ |
+|  checkableRelation   | `'upward' \| 'downward' \| 'both' \| 'none'` |     'both'      |                                                可选，设置父子节点的 check 规则                                                 | [树组件checkableRelation](http://devui.huawei.com/components/zh-cn/tree/demo#check-control-tree) |
 
 ## d-tree-select 事件
 

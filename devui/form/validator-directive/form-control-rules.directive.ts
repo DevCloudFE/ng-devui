@@ -5,7 +5,6 @@ import {
   ElementRef,
   EventEmitter,
   Host,
-
   Input,
   OnChanges,
   OnDestroy,
@@ -78,7 +77,7 @@ export abstract class DAbstractControlRuleDirective implements OnChanges {
 
   /* language key */
   _locale: string;
-  set locale (key: string) {
+  set locale(key: string) {
     this._locale = key;
     this._parseErrors(this._cd.control.errors);
     this.updateStatusAndMessageToView(this._cd.control.status);
@@ -104,9 +103,7 @@ export abstract class DAbstractControlRuleDirective implements OnChanges {
 
   @Output() dRulesStatusChange = new EventEmitter<DValidateErrorStatus>();
 
-  constructor(
-    cd: AbstractControlDirective, parent: DAbstractControlRuleDirective
-    ) {
+  constructor(cd: AbstractControlDirective, parent: DAbstractControlRuleDirective) {
     this._cd = cd;
     this._parent = parent;
   }
@@ -148,7 +145,12 @@ export abstract class DAbstractControlRuleDirective implements OnChanges {
     }
   }
 
-  public setOriginRules (rules: DValidateRules): void {
+  public updateRules(rules: DValidateRules): void {
+    this._rules = { ...this._originRules, ...this._translateRulesToObject(rules) };
+    this.setupOrUpdateRules();
+  }
+
+  public setOriginRules(rules: DValidateRules): void {
     this._originRules = this._translateRulesToObject(rules);
   }
 
@@ -234,7 +236,7 @@ export abstract class DAbstractControlRuleDirective implements OnChanges {
   private _translateRulesToObject(rules: DValidateRules) {
     if (Array.isArray(rules)) {
       return {
-        validators: rules
+        validators: rules,
       };
     }
 
@@ -282,7 +284,8 @@ export abstract class DAbstractControlRuleDirective implements OnChanges {
     if (typeof res === 'boolean' && !res) {
       error = {};
       error[id] = message;
-    } else if (typeof res === 'string' || res && typeof res === 'object') { // 兼容国际化词条
+    } else if (typeof res === 'string' || (res && typeof res === 'object')) {
+      // 兼容国际化词条
       error = {};
       error[id] = res;
     }
@@ -462,11 +465,7 @@ export class DFormGroupRuleDirective extends DAbstractControlRuleDirective imple
 
   private destroy$ = new Subject();
 
-  constructor(
-    @Self() cd: ControlContainer,
-    @Optional() @Host() @SkipSelf() parentDir: DFormGroupRuleDirective,
-    private i18n: I18nService
-    ) {
+  constructor(@Self() cd: ControlContainer, @Optional() @Host() @SkipSelf() parentDir: DFormGroupRuleDirective, private i18n: I18nService) {
     super(cd, parentDir);
   }
 

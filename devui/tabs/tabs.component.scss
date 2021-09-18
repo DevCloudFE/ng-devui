@@ -19,6 +19,7 @@ $devui-tab-slider-bg: $devui-list-item-hover-bg;
 
   li {
     cursor: pointer;
+    border: 2px solid transparent;
 
     & a {
       cursor: pointer;
@@ -93,7 +94,7 @@ $devui-tab-slider-bg: $devui-list-item-hover-bg;
       cursor: pointer;
       border: none;
       color: $devui-text;
-      line-height: 30px;
+      line-height: 26px;
       padding: 0 16px;
       transition: color $devui-animation-duration-slow $devui-animation-ease-in-out;
 
@@ -252,8 +253,7 @@ $devui-tab-slider-bg: $devui-list-item-hover-bg;
     cursor: pointer;
     float: left;
     position: relative;
-    padding: 4px 20px;
-    line-height: 22px;
+    padding: 8px 16px;
 
     & a {
       cursor: pointer;
@@ -281,7 +281,7 @@ $devui-tab-slider-bg: $devui-list-item-hover-bg;
       border: 1px solid $devui-dividing-line;
       background: $devui-global-bg;
       border-radius: $devui-border-radius $devui-border-radius 0 0;
-      font-weight: 700;
+      font-weight: bold;
       // 以下覆盖父元素的底部边框,解决多1px的边框造成的抖动
       margin: -1px;
       border-bottom-color: transparent;
@@ -315,7 +315,7 @@ $devui-tab-slider-bg: $devui-list-item-hover-bg;
   li {
     float: left;
     margin-left: 32px;
-    margin-bottom: -1px;
+    margin-bottom: -3px;
 
     &:first-child {
       margin-left: 0;

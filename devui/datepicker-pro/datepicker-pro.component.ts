@@ -240,7 +240,10 @@ export class DatepickerProComponent implements OnInit, AfterViewInit, OnDestroy,
     });
     this.dateValue = null;
     this.pickerSrv.curDate = null;
-    this.onChange(this.pickerSrv.curDate);
+
+    if (event) {
+      this.onChange(this.pickerSrv.curDate);
+    }
   }
 
   onToggle(isOpen) {

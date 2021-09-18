@@ -35,6 +35,7 @@ import { CascaderModule } from 'ng-devui/cascader';
 |    loadChildrenFn    | `(value: CascaderItem) => Promise<CascaderItem[]> \| Observable<CascaderItem[]>` |               null               |                         可选，传入懒加载的加载子节点的函数                          | [点击加载](demo#lazyload-cascader) |
 |  dropdownPanelClass  |                                     `string`                                     |                -                 |                        下拉面板的 class,用于用户选中某个面板                        | [基本用法](demo#basic-usage)       |
 |    showAnimation     |                                    `boolean`                                     |               true               |                                 可选，是否开启动画                                  |                                    | ✔          |
+|    appendToBody     |                                    `boolean`                                     |               true               |                                 可选，将下拉附着到body                                |                                   |
 
 ## d-cascader 事件
 

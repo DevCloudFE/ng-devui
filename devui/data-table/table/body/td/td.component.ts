@@ -37,6 +37,8 @@ export class TableTdComponent implements OnInit, OnChanges, OnDestroy {
   @Output() editStatusEvent = new EventEmitter<boolean>();
 
   private documentClickSubscription: Subscription;
+  private documentMousedownSubscription: Subscription;
+  private clickInTd: boolean;
   private tdClickSubscription: Subscription;
   private currentEditing = false;
   constructor(private elementRef: ElementRef, private tdService: TableTdService) { }
@@ -99,14 +101,17 @@ export class TableTdComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   bindEditClickEvent() {
-    this.documentClickSubscription = fromEvent(document, 'mousedown').pipe(
+    this.documentClickSubscription = fromEvent(document, 'click').pipe(
       tap((e: Event) => {
         e.stopPropagation();
       })
     ).subscribe((clickEvent) => {
-      if (!this.elementRef.nativeElement.contains(clickEvent.target)) {
+      if (!this.elementRef.nativeElement.contains(clickEvent.target) && !this.clickInTd) {
         this.finishCellEdit();
       }
+    });
+    this.documentMousedownSubscription = fromEvent(document, 'mousedown').subscribe(event => {
+        this.clickInTd = !!this.elementRef.nativeElement.contains(event.target);
     });
 
     this.tdClickSubscription = this.tdService.tableCellClickEvent.subscribe((clickEvent) => {
@@ -165,6 +170,11 @@ export class TableTdComponent implements OnInit, OnChanges, OnDestroy {
     if (this.tdClickSubscription) {
       this.tdClickSubscription.unsubscribe();
       this.tdClickSubscription = null;
+    }
+
+    if (this.documentMousedownSubscription) {
+      this.documentMousedownSubscription.unsubscribe();
+      this.documentMousedownSubscription = null;
     }
   }
 }

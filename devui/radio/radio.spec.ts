@@ -1,5 +1,5 @@
 import { Component, DebugElement } from '@angular/core';
-import { async, ComponentFixture, fakeAsync, flush, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, flush, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { of } from 'rxjs';
@@ -40,7 +40,7 @@ describe('radio', () => {
   let firstRadioLabel: HTMLElement;
   let secondRadioLabel: HTMLElement;
   let thirdRadioLabel: HTMLElement;
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [RadioModule, FormsModule],
       declarations: [TestRadioComponent]

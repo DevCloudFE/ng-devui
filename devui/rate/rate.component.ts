@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, forwardRef, Input, OnInit } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -21,6 +21,7 @@ export class RateComponent implements OnInit, ControlValueAccessor {
   @Input() icon = '';
   @Input() character = '';
   @Input() type: 'success' | 'warning' | 'error';
+  @Input() allowHalf = false;
   totalLevel_array = [];
   chooseValue: number;
   width = '';
@@ -52,8 +53,15 @@ export class RateComponent implements OnInit, ControlValueAccessor {
 
   // 动态模式配置
   setDynamicRating() {
-    this.setChange(0, this.chooseValue + 1, '100%');
-    this.setChange(this.chooseValue + 1, this.count, '0');
+    const halfStar = this.chooseValue % 1;
+    const wholeStar = Math.floor(this.chooseValue);
+    this.setChange(0, wholeStar + 1, '100%');
+    if (this.allowHalf && halfStar) {
+      this.setChange(wholeStar + 1, wholeStar + 2, '50%');
+      this.setChange(wholeStar + 2, this.count, '0');
+    } else {
+      this.setChange(wholeStar + 1, this.count, '0');
+    }
   }
 
   hoverToggle(event, index?: number, reset: boolean = false) {
@@ -61,14 +69,19 @@ export class RateComponent implements OnInit, ControlValueAccessor {
       return;
     }
     if (reset) {
-      if (this.chooseValue >= 0) {
-        this.setChange(0, this.chooseValue + 1, '100%');
-        this.setChange(this.chooseValue + 1, this.count, '0');
+      // chooseValue从index取值故比真实值小1
+      if (this.chooseValue >= -0.5) {
+        this.setDynamicRating();
       } else {
         this.setChange(0, this.count, '0');
       }
     } else {
-      this.setChange(0, index + 1, '100%');
+      this.setChange(0, index, '100%');
+      if (this.allowHalf && (event.offsetX * 2 <= event.target.clientWidth)) {
+        this.setChange(index, index + 1, '50%');
+      } else {
+        this.setChange(index, index + 1, '100%');
+      }
       this.setChange(index + 1, this.count, '0');
     }
   }
@@ -79,14 +92,22 @@ export class RateComponent implements OnInit, ControlValueAccessor {
     }
   }
 
-  selectValue(index) {
+  selectValue(event, index) {
     if (this.read) {
       return;
     }
-    this.setChange(0, index + 1, '100%');
+    this.setChange(0, index, '100%');
+
+    if (this.allowHalf && (event.offsetX * 2 <= event.target.clientWidth)) {
+      this.setChange(index, index + 1, '50%');
+      this.chooseValue = index - 0.5;
+    } else {
+      this.setChange(index, index + 1, '100%');
+      this.chooseValue = index;
+    }
+
     this.setChange(index + 1, this.count, '0');
-    this.chooseValue = index;
-    this.onChange(index + 1);
+    this.onChange(this.chooseValue + 1);
     this.onTouched();
   }
 

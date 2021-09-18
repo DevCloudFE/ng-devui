@@ -6,7 +6,8 @@ import scss from 'highlight.js/lib/languages/scss';
 import typescript from 'highlight.js/lib/languages/typescript';
 import xml from 'highlight.js/lib/languages/xml';
 import { DevUIModule } from 'ng-devui';
-import { SafePipeModule } from 'ng-devui/utils';
+import { I18nService } from 'ng-devui/i18n';
+import { LazyLoadModule, SafePipeModule } from 'ng-devui/utils';
 import { DevuiCommonsModule } from '../../../devui-commons/src/public-api';
 import { AppContentComponent } from './app-content.component';
 import { ComponentDataService } from './component.data.service';
@@ -36,6 +37,7 @@ export function hljsLanguages() {
   ],
   imports: [
     CommonModule,
+    LazyLoadModule,
     SafePipeModule,
     TranslateModule,
     DevuiCommonsModule,
@@ -50,7 +52,8 @@ export function hljsLanguages() {
     ]),
   ],
   providers: [
-    ComponentDataService
+    ComponentDataService,
+    I18nService
   ]
 })
 export class AppContentModule {

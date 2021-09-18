@@ -15,7 +15,7 @@ import { InputNumberComponent } from 'ng-devui/input-number';
 import { SelectComponent } from 'ng-devui/select';
 import { TreeSelectComponent } from 'ng-devui/tree-select';
 import { stopPropagationIfExist } from 'ng-devui/utils';
-import { Subscription } from 'rxjs';
+import { fromEvent, Subscription } from 'rxjs';
 import { DataTableRowComponent } from './data-table-row.component';
 import { DataTableComponent } from './data-table.component';
 import { EditorDirective } from './editor-host.directive';
@@ -39,6 +39,8 @@ export class DataTableCellComponent implements OnInit, OnChanges, OnDestroy {
   isCellEdit: boolean;
   forceUpdateSubscription: Subscription;
   documentClickSubscription: Subscription;
+  documentMousedownSubscription: Subscription;
+  clickInTd: boolean;
   cellEditorClickSubscription: Subscription;
   cellActionSubscription: Subscription;
   clickCount = 0; // 记录点击次数
@@ -55,6 +57,11 @@ export class DataTableCellComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnInit(): void {
     this.forceUpdateSubscription = this.rowComponent.forceUpdateEvent.subscribe(_ => this.forceUpdate());
+    if (this.column.editable) {
+      this.documentMousedownSubscription = fromEvent(document, 'mousedown').subscribe(event => {
+        this.clickInTd = !!this.cellRef.nativeElement.contains(event.target);
+      });
+    }
     this.ngZone.runOutsideAngular(() => {
       this.cellRef.nativeElement.addEventListener(
         'click',
@@ -177,6 +184,8 @@ export class DataTableCellComponent implements OnInit, OnChanges, OnDestroy {
     this.cellEditorClickSubscription && this.unSubscription(this.cellEditorClickSubscription);
     // tslint:disable-next-line:no-unused-expression
     this.cellActionSubscription && this.unSubscription(this.cellActionSubscription);
+    // tslint:disable-next-line:no-unused-expression
+    this.documentMousedownSubscription && this.unSubscription(this.documentMousedownSubscription);
   }
 
   private unSubscription(sbscription: Subscription) {
@@ -253,7 +262,7 @@ export class DataTableCellComponent implements OnInit, OnChanges, OnDestroy {
         this.creatCellEditor();
         this.documentClickSubscription = this.dt.documentClickEvent.subscribe(
           event => {
-            if (event === 'cancel' || !this.cellRef.nativeElement.contains(event.target)) {
+            if (event === 'cancel' || (!this.cellRef.nativeElement.contains(event.target) && !this.clickInTd)) {
               this.ngZone.run(() => {
                 this.finishCellEdit();
               });

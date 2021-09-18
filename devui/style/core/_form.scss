@@ -35,13 +35,14 @@ $border-change-function: $devui-animation-ease-in-out-smooth;
 
 [dTextArea] {
   width: 100%;
+  min-height: 80px;
 }
 
 .devui-form-controls textarea,
 [dTextInput],
 [dTextarea] {
   box-sizing: border-box;
-  padding: 4px 10px;
+  padding: 4px 8px;
   color: $devui-text;
   vertical-align: middle;
   border: 1px solid $devui-form-control-line;
@@ -89,7 +90,7 @@ $border-change-function: $devui-animation-ease-in-out-smooth;
   border: 1px solid $devui-form-control-line;
   border-radius: $devui-border-radius;
   display: table-cell;
-  padding: 0 10px;
+  padding: 0 8px;
   text-align: center;
 
   &:last-child {
@@ -110,8 +111,8 @@ $border-change-function: $devui-animation-ease-in-out-smooth;
   background-color: $devui-base-bg;
   border: 1px solid $devui-form-control-line;
   border-radius: $devui-border-radius;
-  padding: 5px 10px;
-  line-height: 16px; // 解决ie中文字不居中，由于height28px，有10px的padding和2px的border，剩余16px，使用其他的会使文字不居中
+  padding: 4px 8px;
+  line-height: 18px;
   font-size: $devui-font-size;
   color: $devui-text;
   width: 100%;
@@ -149,7 +150,7 @@ $border-change-function: $devui-animation-ease-in-out-smooth;
   &.devui-search-in-dropdown {
     margin: 0;
     border: none;
-    padding: 5px 26px 5px 10px;
+    padding: 4px 28px 4px 8px;
     background-color: $devui-embed-search-bg;
     color: $devui-text;
 
@@ -204,7 +205,7 @@ $border-change-function: $devui-animation-ease-in-out-smooth;
 .devui-form-control {
   color: $devui-text;
   background-color: $devui-base-bg;
-  padding: 5px 10px;
+  padding: 4px 8px;
   border: 1px solid $devui-form-control-line;
   display: block;
   width: 100%;
@@ -485,11 +486,11 @@ d-form-control {
       }
 
       .devui-input.devui-icon-left {
-        padding-right: 30px;
+        padding-right: 32px;
       }
 
       .devui-input {
-        padding-right: 54px;
+        padding-right: 56px;
       }
 
       .devui-input.devui-clear-exit {
@@ -505,7 +506,7 @@ d-form-control {
       }
 
       .devui-input.devui-input-sm {
-        padding-right: 54px;
+        padding-right: 56px;
       }
 
       .devui-input.devui-clear-exit.devui-input-sm {
@@ -525,7 +526,7 @@ d-form-control {
       }
 
       .devui-input.devui-clear-exit.devui-input-lg {
-        padding-right: 95px;
+        padding-right: 96px;
       }
     }
   }
@@ -566,7 +567,7 @@ d-form-control {
     }
 
     &:hover .input-box:not(.disabled) {
-      padding-right: 58px;
+      padding-right: 60px;
     }
   }
 

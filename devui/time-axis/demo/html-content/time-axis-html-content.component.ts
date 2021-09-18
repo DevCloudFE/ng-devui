@@ -18,7 +18,7 @@ export class TimeAxisHtmlContentComponent implements OnInit {
             model: 'html',
             direction: 'vertical',
             list: [
-              {time: '2017-07-25', text: '<div style=\'font-weight: 600\'>some events in 2017-07-25</div>',
+              {time: '2017-07-25', text: '<div style=\'font-weight: bold\'>some events in 2017-07-25</div>',
                 dotColor: 'var(--devui-success)', iconClass: 'stops'},
               {time: '2017-07-27', text: '<div>some events in 2017-07-27</div>', dotColor: 'var(--devui-warning)'},
               {time: '2017-07-28', text: '<div style=\'color: chocolate\'>some events in 2017-07-28</div>'},

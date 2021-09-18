@@ -1,0 +1,173 @@
+@import '../style/theme/color';
+@import '../style/core/_font';
+@import '../style/theme/corner';
+
+@mixin list {
+  d-toggle-menu-input,
+  d-toggle-menu-placeholder,
+  d-toggle-menu-search {
+    font-size: $devui-font-size-md;
+    min-height: 26px;
+    line-height: 18px;
+  }
+
+  d-toggle-menu-list-item,
+  .devui-no-data-tips {
+    font-size: $devui-font-size-md;
+    min-height: 36px;
+    line-height: 18px;
+  }
+
+  &-lg {
+    font-size: $devui-font-size-lg;
+    min-height: 46px;
+
+    d-toggle-menu-input,
+    d-toggle-menu-placeholder,
+    d-toggle-menu-search {
+      font-size: $devui-font-size-lg;
+      min-height: 46px;
+      line-height: 46px;
+    }
+
+    d-toggle-menu-list-item,
+    .devui-no-data-tips {
+      font-size: $devui-font-size-lg;
+      min-height: 40px;
+      line-height: 28px;
+    }
+  }
+
+  &-sm {
+    font-size: $devui-font-size-sm;
+    min-height: 24px;
+
+    d-toggle-menu-input,
+    d-toggle-menu-placeholder,
+    d-toggle-menu-search,
+    d-toggle-menu-list-item {
+      font-size: $devui-font-size-sm;
+      min-height: 24px;
+      line-height: 14px;
+    }
+
+    d-toggle-menu-list-item,
+    .devui-no-data-tips {
+      min-height: 26px;
+    }
+  }
+}
+
+:host {
+  .devui-toggle-menu-container {
+    padding: 0;
+    width: 100%;
+    height: auto;
+    outline: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: $devui-border-radius;
+    border: solid 1px $devui-form-control-line;
+    background-color: $devui-base-bg;
+
+    &.disabled {
+      color: $devui-disabled-text;
+      border-color: $devui-disabled-line;
+      background-color: $devui-disabled-bg;
+    }
+  }
+
+  ::ng-deep {
+    d-toggle-menu-label {
+      max-width: 100%;
+    }
+
+    .devui-toggle-menu {
+      font-size: $devui-font-size-md;
+      min-height: 26px;
+      @include list;
+    }
+  }
+}
+
+.devui-dropdown-menu {
+  width: 100%;
+  padding-bottom: 0;
+
+  &:not(.devui-dropdown-menu-cdk) {
+    width: calc(100% + 2px);
+    left: -1px;
+    margin: 5px 0;
+  }
+}
+
+.devui-dropdown-menu-cdk {
+  position: static;
+  display: block;
+  width: 100%;
+}
+
+::ng-deep {
+  .devui-dropdown-menu {
+    &.devui-dropdown-menu-cdk {
+      font-size: $devui-font-size-md;
+      min-height: 26px;
+      @include list;
+    }
+
+    &.devui-custom-right,
+    &.devui-custom-left,
+    &.devui-custom-top {
+      min-width: 400px;
+
+      d-toggle-menu-list {
+        width: 100%;
+        display: flex !important;
+
+        .devui-dropdown-menu-wrap {
+          display: inline-block;
+        }
+
+        .devui-select-custom-area {
+          display: inline-block;
+          overflow: auto;
+        }
+
+        &:not(.devui-custom-top) > .devui-dropdown-menu-wrap {
+          width: calc(50% - 1px);
+        }
+
+        &:not(.devui-custom-top) > .devui-select-custom-area {
+          width: 50%;
+
+          & > .devui-select-custom-area::before {
+            display: none;
+          }
+        }
+      }
+    }
+
+    &.devui-custom-top {
+      flex-direction: column-reverse;
+    }
+
+    &.devui-custom-left d-toggle-menu-list .devui-select-custom-area {
+      border-right: 1px solid $devui-dividing-line;
+      order: -1;
+    }
+
+    &.devui-custom-right d-toggle-menu-list .devui-select-custom-area {
+      border-left: 1px solid $devui-dividing-line;
+    }
+
+    &.devui-custom-top > .devui-select-custom-area {
+      border-bottom: 1px solid $devui-dividing-line;
+    }
+
+    &.devui-reset-min-width {
+      min-width: auto;
+    }
+  }
+}

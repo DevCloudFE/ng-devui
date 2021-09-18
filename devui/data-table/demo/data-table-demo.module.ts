@@ -1,7 +1,9 @@
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 import { DevUIModule } from 'ng-devui';
 import { AutoCompleteModule } from 'ng-devui/auto-complete';
 import { DataTableModule } from 'ng-devui/data-table';
@@ -12,11 +14,11 @@ import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
 import { SplitterModule } from 'ng-devui/splitter';
 import { TooltipModule } from 'ng-devui/tooltip';
-import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 import { DatatableDemoAsyncComponent } from './async/data-table-demo-async.component';
 import { BasicOldComponent } from './basic-old/basic-old.component';
 import { DatatableDemoBasicComponent } from './basic/data-table-demo-basic.component';
+import { BigDataTreeTableComponent } from './big-data-tree-table/big-data-tree-table.component';
 import { CellMergeComponent } from './cell-merge/cell-merge.component';
 import { CheckOptionsColumnComponent } from './check-options-column/check-options-column.component';
 import { CheckOptionsComponent } from './check-options/check-options.component';
@@ -41,11 +43,11 @@ import { MutilStylesComponent } from './mutil-styles/mutil-styles.component';
 import { TreeTableOldComponent } from './tree-table-old/tree-table-old.component';
 import { TreeDataComponent } from './tree-table/tree-data.component';
 import { VirtualScrollComponent } from './virtual-scroll/virtual-scroll.component';
-
 @NgModule({
   imports: [
     TranslateModule,
     CommonModule,
+    ScrollingModule,
     DevUIModule,
     FormsModule,
     DataTableModule,
@@ -95,9 +97,10 @@ import { VirtualScrollComponent } from './virtual-scroll/virtual-scroll.componen
     VirtualScrollComponent,
     MutilStylesComponent,
     FixHeightVirtualScrollComponent,
+    BigDataTreeTableComponent
   ],
   providers: [],
-  
+
 })
 export class DataTableDemoModule {
 }

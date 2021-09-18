@@ -11,7 +11,7 @@ import { DataTableColumnTmplComponent } from './tmpl/data-table-column-tmpl.comp
 })
 export class DataTableRowComponent implements OnInit {
   @Input() rowItem: any;
-  @HostBinding('style.font-weight') fontWeight = '400';
+  @HostBinding('style.font-weight') fontWeight = 'normal';
   @HostBinding('style.vertical-align') verticalAlign = 'middle';
   @Input() selectable: boolean;
   @Input() checkable: boolean;

@@ -1,14 +1,18 @@
-import { Directive, ElementRef, EventEmitter, Input, OnChanges, OnDestroy, Output, SimpleChanges } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, EventEmitter, Input, OnChanges, OnDestroy, Output, SimpleChanges } from '@angular/core';
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Directive({ selector: '[dLazyLoad]' })
-export class LazyLoadDirective implements OnDestroy, OnChanges {
+export class LazyLoadDirective implements OnDestroy, OnChanges, AfterViewInit {
 
   // 启用懒加载，默认不启用
   @Input() enableLazyLoad = false;
+  // 懒加载模式，默认列表模式
+  @Input() contentMode: 'img' | 'list' = 'list';
   // 滚动监听的目标，默认是宿主，
-  @Input() target: ElementRef | Window;
+  @Input() target: ElementRef;
+  // 图片懒加载模式的图片地址
+  @Input() imgLoadSrc: string;
   // 加载更多
   @Output() loadMore = new EventEmitter<any>();
 
@@ -23,10 +27,15 @@ export class LazyLoadDirective implements OnDestroy, OnChanges {
     const element = this.target ? this.target : this.el.nativeElement;
     if (changes && changes['enableLazyLoad']) {
       if (changes.enableLazyLoad.currentValue) {
-        this.scrollSubscription = fromEvent(element, 'scroll').pipe(
-          debounceTime(300),
-          distinctUntilChanged()
-        ).subscribe(event => this.scrollList(event));
+        const scrollEvent = fromEvent(element, 'scroll');
+        let scrollEventFormat = scrollEvent;
+        if (this.contentMode === 'list') {
+          scrollEventFormat = scrollEvent.pipe(
+            debounceTime(300),
+            distinctUntilChanged()
+          );
+        }
+        this.scrollSubscription = scrollEventFormat.subscribe(event => this.scrollList(event));
       } else if (this.scrollSubscription) {
         this.scrollSubscription.unsubscribe();
       } else {
@@ -34,6 +43,17 @@ export class LazyLoadDirective implements OnDestroy, OnChanges {
       }
     }
   }
+
+  ngAfterViewInit() {
+    if (this.contentMode === 'img') {
+      setTimeout(() => {
+        const target = this.target ? this.target : this.el.nativeElement;
+        const mockEvent = {target};
+        this.scrollList(mockEvent);
+      });
+    }
+  }
+
   ngOnDestroy() {
     if (this.scrollSubscription) {
       this.scrollSubscription.unsubscribe();
@@ -43,11 +63,21 @@ export class LazyLoadDirective implements OnDestroy, OnChanges {
   scrollList(event) {
     const targetEl = event.target.scrollingElement ? event.target.scrollingElement : event.target;
     const clientHeight = targetEl.clientHeight;
-    const scrollHeight = targetEl.scrollHeight;
     const scrollTop = targetEl.scrollTop;
-    if (scrollTop !== 0 && (scrollTop + clientHeight + this.loadFactor >= scrollHeight)) {
-      this.loadMore.emit(event);
+    if (this.contentMode === 'img') {
+      const rect = this.el.nativeElement.getBoundingClientRect();
+      if (rect.top >= 0 && (clientHeight >= rect.top + this.loadFactor)) {
+        if (this.imgLoadSrc) {
+          this.el.nativeElement.src = this.imgLoadSrc;
+        }
+        this.loadMore.emit(event);
+        this.scrollSubscription.unsubscribe();
+      }
+    } else {
+      const scrollHeight = targetEl.scrollHeight;
+      if (scrollTop !== 0 && (scrollTop + clientHeight + this.loadFactor >= scrollHeight)) {
+        this.loadMore.emit(event);
+      }
     }
-
   }
 }

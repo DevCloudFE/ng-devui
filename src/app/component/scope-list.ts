@@ -8,18 +8,18 @@ export const suggestScopeList: Array<string> = [
 ];
 
 export const newScopeList: Array<string> | string = [
-  'Select',
-  'TreeSelect',
-  'Upload',
-  'Cascader',
-  'Button',
-  'DataTable',
-  'dragDrop',
-  'Editorx',
-  'TagsInput',
+  'badge',
+  'button',
+  'categorySearch',
+  'dataTable',
+  'form',
+  'markdown',
+  'tag',
+  'rate',
+  'search',
+  'upload',
+  'transfer',
   'tree'
 ];
 
-export const sunsetScopeList: Array<string> | string = [
-  'jsmind'
-];
+export const sunsetScopeList: Array<string> | string = [];

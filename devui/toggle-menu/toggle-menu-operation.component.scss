@@ -1,0 +1,40 @@
+@import '../style/theme/color';
+@import '../style/core/animation';
+
+:host {
+  .devui-toggle-menu-operation-container {
+    min-height: inherit;
+
+    .devui-toggle-menu-chevron-icon {
+      width: 28px;
+      height: 100%;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+
+      &-open {
+        transform: rotate(180deg);
+      }
+
+      &-animation {
+        transition: transform $devui-animation-duration-slow $devui-animation-ease-in-out-smooth;
+      }
+
+      & > svg path {
+        fill: $devui-icon-text;
+      }
+    }
+
+    &.disabled {
+      cursor: not-allowed;
+      background-color: $devui-disabled-bg;
+
+      .devui-toggle-menu-clear-icon svg path,
+      .devui-toggle-menu-chevron-icon svg path {
+        fill: $devui-disabled-text;
+      }
+    }
+  }
+}

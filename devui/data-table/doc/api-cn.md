@@ -78,8 +78,8 @@ import { DataTableModule } from 'ng-devui/data-table';
 |     detialToggle      |          `EventEmitter<any>`           |     使用配置column方式时扩展行展开收起事件，返回行状态信息 | [扩展行](demo#expand-row)|
 |     cellEditStart     |  `EventEmitter<CellSelectedEventArg>`  |          表格单元格开始编辑事件，返回单元格信息          |
 |      cellEditEnd      |  `EventEmitter<CellSelectedEventArg>`  |          表格单元格结束编辑事件，返回单元格信息          |    [编辑单元格](demo#edit-cell)    |
-|   tableScrollEvent    |         `EventEmitter<Event>`          |                     表格内部滚动事件                     |
-
+|   tableScrollEvent    |         `EventEmitter<Event>`          |                     表格内部滚动事件                     | |
+|   columnDragEnd  |    `EventEmitter<{form: index, to: index}>`    |                列拖拽结束事件                     |   [列拖拽](demo#column-dragging) |
 
 ### d-data-table 公共方法
 

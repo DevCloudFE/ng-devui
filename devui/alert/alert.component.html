@@ -1,5 +1,5 @@
 <div class="devui-alert devui-alert-{{ type }} {{ cssClass }}" *ngIf="!hide">
-  <button type="button" class="devui-close" (click)="close()" *ngIf="closeable">
+  <div class="devui-close" (click)="close()" *ngIf="closeable">
     <svg
       width="10px"
       height="10px"
@@ -16,7 +16,7 @@
         </g>
       </g>
     </svg>
-  </button>
+  </div>
   <span class="devui-alert-icon" *ngIf="showIcon !== false && type !== 'simple'">
     <svg
       width="16px"

@@ -29,9 +29,9 @@ const DEBOUNCE_TIME = 200;
   preserveWhitespaces: false
 })
 export class CascaderComponent implements OnInit, OnDestroy, OnChanges, ControlValueAccessor {
-  @ViewChild('mainDropdown', { static: true }) mainDropdown: DropDownDirective;
+  @ViewChild('mainDropdown') mainDropdown: DropDownDirective;
   @ViewChild('innerInput') innerInput: ElementRef;
-  @ViewChild(DropDownAppendToBodyComponent, { static: true }) dropdownComp: DropDownAppendToBodyComponent;
+  @ViewChild(DropDownAppendToBodyComponent, { static: false }) dropdownComp: DropDownAppendToBodyComponent;
   @Input() options: CascaderItem[] = [];
   @Input() width = 200;
   @Input() dropdownWidth: number;
@@ -47,6 +47,7 @@ export class CascaderComponent implements OnInit, OnDestroy, OnChanges, ControlV
   @Input() dropDownItemTemplate: TemplateRef<any>;
   @Input() dropdownHeaderTemplate: TemplateRef<any>;
   @Input() dropdownPanelClass = '';
+  @Input() appendToBody = true;
   @Input() @WithConfig() showAnimation = true;
   @Input()
   set loadChildrenFn(fn: (value: CascaderItem) => Promise<CascaderItem[]> | Observable<CascaderItem[]>) {
@@ -368,7 +369,7 @@ export class CascaderComponent implements OnInit, OnDestroy, OnChanges, ControlV
 
   // 防止位置超出overlay边界
   rePosition(): void {
-    if (typeof window === undefined) {
+    if (typeof window === undefined || !this.appendToBody) {
       return;
     }
     setTimeout(() => {

@@ -78,7 +78,8 @@ On the page:
 | detialToggle | `EventEmitter<any>` | Extended row expansion/collapse event. The row status information is returned. |
 | cellEditStart | `EventEmitter<CellSelectedEventArg>` | Cell Editing Start Event, Returning Cell Information |
 | cellEditEnd | `EventEmitter<CellSelectedEventArg>` | Table cell editing end event. Cell information is returned. | [Edit cell](demo#edit-cell) |
-| tableScrollEvent | `EventEmitter<Event>` | Table Internal Rolling Event |
+| tableScrollEvent | `EventEmitter<Event>` | Table Internal Rolling Event | |
+|   columnDragEnd  |    `EventEmitter<{form: index, to: index}>`    |            Column Drag End Event        |   [Column dragging](demo#column-dragging) |
 
 ## d-data-table public method
 

@@ -1,0 +1,28 @@
+<section class="demo-section">
+  <d-button (btnClick)="updateRules()">Update Validate Rules</d-button>
+  <div>
+    <input
+      #myInputValidate="dValidateRules"
+      dTextInput
+      placeholder="Input"
+      autocomplete="off"
+      name="singleInput"
+      maxlength="11"
+      [(ngModel)]="singleInput1Data"
+      [dValidateRules]="[
+        { required: true },
+        { whitespace: true },
+        { minlength: 3 },
+        { maxlength: 10 },
+        {
+          pattern: isAlphabetPattern,
+          message: {
+            'zh-cn': '只能包含数字与大小写字符',
+            'en-us': 'The value cannot contain characters except uppercase and lowercase letters.',
+            default: '只能包含数字与大小写字符'
+          }
+        }
+      ]"
+    />
+  </div>
+</section>

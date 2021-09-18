@@ -1,10 +1,10 @@
 diff --git a/node_modules/ng-packagr/lib/styles/stylesheet-processor-worker.js b/node_modules/ng-packagr/lib/styles/stylesheet-processor-worker.js
-index aec9aa0..59dc39a 100644
+index fdb6f3a..eb99014 100644
 --- a/node_modules/ng-packagr/lib/styles/stylesheet-processor-worker.js
 +++ b/node_modules/ng-packagr/lib/styles/stylesheet-processor-worker.js
-@@ -125,6 +125,7 @@ function optimizeCss(filePath, css, browsers, cssUrl) {
-             },
-         ],
+@@ -121,6 +121,7 @@ function optimizeCss(filePath, css, browsers, cssUrl) {
+         autoprefixer: true,
+         stage: 3,
      }));
 +    postCssPlugins.push(require(process.cwd() + '/' + 'scripts/themeable/add-origin-varvalue.js' ));
      return postcss_1.default(postCssPlugins).process(css, {

@@ -1,3 +1,4 @@
+import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import {
   Component,
   ContentChild,
@@ -8,7 +9,8 @@ import {
   OnInit,
   Output,
   SimpleChanges,
-  TemplateRef
+  TemplateRef,
+  ViewChild
 } from '@angular/core';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { Observable, Subscription } from 'rxjs';
@@ -33,12 +35,14 @@ export class TransferComponent implements OnInit, OnChanges, OnDestroy {
   @Input() isTargetDroppable = false;
   @Input() showOptionTitle = false;
   @Input() beforeTransfer: (sourceOption, targetOption) => boolean | Promise<boolean> | Observable<boolean>;
+  @Input() virtualScroll = false;
 
   // 自定义
   @Input() customSourceCheckedLen = 0;
   @Input() customTargetCheckedLen = 0;
   @ContentChild('sourceTemplate') sourceCustomViewTemplate: TemplateRef<any>;
   @ContentChild('targetTemplate') targetCustomViewTemplate: TemplateRef<any>;
+  @ViewChild(CdkVirtualScrollViewport) virtualScrollViewport: CdkVirtualScrollViewport;
 
   @Output() transferToTarget = new EventEmitter<any>();
   @Output() transferToSource = new EventEmitter<any>();
@@ -64,6 +68,10 @@ export class TransferComponent implements OnInit, OnChanges, OnDestroy {
 
   sourceSearchText = '';
   targetSearchText = '';
+
+  itemSize = 36;
+  minBuffer = parseInt(this.height, 10) * 2;
+  maxBuffer = parseInt(this.height, 10) * 3;
 
   i18nCommonText: I18nInterface['common'];
   i18nSubscription: Subscription;
@@ -234,8 +242,8 @@ export class TransferComponent implements OnInit, OnChanges, OnDestroy {
       }
     }
 
-    this.targetDisplayOption = this.targetOption;
-    this.sourceDisplayOption = this.sourceOption;
+    this.targetDisplayOption = [...this.targetOption];
+    this.sourceDisplayOption = [...this.sourceOption];
     this.listTotalCheck(TransferDirection.TARGET);
     this.listTotalCheck(TransferDirection.SOURCE);
     this.afterTransfer.emit(direction);
@@ -315,6 +323,10 @@ export class TransferComponent implements OnInit, OnChanges, OnDestroy {
         this.transferToTarget.next({ sourceOption: this.sourceOption, targetOption: this.targetOption });
       }
     }
+  }
+
+  trackByFn(index, item) {
+    return index;
   }
 
   ngOnDestroy() {

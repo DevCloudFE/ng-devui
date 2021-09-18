@@ -6,18 +6,18 @@
 @import '../style/core/animation';
 
 $devui-btn-loading-color: $devui-text;
-$devui-btn-xs-padding: 1px 5px;
+$devui-btn-xs-padding: 0 4px;
 $devui-btn-xs-height: 24px;
 $devui-btn-icon-xs-min-width: 24px;
 $devui-btn-xs-min-width: 48px;
-$devui-btn-sm-padding: 1px 15px;
+$devui-btn-sm-padding: 0 16px;
 $devui-btn-sm-min-width: 56px;
 $devui-btn-icon-sm-min-width: 24px;
 $devui-btn-sm-height: 24px;
 $devui-btn-min-width: 64px;
 $devui-btn-height: 28px;
-$devui-btn-padding: 3px 20px;
-$devui-btn-lg-padding: 5px 23px;
+$devui-btn-padding: 0 20px;
+$devui-btn-lg-padding: 0 24px;
 $devui-btn-lg-min-width: 72px;
 $devui-btn-icon-lg-min-width: 32px;
 $devui-btn-lg-height: 32px;
@@ -173,7 +173,7 @@ $devui-btn-pseudo-config: (
   border-width: 1px;
   border-color: transparent;
   background-color: transparent;
-  @each $type in text, text-dark, common, stress, primary, danger, left, right, xs, sm, lg {
+  @each $type in common, stress, primary, danger, left, right, xs, sm, lg, text, text-dark {
     &.devui-btn-#{$type} {
       @each $key, $value in map-get($devui-btn-normal-config, $type) {
         #{$key}: $value;
@@ -332,13 +332,13 @@ $devui-btn-pseudo-config: (
   }
 
   &.d-btn-icon {
-    padding: 7px 8px;
+    padding: 8px 8px;
     line-height: 1em;
     border: 1px solid transparent;
 
     &.devui-btn-xs,
     &.devui-btn-sm {
-      padding: 5px;
+      padding: 4px;
     }
 
     &.devui-btn-xs {
@@ -393,8 +393,8 @@ $devui-btn-pseudo-config: (
   position: relative;
 }
 
-.clear-right-5 {
-  margin-right: 5px;
+.clear-right-4 {
+  margin-right: 4px;
 }
 
 .devui-btn-more-text-omits {

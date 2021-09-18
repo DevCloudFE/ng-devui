@@ -1,0 +1,67 @@
+<h4>当前总数据量 ：{{ totleItem }}条</h4>
+
+<div style="padding: 8px; height: 500px">
+  <div cdkScrollable class="cdk-scroll-container">
+    <cdk-virtual-scroll-viewport
+      id="big-data-tree-table-virtualScroll"
+      #cdkVirtualScrollViewport
+      [itemSize]="itemSize"
+      minBufferPx="80"
+      maxBufferPx="200"
+      [style.height]="itemSize * itemCount + 'px'"
+      (scroll)="onBodyScroll()"
+    >
+      <div *cdkVirtualFor="let item of scrollArray"></div>
+    </cdk-virtual-scroll-viewport>
+    <d-data-table
+      id="big-data-tree-table"
+      [dataSource]="visibleNodes"
+      [tableWidthConfig]="tableWidthConfig"
+      [fixHeader]="true"
+      [scrollable]="false"
+      [tableHeight]="tableHeight"
+      (mousewheel)="scrollFunc($event)"
+    >
+      <thead dTableHead>
+        <tr dTableRow>
+          <th dHeadCell>#</th>
+          <th
+            dHeadCell
+            [nestedColumn]="true"
+            [iconFoldTable]="iconParentOpen"
+            [iconUnFoldTable]="iconParentClose"
+            (toggleChildrenTableEvent)="toggleAllNodesExpand($event)"
+          >
+            Title
+          </th>
+          <ng-container *ngFor="let colOption of dataTableOptions.columns">
+            <th dHeadCell>{{ colOption.header }}</th>
+          </ng-container>
+        </tr>
+      </thead>
+      <tbody dTableBody>
+        <ng-template let-rowItem="rowItem" let-rowIndex="rowIndex" let-nestedLayer="nestedLayer" let-nestedIndex="nestedIndex">
+          <tr dTableRow>
+            <td dTableCell>
+              {{ rowItem.key }}
+            </td>
+            <td [ngStyle]="{ 'padding-left': rowItem.level * 20 + 'px' }" dTableCell [rowItem]="rowItem">
+              <span
+                class="tree-table-icon"
+                [ngClass]="rowItem.expand ? 'icon-open-folder' : 'icon-close-folder'"
+                *ngIf="!rowItem.isLeaf"
+                (click)="toggleNodeExpand(rowItem, rowIndex, !rowItem.expand)"
+              ></span>
+              <span [ngStyle]="{ 'padding-left': rowItem.isLeaf ? '20px' : 0 }">{{ rowItem.title }}</span>
+            </td>
+            <ng-container *ngFor="let colOption of dataTableOptions.columns">
+              <td dTableCell>
+                <span>{{ rowItem[colOption.field] }}</span>
+              </td>
+            </ng-container>
+          </tr>
+        </ng-template>
+      </tbody>
+    </d-data-table>
+  </div>
+</div>

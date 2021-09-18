@@ -834,7 +834,7 @@ describe('data-table', () => {
       tick();
       fixture.detectChanges();
 
-      document.dispatchEvent(new Event('mousedown'));
+      document.dispatchEvent(new Event('click'));
       tick();
       fixture.detectChanges();
       row1Column1 = debugEl.query(By.css('table.devui-table tbody tr td .cell-container .cell-container-inner span'));
@@ -885,7 +885,7 @@ describe('data-table', () => {
       debugEl.query(By.css('table.devui-table tbody tr td span.cell-modify')).nativeElement.dispatchEvent(new Event('click'));
       tick();
       fixture.detectChanges();
-      document.dispatchEvent(new Event('mousedown'));
+      document.dispatchEvent(new Event('click'));
       tick();
       fixture.detectChanges();
       const inputRow1Column1 = debugEl.query(
@@ -901,7 +901,7 @@ describe('data-table', () => {
       debugEl.query(By.css('table.devui-table tbody tr td span.cell-modify')).nativeElement.dispatchEvent(new Event('click'));
       tick();
       fixture.detectChanges();
-      document.dispatchEvent(new Event('mousedown'));
+      document.dispatchEvent(new Event('click'));
       tick();
       fixture.detectChanges();
       const inputRow1Column12 = debugEl.query(
@@ -920,7 +920,7 @@ describe('data-table', () => {
         By.css('table.devui-table tbody tr td .devui-input-group input.devui-form-control')
       );
       expect(inputRow1Column1).toBeTruthy();
-      document.dispatchEvent(new Event('mousedown'));
+      document.dispatchEvent(new Event('click'));
       tick();
       fixture.detectChanges();
       flush();
@@ -957,7 +957,7 @@ describe('data-table', () => {
       debugEl.query(By.css('table.devui-table tbody tr td span.cell-modify')).nativeElement.dispatchEvent(new Event('click'));
       tick();
       fixture.detectChanges();
-      document.dispatchEvent(new Event('mousedown'));
+      document.dispatchEvent(new Event('click'));
       tick();
       fixture.detectChanges();
       const inputRow1Column1 = debugEl.query(
@@ -973,7 +973,7 @@ describe('data-table', () => {
       debugEl.query(By.css('table.devui-table tbody tr td span.cell-modify')).nativeElement.dispatchEvent(new Event('click'));
       tick();
       fixture.detectChanges();
-      document.dispatchEvent(new Event('mousedown'));
+      document.dispatchEvent(new Event('click'));
       tick();
       fixture.detectChanges();
       const inputRow1Column12 = debugEl.query(
@@ -990,7 +990,7 @@ describe('data-table', () => {
       debugEl.query(By.css('table.devui-table tbody tr td span.cell-modify')).nativeElement.dispatchEvent(new Event('click'));
       tick();
       fixture.detectChanges();
-      document.dispatchEvent(new Event('mousedown'));
+      document.dispatchEvent(new Event('click'));
       tick();
       fixture.detectChanges();
       const inputRow1Column1 = debugEl.query(

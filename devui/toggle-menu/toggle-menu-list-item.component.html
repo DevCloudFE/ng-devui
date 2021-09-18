@@ -1,0 +1,59 @@
+<li
+  title="{{ formatter(item.option) }}"
+  class="devui-dropdown-item devui-toggle-menu{{ multiple ? '-multiple-' : '-' }}item {{
+    highlightToggle && item.isChecked ? highlightItemClass : ''
+  }}"
+  [class.selected]="selectIndex === index && item.id !== activeIndex"
+  [class.disabled]="optionDisabledKey && item.option[optionDisabledKey]"
+  [class.group]="optionGroupKey && item.option[optionGroupKey]"
+  (click)="choose(item.option, item.id, $event)"
+>
+  <ng-template
+    [ngTemplateOutlet]="customTemplate || (multiple ? checkBoxItem : isShowKeyword ? defaultHighlight : defaultItem)"
+    [ngTemplateOutletContext]="
+      isShowKeyword
+        ? {
+            item: item.option,
+            formatter: formatter,
+            keyword: keyword,
+            $index: index
+          }
+        : multiple
+        ? {
+            option: item.option,
+            checked: item.isChecked,
+            filterKey: filterKey,
+            position: 'list',
+            template: checkBoxItem,
+            $index: index
+          }
+        : {
+            option: item.option,
+            filterKey: filterKey,
+            position: 'list',
+            template: defaultItem,
+            $index: index
+          }
+    "
+  >
+  </ng-template>
+</li>
+
+<ng-template #defaultItem let-option="option">
+  {{ formatter(option) }}
+</ng-template>
+
+<ng-template #defaultHighlight let-item="item" let-keyword="keyword">
+  <d-highlight [value]="formatter(item)" [term]="keyword"></d-highlight>
+</ng-template>
+
+<ng-template #checkBoxItem let-option="option" let-checked="checked">
+  <d-checkbox
+    [color]="color"
+    [cssClass]="'devui-select-checkbox'"
+    [disabled]="option[optionDisabledKey]"
+    [label]="formatter(option)"
+    [ngModel]="checked"
+  >
+  </d-checkbox>
+</ng-template>

@@ -16,6 +16,7 @@ import {
   ViewChild,
   ViewChildren
 } from '@angular/core';
+import { cloneDeep, isEqual } from 'lodash-es';
 import { DatepickerProCalendarComponent } from 'ng-devui/datepicker-pro';
 import { DropDownDirective } from 'ng-devui/dropdown';
 import { DValidateRules } from 'ng-devui/form';
@@ -23,7 +24,6 @@ import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { ITreeItem } from 'ng-devui/tree';
 import { DefaultIcons } from 'ng-devui/tree-select';
 import { DateConverter, DefaultDateConverter } from 'ng-devui/utils';
-import { cloneDeep, isEqual } from 'lodash-es';
 import { fromEvent, Observable, Subject } from 'rxjs';
 import { debounceTime, takeUntil, tap } from 'rxjs/operators';
 import { CreateFilterEvent, ICategorySearchTagItem, SearchEvent, SelectedTagsEvent } from './category-search.type';
@@ -76,6 +76,7 @@ export class CategorySearchComponent implements OnInit, OnChanges, OnDestroy, Af
   isHover = false;
   isFocus = false;
   noRecord = false;
+  showNoDataTips = false;
   icons = DefaultIcons;
   destroy$ = new Subject();
   i18nCommonText: I18nInterface['common'];
@@ -87,7 +88,7 @@ export class CategorySearchComponent implements OnInit, OnChanges, OnDestroy, Af
   scrollToTailFlag = true; // 是否在更新标签内容后滚动至输入框的开关
   DROPDOWN_ANIMATION_TIMEOUT = 200; // 下拉动画延迟
   document: Document;
-  activeType: 'start' | 'end' = 'start';
+
   get showFilterNameClear() {
     return typeof this.filterName === 'string' && this.filterName.length > 0;
   }
@@ -190,23 +191,39 @@ export class CategorySearchComponent implements OnInit, OnChanges, OnDestroy, Af
     if (this.defaultSearchField && this.defaultSearchField.length) {
       this.searchField = this.category.filter((item) => this.defaultSearchField.includes(item.field));
     }
+    // 初始化时判断已选中分类中最后一项是否赋值，未赋值则识别为正在处理的分类，优先显示赋值下拉列表
+    if (this.selectedTags.length) {
+      const [lastItem] = this.selectedTags.slice(-1);
+      const isNull = lastItem.value[lastItem.filterKey || 'label'] === undefined;
+      this.currentSelectTag = isNull && (lastItem.value.value === undefined || lastItem.value.value === []) ? lastItem : undefined;
+    }
   }
 
   // 初始化tag的value属性：{filterKey | label, value, data}
+  initCategoryItem(item) {
+    const preValue = item.type === 'numberRange' || item.type === 'treeSelect' ? { value: [] } : { value: undefined };
+    preValue[item.filterKey || 'label'] = undefined;
+    if (item.value) {
+      for (const prop in preValue) {
+        if (item.value[prop] === undefined) {
+          item.value[prop] = preValue[prop];
+        }
+      }
+    } else {
+      item.value = preValue;
+    }
+    item.value.cache = (item.value.value && typeof item.value.value === 'object' && cloneDeep(item.value.value)) || item.value.value;
+    if (item.type === 'treeSelect' && item.options && item.options.length) {
+      item.value.options = cloneDeep(item.options);
+    }
+    const result = (item.type === 'checkbox' || item.type === 'label') && this.getItemValue(item.value.value, item.filterKey || 'label');
+    item.title = this.setTitle(item, item.type, result);
+    return item;
+  }
+
   setValue(data) {
     if (data && Array.isArray(data) && data.length) {
-      data.forEach((item) => {
-        const preValue = item.type === 'numberRange' || item.type === 'treeSelect' ? { value: [] } : { value: undefined };
-        preValue[item.filterKey || 'label'] = undefined;
-        item.value = item.value || preValue;
-        item.value.cache = (item.value.value && typeof item.value.value === 'object' && cloneDeep(item.value.value)) || item.value.value;
-        if (item.type === 'treeSelect' && item.options && item.options.length) {
-          item.value.options = cloneDeep(item.options);
-        }
-        const result =
-          (item.type === 'checkbox' || item.type === 'label') && this.getItemValue(item.value.value, item.filterKey || 'label');
-        item.title = this.setTitle(item, item.type, result);
-      });
+      data.forEach((item) => (item = this.initCategoryItem(item)));
     }
   }
 
@@ -348,9 +365,12 @@ export class CategorySearchComponent implements OnInit, OnChanges, OnDestroy, Af
     field.value.cache = cloneDeep(field.value.value);
   }
 
-  removeTag(tag) {
-    this.canChange(this.selectedTags[this.selectedTags.length - 1], 'delete').then((val) => {
+  removeTag(tag: ICategorySearchTagItem, event?: Event) {
+    this.canChange(tag, 'delete').then((val) => {
       if (!val) {
+        if (this.beforeTagChange && event) {
+          event.stopPropagation();
+        }
         return;
       }
       tag = this.resetValue(tag);
@@ -531,7 +551,6 @@ export class CategorySearchComponent implements OnInit, OnChanges, OnDestroy, Af
 
   confirmDate(tag) {
     this.afterDropdownClosed();
-    this.activeType = 'start';
     tag.value.cache = cloneDeep(tag.value.value);
     tag.value[tag.filterKey || 'label'] = tag.showTime
       ? this.dateConverter.formatDateTime(tag.value.value[0]) + ' - ' + this.dateConverter.formatDateTime(tag.value.value[1])
@@ -540,16 +559,12 @@ export class CategorySearchComponent implements OnInit, OnChanges, OnDestroy, Af
     this.updateSelectedTags(tag);
   }
 
-  switchType() {
-    this.activeType = this.activeType === 'start' ? 'end' : 'start';
-  }
-
   dateValueChange(tag, datepickerpro: DatepickerProCalendarComponent) {
-    if (this.activeType === 'start') {
-      tag.value.value ? (tag.value.value[0] = datepickerpro.curActiveDate) : (tag.value.value = [datepickerpro.curActiveDate]);
-    }
-    if (this.activeType === 'end') {
-      tag.value.value[1] = datepickerpro.curActiveDate;
+    const index = datepickerpro.currentActiveInput === 'start' ? 0 : 1;
+    if (tag.value.value) {
+      tag.value.value[index] = datepickerpro.curActiveDate;
+    } else {
+      tag.value.value = [datepickerpro.curActiveDate];
     }
   }
 
@@ -586,6 +601,7 @@ export class CategorySearchComponent implements OnInit, OnChanges, OnDestroy, Af
       dropdown.isOpen = false;
     }
     if (!dropdown.isOpen) {
+      this.showNoDataTips = false;
       return;
     }
     if (tag) {
@@ -608,6 +624,7 @@ export class CategorySearchComponent implements OnInit, OnChanges, OnDestroy, Af
       this.handleAccordingType(this.currentSelectTag.type, this.currentSelectTag.options);
       this.scrollToTailFlag = true;
     }
+    this.showNoDataTips = this.categoryDisplay.length === 0 || !this.categoryDisplay.some((item) => item && item.groupLength === undefined);
   }
 
   handleAccordingType(type, options) {

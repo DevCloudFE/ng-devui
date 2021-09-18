@@ -1,0 +1,24 @@
+@import '../style/core/_font';
+
+:host {
+  .devui-toggle-menu-input-template-container {
+    height: 24px;
+    line-height: 24px;
+    padding: 0 10px;
+  }
+
+  input.devui-select-input {
+    cursor: pointer;
+    font-size: inherit;
+    height: inherit;
+    min-height: inherit;
+    line-height: inherit;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    border: none !important;
+    padding: 0 10px;
+    margin: 0;
+    outline: 0;
+  }
+}

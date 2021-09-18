@@ -1,0 +1,42 @@
+@import '../style/theme/color';
+@import '../style/core/_font';
+
+:host {
+  .devui-select-list-unstyled {
+    overflow-y: auto;
+  }
+
+  li {
+    font-size: $devui-font-size-lg;
+    min-height: 40px;
+    line-height: 28px;
+    padding: 11px 10px;
+    width: 100%;
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    border: 0;
+    background-color: transparent;
+    color: $devui-text;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $devui-list-item-hover-bg;
+      color: $devui-list-item-hover-text;
+    }
+
+    &.devui-no-data-tips {
+      cursor: not-allowed;
+      color: $devui-disabled-text;
+    }
+  }
+
+  ::ng-deep {
+    d-toggle-menu-search {
+      .devui-toggle-menu-search > input {
+        background-color: $devui-embed-search-bg;
+      }
+    }
+  }
+}

@@ -34,3 +34,13 @@
 #form-label-horizontal ::ng-deep d-form-demo-label-horizontal form {
   width: 550px;
 }
+
+#demo-validate-update ::ng-deep {
+  .demo-section {
+    width: 450px;
+  }
+
+  d-button {
+    margin-bottom: 20px;
+  }
+}

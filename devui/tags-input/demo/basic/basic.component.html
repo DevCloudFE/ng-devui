@@ -1,6 +1,5 @@
 <h4>Normal</h4>
 <d-tags-input
-  (click)="$event.stopPropagation()"
   id="issue-tags"
   [tags]="tagList"
   [displayProperty]="taskTagConfig.displayProperty"
@@ -19,7 +18,6 @@
 <pre style="margin: 8px 0">{{ tagList | json }}</pre>
 <h4>Disabled</h4>
 <d-tags-input
-  (click)="$event.stopPropagation()"
   id="issue-tags"
   [tags]="tagList"
   [displayProperty]="taskTagConfig.displayProperty"

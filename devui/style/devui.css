@@ -286,7 +286,7 @@ abbr[title] {
 
 b,
 strong {
-  font-weight: bolder;
+  font-weight: bold;
 }
 
 code,
@@ -1780,7 +1780,6 @@ textarea.devcloud-form-text {
 
 /*!
  * Quill Editor v1.0.9
- * https://quilljs.com/
  * Copyright (c) 2014, Jason Chen
  * Copyright (c) 2013, salesforce.com
  */
@@ -2597,7 +2596,7 @@ textarea.devcloud-form-text {
   display: inline-block;
   float: left;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: normal;
   height: 24px;
   position: relative;
   vertical-align: middle;

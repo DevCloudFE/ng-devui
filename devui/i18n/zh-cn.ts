@@ -233,6 +233,7 @@ export default {
   },
   tagsInput: {
     tagsReachMaxLength: '您输入的标签已达到最大长度限制',
+    tagsReachMaxNumber: '已达到最大个数：',
   },
   categorySearch: {
     confirm: '确定',

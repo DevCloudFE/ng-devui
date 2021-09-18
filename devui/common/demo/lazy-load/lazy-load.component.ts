@@ -16,7 +16,7 @@ export class LazyLoadComponent implements OnInit {
   next1 = 1;
   showLoading1 = false;
   list1 = [];
-  target = window;
+  target: any = window;
   constructor() { }
 
   ngOnInit() {

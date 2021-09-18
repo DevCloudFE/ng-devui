@@ -1,17 +1,17 @@
 import { Component, DebugElement, OnInit, ViewChild } from '@angular/core';
-import { ComponentFixture, discardPeriodicTasks, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, flush, TestBed, tick } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { DomHelper } from '../utils/testing/dom-helper';
 import { createKeyBoardEvent } from '../utils/testing/event-helper';
 import { TagsInputComponent } from './tags.input.component';
+import { TagsInputModule } from './tags.input.module';
 
 @Component({
   template: `
     <d-tags-input
       #comp
-      (click)="$event.stopPropagation()"
       [tags]="tagList"
       [suggestionList]="suggestionList"
       [placeholder]="taskTagConfig.placeholder"
@@ -45,192 +45,222 @@ class TestTagsInputComponent implements OnInit {
 }
 
 describe('tags input', () => {
-  let fixtrue: ComponentFixture<TestTagsInputComponent>;
+  let fixture: ComponentFixture<TestTagsInputComponent>;
   let debugEl: DebugElement;
   let component: TestTagsInputComponent;
   let domHelper: DomHelper<TestTagsInputComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [FormsModule, NoopAnimationsModule],
-      declarations: [TestTagsInputComponent, TagsInputComponent]
+      imports: [FormsModule, NoopAnimationsModule, TagsInputModule],
+      declarations: [TestTagsInputComponent, TagsInputComponent],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixtrue = TestBed.createComponent(TestTagsInputComponent);
-    debugEl = fixtrue.debugElement;
-    component = fixtrue.componentInstance;
-    fixtrue.detectChanges();
-    domHelper = new DomHelper(fixtrue);
+    fixture = TestBed.createComponent(TestTagsInputComponent);
+    debugEl = fixture.debugElement;
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+    domHelper = new DomHelper(fixture);
   });
 
   describe('basic', () => {
     it('should have correct classes', () => {
-      const classes = ['.devui-tags-host', '.devui-tags', '.devui-tag-list', '.input.devui-input'];
+      const classes = ['.devui-tags-host', '.devui-toggle-menu-container', '.devui-select-tag-list', '.devui-select-input'];
       expect(domHelper.judgeStyleClasses(classes)).toBeTruthy();
     });
 
     it('should have correct placeholder', () => {
-      const inputEl = debugEl.query(By.css('.input.devui-input')).nativeElement;
+      const inputEl = debugEl.query(By.css('.devui-select-input')).nativeElement;
       expect(inputEl.placeholder).toBe(component.taskTagConfig.placeholder);
     });
 
     it('should host element click trigger host_click function', () => {
       component.comp.host_click = jasmine.createSpy('host click');
-      const hostEl: HTMLElement = component.comp.selectBoxElement.nativeElement;
+      const hostEl: HTMLElement = component.comp.tagsInputWrapperItem.nativeElement;
       hostEl.click();
 
-      fixtrue.detectChanges();
+      fixture.detectChanges();
       expect(component.comp.host_click).toHaveBeenCalledTimes(1);
-    });
-
-    it('shuold input element focus/blur trigger input_focus/input_blur function', () => {
-      component.comp.input_focus = jasmine.createSpy('input focus');
-      component.comp.input_blur = jasmine.createSpy('input blur');
-
-      const inputEl: HTMLElement = debugEl.query(By.css('.input.devui-input')).nativeElement;
-      inputEl.dispatchEvent(new Event('focus'));
-      inputEl.dispatchEvent(new Event('blur'));
-
-      expect(component.comp.input_focus).toHaveBeenCalledTimes(1);
-      expect(component.comp.input_blur).toHaveBeenCalledTimes(1);
     });
 
     it('should host click function work', fakeAsync(() => {
       // 被调用一次，但是具体是否生效不进行判断
-      spyOn(component.comp.tagInputElement.nativeElement, 'focus');
-      const hostEl: HTMLElement = component.comp.selectBoxElement.nativeElement;
+      const dom = component.comp.tagsInputWrapperItem.nativeElement.querySelector('.devui-toggle-menu-search>input');
+      spyOn(dom, 'focus');
+      const hostEl: HTMLElement = component.comp.tagsInputWrapperItem.nativeElement;
 
       hostEl.dispatchEvent(new Event('click'));
-      fixtrue.detectChanges();
+      fixture.detectChanges();
+      tick();
+      fixture.detectChanges();
 
-      expect(component.comp.tagInputElement.nativeElement.focus).toHaveBeenCalledTimes(1);
+      expect(dom.focus).toHaveBeenCalledTimes(1);
     }));
   });
 
-  describe('host focus', () => {
-    let tagInputEl: HTMLElement;
-    beforeEach(() => {
-      tagInputEl = component.comp.tagInputElement.nativeElement;
-      tagInputEl.dispatchEvent(new Event('focus'));
-      fixtrue.detectChanges();
-    });
+  describe('action drop-down list', () => {
+    let hostEl: HTMLElement;
+    let containerEl: HTMLElement;
+    beforeEach(fakeAsync(() => {
+      hostEl = component.comp.tagsInputWrapperItem.nativeElement;
+      hostEl.dispatchEvent(new Event('click'));
+      fixture.detectChanges();
+      flush();
+      fixture.detectChanges();
+
+      containerEl = component.comp.selectBoxContainer.selectBoxElement.nativeElement;
+      containerEl.dispatchEvent(new Event('click'));
+      fixture.detectChanges();
+      flush();
+      fixture.detectChanges();
+    }));
 
     it('should focus open the select list', () => {
-      const classes = ['.devui-tags-autocomplete', '.devui-suggestion-list', '.devui-suggestion-item'];
+      const classes = ['.devui-dropdown-menu', '.devui-dropdown-menu-wrap', '.devui-toggle-menu-item'];
       expect(domHelper.judgeStyleClasses(classes)).toBeTruthy();
     });
 
     it('should first item be selected', () => {
-      const selectedItem = debugEl.query(By.css('.devui-suggestion-item.selected'));
-      const items = debugEl.queryAll(By.css('.devui-suggestion-item'));
+      const selectedItem = debugEl.query(By.css('.devui-toggle-menu-item.selected'));
+      const items = debugEl.queryAll(By.css('.devui-toggle-menu-item'));
 
       expect(selectedItem).toBe(items[0]);
     });
+
+    it('should arrow up work', fakeAsync(() => {
+      const upEvent = createKeyBoardEvent('keydown', {
+        key: 'ArrowUp',
+        keyCode: 38,
+      });
+
+      containerEl.dispatchEvent(upEvent);
+      fixture.detectChanges();
+      flush();
+      fixture.detectChanges();
+
+      const selectedItem = debugEl.query(By.css('.devui-toggle-menu-item.selected'));
+      const items = debugEl.queryAll(By.css('.devui-toggle-menu-item'));
+
+      expect(selectedItem).toBe(items[items.length - 1]);
+    }));
+
+    it('should arrow down work', fakeAsync(() => {
+      const downEvent = createKeyBoardEvent('keydown', {
+        key: 'ArrowDown',
+        keyCode: 40,
+      });
+
+      containerEl.dispatchEvent(downEvent);
+      fixture.detectChanges();
+      flush();
+      fixture.detectChanges();
+
+      const selectedItem = debugEl.query(By.css('.devui-toggle-menu-item.selected'));
+      const items = debugEl.queryAll(By.css('.devui-toggle-menu-item'));
+
+      expect(selectedItem).toBe(items[1]);
+    }));
+
+    it('should choose item work', fakeAsync(() => {
+      const listItems = debugEl.queryAll(By.css('.devui-toggle-menu-item'));
+      const content = listItems[2].nativeNode.innerText;
+      listItems[2].nativeElement.click();
+      fixture.detectChanges();
+      flush();
+      fixture.detectChanges();
+
+      const tagItems = debugEl.queryAll(By.css('.devui-select-tag-item>span.over-flow-ellipsis'));
+      expect(tagItems[1].nativeNode.innerText).toBe(`${content}`);
+    }));
+  });
+
+  describe('add tag', () => {
+    let containerEl: HTMLElement;
+    let tagInputEl: HTMLInputElement;
+    beforeEach(fakeAsync(() => {
+      tagInputEl = debugEl.query(By.css('.devui-toggle-menu-search>input')).nativeElement;
+      containerEl = component.comp.selectBoxContainer.selectBoxElement.nativeElement;
+      containerEl.dispatchEvent(new Event('click'));
+      fixture.detectChanges();
+      flush();
+      fixture.detectChanges();
+    }));
 
     it('should blur add input value', fakeAsync(() => {
       const testTxt = 'test';
-      (tagInputEl as HTMLInputElement).value = testTxt;
-      tagInputEl.dispatchEvent(new Event('input'));
-      fixtrue.detectChanges();
+      tagInputEl.value = testTxt;
+      tagInputEl.dispatchEvent(new Event('input', { bubbles: true }));
+      tick(100);
+      fixture.detectChanges();
 
       tagInputEl.dispatchEvent(new Event('blur'));
-      tick(50);
-      fixtrue.detectChanges();
+      fixture.detectChanges();
+      flush();
+      fixture.detectChanges();
 
-      const items = debugEl.queryAll(By.css('.devui-tag-item'));
-      expect(items[1].nativeElement.textContent).toBe(`${testTxt}`);
-      discardPeriodicTasks();
+      const items = debugEl.queryAll(By.css('.devui-select-tag-item>span.over-flow-ellipsis'));
+      expect(items[1].nativeNode.textContent).toBe(`${testTxt}`);
     }));
-
-    it('should enter keydown work', fakeAsync(() => {
-      const enterEvent = createKeyBoardEvent('keydown', {
-        key: 'Enter',
-        keyCode: 13
-      });
-
-      tagInputEl.dispatchEvent(enterEvent);
-      fixtrue.detectChanges();
-      tick(50);
-      fixtrue.detectChanges();
-      discardPeriodicTasks();
-
-      const selectedItem = debugEl.query(By.css('.devui-suggestion-item.selected'));
-      const items = debugEl.queryAll(By.css('.devui-suggestion-item'));
-
-      expect(component.tagList.length).toBe(2);
-      expect(selectedItem).toBe(items[0]);
-      expect(component.getTagValue).toHaveBeenCalled();
-    }));
-
-    it('should arrow up work', () => {
-      const upEvent = createKeyBoardEvent('keydown', {
-        key: 'ArrowUp',
-        keyCode: 38
-      });
-
-      tagInputEl.dispatchEvent(upEvent);
-      fixtrue.detectChanges();
-
-      const selectedItem = debugEl.query(By.css('.devui-suggestion-item.selected'));
-      const items = debugEl.queryAll(By.css('.devui-suggestion-item'));
-
-      expect(selectedItem).toBe(items[items.length - 1]);
-    });
-
-    it('should arrow down work', () => {
-      const downEvent = createKeyBoardEvent('keydown', {
-        key: 'ArrowDown',
-        keyCode: 40
-      });
-
-      tagInputEl.dispatchEvent(downEvent);
-      fixtrue.detectChanges();
-
-      const selectedItem = debugEl.query(By.css('.devui-suggestion-item.selected'));
-      const items = debugEl.queryAll(By.css('.devui-suggestion-item'));
-
-      expect(selectedItem).toBe(items[1]);
-    });
 
     it('should add tag which is not in suggestion list after enter', fakeAsync(() => {
       const testTxt = 'test';
-      (tagInputEl as HTMLInputElement).value = testTxt;
-      tagInputEl.dispatchEvent(new Event('input'));
-      discardPeriodicTasks();
-      fixtrue.detectChanges();
+      tagInputEl.value = testTxt;
+      tagInputEl.dispatchEvent(new Event('input', { bubbles: true }));
+      tick(100);
+      fixture.detectChanges();
 
       expect(component.comp.newTag).toBe(testTxt);
 
-      // 模拟搜索函数
-      component.suggestionList = component.suggestionList.filter((item) => item.name.toLowerCase().indexOf(testTxt) !== -1);
-      fixtrue.detectChanges();
+      const enterEvent = createKeyBoardEvent('keydown', {
+        key: 'Enter',
+        keyCode: 13,
+      });
+
+      containerEl.dispatchEvent(enterEvent);
+      fixture.detectChanges();
+      flush();
+      fixture.detectChanges();
+
+      const tagItems = debugEl.queryAll(By.css('.devui-select-tag-item'));
+      expect(tagItems[tagItems.length - 1].nativeNode.innerText).toBe(`${testTxt}`);
+    }));
+
+    it('should select tag which is in suggestion list after enter', fakeAsync(() => {
+      const testTxt = 'item2';
+      tagInputEl.value = testTxt;
+      tagInputEl.dispatchEvent(new Event('input', { bubbles: true }));
+      tick(100);
+      fixture.detectChanges();
+
+      expect(component.comp.newTag).toBe(testTxt);
 
       const enterEvent = createKeyBoardEvent('keydown', {
         key: 'Enter',
-        keyCode: 13
+        keyCode: 13,
       });
 
-      tagInputEl.dispatchEvent(enterEvent);
-      fixtrue.detectChanges();
-      tick(50);
-      fixtrue.detectChanges();
-      discardPeriodicTasks();
+      containerEl.dispatchEvent(enterEvent);
+      fixture.detectChanges();
+      flush();
+      fixture.detectChanges();
 
-      const tagItems = debugEl.queryAll(By.css('.devui-tag-item'));
-      expect(tagItems[tagItems.length - 1].nativeElement.textContent).toBe(`${testTxt}`);
+      const tagItems = debugEl.queryAll(By.css('.devui-select-tag-item'));
+      expect(tagItems[tagItems.length - 1].nativeNode.innerText).toBe(`${testTxt}`);
     }));
   });
 
   describe('remove button should work', () => {
-    it('should have remove button', () => {
-      const removeBtn: HTMLElement = debugEl.query(By.css('.devui-tag-item .remove-button')).nativeElement;
+    it('should have remove button', fakeAsync(() => {
+      const removeBtn: HTMLElement = debugEl.query(By.css('.devui-select-tag-item>.devui-select-tag-remove-button')).nativeElement;
       removeBtn.dispatchEvent(new Event('click'));
+      fixture.detectChanges();
+      flush();
+      fixture.detectChanges();
 
-      fixtrue.detectChanges();
-      expect(component.tagList.length).toBe(0);
+      expect(component.comp.selectedItems.length).toBe(0);
       expect(component.getTagValue).toHaveBeenCalled();
-    });
+    }));
   });
 });

@@ -1,0 +1,7 @@
+<div [dMovable]="true" [handle]="header" [moveEl]="parent">
+  <div class="modal-header" #header>Custom Drag Title</div>
+  <div class="modal-body">
+    <div *ngIf="!!data.content">{{ data.content }}</div>
+  </div>
+  <i class="icon-close" (click)="close($event)"></i>
+</div>

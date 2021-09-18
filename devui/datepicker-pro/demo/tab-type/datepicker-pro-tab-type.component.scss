@@ -1,0 +1,60 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
+.devui-datepicker-pro-wrapper {
+  display: inline-block;
+  background-color: $devui-base-bg;
+
+  .devui-single-picker {
+    padding-left: 8px;
+    position: relative;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 24px;
+
+    .devui-input {
+      height: 26px;
+      padding: 4px 8px;
+      width: calc(100% - 16px);
+    }
+
+    &-icon {
+      vertical-align: bottom;
+    }
+
+    &.devui-has-value:hover:not(.devui-disabled) .close-icon-wrapper {
+      visibility: visible;
+    }
+
+    &:not(.devui-disabled) .close-icon-wrapper {
+      cursor: pointer;
+    }
+  }
+
+  .devui-input-group > .devui-input {
+    display: inline-block;
+    width: 300px;
+
+    &::-ms-clear {
+      display: none;
+    }
+  }
+}
+
+.devui-datepicker-pro-dropdown-panel {
+  width: 445px;
+
+  ::ng-deep {
+    .devui-tab-content {
+      margin-top: 0;
+    }
+
+    .devui-radio-list-item {
+      width: 135px;
+      margin-bottom: 8px;
+    }
+
+    .devui-nav-tabs.devui-nav li a {
+      padding: 4px 8px 0 8px;
+    }
+  }
+}

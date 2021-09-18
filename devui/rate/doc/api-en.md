@@ -20,3 +20,4 @@ In the page:
 | color | `string` | -- | Optional. Star color. | [Dynamic Mode-Custom](demo#dynamic-mode-Custom) |
 | icon | `string` | -- | Optional. Style of the rating icon. Only all icons in the DevUI icon library are supported. | [Dynamic Mode](demo#dynamic-mode) |
 | character | `string` | -- | Optional. Scoring icon style. Only one of icon and character can be set. | [Dynamic Mode-Custom](demo#dynamic-mode-Custom) |
+| allowHalf |            `boolean`             |  false   | Optional. Whether allow Half Selection in Dynamic Mode. | [Half Selection Mode](demo#rate-half)      |

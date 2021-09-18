@@ -4,34 +4,19 @@
   overflow-y: auto;
 }
 
-.devui-dropdown-toggle.more {
-  position: relative;
-  display: inline-block;
-  background: $devui-primary;
-  border-radius: 0 $devui-border-radius $devui-border-radius 0;
-  color: $devui-light-text;
-  height: 28px;
-  width: 28px;
-  padding-top: 6px;
-  vertical-align: top;
-  text-align: center;
-  cursor: pointer;
-}
+:host ::ng-deep d-button-group {
+  margin-right: 20px;
+  margin-bottom: 20px;
 
-.devui-dropdown-toggle.more:hover {
-  background: $devui-primary-hover;
-}
-
-.devui-dropdown-toggle.more::before {
-  content: ' ';
-  position: absolute;
-  top: 4px;
-  bottom: 4px;
-  left: 0;
-  width: 1px;
-  background-color: $devui-light-text; // the dividing line between buttons
-}
-
-.btn-group {
-  display: inline-block;
+  d-button + d-button {
+    .devui-btn-primary:not(:disabled)::before {
+      content: '';
+      position: absolute;
+      top: 4px;
+      bottom: 4px;
+      left: 0;
+      width: 1px;
+      background-color: $devui-light-text;
+    }
+  }
 }

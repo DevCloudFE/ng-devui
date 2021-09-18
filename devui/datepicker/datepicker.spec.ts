@@ -1,5 +1,5 @@
 import { Component, DebugElement, ElementRef, TemplateRef, ViewChild } from '@angular/core';
-import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -183,7 +183,7 @@ describe('datePicker', () => {
     let component: TestDatePickerDirectiveComponent;
     let domHelper: DomHelper<TestDatePickerDirectiveComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
         imports: [DatepickerModule, NoopAnimationsModule, FormsModule],
         declarations: [TestDatePickerDirectiveComponent]
@@ -308,7 +308,7 @@ describe('datePicker', () => {
     let component: TestDatePickerAppendToBodyComponent;
     let domHelper: DomHelper<TestDatePickerAppendToBodyComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
         imports: [DatepickerModule, NoopAnimationsModule, FormsModule],
         declarations: [TestDatePickerAppendToBodyComponent]
@@ -435,7 +435,7 @@ describe('datePicker', () => {
     let component: TestDatePickerCmpComponent;
     let domHelper: DomHelper<TestDatePickerCmpComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
         imports: [DatepickerModule, NoopAnimationsModule, FormsModule],
         declarations: [TestDatePickerCmpComponent]

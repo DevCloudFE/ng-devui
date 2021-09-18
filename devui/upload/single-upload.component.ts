@@ -1,4 +1,5 @@
-import { Component, EventEmitter, forwardRef, Input, OnDestroy, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, EventEmitter, forwardRef, Inject, Input, OnDestroy, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { ToastService } from 'ng-devui/toast';
@@ -55,9 +56,12 @@ export class SingleUploadComponent implements OnDestroy, OnInit, ControlValueAcc
   i18nCommonText: I18nInterface['common'];
   i18nSubscription: Subscription;
   errorMsg = [];
+  document: Document;
   private onChange = (_: any) => null;
   private onTouched = () => null;
-  constructor(private i18n: I18nService, private selectFiles: SelectFiles, private toastService: ToastService) {
+  constructor(private i18n: I18nService, private selectFiles: SelectFiles,
+              @Inject(DOCUMENT) private doc: any, private toastService: ToastService) {
+    this.document = this.doc;
   }
 
   writeValue(files: any): void {
@@ -160,6 +164,10 @@ export class SingleUploadComponent implements OnDestroy, OnInit, ControlValueAcc
     this.canUpload().then((canUpload) => {
       if (!canUpload) {
         return;
+      }
+      const tempNode = this.document.getElementById('d-upload-temp');
+      if (tempNode) {
+        this.document.body.removeChild(tempNode);
       }
       this.singleUploadViewComponent
         .upload()

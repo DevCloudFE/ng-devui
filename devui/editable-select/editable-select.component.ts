@@ -134,7 +134,7 @@ export class EditableSelectComponent implements ControlValueAccessor, OnInit, On
   }
 
   toggle($event: Event) {
-    const inputString = typeof this.inputValue === 'string' ? this.inputValue : this.inputValue.label;
+    const inputString = typeof this.inputValue === 'object' ? this.inputValue.label : this.inputValue || '';
     this.activeIndex = this.source
       .map((item) => {
         if (typeof item === 'string') {

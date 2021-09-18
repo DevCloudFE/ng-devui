@@ -11,8 +11,7 @@ export class MutilStylesComponent implements OnInit {
   headerBk = false;
   striped = false;
 
-  activeBorderTab: string | number = '';
-  activeBorderTable: '' | 'bordered' | 'borderless' = '';
+  activeBorderTab: any = '';
   borderItems = [
     {
       id: '',
@@ -28,8 +27,7 @@ export class MutilStylesComponent implements OnInit {
     }
   ];
 
-  activeSizeTab: string | number = 'sm';
-  activeSizeTable: 'sm' | 'md' | 'lg' = 'sm';
+  activeSizeTab: any = 'sm';
   sizeItems = [
     {
       id: 'sm',
