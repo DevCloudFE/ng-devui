@@ -72,7 +72,7 @@ export class NavSpriteComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChildren('items', { read: ElementRef })
   items!: QueryList<ElementRef>;
 
-  @Output() afterNavInit = new EventEmitter(); // 组件初始化后返回组件实例
+  @Output() afterNavInit = new EventEmitter<NavSpriteComponent>(); // 组件初始化后返回组件实例
 
   currentTemp: TemplateRef<any>;
 
@@ -84,7 +84,7 @@ export class NavSpriteComponent implements OnInit, AfterViewInit, OnDestroy {
 
   itemsInit = false;
 
-  contents;
+  contents: HTMLElement[];
 
   targetContainer: HTMLElement;
 
@@ -98,8 +98,6 @@ export class NavSpriteComponent implements OnInit, AfterViewInit, OnDestroy {
 
   timeGap = 60;
 
-  document: Document;
-
   get baseUrl() {
     if (typeof window === 'undefined') {
       return '';
@@ -112,11 +110,9 @@ export class NavSpriteComponent implements OnInit, AfterViewInit, OnDestroy {
     private element: ElementRef,
     private router: Router,
     private activeRout: ActivatedRoute,
-    private render2: Renderer2,
     private cdr: ChangeDetectorRef,
-    @Inject(DOCUMENT) private doc: any
+    @Inject(DOCUMENT) private document: Document
   ) {
-    this.document = this.doc;
   }
 
   ngOnInit() {
@@ -176,10 +172,10 @@ export class NavSpriteComponent implements OnInit, AfterViewInit, OnDestroy {
       search.push(`h${i + 1}`);
     }
     this.contents = Array.from(this.target.querySelectorAll(search.join(',')));
-    this.menus = this.contents.map((i: HTMLElement) => {
+    this.menus = this.contents.map((i) => {
       return {
         originEle: i,
-        level: i.tagName.match(/\d+/)[0],
+        level: +i.tagName.match(/\d+/)[0],
         label: i.innerText,
         href: this.baseUrl + '#' + i.innerText,
         scrollPosition: this.getScrollPosition(i),
@@ -260,10 +256,10 @@ export class NavSpriteComponent implements OnInit, AfterViewInit, OnDestroy {
     const target = this.menus[this.activeIndex];
     this.menus.forEach((i) => {
       if (i.originEle) {
-        this.render2.removeClass(i.originEle, 'nav-active');
+        this.render.removeClass(i.originEle, 'nav-active');
       }
     });
-    this.render2.addClass(target?.originEle, 'nav-active');
+    this.render.addClass(target?.originEle, 'nav-active');
   }
 
   navTo(index) {

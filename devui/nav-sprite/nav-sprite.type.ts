@@ -10,6 +10,7 @@ export interface NavMenu {
   originEle: HTMLElement;
   label: string;
   level: number;
+  href: string;
   scrollPosition: {
     top: number;
     startLine: number
