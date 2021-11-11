@@ -4,22 +4,6 @@
 @import '../devui-commons/src/devui-commons.scss';
 @import '~ng-devui/theme-collection/extend-theme';
 
-.markdown {
-  color: $devui-text;
-  font-size: $devui-font-size-page-title;
-  line-height: 1.8;
-
-  a {
-    color: $devui-link;
-
-    &:hover {
-      color: $devui-link-active;
-      text-decoration: underline;
-      cursor: pointer;
-    }
-  }
-}
-
 .highlight {
   line-height: 1.5;
   position: relative;
@@ -29,7 +13,16 @@ code[class*='language-'],
 pre[class*='language-'],
 pre code {
   white-space: pre;
-  font-family: 'Menlo', 'DejaVu Sans Mono', 'Liberation Mono', 'Consolas', 'Ubuntu Mono', 'Courier New', 'andale mono', 'lucida console', monospace;
+  font-family:
+    'Menlo',
+    'DejaVu Sans Mono',
+    'Liberation Mono',
+    'Consolas',
+    'Ubuntu Mono',
+    'Courier New',
+    'andale mono',
+    'lucida console',
+    monospace;
 }
 
 pre {
@@ -75,6 +68,10 @@ section {
   display: block;
   overflow-x: auto;
 
+  .devui-api-table-wrapper {
+    overflow-x: auto;
+  }
+
   table {
     font-size: $devui-font-size;
   }
@@ -113,31 +110,8 @@ section {
     background: $devui-area;
     white-space: nowrap;
     color: $devui-text;
-    font-weight: 600;
+    font-weight: bold;
   }
-}
-
-.markdown h1 {
-  font-size: $devui-font-size-price;
-}
-
-.markdown h2 {
-  font-size: $devui-font-size-page-title;
-}
-
-.markdown h3 {
-  font-size: $devui-font-size-card-title;
-}
-
-.markdown h2,
-.markdown h3,
-.markdown h4,
-.markdown h5,
-.markdown h6 {
-  color: $devui-text;
-  margin: 1.6em 0 0.6em;
-  font-weight: 500;
-  clear: both;
 }
 
 code {
@@ -146,40 +120,6 @@ code {
   color: #c7254e;
   background-color: $devui-area;
   border-radius: $devui-border-radius;
-}
-
-.readme {
-  h1 {
-    // font-size: 30px;
-    @include font-title();
-
-    padding: 20px 0;
-  }
-
-  h2 {
-    // font-size: 24px;
-    @include font-title($devui-font-size-card-title);
-
-    padding: 40px 0 15px;
-  }
-
-  h3 {
-    // font-size: 18px;
-    @include font-title($devui-font-size-card-title);
-
-    padding: 30px 0 10px;
-  }
-
-  h1,
-  h2,
-  h3 {
-    // font-weight: 300;
-    margin: 0;
-  }
-
-  pre code {
-    padding: 0.5em;
-  }
 }
 
 [dTextInput]::-ms-clear,

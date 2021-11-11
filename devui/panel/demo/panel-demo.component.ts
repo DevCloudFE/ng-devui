@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -9,18 +9,18 @@ import { Subscription } from 'rxjs';
 })
 export class PanelDemoComponent implements OnInit, OnDestroy {
   basicSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./basic/basic.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/basic.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./basic/basic.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./basic/basic.component.ts?raw') },
   ];
 
   typeSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./type/type.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./type/type.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./type/type.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./type/type.component.ts?raw') },
   ];
 
   conditionChangeSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./condition-change/condition-change.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./condition-change/condition-change.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./condition-change/condition-change.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./condition-change/condition-change.component.ts?raw') },
   ];
 
   navItems = [];

@@ -1,0 +1,77 @@
+@import '../style/theme/color';
+
+:host {
+  display: block;
+  position: relative;
+}
+
+:host.d-dashboard-show-grid-block::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+}
+
+:host.d-dashboard-show-grid-block ::ng-deep .grid-stack-placeholder > .placeholder-content {
+  opacity: 0.8;
+}
+
+::ng-deep {
+  @import '~gridstack/dist/gridstack';
+  @import '~gridstack/dist/gridstack-extra';
+
+  .grid-stack .grid-stack-placeholder > .placeholder-content {
+    border: 1px dashed $devui-brand;
+    background-color: $devui-list-item-hover-bg;
+  }
+
+  .grid-stack > .grid-stack-item > .grid-stack-item-content {
+    overflow-x: auto;
+  }
+
+  .grid-stack-item-removing {
+    opacity: 0.8;
+    filter: blur(2px);
+  }
+
+  .grid-stack > .grid-stack-item.ui-resizable > .ui-resizable-se,
+  .grid-stack > .grid-stack-item.ui-resizable > .ui-resizable-sw {
+    transform: rotate(-45deg) translateY(-4px);
+  }
+
+  .grid-stack > .grid-stack-item > .ui-resizable-se,
+  .grid-stack > .grid-stack-item > .ui-resizable-sw {
+    background: none;
+
+    &::before {
+      content: '';
+      width: 20px;
+      height: 20px;
+      display: block;
+      position: absolute;
+      top: -20%;
+      left: 0;
+      transform: rotate(45deg) scale(0.8);
+      background-image:
+        linear-gradient(
+          135deg,
+          transparent 0,
+          transparent 70%,
+          $devui-icon-fill 70%,
+          $devui-icon-fill 77%,
+          transparent 77%,
+          transparent 83%,
+          $devui-icon-fill 83%,
+          $devui-icon-fill 90%,
+          transparent 90%,
+          transparent 100%
+        );
+      background-size: 100%;
+      background-repeat: no-repeat;
+    }
+  }
+}

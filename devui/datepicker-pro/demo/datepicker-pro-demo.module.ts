@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
 import { AutoCompleteModule } from 'ng-devui/auto-complete';
 import { ButtonModule } from 'ng-devui/button';
 import { DatepickerProModule } from 'ng-devui/datepicker-pro';
@@ -14,6 +13,7 @@ import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
 import { TabsModule } from 'ng-devui/tabs';
+import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 import { BasicDatepickerProComponent } from './basic/basic-datepicker-pro.component';
 import { DatepickerProDemoComponent } from './datepicker-pro-demo.component';
@@ -71,6 +71,6 @@ import { DatepickerProTemplateComponent } from './template/datepicker-template.c
     DatepickerProTabTypeComponent
   ],
   providers: [],
-
+  
 })
 export class DatepickerProDemoModule {}

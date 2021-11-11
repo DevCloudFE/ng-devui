@@ -9,27 +9,27 @@ import { Subscription } from 'rxjs';
 })
 export class TransferDemoComponent implements OnInit, OnDestroy {
   basicSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'html', code: require('!!raw-loader!./basic/transfer-demo-base.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/transfer-demo-base.component.ts') },
+    { title: 'HTML', language: 'html', code: require('./basic/transfer-demo-base.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./basic/transfer-demo-base.component.ts?raw') },
   ];
   customSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'html', code: require('!!raw-loader!./custom/transfer-demo-custom.component.html') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./custom/transfer-demo-custom.component.scss') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./custom/transfer-demo-custom.component.ts') },
+    { title: 'HTML', language: 'html', code: require('./custom/transfer-demo-custom.component.html?raw') },
+    { title: 'SCSS', language: 'css', code: require('./custom/transfer-demo-custom.component.scss?raw') },
+    { title: 'TS', language: 'typescript', code: require('./custom/transfer-demo-custom.component.ts?raw') },
   ];
   searchSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'html', code: require('!!raw-loader!./search/transfer-demo-search.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./search/transfer-demo-search.component.ts') },
+    { title: 'HTML', language: 'html', code: require('./search/transfer-demo-search.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./search/transfer-demo-search.component.ts?raw') },
   ];
   sortSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'html', code: require('!!raw-loader!./sort/transfer-demo-sort.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./sort/transfer-demo-sort.component.ts') },
+    { title: 'HTML', language: 'html', code: require('./sort/transfer-demo-sort.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./sort/transfer-demo-sort.component.ts?raw') },
   ];
 
   TransferDemoVirtualScroll: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./virtual-scroll/transfer-virtual-scroll.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./virtual-scroll/transfer-virtual-scroll.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./virtual-scroll/transfer-virtual-scroll.component.scss') },
+    { title: 'HTML', language: 'xml', code: require('./virtual-scroll/transfer-virtual-scroll.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./virtual-scroll/transfer-virtual-scroll.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./virtual-scroll/transfer-virtual-scroll.component.scss?raw') },
   ];
     navItems = [];
   subs: Subscription = new Subscription();

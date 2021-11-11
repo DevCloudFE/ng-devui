@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -8,35 +8,35 @@ import { Subscription } from 'rxjs';
 })
 export class PopoverDemoComponent implements OnInit, OnDestroy {
   basicSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./basic/basic.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/basic.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./basic/basic.component.scss') },
+    { title: 'HTML', language: 'xml', code: require('./basic/basic.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./basic/basic.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./basic/basic.component.scss?raw') },
   ];
 
   positionSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./position/position.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./position/position.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./position/position.component.scss') }
+    { title: 'HTML', language: 'xml', code: require('./position/position.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./position/position.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./position/position.component.scss?raw') }
   ];
 
   manualSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./manual/manual.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./manual/manual.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./manual/manual.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./manual/manual.component.ts?raw') },
   ];
 
   customizeSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./customize/customize.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./customize/customize.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./customize/customize.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./customize/customize.component.ts?raw') },
   ];
 
   scrollElementSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./scroll-element/scroll-element.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./scroll-element/scroll-element.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./scroll-element/scroll-element.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./scroll-element/scroll-element.component.ts?raw') },
   ];
 
   hoverDelayTimeSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./hover-delay-time/hover-delay-time.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./hover-delay-time/hover-delay-time.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./hover-delay-time/hover-delay-time.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./hover-delay-time/hover-delay-time.component.ts?raw') },
   ];
 
   navItems = [];

@@ -1,14 +1,13 @@
 <d-tags-input
-  id="issue-tags"
-  [tags]="tagList"
+  [(ngModel)]="tagList"
   [displayProperty]="taskTagConfig.displayProperty"
   [placeholder]="taskTagConfig.placeholder"
   [minLength]="taskTagConfig.minLength"
   [maxLength]="taskTagConfig.maxLength"
   [maxTags]="taskTagConfig.maxTags"
   [suggestionList]="suggestionList"
-  (valueChange)="getTagValue($event)"
   [checkBeforeAdd]="customCheck"
+  (valueChange)="getTagValue($event)"
 >
 </d-tags-input>
 <pre style="margin-top: 8px">{{ tagList | json }}</pre>

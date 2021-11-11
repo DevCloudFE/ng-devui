@@ -1,5 +1,5 @@
 <td *ngIf="showExpandToggle" class="devui-detail-cell" [ngClass]="{ 'devui-sticky-left-cell': columns[0]?.fixedLeft }" [style.left]="0">
-  <div *ngIf="rowItem.detail || rowItem.$expandConfig" (click)="toggle()">
+  <div *ngIf="rowItem.detail || rowItem?.$expandConfig" (click)="toggle()">
     <span [style.vertical-align]="'middle'" *ngIf="!rowItem['$isDetailOpen'] && !rowItem.$expandConfig?.expand">
       <svg
         class="svg-icon-arrow"

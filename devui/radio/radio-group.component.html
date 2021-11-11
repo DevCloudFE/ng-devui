@@ -1,5 +1,5 @@
 <div class="devui-radio-group">
-  <ul [class.devui-radio-horizontal]="cssStyle === 'row'">
+  <ul [class.devui-radio-horizontal]="direction === 'row'">
     <ng-container *ngIf="radios.length === 0">
       <li *ngFor="let value of values" class="devui-radio-list-item">
         <label class="devui-radio" [class.active]="value == _value" [class.disabled]="disabled">

@@ -299,7 +299,8 @@ export interface FilterConfig {
   id: number | string;
   name: string;
   value: any;
-  checked?: boolean;
+  checked?: boolean; // multiple select
+  selected?: boolean; // single select
 }
 ```
 

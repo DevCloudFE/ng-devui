@@ -14,12 +14,19 @@ import { Subscription } from 'rxjs';
 })
 export class DevUIApiComponent implements OnInit, AfterViewInit, OnDestroy {
   subs: Subscription = new Subscription();
-  @Input() api: any;
+  _api: any;
+  @Input() set api(api: any) {
+    const newApi = api.replace(/<table>/g, `<div class="devui-api-table-wrapper"><table>`).replace(/<\/table>/g, `</table></div>`);
+    this._api = newApi;
+  }
+  get api() {
+    return this._api;
+  }
   apiData: any;
   navSpriteInstance = null;
   document: Document;
   scrollContainer;
-
+  options;
   constructor(
     private router: Router,
     private translate: TranslateService,
@@ -52,7 +59,9 @@ export class DevUIApiComponent implements OnInit, AfterViewInit, OnDestroy {
       })
     );
   }
-
+  onCopied(options) {
+    this.options = options;
+  }
   setApi(lang) {
     if (this.i18n.i18nConfig.hasOwnProperty(lang)) {
       this.api = this.apiData[lang];

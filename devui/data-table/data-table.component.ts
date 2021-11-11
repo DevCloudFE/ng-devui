@@ -311,6 +311,9 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
   @ViewChild('tableBody') set content(content: ElementRef) {
     setTimeout(() => {
       this.tableBodyEl = content;
+      if (this.virtualScroll) {
+        this.initVirtualBodyHeight();
+      }
     });
   }
 
@@ -326,6 +329,10 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
 
     if (this.innerHeader) {
       this.innerHeader.setHeaderCheckStatus({pageAllChecked: this._pageAllChecked, pageHalfChecked: this.halfChecked});
+    }
+
+    if (this.virtualScroll) {
+      this.initVirtualBodyHeight();
     }
   }
 
@@ -356,6 +363,7 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
     return this._pageAllChecked;
   }
 
+  virtualBodyHeight;
   document: Document;
   constructor(
     private elementRef: ElementRef,
@@ -365,6 +373,29 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
     @Inject(DOCUMENT) private doc: any) {
       this.onDocumentClickListen = this.onDocumentClick.bind(this);
       this.document = this.doc;
+  }
+
+  initVirtualBodyHeight() {
+    setTimeout(() => {
+      this.virtualScrollViewport.checkViewportSize();
+    });
+    if (this.tableHeight && this.tableHeight !== 'auto') {
+      this.virtualBodyHeight = this.tableHeight;
+      return;
+    }
+
+    if (!this.maxHeight) {
+      this.virtualBodyHeight = null;
+      return;
+    }
+
+    if (this.tableBodyEl) {
+      const tableHeader = this.tableBodyEl.nativeElement.querySelector('thead');
+      const tableHeaderHeight = (tableHeader?.offsetHeight + 8) || 0;
+      const curTotalHeight = this.dataSource.length * this.virtualItemSize + tableHeaderHeight;
+      this.virtualBodyHeight = curTotalHeight < parseInt(this.maxHeight, 10) ? curTotalHeight + 'px' : this.maxHeight;
+      return;
+    }
   }
 
   private getColumns() {
@@ -416,6 +447,15 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
           this.tableWidthConfig.splice(expandColIndex, 1);
         }
       }
+    }
+
+    if (
+      this.virtualScroll &&
+      (changes['tableHeight'] && !changes.tableHeight.firstChange) ||
+      (changes['maxHeight'] && !changes.maxHeight.firstChange) ||
+      (changes['virtualScroll'] && !changes.virtualScroll.firstChange)
+    ) {
+      this.initVirtualBodyHeight();
     }
   }
 
@@ -487,7 +527,7 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
     });
   }
 
-  private updateColumns() {
+  public updateColumns() {
     this._columns = this.getColumns();
     this.tableWidthConfig = [];
     if (this.showExpandToggle) {

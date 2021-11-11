@@ -13,6 +13,7 @@ import { TagsInputDemoAsyncComponent } from './async/async.component';
 import { TagsInputDemoBasicComponent } from './basic/basic.component';
 import { TagsInputDemoNgModelComponent } from './ngmodel/ngmodel.component';
 import { TagsInputDemoComponent } from './tags.input-demo.component';
+import { TagsInputDemoVirtualScrollComponent } from './virtual-scroll/virtual-scroll.component';
 
 @NgModule({
   imports: [
@@ -38,6 +39,12 @@ import { TagsInputDemoComponent } from './tags.input-demo.component';
     ]),
   ],
   exports: [],
-  declarations: [TagsInputDemoComponent, TagsInputDemoBasicComponent, TagsInputDemoNgModelComponent, TagsInputDemoAsyncComponent],
+  declarations: [
+    TagsInputDemoComponent,
+    TagsInputDemoBasicComponent,
+    TagsInputDemoNgModelComponent,
+    TagsInputDemoAsyncComponent,
+    TagsInputDemoVirtualScrollComponent,
+  ],
 })
 export class TagsInputDemoModule {}

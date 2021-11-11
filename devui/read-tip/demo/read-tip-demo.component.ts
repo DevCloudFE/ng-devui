@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -9,27 +9,27 @@ import { Subscription } from 'rxjs';
 })
 export class ReadTipDemoComponent implements OnInit, OnDestroy {
   basicSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./basic/basic.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/basic.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./basic/basic.component.scss') },
+    { title: 'HTML', language: 'xml', code: require('./basic/basic.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./basic/basic.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./basic/basic.component.scss?raw') },
   ];
 
   multiSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./multi-readtip/multi-readtip.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./multi-readtip/multi-readtip.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./multi-readtip/multi-readtip.component.scss') },
+    { title: 'HTML', language: 'xml', code: require('./multi-readtip/multi-readtip.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./multi-readtip/multi-readtip.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./multi-readtip/multi-readtip.component.scss?raw') },
   ];
 
   templateSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./readtip-template/readtip-template.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./readtip-template/readtip-template.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./readtip-template/readtip-template.component.scss') },
+    { title: 'HTML', language: 'xml', code: require('./readtip-template/readtip-template.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./readtip-template/readtip-template.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./readtip-template/readtip-template.component.scss?raw') },
   ];
 
   asyncSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./async-readtip/readtip-async.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./async-readtip/readtip-async.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./async-readtip/readtip-async.component.scss') },
+    { title: 'HTML', language: 'xml', code: require('./async-readtip/readtip-async.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./async-readtip/readtip-async.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./async-readtip/readtip-async.component.scss?raw') },
   ];
 
   navItems = [];

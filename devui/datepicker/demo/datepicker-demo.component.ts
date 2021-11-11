@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -9,177 +9,177 @@ import { Subscription } from 'rxjs';
 })
 export class DatepickerDemoComponent implements OnInit, OnDestroy {
   basicSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'html', code: require('!!raw-loader!./basic/basic.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/basic.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./basic/basic.component.scss') },
+    { title: 'HTML', language: 'html', code: require('./basic/basic.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./basic/basic.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./basic/basic.component.scss?raw') },
   ];
   setModeSource: Array<DevuiSourceData> = [
-    {title: 'HTML', language: 'html', code: require('!!raw-loader!./set-mode/set-mode.component.html')},
-    {title: 'TS', language: 'typescript', code: require('!!raw-loader!./set-mode/set-mode.component.ts')},
-    {title: 'SCSS', language: 'css', code: require('!!raw-loader!./set-mode/set-mode.component.scss')},
+    {title: 'HTML', language: 'html', code: require('./set-mode/set-mode.component.html?raw')},
+    {title: 'TS', language: 'typescript', code: require('./set-mode/set-mode.component.ts?raw')},
+    {title: 'SCSS', language: 'css', code: require('./set-mode/set-mode.component.scss?raw')},
   ];
   minMaxSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'html', code: require('!!raw-loader!./min-max/min-max.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./min-max/min-max.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./min-max/min-max.component.scss') },
+    { title: 'HTML', language: 'html', code: require('./min-max/min-max.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./min-max/min-max.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./min-max/min-max.component.scss?raw') },
   ];
   appendToBodySource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'html', code: require('!!raw-loader!./append-to-body/append-to-body.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./append-to-body/append-to-body.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./append-to-body/append-to-body.component.scss') },
+    { title: 'HTML', language: 'html', code: require('./append-to-body/append-to-body.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./append-to-body/append-to-body.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./append-to-body/append-to-body.component.scss?raw') },
   ];
   rangeSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'html', code: require('!!raw-loader!./range/datepicker-range.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./range/datepicker-range.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./range/datepicker-range.component.scss') },
+    { title: 'HTML', language: 'html', code: require('./range/datepicker-range.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./range/datepicker-range.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./range/datepicker-range.component.scss?raw') },
   ];
   formatSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'html', code: require('!!raw-loader!./format/datepicker-format.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./format/datepicker-format.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./format/datepicker-format.component.scss') },
+    { title: 'HTML', language: 'html', code: require('./format/datepicker-format.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./format/datepicker-format.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./format/datepicker-format.component.scss?raw') },
   ];
   rangePickerSource = [
     {
       title: 'HTML',
       language: 'html',
-      code: require('!!raw-loader!./range-picker-basic/date-range-picker-basic.component.html'),
+      code: require('./range-picker-basic/date-range-picker-basic.component.html?raw'),
     },
     {
       title: 'TS',
       language: 'typescript',
-      code: require('!!raw-loader!./range-picker-basic/date-range-picker-basic.component.ts'),
+      code: require('./range-picker-basic/date-range-picker-basic.component.ts?raw'),
     },
     {
       title: 'SCSS',
       language: 'css',
-      code: require('!!raw-loader!./range-picker-basic/date-range-picker-basic.component.scss'),
+      code: require('./range-picker-basic/date-range-picker-basic.component.scss?raw'),
     },
   ];
   rangePickerFormat = [
     {
       title: 'HTML',
       language: 'html',
-      code: require('!!raw-loader!./range-picker-format/date-range-picker-format.component.html'),
+      code: require('./range-picker-format/date-range-picker-format.component.html?raw'),
     },
     {
       title: 'TS',
       language: 'typescript',
-      code: require('!!raw-loader!./range-picker-format/date-range-picker-format.component.ts'),
+      code: require('./range-picker-format/date-range-picker-format.component.ts?raw'),
     },
     {
       title: 'SCSS',
       language: 'css',
-      code: require('!!raw-loader!./range-picker-format/date-range-picker-format.component.scss'),
+      code: require('./range-picker-format/date-range-picker-format.component.scss?raw'),
     },
   ];
   rangePickerDisabled = [
     {
       title: 'HTML',
       language: 'html',
-      code: require('!!raw-loader!./range-picker-disabled/date-range-picker-disabled.component.html'),
+      code: require('./range-picker-disabled/date-range-picker-disabled.component.html?raw'),
     },
     {
       title: 'TS',
       language: 'typescript',
-      code: require('!!raw-loader!./range-picker-disabled/date-range-picker-disabled.component.ts'),
+      code: require('./range-picker-disabled/date-range-picker-disabled.component.ts?raw'),
     },
     {
       title: 'SCSS',
       language: 'css',
-      code: require('!!raw-loader!./range-picker-disabled/date-range-picker-disabled.component.scss'),
+      code: require('./range-picker-disabled/date-range-picker-disabled.component.scss?raw'),
     },
   ];
   rangePickerRestricted = [
     {
       title: 'HTML',
       language: 'html',
-      code: require('!!raw-loader!./range-picker-restricted-range/date-range-picker-restricted-range.component.html'),
+      code: require('./range-picker-restricted-range/date-range-picker-restricted-range.component.html?raw'),
     },
     {
       title: 'TS',
       language: 'typescript',
-      code: require('!!raw-loader!./range-picker-restricted-range/date-range-picker-restricted-range.component.ts'),
+      code: require('./range-picker-restricted-range/date-range-picker-restricted-range.component.ts?raw'),
     },
     {
       title: 'SCSS',
       language: 'css',
-      code: require('!!raw-loader!./range-picker-restricted-range/date-range-picker-restricted-range.component.scss'),
+      code: require('./range-picker-restricted-range/date-range-picker-restricted-range.component.scss?raw'),
     },
   ];
   rangePickerTime = [
     {
       title: 'HTML',
       language: 'html',
-      code: require('!!raw-loader!./range-picker-time/date-range-picker-time.component.html'),
+      code: require('./range-picker-time/date-range-picker-time.component.html?raw'),
     },
     {
       title: 'TS',
       language: 'typescript',
-      code: require('!!raw-loader!./range-picker-time/date-range-picker-time.component.ts'),
+      code: require('./range-picker-time/date-range-picker-time.component.ts?raw'),
     },
     {
       title: 'SCSS',
       language: 'css',
-      code: require('!!raw-loader!./range-picker-time/date-range-picker-time.component.scss'),
+      code: require('./range-picker-time/date-range-picker-time.component.scss?raw'),
     },
   ];
   rangeClearButtonSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'html', code: require('!!raw-loader!./range-clear-button/range-clear-button.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./range-clear-button/range-clear-button.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./range-clear-button/range-clear-button.component.scss') },
+    { title: 'HTML', language: 'html', code: require('./range-clear-button/range-clear-button.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./range-clear-button/range-clear-button.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./range-clear-button/range-clear-button.component.scss?raw') },
   ];
   rangeTodaySource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'html', code: require('!!raw-loader!./range-today/range-today.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./range-today/range-today.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./range-today/range-today.component.scss') },
+    { title: 'HTML', language: 'html', code: require('./range-today/range-today.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./range-today/range-today.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./range-today/range-today.component.scss?raw') },
   ];
   customViewTemplateSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'html', code: require('!!raw-loader!./custom-view-template/custom-view-template.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./custom-view-template/custom-view-template.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./custom-view-template/custom-view-template.component.scss') },
+    { title: 'HTML', language: 'html', code: require('./custom-view-template/custom-view-template.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./custom-view-template/custom-view-template.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./custom-view-template/custom-view-template.component.scss?raw') },
   ];
   clearButtonSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'html', code: require('!!raw-loader!./clear-button/clear-button.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./clear-button/clear-button.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./clear-button/clear-button.component.scss') },
+    { title: 'HTML', language: 'html', code: require('./clear-button/clear-button.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./clear-button/clear-button.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./clear-button/clear-button.component.scss?raw') },
   ];
   buttonSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'html', code: require('!!raw-loader!./button/button.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./button/button.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./button/button.component.css') },
+    { title: 'HTML', language: 'html', code: require('./button/button.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./button/button.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./button/button.component.css?raw') },
   ];
   twoDatepickerBasic = [
     {
       title: 'HTML',
       language: 'html',
-      code: require('!!raw-loader!./two-datepicker-basic/two-datepicker-basic.component.html'),
+      code: require('./two-datepicker-basic/two-datepicker-basic.component.html?raw'),
     },
     {
       title: 'TS',
       language: 'typescript',
-      code: require('!!raw-loader!./two-datepicker-basic/two-datepicker-basic.component.ts'),
+      code: require('./two-datepicker-basic/two-datepicker-basic.component.ts?raw'),
     },
     {
       title: 'SCSS',
       language: 'css',
-      code: require('!!raw-loader!./two-datepicker-basic/two-datepicker-basic.component.scss'),
+      code: require('./two-datepicker-basic/two-datepicker-basic.component.scss?raw'),
     },
   ];
   twoDatepickerFormat = [
     {
       title: 'HTML',
       language: 'html',
-      code: require('!!raw-loader!./two-datepicker-format/two-datepicker-format.component.html'),
+      code: require('./two-datepicker-format/two-datepicker-format.component.html?raw'),
     },
     {
       title: 'TS',
       language: 'typescript',
-      code: require('!!raw-loader!./two-datepicker-format/two-datepicker-format.component.ts'),
+      code: require('./two-datepicker-format/two-datepicker-format.component.ts?raw'),
     },
     {
       title: 'SCSS',
       language: 'css',
-      code: require('!!raw-loader!./two-datepicker-format/two-datepicker-format.component.scss'),
+      code: require('./two-datepicker-format/two-datepicker-format.component.scss?raw'),
     },
   ];
 

@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
-import { DataTableComponent, FilterConfig, SortDirection, SortEventArg, TableWidthConfig } from 'ng-devui/data-table';
+import { DataTableComponent, SortDirection, SortEventArg, TableWidthConfig, FilterConfig } from 'ng-devui/data-table';
 import { originSource, SourceType } from '../mock-data';
 
 @Component({

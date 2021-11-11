@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -9,55 +9,55 @@ import { Subscription } from 'rxjs';
 })
 export class DragDropDemoComponent implements OnInit, OnDestroy {
   basicSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./basic/basic.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/basic.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./basic/basic.component.scss') },
+    { title: 'HTML', language: 'xml', code: require('./basic/basic.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./basic/basic.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./basic/basic.component.scss?raw') },
   ];
 
   treeSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./tree/tree.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./tree/tree.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./tree/tree.component.scss') },
+    { title: 'HTML', language: 'xml', code: require('./tree/tree.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./tree/tree.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./tree/tree.component.scss?raw') },
   ];
 
   followSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./follow/follow.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./follow/follow.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./follow/follow.component.scss') },
+    { title: 'HTML', language: 'xml', code: require('./follow/follow.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./follow/follow.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./follow/follow.component.scss?raw') },
   ];
 
   switchSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./switch/switch.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./switch/switch.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./switch/switch.component.scss') },
+    { title: 'HTML', language: 'xml', code: require('./switch/switch.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./switch/switch.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./switch/switch.component.scss?raw') },
   ];
 
   positionSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./position/position.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./position/position.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./position/position.component.scss') },
+    { title: 'HTML', language: 'xml', code: require('./position/position.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./position/position.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./position/position.component.scss?raw') },
   ];
 
   dropScrollSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./drop-scroll/drop-scroll.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./drop-scroll/drop-scroll.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./drop-scroll/drop-scroll.component.scss') },
+    { title: 'HTML', language: 'xml', code: require('./drop-scroll/drop-scroll.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./drop-scroll/drop-scroll.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./drop-scroll/drop-scroll.component.scss?raw') },
   ];
   originPlaceholderSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./origin-placeholder/origin-placeholder.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./origin-placeholder/origin-placeholder.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./origin-placeholder/origin-placeholder.component.scss') },
+    { title: 'HTML', language: 'xml', code: require('./origin-placeholder/origin-placeholder.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./origin-placeholder/origin-placeholder.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./origin-placeholder/origin-placeholder.component.scss?raw') },
   ];
   batchDragSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./batch-drag/batch-drag.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./batch-drag/batch-drag.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./batch-drag/batch-drag.component.scss') },
+    { title: 'HTML', language: 'xml', code: require('./batch-drag/batch-drag.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./batch-drag/batch-drag.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./batch-drag/batch-drag.component.scss?raw') },
   ];
 
   crossDimensionSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./cross-dimension/cross-dimension.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./cross-dimension/cross-dimension.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./cross-dimension/cross-dimension.component.scss') },
+    { title: 'HTML', language: 'xml', code: require('./cross-dimension/cross-dimension.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./cross-dimension/cross-dimension.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./cross-dimension/cross-dimension.component.scss?raw') },
   ];
 
   navItems = [];

@@ -1,7 +1,6 @@
 <h4>Normal</h4>
 <d-tags-input
-  id="issue-tags"
-  [tags]="tagList"
+  [(ngModel)]="tagList"
   [displayProperty]="taskTagConfig.displayProperty"
   [placeholder]="taskTagConfig.placeholder"
   [minLength]="taskTagConfig.minLength"
@@ -18,7 +17,6 @@
 <pre style="margin: 8px 0">{{ tagList | json }}</pre>
 <h4>Disabled</h4>
 <d-tags-input
-  id="issue-tags"
   [tags]="tagList"
   [displayProperty]="taskTagConfig.displayProperty"
   [placeholder]="taskTagConfig.placeholder"

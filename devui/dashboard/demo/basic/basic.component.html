@@ -1,0 +1,38 @@
+<d-button (btnClick)="addWidget()">添加一个widget</d-button>
+<d-button [bsStyle]="'common'" (btnClick)="deleteWidget(widgets.length - 1)">删除最后一个widget</d-button>
+<d-dashboard #dashboard="dDashboard" class="dashboard">
+  <d-dashboard-widget
+    *ngFor="let widget of widgets; let index = index"
+    [(x)]="widget.x"
+    [(y)]="widget.y"
+    [(width)]="widget.width"
+    [(height)]="widget.height"
+    [minWidth]="widget.minWidth"
+    [minHeight]="widget.minHeight"
+    [maxWidth]="widget.maxWidth"
+    [maxHeight]="widget.maxHeight"
+    [locked]="widget.locked"
+    [noMove]="widget.noMove || widget.locked"
+    [noResize]="widget.noResize || widget.locked"
+    [autoPosition]="widget.autoPosition"
+    class="widget"
+  >
+    <div class="index">{{ index + 1 }}</div>
+    <div class="content">
+      <div>
+        <div>
+          <span>坐标</span><span class="coordinate">{{ widget.x }} , {{ widget.y }}</span>
+        </div>
+        <div>
+          <span>宽高</span><span class="size">{{ widget.width }} x {{ widget.height }}</span>
+        </div>
+        <div *ngIf="widget.locked"><span>锁定位置</span></div>
+        <div *ngIf="widget.noMove"><span>锁定拖拽移动</span></div>
+        <div *ngIf="widget.noResize"><span>锁定拖拽大小</span></div>
+      </div>
+    </div>
+  </d-dashboard-widget>
+  <d-dashboard-widget [minWidth]="2" [maxWidth]="5" class="widget">
+    <div class="content"><div>独立使用</div></div></d-dashboard-widget
+  >
+</d-dashboard>

@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -8,22 +8,22 @@ import { Subscription } from 'rxjs';
 })
 export class ToggleDemoComponent implements OnInit, OnDestroy {
   basicSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./basic/basic.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/basic.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./basic/basic.component.css') },
+    { title: 'HTML', language: 'xml', code: require('./basic/basic.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./basic/basic.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./basic/basic.component.css?raw') },
   ];
   twoBindingSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./two-binding/two-binding.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./two-binding/two-binding.component.ts') }
+    { title: 'HTML', language: 'xml', code: require('./two-binding/two-binding.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./two-binding/two-binding.component.ts?raw') }
   ];
   callbackSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./callback/callback.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./callback/callback.component.ts') }
+    { title: 'HTML', language: 'xml', code: require('./callback/callback.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./callback/callback.component.ts?raw') }
   ];
   customSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./custom/custom.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./custom/custom.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./custom/custom.component.scss') }
+    { title: 'HTML', language: 'xml', code: require('./custom/custom.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./custom/custom.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./custom/custom.component.scss?raw') }
   ];
 
   navItems = [];

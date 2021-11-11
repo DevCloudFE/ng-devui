@@ -188,7 +188,7 @@ describe('tags input', () => {
       fixture.detectChanges();
     }));
 
-    it('should blur add input value', fakeAsync(() => {
+    it('should add input value on blur', fakeAsync(() => {
       const testTxt = 'test';
       tagInputEl.value = testTxt;
       tagInputEl.dispatchEvent(new Event('input', { bubbles: true }));
@@ -196,6 +196,9 @@ describe('tags input', () => {
       fixture.detectChanges();
 
       tagInputEl.dispatchEvent(new Event('blur'));
+      component.comp.isOpen = false;
+      fixture.detectChanges();
+      tick(300);
       fixture.detectChanges();
       flush();
       fixture.detectChanges();

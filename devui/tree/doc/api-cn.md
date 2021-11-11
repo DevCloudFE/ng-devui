@@ -231,6 +231,7 @@ export interface ITreeItem {
   isActive?: boolean; // 节点是否为selected状态
   isChecked?: boolean; // 节点是否为checked状态
   halfChecked?: boolean; // 节点是否为半选状态
+  showCheckbox?:boolean // 是否显示checkbox，常用于父节点仅作为分类，不具备可操作的场景
   disabled?: boolean; // 节点是否为半选状态
   disableAdd?: boolean; // 节点是否禁止check
   disableEdit?: boolean; // 节点是否禁止编辑

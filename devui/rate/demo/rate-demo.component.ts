@@ -10,28 +10,28 @@ import { Subscription } from 'rxjs';
 })
 export class RateDemoComponent implements OnInit, OnDestroy {
   basicSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./basic/basic.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/basic.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./basic/basic.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./basic/basic.component.ts?raw') },
   ];
 
   onlyreadSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./onlyread/onlyread.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./onlyread/onlyread.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./onlyread/onlyread.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./onlyread/onlyread.component.ts?raw') },
   ];
 
   customizeSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./customize/customize.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./customize/customize.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./customize/customize.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./customize/customize.component.ts?raw') },
   ];
   TypeSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./type/type.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./type/type.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./type/type.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./type/type.component.ts?raw') },
   ];
 
   halfSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./half/rate-half.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./half/rate-half.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./half/rate-half.component.scss') },
+    { title: 'HTML', language: 'xml', code: require('./half/rate-half.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./half/rate-half.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./half/rate-half.component.scss?raw') },
   ];
 
   navItems = [];

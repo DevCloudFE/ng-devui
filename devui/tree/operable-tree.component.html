@@ -143,7 +143,7 @@
           </ng-template>
         </ng-container>
         <d-checkbox
-          *ngIf="checkable"
+          *ngIf="checkable && (treeNode.data.showCheckbox === undefined ? true : treeNode.data.showCheckbox)"
           [showAnimation]="treeNode.data.isHover"
           [(ngModel)]="treeNode.data.isChecked"
           (ngModelChange)="checkNodeById($event, treeNode.id)"
@@ -382,7 +382,7 @@
           </ng-template>
         </ng-container>
         <d-checkbox
-          *ngIf="checkable"
+          *ngIf="checkable && checkable && (treeNode.data.showCheckbox === undefined ? true : treeNode.data.showCheckbox)"
           [(ngModel)]="treeNode.data.isChecked"
           (ngModelChange)="checkNodeById($event, treeNode.id)"
           [halfchecked]="treeNode.data.halfChecked"

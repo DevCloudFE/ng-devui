@@ -8,8 +8,8 @@ export const routesConfig = [
   {
     path: 'design-color',
     component: ExamplePanelComponent,
-    loadChildren: () =>
-      import('../../../devui/design-token/color/demo/design-color-demo.module').then((m) => m.DesignColorDemoModule),
+    loadChildren: () => import('../../../devui/design-token/color/demo/design-color-demo.module')
+      .then((m) => m.DesignColorDemoModule),
     data: {
       type: 'Design Tokens',
       enType: 'Design Tokens',
@@ -19,23 +19,23 @@ export const routesConfig = [
     },
   },
   {
-      path: 'design-animation',
-      component: ExamplePanelComponent,
-      loadChildren: () =>
-        import('../../../devui/design-token/animation/demo/design-animation-demo.module').then((m) => m.DesignAnimationDemoModule),
-      data: {
-        type: 'Design Tokens',
-        enType: 'Design Tokens',
-        name: 'Animation',
-        cnName: '动效',
-        nodisplay: true,
-      },
-    },
+    path: 'design-animation',
+    component: ExamplePanelComponent,
+    loadChildren: () =>
+      import('../../../devui/design-token/animation/demo/design-animation-demo.module').then((m) => m.DesignAnimationDemoModule),
+    data: {
+      type: 'Design Tokens',
+      enType: 'Design Tokens',
+      name: 'Animation',
+      cnName: '动效',
+      nodisplay: true,
+    },
+  },
   {
     path: 'design-link',
     component: ExamplePanelComponent,
-    loadChildren: () =>
-      import('../../../devui/design-token/link/demo/design-link-demo.module').then((m) => m.DesignLinkDemoModule),
+    loadChildren: () => import('../../../devui/design-token/link/demo/design-link-demo.module')
+      .then((m) => m.DesignLinkDemoModule),
     data: {
       type: 'Design Tokens',
       enType: 'Design Tokens',
@@ -47,8 +47,8 @@ export const routesConfig = [
   {
     path: 'design-shadow',
     component: ExamplePanelComponent,
-    loadChildren: () =>
-      import('../../../devui/design-token/shadow/demo/design-shadow-demo.module').then((m) => m.DesignShadowDemoModule),
+    loadChildren: () => import('../../../devui/design-token/shadow/demo/design-shadow-demo.module')
+      .then((m) => m.DesignShadowDemoModule),
     data: {
       type: 'Design Tokens',
       enType: 'Design Tokens',
@@ -60,8 +60,8 @@ export const routesConfig = [
   {
     path: 'design-font',
     component: ExamplePanelComponent,
-    loadChildren: () =>
-      import('../../../devui/design-token/font/demo/design-font-demo.module').then((m) => m.DesignFontDemoModule),
+    loadChildren: () => import('../../../devui/design-token/font/demo/design-font-demo.module')
+      .then((m) => m.DesignFontDemoModule),
     data: {
       type: 'Design Tokens',
       enType: 'Design Tokens',
@@ -73,10 +73,8 @@ export const routesConfig = [
   {
     path: 'design-border-radius',
     component: ExamplePanelComponent,
-    loadChildren: () =>
-      import('../../../devui/design-token/border-radius/demo/design-border-radius-demo.module').then(
-        (m) => m.DesignBorderRadiusDemoModule
-      ),
+    loadChildren: () => import('../../../devui/design-token/border-radius/demo/design-border-radius-demo.module')
+    .then((m) => m.DesignBorderRadiusDemoModule),
     data: {
       type: 'Design Tokens',
       enType: 'Design Tokens',
@@ -284,6 +282,18 @@ export const routesConfig = [
       enType: 'Data Entry',
       name: 'DatepickerPro',
       cnName: '日期选择器',
+    },
+  },
+  {
+    path: 'dashboard',
+    component: ExamplePanelComponent,
+    loadChildren: () =>
+      import('../../../devui/dashboard/demo/dashboard-demo.module').then((m) => m.DashboardDemoModule),
+    data: {
+      type: '演进中',
+      enType: 'Experimental',
+      name: 'Dashboard',
+      cnName: '仪表盘',
     },
   },
   {

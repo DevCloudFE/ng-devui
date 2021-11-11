@@ -8,144 +8,138 @@ import { Subscription } from 'rxjs';
 })
 export class DataTableDemoComponent implements OnInit, OnDestroy {
   basicSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./basic/data-table-demo-basic.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/data-table-demo-basic.component.ts') },
-    { title: 'mock-data', language: 'typescript', code: require('!!raw-loader!./mock-data') },
+    { title: 'HTML', language: 'xml', code: require('./basic/data-table-demo-basic.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./basic/data-table-demo-basic.component.ts?raw') },
+    { title: 'mock-data', language: 'typescript', code: require('./mock-data?raw') },
   ];
   basicOldSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./basic-old/basic-old.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic-old/basic-old.component.ts') },
-    { title: 'mock-data', language: 'typescript', code: require('!!raw-loader!./mock-data') },
+    { title: 'HTML', language: 'xml', code: require('./basic-old/basic-old.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./basic-old/basic-old.component.ts?raw') },
+    { title: 'mock-data', language: 'typescript', code: require('./mock-data?raw') },
   ];
   interactionColumnSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./interaction-column/interaction-column.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./interaction-column/interaction-column.component.ts') },
-    { title: 'mock-data', language: 'typescript', code: require('!!raw-loader!./mock-data') },
+    { title: 'HTML', language: 'xml', code: require('./interaction-column/interaction-column.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./interaction-column/interaction-column.component.ts?raw') },
+    { title: 'mock-data', language: 'typescript', code: require('./mock-data?raw') },
   ];
   interactionSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./interaction/interaction.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./interaction/interaction.component.ts') },
-    { title: 'mock-data', language: 'typescript', code: require('!!raw-loader!./mock-data') },
+    { title: 'HTML', language: 'xml', code: require('./interaction/interaction.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./interaction/interaction.component.ts?raw') },
+    { title: 'mock-data', language: 'typescript', code: require('./mock-data?raw') },
   ];
   checkOptionSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./check-options/check-options.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./check-options/check-options.component.ts') },
-    { title: 'mock-data', language: 'typescript', code: require('!!raw-loader!./mock-data') },
+    { title: 'HTML', language: 'xml', code: require('./check-options/check-options.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./check-options/check-options.component.ts?raw') },
+    { title: 'mock-data', language: 'typescript', code: require('./mock-data?raw') },
   ];
   checkOptionColSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./check-options-column/check-options-column.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./check-options-column/check-options-column.component.ts') },
-    { title: 'mock-data', language: 'typescript', code: require('!!raw-loader!./mock-data') },
+    { title: 'HTML', language: 'xml', code: require('./check-options-column/check-options-column.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./check-options-column/check-options-column.component.ts?raw') },
+    { title: 'mock-data', language: 'typescript', code: require('./mock-data?raw') },
   ];
   asyncSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./async/data-table-demo-async.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./async/data-table-demo-async.component.ts') },
-    { title: 'mock-data', language: 'typescript', code: require('!!raw-loader!./mock-data') },
+    { title: 'HTML', language: 'xml', code: require('./async/data-table-demo-async.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./async/data-table-demo-async.component.ts?raw') },
+    { title: 'mock-data', language: 'typescript', code: require('./mock-data?raw') },
   ];
   maxHeightSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./max-height/data-table-demo-maxheight.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./max-height/data-table-demo-maxheight.component.ts') },
-    { title: 'mock-data', language: 'typescript', code: require('!!raw-loader!./mock-data') },
+    { title: 'HTML', language: 'xml', code: require('./max-height/data-table-demo-maxheight.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./max-height/data-table-demo-maxheight.component.ts?raw') },
+    { title: 'mock-data', language: 'typescript', code: require('./mock-data?raw') },
   ];
   lazySource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./lazy/data-table-demo-lazyloaddata.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./lazy/data-table-demo-lazyloaddata.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./lazy/data-table-demo-lazyloaddata.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./lazy/data-table-demo-lazyloaddata.component.ts?raw') },
   ];
   multiSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./multi-header/data-table-demo-multiheader.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./multi-header/data-table-demo-multiheader.component.ts') },
-    { title: 'mock-data', language: 'typescript', code: require('!!raw-loader!./mock-data') },
+    { title: 'HTML', language: 'xml', code: require('./multi-header/data-table-demo-multiheader.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./multi-header/data-table-demo-multiheader.component.ts?raw') },
+    { title: 'mock-data', language: 'typescript', code: require('./mock-data?raw') },
   ];
   headerGroupingSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./header-grouping/header-grouping.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./header-grouping/header-grouping.component.ts') },
-    { title: 'mock-data', language: 'typescript', code: require('!!raw-loader!./mock-data') },
+    { title: 'HTML', language: 'xml', code: require('./header-grouping/header-grouping.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./header-grouping/header-grouping.component.ts?raw') },
+    { title: 'mock-data', language: 'typescript', code: require('./mock-data?raw') },
   ];
   editableSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./editable/data-table-demo-editable.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./editable/data-table-demo-editable.component.ts') },
-    { title: 'mock-data', language: 'typescript', code: require('!!raw-loader!./mock-data') },
+    { title: 'HTML', language: 'xml', code: require('./editable/data-table-demo-editable.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./editable/data-table-demo-editable.component.ts?raw') },
+    { title: 'mock-data', language: 'typescript', code: require('./mock-data?raw') },
   ];
   editableOldSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./editable-old/editable-old.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./editable-old/editable-old.component.ts') },
-    { title: 'mock-data', language: 'typescript', code: require('!!raw-loader!./mock-data') },
+    { title: 'HTML', language: 'xml', code: require('./editable-old/editable-old.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./editable-old/editable-old.component.ts?raw') },
+    { title: 'mock-data', language: 'typescript', code: require('./mock-data?raw') },
   ];
   treeTableSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./tree-table/tree-data.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./tree-table/tree-data.component.ts') },
-    { title: 'mock-data', language: 'typescript', code: require('!!raw-loader!./mock-data') },
+    { title: 'HTML', language: 'xml', code: require('./tree-table/tree-data.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./tree-table/tree-data.component.ts?raw') },
+    { title: 'mock-data', language: 'typescript', code: require('./mock-data?raw') },
   ];
   treeTableOldSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./tree-table-old/tree-table-old.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./tree-table-old/tree-table-old.component.ts') },
-    { title: 'mock-data', language: 'typescript', code: require('!!raw-loader!./mock-data') },
+    { title: 'HTML', language: 'xml', code: require('./tree-table-old/tree-table-old.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./tree-table-old/tree-table-old.component.ts?raw') },
+    { title: 'mock-data', language: 'typescript', code: require('./mock-data?raw') },
   ];
   expandRowSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./expand-row/expand-row.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./expand-row/expand-row.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./expand-row/expand-row.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./expand-row/expand-row.component.ts?raw') },
   ];
   expandRowOldSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./expand-row-old/expand-row-old.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./expand-row-old/expand-row-old.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./expand-row-old/expand-row-old.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./expand-row-old/expand-row-old.component.ts?raw') },
   ];
   fixColumnSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./fix-column/fix-column.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./fix-column/fix-column.component.ts') },
-    { title: 'mock-data', language: 'typescript', code: require('!!raw-loader!./mock-data') },
+    { title: 'HTML', language: 'xml', code: require('./fix-column/fix-column.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./fix-column/fix-column.component.ts?raw') },
+    { title: 'mock-data', language: 'typescript', code: require('./mock-data?raw') },
   ];
   fixColumnOldSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./fix-column-old/fix-column-old.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./fix-column-old/fix-column-old.component.ts') },
-    { title: 'mock-data', language: 'typescript', code: require('!!raw-loader!./mock-data') },
+    { title: 'HTML', language: 'xml', code: require('./fix-column-old/fix-column-old.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./fix-column-old/fix-column-old.component.ts?raw') },
+    { title: 'mock-data', language: 'typescript', code: require('./mock-data?raw') },
   ];
   dragColumnSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./drag-column/drag-column.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./drag-column/drag-column.component.ts') },
-    { title: 'mock-data', language: 'typescript', code: require('!!raw-loader!./mock-data') },
+    { title: 'HTML', language: 'xml', code: require('./drag-column/drag-column.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./drag-column/drag-column.component.ts?raw') },
+    { title: 'mock-data', language: 'typescript', code: require('./mock-data?raw') },
   ];
   cellMergeSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./cell-merge/cell-merge.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./cell-merge/cell-merge.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./cell-merge/cell-merge.component.scss') },
-    { title: 'mock-data', language: 'typescript', code: require('!!raw-loader!./mock-data') },
+    { title: 'HTML', language: 'xml', code: require('./cell-merge/cell-merge.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./cell-merge/cell-merge.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./cell-merge/cell-merge.component.scss?raw') },
+    { title: 'mock-data', language: 'typescript', code: require('./mock-data?raw') },
   ];
   dragRowSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./drag-row/drag-row.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./drag-row/drag-row.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./drag-row/drag-row.component.scss') },
-    { title: 'mock-data', language: 'typescript', code: require('!!raw-loader!./mock-data') },
+    { title: 'HTML', language: 'xml', code: require('./drag-row/drag-row.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./drag-row/drag-row.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./drag-row/drag-row.component.scss?raw') },
+    { title: 'mock-data', language: 'typescript', code: require('./mock-data?raw') },
   ];
   mutiDragRowSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./muti-drag-row/muti-drag-row.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./muti-drag-row/muti-drag-row.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./muti-drag-row/muti-drag-row.component.scss') },
-    { title: 'mock-data', language: 'typescript', code: require('!!raw-loader!./mock-data') },
-  ];
-  bigDataTreeTableSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./big-data-tree-table/big-data-tree-table.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./big-data-tree-table/big-data-tree-table.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./big-data-tree-table/big-data-tree-table.component.scss') },
-    { title: 'mock-data', language: 'typescript', code: require('!!raw-loader!./big-data-tree-table/mock-data') },
+    { title: 'HTML', language: 'xml', code: require('./muti-drag-row/muti-drag-row.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./muti-drag-row/muti-drag-row.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./muti-drag-row/muti-drag-row.component.scss?raw') },
+    { title: 'mock-data', language: 'typescript', code: require('./mock-data?raw') },
   ];
   virtualScrollSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./virtual-scroll/virtual-scroll.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./virtual-scroll/virtual-scroll.component.ts') },
-    { title: 'mock-data', language: 'typescript', code: require('!!raw-loader!./mock-data') },
+    { title: 'HTML', language: 'xml', code: require('./virtual-scroll/virtual-scroll.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./virtual-scroll/virtual-scroll.component.ts?raw') },
+    { title: 'mock-data', language: 'typescript', code: require('./mock-data?raw') },
   ];
   mutilStyles: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./mutil-styles/mutil-styles.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./mutil-styles/mutil-styles.component.ts') },
-    { title: 'mock-data', language: 'typescript', code: require('!!raw-loader!./mock-data') },
+    { title: 'HTML', language: 'xml', code: require('./mutil-styles/mutil-styles.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./mutil-styles/mutil-styles.component.ts?raw') },
+    { title: 'mock-data', language: 'typescript', code: require('./mock-data?raw') },
   ];
   fixHeightVirtualScrollSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./fix-height-virtual-scroll/fix-height-virtual-scroll.component.html') },
+    { title: 'HTML', language: 'xml', code: require('./fix-height-virtual-scroll/fix-height-virtual-scroll.component.html?raw') },
     {
       title: 'TS',
       language: 'typescript',
-      code: require('!!raw-loader!./fix-height-virtual-scroll/fix-height-virtual-scroll.component.ts'),
+      code: require('./fix-height-virtual-scroll/fix-height-virtual-scroll.component.ts?raw'),
     },
-    { title: 'mock-data', language: 'typescript', code: require('!!raw-loader!./mock-data') },
+    { title: 'mock-data', language: 'typescript', code: require('./mock-data?raw') },
   ];
 
   navItems = [];
@@ -187,7 +181,6 @@ export class DataTableDemoComponent implements OnInit, OnDestroy {
       { dAnchorLink: 'cell-merge', value: values['cell-merge'] },
       { dAnchorLink: 'drag-row', value: values['drag-row'] },
       { dAnchorLink: 'muti-drag-row', value: values['muti-drag-row'] },
-      // { dAnchorLink: 'big-data-tree-table', value: values['big-data-tree-table'] },
     ];
   }
 

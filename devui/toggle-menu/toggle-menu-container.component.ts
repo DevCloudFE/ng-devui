@@ -46,11 +46,12 @@ import { ToggleMenuListComponent } from './toggle-menu-list.component';
 })
 export class ToggleMenuContainerComponent implements OnInit, OnChanges {
   @Input() set isOpen(value) {
-    this._isOpen = value;
-    // 初始化时不应该触发toggleChange
-    if (!this.isInit) {
-      this.toggleChange.emit(value);
+    if (this._isOpen === value) {
+      // 如果toggle-container自身触发开关，父级组件的isOpen随toggleChange改变，会通过input再次返回导致重复触发，通过值是否变化屏蔽该次触发
+      return;
     }
+    this._isOpen = value;
+    this.toggleChange.emit(value);
     this.setDocumentClickListener();
     if (this.selectWrapper) {
       this.dropDownWidth = this.width ? this.width : this.selectWrapper.nativeElement.offsetWidth;
@@ -208,7 +209,7 @@ export class ToggleMenuContainerComponent implements OnInit, OnChanges {
       this.listInstance.selectIndex = this.listInstance.activeIndex ? this.listInstance.activeIndex : -1;
       this.changeDetectorRef.detectChanges();
     }
-  }
+  };
 
   // mousedown mouseup解决focus与click冲突问题
   @HostListener('mousedown', ['$event'])

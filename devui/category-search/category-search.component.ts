@@ -16,7 +16,6 @@ import {
   ViewChild,
   ViewChildren
 } from '@angular/core';
-import { cloneDeep, isEqual } from 'lodash-es';
 import { DatepickerProCalendarComponent } from 'ng-devui/datepicker-pro';
 import { DropDownDirective } from 'ng-devui/dropdown';
 import { DValidateRules } from 'ng-devui/form';
@@ -24,6 +23,7 @@ import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { ITreeItem } from 'ng-devui/tree';
 import { DefaultIcons } from 'ng-devui/tree-select';
 import { DateConverter, DefaultDateConverter } from 'ng-devui/utils';
+import { cloneDeep, isEqual } from 'lodash-es';
 import { fromEvent, Observable, Subject } from 'rxjs';
 import { debounceTime, takeUntil, tap } from 'rxjs/operators';
 import { CreateFilterEvent, ICategorySearchTagItem, SearchEvent, SelectedTagsEvent } from './category-search.type';
@@ -45,6 +45,7 @@ export class CategorySearchComponent implements OnInit, OnChanges, OnDestroy, Af
   @Input() searchKey = '';
   @Input() placeholderText;
   @Input() inputReadOnly = false;
+  @Input() showSearchCategory = true; // 是否显示搜索关键字下拉菜单
   @Input() categoryInGroup = false; // 是否按组别显示分类下拉列表
   @Input() groupOrderConfig: Array<string>; // 用户配置组顺序
   @Input() customGroupNameTemplate: TemplateRef<any>; // 用户自定义组名称显示模板

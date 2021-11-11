@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { Subscription } from 'rxjs';
 @Component({
     selector: 'd-alert-demo',
@@ -8,21 +8,21 @@ import { Subscription } from 'rxjs';
 })
 export class AlertDemoComponent implements OnInit, OnDestroy {
   basicSource: Array<DevuiSourceData> = [
-    {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./basic/basic.component.html')},
-    {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./basic/basic.component.ts')},
-    {title: 'SCSS', language: 'css', code:  require('!!raw-loader!./basic/basic.component.css')}
+    {title: 'HTML', language: 'xml', code:  require('./basic/basic.component.html?raw')},
+    {title: 'TS', language: 'typescript', code:  require('./basic/basic.component.ts?raw')},
+    {title: 'SCSS', language: 'css', code:  require('./basic/basic.component.css?raw')}
   ];
 
   closeSource: Array<DevuiSourceData> = [
-    {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./close/close.component.html')},
-    {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./close/close.component.ts')},
-    {title: 'SCSS', language: 'css', code:  require('!!raw-loader!./close/close.component.css')}
+    {title: 'HTML', language: 'xml', code:  require('./close/close.component.html?raw')},
+    {title: 'TS', language: 'typescript', code:  require('./close/close.component.ts?raw')},
+    {title: 'SCSS', language: 'css', code:  require('./close/close.component.css?raw')}
   ];
 
   withoutIconSource: Array<DevuiSourceData> = [
-    {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./withoutIcon/withoutIcon.component.html')},
-    {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./withoutIcon/withoutIcon.component.ts')},
-    {title: 'SCSS', language: 'css', code:  require('!!raw-loader!./withoutIcon/withoutIcon.component.css')}
+    {title: 'HTML', language: 'xml', code:  require('./withoutIcon/withoutIcon.component.html?raw')},
+    {title: 'TS', language: 'typescript', code:  require('./withoutIcon/withoutIcon.component.ts?raw')},
+    {title: 'SCSS', language: 'css', code:  require('./withoutIcon/withoutIcon.component.css?raw')}
   ];
 
   navItems = [];

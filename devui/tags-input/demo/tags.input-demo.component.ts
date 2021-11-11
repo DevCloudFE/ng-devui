@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DevuiSourceData } from 'ng-devui/shared/devui-codebox/devui-source-data';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { DevuiSourceData } from 'ng-devui/shared/devui-codebox/devui-source-data';
 import { Subscription } from 'rxjs';
 @Component({
   selector: 'd-demo-basic',
@@ -8,18 +8,23 @@ import { Subscription } from 'rxjs';
 })
 export class TagsInputDemoComponent implements OnInit, OnDestroy {
   basicSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./basic/basic.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/basic.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./basic/basic.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./basic/basic.component.ts?raw') },
   ];
 
   asyncSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./async/async.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./async/async.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./async/async.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./async/async.component.ts?raw') },
   ];
 
   ngModelSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./ngmodel/ngmodel.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./ngmodel/ngmodel.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./ngmodel/ngmodel.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./ngmodel/ngmodel.component.ts?raw') },
+  ];
+
+  virtualScrollSource: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'xml', code: require('./virtual-scroll/virtual-scroll.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./virtual-scroll/virtual-scroll.component.ts?raw') },
   ];
 
   navItems = [];
@@ -46,6 +51,7 @@ export class TagsInputDemoComponent implements OnInit, OnDestroy {
       { dAnchorLink: 'basic-usage', value: values['basic-usage'] },
       { dAnchorLink: 'ng-model', value: values['ng-model'] },
       { dAnchorLink: 'async-input', value: values['async-input'] },
+      { dAnchorLink: 'virtual-scroll', value: values['virtual-scroll'] },
     ];
   }
 

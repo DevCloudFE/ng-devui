@@ -350,6 +350,7 @@ export class InputNumberComponent implements ControlValueAccessor, OnChanges, On
     if (event['clipboardData']) {
       input = event['clipboardData'].getData('text');
       value = value.substring(0, selectionStart) + input + value.substring(selectionEnd);
+      event.preventDefault();
     } else {
       input = event['data'];
       if (input === undefined || input === null) {

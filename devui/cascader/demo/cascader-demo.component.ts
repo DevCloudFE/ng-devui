@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -9,39 +9,39 @@ import { Subscription } from 'rxjs';
 })
 export class CascaderDemoComponent implements OnInit, OnDestroy {
   cascaderBasicComponent = [
-    { title: 'HTML', language: 'html', code: require('!!raw-loader!./basic/basic.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/basic.component.ts') },
+    { title: 'HTML', language: 'html', code: require('./basic/basic.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./basic/basic.component.ts?raw') },
   ];
 
   cascaderMultipleComponent = [
-    { title: 'HTML', language: 'html', code: require('!!raw-loader!./multiple-cascader/multiple-cascader.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./multiple-cascader/multiple-cascader.component.ts') },
+    { title: 'HTML', language: 'html', code: require('./multiple-cascader/multiple-cascader.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./multiple-cascader/multiple-cascader.component.ts?raw') },
   ];
 
   cascaderSearchComponent = [
-    { title: 'HTML', language: 'html', code: require('!!raw-loader!./search-cascader/search-cascader.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./search-cascader/search-cascader.component.ts') },
+    { title: 'HTML', language: 'html', code: require('./search-cascader/search-cascader.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./search-cascader/search-cascader.component.ts?raw') },
   ];
 
   cascaderTempComponent = [
-    { title: 'HTML', language: 'html', code: require('!!raw-loader!./template-cascader/template-cascader.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./template-cascader/template-cascader.component.ts') },
+    { title: 'HTML', language: 'html', code: require('./template-cascader/template-cascader.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./template-cascader/template-cascader.component.ts?raw') },
   ];
 
   cascaderLazyloadComponent = [
-    { title: 'HTML', language: 'html', code: require('!!raw-loader!./lazyload-cascader/lazyload-cascader.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./lazyload-cascader/lazyload-cascader.component.ts') },
+    { title: 'HTML', language: 'html', code: require('./lazyload-cascader/lazyload-cascader.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./lazyload-cascader/lazyload-cascader.component.ts?raw') },
   ];
 
   cascaderParentSelectComponent = [
-    { title: 'HTML', language: 'html', code: require('!!raw-loader!./parent-select-cascader/parent-select-cascader.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./parent-select-cascader/parent-select-cascader.component.ts') },
+    { title: 'HTML', language: 'html', code: require('./parent-select-cascader/parent-select-cascader.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./parent-select-cascader/parent-select-cascader.component.ts?raw') },
   ];
 
   CascaderDemoHeaderTemplate: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./header-template/cascader-header-template.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./header-template/cascader-header-template.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./header-template/cascader-header-template.component.scss') },
+    { title: 'HTML', language: 'xml', code: require('./header-template/cascader-header-template.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./header-template/cascader-header-template.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./header-template/cascader-header-template.component.scss?raw') },
   ];
   navItems = [];
   subs: Subscription = new Subscription();

@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -9,34 +9,34 @@ import { Subscription } from 'rxjs';
 })
 export class TimeAxisDemoComponent implements OnInit, OnDestroy {
   basicSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./all-states/time-axis-all-states.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./all-states/time-axis-all-states.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./all-states/time-axis-all-states.component.scss') }
+    { title: 'HTML', language: 'xml', code: require('./all-states/time-axis-all-states.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./all-states/time-axis-all-states.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./all-states/time-axis-all-states.component.scss?raw') }
   ];
   directionSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./direction/time-axis-direction.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./direction/time-axis-direction.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./direction/time-axis-direction.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./direction/time-axis-direction.component.ts?raw') },
   ];
   htmlSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./html-content/time-axis-html-content.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./html-content/time-axis-html-content.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./html-content/time-axis-html-content.component.scss') }
+    { title: 'HTML', language: 'xml', code: require('./html-content/time-axis-html-content.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./html-content/time-axis-html-content.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./html-content/time-axis-html-content.component.scss?raw') }
   ];
   templateSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./template-content/time-axis-template-content.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./template-content/time-axis-template-content.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./template-content/time-axis-template-content.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./template-content/time-axis-template-content.component.ts?raw') },
   ];
   alternativeModeSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./alternative-mode/alternative-mode.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./alternative-mode/alternative-mode.component.ts') }
+    { title: 'HTML', language: 'xml', code: require('./alternative-mode/alternative-mode.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./alternative-mode/alternative-mode.component.ts?raw') }
   ];
   seperateWaySource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./seperate-way/seperate-way.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./seperate-way/seperate-way.component.ts') }
+    { title: 'HTML', language: 'xml', code: require('./seperate-way/seperate-way.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./seperate-way/seperate-way.component.ts?raw') }
   ];
   customDotSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./custom-dot/custom-dot.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./custom-dot/custom-dot.component.ts') }
+    { title: 'HTML', language: 'xml', code: require('./custom-dot/custom-dot.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./custom-dot/custom-dot.component.ts?raw') }
   ];
 
   navItems = [];

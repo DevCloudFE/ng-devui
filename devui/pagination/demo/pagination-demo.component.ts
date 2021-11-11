@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { Subscription } from 'rxjs';
 @Component({
   selector: 'd-demo-pagination',
@@ -8,23 +8,23 @@ import { Subscription } from 'rxjs';
 })
 export class PaginationDemoComponent implements OnInit, OnDestroy {
   basicSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./basic/basic.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/basic.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./basic/basic.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./basic/basic.component.ts?raw') },
   ];
 
   additionalSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./additional/additional.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./additional/additional.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./additional/additional.component.css') },
+    { title: 'HTML', language: 'xml', code: require('./additional/additional.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./additional/additional.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./additional/additional.component.css?raw') },
   ];
   liteSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./lite/lite.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./lite/lite.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./lite/lite.component.scss') },
+    { title: 'HTML', language: 'xml', code: require('./lite/lite.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./lite/lite.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./lite/lite.component.scss?raw') },
   ];
   widgetsSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./widgets/widgets.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./widgets/widgets.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./widgets/widgets.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./widgets/widgets.component.ts?raw') },
   ];
 
   navItems = [];

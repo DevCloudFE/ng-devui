@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { Subscription } from 'rxjs';
 @Component({
   selector: 'd-demo-input-number',
@@ -8,21 +8,21 @@ import { Subscription } from 'rxjs';
 })
 export class LayoutDemoComponent implements OnInit, OnDestroy {
   LayoutBasic: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./basic/layout-basic.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/layout-basic.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./basic/layout-basic.component.scss') },
+    { title: 'HTML', language: 'xml', code: require('./basic/layout-basic.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./basic/layout-basic.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./basic/layout-basic.component.scss?raw') },
   ];
 
   LayoutTop: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./top/top.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./top/top.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./top/top.component.scss') },
+    { title: 'HTML', language: 'xml', code: require('./top/top.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./top/top.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./top/top.component.scss?raw') },
   ];
 
   LayoutTopAside: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./top-aside/top-aside.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./top-aside/top-aside.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./top-aside/top-aside.component.scss') },
+    { title: 'HTML', language: 'xml', code: require('./top-aside/top-aside.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./top-aside/top-aside.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./top-aside/top-aside.component.scss?raw') },
   ];
 
   navItems = [];

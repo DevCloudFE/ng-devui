@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -9,64 +9,64 @@ import { Subscription } from 'rxjs';
 })
 export class TreeDemoComponent implements OnInit, OnDestroy {
   basicSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./basic/basic.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/basic.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./basic/basic.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./basic/basic.component.ts?raw') },
   ];
   treeFactorySource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./tree-factory/tree-factory.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./tree-factory/tree-factory.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./tree-factory/tree-factory.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./tree-factory/tree-factory.component.ts?raw') },
   ];
   MergeNodeSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./merge-node/merge-node.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./merge-node/merge-node.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./merge-node/merge-node.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./merge-node/merge-node.component.ts?raw') },
   ];
   customLoadingSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./custom-loading/custom-loading.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./custom-loading/custom-loading.component.ts') },
-    { title: 'SVG-TS', language: 'typescript', code: require('!!raw-loader!./custom-loading/custom-loading-svg.ts') },
+    { title: 'HTML', language: 'xml', code: require('./custom-loading/custom-loading.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./custom-loading/custom-loading.component.ts?raw') },
+    { title: 'SVG-TS', language: 'typescript', code: require('./custom-loading/custom-loading-svg.ts?raw') },
   ];
 
   checkableSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./checkable/checkable.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./checkable/checkable.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./checkable/checkable.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./checkable/checkable.component.ts?raw') },
   ];
   customTitleKeySource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./custom-title-key/custom-title-key.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./custom-title-key/custom-title-key.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./custom-title-key/custom-title-key.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./custom-title-key/custom-title-key.component.ts?raw') },
   ];
   searchFilterSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./search-filter/search-filter.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./search-filter/search-filter.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./search-filter/search-filter.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./search-filter/search-filter.component.ts?raw') },
   ];
 
   operateBtnSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./operate-btn/operate-btn.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./operate-btn/operate-btn.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./operate-btn/operate-btn.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./operate-btn/operate-btn.component.ts?raw') },
   ];
 
   customizeSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./customize/customize.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./customize/customize.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./customize/customize.component.scss') },
+    { title: 'HTML', language: 'xml', code: require('./customize/customize.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./customize/customize.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./customize/customize.component.scss?raw') },
   ];
 
   draggableSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./draggable/draggable.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./draggable/draggable.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./draggable/draggable.component.scss') },
+    { title: 'HTML', language: 'xml', code: require('./draggable/draggable.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./draggable/draggable.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./draggable/draggable.component.scss?raw') },
   ];
   checkControlSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./check-control/check-control.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./check-control/check-control.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./check-control/check-control.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./check-control/check-control.component.ts?raw') },
   ];
   virtualScrollSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./virtual-scroll/virtual-scroll.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./virtual-scroll/virtual-scroll.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./virtual-scroll/virtual-scroll.component.css') },
+    { title: 'HTML', language: 'xml', code: require('./virtual-scroll/virtual-scroll.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./virtual-scroll/virtual-scroll.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./virtual-scroll/virtual-scroll.component.css?raw') },
   ];
   withoutAnimationSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./without-animation/without-animation.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./without-animation/without-animation.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./without-animation/without-animation.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./without-animation/without-animation.component.ts?raw') },
   ];
 
   navItems = [];
