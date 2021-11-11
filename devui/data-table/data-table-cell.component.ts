@@ -39,7 +39,8 @@ export class DataTableCellComponent implements OnInit, OnChanges, OnDestroy {
   isCellEdit: boolean;
   forceUpdateSubscription: Subscription;
   documentClickSubscription: Subscription;
-  documentMousedownSubscription: Subscription;
+  tdMousedownSubscription: Subscription;
+  tdMouseupSubscription: Subscription;
   clickInTd: boolean;
   cellEditorClickSubscription: Subscription;
   cellActionSubscription: Subscription;
@@ -58,8 +59,12 @@ export class DataTableCellComponent implements OnInit, OnChanges, OnDestroy {
   ngOnInit(): void {
     this.forceUpdateSubscription = this.rowComponent.forceUpdateEvent.subscribe(_ => this.forceUpdate());
     if (this.column.editable) {
-      this.documentMousedownSubscription = fromEvent(document, 'mousedown').subscribe(event => {
-        this.clickInTd = !!this.cellRef.nativeElement.contains(event.target);
+      this.tdMousedownSubscription = fromEvent(this.cellRef.nativeElement, 'mousedown').subscribe(event => {
+        this.clickInTd = true;
+      });
+
+      this.tdMouseupSubscription = fromEvent(this.cellRef.nativeElement, 'mouseup').subscribe(event => {
+        this.clickInTd = false;
       });
     }
     this.ngZone.runOutsideAngular(() => {
@@ -185,7 +190,9 @@ export class DataTableCellComponent implements OnInit, OnChanges, OnDestroy {
     // tslint:disable-next-line:no-unused-expression
     this.cellActionSubscription && this.unSubscription(this.cellActionSubscription);
     // tslint:disable-next-line:no-unused-expression
-    this.documentMousedownSubscription && this.unSubscription(this.documentMousedownSubscription);
+    this.tdMousedownSubscription && this.unSubscription(this.tdMousedownSubscription);
+    // tslint:disable-next-line:no-unused-expression
+    this.tdMouseupSubscription && this.unSubscription(this.tdMouseupSubscription);
   }
 
   private unSubscription(sbscription: Subscription) {
@@ -267,6 +274,7 @@ export class DataTableCellComponent implements OnInit, OnChanges, OnDestroy {
                 this.finishCellEdit();
               });
             }
+            this.clickInTd = false;
           }
         );
         this.cellEditorClickSubscription = this.dt.cellEditorClickEvent.subscribe(

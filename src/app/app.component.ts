@@ -90,8 +90,6 @@ export class AppComponent implements OnInit, OnDestroy {
     const pathArray = url.split('/');
     pathArray[2] = this.currentLang;
     this.router.navigateByUrl(pathArray.join('/'));
-
-    this.innerMenuList.find(menu => menu.href === '/components/overview').href = `/components/${this.currentLang}/overview`;
   }
   ngOnDestroy(): void {
     if (this.clickSub) {

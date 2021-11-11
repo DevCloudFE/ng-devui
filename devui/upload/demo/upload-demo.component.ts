@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -9,30 +9,30 @@ import { Subscription } from 'rxjs';
 })
 export class UploadDemoComponent implements OnInit, OnDestroy {
   basicSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./basic/basic.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/basic.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./basic/basic.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./basic/basic.component.ts?raw') },
   ];
   multiSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./multi/multi.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./multi/multi.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./multi/multi.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./multi/multi.component.ts?raw') },
   ];
   customizeSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./customize/customize.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./customize/customize.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./customize/customize.component.scss') },
+    { title: 'HTML', language: 'xml', code: require('./customize/customize.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./customize/customize.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./customize/customize.component.scss?raw') },
   ];
   autoSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./auto/auto.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./auto/auto.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./auto/auto.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./auto/auto.component.ts?raw') },
   ];
   dynamicUploadOptionsSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./dynamic-upload-options/dynamic-upload-options.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./dynamic-upload-options/dynamic-upload-options.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./dynamic-upload-options/dynamic-upload-options.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./dynamic-upload-options/dynamic-upload-options.component.ts?raw') },
   ];
   customizeAreaUploadSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./customize-area-upload/customize-area-upload.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./customize-area-upload/customize-area-upload.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./customize-area-upload/customize-area-upload.component.scss') },
+    { title: 'HTML', language: 'xml', code: require('./customize-area-upload/customize-area-upload.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./customize-area-upload/customize-area-upload.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./customize-area-upload/customize-area-upload.component.scss?raw') },
   ];
 
   navItems = [];

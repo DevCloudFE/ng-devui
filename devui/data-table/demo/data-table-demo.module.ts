@@ -18,7 +18,6 @@ import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 import { DatatableDemoAsyncComponent } from './async/data-table-demo-async.component';
 import { BasicOldComponent } from './basic-old/basic-old.component';
 import { DatatableDemoBasicComponent } from './basic/data-table-demo-basic.component';
-import { BigDataTreeTableComponent } from './big-data-tree-table/big-data-tree-table.component';
 import { CellMergeComponent } from './cell-merge/cell-merge.component';
 import { CheckOptionsColumnComponent } from './check-options-column/check-options-column.component';
 import { CheckOptionsComponent } from './check-options/check-options.component';
@@ -97,7 +96,6 @@ import { VirtualScrollComponent } from './virtual-scroll/virtual-scroll.componen
     VirtualScrollComponent,
     MutilStylesComponent,
     FixHeightVirtualScrollComponent,
-    BigDataTreeTableComponent
   ],
   providers: [],
 

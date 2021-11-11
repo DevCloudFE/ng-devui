@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -12,18 +12,18 @@ import { Subscription } from 'rxjs';
 })
 export class MultiAutoCompleteDemoComponent implements OnInit, OnDestroy {
   MultiAutoCompleteDemoDefault: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./default/multi-auto-complete-demo-default.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./default/multi-auto-complete-demo-default.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./default/multi-auto-complete-demo-default.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./default/multi-auto-complete-demo-default.component.ts?raw') },
   ];
 
   MultiAutoCompleteDemoArray: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./array/multi-auto-complete-demo-array.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./array/multi-auto-complete-demo-array.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./array/multi-auto-complete-demo-array.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./array/multi-auto-complete-demo-array.component.ts?raw') },
   ];
 
   MultiAutoCompleteDemoDisabled: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./disabled/multi-auto-complete-demo-disabled.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./disabled/multi-auto-complete-demo-disabled.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./disabled/multi-auto-complete-demo-disabled.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./disabled/multi-auto-complete-demo-disabled.component.ts?raw') },
   ];
 
   navItems = [];

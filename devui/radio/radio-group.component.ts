@@ -9,10 +9,9 @@ import {
   OnChanges,
   Output,
   QueryList,
-  SimpleChanges,
+  SimpleChanges
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-
 import { Observable } from 'rxjs';
 import { RadioComponent } from './radio.component';
 
@@ -33,7 +32,13 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges, Aft
   constructor() {}
   @Input() name: string;
   @Input() values: any[];
-  @Input() cssStyle: 'row' | 'column';
+  /**
+   * @deprecated Use direction to replace.
+   */
+   @Input() set cssStyle(direction: any) {
+    this.direction = direction;
+  }
+  @Input() direction: 'row' | 'column';
   @Input() disabled: boolean;
   @Input() beforeChange: (value) => boolean | Promise<boolean> | Observable<boolean>;
   @Output() change = new EventEmitter<any>();

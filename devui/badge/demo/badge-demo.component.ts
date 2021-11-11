@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -9,33 +9,33 @@ import { Subscription } from 'rxjs';
 })
 export class BadgeDemoComponent implements OnInit, OnDestroy {
   basicSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./basic/basic.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/basic.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./basic/basic.component.scss') },
+    { title: 'HTML', language: 'xml', code: require('./basic/basic.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./basic/basic.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./basic/basic.component.scss?raw') },
   ];
   dotSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./dot/dot.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./dot/dot.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./dot/dot.component.scss') },
+    { title: 'HTML', language: 'xml', code: require('./dot/dot.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./dot/dot.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./dot/dot.component.scss?raw') },
   ];
   countSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./count/count.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./count/count.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./count/count.component.scss') },
+    { title: 'HTML', language: 'xml', code: require('./count/count.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./count/count.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./count/count.component.scss?raw') },
   ];
   statusSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./status/status.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./status/status.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./status/status.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./status/status.component.ts?raw') },
   ];
   positionSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./position/position.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./position/position.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./position/position.component.scss') },
+    { title: 'HTML', language: 'xml', code: require('./position/position.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./position/position.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./position/position.component.scss?raw') },
   ];
   customSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./custom/custom.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./custom/custom.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./custom/custom.component.scss') },
+    { title: 'HTML', language: 'xml', code: require('./custom/custom.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./custom/custom.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./custom/custom.component.scss?raw') },
   ];
 
   navItems = [];

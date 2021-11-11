@@ -1,0 +1,106 @@
+<div class="layout">
+  <div class="side">
+    <div
+      class="add-zone"
+      dDashboardLibraryPanel
+      (widgetDragStart)="log('Dashboard Library Panel: widget drag start')"
+      (widgetDragStop)="log('Dashboard Library Panel: widget drag stop')"
+    >
+      <div
+        class="new-widget"
+        dDashboardLibraryWidget
+        [targetDashboard]="dashboard"
+        [dragCopyStyle]="true"
+        [dragMode]="'copy'"
+        [widgetData]="{ msg: 'Aha!' }"
+      >
+        <span class="icon icon-add"></span>
+        <div class="info">拖动此卡片到右侧添加</div>
+      </div>
+    </div>
+    <div class="trash-zone" dDashboardLibraryTrash [trashData]="{ data: 'foo' }" [targetDashboard]="dashboard">
+      <div class="icon icon-delete"></div>
+      <div class="info">拖动仪表盘的卡片到这里删除</div>
+    </div>
+  </div>
+  <div class="main-content">
+    <d-dashboard
+      #dashboard="dDashboard"
+      [static]="static"
+      [float]="float"
+      [animate]="animate"
+      [widgetMoveable]="widgetMoveable"
+      [widgetResizable]="widgetResizable"
+      [showGridBlock]="showGridBlock"
+      [column]="column"
+      [cellHeight]="cellHeight"
+      [margin]="margin"
+      [maxRow]="maxRow"
+      [minRow]="minRow"
+      (widgetAdded)="log('add', $event); addWidget($event, 'drag')"
+      (widgetChanged)="log('change', $event)"
+      (widgetRemoved)="log('remove', $event); deleteWidget($event)"
+    >
+      <d-dashboard-widget
+        *ngFor="let widget of widgets; let index = index"
+        [(x)]="widget.x"
+        [(y)]="widget.y"
+        [(width)]="widget.width"
+        [(height)]="widget.height"
+      >
+        <div style="padding: 12px">来源：{{ widget.from === 'data' ? '数据' : '拖拽' }}</div>
+      </d-dashboard-widget>
+    </d-dashboard>
+  </div>
+</div>
+<hr />
+<div class="layout">
+  <div class="setting">
+    <div class="title">布局</div>
+    <form dForm [layout]="layoutDirection" [labelSize]="'sm'">
+      <d-form-item>
+        <d-form-label>列数</d-form-label>
+        <d-form-control [extraInfo]="'数字，取值范围 1 - 12， 超过12列请参考api配置'">
+          <input dTextInput name="column" [(ngModel)]="column" [ngModelOptions]="{ updateOn: 'blur' }" />
+        </d-form-control>
+      </d-form-item>
+      <d-form-item>
+        <d-form-label>行高</d-form-label>
+        <d-form-control [extraInfo]="'数字或字符串， 数字单位为px'">
+          <input dTextInput name="cellHeight" [(ngModel)]="cellHeight" [ngModelOptions]="{ updateOn: 'blur' }" />
+        </d-form-control>
+      </d-form-item>
+      <d-form-item>
+        <d-form-label>边距</d-form-label>
+        <d-form-control [extraInfo]="'数字或字符串， 数字单位为px'">
+          <input dTextInput name="margin" [(ngModel)]="margin" [ngModelOptions]="{ updateOn: 'blur' }" />
+        </d-form-control>
+      </d-form-item>
+      <d-form-item>
+        <d-form-label>最小行高</d-form-label>
+        <d-form-control [extraInfo]="'数字，0 表示不限制'">
+          <input dTextInput name="minRow" [(ngModel)]="minRow" [ngModelOptions]="{ updateOn: 'blur' }" />
+        </d-form-control>
+      </d-form-item>
+      <d-form-item>
+        <d-form-label>最大行高</d-form-label>
+        <d-form-control [extraInfo]="'数字，0 表示不限制'">
+          <input dTextInput name="maxRow" [(ngModel)]="maxRow" [ngModelOptions]="{ updateOn: 'blur' }" />
+        </d-form-control>
+      </d-form-item>
+    </form>
+  </div>
+  <div class="config">
+    <div class="title">配置</div>
+    <div><d-toggle [(ngModel)]="static"></d-toggle>静态</div>
+    <div><d-toggle [(ngModel)]="float"></d-toggle>允许上空</div>
+    <div><d-toggle [(ngModel)]="animate"></d-toggle>动画</div>
+    <div><d-toggle [(ngModel)]="widgetMoveable"></d-toggle>禁止移动</div>
+    <div><d-toggle [(ngModel)]="widgetResizable"></d-toggle>禁止调整大小</div>
+    <div><d-toggle [(ngModel)]="showGridBlock"></d-toggle>显示网格</div>
+  </div>
+  <div class="operation">
+    <div class="title">操作</div>
+    <d-button [bsStyle]="'common'" (btnClick)="dashboard.compact()">自动连续紧凑排列</d-button>
+  </div>
+</div>

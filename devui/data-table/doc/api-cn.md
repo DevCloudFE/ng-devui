@@ -301,7 +301,8 @@ export interface FilterConfig {
   id: number | string;
   name: string;
   value: any;
-  checked?: boolean;
+  checked?: boolean; // 多选时控制选中
+  selected?: boolean; // 单选时控制选中
 }
 ```
 

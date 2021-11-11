@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { padStart } from 'lodash-es';
 import { DatepickerProCalendarComponent } from 'ng-devui/datepicker-pro';
+import { padStart } from 'lodash-es';
 
 @Component({
   selector: 'd-demo-datepicker-pro-tab-type',

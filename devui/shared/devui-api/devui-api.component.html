@@ -1,6 +1,6 @@
 <section class="markdown api-container" #targetContainer>
   <ng-container *ngIf="api">
-    <div [innerHTML]="api | safe: 'html'"></div>
+    <div dCodeCopy (copied)="onCopied($event)" dReadTip [readTipOptions]="options" [innerHTML]="api | safe: 'html'"></div>
   </ng-container>
 </section>
 

@@ -1,4 +1,10 @@
-<d-data-table [fixHeader]="true" [dataSource]="basicDataSource" [colDraggable]="true" (columnDragEnd)="onDragEnd($event)">
+<d-data-table
+  [fixHeader]="true"
+  [dataSource]="basicDataSource"
+  [colDraggable]="true"
+  [colDropFreezeTo]="1"
+  (columnDragEnd)="onDragEnd($event)"
+>
   <d-column field="$index" header="#" [width]="'50px'"></d-column>
   <d-column
     *ngFor="let colOption of dataTableOptions.columns"

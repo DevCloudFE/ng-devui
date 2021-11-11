@@ -1,4 +1,10 @@
-import { CdkOverlayOrigin } from '@angular/cdk/overlay';
+import {
+  CdkConnectedOverlay,
+  CdkOverlayOrigin,
+  ConnectedOverlayPositionChange,
+  ConnectedPosition,
+  VerticalConnectionPos
+} from '@angular/cdk/overlay';
 import { Component, ElementRef, Input, TemplateRef, ViewChild } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 import { fadeInOut } from 'ng-devui/utils';
@@ -37,11 +43,15 @@ export class AutoCompletePopupComponent implements ControlValueAccessor {
   @Input() showAnimation = true;
   @ViewChild('selectMenuElement') selectMenuElement: ElementRef;
   @ViewChild('dropdownUl') dropdownUl: ElementRef;
+  @ViewChild(CdkConnectedOverlay) connectedOverlay: CdkConnectedOverlay;
   activeIndex = 0;
   hoverIndex = 0;
-  showLoading = false;
-  private value: any;
   labelMinHeight = 20; // position.top小于20px时候，表示光标在第一行
+  showLoading = false;
+  overlayPositions: Array<ConnectedPosition>;
+  popPosition: VerticalConnectionPos = 'bottom';
+  popDirection: 'top' | 'bottom';
+  private value: any;
   private onChange = (_: any) => null;
   private onTouched = () => null;
 
@@ -159,5 +169,9 @@ export class AutoCompletePopupComponent implements ControlValueAccessor {
 
   loadFinish($event) {
     this.showLoading = false;
+  }
+
+  onPositionChange(position: ConnectedOverlayPositionChange) {
+    this.popPosition = position.connectionPair.originY;
   }
 }

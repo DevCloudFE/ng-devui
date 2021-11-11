@@ -1,26 +1,26 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { Subscription } from 'rxjs';
 @Component({
   templateUrl: './text-input-demo.component.html',
 })
 export class TextInputDemoComponent implements OnInit, OnDestroy {
   basicSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./basic/basic.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/basic.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./basic/basic.component.scss') },
+    { title: 'HTML', language: 'xml', code: require('./basic/basic.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./basic/basic.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./basic/basic.component.scss?raw') },
   ];
 
   passwordVisibleSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./password-visible/password-visible.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./password-visible/password-visible.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./password-visible/password-visible.component.scss') },
+    { title: 'HTML', language: 'xml', code: require('./password-visible/password-visible.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./password-visible/password-visible.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./password-visible/password-visible.component.scss?raw') },
   ];
 
   sizeSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./size/text-input-size.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./size/text-input-size.component.ts') }
+    { title: 'HTML', language: 'xml', code: require('./size/text-input-size.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./size/text-input-size.component.ts?raw') }
   ];
   navItems = [];
   subs: Subscription = new Subscription();

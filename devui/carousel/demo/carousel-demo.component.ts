@@ -8,23 +8,23 @@ import { Subscription } from 'rxjs';
 })
 export class CarouselDemoComponent implements OnInit, OnDestroy {
   CarouselBasicComponent = [
-    { title: 'HTML', language: 'html', code: require('!!raw-loader!./basic/carousel-demo-basic.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/carousel-demo-basic.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./demo-common.scss') },
+    { title: 'HTML', language: 'html', code: require('./basic/carousel-demo-basic.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./basic/carousel-demo-basic.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./demo-common.scss?raw') },
   ];
   CarouselTriggerComponent = [
-    { title: 'HTML', language: 'html', code: require('!!raw-loader!./trigger/carousel-demo-trigger.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./trigger/carousel-demo-trigger.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./demo-common.scss') },
+    { title: 'HTML', language: 'html', code: require('./trigger/carousel-demo-trigger.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./trigger/carousel-demo-trigger.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./demo-common.scss?raw') },
   ];
   CarouselAutoplayComponent = [
-    { title: 'HTML', language: 'html', code: require('!!raw-loader!./autoplay/carousel-demo-autoplay.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./autoplay/carousel-demo-autoplay.component.ts') },
+    { title: 'HTML', language: 'html', code: require('./autoplay/carousel-demo-autoplay.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./autoplay/carousel-demo-autoplay.component.ts?raw') },
   ];
   CarouselCustomComponent = [
-    { title: 'HTML', language: 'html', code: require('!!raw-loader!./custom/carousel-demo-custom.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./custom/carousel-demo-custom.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./demo-common.scss') },
+    { title: 'HTML', language: 'html', code: require('./custom/carousel-demo-custom.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./custom/carousel-demo-custom.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./demo-common.scss?raw') },
   ];
 
   navItems = [];

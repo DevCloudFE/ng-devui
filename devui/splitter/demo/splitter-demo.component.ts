@@ -8,33 +8,33 @@ import { Subscription } from 'rxjs';
 })
 export class SplitterDemoComponent implements OnInit, OnDestroy {
   SplitterBasicComponent = [
-    { title: 'HTML', language: 'html', code: require('!!raw-loader!./basic/splitter-demo-basic.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/splitter-demo-basic.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./splitter-demo.component.scss') },
+    { title: 'HTML', language: 'html', code: require('./basic/splitter-demo-basic.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./basic/splitter-demo-basic.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./splitter-demo.component.scss?raw') },
   ];
 
   SplitterVerticalComponent = [
-    { title: 'HTML', language: 'html', code: require('!!raw-loader!./vertical/splitter-demo-vertical.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./vertical/splitter-demo-vertical.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./splitter-demo.component.scss') },
+    { title: 'HTML', language: 'html', code: require('./vertical/splitter-demo-vertical.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./vertical/splitter-demo-vertical.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./splitter-demo.component.scss?raw') },
   ];
 
   SplitterMultiComponent = [
-    { title: 'HTML', language: 'html', code: require('!!raw-loader!./multi/splitter-demo-multi.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./multi/splitter-demo-multi.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./splitter-demo.component.scss') },
+    { title: 'HTML', language: 'html', code: require('./multi/splitter-demo-multi.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./multi/splitter-demo-multi.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./splitter-demo.component.scss?raw') },
   ];
 
   SplitterDirectionComponent = [
-    { title: 'HTML', language: 'html', code: require('!!raw-loader!./direction/splitter-demo-direction.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./direction/splitter-demo-direction.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./splitter-demo.component.scss') },
+    { title: 'HTML', language: 'html', code: require('./direction/splitter-demo-direction.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./direction/splitter-demo-direction.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./splitter-demo.component.scss?raw') },
   ];
 
   SplitterFoldedMenuComponent = [
-    { title: 'HTML', language: 'html', code: require('!!raw-loader!./shrink/shrink.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./shrink/shrink.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./shrink/shrink.component.scss') },
+    { title: 'HTML', language: 'html', code: require('./shrink/shrink.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./shrink/shrink.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./shrink/shrink.component.scss?raw') },
   ];
 
   navItems = [];

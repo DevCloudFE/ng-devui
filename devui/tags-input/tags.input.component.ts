@@ -14,12 +14,12 @@ import {
   ViewChild
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { isEmpty } from 'lodash-es';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { ToggleMenuContainerComponent, ToggleMenuListComponent, ToggleMenuSearchComponent } from 'ng-devui/toggle-menu';
 import { DevConfigService, WithConfig } from 'ng-devui/utils/globalConfig';
+import { isEmpty } from 'lodash-es';
 import { BehaviorSubject, fromEvent, Observable, of, Subscription } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { debounceTime, map, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'd-tags-input',
@@ -77,6 +77,10 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
    */
   @Input() appendToBody = false;
   /**
+   * 【可选】是否虚拟滚动
+   */
+  @Input() virtualScroll = false;
+  /**
    * 【可选】下拉选项
    */
   @Input() suggestionList: any = [];
@@ -126,6 +130,8 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
   blurEventSubscription: Subscription;
   valueParser: (item: any) => any;
   searchFn: (term: string) => Observable<Array<{ id: string | number; option: any }>>;
+
+  private DEBONCE_TIME = 300;
   private sourceSubscription: BehaviorSubject<any>;
   private KEYS: any = {
     backspace: 8,
@@ -197,11 +203,17 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
   ngAfterViewInit() {
     if (this.searchBox) {
       const inputDom = this.searchBox.el.nativeElement.querySelector('input');
-      this.blurEventSubscription = fromEvent(inputDom, 'blur').subscribe((term) => {
-        if (!isEmpty(this.newTag)) {
-          this.addTag();
-        }
-      });
+      // input失焦不冒泡，直接监听事件处理会早于list中点击事件传递到该组件，因此增加debounceTime待下拉列表关闭后判断是否插入标签
+      this.blurEventSubscription = fromEvent(inputDom, 'blur')
+        .pipe(debounceTime(this.DEBONCE_TIME))
+        .subscribe(() => {
+          if (this.isOpen) {
+            return;
+          }
+          if (!isEmpty(this.newTag)) {
+            this.addTag();
+          }
+        });
     }
   }
 
@@ -334,7 +346,7 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
           : item[this.displayProperty].toLowerCase() === value[this.displayProperty].toLowerCase()
       );
       this._suggestionList.splice(suggestionListIndex, 1);
-      this.newTag = '';
+      this.delayResetNewTag();
       this.sourceSubscription.next(this.newTag);
     });
   }
@@ -384,23 +396,21 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
   }
 
   addTag() {
-    this.canAdd().then((result) => {
-      if (result && this.maxTags > this.selectedItems.length) {
-        if (this.tagIsValid()) {
-          const obj = {};
-          obj[this.displayProperty] = this.newTag;
-          this.checkMaxTags(obj);
-          this.onChange(this.selectedItems.map((tagItem) => tagItem.option));
-          this.valueChange.emit(this.newTag);
+    this.canAdd()
+      .then((result) => {
+        if (result && this.maxTags > this.selectedItems.length) {
+          if (this.tagIsValid()) {
+            const obj = {};
+            obj[this.displayProperty] = this.newTag;
+            this.checkMaxTags(obj);
+            this.onChange(this.selectedItems.map((tagItem) => tagItem.option));
+            this.valueChange.emit(this.newTag);
+          }
+        } else {
+          this.newTagValid = false;
         }
-        setTimeout(() => {
-          // 放在timeout里是因为如果用空格添加tag，会导致添加之后输入框里有个空格。
-          this.newTag = '';
-        }, 50);
-      } else {
-        this.newTagValid = false;
-      }
-    });
+      })
+      .finally(() => this.delayResetNewTag());
     this.sourceSubscription.next('');
   }
 
@@ -442,9 +452,15 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
 
   toggleChangeFn(event) {
     if (!event) {
-      this.newTag = '';
       this.onTouch();
     }
     this.isOpen = event;
+  }
+
+  delayResetNewTag() {
+    setTimeout(() => {
+      // 放在timeout里是因为如果用空格添加tag，会导致添加之后输入框里有个空格。
+      this.newTag = '';
+    }, 50);
   }
 }

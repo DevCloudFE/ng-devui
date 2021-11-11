@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -9,8 +9,8 @@ import { Subscription } from 'rxjs';
 })
 export class DesignLinkDemoComponent implements OnInit, OnDestroy {
   LinkSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./link/link.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./link/link.component.ts') }
+    { title: 'HTML', language: 'xml', code: require('./link/link.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./link/link.component.ts?raw') }
   ];
 
   navItems = [];

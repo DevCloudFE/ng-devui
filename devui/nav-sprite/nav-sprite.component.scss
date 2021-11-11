@@ -86,20 +86,28 @@
     &.active {
       a {
         color: $devui-link;
+
+        &:not(.open) {
+          font-weight: 600;
+        }
       }
 
       color: $devui-link;
+
+      &:not(.open) {
+        font-weight: 600;
+      }
     }
 
     &:not(.disabled):hover {
-      color: $devui-list-item-hover-text;
+      color: $devui-link;
     }
 
     .nav-item {
       a,
       span {
         &:hover {
-          color: $devui-list-item-hover-text;
+          color: $devui-link;
         }
       }
     }

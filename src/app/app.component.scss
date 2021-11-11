@@ -366,26 +366,6 @@ body {
   color: $devui-text;
 }
 
-.readme {
-  .hljs {
-    background: transparent;
-  }
-
-  pre {
-    background-color: $devui-base-bg;
-    border: none;
-
-    code {
-      border: 1px solid $devui-dividing-line;
-      overflow-x: auto;
-    }
-  }
-
-  p {
-    margin: 1em 0;
-  }
-}
-
 @media (max-width: 1024px) {
   .app-container {
     .header-menu {

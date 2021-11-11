@@ -86,6 +86,7 @@ export class MutiDragRowComponent implements OnInit {
       if (index > -1 && index < e.dropIndex) {
         fromIndexLessThanDropIndexCount++;
       }
+      dragData.isSelected = false;
       return dragData;
     }).forEach((dragData) => {
       this.removeItem(dragData, this.basicDataSource);

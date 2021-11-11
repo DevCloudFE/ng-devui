@@ -111,7 +111,6 @@
 
 .devui-code-box pre {
   width: auto;
-  border: none;
   margin: 10px 0 0;
 }
 
@@ -189,15 +188,20 @@
         color: $devui-text;
         white-space: nowrap;
         text-overflow: ellipsis;
-        -webkit-transition: all .3s ease;
-        transition: all .3s ease;
-
+        -webkit-transition: all 0.3s ease;
+        transition: all 0.3s ease;
       }
       a.current {
         color: $devui-link;
       }
 
       &.active {
+        color: $devui-link;
+        &:not(.open) {
+          font-weight: 600;
+        }
+      }
+      &:not(.disabled):hover {
         color: $devui-link;
       }
     }
@@ -227,4 +231,103 @@
     margin-left: 0;
     transition: all 0.2s ease-out;
   }
+}
+
+// 设置引导页MarkDown文档标题
+.readme {
+  h1 {
+    @include font-title($devui-font-size-data-overview);
+    padding: 40px 0 20px;
+  }
+  h2 {
+    @include font-title($devui-font-size-page-title);
+    padding: 40px 0 15px;
+  }
+  h3 {
+    @include font-title($devui-font-size-card-title);
+    padding: 30px 0 10px;
+  }
+  h1,
+  h2,
+  h3 {
+    // font-weight: normal;
+    margin: 0;
+  }
+  pre code {
+    padding: 0.5em;
+  }
+}
+// 引导页页面样式设置
+.readme {
+  .hljs {
+    background: transparent;
+  }
+  pre {
+    background-color: $devui-base-bg;
+    border: none;
+    code {
+      border: 1px solid $devui-dividing-line;
+      overflow-x: auto;
+    }
+  }
+  p {
+    margin: 1em 0;
+  }
+}
+// API页MarkDown文档标题样式
+.markdown h1 {
+  font-size: $devui-font-size-price;
+}
+.markdown h2 {
+  font-size: $devui-font-size-page-title;
+}
+.markdown h3 {
+  font-size: $devui-font-size-card-title;
+}
+.markdown h2,
+.markdown h3,
+.markdown h4,
+.markdown h5,
+.markdown h6 {
+  color: $devui-text;
+  margin: 1.6em 0 0.6em;
+  font-weight: bold;
+  clear: both;
+}
+// API页MarkDown文档正文样式
+.markdown {
+  color: $devui-text;
+  font-size: $devui-font-size-lg;
+  line-height: 1.8;
+  a {
+    color: $devui-link;
+    &:hover {
+      color: $devui-link-active;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+}
+// 使用Card组件对demo进行封装
+.devui-demo-card-wrapper {
+  .devui-demo-example {
+    margin-bottom: 0px;
+  }
+  cursor: pointer;
+  transition: box-shadow $devui-animation-duration-slow $devui-animation-ease-in-out-smooth,
+    transform $devui-animation-duration-slow $devui-animation-ease-in-out-smooth;
+  &:hover {
+    box-shadow: $devui-shadow-length-hover $devui-light-shadow;
+    // transform: translateY(-5px);
+  }
+  margin-bottom: 40px;
+}
+
+// MarkDown文档代码复制按钮样式
+.d-md-pre-copy {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  text-align: right;
+  cursor: pointer;
 }

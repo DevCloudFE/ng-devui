@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { CodeCopyModule } from './codecopy/codecopy.module';
 import { HeaderModule } from './header';
 import { SidebarModule } from './sidebar';
 
@@ -10,7 +11,8 @@ import { SidebarModule } from './sidebar';
   ],
   exports: [
     HeaderModule,
-    SidebarModule
+    SidebarModule,
+    CodeCopyModule
   ]
 })
 export class DevuiCommonsModule { }

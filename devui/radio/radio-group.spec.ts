@@ -15,7 +15,7 @@ import { RadioModule } from './radio.module';
       [values]="values"
       [(ngModel)]="choose"
       (change)="mockChange($event)"
-      [cssStyle]="direction"
+      [direction]="direction"
       [disabled]="isDisabled"
       [beforeChange]="beforeChange"
     >
@@ -35,7 +35,7 @@ class TestRadioGroupComponent {
 
 @Component({
   template: `
-  <d-radio-group [cssStyle]="'row'" [(ngModel)]="choose2" (change)="mockChange($event)">
+  <d-radio-group [direction]="'row'" [(ngModel)]="choose2" (change)="mockChange($event)">
     <d-radio [name]="'customized-city'" *ngFor="let value of values2" [value]="value"> The Radio value is: {{ value }} </d-radio>
   </d-radio-group>
   `,

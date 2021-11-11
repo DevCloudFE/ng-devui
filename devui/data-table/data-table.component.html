@@ -108,7 +108,7 @@
     [maxBufferPx]="virtualMaxBufferPx"
     class="devui-scrollbar viewport-wrapper"
     [ngClass]="{ 'scroll-view': scrollable, 'virtual-scroll-wrap': !fixHeader }"
-    [style.height]="tableHeight ? tableHeight : null"
+    [style.height]="virtualBodyHeight"
     [style.max-height]="maxHeight ? maxHeight : null"
     [style.max-width]="maxWidth ? maxWidth : null"
     [style.width]="!maxWidth ? tableWidth : null"

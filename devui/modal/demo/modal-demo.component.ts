@@ -9,69 +9,69 @@ import { Subscription } from 'rxjs';
 })
 export class ModalDemoComponent implements OnInit, OnDestroy {
   basicSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./basic/basic.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/basic.component.ts') },
-    { title: 'ModalTestComponent HTML', language: 'xml', code: require('!!raw-loader!./basic/modal-test.component.html') },
-    { title: 'ModalTestComponent TS', language: 'typescript', code: require('!!raw-loader!./basic/modal-test.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./basic/basic.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./basic/basic.component.ts?raw') },
+    { title: 'ModalTestComponent HTML', language: 'xml', code: require('./basic/modal-test.component.html?raw') },
+    { title: 'ModalTestComponent TS', language: 'typescript', code: require('./basic/modal-test.component.ts?raw') },
   ];
   basicUpdateSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./basic-update/basic-update.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic-update/basic-update.component.ts') },
-    { title: 'ModalTestComponent HTML', language: 'xml', code: require('!!raw-loader!./basic-update/modal-test.component.html') },
-    { title: 'ModalTestComponent TS', language: 'typescript', code: require('!!raw-loader!./basic-update/modal-test.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./basic-update/basic-update.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./basic-update/basic-update.component.ts?raw') },
+    { title: 'ModalTestComponent HTML', language: 'xml', code: require('./basic-update/modal-test.component.html?raw') },
+    { title: 'ModalTestComponent TS', language: 'typescript', code: require('./basic-update/modal-test.component.ts?raw') },
   ];
   customizeSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./customize/customize.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./customize/customize.component.ts') },
-    { title: 'Custom Component HTML', language: 'xml', code: require('!!raw-loader!./customize/modal-alert.component.html') },
-    { title: 'Custom Component TS', language: 'typescript', code: require('!!raw-loader!./customize/modal-alert.component.ts') },
-    { title: 'Custom Component CSS', language: 'css', code: require('!!raw-loader!./customize/modal-alert.component.scss') },
+    { title: 'HTML', language: 'xml', code: require('./customize/customize.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./customize/customize.component.ts?raw') },
+    { title: 'Custom Component HTML', language: 'xml', code: require('./customize/modal-alert.component.html?raw') },
+    { title: 'Custom Component TS', language: 'typescript', code: require('./customize/modal-alert.component.ts?raw') },
+    { title: 'Custom Component CSS', language: 'css', code: require('./customize/modal-alert.component.scss?raw') },
   ];
   tipsSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./tips/tips.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./tips/tips.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./tips/tips.component.css') },
+    { title: 'HTML', language: 'xml', code: require('./tips/tips.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./tips/tips.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./tips/tips.component.css?raw') },
   ];
   hideSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./hide/hide.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./hide/hide.component.ts') },
-    { title: 'ModalFormComponent HTML', language: 'xml', code: require('!!raw-loader!./hide/modal-form.component.html') },
-    { title: 'ModalFormComponent CSS', language: 'css', code: require('!!raw-loader!./hide/modal-form.component.scss') },
-    { title: 'ModalFormComponent TS', language: 'typescript', code: require('!!raw-loader!./hide/modal-form.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./hide/hide.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./hide/hide.component.ts?raw') },
+    { title: 'ModalFormComponent HTML', language: 'xml', code: require('./hide/modal-form.component.html?raw') },
+    { title: 'ModalFormComponent CSS', language: 'css', code: require('./hide/modal-form.component.scss?raw') },
+    { title: 'ModalFormComponent TS', language: 'typescript', code: require('./hide/modal-form.component.ts?raw') },
   ];
   warningSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./warning/warning.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./warning/warning.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./warning/warning.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./warning/warning.component.ts?raw') },
   ];
   autofocusSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./autofocus/autofocus.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./autofocus/autofocus.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./autofocus/autofocus.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./autofocus/autofocus.component.ts?raw') },
   ];
   templateSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./template/template.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./template/template.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./template/template.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./template/template.component.ts?raw') },
     { title: 'Dialog Content HTML', language: 'xml',
-    code: require('!!raw-loader!./template/dialog-content/dialog-content.component.html') },
+    code: require('./template/dialog-content/dialog-content.component.html?raw') },
     { title: 'Dialog Content TS', language: 'typescript',
-    code: require('!!raw-loader!./template/dialog-content/dialog-content.component.ts') },
+    code: require('./template/dialog-content/dialog-content.component.ts?raw') },
     { title: 'Modal Content HTML', language: 'xml',
-    code: require('!!raw-loader!./template/modal-content/modal-content.component.html') },
+    code: require('./template/modal-content/modal-content.component.html?raw') },
     { title: 'Modal Content TS', language: 'typescript',
-    code: require('!!raw-loader!./template/modal-content/modal-content.component.ts') },
+    code: require('./template/modal-content/modal-content.component.ts?raw') },
     { title: 'Modal Content CSS', language: 'css',
-    code: require('!!raw-loader!./template/modal-content/modal-content.component.scss') }
+    code: require('./template/modal-content/modal-content.component.scss?raw') }
   ];
   fixedWrapperSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./fixed/fixed-wrapper.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./fixed/fixed-wrapper.component.ts') },
-    { title: 'ModalTestComponent HTML', language: 'xml', code: require('!!raw-loader!./fixed/modal-test.component.html') },
-    { title: 'ModalTestComponent TS', language: 'typescript', code: require('!!raw-loader!./fixed/modal-test.component.ts') }
+    { title: 'HTML', language: 'xml', code: require('./fixed/fixed-wrapper.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./fixed/fixed-wrapper.component.ts?raw') },
+    { title: 'ModalTestComponent HTML', language: 'xml', code: require('./fixed/modal-test.component.html?raw') },
+    { title: 'ModalTestComponent TS', language: 'typescript', code: require('./fixed/modal-test.component.ts?raw') }
   ];
   casesSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./cases/cases.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./cases/cases.component.ts') },
-    { title: 'ModalCasesComponent HTML', language: 'xml', code: require('!!raw-loader!./cases/modal-cases.component.html') },
-    { title: 'ModalCasesComponent TS', language: 'typescript', code: require('!!raw-loader!./cases/modal-cases.component.ts') }
+    { title: 'HTML', language: 'xml', code: require('./cases/cases.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./cases/cases.component.ts?raw') },
+    { title: 'ModalCasesComponent HTML', language: 'xml', code: require('./cases/modal-cases.component.html?raw') },
+    { title: 'ModalCasesComponent TS', language: 'typescript', code: require('./cases/modal-cases.component.ts?raw') }
   ];
 
   navItems = [];
