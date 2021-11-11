@@ -1,1 +1,1 @@
-export type FullscreenMode = 'immersive' | 'normal' | '';
+export type FullscreenMode = 'immersive' | 'normal';

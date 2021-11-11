@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DevuiSourceData } from 'ng-devui/shared/devui-codebox/devui-source-data';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { DevuiSourceData } from 'ng-devui/shared/devui-codebox/devui-source-data';
 import { Subscription } from 'rxjs';
 @Component({
   selector: 'd-accordion-demo',
@@ -8,37 +8,37 @@ import { Subscription } from 'rxjs';
 })
 export class AccordionDemoComponent implements OnInit, OnDestroy {
   AccordionDemoBasic: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./basic/basic.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/basic.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./basic/basic.component.css') },
+    { title: 'HTML', language: 'xml', code: require('./basic/basic.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./basic/basic.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./basic/basic.component.css?raw') },
   ];
 
   AccordionDemolink: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./link/link.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./link/link.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./link/link.component.css') },
+    { title: 'HTML', language: 'xml', code: require('./link/link.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./link/link.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./link/link.component.css?raw') },
   ];
 
   AccordionDemoTemplate: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./template/template.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./template/template.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./template/template.component.scss') },
+    { title: 'HTML', language: 'xml', code: require('./template/template.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./template/template.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./template/template.component.scss?raw') },
   ];
 
   AccordionDemoInnerListTemplate: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./inner-list-template/inner-list-template.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./inner-list-template/inner-list-template.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./inner-list-template/inner-list-template.component.css') },
+    { title: 'HTML', language: 'xml', code: require('./inner-list-template/inner-list-template.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./inner-list-template/inner-list-template.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./inner-list-template/inner-list-template.component.css?raw') },
   ];
   AccordionDemoMultiLevel: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./multi-level/multi-level.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./multi-level/multi-level.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./multi-level/multi-level.component.css') },
+    { title: 'HTML', language: 'xml', code: require('./multi-level/multi-level.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./multi-level/multi-level.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./multi-level/multi-level.component.css?raw') },
   ];
   AccordionDemoChangeKey: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./change-key/change-key.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./change-key/change-key.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./change-key/change-key.component.css') },
+    { title: 'HTML', language: 'xml', code: require('./change-key/change-key.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./change-key/change-key.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./change-key/change-key.component.css?raw') },
   ];
 
   navItems = [];

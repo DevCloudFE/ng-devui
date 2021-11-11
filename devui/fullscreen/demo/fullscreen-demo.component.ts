@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DevuiSourceData } from 'ng-devui/shared/devui-codebox/devui-source-data';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { DevuiSourceData } from 'ng-devui/shared/devui-codebox/devui-source-data';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -8,12 +8,12 @@ import { Subscription } from 'rxjs';
 })
 export class FullscreenDemoComponent implements OnInit, OnDestroy {
   FullscreenDemoNormal: DevuiSourceData[] = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./normal/normal.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./normal/normal.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./normal/normal.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./normal/normal.component.ts?raw') },
   ];
   FullscreenDemoImmersive: DevuiSourceData[] = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./immersive/immersive.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./immersive/immersive.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./immersive/immersive.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./immersive/immersive.component.ts?raw') },
   ];
 
   navItems = [];

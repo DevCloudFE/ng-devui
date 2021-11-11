@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -12,23 +12,23 @@ export class MentionDemoComponent implements OnInit, OnDestroy {
   navItems = [];
 
   basicSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./basic/basic.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/basic.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./basic/basic.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./basic/basic.component.ts?raw') },
   ];
 
   asyncSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./async/async.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./async/async.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./async/async.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./async/async.component.ts?raw') },
   ];
 
   customSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./custom/custom.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./custom/custom.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./custom/custom.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./custom/custom.component.ts?raw') },
   ];
 
   prefixSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./prefix/prefix.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./prefix/prefix.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./prefix/prefix.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./prefix/prefix.component.ts?raw') },
   ];
 
   subs: Subscription = new Subscription();

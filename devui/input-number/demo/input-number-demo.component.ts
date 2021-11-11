@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { Subscription } from 'rxjs';
 @Component({
   selector: 'd-demo-input-number',
@@ -8,51 +8,51 @@ import { Subscription } from 'rxjs';
 })
 export class InputNumberDemoComponent implements OnInit, OnDestroy {
   InputNumberBasic: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./basic/input-number-basic.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/input-number-basic.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./basic/input-number-basic.component.css') },
+    { title: 'HTML', language: 'xml', code: require('./basic/input-number-basic.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./basic/input-number-basic.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./basic/input-number-basic.component.css?raw') },
   ];
 
   InputNumberDisabled: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./disabled/input-number-disabled.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./disabled/input-number-disabled.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./disabled/input-number-disabled.component.css') },
+    { title: 'HTML', language: 'xml', code: require('./disabled/input-number-disabled.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./disabled/input-number-disabled.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./disabled/input-number-disabled.component.css?raw') },
   ];
 
   InputNumberEmpty: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./empty/input-number-empty.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./empty/input-number-empty.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./empty/input-number-empty.component.css') },
+    { title: 'HTML', language: 'xml', code: require('./empty/input-number-empty.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./empty/input-number-empty.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./empty/input-number-empty.component.css?raw') },
   ];
 
   InputNumberPlaceholderAndMaxLengthComponent: Array<DevuiSourceData> = [
     {
       title: 'HTML',
       language: 'xml',
-      code: require('!!raw-loader!./placeholderAndMaxLength/input-number-placeholder-maxLength.component.html'),
+      code: require('./placeholderAndMaxLength/input-number-placeholder-maxLength.component.html?raw'),
     },
     {
       title: 'TS',
       language: 'typescript',
-      code: require('!!raw-loader!./placeholderAndMaxLength/input-number-placeholder-maxLength.component.ts'),
+      code: require('./placeholderAndMaxLength/input-number-placeholder-maxLength.component.ts?raw'),
     },
     {
       title: 'SCSS',
       language: 'css',
-      code: require('!!raw-loader!./placeholderAndMaxLength/input-number-placeholder-maxLength.component.css'),
+      code: require('./placeholderAndMaxLength/input-number-placeholder-maxLength.component.css?raw'),
     },
   ];
 
   InputNumberReg: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./reg/input-number-reg.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./reg/input-number-reg.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./reg/input-number-reg.component.css') },
+    { title: 'HTML', language: 'xml', code: require('./reg/input-number-reg.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./reg/input-number-reg.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./reg/input-number-reg.component.css?raw') },
   ];
 
   DecimalLimit: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./decimalLimit/decimal-limit.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./decimalLimit/decimal-limit.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./decimalLimit/decimal-limit.component.css') },
+    { title: 'HTML', language: 'xml', code: require('./decimalLimit/decimal-limit.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./decimalLimit/decimal-limit.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./decimalLimit/decimal-limit.component.css?raw') },
   ];
 
   navItems = [];

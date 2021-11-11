@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { Subscription } from 'rxjs';
 @Component({
   selector: 'd-demo-tabs',
@@ -8,53 +8,53 @@ import { Subscription } from 'rxjs';
 })
 export class TabsDemoComponent implements OnInit, OnDestroy {
   basicSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./basic/basic.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/basic.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./basic/basic.component.css') },
+    { title: 'HTML', language: 'xml', code: require('./basic/basic.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./basic/basic.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./basic/basic.component.css?raw') },
   ];
 
   withoutContentSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./without-content/without-content.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./without-content/without-content.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./without-content/without-content.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./without-content/without-content.component.ts?raw') },
   ];
 
   beforeChangeSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./before-change/before-change.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./before-change/before-change.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./before-change/before-change.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./before-change/before-change.component.ts?raw') },
   ];
   customSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./custom/custom.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./custom/custom.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./custom/custom.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./custom/custom.component.ts?raw') },
   ];
   typePillsSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./type-pills/type-pills.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./type-pills/type-pills.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./type-pills/type-pills.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./type-pills/type-pills.component.ts?raw') },
   ];
   typeOptionsSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./type-options/type-options.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./type-options/type-options.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./type-options/type-options.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./type-options/type-options.component.ts?raw') },
   ];
   typeSliderSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./type-slider/type-slider.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./type-slider/type-slider.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./type-slider/type-slider.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./type-slider/type-slider.component.ts?raw') },
   ];
   typeWrappedSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./type-wrapped/type-wrapped.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./type-wrapped/type-wrapped.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./type-wrapped/type-wrapped.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./type-wrapped/type-wrapped.component.ts?raw') },
   ];
   ConfigurableSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./configurable-tabs/configurable-tabs.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./configurable-tabs/configurable-tabs.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./configurable-tabs/configurable-tabs.component.scss') },
+    { title: 'HTML', language: 'xml', code: require('./configurable-tabs/configurable-tabs.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./configurable-tabs/configurable-tabs.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./configurable-tabs/configurable-tabs.component.scss?raw') },
     {
       title: 'tabs-transfer HTML',
       language: 'xml',
-      code: require('!!raw-loader!./configurable-tabs/tabs-transfer/tabs-transfer.component.html'),
+      code: require('./configurable-tabs/tabs-transfer/tabs-transfer.component.html?raw'),
     },
     {
       title: 'tabs-transfer TS',
       language: 'typescript',
-      code: require('!!raw-loader!./configurable-tabs/tabs-transfer/tabs-transfer.component.ts'),
+      code: require('./configurable-tabs/tabs-transfer/tabs-transfer.component.ts?raw'),
     },
   ];
   navItems = [];

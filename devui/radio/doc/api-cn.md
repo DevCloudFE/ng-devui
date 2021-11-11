@@ -38,7 +38,8 @@ import { RadioModule } from 'ng-devui';
 |     name     |            `string`             |    --    |                             必选，单选项名称 （radio 唯一标识符）                             | [竖向排列](demo#vertical)              |
 |    values    |             `array`             |    --    |                                       必选，单选数据组                                        | [竖向排列](demo#vertical)              |
 |   disabled   |            `boolean`            | false | 可选，是否禁用该选项组                                                          | [radio-group根据条件终止切换操作](demo#condition-radio-group)                |
-|   cssStyle   |       `'row' \| 'column'`       | 'column' |                                   可选，设置横向或纵向排列                                    | [横向排列](demo#horizontal)            |     |
+| ~~cssStyle~~ |       `'row' \| 'column'`       | 'column' |                   可选，设置横向或纵向排列（`已废弃，请使用direction`）                         | [横向排列](demo#horizontal)            |
+|   direction  |       `'row' \| 'column'`       | 'column' |                                   可选，设置横向或纵向排列                                     | [横向排列](demo#horizontal)            |
 | beforeChange | `Function \| Promise \| Observable` |    --    | 可选，radio-group 切换前的回调函数，返回 boolean 类型，返回 false 可以阻止 radio-group 的切换 | [回调切换](demo#condition-radio-group) |
 
 ## d-radio-group 事件

@@ -143,6 +143,7 @@
             />
           </div>
           <div
+            *ngIf="!enterSearch || (enterSearch && showSearchCategory)"
             dDropDownMenu
             class="devui-dropdown-menu devui-dropdown-overlay devui-dropdown-menu-fix"
             [ngClass]="{ 'max-height': currentSelectTag?.type !== 'treeSelect' }"

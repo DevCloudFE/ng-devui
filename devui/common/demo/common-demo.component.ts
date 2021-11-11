@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -9,35 +9,35 @@ import { Subscription } from 'rxjs';
 })
 export class CommonDemoComponent implements OnInit, OnDestroy {
   pipeSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'html', code: require('!!raw-loader!./pipe/pipe.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./pipe/pipe.component.ts') },
+    { title: 'HTML', language: 'html', code: require('./pipe/pipe.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./pipe/pipe.component.ts?raw') },
   ];
 
   helperJumpSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'html', code: require('!!raw-loader!./helper-jump/helper-jump.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./helper-jump/helper-jump.component.ts') },
+    { title: 'HTML', language: 'html', code: require('./helper-jump/helper-jump.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./helper-jump/helper-jump.component.ts?raw') },
   ];
 
   helperDownloadSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'html', code: require('!!raw-loader!./helper-download/helper-download.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./helper-download/helper-download.component.ts') },
+    { title: 'HTML', language: 'html', code: require('./helper-download/helper-download.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./helper-download/helper-download.component.ts?raw') },
   ];
 
   iframePropagateSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'html', code: require('!!raw-loader!./iframe-propagate/iframe-propagate.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./iframe-propagate/iframe-propagate.component.ts') },
+    { title: 'HTML', language: 'html', code: require('./iframe-propagate/iframe-propagate.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./iframe-propagate/iframe-propagate.component.ts?raw') },
   ];
 
   lazyLoadSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'html', code: require('!!raw-loader!./lazy-load/lazy-load.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./lazy-load/lazy-load.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./lazy-load/lazy-load.component.scss') },
+    { title: 'HTML', language: 'html', code: require('./lazy-load/lazy-load.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./lazy-load/lazy-load.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./lazy-load/lazy-load.component.scss?raw') },
   ];
 
   clipboardSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'html', code: require('!!raw-loader!./clipboard/clipboard.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./clipboard/clipboard.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./clipboard/clipboard.component.scss') },
+    { title: 'HTML', language: 'html', code: require('./clipboard/clipboard.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./clipboard/clipboard.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./clipboard/clipboard.component.scss?raw') },
   ];
 
   navItems = [];

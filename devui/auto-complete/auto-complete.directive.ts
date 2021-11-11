@@ -1,4 +1,4 @@
-import { CdkOverlayOrigin } from '@angular/cdk/overlay';
+import { CdkOverlayOrigin, ConnectedPosition } from '@angular/cdk/overlay';
 import {
   ChangeDetectorRef,
   ComponentFactoryResolver,
@@ -23,7 +23,7 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { PositionService } from 'ng-devui/position';
-import { addClassToOrigin, removeClassFromOrigin } from 'ng-devui/utils';
+import { addClassToOrigin, AppendToBodyDirection, AppendToBodyDirectionsConfig, removeClassFromOrigin } from 'ng-devui/utils';
 import { DevConfigService, WithConfig } from 'ng-devui/utils/globalConfig';
 import { fromEvent, Observable, of, Subject, Subscription } from 'rxjs';
 import { debounceTime, filter, map, switchMap, takeUntil, tap } from 'rxjs/operators';
@@ -64,6 +64,7 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
   }
 
   @Input() appendToBody = false;
+  @Input() appendToBodyDirections: Array<AppendToBodyDirection | ConnectedPosition> = ['rightDown', 'leftDown', 'rightUp', 'leftUp'];
   @Input() cdkOverlayOffsetY = 0; // 内部使用不开放
   @Input() dAutoCompleteWidth: number;
   @Input() formatter: (item: any) => string;
@@ -101,7 +102,6 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
 
   private valueChanges: Observable<any[]>;
   private value: any;
-  private placement = 'bottom-left';
   private subscription: Subscription;
   private onChange = (_: any) => null;
   private onTouched = () => null;
@@ -161,11 +161,33 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
         }, 0);
       }
     });
+
+    this.setPositions();
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes && this.popupRef && changes.source) {
       this.fillPopup(this.source);
+    }
+    if (changes['appendToBodyDirections']) {
+      this.setPositions();
+    }
+  }
+
+  setPositions() {
+    if (this.popupRef) {
+      this.popupRef.instance.overlayPositions =
+        this.appendToBodyDirections && this.appendToBodyDirections.length > 0
+          ? this.appendToBodyDirections
+              .map((position) => {
+                if (typeof position === 'string') {
+                  return AppendToBodyDirectionsConfig[position];
+                } else {
+                  return position;
+                }
+              })
+              .filter((position) => position !== undefined)
+          : undefined;
     }
   }
 
@@ -222,6 +244,7 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
         this.fillPopup(tempSource);
         this.openPopup();
         this.changeDetectorRef.markForCheck();
+        this.updatePosition();
       });
     }
 
@@ -242,8 +265,19 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
         this.openPopup();
       }
       this.changeDetectorRef.markForCheck();
+      this.updatePosition();
     } else {
       this.hidePopup();
+    }
+  }
+
+  private updatePosition() {
+    if (this.appendToBody) {
+      setTimeout(() => {
+        if (this.popupRef.instance.connectedOverlay && this.popupRef.instance.connectedOverlay.overlayRef) {
+          this.popupRef.instance.connectedOverlay.overlayRef.updatePosition();
+        }
+      });
     }
   }
 
@@ -394,8 +428,17 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
     } else {
       pop.appendToBody = false;
     }
-    ['formatter', 'itemTemplate', 'noResultItemTemplate', 'cssClass', 'dropdown',
-      'popTipsText', 'position', 'overview', 'showAnimation'].forEach((key) => {
+    [
+      'formatter',
+      'itemTemplate',
+      'noResultItemTemplate',
+      'cssClass',
+      'dropdown',
+      'popTipsText',
+      'position',
+      'overview',
+      'showAnimation',
+    ].forEach((key) => {
       if (this[key] !== undefined) {
         pop[key] = this[key];
       }
@@ -427,12 +470,11 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
 
   private registerInputEvent(elementRef: ElementRef) {
     return fromEvent(elementRef.nativeElement, 'input').pipe(
-        map((e: any) => e.target.value),
-        filter((term) => !this.disabled && this.searchFn && term.length >= 0),
-        debounceTime(this.delay),
-        tap((term) => this.onTermChange(term)),
-        switchMap((term) => this.searchFn(term, this))
-      );
-
+      map((e: any) => e.target.value),
+      filter((term) => !this.disabled && this.searchFn && term.length >= 0),
+      debounceTime(this.delay),
+      tap((term) => this.onTermChange(term)),
+      switchMap((term) => this.searchFn(term, this))
+    );
   }
 }

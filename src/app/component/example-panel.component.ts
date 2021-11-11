@@ -30,7 +30,7 @@ export class ExamplePanelComponent implements OnInit, AfterViewInit {
   @ViewChildren('typescript') typescript: QueryList<ElementRef>;
   @ViewChildren('documentation') documentation: QueryList<ElementRef>;
   componentName: string;
-  componentTab: string|number;
+  componentTab: string | number;
   description: string;
   tmw: string;
   componentPath: string;
@@ -64,7 +64,7 @@ export class ExamplePanelComponent implements OnInit, AfterViewInit {
     }
   }
 
-  activeTabChange(tab: string|number) {
+  activeTabChange(tab: string | number) {
     const navigation = this.router.url.split('/');
     navigation.pop();
     navigation.push(tab as string);

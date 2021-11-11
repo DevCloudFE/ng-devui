@@ -1,3 +1,4 @@
+import { ConnectedPosition } from '@angular/cdk/overlay';
 import {
   ChangeDetectorRef,
   Component,
@@ -17,6 +18,7 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { AutoCompleteDirective } from 'ng-devui/auto-complete';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
+import { AppendToBodyDirection } from 'ng-devui/utils';
 import { DevConfigService, WithConfig } from 'ng-devui/utils/globalConfig';
 import { Observable, Subscription } from 'rxjs';
 
@@ -40,6 +42,7 @@ export class EditableSelectComponent implements ControlValueAccessor, OnInit, On
     this.i18nCommonText = this.i18n.getI18nText().common;
   }
   @Input() appendToBody = false;
+  @Input() appendToBodyDirections: Array<AppendToBodyDirection | ConnectedPosition> = ['rightDown', 'leftDown', 'rightUp', 'leftUp'];
   @Input() cssClass: string;
   @Input() disabled = false;
   @Input() placeholder = '';
@@ -145,9 +148,9 @@ export class EditableSelectComponent implements ControlValueAccessor, OnInit, On
       })
       .indexOf(inputString.toLowerCase());
     this.activeIndex = this.activeIndex > -1 ? this.activeIndex : 0;
-
     this.dropDownOpen = !this.dropDownOpen;
   }
+
   loadMoreEvent($event) {
     this.loadMore.emit($event);
   }

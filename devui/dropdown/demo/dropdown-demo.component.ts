@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -9,49 +9,49 @@ import { Subscription } from 'rxjs';
 })
 export class DropdownDemoComponent implements OnInit, OnDestroy {
   basicSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./basic/basic.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/basic.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./basic/basic.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./basic/basic.component.ts?raw') },
   ];
   hoverSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./hover/hover.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./hover/hover.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./hover/hover.component.scss') },
+    { title: 'HTML', language: 'xml', code: require('./hover/hover.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./hover/hover.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./hover/hover.component.scss?raw') },
   ];
   manuallySource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./manually/manually.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./manually/manually.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./manually/manually.component.scss') },
+    { title: 'HTML', language: 'xml', code: require('./manually/manually.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./manually/manually.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./manually/manually.component.scss?raw') },
   ];
   focusSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./focus/focus.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./focus/focus.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./focus/focus.component.scss') },
+    { title: 'HTML', language: 'xml', code: require('./focus/focus.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./focus/focus.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./focus/focus.component.scss?raw') },
   ];
   closeScopeSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./close-scope/close-scope.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./close-scope/close-scope.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./close-scope/close-scope.component.scss') },
+    { title: 'HTML', language: 'xml', code: require('./close-scope/close-scope.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./close-scope/close-scope.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./close-scope/close-scope.component.scss?raw') },
   ];
   appendToBodySource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./append-to-body/append-to-body.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./append-to-body/append-to-body.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./append-to-body/append-to-body.component.scss') },
+    { title: 'HTML', language: 'xml', code: require('./append-to-body/append-to-body.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./append-to-body/append-to-body.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./append-to-body/append-to-body.component.scss?raw') },
   ];
   addIconSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./add-icon/add-icon.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./add-icon/add-icon.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./add-icon/add-icon.component.scss') },
+    { title: 'HTML', language: 'xml', code: require('./add-icon/add-icon.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./add-icon/add-icon.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./add-icon/add-icon.component.scss?raw') },
   ];
   multiLevelSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./multi-level/multi-level.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./multi-level/multi-level.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./multi-level/multi-level.component.css') },
+    { title: 'HTML', language: 'xml', code: require('./multi-level/multi-level.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./multi-level/multi-level.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./multi-level/multi-level.component.css?raw') },
   ];
 
   dropdownDemoSetIsOpen: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./set-is-open/dropdown-set-is-open.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./set-is-open/dropdown-set-is-open.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./set-is-open/dropdown-set-is-open.component.scss') },
+    { title: 'HTML', language: 'xml', code: require('./set-is-open/dropdown-set-is-open.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./set-is-open/dropdown-set-is-open.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./set-is-open/dropdown-set-is-open.component.scss?raw') },
   ];
   navItems = [];
   subs: Subscription = new Subscription();

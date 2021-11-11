@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { Subscription } from 'rxjs';
 @Component({
   selector: 'd-drawer-demo',
@@ -8,24 +8,24 @@ import { Subscription } from 'rxjs';
 })
 export class DrawerDemoComponent implements OnInit, OnDestroy {
   basicSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./basic/basic.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/basic.component.ts') },
-    { title: 'drawerContent-html', language: 'xml', code: require('!!raw-loader!./drawerContent/drawer-content.component.html') },
-    { title: 'drawerContent-ts', language: 'typescript', code: require('!!raw-loader!./drawerContent/drawer-content.component.ts') },
-    { title: 'drawerContent-css', language: 'css', code: require('!!raw-loader!./drawerContent/drawer-content.component.scss') },
+    { title: 'HTML', language: 'xml', code: require('./basic/basic.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./basic/basic.component.ts?raw') },
+    { title: 'drawerContent-html', language: 'xml', code: require('./drawerContent/drawer-content.component.html?raw') },
+    { title: 'drawerContent-ts', language: 'typescript', code: require('./drawerContent/drawer-content.component.ts?raw') },
+    { title: 'drawerContent-css', language: 'css', code: require('./drawerContent/drawer-content.component.scss?raw') },
   ];
 
   undestroyableSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./undestroyable/undestroyable.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./undestroyable/undestroyable.component.ts') },
-    { title: 'drawerContent-html', language: 'xml', code: require('!!raw-loader!./drawerContent/drawer-content.component.html') },
-    { title: 'drawerContent-ts', language: 'typescript', code: require('!!raw-loader!./drawerContent/drawer-content.component.ts') },
-    { title: 'drawerContent-css', language: 'css', code: require('!!raw-loader!./drawerContent/drawer-content.component.scss') },
+    { title: 'HTML', language: 'xml', code: require('./undestroyable/undestroyable.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./undestroyable/undestroyable.component.ts?raw') },
+    { title: 'drawerContent-html', language: 'xml', code: require('./drawerContent/drawer-content.component.html?raw') },
+    { title: 'drawerContent-ts', language: 'typescript', code: require('./drawerContent/drawer-content.component.ts?raw') },
+    { title: 'drawerContent-css', language: 'css', code: require('./drawerContent/drawer-content.component.scss?raw') },
   ];
 
   templateSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./template/template.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./template/template.component.ts') }
+    { title: 'HTML', language: 'xml', code: require('./template/template.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./template/template.component.ts?raw') }
   ];
 
   navItems = [];

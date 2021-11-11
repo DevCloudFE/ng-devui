@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { Subscription } from 'rxjs';
 @Component({
   selector: 'd-demo-search',
@@ -8,31 +8,31 @@ import { Subscription } from 'rxjs';
 })
 export class SearchDemoComponent implements OnInit, OnDestroy {
   basicSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./basic/basic.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/basic.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./basic/basic.component.css') },
+    { title: 'HTML', language: 'xml', code: require('./basic/basic.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./basic/basic.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./basic/basic.component.css?raw') },
   ];
 
   iconLeftSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./icon-left/icon-left.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./icon-left/icon-left.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./icon-left/icon-left.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./icon-left/icon-left.component.ts?raw') },
   ];
 
   ngmodelDemoSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./ngmodel/ngmodel.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./ngmodel/ngmodel.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./ngmodel/ngmodel.component.css') },
+    { title: 'HTML', language: 'xml', code: require('./ngmodel/ngmodel.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./ngmodel/ngmodel.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./ngmodel/ngmodel.component.css?raw') },
   ];
 
   autoFocusDemoSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./auto-focus/auto-focus.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./auto-focus/auto-focus.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./auto-focus/auto-focus.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./auto-focus/auto-focus.component.ts?raw') },
   ];
 
   searchDemoNoBorder: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./no-border/search-no-border.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./no-border/search-no-border.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./no-border/search-no-border.component.scss') },
+    { title: 'HTML', language: 'xml', code: require('./no-border/search-no-border.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./no-border/search-no-border.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./no-border/search-no-border.component.scss?raw') },
   ];
   navItems = [];
   subs: Subscription = new Subscription();

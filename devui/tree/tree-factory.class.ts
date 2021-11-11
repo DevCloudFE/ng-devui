@@ -49,7 +49,7 @@ export interface ITreeItem {
   isChecked?: boolean;
   halfChecked?: boolean;
   disabled?: boolean;
-
+  showCheckbox?: boolean;
   [prop: string]: any;
 
   disableAdd?: boolean;
@@ -146,7 +146,8 @@ export class TreeFactory {
         disableAdd: !!item.disableAdd,
         disableEdit: !!item.disableEdit,
         disableDelete: !!item.disableDelete,
-        children: []
+        children: [],
+        showCheckbox: item.showCheckbox
       }, undefined, renderTree);
 
       if (!!item.isChecked) {
@@ -155,7 +156,7 @@ export class TreeFactory {
 
       this.mapTreeItems({
         treeItems: item[treeNodeChildrenKey] || [], parentId: node.id, treeNodeChildrenKey, treeNodeIdKey,
-        checkboxDisabledKey, treeNodeTitleKey
+        checkboxDisabledKey, selectDisabledKey, toggleDisabledKey, treeNodeTitleKey
       }, renderTree);
     });
     return this;

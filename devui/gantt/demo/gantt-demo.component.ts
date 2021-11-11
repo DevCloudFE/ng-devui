@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { Subscription } from 'rxjs';
 @Component({
   selector: 'd-gantt-demo',
@@ -8,22 +8,22 @@ import { Subscription } from 'rxjs';
 })
 export class GanttDemoComponent implements OnInit, OnDestroy {
   basicSource: Array<DevuiSourceData> = [
-    {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./basic/basic.component.html')},
-    {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./basic/basic.component.ts')},
-    {title: 'SCSS', language: 'css', code:  require('!!raw-loader!./basic/basic.component.scss')},
-    {title: 'data', language: 'typescript', code:  require('!!raw-loader!./mock-data.ts')}
+    {title: 'HTML', language: 'xml', code:  require('./basic/basic.component.html?raw')},
+    {title: 'TS', language: 'typescript', code:  require('./basic/basic.component.ts?raw')},
+    {title: 'SCSS', language: 'css', code:  require('./basic/basic.component.scss?raw')},
+    {title: 'data', language: 'typescript', code:  require('./mock-data.ts?raw')}
   ];
   inTableSource: Array<DevuiSourceData> = [
-    {title: 'HTML', language: 'xml', code:  require('!!raw-loader!./table/table.component.html')},
-    {title: 'TS', language: 'typescript', code:  require('!!raw-loader!./table/table.component.ts')},
-    {title: 'SCSS', language: 'css', code:  require('!!raw-loader!./table/table.component.scss')},
+    {title: 'HTML', language: 'xml', code:  require('./table/table.component.html?raw')},
+    {title: 'TS', language: 'typescript', code:  require('./table/table.component.ts?raw')},
+    {title: 'SCSS', language: 'css', code:  require('./table/table.component.scss?raw')},
     {title: 'reset-position-HTML', language: 'typescript',
-    code: require('!!raw-loader!./table/reset-position/reset-position.component.html')},
+    code: require('./table/reset-position/reset-position.component.html?raw')},
     {title: 'reset-position-TS', language: 'xml',
-    code: require('!!raw-loader!./table/reset-position/reset-position.component.ts')},
+    code: require('./table/reset-position/reset-position.component.ts?raw')},
     {title: 'reset-position-CSS', language: 'typescript',
-    code: require('!!raw-loader!./table/reset-position/reset-position.component.scss')},
-    {title: 'data', language: 'typescript', code:  require('!!raw-loader!./mock-data.ts')}
+    code: require('./table/reset-position/reset-position.component.scss?raw')},
+    {title: 'data', language: 'typescript', code:  require('./mock-data.ts?raw')}
   ];
 
   navItems = [];

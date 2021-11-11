@@ -365,6 +365,10 @@
   }
 }
 
+.devui-pagination-hidden {
+  display: none;
+}
+
 :host ::ng-deep .devui-input-sm {
   height: 24px;
   padding: 4px 4px;

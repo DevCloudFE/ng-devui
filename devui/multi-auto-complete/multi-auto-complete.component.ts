@@ -1,3 +1,4 @@
+import { ConnectedPosition } from '@angular/cdk/overlay';
 import {
   ChangeDetectorRef,
   Component,
@@ -15,7 +16,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { AutoCompleteDirective, AutoCompletePopupComponent } from 'ng-devui/auto-complete';
-import { addClassToOrigin, removeClassFromOrigin } from 'ng-devui/utils';
+import { addClassToOrigin, AppendToBodyDirection, removeClassFromOrigin } from 'ng-devui/utils';
 import { DevConfigService, WithConfig } from 'ng-devui/utils/globalConfig';
 import { Observable, of } from 'rxjs';
 
@@ -35,6 +36,7 @@ import { Observable, of } from 'rxjs';
 export class MultiAutoCompleteComponent implements OnInit, OnChanges, ControlValueAccessor {
   static ID_SEED = 0;
   @Input() appendToBody = false;
+  @Input() appendToBodyDirections: Array<AppendToBodyDirection | ConnectedPosition> = ['rightDown', 'leftDown', 'rightUp', 'leftUp'];
   @Input() cssClass: string;
   /*
   overview: border none multiline single

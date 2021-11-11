@@ -113,6 +113,12 @@ export class CheckControlComponent implements OnInit {
   data2 = Object.assign(source, []);
   data3 = Object.assign(source, []);
   data4 = Object.assign(source, []);
+  data5 = source.map(item => {
+    if (item.items && item.items.length) {
+      item['showCheckbox'] = false;
+    }
+    return item;
+  });
   constructor() { }
 
   ngOnInit() {

@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -9,26 +9,26 @@ import { Subscription } from 'rxjs';
 })
 export class AnchorDemoComponent implements OnInit, OnDestroy {
   basicSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./basic/basic.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/basic.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./basic/basic.component.scss') },
+    { title: 'HTML', language: 'xml', code: require('./basic/basic.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./basic/basic.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./basic/basic.component.scss?raw') },
   ];
 
   asyncSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./async/async.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./async/async.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./async/async.component.scss') },
+    { title: 'HTML', language: 'xml', code: require('./async/async.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./async/async.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./async/async.component.scss?raw') },
   ];
   hashSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./hash/hash.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./hash/hash.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./hash/hash.component.scss') },
+    { title: 'HTML', language: 'xml', code: require('./hash/hash.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./hash/hash.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./hash/hash.component.scss?raw') },
   ];
 
   ScrollTargetSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./scroll-target/scroll-target.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./scroll-target/scroll-target.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./scroll-target/scroll-target.component.scss') },
+    { title: 'HTML', language: 'xml', code: require('./scroll-target/scroll-target.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./scroll-target/scroll-target.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./scroll-target/scroll-target.component.scss?raw') },
   ];
 
   navItems = [];

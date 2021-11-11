@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -12,42 +12,42 @@ import { Subscription } from 'rxjs';
 })
 export class AutoCompleteDemoComponent implements OnInit, OnDestroy {
   AutoCompleteDemoBasic: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./basic/auto-complete-demo-basic.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/auto-complete-demo-basic.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./basic/auto-complete-demo-basic.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./basic/auto-complete-demo-basic.component.ts?raw') },
   ];
 
   AutoCompleteDemoArray: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./array/auto-complete-demo-array.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./array/auto-complete-demo-array.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./array/auto-complete-demo-array.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./array/auto-complete-demo-array.component.ts?raw') },
   ];
 
   AutoCompleteDemoCustom: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./custom/auto-complete-demo-custom.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./custom/auto-complete-demo-custom.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./custom/auto-complete-demo-custom.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./custom/auto-complete-demo-custom.component.ts?raw') },
   ];
 
   AutoCompleteDemoDisable: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./disabled/auto-complete-demo-disable.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./disabled/auto-complete-demo-disable.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./disabled/auto-complete-demo-disable.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./disabled/auto-complete-demo-disable.component.ts?raw') },
   ];
   AutoCompleteDemoDropdown: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./dropdown/auto-complete-demo-dropdown.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./dropdown/auto-complete-demo-dropdown.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./dropdown/auto-complete-demo-dropdown.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./dropdown/auto-complete-demo-dropdown.component.ts?raw') },
   ];
 
   AutoCompleteDemoObject: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./object/auto-complete-demo-object.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./object/auto-complete-demo-object.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./object/auto-complete-demo-object.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./object/auto-complete-demo-object.component.ts?raw') },
   ];
 
   AutoCompleteDemoLatest: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./latest/auto-complete-demo-latest.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./latest/auto-complete-demo-latest.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./latest/auto-complete-demo-latest.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./latest/auto-complete-demo-latest.component.ts?raw') },
   ];
 
   AutoCompleteDemoLazyLoad: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./lazy-load/auto-complete-demo-lazy-load.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./lazy-load/auto-complete-demo-lazy-load.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./lazy-load/auto-complete-demo-lazy-load.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./lazy-load/auto-complete-demo-lazy-load.component.ts?raw') },
   ];
 
   navItems = [];

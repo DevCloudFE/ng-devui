@@ -4,7 +4,7 @@
   [(ngModel)]="choose"
   [beforeChange]="beforeChange"
   (change)="valueChange($event)"
-  [cssStyle]="'row'"
+  [direction]="'row'"
 >
 </d-radio-group>
 <d-radio-group
@@ -13,7 +13,7 @@
   [(ngModel)]="chooseSeason"
   [beforeChange]="beforeChange"
   (change)="valueChange($event)"
-  [cssStyle]="'row'"
+  [direction]="'row'"
   [disabled]="true"
 >
 </d-radio-group>

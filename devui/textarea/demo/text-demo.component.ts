@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -8,19 +8,19 @@ import { Subscription } from 'rxjs';
 })
 export class TextDemoComponent implements OnInit, OnDestroy {
   basicSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./basic/basic.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/basic.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./basic/basic.component.css') },
+    { title: 'HTML', language: 'xml', code: require('./basic/basic.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./basic/basic.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./basic/basic.component.css?raw') },
   ];
   resizeSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./resize/resize.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./resize/resize.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./resize/resize.component.css') },
+    { title: 'HTML', language: 'xml', code: require('./resize/resize.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./resize/resize.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./resize/resize.component.css?raw') },
   ];
   countSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./count/count.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./count/count.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./count/count.component.scss') },
+    { title: 'HTML', language: 'xml', code: require('./count/count.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./count/count.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./count/count.component.scss?raw') },
   ];
 
   navItems = [];

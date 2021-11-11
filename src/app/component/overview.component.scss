@@ -112,10 +112,6 @@
           & + d-tag {
             top: 24px;
           }
-
-          &.d-overview-shadow:hover {
-            box-shadow: $devui-shadow-length-connected-overlay $devui-shadow;
-          }
         }
 
         .d-overview-card-icon {

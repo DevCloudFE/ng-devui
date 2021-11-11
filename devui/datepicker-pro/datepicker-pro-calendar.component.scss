@@ -63,8 +63,12 @@
       display: inline-block;
       line-height: 12px;
 
-      svg path {
-        fill: $devui-light-text;
+      svg {
+        vertical-align: middle;
+
+        path {
+          fill: $devui-light-text;
+        }
       }
 
       &:hover {

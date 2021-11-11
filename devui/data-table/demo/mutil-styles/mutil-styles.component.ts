@@ -43,8 +43,7 @@ export class MutilStylesComponent implements OnInit {
     }
   ];
 
-  activeLayoutTab: string | number = 'fixed';
-  activeLayoutTable: 'fixed' | 'auto' = 'fixed';
+  activeLayoutTab: any = 'fixed';
   layoutItems = [
     {
       id: 'fixed',

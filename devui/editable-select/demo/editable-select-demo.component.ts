@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DevuiSourceData } from 'ng-devui/shared/devui-codebox/devui-source-data';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { DevuiSourceData } from 'ng-devui/shared/devui-codebox/devui-source-data';
 import { Subscription } from 'rxjs';
 @Component({
   selector: 'd-editable-select-demo',
@@ -11,24 +11,24 @@ import { Subscription } from 'rxjs';
 })
 export class EditableSelectDemoComponent implements OnInit, OnDestroy {
   BasicSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./basic/with-source.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/with-source.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./basic/with-source.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./basic/with-source.component.ts?raw') },
   ];
   SearchFnSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./search-function/with-search-function.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./search-function/with-search-function.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./search-function/with-search-function.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./search-function/with-search-function.component.ts?raw') },
   ];
   DisableDataSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./disable-data/disable-data-with-source.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./disable-data/disable-data-with-source.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./disable-data/disable-data-with-source.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./disable-data/disable-data-with-source.component.ts?raw') },
   ];
   AsyncDataSearchFnSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./async-data-function/async-data-with-function.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./async-data-function/async-data-with-function.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./async-data-function/async-data-with-function.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./async-data-function/async-data-with-function.component.ts?raw') },
   ];
   LazyLoadComponentSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./lazy-load/lazy-load.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./lazy-load/lazy-load.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./lazy-load/lazy-load.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./lazy-load/lazy-load.component.ts?raw') },
   ];
 
   navItems = [];

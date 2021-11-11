@@ -79,7 +79,7 @@
       </ng-template>
     </td>
   </tr>
-  <tr class="expand-row" *ngIf="rowItem.$expandConfig?.expand">
+  <tr class="expand-row" *ngIf="rowItem?.$expandConfig?.expand">
     <td *ngIf="checkable"></td>
     <td *ngIf="showExpandToggle"></td>
     <td [attr.colspan]="columns.length">

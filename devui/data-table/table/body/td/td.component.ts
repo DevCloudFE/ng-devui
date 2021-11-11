@@ -37,7 +37,8 @@ export class TableTdComponent implements OnInit, OnChanges, OnDestroy {
   @Output() editStatusEvent = new EventEmitter<boolean>();
 
   private documentClickSubscription: Subscription;
-  private documentMousedownSubscription: Subscription;
+  private tdMousedownSubscription: Subscription;
+  private tdMouseupSubscription: Subscription;
   private clickInTd: boolean;
   private tdClickSubscription: Subscription;
   private currentEditing = false;
@@ -109,9 +110,14 @@ export class TableTdComponent implements OnInit, OnChanges, OnDestroy {
       if (!this.elementRef.nativeElement.contains(clickEvent.target) && !this.clickInTd) {
         this.finishCellEdit();
       }
+      this.clickInTd = false;
     });
-    this.documentMousedownSubscription = fromEvent(document, 'mousedown').subscribe(event => {
-        this.clickInTd = !!this.elementRef.nativeElement.contains(event.target);
+    this.tdMousedownSubscription = fromEvent(this.elementRef.nativeElement, 'mousedown').subscribe(event => {
+      this.clickInTd = true;
+    });
+
+    this.tdMouseupSubscription = fromEvent(this.elementRef.nativeElement, 'mouseup').subscribe(event => {
+      this.clickInTd = false;
     });
 
     this.tdClickSubscription = this.tdService.tableCellClickEvent.subscribe((clickEvent) => {
@@ -172,9 +178,14 @@ export class TableTdComponent implements OnInit, OnChanges, OnDestroy {
       this.tdClickSubscription = null;
     }
 
-    if (this.documentMousedownSubscription) {
-      this.documentMousedownSubscription.unsubscribe();
-      this.documentMousedownSubscription = null;
+    if (this.tdMousedownSubscription) {
+      this.tdMousedownSubscription.unsubscribe();
+      this.tdMousedownSubscription = null;
+    }
+
+    if (this.tdMouseupSubscription) {
+      this.tdMouseupSubscription.unsubscribe();
+      this.tdMouseupSubscription = null;
     }
   }
 }

@@ -86,8 +86,6 @@
   }
 
   .devui-tooltip-inner {
-    display: flex;
-    align-items: center;
     max-width: 200px;
     padding: 4px 16px;
     font-size: $devui-font-size;
@@ -101,7 +99,7 @@
     word-wrap: break-word;
     text-align: start;
     border-radius: $devui-border-radius-feedback;
-    min-height: 28px;
+    min-height: 26px;
   }
 
   .devui-tooltip-arrow {

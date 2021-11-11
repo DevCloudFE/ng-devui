@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -8,25 +8,25 @@ import { Subscription } from 'rxjs';
 })
 export class CheckBoxDemoComponent implements OnInit, OnDestroy {
   checkboxDemoBasic: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./basic/checkbox-basic.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./basic/checkbox-basic.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./basic/checkbox-basic.component.css') },
+    { title: 'HTML', language: 'xml', code: require('./basic/checkbox-basic.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./basic/checkbox-basic.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./basic/checkbox-basic.component.css?raw') },
   ];
 
   checkboxDemoGroup: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./group/checkbox-group-basic.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./group/checkbox-group-basic.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./group/checkbox-group-basic.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./group/checkbox-group-basic.component.ts?raw') },
   ];
 
   conditionChangeSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./condition-change/condition-change.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./condition-change/condition-change.component.ts') },
-    { title: 'SCSS', language: 'css', code: require('!!raw-loader!./condition-change/condition-change.component.scss') },
+    { title: 'HTML', language: 'xml', code: require('./condition-change/condition-change.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./condition-change/condition-change.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./condition-change/condition-change.component.scss?raw') },
   ];
 
   conditionGroupSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('!!raw-loader!./condition-group/condition-group.component.html') },
-    { title: 'TS', language: 'typescript', code: require('!!raw-loader!./condition-group/condition-group.component.ts') },
+    { title: 'HTML', language: 'xml', code: require('./condition-group/condition-group.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./condition-group/condition-group.component.ts?raw') },
   ];
 
   navItems = [];

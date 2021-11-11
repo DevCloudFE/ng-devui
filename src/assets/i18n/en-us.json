@@ -1414,6 +1414,13 @@
       "description": "Enter or select a date.",
       "tmw": "When users want to enter a date or click the input box to select a date."
     },
+    "dashboard": {
+      "name": "Dashboard",
+      "type": "Experimental",
+      "path": "dashboard",
+      "description": "Dashboard supports various pendants.",
+      "tmw": "Functions as a container to carry various types of content."
+    },
     "datepicker": {
       "name": "DatePicker",
       "type": "Data entry",
@@ -3056,10 +3063,14 @@
       "ngmodelDemo": {
         "title": "NgModel"
       },
+      "virtualScrollDemo": {
+        "title": "Virtual scrolling"
+      },
       "anchorLinkValues": {
         "basic-usage": "Basic Usage",
         "ng-model": "NgModel",
-        "async-input": "Asynchronous data source"
+        "async-input": "Asynchronous data source",
+        "virtual-scroll": "Virtual scrolling"
       }
     },
     "time-axis": {

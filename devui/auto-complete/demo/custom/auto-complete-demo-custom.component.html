@@ -26,6 +26,7 @@
       dAutoComplete
       placeholder="Search"
       [appendToBody]="true"
+      [appendToBodyDirections]="['leftDown', 'leftUp']"
       [allowEmptyValueSearch]="true"
       [searchFn]="onSearchLocal.bind(this)"
       [itemTemplate]="customizeItemTemplate"
