@@ -88,7 +88,7 @@ describe('dialog', () => {
 
       }).overrideModule(BrowserDynamicTestingModule, {
         set: {
-          
+
         }
       }).compileComponents();
     }));
@@ -131,7 +131,7 @@ describe('dialog', () => {
 
       const body = document.querySelector('body') as HTMLElement;
       if (document.documentElement.scrollHeight > document.documentElement.clientHeight) {
-        expect(body.classList).toContain('devui-body-scrollblock');
+        expect(body.style.width).toContain('calc');
       }
 
       closeDialog(fixture);
@@ -305,7 +305,7 @@ describe('dialog', () => {
       expect(modalHeader.style.cursor).not.toBe('move');
       expect(document.querySelector('.close')).toBeFalsy();
       expect(modalContent.style.transform).toBe('translate(0px, 40px)');
-      expect(body.classList).not.toContain('devui-body-scrollblock');
+      expect(body.style.width).not.toContain('calc');
 
       closeDialog(fixture);
       tick();
@@ -375,7 +375,7 @@ describe('modal', () => {
         providers: [ModalService],
       }).overrideModule(BrowserDynamicTestingModule, {
         set: {
-          
+
         }
       }).compileComponents();
     }));
@@ -429,7 +429,7 @@ describe('modal', () => {
         providers: [ModalService],
       }).overrideModule(BrowserDynamicTestingModule, {
         set: {
-          
+
         }
       }).compileComponents();
     }));

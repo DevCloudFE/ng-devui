@@ -66,7 +66,7 @@ describe('Drawer', () => {
       declarations: [TestDrawerComponent, DrawerContentComponent]
     }).overrideModule(BrowserDynamicTestingModule, {
       set: {
-        
+
       }
     })
       .compileComponents();
@@ -91,9 +91,6 @@ describe('Drawer', () => {
     component.openDrawer();
     fixture.detectChanges();
 
-    const bodyElement = document.querySelector('body') as HTMLElement;
-    expect(bodyElement.className).toContain('devui-body-scrollblock');
-
     const drawerElement = document.querySelector('.drawer') as HTMLElement;
     expect(drawerElement.style.zIndex).toBe('1000');
 
@@ -107,7 +104,6 @@ describe('Drawer', () => {
     tick();
     fixture.detectChanges();
     flush();
-    expect(bodyElement.className).not.toContain('devui-body-scrollblock');
   }));
 
   it('should create with different styles', fakeAsync(() => {
@@ -200,5 +196,19 @@ describe('Drawer', () => {
     tick();
     fixture.detectChanges();
     expect(document.querySelector('d-drawer')).toBeNull();
+  }));
+
+  it('should bodyScrollable work fine', fakeAsync(() => {
+    component.drawerOptions.bodyScrollable = false;
+    component.openDrawer();
+    fixture.detectChanges();
+
+    expect(document.documentElement.style.position).toBe('fixed');
+
+    component.closeDrawer();
+    tick();
+    fixture.detectChanges();
+    flush();
+    expect(document.documentElement.style.position).not.toBe('fixed');
   }));
 });

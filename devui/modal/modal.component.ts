@@ -1,7 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, ElementRef, Inject, Input, OnDestroy, OnInit, Renderer2, TemplateRef, ViewChild } from '@angular/core';
-import { backdropFadeInOut, wipeInOutAnimation } from 'ng-devui/utils';
 import { isUndefined } from 'lodash-es';
+import { backdropFadeInOut, lockScroll, wipeInOutAnimation } from 'ng-devui/utils';
 import { fromEvent, Observable, Subscription } from 'rxjs';
 import { ModalContainerDirective } from './modal.directive';
 
@@ -9,14 +9,10 @@ import { ModalContainerDirective } from './modal.directive';
   selector: 'd-modal',
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss'],
-  animations: [
-    backdropFadeInOut,
-    wipeInOutAnimation
-  ],
+  animations: [backdropFadeInOut, wipeInOutAnimation],
   preserveWhitespaces: false,
 })
 export class ModalComponent implements OnInit, OnDestroy {
-
   @Input() id: string;
   @Input() showAnimation = true;
   /**
@@ -40,9 +36,7 @@ export class ModalComponent implements OnInit, OnDestroy {
   @ViewChild('dialog', { static: true }) dialogElement: ElementRef;
   animateState = '';
   draggableHandleEl: HTMLElement;
-  scrollTop: number;
-  scrollLeft: number;
-  documentOverFlow: boolean;
+  cb: () => void;
 
   mouseDwonEl: ElementRef;
   ignoreBackDropClick = false;
@@ -51,24 +45,20 @@ export class ModalComponent implements OnInit, OnDestroy {
   contentTemplate: TemplateRef<any>;
   document: Document;
 
-  constructor(
-    private elementRef: ElementRef,
-    private renderer: Renderer2,
-    @Inject(DOCUMENT) private doc: any
-  ) {
-    this.backdropCloseable = isUndefined(this.backdropCloseable)
-      ? true
-      : this.backdropCloseable;
+  constructor(private elementRef: ElementRef, private renderer: Renderer2, @Inject(DOCUMENT) private doc: any) {
+    this.backdropCloseable = isUndefined(this.backdropCloseable) ? true : this.backdropCloseable;
     this.document = this.doc;
   }
 
   ngOnInit() {
     if (this.escapable) {
-      this.pressEscToClose.add(fromEvent(window, 'keydown').subscribe((event) => {
-        if (event['keyCode'] === 27) {
-          this.hide();
-        }
-      }));
+      this.pressEscToClose.add(
+        fromEvent(window, 'keydown').subscribe((event) => {
+          if (event['keyCode'] === 27) {
+            this.hide();
+          }
+        })
+      );
     }
 
     const handle = this.elementRef.nativeElement.querySelector('#d-modal-header');
@@ -78,11 +68,9 @@ export class ModalComponent implements OnInit, OnDestroy {
   }
 
   // Will overwrite this method in modal service
-  onHidden() {
-  }
+  onHidden() {}
 
-  updateButtonOptions<T>(buttonOptions: Array<T>) {
-  }
+  updateButtonOptions<T>(buttonOptions: Array<T>) {}
 
   canHideModel() {
     let hiddenResult = Promise.resolve(true);
@@ -105,8 +93,12 @@ export class ModalComponent implements OnInit, OnDestroy {
 
   onModalClick = ($event) => {
     // 一定要document.contains($event.target)，因为$event.target可能已经不在document里了，这个时候就不能进hide了,使用document.body兼容IE
-    if (this.backdropCloseable && !this.ignoreBackDropClick &&
-      (!this.dialogElement.nativeElement.contains($event.target) && this.document.body.contains($event.target))) {
+    if (
+      this.backdropCloseable &&
+      !this.ignoreBackDropClick &&
+      !this.dialogElement.nativeElement.contains($event.target) &&
+      this.document.body.contains($event.target)
+    ) {
       this.hide();
     }
     this.ignoreBackDropClick = false;
@@ -139,16 +131,8 @@ export class ModalComponent implements OnInit, OnDestroy {
   }
 
   show() {
-    if (this.document.documentElement.scrollHeight > this.document.documentElement.clientHeight) {
-      this.documentOverFlow = true;
-      this.scrollTop = this.document.documentElement.scrollTop || this.document.body.scrollTop;
-      this.scrollLeft = this.document.documentElement.scrollLeft || this.document.body.scrollLeft;
-      this.renderer.addClass(this.document.body, 'devui-body-scrollblock');
-      this.renderer.setStyle(this.document.body, 'top', `-${this.scrollTop}px`);
-      this.renderer.setStyle(this.document.body, 'left', `-${this.scrollLeft}px`);
-    }
-    if (!this.bodyScrollable && this.documentOverFlow) {
-      this.renderer.addClass(this.document.body, 'devui-body-overflow-hidden');
+    if (!this.bodyScrollable) {
+      this.cb = lockScroll();
     }
 
     this.dialogElement.nativeElement.focus();

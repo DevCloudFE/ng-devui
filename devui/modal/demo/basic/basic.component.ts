@@ -7,7 +7,6 @@ import { ModalTestComponent } from './modal-test.component';
   templateUrl: './basic.component.html',
 })
 export class BasicComponent {
-
   constructor(private dialogService: DialogService) {}
 
   openstandardDialog(dialogtype?: string) {
@@ -19,6 +18,7 @@ export class BasicComponent {
       content: ModalTestComponent,
       backdropCloseable: true,
       dialogtype: dialogtype,
+      bodyScrollable: false,
       onClose: () => {
         console.log('on dialog closed');
       },

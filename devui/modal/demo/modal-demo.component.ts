@@ -103,8 +103,7 @@ export class ModalDemoComponent implements OnInit, OnDestroy {
       { dAnchorLink: 'update-button-options', value: values['update-button-options'] },
       { dAnchorLink: 'configure-button-to-get-focus-automatically', value: values['configure-button-to-get-focus-automatically'] },
       { dAnchorLink: 'template-content', value: values['template-content'] },
-      { dAnchorLink: 'template-fixed', value: values['template-fixed'] },
-      { dAnchorLink: 'cases', value: values['cases'] }
+      { dAnchorLink: 'cases', value: values['cases'] },
     ];
   }
 

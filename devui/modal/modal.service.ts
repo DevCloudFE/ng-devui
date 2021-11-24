@@ -1,13 +1,8 @@
 import { DOCUMENT } from '@angular/common';
-import {
-  ComponentFactoryResolver,
-  Inject,
-  Injectable,
-  Renderer2, RendererFactory2
-} from '@angular/core';
+import { ComponentFactoryResolver, Inject, Injectable, Renderer2, RendererFactory2 } from '@angular/core';
+import { assign, isUndefined } from 'lodash-es';
 import { OverlayContainerRef } from 'ng-devui/overlay-container';
 import { DevConfigService } from 'ng-devui/utils/globalConfig';
-import { assign, isUndefined } from 'lodash-es';
 import { ModalComponent } from './modal.component';
 import { IModalOptions } from './modal.types';
 
@@ -16,10 +11,13 @@ export class ModalService {
   private renderer: Renderer2;
   document: Document;
 
-  constructor(private componentFactoryResolver: ComponentFactoryResolver,
-              private overlayContainerRef: OverlayContainerRef, private rendererFactory: RendererFactory2,
-              private devConfigService: DevConfigService,
-              @Inject(DOCUMENT) private doc: any) {
+  constructor(
+    private componentFactoryResolver: ComponentFactoryResolver,
+    private overlayContainerRef: OverlayContainerRef,
+    private rendererFactory: RendererFactory2,
+    private devConfigService: DevConfigService,
+    @Inject(DOCUMENT) private doc: any
+  ) {
     this.renderer = this.rendererFactory.createRenderer(null, null);
     this.document = this.doc;
   }
@@ -44,7 +42,7 @@ export class ModalService {
     offsetY,
     bodyScrollable = true,
     contentTemplate,
-    escapable = true
+    escapable = true,
   }: IModalOptions) {
     const finalComponentFactoryResolver = componentFactoryResolver || this.componentFactoryResolver;
 
@@ -63,9 +61,8 @@ export class ModalService {
     }
 
     if (showAnimation !== undefined) {
-
     } else if (showAnimate !== undefined) {
-      showAnimation = showAnimate ;
+      showAnimation = showAnimate;
     } else {
       showAnimation = showAnimateValue;
     }
@@ -82,27 +79,23 @@ export class ModalService {
       offsetY,
       bodyScrollable,
       contentTemplate,
-      escapable
+      escapable,
     });
 
     let modalContentInstance;
     if (component) {
-      modalContentInstance = modalRef.instance.modalContainerHost.viewContainerRef
-        .createComponent(finalComponentFactoryResolver.resolveComponentFactory(component), 0, injector);
+      modalContentInstance = modalRef.instance.modalContainerHost.viewContainerRef.createComponent(
+        finalComponentFactoryResolver.resolveComponentFactory(component),
+        0,
+        injector
+      );
       assign(modalContentInstance.instance, { data, handler });
     }
 
     modalRef.instance.onHidden = () => {
-      if (modalRef.instance.documentOverFlow) {
-        this.renderer.removeStyle(this.document.body, 'top');
-        this.renderer.removeStyle(this.document.body, 'left');
-        this.renderer.removeClass(this.document.body, 'devui-body-scrollblock');
-        this.renderer.removeClass(this.document.body, 'devui-body-overflow-hidden');
-        this.document.documentElement.scrollTop = modalRef.instance.scrollTop;
-        this.document.body.scrollTop = modalRef.instance.scrollTop;
-        this.document.documentElement.scrollLeft = modalRef.instance.scrollLeft;
-        this.document.body.scrollLeft = modalRef.instance.scrollLeft;
-    }
+      if (!modalRef.instance.bodyScrollable) {
+        modalRef.instance.cb();
+      }
       if (onClose) {
         onClose();
       }
@@ -115,7 +108,7 @@ export class ModalService {
 
     return {
       modalInstance: modalRef.instance,
-      modalContentInstance: modalContentInstance ? modalContentInstance.instance : null
+      modalContentInstance: modalContentInstance ? modalContentInstance.instance : null,
     };
   }
 }

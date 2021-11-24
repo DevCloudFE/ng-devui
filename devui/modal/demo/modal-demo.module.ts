@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 import { ButtonModule } from 'ng-devui/button';
 import { FormModule } from 'ng-devui/form';
 import { ModalModule } from 'ng-devui/modal';
@@ -10,7 +11,6 @@ import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
 import { TextInputModule } from 'ng-devui/text-input';
-import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 import { AutofocusComponent } from './autofocus/autofocus.component';
 import { BasicUpdateComponent } from './basic-update/basic-update.component';
@@ -77,6 +77,5 @@ import { WarningComponent } from './warning/warning.component';
     CasesComponent,
     ModalCasesComponent
   ],
-  
 })
 export class ModalDemoModule {}
