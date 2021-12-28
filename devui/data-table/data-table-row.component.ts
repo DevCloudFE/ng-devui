@@ -40,8 +40,8 @@ export class DataTableRowComponent implements OnInit {
   ngOnInit(): void {
     this.ngZone.runOutsideAngular(() => {
       this.rowRef.nativeElement.addEventListener(
-          'click',
-          this.onRowClick.bind(this)
+        'click',
+        this.onRowClick.bind(this)
       );
       this.rowRef.nativeElement.addEventListener(
         'dblclick',

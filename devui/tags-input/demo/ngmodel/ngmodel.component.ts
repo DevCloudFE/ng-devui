@@ -23,7 +23,7 @@ export class TagsInputDemoNgModelComponent implements OnInit {
 
   customCheck = (newtag: string) => {
     return true;
-  }
+  };
 
   getTagValue(value) {
     console.log(value);

@@ -66,7 +66,7 @@ export class DashboardWidgetComponent implements GridStackNode, OnChanges, After
   @Input() widgetData;
 
   @Output() widgetInit = new EventEmitter(true);
-  @Output() widgetResize = new EventEmitter<{width: number, height: number} | null>(true);
+  @Output() widgetResize = new EventEmitter<{width: number; height: number} | null>(true);
   @Output() widgetDestroy = new EventEmitter();
 
   @HostBinding('class.grid-stack-item')

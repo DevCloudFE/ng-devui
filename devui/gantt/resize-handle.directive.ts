@@ -134,7 +134,7 @@ export class ResizeHandleDirective {
 
   bindMousemove = (e) => {
     this.move(e);
-  }
+  };
 
   move(event: MouseEvent): void {
     this.moveCount++;

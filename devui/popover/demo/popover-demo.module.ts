@@ -50,6 +50,6 @@ import { ScrollElementComponent } from './scroll-element/scroll-element.componen
     ScrollElementComponent,
     HoverDelayTimeComponent,
   ],
-  
+
 })
 export class PopoverDemoModule {}

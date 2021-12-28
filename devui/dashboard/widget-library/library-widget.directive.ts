@@ -111,7 +111,7 @@ export class DashboardLibraryWidgetDirective implements OnChanges, AfterViewInit
     } else {
       return () => {};
     }
-  }
+  };
 
   helper = (event) => {
     if (this.dragMode === 'move') {
@@ -131,10 +131,10 @@ export class DashboardLibraryWidgetDirective implements OnChanges, AfterViewInit
       el.classList.add('grid-stack-item-adding-item-template');
       el.style.zIndex = '1060';
       if (this.width !== undefined) {
-        el.setAttribute('data-gs-width', this.width + '');
+        el.setAttribute('data-gs-width', String(this.width));
       }
       if (this.height !== undefined) {
-        el.setAttribute('data-gs-height', this.height + '');
+        el.setAttribute('data-gs-height', String(this.height));
       }
       this.setDragWidthHeight(el);
       const domPortalOutlet = new DomPortalOutlet(el, this.cfr, this.appRef, this.injector);
@@ -154,7 +154,7 @@ export class DashboardLibraryWidgetDirective implements OnChanges, AfterViewInit
       domPortalOutlet.dispose();
       return result;
     }
-  }
+  };
 
   copyCanvas(origin, target) {
     // 拷贝canvas的内容

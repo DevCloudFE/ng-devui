@@ -52,5 +52,5 @@ export class DynamicUploadOptionsComponent implements OnInit {
     files[0].uploadOptions.uri = '/upload2';
     console.log(files);
     return true;
-  }
+  };
 }

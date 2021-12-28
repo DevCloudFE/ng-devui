@@ -158,17 +158,17 @@ export class FilterComponent implements OnInit, OnChanges, OnDestroy {
 
   onContainerScroll = () => {
     this.closeFilter(this.filterDropdown);
-  }
+  };
 
   showFilterContent($event) {
     if (this.closeWhenScroll) {
       const tableViewElement = this.thComponent.tableViewRefElement.nativeElement.querySelector('.devui-scrollbar.scroll-view');
       if ($event) {
         this.document.addEventListener('scroll', this.onContainerScroll);
-        tableViewElement?.addEventListener('scroll', this.onContainerScroll);
+        if (tableViewElement) { tableViewElement.addEventListener('scroll', this.onContainerScroll); }
       } else {
         this.document.removeEventListener('scroll', this.onContainerScroll);
-        tableViewElement?.removeEventListener('scroll', this.onContainerScroll);
+        if (tableViewElement) { tableViewElement.removeEventListener('scroll', this.onContainerScroll); }
       }
     }
     this.searchText = '';

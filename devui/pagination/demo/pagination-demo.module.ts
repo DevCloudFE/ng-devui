@@ -41,7 +41,7 @@ import { WidgetsComponent } from './widgets/widgets.component';
     LiteComponent,
     WidgetsComponent
   ],
-  
+
 })
 export class PaginationDemoModule {
 }

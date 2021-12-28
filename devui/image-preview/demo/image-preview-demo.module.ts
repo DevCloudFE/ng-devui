@@ -42,6 +42,6 @@ import { ZIndexComponent } from './z-index/z-index.component';
     CustomOpenComponent,
     ZIndexComponent
   ],
-  
+
 })
 export class ImagePreviewDemoModule { }

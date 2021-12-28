@@ -53,7 +53,7 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
   dragBoxLeft;
   dragCellRef: HTMLElement;
 
-  searchQuery: { [key: string]: any; } = {};
+  searchQuery: { [key: string]: any } = {};
   multiSortArray: SortEventArg[] = [];
   sortField: string;
   sortDirection: 'ASC' | 'DESC' | '';
@@ -123,9 +123,9 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
               private ref: ChangeDetectorRef,
               private i18n: I18nService,
               @Inject(DOCUMENT) private doc: any) {
-      this.i18nCommonText = this.i18n.getI18nText().common;
-      this.document = this.doc;
-      this.documentElement = this.doc.documentElement;
+    this.i18nCommonText = this.i18n.getI18nText().common;
+    this.document = this.doc;
+    this.documentElement = this.doc.documentElement;
   }
 
   ngOnInit() {
@@ -244,8 +244,10 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
         cellIndex++;
       } else {
         if (column.advancedHeader[0].colspan) {
-          this.cellMap[cellIndex] = { name: column.field, isAdvanceHeader: true,
-            sortKey: [index], headerLength: column.advancedHeader[0].colspan };
+          this.cellMap[cellIndex] = {
+            name: column.field, isAdvanceHeader: true,
+            sortKey: [index], headerLength: column.advancedHeader[0].colspan
+          };
           cellIndex++;
         } else {
           Object.keys(this.cellMap).forEach(key => {
@@ -315,9 +317,9 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
   onBeginResize($event) {
     const thRenderWidthList = [];
     this.thList.forEach(th => {
-      thRenderWidthList.push({field: th.element.getAttribute('field'), width: th.element.clientWidth});
+      thRenderWidthList.push({ field: th.element.getAttribute('field'), width: th.element.clientWidth });
     });
-    this.beginResizeHandlerEvent.emit({event: $event, thRenderWidthList});
+    this.beginResizeHandlerEvent.emit({ event: $event, thRenderWidthList });
   }
 
   onResizing($event, column) {
@@ -366,7 +368,7 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
     setTimeout(() => { // fix chrome bug, mousedown的时候会错误的触发mousemove
       this.dispatchMousedown();
     });
-  }
+  };
 
   grab = (e) => {
     e.preventDefault();
@@ -375,7 +377,7 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
     const context = this.canStart(e.target);
     this.grabbed = context;
     this.documentElement.addEventListener('mousemove', this.startBecauseMouseMoved);
-  }
+  };
 
   startBecauseMouseMoved = (e) => {
     e.preventDefault();
@@ -400,7 +402,7 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
     this.offsetX = 15;
     this.offsetY = 15;
     this.renderMirrorImage(this.item);
-  }
+  };
 
   release = (e) => {
     e.preventDefault();
@@ -423,7 +425,7 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
     }
     this.sortColumn(this.originCellIndex.x, to);
     cancelAnimationFrame(this.animationRequestId);
-  }
+  };
 
   sortColumn = (from, to) => {
     if (from === to) {
@@ -453,7 +455,7 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
     for (let i = 0; i < loopCount; i++) {
       this.dragTableEndEvent.emit({ from: fromCell, to: toCell });
     }
-  }
+  };
 
   sort = ({ list, from, to }) => {
     if (!list[from] && !list[to]) {
@@ -464,7 +466,7 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
     } else {
       this.insertBeforeSibling({ target: list[from], origin: list[to] });
     }
-  }
+  };
 
   appendSibling({ target, origin }) {
     if (!target) {
@@ -570,7 +572,7 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
         this.el.style.display = 'none';
       });
     }
-  }
+  };
 
   renderFakeTable() {
     if (this.el && !this.dataSourceChange) {
@@ -828,7 +830,7 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
         this.animate(fixItemRect, fixItem, 300);
       }
     }
-  }
+  };
 
   handleScroll(x, y, e) {
     this.scrollViewRect = this.scrollViewEl.getBoundingClientRect();
@@ -904,7 +906,7 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
       result = rowL > resultL ? row : result;
     });
     return result;
-  }
+  };
   getColumnAsTableByIndex(table, selectedColIndex, colSpan, rowSpan) {
     const skipRowIndexList = this.getDataBetween(0, 0 + rowSpan);
     const cTable = table.cloneNode(true);
@@ -1025,7 +1027,7 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
     });
     this.sizeChildColumnFake(cTable, table, index);
     return cTable;
-  }
+  };
 
   sizeChildColumnFake(fakeTable, originEl, index) {
     // calculate width of every column
@@ -1050,7 +1052,7 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
         this.detecteChildTables(childTable);
       }
     });
-  }
+  };
   origin2DragItem(liTable) {
     this.css(liTable, { 'table-layout': 'fixed', width: 'initial', height: 'initial', padding: 0, margin: 0 });
     ['width', 'height', 'id'].forEach((p) => {
@@ -1061,9 +1063,8 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
   getElementBehindPoint(point, x, y) {
     const p = point || {};
     const state = p.className;
-    let el;
     p.className += ' gu-hide';
-    el = this.document.elementFromPoint(x, y);
+    const el = this.document.elementFromPoint(x, y);
     p.className = state;
     return el;
   }
@@ -1121,7 +1122,7 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
 
     const reference = target !== dropTarget ? inside() : outside();
     return reference;
-  }
+  };
 
   getRectWidth(rect) {
     return rect.width || (rect.right - rect.left);
@@ -1143,7 +1144,7 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
 
   isInitialPlacement(target, s) {
     let sibling;
-    if (s !== void 0) {
+    if (s !== undefined) {
       sibling = s;
     } else if (this.mirror) {
       sibling = this.currentSibling;
@@ -1170,7 +1171,7 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
       return null;
     }
     return immediate;
-  }
+  };
 
   animate(prevRect, target, time) {
     if (time) {
@@ -1180,7 +1181,6 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
       const currentRect = target.getBoundingClientRect();
       target.style.transition = 'none';
       target.style.transform = 'translate3d(' + (prevRect.left - currentRect.left) + 'px,' + (prevRect.top - currentRect.top) + 'px,0)';
-      target.offsetWidth; // tslint:disable-line
       target.style.transition = 'all ' + time + 'ms cubic-bezier(0.755, 0.05, 0.855, 0.06)';
       target.style.transform = 'translate3d(0,0,0)';
       clearTimeout(target.animated);

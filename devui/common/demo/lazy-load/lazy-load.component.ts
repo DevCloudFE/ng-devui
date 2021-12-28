@@ -16,7 +16,7 @@ export class LazyLoadComponent implements OnInit {
   next1 = 1;
   showLoading1 = false;
   list1 = [];
-  target:any = window;
+  target: any = window;
   constructor() { }
 
   ngOnInit() {
@@ -37,8 +37,8 @@ export class LazyLoadComponent implements OnInit {
       tmpList.push(this.sentence);
     }
     setTimeout(() => {
-        this.list = this.list.concat(tmpList);
-        this.showLoading = false;
+      this.list = this.list.concat(tmpList);
+      this.showLoading = false;
     }, 300);
 
     this.complete = this.next > this.total;
@@ -55,8 +55,8 @@ export class LazyLoadComponent implements OnInit {
       tmpList.push(this.sentence);
     }
     setTimeout(() => {
-        this.list1 = this.list1.concat(tmpList);
-        this.showLoading1 = false;
+      this.list1 = this.list1.concat(tmpList);
+      this.showLoading1 = false;
     }, 300);
 
     this.complete = this.next1 > this.total;

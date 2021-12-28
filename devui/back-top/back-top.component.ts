@@ -49,11 +49,11 @@ export class BackTopComponent implements OnInit, OnChanges, OnDestroy {
   addScrollEvent() {
     this.subs.add(
       fromEvent(this.getScrollTarget(), 'scroll')
-      .pipe(debounceTime(this.SCROLL_REFRESH_INTERVAL))
-      .subscribe(() => {
-        this.showButton();
-        this.cdr.detectChanges();
-      })
+        .pipe(debounceTime(this.SCROLL_REFRESH_INTERVAL))
+        .subscribe(() => {
+          this.showButton();
+          this.cdr.detectChanges();
+        })
     );
   }
 
@@ -68,7 +68,7 @@ export class BackTopComponent implements OnInit, OnChanges, OnDestroy {
 
   showButton() {
     this.currScrollTop = this.target === window ?
-    (window.pageYOffset || this.document.documentElement.scrollTop || this.document.body.scrollTop) : this.scrollTarget.scrollTop;
+      (window.pageYOffset || this.document.documentElement.scrollTop || this.document.body.scrollTop) : this.scrollTarget.scrollTop;
     if (this.isVisible !== (this.currScrollTop >= this.visibleHeight)) {
       this.isVisible = !this.isVisible;
     }

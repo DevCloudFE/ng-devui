@@ -74,7 +74,7 @@ export const routesConfig = [
     path: 'design-border-radius',
     component: ExamplePanelComponent,
     loadChildren: () => import('../../../devui/design-token/border-radius/demo/design-border-radius-demo.module')
-    .then((m) => m.DesignBorderRadiusDemoModule),
+      .then((m) => m.DesignBorderRadiusDemoModule),
     data: {
       type: 'Design Tokens',
       enType: 'Design Tokens',

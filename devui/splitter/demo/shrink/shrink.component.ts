@@ -1,6 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { SplitterOrientation } from 'ng-devui/splitter';
 
+interface IMenuType {
+  title: string;
+  active: boolean;
+  children?: Array<{
+    title: string;
+    active: boolean;
+  }>;
+  icon?: string;
+}
+
 @Component({
   selector: 'd-splitter-demo-shrink',
   templateUrl: './shrink.component.html',
@@ -104,12 +114,4 @@ export class SplitterDemoMenuFoldComponent implements OnInit {
   }
 }
 
-interface IMenuType {
-  title: string;
-  active: boolean;
-  children?: Array<{
-    title: string;
-    active: boolean;
-  }>;
-  icon?: string;
-}
+

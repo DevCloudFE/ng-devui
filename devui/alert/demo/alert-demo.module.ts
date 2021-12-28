@@ -38,7 +38,7 @@ import { WithoutIconComponent } from './withoutIcon/withoutIcon.component';
     CloseComponent,
     WithoutIconComponent
   ],
-  
+
 })
 export class AlertDemoModule {
 }

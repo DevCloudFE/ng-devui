@@ -51,15 +51,15 @@ export class GanttToolsComponent {
 
   avtionHandle (type) {
     switch (type) {
-      case 'today':
-        this.goToday.emit();
-        break;
-      case 'reduce':
-        this.reduceUnit.emit();
-        break;
-      case 'increase':
-        this.increaseUnit.emit();
-        break;
+    case 'today':
+      this.goToday.emit();
+      break;
+    case 'reduce':
+      this.reduceUnit.emit();
+      break;
+    case 'increase':
+      this.increaseUnit.emit();
+      break;
     }
   }
 

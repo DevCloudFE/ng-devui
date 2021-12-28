@@ -32,10 +32,10 @@ describe('card', () => {
   let cardElement: HTMLElement;
 
   beforeEach(() => {
-      TestBed.configureTestingModule({
-          imports: [CardModule, AvatarModule],
-          declarations: [TestCardComponent]
-      });
+    TestBed.configureTestingModule({
+      imports: [CardModule, AvatarModule],
+      declarations: [TestCardComponent]
+    });
   });
 
   beforeEach(() => {

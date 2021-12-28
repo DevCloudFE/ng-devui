@@ -21,10 +21,10 @@ describe('button-group', () => {
   let buttonGroupElement: HTMLElement;
 
   beforeEach(() => {
-      TestBed.configureTestingModule({
-          imports: [ButtonModule],
-          declarations: [TestButtonGroupComponent]
-      });
+    TestBed.configureTestingModule({
+      imports: [ButtonModule],
+      declarations: [TestButtonGroupComponent]
+    });
   });
 
   beforeEach(() => {

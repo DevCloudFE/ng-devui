@@ -64,7 +64,7 @@ class TestDownloadComponent {
 
   downloadError = (response) => {
     this.downError = response;
-  }
+  };
 }
 
 @Component({

@@ -72,7 +72,7 @@ export class DraggableComponent implements OnInit {
       console.log('dropNodeId: ' + dropNodeId);
       resovle(undefined);
     });
-  }
+  };
 
   onDrop(data) {
     this.transferData = data.event.dataTransfer.getData('Text');

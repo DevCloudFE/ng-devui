@@ -13,6 +13,12 @@ export interface CellSelectedEventArg {
   rowComponent: DataTableRowComponent;
 }
 
+export enum SortDirection {
+  ASC = 'ASC',
+  DESC = 'DESC',
+  default = ''
+}
+
 export interface RowSelectedEventArg {
   rowIndex: number;
   nestedIndex: string;
@@ -72,12 +78,6 @@ export enum ColumnAdjustStrategy {
 export interface TableCheckStatusArg {
   pageAllChecked?: boolean;
   pageHalfChecked?: boolean;
-}
-
-export enum SortDirection {
-  ASC = 'ASC',
-  DESC = 'DESC',
-  default = ''
 }
 
 export interface TableWidthConfig {

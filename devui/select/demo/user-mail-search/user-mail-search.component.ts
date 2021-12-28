@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { of } from 'rxjs';
 
 @Component({
-    selector: 'd-user-mail-search',
-    templateUrl: './user-mail-search.component.html',
+  selector: 'd-user-mail-search',
+  templateUrl: './user-mail-search.component.html',
   styleUrls: ['./user-mail-search.component.css']
 })
 export class UserMailSearchComponent {
@@ -31,5 +31,5 @@ export class UserMailSearchComponent {
           || item.option.email.toLowerCase().indexOf(term.toLowerCase()) !== -1)
         )
     );
-  }
+  };
 }

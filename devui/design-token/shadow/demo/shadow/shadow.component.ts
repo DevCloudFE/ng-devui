@@ -43,7 +43,7 @@ export class ShadowComponent implements OnInit, OnDestroy {
       }
     });
     this.shadows = cloneDeep(this.shadows);
-  }
+  };
 
   setI18n() {
     this.subs.add(

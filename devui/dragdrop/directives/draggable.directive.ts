@@ -10,7 +10,7 @@ import { PreserveNextEventEmitter } from './../shared/preserve-next-event-emitte
 import { DragPreviewDirective } from './drag-preview.directive';
 
 @Directive({
-    selector: '[dDraggable]'
+  selector: '[dDraggable]'
 })
 /**
  * Makes an element draggable by adding the draggable html attribute
@@ -68,19 +68,19 @@ export class DraggableDirective implements OnInit, AfterViewInit, OnDestroy {
   @Output() dropEndEvent: PreserveNextEventEmitter<any> = new PreserveNextEventEmitter<any>();
   @Input()
   public get disabled(): boolean {
-      return this._disabled;
+    return this._disabled;
   }
 
   public set disabled(value: boolean) {
-      this._disabled = value;
-      this.draggable = !this._disabled;
+    this._disabled = value;
+    this.draggable = !this._disabled;
   }
   private _disabled: boolean;
 
   @Input() enableDragFollow = false; // 默认false使用浏览器H5API拖拽, 否则使用原dom定位偏移
   @Input() dragFollowOptions: {
-      appendToBody?: boolean;
-    };
+    appendToBody?: boolean;
+  };
   @Input() originPlaceholder: {
     show?: boolean;
     tag?: string;
@@ -106,8 +106,8 @@ export class DraggableDirective implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(public el: ElementRef, private renderer: Renderer2, private dragDropService: DragDropService, private ngZone: NgZone,
               @Optional() @Self() public dragPreviewDirective: DragPreviewDirective, @Inject(DOCUMENT) private doc: any
-    ) {
-      this.document = this.doc;
+  ) {
+    this.document = this.doc;
   }
 
   ngOnInit() {
@@ -140,7 +140,7 @@ export class DraggableDirective implements OnInit, AfterViewInit, OnDestroy {
           this.dragDropService.draggedElIdentity = undefined;
         }
         this.dragDropService.subscription.unsubscribe();
-    })).add(
+      })).add(
       this.dragDropService.dragElShowHideEvent.subscribe(this.dragElShowHideEvent)
     );
   }
@@ -150,7 +150,7 @@ export class DraggableDirective implements OnInit, AfterViewInit, OnDestroy {
     if (this.dragIdentity) {
       if (this.dragDropService.draggedEl && this.dragIdentity === this.dragDropService.draggedElIdentity) {
         if (this.originPlaceholder && this.originPlaceholder.show !== false) {
-            this.insertOriginPlaceholder();
+          this.insertOriginPlaceholder();
         }
         this.dragDropService.draggedEl = this.el.nativeElement;
         this.el.nativeElement.style.display = 'none'; // recovery don't need to emit event
@@ -252,7 +252,7 @@ export class DraggableDirective implements OnInit, AfterViewInit, OnDestroy {
       if (this.dragDropService.batchDragging
         && this.dragDropService.batchDragData && this.dragDropService.batchDragData.length > 1) {
         this.dragDropService.batchDragData.map(dragData => dragData.draggable)
-          .filter(draggable => draggable &&　draggable !== this)
+          .filter(draggable => draggable && draggable !== this)
           .forEach((draggable) => {
             if (draggable.originPlaceholder && draggable.originPlaceholder.show !== false) {
               draggable.insertOriginPlaceholder(true, false);
@@ -263,13 +263,13 @@ export class DraggableDirective implements OnInit, AfterViewInit, OnDestroy {
           });
       }
       // Firefox requires setData() to be called otherwise the drag does not work.
-      if (e.dataTransfer != null) {
-          e.dataTransfer.setData('text', '');
+      if (e.dataTransfer !== null) {
+        e.dataTransfer.setData('text', '');
       }
       e.dataTransfer.effectAllowed = this.dragEffect;
       this.dropSubscription();
       if (this.dragDropService.dragFollow) {
-        if ('function' === typeof DataTransfer.prototype.setDragImage) {
+        if (typeof DataTransfer.prototype.setDragImage === 'function') {
           e.dataTransfer.setDragImage(this.dragDropService.dragEmptyImage, 0 , 0);
         } else {
           e.srcElement.style.display = 'none';
@@ -298,7 +298,7 @@ export class DraggableDirective implements OnInit, AfterViewInit, OnDestroy {
       }
       if (this.dragDropService.batchDragging && this.dragDropService.batchDragData && this.dragDropService.batchDragData.length > 1) {
         this.dragDropService.batchDragData.map(dragData => dragData.draggable)
-          .filter(draggable => draggable &&　draggable !== this)
+          .filter(draggable => draggable && draggable !== this)
           .forEach((draggable) => {
             if (draggable.originPlaceholder && draggable.originPlaceholder.show !== false) {
               draggable.el.nativeElement.style.display = '';
@@ -338,9 +338,9 @@ export class DraggableDirective implements OnInit, AfterViewInit, OnDestroy {
     if (!this.draggable) {
       return false;
     }
-    if (this.batchDraggable &&　!this.batchDraggable.allowAddToBatchGroup()) {  // 批量拖拽判断group是否相同
+    if (this.batchDraggable && !this.batchDraggable.allowAddToBatchGroup()) {  // 批量拖拽判断group是否相同
       return false;
-  }
+    }
     if (this.dragHandle) {
       if (e && e.fromTouch) {return true; } // from touchstart dispatch event
       if (!this.mouseOverElement) { return false; }
@@ -413,7 +413,7 @@ export class DraggableDirective implements OnInit, AfterViewInit, OnDestroy {
     this.dragOriginPlaceholder = node;
     this.dragOriginPlaceholderNextSibling = this.el.nativeElement.nextSibling;
     this.el.nativeElement.parentElement.insertBefore(node, this.el.nativeElement.nextSibling);
-  }
+  };
 
   public removeOriginPlaceholder = (updateService = true) => {
     if (this.dragOriginPlaceholder) {
@@ -425,7 +425,7 @@ export class DraggableDirective implements OnInit, AfterViewInit, OnDestroy {
     }
     this.dragOriginPlaceholder = undefined;
     this.dragOriginPlaceholderNextSibling = undefined;
-  }
+  };
   public delayRemoveOriginPlaceholder = (updateService = true) => {
     const timeout = this.originPlaceholder.removeDelay;
     const delayOriginPlaceholder = this.dragOriginPlaceholder;
@@ -462,7 +462,7 @@ export class DraggableDirective implements OnInit, AfterViewInit, OnDestroy {
       this.dragOriginPlaceholder = undefined;
       this.dragOriginPlaceholderNextSibling = undefined;
     });
-  }
+  };
   findNextSibling(currentNextSibling) {
     if (!this.dragDropService.batchDragData) {
       return currentNextSibling;

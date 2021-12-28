@@ -56,32 +56,32 @@ export class UserLimitSelectedNumberComponent {
   checkSelectionNumberFunc = () => {
     this.checkSelectionNumber(this.currentOption1, this.options2, 2,
       this.equalNumberFunc, this.exccedNumberFunc, this.restoreFunc);
-  }
+  };
 
   // equalNumberFn
   disabledOthers = (selection: Array<any>, originOptions: Array<any>, disabledKey: string) => {
-    originOptions.filter(op => selection.indexOf(op) < 0).forEach(op => op[disabledKey] = true);
-  }
+    originOptions.filter(op => selection.indexOf(op) < 0).forEach(op => {op[disabledKey] = true;});
+  };
 
   // exccedNumberFn
   acceptOptionByNumber = (selection: Array<any>, originOptions: Array<any>, maxNumber: number, disabledKey: string) => {
     this.currentOption1 =  // 此处需要手动改外部变量的地址
     selection = selection.filter((_, index) => (index < maxNumber));
     this.disabledOthers(selection, originOptions, disabledKey);
-  }
+  };
 
   // restoreFn
   restoreOption = (originOptions: Array<any>, disabledKey: string, disabledAlwaysKey: string) => {
-    originOptions.filter(op => op[disabledAlwaysKey] !== true).forEach(op => op[disabledKey] = false);
-    originOptions.filter(op => op[disabledAlwaysKey] === true).forEach(op => op[disabledKey] = true);
-  }
+    originOptions.filter(op => op[disabledAlwaysKey] !== true).forEach(op =>{ op[disabledKey] = false;});
+    originOptions.filter(op => op[disabledAlwaysKey] === true).forEach(op =>{ op[disabledKey] = true;});
+  };
 
   equalNumberFunc = () => {
     const selection = this.currentOption1;
     const originOptions = this.options2;
     const disabledKey = 'disabled';
     this.disabledOthers(selection, originOptions, disabledKey);
-  }
+  };
 
   exccedNumberFunc = () => {
     const selection = this.currentOption1;
@@ -89,12 +89,12 @@ export class UserLimitSelectedNumberComponent {
     const maxNumber = 2;
     const disabledKey = 'disabled';
     this.acceptOptionByNumber(selection, originOptions, maxNumber, disabledKey);
-  }
+  };
 
   restoreFunc = () => {
     const originOptions = this.options2;
     const disabledKey = 'disabled';
     const disabledAlwaysKey = 'disabledAlways';
     this.restoreOption(originOptions, disabledKey, disabledAlwaysKey);
-  }
+  };
 }

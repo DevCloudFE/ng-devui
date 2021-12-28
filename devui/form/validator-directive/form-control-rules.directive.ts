@@ -455,7 +455,7 @@ const dControlErrorStatusHost = {
 @Directive({
   selector: `[dValidateRules][formGroupName],[dValidateRules][formArrayName],[dValidateRules][ngModelGroup],
           [dValidateRules][formGroup],[dValidateRules]form:not([ngNoForm]),[dValidateRules][ngForm]`,
-  // tslint:disable-next-line: no-host-metadata-property
+  /* eslint-disable-next-line @angular-eslint/no-host-metadata-property*/
   host: dControlErrorStatusHost,
   exportAs: 'dValidateRules',
 })
@@ -500,7 +500,7 @@ export class DFormGroupRuleDirective extends DAbstractControlRuleDirective imple
 
 @Directive({
   selector: '[dValidateRules][formControlName],[dValidateRules][ngModel],[dValidateRules][formControl]',
-  // tslint:disable-next-line: no-host-metadata-property
+  /* eslint-disable-next-line @angular-eslint/no-host-metadata-property*/
   host: dControlErrorStatusHost,
   exportAs: 'dValidateRules',
 })
@@ -523,13 +523,13 @@ export class DFormControlRuleDirective extends DAbstractControlRuleDirective imp
   }
 
   constructor(
-    @Self() cd: NgControl,
-    @Optional() @Host() private dFormItem: FormItemComponent,
-    @Optional() @Host() @SkipSelf() parentDir: DFormGroupRuleDirective,
-    private i18n: I18nService,
-    public triggerElementRef: ElementRef,
-    private overlayContainerRef: OverlayContainerRef,
-    private componentFactoryResolver: ComponentFactoryResolver
+  @Self() cd: NgControl,
+          @Optional() @Host() private dFormItem: FormItemComponent,
+          @Optional() @Host() @SkipSelf() parentDir: DFormGroupRuleDirective,
+          private i18n: I18nService,
+          public triggerElementRef: ElementRef,
+          private overlayContainerRef: OverlayContainerRef,
+          private componentFactoryResolver: ComponentFactoryResolver
   ) {
     super(cd, parentDir);
   }
@@ -580,8 +580,8 @@ export class DFormControlRuleDirective extends DAbstractControlRuleDirective imp
   }
 
   updateStatusAndMessageToView(status: any): void {
-    let controlStatus = null,
-      message = null;
+    let controlStatus = null;
+    let message = null;
     if (this.showStatus) {
       [controlStatus, message] = this.getFormControlStatusAndMessage(status);
     }

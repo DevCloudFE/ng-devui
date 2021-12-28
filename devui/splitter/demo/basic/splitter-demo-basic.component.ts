@@ -7,7 +7,7 @@ import { SplitterOrientation } from 'ng-devui/splitter';
   styleUrls: ['../splitter-demo.component.scss']
 })
 export class SplitterDemoBasicComponent {
- // splitter input
+  // splitter input
   orientation: SplitterOrientation = 'horizontal';
   splitBarSize = '2px';
   disabledBarSize = '1px';

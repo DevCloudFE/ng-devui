@@ -78,12 +78,14 @@ export class UploadComponent {
     // 触发文件上传
     let finalUploads = [];
     await uploads[0].send(uploads).finally(() =>
-      // 根据uploads[0]的上传状态为其他file设置状态
+    // 根据uploads[0]的上传状态为其他file设置状态
+    {
       finalUploads = uploads.map((file) => {
         file.status = uploads[0].status;
         file.percentage = uploads[0].percentage;
         return { file: file.file, response: uploads[0].response };
-      })
+      });
+    }
     );
 
     return finalUploads;

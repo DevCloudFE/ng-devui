@@ -17,7 +17,7 @@ import { LoadingService } from './loading.service';
     LoadingBackdropComponent,
     LoadingComponent
   ],
-  
+
   providers: [LoadingService],
 })
 export class LoadingModule {

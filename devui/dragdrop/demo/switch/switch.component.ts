@@ -22,7 +22,7 @@ export class SwitchComponent {
     let index = e.dropIndex;
     const fromIndex = e.dragFromIndex;
     if (-1 !== index) {
-      /*修正同一个container排序，往下拖动index多了1个位置*/
+      /* 修正同一个container排序，往下拖动index多了1个位置*/
       if (-1 !== fromIndex && index > fromIndex) {
         index--;
       }
@@ -30,7 +30,7 @@ export class SwitchComponent {
     } else {
       this.list2.push(e.dragData);
     }
-    if (-1 === fromIndex) {
+    if (fromIndex === -1) {
       this.removeItem(e.dragData, this.list1);
     }
   }

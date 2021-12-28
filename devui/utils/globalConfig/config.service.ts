@@ -30,8 +30,8 @@ export class DevConfigService {
     );
   }
   set<T extends DevUIGlobalConfigKey>(componentName: T, value: DevUIGlobalConfig[T]): void {
-      this.config[componentName] = { ...this.config[componentName], ...value };
-      this.configUpdated$.next(componentName);
+    this.config[componentName] = { ...this.config[componentName], ...value };
+    this.configUpdated$.next(componentName);
 
   }
 }

@@ -139,6 +139,7 @@ export class EditableSelectComponent implements ControlValueAccessor, OnInit, On
   toggle($event: Event) {
     const inputString = typeof this.inputValue === 'object' ? this.inputValue.label : this.inputValue || '';
     this.activeIndex = this.source
+      /* eslint-disable-next-line array-callback-return*/
       .map((item) => {
         if (typeof item === 'string') {
           return item.toLowerCase();

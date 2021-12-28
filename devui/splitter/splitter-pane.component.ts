@@ -13,23 +13,23 @@ import { CollapseDirection, SplitterOrientation } from './splitter.types';
 })
 
 export class SplitterPaneComponent implements OnChanges, AfterViewChecked {
-   // pane的最小值
-   @Input() minSize: string;
-   // pane的最大值
-   @Input() maxSize: string;
-   // 当前panel是否可调整大小
-   @Input() resizable = true;
-   // 面板是否可折叠
-   @Input() collapsible = false;
-   // 是否折叠收缩
-   @Input() shrink = false;
-   // 折叠收缩后宽度
-   @Input() shrinkWidth = 36;
-   // 面板初始化是否折叠，默认不折叠
-   @Input() collapsed = false;
-   // 非边缘面板折叠方向，before只生成向前折叠的按钮，after生成向后折叠按钮，both生成两个
-   @Input() collapseDirection: CollapseDirection = 'both';
-   widthBeforeShrink;
+  // pane的最小值
+  @Input() minSize: string;
+  // pane的最大值
+  @Input() maxSize: string;
+  // 当前panel是否可调整大小
+  @Input() resizable = true;
+  // 面板是否可折叠
+  @Input() collapsible = false;
+  // 是否折叠收缩
+  @Input() shrink = false;
+  // 折叠收缩后宽度
+  @Input() shrinkWidth = 36;
+  // 面板初始化是否折叠，默认不折叠
+  @Input() collapsed = false;
+  // 非边缘面板折叠方向，before只生成向前折叠的按钮，after生成向后折叠按钮，both生成两个
+  @Input() collapseDirection: CollapseDirection = 'both';
+  widthBeforeShrink;
   // pane初始化大小
   _size;
   @Input()
@@ -68,7 +68,7 @@ export class SplitterPaneComponent implements OnChanges, AfterViewChecked {
     this.setOrderStyles();
   }
   get order() {
-      return this._order;
+    return this._order;
   }
 
   constructor(private splitter: SplitterService, private el: ElementRef, private renderer: Renderer2) {

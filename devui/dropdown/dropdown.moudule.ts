@@ -25,7 +25,7 @@ import { DropDownDirective } from './dropdown.directive';
     DropDownToggleDirective,
     DropDownAppendToBodyComponent
   ],
-  
+
 })
 export class DropDownModule {
 }

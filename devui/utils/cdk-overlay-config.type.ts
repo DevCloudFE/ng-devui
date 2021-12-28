@@ -2,7 +2,7 @@ import { ConnectedPosition } from '@angular/cdk/overlay';
 
 export type AppendToBodyDirection= 'rightDown'| 'rightUp' | 'leftUp'| 'leftDown' | 'centerDown' | 'centerUp';
 export const AppendToBodyDirectionsConfig: {
-  [p in AppendToBodyDirection] : ConnectedPosition
+  [p in AppendToBodyDirection]: ConnectedPosition
 } = {
   'rightDown': {
     originX: 'start',

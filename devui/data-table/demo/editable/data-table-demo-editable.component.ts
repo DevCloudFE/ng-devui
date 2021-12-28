@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { EditableTip } from 'ng-devui/data-table';
-import { editableOriginSource, genderSource, SourceType } from '../mock-data';
+import { cloneDeep } from 'lodash-es';
+import { editableOriginSource, genderSource } from '../mock-data';
 
 @Component({
-    selector: 'd-editable',
-    templateUrl: './data-table-demo-editable.component.html'
+  selector: 'd-editable',
+  templateUrl: './data-table-demo-editable.component.html'
 })
 export class DatatableDemoEditableComponent implements OnInit {
   genderSource = genderSource;
-  basicDataSource: Array<SourceType> = JSON.parse(JSON.stringify(editableOriginSource.slice(0, 6)));
+  basicDataSource = cloneDeep(editableOriginSource.slice(0, 6));
 
   editableTip = EditableTip.btn;
   nameEditing: boolean;
@@ -22,7 +23,7 @@ export class DatatableDemoEditableComponent implements OnInit {
 
   beforeEditStart = (rowItem, field) => {
     return true;
-  }
+  };
 
   beforeEditEnd = (rowItem, field) => {
     console.log('beforeEditEnd');
@@ -31,5 +32,5 @@ export class DatatableDemoEditableComponent implements OnInit {
     } else {
       return true;
     }
-  }
+  };
 }

@@ -54,7 +54,7 @@ import { UploadDemoComponent } from './upload-demo.component';
     DynamicUploadOptionsComponent,
     CustomizeAreaUploadComponent
   ],
-  
+
   providers: [],
 })
 export class UploadDemoModule {

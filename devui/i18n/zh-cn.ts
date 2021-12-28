@@ -65,7 +65,7 @@ export default {
     hour: '时',
     min: '分',
     second: '秒'
- },
+  },
   form: {
     required(val): string {
       return '值不能为空';

@@ -64,7 +64,7 @@ export class RateComponent implements OnInit, ControlValueAccessor {
     }
   }
 
-  hoverToggle(event, index?: number, reset: boolean = false) {
+  hoverToggle(event, index?: number, reset = false) {
     if (this.read) {
       return;
     }

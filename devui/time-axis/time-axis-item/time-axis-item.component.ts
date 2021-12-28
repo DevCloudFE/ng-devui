@@ -27,29 +27,29 @@ export class TimeAxisItemComponent implements OnInit {
   @Input()
   set type(type) {
     switch (type) {
-      case 'success':
-        this._type = 'right';
-        break;
+    case 'success':
+      this._type = 'right';
+      break;
 
-      case 'danger':
-        this._type = 'danger';
-        break;
+    case 'danger':
+      this._type = 'danger';
+      break;
 
-      case 'warning':
-        this._type = 'warning';
-        break;
+    case 'warning':
+      this._type = 'warning';
+      break;
 
-      case 'primary':
-        this._type = 'primary';
-        break;
+    case 'primary':
+      this._type = 'primary';
+      break;
 
-      case 'running':
-        this._type = 'running';
-        this.dotText = '↻';
-        break;
+    case 'running':
+      this._type = 'running';
+      this.dotText = '↻';
+      break;
 
-      default:
-        break;
+    default:
+      break;
     }
   }
 

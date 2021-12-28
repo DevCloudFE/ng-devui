@@ -85,7 +85,7 @@ export class DropScrollComponent {
     } else {
       targetArray.push(item);
     }
-    if (-1 === fromIndex) {
+    if (fromIndex === -1) {
       this.removeItem(item, parentArray);
     }
   }

@@ -3,13 +3,11 @@ import {
   OnInit,
   ViewChild
 } from '@angular/core';
-
 import {
   CheckableRelation,
   DataTableComponent,
   TableWidthConfig
 } from 'ng-devui/data-table';
-
 import {
   SourceType,
   treeDataSource
@@ -70,14 +68,14 @@ export class TreeDataComponent implements OnInit {
               dob: new Date(1989, 1, 1),
               startDate: new Date(2020, 1, 4),
               endDate: new Date(2020, 1, 8)
-          });
+            });
           }
         }
         resolve(rowItem);
       }, 500);
 
     });
-  }
+  };
 
   loadAllChildrenTable = () => {
     return new Promise((resolve) => {
@@ -90,15 +88,15 @@ export class TreeDataComponent implements OnInit {
           dob: new Date(1989, 1, 1),
         },
         {
-            title: 'table title01212',
-            lastName: 'Mark',
-            status: 'done',
-            dob: new Date(1991, 3, 1)
+          title: 'table title01212',
+          lastName: 'Mark',
+          status: 'done',
+          dob: new Date(1991, 3, 1)
         });
         resolve(undefined);
       }, 500);
     });
-  }
+  };
 
   setUnCheckableRelation(type) {
     if (type === 'upward') {

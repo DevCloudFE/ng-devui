@@ -1,0 +1,88 @@
+<h3>Basic</h3>
+<h4>Justify Left</h4>
+<d-row [dJustify]="'start'">
+  <d-col [dSpan]="6">col-6</d-col>
+  <d-col [dSpan]="6">col-6</d-col>
+  <d-col [dSpan]="6">col-6</d-col>
+</d-row>
+<h4>Justify Center</h4>
+<d-row [dJustify]="'center'">
+  <d-col [dSpan]="6">col-6</d-col>
+  <d-col [dSpan]="6">col-6</d-col>
+  <d-col [dSpan]="6">col-6</d-col>
+</d-row>
+<h4>Justify Right</h4>
+<d-row [dJustify]="'end'">
+  <d-col [dSpan]="6">col-6</d-col>
+  <d-col [dSpan]="6">col-6</d-col>
+  <d-col [dSpan]="6">col-6</d-col>
+</d-row>
+<h4>Justify Around</h4>
+<d-row [dJustify]="'around'">
+  <d-col [dSpan]="6">col-6</d-col>
+  <d-col [dSpan]="6">col-6</d-col>
+  <d-col [dSpan]="6">col-6</d-col>
+</d-row>
+<h4>Justify Between</h4>
+<d-row [dJustify]="'between'">
+  <d-col [dSpan]="6">col-6</d-col>
+  <d-col [dSpan]="6">col-6</d-col>
+  <d-col [dSpan]="6">col-6</d-col>
+</d-row>
+<h4>Align Top</h4>
+<d-row [dAlign]="'start'" class="base-container">
+  <d-col [dSpan]="6">col-6</d-col>
+  <d-col [dSpan]="6" class="full-height">col-6</d-col>
+  <d-col [dSpan]="6">col-6</d-col>
+  <d-col [dSpan]="6">col-6</d-col>
+</d-row>
+<h4>Align Center</h4>
+<d-row [dAlign]="'center'" class="base-container">
+  <d-col [dSpan]="6">col-6</d-col>
+  <d-col [dSpan]="6" class="full-height">col-6</d-col>
+  <d-col [dSpan]="6">col-6</d-col>
+  <d-col [dSpan]="6">col-6</d-col>
+</d-row>
+<h4>Align Bottom</h4>
+<d-row [dAlign]="'end'" class="base-container">
+  <d-col [dSpan]="6">col-6</d-col>
+  <d-col [dSpan]="6" class="full-height">col-6</d-col>
+  <d-col [dSpan]="6">col-6</d-col>
+  <d-col [dSpan]="6">col-6</d-col>
+</d-row>
+<h4>Align Baseline</h4>
+<d-row [dAlign]="'baseline'" class="base-container">
+  <d-col [dSpan]="6">col-6</d-col>
+  <d-col [dSpan]="6" class="full-height">col-6</d-col>
+  <d-col [dSpan]="6">col-6</d-col>
+  <d-col [dSpan]="6">col-6</d-col>
+</d-row>
+<h4>Align Stretch</h4>
+<d-row [dAlign]="'stretch'" class="base-container">
+  <d-col [dSpan]="6">col-6</d-col>
+  <d-col [dSpan]="6" class="full-height">col-6</d-col>
+  <d-col [dSpan]="6">col-6</d-col>
+  <d-col [dSpan]="6">col-6</d-col>
+</d-row>
+<h4>Col Align Self</h4>
+<d-row class="base-container">
+  <d-col [dSpan]="6">col-6</d-col>
+  <d-col [dSpan]="6" class="full-height">col-6</d-col>
+  <d-col [dSpan]="6" [dAlignSelf]="'center'">col-6、align-self-center</d-col>
+  <d-col [dSpan]="6">col-6</d-col>
+</d-row>
+
+<h3>Responsive</h3>
+<h4>Justify Responsive</h4>
+<d-row [dJustify]="{ ss: 'start', xs: 'between', md: 'end' }">
+  <d-col [dSpan]="6">col-6</d-col>
+  <d-col [dSpan]="6">col-6</d-col>
+  <d-col [dSpan]="6">col-6</d-col>
+</d-row>
+<h4>Align Responsive</h4>
+<d-row [dAlign]="{ ss: 'start', md: 'end' }" class="base-container">
+  <d-col [dSpan]="6">col-6</d-col>
+  <d-col [dSpan]="6" class="full-height">col-6</d-col>
+  <d-col [dSpan]="6">col-6</d-col>
+  <d-col [dSpan]="6">col-6</d-col>
+</d-row>

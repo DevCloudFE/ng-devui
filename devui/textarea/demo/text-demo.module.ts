@@ -38,7 +38,7 @@ import { TextDemoComponent } from './text-demo.component';
     ResizeComponent,
     CountComponent
   ],
-  
+
 })
 export class TextDemoModule {
 }

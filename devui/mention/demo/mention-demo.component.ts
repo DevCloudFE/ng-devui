@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
+import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-mention-demo',
+  selector: 'd-mention-demo',
   templateUrl: './mention-demo.component.html'
 })
 export class MentionDemoComponent implements OnInit, OnDestroy {

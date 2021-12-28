@@ -1,5 +1,7 @@
-import { AfterContentInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, ElementRef,
-  HostBinding, Input, OnChanges, OnDestroy, QueryList, SimpleChanges } from '@angular/core';
+import {
+  AfterContentInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, ElementRef,
+  HostBinding, Input, OnChanges, OnDestroy, QueryList, SimpleChanges
+} from '@angular/core';
 import { Subscription } from 'rxjs';
 import { SplitterPaneComponent } from './splitter-pane.component';
 import { SplitterService } from './splitter.service';
@@ -25,6 +27,8 @@ export class SplitterComponent implements OnChanges, AfterContentInit, OnDestroy
   @Input() disabledBarSize = '1px';
   // 是否显示展开/收缩按钮
   @Input() showCollapseButton = true;
+  @Input() collapsePosLeft: string;
+  @Input() collapsePosTop: string;
 
   @HostBinding('class') get class() {
     return 'devui-splitter devui-splitter-' + this.orientation;
@@ -39,7 +43,7 @@ export class SplitterComponent implements OnChanges, AfterContentInit, OnDestroy
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.orientation && !changes.orientation.isFirstChange()) {
-        this.reconfigure();
+      this.reconfigure();
     }
   }
 
@@ -68,7 +72,7 @@ export class SplitterComponent implements OnChanges, AfterContentInit, OnDestroy
         if (this.orientation === 'vertical') {
           return this.el.nativeElement.clientHeight;
         } else {
-            return this.el.nativeElement.clientWidth;
+          return this.el.nativeElement.clientWidth;
         }
       }
     });

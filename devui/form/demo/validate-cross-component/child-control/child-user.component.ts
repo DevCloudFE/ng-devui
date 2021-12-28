@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { DValidateRules } from 'ng-devui/form';
 
 @Component({
-  selector: 'child-user',
+  selector: 'd-child-user',
   templateUrl: './child-user.component.html'
 })
 export class ChildUserComponent {

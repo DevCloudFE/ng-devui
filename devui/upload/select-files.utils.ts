@@ -52,7 +52,7 @@ export class SelectFiles {
       this.document.body.appendChild(input); // Fix compatibility issue with Internet Explorer 11
       this.simulateClickEvent(input);
     });
-  }
+  };
 
   isAllowedFileType = (accept: string, file: File) => {
     if (accept) {
@@ -74,31 +74,31 @@ export class SelectFiles {
       });
     }
     return true;
-  }
+  };
 
   beyondMaximalSize = (fileSize, maximumSize) => {
     if (maximumSize) {
       return fileSize > 1024 * 1024 * maximumSize;
     }
     return false;
-  }
+  };
 
   beyondAllFilesMaximalSize = (fileSize, maximumSize) => {
     if (maximumSize) {
       return fileSize > 1024 * 1024 * maximumSize;
     }
     return false;
-  }
+  };
 
   triggerSelectFiles = (fileOptions: IFileOptions, uploadOptions: IUploadOptions) => {
     const { multiple, accept, webkitdirectory} = fileOptions;
     return from(this.selectFiles({ multiple, accept , webkitdirectory})).pipe(mergeMap(file => <any>file));
-  }
+  };
 
   triggerDropFiles = (fileOptions: IFileOptions, uploadOptions: IUploadOptions, files: any) => {
     return new Observable(observer => observer.next(files)).pipe(mergeMap(file => <any>file));
 
-  }
+  };
 
   checkAllFilesSize(fileSize, maximumSize) {
     if (this.beyondMaximalSize(fileSize, maximumSize)) {

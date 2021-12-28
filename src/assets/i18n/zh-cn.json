@@ -1326,7 +1326,7 @@
       "batchDragRowDemo": {
         "title": "批量行拖拽",
         "description": "支持使用DragDrop组件来实现表格的批量行拖拽功能，请用Ctrl按键和鼠标多选并进行拖拽，只能通过自定义head、body模板和其中的行、单元格来实现。"
-      },    
+      },
       "editableDemo": {
         "title": "编辑单元格",
         "description": "支持两种实现方式，方式一通过自定义body模板中的单元格来实现，方式二通过配置column来实现。"
@@ -1363,7 +1363,7 @@
         "title": "批量行拖拽",
         "description": "支持使用DragDrop组件来实现表格的批量行拖拽功能，请用Ctrl按键和鼠标多选并进行拖拽，只能通过自定义head、body模板和其中的行、单元格来实现。"
       },
-      "bigDataTreeTableDemo": {
+      "virtualScrollTreeTableDemo": {
         "title": "大数据量树形表格",
         "description": "当需要展示10000~100000条树形数据时，为使操作流畅，请使用这种表格。"
       },
@@ -1401,7 +1401,7 @@
         "cell-merge": "单元格合并",
         "drag-row": "行拖拽",
         "muti-drag-row": "批量行拖拽",
-        "big-data-tree-table": "大数据树形表格"
+        "virtual-scroll-tree-table": "大数据树形表格"
       }
     },
     "datepickerPro": {
@@ -1800,9 +1800,16 @@
         "fullscreen": "全屏",
         "exitFullscreen": "退出全屏"
       },
+      "customDemo": {
+        "title": "函数方式调用",
+        "description": "调用方法触发全屏。",
+        "fullscreen": "全屏",
+        "exitFullscreen": "退出全屏"
+      },
       "anchorLinkValues": {
         "immersive-full-screen": "沉浸式全屏",
-        "general-full-screen": "普通全屏"
+        "general-full-screen": "普通全屏",
+        "custom-full-screen": "函数方式调用"
       }
     },
     "transfer": {
@@ -3687,23 +3694,71 @@
       "name": "Layout 布局",
       "type": "布局",
       "path": "layout",
-      "description": "页面的布局方式。",
-      "tmw": "当用户需要直接使用一些既有布局时。",
+      "description": "页面的布局方式，包含响应式栅格、Flex、间距、响应式Class、响应式Style、典型布局容器等。",
+      "tmw": "当用户需要使用Flex布局、间距设置、响应式布局、典型布局等时。",
       "basicDemo": {
-        "title": "基本用法"
+        "title": "栅格基本用法",
+        "description": "响应式断点分别对应（px）：ss > 0, ms >= 360, mm >= 768, ml >= 1024, xs >= 1280, sm >= 1440, md >= 1600, lg >= 1760, xl >= 1920，合并设置时，使用 ss 断点即代表通用设置。"
       },
-      "appDemo1": {
-        "title": "应用场景1",
+      "gutterDemo": {
+        "title": "栅格间距（Gutter）",
+        "description": "通过栅格内区块Padding方式实现间隔。"
+      },
+      "spaceDemo": {
+        "title": "栅格间距（Space）",
+        "description": "通过栅格内区块Margin方式实现间隔。"
+      },
+      "offsetDemo": {
+        "title": "左右偏移"
+      },
+      "alignJustifyDemo": {
+        "title": "对齐"
+      },
+      "orderDemo": {
+        "title": "排序",
+        "description": "Order: 0, 1, 2, ..., 24."
+      },
+      "flexDemo": {
+        "title": "Flex使用",
+        "description": "[dFlex]是通用的，你可以在其他地方同样使用。"
+      },
+      "spaceGutterDemo": {
+        "title": "间距（通用）",
+        "description": "[dGutter]与[dSpace]是通用的，你可以在其他地方同样使用。"
+      },
+      "classDemo": {
+        "title": "响应式Class",
+        "description": "响应式Class设置支持，可合并多个断点范围内设置的Class。"
+      },
+      "styleDemo": {
+        "title": "响应式Style",
+        "description": "响应式Style设置支持，可合并多个断点范围内设置的Style。"
+      },
+      "layoutContainerDemo": {
+        "title": "布局容器"
+      },
+      "layoutContainerDemo1": {
+        "title": "布局容器场景1",
         "description": "常用上中下布局。"
       },
-      "appDemo2": {
-        "title": "应用场景2",
+      "layoutContainerDemo2": {
+        "title": "布局容器场景2",
         "description": "常用上中下布局及侧边栏布局。"
       },
       "anchorLinkValues": {
-        "basic-usage": "基本用法",
-        "application-scenario1": "应用场景1",
-        "application-scenario2": "应用场景2"
+        "basic-usage": "栅格基本用法",
+        "gutter": "栅格间距（Gutter）",
+        "space": "栅格间距（Space）",
+        "offset": "左右偏移",
+        "align-justify": "对齐",
+        "order": "排序",
+        "flex": "Flex使用",
+        "space-gutter": "间距（通用）",
+        "class": "响应式Class",
+        "style": "响应式Style",
+        "layout-container": "布局容器",
+        "layout-container-scenario1": "布局容器场景1",
+        "layout-container-scenario2": "布局容器场景2"
       }
     },
     "gantt": {
@@ -3959,6 +4014,175 @@
         "basicDemo": "基本用法",
         "trend-icon-template": "自定义趋势图标"
       }
+    },
+    "line-chart": {
+      "name": "Line Chart 折线图",
+      "type": "模板图表",
+      "path": "line-chart",
+      "description": "基本数据的折线图",
+      "tmw": "展示基本的数据线性变化",
+      "line-chartDemo": {
+        "title": "基础折线图"
+      },
+      "threshold-chartDemo": {
+        "title": "阈值线模板"
+      },
+      "compare-chartDemo": {
+        "title": "对比模板"
+      },
+      "anchorLinkValues": {
+        "echarts-temp-line-chart": "基础折线图",
+        "threshold-temp-line-chart": "阈值线模板"
+      }
+    },
+    "hex-bin-chart": {
+      "name": "Hex Bin Chart 分箱图",
+      "type": "模板图表",
+      "path": "hex-bin-chart",
+      "description": "离散的数据对比",
+      "tmw": "展示离散数据的数据对比",
+      "auto-chartDemo": {
+        "title": "自动布局分箱图"
+      },
+      "anchorLinkValues": {
+        "auto-chartDemo": "自动布局分箱图"
+      }
+    },
+    "map-chart": {
+      "name": "Map Chart 地图",
+      "type": "模板图表",
+      "path": "map-chart",
+      "description": "地区数据展示",
+      "tmw": "展示基本的数据线性变化",
+      "china-province": {
+        "title": "省级数据中国地图"
+      },
+      "china-city-province": {
+        "title": "市级数据中国地图"
+      },
+      "anchorLinkValues": {
+        "china-province": "省级数据中国地图",
+        "china-city-province": "市级数据中国地图"
+      }
+    },
+    "bar-chart": {
+      "name": "Bar Chart 柱状图",
+      "type": "模板图表",
+      "path": "bar-chart",
+      "description": "基本数据的折线图",
+      "tmw": "展示基本的数据线性变化",
+      "echarts-bar-chart": {
+        "title": "基础柱状图"
+      },
+      "echarts-bar-stacked": {
+        "title": "堆积柱状图"
+      },
+      "echarts-bar-two": {
+        "title": "双向柱状图"
+      },
+      "echarts-bar-line": {
+        "title": "折线柱模板"
+      },
+      "anchorLinkValues": {
+        "echarts-bar-chart": "基础柱状图",
+        "echarts-bar-stacked": "堆积柱状图",
+        "echarts-bar-two": "双向柱状图",
+        "echarts-bar-line": "折线柱模板"
+      }
+    },
+    "radar-chart": {
+      "name": "Radar Chart 雷达图",
+      "type": "模板图表",
+      "path": "radar-chart",
+      "description": "雷达图",
+      "tmw": "展示关联数据的占比对比",
+      "radar-chartDemo": {
+        "title": "雷达图"
+      },
+      "anchorLinkValues": {
+        "radar-chartDemo": "基础雷达图"
+      }
+    },
+    "scatter-chart": {
+      "name": "Scatter Chart 散点图",
+      "type": "模板图表",
+      "path": "scatter-chart",
+      "description": "散点图",
+      "tmw": "展示坐标系中的离散数据",
+      "basic-scatter-chartDemo": {
+        "title": "基础散点图"
+      },
+      "anchorLinkValues": {
+        "basic-scatter-chartDemo": "散点图"
+      }
+    },
+    "pie-chart": {
+      "name": "Pie Chart 饼图",
+      "type": "模板图表",
+      "path": "pie-chart",
+      "description": "饼图",
+      "tmw": "展示坐标系中的百分占比数据",
+      "basic-pie-chartDemo": {
+        "title": "基础饼图"
+      },
+      "rose-pie-chartDemo": {
+        "title": "玫瑰饼图"
+      },
+      "anchorLinkValues": {
+        "basic-pie-chartDemo": "饼图",
+        "rose-pie-chartDemo": "玫瑰饼图"
+      }
+    },
+    "chart-card": {
+      "name": "Chart Card 图表卡片",
+      "type": "模板图表",
+      "path": "chart-card",
+      "description": "图表卡片",
+      "tmw": "用固定布局的卡片展示图表",
+      "basic-card": {
+        "title": "基础卡片"
+      },
+      "anchorLinkValues": {
+        "basic-card": "基础卡片"
+      }
+    },
+    "funnel-chart": {
+      "name": "Funnel Chart 漏斗图",
+      "type": "模板图表",
+      "path": "funnel-chart",
+      "description": "漏斗图",
+      "tmw": "用漏斗图展示排序关系的数据",
+      "basic-chart": {
+        "title": "漏斗图"
+      },
+      "anchorLinkValues": {
+        "basic-chart": "基础漏斗图"
+      }
+    },
+    "chart-marker": {
+      "name": "Chart Marker 图表标记器",
+      "type": "模板图表",
+      "path": "chart-marker",
+      "description": "图表标记器",
+      "tmw": "用于对二维坐标系进行标记及信息记录",
+      "basic-marker": {
+        "title": "图表标记器"
+      }
+    },
+    "chart-toolbox": {
+      "name": "Chart Toolbox 图表工具栏",
+      "type": "模板图表",
+      "path": "chart-toolbox",
+      "description": "图表工具栏",
+      "tmw": "提供一些图表交互工具",
+      "basic-marker": {
+        "title": "图表工具栏"
+      }
+    },
+    "echart-temp-basic": {
+      "shared-card": "分享卡片",
+      "shared-link-image": "分享链接或者图片",
+      "download-image": "下载Chart图片"
     }
   }
 }

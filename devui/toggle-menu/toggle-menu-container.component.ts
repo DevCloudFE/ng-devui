@@ -238,17 +238,17 @@ export class ToggleMenuContainerComponent implements OnInit, OnChanges {
       if (!this.appendToBody) {
         let direction = '';
         switch (this.direction) {
-          case 'auto':
-            direction = this.isBottomRectEnough() ? 'bottom' : 'top';
-            break;
-          case 'down':
-            direction = 'bottom';
-            break;
-          case 'up':
-            direction = 'top';
-            break;
-          default:
-            direction = 'bottom';
+        case 'auto':
+          direction = this.isBottomRectEnough() ? 'bottom' : 'top';
+          break;
+        case 'down':
+          direction = 'bottom';
+          break;
+        case 'up':
+          direction = 'top';
+          break;
+        default:
+          direction = 'bottom';
         }
         this.popDirection = <any>direction;
       } else {

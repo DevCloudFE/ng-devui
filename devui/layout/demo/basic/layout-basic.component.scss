@@ -1,7 +1,7 @@
 @import '~ng-devui/styles-var/devui-var.scss';
 
-.basic-usage {
-  box-shadow: $devui-shadow-length-base; // TODO: color not variable
+.layout-wrapper {
+  box-shadow: $devui-shadow-length-base $devui-light-shadow;
   margin-top: 36px;
 
   &:first-child {
@@ -23,13 +23,13 @@ d-aside {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: $devui-area;
+  background-color: $devui-base-bg;
 }
 
 d-content {
   line-height: 200px;
   text-align: center;
-  background-color: $devui-global-bg-normal;
+  background-color: $devui-global-bg;
 }
 
 d-footer {

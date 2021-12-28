@@ -45,6 +45,7 @@ In the page:
 |  dotColor  | `string` |  --  | Optional. Custom Time Circle Color.   | [Customizing Content Using a Template](demo#content-with-template) |
 |  customDot  | `string\|HTMLElement\|TemplateRef` |  --  | Optional. User-defined time point.   | [Time Point Customization](demo#custom-dot) |
 |  extraElement  | `string\|HTMLElement\|TemplateRef` |  --  | Optional. Customizing Additional Elements Between Two Points in Time.   | [Customizing Content Using a Template](demo#content-with-template) |
+|  iconClass  | `string` |  --  | Optional. Point-in-time additional style name.   | [Setting Direction Parameters](demo#direction) |
 
 ## TimeAxisData
 
@@ -91,7 +92,10 @@ interface TimeAxisData {
 |  data  |                   `array`                   |  --  | Optional. This parameter is valid only when model is set to template.             | [The time node is used independently](demo#seperate-way) |
 |  contentTemplate  | `TemplateRef` |  --  | Optional. Content template. This parameter is left empty by default. This parameter needs to be set when model is set to `template`. | [The time node is used independently](demo#seperate-way) |
 |  lineStyle  | `{style: 'solid' \| 'dashed' \| 'dotted' \| 'none', color: string}`  | `{style: 'solid'}`  | Optional. Setting the Timeline Line Style.   | [The time node is used independently](demo#seperate-way) |
+|  dotColor  | `string` |  --  | Optional. Custom Time Circle Color.   | [The time node is used independently](demo#seperate-way) |
 |  customDot  | `string\|HTMLElement\|TemplateRef` |  --  | Optional. User-defined time point.   | [The time node is used independently](demo#seperate-way) |
 |  extraElement  | `string\|HTMLElement\|TemplateRef` |  --  | Optional. Customizing Additional Elements Between Two Points in Time.   | [The time node is used independently](demo#seperate-way) |
 |  position  | `'up'\|'bottom'\|'left'\|'right'` |  --  | Optional. Indicates the position of text or data. If time exists, the time is in the reverse position.   | [The time node is used independently](demo#seperate-way) |
 |  timePosition  | `'left'\|'bottom'` |  --  | Optional. Defines the time parameter position only when direction is `vertical`.  | [The time node is used independently](demo#seperate-way) |
+|  iconClass  | `string` |  --  | Optional. Point-in-time additional style name.   | [Setting Direction Parameters](demo#direction) |
+| horizontalAlign  |     `'center'\|'left'`      |  `'center'`  | Optional. Only when the direction is `horizontal`, Set Content Alignment. | [Setting Direction Parameters](demo#direction)        |

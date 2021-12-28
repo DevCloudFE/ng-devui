@@ -47,7 +47,7 @@ import { VerticalComponent } from './vertical/vertical.component';
     VerticalComponent,
     CustomComponent,
   ],
-  
+
 })
 export class RadioDemoModule {
 }

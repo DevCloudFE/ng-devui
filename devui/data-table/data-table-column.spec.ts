@@ -134,7 +134,7 @@ class TestDataTableColumnBasicComponent {
         field="dob"
         header="Date of birth"
         [fieldType]="'date'"
-        [extraOptions]="{ dateFormat: 'MM/DD/YYYY' }"
+        [extraOptions]="{ dateFormat: 'MM/dd/yyyy' }"
         [width]="'2000px'"
       ></d-column>
       <d-column field="hidden" header="hidden" [width]="'100px'">hidden</d-column>
@@ -283,7 +283,7 @@ class TestDataTableAdvancedColumnComponent implements OnInit {
     this.filterListMulti = this.filterList;
     this.ref.detectChanges();
     return true;
-  }
+  };
 
   getCheckedRows() {
     return this.datatable.getCheckedRows();
@@ -344,7 +344,7 @@ class TestDataTableAdvancedColumnComponent implements OnInit {
                     [(ngModel)]="rowItem[column.field]"
                     dDatepicker
                     appendToBody
-                    [dateFormat]="YYYY / MM / DD"
+                    [dateFormat]="yyyy / MM / DD"
                     #datePicker="datepicker"
                     [showTime]="true"
                     [autoOpen]="true"
@@ -426,7 +426,7 @@ class TestDataTableColumnEditComponent {
         field="dob"
         header="date"
         [fieldType]="'date'"
-        [extraOptions]="{ dateFormat: 'MM/DD/YYYY' }"
+        [extraOptions]="{ dateFormat: 'MM/dd/yyyy' }"
         [width]="'20%'"
       ></d-column>
     </d-data-table>
@@ -476,7 +476,7 @@ class TestDataTableColumnWithChildrenComponent {
         field="dob"
         header="Date of birth"
         [fieldType]="'date'"
-        [extraOptions]="{ dateFormat: 'MM/DD/YYYY' }"
+        [extraOptions]="{ dateFormat: 'MM/dd/yyyy' }"
         [width]="'200px'"
       ></d-column>
     </d-data-table>

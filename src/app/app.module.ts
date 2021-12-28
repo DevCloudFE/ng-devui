@@ -4,10 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { DevUIModule } from 'ng-devui';
 import { DEVUI_LANG, ZH_CN } from 'ng-devui/i18n';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { environment } from 'src/environments/environment';
 import { DevuiCommonsModule } from '../../devui-commons/src/public-api';
 import { AppComponent } from './app.component';
@@ -30,25 +30,25 @@ export function HttpLoaderFactory(http: HttpClient) {
     HttpClientModule,
     DevuiCommonsModule,
     RouterModule.forRoot([
-    {
+      {
         path: '',
         redirectTo: 'components/zh-cn',
         pathMatch: 'full'
-    },
-    {
+      },
+      {
         path: 'components/:lang',
         loadChildren: () => import('./component/app-content.module').then(m => m.AppContentModule)
-    },
-    {
+      },
+      {
         path: '**',
         redirectTo: 'components/zh-cn'
-    }
-], { relativeLinkResolution: 'legacy' }),
+      }
+    ], { relativeLinkResolution: 'legacy' }),
     TranslateModule.forRoot({
       loader: {
-          provide: TranslateLoader,
-          useFactory: HttpLoaderFactory,
-          deps: [HttpClient]
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
       }
     })
   ],

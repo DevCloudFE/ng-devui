@@ -1,4 +1,3 @@
-// tslint:disable: max-line-length
 import { Component, DebugElement, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, flush, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
@@ -188,7 +187,7 @@ class TestStepsGuideComponent implements OnInit {
   constructor(private stepsGuideService: StepsGuideService) {}
 
   ngOnInit() {
-    this.stepsGuideService.currentIndex.subscribe((index) => (this.currentStep = index));
+    this.stepsGuideService.currentIndex.subscribe((index) => {this.currentStep = index;});
   }
 
   operateChange(e) {
@@ -200,15 +199,15 @@ class TestStepsGuideComponent implements OnInit {
 
   toggle = (show) => {
     this.stepsGuideService.showGuide(show);
-  }
+  };
 
   setIndex = (index) => {
     this.stepsGuideService.setCurrentIndex(index);
-  }
+  };
 
   setPlaceHolderHeight = (height: number) => {
     this.placeHolder.nativeElement.style.height = `${height}px`;
-  }
+  };
 }
 
 describe('steps guide basic', () => {
@@ -246,9 +245,9 @@ describe('steps guide basic', () => {
       // 检查stepsGuide是否正确出现
       expect(domHelper.judgeAppendToBodyStyleClasses([
         '.devui-step-item',
-          '.devui-shining-dot', '.devui-shining-plus', '.devui-arrow', '.devui-guide-container',
-            '.devui-title', '.icon-close', '.devui-content', '.devui-ctrl',
-              '.devui-guide-btn'
+        '.devui-shining-dot', '.devui-shining-plus', '.devui-arrow', '.devui-guide-container',
+        '.devui-title', '.icon-close', '.devui-content', '.devui-ctrl',
+        '.devui-guide-btn'
       ])).toBeTruthy();
       // 循环列表看每一项的上一步、下一步都是否正确处罚
       component.steps.map((step, index) => {
@@ -270,7 +269,8 @@ describe('steps guide basic', () => {
           if (document.querySelector('.devui-guide-btn').children.length === 1) {
             currentBtn = 0;
           }
-          CommonFunctions.tickEvent(document.querySelector('.devui-guide-btn').children[currentBtn], CommonFunctions.event('click'), fixture);
+          CommonFunctions.tickEvent(document.querySelector('.devui-guide-btn').children[currentBtn],
+            CommonFunctions.event('click'), fixture);
           CommonFunctions.tickEvent(document.querySelector('.devui-guide-btn').children[1], CommonFunctions.event('click'), fixture);
           TestFunctions.guideCorrect(component.positions[index + 1], component.steps[index + 1].title);
         }

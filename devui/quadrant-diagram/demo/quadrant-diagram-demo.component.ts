@@ -1,8 +1,8 @@
 import {
   Component, OnDestroy, OnInit
 } from '@angular/core';
-import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
+import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
 @Component({

@@ -137,7 +137,7 @@ describe('splitter', () => {
     });
 
     it('service should throw error ', () => {
-    expect(function() {service.getPane(3); }).toThrow(new Error('no pane can return.'));
+      expect(function() {service.getPane(3); }).toThrow(new Error('no pane can return.'));
     });
 
     it('should change collapse state', () => {
@@ -280,15 +280,15 @@ function touchEventTrigger(el: HTMLElement, from: { x: number; y: number }, to: 
 function dispatchTouchEvent(
   node: Node,
   type: string,
-  x: number = 0,
-  y: number = 0,
+  x = 0,
+  y = 0,
   toucheNum?: number,
   event: Event = createTouchEvent(type, x, y, toucheNum)
 ) {
   node.dispatchEvent(event);
 }
 
-function createTouchEvent(type: string, pageX: number = 0, pageY: number = 0, toucheNum?: number): Event {
+function createTouchEvent(type: string, pageX = 0, pageY = 0, toucheNum?: number): Event {
   const event = new UIEvent(type, { detail: 0, view: window });
   const touchDetails = { pageX, pageY, clientX: pageX, clientY: pageY };
   let touches = { value: [touchDetails] };

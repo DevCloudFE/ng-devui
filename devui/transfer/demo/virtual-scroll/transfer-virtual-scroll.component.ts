@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { TransferDataFormat } from 'ng-devui/transfer';
 
 @Component({
   selector: 'd-demo-transfer-virtual-scroll',
@@ -8,7 +7,7 @@ import { TransferDataFormat } from 'ng-devui/transfer';
 })
 export class TransferVirtualScrollComponent implements OnInit {
   disabled = false;
-  sourceOption: TransferDataFormat[] = [
+  sourceOption = [
     { name: 'Option1', value: 1, id: 1, checked: false },
     { name: 'Option2', value: 2, id: 2, checked: false },
     { name: 'Option3', value: 3, id: 3, checked: false },

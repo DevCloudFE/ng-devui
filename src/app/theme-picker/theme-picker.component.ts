@@ -7,7 +7,7 @@ import { createTheme } from './customize-theme/util';
 import { LargeFontSize } from './theme-data-more';
 
 @Component({
-  selector: 'app-theme-picker',
+  selector: 'd-theme-picker',
   templateUrl: './theme-picker.component.html',
   styleUrls: ['./theme-picker.component.scss'],
 })
@@ -24,10 +24,10 @@ export class ThemePickerComponent implements OnInit, OnDestroy {
   largeFontSizeMode = false;
   activeThemeType: string | number = 'devuiTheme';
   advancedThemeList = [{ value: 'infinity',  url: 'assets/infinity.png' },
-  { value: 'sweet', url: 'assets/sweet.png' },
-  { value: 'provence',  url: 'assets/provence.png' },
-  { value: 'deep',  url: 'assets/deep.png' },
-  { value: 'galaxy',  url: 'assets/galaxy.png' }];
+    { value: 'sweet', url: 'assets/sweet.png' },
+    { value: 'provence',  url: 'assets/provence.png' },
+    { value: 'deep',  url: 'assets/deep.png' },
+    { value: 'galaxy',  url: 'assets/galaxy.png' }];
   currentAdvancedTheme = 'infinity';
   assetsPrefix = environment.deployPrefix;
   constructor(
@@ -95,7 +95,7 @@ export class ThemePickerComponent implements OnInit, OnDestroy {
 
   themesChange() {
     if (this.largeFontSizeMode) {
-      this.largeFontTheme.data = Object.assign({}, this.themes[`${this.themePrefix}-${this.themeMode}-theme`].data, LargeFontSize);
+      this.largeFontTheme.data = { ...this.themes[`${this.themePrefix}-${this.themeMode}-theme`].data, ...LargeFontSize};
       this.theme = `devui-large-font-theme`;
     } else {
       this.theme = `${this.themePrefix}-${this.themeMode}-theme`;
@@ -111,8 +111,8 @@ export class ThemePickerComponent implements OnInit, OnDestroy {
 
   themeFontSizeChange() {
     if (typeof window !== 'undefined' && this.largeFontSizeMode) {
-     this.largeFontTheme.data = Object.assign({}, this.themes[window['devuiCurrentTheme']].data, LargeFontSize);
-     this.theme = `devui-large-font-theme`;
+      this.largeFontTheme.data = { ...this.themes[window['devuiCurrentTheme']].data, ...LargeFontSize};
+      this.theme = `devui-large-font-theme`;
     } else {
       this.theme = `${this.themePrefix}-${this.themeMode}-theme`;
     }

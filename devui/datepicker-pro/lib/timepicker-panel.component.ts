@@ -115,41 +115,41 @@ export class TimepickerPanelComponent implements OnInit, OnDestroy {
 
   chooseTime(type: string, index: number, handle = false, justScroll = false) {
     switch (type) {
-      case 'hour':
-        this.hourIndex = index;
-        this.firstList = new Array(24).fill(1).map((t, i) => {
-          return {
-            time: i < 10 ? `0${i}` : i + '',
-            type: 'hour',
-            active: this.hourIndex === i,
-            disabled: false
-          };
-        });
-        this.setAllScroll(index, this.pickSrv.curMin, this.pickSrv.curSec, justScroll);
-        break;
-      case 'min':
-        this.minIndex = index;
-        this.secondList = new Array(60).fill(1).map((t, i) => {
-          return {
-            time: i < 10 ? `0${i}` : i + '',
-            type: 'min',
-            active: this.minIndex === i,
-            disabled: false
-          };
-        });
-        this.setAllScroll(this.pickSrv.curHour, index, this.pickSrv.curSec, justScroll);
-        break;
-      case 'sec':
-        this.secIndex = index;
-        this.thirdList = new Array(60).fill(1).map((t, i) => {
-          return {
-            time: i < 10 ? `0${i}` : i + '',
-            type: 'sec',
-            active: this.secIndex === i,
-            disabled: false
-          };
-        });
-        this.setAllScroll(this.pickSrv.curHour, this.pickSrv.curMin, index, justScroll);
+    case 'hour':
+      this.hourIndex = index;
+      this.firstList = new Array(24).fill(1).map((t, i) => {
+        return {
+          time: i < 10 ? `0${i}` : String(i),
+          type: 'hour',
+          active: this.hourIndex === i,
+          disabled: false
+        };
+      });
+      this.setAllScroll(index, this.pickSrv.curMin, this.pickSrv.curSec, justScroll);
+      break;
+    case 'min':
+      this.minIndex = index;
+      this.secondList = new Array(60).fill(1).map((t, i) => {
+        return {
+          time: i < 10 ? `0${i}` : String(i),
+          type: 'min',
+          active: this.minIndex === i,
+          disabled: false
+        };
+      });
+      this.setAllScroll(this.pickSrv.curHour, index, this.pickSrv.curSec, justScroll);
+      break;
+    case 'sec':
+      this.secIndex = index;
+      this.thirdList = new Array(60).fill(1).map((t, i) => {
+        return {
+          time: i < 10 ? `0${i}` : String(i),
+          type: 'sec',
+          active: this.secIndex === i,
+          disabled: false
+        };
+      });
+      this.setAllScroll(this.pickSrv.curHour, this.pickSrv.curMin, index, justScroll);
     }
 
     if (handle) {

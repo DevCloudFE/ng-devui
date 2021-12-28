@@ -153,7 +153,7 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
   private onTouch = () => null;
 
   constructor(private i18n: I18nService, private devConfigService: DevConfigService) {
-    this.valueParser = (item) => (typeof item === 'object' ? item[this.displayProperty] || '' : item + '' ? item.toString() : '');
+    this.valueParser = (item) => (typeof item === 'object' ? item[this.displayProperty] || '' : String(item) ? item.toString() : '');
   }
 
   private setI18nText() {
@@ -192,8 +192,8 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
           term === ''
             ? true
             : this.caseSensitivity
-            ? item[this.displayProperty].indexOf(term) !== -1
-            : item[this.displayProperty].toLowerCase().indexOf(term.toLowerCase()) !== -1
+              ? item[this.displayProperty].indexOf(term) !== -1
+              : item[this.displayProperty].toLowerCase().indexOf(term.toLowerCase()) !== -1
         )
       );
     };
@@ -254,8 +254,12 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
       )
       .subscribe((options) => {
         this.availableOptions = options;
-        this.selectBoxContainer?.updatePosition();
-        this.selectBox?.resetIndex(!options.length);
+        if(this.selectBoxContainer){
+          this.selectBoxContainer.updatePosition();
+        }
+        if(this.selectBox){
+          this.selectBox.resetIndex(!options.length);
+        }
       });
   }
 
@@ -295,28 +299,29 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
   passEvent(data) {
     const { event, type } = data;
     switch (type) {
-      case 'keydown.enter':
-      case 'blur':
-        // keydown.enter 和 keydown 都接收会重复处理
-        // 点击会聚焦input，input失焦事件不会冒泡，单独处理
-        break;
-      case 'keydown':
-        const hotkeys = [this.KEYS.enter, this.KEYS.tab];
-        if (this.isAddBySpace) {
-          hotkeys.push(this.KEYS.space);
+    case 'keydown.enter':
+    case 'blur':
+      // keydown.enter 和 keydown 都接收会重复处理
+      // 点击会聚焦input，input失焦事件不会冒泡，单独处理
+      break;
+    case 'keydown':{
+      const hotkeys = [this.KEYS.enter, this.KEYS.tab];
+      if (this.isAddBySpace) {
+        hotkeys.push(this.KEYS.space);
+      }
+      if (event.keyCode === this.KEYS.enter || event.keyCode === this.KEYS.tab || event.keyCode === this.KEYS.space) {
+        event.preventDefault();
+        event.stopPropagation();
+        if (this.selectBox?.selectIndex !== -1) {
+          this.addSuggestionByIndex(this.selectBox.selectIndex, this.availableOptions[this.selectBox.selectIndex]);
+        } else {
+          this.addTag();
         }
-        if (event.keyCode === this.KEYS.enter || event.keyCode === this.KEYS.tab || event.keyCode === this.KEYS.space) {
-          event.preventDefault();
-          event.stopPropagation();
-          if (this.selectBox?.selectIndex !== -1) {
-            this.addSuggestionByIndex(this.selectBox.selectIndex, this.availableOptions[this.selectBox.selectIndex]);
-          } else {
-            this.addTag();
-          }
-        }
-        break;
-      default:
-        this.inputEvent = { event, type };
+      }
+      break;
+    }
+    default:
+      this.inputEvent = { event, type };
     }
   }
 

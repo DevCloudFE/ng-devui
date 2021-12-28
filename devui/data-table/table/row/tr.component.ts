@@ -1,8 +1,9 @@
-import { AfterContentInit, Component, ContentChildren, EventEmitter, Input, OnInit, Output, QueryList} from '@angular/core';
+import { AfterContentInit, Component, ContentChildren, EventEmitter, OnInit, Output, QueryList } from '@angular/core';
 import { RowCheckChangeEventArg, TableCheckOptions } from '../../data-table.model';
 import { TableThComponent } from '../head/th/th.component';
 
 @Component({
+  /* eslint-disable-next-line @angular-eslint/component-selector*/
   selector: '[dTableRow]',
   templateUrl: './tr.component.html',
   styleUrls: ['./tr.component.scss']

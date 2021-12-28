@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'd-lazy-load-virtual-scroll',
-    templateUrl: './lazy-load-virtual-scroll.component.html',
-    styleUrls: ['./lazy-load-virtual-scroll.component.scss']
+  selector: 'd-lazy-load-virtual-scroll',
+  templateUrl: './lazy-load-virtual-scroll.component.html',
+  styleUrls: ['./lazy-load-virtual-scroll.component.scss']
 })
 export class LazyLoadVirtualScrollComponent {
   options = ['option 1', 'option 2', 'option 3', 'option 4', 'option 5', 'option 6', 'option 7', 'option 8',

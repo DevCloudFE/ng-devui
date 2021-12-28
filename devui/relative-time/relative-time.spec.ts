@@ -104,7 +104,7 @@ describe('relative time', () => {
     });
     it('should correct when input time over limit', () => {
       testComponent.source = new Date('2015-5-20 12:00:00');
-      const dateStr = new Date(testComponent.source) + '';
+      const dateStr = String(new Date(testComponent.source));
       fixture.detectChanges();
       expect(displayEl.innerText).toEqual(dateStr);
     });

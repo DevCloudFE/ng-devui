@@ -1,0 +1,73 @@
+<h3>Basic</h3>
+<h4>Horizontal</h4>
+<d-row [dGutter]="12">
+  <d-col [dSpan]="8">
+    <div class="content-box">col-8</div>
+  </d-col>
+  <d-col [dSpan]="8">
+    <div class="content-box">col-8</div>
+  </d-col>
+  <d-col [dSpan]="8">
+    <div class="content-box">col-8</div>
+  </d-col>
+</d-row>
+<h4>Vertical</h4>
+<d-row [dGutter]="12" [dGutterDirection]="'vertical'">
+  <d-col [dSpan]="12">
+    <div class="content-box color-hover">col-12</div>
+  </d-col>
+  <d-col [dSpan]="12">
+    <div class="content-box">col-12</div>
+  </d-col>
+  <d-col [dSpan]="12">
+    <div class="content-box color-hover">col-12</div>
+  </d-col>
+  <d-col [dSpan]="12">
+    <div class="content-box">col-12</div>
+  </d-col>
+</d-row>
+<h4>Horizontal & Vertical</h4>
+<d-row [dGutter]="[12, 12]">
+  <d-col [dSpan]="12">
+    <div class="content-box">col-12</div>
+  </d-col>
+  <d-col [dSpan]="12">
+    <div class="content-box">col-12</div>
+  </d-col>
+  <d-col [dSpan]="12">
+    <div class="content-box">col-12</div>
+  </d-col>
+  <d-col [dSpan]="12">
+    <div class="content-box">col-12</div>
+  </d-col>
+</d-row>
+<h4>Parent No Outer</h4>
+<d-row [dGutter]="[12, 12]" [dGutterNoOuter]="true">
+  <d-col [dSpan]="12">
+    <div class="content-box">col-12</div>
+  </d-col>
+  <d-col [dSpan]="12">
+    <div class="content-box">col-12</div>
+  </d-col>
+  <d-col [dSpan]="12">
+    <div class="content-box">col-12</div>
+  </d-col>
+  <d-col [dSpan]="12">
+    <div class="content-box">col-12</div>
+  </d-col>
+</d-row>
+<h3>Responsive</h3>
+<d-row [dGutter]="{ ss: [6, 6], xs: [12, 12], md: [18, 18] }">
+  <d-col [dSpan]="12">
+    <div class="content-box">col-12</div>
+  </d-col>
+  <d-col [dSpan]="12">
+    <div class="content-box">col-12</div>
+  </d-col>
+  <d-col [dSpan]="12">
+    <div class="content-box">col-12</div>
+  </d-col>
+  <d-col [dSpan]="12">
+    <div class="content-box">col-12</div>
+  </d-col>
+</d-row>

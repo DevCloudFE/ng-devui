@@ -1,6 +1,6 @@
 import {
-    ChangeDetectionStrategy, Component, ContentChild, EventEmitter, Input, OnChanges,
-    OnDestroy, OnInit, Output, SimpleChanges, TemplateRef
+  ChangeDetectionStrategy, Component, ContentChild, EventEmitter, Input, OnChanges,
+  OnDestroy, OnInit, Output, SimpleChanges, TemplateRef
 } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FilterConfig } from '../data-table.model';

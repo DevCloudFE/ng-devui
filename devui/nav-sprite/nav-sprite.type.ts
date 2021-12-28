@@ -12,6 +12,6 @@ export interface NavMenu {
   level: number;
   scrollPosition: {
     top: number;
-    startLine: number
+    startLine: number;
   };
 }

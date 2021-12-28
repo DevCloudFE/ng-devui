@@ -51,6 +51,6 @@ import { WithSearchFunctionComponent } from './search-function/with-search-funct
     LazyLoadComponent,
   ],
   providers: [],
-  
+
 })
 export class EditableSelectDemoModule {}

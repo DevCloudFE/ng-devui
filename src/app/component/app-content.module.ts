@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { DevUIModule } from 'ng-devui';
+import { I18nService } from 'ng-devui/i18n';
+import { LazyLoadModule, SafePipeModule } from 'ng-devui/utils';
 import { TranslateModule } from '@ngx-translate/core';
 import scss from 'highlight.js/lib/languages/scss';
 import typescript from 'highlight.js/lib/languages/typescript';
 import xml from 'highlight.js/lib/languages/xml';
-import { DevUIModule } from 'ng-devui';
-import { I18nService } from 'ng-devui/i18n';
-import { LazyLoadModule, SafePipeModule } from 'ng-devui/utils';
 import { DevuiCommonsModule } from '../../../devui-commons/src/public-api';
 import { AppContentComponent } from './app-content.component';
 import { ComponentDataService } from './component.data.service';
@@ -44,10 +44,10 @@ export function hljsLanguages() {
     DevUIModule.forRoot(),
     RouterModule.forChild([
       {
-          path: '',
-          component: AppContentComponent,
-          data: {},
-          children: routesConfig
+        path: '',
+        component: AppContentComponent,
+        data: {},
+        children: routesConfig
       },
     ]),
   ],

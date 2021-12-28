@@ -148,7 +148,9 @@ export class CascaderComponent implements OnInit, OnDestroy, OnChanges, ControlV
       this.writeValue([...this.cascaderSrv.multipleValue, option.valueList]);
       this.onChange(this.cascaderSrv.multipleValue);
       this.mainDropdown.updateCdkConnectedOverlayOrigin();
-      this.innerInput?.nativeElement.focus();
+      if (this.innerInput) {
+        this.innerInput.nativeElement.focus();
+      }
     } else {
       this.writeValue(option.valueList);
       this.onChange(option.valueList);
@@ -213,8 +215,8 @@ export class CascaderComponent implements OnInit, OnDestroy, OnChanges, ControlV
           this.mainDropdown.isOpen = true;
         }
 
-        if (this.multiple) {
-          this.innerInput?.nativeElement.focus();
+        if (this.multiple && this.innerInput) {
+          this.innerInput.nativeElement.focus();
         }
         this.cascaderSrv.searchResultList = [];
         this.cascaderSrv.searchByString(value);
@@ -347,7 +349,9 @@ export class CascaderComponent implements OnInit, OnDestroy, OnChanges, ControlV
     if (isOpen && this.multiple) {
       this.cascaderSrv.clearTargetActive(this.cascaderSrv.options.find(t => t.active));
       this.cascaderSrv.columnList.splice(1);
-      this.innerInput?.nativeElement.focus();
+      if (this.innerInput) {
+        this.innerInput.nativeElement.focus();
+      }
     }
 
     if (!isOpen && this.allowSearch) {
@@ -377,7 +381,7 @@ export class CascaderComponent implements OnInit, OnDestroy, OnChanges, ControlV
       const width = this.dropdownComp.overlay.overlayRef?.overlayElement.clientWidth;
       const offsetX = this.dropdownComp.overlay.overlayRef?.overlayElement.offsetLeft;
       const offsetRight = window.innerWidth - width - offsetX - 20;
-      this.subMenuDirections.map(t => t.offsetX = offsetRight < 0 ? offsetRight : 0);
+      this.subMenuDirections.map(t => {t.offsetX = offsetRight < 0 ? offsetRight : 0;});
       this.dropdownComp.reposition();
     }, 0);
   }

@@ -53,7 +53,7 @@ export class AccordionComponent implements AccordionOptions, OnChanges, OnInit, 
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['data']) {
-       this.initActiveItem();
+      this.initActiveItem();
     }
     if (changes['autoOpenActiveMenu']) {
       if (this.autoOpenActiveMenu && changes['autoOpenActiveMenu'].previousValue === false) {
@@ -99,7 +99,7 @@ export class AccordionComponent implements AccordionOptions, OnChanges, OnInit, 
 
   private cleanOpenData() {
     this.flatten(this.data, this.childrenKey, true, false).forEach(
-      item => item[this.openKey] = undefined
+      item => {item[this.openKey] = undefined;}
     );
   }
   // 默认激活
@@ -120,19 +120,19 @@ export class AccordionComponent implements AccordionOptions, OnChanges, OnInit, 
     const prevActiveItem = this.activeItem;
     this.activeItemFn(itemEvent.item);
     this.itemClick.emit({...itemEvent, prevActiveItem: prevActiveItem});
-  }
+  };
 
   linkItemClickFn = (itemEvent: AccordionItemClickEvent) => {
     const prevActiveItem = this.activeItem;
     this.activeItem = itemEvent.item;
     this.itemClick.emit({...itemEvent, prevActiveItem: prevActiveItem});
-  }
+  };
 
   // 打开或关闭可折叠菜单
   public menuToggleFn = (menuEvent: AccordionMenuToggleEvent) => {
     this.openMenuFn(menuEvent.item, menuEvent.open);
     this.menuToggle.emit(menuEvent);
-  }
+  };
 
   // 激活子菜单项并去掉其他子菜单的激活
   activeItemFn(item) {

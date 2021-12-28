@@ -1,7 +1,8 @@
-import { ComponentFactoryResolver, Injectable, Injector, Renderer2, RendererFactory2, Type } from '@angular/core';
+import { ComponentFactoryResolver, Injectable, Injector, Type } from '@angular/core';
 import { OverlayContainerRef } from 'ng-devui/overlay-container';
 import { assign } from 'lodash-es';
 import { Message, ToastComponent } from './toast.component';
+
 export interface IToastOptions {
   value?: Array<Message>;
   life?: number;
@@ -13,19 +14,13 @@ export interface IToastOptions {
   component?: Type<any>;
   componentFactoryResolver?: ComponentFactoryResolver;
 }
+
 @Injectable({
   providedIn: 'root',
 })
 export class ToastService {
-  private renderer: Renderer2;
-  constructor(
-    private overlayContainerRef: OverlayContainerRef,
-    private componentFactoryResolver: ComponentFactoryResolver,
-    private rendererFactory: RendererFactory2
-  ) {
-    this.renderer = this.rendererFactory.createRenderer(null, null);
-  }
-  // loading 服务内的函数，外部就可以传入ILoadingOptions类型的参数调用它
+  constructor(private overlayContainerRef: OverlayContainerRef, private componentFactoryResolver: ComponentFactoryResolver) {}
+
   open({
     value,
     life = 5000,
@@ -67,11 +62,13 @@ export class ToastService {
         });
       }
     };
+
     toastRef.instance.onHidden = () => {
       if (toastRef?.hostView) {
         toastRef.hostView.destroy();
       }
     };
+
     toastRef.instance.show();
     return {
       toastInstance: toastRef.instance,

@@ -4,7 +4,12 @@
 
 <h5>time range picker</h5>
 
-<d-range-datepicker-pro [(ngModel)]="value2" [showTime]="true" (ngModelChange)="onChange($event)"></d-range-datepicker-pro>
+<d-range-datepicker-pro
+  [appendToBody]="false"
+  [(ngModel)]="value2"
+  [showTime]="true"
+  (ngModelChange)="onChange($event)"
+></d-range-datepicker-pro>
 
 <h5>week range picker</h5>
 

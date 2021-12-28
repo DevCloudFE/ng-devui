@@ -223,7 +223,7 @@ export class ReadTipDirective implements OnInit, OnDestroy {
     ) {
       this.hide();
     }
-  }
+  };
 
   findElementIndex(element, rules, trigger) {
     const keysCanInherit = ['trigger', 'showAnimate', 'mouseenterTime', 'mouseleaveTime', 'position', 'overlayClassName', 'appendToBody'];

@@ -10,5 +10,5 @@ export class ConditionChangeComponent {
   panelToggle = true;
   beforeToggle = (isOpened) => {
     return isOpened ? this.panelToggle : true;
-  }
+  };
 }

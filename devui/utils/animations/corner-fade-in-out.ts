@@ -20,9 +20,9 @@ export const cornerFadeInOut: AnimationTriggerMetadata = trigger('cornerFadeInOu
       style({transform: 'scale(1)', opacity: 1, transformOrigin: '0% 100%'})),
   ]),
   transition('top => void', [
-      style({transform: 'scale(1)', opacity: 1, transformOrigin: '0% 100%', display: 'inline-block'}),
-      animate('200ms cubic-bezier(0.755, 0.05, 0.855, 0.06)',
-        style({transform: 'scale(0.9)', opacity: 0, transformOrigin: '0% 100%'}))
-    ]
+    style({transform: 'scale(1)', opacity: 1, transformOrigin: '0% 100%', display: 'inline-block'}),
+    animate('200ms cubic-bezier(0.755, 0.05, 0.855, 0.06)',
+      style({transform: 'scale(0.9)', opacity: 0, transformOrigin: '0% 100%'}))
+  ]
   )
 ]);

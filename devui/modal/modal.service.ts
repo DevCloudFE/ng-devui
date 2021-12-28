@@ -62,13 +62,14 @@ export class ModalService {
       showAnimateValue = apiConfig;
     }
 
-    if (showAnimation !== undefined) {
-
-    } else if (showAnimate !== undefined) {
-      showAnimation = showAnimate ;
-    } else {
-      showAnimation = showAnimateValue;
+    if (showAnimation === undefined) {
+      if (showAnimate !== undefined) {
+        showAnimation = showAnimate;
+      } else {
+        showAnimation = showAnimateValue;
+      }
     }
+
     assign(modalRef.instance, {
       id,
       width,
@@ -102,7 +103,7 @@ export class ModalService {
         this.document.body.scrollTop = modalRef.instance.scrollTop;
         this.document.documentElement.scrollLeft = modalRef.instance.scrollLeft;
         this.document.body.scrollLeft = modalRef.instance.scrollLeft;
-    }
+      }
       if (onClose) {
         onClose();
       }

@@ -6,7 +6,7 @@
     <d-header-version-switch [versionOptions]="versionOptions"></d-header-version-switch>
     <d-header-theme-switch [contentTemplate]="theme1"></d-header-theme-switch>
     <ng-template #theme1>
-      <app-theme-picker class="show-themable"></app-theme-picker>
+      <d-theme-picker class="show-themable"></d-theme-picker>
     </ng-template>
     <d-header-language-switch (languageEvent)="toggleLanguage($event)"></d-header-language-switch>
   </d-common-header>
