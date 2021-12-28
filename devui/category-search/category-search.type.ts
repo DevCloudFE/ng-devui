@@ -1,6 +1,16 @@
 import { TemplateRef } from '@angular/core';
 
 export type CategorySearchTagType = 'radio' | 'checkbox' | 'dateRange' | 'label' | 'textInput' | 'numberRange' | 'treeSelect' | 'keyword';
+
+export interface ITagOption {
+  /**
+   * 选项，label和color默认都会取对应的 filterKey 和 colorKey，如未设置取默认值
+   */
+  label?: string; // 通用默认属性，用于设置分类名称
+  color?: string; // label 专用，用于设置标签颜色
+  [propName: string]: any;
+}
+
 /**
  * 候选tag数据配置项
  */
@@ -46,15 +56,6 @@ export interface ICategorySearchTagItem {
     cache?: Array<ITagOption>;
     [propName: string]: any;
   };
-  [propName: string]: any;
-}
-
-export interface ITagOption {
-  /**
-   * 选项，label和color默认都会取对应的 filterKey 和 colorKey，如未设置取默认值
-   */
-  label?: string; // 通用默认属性，用于设置分类名称
-  color?: string; // label 专用，用于设置标签颜色
   [propName: string]: any;
 }
 

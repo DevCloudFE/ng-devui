@@ -124,7 +124,7 @@ export class TreeFactory {
     selectDisabledKey = 'disableSelect',
     toggleDisabledKey = 'disableToggle',
     treeNodeTitleKey = 'title'
-  }: ITreeInput,  renderTree = true) => {
+  }: ITreeInput, renderTree = true) => {
     forEach(treeItems, (item: ITreeItem) => {
       const node = this.addNode({
         id: item[treeNodeIdKey],
@@ -150,7 +150,7 @@ export class TreeFactory {
         showCheckbox: item.showCheckbox
       }, undefined, renderTree);
 
-      if (!!item.isChecked) {
+      if (item.isChecked) {
         this._checked.add(node);
       }
 
@@ -160,14 +160,15 @@ export class TreeFactory {
       }, renderTree);
     });
     return this;
-  }
+  };
 
   addNode({ id, parentId, ...data }: ITreeNodeData, index?, renderTree = true): TreeNode {
+    let newId = id;
     if (isUndefined(id)) {
       this.idx++;
-      id = this.idx;
+      newId = this.idx;
     }
-    const treeNode = new TreeNode(id, parentId, data);
+    const treeNode = new TreeNode(newId, parentId, data);
     if (this.nodes.hasOwnProperty(treeNode.id)) {
       throw new Error(`Duplicated id: ${treeNode.id} detected, please specify unique ids in the tree.`);
     }
@@ -294,20 +295,20 @@ export class TreeFactory {
     this.nodes[id].data.halfChecked = false;
     this.nodes[id].data.isChecked = checked;
     switch (checkableRelation) {
-      case 'upward':
-        this.checkParentNodes(this.nodes[id]);
-        break;
-      case 'downward':
-        this.checkChildNodes(this.nodes[id], checked);
-        break;
-      case 'both':
-        this.checkParentNodes(this.nodes[id]);
-        this.checkChildNodes(this.nodes[id], checked);
-        break;
-      case 'none':
-        break;
-      default:
-        break;
+    case 'upward':
+      this.checkParentNodes(this.nodes[id]);
+      break;
+    case 'downward':
+      this.checkChildNodes(this.nodes[id], checked);
+      break;
+    case 'both':
+      this.checkParentNodes(this.nodes[id]);
+      this.checkChildNodes(this.nodes[id], checked);
+      break;
+    case 'none':
+      break;
+    default:
+      break;
     }
     this.maintainCheckedNodeList(this.nodes[id], checked);
     return this.getCheckedNodes();
@@ -510,9 +511,9 @@ export class TreeFactory {
 
   public searchTree(target: string, hideUnmatched = false, keyword?, pattern?) {
     this.searchItem = target;
-    target = trim(target);
+    const TrimmedTarget = trim(target);
     this.resetSearchResults();
-    return this.dfs(target.toLowerCase(), this._treeRoot, hideUnmatched, keyword, pattern);
+    return this.dfs(TrimmedTarget.toLowerCase(), this._treeRoot, hideUnmatched, keyword, pattern);
   }
 
   get treeRoot() {

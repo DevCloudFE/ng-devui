@@ -46,6 +46,7 @@ export class RangeDatepickerProComponent implements OnInit, OnDestroy, AfterView
   @Input() splitter = '-';
   @Input() width: string;
   @Input() startIndexOfWeek = 0;
+  @Input() appendToBody = true;
   @Input() set calenderRange (value) {
     this.pickerSrv.calendarRange = value || [1970, 2099];
   }
@@ -295,34 +296,38 @@ export class RangeDatepickerProComponent implements OnInit, OnDestroy, AfterView
       }
     }
 
-  }
+  };
 
   inputBlurCallback = (type) => {
     const targetValue = type === 'start' ? this.dateValue[0] : this.dateValue[1];
     if (!this.validateDate(targetValue)) {
       if (type === 'start') {
         this.dateValue[0] = this.pickerSrv.curRangeDate[0] ?
-        this.datepickerConvert.format(this.pickerSrv.curRangeDate[0], this.curFormat, this.locale || this.i18nLocale) :
-        '';
+          this.datepickerConvert.format(this.pickerSrv.curRangeDate[0], this.curFormat, this.locale || this.i18nLocale) :
+          '';
       } else {
         this.dateValue[1] = this.pickerSrv.curRangeDate[1] ?
-        this.datepickerConvert.format(this.pickerSrv.curRangeDate[1], this.curFormat, this.locale || this.i18nLocale) :
-        '';
+          this.datepickerConvert.format(this.pickerSrv.curRangeDate[1], this.curFormat, this.locale || this.i18nLocale) :
+          '';
       }
     }
     this.getStrWidth();
-  }
+  };
 
   public focusChange(type: 'start' | 'end') {
     this.currentActiveInput = type;
     this.pickerSrv.activeInputChange.next(type);
     if (type === 'start') {
       setTimeout(() => {
-        this.datepickerInputStart?.nativeElement?.focus();
+        if (this.datepickerInputStart?.nativeElement) {
+          this.datepickerInputStart.nativeElement.focus();
+        }
       });
     } else {
       setTimeout(() => {
-        this.datepickerInputEnd?.nativeElement?.focus();
+        if (this.datepickerInputEnd?.nativeElement) {
+          this.datepickerInputEnd.nativeElement.focus();
+        }
       });
     }
   }
@@ -358,7 +363,9 @@ export class RangeDatepickerProComponent implements OnInit, OnDestroy, AfterView
   }
 
   clear(event?: MouseEvent) {
-    event?.stopPropagation();
+    if (event) {
+      event.stopPropagation();
+    }
     if (this.disabled) {
       return;
     }

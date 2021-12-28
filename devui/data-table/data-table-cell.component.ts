@@ -156,10 +156,13 @@ export class DataTableCellComponent implements OnInit, OnChanges, OnDestroy {
     this.dynamicEditorActive = false;
     this.templateEditorActive = false;
 
-    // tslint:disable-next-line:no-unused-expression
-    this.documentClickSubscription && this.unSubscription(this.documentClickSubscription);
-    // tslint:disable-next-line:no-unused-expression
-    this.cellEditorClickSubscription && this.unSubscription(this.cellEditorClickSubscription);
+    if (this.documentClickSubscription) {
+      this.unSubscription(this.documentClickSubscription);
+    }
+
+    if (this.cellEditorClickSubscription) {
+      this.unSubscription(this.cellEditorClickSubscription);
+    }
     stopPropagationIfExist($event);
 
     this.dt.onCellEditEnd({
@@ -181,23 +184,33 @@ export class DataTableCellComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    // tslint:disable-next-line:no-unused-expression
-    this.forceUpdateSubscription && this.unSubscription(this.forceUpdateSubscription);
-    // tslint:disable-next-line:no-unused-expression
-    this.documentClickSubscription && this.unSubscription(this.documentClickSubscription);
-    // tslint:disable-next-line:no-unused-expression
-    this.cellEditorClickSubscription && this.unSubscription(this.cellEditorClickSubscription);
-    // tslint:disable-next-line:no-unused-expression
-    this.cellActionSubscription && this.unSubscription(this.cellActionSubscription);
-    // tslint:disable-next-line:no-unused-expression
-    this.tdMousedownSubscription && this.unSubscription(this.tdMousedownSubscription);
-    // tslint:disable-next-line:no-unused-expression
-    this.tdMouseupSubscription && this.unSubscription(this.tdMouseupSubscription);
+    if (this.forceUpdateSubscription) {
+      this.unSubscription(this.forceUpdateSubscription);
+    }
+
+    if (this.documentClickSubscription) {
+      this.unSubscription(this.documentClickSubscription);
+    }
+
+    if (this.cellEditorClickSubscription) {
+      this.unSubscription(this.cellEditorClickSubscription);
+    }
+
+    if (this.cellActionSubscription) {
+      this.unSubscription(this.cellActionSubscription);
+    }
+    if (this.tdMousedownSubscription) {
+      this.unSubscription(this.tdMousedownSubscription);
+    }
+    if (this.tdMouseupSubscription) {
+      this.unSubscription(this.tdMouseupSubscription);
+    }
   }
 
   private unSubscription(sbscription: Subscription) {
     if (sbscription) {
       sbscription.unsubscribe();
+      /* eslint-disable-next-line no-param-reassign */
       sbscription = null;
     }
   }
@@ -206,25 +219,25 @@ export class DataTableCellComponent implements OnInit, OnChanges, OnDestroy {
     let componentFactory;
     let editorComponent;
     switch (this.column.fieldType) {
-      case 'number':
-        editorComponent = InputNumberComponent;
-        break;
-      case 'select':
-        editorComponent = SelectComponent;
-        break;
-      case 'treeSelect':
-        editorComponent = TreeSelectComponent;
-        break;
-      default:
-        this.templateEditorActive = true;
-        break;
+    case 'number':
+      editorComponent = InputNumberComponent;
+      break;
+    case 'select':
+      editorComponent = SelectComponent;
+      break;
+    case 'treeSelect':
+      editorComponent = TreeSelectComponent;
+      break;
+    default:
+      this.templateEditorActive = true;
+      break;
     }
 
     if (editorComponent) {
       componentFactory = this.componentFactoryResolver.resolveComponentFactory(editorComponent);
       const viewContainerRef = this.editorHost.viewContainerRef;
       viewContainerRef.clear();
-      const componentRef = viewContainerRef.createComponent<{ writeValue: Function, registerOnChange: Function }>(componentFactory);
+      const componentRef = viewContainerRef.createComponent<{ writeValue: Function; registerOnChange: Function }>(componentFactory);
       const componentInstance = componentRef.instance;
       if (this.column.extraOptions) {
         componentFactory.inputs.forEach((input) => {

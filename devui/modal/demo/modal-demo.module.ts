@@ -77,6 +77,6 @@ import { WarningComponent } from './warning/warning.component';
     CasesComponent,
     ModalCasesComponent
   ],
-  
+
 })
 export class ModalDemoModule {}

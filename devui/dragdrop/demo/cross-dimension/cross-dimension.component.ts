@@ -8,65 +8,65 @@ import { ChangeDetectorRef, Component } from '@angular/core';
 export class CrossDimensionComponent {
   lists = {
     listA1:   [
-        { name: 'Visual Studio Code' },
-        { name: 'WebStorm' },
-        { name: 'Sublime Text' },
-        { name: 'Atom' },
-        { name: 'Notepad++' },
-      ],
+      { name: 'Visual Studio Code' },
+      { name: 'WebStorm' },
+      { name: 'Sublime Text' },
+      { name: 'Atom' },
+      { name: 'Notepad++' },
+    ],
     listA2:   [
-        { name: 'Chrome' },
-        { name: 'Firefox' },
-        { name: 'Opera' },
-        { name: 'Edge' },
-        { name: 'Internet Explorer' },
-        { name: 'Safari' },
-      ],
-      listA3: [],
+      { name: 'Chrome' },
+      { name: 'Firefox' },
+      { name: 'Opera' },
+      { name: 'Edge' },
+      { name: 'Internet Explorer' },
+      { name: 'Safari' },
+    ],
+    listA3: [],
     listB1: [
-        {name: 'Linux'},
-        {name: 'Windows'},
-        {name: 'Mac OS'},
-        {name: 'DOS'},
-        {name: 'Chrome OS'},
-      ],
+      {name: 'Linux'},
+      {name: 'Windows'},
+      {name: 'Mac OS'},
+      {name: 'DOS'},
+      {name: 'Chrome OS'},
+    ],
     listB2:  [
-        {name: 'Android'},
-        {name: 'IOS'},
-        {name: 'BlackBerry'},
-        {name: 'Symbian'},
-      ],
-      listB3: [],
-      listC1: [],
-      listC2: [],
-      listC3: []
+      {name: 'Android'},
+      {name: 'IOS'},
+      {name: 'BlackBerry'},
+      {name: 'Symbian'},
+    ],
+    listB3: [],
+    listC1: [],
+    listC2: [],
+    listC3: []
 
-    };
-    owners = [ {
-      id: 'not-assign',
-      name: 'Not Assign',
-      collapse: false
+  };
+  owners = [ {
+    id: 'not-assign',
+    name: 'Not Assign',
+    collapse: false
+  }, {
+    id: 'available',
+    name: 'Available',
+    collapse: false
+  }, {
+    id: 'not-available',
+    name: 'Not Available',
+    collapse: false
+  }];
+  listCol = [
+    {
+      id: 'group1',
+      name: 'Group 1'
     }, {
-      id: 'available',
-      name: 'Available',
-      collapse: false
+      id: 'group2',
+      name: 'Group 2'
     }, {
-      id: 'not-available',
-      name: 'Not Available',
-      collapse: false
-    }];
-    listCol = [
-      {
-        id: 'group1',
-        name: 'Group 1'
-      }, {
-        id: 'group2',
-        name: 'Group 2'
-      }, {
-        id: 'group3',
-        name: 'Group 3'
-      }
-    ];
+      id: 'group3',
+      name: 'Group 3'
+    }
+  ];
   ownerListMap = {
     'not-assign': {
       group1: this.lists.listA1,
@@ -105,7 +105,7 @@ export class CrossDimensionComponent {
     } else {
       targetArray.push(item);
     }
-    if (-1 === fromIndex) {
+    if (fromIndex === -1) {
       this.removeItem(item, parentArray);
     }
   }
@@ -142,7 +142,7 @@ export class CrossDimensionComponent {
 
   cleanBatch() {
     Object.keys(this.lists).map(key => this.lists[key]).forEach(list => list.forEach(
-      item => item['isSelected'] = false
+      item => {item['isSelected'] = false;}
     ));
   }
 }

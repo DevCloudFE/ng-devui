@@ -144,8 +144,7 @@ export const devuiGreenTheme: Theme = new Theme({
   id: 'avenueui-green-theme',
   name: 'Green - Light Mode',
   cnName: '绿色主题',
-  data: Object.assign({}, devuiLightTheme.data, {
-    'devui-global-bg': '#f3f8f7',
+  data: { ...devuiLightTheme.data, 'devui-global-bg': '#f3f8f7',
     'devui-brand': '#3DCCA6',
     'devui-brand-foil': '#7fdac1',
     'devui-brand-hover': '#6DDEBB',
@@ -183,8 +182,7 @@ export const devuiGreenTheme: Theme = new Theme({
     'devui-default-bg': '#f3f8f7',
     'devui-primary-disabled': '#c5f0e5',
     'devui-icon-fill-active-disabled': '#c5f0e5',
-    'devui-range-item-hover-bg': '#d8f9ea',
-  }),
+    'devui-range-item-hover-bg': '#d8f9ea',},
   extends: 'devui-light-theme',
   isDark: false,
 });
@@ -291,8 +289,7 @@ export const avenueuiGreenDarkTheme: Theme = new Theme({
   id: 'avenueui-green-dark-theme',
   name: 'Green - Dark Mode',
   cnName: '绿色深色主题',
-  data: Object.assign({}, devuiDarkTheme.data, {
-    'devui-brand': '#3DCCA6',
+  data: { ...devuiDarkTheme.data, 'devui-brand': '#3DCCA6',
     'devui-brand-foil': '#395e54',
     'devui-brand-hover': '#4c9780',
     'devui-brand-active': '#07c693',
@@ -321,8 +318,7 @@ export const avenueuiGreenDarkTheme: Theme = new Theme({
     'devui-default-line': '#3DCCA6',
     'devui-default-bg': '#383838',
     'devui-primary-disabled': '#28544B',
-    'devui-icon-fill-active-disabled': '#28544B',
-  }),
+    'devui-icon-fill-active-disabled': '#28544B',},
   extends: 'devui-dark-theme',
   isDark: true,
 });

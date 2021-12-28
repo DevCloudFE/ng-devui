@@ -47,7 +47,7 @@ export class AnchorBoxHashSupportDirective implements OnInit, AfterViewInit, OnD
     if (targetAnchor.activeChangeBy === 'initial') { return; }
     this.router.navigate([], { fragment: targetAnchor.anchor, replaceUrl: true });
     this.manual = true;
-  }
+  };
 
   navigateToAnchor = (event: NavigationEnd) => {
     if (this.manual) {
@@ -57,7 +57,7 @@ export class AnchorBoxHashSupportDirective implements OnInit, AfterViewInit, OnD
     if (this.scrollToAnchorByHashOnlyInit) { return; }
     const frag = this.router.parseUrl(event.url).fragment;
     this.scrollToFragment(frag);
-  }
+  };
 
   scrollToFragment = (frag: string) => {
     if (!frag) { return; }
@@ -67,5 +67,5 @@ export class AnchorBoxHashSupportDirective implements OnInit, AfterViewInit, OnD
       tempAnchor.anchorBlock = this.box.anchorMap[frag];
       tempAnchor.scrollToAnchor('fragment');
     }
-  }
+  };
 }

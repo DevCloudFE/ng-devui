@@ -142,7 +142,7 @@ export class TooltipDirective implements OnChanges, AfterViewInit, OnDestroy {
   instanceAssignValue(key: string | string[]): void {
     const keyArr = typeof key === 'string' ? [key] : key;
     const obj: any = {};
-    keyArr.forEach((item) => (obj[item] = this[item]));
+    keyArr.forEach((item) => {(obj[item] = this[item]);});
     Object.assign(this.tooltipComponentRef.instance, obj);
   }
   ngOnChanges(changes: SimpleChanges): void {

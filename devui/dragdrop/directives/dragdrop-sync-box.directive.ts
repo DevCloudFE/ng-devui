@@ -24,7 +24,7 @@ export class DragDropSyncBoxDirective implements OnInit, AfterViewInit, OnDestro
   constructor(private dragDropSyncService: DragDropSyncService,
               private dragSyncDrs: DragSyncDescendantRegisterService,
               private dropSortSyncDrs: DropSortSyncDescendantRegisterService) {
-    }
+  }
 
   ngOnInit() {
     this.dragSyncList = new DescendantRoot<DragSyncDirective>(this.dragSyncDrs);

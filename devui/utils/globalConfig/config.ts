@@ -1,6 +1,31 @@
-/* tslint:disable: no-empty-interface*/
 import { InjectionToken } from '@angular/core';
+export interface IShowAnimationConfig {
+  showAnimation?: boolean;
+}
+export type GlobalConfig = IShowAnimationConfig;
 
+export interface TooltipConfig extends IShowAnimationConfig {
+  mouseEnterDelay?: number;
+  mouseLeaveDelay?: number;
+}
+export type PanelConfig = IShowAnimationConfig;
+export type ModalConfig = IShowAnimationConfig;
+export type DropdownConfig = IShowAnimationConfig;
+export type AccordionConfig = IShowAnimationConfig;
+export type TwodatepickerConfig = IShowAnimationConfig;
+export type PopoverConfig = IShowAnimationConfig;
+export type SelectConfig = IShowAnimationConfig;
+export type TreeselectConfig = IShowAnimationConfig;
+export type PopperConfig = IShowAnimationConfig;
+export type TreeConfig = IShowAnimationConfig;
+export type EditableselectConfig = IShowAnimationConfig;
+export type AutocompleteConfig = IShowAnimationConfig;
+export type MultiautocompleteConfig = IShowAnimationConfig;
+export type DatepickerConfig = IShowAnimationConfig;
+export type CascaderConfig = IShowAnimationConfig;
+export type TagsinputConfig = IShowAnimationConfig;
+export type TimepickerConfig = IShowAnimationConfig;
+export type CheckboxConfig = IShowAnimationConfig;
 export interface DevUIGlobalConfig {
   tooltip?: TooltipConfig;
   dropdown?: DropdownConfig;
@@ -26,33 +51,7 @@ export interface DevUIGlobalConfig {
   panel?: PanelConfig;
   global?: GlobalConfig;
 }
-export interface IShowAnimationConfig {
-  showAnimation?: boolean;
-}
-export interface GlobalConfig extends IShowAnimationConfig {}
 
-export interface TooltipConfig extends IShowAnimationConfig {
-  mouseEnterDelay?: number;
-  mouseLeaveDelay?: number;
-}
-export interface PanelConfig extends IShowAnimationConfig {}
-export interface ModalConfig extends IShowAnimationConfig {}
-export interface DropdownConfig extends IShowAnimationConfig {}
-export interface AccordionConfig extends IShowAnimationConfig {}
-export interface TwodatepickerConfig extends IShowAnimationConfig {}
-export interface PopoverConfig extends IShowAnimationConfig {}
-export interface SelectConfig extends IShowAnimationConfig {}
-export interface TreeselectConfig extends IShowAnimationConfig {}
-export interface PopperConfig extends IShowAnimationConfig {}
-export interface TreeConfig extends IShowAnimationConfig {}
-export interface EditableselectConfig extends IShowAnimationConfig {}
-export interface AutocompleteConfig extends IShowAnimationConfig {}
-export interface MultiautocompleteConfig extends IShowAnimationConfig {}
-export interface DatepickerConfig extends IShowAnimationConfig {}
-export interface CascaderConfig extends IShowAnimationConfig {}
-export interface TagsinputConfig extends IShowAnimationConfig {}
-export interface TimepickerConfig extends IShowAnimationConfig {}
-export interface CheckboxConfig extends IShowAnimationConfig {}
 
 export type DevUIGlobalConfigKey = keyof DevUIGlobalConfig;
 export type DevUIGlobalInsideConfigKey = keyof DevUIGlobalConfig['global'];

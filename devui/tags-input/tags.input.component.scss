@@ -60,6 +60,10 @@
         flex-wrap: wrap;
         align-content: flex-start;
 
+        d-toggle-menu-search .devui-toggle-menu-search > input {
+          height: 26px;
+        }
+
         &.disabled d-toggle-menu-search .devui-toggle-menu-search input {
           cursor: not-allowed;
         }

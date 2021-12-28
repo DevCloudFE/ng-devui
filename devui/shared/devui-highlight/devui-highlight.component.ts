@@ -31,7 +31,7 @@ export class DevUIHighlightComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    (<any>HighLight).highlightBlock(this.codeElement.nativeElement);
+    HighLight.highlightBlock(this.codeElement.nativeElement);
   }
 
   constructor() {

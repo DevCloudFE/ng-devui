@@ -126,34 +126,34 @@ export class PositionService {
     }
 
     switch (placementPrimary) {
-      case 'top':
-        targetElPosition.top = hostElPosition.top - targetElement.offsetHeight;
-        targetElPosition.bottom += hostElPosition.top - targetElement.offsetHeight;
-        targetElPosition.left = placementSecondary === 'right'
-          ? shiftWidth[placementSecondary] - targetElement.offsetWidth : shiftWidth[placementSecondary];
-        targetElPosition.right += shiftWidth[placementSecondary];
-        break;
-      case 'bottom':
-        targetElPosition.top = shiftHeight[placementPrimary];
-        targetElPosition.bottom += shiftHeight[placementPrimary];
-        targetElPosition.left = placementSecondary === 'right'
-          ? shiftWidth[placementSecondary] - targetElement.offsetWidth : shiftWidth[placementSecondary];
-        targetElPosition.right += shiftWidth[placementSecondary];
-        break;
-      case 'left':
-        targetElPosition.top = placementSecondary === 'bottom'
-          ? shiftHeight[placementSecondary] - targetElement.offsetHeight : shiftHeight[placementSecondary];
-        targetElPosition.bottom += shiftHeight[placementSecondary];
-        targetElPosition.left = hostElPosition.left - targetElement.offsetWidth;
-        targetElPosition.right += hostElPosition.left - targetElement.offsetWidth;
-        break;
-      case 'right':
-        targetElPosition.top = placementSecondary === 'bottom'
-          ? shiftHeight[placementSecondary] - targetElement.offsetHeight : shiftHeight[placementSecondary];
-        targetElPosition.bottom += shiftHeight[placementSecondary];
-        targetElPosition.left = shiftWidth[placementPrimary];
-        targetElPosition.right += shiftWidth[placementPrimary];
-        break;
+    case 'top':
+      targetElPosition.top = hostElPosition.top - targetElement.offsetHeight;
+      targetElPosition.bottom += hostElPosition.top - targetElement.offsetHeight;
+      targetElPosition.left = placementSecondary === 'right'
+        ? shiftWidth[placementSecondary] - targetElement.offsetWidth : shiftWidth[placementSecondary];
+      targetElPosition.right += shiftWidth[placementSecondary];
+      break;
+    case 'bottom':
+      targetElPosition.top = shiftHeight[placementPrimary];
+      targetElPosition.bottom += shiftHeight[placementPrimary];
+      targetElPosition.left = placementSecondary === 'right'
+        ? shiftWidth[placementSecondary] - targetElement.offsetWidth : shiftWidth[placementSecondary];
+      targetElPosition.right += shiftWidth[placementSecondary];
+      break;
+    case 'left':
+      targetElPosition.top = placementSecondary === 'bottom'
+        ? shiftHeight[placementSecondary] - targetElement.offsetHeight : shiftHeight[placementSecondary];
+      targetElPosition.bottom += shiftHeight[placementSecondary];
+      targetElPosition.left = hostElPosition.left - targetElement.offsetWidth;
+      targetElPosition.right += hostElPosition.left - targetElement.offsetWidth;
+      break;
+    case 'right':
+      targetElPosition.top = placementSecondary === 'bottom'
+        ? shiftHeight[placementSecondary] - targetElement.offsetHeight : shiftHeight[placementSecondary];
+      targetElPosition.bottom += shiftHeight[placementSecondary];
+      targetElPosition.left = shiftWidth[placementPrimary];
+      targetElPosition.right += shiftWidth[placementPrimary];
+      break;
     }
 
     targetElPosition.top = Math.round(targetElPosition.top);
@@ -188,28 +188,28 @@ export class PositionService {
       const placementPrimaryTemp = placement[i].split('-')[0] || 'top';
       const placementSecondaryTemp = placement[i].split('-')[1] || 'center';
 
-      let top, left;
+      let top; let left;
       switch (placementPrimaryTemp) {
-        case 'top':
-          top = hostElPosition.top - targetElement.offsetHeight;
-          left = placementSecondaryTemp === 'right'
+      case 'top':
+        top = hostElPosition.top - targetElement.offsetHeight;
+        left = placementSecondaryTemp === 'right'
           ? shiftWidth[placementSecondaryTemp] - targetElement.offsetWidth : shiftWidth[placementSecondary];
-          break;
-        case 'bottom':
-          top = shiftHeight[placementPrimaryTemp];
-          left = placementSecondaryTemp === 'right'
+        break;
+      case 'bottom':
+        top = shiftHeight[placementPrimaryTemp];
+        left = placementSecondaryTemp === 'right'
           ? shiftWidth[placementSecondaryTemp] - targetElement.offsetWidth : shiftWidth[placementSecondary];
-          break;
-        case 'left':
-          top = placementSecondaryTemp === 'bottom'
-            ? shiftHeight[placementSecondaryTemp] - targetElement.offsetHeight : shiftHeight[placementSecondary];
-          left = hostElPosition.left - targetElement.offsetWidth;
-          break;
-        case 'right':
-          top = placementSecondaryTemp === 'bottom'
-            ? shiftHeight[placementSecondaryTemp] - targetElement.offsetHeight : shiftHeight[placementSecondary];
-          left = shiftWidth[placementPrimaryTemp];
-          break;
+        break;
+      case 'left':
+        top = placementSecondaryTemp === 'bottom'
+          ? shiftHeight[placementSecondaryTemp] - targetElement.offsetHeight : shiftHeight[placementSecondary];
+        left = hostElPosition.left - targetElement.offsetWidth;
+        break;
+      case 'right':
+        top = placementSecondaryTemp === 'bottom'
+          ? shiftHeight[placementSecondaryTemp] - targetElement.offsetHeight : shiftHeight[placementSecondary];
+        left = shiftWidth[placementPrimaryTemp];
+        break;
       }
       if (this.isInViewPort(targetElement, {offsetLeft: left, offsetTop: top})) {
         placementPrimary = placement[i].split('-')[0] || 'top';

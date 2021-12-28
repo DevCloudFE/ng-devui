@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { DevuiSourceData } from 'ng-devui/shared/devui-codebox/devui-source-data';
+import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 @Component({
   selector: 'd-datepicker-pro-demo',
@@ -61,7 +61,7 @@ export class DatepickerProDemoComponent implements OnInit, OnDestroy {
     { title: 'TS', language: 'typescript', code: require('./tab-type/datepicker-pro-tab-type.component.ts?raw') },
     { title: 'SCSS', language: 'css', code: require('./tab-type/datepicker-pro-tab-type.component.scss?raw') },
   ];
-    navItems = [];
+  navItems = [];
   subs: Subscription = new Subscription();
   constructor(private translate: TranslateService) {}
 

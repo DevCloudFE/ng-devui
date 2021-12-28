@@ -51,6 +51,6 @@ import { TemplateComponent } from './template/template.component';
     ChangeKeyComponent,
   ],
   providers: [],
-  
+
 })
 export class AccordionDemoModule {}

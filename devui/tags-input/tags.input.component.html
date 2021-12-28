@@ -36,7 +36,7 @@
       [value]="selectedItems"
       [virtualScroll]="virtualScroll"
       [hasSelectIndex]="true"
-      [isFiltering]="newTag?.length === 0"
+      [isFiltering]="newTag?.length > 0"
       [listItemTemplate]="listItem"
       [closeScope]="'blank'"
       (toggleChange)="toggleChangeFn($event)"

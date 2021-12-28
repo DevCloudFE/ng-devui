@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
+import { ITreeItem } from 'ng-devui/tree';
 @Component({
   selector: 'd-custom-title-key',
   templateUrl: './custom-title-key.component.html'
 })
 export class CustomTitleKeyComponent {
-  data1 = [
+  data1: ITreeItem[] = [
     {
       id: '1',
       name: 'parent node 1 - expanded',

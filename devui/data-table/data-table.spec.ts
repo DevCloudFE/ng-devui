@@ -260,7 +260,7 @@ class TestDataTableAdvancedComponent {
     this.filterListMulti = this.filterList;
     this.ref.detectChanges();
     return true;
-  }
+  };
 
   onRowCheckChange(checked, rowIndex, nestedIndex, rowItem) {
     rowItem.$checked = checked;
@@ -371,11 +371,11 @@ class TestDataTableEditComponent {
 
   beforeEditStart = (rowItem, field): Boolean | Promise<boolean> | Observable<boolean> => {
     return Promise.resolve(true);
-  }
+  };
 
   beforeEditEnd = (rowItem, field): Boolean | Promise<boolean> | Observable<boolean> => {
     return Promise.resolve(true);
-  }
+  };
 }
 
 // data-table: has children
@@ -472,7 +472,7 @@ class TestDataTableWithChildrenComponent {
         resolve(undefined);
       }, 500);
     });
-  }
+  };
 
   onChildTableToggle(event, rowItem) {
     this.childTableToggleEvent = event;
@@ -551,48 +551,48 @@ class TestDataFixedColumnComponent {
   basicDataSource: Array<SourceType> = JSON.parse(JSON.stringify(originSource.slice(0, 6)));
   dataTableOptions = {
     columns: [
-        {
-            field: 'firstName',
-            header: 'First Name',
-            fieldType: 'text',
-            fixedLeft: '0px'
-        },
-        {
-            field: 'lastName',
-            header: 'Last Name',
-            fieldType: 'text'
-        },
-        {
-            field: 'gender',
-            header: 'gender',
-            fieldType: 'text'
-        },
-        {
-            field: 'dob',
-            header: 'Date of birth',
-            fieldType: 'date'
-        },
-        {
-          field: 'dob',
-          header: 'Date of birth',
-          fieldType: 'date'
-        },
-        {
-          field: 'dob',
-          header: 'Date of birth',
-          fieldType: 'date'
-        },
-        {
-          field: 'dob',
-          header: 'Date of birth',
-          fieldType: 'date'
-        },
-        {
-          field: 'dob',
-          header: 'Date of birth',
-          fieldType: 'date',
-          fixedRight: '0px'
-        }
+      {
+        field: 'firstName',
+        header: 'First Name',
+        fieldType: 'text',
+        fixedLeft: '0px'
+      },
+      {
+        field: 'lastName',
+        header: 'Last Name',
+        fieldType: 'text'
+      },
+      {
+        field: 'gender',
+        header: 'gender',
+        fieldType: 'text'
+      },
+      {
+        field: 'dob',
+        header: 'Date of birth',
+        fieldType: 'date'
+      },
+      {
+        field: 'dob',
+        header: 'Date of birth',
+        fieldType: 'date'
+      },
+      {
+        field: 'dob',
+        header: 'Date of birth',
+        fieldType: 'date'
+      },
+      {
+        field: 'dob',
+        header: 'Date of birth',
+        fieldType: 'date'
+      },
+      {
+        field: 'dob',
+        header: 'Date of birth',
+        fieldType: 'date',
+        fixedRight: '0px'
+      }
     ]
   };
 

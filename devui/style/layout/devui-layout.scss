@@ -1,3 +1,10 @@
 @import '~bootstrap/scss/functions';
 @import './config';
 @import '~bootstrap/scss/bootstrap-grid';
+
+/* COMMENT: reset bootstrap default box-sizing to same to ng-devui default */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}

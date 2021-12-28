@@ -71,6 +71,6 @@ import { DatepickerProTemplateComponent } from './template/datepicker-template.c
     DatepickerProTabTypeComponent
   ],
   providers: [],
-  
+
 })
 export class DatepickerProDemoModule {}

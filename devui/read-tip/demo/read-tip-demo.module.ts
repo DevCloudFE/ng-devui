@@ -40,6 +40,6 @@ import { ReadtipTemplateComponent } from './readtip-template/readtip-template.co
   ],
   exports: [ReadTipDemoComponent],
   declarations: [ReadTipDemoComponent, BasicComponent, MultiReadtipComponent, ReadtipTemplateComponent, ReadtipAsyncComponent],
-  
+
 })
 export class ReadTipDemoModule {}

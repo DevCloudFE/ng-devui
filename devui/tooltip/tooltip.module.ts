@@ -17,7 +17,7 @@ import { TooltipDirective } from './tooltip.directive';
   providers: [
     OverlayContainerRef,
   ],
-  
+
 })
 export class TooltipModule {
 }

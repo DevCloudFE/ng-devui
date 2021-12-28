@@ -5,7 +5,7 @@ import { parseDate } from './date-utils';
 export class DefaultDateConverter implements DateConverter {
 
   parse(date: any, pattern?: string, locale?: string): Date {
-    return parseDate(date);
+    return parseDate(date, pattern);
   }
 
   format(date: Date, pattern?: string, locale?: string): string {

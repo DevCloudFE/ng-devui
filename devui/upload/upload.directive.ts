@@ -139,7 +139,7 @@ export class UploadDirective extends UploadComponent implements OnDestroy {
           last()
         )
         .subscribe(
-          (results: Array<{ file: File, response: any }>) => {
+          (results: Array<{ file: File; response: any }>) => {
             this.successEvent.emit(results);
             results.forEach((result) => {
               this.uploadedFiles.push(result.file);

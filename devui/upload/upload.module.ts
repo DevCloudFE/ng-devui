@@ -37,7 +37,7 @@ import { UploadedFilesComponent } from './uploaded-files.component';
     FileDropDirective,
     UploadDirective
   ],
-  
+
   providers: [SelectFiles],
 })
 export class UploadModule {

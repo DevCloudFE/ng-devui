@@ -15,6 +15,6 @@ export class BasicComponent implements OnInit {
 
   onToggle(event) {
     console.log(event);
-}
+  }
 
 }

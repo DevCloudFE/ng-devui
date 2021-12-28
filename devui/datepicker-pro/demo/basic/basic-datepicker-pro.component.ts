@@ -3,8 +3,8 @@ import {
 } from '@angular/core';
 
 @Component({
-selector: 'd-basic-datepicker-pro',
-templateUrl: './basic-datepicker-pro.component.html',
+  selector: 'd-basic-datepicker-pro',
+  templateUrl: './basic-datepicker-pro.component.html',
 })
 export class BasicDatepickerProComponent {
   value1;

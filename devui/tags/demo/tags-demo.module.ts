@@ -34,6 +34,6 @@ import { TagsDemoComponent } from './tags-demo.component';
   ],
   exports: [TagsDemoComponent],
   declarations: [TagsDemoComponent, BasicComponent, CustomComponent],
-  
+
 })
 export class TagsDemoModule {}

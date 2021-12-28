@@ -157,7 +157,7 @@ export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterV
   private _allowClear: boolean;
   private timer: any;
   @Input() readyEvent = (treeSelect: TreeSelectComponent) => {
-  }
+  };
 
   private onChange = (_: any) => null;
   private onTouch = () => null;
@@ -273,6 +273,7 @@ export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterV
             insertObject[this.treeNodeTitleKey] = treeNode[this.treeNodeTitleKey];
             (this.value as any[]).push(insertObject);
             // 赋值触发setValue设置valueType和valueLength
+            /* eslint-disable-next-line no-self-assign*/
             this.value = this.value;
           }
         } else {

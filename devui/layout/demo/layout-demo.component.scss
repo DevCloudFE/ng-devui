@@ -1,0 +1,63 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
+::ng-deep {
+  d-row {
+    text-align: center;
+
+    &.base-container {
+      background: $devui-global-bg;
+      height: 100px;
+    }
+
+    d-col {
+      &.full-height {
+        height: 100%;
+      }
+
+      line-height: 60px;
+      color: $devui-light-text;
+    }
+  }
+
+  .d-common-layout d-col {
+    background: $devui-brand;
+  }
+
+  .d-stripe-layout d-row {
+    margin: 12px !important;
+
+    d-col:nth-child(2n + 1) {
+      background: $devui-brand-hover;
+    }
+
+    d-col:nth-child(2n + 2) {
+      background: $devui-brand;
+    }
+  }
+
+  d-col .content-box {
+    background: $devui-brand;
+
+    &.color-hover {
+      background: $devui-brand-hover;
+    }
+  }
+
+  .brand-content {
+    background: $devui-brand;
+    color: $devui-light-text;
+    text-align: center;
+    line-height: 30px;
+  }
+
+  .hover-content {
+    background: $devui-brand-hover;
+    color: $devui-light-text;
+    text-align: center;
+    line-height: 30px;
+  }
+
+  .base-container {
+    background: $devui-global-bg;
+  }
+}

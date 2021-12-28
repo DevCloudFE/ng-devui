@@ -42,6 +42,7 @@ export class DatepickerProComponent implements OnInit, AfterViewInit, OnDestroy,
   @Input() format: string;
   @Input() cssClass: string;
   @Input() showAnimation = true;
+  @Input() appendToBody = true;
   @Input() width: string;
   @Output() dropdownToggle = new EventEmitter<boolean>();
   @Output() confirmEvent = new EventEmitter<Date>();
@@ -131,7 +132,7 @@ export class DatepickerProComponent implements OnInit, AfterViewInit, OnDestroy,
       takeUntil(this.unsubscribe$)
     ).subscribe(time => {
       if (this.dateValue) {
-        const curTime = this.datepickerConvert.parse(this.dateValue).setHours(time.hour, time.min, time.seconds);
+        const curTime = this.datepickerConvert.parse(this.dateValue, this.curFormat).setHours(time.hour, time.min, time.seconds);
         const curDate = new Date(curTime);
         this.pickerSrv.curDate = curDate;
         this.dateValue = this.formatDateToString(curDate);
@@ -224,7 +225,10 @@ export class DatepickerProComponent implements OnInit, AfterViewInit, OnDestroy,
   }
 
   clear(event?: MouseEvent) {
-    event?.stopPropagation();
+    if (event) {
+      event.stopPropagation();
+    }
+
     if (this.disabled) {
       return;
     }
@@ -261,7 +265,7 @@ export class DatepickerProComponent implements OnInit, AfterViewInit, OnDestroy,
     this.isOpen = true;
 
     setTimeout(() => {
-      this.datepickerInput?.nativeElement?.focus();
+      if (this.datepickerInput?.nativeElement) { this.datepickerInput.nativeElement.focus(); }
     });
   }
 

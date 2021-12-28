@@ -45,6 +45,7 @@ import { TimeAxisModule } from 'ng-devui/time-axis';
 |  dotColor  | `string` |  --  | 可选，自定义时间圈颜色   | [内容使用模板自定义](demo#content-with-template) |
 |  customDot  | `string\|HTMLElement\|TemplateRef` |  --  | 可选，自定义时间点   | [时间点自定义](demo#custom-dot) |
 |  extraElement  | `string\|HTMLElement\|TemplateRef` |  --  | 可选，自定义两个时间点间附加元素   | [内容使用模板自定义](demo#content-with-template) |
+|  iconClass  | `string` |  --  | 可选，时间点附加样式名   | [设置方向](demo#direction) |
 
 ## TimeAxisData
 
@@ -93,7 +94,10 @@ interface TimeAxisData {
 |  data  |                   `array`                   |  --  | 可选，模板数据，当 model 设置为 template 时生效             | [时间节点单独使用](demo#seperate-way) |
 |  contentTemplate  | `TemplateRef` |  --  | 可选，内容模板，默认为空，当 model 为 `template` 时需要设置 | [时间节点单独使用](demo#seperate-way) |
 |  lineStyle  | `{style: 'solid' \| 'dashed' \| 'dotted' \| 'none', color: string}`  | `{style: 'solid'}`  | 可选，设置时间轴线条样式   | [时间节点单独使用](demo#seperate-way) |
+|  dotColor  | `string` |  --  | 可选，自定义时间圈颜色   | [时间节点单独使用](demo#seperate-way) |
 |  customDot  | `string\|HTMLElement\|TemplateRef` |  --  | 可选，自定义时间点   | [时间节点单独使用](demo#seperate-way) |
 |  extraElement  | `string\|HTMLElement\|TemplateRef` |  --  | 可选，自定义两个时间点间附加元素   | [时间节点单独使用](demo#seperate-way) |
 |  position  | `'up'\|'bottom'\|'left'\|'right'` |  --  | 可选，text 或 data的位置，若有time则time位于相反位置   | [时间节点单独使用](demo#seperate-way) |
 |  timePosition  | `'left'\|'bottom'` |  --  | 可选，仅当direction 为 `vertical` 时定义时间参数位置   | [时间节点单独使用](demo#seperate-way) |
+|  iconClass  | `string` |  --  | 可选，时间点附加样式名   | [时间节点单独使用](demo#seperate-way) |
+| horizontalAlign  |     `'center'\|'left'`      |  `'center'`  | 可选，仅当direction 为 `horizontal` 时，设置内容对齐方式 | [时间节点单独使用](demo#seperate-way)           |

@@ -8,13 +8,9 @@ export const suggestScopeList: Array<string> = [
 ];
 
 export const newScopeList: Array<string> | string = [
-  'dashboard',
-  'dataTable',
-  'categorySearch',
-  'autoComplete',
-  'editableSelect',
-  'tree',
-  'tooltip',
+  'layout',
+  'fullscreen',
+  'relativeTime',
   'tagsInput'
 ];
 

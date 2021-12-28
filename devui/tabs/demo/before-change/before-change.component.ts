@@ -31,10 +31,10 @@ export class CustomizeTmpComponent implements OnInit {
   }
   beforeChange = (tab) => {
     if (tab === 'tab1') {
-        this.acticeTabId = 'tab3';
-        return false;
+      this.acticeTabId = 'tab3';
+      return false;
     } else {
-        return true;
+      return true;
     }
-}
+  };
 }

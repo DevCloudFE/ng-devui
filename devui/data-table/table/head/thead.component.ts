@@ -7,6 +7,7 @@ import { TableTrComponent } from '../row/tr.component';
 import { TableThComponent } from './th/th.component';
 
 @Component({
+  /* eslint-disable-next-line @angular-eslint/component-selector*/
   selector: '[dTableHead]',
   templateUrl: './thead.component.html'
 })

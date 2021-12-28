@@ -1370,6 +1370,10 @@
         "title": "Batch line dragging",
         "description": "You can use the DragDrop component to drag rows in a table in batches. You can press Ctrl and select multiple rows and cells to drag them. You can only customize the head and body templates and the rows and cells in the templates."
       },
+      "virtualScrollTreeTableDemo": {
+        "title": "Tree table with a large amount of data",
+        "description": "To display 10,000 to 100,000 tree data records, use this table to ensure smooth operations."
+      },
       "mutilStylesDemo": {
         "title": "Table Style"
       },
@@ -1404,7 +1408,7 @@
         "cell-merge": "Cell Merge",
         "drag-row": "Row dragging",
         "muti-drag-row": "Batch Row dragging",
-        "big-data-tree-table": "Big Data Tree Table"
+        "virtual-scroll-tree-table": "Big Data Tree Table"
       }
     },
     "datepickerPro": {
@@ -1803,9 +1807,16 @@
         "fullscreen": "Full screen",
         "exitFullscreen": "Exit Full Screen"
       },
+      "customDemo": {
+        "title": "Function Invoking",
+        "description": "Create a full screen by calling a function.",
+        "fullscreen": "Full screen",
+        "exitFullscreen": "Exit Full Screen"
+      },
       "anchorLinkValues": {
         "immersive-full-screen": "Immersive full screen",
-        "general-full-screen": "Common full screen"
+        "general-full-screen": "Common full screen",
+        "custom-full-screen": "Function Invoking"
       }
     },
     "transfer": {
@@ -3688,23 +3699,71 @@
       "name": "Layout",
       "type": "layout",
       "path": "layout",
-      "description": "Page Layout.",
-      "tmw": "When user want to use some existed layout.",
+      "description": "Page Layout, including Responsive Grid, Flex, Spacing, Responsive Class, Responsive Style, and Typical Layout Container.",
+      "tmw": "When the user needs to use Flex layouts, spacing settings, responsive layouts, typical layouts, etc.",
       "basicDemo": {
-        "title": "Basic Usage"
+        "title": "Grid Basic Usage",
+        "description": "Responsive breakpoints correspond to (px): ss > 0, ms >= 360, mm >= 768, ml >= 1024, xs >= 1280, sm >= 1440, md >= 1600, lg >= 1760, xl >= 1920. When combining settings, ss breakpoints represent common settings."      },
+      "gutterDemo": {
+        "title": "Grid Gutter",
+        "description": "The interval is implemented by padding in a grid."      },
+      "spaceDemo": {
+        "title": "Grid Space",
+        "description": "The interval is implemented by using the block margin in the grid."
+
       },
-      "appDemo1": {
-        "title": "Application Scenario 1",
+      "offsetDemo": {
+        "title": "Column Offset"
+      },
+      "alignJustifyDemo": {
+        "title": "Alignment"
+      },
+      "orderDemo": {
+        "title": "Order",
+        "description": "Order: 0, 1, 2, ..., 24."
+      },
+      "flexDemo": {
+        "title": "Flex",
+        "description": "[dFlex] is generic and you can use it elsewhere."
+      },
+      "spaceGutterDemo": {
+        "title": "Gutter And Space(Universal)",
+        "description": "[dGutter] is common to [dSpace] and you can use it elsewhere."
+      },
+      "classDemo": {
+        "title": "Responsive Class",
+        "description": "Responsive Class setting support. Classes set within multiple breakpoint ranges can be combined."
+      },
+      "styleDemo": {
+        "title": "Responsive Style",
+        "description": "Responsive Style setting support. Styles set within multiple breakpoint ranges can be combined."
+      },
+      "layoutContainerDemo": {
+        "title": "Layout Container",
+        "description": "Grid Basic Usage"
+      },
+      "layoutContainerDemo1": {
+        "title": "Layout Container Scenario 1",
         "description": "Common top, middle, and bottom layout."
       },
-      "appDemo2": {
-        "title": "Application Scenario 2",
+      "layoutContainerDemo2": {
+        "title": "Layout Container Scenario 2",
         "description": "Common top, middle, and bottom layouts and sidebar layouts."
       },
       "anchorLinkValues": {
-        "basic-usage": "Basic Usage",
-        "application-scenario1": "Application Scenario 1",
-        "application-scenario2": "Application Scenario 2"
+        "basic-usage": "Grid Basic Usage",
+        "gutter": "Grid Gutter",
+        "space": "Grid Space",
+        "offset": "Column Offset",
+        "align-justify": "Alignment",
+        "order": "Order",
+        "flex": "Flex",
+        "space-gutter": "Gutter And Space(Universal)",
+        "class": "Responsive Class",
+        "style": "Responsive Style",
+        "layout-container": "Layout Container",
+        "layout-container-scenario1": "Layout Container Scenario 1",
+        "layout-container-scenario2": "Layout Container Scenario 2"
       }
     },
     "gantt": {
@@ -3957,6 +4016,176 @@
       "anchorLinkValues": {
         "basicDemo": "Basic Usage"
       }
+    },
+    "line-chart": {
+      "name": "Line Chart",
+      "type": "Chart Template",
+      "path": "line-chart",
+      "description": "line chart for basic data",
+      "tmw": "show basic data linear change",
+      "line-chartDemo": {
+        "title": "basic line chart",
+        "threshold": "threshold line chart"
+      },
+      "threshold-chartDemo": {
+        "title": "threshold line chart"
+      },
+      "compare-chartDemo": {
+        "title": "compare line chart"
+      },
+      "anchorLinkValues": {
+        "echarts-temp-line-chart": "basic line chart",
+        "threshold-temp-line-chart": "threshold line chart"
+      }
+    },
+    "hex-bin-chart": {
+      "name": "Hex Bin Chart",
+      "type": "Chart Template",
+      "path": "hex-bin-chart",
+      "description": "Discrete data comparison",
+      "tmw": "Display data comparison of discrete data",
+      "auto-chartDemo": {
+        "title": "Auto-layout binning diagram"
+      },
+      "anchorLinkValues": {
+        "auto-chartDemo": "Auto-layout binning diagram"
+      }
+    },
+    "map-chart": {
+      "name": "Map Chart",
+      "type": "Chart Template",
+      "path": "map-chart",
+      "description": "show region data",
+      "tmw": "show basic data in region",
+      "china-province": {
+        "title": "China Province Data Map"
+      },
+      "china-city-province": {
+        "title": "China City Map"
+      },
+      "anchorLinkValues": {
+        "china-province": "China Province Data Map",
+        "china-city-province": "China City Map "
+      }
+    },
+    "bar-chart": {
+      "name": "Bar Chart",
+      "type": "Template Chart",
+      "path": "bar-chart",
+      "description": "Line chart of basic data",
+      "tmw": "Displays basic linear data changes.",
+      "echarts-bar-chart": {
+        "title": "Basic Histogram"
+      },
+      "echarts-bar-stacked": {
+        "title": "Stacked bar chart"
+      },
+      "echarts-bar-two": {
+        "title": "Bidirectional Histogram"
+      },
+      "echarts-bar-line": {
+        "title": "Line Column Template"
+      },
+      "anchorLinkValues": {
+        "echarts-bar-chart": "Basic bar chart",
+        "echarts-bar-stacked": "Stacked bar chart",
+        "echarts-bar-two": "Bidirectional bar chart",
+        "echarts-bar-line": "Polyline Column Template"
+      }
+    },
+    "radar-chart": {
+      "name": "Radar Chart",
+      "type": "Template Chart",
+      "path": "radar-chart",
+      "description": "Radar",
+      "tmw": "Displays the proportion of associated data.",
+      "radar-chartDemo": {
+        "title": "basic radar"
+      },
+      "anchorLinkValues": {
+        "radar-chartDemo": "basic radar"
+      }
+    },
+    "scatter-chart": {
+      "name": "Scatter Chart",
+      "type": "Template Chart",
+      "path": "scatter-chart",
+      "description": "Scatter",
+      "tmw": "Display discrete data in coordinate systems",
+      "basic-scatter-chartDemo": {
+        "title": "Scatter Chart"
+      },
+      "anchorLinkValues": {
+        "basic-scatter-chartDemo": "Scatter Chart"
+      }
+    },
+    "pie-chart": {
+      "name": "Pie Chart Pie Chart",
+      "type": "Template Chart",
+      "path": "pie-chart",
+      "description": "Pie Chart",
+      "tmw": "Display percentage data in the coordinate system.",
+      "basic-pie-chartDemo": {
+        "title": "Basic Pie Chart"
+      },
+      "rose-pie-chartDemo": {
+        "title": "Rose Pie Chart"
+      },
+      "anchorLinkValues": {
+        "basic-pie-chartDemo": "Pie chart",
+        "rose-pie-chartDemo": "Pie chart"
+      }
+    },
+    "chart-card": {
+      "name": "Chart Card",
+      "type": "Template Chart",
+      "path": "chart-card",
+      "description": "Chart Card",
+      "tmw": "Display charts with fixed layout cards",
+      "basic-card": {
+        "title": "Basic Card"
+      },
+      "anchorLinkValues": {
+        "basic-card": "Basic Card"
+      }
+    },
+    "funnel-chart": {
+      "name": "Funnel Chart",
+      "type": "Template Chart",
+      "path": "funnel-chart",
+      "description": "funnel chart",
+      "tmw": "Displaying Sorting Relationship Data in a Funnel Chart",
+      "basic-chart": {
+        "title": "funnel chart"
+      },
+      "anchorLinkValues": {
+        "basic-chart": "funnel chart"
+      }
+    },
+    "chart-marker": {
+      "name": "Chart Marker",
+      "type": "Template Chart",
+      "path": "chart-marker",
+      "description": "Chart Marker",
+      "tmw": "Used to mark the 2D coordinate system and record information.",
+      "basic-marker": {
+        "title": "Basic Chart Marker"
+      }
+    },
+    "chart-toolbox": {
+      "name": "Chart Toolbox",
+      "type": "Template Chart",
+      "path": "chart-toolbox",
+      "description": "Chart Toolbox",
+      "tmw": "Provides some chart interaction tools.",
+      "basic-marker": {
+        "title": "Chart Toolbox"
+      }
+    },
+    "echart-temp-basic": {
+      "shared-card": "Shared Card",
+      "shared-link-image": "Shared Link and Image",
+      "download-image": "Download Chart Image"
     }
   }
 }

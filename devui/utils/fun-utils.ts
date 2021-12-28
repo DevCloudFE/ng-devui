@@ -7,7 +7,7 @@ export function unshiftString(str: string, targetLength: number, addString: stri
   } else {
     targetLength = targetLength - str.length;
     if (targetLength > addString.length) {
-        addString += addString.repeat(targetLength / addString.length);
+      addString += addString.repeat(targetLength / addString.length);
     }
     return addString.slice(0, targetLength) + String(str);
   }

@@ -15,7 +15,6 @@ export class AutoDemoArrayComponent {
   }
 
   selectValue(value) {
-    // tslint:disable-next-line:no-console
-    console.info(value);
+    console.log(value);
   }
 }

@@ -79,7 +79,7 @@ export class UserSearchNLazyLoadComponent {
         .map((option, index) => ({id: index, option: option}))
         .filter(item => item.option.name.toLowerCase().indexOf(term.toLowerCase()) !== -1)
     );
-  }
+  };
 
   searchFn = (term) => {
     if (this.searchString === term) {
@@ -104,7 +104,7 @@ export class UserSearchNLazyLoadComponent {
           .filter(item => item.option.name.toLowerCase().indexOf(term.toLowerCase()) !== -1)
       );
     }
-  }
+  };
 
   loadMore(data: any) {
     console.log('load more');

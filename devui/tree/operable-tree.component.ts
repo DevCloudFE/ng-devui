@@ -66,15 +66,15 @@ export class OperableTreeComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() checkableRelation: 'upward' | 'downward' | 'both' | 'none' = 'both';
   @Output() nodeSelected = new EventEmitter<TreeNode>();
   @Output() nodeDblClicked = new EventEmitter<TreeNode>();
-  @Output() nodeRightClicked = new EventEmitter<{ node: TreeNode, event: MouseEvent }>();
+  @Output() nodeRightClicked = new EventEmitter<{ node: TreeNode; event: MouseEvent }>();
   @Output() nodeToggled = new EventEmitter<TreeNode>();
   @Output() afterTreeInit = new EventEmitter<Dictionary<TreeNode>>();
   @Output() nodeDeleted = new EventEmitter<TreeNode>();
   @Output() nodeChecked = new EventEmitter<any>();
-  @Output() currentNodeChecked = new EventEmitter<{ id: string | number, data: ITreeNodeData }>();
+  @Output() currentNodeChecked = new EventEmitter<{ id: string | number; data: ITreeNodeData }>();
   @Output() nodeEdited = new EventEmitter<TreeNode>();
-  @Output() editValueChange = new EventEmitter<{ value: string, callback: Function }>();
-  @Output() nodeOnDrop = new EventEmitter<{ event: DragEvent, treeNode: TreeNode, dropType: IDropType }>();
+  @Output() editValueChange = new EventEmitter<{ value: string; callback: Function }>();
+  @Output() nodeOnDrop = new EventEmitter<{ event: DragEvent; treeNode: TreeNode; dropType: IDropType }>();
   @ViewChild('operableTree', { static: true }) operableTree: TreeComponent;
   @ViewChild('operableTreeContainer', { static: true }) operableTreeEle: ElementRef;
   @ViewChild('treeDropIndicator') treeDropIndicator: ElementRef;
@@ -235,15 +235,15 @@ export class OperableTreeComponent implements OnInit, OnDestroy, AfterViewInit {
             const originalParentNode = movingNode.parentId ? this.treeFactory.nodes[movingNode.parentId] : this.treeFactory.treeRoot;
 
             switch (this.dragState.dropType) {
-              case 'prev':
-                this.handlerDropSort(movingNodeIndex, dropNodeIndex, movingNode, dropNode, originalParentNode, 'prev');
-                break;
-              case 'next':
-                this.handlerDropSort(movingNodeIndex, dropNodeIndex, movingNode, dropNode, originalParentNode, 'next');
-                break;
-              case 'inner':
-                this.handlerDropInner(movingNodeIndex, movingNode, dropNode, originalParentNode);
-                break;
+            case 'prev':
+              this.handlerDropSort(movingNodeIndex, dropNodeIndex, movingNode, dropNode, originalParentNode, 'prev');
+              break;
+            case 'next':
+              this.handlerDropSort(movingNodeIndex, dropNodeIndex, movingNode, dropNode, originalParentNode, 'next');
+              break;
+            case 'inner':
+              this.handlerDropInner(movingNodeIndex, movingNode, dropNode, originalParentNode);
+              break;
             }
             this.treeFactory.renderFlattenTree();
           });
@@ -338,7 +338,7 @@ export class OperableTreeComponent implements OnInit, OnDestroy, AfterViewInit {
 
   deleteNodesProxy = (event, treeNode: TreeNode) => {
     this.deleteNodes(event, treeNode);
-  }
+  };
 
   addChildNode(event, treeNode: TreeNode, newNode?) {
     let addResult = Promise.resolve(newNode ? newNode : true);
@@ -367,7 +367,7 @@ export class OperableTreeComponent implements OnInit, OnDestroy, AfterViewInit {
 
   addChildNodeProxy = (event, treeNode: TreeNode, newNode?) => {
     this.addChildNode(event, treeNode, newNode);
-  }
+  };
 
   editNode(event, treeNode: TreeNode) {
     let editResult = Promise.resolve(true);
@@ -381,7 +381,7 @@ export class OperableTreeComponent implements OnInit, OnDestroy, AfterViewInit {
 
   editNodeProxy = (event, treeNode: TreeNode) => {
     this.editNode(event, treeNode);
-  }
+  };
 
   public checkNodeById(checked: boolean, id: number | string) {
     const results = this.treeFactory.checkNodesById(id, checked, this.checkableRelation);
@@ -445,7 +445,7 @@ export class OperableTreeComponent implements OnInit, OnDestroy, AfterViewInit {
           delete this.treeFactory.nodes[originalId];
           if (nodeInfo.hasOwnProperty('data') && nodeInfo.data) {
             if (treeNode.hasOwnProperty('data') && treeNode.data.hasOwnProperty('data')) {
-              treeNode.data.data = Object.assign({}, treeNode.data.data, nodeInfo.data);
+              treeNode.data.data = { ...treeNode.data.data, ...nodeInfo.data };
             } else {
               treeNode.data = Object.assign(treeNode.data, { data: nodeInfo.data });
             }
@@ -454,15 +454,16 @@ export class OperableTreeComponent implements OnInit, OnDestroy, AfterViewInit {
           return treeNode;
         }).catch((e, reaction = 'cancel') => {
           switch (reaction) {
-            case 'justify':
-              const parentNode = this.treeFactory.nodes[treeNode.parentId];
-              const title = treeNode.data.title;
-              this.treeFactory.deleteNodeById(treeNode.id);
-              this.addChildNode(null, parentNode, { title: title });
-              break;
-            case 'cancel':
-            default:
-              this.treeFactory.deleteNodeById(treeNode.id);
+          case 'justify': {
+            const parentNode = this.treeFactory.nodes[treeNode.parentId];
+            const title = treeNode.data.title;
+            this.treeFactory.deleteNodeById(treeNode.id);
+            this.addChildNode(null, parentNode, { title: title });
+            break;
+          }
+          case 'cancel':
+          default:
+            this.treeFactory.deleteNodeById(treeNode.id);
           }
           return Promise.reject(e);
         });

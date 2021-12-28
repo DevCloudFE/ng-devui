@@ -48,7 +48,7 @@ export class CheckBoxGroupComponent implements OnChanges, ControlValueAccessor {
   private onTouch = () => null;
   constructor(
     private devConfigService: DevConfigService
-    ) {
+  ) {
   }
   ngOnChanges(changes: SimpleChanges) {
     if (changes['options']) {

@@ -12,7 +12,7 @@ export class BasicComponent implements OnInit {
   }
 
   onSearch(term) {
-      console.log(term);
+    console.log(term);
   }
 
 }

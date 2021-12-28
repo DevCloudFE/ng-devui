@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, HostBinding, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'd-datepicker-button',
@@ -14,7 +14,6 @@ export class DatepickerButtonComponent implements OnInit {
   }
 
   getValue(value) {
-    // tslint:disable-next-line:no-console
-    console.info(value);
+    console.log(value);
   }
 }

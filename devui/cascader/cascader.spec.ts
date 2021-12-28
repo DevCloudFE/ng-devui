@@ -295,7 +295,7 @@ class LazyLoadComponent {
     } else {
       return of(this.children3);
     }
-  }
+  };
 }
 
 describe('cascader', () => {

@@ -10,7 +10,7 @@ export class ImagePreviewDirective implements OnInit, OnDestroy {
   constructor(
     private elementRef: ElementRef,
     private modalService: ModalService
-    ) { }
+  ) { }
 
   @Input() customSub: Subject<HTMLElement>;
   @Input() disableDefault = false;
@@ -23,14 +23,14 @@ export class ImagePreviewDirective implements OnInit, OnDestroy {
     return !this.disableDefault;
   }
   @HostListener('click', ['$event'])
-    onClick($event) {
-      if (this.disableDefault) {
-        return;
-      }
-      const target = $event.target;
-      if (target && target.nodeName.toLowerCase() === 'img') {
-        this.imagePreView(target as HTMLElement);
-      }
+  onClick($event) {
+    if (this.disableDefault) {
+      return;
+    }
+    const target = $event.target;
+    if (target && target.nodeName.toLowerCase() === 'img') {
+      this.imagePreView(target as HTMLElement);
+    }
   }
 
   ngOnInit(): void {

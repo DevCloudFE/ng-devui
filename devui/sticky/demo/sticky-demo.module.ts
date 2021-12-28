@@ -38,6 +38,6 @@ import { StickyDemoComponent } from './sticky-demo.component';
   ],
   exports: [StickyDemoComponent],
   declarations: [StickyDemoComponent, BasicComponent, ScrollTargetComponent],
-  
+
 })
 export class StickyDemoModule {}

@@ -24,7 +24,7 @@ export class AnimationIconComponent {
     this.startDiffusion = true;
 
     setTimeout(() => {
-        this.startDiffusion = false;
-      }, 400);
+      this.startDiffusion = false;
+    }, 400);
   }
 }

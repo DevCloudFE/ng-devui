@@ -46,7 +46,7 @@ import { SubscriptionComponent } from './subscription/subscription.component';
     ShowLoadingComponent,
     FullScreenComponent
   ],
-  
+
 })
 export class LoadingDemoModule {
 }

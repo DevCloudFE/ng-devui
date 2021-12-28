@@ -9,6 +9,7 @@ import { EditableTip } from '../../../data-table.model';
 import { TableTdService } from './td.service';
 
 @Component({
+  /* eslint-disable-next-line @angular-eslint/component-selector*/
   selector: '[dTableCell]',
   templateUrl: './td.component.html',
   styleUrls: ['./td.component.scss']

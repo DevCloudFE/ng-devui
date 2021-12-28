@@ -8,10 +8,10 @@ import { BreadCrumbComponent } from './breadcrumb.component';
 import { BreadCrumbService } from './breadcrumb.service';
 
 @NgModule({
-    imports: [CommonModule, RouterModule , DropDownModule, SearchModule],
-    exports: [BreadCrumbComponent, BreadCrumbItemComponent],
-    declarations: [BreadCrumbComponent, BreadCrumbItemComponent],
-    providers: [BreadCrumbService],
+  imports: [CommonModule, RouterModule , DropDownModule, SearchModule],
+  exports: [BreadCrumbComponent, BreadCrumbItemComponent],
+  declarations: [BreadCrumbComponent, BreadCrumbItemComponent],
+  providers: [BreadCrumbService],
 })
 export class BreadcrumbModule {
 }
