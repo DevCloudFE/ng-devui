@@ -77,39 +77,39 @@ export class DropScrollEnhancedDirective implements AfterViewInit, OnDestroy {
       // 滚动过程计算区域有效性，滚动条贴到边缘的时候无效，无效的时候设置鼠标事件可用为none
       this.subscription.add(
         fromEvent(this.el.nativeElement, 'scroll', {passive: true})
-        .pipe(throttleTime(300, undefined, {leading: true, trailing: true}))
-        .subscribe(event => {
-          this.toggleScrollToOneEnd(this.el.nativeElement, this.forwardScrollArea, this.direction, DropScrollOrientation.forward);
-          this.toggleScrollToOneEnd(this.el.nativeElement, this.backwardScrollArea, this.direction, DropScrollOrientation.backward);
-        })
+          .pipe(throttleTime(300, undefined, {leading: true, trailing: true}))
+          .subscribe(event => {
+            this.toggleScrollToOneEnd(this.el.nativeElement, this.forwardScrollArea, this.direction, DropScrollOrientation.forward);
+            this.toggleScrollToOneEnd(this.el.nativeElement, this.backwardScrollArea, this.direction, DropScrollOrientation.backward);
+          })
       );
       // 窗口缩放的时候重绘有效性区域
       this.subscription.add(
         fromEvent(window, 'resize', {passive: true})
-        .pipe(throttleTime(300, undefined, {leading: true, trailing: true}))
-        .subscribe(event => this.resizeArea())
+          .pipe(throttleTime(300, undefined, {leading: true, trailing: true}))
+          .subscribe(event => this.resizeArea())
       );
       // dragstart的时候显示拖拽滚动边缘面板
       this.subscription.add(
         this.dragDropService.dragStartEvent.subscribe(() => {
-            if (!this.allowScroll()) {return; }
-            this.zone.runOutsideAngular(() => {
-              setTimeout(() => {
-                // 立马出现会打断边缘元素的拖拽
-                this.forwardScrollArea.style.display = 'block';
-                this.backwardScrollArea.style.display = 'block';
-              });
+          if (!this.allowScroll()) {return; }
+          this.zone.runOutsideAngular(() => {
+            setTimeout(() => {
+              // 立马出现会打断边缘元素的拖拽
+              this.forwardScrollArea.style.display = 'block';
+              this.backwardScrollArea.style.display = 'block';
             });
+          });
         })
       );
       // dragEnd或drop的时候结束了拖拽，滚动区域影藏起来
       this.subscription.add(
-          mergeStatic(this.dragDropService.dragEndEvent, this.dragDropService.dropEvent)
+        mergeStatic(this.dragDropService.dragEndEvent, this.dragDropService.dropEvent)
           .subscribe(() => {
             this.forwardScrollArea.style.display = 'none';
             this.backwardScrollArea.style.display = 'none';
             this.lastScrollTime = undefined;
-        })
+          })
       );
     });
     setTimeout(() => {
@@ -158,7 +158,7 @@ export class DropScrollEnhancedDirective implements AfterViewInit, OnDestroy {
           + (scrollElement.getBoundingClientRect())[rectWidthAttr]
           - scrollElement[offsetWidthAttr]
           + scrollElement[clientWidthAttr]
-          ) === scrollElement[scrollWidthAttr]
+        ) === scrollElement[scrollWidthAttr]
           && orientation === DropScrollOrientation.forward)
         ) {
           compareTarget.style.pointerEvents = 'none';
@@ -268,12 +268,12 @@ export class DropScrollEnhancedDirective implements AfterViewInit, OnDestroy {
 
   resizeArea() {
     [{area: this.forwardScrollArea, orientation: DropScrollOrientation.forward},
-     {area: this.backwardScrollArea, orientation: DropScrollOrientation.backward}
+      {area: this.backwardScrollArea, orientation: DropScrollOrientation.backward}
     ]
-     .forEach(item => {
-      this.setAreaSize(item.area, this.direction, item.orientation);
-      this.setAreaStyleLayout(item.area, this.direction, item.orientation);
-    });
+      .forEach(item => {
+        this.setAreaSize(item.area, this.direction, item.orientation);
+        this.setAreaStyleLayout(item.area, this.direction, item.orientation);
+      });
   }
 
   toggleScrollToOneEnd(scrollElement: any, toggleElement: HTMLElement, direction: DropScrollDirection, orientation: DropScrollOrientation) {

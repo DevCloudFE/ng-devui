@@ -1,13 +1,13 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-    selector: 'd-basic',
-    styleUrls: [`./basic.component.scss`],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    templateUrl: './basic.component.html'
+  selector: 'd-basic',
+  styleUrls: [`./basic.component.scss`],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  templateUrl: './basic.component.html'
 })
 export class DatepickerDemoBasicComponent {
-  selectedDate1 = null;
+  selectedDate1 = new Date();
   selectedDate2 = null;
   selectedDate3 = null;
   disabled = true;

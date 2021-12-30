@@ -2,45 +2,18 @@ import { AsyncValidatorFn, ValidatorFn, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { DValidators } from './validators';
 
-// TODO: 还需提供一个debounceTime
-export type DValidateRules =
-  | {
-      validators?: DValidateRule[];
-      asyncValidators?: DAsyncValidateRule[];
-      asyncDebounceTime?: number; // 异步校验器debounceTime
-      errorStrategy?: DValidationErrorStrategy; // error更新策略
-      message?: string | { [key: string]: string }; // 统一配置的message
-      updateOn?: 'change' | 'blur' | 'submit'; // model更新策略
-      messageShowType?: 'popover' | 'text' | 'none'; // 消息自动显示策略（当前仅单个表单组件下生效），自身附着popover | form-control下显示 | 不显示，
-      popPosition?:
-        | 'left'
-        | 'right'
-        | 'top'
-        | 'bottom'
-        | 'bottom-left'
-        | 'bottom-right'
-        | 'top-left'
-        | 'top-right'
-        | 'left-top'
-        | 'left-bottom'
-        | 'right-top'
-        | 'right-bottom'
-        | (
-            | 'left'
-            | 'right'
-            | 'top'
-            | 'bottom'
-            | 'bottom-left'
-            | 'bottom-right'
-            | 'top-left'
-            | 'top-right'
-            | 'left-top'
-            | 'left-bottom'
-            | 'right-top'
-            | 'right-bottom'
-          )[];
-    }
-  | DValidateRule[];
+/* pristine: 抛出error包括pristine状态
+ ** dirty: 抛出error需在dirty状态
+ */
+export type DValidationErrorStrategy = 'pristine' | 'dirty';
+
+export type DFormControlStatus = 'error' | 'pending' | 'success';
+
+// DForm ValidatorFn
+export type DValidatorFn = (value: any) => boolean | string | { [key: string]: string } | null;
+
+// DForm AsyncValidatorFn
+export type DAsyncValidatorFn = (value: any) => Observable<boolean | string | { [key: string]: string } | null>;
 
 /* id: 自定义验证器必须具有（也可不必）
  ** validator: 自定义验证器必须传入，可支持函数与正则类型，函数必须返回true或false
@@ -70,17 +43,53 @@ export interface DAsyncValidateRule {
   [id: string]: boolean | number | string | { [key: string]: string } | RegExp | DAsyncValidatorFn | AsyncValidatorFn | undefined; // 万能key
 }
 
+// TODO: 还需提供一个debounceTime
+export type DValidateRules =
+  | {
+    validators?: DValidateRule[];
+    asyncValidators?: DAsyncValidateRule[];
+    asyncDebounceTime?: number; // 异步校验器debounceTime
+    errorStrategy?: DValidationErrorStrategy; // error更新策略
+    message?: string | { [key: string]: string }; // 统一配置的message
+    updateOn?: 'change' | 'blur' | 'submit'; // model更新策略
+    messageShowType?: 'popover' | 'text' | 'none'; // 消息自动显示策略（当前仅单个表单组件下生效），自身附着popover | form-control下显示 | 不显示，
+    popPosition?:
+    | 'left'
+    | 'right'
+    | 'top'
+    | 'bottom'
+    | 'bottom-left'
+    | 'bottom-right'
+    | 'top-left'
+    | 'top-right'
+    | 'left-top'
+    | 'left-bottom'
+    | 'right-top'
+    | 'right-bottom'
+    | (
+      | 'left'
+      | 'right'
+      | 'top'
+      | 'bottom'
+      | 'bottom-left'
+      | 'bottom-right'
+      | 'top-left'
+      | 'top-right'
+      | 'left-top'
+      | 'left-bottom'
+      | 'right-top'
+      | 'right-bottom'
+    )[];
+  }
+  | DValidateRule[];
+
+
 export interface DValidateErrorStatus {
   errorMessage: string | { [key: string]: string } | null;
   showError: boolean;
   errors: { [key: string]: any };
 }
 
-// DForm ValidatorFn
-export type DValidatorFn = (value: any) => boolean | string | { [key: string]: string } | null;
-
-// DForm AsyncValidatorFn
-export type DAsyncValidatorFn = (value: any) => Observable<boolean | string | { [key: string]: string } | null>;
 
 /* TODO: 这里是否需要导出 */
 export const ruleReservedWords = [
@@ -107,12 +116,6 @@ export const dDefaultValidators = {
   whitespace: DValidators.whiteSpace,
 };
 
-/* pristine: 抛出error包括pristine状态
- ** dirty: 抛出error需在dirty状态
- */
-export type DValidationErrorStrategy = 'pristine' | 'dirty';
-
-export type DFormControlStatus = 'error' | 'pending' | 'success';
 
 export interface DPopConfig {
   popMaxWidth?: number;

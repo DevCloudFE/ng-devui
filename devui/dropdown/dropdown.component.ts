@@ -6,6 +6,7 @@ import { AppendToBodyDirection, AppendToBodyDirectionsConfig, fadeInOut } from '
 import { DropDownDirective } from './dropdown.directive';
 
 @Component({
+  /* eslint-disable-next-line @angular-eslint/component-selector*/
   selector: '[dDropDown][appendToBody]',
   template: `
     <ng-content></ng-content>
@@ -86,12 +87,12 @@ export class DropDownAppendToBodyComponent implements OnInit, OnChanges {
 
   onPositionChange(position: ConnectedOverlayPositionChange) {
     switch (position.connectionPair.overlayY) {
-      case 'top':
-      case 'center':
-        this.menuPosition = 'bottom';
-        break;
-      case 'bottom':
-        this.menuPosition = 'top';
+    case 'top':
+    case 'center':
+      this.menuPosition = 'bottom';
+      break;
+    case 'bottom':
+      this.menuPosition = 'top';
     }
   }
 }

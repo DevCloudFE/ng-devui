@@ -84,7 +84,7 @@ class TestSelectComponent {
         .filter(option => option.indexOf(term) > -1)
         .map((option, index) => ({ id: index, option: option }))
     );
-  }
+  };
 }
 @Component({
   template: `
@@ -154,7 +154,7 @@ class TestSelectLazyLoadVirtualScrollComponent {
       this.enableLazyLoad = false;
       this.selectComponent.loadFinish();
     }
-  }
+  };
 }
 
 @Component({

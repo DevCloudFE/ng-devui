@@ -39,7 +39,7 @@ export class BorderRadiusComponent implements OnInit, OnDestroy {
       }
     });
     this.borderRadius = cloneDeep(this.borderRadius);
-  }
+  };
 
   setI18n() {
     this.subs.add(

@@ -121,6 +121,6 @@ import { ValidateUpdateComponent } from './validate-update/validate-update.compo
     DebounceTimeComponent,
     ValidateUpdateComponent,
   ],
-  
+
 })
 export class FormDemoModule {}

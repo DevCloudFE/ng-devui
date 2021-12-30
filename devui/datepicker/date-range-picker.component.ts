@@ -38,6 +38,7 @@ export class DateRangePickerComponent implements OnChanges, OnInit, ControlValue
   @Input() disabled: boolean;
   @Input() dateConverter: DateConverter;
   @Input() selectedRange = [null, null];
+  @Input() dateFormat: string;
   @Input() customViewTemplate: TemplateRef<any>;
   @Output() selectedRangeChange = new EventEmitter<SelectDateRangeChangeEventArgs>();
   @Output() hide = new EventEmitter<boolean>();
@@ -79,7 +80,7 @@ export class DateRangePickerComponent implements OnChanges, OnInit, ControlValue
   }
 
   @Input() set maxDate(date: Date | any) {
-    const parseDate = this.dateConverter.parse(date) || null;
+    const parseDate = this.dateConverter.parse(date, this.dateFormat) || null;
     if (parseDate) {
       this._maxDate = parseDate;
     }
@@ -90,7 +91,7 @@ export class DateRangePickerComponent implements OnChanges, OnInit, ControlValue
   }
 
   @Input() set minDate(date: Date | any) {
-    const parseDate = this.dateConverter.parse(date) || null;
+    const parseDate = this.dateConverter.parse(date, this.dateFormat) || null;
     if (parseDate) {
       this._minDate = parseDate;
     }
@@ -164,7 +165,7 @@ export class DateRangePickerComponent implements OnChanges, OnInit, ControlValue
     const currentReason = typeof reason === 'number' ? reason : SelectDateRangeChangeReason.custom;
     this.writeValue(range);
     this.notifyValueChange(range, currentReason);
-  }
+  };
 
   selectingDate(event) {
     this.hoverOnDate.next(event);
@@ -189,12 +190,12 @@ export class DateRangePickerComponent implements OnChanges, OnInit, ControlValue
 
   syncPickerPair(currentCalender: object, orientation: string) {
     switch (orientation) {
-      case 'left':
-        this.currentCalendars[0] = currentCalender;
-        break;
-      case 'right':
-        this.currentCalendars[1] = currentCalender;
-        break;
+    case 'left':
+      this.currentCalendars[0] = currentCalender;
+      break;
+    case 'right':
+      this.currentCalendars[1] = currentCalender;
+      break;
     }
   }
 
@@ -232,6 +233,6 @@ export class DateRangePickerComponent implements OnChanges, OnInit, ControlValue
   clearAll = (reason?: SelectDateRangeChangeReason) => {
     const currentReason = typeof reason === 'number' ? reason : SelectDateRangeChangeReason.custom;
     this.chooseDate([null, null], currentReason);
-  }
+  };
 
 }

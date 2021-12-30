@@ -12,7 +12,7 @@ import { routesConfig } from './component.route';
 import { resolveRoutesConfig } from './resolve-routes-config.service';
 import { newScopeList, sunsetScopeList } from './scope-list';
 @Component({
-  selector: 'cd-app-content', // tslint:disable-line
+  selector: 'd-app-content',
   templateUrl: './app-content.component.html',
   encapsulation: ViewEncapsulation.None,
 })

@@ -35,6 +35,6 @@ import { StatusDemoComponent } from './status-demo.component';
   ],
   exports: [StatusDemoComponent],
   declarations: [StatusDemoComponent, BasicComponent],
-  
+
 })
 export class StatusDemoModule {}

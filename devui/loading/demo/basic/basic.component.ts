@@ -44,7 +44,7 @@ export class BasicComponent implements OnInit {
   view = {
     top: '50px',
     left: '50%'
-   };
+  };
   constructor() {
 
   }

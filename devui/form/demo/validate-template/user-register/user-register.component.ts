@@ -37,7 +37,7 @@ export class UserRegisterComponent {
         'zh-cn': '用户名重名',
         'en-us': 'Duplicate name.'
       }
-    }],
+      }],
     },
     passwordRules: {
       validators: [{ required: true }, { minlength: 6 }, { maxlength: 15 }, { pattern: /^[a-zA-Z0-9]+(\s+[a-zA-Z0-9]+)*$/ }],

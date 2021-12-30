@@ -238,7 +238,7 @@ export class GanttBarComponent implements OnInit, OnChanges, AfterViewInit, OnDe
   }
 
   private checkStepValue() {
-    if (this.step < 0 || !!!this.step) {
+    if (this.step < 0 || !this.step) {
       throw new Error('step value must be greater than 0.');
     } else if ((this.max - this.min) % this.step) {
       throw new Error('(max - min) must be divisible by step.');

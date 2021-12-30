@@ -43,6 +43,6 @@ import { TargetComponent } from './target/target.component';
   ],
   declarations: [MentionDemoComponent, BasicComponent, AsyncComponent, CustomComponent, TargetComponent, PrefixComponent],
   exports: [MentionDemoComponent],
-  
+
 })
 export class MentionDemoModule {}

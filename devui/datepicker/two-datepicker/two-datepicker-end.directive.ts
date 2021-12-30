@@ -96,7 +96,7 @@ export class TwoDatePickerEndDirective implements OnInit, OnDestroy, ControlValu
 
   clear = () => {
     this.twoDatePicker.clear('end');
-  }
+  };
 
   transUserInputToDatePicker(value?: string) {
     if (!this.twoDatePicker.showTime) {
@@ -148,6 +148,8 @@ export class TwoDatePickerEndDirective implements OnInit, OnDestroy, ControlValu
       this.switchOriginSub.unsubscribe();
     }
 
-    this.valueChangeSubscrip?.unsubscribe();
+    if (this.valueChangeSubscrip) {
+      this.valueChangeSubscrip.unsubscribe();
+    }
   }
 }

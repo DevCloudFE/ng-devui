@@ -71,12 +71,12 @@ export class DialogService {
       showAnimateValue = apiConfig;
     }
 
-    if (showAnimation !== undefined) {
-
-    } else if (showAnimate !== undefined) {
-      showAnimation = showAnimate ;
-    } else {
-      showAnimation = showAnimateValue;
+    if (showAnimation === undefined) {
+      if (showAnimate !== undefined) {
+        showAnimation = showAnimate;
+      } else {
+        showAnimation = showAnimateValue;
+      }
     }
     assign(modalRef.instance, {
       id,

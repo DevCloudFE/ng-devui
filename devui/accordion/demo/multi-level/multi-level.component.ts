@@ -20,29 +20,29 @@ export class MultiLevelComponent {
     title: 'Content 3 (as a parent menu, has children)',
 
     children: [{
-        title: 'Child Content 1 (has children)',
-        children: [
-          {title: 'Child Content 1'},
-          {title: 'Child Content 2', active: true},
-          {title: 'Child Content 3'},
-        ]
-      }, {
-        title: 'Child Content 2 (has children',
-        children: [
-          {title: 'Child Content 1'},
-          {
-            title: 'Child Content 2 (has children',
-            children: [
-              {title: 'Child Content 1'},
-              {title: 'Child Content 2'},
-              {title: 'Child Content 3'},
-            ]
-          },
-          {title: 'Child Content 3'},
-        ]
-      },
-      {title: 'Child Content 2'},
-      {title: 'Child Content 3'},
+      title: 'Child Content 1 (has children)',
+      children: [
+        {title: 'Child Content 1'},
+        {title: 'Child Content 2', active: true},
+        {title: 'Child Content 3'},
+      ]
+    }, {
+      title: 'Child Content 2 (has children',
+      children: [
+        {title: 'Child Content 1'},
+        {
+          title: 'Child Content 2 (has children',
+          children: [
+            {title: 'Child Content 1'},
+            {title: 'Child Content 2'},
+            {title: 'Child Content 3'},
+          ]
+        },
+        {title: 'Child Content 3'},
+      ]
+    },
+    {title: 'Child Content 2'},
+    {title: 'Child Content 3'},
     ]
   }, {
     title: 'Content 4 (as a parent menu, has no child)',

@@ -43,7 +43,7 @@ import { CheckboxGroupBasicComponent} from './group/checkbox-group-basic.compone
     CheckboxConditionChangeComponent,
     CheckboxConditionGroupComponent
   ],
-  
+
 })
 export class CheckBoxDemoModule {
 }

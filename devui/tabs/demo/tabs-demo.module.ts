@@ -56,7 +56,7 @@ import { WithoutContentComponent } from './without-content/without-content.compo
     TypeSliderComponent,
     TypeWrappedComponent
   ],
-  
+
 })
 export class TabsDemoModule {
 }

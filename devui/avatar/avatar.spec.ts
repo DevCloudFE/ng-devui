@@ -17,7 +17,7 @@ class TestAvatarComponent {
   template: ` <d-avatar #comp [customText]="'自定义'" [width]="80" [height]="80"></d-avatar> `,
 })
 class TestCustomAvatarComponent {
-    @ViewChild('comp') comp: AvatarComponent;
+  @ViewChild('comp') comp: AvatarComponent;
 }
 
 describe('avatar basic', () => {

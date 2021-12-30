@@ -1,4 +1,3 @@
-
 enum keyBoardLocation {
   // 各个值的含义请参见: https://developer.mozilla.org/zh-CN/docs/Web/API/KeyboardEvent/location
   DOM_KEY_LOCATION_STANDARD,
@@ -49,9 +48,9 @@ export function createKeyBoardEvent(eventType: keyBoardEventType, params: KeyBoa
   });
 
   Object.defineProperties(event, {
-      keyCode: {value: params.keyCode},
-      charCode: {value: params.charCode},
-      data: {value: params.data}
+    keyCode: {value: params.keyCode},
+    charCode: {value: params.charCode},
+    data: {value: params.data}
   });
 
   return event;
@@ -89,14 +88,14 @@ export function mouseMoveTrigger(el: HTMLElement, from: { x: number; y: number }
 export function dispatchMouseEvent(
   node: Node,
   type: string,
-  x: number = 0,
-  y: number = 0,
+  x = 0,
+  y = 0,
   event: MouseEvent = createMouseEvent(type, x, y)
 ) {
   node.dispatchEvent(event);
 }
 
-export function createMouseEvent(type: string, x: number = 0, y: number = 0, button: number = 0): MouseEvent {
+export function createMouseEvent(type: string, x = 0, y = 0, button = 0): MouseEvent {
   const event = document.createEvent('MouseEvent');
   event.initMouseEvent(
     type,
@@ -120,20 +119,20 @@ export function createMouseEvent(type: string, x: number = 0, y: number = 0, but
 
 export function dateToStrWithArr(date: Date, arr = ['yy', 'mm', 'dd'], splitter = '/') {
   const padZero = (value) => {
-    return (value + '').padStart(2, '0');
+    return (String(value)).padStart(2, '0');
   };
   const newArr = [];
   arr.forEach((type) => {
     switch (type) {
-      case 'yy':
-        newArr.push(date.getFullYear());
-        break;
-      case 'mm':
-        newArr.push(padZero(date.getMonth() + 1));
-        break;
-      case 'dd':
-        newArr.push(padZero(date.getDate()));
-        break;
+    case 'yy':
+      newArr.push(date.getFullYear());
+      break;
+    case 'mm':
+      newArr.push(padZero(date.getMonth() + 1));
+      break;
+    case 'dd':
+      newArr.push(padZero(date.getDate()));
+      break;
     }
   });
   return newArr.join(splitter);

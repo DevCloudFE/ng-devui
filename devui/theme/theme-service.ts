@@ -16,10 +16,10 @@ export class ThemeService {
   extraData: {
     [themeId: string]: {
       cssVariables?: {
-        [varname: string]: string
-      },
+        [varname: string]: string;
+      };
       appendClasses?: Array<string>;
-    }
+    };
   };
   private _appendedClasses: Array<string>;
   set appendClasses(classes: Array<string>) {
@@ -124,7 +124,7 @@ export class ThemeService {
     document.body.classList.remove(...classNames);
   }
 
-  setExtraData(data, apply: boolean = false) {
+  setExtraData(data, apply = false) {
     this.extraData = data;
     if (apply) {
       this.applyExtraData();
@@ -163,7 +163,7 @@ export class ThemeService {
 
   public unregisterMediaQuery() {
     if (!this.mediaQuery) {
-     return;
+      return;
     }
     this.mediaQuery.unregister();
     this.mediaQuery = undefined;

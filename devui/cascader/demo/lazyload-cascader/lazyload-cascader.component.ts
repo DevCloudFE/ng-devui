@@ -105,5 +105,5 @@ export class LazyloadCascaderComponent {
         }, 1000);
       });
     }
-  }
+  };
 }

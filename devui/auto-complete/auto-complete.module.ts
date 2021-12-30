@@ -14,6 +14,6 @@ import { AutoCompleteDirective } from './auto-complete.directive';
   exports: [AutoCompleteDirective, AutoCompletePopupComponent],
   declarations: [AutoCompleteDirective, AutoCompletePopupComponent],
   providers: [AutoCompleteConfig],
-  
+
 })
 export class AutoCompleteModule { }

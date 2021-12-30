@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
+import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -31,7 +31,7 @@ export class ToastDemoComponent implements OnInit, OnDestroy {
     { title: 'TS', language: 'typescript', code: require('./service/toast-service.component.ts?raw') },
     { title: 'SCSS', language: 'css', code: require('./service/toast-service.component.scss?raw') },
   ];
-    navItems = [];
+  navItems = [];
   subs: Subscription = new Subscription();
   constructor(private translate: TranslateService) {}
 

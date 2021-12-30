@@ -126,7 +126,7 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
   }
 
   @Input() set maxDate(date: Date | any) {
-    const parseDate = this.dateConverter.parse(date);
+    const parseDate = this.dateConverter.parse(date, this.dateFormat);
     if (parseDate) {
       this._maxDate = parseDate;
     }
@@ -137,7 +137,7 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
   }
 
   @Input() set minDate(date: Date | any) {
-    const parseDate = this.dateConverter.parse(date);
+    const parseDate = this.dateConverter.parse(date, this.dateFormat);
     if (parseDate) {
       this._minDate = parseDate;
     }
@@ -194,6 +194,7 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
     const target = this.cmpRef.location.nativeElement;
     this.applyPopupStyling(target);
     const component = this.cmpRef.instance;
+    component.dateFormat = this.dateFormat;
     this.renderer2.setStyle(target, 'display', 'none');
     component.writeValue(this.selectedDate);
     this.fillPopupData();
@@ -224,7 +225,7 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
     } else {
       curDate = obj;
     }
-    this.selectedDate = curDate ? this.dateConverter.parse(curDate) : null;
+    this.selectedDate = curDate ? this.dateConverter.parse(curDate, this.dateFormat) : null;
     this.writeModelValue(obj);
   }
 
@@ -353,7 +354,7 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
       this.hide();
       this.cdr.markForCheck();
     }
-  }
+  };
 
   clearAll(reason?: SelectDateChangeReason) {
     if (this.disabled) {
@@ -365,45 +366,45 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
 
   private popIn(direction): AnimationMetadata[] {
     switch (direction) {
-      case 'top':
-        return [
-          style({ transform: 'scaleY(0.8) translateY(4px)', opacity: 0.8, transformOrigin: '0% 100%', display: 'block' }),
-          animate(
-            `${AnimationDuration.BASE} ${AnimationCurves.EASE_OUT}`,
-            style({ transform: 'scaleY(0.9999) translateY(0)', opacity: 1, transformOrigin: '0% 100%', display: 'block' })
-          ),
-        ];
-      case 'bottom':
-      default:
-        return [
-          style({ transform: 'scaleY(0.8)  translateY(-4px)', opacity: 0.8, transformOrigin: '0% 0%', display: 'block' }),
-          animate(
-            `${AnimationDuration.BASE}  ${AnimationCurves.EASE_OUT}`,
-            style({ transform: 'scaleY(0.9999)  translateY(0)', opacity: 1, transformOrigin: '0% 0%', display: 'block' })
-          ),
-        ];
+    case 'top':
+      return [
+        style({ transform: 'scaleY(0.8) translateY(4px)', opacity: 0.8, transformOrigin: '0% 100%', display: 'block' }),
+        animate(
+          `${AnimationDuration.BASE} ${AnimationCurves.EASE_OUT}`,
+          style({ transform: 'scaleY(0.9999) translateY(0)', opacity: 1, transformOrigin: '0% 100%', display: 'block' })
+        ),
+      ];
+    case 'bottom':
+    default:
+      return [
+        style({ transform: 'scaleY(0.8)  translateY(-4px)', opacity: 0.8, transformOrigin: '0% 0%', display: 'block' }),
+        animate(
+          `${AnimationDuration.BASE}  ${AnimationCurves.EASE_OUT}`,
+          style({ transform: 'scaleY(0.9999)  translateY(0)', opacity: 1, transformOrigin: '0% 0%', display: 'block' })
+        ),
+      ];
     }
   }
 
   private popOut(direction): AnimationMetadata[] {
     switch (direction) {
-      case 'top':
-        return [
-          style({ transform: 'scaleY(0.9999)  translateY(0)', opacity: 1, transformOrigin: '0% 100%', display: 'block' }),
-          animate(
-            `${AnimationDuration.BASE} ${AnimationCurves.EASE_IN}`,
-            style({ transform: 'scaleY(0.8)  translateY(4px)', opacity: 0.8, transformOrigin: '0% 100%', display: 'block' })
-          ),
-        ];
-      case 'bottom':
-      default:
-        return [
-          style({ transform: 'scaleY(0.9999)  translateY(0)', opacity: 1, transformOrigin: '0% 0%', display: 'block' }),
-          animate(
-            `${AnimationDuration.BASE} ${AnimationCurves.EASE_IN}`,
-            style({ transform: 'scaleY(0.8)  translateY(-4px)', opacity: 0.8, transformOrigin: '0% 0%', display: 'block' })
-          ),
-        ];
+    case 'top':
+      return [
+        style({ transform: 'scaleY(0.9999)  translateY(0)', opacity: 1, transformOrigin: '0% 100%', display: 'block' }),
+        animate(
+          `${AnimationDuration.BASE} ${AnimationCurves.EASE_IN}`,
+          style({ transform: 'scaleY(0.8)  translateY(4px)', opacity: 0.8, transformOrigin: '0% 100%', display: 'block' })
+        ),
+      ];
+    case 'bottom':
+    default:
+      return [
+        style({ transform: 'scaleY(0.9999)  translateY(0)', opacity: 1, transformOrigin: '0% 0%', display: 'block' }),
+        animate(
+          `${AnimationDuration.BASE} ${AnimationCurves.EASE_IN}`,
+          style({ transform: 'scaleY(0.8)  translateY(-4px)', opacity: 0.8, transformOrigin: '0% 0%', display: 'block' })
+        ),
+      ];
     }
   }
 
@@ -413,14 +414,14 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
     }
     let direction = '';
     switch (this.direction) {
-      case 'down':
-        direction = 'bottom';
-        break;
-      case 'up':
-        direction = 'top';
-        break;
-      default:
-        direction = 'bottom';
+    case 'down':
+      direction = 'bottom';
+      break;
+    case 'up':
+      direction = 'top';
+      break;
+    default:
+      direction = 'bottom';
     }
     if (this.showAnimation) {
       const metadata = this.isOpen ? this.popIn(direction) : this.popOut(direction);

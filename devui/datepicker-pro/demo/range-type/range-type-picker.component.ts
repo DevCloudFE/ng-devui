@@ -3,8 +3,8 @@ import {
 } from '@angular/core';
 
 @Component({
-selector: 'd-range-type-picker',
-templateUrl: './range-type-picker.component.html',
+  selector: 'd-range-type-picker',
+  templateUrl: './range-type-picker.component.html',
 })
 export class RangeTypepickerProComponent {
   value1 = [new Date('2020/03/01'), new Date('2020/04/20')];

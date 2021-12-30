@@ -163,7 +163,7 @@ export class TransformableElement {
                       translateX = this.translateX,
                       translateY = this.translateY,
                       turn = this.turn
-    ) {
+  ) {
     if (!target) { target = this.element; }
     target.style.transform = `translate(${translateX}px, ${translateY}px) scale(${zoom}) rotate(${turn}turn)`;
   }

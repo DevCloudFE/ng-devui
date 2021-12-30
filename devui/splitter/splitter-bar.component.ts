@@ -23,6 +23,8 @@ export class SplitterBarComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() orientation: SplitterOrientation;
   // 是否显示展开/收缩按钮
   @Input() showCollapseButton;
+  @Input() collapsePosLeft: string;
+  @Input() collapsePosTop: string;
   // 分隔条大小
   _splitBarSize;
   @Input()
@@ -56,7 +58,7 @@ export class SplitterBarComponent implements OnInit, AfterViewInit, OnDestroy {
     if (event.cancelable) {
       event.preventDefault();
     }
-  }
+  };
 
   // 处理移动过程中的数据流, 合并到pressEvent事件流中
   private moveStream = resize => mouseDown =>
@@ -68,7 +70,7 @@ export class SplitterBarComponent implements OnInit, AfterViewInit, OnDestroy {
         pageX,
         pageY
       }))
-    )
+    );
 
   constructor(private el: ElementRef,
               private splitter: SplitterService,
@@ -95,7 +97,7 @@ export class SplitterBarComponent implements OnInit, AfterViewInit, OnDestroy {
       .pipe(
         tap(this.stopPropagation),
         filter(() => this.splitter.isResizable(this.index)),
-        tap(() => state = this.splitter.dragState(this.index)),
+        tap(() => {state = this.splitter.dragState(this.index);}),
         switchMap(this.moveStream(this.resize))
       )
       .subscribe(({ pageX, pageY, originalX, originalY }) => {

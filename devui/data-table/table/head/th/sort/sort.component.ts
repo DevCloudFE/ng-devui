@@ -18,15 +18,15 @@ export class SortComponent implements OnInit {
 
   sort() {
     switch (this.sortDirection) {
-      case SortDirection.ASC:
-        this.sortDirection = SortDirection.DESC;
-        break;
-      case 'DESC':
-        this.sortDirection = SortDirection.default;
-        break;
-      case SortDirection.default:
-      default:
-        this.sortDirection = SortDirection.ASC;
+    case SortDirection.ASC:
+      this.sortDirection = SortDirection.DESC;
+      break;
+    case 'DESC':
+      this.sortDirection = SortDirection.default;
+      break;
+    case SortDirection.default:
+    default:
+      this.sortDirection = SortDirection.ASC;
     }
     this.sortEvent.emit({ direction: this.sortDirection });
   }

@@ -13,7 +13,7 @@ import {PopoverDirective} from './popover.directive';
   ],
   exports: [PopoverComponent, PopoverDirective],
   declarations: [PopoverComponent, PopoverDirective],
-  
+
 })
 export class PopoverModule {
 }

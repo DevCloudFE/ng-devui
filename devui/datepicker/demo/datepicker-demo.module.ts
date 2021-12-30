@@ -71,7 +71,7 @@ import { TwoDatepickerFormatComponent } from './two-datepicker-format/two-datepi
     TwoDatepickerBasicComponent,
     TwoDatepickerFormatComponent,
   ],
-  
+
   providers: [],
 })
 export class DatepickerDemoModule { }

@@ -235,7 +235,7 @@ export class NavSpriteComponent implements OnInit, AfterViewInit, OnDestroy {
   initStyles() {
     if (this.mode === 'sprite') {
       const content = this.element.nativeElement.querySelector('.devui-nav-sprite-content');
-      const spriteOptions = Object.assign({}, DEFAULT_OPTIONS, this.spriteOption);
+      const spriteOptions = { ...DEFAULT_OPTIONS, ...this.spriteOption};
       this.render.addClass(content, 'devui-is-sprite');
       this.render.setStyle(content, 'position', 'fixed');
       this.render.setStyle(content, 'top', spriteOptions.top);

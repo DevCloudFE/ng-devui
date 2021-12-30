@@ -37,6 +37,6 @@ import { TextInputDemoComponent } from './text-input-demo.component';
   ],
   exports: [TextInputDemoComponent],
   declarations: [TextInputDemoComponent, BasicComponent, PasswordVisibleComponent, TextInputSizeComponent],
-  
+
 })
 export class TextInputDemoModule {}

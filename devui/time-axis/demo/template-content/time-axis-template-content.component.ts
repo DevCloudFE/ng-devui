@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, TemplateRef, ViewChild } from '@angular/core';
 @Component({
-    selector: 'd-demo-time-axis-template-content',
-    templateUrl: './time-axis-template-content.component.html'
+  selector: 'd-demo-time-axis-template-content',
+  templateUrl: './time-axis-template-content.component.html'
 })
 export class TimeAxisTemplateContentComponent implements AfterViewInit {
   @ViewChild('yearShow') yearShow: TemplateRef<any>;
@@ -22,7 +22,7 @@ export class TimeAxisTemplateContentComponent implements AfterViewInit {
         dotColor: 'var(--devui-danger)',
         lineStyle: {style: 'dashed'},
         data: { title: '第一季度交付版本2.0', date: '2020/03/01', status: '未开始', color: 'var(--devui-danger)',
-                  backgroundColor: 'rgba(255, 230, 230, 0.2)', position: 'top'}
+          backgroundColor: 'rgba(255, 230, 230, 0.2)', position: 'top'}
       },
       {
         text: 'nihao',

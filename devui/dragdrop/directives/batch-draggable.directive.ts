@@ -3,8 +3,8 @@ import { DragDropService } from '../services/drag-drop.service';
 import { DraggableDirective } from './draggable.directive';
 export type BatchDragStyle = 'badge' | 'stack' | string;
 @Directive({
-    selector: '[dDraggable][batchDrag]',
-    exportAs: 'dBatchDraggable'
+  selector: '[dDraggable][batchDrag]',
+  exportAs: 'dBatchDraggable'
 })
 
 export class BatchDraggableDirective implements OnInit, OnChanges, OnDestroy, AfterViewInit {
@@ -42,11 +42,11 @@ export class BatchDraggableDirective implements OnInit, OnChanges, OnDestroy, Af
       if (!this.initDragDataByIdentity()) {
         if (this.batchDragActive) {
           if (!this.dragData && this.allowAddToBatchGroup()) {
-           this.addToBatchGroup();
+            this.addToBatchGroup();
           }
-         } else {
-           this.removeFromBatchGroup();
-         }
+        } else {
+          this.removeFromBatchGroup();
+        }
       }
     }
   }
@@ -80,7 +80,7 @@ export class BatchDraggableDirective implements OnInit, OnChanges, OnDestroy, Af
   restoreDragDataViewAfterViewInit() {
     const draggable = this.draggable;
     if (draggable.originPlaceholder && draggable.originPlaceholder.show !== false) {
-        draggable.insertOriginPlaceholder(true, false);
+      draggable.insertOriginPlaceholder(true, false);
     }
     draggable.el.nativeElement.style.display = 'none';
   }
@@ -99,7 +99,7 @@ export class BatchDraggableDirective implements OnInit, OnChanges, OnDestroy, Af
       dragData.dragData = this.draggable.dragData;
       this.dragData = dragData;
     } else {
-      this.dragData = this.dragData ||　{
+      this.dragData = this.dragData || {
         identity: this.draggable.dragIdentity || undefined,
         draggable: this.draggable,
         dragData: this.draggable.dragData

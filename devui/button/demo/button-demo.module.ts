@@ -56,7 +56,7 @@ import { TextComponent } from './text/text.component';
     SizeComponent,
     GroupsComponent,
   ],
-  
+
 })
 export class ButtonDemoModule {
 }

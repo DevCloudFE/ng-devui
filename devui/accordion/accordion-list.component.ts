@@ -99,17 +99,17 @@ export class AccordionListComponent implements OnInit, OnDestroy {
   get routerLinkActived(): boolean {
     return (!!this.accordionItemRouterlinkQueryList
         && this.accordionItemRouterlinkQueryList.some(airlc => this.isLinkRouterActive(airlc))
-      ) || (
-        !!this.accordionMenuQueryList
+    ) || (
+      !!this.accordionMenuQueryList
         && this.accordionMenuQueryList.some(amc => this.isMenuRouterActive(amc))
-      );
+    );
   }
   get hasActiveChildren(): boolean {
     return (!!this.accordionMenuQueryList
         && this.accordionMenuQueryList.some(amc => this.isMenuDataActive(amc)))
       || (!!this.data && !!this.data.length
         && this.data.some(item => this.isItemData(item) && this.isItemDataActive(item))
-    );
+      );
   }
   menuToggleItemFn = (item: any , event?: any) => {
     this.accordion.menuToggleFn({
@@ -118,12 +118,12 @@ export class AccordionListComponent implements OnInit, OnDestroy {
       parent: this.parent.parent,
       event: event
     });
-  }
+  };
   itemClickItemFn = (item: any, event?: any) => {
     this.accordion.itemClickFn({
       item: item,
       parent: this.parent,
       event: event
     });
-  }
+  };
 }

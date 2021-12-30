@@ -144,41 +144,41 @@ export class DropDownMenuDirective implements OnInit, OnDestroy {
 
   private fadeIn(direction): AnimationMetadata[] {
     switch (direction) {
-      case 'top':
-        return [
-          style({transform: 'scaleY(0.8) translateY(4px)', opacity: 0.8, transformOrigin: '0% 100%'}),
-          animate(`200ms ${AnimationCurves.EASE_IN}`,
-            style({transform: 'scaleY(0.9999) translateY(0)', opacity: 1, transformOrigin: '0% 100%'})),
-        ];
-      case 'bottom':
-      default:
-        return [
-          style({transform: 'scaleY(0.8)  translateY(-4px)', opacity: 0.8, transformOrigin: '0% 0%'}),
-          animate(`200ms ${AnimationCurves.EASE_OUT}`,
-            style({transform: 'scaleY(0.9999)  translateY(0)', opacity: 1, transformOrigin: '0% 0%'})),
-        ];
+    case 'top':
+      return [
+        style({transform: 'scaleY(0.8) translateY(4px)', opacity: 0.8, transformOrigin: '0% 100%'}),
+        animate(`200ms ${AnimationCurves.EASE_IN}`,
+          style({transform: 'scaleY(0.9999) translateY(0)', opacity: 1, transformOrigin: '0% 100%'})),
+      ];
+    case 'bottom':
+    default:
+      return [
+        style({transform: 'scaleY(0.8)  translateY(-4px)', opacity: 0.8, transformOrigin: '0% 0%'}),
+        animate(`200ms ${AnimationCurves.EASE_OUT}`,
+          style({transform: 'scaleY(0.9999)  translateY(0)', opacity: 1, transformOrigin: '0% 0%'})),
+      ];
     }
   }
 
   public hide = (event: Event) => {
     this.dropdown.toggle();
-  }
+  };
 
   private fadeOut(direction): AnimationMetadata[] {
     switch (direction) {
-      case 'top':
-        return [
-          style({transform: 'scaleY(0.9999)  translateY(0)', opacity: 1, transformOrigin: '0% 100%'}),
-          animate(`${AnimationDuration.BASE} ${AnimationCurves.EASE_IN}`,
-            style({transform: 'scaleY(0.8)  translateY(4px)', opacity: 0.8, transformOrigin: '0% 100%'}))
-        ];
-      case 'bottom':
-      default:
-        return [
-          style({transform: 'scaleY(0.9999)  translateY(0)', opacity: 1, transformOrigin: '0% 0%'}),
-          animate(`${AnimationDuration.BASE} ${AnimationCurves.EASE_IN}`,
-            style({transform: 'scaleY(0.8)  translateY(-4px)', opacity: 0.8, transformOrigin: '0% 0%'}))
-        ];
+    case 'top':
+      return [
+        style({transform: 'scaleY(0.9999)  translateY(0)', opacity: 1, transformOrigin: '0% 100%'}),
+        animate(`${AnimationDuration.BASE} ${AnimationCurves.EASE_IN}`,
+          style({transform: 'scaleY(0.8)  translateY(4px)', opacity: 0.8, transformOrigin: '0% 100%'}))
+      ];
+    case 'bottom':
+    default:
+      return [
+        style({transform: 'scaleY(0.9999)  translateY(0)', opacity: 1, transformOrigin: '0% 0%'}),
+        animate(`${AnimationDuration.BASE} ${AnimationCurves.EASE_IN}`,
+          style({transform: 'scaleY(0.8)  translateY(-4px)', opacity: 0.8, transformOrigin: '0% 0%'}))
+      ];
     }
   }
 }

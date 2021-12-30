@@ -107,7 +107,7 @@ export class DashboardComponent implements OnChanges, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    this.finalOption = Object.assign({}, DashBoardGridStackDefaultOption, this.initOptions, this.getTransformOption());
+    this.finalOption = { ...DashBoardGridStackDefaultOption, ...this.initOptions, ...this.getTransformOption()};
     this.renderer.addClass(this.el.nativeElement, 'grid-stack-' + this.finalOption.column);
     this.gridStackService.gridStack = GridStack.init(this.finalOption, this.el.nativeElement);
     this.gridStackService.resetAcceptWidget(this);
@@ -192,7 +192,7 @@ export class DashboardComponent implements OnChanges, AfterViewInit, OnDestroy {
           widget.handleChange(node);
         });
     });
-  }
+  };
 
   @HostListener('change', ['$event', '$event.detail'])
   public changeHandler = (event, items: GridStackNode[]) => {
@@ -216,7 +216,7 @@ export class DashboardComponent implements OnChanges, AfterViewInit, OnDestroy {
     if (this.showGridBlock) {
       this.gridStackService.setBackgroundGridBlockIfColumnChange();
     }
-  }
+  };
 
   @HostListener('removed', ['$event', '$event.detail'])
   public removedHandler = (event, items: GridStackNode[]) => {
@@ -228,7 +228,7 @@ export class DashboardComponent implements OnChanges, AfterViewInit, OnDestroy {
     if (isDevMode() && all.some(wd => !wd.widget)) {
       console.warn('remove: something wrong, not handled by dashboard');
     }
-  }
+  };
 
   handleDragInNode(node: GridStackNode, origNode: GridStackNode, widget: DashboardLibraryWidgetDirective) {
     this.widgetAdded.emit([{

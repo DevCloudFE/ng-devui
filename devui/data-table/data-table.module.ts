@@ -2,7 +2,6 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-
 import { ButtonModule } from 'ng-devui/button';
 import { CheckBoxModule } from 'ng-devui/checkbox';
 import { DCommonModule } from 'ng-devui/common';
@@ -36,6 +35,8 @@ import { DataTableCellTmplComponent } from './tmpl/data-table-cell-tmpl.componen
 import { DataTableCellViewTmplComponent } from './tmpl/data-table-cell-view-tmpl.component';
 import { DataTableColumnTmplComponent } from './tmpl/data-table-column-tmpl.component';
 import { DataTableHeadCellTmplComponent } from './tmpl/data-table-head-cell-tmpl.component';
+import { VirtualScrollTreeTableComponent } from './virtualScrollTreeTable.component';
+
 
 @NgModule({
   imports: [
@@ -74,7 +75,8 @@ import { DataTableHeadCellTmplComponent } from './tmpl/data-table-head-cell-tmpl
     TableTheadComponent,
     TableTrComponent,
     TableTbodyComponent,
-    TableTdComponent
+    TableTdComponent,
+    VirtualScrollTreeTableComponent
   ],
   declarations: [
     DataTableComponent,
@@ -95,9 +97,10 @@ import { DataTableHeadCellTmplComponent } from './tmpl/data-table-head-cell-tmpl
     TableTheadComponent,
     TableTrComponent,
     TableTbodyComponent,
-    TableTdComponent
+    TableTdComponent,
+    VirtualScrollTreeTableComponent
   ],
-  
+
   providers: [ TableTdService ],
 })
 export class DataTableModule {

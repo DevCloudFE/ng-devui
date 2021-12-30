@@ -46,6 +46,6 @@ import { TypeComponent } from './type/type.component';
     TypeComponent,
     RateHalfComponent,
   ],
-  
+
 })
 export class RateDemoModule {}

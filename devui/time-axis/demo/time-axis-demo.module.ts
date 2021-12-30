@@ -37,16 +37,16 @@ import { TimeAxisDemoComponent } from './time-axis-demo.component';
   ],
   exports: [TimeAxisDemoComponent],
   declarations: [
-      TimeAxisDemoComponent,
-      TimeAxisAllStatesComponent,
-      TimeAxisDirectionComponent,
-      TimeAxisHtmlContentComponent,
-      TimeAxisTemplateContentComponent,
-      AlternativeModeComponent,
-      SeperateWayComponent,
-      CustomDotComponent
-      ],
-  
+    TimeAxisDemoComponent,
+    TimeAxisAllStatesComponent,
+    TimeAxisDirectionComponent,
+    TimeAxisHtmlContentComponent,
+    TimeAxisTemplateContentComponent,
+    AlternativeModeComponent,
+    SeperateWayComponent,
+    CustomDotComponent
+  ],
+
   providers: [],
 })
 export class TimeAxisDemoModule {

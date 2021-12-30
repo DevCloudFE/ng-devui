@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
+import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'lib-read-tip-demo',
+  selector: 'd-read-tip-demo',
   templateUrl: './read-tip-demo.component.html'
 })
 export class ReadTipDemoComponent implements OnInit, OnDestroy {

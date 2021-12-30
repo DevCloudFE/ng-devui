@@ -36,6 +36,7 @@ import { SelectDateChangeEventArgs, SelectDateChangeReason } from './date-change
 import { DatePickerConfigService as DatePickerConfig } from './date-picker.config.service';
 
 @Component({
+  /* eslint-disable-next-line @angular-eslint/component-selector*/
   selector: '[dDatepicker][appendToBody]',
   providers: [{
     provide: NG_VALUE_ACCESSOR,
@@ -314,16 +315,16 @@ export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDes
       this.isOpen = false;
       this.cdr.markForCheck();
     }
-  }
+  };
 
   onPositionChange(position: ConnectedOverlayPositionChange) {
     switch (position.connectionPair.overlayY) {
-      case 'top':
-      case 'center':
-        this.datepickerPosition = 'bottom';
-        break;
-      case 'bottom':
-        this.datepickerPosition = 'top';
+    case 'top':
+    case 'center':
+      this.datepickerPosition = 'bottom';
+      break;
+    case 'bottom':
+      this.datepickerPosition = 'top';
     }
   }
 
@@ -400,7 +401,7 @@ export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDes
       reason: currentReason,
       selectedDate: null
     });
-  }
+  };
 
   ngOnDestroy() {
     if (this.i18nSubscription) {

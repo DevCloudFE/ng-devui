@@ -41,6 +41,5 @@ testem.log
 Thumbs.db
 desktop.ini
 debug.log
-
 # package-lock
 package-lock.json

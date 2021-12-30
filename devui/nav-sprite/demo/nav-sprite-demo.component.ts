@@ -4,7 +4,7 @@ import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-nav-sprite-demo',
+  selector: 'd-nav-sprite-demo',
   templateUrl: './nav-sprite-demo.component.html'
 })
 export class NavSpriteDemoComponent implements OnInit, OnDestroy {

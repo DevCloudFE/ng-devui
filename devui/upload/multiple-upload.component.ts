@@ -80,8 +80,8 @@ export class MultipleUploadComponent implements OnDestroy, OnInit {
     private i18n: I18nService,
     @Inject(DOCUMENT) private doc: any,
     private toastService: ToastService) {
-      this.document = this.doc;
-    }
+    this.document = this.doc;
+  }
   ngOnInit(): void {
     this.i18nText = this.i18n.getI18nText().upload;
     this.i18nCommonText = this.i18n.getI18nText().common;
@@ -204,7 +204,7 @@ export class MultipleUploadComponent implements OnDestroy, OnInit {
           last()
         )
         .subscribe(
-          (results: Array<{ file: File, response: any }>) => {
+          (results: Array<{ file: File; response: any }>) => {
             this.successEvent.emit(results);
             results.forEach((result) => {
               this.multipleUploadViewComponent.uploadedFilesComponent.addFile(result.file);

@@ -74,5 +74,5 @@ export class BasicComponent {
       console.log('selected and clicked tag:', tag);
       console.log('unassigned tag:', currentSelectTag);
     }
-  }
+  };
 }

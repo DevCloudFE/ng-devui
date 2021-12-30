@@ -1,0 +1,58 @@
+<h3>Basic</h3>
+<h4>Horizontal</h4>
+<d-row [dSpace]="12" [dSpaceDirection]="'horizontal'">
+  <d-col [dSpan]="7">
+    <div class="content-box">col-7</div>
+  </d-col>
+  <d-col [dSpan]="7">
+    <div class="content-box">col-7</div>
+  </d-col>
+  <d-col [dSpan]="7">
+    <div class="content-box">col-7</div>
+  </d-col>
+</d-row>
+<h4>Vertical</h4>
+<d-row [dSpace]="12">
+  <d-col [dSpan]="12">
+    <div class="content-box color-hover">col-12</div>
+  </d-col>
+  <d-col [dSpan]="12">
+    <div class="content-box">col-12</div>
+  </d-col>
+  <d-col [dSpan]="12">
+    <div class="content-box color-hover">col-12</div>
+  </d-col>
+  <d-col [dSpan]="12">
+    <div class="content-box">col-12</div>
+  </d-col>
+</d-row>
+<h4>Horizontal & Vertical</h4>
+<d-row [dSpace]="[12, 12]">
+  <d-col [dSpan]="11">
+    <div class="content-box">col-11</div>
+  </d-col>
+  <d-col [dSpan]="11">
+    <div class="content-box">col-11</div>
+  </d-col>
+  <d-col [dSpan]="11">
+    <div class="content-box">col-11</div>
+  </d-col>
+  <d-col [dSpan]="11">
+    <div class="content-box">col-11</div>
+  </d-col>
+</d-row>
+<h3>Responsive</h3>
+<d-row [dSpace]="{ ss: [6, 6], xs: [12, 12], md: [18, 18] }">
+  <d-col [dSpan]="11">
+    <div class="content-box">col-11</div>
+  </d-col>
+  <d-col [dSpan]="11">
+    <div class="content-box">col-11</div>
+  </d-col>
+  <d-col [dSpan]="11">
+    <div class="content-box">col-11</div>
+  </d-col>
+  <d-col [dSpan]="11">
+    <div class="content-box">col-11</div>
+  </d-col>
+</d-row>

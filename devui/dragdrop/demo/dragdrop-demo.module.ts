@@ -54,7 +54,7 @@ import { TreeComponent } from './tree/tree.component';
     DropScrollComponent,
     CrossDimensionComponent
   ],
-  
+
 })
 export class DragDropDemoModule {
 }

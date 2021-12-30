@@ -44,7 +44,7 @@ import { SearchDemoComponent } from './search-demo.component';
     AutoFocusComponent,
     SearchNoBorderComponent
   ],
-  
+
 })
 export class SearchDemoModule {
 }

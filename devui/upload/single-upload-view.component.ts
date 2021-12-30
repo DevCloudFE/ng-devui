@@ -54,7 +54,7 @@ export class SingleUploadViewComponent extends UploadComponent {
   // 解决templateContext 传递method.bind(this)引发模板中内嵌组件initialize问题
   deleteFileProxy = file => {
     this.deleteFile(file);
-  }
+  };
 
   _onDeleteUploadedFile(filePath: string) {
     this.deleteUploadedFileEvent.emit(filePath);

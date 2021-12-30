@@ -54,7 +54,7 @@ import { DropdownSetIsOpenComponent } from './set-is-open/dropdown-set-is-open.c
     DropDownDemoManuallyComponent,
     DropdownSetIsOpenComponent,
   ],
-  
+
 })
 export class DropdownDemoModule {
 }

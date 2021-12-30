@@ -3,8 +3,8 @@ import { FormLayout } from 'ng-devui/form';
 
 @Component({
   selector: 'd-form-demo-label-horizontal',
-templateUrl: './label-horizontal.component.html',
-styleUrls: ['./label-horizontal.component.css']
+  templateUrl: './label-horizontal.component.html',
+  styleUrls: ['./label-horizontal.component.css']
 
 })
 export class LabelHorizontalComponent implements OnInit {
@@ -104,6 +104,6 @@ export class LabelHorizontalComponent implements OnInit {
       multiple: 'true',
       labelization: {enable: true, labelMaxWidth: '120px'},
       options: this.selectOptions
-  };
+    };
   }
 }

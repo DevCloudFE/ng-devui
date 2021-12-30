@@ -45,7 +45,7 @@ export class TwoBindingComponent implements OnInit {
         ]
       });
     });
-  }
+  };
 
   onChange2(state) {
     console.log(state);

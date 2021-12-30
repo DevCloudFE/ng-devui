@@ -97,7 +97,7 @@ export class FullscreenComponent implements OnInit, OnDestroy, AfterViewInit {
       });
       this.isFullscreen = isFullscreen;
     }
-  }
+  };
 
   public handleFullscreen = async () => {
     const targetElement = this.elementRef.nativeElement.querySelector('[fullscreen-target]');
@@ -126,7 +126,7 @@ export class FullscreenComponent implements OnInit, OnDestroy, AfterViewInit {
     this.fullscreenLaunch.emit({
       isFullscreen
     });
-  }
+  };
 
   private handleKeyDown = (event) => {
     if (event.keyCode === ESC_KEYCODE) { // 按ESC键退出全屏
@@ -144,7 +144,7 @@ export class FullscreenComponent implements OnInit, OnDestroy, AfterViewInit {
         this.isFullscreen = false;
       }
     }
-  }
+  };
 
   ngOnDestroy() {
     this.document.removeEventListener('fullscreenchange', this.onFullScreenChange);

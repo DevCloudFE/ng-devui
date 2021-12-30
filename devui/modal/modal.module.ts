@@ -44,7 +44,7 @@ import { MovableDirective } from './movable.directive';
     DialogService,
     DocumentRef,
   ],
-  
+
 })
 export class ModalModule {
 }

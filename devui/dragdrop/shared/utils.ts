@@ -17,12 +17,12 @@ export class Utils {
       proto.oMatchesSelector ||
       proto.webkitMatchesSelector ||
       function (s) {
-          const matches = (this.document || this.ownerDocument).querySelectorAll(s);
-          let i = matches.length;
-          while (--i >= 0 && matches.item(i) !== this) {
-            // do nothing
-          }
-          return i > -1;
+        const matches = (this.document || this.ownerDocument).querySelectorAll(s);
+        let i = matches.length;
+        while (--i >= 0 && matches.item(i) !== this) {
+          // do nothing
+        }
+        return i > -1;
       };
 
     return func.call(element, selectorName);
@@ -52,7 +52,7 @@ export class Utils {
     const e = this.getElementWithValidClassList(elementRef);
 
     if (e) {
-        e.classList.remove(className);
+      e.classList.remove(className);
     }
   }
 
@@ -66,7 +66,7 @@ export class Utils {
     const e = elementRef instanceof ElementRef ? elementRef.nativeElement : elementRef;
 
     if (e.classList !== undefined && e.classList !== null) {
-        return e;
+      return e;
     }
 
     return null;
@@ -76,7 +76,7 @@ export class Utils {
     const ret = [];
     let len = args.length;
 
-    if (0 === len) { return ret; }
+    if (len === 0) { return ret; }
 
     const start = slice < 0
       ? Math.max(0, slice + len)

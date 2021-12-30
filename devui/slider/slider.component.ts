@@ -20,7 +20,6 @@ import { distinctUntilChanged, map, pluck, takeUntil, tap } from 'rxjs/operators
 
 const SLIDER_CONTROL_VALUE_ACCESSOR: any = {
   provide: NG_VALUE_ACCESSOR,
-  // tslint:disable-next-line
   useExisting: forwardRef(() => SliderComponent),
   multi: true
 };
@@ -101,10 +100,10 @@ export class SliderComponent implements OnInit, OnChanges, ControlValueAccessor,
   }
 
   private onTouchedCallback = () => {
-  }
+  };
 
   private onChangeCallback = (v: any) => {
-  }
+  };
 
   private checkRangeValues(minValue, maxValue) {
     if (maxValue <= minValue) {
@@ -113,7 +112,7 @@ export class SliderComponent implements OnInit, OnChanges, ControlValueAccessor,
   }
 
   private checkStepValue() {
-    if (this.step < 0 || !!!this.step) {
+    if (this.step < 0 || !this.step) {
       throw new Error('step value must be greater than 0.');
     } else if ((this.max - this.min) % this.step) {
       throw new Error('(max - min) must be divisible by step.');

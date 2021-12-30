@@ -49,12 +49,12 @@ export class DropSortSyncDirective extends DescendantChildren<DropSortSyncDirect
     }
     super.ngOnDestroy();
   }
-  subRenderEvent = (nativeStyle: {width: number, height: number}) => {
+  subRenderEvent = (nativeStyle: {width: number; height: number}) => {
     this.syncGroupDirectives = this.dragDropSyncService.getDropSyncByGroup(this.dropSyncGroup).filter(directive => directive !== this);
     this.syncGroupDirectives.forEach(dir => {
       dir.renderPlaceholder(nativeStyle, this.droppable);
     });
-  }
+  };
 
   subInsertionEvent = (cmd: DragPlaceholderInsertionIndexEvent) => {
     this.syncGroupDirectives = this.dragDropSyncService.getDropSyncByGroup(this.dropSyncGroup).filter(directive => directive !== this);
@@ -65,7 +65,7 @@ export class DropSortSyncDirective extends DescendantChildren<DropSortSyncDirect
         relatedEl: dir.getChildrenElByIndex(dir.sortContainer, cmd.index)
       });
     });
-  }
+  };
   getChildrenElByIndex(target, index?) {
     if (index === undefined || target && target.children && target.children.length < index || index < 0) {
       return null;
@@ -73,7 +73,7 @@ export class DropSortSyncDirective extends DescendantChildren<DropSortSyncDirect
     return this.sortContainer.children.item(index);
   }
 
-  renderPlaceholder(nativeStyle: {width: number, height: number}, droppable) {
+  renderPlaceholder(nativeStyle: {width: number; height: number}, droppable) {
     if (!this.placeholder) {
       this.placeholder = document.createElement(droppable.placeholderTag);
       this.placeholder.className = 'drag-placeholder';

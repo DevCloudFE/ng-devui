@@ -6,7 +6,7 @@ import { fromEvent, Observable, Subscription } from 'rxjs';
 import { VERSION } from '../../devui/version';
 
 @Component({
-  selector: 'app-root',
+  selector: 'd-app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   encapsulation: ViewEncapsulation.None

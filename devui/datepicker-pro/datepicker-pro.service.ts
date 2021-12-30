@@ -13,22 +13,20 @@ export class DatepickerProService implements OnDestroy {
   calendarRange = [1970, 2099];
   currentActiveInput: 'start' | 'end' = 'start';
   _minDate: Date = new Date(this.calendarRange[0], 0, 1);
-  _maxDate: Date = new Date(this.calendarRange[1], 11, 31);
-  document: Document;
-
   set minDate(value: Date) {
     this._minDate = new Date(value) || new Date(this.calendarRange[0], 0, 1);
   }
-  set maxDate(value: Date) {
-    this._maxDate = new Date(value) || new Date(this.calendarRange[1], 11, 31);
-  }
-
   get minDate(): Date {
     return this._minDate;
+  }
+  _maxDate: Date = new Date(this.calendarRange[1], 11, 31);
+  set maxDate(value: Date) {
+    this._maxDate = new Date(value) || new Date(this.calendarRange[1], 11, 31);
   }
   get maxDate(): Date {
     return this._maxDate;
   }
+  document: Document;
   get closeAfterSelected(): boolean {
     return !this.isRange && !this.showTime;
   }
@@ -66,13 +64,13 @@ export class DatepickerProService implements OnDestroy {
     value: Date | Date[];
   }>();
   readonly selectedTimeChange = new Subject<{
-    activeInput?: 'start' | 'end',
+    activeInput?: 'start' | 'end';
     hour: number;
     min: number;
     seconds: number;
   }>();
   readonly updateTimeChange = new Subject<{
-    activeInput?: 'start' | 'end',
+    activeInput?: 'start' | 'end';
     hour: number;
     min: number;
     seconds: number;

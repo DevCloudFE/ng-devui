@@ -80,7 +80,7 @@ import { UserSearchNLazyLoadComponent } from './user-search-n-lazyload/user-sear
     MapToPipe,
     ParseFromPipe,
   ],
-  
+
   providers: [],
 })
 export class SelectDemoModule {}

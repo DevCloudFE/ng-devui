@@ -50,7 +50,7 @@ export class ColorComponent implements OnInit, OnDestroy {
         }
       }
     });
-  }
+  };
 
   toggleExpand(rowItem, index) {
     rowItem.expand = !rowItem.expand;
