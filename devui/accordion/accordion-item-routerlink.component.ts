@@ -1,7 +1,7 @@
-import { Component, HostBinding, HostListener, OnChanges, SimpleChanges, ViewChild, ViewEncapsulation} from '@angular/core';
+import { Component, HostBinding, HostListener, Inject, OnChanges, SimpleChanges, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Params, Router, RouterLinkActive, UrlTree } from '@angular/router';
 import { AccordionBaseLinkComponent } from './accordion-base-link-component.class';
-import { AccordionComponent } from './accordion.component';
+import { ACCORDION } from './accordion-token';
 
 @Component({
   selector: 'd-accordion-item-routerlink',
@@ -29,7 +29,7 @@ export class AccordionItemRouterlinkComponent extends AccordionBaseLinkComponent
   public queryParams: Params;
   public fragment: string;
 
-  constructor(protected accordion: AccordionComponent, private router: Router) {
+  constructor(@Inject(ACCORDION) protected accordion: any, private router: Router) {
     super(accordion);
   }
 

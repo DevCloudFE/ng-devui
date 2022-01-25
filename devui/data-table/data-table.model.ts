@@ -1,8 +1,8 @@
 import { TemplateRef } from '@angular/core';
-import { DataTableCellComponent } from './data-table-cell.component';
-import { DataTableRowComponent } from './data-table-row.component';
-import { TableThComponent } from './table/head/th/th.component';
-import { DataTableColumnTmplComponent } from './tmpl/data-table-column-tmpl.component';
+import type { DataTableCellComponent } from './data-table-cell.component';
+import type { DataTableRowComponent } from './data-table-row.component';
+import type { TableThComponent } from './table/head/th/th.component';
+import type { DataTableColumnTmplComponent } from './tmpl/data-table-column-tmpl.component';
 
 export interface CellSelectedEventArg {
   rowIndex: number;

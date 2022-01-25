@@ -1,6 +1,6 @@
-import { Component, Input, OnChanges, SimpleChanges, TemplateRef } from '@angular/core';
-import { DataTableComponent } from './data-table.component';
+import { Component, Inject, Input, OnChanges, SimpleChanges, TemplateRef } from '@angular/core';
 import { TableExpandConfig, TableWidthConfig } from './data-table.model';
+import { DATA_TABLE } from './data-table.token';
 import { DataTableColumnTmplComponent } from './tmpl/data-table-column-tmpl.component';
 
 @Component({
@@ -31,7 +31,7 @@ export class DataTableBodyComponent implements OnChanges {
   @Input() headerExpandConfig: TableExpandConfig;
   @Input() generalRowHoveredData: boolean;
   childTdColspan: number;
-  constructor(public dt: DataTableComponent) {
+  constructor(@Inject(DATA_TABLE) public dt: any) {
 
   }
 

@@ -3,6 +3,7 @@ import {
   Component,
   ComponentFactoryResolver,
   ElementRef,
+  Inject,
   Input,
   NgZone,
   OnChanges,
@@ -16,8 +17,8 @@ import { SelectComponent } from 'ng-devui/select';
 import { TreeSelectComponent } from 'ng-devui/tree-select';
 import { stopPropagationIfExist } from 'ng-devui/utils';
 import { fromEvent, Subscription } from 'rxjs';
-import { DataTableRowComponent } from './data-table-row.component';
-import { DataTableComponent } from './data-table.component';
+import { DATA_TABLE_ROW } from './data-table-row.token';
+import { DATA_TABLE } from './data-table.token';
 import { EditorDirective } from './editor-host.directive';
 import { DataTableColumnTmplComponent } from './tmpl/data-table-column-tmpl.component';
 
@@ -50,9 +51,9 @@ export class DataTableCellComponent implements OnInit, OnChanges, OnDestroy {
   templateEditorActive: boolean; // 通过模板生成的编辑控件激活
   dynamicEditorActive: boolean; // 动态生成的编辑控件激活
 
-  constructor(public dt: DataTableComponent, private changeDetectorRef: ChangeDetectorRef,
+  constructor(@Inject(DATA_TABLE) public dt: any, private changeDetectorRef: ChangeDetectorRef,
               private componentFactoryResolver: ComponentFactoryResolver,
-              public rowComponent: DataTableRowComponent, private cellRef: ElementRef, private ngZone: NgZone) {
+              @Inject(DATA_TABLE_ROW) public rowComponent: any, private cellRef: ElementRef, private ngZone: NgZone) {
 
   }
 

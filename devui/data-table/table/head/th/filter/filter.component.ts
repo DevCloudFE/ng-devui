@@ -8,7 +8,7 @@ import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { BehaviorSubject, fromEvent, Observable, of, Subscription } from 'rxjs';
 import { debounceTime, map, switchMap } from 'rxjs/operators';
 import { FilterConfig } from '../../../../data-table.model';
-import { TableThComponent } from '../th.component';
+import { TABLE_TH } from '../th.token';
 
 @Component({
   selector: 'd-table-filter',
@@ -49,7 +49,7 @@ export class FilterComponent implements OnInit, OnChanges, OnDestroy {
   filterIconActiveInner: boolean;
   DEBONCE_TIME = 300;
   document: Document;
-  constructor(private ref: ChangeDetectorRef, private i18n: I18nService, private thComponent: TableThComponent,
+  constructor(private ref: ChangeDetectorRef, private i18n: I18nService, @Inject(TABLE_TH) private thComponent: any,
               @Inject(DOCUMENT) private doc: any) {
     this.i18nCommonText = this.i18n.getI18nText().common;
     this.document = this.doc;

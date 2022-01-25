@@ -100,9 +100,9 @@ export const myTheme: Theme = new Theme({
     if (typeof window === 'undefined') {
       return;
     }
-    if (window.navigator && window.navigator.msSaveOrOpenBlob) { // IE11 support
+    if (window.navigator && window.navigator['msSaveOrOpenBlob']) { // IE11 support
       const blob = new Blob([data], { type: contentType });
-      window.navigator.msSaveOrOpenBlob(blob, filename);
+      window.navigator['msSaveOrOpenBlob'](blob, filename);
     } else {// other browsers
       if ('download' in this.document.createElement('a')) {
         const blob = new Blob([data], { type: contentType });

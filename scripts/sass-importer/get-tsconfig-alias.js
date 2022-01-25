@@ -1,7 +1,8 @@
 const path = require('path');
-const readConfiguration = require('@angular/compiler-cli').readConfiguration;
+const { createSyncFn  } = require('synckit');
 
 function pathAlias(tsconfigPath) {
+  const readConfiguration = createSyncFn(require.resolve('../worker'));
   const {baseUrl, paths} = readConfiguration(path.resolve(tsconfigPath)).options;
   if (!paths) { return []; }
   return Object.keys(paths)

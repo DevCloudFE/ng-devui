@@ -2,12 +2,17 @@ import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, S
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { DevConfigService, WithConfig } from 'ng-devui/utils/globalConfig';
 import { Subscription } from 'rxjs';
+import { ACCORDION } from './accordion-token';
 import { AccordionItemClickEvent, AccordionMenuToggleEvent, AccordionMenuType, AccordionOptions } from './accordion.type';
 @Component({
   selector: 'd-accordion',
   templateUrl: './accordion.component.html',
   styleUrls: ['./accordion.component.scss'],
   preserveWhitespaces: false,
+  providers: [{
+    provide: ACCORDION,
+    useExisting: AccordionComponent
+  }]
 })
 export class AccordionComponent implements AccordionOptions, OnChanges, OnInit, OnDestroy {
   @Input() data: Array<any> | AccordionMenuType;

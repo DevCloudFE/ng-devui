@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { formatDate } from 'ng-devui/utils';
-import { DataTableColumnTmplComponent } from './tmpl/data-table-column-tmpl.component';
+import type { DataTableColumnTmplComponent } from './tmpl/data-table-column-tmpl.component';
 
 @Pipe({ name: 'disPlayCellValuePipe' })
 export class DisPlayCellValuePipe implements PipeTransform {
