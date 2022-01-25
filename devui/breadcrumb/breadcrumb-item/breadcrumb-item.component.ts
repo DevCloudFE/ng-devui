@@ -1,7 +1,7 @@
 
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
-import { BreadCrumbComponent } from '../breadcrumb.component';
+import { ChangeDetectionStrategy, Component, EventEmitter, Inject, Input, OnInit, Output, TemplateRef } from '@angular/core';
 import { BreadCrumbService } from '../breadcrumb.service';
+import { BREADCRUMB } from '../breadcrumb.token';
 import { MenuConfig } from '../breadcrumb.type';
 
 @Component({
@@ -23,7 +23,7 @@ export class BreadCrumbItemComponent implements OnInit {
   menuListDisplay: Array<MenuConfig>;
   isOpen: boolean;
 
-  constructor(public breadCrumbComponent: BreadCrumbComponent, private breadCrumbService: BreadCrumbService) { }
+  constructor(@Inject(BREADCRUMB) public breadCrumbComponent: any, private breadCrumbService: BreadCrumbService) { }
   ngOnInit(): void {
     this.menuListDisplay = this.menuList;
   }

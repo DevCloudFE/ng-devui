@@ -5,8 +5,8 @@ import {
 } from '@angular/core';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { Subscription } from 'rxjs';
-import { DataTableComponent } from './data-table.component';
 import { SortDirection, SortEventArg, TableCheckOptions } from './data-table.model';
+import { DATA_TABLE } from './data-table.token';
 import { TableThComponent } from './table/head/th/th.component';
 import { DataTableColumnTmplComponent } from './tmpl/data-table-column-tmpl.component';
 
@@ -115,7 +115,7 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
   checkedListForFilter = [];
   document: Document;
   documentElement: HTMLElement;
-  constructor(public dt: DataTableComponent,
+  constructor(@Inject(DATA_TABLE) public dt: any,
               private zone: NgZone,
               private element: ElementRef,
               private differs: KeyValueDiffers,

@@ -1,15 +1,15 @@
 <div class="demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 160, bottom: 0 }">
   <d-demo-nav [navItems]="navItems">></d-demo-nav>
   <div class="devui-demo-example" [dAnchor]="'basic-usage'">
-    <div class="demo-title">基本用法</div>
-    <div class="demo-text">支持拖拽排序，缩放大小，添加，删除，禁止调整单个大小，禁止移动单个，锁定位置等等</div>
+    <div class="demo-title">{{ 'components.dashboard.basicDemo.title' | translate }}</div>
+    <div class="demo-text">{{ 'components.dashboard.basicDemo.description' | translate }}</div>
     <d-codebox id="components-card-basic" [sourceData]="basicSource">
       <d-basic demo></d-basic>
     </d-codebox>
   </div>
   <div class="devui-demo-example" [dAnchor]="'more-config'">
-    <div class="demo-title">更多设置</div>
-    <div class="demo-text">支持配置只读静态，配置上空浮动，连续紧凑排列，从外部拖拽添加，拖拽到垃圾桶删除等</div>
+    <div class="demo-title">{{ 'components.dashboard.configDemo.title' | translate }}</div>
+    <div class="demo-text">{{ 'components.dashboard.configDemo.description' | translate }}</div>
     <d-codebox id="components-card-basic" [sourceData]="moreConfigSource">
       <d-more-config demo></d-more-config>
     </d-codebox>

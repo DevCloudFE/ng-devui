@@ -1,0 +1,14 @@
+karma.conf.js
+e2e/*
+playbook/*
+scripts/*
+server/*
+style-guide/*
+preview/*
+tools/*
+devui-commons/*
+assistant/*
+commitlint.config.js
+node_modules/*
+dist/*
+publish/*

@@ -52,7 +52,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
@@ -157,12 +156,14 @@
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "devui/tsconfig.lib.json",
             "project": "devui/ng-package.json"
           },
           "configurations": {
             "production": {
               "tsConfig": "devui/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "devui/tsconfig.lib.json"
             }
           }
         },

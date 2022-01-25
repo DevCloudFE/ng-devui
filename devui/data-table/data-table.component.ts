@@ -15,6 +15,7 @@ import {
   RowSelectedEventArg, SortEventArg, TableCheckOptions, TableCheckStatusArg,
   TableExpandConfig, TableWidthConfig
 } from './data-table.model';
+import { DATA_TABLE } from './data-table.token';
 import { TableTbodyComponent } from './table/body/tbody.component';
 import { TableThComponent } from './table/head/th/th.component';
 import { TableTheadComponent } from './table/head/thead.component';
@@ -30,6 +31,9 @@ import { DataTableColumnTmplComponent } from './tmpl/data-table-column-tmpl.comp
   // changeDetection: ChangeDetectionStrategy.OnPush,
   exportAs: 'dataTable',
   preserveWhitespaces: false,
+  providers: [
+    {provide: DATA_TABLE, useExisting: DataTableComponent}
+  ],
 })
 export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterContentInit, AfterViewInit {
   /**

@@ -4,6 +4,7 @@ import {
   TemplateRef,
 } from '@angular/core';
 import { BreadCrumbService } from './breadcrumb.service';
+import { BREADCRUMB } from './breadcrumb.token';
 import { SourceConfig } from './breadcrumb.type';
 
 @Component({
@@ -12,6 +13,9 @@ import { SourceConfig } from './breadcrumb.type';
   templateUrl: './breadcrumb.component.html',
   styleUrls: ['./breadcrumb.component.scss'],
   preserveWhitespaces: false,
+  providers: [
+    {provide: BREADCRUMB, useExisting: BreadCrumbComponent}
+  ],
 })
 export class BreadCrumbComponent {
   @Input() separatorIcon: TemplateRef<any>;
