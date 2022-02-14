@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 import {
   AnchorModule, ButtonModule, DrawerModule, DropDownModule, FormModule,
   SearchModule, TabsModule, ToggleModule
@@ -32,6 +33,7 @@ import { MoreConfigComponent } from './more-config/more-config.component';
     ButtonModule,
     AnchorModule,
     ToggleModule,
+    TranslateModule,
     DropDownModule,
     DDemoNavModule,
     DashboardModule,

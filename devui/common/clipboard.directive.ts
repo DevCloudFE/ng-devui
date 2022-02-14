@@ -43,8 +43,8 @@ export class ClipboardDirective implements OnInit , OnDestroy {
     private overlayContainerRef: OverlayContainerRef,
     private componentFactoryResolver: ComponentFactoryResolver,
     @Inject(DOCUMENT) private doc: any) {
-      this.document = this.doc;
-    }
+    this.document = this.doc;
+  }
 
   ngOnInit(): void {
     this.setI18nText();
@@ -107,7 +107,7 @@ export class ClipboardDirective implements OnInit , OnDestroy {
     if (!this.elm.nativeElement.contains(event.target)) {
       this.destroy();
     }
-  }
+  };
 
   ngOnDestroy() {
     if (this.i18nSubscription) {

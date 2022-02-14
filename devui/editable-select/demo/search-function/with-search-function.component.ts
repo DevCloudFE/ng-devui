@@ -29,6 +29,6 @@ export class WithSearchFunctionComponent implements OnInit {
 
   onSearchLocal = (term) => {
     return of(this.languages.filter(lang => lang.toLowerCase().indexOf(term.toLowerCase()) !== -1));
-  }
+  };
 
 }

@@ -8,29 +8,29 @@ export class PrefersColorSchemeMediaQuery {
 
   register() {
     PrefersColorSchemeMediaQuery.enquire
-    .register.bind(enquire)(PrefersColorSchemeMediaQuery.Query.light, {
-      match: () => {
-        this.handleColorSchemeChange('light');
-      }
-    })
-    .register(PrefersColorSchemeMediaQuery.Query.dark, {
-      match: () => {
-        this.handleColorSchemeChange('dark');
-      }
-    });
+      .register.bind(enquire)(PrefersColorSchemeMediaQuery.Query.light, {
+        match: () => {
+          this.handleColorSchemeChange('light');
+        }
+      })
+      .register(PrefersColorSchemeMediaQuery.Query.dark, {
+        match: () => {
+          this.handleColorSchemeChange('dark');
+        }
+      });
     this.prefersColorSchemeSubject.next(this.getInitValue());
   }
 
   unregister() {
     PrefersColorSchemeMediaQuery.enquire
-    .unregister(PrefersColorSchemeMediaQuery.Query.light)
-    .unregister(PrefersColorSchemeMediaQuery.Query.dark);
+      .unregister(PrefersColorSchemeMediaQuery.Query.light)
+      .unregister(PrefersColorSchemeMediaQuery.Query.dark);
     this.prefersColorSchemeSubject.complete();
   }
 
   handleColorSchemeChange = (value: PrefersColorSchemeMediaQuery.Value) => {
     this.prefersColorSchemeSubject.next(value);
-  }
+  };
 
   getInitValue(): PrefersColorSchemeMediaQuery.Value {
     return window.matchMedia(PrefersColorSchemeMediaQuery.Query.light).matches && 'light'
@@ -39,6 +39,7 @@ export class PrefersColorSchemeMediaQuery {
   }
 }
 
+/* eslint-disable-next-line @typescript-eslint/no-namespace */
 export namespace PrefersColorSchemeMediaQuery {
   export type Value = 'light' | 'dark' | 'no-preference';
   export enum Query {

@@ -41,6 +41,6 @@ import { ToastDemoComponent } from './toast-demo.component';
   ],
   exports: [ToastDemoComponent],
   declarations: [ToastDemoComponent, BasicComponent, LifeComponent, SingleComponent, StyleComponent, ToastServiceComponent],
-  
+
 })
 export class ToastDemoModule {}

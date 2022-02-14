@@ -43,7 +43,7 @@ describe('CarouselComponent', () => {
       imports: [CarouselModule],
       declarations: [ TestCarouselComponent ],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

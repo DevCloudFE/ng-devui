@@ -7,6 +7,6 @@ import { ChangeDetectionStrategy, Component, ContentChild, TemplateRef } from '@
 })
 export class DataTableCellViewTmplComponent {
 
-    @ContentChild(TemplateRef) template: TemplateRef<any>;
+  @ContentChild(TemplateRef) template: TemplateRef<any>;
 
 }

@@ -42,9 +42,6 @@ export class RadioComponent implements OnInit, ControlValueAccessor {
   get value(): any {
     return this.inputValue;
   }
-
-  @Input() beforeChange: (value) => boolean | Promise<boolean> | Observable<boolean>;
-
   set value(value: any) {
     this.inputValue = value;
     if (value instanceof Object) {
@@ -53,6 +50,9 @@ export class RadioComponent implements OnInit, ControlValueAccessor {
       this.id = `${this.name}-${value}`;
     }
   }
+
+  @Input() beforeChange: (value) => boolean | Promise<boolean> | Observable<boolean>;
+
 
   constructor() {}
 

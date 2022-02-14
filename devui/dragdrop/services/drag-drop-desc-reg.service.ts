@@ -31,7 +31,7 @@ export class DescendantRegisterService<T> {
 }
 
 @Directive()
-// tslint:disable-next-line
+/* eslint-disable-next-line @angular-eslint/directive-class-suffix */
 export class DescendantChildren<T> implements OnInit, OnDestroy {
   constructor (private drs: DescendantRegisterService<T>) {}
   protected descendantItem: T;

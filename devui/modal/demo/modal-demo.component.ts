@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
+import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -51,15 +51,15 @@ export class ModalDemoComponent implements OnInit, OnDestroy {
     { title: 'HTML', language: 'xml', code: require('./template/template.component.html?raw') },
     { title: 'TS', language: 'typescript', code: require('./template/template.component.ts?raw') },
     { title: 'Dialog Content HTML', language: 'xml',
-    code: require('./template/dialog-content/dialog-content.component.html?raw') },
+      code: require('./template/dialog-content/dialog-content.component.html?raw') },
     { title: 'Dialog Content TS', language: 'typescript',
-    code: require('./template/dialog-content/dialog-content.component.ts?raw') },
+      code: require('./template/dialog-content/dialog-content.component.ts?raw') },
     { title: 'Modal Content HTML', language: 'xml',
-    code: require('./template/modal-content/modal-content.component.html?raw') },
+      code: require('./template/modal-content/modal-content.component.html?raw') },
     { title: 'Modal Content TS', language: 'typescript',
-    code: require('./template/modal-content/modal-content.component.ts?raw') },
+      code: require('./template/modal-content/modal-content.component.ts?raw') },
     { title: 'Modal Content CSS', language: 'css',
-    code: require('./template/modal-content/modal-content.component.scss?raw') }
+      code: require('./template/modal-content/modal-content.component.scss?raw') }
   ];
   fixedWrapperSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('./fixed/fixed-wrapper.component.html?raw') },

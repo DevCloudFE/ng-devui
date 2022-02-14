@@ -24,14 +24,14 @@ export class LifeComponent {
 
   showToast(type: any) {
     switch (type) {
-      case 'error':
-        this.msgs = [{ severity: type, content: 'This is a test text. This is a test text. This is a test text.' }];
-        break;
-      case 'common':
-        this.msgs = [{ severity: type, content: 'This is a test text. This is a test text. This is a test text.' }];
-        break;
-      default:
-        this.msgs = [{ severity: type, summary: 'Summary', content: 'This is a test text. This is a test text. This is a test text.' }];
+    case 'error':
+      this.msgs = [{ severity: type, content: 'This is a test text. This is a test text. This is a test text.' }];
+      break;
+    case 'common':
+      this.msgs = [{ severity: type, content: 'This is a test text. This is a test text. This is a test text.' }];
+      break;
+    default:
+      this.msgs = [{ severity: type, summary: 'Summary', content: 'This is a test text. This is a test text. This is a test text.' }];
     }
   }
 }

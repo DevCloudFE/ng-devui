@@ -1,0 +1,17 @@
+.devui-cdk-scroll-container {
+  position: relative;
+
+  #data-table-virtual-tree-scroll {
+    width: calc(100% - 3px);
+  }
+
+  #data-table-virtual-tree {
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    right: 5px;
+    bottom: 0;
+    width: calc(100% - 8px);
+  }
+}

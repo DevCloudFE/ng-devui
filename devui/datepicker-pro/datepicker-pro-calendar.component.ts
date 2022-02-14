@@ -123,7 +123,9 @@ export class DatepickerProCalendarComponent implements OnInit, AfterViewInit, On
   }
 
   clear(event?: MouseEvent) {
-    event?.stopPropagation();
+    if (event) {
+      event.stopPropagation();
+    }
     this.pickerSrv.updateDateValue.next({
       type: this.isRangeType ? 'range' : 'single',
       value: this.isRangeType ? [] : null
@@ -223,11 +225,15 @@ export class DatepickerProCalendarComponent implements OnInit, AfterViewInit, On
     this.pickerSrv.activeInputChange.next(type);
     if (type === 'start') {
       setTimeout(() => {
-        this.datepickerInputStart?.nativeElement?.focus();
+        if (this.datepickerInputStart?.nativeElement) {
+          this.datepickerInputStart.nativeElement.focus();
+        }
       });
     } else {
       setTimeout(() => {
-        this.datepickerInputEnd?.nativeElement?.focus();
+        if (this.datepickerInputEnd?.nativeElement) {
+          this.datepickerInputEnd.nativeElement.focus();
+        }
       });
     }
   }

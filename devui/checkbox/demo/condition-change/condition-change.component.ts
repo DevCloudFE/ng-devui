@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 @Component({
-    selector: 'd-demo-condition-change',
-    templateUrl: './condition-change.component.html',
-    styleUrls: ['./condition-change.component.scss']
+  selector: 'd-demo-condition-change',
+  templateUrl: './condition-change.component.html',
+  styleUrls: ['./condition-change.component.scss']
 })
 export class CheckboxConditionChangeComponent {
   public checked = false;

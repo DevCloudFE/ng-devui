@@ -36,7 +36,7 @@ import { TooltipDemoComponent } from './tooltip-demo.component';
     BasicComponent,
     DelayComponent
   ],
-  
+
 })
 export class TooltipDemoModule {
 }

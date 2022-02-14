@@ -1,14 +1,19 @@
 import { DOCUMENT } from '@angular/common';
 import {
-    ChangeDetectorRef, Component, ElementRef, EventEmitter, HostBinding, HostListener, Inject, Input,
-    NgZone, OnChanges, OnDestroy, Output, Renderer2, SimpleChanges, TemplateRef
+  ChangeDetectorRef, Component, ElementRef, EventEmitter, HostBinding, HostListener, Inject, Input,
+  NgZone, OnChanges, OnDestroy, Output, Renderer2, SimpleChanges, TemplateRef
 } from '@angular/core';
 import { fromEvent, Observable, Subscription } from 'rxjs';
 import { FilterConfig, SortDirection, SortEventArg } from '../../../data-table.model';
+import { TABLE_TH } from './th.token';
 
 @Component({
+  /* eslint-disable-next-line @angular-eslint/component-selector*/
   selector: '[dHeadCell]',
   templateUrl: './th.component.html',
+  providers: [
+    {provide: TABLE_TH, useExisting: TableThComponent}
+  ],
 })
 export class TableThComponent implements OnChanges, OnDestroy {
   @HostBinding('class.resizeable') resizeEnabledClass = false;
@@ -257,7 +262,7 @@ export class TableThComponent implements OnChanges, OnDestroy {
 
   bindMousemove = (e) => {
     this.move(e);
-  }
+  };
 
   move(event: MouseEvent): void {
 

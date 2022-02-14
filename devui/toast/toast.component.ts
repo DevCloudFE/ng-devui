@@ -92,14 +92,15 @@ export class ToastComponent implements OnInit, AfterViewInit, OnDestroy {
 
   severityDelay(item: Message) {
     switch (item.severity) {
-      case 'warn':
-      case 'error':
-        return 10000;
-      default:
-        // common | success | info | default
-        return 5000;
+    case 'warn':
+    case 'error':
+      return 10000;
+    default:
+      // common | success | info | default
+      return 5000;
     }
   }
+
   show() {
     if (!this.container) {
       this.container = <HTMLDivElement>this.containerViewChild.nativeElement;
@@ -107,10 +108,12 @@ export class ToastComponent implements OnInit, AfterViewInit, OnDestroy {
     this.handleValueChange();
   }
 
-  // Will overwrite this method in modal service
+  // Will overwrite this method in toast service
   close() {}
-  // Will overwrite by drawer service
+
+  // Will overwrite this method in toast service
   onHidden() {}
+
   handleValueChange() {
     this.zIndex++;
     const doms = this.container.children;
@@ -128,7 +131,7 @@ export class ToastComponent implements OnInit, AfterViewInit, OnDestroy {
       if (this.lifeMode === 'single') {
         setTimeout(() => {
           this._value.forEach(
-            (v, i) => (this.timeoutArr[i] = setTimeout(() => this.singleModeRemove(v, doms[i]), v.life || this.severityDelay(v)))
+            (v, i) => {(this.timeoutArr[i] = setTimeout(() => this.singleModeRemove(v, doms[i]), v.life || this.severityDelay(v)));}
           );
         });
       } else {
@@ -222,12 +225,14 @@ export class ToastComponent implements OnInit, AfterViewInit, OnDestroy {
   removeThrottle(index: number, msgItem: any) {
     this.clickSub.next({ index: index, dom: msgItem });
   }
+
   removeIndexThrottle(index: number) {
     const doms = this.container.children;
     if (index < doms.length) {
       this.clickSub.next({ index: index, dom: doms[index] });
     }
   }
+
   removeMsgThrottle(msg: any) {
     const doms = this.container.children;
     const index = this._value.findIndex((item) => {

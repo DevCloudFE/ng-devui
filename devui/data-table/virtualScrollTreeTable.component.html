@@ -1,0 +1,17 @@
+<div style="padding: 8px; height: 500px; user-select: none">
+  <div cdkScrollable class="devui-cdk-scroll-container" [ngStyle]="{ 'padding-top': virtualScrollPadding }">
+    <cdk-virtual-scroll-viewport
+      id="data-table-virtual-tree-scroll"
+      #cdkVirtualScrollViewport
+      [itemSize]="itemSize"
+      minBufferPx="80"
+      maxBufferPx="200"
+      [style.height]="itemSize * itemCount + 'px'"
+      (scroll)="onBodyScroll()"
+    >
+      <div *cdkVirtualFor="let item of scrollArray"></div>
+    </cdk-virtual-scroll-viewport>
+    <d-data-table #dataTable id="data-table-virtual-tree" [dataSource]="visibleNodes" [scrollable]="false" (mousewheel)="scroll($event)">
+    </d-data-table>
+  </div>
+</div>

@@ -51,7 +51,7 @@ import { DropDownModule } from './dropdown.moudule';
 </div>
 <div class="toggle" (click)="dropdown.toggle()">打开/关闭</div>
 `,
-styles: [`
+  styles: [`
  .height-expand { height: calc( 100vh - 100px)}
 `]
 })
@@ -99,7 +99,7 @@ class TestDropdownComponent {
   </div>
 </div>
 `,
- styles: [`
+  styles: [`
 .area {
   width: 500px;
   height: 600px;
@@ -622,7 +622,7 @@ describe('dropdown', () => {
         fixture.detectChanges();
         dropdownToggleElement = debugEl.query(By.directive(DropDownToggleDirective));
         expect(document.activeElement).toEqual(dropdownToggleElement.nativeElement);
-       }));
+      }));
     });
     describe('dropdownToggle autoFocus combine toggleOnFocus', () => {
       // 并发会有问题，目前屏蔽

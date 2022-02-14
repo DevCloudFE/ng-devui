@@ -10,7 +10,7 @@ export class ResizeDirective implements OnInit, OnDestroy {
   @Output() pressEvent = new EventEmitter<any>();
   // 拖动中事件，mousemove，touchmove等
   @Output() dragEvent = new EventEmitter<any>();
- // 释放事件，mouseup，touchend等
+  // 释放事件，mouseup，touchend等
   @Output() releaseEvent = new EventEmitter<any>();
   constructor(private el: ElementRef, private ngZone: NgZone) {}
 
@@ -45,17 +45,17 @@ export class ResizeDirective implements OnInit, OnDestroy {
     this.bind(document, 'mousemove', this.mousemove);
     this.bind(document, 'mouseup', this.mouseup);
     this.pressEvent.emit(this.normalizeEvent(e));
-  }
+  };
 
   mousemove = (e) => {
     this.dragEvent.emit(this.normalizeEvent(e));
-  }
+  };
 
   mouseup = (e) => {
     this.unbind(document, 'mousemove', this.mousemove);
     this.unbind(document, 'mouseup', this.mouseup);
     this.releaseEvent.emit(this.normalizeEvent(e));
-  }
+  };
 
   touchstart = (e) => {
     this.bind(document, 'touchmove', this.touchmove);
@@ -63,13 +63,13 @@ export class ResizeDirective implements OnInit, OnDestroy {
     if (e.touches.length === 1) {
       this.pressEvent.emit(this.normalizeEvent(e));
     }
-  }
+  };
 
   touchmove = (e) => {
     if (e.touches.length === 1) {
       this.dragEvent.emit(this.normalizeEvent(e));
     }
-  }
+  };
 
   touchend = (e) => {
     this.unbind(document, 'touchmove', this.touchmove);
@@ -77,31 +77,31 @@ export class ResizeDirective implements OnInit, OnDestroy {
     if (e.touches.length === 0) {
       this.releaseEvent.emit(this.normalizeEvent(e));
     }
-  }
+  };
 
   // 返回常用位置信息
   normalizeEvent(e) {
     // 判断事件类型，用于计算位置坐标
     if (e.type.match(/touch/)) {
       return {
-          pageX: e.changedTouches[0].pageX,
-          pageY: e.changedTouches[0].pageY,
-          clientX: e.changedTouches[0].clientX,
-          clientY: e.changedTouches[0].clientY,
-          type: e.type,
-          originalEvent: e,
-          isTouch: true
-      };
-  }
-    return {
-        pageX: e.pageX,
-        pageY: e.pageY,
-        clientX: e.clientX,
-        clientY: e.clientY,
-        offsetX: e.offsetX,
-        offsetY: e.offsetY,
+        pageX: e.changedTouches[0].pageX,
+        pageY: e.changedTouches[0].pageY,
+        clientX: e.changedTouches[0].clientX,
+        clientY: e.changedTouches[0].clientY,
         type: e.type,
-        originalEvent: e
+        originalEvent: e,
+        isTouch: true
+      };
+    }
+    return {
+      pageX: e.pageX,
+      pageY: e.pageY,
+      clientX: e.clientX,
+      clientY: e.clientY,
+      offsetX: e.offsetX,
+      offsetY: e.offsetY,
+      type: e.type,
+      originalEvent: e
     };
-}
+  }
 }

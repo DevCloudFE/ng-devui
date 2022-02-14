@@ -195,7 +195,7 @@ export class StepsGuideDirective implements OnInit, OnDestroy {
     const resizeEvt = this.document.createEvent('Event');
     resizeEvt.initEvent('resize', true, true);
     window.dispatchEvent(resizeEvt);
-  }
+  };
 
   // 断开监听, 清空监听dom和实例
   destroyMutationObserver(destroyAll?: boolean) {

@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
+import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 @Component({
   selector: 'd-gantt-demo',
@@ -18,11 +18,11 @@ export class GanttDemoComponent implements OnInit, OnDestroy {
     {title: 'TS', language: 'typescript', code:  require('./table/table.component.ts?raw')},
     {title: 'SCSS', language: 'css', code:  require('./table/table.component.scss?raw')},
     {title: 'reset-position-HTML', language: 'typescript',
-    code: require('./table/reset-position/reset-position.component.html?raw')},
+      code: require('./table/reset-position/reset-position.component.html?raw')},
     {title: 'reset-position-TS', language: 'xml',
-    code: require('./table/reset-position/reset-position.component.ts?raw')},
+      code: require('./table/reset-position/reset-position.component.ts?raw')},
     {title: 'reset-position-CSS', language: 'typescript',
-    code: require('./table/reset-position/reset-position.component.scss?raw')},
+      code: require('./table/reset-position/reset-position.component.scss?raw')},
     {title: 'data', language: 'typescript', code:  require('./mock-data.ts?raw')}
   ];
 

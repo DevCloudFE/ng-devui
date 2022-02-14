@@ -57,7 +57,7 @@ export class ToggleMenuSearchComponent implements OnInit, AfterViewInit, OnDestr
   filterSubscription: Subscription;
 
   constructor(public el: ElementRef) {
-    this.formatter = (item) => (typeof item === 'object' ? item[this.filterKey] || '' : item + '' ? item.toString() : '');
+    this.formatter = (item) => (typeof item === 'object' ? item[this.filterKey] || '' : String(item) ? item.toString() : '');
   }
 
   ngOnInit() {

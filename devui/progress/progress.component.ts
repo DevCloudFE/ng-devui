@@ -33,12 +33,12 @@ export class ProgressComponent implements OnInit , OnChanges {
   ngOnInit(): void {
     if (this.isCircle) {
       this.setCircleProgress();
-   }
+    }
   }
   ngOnChanges(changes: SimpleChanges): void {
-   if (this.isCircle) {
+    if (this.isCircle) {
       this.setCircleProgress();
-   }
+    }
   }
   setCircleProgress(): void {
     if (!this.isCircle) {

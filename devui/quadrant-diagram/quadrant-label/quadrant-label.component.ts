@@ -23,17 +23,17 @@ export class QuadrantLabelComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes && changes['currentLabelSize']) {
       switch (this.currentLabelSize) {
-        case 'small':
-          this.currentCenterPoint = SMALL_LABEL_SIZE_CENTER_POINT;
-          this.currentLabelTemplate = this.smallLabelTemplate;
-          break;
-        case 'normal':
-          this.currentCenterPoint = NORMAL_LABEL_SIZE_CENTER_POINT;
-          this.currentLabelTemplate = this.normalLabelTemplate;
-          break;
-        default:
-          this.currentCenterPoint = LARGE_LABEL_SIZE_CENTER_POINT;
-          this.currentLabelTemplate = this.largeLabelTemplate;
+      case 'small':
+        this.currentCenterPoint = SMALL_LABEL_SIZE_CENTER_POINT;
+        this.currentLabelTemplate = this.smallLabelTemplate;
+        break;
+      case 'normal':
+        this.currentCenterPoint = NORMAL_LABEL_SIZE_CENTER_POINT;
+        this.currentLabelTemplate = this.normalLabelTemplate;
+        break;
+      default:
+        this.currentCenterPoint = LARGE_LABEL_SIZE_CENTER_POINT;
+        this.currentLabelTemplate = this.largeLabelTemplate;
       }
     }
   }

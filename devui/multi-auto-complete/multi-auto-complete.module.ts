@@ -10,7 +10,7 @@ import { MultiAutoCompleteComponent } from './multi-auto-complete.component';
   exports: [MultiAutoCompleteComponent],
   declarations: [MultiAutoCompleteComponent],
   providers: [],
-  
+
 })
 export class MultiAutoCompleteModule {
 }

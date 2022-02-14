@@ -2,13 +2,13 @@
   cdk-connected-overlay
   [cdkConnectedOverlayOrigin]="cdkConnectedOverlayOrigin"
   [cdkConnectedOverlayWidth]="originWidth"
-  [cdkConnectedOverlayPositions]="positions"
+  [cdkConnectedOverlayPositions]="pickerPositions"
   [cdkConnectedOverlayOpen]="isOpen"
   (backdropClick)="isOpen = false"
   (positionChange)="onPositionChange($event)"
 >
   <div
-    [@fadeInOut]="startAnimation ? timePickerPosition : 'void'"
+    [@fadeInOut]="startAnimation ? dropdownPosition : 'void'"
     (@fadeInOut.done)="animationEnd($event)"
     [@.disabled]="!showAnimation"
     class="devui-time-picker-wrapper devui-dropdown-menu"

@@ -3,13 +3,11 @@ import {
   OnInit,
   ViewChild
 } from '@angular/core';
-
 import { DataTableComponent } from 'ng-devui/data-table';
-
+import { cloneDeep } from 'lodash-es';
 import {
   editableOriginSource,
-  genderSource,
-  SourceType
+  genderSource
 } from '../mock-data';
 
 @Component({
@@ -19,7 +17,7 @@ import {
 export class EditableOldComponent implements OnInit {
   @ViewChild(DataTableComponent, { static: true }) dataTable: DataTableComponent;
   genderSource = genderSource;
-  basicDataSource: Array<SourceType> = JSON.parse(JSON.stringify(editableOriginSource.slice(0, 6)));
+  basicDataSource = cloneDeep(editableOriginSource.slice(0, 6));
   thisCellEditEnd(event) {
     console.log('cellEditEnd');
     console.log(event.rowItem);
@@ -33,7 +31,7 @@ export class EditableOldComponent implements OnInit {
       console.log('beforeCellEdit');
       resolve(undefined);
     });
-  }
+  };
 
   finishEdit() {
     this.dataTable.cancelEditingStatus();

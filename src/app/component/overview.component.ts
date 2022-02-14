@@ -1,9 +1,9 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { I18nService } from 'ng-devui/i18n';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { cloneDeep } from 'lodash-es';
-import { I18nService } from 'ng-devui/i18n';
 import { Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ComponentDataService } from './component.data.service';
@@ -45,7 +45,7 @@ export class ComponentsOverviewComponent implements OnInit, OnDestroy {
     private translate: TranslateService, private router: Router, private comDataService: ComponentDataService,
     private i18n: I18nService, @Inject(DOCUMENT) public doc: any
   ) {
-    this.comDataService.getComData().subscribe(value => this.componentsData = value);
+    this.comDataService.getComData().subscribe(value => { this.componentsData = value; });
     this.componentsDataDisplay = cloneDeep(this.componentsData);
     this.setI18n();
 
@@ -70,7 +70,7 @@ export class ComponentsOverviewComponent implements OnInit, OnDestroy {
 
   setI18n() {
     this.overviewText = this.translate.instant('public').overview;
-    this.tagList.map(tag => {tag.title = this.overviewText ? this.overviewText[tag.name] : ''; });
+    this.tagList.map(tag => { tag.title = this.overviewText ? this.overviewText[tag.name] : ''; });
     this.currentLang = this.i18n.getI18nText().locale;
   }
 
@@ -118,11 +118,11 @@ export class ComponentsOverviewComponent implements OnInit, OnDestroy {
     } else {
       this.darkMode = '';
     }
-  }
+  };
 
   searchComponent(event) {
     this.nowFilter = undefined;
-    this.tagList.map(tag => tag.checked = false);
+    this.tagList.map(tag => { tag.checked = false; });
     this.setComponentsSuggest(suggestScopeList);
     this.componentsDataDisplay = filterData(event, this.componentsData);
     this.componentsLooking = [];
@@ -146,7 +146,7 @@ export class ComponentsOverviewComponent implements OnInit, OnDestroy {
 
   filter(type) {
     const tagIndex = this.tagList.findIndex(tag => tag.name === type);
-    this.tagList.map(tag => tag.checked = false);
+    this.tagList.map(tag => { tag.checked = false; });
     if (this.nowFilter !== type) {
       this.nowFilter = type;
       this.tagList[tagIndex].checked = true;

@@ -6,7 +6,7 @@ import { Theme, ThemeService } from 'ng-devui/theme';
 import { CustomThemeService } from './custom-theme.service';
 
 @Component({
-  selector: 'app-theme-picker-customize',
+  selector: 'd-theme-picker-customize',
   templateUrl: './customize-theme.component.html',
   styleUrls: ['./customize-theme.component.scss'],
 })
@@ -75,13 +75,13 @@ export const myTheme: Theme = new Theme({
   id: 'customize-theme-${this.backgroundColor}',
   name: 'myTheme',
   data: ${JSON.stringify(
-      this.cts.genThemeData([
-        {
-          colorName: 'devui-brand',
-          color: this.backgroundColor
-        }
-      ], this.customDark, 'hsl'),
-      null, 2).replace(/"/g, '\'')},
+    this.cts.genThemeData([
+      {
+        colorName: 'devui-brand',
+        color: this.backgroundColor
+      }
+    ], this.customDark, 'hsl'),
+    null, 2).replace(/"/g, '\'')},
   isDark: ${this.customDark ? 'true' : 'false'}
 });
 `;
@@ -100,9 +100,9 @@ export const myTheme: Theme = new Theme({
     if (typeof window === 'undefined') {
       return;
     }
-    if (window.navigator && window.navigator.msSaveOrOpenBlob) { // IE11 support
+    if (window.navigator && window.navigator['msSaveOrOpenBlob']) { // IE11 support
       const blob = new Blob([data], { type: contentType });
-      window.navigator.msSaveOrOpenBlob(blob, filename);
+      window.navigator['msSaveOrOpenBlob'](blob, filename);
     } else {// other browsers
       if ('download' in this.document.createElement('a')) {
         const blob = new Blob([data], { type: contentType });
@@ -121,5 +121,5 @@ export const myTheme: Theme = new Theme({
         URL.revokeObjectURL(exportUrl);
       }
     }
-  }
+  };
 }

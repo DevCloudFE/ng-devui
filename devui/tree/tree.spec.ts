@@ -202,7 +202,7 @@ describe('tree', () => {
     ];
     fixture.detectChanges();
     const newNodeEl: HTMLElement = debugEl
-    .query(By.css('d-tree d-tree-nodes .devui-tree-node__content .devui-tree-node__title')).nativeElement;
+      .query(By.css('d-tree d-tree-nodes .devui-tree-node__content .devui-tree-node__title')).nativeElement;
     expect(newNodeEl.textContent).toEqual('New Node');
 
   });

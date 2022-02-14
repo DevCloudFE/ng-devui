@@ -70,7 +70,7 @@ import { TreeSelectVirtualScrollComponent } from './virtual-scroll/tree-select-v
     TreeSelectIconParentComponent,
     TreeSelectVirtualScrollComponent,
   ],
-  
+
   providers: [],
 })
 export class TreeSelectDemoModule {}

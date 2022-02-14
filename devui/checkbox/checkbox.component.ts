@@ -51,7 +51,7 @@ export class CheckBoxComponent implements ControlValueAccessor, OnChanges {
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
     private devConfigService: DevConfigService
-    ) {
+  ) {
     this.id = CheckBoxComponent.ID_SEED++;
   }
 

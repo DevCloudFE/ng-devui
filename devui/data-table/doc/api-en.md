@@ -432,3 +432,249 @@ colspan: number;
 }
 ```
 Note: Empty cells also need to be indicated. Set rowspan/colspan to 0 based on the content. If column width dragging and multi-row headers are used at the same time, attach the width to the column content. If the column width of the first row is incorrect, manually add the $width attribute for advancedHeader[rowNumber].
+
+#### Tree table with a large amount of data
+
+## virtual-scroll-tree-table parameter
+| Parameter name | Type | Default value | Description | Jump to Demo |
+| :---------------: | :-----------------: | :----- | :-------------------------------------------------------------------------------------------------------: |:-----------------:  |
+|    dataSource     |       `any[]`      | --     |                                        Required. It is a data source used to render table data.        |[Tree table with a large amount of data](demo#virtual-scroll-tree-table)|
+|  editOption |       `any[]`      | --     |                                        Optional. Used to configure the resource of the drop-down list box during modification.        |[Tree table with a large amount of data](demo#virtual-scroll-tree-table)|
+|     showRowIndex      |      `number`      | 10     |                                        Optional. Used to configure the initial number of rows to be displayed in a table.      |[Tree table with a large amount of data](demo#virtual-scroll-tree-table)|
+|     dataTableProperties      |      [`DataTableProperiesInterface`](#DataTableProperiesInterface)      | --     |         Optional. Support for original parameters of dataTable, Parameters defined in DataTableProperiesInterface can be supported.                           |[Tree table with a large amount of data](demo#virtual-scroll-tree-table)|
+
+## virtual-scroll-tree-table event
+| Event | Type | Description | Jump to Demo |
+| :-------------------: | :------------------------------------: | :------------------------------------------------------: | :------------------------------------------------------: |
+|        save         |  `EventEmitter<any>`  |               Returns the data after the operation is changed.               | [Tree table with a large amount of data](demo#virtual-scroll-tree-table) |
+
+## Customizing Templates and Operation Columns in d-column Mode
+
+``` xml
+<d-column field="category" header="Category" [order]="1"
+[width]="'70px'" [editable]="true" [extraOptions]="{editableTip:'btn'}">
+    <d-cell>
+    <ng-template let-rowItem="rowItem">
+        <span>{{ rowItem.category }}</span>
+    </ng-template>
+    </d-cell>
+    <d-cell-edit>
+    <ng-template let-rowItem="rowItem" let-column="column">
+        <div class="customized-editor edit-padding-fix">
+        <d-select
+            [options]="editOption.category"
+            autoFocus="true"
+            toggleOnFocus="true"
+            [appendToBody]="true"
+            [(ngModel)]="rowItem.category"
+            (ngModelChange)="onEditEnd(rowItem, 'categoryEdit')"
+        >
+        </d-select>
+        </div>
+    </ng-template>
+    </d-cell-edit>
+</d-column>
+
+<d-column field="operation" header="Operation" [width]="'130px'" [order]="6">
+    <d-cell>
+    <ng-template let-rowItem="rowItem">
+        <span>
+        <ng-container *ngIf="!isSearch">
+            <div *ngIf="rowItem.node_type" class="operationIcon icon-add-directory" title="Add Folder" (click)="addOperation(rowItem, 'addDataFolder')"></div>
+            <div *ngIf="rowItem.node_type" class="operationIcon icon-add-file" title="Add Node" (click)="addOperation(rowItem , 'addDataNode')"></div>
+            <div class="operationIcon icon-add-sub-node" title="Insert Folder" (click)="addOperation(rowItem, 'insertDataFolder')"></div>
+            <div class="operationIcon icon-add-sub-module" title="Insert Node" (click)="addOperation(rowItem, 'insertDataNode')"></div>
+
+            <div class="operationIcon icon-copy" title="Copy" (click)="copyAndCut(rowItem, 'copy')"></div>
+            <div class="operationIcon icon-cut" title="Cut" (click)="copyAndCut(rowItem, 'cut')"></div>
+            <div *ngIf="rowItem.node_type && saveCopyClickNode" class="operationIcon icon-copy-to-new" title="Paste" (click)="paste(rowItem, 'paste')"></div>
+            <div *ngIf="rowItem.node_id === saveCopyClickNode" class="operationIcon icon-add-manual-use-case" title="Paste to Root" (click)="paste(rowItem, 'toRoot')"></div>
+        </ng-container>
+        <div class="operationIcon icon-delete" title="delete" (click)="delete(rowItem)"></div>
+        </span>
+    </ng-template>
+    </d-cell>
+</d-column>
+```
+
+## Expanding or collapsing a tree table with a large amount of data
+
+Use @ViewChild to invoke the expand/collapse all function
+
+``` xml
+<d-button [disabled]="isSearch" *ngIf="!isOpenAll" class="golbalBtn allNodesExpand" icon="icon-expand-info" bsStyle="common" (click)="toggleAllNodesExpand(true)">
+Expand All</d-button>
+<d-button [disabled]="isSearch" *ngIf="isOpenAll" class="golbalBtn allNodesCollapse" icon="icon-collapse-info" bsStyle="common" (click)="toggleAllNodesExpand(false)">Fold All</d-button>
+```
+
+``` javascript
+@ViewChild('VirtualTableTree') VirtualTableTree: VirtualScrollTreeTableComponent;
+
+toggleAllNodesExpand(e) {
+    this.VirtualTableTree.toggleAllNodesExpand(e);
+    this.isOpenAll = e;
+}
+
+// Use @ViewChild to call toggleAllNodesExpand method in VirtualScrollTreeTableComponent
+```
+
+## Tree table search for a large amount of data
+
+Use @ViewChild to invoke the search function
+
+``` xml
+<div class="searchSelect">
+    <d-select [options]="searchSelectSource" [filterKey]="'name'" [(ngModel)]="searchAttr" (ngModelChange)="searchSelectChange()"> </d-select>
+</div>
+<d-search
+    style="width: 300px"
+    [placeholder]="'search'"
+    [isKeyupSearch]="true"
+    (searchFn)="search($event)"
+></d-search>
+```
+
+``` javascript
+@ViewChild('VirtualTableTree') VirtualTableTree: VirtualScrollTreeTableComponent;
+
+searchSelectChange() {
+  this.BigTableTree.searchAttr = this.searchAttr;
+  this.BigTableTree.searchSelectChange();
+}
+
+search(event) {
+  this.VirtualTableTree.search(event);
+  if(event) {
+    this.isSearch = true;
+  } else {
+    this.isSearch = false;
+  }
+}
+
+// Call the searchSelectChange and search methods in VirtualScrollTreeTableComponent using @ViewChild
+```
+
+## Adding a large amount of data to a tree table
+
+Use @ViewChild to invoke the add function
+
+``` xml
+// Global Add
+<d-button [disabled]="isAddGolbalData || isSearch" class="golbalBtn addNode" icon="icon-add-file" bsStyle="primary" (click)="addGolbal('node')">Add Node</d-button>
+<d-button [disabled]="isAddGolbalData || isSearch" class="golbalBtn addFolder" icon="icon-add-directory" bsStyle="common" (click)="addGolbal('folder')">Add Folder</d-button>
+
+// Add Operation Column
+<div *ngIf="rowItem.node_type" class="operationIcon icon-add-directory" title="Add Folder" (click)="addOperation(rowItem, 'addDataFolder')"></div>
+<div *ngIf="rowItem.node_type" class="operationIcon icon-add-file" title="Add Node" (click)="addOperation(rowItem , 'addDataNode')"></div>
+<div class="operationIcon icon-add-sub-node" title="Insert Folder" (click)="addOperation(rowItem, 'insertDataFolder')"></div>
+<div class="operationIcon icon-add-sub-module" title="Insert Node" (click)="addOperation(rowItem, 'insertDataNode')"></div>
+```
+
+``` javascript
+@ViewChild('VirtualTableTree') VirtualTableTree: VirtualScrollTreeTableComponent;
+
+// Users can customize data templates.
+addTemplate: any = {
+  "property": "addPro",
+  "description": "addDes",
+  "category": "Dynamic"
+}
+
+// Global Add
+addGolbal(status) {
+  this.isAddGolbalData = true;
+  this.VirtualTableTree.addGolbal(status, this.addTemplate);
+  this.isAddGolbalData = false;
+}
+
+// Call the addGolbal method in VirtualScrollTreeTableComponent using @ViewChild
+
+// Add Operation Column
+addOperation(rowItem, status) {
+  this.VirtualTableTree.addOperation(rowItem, status, this.addTemplate);
+}
+
+// Call the addOperation method in VirtualScrollTreeTableComponent using @ViewChild
+```
+
+## Copying and Pasting Tree Tables with a Large Amount of Data
+
+Use @ViewChild to invoke the copying and pasting function
+
+``` xml
+<div class="operationIcon icon-copy" title="Copy" (click)="copyAndCut(rowItem, 'copy')"></div>
+<div class="operationIcon icon-cut" title="Cut" (click)="copyAndCut(rowItem, 'cut')"></div>
+<div *ngIf="rowItem.node_type && saveCopyClickNode" class="operationIcon icon-copy-to-new" title="Paste" (click)="paste(rowItem, 'paste')"></div>
+<div *ngIf="rowItem.node_id === saveCopyClickNode" class="operationIcon icon-add-manual-use-case" title="Paste to Root" (click)="paste(rowItem, 'toRoot')"></div>
+```
+
+``` javascript
+@ViewChild('VirtualTableTree') VirtualTableTree: VirtualScrollTreeTableComponent;
+
+copyAndCut(rowItem, status) {
+  this.saveCopyClickNode = rowItem.node_id;
+  if(status === 'cut') {
+    this.isCut = true;
+  }
+  this.VirtualTableTree.copyAndCut(rowItem, status);
+}
+
+paste(rowItem, status) {
+  this.VirtualTableTree.paste(rowItem, status);
+  if(this.isCut) {
+    this.saveCopyClickNode = "";
+    this.isCut = false;
+  }
+}
+
+// Use @ViewChild to call copyAndCut and paste methods in VirtualScrollTreeTableComponent
+```
+
+## Removing a large amount of data from a tree table
+
+Use @ViewChild to invoke the delete function
+``` xml
+<div class="operationIcon icon-delete" title="delete" (click)="delete(rowItem)"></div>
+```
+
+``` javascript
+@ViewChild('VirtualTableTree') VirtualTableTree: VirtualScrollTreeTableComponent;
+
+delete(rowItem) {
+  this.VirtualTableTree.delete(rowItem);
+}
+
+// Call the delete method in VirtualScrollTreeTableComponent using @ViewChild
+```
+
+## DataTableProperiesInterface
+
+```ts
+export interface DataTableProperiesInterface {
+    maxWidth?: string;
+    maxHeight?: string;
+    size?: string;
+    rowHoveredHighlight?: boolean;
+    generalRowHoveredData?: boolean;
+    cssClass?: string;
+    tableWidth?: string;
+    fixHeader?: boolean;
+    colDraggable?: boolean;
+    colDropFreezeTo?: number;
+    tableWidthConfig?: TableWidthConfig[];
+    showSortIcon?: boolean;
+    showFilterIcon?: boolean;
+    showOperationArea?: boolean;
+    hideColumn?: string[];
+    pageAllChecked?: boolean;
+    onlyOneColumnSort?: boolean;
+    multiSort?: any;
+    resizeable?: boolean;
+    timeout?: number;
+    beforeCellEdit?: any;
+    headerBg?: boolean;
+    tableLayout?: string;
+    borderType?: string;
+    striped?: boolean;
+}
+```

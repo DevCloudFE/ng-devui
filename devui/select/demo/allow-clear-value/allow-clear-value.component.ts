@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'd-allow-clear-value',
-    templateUrl: './allow-clear-value.component.html',
-    styleUrls: ['./allow-clear-value.component.css']
+  selector: 'd-allow-clear-value',
+  templateUrl: './allow-clear-value.component.html',
+  styleUrls: ['./allow-clear-value.component.css']
 })
 export class AllowClearValueComponent {
   value;

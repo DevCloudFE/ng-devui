@@ -1,5 +1,6 @@
-import { ChangeDetectorRef, Component, ElementRef, EventEmitter, HostBinding, Input, NgZone, OnInit, Output } from '@angular/core';
-import { DataTableComponent } from './data-table.component';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, HostBinding, Inject, Input, NgZone, OnInit, Output } from '@angular/core';
+import { DATA_TABLE_ROW } from './data-table-row.token';
+import { DATA_TABLE } from './data-table.token';
 import { ForceUpdateReason } from './force-update-reason.model';
 import { DataTableColumnTmplComponent } from './tmpl/data-table-column-tmpl.component';
 
@@ -8,6 +9,9 @@ import { DataTableColumnTmplComponent } from './tmpl/data-table-column-tmpl.comp
   templateUrl: './data-table-row.component.html',
   styleUrls: ['./data-table-row.component.scss'],
   preserveWhitespaces: false,
+  providers: [
+    {provide: DATA_TABLE_ROW, useExisting: DataTableRowComponent}
+  ],
 })
 export class DataTableRowComponent implements OnInit {
   @Input() rowItem: any;
@@ -33,15 +37,15 @@ export class DataTableRowComponent implements OnInit {
   clickCount = 0; // 记录点击次数
   timeoutId; // 延时id
 
-  constructor(public dt: DataTableComponent, private changeDetectorRef: ChangeDetectorRef,
+  constructor(@Inject(DATA_TABLE) public dt: any, private changeDetectorRef: ChangeDetectorRef,
               private rowRef: ElementRef, private ngZone: NgZone) {
   }
 
   ngOnInit(): void {
     this.ngZone.runOutsideAngular(() => {
       this.rowRef.nativeElement.addEventListener(
-          'click',
-          this.onRowClick.bind(this)
+        'click',
+        this.onRowClick.bind(this)
       );
       this.rowRef.nativeElement.addEventListener(
         'dblclick',

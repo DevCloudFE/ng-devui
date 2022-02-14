@@ -29,5 +29,5 @@ export class HelperDownloadDemoComponent {
 
   downloadError = (response) => {
     this.downError = response;
-  }
+  };
 }

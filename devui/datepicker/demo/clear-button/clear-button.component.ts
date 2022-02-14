@@ -1,8 +1,6 @@
 import {
   ChangeDetectionStrategy,
-  Component,
-  HostBinding,
-  OnInit
+  Component, OnInit
 } from '@angular/core';
 import { SelectDateChangeReason } from 'ng-devui/datepicker';
 
@@ -19,8 +17,7 @@ export class DatepickerClearButtonComponent implements OnInit {
   ngOnInit() {
   }
   getValue(value) {
-    // tslint:disable-next-line:no-console
-    console.info(value);
+    console.log(value);
   }
   getDay(num: number, str = '-') {
     const day = new Date();

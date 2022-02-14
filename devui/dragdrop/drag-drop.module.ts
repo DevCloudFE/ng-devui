@@ -45,9 +45,9 @@ import { DragDropService } from './services/drag-drop.service';
     DragPreviewCloneDomRefComponent,
   ],
   providers: [
-      DragDropService
+    DragDropService
   ],
-  
+
 })
 export class DragDropModule {
 }

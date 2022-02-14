@@ -96,33 +96,33 @@ export class StepsGuideComponent implements OnInit, AfterViewInit, OnDestroy {
     let top = rect.top;
 
     switch (rect.placementPrimary) {
-      case 'top':
-        left = targetRect.left + this.triggerElement.clientWidth / 2 - this.elm.nativeElement.clientWidth / 2;
-        top = top + this.triggerElement.clientHeight / 2 - this.DOT_HORIZONTAL_MARGIN;
-        break;
-      case 'bottom':
-        left = targetRect.left + this.triggerElement.clientWidth / 2 - this.elm.nativeElement.clientWidth / 2;
-        top = top + this.DOT_HORIZONTAL_MARGIN / 2;
-        break;
-      case 'left':
-        left = left + this.triggerElement.clientWidth / 2 - this.DOT_HORIZONTAL_MARGIN;
-        top = top + this.triggerElement.clientHeight / 2 - this.DOT_VERTICAL_MARGIN;
-        break;
-      case 'right':
-        left = left - this.triggerElement.clientWidth / 2 + this.DOT_HORIZONTAL_MARGIN;
-        top = top + this.triggerElement.clientHeight / 2 - this.DOT_VERTICAL_MARGIN;
-        break;
-      default:
+    case 'top':
+      left = targetRect.left + this.triggerElement.clientWidth / 2 - this.elm.nativeElement.clientWidth / 2;
+      top = top + this.triggerElement.clientHeight / 2 - this.DOT_HORIZONTAL_MARGIN;
+      break;
+    case 'bottom':
+      left = targetRect.left + this.triggerElement.clientWidth / 2 - this.elm.nativeElement.clientWidth / 2;
+      top = top + this.DOT_HORIZONTAL_MARGIN / 2;
+      break;
+    case 'left':
+      left = left + this.triggerElement.clientWidth / 2 - this.DOT_HORIZONTAL_MARGIN;
+      top = top + this.triggerElement.clientHeight / 2 - this.DOT_VERTICAL_MARGIN;
+      break;
+    case 'right':
+      left = left - this.triggerElement.clientWidth / 2 + this.DOT_HORIZONTAL_MARGIN;
+      top = top + this.triggerElement.clientHeight / 2 - this.DOT_VERTICAL_MARGIN;
+      break;
+    default:
     }
 
     switch (rect.placementSecondary) {
-      case 'left':
-        left = targetRect.left;
-        break;
-      case 'right':
-        left = targetRect.left - this.elm.nativeElement.clientWidth + this.triggerElement.clientWidth;
-        break;
-      default:
+    case 'left':
+      left = targetRect.left;
+      break;
+    case 'right':
+      left = targetRect.left - this.elm.nativeElement.clientWidth + this.triggerElement.clientWidth;
+      break;
+    default:
     }
 
     this.renderer.setStyle(this.elm.nativeElement, 'left', `${left}px`);

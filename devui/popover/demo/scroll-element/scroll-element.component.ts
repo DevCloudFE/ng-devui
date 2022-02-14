@@ -1,11 +1,11 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, Inject } from '@angular/core';
 @Component({
-    selector: 'd-scroll-element',
-    templateUrl: './scroll-element.component.html'
+  selector: 'd-scroll-element',
+  templateUrl: './scroll-element.component.html'
 })
 export class ScrollElementComponent {
-    scrollElement: Element = this.doc.querySelector('.doc-viewer-container');
-    constructor(@Inject(DOCUMENT) private doc: any) {
-    }
+  scrollElement: Element = this.doc.querySelector('.doc-viewer-container');
+  constructor(@Inject(DOCUMENT) private doc: any) {
+  }
 }

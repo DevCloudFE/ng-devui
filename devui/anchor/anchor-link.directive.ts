@@ -62,7 +62,7 @@ export class AnchorLinkDirective implements OnInit, OnDestroy {
     } else {
       this.bindingAnchorTimer = setTimeout(this.bindAnchorAfterBoxReady, 500);
     }
-  }
+  };
 
   @HostListener('click')
   scrollToAnchor(activeChangeBy?: AnchorActiveChangeSource) {

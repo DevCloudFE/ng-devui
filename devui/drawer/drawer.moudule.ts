@@ -19,7 +19,7 @@ import { DrawerService } from './drawer.service';
     DrawerContentDirective
   ],
   providers: [DrawerService],
-  
+
 })
 export class DrawerModule {
 }

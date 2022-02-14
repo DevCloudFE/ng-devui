@@ -46,7 +46,7 @@ import { TwoBindingComponent } from './two-binding/two-binding.component';
     CallbackComponent,
     CustomComponent
   ],
-  
+
   providers: [],
 })
 export class ToggleDemoModule {}

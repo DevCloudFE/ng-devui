@@ -110,17 +110,17 @@ export class ModalComponent implements OnInit, OnDestroy {
       this.hide();
     }
     this.ignoreBackDropClick = false;
-  }
+  };
 
   modalMouseDown = ($event) => {
     this.mouseDwonEl = $event.target;
-  }
+  };
 
   modalMouseUp = ($event) => {
     if ($event.target !== this.mouseDwonEl) {
       this.ignoreBackDropClick = true;
     }
-  }
+  };
 
   hide() {
     this.canHideModel().then((canHide) => {
@@ -160,19 +160,19 @@ export class ModalComponent implements OnInit, OnDestroy {
   resolveTransformTranslate() {
     let autoOffsetYByPlacement;
     switch (this.placement) {
-      case 'top':
-        autoOffsetYByPlacement = '40px';
-        break;
-      case 'bottom':
-        autoOffsetYByPlacement = '-40px';
-        break;
-      case 'center':
-      default:
-        autoOffsetYByPlacement = '0';
-        break;
+    case 'top':
+      autoOffsetYByPlacement = '40px';
+      break;
+    case 'bottom':
+      autoOffsetYByPlacement = '-40px';
+      break;
+    case 'center':
+    default:
+      autoOffsetYByPlacement = '0';
+      break;
     }
-    const offsetX = !!this.offsetX ? this.offsetX : '0';
-    const offsetY = !!this.offsetY ? this.offsetY : autoOffsetYByPlacement;
+    const offsetX = this.offsetX ? this.offsetX : '0';
+    const offsetY = this.offsetY ? this.offsetY : autoOffsetYByPlacement;
     return 'translate(' + offsetX + ',' + offsetY + ')';
   }
   ngOnDestroy(): void {

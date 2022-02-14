@@ -47,6 +47,6 @@ import { MultiAutoCompleteDemoComponent } from './multi-auto-complete-demo.compo
     MultiAutoCompleteDemoDisabledComponent,
   ],
   providers: [],
-  
+
 })
 export class MultiAutoCompleteDemoModule {}

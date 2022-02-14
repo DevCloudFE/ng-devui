@@ -3,6 +3,16 @@
     <!--菜单类型-->
     <d-accordion-menu *ngIf="item[childrenKey] !== undefined" [item]="item" [deepth]="deepth" [parent]="parent"></d-accordion-menu>
     <!--非菜单类型-->
+    <d-accordion-list
+      *ngIf="item[childrenKey] !== undefined"
+      class="devui-accordion-submenu"
+      [deepth]="deepth + 1"
+      [data]="item[childrenKey]"
+      [parent]="item"
+      [@collapse]="item.open ? 'expanded' : 'collapsed'"
+      [@.disabled]="!animateState"
+    >
+    </d-accordion-list>
     <ng-container *ngIf="item[childrenKey] === undefined">
       <!--路由链接-->
       <d-accordion-item-routerlink

@@ -24,7 +24,7 @@ export class CustomComponent {
   }
 
   pad(num) {
-    return unshiftString(num + '', 2, '0');
+    return unshiftString(String(num), 2, '0');
   }
 
   choose(picker) {

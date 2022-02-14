@@ -208,7 +208,7 @@ class TestDragDropTreeComponent {
     return new Promise(resolve => {
       resolve(undefined);
     });
-  }
+  };
 
 }
 

@@ -34,12 +34,10 @@ export class ThemeGuideComponent implements OnInit, AfterViewInit {
       this.refreshView();
     });
   }
-  document: Document;
-
   get readMe() {
     return this._readMe;
   }
-
+  document: Document;
   @ViewChildren('documentation') documentation: QueryList<ElementRef>;
 
   constructor(private route: ActivatedRoute, private translate: TranslateService, @Inject(DOCUMENT) private doc: any) {

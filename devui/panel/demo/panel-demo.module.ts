@@ -39,6 +39,6 @@ import { TypeComponent } from './type/type.component';
   ],
   exports: [PanelDemoComponent],
   declarations: [PanelDemoComponent, BasicComponent, ConditionChangeComponent, TypeComponent, PanelDemoComponent],
-  
+
 })
 export class PanelDemoModule {}

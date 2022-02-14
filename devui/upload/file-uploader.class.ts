@@ -16,7 +16,7 @@ export class FileUploader {
     this.status = UploadStatus.preLoad;
   }
 
-  public send(uploadFiles?): Promise<{ file: File, response: any }> {
+  public send(uploadFiles?): Promise<{ file: File; response: any }> {
     return new Promise((resolve, reject) => {
       const {
         uri,

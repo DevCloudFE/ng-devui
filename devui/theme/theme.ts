@@ -5,7 +5,7 @@ export class Theme {
   name: string;
   cnName?: string;
   data: {
-    [cssVarName: string]: string
+    [cssVarName: string]: string;
   };
   extends?: ThemeId;
   isDark?: boolean;
@@ -14,22 +14,22 @@ export class Theme {
   extra?: {
     appendClass?: Array<string>;
     cssVariables?: {
-      [cssVarName: string]: string
+      [cssVarName: string]: string;
     };
     [prop: string]: any;
   } | any;
 
   constructor(theme: {
-    id: ThemeId,
-    name: string,
-    cnName?: string,
+    id: ThemeId;
+    name: string;
+    cnName?: string;
     data: {
-      [cssVarName: string]: string
-    },
-    extends?: ThemeId,
-    isDark?: boolean,
-    isPreview?: boolean,
-    isExtendable?: boolean
+      [cssVarName: string]: string;
+    };
+    extends?: ThemeId;
+    isDark?: boolean;
+    isPreview?: boolean;
+    isExtendable?: boolean;
   }) {
     this.id = theme.id;
     this.name = theme.name;

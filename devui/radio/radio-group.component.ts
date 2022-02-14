@@ -35,7 +35,7 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges, Aft
   /**
    * @deprecated Use direction to replace.
    */
-   @Input() set cssStyle(direction: any) {
+  @Input() set cssStyle(direction: any) {
     this.direction = direction;
   }
   @Input() direction: 'row' | 'column';

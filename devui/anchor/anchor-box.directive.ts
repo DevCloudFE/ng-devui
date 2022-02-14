@@ -13,8 +13,8 @@ export class AnchorBoxDirective implements IAnchorBox, OnDestroy {
   public activeChange = this.activeChangeSubject.asObservable();
   sub: Subscription;
   @Input() view: {
-    top?: number,
-    bottom?: number
+    top?: number;
+    bottom?: number;
   };
   @Input() defaultAnchor: string;
   @Input() scrollTarget: HTMLElement;
@@ -33,12 +33,12 @@ export class AnchorBoxDirective implements IAnchorBox, OnDestroy {
     this.anchorMap = {};
     this._anchorList = list;
     this._anchorList.toArray().forEach(targetAnchor => {
-        this.anchorMap[targetAnchor.anchor] = targetAnchor;
-        targetAnchor.boxElement = this;
-        this.sub.add(
-          targetAnchor.activeChangeSubject.pipe(filter(bool => !!bool)).subscribe(() => {
-            this.activeChangeSubject.next(targetAnchor);
-          }));
+      this.anchorMap[targetAnchor.anchor] = targetAnchor;
+      targetAnchor.boxElement = this;
+      this.sub.add(
+        targetAnchor.activeChangeSubject.pipe(filter(bool => !!bool)).subscribe(() => {
+          this.activeChangeSubject.next(targetAnchor);
+        }));
     });
     this.refreshAnchorMap.next();
   }
@@ -51,12 +51,12 @@ export class AnchorBoxDirective implements IAnchorBox, OnDestroy {
     this.anchorMap[anchorName].isActive = true;
     if (deactivateOtherAnchor) {
       Object.keys(this.anchorMap)
-            .filter(name => name !== anchorName)
-            .map(name => this.anchorMap[name])
-            .forEach(anchor => {
-              anchor.activeChangeBy = forceActiveSource;
-              anchor.isActive = false;
-            });
+        .filter(name => name !== anchorName)
+        .map(name => this.anchorMap[name])
+        .forEach(anchor => {
+          anchor.activeChangeBy = forceActiveSource;
+          anchor.isActive = false;
+        });
     }
   }
   ngOnDestroy() {

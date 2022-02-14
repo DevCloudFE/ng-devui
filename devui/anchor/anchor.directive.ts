@@ -97,7 +97,7 @@ export class AnchorDirective implements AfterViewInit, OnDestroy {
         this.scrollTimer = null;
       }, this.THROTTLE_DELAY);
     }
-  }
+  };
 
   checkActiveStatus = (activeChangeBy?: AnchorActiveChangeSource) => {
     if (this.boxElement.isScrollingToTarget) {
@@ -116,7 +116,7 @@ export class AnchorDirective implements AfterViewInit, OnDestroy {
     // 默认处理
     this.activeChangeBy = activeChangeBy || 'scroll';
     this.isActive = bottom > this.REACH_TOP_VISION_OFFSET && top < this.REACH_TOP_VISION_OFFSET;
-  }
+  };
 
   updateScrollListenTarget() {
     if (this.scrollListenTarget) {

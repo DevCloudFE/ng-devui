@@ -320,8 +320,8 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
     private devConfigService: DevConfigService,
     @Inject(DOCUMENT) private doc: any
   ) {
-    this.valueParser = item => (typeof item === 'object' ? item[this.filterKey] || '' : (item + '') ? item.toString() : '');
-    this.formatter = item => (typeof item === 'object' ? item[this.filterKey] || '' : (item + '') ? item.toString() : '');
+    this.valueParser = item => (typeof item === 'object' ? item[this.filterKey] || '' : (String(item)) ? item.toString() : '');
+    this.formatter = item => (typeof item === 'object' ? item[this.filterKey] || '' : (String(item)) ? item.toString() : '');
     this.document = this.doc;
   }
 
@@ -594,7 +594,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
     this.onChange(this.value);
     this.valueChange.emit(option);
     this.setChecked(this.value);
-  }
+  };
 
   updateCdkConnectedOverlayOrigin() {
     if (this.selectWrapper.nativeElement) {
@@ -634,17 +634,17 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
       if (!this.appendToBody) {
         let direction = '';
         switch (this.direction) {
-          case 'auto':
-            direction = this.isBottomRectEnough() ? 'bottom' : 'top';
-            break;
-          case 'down':
-            direction = 'bottom';
-            break;
-          case 'up':
-            direction = 'top';
-            break;
-          default:
-            direction = 'bottom';
+        case 'auto':
+          direction = this.isBottomRectEnough() ? 'bottom' : 'top';
+          break;
+        case 'down':
+          direction = 'bottom';
+          break;
+        case 'up':
+          direction = 'top';
+          break;
+        default:
+          direction = 'bottom';
         }
         this.popDirection = <any>direction;
       } else {
@@ -713,7 +713,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
       this.selectIndex = this.activeIndex ? this.activeIndex : -1;
       this.changeDetectorRef.detectChanges();
     }
-  }
+  };
 
   onEscKeyup($event) {
     if (this.isOpen) {
@@ -780,7 +780,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
     return this.extraConfig?.enableFocusFirstFilteredOption && this.multiple && this.availableOptions.length
       ? this.availableOptions[0]
       : this.availableOptions[this.selectIndex];
-  }
+  };
 
   removeItem(item, $event) {
     this.choose(item.option, item.id, $event);

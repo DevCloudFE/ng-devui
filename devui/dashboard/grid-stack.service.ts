@@ -4,6 +4,7 @@ import { DashboardComponent } from './dashboard.component';
 import { DashboardLibraryTrashDirective } from './widget-library/library-trash.directive';
 import { DashboardLibraryWidgetDirective } from './widget-library/library-widget.directive';
 
+/* eslint-disable */
 @Injectable()
 export class GridStackService {
   gridStack: GridStack;

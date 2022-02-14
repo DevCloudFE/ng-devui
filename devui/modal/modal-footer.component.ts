@@ -12,12 +12,12 @@ import { IButtonStyle } from 'ng-devui/button';
 })
 export class ModalFooterComponent {
   @Input() buttons: Array<{
-    id?: string,
-    cssClass?: IButtonStyle,
-    text: string,
-    handler: ($event: Event) => void,
-    btnwidth?: string,
-    autofocus?: boolean,
-    disabled: boolean
+    id?: string;
+    cssClass?: IButtonStyle;
+    text: string;
+    handler: ($event: Event) => void;
+    btnwidth?: string;
+    autofocus?: boolean;
+    disabled: boolean;
   }>;
 }

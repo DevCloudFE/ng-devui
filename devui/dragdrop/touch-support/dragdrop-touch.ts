@@ -26,7 +26,7 @@ export class DragDropTouch {
   lastTarget: HTMLElement;
   // touched draggble element
   dragSource: HTMLElement;
-  ptDown: {x: number, y: number};
+  ptDown: {x: number; y: number};
   isDragEnabled: boolean;
   isDropZone: boolean;
   pressHoldInterval;
@@ -53,8 +53,8 @@ export class DragDropTouch {
     if (typeof document !== 'undefined') {
       document.addEventListener('test', () => {}, {
         get passive() {
-            supportsPassive = true;
-            return true;
+          supportsPassive = true;
+          return true;
         }
       });
       // listen to touch events
@@ -95,7 +95,7 @@ export class DragDropTouch {
     if ('ontouchstart' in d  // normal mobile device
       || 'ontouchstart' in w
       || navigator.maxTouchPoints > 0
-      || navigator.msMaxTouchPoints > 0
+      || navigator['msMaxTouchPoints'] > 0
       || window['DocumentTouch'] && document instanceof window['DocumentTouch']) {
       bool = true;
     } else {
@@ -139,9 +139,9 @@ export class DragDropTouch {
       // raise double-click and prevent zooming
       if (Date.now() - this.lastClick < DragDropTouch.DBLCLICK) {
         if (this.dispatchEvent(e, 'dblclick', e.target)) {
-            e.preventDefault();
-            this.reset();
-            return;
+          e.preventDefault();
+          this.reset();
+          return;
         }
       }
       // clear all variables
@@ -153,91 +153,91 @@ export class DragDropTouch {
         this.ptDown = this.getPoint(e);
         this.lastTouch = e;
         if (DragDropTouch.IS_PRESS_HOLD_MODE) {
-            this.pressHoldInterval = setTimeout(() => {
-                this.bindTouchmoveTouchend(e);
-                this.isDragEnabled = true;
-                this.touchmove(e);
-            }, DragDropTouch.PRESS_HOLD_AWAIT);
-        } else {
-            e.preventDefault();
+          this.pressHoldInterval = setTimeout(() => {
             this.bindTouchmoveTouchend(e);
+            this.isDragEnabled = true;
+            this.touchmove(e);
+          }, DragDropTouch.PRESS_HOLD_AWAIT);
+        } else {
+          e.preventDefault();
+          this.bindTouchmoveTouchend(e);
         }
       }
     }
-  }
+  };
   touchmoveOnDocument = (e) => {
     if (this.shouldCancelPressHoldMove(e)) {
       this.reset();
       return;
     }
-  }
+  };
   touchmove = (e: TouchEvent) => {
     if (this.shouldCancelPressHoldMove(e)) {
       this.reset();
       return;
     }
     if (this.shouldHandleMove(e) || this.shouldHandlePressHoldMove(e)) {
-        const target = this.getTarget(e);
-        // start dragging
-        if (this.dragSource && !this.img && this.shouldStartDragging(e)) {
-            this.dispatchEvent(e, 'dragstart', this.dragSource);
-            this.createImage(e);
+      const target = this.getTarget(e);
+      // start dragging
+      if (this.dragSource && !this.img && this.shouldStartDragging(e)) {
+        this.dispatchEvent(e, 'dragstart', this.dragSource);
+        this.createImage(e);
+      }
+      // continue dragging
+      if (this.img) {
+        this.clearDragoverInterval();
+        this.lastTouch = e;
+        e.preventDefault(); // prevent scrolling
+        if (target !== this.lastTarget) {
+          // according to drag drop implementation of the browser, dragenterB is supposed to fired before dragleaveA
+          this.dispatchEvent(e, 'dragenter', target);
+          this.dispatchEvent(this.lastTouch, 'dragleave', this.lastTarget);
+          this.lastTarget = target;
         }
-        // continue dragging
-        if (this.img) {
-            this.clearDragoverInterval();
-            this.lastTouch = e;
-            e.preventDefault(); // prevent scrolling
-            if (target !== this.lastTarget) {
-                // according to drag drop implementation of the browser, dragenterB is supposed to fired before dragleaveA
-                this.dispatchEvent(e, 'dragenter', target);
-                this.dispatchEvent(this.lastTouch, 'dragleave', this.lastTarget);
-                this.lastTarget = target;
-            }
-            this.moveImage(e);
-            this.isDropZone = this.dispatchEvent(e, 'dragover', target);
-            // should continue dispatch dragover event when touch position stay still
-            this.setDragoverInterval(e);
-        }
+        this.moveImage(e);
+        this.isDropZone = this.dispatchEvent(e, 'dragover', target);
+        // should continue dispatch dragover event when touch position stay still
+        this.setDragoverInterval(e);
+      }
     }
-  }
+  };
   touchendOnDocument = (e) => {
     if (this.shouldHandle(e)) {
       if (!this.img) {
-          this.dragSource = null;
-          this.lastClick = Date.now();
+        this.dragSource = null;
+        this.lastClick = Date.now();
       }
       // finish dragging
       this.destroyImage();
       if (this.dragSource) {
-          this.reset();
+        this.reset();
       }
     }
-  }
+  };
   touchend = (e) => {
     if (this.shouldHandle(e)) {
       // user clicked the element but didn't drag, so clear the source and simulate a click
       if (!this.img) {
-          this.dragSource = null;
-          // browser will dispatch click event after trigger touchend, since touchstart didn't preventDefault
-          // this._dispatchEvent(this._lastTouch, 'click', e.target);
-          this.lastClick = Date.now();
+        this.dragSource = null;
+        // browser will dispatch click event after trigger touchend, since touchstart didn't preventDefault
+        // this._dispatchEvent(this._lastTouch, 'click', e.target);
+        this.lastClick = Date.now();
       }
       // finish dragging
       this.destroyImage();
       if (this.dragSource) {
-          if (e.type.indexOf('cancel') < 0 && this.isDropZone) {
-              this.dispatchEvent(this.lastTouch, 'drop', this.lastTarget);
-          }
-          this.dispatchEvent(this.lastTouch, 'dragend', this.dragSource);
-          this.reset();
+        if (e.type.indexOf('cancel') < 0 && this.isDropZone) {
+          this.dispatchEvent(this.lastTouch, 'drop', this.lastTarget);
+        }
+        this.dispatchEvent(this.lastTouch, 'dragend', this.dragSource);
+        this.reset();
       }
     }
-  }
+  };
   // ** utilities
   // ignore events that have been handled or that involve more than one touch
   shouldHandle(e) {
-     return e &&
+    return e &&
     !e.defaultPrevented &&
     e.touches && e.touches.length < 2;
   }
@@ -260,7 +260,7 @@ export class DragDropTouch {
     const dragHandleSelector = this.getDragHandle();
     // start dragging when mouseover element matches drag handler selector
     if (dragHandleSelector && !this.matchSelector(e.target, dragHandleSelector)) {
-        return false;
+      return false;
     }
     // start dragging when specified delta is detected
     const delta = this.getDelta(e);
@@ -335,25 +335,25 @@ export class DragDropTouch {
   }
   // create drag image from source element
   createImage(e) {
-     // just in case...
-     if (this.img) {
+    // just in case...
+    if (this.img) {
       this.destroyImage();
     }
     // create drag image from custom element or drag source
-     const src = this.imgCustom || this.dragSource;
-     this.img = src.cloneNode(true);
-     this.copyStyle(src, this.img);
-     this.img.style.top = this.img.style.left = '-9999px';
+    const src = this.imgCustom || this.dragSource;
+    this.img = src.cloneNode(true);
+    this.copyStyle(src, this.img);
+    this.img.style.top = this.img.style.left = '-9999px';
     // if creating from drag source, apply offset and opacity
-     if (!this.imgCustom) {
-        const rc = src.getBoundingClientRect();
-        const pt = this.getPoint(e);
-        this.imgOffset = { x: pt.x - rc.left, y: pt.y - rc.top };
-        this.img.style.opacity = DragDropTouch.OPACITY.toString();
+    if (!this.imgCustom) {
+      const rc = src.getBoundingClientRect();
+      const pt = this.getPoint(e);
+      this.imgOffset = { x: pt.x - rc.left, y: pt.y - rc.top };
+      this.img.style.opacity = DragDropTouch.OPACITY.toString();
     }
     // add image to document
-     this.moveImage(e);
-     document.body.appendChild(this.img);
+    this.moveImage(e);
+    document.body.appendChild(this.img);
   }
   // dispose of drag image element
   destroyImage() {
@@ -392,11 +392,11 @@ export class DragDropTouch {
     });
     // copy canvas content
     if (src instanceof HTMLCanvasElement) {
-        const canSrc = src;
-        const canDst = dst;
-        canDst.width = canSrc.width;
-        canDst.height = canSrc.height;
-        canDst.getContext('2d').drawImage(canSrc, 0, 0);
+      const canSrc = src;
+      const canDst = dst;
+      canDst.width = canSrc.width;
+      canDst.height = canSrc.height;
+      canDst.getContext('2d').drawImage(canSrc, 0, 0);
     }
     // copy canvas content for nested canvas element
     const srcCanvases = src.querySelectorAll('canvas');
@@ -413,7 +413,7 @@ export class DragDropTouch {
     for (let i = 0; i < cs.length; i++) {
       const key = cs[i];
       if (key.indexOf('transition') < 0) {
-          dst.style[key] = cs[key];
+        dst.style[key] = cs[key];
       }
     }
     dst.style.pointerEvents = 'none';
@@ -457,13 +457,13 @@ export class DragDropTouch {
   // repeat dispatch dragover event when touch point stay still
   setDragoverInterval(e) {
     this.dragoverTimer = setInterval(() => {
-        const target = this.getTarget(e);
-        if (target !== this.lastTarget) {
-            this.dispatchEvent(e, 'dragenter', target);
-            this.dispatchEvent(e, 'dragleave', this.lastTarget);
-            this.lastTarget = target;
-        }
-        this.isDropZone = this.dispatchEvent(e, 'dragover', target);
+      const target = this.getTarget(e);
+      if (target !== this.lastTarget) {
+        this.dispatchEvent(e, 'dragenter', target);
+        this.dispatchEvent(e, 'dragleave', this.lastTarget);
+        this.lastTarget = target;
+      }
+      this.isDropZone = this.dispatchEvent(e, 'dragover', target);
     }, DragDropTouch.DRAG_OVER_TIME);
   }
   clearDragoverInterval() {
@@ -474,6 +474,7 @@ export class DragDropTouch {
   }
 
 }
+/* eslint-disable-next-line @typescript-eslint/no-namespace */
 export namespace DragDropTouch {
   /**
      * Object used to hold the data that is being dragged during drag and drop operations.
@@ -536,9 +537,9 @@ export namespace DragDropTouch {
        */
     clearData (type) {
       if (type !== null) {
-          delete this._data[type];
+        delete this._data[type];
       } else {
-          this._data = null;
+        this._data = null;
       }
     }
     /**
@@ -571,9 +572,9 @@ export namespace DragDropTouch {
      * @param offsetY The vertical offset within the image.
      */
     setDragImage (img, offsetX, offsetY) {
-        const ddt = DragDropTouch.getInstance();
-        ddt.imgCustom = img;
-        ddt.imgOffset = { x: offsetX, y: offsetY };
+      const ddt = DragDropTouch.getInstance();
+      ddt.imgCustom = img;
+      ddt.imgOffset = { x: offsetX, y: offsetY };
     }
   }
 

@@ -192,7 +192,7 @@ export * from './version';
     DatepickerProModule,
     MentionModule,
     NavSpriteModule,
-    ReadTipModule,
+    ReadTipModule
   ],
   declarations: [],
 })

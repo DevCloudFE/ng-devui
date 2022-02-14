@@ -103,12 +103,12 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy,
   @Input() showPageSelector = true;
   @Input() haveConfigMenu = false;
   @Input() autoFixPageIndex = true;
-   /**
+  /**
    * 是否自动隐藏
    */
   @Input() autoHide = false;
   minPageSizeOptions: number;
-  litePaginatorIndex: { value: number, label: string } | null;
+  litePaginatorIndex: { value: number; label: string } | null;
   litePaginatorOptions: any[] = [];
   private litePaginatorOptionsLengthCache = 0;
   showConfig = false;
@@ -205,10 +205,8 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy,
   onPageIndexChange(pageIndex: number) {
     if (this.pageIndex !== pageIndex) {
       if (this.lite) {
-        this.litePaginatorIndex = Object.assign({}, {
-          value: this.pageIndex,
-          label: `${this.pageIndex}/${this.totalPage}`
-        });
+        this.litePaginatorIndex = { value: this.pageIndex,
+          label: `${this.pageIndex}/${this.totalPage}`};
       }
       this.pageIndexChange.emit(pageIndex);
     }
@@ -302,10 +300,8 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy,
         };
       });
     }
-    this.litePaginatorIndex = Object.assign({}, {
-      value: this.pageIndex,
-      label: `${this.pageIndex}/${this.totalPage}`
-    });
+    this.litePaginatorIndex = { value: this.pageIndex,
+      label: `${this.pageIndex}/${this.totalPage}`};
   }
 
   private adjustPaginatorWidth() {

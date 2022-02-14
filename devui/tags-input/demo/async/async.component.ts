@@ -33,7 +33,7 @@ export class TagsInputDemoAsyncComponent implements OnInit {
 
   customCheck = (newtag: string) => {
     return true;
-  }
+  };
 
   getTagValue(value) {
     console.log(value);

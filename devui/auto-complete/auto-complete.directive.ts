@@ -91,7 +91,7 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
   @Output() selectValue = new EventEmitter<any>();
   @Output() transInputFocusEmit = new EventEmitter<any>(); // input状态传给父组件函数
   @Output() changeDropDownStatus = new EventEmitter<any>();
-  KEYBOARD_EVENT_NOT_REFRESH = ['escape', 'enter', 'arrowup', 'arrowdown', /*ie 10 edge */ 'esc', 'up', 'down'];
+  KEYBOARD_EVENT_NOT_REFRESH = ['escape', 'enter', 'arrowup', 'arrowdown', /* ie 10 edge */ 'esc', 'up', 'down'];
   popupRef: ComponentRef<AutoCompletePopupComponent>;
 
   private destroy$ = new Subject();
@@ -179,14 +179,14 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
       this.popupRef.instance.overlayPositions =
         this.appendToBodyDirections && this.appendToBodyDirections.length > 0
           ? this.appendToBodyDirections
-              .map((position) => {
-                if (typeof position === 'string') {
-                  return AppendToBodyDirectionsConfig[position];
-                } else {
-                  return position;
-                }
-              })
-              .filter((position) => position !== undefined)
+            .map((position) => {
+              if (typeof position === 'string') {
+                return AppendToBodyDirectionsConfig[position];
+              } else {
+                return position;
+              }
+            })
+            .filter((position) => position !== undefined)
           : undefined;
     }
   }

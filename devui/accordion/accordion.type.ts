@@ -23,7 +23,7 @@ interface IAccordionLinkable {
 }
 export interface AccordionBaseItem
   extends AccordionBase,
-    IAccordionActiveable {
+  IAccordionActiveable {
 }
 export interface AccordionBaseMenu<T>
   extends AccordionBase,
@@ -37,9 +37,9 @@ export interface AccordionLinkableItem
 }
 export interface AccordionMenuItem
   extends AccordionBase,
-    IAccordionActiveable,
-    IAccordionFoldable<AccordionMenuItem>,
-    IAccordionLinkable {
+  IAccordionActiveable,
+  IAccordionFoldable<AccordionMenuItem>,
+  IAccordionLinkable {
 }
 
 export type AccordionMenuType = Array<AccordionMenuItem>;

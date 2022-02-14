@@ -52,9 +52,9 @@ export class ToggleComponent implements ControlValueAccessor {
   @Output() change = new EventEmitter<boolean>();
 
   private onTouchedCallback = () => {
-  }
+  };
   private onChangeCallback = (v: any) => {
-  }
+  };
 
   @HostListener('click')
   onToggle() {

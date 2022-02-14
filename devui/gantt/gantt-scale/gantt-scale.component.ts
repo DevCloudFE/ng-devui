@@ -147,20 +147,20 @@ export class GanttScaleComponent implements OnInit, OnChanges, OnDestroy {
     };
 
     const dayOfMonth = date.getDate();
-    dateInfo.dayOfMonthLabel = dayOfMonth + '';
+    dateInfo.dayOfMonthLabel = String(dayOfMonth);
     if (dayOfMonth === 1) {
       dateInfo.monthStart = true;
     }
 
     const dayOfWeek = date.getDay();
-    dateInfo.dayOfWeekLabel = dayOfWeek + '';
+    dateInfo.dayOfWeekLabel = String(dayOfWeek);
     if (dayOfWeek === 6) {
       dateInfo.weekend = true;
     }
     const month = date.getMonth() + 1;
-    dateInfo.monthLabel = month + '';
+    dateInfo.monthLabel = String(month);
     const year = date.getFullYear();
-    dateInfo.yearLabel = year + '';
+    dateInfo.yearLabel = String(year);
     if (this.ganttService.isSomeDate(date, new Date())) {
       dateInfo.today = true;
     }

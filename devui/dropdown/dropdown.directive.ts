@@ -107,9 +107,9 @@ export class DropDownDirective implements OnDestroy, OnChanges, AfterContentInit
     private devConfigService: DevConfigService,
     @Optional() @SkipSelf() public parentDropdown: DropDownDirective,
     @Inject(DOCUMENT) private doc: any
-    ) {
-      this.document = this.doc;
-    }
+  ) {
+    this.document = this.doc;
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.hasOwnProperty('trigger')) {
@@ -127,6 +127,7 @@ export class DropDownDirective implements OnDestroy, OnChanges, AfterContentInit
   }
 
   public toggle(): boolean {
+    // eslint-disable-next-line no-return-assign
     return this.isOpen = !this.isOpen;
   }
 
@@ -147,7 +148,7 @@ export class DropDownDirective implements OnDestroy, OnChanges, AfterContentInit
   }
 
   subscribeHoverAction(observable: Observable<boolean>): void {
-    if (!!!this.hoverSubscription) {
+    if (!this.hoverSubscription) {
       this.hoverSubscription = observable.pipe(
         debounceTime(50),
       ).subscribe(isOpen => {

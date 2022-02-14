@@ -36,7 +36,7 @@ import { ProgressDemoComponent } from './progress-demo.component';
     BasicComponent,
     CircleComponent,
   ],
-  
+
 })
 export class ProgressDemoModule {
 }

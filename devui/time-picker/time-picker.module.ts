@@ -21,6 +21,6 @@ import { TimePickerComponent } from './time-picker.component';
     TimePickerComponent
   ],
   providers: [],
-  
+
 })
 export class TimePickerModule {}

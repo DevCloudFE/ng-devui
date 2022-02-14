@@ -66,7 +66,7 @@ describe('tooltip', () => {
         }
       }));
 
-      //  TODO: mouseleave/blur状态下，元素已destroy且不可见，但单元测试仍能检测到元素，单元测试与实际情况有差异，暂时不做测试
+      // TODO:mouseleave/blur状态下，元素已destroy且不可见，但单元测试仍能检测到元素，单元测试与实际情况有差异，暂时不做测试
 
     });
   });

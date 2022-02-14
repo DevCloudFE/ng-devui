@@ -89,7 +89,6 @@ export class CategorySearchComponent implements OnInit, OnChanges, OnDestroy, Af
   scrollToTailFlag = true; // 是否在更新标签内容后滚动至输入框的开关
   DROPDOWN_ANIMATION_TIMEOUT = 200; // 下拉动画延迟
   document: Document;
-
   get showFilterNameClear() {
     return typeof this.filterName === 'string' && this.filterName.length > 0;
   }
@@ -180,7 +179,7 @@ export class CategorySearchComponent implements OnInit, OnChanges, OnDestroy, Af
       this.searchKeyCache = this.searchKey;
     }
     this.searchKey = '';
-    setTimeout(() => (this.enterSearch = false), 300);
+    setTimeout(() => {this.enterSearch = false;}, 300);
     return result;
   }
 
@@ -224,7 +223,7 @@ export class CategorySearchComponent implements OnInit, OnChanges, OnDestroy, Af
 
   setValue(data) {
     if (data && Array.isArray(data) && data.length) {
-      data.forEach((item) => (item = this.initCategoryItem(item)));
+      data.forEach((item) => {item = this.initCategoryItem(item);});
     }
   }
 
@@ -630,23 +629,25 @@ export class CategorySearchComponent implements OnInit, OnChanges, OnDestroy, Af
 
   handleAccordingType(type, options) {
     switch (type) {
-      case 'treeSelect':
-        options = cloneDeep(options);
-        break;
-      case 'textInput':
-        setTimeout(() => {
-          const inputDom: HTMLElement = this.document.querySelector('.devui-category-search-type-text-input');
-          inputDom?.focus();
-        }, this.DROPDOWN_ANIMATION_TIMEOUT);
-        break;
-      default:
+    case 'treeSelect':
+      options = cloneDeep(options);
+      break;
+    case 'textInput':
+      setTimeout(() => {
+        const inputDom: HTMLElement = this.document.querySelector('.devui-category-search-type-text-input');
+        if (inputDom) {
+          inputDom.focus();
+        }
+      }, this.DROPDOWN_ANIMATION_TIMEOUT);
+      break;
+    default:
     }
   }
 
   // label 合并名称和颜色字段赋给tag，待[tag]支持传入对象后可移除
   mergeToLabel(obj) {
     if (obj && obj.options && Array.isArray(obj.options)) {
-      obj.options.map((item) => (item.$label = `${item[obj.filterKey || 'label']}_${item[obj.colorKey || 'color']}`));
+      obj.options.map((item) => {item.$label = `${item[obj.filterKey || 'label']}_${item[obj.colorKey || 'color']}`;});
     }
     return obj;
   }

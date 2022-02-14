@@ -1,20 +1,20 @@
 import {
-    Directive,
-    ViewContainerRef
+  Directive,
+  ViewContainerRef
 } from '@angular/core';
 
 @Directive({
-    selector: '[dModalContentHost]',
+  selector: '[dModalContentHost]',
 })
 export class ModalContentDirective {
-    constructor(public viewContainerRef: ViewContainerRef) {
-    }
+  constructor(public viewContainerRef: ViewContainerRef) {
+  }
 }
 
 @Directive({
-    selector: '[dModalContainerHost]',
+  selector: '[dModalContainerHost]',
 })
 export class ModalContainerDirective {
-    constructor(public viewContainerRef: ViewContainerRef) {
-    }
+  constructor(public viewContainerRef: ViewContainerRef) {
+  }
 }

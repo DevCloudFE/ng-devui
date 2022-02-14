@@ -1,7 +1,7 @@
 const path = require('path');
 const ts = require('typescript');
 const AngularCompilerPlugin = require('@ngtools/webpack').AngularWebpackPlugin;
-const readConfiguration = require('@angular/compiler-cli').readConfiguration;
+const { createSyncFn  } = require('synckit');
 const ES6_ONLY_THIRD_PARTY_LIST = require('./es6-only-third-party-list');
 
 function getAngularCompilerTsConfigPath(config) {
@@ -11,7 +11,9 @@ function getAngularCompilerTsConfigPath(config) {
   }
   return undefined;
 }
+
 function getTsconfigCompileTarget(tsconfigPath) {
+  const readConfiguration = createSyncFn(require.resolve('../worker'));
   const {target} = readConfiguration(path.resolve(tsconfigPath)).options;
   return target;
 }

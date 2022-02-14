@@ -23,7 +23,6 @@ interface ExtraSetConfig {
 }
 
 @Component({
-  // tslint:disable-next-line:component-selector
   selector: 'd-popper-component',
   templateUrl: './popper.component.html',
   styleUrls: [`./popper.component.scss`],
@@ -37,7 +36,7 @@ export class PopperComponent implements AfterViewInit, OnDestroy {
   @Input() set open(value) {
     if (this._isOpen === value) { return; }
     this.animate = true;
-    if (!!value) {
+    if (value) {
       this.show();
     } else {
       this.close();
@@ -82,11 +81,11 @@ export class PopperComponent implements AfterViewInit, OnDestroy {
     } else if (!this.appendTo && this.open && !this.el.nativeElement.contains($event.target)) {
       this.open = false;
     }
-  }
+  };
   private blockEvent = ($event: MouseEvent) => {
     $event.preventDefault();
     $event.stopPropagation();
-  }
+  };
 
   constructor(protected el: ElementRef, protected renderer: Renderer2, protected ngZone: NgZone,
               protected changeDetectorRef: ChangeDetectorRef, @Inject(DOCUMENT) private doc: any) {
@@ -95,7 +94,7 @@ export class PopperComponent implements AfterViewInit, OnDestroy {
 
   show() {
     // Append to selector or original parent.
-    if (!!this.appendTo) {
+    if (this.appendTo) {
       if (this.fluidPopper) {
         let popperWidth = this.popperActivator.nativeElement && this.popperActivator.nativeElement.offsetWidth;
         if (this.extraConfig && this.extraConfig.extraWidth) {
@@ -207,7 +206,7 @@ export class PopperComponent implements AfterViewInit, OnDestroy {
       this.renderer.setStyle(optionsContainer, 'transform',
         optionsContainer.style.transform + (this.open ? ' scale3d(1, 1, 1)' : ' scale3d(1, 0.8, 1)') + ' perspective(1px)');
     }
-  }
+  };
 
   private updateContainerTransitionDirection(flipped: boolean) {
     const direction = flipped ? 'top' : 'bottom';
@@ -256,7 +255,7 @@ export class PopperComponent implements AfterViewInit, OnDestroy {
           },
         },
       ],
-      strategy: !!this.appendTo ? 'fixed' : 'absolute',
+      strategy: this.appendTo ? 'fixed' : 'absolute',
     });
   }
 

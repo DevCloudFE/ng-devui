@@ -72,7 +72,7 @@ import { WithoutAnimationComponent } from './without-animation/without-animation
     OperationForAllNodesComponent,
     WithoutAnimationComponent
   ],
-  
+
 })
 export class TreeDemoModule {
 }

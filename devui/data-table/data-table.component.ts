@@ -1,9 +1,12 @@
-import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
+﻿import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { DOCUMENT } from '@angular/common';
 import {
-  AfterContentInit, AfterViewInit, ChangeDetectorRef, Component, ContentChild, ContentChildren, ElementRef,
-  EventEmitter, HostBinding, Inject, Input, NgZone, OnChanges, OnDestroy, OnInit, Output, QueryList, Renderer2,
-  SimpleChanges, TemplateRef, ViewChild
+  AfterContentInit, AfterViewInit, ChangeDetectorRef, Component,
+  ContentChild, ContentChildren, ElementRef, EventEmitter,
+  HostBinding, Inject, Input, NgZone,
+  OnChanges, OnDestroy, OnInit, Output,
+  QueryList, Renderer2, SimpleChanges, TemplateRef,
+  ViewChild
 } from '@angular/core';
 import { merge, Subscription } from 'rxjs';
 import { switchMap, takeUntil } from 'rxjs/operators';
@@ -12,6 +15,7 @@ import {
   RowSelectedEventArg, SortEventArg, TableCheckOptions, TableCheckStatusArg,
   TableExpandConfig, TableWidthConfig
 } from './data-table.model';
+import { DATA_TABLE } from './data-table.token';
 import { TableTbodyComponent } from './table/body/tbody.component';
 import { TableThComponent } from './table/head/th/th.component';
 import { TableTheadComponent } from './table/head/thead.component';
@@ -27,6 +31,9 @@ import { DataTableColumnTmplComponent } from './tmpl/data-table-column-tmpl.comp
   // changeDetection: ChangeDetectionStrategy.OnPush,
   exportAs: 'dataTable',
   preserveWhitespaces: false,
+  providers: [
+    {provide: DATA_TABLE, useExisting: DataTableComponent}
+  ],
 })
 export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterContentInit, AfterViewInit {
   /**
@@ -133,7 +140,7 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
    * 【可选】是否显示排序未激活图标，默认不显示,
    */
   @Input() showSortIcon = false;
-    /**
+  /**
    * 【可选】是否显示筛选未激活图标，默认不显示,
    */
   @Input() showFilterIcon = false;
@@ -298,7 +305,7 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
   displayDataSource: any[];
   headertoggleTableSubscription: Subscription;
   headerCheckStatusSubscription: Subscription;
-  searchQueryChange = new EventEmitter<{ [key: string]: any; }>();
+  searchQueryChange = new EventEmitter<{ [key: string]: any }>();
   halfChecked = false;
   childrenTableOpen: boolean;
   private scrollY = 0;
@@ -318,7 +325,8 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
   }
 
   @Input() set dataSource(dataSource: any[]) {
-    if (null === dataSource || !dataSource) {
+    if (dataSource === null || !dataSource) {
+    /* eslint-disable-next-line no-param-reassign */
       dataSource = [];
     }
     this._dataSource = dataSource;
@@ -371,8 +379,8 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
     private renderer: Renderer2,
     private cdr: ChangeDetectorRef,
     @Inject(DOCUMENT) private doc: any) {
-      this.onDocumentClickListen = this.onDocumentClick.bind(this);
-      this.document = this.doc;
+    this.onDocumentClickListen = this.onDocumentClick.bind(this);
+    this.document = this.doc;
   }
 
   initVirtualBodyHeight() {
@@ -623,7 +631,7 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
     if (data.children) {
       return data.children.some(this.hasChecked);
     }
-  }
+  };
 
   // 判断数据是否存在未选中状态
   private hasUnChecked = (data) => {
@@ -633,7 +641,7 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
     if (data.children) {
       return data.children.some(this.hasUnChecked);
     }
-  }
+  };
 
   setRowCheckStatus($event: RowCheckChangeEventArg) {
     // 处理children的选中
@@ -646,8 +654,7 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
       const nestedIndexArray = $event.nestedIndex.split(',');
       nestedIndexArray.shift();
       const nestedIndexArrayToInt = nestedIndexArray.map((value) => {
-        // tslint:disable-next-line:radix
-        return parseInt(value);
+        return parseInt(value, 10);
       });
       // 通过选中行的父级索引设置父的选中状态
       this.setParentCheckStatus(nestedIndexArrayToInt);
@@ -733,7 +740,7 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
     this.checkAllChange.emit($event);
   }
 
-  onSearchQueryChange($event: { [key: string]: any; }) {
+  onSearchQueryChange($event: { [key: string]: any }) {
     this.searchQueryChange.emit($event);
   }
 

@@ -50,7 +50,7 @@ export class DragSyncDirective extends DescendantChildren<DragSyncDirective> imp
 
   subDragElEvent = (bool: boolean) => {
     this.syncGroupDirectives.forEach(dir => this.renderDisplay(dir.el.nativeElement, bool));
-  }
+  };
 
   renderDisplay(nativeEl: HTMLElement, bool: boolean) {
     nativeEl.style.display = bool ? '' : 'none';

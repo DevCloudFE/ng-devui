@@ -42,6 +42,6 @@ import { UndestroyableComponent } from './undestroyable/undestroyable.component'
   ],
   exports: [],
   declarations: [DrawerDemoComponent, BasicComponent, UndestroyableComponent, DrawerContentComponent, TemplateComponent],
-  
+
 })
 export class DrawerDemoModule {}

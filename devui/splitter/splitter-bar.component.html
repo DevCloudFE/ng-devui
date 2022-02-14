@@ -2,6 +2,8 @@
   class="prev"
   *ngIf="showCollapseButton"
   dPopover
+  [style.left]="collapsePosLeft"
+  [style.top]="collapsePosTop"
   [trigger]="'hover'"
   [controlled]="true"
   [ngClass]="prevClass"

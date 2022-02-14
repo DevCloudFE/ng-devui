@@ -56,7 +56,7 @@ export class UploadedFilesComponent implements OnDestroy, OnInit {
   // 解决templateContext 传递method.bind(this)引发模板中内嵌组件initialize问题
   deleteFileProxy = filePath => {
     this.deleteFile(filePath);
-  }
+  };
   ngOnDestroy() {
     if (this.i18nSubscription) {
       this.i18nSubscription.unsubscribe();

@@ -1,5 +1,4 @@
 import {
-  ComponentFactoryResolver,
   ComponentRef,
   Directive,
   ElementRef,
@@ -41,7 +40,6 @@ export class LoadingDirective implements OnChanges {
   active = true;
 
   constructor(
-    private componentFactoryResolver: ComponentFactoryResolver,
     private triggerElementRef: ElementRef,
     private viewContainerRef: ViewContainerRef,
     private injector: Injector,
@@ -109,11 +107,10 @@ export class LoadingDirective implements OnChanges {
       if (this.backdrop) {
         this.createLoadingBackdrop();
       }
-      this.loadingRef = this.viewContainerRef.createComponent(
-        this.componentFactoryResolver.resolveComponentFactory(LoadingComponent),
-        null,
-        this.injector
-      );
+      this.loadingRef = this.viewContainerRef.createComponent(LoadingComponent, {
+        index: null,
+        injector: this.injector,
+      });
 
       this.insert(this.loadingRef.hostView);
 
@@ -144,11 +141,10 @@ export class LoadingDirective implements OnChanges {
   private createLoadingBackdrop() {
     this.backdropRef =
       !this.backdropRef &&
-      this.viewContainerRef.createComponent(
-        this.componentFactoryResolver.resolveComponentFactory(LoadingBackdropComponent),
-        null,
-        this.injector
-      );
+      this.viewContainerRef.createComponent(LoadingBackdropComponent, {
+        index: null,
+        injector: this.injector,
+      });
     this.insert(this.backdropRef.hostView);
 
     Object.assign(this.backdropRef.instance, {
