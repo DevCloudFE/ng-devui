@@ -95,7 +95,7 @@ export class DragDropTouch {
     if ('ontouchstart' in d  // normal mobile device
       || 'ontouchstart' in w
       || navigator.maxTouchPoints > 0
-      || navigator.msMaxTouchPoints > 0
+      || navigator['msMaxTouchPoints'] > 0
       || window['DocumentTouch'] && document instanceof window['DocumentTouch']) {
       bool = true;
     } else {

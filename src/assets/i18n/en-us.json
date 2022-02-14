@@ -1423,7 +1423,51 @@
       "type": "Experimental",
       "path": "dashboard",
       "description": "Dashboard supports various pendants.",
-      "tmw": "Functions as a container to carry various types of content."
+      "tmw": "Functions as a container to carry various types of content.",
+      "basicDemo": {
+        "title": "Basic Usage",
+        "description": "Supports drag-and-drop sorting, scaling, adding, deleting, resize, moving, and locking.",
+        "addWidget": "Add a widget",
+        "popWidget": "Delete the last widget",
+        "coordinates": "Coordinates",
+        "size": "Width and Height",
+        "lock": "Lock",
+        "position": "Location",
+        "dragMove": "Drag Move",
+        "dragSize": "Drag Size",
+        "independentUse": "Independent use"
+      },
+      "configDemo": {
+        "title": "More Settings",
+        "description": "Supports read-only static configuration, floating configuration, continuous compact arrangement, external addition, and deletion.",
+        "dragAdd": "Drag the card to the right.",
+        "dragDelete": "Drag the dashboard card here to delete it.",
+        "source": "Source:",
+        "data": "Data",
+        "drag": "Drag",
+        "layout": "Layout",
+        "columns": "Number of columns",
+        "placeHolder1": "The value ranges from 1 to 12. For more than 12 columns, see the API configuration.",
+        "rowHeight": "Row Height",
+        "placeHolder2": "Number or character string, in pixels",
+        "margins": "Margins",
+        "minRowHeight": "Minimum row height",
+        "placeHolder3": "Number. The value 0 indicates no restriction.",
+        "maxRowHeight": "Maximum row height",
+        "configuration": "Configuration",
+        "static": "Static",
+        "permittedOverhead": "Allow Overhead",
+        "animation": "animation",
+        "forbiddenMoving": "Forbidden Move",
+        "forbiddenResizing": "Forbidden Resize",
+        "showGrid": "Display Grid",
+        "operation": "Operation",
+        "autoArrangement": "Automatic Continuous Compact Arrangement"
+      },
+      "anchorLinkValues": {
+        "basic-usage": "Basic Usage",
+        "more-config": "More Settings"
+      }
     },
     "datepicker": {
       "name": "DatePicker",

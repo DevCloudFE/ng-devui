@@ -170,10 +170,6 @@
   }
 }
 
-:host ::ng-deep d-accordion-list.devui-accordion-menu-hidden {
-  display: none;
-}
-
 /* 视觉融合灰线 */
 :host ::ng-deep .devui-accordion-item-title {
   position: relative;

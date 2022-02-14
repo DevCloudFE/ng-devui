@@ -2,6 +2,7 @@ module.exports = {
   rules: {
     "no-useless-constructor": "off",
     "no-useless-concat":"off",
+    'no-unused-expressions': 'off',
     "max-params": "off",
     "@typescript-eslint/no-useless-constructor": "off",
     "@typescript-eslint/no-parameter-properties": "off",

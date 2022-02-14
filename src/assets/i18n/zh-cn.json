@@ -1416,7 +1416,51 @@
       "type": "演进中",
       "path": "dashboard",
       "description": "仪表盘支持各类挂件",
-      "tmw": "作为容器承载各类内容"
+      "tmw": "作为容器承载各类内容",
+      "basicDemo": {
+        "title": "基本用法",
+        "description": "支持拖拽排序，缩放大小，添加，删除，禁止调整单个大小，禁止移动单个，锁定位置等等",
+        "addWidget": "添加一个widget",
+        "popWidget": "删除最后一个widget",
+        "coordinates": "坐标",
+        "size": "宽高",
+        "lock": "锁定",
+        "position": "位置",
+        "dragMove": "拖拽移动",
+        "dragSize": "拖拽大小",
+        "independentUse": "独立使用"
+      },
+      "configDemo": {
+        "title": "更多设置",
+        "description": "支持配置只读静态，配置上空浮动，连续紧凑排列，从外部拖拽添加，拖拽到垃圾桶删除等",
+        "dragAdd": "拖动此卡片到右侧添加",
+        "dragDelete": "拖动仪表盘的卡片到这里删除",
+        "source": "来源：",
+        "data": "数据",
+        "drag": "拖拽",
+        "layout": "布局",
+        "columns": "列数",
+        "placeHolder1": "数字，取值范围 1 - 12， 超过12列请参考api配置",
+        "rowHeight": "行高",
+        "placeHolder2": "数字或字符串， 数字单位为px",
+        "margins": "边距",
+        "minRowHeight": "最小行高",
+        "placeHolder3": "数字，0 表示不限制",
+        "maxRowHeight": "最大行高",
+        "configuration": "配置",
+        "static": "静态",
+        "permittedOverhead": "允许上空",
+        "animation": "动画",
+        "forbiddenMoving": "禁止移动",
+        "forbiddenResizing": "禁止调整大小",
+        "showGrid": "显示网格",
+        "operation": "操作",
+        "autoArrangement": "自动连续紧凑排列"
+      },
+      "anchorLinkValues": {
+        "basic-usage": "基本用法",
+        "more-config": "更多设置"
+      }
     },
     "datepicker": {
       "name": "DatePicker 日期选择器",

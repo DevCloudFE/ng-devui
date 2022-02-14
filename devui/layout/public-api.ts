@@ -12,3 +12,4 @@ export * from './row.component';
 export * from './screen-media-query.service';
 export * from './space.directive';
 export * from './style.directive';
+export * from './flex.directive';

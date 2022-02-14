@@ -1,0 +1,12 @@
+diff --git a/node_modules/ng-packagr/lib/styles/stylesheet-processor.js b/node_modules/ng-packagr/lib/styles/stylesheet-processor.js
+index ac329f6..8c4d00f 100644
+--- a/node_modules/ng-packagr/lib/styles/stylesheet-processor.js
++++ b/node_modules/ng-packagr/lib/styles/stylesheet-processor.js
+@@ -138,6 +138,7 @@ class StylesheetProcessor {
+             autoprefixer: true,
+             stage: 3,
+         }));
++        postCssPlugins.push(require(process.cwd() + '/' + 'scripts/themeable/add-origin-varvalue.js' ));
+         return (0, postcss_1.default)(postCssPlugins);
+     }
+     async renderCss(filePath, css) {

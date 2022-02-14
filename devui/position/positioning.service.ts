@@ -7,9 +7,9 @@ export class PositionService {
   constructor(private documentRef: DocumentRef, private windowRef: WindowRef) {
   }
 
-  position(element: HTMLElement, round = true): ClientRect {
-    let elPosition: ClientRect;
-    let parentOffset: ClientRect = { width: 0, height: 0, top: 0, bottom: 0, left: 0, right: 0 };
+  position(element: HTMLElement, round = true) {
+    let elPosition;
+    let parentOffset = { width: 0, height: 0, top: 0, bottom: 0, left: 0, right: 0 };
 
     if (this.getStyle(element, 'position') === 'fixed') {
       elPosition = element.getBoundingClientRect();
@@ -41,7 +41,7 @@ export class PositionService {
     return elPosition;
   }
 
-  offset(element: HTMLElement, round = true): ClientRect {
+  offset(element: HTMLElement, round = true) {
     const elBcr = element.getBoundingClientRect();
     const viewportOffset = {
       top: this.windowRef.pageYOffset - this.documentRef.documentElement.clientTop,
