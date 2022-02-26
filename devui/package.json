@@ -16,6 +16,14 @@
   "bugs": {
     "url": "https://github.com/DevCloudFE/ng-devui/issues"
   },
+  "exports": {
+    "./styles-var/devui-var.scss": {
+      "style": "./styles-var/devui-var.scss"
+    },
+    "./styles-var/devui-var.less": {
+      "style": "./styles-var/devui-var.less"
+    }
+  },
   "dependencies": {
     "@angular/cdk": "^13.0.0",
     "date-fns": "^2.20.0",
