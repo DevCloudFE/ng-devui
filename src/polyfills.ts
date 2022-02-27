@@ -14,21 +14,6 @@
  * Learn more in https://angular.io/guide/browser-support
  */
 
-/** *************************************************************************************************
-* BROWSER POLYFILLS
-*/
-import 'core-js/es/array';
-
-/**
- * If the application will be indexed by Google Search, the following is required.
- * Googlebot uses a renderer based on Chrome 41.
- * https://developers.google.com/search/docs/guides/rendering
- **/
-import 'core-js/es/array';  // Run `npm install --save classlist.js`.
-
-/** IE10 and IE11 requires the following for the Reflect API. */
-import 'core-js/es/reflect';  // Run `npm install --save web-animations-js`.
-
 /**
  * By default, zone.js will patch all possible macroTask and DomEvents
  * user can disable parts of macroTask/DomEvents patch by setting following flags
