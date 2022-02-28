@@ -75,7 +75,7 @@ ng serve --open
 ```
 
 ### Browser Compatibility
-Internet Explorer 11 or later is supported. (For details about how to configure polyfills, please see [Angular Browser Support](https://angular.io/guide/browser-support).)
+Modern browsers
 
 ## Communicate with us
 
