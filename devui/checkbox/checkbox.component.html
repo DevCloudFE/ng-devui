@@ -9,14 +9,13 @@
 >
   <label title="{{ isShowTitle ? title || label : '' }}" (click)="toggle($event)">
     <input
+      #checkbox
       [name]="name || 'checkbox-' + id"
       class="devui-checkbox-input"
       type="checkbox"
       [checked]="checked"
       [disabled]="disabled"
       [indeterminate]="halfchecked"
-      (click)="$event.stopPropagation()"
-      (change)="$event.stopPropagation()"
     />
     <span
       class="devui-checkbox-material"

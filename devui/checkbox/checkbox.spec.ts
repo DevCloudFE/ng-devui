@@ -1,4 +1,4 @@
-import { Component, DebugElement, ViewChild } from '@angular/core';
+import { ApplicationRef, Component, DebugElement, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, flush, TestBed, tick } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
@@ -147,5 +147,22 @@ describe('checkbox', () => {
 
       expect(component.comp.checked).toBeFalsy();
     }));
+
+    it('should not run change detection on `click` and `change` events but should stop propagation', () => {
+      const appRef = TestBed.inject(ApplicationRef);
+      spyOn(appRef, 'tick');
+
+      const clickEvent = new Event('click');
+      spyOn(clickEvent, 'stopPropagation').and.callThrough();
+      const changeEvent = new Event('change');
+      spyOn(changeEvent, 'stopPropagation').and.callThrough();
+
+      component.comp.checkbox.nativeElement.dispatchEvent(clickEvent);
+      component.comp.checkbox.nativeElement.dispatchEvent(changeEvent);
+
+      expect(appRef.tick).not.toHaveBeenCalled();
+      expect(clickEvent.stopPropagation).toHaveBeenCalled();
+      expect(changeEvent.stopPropagation).toHaveBeenCalled();
+    });
   });
 });

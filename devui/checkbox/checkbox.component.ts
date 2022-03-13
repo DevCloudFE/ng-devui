@@ -2,13 +2,18 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  ElementRef,
   EventEmitter,
   forwardRef,
   Input,
+  NgZone,
   OnChanges,
+  OnDestroy,
+  OnInit,
   Output,
   SimpleChanges,
-  TemplateRef
+  TemplateRef,
+  ViewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DevConfigService, WithConfig } from 'ng-devui/utils/globalConfig';
@@ -28,7 +33,7 @@ import { Observable } from 'rxjs';
   ],
   preserveWhitespaces: false,
 })
-export class CheckBoxComponent implements ControlValueAccessor, OnChanges {
+export class CheckBoxComponent implements ControlValueAccessor, OnChanges, OnInit, OnDestroy {
   static ID_SEED = 0;
   @Input() name: string;
   @Input() label: string;
@@ -42,17 +47,28 @@ export class CheckBoxComponent implements ControlValueAccessor, OnChanges {
   @Input() @WithConfig() showAnimation = true;
   @Input() beforeChange: (value) => boolean | Promise<boolean> | Observable<boolean>;
   @Output() change: EventEmitter<boolean> = new EventEmitter<boolean>();
+  /** The native `<input type="checkbox" />` element. */
+  @ViewChild('checkbox', { static: true }) checkbox: ElementRef<HTMLInputElement>;
   public animationUnlocked = false;
   public id: number;
   public checked: boolean;
   private onChange = (_: any) => null;
   private onTouch = () => null;
 
-  constructor(
-    private changeDetectorRef: ChangeDetectorRef,
-    private devConfigService: DevConfigService
-  ) {
+  constructor(private ngZone: NgZone, private changeDetectorRef: ChangeDetectorRef, private devConfigService: DevConfigService) {
     this.id = CheckBoxComponent.ID_SEED++;
+  }
+
+  ngOnInit(): void {
+    this.ngZone.runOutsideAngular(() => {
+      this.checkbox.nativeElement.addEventListener('click', stopPropagation);
+      this.checkbox.nativeElement.addEventListener('change', stopPropagation);
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.checkbox.nativeElement.removeEventListener('click', stopPropagation);
+    this.checkbox.nativeElement.removeEventListener('change', stopPropagation);
   }
 
   writeValue(checked: any): void {
@@ -115,4 +131,8 @@ export class CheckBoxComponent implements ControlValueAccessor, OnChanges {
       this.unlockAnimation();
     }
   }
+}
+
+function stopPropagation(event: Event): void {
+  event.stopPropagation();
 }
