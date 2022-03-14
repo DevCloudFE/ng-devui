@@ -1,4 +1,4 @@
-import { Component, DebugElement } from '@angular/core';
+import { ApplicationRef, Component, DebugElement } from '@angular/core';
 import { ComponentFixture, fakeAsync, flush, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
@@ -35,9 +35,9 @@ class TestRadioGroupComponent {
 
 @Component({
   template: `
-  <d-radio-group [direction]="'row'" [(ngModel)]="choose2" (change)="mockChange($event)">
-    <d-radio [name]="'customized-city'" *ngFor="let value of values2" [value]="value"> The Radio value is: {{ value }} </d-radio>
-  </d-radio-group>
+    <d-radio-group [direction]="'row'" [(ngModel)]="choose2" (change)="mockChange($event)">
+      <d-radio [name]="'customized-city'" *ngFor="let value of values2" [value]="value"> The Radio value is: {{ value }} </d-radio>
+    </d-radio-group>
   `,
 })
 class TestRadioItemGroupComponent {
@@ -54,13 +54,15 @@ describe('radio-group', () => {
   let radios: DebugElement[];
   let domHelper: DomHelper<TestRadioGroupComponent | TestRadioItemGroupComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      imports: [RadioModule, FormsModule],
-      declarations: [TestRadioGroupComponent, TestRadioItemGroupComponent],
-      providers: [RadioGroupComponent],
-    });
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [RadioModule, FormsModule],
+        declarations: [TestRadioGroupComponent, TestRadioItemGroupComponent],
+        providers: [RadioGroupComponent],
+      });
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TestRadioGroupComponent);
@@ -144,6 +146,27 @@ describe('radio-group', () => {
       expect(testComponent.choose).toBe(testComponent.values[0]);
       expect(testComponent.mockChange).toHaveBeenCalledTimes(0);
     }));
+
+    it('should not run change detection when the `d-radio-group` is clicked', () => {
+      const appRef = TestBed.inject(ApplicationRef);
+      spyOn(appRef, 'tick');
+
+      debugEl.query(By.css('d-radio-group')).nativeElement.dispatchEvent(new Event('click'));
+
+      expect(appRef.tick).not.toHaveBeenCalled();
+    });
+
+    it('should prevent default when the input is clicked and the group is disabled', () => {
+      testComponent.isDisabled = true;
+      fixture.detectChanges();
+
+      const event = new Event('click', { bubbles: true });
+      spyOn(event, 'preventDefault').and.callThrough();
+
+      debugEl.query(By.css('input')).nativeElement.dispatchEvent(event);
+
+      expect(event.preventDefault).toHaveBeenCalled();
+    });
   });
 
   describe('should radios number change shown on the page', () => {
@@ -174,10 +197,10 @@ describe('radio-group', () => {
   });
 
   describe('beforechange', () => {
-    beforeEach((() => {
+    beforeEach(() => {
       fixture = TestBed.createComponent(TestRadioGroupComponent);
       testComponent = fixture.debugElement.componentInstance;
-    }));
+    });
 
     it('select should be avoid by beforechange', () => {
       testComponent.beforeChange = (values) => false;
