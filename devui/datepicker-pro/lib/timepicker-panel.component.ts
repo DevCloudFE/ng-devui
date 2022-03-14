@@ -1,6 +1,4 @@
-import {
-  Component, ElementRef, OnDestroy, OnInit
-} from '@angular/core';
+import { Component, ElementRef, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -36,6 +34,7 @@ export class TimepickerPanelComponent implements OnInit, OnDestroy {
   i18nSubscription: Subscription;
 
   constructor(
+    private ngZone: NgZone,
     private el: ElementRef,
     private pickSrv: DatepickerProService,
     protected i18n: I18nService
@@ -186,17 +185,20 @@ export class TimepickerPanelComponent implements OnInit, OnDestroy {
     }
     const difference = to - element.scrollTop;
     const perTick = (difference / duration) * 10;
-    const reqAnimFrame = window['requestAnimationFrame'] ||
+    const reqAnimFrame =
+      window['requestAnimationFrame'] ||
       window['mozRequestAnimationFrame'] ||
       window['msRequestAnimationFrame'] ||
       window['oRequestAnimationFrame'];
-    reqAnimFrame(() => {
-      element.scrollTop = element.scrollTop + perTick;
-      if (element.scrollTop === to) {
-        return;
-      }
-      this.scrollTo(element, to, duration - 10);
-    });
+    this.ngZone.runOutsideAngular(() =>
+      reqAnimFrame(() => {
+        element.scrollTop = element.scrollTop + perTick;
+        if (element.scrollTop === to) {
+          return;
+        }
+        this.scrollTo(element, to, duration - 10);
+      })
+    );
   }
 
   ngOnDestroy() {
