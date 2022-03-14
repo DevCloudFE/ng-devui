@@ -6,13 +6,14 @@ import {
   ElementRef,
   EventEmitter,
   Input,
+  NgZone,
   OnChanges,
   OnDestroy,
   OnInit,
   Output,
   SimpleChanges,
   TemplateRef,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { fadeInOut } from 'ng-devui/utils';
@@ -124,6 +125,7 @@ export class ToggleMenuListComponent implements OnInit, OnChanges, OnDestroy {
   @Output() toggleChange = new EventEmitter<any>();
   @Output() valueChange = new EventEmitter<any>();
   @Output() loadMore = new EventEmitter<any>();
+  @ViewChild('dropdownMenuWrap', { static: true }) dropdownMenuWrap: ElementRef<HTMLElement>;
   @ViewChild('dropdownUl') dropdownUl: ElementRef;
   @ViewChild(CdkVirtualScrollViewport) virtualScrollViewport: CdkVirtualScrollViewport;
 
@@ -153,10 +155,11 @@ export class ToggleMenuListComponent implements OnInit, OnChanges, OnDestroy {
     lg: 50,
   };
 
-  constructor(private changeDetectorRef: ChangeDetectorRef, private i18n: I18nService) {}
+  constructor(private ngZone: NgZone, private changeDetectorRef: ChangeDetectorRef, private i18n: I18nService) {}
 
   ngOnInit() {
     this.setI18nText();
+    this.ngZone.runOutsideAngular(() => this.dropdownMenuWrap.nativeElement.addEventListener('click', preventDefaultAndStopPropagation));
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -195,18 +198,18 @@ export class ToggleMenuListComponent implements OnInit, OnChanges, OnDestroy {
       const evt = changes['eventHandle'].currentValue;
       const { event, type } = evt;
       switch (type) {
-      case 'keydown.esc':
-        this.onEscKeyup(event);
-        break;
-      case 'keydown.ArrowUp':
-        this.handleKeyUpEvent(event);
-        break;
-      case 'keydown.ArrowDown':
-        this.handleKeyDownEvent(event);
-        break;
-      case 'keydown.enter':
-        this.handleKeyEnterEvent(event);
-        break;
+        case 'keydown.esc':
+          this.onEscKeyup(event);
+          break;
+        case 'keydown.ArrowUp':
+          this.handleKeyUpEvent(event);
+          break;
+        case 'keydown.ArrowDown':
+          this.handleKeyDownEvent(event);
+          break;
+        case 'keydown.enter':
+          this.handleKeyEnterEvent(event);
+          break;
       }
     }
   }
@@ -215,6 +218,8 @@ export class ToggleMenuListComponent implements OnInit, OnChanges, OnDestroy {
     if (this.i18nSubscription) {
       this.i18nSubscription.unsubscribe();
     }
+
+    this.dropdownMenuWrap.nativeElement.removeEventListener('click', preventDefaultAndStopPropagation);
   }
 
   setI18nText() {
@@ -232,10 +237,10 @@ export class ToggleMenuListComponent implements OnInit, OnChanges, OnDestroy {
     this.availableOptions = this.availableOptions.map((item, index) =>
       item.id >= 0 && item.option
         ? {
-          isChecked: _value.findIndex((i) => JSON.stringify(i) === JSON.stringify(item.option)) > -1,
-          id: item.id,
-          option: item.option,
-        }
+            isChecked: _value.findIndex((i) => JSON.stringify(i) === JSON.stringify(item.option)) > -1,
+            id: item.id,
+            option: item.option,
+          }
         : { isChecked: _value.findIndex((i) => JSON.stringify(i) === JSON.stringify(item)) > -1, id: index, option: item }
     );
   }
@@ -426,4 +431,9 @@ export class ToggleMenuListComponent implements OnInit, OnChanges, OnDestroy {
     this.showLoading = false;
     this.changeDetectorRef.detectChanges();
   }
+}
+
+function preventDefaultAndStopPropagation(event: Event): void {
+  event.preventDefault();
+  event.stopPropagation();
 }

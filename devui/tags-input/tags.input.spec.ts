@@ -1,4 +1,4 @@
-import { Component, DebugElement, OnInit, ViewChild } from '@angular/core';
+import { ApplicationRef, Component, DebugElement, OnInit, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, flush, TestBed, tick } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
@@ -265,5 +265,22 @@ describe('tags input', () => {
       expect(component.comp.selectedItems.length).toBe(0);
       expect(component.getTagValue).toHaveBeenCalled();
     }));
+  });
+
+  describe('change detection behavior of the `d-toggle-menu-list`', () => {
+    it('should prevent default and stop propagation of the event on the `.devui-dropdown-menu-wrap` but should not run change detection', () => {
+      const appRef = TestBed.inject(ApplicationRef);
+      spyOn(appRef, 'tick');
+
+      const event = new Event('click');
+      spyOn(event, 'preventDefault').and.callThrough();
+      spyOn(event, 'stopPropagation').and.callThrough();
+
+      debugEl.query(By.css('.devui-dropdown-menu-wrap')).nativeElement.dispatchEvent(event);
+
+      expect(appRef.tick).not.toHaveBeenCalled();
+      expect(event.preventDefault).toHaveBeenCalled();
+      expect(event.stopPropagation).toHaveBeenCalled();
+    });
   });
 });
