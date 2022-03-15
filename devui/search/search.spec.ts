@@ -1,7 +1,9 @@
-import { Component, DebugElement } from '@angular/core';
+import { ApplicationRef, Component, DebugElement, NgZone } from '@angular/core';
 import { ComponentFixture, fakeAsync, flush, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
+import { take } from 'rxjs/operators';
+
 import { DomHelper } from '../utils/testing/dom-helper';
 import { SearchModule } from './search.module';
 
@@ -26,12 +28,14 @@ describe('search', () => {
   let testComponent: TestSearchComponent;
   let dh: DomHelper<TestSearchComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      imports: [SearchModule, FormsModule],
-      declarations: [TestSearchComponent]
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [SearchModule, FormsModule],
+        declarations: [TestSearchComponent],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TestSearchComponent);
@@ -108,6 +112,29 @@ describe('search', () => {
       fixture.detectChanges();
       expect(testComponent.testSearchText).toBe(testText);
     }));
+  });
+
+  describe('change detection behavior', () => {
+    it('should not trigger change detection of `keydown` events if this is not an `Enter` button', (done) => {
+      const ngZone = TestBed.inject(NgZone);
+      const appRef = TestBed.inject(ApplicationRef);
+      spyOn(appRef, 'tick');
+
+      const input: HTMLInputElement = debugEl.query(By.css('input')).nativeElement;
+
+      input.dispatchEvent(createKeyBoardEvent('keydown', 'Shift'));
+      expect(appRef.tick).not.toHaveBeenCalled();
+
+      input.dispatchEvent(createKeyBoardEvent('keydown', 'q'));
+      expect(appRef.tick).not.toHaveBeenCalled();
+
+      input.dispatchEvent(createKeyBoardEvent('keydown', 'Enter'));
+
+      ngZone.onMicrotaskEmpty.pipe(take(1)).subscribe(() => {
+        expect(appRef.tick).toHaveBeenCalledTimes(1);
+        done();
+      });
+    });
   });
 });
 
