@@ -1,7 +1,11 @@
 import { DOCUMENT } from '@angular/common';
-import { AfterViewInit, Component, ElementRef, EventEmitter, Inject, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, Inject, Input, NgZone, OnDestroy, OnInit, Output } from '@angular/core';
 import { DEFAULT_MODE, DEFAULT_ZINDEX, ESC_KEYCODE } from './fullscreen.config';
 import { FullscreenMode } from './fullscreen.type';
+
+interface FullscreenLaunch {
+  isFullscreen: boolean;
+}
 
 @Component({
   selector: 'd-fullscreen',
@@ -17,10 +21,12 @@ export class FullscreenComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() zIndex = DEFAULT_ZINDEX;
   @Input() target: HTMLElement;
 
-  @Output() fullscreenLaunch: EventEmitter<any> = new EventEmitter<any>();
+  @Output() fullscreenLaunch = new EventEmitter<FullscreenLaunch>();
   document: Document;
 
   constructor(
+    private ngZone: NgZone,
+    private ref: ChangeDetectorRef,
     private elementRef: ElementRef,
     @Inject(DOCUMENT) private doc: any
   ) {
@@ -31,7 +37,7 @@ export class FullscreenComponent implements OnInit, OnDestroy, AfterViewInit {
     this.document.addEventListener('fullscreenchange', this.onFullScreenChange);
     this.document.addEventListener('MSFullscreenChange', this.onFullScreenChange);
     this.document.addEventListener('webkitfullscreenchange', this.onFullScreenChange);
-    this.document.addEventListener('keydown', this.handleKeyDown);
+    this.ngZone.runOutsideAngular(() => this.document.addEventListener('keydown', this.handleKeyDown));
   }
 
   ngAfterViewInit() {
@@ -128,22 +134,30 @@ export class FullscreenComponent implements OnInit, OnDestroy, AfterViewInit {
     });
   };
 
-  private handleKeyDown = (event) => {
-    if (event.keyCode === ESC_KEYCODE) { // 按ESC键退出全屏
-      if (this.isFullscreen) {
-        const targetElement = this.elementRef.nativeElement.querySelector('[fullscreen-target]');
-        if (this.mode === 'normal') {
-          this.removeFullScreenStyle();
-          this.exitNormalFullscreen(targetElement);
-        } else {
-          if (this.doc.fullscreenElement) { this.exitImmersiveFullScreen(this.doc); }
-        }
-        this.fullscreenLaunch.emit({
-          isFullscreen: false
-        });
-        this.isFullscreen = false;
+  private handleKeyDown = (event: KeyboardEvent): void => {
+    // Press ESC to exit full screen.
+    if (event.keyCode !== ESC_KEYCODE || !this.isFullscreen) {
+      return;
+    }
+
+    const targetElement = this.elementRef.nativeElement.querySelector('[fullscreen-target]');
+    if (this.mode === 'normal') {
+      this.removeFullScreenStyle();
+      this.exitNormalFullscreen(targetElement);
+    } else {
+      if (this.doc.fullscreenElement) {
+        this.exitImmersiveFullScreen(this.doc);
       }
     }
+
+    if (this.fullscreenLaunch.observers.length > 0) {
+      this.ngZone.run(() => {
+        this.fullscreenLaunch.emit({ isFullscreen: false });
+        this.ref.markForCheck();
+      });
+    }
+
+    this.isFullscreen = false;
   };
 
   ngOnDestroy() {
