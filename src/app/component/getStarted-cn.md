@@ -75,7 +75,7 @@ ng serve --open
 ```
 
 ### 浏览器兼容
-+ 支持现代浏览器IE11及以上（polyfills可参考 [Angular Browser Support](https://angular.io/guide/browser-support) 进行配置）。
++ 支持现代浏览器。
 
 ## 一起交流
 
