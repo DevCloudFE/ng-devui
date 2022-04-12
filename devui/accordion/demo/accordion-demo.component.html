@@ -1,4 +1,4 @@
-<div class="devui-demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 180, bottom: 0 }">
+<div class="devui-demo-container" style="padding-left: 4px" dAnchorBox dAnchorHashSupport [view]="{ top: 180, bottom: 0 }">
   <d-demo-nav [navItems]="navItems"></d-demo-nav>
   <div [dAnchor]="'basic-usage'" class="devui-demo-example">
     <div class="devui-demo-title">{{ 'components.accordion.basicDemo.title' | translate }}</div>
@@ -24,7 +24,7 @@
     <d-codebox id="accordion-demo-template" [sourceData]="AccordionDemoTemplate">
       <d-template demo></d-template>
     </d-codebox>
-    <div class="devui-demo-text">{{ 'components.accordion.innerListTemplateDemo.description' | translate }}</div>
+    <div class="devui-demo-text" style="margin-top: 20px">{{ 'components.accordion.innerListTemplateDemo.description' | translate }}</div>
     <d-codebox id="accordion-demo-inner-list-template" [sourceData]="AccordionDemoInnerListTemplate">
       <d-inner-list-template demo></d-inner-list-template>
     </d-codebox>

@@ -180,7 +180,7 @@
             dTreeAutoFocus
             [(ngModel)]="treeNode.data.title"
             (blur)="onBlurEdit(treeNode)"
-            (keyup.enter)="onBlurEdit(treeNode)"
+            (keyup.enter)="eventTriggerBlur($event)"
             (input)="onInputChange($event, treeNode)"
             dPopover
             [content]="treeNode.data.errTips"
@@ -424,7 +424,7 @@
             dTreeAutoFocus
             [(ngModel)]="treeNode.data.title"
             (blur)="onBlurEdit(treeNode)"
-            (keyup.enter)="onBlurEdit(treeNode)"
+            (keyup.enter)="eventTriggerBlur($event)"
             (input)="onInputChange($event, treeNode)"
             dPopover
             [content]="treeNode.data.errTips"

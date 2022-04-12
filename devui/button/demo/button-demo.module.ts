@@ -16,7 +16,6 @@ import { CommonComponent } from './common/common.component';
 import { DangerComponent } from './danger/danger.component';
 import { GroupsComponent } from './groups/groups.component';
 import { IconComponent } from './icon/icon.component';
-import { LeftRightComponent } from './left-right/left-right.component';
 import { LoadingComponent } from './loading/loading.component';
 import { PrimaryComponent } from './primary/primary.component';
 import { SizeComponent } from './size/size.component';
@@ -48,7 +47,6 @@ import { TextComponent } from './text/text.component';
     IconComponent,
     LoadingComponent,
     PrimaryComponent,
-    LeftRightComponent,
     DangerComponent,
     TextComponent,
     CombinationComponent,

@@ -24,7 +24,7 @@ export class I18nService {
   private i18nSubject = new ReplaySubject<I18nInterface>(1);
 
   constructor(@Optional() @Inject(DEVUI_LANG) private appLang) {
-    if (this.i18nConfig.hasOwnProperty(this.appLang)) {
+    if (Object.prototype.hasOwnProperty.call(this.i18nConfig, this.appLang)) {
       this.DEFAULT_LANG = this.appLang;
       this.currentLang = this.appLang;
     } else {
@@ -36,26 +36,15 @@ export class I18nService {
 
   toggleLang(lang = this.DEFAULT_LANG) {
     localStorage.setItem('lang', lang);
-    if (this.i18nConfig.hasOwnProperty(lang)) {
+    if (Object.prototype.hasOwnProperty.call(this.i18nConfig, lang)) {
       this.currentLang = lang;
       this.i18nSubject.next(this.getI18nText());
     }
   }
 
-  /** @deprecated */
-  getLangSuffix() {
-    return localStorage.getItem('lang') === 'en-US' ? 'EN' : 'CN';
-  }
-  /**
-   * @deprecated use langChange to replace;
-   */
-  getMessage(): Observable<string> {
-    return this.subject.asObservable();
-  }
-
   getI18nText(): I18nInterface {
     const lang = localStorage.getItem(this.LANG_KEY) ? localStorage.getItem('lang') : this.DEFAULT_LANG;
-    if (this.i18nConfig.hasOwnProperty(lang)) {
+    if (Object.prototype.hasOwnProperty.call(this.i18nConfig, lang)) {
       this.currentLang = lang;
     }
     return this.i18nConfig[this.currentLang];

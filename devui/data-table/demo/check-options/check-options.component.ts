@@ -15,7 +15,6 @@ import { originSource, SourceType } from '../mock-data';
 })
 export class CheckOptionsComponent implements OnInit {
   @ViewChild(DataTableComponent, { static: true }) datatable: DataTableComponent;
-  // totalData = JSON.parse(JSON.stringify(originSource));
   basicDataSource: Array<SourceType> = JSON.parse(JSON.stringify(originSource.slice(0, 6)));
   dataTableOptions = {
     columns: [

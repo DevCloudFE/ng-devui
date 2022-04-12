@@ -111,7 +111,7 @@ export class CheckBoxComponent implements ControlValueAccessor, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.hasOwnProperty('halfchecked')) {
+    if (Object.prototype.hasOwnProperty.call(changes, 'halfchecked')) {
       this.unlockAnimation();
     }
   }

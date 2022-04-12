@@ -5,7 +5,7 @@
       #fixHeaderContainerRef
       class="table-wrap"
       [style.overflow-x]="'hidden'"
-      [style.overflow-y]="'scroll'"
+      [style.scrollbar-width]="'none'"
       [style.max-height]="maxHeight ? maxHeight : null"
       [style.max-width]="maxWidth ? maxWidth : null"
       [style.width]="!maxWidth ? tableWidth : null"
@@ -39,7 +39,6 @@
       [style.max-width]="maxWidth ? maxWidth : null"
       [style.width]="!maxWidth ? tableWidth : null"
       (scroll)="onBodyScroll($event)"
-      [style.overflow-y]="fixHeader ? 'scroll' : null"
     >
       <table
         #tableBody
@@ -70,6 +69,7 @@
         <tbody
           *ngIf="!innerBody"
           dDataTableBody
+          #devuiNormalScrollBody
           [dataSource]="dataSource"
           [resizeable]="resizeable"
           [columns]="_columns"
@@ -112,7 +112,7 @@
     [style.max-height]="maxHeight ? maxHeight : null"
     [style.max-width]="maxWidth ? maxWidth : null"
     [style.width]="!maxWidth ? tableWidth : null"
-    [style.overflow-y]="fixHeader ? 'scroll' : null"
+    [style.overflow-y]="fixHeader ? 'overlay' : null"
     (scroll)="onBodyScroll($event)"
   >
     <table

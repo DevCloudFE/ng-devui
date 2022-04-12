@@ -2,7 +2,7 @@
 // Source: https://github.com/jserz/js_piece/blob/master/DOM/ParentNode/append()/append().md
 export default (function (arr) {
   arr.forEach(function (item) {
-    if (item.hasOwnProperty('append')) {
+    if (Object.prototype.hasOwnProperty.call(item,'append')) {
       return;
     }
     Object.defineProperty(item, 'append', {

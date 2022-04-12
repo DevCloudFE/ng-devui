@@ -45,12 +45,12 @@ openstandardDialog(dialogtype?: string) {
 |          zIndex          |            `number`             |   1050   | 可选，弹出框 z-index 值                        |
 |      backDropZIndex      |            `number`             |   1049   | 可选，弹出框背景 z-index 值                    |
 |        component         |           `Type<any>`           |    --    | 可选，弹出框组件，弹出框会显示组件内容         | [自定义对话框](demo#custom-dialog)            |
-|         injector         |           `Injector`            |   true   | 可选，可以选择指定将用作组件的父级的注射器。   |
+|         injector         |           `Injector`            |    --    | 可选，可以选择指定将用作组件的父级的注射器。   |
 |           data           |            `object`             |    --    | 可选，传入component实例中的属性                | [自定义对话框](demo#custom-dialog)            |
-|       showAnimation        |            `boolean`            |   true   | 可选，是否显示动画，                           | [自定义对话框](demo#custom-dialog)            | ✔ |
-|    backdropCloseable     |            `boolean`            |   true   | 可选，点击空白处是否能关闭弹出框，             | [自定义对话框](demo#custom-dialog)            |
-| componentFactoryResolver |   `ComponentFactoryResolver`    |    --    | 可选，自定义动态渲染组件解析器，               |
-|         onClose          |           `Function`            |    --    | 可选，弹出框关闭之后回调的函数，               | [自定义对话框](demo#custom-dialog)            |
+|       showAnimation        |            `boolean`            |   true   | 可选，是否显示动画                           | [自定义对话框](demo#custom-dialog)            | ✔ |
+|    backdropCloseable     |            `boolean`            |   true   | 可选，点击空白处是否能关闭弹出框             | [自定义对话框](demo#custom-dialog)            |
+| componentFactoryResolver |   `ComponentFactoryResolver`    |    --    | 可选，自定义动态渲染组件解析器               |
+|         onClose          |           `Function`            |    --    | 可选，弹出框关闭之后回调的函数               | [自定义对话框](demo#custom-dialog)            |
 |       beforeHidden       | `Function\|Promise\|Observable` |    --    | 可选，关闭窗口之前的回调                       |
 |        placement         | `enum('center'\|'top'\|'bottom')` | 'center' | 可选，弹出框出现的位置                         |
 |         offsetX          |            `string`             |  '0px'   | 可选，弹出框横向偏移                           |
@@ -75,7 +75,7 @@ openstandardDialog(dialogtype?: string) {
 |          title           |            `string`             |     --     | 可选，弹出框 title                                                       | [标准对话框](demo#standard-dialog)             |
 |         content          |       `string\|Type<any>`       |     --     | 可选，弹出框内容，支持字符串和组件                                       | [标准对话框](demo#standard-dialog)             |
 |           html           |            `boolean`            |     --     | 可选，content是否是html代码                                              | [警告弹出框](demo#warning-pop-up)              |
-|         injector         |           `Injector`            |    true    | 可选，可以选择指定将用作组件的父级的注射器。                             |
+|         injector         |           `Injector`            |     --     | 可选，可以选择指定将用作组件的父级的注射器。                             |
 |           data           |            `object`             |     --     | 可选，当content为Component时，传递到Component实例中的属性                | [标准对话框](demo#standard-dialog)             |
 |         buttons          |             `array`             |     --     | 可选，弹出框按钮，支持自定义文本、样式、禁用、点击事件                   | [标准对话框](demo#standard-dialog)             |
 |       showAnimation        |            `boolean`            |    true    | 可选，是否显示动画，                                                     | [拦截对话框关闭](demo#intercept-dialog-closed) | ✔ |
@@ -91,6 +91,7 @@ openstandardDialog(dialogtype?: string) {
 |      bodyScrollable      |            `boolean`            |   true    | 可选，dialog 打开后，body是否可滚动，默认可滚动，false时隐藏滚动条，隐藏滚动条可能会产生抖动，可以通过设置外层fixed来同时避免滚动与抖动 |   [通过外层fixed同时避免滚动和抖动](demo#template-fixed)                       |
 |     contentTemplate      |       `TemplateRef<any>`        |     --     | 可选，弹出框内容模板，与content不兼容                                    | [自定义弹出框内容模板](demo#template-content)  |
 |        escapable         |            `boolean`            |    true    | 可选，是否支持esc键关闭弹窗                                              |
+|       showCloseBtn       |            `boolean`            |    true    | 可选，是否展示关闭按钮                                                   |
 
 ## ModalOpenResult
 

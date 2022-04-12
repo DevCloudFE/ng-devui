@@ -28,6 +28,8 @@ import { DatepickerProModule } from 'ng-devui/datepicker-pro';
 | showAnimation | `boolean` | true |  可选，是否开启动画 | |
 | width | `string` | - |  可设置选择器的宽度 | |
 | mode | `'year' \| 'month' \| 'date'` | 'date' |  面板模式 | [年月选择器](demo#monthYear)|
+| markedDateList | `Date[]` | [] |  标记日期列表，可以配合MarkDateInfoTemplate模板展示提示信息 | [标记信息](demo#date-marked)|
+| markedRangeDateList | `Date[][]` | [] |  标记范围日期列表 | [标记信息](demo#date-marked)|
 
 ## d-datepicker-pro 事件
 
@@ -55,6 +57,8 @@ import { DatepickerProModule } from 'ng-devui/datepicker-pro';
 | width | `string` | - |  可设置范围选择器的宽度 | |
 | mode | `'year' \| 'month' \| 'date' \| 'week'` | 'date' |  面板模式 | [范围选择器](demo#range-picker)|
 | startIndexOfWeek | `number` | 0 |  周选择时候，每周的开始时间，0表示周日，6表示周六，与Date.getDay()相同 | [范围选择器](demo#range-picker)|
+| markedDateList | `Date[]` | [] |  标记日期列表，可以配合MarkDateInfoTemplate模板展示提示信息 | [标记信息](demo#date-marked)|
+| markedRangeDateList | `Date[][]` | [] |  标记范围日期列表 | [标记信息](demo#date-marked)|
 
 ## d-range-datepicker-pro 事件
 
@@ -75,6 +79,8 @@ import { DatepickerProModule } from 'ng-devui/datepicker-pro';
 | activeRangeType   |  `'start' \| 'end'` |  'start' |  可选，范围模式下激活开始或者结束日期  |  |
 | showRangeHeader   |  `boolean` |  'true' |  可选，在范围模式下是否显示header头来展示范围切换的input  |  |
 | splitter   |  `string` |  '-' |  可选，在范围模式下的日期分隔符 |  |
+| markedDateList | `Date[]` | [] |  标记日期列表，可以配合MarkDateInfoTemplate模板展示提示信息 | [标记信息](demo#date-marked)|
+| markedRangeDateList | `Date[][]` | [] |  标记范围日期列表 | [标记信息](demo#date-marked)|
 
 ## d-datepicker-static-panel 事件
 
@@ -98,3 +104,4 @@ ngModelChange 可监听其变化。
 |     customTemplate     | `TemplateRef<any>` |        --         |  可选，右侧区域自定义模板  | [传入模板](demo#template) |
 |     footerTemplate     | `TemplateRef<any>` |        --         | 可选，footer自定义模板 | [传入模板](demo#template) |
 |     hostTemplate     | `TemplateRef<any>` |        --         | 可选，datepicker宿主的自定义模板 | [传入模板](demo#host-template) |
+|     markDateInfoTemplate     | `TemplateRef<any>` |        --         | 可选，标记日期的提示信息模板，信息会以popover展示 | [标记信息](demo#date-marked) |

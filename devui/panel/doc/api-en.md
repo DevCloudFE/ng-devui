@@ -40,5 +40,5 @@ In the page：
 ### PanelType
 
 ```ts
-export type PanelType = 'default' | 'primary' | 'success' | 'danger' | 'warning' | 'info';
+export type PanelType = 'default' | 'primary' | 'success' | 'danger' | 'warning' | 'info' | 'ghost';
 ```

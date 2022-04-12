@@ -15,9 +15,7 @@ export interface IToastOptions {
   componentFactoryResolver?: ComponentFactoryResolver;
 }
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class ToastService {
   constructor(private overlayContainerRef: OverlayContainerRef, private componentFactoryResolver: ComponentFactoryResolver) {}
 
@@ -29,6 +27,9 @@ export class ToastService {
     style,
     styleClass,
     injector,
+    /**
+     * @deprecated
+     */
     component,
     componentFactoryResolver,
   }: IToastOptions = {}) {

@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpEvent, HttpEventType, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { Directive, HostListener, Input } from '@angular/core';
 
 declare type HttpObserve = 'body' | 'events' | 'response';
@@ -96,12 +96,14 @@ export class HelperUtils {
         [header: string]: string | string[];
       };
       responseOption?: 'response' | 'body' | 'json';
+      reportProgress?: boolean;
       filename?: string;
       withCredentials?: boolean;
       downloadWithoutDispositionHeader?: boolean;
     },
     onError?: (response) => void,
     onSuccess?: (response) => void,
+    onProgress?: (response) => void,
   ) {
 
     const requestMethod = option && option.method && option.method.toLowerCase() || 'post';
@@ -118,13 +120,14 @@ export class HelperUtils {
     /* eslint-disable-next-line prefer-object-spread */
     const requestOption = Object.assign({}, {
       body: requestBody,
-      observe: 'response' as HttpObserve,
+      observe: (option.reportProgress ? 'events' : 'response') as HttpObserve,
       params: requestOptionParams,
       headers: {
         'Content-Type': requestHeaderContentType
       },
       withCredentials: option.withCredentials,
-      responseType: 'arraybuffer' as ResponseType
+      reportProgress: option.reportProgress,
+      responseType: (option.reportProgress ? 'blob' : 'arraybuffer') as ResponseType
     }, {
       headers: option.header
     });
@@ -203,27 +206,34 @@ export class HelperUtils {
       }
     };
 
-    httpClient.request(requestMethod, requestUrl, requestOption).subscribe((res: HttpResponse<any>) => {
-      const disposition = (<HttpHeaders>res.headers).get('content-disposition');
-      const contentType = (<HttpHeaders>res.headers).get('content-type');
-      if (/^attachment/i.test(disposition) || option.downloadWithoutDispositionHeader) {
-        const downloadFilename = option.filename || disposition && getFilenameFromDisposition(disposition) || url ;
-        downloadFileFromArrayBuffer(res.body, downloadFilename, contentType);
-        if (onSuccess) {
-          onSuccess(res);
+    httpClient.request(requestMethod, requestUrl, requestOption).subscribe((res: HttpEvent<any>) => {
+      if (res.type === HttpEventType.DownloadProgress) {
+        if (onProgress) {
+          onProgress(res);
         }
-      } else {
-        if (onError) {
-          let response;
-          try {
-            response = handleResponse(res);
-          } catch (e) {
-            response = res;
+      } else if (res.type === HttpEventType.Response) {
+        const httpResponse = res as HttpResponse<any>;
+        const disposition = (<HttpHeaders>httpResponse.headers).get('content-disposition');
+        const contentType = (<HttpHeaders>httpResponse.headers).get('content-type');
+
+        if (/^attachment/i.test(disposition) || option.downloadWithoutDispositionHeader) {
+          const downloadFilename = option.filename || disposition && getFilenameFromDisposition(disposition) || url ;
+          downloadFileFromArrayBuffer(httpResponse.body, downloadFilename, contentType);
+          if (onSuccess) {
+            onSuccess(httpResponse);
           }
-          onError(response);
+        } else {
+          if (onError) {
+            let response;
+            try {
+              response = handleResponse(httpResponse);
+            } catch (e) {
+              response = httpResponse;
+            }
+            onError(response);
+          }
         }
       }
-
     }, err => {
       if (onError) {
         let response;

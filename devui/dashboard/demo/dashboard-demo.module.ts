@@ -1,22 +1,21 @@
-
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
 import {
   AnchorModule, ButtonModule, DrawerModule, DropDownModule, FormModule,
   SearchModule, TabsModule, ToggleModule
 } from 'ng-devui';
-// import { OptionChartModule } from 'ng-devui-plus/experimental/option-chart';
 import { DashboardModule } from 'ng-devui/dashboard';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
+import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
 import { BasicComponent } from './basic/basic.component';
 import { DashboardDemoComponent } from './dashboard-demo.component';
 import { MoreConfigComponent } from './more-config/more-config.component';
+
 
 @NgModule({
   declarations: [
@@ -38,7 +37,6 @@ import { MoreConfigComponent } from './more-config/more-config.component';
     DDemoNavModule,
     DashboardModule,
     FormModule,
-    // OptionChartModule,
     SearchModule,
     DrawerModule,
     TabsModule,

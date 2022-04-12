@@ -17,6 +17,9 @@ export class AlertComponent {
   @Input() type: AlertType = 'info';
   @Input() cssClass: string;
   @Input() closeable = true;
+  /**
+   * @deprecated
+   */
   @Input() content: HTMLElement | string;
   @Input() showIcon = true;
   @Output() closeEvent = new EventEmitter<AlertComponent>();

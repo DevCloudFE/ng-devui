@@ -35,6 +35,7 @@ import { MultiAutoCompleteModule } from 'ng-devui/multi-auto-complete';
 |      placeholder       |                      `string`                       |                        --                        |                                         可选，placeholder                                          | [基本用法](demo#basic-usage)               |
 |      latestSource      |                    `Array<any>`                     |                        --                        |                                          可选， 最近输入                                           | [最近输入](demo#auto-latest)               |
 |     showAnimation      |                      `boolean`                      |                       true                       |                                         可选，是否开启动画                                         |                                            | ✔          |
+| cssClass | `string` | -- | 可选，输入框的className |
 
 ## d-multi-auto-complete 事件
 

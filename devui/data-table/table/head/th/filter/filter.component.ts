@@ -95,7 +95,8 @@ export class FilterComponent implements OnInit, OnChanges, OnDestroy {
 
   getFilterDataMultiple() {
     // 兼容当前当用户未传入id时，使用name做重名判断
-    const keyValue = this.checkedListForFilter.length ? this.checkedListForFilter[0].hasOwnProperty('id') ? 'id' : 'name' : '';
+    const keyValue = this.checkedListForFilter.length
+      ? Object.prototype.hasOwnProperty.call(this.checkedListForFilter[0], 'id') ? 'id' : 'name' : '';
     const checkedList = this.removeDuplication(this.checkedListForFilter, keyValue).filter(item => item.checked);
     this.setFilterIconActive(checkedList);
     this.filterChange.emit(checkedList);
@@ -190,10 +191,18 @@ export class FilterComponent implements OnInit, OnChanges, OnDestroy {
 
   filterCheckAll($event) {
     this.filterHalfChecked = false;
-    this.filterListDisplay.forEach(item => {
-      item.checked = $event;
-      this.checkedListForFilter.push(item);
-    });
+    // 全选时只针对当前面板操作，全不选时针对所有数据
+    if ($event) {
+      this.filterListDisplay.forEach(item => {
+        item.checked = $event;
+        this.checkedListForFilter.push(item);
+      });
+    } else {
+      this.filterList.forEach(item => {
+        item.checked = $event;
+        this.checkedListForFilter.push(item);
+      });
+    }
   }
 
   setHalfChecked() {

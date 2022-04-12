@@ -92,6 +92,7 @@ In the page:
 | fileUploaders | `Array<Object>` | [] | Optional. Obtain the list of selected files | [Customize Area to Upload](demo#customize-area-upload) |
 | enableDrop | `boolean` | false | Optional. Indicating whether drag is supported | [Customize Area to Upload](demo#customize-area-upload) |
 | dynamicUploadOptionsFn | [`IUploadOptions`](#iuploadoptions) | -- | Set upload parameters dynamically for each file. The parameters are the currently selected file and the value of `uploadOptions` | [Customize Area to Upload](demo#customize-area-upload) |
+| beforeUpload | `boolean \| Promise<boolean> \| Observable<boolean>` | -- | Optional. It is a callback before upload. The return value is true or false to control whether to upload a file, file information and upload configuration |
 
 ## dUpload Event
 
@@ -145,6 +146,10 @@ Each value represents:
 
 ```ts
 export class IUploadOptions {
+  // isChunked(single file) The default is off
+  isChunked?: boolean;
+  // chunk Size (single file) The default is 20 MB.
+  chunkSize?: number; 
   // Upload interface address.
   uri: string;
   // HTTP request method

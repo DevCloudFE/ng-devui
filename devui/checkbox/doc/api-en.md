@@ -29,6 +29,7 @@ In the page：
 |         color          |            `string`             |   --    |                                                      Optional. Check box color                                                      | [Basic usage](demo#checkbox-basic)                   |
 |     showAnimation      |            `boolean`            |  true   |                                          Optional. Controls whether to display animations.                                          | [Basic usage](demo#checkbox-basic)                   | ✔ |
 |      beforeChange      | `Function\|Promise\|Observable` |   --    | Callback function before checkbox switching, which returns the boolean type. If false is returned, checkbox switching is prevented. | [Stop Checkbox Switching](demo#condition-change) |
+| cssClass | `string` |  --   | Optional. ClassName of the checkbox. |
 
 ## d-checkbox Event
 
@@ -49,7 +50,6 @@ In the page：
 |        options         |          `Array<any>`           |    []    |                                                       Optional. Check box option array                                                        | [Checkbox Group](demo#tabs-group)               |
 |       filterKey        |            `string`             |    --    |              Optional. When options is an object array, this parameter identifies the key value of the unique ID of the option.               | [Checkbox Group](demo#tabs-group)               |
 | labelTemplate |          `TemplateRef`          |    --    |                                                    Optional. Custom template of the label                                                     | [Checkbox Group](demo#tabs-group)               |
-|      halfchecked       |            `boolean`            |  false   |                                                            Optional. Half-selected                                                            |                                                      |
 |         color          |            `string`             |    --    |                                                           Optional. Check box color                                                           | [Checkbox Group](demo#tabs-group)               |
 |     showAnimation      |            `boolean`            |   true   |                                               Optional. Controls whether to display animations.                                               | [Checkbox Group](demo#tabs-group)               |✔ |
 |      beforeChange      | `Function\|Promise\|Observable` |    --    |   Callback function before checkbox switching, which returns the boolean type. If false is returned, checkbox-group switching is prevented.   | [Stop Checkbox Switching](demo#condition-change) |

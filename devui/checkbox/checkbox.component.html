@@ -52,12 +52,14 @@
         </g>
       </svg>
     </span>
-    <ng-template [ngIf]="!!label && !labelTemplate">{{ label }}</ng-template>
-    <ng-template
-      [ngIf]="!!labelTemplate"
-      [ngTemplateOutlet]="labelTemplate"
-      [ngTemplateOutletContext]="{ $implicit: this, checked: checked, halfchecked: halfchecked, disabled: disabled, label: label }"
-    >
-    </ng-template>
+    <div class="devui-checkbox-label">
+      <ng-template [ngIf]="!!label && !labelTemplate">{{ label }}</ng-template>
+      <ng-template
+        [ngIf]="!!labelTemplate"
+        [ngTemplateOutlet]="labelTemplate"
+        [ngTemplateOutletContext]="{ $implicit: this, checked: checked, halfchecked: halfchecked, disabled: disabled, label: label }"
+      >
+      </ng-template>
+    </div>
   </label>
 </div>

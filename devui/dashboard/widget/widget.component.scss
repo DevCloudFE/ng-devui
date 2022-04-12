@@ -1,16 +1,21 @@
-@import '../../style/theme/animation';
+@import '../../style/core/animation';
 @import '../../style/theme/color';
 @import '../../style/theme/corner';
 
 :host {
   display: block;
   background-color: transparent;
-  // 解决hover在handle的时候不高亮卡片，搭配:host:hover颜色使用
+  position: absolute !important;
+  // hover卡片之间间距的时候不应该高亮
   pointer-events: none;
-
+  // 内部元素
   & ::ng-deep > * {
     pointer-events: auto;
   }
+}
+
+.ui-draggable-dragging :host > * {
+  pointer-events: none !important;
 }
 
 .d-dashboard-widget {

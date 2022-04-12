@@ -31,7 +31,6 @@ import { StepsGuideModule } from 'ng-devui/steps-guide';
 |    targetElement     |                    `HTMLElement`                    |  --  |                                       可选，指引信息显示的目标 dom ，如果指定，不再使用指令所在的 dom 作为目标                                        | [自定义位置](demo#custom-usage) |
 |    scrollElement     |                    `HTMLElement`                    |  --  |                                 可选，指引信息跟随滚动定位的容器 dom ，默认会自动获取，如果与预想 dom 不同时需要指定                                  |                                 |
 | scrollToTargetSwitch |                      `boolean`                      | true |                                                    可选，是否自动滚动页面至指引信息显示的位置 dom                                                     | [基本用法](demo#basic-usage)    |
-
 | observerDom | `HTMLElement` | -- | 可选，允许用户指定一个 dom 反馈页面变化。主要用于用户无法控制或判断的且不会触发 resize 事件的 dom 改变导致指引信息位置变化的情况，例如：指引信息绑定在 fixed 定位的头部菜单，页面随路由跳转内容变化会显示或隐藏滚动条导致头部菜单的 dom 位置发生变化 | [自定义位置](demo#custom-usage) |
 | extraConfig | [`ExtraConfig`](#extraconfig) | -- | 可选，扩展配置，用于隐藏上一步按钮和步骤圆点图标，ExtraConfig 对象定义见下文 | [自定义位置](demo#custom-usage) |
 

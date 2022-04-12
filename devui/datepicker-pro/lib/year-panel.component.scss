@@ -97,11 +97,11 @@
         cursor: not-allowed;
 
         &:first-of-type {
-          border-radius: 4px 0 0 4px;
+          border-radius: $devui-border-radius-feedback 0 0 $devui-border-radius-feedback;
         }
 
         &:last-of-type {
-          border-radius: 0 4px 4px 0;
+          border-radius: 0 $devui-border-radius-feedback $devui-border-radius-feedback 0;
         }
       }
     }

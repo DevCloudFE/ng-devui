@@ -11,7 +11,7 @@
     <li
       role="presentation"
       [class.disabled]="tab.disabled"
-      [id]="tab.tabId === undefined ? '' : tab.tabId"
+      [id]="tab.id === undefined ? '' : tab.id"
       [class.active]="tab.id == activeTab"
       (click)="select(tab.id)"
     >
@@ -32,7 +32,7 @@
 <div class="devui-tab-content" *ngIf="showContent">
   <ng-container *ngFor="let tab of tabs">
     <div class="devui-tab-pane fade in" role="tabpanel" *ngIf="tab.id == activeTab" [ngClass]="{ 'in active': tab.id == activeTab }">
-      <ng-template [ngTemplateOutlet]="tab.contentTpl?.templateRef"></ng-template>
+      <ng-template [ngTemplateOutlet]="tab.contentTpl?.templateRef || tab.innerContent"></ng-template>
     </div>
   </ng-container>
 </div>

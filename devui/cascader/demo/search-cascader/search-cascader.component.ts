@@ -17,7 +17,7 @@ export class SearchCascaderComponent {
             {
               label: 'option1-1-1',
               value : 8,
-              children: []
+              isLeaf: true
             },
             {
               label: 'option1-1-2',

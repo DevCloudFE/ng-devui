@@ -112,7 +112,7 @@ export class DropDownDirective implements OnDestroy, OnChanges, AfterContentInit
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.hasOwnProperty('trigger')) {
+    if (Object.prototype.hasOwnProperty.call(changes,'trigger')) {
       this.handleHoverSubscriptionIfTriggerIsHover();
     }
   }

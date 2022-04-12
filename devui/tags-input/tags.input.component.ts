@@ -338,7 +338,7 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
     ) {
       return;
     }
-    this.canAdd().then((result) => {
+    this.canAdd(value).then((result) => {
       if (!result) {
         return;
       }
@@ -352,7 +352,7 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
       );
       this._suggestionList.splice(suggestionListIndex, 1);
       this.delayResetNewTag();
-      this.sourceSubscription.next(this.newTag);
+      this.sourceSubscription.next('');
     });
   }
 
@@ -419,10 +419,10 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
     this.sourceSubscription.next('');
   }
 
-  canAdd() {
+  canAdd(value?) {
     let checkResult = Promise.resolve(true);
     if (this.checkBeforeAdd) {
-      const result: any = this.checkBeforeAdd(this.newTag);
+      const result: any = this.checkBeforeAdd(value || this.newTag);
       if (typeof result !== 'undefined') {
         if (result.then) {
           checkResult = result;

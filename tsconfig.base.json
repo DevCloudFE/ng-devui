@@ -18,21 +18,12 @@
     "noFallthroughCasesInSwitch": true,
     "forceConsistentCasingInFileNames": true,
     "target": "es2015",
-    "typeRoots": [
-      "node_modules/@types"
-    ],
-    "lib": [
-      "es2018",
-      "dom"
-    ],
+    "typeRoots": ["node_modules/@types"],
+    "lib": ["es2018", "dom"],
     "paths": {
-      "ng-devui": [
-        "devui/index.ts"
-      ],
-      "ng-devui/*": [
-        "devui/*"
-      ]
-    },
+      "ng-devui": ["devui/index.ts"],
+      "ng-devui/*": ["devui/*"]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
@@ -40,8 +31,5 @@
     "strictInputAccessModifiers": true,
     "strictTemplates": true
   },
-  "include": [
-    "./src/**/*.ts",
-    "./devui/**/*.ts"
-  ]
+  "include": ["./src/**/*.ts", "./devui/**/*.ts"]
 }

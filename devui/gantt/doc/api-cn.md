@@ -12,6 +12,17 @@ import { GanttModule } from 'ng-devui/gantt';
 |         milestoneList         | `GanttMilestone[]` |  []   | 可选，版本里程碑列表                       | [与datatable组件结合的甘特图](demo#gantt-with-datatable) |
 | ganttScaleContainerOffsetLeft |      `number`      |   0   | 可选，甘特图时间轴容器左偏移像素           | [与datatable组件结合的甘特图](demo#gantt-with-datatable) |
 |   ganttBarContainerElement    |     `Element`      | null  | 必选，甘特图时间条容器，用于显示甘特图标线 | [与datatable组件结合的甘特图](demo#gantt-with-datatable) |
+|         scrollElement         |     `Element`      |  --   | 可选，滚动的容器                         | [与datatable组件结合的甘特图](demo#gantt-with-datatable) |
+|             unit              | `'day'\|'week'\|'month'` | 'day' | 可选，默认时间维度                 |
+|            height             |      `number`      |  --   | 可选，高度                              |
+|           startDate           |       `Date`       |  --   | 可选，开始时间                           |
+|            endDate            |       `Date`       |  --   | 可选，结束时间                           |
+
+### d-gantt-scale 事件
+
+|        事件         |             类型               |             描述            | 跳转 Demo                                                                  |
+| :-----------------: | :---------------------------: | :-------------------------: | -------------------------------------------------------------------------- |
+|  addMilestoneEvent  | `EventEmitter<GanttScaleDateInfo>` | 点击新建后触发事件            |
 
 ### d-gantt-bar 参数
 
@@ -32,6 +43,7 @@ import { GanttModule } from 'ng-devui/gantt';
 | customBarClass   |     `string`      |   --    | 可选，自定义拖拽bar的样式                                      | -- |
 | customBgClass   |     `string`      |   --    | 可选，拖拽bar在移动的时候的背景色                                     | -- |
 | customTitleClass   |     `string`      |   --    | 可选，自定义title样式                                     | -- |
+| scrollElement   |     `Element`      | --  | 可选，滚动的容器                         | [基本用法](demo#gantt-basic) |
 
 
 ### d-gantt-bar 事件

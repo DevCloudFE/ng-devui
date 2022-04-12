@@ -28,12 +28,6 @@ export class ButtonDemoComponent implements OnInit, OnDestroy {
     { title: 'TS', language: 'typescript', code: require('./primary/primary.component.ts?raw') },
   ];
 
-  leftRightSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('./left-right/left-right.component.html?raw') },
-    { title: 'TS', language: 'typescript', code: require('./left-right/left-right.component.ts?raw') },
-    { title: 'SCSS', language: 'css', code: require('./left-right/left-right.component.scss?raw') },
-  ];
-
   textSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('./text/text.component.html?raw') },
     { title: 'TS', language: 'typescript', code: require('./text/text.component.ts?raw') },

@@ -330,7 +330,7 @@ export class SingleDateRangePickerComponent extends SingleDatepickerComponent im
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.hasOwnProperty('selectedRange')) {
+    if (Object.prototype.hasOwnProperty.call(changes, 'selectedRange')) {
       this.selectingRange = false;
       [this.rangeStart, this.rangeEnd] = changes['selectedRange'].currentValue;
     }

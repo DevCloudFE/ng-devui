@@ -88,7 +88,9 @@ export class MergeNodeComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     // 树节点初始化完毕后调用mergeTreeNodes方法将节点合并
-    this.basicTree.treeFactory.mergeTreeNodes();
+    setTimeout(() => {
+      this.basicTree.treeFactory.mergeTreeNodes();
+    });
   }
 
   onNodeSelected(treeNode: TreeNode) {

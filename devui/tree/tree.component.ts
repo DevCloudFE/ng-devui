@@ -156,11 +156,11 @@ export class TreeComponent implements OnInit, OnChanges, AfterViewInit, OnDestro
   }
 
   public isSelectableRegion(ele) {
-    if (!ele.classList.contains('devui-tree-node__content--value-wrapper')
+    if (ele && !ele.classList.contains('devui-tree-node__content--value-wrapper')
       && !ele.classList.contains('devui-tree-node__content')
       && !ele.classList.contains('devui-tree-node__title')
       && ele.tagName !== 'D-HIGHLIGHT'
-      && ele.parentNode.tagName !== 'D-HIGHLIGHT') {
+      && ele.parentNode?.tagName !== 'D-HIGHLIGHT') {
       return false;
     }
     return true;

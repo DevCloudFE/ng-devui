@@ -9,14 +9,14 @@
 </span>
 <span class="devui-badge-status devui-badge-status-{{ status }}" *ngIf="showDot && !hasContent"></span>
 <span
-  class="devui-badge-content devui-badge-content-{{ status }} devui-badge-content-{{ badgePos }}"
+  class="devui-badge-content devui-badge-content-{{ status }} devui-badge-content-{{ position }}"
   *ngIf="hasContent"
   [style.background]="bgColor"
   [style.color]="textColor"
-  [style.right.px]="offsetXY && offsetXY[0] ? -offsetXY[0] : null"
-  [style.top.px]="offsetXY && offsetXY[1] ? offsetXY[1] : null"
+  [style.right.px]="offset && offset[0] ? -offset[0] : null"
+  [style.top.px]="offset && offset[1] ? offset[1] : null"
   [ngClass]="{ 'devui-badge-content-count': !showDot, 'devui-badge-content-dot': showDot }"
 >
-  <ng-container *ngIf="!showDot && count <= maxCount">{{ count }}</ng-container>
-  <ng-container *ngIf="!showDot && count > maxCount">{{ maxCount }}+</ng-container>
+  <ng-container *ngIf="!showDot && parseCountToNumber() <= maxCount">{{ count }}</ng-container>
+  <ng-container *ngIf="!showDot && parseCountToNumber() > maxCount">{{ maxCount }}+</ng-container>
 </span>

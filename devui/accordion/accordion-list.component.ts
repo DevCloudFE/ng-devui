@@ -1,5 +1,6 @@
 import {
-  Component, Host, HostBinding, Inject, Input, OnDestroy, OnInit,
+  Component,
+  forwardRef, Host, HostBinding, Inject, Input, OnDestroy, OnInit,
   Optional, QueryList, SkipSelf, ViewChildren, ViewEncapsulation
 } from '@angular/core';
 import { expandCollapse, expandCollapseForDomDestroy } from 'ng-devui/utils';
@@ -17,31 +18,11 @@ import { AccordionMenuItem } from './accordion.type';
   preserveWhitespaces: false,
   providers: [{
     provide: ACCORDION_LIST,
-    useExisting: AccordionListComponent
+    useExisting: forwardRef(() => AccordionListComponent)
   }]
 })
 export class AccordionListComponent implements OnInit, OnDestroy {
 
-  // @HostBinding('class.open')
-  // get open() {
-  //   return (this.keyOpen === undefined && this.accordion.autoOpenActiveMenu)
-  //     ? this.childActived
-  //     : this.keyOpen;
-  // }
-  // get keyOpen() {
-  //   return this.data && this.data[this.accordion.openKey];
-  // }
-
-  // get children() {
-  //   return this.data && this.data[this.accordion.childrenKey];
-  // }
-  // get childActived() {
-  //   return this.routerLinkActived || this.hasActiveChildren;
-  // }
-
-  // get showAnimate() {
-  //   return this.accordion.showAnimation;
-  // }
   constructor(@Optional() @Host() @SkipSelf() @Inject(ACCORDION_MENU) private parentComponent: any,
               @Inject(ACCORDION) private accordion: any) {}
   @HostBinding('class.devui-accordion-show-animate') get animateState() {
@@ -113,7 +94,7 @@ export class AccordionListComponent implements OnInit, OnDestroy {
   @Input() parent: AccordionMenuItem;
   @ViewChildren(ACCORDION_MENU) accordionMenuQueryList: QueryList<any>;
   @ViewChildren(AccordionItemRouterlinkComponent) accordionItemRouterlinkQueryList: QueryList<AccordionItemRouterlinkComponent>;
-6;
+  6;
   ngOnInit(): void {
     if (this.parentComponent) {
       setTimeout(() => {this.parentComponent.accordionListFromView = this; });

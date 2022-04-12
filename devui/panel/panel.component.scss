@@ -21,7 +21,7 @@
       position: relative;
       border-top: 1px solid $devui-dividing-line;
 
-      d-panel-body {
+      .d-panel-body {
         line-height: 1.5;
         padding: 20px;
         background: $devui-base-bg;
@@ -33,7 +33,7 @@
           content: none;
         }
 
-        d-panel-body {
+        .d-panel-body {
           border-left: none;
         }
 
@@ -44,7 +44,7 @@
             height: 100%;
           }
 
-          d-panel-body {
+          .d-panel-body {
             border-left: 2px solid $devui-dividing-line;
           }
         }
@@ -61,7 +61,8 @@
       }
     }
 
-    &.devui-panel-default {
+    &.devui-panel-default,
+    &.devui-panel-common {
       .devui-panel-heading,
       .devui-panel-body {
         background-color: $devui-default-bg;
@@ -75,7 +76,7 @@
       }
 
       .devui-panel-body-collapse.has-left-padding {
-        d-panel-body {
+        .d-panel-body {
           border-color: $devui-primary-line;
         }
       }
@@ -88,7 +89,7 @@
       }
 
       .devui-panel-body-collapse.has-left-padding {
-        d-panel-body {
+        .d-panel-body {
           border-color: $devui-info-line;
         }
       }
@@ -101,7 +102,7 @@
       }
 
       .devui-panel-body-collapse.has-left-padding {
-        d-panel-body {
+        .d-panel-body {
           border-color: $devui-success-line;
         }
       }
@@ -114,7 +115,7 @@
       }
 
       .devui-panel-body-collapse.has-left-padding {
-        d-panel-body {
+        .d-panel-body {
           border-color: $devui-warning-line;
         }
       }
@@ -127,8 +128,31 @@
       }
 
       .devui-panel-body-collapse.has-left-padding {
-        d-panel-body {
+        .d-panel-body {
           border-color: $devui-danger-line;
+        }
+      }
+    }
+
+    &.devui-panel-ghost {
+      .devui-panel-heading,
+      .devui-panel-body {
+        background-color: transparent;
+        border: none;
+        padding: 0;
+      }
+
+      .d-panel-body {
+        padding: 16px 20px;
+      }
+
+      .devui-panel-body-collapse.has-left-padding {
+        &::before {
+          display: none;
+        }
+
+        .d-panel-body {
+          border: none;
         }
       }
     }

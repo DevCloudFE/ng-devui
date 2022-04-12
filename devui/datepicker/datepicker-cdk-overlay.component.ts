@@ -293,7 +293,7 @@ export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDes
   private writeModelValue(selectDateObj: any) {
     let selectDate;
     let dateReason = SelectDateChangeReason.time;
-    if (selectDateObj && typeof selectDateObj === 'object' && selectDateObj.hasOwnProperty('selectedDate')) {
+    if (selectDateObj && typeof selectDateObj === 'object' && Object.prototype.hasOwnProperty.call(selectDateObj, 'selectedDate')) {
       selectDate = selectDateObj.selectedDate;
       dateReason = selectDateObj.reason;
     }

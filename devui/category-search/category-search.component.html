@@ -68,48 +68,10 @@
           dDropDownMenu
           class="devui-dropdown-menu devui-tag-dropdown-menu devui-dropdown-overlay devui-dropdown-menu-fix"
           [ngClass]="{ 'max-height': item.type !== 'treeSelect' }"
-          [ngSwitch]="item.type"
         >
           <ng-template
-            *ngSwitchCase="'radio'"
-            [ngTemplateOutlet]="item?.customTemplate || radioTemplate"
-            [ngTemplateOutletContext]="{ tagOption: item }"
-          ></ng-template>
-          <ng-template
-            *ngSwitchCase="'dateRange'"
-            [ngTemplateOutlet]="item?.customTemplate || dateRangeTemplate"
-            [ngTemplateOutletContext]="{ tagOption: item, dropdown: selectedDropdown }"
-          >
-          </ng-template>
-          <ng-template
-            *ngSwitchCase="'checkbox'"
-            [ngTemplateOutlet]="item?.customTemplate || checkboxTemplate"
-            [ngTemplateOutletContext]="{ tagOption: item, dropdown: selectedDropdown }"
-          ></ng-template>
-          <ng-template
-            *ngSwitchCase="'label'"
-            [ngTemplateOutlet]="item?.customTemplate || labelTypeTemplate"
-            [ngTemplateOutletContext]="{ tagOption: item, dropdown: selectedDropdown }"
-          ></ng-template>
-          <ng-template
-            *ngSwitchCase="'textInput'"
-            [ngTemplateOutlet]="item?.customTemplate || textInputTemplate"
-            [ngTemplateOutletContext]="{ tagOption: item, dropdown: selectedDropdown }"
-          ></ng-template>
-          <ng-template
-            *ngSwitchCase="'numberRange'"
-            [ngTemplateOutlet]="item?.customTemplate || numberRangeTemplate"
-            [ngTemplateOutletContext]="{ tagOption: item, dropdown: selectedDropdown }"
-          ></ng-template>
-          <ng-template
-            *ngSwitchCase="'treeSelect'"
-            [ngTemplateOutlet]="item?.customTemplate || treeTemplate"
+            [ngTemplateOutlet]="item.customTemplate || templates[item.type]"
             [ngTemplateOutletContext]="{ tagOption: item, dropdown: selectedDropdown, isSelected: true }"
-          ></ng-template>
-          <ng-template
-            *ngSwitchDefault
-            [ngTemplateOutlet]="item?.customTemplate"
-            [ngTemplateOutletContext]="{ tagOption: item, dropdown: selectedDropdown }"
           ></ng-template>
         </div>
       </li>
@@ -135,7 +97,7 @@
               [(ngModel)]="searchKey"
               (ngModelChange)="searchKeyChangeEvent($event)"
               (click)="openMenu(inputDropdown, $event)"
-              (keyup)="checkInputSearching($event); openMenu(inputDropdown, $event)"
+              (keyup)="checkInputSearching(); openMenu(inputDropdown, $event)"
               (keydown.backspace)="backspaceEvent(inputDropdown)"
               (keydown.enter)="searchInputValue($event); closeMenu(inputDropdown)"
               (focus)="isHover = false; isFocus = true"
@@ -164,64 +126,41 @@
               </ul>
             </ng-container>
             <ng-container *ngIf="enterSearch">
-              <li class="devui-dropdown-item devui-search-description" (click)="searchInputValue($event); closeMenu(inputDropdown)">
-                <a><span class="icon-search" style="margin: 0 4px"></span>{{ i18nCategorySearchText?.getSearchMessage(searchKey) }}</a>
+              <li
+                *ngIf="showSearchConfig.keyword"
+                class="devui-dropdown-item devui-search-description"
+                (click)="searchInputValue($event); closeMenu(inputDropdown)"
+              >
+                <a><span class="icon-search" style="margin: 0 4px"></span>{{ showSearchConfig.keywordDescription(searchKey) }}</a>
               </li>
-              <li *ngFor="let item of searchField" (click)="searchCategory(item); closeMenu(inputDropdown)">
-                <a class="devui-dropdown-item"
-                  ><span class="icon-search" style="margin: 0 4px"></span>{{ i18nCategorySearchText?.getFindingMessage(item?.label) }}</a
-                >
-              </li>
-              <div class="devui-dividing-line"></div>
-              <div class="devui-dropdown-menu-tip">{{ i18nCategorySearchText?.selectFilterCondition }}:</div>
-              <ul class="devui-dropdown-menu-template devui-tag-dropdown-menu devui-radio-template">
-                <li
-                  *ngFor="let item of currentSearchCategory"
-                  (click)="clearSearchKey(); checkInputSearching($event); chooseCategory(item, inputDropdown); closeMenu(inputDropdown)"
-                >
-                  <a class="devui-dropdown-item">{{ item?.label }}</a>
+              <ng-container *ngIf="showSearchConfig.field">
+                <li *ngFor="let item of searchField" (click)="searchCategory(item); closeMenu(inputDropdown)">
+                  <a class="devui-dropdown-item"
+                    ><span class="icon-search" style="margin: 0 4px"></span>{{ showSearchConfig.fieldDescription(item?.label) }}</a
+                  >
                 </li>
-              </ul>
+              </ng-container>
+              <div
+                *ngIf="(showSearchConfig.keyword || showSearchConfig.field) && showSearchConfig.category"
+                class="devui-dividing-line"
+              ></div>
+              <ng-container *ngIf="showSearchConfig.category">
+                <div class="devui-dropdown-menu-tip" [style.paddingBottom]="currentSearchCategory.length ? '0' : '12px'">
+                  {{ showSearchConfig.categoryDescription }}
+                </div>
+                <ul class="devui-dropdown-menu-template devui-tag-dropdown-menu devui-radio-template">
+                  <li
+                    *ngFor="let item of currentSearchCategory"
+                    (click)="clearSearchKey(); checkInputSearching(); chooseCategory(item, inputDropdown); closeMenu(inputDropdown)"
+                  >
+                    <a class="devui-dropdown-item">{{ item?.label }}</a>
+                  </li>
+                </ul>
+              </ng-container>
             </ng-container>
-            <ng-container *ngIf="!enterSearch && currentSelectTag" [ngSwitch]="currentSelectTag.type">
+            <ng-container *ngIf="!enterSearch && currentSelectTag">
               <ng-template
-                *ngSwitchCase="'radio'"
-                [ngTemplateOutlet]="currentSelectTag?.customTemplate || radioTemplate"
-                [ngTemplateOutletContext]="{ tagOption: currentSelectTag }"
-              ></ng-template>
-              <ng-template
-                *ngSwitchCase="'dateRange'"
-                [ngTemplateOutlet]="currentSelectTag?.customTemplate || dateRangeTemplate"
-                [ngTemplateOutletContext]="{ tagOption: currentSelectTag, dropdown: inputDropdown }"
-              ></ng-template>
-              <ng-template
-                *ngSwitchCase="'checkbox'"
-                [ngTemplateOutlet]="currentSelectTag?.customTemplate || checkboxTemplate"
-                [ngTemplateOutletContext]="{ tagOption: currentSelectTag, dropdown: inputDropdown }"
-              ></ng-template>
-              <ng-template
-                *ngSwitchCase="'label'"
-                [ngTemplateOutlet]="currentSelectTag?.customTemplate || labelTypeTemplate"
-                [ngTemplateOutletContext]="{ tagOption: currentSelectTag, dropdown: inputDropdown }"
-              ></ng-template>
-              <ng-template
-                *ngSwitchCase="'textInput'"
-                [ngTemplateOutlet]="currentSelectTag?.customTemplate || textInputTemplate"
-                [ngTemplateOutletContext]="{ tagOption: currentSelectTag, dropdown: inputDropdown }"
-              ></ng-template>
-              <ng-template
-                *ngSwitchCase="'numberRange'"
-                [ngTemplateOutlet]="currentSelectTag?.customTemplate || numberRangeTemplate"
-                [ngTemplateOutletContext]="{ tagOption: currentSelectTag, dropdown: inputDropdown }"
-              ></ng-template>
-              <ng-template
-                *ngSwitchCase="'treeSelect'"
-                [ngTemplateOutlet]="currentSelectTag?.customTemplate || treeTemplate"
-                [ngTemplateOutletContext]="{ tagOption: currentSelectTag, dropdown: inputDropdown }"
-              ></ng-template>
-              <ng-template
-                *ngSwitchDefault
-                [ngTemplateOutlet]="currentSelectTag?.customTemplate"
+                [ngTemplateOutlet]="currentSelectTag.customTemplate || templates[currentSelectTag.type]"
                 [ngTemplateOutletContext]="{ tagOption: currentSelectTag, dropdown: inputDropdown }"
               ></ng-template>
             </ng-container>
@@ -328,7 +267,7 @@
       #seeMoreDropdown="d-dropdown"
       dDropDown
       appendToBody
-      [alignOrigin]="PrimeContainerRef"
+      [alignOrigin]="primeContainer"
       [appendToBodyDirections]="['rightDown', 'rightUp', 'leftDown', 'leftUp']"
     >
       <svg
@@ -349,7 +288,7 @@
         </g>
       </svg>
       <div dDropDownMenu class="devui-selected-tags-list">
-        <ul [ngStyle]="{ width: PrimeContainer?.clientWidth + 'px' }">
+        <ul [ngStyle]="{ width: primeContainer?.nativeElement.clientWidth + 'px' }">
           <li class="devui-tag-item" *ngFor="let item of selectedTags; let i = index" (click)="scrollToTag(i, $event)">
             <div class="devui-tag-container">
               <d-tag
@@ -390,7 +329,11 @@
   <div class="devui-category-search-group devui-font-secondary-title">{{ item?.groupName }}</div>
 </ng-template>
 
-<ng-template #radioTemplate let-tagOption="tagOption">
+<ng-template #noData>
+  <div class="devui-no-data-text">{{ i18nCommonText?.noData }}</div>
+</ng-template>
+
+<ng-template [type]="'radio'" let-tagOption="tagOption">
   <div *ngIf="!tagOption.options?.length">
     <ng-container *ngTemplateOutlet="noData"></ng-container>
   </div>
@@ -406,13 +349,13 @@
   </ul>
 </ng-template>
 
-<ng-template #dateRangeTemplate let-tagOption="tagOption" let-dropdown="dropdown">
+<ng-template [type]="'dateRange'" let-tagOption="tagOption" let-dropdown="dropdown">
   <d-datepicker-calendar
     id="{{ tagOption.field }}"
     style="overflow-x: hidden"
     #dDatepickerPro
     [isRangeType]="true"
-    [showTime]="true"
+    [showTime]="tagOption.showTime"
     [ngModel]="tagOption.value.value"
     (ngModelChange)="dateValueChange(tagOption, dDatepickerPro)"
   >
@@ -431,7 +374,7 @@
   </d-datepicker-calendar>
 </ng-template>
 
-<ng-template #checkboxTemplate let-tagOption="tagOption" let-dropdown="dropdown">
+<ng-template [type]="'checkbox'" let-tagOption="tagOption" let-dropdown="dropdown">
   <div *ngIf="!tagOption.options?.length">
     <ng-container *ngTemplateOutlet="noData"></ng-container>
   </div>
@@ -450,7 +393,7 @@
   </div>
 </ng-template>
 
-<ng-template #labelTypeTemplate let-tagOption="tagOption" let-dropdown="dropdown">
+<ng-template [type]="'label'" let-tagOption="tagOption" let-dropdown="dropdown">
   <div *ngIf="!tagOption.options?.length">
     <ng-container *ngTemplateOutlet="noData"></ng-container>
   </div>
@@ -474,7 +417,7 @@
   </div>
 </ng-template>
 
-<ng-template #textInputTemplate let-tagOption="tagOption" let-dropdown="dropdown">
+<ng-template [type]="'textInput'" let-tagOption="tagOption" let-dropdown="dropdown">
   <form #textInputForm="ngForm">
     <input
       class="devui-category-search-type-text-input"
@@ -492,7 +435,7 @@
   </div>
 </ng-template>
 
-<ng-template #numberRangeTemplate let-tagOption="tagOption" let-dropdown="dropdown">
+<ng-template [type]="'numberRange'" let-tagOption="tagOption" let-dropdown="dropdown">
   <div class="devui-input-number-operation-area">
     <d-input-number
       size="sm"
@@ -524,7 +467,7 @@
   </div>
 </ng-template>
 
-<ng-template #treeTemplate let-tagOption="tagOption" let-dropdown="dropdown" let-isSelected="isSelected">
+<ng-template [type]="'treeSelect'" let-tagOption="tagOption" let-dropdown="dropdown" let-isSelected="isSelected">
   <div *ngIf="tagOption.multiple && tagOption.options?.length">
     <ul class="devui-select-list">
       <span>{{ i18nCategorySearchText?.selected }}</span>
@@ -588,8 +531,4 @@
     <d-button (btnClick)="getTreeValue(tagOption, tree); closeMenu(dropdown)">{{ i18nCategorySearchText?.confirm }}</d-button>
     <d-button bsStyle="common" (btnClick)="closeMenu(dropdown)">{{ i18nCategorySearchText?.cancel }}</d-button>
   </div>
-</ng-template>
-
-<ng-template #noData>
-  <div class="devui-no-data-text">{{ i18nCommonText?.noData }}</div>
 </ng-template>

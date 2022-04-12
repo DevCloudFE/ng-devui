@@ -1,5 +1,5 @@
 export function scrollAnimate(target, currentTopValue, targetTopValue, timeGap = 40, scrollTime = 450, callback?) {
-  if (typeof document === 'undefined' || typeof window === 'undefined') {
+  if (typeof document === 'undefined' || typeof window === 'undefined' || !target) {
     return;
   }
   const startTimeStamp = Date.now();

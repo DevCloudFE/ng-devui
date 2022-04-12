@@ -56,7 +56,7 @@ export class ExamplePanelComponent implements OnInit, AfterViewInit {
   }
 
   getData (translations) {
-    if (translations && translations['components'].hasOwnProperty(this.componentPath)) {
+    if (translations && Object.prototype.hasOwnProperty.call(translations['components'], this.componentPath)) {
       const component = translations['components'][this.componentPath];
       this.componentName = component.name;
       this.description = component.description;

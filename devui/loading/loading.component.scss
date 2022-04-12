@@ -22,6 +22,7 @@
   z-index: $devui-z-index-full-page-overlay;
   width: max-content;
   max-width: 100%;
+  display: flex;
 }
 
 .devui-message-wrapper {
@@ -35,7 +36,7 @@
 
 .devui-busy-default-sign {
   position: relative;
-  display: inline-block;
+  display: inline-flex;
   z-index: $devui-z-index-full-page-overlay;
   padding: 12px 12px;
   color: $devui-text;

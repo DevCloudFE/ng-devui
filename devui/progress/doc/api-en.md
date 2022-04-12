@@ -14,10 +14,8 @@ In the page：
 
 | Parameter | Type | Default | Description | Jump to Demo |Global Config| 
 | :----------------: | :------------: | :-------: | :-------: | :------------------------------------------------------- | ---------------------------------------------- |
-| percentage | `number` | 0 | Optional. The maximum value of the progress bar is 100. | [Basic Usage](demo#basic-usage) |
-| percentageText | `string` | -- | Optional. Text description of the current value of the progress bar, for example, '30%'\| '4/5' | [Basic Usage](demo#basic-usage) |
-| barbgcolor | `string` | '#5170ff' | Optional. Color of the progress bar. The default value is sky blue. | [Basic Usage](demo#basic-usage) |
-| height | `string` | '20px' | Optional. The default value is 20px. | [Basic Usage](demo#basic-usage) |
-| isCircle | `boolean` | false | Optional. Whether the progress bar is displayed in a circle. | [Circle Usage](demo#circle-usage) |
-| strokeWidth | `number` | 6 | Optional. Sets the width of the progress bar. The unit is the percentage of the progress bar to the width of the canvas. | [Circle Usage](demo#circle-usage) |
-| showContent | `boolean` | true | Optional. Sets whether to display content in the circle progress bar. | [Circle Usage](demo#circle-usage) |
+| type | `line \| circle` | false | Optional. This parameter indicates whether the progress bar is in a circle shape. | [circle usage](demo#circle-usage) |
+| percentage | `number` | 0 | Optional. The maximum value of the progress bar is 100 | [Basic usage](demo#basic-usage) |
+| percentageText | `string` | -- | Optional. The text description of the current value of the progress bar is as follows: '30%' \| '4/5' | [Basic usage](demo#basic-usage) |
+| strokeColor | `string` | '#5170ff' | Optional. The color of the progress bar is sky blue by default. | [Basic usage](demo#basic-usage) |
+| strokeWidth | `number` | 14 | Optional. Line width of the progress bar | [Circle usage](demo#circle-usage) |

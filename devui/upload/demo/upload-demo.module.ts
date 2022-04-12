@@ -20,6 +20,7 @@ import { CustomizeComponent } from './customize/customize.component';
 import { DynamicUploadOptionsComponent } from './dynamic-upload-options/dynamic-upload-options.component';
 import { MultiComponent } from './multi/multi.component';
 import { UploadDemoComponent } from './upload-demo.component';
+import { UploadSliceComponent } from './slice/upload-slice.component';
 
 @NgModule({
   imports: [
@@ -52,7 +53,8 @@ import { UploadDemoComponent } from './upload-demo.component';
     CustomizeComponent,
     UploadAutoComponent,
     DynamicUploadOptionsComponent,
-    CustomizeAreaUploadComponent
+    CustomizeAreaUploadComponent,
+    UploadSliceComponent
   ],
 
   providers: [],

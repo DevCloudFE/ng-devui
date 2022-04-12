@@ -106,18 +106,16 @@ export class TimePickerComponent implements OnChanges, OnInit, OnDestroy, Contro
   private onTouched = () => null;
 
   @Input() set minTime(minTime: string) {
-    if (this.validateTime(minTime)) {
-      this.setCurrent('minTime', minTime);
-    }
+    this.setCurrent('minTime', minTime);
+    this.setTimeArr();
   }
   get minTime() {
     return this.getCurrent('minTime');
   }
 
   @Input() set maxTime(maxTime: string) {
-    if (this.validateTime(maxTime)) {
-      this.setCurrent('maxTime', maxTime);
-    }
+    this.setCurrent('maxTime', maxTime);
+    this.setTimeArr();
   }
   get maxTime() {
     return this.getCurrent('maxTime');
@@ -424,7 +422,7 @@ export class TimePickerComponent implements OnChanges, OnInit, OnDestroy, Contro
 
   private writeModelValue(selectTimeObj: any, noEmit = false) {
     let selectTime;
-    if (selectTimeObj && typeof selectTimeObj === 'object' && selectTimeObj.hasOwnProperty('selectedTime')) {
+    if (selectTimeObj && typeof selectTimeObj === 'object' && Object.prototype.hasOwnProperty.call(selectTimeObj, 'selectedTime')) {
       selectTime = selectTimeObj.selectedTime;
     } else {
       selectTime = selectTimeObj;
@@ -544,7 +542,7 @@ export class TimePickerComponent implements OnChanges, OnInit, OnDestroy, Contro
   // 当存在值选中的是不可选选项时，进行修正
   fixTimeInRange(list) {
     const curActive = list.find(item => item.active);
-    if (curActive.disabled) {
+    if (curActive?.disabled) {
       this.selectTime(list.find(item => !item.disabled));
     }
   }

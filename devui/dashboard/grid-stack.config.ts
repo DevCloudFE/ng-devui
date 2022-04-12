@@ -1,4 +1,4 @@
-import { GridStackOptions } from 'gridstack';
+import { GridStackNode, GridStackOptions } from 'gridstack';
 const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
   window.navigator.userAgent
 );
@@ -27,3 +27,11 @@ export const DashBoardGridStackDefaultOption: GridStackOptions = {
   disableResize: false,
   animate: true
 };
+export interface GridStackNodeCompatibleWithV2 {
+  x?: number;
+  y?: number;
+  width?: number;
+  height?: number;
+}
+
+export interface GridStackNodeCompatible extends GridStackNode, GridStackNodeCompatibleWithV2 {}

@@ -7,7 +7,7 @@ import { TabsTransferComponent } from './tabs-transfer/tabs-transfer.component';
   styleUrls: ['./configurable-tabs.component.scss']
 })
 export class ConfigurableComponent {
-  tabActiveId: string | number = 1;
+  tabActiveId: string | number  = 1;
   tabsDisplay = [{
     id: 1,
     name: 'Tab1',

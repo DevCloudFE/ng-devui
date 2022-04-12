@@ -173,8 +173,7 @@ export class StepsGuideDirective implements OnInit, OnDestroy {
   }
 
   insert(option: GuideOptions) {
-    const bodyDoms = Array.from(this.document.body.childNodes);
-    const hasGuide = bodyDoms && bodyDoms.find((dom: HTMLElement) => dom.className && dom.className.indexOf('devui-step-item') >= 0);
+    const hasGuide = this.document.querySelector('body>.devui-step-item');
     if (!hasGuide) {
       this.stepRef = this.overlayContainerRef.createComponent(
         this.componentFactoryResolver.resolveComponentFactory(StepsGuideComponent)

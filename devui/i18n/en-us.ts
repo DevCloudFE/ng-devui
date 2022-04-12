@@ -94,6 +94,9 @@ export default {
   },
   gantt: {
     today: 'today',
+    day: 'Day',
+    week: 'Week',
+    month: 'Month',
     monthsOfYear: [
       'January',
       'February',
@@ -238,7 +241,7 @@ export default {
   categorySearch: {
     confirm: 'Confirm',
     cancel: 'Cancel',
-    selectFilterCondition: 'Please select a filter condition',
+    selectFilterCondition: 'Please select a filter condition:',
     getFindingMessage(msg) {
       return `find in '${msg}'`;
     },
