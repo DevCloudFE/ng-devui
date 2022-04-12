@@ -1,3 +1,5 @@
+$devui-animation-ease-in-smooth: var(--devui-animation-ease-in-smooth, cubic-bezier(0.645, 0.045, 0.355, 1));// 命名与实际曲线不符，待废弃
+
 $devui-animation-duration-slow: var(--devui-animation-duration-slow, 300ms);
 $devui-animation-duration-base: var(--devui-animation-duration-base, 200ms);
 $devui-animation-duration-fast: var(--devui-animation-duration-fast, 100ms);

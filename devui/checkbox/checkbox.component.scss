@@ -1,4 +1,4 @@
-@import '../style/mixins/index';
+
 @import '../style/theme/color';
 @import '../style/theme/corner';
 @import '../style/core/animation';
@@ -98,7 +98,7 @@
     border-radius: $devui-border-radius;
     background: linear-gradient($devui-brand, $devui-brand) no-repeat center/0%;
     margin-right: 8px;
-    vertical-align: text-bottom;
+    flex-shrink: 0;
 
     &.devui-checkbox-default-background {
       background-color: $devui-base-bg;
@@ -161,16 +161,16 @@
     position: relative;
     font-weight: normal;
     height: 16px;
-    line-height: 16px;
     cursor: pointer;
     color: $devui-text;
     margin: 0;
-    display: block;
+    display: flex;
+    align-items: center;
+    min-width: 0;
 
     & > span {
       display: inline-block;
       box-sizing: content-box;
-      vertical-align: top;
     }
   }
 

@@ -9,6 +9,8 @@
   font-size: $devui-font-size-page-title;
   line-height: 1.5;
   cursor: pointer;
+  display: flex;
+  align-items: center;
 
   &:hover {
     color: $devui-link;
@@ -22,6 +24,7 @@
   height: 18px;
   position: relative;
   border: 1px solid $devui-brand;
+  margin-left: 8px;
 
   .brand-color {
     position: absolute;

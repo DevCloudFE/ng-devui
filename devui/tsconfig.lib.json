@@ -12,21 +12,16 @@
     "experimentalDecorators": true,
     "importHelpers": true,
     "types": [],
-    "lib": [
-      "dom",
-      "es2018"
-    ]
+    "lib": ["dom", "es2018"]
   },
   "angularCompilerOptions": {
     "skipTemplateCodegen": true,
     "strictMetadataEmit": true,
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true,
-    "enableResourceInlining": true,
+    "enableResourceInlining": true
   },
-  "include": [
-    "**/*.ts"
-  ]
+  "include": ["**/*.ts"]
   // "exclude": [
   //   "test.ts",
   //   "**/*.spec.ts"

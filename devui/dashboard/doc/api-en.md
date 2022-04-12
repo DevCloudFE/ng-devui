@@ -18,7 +18,7 @@ Used in the page:
 Dependencies Required by Components
 
 ```json
-"gridstack": "2.0.1",
+"gridstack": "4.2.6",
 ```
 
 ## d-dashboard component

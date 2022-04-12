@@ -1,3 +1,8 @@
 .input-number {
   margin-right: 12px;
 }
+
+.input-number-group {
+  display: flex;
+  align-items: center;
+}

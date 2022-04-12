@@ -34,6 +34,11 @@ export class RateDemoComponent implements OnInit, OnDestroy {
     { title: 'SCSS', language: 'css', code: require('./half/rate-half.component.scss?raw') },
   ];
 
+  TemplateSource: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'xml', code: require('./template/template.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./template/template.component.ts?raw') },
+  ];
+
   navItems = [];
   subs: Subscription = new Subscription();
   constructor(private translate: TranslateService) {}
@@ -60,6 +65,7 @@ export class RateDemoComponent implements OnInit, OnDestroy {
       { dAnchorLink: 'dynamic-mode-Custom', value: values['dynamic-mode-Custom'] },
       { dAnchorLink: 'half-demo', value: values['half-demo']},
       { dAnchorLink: 'using-the-type-parameter', value: values['using-the-type-parameter'] },
+      { dAnchorLink: 'template', value: values['template'] },
     ];
   }
 

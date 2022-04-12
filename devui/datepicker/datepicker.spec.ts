@@ -17,7 +17,7 @@ class CommonFunctions {
 
   static i18nText() {
     const lang = localStorage.getItem('lang') ? localStorage.getItem('lang').toLocaleLowerCase() : 'zh-cn';
-    if (this.i18nConfig.hasOwnProperty(lang)) {
+    if (Object.prototype.hasOwnProperty.call(this.i18nConfig, lang)) {
       return this.i18nConfig[lang];
     } else {
       return zhCN;
@@ -973,7 +973,6 @@ function testNgModelAndYearMonth(fixture, wrapperEle, component) {
   expect(component.inputEle.nativeElement.value).toBe(
     `${new Date().getFullYear()}/${padZero(new Date().getMonth() + 1)}/05`
   );
-  // expect(currentDay).toBe('05');
   closeDatePicker(fixture);
 
   component.inputEle.nativeElement.value = `${new Date().getFullYear()}/${padZero(new Date().getMonth() + 1)}/05`;

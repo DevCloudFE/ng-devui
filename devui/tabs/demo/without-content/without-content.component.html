@@ -1,10 +1,10 @@
 <section>
   <d-tabs [(activeTab)]="acticeTabId" [showContent]="false" [reactivable]="true" (activeTabChange)="activeTabChange($event)">
-    <d-tab id="tab1" title="Tab1" tabId="tab1" [disabled]="true"> </d-tab>
+    <d-tab id="tab1" title="Tab1" [disabled]="true"> </d-tab>
 
-    <d-tab id="tab2" title="Tab2" tabId="tab2"> </d-tab>
+    <d-tab id="tab2" title="Tab2"> </d-tab>
 
-    <d-tab id="tab3" title="Tab3" tabId="tab3"> </d-tab>
+    <d-tab id="tab3" title="Tab3"> </d-tab>
   </d-tabs>
 
   <pre>activeID: {{ acticeTabId | json }}</pre>

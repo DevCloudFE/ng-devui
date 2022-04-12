@@ -1,100 +1,103 @@
+@import './basic';
 // 基础变量
-$devui-global-bg: var(--devui-global-bg, #f3f6f8);                   // 全局带底色背景
-$devui-global-bg-normal: var(--devui-global-bg-normal, #ffffff);     // 全局白色背景
-$devui-base-bg: var(--devui-base-bg, #ffffff);                       // 基础区块背景白色
-$devui-base-bg-dark: var(--devui-base-bg-dark, #333854);             // 基础区块背景深色(固定)
-$devui-brand: var(--devui-brand, #5e7ce0);                           // 品牌色
-$devui-brand-foil: var(--devui-brand-foil, #859bff);                 // 品牌色辅助色、正衬色
-$devui-brand-hover: var(--devui-brand-hover, #7693f5);               // 品牌色高亮色（加亮）
-$devui-brand-active: var(--devui-brand-active, #526ecc);             // 品牌色激活色（加深）
-$devui-brand-active-focus: var(--devui-brand-active-focus, #344899); // 品牌色焦点色（重度加深）
+$devui-global-bg: var(--devui-global-bg, $devui-slate-5);                   // 全局带底色背景
+$devui-global-bg-normal: var(--devui-global-bg-normal, $devui-white-5);     // 全局白色背景
+$devui-base-bg: var(--devui-base-bg, $devui-white-5);                       // 基础区块背景白色
+$devui-base-bg-dark: var(--devui-base-bg-dark, $devui-slate-100);             // 基础区块背景深色(固定)
+$devui-brand: var(--devui-brand, $devui-blue-50);                           // 品牌色
+$devui-brand-foil: var(--devui-brand-foil, $devui-blue-40);                 // 品牌色辅助色、正衬色
+$devui-brand-hover: var(--devui-brand-hover, $devui-blue-40);               // 品牌色高亮色（加亮）
+$devui-brand-active: var(--devui-brand-active, $devui-blue-60);             // 品牌色激活色（加深）
+$devui-brand-active-focus: var(--devui-brand-active-focus, $devui-blue-90); // 品牌色焦点色（重度加深）
 $devui-contrast: var(--devui-contrast, #c7000b);                     // 品牌色撞色、对比色、反衬色、第二品牌色
-$devui-text: var(--devui-text, #252b3a);                             // 正文文本
-$devui-text-weak: var(--devui-text-weak, #575d6c);                   // 弱化的正文信息（手风琴子项，表头）
-$devui-aide-text: var(--devui-aide-text, #8a8e99);                   // 辅助文本、帮助信息（面包屑）
-$devui-aide-text-stress: var(--devui-aide-text-stress, #575d6c);     // 辅助文本、帮助信息里的强调色
-$devui-placeholder: var(--devui-placeholder, #8a8e99);               // 占位符
-$devui-light-text: var(--devui-light-text, #ffffff);                 // 有色深色背景下字体颜色（固定）
-$devui-dark-text: var(--devui-dark-text, #252b3a);                   // 有色浅色背景下字体颜色（固定）
-$devui-link: var(--devui-link, #526ecc);                             // 链接文本颜色
-$devui-link-active: var(--devui-link-active, #344899);               // 链接文本悬停/激活颜色
-$devui-link-light: var(--devui-link-light, #96adfa);                 // 深色背景下链接文本颜色
-$devui-link-light-active: var(--devui-link-light-active, #beccfa);   // 深色背景下链接文本悬停/激活颜色
-$devui-line: var(--devui-line, #adb0b8);                             // 边框分割线，仅用于边框
-$devui-dividing-line: var(--devui-dividing-line, #dfe1e6);           // 内容分割线，用于内容之间的分割
-$devui-block: var(--devui-block, #ffffff);                           // 大面积的不可折叠区块的背景色（例如顶部导航背景色）
-$devui-area: var(--devui-area, #f8f8f8);                             // 可折叠区块的背景色（展开区域颜色）
-$devui-danger: var(--devui-danger, #f66f6a);                         // 失败、错误、告警
-$devui-warning: var(--devui-warning, #fac20a);                       // 警告、需注意类型提示
-$devui-waiting: var(--devui-waiting, #9faad7);                       // 等待中
-$devui-success: var(--devui-success, #50d4ab);                       // 成功、正确
-$devui-info: var(--devui-info, #5e7ce0);                             // 通知、一般提示、执行中
-$devui-initial: var(--devui-initial, #e9edfa);                       // 初始化、未执行
-$devui-unavailable: var(--devui-unavailable, #f5f5f6);               // 不可用、禁用状态
-$devui-shadow: var(--devui-shadow, rgba(0, 0, 0, 0.2));              // 阴影色
-$devui-light-shadow: var(--devui-light-shadow, rgba(0, 0, 0, 0.1));  // 弱化阴影色
+$devui-text: var(--devui-text, $devui-slate-100);                             // 正文文本
+$devui-text-weak: var(--devui-text-weak, $devui-slate-80);                   // 弱化的正文信息（手风琴子项，表头）
+$devui-aide-text: var(--devui-aide-text, $devui-slate-40);                   // 辅助文本、帮助信息（面包屑）
+$devui-aide-text-stress: var(--devui-aide-text-stress, $devui-slate-80);     // 辅助文本、帮助信息里的强调色
+$devui-placeholder: var(--devui-placeholder, $devui-slate-40);               // 占位符
+$devui-light-text: var(--devui-light-text, $devui-white-5);                 // 有色深色背景下字体颜色（固定）
+$devui-dark-text: var(--devui-dark-text, $devui-slate-100);                   // 有色浅色背景下字体颜色（固定）
+$devui-link: var(--devui-link, $devui-blue-60);                             // 链接文本颜色
+$devui-link-active: var(--devui-link-active, $devui-blue-90);               // 链接文本悬停/激活颜色
+$devui-link-light: var(--devui-link-light, $devui-blue-30);                 // 深色背景下链接文本颜色
+$devui-link-light-active: var(--devui-link-light-active, $devui-blue-20);   // 深色背景下链接文本悬停/激活颜色
+$devui-line: var(--devui-line, $devui-slate-50);                             // 边框分割线，仅用于边框
+$devui-dividing-line: var(--devui-dividing-line, $devui-slate-20);           // 内容分割线，用于内容之间的分割
+$devui-block: var(--devui-block, $devui-white-5);                           // 大面积的不可折叠区块的背景色（例如顶部导航背景色）
+$devui-area: var(--devui-area, $devui-gray-5);                             // 可折叠区块的背景色（展开区域颜色）
+$devui-danger: var(--devui-danger, $devui-red-50);                         // 失败、错误、告警
+$devui-warning: var(--devui-warning, $devui-yellow-50);                       // 警告、需注意类型提示
+$devui-waiting: var(--devui-waiting, $devui-blue-20);                       // 等待中
+$devui-success: var(--devui-success, $devui-green-50);                       // 成功、正确
+$devui-info: var(--devui-info, $devui-blue-50);                             // 通知、一般提示、执行中
+$devui-initial: var(--devui-initial, $devui-blue-10);                       // 初始化、未执行
+$devui-unavailable: var(--devui-unavailable, $devui-gray-5);               // 不可用、禁用状态
+$devui-shadow: var(--devui-shadow, rgba(#252b3a, 0.2));              // 阴影色
+$devui-light-shadow: var(--devui-light-shadow, rgba(#252b3a, 0.2));  // 弱化阴影色
+$devui-connected-overlay-shadow:var(--devui-connected-overlay-shadow, rgba(#252b3a, 0.12)); // 下拉菜单类阴影色
+$devui-feedback-overlay-shadow: var(--devui-feedback-overlay-shadow, rgba(#252b3a, 0.16)); // 信息展示类阴影色
 
 // 图标
-$devui-icon-text: var(--devui-icon-text, #252b3a);                           // 文字图标颜色，同 正文颜色
-$devui-icon-bg: var(--devui-icon-bg, #ffffff);                               // svg图标 背景色
-$devui-icon-fill: var(--devui-icon-fill, #d3d5d9);                           // svg图标 灰色填充色
-$devui-icon-fill-hover: var(--devui-icon-fill-hover, #adb5ce);               // svg图标 灰色填充色悬停反馈色
-$devui-icon-fill-active: var(--devui-icon-fill-active, #5e7ce0);             // svg图标 高亮填充色（激活状态）
-$devui-icon-fill-active-hover: var(--devui-icon-fill-active-hover, #526ecc); // svg图标 高亮填充色悬停反馈色
+$devui-icon-text: var(--devui-icon-text, $devui-slate-100);                           // 文字图标颜色，同 正文颜色
+$devui-icon-bg: var(--devui-icon-bg, $devui-white-5);                               // svg图标 背景色
+$devui-icon-fill: var(--devui-icon-fill, $devui-slate-70);                           // svg图标 灰色填充色
+$devui-icon-fill-hover: var(--devui-icon-fill-hover, $devui-slate-100);               // svg图标 灰色填充色悬停反馈色
+$devui-icon-fill-active: var(--devui-icon-fill-active, $devui-blue-50);             // svg图标 高亮填充色（激活状态）
+$devui-icon-fill-active-hover: var(--devui-icon-fill-active-hover, $devui-blue-60); // svg图标 高亮填充色悬停反馈色
 // 表单
-$devui-form-control-line: var(--devui-form-control-line, #adb0b8);                           // 表单控件边框色，同 边框分割线
-$devui-form-control-line-hover: var(--devui-form-control-line-hover, #575d6c);               // 表单控件边框悬停反馈色
-$devui-form-control-line-active: var(--devui-form-control-line-active, #5e7ce0);             // 表单控件边框激活色，用于获得焦点
-$devui-form-control-line-active-hover: var(--devui-form-control-line-active-hover, #344899); // 表单控件边框激活色，用于获得焦点且悬停
+$devui-form-control-line: var(--devui-form-control-line, $devui-slate-50);                           // 表单控件边框色，同 边框分割线
+$devui-form-control-line-hover: var(--devui-form-control-line-hover, $devui-slate-80);               // 表单控件边框悬停反馈色
+$devui-form-control-line-active: var(--devui-form-control-line-active, $devui-blue-50);             // 表单控件边框激活色，用于获得焦点
+$devui-form-control-line-active-hover: var(--devui-form-control-line-active-hover, $devui-blue-90); // 表单控件边框激活色，用于获得焦点且悬停
 // 列表
-$devui-list-item-active-bg: var(--devui-list-item-active-bg, #5e7ce0);                       // 列表类型单选选中背景
-$devui-list-item-active-text: var(--devui-list-item-active-text, #ffffff);                   // 列表类型单选选中背景搭配文本，同 有色深色背景下字体颜色（固定）
-$devui-list-item-active-hover-bg: var(--devui-list-item-active-hover-bg, #526ecc);           // 列表类型单选选中背景悬停反馈色（仅用于分页等）
-$devui-list-item-hover-bg: var(--devui-list-item-hover-bg, #f2f5fc);                         // 列表类型普通选项悬停背景
-$devui-list-item-hover-text: var(--devui-list-item-hover-text, #526ecc);                     // 列表类型普通选项悬停背景搭配文本
-$devui-list-item-selected-bg: var(--devui-list-item-selected-bg, #e9edfa);                   // 列表类型多选被选中的行色，仅用于表格类
-$devui-list-item-strip-bg: var(--devui-list-item-strip-bg, #f2f5fc);                         // 列表类型斑马纹色，仅用于表格类
+$devui-list-item-active-bg: var(--devui-list-item-active-bg, $devui-blue-50);                       // 列表类型单选选中背景
+$devui-list-item-active-text: var(--devui-list-item-active-text, $devui-white-5);                   // 列表类型单选选中背景搭配文本，同 有色深色背景下字体颜色（固定）
+$devui-list-item-active-hover-bg: var(--devui-list-item-active-hover-bg, $devui-blue-60);           // 列表类型单选选中背景悬停反馈色（仅用于分页等）
+$devui-list-item-hover-bg: var(--devui-list-item-hover-bg, $devui-blue-5);                         // 列表类型普通选项悬停背景
+$devui-list-item-hover-text: var(--devui-list-item-hover-text, $devui-blue-60);                     // 列表类型普通选项悬停背景搭配文本
+$devui-list-item-selected-bg: var(--devui-list-item-selected-bg, $devui-blue-10);                   // 列表类型多选被选中的行色，仅用于表格类
+$devui-list-item-strip-bg: var(--devui-list-item-strip-bg, $devui-blue-5);                         // 列表类型斑马纹色，仅用于表格类
 // 禁用
-$devui-disabled-bg: var(--devui-disabled-bg, #f5f5f6);     // disabled背景颜色
-$devui-disabled-line: var(--devui-disabled-line, #dfe1e6); // disabled边框颜色
-$devui-disabled-text: var(--devui-disabled-text, #adb0b8); // disabled文字颜色
-$devui-primary-disabled: var(--devui-primary-disabled, #beccfa); //主要按钮disabled状态文字颜色
-$devui-icon-fill-active-disabled: var(--devui-icon-fill-active-disabled, #beccfa);  // svg图标激活状态禁用色
+$devui-disabled-bg: var(--devui-disabled-bg, $devui-gray-5);     // disabled背景颜色
+$devui-disabled-line: var(--devui-disabled-line, $devui-slate-20); // disabled边框颜色
+$devui-disabled-text: var(--devui-disabled-text, $devui-slate-50); // disabled文字颜色
+$devui-primary-disabled: var(--devui-primary-disabled, $devui-blue-20); //主要按钮disabled状态文字颜色
+$devui-icon-fill-active-disabled: var(--devui-icon-fill-active-disabled, $devui-blue-20);  // svg图标激活状态禁用色
 // 特殊背景色
-$devui-label-bg: var(--devui-label-bg, #eef0f5);                             // 默认标签化选项背景色
-$devui-connected-overlay-bg: var(--devui-connected-overlay-bg, #ffffff);     // 有连接点的弹出菜单层背景色
-$devui-connected-overlay-line: var(--devui-connected-overlay-line, #526ecc); // 有连接点的弹出菜单层边框色
-$devui-fullscreen-overlay-bg: var(--devui-fullscreen-overlay-bg, #ffffff);   // 全屏类型的弹出内容层背景色（模态弹窗）
+$devui-label-bg: var(--devui-label-bg, $devui-slate-10);                             // 默认标签化选项背景色
+$devui-connected-overlay-bg: var(--devui-connected-overlay-bg, $devui-white-5);     // 有连接点的弹出菜单层背景色
+$devui-connected-overlay-line: var(--devui-connected-overlay-line, $devui-blue-60); // 有连接点的弹出菜单层边框色
+$devui-fullscreen-overlay-bg: var(--devui-fullscreen-overlay-bg, $devui-white-5);   // 全屏类型的弹出内容层背景色（模态弹窗）
 $devui-feedback-overlay-bg: var(--devui-feedback-overlay-bg, #464d6e);       // 信息提示反馈类型的漂浮层背景色（toast、popover）
-$devui-feedback-overlay-text: var(--devui-feedback-overlay-text, #dfe1e6);   // 信息提示反馈类型的漂浮层背景色搭配文本色
-$devui-embed-search-bg: var(--devui-embed-search-bg, #f2f5fc);               // 被嵌套的无边框搜索框背景色
-$devui-embed-search-bg-hover: var(--devui-embed-search-bg-hover, #eef0f5);   // 被嵌套的无边框搜索框背景色
-$devui-float-block-shadow: var(--devui-float-block-shadow, rgba(94, 124, 224, 0.3));  // 特殊浮层背景色（待修正）
-$devui-highlight-overlay: var(--devui-highlight-overlay, rgba(255, 255, 255, 0.8)); // 局部半透明全局浮层背景色（比如底部）
-$devui-range-item-hover-bg: var(--devui-range-item-hover-bg, #e9edfa); // datepicker范围中的日期hover的反馈背景色
+$devui-feedback-overlay-text: var(--devui-feedback-overlay-text, $devui-slate-20);   // 信息提示反馈类型的漂浮层背景色搭配文本色
+$devui-embed-search-bg: var(--devui-embed-search-bg, $devui-blue-5);               // 被嵌套的无边框搜索框背景色
+$devui-embed-search-bg-hover: var(--devui-embed-search-bg-hover, $devui-slate-10);   // 被嵌套的无边框搜索框背景色
+$devui-float-block-shadow: var(--devui-float-block-shadow, $devui-slate-10);  // 特殊浮层背景色（待修正）
+$devui-highlight-overlay: var(--devui-highlight-overlay, $devui-blue-10); // 局部半透明全局浮层背景色（比如底部）
+$devui-range-item-hover-bg: var(--devui-range-item-hover-bg, $devui-blue-10); // datepicker范围中的日期hover的反馈背景色
 
 // 按钮
-$devui-primary: var(--devui-primary, #5e7ce0);                // 主要按钮，同品牌色
-$devui-primary-hover: var(--devui-primary-hover, #7693f5);    // 主要按钮悬停
-$devui-primary-active: var(--devui-primary-active, #344899);  // 主要按钮激活
+$devui-primary: var(--devui-primary, $devui-blue-50);                // 主要按钮，同品牌色
+$devui-primary-hover: var(--devui-primary-hover, $devui-blue-40);    // 主要按钮悬停
+$devui-primary-active: var(--devui-primary-active, $devui-blue-90);  // 主要按钮激活
 
 $devui-contrast-hover: var(--devui-contrast-hover, #d64a52);  // 突出按钮悬停
 $devui-contrast-active: var(--devui-contrast-active, #b12220);// 突出按钮激活
 
 // 状态
-$devui-danger-line: var(--devui-danger-line, #f66f6a);  // 失败边框
-$devui-danger-bg: var(--devui-danger-bg, #ffeeed);      // 失败底色
+$devui-danger-line: var(--devui-danger-line, $devui-red-50);  // 失败边框
+$devui-danger-bg: var(--devui-danger-bg, $devui-orange-5);      // 失败底色
 
-$devui-warning-line: var(--devui-warning-line, #fa9841);// 警告边框
-$devui-warning-bg: var(--devui-warning-bg, #fff3e8);    // 警告底色
+$devui-warning-line: var(--devui-warning-line, $devui-orange-50);// 警告边框
+$devui-warning-bg: var(--devui-warning-bg, $devui-orange-5);    // 警告底色
 
-$devui-info-line: var(--devui-info-line, #5e7ce0);      // 通知边框
-$devui-info-bg: var(--devui-info-bg, #f2f5fc);          // 通知底色
+$devui-info-line: var(--devui-info-line, $devui-blue-50);      // 通知边框
+$devui-info-bg: var(--devui-info-bg, $devui-blue-5);          // 通知底色
 
-$devui-success-line: var(--devui-success-line, #50d4ab);// 成功边框
-$devui-success-bg: var(--devui-success-bg, #edfff9);    // 成功底色
-$devui-primary-line: var(--devui-primary-line, #5e7ce0);// 主要边框
-$devui-primary-bg: var(--devui-primary-bg, #f2f5fc);    // 主要底色
+$devui-success-line: var(--devui-success-line, $devui-green-50);// 成功边框
+$devui-success-bg: var(--devui-success-bg, $devui-green-5);    // 成功底色
+$devui-primary-line: var(--devui-primary-line, $devui-blue-50);// 主要边框
+$devui-primary-bg: var(--devui-primary-bg, $devui-blue-5);    // 主要底色
 
-$devui-default-line: var(--devui-default-line, #5e7ce0);// 默认边框
-$devui-default-bg: var(--devui-default-bg, #f3f6f8);    // 默认底色
+$devui-default-line: var(--devui-default-line, $devui-blue-50);// 默认边框
+$devui-default-bg: var(--devui-default-bg, $devui-slate-5);    // 默认底色

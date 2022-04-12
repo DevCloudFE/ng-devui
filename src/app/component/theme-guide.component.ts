@@ -11,7 +11,7 @@ import * as hljs from 'highlight.js/lib/core';
 
 @Component({
   template: `
-    <div dCodeCopy (copied)="onCopied($event)" dReadTip [readTipOptions]="options" class="get-start">
+    <div dCodeCopy class="get-start">
       <div class="readme">
         <div [innerHTML]="readMe | safe: 'html'" #documentation></div>
       </div>
@@ -27,7 +27,7 @@ import * as hljs from 'highlight.js/lib/core';
 })
 export class ThemeGuideComponent implements OnInit, AfterViewInit {
   _readMe: HTMLElement;
-  options;
+
   @Input() set readMe(readMe: HTMLElement) {
     this._readMe = readMe;
     setTimeout(() => {
@@ -52,9 +52,6 @@ export class ThemeGuideComponent implements OnInit, AfterViewInit {
     });
   }
 
-  onCopied(options) {
-    this.options = options;
-  }
   setReadMe(lang) {
     const currLang = lang === 'en-us' ? 'en' : 'cn';
     this.readMe = require(`!html-loader!markdown-loader!./themeGuide-${currLang}.md`);

@@ -37,7 +37,7 @@
   [size]="activeSizeTab"
   [tableLayout]="activeLayoutTab"
 >
-  <thead dTableHead>
+  <thead dTableHead [checkable]="true">
     <tr dTableRow>
       <th dHeadCell>#</th>
       <th dHeadCell *ngFor="let colOption of dataTableOptions.columns">{{ colOption.header }}</th>
@@ -46,6 +46,19 @@
   <tbody dTableBody>
     <ng-template let-rowItem="rowItem" let-rowIndex="rowIndex">
       <tr dTableRow>
+        <td dTableCell class="devui-checkable-cell">
+          <d-checkbox
+            [ngModelOptions]="{ standalone: true }"
+            [ngModel]="rowItem.$checked"
+            [halfchecked]="rowItem.$halfChecked"
+            [disabled]="rowItem.$checkDisabled"
+            dTooltip
+            [content]="rowItem.$checkBoxTips"
+            [position]="['top', 'right', 'bottom', 'left']"
+            [showAnimation]="false"
+          >
+          </d-checkbox>
+        </td>
         <td dTableCell>{{ rowIndex + 1 }}</td>
         <td dTableCell *ngFor="let colOption of dataTableOptions.columns">
           {{ colOption.fieldType === 'date' ? (rowItem[colOption.field] | i18nDate: 'short':false) : rowItem[colOption.field] }}

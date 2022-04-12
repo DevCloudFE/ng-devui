@@ -1,4 +1,4 @@
-import { Component, HostBinding, Inject, ViewEncapsulation } from '@angular/core';
+import { Component, forwardRef, HostBinding, Inject, ViewEncapsulation } from '@angular/core';
 import { AccordionBaseComponent } from './accordion-base-component.class';
 import { ACCORDION_MENU } from './accordion-menu-token';
 import { ACCORDION } from './accordion-token';
@@ -10,7 +10,7 @@ import { AccordionBaseMenu, AccordionMenuItem } from './accordion.type';
   preserveWhitespaces: false,
   providers: [{
     provide: ACCORDION_MENU,
-    useExisting: AccordionMenuComponent
+    useExisting: forwardRef(() => AccordionMenuComponent)
   }]
 })
 export class AccordionMenuComponent extends AccordionBaseComponent<AccordionBaseMenu<AccordionMenuItem>> {

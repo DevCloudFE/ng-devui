@@ -52,13 +52,21 @@
                           'devui-table-date-start': isStartDate(day.date),
                           'devui-table-date-end': isEndDate(day.date),
                           'devui-table-date-in-selected-range': isDateInSelectRange(day.date),
-                          'devui-table-date-active-type': isActiveTypeDate(day.date)
+                          'devui-table-date-active-type': isActiveTypeDate(day.date),
+                          'devui-table-date-suggested': isDateSuggest(day.date),
+                          'devui-table-date-marked': isDateMarked(day.date)
                         }"
                         *ngFor="let day of week"
+                        dPopover
+                        [content]="markDate"
+                        [visible]="isPopoverShow(day)"
                         (click)="selectDate(day)"
                         (mouseenter)="setHoverTarget(day.date, day.inMonth)"
                       >
                         <span>{{ day.inMonth ? day.day : '' }}</span>
+                        <ng-template #markDate>
+                          <ng-template [ngTemplateOutlet]="markDateTemplate" [ngTemplateOutletContext]="{ date: day.date }"></ng-template>
+                        </ng-template>
                       </td>
                     </tr>
                   </tbody>

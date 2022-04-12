@@ -12,6 +12,7 @@ import {
 import { expandCollapseForDomDestroy } from 'ng-devui/utils';
 import { DevConfigService, WithConfig } from 'ng-devui/utils/globalConfig';
 import { Observable } from 'rxjs';
+import { PanelBodyComponent } from './panel-body.component';
 import { PanelFooterComponent } from './panel-footer.component';
 import { PanelHeaderComponent } from './panel-header.component';
 import { PanelType } from './panel.types';
@@ -32,6 +33,7 @@ export class PanelComponent {
   @Output() toggle: EventEmitter<boolean> = new EventEmitter<boolean>();
   @ContentChild(PanelHeaderComponent) panelHeader;
   @ContentChild(PanelFooterComponent) panelFooter;
+  @ContentChild(PanelBodyComponent) panelBody;
   constructor(private devConfigService: DevConfigService) {  }
   toggleBody() {
     this.canToggle().then((val) => {

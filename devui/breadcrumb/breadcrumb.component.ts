@@ -1,8 +1,4 @@
-import {
-  Component,
-  Input,
-  TemplateRef,
-} from '@angular/core';
+import { Component, forwardRef, Input, TemplateRef } from '@angular/core';
 import { BreadCrumbService } from './breadcrumb.service';
 import { BREADCRUMB } from './breadcrumb.token';
 import { SourceConfig } from './breadcrumb.type';
@@ -13,9 +9,10 @@ import { SourceConfig } from './breadcrumb.type';
   templateUrl: './breadcrumb.component.html',
   styleUrls: ['./breadcrumb.component.scss'],
   preserveWhitespaces: false,
-  providers: [
-    {provide: BREADCRUMB, useExisting: BreadCrumbComponent}
-  ],
+  providers: [{
+    provide: BREADCRUMB,
+    useExisting: forwardRef(() => BreadCrumbComponent)
+  }],
 })
 export class BreadCrumbComponent {
   @Input() separatorIcon: TemplateRef<any>;

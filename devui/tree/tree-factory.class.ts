@@ -1,8 +1,6 @@
 import {
   forEach,
-  isUndefined,
-  map,
-  omitBy,
+  isUndefined, omitBy,
   pickBy,
   reduce,
   trim,
@@ -169,7 +167,7 @@ export class TreeFactory {
       newId = this.idx;
     }
     const treeNode = new TreeNode(newId, parentId, data);
-    if (this.nodes.hasOwnProperty(treeNode.id)) {
+    if (Object.prototype.hasOwnProperty.call(this.nodes, treeNode.id)) {
       throw new Error(`Duplicated id: ${treeNode.id} detected, please specify unique ids in the tree.`);
     }
     this.nodes[treeNode.id] = treeNode;
@@ -384,23 +382,6 @@ export class TreeFactory {
     return [];
   }
 
-  /*
-  * @deprecated
-  *
-  */
-  private toTree() {
-    const patchChildren = (nodes: any) => {
-      return map(nodes, (node: any) => {
-        return {
-          ...node,
-          children: patchChildren(this.getChildrenById(node.id))
-        };
-      });
-    };
-
-    return patchChildren(this.getChildrenById(undefined));
-  }
-
   startLoading(id: number | string) {
     if (!this.nodes[id]) {
       return;
@@ -413,15 +394,6 @@ export class TreeFactory {
       return;
     }
     this.nodes[id].data.loading = false;
-  }
-
-  /*
-  * @deprecated
-  */
-  private isMatchNode(inputValue: string, hideUnmatched?: boolean) {
-    const target = trim(inputValue);
-    this.resetSearchResults();
-    this.dfs(target.toLowerCase(), this._treeRoot, hideUnmatched);
   }
 
   getNodeById(id: number | string): any {

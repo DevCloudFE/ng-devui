@@ -1,0 +1,73 @@
+<div style="width: 50%">
+  <h4>Basic Usage</h4>
+  <d-single-upload
+    #singleupload
+    [fileOptions]="fileOptions"
+    [uploadedFiles]="uploadedFiles"
+    [uploadOptions]="uploadOptions"
+    [filePath]="'name'"
+    [beforeUpload]="beforeUpload"
+    [dynamicUploadOptionsFn]="dynamicUploadOptionsFn"
+    (successEvent)="onSuccess($event)"
+    (deleteUploadedFileEvent)="deleteUploadedFile($event)"
+    (errorEvent)="onError($event)"
+  >
+  </d-single-upload>
+  <h4>Dragdrop</h4>
+  <d-single-upload
+    #singleuploadDrag
+    [enableDrop]="true"
+    [fileOptions]="fileOptions"
+    [uploadedFiles]="uploadedFiles"
+    [uploadOptions]="uploadOptions"
+    [placeholderText]="'Drag files'"
+    [withoutBtn]="true"
+    [filePath]="'name'"
+    [beforeUpload]="beforeUploadFn"
+    (successEvent)="onSuccess($event)"
+    (deleteUploadedFileEvent)="deleteUploadedFile($event)"
+    (errorEvent)="onError($event)"
+    (fileDrop)="fileDrop($event)"
+    (fileOver)="fileOver($event)"
+  >
+  </d-single-upload>
+  <div [style.margin-top.px]="8">
+    <d-button (btnClick)="customUploadEvent()">Upload</d-button>
+  </div>
+  <h4>ngModel</h4>
+  <d-single-upload
+    #singleupload
+    [fileOptions]="fileOptions"
+    [uploadedFiles]="uploadedFiles"
+    [uploadOptions]="uploadOptions"
+    [filePath]="'name'"
+    [beforeUpload]="beforeUpload"
+    (successEvent)="onSuccess($event)"
+    (deleteUploadedFileEvent)="deleteUploadedFile($event)"
+    (errorEvent)="onError($event)"
+    (fileSelect)="fileSelect($event)"
+    [(ngModel)]="selectedFiles"
+  >
+  </d-single-upload>
+  <div [style.margin-top.px]="8">
+    <d-button style="margin-right: 8px">
+      <label for="fileInput" style="cursor: pointer">Select Files</label>
+    </d-button>
+    <input type="file" id="fileInput" style="visibility: hidden" />
+  </div>
+  <h4>Disabled</h4>
+  <d-single-upload
+    #singleupload
+    [fileOptions]="fileOptions"
+    [uploadedFiles]="uploadedFiles"
+    [uploadOptions]="uploadOptions"
+    [uploadText]="'Upload'"
+    [filePath]="'name'"
+    [beforeUpload]="beforeUpload"
+    (successEvent)="onSuccess($event)"
+    (deleteUploadedFileEvent)="deleteUploadedFile($event)"
+    (errorEvent)="onError($event)"
+    [disabled]="true"
+  >
+  </d-single-upload>
+</div>

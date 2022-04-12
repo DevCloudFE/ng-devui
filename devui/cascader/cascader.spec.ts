@@ -712,11 +712,13 @@ describe('cascader', () => {
     }));
 
     it('multiple search should work', fakeAsync(() => {
+      clickDropDownToggle();
       const searchInputEle = fixture.debugElement.query(By.css('.inner-input')).nativeElement;
       expect(searchInputEle).toBeTruthy();
     }));
 
     it ('multiple search result should work', fakeAsync(() => {
+      clickDropDownToggle();
       const searchInputEle = fixture.debugElement.query(By.css('.inner-input')).nativeElement;
       searchInputEle.value = '1-1';
       searchInputEle.dispatchEvent(new Event('input', {}));
@@ -736,6 +738,7 @@ describe('cascader', () => {
     }));
 
     it ('click active result should not work', fakeAsync(() => {
+      clickDropDownToggle();
       const searchInputEle = fixture.debugElement.query(By.css('.inner-input')).nativeElement;
       searchInputEle.value = '1-1';
       searchInputEle.dispatchEvent(new Event('input', {}));

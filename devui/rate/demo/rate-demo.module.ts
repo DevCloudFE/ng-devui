@@ -13,6 +13,7 @@ import { RateDemoCustomizeComponent } from './customize/customize.component';
 import { RateHalfComponent } from './half/rate-half.component';
 import { RateDemoOnlyReadComponent } from './onlyread/onlyread.component';
 import { RateDemoComponent } from './rate-demo.component';
+import { RateDemoTemplateComponent } from './template/template.component';
 import { TypeComponent } from './type/type.component';
 
 @NgModule({
@@ -43,6 +44,7 @@ import { TypeComponent } from './type/type.component';
     RateDemoBasicComponent,
     RateDemoOnlyReadComponent,
     RateDemoCustomizeComponent,
+    RateDemoTemplateComponent,
     TypeComponent,
     RateHalfComponent,
   ],

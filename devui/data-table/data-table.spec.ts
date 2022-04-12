@@ -1,4 +1,4 @@
-import {
+﻿import {
   ChangeDetectorRef,
   Component,
   DebugElement,
@@ -631,6 +631,7 @@ class TestDataFixedColumnComponent {
     }
   ];
 }
+
 describe('data-table', () => {
   describe('basic', () => {
     let fixture: ComponentFixture<TestDataTableBasicComponent>;

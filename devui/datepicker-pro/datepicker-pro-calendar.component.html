@@ -1,4 +1,4 @@
-<div class="devui-calendar-header" *ngIf="showRangeHeader && isRangeType">
+<div class="devui-calendar-header" *ngIf="showRangeHeader && isRangeType" [ngStyle]="{ width: showTime ? 'auto' : '330px' }">
   <div
     class="devui-range-picker devui-input-group devui-dropdown-origin"
     [ngClass]="{

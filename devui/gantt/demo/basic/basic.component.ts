@@ -72,7 +72,6 @@ export class BasicComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     this.ganttService.setScaleConfig({ unit: this.unit });
     this.ganttScaleWidth = this.ganttService.getDurationWidth(this.ganttStartDate, this.ganttEndDate) + 'px';
-    // this.tableWidthConfig[3].width = this.ganttScaleWidth;
   }
 
   onReduceUnit() {

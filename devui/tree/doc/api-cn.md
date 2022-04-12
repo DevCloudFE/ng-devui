@@ -33,6 +33,7 @@ import { TreeModule } from 'ng-devui/tree';
 |    treeNodesRef     |          `TemplateRef<any>`          |       --        |                                                   可选，自定义节点的显示模板                                                   |
 | loadingTemplateRef  |          `TemplateRef<any>`          |       --        |                                                    可选，自定义加载中的模板                                                    | [自定义 loading 模板](demo#custom-loading) |
 |    virtualScroll    |              `boolean`               |      false      |                                         可选，是否开启虚拟滚动，用于处理大数据量的情形                                         | [大数据量可操作树](demo#virtual-scroll)    |
+| itemSize | `number` | 30 | 可选，开启虚拟滚动后基准数量 |
 | virtualScrollHeight |               `string`               |     '800px'     |                                                  可选，设置虚拟滚动时树的高度                                                  | [大数据量可操作树](demo#virtual-scroll)    |
 |     minBufferPx     |               `number`               |       600       | 可选，设置虚拟滚动时的最小 buffer 尺寸，参考https://material.angular.io/cdk/scrolling/overview#scrolling-over-fixed-size-items | [大数据量可操作树](demo#virtual-scroll)    |
 |     maxBufferPx     |               `number`               |      900       | 可选，设置虚拟滚动时的最大 buffer 尺寸，参考https://material.angular.io/cdk/scrolling/overview#scrolling-over-fixed-size-items | [大数据量可操作树](demo#virtual-scroll)    |
@@ -73,7 +74,7 @@ import { TreeModule } from 'ng-devui/tree';
 |       draggable       |                  `boolean`                   |      false      |                                              可选，树节点是否支持 drag、drop 操作                                              | [可拖拽树](demo#drag-and-drop-tree)            |
 |     checkboxInput     |     [`ICheckboxInput`](#icheckboxinput)      |       {}        |                                                 可选，设置 checkbox 的相关属性                                                 | [可勾选树](demo#checkable-tree)                |
 |    canActivateNode    |                  `boolean`                   |      true       |                    可选，是否可以选中节点 ,false 时点击节点触发 nodeChecked 事件，不触发 nodeSelected 事件                     | [可勾选树](demo#checkable-tree)              |
-| canActivateParentNode |                  `boolean`                   |      true       |                     可选，父节点是否可选中,false 时点击节点触发 nodeChecked 事件，不触发 nodeSelected 事件                     | [可勾选树](demo#checkable-tree)              |
+| canActivateParentNode |                  `boolean`                   |      true       |                     可选，父节点是否可选中,false 时点击节点触发 nodeToggled 事件，不触发 nodeSelected 事件                     | [可勾选树](demo#checkable-tree)              |
 | iconTemplatePosition  |                   `string`                   |       --        |                               可选，设置图标的位置，可选`'before-checkbox'`或`'after-checkbox'`                                | [自定义图标](demo#custom-icon)                 |
 |   checkableRelation   | `'upward' \| 'downward' \| 'both' \| 'none'` |     'both'      |                                                可选，设置父子节点的 check 规则                                                 | [控制父子 check 关系](demo#check-control-tree) |
 |     beforeAddNode     |                `Promise<any>`                |       --        |                             可选，新增子节点前回调(参数为当前节点), 返回值中可指定添加节点的 index                             | [操作按钮](demo#operation-button)              |
@@ -83,11 +84,14 @@ import { TreeModule } from 'ng-devui/tree';
 |      postAddNode      |                `Promise<any>`                |       --        |                                              可选，新增节点后回调(参数为新增节点)                                              | [操作按钮](demo#operation-button)              |
 |       dropType        |          [`IDropType`](#idroptype)           |       --        |            可选，设置拖拽放置的位置，`dropPrev`为放置在节点前，`dropNext`为放置在节点后，`dropInner`为放置在节点中             | [可拖拽树](demo#drag-and-drop-tree)            |
 |     virtualScroll     |                  `boolean`                   |      false      |                                         可选，是否开启虚拟滚动，用于处理大数据量的情形                                         | [大数据量可操作树](demo#virtual-scroll)        |
+| itemSize | `number` | 30 | 可选，开启虚拟滚动后基准数量 |
 |  virtualScrollHeight  |                   `string`                   |     '800px'     |                                                  可选，设置虚拟滚动时树的高度                                                  | [大数据量可操作树](demo#virtual-scroll)        |
 |      minBufferPx      |                   `number`                   |       600       | 可选，设置虚拟滚动时的最小 buffer 尺寸，参考https://material.angular.io/cdk/scrolling/overview#scrolling-over-fixed-size-items | [大数据量可操作树](demo#virtual-scroll)        |
 |      maxBufferPx      |                   `number`                   |       900       | 可选，设置虚拟滚动时的最大 buffer 尺寸，参考https://material.angular.io/cdk/scrolling/overview#scrolling-over-fixed-size-items | [大数据量可操作树](demo#virtual-scroll)        |
 |   disableMouseEvent   |                  `boolean`                   |      false      |                可选，设置是否禁用鼠标的移入移出事件，主要用于兼容使用 appendTobody 时无法悬停到下拉框内容的情况                | [自定义图标](demo#custom-icon)                 |
 |   showAnimation    |    `boolean`                  |           true         |   可选，是否展示动画      | [无动画](demo#without-animation)   | ✔ |
+| loadingTemplateRef  |          `TemplateRef<any>`          |       --        |                                                    可选，自定义加载中的模板                                                    |
+|    treeNodesRef     |          `TemplateRef<any>`          |       --        |                                                   可选，自定义节点的显示模板                                                   |
 
 ## d-operable-tree 事件
 

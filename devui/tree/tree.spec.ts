@@ -119,7 +119,6 @@ describe('tree', () => {
     });
 
     it('should click apply selectNode function', () => {
-      // component.basicTree.selectNode = jasmine.createSpy('select node function');
       const treeEl: HTMLElement = debugEl.query(By.css('.devui-tree-node__content')).nativeElement;
 
       treeEl.dispatchEvent(new Event('click'));

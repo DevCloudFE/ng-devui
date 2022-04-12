@@ -82,8 +82,10 @@ export class CascaderComponent implements OnInit, OnDestroy, OnChanges, ControlV
   multipleValueList: CascaderItem[] = [];
   lazyloadValue = [];
 
+  timer;
   showTextValue;
   showSearchPanel: boolean;
+  showSearchInput = false;
   onChange = Function.prototype;
   onTouched = Function.prototype;
 
@@ -211,6 +213,7 @@ export class CascaderComponent implements OnInit, OnDestroy, OnChanges, ControlV
         distinctUntilChanged(),
         filter(t => t !== '')
       ).subscribe(value => {
+        clearTimeout(this.timer);
         if (this.mainDropdown && !this.mainDropdown.isOpen) {
           this.mainDropdown.isOpen = true;
         }
@@ -361,7 +364,7 @@ export class CascaderComponent implements OnInit, OnDestroy, OnChanges, ControlV
         this.writeValue(this.cascaderSrv.currentValue);
       }
       // 在动画结束后再设置参数，防止panel中内容突变，动画时间200
-      setTimeout(() => {
+      this.timer = setTimeout(() => {
         this.showSearchPanel = false;
       }, 200);
     }

@@ -13,28 +13,10 @@ export class BasicComponent {
     {
       label: 'status',
       field: 'status',
-      type: 'radio',
-      filterKey: 'status',
       value: {
         status: 'developing',
+        value: 'developing',
       },
-      options: [
-        {
-          status: 'new',
-        },
-        {
-          status: 'developing',
-        },
-        {
-          status: 'completed',
-        },
-        {
-          status: 'under acceptance',
-        },
-        {
-          status: 'closed-loop',
-        },
-      ],
     },
   ];
   finalSearchItems: any;

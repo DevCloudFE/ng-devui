@@ -285,9 +285,9 @@ export class TransferComponent implements OnInit, OnChanges, OnDestroy {
     } else {
       if (keyword !== '') {
         if (direction === TransferDirection.SOURCE) {
-          this.sourceDisplayOption = this.sourceOption.filter(item => item.name.match(keyword) !== null);
+          this.sourceDisplayOption = this.sourceOption.filter(item => item.name.includes(keyword));
         } else if (direction === TransferDirection.TARGET) {
-          this.targetDisplayOption = this.targetOption.filter(item => item.name.match(keyword) !== null);
+          this.targetDisplayOption = this.targetOption.filter(item => item.name.includes(keyword));
         }
       } else {
         if (direction === TransferDirection.SOURCE) {
@@ -309,17 +309,21 @@ export class TransferComponent implements OnInit, OnChanges, OnDestroy {
       }
       if (direction === TransferDirection.SOURCE) {
         this.sourceOption.splice(index, 0, fromIndex === -1 ? e.dragData : this.sourceOption.splice(fromIndex, 1)[0]);
+        this.sourceDisplayOption = [...this.sourceOption];
         this.transferToSource.next({ sourceOption: this.sourceOption, targetOption: this.targetOption });
       } else {
         this.targetOption.splice(index, 0, fromIndex === -1 ? e.dragData : this.targetOption.splice(fromIndex, 1)[0]);
+        this.targetDisplayOption = [...this.targetOption];
         this.transferToTarget.next({ sourceOption: this.sourceOption, targetOption: this.targetOption });
       }
     } else {
       if (direction === TransferDirection.SOURCE) {
         this.sourceOption.push(e.dragData);
+        this.sourceDisplayOption = [...this.sourceOption];
         this.transferToSource.next({ sourceOption: this.sourceOption, targetOption: this.targetOption });
       } else {
         this.targetOption.push(e.dragData);
+        this.targetDisplayOption = [...this.targetOption];
         this.transferToTarget.next({ sourceOption: this.sourceOption, targetOption: this.targetOption });
       }
     }

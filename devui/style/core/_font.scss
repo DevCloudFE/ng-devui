@@ -1,6 +1,8 @@
 // 字号大小变量
 @import '../theme/font';
 
+$font-family: 'HuaweiFont', 'Helvetica','Arial', 'PingFangSC-Regular', 'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑','Microsoft JhengHei';
+
 @mixin font-content() {
   font-size: $devui-font-size;
   font-weight: $devui-font-content-weight;
@@ -11,4 +13,36 @@
   font-size: $font-size;
   font-weight: $devui-font-title-weight;
   line-height: $devui-line-height-base;
+}
+
+.devui-font-size-base {
+  font-size: $devui-font-size; // 12px
+}
+
+.devui-font-base {
+  @include font-content(); // 12px normal 1.5
+}
+
+.devui-font-size-modal-title {
+  font-size: $devui-font-size-modal-title; // 18px
+}
+
+.devui-font-modal-title {
+  @include font-title($devui-font-size-modal-title); // 18px bold 1.5
+}
+
+.devui-font-size-page-title {
+  font-size: $devui-font-size-page-title; // 16px
+}
+
+.devui-font-page-title {
+  @include font-title(); // 16px bold 1.5
+}
+
+.devui-font-size-secondary-title {
+  font-size: $devui-font-size-card-title; // 14px
+}
+
+.devui-font-secondary-title {
+  @include font-title($devui-font-size-card-title); // 14px bold 1.5
 }

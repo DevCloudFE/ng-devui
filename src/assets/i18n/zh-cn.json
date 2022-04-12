@@ -689,8 +689,8 @@
         "description": "基本徽章类型，当有包裹元素时在右上角显示徽章和数目。",
         "basic": "标准徽章，通过count参数设置徽章展示的数目，通过status参数可设置徽章状态色",
         "maxCount": "可通过maxCount参数设置徽章展示的数目最大值，默认为99",
-        "statusColor": "通过bgColor参数设置徽章展示状态色，通过offsetXY参数可设置徽章偏移量",
-        "position": "通过badgePos参数设置徽章位置",
+        "statusColor": "通过bgColor参数设置徽章展示状态色，通过offset参数可设置徽章偏移量",
+        "position": "通过position参数设置徽章位置",
         "unread": "未读消息"
       },
       "dotDemo": {
@@ -712,11 +712,11 @@
       },
       "positionDemo": {
         "title": "徽章位置",
-        "description": "通过badgePos参数设置徽章位置。"
+        "description": "通过position参数设置徽章位置。"
       },
       "customDemo": {
         "title": "自定义",
-        "description": "通过bgColor参数设置徽章展示状态色(此时status参数设置的徽章状态色失效)，通过offsetXY参数可设置相对于badgePos的徽章偏移量。通过textColor、bgColor自定义文字、背景颜色。"
+        "description": "通过bgColor参数设置徽章展示状态色(此时status参数设置的徽章状态色失效)，通过offset参数可设置相对于position的徽章偏移量。通过textColor、bgColor自定义文字、背景颜色。"
       },
       "anchorLinkValues": {
         "badge-basic": "基本徽章",
@@ -1025,6 +1025,14 @@
             "button": "按钮",
             "status": "状态"
           },
+          "catalogsList": {
+            "theme": "主题色",
+            "text": "文字",
+            "border": "边框",
+            "background": "背景",
+            "status": "状态/功能"
+          },
+          "formColor": "完整色板",
           "colors": {
             "global-bg": "浅灰色背景body",
             "bg-white": "顶部导航颜色，背景色",
@@ -1105,6 +1113,7 @@
         "instance": {
           "title": "实例",
           "description": "阴影对照表",
+          "description2": "阴影颜色对照表",
           "defaultTable": {
             "tab": "默认主题阴影对照表",
             "shadowName": "阴影变量名",
@@ -1117,6 +1126,13 @@
             "shadowName": "阴影变量名",
             "newShadowName": "新版变量名",
             "shadowValue": "阴影变量值",
+            "description": "描述"
+          },
+          "colorTable": {
+            "colorVar": "颜色变量",
+            "normalColor": "普通色值",
+            "darkColor": "暗黑色值",
+            "themeValue": "当前主题色值",
             "description": "描述"
           },
           "shadows": {
@@ -1142,6 +1158,10 @@
             "hwc-shadow-prompt": "提示类",
             "hwc-shadow-success": "成功提示",
             "hwc-shadow-dark": "深色提示背景阴影"
+          },
+          "shadowColor": {
+            "devui-shadow": "阴影色",
+            "devui-light-shadow": "弱化阴影色"
           }
         }
       },
@@ -1275,6 +1295,51 @@
         "animation": "animation"
       }
     },
+    "design-z-index": {
+      "name": "ZIndex 层级",
+      "type": "Design tokens",
+      "path": "design-z-index",
+      "description": "组件库公共样式规范。",
+      "tmw": "当需要查看组件库相关样式，使用场景以及变更时。",
+      "ZIndexDemo": {
+        "title": "层级",
+        "description1": "1. 组件库为用户们提供了层级变量用于不同的场景，下表列出了这些变量的名称，对应的变量值以及使用场景；",
+        "description2": "2. 通过`@import '~ng-devui/styles-var/devui-var.scss';`引入层级变量后即可使用；",
+        "description3": "3. 若样式表为less文件，则`@import '~ng-devui/styles-var/devui-var.less';`,并将变量前缀'$'改为'@'；",
+        "description4": "4. 若存在遮罩，则遮罩基于对应z-index值-1；",
+        "description5": "5. 内容层，根据需要设置，zIndex需小于临时层；",
+        "description6": "6. 背景层，根据需要设置，zIndex需小于内容层。",
+        "title2": "层级规则",
+        "description7": "按照交互形式分为背景层、内容层、临时层。层级的前后顺序为，临时层>内容层>背景层，顺序不可更改。",
+        "subTitle1": "1. 临时层",
+        "description8": "操作或任务相关的临时层，一般承载当前需要临时处理的任务或者需要接受的反馈等，高于内容层。",
+        "description9": "分为两种模态：一种是内容区不可进行操作，被蒙版遮罩禁用，用户必须聚焦处理弹窗内容才可继续其他操作（弹窗、模态抽屉）、一种是内容区可进行操作，无蒙版（非模态抽屉、轻量级弹窗、悬浮菜单、使用指南）",
+        "subTitle2": "2. 内容层",
+        "description10": "主要承载页面信息、组件、手风琴等页面元素。",
+        "subTitle3": "3. 背景层",
+        "description11": "页面背景层永远置于页面底部，页面背景层颜色统一为#EEF0F5，颜色中立柔和，方便凸显和聚焦内容层。",
+        "instance": {
+          "title": "Instance",
+          "tableTitle": "层级变量表",
+          "table": {
+            "zIndexName": "层级变量名",
+            "zIndexValue": "层级变量值",
+            "description": "描述"
+          },
+          "zIndex": {
+            "devui-z-index-full-page-overlay": "全屏覆盖类元素",
+            "devui-z-index-pop-up": "提示类信息，popover，tooltip等",
+            "devui-z-index-dropdown": "下拉菜单，dropdown等, 兼容, 取值待重新定义",
+            "devui-z-index-modal": "弹窗",
+            "devui-z-index-drawer": "抽屉板",
+            "devui-z-index-framework": "框架类元素，header,sideMenu等"
+          }
+        }
+      },
+      "anchorLinkValues": {
+        "z-index": "z-index"
+      }
+    },
     "codemirror": {
       "name": "CodeMirror 代码编辑器",
       "type": "扩展服务",
@@ -1363,9 +1428,17 @@
         "title": "批量行拖拽",
         "description": "支持使用DragDrop组件来实现表格的批量行拖拽功能，请用Ctrl按键和鼠标多选并进行拖拽，只能通过自定义head、body模板和其中的行、单元格来实现。"
       },
-      "virtualScrollTreeTableDemo": {
-        "title": "大数据量树形表格",
+      "virtualScrollTreeTableBasicDemo": {
+        "title": "大数据量树形表格基本用法",
         "description": "当需要展示10000~100000条树形数据时，为使操作流畅，请使用这种表格。"
+      },
+      "virtualScrollTreeTableOperationDemo": {
+        "title": "大数据量树形表格操作功能",
+        "description": "大数据量树形表格的各种基本操作，增添、修改、删除、查询、复制/剪切功能。"
+      },
+      "virtualScrollTreeTableInteractionDemo": {
+        "title": "大数据量树形表格交互",
+        "description": "大数据量树形表格的高级操作，拖拽、复选、批量删除、继承原本数据表格的大部分功能。"
       },
       "mutilStylesDemo": {
         "title": "表格样式"
@@ -1401,7 +1474,9 @@
         "cell-merge": "单元格合并",
         "drag-row": "行拖拽",
         "muti-drag-row": "批量行拖拽",
-        "virtual-scroll-tree-table": "大数据树形表格"
+        "virtual-scroll-tree-table-basic": "大数据量树形表格基本用法",
+        "virtual-scroll-tree-table-operation": "大数据量树形表格操作功能",
+        "virtual-scroll-tree-table-interaction": "大数据量树形表格交互"
       }
     },
     "datepickerPro": {
@@ -2487,7 +2562,7 @@
       },
       "typeDemo": {
         "title": "多种类型",
-        "description": "面板类型分为default、primary、success，danger、warning、info。"
+        "description": "面板类型分为default、primary、success，danger、warning、info、ghost。"
       },
       "conditionChangeDemo": {
         "title": "根据条件阻止折叠",
@@ -2640,14 +2715,18 @@
         "title": "半选模式"
       },
       "typeDemo": {
-        "title": "使用type参数"
+        "title": "设置颜色"
+      },
+      "templateDemo": {
+        "title": "自定义模板"
       },
       "anchorLinkValues": {
         "read-only-mode": "只读模式",
         "dynamic-mode": "动态模式",
         "dynamic-mode-Custom": "动态模式-自定义",
         "half-demo": "半选模式",
-        "using-the-type-parameter": "使用type参数"
+        "using-the-type-parameter": "设置颜色",
+        "template": "自定义模板"
       }
     },
     "search": {
@@ -3494,13 +3573,18 @@
         "title": "任意区域上传",
         "description": "用户可通过dUpload指令支持文件任意区域上传。"
       },
+      "sliceDemo": {
+        "title": "分片上传",
+        "description": "用户可通过设置分片上传的大小进行分片上传。"
+      },
       "anchorLinkValues": {
         "basic-usage": "基本用法",
         "multi-files": "多文件上传",
         "auto-upload": "自动上传",
         "custom": "自定义",
         "dynamic-upload-options": "动态上传参数",
-        "customize-area-upload": "任意区域上传"
+        "customize-area-upload": "任意区域上传",
+        "upload-slice": "分片上传"
       }
     },
     "user-guide": {
@@ -3514,7 +3598,7 @@
       },
       "serviceWayDemo": {
         "title": "服务方式",
-        "description": "以服务方式使用user-guide。将接口暴露给用户，开启某套教程的入口方式用户可自定义。此方式需要在使用user-guide的component中引入UserGuideCmdService。"
+        "description": "以服务方式使用user-guide。将接口暴露给用户，开启某套教程的入口方式用户可自定义。此方式需要在使用user-guide的component中引入UserGuideService。"
       },
       "anchorLinkValues": {
         "user-guide-basic": "组件方式",
@@ -3905,7 +3989,7 @@
       "tmw": "需要解决低版本浏览器不支持的方法时。",
       "basicDemo": {
         "title": "使用方法",
-        "description": "目前由于实现方法较少，且主要供富文本组件使用，因此当前腻子脚本文件存放于富文本模块下。 使用时，devcloud 项目或 Angular cli 创建的项目可以在 src/polyfills.ts 中插入：import 'ng-devui/add-ons/editorx/polyfill'; 由于腻子脚本只是一段独立执行的js代码，也可以直接用静态资源的方式插入页面来使用。",
+        "description": "目前由于实现方法较少，且主要供富文本组件使用，因此当前腻子脚本文件存放于富文本模块下。 可以在 src/polyfills.ts 中插入：import 'ng-devui/add-ons/editorx/polyfill'; 由于腻子脚本只是一段独立执行的js代码，也可以直接用静态资源的方式插入页面来使用。",
         "name": "腻子脚本",
         "license": "授权方式",
         "size": "大小",
@@ -3999,6 +4083,9 @@
       "basicDemo": {
         "title": "基本用法"
       },
+      "markedTypeDemo": {
+        "title": "日期标记"
+      },
       "showTimeDemo": {
         "title": "显示时间"
       },
@@ -4031,6 +4118,7 @@
       },
       "anchorLinkValues": {
         "basic-usage": "基本用法",
+        "mark-type": "日期标记",
         "show-time": "显示时间",
         "template": "自定义扩展区域",
         "monthYear": "年月选择器",
@@ -4127,11 +4215,15 @@
       "echarts-bar-line": {
         "title": "折线柱模板"
       },
+      "echarts-bar-horizontal": {
+        "title": "横向柱状图模板"
+      },
       "anchorLinkValues": {
         "echarts-bar-chart": "基础柱状图",
         "echarts-bar-stacked": "堆积柱状图",
         "echarts-bar-two": "双向柱状图",
-        "echarts-bar-line": "折线柱模板"
+        "echarts-bar-line": "折线柱模板",
+        "echarts-bar-horizontal": "横向柱状图模板"
       }
     },
     "radar-chart": {
@@ -4227,6 +4319,16 @@
       "shared-card": "分享卡片",
       "shared-link-image": "分享链接或者图片",
       "download-image": "下载Chart图片"
+    },
+    "chart-form": {
+      "name": "Chart Form 图表配置表单生成器",
+      "type": "模板图表",
+      "path": "chart-form",
+      "description": "图表配置表单生成器",
+      "tmw": "快速生成图表的配置表单",
+      "basic-form": {
+        "title": "图表配置表单生成器"
+      }
     }
   }
 }

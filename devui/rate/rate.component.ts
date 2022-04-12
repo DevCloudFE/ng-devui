@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, forwardRef, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, forwardRef, Input, OnInit, TemplateRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -15,12 +15,30 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   preserveWhitespaces: false,
 })
 export class RateComponent implements OnInit, ControlValueAccessor {
-  @Input() read = false;
+  /**
+   * @deprecated
+   * 用readonly替代
+  */
+  @Input() set read(value) {
+    this.readonly = value;
+  }
+  @Input() readonly = false;
+
   @Input() count = 5;
   @Input() color = '';
+  /**
+   * @deprecated
+   * 用character替代
+  */
   @Input() icon = '';
-  @Input() character = '';
-  @Input() type: 'success' | 'warning' | 'error';
+  @Input() character: string | TemplateRef<any> = '';
+  /**
+   * @deprecated
+   * 用color替代
+  */
+  @Input() set type(value) {
+    this.color = `var(--devui-${value})`;
+  }
   @Input() allowHalf = false;
   totalLevel_array = [];
   chooseValue: number;
@@ -36,6 +54,14 @@ export class RateComponent implements OnInit, ControlValueAccessor {
     for (let i = 0; i < this.count; i++) {
       this.totalLevel_array.push({ width: '0' });
     }
+  }
+
+  get isCharacterTemplate() {
+    return this.character instanceof TemplateRef;
+  }
+
+  get characterTemplate(): TemplateRef<any> {
+    return this.character as TemplateRef<any>;
   }
 
   // 只读模式配置
@@ -65,7 +91,7 @@ export class RateComponent implements OnInit, ControlValueAccessor {
   }
 
   hoverToggle(event, index?: number, reset = false) {
-    if (this.read) {
+    if (this.readonly) {
       return;
     }
     if (reset) {
@@ -93,7 +119,7 @@ export class RateComponent implements OnInit, ControlValueAccessor {
   }
 
   selectValue(event, index) {
-    if (this.read) {
+    if (this.readonly) {
       return;
     }
     this.setChange(0, index, '100%');
@@ -121,7 +147,7 @@ export class RateComponent implements OnInit, ControlValueAccessor {
 
   writeValue(value: number | null): void {
     this.chooseValue = value - 1;
-    if (this.read) {
+    if (this.readonly) {
       this.setStaticRating();
     } else {
       this.setDynamicRating();

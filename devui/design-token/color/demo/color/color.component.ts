@@ -22,7 +22,20 @@ export class ColorComponent implements OnInit, OnDestroy {
   headerExpandConfig: TableExpandConfig;
   activeTab: string | number = 'tab1';
   colorSource = [];
+  textColorSource = [];
+  borderColorSource = [];
+  backgroundColorSource = [];
+  statusColorSource = [];
+  themeColorSource = [];
   catalogs: CatalogConfig[] = [];
+  catalogsList: CatalogConfig[] = [];
+  tableList: CatalogConfig[][] = [];
+  colorTypeList = ['blue', 'sky', 'green', 'lime', 'yellow', 'orange', 'red', 'magenta', 'purple'];
+  // TODO: 灰色类变量用于文字，边框，背景，暂不支持开发直接使用灰色变量
+  colorTypeSecList = ['gray', 'slate', 'zinc', 'dark-gray', 'dark-slate', 'dark-zinc'];
+  colorNumberList = ['5', '10' ,'20', '30', '40', '50', '60', '70', '80', '90', '100'];
+  colorList = [];
+  tableNameList = [];
 
   colors = [];
   constructor(private translate: TranslateService) {}
@@ -39,7 +52,17 @@ export class ColorComponent implements OnInit, OnDestroy {
 
   changeValueInTable = () => {
     const theme = this.themeService.currentTheme;
-    this.catalogs.map((obj) => {
+    if(this.activeTab === 'tab1') {
+      this.catalogs.forEach(item => {
+        this.changeVal(item, theme);
+      });
+    } else {
+      this.changeVal(this.catalogs, theme);
+    }
+  };
+
+  changeVal(val, theme) {
+    val.map((obj) => {
       const nameArr = obj.name.split('$');
       if (nameArr.length === 2) {
         const match = theme.data[nameArr[1]];
@@ -79,145 +102,156 @@ export class ColorComponent implements OnInit, OnDestroy {
   }
 
   setValues(values) {
+    console.log('values', values);
+    Object.values(values.catalogsList).forEach(item => {
+      this.tableNameList.push(item);
+    });
+
     this.colorSource = [
-      { type: 'basic', name: '$devui-global-bg', light: '#f3f6f8', dark: '#202124', description: values.colorSource['devui-global-bg'] },
       {
-        type: 'basic',
+        type: 'background',
+        name: '$devui-global-bg',
+        light: '#f3f6f8',
+        dark: '#202124',
+        description: values.colorSource['devui-global-bg']
+      },
+      {
+        type: 'background',
         name: '$devui-global-bg-normal',
         light: '#ffffff',
         dark: '#202124',
         description: values.colorSource['devui-global-bg-normal'],
       },
       {
-        type: 'basic',
+        type: 'background',
         name: '$devui-base-bg',
         light: '#ffffff',
         dark: '#2E2F31',
         description: values.colorSource['devui-global-bg-normal'],
       },
       {
-        type: 'basic',
+        type: 'background',
         name: '$devui-base-bg-dark',
         light: '#333854',
         dark: '#2e2f31',
         description: values.colorSource['devui-base-bg-dark'],
       },
-      { type: 'basic', name: '$devui-brand', light: '#5e7ce0', dark: '#5e7ce0', description: values.colorSource['devui-brand'] },
-      { type: 'basic', name: '$devui-brand-foil', light: '#859bff', dark: '#313a61', description: values.colorSource['devui-brand-foil'] },
+      { type: 'theme', name: '$devui-brand', light: '#5e7ce0', dark: '#5e7ce0', description: values.colorSource['devui-brand'] },
+      { type: 'theme', name: '$devui-brand-foil', light: '#859bff', dark: '#313a61', description: values.colorSource['devui-brand-foil'] },
       {
-        type: 'basic',
+        type: 'theme',
         name: '$devui-brand-hover',
         light: '#7693f5',
         dark: '#425288',
         description: values.colorSource['devui-brand-hover'],
       },
       {
-        type: 'basic',
+        type: 'theme',
         name: '$devui-brand-active',
         light: '#526ecc',
         dark: '#526ecc',
         description: values.colorSource['devui-brand-active'],
       },
       {
-        type: 'basic',
+        type: 'theme',
         name: '$devui-brand-active-focus',
         light: '#344899',
         dark: '#344899',
         description: values.colorSource['devui-brand-active-focus'],
       },
-      { type: 'basic', name: '$devui-contrast', light: '#C7000B', dark: '#C7000B', description: values.colorSource['devui-contrast'] },
-      { type: 'basic', name: '$devui-text', light: '#252b3a', dark: '#E8E8E8', description: values.colorSource['devui-text'] },
-      { type: 'basic', name: '$devui-text-weak', light: '#575d6c', dark: '#A0A0A0', description: values.colorSource['devui-text-weak'] },
-      { type: 'basic', name: '$devui-aide-text', light: '#8a8e99', dark: '#909090', description: values.colorSource['devui-aide-text'] },
+      { type: 'theme', name: '$devui-contrast', light: '#C7000B', dark: '#C7000B', description: values.colorSource['devui-contrast'] },
+      { type: 'text', name: '$devui-text', light: '#252b3a', dark: '#E8E8E8', description: values.colorSource['devui-text'] },
+      { type: 'text', name: '$devui-text-weak', light: '#575d6c', dark: '#A0A0A0', description: values.colorSource['devui-text-weak'] },
+      { type: 'text', name: '$devui-aide-text', light: '#8a8e99', dark: '#909090', description: values.colorSource['devui-aide-text'] },
       {
-        type: 'basic',
+        type: 'text',
         name: '$devui-aide-text-stress',
         light: '#575d6c',
         dark: '#A0A0A0',
         description: values.colorSource['devui-aide-text-stress'],
       },
       {
-        type: 'basic',
+        type: 'text',
         name: '$devui-placeholder',
         light: '#8a8e99',
         dark: '#8A8A8A',
         description: values.colorSource['devui-placeholder'],
       },
-      { type: 'basic', name: '$devui-light-text', light: '#ffffff', dark: '#ffffff', description: values.colorSource['devui-light-text'] },
-      { type: 'basic', name: '$devui-dark-text', light: '#252b3a', dark: '#252b3a', description: values.colorSource['devui-dark-text'] },
-      { type: 'basic', name: '$devui-link', light: '#526ecc', dark: '#526ECC', description: values.colorSource['devui-link'] },
+      { type: 'text', name: '$devui-light-text', light: '#ffffff', dark: '#ffffff', description: values.colorSource['devui-light-text'] },
+      { type: 'text', name: '$devui-dark-text', light: '#252b3a', dark: '#252b3a', description: values.colorSource['devui-dark-text'] },
+      { type: 'text', name: '$devui-link', light: '#526ecc', dark: '#526ECC', description: values.colorSource['devui-link'] },
       {
-        type: 'basic',
+        type: 'text',
         name: '$devui-link-active',
         light: '#344899',
         dark: '#344899',
         description: values.colorSource['devui-link-active'],
       },
-      { type: 'basic', name: '$devui-link-light', light: '#96adfa', dark: '#96adfa', description: values.colorSource['devui-link-light'] },
+      { type: 'text', name: '$devui-link-light', light: '#96adfa', dark: '#96adfa', description: values.colorSource['devui-link-light'] },
       {
-        type: 'basic',
+        type: 'text',
         name: '$devui-link-light-active',
         light: '#beccfa',
         dark: '#beccfa',
         description: values.colorSource['devui-link-light-active'],
       },
-      { type: 'basic', name: '$devui-line', light: '#adb0b8', dark: '#505153', description: values.colorSource['devui-line'] },
+      { type: 'border', name: '$devui-line', light: '#adb0b8', dark: '#505153', description: values.colorSource['devui-line'] },
       {
-        type: 'basic',
+        type: 'border',
         name: '$devui-dividing-line',
         light: '#dfe1e6',
         dark: '#3D3E40',
         description: values.colorSource['devui-dividing-line'],
       },
-      { type: 'basic', name: '$devui-block', light: '#ffffff', dark: '#606061', description: values.colorSource['devui-block'] },
-      { type: 'basic', name: '$devui-area', light: '#f8f8f8', dark: '#34363A', description: values.colorSource['devui-area'] },
-      { type: 'basic', name: '$devui-danger', light: '#f66f6a', dark: '#f66f6a', description: values.colorSource['devui-danger'] },
-      { type: 'basic', name: '$devui-warning', light: '#fac20a', dark: '#fac20a', description: values.colorSource['devui-warning'] },
-      { type: 'basic', name: '$devui-waiting', light: '#9faad7', dark: '#5e6580', description: values.colorSource['devui-waiting'] },
-      { type: 'basic', name: '$devui-success', light: '#50d4ab', dark: '#50d4ab', description: values.colorSource['devui-success'] },
-      { type: 'basic', name: '$devui-info', light: '#5e7ce0', dark: '#5e7ce0', description: values.colorSource['devui-info'] },
-      { type: 'basic', name: '$devui-initial', light: '#e9edfa', dark: '#64676e', description: values.colorSource['devui-initial'] },
+      { type: 'background', name: '$devui-block', light: '#ffffff', dark: '#606061', description: values.colorSource['devui-block'] },
+      { type: 'background', name: '$devui-area', light: '#f8f8f8', dark: '#34363A', description: values.colorSource['devui-area'] },
+      { type: 'status', name: '$devui-danger', light: '#f66f6a', dark: '#f66f6a', description: values.colorSource['devui-danger'] },
+      { type: 'status', name: '$devui-warning', light: '#fac20a', dark: '#fac20a', description: values.colorSource['devui-warning'] },
+      { type: 'status', name: '$devui-waiting', light: '#9faad7', dark: '#5e6580', description: values.colorSource['devui-waiting'] },
+      { type: 'status', name: '$devui-success', light: '#50d4ab', dark: '#50d4ab', description: values.colorSource['devui-success'] },
+      { type: 'status', name: '$devui-info', light: '#5e7ce0', dark: '#5e7ce0', description: values.colorSource['devui-info'] },
+      { type: 'status', name: '$devui-initial', light: '#e9edfa', dark: '#64676e', description: values.colorSource['devui-initial'] },
       {
-        type: 'basic',
+        type: 'status',
         name: '$devui-unavailable',
         light: '#f5f5f6',
         dark: '#5b5b5c',
         description: values.colorSource['devui-unavailable'],
       },
       {
-        type: 'basic',
+        type: 'status',
         name: '$devui-shadow',
         light: 'rgba(0, 0, 0, 0.2)',
         dark: 'rgba(17, 18, 19, 0.4)',
         description: values.colorSource['devui-shadow'],
       },
       {
-        type: 'basic',
+        type: 'status',
         name: '$devui-light-shadow',
         light: 'rgba(0, 0, 0, 0.1)',
         dark: 'rgba(17, 18, 19, 0.5)',
         description: values.colorSource['devui-light-shadow'],
       },
 
-      { type: 'icon', name: '$devui-icon-text', light: '#252b3a', dark: '#E8E8E8', description: values.colorSource['devui-icon-text'] },
-      { type: 'icon', name: '$devui-icon-bg', light: '#ffffff', dark: '#2E2F31', description: values.colorSource['devui-icon-bg'] },
-      { type: 'icon', name: '$devui-icon-fill', light: '#d3d5d9', dark: '#606061', description: values.colorSource['devui-icon-fill'] },
+      { type: 'text', name: '$devui-icon-text', light: '#252b3a', dark: '#E8E8E8', description: values.colorSource['devui-icon-text'] },
+      { type: 'background', name: '$devui-icon-bg', light: '#ffffff', dark: '#2E2F31', description: values.colorSource['devui-icon-bg'] },
+      { type: 'status', name: '$devui-icon-fill', light: '#d3d5d9', dark: '#606061', description: values.colorSource['devui-icon-fill'] },
       {
-        type: 'icon',
+        type: 'status',
         name: '$devui-icon-fill-hover',
         light: '#adb5ce',
         dark: '#73788a',
         description: values.colorSource['devui-icon-fill-hover'],
       },
       {
-        type: 'icon',
+        type: 'status',
         name: '$devui-icon-fill-active',
         light: '#5e7ce0',
         dark: '#5e7ce0',
         description: values.colorSource['devui-icon-fill-active'],
       },
       {
-        type: 'icon',
+        type: 'status',
         name: '$devui-icon-fill-active-hover',
         light: '#526ecc',
         dark: '#526ecc',
@@ -225,28 +259,28 @@ export class ColorComponent implements OnInit, OnDestroy {
       },
 
       {
-        type: 'form',
+        type: 'border',
         name: '$devui-form-control-line',
         light: '#adb0b8',
         dark: '#505153',
         description: values.colorSource['devui-form-control-line'],
       },
       {
-        type: 'form',
+        type: 'border',
         name: '$devui-form-control-line-hover',
         light: '#575d6c',
         dark: '#909090',
         description: values.colorSource['devui-form-control-line-hover'],
       },
       {
-        type: 'form',
+        type: 'border',
         name: '$devui-form-control-line-active',
         light: '#5e7ce0',
         dark: '#5e7ce0',
         description: values.colorSource['devui-form-control-line-active'],
       },
       {
-        type: 'form',
+        type: 'border',
         name: '$devui-form-control-line-active-hover',
         light: '#344899',
         dark: '#344899',
@@ -254,49 +288,49 @@ export class ColorComponent implements OnInit, OnDestroy {
       },
 
       {
-        type: 'list',
+        type: 'background',
         name: '$devui-list-item-active-bg',
         light: '#5e7ce0',
         dark: '#5e7ce0',
         description: values.colorSource['devui-list-item-active-bg'],
       },
       {
-        type: 'list',
+        type: 'text',
         name: '$devui-list-item-active-text',
         light: '#ffffff',
         dark: '#ffffff',
         description: values.colorSource['devui-list-item-active-text'],
       },
       {
-        type: 'list',
+        type: 'background',
         name: '$devui-list-item-active-hover-bg',
         light: '#526ecc',
         dark: '#526ecc',
         description: values.colorSource['devui-list-item-active-hover-bg'],
       },
       {
-        type: 'list',
+        type: 'background',
         name: '$devui-list-item-hover-bg',
         light: '#f2f5fc',
         dark: '#383838',
         description: values.colorSource['$devui-list-item-hover-bg'],
       },
       {
-        type: 'list',
+        type: 'text',
         name: '$devui-list-item-hover-text',
         light: '#526ecc',
         dark: '#526ecc',
         description: values.colorSource['devui-list-item-hover-text'],
       },
       {
-        type: 'list',
+        type: 'background',
         name: '$devui-list-item-selected-bg',
         light: '#e9edfa',
         dark: '#454545',
         description: values.colorSource['devui-list-item-selected-bg'],
       },
       {
-        type: 'list',
+        type: 'background',
         name: '$devui-list-item-strip-bg',
         light: '#f2f5fc',
         dark: '#383838',
@@ -304,35 +338,35 @@ export class ColorComponent implements OnInit, OnDestroy {
       },
 
       {
-        type: 'disable',
+        type: 'background',
         name: '$devui-disabled-bg',
         light: '#f5f5f6',
         dark: '#3D3E44',
         description: values.colorSource['devui-disabled-bg'],
       },
       {
-        type: 'disable',
+        type: 'border',
         name: '$devui-disabled-line',
         light: '#dfe1e6',
         dark: '#505153',
         description: values.colorSource['devui-disabled-line'],
       },
       {
-        type: 'disable',
+        type: 'text',
         name: '$devui-disabled-text',
         light: '#adb0b8',
         dark: '#7D7D7D',
         description: values.colorSource['devui-disabled-text'],
       },
       {
-        type: 'disable',
+        type: 'text',
         name: 'devui-primary-disabled',
         light: '#beccfa',
         dark: '#2b3458',
         description: values.colorSource['devui-primary-disabled'],
       },
       {
-        type: 'disable',
+        type: 'status',
         name: 'devui-icon-fill-active-disabled',
         light: '#beccfa',
         dark: '#2b3458',
@@ -340,107 +374,107 @@ export class ColorComponent implements OnInit, OnDestroy {
       },
 
       {
-        type: 'specialBackground',
+        type: 'background',
         name: '$devui-label-bg',
         light: '#eef0f5',
         dark: '#46443F',
         description: values.colorSource['devui-label-bg'],
       },
       {
-        type: 'specialBackground',
+        type: 'background',
         name: '$devui-connected-overlay-bg',
         light: '#ffffff',
         dark: '#2F2F2F',
         description: values.colorSource['devui-connected-overlay-bg'],
       },
       {
-        type: 'specialBackground',
+        type: 'border',
         name: '$devui-connected-overlay-line',
         light: '#526ecc',
         dark: '#526ecc',
         description: values.colorSource['devui-connected-overlay-line'],
       },
       {
-        type: 'specialBackground',
+        type: 'background',
         name: '$devui-fullscreen-overlay-bg',
         light: '#ffffff',
         dark: '#2E2F31',
         description: values.colorSource['devui-fullscreen-overlay-bg'],
       },
       {
-        type: 'specialBackground',
+        type: 'background',
         name: '$devui-feedback-overlay-bg',
         light: '#464d6e',
         dark: '#4C4C4C',
         description: values.colorSource['devui-feedback-overlay-bg'],
       },
       {
-        type: 'specialBackground',
+        type: 'text',
         name: '$devui-feedback-overlay-text',
         light: '#dfe1e6',
         dark: '#DFE1E6',
         description: values.colorSource['devui-feedback-overlay-text'],
       },
       {
-        type: 'specialBackground',
+        type: 'background',
         name: '$devui-embed-search-bg',
         light: '#f2f5fc',
         dark: '#383838',
         description: values.colorSource['devui-embed-search-bg'],
       },
       {
-        type: 'specialBackground',
+        type: 'background',
         name: '$devui-embed-search-bg-hover',
         light: '#eef0f5',
         dark: '#3D3E40',
         description: values.colorSource['devui-embed-search-bg-hover'],
       },
       {
-        type: 'specialBackground',
+        type: 'background',
         name: '$devui-float-block-shadow',
         light: 'rgba(94, 124, 224, 0.3)',
         dark: 'rgba(94, 124, 224, 0.3)',
         description: values.colorSource['devui-float-block-shadow'],
       },
       {
-        type: 'specialBackground',
+        type: 'background',
         name: '$devui-highlight-overlay',
         light: 'rgba(255, 255, 255, 0.8)',
         dark: 'rgba(255, 255, 255, 0.1)',
         description: values.colorSource['devui-highlight-overlay'],
       },
       {
-        type: 'specialBackground',
+        type: 'background',
         name: '$devui-range-item-hover-bg',
         light: '#e9edfa',
         dark: '#454545',
         description: values.colorSource['devui-range-item-hover-bg'],
       },
 
-      { type: 'button', name: '$devui-primary', light: '#5e7ce0', dark: '#5e7ce0', description: values.colorSource['devui-primary'] },
+      { type: 'status', name: '$devui-primary', light: '#5e7ce0', dark: '#5e7ce0', description: values.colorSource['devui-primary'] },
       {
-        type: 'button',
+        type: 'status',
         name: '$devui-primary-hover',
         light: '#7693f5',
         dark: '#425288',
         description: values.colorSource['devui-primary-hover'],
       },
       {
-        type: 'button',
+        type: 'status',
         name: '$devui-primary-active',
         light: '#344899',
         dark: '#344899',
         description: values.colorSource['devui-primary-active'],
       },
       {
-        type: 'button',
+        type: 'status',
         name: '$devui-contrast-hover',
         light: '#D64A52',
         dark: '#D64A52',
         description: values.colorSource['devui-contrast-hover'],
       },
       {
-        type: 'button',
+        type: 'status',
         name: '$devui-contrast-active',
         light: '#B12220',
         dark: '#B12220',
@@ -491,15 +525,12 @@ export class ColorComponent implements OnInit, OnDestroy {
       { type: 'status', name: '$devui-default-bg', light: '#f3f6f8', dark: '#383838', description: values.colorSource['devui-default-bg'] },
     ];
 
-    this.catalogs = [
-      { name: values.catalogs.basic, type: 'basic', expand: true },
-      { name: values.catalogs.icon, type: 'icon', expand: true },
-      { name: values.catalogs.form, type: 'form', expand: true },
-      { name: values.catalogs.list, type: 'list', expand: true },
-      { name: values.catalogs.disable, type: 'disable', expand: true },
-      { name: values.catalogs.specialBackground, type: 'specialBackground', expand: true },
-      { name: values.catalogs.button, type: 'button', expand: true },
-      { name: values.catalogs.status, type: 'status', expand: true },
+    this.catalogsList = [
+      { name: values.catalogsList.theme, type: 'theme', expand: true },
+      { name: values.catalogsList.text, type: 'text', expand: true },
+      { name: values.catalogsList.border, type: 'border', expand: true },
+      { name: values.catalogsList.background, type: 'background', expand: true },
+      { name: values.catalogsList.status, type: 'status', expand: true },
     ];
 
     this.colors = [
@@ -756,17 +787,31 @@ export class ColorComponent implements OnInit, OnDestroy {
       },
     ];
 
+    this.colorList = [
+      ['#f2f5fc', '#e9edfa', '#beccfa', '#96adfa', '#7693f5', '#5e7ce0', '#526ecc', '#465eb8', '#3c51a6', '#344899', '#2a3c85'],
+      ['#ebf6ff', '#d1ebff', '#b8e0ff', '#9ed5ff', '#85caff', '#6cbfff', '#4ea6e6', '#3590cc', '#207ab3', '#0f6999', '#035880'],
+      ['#edfff9', '#cffcee', '#acf2dc', '#8be8cb', '#6ddebb', '#50d4ab', '#3ac295', '#27b080', '#169e6c', '#088c58', '#007a45'],
+      ['#f0ffe6', '#e5ffd4', '#d8fcc0', '#c5f2a7', '#b3e890', '#a6dd82', '#92cc68', '#7eba50', '#6ca83b', '#5e9629', '#518519'],
+      ['#fffbf0', '#fff1c2', '#ffe794', '#ffdc66', '#ffd138', '#fac20a', '#e3aa00', '#cc9600', '#b58200', '#9e6f00', '#875c00'],
+      ['#fff3e8', '#ffe1c7', '#ffd0a6', '#ffbf85', '#ffad63', '#fa9841', '#e37d29', '#cc6414', '#b54e04', '#9e3f00', '#873400'],
+      ['#ffeeed', '#ffd5d4', '#ffbcba', '#ffa4a1', '#ff8b87', '#f66f6a', '#de504e', '#c73636', '#b02121', '#991111', '#820404'],
+      ['#ffedf3', '#ffd4e3', '#ffbad2', '#ffa1c2', '#fc86b0', '#f3689a', '#db4d83', '#c4356e', '#ad215b', '#96114d', '#800440'],
+      ['#f5f0ff', '#e7d9ff', '#d8c2ff', '#caabff', '#bc94ff', '#a97af8', '#8a5ce0', '#6f42c9', '#572db3', '#3f1a9c', '#2a0c85'],
+    ];
+
     this.setDataList();
   }
 
   setDataList() {
     const currentDataList = this.activeTab === 'tab1' ? 'colorSource' : 'colors';
     const result = [];
-    this.catalogs.forEach((catalog, catalogIndex) => {
-      result.push(catalog);
-      if (catalog.expand && !this.catalogs[catalogIndex + 1]?.hasOwnProperty('description')) {
+    this.catalogsList.forEach((catalog, catalogIndex) => {
+      if (catalog.expand && !Object.prototype.hasOwnProperty.call(
+        this.catalogsList[catalogIndex + 1] || {}, 'description')) {
         const insertItems = this[currentDataList].filter((color) => color.type === catalog.type);
-        result.push(...insertItems);
+        this[`${insertItems[0].type}ColorSource`].push(...insertItems);
+        this.tableList.push(this[`${insertItems[0].type}ColorSource`]);
+        result.push(this[`${insertItems[0].type}ColorSource`]);
       }
     });
     this.catalogs = result;

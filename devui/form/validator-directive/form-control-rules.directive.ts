@@ -245,7 +245,7 @@ export abstract class DAbstractControlRuleDirective implements OnChanges {
 
   private _findNgValidatorInDefault(validatorRule: DValidateRule) {
     for (const key in dDefaultValidators) {
-      if (validatorRule.hasOwnProperty(key)) {
+      if (Object.prototype.hasOwnProperty.call(validatorRule, key)) {
         return { id: key, ngValidator: this._generateValidatorFnFromDefault(key, validatorRule[key]) };
       }
     }

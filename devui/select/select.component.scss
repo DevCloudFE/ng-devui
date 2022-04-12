@@ -8,7 +8,7 @@
   &:not(.devui-dropdown-menu-cdk) {
     width: calc(100% + 2px);
     left: -1px;
-    margin: 5px 0;
+    margin: 4px 0;
   }
 
   &.devui-custom-right,
@@ -110,9 +110,9 @@
   font-size: $devui-font-size;
   display: block;
   min-height: 36px;
-  line-height: 1.5;
+  line-height: 20px;
   width: 100%;
-  padding: 10px 10px;
+  padding: 8px 12px;
   clear: both;
   overflow: hidden;
   white-space: nowrap;

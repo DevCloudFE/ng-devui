@@ -1,1 +1,1 @@
-export type PanelType = 'default' | 'primary' | 'success' | 'danger' | 'warning' | 'info';
+export type PanelType = 'common' | 'default' | 'primary' | 'success' | 'danger' | 'warning' | 'info' | 'ghost';

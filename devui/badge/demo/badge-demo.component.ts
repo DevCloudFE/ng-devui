@@ -60,8 +60,8 @@ export class BadgeDemoComponent implements OnInit, OnDestroy {
   setNavValues(values) {
     this.navItems = [
       { dAnchorLink: 'badge-basic', value: values['badge-basic'] },
-      { dAnchorLink: 'badge-dot', value: values['badge-dot'] },
       { dAnchorLink: 'badge-count', value: values['badge-count'] },
+      { dAnchorLink: 'badge-dot', value: values['badge-dot'] },
       { dAnchorLink: 'badge-status', value: values['badge-status'] },
       { dAnchorLink: 'position', value: values['position'] },
       { dAnchorLink: 'custom', value: values['custom'] }

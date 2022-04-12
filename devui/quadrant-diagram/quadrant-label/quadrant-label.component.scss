@@ -7,7 +7,7 @@
   font-size: $devui-font-size-card-title;
   color: $devui-text;
   background: $devui-base-bg;
-  box-shadow: $devui-shadow-length-base $devui-shadow, $devui-shadow-length-base $devui-shadow;
+  box-shadow: $devui-shadow-length-base $devui-shadow;
   border-radius: $devui-border-radius;
   z-index: 10;
   cursor: grabbing;
@@ -32,7 +32,7 @@
 
 .devui-small-size {
   background: $devui-success;
-  border-radius: 6px;
+  border-radius: 100%;
   height: 12px;
   width: 12px;
 }

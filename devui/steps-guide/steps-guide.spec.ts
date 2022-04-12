@@ -119,7 +119,7 @@ class TestFunctions {
       [pageName]="'basic'"
       [steps]="steps"
       [stepIndex]="7"
-      [position]="positions[7]"
+      [dStepsGuidePosition]="positions[7]"
       (operateChange)="operateChange($event)"
     ></div>
   `,

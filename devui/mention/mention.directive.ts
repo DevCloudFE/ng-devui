@@ -143,7 +143,7 @@ export class MentionDirective implements OnInit, OnChanges, AfterViewInit, OnDes
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.hasOwnProperty('mentionSuggestions')) {
+    if (Object.prototype.hasOwnProperty.call(changes, 'mentionSuggestions')) {
       if (this.isOpen) {
         this.previousValue = null;
         this.activeIndex = -1;
