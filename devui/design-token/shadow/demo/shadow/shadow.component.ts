@@ -14,6 +14,7 @@ export class ShadowComponent implements OnInit, OnDestroy {
   subs: Subscription = new Subscription();
   shadows = [];
   oldShadows = [];
+  shadowColor = [];
 
   activeTab: string | number = 'curShadow';
 
@@ -30,8 +31,13 @@ export class ShadowComponent implements OnInit, OnDestroy {
   }
 
   changeValueInTable = () => {
+    this.changeValue('shadows');
+    this.changeValue('shadowColor');
+  };
+
+  changeValue(type) {
     const theme = this.themeService.currentTheme;
-    this.shadows.map((obj) => {
+    this[type].map((obj) => {
       const nameArr = obj.name.split('$');
       if (nameArr.length === 2) {
         const match = theme.data[nameArr[1]];
@@ -42,8 +48,8 @@ export class ShadowComponent implements OnInit, OnDestroy {
         }
       }
     });
-    this.shadows = cloneDeep(this.shadows);
-  };
+    this[type] = cloneDeep(this[type]);
+  }
 
   setI18n() {
     this.subs.add(
@@ -161,6 +167,21 @@ export class ShadowComponent implements OnInit, OnDestroy {
         newName: '$devui-shadow-length-feedback-overlay $devui-shadow',
         value: '0 5px 8px 0 rgba(70, 77, 110, 0.25)',
         description: values.oldShadows['hwc-shadow-dark'],
+      },
+    ];
+
+    this.shadowColor = [
+      {
+        name: '$devui-shadow',
+        light: 'rgba(0, 0, 0, 0.2)',
+        dark: 'rgba(17, 18, 19, 0.4)',
+        description: values.shadowColor['devui-shadow'],
+      },
+      {
+        name: '$devui-light-shadow',
+        light: 'rgba(0, 0, 0, 0.1)',
+        dark: 'rgba(17, 18, 19, 0.5)',
+        description: values.shadowColor['devui-light-shadow'],
       },
     ];
 

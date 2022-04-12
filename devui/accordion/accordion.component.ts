@@ -1,4 +1,15 @@
-import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, TemplateRef } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  forwardRef,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  Output,
+  SimpleChanges,
+  TemplateRef
+} from '@angular/core';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { DevConfigService, WithConfig } from 'ng-devui/utils/globalConfig';
 import { Subscription } from 'rxjs';
@@ -11,7 +22,7 @@ import { AccordionItemClickEvent, AccordionMenuToggleEvent, AccordionMenuType, A
   preserveWhitespaces: false,
   providers: [{
     provide: ACCORDION,
-    useExisting: AccordionComponent
+    useExisting: forwardRef(() => AccordionComponent)
   }]
 })
 export class AccordionComponent implements AccordionOptions, OnChanges, OnInit, OnDestroy {

@@ -17,6 +17,11 @@ export class DatepickerProDemoComponent implements OnInit, OnDestroy {
     { title: 'TS', language: 'typescript', code: require('./show-time/show-time-picker.component.ts?raw') },
   ];
 
+  markedTypeSource: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'xml', code: require('./marked-type/marked-type.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./marked-type/marked-type.component.ts?raw') },
+  ];
+
   templateSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('./template/datepicker-template.component.html?raw') },
     { title: 'SCSS', language: 'css', code: require('./template/datepicker-template.component.scss?raw') },
@@ -83,6 +88,7 @@ export class DatepickerProDemoComponent implements OnInit, OnDestroy {
   setNavValues(values) {
     this.navItems = [
       { dAnchorLink: 'basic-usage', value: values['basic-usage'] },
+      { dAnchorLink: 'date-marked', value: values['mark-type'] },
       { dAnchorLink: 'show-time', value: values['show-time'] },
       { dAnchorLink: 'template', value: values['template'] },
       { dAnchorLink: 'monthYear', value: values['monthYear'] },

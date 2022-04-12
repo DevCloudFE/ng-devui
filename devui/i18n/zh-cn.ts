@@ -94,6 +94,9 @@ export default {
   },
   gantt: {
     today: '今天',
+    day: '天',
+    week: '周',
+    month: '月',
     monthsOfYear: [
       '1月',
       '2月',
@@ -238,7 +241,7 @@ export default {
   categorySearch: {
     confirm: '确定',
     cancel: '取消',
-    selectFilterCondition: '请选择筛选条件',
+    selectFilterCondition: '请选择筛选条件：',
     getFindingMessage(msg) {
       return `在 '${msg}' 中查找`;
     },

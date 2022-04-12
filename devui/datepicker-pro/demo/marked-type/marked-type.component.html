@@ -1,0 +1,16 @@
+<d-datepicker-pro
+  [(ngModel)]="value"
+  [markedDateList]="list"
+  [showTime]="true"
+  (ngModelChange)="onChange($event)"
+  [markedRangeDateList]="markRange"
+>
+  <ng-template #markDateInfoTemplate let-date="date">
+    <ng-container *ngIf="isStart(date)">
+      <span>标记点起始日期信息</span>
+    </ng-container>
+    <ng-container *ngIf="!isStart(date)">
+      <span>标记点结束日期信息</span>
+    </ng-container>
+  </ng-template>
+</d-datepicker-pro>

@@ -705,9 +705,6 @@ function testInputParam(fixture, wrapperEle, component) {
   const testTemplate = wrapperEle.querySelector('.test-template');
   expect(testTemplate).toBeTruthy();
   // ToDo: click后会直接进入组件的ngOnDestroy，并且没有走chooseDate，但是toHaveBeenCalled没有报错也没有执行，预测detectChanges直接结束了it
-  // testTemplate.dispatchEvent(new Event('click'));
-  // fixture.detectChanges();
-  // expect(component.getValue).toHaveBeenCalled();
 
   tickEvent(document.querySelector('.devui-date-range-custom'), new Event('click'), fixture);
   expect(wrapperEle.querySelector('.test-class')).toBeTruthy();

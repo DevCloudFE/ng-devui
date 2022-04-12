@@ -1,6 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import {
-  ChangeDetectorRef, Component, ElementRef, EventEmitter, HostBinding, HostListener, Inject, Input,
+  ChangeDetectorRef, Component, ElementRef, EventEmitter,
+  forwardRef, HostBinding, HostListener, Inject, Input,
   NgZone, OnChanges, OnDestroy, Output, Renderer2, SimpleChanges, TemplateRef
 } from '@angular/core';
 import { fromEvent, Observable, Subscription } from 'rxjs';
@@ -11,9 +12,10 @@ import { TABLE_TH } from './th.token';
   /* eslint-disable-next-line @angular-eslint/component-selector*/
   selector: '[dHeadCell]',
   templateUrl: './th.component.html',
-  providers: [
-    {provide: TABLE_TH, useExisting: TableThComponent}
-  ],
+  providers: [{
+    provide: TABLE_TH,
+    useExisting: forwardRef(() => TableThComponent)
+  }],
 })
 export class TableThComponent implements OnChanges, OnDestroy {
   @HostBinding('class.resizeable') resizeEnabledClass = false;
@@ -52,7 +54,6 @@ export class TableThComponent implements OnChanges, OnDestroy {
   @Input() iconFoldTable: string;
   @Input() iconUnFoldTable: string;
 
-  resizeBarRefElement: HTMLElement;
   @Input() tableViewRefElement: ElementRef;
 
   @Output() resizeEndEvent: EventEmitter<any> = new EventEmitter<any>();
@@ -64,6 +65,8 @@ export class TableThComponent implements OnChanges, OnDestroy {
 
   @Input() fixedLeft: string;
   @Input() fixedRight: string;
+
+  resizeBarRefElement: HTMLElement;
   element: HTMLElement;
   subscription: Subscription;
   resizing = false;
@@ -75,10 +78,11 @@ export class TableThComponent implements OnChanges, OnDestroy {
   mouseDownScreenX: number;
   resizeHandleElement: HTMLElement;
   tableElement: HTMLElement;
+
+  // 以下为内部传递参数，不对外暴露
   @Input() childrenTableOpen: boolean;
   @Output() toggleChildrenTableEvent = new EventEmitter<boolean>();
   @Output() tapEvent = new EventEmitter<any>();
-
   @Input() column: any; // 为配置column方式兼容自定义过滤模板context
   document: Document;
 
@@ -249,9 +253,8 @@ export class TableThComponent implements OnChanges, OnDestroy {
       if (this.tableElement) {
         this.renderer2.removeChild(this.tableElement, this.resizeBarRefElement);
       }
-      // this.width = finalWidth + 'px';
 
-      this.resizeEndEvent.emit({ width: finalWidth });
+      this.resizeEndEvent.emit({ width: finalWidth, beforeWidth: this.initialWidth });
     });
     if (this.subscription && !this.subscription.closed) {
       this._destroySubscription();

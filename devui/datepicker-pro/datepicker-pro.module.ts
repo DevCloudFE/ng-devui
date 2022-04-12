@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'ng-devui/button';
 import { DropDownModule } from 'ng-devui/dropdown';
+import { PopoverModule } from 'ng-devui/popover';
 import { DatepickerPanelComponent } from './datepicker-panel.component';
 import { DatepickerProCalendarComponent } from './datepicker-pro-calendar.component';
 import { DatepickerProComponent } from './datepicker-pro.component';
@@ -21,7 +22,8 @@ import { RangeDatepickerProComponent } from './range-datepicker-pro.component';
     FormsModule,
     DropDownModule,
     ScrollingModule,
-    ButtonModule
+    ButtonModule,
+    PopoverModule
   ],
   exports: [
     DatepickerProComponent,

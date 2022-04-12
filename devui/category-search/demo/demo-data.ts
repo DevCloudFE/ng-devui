@@ -48,14 +48,14 @@ export const demoData: ICategorySearchTagItem[] = [
     field: 'creatTime',
     type: 'dateRange',
     group: 'Time-related',
-    showTime: false,
+    showTime: true,
   },
   {
     label: 'modified time',
     field: 'modifiedTime',
     type: 'dateRange',
     group: 'Time-related',
-    showTime: true,
+    showTime: false,
   },
   {
     label: 'IP address',

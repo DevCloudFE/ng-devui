@@ -47,7 +47,11 @@ d-button {
 
 .devui-circle-loading-container {
   position: absolute;
-  top: 5px;
+  left: 0;
+  top: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
 
 .devui-circle-loading-container-2 {

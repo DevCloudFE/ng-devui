@@ -131,6 +131,7 @@ export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterV
   @ViewChild('searchInputModel') searchInputModel;
   @ViewChild('popper', { static: true }) popper;
   @ContentChild('iconTemplate') iconTemplatePassThrough;
+  // TODO: need to change to nodeToggledEvent
   @Output() nodeToggleEvent = new EventEmitter<any>();
   @Output() valueChanged = new EventEmitter<any>();
   @Input() virtualScroll = false;
@@ -254,14 +255,14 @@ export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterV
       return treeNode.map(node => this.prepareTree(node, expandTree));
     } else if (treeNode) {
       let parentCheckedByChildren = false;
-      if (treeNode.hasOwnProperty(this.treeNodeChildrenKey)) {
+      if (Object.prototype.hasOwnProperty.call(treeNode, this.treeNodeChildrenKey)) {
         treeNode.open = expandTree ? true : treeNode.open;
         treeNode[this.treeNodeChildrenKey] = this.prepareTree(treeNode[this.treeNodeChildrenKey], expandTree);
         if (this.multiple) {
           [parentCheckedByChildren, treeNode.halfChecked] = this.resolveParentNode(treeNode[this.treeNodeChildrenKey]);
         }
       }
-      if (treeNode.hasOwnProperty(this.treeNodeIdKey)) {
+      if (Object.prototype.hasOwnProperty.call(treeNode, this.treeNodeIdKey)) {
         const nodeId = treeNode[this.treeNodeIdKey];
         if (this.multiple) {
           const selectedByValue = this.nodeSelected(nodeId);
@@ -397,6 +398,10 @@ export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterV
   responsePopperChange(popperState: any) {
     if (popperState && this.searchable) {
       this.focusSearchInput();
+    }
+
+    if (popperState && this.virtualScroll && this.tree) {
+      this.tree.operableTree.viewPort.checkViewportSize();
     }
   }
 

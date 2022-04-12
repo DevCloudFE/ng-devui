@@ -17,7 +17,7 @@ class CommonFunctions {
 
   static i18nText() {
     const lang = localStorage.getItem('lang') ? localStorage.getItem('lang').toLocaleLowerCase() : 'zh-cn';
-    if (this.i18nConfig.hasOwnProperty(lang)) {
+    if (Object.prototype.hasOwnProperty.call(this.i18nConfig, lang)) {
       return this.i18nConfig[lang];
     } else {
       return zhCN;

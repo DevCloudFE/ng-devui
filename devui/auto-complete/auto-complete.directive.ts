@@ -46,8 +46,14 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
   @HostBinding('attr.autocapitalize') autocapitalize = 'off';
   @HostBinding('attr.autocorrect') autocorrect = 'off';
   @Input() disabled: boolean;
+  /**
+   * @deprecated
+   */
   @Input() cssClass: string;
   @Input() delay = 300;
+  /**
+   * @deprecated
+   */
   @Input() minLength: number;
   @Input() itemTemplate: TemplateRef<any>;
   @Input() noResultItemTemplate: TemplateRef<any>;
@@ -78,6 +84,9 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
   @Input() source: any[];
   @Input() valueParser: (item: any) => any;
   @Input() searchFn: (term: string, target?: AutoCompleteDirective) => Observable<any[]>;
+  /**
+   * @deprecated
+   */
   @Input() dropdown: boolean;
   @Input() maxHeight = 300;
   @Input() disabledKey: string;
@@ -90,7 +99,11 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
   @Output() loadMore = new EventEmitter<any>();
   @Output() selectValue = new EventEmitter<any>();
   @Output() transInputFocusEmit = new EventEmitter<any>(); // input状态传给父组件函数
+  /**
+   * @deprecated
+   */
   @Output() changeDropDownStatus = new EventEmitter<any>();
+  @Output() toggleChange = new EventEmitter<any>();
   KEYBOARD_EVENT_NOT_REFRESH = ['escape', 'enter', 'arrowup', 'arrowdown', /* ie 10 edge */ 'esc', 'up', 'down'];
   popupRef: ComponentRef<AutoCompletePopupComponent>;
 
@@ -287,6 +300,7 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
     this.popupRef.instance.disabled = this.disabled;
     addClassToOrigin(this.elementRef);
     this.changeDropDownStatus.emit(true);
+    this.toggleChange.emit(true);
   }
 
   writeValue(obj): void {
@@ -408,6 +422,7 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
       this.popupRef.instance.isOpen = false;
       removeClassFromOrigin(this.elementRef);
       this.changeDropDownStatus.emit(false);
+      this.toggleChange.emit(false);
     }
   }
 

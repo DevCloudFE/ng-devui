@@ -99,7 +99,7 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
   fixTableScrollViewEl;
   animationRequestId;
   colOffset = 0;
-  seconedHeaderOffset = 0;
+  secondHeaderOffset = 0;
   cellMapOffset = 0;
   cellMap = {};
   iterableDiffer;
@@ -609,7 +609,7 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
   }
   buildFakeTable(table) {
     this.colOffset = 0;
-    this.seconedHeaderOffset = 0;
+    this.secondHeaderOffset = 0;
     return Array.from(table.rows[0].children).map((cell, index) => {
       return this.getColumnAsTableByIndex(table, index, (<any>cell).colSpan, (<any>cell).rowSpan);
     });
@@ -659,9 +659,9 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
     );
   }
 
-  css(el, csses) {
-    Object.keys(csses).forEach((k) => {
-      el.style[k] = csses[k];
+  css(el, cssList) {
+    Object.keys(cssList).forEach((k) => {
+      el.style[k] = cssList[k];
     });
     return el;
   }
@@ -923,8 +923,8 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
       }
     };
     const insertBodyColList = this.getDataBetween(selectedColIndex - 1 + this.colOffset, selectedColIndex + this.colOffset + colSpan);
-    const insertHeaderColList = this.getDataBetween(selectedColIndex + this.seconedHeaderOffset - 1, selectedColIndex +
-      this.seconedHeaderOffset + colSpan - rowSpan + 1);
+    const insertHeaderColList = this.getDataBetween(selectedColIndex + this.secondHeaderOffset - 1, selectedColIndex +
+      this.secondHeaderOffset + colSpan - rowSpan + 1);
     const getTreeTableCol = (row, rowIndex) => {
       const target = this.getChildTableColumn((<any>row).children[0].children[0], selectedColIndex);
       empty((<any>row).children[0]);
@@ -992,7 +992,7 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
       this.css(row, { height: `${table.rows[rowIndex].getBoundingClientRect().height}px` });
     });
     this.colOffset += (colSpan - 1);
-    this.seconedHeaderOffset = rowSpan > 1 ? this.seconedHeaderOffset - 1 : this.seconedHeaderOffset;
+    this.secondHeaderOffset = rowSpan > 1 ? this.secondHeaderOffset - 1 : this.secondHeaderOffset;
     return cTable;
   }
 

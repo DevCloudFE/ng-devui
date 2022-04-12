@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { Inject, Injectable, OnDestroy } from '@angular/core';
+import { Inject, Injectable, OnDestroy, TemplateRef } from '@angular/core';
 import { Subject } from 'rxjs';
 
 @Injectable()
@@ -9,6 +9,9 @@ export class DatepickerProService implements OnDestroy {
   curHoverDate: Date;
   startIndexOfWeek: number;
   isRange: boolean;
+  markedRangeDateList: Date[][];
+  markDateInfoTemplate: TemplateRef<any>;
+  markedDateList: Date[];
   showTime: boolean;
   calendarRange = [1970, 2099];
   currentActiveInput: 'start' | 'end' = 'start';
@@ -216,6 +219,37 @@ export class DatepickerProService implements OnDestroy {
     } else {
       return this.curHoverDate?.getTime() < date.getTime();
     }
+  }
+
+  isInSuggestList(date: Date): boolean {
+    if (!this.markedRangeDateList) {
+      return false;
+    }
+
+    for (let index = 0; index < this.markedRangeDateList.length; index++) {
+      const range = this.markedRangeDateList[index];
+      if (
+        range[0]?.getTime() < date.getTime() && range[1]?.getTime() > date.getTime()
+      ) {
+        return true;
+      }
+
+      if (
+        range[0]?.toDateString() === date.toDateString() || range[1]?.toDateString() === date.toDateString()
+      ) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  isMarkedDate(date: Date): boolean {
+    for (let index = 0; index < this.markedDateList?.length; index++) {
+      if (this.markedDateList[index]?.toDateString() === date.toDateString()) {
+        return true;
+      }
+    }
+    return false;
   }
 
   mearsureStrWidth(str: string): number {

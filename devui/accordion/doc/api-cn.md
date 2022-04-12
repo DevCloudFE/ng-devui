@@ -39,6 +39,7 @@ import { AccordionModule } from 'ng-devui/accordion';
 | autoOpenActiveMenu |                       `boolean`                       |   false    |                                                                                                  可选，是否自动展开带有活跃子项的菜单                                                                                                  | [复合层级和自动展开](demo#compound-level-and-auto-expand)      |
 |   accordionType    |                  `'normal'\|'embed'`                  |  'normal'  |                                                                                           可选，菜单形式是普通（带阴影）还是内嵌（不带阴影）                                                                                           | [基本用法](demo#basic-usage)                                   |
 |   showAnimation    |    `boolean`                  |           true         |   可选，是否展示动画         | [内置路由和链接类型](demo#use-built-in-routing-and-link-types)   | ✔ |
+|   showNoContent    |    `boolean`                  |           true         |   可选，没有内容的时候是否显示没有数据         |    |  |
 
 ### d-accordion 事件
 

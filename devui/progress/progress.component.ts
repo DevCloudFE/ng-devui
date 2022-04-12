@@ -1,12 +1,11 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ContentChild,
   Input,
   OnChanges,
   OnInit,
   SimpleChanges,
-  TemplateRef,
+  TemplateRef
 } from '@angular/core';
 
 @Component({
@@ -18,10 +17,28 @@ import {
 export class ProgressComponent implements OnInit , OnChanges {
   @Input() percentage = 0;
   @Input() percentageText: string;
+  /**
+   * @deprecated
+   * 用stroleColor替换
+   */
   @Input() barbgcolor: string;
-  @Input() height = '16px';
-  @Input() strokeWidth = 6; // 设置圈形进度条宽度，进度条与画布宽度的百分比
-  @Input() isCircle = false;
+  @Input() strokeColor: string;
+  /**
+   * @deprecated
+   * 统一用strokeWidth
+   */
+  @Input() set height(value) {
+    this.strokeWidth = parseInt(value, 10);
+  };
+  @Input() strokeWidth = 14; // 进度条的线条宽度
+  /**
+   * @deprecated
+   * 用type类型替换
+   */
+  @Input() set isCircle(value: boolean) {
+    this.type = value ? 'circle' : 'line';
+  };
+  @Input() type: 'line' | 'circle' = 'line';
   @Input() showContent = true;
   @ContentChild(TemplateRef) customViewTemplate: TemplateRef<any>;
   trailPath: { [key: string]: string };
@@ -31,17 +48,17 @@ export class ProgressComponent implements OnInit , OnChanges {
 
   }
   ngOnInit(): void {
-    if (this.isCircle) {
+    if (this.type === 'circle') {
       this.setCircleProgress();
     }
   }
   ngOnChanges(changes: SimpleChanges): void {
-    if (this.isCircle) {
+    if (this.type === 'circle') {
       this.setCircleProgress();
     }
   }
   setCircleProgress(): void {
-    if (!this.isCircle) {
+    if (this.type !== 'circle') {
       return;
     }
     const radius = 50 - this.strokeWidth / 2;
@@ -60,7 +77,7 @@ export class ProgressComponent implements OnInit , OnChanges {
       transition: 'stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s'
     };
     this.strokePath = {
-      stroke: this.barbgcolor || (null as any),
+      stroke: this.strokeColor || this.barbgcolor || (null as any),
       strokeDasharray: `${(this.percentage / 100) * len }px ${len}px`,
       strokeDashoffset: `0`,
       transition: 'stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s'

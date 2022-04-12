@@ -48,6 +48,9 @@ export interface I18nInterface {
   };
   gantt: {
     today: string;
+    day: string;
+    week: string;
+    month: string;
     monthsOfYear: string[];
     yearDisplay(year): string;
     monthDisplay(strMonthIndex: string): string;

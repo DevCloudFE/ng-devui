@@ -1,5 +1,6 @@
 @import '../style/theme/color';
 @import '../style/core/animation';
+@import '../style/theme/corner';
 
 :host {
   display: block;
@@ -22,7 +23,7 @@
     height: 5px;
     width: 100%;
     transition: background-color $devui-animation-duration-base $devui-animation-ease-in-out-smooth;
-    border-radius: 4px;
+    border-radius: $devui-border-radius-full;
 
     &.disabled {
       background-color: $devui-area;
@@ -48,7 +49,7 @@
     background-color: $devui-brand;
     height: 5px;
     width: 0;
-    border-radius: 4px;
+    border-radius: $devui-border-radius-full;
   }
 
   .devui-slider-handle {

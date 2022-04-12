@@ -82,3 +82,216 @@ td {
 .devui-catalog-title {
   font-weight: bold;
 }
+
+.swatches {
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+}
+
+.formColor {
+  margin: 16px 15px 16px 0;
+  text-align: center;
+  line-height: 50px;
+  color: $devui-text;
+  height: 100%;
+  font-size: $devui-font-size-page-title;
+  font-weight: 550;
+
+  .swatches-block {
+    line-height: 20px;
+    width: 145px;
+    position: relative;
+    height: 64px;
+    font-size: 12px;
+    box-sizing: border-box;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}
+
+.formColor:last-child {
+  margin-right: 0;
+}
+
+$colorMap: (
+  '$devui-blue-5': $devui-blue-5,
+  '$devui-blue-10': $devui-blue-10,
+  '$devui-blue-20': $devui-blue-20,
+  '$devui-blue-30': $devui-blue-30,
+  '$devui-blue-40': $devui-blue-40,
+  '$devui-blue-50': $devui-blue-50,
+  '$devui-blue-60': $devui-blue-60,
+  '$devui-blue-70': $devui-blue-70,
+  '$devui-blue-80': $devui-blue-80,
+  '$devui-blue-90': $devui-blue-90,
+  '$devui-blue-100': $devui-blue-100,
+  '$devui-sky-5': $devui-sky-5,
+  '$devui-sky-10': $devui-sky-10,
+  '$devui-sky-20': $devui-sky-20,
+  '$devui-sky-30': $devui-sky-30,
+  '$devui-sky-40': $devui-sky-40,
+  '$devui-sky-50': $devui-sky-50,
+  '$devui-sky-60': $devui-sky-60,
+  '$devui-sky-70': $devui-sky-70,
+  '$devui-sky-80': $devui-sky-80,
+  '$devui-sky-90': $devui-sky-90,
+  '$devui-sky-100': $devui-sky-100,
+  '$devui-green-5': $devui-green-5,
+  '$devui-green-10': $devui-green-10,
+  '$devui-green-20': $devui-green-20,
+  '$devui-green-30': $devui-green-30,
+  '$devui-green-40': $devui-green-40,
+  '$devui-green-50': $devui-green-50,
+  '$devui-green-60': $devui-green-60,
+  '$devui-green-70': $devui-green-70,
+  '$devui-green-80': $devui-green-80,
+  '$devui-green-90': $devui-green-90,
+  '$devui-green-100': $devui-green-100,
+  '$devui-lime-5': $devui-lime-5,
+  '$devui-lime-10': $devui-lime-10,
+  '$devui-lime-20': $devui-lime-20,
+  '$devui-lime-30': $devui-lime-30,
+  '$devui-lime-40': $devui-lime-40,
+  '$devui-lime-50': $devui-lime-50,
+  '$devui-lime-60': $devui-lime-60,
+  '$devui-lime-70': $devui-lime-70,
+  '$devui-lime-80': $devui-lime-80,
+  '$devui-lime-90': $devui-lime-90,
+  '$devui-lime-100': $devui-lime-100,
+  '$devui-yellow-5': $devui-yellow-5,
+  '$devui-yellow-10': $devui-yellow-10,
+  '$devui-yellow-20': $devui-yellow-20,
+  '$devui-yellow-30': $devui-yellow-30,
+  '$devui-yellow-40': $devui-yellow-40,
+  '$devui-yellow-50': $devui-yellow-50,
+  '$devui-yellow-60': $devui-yellow-60,
+  '$devui-yellow-70': $devui-yellow-70,
+  '$devui-yellow-80': $devui-yellow-80,
+  '$devui-yellow-90': $devui-yellow-90,
+  '$devui-yellow-100': $devui-yellow-100,
+  '$devui-orange-5': $devui-orange-5,
+  '$devui-orange-10': $devui-orange-10,
+  '$devui-orange-20': $devui-orange-20,
+  '$devui-orange-30': $devui-orange-30,
+  '$devui-orange-40': $devui-orange-40,
+  '$devui-orange-50': $devui-orange-50,
+  '$devui-orange-60': $devui-orange-60,
+  '$devui-orange-70': $devui-orange-70,
+  '$devui-orange-80': $devui-orange-80,
+  '$devui-orange-90': $devui-orange-90,
+  '$devui-orange-100': $devui-orange-100,
+  '$devui-red-5': $devui-red-5,
+  '$devui-red-10': $devui-red-10,
+  '$devui-red-20': $devui-red-20,
+  '$devui-red-30': $devui-red-30,
+  '$devui-red-40': $devui-red-40,
+  '$devui-red-50': $devui-red-50,
+  '$devui-red-60': $devui-red-60,
+  '$devui-red-70': $devui-red-70,
+  '$devui-red-80': $devui-red-80,
+  '$devui-red-90': $devui-red-90,
+  '$devui-red-100': $devui-red-100,
+  '$devui-magenta-5': $devui-magenta-5,
+  '$devui-magenta-10': $devui-magenta-10,
+  '$devui-magenta-20': $devui-magenta-20,
+  '$devui-magenta-30': $devui-magenta-30,
+  '$devui-magenta-40': $devui-magenta-40,
+  '$devui-magenta-50': $devui-magenta-50,
+  '$devui-magenta-60': $devui-magenta-60,
+  '$devui-magenta-70': $devui-magenta-70,
+  '$devui-magenta-80': $devui-magenta-80,
+  '$devui-magenta-90': $devui-magenta-90,
+  '$devui-magenta-100': $devui-magenta-100,
+  '$devui-purple-5': $devui-purple-5,
+  '$devui-purple-10': $devui-purple-10,
+  '$devui-purple-20': $devui-purple-20,
+  '$devui-purple-30': $devui-purple-30,
+  '$devui-purple-40': $devui-purple-40,
+  '$devui-purple-50': $devui-purple-50,
+  '$devui-purple-60': $devui-purple-60,
+  '$devui-purple-70': $devui-purple-70,
+  '$devui-purple-80': $devui-purple-80,
+  '$devui-purple-90': $devui-purple-90,
+  '$devui-purple-100': $devui-purple-100,
+  '$devui-gray-5': $devui-gray-5,
+  '$devui-gray-10': $devui-gray-10,
+  '$devui-gray-20': $devui-gray-20,
+  '$devui-gray-30': $devui-gray-30,
+  '$devui-gray-40': $devui-gray-40,
+  '$devui-gray-50': $devui-gray-50,
+  '$devui-gray-60': $devui-gray-60,
+  '$devui-gray-70': $devui-gray-70,
+  '$devui-gray-80': $devui-gray-80,
+  '$devui-gray-90': $devui-gray-90,
+  '$devui-gray-100': $devui-gray-100,
+  '$devui-slate-5': $devui-slate-5,
+  '$devui-slate-10': $devui-slate-10,
+  '$devui-slate-20': $devui-slate-20,
+  '$devui-slate-30': $devui-slate-30,
+  '$devui-slate-40': $devui-slate-40,
+  '$devui-slate-50': $devui-slate-50,
+  '$devui-slate-60': $devui-slate-60,
+  '$devui-slate-70': $devui-slate-70,
+  '$devui-slate-80': $devui-slate-80,
+  '$devui-slate-90': $devui-slate-90,
+  '$devui-slate-100': $devui-slate-100,
+  '$devui-zinc-5': $devui-zinc-5,
+  '$devui-zinc-10': $devui-zinc-10,
+  '$devui-zinc-20': $devui-zinc-20,
+  '$devui-zinc-30': $devui-zinc-30,
+  '$devui-zinc-40': $devui-zinc-40,
+  '$devui-zinc-50': $devui-zinc-50,
+  '$devui-zinc-60': $devui-zinc-60,
+  '$devui-zinc-70': $devui-zinc-70,
+  '$devui-zinc-80': $devui-zinc-80,
+  '$devui-zinc-90': $devui-zinc-90,
+  '$devui-zinc-100': $devui-zinc-100,
+  '$devui-dark-gray-5': $devui-dark-gray-5,
+  '$devui-dark-gray-10': $devui-dark-gray-10,
+  '$devui-dark-gray-20': $devui-dark-gray-20,
+  '$devui-dark-gray-30': $devui-dark-gray-30,
+  '$devui-dark-gray-40': $devui-dark-gray-40,
+  '$devui-dark-gray-50': $devui-dark-gray-50,
+  '$devui-dark-gray-60': $devui-dark-gray-60,
+  '$devui-dark-gray-70': $devui-dark-gray-70,
+  '$devui-dark-gray-80': $devui-dark-gray-80,
+  '$devui-dark-gray-90': $devui-dark-gray-90,
+  '$devui-dark-gray-100': $devui-dark-gray-100,
+  '$devui-dark-slate-5': $devui-dark-slate-5,
+  '$devui-dark-slate-10': $devui-dark-slate-10,
+  '$devui-dark-slate-20': $devui-dark-slate-20,
+  '$devui-dark-slate-30': $devui-dark-slate-30,
+  '$devui-dark-slate-40': $devui-dark-slate-40,
+  '$devui-dark-slate-50': $devui-dark-slate-50,
+  '$devui-dark-slate-60': $devui-dark-slate-60,
+  '$devui-dark-slate-70': $devui-dark-slate-70,
+  '$devui-dark-slate-80': $devui-dark-slate-80,
+  '$devui-dark-slate-90': $devui-dark-slate-90,
+  '$devui-dark-slate-100': $devui-dark-slate-100,
+  '$devui-dark-zinc-5': $devui-dark-zinc-5,
+  '$devui-dark-zinc-10': $devui-dark-zinc-10,
+  '$devui-dark-zinc-20': $devui-dark-zinc-20,
+  '$devui-dark-zinc-30': $devui-dark-zinc-30,
+  '$devui-dark-zinc-40': $devui-dark-zinc-40,
+  '$devui-dark-zinc-50': $devui-dark-zinc-50,
+  '$devui-dark-zinc-60': $devui-dark-zinc-60,
+  '$devui-dark-zinc-70': $devui-dark-zinc-70,
+  '$devui-dark-zinc-80': $devui-dark-zinc-80,
+  '$devui-dark-zinc-90': $devui-dark-zinc-90,
+  '$devui-dark-zinc-100': $devui-dark-zinc-100,
+);
+
+$colorList: 'blue', 'sky', 'green', 'lime', 'yellow', 'orange', 'red', 'magenta', 'purple',
+  'gray', 'slate', 'zinc', 'dark-gray', 'dark-slate', 'dark-zinc';
+$list: 5 10 20 30 40 50 60 70 80 90 100;
+
+@each $color in $colorList {
+  @each $i in $list {
+    .block-#{$color}-#{$i} {
+      background-color: map-get($colorMap, #{'$'}devui-#{$color}-#{$i});
+    }
+  }
+}

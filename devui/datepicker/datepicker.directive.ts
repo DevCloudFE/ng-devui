@@ -220,7 +220,7 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
 
   writeValue(obj: any): void {
     let curDate;
-    if (obj && typeof obj === 'object' && obj.hasOwnProperty('selectedDate')) {
+    if (obj && typeof obj === 'object' && Object.prototype.hasOwnProperty.call(obj, 'selectedDate')) {
       curDate = obj.selectedDate;
     } else {
       curDate = obj;
@@ -274,7 +274,7 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
   private writeModelValue(selectDateObj: any) {
     let selectDate;
     let dateReason = SelectDateChangeReason.time;
-    if (selectDateObj && typeof selectDateObj === 'object' && selectDateObj.hasOwnProperty('selectedDate')) {
+    if (selectDateObj && typeof selectDateObj === 'object' && Object.prototype.hasOwnProperty.call(selectDateObj, 'selectedDate')) {
       selectDate = selectDateObj.selectedDate;
       dateReason = selectDateObj.reason;
     } else {
@@ -290,7 +290,7 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
     if (this.isOpen) {
       this.cmpRef.instance.writeValue(this.selectedDate);
     }
-    if (selectDateObj && typeof selectDateObj === 'object' && selectDateObj.hasOwnProperty('selectedDate')) {
+    if (selectDateObj && typeof selectDateObj === 'object' && Object.prototype.hasOwnProperty.call(selectDateObj, 'selectedDate')) {
       this.selectedDateChange.emit({
         reason: dateReason,
         selectedDate: this.selectedDate,

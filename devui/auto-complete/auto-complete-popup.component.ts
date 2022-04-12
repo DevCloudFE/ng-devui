@@ -28,6 +28,9 @@ export class AutoCompletePopupComponent implements ControlValueAccessor {
   @Input() isOpen: boolean;
   @Input() term: string;
   @Input() popTipsText: string;
+  /**
+   * @deprecated
+   */
   @Input() overview: string;
   @Input() itemTemplate: TemplateRef<any>;
   @Input() noResultItemTemplate: TemplateRef<any>;

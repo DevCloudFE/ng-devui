@@ -33,9 +33,9 @@ export class DrawerComponent implements OnInit, OnDestroy {
   @Input() width = '300px';
   @Input() zIndex: number;
   @Input() isCover = true;
-  /*
-  @deprecated
-  */
+  /**
+   * @deprecated
+   */
   @Input() fullScreen = false;
   @Input() showAnimation = true;
   @ViewChild(DrawerContentDirective, { static: true }) drawerContentHost: DrawerContentDirective;
@@ -45,7 +45,7 @@ export class DrawerComponent implements OnInit, OnDestroy {
   @Input() clickDoms: any = [];
   // Will overwrite by drawer service
   @Input() afterOpened: Function;
-  @Input() position: 'right' | 'left' = 'left';
+  @Input() position: 'right' | 'left' = 'right';
   @Input() bodyScrollable = true; // drawer打开body是否可滚动
   @ViewChild('drawerContainer', { static: true }) drawerContainer: ElementRef;
   _width: string;

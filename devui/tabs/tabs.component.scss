@@ -1,9 +1,8 @@
 @import '../style/theme/color';
-@import '../style/theme/variables';
-@import '../style/mixins/index';
 @import '../style/core/font';
 @import '../style/theme/corner';
 @import '../style/core/animation';
+@import '../style/theme/shadow';
 
 $devui-tab-slider-bg: $devui-list-item-hover-bg;
 
@@ -353,7 +352,7 @@ $devui-tab-slider-bg: $devui-list-item-hover-bg;
   z-index: 0;
   background-color: $devui-base-bg;
   border-radius: $devui-border-radius;
-  box-shadow: 0 2px 4px 0 $devui-light-shadow;
+  box-shadow: $devui-shadow-length-base $devui-light-shadow;
   top: 1px;
   height: 30px;
   transition: left $devui-animation-duration-slow $devui-animation-ease-in-out, width $devui-animation-duration-slow $devui-animation-ease-in-out;

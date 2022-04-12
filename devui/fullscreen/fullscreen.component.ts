@@ -15,6 +15,9 @@ export class FullscreenComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @Input() mode: FullscreenMode = DEFAULT_MODE;
   @Input() zIndex = DEFAULT_ZINDEX;
+  /**
+   * @deprecated
+   */
   @Input() target: HTMLElement;
 
   @Output() fullscreenLaunch: EventEmitter<any> = new EventEmitter<any>();

@@ -268,7 +268,6 @@ export class ToggleMenuContainerComponent implements OnInit, OnChanges {
   isBottomRectEnough() {
     const selectMenuElement = this.selectWrapper.nativeElement;
     const selectInputElement = this.selectBoxElement;
-    // const selectInputElement = this.selectBoxElement || this.selectInputWithLabelElement || this.selectInputWithTemplateElement;
     const displayStyle = selectMenuElement.style['display'] || (<any>window).getComputedStyle(selectMenuElement).display;
     let tempStyle;
     if (displayStyle === 'none') {

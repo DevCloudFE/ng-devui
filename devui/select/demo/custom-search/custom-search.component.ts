@@ -57,7 +57,7 @@ export class CustomSearchComponent {
     name: 'option10',
     value: 10
   }];
-  constructor() {}
+
   onSelectObject = (term) => {
     return of(
       this.options2
@@ -65,4 +65,15 @@ export class CustomSearchComponent {
         .filter(item => item.option.name.toLowerCase().indexOf(term.toLowerCase()) !== -1)
     );
   };
+
+  /* searchFn 推荐返回 observable, 但也接受 PromiseLike<T> 类型
+   * 例如使用 async 方法，请求接口后返回数组即可，注意数组需要封装为 [{ id: index, option: option }] 结构
+   * 自定义 searchFn 时请勿使用 options
+  onSelectObject = async (term) => {
+    this.http.post('url/api', {keyword: term}).subscribe((res) => {
+      const result = res.map((option, index) => ({ id: index, option: option }));
+      return result;
+    });
+  };
+  */
 }

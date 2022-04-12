@@ -37,16 +37,21 @@ import { Observable, Subscription } from 'rxjs';
   preserveWhitespaces: false,
 })
 export class EditableSelectComponent implements ControlValueAccessor, OnInit, OnChanges, OnDestroy {
-  constructor(private changeDetectorRef: ChangeDetectorRef, private i18n: I18nService,
-              private devConfigService: DevConfigService) {
+  constructor(private changeDetectorRef: ChangeDetectorRef, private i18n: I18nService, private devConfigService: DevConfigService) {
     this.i18nCommonText = this.i18n.getI18nText().common;
   }
   @Input() appendToBody = false;
   @Input() appendToBodyDirections: Array<AppendToBodyDirection | ConnectedPosition> = ['rightDown', 'leftDown', 'rightUp', 'leftUp'];
+  /**
+   * @deprecated
+   */
   @Input() cssClass: string;
   @Input() disabled = false;
   @Input() placeholder = '';
   @Input() source: any[] = [];
+  /**
+   * @deprecated
+   */
   @Input() isOpen: boolean;
   @Input() itemTemplate: TemplateRef<any>;
   @Input() noResultItemTemplate: TemplateRef<any>;
@@ -57,6 +62,7 @@ export class EditableSelectComponent implements ControlValueAccessor, OnInit, On
   @Input() width: number;
   @Input() @WithConfig() showAnimation = true;
   @Output() loadMore = new EventEmitter<any>();
+  @Output() toggleChange = new EventEmitter<any>();
   @ViewChild(AutoCompleteDirective, { static: true }) autoCompleteDirective: AutoCompleteDirective;
   @ViewChild('editableSelectBox', { static: true }) editableSelectBox: ElementRef;
   multiItems: any[] = [];
@@ -160,5 +166,9 @@ export class EditableSelectComponent implements ControlValueAccessor, OnInit, On
     if (this.i18nSubscription) {
       this.i18nSubscription.unsubscribe();
     }
+  }
+
+  toggleChangeHandler(value) {
+    this.toggleChange.emit(value);
   }
 }

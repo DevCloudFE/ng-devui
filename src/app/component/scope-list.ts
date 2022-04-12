@@ -8,10 +8,29 @@ export const suggestScopeList: Array<string> = [
 ];
 
 export const newScopeList: Array<string> | string = [
-  'layout',
-  'fullscreen',
-  'relativeTime',
-  'tagsInput'
+  'datatable',
+  'categorySearch',
+  'rate',
+  'dashboard',
+  'editableSelect',
+  'upload',
+  'panel',
+  'tagsInput',
+  'transfer',
+  'autocomplete',
+  'gantt',
+  'badge',
+  'imagePreview',
+  'timePicker',
+  'toast',
+  'userGuide',
+  'cascader',
+  'select',
+  'dropDown',
+  'download',
+  'toggle'
 ];
 
-export const sunsetScopeList: Array<string> | string = [];
+export const sunsetScopeList: Array<string> | string = [
+  'codeMirror', 'echarts' ,'polyfills'
+];

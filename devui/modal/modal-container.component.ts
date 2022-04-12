@@ -30,7 +30,7 @@ export class ModalContainerComponent implements OnInit {
     disabled: boolean;
   }>;
   @Input() html: boolean;
-  @Input() onClose: EventListener;
+  @Input() onClose: ($event?: Event) => void;
   @ViewChild(ModalContentDirective, { static: true }) modalContentHost: ModalContentDirective;
   @Input() dialogtype = 'standard';
   @Input() showCloseBtn: boolean;

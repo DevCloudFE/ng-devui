@@ -35,9 +35,10 @@ import { EditableSelectModule } from 'ng-devui/editable-select';
 
 ## d-editable-select 事件
 
-|   事件   |                           类型                           |                                                                  说明                                                                  | 跳转 Demo                    |
-| :------: | :------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------: | ---------------------------- |
-| loadMore | `EventEmitter<ComponentRef<AutoCompletePopupComponent>>` | 懒加载触发事件，配合`enableLazyLoad`使用，使用`$event.loadFinish()`关闭 loading 状态，其中\$event 为 AutoCompletePopupComponent 的实例 | [数据懒加载](demo#lazy-load) |
+|     事件     |                           类型                           |                                                                  说明                                                                  | 跳转 Demo                    |
+| :----------: | :------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------: | ---------------------------- |
+|   loadMore   | `EventEmitter<ComponentRef<AutoCompletePopupComponent>>` | 懒加载触发事件，配合`enableLazyLoad`使用，使用`$event.loadFinish()`关闭 loading 状态，其中\$event 为 AutoCompletePopupComponent 的实例 | [数据懒加载](demo#lazy-load) |
+| toggleChange |                 `EventEmitter<boolean>`                  |                                                可选，输出函数，下拉打开关闭 toggle 事件                                                | [基本用法](demo#basic-usage) |
 
 # 接口 & 类型定义
 

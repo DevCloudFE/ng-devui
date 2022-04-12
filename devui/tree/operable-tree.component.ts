@@ -38,6 +38,9 @@ export class OperableTreeComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() iconParentOpen: string;
   @Input() iconParentClose: string;
   @Input() iconLeaf: string;
+  /**
+   * @deprecated
+   */
   @Input() showLoading: boolean;
   @Input() loadingTemplateRef: TemplateRef<any>;
   @Input() treeNodesRef: TemplateRef<any>;
@@ -312,6 +315,7 @@ export class OperableTreeComponent implements OnInit, OnDestroy, AfterViewInit {
       this.treeFactory.activeNodeById(treeNode.id);
     } else {
       this.toggleNode(event, treeNode);
+      return;
     }
     this.nodeSelected.emit(treeNode);
   }
@@ -443,8 +447,8 @@ export class OperableTreeComponent implements OnInit, OnDestroy, AfterViewInit {
           // Swap id if id was modified by outer system
           treeNode.id = nodeInfo.id ? nodeInfo.id : originalId;
           delete this.treeFactory.nodes[originalId];
-          if (nodeInfo.hasOwnProperty('data') && nodeInfo.data) {
-            if (treeNode.hasOwnProperty('data') && treeNode.data.hasOwnProperty('data')) {
+          if (Object.prototype.hasOwnProperty.call(nodeInfo, 'data') && nodeInfo.data) {
+            if (Object.prototype.hasOwnProperty.call(treeNode, 'data') && Object.prototype.hasOwnProperty.call(treeNode.data, 'data')) {
               treeNode.data.data = { ...treeNode.data.data, ...nodeInfo.data };
             } else {
               treeNode.data = Object.assign(treeNode.data, { data: nodeInfo.data });
@@ -506,6 +510,10 @@ export class OperableTreeComponent implements OnInit, OnDestroy, AfterViewInit {
 
   initTreeFinishEvent($event) {
     this.afterTreeInit.emit($event);
+  }
+
+  eventTriggerBlur(event) {
+    (event.target as HTMLElement).blur();
   }
 
   ngOnDestroy() {

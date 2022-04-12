@@ -78,11 +78,21 @@ export class DatepickerProCalendarComponent implements OnInit, AfterViewInit, On
   @Input() splitter = '-';
   @Input() showRangeHeader = true;
 
+  @Input() set markedRangeDateList(value: Date[][]) {
+    this.pickerSrv.markedRangeDateList = value;
+  };
+  @Input() set markedDateList(value: Date[]) {
+    this.pickerSrv.markedDateList = value;
+  }
+
   @Output() confirmEvent = new EventEmitter<Date | Date[]>();
   @Output() cancelEvent = new EventEmitter<void>();
 
   @ContentChild('customTemplate') customTemplate: TemplateRef<any>;
   @ContentChild('footerTemplate') footerTemplate: TemplateRef<any>;
+  @ContentChild('markDateInfoTemplate') set markDateInfoTemplate(tmp: TemplateRef<any>) {
+    this.pickerSrv.markDateInfoTemplate = tmp;
+  };
 
   @ViewChild('dateInputStart') datepickerInputStart: ElementRef;
   @ViewChild('dateInputEnd') datepickerInputEnd: ElementRef;

@@ -77,11 +77,17 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy,
    * 【可选】是否显示总条目
    */
   @Input() canViewTotal: boolean;
+  /**
+   * @deprecated
+   */
   @Input() cssClass: string;
   // 是否显示跳转按钮，默认不显示
   @Input() showJumpButton = false;
   // 翻过了页的需求要显示当前真实页面
   @Input() showTruePageIndex = false;
+  /**
+   * @deprecated
+   */
   @Input() id;
   showPages = [];
   totalPage = 1;

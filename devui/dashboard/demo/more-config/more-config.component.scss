@@ -31,12 +31,13 @@
   text-align: center;
   border: 1px solid $devui-primary-line;
   background: $devui-primary-bg;
-  padding: 20px;
+  padding: 16px;
   cursor: pointer;
+  z-index: 1;
 
   .icon {
-    font-size: 2em;
-    margin-bottom: 16px;
+    font-size: 1.5em;
+    margin-bottom: 20px;
   }
 }
 
@@ -47,11 +48,11 @@
   text-align: center;
   border: 1px solid $devui-danger-line;
   background: $devui-danger-bg;
-  padding: 20px;
+  padding: 16px;
 
   .icon {
-    font-size: 2em;
-    margin-bottom: 16px;
+    font-size: 1.5em;
+    margin-bottom: 8px;
   }
 }
 

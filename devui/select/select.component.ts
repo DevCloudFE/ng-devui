@@ -222,7 +222,10 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
       enable: boolean; // 默认值为false
       overflow?: 'normal' | 'scroll-y' | 'multiple-line' | string; // 默认值为''
       containerMaxHeight?: string; // 默认值1.8em
-      containnerMaxHeight?: string; // 默认值1.8em, 已废弃
+      /**
+       * @deprecated
+       */
+      containnerMaxHeight?: string; // 默认值1.8em
       labelMaxWidth?: string; // 默认100%
     };
     selectedItemWithTemplate?: {
@@ -295,8 +298,8 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
   minBuffer: number;
   maxBuffer: number;
   virtualScrollItemSize: any = {
-    sm: 34,
-    normal: 38,
+    sm: 30,
+    normal: 36,
     lg: 50,
   };
 

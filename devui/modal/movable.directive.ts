@@ -107,7 +107,7 @@ export class MovableDirective implements OnInit, OnChanges {
     }
     // Recursively iterate this elements children
     for (const /** @type {?} */ child in element.children) {
-      if (element.children.hasOwnProperty(child)) {
+      if (Object.prototype.hasOwnProperty.call(element.children, child)) {
         if (this.checkHandleTarget(target, element.children[child])) {
           return true;
         }

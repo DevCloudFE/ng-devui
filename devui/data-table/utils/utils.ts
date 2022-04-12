@@ -63,7 +63,7 @@ export const highPerformanceExpandObjectInArray = (oldObj, attr) => {
   if(attr) {
     const newObj=[];
     for(let i=0;i<attr.length;i++) {
-      if(oldObj.hasOwnProperty(attr[i])) {
+      if(Object.prototype.hasOwnProperty.call(oldObj, attr[i])) {
         newObj.push(oldObj[attr[i]]);
       }
     }
@@ -132,4 +132,39 @@ export const highPerformanceMap = (arr, func) => {
     res = arr.map(func);
   }
   return res;
+};
+
+export const flatTreeData = (dataSource: any[]) => {
+  const flatData = [];
+
+  const travelObj = (arr, parentId) => {
+    arr.forEach(item => {
+      if (item.children) {
+        const obj = {
+          id: generateId(),
+          node_id: generateId(),
+          node_type: 1,
+          parent_node_id: parentId,
+          ...item
+        };
+        const children = obj.children;
+        delete obj.children;
+        flatData.push(obj);
+        travelObj(children, obj.node_id);
+      } else {
+        const obj = {
+          id: generateId(),
+          node_id: generateId(),
+          node_type: 0,
+          parent_node_id: parentId,
+          ...item
+        };
+        flatData.push(obj);
+      }
+    });
+  };
+
+  travelObj(dataSource, null);
+
+  return flatData;
 };

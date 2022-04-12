@@ -1,6 +1,5 @@
 /**
  * 2020.03.23-Modified from https://github.com/Bernardo-Castilho/dragdroptouch, license: MIT，reason:Converting .js file to .ts file
- *            Huawei Technologies Co.,Ltd.<devcloudmobile@huawei.com>
  */
 export class DragDropTouch {
   static readonly THRESHOLD = 5; // pixels to move before drag starts
@@ -220,7 +219,6 @@ export class DragDropTouch {
       if (!this.img) {
         this.dragSource = null;
         // browser will dispatch click event after trigger touchend, since touchstart didn't preventDefault
-        // this._dispatchEvent(this._lastTouch, 'click', e.target);
         this.lastClick = Date.now();
       }
       // finish dragging

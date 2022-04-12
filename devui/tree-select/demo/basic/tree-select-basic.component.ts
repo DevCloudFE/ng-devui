@@ -170,7 +170,7 @@ export class TreeSelectBasicComponent {
     console.log('value changed:', $event);
   }
   nodeToggleEvent(node) {
-    if (node.id === 20 && !node.data.isOpen) {
+    if (node.id === 20 && node.data.isOpen) {
       this.data2[5].children = [{
         'title': 'LazyLoad leaf-1',
         'id': 21

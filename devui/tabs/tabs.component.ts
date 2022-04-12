@@ -28,7 +28,15 @@ export class TabsComponent implements OnInit, AfterContentInit, OnChanges, After
   @Input() type: 'tabs' | 'pills' | 'options' | 'wrapped' | 'slider' = 'tabs';
   @Input() showContent = true;
   @Input() activeTab: number | string;
+  /**
+   * @todo
+   * 待重新设计
+   */
   @Input() vertical = false;
+  /**
+   * @deprecated
+   * class设置无需内层，外层即可
+   */
   @Input() cssClass: string;
   @Input() customWidth: string;
   @ContentChildren(TabComponent) tabs: QueryList<TabComponent>;
@@ -44,7 +52,7 @@ export class TabsComponent implements OnInit, AfterContentInit, OnChanges, After
   }
   ngAfterViewInit(): void {
     if (this.type === 'slider' && this.activeTab === undefined && this.tabs.length > 0 && this.tabs[0]) {
-      this.select(this.tabs.first.id, this.tabsEle.nativeElement.getElementById(this.tabs[0].tabId));
+      this.select(this.tabs.first.id, this.tabsEle.nativeElement.getElementById(this.tabs[0].id));
     }
   }
   ngOnChanges(changes: SimpleChanges): void {

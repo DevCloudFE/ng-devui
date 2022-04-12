@@ -14,9 +14,10 @@ import { TextInputModule } from 'ng-devui/text-input';
 import { TreeModule } from 'ng-devui/tree';
 import { PopperModule } from 'ng-devui/utils';
 import { CategorySearchComponent } from './category-search.component';
+import { ContentTemplateDirective } from './content-template.directive';
+import { DefaultTemplateDirective } from './default-template.directive';
 
 @NgModule({
-  declarations: [CategorySearchComponent],
   imports: [
     CommonModule,
     FormModule,
@@ -32,8 +33,9 @@ import { CategorySearchComponent } from './category-search.component';
     LoadingModule,
     TreeModule,
     PopperModule,
-    DatepickerProModule
+    DatepickerProModule,
   ],
-  exports: [CategorySearchComponent],
+  declarations: [CategorySearchComponent, ContentTemplateDirective, DefaultTemplateDirective],
+  exports: [CategorySearchComponent, ContentTemplateDirective, DefaultTemplateDirective],
 })
 export class CategorySearchModule {}

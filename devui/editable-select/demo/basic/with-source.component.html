@@ -4,6 +4,7 @@
   [source]="languages"
   [maxHeight]="300"
   [(ngModel)]="selectItem1"
+  (toggleChange)="toggleChange($event)"
   name="multiple-auto"
   placeholder="Search"
 >

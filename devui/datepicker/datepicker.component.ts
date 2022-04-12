@@ -95,20 +95,38 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
       this.minDate.getFullYear() : (nowDate).getFullYear() - Math.floor(this._yearNumber / 2);
     this.nowMaxYear = (nowDate).getFullYear() + Math.floor(this._yearNumber / 2) > this.maxDate.getFullYear() ?
       this.maxDate.getFullYear() : (nowDate).getFullYear() + Math.floor(this._yearNumber / 2);
+    this.initMode();
     this.onSelectDateChanged();
     this.onDisplayWeeksChange();
     this.onYearRangeChange();
     this.initDatePicker();
-    this.initMode();
   }
 
   initMode() {
     if (this.mode === 'year') {
       this.openChooseYear = true;
       this.openChooseMonth = false;
+      if(!this.selectedDate){
+        this.selectedDate = new Date();
+      }
+      if(this.maxDate.getTime() < this.selectedDate.getTime()){
+        this.selectedDate = new Date(this.maxDate);
+      }
+      if(this.minDate.getTime() > this.selectedDate.getTime()){
+        this.selectedDate = new Date(this.minDate);
+      }
     } else if (this.mode === 'month') {
       this.openChooseYear = false;
       this.openChooseMonth = true;
+      if(!this.selectedDate){
+        this.selectedDate = new Date();
+      }
+      if(this.maxDate.getTime() < this.selectedDate.getTime()){
+        this.selectedDate = new Date(this.maxDate);
+      }
+      if(this.minDate.getTime() > this.selectedDate.getTime()){
+        this.selectedDate = new Date(this.minDate);
+      }
     } else {
       this.openChooseYear = this.openChooseMonth = false;
     }
