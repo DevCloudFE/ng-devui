@@ -14,16 +14,6 @@
  * Learn more in https://angular.io/guide/browser-support
  */
 
-/** *************************************************************************************************
-* BROWSER POLYFILLS
-*/
-/** *************************************************************************************************
- * APPLICATION IMPORTS
- */
-// import 'ng-devui/add-ons/editorx/polyfill'; // Run `npm install --save classlist.js`.
-import 'core-js/es/array';
-/** IE10 and IE11 requires the following for the Reflect API. */
-import 'core-js/es/reflect'; // Run `npm install --save web-animations-js`.
 /**
  * By default, zone.js will patch all possible macroTask and DomEvents
  * user can disable parts of macroTask/DomEvents patch by setting following flags
