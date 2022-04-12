@@ -27,7 +27,6 @@ export class DataTableColumnTmplComponent implements OnChanges, OnDestroy, OnIni
   @Input() header: string;
   @Input() sortable: boolean;
   @Input() editable: boolean;
-  @Input() unresizable: boolean;
   @Input() filterable: boolean;
   @Input() closeFilterWhenScroll: boolean;
   @Input() cellClass: string;

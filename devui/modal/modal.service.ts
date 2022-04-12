@@ -34,6 +34,9 @@ export class ModalService {
     data,
     handler,
     showAnimation,
+    /**
+     * @deprecated
+     */
     showAnimate,
     backdropCloseable,
     componentFactoryResolver,

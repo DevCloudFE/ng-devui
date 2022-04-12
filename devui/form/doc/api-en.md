@@ -52,6 +52,7 @@ In the page
 |   layout   | `'horizontal'\|'vertical'\|'columns'` | 'horizontal' | Optional. Sets the form arrangement mode.                                                                                                              | [Basic usage](demo#basic-usage)                            |
 | labelSize  |         `'sm' \| '' \| 'lg'`          |      ''      | Optional. Sets the width of the label. If this parameter is not set, the default value is 100 px. 'sm' corresponds to 80 px, 'lg' corresponds to 150px | [Label horizontal arrangement](demo#demo-label-horizontal) |
 | labelAlign |      `'start'\|'center'\|'end'`       |   'start'    | Optional. This parameter specifies the label alignment mode in horizontal layout mode.                                                                 | [label horizontal arrangement](demo#demo-label-horizontal) |
+|dHasFeedback|              `boolean`                |    false     | Optional. Sets whether to display the feedback icon for the current form. |  |
 
 ## dForm Event
 

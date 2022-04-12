@@ -40,7 +40,8 @@
 
 .grid {
   letter-spacing: -0.31em;
-  *letter-spacing: normal;
+
+  /* *letter-spacing: normal; */
   word-spacing: -0.43em;
 }
 
@@ -74,7 +75,8 @@
 .u-19-24,
 .u-23-24 {
   display: inline-block;
-  *display: inline;
+
+  /* *display: inline; */
   zoom: 1;
   letter-spacing: normal;
   word-spacing: normal;
@@ -1769,13 +1771,6 @@ d-data-table.g-table thead > tr > th {
 ol,
 ul {
   margin-bottom: 0;
-}
-
-input[type=text].devcloud-form-text,
-input[type=password].devcloud-form-text,
-textarea.devcloud-form-text {
-  font-size: 12px;
-  font-size: var(--devui-font-size, 12px);
 }
 
 /*!

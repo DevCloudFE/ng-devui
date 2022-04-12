@@ -15,42 +15,36 @@
 
   <div class="devui-datepicker-pro-dropdown-panel" dDropDownMenu>
     <d-tabs [type]="'tabs'" [(activeTab)]="tab1acticeID">
-      <d-tab id="1" title="Quick Choose" tabId="tab1">
-        <ng-template dTabContent>
-          <div style="padding: 8px">
-            <d-radio-group [name]="'season'" [values]="values" [(ngModel)]="choose" (change)="valueChange($event)" [cssStyle]="'row'">
-            </d-radio-group>
-          </div>
-        </ng-template>
+      <d-tab id="1" title="Quick Choose">
+        <div style="padding: 8px">
+          <d-radio-group [name]="'season'" [values]="values" [(ngModel)]="choose" (change)="valueChange($event)" [cssStyle]="'row'">
+          </d-radio-group>
+        </div>
       </d-tab>
 
-      <d-tab id="2" title="Absolute Time" tabId="tab2">
-        <ng-template dTabContent>
-          <d-datepicker-calendar
-            #calendar
-            [isRangeType]="true"
-            [(ngModel)]="curDate"
-            [showTime]="true"
-            (confirmEvent)="ensureDate()"
-            (cancelEvent)="cancel()"
-          >
-          </d-datepicker-calendar>
-        </ng-template>
+      <d-tab id="2" title="Absolute Time">
+        <d-datepicker-calendar
+          #calendar
+          [isRangeType]="true"
+          [(ngModel)]="curDate"
+          [showTime]="true"
+          (confirmEvent)="ensureDate()"
+          (cancelEvent)="cancel()"
+        >
+        </d-datepicker-calendar>
       </d-tab>
 
-      <d-tab id="3" title="Relative Time" tabId="tab3">
-        <ng-template dTabContent>
-          <div style="padding: 8px 16px">
-            <span>last:</span>
-            <d-input-number style="width: 100px; margin: 0 8px" [(ngModel)]="relativeNumber"></d-input-number>
+      <d-tab id="3" title="Relative Time">
+        <div style="padding: 8px 16px">
+          <span>last:</span>
+          <d-input-number style="width: 100px; margin: 0 8px" [(ngModel)]="relativeNumber"></d-input-number>
 
-            <div style="width: 100px; display: inline-block">
-              <d-select [appendToBody]="true" [options]="options" [(ngModel)]="relativeUnit"></d-select>
-            </div>
-
-            <d-button style="margin-right: 8px; float: right" (click)="ensureRelativeTime()">Ensure</d-button>
+          <div style="width: 100px; display: inline-block">
+            <d-select [appendToBody]="true" [options]="options" [(ngModel)]="relativeUnit"></d-select>
           </div>
-        </ng-template>
+
+          <d-button style="margin-right: 8px; float: right" (click)="ensureRelativeTime()">Ensure</d-button>
+        </div>
       </d-tab>
     </d-tabs>
   </div>

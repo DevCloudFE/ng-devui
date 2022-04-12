@@ -22,7 +22,7 @@
     [ngModel]="showTextValue"
     (ngModelChange)="valueChanges($event)"
   />
-  <div class="devui-tags-input-wrapper" dDropDownToggle *ngIf="multiple">
+  <div class="devui-tags-input-wrapper" dDropDownToggle *ngIf="multiple" (focus)="showSearchInput = true">
     <div class="devui-tags-input">
       <d-tag
         *ngFor="let item of multipleValueList; let index = index"
@@ -32,7 +32,8 @@
       ></d-tag>
       <input
         #innerInput
-        *ngIf="allowSearch"
+        (blur)="showSearchInput = false"
+        *ngIf="allowSearch && showSearchInput"
         dTextInput
         class="inner-input"
         [placeholder]="multipleValueList.length ? '' : placeholder"
@@ -190,7 +191,7 @@
     [ngModel]="showTextValue"
     (ngModelChange)="valueChanges($event)"
   />
-  <div class="devui-tags-input-wrapper" dDropDownToggle *ngIf="multiple">
+  <div class="devui-tags-input-wrapper" dDropDownToggle *ngIf="multiple" (focus)="showSearchInput = true">
     <div class="devui-tags-input">
       <d-tag
         *ngFor="let item of multipleValueList; let index = index"
@@ -200,7 +201,8 @@
       ></d-tag>
       <input
         #innerInput
-        *ngIf="allowSearch"
+        (blur)="showSearchInput = false"
+        *ngIf="allowSearch && showSearchInput"
         dTextInput
         class="inner-input"
         [placeholder]="multipleValueList.length ? '' : placeholder"

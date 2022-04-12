@@ -23,9 +23,12 @@ export class ModalDemoComponent implements OnInit, OnDestroy {
   customizeSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('./customize/customize.component.html?raw') },
     { title: 'TS', language: 'typescript', code: require('./customize/customize.component.ts?raw') },
-    { title: 'Custom Component HTML', language: 'xml', code: require('./customize/modal-alert.component.html?raw') },
-    { title: 'Custom Component TS', language: 'typescript', code: require('./customize/modal-alert.component.ts?raw') },
-    { title: 'Custom Component CSS', language: 'css', code: require('./customize/modal-alert.component.scss?raw') },
+    { title: 'ModalAlert Component HTML', language: 'xml', code: require('./customize/modal-alert.component.html?raw') },
+    { title: 'ModalAlert TS', language: 'typescript', code: require('./customize/modal-alert.component.ts?raw') },
+    { title: 'ModalAlert CSS', language: 'css', code: require('./customize/modal-alert.component.scss?raw') },
+    { title: 'ModalNoBtn Component HTML', language: 'xml', code: require('./customize/modal-no-btn.component.html?raw') },
+    { title: 'ModalNoBtn TS', language: 'typescript', code: require('./customize/modal-no-btn.component.ts?raw') },
+    { title: 'ModalNoBtn CSS', language: 'css', code: require('./customize/modal-no-btn.component.scss?raw') },
   ];
   tipsSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('./tips/tips.component.html?raw') },

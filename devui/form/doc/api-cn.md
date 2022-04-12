@@ -52,6 +52,7 @@ import { FormsModule } from '@angular/forms';
 |   layout   | `'horizontal'\|'vertical'\|'columns'` | 'horizontal' | 可选，设置表单的排列方式                                                   | [基本用法](demo#basic-usage)                 |
 | labelSize  |         `'sm' \| '' \| 'lg'`          |      ''      | 可选，设置 label 的占宽，未设置默认为 100px，'sm'对应 80px，'lg'对应 150px | [label 横向排列](demo#demo-label-horizontal) |
 | labelAlign |    `'start' \| 'center' \| 'end'`     |   'start'    | 可选，设置水平布局方式下，label 对齐方式                                   | [label 横向排列](demo#demo-label-horizontal) |
+|dHasFeedback|              `boolean`                |    false     | 可选，设置当前 form 是否显示反馈图标                                   |  |
 
 ## dForm 事件
 

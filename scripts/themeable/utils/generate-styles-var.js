@@ -10,6 +10,7 @@ async function readFile(files, dir = '') {
 async function task() {
   const dir = 'devui/style/theme/';
   const content = (await readFile([
+    '_basic.scss',
     '_color.scss',
     '_font.scss',
     '_shadow.scss',
@@ -17,14 +18,14 @@ async function task() {
     '_animation.scss',
     '_z-index.scss'
   ], dir)).join('\n');
-  const targetDir ="publish/styles-var/"
-
-  await fs.writeFile(targetDir + 'devui-var.scss', content, 'utf8');
-  await fs.writeFile(targetDir + 'devui-var.less', content.replace(/\$/g, '@'), 'utf8');
+  const targetDir = "publish/styles-var/";
+  const contentWithoutImport = content.replace(/@import[ 'a-z;./]*/ig, '')
+  await fs.writeFile(targetDir + 'devui-var.scss', contentWithoutImport, 'utf8');
+  await fs.writeFile(targetDir + 'devui-var.less', contentWithoutImport.replace(/\$/g, '@'), 'utf8');
 }
 
-module.exports =  function runTask() {
-  task().then(()=>{
+module.exports = function runTask() {
+  task().then(() => {
     console.log('StyleSheet variable file(s) generated.');
-  })
-}
+  });
+};

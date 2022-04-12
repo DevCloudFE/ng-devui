@@ -111,7 +111,6 @@ describe('fullscreen', () => {
       fixture.detectChanges();
       const buttonEle = debugEl.query(By.css('.fullscreen-button'));
       buttonEle.triggerEventHandler('click', {}); // 未生效
-      // buttonEle.nativeElement.dispatchEvent(new Event('click'));
       tick();
       fixture.detectChanges();
       // 点击后全屏显示

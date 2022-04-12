@@ -18,7 +18,7 @@ import { DashboardModule } from 'ng-devui/dashboard';
 组件所需依赖
 
 ```json
-"gridstack": "2.0.1",
+"gridstack": "4.2.6",
 
 ```
 

@@ -35,6 +35,9 @@ export class DialogService {
     backdropCloseable,
     maxHeight,
     showAnimation,
+    /**
+     * @deprecated
+     */
     showAnimate,
     title,
     content,

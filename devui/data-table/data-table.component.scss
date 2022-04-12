@@ -28,6 +28,7 @@
 
     .scroll-view {
       overflow-y: auto;
+      overflow-y: overlay;
       overflow-x: auto;
     }
 
@@ -70,12 +71,18 @@
 
   .table-wrap {
     padding-top: $half-sort-icon-size;
+    overflow-y: auto;
+    overflow-y: overlay;
   }
 
   .virtual-scroll-wrap {
     & .cdk-virtual-scroll-content-wrapper {
       padding-top: $half-sort-icon-size;
     }
+  }
+
+  .devui-scrollbar {
+    scrollbar-width: thin;
   }
 }
 
@@ -317,11 +324,19 @@
     tbody > tr > td {
       padding: 11px 20px 12px;
     }
+
+    thead > tr > th.devui-checkable-cell {
+      padding: 10px 20px;
+    }
   }
 
   &.devui-table-lg ::ng-deep {
     tbody > tr > td {
       padding: 15px 20px 16px;
+    }
+
+    thead > tr > th.devui-checkable-cell {
+      padding: 10px 20px;
     }
   }
 }

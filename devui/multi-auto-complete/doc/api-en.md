@@ -35,6 +35,7 @@ In the page:
 |      placeholder       |                      `string`                       |                      --                       |                                                                    Optional. Placeholder                                                                    | [Basic usage](demo#basic-usage)                        |
 |      latestSource      |                    `Array<any>`                     |                      --                       |                                                                   Optional. Latest input                                                                    | [Last input](demo#auto-latest)                         |
 |     showAnimation      |                      `boolean`                      |                     true                      |                                                           optional. Whether to enable animation.                                                            |                                                        | ✔             |
+| cssClass | `string` | -- | Optional. ClassName of the input. |
 
 ## d-multi-auto-complete events
 

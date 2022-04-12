@@ -54,12 +54,12 @@ npm install @angular/cdk --save
 ```
 
 ```TypeScript
-import {ScrollDispatchModule} from '@angular/cdk/scrolling';
+import {ScrollingModule} from '@angular/cdk/scrolling';
 
 @NgModule({
 imports: [
 //...
-ScrollDispatchModule,
+ScrollingModule,
 //...
 ]
 })

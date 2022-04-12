@@ -84,7 +84,7 @@ export class GanttScaleComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.hasOwnProperty('scrollElement')) {
+    if (Object.prototype.hasOwnProperty.call(changes, 'scrollElement')) {
       this.registerScrollEvent();
     }
   }

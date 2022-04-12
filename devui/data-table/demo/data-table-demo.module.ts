@@ -95,10 +95,8 @@ import { VirtualScrollComponent } from './virtual-scroll/virtual-scroll.componen
     InteractionColumnComponent,
     VirtualScrollComponent,
     MutilStylesComponent,
-    FixHeightVirtualScrollComponent,
+    FixHeightVirtualScrollComponent
   ],
   providers: [],
-
 })
-export class DataTableDemoModule {
-}
+export class DataTableDemoModule {}

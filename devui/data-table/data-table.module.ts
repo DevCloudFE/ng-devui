@@ -35,7 +35,6 @@ import { DataTableCellTmplComponent } from './tmpl/data-table-cell-tmpl.componen
 import { DataTableCellViewTmplComponent } from './tmpl/data-table-cell-view-tmpl.component';
 import { DataTableColumnTmplComponent } from './tmpl/data-table-column-tmpl.component';
 import { DataTableHeadCellTmplComponent } from './tmpl/data-table-head-cell-tmpl.component';
-import { VirtualScrollTreeTableComponent } from './virtualScrollTreeTable.component';
 
 
 @NgModule({
@@ -75,8 +74,7 @@ import { VirtualScrollTreeTableComponent } from './virtualScrollTreeTable.compon
     TableTheadComponent,
     TableTrComponent,
     TableTbodyComponent,
-    TableTdComponent,
-    VirtualScrollTreeTableComponent
+    TableTdComponent
   ],
   declarations: [
     DataTableComponent,
@@ -97,8 +95,7 @@ import { VirtualScrollTreeTableComponent } from './virtualScrollTreeTable.compon
     TableTheadComponent,
     TableTrComponent,
     TableTbodyComponent,
-    TableTdComponent,
-    VirtualScrollTreeTableComponent
+    TableTdComponent
   ],
 
   providers: [ TableTdService ],

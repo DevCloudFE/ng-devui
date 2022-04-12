@@ -164,7 +164,7 @@
       "tmw": "When the page needs to send a warning message to users.",
       "basicDemo": {
         "title": "Basic Usage",
-        "description": "There are 4 types of Alert: success, danger, warning, info."
+        "description": "There are 4 types of Alert: success, danger, warning, info, ghost."
       },
       "closableDemo": {
         "title": "Closable Prompt",
@@ -696,8 +696,8 @@
         "description": "Basic badge type. When there is a package element, the badge and number are displayed in the upper right corner.",
         "basic": "Standard badge. The count parameter specifies the number of badges to be displayed. The status parameter specifies the status color of the badge.",
         "maxCount": "The maxCount parameter is used to set the maximum number of badges to be displayed. The default value is 99.",
-        "statusColor": "The bgColor parameter is used to set the status color of the badge. The offsetXY parameter is used to set the badge offset.",
-        "position": "Set badgePos to set the badge position.",
+        "statusColor": "The bgColor parameter is used to set the status color of the badge. The offset parameter is used to set the badge offset.",
+        "position": "Set position to set the badge position.",
         "unread": "Unread messages"
       },
       "dotDemo": {
@@ -719,11 +719,11 @@
       },
       "positionDemo": {
         "title": "Badge Position",
-        "description": "Set badgePos to set the badge position."
+        "description": "Set position to set the badge position."
       },
       "customDemo": {
         "title": "Custom",
-        "description": "The bgColor parameter is used to set the badge status color (the badge status color specified by status is invalid). The offsetXY parameter is used to set the badge offset relative to the badgePos.Customizing text and background colors using textColor and bgColor."
+        "description": "The bgColor parameter is used to set the badge status color (the badge status color specified by status is invalid). The offset parameter is used to set the badge offset relative to the position.Customizing text and background colors using textColor and bgColor."
       },
       "anchorLinkValues": {
         "badge-basic": "Basic Badge",
@@ -1032,6 +1032,14 @@
             "button": "Button",
             "status": "Status"
           },
+          "catalogsList": {
+            "text": "Text",
+            "border": "Border",
+            "background": "Background",
+            "status": "Status/Function",
+            "theme": "Theme Color"
+          },
+          "formColor": "Complete Swatches",
           "colors": {
             "global-bg": "Body with a light gray background",
             "bg-white": "Top navigation color, background color",
@@ -1112,6 +1120,7 @@
         "instance": {
           "title": "Instance",
           "description": "Shading table",
+          "description2": "Shadow color table",
           "defaultTable": {
             "tab": "Default Theme Shadow Table",
             "shadowName": "shadow variable name",
@@ -1124,6 +1133,13 @@
             "shadowName": "shadow variable name",
             "newShadowName": "New variable name",
             "shadowValue": "shadow variable value",
+            "description": "Description"
+          },
+          "colorTable": {
+            "colorVar": "Color variable",
+            "normalColor": "Normal color value",
+            "darkColor": "Dark Black Value",
+            "themeValue": "Current Theme Color Value",
             "description": "Description"
           },
           "shadows": {
@@ -1149,6 +1165,10 @@
             "hwc-shadow-prompt": "Prompt",
             "hwc-shadow-success": "Success prompt",
             "hwc-shadow-dark": "Dark background shadow"
+          },
+          "shadowColor": {
+            "devui-shadow": "shadow color",
+            "devui-light-shadow": "Weak shadow color"
           }
         }
       },
@@ -1282,6 +1302,51 @@
         "animation": "animation"
       }
     },
+    "design-z-index": {
+      "name": "Zindex Layer",
+      "type": "Design tokens",
+      "path": "design-z-index",
+      "description": "Component library common style specifications.",
+      "tmw": "View the styles, application scenarios, and changes of the component library.",
+      "ZIndexDemo": {
+        "title": "Layer",
+        "description1": "1. The component library provides hierarchical variables for users in different scenarios. The following table lists the names, values, and application scenarios of these variables.",
+        "description2": "2. Pass `@import '~ng-devui/styles-var/devui-var.scss'; `The level variables can be used after they are introduced.",
+        "description3": "3. If the stylesheet is a less file, `@import' ~ng-devui/styles-var/devui-var.less '; `, and change the variable prefix '$' to '@';",
+        "description4": "4. If a mask exists, the mask is based on the corresponding z-index value -1.",
+        "description5": "5. Content layer. Set zIndex as required. The value of zIndex must be smaller than that of the temporary layer.",
+        "description6": "6. Background layer. Set zIndex as required. The value of zIndex must be smaller than that of the content layer.",
+        "title2": "Layer Rule",
+        "description7": "According to the interaction mode, the content layer is classified into the background layer, content layer, and temporary layer. The sequence of the layers is as follows: Temporary layer > Content layer > Background layer. The sequence cannot be changed.",
+        "subTitle1": "1. Temporary layer",
+        "description8": "Temporary layer related to an operation or task. Generally, it carries tasks that need to be temporarily processed or feedback that needs to be received. It is higher than the content layer.",
+        "description9": "There are two modes: one is that the content area cannot be operated and is disabled by the mask mask. The user must focus on the content of the pop-up window to continue other operations (pop-up window and modal drawer). The other is that the content area can be operated without a mask. (modeless drawer, lightweight pop-up window, floating menu, user guide)",
+        "subTitle2": "2. Content layer",
+        "description10": "Mainly carries page elements such as page information, components, and accordion.",
+        "subTitle3": "3. Background layer",
+        "description11": "The page background layer is always placed at the bottom of the page. The color of the page background layer is #EEF0F5, which is neutral and soft to highlight and focus the content layer.",
+        "instance": {
+          "title": "Instance",
+          "tableTitle": "Hierarchical variable table",
+          "table": {
+            "zIndexName": "Layer variable name",
+            "zIndexValue": "Level variable value",
+            "description": "Description"
+          },
+          "zIndex": {
+            "devui-z-index-full-page-overlay": " Full Screen Coverage Elements",
+            "devui-z-index-pop-up": " prompt information, such as popover and tooltip",
+            "devui-z-index-dropdown": "Dropdown menu, such as dropdown, compatible. Values to be redefined",
+            "devui-z-index-modal": "Popup window",
+            "devui-z-index-drawer": "Drawer Board",
+            "devui-z-index-framework": "Framework element, header, sideMenu, etc."
+          }
+        }
+      },
+      "anchorLinkValues": {
+        "z-index": "z-index"
+      }
+    },
     "codemirror": {
       "name": "CodeMirror",
       "type": "Extended service",
@@ -1370,9 +1435,17 @@
         "title": "Batch line dragging",
         "description": "You can use the DragDrop component to drag rows in a table in batches. You can press Ctrl and select multiple rows and cells to drag them. You can only customize the head and body templates and the rows and cells in the templates."
       },
-      "virtualScrollTreeTableDemo": {
-        "title": "Tree table with a large amount of data",
+      "virtualScrollTreeTableBasicDemo": {
+        "title": "Tree table with a large amount of data Basic",
         "description": "To display 10,000 to 100,000 tree data records, use this table to ensure smooth operations."
+      },
+      "virtualScrollTreeTableOperationDemo": {
+        "title": "Tree table with a large amount of data Operation",
+        "description": "Basic operations, including adding, modifying, deleting, querying, copying, and cutting tree tables with a large amount of data."
+      },
+      "virtualScrollTreeTableInteractionDemo": {
+        "title": "Tree table with a large amount of data Interaction",
+        "description": "Advanced operations on tree tables with a large amount of data, including dragging, selecting, deleting, and inheriting most functions of the original table."
       },
       "mutilStylesDemo": {
         "title": "Table Style"
@@ -1408,7 +1481,9 @@
         "cell-merge": "Cell Merge",
         "drag-row": "Row dragging",
         "muti-drag-row": "Batch Row dragging",
-        "virtual-scroll-tree-table": "Big Data Tree Table"
+        "virtual-scroll-tree-table-basic": "Big Data Tree Table Basic",
+        "virtual-scroll-tree-table-operation": "Big Data Tree Table Operation",
+        "virtual-scroll-tree-table-interaction": "Big Data Tree Table Interaction"
       }
     },
     "datepickerPro": {
@@ -2647,14 +2722,18 @@
         "title": "Half Star Mode"
       },
       "typeDemo": {
-        "title": "Use the type parameter"
+        "title": "Set Color"
+      },
+      "templateDemo": {
+        "title": "Custom Template"
       },
       "anchorLinkValues": {
         "read-only-mode": "Read-only Mode",
         "dynamic-mode": "Dynamic Mode",
         "dynamic-mode-Custom": "Dynamic Mode-Custom",
         "half-demo": "Half Star Mode",
-        "using-the-type-parameter": "Use the type parameter"
+        "using-the-type-parameter": "Set Color",
+        "template": "Custom Template"
       }
     },
     "search": {
@@ -3499,13 +3578,18 @@
         "title": "Customize Area to Upload",
         "description": "Users can use the dUpload command to upload files in any area."
       },
+      "sliceDemo": {
+        "title": "Uploading Slice",
+        "description": "You can set the size of a segment to upload."
+      },
       "anchorLinkValues": {
         "basic-usage": "Basic Usage",
         "multi-files": "Upload Multiple Files",
         "auto-upload": "Automatic Upload",
         "custom": "Customize",
         "dynamic-upload-options": "Dynamic Upload Parameters",
-        "customize-area-upload": "Customize Area to Upload"
+        "customize-area-upload": "Customize Area to Upload",
+        "upload-slice": "Uploading Slice"
       }
     },
     "user-guide": {
@@ -3519,7 +3603,7 @@
       },
       "serviceWayDemo": {
         "title": "Service Mode",
-        "description": "Use the user-guide as a service. The interface is exposed to users. The entrance to a tutorial can be customized. In this mode, UserGuideCmdService needs to be introduced to the component that uses the user-guide."
+        "description": "Use the user-guide as a service. The interface is exposed to users. The entrance to a tutorial can be customized. In this mode, UserGuideService needs to be introduced to the component that uses the user-guide."
       },
       "anchorLinkValues": {
         "user-guide-basic": "Component Mode",
@@ -3747,14 +3831,15 @@
       "tmw": "When the user needs to use Flex layouts, spacing settings, responsive layouts, typical layouts, etc.",
       "basicDemo": {
         "title": "Grid Basic Usage",
-        "description": "Responsive breakpoints correspond to (px): ss > 0, ms >= 360, mm >= 768, ml >= 1024, xs >= 1280, sm >= 1440, md >= 1600, lg >= 1760, xl >= 1920. When combining settings, ss breakpoints represent common settings."      },
+        "description": "Responsive breakpoints correspond to (px): ss > 0, ms >= 360, mm >= 768, ml >= 1024, xs >= 1280, sm >= 1440, md >= 1600, lg >= 1760, xl >= 1920. When combining settings, ss breakpoints represent common settings."
+      },
       "gutterDemo": {
         "title": "Grid Gutter",
-        "description": "The interval is implemented by padding in a grid."      },
+        "description": "The interval is implemented by padding in a grid."
+      },
       "spaceDemo": {
         "title": "Grid Space",
         "description": "The interval is implemented by using the block margin in the grid."
-
       },
       "offsetDemo": {
         "title": "Column Offset"
@@ -3910,7 +3995,7 @@
       "tmw": "To solve the method that is not supported by the browser of an earlier version.",
       "basicDemo": {
         "title": "Usage",
-        "description": "Currently, there are few implementation methods and are mainly used by the rich text component. Therefore, the putty script file is stored in the rich text module. When using the devcloud project or the project created by the Angular CLI, you can insert the following information into src/polyfills.ts: import' ng-devui/add-ons/editorx/polyfill '; The putty script is only a piece of JS code that is independently executed. You can also insert a static resource into the page for use.",
+        "description": "Currently, there are few implementation methods and are mainly used by the rich text component. Therefore, the putty script file is stored in the rich text module. You can insert the following information into src/polyfills.ts: import' ng-devui/add-ons/editorx/polyfill '; The putty script is only a piece of JS code that is independently executed. You can also insert a static resource into the page for use.",
         "name": "Polyfills",
         "license": "License",
         "size": "Size",
@@ -4004,6 +4089,9 @@
       "basicDemo": {
         "title": "Basic Usage"
       },
+      "markedTypeDemo": {
+        "title": "Date Mark"
+      },
       "showTimeDemo": {
         "title": "Show Time"
       },
@@ -4036,6 +4124,7 @@
       },
       "anchorLinkValues": {
         "basic-usage": "Basic Usage",
+        "mark-type": "Date Marked",
         "show-time": "Show Time",
         "template": "Customizing an Extended Area",
         "monthYear": "Month & Year picker",
@@ -4230,6 +4319,16 @@
       "shared-card": "Shared Card",
       "shared-link-image": "Shared Link and Image",
       "download-image": "Download Chart Image"
+    },
+    "chart-form": {
+      "name": "Chart Form Builder",
+      "type": "Template Chart",
+      "path": "chart-form",
+      "description": "Chart Form",
+      "tmw": "Quickly generate configuration forms for charts",
+      "basic-form": {
+        "title": "Chart Form Builder"
+      }
     }
   }
 }

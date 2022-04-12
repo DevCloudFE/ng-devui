@@ -84,6 +84,8 @@ this.toastService.open({
 |   sticky   |          `boolean`           | false  | 可选，是否常驻，默认自动关闭                                                                                                                                                                 | [服务方式调用](demo#toast-service) |
 |   style    |   `{[klass:string]:any;}`    |   --   | 可选，样式。参见 [ngStyle](https://angular.cn/api/common/NgStyle)                                                                                                                            | [服务方式调用](demo#toast-service) |
 | styleClass |           `string`           |   --   | 可选，类名。                                                                                                                                                                                 | [服务方式调用](demo#toast-service) |
+| injector | `Injector` | -- | 可选，可以选择指定将用作组件的父级的注射器。   |
+| componentFactoryResolver | `ComponentFactoryResolver` | -- | 可选，可以选择指定将用作组件的父级的注射器。   |
 
 
 接收发射过来的数据，closeEvent 返回被手动关闭或自动消失的单条消息内容，valueChange 返回变化（手动关闭或自动消失）后剩余消息内容数组，[`Array<Message>`](#message) 对象定义见接口 & 类型定义:

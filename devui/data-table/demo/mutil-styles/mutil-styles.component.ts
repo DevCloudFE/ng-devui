@@ -85,6 +85,10 @@ export class MutilStylesComponent implements OnInit {
 
   tableWidthConfig: TableWidthConfig[] = [
     {
+      field: 'checkbox',
+      width: '50px'
+    },
+    {
       field: '#',
       width: '50px'
     },
@@ -114,6 +118,10 @@ export class MutilStylesComponent implements OnInit {
       this.tableWidthConfig = [];
     } else {
       this.tableWidthConfig = [
+        {
+          field: 'checkbox',
+          width: '50px'
+        },
         {
           field: '#',
           width: '50px'

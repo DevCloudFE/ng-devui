@@ -10,7 +10,7 @@ import * as hljs from 'highlight.js/lib/core';
 
 @Component({
   template: `
-    <div dCodeCopy (copied)="onCopied($event)" dReadTip [readTipOptions]="options" class="get-start">
+    <div dCodeCopy class="get-start">
       <div class="readme">
         <div [innerHTML]="readMe | safe: 'html'" #documentation></div>
       </div>
@@ -26,7 +26,6 @@ import * as hljs from 'highlight.js/lib/core';
 })
 export class GetStartedComponent implements OnInit, AfterViewInit {
   _readMe: HTMLElement;
-  options;
   @Input() set readMe(readMe: HTMLElement) {
     this._readMe = readMe;
     setTimeout(() => {
@@ -49,9 +48,7 @@ export class GetStartedComponent implements OnInit, AfterViewInit {
       this.setReadMe(event.lang);
     });
   }
-  onCopied(options) {
-    this.options = options;
-  }
+
   setReadMe(lang) {
     const currLang = lang === 'en-us' ? 'en' : 'cn';
     this.readMe = require(`!html-loader!markdown-loader!./getStarted-${currLang}.md`);

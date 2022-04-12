@@ -56,11 +56,20 @@ export class RangeDatepickerProComponent implements OnInit, OnDestroy, AfterView
   @Input() set maxDate(value: Date) {
     this.pickerSrv.maxDate = value;
   }
+  @Input() set markedRangeDateList(value: Date[][]) {
+    this.pickerSrv.markedRangeDateList = value;
+  };
+  @Input() set markedDateList(value: Date[]) {
+    this.pickerSrv.markedDateList = value;
+  }
   @Output() dropdownToggle = new EventEmitter<boolean>();
   @Output() confirmEvent = new EventEmitter<Date[]>();
   @ContentChild('customTemplate') customTemplate: TemplateRef<any>;
   @ContentChild('footerTemplate') footerTemplate: TemplateRef<any>;
   @ContentChild('hostTemplate') hostTemplate: TemplateRef<any>;
+  @ContentChild('markDateInfoTemplate') set markDateInfoTemplate(tmp: TemplateRef<any>) {
+    this.pickerSrv.markDateInfoTemplate = tmp;
+  };
   @ViewChild('dateInputStart') datepickerInputStart: ElementRef;
   @ViewChild('dateInputEnd') datepickerInputEnd: ElementRef;
 
@@ -362,11 +371,11 @@ export class RangeDatepickerProComponent implements OnInit, OnDestroy, AfterView
     this.isOpen = true;
   }
 
-  clear(event?: MouseEvent) {
+  clear(event?: MouseEvent, isHandle?: boolean) {
     if (event) {
       event.stopPropagation();
     }
-    if (this.disabled) {
+    if (this.disabled && isHandle) {
       return;
     }
     this.pickerSrv.updateDateValue.next({

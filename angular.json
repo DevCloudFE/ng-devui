@@ -18,7 +18,8 @@
               "highlight.js",
               "codemirror",
               "xss",
-              "enquire.js"
+              "enquire.js",
+              "color"
             ],
             "customWebpackConfig": {
               "path": "scripts/extra-webpack.config.js"

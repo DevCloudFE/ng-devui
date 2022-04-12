@@ -34,8 +34,11 @@ export class TableTdComponent implements OnInit, OnChanges, OnDestroy {
   @Input() beforeEditEnd: (rowItem, field) => boolean | Promise<boolean> | Observable<boolean>;
   @Output() toggleChildTableEvent = new EventEmitter<boolean>();
   @Input() editing: boolean;
-  @Output() editingChange = new EventEmitter<boolean>();
   @Output() editStatusEvent = new EventEmitter<boolean>();
+  /**
+   * 编辑状态调整 @deprecated
+   */
+  @Output() editingChange = new EventEmitter<boolean>();
 
   private documentClickSubscription: Subscription;
   private tdMousedownSubscription: Subscription;

@@ -49,6 +49,7 @@ export class PopoverComponent implements OnInit, AfterViewInit, OnDestroy, OnCha
   @Input() popType: PopoverType;
   @Input() popMaxWidth: number;
   @Input() popoverStyle: PopoverStyle;
+
   /**
    * @deprecated Use mouseLeaveDelay to replace.
    */

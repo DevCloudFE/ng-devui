@@ -84,6 +84,8 @@ value: [{severity:'info', summary:'summary', content:'details'}],
 |   sticky   |          `boolean`           |  false  | Optional. Indicating whether the database is permanently configured. This parameter is automatically disabled by default.                                                                                                                                                                                               |[Service Function](demo#toast-service)|
 |   style    |           `{[klass:string]:any;}`          |   --    | Optional. Style. Refer to [ngStyle](https://angular.io/api/common/NgStyle)                                                                                                                                                                                                                                                                                                           |[Service Function](demo#toast-service)
 | styleClass |           `string`           |   --    | Optional. Class name     |[Service Function](demo#toast-service)   |
+| injector | `Injector` | -- | Optional. You can specify the syringe that will be used as the parent of the component.   |
+| componentFactoryResolver | `ComponentFactoryResolver` | -- | Optional. Customized dynamic rendering component parser. |
 
 
 Receives sent data. CloseEvent returns the content of a single message that is manually closed or automatically disappeared. ValueChange returns the content array of the remaining message after the change (manually closed or automatically disappeared). For the definition of the [`Array<Message>`](#message) object, see the definition of the interface and type.

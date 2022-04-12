@@ -1,7 +1,4 @@
-import {
-  Component,
-  OnInit
-} from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'd-with-source',
@@ -11,18 +8,29 @@ import {
       section {
         width: 50%;
       }
-    `
-  ]
+    `,
+  ],
 })
-export class WithSourceComponent implements OnInit {
+export class WithSourceComponent {
   selectItem1;
+  languages = [
+    'C#',
+    'C',
+    'C++',
+    'CPython',
+    'Java',
+    'JavaScript',
+    'Go',
+    'Python',
+    'Ruby',
+    'F#',
+    'TypeScript',
+    'SQL',
+    'LiveScript',
+    'CoffeeScript',
+  ];
 
-  languages = ['C#', 'C', 'C++', 'CPython', 'Java', 'JavaScript', 'Go', 'Python', 'Ruby', 'F#', 'TypeScript', 'SQL',
-    'LiveScript', 'CoffeeScript'];
-
-  constructor() {
-  }
-
-  ngOnInit() {
+  toggleChange(event) {
+    console.log('isOpen:', event);
   }
 }

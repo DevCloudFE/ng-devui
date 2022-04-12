@@ -1,4 +1,16 @@
-import { ChangeDetectorRef, Component, ElementRef, EventEmitter, HostBinding, Inject, Input, NgZone, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  EventEmitter,
+  forwardRef,
+  HostBinding,
+  Inject,
+  Input,
+  NgZone,
+  OnInit,
+  Output
+} from '@angular/core';
 import { DATA_TABLE_ROW } from './data-table-row.token';
 import { DATA_TABLE } from './data-table.token';
 import { ForceUpdateReason } from './force-update-reason.model';
@@ -9,9 +21,10 @@ import { DataTableColumnTmplComponent } from './tmpl/data-table-column-tmpl.comp
   templateUrl: './data-table-row.component.html',
   styleUrls: ['./data-table-row.component.scss'],
   preserveWhitespaces: false,
-  providers: [
-    {provide: DATA_TABLE_ROW, useExisting: DataTableRowComponent}
-  ],
+  providers: [{
+    provide: DATA_TABLE_ROW,
+    useExisting: forwardRef(() => DataTableRowComponent)
+  }],
 })
 export class DataTableRowComponent implements OnInit {
   @Input() rowItem: any;
@@ -70,7 +83,6 @@ export class DataTableRowComponent implements OnInit {
   }
 
   onRowClick($event) {
-    // $event.stopPropagation();
     this.clickCount++;
     if (this.clickCount === 1) {
       this.timeoutId = setTimeout(() => {
@@ -84,7 +96,6 @@ export class DataTableRowComponent implements OnInit {
   }
 
   onRowDBClick($event) {
-    // $event.stopPropagation();
     this.dt.onRowDBClick({ rowIndex: this.rowIndex, nestedIndex: this.nestedIndex, rowItem: this.rowItem, rowComponent: this });
   }
 

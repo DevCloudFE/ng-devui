@@ -2,17 +2,19 @@
   <h5>[<code>autoFocus</code>]="true"</h5>
   <d-input-number [(ngModel)]="value" class="input-number" [autoFocus]="true"></d-input-number>
   <br />
-  <d-input-number size="sm" [(ngModel)]="value" class="input-number"></d-input-number>
-  <d-input-number
-    [min]="min"
-    [max]="max"
-    [step]="step"
-    [(ngModel)]="value"
-    (whileValueChanging)="showValue($event, 'typing')"
-    (ngModelChange)="showValue($event, 'model')"
-    (afterValueChanged)="showValue($event, 'typed')"
-    class="input-number"
-  >
-  </d-input-number>
-  <d-input-number size="lg" [min]="min" [max]="max" [step]="step" [(ngModel)]="value" class="input-number"></d-input-number>
+  <div class="input-number-group">
+    <d-input-number size="sm" [(ngModel)]="value" class="input-number"></d-input-number>
+    <d-input-number
+      [min]="min"
+      [max]="max"
+      [step]="step"
+      [(ngModel)]="value"
+      (whileValueChanging)="showValue($event, 'typing')"
+      (ngModelChange)="showValue($event, 'model')"
+      (afterValueChanged)="showValue($event, 'typed')"
+      class="input-number"
+    >
+    </d-input-number>
+    <d-input-number size="lg" [min]="min" [max]="max" [step]="step" [(ngModel)]="value" class="input-number"></d-input-number>
+  </div>
 </div>

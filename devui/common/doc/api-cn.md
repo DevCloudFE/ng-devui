@@ -6,6 +6,12 @@
 import { DCommonModule } from 'ng-devui/common';
 ```
 
+如果你需要使用到 dLazyLoad，则引入：
+
+```ts
+import { LazyLoadModule } from 'ng-devui/utils';
+```
+
 如果你需要使用到 HelperUtils，则引入：
 
 ```ts
@@ -339,10 +345,12 @@ import { HelperUtils } from 'ng-devui';
 |              option.header              |              `Object`               |                  --                   |                                               可选，用于设置请求 header，使用键值对的 Object 设置 header 值，左值为 header 选项的 key，右值为 header 选项的 value， 如`{'X-lang': 'en'}`                                                |
 |          option.responseOption          |  `'response' \| 'body' \| 'json'`   |                'json'                 |                                                                                      可选用于指定失败时候返回的默认格式，若格式处理失败会降级返回                                                                                       |
 |             option.filename             |              `string`               |                  --                   |                                                             可选，默认不需要设置，优先设置为配置项，其次会从响应头 Content-Type 指定的 filename 获取，再其次从访问路径获取                                                              |
+|             option.reportProgress             |              `boolean`               |                  false                   |                                                             可选，默认为flase，是否监听下载的进度，设置为true是可以用onProgress方法监听下载进度                                                              |
 |         option.withCredentials          |              `boolean`              |                 false                 |                                                                                            可选，调用 http 接口是否启用 xhr.withCredentials                                                                                             |
 | option.downloadWithoutDispositionHeader |              `boolean`              |                 false                 |                                    可选，默认需要请求头标记 Content-Disposition: attachment 否则当作非文件流出错处理。 设置为 true，则返回响应头 http 码为成功（2xx）的情况下则强制将返回的 response                                    |
 |                 onError                 |        `(res: any) => void`         |                  --                   |                     可选，用于下载失败时候的回调，类型为 (response) => void, 参数 response 为请求返回的错误信息，response 试图将返回信息转为 json 如果失败则返回原返回数据的 textcontent，此处和 downloadFile 一致                      |
-|                onSuccess                |        `(res: any) => void`         |                  --                   | 可选，用于下载成功回调，类型为 (response) => void, 参数 response 为请求返回的整个 Http 信息，response 内 body 的加载类型为 ArrayBuffer。由于 body 为下载的文件流，故不会将 body 转为 json 或者试图解析 body 为文本，此处与 onError 不同 |
+|                onSuccess                |        `(res: HttpResponse<ArrayBuffer>) => void`         |                  --                   | 可选，用于下载成功回调，类型为 (response) => void, 参数 response 为请求返回的整个 Http 信息，response 内 body 的加载类型为 ArrayBuffer。由于 body 为下载的文件流，故不会将 body 转为 json 或者试图解析 body 为文本，此处与 onError 不同 |
+|                onProgress                |        `(res: HttpProgressEvent) => void`         |                  --                   | 可选，用于下载进度事件的回调，类型为 (response) => void, 参数 response 为请求返回的下载进度信息，response的加载类型为 blob。 |
 
 如何获取 httpClient 实例：
 
@@ -442,5 +450,14 @@ export interface CopyResult {
   isSupported: boolean;
   isSucceeded: boolean;
   content: string;
+}
+```
+
+### HttpProgressEvent
+```typescript
+interface HttpProgressEvent {
+  type: HttpEventType.DownloadProgress | HttpEventType.UploadProgress;
+  loaded: number;
+  total?: number;
 }
 ```

@@ -130,9 +130,9 @@ export class ToastComponent implements OnInit, AfterViewInit, OnDestroy {
       this.timestamp = new Date().getTime();
       if (this.lifeMode === 'single') {
         setTimeout(() => {
-          this._value.forEach(
-            (v, i) => {(this.timeoutArr[i] = setTimeout(() => this.singleModeRemove(v, doms[i]), v.life || this.severityDelay(v)));}
-          );
+          this._value.forEach((v, i) => {
+            this.timeoutArr[i] = setTimeout(() => this.singleModeRemove(v, doms[i]), v.life || this.severityDelay(v));
+          });
         });
       } else {
         this.timeout = setTimeout(() => {
@@ -150,7 +150,7 @@ export class ToastComponent implements OnInit, AfterViewInit, OnDestroy {
       const doms = this.container.children;
       dom = doms[index];
     }
-    dom.classList.remove('slide-in');
+    dom?.classList.remove('slide-in');
     setTimeout(() => {
       this.closeEvent.emit({ message: msg });
       if (this.container.querySelectorAll('.slide-in').length === 0) {

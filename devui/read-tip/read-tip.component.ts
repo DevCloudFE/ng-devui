@@ -11,7 +11,7 @@ import {
   OnDestroy,
   OnInit,
   Renderer2,
-  TemplateRef,
+  TemplateRef
 } from '@angular/core';
 import { PositionService } from 'ng-devui/position';
 import { PositionType } from 'ng-devui/tooltip';

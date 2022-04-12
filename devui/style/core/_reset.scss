@@ -1,12 +1,12 @@
 @import '../theme/color';
+@import '../core/font';
 
 body {
   margin: 0;
   padding: 0;
-  color: $text-color;
+  color: $devui-text;
   font-size: $devui-font-size;
   font-family: $font-family;
-  font-variant: $font-variant-base;
   line-height: $devui-line-height-base;
 }
 

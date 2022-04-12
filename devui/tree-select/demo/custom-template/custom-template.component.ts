@@ -152,9 +152,9 @@ export class TreeSelectCustomTemplateComponent {
   traverseTree(tree) {
     let results = [];
     for (let i = 0; i < tree.length; i++) {
-      if (!tree[i].hasOwnProperty('children')) {
+      if (!Object.prototype.hasOwnProperty.call(tree[i], 'children')) {
         results.push(tree[i]);
-      } else if (tree[i].hasOwnProperty('children')) {
+      } else if (Object.prototype.hasOwnProperty.call(tree[i], 'children')) {
         results.push(tree[i]);
         results = results.concat(this.traverseTree(tree[i].children));
       }

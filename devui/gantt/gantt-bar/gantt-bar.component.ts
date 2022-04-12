@@ -150,7 +150,9 @@ export class GanttBarComponent implements OnInit, OnChanges, AfterViewInit, OnDe
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.hasOwnProperty('min') || changes.hasOwnProperty('max') || changes.hasOwnProperty('step')) {
+    if (Object.prototype.hasOwnProperty.call(changes, 'min')
+      || Object.prototype.hasOwnProperty.call(changes, 'max')
+      || Object.prototype.hasOwnProperty.call(changes, 'step')) {
       this.checkRangeValues(this.min, this.max);
       this.checkStepValue();
     }

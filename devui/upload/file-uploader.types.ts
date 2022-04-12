@@ -1,4 +1,8 @@
 export class IUploadOptions {
+  // 是否开启分片上传
+  isChunked?: boolean;
+  // 分片大小
+  chunkSize?: number;
   // 上传接口地址
   uri: string;
   // http 请求方法

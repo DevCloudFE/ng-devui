@@ -22,7 +22,7 @@ In the page
 |        allowSave        |                                      `boolean`                                      |  true   | Optional. Whether to show save current filter button.                                                                                                                             |              [Basic usage](demo#basic-usage)              |
 |       allowClear        |                                      `boolean`                                      |  true   | Optional. Whether to display the button for clearing the current filter.                                                                                                          |              [Basic usage](demo#basic-usage)              |
 |      allowShowMore      |                                      `boolean`                                      |  false  | Optional. Whether to display the button in the drop-down list of the current filter criteria.                                                                                     | [Large-scale data display optimization](demo#auto-scroll) |
-|   showSearchCategory    |                                      `boolean`                                      |  true   | Optional. Whether to display the search keyword drop-down list.                                                                                                                   |                                                           |
+|   showSearchCategory    |                              `boolean \| SearchConfig`                              |  true   | Optional. Whether to display the search keyword drop-down list.                                                                                                                   |   [Customize drop-down list box](demo##custom-template)   |
 |        searchKey        |                                      `string`                                       |   ''    | Optional. Default value displayed in the search box.                                                                                                                              |              [Basic usage](demo#basic-usage)              |
 |     beforeTagChange     | `(tag, searchKey, operation) => boolean \| Promise<boolean> \| Observable<boolean>` |   --    | Optional. Method called before changing the tag, returns the boolean type, and returns false to prevent the classification value from changing.                                   |                                                           |
 |       toggleEvent       |                    `(dropdown, tag?, currentSelectTag?) => void`                    |   --    | Optional. Method called when the drop-down menu switch of the selected classification is enabled, which can be executed by the default method after being blocked by return.      |              [Basic usage](demo#basic-usage)              |
@@ -86,9 +86,9 @@ export interface ICategorySearchTagItem {
    * Selected Value
    */
   value?: {
-    value: Array<ITagOption>; // Selected value from the drop-down list box
     label: string; // Used to display the selected value, or the property name if filterKey is specified, such as the status in basic demo.
-    cache: Array<ITagOption>; // Cached data used to reset the selection value when the drop-down list expands
+    value: string | Array<ITagOption | number | string>; // Selected value from the drop-down list box
+    cache: string | Array<ITagOption | number | string>; // Cached data used to reset the selection value when the drop-down list expands
   };
   /**
    * Indicates whether to display hour, minute, and second for the dateRange type.
@@ -122,6 +122,15 @@ export type SearchEvent = {
   selectedTags: Array<ICategorySearchTagItem>;
   searchKey: string;
 };
+
+export interface SearchConfig {
+  keyword?: boolean;
+  keywordDescription?: (searchKey: string) => string;
+  field?: boolean;
+  fieldDescription?: (label: string) => string;
+  category?: boolean;
+  categoryDescription?: string;
+}
 
 export type DValidateRules =
   | {

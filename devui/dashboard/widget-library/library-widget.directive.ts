@@ -1,19 +1,7 @@
 import { DomPortalOutlet, TemplatePortal } from '@angular/cdk/portal';
 import {
-  AfterViewInit,
-  ApplicationRef,
-  ComponentFactoryResolver,
-  Directive,
-  ElementRef,
-  HostBinding,
-  Injector,
-  Input,
-  OnChanges,
-  OnDestroy,
-  Optional,
-  SimpleChanges,
-  TemplateRef,
-  ViewContainerRef,
+  AfterViewInit, ApplicationRef, ComponentFactoryResolver, Directive, ElementRef, HostBinding, Injector,
+  Input, OnChanges, OnDestroy, Optional, SimpleChanges, TemplateRef, ViewContainerRef
 } from '@angular/core';
 import { DashboardComponent } from '../dashboard.component';
 import { GridStackService } from '../grid-stack.service';
@@ -23,11 +11,11 @@ import { DashboardLibraryPanelDirective } from '../widget-library/library-panel.
   selector: '[dDashboardLibraryWidget]',
 })
 export class DashboardLibraryWidgetDirective implements OnChanges, AfterViewInit, OnDestroy {
-  @HostBinding('attr.data-gs-width')
+  @HostBinding('attr.gs-w')
   @Input()
   width: number;
 
-  @HostBinding('attr.data-gs-height')
+  @HostBinding('attr.gs-h')
   @Input()
   height: number;
 
@@ -40,7 +28,7 @@ export class DashboardLibraryWidgetDirective implements OnChanges, AfterViewInit
 
   @HostBinding('class.grid-stack-new-item')
   hostBinding = true;
-  @HostBinding('attr.data-gs-instance')
+  @HostBinding('attr.gs-instance')
   gridStackId;
 
   @Input() targetDashboard: DashboardComponent;
@@ -55,7 +43,7 @@ export class DashboardLibraryWidgetDirective implements OnChanges, AfterViewInit
     private injector: Injector,
     private vcf: ViewContainerRef,
     @Optional() private libraryPanel: DashboardLibraryPanelDirective
-  ) {}
+  ) { }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.targetDashboard) {
@@ -109,7 +97,7 @@ export class DashboardLibraryWidgetDirective implements OnChanges, AfterViewInit
         };
       }
     } else {
-      return () => {};
+      return () => { };
     }
   };
 
@@ -131,10 +119,10 @@ export class DashboardLibraryWidgetDirective implements OnChanges, AfterViewInit
       el.classList.add('grid-stack-item-adding-item-template');
       el.style.zIndex = '1060';
       if (this.width !== undefined) {
-        el.setAttribute('data-gs-width', String(this.width));
+        el.setAttribute('gs-w', `${this.width}`);
       }
       if (this.height !== undefined) {
-        el.setAttribute('data-gs-height', String(this.height));
+        el.setAttribute('gs-h', `${this.height}`);
       }
       this.setDragWidthHeight(el);
       const domPortalOutlet = new DomPortalOutlet(el, this.cfr, this.appRef, this.injector);

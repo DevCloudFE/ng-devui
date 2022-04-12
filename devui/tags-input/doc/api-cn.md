@@ -31,6 +31,7 @@ import { TagsInputModule } from 'ng-devui/tags-input';
 |   placeholder   |            `boolean`            |           ''            |                                      可选，输入框的 placeholder                                       | [基本用法](demo#basic-usage)    |
 |    minLength    |            `number`             |            3            |                                     可选，输入标签内容的最小长度                                      | [基本用法](demo#basic-usage)    |
 |    maxLength    |            `number`             | Number.MAX_SAFE_INTEGER |                                     可选，输入标签内容的最大长度                                      | [基本用法](demo#basic-usage)    |
+|     minTags     |            `number`             |            0            |                                      可选，可输入标签的最小个数                                       | [基本用法](demo#basic-usage)    |
 |     maxTags     |            `number`             | Number.MAX_SAFE_INTEGER |                                      可选，可输入标签的最大个数                                       | [基本用法](demo#basic-usage)    |
 | caseSensitivity |            `boolean`            |          false          |                                   可选，大小写敏感，默认忽略大小写                                    | [基本用法](demo#basic-usage)    |            |
 |   spellcheck    |            `boolean`            |          true           |                                 可选，input 输入框是否开启拼写检查的                                  | [基本用法](demo#basic-usage)    |            |
@@ -42,6 +43,8 @@ import { TagsInputModule } from 'ng-devui/tags-input';
 |  appendToBody   |            `boolean`            |          false          |                                   可选，下拉弹出是否 append to body                                   | [双向绑定](demo#ng-model)       |
 |  itemTemplate   |          `TemplateRef`          |           --            |                                       可选，自定义选项展示模板                                        | [双向绑定](demo#ng-model)       |
 |  virtualScroll  |            `boolean`            |          false          |                                 可选，是否虚拟滚动，大数据量场景使用                                  | [虚拟滚动](demo#virtual-scroll) |
+| multiline | `boolean` | true | 可选，是否两行显示 |
+| maxHeight | `string` | -- | 可选，已选中标签容器最大高度 |
 
 备注：除传入`tags`方式实现外，还可采用`ngModel`绑定数组的方式，详细使用示例参考[双向绑定](demo#ng-model)。
 

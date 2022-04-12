@@ -8,35 +8,27 @@ import { TabsModule } from './tabs.module';
 @Component({
   template: `<d-tabs #tabs [type]="'tabs'" [(activeTab)]="activeTab" [beforeChange]="beforeChange"
     (activeTabChange)="activeTabChange($event)">
-    <d-tab [id]="Tab1.id" [title]="Tab1.title" [tabId]="Tab1.id">
-      <ng-template dTabContent>
-        <p>
-          这是Tab1的内容
-        </p>
-      </ng-template>
+    <d-tab [id]="Tab1.id" [title]="Tab1.title">
+      <p>
+        这是Tab1的内容
+      </p>
     </d-tab>
 
-    <d-tab [id]="Tab2.id" [title]="Tab2.title" [tabId]="Tab2.id" [disabled]="true">
-      <ng-template dTabContent>
-        <p>
-          这是Tab2的内容
-        </p>
-      </ng-template>
+    <d-tab [id]="Tab2.id" [title]="Tab2.title" [disabled]="true">
+      <p>
+        这是Tab2的内容
+      </p>
     </d-tab>
 
-    <d-tab [id]="Tab3.id" [title]="Tab3.title" [tabId]="Tab3.id">
-      <ng-template dTabContent>
-        <p>
-          这是Tab3的内容
-        </p>
-      </ng-template>
+    <d-tab [id]="Tab3.id" [title]="Tab3.title">
+      <p>
+        这是Tab3的内容
+      </p>
     </d-tab>
-    <d-tab [id]="Tab4.id" [title]="Tab4.title" [tabId]="Tab4.id">
-      <ng-template dTabContent>
-        <p>
-          这是Tab4的内容
-        </p>
-      </ng-template>
+    <d-tab [id]="Tab4.id" [title]="Tab4.title">
+      <p>
+        这是Tab4的内容
+      </p>
     </d-tab>
   </d-tabs>`,
 })
@@ -72,9 +64,7 @@ class TestTabsComponent {
       <ng-template dTabTitle>
         {{ item.title }}
       </ng-template>
-      <ng-template dTabContent>
-        {{ item.content }}
-      </ng-template>
+      {{ item.content }}
     </d-tab>
   </d-tabs>`,
 })

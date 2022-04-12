@@ -38,7 +38,6 @@
     [ngStyle]="{ 'min-height': filterBoxHeight ? filterBoxHeight : '60px' }"
   >
     <ng-template
-      *ngIf="filterDropdown.isOpen"
       [ngTemplateOutlet]="customFilterTemplate || (filterMultiple ? filterContentTmplForMultiple : filterContentTmplForRadio)"
       [ngTemplateOutletContext]="{
         $implicit: this,

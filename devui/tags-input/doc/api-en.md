@@ -31,6 +31,7 @@ In the page:
 |   placeholder   |            `boolean`            |           ''            |                               Optional. This parameter specifies the placeholder in the text box.                                | [Basic Usage](demo#basic-usage)          |
 |    minLength    |            `number`             |            3            |                                      Optional. Enter the minimum length of the tag content.                                      | [Basic Usage](demo#basic-usage)          |
 |    maxLength    |            `number`             | Number.MAX_SAFE_INTEGER |                                      Optional. Enter the maximum length of the tag content.                                      | [Basic Usage](demo#basic-usage)          |
+|     minTags     |            `number`             |            0            |                                      Optional. Minimum number of tags that can be entered                                       | [Basic Usage](demo#basic-usage)    |
 |     maxTags     |            `number`             | Number.MAX_SAFE_INTEGER |                                       Optional. Maximum number of tags that can be entered                                       | [Basic Usage](demo#basic-usage)          |
 | caseSensitivity |            `boolean`            |          false          |                                   Optional. Is case sensitive. The default value is ignoring.                                    | [Basic Usage](demo#basic-usage)          | Write         |
 |   spellcheck    |            `boolean`            |          true           |                           Optional. Indicates whether to enable spelling check in the input text box.                            | [Basic Usage](demo#basic-usage)          | spellcheck    |
@@ -42,6 +43,8 @@ In the page:
 |  appendToBody   |            `boolean`            |          false          |                           Optional. Whether to append to body is displayed in the drop-down list box.                            | [NgModel](demo#ng-model)                 |
 |  itemTemplate   |          `TemplateRef`          |           --            |                                          Optional. Customized option display template.                                           | [NgModel](demo#ng-model)                 |
 |  virtualScroll  |            `boolean`            |          false          |           Optional. Whether to use virtual scrolling. This parameter is used in scenarios with a large amount of data.           | [Virtual scrolling](demo#virtual-scroll) |
+| multiline | `boolean` | true | Optional. It indicates whether to display two lines. |
+| maxHeight | `string` | -- | Optional. Maximum height of the selected label container. |
 
 Note: In addition to the "tags" mode, you can also use the "ngModel" mode to bind arrays. For details, see [NgModel](demo#ng-model).
 

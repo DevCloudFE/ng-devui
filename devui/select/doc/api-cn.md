@@ -21,7 +21,7 @@ import { SelectModule } from 'ng-devui/select';
 |                     options                      |                       `array`                       |                        []                        | 可选, 和 searchFn 互斥，两者必须有且只有一个。下拉选项资源`string` `object`                                                                                                         | [基本用法](demo#basic-usage)                                |
 |                     isSearch                     |                      `boolean`                      |                      false                       | 可选,是否支持过滤搜索                                                                                                                                                               | [使用对象](demo#object-filter)                              |
 |                   scrollHight                    |                      `string`                       |                     '300px'                      | 可选,下拉菜单高度,建议使用 px 作为高度单位                                                                                                                                          |
-|                highlightItemClass                |                      `string`                       |                    'bg-grey'                     | 可选,下拉高亮 css                                                                                                                                                                   |
+|                highlightItemClass                |                      `string`                       |                     'active'                     | 可选,下拉高亮 css                                                                                                                                                                   |
 |                    filterKey                     |                      `string`                       |                        --                        | 当传入资源 options 类型为 object 时,必选,针对传入资源 options 的每项对应字段做过滤操作                                                                                              | [使用对象](demo#object-filter)                              |
 |                     multiple                     |                      `boolean`                      |                      false                       | 可选,是否支持多选                                                                                                                                                                   | [自定义搜索功能](demo#custom-search)                        |
 |                   isSelectAll                    |                      `boolean`                      |                      false                       | 可选,是否显示全选                                                                                                                                                                   | [全选下拉选项](demo#select-all)                             |
@@ -64,6 +64,7 @@ import { SelectModule } from 'ng-devui/select';
 |                 templateItemSize                 |                      `number`                       |                      false                       | `待完善`可选，模板单条高度, appendToBody 必须为 true                                                                                                                                |
 |                loadingTemplateRef                |                 `TemplateRef<any>`                  |                        --                        | 可选，自定义 loading 模板                                                                                                                                                           | [虚拟滚动 或 懒加载](demo#lazy-load-virtual-scroll)         |
 |  showAnimation   |             `boolean`              |                                 true                                  |  可选，是否开启动画 |   | ✔ |
+| color | `string` | -- | 可选，复选框颜色 |   |
 
 ### d-select 事件
 
@@ -80,12 +81,12 @@ npm install @angular/cdk --save
 ```
 
 ```TypeScript
-import { ScrollDispatchModule } from '@angular/cdk/scrolling';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @NgModule({
   imports: [
     // ...
-    ScrollDispatchModule,
+    ScrollingModule,
     // ...
   ]
 })

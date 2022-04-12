@@ -26,10 +26,11 @@
     [sceneType]="'select'"
     [dAutoCompleteWidth]="width"
     dAutoComplete
-    [showAnimation]="showAnimation"
-    (selectValue)="selectValue($event)"
     [enableLazyLoad]="enableLazyLoad"
+    [showAnimation]="showAnimation"
+    (toggleChange)="toggleChangeHandler($event)"
     (loadMore)="loadMoreEvent($event)"
+    (selectValue)="selectValue($event)"
   />
   <span class="devui-form-control-feedback">
     <span class="devui-select-chevron-icon">

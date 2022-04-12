@@ -82,3 +82,4 @@ constructor( private loadingService: LoadingService ) {}
 |    positionType    |           `'static' \| 'relative' \| 'absolute' \| 'fixed' \|'sticky'`           |       'relative'       | 可选，指定`dLoading`宿主元素的定位类型, |[服务方式调用](demo#full-screen)
 |        view        | `{top?:string,left?:string}` | {top:'50%',left:'50%'} | 可选，调整 loading 的显示位置，相对于宿主元素的顶部距离与左侧距离   | [服务方式调用](demo#full-screen)   |
 |          zIndex          |            `number`             |   --   | 可选，弹出框 z-index 值                        | [服务方式调用](demo#full-screen)   |
+|         injector         |           `Injector`            |    --    | 可选，可以选择指定将用作组件的父级的注射器      |

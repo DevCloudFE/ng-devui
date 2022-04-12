@@ -96,6 +96,7 @@ import { UploadModule } from 'ng-devui/upload';
 |     fileUploaders      |           `Array<Object>`           |  []   |                       可选，获取已选择的文件列表                        | [任意区域上传](demo#customize-area-upload) |
 |       enableDrop       |              `boolean`              | false |                           可选，是否支持拖拽                            | [任意区域上传](demo#customize-area-upload) |
 | dynamicUploadOptionsFn | [`IUploadOptions`](#iuploadoptions) |  --   | 为文件动态设置自定义的上传参数, 参数为当前选中文件及`uploadOptions`的值 | [任意区域上传](demo#customize-area-upload) |
+|      beforeUpload      | `boolean \| Promise<boolean> \| Observable<boolean>` |     --     | 可选，上传前的回调，通过返回`true` or `false` ,控制文件是否上传,参数为文件信息及上传配置 |
 
 ## dUpload 事件
 
@@ -150,6 +151,10 @@ import { UploadModule } from 'ng-devui/upload';
 
 ```ts
 export class IUploadOptions {
+  // 是否开启分片上传 (单文件) 默认是关闭
+  isChunked?: boolean;
+  // 分片大小 (单文件) 默认分片大小 20兆。
+  chunkSize?: number;
   // 上传接口地址
   uri: string;
   // http 请求方法

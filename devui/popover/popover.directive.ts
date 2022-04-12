@@ -53,12 +53,14 @@ export class PopoverDirective implements OnInit, OnDestroy {
    * 是否显示动画
    */
   @Input() @WithConfig() showAnimation = true;
+
   /**
    * @deprecated Use showAnimation to replace.
    */
   @Input() set showAnimate(isShowAnimate: any) {
     this.showAnimation = isShowAnimate;
   }
+
   /**
    * `scrollElement` 默认值是 `window `, 可以不传，只有当页面的滚动不在 window 且`appendToBody`属性为`true`上的时候才需要传递
    */
@@ -76,11 +78,11 @@ export class PopoverDirective implements OnInit, OnDestroy {
   // 触发 popover 的方式（点击/鼠标悬停等）
   @Input() trigger: TriggerType = 'click';
 
-  // 是否可以移入popover内部
-  @Input() hoverToContent = false; // 废弃
-
-  // 设置样式
-  @Input() popoverStyle: object;
+  /**
+   * @deprecated
+   * 是否可以移入popover内部
+   */
+  @Input() hoverToContent = false;
 
   /**
    * @deprecated Use mouseLeaveDelay to replace.
@@ -90,6 +92,9 @@ export class PopoverDirective implements OnInit, OnDestroy {
   @Input() set hoverDelayTime(delayTime: any) {
     this.mouseLeaveDelay = delayTime;
   }
+
+  // 设置样式
+  @Input() popoverStyle: object;
 
   // 防止每次鼠标不小心经过目标元素就会显示出PopOver的内容，所以增加适当的延迟。
   @Input() mouseEnterDelay = 150;

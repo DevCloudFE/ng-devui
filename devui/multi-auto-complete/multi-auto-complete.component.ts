@@ -37,10 +37,14 @@ export class MultiAutoCompleteComponent implements OnInit, OnChanges, ControlVal
   static ID_SEED = 0;
   @Input() appendToBody = false;
   @Input() appendToBodyDirections: Array<AppendToBodyDirection | ConnectedPosition> = ['rightDown', 'leftDown', 'rightUp', 'leftUp'];
+  /**
+   * @deprecated
+   */
   @Input() cssClass: string;
-  /*
-  overview: border none multiline single
-  */
+  /**
+   * @deprecated
+   * overview: border none multiline single
+   */
   @Input() overview = 'border';
   @Input() tipsText: string; // 提示文字
   @Input() placeholder = ''; // placeholder
