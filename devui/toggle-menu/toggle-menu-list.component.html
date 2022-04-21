@@ -1,4 +1,5 @@
 <ul
+  #dropdownMenuWrap
   class="devui-dropdown-menu-wrap {{ size ? 'devui-dropdown-menu-' + size : '' }}"
   dLoading
   positionType="relative"
@@ -6,7 +7,6 @@
   [message]="i18nCommonText?.loading"
   [loadingTemplateRef]="loadingTemplateRef"
   [backdrop]="true"
-  (click)="$event.stopPropagation(); $event.preventDefault()"
 >
   <ng-content></ng-content>
   <ul
