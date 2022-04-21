@@ -7,16 +7,19 @@ import {
   EventEmitter,
   forwardRef,
   Input,
+  NgZone,
   OnDestroy,
   OnInit,
   Output,
   Renderer2,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
-import { fromEvent, Subject, Subscription } from 'rxjs';
+import { fromEvent, Subject } from 'rxjs';
 import { debounceTime, filter, map, takeUntil } from 'rxjs/operators';
+
+const NOOP = (value: string) => {};
 
 @Component({
   selector: 'd-search',
@@ -34,8 +37,7 @@ import { debounceTime, filter, map, takeUntil } from 'rxjs/operators';
   ],
 })
 export class SearchComponent implements ControlValueAccessor, OnInit, OnDestroy, AfterViewInit {
-  constructor(private renderer: Renderer2, private i18n: I18nService, private cdr: ChangeDetectorRef, private el: ElementRef) {
-  }
+  constructor(private ngZone: NgZone, private renderer: Renderer2, private i18n: I18nService, private cdr: ChangeDetectorRef) {}
 
   /**
    * 【可选】下拉选框尺寸
@@ -54,15 +56,15 @@ export class SearchComponent implements ControlValueAccessor, OnInit, OnDestroy,
   @Input() noBorder = false;
   @Input() autoFocus = false;
   @Output() searchFn = new EventEmitter<string>();
-  @ViewChild('filterInput', { static: true }) filterInputElement: ElementRef;
+  /** The native `<input class="devui-input" />` element. */
+  @ViewChild('filterInput', { static: true }) filterInputElement: ElementRef<HTMLInputElement>;
   @ViewChild('line') lineElement: ElementRef;
   @ViewChild('clearIcon') clearIconElement: ElementRef;
   i18nCommonText: I18nInterface['common'];
-  i18nSubscription: Subscription;
   clearIconExit = false;
   width: number;
-  destroy$ = new Subject();
-  private onChange = (_: any) => null;
+  private destroy$ = new Subject<void>();
+  private onChange = NOOP;
   private onTouch = () => null;
 
   ngOnInit() {
@@ -84,7 +86,8 @@ export class SearchComponent implements ControlValueAccessor, OnInit, OnDestroy,
 
   setI18nText() {
     this.i18nCommonText = this.i18n.getI18nText().common;
-    this.i18nSubscription = this.i18n.langChange()
+    this.i18n
+      .langChange()
       .pipe(takeUntil(this.destroy$))
       .subscribe((data) => {
         this.i18nCommonText = data.common;
@@ -117,25 +120,47 @@ export class SearchComponent implements ControlValueAccessor, OnInit, OnDestroy,
     }
   }
 
-  registerFilterChange() {
-    fromEvent(this.filterInputElement.nativeElement, 'input')
-      .pipe(
-        takeUntil(this.destroy$),
-        map((e: any) => e.target.value),
-        debounceTime(this.delay))
-      .subscribe((value) => {
-        this.onChange(value);
-        if (this.isKeyupSearch) {
-          this.searchFn.emit(value);
-        }
-      });
+  registerFilterChange(): void {
+    this.ngZone.runOutsideAngular(() => {
+      fromEvent(this.filterInputElement.nativeElement, 'input')
+        .pipe(
+          filter(
+            () =>
+              // The following condition checks 2 things:
+              // 1) if `SearchComponent` acts as a value accessor (`onChange !== NOOP`),
+              //    it means that `ngModel` or `formControl` directive is bound. Otherwise,
+              //    `registerOnChange` will not be called and `onChange` will not be re-assigned.
+              // 2) if `keyupSearch` is truthy and `searchFn` is observed within the parent component
+              //    through `(searchFn)="onSearchFn($event)"`
+              // We'll skip running change detection if these conditions are not met.
+              this.onChange !== NOOP || (this.isKeyupSearch && this.searchFn.observers.length > 0)
+          ),
+          map((event: KeyboardEvent) => (event.target as HTMLInputElement).value),
+          debounceTime(this.delay),
+          takeUntil(this.destroy$)
+        )
+        .subscribe((value) => {
+          this.ngZone.run(() => {
+            this.onChange(value);
+            if (this.isKeyupSearch) {
+              this.searchFn.emit(value);
+            }
+            this.cdr.markForCheck();
+          });
+        });
 
-    fromEvent(this.filterInputElement.nativeElement, 'keydown').pipe(
-      takeUntil(this.destroy$),
-      filter((keyEvent: KeyboardEvent) => keyEvent.key === 'Enter'),
-      debounceTime(this.delay),
-    ).subscribe((keyEvent) => {
-      this.searchFn.emit(this.filterInputElement.nativeElement.value);
+      fromEvent(this.filterInputElement.nativeElement, 'keydown')
+        .pipe(
+          takeUntil(this.destroy$),
+          filter((keyEvent: KeyboardEvent) => keyEvent.key === 'Enter' && this.searchFn.observers.length > 0),
+          debounceTime(this.delay)
+        )
+        .subscribe(() => {
+          this.ngZone.run(() => {
+            this.searchFn.emit(this.filterInputElement.nativeElement.value);
+            this.cdr.markForCheck();
+          });
+        });
     });
   }
 
@@ -162,6 +187,6 @@ export class SearchComponent implements ControlValueAccessor, OnInit, OnDestroy,
   }
 
   ngOnDestroy() {
-    this.destroy$.next(true);
+    this.destroy$.next();
   }
 }
