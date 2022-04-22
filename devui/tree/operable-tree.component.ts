@@ -14,8 +14,7 @@ import {
   ViewChildren
 } from '@angular/core';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
-import { expandCollapseForDomDestroy } from 'ng-devui/utils';
-import { DevConfigService, WithConfig } from 'ng-devui/utils/globalConfig';
+import { DevConfigService, expandCollapseForDomDestroy, WithConfig } from 'ng-devui/utils';
 import { Subscription } from 'rxjs';
 import { Dictionary, ITreeItem, ITreeNodeData, TreeNode } from './tree-factory.class';
 import { TreeComponent } from './tree.component';

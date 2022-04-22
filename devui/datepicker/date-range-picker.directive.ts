@@ -23,11 +23,12 @@ import {
   addClassToOrigin,
   DateConverter,
   DefaultDateConverter,
+  DevConfigService,
   fadeInOut,
   formWithDropDown,
-  removeClassFromOrigin
+  removeClassFromOrigin,
+  WithConfig
 } from 'ng-devui/utils';
-import { DevConfigService, WithConfig } from 'ng-devui/utils/globalConfig';
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime, filter, map } from 'rxjs/operators';
 import { DatePickerConfigService as DatePickerConfig } from './date-picker.config.service';

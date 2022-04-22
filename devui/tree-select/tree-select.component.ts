@@ -19,8 +19,7 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { ICheckboxInput, ITreeItem, OperableTreeComponent, TreeNode } from 'ng-devui/tree';
-import { addClassToOrigin, removeClassFromOrigin } from 'ng-devui/utils';
-import { DevConfigService, WithConfig } from 'ng-devui/utils/globalConfig';
+import { addClassToOrigin, DevConfigService, removeClassFromOrigin, WithConfig } from 'ng-devui/utils';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import DefaultIcons from './tree-default-icons';

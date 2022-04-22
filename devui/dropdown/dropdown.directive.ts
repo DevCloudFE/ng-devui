@@ -5,8 +5,7 @@ import {
   OnChanges, OnDestroy, Optional, Output, QueryList, SimpleChanges,
   SkipSelf
 } from '@angular/core';
-import { addClassToOrigin, formWithDropDown, removeClassFromOrigin } from 'ng-devui/utils';
-import { DevConfigService, WithConfig } from 'ng-devui/utils/globalConfig';
+import { addClassToOrigin, DevConfigService, formWithDropDown, removeClassFromOrigin, WithConfig } from 'ng-devui/utils';
 import { fromEvent, merge, Observable, ReplaySubject, Subscription } from 'rxjs';
 import { debounceTime, filter, mapTo, tap } from 'rxjs/operators';
 import { DropDownService } from './dropdown.service';

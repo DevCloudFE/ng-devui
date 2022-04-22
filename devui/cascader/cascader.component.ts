@@ -6,7 +6,7 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DropDownAppendToBodyComponent, DropDownDirective } from 'ng-devui/dropdown';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
-import { DevConfigService, WithConfig } from 'ng-devui/utils/globalConfig';
+import { DevConfigService, WithConfig } from 'ng-devui/utils';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, takeUntil } from 'rxjs/operators';
 import { CascaderService } from './cascader.service';

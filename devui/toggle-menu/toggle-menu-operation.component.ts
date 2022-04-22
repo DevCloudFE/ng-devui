@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { DevConfigService, WithConfig } from 'ng-devui/utils/globalConfig';
+import { DevConfigService, WithConfig } from 'ng-devui/utils';
 
 @Component({
   selector: 'd-toggle-menu-operation',

@@ -27,9 +27,10 @@ import {
   AnimationDuration,
   DateConverter,
   DefaultDateConverter,
-  removeClassFromOrigin
+  DevConfigService,
+  removeClassFromOrigin,
+  WithConfig
 } from 'ng-devui/utils';
-import { DevConfigService, WithConfig } from 'ng-devui/utils/globalConfig';
 import { fromEvent, Observable, Subscription } from 'rxjs';
 import { debounceTime, filter, map } from 'rxjs/operators';
 import { SelectDateChangeEventArgs, SelectDateChangeReason } from './date-change-event-args.model';

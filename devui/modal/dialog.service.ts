@@ -7,7 +7,7 @@ import {
   Renderer2, RendererFactory2
 } from '@angular/core';
 import { OverlayContainerRef } from 'ng-devui/overlay-container';
-import { DevConfigService } from 'ng-devui/utils/globalConfig';
+import { DevConfigService } from 'ng-devui/utils';
 import { assign, isUndefined } from 'lodash-es';
 import { ModalContainerComponent } from './modal-container.component';
 import { ModalComponent } from './modal.component';

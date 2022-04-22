@@ -35,11 +35,12 @@ import {
   addClassToOrigin,
   AppendToBodyDirection,
   AppendToBodyDirectionsConfig,
+  DevConfigService,
   fadeInOut,
   formWithDropDown,
-  removeClassFromOrigin
+  removeClassFromOrigin,
+  WithConfig
 } from 'ng-devui/utils';
-import { DevConfigService, WithConfig } from 'ng-devui/utils/globalConfig';
 import { WindowRef } from 'ng-devui/window-ref';
 import { BehaviorSubject, fromEvent, Observable, of, Subscription } from 'rxjs';
 import { debounceTime, filter, map, switchMap } from 'rxjs/operators';
