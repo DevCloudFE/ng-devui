@@ -2,17 +2,22 @@ import {
   AfterViewInit,
   Component,
   ContentChildren,
+  ElementRef,
   EventEmitter,
   forwardRef,
-  HostListener,
   Input,
+  NgZone,
   OnChanges,
+  OnDestroy,
+  OnInit,
   Output,
   QueryList,
-  SimpleChanges
+  SimpleChanges,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { fromEvent, Observable, Subject } from 'rxjs';
+import { filter, switchMap, takeUntil } from 'rxjs/operators';
+
 import { RadioComponent } from './radio.component';
 
 @Component({
@@ -28,8 +33,7 @@ import { RadioComponent } from './radio.component';
   ],
   preserveWhitespaces: false,
 })
-export class RadioGroupComponent implements ControlValueAccessor, OnChanges, AfterViewInit {
-  constructor() {}
+export class RadioGroupComponent implements ControlValueAccessor, OnChanges, OnInit, AfterViewInit, OnDestroy {
   @Input() name: string;
   @Input() values: any[];
   /**
@@ -47,18 +51,34 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges, Aft
   _value: any;
   onChange: (_: any) => null;
   onTouched: () => null;
-  @HostListener('click', ['$event'])
-  onRadioChange(event) {
-    if (event.target.tagName.toLowerCase() === 'input') {
-      if (this.disabled) {
-        event.preventDefault();
-      }
-      this.canChange().then((change) => {
-        if (!change) {
-          event.preventDefault();
-        }
-      });
-    }
+
+  private destroy$ = new Subject<void>();
+
+  constructor(private ngZone: NgZone, private host: ElementRef<HTMLElement>) {}
+
+  ngOnInit(): void {
+    this.ngZone.runOutsideAngular(() =>
+      fromEvent(this.host.nativeElement, 'click')
+        .pipe(
+          filter((event) => (event.target as HTMLElement).tagName.toLowerCase() === 'input'),
+          switchMap((event) => {
+            if (this.disabled) {
+              event.preventDefault();
+            }
+            return this.canChange().then((change) => ({ event, change }));
+          }),
+          takeUntil(this.destroy$)
+        )
+        .subscribe(({ event, change }) => {
+          if (!change) {
+            event.preventDefault();
+          }
+        })
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
   }
 
   ngAfterViewInit(): void {
