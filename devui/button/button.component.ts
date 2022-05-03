@@ -5,11 +5,13 @@ import {
   Component,
   ElementRef,
   EventEmitter,
-  HostListener,
   Input,
+  NgZone,
+  OnDestroy,
+  OnInit,
   Output,
   TemplateRef,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
 export type IButtonType = 'button' | 'submit' | 'reset';
 /**
@@ -26,7 +28,7 @@ export type IButtonSize = 'lg' | 'md' | 'sm' | 'xs';
   changeDetection: ChangeDetectionStrategy.OnPush,
   preserveWhitespaces: false,
 })
-export class ButtonComponent implements AfterContentChecked {
+export class ButtonComponent implements OnInit, AfterContentChecked, OnDestroy {
   @Input() id: string;
   @Input() type: IButtonType = 'button';
   @Input() bsStyle: IButtonStyle = 'primary';
@@ -45,23 +47,21 @@ export class ButtonComponent implements AfterContentChecked {
   @Input() loadingTemplateRef: TemplateRef<any>;
   @Output() btnClick = new EventEmitter<MouseEvent>();
   @ViewChild('buttonContent', { static: true }) buttonContent: ElementRef;
+  /** The native `<button class="devui-btn"></button>` element. */
+  @ViewChild('button', { static: true }) button: ElementRef<HTMLButtonElement>;
 
-  @HostListener('click', ['$event'])
-  handleDisabled($event: Event) {
-    if (this.disabled) {
-      $event.preventDefault();
-      $event.stopImmediatePropagation();
-    }
+  constructor(private cd: ChangeDetectorRef, private host: ElementRef<HTMLElement>, private ngZone: NgZone) {}
+
+  ngOnInit(): void {
+    this.ngZone.runOutsideAngular(() => {
+      this.host.nativeElement.addEventListener('click', this.handleDisabled);
+      this.button.nativeElement.addEventListener('click', this.handleNativeButtonClick);
+    });
   }
 
-  constructor(private cd: ChangeDetectorRef) {
-  }
-
-  // 新增click事件，解决直接在host上使用click，在disabled状态下还能触发事件
-  onClick(event) {
-    if (!this.showLoading) {
-      this.btnClick.emit(event);
-    }
+  ngOnDestroy(): void {
+    this.host.nativeElement.removeEventListener('click', this.handleDisabled);
+    this.button.nativeElement.removeEventListener('click', this.handleNativeButtonClick);
   }
 
   ngAfterContentChecked(): void {
@@ -71,4 +71,20 @@ export class ButtonComponent implements AfterContentChecked {
   hasContent() {
     return !!this.buttonContent && this.buttonContent.nativeElement && this.buttonContent.nativeElement.innerHTML.trim();
   }
+
+  private handleDisabled = (event: MouseEvent): void => {
+    if (this.disabled) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+    }
+  };
+
+  private handleNativeButtonClick = (event: MouseEvent): void => {
+    if (!this.showLoading && this.btnClick.observers.length) {
+      this.ngZone.run(() => {
+        this.btnClick.emit(event);
+        this.cd.markForCheck();
+      });
+    }
+  };
 }

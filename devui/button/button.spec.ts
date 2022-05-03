@@ -1,4 +1,4 @@
-import { Component, DebugElement } from '@angular/core';
+import { ApplicationRef, Component, DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { ButtonModule } from 'ng-devui/button';
@@ -15,9 +15,9 @@ import { ButtonComponent } from './button.component';
       [icon]="icon"
       [showLoading]="loading"
     >
-      {{text}}
+      {{ text }}
     </d-button>
-  `
+  `,
 })
 class TestButtonComponent {
   bsStyle = 'primary';
@@ -34,9 +34,7 @@ class TestButtonComponent {
   }
 }
 @Component({
-  template: `
-    <d-button [autofocus]="true" *ngIf="show">{{text}}</d-button>
-  `
+  template: ` <d-button [autofocus]="true" *ngIf="show">{{ text }}</d-button> `,
 })
 class TestButtonAutoFocusComponent {
   show = false;
@@ -44,24 +42,26 @@ class TestButtonAutoFocusComponent {
 
 describe('Button', () => {
   let fixture: ComponentFixture<any>;
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      imports: [ButtonModule],
-      declarations: [TestButtonComponent, TestButtonAutoFocusComponent],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [ButtonModule],
+        declarations: [TestButtonComponent, TestButtonAutoFocusComponent],
+      }).compileComponents();
+    })
+  );
 
   describe('Button Core', () => {
     let testComponent: TestButtonComponent;
     let buttonDebugElement: DebugElement;
     let buttonInsideNativeElement: HTMLElement;
-    beforeEach((() => {
+    beforeEach(() => {
       fixture = TestBed.createComponent(TestButtonComponent);
       testComponent = fixture.debugElement.componentInstance;
       buttonDebugElement = fixture.debugElement.query(By.directive(ButtonComponent));
       buttonInsideNativeElement = buttonDebugElement.query(By.css('button')).nativeElement;
       fixture.detectChanges();
-    }));
+    });
     describe('button default behavior', () => {
       it('Button demo has created successfully', () => {
         expect(testComponent).toBeTruthy();
@@ -188,6 +188,31 @@ describe('Button', () => {
         expect(buttonInsideNativeElement.classList.contains('devui-btn-right')).toBe(true);
       });
     });
+
+    describe('change detection behavior', () => {
+      it('should not run change detection when the `d-button` is clicked', () => {
+        const appRef = TestBed.inject(ApplicationRef);
+        spyOn(appRef, 'tick');
+
+        buttonDebugElement.nativeElement.dispatchEvent(new Event('click'));
+
+        expect(appRef.tick).not.toHaveBeenCalled();
+      });
+
+      it('should prevent default behavior and stop propagation when the button is disabled', () => {
+        testComponent.isDisabled = true;
+        fixture.detectChanges();
+
+        const event = new Event('click');
+        spyOn(event, 'preventDefault');
+        spyOn(event, 'stopImmediatePropagation');
+
+        buttonDebugElement.nativeElement.dispatchEvent(event);
+
+        expect(event.preventDefault).toHaveBeenCalled();
+        expect(event.stopImmediatePropagation).toHaveBeenCalled();
+      });
+    });
   });
 
   describe('button autoFocus', () => {
@@ -210,5 +235,4 @@ describe('Button', () => {
       expect(document.activeElement.classList.contains('devui-btn')).toBe(true);
     });
   });
-
 });
