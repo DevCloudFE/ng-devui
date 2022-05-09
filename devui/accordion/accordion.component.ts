@@ -11,7 +11,7 @@ import {
   TemplateRef
 } from '@angular/core';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
-import { DevConfigService, WithConfig } from 'ng-devui/utils/globalConfig';
+import { DevConfigService, WithConfig } from 'ng-devui/utils';
 import { Subscription } from 'rxjs';
 import { ACCORDION } from './accordion-token';
 import { AccordionItemClickEvent, AccordionMenuToggleEvent, AccordionMenuType, AccordionOptions } from './accordion.type';

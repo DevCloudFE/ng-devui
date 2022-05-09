@@ -18,8 +18,7 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { AutoCompleteDirective } from 'ng-devui/auto-complete';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
-import { AppendToBodyDirection } from 'ng-devui/utils';
-import { DevConfigService, WithConfig } from 'ng-devui/utils/globalConfig';
+import { AppendToBodyDirection, DevConfigService, WithConfig } from 'ng-devui/utils';
 import { Observable, Subscription } from 'rxjs';
 
 @Component({

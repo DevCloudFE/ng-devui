@@ -9,8 +9,7 @@ import {
   Input,
   Output
 } from '@angular/core';
-import { expandCollapseForDomDestroy } from 'ng-devui/utils';
-import { DevConfigService, WithConfig } from 'ng-devui/utils/globalConfig';
+import { DevConfigService, expandCollapseForDomDestroy, WithConfig } from 'ng-devui/utils';
 import { Observable } from 'rxjs';
 import { PanelBodyComponent } from './panel-body.component';
 import { PanelFooterComponent } from './panel-footer.component';

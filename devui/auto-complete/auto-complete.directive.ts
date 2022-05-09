@@ -23,8 +23,14 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { PositionService } from 'ng-devui/position';
-import { addClassToOrigin, AppendToBodyDirection, AppendToBodyDirectionsConfig, removeClassFromOrigin } from 'ng-devui/utils';
-import { DevConfigService, WithConfig } from 'ng-devui/utils/globalConfig';
+import {
+  addClassToOrigin,
+  AppendToBodyDirection,
+  AppendToBodyDirectionsConfig,
+  DevConfigService,
+  removeClassFromOrigin,
+  WithConfig
+} from 'ng-devui/utils';
 import { fromEvent, Observable, of, Subject, Subscription } from 'rxjs';
 import { debounceTime, filter, map, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { AutoCompleteConfig } from './auto-complete-config';

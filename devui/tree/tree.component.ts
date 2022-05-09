@@ -17,7 +17,7 @@ import {
 } from '@angular/core';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { expandCollapseForDomDestroy } from 'ng-devui/utils';
-import { DevConfigService, WithConfig } from 'ng-devui/utils/globalConfig';
+import { DevConfigService, WithConfig } from 'ng-devui/utils';
 import { Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import {

@@ -11,7 +11,7 @@ import {
   SimpleChanges
 } from '@angular/core';
 import { OverlayContainerRef } from 'ng-devui/overlay-container';
-import { DevConfigService, WithConfig } from 'ng-devui/utils/globalConfig';
+import { DevConfigService, WithConfig } from 'ng-devui/utils';
 import { fromEvent, Subject } from 'rxjs';
 import { debounceTime, filter, map, takeUntil } from 'rxjs/operators';
 import { TooltipComponent } from './tooltip.component';

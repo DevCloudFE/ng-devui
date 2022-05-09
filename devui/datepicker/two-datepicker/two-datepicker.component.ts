@@ -14,8 +14,7 @@ import {
   ViewChild
 } from '@angular/core';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
-import { DateConverter, DefaultDateConverter, fadeInOut } from 'ng-devui/utils';
-import { DevConfigService, WithConfig } from 'ng-devui/utils/globalConfig';
+import { DateConverter, DefaultDateConverter, DevConfigService, fadeInOut, WithConfig } from 'ng-devui/utils';
 import { Subject, Subscription } from 'rxjs';
 import { distinctUntilChanged } from 'rxjs/operators';
 import { DatePickerConfigService as DatePickerConfig } from '../date-picker.config.service';
