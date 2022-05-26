@@ -36,7 +36,7 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy,
    * 【可选】用于选择更改分页每页最大条目数量的下拉框的数据源，默认为`[5, 10, 20, 50]`
    */
   @Input() pageSizeOptions: number[] = [5, 10, 20, 50];
-  @Input() pageSizeDirection: Array<AppendToBodyDirection | ConnectedPosition> = ['centerDown', 'centerUp'];
+  @Input() pageSizeDirection: Array<AppendToBodyDirection | ConnectedPosition> = ['rightDown', 'rightUp'];
   /**
    * 【可选】初始化页码
    */
@@ -93,6 +93,7 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy,
   totalPage = 1;
   _total = 0;
   jumpPage = null;
+  rotateDegrees = 0;
 
   @Input() totalItemText: string;
   @Input() goToText: string;
@@ -124,7 +125,7 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy,
   i18nText: I18nInterface['pagination'];
   i18nLocale: I18nInterface['locale'];
   i18nSubscription: Subscription;
-  constructor(private ref: ChangeDetectorRef, private i18n: I18nService) {  }
+  constructor(private ref: ChangeDetectorRef, private i18n: I18nService) { }
 
   ngOnInit(): void {
     this.i18nText = this.i18n.getI18nText().pagination;
@@ -211,8 +212,10 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy,
   onPageIndexChange(pageIndex: number) {
     if (this.pageIndex !== pageIndex) {
       if (this.lite) {
-        this.litePaginatorIndex = { value: this.pageIndex,
-          label: `${this.pageIndex}/${this.totalPage}`};
+        this.litePaginatorIndex = {
+          value: this.pageIndex,
+          label: `${this.pageIndex}/${this.totalPage}`
+        };
       }
       this.pageIndexChange.emit(pageIndex);
     }
@@ -220,6 +223,7 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy,
 
   onPageSizeChange(size) {
     if (this.pageSize !== size) {
+      this.pageSize = size;
       this.pageSizeChange.emit(size);
       if (this.autoFixPageIndex && Math.ceil(this.total / size) < this.totalPage) {
         this.totalPage = Math.ceil(this.total / size);
@@ -306,8 +310,10 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy,
         };
       });
     }
-    this.litePaginatorIndex = { value: this.pageIndex,
-      label: `${this.pageIndex}/${this.totalPage}`};
+    this.litePaginatorIndex = {
+      value: this.pageIndex,
+      label: `${this.pageIndex}/${this.totalPage}`
+    };
   }
 
   private adjustPaginatorWidth() {
@@ -319,7 +325,9 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy,
       this.litePaginator.nativeElement.style.width = `${Math.max(minWidth, width)}px`;
     }
   }
-
+  onToggle(event) {
+    this.rotateDegrees = event ? 180 : 0;
+  }
   toggleMenu(force: boolean = null) {
     if (force !== null) {
       this.showConfig = force;

@@ -20,18 +20,19 @@
       <d-custom-loading demo></d-custom-loading>
     </d-codebox>
   </div>
-  <div class="devui-demo-example" [dAnchor]="'custom-display-field'">
-    <div class="devui-demo-title">{{ 'components.tree.customTitleKeyDemo.title' | translate }}</div>
-    <div class="devui-demo-text">{{ 'components.tree.customTitleKeyDemo.description' | translate }}</div>
-    <d-codebox id="custom-title-key" [sourceData]="customTitleKeySource">
-      <d-custom-title-key demo></d-custom-title-key>
+  <div class="devui-demo-example" [dAnchor]="'check-control-tree'">
+    <div class="devui-demo-title">{{ 'components.tree.checkControlDemo.title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.tree.checkControlDemo.description' | translate }}</div>
+    <d-codebox id="draggable" [sourceData]="checkControlSource">
+      <d-check-control demo></d-check-control>
     </d-codebox>
   </div>
-  <div class="devui-demo-example" [dAnchor]="'checkable-tree'">
-    <div class="devui-demo-title">{{ 'components.tree.checkableDemo.title' | translate }}</div>
-    <div class="devui-demo-text">{{ 'components.tree.checkableDemo.description' | translate }}</div>
-    <d-codebox id="checkable" [sourceData]="checkableSource">
-      <d-checkable demo></d-checkable>
+
+  <div class="devui-demo-example" [dAnchor]="'custom-key'">
+    <div class="devui-demo-title">{{ 'components.tree.customKeyDemo.title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.tree.customKeyDemo.description' | translate }}</div>
+    <d-codebox id="checkable" [sourceData]="customKeySource">
+      <d-custom-key demo></d-custom-key>
     </d-codebox>
   </div>
   <div class="devui-demo-example" [dAnchor]="'operation-button'">
@@ -64,13 +65,7 @@
       <d-draggable demo></d-draggable>
     </d-codebox>
   </div>
-  <div class="devui-demo-example" [dAnchor]="'check-control-tree'">
-    <div class="devui-demo-title">{{ 'components.tree.checkControlDemo.title' | translate }}</div>
-    <div class="devui-demo-text">{{ 'components.tree.checkControlDemo.description' | translate }}</div>
-    <d-codebox id="draggable" [sourceData]="checkControlSource">
-      <d-check-control demo></d-check-control>
-    </d-codebox>
-  </div>
+
   <div class="devui-demo-example" [dAnchor]="'tree-factory'">
     <div class="devui-demo-title">{{ 'components.tree.treeFactoryDemo.title' | translate }}</div>
     <div class="devui-demo-text">{{ 'components.tree.treeFactoryDemo.description' | translate }}</div>
@@ -83,13 +78,6 @@
     <div class="devui-demo-text">{{ 'components.tree.virtualScrollDemo.description' | translate }}</div>
     <d-codebox id="virtual-scroll" [sourceData]="virtualScrollSource">
       <d-virtual-scroll demo></d-virtual-scroll>
-    </d-codebox>
-  </div>
-  <div class="devui-demo-example" [dAnchor]="'without-animation'">
-    <div class="devui-demo-title">{{ 'components.tree.withoutAnimationDemo.title' | translate }}</div>
-    <div class="devui-demo-text">{{ 'components.tree.withoutAnimationDemo.description' | translate }}</div>
-    <d-codebox id="without-animation" [sourceData]="withoutAnimationSource">
-      <d-without-animation demo></d-without-animation>
     </d-codebox>
   </div>
 </div>

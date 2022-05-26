@@ -77,6 +77,20 @@ export class DatepickerProCalendarComponent implements OnInit, AfterViewInit, On
   @Input() startIndexOfWeek = 0;
   @Input() splitter = '-';
   @Input() showRangeHeader = true;
+  @Input() placeholder: string[];
+
+  @Input() set minDate(value: Date) {
+    if (!value) {
+      return;
+    }
+    this.pickerSrv.minDate = value;
+  }
+  @Input() set maxDate(value: Date) {
+    if (!value) {
+      return;
+    }
+    this.pickerSrv.maxDate = value;
+  }
 
   @Input() set markedRangeDateList(value: Date[][]) {
     this.pickerSrv.markedRangeDateList = value;

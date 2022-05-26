@@ -1,6 +1,5 @@
 <d-data-table
   #dataTable
-  [type]="'striped'"
   [fixHeader]="true"
   [dataSource]="basicDataSource"
   [showExpandToggle]="true"
@@ -8,6 +7,7 @@
   [headerExpandConfig]="headerExpandConfig"
   [fixHeader]="true"
   [scrollable]="true"
+  [tableOverflowType]="'overlay'"
   (detialToggle)="toggle($event)"
 >
   <d-column field="$index" header="#" [width]="'50px'"></d-column>

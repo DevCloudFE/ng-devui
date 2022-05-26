@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./basic.component.scss']
 })
 export class BasicComponent implements OnInit {
+  rotateDegrees = 0;
   constructor() {
 
   }
@@ -15,6 +16,7 @@ export class BasicComponent implements OnInit {
 
   onToggle(event) {
     console.log(event);
+    this.rotateDegrees = event ? 180 : 0;
   }
 
 }

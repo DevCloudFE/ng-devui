@@ -9,7 +9,7 @@
   cursor: pointer;
   width: 36px;
   height: 36px;
-  border-radius: 18px;
+  border-radius: 100%;
   background: $devui-highlight-overlay;
   box-shadow: $devui-shadow-length-hover $devui-light-shadow;
   display: inline-flex;
@@ -88,12 +88,12 @@
 
       &:hover {
         cursor: pointer;
-        background: $devui-list-item-hover-bg;
+        background: $devui-icon-fill-hover;
       }
 
       &.active {
         width: 24px;
-        background: $devui-list-item-active-bg;
+        background: $devui-icon-fill-active;
         transition: all $devui-animation-duration-slow $devui-animation-ease-in-out-smooth;
       }
     }

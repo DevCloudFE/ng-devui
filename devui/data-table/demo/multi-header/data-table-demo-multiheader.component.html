@@ -1,11 +1,11 @@
 <d-data-table
-  [type]="'striped'"
   [dataSource]="basicDataSource"
   (cellClick)="cellClick($event)"
   (cellDBClick)="cellDBClick($event)"
   (rowDBClick)="rowDBClick($event)"
   (rowClick)="rowClick($event)"
   [scrollable]="true"
+  [tableOverflowType]="'overlay'"
 >
   <d-column [order]="1" field="$index" header="#" [width]="'50px'"></d-column>
   <d-column

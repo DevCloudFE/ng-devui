@@ -25,6 +25,15 @@
     </d-tab>
   </d-tabs>
 </div>
+<div class="handle-group">
+  Shadow Type：<d-tabs type="options" [(activeTab)]="activeShadowType" [showContent]="false" (activeTabChange)="layoutChange($event)">
+    <d-tab *ngFor="let item of TypeItems" [id]="item.id">
+      <ng-template dTabTitle>
+        {{ item.title }}
+      </ng-template>
+    </d-tab>
+  </d-tabs>
+</div>
 <div class="handle-group">Header background：<d-toggle [(ngModel)]="headerBk"></d-toggle></div>
 <div class="handle-group">Stripes：<d-toggle [(ngModel)]="striped"></d-toggle></div>
 <d-data-table
@@ -36,6 +45,8 @@
   [striped]="striped"
   [size]="activeSizeTab"
   [tableLayout]="activeLayoutTab"
+  [shadowType]="activeShadowType"
+  [tableOverflowType]="'overlay'"
 >
   <thead dTableHead [checkable]="true">
     <tr dTableRow>

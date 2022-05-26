@@ -1,4 +1,11 @@
-<d-data-table [dataSource]="maxHeightDataSource" [fixHeader]="true" tableHeight="360px" [containFixHeaderHeight]="true" [scrollable]="true">
+<d-data-table
+  [dataSource]="maxHeightDataSource"
+  [tableOverflowType]="'overlay'"
+  [fixHeader]="true"
+  tableHeight="360px"
+  [containFixHeaderHeight]="true"
+  [scrollable]="true"
+>
   <thead dTableHead>
     <tr dTableRow>
       <th dHeadCell *ngFor="let colOption of dataTableOptions.columns">{{ colOption.header }}</th>

@@ -6,8 +6,8 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ButtonModule } from '../button/button.module';
 import { DomHelper } from '../utils/testing/dom-helper';
 import * as EventHelper from '../utils/testing/event-helper';
-import { ModalTestComponent } from './demo/basic/modal-test.component';
 import { ModalAlertComponent } from './demo/customize/modal-alert.component';
+import { ModalTestComponent } from './demo/modal-test.component';
 import { DialogService } from './dialog.service';
 import { ModalModule } from './modal.module';
 import { ModalService } from './modal.service';
@@ -127,7 +127,7 @@ describe('dialog', () => {
       const header = document.querySelector('d-modal-header') as HTMLElement;
       expect(header.style.cursor).toBe('move');
 
-      expect(document.querySelector('.close')).toBeTruthy();
+      expect(document.querySelector('.modal-header-close')).toBeTruthy();
 
       const body = document.querySelector('body') as HTMLElement;
       if (document.documentElement.scrollHeight > document.documentElement.clientHeight) {

@@ -187,6 +187,31 @@
         "description": "Without default icon."
       }
     },
+    "icon": {
+      "name": "Icon",
+      "type": "General",
+      "path": "icon",
+      "description": "Common icon display scenarios",
+      "basicDemo": {
+        "title": "Basic Usage",
+        "description": "Basic icon usage",
+        "default": "Default icon",
+        "operableIcon": "Interactive Icon",
+        "operableIconwithSuffix": "Icon - text suffix",
+        "operableIconwithPrefix": "Icon - text prefix",
+        "customIcon": "Customized icon"
+      },
+      "iconGroupDemo": {
+        "title": "Icon Group",
+        "description": "Use Scenarios of Common Icon Groups",
+        "operable": "Operatable icon group",
+        "exitFullscreen": "Static icon group"
+      },
+      "anchorLinkValues": {
+        "basic": "Basic",
+        "icon-group": "Icon Group"
+      }
+    },
     "animations": {
       "name": "Animations",
       "type": "Extended Service",
@@ -1168,7 +1193,9 @@
           },
           "shadowColor": {
             "devui-shadow": "shadow color",
-            "devui-light-shadow": "Weak shadow color"
+            "devui-light-shadow": "Weak shadow color",
+            "devui-connected-overlay-shadow": "Pop-up (overlay) layer with connection points shadow color",
+            "devui-feedback-overlay-shadow": "Information Prompt Feedback Class shadow color"
           }
         }
       },
@@ -1539,9 +1566,14 @@
         "operation": "Operation",
         "autoArrangement": "Automatic Continuous Compact Arrangement"
       },
+      "solutionDemo": {
+        "title": "Solution",
+        "description": "Provides a complete library addition solution"
+      },
       "anchorLinkValues": {
         "basic-usage": "Basic Usage",
-        "more-config": "More Settings"
+        "more-config": "More Settings",
+        "solution": "Solution"
       }
     },
     "datepicker": {
@@ -2191,7 +2223,7 @@
       "tmw": "When there are too many operation commands on the page, this component can be used to contain operation elements. When you click or move into a drop-down menu, You can select a value from the dropdown list.",
       "basicDemo": {
         "title": "Basic Usage",
-        "description": "test.",
+        "description": "",
         "More Operations": "More Operations",
         "Text box": "Text box",
         "Disable Options": "Disable Options",
@@ -2262,7 +2294,7 @@
       },
       "addIconDemo": {
         "title": "Adding icons",
-        "description": "test.",
+        "description": "",
         "Newly created": "Newly created",
         "Delete": "Delete",
         "Menu 1": "Menu 1",
@@ -2272,7 +2304,7 @@
       },
       "multiLevelDemo": {
         "title": "Multi-level drop-down menu",
-        "description": "test.",
+        "description": "",
         "Click": "Click",
         "More options": "More options",
         "Content 1": "Content 1",
@@ -2499,7 +2531,6 @@
         "custom-dialog": "Custom Dialog Box",
         "intercept-dialog-closed": "Blocking dialog box closed",
         "message-hint": "Information",
-        "warning-pop-up": "Warning Dialog Box",
         "update-button-options": "Update the button status in the pop-up dialog box",
         "configure-button-to-get-focus-automatically": "Configure button to automatically get focus",
         "template-content": "Customizing a pop-up box content template",
@@ -2515,7 +2546,7 @@
       "tmw": "When loading/rendering all the data takes a long time, you can use pagination to split the data.",
       "basicDemo": {
         "title": "Basic Usage",
-        "description": "test.",
+        "description": "",
         "Standard Size": "Standard Size",
         "Medium size": "Medium size",
         "Large size": "Large size",
@@ -2721,6 +2752,9 @@
       "halfDemo": {
         "title": "Half Star Mode"
       },
+      "clearDemo": {
+        "title": "Clear Star Mode"
+      },
       "typeDemo": {
         "title": "Set Color"
       },
@@ -2732,6 +2766,7 @@
         "dynamic-mode": "Dynamic Mode",
         "dynamic-mode-Custom": "Dynamic Mode-Custom",
         "half-demo": "Half Star Mode",
+        "clear-demo": "Clear Star Mode",
         "using-the-type-parameter": "Set Color",
         "template": "Custom Template"
       }
@@ -2815,7 +2850,7 @@
       },
       "AllowClearValueDemo": {
         "title": "Allow clearing values",
-        "description": "test.",
+        "description": "",
         "test": "Option"
       },
       "CustomAreaDemo": {
@@ -2827,7 +2862,7 @@
       },
       "CustomAreaDirectionDemo": {
         "title": "Customizing Area Orientation and Selecting",
-        "description": "test.",
+        "description": "",
         "Customizing Area Orientation and Selecting": "Customizing Area Orientation and Selecting",
         "Customize the region and change the width alignment by appendToBody.": "Customize the region and change the width alignment by appendToBody.",
         "Recent Selections": "Recent Selections",
@@ -2879,14 +2914,14 @@
       },
       "LoadingDemo": {
         "title": "Asynchronous loading: loading",
-        "description": "test.",
+        "description": "",
         "Lazy loading: Change the options mode.": "Lazy loading: Change the options mode.",
         "Lazy loading: The searchFn mode is used.": "Lazy loading: The searchFn mode is used.",
         "Option": "Option"
       },
       "UserLimitSelectedNumberDemo": {
         "title": "User scenario: The number of selected users is limited.",
-        "description": "test.",
+        "description": "",
         "maxselectnumber:2,disabled:1": "max select number:2, disabled:1",
         "Option": "Option"
       },
@@ -2898,7 +2933,7 @@
       },
       "UserSearchNLazyLoadDemo": {
         "title": "User scenario: lazy loading of custom search",
-        "description": "test.",
+        "description": "",
         "Search and lazy loading are used together.": "Search and lazy loading are used together.",
         "Current Select": "Current Select",
         "This is a longer option for testing.": "This is a longer option for testing.",
@@ -2907,7 +2942,7 @@
       },
       "UserMailSearchDemo": {
         "title": "User scenario: Combine customized search and template Email search",
-        "description": "test.",
+        "description": "",
         "Search by name or email address": "Search by name or email address",
         "Name:": "Name:",
         "E-mail address:": "E-mail address:",
@@ -2915,7 +2950,7 @@
       },
       "ModelValueDemo": {
         "title": "ngModel Value Processing",
-        "description": "test.",
+        "description": "",
         "Current Select": "Current Select",
         "Option": "Option"
       },
@@ -3094,62 +3129,48 @@
       "tmw": "When users want to collect and display large pieces of content in areas at the same level to keep the GUI neat.",
       "basicDemo": {
         "title": "Basic Usage",
-        "description": "test.",
-        "Here's what Tab1 says.": "Here's what Tab1 says.",
-        "This is Tab2.": "This is Tab2.",
-        "This is Tab3.": "This is Tab3."
+        "description": ""
       },
       "withoutContentDemo": {
         "title": "No Content",
-        "description": "test.",
+        "description": "",
         "activeID": "activeID"
       },
       "customDemo": {
         "title": "Customizing a Template",
-        "description": "test.",
-        "Here's what Tab1 says.": "Here's what Tab1 says.",
-        "This is Tab2.": "This is Tab2.",
-        "This is Tab3.": "This is Tab3."
+        "description": ""
       },
       "typePillsDemo": {
         "title": "Type Pills",
-        "description": "test.",
-        "Here's what Tab1 says.": "Here's what Tab1 says.",
-        "This is Tab2.": "This is Tab2.",
-        "This is Tab3.": "This is Tab3."
+        "description": ""
       },
       "typeOptionsDemo": {
         "title": "Type Options",
-        "description": "test.",
-        "Here's what Tab1 says.": "Here's what Tab1 says.",
-        "This is Tab2.": "This is Tab2.",
-        "This is Tab3.": "This is Tab3."
+        "description": ""
       },
       "typeSliderDemo": {
         "title": "Type Slider",
-        "description": "test.",
-        "Here's what Tab1 says.": "Here's what Tab1 says.",
-        "This is Tab2.": "This is Tab2.",
-        "This is Tab3.": "This is Tab3."
+        "description": ""
       },
       "typeWrappedDemo": {
         "title": "Type Wrapped",
-        "description": "test.",
-        "Here's what Tab1 says.": "Here's what Tab1 says.",
-        "This is Tab2.": "This is Tab2.",
-        "This is Tab3.": "This is Tab3."
+        "description": ""
+      },
+      "sizeDemo": {
+        "title": "Size",
+        "description": "Tabs are available in four sizes. You can select a proper size based on your business scenario."
       },
       "beforeChangeDemo": {
         "title": "Intercept Tab Switching",
-        "description": "Using beforeChange to intercept tab switchover.",
-        "Here's what Tab1 says.": "Here's what Tab1 says.",
-        "This is Tab2.": "This is Tab2.",
-        "This is Tab3.": "This is Tab3."
+        "description": "Using beforeChange to intercept tab switchover."
       },
-      "configurableTabsDemo": {
-        "title": "Customizing Tabs Display and Arrange",
-        "description": "The transfer component is introduced to implement customized tabs display.",
-        "activeID": "activeID"
+      "addDeleteDemo": {
+        "title": "Add / Remove",
+        "description": "Add and Remove Tabs"
+      },
+      "bigDataDemo": {
+        "title": "Big data display",
+        "description": "A lot of tab switching"
       },
       "anchorLinkValues": {
         "basic-usage": "Basic Usage",
@@ -3159,8 +3180,10 @@
         "type-options": "Type Options",
         "type-slider": "Type Slider",
         "type-wrapped": "Type Wrapped",
+        "size": "Size",
         "intercept-tab-switch": "Intercept Tab Switching",
-        "custom-tabs-display-and-arrangement": "Customizing Tabs Display and Arrange"
+        "add-delete": "Add / Remove",
+        "big-data": "Big data display"
       }
     },
     "tags": {
@@ -3408,7 +3431,7 @@
         "folding": "folding"
       },
       "checkControlDemo": {
-        "title": "Controlling the Parent-Child Check Relationship",
+        "title": "Checkable Tree",
         "description": "The usage of checkableRelation controls the performance of parent and child nodes during check.",
         "Parent node": "Parent node",
         "unfold": "unfold",
@@ -3421,26 +3444,17 @@
         "title": "Common treeFactory functions",
         "description": ""
       },
-      "checkableDemo": {
-        "title": "Checkable Tree",
-        "description": "Tree that can be checked.",
+      "customKeyDemo": {
+        "title": "Custom Key",
+        "description": "Custom key of tree node",
         "Subnode": "Subnode",
         "Parent node": "Parent node"
       },
       "customLoadingDemo": {
-        "title": "Customizing a Loading Template",
+        "title": "Node Lazyload",
         "Leaf node": "Leaf node",
         "No child node": "No child node",
         "Dynamic loading": "Dynamic loading",
-        "Parent node": "Parent node",
-        "unfold": "unfold",
-        "folding": "folding"
-      },
-      "customTitleKeyDemo": {
-        "title": "Custom Display Fields",
-        "description": "Set treeNodeTitleKey to customize the keywords displayed and searched in the tree.",
-        "Leaf node": "Leaf node",
-        "No child node": "No child node",
         "Parent node": "Parent node",
         "unfold": "unfold",
         "folding": "folding"
@@ -3493,24 +3507,19 @@
         "Leaf node": "Leaf node",
         "unfold": "unfold"
       },
-      "withoutAnimationDemo": {
-        "title": "Without Animation",
-        "description": "Indicates whether to display animations for the showAnimation attribute."
-      },
       "anchorLinkValues": {
         "basic-usage": "Basic Usage",
         "merge-node": "Merging Nodes",
-        "custom-loading": "Customizing a Loading Template",
-        "custom-display-field": "Custom Display Fields",
+        "lazy-loading": "Node Lazyload ",
+        "custom-key": "Custom Key",
+        "check-control-tree": "Checkable Tree",
         "checkable-tree": "Checkable Tree",
         "operation-button": "Operation button",
         "search-filtering": "Search Filtering",
         "custom-icon": "Custom Icon",
         "drag-and-drop-tree": "Dragable tree",
         "tree-factory": "Common treeFactory functions",
-        "check-control-tree": "Controlling the Parent-Child Check Relationship",
-        "virtual-scroll": "Operation tree of large data volume",
-        "without-animation": "Without Animation"
+        "virtual-scroll": "Operation tree of large data volume"
       }
     },
     "typography": {
@@ -3657,7 +3666,7 @@
       "tmw": "Folders, organizational structures, taxonomy, countries, regions, and so on, most of the structures of everything in the world are tree-shaped. The tree control can display the hierarchical relationship completely and provide interactive functions such as expanding, folding, and selecting.",
       "basicDemo": {
         "title": "Basic Usage",
-        "description": "test.",
+        "description": "",
         "Standard: Single Select": "Standard: Single Select",
         "Standard: Multiple Select": "Standard: Multiple Select",
         "Custom Width: Single Select": "Custom Width: Single Select",
@@ -3665,7 +3674,7 @@
       },
       "labelizationDemo": {
         "title": "Tag-based configuration",
-        "description": "test.",
+        "description": "",
         "Standard: Single Select": "Standard: Single Select",
         "Standard: Multiple Select": "Standard: Multiple Select",
         "AllowClear:SingleSelect(allowUnselectparametermustbetrueandenablelabelizationDemomustbefalse, whichisthedefaultvalue)": "AllowClear:SingleSelect(allowUnselectparametermustbetrueandenablelabelizationDemomustbefalse, whichisthedefaultvalue)",
@@ -3673,24 +3682,24 @@
       },
       "leafOnlyDemo": {
         "title": "Only leaf nodes can be selected.",
-        "description": "test.",
+        "description": "",
         "Leaf Only: Single Select": "Leaf Only: Single Select",
         "Leaf Only: Multiple Select": "Leaf Only: Multiple Select"
       },
       "hooksDemo": {
         "title": "Hook called upon completion of initialization",
-        "description": "test.",
+        "description": "",
         "Open on init: Single Select": "Open on init: Single Select"
       },
       "searchableDemo": {
         "title": "Easy search tree",
-        "description": "test.",
+        "description": "",
         "Standard: Single Select": "Standard: Single Select",
         "Standard: Multiple Select": "Standard: Multiple Select"
       },
       "appendToDemo": {
         "title": "Append To Element Capability",
-        "description": "test.",
+        "description": "",
         "Standard: Single Select Append To Body": "Standard: Single Select Append To Body",
         "Standard: Multiple Select Append To Body": "Standard: Multiple Select Append To Body",
         "Custom Width: Single Select Append To Body": "Custom Width: Single Select Append To Body",
@@ -3698,7 +3707,7 @@
       },
       "customIconDemo": {
         "title": "Customizing icons and selected nodes",
-        "description": "test.",
+        "description": "",
         "Standard: iconTemplatePosition": "Standard: iconTemplatePosition",
         "Standard: iconTemplateInput": "Standard: itemTemplateInput + iconTemplateInput"
       },
@@ -3708,14 +3717,14 @@
       },
       "keysDemo": {
         "title": "Custom key",
-        "description": "test.",
+        "description": "",
         "Standard: treeNodeIdKey": "Standard: treeNodeIdKey",
         "Standard: treeNodeChildrenKey": "Standard: treeNodeChildrenKey",
         "Standard: treeNodeTitleKey": "Standard: treeNodeTitleKey"
       },
       "iconParentDemo": {
         "title": "Customizing the node expansion and closing icon",
-        "description": "test.",
+        "description": "",
         "Standard: iconParent": "Standard: iconParent"
       },
       "virtualScrollDemo": {
@@ -4037,6 +4046,18 @@
         "basic-usage": "Basic Usage",
         "format": "formatting",
         "custom": "Importing a template"
+      }
+    },
+    "number-trans": {
+      "name": "NumberTranslate",
+      "type": "Data display",
+      "path": "number-trans",
+      "description": "Digital Format Conversion",
+      "tmw": "This command is used when the number format needs to be converted.",
+      "basicDemo": {
+        "beforeTrans": "Before Conversion",
+        "afterTrans": "After Conversion",
+        "title": "Conversion Instance"
       }
     },
     "relative-time": {

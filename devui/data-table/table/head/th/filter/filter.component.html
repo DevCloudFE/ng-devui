@@ -38,6 +38,7 @@
     [ngStyle]="{ 'min-height': filterBoxHeight ? filterBoxHeight : '60px' }"
   >
     <ng-template
+      *ngIf="filterDropdown.isOpen"
       [ngTemplateOutlet]="customFilterTemplate || (filterMultiple ? filterContentTmplForMultiple : filterContentTmplForRadio)"
       [ngTemplateOutletContext]="{
         $implicit: this,
@@ -56,6 +57,7 @@
       <input
         name="select"
         type="text"
+        autocomplete="off"
         [placeholder]="i18nCommonText?.searchPlaceholder"
         [(ngModel)]="searchText"
         class="devui-form-control devui-input devui-search-in-dropdown"
@@ -104,6 +106,7 @@
       <input
         name="select"
         type="text"
+        autocomplete="off"
         [placeholder]="i18nCommonText?.searchPlaceholder"
         [(ngModel)]="searchText"
         class="devui-form-control devui-input devui-search-in-dropdown"

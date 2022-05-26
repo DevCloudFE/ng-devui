@@ -14,7 +14,7 @@ import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
 import { TextInputModule } from 'ng-devui/text-input';
 import { LazyLoadModule } from 'ng-devui/utils';
 import { TranslateModule } from '@ngx-translate/core';
-import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
+import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
 import { ClipboardDemoComponent } from './clipboard/clipboard.component';
 import { CommonDemoComponent } from './common-demo.component';
 import { HelperDownloadDemoComponent } from './helper-download/helper-download.component';

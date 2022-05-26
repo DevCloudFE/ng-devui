@@ -122,10 +122,10 @@ export class SplitterService {
     const pane = this.getPane(paneIndex);
     const nearPane = this.getPane(nearPaneIndex);
     if (pane.collapsible) {
-      pane.collapsed = lockStatus ? pane.collapsed : !pane.collapsed;
+      pane._collapsed = lockStatus ? pane._collapsed : !pane._collapsed;
       pane.toggleCollapseClass();
-      nearPane.toggleNearPaneFlexGrow(pane.collapsed);
-      pane.collapsedChange.emit(pane.collapsed);
+      nearPane.toggleNearPaneFlexGrow(pane._collapsed);
+      pane.collapsedChange.emit(pane._collapsed);
     }
   }
 }

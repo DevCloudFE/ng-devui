@@ -9,28 +9,6 @@
   position: static;
 }
 
-.devui-dropdown-item {
-  cursor: pointer;
-  display: block;
-  width: 100%;
-  padding: 8px 12px;
-  clear: both;
-  border: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  line-height: 14px;
-}
-
-.devui-dropdown-menu {
-  .devui-dropdown-item:not(.disabled) {
-    &.selected {
-      color: $devui-list-item-active-text;
-      background-color: $devui-list-item-active-bg;
-    }
-  }
-}
-
 .devui-no-result-template,
 .devui-is-searching-template {
   display: block;
@@ -44,7 +22,7 @@
   cursor: not-allowed;
   background-color: $devui-disabled-bg;
   color: $devui-disabled-text;
-  line-height: 14px;
+  line-height: 20px;
 
   &:hover,
   &:active,
@@ -53,20 +31,8 @@
   }
 }
 
-/* 选项disabled */
-.devui-dropdown-item.disabled,
-.devui-dropdown-item.disabled:hover {
-  cursor: not-allowed;
-  color: $devui-disabled-text;
-}
-
 ul.devui-list-unstyled {
   margin: 0;
-  overflow-y: auto;
-}
-
-.devui-dropdown-bg {
-  background: $devui-list-item-hover-bg;
 }
 
 .devui-popup-tips {

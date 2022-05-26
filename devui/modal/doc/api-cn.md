@@ -6,11 +6,11 @@ import { ModalModule } from 'ng-devui/modal';
 
 在页面中使用：
 ```html
-<d-button (click)="openstandardDialog('standard')">click me!</d-button>
-通过openstandardDialog函数中调用dialogService.open()或modalService.open()打开模态弹窗
+<d-button (click)="openStandardDialog('standard')">open dialog</d-button>
+通过openStandardDialog函数中调用dialogService.open()或modalService.open()打开模态弹窗
 ```
 ```ts
-openstandardDialog(dialogtype?: string) {
+openStandardDialog(dialogtype?: string) {
     const results = this.dialogService.open({
       id: 'dialog-service',
       width: '346px',
@@ -72,9 +72,9 @@ openstandardDialog(dialogtype?: string) {
 |          zIndex          |            `number`             |    1050    | 可选，弹出框 z-index 值                                                  | [信息提示](demo#message-hint)                  |
 |      backDropZIndex      |            `number`             |    1049    | 可选，弹出框背景 z-index 值                                              |
 |        maxHeight         |            `string`             |     --     | 可选，弹出框最大高度(e.g '600px')                                          | [标准对话框](demo#standard-dialog)             |
-|          title           |            `string`             |     --     | 可选，弹出框 title                                                       | [标准对话框](demo#standard-dialog)             |
+|          title           |            `string`             |     --     | 可选，弹出框标题，未配置标题和弹出框类型时移除标题占位高度       | [标准对话框](demo#standard-dialog)             |
 |         content          |       `string\|Type<any>`       |     --     | 可选，弹出框内容，支持字符串和组件                                       | [标准对话框](demo#standard-dialog)             |
-|           html           |            `boolean`            |     --     | 可选，content是否是html代码                                              | [警告弹出框](demo#warning-pop-up)              |
+|           html           |            `boolean`            |     --     | 可选，content是否是html代码                                              | [警告弹出框](demo#message-hint)              |
 |         injector         |           `Injector`            |     --     | 可选，可以选择指定将用作组件的父级的注射器。                             |
 |           data           |            `object`             |     --     | 可选，当content为Component时，传递到Component实例中的属性                | [标准对话框](demo#standard-dialog)             |
 |         buttons          |             `array`             |     --     | 可选，弹出框按钮，支持自定义文本、样式、禁用、点击事件                   | [标准对话框](demo#standard-dialog)             |
@@ -83,7 +83,7 @@ openstandardDialog(dialogtype?: string) {
 | componentFactoryResolver |   `ComponentFactoryResolver`    |     --     | 可选，自定义动态渲染组件解析器，                                         |
 |         onClose          |           `Function`            |     --     | 可选，弹出框关闭之后回调的函数，                                         | [标准对话框](demo#standard-dialog)             |
 |       beforeHidden       | `Function\|Promise\|Observable` |     --     | 可选，可以阻止对话框关闭                                                 | [拦截对话框关闭](demo#intercept-dialog-closed) |
-|        dialogtype        |            `string`             | 'standard' | 可选，弹出框类型，有四种选择['standard'\|'success'\|'failed'\|'warning'\|'info'] | [标准对话框](demo#standard-dialog)             |
+|        dialogtype        |            `string`             | 'standard' | 可选，弹出框类型，有四种选择<br />`'standard' \| 'success' \| 'failed' \| 'warning' \| 'info'` | [信息提示](demo#message-hint)             |
 |        draggable         |            `boolean`            |    true    | 可选，弹出框是否可拖拽                                                   |
 |        placement         | `enum('center'\|'top'\|'bottom')` |  'center'  | 可选，弹出框出现的位置                                                   |
 |         offsetX          |            `string`             |   '0px'    | 可选，弹出框横向偏移                                                     |

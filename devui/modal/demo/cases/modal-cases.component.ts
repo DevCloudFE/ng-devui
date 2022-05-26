@@ -2,7 +2,8 @@ import { Component, Input } from '@angular/core';
 import { FormLayout } from 'ng-devui/form';
 @Component({
   selector: 'd-modal-cases',
-  templateUrl: './modal-cases.component.html'
+  templateUrl: './modal-cases.component.html',
+  styles: ['textarea { height: 100px; resize: none }'],
 })
 export class ModalCasesComponent {
   @Input() data: any;
@@ -10,9 +11,6 @@ export class ModalCasesComponent {
   tagName = '';
   des = '';
   layoutDirection: FormLayout = FormLayout.Vertical;
-
-  constructor() {
-  }
 
   formChange() {
     if (this.branch && this.tagName) {

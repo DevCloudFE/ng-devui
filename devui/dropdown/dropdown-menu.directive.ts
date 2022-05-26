@@ -113,9 +113,15 @@ export class DropDownMenuDirective implements OnInit, OnDestroy {
     }
   }
 
+  @HostListener('mouseenter', ['$event'])
+  public mouseEnter(event: MouseEvent) {
+    this.dropdown.mouseenterFlag = true;
+  }
+
   @HostListener('mouseleave', ['$event'])
   public mouseLeave(event: MouseEvent) {
     event.stopPropagation();
+    this.dropdown.mouseenterFlag = false;
     if ((this.dropdown.appendToBody && this.dropdown.trigger === 'hover')
       || (this.dropdown.trigger === 'click' && this.dropdown.closeOnMouseLeaveMenu)) {
       if (this.dropdown.toggleEl?.nativeElement.contains(event.relatedTarget)

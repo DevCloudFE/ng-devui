@@ -27,7 +27,7 @@ export class CustomComponent implements OnInit {
     this.targetElement = this.doc.querySelector('.header-menu>div:first-child');
     /* 用于判断内容变化的dom，可选择最接近变化范围的容器，
     在angular组件或路由下可能不能正确触发，可选择更外层容器尝试 */
-    this.observerDom = this.doc.querySelector('.header-menu');
+    this.observerDom = this.doc.querySelector('.header-shadow');
   }
 
   reset(index = 0) {

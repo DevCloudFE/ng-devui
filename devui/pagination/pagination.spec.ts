@@ -1,13 +1,14 @@
 import { Component, DebugElement, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, flush, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DomHelper } from '../utils/testing/dom-helper';
 import { createKeyBoardEvent } from '../utils/testing/event-helper';
 import { PaginationComponent } from './pagination.component';
 import { PaginationModule } from './pagination.module';
+
 @Component({
-  template: `
-    <d-pagination
+  template: ` <d-pagination
     #pagination
     [size]="'sm'"
     [total]="pager.total"
@@ -25,37 +26,36 @@ class TestPaginationComponent {
   pager = {
     total: 306,
     pageIndex: 5,
-    pageSize: 10
+    pageSize: 10,
   };
 }
 
 @Component({
-  template: `
-    <d-pagination
-      [total]="pager3.total"
-      [(pageSize)]="pager3.pageSize"
-      [totalItemText]="'总条数'"
-      [(pageIndex)]="pager3.pageIndex"
-      [canViewTotal]="true"
-      [canChangePageSize]="true"
-      [lite]="true"
-    >
-    </d-pagination>`,
+  template: ` <d-pagination
+    [total]="pager3.total"
+    [(pageSize)]="pager3.pageSize"
+    [totalItemText]="'总条数'"
+    [(pageIndex)]="pager3.pageIndex"
+    [canViewTotal]="true"
+    [canChangePageSize]="true"
+    [lite]="true"
+  >
+  </d-pagination>`,
 })
 class TestLitePaginationComponent {
   @ViewChild('pagination') pagination: PaginationComponent;
   pager3 = {
     total: 0,
     pageIndex: 1,
-    pageSize: 10
+    pageSize: 10,
   };
 }
 
 describe('pagination basic', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [PaginationModule],
-      declarations: [TestPaginationComponent, TestLitePaginationComponent]
+      imports: [BrowserAnimationsModule, PaginationModule],
+      declarations: [TestPaginationComponent, TestLitePaginationComponent],
     }).compileComponents();
   });
 

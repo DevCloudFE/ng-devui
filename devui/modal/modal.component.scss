@@ -58,7 +58,7 @@
 
 :host ::ng-deep .modal-content {
   position: relative;
-  border-radius: $devui-border-radius;
+  border-radius: $devui-border-radius-card;
   border: none;
   background-color: $devui-fullscreen-overlay-bg;
   background-clip: padding-box;
@@ -67,16 +67,16 @@
 
   .modal-body {
     padding-top: 20px;
-    padding-right: 32px;
+    padding-right: 20px;
     padding-bottom: 20px;
-    padding-left: 32px;
+    padding-left: 20px;
     color: $devui-text-weak;
   }
 
   .modal-footer {
     border-top: none;
     text-align: center;
-    padding: 0 32px 24px;
+    padding: 0 20px 20px;
 
     button {
       margin: 0 5px;

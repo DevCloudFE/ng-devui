@@ -34,12 +34,9 @@ import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import {
   addClassToOrigin,
   AppendToBodyDirection,
-  AppendToBodyDirectionsConfig,
-  DevConfigService,
-  fadeInOut,
+  AppendToBodyDirectionsConfig, DevConfigService, fadeInOut,
   formWithDropDown,
-  removeClassFromOrigin,
-  WithConfig
+  removeClassFromOrigin, WithConfig
 } from 'ng-devui/utils';
 import { WindowRef } from 'ng-devui/window-ref';
 import { BehaviorSubject, fromEvent, Observable, of, Subscription } from 'rxjs';
@@ -302,6 +299,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
     sm: 30,
     normal: 36,
     lg: 50,
+    space: 4
   };
 
   cdkConnectedOverlayOrigin: CdkOverlayOrigin;
@@ -412,18 +410,19 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
 
   getVirtualScrollHeight(len, size) {
     if (len > 0) {
-      let height = this.templateItemSize ? this.templateItemSize * len : this.virtualScrollItemSize[size ? size : 'normal'] * len;
+      let height =
+        (this.templateItemSize || this.virtualScrollItemSize[size || 'normal']) * len + this.virtualScrollItemSize.space * (len - 1);
       if (this.isSelectAll && this.multiple) {
-        height += this.virtualScrollItemSize[size ? size : 'normal'];
+        height += this.virtualScrollItemSize[size ? size : 'normal'] + this.virtualScrollItemSize.space;
       }
-      const scrollHight = parseInt(this.scrollHight, 10);
-      this.scrollHeightNum = height > scrollHight ? scrollHight : height;
+      const scrollHeight = parseInt(this.scrollHight, 10);
+      this.scrollHeightNum = height > scrollHeight ? scrollHeight : height;
       return `${this.scrollHeightNum}px`;
     }
   }
 
   get realVirtualScrollItemSize() {
-    const itemSize = this.templateItemSize || this.virtualScrollItemSize[this.size || 'normal'];
+    const itemSize = (this.templateItemSize || this.virtualScrollItemSize[this.size || 'normal']) + this.virtualScrollItemSize.space;
     const num = Math.round(this.scrollHeightNum / itemSize) || 10;
     this.minBuffer = num * 1.5 * itemSize;
     this.maxBuffer = num * 2.5 * itemSize;

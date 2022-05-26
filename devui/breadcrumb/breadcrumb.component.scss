@@ -1,9 +1,15 @@
+@import '../style/theme/color';
+
 :host {
   display: flex;
   -webkit-align-items: center;
   min-height: 28px;
 
   ::ng-deep d-breadcrumb-item:last-child {
+    & .devui-breadcrumb-item {
+      color: $devui-text;
+    }
+
     .devui-breadcrumb-separator {
       display: none;
     }

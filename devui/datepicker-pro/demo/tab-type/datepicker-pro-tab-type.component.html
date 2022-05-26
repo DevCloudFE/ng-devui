@@ -17,7 +17,7 @@
     <d-tabs [type]="'tabs'" [(activeTab)]="tab1acticeID">
       <d-tab id="1" title="Quick Choose">
         <div style="padding: 8px">
-          <d-radio-group [name]="'season'" [values]="values" [(ngModel)]="choose" (change)="valueChange($event)" [cssStyle]="'row'">
+          <d-radio-group [name]="'season'" [values]="values" [(ngModel)]="choose" (change)="valueChange($event)" [direction]="'row'">
           </d-radio-group>
         </div>
       </d-tab>

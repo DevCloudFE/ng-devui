@@ -27,6 +27,7 @@ In the page:
 | maxDate | `Date` | new Date(calenderRange[1]) | (optional) Restricts the maximum date that can be selected. | [Basic usage](demo#basic-usage) |
 | showAnimation | `boolean` | true | (optional) Whether to enable animation | |
 | width | `string` | - | Width of the selector. | |
+| placeholder | `string` | - |  host input's placeholder | |
 | mode | `'year' \| 'month' \| 'date'` | 'date' | panel mode | [year and month selector](demo#monthYear)|
 | markedDateList | `Date[]` | [] | Marked date list, which can be used with the MarkDateInfoTemplate template to display prompt information | [mark information](demo#date-marked)|
 | markedRangeDateList | `Date[][]` | [] | Marking Range Date List|[Marking Information](demo#date-marked)|
@@ -55,6 +56,7 @@ Triggered when the | dropdownToggle | `EventEmitter<boolean>` | -- | drop-down p
 | splitter | `string` | `-` | The separator between dates can be set. | |
 | showAnimation | `boolean` | true | (optional) Whether to enable animation | |
 | width | `string` | - | Width of the range selector. | |
+| placeholder | `string[]` | - |  host input's placeholder,need start and end string | |
 | mode | `year' \| 'month' \| 'date'\| 'week'`| 'date' | panel mode | [range selector](demo#range-picker)|
 | startIndexOfWeek | `number` | 0 |: start time of a week. 0 indicates Sunday and 6 indicates Saturday, which is the same as Date.getDay().|[range selector](demo#range-picker)|
 | markedDateList | `Date[]` | [] | Marked date list, which can be used with the MarkDateInfoTemplate template to display prompt information | [mark information](demo#date-marked)|
@@ -81,6 +83,8 @@ Triggered when the | dropdownToggle | `EventEmitter<boolean>` | -- | drop-down p
 | Splitter | `string` | '-' | Optional, date separator in range mode | |
 | markedDateList | `Date[]` | [] | Marked date list, which can be used with the MarkDateInfoTemplate template to display prompt information | [mark information](demo#date-marked)|
 | markedRangeDateList | `Date[][]` | [] | Marking Range Date List|[Marking Information](demo#date-marked)|
+| minDate | `Date` | - | (optional) Restricts the minimum available date. | [Basic usage](demo#basic-usage) |
+| maxDate | `Date` | - | (optional) Restricts the maximum date that can be selected. | [Basic usage](demo#basic-usage) |
 
 ## d-datepicker-static-panel event
 

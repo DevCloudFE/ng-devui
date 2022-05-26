@@ -31,6 +31,13 @@
       <d-type-wrapped demo></d-type-wrapped>
     </d-codebox>
   </div>
+  <div class="devui-demo-example" [dAnchor]="'size'">
+    <div class="devui-demo-title">{{ 'components.tabs.sizeDemo.title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.tabs.sizeDemo.description' | translate }}</div>
+    <d-codebox id="components-tabs-size" [sourceData]="sizeSource">
+      <d-size demo></d-size>
+    </d-codebox>
+  </div>
   <div class="devui-demo-example" [dAnchor]="'no-set-content'">
     <div class="devui-demo-title">{{ 'components.tabs.withoutContentDemo.title' | translate }}</div>
     <div class="devui-demo-text"></div>
@@ -51,11 +58,18 @@
       <d-before-change demo></d-before-change>
     </d-codebox>
   </div>
-  <div class="devui-demo-example" [dAnchor]="'custom-tabs-display-and-arrangement'">
-    <div class="devui-demo-title">{{ 'components.tabs.configurableTabsDemo.title' | translate }}</div>
-    <div class="devui-demo-text">{{ 'components.tabs.configurableTabsDemo.description' | translate }}</div>
-    <d-codebox id="components-tabs-configurable" [sourceData]="ConfigurableSource">
-      <d-configurable demo></d-configurable>
+  <div class="devui-demo-example" [dAnchor]="'add-delete'">
+    <div class="devui-demo-title">{{ 'components.tabs.addDeleteDemo.title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.tabs.addDeleteDemo.description' | translate }}</div>
+    <d-codebox id="components-tabs-add-delete" [sourceData]="AddDeleteSource">
+      <d-add-delete demo></d-add-delete>
+    </d-codebox>
+  </div>
+  <div class="devui-demo-example" [dAnchor]="'big-data'">
+    <div class="devui-demo-title">{{ 'components.tabs.bigDataDemo.title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.tabs.bigDataDemo.description' | translate }}</div>
+    <d-codebox id="components-tabs-big-data" [sourceData]="BigDataSource">
+      <d-big-data demo></d-big-data>
     </d-codebox>
   </div>
 </div>

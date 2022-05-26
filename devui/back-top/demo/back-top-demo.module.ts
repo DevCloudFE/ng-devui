@@ -9,7 +9,7 @@ import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.
 import { ToggleModule } from 'ng-devui/toggle';
 import { TooltipModule } from 'ng-devui/tooltip';
 import { TranslateModule } from '@ngx-translate/core';
-import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
+import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
 import { BackTopDemoComponent } from './back-top-demo.component';
 import { BasicComponent } from './basic/basic.component';
 import { CustomizeComponent } from './customize/customize.component';

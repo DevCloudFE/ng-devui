@@ -10,6 +10,7 @@
       [(ngModel)]="selectItem0"
       dAutoComplete
       [source]="languages"
+      [maxHeight]="400"
     />
   </div>
   <pre>{{ (selectItem0 | json) || 'No language select!' }}</pre>

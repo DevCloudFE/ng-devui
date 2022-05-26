@@ -1,22 +1,35 @@
 import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { DOCUMENT } from '@angular/common';
 import {
-  AfterContentInit, ChangeDetectorRef, ContentChildren, Directive, ElementRef, EventEmitter, HostBinding, Inject, Input,
-  OnChanges, OnDestroy, Optional, Output, QueryList, SimpleChanges,
+  AfterContentInit,
+  ChangeDetectorRef,
+  ContentChildren,
+  Directive,
+  ElementRef,
+  EventEmitter,
+  HostBinding,
+  Inject,
+  Input,
+  OnChanges,
+  OnDestroy,
+  Optional,
+  Output,
+  QueryList,
+  SimpleChanges,
   SkipSelf
 } from '@angular/core';
 import { addClassToOrigin, DevConfigService, formWithDropDown, removeClassFromOrigin, WithConfig } from 'ng-devui/utils';
 import { fromEvent, merge, Observable, ReplaySubject, Subscription } from 'rxjs';
-import { debounceTime, filter, mapTo, tap } from 'rxjs/operators';
+import { debounceTime, delay, filter, mapTo, tap } from 'rxjs/operators';
 import { DropDownService } from './dropdown.service';
 
 @Directive({
   selector: '[dDropDown]',
   exportAs: 'd-dropdown',
-  providers: [DropDownService]
+  providers: [DropDownService],
 })
 export class DropDownDirective implements OnDestroy, OnChanges, AfterContentInit {
-  @ContentChildren(DropDownDirective, {descendants: true}) dropdownChildren: QueryList<DropDownDirective>;
+  @ContentChildren(DropDownDirective, { descendants: true }) dropdownChildren: QueryList<DropDownDirective>;
   private hoverSubscription: Subscription;
   /**
    * 控制是否打开dropdown，绑定一个devui-dropdown-open class
@@ -47,7 +60,7 @@ export class DropDownDirective implements OnDestroy, OnChanges, AfterContentInit
   get isOpen(): boolean {
     return this._isOpen;
   }
-
+  mouseenterFlag = false;
   startAnimation = false;
 
   @HostBinding('class.devui-dropdown') addClass = true;
@@ -81,7 +94,7 @@ export class DropDownDirective implements OnDestroy, OnChanges, AfterContentInit
   document: Document;
 
   public set appendToBody(bool: boolean) {
-    this._appendToBody = (bool === true);
+    this._appendToBody = bool === true;
     this.updateCdkConnectedOverlayOrigin();
   }
   public get appendToBody() {
@@ -111,7 +124,7 @@ export class DropDownDirective implements OnDestroy, OnChanges, AfterContentInit
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (Object.prototype.hasOwnProperty.call(changes,'trigger')) {
+    if (Object.prototype.hasOwnProperty.call(changes, 'trigger')) {
       this.handleHoverSubscriptionIfTriggerIsHover();
     }
   }
@@ -126,8 +139,8 @@ export class DropDownDirective implements OnDestroy, OnChanges, AfterContentInit
   }
 
   public toggle(): boolean {
-    // eslint-disable-next-line no-return-assign
-    return this.isOpen = !this.isOpen;
+    this.isOpen = !this.isOpen;
+    return this.isOpen;
   }
 
   public focusToggleElement() {
@@ -148,9 +161,11 @@ export class DropDownDirective implements OnDestroy, OnChanges, AfterContentInit
 
   subscribeHoverAction(observable: Observable<boolean>): void {
     if (!this.hoverSubscription) {
-      this.hoverSubscription = observable.pipe(
-        debounceTime(50),
-      ).subscribe(isOpen => {
+      this.hoverSubscription = observable.pipe(debounceTime(50)).subscribe((isOpen) => {
+        if (this.mouseenterFlag) {
+          this.mouseenterFlag = false;
+          return;
+        }
         if (!this.disabled && this.isOpen !== isOpen) {
           this.isOpen = isOpen;
         }
@@ -165,11 +180,12 @@ export class DropDownDirective implements OnDestroy, OnChanges, AfterContentInit
     }
   }
 
-  handleHoverSubscriptionIfTriggerIsHover () {
+  handleHoverSubscriptionIfTriggerIsHover() {
     if (this.trigger === 'hover') {
       const states: Observable<boolean> = merge(
         fromEvent(this.el.nativeElement, 'mouseenter').pipe(mapTo(true)),
         fromEvent(this.el.nativeElement, 'mouseleave').pipe(
+          delay(200),
           filter((event: MouseEvent) => {
             if (this.isOpen && this.appendToBody === true) {
               // 冒泡模拟的relatedTarget， 和作用于dropdown本身event.relatedTarget
@@ -192,7 +208,7 @@ export class DropDownDirective implements OnDestroy, OnChanges, AfterContentInit
               return true;
             }
           }),
-          tap(event => {
+          tap((event) => {
             if (this.parentDropdown) {
               this.simulateEventDispatch(event, this.parentDropdown.el.nativeElement);
             }

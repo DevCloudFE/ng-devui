@@ -4,6 +4,7 @@
   [beforeCellEdit]="beforeCellEdit"
   (cellEditEnd)="thisCellEditEnd($event)"
   [scrollable]="true"
+  [tableOverflowType]="'overlay'"
 >
   <d-column field="lastName" header="Last Name" [width]="'100px'" [editable]="true">
     <d-cell-edit>

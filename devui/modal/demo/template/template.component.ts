@@ -1,12 +1,11 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { DialogService, ModalService } from 'ng-devui/modal';
 
 @Component({
   selector: 'd-template',
   templateUrl: './template.component.html',
-  styles: ['d-button { margin-right: 8px; }']
 })
-export class TemplateComponent implements OnInit {
+export class TemplateComponent {
   @ViewChild('dialogContent', { static: true }) dialogContent: TemplateRef<any>;
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
   dialogData = {
@@ -15,15 +14,11 @@ export class TemplateComponent implements OnInit {
     address: 'Chengdu',
   };
 
-  modalData = {
-    content: 'Error: This is an error message, please take a look.',
-  };
+  modalData = { content: 'Error: This is an error message, please take a look.' };
 
-  constructor(private dialogService: DialogService, private modalService: ModalService) { }
+  constructor(private dialogService: DialogService, private modalService: ModalService) {}
 
-  ngOnInit() {}
-
-  openTempleteDialog() {
+  openTemplateDialog() {
     const results = this.dialogService.open({
       id: 'template',
       width: '346px',
@@ -50,11 +45,11 @@ export class TemplateComponent implements OnInit {
             results.modalInstance.hide();
           },
         },
-      ]
+      ],
     });
   }
 
-  openTempleteModal() {
+  openTemplateModal() {
     const results = this.modalService.open({
       id: 'modal-modal',
       width: '300px',
@@ -62,7 +57,7 @@ export class TemplateComponent implements OnInit {
       contentTemplate: this.modalContent,
       onClose: () => {
         console.log('on modal closed.');
-      }
+      },
     });
   }
 }

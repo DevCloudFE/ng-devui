@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ThemeService } from 'ng-devui/theme';
+import { devuiDarkTheme, devuiLightTheme, ThemeService } from 'ng-devui/theme';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { cloneDeep } from 'lodash-es';
 import { Subscription } from 'rxjs';
@@ -68,23 +68,39 @@ export class ShadowComponent implements OnInit, OnDestroy {
 
   setValues(values) {
     this.shadows = [
-      { name: '$devui-shadow-length-base', value: '0 1px 4px 0', description: values.shadows['devui-shadow-length-base'] },
-      { name: '$devui-shadow-length-slide-left', value: '-2px 0 8px 0', description: values.shadows['devui-shadow-length-slide-left'] },
-      { name: '$devui-shadow-length-slide-right', value: '2px 0 8px 0', description: values.shadows['devui-shadow-length-slide-right'] },
+      {
+        name: '$devui-shadow-length-base',
+        value: devuiLightTheme.data['devui-shadow-length-base'],
+        description: values.shadows['devui-shadow-length-base']
+      },
+      {
+        name: '$devui-shadow-length-slide-left',
+        value: devuiLightTheme.data['devui-shadow-length-slide-left'],
+        description: values.shadows['devui-shadow-length-slide-left']
+      },
+      {
+        name: '$devui-shadow-length-slide-right',
+        value: devuiLightTheme.data['devui-shadow-length-slide-right'],
+        description: values.shadows['devui-shadow-length-slide-right']
+      },
       {
         name: '$devui-shadow-length-connected-overlay',
-        value: '0 2px 8px 0',
+        value: devuiLightTheme.data['devui-shadow-length-connected-overlay'],
         description: values.shadows['devui-shadow-length-connected-overlay'],
       },
-      { name: '$devui-shadow-length-hover', value: '0 4px 16px 0', description: values.shadows['devui-shadow-length-hover'] },
+      {
+        name: '$devui-shadow-length-hover',
+        value: devuiLightTheme.data['devui-shadow-length-hover'],
+        description: values.shadows['devui-shadow-length-hover']
+      },
       {
         name: '$devui-shadow-length-feedback-overlay',
-        value: '0 4px 16px 0',
+        value: devuiLightTheme.data['devui-shadow-length-feedback-overlay'],
         description: values.shadows['devui-shadow-length-feedback-overlay'],
       },
       {
         name: '$devui-shadow-length-fullscreen-overlay',
-        value: '0 8px 40px 0',
+        value: devuiLightTheme.data['devui-shadow-length-fullscreen-overlay'],
         description: values.shadows['devui-shadow-length-fullscreen-overlay'],
       },
     ];
@@ -173,16 +189,28 @@ export class ShadowComponent implements OnInit, OnDestroy {
     this.shadowColor = [
       {
         name: '$devui-shadow',
-        light: 'rgba(0, 0, 0, 0.2)',
-        dark: 'rgba(17, 18, 19, 0.4)',
+        light: devuiLightTheme.data['devui-shadow'],
+        dark: devuiDarkTheme.data['devui-shadow'],
         description: values.shadowColor['devui-shadow'],
       },
       {
         name: '$devui-light-shadow',
-        light: 'rgba(0, 0, 0, 0.1)',
-        dark: 'rgba(17, 18, 19, 0.5)',
+        light: devuiLightTheme.data['devui-light-shadow'],
+        dark: devuiDarkTheme.data['devui-light-shadow'],
         description: values.shadowColor['devui-light-shadow'],
       },
+      {
+        name: '$devui-connected-overlay-shadow',
+        light: devuiLightTheme.data['devui-connected-overlay-shadow'],
+        dark: devuiDarkTheme.data['devui-connected-overlay-shadow'],
+        description: values.shadowColor['devui-connected-overlay-shadow'],
+      },
+      {
+        name: '$devui-feedback-overlay-shadow',
+        light: devuiLightTheme.data['devui-feedback-overlay-shadow'],
+        dark: devuiDarkTheme.data['devui-feedback-overlay-shadow'],
+        description: values.shadowColor['devui-feedback-overlay-shadow'],
+      }
     ];
 
     if (this.themeService) {

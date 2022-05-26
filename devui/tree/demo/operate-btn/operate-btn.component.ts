@@ -9,19 +9,20 @@ export class OperateBtnComponent {
   currentSelectedNode;
   @ViewChild('operableTree', { static: true }) operableTree: OperableTreeComponent;
   data = [{
-    'title': 'parent node 1'
+    'title': 'parent node 1',
+    'disableAdd':true
   }, {
     'title': 'parent node 2',
-    'children': [{
+    'items': [{
       'title': 'leaf node 2-1',
-      'children': [{
+      'items': [{
         'title': 'leaf node 2-1-1'
       }, {
         'title': 'leaf node 2-1-2'
       }]
     }, {
       'title': 'leaf node 2-2',
-      'children': [{
+      'items': [{
         'title': 'leaf node 2-2-1'
       }, {
         'title': 'leaf node 2-2-2'
@@ -29,21 +30,21 @@ export class OperateBtnComponent {
     }]
   }, {
     'title': 'parent node 3',
-    'children': [{
+    'items': [{
       'title': 'leaf node 3-1',
     }, {
       'title': 'leaf node 3-2',
     }],
   }, {
     'title': 'parent node 4',
-    'children': [{
+    'items': [{
       'title': 'leaf node 4-1'
     }, {
       'title': 'leaf node 4-2'
     }]
   }, {
     'title': 'parent node 5',
-    'children': [{
+    'items': [{
       'title': 'leaf node 5-1'
     }, {
       'title': 'leaf node 5-2'

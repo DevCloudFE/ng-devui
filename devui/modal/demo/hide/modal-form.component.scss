@@ -1,6 +1,6 @@
 @import '~ng-devui/styles-var/devui-var.scss';
 
-.d-form-field {
+.d-form-field:not(:last-child) {
   margin-bottom: 20px;
 }
 
@@ -24,4 +24,8 @@
 
 .d-form-ctrl {
   margin-left: 108px;
+
+  & > div {
+    width: 70%;
+  }
 }

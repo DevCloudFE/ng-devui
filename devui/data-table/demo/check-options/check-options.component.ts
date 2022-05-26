@@ -48,23 +48,23 @@ export class CheckOptionsComponent implements OnInit {
     },
     {
       field: '#',
-      width: '50px'
+      width: '10%'
     },
     {
       field: 'firstName',
-      width: '150px'
+      width: '30%'
     },
     {
       field: 'lastName',
-      width: '150px'
+      width: '30%'
     },
     {
       field: 'gender',
-      width: '150px'
+      width: '30%'
     },
     {
       field: 'dob',
-      width: '200px'
+      width: '30%'
     }
   ];
 

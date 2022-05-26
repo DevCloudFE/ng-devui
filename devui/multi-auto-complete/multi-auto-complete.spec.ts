@@ -73,7 +73,7 @@ describe('multi-auto-complete', () => {
       fixture.detectChanges();
 
       const labelItems = debugEl.queryAll(
-        By.css('.multi-auto-complete label.multiple-label-auto-complete .devui-dropdown-origin li .label-item')
+        By.css('.multi-auto-complete label.multiple-label-auto-complete .devui-dropdown-origin li .devui-tag-item')
       );
       expect(labelItems.length).toBe(component.multiItems.length);
     }));
@@ -98,7 +98,7 @@ describe('multi-auto-complete', () => {
       tick();
       fixture.detectChanges();
       const labelItems = debugEl.queryAll(
-        By.css('.multi-auto-complete label.multiple-label-auto-complete .devui-dropdown-origin li .label-item')
+        By.css('.multi-auto-complete label.multiple-label-auto-complete .devui-dropdown-origin li .devui-tag-item')
       );
       expect(component.multiItems.length).toBe(5);
       expect(labelItems.length).toBe(5);
@@ -125,7 +125,7 @@ describe('multi-auto-complete', () => {
       tick();
       fixture.detectChanges();
       const labelItems = debugEl.queryAll(
-        By.css('.multi-auto-complete label.multiple-label-auto-complete .devui-dropdown-origin li .label-item')
+        By.css('.multi-auto-complete label.multiple-label-auto-complete .devui-dropdown-origin li .devui-tag-item')
       );
       expect(component.multiItems.length).toBe(5);
       expect(labelItems.length).toBe(5);
@@ -166,7 +166,7 @@ describe('multi-auto-complete', () => {
       tick();
       fixture.detectChanges();
       const labelItems = debugEl.queryAll(
-        By.css('.multi-auto-complete label.multiple-label-auto-complete .devui-dropdown-origin li .label-item')
+        By.css('.multi-auto-complete label.multiple-label-auto-complete .devui-dropdown-origin li .devui-tag-item')
       );
       expect(component.multiItems.length).toBe(6);
       expect(labelItems.length).toBe(6);
@@ -244,7 +244,7 @@ describe('multi-auto-complete', () => {
       fixture.detectChanges();
 
       const labelItems = debugEl.queryAll(
-        By.css('.multi-auto-complete label.multiple-label-auto-complete .devui-dropdown-origin li .label-item')
+        By.css('.multi-auto-complete label.multiple-label-auto-complete .devui-dropdown-origin li .devui-tag-item')
       );
       expect(component.multiItems.length).toBe(4);
       expect(labelItems.length).toBe(4);
@@ -257,7 +257,7 @@ describe('multi-auto-complete', () => {
       tick();
       fixture.detectChanges();
 
-      const itemEl = debugEl.query(By.css('.multi-auto-complete label.multiple-label-auto-complete ul li span.label-item .label'));
+      const itemEl = debugEl.query(By.css('.multi-auto-complete label.multiple-label-auto-complete ul li .devui-tag-item'));
       itemEl.nativeElement.dispatchEvent(new Event('click', { bubbles: true }));
       tick();
       fixture.detectChanges();
@@ -299,7 +299,7 @@ describe('multi-auto-complete', () => {
       tick();
       fixture.detectChanges();
       const labelItems = debugEl.queryAll(
-        By.css('.multi-auto-complete label.multiple-label-auto-complete .devui-dropdown-origin li .label-item')
+        By.css('.multi-auto-complete label.multiple-label-auto-complete .devui-dropdown-origin li .devui-tag-item')
       );
       expect(component.multiItems.length).toBe(4);
       expect(labelItems.length).toBe(4);

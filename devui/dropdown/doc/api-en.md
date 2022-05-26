@@ -3,7 +3,7 @@
 Import into module:
 
 ```typescript
-import { DropDownModule } from ' ng-devui/dropdown';
+import { DropDownModule } from 'ng-devui/dropdown';
 ```
 
 ## dDropDown

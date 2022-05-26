@@ -80,6 +80,9 @@ export class GanttScaleComponent implements OnInit, OnChanges, OnDestroy {
         this.unit = config.unit;
         this.getViewScaleData();
       }
+      if (config.viewChange){
+        this.getViewScaleData();
+      }
     });
   }
 

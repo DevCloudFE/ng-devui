@@ -14,6 +14,8 @@ export class WidgetsComponent {
     pageSize: 10,
     pageSizeOptions: [10, 20, 30, 40, 50]
   };
+  preLink = '<span class="icon-arrow-left"></span>';
+  nextLink = '<span class="icon-arrow-right"></span>';
   pageIndexChange(pageIndex) {
     this.checkCount(pageIndex);
   }

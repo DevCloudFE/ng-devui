@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { DevUIModule } from 'ng-devui';
-import { I18nService } from 'ng-devui/i18n';
 import { LazyLoadModule, SafePipeModule } from 'ng-devui/utils';
 import { TranslateModule } from '@ngx-translate/core';
 import scss from 'highlight.js/lib/languages/scss';
@@ -20,9 +19,9 @@ import { ThemeGuideComponent } from './theme-guide.component';
 
 export function hljsLanguages() {
   return [
-    {name: 'typescript', func: typescript},
-    {name: 'scss', func: scss},
-    {name: 'html', func: xml}
+    { name: 'typescript', func: typescript },
+    { name: 'scss', func: scss },
+    { name: 'html', func: xml },
   ];
 }
 
@@ -33,7 +32,7 @@ export function hljsLanguages() {
     ComponentsOverviewComponent,
     GetStartedComponent,
     ThemeGuideComponent,
-    GlobalConfigComponent
+    GlobalConfigComponent,
   ],
   imports: [
     CommonModule,
@@ -47,15 +46,10 @@ export function hljsLanguages() {
         path: '',
         component: AppContentComponent,
         data: {},
-        children: routesConfig
+        children: routesConfig,
       },
     ]),
   ],
-  providers: [
-    ComponentDataService,
-    I18nService
-  ]
+  providers: [ComponentDataService],
 })
-export class AppContentModule {
-  constructor() {}
-}
+export class AppContentModule {}

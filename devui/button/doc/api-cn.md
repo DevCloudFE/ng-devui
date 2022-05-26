@@ -22,6 +22,7 @@ import { ButtonModule } from 'ng-devui/button';
 |   bsSize    |  [`IButtonSize`](#ibuttonsize)   |  'md'   | 可选，大小 `'lg' \| 'md' \| 'sm' \| 'xs'`          | [按钮尺寸](demo#button-size)      |
 |  bordered   |   `boolean`     |  false  | 可选，是否有边框          |      [自动获得焦点](demo#button-auto-focus)             |
 |    icon     |    `string`     |   --    | 可选， 自定义按钮图标                                                          | [图标按钮](demo#button-icon)      |
+|    shape     |    `'circle'`     |   --    | 可选， 自定义按钮形状                                                       | [图标按钮](demo#button-icon)      |
 | showLoading |   `boolean`     |  false  | 可选，是否显示加载提示                                                         | [加载中状态](demo#button-loading) |
 |    width    |    `string`     |   --    | 可选，button 宽度    |   [主要按钮与次要按钮组合](demo#button-primary-and-common)         |
 |  disabled   |   `boolean`     |  false  | 可选，是否禁用 button                                                         | [主要按钮](demo#button-primary)   |

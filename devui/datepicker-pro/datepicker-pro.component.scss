@@ -27,23 +27,25 @@
       visibility: hidden;
 
       .close-icon {
-        background-color: $devui-line;
-        border-radius: 50%;
-        width: 12px;
-        height: 12px;
+        width: 16px;
+        height: 16px;
         display: inline-block;
         line-height: 12px;
 
         svg {
           vertical-align: middle;
+          position: relative;
+          top: -0.1em;
 
           path {
-            fill: $devui-light-text;
+            fill: $devui-shape-icon-fill;
           }
         }
 
         &:hover {
-          background-color: $devui-icon-fill-active;
+          svg path {
+            fill: $devui-shape-icon-fill-active;
+          }
         }
       }
     }

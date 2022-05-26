@@ -44,8 +44,8 @@ export class StepsGuideDirective implements OnInit, OnDestroy {
   }
 
   /**
-  * @deprecated Use dStepsGuidePosition to replace.
-  */
+   * @deprecated Use dStepsGuidePosition to replace.
+   */
   @Input() set position(pos: StepsGuidePositionType) {
     if (!this._dStepsGuidePosition) {
       this.dStepsGuidePosition = pos;
@@ -175,9 +175,7 @@ export class StepsGuideDirective implements OnInit, OnDestroy {
   insert(option: GuideOptions) {
     const hasGuide = this.document.querySelector('body>.devui-step-item');
     if (!hasGuide) {
-      this.stepRef = this.overlayContainerRef.createComponent(
-        this.componentFactoryResolver.resolveComponentFactory(StepsGuideComponent)
-      );
+      this.stepRef = this.overlayContainerRef.createComponent(this.componentFactoryResolver.resolveComponentFactory(StepsGuideComponent));
       Object.assign(this.stepRef.instance, option, { extraConfig: this.extraConfig });
       this.stepRef.instance.close = (step, type?) => {
         this.operateChange.emit({ clickType: type, currentIndex: step });
@@ -210,7 +208,7 @@ export class StepsGuideDirective implements OnInit, OnDestroy {
   canChange(index) {
     let changeResult = Promise.resolve(true);
     const currentIndex = this.currentIndex >= 0 ? this.currentIndex : this.stepIndex;
-    if (this.beforeChange) {
+    if (currentIndex === index && this.beforeChange) {
       const result: any = this.beforeChange(currentIndex, index);
       if (typeof result !== 'undefined') {
         if (result.then) {

@@ -5,6 +5,7 @@
   [tableWidthConfig]="tableWidthConfig"
   [showOperationArea]="false"
   [onlyOneColumnSort]="true"
+  [tableOverflowType]="'overlay'"
 >
   <thead dTableHead [checkable]="true">
     <tr dTableRow>
@@ -16,6 +17,7 @@
         [filterList]="filterListMulti"
         [beforeFilter]="beforeFilter"
         (filterChange)="onFirstFilterChange($event)"
+        (filterToggle)="onToggle($event)"
         [extraFilterTemplate]="extraFilterTemplate"
         [resizeEnabled]="true"
         (resizeEndEvent)="onResize($event, 'firstName')"
@@ -41,8 +43,7 @@
       <th
         dHeadCell
         [sortable]="true"
-        [showSortIcon]="true"
-        [(sortDirection)]="genderSortDirection"
+        [showSortIcon]="false"
         (sortChange)="onSortChange($event, 'Gender')"
         [filterable]="true"
         [filterMultiple]="false"

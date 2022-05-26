@@ -7,10 +7,9 @@ import { ModalTestComponent } from './modal-test.component';
   templateUrl: './basic-update.component.html',
 })
 export class BasicUpdateComponent {
-
   constructor(private dialogService: DialogService) {}
 
-  openstandardDialog(dialogtype?: string) {
+  openStandardDialog(dialogtype?: string) {
     const results = this.dialogService.open({
       id: 'dialog-service',
       width: '346px',

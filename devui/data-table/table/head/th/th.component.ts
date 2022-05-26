@@ -41,6 +41,10 @@ export class TableThComponent implements OnChanges, OnDestroy {
   @Input() filterBoxWidth: any;
   @Input() filterBoxHeight: any;
   @Output() filterChange = new EventEmitter<FilterConfig[]>();
+  @Output() filterToggle = new EventEmitter<{
+    isOpen: boolean;
+    checklist: FilterConfig[];
+  }>();
 
   @Input() sortable: boolean;
   @Input() sortDirection: SortDirection;
@@ -65,6 +69,10 @@ export class TableThComponent implements OnChanges, OnDestroy {
 
   @Input() fixedLeft: string;
   @Input() fixedRight: string;
+  @HostBinding('class.devui-last-sticky-left-cell')
+  @Input() isLastFixedLeft: boolean;
+  @HostBinding('class.devui-first-sticky-right-cell')
+  @Input() isFirstFixedRight: boolean;
 
   resizeBarRefElement: HTMLElement;
   element: HTMLElement;
@@ -173,6 +181,13 @@ export class TableThComponent implements OnChanges, OnDestroy {
 
   emitFilterData(filterData) {
     this.filterChange.emit(filterData);
+  }
+
+  emitFilterToggle(data: {
+    isOpen: boolean;
+    checklist: FilterConfig[];
+  }) {
+    this.filterToggle.emit(data);
   }
 
   onSort(event: SortEventArg) {

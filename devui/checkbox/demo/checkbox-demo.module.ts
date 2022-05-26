@@ -8,13 +8,13 @@ import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
 import { TranslateModule } from '@ngx-translate/core';
-import { CheckBoxDemoComponent } from './checkbox-demo.component';
-
-import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
+import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
 import { CheckboxBasicComponent } from './basic/checkbox-basic.component';
+import { CheckBoxDemoComponent } from './checkbox-demo.component';
 import { CheckboxConditionChangeComponent } from './condition-change/condition-change.component';
 import { CheckboxConditionGroupComponent } from './condition-group/condition-group.component';
-import { CheckboxGroupBasicComponent} from './group/checkbox-group-basic.component';
+import { CheckboxGroupBasicComponent } from './group/checkbox-group-basic.component';
+
 
 @NgModule({
   imports: [

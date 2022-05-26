@@ -10,7 +10,7 @@
 <h3 class="devui-h3-title">{{ 'components.design-font.fontDemo.instance.tableTitle' | translate }}</h3>
 <d-tabs [type]="'tabs'" [(activeTab)]="activeTab">
   <d-tab id="curFont" title="{{ 'components.design-font.fontDemo.instance.defaultTable.tab' | translate }}">
-    <d-data-table #datatable [dataSource]="fonts" [scrollable]="true" [type]="'striped'">
+    <d-data-table #datatable [dataSource]="fonts" [scrollable]="true">
       <d-column field="name" header="{{ 'components.design-font.fontDemo.instance.defaultTable.fontName' | translate }}" [width]="'150px'">
       </d-column>
       <d-column
@@ -32,7 +32,7 @@
     </d-data-table>
   </d-tab>
   <d-tab id="oldFont" title="{{ 'components.design-font.fontDemo.instance.oldTable.tab' | translate }}">
-    <d-data-table #datatable [dataSource]="oldFonts" [scrollable]="true" [type]="'striped'">
+    <d-data-table #datatable [dataSource]="oldFonts" [scrollable]="true">
       <d-column field="name" header="{{ 'components.design-font.fontDemo.instance.oldTable.fontName' | translate }}" [width]="'150px'">
       </d-column>
       <d-column

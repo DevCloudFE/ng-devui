@@ -31,6 +31,21 @@ export class FixColumnOldComponent implements OnInit {
         fieldType: 'text'
       },
       {
+        field: 'gender',
+        header: 'gender',
+        fieldType: 'text'
+      },
+      {
+        field: 'gender',
+        header: 'gender',
+        fieldType: 'text'
+      },
+      {
+        field: 'gender',
+        header: 'gender',
+        fieldType: 'text'
+      },
+      {
         field: 'dob',
         header: 'Date of birth',
         fieldType: 'date'

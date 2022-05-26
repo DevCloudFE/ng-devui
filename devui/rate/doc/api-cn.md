@@ -21,3 +21,4 @@ import { RateModule } from 'ng-devui/rate';
 |   ~~icon~~    |            `string`             |  --   | 可选，评分图标的样式，只支持 devUI 图标库中所有图标（`已废弃，建议使用character`）      | [动态模式](demo#dynamic-mode)             |
 | character |            `string\|TemplateRef`             |  --   | 可选，评分图标的样式，支持传入文本或模板 | [动态模式-自定义](demo#dynamic-mode-Custom)      |
 | allowHalf |            `boolean`             |  false   | 可选，动态模式下是否允许半选 | [半选模式](demo#rate-half)      |
+| allowClear |            `boolean`             |  false   | 可选，是否允许清空 | [清空模式](demo#rate-clear)      |

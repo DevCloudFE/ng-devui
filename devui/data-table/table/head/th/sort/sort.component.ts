@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, HostBinding, Input, OnInit, Output } from '@angular/core';
 import { SortDirection, SortEventArg } from '../../../../data-table.model';
 
 @Component({
@@ -8,8 +8,14 @@ import { SortDirection, SortEventArg } from '../../../../data-table.model';
 })
 export class SortComponent implements OnInit {
   @Input() sortDirection: SortDirection;
+  @HostBinding('class.devui-icon-show')
   @Input() showSortIcon = false;
   @Output() sortEvent = new EventEmitter<SortEventArg>();
+
+  @HostBinding('class.devui-icon-show')
+  get canShow() {
+    return this.showSortIcon || (this.sortDirection === 'ASC') || (this.sortDirection === 'DESC');
+  }
 
   constructor() { }
 

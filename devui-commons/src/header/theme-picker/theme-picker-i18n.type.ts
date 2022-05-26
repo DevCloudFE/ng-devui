@@ -1,0 +1,42 @@
+export const themePicker = {
+  'zh-cn': {
+    theme: '主题',
+    color: '主题颜色',
+    mode: '主题模式',
+    light: '浅色模式',
+    dark: '深色模式',
+    follow: '跟随系统',
+    largeSize: '大字号模式',
+    default: '默认主题',
+    extend: '扩展主题',
+    customize: '定制主题',
+    customizeDark: '深色',
+    customizeDownloadConfig: '下载主题文件',
+    customizeDownloadConfigHelp: '使用',
+    infinity: '无限',
+    sweet: '蜜糖',
+    deep: '深邃夜空',
+    provence: '普罗旺斯',
+    galaxy: '追光'
+  },
+  'en-us': {
+    theme: 'Theme',
+    color: 'Theme Color',
+    mode: 'Theme Mode',
+    light: 'Light Theme',
+    dark: 'Dark Theme',
+    follow: 'Follow System',
+    largeSize: 'Large FontSize',
+    default: 'Default',
+    extend: 'Extend',
+    customize: 'Customize',
+    customizeDark: 'Dark',
+    customizeDownloadConfig: 'Download Theme Config',
+    customizeDownloadConfigHelp: 'Usage',
+    infinity: 'Infinity',
+    sweet: 'Sweet',
+    deep: 'Deep',
+    provence: 'Provence',
+    galaxy: 'Galaxy'
+  }
+}

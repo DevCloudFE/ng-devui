@@ -1,45 +1,6 @@
 <div class="btn-group">
-  <d-button-group size="xs">
-    <d-button bsStyle="common" [disabled]="true">L</d-button>
-    <d-button bsStyle="common">M</d-button>
-    <d-button bsStyle="common" [disabled]="true">R</d-button>
-  </d-button-group>
-  <d-button-group size="sm">
-    <d-button bsStyle="primary">Left</d-button>
-    <d-button bsStyle="common">Middle</d-button>
-    <d-button bsStyle="common">Right</d-button>
-  </d-button-group>
   <d-button-group>
-    <d-button bsStyle="primary" icon="icon-filter">Filter</d-button>
-    <d-button bsStyle="common" class="border-remove">88</d-button>
-  </d-button-group>
-  <d-button-group size="lg">
-    <d-button bsStyle="common" icon="icon-add">New</d-button>
-    <d-button bsStyle="common">793</d-button>
-  </d-button-group>
-</div>
-<div class="btn-group">
-  <d-button-group>
-    <d-button bsStyle="primary" icon="icon-add">New</d-button>
-    <d-button bsStyle="common">Delete</d-button>
-    <div dDropDown [closeScope]="'blank'">
-      <d-button bsStyle="common" dDropDownToggle class="devui-dropdown-origin border-remove">
-        Click me
-        <span class="icon-chevron-down"></span>
-      </d-button>
-      <ul dDropDownMenu class="devui-dropdown-menu devui-scrollbar devui-dropdown-overlay" role="menu">
-        <li role="menuitem">
-          <input type="text" class="devui-input devui-input devui-search-in-dropdown" placeholder="Please enter" />
-          <div class="icon-in-search">
-            <i class="icon icon-search"></i>
-          </div>
-        </li>
-        <li class="disabled" role="menuitem">
-          <a class="devui-dropdown-item disabled">item 1</a>
-        </li>
-        <li role="menuitem"><a class="devui-dropdown-item">item 2</a></li>
-        <li role="menuitem"><a class="devui-dropdown-item">item 3</a></li>
-      </ul>
-    </div>
+    <d-button bsStyle="primary">按钮名称</d-button>
+    <d-button icon="icon-select-arrow" bsStyle="primary"></d-button>
   </d-button-group>
 </div>

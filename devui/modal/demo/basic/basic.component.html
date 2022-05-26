@@ -1,4 +1,2 @@
-<d-button (click)="openstandardDialog('standard')">open modal!</d-button>
-<d-button bsStyle="common" style="margin-left: 8px" (click)="openDialogWithoutAnimation('standard')"
-  >open modal without animation!</d-button
->
+<d-button (click)="openDialog()">open dialog</d-button>
+<d-button bsStyle="common" (click)="openDialog('standard', false)">open dialog without animation</d-button>

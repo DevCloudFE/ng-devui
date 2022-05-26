@@ -1,6 +1,7 @@
 <button
   [attr.id]="id"
   class="devui-btn devui-btn-{{ bsStyle }} devui-btn-{{ bsSize }} devui-btn-{{ bsPosition }}"
+  [class.devui-btn-circle]="shape === 'circle'"
   [type]="type"
   [disabled]="disabled"
   [class.bordered]="bordered"
@@ -11,7 +12,7 @@
   [ngStyle]="{ width: width }"
   [dAutoFocus]="autofocus"
   (click)="onClick($event)"
-  [ngClass]="{ 'd-btn-icon': !!icon && !hasContent() && bsStyle !== 'primary', 'd-btn-icon-wrap': !!icon }"
+  [ngClass]="{ 'd-btn-icon': !!icon && !hasContent(), 'd-btn-icon-wrap': !!icon }"
 >
   <span *ngIf="!!icon" class="devui-icon-fix icon {{ icon }}" [ngClass]="{ 'clear-right-4': hasContent() }"></span>
   <!--

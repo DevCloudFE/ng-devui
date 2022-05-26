@@ -313,7 +313,7 @@ describe('dropdown', () => {
         expect(dropdownMenuElement.styles['display']).toBe('none');
         dropdownElement.nativeElement.dispatchEvent(new MouseEvent('mouseenter', {'bubbles': false, 'cancelable': false}));
         fixture.detectChanges();
-        tick(50); // debounce time
+        tick(250); // debounce time
         fixture.detectChanges();
         tick(); // animation time
         fixture.detectChanges();
@@ -325,7 +325,7 @@ describe('dropdown', () => {
           fixture.detectChanges();
           dropdownElement.nativeElement.dispatchEvent(new MouseEvent('mouseenter', {'bubbles': false, 'cancelable': false}));
           fixture.detectChanges();
-          tick(50); // debounce time
+          tick(250); // debounce time
           fixture.detectChanges();
           tick(); // animation time
           fixture.detectChanges();
@@ -337,7 +337,7 @@ describe('dropdown', () => {
             'cancelable': false
           }));
           fixture.detectChanges();
-          tick(50); // debounce time
+          tick(250); // debounce time
           fixture.detectChanges();
           tick(); // animation time
           fixture.detectChanges();
@@ -530,7 +530,7 @@ describe('dropdown', () => {
           'cancelable': false
         }));
         fixture.detectChanges();
-        tick(50); // debounce time
+        tick(250); // debounce time
         fixture.detectChanges();
         tick(); // animation time
         fixture.detectChanges();
@@ -701,7 +701,7 @@ describe('dropdown', () => {
         expect(dropdownMenuElement).toBeNull();
         dropdownElement.nativeElement.dispatchEvent(new MouseEvent('mouseenter', {'bubbles': false, 'cancelable': false}));
         fixture.detectChanges();
-        tick(50); // hoverDebounceTime
+        tick(250); // hoverDebounceTimetime
         fixture.detectChanges();
         tick();
         fixture.detectChanges();
@@ -716,7 +716,7 @@ describe('dropdown', () => {
           fixture.detectChanges();
           dropdownElement.nativeElement.dispatchEvent(new MouseEvent('mouseenter', {'bubbles': false, 'cancelable': false}));
           fixture.detectChanges();
-          tick(50);
+          tick(250);
           fixture.detectChanges();
           tick();
           fixture.detectChanges();
@@ -728,7 +728,7 @@ describe('dropdown', () => {
             'cancelable': false
           }));
           fixture.detectChanges();
-          tick(50); // hoverDebounceTime
+          tick(250); // hoverDebounceTimetime
           fixture.detectChanges();
           tick(); // animationTime
           fixture.detectChanges();
@@ -743,7 +743,7 @@ describe('dropdown', () => {
             'cancelable': false
           }));
           fixture.detectChanges();
-          tick(50); // hoverDebounceTime
+          tick(250); // hoverDebounceTimetime
           fixture.detectChanges();
           tick(); // animationTime
           fixture.detectChanges();
@@ -761,7 +761,7 @@ describe('dropdown', () => {
               'cancelable': false
             }));
             fixture.detectChanges();
-            tick(50); // hoverDebounceTime
+            tick(250); // hoverDebounceTimetime
             fixture.detectChanges();
             tick(); // animationTime
             fixture.detectChanges();
@@ -773,7 +773,7 @@ describe('dropdown', () => {
               'cancelable': false
             }));
             fixture.detectChanges();
-            tick(50); // hoverDebounceTime
+            tick(250); // hoverDebounceTimetime
             fixture.detectChanges();
             tick(); // animationTime
             fixture.detectChanges();
@@ -788,7 +788,7 @@ describe('dropdown', () => {
               'cancelable': false
             }));
             fixture.detectChanges();
-            tick(50); // hoverDebounceTime
+            tick(250); // hoverDebounceTimetime
             fixture.detectChanges();
             tick(); // animationTime
             fixture.detectChanges();
@@ -824,7 +824,7 @@ describe('dropdown', () => {
           'cancelable': false
         }));
         fixture.detectChanges();
-        tick(50); // debounce time
+        tick(250); // debounce time
         fixture.detectChanges();
         tick(); // animation time
         fixture.detectChanges();
@@ -841,7 +841,7 @@ describe('dropdown', () => {
           'cancelable': false
         }));
         fixture.detectChanges();
-        tick(50); // debounce time
+        tick(250); // debounce time
         fixture.detectChanges();
         tick(); // animation time
         fixture.detectChanges();
@@ -980,7 +980,7 @@ describe('dropdown', () => {
         const mouseenterElement = document.querySelector(`#${id}`).parentElement;
         mouseenterElement.dispatchEvent(new MouseEvent('mouseenter', {'bubbles': false, 'cancelable': false}));
         fixture.detectChanges();
-        tick(50);
+        tick(250);
         fixture.detectChanges();
         tick();
         return mouseenterElement;
@@ -993,7 +993,7 @@ describe('dropdown', () => {
           'cancelable': false
         }));
         fixture.detectChanges();
-        tick(50);
+        tick(250);
         fixture.detectChanges();
         tick();
         return toggleElement;
@@ -1006,7 +1006,7 @@ describe('dropdown', () => {
           'cancelable': false
         }));
         fixture.detectChanges();
-        tick(50);
+        tick(250);
         fixture.detectChanges();
         tick();
         return menuElement;
@@ -1225,6 +1225,8 @@ describe('dropdown', () => {
             leaveMenu('menu3', getRelatedTarget('item-2'));
             hoverToggle('item-2');
             fixture.detectChanges();
+            tick(250);
+            fixture.detectChanges();
             expect(isMenuShow('menu1')).toBe(true);
             expect(isMenuShow('menu2')).toBe(false);
             expect(isMenuShow('menu3')).toBe(false);
@@ -1278,7 +1280,7 @@ describe('dropdown', () => {
               fixture.detectChanges();
               leaveMenu('menu3', document);
               fixture.detectChanges();
-              tick(50);
+              tick(250);
               fixture.detectChanges();
               tick();
               fixture.detectChanges();
@@ -1295,7 +1297,7 @@ describe('dropdown', () => {
               fixture.detectChanges();
               leaveMenu('menu3', getRelatedTarget('item-12'));
               fixture.detectChanges();
-              tick(50);
+              tick(250);
               fixture.detectChanges();
               tick();
               fixture.detectChanges();

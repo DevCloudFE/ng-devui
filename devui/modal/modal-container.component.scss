@@ -2,6 +2,12 @@
 
 .modal-body {
   padding: 12px 32px 12px 32px;
+  overflow-y: hidden;
+
+  &:hover {
+    overflow-y: auto;
+    overflow-y: overlay;
+  }
 }
 
 .display-flex {

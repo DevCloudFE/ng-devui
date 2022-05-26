@@ -48,20 +48,25 @@
 }
 
 .devui-dropdown-menu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  z-index: $devui-z-index-dropdown;
   display: none;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  z-index: $devui-z-index-dropdown;
   min-width: calc(min(100%, 102px));
   margin: 4px 0;
-  padding-bottom: 4px;
   background-clip: padding-box;
-  border-radius: $devui-border-radius;
-  list-style: none;
   background-color: $devui-connected-overlay-bg;
+  border-radius: $devui-border-radius;
   box-shadow: $devui-shadow-length-connected-overlay $devui-shadow;
+  list-style: none;
   outline: none;
+
+  &.devui-scrollbar,
+  .devui-scrollbar {
+    overflow-y: auto;
+    overflow-y: overlay;
+  }
 
   .open > & {
     display: block;
@@ -72,7 +77,7 @@
 
     > a {
       height: 36px;
-      padding: 0 10px;
+      padding: 8px 12px;
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -80,7 +85,7 @@
   }
 
   li > input {
-    margin: 0 10px;
+    margin: 0 8px;
   }
 
   > .disabled > a {
@@ -93,26 +98,53 @@
     }
   }
 
-  .devui-dropdown-item:not(.disabled) {
-    &:hover:not(:active):not(.selected):not(.active) {
-      background-color: $devui-list-item-hover-bg;
-      color: $devui-list-item-hover-text;
+  .devui-dropdown-item {
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    min-height: 36px;
+    line-height: 20px;
+    padding: 8px 12px;
+    border: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    border-radius: $devui-border-radius;
+    transition:
+      color $devui-animation-duration-fast $devui-animation-ease-in-out-smooth,
+      background-color $devui-animation-duration-fast $devui-animation-ease-in-out-smooth;
+
+    &:not(:first-child) {
+      margin-top: 4px;
     }
 
-    &:active:hover {
-      background-color: $devui-list-item-active-bg;
-      color: $devui-list-item-active-text;
+    &.disabled {
+      cursor: not-allowed;
+      color: $devui-disabled-text;
     }
 
-    &.devui-dropdown-bg {
-      //箭头选中
-      background-color: $devui-list-item-hover-bg;
-      color: $devui-list-item-hover-text;
-    }
+    &:not(.disabled) {
+      &:hover:not(.selected):not(.active) {
+        background-color: $devui-list-item-hover-bg;
+        color: $devui-list-item-hover-text;
+      }
 
-    &.active {
-      color: $devui-list-item-active-text;
-      background-color: $devui-list-item-active-bg;
+      &.devui-dropdown-bg {
+        // 键盘上下箭头选中
+        background-color: $devui-list-item-hover-bg;
+        color: $devui-list-item-hover-text;
+      }
+
+      &.selected,
+      &.active {
+        color: $devui-list-item-active-text;
+        background-color: $devui-list-item-active-bg;
+
+        &:hover {
+          background-color: $devui-list-item-active-bg;
+          color: $devui-list-item-active-text;
+        }
+      }
     }
   }
 }
@@ -212,11 +244,5 @@
         background-color: transparent;
       }
     }
-  }
-}
-
-.devui-dropdown-menu {
-  .devui-dropdown-item {
-    transition: color $devui-animation-duration-fast $devui-animation-ease-in-out-smooth, background-color $devui-animation-duration-fast $devui-animation-ease-in-out-smooth;
   }
 }

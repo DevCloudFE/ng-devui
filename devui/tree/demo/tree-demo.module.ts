@@ -14,12 +14,11 @@ import { TooltipModule } from 'ng-devui/tooltip';
 import { TreeModule } from 'ng-devui/tree';
 import { SafePipeModule } from 'ng-devui/utils';
 import { TranslateModule } from '@ngx-translate/core';
-import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
+import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
 import { BasicComponent } from './basic/basic.component';
 import { CheckControlComponent } from './check-control/check-control.component';
-import { CheckableComponent } from './checkable/checkable.component';
+import { CustomKeyComponent } from './custom-key/custom-key.component';
 import { CustomLoadingComponent } from './custom-loading/custom-loading.component';
-import { CustomTitleKeyComponent } from './custom-title-key/custom-title-key.component';
 import { CustomizeComponent } from './customize/customize.component';
 import { DraggableComponent } from './draggable/draggable.component';
 import { MergeNodeComponent } from './merge-node/merge-node.component';
@@ -28,7 +27,6 @@ import { SearchFilterComponent } from './search-filter/search-filter.component';
 import { TreeDemoComponent } from './tree-demo.component';
 import { OperationForAllNodesComponent } from './tree-factory/tree-factory.component';
 import { VirtualScrollComponent } from './virtual-scroll/virtual-scroll.component';
-import { WithoutAnimationComponent } from './without-animation/without-animation.component';
 
 @NgModule({
   imports: [
@@ -59,18 +57,16 @@ import { WithoutAnimationComponent } from './without-animation/without-animation
   declarations: [
     TreeDemoComponent,
     BasicComponent,
-    CheckableComponent,
+    CustomKeyComponent,
     OperateBtnComponent,
     CustomizeComponent,
     DraggableComponent,
-    CustomTitleKeyComponent,
     SearchFilterComponent,
     CheckControlComponent,
     VirtualScrollComponent,
     CustomLoadingComponent,
     MergeNodeComponent,
-    OperationForAllNodesComponent,
-    WithoutAnimationComponent
+    OperationForAllNodesComponent
   ],
 
 })

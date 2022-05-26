@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
-import { TreeComponent, TreeNode } from 'ng-devui/tree';
+import { TreeComponent } from 'ng-devui/tree';
 
 @Component({
   selector: 'd-merge-node',
@@ -92,13 +92,4 @@ export class MergeNodeComponent implements AfterViewInit {
       this.basicTree.treeFactory.mergeTreeNodes();
     });
   }
-
-  onNodeSelected(treeNode: TreeNode) {
-    console.log('selected: ', treeNode);
-  }
-
-  onNodeToggled(treeNode: TreeNode) {
-    console.log(treeNode);
-  }
-
 }

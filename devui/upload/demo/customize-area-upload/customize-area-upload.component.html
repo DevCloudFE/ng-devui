@@ -6,7 +6,7 @@
     >
       <span class="filename">{{ fileUploader.file.name }}</span>
       <div *ngIf="fileUploader.status === 1" class="devui-loading">
-        <d-progress [percentage]="fileUploader.percentage" [height]="'5px'" [barbgcolor]="'#50D4AB'"></d-progress>
+        <d-progress [percentage]="fileUploader.percentage" [height]="'5px'" [strokeColor]="'#50D4AB'"></d-progress>
         <span (click)="deleteFile(fileUploader)" class="devui-cancel-upload">{{ CANCELUPLOAD }}</span>
       </div>
       <span *ngIf="fileUploader.status === 2 || fileUploader.status === 3" class="icon-file"></span>

@@ -1,0 +1,49 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
+.demo-nav {
+  width: 240px;
+  position: fixed;
+  top: 100px;
+  right: 0;
+  height: 100%;
+  z-index: 1;
+
+  .fast-forward {
+    width: 130px;
+    font-size: $devui-font-size-card-title;
+    color: $devui-text;
+    line-height: 24px;
+    font-weight: bold;
+    padding-bottom: 10px;
+    margin-left: 20px;
+    border-bottom: 1px solid $devui-dividing-line;
+  }
+
+  .step-nav {
+    margin-top: 10px;
+
+    & > li {
+      list-style: none;
+      padding-left: 20px;
+      cursor: pointer;
+      height: 50px;
+      line-height: 50px;
+      font-size: $devui-font-size;
+      color: $devui-text;
+      position: relative;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+
+      &.active {
+        color: $devui-link;
+      }
+    }
+  }
+}
+
+@media (max-width: 1400px) {
+  .demo-nav {
+    display: none;
+  }
+}

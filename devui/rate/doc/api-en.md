@@ -21,3 +21,4 @@ In the page:
 | ~~icon~~ | `string` | -- | Optional. Style of the rating icon. Only all icons in the DevUI icon library are supported. (`Deprecated. You are advised to use character.`)| [Dynamic Mode](demo#dynamic-mode) |
 | character | `string\|TemplateRef` | -- | Optional. Scoring icon style. Text or templates can be transferred. | [Dynamic Mode-Custom](demo#dynamic-mode-Custom) |
 | allowHalf |            `boolean`             |  false   | Optional. Whether allow Half Selection in Dynamic Mode. | [Half Selection Mode](demo#rate-half)      |
+| allowClear |            `boolean`             |  false   | Optional. Whether allow Clear Selection. | [Clear Mode](demo#rate-clear)      |

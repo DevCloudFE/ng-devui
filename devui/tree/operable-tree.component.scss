@@ -19,34 +19,34 @@
 
       svg {
         #add-path {
-          fill: $devui-icon-text;
+          fill: $devui-icon-fill;
         }
 
         #edit-path {
-          fill: $devui-icon-text;
+          fill: $devui-icon-fill;
         }
 
         #delete-path {
-          fill: $devui-icon-text;
+          fill: $devui-icon-fill;
         }
 
         path,
         rect {
-          fill: $devui-icon-text;
+          fill: $devui-icon-fill;
         }
       }
 
       &:hover {
         #add-path {
-          fill: $devui-icon-fill-active-hover;
+          fill: $devui-icon-fill-hover;
         }
 
         #edit-path {
-          fill: $devui-icon-fill-active-hover;
+          fill: $devui-icon-fill-hover;
         }
 
         #delete-path {
-          fill: $devui-icon-fill-active-hover;
+          fill: $devui-icon-fill-hover;
         }
       }
     }

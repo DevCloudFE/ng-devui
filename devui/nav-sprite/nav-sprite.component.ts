@@ -203,8 +203,8 @@ export class NavSpriteComponent implements OnInit, AfterViewInit, OnDestroy {
   scrollEventHandler() {
     if (!this.isToViewByNav) {
       const scrollTop = this.targetContainer.scrollTop;
-      const index = this.menus.findIndex((i) => {
-        return scrollTop < i.scrollPosition.top;
+      const index = this.menus.findIndex((ele, i) => {
+        return scrollTop >= ele.scrollPosition.startLine && scrollTop < this.menus[i + 1].scrollPosition.startLine;
       });
       if (index !== -1 && this.activeIndex !== index) {
         this.activeIndex = index;
@@ -235,7 +235,7 @@ export class NavSpriteComponent implements OnInit, AfterViewInit, OnDestroy {
   initStyles() {
     if (this.mode === 'sprite') {
       const content = this.element.nativeElement.querySelector('.devui-nav-sprite-content');
-      const spriteOptions = { ...DEFAULT_OPTIONS, ...this.spriteOption};
+      const spriteOptions = { ...DEFAULT_OPTIONS, ...this.spriteOption };
       this.render.addClass(content, 'devui-is-sprite');
       this.render.setStyle(content, 'position', 'fixed');
       this.render.setStyle(content, 'top', spriteOptions.top);

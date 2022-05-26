@@ -514,6 +514,20 @@ export const routesConfig = [
     },
   },
   {
+    path: 'icon',
+    component: ExamplePanelComponent,
+    loadChildren: () =>
+      import('../../../devui/icon/demo/icon-demo.module').then(
+        (m) => m.IconDemoModule
+      ),
+    data: {
+      type: '通用',
+      enType: 'General',
+      name: 'Icon',
+      cnName: '图标',
+    },
+  },
+  {
     path: 'loading',
     component: ExamplePanelComponent,
     loadChildren: () =>

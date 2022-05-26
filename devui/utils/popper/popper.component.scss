@@ -52,8 +52,8 @@
   .popper-container-scrollable {
     min-height: 40px;
     width: 100%;
-    overflow-y: auto;
-    overflow-x: auto;
+    overflow: auto;
+    overflow: overlay;
   }
 
   &.fluid {

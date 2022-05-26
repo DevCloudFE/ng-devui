@@ -1,5 +1,12 @@
 <h4>single calendar panel</h4>
 <div>
-  <d-datepicker-calendar [isRangeType]="true" [showTime]="false" [ngModel]="value1" (confirmEvent)="onClickEnsure($event)">
+  <d-datepicker-calendar
+    [minDate]="minDate"
+    [maxDate]="maxDate"
+    [isRangeType]="true"
+    [showTime]="false"
+    [ngModel]="value1"
+    (confirmEvent)="onClickEnsure($event)"
+  >
   </d-datepicker-calendar>
 </div>

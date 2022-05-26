@@ -17,4 +17,5 @@ export class CarouselDemoAutoPlayComponent {
   height = '500px';
   autoplay = true;
   autoplaySpeed = 3000;
+  transitionSpeed = 1000;
 }

@@ -16,13 +16,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { AutoCompleteDirective, AutoCompletePopupComponent } from 'ng-devui/auto-complete';
-import {
-  addClassToOrigin,
-  AppendToBodyDirection,
-  DevConfigService,
-  removeClassFromOrigin,
-  WithConfig
-} from 'ng-devui/utils';
+import { addClassToOrigin, AppendToBodyDirection, DevConfigService, removeClassFromOrigin, WithConfig } from 'ng-devui/utils';
 import { Observable, of } from 'rxjs';
 
 @Component({

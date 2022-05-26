@@ -117,7 +117,7 @@ export class ToastComponent implements OnInit, AfterViewInit, OnDestroy {
   handleValueChange() {
     this.zIndex++;
     const doms = this.container.children;
-    setTimeout(() => this._value.forEach((v, i) => v && doms[i].classList.add('slide-in')));
+    setTimeout(() => this._value.forEach((v, i) => v && doms[i]?.classList.add('slide-in')));
 
     if (!this.sticky) {
       if (this.timeout) {
@@ -150,7 +150,9 @@ export class ToastComponent implements OnInit, AfterViewInit, OnDestroy {
       const doms = this.container.children;
       dom = doms[index];
     }
-    dom?.classList.remove('slide-in');
+    if (dom) {
+      dom.classList.remove('slide-in');
+    }
     setTimeout(() => {
       this.closeEvent.emit({ message: msg });
       if (this.container.querySelectorAll('.slide-in').length === 0) {
@@ -178,7 +180,7 @@ export class ToastComponent implements OnInit, AfterViewInit, OnDestroy {
         const otherToasts = this._value.slice(0);
         otherToasts.splice(index, 1, undefined);
         const doms = this.container.children;
-        otherToasts.forEach((v, i) => v && doms[i].classList.remove('slide-in'));
+        otherToasts.forEach((v, i) => v && doms[i]?.classList.remove('slide-in'));
       });
     }
   }
@@ -213,7 +215,7 @@ export class ToastComponent implements OnInit, AfterViewInit, OnDestroy {
   removeAll() {
     if (this.value && this.value.length) {
       const doms = this.container.children;
-      this._value.forEach((v, i) => v && doms[i].classList.remove('slide-in'));
+      this._value.forEach((v, i) => v && doms[i]?.classList.remove('slide-in'));
       setTimeout(() => {
         this.value.forEach((msg, index) => this.closeEvent.emit({ message: this.value[index] }));
         this.value = [];

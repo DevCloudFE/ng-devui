@@ -1,0 +1,8 @@
+<div [class.devui-icon-can-interactive]="operable" class="devui-icon-container" [class.disabled]="disabled">
+  <ng-content select="[iconPrefix]"></ng-content>
+  <ng-template [ngTemplateOutlet]="template || defaultTemplate"> </ng-template>
+  <ng-template #defaultTemplate>
+    <i class="devui-icon {{ icon }}" [style.transform]="'rotate(' + rotate + 'deg)'"> </i>
+  </ng-template>
+  <ng-content select="[iconSuffix]"></ng-content>
+</div>

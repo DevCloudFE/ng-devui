@@ -2,19 +2,27 @@
 
 .sort-clickable {
   cursor: pointer;
-  position: absolute;
-  top: -16px;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 8px;
+  vertical-align: -0.55em;
+}
+
+:host {
+  height: 20px;
   line-height: 20px;
+  margin-right: 4px;
+  margin-left: 8px;
+  flex: 1;
+  display: none;
+
+  &.devui-icon-show {
+    display: block;
+  }
 }
 
 .sort-icon-default {
   visibility: hidden;
 
   > svg g use {
-    fill: $devui-dividing-line;
+    fill: $devui-shape-icon-fill;
   }
 
   > svg g polygon {
@@ -23,7 +31,7 @@
 
   &:hover {
     > svg g use {
-      fill: $devui-icon-fill-active-hover;
+      fill: $devui-shape-icon-fill-active;
     }
   }
 
@@ -35,7 +43,7 @@
 .sort-icon-asc,
 .sort-icon-desc {
   > svg g use {
-    fill: $devui-icon-fill-active;
+    fill: $devui-shape-icon-fill-active;
   }
 
   > svg g polygon {
@@ -44,7 +52,7 @@
 
   &:hover {
     > svg g use {
-      fill: $devui-icon-fill-active-hover;
+      fill: $devui-shape-icon-fill-active;
     }
   }
 }
@@ -57,6 +65,6 @@
 
 .sort-icon-desc {
   > svg g polygon:first-of-type {
-    opacity: 0.3;
+    opacity: 0.5;
   }
 }

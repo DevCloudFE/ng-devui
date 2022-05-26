@@ -1,17 +1,21 @@
 <div class="devui-pagination" [class.devui-pagination-hidden]="autoHide && total < minPageSizeOptions">
-  <div *ngIf="canChangePageSize && !lite" class="devui-page-size {{ size ? 'devui-page-size-' + size : '' }}">
-    <d-select
-      [scrollHight]="'200px'"
-      [size]="size"
-      [ngModel]="pageSize"
-      [appendToBody]="true"
-      [appendToBodyDirections]="pageSizeDirection"
-      (valueChange)="onPageSizeChange($event)"
-      [options]="pageSizeOptions"
-      [isSearch]="false"
-    ></d-select>
-  </div>
-  <div *ngIf="canViewTotal" class="devui-total-size">{{ totalItemText ? totalItemText : i18nText?.totalItem }}: {{ total }}</div>
+  <ng-container *ngIf="canChangePageSize && !lite">
+    <div dDropDown (toggleEvent)="onToggle($event)" appendToBody [appendToBodyDirections]="pageSizeDirection">
+      <d-icon
+        class="devui-dropdown-default devui-dropdown-origin devui-page-size {{ size ? 'devui-page-size-' + size : '' }}"
+        dDropDownToggle
+        [icon]="'icon-select-arrow'"
+        [rotate]="rotateDegrees"
+      >
+        <span iconPrefix>{{ pageSize }}</span>
+      </d-icon>
+      <ul dDropDownMenu class="devui-dropdown-menu" role="menu">
+        <li *ngFor="let item of pageSizeOptions" class="devui-dropdown-item" (click)="onPageSizeChange(item)">{{ item }}</li>
+      </ul>
+    </div>
+    <span style="margin-right: 8px">{{ i18nText?.perPage }},</span>
+  </ng-container>
+  <div *ngIf="canViewTotal" class="devui-total-size">{{ totalItemText ? totalItemText + ': ' + total : i18nText?.totalItem(total) }}</div>
   <div *ngIf="lite && showPageSelector" class="devui-lite-paginator" #litePaginator>
     <d-select
       [scrollHight]="'200px'"

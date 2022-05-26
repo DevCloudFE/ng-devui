@@ -303,8 +303,9 @@ export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterV
   }
 
   private resolveParentNode(treeNodes: ITreeItem[]): boolean[] {
-    const childrenFullCheckedCount = treeNodes.filter(_ => _.isChecked).length;
-    const childrenCheckedCount = treeNodes.filter(_ => _.isChecked || _.halfChecked).length;
+    const enableParentNodeCheckByChild = this.checkableRelation === 'both' || this.checkableRelation === 'upward';
+    const childrenFullCheckedCount = enableParentNodeCheckByChild && treeNodes.filter(_ => _.isChecked).length;
+    const childrenCheckedCount = enableParentNodeCheckByChild && treeNodes.filter(_ => _.isChecked || _.halfChecked).length;
     return [
       childrenFullCheckedCount > 0 && treeNodes.length === childrenFullCheckedCount,
       childrenCheckedCount > 0 && treeNodes.length > childrenFullCheckedCount

@@ -97,31 +97,10 @@
 
 <!--黄底模板-->
 <ng-template #defaultTemplate let-item="item" let-formatter="formatter">
-  <span class="label-item">
-    <span class="label label-text">{{ formatter(item) }}</span
-    ><span class="label label-close" (click)="removeLabel(item)">
-      <svg
-        width="12px"
-        height="12px"
-        viewBox="0 0 12 12"
-        version="1.1"
-        xmlns="http://www.w3.org/2000/svg"
-        xmlns:xlink="http://www.w3.org/1999/xlink"
-      >
-        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-          <rect x="0" y="0" width="12" height="12" rx="6"></rect>
-          <path
-            d="M8.86785321,3.13214679 C9.02624037,3.29053395 9.02624037,3.54733027 8.86785321,3.70571743 L6.573,6 L8.86785321,8.29428257 C9.02624037,8.45266973 9.02624037,8.70946605 8.86785321,8.86785321 C8.70946605,9.02624037 8.45266973,9.02624037 8.29428257,8.86785321 L6,6.573 L3.70571743,8.86785321 C3.54733027,9.02624037 3.29053395,9.02624037 3.13214679,8.86785321 C2.97375963,8.70946605 2.97375963,8.45266973 3.13214679,8.29428257 L5.427,6 L3.13214679,3.70571743 C2.97375963,3.54733027 2.97375963,3.29053395 3.13214679,3.13214679 C3.29053395,2.97375963 3.54733027,2.97375963 3.70571743,3.13214679 L6,5.427 L8.29428257,3.13214679 C8.45266973,2.97375963 8.70946605,2.97375963 8.86785321,3.13214679 Z"
-            fill-rule="nonzero"
-          ></path>
-        </g>
-      </svg> </span
-  ></span>
+  <d-tag [deletable]="true" [tag]="formatter(item)" (tagDelete)="removeLabel(item)"></d-tag>
 </ng-template>
 
 <!--无底色模板-->
 <ng-template #transparentTemplate let-item="item" let-formatter="formatter" let-parent="parent">
-  <span class="label-item">
-    <span class="label label-text">{{ formatter(item) }}</span>
-  </span>
+  <d-tag [tag]="formatter(item)"></d-tag>
 </ng-template>

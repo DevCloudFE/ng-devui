@@ -1,15 +1,14 @@
 <div class="modal-footer">
-  <div>
-    <d-button
-      *ngFor="let button of buttons"
-      [attr.id]="button.id"
-      (btnClick)="button.handler($event)"
-      [bsStyle]="button.cssClass"
-      circled="true"
-      [width]="button.btnwidth"
-      [autofocus]="button.autofocus"
-      [disabled]="button.disabled"
-      >{{ button.text }}
-    </d-button>
-  </div>
+  <d-button
+    *ngFor="let button of buttons"
+    [bsSize]="'lg'"
+    [attr.id]="button.id"
+    (btnClick)="button.handler($event)"
+    [bsStyle]="button.cssClass"
+    circled="true"
+    [width]="button.btnwidth"
+    [autofocus]="button.autofocus"
+    [disabled]="button.disabled"
+    >{{ button.text }}
+  </d-button>
 </div>

@@ -17,6 +17,7 @@ import {
   ViewChild,
   ViewChildren
 } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { DatepickerProCalendarComponent } from 'ng-devui/datepicker-pro';
 import { DropDownDirective } from 'ng-devui/dropdown';
 import { DValidateRules } from 'ng-devui/form';
@@ -73,7 +74,6 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
   @ViewChild('ScrollBarContainer') scrollBarContainer: ElementRef;
   @ViewChild('PrimeContainer') primeContainer: ElementRef<any>;
   @ViewChildren('selectedDropdown') selectedDropdownList: QueryList<DropDownDirective>;
-  @ViewChildren(DatepickerProCalendarComponent) datePickers: QueryList<DatepickerProCalendarComponent>;
   @ViewChildren(DatepickerProCalendarComponent, { read: ElementRef }) datePickerElements: QueryList<ElementRef>;
   @ViewChildren(DefaultTemplateDirective) defaultTemplates: QueryList<DefaultTemplateDirective>;
   @ContentChildren(ContentTemplateDirective) contentTemplates: QueryList<ContentTemplateDirective>;
@@ -87,6 +87,7 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
   searchKeyCache = '';
   enterSearch = false;
   isShowSavePanel = false;
+  isSearchCategory = false;
   isHover = false;
   isFocus = false;
   noRecord = false;
@@ -97,6 +98,7 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
   i18nCategorySearchText: I18nInterface['categorySearch'];
   currentSearchCategory: Array<ICategorySearchTagItem>;
   categoryDisplay: Array<ICategorySearchTagItem>;
+  currentOpenDropdown: DropDownDirective;
   currentScrollTagIndex: number; // 当前要滚动至的标签索引
   scrollTimeout: any; // 如果标签在可视范围内则延时展开下拉的定时器
   scrollToTailFlag = true; // 是否在更新标签内容后滚动至输入框的开关
@@ -104,6 +106,8 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
   DELAY = 300; // 防抖延迟
   templates = {}; // 所有类型默认模板
   customTemplates = {}; // 按field标记的自定义模板集合
+  joinLabelTypes = ['checkbox', 'label'];
+  valueIsArrayTypes = ['numberRange', 'treeSelect'];
   showSearchConfig: SearchConfig;
   document: Document;
 
@@ -162,6 +166,7 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
               clearTimeout(this.scrollTimeout);
               this.scrollTimeout = undefined;
             }
+            // TODO: 无法区分手动和自动滚动，待处理滚动时关闭已打开的下拉
           }),
           // 300毫秒内不再触发滚动事件则展开下拉列表
           debounceTime(this.DELAY)
@@ -280,7 +285,7 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
 
   // 初始化tag的value属性：{filterKey | label, value, data}
   initCategoryItem(item) {
-    const preValue = item.type === 'numberRange' || item.type === 'treeSelect' ? { value: [] } : { value: undefined };
+    const preValue = this.valueIsArrayTypes.includes(item.type) ? { value: [] } : { value: undefined };
     preValue[item.filterKey || 'label'] = undefined;
     if (item.value) {
       for (const prop in preValue) {
@@ -295,7 +300,7 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
     if (item.type === 'treeSelect' && item.options && item.options.length) {
       item.value.options = cloneDeep(item.options);
     }
-    item.customTemplate = this.customTemplates[item.field];
+    item.customTemplate = this.customTemplates[item.field] || item.customTemplate;
     return item;
   }
 
@@ -303,10 +308,13 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
     if (Array.isArray(data) && data.length) {
       data.forEach((item) => {
         if (isSelectedTags) {
-          const origin = this.category.find((categoryItem) => categoryItem.field === item.field);
-          merge(item, origin);
-          const result =
-            (item.type === 'checkbox' || item.type === 'label') && this.getItemValue(item.value.value, item.filterKey || 'label');
+          let result = '';
+          const originItem = this.category.find((categoryItem) => categoryItem.field === item.field);
+          merge(item, originItem);
+          if (item.value.value) {
+            item.value.cache = cloneDeep(item.value.value);
+            result = this.joinLabelTypes.includes(item.type) ? this.getItemValue(item.value.value, item.filterKey || 'label') : '';
+          }
           item.title = this.setTitle(item, item.type, result);
         } else {
           item = this.initCategoryItem(item);
@@ -316,7 +324,7 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
   }
 
   setTitle(tag: ICategorySearchTagItem, type: string, result?: string) {
-    return type === 'checkbox' || type === 'label'
+    return this.joinLabelTypes.includes(type)
       ? `${tag.label}: ${result || ''}`
       : `${tag.label}: ${result || (tag.value && tag.value[tag.filterKey || 'label']) || ''}`;
   }
@@ -329,7 +337,7 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
       const keys = this.groupOrderConfig || Object.keys(groupObj);
       this.categoryDisplay = [];
       keys.forEach((key) => {
-        if (groupObj[key]) {
+        if (groupObj[key]?.length) {
           const groupItem = <ICategorySearchTagItem>{};
           groupItem.groupName = key;
           groupItem.groupLength = groupObj[key].length;
@@ -413,6 +421,7 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
           setTimeout(() => this.scrollToTail());
         }
         this.selectedTagsChange.emit({ selectedTags: result || this.selectedTags, currentChangeTag: tag, operation: 'add' });
+        this.isSearchCategory = false;
       }
     });
   }
@@ -447,8 +456,6 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
       const dropdownArr = this.selectedDropdownList.toArray();
       this.openMenu(dropdownArr[this.currentScrollTagIndex], event);
       this.currentScrollTagIndex = undefined;
-    } else {
-      this.inputEle.nativeElement.focus();
     }
   }
 
@@ -519,6 +526,15 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
     setTimeout(() => {
       this.inputEle.nativeElement.focus();
     });
+  }
+
+  // 失焦时关闭当前下拉列表，延时用以防止关闭掉点击分类展开的内容列表
+  blurInput() {
+    setTimeout(() => {
+      if (!this.currentSelectTag && this.currentOpenDropdown) {
+        this.currentOpenDropdown.isOpen = false;
+      }
+    }, this.DELAY);
   }
 
   openMenu(inputDropdown: DropDownDirective, event) {
@@ -628,14 +644,14 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
     this.filterName = '';
   }
 
-  createFilterInputAutoFocus(dropdown, inputElm, filterNameForm) {
+  createFilterInputAutoFocus(dropdown: DropDownDirective, inputElm: HTMLElement, filterNameForm: NgForm) {
     if (dropdown.isOpen) {
       filterNameForm.form.reset();
       setTimeout(() => inputElm.focus());
     }
   }
 
-  searchKeyChangeEvent(event) {
+  searchKeyChangeEvent(event: string) {
     this.enterSearch = !!event;
     this.currentSearchCategory = this.category.filter((item) => item['label'].toLowerCase().includes(event.toLowerCase()));
     this.searchKeyChange.emit(event);
@@ -646,7 +662,7 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
   }
 
   resetValue(tag) {
-    tag.value = tag.type === 'numberRange' || tag.type === 'treeSelect' ? { value: [] } : { value: undefined };
+    tag.value = this.valueIsArrayTypes.includes(tag.type) ? { value: [] } : { value: undefined };
     tag.value[tag.filterKey || 'label'] = undefined;
     return tag;
   }
@@ -719,12 +735,16 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
     if (this.toggleEvent) {
       this.toggleEvent(dropdown, tag, this.currentSelectTag);
     }
-    if (dropdown.isOpen && tag?.type === 'keyword') {
-      this.searchKey = this.searchKeyCache;
-      this.inputEle.nativeElement.focus();
-      dropdown.isOpen = false;
-    }
-    if (!dropdown.isOpen) {
+    if (dropdown.isOpen) {
+      this.currentOpenDropdown = dropdown;
+      if (tag?.type === 'keyword') {
+        this.searchKey = this.searchKeyCache;
+        this.inputEle.nativeElement.focus();
+        dropdown.isOpen = false;
+      }
+    } else {
+      this.clearCurrentSelectTagFromSearch();
+      this.currentOpenDropdown = undefined;
       this.showNoDataTips = false;
       return;
     }
@@ -734,25 +754,32 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
         tag.value.value = cloneDeep(tag.value.cache);
         this.handleAccordingType(tag.type, tag.value.options);
       }
-      if (tag.type === 'dateRange') {
-        // 由于datePicker无法初始化显示已有时间，需通过实例调用updateCurPosition方法渲染，因此通过field识别当前显示实例并调用
-        const datePickerItem =
-          this.datePickers.length > 1
-            ? this.datePickers.find((v, i) => this.datePickerElements.toArray()[i]?.nativeElement?.id === tag.field)
-            : this.datePickers.first;
-        datePickerItem.updateCurPosition();
-        datePickerItem.focusChange('start');
-      }
     } else if (this.currentSelectTag) {
-      const isArrayType = this.currentSelectTag.type === 'numberRange' || this.currentSelectTag.type === 'treeSelect';
-      this.currentSelectTag.value.value = isArrayType ? [] : undefined;
+      this.currentSelectTag.value.value = this.valueIsArrayTypes.includes(this.currentSelectTag.type) ? [] : undefined;
       this.handleAccordingType(this.currentSelectTag.type, this.currentSelectTag.options);
       this.scrollToTailFlag = true;
     }
     this.showNoDataTips = this.categoryDisplay.length === 0 || !this.categoryDisplay.some((item) => item && item.groupLength === undefined);
   }
 
-  handleAccordingType(type, options) {
+  showCurrentSearchCategory(item, inputDropdown: DropDownDirective) {
+    this.isSearchCategory = true;
+    this.clearSearchKey();
+    this.closeMenu(inputDropdown);
+    this.chooseCategory(item, inputDropdown);
+    setTimeout(() => this.checkInputSearching(), this.DELAY);
+  }
+
+  clearCurrentSelectTagFromSearch() {
+    if (this.currentSelectTag) {
+      if (this.isSearchCategory) {
+        this.isSearchCategory = false;
+        setTimeout(() => this.finishChoose(), this.DELAY);
+      }
+    }
+  }
+
+  handleAccordingType(type: string, options: Array<any>) {
     switch (type) {
     case 'treeSelect':
       options = cloneDeep(options);

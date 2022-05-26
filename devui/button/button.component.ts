@@ -30,6 +30,7 @@ export class ButtonComponent implements AfterContentChecked {
   @Input() id: string;
   @Input() type: IButtonType = 'button';
   @Input() bsStyle: IButtonStyle = 'primary';
+  @Input() shape: 'circle';
   @Input() bsSize: IButtonSize = 'md';
   /**
    * @deprecated

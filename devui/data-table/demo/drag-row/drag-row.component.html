@@ -2,10 +2,10 @@
   [dataSource]="basicDataSource"
   [tableWidthConfig]="tableWidthConfig"
   [scrollable]="true"
-  [type]="'striped'"
   dDroppable
   [switchWhileCrossEdge]="true"
   [dropScope]="'default-switch'"
+  [tableOverflowType]="'overlay'"
   (dropEvent)="onDrop($event)"
 >
   <thead dTableHead>
