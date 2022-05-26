@@ -3,7 +3,7 @@
 The following information is added to the module:
 
 ```ts
-import {DashboardModule} from 'ng-devui/dashboard';
+import { DashboardModule } from 'ng-devui/dashboard';
 ```
 
 Used in the page:

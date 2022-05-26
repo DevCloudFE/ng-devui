@@ -34,6 +34,12 @@ export class RateDemoComponent implements OnInit, OnDestroy {
     { title: 'SCSS', language: 'css', code: require('./half/rate-half.component.scss?raw') },
   ];
 
+  clearSource: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'xml', code: require('./clear/rate-clear.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./clear/rate-clear.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./clear/rate-clear.component.scss?raw') },
+  ];
+
   TemplateSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('./template/template.component.html?raw') },
     { title: 'TS', language: 'typescript', code: require('./template/template.component.ts?raw') },
@@ -64,6 +70,7 @@ export class RateDemoComponent implements OnInit, OnDestroy {
       { dAnchorLink: 'dynamic-mode', value: values['dynamic-mode'] },
       { dAnchorLink: 'dynamic-mode-Custom', value: values['dynamic-mode-Custom'] },
       { dAnchorLink: 'half-demo', value: values['half-demo']},
+      { dAnchorLink: 'clear-demo', value: values['clear-demo']},
       { dAnchorLink: 'using-the-type-parameter', value: values['using-the-type-parameter'] },
       { dAnchorLink: 'template', value: values['template'] },
     ];

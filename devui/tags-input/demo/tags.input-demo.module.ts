@@ -8,7 +8,7 @@ import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
 import { TagsInputModule } from 'ng-devui/tags-input';
 import { TranslateModule } from '@ngx-translate/core';
-import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
+import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
 import { TagsInputDemoAsyncComponent } from './async/async.component';
 import { TagsInputDemoBasicComponent } from './basic/basic.component';
 import { TagsInputDemoNgModelComponent } from './ngmodel/ngmodel.component';

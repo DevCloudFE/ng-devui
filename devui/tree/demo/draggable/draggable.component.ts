@@ -13,17 +13,17 @@ export class DraggableComponent implements OnInit {
   }, {
     'title': 'parent node 2',
     'open': true,
-    'children': [{
+    'items': [{
       'title': 'leaf node 2-1',
       'open': true,
-      'children': [{
+      'items': [{
         'title': 'leaf node 2-1-1'
       }, {
         'title': 'leaf node 2-1-2'
       }]
     }, {
       'title': 'leaf node 2-2',
-      'children': [{
+      'items': [{
         'title': 'leaf node 2-2-1'
       }, {
         'title': 'leaf node 2-2-2'
@@ -32,7 +32,7 @@ export class DraggableComponent implements OnInit {
   }, {
     'title': 'parent node 3',
     'open': true,
-    'children': [{
+    'items': [{
       'title': 'leaf node 3-1',
     }, {
       'title': 'leaf node 3-2',
@@ -40,7 +40,7 @@ export class DraggableComponent implements OnInit {
   }, {
     'title': 'parent node 4',
     'open': true,
-    'children': [{
+    'items': [{
       'title': 'leaf node 4-1'
     }, {
       'title': 'leaf node 4-2'
@@ -48,7 +48,7 @@ export class DraggableComponent implements OnInit {
   }, {
     'title': 'parent node 5',
     'open': true,
-    'children': [{
+    'items': [{
       'title': 'leaf node 5-1'
     }, {
       'title': 'leaf node 5-2'
@@ -75,11 +75,15 @@ export class DraggableComponent implements OnInit {
   };
 
   onDrop(data) {
+    console.log('drop', data);
     this.transferData = data.event.dataTransfer.getData('Text');
   }
 
+  dragStart(event) {
+    console.log('dragStart', event);
+  }
   showNode(node) {
-    console.log(node);
+    console.log('toggle', node);
   }
   dragOver($event) {
     $event.preventDefault();

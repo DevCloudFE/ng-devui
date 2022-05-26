@@ -110,7 +110,7 @@ export class DialogService {
       } else {
         this.contentRef = modalContainerRef.instance.modalContentHost.viewContainerRef
           .createComponent(finalComponentFactoryResolver.resolveComponentFactory(content));
-        assign(this.contentRef.instance, { data }, dialogtype);
+        assign(this.contentRef.instance, { data, dialogtype });
       }
     }
 

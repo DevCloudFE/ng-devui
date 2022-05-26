@@ -5,7 +5,6 @@
 .devui-breadcrumb-font-style {
   font-size: $devui-font-size;
   color: $devui-aide-text;
-  line-height: 18px;
 }
 
 .devui-breadcrumb-item {
@@ -35,7 +34,6 @@
   cursor: pointer;
   width: 16px;
   height: 16px;
-  line-height: 18px;
   margin-right: -8px;
   text-align: center;
   outline: none;
@@ -46,7 +44,7 @@
 
   &:hover {
     svg g path {
-      fill: $devui-icon-text;
+      fill: $devui-icon-fill-hover;
     }
   }
 }

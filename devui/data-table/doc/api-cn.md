@@ -36,7 +36,7 @@ import { DataTableModule } from 'ng-devui/data-table';
 | loadAllChildrenTable  |           `() => Promise<any>`           | --     |                      可选，表头展开所有子表格的回调，用于异步加载所有子表格                      | [树形表格](demo#tree-form)                       |
 |     colDraggable      |           `boolean`           | false  |                                    可选，表格列是否可拖动排序                                    | [列拖拽](demo#column-dragging)                   |
 |    colDropFreezeTo    |           `number`            | 0      |                            可选，表格列可拖动排序时配置前n列不可拖动                             | [列拖拽](demo#column-dragging)                   |
-|     virtualScroll     |           `boolean`           | false  |                                      可选，是否开启虚拟滚动，虚拟滚动参数对树形表格不生效         | [虚拟滚动](demo#virtual-scroll)                  |
+|     virtualScroll     |           `boolean`           | false  |                                      可选，是否开启虚拟滚动，虚拟滚动参数对树形表格不生效，需要使用树形虚拟滚动请参考大数据量树形表格demo的实现         | [虚拟滚动](demo#virtual-scroll)                  |
 |    virtualItemSize    |           `number`            | 40     |                       可选，虚拟滚动时每一行的高度，默认为表格默认行高40`px`                       | [虚拟滚动](demo#virtual-scroll)                  |
 |  virtualMinBufferPx   |           `number`            | 80     |                    可选，虚拟滚动时缓冲区最小像素高度，低于该值时将加载新结构                    | [虚拟滚动](demo#virtual-scroll)                  |
 |  virtualMaxBufferPx   |           `number`            | 200    |                                可选，虚拟滚动时缓冲区最大像素高度                                | [虚拟滚动](demo#virtual-scroll)                  |
@@ -61,6 +61,8 @@ import { DataTableModule } from 'ng-devui/data-table';
 |    tableLayout     |           `'fixed'\|'auto'`           | 'fixed'     |         可选，表格布局         | [表格样式](demo#mutil-styles)                     |
 |    borderType     |           `''\|'bordered'\|'borderless'`           | ''     |         可选，表格边框类型，默认有行边框，bordered：全边框，borderless：无边框         | [表格样式](demo#mutil-styles)                     |
 |    striped     |           `boolean`           | false     |         可选，表格是否展示为斑马纹间隔         | [表格样式](demo#mutil-styles)                     |
+|    shadowType     |           `'shadow' \| 'embed'`          | 'embed'     |         可选，表格为阴影类型还是内嵌类型        | [表格样式](demo#mutil-styles)                     |
+|    tableOverflowType     |           `'overlay' \| 'auto'`          | 'auto'     |         可选，表格滚动条类型，overlay情况下鼠标悬浮才会显示滚动条       | [表格样式](demo#mutil-styles)                     |
 
 ### d-data-table 事件
 
@@ -148,6 +150,7 @@ import { DataTableModule } from 'ng-devui/data-table';
 |           事件           |        类型         |                        描述                         | 跳转 Demo                                                |
 | :----------------------: | :-----------------: | :-------------------------------------------------: | :------------------------------------------------------- |
 |       filterChange       |  `EventEmitter<FilterConfig[]>`   |        确认筛选回调事件，返回选中的筛选数组         | [表格交互](demo#table-interaction) |
+|       filterToggle       |  `EventEmitter<{isOpen: boolean;checklist: FilterConfig[];}>`   |        筛选面板的展开收起事件         | [表格交互](demo#table-interaction) |
 |        sortChange        |   `EventEmitter<SortEventArg>`    |           排序回调事件，返回该列排序信息            | [表格交互](demo#table-interaction) |
 |     resizeStartEvent     |    `EventEmitter<MouseEvent>`     |              该列宽度调整开始时的事件               |
 |      resizingEvent       | `EventEmitter<{ width: string }>` |              该列宽度调整进行中的事件               |
@@ -360,6 +363,7 @@ export enum SortDirection {
 |     事件     |       类型       |                 描述                 | 跳转 Demo                                                |
 | :----------: | :--------------: | :----------------------------------: | :------------------------------------------------------- |
 | filterChange | `FilterConfig[]` | 确认筛选回调事件，返回选中的筛选数组 | [表格交互](demo#table-interaction) |
+|       filterToggle       |  `EventEmitter<{isOpen: boolean;checklist: FilterConfig[];}>`   |        筛选面板的展开收起事件         | [表格交互](demo#table-interaction) |
 
 ## rowItem参数
 |       参数        |        类型         | 默认值 |                                                   描述                                                    |

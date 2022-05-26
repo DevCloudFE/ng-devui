@@ -1,0 +1,84 @@
+@import '../style/theme/color';
+@import '../style/core/animation';
+@import '../style/theme/corner';
+
+$devui-icon-background-hover: var(--devui-icon-background-hover, $devui-list-item-hover-bg);
+$devui-icon-background-active: var(--devui-icon-background-active, $devui-list-item-active-bg);
+
+.devui-icon {
+  font-size: 16px;
+  display: inline-block;
+  vertical-align: middle;
+  transition: all $devui-animation-duration-slow $devui-animation-ease-in-out-smooth;
+}
+
+.devui-icon-can-interactive {
+  cursor: pointer;
+  transition: color $devui-animation-duration-slow $devui-animation-ease-in-out-smooth;
+
+  .devui-icon {
+    cursor: pointer;
+  }
+
+  &:hover {
+    color: $devui-icon-fill-hover;
+
+    &.devui-icon-container {
+      background-color: $devui-icon-background-hover;
+    }
+
+    .devui-icon {
+      color: $devui-icon-fill-hover;
+    }
+  }
+
+  &:active {
+    color: $devui-icon-fill-active;
+
+    &.devui-icon-container {
+      background-color: $devui-icon-background-active;
+    }
+
+    .devui-icon {
+      color: $devui-icon-fill-active;
+    }
+  }
+
+  &.devui-icon-container {
+    height: 32px;
+    padding: 0 8px;
+    border-radius: $devui-border-radius;
+    transition: all $devui-animation-duration-slow $devui-animation-ease-in-out-smooth;
+  }
+}
+
+.devui-icon-container {
+  display: inline-flex;
+  align-items: center;
+  color: $devui-icon-fill;
+}
+
+.disabled {
+  color: $devui-disabled-text;
+  pointer-events: none;
+
+  .devui-icon {
+    color: $devui-disabled-text;
+  }
+}
+
+::ng-deep .devui-icon-container [iconPrefix] {
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+::ng-deep .devui-icon-container [iconSuffix] {
+  vertical-align: middle;
+  margin-left: 8px;
+}
+
+::ng-deep .devui-icon-container span,
+::ng-deep .devui-icon-container svg,
+::ng-deep .devui-icon-container i {
+  vertical-align: middle;
+}

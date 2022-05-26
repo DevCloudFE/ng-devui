@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { ITreeItem, TreeComponent, TreeNode } from 'ng-devui/tree';
+import { TreeComponent, TreeNode } from 'ng-devui/tree';
 
 @Component({
   selector: 'd-basic',
@@ -7,11 +7,10 @@ import { ITreeItem, TreeComponent, TreeNode } from 'ng-devui/tree';
 })
 export class BasicComponent {
   @ViewChild('basicTree', { static: true }) basicTree: TreeComponent;
-  data1 = [
+  data = [
     {
       title: 'parent node 1 - expanded',
       open: true,
-      disabled: true,
       items: [
         {
           title: 'parent node 11 - folded',
@@ -32,7 +31,6 @@ export class BasicComponent {
         },
         {
           title: 'parent node 12 - folded',
-          disableToggle: true,
           items: [
             {
               title: 'leaf node 121'
@@ -48,10 +46,6 @@ export class BasicComponent {
             }
           ]
         },
-        {
-          title: 'parent node 13 - without children - dynamic loading',
-          isParent: true
-        }
       ]
     },
     {
@@ -111,85 +105,13 @@ export class BasicComponent {
         }
       ]
     },
-    {
-      id: 'dynamicNode',
-      title: 'parent node 3 - without children - dynamic loading',
-      isParent: true,
-      data: {
-        id: 'newChildNode',
-        name: 'new child node'
-      }
-    }
   ];
 
   onNodeSelected(treeNode: TreeNode) {
-    console.log('selected: ', treeNode);
+    console.log('selected', treeNode);
   }
 
   onNodeToggled(treeNode: TreeNode) {
-    this.loadChildren(treeNode);
-  }
-
-  changeTree() {
-    this.data1 = [{
-      id: 'dynamicNode2',
-      title: 'parent node 4 - dynamic loading',
-      isParent: true,
-      data: {
-        id: 'newChildNode2',
-        name: 'new child node 2'
-      }
-    }];
-  }
-
-  loadChildren(treeNode: TreeNode) {
-    if (this.basicTree.treeFactory.getChildrenById(treeNode.id).length === 0 && treeNode.data.isParent) {
-      if (!this.basicTree.treeFactory.nodes[treeNode.id].data.loading) {
-        this.basicTree.treeFactory.startLoading(treeNode.id);
-        this.getMockData()
-          .then((result: Array<ITreeItem>) => {
-            this.basicTree.treeFactory.endLoading(treeNode.id);
-            this.basicTree.treeFactory.mapTreeItems({ treeItems: result, parentId: treeNode.id });
-            console.log('loaded children: ', this.basicTree.treeFactory.getChildrenById(treeNode.id));
-          })
-          .catch(() => {
-            this.basicTree.treeFactory.endLoading(treeNode.id);
-          });
-      }
-    }
-  }
-
-  getMockData() {
-    return new Promise(resolve => {
-      setTimeout(() => {
-        resolve([
-          {
-            title: 'leaf node 311',
-            data: {
-              id: 'extraNode',
-              name: 'extra node'
-            }
-          },
-          {
-            title: 'leaf node 312',
-          },
-          {
-            title: 'leaf node 313--expanded',
-            open: true,
-            items: [
-              {
-                title: 'leaf node 313-1',
-              },
-              {
-                title: 'leaf node 313-2',
-              },
-              {
-                title: 'leaf node 313-3',
-              }
-            ]
-          }
-        ]);
-      }, 3000);
-    });
+    console.log('Toggled', treeNode);
   }
 }

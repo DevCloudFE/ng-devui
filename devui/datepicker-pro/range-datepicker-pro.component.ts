@@ -47,13 +47,20 @@ export class RangeDatepickerProComponent implements OnInit, OnDestroy, AfterView
   @Input() width: string;
   @Input() startIndexOfWeek = 0;
   @Input() appendToBody = true;
+  @Input() placeholder: string[];
   @Input() set calenderRange (value) {
     this.pickerSrv.calendarRange = value || [1970, 2099];
   }
   @Input() set minDate(value: Date) {
+    if (!value) {
+      return;
+    }
     this.pickerSrv.minDate = value;
   }
   @Input() set maxDate(value: Date) {
+    if (!value) {
+      return;
+    }
     this.pickerSrv.maxDate = value;
   }
   @Input() set markedRangeDateList(value: Date[][]) {
@@ -324,6 +331,9 @@ export class RangeDatepickerProComponent implements OnInit, OnDestroy, AfterView
   };
 
   public focusChange(type: 'start' | 'end') {
+    if (!this.isOpen) {
+      type = 'start';
+    }
     this.currentActiveInput = type;
     this.pickerSrv.activeInputChange.next(type);
     if (type === 'start') {

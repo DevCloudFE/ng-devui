@@ -1,25 +1,23 @@
-<h3 class="devui-h3-title">Default</h3>
+<h4 class="devui-h3-title">Default</h4>
 <d-operable-tree
   [tree]="data"
-  [treeNodeIdKey]="'id'"
-  [treeNodeChildrenKey]="'children'"
-  [checkable]="false"
   [draggable]="true"
   (nodeOnDrop)="onDrop($event)"
+  (nodeDragStart)="dragStart($event)"
   [beforeNodeDrop]="beforeNodeDrop"
+  (nodeOnDrop)="onDrop($event)"
   (nodeToggled)="showNode($event)"
 >
 </d-operable-tree>
-<h3 class="devui-h3-title">Sortable</h3>
+<h4 class="devui-h3-title">Sortable</h4>
 <d-operable-tree
   [tree]="data"
-  [treeNodeIdKey]="'id'"
-  [treeNodeChildrenKey]="'children'"
-  [checkable]="false"
   [draggable]="true"
   [dropType]="dropType"
   (nodeOnDrop)="onDrop($event)"
+  (nodeDragStart)="dragStart($event)"
   [beforeNodeDrop]="beforeNodeDrop"
+  (nodeOnDrop)="onDrop($event)"
   (nodeToggled)="showNode($event)"
 >
 </d-operable-tree>

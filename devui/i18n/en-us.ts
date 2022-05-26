@@ -97,6 +97,7 @@ export default {
     day: 'Day',
     week: 'Week',
     month: 'Month',
+    milestone: 'milestone',
     monthsOfYear: [
       'January',
       'February',
@@ -122,10 +123,13 @@ export default {
     },
   },
   pagination: {
-    totalItem: 'Total Records',
     goTo: 'Go To',
     pageSize: 'Page Size',
     page: 'Page',
+    perPage: 'Per Page',
+    totalItem(total) {
+      return `Total ${total} Records`;
+    }
   },
   quadrant: {
     xAxisLabel: 'Urgency',

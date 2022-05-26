@@ -1,34 +1,133 @@
-<ul
-  class="devui-nav devui-nav-{{ type }} {{ cssClass }}"
-  [ngClass]="{
-    'devui-nav-stacked': vertical
-  }"
-  role="tablist"
-  [id]="id"
-  #tabsEle
->
-  <ng-container *ngFor="let tab of tabs">
-    <li
-      role="presentation"
-      [class.disabled]="tab.disabled"
-      [id]="tab.id === undefined ? '' : tab.id"
-      [class.active]="tab.id == activeTab"
-      (click)="select(tab.id)"
+<div class="devui-nav-container devui-nav-{{ size }}">
+  <div *ngIf="scrollMode" class="devui-nav-scroll-ctrl">
+    <span [ngClass]="{ disable: offsetIndex === 0 }" (click)="scroll('prev')">
+      <svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1">
+        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+          <polygon
+            fill-rule="nonzero"
+            points="10.7071068 12.2928932 9.29289322 13.7071068 3.58578644 8 9.29289322 2.29289322 10.7071068 3.70710678 6.41421356 8"
+          ></polygon>
+        </g>
+      </svg>
+    </span>
+  </div>
+  <div
+    #tabsViewport
+    [style.width]="type === 'tabs' ? '100%' : ''"
+    [ngClass]="{ 'dev-nav-scroll-container': scrollMode, 'devui-nav-shadow': isShowShadow }"
+  >
+    <ul
+      #tabsEle
+      role="tablist"
+      class="devui-nav devui-nav-{{ type }}"
+      [id]="id"
+      [ngClass]="{
+        'devui-nav-add-button': addable,
+        'devui-nav-overflow': scrollMode
+      }"
     >
-      <a
-        role="tab"
-        data-toggle="tab"
-        [attr.aria-expanded]="tab.id == activeTab"
-        [style.width]="customWidth"
-        [ngClass]="{ 'custom-width': customWidth }"
+      <ng-container *ngFor="let tab of tabs">
+        <li
+          role="presentation"
+          class="devui-nav-tab-item"
+          [id]="tab.id === undefined ? '' : tab.id"
+          [class.disabled]="tab.disabled"
+          [class.active]="tab.id == activeTab"
+          (click)="select(tab.id)"
+        >
+          <a
+            role="tab"
+            data-toggle="tab"
+            [attr.aria-expanded]="tab.id == activeTab"
+            [style.width]="customWidth"
+            [ngClass]="{ 'custom-width': customWidth }"
+          >
+            <ng-template
+              *ngIf="!tab.title"
+              [ngTemplateOutlet]="tab.titleTpl?.templateRef"
+              [ngTemplateOutletContext]="{ tab: tab }"
+            ></ng-template>
+            <span *ngIf="tab.title">{{ tab.title }}</span>
+          </a>
+          <span *ngIf="checkCloseable(tab)" class="devui-tab-close-icon" (click)="addOrDeleteTab($event, tab.id)">
+            <svg
+              width="12px"
+              height="12px"
+              viewBox="0 0 12 12"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+            >
+              <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <path
+                  d="M8.86785321,3.13214679 C9.02624037,3.29053395 9.02624037,3.54733027 8.86785321,3.70571743 L6.573,6 L8.86785321,8.29428257 C9.02624037,8.45266973 9.02624037,8.70946605 8.86785321,8.86785321 C8.70946605,9.02624037 8.45266973,9.02624037 8.29428257,8.86785321 L6,6.573 L3.70571743,8.86785321 C3.54733027,9.02624037 3.29053395,9.02624037 3.13214679,8.86785321 C2.97375963,8.70946605 2.97375963,8.45266973 3.13214679,8.29428257 L5.427,6 L3.13214679,3.70571743 C2.97375963,3.54733027 2.97375963,3.29053395 3.13214679,3.13214679 C3.29053395,2.97375963 3.54733027,2.97375963 3.70571743,3.13214679 L6,5.427 L8.29428257,3.13214679 C8.45266973,2.97375963 8.70946605,2.97375963 8.86785321,3.13214679 Z"
+                  fill-rule="nonzero"
+                ></path>
+              </g>
+            </svg>
+          </span>
+        </li>
+      </ng-container>
+      <li *ngIf="addable && !addTabTpl; else addTabTpl" class="devui-tab-add-icon">
+        <a [style.width]="customWidth" (click)="addOrDeleteTab($event)">
+          <svg
+            width="16px"
+            height="16px"
+            viewBox="0 0 16 16"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+          >
+            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+              <polygon points="7 7 7 2 9 2 9 7 14 7 14 9 9 9 9 14 7 14 7 9 2 9 2 7"></polygon>
+            </g>
+          </svg>
+        </a>
+      </li>
+      <div class="devui-nav-{{ type }}-animation" [style.left]="offsetLeft + 'px'" [style.width]="offsetWidth + 'px'"></div>
+    </ul>
+  </div>
+  <div dDropDown appendToBody *ngIf="scrollMode" class="devui-nav-scroll-ctrl">
+    <span [ngClass]="{ disable: offsetIndex === tabs.length - 1 }" (click)="scroll('next')">
+      <svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1">
+        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+          <polygon
+            fill-rule="nonzero"
+            transform="translate(8.146447, 8.000000) scale(-1, 1) translate(-8.146447, -8.000000) "
+            points="11.7071068 12.2928932 10.2928932 13.7071068 4.58578644 8 10.2928932 2.29289322 11.7071068 3.70710678 7.41421356 8"
+          ></polygon>
+        </g>
+      </svg>
+    </span>
+    <span class="devui-nav-more-operate" dDropDownToggle>
+      <svg
+        width="16px"
+        height="16px"
+        viewBox="0 0 16 16"
+        version="1.1"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
       >
-        <ng-template *ngIf="!tab.title" [ngTemplateOutlet]="tab.titleTpl?.templateRef"></ng-template>
+        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+          <path
+            d="M0.5,8 C0.499999992,7.46410162 0.785898375,6.96891109 1.24999999,6.7009619 C1.71410161,6.4330127 2.28589839,6.4330127 2.75000001,6.7009619 C3.21410162,6.96891109 3.50000001,7.46410162 3.5,8 C3.5,8.82842713 2.82842712,9.5 2,9.5 C1.17157288,9.5 0.5,8.82842713 0.5,8 Z M6.5,8 C6.49999999,7.46410162 6.78589838,6.96891109 7.24999999,6.7009619 C7.71410161,6.4330127 8.28589839,6.4330127 8.75000001,6.7009619 C9.21410162,6.96891109 9.50000001,7.46410162 9.5,8 C9.5,8.82842713 8.82842712,9.5 8,9.5 C7.17157288,9.5 6.5,8.82842713 6.5,8 Z M12.5,8 C12.5,7.46410162 12.7858984,6.96891109 13.25,6.7009619 C13.7141016,6.4330127 14.2858984,6.4330127 14.75,6.7009619 C15.2141016,6.96891109 15.5,7.46410162 15.5,8 C15.5,8.82842713 14.8284271,9.5 14,9.5 C13.1715729,9.5 12.5,8.82842713 12.5,8 Z"
+            transform="translate(8.000000, 8.000000) rotate(90.000000) translate(-8.000000, -8.000000) "
+          ></path>
+        </g>
+      </svg>
+    </span>
+    <ul role="menu" dDropDownMenu class="devui-nav-dropdown devui-dropdown-menu devui-dropdown-overlay">
+      <li class="devui-dropdown-item" *ngFor="let tab of tabs; index as i" (click)="scroll(null, i, tab)">
+        <ng-template
+          *ngIf="!tab.title"
+          [ngTemplateOutlet]="tab.titleTpl?.templateRef"
+          [ngTemplateOutletContext]="{ tab: tab }"
+        ></ng-template>
         <span *ngIf="tab.title">{{ tab.title }}</span>
-      </a>
-    </li>
-  </ng-container>
-  <div class="devui-nav-{{ type }}-animation" [style.left]="offsetLeft + 'px'" [style.width]="offsetWidth + 'px'"></div>
-</ul>
+      </li>
+    </ul>
+  </div>
+</div>
 <div class="devui-tab-content" *ngIf="showContent">
   <ng-container *ngFor="let tab of tabs">
     <div class="devui-tab-pane fade in" role="tabpanel" *ngIf="tab.id == activeTab" [ngClass]="{ 'in active': tab.id == activeTab }">

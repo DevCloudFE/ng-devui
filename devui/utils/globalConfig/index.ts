@@ -1,1 +1,2 @@
-export * from './public-api';
+export * from './config';
+export * from './config.service';

@@ -19,7 +19,7 @@ import {
   DataTableComponent,
   EditableTip,
   TableCheckOptions,
-  TableWidthConfig
+  TableWidthConfig,
 } from 'ng-devui/data-table';
 import { DatepickerModule } from 'ng-devui/datepicker';
 import {

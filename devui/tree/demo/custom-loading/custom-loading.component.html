@@ -1,11 +1,12 @@
 <d-tree
   #basicTree
-  [loadingTemplateRef]="loadingTemplateRef"
-  [tree]="data1"
-  (nodeSelected)="onNodeSelected($event)"
+  [tree]="data"
   (nodeToggled)="onNodeToggled($event)"
+  [loadingTemplateRef]="isCustomLoadingTmpl ? loadingTemplateRef : undefined"
 >
 </d-tree>
 <ng-template #loadingTemplateRef>
   <div style="margin-left: 10px" [innerHTML]="customLoadingSvg | safe: 'html'"></div>
 </ng-template>
+
+<d-button bsStyle="common" (click)="changeLoadingTemplate()"> Change Loading Template </d-button>

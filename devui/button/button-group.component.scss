@@ -55,3 +55,24 @@
     }
   }
 }
+
+:host ::ng-deep {
+  d-button + d-button {
+    .devui-btn-primary:not(:disabled)::before,
+    .devui-btn-common:not(:disabled)::before,
+    .devui-btn-danger:not(:disabled)::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 1px;
+      background-color: rgba($color: $devui-white-5, $alpha: 0.8);
+    }
+
+    .devui-btn:disabled {
+      border-left-style: none;
+      margin-left: 0;
+    }
+  }
+}

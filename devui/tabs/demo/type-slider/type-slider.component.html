@@ -1,10 +1,5 @@
 <section>
-  <d-tabs [(activeTab)]="tabActiveId" type="slider">
-    <d-tab *ngFor="let item of tabItems" [id]="item.id">
-      <ng-template dTabTitle>
-        {{ item.title }}
-      </ng-template>
-      {{ item.content }}
-    </d-tab>
+  <d-tabs type="slider" [(activeTab)]="tabActiveId" (activeTabChange)="activeTabChange($event)">
+    <d-tab *ngFor="let item of tabItems" [id]="item.id" [title]="item.title"></d-tab>
   </d-tabs>
 </section>

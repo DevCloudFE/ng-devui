@@ -111,24 +111,24 @@ $devui-purple-90: #3f1a9c;
 $devui-purple-100: #2a0c85;
 
 $devui-gray-5: #f5f5f5;
-$devui-gray-10: #ebebed;
-$devui-gray-20: #d6d6d6;
-$devui-gray-30: #bdbdbd;
-$devui-gray-40: #939395;
-$devui-gray-50: #78787a;
-$devui-gray-60: #5e5e60;
-$devui-gray-70: #4c4c4e;
-$devui-gray-80: #3b3b3d;
-$devui-gray-90: #2e2e2e;
-$devui-gray-100: #242424;
+$devui-gray-10: #ebebeb;
+$devui-gray-20: #e0e0e0;
+$devui-gray-30:  #d1d1d1;
+$devui-gray-40: #bdbdbd;
+$devui-gray-50: #8a8a8a;
+$devui-gray-60: #878787;
+$devui-gray-70: #707070;
+$devui-gray-80: #5c5c5c;
+$devui-gray-90: #474747;
+$devui-gray-100: #383838;
 
 $devui-slate-5: #f7f8fa;
 $devui-slate-10: #eef0f5;
 $devui-slate-20: #dfe1e6;
-$devui-slate-30: #cfd0d3;
-$devui-slate-40: #babbc0;
-$devui-slate-50: #adb0b8;
-$devui-slate-60: #95979e;
+$devui-slate-30: #d7d8da;
+$devui-slate-40: #cfd0d3;
+$devui-slate-50: #babbc0;
+$devui-slate-60: #9b9fa8;
 $devui-slate-70: #71757f;
 $devui-slate-80: #575d6c;
 $devui-slate-90: #323745;
@@ -136,15 +136,15 @@ $devui-slate-100: #252b3a;
 
 $devui-zinc-5: #f8f8fa;
 $devui-zinc-10: #f2f2f3;
-$devui-zinc-20: #dddde0;
-$devui-zinc-30: #babac2;
-$devui-zinc-40: #95959e;
-$devui-zinc-50: #757580;
-$devui-zinc-60: #5e5e66;
-$devui-zinc-70: #49494f;
-$devui-zinc-80: #38383d;
-$devui-zinc-90: #2a2a2e;
-$devui-zinc-100: #202024;
+$devui-zinc-20: #e2e2e6;
+$devui-zinc-30: #d5d5db;
+$devui-zinc-40: #c7c7d1;
+$devui-zinc-50: #aeaebd;
+$devui-zinc-60: #9696a3;
+$devui-zinc-70: #7a7a85;
+$devui-zinc-80: #63636b;
+$devui-zinc-90: #494952;
+$devui-zinc-100: #37373d;
 
 $devui-dark-gray-5: #16181a;
 $devui-dark-gray-10: #202124;
@@ -152,7 +152,7 @@ $devui-dark-gray-20: #292a2e;
 $devui-dark-gray-30: #2e2f33;
 $devui-dark-gray-40: #323338;
 $devui-dark-gray-50: #393a3e;
-$devui-dark-gray-60: #525257;
+$devui-dark-gray-60: #4e5057;
 $devui-dark-gray-70: #696c75;
 $devui-dark-gray-80: #868a99;
 $devui-dark-gray-90: #acb0bd;
@@ -211,9 +211,6 @@ $devui-black-5: #000000;
 // $devui-shadow-length-right-xl: 12px 0 24px 0;
 
 // // Font Size
-// $devui-font-size-sm: 12px;
-// $devui-font-size-md: 14px;
-// $devui-font-size-lg: 16px;
 // $devui-font-size-xl: 18px;
 // $devui-font-size-2xl: 20px;
 // $devui-font-size-3xl: 24px;
@@ -229,15 +226,3 @@ $devui-black-5: #000000;
 // $devui-z-index-1020: 1020;
 // $devui-z-index-1010: 1010;
 // $devui-z-index-1000: 1000;
-
-// // Animation
-// $devui-animation-duration-slow: 300ms;
-// $devui-animation-duration-base: 200ms;
-// $devui-animation-duration-fast: 100ms;
-
-// $devui-animation-ease-in: cubic-bezier(0.5, 0, 0.84, 0.25);
-// $devui-animation-ease-out: cubic-bezier(0.16, 0.75, 0.5, 1);
-// $devui-animation-ease-in-out: cubic-bezier(0.5, 0.05, 0.5, 0.95);
-
-// $devui-animation-ease-in-out-smooth: cubic-bezier(0.645, 0.045, 0.355, 1);
-// $devui-animation-linear: cubic-bezier(0, 0, 1, 1);

@@ -582,6 +582,24 @@
         "back-top-scroll-container": "滚动容器"
       }
     },
+    "icon": {
+      "name": "Icon 图标",
+      "type": "通用",
+      "path": "icon",
+      "description": "常用图标展示场景",
+      "basicDemo": {
+        "title": "基本用法",
+        "description": "基础图标的使用形式"
+      },
+      "iconGroupDemo": {
+        "title": "图标组",
+        "description": "常用图标组使用场景"
+      },
+      "anchorLinkValues": {
+        "basic": "基本用法",
+        "icon-group": "图标组"
+      }
+    },
     "button": {
       "name": "Button 按钮",
       "type": "通用",
@@ -1161,7 +1179,9 @@
           },
           "shadowColor": {
             "devui-shadow": "阴影色",
-            "devui-light-shadow": "弱化阴影色"
+            "devui-light-shadow": "弱化阴影色",
+            "devui-connected-overlay-shadow": "有连接点的弹出(覆盖)层阴影色",
+            "devui-feedback-overlay-shadow": "信息提示反馈类阴影色"
           }
         }
       },
@@ -1532,9 +1552,14 @@
         "operation": "操作",
         "autoArrangement": "自动连续紧凑排列"
       },
+      "solutionDemo": {
+        "title": "解决方案",
+        "description": "提供完整的库添加解决方案"
+      },
       "anchorLinkValues": {
         "basic-usage": "基本用法",
-        "more-config": "更多设置"
+        "more-config": "更多设置",
+        "solution": "解决方案"
       }
     },
     "datepicker": {
@@ -2492,7 +2517,6 @@
         "custom-dialog": "自定义对话框",
         "intercept-dialog-closed": "拦截对话框关闭",
         "message-hint": "信息提示",
-        "warning-pop-up": "警告弹出框",
         "update-button-options": "更新弹出框按钮状态",
         "configure-button-to-get-focus-automatically": "配置按钮自动获得焦点",
         "template-content": "配置弹出框内容模板",
@@ -2714,6 +2738,9 @@
       "halfDemo": {
         "title": "半选模式"
       },
+      "clearDemo": {
+        "title": "清空模式"
+      },
       "typeDemo": {
         "title": "设置颜色"
       },
@@ -2725,6 +2752,7 @@
         "dynamic-mode": "动态模式",
         "dynamic-mode-Custom": "动态模式-自定义",
         "half-demo": "半选模式",
+        "clear-demo": "清空模式",
         "using-the-type-parameter": "设置颜色",
         "template": "自定义模板"
       }
@@ -3091,10 +3119,7 @@
       "tmw": "用户需要通过平级的区域将大块内容进行收纳和展现，保持界面整洁。",
       "basicDemo": {
         "title": "基本用法",
-        "description": "",
-        "Here's what Tab1 says.": "这是Tab1的内容",
-        "This is Tab2.": "这是Tab2的内容",
-        "This is Tab3.": "这是Tab3的内容"
+        "description": ""
       },
       "withoutContentDemo": {
         "title": "禁用选项卡",
@@ -3103,50 +3128,39 @@
       },
       "customDemo": {
         "title": "自定义模板",
-        "description": "",
-        "Here's what Tab1 says.": "这是Tab1的内容",
-        "This is Tab2.": "这是Tab2的内容",
-        "This is Tab3.": "这是Tab3的内容"
+        "description": ""
       },
       "typePillsDemo": {
         "title": "Pills类型",
-        "description": "",
-        "Here's what Tab1 says.": "这是Tab1的内容",
-        "This is Tab2.": "这是Tab2的内容",
-        "This is Tab3.": "这是Tab3的内容"
+        "description": ""
       },
       "typeOptionsDemo": {
         "title": "Options类型",
-        "description": "",
-        "Here's what Tab1 says.": "这是Tab1的内容",
-        "This is Tab2.": "这是Tab2的内容",
-        "This is Tab3.": "这是Tab3的内容"
+        "description": ""
       },
       "typeSliderDemo": {
         "title": "Slider类型",
-        "description": "",
-        "Here's what Tab1 says.": "这是Tab1的内容",
-        "This is Tab2.": "这是Tab2的内容",
-        "This is Tab3.": "这是Tab3的内容"
+        "description": ""
       },
       "typeWrappedDemo": {
         "title": "Wrapped类型",
-        "description": "",
-        "Here's what Tab1 says.": "这是Tab1的内容",
-        "This is Tab2.": "这是Tab2的内容",
-        "This is Tab3.": "这是Tab3的内容"
+        "description": ""
+      },
+      "sizeDemo": {
+        "title": "选项卡尺寸",
+        "description": "选项卡有4种大小，可以根据业务场景选择合适大小的尺寸。"
       },
       "beforeChangeDemo": {
         "title": "拦截tab切换",
-        "description": "使用beforeChange拦截tab切换。",
-        "Here's what Tab1 says.": "这是Tab1的内容",
-        "This is Tab2.": "这是Tab2的内容",
-        "This is Tab3.": "这是Tab3的内容"
+        "description": "使用beforeChange拦截选项卡切换。"
       },
-      "configurableTabsDemo": {
-        "title": "自定义Tabs显示与排列",
-        "description": "通过引入transfer组件，实现tabs的自定义显示。",
-        "activeID:": "activeID:"
+      "addDeleteDemo": {
+        "title": "添加 / 删除",
+        "description": "添加和删除选项卡。"
+      },
+      "bigDataDemo": {
+        "title": "大数据展示",
+        "description": "需要使用大量选项卡切换。"
       },
       "anchorLinkValues": {
         "basic-usage": "基本用法",
@@ -3156,8 +3170,10 @@
         "type-options": "Options类型",
         "type-slider": "Slider类型",
         "type-wrapped": "Wrapped类型",
+        "size": "选项卡尺寸",
         "intercept-tab-switch": "拦截tab切换",
-        "custom-tabs-display-and-arrangement": "自定义Tabs显示与排列"
+        "add-delete": "添加 / 删除",
+        "big-data": "大数据展示"
       }
     },
     "tags": {
@@ -3403,7 +3419,7 @@
         "folding": "折叠"
       },
       "checkControlDemo": {
-        "title": "控制父子check关系",
+        "title": "可勾选树",
         "description": "通过OperableTree的 checkableRelation 控制check时父子节点的表现。",
         "Parent node": "父节点",
         "unfold": "展开",
@@ -3416,26 +3432,17 @@
         "title": "常用treeFactory函数",
         "description": ""
       },
-      "checkableDemo": {
-        "title": "可勾选树",
-        "description": "可以进行勾选的树。",
+      "customKeyDemo": {
+        "title": "自定义键值名",
+        "description": "自定义树节点显示的键值名",
         "Subnode": "子节点",
         "Parent node": "父节点"
       },
       "customLoadingDemo": {
-        "title": "自定义loading模板",
+        "title": "节点懒加载",
         "Leaf node": "叶子节点",
         "No child node": "没有子节点",
         "Dynamic loading": "动态加载",
-        "Parent node": "父节点",
-        "unfold": "展开",
-        "folding": "折叠"
-      },
-      "customTitleKeyDemo": {
-        "title": "自定显示字段",
-        "description": "通过设置treeNodeTitleKey,自定义树中显示和搜索的关键字。",
-        "Leaf node": "叶子节点",
-        "No child node": "没有子节点",
         "Parent node": "父节点",
         "unfold": "展开",
         "folding": "折叠"
@@ -3488,24 +3495,18 @@
         "Leaf node": "叶子节点",
         "unfold": "展开"
       },
-      "withoutAnimationDemo": {
-        "title": "无动画",
-        "description": "通过showAnimation设置是否展示动画。"
-      },
       "anchorLinkValues": {
         "basic-usage": "基本用法",
         "merge-node": "合并节点",
-        "custom-loading": "自定义loading模板",
-        "custom-display-field": "自定显示字段",
-        "checkable-tree": "可勾选树",
+        "lazy-loading": "节点懒加载",
+        "check-control-tree": "可勾选树",
+        "custom-key": "自定义键值名",
         "operation-button": "操作按钮",
         "search-filtering": "搜索过滤",
         "custom-icon": "自定义图标",
         "drag-and-drop-tree": "可拖拽树",
-        "check-control-tree": "控制父子check关系",
         "tree-factory": "常用treeFactory函数",
-        "virtual-scroll": "大数据量可操作树",
-        "without-animation": "无动画"
+        "virtual-scroll": "大数据量可操作树"
       }
     },
     "typography": {
@@ -4033,6 +4034,18 @@
         "custom": "传入模板"
       }
     },
+    "number-trans": {
+      "name": "NumberTranslate 数字格式转换器",
+      "type": "数据展示",
+      "path": "number-trans",
+      "description": "数字格式转换",
+      "tmw": "需要对数字进行格式转换时使用",
+      "basicDemo": {
+        "beforeTrans": "转换前",
+        "afterTrans": "转换后",
+        "title": "转换示例"
+      }
+    },
     "relative-time": {
       "name": "RelativeTime 人性化时间转换",
       "type": "数据展示",
@@ -4328,6 +4341,30 @@
       "tmw": "快速生成图表的配置表单",
       "basic-form": {
         "title": "图表配置表单生成器"
+      }
+    },
+    "action-steps": {
+      "name": "步骤编排",
+      "type": "演进中",
+      "path": "action-steps",
+      "description": "步骤编排",
+      "tmw": "步骤编排",
+      "basicDemo": {
+        "title": "基本用法",
+        "description": ""
+      },
+      "typeDemo": {
+        "title": "状态与类型",
+        "description": ""
+      },
+      "customDemo": {
+        "title": "自定义配置",
+        "description": ""
+      },
+      "anchorLinkValues": {
+        "basic-usage": "基本用法",
+        "type-usage": "状态与类型",
+        "custom-usage": "自定义配置"
       }
     }
   }

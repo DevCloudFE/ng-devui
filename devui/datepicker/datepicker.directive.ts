@@ -26,10 +26,7 @@ import {
   AnimationCurves,
   AnimationDuration,
   DateConverter,
-  DefaultDateConverter,
-  DevConfigService,
-  removeClassFromOrigin,
-  WithConfig
+  DefaultDateConverter, DevConfigService, removeClassFromOrigin, WithConfig
 } from 'ng-devui/utils';
 import { fromEvent, Observable, Subscription } from 'rxjs';
 import { debounceTime, filter, map } from 'rxjs/operators';

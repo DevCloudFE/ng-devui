@@ -36,7 +36,7 @@ On the page:
 | loadAllChildrenTable | `() => Promise<any>` | -- | Optional. It is the callback for expanding all subtables in the table header. It is used to asynchronously load all subtables. | [Tree table](demo#tree-form) |
 | colDraggable | `boolean` | false | Optional. Whether columns can be dragged or sorted | [Column dragging](demo#column-dragging) |
 | colDropFreezeTo | `number` | 0 | Optional. The first n columns cannot be dragged when the table columns can be sorted. | [Column dragging](demo#column-dragging) |
-| virtualScroll | `boolean` | false | Optional. Specifies whether to enable virtual scrolling. Virtual scrolling parameters do not take effect for tree tables. | [Virtual scrolling](demo#virtual-scroll) |
+| virtualScroll | `boolean` | false | Optional. Specifies whether to enable virtual scrolling. Virtual scrolling parameters do not take effect for tree tables. To use tree-shaped virtual scrolling, see the implementation of the demo for tree tables with a large amount of data. | [Virtual scrolling](demo#virtual-scroll) |
 | virtualItemSize | `number` | 40 | Optional. Height of each row during virtual scrolling. The default value is 40`px`. | [Virtual scrolling](demo#virtual-scroll) |
 | virtualMinBufferPx | `number` | 80 | Optional. Minimum pixel height of the buffer during virtual scrolling. If the pixel height is less than this value, the new structure is loaded. | [Virtual scrolling](demo#virtual-scroll) |
 | virtualMaxBufferPx | `number` | 200 | Optional. Maximum pixel height of the buffer during virtual scrolling | [virtual scrolling](demo#virtual-scroll) |
@@ -61,6 +61,8 @@ On the page:
 | tableLayout | `'fixed'\|'auto'` | 'fixed' | Optional. Table layout | [Table style](demo#mutil-styles) |
 | borderType | `''\|'bordered'\|'borderless'` | '' | Optional. Table border type. The default value is row border. The options are bordered (full border) and borderless (no border). | [Table style](demo#mutil-styles) |
 | striped | `boolean` | false | Optional. Whether to display the table with zebra stripes. | [Table style](demo#mutil-styles)                      |
+| shadowType | `'shadow' \| 'embed' ` | 'embed' | Optional. Whether the table is of the shadow or embedded type | [table style](demo#mutil-styles) |
+| tableOverflowType | ``Overlay'\ | 'auto' `|'auto' | Optional. The scroll bar is displayed only when the cursor is hovered in overlay mode. | [Table style](demo#mutil-styles) |
 
 ## d-data-table event
 
@@ -147,6 +149,7 @@ On the page:
 | Event | Type | Description | Jump to Demo |
 | :----------------------: | :-----------------: | :-------------------------------------------------: | :------------------------------------------------------- |
 | filterChange | `EventEmitter<FilterConfig[]>` | Callback event for confirming the filtering and returning the selected filtering array. | [Table interaction](demo#table-interaction) |
+| filterToggle | `EventEmitter<{isOpen: boolean;checklist: FilterConfig[];}>` | Filter Panel Expansion and Collapse Event | [Table Interaction](demo#table-interaction) |
 | sortChange | `EventEmitter<SortEventArg>` | Sorting callback event, which returns the sorting information of the column. | [Table interaction](demo#table-interaction) |
 | resizeStartEvent | `EventEmitter<MouseEvent>` | Event when the column width adjustment starts |
 | resizingEvent | `EventEmitter<{ width: string }>` | Event that the column width is being adjusted |
@@ -355,6 +358,7 @@ export enum SortDirection {
 | Event | Type | Description | Jump to Demo |
 | :----------: | :--------------: | :----------------------------------: | :------------------------------------------------------- |
 | filterChange | `FilterConfig[]` | Callback event for confirming the filtering and returning the selected filtering array. | [Table interaction](demo#table-interaction) |
+| filterToggle | `EventEmitter<{isOpen: boolean;checklist: FilterConfig[];}>` | Filter Panel Expansion and Collapse Event | [Table Interaction](demo#table-interaction) |
 
 ## rowItem parameter
 

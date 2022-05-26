@@ -12,18 +12,12 @@
   <div class="button-group">
     <d-button
       icon="icon-close"
-      bsStyle="text-dark"
+      bsStyle="text"
       title="Clear"
       (btnClick)="clear()"
       [disabled]="!(multiItems2 && multiItems2.length)"
     ></d-button>
-    <d-button
-      icon="icon-copy"
-      bsStyle="text-dark"
-      title="Copy"
-      (btnClick)="copy()"
-      [disabled]="!(multiItems2 && multiItems2.length)"
-    ></d-button>
+    <d-button icon="icon-copy" bsStyle="text" title="Copy" (btnClick)="copy()" [disabled]="!(multiItems2 && multiItems2.length)"></d-button>
   </div>
 </div>
 

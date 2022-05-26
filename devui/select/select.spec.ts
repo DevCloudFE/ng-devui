@@ -1575,7 +1575,8 @@ describe('Select', () => {
           const listElement = menuElement.nativeElement.querySelector('.devui-select-list-unstyled');
           const innerList = menuElement.nativeElement.querySelector('.devui-select-list-unstyled > .cdk-virtual-scroll-content-wrapper');
           const singleHeight = 36;
-          listElement.scrollTop = singleHeight * 100;
+          const listItemSpace = 4;
+          listElement.scrollTop = (singleHeight + listItemSpace) * 100;
           listElement.dispatchEvent(new Event('scroll', { 'bubbles': true, 'cancelable': false }));
           virtualScrollFlush();
           const option11th = [...innerList.children].filter(el => el.innerText.trim() === '选项101').pop();
@@ -1595,12 +1596,14 @@ describe('Select', () => {
           const listElement = menuElement.nativeElement.querySelector('.devui-select-list-unstyled > .cdk-virtual-scroll-content-wrapper');
           expect(listElement.children.length).toEqual(3);
           const singleHeight = 36;
-          const expectHeight = singleHeight * component.options.length;
+          const listItemSpace = 4;
+          const expectHeight = singleHeight * component.options.length + listItemSpace * (component.options.length - 1);
           expect(listElement.getBoundingClientRect().height).toBeCloseTo(expectHeight, 1);
         }));
       });
       describe('templateItemSize', () => {
         const templateItemSize = 46;
+        const listItemSpace = 4;
         beforeEach(fakeAsync(() => {
           fixture = TestBed.createComponent(TestSelectVirtualScrollItemSizeComponent);
           debugEl = fixture.debugElement;
@@ -1619,13 +1622,13 @@ describe('Select', () => {
         }));
         it('scrollHeight correct', fakeAsync(() => {
           const listElement = menuElement.nativeElement.querySelector('.devui-select-list-unstyled');
-          const expectHeight = templateItemSize * component.options.length;
+          const expectHeight = (templateItemSize + listItemSpace) * component.options.length;
           expect(listElement.scrollHeight).toBeCloseTo(expectHeight);
         }));
         it('scroll to specificated position, first options correct', fakeAsync(() => {
           const listElement = menuElement.nativeElement.querySelector('.devui-select-list-unstyled');
           const innerList = menuElement.nativeElement.querySelector('.devui-select-list-unstyled > .cdk-virtual-scroll-content-wrapper');
-          listElement.scrollTop = templateItemSize * 100;
+          listElement.scrollTop = (templateItemSize + listItemSpace) * 100;
           listElement.dispatchEvent(new Event('scroll', { 'bubbles': true, 'cancelable': false }));
           virtualScrollFlush();
           const option11th = [...innerList.children].filter(el => el.innerText.trim() === '选项101').pop();

@@ -26,7 +26,7 @@ export interface IModalOptions {
 
 export interface IDialogOptions {
   id?: string;
-  title: string;
+  title?: string;
   zIndex?: number;
   backDropZIndex?: number;
   content?: string | Type<any>;

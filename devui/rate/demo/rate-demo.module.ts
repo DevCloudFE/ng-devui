@@ -7,8 +7,9 @@ import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
 import { TranslateModule } from '@ngx-translate/core';
-import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
+import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
 import { RateDemoBasicComponent } from './basic/basic.component';
+import { RateClearComponent } from './clear/rate-clear.component';
 import { RateDemoCustomizeComponent } from './customize/customize.component';
 import { RateHalfComponent } from './half/rate-half.component';
 import { RateDemoOnlyReadComponent } from './onlyread/onlyread.component';
@@ -47,6 +48,7 @@ import { TypeComponent } from './type/type.component';
     RateDemoTemplateComponent,
     TypeComponent,
     RateHalfComponent,
+    RateClearComponent
   ],
 
 })

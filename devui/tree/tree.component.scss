@@ -69,7 +69,7 @@ $keyframe-blue: #5e7ce0;
   .devui-tree-node__title {
     @extend .devui-text-ellipsis;
 
-    margin-left: 5px;
+    margin-left: 4px;
     display: inline-block;
     border: 1px dashed transparent;
     border-radius: $devui-border-radius;
@@ -106,7 +106,7 @@ $keyframe-blue: #5e7ce0;
 
     .devui-leaf-icon-none {
       display: inline-block;
-      width: 16px;
+      width: 8px;
       height: 16px;
     }
   }
@@ -126,11 +126,11 @@ $keyframe-blue: #5e7ce0;
 
       &:hover {
         svg g path {
-          fill: $devui-icon-fill-active;
+          fill: $devui-icon-fill-hover;
         }
 
         svg g rect {
-          stroke: $devui-icon-fill-active;
+          stroke: $devui-icon-fill-hover;
         }
       }
     }
@@ -196,11 +196,11 @@ $keyframe-blue: #5e7ce0;
   }
 
   svg.svg-icon path {
-    fill: $devui-icon-text;
+    fill: $devui-icon-fill-weak;
   }
 
   svg.svg-icon rect {
-    stroke: $devui-icon-text;
+    stroke: $devui-icon-fill-weak;
   }
 
   &.devui-tree-node__open:not(.devui-tree-node__customIcon) {

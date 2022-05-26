@@ -1,7 +1,7 @@
 import { Component, Renderer2 } from '@angular/core';
 import { DialogService } from 'ng-devui/modal';
 import { DocumentRef } from 'ng-devui/window-ref';
-import { ModalTestComponent } from './modal-test.component';
+import { ModalTestComponent } from '../modal-test.component';
 
 @Component({
   selector: 'd-fixed-wrapper',
@@ -16,7 +16,7 @@ export class FixedWrapperComponent {
     private renderer: Renderer2
   ) {}
 
-  openstandardDialog(dialogtype?: string) {
+  openStandardDialog(dialogtype?: string) {
     this.setHtmlStyle();
     const results = this.dialogService.open({
       id: 'dialog-service',

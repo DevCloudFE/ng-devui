@@ -63,6 +63,7 @@
           #timePicker3="timePicker"
           (selectedTimeChange)="timeChange($event)"
           (ngModelChange)="modelChange($event)"
+          [attr.disabled]="true"
           [disabled]="true"
         />
         <div *ngIf="selectedTime3" class="devui-input-group-addon close-icon-wrapper" (click)="timePicker3.clearAll()">

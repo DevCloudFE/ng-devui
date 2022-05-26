@@ -50,6 +50,11 @@
 .drawer-content {
   left: 0;
   right: 0;
-  overflow: auto;
+  overflow: hidden;
   box-shadow: $devui-shadow-length-fullscreen-overlay $devui-shadow;
+
+  &:hover {
+    overflow: auto;
+    overflow: overlay;
+  }
 }

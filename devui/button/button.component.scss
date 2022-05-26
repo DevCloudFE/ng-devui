@@ -1,4 +1,3 @@
-
 @import '../style/theme/color';
 @import '../style/core/font';
 @import '../style/theme/corner';
@@ -9,14 +8,14 @@ $devui-btn-xs-padding: 0 4px;
 $devui-btn-xs-height: 24px;
 $devui-btn-icon-xs-min-width: 24px;
 $devui-btn-xs-min-width: 48px;
-$devui-btn-sm-padding: 0 16px;
+$devui-btn-sm-padding: var(--devui-btn-sm-padding, 0 16px);
 $devui-btn-sm-min-width: 56px;
 $devui-btn-icon-sm-min-width: 24px;
 $devui-btn-sm-height: 24px;
 $devui-btn-min-width: 64px;
 $devui-btn-height: 28px;
-$devui-btn-padding: 0 20px;
-$devui-btn-lg-padding: 0 24px;
+$devui-btn-padding: var(--devui-btn-padding, 0 20px);
+$devui-btn-lg-padding: var(--devui-btn-lg-padding, 0 24px);
 $devui-btn-lg-min-width: 72px;
 $devui-btn-icon-lg-min-width: 32px;
 $devui-btn-lg-height: 32px;
@@ -29,38 +28,38 @@ $devui-btn-line-height: $devui-line-height-base;
 $devui-btn-normal-config: (
   text: (
     color: $devui-brand-active,
-    padding: 0
+    padding: 0,
   ),
   text-dark: (
     color: $devui-brand-active,
-    padding: 0
+    padding: 0,
   ),
   common: (
     color: $devui-text,
     min-width: $devui-btn-min-width,
-    background-color: $devui-block,
-    border-color: $devui-line
+    background-color: var(--devui-btn-common-bg, $devui-base-bg),
+    border-color: var(--devui-btn-common-border-color, $devui-line),
   ),
   stress: (
     color: $devui-light-text,
     min-width: $devui-btn-min-width,
-    background-color: $devui-primary
+    background-color: $devui-primary,
   ),
   primary: (
     color: $devui-light-text,
     min-width: $devui-btn-min-width,
-    background-color: $devui-primary
+    background-color: $devui-primary,
   ),
   danger: (
     color: $devui-light-text,
     min-width: $devui-btn-min-width,
-    background-color: $devui-contrast
+    background-color: $devui-contrast,
   ),
   xs: (
     padding: $devui-btn-xs-padding,
     height: $devui-btn-xs-height,
     font-size: $devui-btn-xs-font-size,
-    min-width: $devui-btn-xs-min-width
+    min-width: $devui-btn-xs-min-width,
   ),
   sm: (
     padding: $devui-btn-sm-padding,
@@ -82,85 +81,88 @@ $devui-btn-normal-config: (
   ),
   default: (
     border-radius: $devui-border-radius,
-  )
+  ),
 );
 
 $devui-btn-pseudo-config: (
   text: (
     hover: (
       background-color: transparent,
-      color: $devui-brand-active-focus
+      color: $devui-brand-active-focus,
     ),
     focus: (
       background-color: transparent,
-      color: $devui-brand-active-focus
+      color: $devui-brand-active-focus,
     ),
     active: (
       background-color: transparent,
-      color: $devui-brand-active-focus
-    )
+      color: $devui-brand-active-focus,
+    ),
   ),
   text-dark: (
     hover: (
       background-color: transparent,
-      color: $devui-brand-active-focus
+      color: $devui-brand-active-focus,
     ),
     focus: (
       background-color: transparent,
-      color: $devui-brand-active-focus
+      color: $devui-brand-active-focus,
     ),
     active: (
       background-color: transparent,
-      color: $devui-brand-active-focus
-    )
+      color: $devui-brand-active-focus,
+    ),
   ),
   common: (
     hover: (
-      border-color: $devui-form-control-line-active,
-      color: $devui-brand-active
+      border-color: var(--devui-btn-common-border-color-hover, $devui-form-control-line-active),
+      color: var(--devui-btn-common-color-hover, $devui-brand-active),
+      background-color: var(--devui-btn-common-bg-hover, $devui-base-bg),
     ),
     focus: (
-      border-color: $devui-form-control-line-active,
-      color: $devui-brand-active
+      border-color: var(--devui-btn-common-border-color-active, $devui-form-control-line-active),
+      color: var(--devui-btn-common-color-active, $devui-brand-active),
+      background-color: var(--devui-btn-common-bg-active, $devui-base-bg),
     ),
     active: (
-      border-color: $devui-form-control-line-active,
-      color: $devui-brand-active
-    )
+      border-color: var(--devui-btn-common-border-color-active, $devui-form-control-line-active),
+      color: var(--devui-btn-common-color-active, $devui-brand-active),
+      background-color: var(--devui-btn-common-bg-active, $devui-base-bg),
+    ),
   ),
   stress: (
     hover: (
-      background-color: $devui-primary-hover
+      background-color: $devui-primary-hover,
     ),
     focus: (
-      background-color: $devui-primary-hover
+      background-color: $devui-primary-hover,
     ),
     active: (
-      background-color: $devui-primary-active
-    )
+      background-color: $devui-primary-active,
+    ),
   ),
   primary: (
     hover: (
-      background-color: $devui-primary-hover
+      background-color: $devui-primary-hover,
     ),
     focus: (
-      background-color: $devui-primary-hover
+      background-color: $devui-primary-hover,
     ),
     active: (
-      background-color: $devui-primary-active
-    )
+      background-color: $devui-primary-active,
+    ),
   ),
   danger: (
     hover: (
-      background-color: $devui-contrast-hover
+      background-color: $devui-contrast-hover,
     ),
     focus: (
-      background-color: $devui-contrast-hover
+      background-color: $devui-contrast-hover,
     ),
     active: (
-      background-color: $devui-contrast-active
-    )
-  )
+      background-color: $devui-contrast-active,
+    ),
+  ),
 );
 
 .devui-btn {
@@ -195,7 +197,7 @@ $devui-btn-pseudo-config: (
     &:disabled {
       color: $devui-disabled-text;
       background: $devui-disabled-bg;
-      border: 1px solid $devui-disabled-line;
+      border-color: var(--devui-btn-common-border-disabled, $devui-disabled-line);
     }
   }
 
@@ -268,7 +270,7 @@ $devui-btn-pseudo-config: (
     }
   }
 
-  &.d-btn-icon {
+  &.d-btn-icon:not(.devui-btn-primary):not(.devui-btn-danger):not(.devui-btn-common) {
     &:hover,
     &:focus {
       border: 1px solid $devui-list-item-hover-bg;
@@ -287,14 +289,14 @@ $devui-btn-pseudo-config: (
         color: $devui-text;
 
         .devui-icon-fix {
-          color: $devui-text-weak;
+          color: $devui-icon-fill;
         }
 
         &:hover {
-          color: $devui-list-item-hover-text;
+          color: $devui-icon-fill-hover;
 
           .devui-icon-fix {
-            color: $devui-icon-fill-active;
+            color: $devui-icon-fill-hover;
           }
         }
       }
@@ -333,7 +335,12 @@ $devui-btn-pseudo-config: (
   &.d-btn-icon {
     padding: 8px 8px;
     line-height: 1em;
-    border: 1px solid transparent;
+    min-width: unset;
+    border: 1px solid transparent; // 待废弃，兼容旧版本button common类型无边框
+
+    &:not(.devui-btn-common) {
+      border: 1px solid transparent;
+    }
 
     &.devui-btn-xs,
     &.devui-btn-sm {
@@ -400,4 +407,8 @@ $devui-btn-pseudo-config: (
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+}
+
+.devui-btn-circle {
+  border-radius: 100%;
 }

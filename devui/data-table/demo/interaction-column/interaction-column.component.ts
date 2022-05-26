@@ -168,4 +168,8 @@ export class InteractionColumnComponent implements OnInit {
     console.log(e);
   }
 
+  onToggle(data) {
+    console.log('onToggle ---', data);
+  }
+
 }

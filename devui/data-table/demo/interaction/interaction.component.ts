@@ -55,31 +55,31 @@ export class InteractionComponent implements OnInit {
   tableWidthConfig: TableWidthConfig[] = [
     {
       field: 'checkbox',
-      width: '36px'
+      width: '30px'
     },
     {
       field: '$index',
-      width: '150px'
+      width: '200px'
     },
     {
       field: 'firstName',
-      width: '150px'
+      width: '200px'
     },
     {
       field: 'lastName',
-      width: '150px'
+      width: '200px'
     },
     {
       field: 'gender',
-      width: '150px'
+      width: '200px'
     },
     {
       field: 'dob',
-      width: '150px'
+      width: '200px'
     },
     {
       field: 'description',
-      width: '150px'
+      width: '200px'
     }
   ];
 
@@ -216,5 +216,9 @@ export class InteractionComponent implements OnInit {
   getCheckedRows() {
     const rows = this.datatable.getCheckedRows();
     console.log(rows);
+  }
+
+  onToggle(data) {
+    console.log('onToggle ---', data);
   }
 }

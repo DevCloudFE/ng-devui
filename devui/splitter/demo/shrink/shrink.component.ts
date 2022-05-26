@@ -113,5 +113,3 @@ export class SplitterDemoMenuFoldComponent implements OnInit {
     return isActive;
   }
 }
-
-

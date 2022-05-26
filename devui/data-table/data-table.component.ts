@@ -293,6 +293,10 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
    */
   @Input() size: 'sm' | 'md' | 'lg' = 'sm';
 
+  @Input() shadowType: 'normal' | 'embed' = 'embed';
+
+  @Input() tableOverflowType: 'overlay' | 'auto' = 'auto';
+
   @ContentChildren(DataTableColumnTmplComponent) columns: QueryList<DataTableColumnTmplComponent>;
   @ContentChild(TableTheadComponent) innerHeader: TableTheadComponent;
   @ContentChild(TableTbodyComponent) innerBody: TableTbodyComponent;
@@ -306,8 +310,16 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
   @ViewChild('devuiNormalScrollBody', {read: ElementRef}) devuiNormalScrollBody: ElementRef;
 
   @HostBinding('style.height') get hostHeight() {
-    return this.tableHeight;
+    return (this.tableHeight && this.dataSource.length) ? this.tableHeight : null;
   }
+
+  @HostBinding('class.devui-table-shadow') get hasShadow() {
+    return this.shadowType === 'normal';
+  }
+
+  hasWidthScroll: boolean;
+
+  hasHeightScroll: boolean;
 
   _dataSource: any[] = [];
   _pageAllChecked = false;
@@ -364,6 +376,7 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
     if (this.virtualScroll) {
       this.initVirtualBodyHeight();
     }
+    this.initScrollStatus();
   }
 
   get dataSource() {
@@ -520,6 +533,19 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
         this.updateColumns();
       });
     }
+
+    setTimeout(() => {
+      this.initScrollStatus();
+    });
+  }
+
+  public initScrollStatus() {
+    if (this.tableOverflowType !== 'overlay') {
+      return;
+    }
+    const ele = this.virtualScroll ? this.virtualScrollViewport?.elementRef?.nativeElement : this.normalScrollElement?.nativeElement;
+    this.hasWidthScroll = ele && ele.scrollWidth > ele.clientWidth;
+    this.hasHeightScroll = ele && ele.scrollHeight > ele.clientHeight;
   }
 
   ngAfterViewInit() {

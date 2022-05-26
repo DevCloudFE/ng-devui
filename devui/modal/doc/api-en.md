@@ -6,11 +6,11 @@ import { ModalModule } from 'ng-devui/modal';
 
 In the page:
 ```html
-<d-button (click)="openstandardDialog('standard')">click me!</d-button>
-Call dialogService.open() or modalService.open() in the openstandardDialog function to open the drawer board.
+<d-button (click)="openStandardDialog('standard')">open dialog</d-button>
+Call dialogService.open() or modalService.open() in the openStandardDialog function to open the drawer board.
 ```
 ```ts
-openstandardDialog(dialogtype?: string) {
+openStandardDialog(dialogtype?: string) {
     const results = this.dialogService.open({
       id: 'dialog-service',
       width: '346px',
@@ -72,9 +72,9 @@ openstandardDialog(dialogtype?: string) {
 | zIndex | `number` | 1050 | Optional. Z-index value in the dialog box displayed. | [Information](demo#message-hint) |
 | backDropZIndex | `number` | 1049 | Optional. Z-index value in the back drop displayed of the dialog box. |
 | maxHeight | `string` | -- | Optional. The maximum height of the dialog box (e.g '600px'). | [Standard Dialog Box](demo#standard-dialog) |
-| title | `string` | -- | Optional. Pop-up box title. | [Standard Dialog Box](demo#standard-dialog) |
+| title | `string` | -- | Optional. Pop-up box title.If the title and dialogtype are not configured, the title placeholder height is removed. | [Standard Dialog Box](demo#standard-dialog) |
 | content | `string\|Type<any>` | -- | Optional. Pop-up box content. Character strings and components are supported. | [Standard Dialog Box](demo#standard-dialog) |
-| html | `boolean` | -- | Optional. Whether content is HTML code. | [Warning Dialog Box](demo#warning-pop-up) |
+| html | `boolean` | -- | Optional. Whether content is HTML code. | [Warning Dialog Box](demo#message-hint) |
 | injector | `Injector` | -- | Optional. You can specify the syringe that will be used as the parent of the component. |
 | data | `object` | -- | Optional. When content is set to Component, the attribute is transferred to the Component instance. | [Standard Dialog Box](demo#standard-dialog) |
 | buttons | `array` | -- | Optional. Pop-up box button, which supports custom text, style, disabling, and click events. | [Standard Dialog Box](demo#standard-dialog) |
@@ -83,7 +83,7 @@ openstandardDialog(dialogtype?: string) {
 | componentFactoryResolver | `ComponentFactoryResolver` | -- | Optional. Customized dynamic rendering component parser. |
 | onClose | `Function` | -- | Optional, Function called back after the dialog box is closed. | [Standard Dialog Box](demo#standard-dialog) |
 | beforeHidden | `Function\|Promise\|Observable` | -- | Optional. It can prevent dialog boxes from closing. | [Blocking dialog box closed](demo#intercept-dialog-closed) |
-| dialogtype | `string` | 'standard' | Optional. The options are ['standard'\|'success'\|'failed'\|'warning'\|'info']. | [Standard Dialog Box](demo#standard-dialog) |
+| dialogtype | `string` | 'standard' | Optional. The options are <br />`'standard' \| 'success' \| 'failed' \| 'warning' \| 'info'`. | [Standard Dialog Box](demo#message-hint) |
 | draggable | `boolean` | true | Optional. Whether the pop-up box can be dragged. |
 | placement | `enum('center'\|'top'\|'bottom')` | 'center' | Optional. This parameter is optional and specifies the position where the dialog box is displayed. |
 | offsetX | `string` | '0px' | Optional. Horizontal offset of the pop-up box. |

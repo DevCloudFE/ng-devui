@@ -18,6 +18,7 @@ export class DatepickerProService implements OnDestroy {
   _minDate: Date = new Date(this.calendarRange[0], 0, 1);
   set minDate(value: Date) {
     this._minDate = new Date(value) || new Date(this.calendarRange[0], 0, 1);
+    this.detectedChanges.next();
   }
   get minDate(): Date {
     return this._minDate;
@@ -25,6 +26,7 @@ export class DatepickerProService implements OnDestroy {
   _maxDate: Date = new Date(this.calendarRange[1], 11, 31);
   set maxDate(value: Date) {
     this._maxDate = new Date(value) || new Date(this.calendarRange[1], 11, 31);
+    this.detectedChanges.next();
   }
   get maxDate(): Date {
     return this._maxDate;
@@ -78,6 +80,7 @@ export class DatepickerProService implements OnDestroy {
     min: number;
     seconds: number;
   }>();
+  readonly detectedChanges = new Subject<void>();
 
   constructor(@Inject(DOCUMENT) private doc: any) {
     this.document = this.doc;
@@ -272,6 +275,7 @@ export class DatepickerProService implements OnDestroy {
     this.updateTimeChange.complete();
     this.selectedTimeChange.complete();
     this.activeInputChange.complete();
+    this.detectedChanges.complete();
   }
 
 }

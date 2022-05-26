@@ -8,7 +8,6 @@
       [(pageIndex)]="pager.pageIndex"
       [canViewTotal]="true"
       [canChangePageSize]="true"
-      [canJumpPage]="true"
       [maxItems]="5"
     >
     </d-pagination>
@@ -21,7 +20,6 @@
       [(pageIndex)]="pager.pageIndex"
       [canViewTotal]="true"
       [canChangePageSize]="true"
-      [canJumpPage]="true"
       [maxItems]="5"
     >
     </d-pagination>
@@ -35,23 +33,7 @@
       [(pageIndex)]="pager.pageIndex"
       [canViewTotal]="true"
       [canChangePageSize]="true"
-      [canJumpPage]="true"
       [maxItems]="5"
-    >
-    </d-pagination>
-  </div>
-  <h4>Custom Style</h4>
-  <div>
-    <d-pagination
-      [total]="pager.total"
-      [(pageSize)]="pager.pageSize"
-      [(pageIndex)]="pager.pageIndex"
-      [canViewTotal]="true"
-      [canChangePageSize]="true"
-      [canJumpPage]="true"
-      [goToText]="'Jump to'"
-      [preLink]="preLink"
-      [nextLink]="nextLink"
     >
     </d-pagination>
   </div>

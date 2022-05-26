@@ -47,6 +47,7 @@
   border-left: 1px solid $devui-dividing-line;
   height: 180px;
   overflow-y: auto;
+  overflow-y: overlay;
   display: inline-block;
   font-size: $devui-font-size;
 

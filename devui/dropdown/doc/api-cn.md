@@ -3,7 +3,7 @@
 在 module 中引入：
 
 ```typescript
-import { DropDownModule } from ' ng-devui/dropdown';
+import { DropDownModule } from 'ng-devui/dropdown';
 ```
 
 ## dDropDown

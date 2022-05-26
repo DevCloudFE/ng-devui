@@ -51,16 +51,18 @@ export interface I18nInterface {
     day: string;
     week: string;
     month: string;
+    milestone: string;
     monthsOfYear: string[];
     yearDisplay(year): string;
     monthDisplay(strMonthIndex: string): string;
     yearAndMonthDisplay(year: string, strMonthIndex: string): string;
   };
   pagination: {
-    totalItem: string;
     goTo: string;
     pageSize: string;
     page: string;
+    perPage: string;
+    totalItem(total): string;
   };
   quadrant: {
     xAxisLabel: string;

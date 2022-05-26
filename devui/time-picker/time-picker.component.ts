@@ -24,13 +24,10 @@ import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import {
   addClassToOrigin,
   AppendToBodyDirection,
-  AppendToBodyDirectionsConfig,
-  DevConfigService,
-  fadeInOut,
+  AppendToBodyDirectionsConfig, DevConfigService, fadeInOut,
   formWithDropDown,
   removeClassFromOrigin,
-  unshiftString,
-  WithConfig
+  unshiftString, WithConfig
 } from 'ng-devui/utils';
 import { fromEvent, Observable, Subscription } from 'rxjs';
 import { debounceTime, filter, map } from 'rxjs/operators';
@@ -569,7 +566,8 @@ export class TimePickerComponent implements OnChanges, OnInit, OnDestroy, Contro
     const reqAnimFrame = window['webkitRequestAnimationFrame'] ||
       window['mozRequestAnimationFrame'] ||
       window['msRequestAnimationFrame'] ||
-      window['oRequestAnimationFrame'];
+      window['oRequestAnimationFrame'] ||
+      window['requestAnimationFrame'];
     reqAnimFrame(() => {
       element.scrollTop = element.scrollTop + perTick;
       if (element.scrollTop === to) {

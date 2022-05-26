@@ -34,6 +34,21 @@ export class FixColumnComponent implements OnInit {
         fieldType: 'text'
       },
       {
+        field: 'gender',
+        header: 'gender',
+        fieldType: 'text'
+      },
+      {
+        field: 'gender',
+        header: 'gender',
+        fieldType: 'text'
+      },
+      {
+        field: 'gender',
+        header: 'gender',
+        fieldType: 'text'
+      },
+      {
         field: 'dob',
         header: 'Date of birth',
         fieldType: 'date'
@@ -73,6 +88,18 @@ export class FixColumnComponent implements OnInit {
     },
     {
       field: 'lastName',
+      width: '150px'
+    },
+    {
+      field: 'gender',
+      width: '150px'
+    },
+    {
+      field: 'gender',
+      width: '150px'
+    },
+    {
+      field: 'gender',
       width: '150px'
     },
     {

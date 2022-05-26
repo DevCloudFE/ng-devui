@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
 import { DialogService } from 'ng-devui/modal';
+
 @Component({
   selector: 'd-autofocus',
   templateUrl: './autofocus.component.html',
 })
 export class AutofocusComponent {
-  constructor(private dialogService: DialogService) {
-
-  }
+  constructor(private dialogService: DialogService) {}
 
   openWarningDialog(dialogtype?: string) {
     const results = this.dialogService.open({
@@ -21,13 +20,13 @@ export class AutofocusComponent {
       dialogtype: dialogtype,
       buttons: [
         {
+          btnwidth: '84px',
           cssClass: 'primary',
           text: 'Close',
           autofocus: true,
           handler: ($event: Event) => {
             results.modalInstance.hide();
           },
-          btnwidth: '84px'
         },
         {
           id: 'btn-cancel',
@@ -36,8 +35,9 @@ export class AutofocusComponent {
           handler: ($event: Event) => {
             results.modalInstance.hide();
             console.log('cancel');
-          }
-        }],
+          },
+        },
+      ],
     });
   }
 }

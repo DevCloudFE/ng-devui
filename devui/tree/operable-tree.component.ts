@@ -76,6 +76,7 @@ export class OperableTreeComponent implements OnInit, OnDestroy, AfterViewInit {
   @Output() currentNodeChecked = new EventEmitter<{ id: string | number; data: ITreeNodeData }>();
   @Output() nodeEdited = new EventEmitter<TreeNode>();
   @Output() editValueChange = new EventEmitter<{ value: string; callback: Function }>();
+  @Output() nodeDragStart = new EventEmitter<{ event: DragEvent; treeNode: TreeNode}>();
   @Output() nodeOnDrop = new EventEmitter<{ event: DragEvent; treeNode: TreeNode; dropType: IDropType }>();
   @ViewChild('operableTree', { static: true }) operableTree: TreeComponent;
   @ViewChild('operableTreeContainer', { static: true }) operableTreeEle: ElementRef;
@@ -137,14 +138,16 @@ export class OperableTreeComponent implements OnInit, OnDestroy, AfterViewInit {
       isParent: treeNode.data.isParent
     };
     event.dataTransfer.setData('Text', JSON.stringify(data));
+    this.nodeDragStart.emit({ event, treeNode: treeNode});
   }
 
   onDragover(event, droppable, treeNode) {
     if (droppable) {
       event.preventDefault();
       event.dataTransfer.dropEffect = 'move';
-      if (!this.treeNodeDragoverResponder.node ||
-        (this.treeNodeDragoverResponder.node && this.treeNodeDragoverResponder.node.id !== treeNode.id)) {
+      if (this.dropType.dropInner
+        && (!this.treeNodeDragoverResponder.node
+          || (this.treeNodeDragoverResponder.node && this.treeNodeDragoverResponder.node.id !== treeNode.id))) {
         clearTimeout(this.treeNodeDragoverResponder.timeout);
         this.treeNodeDragoverResponder.node = treeNode;
         this.treeNodeDragoverResponder.timeout = setTimeout(() => {

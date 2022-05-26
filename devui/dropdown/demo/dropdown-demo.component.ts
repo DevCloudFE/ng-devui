@@ -40,7 +40,6 @@ export class DropdownDemoComponent implements OnInit, OnDestroy {
   addIconSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('./add-icon/add-icon.component.html?raw') },
     { title: 'TS', language: 'typescript', code: require('./add-icon/add-icon.component.ts?raw') },
-    { title: 'SCSS', language: 'css', code: require('./add-icon/add-icon.component.scss?raw') },
   ];
   multiLevelSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('./multi-level/multi-level.component.html?raw') },

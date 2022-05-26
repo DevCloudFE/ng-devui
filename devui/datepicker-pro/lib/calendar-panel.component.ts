@@ -146,6 +146,12 @@ export class CalendarPanelComponent implements OnInit, OnDestroy {
       }
     });
 
+    this.pickerSrv.detectedChanges.pipe(
+      takeUntil(this.unsubscribe$),
+    ).subscribe(() => {
+      this.cdr.detectChanges();
+    });
+
     this.pickerSrv.activeInputChange.pipe(
       takeUntil(this.unsubscribe$)
     ).subscribe(type => {
@@ -232,8 +238,7 @@ export class CalendarPanelComponent implements OnInit, OnDestroy {
           day: this.fillLeft(currentDate.getDate()),
           date: currentDate,
           inMonth: currentDate.getMonth().toString() === monthIndex.toString(),
-          isToday: currentDate.toDateString() === this.today.toDateString(),
-          isDisable: !this.pickerSrv.dateInRange(currentDate)
+          isToday: currentDate.toDateString() === this.today.toDateString()
         };
       });
       displayWeeks.push(weekDays);
@@ -316,7 +321,7 @@ export class CalendarPanelComponent implements OnInit, OnDestroy {
   }
 
   selectDate(day: DevuiCalendarDateItem) {
-    if (day.isDisable || !day.inMonth) {
+    if (this.isDisabled(day.date) || !day.inMonth) {
       return;
     }
 
@@ -335,7 +340,7 @@ export class CalendarPanelComponent implements OnInit, OnDestroy {
       if (this.pickerSrv.currentActiveInput === 'start') {
         this.pickerSrv.currentActiveInput = 'end';
       } else if (this.pickerSrv.currentActiveInput === 'end' && !this.selectedRangeDate[0]) {
-        this.pickerSrv.currentActiveInput = 'start';
+        this.selectedRangeDate[0] = this.curDate;
       } else {
         this.pickerSrv.closeDropdownEvent.next();
       }
@@ -361,6 +366,10 @@ export class CalendarPanelComponent implements OnInit, OnDestroy {
 
   isStartDate(date: Date): boolean {
     return this.pickerSrv.isStartDate(date);
+  }
+
+  isDisabled(date: Date): boolean {
+    return !this.pickerSrv.dateInRange(date);
   }
 
   isEndDate(date: Date): boolean {
@@ -463,14 +472,6 @@ export class CalendarPanelComponent implements OnInit, OnDestroy {
 
   protected fillLeft(num: number) {
     return num < 10 ? `0${num}` : `${num}`;
-  }
-
-  isPopoverShow(day: any): boolean {
-    if (this.isDateMarked(day.date) && this.curHoverDate === day.date && this.markDateTemplate) {
-      return true;
-    } else {
-      return false;
-    }
   }
 
   ngOnDestroy() {

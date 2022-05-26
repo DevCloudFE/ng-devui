@@ -53,6 +53,10 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
    */
   @Input() placeholder = '';
   /**
+   * 【可选】达到最大值时可自定义placeholder
+   */
+  @Input() maxPlaceholder: string;
+  /**
    * 【可选】输入标签的最小长度
    */
   @Input() minLength = 3;
@@ -113,7 +117,9 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
   @ViewChild(ToggleMenuSearchComponent) searchBox: ToggleMenuSearchComponent;
 
   get getPlaceHolder() {
-    return this.selectedItems.length >= this.maxTags ? `${this.i18nTagsInputText.tagsReachMaxNumber}${this.maxTags}` : this.placeholder;
+    const maxPlaceholder =
+      this.maxPlaceholder === undefined ? `${this.i18nTagsInputText.tagsReachMaxNumber}${this.maxTags}` : this.maxPlaceholder;
+    return this.selectedItems.length >= this.maxTags ? maxPlaceholder : this.placeholder;
   }
 
   newTag = '';
@@ -254,10 +260,10 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
       )
       .subscribe((options) => {
         this.availableOptions = options;
-        if(this.selectBoxContainer){
+        if (this.selectBoxContainer) {
           this.selectBoxContainer.updatePosition();
         }
-        if(this.selectBox){
+        if (this.selectBox) {
           this.selectBox.resetIndex(!options.length);
         }
       });
@@ -309,7 +315,7 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
       if (this.isAddBySpace) {
         hotkeys.push(this.KEYS.space);
       }
-      if (event.keyCode === this.KEYS.enter || event.keyCode === this.KEYS.tab || event.keyCode === this.KEYS.space) {
+      if (hotkeys.includes(event.keyCode)) {
         event.preventDefault();
         event.stopPropagation();
         if (this.selectBox?.selectIndex !== -1) {
@@ -451,7 +457,7 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
     if (this.selectBox) {
       this.selectBox.selectIndex = -1;
     }
-    this.newTag = event;
+    this.newTag = (event || '').trim();
     this.sourceSubscription.next(this.newTag);
   }
 

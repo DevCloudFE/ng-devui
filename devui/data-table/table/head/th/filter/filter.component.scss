@@ -1,6 +1,16 @@
 @import '../../../../../style/theme/color';
 @import '../../../../../style/theme/corner';
-@import '../../../../../style/core/font';
+@import '../../../../../style/core/_font';
+
+:host {
+  flex: 1;
+  text-align: right;
+  display: none;
+
+  &.devui-icon-show {
+    display: block;
+  }
+}
 
 .data-table-column-filter-content {
   background: $devui-connected-overlay-bg;
@@ -128,19 +138,19 @@
 
 .filter-icon {
   display: inline-block;
-  vertical-align: middle;
+  vertical-align: -3px;
   visibility: hidden;
   cursor: pointer;
   height: 16px;
   margin-top: -1px; // 解决漏斗形状视觉效果不局中
 
   > svg g {
-    fill: $devui-dividing-line;
+    fill: $devui-shape-icon-fill;
   }
 
   &:hover {
     > svg g {
-      fill: $devui-icon-fill-active-hover;
+      fill: $devui-shape-icon-fill-active;
     }
   }
 
@@ -153,12 +163,12 @@
   visibility: visible !important;
 
   > svg g {
-    fill: $devui-icon-fill-active;
+    fill: $devui-shape-icon-fill-active;
   }
 
   &:hover {
     > svg g {
-      fill: $devui-icon-fill-active-hover;
+      fill: $devui-shape-icon-fill-active;
     }
   }
 }

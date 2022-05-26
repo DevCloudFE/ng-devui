@@ -8,7 +8,7 @@ export class DialogContentComponent implements OnInit {
   @Input() data: any;
   @Input() modalInstance: ModalComponent;
   @Input() modalContentInstance;
-  constructor() {}
+
   ngOnInit(): void {
     console.log('modalInstance', this.modalInstance);
     console.log('modalContentInstance', this.modalContentInstance);

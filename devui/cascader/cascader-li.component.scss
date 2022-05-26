@@ -8,8 +8,8 @@
 }
 
 .devui-dropdown-item {
-  height: 36px;
-  padding: 0 12px;
+  height: 32px;
+  padding: 8px 12px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -107,6 +107,18 @@
   }
 }
 
-:host > li span {
-  transition: color $devui-animation-duration-fast $devui-animation-ease-in-out-smooth, background-color $devui-animation-duration-fast $devui-animation-ease-in-out-smooth;
+:host {
+  &:first-of-type > li {
+    margin-top: 0;
+  }
+
+  & > li {
+    margin-top: 4px;
+
+    span {
+      transition:
+        color $devui-animation-duration-fast $devui-animation-ease-in-out-smooth,
+        background-color $devui-animation-duration-fast $devui-animation-ease-in-out-smooth;
+    }
+  }
 }

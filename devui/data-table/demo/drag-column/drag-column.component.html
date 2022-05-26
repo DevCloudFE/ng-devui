@@ -4,6 +4,7 @@
   [colDraggable]="true"
   [colDropFreezeTo]="1"
   (columnDragEnd)="onDragEnd($event)"
+  [tableOverflowType]="'overlay'"
 >
   <d-column field="$index" header="#" [width]="'50px'"></d-column>
   <d-column

@@ -35,6 +35,8 @@ export class CarouselComponent implements OnInit, AfterContentInit, OnChanges, O
   @Input() autoplay = false;
   // 默认自动播放间隔时间
   @Input() autoplaySpeed = 3000;
+  // 卡片切换动画速度，单位ms
+  @Input() transitionSpeed = 500;
   // 卡片高度
   @Input() height = '100%';
   // 是否显示面板指示器
@@ -45,13 +47,9 @@ export class CarouselComponent implements OnInit, AfterContentInit, OnChanges, O
   @Input() dotTrigger: DotTrigger = 'click';
   // 当前激活面板索引，默认从0开始
   @Input() activeIndex = 0;
-
   // 卡片切换时，返回当前卡片索引，索引从0开始
   @Output() activeIndexChange = new EventEmitter<number>();
-
   @ContentChildren(CarouselItemComponent) items: QueryList<CarouselItemComponent>;
-  // 卡片切换动画间隔，单位ms
-  private transitionSpeed = 500;
 
   showArrow = false;
   // 卡片容器

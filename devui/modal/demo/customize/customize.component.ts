@@ -8,9 +8,7 @@ import { ModalNoBtnComponent } from './modal-no-btn.component';
   templateUrl: './customize.component.html',
 })
 export class CustomizeComponent {
-  constructor(
-    private modalService: ModalService
-  ) { }
+  constructor(private modalService: ModalService) {}
 
   openModal() {
     const results = this.modalService.open({
@@ -32,7 +30,7 @@ export class CustomizeComponent {
     console.log(results);
   }
 
-  openModalWithOutBtn() {
+  openModalWithoutBtn() {
     const results = this.modalService.open({
       id: 'modal-no-btn',
       width: '300px',

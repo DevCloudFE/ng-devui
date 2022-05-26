@@ -6,9 +6,11 @@
 }
 
 .theme-toggle {
-  font-size: 16px;
+  font-size: $devui-font-size-page-title;
   line-height: 1.5;
   cursor: pointer;
+  display: flex;
+  align-items: center;
 
   &:hover {
     color: $devui-link;
@@ -22,6 +24,7 @@
   height: 18px;
   position: relative;
   border: 1px solid $devui-brand;
+  margin-left: 8px;
 
   .brand-color {
     position: absolute;
@@ -52,13 +55,12 @@
 
 .theme-menu {
   padding: 8px 12px;
-  font-size: 12px;
+  font-size: $devui-font-size;
   line-height: 1.5;
-  width: 180px;
-  height: 110px;
+  width: 200px; // 根据tab页动态宽度
 
   .title {
-    font-weight: bold;
+    font-weight: 600;
     padding-bottom: 4px;
     margin: 8px 0 4px 0;
     line-height: 1.5;
@@ -70,6 +72,83 @@
   }
 }
 
+d-toggle,
+d-select {
+  display: inline-block;
+}
+
 .theme-select-radio {
   padding-left: 4px;
+  padding-right: 0;
+}
+
+.theme-follow-toggle {
+  transform: scale(0.8);
+}
+
+.theme-follow-toggle + span {
+  vertical-align: middle;
+  line-height: 28px;
+  margin-left: 4px;
+}
+
+.prefers-color-scheme {
+  display: none;
+}
+
+@media screen and (prefers-color-scheme: light) {
+  .prefers-color-scheme {
+    display: inline-block;
+  }
+}
+
+@media screen and (prefers-color-scheme: dark) {
+  .prefers-color-scheme {
+    display: inline-block;
+  }
+}
+
+.theme-color .theme-brand {
+  display: block;
+  width: 20px;
+  height: 20px;
+  float: left;
+  margin: 10px;
+  cursor: pointer;
+  border: 1px solid $devui-line;
+}
+
+.theme-color::after {
+  display: block;
+  content: '';
+  clear: both;
+}
+
+.devui-tick {
+  fill: $devui-light-text;
+}
+
+.extend-theme-image {
+  background-repeat: no-repeat;
+  height: 40px;
+  margin-bottom: 8px;
+  border-radius: $devui-border-radius;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.extend-theme-title {
+  margin: 0 8px;
+  color: $devui-light-text;
+}
+
+.active-theme {
+  color: $devui-light-text;
+  margin-right: 8px;
+  background-color: $devui-brand;
+  border-radius: 50%;
+  opacity: 0.6;
+  padding: 4px;
 }

@@ -86,6 +86,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.currentOption = this.versionOptions[0];
   }
   toggleLanguage(lang) {
+    this.i18n.toggleLang(lang);
     this.currentLang = lang;
     const url = this.router.url;
     const pathArray = url.split('/');

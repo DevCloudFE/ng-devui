@@ -4,14 +4,12 @@ import { ModalFormComponent } from './modal-form.component';
 
 @Component({
   selector: 'd-hide',
-  templateUrl: './hide.component.html'
+  templateUrl: './hide.component.html',
 })
 export class HideComponent {
-  constructor(private dialogService: DialogService) {
+  constructor(private dialogService: DialogService) {}
 
-  }
-
-  openPreventCloseModal() {
+  openPreventCloseDialog() {
     const results = this.dialogService.open({
       id: 'dialog-service',
       width: '500px',
@@ -27,7 +25,7 @@ export class HideComponent {
           text: 'Save',
           handler: ($event: Event) => {
             results.modalInstance.hide();
-          }
+          },
         },
       ],
     });
@@ -50,7 +48,7 @@ export class HideComponent {
             handler: ($event: Event) => {
               results.modalInstance.hide();
               resolve(true);
-            }
+            },
           },
           {
             id: 'btn-cancel',
@@ -59,9 +57,9 @@ export class HideComponent {
             handler: ($event: Event) => {
               results.modalInstance.hide();
               resolve(true);
-            }
+            },
           },
-        ]
+        ],
       });
     });
   }

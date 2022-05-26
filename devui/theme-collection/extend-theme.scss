@@ -12,15 +12,151 @@ body[ui-theme='galaxy-theme'] {
     line-height: 32px;
   }
 
-  d-tabs {
-    display: inline;
+  d-tabs .devui-nav-container {
+    // lg 容器高度40px
+    &.devui-nav-lg {
+      font-size: $devui-font-size-lg;
 
-    --devui-font-size-card-title: 14px;
+      .devui-nav-tabs > li {
+        height: 39px !important;
+        line-height: 39px !important;
+      }
+
+      .devui-nav-pills > li {
+        height: 40px !important;
+        line-height: 40px !important;
+      }
+
+      .devui-nav-options > li {
+        height: 34px !important;
+        line-height: 34px !important;
+      }
+
+      .devui-nav-slider-animation,
+      .devui-nav-slider > li {
+        height: 36px !important;
+        line-height: 36px !important;
+      }
+
+      .devui-nav-wrapped {
+        &.devui-nav-overflow li.active {
+          padding-top: 7px !important;
+        }
+
+        li {
+          padding: 8px 16px !important;
+        }
+      }
+    }
+
+    // md 容器高度32px
+    &.devui-nav-md {
+      font-size: $devui-font-size-lg !important;
+
+      .devui-nav-tabs > li {
+        height: 31px !important;
+        line-height: 31px !important;
+      }
+
+      .devui-nav-pills > li {
+        height: 32px !important;
+        line-height: 32px !important;
+      }
+
+      .devui-nav-options > li {
+        height: 26px !important;
+        line-height: 26px !important;
+      }
+
+      .devui-nav-slider-animation,
+      .devui-nav-slider > li {
+        height: 28px !important;
+        line-height: 28px !important;
+      }
+    }
+
+    // sm 容器高度28px
+    &.devui-nav-sm {
+      font-size: $devui-font-size-lg !important;
+
+      .devui-nav-tabs > li {
+        height: 27px !important;
+        line-height: 27px !important;
+      }
+
+      .devui-nav-pills > li {
+        height: 28px !important;
+        line-height: 28px !important;
+      }
+
+      .devui-nav-options > li {
+        height: 22px !important;
+        line-height: 22px !important;
+      }
+
+      .devui-nav-slider-animation,
+      .devui-nav-slider > li {
+        height: 24px !important;
+        line-height: 24px !important;
+      }
+
+      .devui-nav-wrapped {
+        &.devui-nav-overflow li.active {
+          padding-top: 1px !important;
+        }
+
+        li {
+          padding: 2px 16px !important;
+        }
+      }
+    }
+
+    // sm 容器高度24px
+    &.devui-nav-xs {
+      font-size: $devui-font-size-sm !important;
+
+      .devui-nav-tabs > li {
+        height: 23px !important;
+        line-height: 23px !important;
+      }
+
+      .devui-nav-pills > li {
+        height: 24px !important;
+        line-height: 24px !important;
+      }
+
+      .devui-nav-options > li {
+        height: 18px !important;
+        line-height: 18px !important;
+      }
+
+      .devui-nav-slider-animation,
+      .devui-nav-slider > li {
+        height: 20px !important;
+        line-height: 20px !important;
+      }
+
+      .devui-nav-wrapped {
+        &.devui-nav-overflow li.active {
+          padding-top: 0 !important;
+        }
+
+        li {
+          padding: 1px 16px 0 !important;
+          line-height: 22px !important;
+        }
+      }
+
+      .devui-tab-close-icon {
+        vertical-align: middle !important;
+      }
+    }
   }
 
   d-tag {
     --devui-font-size: var(--devui-font-size-sm, 12px);
   }
+
   // datepicker定制化处理高亮
   d-datepicker,
   d-date-range-picker,
@@ -35,7 +171,6 @@ body[ui-theme='galaxy-theme'] {
   // TODO: 表单底层统一使用一致的input，全局修改该input尺寸默认值即可
   // input default size change to '32px'
   d-multi-auto-complete .multi-auto-complete label.multiple-label-auto-complete ul.devui-dropdown-origin {
-    padding: 3px 2px 0 2px;
     min-height: 32px;
   }
 
@@ -81,6 +216,10 @@ body[ui-theme='galaxy-theme'] {
       padding: 4px 10px;
       min-height: 32px;
       max-height: 64px;
+
+      .devui-select-item {
+        line-height: 16px;
+      }
     }
   }
 
@@ -99,13 +238,15 @@ body[ui-theme='galaxy-theme'] {
   }
 
   // select带有搜索存在两层ul
-  .devui-dropdown-menu > ul.devui-dropdown-menu-wrap {
+  .devui-dropdown-menu > ul.devui-dropdown-menu-wrap,
+  .devui-dropdown-menu > d-toggle-menu-list > ul.devui-dropdown-menu-wrap {
     // 存在搜索框时
     & > li {
       padding: 12px 12px 0 12px;
     }
 
-    ul {
+    ul,
+    .cdk-virtual-scroll-content-wrapper {
       padding: 12px;
 
       li {
@@ -155,25 +296,19 @@ body[ui-theme='galaxy-theme'] {
     height: 46px;
   }
 
-  d-tabs .devui-nav {
-    display: block;
-
-    &.devui-nav-tabs,
-    &.devui-nav-pills {
-      li a {
-        line-height: 32px !important;
-      }
-    }
-  }
-
   // 表单尺寸未统一，upload内部自定义了高度
   d-single-upload,
   d-multiple-upload {
     .devui-input-group .devui-form-control {
-      min-height: 32px !important;
+      &.devui-files-list,
+      &.devui-upload-placeholder {
+        height: 32px;
+        max-height: 32px;
+      }
 
-      .devui-file-tag {
+      .devui-file-item {
         height: 26px !important;
+        line-height: 24px !important;
       }
     }
   }
@@ -187,14 +322,16 @@ body[ui-theme='galaxy-theme'] {
     right: 12px;
   }
 
-  .table-row-selected {
-    td {
-      color: #ffffff !important;
-    }
+  d-cascader .devui-dropdown input {
+    height: 32px;
   }
 
   // pagination样式修改
   d-pagination {
+    div.devui-pagination div.devui-dropdown d-icon.devui-page-size {
+      height: 32px;
+    }
+
     div.devui-pagination ul.devui-pagination-list li:not(.disabled) {
       cursor: pointer;
 
@@ -285,6 +422,22 @@ body[ui-theme='galaxy-theme'] {
       padding: 0 !important;
     }
   }
+
+  d-editable-select input[name='autoCompleteControl'].devui-dropdown-origin {
+    height: 32px;
+  }
+
+  d-input-number .input-container input.input-box {
+    height: 32px;
+  }
+
+  d-datepicker-pro .devui-datepicker-pro-wrapper .devui-single-picker .devui-input {
+    height: 30px !important;
+  }
+
+  input[dtimepicker] {
+    height: 32px !important;
+  }
 }
 
 body[ui-theme='deep-theme'] {
@@ -307,12 +460,38 @@ body[ui-theme='deep-theme'] {
       color: #ffffff !important;
     }
   }
+
+  .devui-canlender-panel-year-list {
+    --devui-list-item-selected-bg: var(--devui-deep-theme-list-item-selected-bg, #dfe1e6);
+  }
+}
+
+body[ui-theme='sweet-theme'] {
+  .devui-datepicker-pro-panel {
+    --devui-list-item-active-bg: var(--devui-brand, #ec66ab);
+    --devui-list-item-active-text: var(--devui-light-text, #ffffff);
+  }
 }
 
 body[ui-theme='infinity-theme'] {
-  d-tabs .devui-nav {
+  d-tabs {
     --devui-brand: #252b3a;
     --devui-brand-active: #252b3a;
+    --devui-tab-options-bg: #f2f2f3;
+
+    .devui-nav-options > li.active > a {
+      color: #252b3a !important;
+    }
+  }
+
+  .devui-datepicker-pro-panel {
+    --devui-list-item-active-bg: var(--devui-brand, #5e7ce0);
+    --devui-list-item-active-text: var(--devui-light-text, #ffffff);
+    --devui-list-item-hover-bg: var(--devui-list-item-active-hover-bg, #f2f5fc);
+  }
+
+  .devui-table {
+    --devui-list-item-strip-bg: #f8f8fa;
   }
 }
 
@@ -330,5 +509,14 @@ body[ui-theme='galaxy-theme'] {
 
   d-button .devui-btn-primary:disabled {
     --devui-light-text: #838383;
+  }
+}
+
+body[ui-theme='infinity-theme'],
+body[ui-theme='sweet-theme'],
+body[ui-theme='provence-theme'],
+body[ui-theme='deep-theme'] {
+  .devui-form-item .devui-form-label .devui-form-span {
+    color: $devui-aide-text;
   }
 }

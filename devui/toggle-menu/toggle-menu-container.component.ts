@@ -27,12 +27,9 @@ import {
 import {
   addClassToOrigin,
   AppendToBodyDirection,
-  AppendToBodyDirectionsConfig,
-  DevConfigService,
-  fadeInOut,
+  AppendToBodyDirectionsConfig, DevConfigService, fadeInOut,
   formWithDropDown,
-  removeClassFromOrigin,
-  WithConfig
+  removeClassFromOrigin, WithConfig
 } from 'ng-devui/utils';
 import { WindowRef } from 'ng-devui/window-ref';
 import { ToggleMenuListComponent } from './toggle-menu-list.component';

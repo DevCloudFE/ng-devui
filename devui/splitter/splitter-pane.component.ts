@@ -26,7 +26,17 @@ export class SplitterPaneComponent implements OnChanges, AfterViewChecked {
   // 折叠收缩后宽度
   @Input() shrinkWidth = 36;
   // 面板初始化是否折叠，默认不折叠
-  @Input() collapsed = false;
+  _collapsed = false;
+  @Input()
+  set collapsed(newCollapsed) {
+    if (this._collapsed !== newCollapsed) {
+      this._collapsed = newCollapsed;
+      this.splitter.paneChangeSubject.next(true);
+    }
+  }
+  get collapsed() {
+    return this._collapsed;
+  }
   // 非边缘面板折叠方向，before只生成向前折叠的按钮，after生成向后折叠按钮，both生成两个
   @Input() collapseDirection: CollapseDirection = 'both';
   widthBeforeShrink;
@@ -76,9 +86,7 @@ export class SplitterPaneComponent implements OnChanges, AfterViewChecked {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if ((changes.collapsible && !changes.collapsible.isFirstChange())
-    || (changes.collapsed && !changes.collapsed.isFirstChange())
-    || (changes.resizable && !changes.resizable.isFirstChange())) {
+    if ((changes.collapsible && !changes.collapsible.isFirstChange()) || (changes.resizable && !changes.resizable.isFirstChange())) {
       this.splitter.paneChangeSubject.next(true);
     }
   }
@@ -101,13 +109,13 @@ export class SplitterPaneComponent implements OnChanges, AfterViewChecked {
   toggleCollapseClass() {
     const paneHiddenClass = 'devui-splitter-pane-hidden';
 
-    if (!this.collapsed) {
+    if (!this._collapsed) {
       this.renderer.removeClass(this.element, paneHiddenClass);
     } else {
       this.renderer.addClass(this.element, paneHiddenClass);
     }
 
-    if (this.collapsed && this.shrink) {
+    if (this._collapsed && this.shrink) {
       this.renderer.removeClass(this.element, paneHiddenClass);
       this.renderer.setStyle(this.element, 'flex-basis', `${this.shrinkWidth}px`);
       this.shrinkStatusChange.emit(true);

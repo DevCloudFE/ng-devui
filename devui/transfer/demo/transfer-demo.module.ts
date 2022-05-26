@@ -8,7 +8,7 @@ import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
 import { ToggleModule } from 'ng-devui/toggle';
 import { TransferModule } from 'ng-devui/transfer';
 import { TranslateModule } from '@ngx-translate/core';
-import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
+import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
 import { TransferDemoBaseComponent } from './basic/transfer-demo-base.component';
 import { TransferDemoCustomComponent } from './custom/transfer-demo-custom.component';
 import { TransferDemoSearchComponent } from './search/transfer-demo-search.component';

@@ -128,7 +128,7 @@ export class ToggleMenuListComponent implements OnInit, OnChanges, OnDestroy {
   @ViewChild(CdkVirtualScrollViewport) virtualScrollViewport: CdkVirtualScrollViewport;
 
   get realVirtualScrollItemSize() {
-    const itemSize = this.templateItemSize || this.virtualScrollItemSize[this.size || 'normal'];
+    const itemSize = (this.templateItemSize || this.virtualScrollItemSize[this.size || 'normal']) + this.virtualScrollItemSize.space;
     const num = Math.round(this.scrollHeightNum / itemSize) || 10;
     this.minBuffer = num * 1.5 * itemSize;
     this.maxBuffer = num * 2.5 * itemSize;
@@ -148,9 +148,10 @@ export class ToggleMenuListComponent implements OnInit, OnChanges, OnDestroy {
   maxBuffer: number;
   virtualScrollViewportSizeMightChange = false;
   virtualScrollItemSize: any = {
-    sm: 34,
-    normal: 38,
+    sm: 30,
+    normal: 36,
     lg: 50,
+    space: 4,
   };
 
   constructor(private changeDetectorRef: ChangeDetectorRef, private i18n: I18nService) {}
@@ -402,9 +403,10 @@ export class ToggleMenuListComponent implements OnInit, OnChanges, OnDestroy {
 
   getVirtualScrollHeight(len, size) {
     if (len > 0) {
-      let height = this.templateItemSize ? this.templateItemSize * len : this.virtualScrollItemSize[size ? size : 'normal'] * len;
+      let height =
+        (this.templateItemSize || this.virtualScrollItemSize[size || 'normal']) * len + this.virtualScrollItemSize.space * (len - 1);
       if (this.isSelectAll && this.multiple) {
-        height += this.virtualScrollItemSize[size ? size : 'normal'];
+        height += this.virtualScrollItemSize[size ? size : 'normal'] + this.virtualScrollItemSize.space;
       }
       const scrollHeight = parseInt(this.scrollHeight, 10);
       this.scrollHeightNum = height > scrollHeight ? scrollHeight : height;

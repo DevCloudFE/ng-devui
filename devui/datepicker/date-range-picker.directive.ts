@@ -22,12 +22,9 @@ import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import {
   addClassToOrigin,
   DateConverter,
-  DefaultDateConverter,
-  DevConfigService,
-  fadeInOut,
+  DefaultDateConverter, DevConfigService, fadeInOut,
   formWithDropDown,
-  removeClassFromOrigin,
-  WithConfig
+  removeClassFromOrigin, WithConfig
 } from 'ng-devui/utils';
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime, filter, map } from 'rxjs/operators';

@@ -26,7 +26,6 @@ import { DefaultTemplateDirective } from './default-template.directive';
     TextInputModule,
     SearchModule,
     TagsModule,
-    TagsModule,
     ButtonModule,
     CheckBoxModule,
     InputNumberModule,

@@ -43,6 +43,10 @@ export class DataTableColumnTmplComponent implements OnChanges, OnDestroy, OnIni
 */
   @Input() filterList: Array<FilterConfig>;
   @Output() filterChange = new EventEmitter<FilterConfig[]>();
+  @Output() filterToggle = new EventEmitter<{
+    isOpen: boolean;
+    checklist: FilterConfig[];
+  }>();
   @Input() filterMultiple = true;
   @Input() filterIconActive: boolean;
   @Input() filterBoxWidth: any;
@@ -87,4 +91,12 @@ export class DataTableColumnTmplComponent implements OnChanges, OnDestroy, OnIni
   emitFilterData(filterData) {
     this.filterChange.emit(filterData);
   }
+
+  emitFilterToggle(data: {
+    isOpen: boolean;
+    checklist: FilterConfig[];
+  }) {
+    this.filterToggle.emit(data);
+  }
+
 }

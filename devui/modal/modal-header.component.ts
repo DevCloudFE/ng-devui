@@ -17,12 +17,16 @@ import { Subscription } from 'rxjs';
 })
 export class ModalHeaderComponent implements OnInit, OnDestroy {
   @Input() title: string;
-  @Output() closeEvent: EventEmitter<any> = new EventEmitter<any>();
   @Input() dialogtype = 'standard';
   @Input() showCloseBtn: boolean;
+  @Output() closeEvent: EventEmitter<any> = new EventEmitter<any>();
 
   i18nText: I18nInterface['modal'];
   i18nSubscription: Subscription;
+
+  get checkDialogType() {
+    return this.dialogtype?.toLowerCase() || 'standard';
+  }
 
   constructor(private ref: ChangeDetectorRef, private i18n: I18nService) {}
 

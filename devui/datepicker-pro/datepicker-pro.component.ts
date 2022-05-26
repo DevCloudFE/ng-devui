@@ -44,15 +44,22 @@ export class DatepickerProComponent implements OnInit, AfterViewInit, OnDestroy,
   @Input() showAnimation = true;
   @Input() appendToBody = true;
   @Input() width: string;
+  @Input() placeholder: string;
   @Output() dropdownToggle = new EventEmitter<boolean>();
   @Output() confirmEvent = new EventEmitter<Date>();
   @Input() set calenderRange (value) {
     this.pickerSrv.calendarRange = value || [1970, 2099];
   }
   @Input() set minDate(value: Date) {
+    if (!value) {
+      return;
+    }
     this.pickerSrv.minDate = value;
   }
   @Input() set maxDate(value: Date) {
+    if (!value) {
+      return;
+    }
     this.pickerSrv.maxDate = value;
   }
   @Input() set markedRangeDateList(value: Date[][]) {

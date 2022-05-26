@@ -5,7 +5,7 @@
 <h3 class="devui-h3-title">{{ 'components.design-shadow.shadowDemo.instance.description' | translate }}</h3>
 <d-tabs [type]="'tabs'" [(activeTab)]="activeTab">
   <d-tab id="curShadow" title="{{ 'components.design-shadow.shadowDemo.instance.defaultTable.tab' | translate }}">
-    <d-data-table #datatable [dataSource]="shadows" [scrollable]="true" [type]="'striped'">
+    <d-data-table #datatable [dataSource]="shadows" [scrollable]="true">
       <d-column
         field="name"
         header="{{ 'components.design-shadow.shadowDemo.instance.defaultTable.shadowName' | translate }}"
@@ -31,7 +31,7 @@
     </d-data-table>
   </d-tab>
   <d-tab id="oldShadow" title="{{ 'components.design-shadow.shadowDemo.instance.oldTable.tab' | translate }}">
-    <d-data-table #datatable [dataSource]="oldShadows" [scrollable]="true" [type]="'striped'">
+    <d-data-table #datatable [dataSource]="oldShadows" [scrollable]="true">
       <d-column
         field="name"
         header="{{ 'components.design-shadow.shadowDemo.instance.oldTable.shadowName' | translate }}"

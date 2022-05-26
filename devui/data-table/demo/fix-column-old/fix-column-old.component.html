@@ -1,4 +1,4 @@
-<d-data-table #datatable [dataSource]="basicDataSource" [scrollable]="true" [checkable]="true">
+<d-data-table #datatable [dataSource]="basicDataSource" [tableOverflowType]="'overlay'" [scrollable]="true" [checkable]="true">
   <d-column
     *ngFor="let colOption of dataTableOptions.columns"
     [field]="colOption.field"

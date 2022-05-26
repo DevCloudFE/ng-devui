@@ -1,4 +1,4 @@
-<d-data-table #datatable [dataSource]="basicDataSource" [scrollable]="true" [type]="'striped'">
+<d-data-table #datatable [dataSource]="basicDataSource" [scrollable]="true" [tableOverflowType]="'overlay'">
   <d-column field="$index" header="#" [width]="'50px'"></d-column>
   <d-column
     *ngFor="let colOption of dataTableOptions.columns"

@@ -1,6 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import {
-  ChangeDetectorRef, Component, EventEmitter, Inject, Input, OnChanges, OnDestroy, OnInit,
+  ChangeDetectorRef, Component, EventEmitter, HostBinding, Inject, Input, OnChanges, OnDestroy, OnInit,
   Output, SimpleChanges, TemplateRef, ViewChild
 } from '@angular/core';
 import { DropDownDirective } from 'ng-devui/dropdown';
@@ -31,6 +31,15 @@ export class FilterComponent implements OnInit, OnChanges, OnDestroy {
 
   @Output() filterIconActiveChange = new EventEmitter<boolean>(true);
   @Output() filterChange = new EventEmitter<FilterConfig[]>();
+  @Output() filterToggle = new EventEmitter<{
+    isOpen: boolean;
+    checklist: FilterConfig[];
+  }>();
+
+  @HostBinding('class.devui-icon-show')
+  get canShow() {
+    return this.showFilterIcon || this.filterIconActive || this.filterIconActiveInner;
+  }
 
   @ViewChild('filterDropdown') filterDropdown;
   private sourceSubject: BehaviorSubject<any>;
@@ -186,6 +195,13 @@ export class FilterComponent implements OnInit, OnChanges, OnDestroy {
       if (!this.customFilterTemplate) {
         this.registerFilterChange();
       }
+    });
+    const keyValue = this.checkedListForFilter.length
+      ? Object.prototype.hasOwnProperty.call(this.checkedListForFilter[0], 'id') ? 'id' : 'name' : '';
+    const checkedList = this.removeDuplication(this.checkedListForFilter, keyValue).filter(item => item.checked);
+    this.filterToggle.emit({
+      isOpen: $event,
+      checklist: checkedList
     });
   }
 

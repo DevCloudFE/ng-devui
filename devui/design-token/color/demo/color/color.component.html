@@ -10,7 +10,7 @@
   <div class="color-block block-7"></div>
 
   <d-tabs [type]="'tabs'" [(activeTab)]="activeTab" (activeTabChange)="setDataList()" style="margin-top: 8px">
-    <d-tab id="tab1" title="{{ 'components.design-color.colorDemo.instance.defaultTable.tab' | translate }}" tabId="tab1">
+    <d-tab id="tab1" title="{{ 'components.design-color.colorDemo.instance.defaultTable.tab' | translate }}">
       <ng-template dTabContent>
         <div *ngFor="let table of tableList; let index = index">
           <div class="devui-demo-title" style="margin-top: 10px">{{ tableNameList[index] }}</div>
@@ -131,9 +131,9 @@
       </d-data-table>
     </d-tab>
 
-    <d-tab id="tab2" title="{{ 'components.design-color.colorDemo.instance.oldTable.tab' | translate }}" tabId="tab2">
+    <d-tab id="tab2" title="{{ 'components.design-color.colorDemo.instance.oldTable.tab' | translate }}">
       <ng-template dTabContent>
-        <d-data-table #datatable [dataSource]="colors" [scrollable]="true" [type]="'striped'">
+        <d-data-table #datatable [dataSource]="colors" [scrollable]="true">
           <d-column
             field="name"
             header="{{ 'components.design-color.colorDemo.instance.oldTable.colorVar' | translate }}"

@@ -107,23 +107,13 @@
 }
 
 .devui-dropdown-item {
-  font-size: $devui-font-size;
-  display: block;
-  min-height: 36px;
-  line-height: 20px;
-  width: 100%;
-  padding: 8px 12px;
   clear: both;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  border: 0;
+  color: $devui-text;
+  font-size: $devui-font-size;
 
   input[name='search'] {
     font-size: $devui-font-size;
   }
-
-  color: $devui-text;
 }
 
 .devui-dropdown-item ::ng-deep .devui-select-checkbox {
@@ -278,8 +268,6 @@ div.devui-dropdown-menu {
 
 div.devui-dropdown-menu .devui-select-list-unstyled,
 div.devui-dropdown-menu > ul.devui-select-list-unstyled {
-  overflow-y: auto;
-
   & li:hover:not(.active):not(.disabled) {
     background-color: $devui-list-item-hover-bg;
     color: $devui-list-item-hover-text;
@@ -447,7 +435,7 @@ div.devui-dropdown-menu.devui-dropdown-menu-multiple > ul.devui-list-unstyled li
     margin: 1px;
     padding: 0 4px;
     border-radius: $devui-border-radius;
-    color: $devui-text;
+    color: $devui-aide-text;
     background: $devui-label-bg;
     max-width: 100%;
     position: relative;
@@ -466,10 +454,6 @@ div.devui-dropdown-menu.devui-dropdown-menu-multiple > ul.devui-list-unstyled li
     padding-right: 30px;
   }
 
-  .devui-select-tag-item span:hover {
-    color: $devui-brand;
-  }
-
   .devui-select-tag-item.disabled span {
     padding-right: 0;
     color: $devui-disabled-text;
@@ -486,7 +470,7 @@ div.devui-dropdown-menu.devui-dropdown-menu-multiple > ul.devui-list-unstyled li
     width: 12px;
     height: 12px;
     // display: inline-block;
-    transition: transform 0.2s ease;
+    transition: all 0.2s ease;
     pointer-events: auto;
     cursor: pointer;
     background-color: $devui-line;
@@ -500,7 +484,7 @@ div.devui-dropdown-menu.devui-dropdown-menu-multiple > ul.devui-list-unstyled li
     }
 
     &:hover {
-      background-color: $devui-icon-fill-active;
+      background-color: $devui-shape-icon-fill-hover;
     }
   }
 
@@ -713,12 +697,18 @@ svg.svg-icon-search path {
   cursor: pointer;
   pointer-events: initial;
 
-  svg.svg-icon-clear-sm {
-    transform: translateY(0.1em);
+  & > svg {
+    vertical-align: middle;
+
+    path {
+      fill: $devui-shape-icon-fill;
+    }
   }
 
-  svg.svg-icon-clear path {
-    fill: $devui-icon-text;
+  &:hover {
+    svg path {
+      fill: $devui-shape-icon-fill-active;
+    }
   }
 
   &::after {

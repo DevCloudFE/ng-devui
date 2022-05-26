@@ -1,5 +1,5 @@
 @import '../style/theme/color';
-@import '../style/core/font';
+@import '../style/core/_font';
 @import '../style/theme/corner';
 
 @mixin status-color {
@@ -43,7 +43,7 @@
     color: $devui-light-text;
     min-width: 16px;
     height: 16px;
-    font-size: $devui-font-size;
+    font-size: $devui-font-size-sm;
     line-height: 16px;
     text-align: center;
     padding: 0 4px;
@@ -84,13 +84,14 @@
 }
 
 .devui-badge-count {
+  display: inline-block;
   position: relative;
   right: 0;
   background: $devui-brand;
   color: $devui-light-text;
   min-width: 16px;
   height: 16px;
-  font-size: $devui-font-size;
+  font-size: $devui-font-size-sm;
   line-height: 16px;
   text-align: center;
   padding: 0 4px;

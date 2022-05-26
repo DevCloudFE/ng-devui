@@ -2,7 +2,14 @@
 <d-button bsStyle="common" (click)="toggleColOptions()">Config Columns</d-button>
 <br />
 <br />
-<d-data-table dLoading [dataSource]="remoteDataSource" [backdrop]="true" [scrollable]="true" [showLoading]="showLoading">
+<d-data-table
+  dLoading
+  [dataSource]="remoteDataSource"
+  [tableOverflowType]="'overlay'"
+  [backdrop]="true"
+  [scrollable]="true"
+  [showLoading]="showLoading"
+>
   <thead dTableHead>
     <tr dTableRow>
       <th dHeadCell *ngFor="let colOption of colDataOptions">{{ colOption.header }}</th>

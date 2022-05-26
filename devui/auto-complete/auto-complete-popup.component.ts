@@ -20,7 +20,7 @@ import { AutoCompleteConfig } from './auto-complete-config';
 export class AutoCompletePopupComponent implements ControlValueAccessor {
   @Input() width: number;
   @Input() cssClass: string;
-  @Input() maxHeight: number;
+  @Input() maxHeight = 300;
   @Input() disabled = false;
   @Input() disabledKey: string;
   @Input() source: any[];
@@ -60,7 +60,6 @@ export class AutoCompletePopupComponent implements ControlValueAccessor {
 
   constructor(private autoCompleteConfig: AutoCompleteConfig, public elementRef: ElementRef) {
     this.formatter = this.autoCompleteConfig.autoComplete.formatter;
-    this.maxHeight = 300;
   }
 
   writeValue(obj): void {

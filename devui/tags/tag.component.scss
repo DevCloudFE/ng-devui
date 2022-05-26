@@ -13,7 +13,7 @@
   min-height: 20px;
   font-size: $devui-font-size;
   line-height: 20px;
-  color: $devui-text;
+  color: $devui-aide-text;
   background-color: $devui-label-bg;
   border-radius: $devui-border-radius;
   border-width: 0;
@@ -41,7 +41,7 @@
   }
 
   &:hover:not(.devui-colorful-tag):not(.devui-selected-tag).devui-checkable-tag {
-    color: $devui-brand-hover;
+    color: $devui-aide-text-hover;
 
     .remove-button svg polygon {
       fill: $devui-brand-hover;
@@ -55,7 +55,7 @@
   }
 
   &.devui-selected-tag {
-    color: $devui-brand-active;
+    color: $devui-aide-text-hover;
 
     .remove-button svg polygon {
       fill: $devui-brand-active;
@@ -77,7 +77,7 @@
     transform: translateY(-50%);
 
     svg polygon {
-      fill: $devui-aide-text;
+      fill: $devui-icon-fill;
     }
 
     &:hover {
@@ -93,10 +93,11 @@
     width: 12px;
     height: 12px;
     line-height: 12px;
-    background-color: $devui-line;
+    background-color: $devui-shape-icon-fill;
     border-radius: 50%;
     display: inline-block;
     text-align: center;
+    transition: background-color $devui-animation-ease-in-out-smooth $devui-animation-duration-slow;
 
     svg path {
       fill: $devui-light-text;
@@ -104,7 +105,7 @@
 
     &:hover {
       text-decoration: none;
-      background-color: $devui-brand;
+      background-color: $devui-shape-icon-fill-hover;
     }
   }
 }
