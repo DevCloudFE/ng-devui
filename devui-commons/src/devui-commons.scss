@@ -25,8 +25,8 @@
 //内容区文档头样式
 .devui-docs-header {
   h1 {
-    @include font-title($devui-font-size-data-overview);
     margin: 32px 0 24px 0;
+    @include font-title($devui-font-size-data-overview);
   }
 
   h3 {
@@ -114,7 +114,8 @@
   margin: 10px 0 0;
 }
 
-.devui-code-box .collapse {
+.devui-code-box .collapse,
+.devui-code-box .code-link {
   display: block; /* .collapse conflick with bootstrap */
   position: absolute;
   left: 20px;
@@ -134,6 +135,10 @@
   & > svg > path {
     fill: $devui-text;
   }
+}
+
+.devui-code-box .code-link:hover {
+  transform: scale(1.2);
 }
 
 .devui-new-code-copy {
@@ -191,6 +196,7 @@
         -webkit-transition: all 0.3s ease;
         transition: all 0.3s ease;
       }
+
       a.current {
         color: $devui-link;
       }
@@ -217,7 +223,6 @@
     padding: 0 15% 0 8%;
   }
 }
-
 
 @media (max-width: 1250px) {
   .devui-content-nav {

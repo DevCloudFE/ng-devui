@@ -49,6 +49,8 @@
     "showCode": "Show Code",
     "hideCode": "Hide Code",
     "copyCode": "Copy Code",
+    "codesandbox": "Edit On CodeSandbox",
+    "stackblitz": "Edit On StackBlitz",
     "success": "Success"
   },
   "components": {
