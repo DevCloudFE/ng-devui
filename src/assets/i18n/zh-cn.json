@@ -49,6 +49,8 @@
     "showCode": "展开代码",
     "hideCode": "收起代码",
     "copyCode": "复制代码",
+    "codesandbox": "在 CodeSandbox 上打开",
+    "stackblitz": "在 StackBlitz 上打开",
     "success": "复制成功"
   },
   "components": {

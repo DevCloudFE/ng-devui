@@ -19,7 +19,8 @@
               "codemirror",
               "xss",
               "enquire.js",
-              "color"
+              "color",
+              "codesandbox"
             ],
             "customWebpackConfig": {
               "path": "scripts/extra-webpack.config.js"
