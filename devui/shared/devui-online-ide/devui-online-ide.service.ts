@@ -101,6 +101,9 @@ export class DevuiOnlineIdeService {
 @font-face { font-family: "devui-icomoon"; src: url('~@devui-design/icons/icomoon/fonts/devui-icomoon.eot?1622620995'); src: url('~@devui-design/icons/icomoon/fonts/devui-icomoon.woff?1622620995') format('woff'), url('~@devui-design/icons/icomoon/fonts/devui-icomoon.ttf?1622620995') format('truetype'), url('~@devui-design/icons/icomoon/fonts/devui-icomoon.svg?1622620995#devui-icomoon') format('svg'); }
 `,
     };
+    if(ide === 'CodeSandbox') {
+      files['sandbox.config.json']= '{"infiniteLoopProtection": false}';
+    }
     if (/templateUrl\:/.test(tsCode)) {
       const extension = tsCode.match(regConfig.templateExtension)[0];
       tsCode = tsCode.replace(regConfig.templateUrl, `./app.component.${extension}`);
