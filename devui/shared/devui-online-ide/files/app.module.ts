@@ -16,6 +16,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
 import { DevUIModule } from "ng-devui";
 import { I18nModule } from 'ng-devui/i18n';
+import { IconModule } from 'ng-devui/icon';
 
 import {
   AutoCompletePopupComponent,
@@ -49,7 +50,8 @@ ${importStr}
     HttpClientJsonpModule,
     ClipboardModule,
     DevUIModule,
-    I18nModule
+    I18nModule,
+    IconModule
   ],
   declarations: [ ${componentName}, ${componentsStr} ],
   entryComponents: [

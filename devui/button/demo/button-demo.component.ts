@@ -41,6 +41,7 @@ export class ButtonDemoComponent implements OnInit, OnDestroy {
   combinationSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('./combination/combination.component.html?raw') },
     { title: 'TS', language: 'typescript', code: require('./combination/combination.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./combination/combination.component.css?raw') }
   ];
 
   autofocusSource: Array<DevuiSourceData> = [
