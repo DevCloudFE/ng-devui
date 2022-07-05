@@ -1,6 +1,6 @@
 <div
-  class="devui-drop{{ popDirection === 'bottom' ? 'down' : 'up' }} 
-  {{ size ? 'devui-select-' + size : '' }} 
+  class="devui-drop{{ popDirection === 'bottom' ? 'down' : 'up' }}
+  {{ size ? 'devui-select-' + size : '' }}
   devui-dropdown-origin"
   [ngClass]="[isOpen ? 'open' : '', overview === 'underlined' ? 'devui-select-underlined-border' : '', disabled ? 'disabled' : '']"
   #selectWrapper
@@ -244,11 +244,11 @@
           <ng-template [ngTemplateOutlet]="dropdownItemTpl" [ngTemplateOutletContext]="{ item: item, index: index }"></ng-template>
         </ng-container>
       </ul>
-      <li *ngIf="availableOptions.length === 0 && !noResultItemTemplate" class="devui-no-data-tip">
+      <li *ngIf="availableOptions.length === 0 && !noResultItemTemplate && !this.showLoading" class="devui-no-data-tip">
         <ng-container *ngIf="!filter">{{ i18nCommonText?.noData }}</ng-container>
         <ng-container *ngIf="filter">{{ i18nCommonText?.noRecordsFound }}</ng-container>
       </li>
-      <li *ngIf="availableOptions.length === 0 && noResultItemTemplate" class="devui-no-data-tip">
+      <li *ngIf="availableOptions.length === 0 && noResultItemTemplate && !this.showLoading" class="devui-no-data-tip">
         <ng-template [ngTemplateOutlet]="noResultItemTemplate" [ngTemplateOutletContext]="{ options: options }"></ng-template>
       </li>
     </ul>
