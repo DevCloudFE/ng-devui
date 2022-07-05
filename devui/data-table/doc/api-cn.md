@@ -61,7 +61,7 @@ import { DataTableModule } from 'ng-devui/data-table';
 |    tableLayout     |           `'fixed'\|'auto'`           | 'fixed'     |         可选，表格布局         | [表格样式](demo#mutil-styles)                     |
 |    borderType     |           `''\|'bordered'\|'borderless'`           | ''     |         可选，表格边框类型，默认有行边框，bordered：全边框，borderless：无边框         | [表格样式](demo#mutil-styles)                     |
 |    striped     |           `boolean`           | false     |         可选，表格是否展示为斑马纹间隔         | [表格样式](demo#mutil-styles)                     |
-|    shadowType     |           `'shadow' \| 'embed'`          | 'embed'     |         可选，表格为阴影类型还是内嵌类型        | [表格样式](demo#mutil-styles)                     |
+|    shadowType     |           `'normal' \| 'embed'`          | 'embed'     |         可选，表格为阴影类型还是内嵌类型        | [表格样式](demo#mutil-styles)                     |
 |    tableOverflowType     |           `'overlay' \| 'auto'`          | 'auto'     |         可选，表格滚动条类型，overlay情况下鼠标悬浮才会显示滚动条       | [表格样式](demo#mutil-styles)                     |
 
 ### d-data-table 事件

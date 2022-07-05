@@ -61,7 +61,7 @@ On the page:
 | tableLayout | `'fixed'\|'auto'` | 'fixed' | Optional. Table layout | [Table style](demo#mutil-styles) |
 | borderType | `''\|'bordered'\|'borderless'` | '' | Optional. Table border type. The default value is row border. The options are bordered (full border) and borderless (no border). | [Table style](demo#mutil-styles) |
 | striped | `boolean` | false | Optional. Whether to display the table with zebra stripes. | [Table style](demo#mutil-styles)                      |
-| shadowType | `'shadow' \| 'embed' ` | 'embed' | Optional. Whether the table is of the shadow or embedded type | [table style](demo#mutil-styles) |
+| shadowType | `'normal' \| 'embed' ` | 'embed' | Optional. Whether the table is of the shadow or embedded type | [table style](demo#mutil-styles) |
 | tableOverflowType | ``Overlay'\ | 'auto' `|'auto' | Optional. The scroll bar is displayed only when the cursor is hovered in overlay mode. | [Table style](demo#mutil-styles) |
 
 ## d-data-table event
