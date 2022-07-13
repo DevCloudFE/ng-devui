@@ -81,28 +81,7 @@
       </ul>
     </div>
     <div popper-prepend class="devui-tree-select devui-search-container devui-form-group devui-has-feedback" *ngIf="searchable">
-      <input class="devui-input devui-search-in-dropdown" [(ngModel)]="searchString" #searchInputModel="ngModel" #searchInput />
-      <span class="devui-form-control-feedback">
-        <svg
-          width="14px"
-          height="14px"
-          viewBox="0 0 14 14"
-          version="1.1"
-          xmlns="http://www.w3.org/2000/svg"
-          xmlns:xlink="http://www.w3.org/1999/xlink"
-          class="svg-icon-search"
-          style="vertical-align: middle"
-        >
-          <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-            <g transform="translate(-1.000000, -1.000000)">
-              <path
-                d="M7.30811922,1 C10.7919973,1 13.6162384,3.82424117 13.6162384,7.30811922 C13.6162384,8.72507634 13.149053,10.0329164 12.3603151,11.0860065 L14.7360564,13.4616238 C15.0879812,13.8135487 15.0879812,14.3841316 14.7360564,14.7360564 C14.3841316,15.0879812 13.8135487,15.0879812 13.4616238,14.7360564 L11.0860065,12.3603151 C10.0329164,13.149053 8.72507634,13.6162384 7.30811922,13.6162384 C3.82424117,13.6162384 1,10.7919973 1,7.30811922 C1,3.82424117 3.82424117,1 7.30811922,1 Z M7.31,2.51 C4.6590332,2.51 2.51,4.6590332 2.51,7.31 C2.51,9.9609668 4.6590332,12.11 7.31,12.11 C9.9609668,12.11 12.11,9.9609668 12.11,7.31 C12.11,4.6590332 9.9609668,2.51 7.31,2.51 Z"
-                fill-rule="nonzero"
-              ></path>
-            </g>
-          </g>
-        </svg>
-      </span>
+      <d-search #searchInputModel="ngModel" #searchInput [(ngModel)]="searchString" [placeholder]="''"></d-search>
     </div>
     <div
       class="devui-tree-select devui-options-container"

@@ -14,6 +14,7 @@ import {
   SimpleChanges,
   ViewChild
 } from '@angular/core';
+import { DropDownAppendToBodyComponent } from 'ng-devui/dropdown';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { AppendToBodyDirection } from 'ng-devui/utils';
 import { fromEvent, Subscription } from 'rxjs';
@@ -120,6 +121,7 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy,
   private litePaginatorOptionsLengthCache = 0;
   showConfig = false;
   @ViewChild('litePaginator') litePaginator: ElementRef;
+  @ViewChild('dropDownElement') dropDownElement: DropDownAppendToBodyComponent;
   private configButtonLoseFocusHandler: Subscription | null = null;
   private loseFocusListener: any = null;
   i18nText: I18nInterface['pagination'];
@@ -231,6 +233,7 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy,
       }
       this.adjustPaginatorWidth();
     }
+    this.dropDownElement.dropDown.toggle();
   }
 
   hasPrev(): boolean {

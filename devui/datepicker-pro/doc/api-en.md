@@ -27,6 +27,7 @@ In the page:
 | maxDate | `Date` | new Date(calenderRange[1]) | (optional) Restricts the maximum date that can be selected. | [Basic usage](demo#basic-usage) |
 | showAnimation | `boolean` | true | (optional) Whether to enable animation | |
 | width | `string` | - | Width of the selector. | |
+| allowClear | `boolean` | true | Whether to allow the user to clear the date, that is, display the clear button. | |
 | placeholder | `string` | - |  host input's placeholder | |
 | mode | `'year' \| 'month' \| 'date'` | 'date' | panel mode | [year and month selector](demo#monthYear)|
 | markedDateList | `Date[]` | [] | Marked date list, which can be used with the MarkDateInfoTemplate template to display prompt information | [mark information](demo#date-marked)|

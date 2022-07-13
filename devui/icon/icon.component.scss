@@ -1,53 +1,52 @@
-@import '../style/theme/color';
+@import './icon-style-token.scss';
 @import '../style/core/animation';
-@import '../style/theme/corner';
-
-$devui-icon-background-hover: var(--devui-icon-background-hover, $devui-list-item-hover-bg);
-$devui-icon-background-active: var(--devui-icon-background-active, $devui-list-item-active-bg);
 
 .devui-icon {
-  font-size: 16px;
+  font-size: $devui-icon-font-size;
   display: inline-block;
   vertical-align: middle;
   transition: all $devui-animation-duration-slow $devui-animation-ease-in-out-smooth;
 }
 
 .devui-icon-can-interactive {
-  cursor: pointer;
-  transition: color $devui-animation-duration-slow $devui-animation-ease-in-out-smooth;
-
-  .devui-icon {
+  &:not(.disabled) {
     cursor: pointer;
-  }
-
-  &:hover {
-    color: $devui-icon-fill-hover;
-
-    &.devui-icon-container {
-      background-color: $devui-icon-background-hover;
-    }
+    transition: color $devui-animation-duration-slow $devui-animation-ease-in-out-smooth;
 
     .devui-icon {
-      color: $devui-icon-fill-hover;
+      cursor: pointer;
     }
   }
 
-  &:active {
-    color: $devui-icon-fill-active;
+  &:hover:not(.disabled) {
+    color: $devui-icon-hover-color;
 
     &.devui-icon-container {
-      background-color: $devui-icon-background-active;
+      background-color: $devui-icon-hover-bg;
     }
 
     .devui-icon {
-      color: $devui-icon-fill-active;
+      color: $devui-icon-hover-color;
+    }
+  }
+
+  &:active:not(.disabled) {
+    color: $devui-icon-active-color;
+
+    &.devui-icon-container {
+      background-color: $devui-icon-active-bg;
+    }
+
+    .devui-icon {
+      color: $devui-icon-active-color;
     }
   }
 
   &.devui-icon-container {
-    height: 32px;
+    height: $devui-icon-height;
     padding: 0 8px;
-    border-radius: $devui-border-radius;
+    margin-left: -8px;
+    border-radius: $devui-icon-border-radius;
     transition: all $devui-animation-duration-slow $devui-animation-ease-in-out-smooth;
   }
 }
@@ -55,26 +54,26 @@ $devui-icon-background-active: var(--devui-icon-background-active, $devui-list-i
 .devui-icon-container {
   display: inline-flex;
   align-items: center;
-  color: $devui-icon-fill;
+  color: $devui-icon-color;
 }
 
 .disabled {
-  color: $devui-disabled-text;
-  pointer-events: none;
+  color: $devui-icon-disabled-color;
+  cursor: not-allowed;
 
   .devui-icon {
-    color: $devui-disabled-text;
+    color: $devui-icon-disabled-color;
   }
 }
 
 ::ng-deep .devui-icon-container [iconPrefix] {
   vertical-align: middle;
-  margin-right: 8px;
+  margin-right: $devui-icon-space;
 }
 
 ::ng-deep .devui-icon-container [iconSuffix] {
   vertical-align: middle;
-  margin-left: 8px;
+  margin-left: $devui-icon-space;
 }
 
 ::ng-deep .devui-icon-container span,

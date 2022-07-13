@@ -21,6 +21,7 @@ In the page:
 | customViewTemplate Template | `TemplateRef` |   --    | Optional. Custom tag template.     | [Single Tag](demo#single-tag)   |
 |           checked           |   `boolean`   |  false  | Optional. Initial status of a tag. selected.                                                                                                                           | [Single Tag](demo#single-tag)   |
 |         customColor         |   `string`    |   ''    | Optional. Enter a color string (for example, '#f50') and customize the color label.                                                                                   | [Single Tag](demo#single-tag) |
+|    maxWidth     |   `string`    |    --     | Optional. Indicates the maximum width of the label. If the label exceeds the maximum width, the text is omitted and an ellipsis is displayed.       | [Single Tag](demo#single-tag) |
 
 ## d-tag event
 
@@ -36,6 +37,7 @@ In the page:
 | displayProperty | `string`  |   ''    | Optional. Set the attribute name to the value of the attribute.                                     | [Tag Group](demo#tags-group) |
 |   deleteable    | `boolean` |  false  | Optional. Specifies whether a tag can be deleted.                                                   | [Tag Group](demo#tags-group) |
 |  titleProperty  | `string`  |   ''    | Optional. Sets the attribute name. When the cursor is hovered, the value of the title is displayed. | [Tag Group](demo#tags-group) |
+|    hideBeyondTags    | `boolean`  |   false   | Optional. If the total width of the tag group exceeds the width of the parent, hide the extra tag.  | [Multi-Label Exceed Hide](demo#hide-tags) |
 
 ## d-tags event
 

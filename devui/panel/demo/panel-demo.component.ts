@@ -16,6 +16,7 @@ export class PanelDemoComponent implements OnInit, OnDestroy {
 
   typeSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('./type/type.component.html?raw') },
+    { title: 'SCSS', language: 'css', code: require('./type/type.component.scss?raw') },
     { title: 'TS', language: 'typescript', code: require('./type/type.component.ts?raw') },
   ];
 

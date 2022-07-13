@@ -230,7 +230,7 @@
           </form>
         </div>
         <div class="devui-save-panel-operation-area">
-          <d-button (btnClick)="createFilterFn(); saveDropdown.toggle()" [disabled]="filterNameForm.invalid">{{
+          <d-button [disabled]="filterNameForm.invalid" (btnClick)="createFilterFn(); saveDropdown.toggle()">{{
             i18nCategorySearchText?.confirm
           }}</d-button>
           <d-button bsStyle="common" (btnClick)="saveDropdown.toggle()">{{ i18nCategorySearchText?.cancel }}</d-button>
@@ -307,7 +307,7 @@
 </ng-template>
 
 <ng-template #noData>
-  <div class="devui-no-data-text">{{ i18nCommonText?.noData }}</div>
+  <div class="devui-no-data-tip">{{ i18nCommonText?.noData }}</div>
 </ng-template>
 
 <ng-template [type]="'radio'" let-tagOption="tagOption" let-key="tagOption.filterKey || 'label'">
@@ -410,7 +410,9 @@
     />
   </form>
   <div class="devui-dropdown-operation-area">
-    <d-button (btnClick)="getTextInputValue(tagOption); closeMenu(dropdown)">{{ i18nCategorySearchText?.confirm }}</d-button>
+    <d-button [disabled]="textInputForm.invalid" (btnClick)="getTextInputValue(tagOption); closeMenu(dropdown)">{{
+      i18nCategorySearchText?.confirm
+    }}</d-button>
     <d-button bsStyle="common" (btnClick)="closeMenu(dropdown)">{{ i18nCategorySearchText?.cancel }}</d-button>
   </div>
 </ng-template>
@@ -510,9 +512,7 @@
   <div *ngIf="!tagOption.options?.length">
     <ng-container *ngTemplateOutlet="noData"></ng-container>
   </div>
-  <div *ngIf="noRecord" class="devui-no-data-tip">
-    {{ i18nCommonText?.noRecordsFound }}
-  </div>
+  <div *ngIf="noRecord" class="devui-no-data-tip">{{ i18nCommonText?.noRecordsFound }}</div>
   <div *ngIf="tagOption.multiple" class="devui-dropdown-operation-area">
     <d-button (btnClick)="getTreeValue(tagOption, tree); closeMenu(dropdown)">{{ i18nCategorySearchText?.confirm }}</d-button>
     <d-button bsStyle="common" (btnClick)="closeMenu(dropdown)">{{ i18nCategorySearchText?.cancel }}</d-button>

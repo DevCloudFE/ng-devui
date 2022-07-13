@@ -77,7 +77,7 @@ In the page:
 | fileOver | `EventEmitter<boolean>` | Supports dragging and uploading. When a file is moved to a dragable area, an event is triggered. If a dragable element is moved out of the target, the value `false` is returned. If an element is being dragged to the target, the value `true` is returned | [Upload Multiple Files](demo#multi-files) |
 | fileDrop | `EventEmitter<any>` | Supports the callback of the list of dragged files during upload. The first file is returned by default when a single file is uploaded | [Upload Multiple Files](demo#multi-files) |
 | successEvent | `EventEmitter<Array<{file: File; response: any}>>` | Callback function when the upload is successful, which returns the file and Xhr response information | [Upload Multiple Files](demo#multi-files) |
-| errorEvent | `EventEmitter<{file: File; response: any}>` | Callback function when an upload error occurs. The error information about the upload failure is returned | [Upload Multiple Files](demo#multi-files) |
+| errorEvent | `EventEmitter<Array<{file: File; response: any}>>` | Callback function when an upload error occurs. The error information about the upload failure is returned | [Upload Multiple Files](demo#multi-files) |
 | deleteUploadedFileEvent | `EventEmitter<string>` | Callback function for deleting uploaded files. The file path information is returned | [Upload Multiple Files](demo#multi-files) |
 |      fileSelect         | `EventEmitter<File>` | Callback function for selecting files. The callback function returns the path information of the selected files                                                                         | [Upload Multiple Files](demo#multi-files) |
 

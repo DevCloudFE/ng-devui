@@ -58,7 +58,7 @@
       </ng-container>
     </span>
   </ng-container>
-  <span class="title">
+  <span class="title" [ngStyle]="{ flex: sortable ? 'inherit' : 1 }">
     <ng-content></ng-content>
   </span>
   <d-table-sort *ngIf="sortable" [sortDirection]="sortDirection" [showSortIcon]="showSortIcon" (sortEvent)="onSort($event)"></d-table-sort>

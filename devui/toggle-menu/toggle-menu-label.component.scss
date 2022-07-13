@@ -23,77 +23,40 @@
     height: auto;
     overflow-y: auto;
     overflow-x: hidden;
-    line-height: 1.5;
+    line-height: 1;
     max-height: 48px;
-  }
-
-  .over-flow-ellipsis {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    height: 20px;
-    line-height: 20px;
-    vertical-align: middle;
+    min-height: 24px;
   }
 }
 
 .devui-select-tag-item {
   display: inline-block;
-  margin: 1px;
-  padding: 0 4px;
-  border-radius: $devui-border-radius;
-  color: $devui-aide-text;
-  background: $devui-label-bg;
-  max-width: 100%;
-  position: relative;
-  border: 1px solid $devui-label-bg;
+  margin: 2px 0 0 2px;
+}
 
-  &:not(.disabled) {
-    span {
+:host ::ng-deep .devui-select-tag-item {
+  d-tag {
+    width: 100%;
+
+    .devui-tag-item > span {
+      vertical-align: top;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
       display: inline-block;
-      max-width: 100%;
-      padding-right: 30px;
+      width: 100%;
     }
   }
 
   &.disabled {
-    cursor: not-allowed;
-    color: $devui-disabled-text;
-    background-color: $devui-disabled-bg;
-    border-color: $devui-disabled-line;
+    line-height: 18px;
 
-    span {
-      padding-right: 0;
+    d-tag .devui-tag-item {
+      border: solid 1px $devui-disabled-line;
+      line-height: 18px;
+      background-color: $devui-disabled-bg;
       color: $devui-disabled-text;
-    }
-  }
-
-  .devui-select-tag-remove-button {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    // line-height: 12px;
-    // text-align: center;
-    color: $devui-text; // TODO： Color-Question
-    width: 12px;
-    height: 12px;
-    // display: inline-block;
-    transition: all 0.2s ease;
-    pointer-events: auto;
-    cursor: pointer;
-    background-color: $devui-shape-icon-fill;
-    border-radius: 50%;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-
-    svg path {
-      fill: $devui-light-text; // TODO: Color-Question
-    }
-
-    &:hover {
-      background-color: $devui-shape-icon-fill-hover;
+      cursor: not-allowed;
     }
   }
 }

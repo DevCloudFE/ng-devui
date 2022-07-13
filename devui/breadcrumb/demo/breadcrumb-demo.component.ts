@@ -29,6 +29,11 @@ export class BreadCrumbDemoComponent implements OnInit, OnDestroy {
     { title: 'TS', language: 'typescript', code: require('./menu/menu.component.ts?raw') },
   ];
 
+  ClickBlockSource: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'xml', code: require('./click-block/click-block.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./click-block/click-block.component.ts?raw') },
+  ];
+
   navItems = [];
   subs: Subscription = new Subscription();
   constructor(private translate: TranslateService) {}
@@ -53,7 +58,8 @@ export class BreadCrumbDemoComponent implements OnInit, OnDestroy {
       { dAnchorLink: 'basic-breadcrumbs', value: values['basic-breadcrumbs'] },
       { dAnchorLink: 'source-config-breadcrumbs', value: values['source-config-breadcrumbs'] },
       { dAnchorLink: 'drop-down-breadcrumbs', value: values['drop-down-breadcrumbs'] },
-      { dAnchorLink: 'self-defined-breadcrumbs', value: values['self-defined-breadcrumbs'] }
+      { dAnchorLink: 'self-defined-breadcrumbs', value: values['self-defined-breadcrumbs'] },
+      { dAnchorLink: 'click-block-breadcrumbs', value: values['click-block-breadcrumbs'] }
     ];
   }
 

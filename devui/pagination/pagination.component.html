@@ -1,6 +1,6 @@
 <div class="devui-pagination" [class.devui-pagination-hidden]="autoHide && total < minPageSizeOptions">
   <ng-container *ngIf="canChangePageSize && !lite">
-    <div dDropDown (toggleEvent)="onToggle($event)" appendToBody [appendToBodyDirections]="pageSizeDirection">
+    <div dDropDown (toggleEvent)="onToggle($event)" appendToBody [appendToBodyDirections]="pageSizeDirection" #dropDownElement>
       <d-icon
         class="devui-dropdown-default devui-dropdown-origin devui-page-size {{ size ? 'devui-page-size-' + size : '' }}"
         dDropDownToggle
@@ -9,7 +9,7 @@
       >
         <span iconPrefix>{{ pageSize }}</span>
       </d-icon>
-      <ul dDropDownMenu class="devui-dropdown-menu" role="menu">
+      <ul dDropDownMenu class="devui-dropdown-menu devui-pagination-dropdown-menu" role="menu" (click)="$event.stopPropagation()">
         <li *ngFor="let item of pageSizeOptions" class="devui-dropdown-item" (click)="onPageSizeChange(item)">{{ item }}</li>
       </ul>
     </div>

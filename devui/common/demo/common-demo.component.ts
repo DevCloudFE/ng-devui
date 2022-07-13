@@ -13,6 +13,11 @@ export class CommonDemoComponent implements OnInit, OnDestroy {
     { title: 'TS', language: 'typescript', code: require('./pipe/pipe.component.ts?raw') },
   ];
 
+  helperBrowserSource: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'html', code: require('./helper-browser/helper-browser.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./helper-browser/helper-browser.component.ts?raw') },
+  ];
+
   helperJumpSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'html', code: require('./helper-jump/helper-jump.component.html?raw') },
     { title: 'TS', language: 'typescript', code: require('./helper-jump/helper-jump.component.ts?raw') },
@@ -62,6 +67,7 @@ export class CommonDemoComponent implements OnInit, OnDestroy {
   setNavValues(values) {
     this.navItems = [
       { dAnchorLink: 'date-pipe', value: values['date-pipe'] },
+      { dAnchorLink: 'browser-version', value: values['browser-version'] },
       { dAnchorLink: 'open-url', value: values['open-url'] },
       { dAnchorLink: 'download-file', value: values['download-file'] },
       { dAnchorLink: 'iframe-propagate', value: values['iframe-propagate'] },

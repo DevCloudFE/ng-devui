@@ -40,6 +40,10 @@ export class TableTdComponent implements OnInit, OnChanges, OnDestroy {
    */
   @Output() editingChange = new EventEmitter<boolean>();
 
+  @HostBinding('class.editable-cell') get isEditable() {
+    return this.editable && !this.editing && this.editableTip !== 'btn';
+  }
+
   private documentClickSubscription: Subscription;
   private tdMousedownSubscription: Subscription;
   private tdMouseupSubscription: Subscription;

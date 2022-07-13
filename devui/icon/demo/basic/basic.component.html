@@ -1,8 +1,20 @@
-<h4>默认图标</h4>
+<h4>默认图标 - 正常/禁用/旋转</h4>
 <d-icon [icon]="'icon-setting'"></d-icon>
+<d-icon [icon]="'icon-setting'" [disabled]="true"></d-icon>
+<d-icon [icon]="'icon-refresh'" [rotate]="'infinite'"></d-icon>
 
-<h4>可交互默认图标</h4>
-<d-icon [icon]="'icon-setting'" [operable]="true"> </d-icon>
+<h4>彩色图标</h4>
+<d-icon [icon]="'icon-star'" [color]="'var(--devui-warning)'"></d-icon>
+
+<h4>可交互默认图标 - 正常/禁用/旋转</h4>
+<d-icon [icon]="'icon-setting'" [operable]="true"></d-icon>
+<d-icon [icon]="'icon-setting'" [operable]="true" [disabled]="true"></d-icon>
+<d-icon [icon]="'icon-refresh'" [operable]="true" [rotate]="'infinite'"></d-icon>
+
+<h4>链接图标</h4>
+<d-icon icon="icon-homepage">
+  <a iconSuffix class="devui-link" href="https://devui.huawei.com/">首页</a>
+</d-icon>
 
 <h4>文字图标 - 文字后置</h4>
 <d-icon [icon]="'icon-setting'" [operable]="true">
@@ -17,6 +29,19 @@
 <h4>文字图标 - 自定义图标</h4>
 <d-icon [icon]="customTemplate" [operable]="true">
   <span iconSuffix>添加</span>
+</d-icon>
+
+<h4>文字图标 - 禁用</h4>
+<d-icon [icon]="'icon-edit'" [disabled]="true">
+  <span iconSuffix>无权编辑</span>
+</d-icon>
+
+<h4>文字图标 - 旋转</h4>
+<d-icon [icon]="'icon-refresh'" [rotate]="'infinite'">
+  <span iconSuffix>运行中</span>
+</d-icon>
+<d-icon [icon]="'icon-refresh'" [operable]="true" [rotate]="'infinite'">
+  <span iconSuffix>下载中</span>
 </d-icon>
 
 <ng-template #customTemplate>

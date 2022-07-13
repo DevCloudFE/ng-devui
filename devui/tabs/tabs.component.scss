@@ -152,12 +152,14 @@
     .devui-nav-options > li {
       height: 22px;
       line-height: 22px;
+      font-size: $devui-font-size;
     }
 
     .devui-nav-slider-animation,
     .devui-nav-slider > li {
       height: 24px;
       line-height: 24px;
+      font-size: $devui-font-size;
     }
 
     // TODO: wrapped类型无视主题高度40px
@@ -190,12 +192,14 @@
     .devui-nav-options > li {
       height: 20px;
       line-height: 20px;
+      font-size: $devui-font-size;
     }
 
     .devui-nav-slider-animation,
     .devui-nav-slider > li {
       height: 22px;
       line-height: 22px;
+      font-size: $devui-font-size;
     }
 
     .devui-nav-wrapped {
@@ -241,6 +245,33 @@
       &.active::after {
         width: 100%;
         background: $devui-brand;
+      }
+    }
+
+    &.devui-nav-stacked {
+      border: none;
+
+      & > li {
+        float: none;
+        border: none;
+        margin-left: 0;
+        height: 36px;
+        line-height: 36px;
+        font-weight: bold;
+
+        &:not(.active),
+        &:not(.disable) {
+          & > a {
+            color: $devui-text;
+          }
+        }
+
+        &.active,
+        &:hover:not(.disabled) {
+          & > a {
+            color: $devui-brand;
+          }
+        }
       }
     }
   }

@@ -479,6 +479,9 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
   }
 
   isDisabledDay(date) {
+    if (this.disabled) {
+      return true;
+    }
     if (!date) {
       return false;
     }

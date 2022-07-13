@@ -76,7 +76,7 @@ export class ComponentsOverviewComponent implements OnInit, OnDestroy {
 
   calNumberOfComponents() {
     this.totalNumComponents = 0;
-    this.componentsData.map(components => {
+    this.componentsData.forEach(components => {
       if (!components.nodisplay) {
         this.totalNumComponents = this.totalNumComponents + components.children.length;
       }
@@ -101,8 +101,8 @@ export class ComponentsOverviewComponent implements OnInit, OnDestroy {
 
   setComponentsSuggest(type) {
     this.componentsSuggest = [];
-    this.componentsData.map(cmpList => {
-      cmpList.children.map(cmp => {
+    this.componentsData.forEach(cmpList => {
+      cmpList.children.forEach(cmp => {
         if (Array.isArray(type) && type.find(scope => scope.toLocaleLowerCase() === cmp.lowerName)) {
           this.componentsSuggest.push(cloneDeep(cmp));
         } else if (type === 'newChange' && cmp.newChange) {
@@ -122,7 +122,7 @@ export class ComponentsOverviewComponent implements OnInit, OnDestroy {
 
   searchComponent(event) {
     this.nowFilter = undefined;
-    this.tagList.map(tag => { tag.checked = false; });
+    this.tagList.forEach(tag => { tag.checked = false; });
     this.setComponentsSuggest(suggestScopeList);
     this.componentsDataDisplay = filterData(event, this.componentsData);
     this.componentsLooking = [];
@@ -133,8 +133,8 @@ export class ComponentsOverviewComponent implements OnInit, OnDestroy {
         });
       });
       if (res) {
-        this.componentsData.map(cmpList => {
-          cmpList.children.map(cmp => {
+        this.componentsData.forEach(cmpList => {
+          cmpList.children.forEach(cmp => {
             if (res.name.includes(cmp.lowerName)) {
               this.componentsLooking.unshift(cloneDeep(cmp));
             }
@@ -146,7 +146,7 @@ export class ComponentsOverviewComponent implements OnInit, OnDestroy {
 
   filter(type) {
     const tagIndex = this.tagList.findIndex(tag => tag.name === type);
-    this.tagList.map(tag => { tag.checked = false; });
+    this.tagList.forEach(tag => { tag.checked = false; });
     if (this.nowFilter !== type) {
       this.nowFilter = type;
       this.tagList[tagIndex].checked = true;

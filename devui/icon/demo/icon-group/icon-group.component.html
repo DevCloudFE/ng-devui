@@ -11,3 +11,62 @@
   <d-icon [icon]="'icon-edit'"></d-icon>
   <d-icon [icon]="'icon-delete'"></d-icon>
 </d-icon-group>
+
+<h4>典型工具栏场景1</h4>
+<d-icon-group>
+  <d-icon [icon]="'icon-add'" [operable]="true"> </d-icon>
+  <d-icon [icon]="'icon-edit'" [operable]="true"></d-icon>
+  <span dDropDown>
+    <d-icon dDropDownToggle [icon]="'icon-more-operate'" [operable]="true"> </d-icon>
+    <ul dDropDownMenu>
+      <li class="devui-dropdown-item">删除</li>
+      <li class="devui-dropdown-item">保存</li>
+    </ul>
+  </span>
+</d-icon-group>
+
+<h4>典型工具栏场景2</h4>
+<div class="btn-group" dDropDown appendToBody>
+  <d-icon-group>
+    <d-icon
+      class="pipeline-watch"
+      [color]="watched ? 'var(--devui-warning)' : ''"
+      [icon]="watched ? 'icon-star' : 'icon-star-o'"
+      [operable]="true"
+      [title]="watched ? '取消收藏' : '收藏'"
+      (click)="watched = !watched"
+    >
+    </d-icon>
+    <d-icon dDropDownToggle icon="icon-more-operate" [operable]="true" title="更多"> </d-icon>
+  </d-icon-group>
+  <ul dDropDownMenu class="devui-dropdown-menu" role="menu">
+    <li role="menuitem">
+      <a class="devui-dropdown-item">
+        <d-icon icon="icon-run">
+          <span iconSuffix>运行</span>
+        </d-icon>
+      </a>
+    </li>
+    <li role="menuitem">
+      <a class="devui-dropdown-item">
+        <d-icon icon="icon-edit">
+          <span iconSuffix>编辑</span>
+        </d-icon>
+      </a>
+    </li>
+    <li role="menuitem">
+      <a class="devui-dropdown-item">
+        <d-icon icon="icon-copy">
+          <span iconSuffix>复制</span>
+        </d-icon>
+      </a>
+    </li>
+    <li role="menuitem" [class.disabled]="true">
+      <a class="devui-dropdown-item" [class.disabled]="true">
+        <d-icon icon="icon-delete" [disabled]="true" title="任务运行中，无法删除">
+          <span iconSuffix>删除</span>
+        </d-icon>
+      </a>
+    </li>
+  </ul>
+</div>

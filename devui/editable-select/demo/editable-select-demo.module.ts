@@ -10,7 +10,7 @@ import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
-import { AsyncDataWithFuncitionComponent } from './async-data-function/async-data-with-function.component';
+import { AsyncDataWithFunctionComponent } from './async-data-function/async-data-with-function.component';
 import { WithSourceComponent } from './basic/with-source.component';
 import { DisableDataWithSourceComponent } from './disable-data/disable-data-with-source.component';
 import { EditableSelectDemoComponent } from './editable-select-demo.component';
@@ -44,13 +44,12 @@ import { WithSearchFunctionComponent } from './search-function/with-search-funct
   exports: [EditableSelectDemoComponent],
   declarations: [
     EditableSelectDemoComponent,
-    AsyncDataWithFuncitionComponent,
+    AsyncDataWithFunctionComponent,
     DisableDataWithSourceComponent,
     WithSearchFunctionComponent,
     WithSourceComponent,
     LazyLoadComponent,
   ],
   providers: [],
-
 })
 export class EditableSelectDemoModule {}

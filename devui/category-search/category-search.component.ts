@@ -72,7 +72,7 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
   @Output() searchKeyChange = new EventEmitter<String>();
   @ViewChild('InputEle') inputEle: ElementRef;
   @ViewChild('ScrollBarContainer') scrollBarContainer: ElementRef;
-  @ViewChild('PrimeContainer') primeContainer: ElementRef<any>;
+  @ViewChild('PrimeContainer') primeContainer: ElementRef;
   @ViewChildren('selectedDropdown') selectedDropdownList: QueryList<DropDownDirective>;
   @ViewChildren(DatepickerProCalendarComponent, { read: ElementRef }) datePickerElements: QueryList<ElementRef>;
   @ViewChildren(DefaultTemplateDirective) defaultTemplates: QueryList<DefaultTemplateDirective>;
@@ -337,7 +337,7 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
       const keys = this.groupOrderConfig || Object.keys(groupObj);
       this.categoryDisplay = [];
       keys.forEach((key) => {
-        if (groupObj[key]?.length) {
+        if (groupObj[key]) {
           const groupItem = <ICategorySearchTagItem>{};
           groupItem.groupName = key;
           groupItem.groupLength = groupObj[key].length;
@@ -464,27 +464,21 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
     const filterKey = field.filterKey || 'label';
     const colorKey = field.colorKey || 'color';
     result[filterKey] = value;
-    switch (field.type) {
-    case 'radio':
+    if (field.type === 'radio') {
       field.value.value = value;
       field.title = this.setTitle(field, 'radio', value);
-      break;
-    case 'label':
+    }
+    if (field.type === 'label') {
       if (!field.options[0]?.$label) {
         this.mergeToLabel(field);
       }
       result[colorKey] = COLORS[Math.floor(COLORS.length * Math.random())];
       result['$label'] = `${value}_${result[colorKey]}`;
+    }
+    if (['label', 'checkbox'].includes(field.type)) {
       field.value.value = [result];
       // setTitle中checkbox与label同样处理，不需要针对label修改类型参数
       field.title = this.setTitle(field, 'checkbox', value);
-      break;
-    case 'checkbox':
-      field.value.value = [result];
-      // setTitle中checkbox与label同样处理，不需要针对label修改类型参数
-      field.title = this.setTitle(field, 'checkbox', value);
-      break;
-    default:
     }
     field.value[filterKey] = value;
     field.value.cache = cloneDeep(field.value.value);

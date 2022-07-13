@@ -48,6 +48,7 @@ export class RangeDatepickerProComponent implements OnInit, OnDestroy, AfterView
   @Input() startIndexOfWeek = 0;
   @Input() appendToBody = true;
   @Input() placeholder: string[];
+  @Input() allowClear = true;
   @Input() set calenderRange (value) {
     this.pickerSrv.calendarRange = value || [1970, 2099];
   }

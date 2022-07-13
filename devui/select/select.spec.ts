@@ -952,12 +952,12 @@ describe('Select', () => {
         }));
         describe('enable labelization', () => {
           it('should show in label', fakeAsync(() => {
-            const labelElements = debugEl.queryAll(By.css('.devui-select-tag-list .devui-select-tag-item'));
+            const labelElements = debugEl.queryAll(By.css('.devui-select-tag-list .devui-tag-item'));
             expect(labelElements.length).toEqual(component.option.length);
           }));
           it('option should remove by clicking remove icon', fakeAsync(() => {
-            const secondLabelElement = debugEl.queryAll(By.css('.devui-select-tag-list .devui-select-tag-item'))[1];
-            const removeButton = secondLabelElement.query(By.css('.devui-select-tag-remove-button'));
+            const secondLabelElement = debugEl.queryAll(By.css('.devui-select-tag-list .devui-tag-item'))[1];
+            const removeButton = secondLabelElement.query(By.css('.remove-button'));
             removeButton.nativeElement.click();
             fixture.detectChanges();
             expect(component.option).toEqual(component.options.filter((item, index) => index !== 1));
@@ -1266,7 +1266,7 @@ describe('Select', () => {
           fixture.detectChanges();
           openMenu();
           const itemElements = debugEl.queryAll(By.css('d-select > div > div.devui-dropdown-menu li.devui-dropdown-item'));
-          const nodataElement = debugEl.query(By.css('d-select > div > div.devui-dropdown-menu li.devui-no-data-tip'));
+          const nodataElement = debugEl.query(By.css('d-select > div > div.devui-dropdown-menu div.devui-no-data-tip'));
           expect(itemElements.length).toBe(0);
           expect(nodataElement.nativeElement.innerText).toBe('没有数据');
         }));
@@ -1282,7 +1282,7 @@ describe('Select', () => {
           fixture.detectChanges();
           tick(300); fixture.detectChanges();
           const itemElements = debugEl.queryAll(By.css('d-select > div > div.devui-dropdown-menu li.devui-dropdown-item'));
-          const nodataElement = debugEl.query(By.css('d-select > div > div.devui-dropdown-menu li.devui-no-data-tip'));
+          const nodataElement = debugEl.query(By.css('d-select > div > div.devui-dropdown-menu div.devui-no-data-tip'));
           expect(itemElements.length).toBe(0);
           expect(nodataElement.nativeElement.innerText).toBe('找不到相关记录');
         }));
@@ -1299,7 +1299,7 @@ describe('Select', () => {
           fixture.detectChanges();
           tick(300); fixture.detectChanges();
           const itemElements = debugEl.queryAll(By.css('d-select > div > div.devui-dropdown-menu li.devui-dropdown-item'));
-          const nodataElement = debugEl.query(By.css('d-select > div > div.devui-dropdown-menu li.devui-no-data-tip'));
+          const nodataElement = debugEl.query(By.css('d-select > div > div.devui-dropdown-menu div.devui-no-data-tip'));
           expect(itemElements.length).toBe(0);
           expect(nodataElement.nativeElement.innerText).toBe('没有自定义数据');
         }));

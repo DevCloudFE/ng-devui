@@ -3,9 +3,7 @@
 @import '../../../../../style/core/_font';
 
 :host {
-  flex: 1;
   text-align: right;
-  display: none;
 
   &.devui-icon-show {
     display: block;
@@ -163,12 +161,12 @@
   visibility: visible !important;
 
   > svg g {
-    fill: $devui-shape-icon-fill-active;
+    fill: $devui-brand;
   }
 
   &:hover {
     > svg g {
-      fill: $devui-shape-icon-fill-active;
+      fill: $devui-brand;
     }
   }
 }

@@ -135,22 +135,7 @@
 .devui-tree-select.devui-options-container {
   width: 100%;
   color: $devui-text;
-  margin: 4px 0;
   padding-left: 8px;
-
-  .devui-no-data-tip {
-    user-select: none;
-    cursor: not-allowed;
-    padding: 5px 12px;
-    background-color: $devui-disabled-bg;
-    color: $devui-disabled-text;
-  }
-}
-
-.devui-tree-select.devui-search-container {
-  .devui-search-in-dropdown {
-    height: 32px;
-  }
 }
 
 .devui-select-item {
@@ -280,8 +265,13 @@ svg.svg-icon-search path {
 
 .devui-tree-select {
   .devui-select-input.devui-tree-select-input {
-    &:not(.icon):not([class^=icon-]):not([disabled]):not(.disabled):not(.devui-disabled) { // 为了增加层级覆盖form的样式
+    &:not(.icon):not([class^='icon-']):not([disabled]):not(.disabled):not(.devui-disabled) {
+      // 为了增加层级覆盖form的样式
       color: $devui-placeholder;
     }
   }
+}
+
+::ng-deep .devui-tree-select.devui-search-container d-search {
+  width: 100%;
 }

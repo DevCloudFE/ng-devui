@@ -291,7 +291,7 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
   /**
    * 表格尺寸，sm对应行高40px， md对应行高48px，lg对应行高56px
    */
-  @Input() size: 'sm' | 'md' | 'lg' = 'sm';
+  @Input() size: 'xs' | 'sm' | 'md' | 'lg' = 'sm';
 
   @Input() shadowType: 'normal' | 'embed' = 'embed';
 

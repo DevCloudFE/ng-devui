@@ -11,7 +11,7 @@ export class DatatableDemoEditableComponent implements OnInit {
   genderSource = genderSource;
   basicDataSource = cloneDeep(editableOriginSource.slice(0, 6));
 
-  editableTip = EditableTip.btn;
+  editableTip = EditableTip.hover;
   nameEditing: boolean;
 
   ngOnInit() {

@@ -45,6 +45,7 @@ export class DatepickerProComponent implements OnInit, AfterViewInit, OnDestroy,
   @Input() appendToBody = true;
   @Input() width: string;
   @Input() placeholder: string;
+  @Input() allowClear = true;
   @Output() dropdownToggle = new EventEmitter<boolean>();
   @Output() confirmEvent = new EventEmitter<Date>();
   @Input() set calenderRange (value) {

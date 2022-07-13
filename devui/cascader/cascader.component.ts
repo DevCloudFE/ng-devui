@@ -46,6 +46,7 @@ export class CascaderComponent implements OnInit, OnDestroy, OnChanges, ControlV
   @Input() checkboxRelation = { upward: true, downward: true };
   @Input() dropDownItemTemplate: TemplateRef<any>;
   @Input() dropdownHeaderTemplate: TemplateRef<any>;
+  @Input() hostTemplate: TemplateRef<any>;
   @Input() dropdownPanelClass = '';
   @Input() appendToBody = true;
   @Input() @WithConfig() showAnimation = true;

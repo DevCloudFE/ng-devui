@@ -1,7 +1,4 @@
-import {
-  Component,
-  OnInit
-} from '@angular/core';
+import { Component } from '@angular/core';
 import { Observable, of, timer } from 'rxjs';
 
 @Component({
@@ -9,36 +6,40 @@ import { Observable, of, timer } from 'rxjs';
   templateUrl: './async-data-with-function.component.html',
   styles: [
     `
-      section {
-        width: 50%;
+      d-editable-select {
+        margin: 12px 0;
       }
-    `
-  ]
+    `,
+  ],
 })
-export class AsyncDataWithFuncitionComponent implements OnInit {
-  selectItem4;
+export class AsyncDataWithFunctionComponent {
+  selectItem: any;
+  loading = false;
+  onSearchLocal: (term: string) => Observable<any>;
 
-  loading4 = false;
+  languages = [
+    'C#',
+    'C',
+    'C++',
+    'CPython',
+    'Java',
+    'JavaScript',
+    'Go',
+    'Python',
+    'Ruby',
+    'F#',
+    'TypeScript',
+    'SQL',
+    'LiveScript',
+    'CoffeeScript',
+  ];
 
-  onSearchLocal2: (term: string) => Observable<any>;
-
-  languages = ['C#', 'C', 'C++', 'CPython', 'Java', 'JavaScript', 'Go', 'Python', 'Ruby', 'F#', 'TypeScript', 'SQL',
-    'LiveScript', 'CoffeeScript'];
-
-  constructor() {
-  }
-
-  ngOnInit() {
-  }
-
-  getAsyncData2() {
-    this.loading4 = true;
+  getAsyncData() {
+    this.loading = true;
     timer(3000).subscribe(() => {
       const languages = this.languages.slice();
-      this.onSearchLocal2 = (term: string) => {
-        return of(languages.filter(lang => lang.toLowerCase().indexOf(term.toLowerCase()) !== -1));
-      };
-      this.loading4 = false;
+      this.onSearchLocal = (term: string) => of(languages.filter((lang) => lang.toLowerCase().indexOf(term.toLowerCase()) !== -1));
+      this.loading = false;
     });
   }
 }

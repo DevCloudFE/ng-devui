@@ -1,0 +1,14 @@
+@import '../style/theme/color';
+@import '../style/theme/corner';
+
+// basic
+$devui-icon-font-size: var(--devui-icon-font-size, 16px);
+$devui-icon-height: var(--devui-icon-height, 32px);
+$devui-icon-space: var(--devui-icon-space, 8px);
+$devui-icon-border-radius: var(--devui-icon-border-radius, $devui-border-radius);
+$devui-icon-color: var(--devui-icon-color, $devui-icon-fill);
+$devui-icon-hover-color: var(--devui-icon-hover-color, $devui-icon-fill-hover);
+$devui-icon-hover-bg: var(--devui-icon-hover-bg, $devui-list-item-hover-bg);
+$devui-icon-active-bg: var(--devui-icon-active-bg, $devui-list-item-active-bg);
+$devui-icon-active-color: var(--devui-icon-active-color, $devui-icon-fill-active);
+$devui-icon-disabled-color: var(--devui-icon-disabled-color, $devui-disabled-text);

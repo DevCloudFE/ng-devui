@@ -11,8 +11,8 @@ export const devuiCustomComponentsThemeData = {
   'devui-btn-common-color-active': '#252B3A',
   'devui-btn-common-border-color-active': 'transparent',
   'devui-btn-common-border-disabled': 'transparent',
-  'devui-icon-background-hover': '#EBEBEB',
-  'devui-icon-background-active': '#D1D1D1'
+  'devui-icon-hover-bg': '#EBEBEB',
+  'devui-icon-active-bg': '#D1D1D1'
 };
 
 export const devuiCustomComponentsDarkThemeData = {

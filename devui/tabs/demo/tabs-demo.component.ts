@@ -76,6 +76,7 @@ export class TabsDemoComponent implements OnInit, OnDestroy {
     this.navItems = [
       { dAnchorLink: 'basic-usage', value: values['basic-usage'] },
       { dAnchorLink: 'type-pills', value: values['type-pills'] },
+      { dAnchorLink: 'type-options', value: values['type-options'] },
       { dAnchorLink: 'type-slider', value: values['type-slider'] },
       { dAnchorLink: 'type-wrapped', value: values['type-wrapped'] },
       { dAnchorLink: 'size', value: values['size'] },

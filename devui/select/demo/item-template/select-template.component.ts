@@ -7,6 +7,11 @@ import { Component } from '@angular/core';
       .col-md-5 {
         width: 50%;
       }
+
+      span {
+        display: inline-block;
+        width: 100%;
+      }
     `
   ]
 })

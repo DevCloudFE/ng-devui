@@ -78,6 +78,7 @@ export class DatepickerProCalendarComponent implements OnInit, AfterViewInit, On
   @Input() splitter = '-';
   @Input() showRangeHeader = true;
   @Input() placeholder: string[];
+  @Input() allowClear = true;
 
   @Input() set minDate(value: Date) {
     if (!value) {

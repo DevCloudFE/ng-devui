@@ -46,6 +46,7 @@ export class TableThComponent implements OnChanges, OnDestroy {
     checklist: FilterConfig[];
   }>();
 
+  @HostBinding('class.can-sort')
   @Input() sortable: boolean;
   @Input() sortDirection: SortDirection;
   @Input() showSortIcon = false;

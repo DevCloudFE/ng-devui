@@ -1,4 +1,5 @@
 <d-data-table
+  #tableInstance
   [dataSource]="lazyDataSource"
   [lazy]="true"
   (loadMore)="loadMore($event)"

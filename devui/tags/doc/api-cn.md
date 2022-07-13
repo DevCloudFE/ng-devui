@@ -22,6 +22,7 @@ import { TagsModule } from 'ng-devui/tags';
 | customViewTemplate | `TemplateRef` |    --     | 可选，自定义标签模板                                                                                                                                                | [单个标签](demo#single-tag) |
 |      checked       |   `boolean`   |   false   | 可选，标签选中的初始状态                                                                                                                                            | [单个标签](demo#single-tag) |
 |    customColor     |   `string`    |    ''     | 可选，传入颜色字符串（如'#f50'），自定义彩色标签的颜色                                                                                                              | [单个标签](demo#single-tag) |
+|    maxWidth     |   `string`    |    --     | 可选，标签最大宽度，超出文字会省略并出现省略号       | [单个标签](demo#single-tag) |
 
 ## d-tag 事件
 
@@ -39,6 +40,7 @@ import { TagsModule } from 'ng-devui/tags';
 | displayProperty |  `string`  |    ''     | 可选，设置属性名，使得标签名为该属性对应的值               | [标签组](demo#tags-group) |
 |    deletable    | `boolean`  |   false   | 可选，设置标签是否可删除                                   | [标签组](demo#tags-group) |
 |  titleProperty  |  `string`  |    ''     | 可选，设置属性名，鼠标悬浮时 title 显示的值                | [标签组](demo#tags-group) |
+|    hideBeyondTags    | `boolean`  |   false   | 可选，标签组总宽度超过父级宽度是否隐藏超出标签  | [多标签超出隐藏](demo#hide-tags) |
 
 ## d-tags 事件
 

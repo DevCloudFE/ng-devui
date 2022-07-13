@@ -9,28 +9,6 @@
   position: static;
 }
 
-.devui-no-result-template,
-.devui-is-searching-template {
-  display: block;
-  width: 100%;
-  padding: 8px 12px;
-  clear: both;
-  border: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  cursor: not-allowed;
-  background-color: $devui-disabled-bg;
-  color: $devui-disabled-text;
-  line-height: 20px;
-
-  &:hover,
-  &:active,
-  &:hover:active {
-    background-color: $devui-unavailable;
-  }
-}
-
 ul.devui-list-unstyled {
   margin: 0;
 }

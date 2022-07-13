@@ -2,7 +2,13 @@
   <ng-content select="[iconPrefix]"></ng-content>
   <ng-template [ngTemplateOutlet]="template || defaultTemplate"> </ng-template>
   <ng-template #defaultTemplate>
-    <i class="devui-icon {{ icon }}" [style.transform]="'rotate(' + rotate + 'deg)'"> </i>
+    <i
+      class="devui-icon {{ icon }}"
+      [class.devui-icon-spin]="rotate === 'infinite'"
+      [style.transform]="'rotate(' + rotate + 'deg)'"
+      [style.color]="color"
+    >
+    </i>
   </ng-template>
   <ng-content select="[iconSuffix]"></ng-content>
 </div>

@@ -548,11 +548,15 @@
       "sourceDemo": {
         "title": "传入source"
       },
+      "clickBlockDemo": {
+        "title": "点击可拦截"
+      },
       "anchorLinkValues": {
         "basic-breadcrumbs": "基础面包屑",
         "source-config-breadcrumbs": "传入source",
         "drop-down-breadcrumbs": "可下拉的面包屑",
-        "self-defined-breadcrumbs": "自定义下拉列表和分隔符的面包屑"
+        "self-defined-breadcrumbs": "自定义下拉列表和分隔符的面包屑",
+        "click-block-breadcrumbs": "点击可拦截的面包屑"
       }
     },
     "back-top": {
@@ -626,11 +630,6 @@
         "last": "上一步",
         "next": "下一步"
       },
-      "button-left-right": {
-        "title": "左按钮与右按钮",
-        "left": "左按钮",
-        "right": "右按钮"
-      },
       "button-text": {
         "title": "文字按钮",
         "ok": "确定",
@@ -688,7 +687,6 @@
         "button-primary": "主要按钮",
         "button-common": "次要按钮",
         "button-primary-and-common": "主要按钮与次要按钮组合",
-        "button-left-right": "左按钮与右按钮",
         "button-danger": "警示按钮",
         "button-text": "文字按钮",
         "button-loading": "加载中状态",
@@ -865,6 +863,9 @@
       "pipeDemo": {
         "title": "日期解析器"
       },
+      "browserDemo": {
+        "title": "当前浏览器名和版本"
+      },
       "openURLDemo": {
         "title": "在新标签页打开网页"
       },
@@ -880,6 +881,7 @@
       },
       "anchorLinkValues": {
         "lazy-load": "懒加载指令",
+        "browser-version": "当前浏览器名和版本",
         "date-pipe": "日期解析器",
         "open-url": "新标签页打开网页",
         "download-file": "文件下载",
@@ -963,6 +965,7 @@
             "devui-text": "正文文本",
             "devui-text-weak": "弱化的正文信息（手风琴子项，表头）",
             "devui-aide-text": "辅助文本、帮助信息（面包屑）",
+            "devui-aide-text-hover": "辅助文本悬浮色，用于标签文本悬浮等场景",
             "devui-aide-text-stress": "辅助文本、帮助信息里的强调色",
             "devui-placeholder": "占位符",
             "devui-light-text": "有色深色背景下字体颜色（固定）",
@@ -1746,7 +1749,7 @@
       },
       "disabledDemo": {
         "title": "使用禁用",
-        "description": "通过 disabled 自定义是否使用禁用。"
+        "description": "设置 disabled 禁用整个组件，也可传入 disabledKey 禁用单个选项。"
       },
       "anchorLinkValues": {
         "basic-usage": "基本用法",
@@ -3192,9 +3195,14 @@
         "title": "标签组",
         "description": "标签组可传入字符串数组或对象数组，在对象数组中，可通过displayProperty，titleProperty设置标签显示值和title显示值，通过labelStyle设置标签样式。"
       },
+      "hideDemo": {
+        "title": "多标签超出隐藏",
+        "description": "当标签组总宽度超过定宽宽度且hideBeyondTags为true时隐藏多余标签，点击+x后弹窗显示剩余标签"
+      },
       "anchorLinkValues": {
         "single-tag": "单个标签",
-        "tags-group": "标签组"
+        "tags-group": "标签组",
+        "hide-tags": "多标签超出隐藏"
       }
     },
     "tags-input": {
@@ -4367,6 +4375,20 @@
         "basic-usage": "基本用法",
         "type-usage": "状态与类型",
         "custom-usage": "自定义配置"
+      }
+    },
+    "config-provider": {
+      "name": "自定义Config容器",
+      "type": "演进中",
+      "path": "config-provider",
+      "description": "自定义Config容器，可使用容器进行局部主题化等配置。",
+      "tmw": "需要自定义局部容器配置项时。",
+      "themeDemo": {
+        "title": "局部主题化",
+        "description": "使用themeId（已初始化）或直接使用theme自定义配置局部主题。"
+      },
+      "anchorLinkValues": {
+        "custom-theme": "局部主题化"
       }
     }
   }

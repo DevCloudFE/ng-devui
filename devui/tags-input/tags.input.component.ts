@@ -310,7 +310,7 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
       // keydown.enter 和 keydown 都接收会重复处理
       // 点击会聚焦input，input失焦事件不会冒泡，单独处理
       break;
-    case 'keydown':{
+    case 'keydown': {
       const hotkeys = [this.KEYS.enter, this.KEYS.tab];
       if (this.isAddBySpace) {
         hotkeys.push(this.KEYS.space);
@@ -374,6 +374,9 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
       this._suggestionList = this.availableOptions;
       const tag = this.selectedItems[index].option;
       this.selectedItems.splice(index, 1);
+      if (this.selectedItems.length === 0) {
+        this.selectBoxContainer.updatePosition();
+      }
       this.onChange(this.selectedItems.map((tagItem) => tagItem.option));
       this.valueChange.emit(tag);
     });

@@ -43,6 +43,16 @@ export class TabsComponent implements AfterContentInit, OnChanges, AfterViewInit
   @Input() closeableIds = [];
   @Input() addable = false;
   @Input() addTabTpl: TemplateRef<any>;
+  /**
+   * @todo
+   * 待重新设计
+   */
+  @Input() vertical = false;
+  /**
+   * @deprecated
+   * class设置无需内层，外层即可
+   */
+  @Input() cssClass: string;
   @Input() beforeChange: (value) => boolean | Promise<boolean> | Observable<boolean>;
   @ContentChildren(TabComponent) tabs: QueryList<TabComponent>;
   @Output() activeTabChange = new EventEmitter<number | string>();

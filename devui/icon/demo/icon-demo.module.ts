@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { DataTableModule } from 'ng-devui/data-table';
+import { DropDownModule } from 'ng-devui/dropdown';
 import { I18nModule } from 'ng-devui/i18n';
 import { IconModule } from 'ng-devui/icon';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
@@ -23,6 +24,7 @@ import { IconGroupDemoComponent } from './icon-group/icon-group.component';
     FormsModule,
     I18nModule,
     DataTableModule,
+    DropDownModule,
     RouterModule.forChild([
       { path: '', redirectTo: 'demo' },
       { path: 'demo', component: IconDemoComponent },

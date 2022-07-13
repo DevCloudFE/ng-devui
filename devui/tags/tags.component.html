@@ -1,6 +1,7 @@
-<div class="devui-tags">
+<div class="devui-tags" #tagsElement>
   <d-tag
-    *ngFor="let tag of tags; let index = index"
+    #tagElement
+    *ngFor="let tag of hideBeyondTags ? showTags : tags; let index = index"
     [tag]="displayProperty ? tag[displayProperty] : tag"
     [mode]="mode"
     [deletable]="deletable"
@@ -12,4 +13,32 @@
     (tagDelete)="removeTag($event, tag, index)"
   >
   </d-tag>
+  <d-tag
+    *ngIf="hideBeyondTags && showMore"
+    dPopover
+    [content]="beyondTagsTpl"
+    [controlled]="true"
+    [tag]="'+ ' + beyondTags.length"
+    [mode]="'checkable'"
+    [popoverStyle]="{ backgroundColor: 'white', color: 'black' }"
+  ></d-tag>
 </div>
+
+<ng-template #beyondTagsTpl>
+  <div class="beyond-tags-wrapper">
+    <d-tag
+      class="beyond-tag-style"
+      *ngFor="let tag of beyondTags; let index = index"
+      [tag]="displayProperty ? tag[displayProperty] : tag"
+      [mode]="mode"
+      [deletable]="deletable"
+      [checked]="tag['checked']"
+      [labelStyle]="tag['labelStyle']"
+      [customColor]="tag['customColor']"
+      [titleContent]="titleProperty ? tag[titleProperty] : displayProperty ? tag[displayProperty] : tag"
+      [customViewTemplate]="customViewTemplate"
+      (tagDelete)="removeTag($event, tag, index)"
+    >
+    </d-tag>
+  </div>
+</ng-template>

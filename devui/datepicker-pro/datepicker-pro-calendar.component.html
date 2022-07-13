@@ -42,7 +42,7 @@
         'devui-end-side': currentActiveInput === 'end'
       }"
     ></div>
-    <div class="devui-input-group-addon close-icon-wrapper" (click)="clear($event)">
+    <div *ngIf="allowClear" class="devui-input-group-addon close-icon-wrapper" (click)="clear($event)">
       <div class="close-icon">
         <svg
           width="16px"

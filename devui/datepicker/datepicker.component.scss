@@ -201,6 +201,10 @@
   text-align: center;
 }
 
+.devui-month-view .devui-timepicker.devui-timepicker-disabled {
+  background-color: $devui-disabled-bg;
+}
+
 .devui-month-view .devui-timepicker.devui-timepicker-disabled input {
   cursor: not-allowed;
   color: $devui-disabled-text;

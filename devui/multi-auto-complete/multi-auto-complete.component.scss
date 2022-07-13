@@ -232,9 +232,17 @@
   color: inherit;
 }
 
-:host ::ng-deep .multiple-label-auto-complete-disabled d-tag .devui-tag-item {
-  color: $devui-disabled-text;
-  cursor: not-allowed;
+:host ::ng-deep .multiple-label-auto-complete-disabled {
+  li {
+    border: solid 1px $devui-disabled-line;
+    border-radius: $devui-border-radius;
+
+    d-tag .devui-tag-item {
+      background-color: $devui-disabled-bg;
+      color: $devui-disabled-text;
+      cursor: not-allowed;
+    }
+  }
 }
 
 :host ::ng-deep .multiple-label-auto-complete-border ul li .devui-dropdown-menu {

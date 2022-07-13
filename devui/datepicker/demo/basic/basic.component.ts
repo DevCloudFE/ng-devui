@@ -15,7 +15,7 @@ export class DatepickerDemoBasicComponent {
     timePicker: true,
     dateConverter: null,
     min: 2019,
-    max: 2020,
+    max: 2040,
     format: {
       date: 'MM.dd.y',
       time: 'y-MM-dd HH:mm:ss'

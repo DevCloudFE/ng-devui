@@ -19,9 +19,10 @@
     <ul
       #tabsEle
       role="tablist"
-      class="devui-nav devui-nav-{{ type }}"
+      class="devui-nav devui-nav-{{ type }} {{ cssClass }}"
       [id]="id"
       [ngClass]="{
+        'devui-nav-stacked': vertical,
         'devui-nav-add-button': addable,
         'devui-nav-overflow': scrollMode
       }"

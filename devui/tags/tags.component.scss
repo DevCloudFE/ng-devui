@@ -7,6 +7,19 @@
   line-height: 24px;
 }
 
+.beyond-tags-wrapper {
+  max-width: 300px;
+  margin-top: 8px;
+
+  .beyond-tag-style {
+    margin-bottom: 8px;
+  }
+
+  d-tag:not(:last-of-type) {
+    margin-right: 8px;
+  }
+}
+
 d-tag:not(:last-of-type) {
   margin-right: 4px;
 }

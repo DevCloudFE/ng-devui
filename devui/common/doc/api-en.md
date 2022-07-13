@@ -44,7 +44,7 @@ In the page:
 
 ## dLzayLoad Parameters
 
-|    Parameter   |   Type    |Default|     Description      | Jump to Demo                 |Global Config| 
+|    Parameter   |   Type    |Default|     Description      | Jump to Demo                 |Global Config|
 | :----------------: | :------------: | :-------: | :---: | :------------------: | ---------------------------- |
 | enableLazyLoad | `boolean` | false | Optional. Whether to use lazyload | [Lazyload Directive](demo#lazy-load) |
 | target | `HTMLElement` | host | Optional. Indicates the target of the scrolling monitoring. | [懒加载指令](demo#lazy-load) |
@@ -296,6 +296,14 @@ The formatting format is slightly different from the format provided by the Angu
 </table>
 
 # HelperUtils Static Methods
+
+## getBrowserName() => void
+
+Method description: Obtains the current browser name (`IE`|`ClassicEdge`|`Firefox`|`Opera`|`Edge`|`Chrome`|`Safari`|`Other`)
+
+## getBrowserVersion() => void
+
+Method description: Obtaining the Current Browser Version (Major Version)
 
 ## jumpOuterUrl(url: string, target?: string) => void
 

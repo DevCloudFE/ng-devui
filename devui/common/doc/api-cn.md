@@ -50,7 +50,7 @@ import { HelperUtils } from 'ng-devui';
 
 ## dLzayLoad 参数
 
-|      参数      |   类型    | 默认  |         说明         | 跳转 Demo                    |全局配置项| 
+|      参数      |   类型    | 默认  |         说明         | 跳转 Demo                    |全局配置项|
 | :----------------: | :------------: | :-------: | :---: | :------------------: | ---------------------------- |
 | enableLazyLoad | `boolean` | false | 可选，是否使用懒加载 | [懒加载指令](demo#lazy-load) |
 | target | `HTMLElement` | 宿主 | 可选，滚动监听的目标。 | [懒加载指令](demo#lazy-load) |
@@ -302,6 +302,14 @@ import { HelperUtils } from 'ng-devui';
 </table>
 
 # HelperUtils 静态方法
+
+## getBrowserName() => void
+
+方法描述：获取当前浏览器名称（`IE`|`ClassicEdge`|`Firefox`|`Opera`|`Edge`|`Chrome`|`Safari`|`Other`）
+
+## getBrowserVersion() => void
+
+方法描述：获取当前浏览器版本（大版本号）
 
 ## jumpOuterUrl(url: string, target?: string) => void
 

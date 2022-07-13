@@ -1,29 +1,28 @@
 import {
-  Component,
-  ElementRef,
-  Input,
-  ContentChildren,
-  QueryList,
-  HostBinding,
-  ChangeDetectorRef,
-  Output,
-  OnChanges,
   AfterViewInit,
-  SimpleChanges,
-  Renderer2,
-  HostListener,
+  ChangeDetectorRef,
+  Component,
+  ContentChildren,
+  ElementRef,
   EventEmitter,
-  OnDestroy,
+  HostBinding,
+  HostListener,
+  Input,
   isDevMode,
+  OnChanges,
+  OnDestroy,
+  Output,
+  QueryList,
+  Renderer2,
+  SimpleChanges
 } from '@angular/core';
-import { GridStackOptions, GridStack, GridStackNode } from 'gridstack';
-import { DashboardWidgetComponent } from './widget/widget.component';
-import { DashBoardGridStackDefaultOption } from './grid-stack.config';
+import { GridStack, GridStackNode, GridStackOptions } from 'gridstack';
+import { DashBoardGridStackDefaultOption, GridStackNodeCompatible } from './grid-stack.config';
 import { GridStackService } from './grid-stack.service';
+import './polyfill';
 import { DashboardLibraryTrashDirective } from './widget-library/library-trash.directive';
 import { DashboardLibraryWidgetDirective } from './widget-library/library-widget.directive';
-import './polyfill';
-import { GridStackNodeCompatible } from './grid-stack.config';
+import { DashboardWidgetComponent } from './widget/widget.component';
 
 export type DashboardWidgetEvent = Array<{
   widget?: DashboardWidgetComponent; // change, remove
@@ -87,7 +86,7 @@ export class DashboardComponent implements OnChanges, AfterViewInit, OnDestroy {
     private cdr: ChangeDetectorRef,
     private renderer: Renderer2,
     public gridStackService: GridStackService
-  ) { }
+  ) {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (this.gridStack) {
@@ -137,8 +136,8 @@ export class DashboardComponent implements OnChanges, AfterViewInit, OnDestroy {
 
     this.renderedWidgets = this.widgetComponents.toArray();
     setTimeout(() => {
-      this.renderedWidgets.forEach((widget) => widget.handleChange(
-        this.addGridStackNodeCompatible(widget.elem.nativeElement['gridstackNode']))
+      this.renderedWidgets.forEach((widget) =>
+        widget.handleChange(this.addGridStackNodeCompatible(widget.elem.nativeElement['gridstackNode']))
       );
     });
     this.widgetComponents.changes.subscribe((changes) => {
@@ -291,8 +290,8 @@ export class DashboardComponent implements OnChanges, AfterViewInit, OnDestroy {
         x: item.x,
         y: item.y,
         width: item.w,
-        height: item.h
-      }
+        height: item.h,
+      },
     };
   }
 

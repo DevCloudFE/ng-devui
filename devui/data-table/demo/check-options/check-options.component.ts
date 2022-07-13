@@ -44,7 +44,7 @@ export class CheckOptionsComponent implements OnInit {
   tableWidthConfig: TableWidthConfig[] = [
     {
       field: 'checkbox',
-      width: '55px'
+      width: '60px'
     },
     {
       field: '#',

@@ -18,6 +18,11 @@ export class TagsDemoComponent implements OnDestroy, OnInit {
     { title: 'SCSS', language: 'css', code: require('./custom/custom.component.scss?raw') },
   ];
 
+  hideSource: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'xml', code: require('./hide/hide.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./hide/hide.component.ts?raw') },
+  ];
+
   navItems = [];
   subs: Subscription = new Subscription();
   constructor(private translate: TranslateService) { }
@@ -41,6 +46,7 @@ export class TagsDemoComponent implements OnDestroy, OnInit {
     this.navItems = [
       { dAnchorLink: 'single-tag', value: values['single-tag'] },
       { dAnchorLink: 'tags-group', value: values['tags-group'] },
+      { dAnchorLink: 'hide-tags', value: values['hide-tags'] },
     ];
   }
 
