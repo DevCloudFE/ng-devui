@@ -1,15 +1,13 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
-
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { DataTableComponent } from 'ng-devui/data-table';
-import {LoadingType} from 'ng-devui/loading';
-import { EMPTY } from 'rxjs';
 import { originSource } from './../mock-data';
 @Component({
   selector: 'd-datatable-demo-lazyloaddata',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './data-table-demo-lazyloaddata.component.html'
 })
-export class DatatableDemoLazyloadDataComponent implements OnInit {
+export class DatatableDemoLazyloadDataComponent implements AfterViewInit {
+  @ViewChild('tableInstance') tableInstance: DataTableComponent;
   showLoading = false;
   // Lazy Load
   total = 40;
@@ -72,6 +70,8 @@ export class DatatableDemoLazyloadDataComponent implements OnInit {
     console.log(`load more`, this.next, this.complete);
   }
 
-  ngOnInit() {
+  ngAfterViewInit(): void {
+    // 在组件重置时重置滚动条，避免浏览器记忆滚动位置导致组件重置直接出发懒加载
+    this.tableInstance.normalScrollElement.nativeElement.scrollTop = 0;
   }
 }

@@ -9,6 +9,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
 import { BasicComponent } from './basic/basic.component';
 import { CustomComponent } from './custom/custom.component';
+import { HideComponent } from './hide/hide.component';
 import { TagsDemoComponent } from './tags-demo.component';
 
 @NgModule({
@@ -33,7 +34,7 @@ import { TagsDemoComponent } from './tags-demo.component';
     ]),
   ],
   exports: [TagsDemoComponent],
-  declarations: [TagsDemoComponent, BasicComponent, CustomComponent],
+  declarations: [TagsDemoComponent, BasicComponent, CustomComponent, HideComponent],
 
 })
 export class TagsDemoModule {}

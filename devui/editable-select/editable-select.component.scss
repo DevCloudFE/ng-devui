@@ -1,27 +1,66 @@
 @import '../style/theme/color';
+@import '../style/core/font';
 @import '../style/core/animation';
 
-.devui-select-chevron-icon {
-  display: inline-flex;
-  vertical-align: middle;
-  transition: transform $devui-animation-duration-slow $devui-animation-ease-in-out-smooth;
+.devui-form-group.devui-has-feedback {
+  & > .devui-form-control-feedback {
+    height: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    font-size: $devui-font-size;
+    z-index: 10;
+
+    & > span {
+      align-items: center;
+
+      & > svg {
+        width: 1em;
+        height: 1em;
+      }
+    }
+  }
+
+  .devui-select-clear-icon {
+    pointer-events: auto;
+    display: none;
+    cursor: pointer;
+
+    path {
+      fill: $devui-shape-icon-fill;
+      transition: all $devui-animation-ease-in-out-smooth $devui-animation-duration-slow;
+    }
+
+    &:hover {
+      path {
+        fill: $devui-shape-icon-fill-hover;
+      }
+    }
+  }
+
+  .devui-select-chevron-icon {
+    display: flex;
+    transition: transform $devui-animation-duration-slow $devui-animation-ease-in-out-smooth;
+
+    svg path {
+      fill: $devui-text-weak; // TODO: Color-Question
+    }
+  }
+
+  &.allow-clear:hover {
+    .devui-select-chevron-icon {
+      display: none;
+    }
+
+    .devui-select-clear-icon {
+      display: flex;
+    }
+  }
 }
 
 .devui-select-open .devui-select-chevron-icon {
   transform: rotate(180deg);
-}
-
-.devui-select-chevron-icon svg path {
-  fill: $devui-text-weak;// TODO: Color-Question
-}
-
-input::-ms-clear {
-  display: none;
-}
-
-.devui-no-data-tip {
-  user-select: none;
-  cursor: not-allowed;
 }
 
 .devui-form-control {
@@ -29,6 +68,6 @@ input::-ms-clear {
   padding-right: 24px;
 }
 
-.devui-form-group.devui-has-feedback > .devui-form-control-feedback {
-  line-height: 26px;
+input::-ms-clear {
+  display: none;
 }

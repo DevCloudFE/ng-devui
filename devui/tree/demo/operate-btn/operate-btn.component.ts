@@ -54,7 +54,7 @@ export class OperateBtnComponent {
     console.log('deleted: ', treeNode);
   }
 
-  onOperableNodeSelected(treeNode: TreeNode) {
+  onOperableNodeSelected(treeNode: TreeNode | TreeNode[]) {
     console.log('selected: ', treeNode);
     this.currentSelectedNode = treeNode;
   }

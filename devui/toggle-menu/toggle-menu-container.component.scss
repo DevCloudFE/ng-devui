@@ -11,12 +11,6 @@
     line-height: 18px;
   }
 
-  .devui-no-data-tips {
-    font-size: $devui-font-size-md;
-    min-height: 36px;
-    line-height: 18px;
-  }
-
   &-lg {
     font-size: $devui-font-size-lg;
     min-height: 46px;
@@ -29,8 +23,7 @@
       line-height: 46px;
     }
 
-    d-toggle-menu-list-item,
-    .devui-no-data-tips {
+    d-toggle-menu-list-item {
       font-size: $devui-font-size-lg;
       min-height: 40px;
       line-height: 28px;
@@ -50,8 +43,7 @@
       line-height: 14px;
     }
 
-    d-toggle-menu-list-item,
-    .devui-no-data-tips {
+    d-toggle-menu-list-item {
       min-height: 26px;
     }
   }

@@ -1,9 +1,62 @@
 import { HttpClient, HttpErrorResponse, HttpEvent, HttpEventType, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { Directive, HostListener, Input } from '@angular/core';
 
+const enum Browser {
+  IE = 'IE',
+  ClassicEdge = 'ClassicEdge',
+  Firefox = 'Firefox',
+  Opera = 'Opera',
+  Edge = 'Edge',
+  Chrome = 'Chrome',
+  Safari = 'Safari',
+  Other = 'Other',
+};
 declare type HttpObserve = 'body' | 'events' | 'response';
 declare type ResponseType = 'arraybuffer' | 'blob' | 'json' | 'text';
 export class HelperUtils {
+  private static _browserName: Browser = null;
+  private static _browserVersion = null;
+
+  static getBrowserName() {
+    !this._browserName && this.getBrowserInfo();
+    return this._browserName;
+  }
+
+  static getBrowserVersion() {
+    !this._browserVersion && this.getBrowserInfo();
+    return this._browserVersion;
+  }
+
+  private static getBrowserInfo() {
+    if (typeof navigator !== 'undefined') {
+      const ua = navigator.userAgent.toLowerCase();
+      const isIE = ua.match(/rv:([\d.]+)\) like gecko/) || ua.match(/msie ([\d\.]+)/);
+      const isClassicEdge = ua.match(/edge\/([\d\.]+)/);
+      const isFirefox = ua.match(/firefox\/([\d\.]+)/);
+      const isOpera = ua.match(/(?:opera|opr).([\d\.]+)/);
+      const isEdge = ua.match(/edg\/([\d\.]+)/);
+      const isChrome = ua.match(/chrome\/([\d\.]+)/);
+      const isSafari = ua.match(/version\/([\d\.]+).*safari/);
+      const infos = isIE || isClassicEdge || isFirefox || isOpera || isEdge || isChrome || isSafari;
+      this._browserName = isIE
+        ? Browser.IE
+        : isClassicEdge
+          ? Browser.ClassicEdge
+          : isFirefox
+            ? Browser.Firefox
+            : isOpera
+              ? Browser.Opera
+              : isEdge
+                ? Browser.Edge
+                : isChrome
+                  ? Browser.Chrome
+                  : isSafari
+                    ? Browser.Safari
+                    : Browser.Other;
+      this._browserVersion = infos ? parseInt(infos[1], 10) : 0;
+    }
+  }
+
   static jumpOuterUrl(url, target = '_blank') {
     if (url !== undefined && typeof document !== 'undefined') {
       const tempLink = document.createElement('a');

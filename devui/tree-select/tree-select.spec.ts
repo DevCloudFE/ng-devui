@@ -378,13 +378,15 @@ describe('TreeSelect', () => {
       tick(200);
       fixture.detectChanges();
       const searchInputEl = debugEl
-        .query(By.css('body > div> div > div.devui-tree-select.devui-search-container.devui-form-group.devui-has-feedback > input'))
+        .query(
+          By.css('body > div> div > div.devui-tree-select.devui-search-container.devui-form-group.devui-has-feedback input.devui-input'))
         .nativeElement;
       searchInputEl.dispatchEvent(new Event('focus'));
       searchInputEl.value = '1';
       searchInputEl.dispatchEvent(new Event('input'));
       tick(500);
       fixture.detectChanges();
+      tick(500);
       expect(component.treeSelect.searchString).toEqual('1');
     }));
 

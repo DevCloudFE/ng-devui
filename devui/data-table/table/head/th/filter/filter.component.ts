@@ -123,7 +123,7 @@ export class FilterComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   setFilterIconActive(checkedData) {
-    if (this.filterIconActive === undefined && (Array.isArray(checkedData) ? checkedData.length : checkedData)) {
+    if (Array.isArray(checkedData) ? checkedData.length : checkedData) {
       this.filterIconActiveInner = true;
     } else {
       this.filterIconActiveInner = false;

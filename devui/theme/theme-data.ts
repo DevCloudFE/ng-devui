@@ -137,6 +137,7 @@ export const devuiLightTheme: Theme = new Theme({
     'devui-z-index-modal': '1050',
     'devui-z-index-drawer': '1040',
     'devui-z-index-framework': '1000',
+    'devui-icon-active-color': '#ffffff'
   },
   isDark: false,
 });
@@ -207,6 +208,7 @@ export const devuiDarkTheme: Theme = new Theme({
     'devui-text': '#E8E8E8',
     'devui-text-weak': '#A0A0A0',
     'devui-aide-text': '#909090',
+    'devui-aide-text-hover': '#73788a',
     'devui-aide-text-stress': '#A0A0A0',
     'devui-placeholder': '#8A8A8A',
     'devui-light-text': '#ffffff',
@@ -290,6 +292,7 @@ export const devuiDarkTheme: Theme = new Theme({
     'devui-primary-bg': '#383D4F',
     'devui-default-line': '#5e7ce0',
     'devui-default-bg': '#383838',
+    'devui-icon-active-color': '#ffffff'
   },
   extends: 'devui-light-theme',
   isDark: true,

@@ -204,7 +204,7 @@ export class NavSpriteComponent implements OnInit, AfterViewInit, OnDestroy {
     if (!this.isToViewByNav) {
       const scrollTop = this.targetContainer.scrollTop;
       const index = this.menus.findIndex((ele, i) => {
-        return scrollTop >= ele.scrollPosition.startLine && scrollTop < this.menus[i + 1].scrollPosition.startLine;
+        return scrollTop >= ele.scrollPosition.startLine && scrollTop < this.menus[i + 1]?.scrollPosition.startLine;
       });
       if (index !== -1 && this.activeIndex !== index) {
         this.activeIndex = index;

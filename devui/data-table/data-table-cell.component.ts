@@ -3,6 +3,7 @@ import {
   Component,
   ComponentFactoryResolver,
   ElementRef,
+  HostBinding,
   Inject,
   Input,
   NgZone,
@@ -37,6 +38,10 @@ export class DataTableCellComponent implements OnInit, OnChanges, OnDestroy {
   @Input() isEditRow: boolean;
   @Input() timeout: number;
   @Input() tableLevel: number;
+
+  @HostBinding('class.editable-cell') get isEditable() {
+    return this.column.editable && !this.isCellEdit && this.column.extraOptions?.editableTip !== 'btn';
+  }
   isCellEdit: boolean;
   forceUpdateSubscription: Subscription;
   documentClickSubscription: Subscription;

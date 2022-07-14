@@ -144,6 +144,7 @@ import { DataTableModule } from 'ng-devui/data-table';
 |      fixedRight      |                  `string`                  | --     |            可选，该列固定到右侧的距离，如：‘100px’            | [固定列](demo#fixed-column)        |
 |     showSortIcon      |           `boolean`           | fasle   |                              可选，是否显示排序未激活图标，默认不显示                              | [表格交互](demo#table-interaction)               |
 |     showFilterIcon      |           `boolean`           | fasle   |                              可选，是否显示筛选未激活图标，默认不显示                              | [表格交互](demo#table-interaction)               |
+|     column      |           `any`           | --   |                              可选，可以将数据透传至filterList的自定义模板中                              |               |
 
 ## dHeadCell 事件
 
@@ -456,3 +457,368 @@ advancedHeader: Array < {
 ```
 
 注意: 空单元格也需要表示，并根据内容把rowspan/colspan置为0，如果同时使用列宽拖拽和多行表头，请为列内容附上宽度width，如果第一行的列宽度不正确，请手动为advancedHeader[rowNumber]增加一个属性$width
+
+#### 大数据量树形表格
+
+## virtual-scroll-tree-table 参数
+|       参数        |        类型         | 默认值 |                                                   描述                                                    |       跳转 Demo       |
+| :---------------: | :-----------------: | :----- | :-------------------------------------------------------------------------------------------------------: |:-----------------:  |
+|    dataSource     |       `any[]`      | --     |                                        必选，铺平的数据源，用于渲染表格数据，可以使用公共方法flatTreeData将树形结构铺平                                        |[大数据量树形表格基本用法](demo#virtual-scroll-tree-table-basic)|
+|  editOption |       `any[]`      | --     |                                        可选，用于配置修改时下拉选项资源                                      |[大数据量树形表格操作功能](demo#virtual-scroll-tree-table-operation)|
+|     displayRowNum      |      `number`      | 10     |                                        可选，用于配置表格显示行数,表格高度由行数乘以行高决定                                    |[大数据量树形表格基本用法](demo#virtual-scroll-tree-table-basic)|
+|     rowHeight      |      `number`      |  -    |                                        可选，用于配置表格行高，不传的话取DataTablePropertiesInterface.size的值                                   |[大数据量树形表格基本用法](demo#virtual-scroll-tree-table-basic)|
+|     dataTableProperties      |      [`DataTablePropertiesInterface`](#DataTablePropertiesInterface)      | --     |         可选，对dataTable原有参数的支持，可支持定义在DataTablePropertiesInterface中的参数                            |[大数据量树形表格交互](demo#virtual-scroll-tree-table-interaction)|
+|     draggable      |      `boolean`      | false     |                                        可选，表格是否开启行拖拽                                    |[大数据量树形表格交互](demo#virtual-scroll-tree-table-interaction)|
+|     checkableRelation      |      `CheckableRelation`      | { upward: true, downward: true }     |                                        可选，表格的树形父子选中逻辑关系                                  | - |
+
+## virtual-scroll-tree-table 事件
+|         事件          |                  类型                  |                           描述                           |                        跳转 Demo                         |
+| :-------------------: | :------------------------------------: | :------------------------------------------------------: | :------------------------------------------------------: |
+|        save         |  `EventEmitter<any>`  |               返回操作改变之后的数据               | [大数据量树形表格基本用法](demo#virtual-scroll-tree-table-basic) |
+|        allChecked         |  `EventEmitter<any>`  |               返回表头复选框状态               | [大数据量树形表格交互](demo#virtual-scroll-tree-table-interaction) |
+
+原datatable事件都可以透传，支持multiSortChange，cellClick，cellDBClick，rowClick，rowDBClick，cellEditStart，cellEditEnd，resize事件。
+
+## 使用d-column方式自定义模板和操作列
+
+``` xml
+<d-column field="category" header="类别" [order]="1"
+[width]="'70px'" [editable]="true" [extraOptions]="{editableTip:'btn'}">
+    <d-cell>
+    <ng-template let-rowItem="rowItem">
+        <span>{{ rowItem.category }}</span>
+    </ng-template>
+    </d-cell>
+    <d-cell-edit>
+    <ng-template let-rowItem="rowItem" let-column="column">
+        <div class="customized-editor edit-padding-fix">
+        <d-select
+            [options]="editOption.category"
+            autoFocus="true"
+            toggleOnFocus="true"
+            [appendToBody]="true"
+            [(ngModel)]="rowItem.category"
+            (ngModelChange)="onEditEnd(rowItem, 'categoryEdit')"
+        >
+        </d-select>
+        </div>
+    </ng-template>
+    </d-cell-edit>
+</d-column>
+
+<d-column field="operation" header="操作" [width]="'130px'" [order]="6">
+    <d-cell>
+    <ng-template let-rowItem="rowItem">
+        <span>
+        <ng-container *ngIf="!isSearch">
+            <div *ngIf="rowItem.node_type" class="operationIcon icon-add-directory" title="添加文件夹" (click)="addTreeNodeByRowItem(rowItem, 'addChild', 1)"></div>
+            <div *ngIf="rowItem.node_type" class="operationIcon icon-add-file" title="添加节点" (click)="addTreeNodeByRowItem(rowItem , 'addChild', 0)"></div>
+            <div class="operationIcon icon-add-sub-node" title="插入文件夹" (click)="addTreeNodeByRowItem(rowItem, 'insertAfter', 1)"></div>
+            <div class="operationIcon icon-add-sub-module" title="插入节点" (click)="addTreeNodeByRowItem(rowItem, 'insertAfter', 1)"></div>
+
+            <div class="operationIcon icon-copy" title="复制" (click)="copyAndCut(rowItem, 'copy')"></div>
+            <div class="operationIcon icon-cut" title="剪切" (click)="copyAndCut(rowItem, 'cut')"></div>
+            <div *ngIf="rowItem.node_type && saveCopyClickNode" class="operationIcon icon-copy-to-new" title="粘贴" (click)="paste(rowItem, 'paste')"></div>
+            <div *ngIf="rowItem.node_id === saveCopyClickNode" class="operationIcon icon-add-manual-use-case" title="粘贴到根" (click)="paste(rowItem, 'toRoot')"></div>
+        </ng-container>
+        <div class="operationIcon icon-delete" title="移除" (click)="delete(rowItem)"></div>
+        </span>
+    </ng-template>
+    </d-cell>
+</d-column>
+```
+
+## 大数据量树形表格全部展开/收起
+
+使用@ViewChild方式调用全部展开/收起功能
+
+``` xml
+<d-button [disabled]="isSearch" *ngIf="!isOpenAll" class="golbalBtn allNodesExpand" icon="icon-expand-info" bsStyle="common" (click)="toggleAllNodesExpand(true)">全部展开</d-button>
+<d-button [disabled]="isSearch" *ngIf="isOpenAll" class="golbalBtn allNodesCollapse" icon="icon-collapse-info" bsStyle="common" (click)="toggleAllNodesExpand(false)">全部收起</d-button>
+```
+
+``` javascript
+@ViewChild('VirtualTableTree') VirtualTableTree: VirtualScrollTreeTableComponent;
+
+toggleAllNodesExpand(e) {
+    this.VirtualTableTree.toggleAllNodesExpand(e);
+    this.isOpenAll = e;
+}
+
+// 使用@ViewChild调用VirtualScrollTreeTableComponent中的toggleAllNodesExpand方法
+```
+
+## 大数据量树形表格搜索
+
+使用@ViewChild方式调用搜索功能
+
+``` xml
+<div class="searchSelect">
+    <d-select [options]="searchSelectSource" [filterKey]="'name'" [(ngModel)]="searchAttr" (ngModelChange)="searchSelectChange()"> </d-select>
+</div>
+<d-search
+    style="width: 300px"
+    [placeholder]="'搜索'"
+    [isKeyupSearch]="true"
+    (searchFn)="search($event)"
+></d-search>
+```
+
+``` javascript
+@ViewChild('VirtualTableTree') VirtualTableTree: VirtualScrollTreeTableComponent;
+
+searchSelectChange() {
+  this.BigTableTree.searchAttr = this.searchAttr;
+  this.BigTableTree.searchSelectChange();
+}
+
+search(event) {
+  this.VirtualTableTree.search(event);
+  if(event) {
+    this.isSearch = true;
+  } else {
+    this.isSearch = false;
+  }
+}
+
+// 使用@ViewChild调用VirtualScrollTreeTableComponent中的searchSelectChange和search方法
+```
+
+## 大数据量树形表格添加
+
+使用@ViewChild方式调用添加功能
+
+``` xml
+// 全局添加
+<d-button [disabled]="isAddGlobalData || isSearch" class="golbalBtn addNode" icon="icon-add-file" bsStyle="primary" (click)="addRootNode('node')">添加节点</d-button>
+<d-button [disabled]="isAddGlobalData || isSearch" class="golbalBtn addFolder" icon="icon-add-directory" bsStyle="common" (click)="addRootNode('folder')">添加文件夹</d-button>
+
+// 操作列添加
+<div *ngIf="rowItem.node_type" class="operationIcon icon-add-directory" title="添加文件夹" (click)="addTreeNodeByRowItem(rowItem, 'addChild', 1)"></div>
+<div *ngIf="rowItem.node_type" class="operationIcon icon-add-file" title="添加节点" (click)="addTreeNodeByRowItem(rowItem , 'addChild', 0)"></div>
+<div class="operationIcon icon-add-sub-node" title="插入文件夹" (click)="addTreeNodeByRowItem(rowItem, 'insertAfter', 1)"></div>
+<div class="operationIcon icon-add-sub-module" title="插入节点" (click)="addTreeNodeByRowItem(rowItem, 'insertAfter', 0)"></div>
+```
+
+``` javascript
+@ViewChild('VirtualTableTree') VirtualTableTree: VirtualScrollTreeTableComponent;
+
+// 可自定义添加数据模板
+addTemplate: any = {
+  "property": "addPro",
+  "description": "addDes",
+  "category": "Dynamic"
+}
+
+// 全局添加
+addRootNode(status) {
+  this.isAddGlobalData = true;
+  this.VirtualTableTree.addRootNode(status, this.addTemplate);
+  this.isAddGlobalData = false;
+}
+
+// 使用@ViewChild调用VirtualScrollTreeTableComponent中的addGolbal方法
+
+// 操作列添加
+addTreeNodeByRowItem(rowItem: TreeNodeInterface, action: 'addChild' | 'insertBefore' | 'insertAfter', nodeType: VirtualTreeNodeType) {
+  this.VirtualTableTree.addTreeNodeByRowItem(rowItem, action, this.addTemplate);
+}
+
+// 使用@ViewChild调用VirtualScrollTreeTableComponent中的addOperation方法
+```
+
+## 大数据量树形表格复制/粘贴
+
+使用@ViewChild方式调用复制/粘贴功能
+
+``` xml
+<div class="operationIcon icon-copy" title="复制" (click)="copyAndCut(rowItem, 'copy')"></div>
+<div class="operationIcon icon-cut" title="剪切" (click)="copyAndCut(rowItem, 'cut')"></div>
+<div *ngIf="rowItem.node_type && saveCopyClickNode" class="operationIcon icon-copy-to-new" title="粘贴" (click)="paste(rowItem, 'paste')"></div>
+<div *ngIf="rowItem.node_id === saveCopyClickNode" class="operationIcon icon-add-manual-use-case" title="粘贴到根" (click)="paste(rowItem, 'toRoot')"></div>
+```
+
+``` javascript
+@ViewChild('VirtualTableTree') VirtualTableTree: VirtualScrollTreeTableComponent;
+
+copyAndCut(rowItem, status) {
+  this.saveCopyClickNode = rowItem.node_id;
+  if(status === 'cut') {
+    this.isCut = true;
+  }
+  this.VirtualTableTree.copyAndCut(rowItem, status);
+}
+
+paste(rowItem, status) {
+  this.VirtualTableTree.paste(rowItem, status);
+  if(this.isCut) {
+    this.saveCopyClickNode = "";
+    this.isCut = false;
+  }
+}
+
+// 使用@ViewChild调用VirtualScrollTreeTableComponent中的copyAndCut和paste方法
+```
+
+## 大数据量树形表格移除
+
+使用@ViewChild方式调用移除功能
+
+``` xml
+<div class="operationIcon icon-delete" title="移除" (click)="delete(rowItem)"></div>
+```
+
+``` javascript
+@ViewChild('VirtualTableTree') VirtualTableTree: VirtualScrollTreeTableComponent;
+
+delete(rowItem) {
+  this.VirtualTableTree.delete(rowItem);
+}
+
+// 使用@ViewChild调用VirtualScrollTreeTableComponent中的delete方法
+```
+
+## 大数据量树形表格拖拽
+
+使用@ViewChild方式调用拖拽功能
+
+``` xml
+<d-column field="drag" header="" [width]="'15px'" [order]="1">
+  <d-cell>
+    <ng-template let-rowItem="rowItem" let-rowIndex="rowIndex">
+      <span [ngClass]="{ 'table-drag-row-handle': rowItem.node_type === 0 }">
+        <div class="icon-drag-small dragLine" *ngIf="rowItem.node_type === 0" (mousedown)="dragDown($event, rowItem, rowIndex)"></div>
+      </span>
+    </ng-template>
+  </d-cell>
+</d-column>
+```
+
+``` javascript
+@ViewChild('VirtualTableTree') VirtualTableTree: VirtualScrollTreeTableComponent;
+
+dragDown(downEvent, rowItem, rowIndex) {
+  this.VirtualTableTree.dragDown(downEvent, rowItem, rowIndex, document);
+}
+
+// 使用@ViewChild调用VirtualScrollTreeTableComponent中的dragDown方法
+```
+
+## 大数据量树形表格复选
+
+使用@ViewChild方式调用复选功能
+
+``` xml
+<d-column field="checked" [header]="" [width]="'30px'" [order]="0">
+  <d-head-cell>
+    <ng-template let-column="column">
+      <d-checkbox
+        id="virtual-scroll-tree-table-allCheck"
+        [isShowTitle]="false"
+        (change)="onAllCheckChange($event)"
+        [halfchecked]="halfCheck"
+        [(ngModel)]="allCheck"
+      >
+      </d-checkbox>
+    </ng-template>
+  </d-head-cell>
+  <d-cell>
+    <ng-template let-rowItem="rowItem" let-rowIndex="rowIndex">
+      <d-checkbox
+        [ngModelOptions]="{ standalone: true }"
+        [ngModel]="rowItem.checked"
+        [halfchecked]="rowItem.halfChecked"
+        [disabled]="rowItem.disabled"
+        (ngModelChange)="onRowCheckChange($event, rowItem)"
+        dTooltip
+        [content]="rowItem.$checkBoxTips"
+        [position]="['top', 'right', 'bottom', 'left']"
+        [showAnimation]="false"
+      >
+      </d-checkbox>
+    </ng-template>
+  </d-cell>
+</d-column>
+```
+
+``` javascript
+@ViewChild('VirtualTableTree') VirtualTableTree: VirtualScrollTreeTableComponent;
+
+onRowCheckChange(event, rowItem) {
+  this.VirtualTableTree.onRowCheckChange(event, rowItem);
+}
+
+onAllCheckChange(event) {
+  this.VirtualTableTree.onAllCheckChange(event);
+}
+
+allChecked(event) {
+  this.allCheck = event.allCheck;
+  this.halfCheck = event.halfCheck;
+}
+
+// 使用@ViewChild调用VirtualScrollTreeTableComponent中的onRowCheckChange和onAllCheckChange方法
+
+getRowCheckData() {
+  const saveCheck = this.VirtualTableTree.saveCheck;
+  const saveHalfCheck = this.VirtualTableTree.saveHalfCheck;
+}
+
+// 使用@ViewChild获取VirtualScrollTreeTableComponent中的saveCheck全选数组和saveHalfCheck半选数组
+
+ngOnInit() {
+  this.dataSource = JSON.parse(this.dataSource);
+  this.dataSource[2].disabled = true;
+  this.dataSource[163].disabled = true;
+  this.dataSource = JSON.stringify(this.dataSource);
+}
+
+// 复选框可根据数据中的disabled属性进行禁用，注意：父节点禁用时，下方所有子集均会被置为禁用状态，在添加、复制/剪切、拖拽时，放置在其下方的子节点也会被置为禁用状态
+```
+
+## 大数据量树形表格批量删除
+
+使用@ViewChild方式调用批量删除功能
+
+``` javascript
+@ViewChild('VirtualTableTree') VirtualTableTree: VirtualScrollTreeTableComponent;
+
+batchDelete() {
+  this.VirtualTableTree.batchDelete();
+}
+
+// 使用@ViewChild调用VirtualScrollTreeTableComponent中的batchDelete方法
+```
+
+## DataTablePropertiesInterface
+
+```ts
+export interface DataTablePropertiesInterface {
+    maxWidth?: string;
+    maxHeight?: string;
+    size?: string | number;
+    rowHoveredHighlight?: boolean;
+    generalRowHoveredData?: boolean;
+    cssClass?: string;
+    tableWidth?: string;
+    fixHeader?: boolean;
+    colDraggable?: boolean;
+    colDropFreezeTo?: number;
+    tableWidthConfig?: TableWidthConfig[];
+    showSortIcon?: boolean;
+    showFilterIcon?: boolean;
+    showOperationArea?: boolean;
+    hideColumn?: string[];
+    pageAllChecked?: boolean;
+    onlyOneColumnSort?: boolean;
+    multiSort?: any;
+    resizeable?: boolean;
+    timeout?: number;
+    beforeCellEdit?: any;
+    headerBg?: boolean;
+    tableLayout?: string;
+    borderType?: string;
+    striped?: boolean;
+    shadowType?: 'normal' | 'embed';
+}
+```

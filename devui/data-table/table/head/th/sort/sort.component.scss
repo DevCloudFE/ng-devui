@@ -43,7 +43,7 @@
 .sort-icon-asc,
 .sort-icon-desc {
   > svg g use {
-    fill: $devui-shape-icon-fill-active;
+    fill: $devui-brand;
   }
 
   > svg g polygon {
@@ -52,7 +52,7 @@
 
   &:hover {
     > svg g use {
-      fill: $devui-shape-icon-fill-active;
+      fill: $devui-brand;
     }
   }
 }

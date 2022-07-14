@@ -580,11 +580,15 @@
       "sourceDemo": {
         "title": "Source Config"
       },
+      "clickBlockDemo": {
+        "title": "Click to intercept"
+      },
       "anchorLinkValues": {
         "basic-breadcrumbs": "Basic Breadcrumbs",
         "source-config-breadcrumbs": "Source Config",
         "drop-down-breadcrumbs": "Breadcrumbs with Dropdown menu",
-        "self-defined-breadcrumbs": "Customize"
+        "self-defined-breadcrumbs": "Customize",
+        "click-block-breadcrumbs": "Click to block breadcrumbs"
       }
     },
     "back-top": {
@@ -639,11 +643,6 @@
         "cancel": "cancels",
         "last": "Previous",
         "next": "Next step"
-      },
-      "button-left-right": {
-        "title": "Left & Right Buttons",
-        "left": "Left button",
-        "right": "Right button"
       },
       "button-text": {
         "title": "Text Buttons",
@@ -702,7 +701,6 @@
         "button-primary": "Primary Buttons",
         "button-common": "Common Buttons",
         "button-primary-and-common": "Combinations of Primary & Common Buttons",
-        "button-left-right": "Left & Right Buttons",
         "button-danger": "Danger Buttons",
         "button-text": "Text Buttons",
         "button-loading": "Loading Buttons",
@@ -879,6 +877,9 @@
       "pipeDemo": {
         "title": "DatePipe"
       },
+      "browserDemo": {
+        "title": "Current browser name and version"
+      },
       "openURLDemo": {
         "title": "Open URL in A New Tag"
       },
@@ -894,6 +895,7 @@
       },
       "anchorLinkValues": {
         "lazy-load": "Lazyload Directive",
+        "browser-version": "Current browser name and version",
         "date-pipe": "Datepipe",
         "open-url": "Open URL in A New Tag",
         "download-file": "Download File",
@@ -977,6 +979,7 @@
             "devui-text": "Body Text",
             "devui-text-weak": "Weakened text information (accordion subitem, table header)",
             "devui-aide-text": "auxiliary text, help information (breadcrumb)",
+            "devui-aide-text-hover": "Hover color in auxiliary text and help information",
             "devui-aide-text-stress": "Accent color in auxiliary text and help information",
             "devui-placeholder": "Placeholder",
             "devui-light-text": "Font color on colored dark background (fixed)",
@@ -1760,7 +1763,7 @@
       },
       "disabledDemo": {
         "title": "Use Disabled",
-        "description": "You can specify whether to enable or disable the function by using the disabled command."
+        "description": "Set disabled to disable the entire component, or pass disabledKey to disable a single option."
       },
       "anchorLinkValues": {
         "basic-usage": "Basic usage",
@@ -3202,9 +3205,14 @@
         "title": "Tag Group",
         "description": "The tag group can be a string array or an object array. In the object array, you can use displayProperty and titleProperty to set the label display value and title display value, and use labelStyle to set the label style."
       },
+      "hideDemo": {
+        "title": "Multi-Label Exceed Hide",
+        "description": "When the total width of the tag group exceeds the fixed width and hideBeyondTags is set to true, unnecessary tags are hidden. After +x is clicked, the remaining tags are displayed."
+      },
       "anchorLinkValues": {
         "single-tag": "Single Tag",
-        "tags-group": "Tag Group"
+        "tags-group": "Tag Group",
+        "hide-tags": "Multi-Label Exceed Hide"
       }
     },
     "tags-input": {
@@ -4351,6 +4359,20 @@
       "tmw": "Quickly generate configuration forms for charts",
       "basic-form": {
         "title": "Chart Form Builder"
+      }
+    },
+    "config-provider": {
+      "name": "Customized Config Container",
+      "type": "Experimental",
+      "path": "config-provider",
+      "description": "Customize the Config container. You can use the container to perform partial thematic configuration.",
+      "tmw": "Configuration items of local containers need to be customized.",
+      "themeDemo": {
+        "title": "Partial Theme",
+        "description": "Use themeId (initialized) or directly use theme to customize the theme."
+      },
+      "anchorLinkValues": {
+        "custom-theme": "Partial Theme"
       }
     }
   }

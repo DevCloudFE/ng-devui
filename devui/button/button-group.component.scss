@@ -67,12 +67,44 @@
       bottom: 0;
       left: 0;
       width: 1px;
-      background-color: rgba($color: $devui-white-5, $alpha: 0.8);
+      background-color: rgba($color: $devui-white-5, $alpha: 0.2);
     }
 
     .devui-btn:disabled {
       border-left-style: none;
       margin-left: 0;
+    }
+  }
+
+  d-button:active + d-button,
+  d-button + d-button:active {
+    .devui-btn-primary:not(:disabled)::before {
+      background-color: $devui-primary-active;
+    }
+
+    .devui-btn-common:not(:disabled)::before {
+      background-color: var(--devui-btn-common-bg-active, $devui-base-bg);
+    }
+
+    .devui-btn-danger:not(:disabled)::before {
+      background-color: $devui-contrast-active;
+    }
+  }
+
+  d-button:focus-within + d-button,
+  d-button + d-button:focus-within,
+  d-button:hover + d-button,
+  d-button + d-button:hover {
+    .devui-btn-primary:not(:disabled)::before {
+      background-color: $devui-primary-hover;
+    }
+
+    .devui-btn-common:not(:disabled)::before {
+      background-color: var(--devui-btn-common-border-color-hover, $devui-form-control-line-active);
+    }
+
+    .devui-btn-danger:not(:disabled)::before {
+      background-color: $devui-contrast-hover;
     }
   }
 }

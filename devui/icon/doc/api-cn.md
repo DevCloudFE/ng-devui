@@ -23,6 +23,8 @@ import { IconModule } from 'ng-devui/icon';
 
 |   参数   |            类型            | 默认  | 说明                                                                                        |
 | :------: | :------------------------: | :---: | :------------------------------------------------------------------------------------------ |
-|   icon   | `string\|TemplateRef<any>` |  --   | 必选，传入[图标库](https://devui.design/icon/ruleResource)图标，例如 'icon-add' |
+|   icon   | `string\|TemplateRef<any>` |  --   | 必选，传入[图标库](https://devui.huawei.com/icon/zh-cn/ruleResource)图标，例如 'icon-add' |
 | operable |         `boolean`          | false | 可选，图标是否可操作                                                                        |
 | disabled |         `boolean`          | false | 可选，图标是否禁用                                                                          |
+|  rotate  |    `number\|'infinite'`    |  --   | 可选，图标的旋转角度，设置为'infinite'时图标会保持持续旋转                                  |
+|  color  |    `string`    |  --   | 可选，图标的颜色设置                                |

@@ -50,6 +50,7 @@ export class MultiAutoCompleteComponent implements OnInit, OnChanges, ControlVal
   @Input() disabled = false;
   @Input() source: any[];
   @Input() latestSource: any[]; // 最近输入
+  @Input() disabledKey: string; // 单个选项禁用
   @Input() width: number;
   // @Input() isOpen: boolean;   // 未使用
   // @Input() term: string; // 未使用

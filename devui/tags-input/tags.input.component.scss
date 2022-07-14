@@ -52,6 +52,7 @@
       &:not(.init-inline) {
         d-toggle-menu-label {
           width: 100%;
+          border-radius: $devui-border-radius;
           background-color: $devui-base-bg;
         }
       }

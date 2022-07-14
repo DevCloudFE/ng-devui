@@ -59,7 +59,7 @@ $devui-table-inset-shadow-right: var(--devui-table-inset-shadow-right, -8px 0 8p
         bottom: 0;
         top: 0;
         width: 50px;
-        background: linear-gradient(90deg, transparent, #ffffff);
+        background: linear-gradient(90deg, transparent, $devui-base-bg);
       }
 
       &.has-height-scroll:not(:hover)::before {
@@ -69,7 +69,7 @@ $devui-table-inset-shadow-right: var(--devui-table-inset-shadow-right, -8px 0 8p
         bottom: 0;
         right: 0;
         height: 20px;
-        background: linear-gradient(180deg, transparent, #ffffff);
+        background: linear-gradient(180deg, transparent, $devui-base-bg);
       }
     }
 
@@ -164,7 +164,7 @@ $devui-table-inset-shadow-right: var(--devui-table-inset-shadow-right, -8px 0 8p
     span {
       font-weight: bold;
       color: $devui-text;
-      font-size: $devui-font-size;
+      font-size: $devui-font-size-sm;
     }
 
     tr {
@@ -338,6 +338,23 @@ $devui-table-inset-shadow-right: var(--devui-table-inset-shadow-right, -8px 0 8p
       background-color: inherit;
       border-bottom: 1px solid $devui-dividing-line;
 
+      &.editable-cell {
+        position: relative;
+
+        &:hover::after {
+          content: '';
+          display: block;
+          width: calc(100% - 32px);
+          position: absolute;
+          height: calc(100% - 14px);
+          border: 1px solid $devui-line;
+          left: 12px;
+          top: 8px;
+          border-radius: $devui-border-radius;
+          pointer-events: none;
+        }
+      }
+
       &.devui-checkable-cell {
         padding: 10px 0 10px 20px;
       }
@@ -418,6 +435,11 @@ $devui-table-inset-shadow-right: var(--devui-table-inset-shadow-right, -8px 0 8p
 .devui-no-result-wrapper {
   padding: 40px 0;
   background: $devui-base-bg;
+  width: calc(100% - 8px);
+
+  &.overlay-table-no-result {
+    width: 100%;
+  }
 }
 
 .devui-table.area-active ::ng-deep {
@@ -432,6 +454,15 @@ $devui-table-inset-shadow-right: var(--devui-table-inset-shadow-right, -8px 0 8p
       .sort-icon-default {
         visibility: visible;
       }
+    }
+  }
+}
+
+.devui-table ::ng-deep {
+  thead > tr > th.can-sort {
+    d-table-filter {
+      flex: 1;
+      text-align: right;
     }
   }
 }
@@ -456,6 +487,20 @@ $devui-table-inset-shadow-right: var(--devui-table-inset-shadow-right, -8px 0 8p
       padding: 10px 20px;
     }
   }
+
+  &.devui-table-xs ::ng-deep {
+    tbody > tr > td {
+      padding: 4px 20px 4px;
+    }
+
+    thead > tr > th.devui-checkable-cell {
+      padding: 10px 20px;
+    }
+
+    thead tr th .title {
+      line-height: 32px;
+    }
+  }
 }
 
 .devui-table.table-striped ::ng-deep {
@@ -476,6 +521,14 @@ $devui-table-inset-shadow-right: var(--devui-table-inset-shadow-right, -8px 0 8p
   thead {
     tr {
       background-color: $devui-list-item-strip-bg;
+
+      .devui-first-sticky-right-cell {
+        background: linear-gradient(to right, transparent, $devui-list-item-strip-bg 10px);
+      }
+
+      .devui-last-sticky-left-cell {
+        background: linear-gradient(to left, transparent, $devui-list-item-strip-bg 10px);
+      }
     }
   }
 }
@@ -506,7 +559,7 @@ $devui-table-inset-shadow-right: var(--devui-table-inset-shadow-right, -8px 0 8p
 }
 
 .devui-table.table-hover ::ng-deep {
-  tbody > tr:not(.table-row-selected):not(.expand-row):hover {
+  tbody > tr:not(.table-row-selected):not(.expand-row):not(.child-table):hover {
     background: $devui-list-item-hover-bg;
 
     .devui-first-sticky-right-cell {
@@ -721,4 +774,14 @@ $devui-table-inset-shadow-right: var(--devui-table-inset-shadow-right, -8px 0 8p
 
 :host ::ng-deep .gu-transit {
   opacity: 0.5;
+}
+
+:host ::ng-deep .devui-table.table-bordered {
+  thead tr th.devui-checkable-cell {
+    padding: 10px;
+  }
+
+  tbody > tr > td.devui-checkable-cell {
+    padding: 10px;
+  }
 }

@@ -21,11 +21,6 @@
       background-color: $devui-list-item-hover-bg;
       color: $devui-list-item-hover-text;
     }
-
-    &.devui-no-data-tips {
-      cursor: not-allowed;
-      color: $devui-disabled-text;
-    }
   }
 
   ::ng-deep {

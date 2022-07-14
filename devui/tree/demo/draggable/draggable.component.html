@@ -13,12 +13,14 @@
 <d-operable-tree
   [tree]="data"
   [draggable]="true"
+  [canActivateMultipleNode]="true"
   [dropType]="dropType"
   (nodeOnDrop)="onDrop($event)"
   (nodeDragStart)="dragStart($event)"
   [beforeNodeDrop]="beforeNodeDrop"
   (nodeOnDrop)="onDrop($event)"
   (nodeToggled)="showNode($event)"
+  (nodeSelected)="onOperableNodeSelected($event)"
 >
 </d-operable-tree>
 

@@ -6,7 +6,13 @@
 
 <h5>limit range</h5>
 
-<d-datepicker-pro [(ngModel)]="value4" [minDate]="minDate" [maxDate]="maxDate" [calenderRange]="[2000, 2030]"></d-datepicker-pro>
+<d-datepicker-pro
+  [(ngModel)]="value4"
+  [minDate]="minDate"
+  [allowClear]="false"
+  [maxDate]="maxDate"
+  [calenderRange]="[2000, 2030]"
+></d-datepicker-pro>
 
 <h5>disable</h5>
 

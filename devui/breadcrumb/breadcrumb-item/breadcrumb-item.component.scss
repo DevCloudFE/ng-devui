@@ -3,7 +3,7 @@
 @import '../../style/core/animation';
 
 .devui-breadcrumb-font-style {
-  font-size: $devui-font-size;
+  font-size: $devui-font-size-sm;
   color: $devui-aide-text;
 }
 
@@ -40,12 +40,6 @@
 
   svg g path {
     fill: $devui-icon-fill;
-  }
-
-  &:hover {
-    svg g path {
-      fill: $devui-icon-fill-hover;
-    }
   }
 }
 
@@ -120,8 +114,16 @@ d-search {
   width: 100%;
 }
 
-.devui-breadcrumb-item-with-menu .devui-breadcrumb-item {
-  cursor: pointer;
+.devui-breadcrumb-item-with-menu {
+  .devui-breadcrumb-item {
+    cursor: pointer;
+  }
+
+  &:hover {
+    svg g path {
+      fill: $devui-icon-fill-hover;
+    }
+  }
 }
 
 .devui-dropdown-open {

@@ -77,7 +77,7 @@ $devui-connected-overlay-line: var(--devui-connected-overlay-line, $devui-blue-6
 $devui-fullscreen-overlay-bg: var(--devui-fullscreen-overlay-bg, $devui-white-5); // 全屏类型的弹出内容层背景色（模态弹窗）
 $devui-feedback-overlay-bg: var(--devui-feedback-overlay-bg, #464d6e); // 信息提示反馈类型的漂浮层背景色（toast、popover）
 $devui-feedback-overlay-text: var(--devui-feedback-overlay-text, $devui-slate-20); // 信息提示反馈类型的漂浮层背景色搭配文本色
-$devui-embed-search-bg: var(--devui-embed-search-bg, $devui-blue-5); // 被嵌套的无边框搜索框背景色
+$devui-embed-search-bg: var(--devui-embed-search-bg, $devui-zinc-10); // 被嵌套的无边框搜索框背景色
 $devui-embed-search-bg-hover: var(--devui-embed-search-bg-hover, $devui-slate-10); // 被嵌套的无边框搜索框背景色
 $devui-float-block-shadow: var(--devui-float-block-shadow, rgba(94, 124, 224, 0.3)); // 特殊浮层背景色（待修正）
 $devui-highlight-overlay: var(--devui-highlight-overlay, rgba(255, 255, 255, 0.8)); // 局部半透明全局浮层背景色（比如底部）

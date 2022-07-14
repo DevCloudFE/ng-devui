@@ -27,6 +27,7 @@ import { DatepickerProModule } from 'ng-devui/datepicker-pro';
 | maxDate   |  `Date` |  new Date(calenderRange[1]) |  可选，限制最大可选日期   | [基本用法](demo#basic-usage) |
 | showAnimation | `boolean` | true |  可选，是否开启动画 | |
 | width | `string` | - |  可设置选择器的宽度 | |
+| allowClear | `boolean` | true |  是否允许用户清除日期，即显示清除按钮 | |
 | placeholder | `string` | - |  输入框的placeholder | |
 | mode | `'year' \| 'month' \| 'date'` | 'date' |  面板模式 | [年月选择器](demo#monthYear)|
 | markedDateList | `Date[]` | [] |  标记日期列表，可以配合MarkDateInfoTemplate模板展示提示信息 | [标记信息](demo#date-marked)|

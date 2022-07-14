@@ -17,6 +17,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
 import { ClipboardDemoComponent } from './clipboard/clipboard.component';
 import { CommonDemoComponent } from './common-demo.component';
+import { HelperBrowserComponent } from './helper-browser/helper-browser.component';
 import { HelperDownloadDemoComponent } from './helper-download/helper-download.component';
 import { HelperJumpDemoComponent } from './helper-jump/helper-jump.component';
 import { IframPropagateDemoComponent } from './iframe-propagate/iframe-propagate.component';
@@ -56,6 +57,7 @@ import { PipeDemoComponent } from './pipe/pipe.component';
   declarations: [
     PipeDemoComponent,
     CommonDemoComponent,
+    HelperBrowserComponent,
     HelperJumpDemoComponent,
     HelperDownloadDemoComponent,
     IframPropagateDemoComponent,

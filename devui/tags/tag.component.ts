@@ -28,6 +28,8 @@ export class TagComponent {
 
   @Input() checked = false;
 
+  @Input() maxWidth;
+
   @Input() customViewTemplate: TemplateRef<any>;
   /**
    * tag被删除后触发

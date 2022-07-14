@@ -21,8 +21,10 @@ In the page：
 
 ### d-icon parameter
 
-| Parameter |            Type            | Default | Description                                                                                                                                                                     |
-| :-------: | :------------------------: | :-----: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-|   icon    | `string\|TemplateRef<any>` |   --    | (mandatory). The [icon library] (https://devui.design/icon/ruleResource) icon is transferred, for example, 'icon-add' or a customized template can be transferred. |
-| operable  |         `boolean`          |  false  | Optional. Indicates whether the icon is operable.                                                                                                                               |
-| disabled  |         `boolean`          |  false  | Optional. Indicates whether the icon is disabled.                                                                                                                               |
+| Parameter |            Type            | Default | Description                                                                                                                  |
+| :-------: | :------------------------: | :-----: | :--------------------------------------------------------------------------------------------------------------------------- |
+|   icon    | `string\|TemplateRef<any>` |   --    | (mandatory). Transfer the [icon library](https://devui.huawei.com/icon/zh-cn/ruleResource) icon, for example, 'icon-add' |
+| operable  |         `boolean`          |  false  | Optional. Indicates whether the icon is operable.                                                                            |
+| disabled  |         `boolean`          |  false  | Optional. Indicates whether the icon is disabled.                                                                            |
+|  rotate   |   `number\|'infinite'`   |   --    | Optional. Rotation angle of the icon. If the value is ‘infinite’, the icon rotates continuously.                               |
+|   color   |          `string`          |   --    | Optional. Set the color of the icon.                                                                                         |

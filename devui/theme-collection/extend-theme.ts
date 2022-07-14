@@ -47,7 +47,8 @@ export const provenceTheme: Theme = new Theme({
     'devui-embed-search-bg': '#F4F2FF',
     'devui-connected-overlay-line': '#7B69EE',
     'devui-primary-disabled': '#d8d2fa',
-    'devui-icon-fill-active-disabled': '#d8d2fa'
+    'devui-icon-fill-active-disabled': '#d8d2fa',
+    'devui-link-active': '#3f1a9c'
 
   },
   extends: 'infinity-theme',
@@ -93,6 +94,7 @@ export const sweetTheme: Theme = new Theme({
     'devui-connected-overlay-line': '#ec66ab',
     'devui-primary-disabled': '#fad1e6',
     'devui-icon-fill-active-disabled': '#fad1e6',
+    'devui-link-active': '#96114d'
   },
   extends: 'infinity-theme',
   isDark: false

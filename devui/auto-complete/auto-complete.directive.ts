@@ -109,7 +109,7 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
    * @deprecated
    */
   @Output() changeDropDownStatus = new EventEmitter<any>();
-  @Output() toggleChange = new EventEmitter<any>();
+  @Output() toggleChange = new EventEmitter<boolean>();
   KEYBOARD_EVENT_NOT_REFRESH = ['escape', 'enter', 'arrowup', 'arrowdown', /* ie 10 edge */ 'esc', 'up', 'down'];
   popupRef: ComponentRef<AutoCompletePopupComponent>;
 
@@ -137,14 +137,11 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
     private i18n: I18nService,
     private devConfigService: DevConfigService
   ) {
-    this.minLength = this.autoCompleteConfig.autoComplete.minLength;
-    this.itemTemplate = this.autoCompleteConfig.autoComplete.itemTemplate;
-    this.noResultItemTemplate = this.autoCompleteConfig.autoComplete.noResultItemTemplate;
-    this.formatter = this.autoCompleteConfig.autoComplete.formatter;
-    this.valueParser = this.autoCompleteConfig.autoComplete.valueParser;
+
   }
 
   ngOnInit() {
+    this.init();
     this.setI18nText();
     this.valueChanges = this.registerInputEvent(this.elementRef);
     // 调用时机：input keyup
@@ -153,12 +150,11 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
     // 动态的创建了popup组件，
     const factory = this.componentFactoryResolver.resolveComponentFactory(AutoCompletePopupComponent);
     this.popupRef = this.viewContainerRef.createComponent(factory, this.viewContainerRef.length, this.injector);
-
     this.fillPopup(this.source);
 
     if (!this.searchFn) {
       this.searchFn = (term) => {
-        return of(this.source.filter((lang) => this.formatter(lang).toLowerCase().indexOf(term.toLowerCase()) !== -1));
+        return of(this.source.filter((item) => this.formatter(item).toLowerCase().indexOf(term.toLowerCase()) !== -1));
       };
     }
 
@@ -191,6 +187,14 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
     if (changes['appendToBodyDirections']) {
       this.setPositions();
     }
+  }
+
+  init() {
+    this.minLength = this.minLength ?? this.autoCompleteConfig.autoComplete.minLength;
+    this.itemTemplate = this.itemTemplate || this.autoCompleteConfig.autoComplete.itemTemplate;
+    this.noResultItemTemplate = this.noResultItemTemplate || this.autoCompleteConfig.autoComplete.noResultItemTemplate;
+    this.formatter = this.formatter || this.autoCompleteConfig.autoComplete.formatter;
+    this.valueParser = this.valueParser || this.autoCompleteConfig.autoComplete.valueParser;
   }
 
   setPositions() {

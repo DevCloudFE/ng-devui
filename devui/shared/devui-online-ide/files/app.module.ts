@@ -14,9 +14,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
+import { TranslateModule } from '@ngx-translate/core';
 import { DevUIModule } from "ng-devui";
 import { I18nModule } from 'ng-devui/i18n';
 import { IconModule } from 'ng-devui/icon';
+import { LazyLoadModule } from 'ng-devui/utils';
 
 import {
   AutoCompletePopupComponent,
@@ -51,7 +53,9 @@ ${importStr}
     ClipboardModule,
     DevUIModule,
     I18nModule,
-    IconModule
+    IconModule,
+    LazyLoadModule,
+    TranslateModule.forRoot()
   ],
   declarations: [ ${componentName}, ${componentsStr} ],
   entryComponents: [

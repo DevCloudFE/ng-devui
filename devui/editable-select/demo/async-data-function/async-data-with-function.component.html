@@ -1,3 +1,3 @@
-<d-button [showLoading]="loading4" (click)="getAsyncData2()" style="margin-bottom: 12px">click me!</d-button>
-<d-editable-select [(ngModel)]="selectItem4" [searchFn]="onSearchLocal2" name="multiple-auto" placeholder="Search"> </d-editable-select>
-<pre>{{ (selectItem4 | json) || 'No language select!' }}</pre>
+<d-button [showLoading]="loading" (click)="getAsyncData()">click me!</d-button>
+<d-editable-select placeholder="Search" [(ngModel)]="selectItem" [searchFn]="onSearchLocal"> </d-editable-select>
+<pre>{{ (selectItem | json) || 'No language select' }}</pre>
