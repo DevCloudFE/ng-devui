@@ -1,6 +1,7 @@
 <img
   *ngIf="imgSrc && !isErrorImg"
   [src]="imgSrc"
+  [referrerPolicy]="referrerPolicy"
   alt=""
   (error)="showErrAvatar()"
   [ngStyle]="{

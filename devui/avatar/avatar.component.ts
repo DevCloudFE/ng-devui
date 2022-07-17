@@ -40,6 +40,10 @@ export class AvatarComponent implements OnChanges, OnInit {
    * 自定义头像显示文字
    */
   @Input() customText: string;
+  /**
+   * 若使用图片时需要特别的 referrerPolicy
+   */
+  @Input() referrerPolicy: 'no-referrer' | 'no-referrer-when-downgrade' | 'origin' | 'origin-when-cross-origin' | 'unsafe-url' = 'no-referrer-when-downgrade';
 
   fontSize = 12;
   code: number;

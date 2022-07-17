@@ -23,6 +23,7 @@ In the page:
 |      isRound     |        `boolean`        |   true | Optional. Indicating whether to display a circular avatar | [Basic Configuration](demo#basic-configuration)     |
 |      imgSrc      |         `string`        |   --   | Optional. Import a customized image as the avatar | [Basic Configuration](demo#basic-configuration) |
 |    customText    |         `string`        |   --   | Optional. Input the customized display text | [Basic Configuration](demo#basic-configuration) |
+|  referrerPolicy  |        `string`        |  no-referrer-when-downgrade  | Specifies which referrer information to use when fetching an image. |   |
 
 
 ### Basic Profile Picture Display Rules

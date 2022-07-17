@@ -24,6 +24,7 @@ import { AvatarModule } from 'ng-devui/avatar';
 |  isRound   |       `boolean`        | true | 可选，是否显示为圆形头像                                                    | [头像的基础配置](demo#basic-configuration) |
 |   imgSrc   |        `string`        |  --  | 可选，传入自定义图片作为头像                                                | [头像的基础配置](demo#basic-configuration) |
 | customText |        `string`        |  --  | 可选，传入自定义显示文字                                                    | [头像的基础配置](demo#basic-configuration) |
+| referrerPolicy |        `string`        |  no-referrer-when-downgrade  | 指定在获取图像时要使用的引荐来源信息。 |   |
 
 ### 头像显示基本规则
 
