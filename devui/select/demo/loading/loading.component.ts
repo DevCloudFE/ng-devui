@@ -89,5 +89,5 @@ export class LoadingComponent {
         .map((option, index) => ({id: index, option: option}))
         .filter(item => item.option.name.toLowerCase().indexOf(term.toLowerCase()) !== -1)
     );
-  }
+  };
 }

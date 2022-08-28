@@ -9,6 +9,7 @@ import { EditableTip } from '../../../data-table.model';
 import { TableTdService } from './td.service';
 
 @Component({
+  /* eslint-disable-next-line @angular-eslint/component-selector*/
   selector: '[dTableCell]',
   templateUrl: './td.component.html',
   styleUrls: ['./td.component.scss']
@@ -33,8 +34,15 @@ export class TableTdComponent implements OnInit, OnChanges, OnDestroy {
   @Input() beforeEditEnd: (rowItem, field) => boolean | Promise<boolean> | Observable<boolean>;
   @Output() toggleChildTableEvent = new EventEmitter<boolean>();
   @Input() editing: boolean;
-  @Output() editingChange = new EventEmitter<boolean>();
   @Output() editStatusEvent = new EventEmitter<boolean>();
+  /**
+   * 编辑状态调整 @deprecated
+   */
+  @Output() editingChange = new EventEmitter<boolean>();
+
+  @HostBinding('class.editable-cell') get isEditable() {
+    return this.editable && !this.editing && this.editableTip !== 'btn';
+  }
 
   private documentClickSubscription: Subscription;
   private tdMousedownSubscription: Subscription;

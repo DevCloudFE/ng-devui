@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { Inject, Injectable, OnDestroy } from '@angular/core';
+import { Inject, Injectable, OnDestroy, TemplateRef } from '@angular/core';
 import { Subject } from 'rxjs';
 
 @Injectable()
@@ -9,26 +9,29 @@ export class DatepickerProService implements OnDestroy {
   curHoverDate: Date;
   startIndexOfWeek: number;
   isRange: boolean;
+  markedRangeDateList: Date[][];
+  markDateInfoTemplate: TemplateRef<any>;
+  markedDateList: Date[];
   showTime: boolean;
   calendarRange = [1970, 2099];
   currentActiveInput: 'start' | 'end' = 'start';
   _minDate: Date = new Date(this.calendarRange[0], 0, 1);
-  _maxDate: Date = new Date(this.calendarRange[1], 11, 31);
-  document: Document;
-
   set minDate(value: Date) {
     this._minDate = new Date(value) || new Date(this.calendarRange[0], 0, 1);
+    this.detectedChanges.next();
   }
-  set maxDate(value: Date) {
-    this._maxDate = new Date(value) || new Date(this.calendarRange[1], 11, 31);
-  }
-
   get minDate(): Date {
     return this._minDate;
+  }
+  _maxDate: Date = new Date(this.calendarRange[1], 11, 31);
+  set maxDate(value: Date) {
+    this._maxDate = new Date(value) || new Date(this.calendarRange[1], 11, 31);
+    this.detectedChanges.next();
   }
   get maxDate(): Date {
     return this._maxDate;
   }
+  document: Document;
   get closeAfterSelected(): boolean {
     return !this.isRange && !this.showTime;
   }
@@ -66,17 +69,18 @@ export class DatepickerProService implements OnDestroy {
     value: Date | Date[];
   }>();
   readonly selectedTimeChange = new Subject<{
-    activeInput?: 'start' | 'end',
+    activeInput?: 'start' | 'end';
     hour: number;
     min: number;
     seconds: number;
   }>();
   readonly updateTimeChange = new Subject<{
-    activeInput?: 'start' | 'end',
+    activeInput?: 'start' | 'end';
     hour: number;
     min: number;
     seconds: number;
   }>();
+  readonly detectedChanges = new Subject<void>();
 
   constructor(@Inject(DOCUMENT) private doc: any) {
     this.document = this.doc;
@@ -220,6 +224,37 @@ export class DatepickerProService implements OnDestroy {
     }
   }
 
+  isInSuggestList(date: Date): boolean {
+    if (!this.markedRangeDateList) {
+      return false;
+    }
+
+    for (let index = 0; index < this.markedRangeDateList.length; index++) {
+      const range = this.markedRangeDateList[index];
+      if (
+        range[0]?.getTime() < date.getTime() && range[1]?.getTime() > date.getTime()
+      ) {
+        return true;
+      }
+
+      if (
+        range[0]?.toDateString() === date.toDateString() || range[1]?.toDateString() === date.toDateString()
+      ) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  isMarkedDate(date: Date): boolean {
+    for (let index = 0; index < this.markedDateList?.length; index++) {
+      if (this.markedDateList[index]?.toDateString() === date.toDateString()) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   mearsureStrWidth(str: string): number {
     const mearsureDom = this.document.createElement('span');
     mearsureDom.innerText = str;
@@ -240,6 +275,7 @@ export class DatepickerProService implements OnDestroy {
     this.updateTimeChange.complete();
     this.selectedTimeChange.complete();
     this.activeInputChange.complete();
+    this.detectedChanges.complete();
   }
 
 }

@@ -20,7 +20,6 @@ import { fromEvent, Observable, Subscription } from 'rxjs';
 
 const INPUT_NUMBER_CONTROL_VALUE_ACCESSOR: any = {
   provide: NG_VALUE_ACCESSOR,
-  // tslint:disable-next-line
   useExisting: forwardRef(() => InputNumberComponent),
   multi: true
 };
@@ -83,10 +82,10 @@ export class InputNumberComponent implements ControlValueAccessor, OnChanges, On
   }
 
   private onTouchedCallback = () => {
-  }
+  };
 
   private onChangeCallback = (v: any) => {
-  }
+  };
 
   constructor(private cdr: ChangeDetectorRef, private el: ElementRef, private renderer: Renderer2,
               @Inject(DOCUMENT) private doc: any) {
@@ -176,7 +175,7 @@ export class InputNumberComponent implements ControlValueAccessor, OnChanges, On
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.hasOwnProperty('min') || changes.hasOwnProperty('max')) {
+    if (Object.prototype.hasOwnProperty.call(changes, 'min') || Object.prototype.hasOwnProperty.call(changes, 'max')) {
       this.checkRangeValues(this.min, this.max);
     }
   }
@@ -250,7 +249,7 @@ export class InputNumberComponent implements ControlValueAccessor, OnChanges, On
       } else {
         const decimals = this.getMaxDecimals(this.value);
         const floatValue = type === 'increase' ? (this.value + this.step) : (this.value - this.step);
-        if (this.matchReg(floatValue + '')) {
+        if (this.matchReg(String(floatValue))) {
           this.updateValue(parseFloat(floatValue.toFixed(decimals)));
         }
       }
@@ -339,7 +338,7 @@ export class InputNumberComponent implements ControlValueAccessor, OnChanges, On
     this.keyBoardControl(event);
   }
 
-  protectInput(event) {
+  protectInput(event: Event) {
     if (this.disabled) {
       return;
     }

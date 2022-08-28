@@ -46,6 +46,7 @@ export class CalendarPanelComponent implements OnInit, OnDestroy {
 
   set curHoverDate(value: Date) {
     this.pickerSrv.curHoverDate = value;
+    this.cdr.detectChanges();
   }
 
   get curDate(): Date {
@@ -66,7 +67,10 @@ export class CalendarPanelComponent implements OnInit, OnDestroy {
         this.pickerSrv.curRangeDate[0] = value;
       } else if (this.pickerSrv.currentActiveInput === 'end') {
         if (this.pickerSrv.showTime) {
-          this.pickerSrv.curRangeDate[1] = this.pickerSrv.curRangeDate[1] ? value : new Date(value.setHours(23, 59, 59));
+          this.pickerSrv.curRangeDate[1] =
+            (this.pickerSrv.curRangeDate[1] && this.pickerSrv.curRangeDate[1].toDateString() === value.toDateString())
+              ? value
+              : new Date(value.setHours(23, 59, 59));
         } else {
           this.pickerSrv.curRangeDate[1] = new Date(value.setHours(23, 59, 59));
         }
@@ -82,6 +86,10 @@ export class CalendarPanelComponent implements OnInit, OnDestroy {
 
   set selectedRangeDate(dateList: Date[]) {
     this.pickerSrv.curRangeDate = dateList;
+  }
+
+  get markDateTemplate() {
+    return this.pickerSrv.markDateInfoTemplate;
   }
 
   constructor(
@@ -123,6 +131,8 @@ export class CalendarPanelComponent implements OnInit, OnDestroy {
         if (!this.scrollListener) {
           this.initScrollListener();
         }
+      } else {
+        this.curHoverDate = null;
       }
     });
 
@@ -136,12 +146,21 @@ export class CalendarPanelComponent implements OnInit, OnDestroy {
       }
     });
 
+    this.pickerSrv.detectedChanges.pipe(
+      takeUntil(this.unsubscribe$),
+    ).subscribe(() => {
+      this.cdr.detectChanges();
+    });
+
     this.pickerSrv.activeInputChange.pipe(
       takeUntil(this.unsubscribe$)
     ).subscribe(type => {
       if (type === 'start') {
         this.goToDate(this.selectedRangeDate[0] || this.selectedRangeDate[1] || new Date());
       } else {
+        if (!this.selectedRangeDate[1] && this.selectedRangeDate[0]) {
+          this.updateRangeDate([this.selectedRangeDate[0], this.selectedRangeDate[0]]);
+        }
         this.goToDate(this.selectedRangeDate[1] || this.selectedRangeDate[0] || new Date());
       }
     });
@@ -206,8 +225,8 @@ export class CalendarPanelComponent implements OnInit, OnDestroy {
     };
   }
 
-  private getDisplayWeeks(yearindex: number, monthIndex: number): DevuiCalendarDateItem[] {
-    const firstDayOfMonth = new Date(yearindex, monthIndex, 1);
+  private getDisplayWeeks(yearIndex: number, monthIndex: number): DevuiCalendarDateItem[] {
+    const firstDayOfMonth = new Date(yearIndex, monthIndex, 1);
     const weekOfDay = firstDayOfMonth.getDay();
     const startDate = new Date(firstDayOfMonth.getTime() - weekOfDay * DAY_DURATION);
     const displayWeeks = [];
@@ -219,8 +238,7 @@ export class CalendarPanelComponent implements OnInit, OnDestroy {
           day: this.fillLeft(currentDate.getDate()),
           date: currentDate,
           inMonth: currentDate.getMonth().toString() === monthIndex.toString(),
-          isToday: currentDate.toDateString() === this.today.toDateString(),
-          isDisable: !this.pickerSrv.dateInRange(currentDate)
+          isToday: currentDate.toDateString() === this.today.toDateString()
         };
       });
       displayWeeks.push(weekDays);
@@ -265,9 +283,9 @@ export class CalendarPanelComponent implements OnInit, OnDestroy {
 
     const curDate = (this.pickerSrv.currentActiveInput === 'start' ?
       (dateList[0] || dateList[1]) : (dateList[1] || dateList[0])) || new Date();
-    const morethanOneYear = Math.abs(curDate.getFullYear() - (this.currentBodyIndex / 12 + this.pickerSrv.calendarRange[0])) > 1;
+    const moreThanOneYear = Math.abs(curDate.getFullYear() - (this.currentBodyIndex / 12 + this.pickerSrv.calendarRange[0])) > 1;
     this.selectedRangeDate = dateList;
-    this.goToDate(curDate, morethanOneYear ? 'auto' : 'smooth');
+    this.goToDate(curDate, moreThanOneYear ? 'auto' : 'smooth');
     this.cdr.detectChanges();
   }
 
@@ -277,9 +295,9 @@ export class CalendarPanelComponent implements OnInit, OnDestroy {
       this.cdr.detectChanges();
       return;
     }
-    const morethanOneYear = Math.abs(date.getFullYear() - (this.currentBodyIndex / 12 + this.pickerSrv.calendarRange[0])) > 1;
+    const moreThanOneYear = Math.abs(date.getFullYear() - (this.currentBodyIndex / 12 + this.pickerSrv.calendarRange[0])) > 1;
     this.curDate = date;
-    this.goToDate(this.curDate, morethanOneYear ? 'auto' : 'smooth');
+    this.goToDate(this.curDate, moreThanOneYear ? 'auto' : 'smooth');
     this.cdr.detectChanges();
   }
 
@@ -303,7 +321,7 @@ export class CalendarPanelComponent implements OnInit, OnDestroy {
   }
 
   selectDate(day: DevuiCalendarDateItem) {
-    if (day.isDisable || !day.inMonth) {
+    if (this.isDisabled(day.date) || !day.inMonth) {
       return;
     }
 
@@ -322,7 +340,7 @@ export class CalendarPanelComponent implements OnInit, OnDestroy {
       if (this.pickerSrv.currentActiveInput === 'start') {
         this.pickerSrv.currentActiveInput = 'end';
       } else if (this.pickerSrv.currentActiveInput === 'end' && !this.selectedRangeDate[0]) {
-        this.pickerSrv.currentActiveInput = 'start';
+        this.selectedRangeDate[0] = this.curDate;
       } else {
         this.pickerSrv.closeDropdownEvent.next();
       }
@@ -348,6 +366,10 @@ export class CalendarPanelComponent implements OnInit, OnDestroy {
 
   isStartDate(date: Date): boolean {
     return this.pickerSrv.isStartDate(date);
+  }
+
+  isDisabled(date: Date): boolean {
+    return !this.pickerSrv.dateInRange(date);
   }
 
   isEndDate(date: Date): boolean {
@@ -378,6 +400,14 @@ export class CalendarPanelComponent implements OnInit, OnDestroy {
     return this.pickerSrv.isDateAbandon(date);
   }
 
+  isDateSuggest(date: Date): boolean {
+    return this.pickerSrv.isInSuggestList(date);
+  }
+
+  isDateMarked(date: Date): boolean {
+    return this.pickerSrv.isMarkedDate(date);
+  }
+
   isSingleDate(): boolean {
     if (this.pickerSrv.currentActiveInput === 'start') {
       return !this.pickerSrv.curRangeDate[1];
@@ -391,14 +421,12 @@ export class CalendarPanelComponent implements OnInit, OnDestroy {
       this.curHoverDate = null;
       return;
     }
+    this.curHoverDate = date;
     if (this.isWeekSelect) {
       this.weekHoverRange = this.getWeekRange(date);
       this.curWeekHoverDate = date;
+      this.cdr.markForCheck();
       return;
-    }
-
-    if (this.isRangeType) {
-      this.curHoverDate = date;
     }
   }
 
@@ -406,7 +434,10 @@ export class CalendarPanelComponent implements OnInit, OnDestroy {
     if (!date) {
       return [];
     }
-    const weekStart = new Date(date.getTime() - (date.getDay() - this.pickerSrv.startIndexOfWeek) * DAY_DURATION);
+    const diff = date.getDay() < this.pickerSrv.startIndexOfWeek
+      ? 7 - (this.pickerSrv.startIndexOfWeek - date.getDay())
+      : date.getDay() - this.pickerSrv.startIndexOfWeek;
+    const weekStart = new Date(date.getTime() - diff * DAY_DURATION);
     const weekEnd = new Date(weekStart.getTime() + DAY_DURATION * 6);
     weekEnd.setHours(23, 59, 59);
 
@@ -420,8 +451,7 @@ export class CalendarPanelComponent implements OnInit, OnDestroy {
     if (this.pickerSrv.isDateActive(date)) {
       return false;
     }
-    return (this.pickerSrv.isDateInRange(date) ||
-    (range[0]?.getTime() < time && time < range[1]?.getTime()) ||
+    return ((range[0]?.getTime() < time && time < range[1]?.getTime()) ||
     (range[0]?.toDateString() === timeStr || timeStr === range[1]?.toDateString()));
   }
 

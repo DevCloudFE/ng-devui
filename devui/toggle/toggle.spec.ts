@@ -17,7 +17,7 @@ class TestToggleComponent {
   onChange = jasmine.createSpy('on change');
   beforeChange = () => {
     return;
-  }
+  };
 }
 
 describe('toggle', () => {
@@ -150,7 +150,7 @@ describe('toggle', () => {
   });
 });
 
-function onClickTest(fixture, debugEl, component, canChange: boolean = true) {
+function onClickTest(fixture, debugEl, component, canChange = true) {
   const toggleComponent: DebugElement = debugEl.query(By.directive(ToggleComponent));
   toggleComponent.triggerEventHandler('click', {});
   fixture.detectChanges();

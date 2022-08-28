@@ -46,20 +46,38 @@ export class RangeDatepickerProComponent implements OnInit, OnDestroy, AfterView
   @Input() splitter = '-';
   @Input() width: string;
   @Input() startIndexOfWeek = 0;
+  @Input() appendToBody = true;
+  @Input() placeholder: string[];
+  @Input() allowClear = true;
   @Input() set calenderRange (value) {
     this.pickerSrv.calendarRange = value || [1970, 2099];
   }
   @Input() set minDate(value: Date) {
+    if (!value) {
+      return;
+    }
     this.pickerSrv.minDate = value;
   }
   @Input() set maxDate(value: Date) {
+    if (!value) {
+      return;
+    }
     this.pickerSrv.maxDate = value;
+  }
+  @Input() set markedRangeDateList(value: Date[][]) {
+    this.pickerSrv.markedRangeDateList = value;
+  };
+  @Input() set markedDateList(value: Date[]) {
+    this.pickerSrv.markedDateList = value;
   }
   @Output() dropdownToggle = new EventEmitter<boolean>();
   @Output() confirmEvent = new EventEmitter<Date[]>();
   @ContentChild('customTemplate') customTemplate: TemplateRef<any>;
   @ContentChild('footerTemplate') footerTemplate: TemplateRef<any>;
   @ContentChild('hostTemplate') hostTemplate: TemplateRef<any>;
+  @ContentChild('markDateInfoTemplate') set markDateInfoTemplate(tmp: TemplateRef<any>) {
+    this.pickerSrv.markDateInfoTemplate = tmp;
+  };
   @ViewChild('dateInputStart') datepickerInputStart: ElementRef;
   @ViewChild('dateInputEnd') datepickerInputEnd: ElementRef;
 
@@ -295,34 +313,41 @@ export class RangeDatepickerProComponent implements OnInit, OnDestroy, AfterView
       }
     }
 
-  }
+  };
 
   inputBlurCallback = (type) => {
     const targetValue = type === 'start' ? this.dateValue[0] : this.dateValue[1];
     if (!this.validateDate(targetValue)) {
       if (type === 'start') {
         this.dateValue[0] = this.pickerSrv.curRangeDate[0] ?
-        this.datepickerConvert.format(this.pickerSrv.curRangeDate[0], this.curFormat, this.locale || this.i18nLocale) :
-        '';
+          this.datepickerConvert.format(this.pickerSrv.curRangeDate[0], this.curFormat, this.locale || this.i18nLocale) :
+          '';
       } else {
         this.dateValue[1] = this.pickerSrv.curRangeDate[1] ?
-        this.datepickerConvert.format(this.pickerSrv.curRangeDate[1], this.curFormat, this.locale || this.i18nLocale) :
-        '';
+          this.datepickerConvert.format(this.pickerSrv.curRangeDate[1], this.curFormat, this.locale || this.i18nLocale) :
+          '';
       }
     }
     this.getStrWidth();
-  }
+  };
 
   public focusChange(type: 'start' | 'end') {
+    if (!this.isOpen) {
+      type = 'start';
+    }
     this.currentActiveInput = type;
     this.pickerSrv.activeInputChange.next(type);
     if (type === 'start') {
       setTimeout(() => {
-        this.datepickerInputStart?.nativeElement?.focus();
+        if (this.datepickerInputStart?.nativeElement) {
+          this.datepickerInputStart.nativeElement.focus();
+        }
       });
     } else {
       setTimeout(() => {
-        this.datepickerInputEnd?.nativeElement?.focus();
+        if (this.datepickerInputEnd?.nativeElement) {
+          this.datepickerInputEnd.nativeElement.focus();
+        }
       });
     }
   }
@@ -357,9 +382,11 @@ export class RangeDatepickerProComponent implements OnInit, OnDestroy, AfterView
     this.isOpen = true;
   }
 
-  clear(event?: MouseEvent) {
-    event?.stopPropagation();
-    if (this.disabled) {
+  clear(event?: MouseEvent, isHandle?: boolean) {
+    if (event) {
+      event.stopPropagation();
+    }
+    if (this.disabled && isHandle) {
       return;
     }
     this.pickerSrv.updateDateValue.next({

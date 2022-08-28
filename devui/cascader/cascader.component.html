@@ -3,45 +3,90 @@
   *ngIf="appendToBody"
   dDropDown
   appendToBody
-  [trigger]="'click'"
+  [trigger]="disabled ? 'manually' : 'click'"
   [closeScope]="'blank'"
   #mainDropdown="d-dropdown"
   (toggleEvent)="onToggle($event)"
   [showAnimation]="showAnimation"
   [appendToBodyDirections]="subMenuDirections"
 >
-  <input
-    *ngIf="!multiple"
-    [placeholder]="placeholder"
-    type="text"
-    class="devui-form-control devui-select-input devui-input"
-    [ngClass]="{ 'devui-search-cascader': allowSearch }"
-    [readonly]="!allowSearch"
-    dDropDownToggle
-    [disabled]="disabled"
-    [ngModel]="showTextValue"
-    (ngModelChange)="valueChanges($event)"
-  />
-  <div class="devui-tags-input-wrapper" dDropDownToggle *ngIf="multiple">
-    <div class="devui-tags-input">
-      <d-tag
-        *ngFor="let item of multipleValueList; let index = index"
-        [tag]="item.label"
-        [deletable]="true"
-        (tagDelete)="deleteTag($event, item)"
-      ></d-tag>
-      <input
-        #innerInput
-        *ngIf="allowSearch"
-        dTextInput
-        class="inner-input"
-        [placeholder]="multipleValueList.length ? '' : placeholder"
-        [ngModel]="showTextValue"
-        (ngModelChange)="valueChanges($event)"
-      />
-      <span *ngIf="!multipleValueList.length && !allowSearch" class="devui-dropdown-placeholder">{{ placeholder }}</span>
+  <div dDropDownToggle (focus)="showSearchInput = true">
+    <ng-template
+      [ngTemplateOutlet]="hostTemplate || default"
+      [ngTemplateOutletContext]="{ value: showTextValue || multipleValueList }"
+    ></ng-template>
+  </div>
+
+  <ng-template #default>
+    <input
+      *ngIf="!multiple"
+      [placeholder]="placeholder"
+      type="text"
+      class="devui-form-control devui-select-input devui-input"
+      [ngClass]="{ 'devui-search-cascader': allowSearch }"
+      [readonly]="!allowSearch"
+      [disabled]="disabled"
+      [ngModel]="showTextValue"
+      (ngModelChange)="valueChanges($event)"
+    />
+    <div class="devui-tags-input-wrapper" *ngIf="multiple">
+      <div class="devui-tags-input">
+        <d-tag
+          *ngFor="let item of multipleValueList; let index = index"
+          [tag]="item.label"
+          [deletable]="true"
+          (tagDelete)="deleteTag($event, item)"
+        ></d-tag>
+        <input
+          #innerInput
+          (blur)="showSearchInput = false"
+          *ngIf="allowSearch && showSearchInput"
+          dTextInput
+          class="inner-input"
+          [placeholder]="multipleValueList.length ? '' : placeholder"
+          [ngModel]="showTextValue"
+          (ngModelChange)="valueChanges($event)"
+        />
+        <span *ngIf="!multipleValueList.length && !allowSearch" class="devui-dropdown-placeholder">{{ placeholder }}</span>
+      </div>
+      <div class="devui-drop-icon-wrapper" [ngClass]="{ 'dropdown-show-clear': allowClear }">
+        <span class="devui-drop-icon" [ngClass]="{ 'devui-drop-icon-animation': showAnimation }">
+          <svg
+            width="1em"
+            height="1em"
+            viewBox="0 0 16 16"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+          >
+            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+              <path
+                d="M12.1464466,6.85355339 L8.35355339,10.6464466 C8.15829124,10.8417088 7.84170876,10.8417088 7.64644661,10.6464466 L3.85355339,6.85355339 C3.65829124,6.65829124 3.65829124,6.34170876 3.85355339,6.14644661 C3.94732158,6.05267842 4.07449854,6 4.20710678,6 L11.7928932,6 C12.0690356,6 12.2928932,6.22385763 12.2928932,6.5 C12.2928932,6.63260824 12.2402148,6.7597852 12.1464466,6.85355339 Z"
+                fill-rule="nonzero"
+              ></path>
+            </g>
+          </svg>
+        </span>
+        <span class="devui-cascader-close-icon" (click)="clearTags()">
+          <svg
+            width="12px"
+            height="12px"
+            viewBox="0 0 12 12"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+          >
+            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+              <path
+                d="M8.86785321,3.13214679 C9.02624037,3.29053395 9.02624037,3.54733027 8.86785321,3.70571743 L6.573,6 L8.86785321,8.29428257 C9.02624037,8.45266973 9.02624037,8.70946605 8.86785321,8.86785321 C8.70946605,9.02624037 8.45266973,9.02624037 8.29428257,8.86785321 L6,6.573 L3.70571743,8.86785321 C3.54733027,9.02624037 3.29053395,9.02624037 3.13214679,8.86785321 C2.97375963,8.70946605 2.97375963,8.45266973 3.13214679,8.29428257 L5.427,6 L3.13214679,3.70571743 C2.97375963,3.54733027 2.97375963,3.29053395 3.13214679,3.13214679 C3.29053395,2.97375963 3.54733027,2.97375963 3.70571743,3.13214679 L6,5.427 L8.29428257,3.13214679 C8.45266973,2.97375963 8.70946605,2.97375963 8.86785321,3.13214679 Z"
+                fill-rule="nonzero"
+              ></path>
+            </g>
+          </svg>
+        </span>
+      </div>
     </div>
-    <div class="devui-drop-icon-wrapper" [ngClass]="{ 'dropdown-show-clear': allowClear }">
+    <div class="devui-single-drop-icon-wrapper" *ngIf="!multiple" [ngClass]="{ 'dropdown-show-clear': allowClear }">
       <span class="devui-drop-icon" [ngClass]="{ 'devui-drop-icon-animation': showAnimation }">
         <svg
           width="1em"
@@ -77,43 +122,7 @@
         </svg>
       </span>
     </div>
-  </div>
-  <div class="devui-single-drop-icon-wrapper" *ngIf="!multiple" [ngClass]="{ 'dropdown-show-clear': allowClear }">
-    <span class="devui-drop-icon" [ngClass]="{ 'devui-drop-icon-animation': showAnimation }">
-      <svg
-        width="1em"
-        height="1em"
-        viewBox="0 0 16 16"
-        version="1.1"
-        xmlns="http://www.w3.org/2000/svg"
-        xmlns:xlink="http://www.w3.org/1999/xlink"
-      >
-        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-          <path
-            d="M12.1464466,6.85355339 L8.35355339,10.6464466 C8.15829124,10.8417088 7.84170876,10.8417088 7.64644661,10.6464466 L3.85355339,6.85355339 C3.65829124,6.65829124 3.65829124,6.34170876 3.85355339,6.14644661 C3.94732158,6.05267842 4.07449854,6 4.20710678,6 L11.7928932,6 C12.0690356,6 12.2928932,6.22385763 12.2928932,6.5 C12.2928932,6.63260824 12.2402148,6.7597852 12.1464466,6.85355339 Z"
-            fill-rule="nonzero"
-          ></path>
-        </g>
-      </svg>
-    </span>
-    <span class="devui-cascader-close-icon" (click)="clearTags()">
-      <svg
-        width="12px"
-        height="12px"
-        viewBox="0 0 12 12"
-        version="1.1"
-        xmlns="http://www.w3.org/2000/svg"
-        xmlns:xlink="http://www.w3.org/1999/xlink"
-      >
-        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-          <path
-            d="M8.86785321,3.13214679 C9.02624037,3.29053395 9.02624037,3.54733027 8.86785321,3.70571743 L6.573,6 L8.86785321,8.29428257 C9.02624037,8.45266973 9.02624037,8.70946605 8.86785321,8.86785321 C8.70946605,9.02624037 8.45266973,9.02624037 8.29428257,8.86785321 L6,6.573 L3.70571743,8.86785321 C3.54733027,9.02624037 3.29053395,9.02624037 3.13214679,8.86785321 C2.97375963,8.70946605 2.97375963,8.45266973 3.13214679,8.29428257 L5.427,6 L3.13214679,3.70571743 C2.97375963,3.54733027 2.97375963,3.29053395 3.13214679,3.13214679 C3.29053395,2.97375963 3.54733027,2.97375963 3.70571743,3.13214679 L6,5.427 L8.29428257,3.13214679 C8.45266973,2.97375963 8.70946605,2.97375963 8.86785321,3.13214679 Z"
-            fill-rule="nonzero"
-          ></path>
-        </g>
-      </svg>
-    </span>
-  </div>
+  </ng-template>
 
   <div dDropDownMenu class="devui-drop-menu-wrapper {{ dropdownPanelClass }}">
     <ng-container *ngIf="!showSearchPanel">
@@ -143,8 +152,7 @@
             [checkboxRelation]="checkboxRelation"
           ></d-cascader-li>
         </ng-container>
-
-        <span *ngIf="!optionList.length">{{ i18nCommonText.noData }}</span>
+        <div *ngIf="!optionList.length" class="devui-no-data-tip">{{ i18nCommonText.noData }}</div>
       </ul>
     </ng-container>
 
@@ -162,7 +170,7 @@
         >
           {{ item.label }}
         </li>
-        <span *ngIf="!searchResultList.length">{{ i18nCommonText.noData }}</span>
+        <div *ngIf="!searchResultList.length" class="devui-no-data-tip">{{ i18nCommonText.noData }}</div>
       </ul>
     </ng-container>
   </div>
@@ -178,38 +186,82 @@
   (toggleEvent)="onToggle($event)"
   [showAnimation]="showAnimation"
 >
-  <input
-    *ngIf="!multiple"
-    [placeholder]="placeholder"
-    type="text"
-    class="devui-form-control devui-select-input devui-input"
-    [ngClass]="{ 'devui-search-cascader': allowSearch }"
-    [readonly]="!allowSearch"
-    dDropDownToggle
-    [disabled]="disabled"
-    [ngModel]="showTextValue"
-    (ngModelChange)="valueChanges($event)"
-  />
-  <div class="devui-tags-input-wrapper" dDropDownToggle *ngIf="multiple">
-    <div class="devui-tags-input">
-      <d-tag
-        *ngFor="let item of multipleValueList; let index = index"
-        [tag]="item.label"
-        [deletable]="true"
-        (tagDelete)="deleteTag($event, item)"
-      ></d-tag>
-      <input
-        #innerInput
-        *ngIf="allowSearch"
-        dTextInput
-        class="inner-input"
-        [placeholder]="multipleValueList.length ? '' : placeholder"
-        [ngModel]="showTextValue"
-        (ngModelChange)="valueChanges($event)"
-      />
-      <span *ngIf="!multipleValueList.length && !allowSearch" class="devui-dropdown-placeholder">{{ placeholder }}</span>
+  <div dDropDownToggle (focus)="showSearchInput = true">
+    <ng-template
+      [ngTemplateOutlet]="hostTemplate || default"
+      [ngTemplateOutletContext]="{ value: showTextValue || multipleValueList }"
+    ></ng-template>
+  </div>
+  <ng-template #default>
+    <input
+      *ngIf="!multiple"
+      [placeholder]="placeholder"
+      type="text"
+      class="devui-form-control devui-select-input devui-input"
+      [ngClass]="{ 'devui-search-cascader': allowSearch }"
+      [readonly]="!allowSearch"
+      [disabled]="disabled"
+      [ngModel]="showTextValue"
+      (ngModelChange)="valueChanges($event)"
+    />
+    <div class="devui-tags-input-wrapper" *ngIf="multiple">
+      <div class="devui-tags-input">
+        <d-tag
+          *ngFor="let item of multipleValueList; let index = index"
+          [tag]="item.label"
+          [deletable]="true"
+          (tagDelete)="deleteTag($event, item)"
+        ></d-tag>
+        <input
+          #innerInput
+          (blur)="showSearchInput = false"
+          *ngIf="allowSearch && showSearchInput"
+          dTextInput
+          class="inner-input"
+          [placeholder]="multipleValueList.length ? '' : placeholder"
+          [ngModel]="showTextValue"
+          (ngModelChange)="valueChanges($event)"
+        />
+        <span *ngIf="!multipleValueList.length && !allowSearch" class="devui-dropdown-placeholder">{{ placeholder }}</span>
+      </div>
+      <div class="devui-drop-icon-wrapper" [ngClass]="{ 'dropdown-show-clear': allowClear }">
+        <span class="devui-drop-icon" [ngClass]="{ 'devui-drop-icon-animation': showAnimation }">
+          <svg
+            width="1em"
+            height="1em"
+            viewBox="0 0 16 16"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+          >
+            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+              <path
+                d="M12.1464466,6.85355339 L8.35355339,10.6464466 C8.15829124,10.8417088 7.84170876,10.8417088 7.64644661,10.6464466 L3.85355339,6.85355339 C3.65829124,6.65829124 3.65829124,6.34170876 3.85355339,6.14644661 C3.94732158,6.05267842 4.07449854,6 4.20710678,6 L11.7928932,6 C12.0690356,6 12.2928932,6.22385763 12.2928932,6.5 C12.2928932,6.63260824 12.2402148,6.7597852 12.1464466,6.85355339 Z"
+                fill-rule="nonzero"
+              ></path>
+            </g>
+          </svg>
+        </span>
+        <span class="devui-cascader-close-icon" (click)="clearTags()">
+          <svg
+            width="12px"
+            height="12px"
+            viewBox="0 0 12 12"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+          >
+            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+              <path
+                d="M8.86785321,3.13214679 C9.02624037,3.29053395 9.02624037,3.54733027 8.86785321,3.70571743 L6.573,6 L8.86785321,8.29428257 C9.02624037,8.45266973 9.02624037,8.70946605 8.86785321,8.86785321 C8.70946605,9.02624037 8.45266973,9.02624037 8.29428257,8.86785321 L6,6.573 L3.70571743,8.86785321 C3.54733027,9.02624037 3.29053395,9.02624037 3.13214679,8.86785321 C2.97375963,8.70946605 2.97375963,8.45266973 3.13214679,8.29428257 L5.427,6 L3.13214679,3.70571743 C2.97375963,3.54733027 2.97375963,3.29053395 3.13214679,3.13214679 C3.29053395,2.97375963 3.54733027,2.97375963 3.70571743,3.13214679 L6,5.427 L8.29428257,3.13214679 C8.45266973,2.97375963 8.70946605,2.97375963 8.86785321,3.13214679 Z"
+                fill-rule="nonzero"
+              ></path>
+            </g>
+          </svg>
+        </span>
+      </div>
     </div>
-    <div class="devui-drop-icon-wrapper" [ngClass]="{ 'dropdown-show-clear': allowClear }">
+    <div class="devui-single-drop-icon-wrapper" *ngIf="!multiple" [ngClass]="{ 'dropdown-show-clear': allowClear }">
       <span class="devui-drop-icon" [ngClass]="{ 'devui-drop-icon-animation': showAnimation }">
         <svg
           width="1em"
@@ -245,43 +297,8 @@
         </svg>
       </span>
     </div>
-  </div>
-  <div class="devui-single-drop-icon-wrapper" *ngIf="!multiple" [ngClass]="{ 'dropdown-show-clear': allowClear }">
-    <span class="devui-drop-icon" [ngClass]="{ 'devui-drop-icon-animation': showAnimation }">
-      <svg
-        width="1em"
-        height="1em"
-        viewBox="0 0 16 16"
-        version="1.1"
-        xmlns="http://www.w3.org/2000/svg"
-        xmlns:xlink="http://www.w3.org/1999/xlink"
-      >
-        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-          <path
-            d="M12.1464466,6.85355339 L8.35355339,10.6464466 C8.15829124,10.8417088 7.84170876,10.8417088 7.64644661,10.6464466 L3.85355339,6.85355339 C3.65829124,6.65829124 3.65829124,6.34170876 3.85355339,6.14644661 C3.94732158,6.05267842 4.07449854,6 4.20710678,6 L11.7928932,6 C12.0690356,6 12.2928932,6.22385763 12.2928932,6.5 C12.2928932,6.63260824 12.2402148,6.7597852 12.1464466,6.85355339 Z"
-            fill-rule="nonzero"
-          ></path>
-        </g>
-      </svg>
-    </span>
-    <span class="devui-cascader-close-icon" (click)="clearTags()">
-      <svg
-        width="12px"
-        height="12px"
-        viewBox="0 0 12 12"
-        version="1.1"
-        xmlns="http://www.w3.org/2000/svg"
-        xmlns:xlink="http://www.w3.org/1999/xlink"
-      >
-        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-          <path
-            d="M8.86785321,3.13214679 C9.02624037,3.29053395 9.02624037,3.54733027 8.86785321,3.70571743 L6.573,6 L8.86785321,8.29428257 C9.02624037,8.45266973 9.02624037,8.70946605 8.86785321,8.86785321 C8.70946605,9.02624037 8.45266973,9.02624037 8.29428257,8.86785321 L6,6.573 L3.70571743,8.86785321 C3.54733027,9.02624037 3.29053395,9.02624037 3.13214679,8.86785321 C2.97375963,8.70946605 2.97375963,8.45266973 3.13214679,8.29428257 L5.427,6 L3.13214679,3.70571743 C2.97375963,3.54733027 2.97375963,3.29053395 3.13214679,3.13214679 C3.29053395,2.97375963 3.54733027,2.97375963 3.70571743,3.13214679 L6,5.427 L8.29428257,3.13214679 C8.45266973,2.97375963 8.70946605,2.97375963 8.86785321,3.13214679 Z"
-            fill-rule="nonzero"
-          ></path>
-        </g>
-      </svg>
-    </span>
-  </div>
+  </ng-template>
+
   <div dDropDownMenu class="devui-drop-menu-wrapper {{ dropdownPanelClass }}">
     <ng-container *ngIf="!showSearchPanel">
       <ul
@@ -310,8 +327,7 @@
             [checkboxRelation]="checkboxRelation"
           ></d-cascader-li>
         </ng-container>
-
-        <span *ngIf="!optionList.length">{{ i18nCommonText.noData }}</span>
+        <div *ngIf="!optionList.length" class="devui-no-data-tip">{{ i18nCommonText.noData }}</div>
       </ul>
     </ng-container>
 
@@ -329,7 +345,7 @@
         >
           {{ item.label }}
         </li>
-        <span *ngIf="!searchResultList.length">{{ i18nCommonText.noData }}</span>
+        <div *ngIf="!searchResultList.length" class="devui-no-data-tip">{{ i18nCommonText.noData }}</div>
       </ul>
     </ng-container>
   </div>

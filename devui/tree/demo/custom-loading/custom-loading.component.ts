@@ -1,6 +1,121 @@
 import { Component, ViewChild } from '@angular/core';
 import { ITreeItem, TreeComponent, TreeNode } from 'ng-devui/tree';
 import { customLoadingSvg } from './custom-loading-svg';
+
+export const originTreeData = [
+  {
+    title: 'parent node 1',
+    open: true,
+    disabled: true,
+    items: [
+      {
+        title: 'parent node 11',
+        items: [
+          {
+            title: 'leaf node 111'
+          },
+          {
+            title: 'leaf node 112'
+          },
+          {
+            title: 'leaf node 113'
+          },
+          {
+            title: 'leaf node 114'
+          }
+        ]
+      },
+      {
+        title: 'parent node 12',
+        disableToggle: true,
+        items: [
+          {
+            title: 'leaf node 121'
+          },
+          {
+            title: 'leaf node 122'
+          },
+          {
+            title: 'leaf node 123'
+          },
+          {
+            title: 'leaf node 124'
+          }
+        ]
+      },
+      {
+        title: 'parent node 13 - without children - dynamic loading',
+        isParent: true
+      }
+    ]
+  },
+  {
+    title: 'parent node 2',
+    items: [
+      {
+        title: 'parent node 21',
+        open: true,
+        items: [
+          {
+            title: 'leaf node 211'
+          },
+          {
+            title: 'leaf node 212'
+          },
+          {
+            title: 'leaf node 213'
+          },
+          {
+            title: 'leaf node 214'
+          }
+        ]
+      },
+      {
+        title: 'parent node 22',
+        items: [
+          {
+            title: 'leaf node 221'
+          },
+          {
+            title: 'leaf node 222'
+          },
+          {
+            title: 'leaf node 223'
+          },
+          {
+            title: 'leaf node 224'
+          }
+        ]
+      },
+      {
+        title: 'parent node 23',
+        items: [
+          {
+            title: 'leaf node 231'
+          },
+          {
+            title: 'leaf node 232'
+          },
+          {
+            title: 'leaf node 233'
+          },
+          {
+            title: 'leaf node 234'
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'dynamicNode',
+    title: 'parent node 3 - without children - dynamic loading',
+    isParent: true,
+    data: {
+      id: 'newChildNode',
+      name: 'new child node'
+    }
+  }
+];
 @Component({
   selector: 'd-custom-loading',
   templateUrl: './custom-loading.component.html'
@@ -12,131 +127,21 @@ export class CustomLoadingComponent {
     left: '30px'
   };
   customLoadingSvg = customLoadingSvg;
-  data1 = [
-    {
-      title: 'parent node 1 - expanded',
-      open: true,
-      disabled: true,
-      items: [
-        {
-          title: 'parent node 11 - folded',
-          items: [
-            {
-              title: 'leaf node 111'
-            },
-            {
-              title: 'leaf node 112'
-            },
-            {
-              title: 'leaf node 113'
-            },
-            {
-              title: 'leaf node 114'
-            }
-          ]
-        },
-        {
-          title: 'parent node 12 - folded',
-          disableToggle: true,
-          items: [
-            {
-              title: 'leaf node 121'
-            },
-            {
-              title: 'leaf node 122'
-            },
-            {
-              title: 'leaf node 123'
-            },
-            {
-              title: 'leaf node 124'
-            }
-          ]
-        },
-        {
-          title: 'parent node 13 - without children - dynamic loading',
-          isParent: true
-        }
-      ]
-    },
-    {
-      title: 'parent node 2 - folded',
-      items: [
-        {
-          title: 'parent node 21 - expanded',
-          open: true,
-          items: [
-            {
-              title: 'leaf node 211'
-            },
-            {
-              title: 'leaf node 212'
-            },
-            {
-              title: 'leaf node 213'
-            },
-            {
-              title: 'leaf node 214'
-            }
-          ]
-        },
-        {
-          title: 'parent node 22 - folded',
-          items: [
-            {
-              title: 'leaf node 221'
-            },
-            {
-              title: 'leaf node 222'
-            },
-            {
-              title: 'leaf node 223'
-            },
-            {
-              title: 'leaf node 224'
-            }
-          ]
-        },
-        {
-          title: 'parent node 23 - folded',
-          items: [
-            {
-              title: 'leaf node 231'
-            },
-            {
-              title: 'leaf node 232'
-            },
-            {
-              title: 'leaf node 233'
-            },
-            {
-              title: 'leaf node 234'
-            }
-          ]
-        }
-      ]
-    },
-    {
-      id: 'dynamicNode',
-      title: 'parent node 3 - without children - dynamic loading',
-      isParent: true,
-      data: {
-        id: 'newChildNode',
-        name: 'new child node'
-      }
-    }
-  ];
-
-  onNodeSelected(treeNode: TreeNode) {
-    console.log('selected: ', treeNode);
-  }
+  data = originTreeData;
+  isCustomLoadingTmpl = false;
 
   onNodeToggled(treeNode: TreeNode) {
+    console.log('toggled ', treeNode);
     this.loadChildren(treeNode);
   }
 
+  changeLoadingTemplate() {
+    this.isCustomLoadingTmpl = !this.isCustomLoadingTmpl;
+    this.data = [...originTreeData];
+  }
+
   changeTree() {
-    this.data1 = [{
+    this.data = [{
       id: 'dynamicNode2',
       title: 'parent node 4 - dynamic loading',
       isParent: true,

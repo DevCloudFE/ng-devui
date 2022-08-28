@@ -32,7 +32,7 @@
     [backdrop]="true"
   >
     <ul
-      class="devui-list-unstyled scroll-height"
+      class="devui-list-unstyled devui-scrollbar scroll-height"
       [style.maxHeight]="maxHeight + 'px'"
       dLazyLoad
       [enableLazyLoad]="enableLazyLoad"
@@ -66,15 +66,13 @@
           >
           </ng-template>
         </li>
-        <li class="devui-no-result-template" *ngIf="!source?.length && noResultItemTemplate != null">
+        <div class="devui-no-data-tip" *ngIf="!source?.length && noResultItemTemplate">
           <ng-template [ngTemplateOutlet]="noResultItemTemplate" [ngTemplateOutletContext]="{ term: term, source: source }"> </ng-template>
-        </li>
+        </div>
       </ng-container>
-      <ng-container *ngIf="isSearching && searchingTemplate">
-        <li class="devui-is-searching-template">
-          <ng-template [ngTemplateOutlet]="searchingTemplate" [ngTemplateOutletContext]="{ term: term }"> </ng-template>
-        </li>
-      </ng-container>
+      <div class="devui-no-data-tip" *ngIf="isSearching && searchingTemplate">
+        <ng-template [ngTemplateOutlet]="searchingTemplate" [ngTemplateOutletContext]="{ term: term }"> </ng-template>
+      </div>
     </ul>
   </div>
 </ng-template>

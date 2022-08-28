@@ -8,7 +8,7 @@ import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
 import { ToggleModule } from 'ng-devui/toggle';
 import { TranslateModule } from '@ngx-translate/core';
-import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
+import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
 import { AccordionDemoComponent } from './accordion-demo.component';
 import { BasicComponent } from './basic/basic.component';
 import { ChangeKeyComponent } from './change-key/change-key.component';
@@ -51,6 +51,6 @@ import { TemplateComponent } from './template/template.component';
     ChangeKeyComponent,
   ],
   providers: [],
-  
+
 })
 export class AccordionDemoModule {}

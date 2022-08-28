@@ -1,0 +1,17 @@
+<section>
+  <d-tabs type="tabs" size="xs" [(activeTab)]="tabActiveId" (activeTabChange)="activeTabChange($event)">
+    <d-tab *ngFor="let item of tabItems" [id]="item.id" [title]="item.title"></d-tab>
+  </d-tabs>
+  <br />
+  <d-tabs type="pills" size="sm" [(activeTab)]="tabActiveId" (activeTabChange)="activeTabChange($event)">
+    <d-tab *ngFor="let item of tabItems" [id]="item.id" [title]="item.title"></d-tab>
+  </d-tabs>
+  <br />
+  <d-tabs type="slider" size="md" [(activeTab)]="tabActiveId" (activeTabChange)="activeTabChange($event)">
+    <d-tab *ngFor="let item of tabItems" [id]="item.id" [title]="item.title"></d-tab>
+  </d-tabs>
+  <br />
+  <d-tabs type="wrapped" size="lg" [(activeTab)]="tabActiveId" (activeTabChange)="activeTabChange($event)">
+    <d-tab *ngFor="let item of tabItems" [id]="item.id" [title]="item.title"></d-tab>
+  </d-tabs>
+</section>

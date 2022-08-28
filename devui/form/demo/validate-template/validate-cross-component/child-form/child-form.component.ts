@@ -4,7 +4,7 @@ import { ControlContainer, NgForm } from '@angular/forms';
 export const formInjectFactory = (form: NgForm) => form;
 
 @Component({
-  selector: 'child-form-group',
+  selector: 'd-child-form-group',
   templateUrl: './child-form.component.html',
   viewProviders: [ { provide: ControlContainer, useExisting: NgForm }]  // Inject the parent form.
   /* If you are not sure whether the upper-layer NgForm dependency exists,

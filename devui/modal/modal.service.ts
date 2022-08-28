@@ -6,7 +6,7 @@ import {
   Renderer2, RendererFactory2
 } from '@angular/core';
 import { OverlayContainerRef } from 'ng-devui/overlay-container';
-import { DevConfigService } from 'ng-devui/utils/globalConfig';
+import { DevConfigService } from 'ng-devui/utils';
 import { assign, isUndefined } from 'lodash-es';
 import { ModalComponent } from './modal.component';
 import { IModalOptions } from './modal.types';
@@ -34,6 +34,9 @@ export class ModalService {
     data,
     handler,
     showAnimation,
+    /**
+     * @deprecated
+     */
     showAnimate,
     backdropCloseable,
     componentFactoryResolver,
@@ -62,13 +65,14 @@ export class ModalService {
       showAnimateValue = apiConfig;
     }
 
-    if (showAnimation !== undefined) {
-
-    } else if (showAnimate !== undefined) {
-      showAnimation = showAnimate ;
-    } else {
-      showAnimation = showAnimateValue;
+    if (showAnimation === undefined) {
+      if (showAnimate !== undefined) {
+        showAnimation = showAnimate;
+      } else {
+        showAnimation = showAnimateValue;
+      }
     }
+
     assign(modalRef.instance, {
       id,
       width,
@@ -102,7 +106,7 @@ export class ModalService {
         this.document.body.scrollTop = modalRef.instance.scrollTop;
         this.document.documentElement.scrollLeft = modalRef.instance.scrollLeft;
         this.document.body.scrollLeft = modalRef.instance.scrollLeft;
-    }
+      }
       if (onClose) {
         onClose();
       }

@@ -2,9 +2,12 @@
 
 .input-group {
   display: flex;
+  height: auto;
 
   input {
     width: 200px;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
   }
 
   button {
@@ -15,6 +18,6 @@
     outline: none !important;
     border: 1px solid $devui-form-control-line;
     border-left: none;
-    height: 28px;
+    height: inherit;
   }
 }

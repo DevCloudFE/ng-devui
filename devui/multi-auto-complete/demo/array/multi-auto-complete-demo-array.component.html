@@ -1,4 +1,4 @@
-<d-toast [value]="msgs"></d-toast>
+<d-toast [value]="messages"></d-toast>
 <div class="control-container">
   <d-multi-auto-complete
     [(ngModel)]="multiItems2"
@@ -6,21 +6,20 @@
     [ngModelOptions]="{ updateOn: 'blur' }"
     [dValidateRules]="[{ minlength: 3 }]"
     (autoSubmit)="autoSubmit($event)"
-    name="multiple-auto"
   >
   </d-multi-auto-complete>
   <div class="button-group">
     <d-button
       icon="icon-close"
-      bsStyle="text-dark"
       title="Clear"
+      bsStyle="common"
       (btnClick)="clear()"
       [disabled]="!(multiItems2 && multiItems2.length)"
     ></d-button>
     <d-button
       icon="icon-copy"
-      bsStyle="text-dark"
       title="Copy"
+      bsStyle="common"
       (btnClick)="copy()"
       [disabled]="!(multiItems2 && multiItems2.length)"
     ></d-button>

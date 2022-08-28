@@ -1,49 +1,9 @@
 <section>
   <div class="btn-group" dDropDown (toggleEvent)="onToggle($event)">
-    <a dDropDownToggle class="devui-dropdown-default devui-dropdown-origin">
-      More
-      <span class="icon-select-arrow"></span>
-    </a>
-
+    <d-icon dDropDownToggle [icon]="'icon-select-arrow'" [operable]="true" [rotate]="rotateDegrees">
+      <span iconPrefix>more</span>
+    </d-icon>
     <ul dDropDownMenu class="devui-dropdown-menu" role="menu">
-      <li role="menuitem">
-        <input type="text" class="devui-input devui-input-sm devui-search-in-dropdown" placeholder="input box" />
-        <div class="icon-in-search">
-          <i class="icon icon-search"></i>
-        </div>
-      </li>
-      <li class="disabled" role="menuitem">
-        <a class="devui-dropdown-item disabled">Disabled Option</a>
-      </li>
-      <li role="menuitem">
-        <a class="devui-dropdown-item">New</a>
-      </li>
-      <li role="menuitem">
-        <a class="devui-dropdown-item">Delete</a>
-      </li>
-      <li role="menuitem">
-        <a class="devui-dropdown-item">Item 1</a>
-      </li>
-      <li class="disabled" role="menuitem">
-        <a class="devui-dropdown-item disabled">Item 2</a>
-      </li>
-      <li role="menuitem">
-        <a class="devui-dropdown-item">Item 3</a>
-      </li>
-      <li role="menuitem">
-        <a class="devui-dropdown-item">Item 4</a>
-      </li>
-    </ul>
-  </div>
-</section>
-<section>
-  <div class="btn-group" dDropDown (toggleEvent)="onToggle($event)">
-    <a dDropDownToggle class="devui-dropdown-no-border devui-dropdown-origin">
-      More
-      <span class="icon-select-arrow"></span>
-    </a>
-
-    <ul dDropDownMenu class="devui-dropdown-menu devui-scrollbar" role="menu">
       <li role="menuitem">
         <input type="text" class="devui-input devui-input-sm devui-search-in-dropdown" placeholder="input box" />
         <div class="icon-in-search">
@@ -77,11 +37,9 @@
 <section>
   <h5>Attached to Body to avoid being blocked by container with scrollbar</h5>
   <div class="btn-group" dDropDown appendToBody (toggleEvent)="onToggle($event)">
-    <a dDropDownToggle class="devui-dropdown-default devui-dropdown-origin">
-      More
-      <span class="icon-select-arrow"></span>
-    </a>
-
+    <d-icon dDropDownToggle class="devui-dropdown-default devui-dropdown-origin" [icon]="'icon-select-arrow'" [rotate]="rotateDegrees">
+      <span iconPrefix>more</span>
+    </d-icon>
     <ul dDropDownMenu class="devui-dropdown-menu devui-scrollbar" role="menu">
       <li role="menuitem">
         <input type="text" class="devui-input devui-input-sm devui-search-in-dropdown" placeholder="input box" />

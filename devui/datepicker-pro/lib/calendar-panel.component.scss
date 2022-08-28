@@ -230,6 +230,30 @@
           border-color: transparent;
         }
       }
+
+      &.devui-table-date-marked span {
+        position: relative;
+
+        &::after {
+          content: '';
+          display: block;
+          position: absolute;
+          right: 9px;
+          bottom: 2px;
+          width: 3px;
+          height: 3px;
+          border-radius: 50%;
+          background-color: $devui-list-item-active-bg;
+        }
+      }
+
+      &.devui-table-date-marked.devui-table-date-selected span::after {
+        background-color: $devui-list-item-active-text;
+      }
+
+      &.devui-table-date-suggested {
+        border-bottom: 1px solid $devui-link-light-active;
+      }
     }
 
     &.devui-single-date .devui-table-date {

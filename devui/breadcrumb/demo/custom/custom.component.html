@@ -1,3 +1,4 @@
+<h4>Use Custom Template</h4>
 <d-breadcrumb [separatorIcon]="separatorIcon">
   <d-breadcrumb-item>
     <a routerLink="/components/zh-cn/get-start">DevUI</a>
@@ -7,7 +8,7 @@
   </d-breadcrumb-item>
 </d-breadcrumb>
 <ng-template #menuTpl>
-  <div class="breadcrumb-dropdown-menu">
+  <ul class="breadcrumb-dropdown-menu">
     <li>
       <span class="icon-arrow-right"></span>
       <a href="/components/zh-cn/anchor/demo">Anchor</a>
@@ -16,8 +17,29 @@
       <span class="icon-arrow-right"></span>
       <a href="/components/zh-cn/button/demo">Button</a>
     </li>
-  </div>
+  </ul>
 </ng-template>
 <ng-template #separatorIcon>
   <span class="icon-arrow-right"></span>
 </ng-template>
+
+<h4>Use Custom Dropdown Behavior</h4>
+<d-breadcrumb>
+  <ng-container *ngFor="let item of breadData">
+    <d-breadcrumb-item dDropDown #dropdownInstance="d-dropdown" [disabled]="!item.showMenu">
+      <a [href]="item.link" dDropDownToggle>
+        <span>{{ item.label }}</span>
+        <i
+          *ngIf="item.showMenu"
+          class="icon icon-select-arrow devui-icon-rotate"
+          [style.transform]="dropdownInstance?.isOpen ? 'rotate(180deg)' : 'rotate(0deg)'"
+        ></i>
+      </a>
+      <ul dDropDownMenu>
+        <li *ngFor="let option of item.menuList">
+          <a [href]="option.link">{{ option.name }}</a>
+        </li>
+      </ul>
+    </d-breadcrumb-item>
+  </ng-container>
+</d-breadcrumb>

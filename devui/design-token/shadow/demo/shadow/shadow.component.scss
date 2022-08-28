@@ -5,3 +5,22 @@
   width: 100px;
   box-shadow: $devui-shadow-length-fullscreen-overlay $devui-light-shadow;
 }
+
+code {
+  display: block;
+  margin: 20px 0;
+}
+
+.color-name {
+  display: inline-block;
+  width: 120px;
+  vertical-align: middle;
+}
+
+.color-cube {
+  height: 20px;
+  width: 20px;
+  display: inline-block;
+  vertical-align: middle;
+  box-shadow: $devui-shadow-length-base $devui-light-shadow;
+}

@@ -35,9 +35,9 @@
         </span>
         <div *ngIf="dSingleUploadView.fileUploaders[0]?.status === UploadStatus.uploading" class="icon devui-upload-progress">
           <d-progress
-            [isCircle]="true"
+            [type]="'circle'"
             [percentage]="dSingleUploadView.fileUploaders[0].percentage"
-            [barbgcolor]="'#50D4AB'"
+            [strokeColor]="'#50D4AB'"
             [strokeWidth]="8"
             [showContent]="false"
           >

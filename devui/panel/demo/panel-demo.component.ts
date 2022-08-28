@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
+import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -10,16 +10,19 @@ import { Subscription } from 'rxjs';
 export class PanelDemoComponent implements OnInit, OnDestroy {
   basicSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('./basic/basic.component.html?raw') },
+    { title: 'SCSS', language: 'css', code: require('./basic/basic.component.scss?raw') },
     { title: 'TS', language: 'typescript', code: require('./basic/basic.component.ts?raw') },
   ];
 
   typeSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('./type/type.component.html?raw') },
+    { title: 'SCSS', language: 'css', code: require('./type/type.component.scss?raw') },
     { title: 'TS', language: 'typescript', code: require('./type/type.component.ts?raw') },
   ];
 
   conditionChangeSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('./condition-change/condition-change.component.html?raw') },
+    { title: 'SCSS', language: 'css', code: require('./condition-change/condition-change.component.scss?raw') },
     { title: 'TS', language: 'typescript', code: require('./condition-change/condition-change.component.ts?raw') },
   ];
 

@@ -119,7 +119,6 @@ describe('tree', () => {
     });
 
     it('should click apply selectNode function', () => {
-      // component.basicTree.selectNode = jasmine.createSpy('select node function');
       const treeEl: HTMLElement = debugEl.query(By.css('.devui-tree-node__content')).nativeElement;
 
       treeEl.dispatchEvent(new Event('click'));
@@ -202,7 +201,7 @@ describe('tree', () => {
     ];
     fixture.detectChanges();
     const newNodeEl: HTMLElement = debugEl
-    .query(By.css('d-tree d-tree-nodes .devui-tree-node__content .devui-tree-node__title')).nativeElement;
+      .query(By.css('d-tree d-tree-nodes .devui-tree-node__content .devui-tree-node__title')).nativeElement;
     expect(newNodeEl.textContent).toEqual('New Node');
 
   });

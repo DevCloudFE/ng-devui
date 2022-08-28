@@ -1,8 +1,19 @@
 import {
-  AfterViewInit, ChangeDetectionStrategy, Component,
-  ElementRef, EventEmitter, HostBinding, Input, OnChanges, OnDestroy, Optional, Output, SimpleChanges
+  Component,
+  ElementRef,
+  Input,
+  ChangeDetectionStrategy,
+  HostBinding,
+  EventEmitter,
+  Output,
+  OnChanges,
+  SimpleChanges,
+  Optional,
+  AfterViewInit,
+  OnDestroy,
 } from '@angular/core';
 import { GridStackNode, GridStackWidget } from 'gridstack';
+import { GridStackNodeCompatible } from '../grid-stack.config';
 import { GridStackService } from '../grid-stack.service';
 
 export type DashboardWidget = GridStackWidget & {
@@ -20,53 +31,66 @@ export type DashboardWidget = GridStackWidget & {
 })
 export class DashboardWidgetComponent implements GridStackNode, OnChanges, AfterViewInit, OnDestroy {
   static autoNumberedId = 0;
-  @HostBinding('attr.data-gs-x')
-  @Input() x: number;
+  @HostBinding('attr.gs-x')
+  @Input()
+  x: number;
   @Output() xChange = new EventEmitter<number>();
 
-  @HostBinding('attr.data-gs-y')
-  @Input() y: number;
+  @HostBinding('attr.gs-y')
+  @Input()
+  y: number;
   @Output() yChange = new EventEmitter<number>();
 
-  @HostBinding('attr.data-gs-width')
-  @Input() width: number;
+  @HostBinding('attr.gs-w')
+  @Input()
+  width: number;
   @Output() widthChange = new EventEmitter<number>();
 
-  @HostBinding('attr.data-gs-height')
-  @Input() height: number;
+  @HostBinding('attr.gs-h')
+  @Input()
+  height: number;
   @Output() heightChange = new EventEmitter<number>();
 
-  @HostBinding('attr.data-gs-id')
-  @Input() id: string;
+  @HostBinding('attr.gs-id')
+  @Input()
+  id: string;
 
-  @HostBinding('attr.data-gs-max-width')
-  @Input() maxWidth: number;
+  @HostBinding('attr.gs-max-w')
+  @Input()
+  maxWidth: number;
 
-  @HostBinding('attr.data-gs-max-height')
-  @Input() maxHeight: number;
+  @HostBinding('attr.gs-max-h')
+  @Input()
+  maxHeight: number;
 
-  @HostBinding('attr.data-gs-min-width')
-  @Input() minWidth: number;
+  @HostBinding('attr.gs-min-w')
+  @Input()
+  minWidth: number;
 
-  @HostBinding('attr.data-gs-min-height')
-  @Input() minHeight: number;
+  @HostBinding('attr.gs-min-h')
+  @Input()
+  minHeight: number;
 
-  @HostBinding('attr.data-gs-no-resize')
-  @Input() noResize: boolean;
+  @HostBinding('attr.gs-no-resize')
+  @Input()
+  noResize: boolean;
 
-  @HostBinding('attr.data-gs-no-move')
-  @Input() noMove: boolean;
+  @HostBinding('attr.gs-no-move')
+  @Input()
+  noMove: boolean;
 
-  @HostBinding('attr.data-gs-auto-position')
-  @Input() autoPosition: boolean; // 仅初始化有效，默认为false
+  @HostBinding('attr.gs-auto-position')
+  @Input()
+  autoPosition: boolean; // 仅初始化有效，默认为false
 
-  @HostBinding('attr.data-gs-locked')
-  @Input() locked: boolean;
+  @HostBinding('attr.gs-locked')
+  @Input()
+  locked: boolean;
 
   @Input() widgetData;
 
   @Output() widgetInit = new EventEmitter(true);
-  @Output() widgetResize = new EventEmitter<{width: number, height: number} | null>(true);
+  @Output() widgetResize = new EventEmitter<{ width: number; height: number } | null>(true);
   @Output() widgetDestroy = new EventEmitter();
 
   @HostBinding('class.grid-stack-item')
@@ -79,7 +103,7 @@ export class DashboardWidgetComponent implements GridStackNode, OnChanges, After
   ngOnChanges(changes: SimpleChanges) {
     if (this.gridStackService && this.gridStackService.gridStack) {
       if (changes.x || changes.y || changes.width || changes.height) {
-        this.gridStackService.gridStack.update(this.elem.nativeElement, this.x, this.y, this.width, this.height);
+        this.gridStackService.gridStack.update(this.elem.nativeElement, { x: this.x, y: this.y, w: this.width, h: this.height });
       }
       if (changes.noResize) {
         this.gridStackService.gridStack.resizable(this.elem.nativeElement, !this.noResize);
@@ -88,19 +112,19 @@ export class DashboardWidgetComponent implements GridStackNode, OnChanges, After
         this.gridStackService.gridStack.movable(this.elem.nativeElement, !this.noMove);
       }
       if (changes.locked) {
-        this.gridStackService.gridStack.locked(this.elem.nativeElement, !!this.locked);
+        this.gridStackService.gridStack.update(this.elem.nativeElement, { locked: !!this.locked });
       }
       if (changes.maxWidth) {
-        this.gridStackService.gridStack.maxWidth(this.elem.nativeElement, this.maxWidth);
+        this.gridStackService.gridStack.update(this.elem.nativeElement, { maxW: this.maxWidth });
       }
       if (changes.maxHeight) {
-        this.gridStackService.gridStack.maxHeight(this.elem.nativeElement, this.maxHeight);
+        this.gridStackService.gridStack.update(this.elem.nativeElement, { maxH: this.maxHeight });
       }
       if (changes.minWidth) {
-        this.gridStackService.gridStack.minWidth(this.elem.nativeElement, this.minWidth);
+        this.gridStackService.gridStack.update(this.elem.nativeElement, { minW: this.minWidth });
       }
       if (changes.minHeight) {
-        this.gridStackService.gridStack.minHeight(this.elem.nativeElement, this.minHeight);
+        this.gridStackService.gridStack.update(this.elem.nativeElement, { minH: this.minHeight });
       }
     }
   }
@@ -112,10 +136,10 @@ export class DashboardWidgetComponent implements GridStackNode, OnChanges, After
     this.widgetDestroy.emit();
   }
 
-  handleChange({ x, y, width, height }: GridStackNode) {
-    const change = { x, y, width, height };
-    const beforeChange = {width: this.width, height: this.height};
-    Object.keys(change).forEach(key => {
+  handleChange({ x, y, width, height }: GridStackNodeCompatible) {
+    const change = { x, y, width, height};
+    const beforeChange = { width: this.width, height: this.height };
+    Object.keys(change).forEach((key) => {
       if (change[key] !== this[key]) {
         this[key] = change[key];
         const eventEmitter = this[key + 'Change'] as EventEmitter<number>;
@@ -125,7 +149,7 @@ export class DashboardWidgetComponent implements GridStackNode, OnChanges, After
       }
     });
     if (change.width !== beforeChange.width || change.height !== beforeChange.height) {
-      this.widgetResize.emit({width: width, height: height});
+      this.widgetResize.emit({ width, height});
     }
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { DevuiSourceData } from 'ng-devui/shared/devui-codebox/devui-source-data';
+import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 @Component({
   selector: 'd-demo-tags',
@@ -16,6 +16,11 @@ export class TagsDemoComponent implements OnDestroy, OnInit {
     { title: 'HTML', language: 'xml', code: require('./custom/custom.component.html?raw') },
     { title: 'TS', language: 'typescript', code: require('./custom/custom.component.ts?raw') },
     { title: 'SCSS', language: 'css', code: require('./custom/custom.component.scss?raw') },
+  ];
+
+  hideSource: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'xml', code: require('./hide/hide.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./hide/hide.component.ts?raw') },
   ];
 
   navItems = [];
@@ -41,6 +46,7 @@ export class TagsDemoComponent implements OnDestroy, OnInit {
     this.navItems = [
       { dAnchorLink: 'single-tag', value: values['single-tag'] },
       { dAnchorLink: 'tags-group', value: values['tags-group'] },
+      { dAnchorLink: 'hide-tags', value: values['hide-tags'] },
     ];
   }
 

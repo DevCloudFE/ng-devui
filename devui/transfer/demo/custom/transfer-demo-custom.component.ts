@@ -147,9 +147,9 @@ export class TransferDemoCustomComponent {
     const checkedRows = this.sourceTable.getCheckedRows();
     const ids = checkedRows.map(item => item.id);
     this.originSource = this.originSource.filter(item => {
-      return !ids.find(id => id === item.id);
+      return (!ids.find(id => id === item.id));
     });
-    this.originSource.forEach(item => item.$checked = false);
+    this.originSource.forEach(item => {item.$checked = false;});
     this.basicDataSource = JSON.parse(JSON.stringify(this.originSource));
     this.targetSource = this.basicTargetSource.concat(checkedRows);
     this.basicTargetSource = JSON.parse(JSON.stringify(this.targetSource));
@@ -166,7 +166,7 @@ export class TransferDemoCustomComponent {
     this.targetSource = this.targetSource.filter(item => {
       return !ids.find(id => id === item.id);
     });
-    this.targetSource.forEach(item => item.$checked = false);
+    this.targetSource.forEach(item => {item.$checked = false;});
     this.basicTargetSource = JSON.parse(JSON.stringify(this.targetSource));
     this.originSource = this.basicDataSource.concat(checkedRows);
     this.basicDataSource = JSON.parse(JSON.stringify(this.originSource));

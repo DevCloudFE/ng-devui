@@ -33,6 +33,7 @@
             labelization: multipleSelect2DemoConfig.labelization
           }"
           [ngModel]="formData.multipleSelectValue"
+          [size]="'sm'"
         ></d-select>
       </d-form-control>
     </d-form-item>
@@ -53,7 +54,7 @@
     <d-form-item>
       <d-form-label>Radio</d-form-label>
       <d-form-control>
-        <d-radio-group name="schedule" [cssStyle]="'row'" [(ngModel)]="formData.radioValue">
+        <d-radio-group name="schedule" [direction]="'row'" [(ngModel)]="formData.radioValue">
           <d-radio *ngFor="let option of radioOptions" [name]="'schedule'" [value]="option.id">
             {{ option.label }}
           </d-radio>

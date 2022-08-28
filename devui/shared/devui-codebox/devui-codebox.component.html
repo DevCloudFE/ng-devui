@@ -8,8 +8,52 @@
   <section class="devui-code-box-meta markdown">
     <span
       dTooltip
+      [content]="'codebox.stackblitz' | translate"
+      [position]="'top'"
+      alt="Edit On StackBlitz"
+      class="code-link"
+      style="left: calc(15px + 42px)"
+      (click)="openOnlineIDE()"
+    >
+      <svg
+        width="16px"
+        height="16px"
+        viewBox="0 0 1024 1024"
+        version="1.1"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+      >
+        <path
+          d="M848 359.3H627.7L825.8 109c4.1-5.3.4-13-6.3-13H436c-2.8 0-5.5 1.5-6.9 4L170 547.5c-3.1 5.3.7 12 6.9 12h174.4l-89.4 357.6c-1.9 7.8 7.5 13.3 13.3 7.7L853.5 373c5.2-4.9 1.7-13.7-5.5-13.7z"
+        ></path>
+      </svg>
+    </span>
+    <span
+      dTooltip
+      [content]="'codebox.codesandbox' | translate"
+      [position]="'top'"
+      alt="Edit On CodeSandbox"
+      class="code-link"
+      style="left: calc(15px + 80px)"
+      (click)="openOnlineIDE('CodeSandbox')"
+    >
+      <svg
+        width="16px"
+        height="16px"
+        viewBox="0 0 1024 1024"
+        version="1.1"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+      >
+        <path
+          d="M709.6 210l.4-.2h.2L512 96 313.9 209.8h-.2l.7.3L151.5 304v416L512 928l360.5-208V304l-162.9-94zM482.7 843.6L339.6 761V621.4L210 547.8V372.9l272.7 157.3v313.4zM238.2 321.5l134.7-77.8 138.9 79.7 139.1-79.9 135.2 78-273.9 158-274-158zM814 548.3l-128.8 73.1v139.1l-143.9 83V530.4L814 373.1v175.2z"
+        ></path>
+      </svg>
+    </span>
+    <span
+      dTooltip
       [content]="expanded ? ('codebox.hideCode' | translate) : ('codebox.showCode' | translate)"
-      [position]="'bottom'"
+      [position]="'top'"
       alt="expand code"
       class="collapse"
       (click)="toggleCode()"
@@ -24,7 +68,6 @@
       >
         <path
           d="M1003.46892,474.447037 L750.118678,246.329458 C730.418156,228.591027 700.067888,230.181618 682.329458,249.88214 L682.329458,249.88214 L682.329458,249.88214 C664.591027,269.582663 666.181618,299.932931 685.88214,317.671361 L902.31217,512.545835 L686.384104,706.968338 C666.683581,724.706768 665.092991,755.057036 682.831421,774.757559 C700.569852,794.458082 730.92012,796.048672 750.620642,778.310241 L1006.26246,548.129313 C1025.96298,530.390883 1027.55357,500.040615 1009.81514,480.340092 C1007.84473,478.151722 1005.71869,476.186813 1003.46892,474.447037 Z M120.832433,512.545835 L337.262462,317.671361 C356.962985,299.932931 358.553575,269.582663 340.815145,249.88214 L340.815145,249.88214 L340.815145,249.88214 C323.076714,230.181618 292.726447,228.591027 273.025924,246.329458 L19.6756857,474.447037 C17.4259125,476.186813 15.2998752,478.151722 13.3294577,480.340092 L13.3294577,480.340092 L13.3294577,480.340092 C-4.40897251,500.040615 -2.81838236,530.390883 16.8821402,548.129313 L272.52396,778.310241 C292.224483,796.048672 322.574751,794.458082 340.313181,774.757559 C358.051611,755.057036 356.461021,724.706768 336.760498,706.968338 L120.832433,512.545835 Z"
-          id="Combined-Shape"
         ></path>
       </svg>
     </span>
@@ -33,55 +76,53 @@
     <div style="padding: 30px 0">
       <d-tabs [(activeTab)]="codeTabID">
         <d-tab *ngFor="let source of sourceData" [title]="source.title" [id]="source.title">
-          <ng-template dTabContent>
-            <div class="highlight">
-              <div class="code-box-actions">
-                <span
-                  *ngIf="!_copied"
-                  dTooltip
-                  [content]="'codebox.copyCode' | translate"
-                  [position]="'bottom'"
-                  (click)="copyCode(source.code.default || source.code)"
+          <div class="highlight">
+            <div class="code-box-actions">
+              <span
+                *ngIf="!_copied"
+                dTooltip
+                [content]="'codebox.copyCode' | translate"
+                [position]="'bottom'"
+                (click)="copyCode(source.code.default || source.code)"
+              >
+                <svg class="devui-code-copy" version="1.1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+                  <path
+                    d="M10 4v-4h-7l-3 3v9h6v4h10v-12h-6zM3 1.414v1.586h-1.586l1.586-1.586zM1 11v-7h3v-3h5v3l-3 3v4h-5zM9 5.414v1.586h-1.586l1.586-1.586zM15 15h-8v-7h3v-3h5v10z"
+                  ></path>
+                </svg>
+              </span>
+              <span
+                *ngIf="_copied"
+                dTooltip
+                [content]="'codebox.success' | translate"
+                [position]="'bottom'"
+                (click)="copyCode(source.code.default || source.code)"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                  width="16px"
+                  height="16px"
+                  viewBox="0 0 16 16"
+                  version="1.1"
                 >
-                  <svg class="devui-code-copy" version="1.1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
-                    <path
-                      d="M10 4v-4h-7l-3 3v9h6v4h10v-12h-6zM3 1.414v1.586h-1.586l1.586-1.586zM1 11v-7h3v-3h5v3l-3 3v4h-5zM9 5.414v1.586h-1.586l1.586-1.586zM15 15h-8v-7h3v-3h5v10z"
-                    ></path>
-                  </svg>
-                </span>
-                <span
-                  *ngIf="_copied"
-                  dTooltip
-                  [content]="'codebox.success' | translate"
-                  [position]="'bottom'"
-                  (click)="copyCode(source.code.default || source.code)"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink"
-                    width="16px"
-                    height="16px"
-                    viewBox="0 0 16 16"
-                    version="1.1"
-                  >
-                    <defs>
-                      <polygon
-                        id="path-1"
-                        points="6.53553391 9.77817459 12.1923882 4.12132034 13.6066017 5.53553391 6.53553391 12.6066017 3 9.07106781 4.41421356 7.65685425 6.53553391 9.77817459"
-                      />
-                    </defs>
-                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                      <mask id="mask-2" fill="white">
-                        <use xlink:href="#path-1" />
-                      </mask>
-                      <use id="Mask" fill="#3DCCA6" xlink:href="#path-1" />
-                    </g>
-                  </svg>
-                </span>
-              </div>
-              <d-highlight [code]="source.code.default || source.code" [language]="source.language"></d-highlight>
+                  <defs>
+                    <polygon
+                      id="path-1"
+                      points="6.53553391 9.77817459 12.1923882 4.12132034 13.6066017 5.53553391 6.53553391 12.6066017 3 9.07106781 4.41421356 7.65685425 6.53553391 9.77817459"
+                    />
+                  </defs>
+                  <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <mask id="mask-2" fill="white">
+                      <use xlink:href="#path-1" />
+                    </mask>
+                    <use id="Mask" fill="#3DCCA6" xlink:href="#path-1" />
+                  </g>
+                </svg>
+              </span>
             </div>
-          </ng-template>
+            <d-highlight [code]="source.code.default || source.code" [language]="source.language"></d-highlight>
+          </div>
         </d-tab>
       </d-tabs>
     </div>

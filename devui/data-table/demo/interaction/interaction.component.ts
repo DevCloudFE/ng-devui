@@ -1,5 +1,5 @@
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
-import { DataTableComponent, SortDirection, SortEventArg, TableWidthConfig, FilterConfig } from 'ng-devui/data-table';
+import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { DataTableComponent, SortDirection, SortEventArg, TableWidthConfig } from 'ng-devui/data-table';
 import { originSource, SourceType } from '../mock-data';
 
 @Component({
@@ -10,7 +10,7 @@ import { originSource, SourceType } from '../mock-data';
 export class InteractionComponent implements OnInit {
   @ViewChild(DataTableComponent, { static: true }) datatable: DataTableComponent;
   sortableDataSource: Array<SourceType> = JSON.parse(JSON.stringify(originSource.slice(0, 6)));
-  filterListRadio: FilterConfig[] = [
+  filterListRadio = [
     {
       name: 'Clear',
       value: 'Clear',
@@ -55,43 +55,50 @@ export class InteractionComponent implements OnInit {
   tableWidthConfig: TableWidthConfig[] = [
     {
       field: 'checkbox',
-      width: '36px'
+      width: '30px'
     },
     {
       field: '$index',
-      width: '20%'
+      width: '200px'
     },
     {
       field: 'firstName',
-      width: '20%'
+      width: '200px'
     },
     {
       field: 'lastName',
-      width: '20%'
+      width: '200px'
     },
     {
       field: 'gender',
-      width: '20%'
+      width: '200px'
     },
     {
       field: 'dob',
-      width: '20%'
+      width: '200px'
     },
     {
       field: 'description',
-      width: '20%'
+      width: '200px'
     }
   ];
 
+  _totalWidth = 0;
+  lastWidth = 0;
+  firstResize = true;
+
   lastNameSortDirection = SortDirection.ASC;
-  genderSortDirecticon = SortDirection.default;
+  genderSortDirection = SortDirection.default;
   sortParams = {field: 'lastName', direction: this.lastNameSortDirection};
   checkboxList = [];
   allChecked = false;
   halfChecked = false;
   filterIconActive = false;
 
-  constructor(private ref: ChangeDetectorRef) { }
+  constructor(
+    private ref: ChangeDetectorRef,
+    private ele: ElementRef
+  ) { }
   ngOnInit() {
     this.checkboxList = JSON.parse(JSON.stringify(originSource.slice(0, 6)));
     this.sortableDataSource[0]['$checkDisabled'] = true;
@@ -104,12 +111,36 @@ export class InteractionComponent implements OnInit {
     };
   }
 
-  onResize({ width }, field) {
+  onResize({ width, beforeWidth }, field) {
     const index = this.tableWidthConfig.findIndex((config) => {
       return config.field === field;
     });
     if (index > -1) {
+      if (this.firstResize) {
+        this.firstResize = false;
+        const ratio = beforeWidth / parseInt(this.tableWidthConfig[index].width, 10);
+        this.tableWidthConfig.forEach(t => {
+          t.width = parseInt(t.width, 10) * ratio + 'px';
+        });
+        this._totalWidth = this.ele.nativeElement.querySelector('.table-wrap').offsetWidth;
+        this.lastWidth = parseInt(this.tableWidthConfig.slice(-1)[0].width);
+      }
       this.tableWidthConfig[index].width = width + 'px';
+
+      let newWidthTotal = 0;
+      this.tableWidthConfig.forEach(t => {
+        newWidthTotal += parseInt(t.width, 10);
+      });
+
+      const lastCol = this.tableWidthConfig[this.tableWidthConfig.length - 1];
+      const lastColWidth = parseInt(lastCol.width, 10);
+      const changeValue = newWidthTotal - this._totalWidth;
+      if (changeValue < 0) {
+        lastCol.width = lastColWidth + this._totalWidth - newWidthTotal + 'px';
+      } else if (lastColWidth > this.lastWidth) {
+        const lastChange = (lastColWidth - this.lastWidth) > changeValue ? changeValue : (lastColWidth - this.lastWidth);
+        lastCol.width = lastColWidth - lastChange + 'px';
+      }
     }
   }
 
@@ -143,7 +174,7 @@ export class InteractionComponent implements OnInit {
     this.filterListMulti = this.firstFilterList;
     this.ref.detectChanges();
     return true;
-  }
+  };
 
   onRowCheckChange(checked, rowIndex, nestedIndex, rowItem) {
     rowItem.$checked = checked;
@@ -185,5 +216,9 @@ export class InteractionComponent implements OnInit {
   getCheckedRows() {
     const rows = this.datatable.getCheckedRows();
     console.log(rows);
+  }
+
+  onToggle(data) {
+    console.log('onToggle ---', data);
   }
 }

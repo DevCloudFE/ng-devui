@@ -5,7 +5,8 @@
       #fixHeaderContainerRef
       class="table-wrap"
       [style.overflow-x]="'hidden'"
-      [style.overflow-y]="'scroll'"
+      [style.scrollbar-width]="'none'"
+      [style.overflow-y]="tableOverflowType === 'overlay' ? 'overlay' : 'scroll'"
       [style.max-height]="maxHeight ? maxHeight : null"
       [style.max-width]="maxWidth ? maxWidth : null"
       [style.width]="!maxWidth ? tableWidth : null"
@@ -33,13 +34,18 @@
       (loadMore)="onLoadMore($event)"
       *ngIf="!virtualScroll; else scrollViewTpl"
       class="devui-scrollbar"
-      [ngClass]="{ 'scroll-view': scrollable, 'table-wrap': !fixHeader }"
+      [ngClass]="{
+        'scroll-view': scrollable,
+        'overflow-overlay': tableOverflowType === 'overlay',
+        'table-wrap': !fixHeader,
+        'has-width-scroll': hasWidthScroll,
+        'has-height-scroll': hasHeightScroll
+      }"
       [style.height]="tableHeight ? tableHeight : null"
       [style.max-height]="maxHeight ? maxHeight : null"
       [style.max-width]="maxWidth ? maxWidth : null"
       [style.width]="!maxWidth ? tableWidth : null"
       (scroll)="onBodyScroll($event)"
-      [style.overflow-y]="fixHeader ? 'scroll' : null"
     >
       <table
         #tableBody
@@ -49,6 +55,7 @@
         [ngClass]="{ 'area-active': showOperationArea }"
         [style.table-layout]="tableLayout"
         [style.height]="minHeight ? minHeight : null"
+        [style.position]="tableOverflowType === 'overlay' ? null : 'relative'"
       >
         <colgroup>
           <col *ngFor="let config of tableWidthConfig" [style.width]="config.width" />
@@ -70,6 +77,7 @@
         <tbody
           *ngIf="!innerBody"
           dDataTableBody
+          #devuiNormalScrollBody
           [dataSource]="dataSource"
           [resizeable]="resizeable"
           [columns]="_columns"
@@ -93,9 +101,13 @@
   </div>
 </div>
 
-<ng-container *ngIf="!dataSource?.length && noResultTemplate != null">
+<div
+  class="devui-no-result-wrapper"
+  [ngClass]="{ 'overlay-table-no-result': tableOverflowType === 'overlay' }"
+  *ngIf="!dataSource?.length && noResultTemplate != null"
+>
   <ng-template [ngTemplateOutlet]="noResultTemplate" [ngTemplateOutletContext]="{ $implicit: this }"></ng-template>
-</ng-container>
+</div>
 
 <ng-template #scrollViewTpl>
   <cdk-virtual-scroll-viewport
@@ -107,12 +119,17 @@
     [minBufferPx]="virtualMinBufferPx"
     [maxBufferPx]="virtualMaxBufferPx"
     class="devui-scrollbar viewport-wrapper"
-    [ngClass]="{ 'scroll-view': scrollable, 'virtual-scroll-wrap': !fixHeader }"
+    [ngClass]="{
+      'scroll-view': scrollable,
+      'overflow-overlay': tableOverflowType === 'overlay',
+      'virtual-scroll-wrap': !fixHeader,
+      'has-width-scroll': hasWidthScroll,
+      'has-height-scroll': hasHeightScroll
+    }"
     [style.height]="virtualBodyHeight"
     [style.max-height]="maxHeight ? maxHeight : null"
     [style.max-width]="maxWidth ? maxWidth : null"
     [style.width]="!maxWidth ? tableWidth : null"
-    [style.overflow-y]="fixHeader ? 'scroll' : null"
     (scroll)="onBodyScroll($event)"
   >
     <table

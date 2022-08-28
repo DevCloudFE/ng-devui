@@ -10,7 +10,7 @@ export class LazyLoadDirective implements OnDestroy, OnChanges, AfterViewInit {
   // 懒加载模式，默认列表模式
   @Input() contentMode: 'img' | 'list' = 'list';
   // 滚动监听的目标，默认是宿主，
-  @Input() target: ElementRef;
+  @Input() target: HTMLElement | Window;
   // 图片懒加载模式的图片地址
   @Input() imgLoadSrc: string;
   // 加载更多

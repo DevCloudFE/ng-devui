@@ -14,6 +14,10 @@ section {
   }
 }
 
+section.overflow {
+  overflow: hidden;
+}
+
 .handler {
   position: absolute;
   top: 10px;
@@ -144,7 +148,7 @@ d-data-table {
     top: 0;
     bottom: 0;
     width: 6px;
-    border-left: 3px solid $devui-line;
+    border-left: 2px solid $devui-line;
     cursor: col-resize;
   }
 

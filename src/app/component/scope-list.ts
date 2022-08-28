@@ -8,14 +8,24 @@ export const suggestScopeList: Array<string> = [
 ];
 
 export const newScopeList: Array<string> | string = [
-  'dashboard',
+  'breadcrumb',
+  'category-search',
+  'cascader',
   'dataTable',
-  'categorySearch',
-  'autoComplete',
-  'editableSelect',
+  'datepicker-pro',
+  'editable-select',
+  'alert',
+  'panel',
+  'tags',
+  'pagination',
+  'upload',
   'tree',
-  'tooltip',
-  'tagsInput'
+  'toggle',
+  'editable-select',
+  'common',
+  'multi-auto-complete'
 ];
 
-export const sunsetScopeList: Array<string> | string = [];
+export const sunsetScopeList: Array<string> | string = [
+  'codeMirror', 'echarts' ,'polyfills'
+];

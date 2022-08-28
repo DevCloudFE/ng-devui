@@ -1,17 +1,19 @@
 @import '../style/theme/color';
-@import '../style/theme/font';
+@import '../style/core/font';
 @import '../style/core/animation';
+@import '../style/theme/corner';
 
 :host {
   display: inline-block;
   font-size: 0;
+  line-height: 1;
   vertical-align: middle;
 }
 
 .devui-toggle {
   width: 36px;
   height: 18px;
-  border-radius: 10px;
+  border-radius: $devui-border-radius-full;
   background: $devui-line;
   border: 1px solid $devui-line;
   position: relative;
@@ -59,7 +61,7 @@
     width: 16px;
     height: 16px;
     background: $devui-light-text;
-    border-radius: 100%;
+    border-radius: $devui-border-radius-full;
     position: absolute;
     top: 1px;
     left: 1px;
@@ -73,7 +75,6 @@
   &.devui-toggle-lg {
     width: 58px;
     height: 30px;
-    border-radius: 16px;
 
     .devui-toggle-inner-wrapper {
       padding-left: 28px;
@@ -101,7 +102,6 @@
   &.devui-toggle-sm {
     width: 30px;
     height: 14px;
-    border-radius: 8px;
 
     .devui-toggle-inner-wrapper {
       padding-left: 12px;

@@ -29,6 +29,7 @@ import { CheckBoxModule } from 'ng-devui';
 |     color     |            `string`             |  --   |                                   可选，复选框颜色                                    | [基本用法](demo#checkbox-basic)   |
 | showAnimation |            `boolean`            | true  |                                可选，控制是否显示动画                                 | [基本用法](demo#checkbox-basic)   | ✔ |
 | beforeChange  | `Function\|Promise\|Observable` |  --   | 可选，checkbox 切换前的回调函数，返回 boolean 类型，返回 false 可以阻止 checkbox 切换 | [回调切换](demo#condition-change) |
+| cssClass | `string` |  --   | 可选，checkbox 的className |
 
 ## d-checkbox 事件
 
@@ -49,7 +50,6 @@ import { CheckBoxModule } from 'ng-devui';
 |    options    |          `Array<any>`           |    []    |                                    可选，复选框选项数组                                     | [使用 CheckBoxGroup](demo#tabs-group) |
 |   filterKey   |            `string`             |    --    |                     可选，options 为对象数组时，标识选项唯一 id 的键值                      | [使用 CheckBoxGroup](demo#tabs-group) |
 | labelTemplate |          `TemplateRef`          |    --    |                                   可选，标签的自定义模板                                    | [使用 CheckBoxGroup](demo#tabs-group) |
-|  halfchecked  |            `boolean`            |  false   |                                       可选，半选状态                                        |                                       |
 |     color     |            `string`             |    --    |                                      可选，复选框颜色                                       | [使用 CheckBoxGroup](demo#tabs-group) |
 | showAnimation |            `boolean`            |   true   |                                   可选，控制是否显示动画                                    | [使用 CheckBoxGroup](demo#tabs-group) |✔ |
 | beforeChange  | `Function\|Promise\|Observable` |    --    | 可选，checkbox 切换前的回调函数，返回 boolean 类型，返回 false 可以阻止 checkbox-group 切换 | [回调切换](demo#condition-change)     |

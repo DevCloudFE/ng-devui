@@ -1,4 +1,3 @@
-// tslint:disable: max-line-length
 import { Component, DebugElement, ElementRef, TemplateRef, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
@@ -71,7 +70,7 @@ class TestDateRangePickerComponent {
     fn([new Date(), new Date()], undefined, false);
   }
 
-  constructor() {}
+  constructor() { }
 }
 
 @Component({
@@ -92,7 +91,7 @@ class TestDateRangePickerOriginComponent {
 
   placeHolderHeight = false;
   isOrigin = false;
-  constructor() {}
+  constructor() { }
 }
 
 @Component({
@@ -114,7 +113,7 @@ class TestDateRangePickerCmpComponent {
   customViewTemplate;
   reason;
   @ViewChild('myCustomView') myCustomView: TemplateRef<any>;
-  constructor() {}
+  constructor() { }
   today() {
     return [new Date(), new Date()];
   }
@@ -417,7 +416,7 @@ describe('dateRangePickerComponent', () => {
 });
 
 function padZero(value) {
-  return (value + '').padStart(2, '0');
+  return (String(value)).padStart(2, '0');
 }
 
 function resolveMonth(str) {
@@ -537,7 +536,7 @@ function testNgModelAndYearMonth(fixture, wrapperEle, component) {
               if (time === 'month') {
                 currentMonth = currentMonth % 12 || 12;
               }
-              expect(fun[`${time}Show`](showEle[side][time])).toBe((currentMonth) + '');
+              expect(fun[`${time}Show`](showEle[side][time])).toBe(String(currentMonth));
             }
           }
         }
@@ -587,7 +586,7 @@ function testNgModelAndYearMonth(fixture, wrapperEle, component) {
   closeDatePicker(fixture);
 
   component.inputEle.nativeElement.value = `${strDate(0, 0, 0, '05')}${component.splitter}${strDate(0, 1, 0, '05')}`;
-  tickEvent(component.inputEle.nativeElement, new KeyboardEvent('keyup', {key: 'Enter'}), fixture, 1000);
+  tickEvent(component.inputEle.nativeElement, new KeyboardEvent('keyup', { key: 'Enter' }), fixture, 1000);
   tickEvent(component.inputEle.nativeElement, new Event('blur'), fixture, 1000);
   openDatePicker(fixture);
   leftDayListEle = wrapperEle.querySelectorAll('tbody')[0];
@@ -681,7 +680,7 @@ function testInputParam(fixture, wrapperEle, component) {
     }
   }
   const rightMonth = resolveMonth(wrapperEle.querySelectorAll('.devui-date-title')[3].textContent.trim());
-  if (component.maxDate.getMonth() + 1 + '' !== rightMonth) {
+  if (String(component.maxDate.getMonth() + 1) !== rightMonth) {
     const nextMonthBtn = wrapperEle.querySelectorAll('.devui-calender-header')[1].querySelectorAll('.devui-btn-link')[2];
     tickEvent(nextMonthBtn, new Event('click'), fixture);
   }
@@ -706,9 +705,6 @@ function testInputParam(fixture, wrapperEle, component) {
   const testTemplate = wrapperEle.querySelector('.test-template');
   expect(testTemplate).toBeTruthy();
   // ToDo: click后会直接进入组件的ngOnDestroy，并且没有走chooseDate，但是toHaveBeenCalled没有报错也没有执行，预测detectChanges直接结束了it
-  // testTemplate.dispatchEvent(new Event('click'));
-  // fixture.detectChanges();
-  // expect(component.getValue).toHaveBeenCalled();
 
   tickEvent(document.querySelector('.devui-date-range-custom'), new Event('click'), fixture);
   expect(wrapperEle.querySelector('.test-class')).toBeTruthy();
@@ -741,7 +737,12 @@ function testTimePicker(fixture, wrapperEle, component) {
   expect(picker['right'].querySelector('.devui-timepicker')).toBeTruthy();
   closeDatePicker(fixture);
 
-  component.dateRange = [new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()), new Date(new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDate())];
+  component.dateRange = [new Date(new Date().getFullYear(),
+    new Date().getMonth(),
+    new Date().getDate()),
+  new Date(new Date().getFullYear(),
+    new Date().getMonth() + 1,
+    new Date().getDate())];
   fixture.detectChanges();
   tick();
   fixture.detectChanges();
@@ -844,7 +845,8 @@ function testTimePicker(fixture, wrapperEle, component) {
       for (const time in timeInputEle[side]) {
         if (time) {
           const arr = ['hours', 'minutes', 'seconds'];
-          testTimePickerBtn(picker[side].querySelectorAll('.devui-btn-nav')[arr.indexOf(time)], fixture, timeEvent, timeInputEle[side][time], component);
+          testTimePickerBtn(picker[side].querySelectorAll('.devui-btn-nav')[arr.indexOf(time)],
+            fixture, timeEvent, timeInputEle[side][time], component);
         }
       }
     }
@@ -855,12 +857,17 @@ function testTimePicker(fixture, wrapperEle, component) {
 
   expect(component.getValue).toHaveBeenCalled();
   expect(component.inputEle.nativeElement.value).toBe(
+    /* eslint-disable-next-line max-len*/
     `${strDate(0, 0, 0)} 0${timeEvent}:0${timeEvent}:0${timeEvent}${component.splitter}${strDate(0, 1, 0)} 0${timeEvent}:0${timeEvent}:0${timeEvent}`
   );
   expect(component.dateRange).toEqual(
     [
-      new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate(), Number(timeEvent), Number(timeEvent), Number(timeEvent)),
-      new Date(new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDate(), Number(timeEvent), Number(timeEvent), Number(timeEvent))
+      new Date(new Date().getFullYear(),
+        new Date().getMonth(),
+        new Date().getDate(), Number(timeEvent), Number(timeEvent), Number(timeEvent)),
+      new Date(new Date().getFullYear(),
+        new Date().getMonth() + 1,
+        new Date().getDate(), Number(timeEvent), Number(timeEvent), Number(timeEvent))
     ]
   );
 }
@@ -899,7 +906,8 @@ function testTimePickerBtn(btnWrapperEle, fixture, timeEvent, inputEle, componen
 }
 
 function testDateConfig(fixture, wrapperEle, component) {
-  component.dateRange = [new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()), new Date(new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDate())];
+  component.dateRange = [new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()),
+    new Date(new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDate())];
   fixture.detectChanges();
   tick();
   fixture.detectChanges();
@@ -911,6 +919,7 @@ function testDateConfig(fixture, wrapperEle, component) {
   tickEvent(confirmBtn, new Event('click'), fixture);
 
   expect(component.inputEle.nativeElement.value).toBe(
+    /* eslint-disable-next-line max-len*/
     `${strDate(0, 0, 0, undefined, ['mm', 'dd', 'yy'], '.')} 00-00-00${component.splitter}${strDate(0, 1, 0, undefined, ['mm', 'dd', 'yy'], '.')} 00-00-00`
   );
 }

@@ -1,0 +1,9 @@
+<section>
+  <d-tabs [type]="'wrapped'" [scrollMode]="true" [(activeTab)]="tabActiveId">
+    <d-tab *ngFor="let item of tabItems" [id]="item.id">
+      <ng-template dTabTitle>
+        {{ item.title }}
+      </ng-template>
+    </d-tab>
+  </d-tabs>
+</section>

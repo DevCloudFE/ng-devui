@@ -1,0 +1,42 @@
+<h3>Baisc</h3>
+<h4>Gutter</h4>
+<div [dFlex] [dFlexContainer]="'row'" [dAlign]="'center'" class="base-container" [dGutter]="[12, 12]">
+  <div style="width: 100px; height: 40px">
+    <div class="brand-content">col</div>
+  </div>
+  <div style="height: 80px" [dFlex]="1" [dFlexContainer]="'column'" [dAlign]="'center'">
+    <div [dFlex]="1" style="width: 300px" class="hover-content">item</div>
+    <div style="width: 100%; height: 30px" class="brand-content">item</div>
+  </div>
+</div>
+<h4>Space</h4>
+<div [dFlex] [dFlexContainer]="'row'" [dAlign]="'center'" class="base-container" [dSpace]="[12, 12]">
+  <div style="width: 100px; height: 40px">
+    <div class="brand-content">col</div>
+  </div>
+  <div style="height: 80px" [dFlex]="1" [dFlexContainer]="'column'" [dAlign]="'center'" [dSpace]="[12, 12]">
+    <div [dFlex]="1" style="width: 300px" class="hover-content">item</div>
+    <div style="width: 100%; height: 30px" class="brand-content">item</div>
+  </div>
+</div>
+<h3>Responsive</h3>
+<h4>Gutter</h4>
+<div [dFlex] [dFlexContainer]="'row'" [dAlign]="'center'" class="base-container" [dGutter]="{ ss: 0, md: [16, 16] }">
+  <div style="width: 100px; height: 40px">
+    <div class="brand-content">col</div>
+  </div>
+  <div style="height: 80px" [dFlex]="1" [dFlexContainer]="'column'" [dAlign]="'center'">
+    <div [dFlex]="1" style="width: 300px" class="hover-content">item</div>
+    <div style="width: 100%; height: 30px" class="brand-content">item</div>
+  </div>
+</div>
+<h4>Space</h4>
+<div [dFlex] [dFlexContainer]="'row'" [dAlign]="'center'" class="base-container" [dSpace]="{ ss: 0, md: [16, 16] }">
+  <div style="width: 100px; height: 40px">
+    <div class="brand-content">col</div>
+  </div>
+  <div style="height: 80px" [dFlex]="1" [dFlexContainer]="'column'" [dAlign]="'center'" [dSpace]="{ ss: 0, md: [16, 16] }">
+    <div [dFlex]="1" style="width: 300px" class="hover-content">item</div>
+    <div style="width: 100%; height: 30px" class="brand-content">item</div>
+  </div>
+</div>

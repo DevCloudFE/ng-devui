@@ -7,7 +7,7 @@ import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
 import { SliderModule } from 'ng-devui/slider';
 import { TranslateModule } from '@ngx-translate/core';
-import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
+import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
 import { SliderBasicComponent } from './basic/slider-basic.component';
 import { SliderCustomFormatterComponent } from './custom-formatter/slider-custom-formatter.component';
 import { SliderDisabledComponent } from './disabled/slider-disabled.component';

@@ -19,16 +19,16 @@ export class VirtualScrollComponent implements OnInit {
   },
   {
     'title': 'parent node 2',
-    'children': [{
+    'items': [{
       'title': 'leaf node 2-1',
-      'children': [{
+      'items': [{
         'title': 'leaf node 2-1-1'
       }, {
         'title': 'leaf node 2-1-2'
       }]
     }, {
       'title': 'leaf node 2-2',
-      'children': [{
+      'items': [{
         'title': 'leaf node 2-2-1'
       }, {
         'title': 'leaf node 2-2-2'
@@ -36,17 +36,17 @@ export class VirtualScrollComponent implements OnInit {
     }]
   }, {
     'title': 'parent node with 1000 leaf nodes',
-    'children': [],
+    'items': [],
   }, {
     'title': 'parent node 4',
-    'children': [{
+    'items': [{
       'title': 'leaf node 4-1'
     }, {
       'title': 'leaf node 4-2'
     }]
   }, {
     'title': 'parent node 5',
-    'children': [{
+    'items': [{
       'title': 'leaf node 5-1'
     }, {
       'title': 'leaf node 5-2'
@@ -62,7 +62,7 @@ export class VirtualScrollComponent implements OnInit {
       this.data.push({ 'title': 'new node -' + (i + 1) });
     }
     for (let i = 0; i < 1000; i++) {
-      this.data[3].children.push({ 'title': 'new leaf node 加载-' + (i + 1), children: [] });
+      this.data[3].items.push({ 'title': 'new leaf node 加载-' + (i + 1), items: [] });
     }
   }
   ngOnInit(): void {
@@ -72,7 +72,7 @@ export class VirtualScrollComponent implements OnInit {
     console.log('deleted: ', treeNode);
   }
 
-  onOperableNodeSelected(treeNode: TreeNode) {
+  onOperableNodeSelected(treeNode: TreeNode | TreeNode[]) {
     console.log('selected: ', treeNode);
     this.currentSelectedNode = treeNode;
   }
@@ -173,21 +173,21 @@ export class VirtualScrollComponent implements OnInit {
     return new Promise((resolve, reject) => {
       resolve(node);
     }).catch(err => console.error(err));
-  }
+  };
 
   beforeEditNode = (node) => {
     console.log('beforeEditNode', node);
     return new Promise((resolve, reject) => {
       resolve(node);
     }).catch(err => console.error(err));
-  }
+  };
 
   postAddNode = (node) => {
     console.log('postAddNode', node);
     return new Promise((resolve, reject) => {
       resolve(node);
     }).catch(err => console.error(err));
-  }
+  };
 
   editValueChange(event) {
     console.log('editChanged', event);

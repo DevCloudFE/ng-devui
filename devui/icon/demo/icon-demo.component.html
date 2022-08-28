@@ -1,0 +1,17 @@
+<div class="demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 160, bottom: 0 }">
+  <d-demo-nav [navItems]="navItems">></d-demo-nav>
+  <div class="devui-demo-example" [dAnchor]="'basic'">
+    <div class="devui-demo-title">{{ 'components.icon.basicDemo.title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.icon.basicDemo.description' | translate }}</div>
+    <d-codebox id="components-button-primary" [sourceData]="basicSource">
+      <d-basic demo></d-basic>
+    </d-codebox>
+  </div>
+  <div class="devui-demo-example" [dAnchor]="'icon-group'">
+    <div class="demo-title">{{ 'components.icon.iconGroupDemo.title' | translate }}</div>
+    <div class="demo-text">{{ 'components.icon.iconGroupDemo.description' | translate }}</div>
+    <d-codebox id="batch-op-basic" [sourceData]="iconGroupSource">
+      <d-icon-group-demo demo></d-icon-group-demo>
+    </d-codebox>
+  </div>
+</div>

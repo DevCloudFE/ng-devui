@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
+import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 @Component({
   selector: 'd-demo-button',
@@ -26,12 +26,6 @@ export class ButtonDemoComponent implements OnInit, OnDestroy {
   primarySource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('./primary/primary.component.html?raw') },
     { title: 'TS', language: 'typescript', code: require('./primary/primary.component.ts?raw') },
-  ];
-
-  leftRightSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'xml', code: require('./left-right/left-right.component.html?raw') },
-    { title: 'TS', language: 'typescript', code: require('./left-right/left-right.component.ts?raw') },
-    { title: 'SCSS', language: 'css', code: require('./left-right/left-right.component.scss?raw') },
   ];
 
   textSource: Array<DevuiSourceData> = [
@@ -88,7 +82,6 @@ export class ButtonDemoComponent implements OnInit, OnDestroy {
       { dAnchorLink: 'button-primary', value: values['button-primary'] },
       { dAnchorLink: 'button-common', value: values['button-common'] },
       { dAnchorLink: 'button-primary-and-common', value: values['button-primary-and-common'] },
-      { dAnchorLink: 'button-left-right', value: values['button-left-right'] },
       { dAnchorLink: 'button-danger', value: values['button-danger'] },
       { dAnchorLink: 'button-text', value: values['button-text'] },
       { dAnchorLink: 'button-loading', value: values['button-loading'] },

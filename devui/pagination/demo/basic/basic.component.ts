@@ -10,8 +10,7 @@ export class BasicComponent implements OnInit {
     pageIndex: 5,
     pageSize: 10
   };
-  preLink = '<span class="icon-arrow-left"></span>';
-  nextLink = '<span class="icon-arrow-right"></span>';
+
   constructor() { }
 
   ngOnInit() {

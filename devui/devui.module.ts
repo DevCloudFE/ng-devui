@@ -24,6 +24,7 @@ import { EditableSelectModule } from 'ng-devui/editable-select';
 import { FormModule } from 'ng-devui/form';
 import { FullscreenModule } from 'ng-devui/fullscreen';
 import { GanttModule } from 'ng-devui/gantt';
+import { IconModule } from 'ng-devui/icon';
 import { ImagePreviewModule } from 'ng-devui/image-preview';
 import { InputNumberModule } from 'ng-devui/input-number';
 import { LayoutModule } from 'ng-devui/layout';
@@ -87,6 +88,7 @@ export * from 'ng-devui/editable-select';
 export * from 'ng-devui/form';
 export * from 'ng-devui/fullscreen';
 export * from 'ng-devui/gantt';
+export * from 'ng-devui/icon';
 export * from 'ng-devui/image-preview';
 export * from 'ng-devui/input-number';
 export * from 'ng-devui/layout';
@@ -154,6 +156,7 @@ export * from './version';
     ImagePreviewModule,
     LoadingModule,
     LayoutModule,
+    IconModule,
     ModalModule,
     MultiAutoCompleteModule,
     PaginationModule,
@@ -192,7 +195,7 @@ export * from './version';
     DatepickerProModule,
     MentionModule,
     NavSpriteModule,
-    ReadTipModule,
+    ReadTipModule
   ],
   declarations: [],
 })

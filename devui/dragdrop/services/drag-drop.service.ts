@@ -51,22 +51,24 @@ export class DragDropService {
   dragOriginPlaceholderNextSibling: any;
   touchInstance;
 
-  /*协同拖拽需要 */
+  /* 协同拖拽需要 */
   dragElShowHideEvent = new Subject<boolean>();
   dragSyncGroupDirectives;
-  /*预览功能 */
+  /* 预览功能 */
   dragPreviewDirective: DragPreviewDirective;
   document: Document;
 
   constructor(private ngZone: NgZone, @Inject(DOCUMENT) private doc: any) {
     this.touchInstance = DragDropTouch.getInstance();
     // service not support OnInit, only support OnDestroy, so write in constructor
-    // tslint:disable-next-line: max-line-length
-    this.dragEmptyImage.src = 'data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=='; // safari的img必须要有src
+    // safari的img必须要有src
+    this.dragEmptyImage.src
+      = 'data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==';
     this.document = this.doc;
   }
   newSubscription() {
     this.subscription.unsubscribe();
+    // eslint-disable-next-line no-return-assign
     return this.subscription = new Subscription();
   }
 
@@ -119,7 +121,7 @@ export class DragDropService {
           /* 计数样式定位 */
           if (this.batchDragStyle && this.batchDragStyle.length && this.batchDragStyle.indexOf('badge') > -1) {
             const badge = this.document.createElement('div');
-            badge.innerText = this.batchDragData.length + '';
+            badge.innerText = String(this.batchDragData.length);
             badge.classList.add('batch-dragged-node-count');
             node.style.position = 'relative';
             const style = {
@@ -151,7 +153,7 @@ export class DragDropService {
                 position: 'absolute',
                 left: -5 * (i + 1) + 'px',
                 top: -5 * (i + 1) + 'px',
-                zIndex: - (i + 1) + '',
+                zIndex: String(- (i + 1)),
                 width: this.dragOffset.width + 'px',
                 height: this.dragOffset.height + 'px',
                 background: '#fff',
@@ -238,7 +240,7 @@ export class DragDropService {
       this.dragCloneNode.style.left = clientX - offsetLeft + 'px';
       this.dragCloneNode.style.top = clientY - offsetTop + 'px';
     });
-  }
+  };
 
   getBatchDragData(identity?, order: ((a: any, b: any) => number) | 'select' | 'draggedElFirst' = 'draggedElFirst') {
     const result = this.batchDragData.map(dragData => dragData.dragData);
@@ -266,7 +268,7 @@ export class DragDropService {
       this.batchDragData
         .filter(dragData => dragData.draggable)
         .map(dragData => dragData.draggable)
-        .forEach(draggable => draggable.batchDraggable.dragData = undefined);
+        .forEach(draggable => {draggable.batchDraggable.dragData = undefined;});
       this.batchDragData = undefined;
       this.batchDragGroup = undefined;
     }

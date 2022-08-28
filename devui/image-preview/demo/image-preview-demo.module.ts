@@ -9,7 +9,7 @@ import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
 import { SafePipeModule } from 'ng-devui/utils';
 import { TranslateModule } from '@ngx-translate/core';
-import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
+import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
 import { BasicComponent } from './basic/basic.component';
 import { CustomOpenComponent } from './custom-open/custom-open.component';
 import { DImagePreviewDemoComponent } from './image-preview-demo.component';
@@ -42,6 +42,6 @@ import { ZIndexComponent } from './z-index/z-index.component';
     CustomOpenComponent,
     ZIndexComponent
   ],
-  
+
 })
 export class ImagePreviewDemoModule { }

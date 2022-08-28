@@ -2,7 +2,7 @@
 
 <d-datepicker-pro [(ngModel)]="value1" [showTime]="true" [width]="'150px'">
   <ng-template #hostTemplate let-value="value">
-    <d-button class="devui-dropdown-origin" bsStyle="text-dark">
+    <d-button class="devui-dropdown-origin" bsStyle="text">
       {{ value || 'select time' }}
     </d-button>
   </ng-template>
@@ -14,11 +14,11 @@
 
 <d-range-datepicker-pro [(ngModel)]="value2" [width]="'150px'">
   <ng-template #hostTemplate let-values="values">
-    <d-button class="devui-dropdown-origin" bsStyle="text-dark" (click)="rangePicker.focusChange('start')">
+    <d-button class="devui-dropdown-origin" bsStyle="text" (click)="rangePicker.focusChange('start')">
       {{ values[0] || 'start' }}
     </d-button>
     <span> -- </span>
-    <d-button (click)="rangePicker.focusChange('end')" class="devui-dropdown-origin" bsStyle="text-dark">
+    <d-button (click)="rangePicker.focusChange('end')" class="devui-dropdown-origin" bsStyle="text">
       {{ values[1] || 'end' }}
     </d-button>
   </ng-template>

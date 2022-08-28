@@ -3,7 +3,7 @@
 在 module 中引入：
 
 ```typescript
-import { DropDownModule } from ' ng-devui/dropdown';
+import { DropDownModule } from 'ng-devui/dropdown';
 ```
 
 ## dDropDown
@@ -12,14 +12,14 @@ import { DropDownModule } from ' ng-devui/dropdown';
 
 ### dDropDown 参数
 
-|         参数          |              类型              |  默认   |                                                      说明                                                       | 跳转 Demo                                              |全局配置项| 
-| :----------------: | :-------------------: | :----------------------------: | :-----: | :-------------------------------------------------------------------------------------------------------------: | ------------------------------------------------------ |
-|        isOpen         |           `boolean`            |  false  |                                      可选，可以显示指定 dropdown 是否打开                                       | [设置 isOpen 控制下拉](demo#dropdown-set-is-open)      |
+|         参数          |              类型              |  默认   |                                                      说明                                                       |                       跳转 Demo                        | 全局配置项 |
+| :-------------------: | :----------------------------: | :-----: | :-------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------: | ---------- |
+|        isOpen         |           `boolean`            |  false  |                                      可选，可以显示指定 dropdown 是否打开                                       |   [设置 isOpen 控制下拉](demo#dropdown-set-is-open)    |
 |       disabled        |           `boolean`            |  false  |                                         可选，设置为 true 禁用 dropdown                                         |
-|        trigger        | `'click'\|'hover'\|'manually'` | 'click' |           可选，dropdown 触发方式, click 为点击，hover 为悬停（也包含点击）、manually 为完全手动控制            | [悬浮下拉](demo#suspension-drop-down)                  |
+|        trigger        | `'click'\|'hover'\|'manually'` | 'click' |           可选，dropdown 触发方式, click 为点击，hover 为悬停（也包含点击）、manually 为完全手动控制            |         [悬浮下拉](demo#suspension-drop-down)          |
 |      closeScope       |    `'all'\|'blank'\|'none'`    |  'all'  | 可选，点击关闭区域，blank 点击非菜单空白才关闭, all 点击菜单内外都关闭，none 菜单内外均不关闭仅下拉按键可以关闭 | [关闭触发点设置](demo#turn-off-trigger-point-settings) |
-| closeOnMouseLeaveMenu |           `boolean`            |  false  |                                   可选，是否进入菜单后离开菜单的时候关闭菜单                                    | [多级下拉菜单](demo#multi-level-drop-down-menu)        |
-|  showAnimation   |             `boolean`              |                                 true                                  |  可选，是否开启动画 |   | ✔ |
+| closeOnMouseLeaveMenu |           `boolean`            |  false  |                                   可选，是否进入菜单后离开菜单的时候关闭菜单                                    |    [多级下拉菜单](demo#multi-level-drop-down-menu)     |
+|     showAnimation     |           `boolean`            |  true   |                                               可选，是否开启动画                                                |                                                        | ✔          |
 
 ### dDropDown 事件
 
@@ -43,12 +43,12 @@ npm install @angular/cdk --save
 ```
 
 ```TypeScript
-import { ScrollDispatchModule } from '@angular/cdk/scrolling';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @NgModule({
   imports: [
     // ...
-    ScrollDispatchModule,
+    ScrollingModule,
     // ...
   ]
 })

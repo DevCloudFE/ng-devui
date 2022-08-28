@@ -9,57 +9,49 @@
 
 <h3 class="devui-h3-title">{{ 'components.design-font.fontDemo.instance.tableTitle' | translate }}</h3>
 <d-tabs [type]="'tabs'" [(activeTab)]="activeTab">
-  <d-tab id="curFont" title="{{ 'components.design-font.fontDemo.instance.defaultTable.tab' | translate }}" tabId="curFont">
-    <ng-template dTabContent>
-      <d-data-table #datatable [dataSource]="fonts" [scrollable]="true" [type]="'striped'">
-        <d-column
-          field="name"
-          header="{{ 'components.design-font.fontDemo.instance.defaultTable.fontName' | translate }}"
-          [width]="'150px'"
-        >
-        </d-column>
-        <d-column
-          field="value"
-          header="{{ 'components.design-font.fontDemo.instance.defaultTable.fontValue' | translate }}"
-          [width]="'150px'"
-        ></d-column>
-        <d-column
-          field="themeValue"
-          header="{{ 'components.design-font.fontDemo.instance.defaultTable.themeValue' | translate }}"
-          [width]="'150px'"
-        ></d-column>
-        <d-column
-          field="description"
-          header="{{ 'components.design-font.fontDemo.instance.defaultTable.description' | translate }}"
-          [width]="'200px'"
-        >
-        </d-column>
-      </d-data-table>
-    </ng-template>
+  <d-tab id="curFont" title="{{ 'components.design-font.fontDemo.instance.defaultTable.tab' | translate }}">
+    <d-data-table #datatable [dataSource]="fonts" [scrollable]="true">
+      <d-column field="name" header="{{ 'components.design-font.fontDemo.instance.defaultTable.fontName' | translate }}" [width]="'150px'">
+      </d-column>
+      <d-column
+        field="value"
+        header="{{ 'components.design-font.fontDemo.instance.defaultTable.fontValue' | translate }}"
+        [width]="'150px'"
+      ></d-column>
+      <d-column
+        field="themeValue"
+        header="{{ 'components.design-font.fontDemo.instance.defaultTable.themeValue' | translate }}"
+        [width]="'150px'"
+      ></d-column>
+      <d-column
+        field="description"
+        header="{{ 'components.design-font.fontDemo.instance.defaultTable.description' | translate }}"
+        [width]="'200px'"
+      >
+      </d-column>
+    </d-data-table>
   </d-tab>
-  <d-tab id="oldFont" title="{{ 'components.design-font.fontDemo.instance.oldTable.tab' | translate }}" tabId="oldFont">
-    <ng-template dTabContent>
-      <d-data-table #datatable [dataSource]="oldFonts" [scrollable]="true" [type]="'striped'">
-        <d-column field="name" header="{{ 'components.design-font.fontDemo.instance.oldTable.fontName' | translate }}" [width]="'150px'">
-        </d-column>
-        <d-column
-          field="newName"
-          header="{{ 'components.design-font.fontDemo.instance.oldTable.newFontName' | translate }}"
-          [width]="'150px'"
-        >
-        </d-column>
-        <d-column
-          field="value"
-          header="{{ 'components.design-font.fontDemo.instance.oldTable.fontValue' | translate }}"
-          [width]="'150px'"
-        ></d-column>
-        <d-column
-          field="description"
-          header="{{ 'components.design-font.fontDemo.instance.oldTable.description' | translate }}"
-          [width]="'200px'"
-        >
-        </d-column>
-      </d-data-table>
-    </ng-template>
+  <d-tab id="oldFont" title="{{ 'components.design-font.fontDemo.instance.oldTable.tab' | translate }}">
+    <d-data-table #datatable [dataSource]="oldFonts" [scrollable]="true">
+      <d-column field="name" header="{{ 'components.design-font.fontDemo.instance.oldTable.fontName' | translate }}" [width]="'150px'">
+      </d-column>
+      <d-column
+        field="newName"
+        header="{{ 'components.design-font.fontDemo.instance.oldTable.newFontName' | translate }}"
+        [width]="'150px'"
+      >
+      </d-column>
+      <d-column
+        field="value"
+        header="{{ 'components.design-font.fontDemo.instance.oldTable.fontValue' | translate }}"
+        [width]="'150px'"
+      ></d-column>
+      <d-column
+        field="description"
+        header="{{ 'components.design-font.fontDemo.instance.oldTable.description' | translate }}"
+        [width]="'200px'"
+      >
+      </d-column>
+    </d-data-table>
   </d-tab>
 </d-tabs>

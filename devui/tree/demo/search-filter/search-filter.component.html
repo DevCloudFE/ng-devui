@@ -27,12 +27,4 @@
   <div class="icon icon-help help-tip" dTooltip [content]="'使用正则表达式限定搜索范围'"></div>
 </div>
 
-<d-operable-tree
-  #dOperableTreeComponent="dOperableTreeComponent"
-  [tree]="data2"
-  [treeNodeIdKey]="'id'"
-  [treeNodeChildrenKey]="'children'"
-  (nodeDeleted)="onOperableNodeDeleted($event)"
-  (nodeSelected)="onOperableNodeSelected($event)"
->
-</d-operable-tree>
+<d-operable-tree #dOperableTreeComponent="dOperableTreeComponent" [tree]="data2"> </d-operable-tree>

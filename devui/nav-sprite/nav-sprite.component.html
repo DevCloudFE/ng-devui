@@ -12,7 +12,7 @@
     <ng-container *ngIf="isOpen; else minTemp">
       <div class="devui-nav-sprite-header">
         <div class="devui-nav-sprite-header-title">{{ title }}</div>
-        <d-button icon="icon-close" bsStyle="text-dark" title="close" (click)="hide()"></d-button>
+        <d-button icon="icon-close" bsStyle="text" title="close" (click)="hide()"></d-button>
       </div>
       <ng-container [ngTemplateOutlet]="defaultItemsTemp"></ng-container>
     </ng-container>

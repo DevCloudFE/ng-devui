@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
+import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -11,6 +11,11 @@ export class CommonDemoComponent implements OnInit, OnDestroy {
   pipeSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'html', code: require('./pipe/pipe.component.html?raw') },
     { title: 'TS', language: 'typescript', code: require('./pipe/pipe.component.ts?raw') },
+  ];
+
+  helperBrowserSource: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'html', code: require('./helper-browser/helper-browser.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./helper-browser/helper-browser.component.ts?raw') },
   ];
 
   helperJumpSource: Array<DevuiSourceData> = [
@@ -62,6 +67,7 @@ export class CommonDemoComponent implements OnInit, OnDestroy {
   setNavValues(values) {
     this.navItems = [
       { dAnchorLink: 'date-pipe', value: values['date-pipe'] },
+      { dAnchorLink: 'browser-version', value: values['browser-version'] },
       { dAnchorLink: 'open-url', value: values['open-url'] },
       { dAnchorLink: 'download-file', value: values['download-file'] },
       { dAnchorLink: 'iframe-propagate', value: values['iframe-propagate'] },

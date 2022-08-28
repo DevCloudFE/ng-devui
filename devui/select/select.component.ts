@@ -34,12 +34,10 @@ import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import {
   addClassToOrigin,
   AppendToBodyDirection,
-  AppendToBodyDirectionsConfig,
-  fadeInOut,
+  AppendToBodyDirectionsConfig, DevConfigService, fadeInOut,
   formWithDropDown,
-  removeClassFromOrigin
+  removeClassFromOrigin, WithConfig
 } from 'ng-devui/utils';
-import { DevConfigService, WithConfig } from 'ng-devui/utils/globalConfig';
 import { WindowRef } from 'ng-devui/window-ref';
 import { BehaviorSubject, fromEvent, Observable, of, Subscription } from 'rxjs';
 import { debounceTime, filter, map, switchMap } from 'rxjs/operators';
@@ -222,7 +220,10 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
       enable: boolean; // 默认值为false
       overflow?: 'normal' | 'scroll-y' | 'multiple-line' | string; // 默认值为''
       containerMaxHeight?: string; // 默认值1.8em
-      containnerMaxHeight?: string; // 默认值1.8em, 已废弃
+      /**
+       * @deprecated
+       */
+      containnerMaxHeight?: string; // 默认值1.8em
       labelMaxWidth?: string; // 默认100%
     };
     selectedItemWithTemplate?: {
@@ -295,9 +296,10 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
   minBuffer: number;
   maxBuffer: number;
   virtualScrollItemSize: any = {
-    sm: 34,
-    normal: 38,
+    sm: 30,
+    normal: 36,
     lg: 50,
+    space: 4
   };
 
   cdkConnectedOverlayOrigin: CdkOverlayOrigin;
@@ -320,8 +322,8 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
     private devConfigService: DevConfigService,
     @Inject(DOCUMENT) private doc: any
   ) {
-    this.valueParser = item => (typeof item === 'object' ? item[this.filterKey] || '' : (item + '') ? item.toString() : '');
-    this.formatter = item => (typeof item === 'object' ? item[this.filterKey] || '' : (item + '') ? item.toString() : '');
+    this.valueParser = item => (typeof item === 'object' ? item[this.filterKey] || '' : (String(item)) ? item.toString() : '');
+    this.formatter = item => (typeof item === 'object' ? item[this.filterKey] || '' : (String(item)) ? item.toString() : '');
     this.document = this.doc;
   }
 
@@ -408,18 +410,19 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
 
   getVirtualScrollHeight(len, size) {
     if (len > 0) {
-      let height = this.templateItemSize ? this.templateItemSize * len : this.virtualScrollItemSize[size ? size : 'normal'] * len;
+      let height =
+        (this.templateItemSize || this.virtualScrollItemSize[size || 'normal']) * len + this.virtualScrollItemSize.space * (len - 1);
       if (this.isSelectAll && this.multiple) {
-        height += this.virtualScrollItemSize[size ? size : 'normal'];
+        height += this.virtualScrollItemSize[size ? size : 'normal'] + this.virtualScrollItemSize.space;
       }
-      const scrollHight = parseInt(this.scrollHight, 10);
-      this.scrollHeightNum = height > scrollHight ? scrollHight : height;
+      const scrollHeight = parseInt(this.scrollHight, 10);
+      this.scrollHeightNum = height > scrollHeight ? scrollHeight : height;
       return `${this.scrollHeightNum}px`;
     }
   }
 
   get realVirtualScrollItemSize() {
-    const itemSize = this.templateItemSize || this.virtualScrollItemSize[this.size || 'normal'];
+    const itemSize = (this.templateItemSize || this.virtualScrollItemSize[this.size || 'normal']) + this.virtualScrollItemSize.space;
     const num = Math.round(this.scrollHeightNum / itemSize) || 10;
     this.minBuffer = num * 1.5 * itemSize;
     this.maxBuffer = num * 2.5 * itemSize;
@@ -594,7 +597,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
     this.onChange(this.value);
     this.valueChange.emit(option);
     this.setChecked(this.value);
-  }
+  };
 
   updateCdkConnectedOverlayOrigin() {
     if (this.selectWrapper.nativeElement) {
@@ -634,17 +637,17 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
       if (!this.appendToBody) {
         let direction = '';
         switch (this.direction) {
-          case 'auto':
-            direction = this.isBottomRectEnough() ? 'bottom' : 'top';
-            break;
-          case 'down':
-            direction = 'bottom';
-            break;
-          case 'up':
-            direction = 'top';
-            break;
-          default:
-            direction = 'bottom';
+        case 'auto':
+          direction = this.isBottomRectEnough() ? 'bottom' : 'top';
+          break;
+        case 'down':
+          direction = 'bottom';
+          break;
+        case 'up':
+          direction = 'top';
+          break;
+        default:
+          direction = 'bottom';
         }
         this.popDirection = <any>direction;
       } else {
@@ -713,7 +716,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
       this.selectIndex = this.activeIndex ? this.activeIndex : -1;
       this.changeDetectorRef.detectChanges();
     }
-  }
+  };
 
   onEscKeyup($event) {
     if (this.isOpen) {
@@ -780,7 +783,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
     return this.extraConfig?.enableFocusFirstFilteredOption && this.multiple && this.availableOptions.length
       ? this.availableOptions[0]
       : this.availableOptions[this.selectIndex];
-  }
+  };
 
   removeItem(item, $event) {
     this.choose(item.option, item.id, $event);

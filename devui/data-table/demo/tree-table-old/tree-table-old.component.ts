@@ -20,13 +20,13 @@ export class TreeTableOldComponent implements OnInit {
   }
 
   cellClick(e) {
-      console.log('cell');
-      console.log(e);
+    console.log('cell');
+    console.log(e);
   }
 
   rowClick(e) {
-      console.log('row');
-      console.log(e);
+    console.log('row');
+    console.log(e);
   }
 
   loadChildrenTable = (rowItem) => {
@@ -41,14 +41,14 @@ export class TreeTableOldComponent implements OnInit {
               dob: new Date(1989, 1, 1),
               startDate: new Date(2020, 1, 4),
               endDate: new Date(2020, 1, 8)
-          });
+            });
           }
         }
         resolve(rowItem);
       }, 500);
 
     });
-  }
+  };
 
   loadAllChildrenTable = () => {
     this.basicDataSource[0].children[0].children[1].children[0].children = [];
@@ -59,15 +59,15 @@ export class TreeTableOldComponent implements OnInit {
       dob: new Date(1989, 1, 1),
     },
     {
-        title: 'table title32',
-        lastName: 'Mark',
-        status: 'done',
-        dob: new Date(1991, 3, 1)
+      title: 'table title32',
+      lastName: 'Mark',
+      status: 'done',
+      dob: new Date(1991, 3, 1)
     });
     return new Promise((resolve) => {
       resolve(true);
     });
-  }
+  };
 
   setUnCheckableRelation(type) {
     if (type === 'upward') {

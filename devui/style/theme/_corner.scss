@@ -1,5 +1,4 @@
-//圆角变量
-
 $devui-border-radius: var(--devui-border-radius, 2px); //一般圆角
 $devui-border-radius-feedback: var(--devui-border-radius-feedback, 4px); //反馈类圆角
 $devui-border-radius-card: var(--devui-border-radius-card, 6px); //卡片圆角
+$devui-border-radius-full: var(--devui-border-radius-full, 100px); //暂不对外开放，用于开关，进度条等组件的圆角自适应宽高

@@ -15,17 +15,17 @@
 
   .devui-page-size {
     display: inline-block;
-    max-width: 100px;
     vertical-align: middle;
-    margin: 0 12px 0 0;
+    margin: 0 8px 0 0;
     position: relative;
+    height: 28px;
 
     &.devui-page-size-sm {
-      max-width: 80px;
+      height: 26px;
     }
 
     &.devui-page-size-lg {
-      max-width: 100px;
+      height: 46px;
 
       li a.devui-pagination-link {
         height: 46px;
@@ -379,4 +379,8 @@
 
 :host ::ng-deep .devui-input-lg {
   height: 46px;
+}
+
+.devui-pagination-dropdown-menu {
+  min-width: 60px;
 }

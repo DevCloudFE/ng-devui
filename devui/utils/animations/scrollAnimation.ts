@@ -1,5 +1,5 @@
-export function scrollAnimate(target, currentTopValue, targetTopValue, timeGap: number = 40, scrollTime: number = 450, callback?) {
-  if (typeof document === 'undefined' || typeof window === 'undefined') {
+export function scrollAnimate(target, currentTopValue, targetTopValue, timeGap = 40, scrollTime = 450, callback?) {
+  if (typeof document === 'undefined' || typeof window === 'undefined' || !target) {
     return;
   }
   const startTimeStamp = Date.now();
@@ -32,8 +32,9 @@ export function easeInOutCubic(t: number, b: number, c: number, d: number): numb
   const cc = c - b;
   let tt = t / (d / 2);
   if (tt < 1) {
-    return (cc / 2) * tt * tt * tt + b;
+    return ((cc / 2) * tt * tt * tt + b);
   } else {
-    return (cc / 2) * ((tt -= 2) * tt * tt + 2) + b;
+    // eslint-disable-next-line no-return-assign
+    return ((cc / 2) * ((tt -= 2) * tt * tt + 2) + b);
   }
 }

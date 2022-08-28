@@ -7,7 +7,7 @@ import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
 import { TabsModule } from 'ng-devui/tabs';
 import { TranslateModule } from '@ngx-translate/core';
-import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
+import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
 import { DesignFontDemoComponent } from './design-font-demo.component';
 import { FontComponent } from './font/font.component';
 @NgModule({

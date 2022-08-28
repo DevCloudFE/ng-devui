@@ -13,7 +13,7 @@ export class NgmodelComponent implements OnInit {
   }
 
   onSearch(term) {
-      console.log(term);
+    console.log(term);
   }
 
 }

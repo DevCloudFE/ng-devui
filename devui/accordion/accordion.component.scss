@@ -1,4 +1,3 @@
-@import '../style/mixins/index';
 @import '../style/theme/color';
 @import '../style/theme/shadow';
 @import '../style/theme/corner';
@@ -168,10 +167,6 @@
     color: $devui-brand-active;
     background: transparent;
   }
-}
-
-:host ::ng-deep d-accordion-list.devui-accordion-menu-hidden {
-  display: none;
 }
 
 /* 视觉融合灰线 */

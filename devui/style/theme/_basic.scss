@@ -1,0 +1,228 @@
+// Color
+// 取色规则1： 所有使用颜色均需要在色板中选择
+// 取色规则2： 除标签等用于功能分类及black,white的取色可以增加透明度(eg: rgba($devui-white-5,0.3)，其余场景均不允许
+
+$devui-blue-5: #f2f5fc;
+$devui-blue-10: #e9edfa;
+$devui-blue-20: #beccfa;
+$devui-blue-30: #96adfa;
+$devui-blue-40: #7693f5;
+$devui-blue-50: #5e7ce0;
+$devui-blue-60: #526ecc;
+$devui-blue-70: #465eb8;
+$devui-blue-80: #3c51a6;
+$devui-blue-90: #344899;
+$devui-blue-100: #2a3c85;
+
+$devui-sky-5: #ebf6ff;
+$devui-sky-10: #d1ebff;
+$devui-sky-20: #b8e0ff;
+$devui-sky-30: #9ed5ff;
+$devui-sky-40: #85caff;
+$devui-sky-50: #6cbfff;
+$devui-sky-60: #4ea6e6;
+$devui-sky-70: #3590cc;
+$devui-sky-80: #207ab3;
+$devui-sky-90: #0f6999;
+$devui-sky-100: #035880;
+
+$devui-green-5: #edfff9;
+$devui-green-10: #cffcee;
+$devui-green-20: #acf2dc;
+$devui-green-30: #8be8cb;
+$devui-green-40: #6ddebb;
+$devui-green-50: #50d4ab;
+$devui-green-60: #3ac295;
+$devui-green-70: #27b080;
+$devui-green-80: #169e6c;
+$devui-green-90: #088c58;
+$devui-green-100: #007a45;
+
+$devui-lime-5: #f0ffe6;
+$devui-lime-10: #e5ffd4;
+$devui-lime-20: #d8fcc0;
+$devui-lime-30: #c5f2a7;
+$devui-lime-40: #b3e890;
+$devui-lime-50: #a6dd82;
+$devui-lime-60: #92cc68;
+$devui-lime-70: #7eba50;
+$devui-lime-80: #6ca83b;
+$devui-lime-90: #5e9629;
+$devui-lime-100: #518519;
+
+$devui-yellow-5: #fffbf0;
+$devui-yellow-10: #fff1c2;
+$devui-yellow-20: #ffe794;
+$devui-yellow-30: #ffdc66;
+$devui-yellow-40: #ffd138;
+$devui-yellow-50: #fac20a;
+$devui-yellow-60: #e3aa00;
+$devui-yellow-70: #cc9600;
+$devui-yellow-80: #b58200;
+$devui-yellow-90: #9e6f00;
+$devui-yellow-100: #875c00;
+
+$devui-orange-5: #fff3e8;
+$devui-orange-10: #ffe1c7;
+$devui-orange-20: #ffd0a6;
+$devui-orange-30: #ffbf85;
+$devui-orange-40: #ffad63;
+$devui-orange-50: #fa9841;
+$devui-orange-60: #e37d29;
+$devui-orange-70: #cc6414;
+$devui-orange-80: #b54e04;
+$devui-orange-90: #9e3f00;
+$devui-orange-100: #873400;
+
+$devui-red-5: #ffeeed;
+$devui-red-10: #ffd5d4;
+$devui-red-20: #ffbcba;
+$devui-red-30: #ffa4a1;
+$devui-red-40: #ff8b87;
+$devui-red-50: #f66f6a;
+$devui-red-60: #de504e;
+$devui-red-70: #c73636;
+$devui-red-80: #b02121;
+$devui-red-90: #991111;
+$devui-red-100: #820404;
+
+$devui-magenta-5: #ffedf3;
+$devui-magenta-10: #ffd4e3;
+$devui-magenta-20: #ffbad2;
+$devui-magenta-30: #ffa1c2;
+$devui-magenta-40: #fc86b0;
+$devui-magenta-50: #f3689a;
+$devui-magenta-60: #db4d83;
+$devui-magenta-70: #c4356e;
+$devui-magenta-80: #ad215b;
+$devui-magenta-90: #96114d;
+$devui-magenta-100: #800440;
+
+$devui-purple-5: #f5f0ff;
+$devui-purple-10: #e7d9ff;
+$devui-purple-20: #d8c2ff;
+$devui-purple-30: #caabff;
+$devui-purple-40: #bc94ff;
+$devui-purple-50: #a97af8;
+$devui-purple-60: #8a5ce0;
+$devui-purple-70: #6f42c9;
+$devui-purple-80: #572db3;
+$devui-purple-90: #3f1a9c;
+$devui-purple-100: #2a0c85;
+
+$devui-gray-5: #f5f5f5;
+$devui-gray-10: #ebebeb;
+$devui-gray-20: #e0e0e0;
+$devui-gray-30:  #d1d1d1;
+$devui-gray-40: #bdbdbd;
+$devui-gray-50: #8a8a8a;
+$devui-gray-60: #878787;
+$devui-gray-70: #707070;
+$devui-gray-80: #5c5c5c;
+$devui-gray-90: #474747;
+$devui-gray-100: #383838;
+
+$devui-slate-5: #f7f8fa;
+$devui-slate-10: #eef0f5;
+$devui-slate-20: #dfe1e6;
+$devui-slate-30: #d7d8da;
+$devui-slate-40: #cfd0d3;
+$devui-slate-50: #babbc0;
+$devui-slate-60: #9b9fa8;
+$devui-slate-70: #71757f;
+$devui-slate-80: #575d6c;
+$devui-slate-90: #323745;
+$devui-slate-100: #252b3a;
+
+$devui-zinc-5: #f8f8fa;
+$devui-zinc-10: #f2f2f3;
+$devui-zinc-20: #e2e2e6;
+$devui-zinc-30: #d5d5db;
+$devui-zinc-40: #c7c7d1;
+$devui-zinc-50: #aeaebd;
+$devui-zinc-60: #9696a3;
+$devui-zinc-70: #7a7a85;
+$devui-zinc-80: #63636b;
+$devui-zinc-90: #494952;
+$devui-zinc-100: #37373d;
+
+$devui-dark-gray-5: #16181a;
+$devui-dark-gray-10: #202124;
+$devui-dark-gray-20: #292a2e;
+$devui-dark-gray-30: #2e2f33;
+$devui-dark-gray-40: #323338;
+$devui-dark-gray-50: #393a3e;
+$devui-dark-gray-60: #4e5057;
+$devui-dark-gray-70: #696c75;
+$devui-dark-gray-80: #868a99;
+$devui-dark-gray-90: #acb0bd;
+$devui-dark-gray-100: #ced1db;
+
+$devui-dark-slate-5: #0e111a;
+$devui-dark-slate-10: #141721;
+$devui-dark-slate-20: #1a1e29;
+$devui-dark-slate-30: #232633;
+$devui-dark-slate-40: #2c303e;
+$devui-dark-slate-50: #33384b;
+$devui-dark-slate-60: #444b61;
+$devui-dark-slate-70: #626a85;
+$devui-dark-slate-80: #878ea8;
+$devui-dark-slate-90: #a3aac2;
+$devui-dark-slate-100: #c1c7db;
+
+$devui-dark-zinc-5: #1a1a1c;
+$devui-dark-zinc-10: #212124;
+$devui-dark-zinc-20: #28282b;
+$devui-dark-zinc-30: #2f2f33;
+$devui-dark-zinc-40: #353537;
+$devui-dark-zinc-50: #3d3d42;
+$devui-dark-zinc-60: #4b4b52;
+$devui-dark-zinc-70: #575861;
+$devui-dark-zinc-80: #767680;
+$devui-dark-zinc-90: #9898a3;
+$devui-dark-zinc-100: #b7b7c7;
+
+$devui-white-5: #ffffff;
+$devui-black-5: #000000;
+
+// TODO: 非色板变量命名规则待定，暂不开放
+// // 字体边框背景的黑，灰色待定
+
+// // Border
+// $devui-border-radius-sm: 2px;
+// $devui-border-radius-md: 4px;
+// $devui-border-radius-lg: 8px;
+// $devui-border-radius-100: 100px;
+
+// // Box Shadow
+// $devui-shadow-length-sm: 0 1px 4px 0;
+// $devui-shadow-length-md: 0 4px 8px 0;
+// $devui-shadow-length-lg: 0 8px 16px 0;
+// $devui-shadow-length-xl: 0 12px 24px 0;
+
+// $devui-shadow-length-left-sm: -1px 0 4px 0;
+// $devui-shadow-length-left-md: -4px 0 8px 0;
+// $devui-shadow-length-left-lg: -8px 0 16px 0;
+// $devui-shadow-length-left-xl: -12px 0 24px 0;
+
+// $devui-shadow-length-right-sm: 1px 0 4px 0;
+// $devui-shadow-length-right-md: 4px 0 8px 0;
+// $devui-shadow-length-right-lg: 8px 0 16px 0;
+// $devui-shadow-length-right-xl: 12px 0 24px 0;
+
+// // Font Size
+// $devui-font-size-xl: 18px;
+// $devui-font-size-2xl: 20px;
+// $devui-font-size-3xl: 24px;
+// $devui-font-size-4xl: 28px;
+// $devui-font-size-5xl: 36px;
+
+// // ZIndex
+// $devui-z-index-1080: 1080;
+// $devui-z-index-1060: 1060;
+// $devui-z-index-1050: 1050;
+// $devui-z-index-1040: 1040;
+// $devui-z-index-1030: 1030;
+// $devui-z-index-1020: 1020;
+// $devui-z-index-1010: 1010;
+// $devui-z-index-1000: 1000;

@@ -138,26 +138,26 @@ export class GanttMarkerDirective implements OnChanges, OnDestroy {
 
   destroyMarkElement(type = 'all') {
     switch (type) {
-      case 'monthMark':
-        this.removeMonthMark();
-        break;
-        case 'weekend':
-          this.removeWeekendMark();
-          break;
-        case 'today':
-          this.removeTodayMark();
-          break;
-        case 'milestone':
-          this.removeMileStoneMark();
-          break;
-        case 'all':
-          this.removeMonthMark();
-          this.removeWeekendMark();
-          this.removeTodayMark();
-          this.removeMileStoneMark();
-          break;
-        default:
-          break;
+    case 'monthMark':
+      this.removeMonthMark();
+      break;
+    case 'weekend':
+      this.removeWeekendMark();
+      break;
+    case 'today':
+      this.removeTodayMark();
+      break;
+    case 'milestone':
+      this.removeMileStoneMark();
+      break;
+    case 'all':
+      this.removeMonthMark();
+      this.removeWeekendMark();
+      this.removeTodayMark();
+      this.removeMileStoneMark();
+      break;
+    default:
+      break;
     }
   }
 

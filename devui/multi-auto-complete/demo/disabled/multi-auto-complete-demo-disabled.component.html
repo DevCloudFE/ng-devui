@@ -1,3 +1,11 @@
-<d-multi-auto-complete [disabled]="true" [source]="languages" [(ngModel)]="multiItems" name="multiple-auto"> </d-multi-auto-complete>
-
+<section>
+  <d-multi-auto-complete
+    [disabled]="toggle"
+    [disabledKey]="disabledKey"
+    [source]="languages"
+    [(ngModel)]="multiItems"
+    [searchFn]="onSearchMultiple"
+  ></d-multi-auto-complete>
+  <d-button bsStyle="primary" (btnClick)="toggle = !toggle">Disable</d-button>
+</section>
 <pre>{{ multiItems | json }}</pre>

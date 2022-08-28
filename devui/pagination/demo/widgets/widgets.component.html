@@ -42,7 +42,19 @@
     [pageSizeDirection]="['centerUp']"
   >
   </d-pagination>
+  <h4>Custom Style</h4>
   <div>
-    <pre>{{ pager | json }}</pre>
+    <d-pagination
+      [total]="pager.total"
+      [(pageSize)]="pager.pageSize"
+      [(pageIndex)]="pager.pageIndex"
+      [canViewTotal]="true"
+      [canChangePageSize]="true"
+      [canJumpPage]="true"
+      [goToText]="'Jump to'"
+      [preLink]="preLink"
+      [nextLink]="nextLink"
+    >
+    </d-pagination>
   </div>
 </section>

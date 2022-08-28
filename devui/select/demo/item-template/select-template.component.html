@@ -4,7 +4,9 @@
     <div class="col-md-5">
       <h5>Use templates only for lists<!--只在列表使用模板--></h5>
       <d-select [options]="languages2" [filterKey]="'name'" [(ngModel)]="currentOption4" [placeholder]="'Search'">
-        <ng-template let-option="option" let-filterKey="filterKey"> Do you agree? {{ option[filterKey] }} </ng-template>
+        <ng-template let-option="option" let-filterKey="filterKey">
+          <span title="Do you agree? {{ option[filterKey] }}"> Do you agree? {{ option[filterKey] }} </span>
+        </ng-template>
       </d-select>
 
       <h5>Use the same template in the list and selected items<!--在列表和选中项使用相同模板--></h5>
@@ -15,7 +17,9 @@
         [placeholder]="'Search'"
         [extraConfig]="{ selectedItemWithTemplate: { enable: true } }"
       >
-        <ng-template let-option="option" let-filterKey="filterKey"> Do you agree? {{ option[filterKey] }} </ng-template>
+        <ng-template let-option="option" let-filterKey="filterKey">
+          <span title="Do you agree? {{ option[filterKey] }}"> Do you agree? {{ option[filterKey] }} </span>
+        </ng-template>
       </d-select>
 
       <h5>Use different templates in lists and selected items<!--在列表和选中项使用不同模板--></h5>
@@ -27,9 +31,11 @@
         [extraConfig]="{ selectedItemWithTemplate: { enable: true } }"
       >
         <ng-template let-option="option" let-filterKey="filterKey" let-position="position">
-          <ng-container *ngIf="position === 'list'"> Do you agree? {{ option[filterKey] }} </ng-container>
+          <ng-container *ngIf="position === 'list'">
+            <span title="Do you agree? {{ option[filterKey] }}"> Do you agree? {{ option[filterKey] }} </span>
+          </ng-container>
           <ng-container *ngIf="position === 'result'">
-            {{ option['specialContent'] }}
+            <span title="option['specialContent']"> {{ option['specialContent'] }}</span>
           </ng-container>
         </ng-template>
       </d-select>
@@ -94,11 +100,11 @@
       >
         <ng-template let-option="option" let-filterKey="filterKey" let-position="position" let-checked="checked" let-template="template">
           <ng-container *ngIf="position === 'result'">
-            <ng-container *ngIf="option?.length === languages3.length"> Agree With All</ng-container>
+            <ng-container *ngIf="option?.length === languages3.length">Agree With All</ng-container>
             <ng-container *ngIf="option?.length !== languages3.length">
               Agree with
               <ng-container *ngFor="let op of option; let index = index">
-                <ng-container *ngIf="index !== 0">, </ng-container>{{ op[filterKey] }} </ng-container
+                <ng-container *ngIf="index !== 0">, </ng-container>{{ op[filterKey] }}</ng-container
               >.
             </ng-container>
           </ng-container>

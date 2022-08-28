@@ -4,9 +4,9 @@ import {
 import { DatepickerProComponent } from 'ng-devui/datepicker-pro';
 
 @Component({
-selector: 'd-datepicker-pro-template',
-styleUrls: ['./datepicker-template.component.scss'],
-templateUrl: './datepicker-template.component.html',
+  selector: 'd-datepicker-pro-template',
+  styleUrls: ['./datepicker-template.component.scss'],
+  templateUrl: './datepicker-template.component.html',
 })
 export class DatepickerProTemplateComponent {
   @ViewChild('datepicker') datepickerPro: DatepickerProComponent;

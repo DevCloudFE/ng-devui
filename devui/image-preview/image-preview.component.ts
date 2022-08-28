@@ -61,6 +61,25 @@ export class DImagePreviewComponent implements OnInit, OnDestroy {
     }
   }
 
+  @HostListener('touchstart', ['$event'])
+  touchstart($event) {
+    $event['clientX'] = $event.changedTouches[0].clientX;
+    $event['clientY'] = $event.changedTouches[0].clientY;
+    this.transformableImageElementRef.mouseDown($event);
+  }
+
+  @HostListener('touchmove', ['$event'])
+  touchmove($event) {
+    $event['clientX'] = $event.changedTouches[0].clientX;
+    $event['clientY'] = $event.changedTouches[0].clientY;
+    this.transformableImageElementRef.mouseMove($event);
+  }
+
+  @HostListener('touchend', ['$event'])
+  touchend($event) {
+    this.transformableImageElementRef.mouseDown($event);
+  }
+
   @HostListener('window:keydown.ArrowLeft', [])
   arrowLeft() {
     this.pre();

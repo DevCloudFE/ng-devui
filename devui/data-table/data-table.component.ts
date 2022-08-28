@@ -1,9 +1,28 @@
-import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
+﻿import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { DOCUMENT } from '@angular/common';
 import {
-  AfterContentInit, AfterViewInit, ChangeDetectorRef, Component, ContentChild, ContentChildren, ElementRef,
-  EventEmitter, HostBinding, Inject, Input, NgZone, OnChanges, OnDestroy, OnInit, Output, QueryList, Renderer2,
-  SimpleChanges, TemplateRef, ViewChild
+  AfterContentInit,
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  ContentChild,
+  ContentChildren,
+  ElementRef,
+  EventEmitter,
+  forwardRef,
+  HostBinding,
+  Inject,
+  Input,
+  NgZone,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  Output,
+  QueryList,
+  Renderer2,
+  SimpleChanges,
+  TemplateRef,
+  ViewChild
 } from '@angular/core';
 import { merge, Subscription } from 'rxjs';
 import { switchMap, takeUntil } from 'rxjs/operators';
@@ -12,6 +31,7 @@ import {
   RowSelectedEventArg, SortEventArg, TableCheckOptions, TableCheckStatusArg,
   TableExpandConfig, TableWidthConfig
 } from './data-table.model';
+import { DATA_TABLE } from './data-table.token';
 import { TableTbodyComponent } from './table/body/tbody.component';
 import { TableThComponent } from './table/head/th/th.component';
 import { TableTheadComponent } from './table/head/thead.component';
@@ -27,6 +47,10 @@ import { DataTableColumnTmplComponent } from './tmpl/data-table-column-tmpl.comp
   // changeDetection: ChangeDetectionStrategy.OnPush,
   exportAs: 'dataTable',
   preserveWhitespaces: false,
+  providers: [{
+    provide: DATA_TABLE,
+    useExisting: forwardRef(() => DataTableComponent)
+  }],
 })
 export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterContentInit, AfterViewInit {
   /**
@@ -58,7 +82,7 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
    */
   @Input() scrollable: boolean;
   /**
-   * 【可选】默认表格使用的表格类型，可选值为'cell'
+   * 【可选】默认表格使用的表格类型，可选值为'cell' @deprecated
    */
   @Input() editModel = 'cell';
   /**
@@ -118,7 +142,7 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
    */
   @Input() colDropFreezeTo = 0;
   /**
-   * 【可选】用来自定义详情页的模板
+   * 【可选】用来自定义详情页的模板 @deprecated
    */
   @Input() detailTemplateRef: TemplateRef<any>;
   /**
@@ -133,12 +157,12 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
    * 【可选】是否显示排序未激活图标，默认不显示,
    */
   @Input() showSortIcon = false;
-    /**
+  /**
    * 【可选】是否显示筛选未激活图标，默认不显示,
    */
   @Input() showFilterIcon = false;
   /**
-   * 多列选择Change事件，用来更新多列选择数组
+   * 多列选择Change事件，用来更新多列选择数组, column param
    * */
   @Output() multiSortChange = new EventEmitter<SortEventArg[]>();
   /**
@@ -191,13 +215,14 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
   @Output() resize = new EventEmitter<ColumnResizeEventArg>();
   /**
    * 当前表格层级，默认为0，在树形表格场景下自增长
+   * 内部嵌套使用，不对外暴露
    */
   @Input() tableLevel = 0;
   /**
- * 配置树形表格的父子选中是否互相关联
- * upward：选中子关联父
- * downward： 选中父关联子
- */
+   * 配置树形表格的父子选中是否互相关联
+   * upward：选中子关联父
+   * downward： 选中父关联子
+   */
   @Input() checkableRelation: CheckableRelation = { upward: true, downward: true };
   /**
    * 异步加载子列表
@@ -266,7 +291,11 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
   /**
    * 表格尺寸，sm对应行高40px， md对应行高48px，lg对应行高56px
    */
-  @Input() size: 'sm' | 'md' | 'lg' = 'sm';
+  @Input() size: 'xs' | 'sm' | 'md' | 'lg' = 'sm';
+
+  @Input() shadowType: 'normal' | 'embed' = 'embed';
+
+  @Input() tableOverflowType: 'overlay' | 'auto' = 'auto';
 
   @ContentChildren(DataTableColumnTmplComponent) columns: QueryList<DataTableColumnTmplComponent>;
   @ContentChild(TableTheadComponent) innerHeader: TableTheadComponent;
@@ -278,10 +307,19 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
   @ViewChild('cdkVirtualScrollViewport') virtualScrollViewport: CdkVirtualScrollViewport;
   @ViewChild('normalScroll') normalScrollElement: ElementRef;
   @ViewChild('scrollViewTpl') vitualScrollElement: TemplateRef<any>;
+  @ViewChild('devuiNormalScrollBody', {read: ElementRef}) devuiNormalScrollBody: ElementRef;
 
   @HostBinding('style.height') get hostHeight() {
-    return this.tableHeight;
+    return (this.tableHeight && this.dataSource.length) ? this.tableHeight : null;
   }
+
+  @HostBinding('class.devui-table-shadow') get hasShadow() {
+    return this.shadowType === 'normal';
+  }
+
+  hasWidthScroll: boolean;
+
+  hasHeightScroll: boolean;
 
   _dataSource: any[] = [];
   _pageAllChecked = false;
@@ -298,7 +336,7 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
   displayDataSource: any[];
   headertoggleTableSubscription: Subscription;
   headerCheckStatusSubscription: Subscription;
-  searchQueryChange = new EventEmitter<{ [key: string]: any; }>();
+  searchQueryChange = new EventEmitter<{ [key: string]: any }>();
   halfChecked = false;
   childrenTableOpen: boolean;
   private scrollY = 0;
@@ -307,6 +345,9 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
 
   tableBodyEl: ElementRef;
   onDocumentClickListen: any;
+
+  _tableTotalWidth = 0;
+  _lastColSize = 0;
 
   @ViewChild('tableBody') set content(content: ElementRef) {
     setTimeout(() => {
@@ -318,7 +359,8 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
   }
 
   @Input() set dataSource(dataSource: any[]) {
-    if (null === dataSource || !dataSource) {
+    if (dataSource === null || !dataSource) {
+    /* eslint-disable-next-line no-param-reassign */
       dataSource = [];
     }
     this._dataSource = dataSource;
@@ -334,6 +376,7 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
     if (this.virtualScroll) {
       this.initVirtualBodyHeight();
     }
+    this.initScrollStatus();
   }
 
   get dataSource() {
@@ -371,13 +414,15 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
     private renderer: Renderer2,
     private cdr: ChangeDetectorRef,
     @Inject(DOCUMENT) private doc: any) {
-      this.onDocumentClickListen = this.onDocumentClick.bind(this);
-      this.document = this.doc;
+    this.onDocumentClickListen = this.onDocumentClick.bind(this);
+    this.document = this.doc;
   }
 
   initVirtualBodyHeight() {
     setTimeout(() => {
-      this.virtualScrollViewport.checkViewportSize();
+      if (this.virtualScrollViewport) {
+        this.virtualScrollViewport.checkViewportSize();
+      }
     });
     if (this.tableHeight && this.tableHeight !== 'auto') {
       this.virtualBodyHeight = this.tableHeight;
@@ -451,9 +496,9 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
 
     if (
       this.virtualScroll &&
-      (changes['tableHeight'] && !changes.tableHeight.firstChange) ||
+      ((changes['tableHeight'] && !changes.tableHeight.firstChange) ||
       (changes['maxHeight'] && !changes.maxHeight.firstChange) ||
-      (changes['virtualScroll'] && !changes.virtualScroll.firstChange)
+      (changes['virtualScroll'] && !changes.virtualScroll.firstChange))
     ) {
       this.initVirtualBodyHeight();
     }
@@ -488,6 +533,19 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
         this.updateColumns();
       });
     }
+
+    setTimeout(() => {
+      this.initScrollStatus();
+    });
+  }
+
+  public initScrollStatus() {
+    if (this.tableOverflowType !== 'overlay') {
+      return;
+    }
+    const ele = this.virtualScroll ? this.virtualScrollViewport?.elementRef?.nativeElement : this.normalScrollElement?.nativeElement;
+    this.hasWidthScroll = ele && ele.scrollWidth > ele.clientWidth;
+    this.hasHeightScroll = ele && ele.scrollHeight > ele.clientHeight;
   }
 
   ngAfterViewInit() {
@@ -623,7 +681,7 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
     if (data.children) {
       return data.children.some(this.hasChecked);
     }
-  }
+  };
 
   // 判断数据是否存在未选中状态
   private hasUnChecked = (data) => {
@@ -633,7 +691,7 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
     if (data.children) {
       return data.children.some(this.hasUnChecked);
     }
-  }
+  };
 
   setRowCheckStatus($event: RowCheckChangeEventArg) {
     // 处理children的选中
@@ -646,8 +704,7 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
       const nestedIndexArray = $event.nestedIndex.split(',');
       nestedIndexArray.shift();
       const nestedIndexArrayToInt = nestedIndexArray.map((value) => {
-        // tslint:disable-next-line:radix
-        return parseInt(value);
+        return parseInt(value, 10);
       });
       // 通过选中行的父级索引设置父的选中状态
       this.setParentCheckStatus(nestedIndexArrayToInt);
@@ -733,7 +790,7 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
     this.checkAllChange.emit($event);
   }
 
-  onSearchQueryChange($event: { [key: string]: any; }) {
+  onSearchQueryChange($event: { [key: string]: any }) {
     this.searchQueryChange.emit($event);
   }
 
@@ -764,6 +821,7 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
   beginResizeHandlerEvent($event) {
     const thRenderWidthList = $event.thRenderWidthList;
     if (thRenderWidthList.length > 0) {
+      this._tableTotalWidth = this.elementRef.nativeElement.querySelector('.table-wrap').offsetWidth;
       // 兼容d-column表头分组场景
       const reverseThList = thRenderWidthList.reverse();
       this._columns.forEach(column => {
@@ -772,6 +830,10 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
           column.width = thItem.width + 'px';
         }
       });
+
+      if (!this._lastColSize) {
+        this._lastColSize = parseInt(this._columns.slice(-1)[0].width, 10);
+      }
       this.updateColumnsWidth();
     }
     this.onDocumentClick($event.event);
@@ -791,21 +853,41 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
   }
 
   onResizeHandler({ width, field }) {
+    if (width < 0) {
+      return;
+    }
     const index = this.tableWidthConfig.findIndex((config) => {
       return config.field === field;
     });
     if (index > -1) {
       this.tableWidthConfig[index].width = width + 'px';
     }
+    const curTotal = this.tableWidthConfig.reduce((pre, cur) => {
+      const value = pre + parseInt(cur.width, 10);
+      return value;
+    }, 0);
+    let columnResizeEventArg;
     this._columns = this._columns.map((column, colIndex) => {
       if (column.field === field) {
         column.width = parseInt(width, 10) + 'px';
-        const columnResizeEventArg = { currentColumn: column, nextColumn: this._columns[colIndex + 1] };
+        columnResizeEventArg = { currentColumn: column, nextColumn: this._columns[colIndex + 1] };
         this.resize.emit(columnResizeEventArg);
-        return column;
       }
       return column;
     });
+
+    const changeSize = curTotal - this._tableTotalWidth;
+    const lastCol = this._columns.slice(-1)[0];
+    const lastColWidth = parseInt(lastCol.width, 10);
+    if (changeSize < 0 && columnResizeEventArg.nextColumn) {
+      const newSize = parseInt(lastCol.width) - changeSize + 'px';
+      lastCol.width = newSize;
+      this.tableWidthConfig[this.tableWidthConfig.length - 1].width = newSize;
+    } else if (this._lastColSize < lastColWidth) {
+      const lastChange = (lastColWidth - this._lastColSize) > changeSize ? changeSize : (lastColWidth - this._lastColSize);
+      lastCol.width = lastColWidth - lastChange + 'px';
+      this.tableWidthConfig[this.tableWidthConfig.length - 1].width = lastColWidth - lastChange + 'px';
+    }
   }
 
   handleDragTable({ from, to }) {

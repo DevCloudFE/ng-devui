@@ -9,7 +9,7 @@ import { originSource, SourceType } from '../mock-data';
 })
 export class DatatableDemoAsyncComponent implements OnInit {
 
-  /*get Async DataSource*/
+  /* get Async DataSource*/
   remoteDataSource: Array<SourceType> = [];
   showLoading = false;
   loading: LoadingType;

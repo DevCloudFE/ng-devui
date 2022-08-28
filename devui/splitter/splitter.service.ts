@@ -25,20 +25,20 @@ export class SplitterService {
     const next = this.getPane(splitbarIndex + 1);
     const total = prev.computedSize + next.computedSize;
     return {
-        prev: {
-            index: splitbarIndex,
-            initialSize: prev.computedSize,
-            // 设置有最小值，直接取值，如果没有设置就用两个pane总和减去相邻pane的最大值，都没设置（NAN）在取0
-            minSize: this.toPixels(prev.minSize) || total - this.toPixels(next.maxSize) || 0,
-            // 设置有最大值，直接取值，如果没有设置就用两个pane总和减去相邻pane的最小值，都没设置（NAN）在取两个pane总和
-            maxSize: this.toPixels(prev.maxSize) || total - this.toPixels(next.minSize) || total
-        },
-        next: {
-            index: splitbarIndex + 1,
-            initialSize: next.computedSize,
-            minSize: this.toPixels(next.minSize) || total - this.toPixels(prev.maxSize) || 0,
-            maxSize: this.toPixels(next.maxSize) || total - this.toPixels(prev.minSize) || total
-        }
+      prev: {
+        index: splitbarIndex,
+        initialSize: prev.computedSize,
+        // 设置有最小值，直接取值，如果没有设置就用两个pane总和减去相邻pane的最大值，都没设置（NAN）在取0
+        minSize: this.toPixels(prev.minSize) || total - this.toPixels(next.maxSize) || 0,
+        // 设置有最大值，直接取值，如果没有设置就用两个pane总和减去相邻pane的最小值，都没设置（NAN）在取两个pane总和
+        maxSize: this.toPixels(prev.maxSize) || total - this.toPixels(next.minSize) || total
+      },
+      next: {
+        index: splitbarIndex + 1,
+        initialSize: next.computedSize,
+        minSize: this.toPixels(next.minSize) || total - this.toPixels(prev.maxSize) || 0,
+        maxSize: this.toPixels(next.maxSize) || total - this.toPixels(prev.minSize) || total
+      }
     };
   }
 
@@ -66,17 +66,17 @@ export class SplitterService {
 
   // resize pane的大小
   resize(paneState, moveSize) {
-      const pane = this.getPane(paneState.index);
-      const splitterSize = this.containerSize();
-      const newSize = this.clamp(paneState.minSize, paneState.maxSize, paneState.initialSize + moveSize);
-      let size = '';
-      if (this.isPercent(pane.size)) {
-          size = (100 * newSize / splitterSize) + '%';
-      } else {
-          size = newSize + 'px';
-      }
-      pane.size = size;
-      pane.sizeChange.emit(size);
+    const pane = this.getPane(paneState.index);
+    const splitterSize = this.containerSize();
+    const newSize = this.clamp(paneState.minSize, paneState.maxSize, paneState.initialSize + moveSize);
+    let size = '';
+    if (this.isPercent(pane.size)) {
+      size = (100 * newSize / splitterSize) + '%';
+    } else {
+      size = newSize + 'px';
+    }
+    pane.size = size;
+    pane.sizeChange.emit(size);
   }
 
   // 判断pane是否可以调整大小，只要有一边设置了不可调整或者收起，相邻pane调整就失效
@@ -122,10 +122,10 @@ export class SplitterService {
     const pane = this.getPane(paneIndex);
     const nearPane = this.getPane(nearPaneIndex);
     if (pane.collapsible) {
-        pane.collapsed = lockStatus ? pane.collapsed : !pane.collapsed;
-        pane.toggleCollapseClass();
-        nearPane.toggleNearPaneFlexGrow(pane.collapsed);
-        pane.collapsedChange.emit(pane.collapsed);
+      pane._collapsed = lockStatus ? pane._collapsed : !pane._collapsed;
+      pane.toggleCollapseClass();
+      nearPane.toggleNearPaneFlexGrow(pane._collapsed);
+      pane.collapsedChange.emit(pane._collapsed);
     }
   }
 }

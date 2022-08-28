@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 @Component({
-    selector: 'd-demo-time-axis-direction',
-    templateUrl: './time-axis-direction.component.html'
+  selector: 'd-demo-time-axis-direction',
+  templateUrl: './time-axis-direction.component.html'
 })
 export class TimeAxisDirectionComponent implements OnInit {
   dataHorizontal = {

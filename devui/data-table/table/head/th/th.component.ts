@@ -1,14 +1,21 @@
 import { DOCUMENT } from '@angular/common';
 import {
-    ChangeDetectorRef, Component, ElementRef, EventEmitter, HostBinding, HostListener, Inject, Input,
-    NgZone, OnChanges, OnDestroy, Output, Renderer2, SimpleChanges, TemplateRef
+  ChangeDetectorRef, Component, ElementRef, EventEmitter,
+  forwardRef, HostBinding, HostListener, Inject, Input,
+  NgZone, OnChanges, OnDestroy, Output, Renderer2, SimpleChanges, TemplateRef
 } from '@angular/core';
 import { fromEvent, Observable, Subscription } from 'rxjs';
 import { FilterConfig, SortDirection, SortEventArg } from '../../../data-table.model';
+import { TABLE_TH } from './th.token';
 
 @Component({
+  /* eslint-disable-next-line @angular-eslint/component-selector*/
   selector: '[dHeadCell]',
   templateUrl: './th.component.html',
+  providers: [{
+    provide: TABLE_TH,
+    useExisting: forwardRef(() => TableThComponent)
+  }],
 })
 export class TableThComponent implements OnChanges, OnDestroy {
   @HostBinding('class.resizeable') resizeEnabledClass = false;
@@ -34,7 +41,12 @@ export class TableThComponent implements OnChanges, OnDestroy {
   @Input() filterBoxWidth: any;
   @Input() filterBoxHeight: any;
   @Output() filterChange = new EventEmitter<FilterConfig[]>();
+  @Output() filterToggle = new EventEmitter<{
+    isOpen: boolean;
+    checklist: FilterConfig[];
+  }>();
 
+  @HostBinding('class.can-sort')
   @Input() sortable: boolean;
   @Input() sortDirection: SortDirection;
   @Input() showSortIcon = false;
@@ -47,7 +59,6 @@ export class TableThComponent implements OnChanges, OnDestroy {
   @Input() iconFoldTable: string;
   @Input() iconUnFoldTable: string;
 
-  resizeBarRefElement: HTMLElement;
   @Input() tableViewRefElement: ElementRef;
 
   @Output() resizeEndEvent: EventEmitter<any> = new EventEmitter<any>();
@@ -59,6 +70,12 @@ export class TableThComponent implements OnChanges, OnDestroy {
 
   @Input() fixedLeft: string;
   @Input() fixedRight: string;
+  @HostBinding('class.devui-last-sticky-left-cell')
+  @Input() isLastFixedLeft: boolean;
+  @HostBinding('class.devui-first-sticky-right-cell')
+  @Input() isFirstFixedRight: boolean;
+
+  resizeBarRefElement: HTMLElement;
   element: HTMLElement;
   subscription: Subscription;
   resizing = false;
@@ -70,10 +87,11 @@ export class TableThComponent implements OnChanges, OnDestroy {
   mouseDownScreenX: number;
   resizeHandleElement: HTMLElement;
   tableElement: HTMLElement;
+
+  // 以下为内部传递参数，不对外暴露
   @Input() childrenTableOpen: boolean;
   @Output() toggleChildrenTableEvent = new EventEmitter<boolean>();
   @Output() tapEvent = new EventEmitter<any>();
-
   @Input() column: any; // 为配置column方式兼容自定义过滤模板context
   document: Document;
 
@@ -166,6 +184,13 @@ export class TableThComponent implements OnChanges, OnDestroy {
     this.filterChange.emit(filterData);
   }
 
+  emitFilterToggle(data: {
+    isOpen: boolean;
+    checklist: FilterConfig[];
+  }) {
+    this.filterToggle.emit(data);
+  }
+
   onSort(event: SortEventArg) {
     this.sortDirection = event.direction;
     if (event.direction === SortDirection.default) {
@@ -244,9 +269,8 @@ export class TableThComponent implements OnChanges, OnDestroy {
       if (this.tableElement) {
         this.renderer2.removeChild(this.tableElement, this.resizeBarRefElement);
       }
-      // this.width = finalWidth + 'px';
 
-      this.resizeEndEvent.emit({ width: finalWidth });
+      this.resizeEndEvent.emit({ width: finalWidth, beforeWidth: this.initialWidth });
     });
     if (this.subscription && !this.subscription.closed) {
       this._destroySubscription();
@@ -257,7 +281,7 @@ export class TableThComponent implements OnChanges, OnDestroy {
 
   bindMousemove = (e) => {
     this.move(e);
-  }
+  };
 
   move(event: MouseEvent): void {
 

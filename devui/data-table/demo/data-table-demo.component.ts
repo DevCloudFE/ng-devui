@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
+import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 @Component({
   selector: 'd-datatable-demo',
@@ -20,11 +20,13 @@ export class DataTableDemoComponent implements OnInit, OnDestroy {
   interactionColumnSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('./interaction-column/interaction-column.component.html?raw') },
     { title: 'TS', language: 'typescript', code: require('./interaction-column/interaction-column.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./interaction-column/interaction-column.component.scss?raw') },
     { title: 'mock-data', language: 'typescript', code: require('./mock-data?raw') },
   ];
   interactionSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('./interaction/interaction.component.html?raw') },
     { title: 'TS', language: 'typescript', code: require('./interaction/interaction.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./interaction/interaction.component.scss?raw') },
     { title: 'mock-data', language: 'typescript', code: require('./mock-data?raw') },
   ];
   checkOptionSource: Array<DevuiSourceData> = [
@@ -130,6 +132,7 @@ export class DataTableDemoComponent implements OnInit, OnDestroy {
   mutilStyles: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('./mutil-styles/mutil-styles.component.html?raw') },
     { title: 'TS', language: 'typescript', code: require('./mutil-styles/mutil-styles.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./mutil-styles/mutil-styles.component.scss?raw') },
     { title: 'mock-data', language: 'typescript', code: require('./mock-data?raw') },
   ];
   fixHeightVirtualScrollSource: Array<DevuiSourceData> = [

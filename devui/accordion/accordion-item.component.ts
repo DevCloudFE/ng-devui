@@ -1,6 +1,6 @@
-import { Component, HostListener, ViewEncapsulation } from '@angular/core';
+import { Component, HostListener, Inject, ViewEncapsulation } from '@angular/core';
 import { AccordionBaseItemComponent } from './accordion-base-item-component.class';
-import { AccordionComponent } from './accordion.component';
+import { ACCORDION } from './accordion-token';
 import { AccordionBaseItem } from './accordion.type';
 
 @Component({
@@ -10,7 +10,7 @@ import { AccordionBaseItem } from './accordion.type';
   preserveWhitespaces: false,
 })
 export class AccordionItemComponent extends AccordionBaseItemComponent<AccordionBaseItem> {
-  constructor(protected accordion: AccordionComponent) {
+  constructor(@Inject(ACCORDION) protected accordion: any) {
     super(accordion);
   }
   @HostListener('click', ['$event'])

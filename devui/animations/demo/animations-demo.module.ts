@@ -6,7 +6,7 @@ import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
 import { TranslateModule } from '@ngx-translate/core';
-import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
+import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
 import { AnimationIconComponent } from './animation-icon/animation-icon.component';
 import { AnimationsDemoComponent } from './animations-demo.component';
 import { CollapseComponent } from './collapse/collapse.component';

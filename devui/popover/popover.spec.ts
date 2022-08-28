@@ -25,7 +25,7 @@ import { PopoverModule } from './popover.module';
       [controlled]="true"
       [showAnimation]="true"
       [trigger]="'hover'"
-      [hoverDelayTime]="hoverDelayTime"
+      [mouseLeaveDelay]="mouseLeaveDelay"
       [visible]="hoverVisible"
       [appendToBody]="false"
     >
@@ -39,7 +39,7 @@ class TestPopoverBasicComponent {
 
   hoverContent = 'hover';
   hoverVisible = true;
-  hoverDelayTime = 0;
+  mouseLeaveDelay = 0;
 }
 
 describe('popover', () => {
@@ -87,7 +87,7 @@ describe('popover', () => {
         const buttonEle = debugEle.query(By.css('d-button')).nativeElement;
 
         for (const i in config) {
-          if (config.hasOwnProperty(i)) {  // use if to fix tslint error
+          if (Object.prototype.hasOwnProperty.call(config, i)) {  // use if to fix tslint error
             if (i === '0') { // TODO:需要解决元素destroy不销毁问题，这里用例暂时先注释
               testComponent.direction = config[i];
               testComponent.content = config[i];
@@ -103,7 +103,7 @@ describe('popover', () => {
         }
       });
 
-      //  hover可正常显示、可正常变更、可触发mouseleave
+      // hover可正常显示、可正常变更、可触发mouseleave
       it('Mouse hover can open popover content', fakeAsync(() => {
         const buttonEle = debugEle.queryAll(By.css('d-button'))[1].nativeElement;
 
@@ -127,14 +127,13 @@ describe('popover', () => {
         testComponent.hoverVisible = false;
         fixture.detectChanges();
 
-        testComponent.hoverDelayTime = 100;
+        testComponent.mouseLeaveDelay = 100;
         fixture.detectChanges();
         buttonEle.dispatchEvent(new Event('mouseenter'));
         tick(150);
         fixture.detectChanges();
         expect(debugEle.query(By.css('d-popover .devui-popover-content')).nativeElement.textContent).toBe('hover1');
-        //  TODO: mouseleave/blur/visible=false状态下，元素已destroy且不可见，但单元测试仍能检测到元素，单元测试与实际情况有差异，暂时不做测试
-        // expect(debugEle.query(By.css('d-popover .devui-popover-content')).nativeElement.textContent).toBe('hover1');
+        // TODO:mouseleave/blur/visible=false状态下，元素已destroy且不可见，但单元测试仍能检测到元素，单元测试与实际情况有差异，暂时不做测试
       }));
 
     });

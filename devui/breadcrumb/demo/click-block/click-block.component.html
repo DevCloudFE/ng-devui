@@ -1,0 +1,5 @@
+<d-breadcrumb>
+  <d-breadcrumb-item *ngFor="let item of breadItem">
+    <a rel="noopener" (click)="navigate($event, item)">{{ item.name }}</a>
+  </d-breadcrumb-item>
+</d-breadcrumb>

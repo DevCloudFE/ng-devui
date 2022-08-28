@@ -23,7 +23,7 @@ import { CategorySearchModule } from 'ng-devui/category-search';
 |        allowSave        |                                      `boolean`                                      | true  | 可选，是否显示保存当前过滤的按钮                                                            | [基本用法](demo#basic-usage)         |
 |       allowClear        |                                      `boolean`                                      | true  | 可选，是否显示清除当前过滤的按钮                                                            | [基本用法](demo#basic-usage)         |
 |      allowShowMore      |                                      `boolean`                                      | false | 可选，是否显示当前过滤条件下拉列表的按钮                                                    | [大数据量优化展示](demo#auto-scroll) |
-|   showSearchCategory    |                                      `boolean`                                      | true  | 可选，是否显示搜索关键字下拉菜单                                                            |                                      |
+|   showSearchCategory    |                              `boolean \| SearchConfig`                              | true  | 可选，是否显示搜索关键字下拉菜单                                                            | [自定义展示模板](demo##custom-template)  |
 |        searchKey        |                                      `string`                                       |  ''   | 可选，搜索框内的默认展示值                                                                  | [基本用法](demo#basic-usage)         |
 |     beforeTagChange     | `(tag, searchKey, operation) => boolean \| Promise<boolean> \| Observable<boolean>` |  --   | 可选，改变标签前调用的方法，返回 boolean 类型，返回 false 可以阻止分类值改变                |                                      |
 |       toggleEvent       |                    `(dropdown, tag?, currentSelectTag?) => void`                    |  --   | 可选，已选分类的下拉菜单开关时调用的方法，可使用 return 阻止之后的默认方法执行              | [基本用法](demo#basic-usage)         |
@@ -87,9 +87,9 @@ export interface ICategorySearchTagItem {
    * 已选中值
    */
   value?: {
-    value: Array<ITagOption>; // 下拉列表的选择值
     label: string; // 用于显示选中值，如果指定了 filterKey 则使用该值为属性名，例如 basic demo 中的状态
-    cache: Array<ITagOption>; // 下拉列表展开时用于重置选择值的缓存数据
+    value: string | Array<ITagOption | number | string>; // 下拉列表的选择值
+    cache: string | Array<ITagOption | number | string>; // 下拉列表展开时用于重置选择值的缓存数据
   };
   /**
    * dateRange 类型是否显示时分秒
@@ -107,22 +107,31 @@ export interface ITagOption {
   [propName: string]: any;
 }
 
-export type SelectedTagsEvent = {
+export interface SelectedTagsEvent = {
   selectedTags: Array<ICategorySearchTagItem>;
   currentChangeTag: ICategorySearchTagItem;
   operation: 'add' | 'delete' | 'clear';
 };
 
-export type CreateFilterEvent = {
+export interface CreateFilterEvent = {
   name: string;
   selectedTags: Array<ICategorySearchTagItem>;
   keyword: string;
 };
 
-export type SearchEvent = {
+export interface SearchEvent = {
   selectedTags: Array<ICategorySearchTagItem>;
   searchKey: string;
 };
+
+export interface SearchConfig {
+  keyword?: boolean;
+  keywordDescription?: ((searchKey: string) => string);
+  field?: boolean;
+  fieldDescription?: ((label: string) => string);
+  category?: boolean;
+  categoryDescription?: string;
+}
 
 export type DValidateRules =
   | {

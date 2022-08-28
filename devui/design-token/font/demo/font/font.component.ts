@@ -44,7 +44,7 @@ export class FontComponent implements OnInit, OnDestroy {
       }
     });
     this.fonts = cloneDeep(this.fonts);
-  }
+  };
 
   setI18n() {
     this.subs.add(

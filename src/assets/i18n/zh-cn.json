@@ -49,6 +49,8 @@
     "showCode": "展开代码",
     "hideCode": "收起代码",
     "copyCode": "复制代码",
+    "codesandbox": "在 CodeSandbox 上打开",
+    "stackblitz": "在 StackBlitz 上打开",
     "success": "复制成功"
   },
   "components": {
@@ -546,11 +548,15 @@
       "sourceDemo": {
         "title": "传入source"
       },
+      "clickBlockDemo": {
+        "title": "点击可拦截"
+      },
       "anchorLinkValues": {
         "basic-breadcrumbs": "基础面包屑",
         "source-config-breadcrumbs": "传入source",
         "drop-down-breadcrumbs": "可下拉的面包屑",
-        "self-defined-breadcrumbs": "自定义下拉列表和分隔符的面包屑"
+        "self-defined-breadcrumbs": "自定义下拉列表和分隔符的面包屑",
+        "click-block-breadcrumbs": "点击可拦截的面包屑"
       }
     },
     "back-top": {
@@ -582,6 +588,24 @@
         "back-top-scroll-container": "滚动容器"
       }
     },
+    "icon": {
+      "name": "Icon 图标",
+      "type": "通用",
+      "path": "icon",
+      "description": "常用图标展示场景",
+      "basicDemo": {
+        "title": "基本用法",
+        "description": "基础图标的使用形式"
+      },
+      "iconGroupDemo": {
+        "title": "图标组",
+        "description": "常用图标组使用场景"
+      },
+      "anchorLinkValues": {
+        "basic": "基本用法",
+        "icon-group": "图标组"
+      }
+    },
     "button": {
       "name": "Button 按钮",
       "type": "通用",
@@ -605,11 +629,6 @@
         "cancel": "取消",
         "last": "上一步",
         "next": "下一步"
-      },
-      "button-left-right": {
-        "title": "左按钮与右按钮",
-        "left": "左按钮",
-        "right": "右按钮"
       },
       "button-text": {
         "title": "文字按钮",
@@ -668,7 +687,6 @@
         "button-primary": "主要按钮",
         "button-common": "次要按钮",
         "button-primary-and-common": "主要按钮与次要按钮组合",
-        "button-left-right": "左按钮与右按钮",
         "button-danger": "警示按钮",
         "button-text": "文字按钮",
         "button-loading": "加载中状态",
@@ -689,8 +707,8 @@
         "description": "基本徽章类型，当有包裹元素时在右上角显示徽章和数目。",
         "basic": "标准徽章，通过count参数设置徽章展示的数目，通过status参数可设置徽章状态色",
         "maxCount": "可通过maxCount参数设置徽章展示的数目最大值，默认为99",
-        "statusColor": "通过bgColor参数设置徽章展示状态色，通过offsetXY参数可设置徽章偏移量",
-        "position": "通过badgePos参数设置徽章位置",
+        "statusColor": "通过bgColor参数设置徽章展示状态色，通过offset参数可设置徽章偏移量",
+        "position": "通过position参数设置徽章位置",
         "unread": "未读消息"
       },
       "dotDemo": {
@@ -712,11 +730,11 @@
       },
       "positionDemo": {
         "title": "徽章位置",
-        "description": "通过badgePos参数设置徽章位置。"
+        "description": "通过position参数设置徽章位置。"
       },
       "customDemo": {
         "title": "自定义",
-        "description": "通过bgColor参数设置徽章展示状态色(此时status参数设置的徽章状态色失效)，通过offsetXY参数可设置相对于badgePos的徽章偏移量。通过textColor、bgColor自定义文字、背景颜色。"
+        "description": "通过bgColor参数设置徽章展示状态色(此时status参数设置的徽章状态色失效)，通过offset参数可设置相对于position的徽章偏移量。通过textColor、bgColor自定义文字、背景颜色。"
       },
       "anchorLinkValues": {
         "badge-basic": "基本徽章",
@@ -845,6 +863,9 @@
       "pipeDemo": {
         "title": "日期解析器"
       },
+      "browserDemo": {
+        "title": "当前浏览器名和版本"
+      },
       "openURLDemo": {
         "title": "在新标签页打开网页"
       },
@@ -860,6 +881,7 @@
       },
       "anchorLinkValues": {
         "lazy-load": "懒加载指令",
+        "browser-version": "当前浏览器名和版本",
         "date-pipe": "日期解析器",
         "open-url": "新标签页打开网页",
         "download-file": "文件下载",
@@ -943,6 +965,7 @@
             "devui-text": "正文文本",
             "devui-text-weak": "弱化的正文信息（手风琴子项，表头）",
             "devui-aide-text": "辅助文本、帮助信息（面包屑）",
+            "devui-aide-text-hover": "辅助文本悬浮色，用于标签文本悬浮等场景",
             "devui-aide-text-stress": "辅助文本、帮助信息里的强调色",
             "devui-placeholder": "占位符",
             "devui-light-text": "有色深色背景下字体颜色（固定）",
@@ -1025,6 +1048,14 @@
             "button": "按钮",
             "status": "状态"
           },
+          "catalogsList": {
+            "theme": "主题色",
+            "text": "文字",
+            "border": "边框",
+            "background": "背景",
+            "status": "状态/功能"
+          },
+          "formColor": "完整色板",
           "colors": {
             "global-bg": "浅灰色背景body",
             "bg-white": "顶部导航颜色，背景色",
@@ -1105,6 +1136,7 @@
         "instance": {
           "title": "实例",
           "description": "阴影对照表",
+          "description2": "阴影颜色对照表",
           "defaultTable": {
             "tab": "默认主题阴影对照表",
             "shadowName": "阴影变量名",
@@ -1117,6 +1149,13 @@
             "shadowName": "阴影变量名",
             "newShadowName": "新版变量名",
             "shadowValue": "阴影变量值",
+            "description": "描述"
+          },
+          "colorTable": {
+            "colorVar": "颜色变量",
+            "normalColor": "普通色值",
+            "darkColor": "暗黑色值",
+            "themeValue": "当前主题色值",
             "description": "描述"
           },
           "shadows": {
@@ -1142,6 +1181,12 @@
             "hwc-shadow-prompt": "提示类",
             "hwc-shadow-success": "成功提示",
             "hwc-shadow-dark": "深色提示背景阴影"
+          },
+          "shadowColor": {
+            "devui-shadow": "阴影色",
+            "devui-light-shadow": "弱化阴影色",
+            "devui-connected-overlay-shadow": "有连接点的弹出(覆盖)层阴影色",
+            "devui-feedback-overlay-shadow": "信息提示反馈类阴影色"
           }
         }
       },
@@ -1275,6 +1320,51 @@
         "animation": "animation"
       }
     },
+    "design-z-index": {
+      "name": "ZIndex 层级",
+      "type": "Design tokens",
+      "path": "design-z-index",
+      "description": "组件库公共样式规范。",
+      "tmw": "当需要查看组件库相关样式，使用场景以及变更时。",
+      "ZIndexDemo": {
+        "title": "层级",
+        "description1": "1. 组件库为用户们提供了层级变量用于不同的场景，下表列出了这些变量的名称，对应的变量值以及使用场景；",
+        "description2": "2. 通过`@import '~ng-devui/styles-var/devui-var.scss';`引入层级变量后即可使用；",
+        "description3": "3. 若样式表为less文件，则`@import '~ng-devui/styles-var/devui-var.less';`,并将变量前缀'$'改为'@'；",
+        "description4": "4. 若存在遮罩，则遮罩基于对应z-index值-1；",
+        "description5": "5. 内容层，根据需要设置，zIndex需小于临时层；",
+        "description6": "6. 背景层，根据需要设置，zIndex需小于内容层。",
+        "title2": "层级规则",
+        "description7": "按照交互形式分为背景层、内容层、临时层。层级的前后顺序为，临时层>内容层>背景层，顺序不可更改。",
+        "subTitle1": "1. 临时层",
+        "description8": "操作或任务相关的临时层，一般承载当前需要临时处理的任务或者需要接受的反馈等，高于内容层。",
+        "description9": "分为两种模态：一种是内容区不可进行操作，被蒙版遮罩禁用，用户必须聚焦处理弹窗内容才可继续其他操作（弹窗、模态抽屉）、一种是内容区可进行操作，无蒙版（非模态抽屉、轻量级弹窗、悬浮菜单、使用指南）",
+        "subTitle2": "2. 内容层",
+        "description10": "主要承载页面信息、组件、手风琴等页面元素。",
+        "subTitle3": "3. 背景层",
+        "description11": "页面背景层永远置于页面底部，页面背景层颜色统一为#EEF0F5，颜色中立柔和，方便凸显和聚焦内容层。",
+        "instance": {
+          "title": "Instance",
+          "tableTitle": "层级变量表",
+          "table": {
+            "zIndexName": "层级变量名",
+            "zIndexValue": "层级变量值",
+            "description": "描述"
+          },
+          "zIndex": {
+            "devui-z-index-full-page-overlay": "全屏覆盖类元素",
+            "devui-z-index-pop-up": "提示类信息，popover，tooltip等",
+            "devui-z-index-dropdown": "下拉菜单，dropdown等, 兼容, 取值待重新定义",
+            "devui-z-index-modal": "弹窗",
+            "devui-z-index-drawer": "抽屉板",
+            "devui-z-index-framework": "框架类元素，header,sideMenu等"
+          }
+        }
+      },
+      "anchorLinkValues": {
+        "z-index": "z-index"
+      }
+    },
     "codemirror": {
       "name": "CodeMirror 代码编辑器",
       "type": "扩展服务",
@@ -1326,7 +1416,7 @@
       "batchDragRowDemo": {
         "title": "批量行拖拽",
         "description": "支持使用DragDrop组件来实现表格的批量行拖拽功能，请用Ctrl按键和鼠标多选并进行拖拽，只能通过自定义head、body模板和其中的行、单元格来实现。"
-      },    
+      },
       "editableDemo": {
         "title": "编辑单元格",
         "description": "支持两种实现方式，方式一通过自定义body模板中的单元格来实现，方式二通过配置column来实现。"
@@ -1363,9 +1453,17 @@
         "title": "批量行拖拽",
         "description": "支持使用DragDrop组件来实现表格的批量行拖拽功能，请用Ctrl按键和鼠标多选并进行拖拽，只能通过自定义head、body模板和其中的行、单元格来实现。"
       },
-      "bigDataTreeTableDemo": {
-        "title": "大数据量树形表格",
+      "virtualScrollTreeTableBasicDemo": {
+        "title": "大数据量树形表格基本用法",
         "description": "当需要展示10000~100000条树形数据时，为使操作流畅，请使用这种表格。"
+      },
+      "virtualScrollTreeTableOperationDemo": {
+        "title": "大数据量树形表格操作功能",
+        "description": "大数据量树形表格的各种基本操作，增添、修改、删除、查询、复制/剪切功能。"
+      },
+      "virtualScrollTreeTableInteractionDemo": {
+        "title": "大数据量树形表格交互",
+        "description": "大数据量树形表格的高级操作，拖拽、复选、批量删除、继承原本数据表格的大部分功能。"
       },
       "mutilStylesDemo": {
         "title": "表格样式"
@@ -1401,7 +1499,9 @@
         "cell-merge": "单元格合并",
         "drag-row": "行拖拽",
         "muti-drag-row": "批量行拖拽",
-        "big-data-tree-table": "大数据树形表格"
+        "virtual-scroll-tree-table-basic": "大数据量树形表格基本用法",
+        "virtual-scroll-tree-table-operation": "大数据量树形表格操作功能",
+        "virtual-scroll-tree-table-interaction": "大数据量树形表格交互"
       }
     },
     "datepickerPro": {
@@ -1416,7 +1516,56 @@
       "type": "演进中",
       "path": "dashboard",
       "description": "仪表盘支持各类挂件",
-      "tmw": "作为容器承载各类内容"
+      "tmw": "作为容器承载各类内容",
+      "basicDemo": {
+        "title": "基本用法",
+        "description": "支持拖拽排序，缩放大小，添加，删除，禁止调整单个大小，禁止移动单个，锁定位置等等",
+        "addWidget": "添加一个widget",
+        "popWidget": "删除最后一个widget",
+        "coordinates": "坐标",
+        "size": "宽高",
+        "lock": "锁定",
+        "position": "位置",
+        "dragMove": "拖拽移动",
+        "dragSize": "拖拽大小",
+        "independentUse": "独立使用"
+      },
+      "configDemo": {
+        "title": "更多设置",
+        "description": "支持配置只读静态，配置上空浮动，连续紧凑排列，从外部拖拽添加，拖拽到垃圾桶删除等",
+        "dragAdd": "拖动此卡片到右侧添加",
+        "dragDelete": "拖动仪表盘的卡片到这里删除",
+        "source": "来源：",
+        "data": "数据",
+        "drag": "拖拽",
+        "layout": "布局",
+        "columns": "列数",
+        "placeHolder1": "数字，取值范围 1 - 12， 超过12列请参考api配置",
+        "rowHeight": "行高",
+        "placeHolder2": "数字或字符串， 数字单位为px",
+        "margins": "边距",
+        "minRowHeight": "最小行高",
+        "placeHolder3": "数字，0 表示不限制",
+        "maxRowHeight": "最大行高",
+        "configuration": "配置",
+        "static": "静态",
+        "permittedOverhead": "允许上空",
+        "animation": "动画",
+        "forbiddenMoving": "禁止移动",
+        "forbiddenResizing": "禁止调整大小",
+        "showGrid": "显示网格",
+        "operation": "操作",
+        "autoArrangement": "自动连续紧凑排列"
+      },
+      "solutionDemo": {
+        "title": "解决方案",
+        "description": "提供完整的库添加解决方案"
+      },
+      "anchorLinkValues": {
+        "basic-usage": "基本用法",
+        "more-config": "更多设置",
+        "solution": "解决方案"
+      }
     },
     "datepicker": {
       "name": "DatePicker 日期选择器",
@@ -1600,7 +1749,7 @@
       },
       "disabledDemo": {
         "title": "使用禁用",
-        "description": "通过 disabled 自定义是否使用禁用。"
+        "description": "设置 disabled 禁用整个组件，也可传入 disabledKey 禁用单个选项。"
       },
       "anchorLinkValues": {
         "basic-usage": "基本用法",
@@ -1800,9 +1949,16 @@
         "fullscreen": "全屏",
         "exitFullscreen": "退出全屏"
       },
+      "customDemo": {
+        "title": "函数方式调用",
+        "description": "调用方法触发全屏。",
+        "fullscreen": "全屏",
+        "exitFullscreen": "退出全屏"
+      },
       "anchorLinkValues": {
         "immersive-full-screen": "沉浸式全屏",
-        "general-full-screen": "普通全屏"
+        "general-full-screen": "普通全屏",
+        "custom-full-screen": "函数方式调用"
       }
     },
     "transfer": {
@@ -2366,7 +2522,6 @@
         "custom-dialog": "自定义对话框",
         "intercept-dialog-closed": "拦截对话框关闭",
         "message-hint": "信息提示",
-        "warning-pop-up": "警告弹出框",
         "update-button-options": "更新弹出框按钮状态",
         "configure-button-to-get-focus-automatically": "配置按钮自动获得焦点",
         "template-content": "配置弹出框内容模板",
@@ -2436,7 +2591,7 @@
       },
       "typeDemo": {
         "title": "多种类型",
-        "description": "面板类型分为default、primary、success，danger、warning、info。"
+        "description": "面板类型分为default、primary、success，danger、warning、info、ghost。"
       },
       "conditionChangeDemo": {
         "title": "根据条件阻止折叠",
@@ -2588,15 +2743,23 @@
       "halfDemo": {
         "title": "半选模式"
       },
+      "clearDemo": {
+        "title": "清空模式"
+      },
       "typeDemo": {
-        "title": "使用type参数"
+        "title": "设置颜色"
+      },
+      "templateDemo": {
+        "title": "自定义模板"
       },
       "anchorLinkValues": {
         "read-only-mode": "只读模式",
         "dynamic-mode": "动态模式",
         "dynamic-mode-Custom": "动态模式-自定义",
         "half-demo": "半选模式",
-        "using-the-type-parameter": "使用type参数"
+        "clear-demo": "清空模式",
+        "using-the-type-parameter": "设置颜色",
+        "template": "自定义模板"
       }
     },
     "search": {
@@ -2961,10 +3124,7 @@
       "tmw": "用户需要通过平级的区域将大块内容进行收纳和展现，保持界面整洁。",
       "basicDemo": {
         "title": "基本用法",
-        "description": "",
-        "Here's what Tab1 says.": "这是Tab1的内容",
-        "This is Tab2.": "这是Tab2的内容",
-        "This is Tab3.": "这是Tab3的内容"
+        "description": ""
       },
       "withoutContentDemo": {
         "title": "禁用选项卡",
@@ -2973,50 +3133,39 @@
       },
       "customDemo": {
         "title": "自定义模板",
-        "description": "",
-        "Here's what Tab1 says.": "这是Tab1的内容",
-        "This is Tab2.": "这是Tab2的内容",
-        "This is Tab3.": "这是Tab3的内容"
+        "description": ""
       },
       "typePillsDemo": {
         "title": "Pills类型",
-        "description": "",
-        "Here's what Tab1 says.": "这是Tab1的内容",
-        "This is Tab2.": "这是Tab2的内容",
-        "This is Tab3.": "这是Tab3的内容"
+        "description": ""
       },
       "typeOptionsDemo": {
         "title": "Options类型",
-        "description": "",
-        "Here's what Tab1 says.": "这是Tab1的内容",
-        "This is Tab2.": "这是Tab2的内容",
-        "This is Tab3.": "这是Tab3的内容"
+        "description": ""
       },
       "typeSliderDemo": {
         "title": "Slider类型",
-        "description": "",
-        "Here's what Tab1 says.": "这是Tab1的内容",
-        "This is Tab2.": "这是Tab2的内容",
-        "This is Tab3.": "这是Tab3的内容"
+        "description": ""
       },
       "typeWrappedDemo": {
         "title": "Wrapped类型",
-        "description": "",
-        "Here's what Tab1 says.": "这是Tab1的内容",
-        "This is Tab2.": "这是Tab2的内容",
-        "This is Tab3.": "这是Tab3的内容"
+        "description": ""
+      },
+      "sizeDemo": {
+        "title": "选项卡尺寸",
+        "description": "选项卡有4种大小，可以根据业务场景选择合适大小的尺寸。"
       },
       "beforeChangeDemo": {
         "title": "拦截tab切换",
-        "description": "使用beforeChange拦截tab切换。",
-        "Here's what Tab1 says.": "这是Tab1的内容",
-        "This is Tab2.": "这是Tab2的内容",
-        "This is Tab3.": "这是Tab3的内容"
+        "description": "使用beforeChange拦截选项卡切换。"
       },
-      "configurableTabsDemo": {
-        "title": "自定义Tabs显示与排列",
-        "description": "通过引入transfer组件，实现tabs的自定义显示。",
-        "activeID:": "activeID:"
+      "addDeleteDemo": {
+        "title": "添加 / 删除",
+        "description": "添加和删除选项卡。"
+      },
+      "bigDataDemo": {
+        "title": "大数据展示",
+        "description": "需要使用大量选项卡切换。"
       },
       "anchorLinkValues": {
         "basic-usage": "基本用法",
@@ -3026,8 +3175,10 @@
         "type-options": "Options类型",
         "type-slider": "Slider类型",
         "type-wrapped": "Wrapped类型",
+        "size": "选项卡尺寸",
         "intercept-tab-switch": "拦截tab切换",
-        "custom-tabs-display-and-arrangement": "自定义Tabs显示与排列"
+        "add-delete": "添加 / 删除",
+        "big-data": "大数据展示"
       }
     },
     "tags": {
@@ -3044,9 +3195,14 @@
         "title": "标签组",
         "description": "标签组可传入字符串数组或对象数组，在对象数组中，可通过displayProperty，titleProperty设置标签显示值和title显示值，通过labelStyle设置标签样式。"
       },
+      "hideDemo": {
+        "title": "多标签超出隐藏",
+        "description": "当标签组总宽度超过定宽宽度且hideBeyondTags为true时隐藏多余标签，点击+x后弹窗显示剩余标签"
+      },
       "anchorLinkValues": {
         "single-tag": "单个标签",
-        "tags-group": "标签组"
+        "tags-group": "标签组",
+        "hide-tags": "多标签超出隐藏"
       }
     },
     "tags-input": {
@@ -3273,7 +3429,7 @@
         "folding": "折叠"
       },
       "checkControlDemo": {
-        "title": "控制父子check关系",
+        "title": "可勾选树",
         "description": "通过OperableTree的 checkableRelation 控制check时父子节点的表现。",
         "Parent node": "父节点",
         "unfold": "展开",
@@ -3286,26 +3442,17 @@
         "title": "常用treeFactory函数",
         "description": ""
       },
-      "checkableDemo": {
-        "title": "可勾选树",
-        "description": "可以进行勾选的树。",
+      "customKeyDemo": {
+        "title": "自定义键值名",
+        "description": "自定义树节点显示的键值名",
         "Subnode": "子节点",
         "Parent node": "父节点"
       },
       "customLoadingDemo": {
-        "title": "自定义loading模板",
+        "title": "节点懒加载",
         "Leaf node": "叶子节点",
         "No child node": "没有子节点",
         "Dynamic loading": "动态加载",
-        "Parent node": "父节点",
-        "unfold": "展开",
-        "folding": "折叠"
-      },
-      "customTitleKeyDemo": {
-        "title": "自定显示字段",
-        "description": "通过设置treeNodeTitleKey,自定义树中显示和搜索的关键字。",
-        "Leaf node": "叶子节点",
-        "No child node": "没有子节点",
         "Parent node": "父节点",
         "unfold": "展开",
         "folding": "折叠"
@@ -3358,24 +3505,18 @@
         "Leaf node": "叶子节点",
         "unfold": "展开"
       },
-      "withoutAnimationDemo": {
-        "title": "无动画",
-        "description": "通过showAnimation设置是否展示动画。"
-      },
       "anchorLinkValues": {
         "basic-usage": "基本用法",
         "merge-node": "合并节点",
-        "custom-loading": "自定义loading模板",
-        "custom-display-field": "自定显示字段",
-        "checkable-tree": "可勾选树",
+        "lazy-loading": "节点懒加载",
+        "check-control-tree": "可勾选树",
+        "custom-key": "自定义键值名",
         "operation-button": "操作按钮",
         "search-filtering": "搜索过滤",
         "custom-icon": "自定义图标",
         "drag-and-drop-tree": "可拖拽树",
-        "check-control-tree": "控制父子check关系",
         "tree-factory": "常用treeFactory函数",
-        "virtual-scroll": "大数据量可操作树",
-        "without-animation": "无动画"
+        "virtual-scroll": "大数据量可操作树"
       }
     },
     "typography": {
@@ -3443,13 +3584,18 @@
         "title": "任意区域上传",
         "description": "用户可通过dUpload指令支持文件任意区域上传。"
       },
+      "sliceDemo": {
+        "title": "分片上传",
+        "description": "用户可通过设置分片上传的大小进行分片上传。"
+      },
       "anchorLinkValues": {
         "basic-usage": "基本用法",
         "multi-files": "多文件上传",
         "auto-upload": "自动上传",
         "custom": "自定义",
         "dynamic-upload-options": "动态上传参数",
-        "customize-area-upload": "任意区域上传"
+        "customize-area-upload": "任意区域上传",
+        "upload-slice": "分片上传"
       }
     },
     "user-guide": {
@@ -3463,7 +3609,7 @@
       },
       "serviceWayDemo": {
         "title": "服务方式",
-        "description": "以服务方式使用user-guide。将接口暴露给用户，开启某套教程的入口方式用户可自定义。此方式需要在使用user-guide的component中引入UserGuideCmdService。"
+        "description": "以服务方式使用user-guide。将接口暴露给用户，开启某套教程的入口方式用户可自定义。此方式需要在使用user-guide的component中引入UserGuideService。"
       },
       "anchorLinkValues": {
         "user-guide-basic": "组件方式",
@@ -3687,23 +3833,71 @@
       "name": "Layout 布局",
       "type": "布局",
       "path": "layout",
-      "description": "页面的布局方式。",
-      "tmw": "当用户需要直接使用一些既有布局时。",
+      "description": "页面的布局方式，包含响应式栅格、Flex、间距、响应式Class、响应式Style、典型布局容器等。",
+      "tmw": "当用户需要使用Flex布局、间距设置、响应式布局、典型布局等时。",
       "basicDemo": {
-        "title": "基本用法"
+        "title": "栅格基本用法",
+        "description": "响应式断点分别对应（px）：ss > 0, ms >= 360, mm >= 768, ml >= 1024, xs >= 1280, sm >= 1440, md >= 1600, lg >= 1760, xl >= 1920，合并设置时，使用 ss 断点即代表通用设置。"
       },
-      "appDemo1": {
-        "title": "应用场景1",
+      "gutterDemo": {
+        "title": "栅格间距（Gutter）",
+        "description": "通过栅格内区块Padding方式实现间隔。"
+      },
+      "spaceDemo": {
+        "title": "栅格间距（Space）",
+        "description": "通过栅格内区块Margin方式实现间隔。"
+      },
+      "offsetDemo": {
+        "title": "左右偏移"
+      },
+      "alignJustifyDemo": {
+        "title": "对齐"
+      },
+      "orderDemo": {
+        "title": "排序",
+        "description": "Order: 0, 1, 2, ..., 24."
+      },
+      "flexDemo": {
+        "title": "Flex使用",
+        "description": "[dFlex]是通用的，你可以在其他地方同样使用。"
+      },
+      "spaceGutterDemo": {
+        "title": "间距（通用）",
+        "description": "[dGutter]与[dSpace]是通用的，你可以在其他地方同样使用。"
+      },
+      "classDemo": {
+        "title": "响应式Class",
+        "description": "响应式Class设置支持，可合并多个断点范围内设置的Class。"
+      },
+      "styleDemo": {
+        "title": "响应式Style",
+        "description": "响应式Style设置支持，可合并多个断点范围内设置的Style。"
+      },
+      "layoutContainerDemo": {
+        "title": "布局容器"
+      },
+      "layoutContainerDemo1": {
+        "title": "布局容器场景1",
         "description": "常用上中下布局。"
       },
-      "appDemo2": {
-        "title": "应用场景2",
+      "layoutContainerDemo2": {
+        "title": "布局容器场景2",
         "description": "常用上中下布局及侧边栏布局。"
       },
       "anchorLinkValues": {
-        "basic-usage": "基本用法",
-        "application-scenario1": "应用场景1",
-        "application-scenario2": "应用场景2"
+        "basic-usage": "栅格基本用法",
+        "gutter": "栅格间距（Gutter）",
+        "space": "栅格间距（Space）",
+        "offset": "左右偏移",
+        "align-justify": "对齐",
+        "order": "排序",
+        "flex": "Flex使用",
+        "space-gutter": "间距（通用）",
+        "class": "响应式Class",
+        "style": "响应式Style",
+        "layout-container": "布局容器",
+        "layout-container-scenario1": "布局容器场景1",
+        "layout-container-scenario2": "布局容器场景2"
       }
     },
     "gantt": {
@@ -3806,7 +4000,7 @@
       "tmw": "需要解决低版本浏览器不支持的方法时。",
       "basicDemo": {
         "title": "使用方法",
-        "description": "目前由于实现方法较少，且主要供富文本组件使用，因此当前腻子脚本文件存放于富文本模块下。 使用时，devcloud 项目或 Angular cli 创建的项目可以在 src/polyfills.ts 中插入：import 'ng-devui/add-ons/editorx/polyfill'; 由于腻子脚本只是一段独立执行的js代码，也可以直接用静态资源的方式插入页面来使用。",
+        "description": "目前由于实现方法较少，且主要供富文本组件使用，因此当前腻子脚本文件存放于富文本模块下。 可以在 src/polyfills.ts 中插入：import 'ng-devui/add-ons/editorx/polyfill'; 由于腻子脚本只是一段独立执行的js代码，也可以直接用静态资源的方式插入页面来使用。",
         "name": "腻子脚本",
         "license": "授权方式",
         "size": "大小",
@@ -3848,6 +4042,18 @@
         "basic-usage": "基本用法",
         "format": "格式化",
         "custom": "传入模板"
+      }
+    },
+    "number-trans": {
+      "name": "NumberTranslate 数字格式转换器",
+      "type": "数据展示",
+      "path": "number-trans",
+      "description": "数字格式转换",
+      "tmw": "需要对数字进行格式转换时使用",
+      "basicDemo": {
+        "beforeTrans": "转换前",
+        "afterTrans": "转换后",
+        "title": "转换示例"
       }
     },
     "relative-time": {
@@ -3900,6 +4106,9 @@
       "basicDemo": {
         "title": "基本用法"
       },
+      "markedTypeDemo": {
+        "title": "日期标记"
+      },
       "showTimeDemo": {
         "title": "显示时间"
       },
@@ -3932,6 +4141,7 @@
       },
       "anchorLinkValues": {
         "basic-usage": "基本用法",
+        "mark-type": "日期标记",
         "show-time": "显示时间",
         "template": "自定义扩展区域",
         "monthYear": "年月选择器",
@@ -3958,6 +4168,227 @@
       "anchorLinkValues": {
         "basicDemo": "基本用法",
         "trend-icon-template": "自定义趋势图标"
+      }
+    },
+    "line-chart": {
+      "name": "Line Chart 折线图",
+      "type": "模板图表",
+      "path": "line-chart",
+      "description": "基本数据的折线图",
+      "tmw": "展示基本的数据线性变化",
+      "line-chartDemo": {
+        "title": "基础折线图"
+      },
+      "threshold-chartDemo": {
+        "title": "阈值线模板"
+      },
+      "compare-chartDemo": {
+        "title": "对比模板"
+      },
+      "anchorLinkValues": {
+        "echarts-temp-line-chart": "基础折线图",
+        "threshold-temp-line-chart": "阈值线模板"
+      }
+    },
+    "hex-bin-chart": {
+      "name": "Hex Bin Chart 分箱图",
+      "type": "模板图表",
+      "path": "hex-bin-chart",
+      "description": "离散的数据对比",
+      "tmw": "展示离散数据的数据对比",
+      "auto-chartDemo": {
+        "title": "自动布局分箱图"
+      },
+      "anchorLinkValues": {
+        "auto-chartDemo": "自动布局分箱图"
+      }
+    },
+    "map-chart": {
+      "name": "Map Chart 地图",
+      "type": "模板图表",
+      "path": "map-chart",
+      "description": "地区数据展示",
+      "tmw": "展示基本的数据线性变化",
+      "china-province": {
+        "title": "省级数据中国地图"
+      },
+      "china-city-province": {
+        "title": "市级数据中国地图"
+      },
+      "anchorLinkValues": {
+        "china-province": "省级数据中国地图",
+        "china-city-province": "市级数据中国地图"
+      }
+    },
+    "bar-chart": {
+      "name": "Bar Chart 柱状图",
+      "type": "模板图表",
+      "path": "bar-chart",
+      "description": "基本数据的折线图",
+      "tmw": "展示基本的数据线性变化",
+      "echarts-bar-chart": {
+        "title": "基础柱状图"
+      },
+      "echarts-bar-stacked": {
+        "title": "堆积柱状图"
+      },
+      "echarts-bar-two": {
+        "title": "双向柱状图"
+      },
+      "echarts-bar-line": {
+        "title": "折线柱模板"
+      },
+      "echarts-bar-horizontal": {
+        "title": "横向柱状图模板"
+      },
+      "anchorLinkValues": {
+        "echarts-bar-chart": "基础柱状图",
+        "echarts-bar-stacked": "堆积柱状图",
+        "echarts-bar-two": "双向柱状图",
+        "echarts-bar-line": "折线柱模板",
+        "echarts-bar-horizontal": "横向柱状图模板"
+      }
+    },
+    "radar-chart": {
+      "name": "Radar Chart 雷达图",
+      "type": "模板图表",
+      "path": "radar-chart",
+      "description": "雷达图",
+      "tmw": "展示关联数据的占比对比",
+      "radar-chartDemo": {
+        "title": "雷达图"
+      },
+      "anchorLinkValues": {
+        "radar-chartDemo": "基础雷达图"
+      }
+    },
+    "scatter-chart": {
+      "name": "Scatter Chart 散点图",
+      "type": "模板图表",
+      "path": "scatter-chart",
+      "description": "散点图",
+      "tmw": "展示坐标系中的离散数据",
+      "basic-scatter-chartDemo": {
+        "title": "基础散点图"
+      },
+      "anchorLinkValues": {
+        "basic-scatter-chartDemo": "散点图"
+      }
+    },
+    "pie-chart": {
+      "name": "Pie Chart 饼图",
+      "type": "模板图表",
+      "path": "pie-chart",
+      "description": "饼图",
+      "tmw": "展示坐标系中的百分占比数据",
+      "basic-pie-chartDemo": {
+        "title": "基础饼图"
+      },
+      "rose-pie-chartDemo": {
+        "title": "玫瑰饼图"
+      },
+      "anchorLinkValues": {
+        "basic-pie-chartDemo": "饼图",
+        "rose-pie-chartDemo": "玫瑰饼图"
+      }
+    },
+    "chart-card": {
+      "name": "Chart Card 图表卡片",
+      "type": "模板图表",
+      "path": "chart-card",
+      "description": "图表卡片",
+      "tmw": "用固定布局的卡片展示图表",
+      "basic-card": {
+        "title": "基础卡片"
+      },
+      "anchorLinkValues": {
+        "basic-card": "基础卡片"
+      }
+    },
+    "funnel-chart": {
+      "name": "Funnel Chart 漏斗图",
+      "type": "模板图表",
+      "path": "funnel-chart",
+      "description": "漏斗图",
+      "tmw": "用漏斗图展示排序关系的数据",
+      "basic-chart": {
+        "title": "漏斗图"
+      },
+      "anchorLinkValues": {
+        "basic-chart": "基础漏斗图"
+      }
+    },
+    "chart-marker": {
+      "name": "Chart Marker 图表标记器",
+      "type": "模板图表",
+      "path": "chart-marker",
+      "description": "图表标记器",
+      "tmw": "用于对二维坐标系进行标记及信息记录",
+      "basic-marker": {
+        "title": "图表标记器"
+      }
+    },
+    "chart-toolbox": {
+      "name": "Chart Toolbox 图表工具栏",
+      "type": "模板图表",
+      "path": "chart-toolbox",
+      "description": "图表工具栏",
+      "tmw": "提供一些图表交互工具",
+      "basic-marker": {
+        "title": "图表工具栏"
+      }
+    },
+    "echart-temp-basic": {
+      "shared-card": "分享卡片",
+      "shared-link-image": "分享链接或者图片",
+      "download-image": "下载Chart图片"
+    },
+    "chart-form": {
+      "name": "Chart Form 图表配置表单生成器",
+      "type": "模板图表",
+      "path": "chart-form",
+      "description": "图表配置表单生成器",
+      "tmw": "快速生成图表的配置表单",
+      "basic-form": {
+        "title": "图表配置表单生成器"
+      }
+    },
+    "action-steps": {
+      "name": "步骤编排",
+      "type": "演进中",
+      "path": "action-steps",
+      "description": "步骤编排",
+      "tmw": "步骤编排",
+      "basicDemo": {
+        "title": "基本用法",
+        "description": ""
+      },
+      "typeDemo": {
+        "title": "状态与类型",
+        "description": ""
+      },
+      "customDemo": {
+        "title": "自定义配置",
+        "description": ""
+      },
+      "anchorLinkValues": {
+        "basic-usage": "基本用法",
+        "type-usage": "状态与类型",
+        "custom-usage": "自定义配置"
+      }
+    },
+    "config-provider": {
+      "name": "自定义Config容器",
+      "type": "演进中",
+      "path": "config-provider",
+      "description": "自定义Config容器，可使用容器进行局部主题化等配置。",
+      "tmw": "需要自定义局部容器配置项时。",
+      "themeDemo": {
+        "title": "局部主题化",
+        "description": "使用themeId（已初始化）或直接使用theme自定义配置局部主题。"
+      },
+      "anchorLinkValues": {
+        "custom-theme": "局部主题化"
       }
     }
   }

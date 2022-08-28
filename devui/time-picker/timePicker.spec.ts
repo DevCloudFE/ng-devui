@@ -1,4 +1,3 @@
-// tslint:disable: max-line-length
 import { Component, DebugElement, ElementRef, TemplateRef, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, flush, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
@@ -40,7 +39,7 @@ class CommonFunctions {
   }
 
   static padZero(value) {
-    return (value + '').padStart(2, '0');
+    return (String(value)).padStart(2, '0');
   }
 }
 
@@ -62,7 +61,7 @@ class TestFunctions {
           res: inputValueList[whichList]
         };
       } else {
-        expect(timeEle.textContent.trim()).toBe((timeList.index + '').padStart(2, '0'));
+        expect(timeEle.textContent.trim()).toBe((String(timeList.index)).padStart(2, '0'));
         CommonFunctions.flushEvent(timeEle, new Event('click'), fixture);
         expect(fixture.debugElement.componentInstance.model).toHaveBeenCalled();
         // 把元素展示的值保存
@@ -202,10 +201,10 @@ describe('timePicker', () => {
       // 并且该有的都有
       expect(domHelper.judgeAppendToBodyStyleClasses([
         '.devui-time-picker-wrapper',
-          '.devui-time-picker',
-            '.devui-time-list', '.devui-first-list', '.devui-second-list', '.devui-third-list',
-              '.devui-time-item', '.devui-first-item', '.devui-second-item', '.devui-third-item',
-          '.devui-time-footer'
+        '.devui-time-picker',
+        '.devui-time-list', '.devui-first-list', '.devui-second-list', '.devui-third-list',
+        '.devui-time-item', '.devui-first-item', '.devui-second-item', '.devui-third-item',
+        '.devui-time-footer'
       ])).toBeTruthy();
       // 关闭隐藏
       CommonFunctions.closeTimePicker(fixture);

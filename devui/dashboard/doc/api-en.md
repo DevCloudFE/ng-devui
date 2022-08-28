@@ -3,7 +3,7 @@
 The following information is added to the module:
 
 ```ts
-import {DashboardModule} from 'ng-devui/dashboard';
+import { DashboardModule } from 'ng-devui/dashboard';
 ```
 
 Used in the page:
@@ -18,7 +18,7 @@ Used in the page:
 Dependencies Required by Components
 
 ```json
-"gridstack": "2.0.1",
+"gridstack": "4.2.6",
 ```
 
 ## d-dashboard component
@@ -29,13 +29,13 @@ This component defines a dashboard.
 
 | Parameter | Type | Default | Description |
 | :-------------: | :----------------: | :---: | :------------------------------------------------------------------------------ |
-| initOptions | `GridstackOptions` | -- | is optional. By default, the configuration is built-in. Users do not need to overwrite the configuration. This option is used to maintain scalability.|
+| initOptions | `GridstackOptions` | -- | Optional. By default, the configuration is built-in. Users do not need to overwrite the configuration. This option is used to maintain scalability.|
 | static | `boolean` | false | Optional. Indicates whether to enable read-only. true indicates read-only and false indicates editable. The default value is false. |
 | float | `boolean` | true | Optional. This parameter indicates whether to allow the widget to be placed under a blank widget. The default value is true. |
 | animate | `boolean` | true | Optional. Whether to enable the animation when adjusting the width and height and moving cards. The default value is true. |
 | widgetMoveable | `boolean` | true |: indicates whether the internal widget can be moved. This parameter is valid only when static is set to false.|
-| widgetResizable | `boolean` | true | is optional. Can the size of the internal widget be changed? |
-| showGridBlock | `boolean` | false | (Optional) Indicates whether to display the grid.|
+| widgetResizable | `boolean` | true | Optional. Can the size of the internal widget be changed? |
+| showGridBlock | `boolean` | false | Optional. Indicates whether to display the grid.|
 | column | `number` | 12 | Optional. The default value is 12. If the value is greater than 12, use gridstack.extra.scss to extend the CSS. |
 | minRow | `number` | -- | Optional. Minimum number of rows. The value 0 indicates no limit. |
 | maxRow | `number` | -- | Optional. Maximum number of rows. The value 0 indicates no limit.|
@@ -46,10 +46,10 @@ This component defines a dashboard.
 
 | Event | Type | Description |
 | :-----------: | :----------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------ |
-Event triggered by adding a widget on the UI, such as | widgetAdded | `EventEmitter<DashboardWidgetEvent>` | dragging. A single data node in the array is the added node and contains widgetData information. willItFit indicates whether there is sufficient space. origNode indicates the original node.|
-Event triggered by widget change on the UI, such as | widgetChanged | `EventEmitter<DashboardWidgetEvent>` | dragging. In the array, a single data node is the changed node, and the widget is the dragged DashboardWidgetComponent.
-Event triggered when a widget is deleted on the UI, such as | widgetRemoved | `EventEmitter<DashboardWidgetEvent>` | dragging. A single data node in the array is the deleted node and contains trashData information. The widget is the dragged DashboardWidgetComponent.
-| dashboardInit | `EventEmitter<DashboardWidgetEvent>` | dashboard initialization complete|
+| widgetAdded | `EventEmitter<DashboardWidgetEvent>` | Event triggered by adding a widget on the UI, such as dragging. A single data node in the array is the added node and contains widgetData information. willItFit indicates whether there is sufficient space. origNode indicates the original node.|
+| widgetChanged | `EventEmitter<DashboardWidgetEvent>` | Event triggered by widget change on the UI, such as dragging. In the array, a single data node is the changed node, and the widget is the dragged DashboardWidgetComponent.
+| widgetRemoved | `EventEmitter<DashboardWidgetEvent>` | Event triggered when a widget is deleted on the UI, such as dragging. A single data node in the array is the deleted node and contains trashData information. The widget is the dragged DashboardWidgetComponent.
+| dashboardInit | `EventEmitter<DashboardWidgetEvent>` | Emit when dashboard initialization complete. |
 
 ```typescript
 export type DashboardWidgetEvent = Array<{
@@ -62,7 +62,6 @@ trashData?: any; // remove
 origNode?: GridStackNode; // add(optional)
 } >;
 ```
-
 
 ### d-dashboard function
 
@@ -105,7 +104,7 @@ This component defines a dashboard widget.
 | minHeight | `number` | 0 | Optional. This parameter indicates the minimum height of the widget. The value 0 indicates no limit. |
 | noResize | `boolean` | false | Optional. Indicates whether the widget can be resized. |
 | noMove | `boolean` | false | Optional. Indicates whether the widget can be moved. |
-| autoPosition | `boolean` | false | (Optional) Indicates whether to ignore x and y to automatically search for vacant bits. This parameter is valid only for initialization.|
+| autoPosition | `boolean` | false | Optional. Indicates whether to ignore x and y to automatically search for vacant bits. This parameter is valid only for initialization.|
 | locked | `boolean` | false | Optional. Indicates whether the Widget is locked and not squeezed by other Widget positions. |
 | WidgetData | `any` | -- | Optional. User-defined data can be used for differentiated transmission. |
 
@@ -113,13 +112,13 @@ This component defines a dashboard widget.
 
 | Event | Type | Description |
 | :-----------: | :--------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------: |
-If the | xChange | `EventEmitter<number>` | x value changes, you are advised to bind the | xChange | `EventEmitter<number>` | x value to the corresponding x value bidirectionally. If the | xChange | `EventEmitter<number>` | x value is not bound to the x value, the internal x value will be forcibly changed (see the description).|
-If the | yChange | `EventEmitter<number>` | y value changes, you are advised to bind the | yChange | `EventEmitter<number>` | y value to the corresponding x value bidirectionally. If the | yChange | `EventEmitter<number>` | y value is not bound to the y value, the internal y value will be forcibly changed (see the description).|
-If the | widthChange | `EventEmitter<number>` | width value changes, you are advised to bind the | widthChange | `EventEmitter<number>` | width value to the corresponding width value bidirectionally. If the | widthChange | `EventEmitter<number>` | width value is not bound to the width value, the internal width value will be forcibly changed (see the description).|
-If the | heightChange | `EventEmitter<number>` | height value changes, it is recommended that the | heightChange | `EventEmitter<number>` | height value be bidirectionally bound to the corresponding height value. If the | heightChange | `EventEmitter<number>` | height value is not bound to the height value, the internal height value will be forcibly changed (see the description). | |
-| WidgetInit | `EventEmitter` | Optional. It is transmitted when the Widget initialization is complete. |
-| WidgetResize | `EventEmitter` | Optional. This parameter is triggered when the size of the widget is adjusted. In single-column mode, the value of width is the width of the widget (unit: column), and the value of height is the height of the widget (unit: row). |
-| widgetDestroy | `EventEmitter` | is optional. It is transmitted when the widget is destroyed.|
+| xChange | `EventEmitter<number>` | The x value changes, it is recommended to bind to the corresponding x value in both directions. If it is not bound back to the x value, the internal x value will be forcibly modified (see description) |
+| yChange | `EventEmitter<number>` | The y value changes, it is recommended to bind to the corresponding x value in both directions. If it is not bound back to the y value, the internal y value will be forcibly modified (see description) |
+| widthChange | `EventEmitter<number>` | The width value changes, it is recommended to bind to the corresponding width value in both directions. If it is not bound back to the width value, the internal width value will be forcibly modified (see description) |
+| heightChange | `EventEmitter<number>` | The height value changes, it is recommended to bind to the corresponding height value in both directions. If it is not bound back to the height value, the internal height value will be forcibly modified (see description) | |
+| widgetInit | `EventEmitter` | optional, emitted when widget initialization is complete |
+| widgetResize | `EventEmitter` | Optional, triggered when the widget is resized, triggered when the following changes in single-column mode, when resizing, width is the width of the widget (unit: column), and height is the height of the widget (unit: row) ) |
+| widgetDestroy | `EventEmitter` | optional, emitted when the widget is destroyed |
 
 - Note: If the original data value is not bound, the internal value is forcibly updated to adapt to the GUI function. Users can perform unified processing in the widgetChange event of the dashboard.
 
@@ -134,10 +133,10 @@ This component defines an external pendant that can be dragged into the dashboar
 | targetDashboard | `DashboardComponent` | -- | Mandatory. Target dashboards that can be dragged into |
 | width | `number` | 1 | Width of the widget to be dragged (unit: column) |
 | height | `number` | 1 | Height of the widget to be dragged (unit: row) |
-| dragMode | `'copy'\ | 'move' `| 'copy' | Optional, move or copy|
-| dragTemplate | `TemplateRef<any>` | -- | is optional. The dragged content template is displayed when the content template is dragged. For details about available variables in the template, see the following section.
+| dragMode | `'copy' \| 'move' `| 'copy' | Optional, move or copy|
+| dragTemplate | `TemplateRef<any>` | -- | Optional. The dragged content template is displayed when the content template is dragged. For details about available variables in the template, see the following section.
 | dragCopyStyle | `boolean` | -- | Optional. Indicates whether to copy all styles during dragging. |
-| dragDisabled | `boolean` | false | (Optional) Whether to disable dragging. This parameter is used to temporarily disable dragging into the dashboard.|
+| dragDisabled | `boolean` | false | Optional. Whether to disable dragging. This parameter is used to temporarily disable dragging into the dashboard.|
 
 ### outlet parameter of dragTemplate
 
@@ -155,8 +154,8 @@ This component defines a container for external widgets that can be dragged to t
 
 | Event | Type | Description |
 | :-------------: | :------------: | :------------------------------- |
-| widgetDragStart | `EventEmitter` | is optional. It is emitted when the widget starts to drag.|
-| widgetDragStop | `EventEmitter` | is optional. It is transmitted when the widget ends dragging.|
+| widgetDragStart | `EventEmitter` | Optional. It is emitted when the widget starts to drag.|
+| widgetDragStop | `EventEmitter` | Optional. It is transmitted when the widget ends dragging.|
 
 ## dDashboardLibraryTrash Directive
 
@@ -166,6 +165,6 @@ This component defines a recycle bin that can be dragged into by the dashboard p
 
 | Parameter | Type | Default | Description |
 | :-------------: | :------------------: | :---: | :--------------------------------------------------- |
-| targetDashboard | `DashboardComponent` | -- | (Mandatory) Delete the target dashboard associated with the operation.|
+| targetDashboard | `DashboardComponent` | -- | Mandatory. Delete the target dashboard associated with the operation.|
 | trashData | `any` | -- | Optional. User-defined recycle bin information can be used to distinguish different recycle bins. |
-| dropDisabled | `boolean` | false | (Optional) Indicates whether to disable the Dashboard attachment. This parameter is used to temporarily disable the Dashboard attachment.|
+| dropDisabled | `boolean` | false | Optional. Indicates whether to disable the Dashboard attachment. This parameter is used to temporarily disable the Dashboard attachment.|

@@ -1,6 +1,6 @@
 import {
-    ChangeDetectionStrategy, Component, ContentChild, EventEmitter, Input, OnChanges,
-    OnDestroy, OnInit, Output, SimpleChanges, TemplateRef
+  ChangeDetectionStrategy, Component, ContentChild, EventEmitter, Input, OnChanges,
+  OnDestroy, OnInit, Output, SimpleChanges, TemplateRef
 } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FilterConfig } from '../data-table.model';
@@ -27,7 +27,6 @@ export class DataTableColumnTmplComponent implements OnChanges, OnDestroy, OnIni
   @Input() header: string;
   @Input() sortable: boolean;
   @Input() editable: boolean;
-  @Input() unresizable: boolean;
   @Input() filterable: boolean;
   @Input() closeFilterWhenScroll: boolean;
   @Input() cellClass: string;
@@ -44,6 +43,10 @@ export class DataTableColumnTmplComponent implements OnChanges, OnDestroy, OnIni
 */
   @Input() filterList: Array<FilterConfig>;
   @Output() filterChange = new EventEmitter<FilterConfig[]>();
+  @Output() filterToggle = new EventEmitter<{
+    isOpen: boolean;
+    checklist: FilterConfig[];
+  }>();
   @Input() filterMultiple = true;
   @Input() filterIconActive: boolean;
   @Input() filterBoxWidth: any;
@@ -88,4 +91,12 @@ export class DataTableColumnTmplComponent implements OnChanges, OnDestroy, OnIni
   emitFilterData(filterData) {
     this.filterChange.emit(filterData);
   }
+
+  emitFilterToggle(data: {
+    isOpen: boolean;
+    checklist: FilterConfig[];
+  }) {
+    this.filterToggle.emit(data);
+  }
+
 }

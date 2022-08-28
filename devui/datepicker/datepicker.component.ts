@@ -46,6 +46,7 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
   @Input() customViewTemplate: TemplateRef<any>;
   @Input() selectedDate: Date;
   @Input() mode: 'year'|'month'|'date' = 'date';
+  @Input() dateFormat: string;
   yearNumber = 12;
   _yearNumber = 12;
   _dateConfig: any;
@@ -94,20 +95,38 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
       this.minDate.getFullYear() : (nowDate).getFullYear() - Math.floor(this._yearNumber / 2);
     this.nowMaxYear = (nowDate).getFullYear() + Math.floor(this._yearNumber / 2) > this.maxDate.getFullYear() ?
       this.maxDate.getFullYear() : (nowDate).getFullYear() + Math.floor(this._yearNumber / 2);
+    this.initMode();
     this.onSelectDateChanged();
     this.onDisplayWeeksChange();
     this.onYearRangeChange();
     this.initDatePicker();
-    this.initMode();
   }
 
   initMode() {
     if (this.mode === 'year') {
       this.openChooseYear = true;
       this.openChooseMonth = false;
+      if(!this.selectedDate){
+        this.selectedDate = new Date();
+      }
+      if(this.maxDate.getTime() < this.selectedDate.getTime()){
+        this.selectedDate = new Date(this.maxDate);
+      }
+      if(this.minDate.getTime() > this.selectedDate.getTime()){
+        this.selectedDate = new Date(this.minDate);
+      }
     } else if (this.mode === 'month') {
       this.openChooseYear = false;
       this.openChooseMonth = true;
+      if(!this.selectedDate){
+        this.selectedDate = new Date();
+      }
+      if(this.maxDate.getTime() < this.selectedDate.getTime()){
+        this.selectedDate = new Date(this.maxDate);
+      }
+      if(this.minDate.getTime() > this.selectedDate.getTime()){
+        this.selectedDate = new Date(this.minDate);
+      }
     } else {
       this.openChooseYear = this.openChooseMonth = false;
     }
@@ -161,27 +180,25 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
   }
 
   @Input() set minDate(date: Date | any) {
-    const parseDate = this.dateConverter.parse(date);
+    const parseDate = this.dateConverter.parse(date, this.dateFormat);
     if (parseDate) {
       this._minDate = parseDate;
       this.onYearRangeChange();
     }
   }
+  get minDate() {
+    return this._minDate;
+  }
 
   @Input() set maxDate(date: Date | any) {
-    const parseDate = this.dateConverter.parse(date);
+    const parseDate = this.dateConverter.parse(date, this.dateFormat);
     if (parseDate) {
       this._maxDate = parseDate;
       this.onYearRangeChange();
     }
   }
-
   get maxDate() {
     return this._maxDate;
-  }
-
-  get minDate() {
-    return this._minDate;
   }
 
   set currentHour(hour: number | string) {
@@ -189,7 +206,7 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
   }
 
   get currentHour() {
-    return unshiftString(this._currentHour + '', 2, '0');
+    return unshiftString(String(this._currentHour), 2, '0');
   }
 
   set currentMinute(min: number | string) {
@@ -197,7 +214,7 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
   }
 
   get currentMinute() {
-    return unshiftString(this._currentMinute + '', 2, '0');
+    return unshiftString(String(this._currentMinute), 2, '0');
   }
 
   set currentSecond(sec: number | string) {
@@ -205,7 +222,7 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
   }
 
   get currentSecond() {
-    return unshiftString(this._currentSecond + '', 2, '0');
+    return unshiftString(String(this._currentSecond), 2, '0');
   }
 
   protected resetYearOptions() {
@@ -255,7 +272,7 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
     if (!obj) {
       return;
     }
-    this.selectedDate = this.dateConverter.parse(obj);
+    this.selectedDate = this.dateConverter.parse(obj, this.dateFormat);
     this.onSelectDateChanged();
     this.onDisplayWeeksChange();
     this.availableMonths = this.onDisplayMonthsChange();
@@ -444,15 +461,15 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
     });
 
     if (this.currentYear < this.minDate.getFullYear() || this.currentYear > this.maxDate.getFullYear()) {
-      all.map(month => month.disabled = true);
+      all.map(month => {month.disabled = true; });
     }
 
     if (this.currentYear === this.minDate.getFullYear()) {
-      all.map(month => month.disabled = month.index < this.minDate.getMonth());
+      all.map(month => {month.disabled = month.index < this.minDate.getMonth(); });
     }
 
     if (this.currentYear === this.maxDate.getFullYear()) {
-      all.map(month => month.disabled = month.index > this.maxDate.getMonth());
+      all.map(month => {month.disabled = month.index > this.maxDate.getMonth(); });
     }
     return all;
   }
@@ -462,6 +479,9 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
   }
 
   isDisabledDay(date) {
+    if (this.disabled) {
+      return true;
+    }
     if (!date) {
       return false;
     }
@@ -524,19 +544,19 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
     const min = 0;
     let max = 59;
     switch (type) {
-      case 'h': {
-        timeType = 'currentHour';
-        max = 23;
-        break;
-      }
-      case 'm': {
-        timeType = 'currentMinute';
-        break;
-      }
-      case 's': {
-        timeType = 'currentSecond';
-        break;
-      }
+    case 'h': {
+      timeType = 'currentHour';
+      max = 23;
+      break;
+    }
+    case 'm': {
+      timeType = 'currentMinute';
+      break;
+    }
+    case 's': {
+      timeType = 'currentSecond';
+      break;
+    }
     }
     let value = event.target['value'];
     const selectionStart = event.target['selectionStart'];
@@ -588,36 +608,36 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
 
   timeUp(type) {
     switch (type) {
-      case 'h': {
-        Number(this.currentHour) < 23 ? this.currentHour = (Number(this.currentHour) + 1) : this.currentHour = 0;
-        break;
-      }
-      case 'm': {
-        Number(this.currentMinute) < 59 ? this.currentMinute = (Number(this.currentMinute) + 1) : this.currentMinute = 0;
-        break;
-      }
-      case 's': {
-        Number(this.currentSecond) < 59 ? this.currentSecond = (Number(this.currentSecond) + 1) : this.currentSecond = 0;
-        break;
-      }
+    case 'h': {
+      Number(this.currentHour) < 23 ? this.currentHour = (Number(this.currentHour) + 1) : this.currentHour = 0;
+      break;
+    }
+    case 'm': {
+      Number(this.currentMinute) < 59 ? this.currentMinute = (Number(this.currentMinute) + 1) : this.currentMinute = 0;
+      break;
+    }
+    case 's': {
+      Number(this.currentSecond) < 59 ? this.currentSecond = (Number(this.currentSecond) + 1) : this.currentSecond = 0;
+      break;
+    }
     }
     this.onTimeChange();
   }
 
   timeDown(type) {
     switch (type) {
-      case 'h': {
-        Number(this.currentHour) > 0 ? this.currentHour = (Number(this.currentHour) - 1) : this.currentHour = 23;
-        break;
-      }
-      case 'm': {
-        Number(this.currentMinute) > 0 ? this.currentMinute = (Number(this.currentMinute) - 1) : this.currentMinute = 59;
-        break;
-      }
-      case 's': {
-        Number(this.currentSecond) > 0 ? this.currentSecond = (Number(this.currentSecond) - 1) : this.currentSecond = 59;
-        break;
-      }
+    case 'h': {
+      Number(this.currentHour) > 0 ? this.currentHour = (Number(this.currentHour) - 1) : this.currentHour = 23;
+      break;
+    }
+    case 'm': {
+      Number(this.currentMinute) > 0 ? this.currentMinute = (Number(this.currentMinute) - 1) : this.currentMinute = 59;
+      break;
+    }
+    case 's': {
+      Number(this.currentSecond) > 0 ? this.currentSecond = (Number(this.currentSecond) - 1) : this.currentSecond = 59;
+      break;
+    }
     }
     this.onTimeChange();
   }
@@ -633,7 +653,7 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
     // 清空时将null作为ngModelChange参数传出
     this.onChange(dateObj);
     this.selectedDateChange.emit(dateObj);
-  }
+  };
 
   toggle($event: Event, which) {
     $event.stopPropagation();
@@ -710,11 +730,11 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
   }
 
   chooseDate = (date: string, event = {}, reason = SelectDateChangeReason.custom) => {
-    const parseDate = this.dateConverter.parse(date);
+    const parseDate = this.dateConverter.parse(date, this.dateFormat);
     this.selectedDate = parseDate || new Date();
     this.onSelectDateChanged();
     this.onSelectDate(event, parseDate, undefined, reason);
-  }
+  };
 
   get minDateDefined() {
     return this.minDate.getTime() !== new Date(this.dateConfig.min, 0, 1, 0, 0, 0).getTime();

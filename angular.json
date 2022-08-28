@@ -18,7 +18,9 @@
               "highlight.js",
               "codemirror",
               "xss",
-              "enquire.js"
+              "enquire.js",
+              "color",
+              "codesandbox"
             ],
             "customWebpackConfig": {
               "path": "scripts/extra-webpack.config.js"
@@ -36,7 +38,8 @@
             ],
             "styles": [
               "node_modules/highlight.js/styles/an-old-hope.css",
-              "src/styles.scss"
+              "src/styles.scss",
+              "devui/style/layout/devui-layout.scss"
             ],
             "scripts": []
           },
@@ -51,7 +54,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
@@ -118,14 +120,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "src/tsconfig.app.json",
-              "src/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "fix": true,
+            "lintFilePatterns": [
+              "src/**/*.ts"
             ]
           }
         }
@@ -147,15 +146,6 @@
               "devServerTarget": "devui:serve:production"
             }
           }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": "e2e/tsconfig.e2e.json",
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
         }
       }
     },
@@ -168,12 +158,14 @@
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "devui/tsconfig.lib.json",
             "project": "devui/ng-package.json"
           },
           "configurations": {
             "production": {
               "tsConfig": "devui/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "devui/tsconfig.lib.json"
             }
           }
         },
@@ -194,14 +186,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "devui/tsconfig.lib.json",
-              "devui/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "fix": true,
+            "lintFilePatterns": [
+              "devui/**/*.ts"
             ]
           }
         }

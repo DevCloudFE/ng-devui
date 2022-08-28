@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
 import { DevUIModule } from 'ng-devui';
 import { AutoCompleteModule } from 'ng-devui/auto-complete';
 import { DataTableModule } from 'ng-devui/data-table';
@@ -14,7 +13,8 @@ import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
 import { SplitterModule } from 'ng-devui/splitter';
 import { TooltipModule } from 'ng-devui/tooltip';
-import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
+import { TranslateModule } from '@ngx-translate/core';
+import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
 import { DatatableDemoAsyncComponent } from './async/data-table-demo-async.component';
 import { BasicOldComponent } from './basic-old/basic-old.component';
 import { DatatableDemoBasicComponent } from './basic/data-table-demo-basic.component';
@@ -95,10 +95,8 @@ import { VirtualScrollComponent } from './virtual-scroll/virtual-scroll.componen
     InteractionColumnComponent,
     VirtualScrollComponent,
     MutilStylesComponent,
-    FixHeightVirtualScrollComponent,
+    FixHeightVirtualScrollComponent
   ],
   providers: [],
-
 })
-export class DataTableDemoModule {
-}
+export class DataTableDemoModule {}

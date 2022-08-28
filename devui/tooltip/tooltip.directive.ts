@@ -11,7 +11,7 @@ import {
   SimpleChanges
 } from '@angular/core';
 import { OverlayContainerRef } from 'ng-devui/overlay-container';
-import { DevConfigService, WithConfig } from 'ng-devui/utils/globalConfig';
+import { DevConfigService, WithConfig } from 'ng-devui/utils';
 import { fromEvent, Subject } from 'rxjs';
 import { debounceTime, filter, map, takeUntil } from 'rxjs/operators';
 import { TooltipComponent } from './tooltip.component';
@@ -63,27 +63,27 @@ export class TooltipDirective implements OnChanges, AfterViewInit, OnDestroy {
 
     // 对创建的ToolTip组件添加鼠标移入和移出的监听事件
     if (this.tooltipComponentRef.instance['tooltip'].nativeElement) {
-      this.bindMouseEvent();
+      this.bindMouseEvent(this.tooltipComponentRef.instance['tooltip'].nativeElement, this.unsubscribeT$);
     }
   }
 
-  bindMouseEvent() {
-    fromEvent(this.tooltipComponentRef.instance['tooltip'].nativeElement, 'mouseenter')
+  bindMouseEvent(eventTarget: HTMLElement, unsubscribe$: Subject<unknown>) {
+    fromEvent(eventTarget, 'mouseenter')
       .pipe(
         map((event) => {
           this.isEnter = true;
           return event;
         }),
-        debounceTime(0),
+        debounceTime(this.mouseEnterDelay),
         filter((event) => this.isEnter),
-        takeUntil(this.unsubscribeT$)
+        takeUntil(unsubscribe$)
       )
       .subscribe(() => {
         if (!this.tooltipComponentRef) {
           this.show();
         }
       });
-    fromEvent(this.tooltipComponentRef.instance['tooltip'].nativeElement, 'mouseleave')
+    fromEvent(eventTarget, 'mouseleave')
       .pipe(
         map((event) => {
           this.isEnter = false;
@@ -91,7 +91,7 @@ export class TooltipDirective implements OnChanges, AfterViewInit, OnDestroy {
         }),
         debounceTime(this.mouseLeaveDelay),
         filter((event) => !this.isEnter),
-        takeUntil(this.unsubscribeT$)
+        takeUntil(unsubscribe$)
       )
       .subscribe(() => {
         this.hide();
@@ -142,7 +142,7 @@ export class TooltipDirective implements OnChanges, AfterViewInit, OnDestroy {
   instanceAssignValue(key: string | string[]): void {
     const keyArr = typeof key === 'string' ? [key] : key;
     const obj: any = {};
-    keyArr.forEach((item) => (obj[item] = this[item]));
+    keyArr.forEach((item) => {(obj[item] = this[item]);});
     Object.assign(this.tooltipComponentRef.instance, obj);
   }
   ngOnChanges(changes: SimpleChanges): void {
@@ -162,34 +162,7 @@ export class TooltipDirective implements OnChanges, AfterViewInit, OnDestroy {
 
   ngAfterViewInit() {
     if (this.triggerElementRef.nativeElement) {
-      fromEvent(this.triggerElementRef.nativeElement, 'mouseenter')
-        .pipe(
-          map((event) => {
-            this.isEnter = true;
-            return event;
-          }),
-          debounceTime(this.mouseEnterDelay),
-          filter((event) => this.isEnter),
-          takeUntil(this.unsubscribe$)
-        )
-        .subscribe(() => {
-          if (!this.tooltipComponentRef) {
-            this.show();
-          }
-        });
-      fromEvent(this.triggerElementRef.nativeElement, 'mouseleave')
-        .pipe(
-          map((event) => {
-            this.isEnter = false;
-            return event;
-          }),
-          debounceTime(this.mouseLeaveDelay),
-          filter((event) => !this.isEnter),
-          takeUntil(this.unsubscribe$)
-        )
-        .subscribe(() => {
-          this.hide();
-        });
+      this.bindMouseEvent(this.triggerElementRef.nativeElement, this.unsubscribe$);
     }
   }
 

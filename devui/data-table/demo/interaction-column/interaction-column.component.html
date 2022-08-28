@@ -15,27 +15,28 @@
   (cellDBClick)="cellDBClick($event)"
   (rowDBClick)="rowDBClick($event)"
   (rowClick)="rowClick($event)"
+  [tableOverflowType]="'overlay'"
 >
-  <d-column field="$index" header="#" [width]="'50px'"></d-column>
+  <d-column field="$index" header="#" [width]="'10%'"></d-column>
   <d-column
     field="firstName"
     header="First Name"
     [sortable]="true"
-    [width]="'150px'"
+    [width]="'20%'"
     [filterable]="true"
     [closeFilterWhenScroll]="true"
     [filterList]="filterListMulti"
     [beforeFilter]="beforeFilter"
     [extraFilterTemplate]="extraFilterTemplate"
     (filterChange)="filterChangeMultiple($event)"
+    (filterToggle)="onToggle($event)"
   ></d-column>
   <d-column
     field="lastName"
     header="Last Name"
     [sortable]="true"
-    [width]="'150px'"
+    [width]="'20%'"
     [minWidth]="'100px'"
-    [maxWidth]="'200px'"
     [filterable]="true"
     [closeFilterWhenScroll]="true"
     [filterIconActive]="filterIconActive"
@@ -45,7 +46,7 @@
     field="gender"
     header="Gender"
     [sortable]="true"
-    [width]="'100px'"
+    [width]="'20%'"
     [filterable]="true"
     [filterMultiple]="false"
     [filterList]="filterList2"
@@ -55,11 +56,11 @@
     field="dob"
     header="Date of birth"
     [fieldType]="'date'"
-    [extraOptions]="{ dateFormat: 'MM/DD/YYYY' }"
-    [width]="'100px'"
+    [extraOptions]="{ dateFormat: 'MM/dd/yyyy' }"
+    [width]="'20%'"
   ></d-column>
-  <d-column field="description" header="description" [width]="'150px'"></d-column>
-  <d-column field="hidden" header="hidden" [width]="'100px'">hidden</d-column>
+  <d-column field="description" header="description" [width]="'20%'"></d-column>
+  <d-column field="hidden" header="hidden" [width]="'20%'">hidden</d-column>
 </d-data-table>
 <ng-template #extraFilterTemplate let-checked="checked" let-halfChecked="halfChecked">
   <span>{{ checked ? 'All selected' : halfChecked ? 'Some selected' : ' None selected' }}</span>

@@ -22,12 +22,10 @@ import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import {
   addClassToOrigin,
   DateConverter,
-  DefaultDateConverter,
-  fadeInOut,
+  DefaultDateConverter, DevConfigService, fadeInOut,
   formWithDropDown,
-  removeClassFromOrigin
+  removeClassFromOrigin, WithConfig
 } from 'ng-devui/utils';
-import { DevConfigService, WithConfig } from 'ng-devui/utils/globalConfig';
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime, filter, map } from 'rxjs/operators';
 import { DatePickerConfigService as DatePickerConfig } from './date-picker.config.service';
@@ -35,6 +33,7 @@ import { SelectDateRangeChangeEventArgs, SelectDateRangeChangeReason } from './d
 import { DateRangePickerComponent } from './date-range-picker.component';
 
 @Component({
+  /* eslint-disable-next-line @angular-eslint/component-selector*/
   selector: '[dDateRangePicker]',
   providers: [{
     provide: NG_VALUE_ACCESSOR,
@@ -261,7 +260,7 @@ export class DateRangePickerDirective implements OnInit, ControlValueAccessor, O
       });
     }
     if (!this.showTime && this.hideOnRangeSelected && hide) { this.hide(); }
-  }
+  };
 
   updateCdkConnectedOverlayOrigin() {
     if (this.elementRef.nativeElement) {
@@ -312,16 +311,16 @@ export class DateRangePickerDirective implements OnInit, ControlValueAccessor, O
       this.isOpen = false;
     }
     this.cdr.markForCheck();
-  }
+  };
 
   onPositionChange(position: ConnectedOverlayPositionChange) {
     switch (position.connectionPair.overlayY) {
-      case 'top':
-      case 'center':
-        this.datepickerPosition = 'bottom';
-        break;
-      case 'bottom':
-        this.datepickerPosition = 'top';
+    case 'top':
+    case 'center':
+      this.datepickerPosition = 'bottom';
+      break;
+    case 'bottom':
+      this.datepickerPosition = 'top';
     }
   }
 
@@ -419,13 +418,15 @@ export class DateRangePickerDirective implements OnInit, ControlValueAccessor, O
     if (this.i18nSubscription) {
       this.i18nSubscription.unsubscribe();
     }
-    this.valueChangeSubscrip?.unsubscribe();
+    if (this.valueChangeSubscrip) {
+      this.valueChangeSubscrip.unsubscribe();
+    }
     this.document.removeEventListener('click', this.onDocumentClick);
   }
 
   clearAll = (reason?: SelectDateRangeChangeReason, hide?: boolean) => {
     const currentReason = typeof reason === 'number' ? reason : SelectDateRangeChangeReason.custom;
     this.chooseDate([null, null], currentReason, hide);
-  }
+  };
 
 }

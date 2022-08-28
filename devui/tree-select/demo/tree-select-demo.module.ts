@@ -9,7 +9,7 @@ import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
 import { TreeSelectModule } from 'ng-devui/tree-select';
 import { TranslateModule } from '@ngx-translate/core';
-import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
+import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
 import { TreeSelectAppendToComponent, TreeSelectModalComponent } from '../demo/append-to/tree-select-append-to.component';
 import { TreeSelectBasicComponent } from '../demo/basic/tree-select-basic.component';
 import { TreeSelectCustomIconComponent } from '../demo/custom-icon/tree-select-custom-icon.component';
@@ -70,7 +70,7 @@ import { TreeSelectVirtualScrollComponent } from './virtual-scroll/tree-select-v
     TreeSelectIconParentComponent,
     TreeSelectVirtualScrollComponent,
   ],
-  
+
   providers: [],
 })
 export class TreeSelectDemoModule {}

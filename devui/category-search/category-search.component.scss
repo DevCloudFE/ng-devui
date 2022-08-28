@@ -7,14 +7,14 @@
   position: relative;
   border-radius: $devui-border-radius;
   width: 100%;
+  height: 32px;
   padding: 0 8px;
   display: flex;
-  height: 32px;
+  align-items: flex-start;
   background: transparent;
   transition: border $devui-animation-duration-slow $devui-animation-ease-in-out-smooth;
   background-color: $devui-base-bg;
   border: 1px solid $devui-line;
-  margin-bottom: 8px;
 
   &.container-hover {
     border: 1px solid $devui-form-control-line-hover;
@@ -28,24 +28,30 @@
 
   .devui-category-search-line-container {
     width: 100%;
-    height: 40px;
+    height: 32px;
     overflow: hidden;
-    overflow-x: auto;
-    position: relative;
-    top: -1px;
+
+    &:hover {
+      overflow-x: auto;
+      overflow-x: overlay;
+    }
 
     .devui-category-search-line {
       display: flex;
       flex-flow: row nowrap;
       justify-content: flex-start;
-      align-items: center;
+      align-items: flex-start;
       width: 100%;
       height: 30px;
+      position: relative;
+      top: -1px;
 
       & > li {
+        display: flex;
+        align-items: center;
         flex-grow: 0;
         white-space: nowrap;
-        line-height: 30px;
+        height: 100%;
       }
 
       .devui-category-search-input {
@@ -55,6 +61,13 @@
         align-items: center;
         min-width: 160px;
         padding-right: 20px;
+
+        input {
+          min-width: 240px;
+          width: 100%;
+          height: 32px;
+          font-size: $devui-font-size-sm;
+        }
 
         .devui-category-search-toggle {
           padding-left: 0;
@@ -78,7 +91,7 @@
     flex-wrap: nowrap;
 
     .devui-category-search-separate-line {
-      border-right: solid 1px $devui-icon-fill;
+      border-right: solid 1px $devui-line;
       width: 0;
       height: 16px;
       margin: 8px;
@@ -105,21 +118,13 @@
   .devui-color-block-sm {
     width: 8px;
     height: 8px;
-    border-radius: 2px;
+    border-radius: $devui-border-radius;
     margin-right: 4px;
     display: inline-block;
     position: relative;
     top: -1px;
     vertical-align: middle;
   }
-}
-
-.devui-tag-dropdown-menu > li > a {
-  height: 32px;
-  padding: 0 12px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
 }
 
 span:focus {
@@ -137,6 +142,7 @@ span:focus {
 
     path {
       fill: $devui-icon-fill;
+      transition: all $devui-animation-ease-in-out-smooth $devui-animation-duration-slow;
     }
   }
 
@@ -179,7 +185,7 @@ d-tag {
 
 .devui-dropdown-operation-area {
   border-top: 1px solid $devui-dividing-line;
-  padding-top: 16px;
+  padding-top: 8px;
   margin: 8px 0;
   display: flex;
   justify-content: center;
@@ -264,12 +270,17 @@ d-tag {
 }
 
 .devui-dropdown-menu-template {
-  max-height: 352px;
-  overflow-y: auto;
   max-width: 300px;
+  max-height: 352px;
 
   .devui-category-search-group {
-    padding: 8px 12px 0;
+    font-size: $devui-font-size;
+
+    &.devui-dropdown-item:hover {
+      background-color: transparent;
+      color: $devui-text;
+      cursor: default;
+    }
   }
 }
 
@@ -279,7 +290,7 @@ d-tag {
     flex-flow: row wrap;
     align-items: center;
     justify-content: flex-start;
-    padding: 4px 4px 0;
+    padding: 4px;
     max-height: 390px;
     overflow: auto;
 
@@ -295,28 +306,21 @@ d-tag {
   }
 }
 
-.devui-radio-template {
-  li a {
-    display: block;
-    line-height: 32px;
-    border-radius: 4px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-}
-
 :host ::ng-deep {
-  .devui-tag-container d-tag > .devui-tag-item {
-    display: block !important;
+  .devui-tag-container {
+    line-height: 1;
 
-    & > span {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      display: inline-block;
-      vertical-align: bottom;
-      margin: 0 4px;
+    d-tag > .devui-tag-item {
+      display: block !important;
+
+      & > span {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        display: inline-block;
+        vertical-align: bottom;
+        margin: 0 4px;
+      }
     }
   }
 
@@ -366,7 +370,7 @@ d-tag {
         width: 12px;
         height: 12px;
         margin-right: 8px;
-        border-radius: 2px;
+        border-radius: $devui-border-radius;
         top: -1px;
         position: relative;
         vertical-align: middle;
@@ -466,7 +470,7 @@ d-tag {
 
 .devui-dropdown-menu-tip {
   cursor: text;
-  padding: 12px;
+  padding: 12px 12px 0;
   pointer-events: none;
   color: $devui-aide-text;
 }
@@ -475,11 +479,16 @@ d-tag {
   height: 1px;
   width: 100%;
   background-color: $devui-dividing-line;
+  margin-top: 4px;
 }
 
 .devui-dropdown-menu {
   margin-top: 4px;
   padding-bottom: 0;
+
+  .devui-dropdown-item .icon-search {
+    margin-right: 4px;
+  }
 }
 
 .devui-no-data-text {

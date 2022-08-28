@@ -11,8 +11,9 @@
     content: '*';
     color: red;
     display: inline-block;
-    margin-right: 8px;
-    margin-left: -12px;
+    margin-right: 4px;
+    margin-left: -8px;
+    vertical-align: middle;
   }
 }
 
@@ -26,10 +27,12 @@
 .devui-helping {
   display: inline-block;
   vertical-align: middle;
-  position: relative;
-  top: -0.1em;
   margin-left: $content-spacing-small;
   cursor: pointer;
+
+  path {
+    fill: $devui-shape-icon-fill;
+  }
 }
 
 .devui-help-tips {

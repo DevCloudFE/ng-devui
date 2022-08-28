@@ -13,6 +13,7 @@ export class BasicComponent {
     { id: 668, name: 'custom color', customColor: '#f50' },
   ];
   tagList3: any = [
+    { id: 911, name: 'default Color', labelStyle: '' },
     { id: 918, name: 'label color1', labelStyle: 'blue-w98' },
     { id: 1769, name: 'label color2', labelStyle: 'green-w98' },
     { id: 555, name: 'label color3', labelStyle: 'yellow-w98' },

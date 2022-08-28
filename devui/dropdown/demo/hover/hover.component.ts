@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class DropDownDemoHoverComponent {
 
-    onToggle(event) {
-        console.log(event);
-    }
+  onToggle(event) {
+    console.log(event);
+  }
 }

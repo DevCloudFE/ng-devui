@@ -51,7 +51,7 @@
         </div>
         <ul dDropDownMenu class="devui-dropdown-menu" role="menu">
           <li *ngFor="let option of checkOptions" role="menuitem" (click)="onOptionSelect(option)">
-            <a class="devui-dropdown-item disabled">{{ option.label }}</a>
+            <a class="devui-dropdown-item">{{ option.label }}</a>
           </li>
         </ul>
       </div>
@@ -80,8 +80,11 @@
       [extraFilterTemplate]="column.extraFilterTemplate"
       [searchFn]="column.searchFn"
       (filterChange)="column.emitFilterData($event)"
+      (filterToggle)="column.emitFilterToggle($event)"
       [fixedLeft]="column.fixedLeft"
+      [isLastFixedLeft]="column.fixedLeft && !columns[colIndex + 1]?.fixedLeft"
       [fixedRight]="column.fixedRight"
+      [isFirstFixedRight]="column.fixedRight && !columns[colIndex - 1]?.fixedRight"
       [nestedColumn]="column.extraOptions?.showHeadTableToggler"
       (toggleChildrenTableEvent)="toggleChildrenTable($event)"
       (tapEvent)="onTap($event)"
@@ -154,7 +157,7 @@
         </div>
         <ul dDropDownMenu class="devui-dropdown-menu" role="menu">
           <li *ngFor="let option of checkOptions" role="menuitem" (click)="onOptionSelect(option)">
-            <a class="devui-dropdown-item disabled">{{ option.label }}</a>
+            <a class="devui-dropdown-item">{{ option.label }}</a>
           </li>
         </ul>
       </div>
@@ -196,8 +199,11 @@
         [extraFilterTemplate]="column.extraFilterTemplate"
         [searchFn]="column.searchFn"
         (filterChange)="column.emitFilterData($event)"
+        (filterToggle)="column.emitFilterToggle($event)"
         [fixedLeft]="column.fixedLeft"
+        [isLastFixedLeft]="column.fixedLeft && !columns[colIndex + 1]?.fixedLeft"
         [fixedRight]="column.fixedRight"
+        [isFirstFixedRight]="column.fixedRight && !columns[colIndex - 1]?.fixedRight"
         [nestedColumn]="column.extraOptions?.showHeadTableToggler"
         (toggleChildrenTableEvent)="toggleChildrenTable($event)"
         (tapEvent)="onTap($event)"
@@ -251,8 +257,11 @@
         [extraFilterTemplate]="column.extraFilterTemplate"
         [searchFn]="column.searchFn"
         (filterChange)="column.emitFilterData($event)"
+        (filterToggle)="column.emitFilterToggle($event)"
         [fixedLeft]="column.fixedLeft"
+        [isLastFixedLeft]="column.fixedLeft && !columns[colIndex + 1]?.fixedLeft"
         [fixedRight]="column.fixedRight"
+        [isFirstFixedRight]="column.fixedRight && !columns[colIndex - 1]?.fixedRight"
         [nestedColumn]="column.extraOptions?.showHeadTableToggler"
         (toggleChildrenTableEvent)="toggleChildrenTable($event)"
         (tapEvent)="onTap($event)"

@@ -6,7 +6,7 @@ export class PreserveNextEventEmitter<T> extends EventEmitter<T> {
   private _isAsync: boolean;
   get schedulerFns() { return this._schedulerFns; }
 
-  constructor(isAsync: boolean = false) {
+  constructor(isAsync = false) {
     super(isAsync);
     this._isAsync = isAsync;
   }
@@ -36,7 +36,7 @@ export class PreserveNextEventEmitter<T> extends EventEmitter<T> {
       } : (value: any) => { generatorOrNext.next(value); };
     } else {
       schedulerFn = this._isAsync ? (value: any) => { setTimeout(() => generatorOrNext(value)); } :
-                                     (value: any) => { generatorOrNext(value); };
+        (value: any) => { generatorOrNext(value); };
     }
     if (!this._schedulerFns) {
       this._schedulerFns = new Set<any>();

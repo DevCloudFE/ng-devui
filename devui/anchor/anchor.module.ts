@@ -9,22 +9,22 @@ import { AnchorLinkDirective } from './anchor-link.directive';
 import { AnchorDirective } from './anchor.directive';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        RouterModule
-    ],
-    declarations: [
-        AnchorLinkDirective,
-        AnchorBoxDirective,
-        AnchorDirective,
-        AnchorBoxHashSupportDirective
-    ],
-    exports: [
-        AnchorLinkDirective,
-        AnchorBoxDirective,
-        AnchorDirective,
-        AnchorBoxHashSupportDirective
-    ],
+  imports: [
+    CommonModule,
+    RouterModule
+  ],
+  declarations: [
+    AnchorLinkDirective,
+    AnchorBoxDirective,
+    AnchorDirective,
+    AnchorBoxHashSupportDirective
+  ],
+  exports: [
+    AnchorLinkDirective,
+    AnchorBoxDirective,
+    AnchorDirective,
+    AnchorBoxHashSupportDirective
+  ],
 })
 
 export class AnchorModule {}

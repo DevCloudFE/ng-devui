@@ -3,8 +3,21 @@
 @import '../style/theme/corner';
 @import '../style/core/_font';
 
+$devui-table-inset-shadow-left: var(--devui-table-inset-shadow-left, 8px 0 8px -4px);
+$devui-table-inset-shadow-right: var(--devui-table-inset-shadow-right, -8px 0 8px -4px);
+
 :host {
   display: block;
+
+  &.devui-table-shadow {
+    border-radius: $devui-border-radius;
+    overflow: hidden;
+    box-shadow: $devui-shadow-length-base $devui-light-shadow;
+
+    ::ng-deep table tbody tr:last-child td {
+      border-bottom-color: transparent;
+    }
+  }
 }
 
 .devui-data-table ::ng-deep {
@@ -27,8 +40,37 @@
     }
 
     .scroll-view {
-      overflow-y: auto;
       overflow-x: auto;
+      overflow-y: scroll;
+
+      &.overflow-overlay {
+        overflow: hidden;
+
+        &:hover {
+          overflow: auto;
+          overflow: overlay;
+        }
+      }
+
+      &.has-width-scroll:not(:hover)::after {
+        content: '';
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        top: 0;
+        width: 50px;
+        background: linear-gradient(90deg, transparent, $devui-base-bg);
+      }
+
+      &.has-height-scroll:not(:hover)::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        height: 20px;
+        background: linear-gradient(180deg, transparent, $devui-base-bg);
+      }
     }
 
     .devui-table {
@@ -37,11 +79,45 @@
       table-layout: fixed;
       width: 100%;
       max-width: 100%;
-      position: relative;
       margin: 0;
 
       & > tbody + tbody {
         border-top: none;
+      }
+    }
+
+    .viewport-wrapper {
+      overflow-x: auto;
+      overflow-y: scroll;
+      position: relative;
+
+      &.overflow-overlay {
+        overflow: hidden;
+
+        &:hover {
+          overflow: auto;
+          overflow: overlay;
+        }
+      }
+
+      &.has-width-scroll:not(:hover)::after {
+        content: '';
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        top: 0;
+        width: 50px;
+        background: linear-gradient(90deg, transparent, #ffffff);
+      }
+
+      &.has-height-scroll:not(:hover)::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        height: 20px;
+        background: linear-gradient(180deg, transparent, #ffffff);
       }
     }
 
@@ -50,7 +126,7 @@
       bottom: 0;
       position: absolute;
       cursor: col-resize;
-      background: $devui-line;
+      background: $devui-form-control-line-active;
       width: 2px;
       z-index: 9999;
       display: none;
@@ -69,13 +145,17 @@
   $half-sort-icon-size: 8px;
 
   .table-wrap {
-    padding-top: $half-sort-icon-size;
+    overflow-y: auto;
   }
 
   .virtual-scroll-wrap {
     & .cdk-virtual-scroll-content-wrapper {
       padding-top: $half-sort-icon-size;
     }
+  }
+
+  .devui-scrollbar {
+    scrollbar-width: thin;
   }
 }
 
@@ -84,7 +164,7 @@
     span {
       font-weight: bold;
       color: $devui-text;
-      font-size: $devui-font-size;
+      font-size: $devui-font-size-sm;
     }
 
     tr {
@@ -101,7 +181,7 @@
         $childtable-toggler-icon: 20px;
         $negative-half-sort-icon-size: -($sort-clickable-area + $half-sort-icon); // 排序图标的大小为16 * 16 px，所以图标需要移动8px，让图标的一半显示在标题头外
 
-        border-bottom: 1px solid $devui-line;
+        border-bottom: 1px solid $devui-dividing-line;
         display: table-cell;
         padding: 0;
         font-size: 0;
@@ -126,13 +206,13 @@
         .title,
         .parent-title {
           display: inline-block;
-          width: calc(100% - #{$drag-icon-size} - #{$drag-icon-margin-right});
-          line-height: 36px;
+          max-width: calc(100% - #{$drag-icon-size} - #{$drag-icon-margin-right});
+          line-height: 42px;
           vertical-align: middle;
           white-space: nowrap;
           text-overflow: ellipsis;
           overflow: hidden;
-          font-size: $devui-font-size;
+          font-size: $devui-font-size-sm;
           font-weight: bold;
           color: $devui-text;
         }
@@ -149,17 +229,24 @@
           width: calc(100% - #{$drag-icon-size} - #{$drag-icon-margin-right} - #{$filter-icon-size} - #{$childtable-toggler-icon});
         }
 
-        .sort-clickable {
-          position: absolute;
-          top: $negative-half-sort-icon-size;
-          left: 50%;
-          transform: translateX(-50%);
-          padding: $sort-clickable-area;
-        }
-
+        // .sort-clickable {
+        //   position: absolute;
+        //   top: $negative-half-sort-icon-size;
+        //   left: 50%;
+        //   transform: translateX(-50%);
+        //   padding: $sort-clickable-area;
+        // }
         &:hover,
         &.hover {
           border-radius: $devui-border-radius 0 0 $devui-border-radius;
+
+          d-table-sort {
+            display: block;
+          }
+
+          d-table-filter {
+            display: block;
+          }
 
           .filter-icon {
             visibility: visible;
@@ -188,7 +275,7 @@
         }
 
         &.devui-checkable-cell {
-          padding: 10px;
+          padding: 10px 0 10px 20px;
         }
 
         &.devui-detail-cell {
@@ -241,18 +328,35 @@
     > td {
       background-clip: padding-box;
       vertical-align: middle;
-      padding: 7px 20px 8px;
+      padding: 10px 20px 9px;
       border-top: none;
       word-wrap: break-word;
       word-break: normal;
-      line-height: 24px;
+      line-height: 22px;
       font-size: $devui-font-size;
       color: $devui-text; // #3C4458;
       background-color: inherit;
       border-bottom: 1px solid $devui-dividing-line;
 
+      &.editable-cell {
+        position: relative;
+
+        &:hover::after {
+          content: '';
+          display: block;
+          width: calc(100% - 32px);
+          position: absolute;
+          height: calc(100% - 14px);
+          border: 1px solid $devui-line;
+          left: 12px;
+          top: 8px;
+          border-radius: $devui-border-radius;
+          pointer-events: none;
+        }
+      }
+
       &.devui-checkable-cell {
-        padding: 10px;
+        padding: 10px 0 10px 20px;
       }
 
       &.devui-detail-cell {
@@ -279,6 +383,32 @@
     margin: auto;
   }
 
+  svg.svg-icon rect {
+    stroke: $devui-disabled-text;
+  }
+
+  svg.svg-icon.svg-icon-close rect:last-child {
+    stroke: none;
+    fill: $devui-disabled-text;
+  }
+
+  path {
+    fill: $devui-disabled-text;
+  }
+
+  svg.svg-icon:hover g path {
+    fill: $devui-icon-fill-active;
+  }
+
+  svg.svg-icon:hover g rect {
+    stroke: $devui-icon-fill-active;
+  }
+
+  svg.svg-icon.svg-icon-close:hover rect:last-child {
+    stroke: none;
+    fill: $devui-icon-fill-active;
+  }
+
   .resize-handle {
     display: inline-block;
     position: absolute;
@@ -291,8 +421,24 @@
 
   .resizeable:hover {
     .resize-handle {
-      border-right: 3px solid $devui-line;
+      border-right: 1px solid $devui-line;
     }
+  }
+
+  .resizeable {
+    .resize-handle:hover {
+      border-right: 2px solid $devui-form-control-line-active;
+    }
+  }
+}
+
+.devui-no-result-wrapper {
+  padding: 40px 0;
+  background: $devui-base-bg;
+  width: calc(100% - 8px);
+
+  &.overlay-table-no-result {
+    width: 100%;
   }
 }
 
@@ -312,10 +458,23 @@
   }
 }
 
+.devui-table ::ng-deep {
+  thead > tr > th.can-sort {
+    d-table-filter {
+      flex: 1;
+      text-align: right;
+    }
+  }
+}
+
 .devui-table {
   &.devui-table-md ::ng-deep {
     tbody > tr > td {
       padding: 11px 20px 12px;
+    }
+
+    thead > tr > th.devui-checkable-cell {
+      padding: 10px 20px;
     }
   }
 
@@ -323,11 +482,29 @@
     tbody > tr > td {
       padding: 15px 20px 16px;
     }
+
+    thead > tr > th.devui-checkable-cell {
+      padding: 10px 20px;
+    }
+  }
+
+  &.devui-table-xs ::ng-deep {
+    tbody > tr > td {
+      padding: 4px 20px 4px;
+    }
+
+    thead > tr > th.devui-checkable-cell {
+      padding: 10px 20px;
+    }
+
+    thead tr th .title {
+      line-height: 32px;
+    }
   }
 }
 
 .devui-table.table-striped ::ng-deep {
-  tbody > tr:nth-of-type(odd) {
+  tbody > tr:nth-of-type(even) {
     background: $devui-list-item-strip-bg;
   }
 }
@@ -344,6 +521,14 @@
   thead {
     tr {
       background-color: $devui-list-item-strip-bg;
+
+      .devui-first-sticky-right-cell {
+        background: linear-gradient(to right, transparent, $devui-list-item-strip-bg 10px);
+      }
+
+      .devui-last-sticky-left-cell {
+        background: linear-gradient(to left, transparent, $devui-list-item-strip-bg 10px);
+      }
     }
   }
 }
@@ -374,8 +559,16 @@
 }
 
 .devui-table.table-hover ::ng-deep {
-  tbody > tr:not(.table-row-selected):hover {
+  tbody > tr:not(.table-row-selected):not(.expand-row):not(.child-table):hover {
     background: $devui-list-item-hover-bg;
+
+    .devui-first-sticky-right-cell {
+      background: linear-gradient(to right, transparent, $devui-list-item-hover-bg 10px);
+    }
+
+    .devui-last-sticky-left-cell {
+      background: linear-gradient(to left, transparent, $devui-list-item-hover-bg 10px);
+    }
   }
 }
 
@@ -417,7 +610,7 @@
 
 :host ::ng-deep .childtable-toggler {
   cursor: pointer;
-  padding-right: 4px;
+  padding-right: 8px;
   font-size: unset !important;
 
   & > svg {
@@ -473,8 +666,19 @@
 :host ::ng-deep .devui-talbe-scorll-right {
   tr,
   th {
-    .devui-sticky-left-cell {
-      box-shadow: rgba(0, 0, 0, 0.05) $devui-shadow-length-slide-right;
+    .devui-last-sticky-left-cell {
+      background: linear-gradient(to left, transparent, $devui-base-bg 10px);
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 10px;
+        pointer-events: none;
+        box-shadow: inset $devui-table-inset-shadow-left $devui-light-shadow;
+      }
     }
   }
 }
@@ -483,8 +687,19 @@
 :host ::ng-deep .devui-talbe-scorll-left {
   tr,
   th {
-    .devui-sticky-right-cell {
-      box-shadow: rgba(0, 0, 0, 0.05) $devui-shadow-length-slide-left;
+    .devui-first-sticky-right-cell {
+      background: linear-gradient(to right, transparent, $devui-base-bg 10px);
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 10px;
+        pointer-events: none;
+        box-shadow: inset $devui-table-inset-shadow-right $devui-light-shadow;
+      }
     }
   }
 }
@@ -559,4 +774,14 @@
 
 :host ::ng-deep .gu-transit {
   opacity: 0.5;
+}
+
+:host ::ng-deep .devui-table.table-bordered {
+  thead tr th.devui-checkable-cell {
+    padding: 10px;
+  }
+
+  tbody > tr > td.devui-checkable-cell {
+    padding: 10px;
+  }
 }

@@ -4,8 +4,8 @@ export interface IAnchorBox {
   defaultAnchor: string;
   forceActiveAnchor: Function;
   view: {
-    top?: number,
-    bottom?: number
+    top?: number;
+    bottom?: number;
   };
 }
 export type AnchorActiveChangeSource = 'anchor-link' | 'scroll' | 'click-inside' | 'initial' | 'fragment';

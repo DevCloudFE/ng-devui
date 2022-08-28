@@ -1,6 +1,8 @@
 @import '../style/theme/color';
 @import '../style/core/_font';
 
+$devui-table-expand-area-bg: var(--devui-table-expand-area-bg, #f7f8fa);
+
 .detail-content {
   color: $devui-text;
   font-size: $devui-font-size;
@@ -24,6 +26,6 @@
   }
 }
 
-.expand-row:hover {
-  background: inherit !important;
+::ng-deep .devui-table tbody > tr.expand-row {
+  background: $devui-table-expand-area-bg;
 }

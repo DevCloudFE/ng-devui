@@ -117,7 +117,7 @@ export class InteractionColumnComponent implements OnInit {
     this.filterListMulti = this.filterList;
     this.ref.detectChanges();
     return true;
-  }
+  };
 
   getCheckedRows() {
     const rows = this.datatable.getCheckedRows();
@@ -155,17 +155,21 @@ export class InteractionColumnComponent implements OnInit {
     console.log(e);
   }
   cellClick(e) {
-      console.log('cell');
-      console.log(e);
+    console.log('cell');
+    console.log(e);
   }
   rowDBClick(e) {
-      console.log('rowDB');
-      console.log(e);
+    console.log('rowDB');
+    console.log(e);
   }
 
   rowClick(e) {
-      console.log('row');
-      console.log(e);
+    console.log('row');
+    console.log(e);
+  }
+
+  onToggle(data) {
+    console.log('onToggle ---', data);
   }
 
 }

@@ -8,7 +8,7 @@ import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
 import { TranslateModule } from '@ngx-translate/core';
-import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
+import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
 import { BasicComponent } from './basic/basic.component';
 import { ConditionChangeComponent } from './condition-change/condition-change.component';
 import { PanelDemoComponent } from './panel-demo.component';
@@ -39,6 +39,6 @@ import { TypeComponent } from './type/type.component';
   ],
   exports: [PanelDemoComponent],
   declarations: [PanelDemoComponent, BasicComponent, ConditionChangeComponent, TypeComponent, PanelDemoComponent],
-  
+
 })
 export class PanelDemoModule {}

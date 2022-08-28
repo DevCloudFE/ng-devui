@@ -16,7 +16,7 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { ToggleMenuContainerComponent, ToggleMenuListComponent, ToggleMenuSearchComponent } from 'ng-devui/toggle-menu';
-import { DevConfigService, WithConfig } from 'ng-devui/utils/globalConfig';
+import { DevConfigService, WithConfig } from 'ng-devui/utils';
 import { isEmpty } from 'lodash-es';
 import { BehaviorSubject, fromEvent, Observable, of, Subscription } from 'rxjs';
 import { debounceTime, map, switchMap } from 'rxjs/operators';
@@ -52,6 +52,10 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
    * 【可选】输入的placeholder
    */
   @Input() placeholder = '';
+  /**
+   * 【可选】达到最大值时可自定义placeholder
+   */
+  @Input() maxPlaceholder: string;
   /**
    * 【可选】输入标签的最小长度
    */
@@ -113,7 +117,9 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
   @ViewChild(ToggleMenuSearchComponent) searchBox: ToggleMenuSearchComponent;
 
   get getPlaceHolder() {
-    return this.selectedItems.length >= this.maxTags ? `${this.i18nTagsInputText.tagsReachMaxNumber}${this.maxTags}` : this.placeholder;
+    const maxPlaceholder =
+      this.maxPlaceholder === undefined ? `${this.i18nTagsInputText.tagsReachMaxNumber}${this.maxTags}` : this.maxPlaceholder;
+    return this.selectedItems.length >= this.maxTags ? maxPlaceholder : this.placeholder;
   }
 
   newTag = '';
@@ -153,7 +159,7 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
   private onTouch = () => null;
 
   constructor(private i18n: I18nService, private devConfigService: DevConfigService) {
-    this.valueParser = (item) => (typeof item === 'object' ? item[this.displayProperty] || '' : item + '' ? item.toString() : '');
+    this.valueParser = (item) => (typeof item === 'object' ? item[this.displayProperty] || '' : String(item) ? item.toString() : '');
   }
 
   private setI18nText() {
@@ -192,8 +198,8 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
           term === ''
             ? true
             : this.caseSensitivity
-            ? item[this.displayProperty].indexOf(term) !== -1
-            : item[this.displayProperty].toLowerCase().indexOf(term.toLowerCase()) !== -1
+              ? item[this.displayProperty].indexOf(term) !== -1
+              : item[this.displayProperty].toLowerCase().indexOf(term.toLowerCase()) !== -1
         )
       );
     };
@@ -254,8 +260,12 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
       )
       .subscribe((options) => {
         this.availableOptions = options;
-        this.selectBoxContainer?.updatePosition();
-        this.selectBox?.resetIndex(!options.length);
+        if (this.selectBoxContainer) {
+          this.selectBoxContainer.updatePosition();
+        }
+        if (this.selectBox) {
+          this.selectBox.resetIndex(!options.length);
+        }
       });
   }
 
@@ -295,28 +305,29 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
   passEvent(data) {
     const { event, type } = data;
     switch (type) {
-      case 'keydown.enter':
-      case 'blur':
-        // keydown.enter 和 keydown 都接收会重复处理
-        // 点击会聚焦input，input失焦事件不会冒泡，单独处理
-        break;
-      case 'keydown':
-        const hotkeys = [this.KEYS.enter, this.KEYS.tab];
-        if (this.isAddBySpace) {
-          hotkeys.push(this.KEYS.space);
+    case 'keydown.enter':
+    case 'blur':
+      // keydown.enter 和 keydown 都接收会重复处理
+      // 点击会聚焦input，input失焦事件不会冒泡，单独处理
+      break;
+    case 'keydown': {
+      const hotkeys = [this.KEYS.enter, this.KEYS.tab];
+      if (this.isAddBySpace) {
+        hotkeys.push(this.KEYS.space);
+      }
+      if (hotkeys.includes(event.keyCode)) {
+        event.preventDefault();
+        event.stopPropagation();
+        if (this.selectBox?.selectIndex !== -1) {
+          this.addSuggestionByIndex(this.selectBox.selectIndex, this.availableOptions[this.selectBox.selectIndex]);
+        } else {
+          this.addTag();
         }
-        if (event.keyCode === this.KEYS.enter || event.keyCode === this.KEYS.tab || event.keyCode === this.KEYS.space) {
-          event.preventDefault();
-          event.stopPropagation();
-          if (this.selectBox?.selectIndex !== -1) {
-            this.addSuggestionByIndex(this.selectBox.selectIndex, this.availableOptions[this.selectBox.selectIndex]);
-          } else {
-            this.addTag();
-          }
-        }
-        break;
-      default:
-        this.inputEvent = { event, type };
+      }
+      break;
+    }
+    default:
+      this.inputEvent = { event, type };
     }
   }
 
@@ -333,7 +344,7 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
     ) {
       return;
     }
-    this.canAdd().then((result) => {
+    this.canAdd(value).then((result) => {
       if (!result) {
         return;
       }
@@ -347,7 +358,7 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
       );
       this._suggestionList.splice(suggestionListIndex, 1);
       this.delayResetNewTag();
-      this.sourceSubscription.next(this.newTag);
+      this.sourceSubscription.next('');
     });
   }
 
@@ -363,6 +374,9 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
       this._suggestionList = this.availableOptions;
       const tag = this.selectedItems[index].option;
       this.selectedItems.splice(index, 1);
+      if (this.selectedItems.length === 0) {
+        this.selectBoxContainer.updatePosition();
+      }
       this.onChange(this.selectedItems.map((tagItem) => tagItem.option));
       this.valueChange.emit(tag);
     });
@@ -414,10 +428,10 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
     this.sourceSubscription.next('');
   }
 
-  canAdd() {
+  canAdd(value?) {
     let checkResult = Promise.resolve(true);
     if (this.checkBeforeAdd) {
-      const result: any = this.checkBeforeAdd(this.newTag);
+      const result: any = this.checkBeforeAdd(value || this.newTag);
       if (typeof result !== 'undefined') {
         if (result.then) {
           checkResult = result;
@@ -446,7 +460,7 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
     if (this.selectBox) {
       this.selectBox.selectIndex = -1;
     }
-    this.newTag = event;
+    this.newTag = (event || '').trim();
     this.sourceSubscription.next(this.newTag);
   }
 

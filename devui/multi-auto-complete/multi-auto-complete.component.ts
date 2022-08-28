@@ -16,8 +16,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { AutoCompleteDirective, AutoCompletePopupComponent } from 'ng-devui/auto-complete';
-import { addClassToOrigin, AppendToBodyDirection, removeClassFromOrigin } from 'ng-devui/utils';
-import { DevConfigService, WithConfig } from 'ng-devui/utils/globalConfig';
+import { addClassToOrigin, AppendToBodyDirection, DevConfigService, removeClassFromOrigin, WithConfig } from 'ng-devui/utils';
 import { Observable, of } from 'rxjs';
 
 @Component({
@@ -37,16 +36,21 @@ export class MultiAutoCompleteComponent implements OnInit, OnChanges, ControlVal
   static ID_SEED = 0;
   @Input() appendToBody = false;
   @Input() appendToBodyDirections: Array<AppendToBodyDirection | ConnectedPosition> = ['rightDown', 'leftDown', 'rightUp', 'leftUp'];
+  /**
+   * @deprecated
+   */
   @Input() cssClass: string;
-  /*
-  overview: border none multiline single
-  */
+  /**
+   * @deprecated
+   * overview: border none multiline single
+   */
   @Input() overview = 'border';
   @Input() tipsText: string; // 提示文字
   @Input() placeholder = ''; // placeholder
   @Input() disabled = false;
   @Input() source: any[];
   @Input() latestSource: any[]; // 最近输入
+  @Input() disabledKey: string; // 单个选项禁用
   @Input() width: number;
   // @Input() isOpen: boolean;   // 未使用
   // @Input() term: string; // 未使用

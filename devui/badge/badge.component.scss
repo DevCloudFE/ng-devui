@@ -1,5 +1,6 @@
 @import '../style/theme/color';
 @import '../style/core/_font';
+@import '../style/theme/corner';
 
 @mixin status-color {
   &-danger {
@@ -21,6 +22,11 @@
   &-info {
     background: $devui-info;
   }
+
+  &-common {
+    background: $devui-unavailable;
+    color: $devui-aide-text;
+  }
 }
 
 :host {
@@ -37,11 +43,11 @@
     color: $devui-light-text;
     min-width: 16px;
     height: 16px;
-    font-size: $devui-font-size;
+    font-size: $devui-font-size-sm;
     line-height: 16px;
     text-align: center;
     padding: 0 4px;
-    border-radius: 8px;
+    border-radius: $devui-border-radius-full;
   }
 
   &-dot {
@@ -78,17 +84,18 @@
 }
 
 .devui-badge-count {
+  display: inline-block;
   position: relative;
   right: 0;
   background: $devui-brand;
   color: $devui-light-text;
   min-width: 16px;
   height: 16px;
-  font-size: $devui-font-size;
+  font-size: $devui-font-size-sm;
   line-height: 16px;
   text-align: center;
   padding: 0 4px;
-  border-radius: 8px;
+  border-radius: $devui-border-radius-full;
   @include status-color;
 }
 

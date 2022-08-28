@@ -1,5 +1,4 @@
 import {
-  ComponentFactoryResolver,
   ComponentRef,
   Directive,
   ElementRef,
@@ -41,7 +40,6 @@ export class LoadingDirective implements OnChanges {
   active = true;
 
   constructor(
-    private componentFactoryResolver: ComponentFactoryResolver,
     private triggerElementRef: ElementRef,
     private viewContainerRef: ViewContainerRef,
     private injector: Injector,
@@ -102,30 +100,34 @@ export class LoadingDirective implements OnChanges {
     }
   }
   private startLoading() {
+    this.position = this.positionType || 'relative';
+
+    if (this.backdrop && !this.backdropRef) {
+      this.createLoadingBackdrop();
+    }
+
+    if (!this.backdrop && this.backdropRef) {
+      this.backdropRef.destroy();
+      this.backdropRef = null;
+    }
+
     if (!this.loadingRef) {
-
-      this.position = this.positionType || 'relative';
-
-      if (this.backdrop) {
-        this.createLoadingBackdrop();
-      }
-      this.loadingRef = this.viewContainerRef.createComponent(
-        this.componentFactoryResolver.resolveComponentFactory(LoadingComponent),
-        null,
-        this.injector
-      );
+      this.loadingRef = this.viewContainerRef.createComponent(LoadingComponent, {
+        index: null,
+        injector: this.injector,
+      });
 
       this.insert(this.loadingRef.hostView);
-
-      Object.assign(this.loadingRef.instance, {
-        message: this.message,
-        loadingTemplateRef: this.loadingTemplateRef,
-        top: this.view ? this.view.top : '50%',
-        left: this.view ? this.view.left : '50%',
-        isCustomPosition: !!this.view,
-        zIndex: this.zIndex ? this.zIndex : '',
-      });
     }
+
+    Object.assign(this.loadingRef.instance, {
+      message: this.message,
+      loadingTemplateRef: this.loadingTemplateRef,
+      top: this.view ? this.view.top : '50%',
+      left: this.view ? this.view.left : '50%',
+      isCustomPosition: !!this.view,
+      zIndex: this.zIndex ? this.zIndex : '',
+    });
   }
 
   private endLoading() {
@@ -144,11 +146,10 @@ export class LoadingDirective implements OnChanges {
   private createLoadingBackdrop() {
     this.backdropRef =
       !this.backdropRef &&
-      this.viewContainerRef.createComponent(
-        this.componentFactoryResolver.resolveComponentFactory(LoadingBackdropComponent),
-        null,
-        this.injector
-      );
+      this.viewContainerRef.createComponent(LoadingBackdropComponent, {
+        index: null,
+        injector: this.injector,
+      });
     this.insert(this.backdropRef.hostView);
 
     Object.assign(this.backdropRef.instance, {

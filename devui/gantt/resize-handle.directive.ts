@@ -95,8 +95,6 @@ export class ResizeHandleDirective {
     this.renderer2.addClass(this.resizeOverlay, 'resize-overlay');
     this.renderer2.listen(this.resizeOverlay, 'click', (clickEvent: Event) => clickEvent.stopPropagation());
 
-    // this.renderer2.addClass(this.containerElement, 'table-view-selector');
-
     const resizeBar = this.renderer2.createElement('div');
     this.renderer2.addClass(resizeBar, 'resize-bar');
     this.resizeBarRefElement = resizeBar;
@@ -134,7 +132,7 @@ export class ResizeHandleDirective {
 
   bindMousemove = (e) => {
     this.move(e);
-  }
+  };
 
   move(event: MouseEvent): void {
     this.moveCount++;

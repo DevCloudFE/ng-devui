@@ -42,21 +42,39 @@ export class DatepickerProComponent implements OnInit, AfterViewInit, OnDestroy,
   @Input() format: string;
   @Input() cssClass: string;
   @Input() showAnimation = true;
+  @Input() appendToBody = true;
   @Input() width: string;
+  @Input() placeholder: string;
+  @Input() allowClear = true;
   @Output() dropdownToggle = new EventEmitter<boolean>();
   @Output() confirmEvent = new EventEmitter<Date>();
   @Input() set calenderRange (value) {
     this.pickerSrv.calendarRange = value || [1970, 2099];
   }
   @Input() set minDate(value: Date) {
+    if (!value) {
+      return;
+    }
     this.pickerSrv.minDate = value;
   }
   @Input() set maxDate(value: Date) {
+    if (!value) {
+      return;
+    }
     this.pickerSrv.maxDate = value;
+  }
+  @Input() set markedRangeDateList(value: Date[][]) {
+    this.pickerSrv.markedRangeDateList = value;
+  };
+  @Input() set markedDateList(value: Date[]) {
+    this.pickerSrv.markedDateList = value;
   }
   @ContentChild('customTemplate') customTemplate: TemplateRef<any>;
   @ContentChild('footerTemplate') footerTemplate: TemplateRef<any>;
   @ContentChild('hostTemplate') hostTemplate: TemplateRef<any>;
+  @ContentChild('markDateInfoTemplate') set markDateInfoTemplate(tmp: TemplateRef<any>) {
+    this.pickerSrv.markDateInfoTemplate = tmp;
+  };
   @ViewChild('dateInput') datepickerInput: ElementRef;
 
   private i18nLocale: I18nInterface['locale'];
@@ -131,7 +149,7 @@ export class DatepickerProComponent implements OnInit, AfterViewInit, OnDestroy,
       takeUntil(this.unsubscribe$)
     ).subscribe(time => {
       if (this.dateValue) {
-        const curTime = this.datepickerConvert.parse(this.dateValue).setHours(time.hour, time.min, time.seconds);
+        const curTime = this.datepickerConvert.parse(this.dateValue, this.curFormat).setHours(time.hour, time.min, time.seconds);
         const curDate = new Date(curTime);
         this.pickerSrv.curDate = curDate;
         this.dateValue = this.formatDateToString(curDate);
@@ -223,9 +241,12 @@ export class DatepickerProComponent implements OnInit, AfterViewInit, OnDestroy,
     return this.datepickerConvert.format(date, this.curFormat);
   }
 
-  clear(event?: MouseEvent) {
-    event?.stopPropagation();
-    if (this.disabled) {
+  clear(event?: MouseEvent, isHandle?: boolean) {
+    if (event) {
+      event.stopPropagation();
+    }
+
+    if (this.disabled && isHandle) {
       return;
     }
     this.pickerSrv.updateDateValue.next({
@@ -261,7 +282,7 @@ export class DatepickerProComponent implements OnInit, AfterViewInit, OnDestroy,
     this.isOpen = true;
 
     setTimeout(() => {
-      this.datepickerInput?.nativeElement?.focus();
+      if (this.datepickerInput?.nativeElement) { this.datepickerInput.nativeElement.focus(); }
     });
   }
 

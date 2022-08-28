@@ -17,7 +17,7 @@ class CommonFunctions {
 
   static i18nText() {
     const lang = localStorage.getItem('lang') ? localStorage.getItem('lang').toLocaleLowerCase() : 'zh-cn';
-    if (this.i18nConfig.hasOwnProperty(lang)) {
+    if (Object.prototype.hasOwnProperty.call(this.i18nConfig, lang)) {
       return this.i18nConfig[lang];
     } else {
       return zhCN;
@@ -535,7 +535,7 @@ describe('datePicker', () => {
           fixture.detectChanges();
           expect(
             debugEl.query(By.css('.devui-day.active')).query(By.css('.devui-calendar-date')
-          ).nativeElement.innerText).toBe((now.getDate() + '').padStart(2, '0'));
+            ).nativeElement.innerText).toBe((String(now.getDate())).padStart(2, '0'));
         }));
 
         it('test selectedDate smaller than min', fakeAsync(() => {
@@ -545,7 +545,7 @@ describe('datePicker', () => {
           fixture.detectChanges();
           expect(
             debugEl.query(By.css('.devui-day.active')).query(By.css('.devui-calendar-date')
-          ).nativeElement.innerText).toBe((now.getDate() + '').padStart(2, '0'));
+            ).nativeElement.innerText).toBe((String(now.getDate())).padStart(2, '0'));
         }));
       });
 
@@ -741,7 +741,7 @@ describe('datePicker', () => {
 });
 
 function padZero(value) {
-  return (value + '').padStart(2, '0');
+  return (String(value)).padStart(2, '0');
 }
 
 function resolveMonth(str) {
@@ -926,7 +926,7 @@ function testNgModelAndYearMonth(fixture, wrapperEle, component) {
   fixture.detectChanges();
   yearEle = wrapperEle.querySelectorAll('.devui-date-title')[0];
 
-  expect(yearEle.innerText.trim().slice(0, 4)).toBe(new Date().getFullYear() - 1 + '');
+  expect(yearEle.innerText.trim().slice(0, 4)).toBe(String(new Date().getFullYear() - 1));
 
   const lastMonthEle = wrapperEle.querySelector('.devui-date-header').querySelectorAll('.devui-btn-link')[1];
   lastMonthEle.dispatchEvent(new Event('click'));
@@ -937,7 +937,7 @@ function testNgModelAndYearMonth(fixture, wrapperEle, component) {
     trueMonth = 13;
   }
 
-  expect(resolveMonth(monthEle.innerText.trim())).toBe(trueMonth - 1 + '');
+  expect(resolveMonth(monthEle.innerText.trim())).toBe(String(trueMonth - 1));
 
   closeDatePicker(fixture);
 
@@ -973,7 +973,6 @@ function testNgModelAndYearMonth(fixture, wrapperEle, component) {
   expect(component.inputEle.nativeElement.value).toBe(
     `${new Date().getFullYear()}/${padZero(new Date().getMonth() + 1)}/05`
   );
-  // expect(currentDay).toBe('05');
   closeDatePicker(fixture);
 
   component.inputEle.nativeElement.value = `${new Date().getFullYear()}/${padZero(new Date().getMonth() + 1)}/05`;
@@ -1024,7 +1023,7 @@ function testInputParam(fixture, wrapperEle, component) {
   if (nextAvailable.getDate() !== 1) {
     availableDayNumberList.push(nextAvailable);
   }
-  availableDayNumberList.forEach((date, index) => availableDayNumberList[index] = (date.getDate() + '').padStart(2, '0'));
+  availableDayNumberList.forEach((date, index) => { availableDayNumberList[index] = (String(date.getDate())).padStart(2, '0'); });
   for (const dayEl of dayListEle.querySelectorAll('.devui-in-month-day')) {
     const dayNumber = dayEl.querySelector('.devui-calendar-date').innerText.trim();
     if (
@@ -1086,7 +1085,7 @@ function testTimePicker(fixture, wrapperEle, component) {
   tickEvent(confirmBtn, new Event('click'), fixture);
 
   expect(component.getValue).toHaveBeenCalled();
-  // tslint:disable-next-line: max-line-length
+  /* eslint-disable-next-line max-len*/
   expect(component.inputEle.nativeElement.value).toBe(`${new Date().getFullYear()}/${padZero(new Date().getMonth() + 1)}/${padZero(new Date().getDate())} 0${timeEvent}:0${timeEvent}:0${timeEvent}`);
   expect(component.selectedDate1).toEqual(
     new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate(), Number(timeEvent), Number(timeEvent), Number(timeEvent))
@@ -1096,7 +1095,7 @@ function testTimePicker(fixture, wrapperEle, component) {
   tickEvent(component.inputEle.nativeElement, new Event('input'), fixture, 1000);
   tickEvent(component.inputEle.nativeElement, new Event('blur'), fixture, 1000);
   fixture.detectChanges();
-  // tslint:disable-next-line: max-line-length
+  /* eslint-disable-next-line max-len*/
   expect(component.inputEle.nativeElement.value).toBe(`${new Date().getFullYear()}/${padZero(new Date().getMonth() + 1)}/${padZero(new Date().getDate())} 0${timeEvent}:0${timeEvent}:0${timeEvent}`);
 }
 
@@ -1141,6 +1140,7 @@ function testDateConfig(fixture, wrapperEle, component) {
   fixture.detectChanges();
   tickEvent(confirmBtn, new Event('click'), fixture);
 
-  // tslint:disable-next-line: max-line-length  MM.dd.y mm-ss-HH
+  // MM.dd.y mm-ss-HH
+  /* eslint-disable-next-line max-len*/
   expect(component.inputEle.nativeElement.value).toBe(`${padZero(new Date().getMonth() + 1)}.${padZero(new Date().getDate())}.${new Date().getFullYear()} ${padZero(new Date().getMinutes())}-${padZero(new Date().getSeconds())}-${padZero(new Date().getHours())}`);
 }

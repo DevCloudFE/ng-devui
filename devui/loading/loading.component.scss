@@ -22,6 +22,7 @@
   z-index: $devui-z-index-full-page-overlay;
   width: max-content;
   max-width: 100%;
+  display: flex;
 }
 
 .devui-message-wrapper {
@@ -35,7 +36,7 @@
 
 .devui-busy-default-sign {
   position: relative;
-  display: inline-block;
+  display: inline-flex;
   z-index: $devui-z-index-full-page-overlay;
   padding: 12px 12px;
   color: $devui-text;
@@ -96,10 +97,10 @@
   }
 
   50% {
-    transform: rotate(135deg) scale(1.5);
+    transform: rotate(180deg) scale(1.5);
   }
 
   100% {
-    transform: rotate(270deg) scale(1);
+    transform: rotate(360deg) scale(1);
   }
 }

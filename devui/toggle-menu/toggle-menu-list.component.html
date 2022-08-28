@@ -32,12 +32,12 @@
         }"
       ></ng-template>
     </ng-container>
+    <div *ngIf="availableOptions?.length === 0" class="devui-no-data-tip">
+      <ng-container *ngIf="noResultItemTemplate; else noResultDefaultTpl">
+        <ng-template [ngTemplateOutlet]="noResultItemTemplate" [ngTemplateOutletContext]="{ options: options }"></ng-template>
+      </ng-container>
+    </div>
   </ul>
-  <li *ngIf="availableOptions?.length === 0" class="devui-no-data-tips">
-    <ng-container *ngIf="noResultItemTemplate; else noResultDefaultTpl">
-      <ng-template [ngTemplateOutlet]="noResultItemTemplate" [ngTemplateOutletContext]="{ options: options }"></ng-template>
-    </ng-container>
-  </li>
 </ul>
 <ng-container *ngIf="customViewTemplate">
   <div class="devui-select-custom-area">

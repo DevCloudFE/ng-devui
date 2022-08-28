@@ -7,7 +7,7 @@ import {
   Renderer2, RendererFactory2
 } from '@angular/core';
 import { OverlayContainerRef } from 'ng-devui/overlay-container';
-import { DevConfigService } from 'ng-devui/utils/globalConfig';
+import { DevConfigService } from 'ng-devui/utils';
 import { assign, isUndefined } from 'lodash-es';
 import { ModalContainerComponent } from './modal-container.component';
 import { ModalComponent } from './modal.component';
@@ -35,6 +35,9 @@ export class DialogService {
     backdropCloseable,
     maxHeight,
     showAnimation,
+    /**
+     * @deprecated
+     */
     showAnimate,
     title,
     content,
@@ -71,12 +74,12 @@ export class DialogService {
       showAnimateValue = apiConfig;
     }
 
-    if (showAnimation !== undefined) {
-
-    } else if (showAnimate !== undefined) {
-      showAnimation = showAnimate ;
-    } else {
-      showAnimation = showAnimateValue;
+    if (showAnimation === undefined) {
+      if (showAnimate !== undefined) {
+        showAnimation = showAnimate;
+      } else {
+        showAnimation = showAnimateValue;
+      }
     }
     assign(modalRef.instance, {
       id,
@@ -107,7 +110,7 @@ export class DialogService {
       } else {
         this.contentRef = modalContainerRef.instance.modalContentHost.viewContainerRef
           .createComponent(finalComponentFactoryResolver.resolveComponentFactory(content));
-        assign(this.contentRef.instance, { data }, dialogtype);
+        assign(this.contentRef.instance, { data, dialogtype });
       }
     }
 

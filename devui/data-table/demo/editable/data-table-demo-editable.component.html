@@ -1,4 +1,4 @@
-<d-data-table #dataTable [dataSource]="basicDataSource" [scrollable]="true">
+<d-data-table #dataTable [dataSource]="basicDataSource" [tableOverflowType]="'overlay'" [scrollable]="true">
   <thead dTableHead>
     <tr dTableRow>
       <th dHeadCell>Last Name</th>
@@ -22,7 +22,14 @@
         >
           <span *ngIf="!rowItem['nameEdit']">{{ rowItem?.lastName }}</span>
           <div *ngIf="rowItem['nameEdit']" class="edit-padding-fix">
-            <input class="devui-form-control" name="lastname" [(ngModel)]="rowItem.lastName" [attr.maxlength]="100" [attr.minlength]="3" />
+            <input
+              class="devui-form-control"
+              autofocus
+              name="lastname"
+              [(ngModel)]="rowItem.lastName"
+              [attr.maxlength]="100"
+              [attr.minlength]="3"
+            />
           </div>
         </td>
         <td dTableCell [editable]="true" [(editing)]="rowItem['dateEdit']">
@@ -50,7 +57,7 @@
         <td dTableCell [editable]="true" [(editing)]="rowItem['ageEdit']">
           <span *ngIf="!rowItem['ageEdit']">{{ rowItem?.age }}</span>
           <div *ngIf="rowItem['ageEdit']" class="edit-padding-fix">
-            <d-input-number [(ngModel)]="rowItem.age"></d-input-number>
+            <d-input-number [autoFocus]="true" [(ngModel)]="rowItem.age"></d-input-number>
           </div>
         </td>
         <td dTableCell [editable]="true" [(editing)]="rowItem['genderEdit']">

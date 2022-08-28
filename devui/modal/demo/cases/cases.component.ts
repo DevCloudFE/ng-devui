@@ -10,7 +10,7 @@ export class CasesComponent {
 
   constructor(private dialogService: DialogService) {}
 
-  openstandardDialog(dialogtype?: string) {
+  openStandardDialog(dialogtype?: string) {
     const results = this.dialogService.open({
       id: 'dialog-service',
       width: '600px',

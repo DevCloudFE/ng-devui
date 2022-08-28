@@ -44,7 +44,7 @@ In the page:
 
 ## dLzayLoad Parameters
 
-|    Parameter   |   Type    |Default|     Description      | Jump to Demo                 |Global Config| 
+|    Parameter   |   Type    |Default|     Description      | Jump to Demo                 |Global Config|
 | :----------------: | :------------: | :-------: | :---: | :------------------: | ---------------------------- |
 | enableLazyLoad | `boolean` | false | Optional. Whether to use lazyload | [Lazyload Directive](demo#lazy-load) |
 | target | `HTMLElement` | host | Optional. Indicates the target of the scrolling monitoring. | [懒加载指令](demo#lazy-load) |
@@ -297,6 +297,14 @@ The formatting format is slightly different from the format provided by the Angu
 
 # HelperUtils Static Methods
 
+## getBrowserName() => void
+
+Method description: Obtains the current browser name (`IE`|`ClassicEdge`|`Firefox`|`Opera`|`Edge`|`Chrome`|`Safari`|`Other`)
+
+## getBrowserVersion() => void
+
+Method description: Obtaining the Current Browser Version (Major Version)
+
 ## jumpOuterUrl(url: string, target?: string) => void
 
 Method description: This method is used to redirect to an external URL. The router.navigate cannot be redirected to an external system. Window.open is blocked by the browser. This method uses the a tag to simulate the jump.
@@ -340,9 +348,11 @@ Note: The browsers use different default opening modes for different types of fi
 |          option.responseOption          |  `response' \| 'body' \| 'json'`   |                'json'                 |                                                                                                            Optional. This parameter is used to specify the default format returned when the format fails to be processed. If the format fails to be processed, the format will be degraded.                                                                                                             |
 |             option.filename             |              `string`              |                  --                   |                                                                                                Optional. This parameter is not set by default. It is set to a configuration item first, obtained from filename specified in Content-Type in the response header, and then obtained from the access path.                                                                                                |
 |         option.withCredentials          |             `boolean`              |                 false                 |                                                                                                                                                       Optional. Indicates whether to enable xhr.withCredentials when HTTP interfaces are invoked.                                                                                                                                                       |
+| option.reportProgress | `boolean` | false | is optional. The default value is flase. It indicates whether to monitor the download progress. If it is set to true, the onProgress method can be used to monitor the download progress.|
 | option.downloadWithoutDispositionHeader |             `boolean`              |                 false                 |                                                                Optional. Content-Disposition: attachment is required in the request header by default. Otherwise, an error occurs in the non-file stream. If this parameter is set to true, the returned response is forcibly returned when the HTTP code in the response header is 2xx.                                                                |
 |                 onError                 |        `(res: any) => void`        |                  --                   |             Optional. It is used for callback when the download fails. The type is (response) => void. The parameter response indicates the error information returned by the request. The response attempts to convert the returned information to JSON. If the download fails, the textcontent of the original returned data is returned. The value is the same as that of downloadFile.              |
-|                onSuccess                |        `(res: any) => void`        |                  --                   | Optional. It is used to call back the download success. The type is (response) => void. The parameter response indicates the entire HTTP information returned by the request. The loading type of the body in the response is ArrayBuffer. The body is the downloaded file stream. Therefore, the body is not converted to JSON or attempted to parse the body as text. This is different from onError. |
+|                onSuccess                |        `(res: HttpResponse<ArrayBuffer>) => void`        |                  --                   | Optional. It is used to call back the download success. The type is (response) => void. The parameter response indicates the entire HTTP information returned by the request. The loading type of the body in the response is ArrayBuffer. The body is the downloaded file stream. Therefore, the body is not converted to JSON or attempted to parse the body as text. This is different from onError. |
+| onProgress | `(res: HttpProgressEvent) => void` | -- | is optional. It is used to call back the download progress event. The type is (response) => void. The parameter response is the download progress information returned by the request. The loading type of the response is blob.|
 
 How to get httpClient instance:
 
@@ -445,3 +455,11 @@ export interface CopyResult {
 }
 ```
 
+### HttpProgressEvent
+```typescript
+interface HttpProgressEvent {
+  type: HttpEventType.DownloadProgress | HttpEventType.UploadProgress;
+  loaded: number;
+  total?: number;
+}
+```

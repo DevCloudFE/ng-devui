@@ -23,340 +23,340 @@ import { DragPlaceholderInsertionEvent, DragPlaceholderInsertionIndexEvent } fro
 
 export type DropIndexFlag = 'beforeAll' | 'afterAll';
 @Directive({
-    selector: '[dDroppable]'
+  selector: '[dDroppable]'
 })
 export class DroppableDirective implements OnInit, AfterViewInit, OnDestroy {
 
-    /**
+  /**
      *  Event fired when Drag dragged element enters a valid drop target.
      */
-    @Output() dragEnterEvent: EventEmitter<any> = new EventEmitter<any>();
+  @Output() dragEnterEvent: EventEmitter<any> = new EventEmitter<any>();
 
-    /**
+  /**
      * Event fired when an element is being dragged over a valid drop target
      */
-    @Output() dragOverEvent: EventEmitter<any> = new EventEmitter<any>();
+  @Output() dragOverEvent: EventEmitter<any> = new EventEmitter<any>();
 
-    /**
+  /**
      * Event fired when a dragged element leaves a valid drop target.
      */
-    @Output() dragLeaveEvent: EventEmitter<any> = new EventEmitter<any>();
+  @Output() dragLeaveEvent: EventEmitter<any> = new EventEmitter<any>();
 
-    /**
+  /**
      * Event fired when an element is dropped on a valid drop target.
      */
-    @Output() dropEvent: EventEmitter<DropEvent> = new EventEmitter<DropEvent>(); // 注意使用了虚拟滚动后，DropEvent中的dragFromIndex无效
+  @Output() dropEvent: EventEmitter<DropEvent> = new EventEmitter<DropEvent>(); // 注意使用了虚拟滚动后，DropEvent中的dragFromIndex无效
 
-    /**
+  /**
      * CSS class applied on the draggable that is applied when the item is being dragged.
      */
-    @Input() dragOverClass: string;
+  @Input() dragOverClass: string;
 
-    /**
+  /**
      * Defines compatible drag drop pairs. Values must match both in draggable and droppable.dropScope.
      */
-    @Input() dropScope: string | Array<string> = 'default';
+  @Input() dropScope: string | Array<string> = 'default';
 
-    @Input() placeholderTag = 'div';
+  @Input() placeholderTag = 'div';
 
-    @Input() placeholderStyle: any = {backgroundColor: ['#859bff', `var(--devui-brand-foil, #859bff)`], opacity: '.4'};
+  @Input() placeholderStyle: any = {backgroundColor: ['#859bff', `var(--devui-brand-foil, #859bff)`], opacity: '.4'};
 
-    /**
+  /**
      * 设置placeholder的提示性文字，仅支持文本（安全起见）
      */
-    @Input() placeholderText = '';
+  @Input() placeholderText = '';
 
-    /**
+  /**
      * 用于允许拖动到元素上，方便树形结构的拖动可以成为元素的子节点
      */
-    @Input() allowDropOnItem = false;
+  @Input() allowDropOnItem = false;
 
-    /**
+  /**
      * allowDropOnItem为true时，才有效，用于允许拖动到元素上后，被命中的元素增加样式
      */
-    @Input() dragOverItemClass: string;
+  @Input() dragOverItemClass: string;
 
-    /**
+  /**
      *  用于修正有内嵌列表后，父项高度被撑大，此处height，width为父项自己的高度（用于纵向拖动），宽度（用于横向拖动）
      * */
-    @Input() nestingTargetRect: {height?: number, width?: number};
+  @Input() nestingTargetRect: {height?: number; width?: number};
 
-     /**
+  /**
     *  是否启用越过立即交换位置的算法, 不能与allowDropOnItem一起用，allowDropOnItem为true时，此规则无效
     * */
-    @Input() switchWhileCrossEdge = false;
+  @Input() switchWhileCrossEdge = false;
 
-    /**
+  /**
     *  sortable的情况下，拖动到可以drop但不在sortContainer里的时候默认drop的位置
     * */
-    @Input() defaultDropPosition: 'closest' | 'before' | 'after' = 'closest';
+  @Input() defaultDropPosition: 'closest' | 'before' | 'after' = 'closest';
 
-    /**
+  /**
     *  sortable的情况下，列表如果使用了virtual scroll等部分加载技术时候返回正确的dropIndex
     * */
-    @Input() dropSortCountSelector: string;
-    @Input() dropSortVirtualScrollOption: {
-      totalLength?: number;
-      startIndex?: number;
-      // innerSortContainer?: HTMLElement | string; // 用于虚拟滚动列表结构发生内嵌
-    };
-    private dropFlag: DropIndexFlag;
+  @Input() dropSortCountSelector: string;
+  @Input() dropSortVirtualScrollOption: {
+    totalLength?: number;
+    startIndex?: number;
+    // innerSortContainer?: HTMLElement | string; // 用于虚拟滚动列表结构发生内嵌
+  };
+  private dropFlag: DropIndexFlag;
 
-    private sortContainer: any;
-    private sortDirection: 'v' | 'h';
-    private sortDirectionZMode: boolean;
-    private placeholder: any;
+  private sortContainer: any;
+  private sortDirection: 'v' | 'h';
+  private sortDirectionZMode: boolean;
+  private placeholder: any;
 
-    // 用于修复dragleave多次触发
-    private dragCount = 0;
+  // 用于修复dragleave多次触发
+  private dragCount = 0;
 
-    private dropIndex = undefined;
+  private dropIndex = undefined;
 
-    private dragStartSubscription: Subscription;
-    private dragEndSubscription: Subscription;
-    private dropEndSubscription: Subscription;
+  private dragStartSubscription: Subscription;
+  private dragEndSubscription: Subscription;
+  private dropEndSubscription: Subscription;
 
-    // 记录上一次悬停的元素，用于对比悬停的元素等是否发生变化
-    private overElement;
+  // 记录上一次悬停的元素，用于对比悬停的元素等是否发生变化
+  private overElement;
 
-    private dragPartEventSub: Subscription;
-    private allowDropCache: boolean;
-    private dragElIndex;
-    /* 协同拖拽需要 */
-    placeholderInsertionEvent = new Subject<DragPlaceholderInsertionEvent>();
-    placeholderRenderEvent = new Subject<any>();
-    document: Document;
+  private dragPartEventSub: Subscription;
+  private allowDropCache: boolean;
+  private dragElIndex;
+  /* 协同拖拽需要 */
+  placeholderInsertionEvent = new Subject<DragPlaceholderInsertionEvent>();
+  placeholderRenderEvent = new Subject<any>();
+  document: Document;
 
-    constructor(protected el: ElementRef, private renderer: Renderer2, private dragDropService: DragDropService, private ngZone: NgZone,
-                @Inject(DOCUMENT) private doc: any) {
-      this.document = this.doc;
+  constructor(protected el: ElementRef, private renderer: Renderer2, private dragDropService: DragDropService, private ngZone: NgZone,
+              @Inject(DOCUMENT) private doc: any) {
+    this.document = this.doc;
+  }
+
+  ngOnInit() {
+    this.placeholder = this.document.createElement(this.placeholderTag);
+    this.placeholder.className = 'drag-placeholder';
+    this.placeholder.innerText = this.placeholderText;
+    this.dragStartSubscription = this.dragDropService.dragStartEvent.subscribe(() => this.setPlaceholder());
+    if (this.dragDropService.draggedEl) {
+      this.setPlaceholder(); // 虚拟滚动生成元素过程中
     }
-
-    ngOnInit() {
-      this.placeholder = this.document.createElement(this.placeholderTag);
-      this.placeholder.className = 'drag-placeholder';
-      this.placeholder.innerText = this.placeholderText;
-      this.dragStartSubscription = this.dragDropService.dragStartEvent.subscribe(() => this.setPlaceholder());
+    this.dropEndSubscription = this.dragDropService.dropEvent.subscribe(() => {
       if (this.dragDropService.draggedEl) {
-        this.setPlaceholder(); // 虚拟滚动生成元素过程中
+        if (!this.dragDropService.dragFollow) {
+          this.renderer.setStyle(this.dragDropService.draggedEl, 'display', '');
+          this.dragDropService.dragElShowHideEvent.next(true);
+        }
       }
-      this.dropEndSubscription = this.dragDropService.dropEvent.subscribe(() => {
-        if (this.dragDropService.draggedEl) {
-          if (!this.dragDropService.dragFollow) {
-            this.renderer.setStyle(this.dragDropService.draggedEl, 'display', '');
-            this.dragDropService.dragElShowHideEvent.next(true);
-          }
+      this.removePlaceholder();
+      this.overElement = undefined;
+      this.allowDropCache = undefined;
+      this.dragElIndex = undefined;
+      this.dropIndex = undefined;
+    });
+    this.dragEndSubscription = this.dragDropService.dragEndEvent.subscribe(() => {
+      if (this.dragDropService.draggedEl) {
+        if (!this.dragDropService.dragFollow) {
+          this.renderer.setStyle(this.dragDropService.draggedEl, 'display', '');
+          this.dragDropService.dragElShowHideEvent.next(true);
         }
-        this.removePlaceholder();
-        this.overElement = undefined;
-        this.allowDropCache = undefined;
-        this.dragElIndex = undefined;
-        this.dropIndex = undefined;
-      });
-      this.dragEndSubscription = this.dragDropService.dragEndEvent.subscribe(() => {
-        if (this.dragDropService.draggedEl) {
-          if (!this.dragDropService.dragFollow) {
-            this.renderer.setStyle(this.dragDropService.draggedEl, 'display', '');
-            this.dragDropService.dragElShowHideEvent.next(true);
-          }
-        }
-        this.removePlaceholder();
-        this.dragCount = 0;
-        this.overElement = undefined;
-        this.allowDropCache = undefined;
-        this.dragElIndex = undefined;
-        this.dropIndex = undefined;
-      });
-      this.ngZone.runOutsideAngular (() => {
-        this.dragPartEventSub = new Subscription();
-        this.dragPartEventSub.add(fromEvent<DragEvent>(this.el.nativeElement, 'dragover')
-          .pipe(
-            filter(event => this.allowDrop(event)),
-            distinctUntilChanged((prev , current) => {
-                const bool = (prev.clientX === current.clientX && prev.clientY === current.clientY && prev.target === current.target);
-                if (bool) { current.preventDefault(); current.stopPropagation(); }
-                return bool;
-            })
-          )
-          .subscribe((event) => this.dragOver(event))
-        );
-        this.dragPartEventSub.add(
-          fromEvent(this.el.nativeElement, 'dragenter').subscribe((event) => this.dragEnter(event))
-        );
-        this.dragPartEventSub.add(
-          fromEvent(this.el.nativeElement, 'dragleave').subscribe((event) => this.dragLeave(event))
-        );
-      });
-    }
-
-    ngAfterViewInit() {
-      if (this.el.nativeElement.hasAttribute('d-sortable')) {
-        this.sortContainer = this.el.nativeElement;
-      } else {
-        this.sortContainer = this.el.nativeElement.querySelector('[d-sortable]');
       }
-      this.sortDirection = this.sortContainer ? this.sortContainer.getAttribute('dsortable') || 'v' : 'v';
-      this.sortDirectionZMode = this.sortContainer ? (this.sortContainer.getAttribute('d-sortable-zmode') === 'true' || false) : false;
-    }
+      this.removePlaceholder();
+      this.dragCount = 0;
+      this.overElement = undefined;
+      this.allowDropCache = undefined;
+      this.dragElIndex = undefined;
+      this.dropIndex = undefined;
+    });
+    this.ngZone.runOutsideAngular (() => {
+      this.dragPartEventSub = new Subscription();
+      this.dragPartEventSub.add(fromEvent<DragEvent>(this.el.nativeElement, 'dragover')
+        .pipe(
+          filter(event => this.allowDrop(event)),
+          distinctUntilChanged((prev , current) => {
+            const bool = (prev.clientX === current.clientX && prev.clientY === current.clientY && prev.target === current.target);
+            if (bool) { current.preventDefault(); current.stopPropagation(); }
+            return bool;
+          })
+        )
+        .subscribe((event) => this.dragOver(event))
+      );
+      this.dragPartEventSub.add(
+        fromEvent(this.el.nativeElement, 'dragenter').subscribe((event) => this.dragEnter(event))
+      );
+      this.dragPartEventSub.add(
+        fromEvent(this.el.nativeElement, 'dragleave').subscribe((event) => this.dragLeave(event))
+      );
+    });
+  }
 
-    ngOnDestroy() {
-        this.dragStartSubscription.unsubscribe();
-        this.dragEndSubscription.unsubscribe();
-        this.dropEndSubscription.unsubscribe();
-        if (this.dragPartEventSub) {this.dragPartEventSub.unsubscribe(); }
+  ngAfterViewInit() {
+    if (this.el.nativeElement.hasAttribute('d-sortable')) {
+      this.sortContainer = this.el.nativeElement;
+    } else {
+      this.sortContainer = this.el.nativeElement.querySelector('[d-sortable]');
     }
+    this.sortDirection = this.sortContainer ? this.sortContainer.getAttribute('dsortable') || 'v' : 'v';
+    this.sortDirectionZMode = this.sortContainer ? (this.sortContainer.getAttribute('d-sortable-zmode') === 'true' || false) : false;
+  }
 
-    dragEnter(e) {
-        this.dragCount++;
-        e.preventDefault(); // ie11 dragenter需要preventDefault否则dragover无效
-        this.dragEnterEvent.emit(e);
-    }
+  ngOnDestroy() {
+    this.dragStartSubscription.unsubscribe();
+    this.dragEndSubscription.unsubscribe();
+    this.dropEndSubscription.unsubscribe();
+    if (this.dragPartEventSub) {this.dragPartEventSub.unsubscribe(); }
+  }
 
-    dragOver(e) {
-      if (this.allowDrop(e)) {
-        if (this.dragDropService.dropTargets.indexOf(this.el) === -1) {
-          this.dragDropService.dropTargets.forEach(el => {
-            const placeHolderEl = el.nativeElement.querySelector('.drag-placeholder');
-            if (placeHolderEl) {
-              placeHolderEl.parentElement.removeChild(placeHolderEl);
-            }
-            Utils.removeClass(el, this.dragOverClass);
-            this.removeDragoverItemClass(el.nativeElement);
-          });
-          this.dragDropService.dropTargets = [this.el];
-          this.overElement = undefined; // 否则会遇到上一次position= 这一次的然后不刷新和插入。
-        }
-        Utils.addClass(this.el, this.dragOverClass);
-        const hitPlaceholder
+  dragEnter(e) {
+    this.dragCount++;
+    e.preventDefault(); // ie11 dragenter需要preventDefault否则dragover无效
+    this.dragEnterEvent.emit(e);
+  }
+
+  dragOver(e) {
+    if (this.allowDrop(e)) {
+      if (this.dragDropService.dropTargets.indexOf(this.el) === -1) {
+        this.dragDropService.dropTargets.forEach(el => {
+          const placeHolderEl = el.nativeElement.querySelector('.drag-placeholder');
+          if (placeHolderEl) {
+            placeHolderEl.parentElement.removeChild(placeHolderEl);
+          }
+          Utils.removeClass(el, this.dragOverClass);
+          this.removeDragoverItemClass(el.nativeElement);
+        });
+        this.dragDropService.dropTargets = [this.el];
+        this.overElement = undefined; // 否则会遇到上一次position= 这一次的然后不刷新和插入。
+      }
+      Utils.addClass(this.el, this.dragOverClass);
+      const hitPlaceholder
           = this.dragDropService.dragOriginPlaceholder && this.dragDropService.dragOriginPlaceholder.contains(e.target);
-        if (this.sortContainer && (
-          (hitPlaceholder && this.overElement === undefined)
+      if (this.sortContainer && (
+        (hitPlaceholder && this.overElement === undefined)
           || !(e.target.contains(this.placeholder) || hitPlaceholder)
           || (this.switchWhileCrossEdge && !this.placeholder.contains(e.target) && !hitPlaceholder) // 越边交换回折的情况需要重新计算
           || (!this.sortContainer.contains(e.target) && this.defaultDropPosition === 'closest') // 就近模式需要重新计算
-        )) {
-          const overElement = this.findSortableEl(e);
-          if (!(this.overElement && overElement) || this.overElement.index !== overElement.index
+      )) {
+        const overElement = this.findSortableEl(e);
+        if (!(this.overElement && overElement) || this.overElement.index !== overElement.index
             || (this.allowDropOnItem && this.overElement.position !== overElement.position
               && (this.overElement.position === 'inside' || overElement.position === 'inside'))
-          ) {
-            // overElement的参数有刷新的时候才进行插入等操作
-            this.overElement = overElement;
+        ) {
+          // overElement的参数有刷新的时候才进行插入等操作
+          this.overElement = overElement;
 
-            this.insertPlaceholder(overElement);
+          this.insertPlaceholder(overElement);
 
-            this.removeDragoverItemClass(this.sortContainer, overElement);
-            if (overElement.position === 'inside' && this.dragOverItemClass) {
-              Utils.addClass(overElement.el, this.dragOverItemClass);
-            }
-          } else {
-            this.overElement = overElement;
+          this.removeDragoverItemClass(this.sortContainer, overElement);
+          if (overElement.position === 'inside' && this.dragOverItemClass) {
+            Utils.addClass(overElement.el, this.dragOverItemClass);
           }
         } else {
-          if (this.sortContainer && this.overElement && this.overElement.el) {
-            if (!this.overElement.el.contains(e.target)) {
-              this.overElement.realEl = e.target;
-            } else {
-              this.overElement.realEl = undefined;
-            }
+          this.overElement = overElement;
+        }
+      } else {
+        if (this.sortContainer && this.overElement && this.overElement.el) {
+          if (!this.overElement.el.contains(e.target)) {
+            this.overElement.realEl = e.target;
+          } else {
+            this.overElement.realEl = undefined;
           }
         }
-        if (this.dragDropService.draggedEl) {
-          if (!this.dragDropService.dragFollow) {
-            this.renderer.setStyle(this.dragDropService.draggedEl, 'display', 'none');
-            this.dragDropService.dragElShowHideEvent.next(false);
-            if (this.dragDropService.dragOriginPlaceholder) {
-              this.renderer.setStyle(this.dragDropService.dragOriginPlaceholder, 'display', 'block');
-            }
-          }
-        }
-        e.preventDefault();
-        e.stopPropagation();
-        this.dragOverEvent.emit(e);
-       }
-    }
-
-    dragLeave(e) {
-      // 用于修复包含子元素时，多次触发dragleave
-      this.dragCount--;
-
-      if (0 === this.dragCount) {
-        if (this.dragDropService.dropTargets.indexOf(this.el) !== -1) {
-          this.dragDropService.dropTargets = [];
-        }
-        Utils.removeClass(this.el, this.dragOverClass);
-        this.removePlaceholder();
-        this.removeDragoverItemClass(this.el.nativeElement);
-        this.overElement = undefined;
-        this.dragElIndex = undefined;
-        this.dropIndex = undefined;
       }
-      e.preventDefault();
-      this.dragLeaveEvent.emit(e);
-    }
-
-    @HostListener('drop', ['$event'])
-    drop(e) {
-      if (!this.allowDrop(e)) { return; }
-      this.dragCount = 0;
-      Utils.removeClass(this.el, this.dragOverClass);
-      this.removeDragoverItemClass(this.sortContainer);
-      this.removePlaceholder();
+      if (this.dragDropService.draggedEl) {
+        if (!this.dragDropService.dragFollow) {
+          this.renderer.setStyle(this.dragDropService.draggedEl, 'display', 'none');
+          this.dragDropService.dragElShowHideEvent.next(false);
+          if (this.dragDropService.dragOriginPlaceholder) {
+            this.renderer.setStyle(this.dragDropService.dragOriginPlaceholder, 'display', 'block');
+          }
+        }
+      }
       e.preventDefault();
       e.stopPropagation();
-      this.dragDropService.dropOnOrigin = this.isDragPlaceholderPosition(this.dropIndex);
-      const draggedElIdentity = this.dragDropService.draggedElIdentity;
-      this.dragDropService.draggedElIdentity = undefined; // 需要提前清除，避免新生成的节点复用了id 刷新了dragOriginPlaceholder
-      let batchDraggble: Array<DraggableDirective> = [];
-      if (this.dragDropService.batchDragData && this.dragDropService.batchDragData.length > 1) {
-        batchDraggble = this.dragDropService.batchDragData.map(dragData => dragData.draggable)
-          .filter(draggable => draggable && draggable.el.nativeElement !== this.dragDropService.draggedEl);
-      }
-      this.dropEvent.emit(
-        new DropEvent(
-          e,
-          this.dragDropService.dragData,
-          this.dragDropService.dropEvent,
-          this.dropSortVirtualScrollOption ? this.getRealIndex(this.dropIndex, this.dropFlag) : this.dropIndex,
-          this.sortContainer ? this.checkSelfFromIndex(this.dragDropService.draggedEl) : -1,
-          this.dragDropService.dropOnItem,
-          this.dragDropService.dropOnOrigin,
-          (this.dragDropService.batchDragging)
-            ? this.dragDropService.getBatchDragData(draggedElIdentity)
-            : undefined
-        )
-      );
-      // 如果drop之后drag元素被删除，则不会发生dragend事件，需要代替dragend清理
-      if (this.dragDropService.dragFollow) {
-        this.dragDropService.disableDraggedCloneNodeFollowMouse();
-      } else {
-        this.renderer.setStyle(this.dragDropService.draggedEl, 'display', '');
-        this.dragDropService.dragElShowHideEvent.next(false);
-      }
-      if (batchDraggble.length > 0 && this.dragDropService.batchDragging) {
-        batchDraggble.forEach((draggable) => {
-          if (!draggable.originPlaceholder || draggable.originPlaceholder.show === false) {
-            draggable.el.nativeElement.style.display = '';
-          } else if (draggable.originPlaceholder.removeDelay > 0 && !this.dragDropService.dropOnOrigin) {
-            draggable.delayRemoveOriginPlaceholder(false);
-          } else {
-            draggable.el.nativeElement.style.display = '';
-            draggable.removeOriginPlaceholder(false);
-          }
-        });
-      }
-      this.dragDropService.dropEvent.next(e);
-      this.dragDropService.dragData = undefined;
-      this.dragDropService.scope = undefined;
-      this.dragDropService.draggedEl = undefined;
-      this.dragDropService.dragFollow = undefined;
-      this.dragDropService.dragFollowOptions = undefined;
-      this.dragDropService.dragOffset = undefined;
-      this.dragDropService.dropOnOrigin = undefined;
-      this.dragDropService.batchDragging = false;
-      this.dragDropService.batchDragStyle = undefined;
-      this.dragDropService.dragPreviewDirective = undefined;
+      this.dragOverEvent.emit(e);
     }
+  }
+
+  dragLeave(e) {
+    // 用于修复包含子元素时，多次触发dragleave
+    this.dragCount--;
+
+    if (this.dragCount === 0) {
+      if (this.dragDropService.dropTargets.indexOf(this.el) !== -1) {
+        this.dragDropService.dropTargets = [];
+      }
+      Utils.removeClass(this.el, this.dragOverClass);
+      this.removePlaceholder();
+      this.removeDragoverItemClass(this.el.nativeElement);
+      this.overElement = undefined;
+      this.dragElIndex = undefined;
+      this.dropIndex = undefined;
+    }
+    e.preventDefault();
+    this.dragLeaveEvent.emit(e);
+  }
+
+  @HostListener('drop', ['$event'])
+  drop(e) {
+    if (!this.allowDrop(e)) { return; }
+    this.dragCount = 0;
+    Utils.removeClass(this.el, this.dragOverClass);
+    this.removeDragoverItemClass(this.sortContainer);
+    this.removePlaceholder();
+    e.preventDefault();
+    e.stopPropagation();
+    this.dragDropService.dropOnOrigin = this.isDragPlaceholderPosition(this.dropIndex);
+    const draggedElIdentity = this.dragDropService.draggedElIdentity;
+    this.dragDropService.draggedElIdentity = undefined; // 需要提前清除，避免新生成的节点复用了id 刷新了dragOriginPlaceholder
+    let batchDraggble: Array<DraggableDirective> = [];
+    if (this.dragDropService.batchDragData && this.dragDropService.batchDragData.length > 1) {
+      batchDraggble = this.dragDropService.batchDragData.map(dragData => dragData.draggable)
+        .filter(draggable => draggable && draggable.el.nativeElement !== this.dragDropService.draggedEl);
+    }
+    this.dropEvent.emit(
+      new DropEvent(
+        e,
+        this.dragDropService.dragData,
+        this.dragDropService.dropEvent,
+        this.dropSortVirtualScrollOption ? this.getRealIndex(this.dropIndex, this.dropFlag) : this.dropIndex,
+        this.sortContainer ? this.checkSelfFromIndex(this.dragDropService.draggedEl) : -1,
+        this.dragDropService.dropOnItem,
+        this.dragDropService.dropOnOrigin,
+        (this.dragDropService.batchDragging)
+          ? this.dragDropService.getBatchDragData(draggedElIdentity)
+          : undefined
+      )
+    );
+    // 如果drop之后drag元素被删除，则不会发生dragend事件，需要代替dragend清理
+    if (this.dragDropService.dragFollow) {
+      this.dragDropService.disableDraggedCloneNodeFollowMouse();
+    } else {
+      this.renderer.setStyle(this.dragDropService.draggedEl, 'display', '');
+      this.dragDropService.dragElShowHideEvent.next(false);
+    }
+    if (batchDraggble.length > 0 && this.dragDropService.batchDragging) {
+      batchDraggble.forEach((draggable) => {
+        if (!draggable.originPlaceholder || draggable.originPlaceholder.show === false) {
+          draggable.el.nativeElement.style.display = '';
+        } else if (draggable.originPlaceholder.removeDelay > 0 && !this.dragDropService.dropOnOrigin) {
+          draggable.delayRemoveOriginPlaceholder(false);
+        } else {
+          draggable.el.nativeElement.style.display = '';
+          draggable.removeOriginPlaceholder(false);
+        }
+      });
+    }
+    this.dragDropService.dropEvent.next(e);
+    this.dragDropService.dragData = undefined;
+    this.dragDropService.scope = undefined;
+    this.dragDropService.draggedEl = undefined;
+    this.dragDropService.dragFollow = undefined;
+    this.dragDropService.dragFollowOptions = undefined;
+    this.dragDropService.dragOffset = undefined;
+    this.dragDropService.dropOnOrigin = undefined;
+    this.dragDropService.batchDragging = false;
+    this.dragDropService.batchDragStyle = undefined;
+    this.dragDropService.dragPreviewDirective = undefined;
+  }
 
   allowDrop(e): boolean {
     if (!e) { return false; }
@@ -366,10 +366,10 @@ export class DroppableDirective implements OnInit, AfterViewInit, OnDestroy {
     let allowed = false;
     if (typeof this.dropScope === 'string') {
       if (typeof this.dragDropService.scope === 'string') {
-          allowed = this.dragDropService.scope === this.dropScope;
+        allowed = this.dragDropService.scope === this.dropScope;
       }
       if (this.dragDropService.scope instanceof Array) {
-          allowed = this.dragDropService.scope.indexOf(this.dropScope) > -1;
+        allowed = this.dragDropService.scope.indexOf(this.dropScope) > -1;
       }
     }
     if (this.dropScope instanceof Array) {
@@ -390,9 +390,10 @@ export class DroppableDirective implements OnInit, AfterViewInit, OnDestroy {
     return Utils.matches(value, this.dropSortCountSelector)
       || value.contains(this.placeholder)
       || value === this.dragDropService.dragOriginPlaceholder;
-  }
+  };
 
   // 查询需要插入placeholder的位置
+  /* eslint-disable-next-line complexity*/
   private findSortableEl(event) {
     const moveElement = event.target;
     let overElement = null;
@@ -418,7 +419,7 @@ export class DroppableDirective implements OnInit, AfterViewInit, OnDestroy {
       );
     }
     // 要先删除clonenode否则placeholderindex是错的
-    if (this.dragDropService.dragFollow &&　this.dragDropService.dragCloneNode) {
+    if (this.dragDropService.dragFollow && this.dragDropService.dragCloneNode) {
       const cloneNodeIndex = childEls.findIndex(value => value === this.dragDropService.dragCloneNode);
       if (-1 !== cloneNodeIndex) {
         childEls.splice(cloneNodeIndex, 1);
@@ -448,10 +449,10 @@ export class DroppableDirective implements OnInit, AfterViewInit, OnDestroy {
     }
     const positionIndex = -1 !== placeholderIndex ? placeholderIndex : this.dragElIndex;
     const currentIndex = childEls.findIndex(value => (
-        value.contains(moveElement)
+      value.contains(moveElement)
         || value.nextElementSibling === moveElement
         && value.nextElementSibling.classList.contains('drag-origin-placeholder'))
-      );
+    );
     if (this.switchWhileCrossEdge && !this.allowDropOnItem && childEls.length
       && -1 !== positionIndex
       && currentIndex > -1
@@ -567,8 +568,8 @@ export class DroppableDirective implements OnInit, AfterViewInit, OnDestroy {
       };
       const threeQuartersOfHeight = dropOnItemEdge.height * 3 / 4;
       const threeQuartersOfWidth = dropOnItemEdge.width * 3 / 4;
-      const AQuarterOfHeight = dropOnItemEdge.height * 1 / 4;
-      const AQuarterOfWidth = dropOnItemEdge.width * 1 / 4;
+      const AQuarterOfHeight = Number(dropOnItemEdge.height) / 4;
+      const AQuarterOfWidth = Number(dropOnItemEdge.width) / 4;
 
       if (this.sortDirectionZMode) {
         const slashPosition = (relY / dropOnItemEdge.height + relX / dropOnItemEdge.width);
@@ -609,7 +610,7 @@ export class DroppableDirective implements OnInit, AfterViewInit, OnDestroy {
       return 'after';
     }
     return 'before';
-   }
+  }
 
   private calcPositionOutside(event: any, targetElement: any) {
     const rect = this.getBoundingRectAndRealPosition(targetElement); // targetElement.getBoundingClientRect();
@@ -638,7 +639,7 @@ export class DroppableDirective implements OnInit, AfterViewInit, OnDestroy {
       Utils.addElStyles(this.placeholder, this.placeholderStyle);
       this.placeholderRenderEvent.next({width: this.dragDropService.dragOffset.width, height: this.dragDropService.dragOffset.height});
     });
-  }
+  };
 
   // 插入placeholder
   private insertPlaceholder(overElement) {
@@ -655,7 +656,7 @@ export class DroppableDirective implements OnInit, AfterViewInit, OnDestroy {
         el => el !== this.dragDropService.dragCloneNode
       );
 
-      if (null === overElement.el) {
+      if (overElement.el === null) {
         cmd = {
           command: 'append'
         };

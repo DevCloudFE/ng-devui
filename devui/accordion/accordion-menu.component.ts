@@ -1,28 +1,26 @@
-import { Component, HostBinding, ViewEncapsulation } from '@angular/core';
-import { expandCollapse, expandCollapseForDomDestroy } from 'ng-devui/utils';
+import { Component, forwardRef, HostBinding, Inject, ViewEncapsulation } from '@angular/core';
 import { AccordionBaseComponent } from './accordion-base-component.class';
-import { AccordionListComponent } from './accordion-list.component';
-import { AccordionComponent } from './accordion.component';
+import { ACCORDION_MENU } from './accordion-menu-token';
+import { ACCORDION } from './accordion-token';
 import { AccordionBaseMenu, AccordionMenuItem } from './accordion.type';
 @Component({
   selector: 'd-accordion-menu',
   templateUrl: './accordion-menu.component.html',
   encapsulation: ViewEncapsulation.None,
   preserveWhitespaces: false,
-  animations: [expandCollapse, expandCollapseForDomDestroy]
+  providers: [{
+    provide: ACCORDION_MENU,
+    useExisting: forwardRef(() => AccordionMenuComponent)
+  }]
 })
 export class AccordionMenuComponent extends AccordionBaseComponent<AccordionBaseMenu<AccordionMenuItem>> {
   @HostBinding('class.devui-accordion-menu-item')
   defaultClasses = true;
 
-  public accordionListFromView: AccordionListComponent;
+  public accordionListFromView: any; // AccordionListComponent
 
   get menuItemTemplate() {
     return this.accordion.menuItemTemplate;
-  }
-
-  get showAnimate() {
-    return this.accordion.showAnimation;
   }
 
   @HostBinding('class.open')
@@ -52,7 +50,7 @@ export class AccordionMenuComponent extends AccordionBaseComponent<AccordionBase
     return this.accordionListFromView && this.accordionListFromView.hasActiveChildren;
   }
 
-  constructor(public accordion: AccordionComponent) {
+  constructor(@Inject(ACCORDION) public accordion: any) {
     super(accordion);
   }
 

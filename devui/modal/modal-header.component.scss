@@ -1,11 +1,8 @@
 @import '../style/theme/color';
-@import '../style/theme/variables';
-@import '../style/mixins/index';
 @import '../style/core/_font';
 
 .modal-header {
-  padding: 32px 32px 0 32px;
-  height: 56px;
+  padding: 20px 20px 0 20px;
   position: relative;
   border: none; // 覆盖bootStrap默认样式
 
@@ -20,30 +17,12 @@
     white-space: nowrap;
   }
 
-  button.close {
-    position: absolute;
-    right: 20px;
-    top: 20px;
-    font-size: $devui-font-size-icon;
-    font-weight: bold;
-    line-height: 1;
-    color: #000000; // TODO: color not variable
-    // text-shadow: 0 1px 0 $devui-base-bg;
-    cursor: pointer;
-    background: transparent;
-    border: 0;
-    -webkit-appearance: none;
+  &.no-title {
+    height: 0;
+    padding: 0;
 
-    svg.svg-icon-close polygon {
-      fill: $devui-text-weak;
-    }
-
-    &:hover {
-      background: $devui-list-item-hover-bg;
-
-      svg.svg-icon-close polygon {
-        fill: $devui-icon-fill-active;
-      }
+    .standard-title {
+      display: none;
     }
   }
 }
@@ -90,8 +69,8 @@
   vertical-align: middle;
 }
 
-button {
-  outline: none;
-  height: 20px;
-  width: 20px;
+.modal-header-close {
+  position: absolute;
+  right: 20px;
+  top: 18px;
 }

@@ -18,15 +18,16 @@ import { ButtonModule } from 'ng-devui/button';
 | :----------------: | :---------: | :------------:  | :-----: | :---------------------------------------------------------------------------  |                                                     |
 |     id      |            `string`             |   --    | 可选，button id     |   [主要按钮](demo#button-primary)                                             |
 |    type     | [`IButtonType`](#ibuttontype)   | 'button'  | 可选，类型 `'button' \| 'submit' \| 'reset' ` |  [警示按钮](demo#button-danger)                                             |
-|   bsStyle   | [`IButtonStyle`](#ibuttonstyle)  | 'primary' | 可选，风格 `'primary' \| 'common' \| 'text' \| 'text-dark' \| 'danger'`      | [次要按钮](demo#button-common)   |
+|   bsStyle   | [`IButtonStyle`](#ibuttonstyle)  | 'primary' | 可选，风格 `'primary' \| 'common' \| 'text' \| 'danger'`      | [次要按钮](demo#button-common)   |
 |   bsSize    |  [`IButtonSize`](#ibuttonsize)   |  'md'   | 可选，大小 `'lg' \| 'md' \| 'sm' \| 'xs'`          | [按钮尺寸](demo#button-size)      |
-| bsPosition |[`IButtonPosition`](#ibuttonposition) |'default' | 可选，按钮位置 `'default' \| 'left' \| 'right'`  | [左右按钮](demo#button-left-right)     |
 |  bordered   |   `boolean`     |  false  | 可选，是否有边框          |      [自动获得焦点](demo#button-auto-focus)             |
 |    icon     |    `string`     |   --    | 可选， 自定义按钮图标                                                          | [图标按钮](demo#button-icon)      |
+|    shape     |    `'circle'`     |   --    | 可选， 自定义按钮形状                                                       | [图标按钮](demo#button-icon)      |
 | showLoading |   `boolean`     |  false  | 可选，是否显示加载提示                                                         | [加载中状态](demo#button-loading) |
 |    width    |    `string`     |   --    | 可选，button 宽度    |   [主要按钮与次要按钮组合](demo#button-primary-and-common)         |
 |  disabled   |   `boolean`     |  false  | 可选，是否禁用 button                                                         | [主要按钮](demo#button-primary)   |
 |  autofocus  |   `boolean`     |  false  | 可选，按钮加载时是否自动获得焦点                                                | [自动获得焦点](demo#button-auto-focus)  |
+|loadingTemplateRef|`TemplateRef<any>`| --| 可选，按钮加载时的展示模板                                                      |     |
 
 ## d-button 事件
 
@@ -56,7 +57,7 @@ export type IButtonType = 'button' | 'submit' | 'reset';
 默认值为'primary'，表示button风格
 
 ```ts
-export type IButtonStyle = 'common' | 'primary' | 'text' | 'text-dark' | 'danger';
+export type IButtonStyle = 'common' | 'primary' | 'text' | 'danger';
 ```
 
 ### IButtonPosition

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, forwardRef, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, forwardRef, Input, OnInit, TemplateRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -15,13 +15,32 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   preserveWhitespaces: false,
 })
 export class RateComponent implements OnInit, ControlValueAccessor {
-  @Input() read = false;
+  /**
+   * @deprecated
+   * 用readonly替代
+  */
+  @Input() set read(value) {
+    this.readonly = value;
+  }
+  @Input() readonly = false;
+
   @Input() count = 5;
   @Input() color = '';
+  /**
+   * @deprecated
+   * 用character替代
+  */
   @Input() icon = '';
-  @Input() character = '';
-  @Input() type: 'success' | 'warning' | 'error';
+  @Input() character: string | TemplateRef<any> = '';
+  /**
+   * @deprecated
+   * 用color替代
+  */
+  @Input() set type(value) {
+    this.color = `var(--devui-${value})`;
+  }
   @Input() allowHalf = false;
+  @Input() allowClear = false;
   totalLevel_array = [];
   chooseValue: number;
   width = '';
@@ -38,6 +57,13 @@ export class RateComponent implements OnInit, ControlValueAccessor {
     }
   }
 
+  get isCharacterTemplate() {
+    return this.character instanceof TemplateRef;
+  }
+
+  get characterTemplate(): TemplateRef<any> {
+    return this.character as TemplateRef<any>;
+  }
   // 只读模式配置
   setStaticRating() {
     const half_star = this.chooseValue % 1;
@@ -59,13 +85,15 @@ export class RateComponent implements OnInit, ControlValueAccessor {
     if (this.allowHalf && halfStar) {
       this.setChange(wholeStar + 1, wholeStar + 2, '50%');
       this.setChange(wholeStar + 2, this.count, '0');
+    } else if (this.allowClear && this.chooseValue === -1) {
+      this.setChange(0, this.count, '0');
     } else {
       this.setChange(wholeStar + 1, this.count, '0');
     }
   }
 
-  hoverToggle(event, index?: number, reset: boolean = false) {
-    if (this.read) {
+  hoverToggle(event, index?: number, reset = false) {
+    if (this.readonly) {
       return;
     }
     if (reset) {
@@ -93,21 +121,32 @@ export class RateComponent implements OnInit, ControlValueAccessor {
   }
 
   selectValue(event, index) {
-    if (this.read) {
+    if (this.readonly) {
       return;
     }
     this.setChange(0, index, '100%');
+    const prevValue = this.chooseValue;
 
     if (this.allowHalf && (event.offsetX * 2 <= event.target.clientWidth)) {
-      this.setChange(index, index + 1, '50%');
       this.chooseValue = index - 0.5;
     } else {
-      this.setChange(index, index + 1, '100%');
       this.chooseValue = index;
     }
 
-    this.setChange(index + 1, this.count, '0');
-    this.onChange(this.chooseValue + 1);
+    if (this.allowClear && this.chooseValue === prevValue) {
+      this.chooseValue = -1;
+      this.setChange(0, this.count, '0');
+      this.onChange(0);
+    } else {
+      if (this.allowHalf && (event.offsetX * 2 <= event.target.clientWidth)) {
+        this.setChange(index, index + 1, '50%');
+      } else {
+        this.setChange(index, index + 1, '100%');
+      }
+      this.setChange(index + 1, this.count, '0');
+      this.onChange(this.chooseValue + 1);
+    }
+
     this.onTouched();
   }
 
@@ -121,7 +160,7 @@ export class RateComponent implements OnInit, ControlValueAccessor {
 
   writeValue(value: number | null): void {
     this.chooseValue = value - 1;
-    if (this.read) {
+    if (this.readonly) {
       this.setStaticRating();
     } else {
       this.setDynamicRating();

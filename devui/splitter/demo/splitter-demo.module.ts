@@ -9,7 +9,7 @@ import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
 import { SplitterModule } from 'ng-devui/splitter';
 import { TooltipModule } from 'ng-devui/tooltip';
 import { TranslateModule } from '@ngx-translate/core';
-import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
+import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
 import { SplitterDemoBasicComponent } from './basic/splitter-demo-basic.component';
 import { SplitterDemoDirectionComponent } from './direction/splitter-demo-direction.component';
 import { SplitterDemoMultiComponent } from './multi/splitter-demo-multi.component';

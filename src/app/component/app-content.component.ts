@@ -12,7 +12,7 @@ import { routesConfig } from './component.route';
 import { resolveRoutesConfig } from './resolve-routes-config.service';
 import { newScopeList, sunsetScopeList } from './scope-list';
 @Component({
-  selector: 'cd-app-content', // tslint:disable-line
+  selector: 'd-app-content',
   templateUrl: './app-content.component.html',
   encapsulation: ViewEncapsulation.None,
 })
@@ -23,7 +23,7 @@ export class AppContentComponent implements OnInit, OnDestroy {
     {path: 'overview', name: '组件总览', linkType: 'routerLink' },
     {path: 'get-start', name: '快速开始', linkType: 'routerLink' },
     {path: 'theme-guide', name: '主题化使用指南', linkType: 'routerLink' },
-    {path: 'global-config', name: '全局设置', linkType: 'routerLink' },
+    {path: 'global-config', name: '全局设置', linkType: 'routerLink' }
   ];
   clickSub: Subscription = new Subscription();
   // @ViewChild('dSearch', { static: true }) dSearch: SearchComponent;

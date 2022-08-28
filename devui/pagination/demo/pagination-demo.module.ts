@@ -1,19 +1,19 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
-
 import { ButtonModule } from 'ng-devui/button';
 import { PaginationModule } from 'ng-devui/pagination';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
-import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
+import { TranslateModule } from '@ngx-translate/core';
+import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
 import { AdditionalComponent } from './additional/additional.component';
 import { BasicComponent } from './basic/basic.component';
 import { LiteComponent } from './lite/lite.component';
 import { PaginationDemoComponent } from './pagination-demo.component';
 import { WidgetsComponent } from './widgets/widgets.component';
+
 
 @NgModule({
   imports: [
@@ -41,7 +41,7 @@ import { WidgetsComponent } from './widgets/widgets.component';
     LiteComponent,
     WidgetsComponent
   ],
-  
+
 })
 export class PaginationDemoModule {
 }

@@ -12,6 +12,17 @@ import {GanttModule} from' ng-devui/gantt';
 | milestoneList | `GanttMilestone[]` | [] | Optional. Version milestone list | [Combined With Datatable](demo#gantt-with-datatable) |
 | ganttScaleContainerOffsetLeft | `number` | 0 | Optional. Left offset pixel of the Gantt chart time axis container | [Combined With Datatable](demo#gantt-with-datatable) |
 | ganttBarContainerElement | `Element` | null | Time bar container of the Gantt chart, which is mandatory. It is used to display the Gantt chart lines. | [Combined With Datatable](demo#gantt-with-datatable) |
+| scrollElement | `Element` | -- | Optional, scrolling container. | [Combined With Datatable](demo#gantt-with-datatable) |
+| unit | `'day'\|'week'\|'month'` | 'day' | Optional, default time dimension. |
+| height | `number` | -- | Optional, hight. |
+| startDate | `Date` | -- | Optional, start date. |
+| endDate | `Date` | -- | Optional, end date. |
+
+### d-gantt-scale event
+
+| Event | Type | Description | Jump to Demo |
+| :-----------------: | :---------------------------: | :--------------------------: | -------------------------------------------------------------------------- |
+| addMilestoneEvent | `EventEmitter<GanttScaleDateInfo>` | Event triggered after a user clicks New. |
 
 ### d-gantt-bar parameter
 
@@ -32,6 +43,7 @@ import {GanttModule} from' ng-devui/gantt';
 | customBarClass   |     `string`      |   --    |Optional.Customizing the Style of the Gantt Bar.                                      | -- |
 | customBgClass   |     `string`      |   --    |Optional.Drag the background color when the Gantt bar is moved.  | -- |
 | customTitleClass   |     `string`      |   --    | Optional. Customizing the title style.                                     | -- |
+| scrollElement | `Element` | -- | Optional, scrolling container. | [Basic Usage](demo#gantt-basic) |
 
 ### d-gantt-bar event
 

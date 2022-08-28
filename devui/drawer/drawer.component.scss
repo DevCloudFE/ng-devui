@@ -1,6 +1,4 @@
 @import '../style/theme/color';
-@import '../style/theme/variables';
-@import '../style/mixins/index';
 @import '../style/theme/shadow';
 @import '../style/theme/corner';
 @import '../style/theme/z-index';
@@ -52,6 +50,11 @@
 .drawer-content {
   left: 0;
   right: 0;
-  overflow: auto;
+  overflow: hidden;
   box-shadow: $devui-shadow-length-fullscreen-overlay $devui-shadow;
+
+  &:hover {
+    overflow: auto;
+    overflow: overlay;
+  }
 }

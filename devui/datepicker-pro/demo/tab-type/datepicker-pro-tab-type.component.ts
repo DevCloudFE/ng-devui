@@ -91,13 +91,13 @@ export class DatepickerProTabTypeComponent implements OnInit {
 
   onToggle(isOpen) {
     this.isOpen = isOpen;
-    if (isOpen) {
-      this.calendarCmp?.updateCurPosition();
+    if (isOpen && this.calendarCmp) {
+      this.calendarCmp.updateCurPosition();
     }
   }
 
   getTimeStr(date: Date) {
-    // tslint:disable-next-line
-    return `${date.toLocaleDateString()} ${padStart(date.getHours() + '', 2, '0')}:${padStart(date.getMinutes() + '', 2, '0')}:${padStart(date.getSeconds() + '', 2, '0')}`;
+    /* eslint-disable-next-line  max-len*/
+    return `${date.toLocaleDateString()} ${padStart(String(date.getHours()), 2, '0')}:${padStart(String(date.getMinutes()), 2, '0')}:${padStart(String(date.getSeconds()), 2, '0')}`;
   }
 }

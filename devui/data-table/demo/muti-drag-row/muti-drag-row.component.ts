@@ -103,7 +103,7 @@ export class MutiDragRowComponent implements OnInit {
     let index = e.dropIndex;
     const fromIndex = e.dragFromIndex;
     if (-1 !== index) {
-      /*修正同一个container排序，往下拖动index多了1个位置*/
+      /* 修正同一个container排序，往下拖动index多了1个位置*/
       if (-1 !== fromIndex && index > fromIndex) {
         index--;
       }

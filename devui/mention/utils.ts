@@ -39,7 +39,7 @@ const properties = [
 ];
 
 const isBrowser = typeof window !== 'undefined';
-const isFirefox = isBrowser && window['mozInnerScreenX'] != null;
+const isFirefox = isBrowser && window['mozInnerScreenX'] !== undefined;
 function _parseInt(value) {
   return parseInt(value, 10);
 }

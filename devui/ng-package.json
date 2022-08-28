@@ -2,11 +2,14 @@
   "$schema": "../node_modules/ng-packagr/ng-package.schema.json",
   "dest": "../publish",
   "lib": {
-    "entryFile": "./index.ts",
-    "umdModuleIds": {
-      "lodash-es": "lodash-es",
-      "enquire.js": "enquire.js"
-    }
+    "entryFile": "./index.ts"
   },
-  "whitelistedNonPeerDependencies": ["@angular/cdk","date-fns", "lodash-es", "@popperjs/core", "enquire.js", "css-vars-ponyfill"]
+  "allowedNonPeerDependencies": [
+    "@angular/cdk",
+    "date-fns",
+    "lodash-es",
+    "@popperjs/core",
+    "enquire.js",
+    "css-vars-ponyfill"
+  ]
 }

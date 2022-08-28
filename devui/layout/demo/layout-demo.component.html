@@ -2,22 +2,100 @@
   <d-demo-nav [navItems]="navItems"></d-demo-nav>
   <div class="devui-demo-example" [dAnchor]="'basic-usage'">
     <div class="devui-demo-title">{{ 'components.layout.basicDemo.title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.layout.basicDemo.description' | translate }}</div>
+    <d-codebox id="layout-component" [sourceData]="GridBasic">
+      <d-grid-basic class="d-stripe-layout" demo></d-grid-basic>
+    </d-codebox>
+  </div>
+
+  <div class="devui-demo-example" [dAnchor]="'gutter'">
+    <div class="devui-demo-title">{{ 'components.layout.gutterDemo.title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.layout.gutterDemo.description' | translate }}</div>
+    <d-codebox id="layout-component" [sourceData]="GridGutter">
+      <d-grid-gutter demo></d-grid-gutter>
+    </d-codebox>
+  </div>
+
+  <div class="devui-demo-example" [dAnchor]="'space'">
+    <div class="devui-demo-title">{{ 'components.layout.spaceDemo.title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.layout.spaceDemo.description' | translate }}</div>
+    <d-codebox id="layout-component" [sourceData]="GridSpace">
+      <d-grid-space demo></d-grid-space>
+    </d-codebox>
+  </div>
+
+  <div class="devui-demo-example" [dAnchor]="'offset'">
+    <div class="devui-demo-title">{{ 'components.layout.offsetDemo.title' | translate }}</div>
+    <d-codebox id="layout-component" [sourceData]="GridOffset">
+      <d-grid-offset class="d-common-layout" demo></d-grid-offset>
+    </d-codebox>
+  </div>
+
+  <div class="devui-demo-example" [dAnchor]="'align-justify'">
+    <div class="devui-demo-title">{{ 'components.layout.alignJustifyDemo.title' | translate }}</div>
+    <d-codebox id="layout-component" [sourceData]="FlexAlignjustify">
+      <d-flex-align-justify class="d-stripe-layout" demo></d-flex-align-justify>
+    </d-codebox>
+  </div>
+
+  <div class="devui-demo-example" [dAnchor]="'order'">
+    <div class="devui-demo-title">{{ 'components.layout.orderDemo.title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.layout.orderDemo.description' | translate }}</div>
+    <d-codebox id="layout-component" [sourceData]="FlexOrder">
+      <d-flex-order class="d-stripe-layout" demo></d-flex-order>
+    </d-codebox>
+  </div>
+
+  <div class="devui-demo-example" [dAnchor]="'flex'">
+    <div class="devui-demo-title">{{ 'components.layout.flexDemo.title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.layout.flexDemo.description' | translate }}</div>
+    <d-codebox id="layout-component" [sourceData]="AloneFlex">
+      <d-alone-flex class="d-stripe-layout" demo></d-alone-flex>
+    </d-codebox>
+  </div>
+
+  <div class="devui-demo-example" [dAnchor]="'space-gutter'">
+    <div class="devui-demo-title">{{ 'components.layout.spaceGutterDemo.title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.layout.spaceGutterDemo.description' | translate }}</div>
+    <d-codebox id="layout-component" [sourceData]="AloneSpaceGutter">
+      <d-alone-space-gutter class="d-stripe-layout" demo></d-alone-space-gutter>
+    </d-codebox>
+  </div>
+
+  <div class="devui-demo-example" [dAnchor]="'class'">
+    <div class="devui-demo-title">{{ 'components.layout.classDemo.title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.layout.classDemo.description' | translate }}</div>
+    <d-codebox id="layout-component" [sourceData]="ClassDemo">
+      <d-class-demo class="d-stripe-layout" demo></d-class-demo>
+    </d-codebox>
+  </div>
+
+  <div class="devui-demo-example" [dAnchor]="'style'">
+    <div class="devui-demo-title">{{ 'components.layout.styleDemo.title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.layout.styleDemo.description' | translate }}</div>
+    <d-codebox id="layout-component" [sourceData]="StyleDemo">
+      <d-style-demo class="d-stripe-layout" demo></d-style-demo>
+    </d-codebox>
+  </div>
+
+  <div class="devui-demo-example" [dAnchor]="'layout-container'">
+    <div class="devui-demo-title">{{ 'components.layout.layoutContainerDemo.title' | translate }}</div>
     <d-codebox id="layout-component" [sourceData]="LayoutBasic">
       <d-layout-basic demo></d-layout-basic>
     </d-codebox>
   </div>
 
-  <div class="devui-demo-example" [dAnchor]="'application-scenario1'">
-    <div class="devui-demo-title">{{ 'components.layout.appDemo1.title' | translate }}</div>
-    <div class="devui-demo-text">{{ 'components.layout.appDemo1.description' | translate }}</div>
+  <div class="devui-demo-example" [dAnchor]="'layout-container-scenario1'">
+    <div class="devui-demo-title">{{ 'components.layout.layoutContainerDemo1.title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.layout.layoutContainerDemo1.description' | translate }}</div>
     <d-codebox id="layout-component" [sourceData]="LayoutTop">
       <d-layout-top demo></d-layout-top>
     </d-codebox>
   </div>
 
-  <div class="devui-demo-example" [dAnchor]="'application-scenario2'">
-    <div class="devui-demo-title">{{ 'components.layout.appDemo2.title' | translate }}</div>
-    <div class="devui-demo-text">{{ 'components.layout.appDemo2.description' | translate }}</div>
+  <div class="devui-demo-example" [dAnchor]="'layout-container-scenario2'">
+    <div class="devui-demo-title">{{ 'components.layout.layoutContainerDemo2.title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.layout.layoutContainerDemo2.description' | translate }}</div>
     <d-codebox id="layout-component" [sourceData]="LayoutTopAside">
       <d-layout-top-aside demo></d-layout-top-aside>
     </d-codebox>

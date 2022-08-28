@@ -20,11 +20,11 @@ export function ThemeServiceInit(
   defaultThemeName?: string,
   extraData?: {
     [themeName: string]: {
-      appendClasses?: Array<string>,
+      appendClasses?: Array<string>;
       cssVariables?: {
-        [cssVarName: string]: string
-      }
-    }
+        [cssVarName: string]: string;
+      };
+    };
   },
   ieSupport = false, // TODO：css-var-ponyflll 仍有一些问题待定位
   allowDynamicTheme = false
@@ -50,7 +50,7 @@ export function ThemeServiceInit(
   return themeService;
 }
 
-export function ThemeServiceFollowSystemOn(themeConfig?: { lightThemeName: string, darkThemeName: string }): Subscription {
+export function ThemeServiceFollowSystemOn(themeConfig?: { lightThemeName: string; darkThemeName: string }): Subscription {
   const themeService: ThemeService = window[THEME_KEY.themeService];
   themeService.registerMediaQuery();
   return themeService.mediaQuery.prefersColorSchemeChange.subscribe(value => {

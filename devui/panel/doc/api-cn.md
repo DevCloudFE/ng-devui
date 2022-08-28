@@ -40,5 +40,5 @@ import { PanelModule } from 'ng-devui';
 ### PanelType
 
 ```ts
-export type PanelType = 'default' | 'primary' | 'success' | 'danger' | 'warning' | 'info';
+export type PanelType = 'default' | 'primary' | 'success' | 'danger' | 'warning' | 'info' | 'ghost';
 ```

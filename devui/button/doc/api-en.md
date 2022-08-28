@@ -18,15 +18,16 @@ In the page:
 | :----------------: | :---------: | :------------: | :-----: | :--------------------------------------------------------------------------- | |
 |     id      |             `string`            |   --   | Optional. ID of the button. | [Primary Buttons](demo#button-primary)|
 |     type    |  [`IButtonType`](#ibuttontype)  |  'button' | Optional. The type is `'button' \| 'submit' \| 'reset'` |[Danger Buttons](demo#button-danger)   |
-|   bsStyle   | [`IButtonStyle`](#ibuttonstyle) |  'primary' | Optional. The style is `'primary' \| 'common' \| 'text' \| 'text-dark' \| 'danger'` | [Common Buttons](demo#button-common) |
+|   bsStyle   | [`IButtonStyle`](#ibuttonstyle) |  'primary' | Optional. The style is `'primary' \| 'common' \| 'text' \| 'danger'` | [Common Buttons](demo#button-common) |
 |   bsSize    |  [`IButtonSize`](#ibuttonsize)   |   'md'  | Optional. The size is `'lg' \| 'md' \| 'sm' \| 'xs'` | [Button Size](demo#button-size) |
-|  bsPosition |[`IButtonPosition`](#ibuttonposition) |'default'| Optional. The button position is `'default' \| 'left' \| 'right'` | [Left & Right Buttons](demo#button-left-right) |
 |  bordered   |   `boolean`  |   false   | Optional. Indicating whether a border exists |  [Auto-focus Buttons](demo#button-auto-focus)|
 |    icon     |   `string`   |   --   | Optional. Customized button icon | [Icon Buttons](demo#button-icon) |
+|    shape     |    `'circle'`     |   --    | Optional. Customized button icon                                                       | [Icon Buttons](demo#button-icon)      |
 | showLoading |   `boolean`  |   false   | Optional. Indicating whether to display the loading prompt | [Loading Buttons](demo#button-loading) |
 |    width    |   `string`   |     --    | Optional. Button width |[Combinations of Primary & Common Buttons](demo#button-primary-and-common) |
 |  disabled   |   `boolean`  |   false   | Optional. Indicating whether to disable the button | [Primary Buttons](demo#button-primary) |
 |  autofocus  |   `boolean`  |   false   | Optional. Indicating whether to automatically obtain the focus during button loading | [Auto-focus Buttons](demo#button-auto-focus) |
+|loadingTemplateRef|`TemplateRef<any>`| --| Optional. It is the display template when the button is loaded.                                                      |     |
 
 ## d-button Event
 
@@ -56,7 +57,7 @@ export type IButtonType = 'button' | 'submit' | 'reset';
 The default value is 'primary', indicating the button style.
 
 ```ts
-export type IButtonStyle = 'common' | 'primary' | 'text' | 'text-dark' | 'danger';
+export type IButtonStyle = 'common' | 'primary' | 'text' | 'danger';
 ```
 
 ### IButtonPosition

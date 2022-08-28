@@ -11,11 +11,10 @@ import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
 import { TextInputModule } from 'ng-devui/text-input';
 import { TranslateModule } from '@ngx-translate/core';
-import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
+import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
 import { AutofocusComponent } from './autofocus/autofocus.component';
 import { BasicUpdateComponent } from './basic-update/basic-update.component';
 import { BasicComponent } from './basic/basic.component';
-import { ModalTestComponent } from './basic/modal-test.component';
 import { CasesComponent } from './cases/cases.component';
 import { ModalCasesComponent } from './cases/modal-cases.component';
 import { CustomizeComponent } from './customize/customize.component';
@@ -25,11 +24,11 @@ import { FixedWrapperComponent } from './fixed/fixed-wrapper.component';
 import { HideComponent } from './hide/hide.component';
 import { ModalFormComponent } from './hide/modal-form.component';
 import { ModalDemoComponent } from './modal-demo.component';
+import { ModalTestComponent } from './modal-test.component';
 import { DialogContentComponent } from './template/dialog-content/dialog-content.component';
 import { ModalContentComponent } from './template/modal-content/modal-content.component';
 import { TemplateComponent } from './template/template.component';
 import { TipsComponent } from './tips/tips.component';
-import { WarningComponent } from './warning/warning.component';
 
 @NgModule({
   imports: [
@@ -67,7 +66,6 @@ import { WarningComponent } from './warning/warning.component';
     TipsComponent,
     HideComponent,
     ModalFormComponent,
-    WarningComponent,
     AutofocusComponent,
     TemplateComponent,
     DialogContentComponent,
@@ -77,6 +75,5 @@ import { WarningComponent } from './warning/warning.component';
     CasesComponent,
     ModalCasesComponent
   ],
-  
 })
 export class ModalDemoModule {}

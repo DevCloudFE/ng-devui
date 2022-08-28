@@ -62,12 +62,12 @@ export class LabelizationComponent {
 
   changeSelect1() {
     this.select1 = [
-    {
-      name: 'option 2',
-      value: 2
-    }, {
-      name: 'option 4',
-      value: 4
-    }];
+      {
+        name: 'option 2',
+        value: 2
+      }, {
+        name: 'option 4',
+        value: 4
+      }];
   }
 }

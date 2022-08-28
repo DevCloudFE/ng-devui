@@ -1,6 +1,7 @@
-import { DOCUMENT } from '@angular/common';
 import { Component, ElementRef, Inject, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { DevuiOnlineIdeService } from '../devui-online-ide/devui-online-ide.service';
 import { DevuiSourceData } from './devui-source-data';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'd-codebox',
@@ -29,41 +30,43 @@ export class DevuiCodeboxComponent implements OnInit {
   }
 
   copy(value: string): Promise<string> {
-
-    const promise = new Promise<string>(
-      (resolve, reject): void => {
-        let copyTextArea = null as HTMLTextAreaElement;
-        try {
-          copyTextArea = this.document.createElement('textarea');
-          copyTextArea.style.height = '0px';
-          copyTextArea.style.opacity = '0';
-          copyTextArea.style.width = '0px';
-          this.document.body.appendChild(copyTextArea);
-          copyTextArea.value = value;
-          copyTextArea.select();
-          this.document.execCommand('copy');
-          resolve(value);
-        } finally {
-          if (copyTextArea && copyTextArea.parentNode) {
-            copyTextArea.parentNode.removeChild(copyTextArea);
-          }
+    const promise = new Promise<string>((resolve, reject): void => {
+      let copyTextArea = null as HTMLTextAreaElement;
+      try {
+        copyTextArea = document.createElement('textarea');
+        copyTextArea.style.height = '0px';
+        copyTextArea.style.opacity = '0';
+        copyTextArea.style.width = '0px';
+        document.body.appendChild(copyTextArea);
+        copyTextArea.value = value;
+        copyTextArea.select();
+        document.execCommand('copy');
+        resolve(value);
+      } finally {
+        if (copyTextArea && copyTextArea.parentNode) {
+          copyTextArea.parentNode.removeChild(copyTextArea);
         }
       }
-    );
+    });
 
-    return (promise);
-
+    return promise;
   }
 
   toggleCode() {
     this.expanded = !this.expanded;
   }
 
-  constructor(private _el: ElementRef, @Inject(DOCUMENT) private doc: any) {
+  openOnlineIDE(ide: 'StackBlitz' | 'CodeSandbox' = 'StackBlitz'): void {
+    if (ide === 'StackBlitz') {
+      this.onlineIdeService.openOnStackBlitz(this.sourceData);
+    } else {
+      this.onlineIdeService.openOnCodeSandbox(this.sourceData);
+    }
+  }
+
+  constructor(private _el: ElementRef, private onlineIdeService: DevuiOnlineIdeService, @Inject(DOCUMENT) private doc: any) {
     this.document = this.doc;
   }
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

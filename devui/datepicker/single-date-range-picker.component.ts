@@ -220,36 +220,36 @@ export class SingleDateRangePickerComponent extends SingleDatepickerComponent im
 
   timeUp(type) {
     switch (type) {
-      case 'h': {
-        Number(this.currentHour) < 23 ? this.currentHour = (Number(this.currentHour) + 1) : this.currentHour = 0;
-        break;
-      }
-      case 'm': {
-        Number(this.currentMinute) < 59 ? this.currentMinute = (Number(this.currentMinute) + 1) : this.currentMinute = 0;
-        break;
-      }
-      case 's': {
-        Number(this.currentSecond) < 59 ? this.currentSecond = (Number(this.currentSecond) + 1) : this.currentSecond = 0;
-        break;
-      }
+    case 'h': {
+      Number(this.currentHour) < 23 ? this.currentHour = (Number(this.currentHour) + 1) : this.currentHour = 0;
+      break;
+    }
+    case 'm': {
+      Number(this.currentMinute) < 59 ? this.currentMinute = (Number(this.currentMinute) + 1) : this.currentMinute = 0;
+      break;
+    }
+    case 's': {
+      Number(this.currentSecond) < 59 ? this.currentSecond = (Number(this.currentSecond) + 1) : this.currentSecond = 0;
+      break;
+    }
     }
     this.timeChange();
   }
 
   timeDown(type) {
     switch (type) {
-      case 'h': {
-        Number(this.currentHour) > 0 ? this.currentHour = (Number(this.currentHour) - 1) : this.currentHour = 23;
-        break;
-      }
-      case 'm': {
-        Number(this.currentMinute) > 0 ? this.currentMinute = (Number(this.currentMinute) - 1) : this.currentMinute = 59;
-        break;
-      }
-      case 's': {
-        Number(this.currentSecond) > 0 ? this.currentSecond = (Number(this.currentSecond) - 1) : this.currentSecond = 59;
-        break;
-      }
+    case 'h': {
+      Number(this.currentHour) > 0 ? this.currentHour = (Number(this.currentHour) - 1) : this.currentHour = 23;
+      break;
+    }
+    case 'm': {
+      Number(this.currentMinute) > 0 ? this.currentMinute = (Number(this.currentMinute) - 1) : this.currentMinute = 59;
+      break;
+    }
+    case 's': {
+      Number(this.currentSecond) > 0 ? this.currentSecond = (Number(this.currentSecond) - 1) : this.currentSecond = 59;
+      break;
+    }
     }
     this.timeChange();
   }
@@ -262,19 +262,19 @@ export class SingleDateRangePickerComponent extends SingleDatepickerComponent im
     const min = 0;
     let max = 59;
     switch (type) {
-      case 'h': {
-        timeType = 'currentHour';
-        max = 23;
-        break;
-      }
-      case 'm': {
-        timeType = 'currentMinute';
-        break;
-      }
-      case 's': {
-        timeType = 'currentSecond';
-        break;
-      }
+    case 'h': {
+      timeType = 'currentHour';
+      max = 23;
+      break;
+    }
+    case 'm': {
+      timeType = 'currentMinute';
+      break;
+    }
+    case 's': {
+      timeType = 'currentSecond';
+      break;
+    }
     }
     let value = event.target['value'];
     const selectionStart = event.target['selectionStart'];
@@ -330,7 +330,7 @@ export class SingleDateRangePickerComponent extends SingleDatepickerComponent im
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.hasOwnProperty('selectedRange')) {
+    if (Object.prototype.hasOwnProperty.call(changes, 'selectedRange')) {
       this.selectingRange = false;
       [this.rangeStart, this.rangeEnd] = changes['selectedRange'].currentValue;
     }
@@ -645,18 +645,18 @@ export class SingleDateRangePickerComponent extends SingleDatepickerComponent im
     this.currentMonthIndex = date.getMonth();
     if (!this.showTime) { return; }
     switch (this.isAuxiliary) {
-      case false:
-        // Left panel
-        this.currentHour = this.rangeStart ? this.rangeStart.getHours() : 0;
-        this.currentMinute = this.rangeStart ? this.rangeStart.getMinutes() : 0;
-        this.currentSecond = this.rangeStart ? this.rangeStart.getSeconds() : 0;
-        break;
-      case true:
-        // Right panel
-        this.currentHour = this.rangeEnd ? this.rangeEnd.getHours() : 23;
-        this.currentMinute = this.rangeEnd ? this.rangeEnd.getMinutes() : 59;
-        this.currentSecond = this.rangeEnd ? this.rangeEnd.getSeconds() : 59;
-        break;
+    case false:
+      // Left panel
+      this.currentHour = this.rangeStart ? this.rangeStart.getHours() : 0;
+      this.currentMinute = this.rangeStart ? this.rangeStart.getMinutes() : 0;
+      this.currentSecond = this.rangeStart ? this.rangeStart.getSeconds() : 0;
+      break;
+    case true:
+      // Right panel
+      this.currentHour = this.rangeEnd ? this.rangeEnd.getHours() : 23;
+      this.currentMinute = this.rangeEnd ? this.rangeEnd.getMinutes() : 59;
+      this.currentSecond = this.rangeEnd ? this.rangeEnd.getSeconds() : 59;
+      break;
     }
   }
 

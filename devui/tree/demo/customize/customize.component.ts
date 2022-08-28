@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { TreeComponent, TreeNode } from 'ng-devui/tree';
+import { TreeComponent } from 'ng-devui/tree';
 
 @Component({
   selector: 'd-customize',
@@ -8,7 +8,6 @@ import { TreeComponent, TreeNode } from 'ng-devui/tree';
 })
 export class CustomizeComponent {
   @ViewChild('operableTree', { static: true }) operableTree: TreeComponent;
-  currentSelectedNode;
   iconParentOpen = '<span class="icon icon-chevron-down"></span>';
   iconParentClose = '<span class="icon icon-collapse"></span>';
   iconLeaf = '<span></span>';
@@ -18,12 +17,12 @@ export class CustomizeComponent {
     'data': { 'type': 'mix' },
     'open': true,
     'status': 'status1',
-    'children': [{
+    'items': [{
       'title': 'leaf node 1-1',
       'data': { 'type': 'mix' },
       'open': false,
       'status': 'status1',
-      'children': [{
+      'items': [{
         'title': 'leaf node 1-1-1',
         'data': { 'type': 'ppt' },
         'status': 'status2',
@@ -36,7 +35,7 @@ export class CustomizeComponent {
       'data': { 'type': 'mix' },
       'open': false,
       'status': 'status1',
-      'children': [{
+      'items': [{
         'title': 'leaf node 1-2-1',
         'data': { 'type': 'ppt' },
         'status': 'status1',
@@ -51,7 +50,7 @@ export class CustomizeComponent {
     'data': { 'type': 'ppt' },
     'open': false,
     'status': 'status1',
-    'children': [{
+    'items': [{
       'title': 'leaf node 2-1',
       'data': { 'type': 'ppt' },
       'status': 'status1',
@@ -65,7 +64,7 @@ export class CustomizeComponent {
     'data': { 'type': 'xls' },
     'open': false,
     'status': 'status1',
-    'children': [{
+    'items': [{
       'title': 'leaf node 3-1',
       'data': { 'type': 'xls' },
       'status': 'status1',
@@ -76,10 +75,6 @@ export class CustomizeComponent {
     }]
   }];
 
-  onOperableNodeSelected(treeNode: TreeNode) {
-    console.log('selected: ', treeNode);
-    this.currentSelectedNode = treeNode;
-  }
   onBlurEdit(treeNode) {
     treeNode.editable = false;
   }

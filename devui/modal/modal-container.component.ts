@@ -21,16 +21,16 @@ export class ModalContainerComponent implements OnInit {
   @Input() title: string;
   @Input() content: string | HTMLElement;
   @Input() buttons: Array<{
-    id?: string,
-    cssClass?: IButtonStyle,
-    text: string,
-    handler: ($event: Event) => void,
-    btnwidth?: string,
-    autofocus?: boolean,
-    disabled: boolean
+    id?: string;
+    cssClass?: IButtonStyle;
+    text: string;
+    handler: ($event: Event) => void;
+    btnwidth?: string;
+    autofocus?: boolean;
+    disabled: boolean;
   }>;
   @Input() html: boolean;
-  @Input() onClose: EventListener;
+  @Input() onClose: ($event?: Event) => void;
   @ViewChild(ModalContentDirective, { static: true }) modalContentHost: ModalContentDirective;
   @Input() dialogtype = 'standard';
   @Input() showCloseBtn: boolean;
@@ -40,7 +40,7 @@ export class ModalContainerComponent implements OnInit {
 
   ngOnInit() {
     if (this.html) {
-        this.content = <HTMLElement>this.sanitizer.bypassSecurityTrustHtml(<string>this.content);
+      this.content = <HTMLElement>this.sanitizer.bypassSecurityTrustHtml(<string>this.content);
     }
   }
 

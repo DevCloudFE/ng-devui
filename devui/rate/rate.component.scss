@@ -18,35 +18,11 @@
 }
 
 .devui-star-color-active {
-  color: #6a81ed;
+  color: $devui-brand;
   line-height: 1.5;
 
   svg g {
-    fill: #6a81ed;
-  }
-}
-
-.devui-star-color-success {
-  color: #3dcca6;
-
-  svg g {
-    fill: #3dcca6;
-  }
-}
-
-.devui-star-color-warning {
-  color: #fac20a;
-
-  svg g {
-    fill: #fac20a;
-  }
-}
-
-.devui-star-color-error {
-  color: #f66f6a;
-
-  svg g {
-    fill: #f66f6a;
+    fill: $devui-brand;
   }
 }
 
@@ -58,11 +34,11 @@
 }
 
 .devui-star-color {
-  color: $devui-dividing-line;
+  color: $devui-shape-icon-fill;
   line-height: 1.5;
 
   svg g {
-    fill: $devui-dividing-line;
+    fill: $devui-shape-icon-fill;
   }
 }
 

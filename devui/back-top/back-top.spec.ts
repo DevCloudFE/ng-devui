@@ -84,10 +84,10 @@ class TestCustomBackTopComponent {
 describe('back-top', () => {
   let fixture: ComponentFixture<any>;
   beforeEach(() => {
-      TestBed.configureTestingModule({
-          imports: [BackTopModule],
-          declarations: [TestBackTopComponent, TestTargetBackTopComponent, TestCustomBackTopComponent]
-      });
+    TestBed.configureTestingModule({
+      imports: [BackTopModule],
+      declarations: [TestBackTopComponent, TestTargetBackTopComponent, TestCustomBackTopComponent]
+    });
   });
 
   const triggerScroll = (target) => {

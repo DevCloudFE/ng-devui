@@ -34,14 +34,7 @@
     <d-form-item>
       <d-form-label>描述</d-form-label>
       <d-form-control [extraInfo]="'您最多还可以输入 ' + (2000 - des.length) + ' 个字符'">
-        <textarea
-          dTextarea
-          name="des"
-          maxlength="2000"
-          style="height: 100px; resize: none"
-          placeholder="请输入描述信息"
-          [(ngModel)]="des"
-        ></textarea>
+        <textarea dTextarea name="des" maxlength="2000" placeholder="请输入描述信息" [(ngModel)]="des"></textarea>
       </d-form-control>
     </d-form-item>
   </form>

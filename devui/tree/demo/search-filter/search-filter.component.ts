@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { OperableTreeComponent, TreeNode } from 'ng-devui/tree';
+import { OperableTreeComponent } from 'ng-devui/tree';
 @Component({
   selector: 'd-search-filter',
   templateUrl: './search-filter.component.html',
@@ -7,17 +7,16 @@ import { OperableTreeComponent, TreeNode } from 'ng-devui/tree';
 })
 export class SearchFilterComponent {
   @ViewChild('dOperableTreeComponent', { static: true }) dOperableTreeComponent: OperableTreeComponent;
-  currentSelectedNode;
   data2 = [{
     'title': 'parent node 1',
     'customSearchValue': 'a',
   }, {
     'title': 'parent node 2',
     'customSearchValue': 'b',
-    'children': [{
+    'items': [{
       'title': 'child node 2-1',
       'customSearchValue': 'c',
-      'children': [{
+      'items': [{
         'title': 'child node 2-1-1',
         'customSearchValue': 'd',
       }, {
@@ -27,7 +26,7 @@ export class SearchFilterComponent {
     }, {
       'title': 'child node 2-2',
       'customSearchValue': 'f',
-      'children': [{
+      'items': [{
         'title': 'child node 2-2-1',
         'customSearchValue': 'g',
       }, {
@@ -38,7 +37,7 @@ export class SearchFilterComponent {
   }, {
     'title': 'parent node 3',
     'customSearchValue': 'i',
-    'children': [{
+    'items': [{
       'title': 'child node 3-1',
       'customSearchValue': 'j',
     }, {
@@ -48,7 +47,7 @@ export class SearchFilterComponent {
   }, {
     'title': 'parent node 4',
     'customSearchValue': 'l',
-    'children': [{
+    'items': [{
       'title': 'child node 4-1',
       'customSearchValue': 'm',
     }, {
@@ -58,7 +57,7 @@ export class SearchFilterComponent {
   }, {
     'title': 'parent node 5',
     'customSearchValue': 'o',
-    'children': [{
+    'items': [{
       'title': 'child node 5-1',
       'customSearchValue': 'p',
     }, {
@@ -66,15 +65,6 @@ export class SearchFilterComponent {
       'customSearchValue': 'q',
     }]
   }];
-
-  onOperableNodeDeleted(treeNode: TreeNode) {
-    console.log('deleted: ', treeNode);
-  }
-
-  onOperableNodeSelected(treeNode: TreeNode) {
-    console.log('selected: ', treeNode);
-    this.currentSelectedNode = treeNode;
-  }
 
   onKeyUp(event) {
     this.dOperableTreeComponent.operableTree.treeFactory.searchTree(event);

@@ -1,18 +1,14 @@
 <section>
-  <d-tabs [(activeTab)]="tabActiveId" [cssClass]="'custom-tabs'">
+  <d-tabs [(activeTab)]="tabActiveId">
     <d-tab *ngFor="let item of tabItems" [disabled]="item?.disabled" [id]="item.id">
       <ng-template dTabTitle>
-        <div class="custom-title">
-          <i class="{{ item.icon }}"></i>
-          {{ item.title }}
-        </div>
+        <i class="{{ item.icon }}"></i>
+        {{ item.title }}
       </ng-template>
-      <ng-template dTabContent>
-        <div class="custom-content">
-          {{ item.content }}
-          <hr />
-        </div>
-      </ng-template>
+      <div>
+        {{ item.content }}
+        <hr />
+      </div>
     </d-tab>
   </d-tabs>
 </section>

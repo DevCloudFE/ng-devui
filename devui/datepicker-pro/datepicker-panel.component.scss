@@ -10,6 +10,10 @@
   border-left: 1px solid $devui-dividing-line;
 }
 
+.devui-datepicker-pro-panel {
+  width: max-content;
+}
+
 :host {
   font-size: 0;
 }

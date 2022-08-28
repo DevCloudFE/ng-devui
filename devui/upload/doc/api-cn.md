@@ -80,7 +80,7 @@ import { UploadModule } from 'ng-devui/upload';
 |        fileOver         |              `EventEmitter<boolean>`               | 支持拖拽上传时，文件移动到可拖放区域触发事件,可拖动的元素移出放置目标时返回`false`，元素正在拖动到放置目标时返回`true` | [多文件上传](demo#multi-files) |
 |        fileDrop         |                `EventEmitter<any>`                 | 支持拖拽上传时，当前拖拽的文件列表回调，单文件上传默认返回第一个文件                                                   | [多文件上传](demo#multi-files) |
 |      successEvent       | `EventEmitter<Array<{file: File; response: any}>>` | 上传成功时的回调函数,返回文件及 xhr 的响应信息                                                                         | [多文件上传](demo#multi-files) |
-|       errorEvent        |    `EventEmitter<{file: File; response: any}>`     | 上传错误时的回调函数，返回上传失败的错误信息                                                                           | [多文件上传](demo#multi-files) |
+|       errorEvent        |    `EventEmitter<Array<{file: File; response: any}>>`     | 上传错误时的回调函数，返回上传失败的错误信息                                                                           | [多文件上传](demo#multi-files) |
 | deleteUploadedFileEvent |               `EventEmitter<string>`               | 删除上传文件的回调函数，返回删除文件的路径信息                                                                         | [多文件上传](demo#multi-files) |
 |       fileSelect        |                `EventEmitter<File>`                | 文件选择后的回调函数，返回已选择文件信息                                                                               | [多文件上传](demo#multi-files) |
 
@@ -96,6 +96,7 @@ import { UploadModule } from 'ng-devui/upload';
 |     fileUploaders      |           `Array<Object>`           |  []   |                       可选，获取已选择的文件列表                        | [任意区域上传](demo#customize-area-upload) |
 |       enableDrop       |              `boolean`              | false |                           可选，是否支持拖拽                            | [任意区域上传](demo#customize-area-upload) |
 | dynamicUploadOptionsFn | [`IUploadOptions`](#iuploadoptions) |  --   | 为文件动态设置自定义的上传参数, 参数为当前选中文件及`uploadOptions`的值 | [任意区域上传](demo#customize-area-upload) |
+|      beforeUpload      | `boolean \| Promise<boolean> \| Observable<boolean>` |     --     | 可选，上传前的回调，通过返回`true` or `false` ,控制文件是否上传,参数为文件信息及上传配置 |
 
 ## dUpload 事件
 
@@ -150,6 +151,10 @@ import { UploadModule } from 'ng-devui/upload';
 
 ```ts
 export class IUploadOptions {
+  // 是否开启分片上传 (单文件) 默认是关闭
+  isChunked?: boolean;
+  // 分片大小 (单文件) 默认分片大小 20兆。
+  chunkSize?: number;
   // 上传接口地址
   uri: string;
   // http 请求方法

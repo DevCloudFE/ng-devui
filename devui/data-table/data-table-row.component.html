@@ -65,7 +65,9 @@
     class="{{ column.cellClass ? column.cellClass : '' }}"
     [ngClass]="{
       'devui-sticky-left-cell': column.fixedLeft,
-      'devui-sticky-right-cell': column.fixedRight
+      'devui-sticky-right-cell': column.fixedRight,
+      'devui-last-sticky-left-cell': column.fixedLeft && !columns[colIndex + 1]?.fixedLeft,
+      'devui-first-sticky-right-cell': column.fixedRight && !columns[colIndex - 1]?.fixedRight
     }"
     [style.left]="column.fixedLeft ? column.fixedLeft : null"
     [style.right]="column.fixedRight ? column.fixedRight : null"

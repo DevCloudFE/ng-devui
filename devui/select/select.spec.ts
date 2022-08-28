@@ -84,7 +84,7 @@ class TestSelectComponent {
         .filter(option => option.indexOf(term) > -1)
         .map((option, index) => ({ id: index, option: option }))
     );
-  }
+  };
 }
 @Component({
   template: `
@@ -154,7 +154,7 @@ class TestSelectLazyLoadVirtualScrollComponent {
       this.enableLazyLoad = false;
       this.selectComponent.loadFinish();
     }
-  }
+  };
 }
 
 @Component({
@@ -170,7 +170,7 @@ class TestSelectLazyLoadVirtualScrollComponent {
   `,
   styles: [`
    .my-option {
-     height: 30px; /* 上下各有padding 10px */
+     height: 30px; /* 上下各有padding 8px */
    }
   `]
 })
@@ -788,7 +788,7 @@ describe('Select', () => {
         menuElement = debugEl.query(By.css('d-select > div >div.devui-dropdown-menu'));
         const toggleRect = toggleElement.nativeElement.parentElement.getBoundingClientRect();
         const menuRect = menuElement.nativeElement.getBoundingClientRect();
-        const verticalBorderOverlayWidth = 4; // 有个间距
+        const verticalBorderOverlayWidth = 3; // 有个间距
         expect(menuRect.y + menuRect.height).toEqual(toggleRect.y - verticalBorderOverlayWidth);
         expect(menuRect.x).toEqual(toggleRect.x);
       }));
@@ -800,7 +800,7 @@ describe('Select', () => {
         menuElement = debugEl.query(By.css('d-select > div >div.devui-dropdown-menu'));
         const toggleRect = toggleElement.nativeElement.parentElement.getBoundingClientRect();
         const menuRect = menuElement.nativeElement.getBoundingClientRect();
-        const verticalBorderOverlayWidth = 4; // 有个间距
+        const verticalBorderOverlayWidth = 3; // 有个间距
         expect(menuRect.y).toEqual(toggleRect.y + toggleRect.height + verticalBorderOverlayWidth);
         expect(menuRect.x).toEqual(toggleRect.x);
       }));
@@ -815,7 +815,7 @@ describe('Select', () => {
           menuElement = debugEl.query(By.css('d-select > div >div.devui-dropdown-menu'));
           const toggleRect = toggleElement.nativeElement.parentElement.getBoundingClientRect();
           const menuRect = menuElement.nativeElement.getBoundingClientRect();
-          const verticalBorderOverlayWidth = 4; // 有个间距
+          const verticalBorderOverlayWidth = 3; // 有个间距
           expect(menuRect.y).toEqual(toggleRect.y + toggleRect.height + verticalBorderOverlayWidth);
           expect(menuRect.x).toEqual(toggleRect.x);
         }));
@@ -826,7 +826,7 @@ describe('Select', () => {
           menuElement = debugEl.query(By.css('d-select > div >div.devui-dropdown-menu'));
           const toggleRect = toggleElement.nativeElement.parentElement.getBoundingClientRect();
           const menuRect = menuElement.nativeElement.getBoundingClientRect();
-          const verticalBorderOverlayWidth = 4; // 有个间距
+          const verticalBorderOverlayWidth = 3; // 有个间距
           expect(menuRect.y + menuRect.height).toEqual(toggleRect.y - verticalBorderOverlayWidth);
           expect(menuRect.x).toEqual(toggleRect.x);
         }));
@@ -952,12 +952,12 @@ describe('Select', () => {
         }));
         describe('enable labelization', () => {
           it('should show in label', fakeAsync(() => {
-            const labelElements = debugEl.queryAll(By.css('.devui-select-tag-list .devui-select-tag-item'));
+            const labelElements = debugEl.queryAll(By.css('.devui-select-tag-list .devui-tag-item'));
             expect(labelElements.length).toEqual(component.option.length);
           }));
           it('option should remove by clicking remove icon', fakeAsync(() => {
-            const secondLabelElement = debugEl.queryAll(By.css('.devui-select-tag-list .devui-select-tag-item'))[1];
-            const removeButton = secondLabelElement.query(By.css('.devui-select-tag-remove-button'));
+            const secondLabelElement = debugEl.queryAll(By.css('.devui-select-tag-list .devui-tag-item'))[1];
+            const removeButton = secondLabelElement.query(By.css('.remove-button'));
             removeButton.nativeElement.click();
             fixture.detectChanges();
             expect(component.option).toEqual(component.options.filter((item, index) => index !== 1));
@@ -1266,7 +1266,7 @@ describe('Select', () => {
           fixture.detectChanges();
           openMenu();
           const itemElements = debugEl.queryAll(By.css('d-select > div > div.devui-dropdown-menu li.devui-dropdown-item'));
-          const nodataElement = debugEl.query(By.css('d-select > div > div.devui-dropdown-menu li.devui-no-data-tip'));
+          const nodataElement = debugEl.query(By.css('d-select > div > div.devui-dropdown-menu div.devui-no-data-tip'));
           expect(itemElements.length).toBe(0);
           expect(nodataElement.nativeElement.innerText).toBe('没有数据');
         }));
@@ -1282,7 +1282,7 @@ describe('Select', () => {
           fixture.detectChanges();
           tick(300); fixture.detectChanges();
           const itemElements = debugEl.queryAll(By.css('d-select > div > div.devui-dropdown-menu li.devui-dropdown-item'));
-          const nodataElement = debugEl.query(By.css('d-select > div > div.devui-dropdown-menu li.devui-no-data-tip'));
+          const nodataElement = debugEl.query(By.css('d-select > div > div.devui-dropdown-menu div.devui-no-data-tip'));
           expect(itemElements.length).toBe(0);
           expect(nodataElement.nativeElement.innerText).toBe('找不到相关记录');
         }));
@@ -1299,7 +1299,7 @@ describe('Select', () => {
           fixture.detectChanges();
           tick(300); fixture.detectChanges();
           const itemElements = debugEl.queryAll(By.css('d-select > div > div.devui-dropdown-menu li.devui-dropdown-item'));
-          const nodataElement = debugEl.query(By.css('d-select > div > div.devui-dropdown-menu li.devui-no-data-tip'));
+          const nodataElement = debugEl.query(By.css('d-select > div > div.devui-dropdown-menu div.devui-no-data-tip'));
           expect(itemElements.length).toBe(0);
           expect(nodataElement.nativeElement.innerText).toBe('没有自定义数据');
         }));
@@ -1574,8 +1574,9 @@ describe('Select', () => {
         it('scroll to specificated position, first options right', fakeAsync(() => {
           const listElement = menuElement.nativeElement.querySelector('.devui-select-list-unstyled');
           const innerList = menuElement.nativeElement.querySelector('.devui-select-list-unstyled > .cdk-virtual-scroll-content-wrapper');
-          const singleHeight = 38;
-          listElement.scrollTop = singleHeight * 100;
+          const singleHeight = 36;
+          const listItemSpace = 4;
+          listElement.scrollTop = (singleHeight + listItemSpace) * 100;
           listElement.dispatchEvent(new Event('scroll', { 'bubbles': true, 'cancelable': false }));
           virtualScrollFlush();
           const option11th = [...innerList.children].filter(el => el.innerText.trim() === '选项101').pop();
@@ -1594,13 +1595,15 @@ describe('Select', () => {
         it('auto height', fakeAsync(() => {
           const listElement = menuElement.nativeElement.querySelector('.devui-select-list-unstyled > .cdk-virtual-scroll-content-wrapper');
           expect(listElement.children.length).toEqual(3);
-          const singleHeight = 38;
-          const expectHeight = singleHeight * component.options.length;
+          const singleHeight = 36;
+          const listItemSpace = 4;
+          const expectHeight = singleHeight * component.options.length + listItemSpace * (component.options.length - 1);
           expect(listElement.getBoundingClientRect().height).toBeCloseTo(expectHeight, 1);
         }));
       });
       describe('templateItemSize', () => {
-        const templateItemSize = 50;
+        const templateItemSize = 46;
+        const listItemSpace = 4;
         beforeEach(fakeAsync(() => {
           fixture = TestBed.createComponent(TestSelectVirtualScrollItemSizeComponent);
           debugEl = fixture.debugElement;
@@ -1619,13 +1622,13 @@ describe('Select', () => {
         }));
         it('scrollHeight correct', fakeAsync(() => {
           const listElement = menuElement.nativeElement.querySelector('.devui-select-list-unstyled');
-          const expectHeight = templateItemSize * component.options.length;
+          const expectHeight = (templateItemSize + listItemSpace) * component.options.length;
           expect(listElement.scrollHeight).toBeCloseTo(expectHeight);
         }));
         it('scroll to specificated position, first options correct', fakeAsync(() => {
           const listElement = menuElement.nativeElement.querySelector('.devui-select-list-unstyled');
           const innerList = menuElement.nativeElement.querySelector('.devui-select-list-unstyled > .cdk-virtual-scroll-content-wrapper');
-          listElement.scrollTop = templateItemSize * 100;
+          listElement.scrollTop = (templateItemSize + listItemSpace) * 100;
           listElement.dispatchEvent(new Event('scroll', { 'bubbles': true, 'cancelable': false }));
           virtualScrollFlush();
           const option11th = [...innerList.children].filter(el => el.innerText.trim() === '选项101').pop();

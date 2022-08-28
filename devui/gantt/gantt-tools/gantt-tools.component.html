@@ -1,5 +1,5 @@
 <div class="tools-container" [style.position]="isFullScreen ? 'fixed' : 'absolute'">
-  <d-button bsStyle="text-dark" (click)="avtionHandle('today')" class="tool">{{ 'Today' }}</d-button>
+  <d-button bsStyle="text" (click)="avtionHandle('today')" class="tool">{{ i18nText.today }}</d-button>
   <div class="tool">
     <span dDropDown [trigger]="'click'" appendToBody class="switch-view">
       <span dDropDownToggle class="devui-dropdown-origin">{{ currentUnitLabel }} <span class="icon-chevron-down"></span></span>
@@ -11,7 +11,7 @@
     </span>
   </div>
   <d-button
-    bsStyle="text-dark"
+    bsStyle="text"
     (click)="avtionHandle('reduce')"
     class="tool"
     [ngClass]="{ disabled: unitRole[this.currentUnit] === unitRole.day }"
@@ -20,7 +20,7 @@
     <i class="icon icon-minus"></i>
   </d-button>
   <d-button
-    bsStyle="text-dark"
+    bsStyle="text"
     (click)="avtionHandle('increase')"
     class="tool"
     [ngClass]="{ disabled: unitRole[this.currentUnit] === unitRole.month }"

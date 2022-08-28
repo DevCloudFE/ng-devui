@@ -17,22 +17,28 @@ import { Observable } from 'rxjs';
   }],
   preserveWhitespaces: false,
 })
-
 export class ToggleComponent implements ControlValueAccessor {
   private _checked: boolean;
   private _disabled: boolean;
+  content = '';
 
   @Input() size: 'sm' | '' | 'lg' = '';
   @Input() color: string;
   @Input() beforeChange: (value) => boolean | Promise<boolean> | Observable<boolean>;
   @Input() checkedContent: string | TemplateRef<any>;
-  get checkedTemplate() {
-    return this.checkedContent instanceof TemplateRef ? this.checkedContent : null;
-  }
   @Input() uncheckedContent: string | TemplateRef<any>;
-  get uncheckedTemplate() {
-    return this.uncheckedContent instanceof TemplateRef ? this.uncheckedContent : null;
+
+  get customTemplate() {
+    const result = this.checked ? this.checkedContent : this.uncheckedContent;
+    if (result instanceof TemplateRef) {
+      this.content = '';
+      return result;
+    } else {
+      this.content = result || '';
+      return null;
+    }
   }
+
   @Input() set checked(v: boolean) {
     this._checked = v === true;
   }
@@ -51,10 +57,8 @@ export class ToggleComponent implements ControlValueAccessor {
 
   @Output() change = new EventEmitter<boolean>();
 
-  private onTouchedCallback = () => {
-  }
-  private onChangeCallback = (v: any) => {
-  }
+  private onTouchedCallback = () => {};
+  private onChangeCallback = (v: any) => {};
 
   @HostListener('click')
   onToggle() {

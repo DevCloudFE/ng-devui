@@ -14,13 +14,13 @@ import {
   ViewChild
 } from '@angular/core';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
-import { DateConverter, DefaultDateConverter, fadeInOut } from 'ng-devui/utils';
-import { DevConfigService, WithConfig } from 'ng-devui/utils/globalConfig';
+import { DateConverter, DefaultDateConverter, DevConfigService, fadeInOut, WithConfig } from 'ng-devui/utils';
 import { Subject, Subscription } from 'rxjs';
 import { distinctUntilChanged } from 'rxjs/operators';
 import { DatePickerConfigService as DatePickerConfig } from '../date-picker.config.service';
 
 @Component({
+  /* eslint-disable-next-line @angular-eslint/component-selector*/
   selector: '[dTwoDatePicker]',
   exportAs: 'twoDatePicker',
   templateUrl: 'two-datepicker.component.html',
@@ -45,7 +45,7 @@ export class TwoDatePickerComponent implements OnInit, OnDestroy {
   @ViewChild('templateWrap') templateWrap: ElementRef;
 
   datePosition: VerticalConnectionPos = 'bottom';
-  selectDateSubject = new Subject<{side: string, date: Date, onlyWrite?: boolean}>();
+  selectDateSubject = new Subject<{side: string; date: Date; onlyWrite?: boolean}>();
   hoverOnDate: Subject<object> = new Subject<object>();
   switchOriginPositionSub: Subject<'start'|'end'|false> = new Subject<'start'|'end'|false>();
   today = new Date();
@@ -66,7 +66,6 @@ export class TwoDatePickerComponent implements OnInit, OnDestroy {
   private _maxDate: Date;
   private _minDate: Date;
   document: Document;
-
   @Input() set dateConfig(dateConfig: any) {
     if (this.checkDateConfig(dateConfig)) {
       this._dateConfig = dateConfig;
@@ -75,10 +74,16 @@ export class TwoDatePickerComponent implements OnInit, OnDestroy {
     }
     this._dateFormat = this.showTime ? this._dateConfig.format.time : this._dateConfig.format.date;
   }
+  get dateConfig() {
+    return this._dateConfig;
+  }
   @Input() set dateFormat(dateFormat: string) {
     if (dateFormat && this._dateFormat !== dateFormat) {
       this._dateFormat = dateFormat;
     }
+  }
+  get dateFormat() {
+    return this._dateFormat || this.datePickerConfig.defaultFormat;
   }
   @Input() set maxDate(date: Date | any) {
     const parseDate = this.convertDate(date);
@@ -86,15 +91,24 @@ export class TwoDatePickerComponent implements OnInit, OnDestroy {
       this._maxDate = parseDate;
     }
   }
+  get maxDate() {
+    return this._maxDate;
+  }
   @Input() set minDate(date: Date | any) {
     const parseDate = this.convertDate(date);
     if (parseDate) {
       this._minDate = parseDate;
     }
   }
+  get minDate() {
+    return this._minDate;
+  }
   set whichOpen(side: 'start'|'end'|false) {
     this._whichOpen = side;
     this.switchOriginPositionSub.next(side);
+  }
+  get whichOpen() {
+    return this._whichOpen;
   }
   set isOpen(isOpen: boolean) {
     this._isOpen = isOpen;
@@ -108,22 +122,6 @@ export class TwoDatePickerComponent implements OnInit, OnDestroy {
         this.document.addEventListener('click', this.onDocumentClick);
       });
     }
-  }
-
-  get dateConfig() {
-    return this._dateConfig;
-  }
-  get dateFormat() {
-    return this._dateFormat || this.datePickerConfig.defaultFormat;
-  }
-  get maxDate() {
-    return this._maxDate;
-  }
-  get minDate() {
-    return this._minDate;
-  }
-  get whichOpen() {
-    return this._whichOpen;
   }
   get isOpen() {
     return this._isOpen;
@@ -157,7 +155,7 @@ export class TwoDatePickerComponent implements OnInit, OnDestroy {
       this.isOpen = false;
     }
     this.cdr.markForCheck();
-  }
+  };
 
   ngOnInit() {
     this._minDate = this.minDate ? new Date(this.minDate) : new Date(this.dateConfig.min, 0, 1, 0, 0, 0);
@@ -195,23 +193,23 @@ export class TwoDatePickerComponent implements OnInit, OnDestroy {
       this.whichOpen = side;
       this.isOpen = true;
     }
-  }
+  };
 
   onPositionChange(position: ConnectedOverlayPositionChange) {
     switch (position.connectionPair.overlayY) {
-      case 'top':
-      case 'center':
-        this.datePosition = 'bottom';
-        break;
-      case 'bottom':
-        this.datePosition = 'top';
+    case 'top':
+    case 'center':
+      this.datePosition = 'bottom';
+      break;
+    case 'bottom':
+      this.datePosition = 'top';
     }
     this.switchOriginPositionSub.next(this.whichOpen);
   }
 
   convertDate(date) {
     return date ?
-      this.dateConverter.parse(date) : null;
+      this.dateConverter.parse(date, this.dateFormat) : null;
   }
 
   formatDate(date) {
@@ -229,12 +227,12 @@ export class TwoDatePickerComponent implements OnInit, OnDestroy {
 
   syncPickerPair(currentCalender: object, orientation: string) {
     switch (orientation) {
-      case 'left':
-        this.currentCalendars[0] = currentCalender;
-        break;
-      case 'right':
-        this.currentCalendars[1] = currentCalender;
-        break;
+    case 'left':
+      this.currentCalendars[0] = currentCalender;
+      break;
+    case 'right':
+      this.currentCalendars[1] = currentCalender;
+      break;
     }
   }
 
@@ -250,7 +248,7 @@ export class TwoDatePickerComponent implements OnInit, OnDestroy {
       [this.rangeStart, this.rangeEnd] = this.selectedRange;
       this.notifyValueChange();
     }
-  }
+  };
 
   notifyValueChange() {
     this.selectedRangeChange.emit(this.selectedRange);
@@ -336,7 +334,7 @@ export class TwoDatePickerComponent implements OnInit, OnDestroy {
       this.selectEnd(null);
     }
     [this.rangeStart, this.rangeEnd] = this.selectedRange;
-  }
+  };
 
   setI18nText() {
     this.i18nText = this.i18n.getI18nText().datePicker;

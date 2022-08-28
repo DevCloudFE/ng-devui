@@ -357,13 +357,13 @@ describe('input-number', () => {
         tick();
         fixture.detectChanges();
         inputEl = debugEl.query(By.css('.input-container .input-box')).nativeElement;
-        expect(inputEl.value).toEqual(component.max + '');
+        expect(inputEl.value).toEqual(String(component.max));
         descBtn.dispatchEvent(new Event('click'));
         fixture.detectChanges();
         tick();
         fixture.detectChanges();
         inputEl = debugEl.query(By.css('.input-container .input-box')).nativeElement;
-        expect(inputEl.value).toEqual(component.max + '');
+        expect(inputEl.value).toEqual(String(component.max));
 
         component.min = component.max = null;
         fixture.detectChanges();
@@ -384,7 +384,7 @@ describe('input-number', () => {
         tick();
         fixture.detectChanges();
         inputEl = debugEl.query(By.css('.input-container .input-box')).nativeElement;
-        expect(inputEl.value).toEqual(component.max + '');
+        expect(inputEl.value).toEqual(String(component.max));
       }));
 
       it('should not decrease when less than min number', fakeAsync(() => {
@@ -402,7 +402,7 @@ describe('input-number', () => {
         tick();
         fixture.detectChanges();
         inputEl = debugEl.query(By.css('.input-container .input-box')).nativeElement;
-        expect(inputEl.value).toEqual(component.min + '');
+        expect(inputEl.value).toEqual(String(component.min));
       }));
 
       // TODO float number & data from clipBoard

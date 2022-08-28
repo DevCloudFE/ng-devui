@@ -6,7 +6,7 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DropDownAppendToBodyComponent, DropDownDirective } from 'ng-devui/dropdown';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
-import { DevConfigService, WithConfig } from 'ng-devui/utils/globalConfig';
+import { DevConfigService, WithConfig } from 'ng-devui/utils';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, takeUntil } from 'rxjs/operators';
 import { CascaderService } from './cascader.service';
@@ -46,6 +46,7 @@ export class CascaderComponent implements OnInit, OnDestroy, OnChanges, ControlV
   @Input() checkboxRelation = { upward: true, downward: true };
   @Input() dropDownItemTemplate: TemplateRef<any>;
   @Input() dropdownHeaderTemplate: TemplateRef<any>;
+  @Input() hostTemplate: TemplateRef<any>;
   @Input() dropdownPanelClass = '';
   @Input() appendToBody = true;
   @Input() @WithConfig() showAnimation = true;
@@ -82,8 +83,10 @@ export class CascaderComponent implements OnInit, OnDestroy, OnChanges, ControlV
   multipleValueList: CascaderItem[] = [];
   lazyloadValue = [];
 
+  timer;
   showTextValue;
   showSearchPanel: boolean;
+  showSearchInput = false;
   onChange = Function.prototype;
   onTouched = Function.prototype;
 
@@ -148,7 +151,9 @@ export class CascaderComponent implements OnInit, OnDestroy, OnChanges, ControlV
       this.writeValue([...this.cascaderSrv.multipleValue, option.valueList]);
       this.onChange(this.cascaderSrv.multipleValue);
       this.mainDropdown.updateCdkConnectedOverlayOrigin();
-      this.innerInput?.nativeElement.focus();
+      if (this.innerInput) {
+        this.innerInput.nativeElement.focus();
+      }
     } else {
       this.writeValue(option.valueList);
       this.onChange(option.valueList);
@@ -209,12 +214,13 @@ export class CascaderComponent implements OnInit, OnDestroy, OnChanges, ControlV
         distinctUntilChanged(),
         filter(t => t !== '')
       ).subscribe(value => {
+        clearTimeout(this.timer);
         if (this.mainDropdown && !this.mainDropdown.isOpen) {
           this.mainDropdown.isOpen = true;
         }
 
-        if (this.multiple) {
-          this.innerInput?.nativeElement.focus();
+        if (this.multiple && this.innerInput) {
+          this.innerInput.nativeElement.focus();
         }
         this.cascaderSrv.searchResultList = [];
         this.cascaderSrv.searchByString(value);
@@ -347,7 +353,9 @@ export class CascaderComponent implements OnInit, OnDestroy, OnChanges, ControlV
     if (isOpen && this.multiple) {
       this.cascaderSrv.clearTargetActive(this.cascaderSrv.options.find(t => t.active));
       this.cascaderSrv.columnList.splice(1);
-      this.innerInput?.nativeElement.focus();
+      if (this.innerInput) {
+        this.innerInput.nativeElement.focus();
+      }
     }
 
     if (!isOpen && this.allowSearch) {
@@ -357,7 +365,7 @@ export class CascaderComponent implements OnInit, OnDestroy, OnChanges, ControlV
         this.writeValue(this.cascaderSrv.currentValue);
       }
       // 在动画结束后再设置参数，防止panel中内容突变，动画时间200
-      setTimeout(() => {
+      this.timer = setTimeout(() => {
         this.showSearchPanel = false;
       }, 200);
     }
@@ -377,7 +385,7 @@ export class CascaderComponent implements OnInit, OnDestroy, OnChanges, ControlV
       const width = this.dropdownComp.overlay.overlayRef?.overlayElement.clientWidth;
       const offsetX = this.dropdownComp.overlay.overlayRef?.overlayElement.offsetLeft;
       const offsetRight = window.innerWidth - width - offsetX - 20;
-      this.subMenuDirections.map(t => t.offsetX = offsetRight < 0 ? offsetRight : 0);
+      this.subMenuDirections.map(t => {t.offsetX = offsetRight < 0 ? offsetRight : 0;});
       this.dropdownComp.reposition();
     }, 0);
   }

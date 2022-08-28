@@ -1,6 +1,5 @@
 @import '../style/theme/color';
-@import '../style/theme/variables';
-@import '../style/mixins/index';
+@import '../style/theme/corner';
 @import '../style/core/_font';
 
 :host {
@@ -10,12 +9,14 @@
 .devui-progress {
   position: relative;
   background: $devui-dividing-line;
+  border-radius: $devui-border-radius-full;
 
   .devui-progress-bar {
     width: 0;
     height: 100%;
     transition: width 0.6s ease;
     background-color: $devui-brand;
+    border-radius: $devui-border-radius-full;
   }
 
   > span {

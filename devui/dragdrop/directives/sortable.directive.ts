@@ -1,7 +1,7 @@
 import { Directive, ElementRef, HostBinding, Input } from '@angular/core';
 
 @Directive({
-    selector: '[dSortable]'
+  selector: '[dSortable]'
 })
 /**
  * Makes an element draggable by adding the draggable html attribute

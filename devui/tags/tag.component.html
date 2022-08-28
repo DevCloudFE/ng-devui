@@ -17,7 +17,7 @@
   (click)="tagClick()"
 >
   <div class="content-wrapper" [ngStyle]="{ 'background-color': colorMap[labelStyle] || customColor }"></div>
-  <span *ngIf="!customViewTemplate">{{ tag }}</span>
+  <span *ngIf="!customViewTemplate" [class.devui-max-width-tag]="maxWidth" [style.maxWidth]="maxWidth ? maxWidth : ''">{{ tag }}</span>
   <ng-template *ngIf="customViewTemplate" [ngTemplateOutlet]="customViewTemplate" [ngTemplateOutletContext]="{ tag: tag }"></ng-template>
   <a
     class="remove-button"

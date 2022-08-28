@@ -16,8 +16,7 @@ import {
   ViewChildren
 } from '@angular/core';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
-import { expandCollapseForDomDestroy } from 'ng-devui/utils';
-import { DevConfigService, WithConfig } from 'ng-devui/utils/globalConfig';
+import { DevConfigService, expandCollapseForDomDestroy, WithConfig } from 'ng-devui/utils';
 import { Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import {
@@ -55,7 +54,7 @@ export class TreeComponent implements OnInit, OnChanges, AfterViewInit, OnDestro
   @Input() itemSize = 30;
   @Output() nodeSelected = new EventEmitter<TreeNode>();
   @Output() nodeDblClicked = new EventEmitter<TreeNode>();
-  @Output() nodeRightClicked = new EventEmitter<{ node: TreeNode, event: MouseEvent }>();
+  @Output() nodeRightClicked = new EventEmitter<{ node: TreeNode; event: MouseEvent }>();
   @Output() nodeToggled = new EventEmitter<TreeNode>();
   @Output() afterTreeInit = new EventEmitter<Dictionary<TreeNode>>();
   @ViewChildren('treeNodeContent') treeNodeContent: QueryList<ElementRef>; // 获取content以取得tree宽度
@@ -156,11 +155,11 @@ export class TreeComponent implements OnInit, OnChanges, AfterViewInit, OnDestro
   }
 
   public isSelectableRegion(ele) {
-    if (!ele.classList.contains('devui-tree-node__content--value-wrapper')
+    if (ele && !ele.classList.contains('devui-tree-node__content--value-wrapper')
       && !ele.classList.contains('devui-tree-node__content')
       && !ele.classList.contains('devui-tree-node__title')
       && ele.tagName !== 'D-HIGHLIGHT'
-      && ele.parentNode.tagName !== 'D-HIGHLIGHT') {
+      && ele.parentNode?.tagName !== 'D-HIGHLIGHT') {
       return false;
     }
     return true;

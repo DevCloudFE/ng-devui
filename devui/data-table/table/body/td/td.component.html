@@ -44,19 +44,17 @@
       <ng-container *ngIf="rowItem['$isChildTableOpen']">
         <svg
           *ngIf="!iconFoldTable"
-          class="svg-icon-close-folder"
           width="16px"
           height="16px"
           viewBox="0 0 16 16"
           version="1.1"
           xmlns="http://www.w3.org/2000/svg"
           xmlns:xlink="http://www.w3.org/1999/xlink"
+          class="svg-icon svg-icon-close"
         >
           <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-            <path
-              d="M3,2 L13,2 C13.5522847,2 14,2.44771525 14,3 L14,13 C14,13.5522847 13.5522847,14 13,14 L3,14 C2.44771525,14 2,13.5522847 2,13 L2,3 C2,2.44771525 2.44771525,2 3,2 Z M12,7 L4,7 L4,9 L12,9 L12,7 Z"
-              fill-rule="nonzero"
-            ></path>
+            <rect x="0.5" y="0.5" width="15" height="15" rx="2"></rect>
+            <rect x="4" y="7" width="8" height="2"></rect>
           </g>
         </svg>
         <span *ngIf="iconFoldTable" [innerHTML]="iconFoldTable | safe: 'html'"></span>
@@ -64,18 +62,18 @@
       <ng-container *ngIf="!rowItem['$isChildTableOpen']">
         <svg
           *ngIf="!iconUnFoldTable"
-          class="svg-icon-open-folder"
           width="16px"
           height="16px"
           viewBox="0 0 16 16"
           version="1.1"
           xmlns="http://www.w3.org/2000/svg"
           xmlns:xlink="http://www.w3.org/1999/xlink"
+          class="svg-icon svg-icon-open-folder"
         >
           <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <rect x="0.5" y="0.5" width="15" height="15" rx="2"></rect>
             <path
-              d="M3,2 L13,2 C13.5522847,2 14,2.44771525 14,3 L14,13 C14,13.5522847 13.5522847,14 13,14 L3,14 C2.44771525,14 2,13.5522847 2,13 L2,3 C2,2.44771525 2.44771525,2 3,2 Z M7,7 L4,7 L4,9 L7,9 L7,12 L9,12 L9,9 L12,9 L12,7 L9,7 L9,4 L7,4 L7,7 Z"
-              fill-rule="nonzero"
+              d="M8.75,4 L8.75,7.25 L12,7.25 L12,8.75 L8.749,8.75 L8.75,12 L7.25,12 L7.249,8.75 L4,8.75 L4,7.25 L7.25,7.25 L7.25,4 L8.75,4 Z"
             ></path>
           </g>
         </svg>

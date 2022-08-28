@@ -216,7 +216,7 @@ export class TwoDatepickerSingleComponent extends SingleDatepickerComponent impl
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.hasOwnProperty('selectedRange')) {
+    if (Object.prototype.hasOwnProperty.call(changes, 'selectedRange')) {
       [this.rangeStart, this.rangeEnd] = changes['selectedRange'].currentValue;
       if (this.rangeStart && this.rangeEnd) {
         this.selectingRange = false;

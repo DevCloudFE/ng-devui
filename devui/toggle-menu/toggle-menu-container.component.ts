@@ -27,12 +27,10 @@ import {
 import {
   addClassToOrigin,
   AppendToBodyDirection,
-  AppendToBodyDirectionsConfig,
-  fadeInOut,
+  AppendToBodyDirectionsConfig, DevConfigService, fadeInOut,
   formWithDropDown,
-  removeClassFromOrigin
+  removeClassFromOrigin, WithConfig
 } from 'ng-devui/utils';
-import { DevConfigService, WithConfig } from 'ng-devui/utils/globalConfig';
 import { WindowRef } from 'ng-devui/window-ref';
 import { ToggleMenuListComponent } from './toggle-menu-list.component';
 
@@ -238,17 +236,17 @@ export class ToggleMenuContainerComponent implements OnInit, OnChanges {
       if (!this.appendToBody) {
         let direction = '';
         switch (this.direction) {
-          case 'auto':
-            direction = this.isBottomRectEnough() ? 'bottom' : 'top';
-            break;
-          case 'down':
-            direction = 'bottom';
-            break;
-          case 'up':
-            direction = 'top';
-            break;
-          default:
-            direction = 'bottom';
+        case 'auto':
+          direction = this.isBottomRectEnough() ? 'bottom' : 'top';
+          break;
+        case 'down':
+          direction = 'bottom';
+          break;
+        case 'up':
+          direction = 'top';
+          break;
+        default:
+          direction = 'bottom';
         }
         this.popDirection = <any>direction;
       } else {
@@ -268,7 +266,6 @@ export class ToggleMenuContainerComponent implements OnInit, OnChanges {
   isBottomRectEnough() {
     const selectMenuElement = this.selectWrapper.nativeElement;
     const selectInputElement = this.selectBoxElement;
-    // const selectInputElement = this.selectBoxElement || this.selectInputWithLabelElement || this.selectInputWithTemplateElement;
     const displayStyle = selectMenuElement.style['display'] || (<any>window).getComputedStyle(selectMenuElement).display;
     let tempStyle;
     if (displayStyle === 'none') {

@@ -8,7 +8,7 @@ import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
 import { TranslateModule } from '@ngx-translate/core';
-import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
+import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
 import { ReadtipAsyncComponent } from './async-readtip/readtip-async.component';
 import { BasicComponent } from './basic/basic.component';
 import { MultiReadtipComponent } from './multi-readtip/multi-readtip.component';
@@ -40,6 +40,6 @@ import { ReadtipTemplateComponent } from './readtip-template/readtip-template.co
   ],
   exports: [ReadTipDemoComponent],
   declarations: [ReadTipDemoComponent, BasicComponent, MultiReadtipComponent, ReadtipTemplateComponent, ReadtipAsyncComponent],
-  
+
 })
 export class ReadTipDemoModule {}

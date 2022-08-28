@@ -49,6 +49,8 @@
     "showCode": "Show Code",
     "hideCode": "Hide Code",
     "copyCode": "Copy Code",
+    "codesandbox": "Edit On CodeSandbox",
+    "stackblitz": "Edit On StackBlitz",
     "success": "Success"
   },
   "components": {
@@ -164,7 +166,7 @@
       "tmw": "When the page needs to send a warning message to users.",
       "basicDemo": {
         "title": "Basic Usage",
-        "description": "There are 4 types of Alert: success, danger, warning, info."
+        "description": "There are 4 types of Alert: success, danger, warning, info, ghost."
       },
       "closableDemo": {
         "title": "Closable Prompt",
@@ -185,6 +187,31 @@
       "fadeInOutDemo": {
         "title": "Without Icon",
         "description": "Without default icon."
+      }
+    },
+    "icon": {
+      "name": "Icon",
+      "type": "General",
+      "path": "icon",
+      "description": "Common icon display scenarios",
+      "basicDemo": {
+        "title": "Basic Usage",
+        "description": "Basic icon usage",
+        "default": "Default icon",
+        "operableIcon": "Interactive Icon",
+        "operableIconwithSuffix": "Icon - text suffix",
+        "operableIconwithPrefix": "Icon - text prefix",
+        "customIcon": "Customized icon"
+      },
+      "iconGroupDemo": {
+        "title": "Icon Group",
+        "description": "Use Scenarios of Common Icon Groups",
+        "operable": "Operatable icon group",
+        "exitFullscreen": "Static icon group"
+      },
+      "anchorLinkValues": {
+        "basic": "Basic",
+        "icon-group": "Icon Group"
       }
     },
     "animations": {
@@ -553,11 +580,15 @@
       "sourceDemo": {
         "title": "Source Config"
       },
+      "clickBlockDemo": {
+        "title": "Click to intercept"
+      },
       "anchorLinkValues": {
         "basic-breadcrumbs": "Basic Breadcrumbs",
         "source-config-breadcrumbs": "Source Config",
         "drop-down-breadcrumbs": "Breadcrumbs with Dropdown menu",
-        "self-defined-breadcrumbs": "Customize"
+        "self-defined-breadcrumbs": "Customize",
+        "click-block-breadcrumbs": "Click to block breadcrumbs"
       }
     },
     "back-top": {
@@ -612,11 +643,6 @@
         "cancel": "cancels",
         "last": "Previous",
         "next": "Next step"
-      },
-      "button-left-right": {
-        "title": "Left & Right Buttons",
-        "left": "Left button",
-        "right": "Right button"
       },
       "button-text": {
         "title": "Text Buttons",
@@ -675,7 +701,6 @@
         "button-primary": "Primary Buttons",
         "button-common": "Common Buttons",
         "button-primary-and-common": "Combinations of Primary & Common Buttons",
-        "button-left-right": "Left & Right Buttons",
         "button-danger": "Danger Buttons",
         "button-text": "Text Buttons",
         "button-loading": "Loading Buttons",
@@ -696,8 +721,8 @@
         "description": "Basic badge type. When there is a package element, the badge and number are displayed in the upper right corner.",
         "basic": "Standard badge. The count parameter specifies the number of badges to be displayed. The status parameter specifies the status color of the badge.",
         "maxCount": "The maxCount parameter is used to set the maximum number of badges to be displayed. The default value is 99.",
-        "statusColor": "The bgColor parameter is used to set the status color of the badge. The offsetXY parameter is used to set the badge offset.",
-        "position": "Set badgePos to set the badge position.",
+        "statusColor": "The bgColor parameter is used to set the status color of the badge. The offset parameter is used to set the badge offset.",
+        "position": "Set position to set the badge position.",
         "unread": "Unread messages"
       },
       "dotDemo": {
@@ -719,11 +744,11 @@
       },
       "positionDemo": {
         "title": "Badge Position",
-        "description": "Set badgePos to set the badge position."
+        "description": "Set position to set the badge position."
       },
       "customDemo": {
         "title": "Custom",
-        "description": "The bgColor parameter is used to set the badge status color (the badge status color specified by status is invalid). The offsetXY parameter is used to set the badge offset relative to the badgePos.Customizing text and background colors using textColor and bgColor."
+        "description": "The bgColor parameter is used to set the badge status color (the badge status color specified by status is invalid). The offset parameter is used to set the badge offset relative to the position.Customizing text and background colors using textColor and bgColor."
       },
       "anchorLinkValues": {
         "badge-basic": "Basic Badge",
@@ -852,6 +877,9 @@
       "pipeDemo": {
         "title": "DatePipe"
       },
+      "browserDemo": {
+        "title": "Current browser name and version"
+      },
       "openURLDemo": {
         "title": "Open URL in A New Tag"
       },
@@ -867,6 +895,7 @@
       },
       "anchorLinkValues": {
         "lazy-load": "Lazyload Directive",
+        "browser-version": "Current browser name and version",
         "date-pipe": "Datepipe",
         "open-url": "Open URL in A New Tag",
         "download-file": "Download File",
@@ -950,6 +979,7 @@
             "devui-text": "Body Text",
             "devui-text-weak": "Weakened text information (accordion subitem, table header)",
             "devui-aide-text": "auxiliary text, help information (breadcrumb)",
+            "devui-aide-text-hover": "Hover color in auxiliary text and help information",
             "devui-aide-text-stress": "Accent color in auxiliary text and help information",
             "devui-placeholder": "Placeholder",
             "devui-light-text": "Font color on colored dark background (fixed)",
@@ -1032,6 +1062,14 @@
             "button": "Button",
             "status": "Status"
           },
+          "catalogsList": {
+            "text": "Text",
+            "border": "Border",
+            "background": "Background",
+            "status": "Status/Function",
+            "theme": "Theme Color"
+          },
+          "formColor": "Complete Swatches",
           "colors": {
             "global-bg": "Body with a light gray background",
             "bg-white": "Top navigation color, background color",
@@ -1112,6 +1150,7 @@
         "instance": {
           "title": "Instance",
           "description": "Shading table",
+          "description2": "Shadow color table",
           "defaultTable": {
             "tab": "Default Theme Shadow Table",
             "shadowName": "shadow variable name",
@@ -1124,6 +1163,13 @@
             "shadowName": "shadow variable name",
             "newShadowName": "New variable name",
             "shadowValue": "shadow variable value",
+            "description": "Description"
+          },
+          "colorTable": {
+            "colorVar": "Color variable",
+            "normalColor": "Normal color value",
+            "darkColor": "Dark Black Value",
+            "themeValue": "Current Theme Color Value",
             "description": "Description"
           },
           "shadows": {
@@ -1149,6 +1195,12 @@
             "hwc-shadow-prompt": "Prompt",
             "hwc-shadow-success": "Success prompt",
             "hwc-shadow-dark": "Dark background shadow"
+          },
+          "shadowColor": {
+            "devui-shadow": "shadow color",
+            "devui-light-shadow": "Weak shadow color",
+            "devui-connected-overlay-shadow": "Pop-up (overlay) layer with connection points shadow color",
+            "devui-feedback-overlay-shadow": "Information Prompt Feedback Class shadow color"
           }
         }
       },
@@ -1282,6 +1334,51 @@
         "animation": "animation"
       }
     },
+    "design-z-index": {
+      "name": "Zindex Layer",
+      "type": "Design tokens",
+      "path": "design-z-index",
+      "description": "Component library common style specifications.",
+      "tmw": "View the styles, application scenarios, and changes of the component library.",
+      "ZIndexDemo": {
+        "title": "Layer",
+        "description1": "1. The component library provides hierarchical variables for users in different scenarios. The following table lists the names, values, and application scenarios of these variables.",
+        "description2": "2. Pass `@import '~ng-devui/styles-var/devui-var.scss'; `The level variables can be used after they are introduced.",
+        "description3": "3. If the stylesheet is a less file, `@import' ~ng-devui/styles-var/devui-var.less '; `, and change the variable prefix '$' to '@';",
+        "description4": "4. If a mask exists, the mask is based on the corresponding z-index value -1.",
+        "description5": "5. Content layer. Set zIndex as required. The value of zIndex must be smaller than that of the temporary layer.",
+        "description6": "6. Background layer. Set zIndex as required. The value of zIndex must be smaller than that of the content layer.",
+        "title2": "Layer Rule",
+        "description7": "According to the interaction mode, the content layer is classified into the background layer, content layer, and temporary layer. The sequence of the layers is as follows: Temporary layer > Content layer > Background layer. The sequence cannot be changed.",
+        "subTitle1": "1. Temporary layer",
+        "description8": "Temporary layer related to an operation or task. Generally, it carries tasks that need to be temporarily processed or feedback that needs to be received. It is higher than the content layer.",
+        "description9": "There are two modes: one is that the content area cannot be operated and is disabled by the mask mask. The user must focus on the content of the pop-up window to continue other operations (pop-up window and modal drawer). The other is that the content area can be operated without a mask. (modeless drawer, lightweight pop-up window, floating menu, user guide)",
+        "subTitle2": "2. Content layer",
+        "description10": "Mainly carries page elements such as page information, components, and accordion.",
+        "subTitle3": "3. Background layer",
+        "description11": "The page background layer is always placed at the bottom of the page. The color of the page background layer is #EEF0F5, which is neutral and soft to highlight and focus the content layer.",
+        "instance": {
+          "title": "Instance",
+          "tableTitle": "Hierarchical variable table",
+          "table": {
+            "zIndexName": "Layer variable name",
+            "zIndexValue": "Level variable value",
+            "description": "Description"
+          },
+          "zIndex": {
+            "devui-z-index-full-page-overlay": " Full Screen Coverage Elements",
+            "devui-z-index-pop-up": " prompt information, such as popover and tooltip",
+            "devui-z-index-dropdown": "Dropdown menu, such as dropdown, compatible. Values to be redefined",
+            "devui-z-index-modal": "Popup window",
+            "devui-z-index-drawer": "Drawer Board",
+            "devui-z-index-framework": "Framework element, header, sideMenu, etc."
+          }
+        }
+      },
+      "anchorLinkValues": {
+        "z-index": "z-index"
+      }
+    },
     "codemirror": {
       "name": "CodeMirror",
       "type": "Extended service",
@@ -1370,6 +1467,18 @@
         "title": "Batch line dragging",
         "description": "You can use the DragDrop component to drag rows in a table in batches. You can press Ctrl and select multiple rows and cells to drag them. You can only customize the head and body templates and the rows and cells in the templates."
       },
+      "virtualScrollTreeTableBasicDemo": {
+        "title": "Tree table with a large amount of data Basic",
+        "description": "To display 10,000 to 100,000 tree data records, use this table to ensure smooth operations."
+      },
+      "virtualScrollTreeTableOperationDemo": {
+        "title": "Tree table with a large amount of data Operation",
+        "description": "Basic operations, including adding, modifying, deleting, querying, copying, and cutting tree tables with a large amount of data."
+      },
+      "virtualScrollTreeTableInteractionDemo": {
+        "title": "Tree table with a large amount of data Interaction",
+        "description": "Advanced operations on tree tables with a large amount of data, including dragging, selecting, deleting, and inheriting most functions of the original table."
+      },
       "mutilStylesDemo": {
         "title": "Table Style"
       },
@@ -1404,7 +1513,9 @@
         "cell-merge": "Cell Merge",
         "drag-row": "Row dragging",
         "muti-drag-row": "Batch Row dragging",
-        "big-data-tree-table": "Big Data Tree Table"
+        "virtual-scroll-tree-table-basic": "Big Data Tree Table Basic",
+        "virtual-scroll-tree-table-operation": "Big Data Tree Table Operation",
+        "virtual-scroll-tree-table-interaction": "Big Data Tree Table Interaction"
       }
     },
     "datepickerPro": {
@@ -1419,7 +1530,56 @@
       "type": "Experimental",
       "path": "dashboard",
       "description": "Dashboard supports various pendants.",
-      "tmw": "Functions as a container to carry various types of content."
+      "tmw": "Functions as a container to carry various types of content.",
+      "basicDemo": {
+        "title": "Basic Usage",
+        "description": "Supports drag-and-drop sorting, scaling, adding, deleting, resize, moving, and locking.",
+        "addWidget": "Add a widget",
+        "popWidget": "Delete the last widget",
+        "coordinates": "Coordinates",
+        "size": "Width and Height",
+        "lock": "Lock",
+        "position": "Location",
+        "dragMove": "Drag Move",
+        "dragSize": "Drag Size",
+        "independentUse": "Independent use"
+      },
+      "configDemo": {
+        "title": "More Settings",
+        "description": "Supports read-only static configuration, floating configuration, continuous compact arrangement, external addition, and deletion.",
+        "dragAdd": "Drag the card to the right.",
+        "dragDelete": "Drag the dashboard card here to delete it.",
+        "source": "Source:",
+        "data": "Data",
+        "drag": "Drag",
+        "layout": "Layout",
+        "columns": "Number of columns",
+        "placeHolder1": "The value ranges from 1 to 12. For more than 12 columns, see the API configuration.",
+        "rowHeight": "Row Height",
+        "placeHolder2": "Number or character string, in pixels",
+        "margins": "Margins",
+        "minRowHeight": "Minimum row height",
+        "placeHolder3": "Number. The value 0 indicates no restriction.",
+        "maxRowHeight": "Maximum row height",
+        "configuration": "Configuration",
+        "static": "Static",
+        "permittedOverhead": "Allow Overhead",
+        "animation": "animation",
+        "forbiddenMoving": "Forbidden Move",
+        "forbiddenResizing": "Forbidden Resize",
+        "showGrid": "Display Grid",
+        "operation": "Operation",
+        "autoArrangement": "Automatic Continuous Compact Arrangement"
+      },
+      "solutionDemo": {
+        "title": "Solution",
+        "description": "Provides a complete library addition solution"
+      },
+      "anchorLinkValues": {
+        "basic-usage": "Basic Usage",
+        "more-config": "More Settings",
+        "solution": "Solution"
+      }
     },
     "datepicker": {
       "name": "DatePicker",
@@ -1603,7 +1763,7 @@
       },
       "disabledDemo": {
         "title": "Use Disabled",
-        "description": "You can specify whether to enable or disable the function by using the disabled command."
+        "description": "Set disabled to disable the entire component, or pass disabledKey to disable a single option."
       },
       "anchorLinkValues": {
         "basic-usage": "Basic usage",
@@ -1803,9 +1963,16 @@
         "fullscreen": "Full screen",
         "exitFullscreen": "Exit Full Screen"
       },
+      "customDemo": {
+        "title": "Function Invoking",
+        "description": "Create a full screen by calling a function.",
+        "fullscreen": "Full screen",
+        "exitFullscreen": "Exit Full Screen"
+      },
       "anchorLinkValues": {
         "immersive-full-screen": "Immersive full screen",
-        "general-full-screen": "Common full screen"
+        "general-full-screen": "Common full screen",
+        "custom-full-screen": "Function Invoking"
       }
     },
     "transfer": {
@@ -2061,7 +2228,7 @@
       "tmw": "When there are too many operation commands on the page, this component can be used to contain operation elements. When you click or move into a drop-down menu, You can select a value from the dropdown list.",
       "basicDemo": {
         "title": "Basic Usage",
-        "description": "test.",
+        "description": "",
         "More Operations": "More Operations",
         "Text box": "Text box",
         "Disable Options": "Disable Options",
@@ -2132,7 +2299,7 @@
       },
       "addIconDemo": {
         "title": "Adding icons",
-        "description": "test.",
+        "description": "",
         "Newly created": "Newly created",
         "Delete": "Delete",
         "Menu 1": "Menu 1",
@@ -2142,7 +2309,7 @@
       },
       "multiLevelDemo": {
         "title": "Multi-level drop-down menu",
-        "description": "test.",
+        "description": "",
         "Click": "Click",
         "More options": "More options",
         "Content 1": "Content 1",
@@ -2369,7 +2536,6 @@
         "custom-dialog": "Custom Dialog Box",
         "intercept-dialog-closed": "Blocking dialog box closed",
         "message-hint": "Information",
-        "warning-pop-up": "Warning Dialog Box",
         "update-button-options": "Update the button status in the pop-up dialog box",
         "configure-button-to-get-focus-automatically": "Configure button to automatically get focus",
         "template-content": "Customizing a pop-up box content template",
@@ -2385,7 +2551,7 @@
       "tmw": "When loading/rendering all the data takes a long time, you can use pagination to split the data.",
       "basicDemo": {
         "title": "Basic Usage",
-        "description": "test.",
+        "description": "",
         "Standard Size": "Standard Size",
         "Medium size": "Medium size",
         "Large size": "Large size",
@@ -2591,15 +2757,23 @@
       "halfDemo": {
         "title": "Half Star Mode"
       },
+      "clearDemo": {
+        "title": "Clear Star Mode"
+      },
       "typeDemo": {
-        "title": "Use the type parameter"
+        "title": "Set Color"
+      },
+      "templateDemo": {
+        "title": "Custom Template"
       },
       "anchorLinkValues": {
         "read-only-mode": "Read-only Mode",
         "dynamic-mode": "Dynamic Mode",
         "dynamic-mode-Custom": "Dynamic Mode-Custom",
         "half-demo": "Half Star Mode",
-        "using-the-type-parameter": "Use the type parameter"
+        "clear-demo": "Clear Star Mode",
+        "using-the-type-parameter": "Set Color",
+        "template": "Custom Template"
       }
     },
     "search": {
@@ -2681,7 +2855,7 @@
       },
       "AllowClearValueDemo": {
         "title": "Allow clearing values",
-        "description": "test.",
+        "description": "",
         "test": "Option"
       },
       "CustomAreaDemo": {
@@ -2693,7 +2867,7 @@
       },
       "CustomAreaDirectionDemo": {
         "title": "Customizing Area Orientation and Selecting",
-        "description": "test.",
+        "description": "",
         "Customizing Area Orientation and Selecting": "Customizing Area Orientation and Selecting",
         "Customize the region and change the width alignment by appendToBody.": "Customize the region and change the width alignment by appendToBody.",
         "Recent Selections": "Recent Selections",
@@ -2745,14 +2919,14 @@
       },
       "LoadingDemo": {
         "title": "Asynchronous loading: loading",
-        "description": "test.",
+        "description": "",
         "Lazy loading: Change the options mode.": "Lazy loading: Change the options mode.",
         "Lazy loading: The searchFn mode is used.": "Lazy loading: The searchFn mode is used.",
         "Option": "Option"
       },
       "UserLimitSelectedNumberDemo": {
         "title": "User scenario: The number of selected users is limited.",
-        "description": "test.",
+        "description": "",
         "maxselectnumber:2,disabled:1": "max select number:2, disabled:1",
         "Option": "Option"
       },
@@ -2764,7 +2938,7 @@
       },
       "UserSearchNLazyLoadDemo": {
         "title": "User scenario: lazy loading of custom search",
-        "description": "test.",
+        "description": "",
         "Search and lazy loading are used together.": "Search and lazy loading are used together.",
         "Current Select": "Current Select",
         "This is a longer option for testing.": "This is a longer option for testing.",
@@ -2773,7 +2947,7 @@
       },
       "UserMailSearchDemo": {
         "title": "User scenario: Combine customized search and template Email search",
-        "description": "test.",
+        "description": "",
         "Search by name or email address": "Search by name or email address",
         "Name:": "Name:",
         "E-mail address:": "E-mail address:",
@@ -2781,7 +2955,7 @@
       },
       "ModelValueDemo": {
         "title": "ngModel Value Processing",
-        "description": "test.",
+        "description": "",
         "Current Select": "Current Select",
         "Option": "Option"
       },
@@ -2960,62 +3134,48 @@
       "tmw": "When users want to collect and display large pieces of content in areas at the same level to keep the GUI neat.",
       "basicDemo": {
         "title": "Basic Usage",
-        "description": "test.",
-        "Here's what Tab1 says.": "Here's what Tab1 says.",
-        "This is Tab2.": "This is Tab2.",
-        "This is Tab3.": "This is Tab3."
+        "description": ""
       },
       "withoutContentDemo": {
         "title": "No Content",
-        "description": "test.",
+        "description": "",
         "activeID": "activeID"
       },
       "customDemo": {
         "title": "Customizing a Template",
-        "description": "test.",
-        "Here's what Tab1 says.": "Here's what Tab1 says.",
-        "This is Tab2.": "This is Tab2.",
-        "This is Tab3.": "This is Tab3."
+        "description": ""
       },
       "typePillsDemo": {
         "title": "Type Pills",
-        "description": "test.",
-        "Here's what Tab1 says.": "Here's what Tab1 says.",
-        "This is Tab2.": "This is Tab2.",
-        "This is Tab3.": "This is Tab3."
+        "description": ""
       },
       "typeOptionsDemo": {
         "title": "Type Options",
-        "description": "test.",
-        "Here's what Tab1 says.": "Here's what Tab1 says.",
-        "This is Tab2.": "This is Tab2.",
-        "This is Tab3.": "This is Tab3."
+        "description": ""
       },
       "typeSliderDemo": {
         "title": "Type Slider",
-        "description": "test.",
-        "Here's what Tab1 says.": "Here's what Tab1 says.",
-        "This is Tab2.": "This is Tab2.",
-        "This is Tab3.": "This is Tab3."
+        "description": ""
       },
       "typeWrappedDemo": {
         "title": "Type Wrapped",
-        "description": "test.",
-        "Here's what Tab1 says.": "Here's what Tab1 says.",
-        "This is Tab2.": "This is Tab2.",
-        "This is Tab3.": "This is Tab3."
+        "description": ""
+      },
+      "sizeDemo": {
+        "title": "Size",
+        "description": "Tabs are available in four sizes. You can select a proper size based on your business scenario."
       },
       "beforeChangeDemo": {
         "title": "Intercept Tab Switching",
-        "description": "Using beforeChange to intercept tab switchover.",
-        "Here's what Tab1 says.": "Here's what Tab1 says.",
-        "This is Tab2.": "This is Tab2.",
-        "This is Tab3.": "This is Tab3."
+        "description": "Using beforeChange to intercept tab switchover."
       },
-      "configurableTabsDemo": {
-        "title": "Customizing Tabs Display and Arrange",
-        "description": "The transfer component is introduced to implement customized tabs display.",
-        "activeID": "activeID"
+      "addDeleteDemo": {
+        "title": "Add / Remove",
+        "description": "Add and Remove Tabs"
+      },
+      "bigDataDemo": {
+        "title": "Big data display",
+        "description": "A lot of tab switching"
       },
       "anchorLinkValues": {
         "basic-usage": "Basic Usage",
@@ -3025,8 +3185,10 @@
         "type-options": "Type Options",
         "type-slider": "Type Slider",
         "type-wrapped": "Type Wrapped",
+        "size": "Size",
         "intercept-tab-switch": "Intercept Tab Switching",
-        "custom-tabs-display-and-arrangement": "Customizing Tabs Display and Arrange"
+        "add-delete": "Add / Remove",
+        "big-data": "Big data display"
       }
     },
     "tags": {
@@ -3043,9 +3205,14 @@
         "title": "Tag Group",
         "description": "The tag group can be a string array or an object array. In the object array, you can use displayProperty and titleProperty to set the label display value and title display value, and use labelStyle to set the label style."
       },
+      "hideDemo": {
+        "title": "Multi-Label Exceed Hide",
+        "description": "When the total width of the tag group exceeds the fixed width and hideBeyondTags is set to true, unnecessary tags are hidden. After +x is clicked, the remaining tags are displayed."
+      },
       "anchorLinkValues": {
         "single-tag": "Single Tag",
-        "tags-group": "Tag Group"
+        "tags-group": "Tag Group",
+        "hide-tags": "Multi-Label Exceed Hide"
       }
     },
     "tags-input": {
@@ -3274,7 +3441,7 @@
         "folding": "folding"
       },
       "checkControlDemo": {
-        "title": "Controlling the Parent-Child Check Relationship",
+        "title": "Checkable Tree",
         "description": "The usage of checkableRelation controls the performance of parent and child nodes during check.",
         "Parent node": "Parent node",
         "unfold": "unfold",
@@ -3287,26 +3454,17 @@
         "title": "Common treeFactory functions",
         "description": ""
       },
-      "checkableDemo": {
-        "title": "Checkable Tree",
-        "description": "Tree that can be checked.",
+      "customKeyDemo": {
+        "title": "Custom Key",
+        "description": "Custom key of tree node",
         "Subnode": "Subnode",
         "Parent node": "Parent node"
       },
       "customLoadingDemo": {
-        "title": "Customizing a Loading Template",
+        "title": "Node Lazyload",
         "Leaf node": "Leaf node",
         "No child node": "No child node",
         "Dynamic loading": "Dynamic loading",
-        "Parent node": "Parent node",
-        "unfold": "unfold",
-        "folding": "folding"
-      },
-      "customTitleKeyDemo": {
-        "title": "Custom Display Fields",
-        "description": "Set treeNodeTitleKey to customize the keywords displayed and searched in the tree.",
-        "Leaf node": "Leaf node",
-        "No child node": "No child node",
         "Parent node": "Parent node",
         "unfold": "unfold",
         "folding": "folding"
@@ -3359,24 +3517,19 @@
         "Leaf node": "Leaf node",
         "unfold": "unfold"
       },
-      "withoutAnimationDemo": {
-        "title": "Without Animation",
-        "description": "Indicates whether to display animations for the showAnimation attribute."
-      },
       "anchorLinkValues": {
         "basic-usage": "Basic Usage",
         "merge-node": "Merging Nodes",
-        "custom-loading": "Customizing a Loading Template",
-        "custom-display-field": "Custom Display Fields",
+        "lazy-loading": "Node Lazyload ",
+        "custom-key": "Custom Key",
+        "check-control-tree": "Checkable Tree",
         "checkable-tree": "Checkable Tree",
         "operation-button": "Operation button",
         "search-filtering": "Search Filtering",
         "custom-icon": "Custom Icon",
         "drag-and-drop-tree": "Dragable tree",
         "tree-factory": "Common treeFactory functions",
-        "check-control-tree": "Controlling the Parent-Child Check Relationship",
-        "virtual-scroll": "Operation tree of large data volume",
-        "without-animation": "Without Animation"
+        "virtual-scroll": "Operation tree of large data volume"
       }
     },
     "typography": {
@@ -3444,13 +3597,18 @@
         "title": "Customize Area to Upload",
         "description": "Users can use the dUpload command to upload files in any area."
       },
+      "sliceDemo": {
+        "title": "Uploading Slice",
+        "description": "You can set the size of a segment to upload."
+      },
       "anchorLinkValues": {
         "basic-usage": "Basic Usage",
         "multi-files": "Upload Multiple Files",
         "auto-upload": "Automatic Upload",
         "custom": "Customize",
         "dynamic-upload-options": "Dynamic Upload Parameters",
-        "customize-area-upload": "Customize Area to Upload"
+        "customize-area-upload": "Customize Area to Upload",
+        "upload-slice": "Uploading Slice"
       }
     },
     "user-guide": {
@@ -3464,7 +3622,7 @@
       },
       "serviceWayDemo": {
         "title": "Service Mode",
-        "description": "Use the user-guide as a service. The interface is exposed to users. The entrance to a tutorial can be customized. In this mode, UserGuideCmdService needs to be introduced to the component that uses the user-guide."
+        "description": "Use the user-guide as a service. The interface is exposed to users. The entrance to a tutorial can be customized. In this mode, UserGuideService needs to be introduced to the component that uses the user-guide."
       },
       "anchorLinkValues": {
         "user-guide-basic": "Component Mode",
@@ -3518,7 +3676,7 @@
       "tmw": "Folders, organizational structures, taxonomy, countries, regions, and so on, most of the structures of everything in the world are tree-shaped. The tree control can display the hierarchical relationship completely and provide interactive functions such as expanding, folding, and selecting.",
       "basicDemo": {
         "title": "Basic Usage",
-        "description": "test.",
+        "description": "",
         "Standard: Single Select": "Standard: Single Select",
         "Standard: Multiple Select": "Standard: Multiple Select",
         "Custom Width: Single Select": "Custom Width: Single Select",
@@ -3526,7 +3684,7 @@
       },
       "labelizationDemo": {
         "title": "Tag-based configuration",
-        "description": "test.",
+        "description": "",
         "Standard: Single Select": "Standard: Single Select",
         "Standard: Multiple Select": "Standard: Multiple Select",
         "AllowClear:SingleSelect(allowUnselectparametermustbetrueandenablelabelizationDemomustbefalse, whichisthedefaultvalue)": "AllowClear:SingleSelect(allowUnselectparametermustbetrueandenablelabelizationDemomustbefalse, whichisthedefaultvalue)",
@@ -3534,24 +3692,24 @@
       },
       "leafOnlyDemo": {
         "title": "Only leaf nodes can be selected.",
-        "description": "test.",
+        "description": "",
         "Leaf Only: Single Select": "Leaf Only: Single Select",
         "Leaf Only: Multiple Select": "Leaf Only: Multiple Select"
       },
       "hooksDemo": {
         "title": "Hook called upon completion of initialization",
-        "description": "test.",
+        "description": "",
         "Open on init: Single Select": "Open on init: Single Select"
       },
       "searchableDemo": {
         "title": "Easy search tree",
-        "description": "test.",
+        "description": "",
         "Standard: Single Select": "Standard: Single Select",
         "Standard: Multiple Select": "Standard: Multiple Select"
       },
       "appendToDemo": {
         "title": "Append To Element Capability",
-        "description": "test.",
+        "description": "",
         "Standard: Single Select Append To Body": "Standard: Single Select Append To Body",
         "Standard: Multiple Select Append To Body": "Standard: Multiple Select Append To Body",
         "Custom Width: Single Select Append To Body": "Custom Width: Single Select Append To Body",
@@ -3559,7 +3717,7 @@
       },
       "customIconDemo": {
         "title": "Customizing icons and selected nodes",
-        "description": "test.",
+        "description": "",
         "Standard: iconTemplatePosition": "Standard: iconTemplatePosition",
         "Standard: iconTemplateInput": "Standard: itemTemplateInput + iconTemplateInput"
       },
@@ -3569,14 +3727,14 @@
       },
       "keysDemo": {
         "title": "Custom key",
-        "description": "test.",
+        "description": "",
         "Standard: treeNodeIdKey": "Standard: treeNodeIdKey",
         "Standard: treeNodeChildrenKey": "Standard: treeNodeChildrenKey",
         "Standard: treeNodeTitleKey": "Standard: treeNodeTitleKey"
       },
       "iconParentDemo": {
         "title": "Customizing the node expansion and closing icon",
-        "description": "test.",
+        "description": "",
         "Standard: iconParent": "Standard: iconParent"
       },
       "virtualScrollDemo": {
@@ -3688,23 +3846,72 @@
       "name": "Layout",
       "type": "layout",
       "path": "layout",
-      "description": "Page Layout.",
-      "tmw": "When user want to use some existed layout.",
+      "description": "Page Layout, including Responsive Grid, Flex, Spacing, Responsive Class, Responsive Style, and Typical Layout Container.",
+      "tmw": "When the user needs to use Flex layouts, spacing settings, responsive layouts, typical layouts, etc.",
       "basicDemo": {
-        "title": "Basic Usage"
+        "title": "Grid Basic Usage",
+        "description": "Responsive breakpoints correspond to (px): ss > 0, ms >= 360, mm >= 768, ml >= 1024, xs >= 1280, sm >= 1440, md >= 1600, lg >= 1760, xl >= 1920. When combining settings, ss breakpoints represent common settings."
       },
-      "appDemo1": {
-        "title": "Application Scenario 1",
+      "gutterDemo": {
+        "title": "Grid Gutter",
+        "description": "The interval is implemented by padding in a grid."
+      },
+      "spaceDemo": {
+        "title": "Grid Space",
+        "description": "The interval is implemented by using the block margin in the grid."
+      },
+      "offsetDemo": {
+        "title": "Column Offset"
+      },
+      "alignJustifyDemo": {
+        "title": "Alignment"
+      },
+      "orderDemo": {
+        "title": "Order",
+        "description": "Order: 0, 1, 2, ..., 24."
+      },
+      "flexDemo": {
+        "title": "Flex",
+        "description": "[dFlex] is generic and you can use it elsewhere."
+      },
+      "spaceGutterDemo": {
+        "title": "Gutter And Space(Universal)",
+        "description": "[dGutter] is common to [dSpace] and you can use it elsewhere."
+      },
+      "classDemo": {
+        "title": "Responsive Class",
+        "description": "Responsive Class setting support. Classes set within multiple breakpoint ranges can be combined."
+      },
+      "styleDemo": {
+        "title": "Responsive Style",
+        "description": "Responsive Style setting support. Styles set within multiple breakpoint ranges can be combined."
+      },
+      "layoutContainerDemo": {
+        "title": "Layout Container",
+        "description": "Grid Basic Usage"
+      },
+      "layoutContainerDemo1": {
+        "title": "Layout Container Scenario 1",
         "description": "Common top, middle, and bottom layout."
       },
-      "appDemo2": {
-        "title": "Application Scenario 2",
+      "layoutContainerDemo2": {
+        "title": "Layout Container Scenario 2",
         "description": "Common top, middle, and bottom layouts and sidebar layouts."
       },
       "anchorLinkValues": {
-        "basic-usage": "Basic Usage",
-        "application-scenario1": "Application Scenario 1",
-        "application-scenario2": "Application Scenario 2"
+        "basic-usage": "Grid Basic Usage",
+        "gutter": "Grid Gutter",
+        "space": "Grid Space",
+        "offset": "Column Offset",
+        "align-justify": "Alignment",
+        "order": "Order",
+        "flex": "Flex",
+        "space-gutter": "Gutter And Space(Universal)",
+        "class": "Responsive Class",
+        "style": "Responsive Style",
+        "layout-container": "Layout Container",
+        "layout-container-scenario1": "Layout Container Scenario 1",
+        "layout-container-scenario2": "Layout Container Scenario 2"
       }
     },
     "gantt": {
@@ -3807,7 +4014,7 @@
       "tmw": "To solve the method that is not supported by the browser of an earlier version.",
       "basicDemo": {
         "title": "Usage",
-        "description": "Currently, there are few implementation methods and are mainly used by the rich text component. Therefore, the putty script file is stored in the rich text module. When using the devcloud project or the project created by the Angular CLI, you can insert the following information into src/polyfills.ts: import' ng-devui/add-ons/editorx/polyfill '; The putty script is only a piece of JS code that is independently executed. You can also insert a static resource into the page for use.",
+        "description": "Currently, there are few implementation methods and are mainly used by the rich text component. Therefore, the putty script file is stored in the rich text module. You can insert the following information into src/polyfills.ts: import' ng-devui/add-ons/editorx/polyfill '; The putty script is only a piece of JS code that is independently executed. You can also insert a static resource into the page for use.",
         "name": "Polyfills",
         "license": "License",
         "size": "Size",
@@ -3849,6 +4056,18 @@
         "basic-usage": "Basic Usage",
         "format": "formatting",
         "custom": "Importing a template"
+      }
+    },
+    "number-trans": {
+      "name": "NumberTranslate",
+      "type": "Data display",
+      "path": "number-trans",
+      "description": "Digital Format Conversion",
+      "tmw": "This command is used when the number format needs to be converted.",
+      "basicDemo": {
+        "beforeTrans": "Before Conversion",
+        "afterTrans": "After Conversion",
+        "title": "Conversion Instance"
       }
     },
     "relative-time": {
@@ -3901,6 +4120,9 @@
       "basicDemo": {
         "title": "Basic Usage"
       },
+      "markedTypeDemo": {
+        "title": "Date Mark"
+      },
       "showTimeDemo": {
         "title": "Show Time"
       },
@@ -3933,6 +4155,7 @@
       },
       "anchorLinkValues": {
         "basic-usage": "Basic Usage",
+        "mark-type": "Date Marked",
         "show-time": "Show Time",
         "template": "Customizing an Extended Area",
         "monthYear": "Month & Year picker",
@@ -3956,6 +4179,200 @@
       },
       "anchorLinkValues": {
         "basicDemo": "Basic Usage"
+      }
+    },
+    "line-chart": {
+      "name": "Line Chart",
+      "type": "Chart Template",
+      "path": "line-chart",
+      "description": "line chart for basic data",
+      "tmw": "show basic data linear change",
+      "line-chartDemo": {
+        "title": "basic line chart",
+        "threshold": "threshold line chart"
+      },
+      "threshold-chartDemo": {
+        "title": "threshold line chart"
+      },
+      "compare-chartDemo": {
+        "title": "compare line chart"
+      },
+      "anchorLinkValues": {
+        "echarts-temp-line-chart": "basic line chart",
+        "threshold-temp-line-chart": "threshold line chart"
+      }
+    },
+    "hex-bin-chart": {
+      "name": "Hex Bin Chart",
+      "type": "Chart Template",
+      "path": "hex-bin-chart",
+      "description": "Discrete data comparison",
+      "tmw": "Display data comparison of discrete data",
+      "auto-chartDemo": {
+        "title": "Auto-layout binning diagram"
+      },
+      "anchorLinkValues": {
+        "auto-chartDemo": "Auto-layout binning diagram"
+      }
+    },
+    "map-chart": {
+      "name": "Map Chart",
+      "type": "Chart Template",
+      "path": "map-chart",
+      "description": "show region data",
+      "tmw": "show basic data in region",
+      "china-province": {
+        "title": "China Province Data Map"
+      },
+      "china-city-province": {
+        "title": "China City Map"
+      },
+      "anchorLinkValues": {
+        "china-province": "China Province Data Map",
+        "china-city-province": "China City Map "
+      }
+    },
+    "bar-chart": {
+      "name": "Bar Chart",
+      "type": "Template Chart",
+      "path": "bar-chart",
+      "description": "Line chart of basic data",
+      "tmw": "Displays basic linear data changes.",
+      "echarts-bar-chart": {
+        "title": "Basic Histogram"
+      },
+      "echarts-bar-stacked": {
+        "title": "Stacked bar chart"
+      },
+      "echarts-bar-two": {
+        "title": "Bidirectional Histogram"
+      },
+      "echarts-bar-line": {
+        "title": "Line Column Template"
+      },
+      "anchorLinkValues": {
+        "echarts-bar-chart": "Basic bar chart",
+        "echarts-bar-stacked": "Stacked bar chart",
+        "echarts-bar-two": "Bidirectional bar chart",
+        "echarts-bar-line": "Polyline Column Template"
+      }
+    },
+    "radar-chart": {
+      "name": "Radar Chart",
+      "type": "Template Chart",
+      "path": "radar-chart",
+      "description": "Radar",
+      "tmw": "Displays the proportion of associated data.",
+      "radar-chartDemo": {
+        "title": "basic radar"
+      },
+      "anchorLinkValues": {
+        "radar-chartDemo": "basic radar"
+      }
+    },
+    "scatter-chart": {
+      "name": "Scatter Chart",
+      "type": "Template Chart",
+      "path": "scatter-chart",
+      "description": "Scatter",
+      "tmw": "Display discrete data in coordinate systems",
+      "basic-scatter-chartDemo": {
+        "title": "Scatter Chart"
+      },
+      "anchorLinkValues": {
+        "basic-scatter-chartDemo": "Scatter Chart"
+      }
+    },
+    "pie-chart": {
+      "name": "Pie Chart Pie Chart",
+      "type": "Template Chart",
+      "path": "pie-chart",
+      "description": "Pie Chart",
+      "tmw": "Display percentage data in the coordinate system.",
+      "basic-pie-chartDemo": {
+        "title": "Basic Pie Chart"
+      },
+      "rose-pie-chartDemo": {
+        "title": "Rose Pie Chart"
+      },
+      "anchorLinkValues": {
+        "basic-pie-chartDemo": "Pie chart",
+        "rose-pie-chartDemo": "Pie chart"
+      }
+    },
+    "chart-card": {
+      "name": "Chart Card",
+      "type": "Template Chart",
+      "path": "chart-card",
+      "description": "Chart Card",
+      "tmw": "Display charts with fixed layout cards",
+      "basic-card": {
+        "title": "Basic Card"
+      },
+      "anchorLinkValues": {
+        "basic-card": "Basic Card"
+      }
+    },
+    "funnel-chart": {
+      "name": "Funnel Chart",
+      "type": "Template Chart",
+      "path": "funnel-chart",
+      "description": "funnel chart",
+      "tmw": "Displaying Sorting Relationship Data in a Funnel Chart",
+      "basic-chart": {
+        "title": "funnel chart"
+      },
+      "anchorLinkValues": {
+        "basic-chart": "funnel chart"
+      }
+    },
+    "chart-marker": {
+      "name": "Chart Marker",
+      "type": "Template Chart",
+      "path": "chart-marker",
+      "description": "Chart Marker",
+      "tmw": "Used to mark the 2D coordinate system and record information.",
+      "basic-marker": {
+        "title": "Basic Chart Marker"
+      }
+    },
+    "chart-toolbox": {
+      "name": "Chart Toolbox",
+      "type": "Template Chart",
+      "path": "chart-toolbox",
+      "description": "Chart Toolbox",
+      "tmw": "Provides some chart interaction tools.",
+      "basic-marker": {
+        "title": "Chart Toolbox"
+      }
+    },
+    "echart-temp-basic": {
+      "shared-card": "Shared Card",
+      "shared-link-image": "Shared Link and Image",
+      "download-image": "Download Chart Image"
+    },
+    "chart-form": {
+      "name": "Chart Form Builder",
+      "type": "Template Chart",
+      "path": "chart-form",
+      "description": "Chart Form",
+      "tmw": "Quickly generate configuration forms for charts",
+      "basic-form": {
+        "title": "Chart Form Builder"
+      }
+    },
+    "config-provider": {
+      "name": "Customized Config Container",
+      "type": "Experimental",
+      "path": "config-provider",
+      "description": "Customize the Config container. You can use the container to perform partial thematic configuration.",
+      "tmw": "Configuration items of local containers need to be customized.",
+      "themeDemo": {
+        "title": "Partial Theme",
+        "description": "Use themeId (initialized) or directly use theme to customize the theme."
+      },
+      "anchorLinkValues": {
+        "custom-theme": "Partial Theme"
       }
     }
   }

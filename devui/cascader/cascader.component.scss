@@ -1,6 +1,7 @@
 @import '../style/theme/color';
 @import '../style/core/_font';
 @import '../style/core/animation';
+@import '../style/theme/corner';
 
 .devui-dropdown-menu {
   padding-bottom: 0;
@@ -28,6 +29,7 @@
 
   .devui-tags-input-wrapper {
     border-color: $devui-brand;
+    border-radius: $devui-border-radius;
   }
 }
 
@@ -47,6 +49,7 @@
   border-left: 1px solid $devui-dividing-line;
   height: 180px;
   overflow-y: auto;
+  overflow-y: overlay;
   display: inline-block;
   font-size: $devui-font-size;
 
@@ -81,14 +84,8 @@
 }
 
 .devui-drop-no-data {
-  height: 36px;
-  background-color: $devui-disabled-bg;
-  padding: 8px;
+  height: auto;
   display: block;
-
-  span {
-    color: $devui-disabled-text;
-  }
 }
 
 .devui-drop-icon {
@@ -148,6 +145,7 @@
   border: 1px solid $devui-line;
   display: inline-flex;
   width: 100%;
+  border-radius: $devui-border-radius;
 
   .devui-tags-input {
     flex: 1;

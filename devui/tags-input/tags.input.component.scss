@@ -52,6 +52,7 @@
       &:not(.init-inline) {
         d-toggle-menu-label {
           width: 100%;
+          border-radius: $devui-border-radius;
           background-color: $devui-base-bg;
         }
       }
@@ -59,6 +60,10 @@
       .devui-toggle-menu-container {
         flex-wrap: wrap;
         align-content: flex-start;
+
+        d-toggle-menu-search .devui-toggle-menu-search > input {
+          height: 26px;
+        }
 
         &.disabled d-toggle-menu-search .devui-toggle-menu-search input {
           cursor: not-allowed;

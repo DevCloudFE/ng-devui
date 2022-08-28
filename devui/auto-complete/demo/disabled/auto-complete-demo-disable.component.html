@@ -1,6 +1,6 @@
 <form class="form">
-  <div class="row">
-    <div class="col-sm-6" style="width: 280px; margin-right: 4px; margin-bottom: 20px; float: left">
+  <div class="disabled-container">
+    <div class="input-box">
       <div class="devui-form-group">
         <input
           dTextInput
@@ -16,7 +16,7 @@
         />
       </div>
     </div>
-    <div class="col-sm-4">
+    <div>
       <d-button (click)="isDisabled = !isDisabled">
         {{ isDisabled ? 'Enable AutoComplete' : 'Disable AutoComplete' }}
       </d-button>

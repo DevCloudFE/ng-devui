@@ -11,7 +11,7 @@ import {
   TemplateRef
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { DevConfigService, WithConfig } from 'ng-devui/utils/globalConfig';
+import { DevConfigService, WithConfig } from 'ng-devui/utils';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -51,7 +51,7 @@ export class CheckBoxComponent implements ControlValueAccessor, OnChanges {
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
     private devConfigService: DevConfigService
-    ) {
+  ) {
     this.id = CheckBoxComponent.ID_SEED++;
   }
 
@@ -111,7 +111,7 @@ export class CheckBoxComponent implements ControlValueAccessor, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.hasOwnProperty('halfchecked')) {
+    if (Object.prototype.hasOwnProperty.call(changes, 'halfchecked')) {
       this.unlockAnimation();
     }
   }

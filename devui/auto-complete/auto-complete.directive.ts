@@ -23,8 +23,14 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { PositionService } from 'ng-devui/position';
-import { addClassToOrigin, AppendToBodyDirection, AppendToBodyDirectionsConfig, removeClassFromOrigin } from 'ng-devui/utils';
-import { DevConfigService, WithConfig } from 'ng-devui/utils/globalConfig';
+import {
+  addClassToOrigin,
+  AppendToBodyDirection,
+  AppendToBodyDirectionsConfig,
+  DevConfigService,
+  removeClassFromOrigin,
+  WithConfig
+} from 'ng-devui/utils';
 import { fromEvent, Observable, of, Subject, Subscription } from 'rxjs';
 import { debounceTime, filter, map, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { AutoCompleteConfig } from './auto-complete-config';
@@ -46,8 +52,14 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
   @HostBinding('attr.autocapitalize') autocapitalize = 'off';
   @HostBinding('attr.autocorrect') autocorrect = 'off';
   @Input() disabled: boolean;
+  /**
+   * @deprecated
+   */
   @Input() cssClass: string;
   @Input() delay = 300;
+  /**
+   * @deprecated
+   */
   @Input() minLength: number;
   @Input() itemTemplate: TemplateRef<any>;
   @Input() noResultItemTemplate: TemplateRef<any>;
@@ -78,6 +90,9 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
   @Input() source: any[];
   @Input() valueParser: (item: any) => any;
   @Input() searchFn: (term: string, target?: AutoCompleteDirective) => Observable<any[]>;
+  /**
+   * @deprecated
+   */
   @Input() dropdown: boolean;
   @Input() maxHeight = 300;
   @Input() disabledKey: string;
@@ -90,8 +105,12 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
   @Output() loadMore = new EventEmitter<any>();
   @Output() selectValue = new EventEmitter<any>();
   @Output() transInputFocusEmit = new EventEmitter<any>(); // input状态传给父组件函数
+  /**
+   * @deprecated
+   */
   @Output() changeDropDownStatus = new EventEmitter<any>();
-  KEYBOARD_EVENT_NOT_REFRESH = ['escape', 'enter', 'arrowup', 'arrowdown', /*ie 10 edge */ 'esc', 'up', 'down'];
+  @Output() toggleChange = new EventEmitter<boolean>();
+  KEYBOARD_EVENT_NOT_REFRESH = ['escape', 'enter', 'arrowup', 'arrowdown', /* ie 10 edge */ 'esc', 'up', 'down'];
   popupRef: ComponentRef<AutoCompletePopupComponent>;
 
   private destroy$ = new Subject();
@@ -118,14 +137,11 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
     private i18n: I18nService,
     private devConfigService: DevConfigService
   ) {
-    this.minLength = this.autoCompleteConfig.autoComplete.minLength;
-    this.itemTemplate = this.autoCompleteConfig.autoComplete.itemTemplate;
-    this.noResultItemTemplate = this.autoCompleteConfig.autoComplete.noResultItemTemplate;
-    this.formatter = this.autoCompleteConfig.autoComplete.formatter;
-    this.valueParser = this.autoCompleteConfig.autoComplete.valueParser;
+
   }
 
   ngOnInit() {
+    this.init();
     this.setI18nText();
     this.valueChanges = this.registerInputEvent(this.elementRef);
     // 调用时机：input keyup
@@ -134,12 +150,11 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
     // 动态的创建了popup组件，
     const factory = this.componentFactoryResolver.resolveComponentFactory(AutoCompletePopupComponent);
     this.popupRef = this.viewContainerRef.createComponent(factory, this.viewContainerRef.length, this.injector);
-
     this.fillPopup(this.source);
 
     if (!this.searchFn) {
       this.searchFn = (term) => {
-        return of(this.source.filter((lang) => this.formatter(lang).toLowerCase().indexOf(term.toLowerCase()) !== -1));
+        return of(this.source.filter((item) => this.formatter(item).toLowerCase().indexOf(term.toLowerCase()) !== -1));
       };
     }
 
@@ -174,19 +189,27 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
     }
   }
 
+  init() {
+    this.minLength = this.minLength ?? this.autoCompleteConfig.autoComplete.minLength;
+    this.itemTemplate = this.itemTemplate || this.autoCompleteConfig.autoComplete.itemTemplate;
+    this.noResultItemTemplate = this.noResultItemTemplate || this.autoCompleteConfig.autoComplete.noResultItemTemplate;
+    this.formatter = this.formatter || this.autoCompleteConfig.autoComplete.formatter;
+    this.valueParser = this.valueParser || this.autoCompleteConfig.autoComplete.valueParser;
+  }
+
   setPositions() {
     if (this.popupRef) {
       this.popupRef.instance.overlayPositions =
         this.appendToBodyDirections && this.appendToBodyDirections.length > 0
           ? this.appendToBodyDirections
-              .map((position) => {
-                if (typeof position === 'string') {
-                  return AppendToBodyDirectionsConfig[position];
-                } else {
-                  return position;
-                }
-              })
-              .filter((position) => position !== undefined)
+            .map((position) => {
+              if (typeof position === 'string') {
+                return AppendToBodyDirectionsConfig[position];
+              } else {
+                return position;
+              }
+            })
+            .filter((position) => position !== undefined)
           : undefined;
     }
   }
@@ -287,6 +310,7 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
     this.popupRef.instance.disabled = this.disabled;
     addClassToOrigin(this.elementRef);
     this.changeDropDownStatus.emit(true);
+    this.toggleChange.emit(true);
   }
 
   writeValue(obj): void {
@@ -408,6 +432,7 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
       this.popupRef.instance.isOpen = false;
       removeClassFromOrigin(this.elementRef);
       this.changeDropDownStatus.emit(false);
+      this.toggleChange.emit(false);
     }
   }
 

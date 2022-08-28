@@ -12,6 +12,9 @@ import {
   ViewChild
 } from '@angular/core';
 export type IButtonType = 'button' | 'submit' | 'reset';
+/**
+ * 类型中text-dark参数废弃
+ */
 export type IButtonStyle = 'common' | 'primary' | 'text' | 'text-dark' | 'danger' | 'success' | 'warning';
 export type IButtonPosition = 'left' | 'right' | 'default';
 export type IButtonSize = 'lg' | 'md' | 'sm' | 'xs';
@@ -27,7 +30,12 @@ export class ButtonComponent implements AfterContentChecked {
   @Input() id: string;
   @Input() type: IButtonType = 'button';
   @Input() bsStyle: IButtonStyle = 'primary';
+  @Input() shape: 'circle';
   @Input() bsSize: IButtonSize = 'md';
+  /**
+   * @deprecated
+   * 原左右按钮用按钮组实现
+   */
   @Input() bsPosition: IButtonPosition = 'default';
   @Input() bordered: boolean;
   @Input() icon: string;

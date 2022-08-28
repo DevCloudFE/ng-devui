@@ -9,7 +9,13 @@ export class BatchDragComponent {
   lists = [
     {
       name: 'IDE',
-      list: [{ name: 'Visual Studio Code', isSelected: false }, { name: 'WebStorm', isSelected: false }, { name: 'Sublime Text', isSelected: false }, { name: 'Atom', isSelected: false }, { name: 'Notepad++', isSelected: false }],
+      list: [
+        { name: 'Visual Studio Code', isSelected: false },
+        { name: 'WebStorm', isSelected: false },
+        { name: 'Sublime Text', isSelected: false },
+        { name: 'Atom', isSelected: false },
+        { name: 'Notepad++', isSelected: false }
+      ],
     },
     {
       name: 'Browser',
@@ -24,11 +30,22 @@ export class BatchDragComponent {
     },
     {
       name: 'OS',
-      list: [{ name: 'Linux', isSelected: false }, { name: 'Windows', isSelected: false }, { name: 'Mac OS', isSelected: false }, { name: 'DOS', isSelected: false }, { name: 'Chrome OS', isSelected: false }],
+      list: [
+        { name: 'Linux', isSelected: false },
+        { name: 'Windows', isSelected: false },
+        { name: 'Mac OS', isSelected: false },
+        { name: 'DOS', isSelected: false },
+        { name: 'Chrome OS', isSelected: false }
+      ],
     },
     {
       name: 'Mobile OS',
-      list: [{ name: 'Android', isSelected: false }, { name: 'IOS', isSelected: false }, { name: 'BlackBerry', isSelected: false }, { name: 'Symbian', isSelected: false }],
+      list: [
+        { name: 'Android', isSelected: false },
+        { name: 'IOS', isSelected: false },
+        { name: 'BlackBerry', isSelected: false },
+        { name: 'Symbian', isSelected: false }
+      ],
     },
     {
       name: 'Whatever',
@@ -61,7 +78,7 @@ export class BatchDragComponent {
     } else {
       targetArray.push(item);
     }
-    if (-1 === fromIndex) {
+    if (fromIndex === -1) {
       this.removeItem(item, parentArray);
     }
   }
@@ -99,6 +116,6 @@ export class BatchDragComponent {
   }
 
   cleanBatch() {
-    this.lists.forEach((list) => list.list.forEach((item) => (item['isSelected'] = false)));
+    this.lists.forEach((list) => list.list.forEach((item) => {item['isSelected'] = false;}));
   }
 }

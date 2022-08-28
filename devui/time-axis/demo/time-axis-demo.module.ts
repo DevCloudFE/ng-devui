@@ -7,7 +7,7 @@ import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.
 import { TagsModule } from 'ng-devui/tags';
 import { TimeAxisModule } from 'ng-devui/time-axis';
 import { TranslateModule } from '@ngx-translate/core';
-import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
+import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
 import { TimeAxisAllStatesComponent } from './all-states/time-axis-all-states.component';
 import { AlternativeModeComponent } from './alternative-mode/alternative-mode.component';
 import { CustomDotComponent } from './custom-dot/custom-dot.component';
@@ -37,16 +37,16 @@ import { TimeAxisDemoComponent } from './time-axis-demo.component';
   ],
   exports: [TimeAxisDemoComponent],
   declarations: [
-      TimeAxisDemoComponent,
-      TimeAxisAllStatesComponent,
-      TimeAxisDirectionComponent,
-      TimeAxisHtmlContentComponent,
-      TimeAxisTemplateContentComponent,
-      AlternativeModeComponent,
-      SeperateWayComponent,
-      CustomDotComponent
-      ],
-  
+    TimeAxisDemoComponent,
+    TimeAxisAllStatesComponent,
+    TimeAxisDirectionComponent,
+    TimeAxisHtmlContentComponent,
+    TimeAxisTemplateContentComponent,
+    AlternativeModeComponent,
+    SeperateWayComponent,
+    CustomDotComponent
+  ],
+
   providers: [],
 })
 export class TimeAxisDemoModule {

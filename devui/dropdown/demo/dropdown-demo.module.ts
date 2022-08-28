@@ -4,12 +4,13 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ButtonModule } from 'ng-devui/button';
 import { DropDownModule } from 'ng-devui/dropdown';
+import { IconModule } from 'ng-devui/icon';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
 import { ToggleModule } from 'ng-devui/toggle';
 import { TranslateModule } from '@ngx-translate/core';
-import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
+import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
 import { DropDownDemoAddIconComponent } from './add-icon/add-icon.component';
 import { DropDownDemoAppendToBodyComponent } from './append-to-body/append-to-body.component';
 import { BasicComponent } from './basic/basic.component';
@@ -31,6 +32,7 @@ import { DropdownSetIsOpenComponent } from './set-is-open/dropdown-set-is-open.c
     DevUIApiModule,
     ButtonModule,
     ToggleModule,
+    IconModule,
     DDemoNavModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo' },
@@ -54,7 +56,7 @@ import { DropdownSetIsOpenComponent } from './set-is-open/dropdown-set-is-open.c
     DropDownDemoManuallyComponent,
     DropdownSetIsOpenComponent,
   ],
-  
+
 })
 export class DropdownDemoModule {
 }

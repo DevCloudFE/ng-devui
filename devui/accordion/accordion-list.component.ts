@@ -1,37 +1,30 @@
 import {
-  Component, Host, HostBinding, Input, OnDestroy, OnInit,
+  Component,
+  forwardRef, Host, HostBinding, Inject, Input, OnDestroy, OnInit,
   Optional, QueryList, SkipSelf, ViewChildren, ViewEncapsulation
 } from '@angular/core';
+import { expandCollapse, expandCollapseForDomDestroy } from 'ng-devui/utils';
 import { AccordionItemRouterlinkComponent } from './accordion-item-routerlink.component';
-import { AccordionMenuComponent } from './accordion-menu.component';
-import { AccordionComponent } from './accordion.component';
+import { ACCORDION_LIST } from './accordion-list-token';
+import { ACCORDION_MENU } from './accordion-menu-token';
+import { ACCORDION } from './accordion-token';
 import { AccordionMenuItem } from './accordion.type';
 
 @Component({
   selector: 'd-accordion-list',
   templateUrl: './accordion-list.component.html',
   encapsulation: ViewEncapsulation.None,
+  animations: [expandCollapse, expandCollapseForDomDestroy],
   preserveWhitespaces: false,
+  providers: [{
+    provide: ACCORDION_LIST,
+    useExisting: forwardRef(() => AccordionListComponent)
+  }]
 })
 export class AccordionListComponent implements OnInit, OnDestroy {
-  @Input() data: Array<AccordionMenuItem>;
-  @Input() deepth = 0;
-  @Input() parent: AccordionMenuItem;
-  @ViewChildren(AccordionMenuComponent) accordionMenuQueryList: QueryList<AccordionMenuComponent>;
-  @ViewChildren(AccordionItemRouterlinkComponent) accordionItemRouterlinkQueryList: QueryList<AccordionItemRouterlinkComponent>;
-  constructor(@Optional() @Host() @SkipSelf() private parentComponent: AccordionMenuComponent,
-              private accordion: AccordionComponent) {}
-  ngOnInit(): void {
-    if (this.parentComponent) {
-      setTimeout(() => {this.parentComponent.accordionListFromView = this; });
-    }
-  }
-  ngOnDestroy(): void {
-    if (this.parentComponent) {
-      this.parentComponent.accordionListFromView = undefined;
-    }
-  }
 
+  constructor(@Optional() @Host() @SkipSelf() @Inject(ACCORDION_MENU) private parentComponent: any,
+              @Inject(ACCORDION) private accordion: any) {}
   @HostBinding('class.devui-accordion-show-animate') get animateState() {
     return this.accordion.showAnimation;
   }
@@ -81,13 +74,44 @@ export class AccordionListComponent implements OnInit, OnDestroy {
   get linkDefaultTarget() {
     return this.accordion.linkDefaultTarget;
   }
+  get routerLinkActived(): boolean {
+    return (!!this.accordionItemRouterlinkQueryList
+        && this.accordionItemRouterlinkQueryList.some(airlc => this.isLinkRouterActive(airlc))
+    ) || (
+      !!this.accordionMenuQueryList
+        && this.accordionMenuQueryList.some(amc => this.isMenuRouterActive(amc))
+    );
+  }
+  get hasActiveChildren(): boolean {
+    return (!!this.accordionMenuQueryList
+        && this.accordionMenuQueryList.some(amc => this.isMenuDataActive(amc)))
+      || (!!this.data && !!this.data.length
+        && this.data.some(item => this.isItemData(item) && this.isItemDataActive(item))
+      );
+  }
+  @Input() data: Array<AccordionMenuItem>;
+  @Input() deepth = 0;
+  @Input() parent: AccordionMenuItem;
+  @ViewChildren(ACCORDION_MENU) accordionMenuQueryList: QueryList<any>;
+  @ViewChildren(AccordionItemRouterlinkComponent) accordionItemRouterlinkQueryList: QueryList<AccordionItemRouterlinkComponent>;
+  6;
+  ngOnInit(): void {
+    if (this.parentComponent) {
+      setTimeout(() => {this.parentComponent.accordionListFromView = this; });
+    }
+  }
+  ngOnDestroy(): void {
+    if (this.parentComponent) {
+      this.parentComponent.accordionListFromView = undefined;
+    }
+  }
   private isLinkRouterActive(airlc: AccordionItemRouterlinkComponent): boolean {
     return airlc.routerLinkActived;
   }
-  private isMenuRouterActive(amc: AccordionMenuComponent): boolean {
+  private isMenuRouterActive(amc: any): boolean {
     return amc.routerLinkActived;
   }
-  private isMenuDataActive(amc: AccordionMenuComponent): boolean {
+  private isMenuDataActive(amc: any): boolean {
     return amc.hasActiveChildren;
   }
   private isItemDataActive(item: AccordionMenuItem): boolean {
@@ -96,21 +120,6 @@ export class AccordionListComponent implements OnInit, OnDestroy {
   private isItemData(item: AccordionMenuItem): boolean {
     return item[this.childrenKey] === undefined;
   }
-  get routerLinkActived(): boolean {
-    return (!!this.accordionItemRouterlinkQueryList
-        && this.accordionItemRouterlinkQueryList.some(airlc => this.isLinkRouterActive(airlc))
-      ) || (
-        !!this.accordionMenuQueryList
-        && this.accordionMenuQueryList.some(amc => this.isMenuRouterActive(amc))
-      );
-  }
-  get hasActiveChildren(): boolean {
-    return (!!this.accordionMenuQueryList
-        && this.accordionMenuQueryList.some(amc => this.isMenuDataActive(amc)))
-      || (!!this.data && !!this.data.length
-        && this.data.some(item => this.isItemData(item) && this.isItemDataActive(item))
-    );
-  }
   menuToggleItemFn = (item: any , event?: any) => {
     this.accordion.menuToggleFn({
       item: item,
@@ -118,12 +127,12 @@ export class AccordionListComponent implements OnInit, OnDestroy {
       parent: this.parent.parent,
       event: event
     });
-  }
+  };
   itemClickItemFn = (item: any, event?: any) => {
     this.accordion.itemClickFn({
       item: item,
       parent: this.parent,
       event: event
     });
-  }
+  };
 }

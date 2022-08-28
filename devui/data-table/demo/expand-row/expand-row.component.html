@@ -1,4 +1,10 @@
-<d-data-table #dataTable [type]="'striped'" [dataSource]="basicDataSource" [scrollable]="true" [tableWidthConfig]="tableWidthConfig">
+<d-data-table
+  #dataTable
+  [dataSource]="basicDataSource"
+  [tableOverflowType]="'overlay'"
+  [scrollable]="true"
+  [tableWidthConfig]="tableWidthConfig"
+>
   <thead dTableHead>
     <tr dTableRow>
       <th dHeadCell></th>

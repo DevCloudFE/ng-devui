@@ -1,5 +1,5 @@
 <div style="padding-bottom: 24px">
-  <d-data-table #datatable [dataSource]="basicDataSource" [checkable]="true" [checkOptions]="checkOptions">
+  <d-data-table #datatable [tableOverflowType]="'overlay'" [dataSource]="basicDataSource" [checkable]="true" [checkOptions]="checkOptions">
     <d-column
       *ngFor="let colOption of dataTableOptions.columns"
       [field]="colOption.field"

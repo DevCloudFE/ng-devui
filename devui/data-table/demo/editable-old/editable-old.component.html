@@ -4,6 +4,7 @@
   [beforeCellEdit]="beforeCellEdit"
   (cellEditEnd)="thisCellEditEnd($event)"
   [scrollable]="true"
+  [tableOverflowType]="'overlay'"
 >
   <d-column field="lastName" header="Last Name" [width]="'100px'" [editable]="true">
     <d-cell-edit>
@@ -49,7 +50,7 @@
     <d-cell-edit>
       <ng-template let-rowItem="rowItem" let-column="column">
         <div class="customized-editor edit-padding-fix">
-          <d-input-number [(ngModel)]="rowItem[column.field]" class="input-number"></d-input-number>
+          <d-input-number [autoFocus]="true" [(ngModel)]="rowItem[column.field]" class="input-number"></d-input-number>
         </div>
       </ng-template>
     </d-cell-edit>

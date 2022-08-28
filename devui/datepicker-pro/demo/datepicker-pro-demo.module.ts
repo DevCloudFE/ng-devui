@@ -14,10 +14,11 @@ import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
 import { TabsModule } from 'ng-devui/tabs';
 import { TranslateModule } from '@ngx-translate/core';
-import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
+import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
 import { BasicDatepickerProComponent } from './basic/basic-datepicker-pro.component';
 import { DatepickerProDemoComponent } from './datepicker-pro-demo.component';
 import { DatepickerProHostComponent } from './host-template/datepicker-host-template.component';
+import { MarkedTypeDemoComponent } from './marked-type/marked-type.component';
 import { MonthYearDatepickerProComponent } from './month-year-picker/month-year-picker.component';
 import { RangeTemplatePickerComponent } from './range-template/range-template.component';
 import { RangeTypepickerProComponent } from './range-type/range-type-picker.component';
@@ -68,9 +69,10 @@ import { DatepickerProTemplateComponent } from './template/datepicker-template.c
     RangeTemplatePickerComponent,
     DatepickerProStaticPanelComponent,
     SelectDatepickerDemoComponent,
-    DatepickerProTabTypeComponent
+    DatepickerProTabTypeComponent,
+    MarkedTypeDemoComponent
   ],
   providers: [],
-  
+
 })
 export class DatepickerProDemoModule {}

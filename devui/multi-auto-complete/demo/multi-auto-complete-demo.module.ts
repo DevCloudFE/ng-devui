@@ -9,7 +9,7 @@ import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
 import { TranslateModule } from '@ngx-translate/core';
-import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
+import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
 import { MultiAutoCompleteDemoArrayComponent } from './array/multi-auto-complete-demo-array.component';
 import { MultiAutoCompleteDemoDefaultComponent } from './default/multi-auto-complete-demo-default.component';
 import { MultiAutoCompleteDemoDisabledComponent } from './disabled/multi-auto-complete-demo-disabled.component';
@@ -47,6 +47,6 @@ import { MultiAutoCompleteDemoComponent } from './multi-auto-complete-demo.compo
     MultiAutoCompleteDemoDisabledComponent,
   ],
   providers: [],
-  
+
 })
 export class MultiAutoCompleteDemoModule {}

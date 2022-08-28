@@ -9,7 +9,7 @@ import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
 import { TranslateModule } from '@ngx-translate/core';
-import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
+import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
 import { DatepickerDemoAppendToBodyComponent } from './append-to-body/append-to-body.component';
 import { DatepickerDemoBasicComponent } from './basic/basic.component';
 import { DatepickerButtonComponent } from './button/button.component';
@@ -71,7 +71,7 @@ import { TwoDatepickerFormatComponent } from './two-datepicker-format/two-datepi
     TwoDatepickerBasicComponent,
     TwoDatepickerFormatComponent,
   ],
-  
+
   providers: [],
 })
 export class DatepickerDemoModule { }

@@ -36,6 +36,7 @@ In the page:
 |  dropdownPanelClass  |                                     `string`                                     |                -                 | Class of the drop-down panel, which is used to select a panel.                                                                                                                                                                   | [Basic usage](demo#basic-usage)                 |
 |    appendToBody     |                                    `boolean`                                     |               true               |                                 Optional, attach the drop-down to the body                             |                                   |
 | showAnimation | `boolean` | true | optional. Whether to enable animation. |   | ✔ |
+|    hostTemplate     |                                    `templateRef<any>`                                     |               -               |              User-defined drop-down list. The value parameter is exposed, which is the currently selected value.            |            [Basic usage](demo#basic-usage)           |
 
 ## d-cascader event
 

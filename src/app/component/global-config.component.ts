@@ -1,9 +1,9 @@
 import { DOCUMENT } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, Inject, Input, OnInit, QueryList, Renderer2, ViewChildren } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { I18nService } from 'ng-devui/i18n';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import * as hljs from 'highlight.js/lib/core';
-import { I18nService } from 'ng-devui/i18n';
 ['bash', 'typescript', 'json'].forEach((langName) => {
   const langModule = require(`highlight.js/lib/languages/${langName}`);
   hljs.registerLanguage(langName, langModule);
@@ -11,7 +11,7 @@ import { I18nService } from 'ng-devui/i18n';
 
 @Component({
   template: `
-    <div dCodeCopy (copied)="onCopied($event)" dReadTip [readTipOptions]="options" class="get-start">
+    <div dCodeCopy class="get-start">
       <div class="readme">
         <div [innerHTML]="readMe | safe: 'html'" #documentation></div>
       </div>
@@ -27,19 +27,17 @@ import { I18nService } from 'ng-devui/i18n';
 })
 export class GlobalConfigComponent implements OnInit, AfterViewInit {
   _readMe: HTMLElement;
-  options;
+
   @Input() set readMe(readMe: HTMLElement) {
     this._readMe = readMe;
     setTimeout(() => {
       this.refreshView();
     });
   }
-  document: Document;
-
   get readMe() {
     return this._readMe;
   }
-
+  document: Document;
   @ViewChildren('documentation') documentation: QueryList<ElementRef>;
 
   constructor(
@@ -61,9 +59,6 @@ export class GlobalConfigComponent implements OnInit, AfterViewInit {
     });
   }
 
-  onCopied(options) {
-    this.options = options;
-  }
   setReadMe(lang) {
     const currLang = lang === 'en-us' ? 'en' : 'cn';
     this.readMe = require(`!html-loader!markdown-loader!./globalConfig-${currLang}.md`);

@@ -2,15 +2,11 @@
 @import '../style/core/_font';
 
 :host {
-  .devui-select-list-unstyled {
-    overflow-y: auto;
-  }
-
   li {
     font-size: $devui-font-size-lg;
     min-height: 40px;
     line-height: 28px;
-    padding: 11px 10px;
+    padding: 8px 12px;
     width: 100%;
     display: block;
     overflow: hidden;
@@ -24,11 +20,6 @@
     &:hover {
       background-color: $devui-list-item-hover-bg;
       color: $devui-list-item-hover-text;
-    }
-
-    &.devui-no-data-tips {
-      cursor: not-allowed;
-      color: $devui-disabled-text;
     }
   }
 

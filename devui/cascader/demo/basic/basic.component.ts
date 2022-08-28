@@ -106,6 +106,7 @@ export class BasicComponent {
   value2: Array<string | number> = [2, 6, 512];
   value3: Array<string | number>;
   value4: Array<string | number>;
+  value5: Array<string | number>;
 
   onChanges(value: any) {
     console.log(value);

@@ -10,58 +10,130 @@
   <div class="color-block block-7"></div>
 
   <d-tabs [type]="'tabs'" [(activeTab)]="activeTab" (activeTabChange)="setDataList()" style="margin-top: 8px">
-    <d-tab id="tab1" title="{{ 'components.design-color.colorDemo.instance.defaultTable.tab' | translate }}" tabId="tab1">
+    <d-tab id="tab1" title="{{ 'components.design-color.colorDemo.instance.defaultTable.tab' | translate }}">
       <ng-template dTabContent>
-        <d-data-table #datatable [dataSource]="catalogs" [scrollable]="true" [showExpandToggle]="true">
-          <thead dTableHead>
-            <tr dTableRow>
-              <th dHeadCell></th>
-              <th dHeadCell>{{ 'components.design-color.colorDemo.instance.defaultTable.colorVar' | translate }}</th>
-              <th dHeadCell>{{ 'components.design-color.colorDemo.instance.defaultTable.normalColor' | translate }}</th>
-              <th dHeadCell>{{ 'components.design-color.colorDemo.instance.defaultTable.darkColor' | translate }}</th>
-              <th dHeadCell>{{ 'components.design-color.colorDemo.instance.defaultTable.themeValue' | translate }}</th>
-              <th dHeadCell>{{ 'components.design-color.colorDemo.instance.defaultTable.description' | translate }}</th>
-            </tr>
-          </thead>
-          <tbody dTableBody>
-            <ng-template let-rowItem="rowItem" let-rowIndex="rowIndex">
+        <div *ngFor="let table of tableList; let index = index">
+          <div class="devui-demo-title" style="margin-top: 10px">{{ tableNameList[index] }}</div>
+          <d-data-table #datatable [dataSource]="tableList[index]" [scrollable]="true" [showExpandToggle]="true">
+            <thead dTableHead>
               <tr dTableRow>
-                <td dTableCell class="cursor-pointer">
-                  <div *ngIf="rowItem.expand !== undefined" (click)="toggleExpand(rowItem, rowIndex)">
-                    <span class="icon-chevron-up devui-icon-style" *ngIf="rowItem?.expand"></span>
-                    <span class="icon-chevron-down devui-icon-style" *ngIf="!rowItem?.expand"></span>
-                  </div>
-                </td>
-                <td dTableCell [ngClass]="{ 'devui-catalog-title': rowItem.expand !== undefined }">{{ rowItem?.name }}</td>
-                <td dTableCell>
-                  <div class="color-name">
-                    {{ rowItem?.light }}
-                  </div>
-                  <div *ngIf="rowItem?.light" class="color-cube" [ngStyle]="{ 'background-color': rowItem?.light }"></div>
-                </td>
-                <td dTableCell>
-                  <div class="color-name">
-                    {{ rowItem?.dark }}
-                  </div>
-                  <div *ngIf="rowItem?.dark" class="color-cube" [ngStyle]="{ 'background-color': rowItem?.dark }"></div>
-                </td>
-                <td dTableCell>
-                  <div class="color-name">
-                    {{ rowItem?.themeValue }}
-                  </div>
-                  <div *ngIf="rowItem?.themeValue" class="color-cube" [ngStyle]="{ 'background-color': rowItem?.themeValue }"></div>
-                </td>
-                <td dTableCell>{{ rowItem?.description }}</td>
+                <th dHeadCell></th>
+                <th dHeadCell>{{ 'components.design-color.colorDemo.instance.defaultTable.colorVar' | translate }}</th>
+                <th dHeadCell>{{ 'components.design-color.colorDemo.instance.defaultTable.normalColor' | translate }}</th>
+                <th dHeadCell>{{ 'components.design-color.colorDemo.instance.defaultTable.darkColor' | translate }}</th>
+                <th dHeadCell>{{ 'components.design-color.colorDemo.instance.defaultTable.themeValue' | translate }}</th>
+                <th dHeadCell>{{ 'components.design-color.colorDemo.instance.defaultTable.description' | translate }}</th>
               </tr>
-            </ng-template>
-          </tbody>
-        </d-data-table>
+            </thead>
+            <tbody dTableBody>
+              <ng-template let-rowItem="rowItem" let-rowIndex="rowIndex">
+                <tr dTableRow>
+                  <td dTableCell class="cursor-pointer">
+                    <div *ngIf="rowItem.expand !== undefined" (click)="toggleExpand(rowItem, rowIndex)">
+                      <span class="icon-chevron-up devui-icon-style" *ngIf="rowItem?.expand"></span>
+                      <span class="icon-chevron-down devui-icon-style" *ngIf="!rowItem?.expand"></span>
+                    </div>
+                  </td>
+                  <td dTableCell [ngClass]="{ 'devui-catalog-title': rowItem.expand !== undefined }">{{ rowItem?.name }}</td>
+                  <td dTableCell>
+                    <div class="color-name">
+                      {{ rowItem?.light }}
+                    </div>
+                    <div *ngIf="rowItem?.light" class="color-cube" [ngStyle]="{ 'background-color': rowItem?.light }"></div>
+                  </td>
+                  <td dTableCell>
+                    <div class="color-name">
+                      {{ rowItem?.dark }}
+                    </div>
+                    <div *ngIf="rowItem?.dark" class="color-cube" [ngStyle]="{ 'background-color': rowItem?.dark }"></div>
+                  </td>
+                  <td dTableCell>
+                    <div class="color-name">
+                      {{ rowItem?.themeValue }}
+                    </div>
+                    <div *ngIf="rowItem?.themeValue" class="color-cube" [ngStyle]="{ 'background-color': rowItem?.themeValue }"></div>
+                  </td>
+                  <td dTableCell>{{ rowItem?.description }}</td>
+                </tr>
+              </ng-template>
+            </tbody>
+          </d-data-table>
+          <div *ngIf="index === 4" style="margin-top: 10px">
+            <span>{{ 'components.design-color.colorDemo.instance.formColor' | translate }}</span>
+            <div class="swatches">
+              <div *ngFor="let col of colorTypeList; let index = index" class="formColor">
+                <div *ngFor="let block of colorNumberList; let idx = index">
+                  <div class="swatches-block" [ngStyle]="{ color: idx > 4 ? '#fff' : '#252b3a' }" [ngClass]="'block-' + col + '-' + block">
+                    <div>{{ '$devui-' + col + '-' + block }}</div>
+                    <div>{{ colorList[index][idx] }}</div>
+                  </div>
+                </div>
+                {{ col }}
+              </div>
+            </div>
+            <div class="swatches">
+              <!--            <div *ngFor="let col of colorTypeSecList, let index = index" class="formColor">-->
+              <!--              <div *ngFor="let block of colorNumberList; let idx = index">-->
+              <!--                <div class="swatches-block" [ngStyle]="{ color: idx > 4 || index > 2 ?-->
+              <!--                '#fff' : '#252b3a' }" [ngClass]="'block-' + col + '-' + block ">-->
+              <!--                  {{ '$devui-' + col + '-' + block }}-->
+              <!--                </div>-->
+              <!--              </div>-->
+              <!--              {{ col }}-->
+              <!--            </div>-->
+            </div>
+          </div>
+        </div>
       </ng-template>
+      <d-data-table #datatable [dataSource]="catalogs" [scrollable]="true" [showExpandToggle]="true">
+        <thead dTableHead>
+          <tr dTableRow>
+            <th dHeadCell></th>
+            <th dHeadCell>{{ 'components.design-color.colorDemo.instance.defaultTable.colorVar' | translate }}</th>
+            <th dHeadCell>{{ 'components.design-color.colorDemo.instance.defaultTable.normalColor' | translate }}</th>
+            <th dHeadCell>{{ 'components.design-color.colorDemo.instance.defaultTable.darkColor' | translate }}</th>
+            <th dHeadCell>{{ 'components.design-color.colorDemo.instance.defaultTable.themeValue' | translate }}</th>
+            <th dHeadCell>{{ 'components.design-color.colorDemo.instance.defaultTable.description' | translate }}</th>
+          </tr>
+        </thead>
+        <tbody dTableBody>
+          <ng-template let-rowItem="rowItem" let-rowIndex="rowIndex">
+            <tr dTableRow>
+              <td dTableCell class="cursor-pointer">
+                <div *ngIf="rowItem.expand !== undefined" (click)="toggleExpand(rowItem, rowIndex)">
+                  <span class="icon-chevron-up devui-icon-style" *ngIf="rowItem?.expand"></span>
+                  <span class="icon-chevron-down devui-icon-style" *ngIf="!rowItem?.expand"></span>
+                </div>
+              </td>
+              <td dTableCell [ngClass]="{ 'devui-catalog-title': rowItem.expand !== undefined }">{{ rowItem?.name }}</td>
+              <td dTableCell>
+                <div class="color-name">
+                  {{ rowItem?.light }}
+                </div>
+                <div *ngIf="rowItem?.light" class="color-cube" [ngStyle]="{ 'background-color': rowItem?.light }"></div>
+              </td>
+              <td dTableCell>
+                <div class="color-name">
+                  {{ rowItem?.dark }}
+                </div>
+                <div *ngIf="rowItem?.dark" class="color-cube" [ngStyle]="{ 'background-color': rowItem?.dark }"></div>
+              </td>
+              <td dTableCell>
+                <div class="color-name">
+                  {{ rowItem?.themeValue }}
+                </div>
+                <div *ngIf="rowItem?.themeValue" class="color-cube" [ngStyle]="{ 'background-color': rowItem?.themeValue }"></div>
+              </td>
+              <td dTableCell>{{ rowItem?.description }}</td>
+            </tr>
+          </ng-template>
+        </tbody>
+      </d-data-table>
     </d-tab>
 
-    <d-tab id="tab2" title="{{ 'components.design-color.colorDemo.instance.oldTable.tab' | translate }}" tabId="tab2">
+    <d-tab id="tab2" title="{{ 'components.design-color.colorDemo.instance.oldTable.tab' | translate }}">
       <ng-template dTabContent>
-        <d-data-table #datatable [dataSource]="colors" [scrollable]="true" [type]="'striped'">
+        <d-data-table #datatable [dataSource]="colors" [scrollable]="true">
           <d-column
             field="name"
             header="{{ 'components.design-color.colorDemo.instance.oldTable.colorVar' | translate }}"

@@ -1,11 +1,11 @@
 <d-data-table
-  [type]="'striped'"
   [dataSource]="basicDataSource"
   (cellClick)="cellClick($event)"
   (cellDBClick)="cellDBClick($event)"
   (rowDBClick)="rowDBClick($event)"
   (rowClick)="rowClick($event)"
   [scrollable]="true"
+  [tableOverflowType]="'overlay'"
 >
   <d-column [order]="1" field="$index" header="#" [width]="'50px'"></d-column>
   <d-column
@@ -37,7 +37,7 @@
     field="dob"
     header="Date of birth"
     [fieldType]="'date'"
-    [extraOptions]="{ dateFormat: 'YYYY/MM/DD' }"
+    [extraOptions]="{ dateFormat: 'yyyy/MM/dd' }"
     [width]="'200px'"
   ></d-column>
 </d-data-table>

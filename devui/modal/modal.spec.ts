@@ -6,8 +6,8 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ButtonModule } from '../button/button.module';
 import { DomHelper } from '../utils/testing/dom-helper';
 import * as EventHelper from '../utils/testing/event-helper';
-import { ModalTestComponent } from './demo/basic/modal-test.component';
 import { ModalAlertComponent } from './demo/customize/modal-alert.component';
+import { ModalTestComponent } from './demo/modal-test.component';
 import { DialogService } from './dialog.service';
 import { ModalModule } from './modal.module';
 import { ModalService } from './modal.service';
@@ -88,7 +88,7 @@ describe('dialog', () => {
 
       }).overrideModule(BrowserDynamicTestingModule, {
         set: {
-          
+
         }
       }).compileComponents();
     }));
@@ -127,7 +127,7 @@ describe('dialog', () => {
       const header = document.querySelector('d-modal-header') as HTMLElement;
       expect(header.style.cursor).toBe('move');
 
-      expect(document.querySelector('.close')).toBeTruthy();
+      expect(document.querySelector('.modal-header-close')).toBeTruthy();
 
       const body = document.querySelector('body') as HTMLElement;
       if (document.documentElement.scrollHeight > document.documentElement.clientHeight) {
@@ -182,7 +182,7 @@ describe('dialog', () => {
 
     it('should contentTemplate/escapable/backdropCloseable(true) works', fakeAsync(() => {
       component.dialogConfig.contentTemplate = component.testContentTemplate;
-      component.dialogConfig.escapable = false,
+      component.dialogConfig.escapable = false;
       component.dialogConfig.backdropCloseable = true;
 
       debugEl.query(By.css('.devui-btn')).nativeElement.dispatchEvent(new Event('click'));
@@ -279,7 +279,7 @@ describe('dialog', () => {
       const buttonEle2 = button2.querySelector('.devui-btn') as HTMLElement;
 
       expect(document.querySelector('#test-dialog-id')).toBeTruthy();
-      expect(modal.style.zIndex + '').toBe('1051');
+      expect(String(modal.style.zIndex)).toBe('1051');
       expect(document.querySelector('.modal-test-component')).toBeTruthy();
       expect(button1.id).toBe('test-dialog-btn-id-1');
       expect(button2.id).toBe('test-dialog-btn-id-2');
@@ -375,7 +375,7 @@ describe('modal', () => {
         providers: [ModalService],
       }).overrideModule(BrowserDynamicTestingModule, {
         set: {
-          
+
         }
       }).compileComponents();
     }));
@@ -429,7 +429,7 @@ describe('modal', () => {
         providers: [ModalService],
       }).overrideModule(BrowserDynamicTestingModule, {
         set: {
-          
+
         }
       }).compileComponents();
     }));
@@ -453,8 +453,8 @@ describe('modal', () => {
       fixture.detectChanges();
 
       const modalContent = document.querySelector('.modal-content') as HTMLElement;
-      expect(modalContent.offsetLeft + '').not.toBe('0');
-      expect(modalContent.offsetTop + '').not.toBe('0');
+      expect(String(modalContent.offsetLeft)).not.toBe('0');
+      expect(String(modalContent.offsetTop)).not.toBe('0');
 
       const buttonEle = document.querySelector('.modal-footer').querySelector('d-button');
       buttonEle.dispatchEvent(new Event('click'));

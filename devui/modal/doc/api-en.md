@@ -6,11 +6,11 @@ import { ModalModule } from 'ng-devui/modal';
 
 In the page:
 ```html
-<d-button (click)="openstandardDialog('standard')">click me!</d-button>
-Call dialogService.open() or modalService.open() in the openstandardDialog function to open the drawer board.
+<d-button (click)="openStandardDialog('standard')">open dialog</d-button>
+Call dialogService.open() or modalService.open() in the openStandardDialog function to open the drawer board.
 ```
 ```ts
-openstandardDialog(dialogtype?: string) {
+openStandardDialog(dialogtype?: string) {
     const results = this.dialogService.open({
       id: 'dialog-service',
       width: '346px',
@@ -45,7 +45,7 @@ openstandardDialog(dialogtype?: string) {
 | zIndex | `number` | 1050 | Optional. Z-index value in the dialog box displayed. |
 | backDropZIndex | `number` | 1049 | Optional. Z-index value in the back drop displayed of the dialog box. |
 | component | `Type<any>` | -- | Optional. Pop-up component. The component content is displayed in the pop-up box. | [Custom Dialog Box](demo#custom-dialog) |
-| injector | `Injector` | true | Optional. You can specify the syringe that will be used as the parent of the component. |
+| injector | `Injector` | -- | Optional. You can specify the syringe that will be used as the parent of the component. |
 | data | `object` | -- | Optional. The attribute of the component instance is transferred. | [Custom Dialog Box](demo#custom-dialog) |
 | showAnimation | `boolean` | true | Optional. Indicating whether to display animations. | [Custom Dialog Box](demo#custom-dialog) | ✔ |
 | backdropCloseable | `boolean` | true | Optional. Can the dialog box be closed when you click a blank area? | [Custom Dialog Box](demo#custom-dialog) |
@@ -72,10 +72,10 @@ openstandardDialog(dialogtype?: string) {
 | zIndex | `number` | 1050 | Optional. Z-index value in the dialog box displayed. | [Information](demo#message-hint) |
 | backDropZIndex | `number` | 1049 | Optional. Z-index value in the back drop displayed of the dialog box. |
 | maxHeight | `string` | -- | Optional. The maximum height of the dialog box (e.g '600px'). | [Standard Dialog Box](demo#standard-dialog) |
-| title | `string` | -- | Optional. Pop-up box title. | [Standard Dialog Box](demo#standard-dialog) |
+| title | `string` | -- | Optional. Pop-up box title.If the title and dialogtype are not configured, the title placeholder height is removed. | [Standard Dialog Box](demo#standard-dialog) |
 | content | `string\|Type<any>` | -- | Optional. Pop-up box content. Character strings and components are supported. | [Standard Dialog Box](demo#standard-dialog) |
-| html | `boolean` | -- | Optional. Whether content is HTML code. | [Warning Dialog Box](demo#warning-pop-up) |
-| injector | `Injector` | true | Optional. You can specify the syringe that will be used as the parent of the component. |
+| html | `boolean` | -- | Optional. Whether content is HTML code. | [Warning Dialog Box](demo#message-hint) |
+| injector | `Injector` | -- | Optional. You can specify the syringe that will be used as the parent of the component. |
 | data | `object` | -- | Optional. When content is set to Component, the attribute is transferred to the Component instance. | [Standard Dialog Box](demo#standard-dialog) |
 | buttons | `array` | -- | Optional. Pop-up box button, which supports custom text, style, disabling, and click events. | [Standard Dialog Box](demo#standard-dialog) |
 | showAnimation | `boolean` | true | Optional. Whether to display animation. | [Blocking dialog box closed](demo#intercept-dialog-closed) | ✔ |
@@ -83,7 +83,7 @@ openstandardDialog(dialogtype?: string) {
 | componentFactoryResolver | `ComponentFactoryResolver` | -- | Optional. Customized dynamic rendering component parser. |
 | onClose | `Function` | -- | Optional, Function called back after the dialog box is closed. | [Standard Dialog Box](demo#standard-dialog) |
 | beforeHidden | `Function\|Promise\|Observable` | -- | Optional. It can prevent dialog boxes from closing. | [Blocking dialog box closed](demo#intercept-dialog-closed) |
-| dialogtype | `string` | 'standard' | Optional. The options are ['standard'\|'success'\|'failed'\|'warning'\|'info']. | [Standard Dialog Box](demo#standard-dialog) |
+| dialogtype | `string` | 'standard' | Optional. The options are <br />`'standard' \| 'success' \| 'failed' \| 'warning' \| 'info'`. | [Standard Dialog Box](demo#message-hint) |
 | draggable | `boolean` | true | Optional. Whether the pop-up box can be dragged. |
 | placement | `enum('center'\|'top'\|'bottom')` | 'center' | Optional. This parameter is optional and specifies the position where the dialog box is displayed. |
 | offsetX | `string` | '0px' | Optional. Horizontal offset of the pop-up box. |
@@ -91,6 +91,7 @@ openstandardDialog(dialogtype?: string) {
 | bodyScrollable | `boolean` | true |Optional. Specifies whether the body can scroll after dialog is enabled. The default value is false. The scroll bar is hidden. Hiding the scroll bar may cause jitter. You can set the outer fixed to avoid scrolling and jitter. |[The outer layer is fixed to solve the jitter and scrolling problem](demo#template-fixed) |
 | contentTemplate | `TemplateRef<any>` | -- | Optional. It is a pop-up box content template, which is incompatible with content. | [Customizing a pop-up box content template](demo#template-content) |
 | escapable | `boolean` | true | Optional. Specifies whether to support the ESC key to close the pop-up window.|                                              |
+| showCloseBtn | `boolean` | true | Optional. Display Close Button. | |
 
 ### ModalOpenResult
 

@@ -94,6 +94,10 @@ export default {
   },
   gantt: {
     today: 'today',
+    day: 'Day',
+    week: 'Week',
+    month: 'Month',
+    milestone: 'milestone',
     monthsOfYear: [
       'January',
       'February',
@@ -119,10 +123,13 @@ export default {
     },
   },
   pagination: {
-    totalItem: 'Total Records',
     goTo: 'Go To',
     pageSize: 'Page Size',
     page: 'Page',
+    perPage: 'Per Page',
+    totalItem(total) {
+      return `Total ${total} Records`;
+    }
   },
   quadrant: {
     xAxisLabel: 'Urgency',
@@ -238,7 +245,7 @@ export default {
   categorySearch: {
     confirm: 'Confirm',
     cancel: 'Cancel',
-    selectFilterCondition: 'Please select a filter condition',
+    selectFilterCondition: 'Please select a filter condition:',
     getFindingMessage(msg) {
       return `find in '${msg}'`;
     },

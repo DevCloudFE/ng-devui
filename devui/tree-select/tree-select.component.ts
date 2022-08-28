@@ -18,9 +18,9 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
+import { SearchComponent } from 'ng-devui/search';
 import { ICheckboxInput, ITreeItem, OperableTreeComponent, TreeNode } from 'ng-devui/tree';
-import { addClassToOrigin, removeClassFromOrigin } from 'ng-devui/utils';
-import { DevConfigService, WithConfig } from 'ng-devui/utils/globalConfig';
+import { addClassToOrigin, DevConfigService, removeClassFromOrigin, WithConfig } from 'ng-devui/utils';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import DefaultIcons from './tree-default-icons';
@@ -34,15 +34,15 @@ import DefaultIcons from './tree-default-icons';
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => TreeSelectComponent),
-      multi: true
-    }
+      multi: true,
+    },
   ],
   preserveWhitespaces: false,
 })
-
 export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterViewInit, OnDestroy, OnChanges {
   @Input() checkableRelation: 'upward' | 'downward' | 'both' | 'none' = 'both';
-  @Input() set allowClear(allowClear) { // 废弃
+  @Input() set allowClear(allowClear) {
+    // 废弃
     this._allowClear = allowClear;
   }
 
@@ -96,9 +96,8 @@ export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterV
     protected renderer: Renderer2,
     protected changeDetectorRef: ChangeDetectorRef,
     private i18n: I18nService,
-    private devConfigService: DevConfigService,
-  ) {
-  }
+    private devConfigService: DevConfigService
+  ) {}
   @Input() @WithConfig() showAnimation = true;
   @Input() placeholder = '';
   @Input() disabled = false;
@@ -127,10 +126,11 @@ export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterV
   @ViewChild('selectHost', { static: true }) selectHost: ElementRef;
   @ViewChild('optionsContainer', { static: true }) optionsContainer: ElementRef;
   @ViewChild('tree', { static: true }) tree: OperableTreeComponent;
-  @ViewChild('searchInput') searchInput;
+  @ViewChild('searchInput') searchInput: SearchComponent;
   @ViewChild('searchInputModel') searchInputModel;
   @ViewChild('popper', { static: true }) popper;
   @ContentChild('iconTemplate') iconTemplatePassThrough;
+  // TODO: need to change to nodeToggledEvent
   @Output() nodeToggleEvent = new EventEmitter<any>();
   @Output() valueChanged = new EventEmitter<any>();
   @Input() virtualScroll = false;
@@ -156,8 +156,7 @@ export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterV
   private _sourceTree = [];
   private _allowClear: boolean;
   private timer: any;
-  @Input() readyEvent = (treeSelect: TreeSelectComponent) => {
-  }
+  @Input() readyEvent = (treeSelect: TreeSelectComponent) => {};
 
   private onChange = (_: any) => null;
   private onTouch = () => null;
@@ -170,8 +169,7 @@ export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterV
     }
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-  }
+  ngOnChanges(changes: SimpleChanges): void {}
 
   ngOnDestroy(): void {
     if (this.i18nSubscription) {
@@ -189,8 +187,8 @@ export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterV
 
   afterTreeInit() {
     if (this.virtualScroll) {
-      this.tree.treeFactory.flattenNodes.pipe(takeUntil(this.destroy$)).subscribe(data => {
-        const treeNodeOnDisplay = data.filter(node => !(node.data.isHide || node.data.hideInVirtualScroll));
+      this.tree.treeFactory.flattenNodes.pipe(takeUntil(this.destroy$)).subscribe((data) => {
+        const treeNodeOnDisplay = data.filter((node) => !(node.data.isHide || node.data.hideInVirtualScroll));
         this.validVirtualScrollHeight = Math.min(treeNodeOnDisplay.length * this.virtualScrollItemSize, this.virtualScrollHeightPx);
       });
     }
@@ -220,10 +218,16 @@ export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterV
     if (this.disabled) {
       return;
     }
-    if (this.timer) { clearTimeout(this.timer); }
+    if (this.timer) {
+      clearTimeout(this.timer);
+    }
     const applyNow = !this.timer;
-    this.timer = setTimeout(() => { this.timer = null; }, 200);
-    if (applyNow) { this.isOpen = !this.isOpen; }
+    this.timer = setTimeout(() => {
+      this.timer = null;
+    }, 200);
+    if (applyNow) {
+      this.isOpen = !this.isOpen;
+    }
   }
 
   private setI18nText() {
@@ -251,17 +255,17 @@ export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterV
 
   private prepareTree(treeNode: any, expandTree = false) {
     if (Array.isArray(treeNode)) {
-      return treeNode.map(node => this.prepareTree(node, expandTree));
+      return treeNode.map((node) => this.prepareTree(node, expandTree));
     } else if (treeNode) {
       let parentCheckedByChildren = false;
-      if (treeNode.hasOwnProperty(this.treeNodeChildrenKey)) {
+      if (Object.prototype.hasOwnProperty.call(treeNode, this.treeNodeChildrenKey)) {
         treeNode.open = expandTree ? true : treeNode.open;
         treeNode[this.treeNodeChildrenKey] = this.prepareTree(treeNode[this.treeNodeChildrenKey], expandTree);
         if (this.multiple) {
           [parentCheckedByChildren, treeNode.halfChecked] = this.resolveParentNode(treeNode[this.treeNodeChildrenKey]);
         }
       }
-      if (treeNode.hasOwnProperty(this.treeNodeIdKey)) {
+      if (Object.prototype.hasOwnProperty.call(treeNode, this.treeNodeIdKey)) {
         const nodeId = treeNode[this.treeNodeIdKey];
         if (this.multiple) {
           const selectedByValue = this.nodeSelected(nodeId);
@@ -273,6 +277,7 @@ export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterV
             insertObject[this.treeNodeTitleKey] = treeNode[this.treeNodeTitleKey];
             (this.value as any[]).push(insertObject);
             // 赋值触发setValue设置valueType和valueLength
+            /* eslint-disable-next-line no-self-assign*/
             this.value = this.value;
           }
         } else {
@@ -295,18 +300,19 @@ export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterV
 
     if (this.multiple && Array.isArray(this.value)) {
       // polyfill Array.prototype.includes()
-      return this.value.map(_ => _[this.treeNodeIdKey]).indexOf(treeNodeId) > -1;
+      return this.value.map((_) => _[this.treeNodeIdKey]).indexOf(treeNodeId) > -1;
     } else {
       return this.value[this.treeNodeIdKey] && treeNodeId === this.value[this.treeNodeIdKey];
     }
   }
 
   private resolveParentNode(treeNodes: ITreeItem[]): boolean[] {
-    const childrenFullCheckedCount = treeNodes.filter(_ => _.isChecked).length;
-    const childrenCheckedCount = treeNodes.filter(_ => _.isChecked || _.halfChecked).length;
+    const enableParentNodeCheckByChild = this.checkableRelation === 'both' || this.checkableRelation === 'upward';
+    const childrenFullCheckedCount = enableParentNodeCheckByChild && treeNodes.filter((_) => _.isChecked).length;
+    const childrenCheckedCount = enableParentNodeCheckByChild && treeNodes.filter((_) => _.isChecked || _.halfChecked).length;
     return [
       childrenFullCheckedCount > 0 && treeNodes.length === childrenFullCheckedCount,
-      childrenCheckedCount > 0 && treeNodes.length > childrenFullCheckedCount
+      childrenCheckedCount > 0 && treeNodes.length > childrenFullCheckedCount,
     ];
   }
 
@@ -316,9 +322,9 @@ export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterV
 
   onOperableNodeChecked(selectedNodes: ITreeItem[]) {
     const selectedValueExtractor = (_selectedNodes) => {
-      return this.leafOnly ?
-        _selectedNodes.filter(_ => !_.data.isParent).map(_ => _.data.originItem) :
-        _selectedNodes.map(_ => _.data.originItem);
+      return this.leafOnly
+        ? _selectedNodes.filter((_) => !_.data.isParent).map((_) => _.data.originItem)
+        : _selectedNodes.map((_) => _.data.originItem);
     };
     if (this.multiple) {
       this.value = selectedValueExtractor(selectedNodes);
@@ -326,14 +332,15 @@ export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterV
     }
   }
 
-  onOperableNodeSelected(selectedNode: TreeNode) {
+  onOperableNodeSelected(selectedNode: TreeNode | TreeNode[]) {
+    const node = selectedNode as TreeNode;
     if (!this.multiple) {
-      if (this.leafOnly && selectedNode.data.isParent) {
+      if (this.leafOnly && node.data.isParent) {
         return;
       }
-      if (selectedNode.data.isActive) {
-        this.currentActiveNode = selectedNode.data.originItem;
-        this.value = selectedNode.data.originItem;
+      if (node.data.isActive) {
+        this.currentActiveNode = node.data.originItem;
+        this.value = node.data.originItem;
         // Configurable close on node selected
         if (this.closeOnNodeSelected) {
           this.isOpen = false;
@@ -343,8 +350,10 @@ export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterV
           this.currentActiveNode = null;
           this.value = null;
         } else {
-          selectedNode.data.isActive = true;
-          if (this.closeOnNodeSelected) { this.isOpen = false; }
+          node.data.isActive = true;
+          if (this.closeOnNodeSelected) {
+            this.isOpen = false;
+          }
         }
       }
 
@@ -369,7 +378,7 @@ export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterV
   visualizeMultipleValue() {
     if (this.tree && this.tree.treeFactory) {
       const selectedNodes = this.selectedValue() as any[];
-      const valueText = selectedNodes.map(_ => _[this.treeNodeTitleKey]);
+      const valueText = selectedNodes.map((_) => _[this.treeNodeTitleKey]);
       this.displayValue = valueText;
     } else {
       this.emptyInput();
@@ -397,11 +406,15 @@ export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterV
     if (popperState && this.searchable) {
       this.focusSearchInput();
     }
+
+    if (popperState && this.virtualScroll && this.tree) {
+      this.tree.operableTree.viewPort.checkViewportSize();
+    }
   }
 
   private focusSearchInput() {
-    if (this.searchInput.nativeElement) {
-      this.searchInput.nativeElement.focus();
+    if (this.searchInput.filterInputElement.nativeElement) {
+      this.searchInput.filterInputElement.nativeElement.focus();
     }
   }
 
@@ -410,17 +423,14 @@ export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterV
     if (typeof searchRes === 'boolean') {
       this.noRecord = searchRes;
     } else if (Array.isArray(searchRes)) {
-      this.noRecord = searchRes.every(res => !res);
+      this.noRecord = searchRes.every((res) => !res);
     }
     this.tree.treeFactory.getFlattenNodes();
     this.popper.update();
   }
 
   private registerSearchListener() {
-    this.searchInputModel.valueChanges.pipe(
-      debounceTime(500),
-      distinctUntilChanged()
-    ).subscribe(searchString => {
+    this.searchInputModel.valueChanges.pipe(debounceTime(500), distinctUntilChanged()).subscribe((searchString) => {
       this.search(searchString);
     });
   }
@@ -432,7 +442,8 @@ export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterV
       this.tree.treeFactory.checkNodesById(item[this.treeNodeIdKey], false);
       const curValue = this.tree.treeFactory.getCheckedNodes();
       this.value = this.leafOnly
-        ? curValue.filter(node => !node.data.isParent).map(node => node.data.originItem) : curValue.map(node => node.data.originItem);
+        ? curValue.filter((node) => !node.data.isParent).map((node) => node.data.originItem)
+        : curValue.map((node) => node.data.originItem);
     } else {
       this.clearAll();
     }

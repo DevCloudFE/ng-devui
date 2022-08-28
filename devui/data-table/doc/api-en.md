@@ -22,6 +22,7 @@ On the page:
 | scrollable | `boolean` | -- | Optional. Whether the table content can be viewed by scrolling when the table exceeds the container. | [Table interaction](demo#table-interaction) |
 | maxWidth | `string px` | -- | Optional. Limit the maximum table width. By default, the parent container is full. |
 | maxHeight | `string px` | -- | Optional. The maximum height is limited. The default value is | [fixed table header](demo#table-fixing) |
+| minHeight | `string px` | -- | Optional, limit the minimum height | -- |
 | size      | `'sm'\|'md'\|'lg'`| 'sm'  | Optional. Specifies the table size, which corresponds to 40 px, 48 px, and 56 px respectively | [Table style](demo#mutil-styles) |
 | rowHoveredHighlight | `boolean` | true | Optional. Indicating whether to highlight a line when the cursor is hovering. The default value is highlighted. |
 | generalRowHoveredData | `boolean` | false | Optional. It is used to configure columns to implement the table. When the cursor is moved to a row, $hovered is recorded to the row item. By default, $hovered is not recorded. |
@@ -31,11 +32,11 @@ On the page:
 | containFixHeaderHeight | `boolean` | false | Optional. whether the height specified by the fixed header includes the height of the header, the height set by tableHeight is the height of the table body by default | [Fixed table header virtual scrolling](demo#fixed-virtual-scroll) |
 | fixHeader | `boolean` | false | Optional. Whether the table header is fixed | [Fixed table header virtual scrolling](demo#fixed-virtual-scroll) |
 | checkableRelation | [`CheckableRelation`](#checkablerelation) | -- | Optional. This parameter specifies whether the parent and child selections in the tree table are associated. | [Tree table](demo#tree-form) |
-| loadChildrenTable | `Promise` | -- | Optional. It is the callback of subtable expansion, which is used to asynchronously load subtables. | [Tree table](demo#tree-form) |
-| loadAllChildrenTable | `Promise` | -- | Optional. It is the callback for expanding all subtables in the table header. It is used to asynchronously load all subtables. | [Tree table](demo#tree-form) |
+| loadChildrenTable | ``(rowItem: any) => Promise<any>` | -- | Optional. It is the callback of subtable expansion, which is used to asynchronously load subtables. | [Tree table](demo#tree-form) |
+| loadAllChildrenTable | `() => Promise<any>` | -- | Optional. It is the callback for expanding all subtables in the table header. It is used to asynchronously load all subtables. | [Tree table](demo#tree-form) |
 | colDraggable | `boolean` | false | Optional. Whether columns can be dragged or sorted | [Column dragging](demo#column-dragging) |
 | colDropFreezeTo | `number` | 0 | Optional. The first n columns cannot be dragged when the table columns can be sorted. | [Column dragging](demo#column-dragging) |
-| virtualScroll | `boolean` | false | Optional. Specifies whether to enable virtual scrolling. | [Virtual scrolling](demo#virtual-scroll) |
+| virtualScroll | `boolean` | false | Optional. Specifies whether to enable virtual scrolling. Virtual scrolling parameters do not take effect for tree tables. To use tree-shaped virtual scrolling, see the implementation of the demo for tree tables with a large amount of data. | [Virtual scrolling](demo#virtual-scroll) |
 | virtualItemSize | `number` | 40 | Optional. Height of each row during virtual scrolling. The default value is 40`px`. | [Virtual scrolling](demo#virtual-scroll) |
 | virtualMinBufferPx | `number` | 80 | Optional. Minimum pixel height of the buffer during virtual scrolling. If the pixel height is less than this value, the new structure is loaded. | [Virtual scrolling](demo#virtual-scroll) |
 | virtualMaxBufferPx | `number` | 200 | Optional. Maximum pixel height of the buffer during virtual scrolling | [virtual scrolling](demo#virtual-scroll) |
@@ -51,15 +52,17 @@ On the page:
 | hideColumn | `string[]` | -- | Optional. Used to hide columns, Transfer the corresponding field. |
 | pageAllChecked | `boolean` | -- | Optional. Select all rows on the current page. |
 | onlyOneColumnSort | `boolean` | -- | Optional. Whether to restrict the output of multi-column sorting to one item | [Table interaction](demo#table-interaction) |
-| multiSort | [`SortEventArg[]`](#sorteventarg) | [] | Optional. It is a multi-column selection array, which is used to guide the columns to be sorted. | [Table interaction](demo#table-interaction) |
+| multiSort | [`SortEventArg[]`](#sorteventarg) | [] | Optional. It is a multi-column selection array, which is used to guide the columns to be sorted.This parameter is valid only in column mode. | [Table interaction](demo#table-interaction) |
 | resizeable | `boolean` | -- | Optional. Whether the column width can be adjusted by dragging. | [Table interaction](demo#table-interaction) |
 | timeout | `number` | 300 | Optional. This parameter is used to distinguish the click interval when the click and double-click events are bound at the same time. The default value is 300`ms`. You can set this parameter to 0 when the two events are used at the same time. |
 | headerExpandConfig | [`TableExpandConfig`](#tableexpandconfig) | -- | Optional. Extra content under the header | [Extended line](demo#expand-row) |
-| beforeCellEdit | `Promise` | -- | Optional. Interception method before cell editing. <br>resolve(extraOptions) updates extraOptions of the column. | [edit cell](demo#edit-cell) |
+| beforeCellEdit | `(rowItem: any, column: any) => Promise<any>` | -- | Optional. Interception method before cell editing. <br>resolve(extraOptions) updates extraOptions of the column. | [edit cell](demo#edit-cell) |
 | headerBg | `boolean` | false | Optional. Indicating whether to display the background color in the table header | [Table style](demo#mutil-styles) |
 | tableLayout | `'fixed'\|'auto'` | 'fixed' | Optional. Table layout | [Table style](demo#mutil-styles) |
 | borderType | `''\|'bordered'\|'borderless'` | '' | Optional. Table border type. The default value is row border. The options are bordered (full border) and borderless (no border). | [Table style](demo#mutil-styles) |
 | striped | `boolean` | false | Optional. Whether to display the table with zebra stripes. | [Table style](demo#mutil-styles)                      |
+| shadowType | `'normal' \| 'embed' ` | 'embed' | Optional. Whether the table is of the shadow or embedded type | [table style](demo#mutil-styles) |
+| tableOverflowType | ``Overlay'\ | 'auto' `|'auto' | Optional. The scroll bar is displayed only when the cursor is hovered in overlay mode. | [Table style](demo#mutil-styles) |
 
 ## d-data-table event
 
@@ -70,7 +73,7 @@ On the page:
 | resize | `EventEmitter<ColumnResizeEventArg>` | Column Width Change Event, Returning Cell Information | [Table Interaction](demo#table-interaction) |
 | childrenTableClose | `EventEmitter<any>` | Event for closing a sublist. The list row information is returned. |
 | allChildrenTableClose | `EventEmitter<any>` | All Sublist Close Event |
-| multiSortChange | `EventEmitter<SortEventArg[]>` | Change event, which is used to update the multi-column selection array and return cell information. | [Table interaction](demo#table-interaction) |
+| multiSortChange | `EventEmitter<SortEventArg[]>` | Change event, which is used to update the multi-column selection array and return cell information.This parameter is valid only in column mode. | [Table interaction](demo#table-interaction) |
 | cellClick | `EventEmitter<CellSelectedEventArg>` | Cell Click Event, Returning Cell Information | [Table Interaction](demo#table-interaction) |
 | cellDBClick | `EventEmitter<CellSelectedEventArg>` | Cell Double-click Event, Returning Cell Information | [Table Interaction](demo#table-interaction) |
 | rowClick | `EventEmitter<RowSelectedEventArg>` | Table row click event, which returns row information | [Table interaction](demo#table-interaction) |
@@ -80,6 +83,7 @@ On the page:
 | cellEditEnd | `EventEmitter<CellSelectedEventArg>` | Table cell editing end event. Cell information is returned. | [Edit cell](demo#edit-cell) |
 | tableScrollEvent | `EventEmitter<Event>` | Table Internal Rolling Event | |
 |   columnDragEnd  |    `EventEmitter<{form: index, to: index}>`    |            Column Drag End Event        |   [Column dragging](demo#column-dragging) |
+| loadMore | `EventEmitter<{any}>` | Lazy Loading Completion Event|[Lazy Loading](demo#lazy-loading-of-list-data) |
 
 ## d-data-table public method
 
@@ -129,7 +133,7 @@ On the page:
 | filterMultiple | `boolean` | -- | Optional. Sets the column to be selected. true indicates that multiple choices are selected, and false indicates that only one choice is selected. | [Table interaction](demo#table-interaction) |
 | filterBoxWidth | `string` | -- | Optional. Width of the filter dialog box, for example, 300px. |
 | filterBoxHeight | `string` | -- | Optional. Height of the filter dialog box, for example, 400px. |
-| beforeFilter | `function\|Promise\|Observable` | -- | Optional. Callback function before the table filtering dialog box is displayed. If false is returned, the dialog box is blocked. | [Table interaction](demo#table-interaction) |
+| beforeFilter | `(value) => boolean \| Promise<boolean> \| Observable<boolean>` | -- | Optional. Callback function before the table filtering dialog box is displayed. If false is returned, the dialog box is blocked. | [Table interaction](demo#table-interaction) |
 | sortable | `boolean` | -- | Optional. Whether the column can be sorted | [Table interaction](demo#table-interaction) |
 | sortDirection | `SortDirection` | -- | Optional. Sets the sorting status of the column. | [Table interaction](demo#table-interaction) |
 | nestedColumn | `boolean` | -- | Optional. Indicates whether to display the expand or collapse icon of the table header in the tree table. | [Tree table](demo#tree-form) |
@@ -139,24 +143,27 @@ On the page:
 | fixedRight | `string` | -- | Optional. The value is fixed to the right of the column, for example, 100px | [fixed column](demo#fixed-column) |
 | showSortIcon | `boolean` | false | Optional. Indicates whether to display the inactive sorting icon. The icon is not displayed by default. | [Table interaction](demo#table-interaction) |
 | showFilterIcon | `boolean` | false | Optional. Indicates whether to display the inactive filter icon. The icon is not displayed by default. | [Table interaction](demo#table-interaction) |
+|     column      |           `any`           | --   |                              Optional. Data can be transparently transmitted to the user-defined template of filterList.                              |               |
 
 ## dHeadCell Event
 
 | Event | Type | Description | Jump to Demo |
 | :----------------------: | :-----------------: | :-------------------------------------------------: | :------------------------------------------------------- |
-| filterChange | `FilterConfig[]` | Callback event for confirming the filtering and returning the selected filtering array. | [Table interaction](demo#table-interaction) |
-| sortChange | `SortEventArg` | Sorting callback event, which returns the sorting information of the column. | [Table interaction](demo#table-interaction) |
-| resizeStartEvent | `MouseEvent` | Event when the column width adjustment starts |
-| resizingEvent | `{width: string}` | Event that the column width is being adjusted |
-| resizeEndEvent | `{width: string}` | Event when the column width adjustment ends | [Table interaction](demo#table-interaction) |
-| toggleChildrenTableEvent | `boolean` | Event for expanding and collapsing all subtables. The value true indicates expanding, and the value false indicates collapse. |
+| filterChange | `EventEmitter<FilterConfig[]>` | Callback event for confirming the filtering and returning the selected filtering array. | [Table interaction](demo#table-interaction) |
+| filterToggle | `EventEmitter<{isOpen: boolean;checklist: FilterConfig[];}>` | Filter Panel Expansion and Collapse Event | [Table Interaction](demo#table-interaction) |
+| sortChange | `EventEmitter<SortEventArg>` | Sorting callback event, which returns the sorting information of the column. | [Table interaction](demo#table-interaction) |
+| resizeStartEvent | `EventEmitter<MouseEvent>` | Event when the column width adjustment starts |
+| resizingEvent | `EventEmitter<{ width: string }>` | Event that the column width is being adjusted |
+| resizeEndEvent | `EventEmitter<{ width: string }>` | Event when the column width adjustment ends | [Table interaction](demo#table-interaction) |
+| toggleChildrenTableEvent | `EventEmitter<boolean>` | Event for expanding and collapsing all subtables. The value true indicates expanding, and the value false indicates collapse. |
+| sortDirectionChange | `EventEmitter<SortDirection>` | Sort Order Direction Change Event|
 
 # dTableCell
 
 ## dTableCell Parameter
 
-| Parameter name | Type | Default value | Description | Jump to Demo |Global Config| 
-| :-------------: | :-----------------------------: | :----- | :------------------------------------------------------------: | :------------------------------------------------- |
+| Parameter name | Type | Default value | Description | Jump to Demo |
+| :-------------: | :-----------------------------: | :-----: | :------------------------------------------------: | :----------------------: |
 | editable | `boolean` | -- | Optional. Whether a cell can be edited | [edit cell](demo#edit-cell) |
 | editableTip | `'hover'\|'btn'` | -- | Optional. This parameter indicates the editing prompt. The background color of the hover changes. The edit button is displayed in the btn. | [edit cell](demo#edit-cell) |
 | nestedColumn | `boolean` | -- | Optional. Display the expansion and collapse icons when the row in the tree table contains subtables. | [Tree table](demo#tree-form) |
@@ -176,8 +183,8 @@ On the page:
 
 | Event | Type | Description | Jump to Demo |
 | :-------------------: | :-------: | :-----------------------------------------------------: | :------------------------------------------------- |
-| editStatusEvent | `boolean` | Cell editing status event | [edit cell](demo#edit-cell) |
-| toggleChildTableEvent | `boolean` | Event for expanding and collapsing the subtable in the current row. The options are true and false. | [Tree table](demo#tree-form) |
+| editStatusEvent | `EventEmitter<boolean>` | Cell editing status event | [edit cell](demo#edit-cell) |
+| toggleChildTableEvent | `EventEmitter<boolean>` | Event for expanding and collapsing the subtable in the current row. The options are true and false. | [Tree table](demo#tree-form) |
 
 #### Configure the row template of the dTableBody when the user-defined template is used.
 
@@ -352,6 +359,7 @@ export enum SortDirection {
 | Event | Type | Description | Jump to Demo |
 | :----------: | :--------------: | :----------------------------------: | :------------------------------------------------------- |
 | filterChange | `FilterConfig[]` | Callback event for confirming the filtering and returning the selected filtering array. | [Table interaction](demo#table-interaction) |
+| filterToggle | `EventEmitter<{isOpen: boolean;checklist: FilterConfig[];}>` | Filter Panel Expansion and Collapse Event | [Table Interaction](demo#table-interaction) |
 
 ## rowItem parameter
 
@@ -432,3 +440,368 @@ colspan: number;
 }
 ```
 Note: Empty cells also need to be indicated. Set rowspan/colspan to 0 based on the content. If column width dragging and multi-row headers are used at the same time, attach the width to the column content. If the column width of the first row is incorrect, manually add the $width attribute for advancedHeader[rowNumber].
+
+#### Tree table with a large amount of data
+
+## virtual-scroll-tree-table parameter
+| Parameter name | Type | Default value | Description | Jump to Demo |
+| :---------------: | :-----------------: | :----- | :-------------------------------------------------------------------------------------------------------: |:-----------------:  |
+|    dataSource     |       `any[]`      | --     |                                        Required. Flattened data source, used to render table data. The public method flatTreeData can be used to flatten the tree structure.        |[Tree table with a large amount of data Basic](demo#virtual-scroll-tree-table-basic)|
+|  editOption |       `any[]`      | --     |                                        Optional. Used to configure the resource of the drop-down list box during modification.        |[Tree table with a large amount of data Operation](demo#virtual-scroll-tree-table-operation)|
+|     displayRowNum      |      `number`      | 10     |                                        Optional. Used to configure the initial number of rows to be displayed in a table.      |[Tree table with a large amount of data Basic](demo#virtual-scroll-tree-table-basic)|
+|     rowHeight      |      `number`      |  -    |                                        This parameter is optional. It is used to configure the table row height. If this parameter is not transferred, the value of DataTablePropertiesInterface.size is used.                                   |[Tree table with a large amount of data Basic](demo#virtual-scroll-tree-table-basic)|
+|     dataTableProperties      |      [`DataTablePropertiesInterface`](#DataTablePropertiesInterface)      | --     |         Optional. Support for original parameters of dataTable, Parameters defined in DataTablePropertiesInterface can be supported.                           |[Tree table with a large amount of data Interaction](demo#virtual-scroll-tree-table-interaction)|
+|     draggable      |      `boolean`      | false     |                   Optional. Indicates whether to enable row dragging in the table.    |[Tree table with a large amount of data Interaction](demo#virtual-scroll-tree-table-interaction)|
+|     checkableRelation      | `CheckableRelation`  | { upward: true, downward: true }  |       Optional, Logical relationship between parent and child in the table tree      | - |
+
+## virtual-scroll-tree-table event
+| Event | Type | Description | Jump to Demo |
+| :-------------------: | :------------------------------------: | :------------------------------------------------------: | :------------------------------------------------------: |
+|        save         |  `EventEmitter<any>`  |               Returns the data after the operation is changed.               | [Tree table with a large amount of data Basic](demo#virtual-scroll-tree-table-basic) |
+|        allChecked         |  `EventEmitter<any>`  |               Return to Table Header Checkbox Status.               | [Tree table with a large amount of data Interaction](demo#virtual-scroll-tree-table-interaction) |
+
+The original datatable events can be transparently transmitted. The multiSortChange, cellClick, cellDBClick, rowClick, rowDBClick, cellEditStart, cellEditEnd, and resize events are supported.
+
+## Customizing Templates and Operation Columns in d-column Mode
+
+``` xml
+<d-column field="category" header="Category" [order]="1"
+[width]="'70px'" [editable]="true" [extraOptions]="{editableTip:'btn'}">
+    <d-cell>
+    <ng-template let-rowItem="rowItem">
+        <span>{{ rowItem.category }}</span>
+    </ng-template>
+    </d-cell>
+    <d-cell-edit>
+    <ng-template let-rowItem="rowItem" let-column="column">
+        <div class="customized-editor edit-padding-fix">
+        <d-select
+            [options]="editOption.category"
+            autoFocus="true"
+            toggleOnFocus="true"
+            [appendToBody]="true"
+            [(ngModel)]="rowItem.category"
+            (ngModelChange)="onEditEnd(rowItem, 'categoryEdit')"
+        >
+        </d-select>
+        </div>
+    </ng-template>
+    </d-cell-edit>
+</d-column>
+
+<d-column field="operation" header="Operation" [width]="'130px'" [order]="6">
+    <d-cell>
+    <ng-template let-rowItem="rowItem">
+        <span>
+        <ng-container *ngIf="!isSearch">
+            <div *ngIf="rowItem.node_type" class="operationIcon icon-add-directory" title="Add Folder" (click)="addTreeNodeByRowItem(rowItem, 'addChild', 1)"></div>
+            <div *ngIf="rowItem.node_type" class="operationIcon icon-add-file" title="Add Node" (click)="addTreeNodeByRowItem(rowItem , 'addChild', 0)"></div>
+            <div class="operationIcon icon-add-sub-node" title="Insert Folder" (click)="addTreeNodeByRowItem(rowItem, 'insertAfter', 1)"></div>
+            <div class="operationIcon icon-add-sub-module" title="Insert Node" (click)="addTreeNodeByRowItem(rowItem, 'insertAfter', 0)"></div>
+
+            <div class="operationIcon icon-copy" title="Copy" (click)="copyAndCut(rowItem, 'copy')"></div>
+            <div class="operationIcon icon-cut" title="Cut" (click)="copyAndCut(rowItem, 'cut')"></div>
+            <div *ngIf="rowItem.node_type && saveCopyClickNode" class="operationIcon icon-copy-to-new" title="Paste" (click)="paste(rowItem, 'paste')"></div>
+            <div *ngIf="rowItem.node_id === saveCopyClickNode" class="operationIcon icon-add-manual-use-case" title="Paste to Root" (click)="paste(rowItem, 'toRoot')"></div>
+        </ng-container>
+        <div class="operationIcon icon-delete" title="delete" (click)="delete(rowItem)"></div>
+        </span>
+    </ng-template>
+    </d-cell>
+</d-column>
+```
+
+## Expanding or collapsing a tree table with a large amount of data
+
+Use @ViewChild to invoke the expand/collapse all function
+
+``` xml
+<d-button [disabled]="isSearch" *ngIf="!isOpenAll" class="golbalBtn allNodesExpand" icon="icon-expand-info" bsStyle="common" (click)="toggleAllNodesExpand(true)">
+Expand All</d-button>
+<d-button [disabled]="isSearch" *ngIf="isOpenAll" class="golbalBtn allNodesCollapse" icon="icon-collapse-info" bsStyle="common" (click)="toggleAllNodesExpand(false)">Fold All</d-button>
+```
+
+``` javascript
+@ViewChild('VirtualTableTree') VirtualTableTree: VirtualScrollTreeTableComponent;
+
+toggleAllNodesExpand(e) {
+    this.VirtualTableTree.toggleAllNodesExpand(e);
+    this.isOpenAll = e;
+}
+
+// Use @ViewChild to call toggleAllNodesExpand method in VirtualScrollTreeTableComponent
+```
+
+## Tree table search for a large amount of data
+
+Use @ViewChild to invoke the search function
+
+``` xml
+<div class="searchSelect">
+    <d-select [options]="searchSelectSource" [filterKey]="'name'" [(ngModel)]="searchAttr" (ngModelChange)="searchSelectChange()"> </d-select>
+</div>
+<d-search
+    style="width: 300px"
+    [placeholder]="'search'"
+    [isKeyupSearch]="true"
+    (searchFn)="search($event)"
+></d-search>
+```
+
+``` javascript
+@ViewChild('VirtualTableTree') VirtualTableTree: VirtualScrollTreeTableComponent;
+
+searchSelectChange() {
+  this.BigTableTree.searchAttr = this.searchAttr;
+  this.BigTableTree.searchSelectChange();
+}
+
+search(event) {
+  this.VirtualTableTree.search(event);
+  if(event) {
+    this.isSearch = true;
+  } else {
+    this.isSearch = false;
+  }
+}
+
+// Call the searchSelectChange and search methods in VirtualScrollTreeTableComponent using @ViewChild
+```
+
+## Adding a large amount of data to a tree table
+
+Use @ViewChild to invoke the add function
+
+``` xml
+// Global Add
+<d-button [disabled]="isAddGlobalData || isSearch" class="golbalBtn addNode" icon="icon-add-file" bsStyle="primary" (click)="addRootNode('node')">Add Node</d-button>
+<d-button [disabled]="isAddGlobalData || isSearch" class="golbalBtn addFolder" icon="icon-add-directory" bsStyle="common" (click)="addRootNode('folder')">Add Folder</d-button>
+
+// Add Operation Column
+<div *ngIf="rowItem.node_type" class="operationIcon icon-add-directory" title="Add Folder" (click)="addTreeNodeByRowItem(rowItem, 'addChild', 1)"></div>
+<div *ngIf="rowItem.node_type" class="operationIcon icon-add-file" title="Add Node" (click)="addTreeNodeByRowItem(rowItem , 'addChild', 0)"></div>
+<div class="operationIcon icon-add-sub-node" title="Insert Folder" (click)="addTreeNodeByRowItem(rowItem, 'insertAfter', 1)"></div>
+<div class="operationIcon icon-add-sub-module" title="Insert Node" (click)="addTreeNodeByRowItem(rowItem, 'insertAfter', 0)"></div>
+```
+
+``` javascript
+@ViewChild('VirtualTableTree') VirtualTableTree: VirtualScrollTreeTableComponent;
+
+// Users can customize data templates.
+addTemplate: any = {
+  "property": "addPro",
+  "description": "addDes",
+  "category": "Dynamic"
+}
+
+// Global Add
+addRootNode(status) {
+  this.isAddGlobalData = true;
+  this.VirtualTableTree.addRootNode(status, this.addTemplate);
+  this.isAddGlobalData = false;
+}
+
+// Call the addGolbal method in VirtualScrollTreeTableComponent using @ViewChild
+
+// Add Operation Column
+addTreeNodeByRowItem(rowItem: TreeNodeInterface, action: 'addChild' | 'insertBefore' | 'insertAfter', nodeType: VirtualTreeNodeType) {
+  this.VirtualTableTree.addTreeNodeByRowItem(rowItem, status, this.addTemplate);
+}
+
+// Call the addOperation method in VirtualScrollTreeTableComponent using @ViewChild
+```
+
+## Copying and Pasting Tree Tables with a Large Amount of Data
+
+Use @ViewChild to invoke the copying and pasting function
+
+``` xml
+<div class="operationIcon icon-copy" title="Copy" (click)="copyAndCut(rowItem, 'copy')"></div>
+<div class="operationIcon icon-cut" title="Cut" (click)="copyAndCut(rowItem, 'cut')"></div>
+<div *ngIf="rowItem.node_type && saveCopyClickNode" class="operationIcon icon-copy-to-new" title="Paste" (click)="paste(rowItem, 'paste')"></div>
+<div *ngIf="rowItem.node_id === saveCopyClickNode" class="operationIcon icon-add-manual-use-case" title="Paste to Root" (click)="paste(rowItem, 'toRoot')"></div>
+```
+
+``` javascript
+@ViewChild('VirtualTableTree') VirtualTableTree: VirtualScrollTreeTableComponent;
+
+copyAndCut(rowItem, status) {
+  this.saveCopyClickNode = rowItem.node_id;
+  if(status === 'cut') {
+    this.isCut = true;
+  }
+  this.VirtualTableTree.copyAndCut(rowItem, status);
+}
+
+paste(rowItem, status) {
+  this.VirtualTableTree.paste(rowItem, status);
+  if(this.isCut) {
+    this.saveCopyClickNode = "";
+    this.isCut = false;
+  }
+}
+
+// Use @ViewChild to call copyAndCut and paste methods in VirtualScrollTreeTableComponent
+```
+
+## Removing a large amount of data from a tree table
+
+Use @ViewChild to invoke the delete function
+``` xml
+<div class="operationIcon icon-delete" title="delete" (click)="delete(rowItem)"></div>
+```
+
+``` javascript
+@ViewChild('VirtualTableTree') VirtualTableTree: VirtualScrollTreeTableComponent;
+
+delete(rowItem) {
+  this.VirtualTableTree.delete(rowItem);
+}
+
+// Call the delete method in VirtualScrollTreeTableComponent using @ViewChild
+```
+
+## Drag a large amount of data from a tree table
+
+Use @ViewChild to invoke the drag function
+
+``` xml
+<d-column field="drag" header="" [width]="'15px'" [order]="1">
+  <d-cell>
+    <ng-template let-rowItem="rowItem" let-rowIndex="rowIndex">
+      <span [ngClass]="{ 'table-drag-row-handle': rowItem.node_type === 0 }">
+        <div class="icon-drag-small dragLine" *ngIf="rowItem.node_type === 0" (mousedown)="dragDown($event, rowItem, rowIndex)"></div>
+      </span>
+    </ng-template>
+  </d-cell>
+</d-column>
+```
+
+``` javascript
+@ViewChild('VirtualTableTree') VirtualTableTree: VirtualScrollTreeTableComponent;
+
+dragDown(downEvent, rowItem, rowIndex) {
+  this.VirtualTableTree.dragDown(downEvent, rowItem, rowIndex, document);
+}
+
+// Use @ViewChild to call dragDown method in VirtualScrollTreeTableComponent
+```
+
+## check a large amount of data from a tree table
+
+Use @ViewChild to invoke the check function
+
+``` xml
+<d-column field="checked" [header]="" [width]="'30px'" [order]="0">
+  <d-head-cell>
+    <ng-template let-column="column">
+      <d-checkbox
+        id="virtual-scroll-tree-table-allCheck"
+        [isShowTitle]="false"
+        (change)="onAllCheckChange($event)"
+        [halfchecked]="halfCheck"
+        [(ngModel)]="allCheck"
+      >
+      </d-checkbox>
+    </ng-template>
+  </d-head-cell>
+  <d-cell>
+    <ng-template let-rowItem="rowItem" let-rowIndex="rowIndex">
+      <d-checkbox
+        [ngModelOptions]="{ standalone: true }"
+        [ngModel]="rowItem.checked"
+        [halfchecked]="rowItem.halfChecked"
+        [disabled]="rowItem.disabled"
+        (ngModelChange)="onRowCheckChange($event, rowItem)"
+        dTooltip
+        [content]="rowItem.$checkBoxTips"
+        [position]="['top', 'right', 'bottom', 'left']"
+        [showAnimation]="false"
+      >
+      </d-checkbox>
+    </ng-template>
+  </d-cell>
+</d-column>
+```
+
+``` javascript
+@ViewChild('VirtualTableTree') VirtualTableTree: VirtualScrollTreeTableComponent;
+
+onRowCheckChange(event, rowItem) {
+  this.VirtualTableTree.onRowCheckChange(event, rowItem);
+}
+
+onAllCheckChange(event) {
+  this.VirtualTableTree.onAllCheckChange(event);
+}
+
+allChecked(event) {
+  this.allCheck = event.allCheck;
+  this.halfCheck = event.halfCheck;
+}
+
+// Use @ViewChild to call the onRowCheckChange and onAllCheckChange methods in VirtualScrollTreeTableComponent
+
+getRowCheckData() {
+  const saveCheck = this.VirtualTableTree.saveCheck;
+  const saveHalfCheck = this.VirtualTableTree.saveHalfCheck;
+}
+
+// Use @ViewChild to obtain the saveCheck all and saveHalfCheck half-selected arrays in VirtualScrollTreeTableComponent
+
+ngOnInit() {
+  this.dataSource = JSON.parse(this.dataSource);
+  this.dataSource[2].disabled = true;
+  this.dataSource[163].disabled = true;
+  this.dataSource = JSON.stringify(this.dataSource);
+}
+
+// The check box can be disabled based on the disabled attribute in the data. Note: When a parent node is disabled, all subsets under the parent node are disabled. When a child node is added, copied, cut, or dragged, the child nodes under the parent node are also disabled.
+```
+
+## Batch delete a large amount of data from a tree table
+
+Use @ViewChild to invoke the batch delete function
+
+``` javascript
+@ViewChild('VirtualTableTree') VirtualTableTree: VirtualScrollTreeTableComponent;
+
+batchDelete() {
+  this.VirtualTableTree.batchDelete();
+}
+
+// Use @ViewChild to call batchDelete method in VirtualScrollTreeTableComponent
+```
+
+## DataTablePropertiesInterface
+
+```ts
+export interface DataTablePropertiesInterface {
+    maxWidth?: string;
+    maxHeight?: string;
+    size?: string | number;
+    rowHoveredHighlight?: boolean;
+    generalRowHoveredData?: boolean;
+    cssClass?: string;
+    tableWidth?: string;
+    fixHeader?: boolean;
+    colDraggable?: boolean;
+    colDropFreezeTo?: number;
+    tableWidthConfig?: TableWidthConfig[];
+    showSortIcon?: boolean;
+    showFilterIcon?: boolean;
+    showOperationArea?: boolean;
+    hideColumn?: string[];
+    pageAllChecked?: boolean;
+    onlyOneColumnSort?: boolean;
+    multiSort?: any;
+    resizeable?: boolean;
+    timeout?: number;
+    beforeCellEdit?: any;
+    headerBg?: boolean;
+    tableLayout?: string;
+    borderType?: string;
+    striped?: boolean;
+    shadowType?: 'normal' | 'embed';
+}
+```

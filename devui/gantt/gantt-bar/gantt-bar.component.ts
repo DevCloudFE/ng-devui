@@ -150,7 +150,9 @@ export class GanttBarComponent implements OnInit, OnChanges, AfterViewInit, OnDe
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.hasOwnProperty('min') || changes.hasOwnProperty('max') || changes.hasOwnProperty('step')) {
+    if (Object.prototype.hasOwnProperty.call(changes, 'min')
+      || Object.prototype.hasOwnProperty.call(changes, 'max')
+      || Object.prototype.hasOwnProperty.call(changes, 'step')) {
       this.checkRangeValues(this.min, this.max);
       this.checkStepValue();
     }
@@ -238,7 +240,7 @@ export class GanttBarComponent implements OnInit, OnChanges, AfterViewInit, OnDe
   }
 
   private checkStepValue() {
-    if (this.step < 0 || !!!this.step) {
+    if (this.step < 0 || !this.step) {
       throw new Error('step value must be greater than 0.');
     } else if ((this.max - this.min) % this.step) {
       throw new Error('(max - min) must be divisible by step.');

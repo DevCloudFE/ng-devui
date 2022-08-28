@@ -31,8 +31,8 @@ export class BasicComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(private ganttService: GanttService, private ele: ElementRef) {}
 
   ngOnInit() {
-    this.ganttStartDate = new Date(curYear, 3, 1);
-    this.ganttEndDate = new Date(curYear, 10, 1);
+    this.ganttStartDate = new Date(curYear, 0, 1);
+    this.ganttEndDate = new Date(curYear, 11, 31);
     this.ganttService.setScaleConfig({
       startDate: this.ganttStartDate,
       endDate: this.ganttEndDate,
@@ -72,7 +72,6 @@ export class BasicComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     this.ganttService.setScaleConfig({ unit: this.unit });
     this.ganttScaleWidth = this.ganttService.getDurationWidth(this.ganttStartDate, this.ganttEndDate) + 'px';
-    // this.tableWidthConfig[3].width = this.ganttScaleWidth;
   }
 
   onReduceUnit() {
@@ -97,6 +96,7 @@ export class BasicComponent implements OnInit, AfterViewInit, OnDestroy {
 
   launchFullscreen({ isFullscreen }) {
     this.isFullScreen = isFullscreen;
+    this.ganttService.setScaleConfig({viewChange: true});
   }
 
   ngAfterViewInit() {

@@ -12,6 +12,7 @@ export class MutilStylesComponent implements OnInit {
   striped = false;
 
   activeBorderTab: any = '';
+  activeShadowType: any = 'embed';
   borderItems = [
     {
       id: '',
@@ -27,8 +28,23 @@ export class MutilStylesComponent implements OnInit {
     }
   ];
 
+  TypeItems = [
+    {
+      id: 'embed',
+      title: 'Embed'
+    },
+    {
+      id: 'normal',
+      title: 'Normal'
+    }
+  ];
+
   activeSizeTab: any = 'sm';
   sizeItems = [
+    {
+      id: 'xs',
+      title: 'Small'
+    },
     {
       id: 'sm',
       title: 'Normal'
@@ -85,24 +101,28 @@ export class MutilStylesComponent implements OnInit {
 
   tableWidthConfig: TableWidthConfig[] = [
     {
+      field: 'checkbox',
+      width: '36px'
+    },
+    {
       field: '#',
-      width: '50px'
+      width: '20%'
     },
     {
       field: 'firstName',
-      width: '100px'
+      width: '20%'
     },
     {
       field: 'lastName',
-      width: '100px'
+      width: '20%'
     },
     {
       field: 'gender',
-      width: '50px'
+      width: '20%'
     },
     {
       field: 'dob',
-      width: '300px'
+      width: '20%'
     }
   ];
 
@@ -115,24 +135,28 @@ export class MutilStylesComponent implements OnInit {
     } else {
       this.tableWidthConfig = [
         {
+          field: 'checkbox',
+          width: '30px'
+        },
+        {
           field: '#',
-          width: '50px'
+          width: '20%'
         },
         {
           field: 'firstName',
-          width: '100px'
+          width: '20%'
         },
         {
           field: 'lastName',
-          width: '100px'
+          width: '20%'
         },
         {
           field: 'gender',
-          width: '50px'
+          width: '20%'
         },
         {
           field: 'dob',
-          width: '300px'
+          width: '20%'
         }
       ];
     }

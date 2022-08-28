@@ -1,0 +1,482 @@
+@import '../styles-var/devui-var.scss';
+// TODO: 组件支持全局配置默认尺寸参数后删除
+// button default size change to '32px'
+.devui-btn:not(.devui-btn-xs):not(.devui-btn-sm):not(.devui-btn-lg) {
+  height: 32px;
+  line-height: 32px;
+}
+
+d-alert .devui-alert {
+  border: none;
+}
+
+d-alert .devui-alert.devui-alert-simple {
+  background-color: $devui-area;
+}
+
+d-tabs .devui-nav-container {
+  // lg 容器高度40px
+  &.devui-nav-lg {
+    font-size: $devui-font-size-lg;
+
+    .devui-nav-tabs > li {
+      height: 39px !important;
+      line-height: 39px !important;
+    }
+
+    .devui-nav-pills > li {
+      height: 40px !important;
+      line-height: 40px !important;
+    }
+
+    .devui-nav-options > li {
+      height: 34px !important;
+      line-height: 34px !important;
+    }
+
+    .devui-nav-slider-animation,
+    .devui-nav-slider > li {
+      height: 36px !important;
+      line-height: 36px !important;
+    }
+
+    .devui-nav-wrapped {
+      &.devui-nav-overflow li.active {
+        padding-top: 7px !important;
+      }
+
+      li {
+        padding: 8px 16px !important;
+      }
+    }
+  }
+
+  // md 容器高度32px
+  &.devui-nav-md {
+    font-size: $devui-font-size-lg !important;
+
+    .devui-nav-tabs > li {
+      height: 31px !important;
+      line-height: 31px !important;
+    }
+
+    .devui-nav-pills > li {
+      height: 32px !important;
+      line-height: 32px !important;
+    }
+
+    .devui-nav-options > li {
+      height: 26px !important;
+      line-height: 26px !important;
+    }
+
+    .devui-nav-slider-animation,
+    .devui-nav-slider > li {
+      height: 28px !important;
+      line-height: 28px !important;
+    }
+  }
+
+  // sm 容器高度28px
+  &.devui-nav-sm {
+    font-size: $devui-font-size-lg !important;
+
+    .devui-nav-tabs > li {
+      height: 27px !important;
+      line-height: 27px !important;
+    }
+
+    .devui-nav-pills > li {
+      height: 28px !important;
+      line-height: 28px !important;
+    }
+
+    .devui-nav-options > li {
+      height: 22px !important;
+      line-height: 22px !important;
+    }
+
+    .devui-nav-slider-animation,
+    .devui-nav-slider > li {
+      height: 24px !important;
+      line-height: 24px !important;
+    }
+
+    .devui-nav-wrapped {
+      &.devui-nav-overflow li.active {
+        padding-top: 1px !important;
+      }
+
+      li {
+        padding: 2px 16px !important;
+      }
+    }
+  }
+
+  // sm 容器高度24px
+  &.devui-nav-xs {
+    font-size: $devui-font-size-sm !important;
+
+    .devui-nav-tabs > li {
+      height: 23px !important;
+      line-height: 23px !important;
+    }
+
+    .devui-nav-pills > li {
+      height: 24px !important;
+      line-height: 24px !important;
+    }
+
+    .devui-nav-options > li {
+      height: 18px !important;
+      line-height: 18px !important;
+    }
+
+    .devui-nav-slider-animation,
+    .devui-nav-slider > li {
+      height: 20px !important;
+      line-height: 20px !important;
+    }
+
+    .devui-nav-wrapped {
+      &.devui-nav-overflow li.active {
+        padding-top: 0 !important;
+      }
+
+      li {
+        padding: 1px 16px 0 !important;
+        line-height: 22px !important;
+      }
+    }
+
+    .devui-tab-close-icon {
+      vertical-align: middle !important;
+    }
+  }
+
+  .devui-nav-tabs,
+  .devui-nav-pills {
+    &.devui-nav-stacked > li {
+      height: 38px !important;
+      line-height: 38px !important;
+    }
+  }
+}
+
+d-tag {
+  --devui-font-size: var(--devui-font-size-sm, 12px);
+}
+
+// datepicker定制化处理高亮
+d-datepicker,
+d-date-range-picker,
+d-datepicker-range-single,
+d-two-datepicker-single {
+  --devui-list-item-active-bg: var(--devui-brand, #5e7ce0);
+  --devui-list-item-active-hover-bg: var(--devui-brand, #526ecc);
+  --devui-list-item-active-text: var(--devui-light-text, #ffffff);
+  --devui-font-size: var(--devui-font-size-sm, 12px);
+}
+
+// TODO: 表单底层统一使用一致的input，全局修改该input尺寸默认值即可
+// input default size change to '32px'
+d-multi-auto-complete .multi-auto-complete label.multiple-label-auto-complete ul.devui-dropdown-origin {
+  min-height: 32px;
+}
+
+d-search .devui-search {
+  .devui-input:not(.devui-input-sm):not(.devui-input-lg) {
+    height: 32px;
+  }
+
+  .devui-search-icon {
+    line-height: 32px;
+  }
+
+  .devui-search-clear:not(.devui-search-clear-lg):not(.devui-search-clear-sm) {
+    line-height: 32px;
+  }
+}
+
+d-select .devui-form-group {
+  .devui-form-control {
+    &.devui-select-input {
+      height: 30px;
+    }
+  }
+
+  .devui-select-list-wrapper.devui-form-control {
+    .devui-select-placeholder {
+      height: 28px;
+      line-height: 28px;
+    }
+
+    ul.devui-select-tag-list {
+      min-height: 28px;
+      line-height: 1;
+
+      .devui-select-tag-item {
+        margin: 4px 0 0 4px;
+      }
+    }
+  }
+}
+
+d-toggle-menu-container .devui-toggle-menu-container {
+  d-toggle-menu-label {
+    ul.devui-select-tag-list {
+      height: 28px !important;
+      min-height: 28px !important;
+
+      &.multiple-line .devui-select-tag-item {
+        margin: 4px 0 0 4px;
+      }
+    }
+  }
+
+  &.disabled d-toggle-menu-label ul.devui-select-tag-list {
+    height: 30px !important;
+    padding-top: 1px;
+  }
+}
+
+d-tree-select {
+  .devui-tree-select .popper .popper-activator .devui-select-input.devui-tree-select-input {
+    padding: 4px 10px;
+    min-height: 32px;
+    max-height: 64px;
+
+    .devui-select-item {
+      line-height: 16px;
+    }
+  }
+}
+
+input {
+  border-radius: $devui-border-radius;
+}
+
+[dTextInput] {
+  height: 32px;
+}
+
+.devui-form-controls input[type='text'],
+.devui-form-controls input[type='password'],
+[dTextInput] {
+  height: 32px;
+}
+
+// select带有搜索存在两层ul
+.devui-dropdown-menu > .devui-dropdown-menu-wrap,
+.devui-dropdown-menu > d-toggle-menu-list > .devui-dropdown-menu-wrap {
+  // 存在搜索框时
+  & > li {
+    padding: 12px 12px 0 12px;
+  }
+
+  ul,
+  .cdk-virtual-scroll-content-wrapper {
+    padding: 12px;
+
+    li {
+      border-radius: $devui-border-radius;
+    }
+  }
+}
+
+// TODO: 下拉专项整改增加offset设置
+.devui-dropdown-menu {
+  margin-top: 8px !important;
+  margin-bottom: 8px !important;
+}
+
+// breadcrumb dropdown menu
+div.devui-search-container {
+  padding: 12px 12px 0 12px;
+}
+// autoComplete等
+.devui-dropdown-menu > ul:not(.devui-dropdown-menu-wrap) {
+  padding: 12px;
+
+  li {
+    border-radius: $devui-border-radius;
+  }
+}
+// dropdown
+ul.devui-dropdown-menu {
+  padding: 12px;
+
+  li .devui-dropdown-item {
+    border-radius: $devui-border-radius;
+  }
+}
+
+d-tags-input {
+  .devui-tags-autocomplete .devui-suggestion-list {
+    padding: 12px !important;
+  }
+}
+
+.devui-input-sm {
+  height: 24px;
+}
+
+.devui-input-lg {
+  height: 46px;
+}
+
+// 表单尺寸未统一，upload内部自定义了高度
+d-single-upload,
+d-multiple-upload {
+  .devui-input-group .devui-form-control {
+    &.devui-files-list,
+    &.devui-upload-placeholder {
+      height: 32px;
+      max-height: 32px;
+    }
+
+    .devui-file-item {
+      height: 26px !important;
+      line-height: 24px !important;
+    }
+  }
+}
+
+div.popper-container div.popper-container-scrollable div.devui-tree-select.devui-options-container {
+  padding: 12px;
+}
+
+div.popper-container div.devui-tree-select span.devui-form-control-feedback {
+  top: 12px;
+  right: 12px;
+}
+
+d-cascader .devui-dropdown input {
+  height: 32px;
+}
+
+d-cascader .devui-tags-input-wrapper .devui-tags-input {
+  min-height: 30px !important;
+  padding-top: 2px !important;
+}
+
+// pagination样式修改
+d-pagination {
+  div.devui-pagination div.devui-dropdown d-icon.devui-page-size {
+    height: 32px;
+  }
+
+  div.devui-pagination ul.devui-pagination-list li:not(.disabled) {
+    cursor: pointer;
+
+    a:hover,
+    span:hover,
+    a:focus,
+    span:focus {
+      background-color: transparent !important;
+      color: $devui-text !important;
+      border: 1px solid $devui-dividing-line !important;
+      box-shadow: 0 1px 3px 0 $devui-light-shadow !important;
+    }
+
+    a:active {
+      background-color: transparent !important;
+      color: $devui-text !important;
+    }
+
+    &.active a {
+      background-color: $devui-primary !important;
+      color: $devui-light-text !important;
+      cursor: pointer !important;
+
+      &:hover {
+        background-color: $devui-primary !important;
+        color: $devui-light-text !important;
+        border: 1px solid transparent !important;
+        box-shadow: none !important;
+      }
+    }
+
+    a.devui-pagination-link:hover:not(:active) svg g polygon {
+      fill: $devui-text !important;
+    }
+
+    a.devui-pagination-link:active svg g polygon {
+      fill: $devui-text !important;
+    }
+  }
+
+  ul.devui-pagination-list > li > a {
+    height: 28px !important;
+    min-width: 28px !important;
+    padding: 0 4px !important;
+    justify-content: center !important;
+    border: 1px solid transparent !important;
+  }
+
+  ul.devui-pagination-sm > li > a {
+    height: 24px !important;
+    min-width: 24px !important;
+  }
+
+  ul.devui-pagination-lg > li > a {
+    height: 40px !important;
+    min-width: 40px !important;
+  }
+
+  .devui-pagination-list > li:first-child > a,
+  .devui-pagination-list > li:last-child > a {
+    padding: 0 !important;
+    height: 28px !important;
+    line-height: 28px !important;
+  }
+
+  .devui-pagination-sm > li:first-child > a,
+  .devui-pagination-sm > li:last-child > a {
+    height: 24px !important;
+    line-height: 24px !important;
+  }
+
+  .devui-pagination-lg > li:first-child > a,
+  .devui-pagination-lg > li:last-child > a {
+    height: 40px !important;
+    line-height: 40px !important;
+  }
+
+  .devui-pagination-link {
+    height: 28px !important;
+    line-height: 28px !important;
+  }
+
+  .devui-pagination-sm > li:first-child > a {
+    padding: 0 !important;
+  }
+
+  .devui-pagination-sm > li:last-child > a {
+    padding: 0 !important;
+  }
+}
+
+d-editable-select input[name='autoCompleteControl'].devui-dropdown-origin {
+  height: 32px;
+}
+
+d-input-number .input-container input.input-box {
+  height: 32px;
+}
+
+d-datepicker-pro .devui-datepicker-pro-wrapper .devui-single-picker .devui-input {
+  height: 30px !important;
+}
+
+.devui-datepicker-pro-wrapper .devui-input-group > .devui-input {
+  height: 30px !important;
+}
+
+.devui-datepicker-pro-wrapper .devui-range-picker .close-icon-wrapper {
+  line-height: 28px !important;
+}
+
+input[dtimepicker] {
+  height: 32px !important;
+}

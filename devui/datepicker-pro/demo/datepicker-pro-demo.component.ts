@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { DevuiSourceData } from 'ng-devui/shared/devui-codebox/devui-source-data';
+import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 @Component({
   selector: 'd-datepicker-pro-demo',
@@ -15,6 +15,11 @@ export class DatepickerProDemoComponent implements OnInit, OnDestroy {
   showTimeSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('./show-time/show-time-picker.component.html?raw') },
     { title: 'TS', language: 'typescript', code: require('./show-time/show-time-picker.component.ts?raw') },
+  ];
+
+  markedTypeSource: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'xml', code: require('./marked-type/marked-type.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./marked-type/marked-type.component.ts?raw') },
   ];
 
   templateSource: Array<DevuiSourceData> = [
@@ -61,7 +66,7 @@ export class DatepickerProDemoComponent implements OnInit, OnDestroy {
     { title: 'TS', language: 'typescript', code: require('./tab-type/datepicker-pro-tab-type.component.ts?raw') },
     { title: 'SCSS', language: 'css', code: require('./tab-type/datepicker-pro-tab-type.component.scss?raw') },
   ];
-    navItems = [];
+  navItems = [];
   subs: Subscription = new Subscription();
   constructor(private translate: TranslateService) {}
 
@@ -83,6 +88,7 @@ export class DatepickerProDemoComponent implements OnInit, OnDestroy {
   setNavValues(values) {
     this.navItems = [
       { dAnchorLink: 'basic-usage', value: values['basic-usage'] },
+      { dAnchorLink: 'date-marked', value: values['mark-type'] },
       { dAnchorLink: 'show-time', value: values['show-time'] },
       { dAnchorLink: 'template', value: values['template'] },
       { dAnchorLink: 'monthYear', value: values['monthYear'] },

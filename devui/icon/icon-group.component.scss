@@ -1,0 +1,13 @@
+:host ::ng-deep d-icon .devui-icon-container:not(.devui-icon-can-interactive) {
+  padding: 8px;
+  margin-left: -8px;
+}
+
+:host ::ng-deep > *:not(:first-child) {
+  margin-left: 8px;
+}
+
+:host {
+  display: inline-flex;
+  align-items: center;
+}

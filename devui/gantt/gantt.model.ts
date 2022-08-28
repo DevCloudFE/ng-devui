@@ -29,6 +29,7 @@ export interface GanttScaleConfig {
   startDate?: Date;
   endDate?: Date;
   unit?: GanttScaleUnit;
+  viewChange?: boolean;
 }
 
 export enum GanttMarkerType {

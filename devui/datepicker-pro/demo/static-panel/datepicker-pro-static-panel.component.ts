@@ -12,6 +12,9 @@ export class DatepickerProStaticPanelComponent {
 
   value1 = new Date();
 
+  minDate = new Date(new Date().setMonth(new Date().getMonth() - 1));
+  maxDate = new Date(new Date().setMonth(new Date().getMonth() + 2));
+
   onClickEnsure(date) {
     console.log(date);
   }

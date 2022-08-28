@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
+import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-badge-demo',
+  selector: 'd-badge-demo',
   templateUrl: './badge-demo.component.html',
 })
 export class BadgeDemoComponent implements OnInit, OnDestroy {
@@ -60,8 +60,8 @@ export class BadgeDemoComponent implements OnInit, OnDestroy {
   setNavValues(values) {
     this.navItems = [
       { dAnchorLink: 'badge-basic', value: values['badge-basic'] },
-      { dAnchorLink: 'badge-dot', value: values['badge-dot'] },
       { dAnchorLink: 'badge-count', value: values['badge-count'] },
+      { dAnchorLink: 'badge-dot', value: values['badge-dot'] },
       { dAnchorLink: 'badge-status', value: values['badge-status'] },
       { dAnchorLink: 'position', value: values['position'] },
       { dAnchorLink: 'custom', value: values['custom'] }

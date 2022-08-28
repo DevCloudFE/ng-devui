@@ -30,6 +30,7 @@
     &:hover {
       overflow-y: scroll;
       overflow-y: overlay;
+      scrollbar-width: thin;
     }
 
     &:not(:last-child) {

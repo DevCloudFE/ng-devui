@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { I18nService } from 'ng-devui/i18n';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import * as hljs from 'highlight.js/lib/core';
-import * as marked from 'marked/lib/marked';
+import { marked } from 'marked';
 import { Subscription } from 'rxjs';
 @Component({
   selector: 'd-api',
@@ -26,7 +26,6 @@ export class DevUIApiComponent implements OnInit, AfterViewInit, OnDestroy {
   navSpriteInstance = null;
   document: Document;
   scrollContainer;
-  options;
   constructor(
     private router: Router,
     private translate: TranslateService,
@@ -59,11 +58,9 @@ export class DevUIApiComponent implements OnInit, AfterViewInit, OnDestroy {
       })
     );
   }
-  onCopied(options) {
-    this.options = options;
-  }
+
   setApi(lang) {
-    if (this.i18n.i18nConfig.hasOwnProperty(lang)) {
+    if (Object.prototype.hasOwnProperty.call(this.i18n.i18nConfig, lang)) {
       this.api = this.apiData[lang];
       setTimeout(() => {
         this.refreshView();
@@ -100,10 +97,10 @@ export class DevUIApiComponent implements OnInit, AfterViewInit, OnDestroy {
         return '';
       }
 
-      if (list[0] === '\'') {
+      if (list[0] === "'") {
         list = list.substr(1);
       }
-      if (list[list.length - 1] === '\'') {
+      if (list[list.length - 1] === "'") {
         list = list.substr(0, list.length - 1);
       }
 

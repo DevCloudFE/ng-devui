@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ICategorySearchTagItem } from 'ng-devui/category-search';
+import { cloneDeep } from 'lodash-es';
 import { demoData } from '../demo-data';
 
 @Component({
@@ -7,34 +8,16 @@ import { demoData } from '../demo-data';
   templateUrl: './basic.component.html',
 })
 export class BasicComponent {
-  category = demoData.slice(0, -2);
+  category = cloneDeep(demoData.slice(0, -2));
   defaultSearchField = ['creator', 'status'];
   selectedTags: ICategorySearchTagItem[] = [
     {
       label: 'status',
       field: 'status',
-      type: 'radio',
-      filterKey: 'status',
       value: {
         status: 'developing',
+        value: 'developing',
       },
-      options: [
-        {
-          status: 'new',
-        },
-        {
-          status: 'developing',
-        },
-        {
-          status: 'completed',
-        },
-        {
-          status: 'under acceptance',
-        },
-        {
-          status: 'closed-loop',
-        },
-      ],
     },
   ];
   finalSearchItems: any;
@@ -74,5 +57,5 @@ export class BasicComponent {
       console.log('selected and clicked tag:', tag);
       console.log('unassigned tag:', currentSelectTag);
     }
-  }
+  };
 }

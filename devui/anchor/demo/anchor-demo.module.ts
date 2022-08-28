@@ -10,7 +10,7 @@ import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.
 import { StickyModule } from 'ng-devui/sticky';
 import { ToggleModule } from 'ng-devui/toggle';
 import { TranslateModule } from '@ngx-translate/core';
-import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
+import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
 import { AnchorDemoComponent } from './anchor-demo.component';
 import { AsyncComponent } from './async/async.component';
 import { BasicComponent } from './basic/basic.component';
@@ -44,6 +44,6 @@ import { ScrollTargetComponent } from './scroll-target/scroll-target.component';
   ],
   exports: [AnchorDemoComponent],
   declarations: [AnchorDemoComponent, BasicComponent, AsyncComponent, HashComponent, ScrollTargetComponent],
-  
+
 })
 export class AnchorDemoModule {}

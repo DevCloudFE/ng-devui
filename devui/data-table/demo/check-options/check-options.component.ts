@@ -15,7 +15,6 @@ import { originSource, SourceType } from '../mock-data';
 })
 export class CheckOptionsComponent implements OnInit {
   @ViewChild(DataTableComponent, { static: true }) datatable: DataTableComponent;
-  // totalData = JSON.parse(JSON.stringify(originSource));
   basicDataSource: Array<SourceType> = JSON.parse(JSON.stringify(originSource.slice(0, 6)));
   dataTableOptions = {
     columns: [
@@ -45,27 +44,27 @@ export class CheckOptionsComponent implements OnInit {
   tableWidthConfig: TableWidthConfig[] = [
     {
       field: 'checkbox',
-      width: '55px'
+      width: '60px'
     },
     {
       field: '#',
-      width: '50px'
+      width: '10%'
     },
     {
       field: 'firstName',
-      width: '150px'
+      width: '30%'
     },
     {
       field: 'lastName',
-      width: '150px'
+      width: '30%'
     },
     {
       field: 'gender',
-      width: '150px'
+      width: '30%'
     },
     {
       field: 'dob',
-      width: '200px'
+      width: '30%'
     }
   ];
 

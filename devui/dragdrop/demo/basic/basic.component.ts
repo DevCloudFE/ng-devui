@@ -22,7 +22,7 @@ export class BasicComponent {
     const fromIndex = e.dragFromIndex;
     const item = e.dragData.item;
     if (-1 !== index) {
-      /*修正同一个container排序，往下拖动index多了1个位置*/
+      /* 修正同一个container排序，往下拖动index多了1个位置*/
       if (-1 !== fromIndex && index > fromIndex) {
         index--;
       }
@@ -30,7 +30,7 @@ export class BasicComponent {
     } else {
       targetArray.push(item);
     }
-    if (-1 === fromIndex) {
+    if (fromIndex === -1) {
       this.removeItem(item, e.dragData.parent);
     }
   }

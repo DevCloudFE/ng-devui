@@ -128,7 +128,7 @@ export class ToggleMenuListComponent implements OnInit, OnChanges, OnDestroy {
   @ViewChild(CdkVirtualScrollViewport) virtualScrollViewport: CdkVirtualScrollViewport;
 
   get realVirtualScrollItemSize() {
-    const itemSize = this.templateItemSize || this.virtualScrollItemSize[this.size || 'normal'];
+    const itemSize = (this.templateItemSize || this.virtualScrollItemSize[this.size || 'normal']) + this.virtualScrollItemSize.space;
     const num = Math.round(this.scrollHeightNum / itemSize) || 10;
     this.minBuffer = num * 1.5 * itemSize;
     this.maxBuffer = num * 2.5 * itemSize;
@@ -148,9 +148,10 @@ export class ToggleMenuListComponent implements OnInit, OnChanges, OnDestroy {
   maxBuffer: number;
   virtualScrollViewportSizeMightChange = false;
   virtualScrollItemSize: any = {
-    sm: 34,
-    normal: 38,
+    sm: 30,
+    normal: 36,
     lg: 50,
+    space: 4,
   };
 
   constructor(private changeDetectorRef: ChangeDetectorRef, private i18n: I18nService) {}
@@ -195,18 +196,18 @@ export class ToggleMenuListComponent implements OnInit, OnChanges, OnDestroy {
       const evt = changes['eventHandle'].currentValue;
       const { event, type } = evt;
       switch (type) {
-        case 'keydown.esc':
-          this.onEscKeyup(event);
-          break;
-        case 'keydown.ArrowUp':
-          this.handleKeyUpEvent(event);
-          break;
-        case 'keydown.ArrowDown':
-          this.handleKeyDownEvent(event);
-          break;
-        case 'keydown.enter':
-          this.handleKeyEnterEvent(event);
-          break;
+      case 'keydown.esc':
+        this.onEscKeyup(event);
+        break;
+      case 'keydown.ArrowUp':
+        this.handleKeyUpEvent(event);
+        break;
+      case 'keydown.ArrowDown':
+        this.handleKeyDownEvent(event);
+        break;
+      case 'keydown.enter':
+        this.handleKeyEnterEvent(event);
+        break;
       }
     }
   }
@@ -232,10 +233,10 @@ export class ToggleMenuListComponent implements OnInit, OnChanges, OnDestroy {
     this.availableOptions = this.availableOptions.map((item, index) =>
       item.id >= 0 && item.option
         ? {
-            isChecked: _value.findIndex((i) => JSON.stringify(i) === JSON.stringify(item.option)) > -1,
-            id: item.id,
-            option: item.option,
-          }
+          isChecked: _value.findIndex((i) => JSON.stringify(i) === JSON.stringify(item.option)) > -1,
+          id: item.id,
+          option: item.option,
+        }
         : { isChecked: _value.findIndex((i) => JSON.stringify(i) === JSON.stringify(item)) > -1, id: index, option: item }
     );
   }
@@ -283,7 +284,9 @@ export class ToggleMenuListComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   onEscKeyup(event?: Event) {
-    event?.stopPropagation();
+    if (event) {
+      event.stopPropagation();
+    }
     this.toggleChange.emit(false);
   }
 
@@ -392,7 +395,7 @@ export class ToggleMenuListComponent implements OnInit, OnChanges, OnDestroy {
     this.valueChange.emit({ value: this.value, multiItems: this.multiItems, option, event, index });
     this.setAvailableOptions();
     this.setChecked(this.value);
-  }
+  };
 
   showSelectAll() {
     return this.isSelectAll && this.multiple && this.availableOptions.length > 0;
@@ -400,9 +403,10 @@ export class ToggleMenuListComponent implements OnInit, OnChanges, OnDestroy {
 
   getVirtualScrollHeight(len, size) {
     if (len > 0) {
-      let height = this.templateItemSize ? this.templateItemSize * len : this.virtualScrollItemSize[size ? size : 'normal'] * len;
+      let height =
+        (this.templateItemSize || this.virtualScrollItemSize[size || 'normal']) * len + this.virtualScrollItemSize.space * (len - 1);
       if (this.isSelectAll && this.multiple) {
-        height += this.virtualScrollItemSize[size ? size : 'normal'];
+        height += this.virtualScrollItemSize[size ? size : 'normal'] + this.virtualScrollItemSize.space;
       }
       const scrollHeight = parseInt(this.scrollHeight, 10);
       this.scrollHeightNum = height > scrollHeight ? scrollHeight : height;

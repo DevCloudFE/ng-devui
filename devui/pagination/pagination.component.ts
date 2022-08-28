@@ -14,6 +14,7 @@ import {
   SimpleChanges,
   ViewChild
 } from '@angular/core';
+import { DropDownAppendToBodyComponent } from 'ng-devui/dropdown';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { AppendToBodyDirection } from 'ng-devui/utils';
 import { fromEvent, Subscription } from 'rxjs';
@@ -36,7 +37,7 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy,
    * 【可选】用于选择更改分页每页最大条目数量的下拉框的数据源，默认为`[5, 10, 20, 50]`
    */
   @Input() pageSizeOptions: number[] = [5, 10, 20, 50];
-  @Input() pageSizeDirection: Array<AppendToBodyDirection | ConnectedPosition> = ['centerDown', 'centerUp'];
+  @Input() pageSizeDirection: Array<AppendToBodyDirection | ConnectedPosition> = ['rightDown', 'rightUp'];
   /**
    * 【可选】初始化页码
    */
@@ -77,16 +78,23 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy,
    * 【可选】是否显示总条目
    */
   @Input() canViewTotal: boolean;
+  /**
+   * @deprecated
+   */
   @Input() cssClass: string;
   // 是否显示跳转按钮，默认不显示
   @Input() showJumpButton = false;
   // 翻过了页的需求要显示当前真实页面
   @Input() showTruePageIndex = false;
+  /**
+   * @deprecated
+   */
   @Input() id;
   showPages = [];
   totalPage = 1;
   _total = 0;
   jumpPage = null;
+  rotateDegrees = 0;
 
   @Input() totalItemText: string;
   @Input() goToText: string;
@@ -103,22 +111,23 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy,
   @Input() showPageSelector = true;
   @Input() haveConfigMenu = false;
   @Input() autoFixPageIndex = true;
-   /**
+  /**
    * 是否自动隐藏
    */
   @Input() autoHide = false;
   minPageSizeOptions: number;
-  litePaginatorIndex: { value: number, label: string } | null;
+  litePaginatorIndex: { value: number; label: string } | null;
   litePaginatorOptions: any[] = [];
   private litePaginatorOptionsLengthCache = 0;
   showConfig = false;
   @ViewChild('litePaginator') litePaginator: ElementRef;
+  @ViewChild('dropDownElement') dropDownElement: DropDownAppendToBodyComponent;
   private configButtonLoseFocusHandler: Subscription | null = null;
   private loseFocusListener: any = null;
   i18nText: I18nInterface['pagination'];
   i18nLocale: I18nInterface['locale'];
   i18nSubscription: Subscription;
-  constructor(private ref: ChangeDetectorRef, private i18n: I18nService) {  }
+  constructor(private ref: ChangeDetectorRef, private i18n: I18nService) { }
 
   ngOnInit(): void {
     this.i18nText = this.i18n.getI18nText().pagination;
@@ -205,10 +214,10 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy,
   onPageIndexChange(pageIndex: number) {
     if (this.pageIndex !== pageIndex) {
       if (this.lite) {
-        this.litePaginatorIndex = Object.assign({}, {
+        this.litePaginatorIndex = {
           value: this.pageIndex,
           label: `${this.pageIndex}/${this.totalPage}`
-        });
+        };
       }
       this.pageIndexChange.emit(pageIndex);
     }
@@ -216,6 +225,7 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy,
 
   onPageSizeChange(size) {
     if (this.pageSize !== size) {
+      this.pageSize = size;
       this.pageSizeChange.emit(size);
       if (this.autoFixPageIndex && Math.ceil(this.total / size) < this.totalPage) {
         this.totalPage = Math.ceil(this.total / size);
@@ -223,6 +233,7 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy,
       }
       this.adjustPaginatorWidth();
     }
+    this.dropDownElement.dropDown.toggle();
   }
 
   hasPrev(): boolean {
@@ -302,10 +313,10 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy,
         };
       });
     }
-    this.litePaginatorIndex = Object.assign({}, {
+    this.litePaginatorIndex = {
       value: this.pageIndex,
       label: `${this.pageIndex}/${this.totalPage}`
-    });
+    };
   }
 
   private adjustPaginatorWidth() {
@@ -317,7 +328,9 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy,
       this.litePaginator.nativeElement.style.width = `${Math.max(minWidth, width)}px`;
     }
   }
-
+  onToggle(event) {
+    this.rotateDegrees = event ? 180 : 0;
+  }
   toggleMenu(force: boolean = null) {
     if (force !== null) {
       this.showConfig = force;

@@ -143,7 +143,7 @@ export class MentionDirective implements OnInit, OnChanges, AfterViewInit, OnDes
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.hasOwnProperty('mentionSuggestions')) {
+    if (Object.prototype.hasOwnProperty.call(changes, 'mentionSuggestions')) {
       if (this.isOpen) {
         this.previousValue = null;
         this.activeIndex = -1;
@@ -305,10 +305,12 @@ export class MentionDirective implements OnInit, OnChanges, AfterViewInit, OnDes
   setPreviousItemActive() {
     this.activeIndex = this.activeIndex - 1 < 0 ? this.filterSuggestions.length - 1 : this.activeIndex - 1;
     this.cdr.markForCheck();
-    this.scrollToFocusItem();
+    setTimeout(() => {
+      if (this.mentionRef) {
+        this.mentionRef.instance.scrollToFocusItem();
+      }
+    });
   }
-
-  scrollToFocusItem() {}
 
   setNextItemActive() {
     this.activeIndex = this.activeIndex + 1 <= this.filterSuggestions.length - 1 ? this.activeIndex + 1 : 0;

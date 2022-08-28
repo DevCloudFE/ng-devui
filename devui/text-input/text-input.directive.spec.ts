@@ -26,14 +26,14 @@ describe('text-input', () => {
     }));
 
     it('should have correct placeholder', waitForAsync(() => {
-        const inputs = debugEl.queryAll(By.css('input'));
-        expect(inputs[0].nativeElement.placeholder).toContain('Please Enter');
+      const inputs = debugEl.queryAll(By.css('input'));
+      expect(inputs[0].nativeElement.placeholder).toContain('Please Enter');
     }));
 
     it('should have correct class', waitForAsync(() => {
-        const inputs = debugEl.queryAll(By.css('input'));
-        fixture.detectChanges();
-        expect(inputs[2].nativeElement.classList).toContain('error');
+      const inputs = debugEl.queryAll(By.css('input'));
+      fixture.detectChanges();
+      expect(inputs[2].nativeElement.classList).toContain('error');
     }));
   });
 });

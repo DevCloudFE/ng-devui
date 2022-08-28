@@ -27,7 +27,11 @@ In the page:
 | maxDate | `Date` | new Date(calenderRange[1]) | (optional) Restricts the maximum date that can be selected. | [Basic usage](demo#basic-usage) |
 | showAnimation | `boolean` | true | (optional) Whether to enable animation | |
 | width | `string` | - | Width of the selector. | |
+| allowClear | `boolean` | true | Whether to allow the user to clear the date, that is, display the clear button. | |
+| placeholder | `string` | - |  host input's placeholder | |
 | mode | `'year' \| 'month' \| 'date'` | 'date' | panel mode | [year and month selector](demo#monthYear)|
+| markedDateList | `Date[]` | [] | Marked date list, which can be used with the MarkDateInfoTemplate template to display prompt information | [mark information](demo#date-marked)|
+| markedRangeDateList | `Date[][]` | [] | Marking Range Date List|[Marking Information](demo#date-marked)|
 
 ## d-datepicker-pro event
 
@@ -53,8 +57,11 @@ Triggered when the | dropdownToggle | `EventEmitter<boolean>` | -- | drop-down p
 | splitter | `string` | `-` | The separator between dates can be set. | |
 | showAnimation | `boolean` | true | (optional) Whether to enable animation | |
 | width | `string` | - | Width of the range selector. | |
+| placeholder | `string[]` | - |  host input's placeholder,need start and end string | |
 | mode | `year' \| 'month' \| 'date'\| 'week'`| 'date' | panel mode | [range selector](demo#range-picker)|
 | startIndexOfWeek | `number` | 0 |: start time of a week. 0 indicates Sunday and 6 indicates Saturday, which is the same as Date.getDay().|[range selector](demo#range-picker)|
+| markedDateList | `Date[]` | [] | Marked date list, which can be used with the MarkDateInfoTemplate template to display prompt information | [mark information](demo#date-marked)|
+| markedRangeDateList | `Date[][]` | [] | Marking Range Date List|[Marking Information](demo#date-marked)|
 
 ## d-range-datepicker-pro event
 
@@ -75,6 +82,10 @@ Triggered when the | dropdownToggle | `EventEmitter<boolean>` | -- | drop-down p
 | activeRangeType | `start' \| 'end'`|'start' | Optional. Activation start or end date in range mode | |
 | showRangeHeader | `boolean` | 'true' | Indicates whether to display the header to display the input of range switching in range mode. | |
 | Splitter | `string` | '-' | Optional, date separator in range mode | |
+| markedDateList | `Date[]` | [] | Marked date list, which can be used with the MarkDateInfoTemplate template to display prompt information | [mark information](demo#date-marked)|
+| markedRangeDateList | `Date[][]` | [] | Marking Range Date List|[Marking Information](demo#date-marked)|
+| minDate | `Date` | - | (optional) Restricts the minimum available date. | [Basic usage](demo#basic-usage) |
+| maxDate | `Date` | - | (optional) Restricts the maximum date that can be selected. | [Basic usage](demo#basic-usage) |
 
 ## d-datepicker-static-panel event
 
@@ -97,3 +108,4 @@ ngModelChange can listen to the change.
 | customTemplate | `TemplateRef<any>` | -- |: optional. Customize a template in the right pane. | [Input template](demo#template) |
 | footerTemplate | `TemplateRef<any>` | -- |: optional. Footer customized template | [Input template](demo#template) |
 | hostTemplate | `TemplateRef<any>` | -- | Optional. Custom template of the datepicker host | [Incoming template] (demo#host-template) |
+| markDateInfoTemplate | `TemplateRef<any>` | -- | Optional, Template for marking date prompt information. The information is displayed in popover format.|[mark information](demo#date-marked)|

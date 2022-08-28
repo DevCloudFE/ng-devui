@@ -171,7 +171,7 @@ describe('tags input', () => {
       flush();
       fixture.detectChanges();
 
-      const tagItems = debugEl.queryAll(By.css('.devui-select-tag-item>span.over-flow-ellipsis'));
+      const tagItems = debugEl.queryAll(By.css('.devui-select-tag-item .devui-tag-item'));
       expect(tagItems[1].nativeNode.innerText).toBe(`${content}`);
     }));
   });
@@ -203,7 +203,7 @@ describe('tags input', () => {
       flush();
       fixture.detectChanges();
 
-      const items = debugEl.queryAll(By.css('.devui-select-tag-item>span.over-flow-ellipsis'));
+      const items = debugEl.queryAll(By.css('.devui-select-tag-item .devui-tag-item'));
       expect(items[1].nativeNode.textContent).toBe(`${testTxt}`);
     }));
 
@@ -256,7 +256,7 @@ describe('tags input', () => {
 
   describe('remove button should work', () => {
     it('should have remove button', fakeAsync(() => {
-      const removeBtn: HTMLElement = debugEl.query(By.css('.devui-select-tag-item>.devui-select-tag-remove-button')).nativeElement;
+      const removeBtn: HTMLElement = debugEl.query(By.css('.devui-select-tag-item .remove-button')).nativeElement;
       removeBtn.dispatchEvent(new Event('click'));
       fixture.detectChanges();
       flush();

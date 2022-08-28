@@ -1,6 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import {
-  ChangeDetectorRef, Component, EventEmitter, Inject, Input, OnChanges, OnDestroy, OnInit,
+  ChangeDetectorRef, Component, EventEmitter, HostBinding, Inject, Input, OnChanges, OnDestroy, OnInit,
   Output, SimpleChanges, TemplateRef, ViewChild
 } from '@angular/core';
 import { DropDownDirective } from 'ng-devui/dropdown';
@@ -8,7 +8,7 @@ import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { BehaviorSubject, fromEvent, Observable, of, Subscription } from 'rxjs';
 import { debounceTime, map, switchMap } from 'rxjs/operators';
 import { FilterConfig } from '../../../../data-table.model';
-import { TableThComponent } from '../th.component';
+import { TABLE_TH } from '../th.token';
 
 @Component({
   selector: 'd-table-filter',
@@ -31,6 +31,15 @@ export class FilterComponent implements OnInit, OnChanges, OnDestroy {
 
   @Output() filterIconActiveChange = new EventEmitter<boolean>(true);
   @Output() filterChange = new EventEmitter<FilterConfig[]>();
+  @Output() filterToggle = new EventEmitter<{
+    isOpen: boolean;
+    checklist: FilterConfig[];
+  }>();
+
+  @HostBinding('class.devui-icon-show')
+  get canShow() {
+    return this.showFilterIcon || this.filterIconActive || this.filterIconActiveInner;
+  }
 
   @ViewChild('filterDropdown') filterDropdown;
   private sourceSubject: BehaviorSubject<any>;
@@ -49,7 +58,7 @@ export class FilterComponent implements OnInit, OnChanges, OnDestroy {
   filterIconActiveInner: boolean;
   DEBONCE_TIME = 300;
   document: Document;
-  constructor(private ref: ChangeDetectorRef, private i18n: I18nService, private thComponent: TableThComponent,
+  constructor(private ref: ChangeDetectorRef, private i18n: I18nService, @Inject(TABLE_TH) private thComponent: any,
               @Inject(DOCUMENT) private doc: any) {
     this.i18nCommonText = this.i18n.getI18nText().common;
     this.document = this.doc;
@@ -95,7 +104,8 @@ export class FilterComponent implements OnInit, OnChanges, OnDestroy {
 
   getFilterDataMultiple() {
     // 兼容当前当用户未传入id时，使用name做重名判断
-    const keyValue = this.checkedListForFilter.length ? this.checkedListForFilter[0].hasOwnProperty('id') ? 'id' : 'name' : '';
+    const keyValue = this.checkedListForFilter.length
+      ? Object.prototype.hasOwnProperty.call(this.checkedListForFilter[0], 'id') ? 'id' : 'name' : '';
     const checkedList = this.removeDuplication(this.checkedListForFilter, keyValue).filter(item => item.checked);
     this.setFilterIconActive(checkedList);
     this.filterChange.emit(checkedList);
@@ -113,7 +123,7 @@ export class FilterComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   setFilterIconActive(checkedData) {
-    if (this.filterIconActive === undefined && (Array.isArray(checkedData) ? checkedData.length : checkedData)) {
+    if (Array.isArray(checkedData) ? checkedData.length : checkedData) {
       this.filterIconActiveInner = true;
     } else {
       this.filterIconActiveInner = false;
@@ -158,17 +168,17 @@ export class FilterComponent implements OnInit, OnChanges, OnDestroy {
 
   onContainerScroll = () => {
     this.closeFilter(this.filterDropdown);
-  }
+  };
 
   showFilterContent($event) {
     if (this.closeWhenScroll) {
       const tableViewElement = this.thComponent.tableViewRefElement.nativeElement.querySelector('.devui-scrollbar.scroll-view');
       if ($event) {
         this.document.addEventListener('scroll', this.onContainerScroll);
-        tableViewElement?.addEventListener('scroll', this.onContainerScroll);
+        if (tableViewElement) { tableViewElement.addEventListener('scroll', this.onContainerScroll); }
       } else {
         this.document.removeEventListener('scroll', this.onContainerScroll);
-        tableViewElement?.removeEventListener('scroll', this.onContainerScroll);
+        if (tableViewElement) { tableViewElement.removeEventListener('scroll', this.onContainerScroll); }
       }
     }
     this.searchText = '';
@@ -186,14 +196,29 @@ export class FilterComponent implements OnInit, OnChanges, OnDestroy {
         this.registerFilterChange();
       }
     });
+    const keyValue = this.checkedListForFilter.length
+      ? Object.prototype.hasOwnProperty.call(this.checkedListForFilter[0], 'id') ? 'id' : 'name' : '';
+    const checkedList = this.removeDuplication(this.checkedListForFilter, keyValue).filter(item => item.checked);
+    this.filterToggle.emit({
+      isOpen: $event,
+      checklist: checkedList
+    });
   }
 
   filterCheckAll($event) {
     this.filterHalfChecked = false;
-    this.filterListDisplay.forEach(item => {
-      item.checked = $event;
-      this.checkedListForFilter.push(item);
-    });
+    // 全选时只针对当前面板操作，全不选时针对所有数据
+    if ($event) {
+      this.filterListDisplay.forEach(item => {
+        item.checked = $event;
+        this.checkedListForFilter.push(item);
+      });
+    } else {
+      this.filterList.forEach(item => {
+        item.checked = $event;
+        this.checkedListForFilter.push(item);
+      });
+    }
   }
 
   setHalfChecked() {

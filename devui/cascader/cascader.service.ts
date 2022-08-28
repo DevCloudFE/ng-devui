@@ -50,16 +50,16 @@ export class CascaderService implements OnDestroy {
   readonly openDrawer = new Subject<void>();
   readonly updateShowText = new Subject<void>();
   readonly updateTagList = new Subject<{
-    isAdd: boolean,
-    option: CascaderItem,
-    isEmit: boolean // 是否触发onchanges,对外发出值
+    isAdd: boolean;
+    option: CascaderItem;
+    isEmit: boolean; // 是否触发onchanges,对外发出值
   }>();
 
   initOptions(options: CascaderItem[]): void {
     this.columnList = [];
     this.options = cloneDeep(options);
     // 标记根节点
-    this.options.forEach(t => t['isRoot'] = true);
+    this.options.forEach(t => {t['isRoot'] = true;});
     this.columnList.push(this.options);
   }
 

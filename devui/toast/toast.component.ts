@@ -92,14 +92,15 @@ export class ToastComponent implements OnInit, AfterViewInit, OnDestroy {
 
   severityDelay(item: Message) {
     switch (item.severity) {
-      case 'warn':
-      case 'error':
-        return 10000;
-      default:
-        // common | success | info | default
-        return 5000;
+    case 'warn':
+    case 'error':
+      return 10000;
+    default:
+      // common | success | info | default
+      return 5000;
     }
   }
+
   show() {
     if (!this.container) {
       this.container = <HTMLDivElement>this.containerViewChild.nativeElement;
@@ -107,14 +108,16 @@ export class ToastComponent implements OnInit, AfterViewInit, OnDestroy {
     this.handleValueChange();
   }
 
-  // Will overwrite this method in modal service
+  // Will overwrite this method in toast service
   close() {}
-  // Will overwrite by drawer service
+
+  // Will overwrite this method in toast service
   onHidden() {}
+
   handleValueChange() {
     this.zIndex++;
     const doms = this.container.children;
-    setTimeout(() => this._value.forEach((v, i) => v && doms[i].classList.add('slide-in')));
+    setTimeout(() => this._value.forEach((v, i) => v && doms[i]?.classList.add('slide-in')));
 
     if (!this.sticky) {
       if (this.timeout) {
@@ -127,9 +130,9 @@ export class ToastComponent implements OnInit, AfterViewInit, OnDestroy {
       this.timestamp = new Date().getTime();
       if (this.lifeMode === 'single') {
         setTimeout(() => {
-          this._value.forEach(
-            (v, i) => (this.timeoutArr[i] = setTimeout(() => this.singleModeRemove(v, doms[i]), v.life || this.severityDelay(v)))
-          );
+          this._value.forEach((v, i) => {
+            this.timeoutArr[i] = setTimeout(() => this.singleModeRemove(v, doms[i]), v.life || this.severityDelay(v));
+          });
         });
       } else {
         this.timeout = setTimeout(() => {
@@ -147,7 +150,9 @@ export class ToastComponent implements OnInit, AfterViewInit, OnDestroy {
       const doms = this.container.children;
       dom = doms[index];
     }
-    dom.classList.remove('slide-in');
+    if (dom) {
+      dom.classList.remove('slide-in');
+    }
     setTimeout(() => {
       this.closeEvent.emit({ message: msg });
       if (this.container.querySelectorAll('.slide-in').length === 0) {
@@ -175,7 +180,7 @@ export class ToastComponent implements OnInit, AfterViewInit, OnDestroy {
         const otherToasts = this._value.slice(0);
         otherToasts.splice(index, 1, undefined);
         const doms = this.container.children;
-        otherToasts.forEach((v, i) => v && doms[i].classList.remove('slide-in'));
+        otherToasts.forEach((v, i) => v && doms[i]?.classList.remove('slide-in'));
       });
     }
   }
@@ -210,7 +215,7 @@ export class ToastComponent implements OnInit, AfterViewInit, OnDestroy {
   removeAll() {
     if (this.value && this.value.length) {
       const doms = this.container.children;
-      this._value.forEach((v, i) => v && doms[i].classList.remove('slide-in'));
+      this._value.forEach((v, i) => v && doms[i]?.classList.remove('slide-in'));
       setTimeout(() => {
         this.value.forEach((msg, index) => this.closeEvent.emit({ message: this.value[index] }));
         this.value = [];
@@ -222,12 +227,14 @@ export class ToastComponent implements OnInit, AfterViewInit, OnDestroy {
   removeThrottle(index: number, msgItem: any) {
     this.clickSub.next({ index: index, dom: msgItem });
   }
+
   removeIndexThrottle(index: number) {
     const doms = this.container.children;
     if (index < doms.length) {
       this.clickSub.next({ index: index, dom: doms[index] });
     }
   }
+
   removeMsgThrottle(msg: any) {
     const doms = this.container.children;
     const index = this._value.findIndex((item) => {

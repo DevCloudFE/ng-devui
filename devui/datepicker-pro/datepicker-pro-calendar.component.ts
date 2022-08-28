@@ -77,12 +77,37 @@ export class DatepickerProCalendarComponent implements OnInit, AfterViewInit, On
   @Input() startIndexOfWeek = 0;
   @Input() splitter = '-';
   @Input() showRangeHeader = true;
+  @Input() placeholder: string[];
+  @Input() allowClear = true;
+
+  @Input() set minDate(value: Date) {
+    if (!value) {
+      return;
+    }
+    this.pickerSrv.minDate = value;
+  }
+  @Input() set maxDate(value: Date) {
+    if (!value) {
+      return;
+    }
+    this.pickerSrv.maxDate = value;
+  }
+
+  @Input() set markedRangeDateList(value: Date[][]) {
+    this.pickerSrv.markedRangeDateList = value;
+  };
+  @Input() set markedDateList(value: Date[]) {
+    this.pickerSrv.markedDateList = value;
+  }
 
   @Output() confirmEvent = new EventEmitter<Date | Date[]>();
   @Output() cancelEvent = new EventEmitter<void>();
 
   @ContentChild('customTemplate') customTemplate: TemplateRef<any>;
   @ContentChild('footerTemplate') footerTemplate: TemplateRef<any>;
+  @ContentChild('markDateInfoTemplate') set markDateInfoTemplate(tmp: TemplateRef<any>) {
+    this.pickerSrv.markDateInfoTemplate = tmp;
+  };
 
   @ViewChild('dateInputStart') datepickerInputStart: ElementRef;
   @ViewChild('dateInputEnd') datepickerInputEnd: ElementRef;
@@ -123,7 +148,9 @@ export class DatepickerProCalendarComponent implements OnInit, AfterViewInit, On
   }
 
   clear(event?: MouseEvent) {
-    event?.stopPropagation();
+    if (event) {
+      event.stopPropagation();
+    }
     this.pickerSrv.updateDateValue.next({
       type: this.isRangeType ? 'range' : 'single',
       value: this.isRangeType ? [] : null
@@ -223,11 +250,15 @@ export class DatepickerProCalendarComponent implements OnInit, AfterViewInit, On
     this.pickerSrv.activeInputChange.next(type);
     if (type === 'start') {
       setTimeout(() => {
-        this.datepickerInputStart?.nativeElement?.focus();
+        if (this.datepickerInputStart?.nativeElement) {
+          this.datepickerInputStart.nativeElement.focus();
+        }
       });
     } else {
       setTimeout(() => {
-        this.datepickerInputEnd?.nativeElement?.focus();
+        if (this.datepickerInputEnd?.nativeElement) {
+          this.datepickerInputEnd.nativeElement.focus();
+        }
       });
     }
   }

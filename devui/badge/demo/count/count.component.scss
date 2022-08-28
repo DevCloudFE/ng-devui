@@ -2,25 +2,20 @@
 
 .title {
   font-size: $devui-font-size-card-title;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   font-weight: bold;
 }
 
 .menu {
-  left: 0;
   width: 200px;
-  background: $devui-global-bg;
+  background: $devui-base-bg;
+  box-shadow: $devui-shadow-length-base	$devui-light-shadow;
 
   &-item {
-    position: relative;
     padding: 8px 16px;
-    display: block;
-
-    .right-badge {
-      position: absolute;
-      right: 20px;
-      top: 12px;
-    }
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
     .item-title {
       color: $devui-text;

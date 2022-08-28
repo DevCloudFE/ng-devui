@@ -8,7 +8,7 @@ import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
 import { ToggleModule } from 'ng-devui/toggle';
 import { TranslateModule } from '@ngx-translate/core';
-import { DDemoNavModule } from 'src/app/component/d-demo-nav.module';
+import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
 import { BasicComponent } from './basic/basic.component';
 import { CallbackComponent } from './callback/callback.component';
 import { CustomComponent } from './custom/custom.component';
@@ -46,7 +46,7 @@ import { TwoBindingComponent } from './two-binding/two-binding.component';
     CallbackComponent,
     CustomComponent
   ],
-  
+
   providers: [],
 })
 export class ToggleDemoModule {}

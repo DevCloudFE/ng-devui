@@ -7,9 +7,9 @@ import {
   QueryList, ViewChildren
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { IExampleData } from 'ng-devui/shared/helpers';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import * as hljs from 'highlight.js/lib/core';
-import { IExampleData } from 'ng-devui/shared/helpers';
 
 ['javascript', 'typescript'].forEach((langName) => {
   // Using require() here because import() support hasn't landed in Webpack yet
@@ -18,7 +18,7 @@ import { IExampleData } from 'ng-devui/shared/helpers';
 });
 
 @Component({
-  selector: 'app-demo-cell',
+  selector: 'd-demo-cell',
   styleUrls: [
     './example-panel.component.scss'
   ],
@@ -46,7 +46,7 @@ export class ExamplePanelComponent implements OnInit, AfterViewInit {
     this.componentPath  = array[array.length - 2];
     this.getData(this.translate.translations[this.translate.currentLang]);
     this.translate.onLangChange.subscribe((event: TranslationChangeEvent) => {
-        this.getData(event.translations);
+      this.getData(event.translations);
     });
     this.route.url.subscribe(UrlSegments => {
       const fragmentIndex = this.router.url.split('/').pop().indexOf('#');
@@ -56,7 +56,7 @@ export class ExamplePanelComponent implements OnInit, AfterViewInit {
   }
 
   getData (translations) {
-    if (translations && translations['components'].hasOwnProperty(this.componentPath)) {
+    if (translations && Object.prototype.hasOwnProperty.call(translations['components'], this.componentPath)) {
       const component = translations['components'][this.componentPath];
       this.componentName = component.name;
       this.description = component.description;

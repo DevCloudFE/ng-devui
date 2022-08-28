@@ -6,6 +6,7 @@ export * from './date-utils';
 export * from './default-date-converter';
 export * from './dom-utils';
 export * from './fun-utils';
+export * from './globalConfig';
 export * from './highlight/highlight.component';
 export * from './highlight/highlight.module';
 export * from './lazy-load/lazy-load.directive';

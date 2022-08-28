@@ -1,0 +1,83 @@
+@import './icon-style-token.scss';
+@import '../style/core/animation';
+
+.devui-icon {
+  font-size: $devui-icon-font-size;
+  display: inline-block;
+  vertical-align: middle;
+  transition: all $devui-animation-duration-slow $devui-animation-ease-in-out-smooth;
+}
+
+.devui-icon-can-interactive {
+  &:not(.disabled) {
+    cursor: pointer;
+    transition: color $devui-animation-duration-slow $devui-animation-ease-in-out-smooth;
+
+    .devui-icon {
+      cursor: pointer;
+    }
+  }
+
+  &:hover:not(.disabled) {
+    color: $devui-icon-hover-color;
+
+    &.devui-icon-container {
+      background-color: $devui-icon-hover-bg;
+    }
+
+    .devui-icon {
+      color: $devui-icon-hover-color;
+    }
+  }
+
+  &:active:not(.disabled) {
+    color: $devui-icon-active-color;
+
+    &.devui-icon-container {
+      background-color: $devui-icon-active-bg;
+    }
+
+    .devui-icon {
+      color: $devui-icon-active-color;
+    }
+  }
+
+  &.devui-icon-container {
+    height: $devui-icon-height;
+    padding: 0 8px;
+    margin-left: -8px;
+    border-radius: $devui-icon-border-radius;
+    transition: all $devui-animation-duration-slow $devui-animation-ease-in-out-smooth;
+  }
+}
+
+.devui-icon-container {
+  display: inline-flex;
+  align-items: center;
+  color: $devui-icon-color;
+}
+
+.disabled {
+  color: $devui-icon-disabled-color;
+  cursor: not-allowed;
+
+  .devui-icon {
+    color: $devui-icon-disabled-color;
+  }
+}
+
+::ng-deep .devui-icon-container [iconPrefix] {
+  vertical-align: middle;
+  margin-right: $devui-icon-space;
+}
+
+::ng-deep .devui-icon-container [iconSuffix] {
+  vertical-align: middle;
+  margin-left: $devui-icon-space;
+}
+
+::ng-deep .devui-icon-container span,
+::ng-deep .devui-icon-container svg,
+::ng-deep .devui-icon-container i {
+  vertical-align: middle;
+}

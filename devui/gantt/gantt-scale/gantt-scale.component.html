@@ -47,7 +47,7 @@
       </div>
     </ng-container>
   </div>
-  <div class="milestone-new {{ unit }}" title="milestone" (click)="addMilestone(data)">
+  <div class="milestone-new {{ unit }}" [title]="i18nText?.milestone" (click)="addMilestone(data)">
     <div class="icon-add"></div>
   </div>
 </div>

@@ -52,7 +52,7 @@ export class ReadTipDirective implements OnInit, OnDestroy {
 
   @HostListener('mouseover', ['$event'])
   onMouseOver(event: MouseEvent) {
-    this.findElementIndex(event.target, this.readTipOptions.rules, 'hover').subscribe((elementInfo) => {
+    this.findElementIndex(event.target, this.readTipOptions?.rules, 'hover').subscribe((elementInfo) => {
       if (elementInfo?.shouldTrigger) {
         this.hide();
         if (!this.readTipComponentRef) {
@@ -74,7 +74,7 @@ export class ReadTipDirective implements OnInit, OnDestroy {
 
   @HostListener('mouseout', ['$event'])
   onMouseOut(event: MouseEvent) {
-    this.findElementIndex(event.target, this.readTipOptions.rules, 'hover').subscribe((elementInfo) => {
+    this.findElementIndex(event.target, this.readTipOptions?.rules, 'hover').subscribe((elementInfo) => {
       if (elementInfo?.shouldTrigger) {
         setTimeout(() => {
           this.hide();
@@ -85,7 +85,7 @@ export class ReadTipDirective implements OnInit, OnDestroy {
 
   @HostListener('click', ['$event'])
   onClick(event: MouseEvent) {
-    this.findElementIndex(event.target, this.readTipOptions.rules, 'click').subscribe((elementInfo) => {
+    this.findElementIndex(event.target, this.readTipOptions?.rules, 'click').subscribe((elementInfo) => {
       this.prevTarget = event.target;
       if (elementInfo?.shouldTrigger) {
         if (!this.readTipComponentRef) {
@@ -223,7 +223,7 @@ export class ReadTipDirective implements OnInit, OnDestroy {
     ) {
       this.hide();
     }
-  }
+  };
 
   findElementIndex(element, rules, trigger) {
     const keysCanInherit = ['trigger', 'showAnimate', 'mouseenterTime', 'mouseleaveTime', 'position', 'overlayClassName', 'appendToBody'];

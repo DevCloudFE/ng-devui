@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
+import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -35,6 +35,11 @@ export class UploadDemoComponent implements OnInit, OnDestroy {
     { title: 'SCSS', language: 'css', code: require('./customize-area-upload/customize-area-upload.component.scss?raw') },
   ];
 
+  UploadDemoSlice: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'xml', code: require('./slice/upload-slice.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./slice/upload-slice.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./slice/upload-slice.component.scss?raw') },
+  ];
   navItems = [];
   subs: Subscription = new Subscription();
   constructor(private translate: TranslateService) {}
@@ -62,6 +67,7 @@ export class UploadDemoComponent implements OnInit, OnDestroy {
       { dAnchorLink: 'custom', value: values['custom'] },
       { dAnchorLink: 'dynamic-upload-options', value: values['dynamic-upload-options'] },
       { dAnchorLink: 'customize-area-upload', value: values['customize-area-upload'] },
+      { dAnchorLink: 'upload-slice', value: values['upload-slice']},
     ];
   }
 
