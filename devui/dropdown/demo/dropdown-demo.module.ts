@@ -35,7 +35,7 @@ import { DropdownSetIsOpenComponent } from './set-is-open/dropdown-set-is-open.c
     IconModule,
     DDemoNavModule,
     RouterModule.forChild([
-      { path: '',  redirectTo: 'demo' },
+      { path: '',  redirectTo: 'demo', pathMatch: 'full' },
       { path: 'demo', component: DropdownDemoComponent},
       { path: 'api', component: DevUIApiComponent, data: {
         'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),

@@ -102,8 +102,8 @@ export class PopoverDirective implements OnInit, OnDestroy {
   // 因为鼠标移出之后如果立刻消失会很突然，所以增加略小一些的延迟，使得既不突然也反应灵敏
   @Input() mouseLeaveDelay = 100;
   isEnter: boolean;
-  unsubscribe$ = new Subject();
-  unsubscribeP$ = new Subject();
+  unsubscribe$ = new Subject<void>();
+  unsubscribeP$ = new Subject<void>();
   document: Document;
   @Input() set visible(_isShow: boolean) {
     if (_isShow) {

@@ -22,7 +22,7 @@ import { ProgressDemoComponent } from './progress-demo.component';
     DevUIApiModule,
     DDemoNavModule,
     RouterModule.forChild([
-      { path: '',  redirectTo: 'demo' },
+      { path: '',  redirectTo: 'demo', pathMatch: 'full' },
       { path: 'demo', component: ProgressDemoComponent},
       { path: 'api', component: DevUIApiComponent, data: {
         'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),

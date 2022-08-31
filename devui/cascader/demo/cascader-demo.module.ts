@@ -31,7 +31,7 @@ import { TemplateCascaderComponent } from './template-cascader/template-cascader
     ButtonModule,
     TabsModule,
     RouterModule.forChild([
-      { path: '', redirectTo: 'demo' },
+      { path: '', redirectTo: 'demo', pathMatch: 'full' },
       { path: 'demo', component: CascaderDemoComponent },
       {
         path: 'api',

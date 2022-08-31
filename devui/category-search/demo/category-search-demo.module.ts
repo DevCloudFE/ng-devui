@@ -1,5 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
+import { FormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { CategorySearchModule } from "ng-devui/category-search";
 import { SelectModule } from "ng-devui/select";
@@ -25,10 +26,12 @@ import { CategorySearchDemoComponent } from "./category-search-demo.component";
     DevUIApiModule,
     CategorySearchModule,
     SelectModule,
+    FormsModule,
     RouterModule.forChild([
       {
         path: "",
         redirectTo: "demo",
+        pathMatch: 'full'
       },
       {
         path: "demo",

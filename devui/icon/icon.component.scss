@@ -1,6 +1,10 @@
 @import './icon-style-token.scss';
 @import '../style/core/animation';
 
+:host {
+  display: inline-flex;
+}
+
 .devui-icon {
   font-size: $devui-icon-font-size;
   display: inline-block;
@@ -80,4 +84,32 @@
 ::ng-deep .devui-icon-container svg,
 ::ng-deep .devui-icon-container i {
   vertical-align: middle;
+}
+
+::ng-deep d-icon.devui-icon-hover {
+  cursor: pointer;
+
+  &:hover {
+    .devui-icon-container {
+      .devui-icon {
+        color: $devui-icon-fill-hover;
+      }
+    }
+  }
+}
+
+::ng-deep d-icon.devui-icon-link {
+  cursor: pointer;
+
+  a {
+    color: $devui-aide-text;
+  }
+
+  &:hover {
+    .devui-icon-container {
+      .devui-icon {
+        color: $devui-brand;
+      }
+    }
+  }
 }

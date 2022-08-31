@@ -26,7 +26,7 @@ import { TagsInputDemoVirtualScrollComponent } from './virtual-scroll/virtual-sc
     DDemoNavModule,
     ButtonModule,
     RouterModule.forChild([
-      { path: '', redirectTo: 'demo' },
+      { path: '', redirectTo: 'demo', pathMatch: 'full' },
       { path: 'demo', component: TagsInputDemoComponent },
       {
         path: 'api',

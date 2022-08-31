@@ -129,7 +129,9 @@ export class Utils {
       ev.dataTransfer.setData('text', '');
       ev.dataTransfer.effectAllowed = event.dataTransfer.effectAllowed;
     }
-    under.dispatchEvent(ev);
+    setTimeout(() => {
+      under.dispatchEvent(ev);
+    }, 0);
     return event;
   }
 }

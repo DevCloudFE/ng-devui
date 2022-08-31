@@ -63,9 +63,11 @@ export class TagsComponent implements OnInit, AfterViewInit, OnChanges {
   constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
-    this.maxShowNumber = this.tags.length;
+    this.maxShowNumber = 0;
     // TODO: 使用cloneDeep导致category-search卡顿，lodash-es报Illegal invocation非法调用错误，需调查原因，暂用循环方式替代深拷贝
-    this.tags.forEach((item) => this.showTags.push(typeof item === 'object' ? { ...item } : item));
+    if(this.hideBeyondTags) {
+      this.tags.forEach((item) => this.showTags.push(typeof item === 'object' ? { ...item } : item));
+    }
   }
 
   ngAfterViewInit() {
@@ -76,7 +78,7 @@ export class TagsComponent implements OnInit, AfterViewInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if(this.hideBeyondTags && changes['tags'] && !changes['tags'].firstChange) {
-      this.maxShowNumber = this.tags.length;
+      this.maxShowNumber = 0;
       this.showTags = [...this.tags];
       this.calculateHideTagsStatus();
     }
@@ -86,13 +88,17 @@ export class TagsComponent implements OnInit, AfterViewInit, OnChanges {
     this.cdr.detectChanges();
     this.tagsFatherWidth = this.tagsElement.nativeElement.getBoundingClientRect().width;
     let curWidth = 0;
-    this.viewChildren.forEach((element, index) => {
-      if (curWidth + element.nativeElement.offsetWidth + this.TAG_MARGIN < this.tagsFatherWidth - this.MORE_TAG_WIDTH) {
-        curWidth += element.nativeElement.offsetWidth;
+    const viewChildrenArr = this.viewChildren.toArray();
+
+    for(let i = 0; i < viewChildrenArr.length; i++) {
+      if (curWidth + viewChildrenArr[i].nativeElement.offsetWidth + this.TAG_MARGIN < this.tagsFatherWidth - this.MORE_TAG_WIDTH) {
+        curWidth += viewChildrenArr[i].nativeElement.offsetWidth;
         curWidth += this.TAG_MARGIN;
-        this.maxShowNumber = index + 1;
+        this.maxShowNumber = i + 1;
+      } else {
+        break;
       }
-    });
+    }
     if (this.maxShowNumber !== this.tags.length) {
       this.showMore = true;
       this.beyondTags = this.showTags.slice(this.maxShowNumber);

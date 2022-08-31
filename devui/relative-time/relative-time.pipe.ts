@@ -8,7 +8,7 @@ import { map, takeUntil } from 'rxjs/operators';
   name: 'dRelativeTime'
 })
 export class RelativeTimePipe implements PipeTransform, OnDestroy {
-  private _destroyed$ = new Subject();
+  private _destroyed$ = new Subject<void>();
   constructor(private i18n: I18nService) {}
 
   transform(

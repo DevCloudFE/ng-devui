@@ -1,9 +1,10 @@
+import { Routes } from "@angular/router";
 import { ExamplePanelComponent } from './example-panel.component';
 import { GetStartedComponent } from './get-started.component';
 import { GlobalConfigComponent } from './global-config.component';
 import { ComponentsOverviewComponent } from './overview.component';
 import { ThemeGuideComponent } from './theme-guide.component';
-export const routesConfig = [
+export const routesConfig: Routes = [
   {
     path: 'design-color',
     component: ExamplePanelComponent,
@@ -1039,6 +1040,20 @@ export const routesConfig = [
       enType: 'Data Display',
       name: 'RelativeTime',
       cnName: '人性化时间转换',
+    },
+  },
+  {
+    path: 'number-trans',
+    component: ExamplePanelComponent,
+    loadChildren: () =>
+      import('../../../devui/number-translation/demo/demo.module').then(
+        (m) => m.DemoModule
+      ),
+    data: {
+      type: '数据展示',
+      enType: 'Data Display',
+      name: 'number translator',
+      cnName: '数字转换器',
     },
   },
   {

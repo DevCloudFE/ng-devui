@@ -114,3 +114,7 @@ Used for menu control objects. For details, see demo.
 ## dDropDownMenu
 
 Used to expand and close menus. For details, see the demo.
+
+## dDropDownMenuItem
+
+Used for drop-down list items. For details, see the demo.

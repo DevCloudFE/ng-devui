@@ -33,7 +33,7 @@ export class HeaderComponent implements OnInit {
 
   @HostListener('window:resize')
   resize(): void {
-    this.showSlideMenu = document.body.clientWidth < 1024 ? false : true;
+    this.showSlideMenu = document.body.clientWidth < 1280 ? false : true;
     this.setSlideBarStyle();
   }
 
@@ -69,7 +69,7 @@ export class HeaderComponent implements OnInit {
   setSlideBarStyle(): void {
     const ele = document.querySelector('.sidebar-wrapper');
     if (ele) {
-      ele.setAttribute('style', `max-width: ${ this.showSlideMenu ? '260px' : '0'}`);
+      ele.setAttribute('style', `max-width: ${ this.showSlideMenu ? '320px' : '0'}`);
     }
   }
 

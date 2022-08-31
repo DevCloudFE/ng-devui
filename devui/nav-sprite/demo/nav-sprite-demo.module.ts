@@ -22,6 +22,7 @@ import { NavSpriteDemoComponent } from "./nav-sprite-demo.component";
       {
         path: "",
         redirectTo: "demo",
+        pathMatch: 'full'
       },
       {
         path: "demo",

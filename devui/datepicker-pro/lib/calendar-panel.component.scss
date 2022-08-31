@@ -175,7 +175,7 @@
         }
       }
 
-      &.devui-table-date-start:not(.devui-table-date-end) {
+      &.devui-table-date-start:not(.devui-table-date-end,.devui-table-date-disable) {
         position: relative;
 
         &::after {
@@ -198,7 +198,7 @@
         }
       }
 
-      &.devui-table-date-end:not(.devui-table-date-start) {
+      &.devui-table-date-end:not(.devui-table-date-start,.devui-table-date-disable) {
         position: relative;
 
         &::after {

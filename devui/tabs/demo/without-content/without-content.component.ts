@@ -1,15 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'd-without-content',
-  templateUrl: './without-content.component.html'
+  templateUrl: './without-content.component.html',
+  styles: [
+    `
+      pre {
+        border: none;
+      }
+    `,
+  ],
 })
-export class WithoutContentComponent implements OnInit {
-  acticeTabId: string | number = 'tab2';
-  constructor() { }
+export class WithoutContentComponent {
+  tabActiveId: string | number = 'tab2';
 
-  ngOnInit() {
-  }
   activeTabChange(event) {
     console.log('switch to', event);
   }

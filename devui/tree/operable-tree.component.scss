@@ -98,3 +98,12 @@
   color: $devui-brand;
   font-weight: bold;
 }
+
+::ng-deep .devui-tree-drag-ghost-container {
+  position: fixed;
+  left: -9999;
+  top: -9999;
+  width: 100%;
+  height: auto;
+  background: transparent;
+}

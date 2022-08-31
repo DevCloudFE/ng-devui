@@ -334,7 +334,7 @@ export class TreeFactory {
     return this.getCheckedNodes();
   }
 
-  private checkParentNodes(node: TreeNode) {
+  checkParentNodes(node: TreeNode) {
     const { parentId } = node;
     const parentNode = this.nodes[parentId];
     if (parentNode) {

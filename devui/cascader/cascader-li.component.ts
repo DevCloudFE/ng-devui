@@ -26,7 +26,7 @@ export class CascaderLiComponent implements OnInit, OnDestroy {
   halfCheck: boolean;
   active: boolean;
 
-  unsubscribe$ = new Subject();
+  unsubscribe$ = new Subject<void>();
 
   @HostListener('click', ['$event'])
   onClick(event: Event) {

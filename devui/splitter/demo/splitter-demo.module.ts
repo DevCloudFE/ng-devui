@@ -29,7 +29,7 @@ import { SplitterDemoVerticalComponent } from './vertical/splitter-demo-vertical
     TooltipModule,
     DDemoNavModule,
     RouterModule.forChild([
-      {path: '', redirectTo: 'demo'},
+      {path: '', redirectTo: 'demo', pathMatch: 'full'},
       {path: 'demo', component: SplitterDemoComponent},
       {
         path: 'api', component: DevUIApiComponent, data: {

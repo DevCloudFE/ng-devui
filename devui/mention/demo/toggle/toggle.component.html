@@ -1,0 +1,18 @@
+<d-button (btnClick)="mentionSeparatorToggle.prefix = !mentionSeparatorToggle.prefix" bsClass="d-btn d-btn-primary">
+  {{ mentionSeparatorToggle.prefix ? 'No space before the prefix' : 'Use space in prefix' }}
+</d-button>
+<d-button (btnClick)="mentionSeparatorToggle.suffix = !mentionSeparatorToggle.suffix" bsClass="d-btn d-btn-primary">
+  {{ mentionSeparatorToggle.suffix ? 'close suggestions without matching results' : 'Use space at the end' }}
+</d-button>
+<br />
+<br />
+<textarea
+  dTextarea
+  placeholder="Please Enter"
+  id="textArea"
+  dMention
+  [mentionSuggestions]="suggestions"
+  [mentionSeparator]="mentionSeparator"
+  [mentionSeparatorToggle]="mentionSeparatorToggle"
+  >{{ content }}</textarea
+>

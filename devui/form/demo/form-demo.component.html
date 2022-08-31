@@ -49,49 +49,63 @@
     </d-codebox>
   </div>
 
-  <hr class="split-line" />
+  <div class="devui-demo-example" [dAnchor]="'demo-inner-validator'">
+    <div class="devui-demo-title">{{ 'components.form.innerValidatorDemo.title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.form.innerValidatorDemo.subtitle' | translate }}</div>
+    <div [innerHTML]="'components.form.innerValidatorDemo.description' | translate"></div>
+    <d-codebox id="inner-validator" [sourceData]="InnerValidatorSource">
+      <d-form-demo-inner-validator demo></d-form-demo-inner-validator>
+    </d-codebox>
+  </div>
+
+  <div class="devui-demo-example" [dAnchor]="'demo-custom-validator'">
+    <div class="devui-demo-title">{{ 'components.form.customerValidatorDemo.title' | translate }}</div>
+    <div [innerHTML]="'components.form.customerValidatorDemo.description' | translate"></div>
+    <d-codebox id="custom-validator" [sourceData]="CustomValidatorSource">
+      <d-form-demo-custom-validator demo></d-form-demo-custom-validator>
+    </d-codebox>
+  </div>
+
+  <div class="devui-demo-example" [dAnchor]="'demo-error-strategy'">
+    <div class="devui-demo-title">{{ 'components.form.customErrorStrategyDemo.title' | translate }}</div>
+    <div [innerHTML]="'components.form.customErrorStrategyDemo.description' | translate"></div>
+    <d-codebox id="error-strategy" [sourceData]="ErrorStrategySource">
+      <d-form-demo-error-strategy demo></d-form-demo-error-strategy>
+    </d-codebox>
+  </div>
+
+  <div class="devui-demo-example" [dAnchor]="'demo-custom-message'">
+    <div class="devui-demo-title">{{ 'components.form.customMessageShowDemo.title' | translate }}</div>
+    <div [innerHTML]="'components.form.customMessageShowDemo.description' | translate"></div>
+    <d-codebox id="custom-message-show" [sourceData]="CustomMessageShowSource">
+      <d-form-demo-custom-message-show demo></d-form-demo-custom-message-show>
+    </d-codebox>
+  </div>
+
+  <div class="devui-demo-example" [dAnchor]="'demo-debounce-time'">
+    <div class="devui-demo-title">{{ 'components.form.debounceTimeDemo.title' | translate }}</div>
+    <div [innerHTML]="'components.form.debounceTimeDemo.description' | translate"></div>
+    <d-codebox id="debounce-time" [sourceData]="DebounceTimeSource">
+      <d-form-demo-debounce-time demo></d-form-demo-debounce-time>
+    </d-codebox>
+  </div>
 
   <div class="devui-demo-example" [dAnchor]="'demo-validate-template'">
-    <div class="devui-demo-title">{{ 'components.form.templateValidateDemo.title' | translate }}</div>
-    <div class="devui-demo-text" [innerHTML]="'components.form.templateValidateDemo.description' | translate"></div>
-    <div id="demo-validate-template">
-      <h5>{{ 'components.form.innerValidatorDemo.title' | translate }}</h5>
-      <div [innerHTML]="'components.form.innerValidatorDemo.description' | translate"></div>
-      <d-codebox id="inner-validator" [sourceData]="InnerValidatorSource">
-        <d-form-demo-inner-validator demo></d-form-demo-inner-validator>
-      </d-codebox>
-      <h5>{{ 'components.form.customerValidatorDemo.title' | translate }}</h5>
-      <div [innerHTML]="'components.form.customerValidatorDemo.description' | translate"></div>
-      <d-codebox id="custom-validator" [sourceData]="CustomValidatorSource">
-        <d-form-demo-custom-validator demo></d-form-demo-custom-validator>
-      </d-codebox>
-      <h5>{{ 'components.form.customErrorStrategyDemo.title' | translate }}</h5>
-      <div [innerHTML]="'components.form.customErrorStrategyDemo.description' | translate"></div>
-      <d-codebox id="error-strategy" [sourceData]="ErrorStrategySource">
-        <d-form-demo-error-strategy demo></d-form-demo-error-strategy>
-      </d-codebox>
-      <h5>{{ 'components.form.customMessageShowDemo.title' | translate }}</h5>
-      <div [innerHTML]="'components.form.customMessageShowDemo.description' | translate"></div>
-      <d-codebox id="custom-message-show" [sourceData]="CustomMessageShowSource">
-        <d-form-demo-custom-message-show demo></d-form-demo-custom-message-show>
-      </d-codebox>
-      <h5>{{ 'components.form.debounceTimeDemo.title' | translate }}</h5>
-      <div [innerHTML]="'components.form.debounceTimeDemo.description' | translate"></div>
-      <d-codebox id="debounce-time" [sourceData]="DebounceTimeSource">
-        <d-form-demo-debounce-time demo></d-form-demo-debounce-time>
-      </d-codebox>
-      <h5>{{ 'components.form.validateTemplateForm.title' | translate }}</h5>
-      <div [innerHTML]="'components.form.validateTemplateForm.description' | translate"></div>
-      <d-codebox id="validate-template-form" [sourceData]="ValidateTemplateForm">
-        <d-form-demo-validate-template-form demo></d-form-demo-validate-template-form>
-      </d-codebox>
-      <h5>{{ 'components.form.userRegisterDemo.title' | translate }}</h5>
-      <div [innerHTML]="'components.form.userRegisterDemo.description' | translate"></div>
-      <d-codebox id="user-register" [sourceData]="UserRegisterShowSource">
-        <d-form-demo-user-register demo></d-form-demo-user-register>
-      </d-codebox>
-    </div>
+    <div class="devui-demo-title">{{ 'components.form.validateTemplateForm.title' | translate }}</div>
+    <div [innerHTML]="'components.form.validateTemplateForm.description' | translate"></div>
+    <d-codebox id="validate-template-form" [sourceData]="ValidateTemplateForm">
+      <d-form-demo-validate-template-form demo></d-form-demo-validate-template-form>
+    </d-codebox>
   </div>
+
+  <div class="devui-demo-example" [dAnchor]="'demo-user-register'">
+    <div class="devui-demo-title">{{ 'components.form.userRegisterDemo.title' | translate }}</div>
+    <div [innerHTML]="'components.form.userRegisterDemo.description' | translate"></div>
+    <d-codebox id="user-register" [sourceData]="UserRegisterShowSource">
+      <d-form-demo-user-register demo></d-form-demo-user-register>
+    </d-codebox>
+  </div>
+
   <div class="devui-demo-example" [dAnchor]="'demo-validate-reactive'">
     <div class="devui-demo-title">{{ 'components.form.validateReactiveDemo.title' | translate }}</div>
     <div class="devui-demo-text" [innerHTML]="'components.form.validateReactiveDemo.description' | translate"></div>

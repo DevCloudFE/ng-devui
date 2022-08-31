@@ -40,8 +40,7 @@
 
 .grid {
   letter-spacing: -0.31em;
-
-  /* *letter-spacing: normal; */
+  *letter-spacing: normal;
   word-spacing: -0.43em;
 }
 
@@ -75,8 +74,7 @@
 .u-19-24,
 .u-23-24 {
   display: inline-block;
-
-  /* *display: inline; */
+  *display: inline;
   zoom: 1;
   letter-spacing: normal;
   word-spacing: normal;
@@ -703,7 +701,7 @@ a:hover {
   background-color: #ffffff;
   background-color: var(--devui-connected-overlay-bg, #ffffff);
   box-shadow: 0 2px 8px 0  rgba(0, 0, 0, 0.2);
-  box-shadow: var(--devui-shadow-connected-overlay, 0 2px 8px 0) var(--devui-shadow, rgba(0, 0, 0, 0.2));
+  box-shadow: var(--devui-shadow-length-connected-overlay, 0 2px 8px 0) var(--devui-shadow, rgba(0, 0, 0, 0.2));
   outline: none;
 }
 
@@ -849,7 +847,7 @@ a:hover {
   background: #ffffff;
   background: var(--devui-connected-overlay-bg, #ffffff);
   box-shadow: 0 2px 8px 0  rgba(0, 0, 0, 0.2);
-  box-shadow: var(--devui-shadow-connected-overlay, 0 2px 8px 0) var(--devui-shadow, rgba(0, 0, 0, 0.2));
+  box-shadow: var(--devui-shadow-length-connected-overlay, 0 2px 8px 0) var(--devui-shadow, rgba(0, 0, 0, 0.2));
 }
 
 .devui-dropdown .devui-dropdown-menu > li > a:not(.disabled) {

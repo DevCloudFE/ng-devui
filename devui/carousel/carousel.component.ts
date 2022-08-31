@@ -13,7 +13,7 @@ import {
   Output,
   QueryList,
   Renderer2,
-  SimpleChanges
+  SimpleChanges,
 } from '@angular/core';
 import { CarouselItemComponent } from './carousel-item.component';
 

@@ -21,7 +21,7 @@ import { DesignBorderRadiusDemoComponent } from './design-border-radius-demo.com
     DDemoNavModule,
     TabsModule,
     RouterModule.forChild([
-      { path: '',  redirectTo: 'demo' },
+      { path: '',  redirectTo: 'demo', pathMatch: 'full' },
       { path: 'demo', component: DesignBorderRadiusDemoComponent},
       { path: 'api', component: DevUIApiComponent, data: {
         'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),

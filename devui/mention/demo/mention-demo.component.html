@@ -2,7 +2,7 @@
   <d-demo-nav [navItems]="navItems"></d-demo-nav>
   <div class="devui-demo-example" [dAnchor]="'basic-usage'">
     <div class="devui-demo-title">{{ 'components.mention.basicDemo.title' | translate }}</div>
-    <div class="devui-demo-text"></div>
+    <div class="devui-demo-text">{{ 'components.mention.basicDemo.description' | translate }}</div>
     <d-codebox id="components-mention-basic" [sourceData]="basicSource">
       <d-mention-basic demo></d-mention-basic>
     </d-codebox>
@@ -10,7 +10,7 @@
 
   <div class="devui-demo-example" [dAnchor]="'async-usage'">
     <div class="devui-demo-title">{{ 'components.mention.asyncDemo.title' | translate }}</div>
-    <div class="devui-demo-text"></div>
+    <div class="devui-demo-text">{{ 'components.mention.asyncDemo.description' | translate }}</div>
     <d-codebox id="components-mention-async" [sourceData]="asyncSource">
       <d-mention-async demo></d-mention-async>
     </d-codebox>
@@ -18,7 +18,7 @@
 
   <div class="devui-demo-example" [dAnchor]="'custom-prefix'">
     <div class="devui-demo-title">{{ 'components.mention.prefixDemo.title' | translate }}</div>
-    <div class="devui-demo-text"></div>
+    <div class="devui-demo-text">{{ 'components.mention.prefixDemo.description' | translate }}</div>
     <d-codebox id="components-mention-prefix" [sourceData]="prefixSource">
       <d-mention-prefix demo></d-mention-prefix>
     </d-codebox>
@@ -26,9 +26,17 @@
 
   <div class="devui-demo-example" [dAnchor]="'custom-template'">
     <div class="devui-demo-title">{{ 'components.mention.customDemo.title' | translate }}</div>
-    <div class="devui-demo-text"></div>
+    <div class="devui-demo-text">{{ 'components.mention.customDemo.description' | translate }}</div>
     <d-codebox id="components-mention-custom" [sourceData]="customSource">
       <d-mention-custom demo></d-mention-custom>
+    </d-codebox>
+  </div>
+
+  <div class="devui-demo-example" [dAnchor]="'use-separator'">
+    <div class="devui-demo-title">{{ 'components.mention.toggleDemo.title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.mention.toggleDemo.description' | translate }}</div>
+    <d-codebox id="components-mention-toggle" [sourceData]="toggleSource">
+      <d-mention-toggle demo></d-mention-toggle>
     </d-codebox>
   </div>
 </div>

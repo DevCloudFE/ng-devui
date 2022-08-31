@@ -271,7 +271,7 @@ class TestDataTableAdvancedColumnComponent implements OnInit {
   filterChangeMultiple($event) {
     const filterList = $event.map(item => item.name);
     const dataDisplay = [];
-    JSON.parse(JSON.stringify(originSource.slice(0, 6))).map(item => {
+    JSON.parse(JSON.stringify(originSource.slice(0, 6))).forEach(item => {
       if (filterList.includes(item.firstName)) {
         dataDisplay.push(item);
       }
@@ -966,7 +966,7 @@ describe('data-table column', () => {
 
       it('should cell click work', fakeAsync(() => {
         const cellEl = debugEl.query(By.css('.devui-data-table .devui-table tbody tr td:nth-child(2)'));
-        cellEl.nativeElement.dispatchEvent(new Event('click'));
+        cellEl.nativeElement.dispatchEvent(new Event('mouseup'));
         flush();
         expect(component.testCellClickEvent).not.toBeNull();
       }));
@@ -980,14 +980,14 @@ describe('data-table column', () => {
 
       it('should row click work', fakeAsync(() => {
         const rowEl = debugEl.query(By.css('.devui-data-table .devui-table tbody tr'));
-        rowEl.nativeElement.dispatchEvent(new Event('click'));
+        rowEl.nativeElement.dispatchEvent(new Event('mouseup'));
         flush();
         expect(component.testRowClickEvent).not.toBeNull();
         fixture.detectChanges();
         component.testRowClickEvent = null;
         // click twice
-        rowEl.nativeElement.dispatchEvent(new Event('click'));
-        rowEl.nativeElement.dispatchEvent(new Event('click'));
+        rowEl.nativeElement.dispatchEvent(new Event('mouseup'));
+        rowEl.nativeElement.dispatchEvent(new Event('mouseup'));
         expect(component.testRowClickEvent).toBeNull();
         flush();
       }));

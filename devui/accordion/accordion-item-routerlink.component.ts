@@ -12,9 +12,10 @@ import { ACCORDION } from './accordion-token';
 export class AccordionItemRouterlinkComponent extends AccordionBaseLinkComponent implements OnChanges {
   @ViewChild(RouterLinkActive) routerLinkActiveDirective: RouterLinkActive;
   @HostBinding('class.devui-router-active')
-  get routerLinkActived(): boolean {
+  get routerLinkActivated(): boolean {
     return !!(this.routerLinkActiveDirective && this.routerLinkActiveDirective.isActive);
   }
+
   private set urlTree(urlTree: UrlTree) {
     if (urlTree) {
       this.queryParams = urlTree.queryParams;
@@ -25,23 +26,23 @@ export class AccordionItemRouterlinkComponent extends AccordionBaseLinkComponent
     }
   }
 
-  public path: string;
-  public queryParams: Params;
-  public fragment: string;
-
-  constructor(@Inject(ACCORDION) protected accordion: any, private router: Router) {
-    super(accordion);
-  }
-
   @HostListener('click', ['$event'])
   onClick(event: MouseEvent) {
     if (!this.disabled) {
       this.accordion.linkItemClickFn({
         item: this.item,
         parent: this.parent,
-        event: event
+        event: event,
       });
     }
+  }
+
+  path: string;
+  queryParams: Params;
+  fragment: string;
+
+  constructor(@Inject(ACCORDION) protected accordion: any, private router: Router) {
+    super(accordion);
   }
 
   ngOnChanges(changes: SimpleChanges): void {

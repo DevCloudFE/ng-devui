@@ -57,7 +57,7 @@ a:hover {
   color: $devui-link;
 
   &:hover {
-    color: $devui-link-active;
+    color: $devui-link;
     text-decoration: underline;
     cursor: pointer;
   }
@@ -67,7 +67,7 @@ a:hover {
   color: $devui-link-light;
 
   &:hover {
-    color: $devui-link-light-active;
+    color: $devui-link-light;
     text-decoration: underline;
     cursor: pointer;
   }
@@ -94,4 +94,16 @@ a:hover {
 
 .devui-body-overflow-hidden {
   overflow: hidden;
+}
+
+.devui-data-table {
+  .devui-table-title {
+    font-weight: bold;
+  }
+
+  .devui-table-link:hover {
+    text-decoration: underline;
+    cursor: pointer;
+    color: $devui-link;
+  }
 }

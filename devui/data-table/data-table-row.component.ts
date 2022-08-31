@@ -57,7 +57,7 @@ export class DataTableRowComponent implements OnInit {
   ngOnInit(): void {
     this.ngZone.runOutsideAngular(() => {
       this.rowRef.nativeElement.addEventListener(
-        'click',
+        'mouseup',
         this.onRowClick.bind(this)
       );
       this.rowRef.nativeElement.addEventListener(
@@ -87,7 +87,9 @@ export class DataTableRowComponent implements OnInit {
     if (this.clickCount === 1) {
       this.timeoutId = setTimeout(() => {
         if (this.clickCount === 1) {
-          this.dt.onRowClick({ rowIndex: this.rowIndex, nestedIndex: this.nestedIndex, rowItem: this.rowItem, rowComponent: this });
+          this.dt.onRowClick({
+            rowIndex: this.rowIndex, nestedIndex: this.nestedIndex, rowItem: this.rowItem, rowComponent: this, event: $event
+          });
         }
         this.clickCount = 0;
         clearTimeout(this.timeoutId);

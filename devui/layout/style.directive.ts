@@ -11,7 +11,7 @@ import { DScreenMediaQueryService } from './screen-media-query.service';
 export class DStyleDirective implements OnInit, OnDestroy {
   @Input() dStyle: DResponseParameter<Object>;
 
-  private destroy$ = new Subject();
+  private destroy$ = new Subject<void>();
   private styleObject = {};
 
   constructor(

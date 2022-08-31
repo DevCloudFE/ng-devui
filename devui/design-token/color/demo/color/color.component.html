@@ -19,8 +19,6 @@
               <tr dTableRow>
                 <th dHeadCell></th>
                 <th dHeadCell>{{ 'components.design-color.colorDemo.instance.defaultTable.colorVar' | translate }}</th>
-                <th dHeadCell>{{ 'components.design-color.colorDemo.instance.defaultTable.normalColor' | translate }}</th>
-                <th dHeadCell>{{ 'components.design-color.colorDemo.instance.defaultTable.darkColor' | translate }}</th>
                 <th dHeadCell>{{ 'components.design-color.colorDemo.instance.defaultTable.themeValue' | translate }}</th>
                 <th dHeadCell>{{ 'components.design-color.colorDemo.instance.defaultTable.description' | translate }}</th>
               </tr>
@@ -35,18 +33,6 @@
                     </div>
                   </td>
                   <td dTableCell [ngClass]="{ 'devui-catalog-title': rowItem.expand !== undefined }">{{ rowItem?.name }}</td>
-                  <td dTableCell>
-                    <div class="color-name">
-                      {{ rowItem?.light }}
-                    </div>
-                    <div *ngIf="rowItem?.light" class="color-cube" [ngStyle]="{ 'background-color': rowItem?.light }"></div>
-                  </td>
-                  <td dTableCell>
-                    <div class="color-name">
-                      {{ rowItem?.dark }}
-                    </div>
-                    <div *ngIf="rowItem?.dark" class="color-cube" [ngStyle]="{ 'background-color': rowItem?.dark }"></div>
-                  </td>
                   <td dTableCell>
                     <div class="color-name">
                       {{ rowItem?.themeValue }}
@@ -71,17 +57,7 @@
                 {{ col }}
               </div>
             </div>
-            <div class="swatches">
-              <!--            <div *ngFor="let col of colorTypeSecList, let index = index" class="formColor">-->
-              <!--              <div *ngFor="let block of colorNumberList; let idx = index">-->
-              <!--                <div class="swatches-block" [ngStyle]="{ color: idx > 4 || index > 2 ?-->
-              <!--                '#fff' : '#252b3a' }" [ngClass]="'block-' + col + '-' + block ">-->
-              <!--                  {{ '$devui-' + col + '-' + block }}-->
-              <!--                </div>-->
-              <!--              </div>-->
-              <!--              {{ col }}-->
-              <!--            </div>-->
-            </div>
+            <div class="swatches"></div>
           </div>
         </div>
       </ng-template>

@@ -44,6 +44,8 @@
       (mouseenter)="switchStep(index, 'hover')"
       [ngClass]="{ active: activeIndex === index }"
       *ngFor="let item of items; let index = index"
-    ></li>
+    >
+      <span class="dot-item-active-progress" [ngStyle]="{ 'transition-duration': transitionSpeed + 'ms' }"></span>
+    </li>
   </ul>
 </div>

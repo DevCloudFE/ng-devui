@@ -33,7 +33,7 @@ import { WipeInOutComponent } from './wipe-in-out/wipe-in-out.component';
     DevUICodeboxModule,
     TranslateModule,
     RouterModule.forChild([
-      { path: '', redirectTo: 'demo' },
+      { path: '', redirectTo: 'demo', pathMatch: 'full' },
       { path: 'demo', component: AnimationsDemoComponent },
       {
         path: 'api',

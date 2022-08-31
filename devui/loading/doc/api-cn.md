@@ -27,11 +27,18 @@ import { LoadingModule } from 'ng-devui/loading';
 |    positionType    |           `string`            |       'relative'       | 可选，指定`dLoading`宿主元素的定位类型,取值与 css position 属性一致。 | [使用 showLoading 控制](demo#show-loading) |
 |        view        | `{top?:string,left?:string}`  | {top:'50%',left:'50%'} | 可选，调整 loading 的显示位置，相对于宿主元素的顶部距离与左侧距离     | [基本用法](demo#basic-usage)               |
 |       zIndex       |        `number`      |   --   | 可选，loading加载提示的 z-index 值        | [基本用法](demo#basic-usage)    |
+|       loadingStyle       |        [`LoadingStyle`](#LoadingStyle)      |   `'default'`   | 可选，类型 `'default' \| 'infinity'`      | [基本用法](demo#basic-usage)    |
 
 ### LoadingType
 
 ```ts
 export type LoadingType = Observable<any> | Promise<any> | Array<Promise<any>> | Array<Observable<any>> | Subscription | undefined;
+```
+
+### LoadingStyle
+
+```ts
+export type LoadingStyle = 'default' | 'infinity';
 ```
 
 # LoadingService
@@ -83,3 +90,4 @@ constructor( private loadingService: LoadingService ) {}
 |        view        | `{top?:string,left?:string}` | {top:'50%',left:'50%'} | 可选，调整 loading 的显示位置，相对于宿主元素的顶部距离与左侧距离   | [服务方式调用](demo#full-screen)   |
 |          zIndex          |            `number`             |   --   | 可选，弹出框 z-index 值                        | [服务方式调用](demo#full-screen)   |
 |         injector         |           `Injector`            |    --    | 可选，可以选择指定将用作组件的父级的注射器      |
+|       loadingStyle       |        [`LoadingStyle`](#LoadingStyle)      |   `'default'`   | 可选，类型 `'default' \| 'infinity'`     |     |

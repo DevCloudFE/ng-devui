@@ -62,7 +62,7 @@ export class TreeComponent implements OnInit, OnChanges, AfterViewInit, OnDestro
   i18nCommonText: I18nInterface['common'];
   i18nSubscription: Subscription;
   treeNodes = [];
-  destroy$ = new Subject();
+  destroy$ = new Subject<void>();
   afterInitAnimate = true;
   constructor(private i18n: I18nService, private devConfigService: DevConfigService) {
 

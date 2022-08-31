@@ -1,4 +1,5 @@
 import {
+  ComponentFactoryResolver,
   ComponentRef,
   Directive,
   ElementRef,
@@ -14,7 +15,7 @@ import { forkJoin, from, Observable, Subscription, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { LoadingBackdropComponent } from './loading-backdrop.component';
 import { LoadingComponent } from './loading.component';
-import { LoadingType } from './loading.types';
+import { LoadingStyle, LoadingType } from './loading.types';
 @Directive({
   selector: '[dLoading]',
   exportAs: 'dLoading'
@@ -35,11 +36,13 @@ export class LoadingDirective implements OnChanges {
 
   @Input() loading: LoadingType;
   @Input() zIndex: number ;
+  @Input() loadingStyle: LoadingStyle = 'default';
   backdropRef: ComponentRef<any>;
   loadingRef: ComponentRef<any>;
   active = true;
 
   constructor(
+    private componentFactoryResolver: ComponentFactoryResolver,
     private triggerElementRef: ElementRef,
     private viewContainerRef: ViewContainerRef,
     private injector: Injector,
@@ -127,6 +130,7 @@ export class LoadingDirective implements OnChanges {
       left: this.view ? this.view.left : '50%',
       isCustomPosition: !!this.view,
       zIndex: this.zIndex ? this.zIndex : '',
+      loadingStyle: this.loadingStyle,
     });
   }
 

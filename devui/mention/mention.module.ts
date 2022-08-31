@@ -7,6 +7,6 @@ import { MentionDirective } from './mention.directive';
 @NgModule({
   imports: [CommonModule, LoadingModule],
   declarations: [MentionComponent, MentionDirective],
-  exports: [MentionComponent, MentionDirective]
+  exports: [MentionComponent, MentionDirective],
 })
 export class MentionModule {}

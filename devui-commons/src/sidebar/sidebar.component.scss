@@ -2,11 +2,12 @@
 
 .sidebar-wrapper {
   position: fixed;
-  top: 70px;
-  width: 260px;
-  max-width: 260px;
+  top: 60px;
+  width: 320px;
+  max-width: 320px;
   height: 100%;
   overflow-y: hidden;
+  scroll-behavior: smooth;
   z-index: 1000;
   border-right: 1px solid $devui-dividing-line;
   background-color: $devui-base-bg;
@@ -19,12 +20,12 @@
 }
 
 .sidebar-nav {
-  width: 260px;
+  width: 100%;
   padding-bottom: 80px;
 }
 
 .sidebar-menu {
-  width: 260px;
+  width: 320px;
 
   outline: none;
   margin-bottom: 0;

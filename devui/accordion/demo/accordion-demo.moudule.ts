@@ -28,7 +28,7 @@ import { TemplateComponent } from './template/template.component';
     DevUICodeboxModule,
     DevUIApiModule,
     RouterModule.forChild([
-      { path: '', redirectTo: 'demo' },
+      { path: '', redirectTo: 'demo', pathMatch: 'full' },
       { path: 'demo', component: AccordionDemoComponent },
       {
         path: 'api',

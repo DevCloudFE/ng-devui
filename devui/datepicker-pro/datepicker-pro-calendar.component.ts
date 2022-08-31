@@ -117,7 +117,7 @@ export class DatepickerProCalendarComponent implements OnInit, AfterViewInit, On
   _dateValue = [];
   i18nText;
   datepickerConvert: DefaultDateConverter;
-  unsubscribe$ = new Subject();
+  unsubscribe$ = new Subject<void>();
   private i18nLocale: I18nInterface['locale'];
 
   private onChange = (_: any) => null;

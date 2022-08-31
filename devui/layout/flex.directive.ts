@@ -33,7 +33,7 @@ export class DFlexDirective implements OnInit, OnChanges, OnDestroy {
   /* TODO：实现这个特性 */
   @Input() dFlexWrap: DResponseParameter<string>;
 
-  private destroy$ = new Subject();
+  private destroy$ = new Subject<void>();
 
   constructor(
     private elementRef: ElementRef,

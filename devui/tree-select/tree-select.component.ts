@@ -149,7 +149,7 @@ export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterV
   displayValue: string | Array<string>;
   valueLength: number;
   userAgent: string;
-  destroy$ = new Subject();
+  destroy$ = new Subject<void>();
   validVirtualScrollHeight: number;
   private _value: object | Array<any> | any;
   private _isOpen = false;

@@ -40,7 +40,7 @@ ieSupport: Indicates whether to enable the IE support. Currently, the css-var-po
 
 ## Making a Theme Switcher
 
-For details, please see [ThemePickerComponent](https://github.com/DevCloudFE/ng-devui/blob/master/src/app/theme-picker/theme-picker.component.ts).
+For details, please see [ThemePickerComponent](https://github.com/DevCloudFE/ng-devui/blob/master/devui-commons/src/header/theme-picker/theme-picker.component.ts).
 
 ## Use a custom theme
 

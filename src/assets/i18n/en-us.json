@@ -775,6 +775,9 @@
         "cardTitle": "DEVUI best practice course",
         "text": "Updated on July 31 15:55"
       },
+      "cardInteractiveDemo": {
+        "title": "Interactive Card"
+      },
       "mediaDemo": {
         "title": "With Images",
         "description": "You can use align to set the alignment mode of the d-card-actions operation area: start alignment, end alignment, and stretch alignment.",
@@ -784,6 +787,7 @@
       "anchorLinkValues": {
         "card-basic": "Basic Usage",
         "card-with-media": "With Images",
+        "card-interactive-usage": "Interactive Card",
         "card-custom": "Customize Area"
       }
     },
@@ -803,6 +807,9 @@
       "autoplayDemo": {
         "title": "Automatic NVOD"
       },
+      "withTransitionProgressDemo": {
+        "title": "Show Transition Progress"
+      },
       "customDemo": {
         "title": "Custom Operations"
       },
@@ -810,7 +817,8 @@
         "basic-usage": "Basic Usage",
         "trigger-usage": "Indicator & Toggle Arrow",
         "autoplay-usage": "Automatic NVOD",
-        "custom-usage": "Custom Operations"
+        "custom-usage": "Custom Operations",
+        "with-transition-progress-usage": "Show Transition Progress"
       }
     },
     "checkbox": {
@@ -1178,7 +1186,7 @@
             "devui-shadow-length-slide-right": "Shadow that appears on the left edge when slides rightward (dataTable fixes that the left column slides rightward)",
             "devui-shadow-length-connected-overlay": "Pop-up (overlay) layer with connection points (Drop-down menu for DatePicker Cascader Select TagsInput Pagination, etc.)",
             "devui-shadow-length-hover": "Where hover is involved",
-            "devui-shadow-length-feedback-overlay": "Information Prompt Feedback Class (PopOver Tooltip Toast StepsGuide, etc.)",
+            "devui-shadow-length-feedback-overlay": "Information Prompt Feedback Class (PopOver Tooltip Toast StepsGuide, etc.) and larger card",
             "devui-shadow-length-fullscreen-overlay": "Pop-up (overlay) layer without connection points (Drawer Modal ImagePreview, etc.)"
           },
           "oldShadows": {
@@ -1879,6 +1887,7 @@
       },
       "innerValidatorDemo": {
         "title": "Verify a single element, use the built-in validator, and configure error message",
+        "subtitle": "We have some integrated validators, you can go to API for more information.",
         "description": "<p> Currently, <code>DevUI</code> supports the following built-in validators: <code>required, minlength, maxlength, min, max, requiredTrue, email, pattern, and whitespace</code>. </p><p>If the user input cannot contain only spaces, use <code>whitespace</code>built-in validator</p><p>If the user input length needs to be restricted, it is a good idea to set the maximum limit to the actual verification value <code>+1</code>. In addition to <code>pattern</code>, other built-in validators also provide built-in error messages. If you do not customize a message, the default message is used. The value of </p><p><code>message</code> can be in the following formats: <code>string</code>object</code>. (The internationalization string can be configured, for example, <code>'zh-cn'</code>. The default value is <code>'default'</code>).</p>"
       },
       "customerValidatorDemo": {
@@ -1937,12 +1946,18 @@
         "demo-modal": "Pop-up form",
         "demo-multi-col": "Multiple lists",
         "demo-filter": "Form filtering",
-        "demo-validate-template": "Template-driven form validation (recommended)",
+        "demo-validate-template": "Using validators in form",
         "demo-validate-reactive": "Reactive form validation",
         "demo-custom-status": "Specify form status",
         "demo-validate-sync": "Form collaboration verification",
         "demo-validate-cross-component": "Cross-component form validation",
-        "demo-validate-update": "Update validate rules"
+        "demo-validate-update": "Update validate rules",
+        "demo-inner-validator": "Using integrated validators",
+        "demo-custom-validator": "Using custom validators",
+        "demo-error-strategy": "Config error update strategy",
+        "demo-custom-message": "Custom your error message",
+        "demo-debounce-time": "Set validate debounce time",
+        "demo-user-register": "Using in user register senario"
       }
     },
     "fullscreen": {
@@ -3175,7 +3190,7 @@
       },
       "bigDataDemo": {
         "title": "Big data display",
-        "description": "A lot of tab switching"
+        "description": "You can select the direct on mode and automatic judgment mode."
       },
       "anchorLinkValues": {
         "basic-usage": "Basic Usage",
@@ -3379,17 +3394,22 @@
       },
       "prefixDemo": {
         "title": "Custom Prefix",
-        "description": "Custom Prefix"
+        "description": "Customize one or more prefixes."
       },
       "customDemo": {
         "title": "Custom Template",
         "description": "Customize a template for displaying a single record in the list."
       },
+      "toggleDemo": {
+        "title": "Use Separators",
+        "description": "To avoid confusion with other content, only the prefix + keyword can be preceded by a separator to trigger and end the component. The default separator is a space."
+      },
       "anchorLinkValues": {
         "basic-usage": "Basic Usage",
         "async-usage": "Async Usage",
         "custom-prefix": "Custom Prefix",
-        "custom-template": "Custom Template"
+        "custom-template": "Custom Template",
+        "toggle-divider": "Use Separators"
       }
     },
     "toggle": {
@@ -3550,10 +3570,15 @@
         "title": "Customize",
         "description": "Customizing the Display Template for Editing."
       },
+      "editableDemo": {
+        "title": "Editable Usage",
+        "description": "You can customize the initial template, edit the template, and set the content character string and content projection. Allows users to directly click the edit and operation icons to edit and copy."
+      },
       "anchorLinkValues": {
         "title-usage": "Title Usage",
         "text-usage": "Text Usage",
-        "custom-usage": "Customize"
+        "custom-usage": "Customize",
+        "editable-usage": "Editable Usage"
       }
     },
     "upload": {
@@ -4174,11 +4199,31 @@
       "description": "Digital display with trends",
       "tmw": "Displays individual data and its trend.",
       "basicDemo": {
-        "title": "Basic Usage",
-        "description": ""
+        "title": "Basic Usage"
+      },
+      "trend-icon-template": {
+        "title": "Custom Icon Template"
+      },
+      "showTrendDemo": {
+        "title": "Control Trend Showing"
+      },
+      "trendPositionDemo": {
+        "title": "Trend Showing Position"
+      },
+      "customTrendStyleDemo": {
+        "title": "Custom Trend Style"
+      },
+      "withSubtextDemo": {
+        "title": "Trend With SubText",
+        "description": "If the actual use requires a percent sign, you can customize the style when the fraction is 95%, 222/250"
       },
       "anchorLinkValues": {
-        "basicDemo": "Basic Usage"
+        "basicDemo": "Basic Usage",
+        "trend-icon-template": "Custom Icon Template",
+        "show-trend-usage": "Control Trend Showing",
+        "trend-position-usage": "Trend Showing Position",
+        "custom-trend-style-usage": "Custom Trend Style",
+        "with-subtext-usage": "Trend With SubText"
       }
     },
     "line-chart": {

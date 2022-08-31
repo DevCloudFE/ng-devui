@@ -218,7 +218,7 @@ export class TransferComponent implements OnInit, OnChanges, OnDestroy {
       this.targetCanTransfer = false;
 
       if (this.sourceCustomViewTemplate) {
-        this.transferToTarget.next();
+        this.transferToTarget.next({});
       } else {
         changeData === undefined
           ? this.transferToTarget.next({ sourceOption: this.sourceOption, targetOption: this.targetOption })
@@ -231,7 +231,7 @@ export class TransferComponent implements OnInit, OnChanges, OnDestroy {
       this.sourceCanTransfer = false;
 
       if (this.targetCustomViewTemplate) {
-        this.transferToSource.next();
+        this.transferToSource.next({});
       } else {
         changeData === undefined
           ? this.transferToSource.next({ sourceOption: this.sourceOption, targetOption: this.targetOption })

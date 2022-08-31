@@ -23,7 +23,7 @@ import { StepsGuideDemoComponent } from './steps-guide-demo.component';
     DevUIApiModule,
     DDemoNavModule,
     RouterModule.forChild([
-      { path: '', redirectTo: 'demo' },
+      { path: '', redirectTo: 'demo', pathMatch: 'full' },
       { path: 'demo', component: StepsGuideDemoComponent },
       {
         path: 'api',

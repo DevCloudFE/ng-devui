@@ -12,8 +12,8 @@
 <d-icon [icon]="'icon-refresh'" [operable]="true" [rotate]="'infinite'"></d-icon>
 
 <h4>链接图标</h4>
-<d-icon icon="icon-homepage">
-  <a iconSuffix class="devui-link" href="https://devui.huawei.com/">首页</a>
+<d-icon icon="icon-helping" dIconLink>
+  <a iconSuffix class="devui-link" href="/components/zh-cn/icon/api">如何使用Icon</a>
 </d-icon>
 
 <h4>文字图标 - 文字后置</h4>
@@ -34,6 +34,11 @@
 <h4>文字图标 - 禁用</h4>
 <d-icon [icon]="'icon-edit'" [disabled]="true">
   <span iconSuffix>无权编辑</span>
+</d-icon>
+
+<h4>文字图标 - 图标变色,常用于文字表单场景</h4>
+<d-icon [icon]="'icon-edit'" dIconHover>
+  <span iconPrefix>暂无描述</span>
 </d-icon>
 
 <h4>文字图标 - 旋转</h4>

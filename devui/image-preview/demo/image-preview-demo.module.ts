@@ -27,7 +27,7 @@ import { ZIndexComponent } from './z-index/z-index.component';
     SafePipeModule,
     ButtonModule,
     RouterModule.forChild([
-      { path: '',  redirectTo: 'demo' },
+      { path: '',  redirectTo: 'demo', pathMatch: 'full' },
       { path: 'demo', component: DImagePreviewDemoComponent},
       { path: 'api', component: DevUIApiComponent, data: {
         'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),

@@ -7,12 +7,10 @@ import { AccordionItemComponent } from './accordion-item.component';
 import { AccordionListComponent } from './accordion-list.component';
 import { AccordionMenuComponent } from './accordion-menu.component';
 import { AccordionComponent } from './accordion.component';
+import { AccordionService } from './accordion.service';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule,
-  ],
+  imports: [CommonModule, RouterModule],
   declarations: [
     AccordionComponent,
     AccordionListComponent,
@@ -29,6 +27,6 @@ import { AccordionComponent } from './accordion.component';
     AccordionItemHreflinkComponent,
     AccordionItemRouterlinkComponent,
   ],
+  providers: [AccordionService],
 })
-
 export class AccordionModule {}

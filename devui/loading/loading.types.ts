@@ -5,6 +5,8 @@ import {
   Observable, Subscription
 } from 'rxjs';
 export type LoadingType = Observable<any> | Promise<any> | Array<Promise<any>> | Array<Observable<any>> | Subscription | undefined;
+
+export type LoadingStyle = 'default' | 'infinity';
 export interface ILoadingOptions {
   target?: Element;
   zIndex?: number;
@@ -17,4 +19,6 @@ export interface ILoadingOptions {
     left?: string;
   };
   injector?: Injector;
+  loadingStyle?: LoadingStyle;
 }
+

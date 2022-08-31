@@ -26,7 +26,7 @@ import { TwoBindingComponent } from './two-binding/two-binding.component';
     ModalModule,
     DDemoNavModule,
     RouterModule.forChild([
-      { path: '', redirectTo: 'demo' },
+      { path: '', redirectTo: 'demo', pathMatch: 'full' },
       { path: 'demo', component: ToggleDemoComponent },
       {
         path: 'api',

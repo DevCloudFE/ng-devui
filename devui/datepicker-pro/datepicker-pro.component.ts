@@ -82,7 +82,7 @@ export class DatepickerProComponent implements OnInit, AfterViewInit, OnDestroy,
   i18nText;
   dateValue = '';
   datepickerConvert: DefaultDateConverter;
-  unsubscribe$ = new Subject();
+  unsubscribe$ = new Subject<void>();
   isOpen = false;
   get dateConfig(): DateConfig {
     return {
@@ -190,6 +190,8 @@ export class DatepickerProComponent implements OnInit, AfterViewInit, OnDestroy,
             type: 'single',
             value: inputDate
           });
+
+          this.onChange(inputDate);
 
           if (this.showTime) {
             this.pickerSrv.updateTimeChange.next({

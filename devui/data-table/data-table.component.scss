@@ -45,6 +45,7 @@ $devui-table-inset-shadow-right: var(--devui-table-inset-shadow-right, -8px 0 8p
 
       &.overflow-overlay {
         overflow: hidden;
+        transform: translate3d(0, 0, 0);
 
         &:hover {
           overflow: auto;
@@ -93,6 +94,7 @@ $devui-table-inset-shadow-right: var(--devui-table-inset-shadow-right, -8px 0 8p
 
       &.overflow-overlay {
         overflow: hidden;
+        transform: translate3d(0, 0, 0);
 
         &:hover {
           overflow: auto;
@@ -161,12 +163,6 @@ $devui-table-inset-shadow-right: var(--devui-table-inset-shadow-right, -8px 0 8p
 
 .devui-table ::ng-deep {
   thead {
-    span {
-      font-weight: bold;
-      color: $devui-text;
-      font-size: $devui-font-size-sm;
-    }
-
     tr {
       background-color: $devui-base-bg;
 
@@ -421,13 +417,47 @@ $devui-table-inset-shadow-right: var(--devui-table-inset-shadow-right, -8px 0 8p
 
   .resizeable:hover {
     .resize-handle {
-      border-right: 1px solid $devui-line;
+      border-right: 2px solid $devui-line;
+
+      &::before {
+        content: '';
+        display: block;
+        width: 0;
+        height: 0;
+        border: 5px solid transparent;
+        border-right-color: $devui-line;
+        position: absolute;
+        left: -8px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      &::after {
+        content: '';
+        display: block;
+        width: 0;
+        height: 0;
+        border: 5px solid transparent;
+        border-left-color: $devui-line;
+        position: absolute;
+        left: 6px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
     }
   }
 
   .resizeable {
     .resize-handle:hover {
       border-right: 2px solid $devui-form-control-line-active;
+
+      &::before {
+        display: none;
+      }
+
+      &::after {
+        display: none;
+      }
     }
   }
 }
@@ -464,6 +494,12 @@ $devui-table-inset-shadow-right: var(--devui-table-inset-shadow-right, -8px 0 8p
       flex: 1;
       text-align: right;
     }
+  }
+}
+
+.devui-table ::ng-deep {
+  tbody > tr > td.devui-operation-cell {
+    padding: 5px 20px;
   }
 }
 

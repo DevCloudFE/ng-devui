@@ -11,7 +11,7 @@ import { DScreenMediaQueryService } from './screen-media-query.service';
 export class DClassDirective implements OnInit, OnDestroy {
   @Input() dClass: DResponseParameter<string[]>;
 
-  private destroy$ = new Subject();
+  private destroy$ = new Subject<void>();
   private executedClassList: string[] = [];
 
   constructor(

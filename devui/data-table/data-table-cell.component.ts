@@ -75,7 +75,7 @@ export class DataTableCellComponent implements OnInit, OnChanges, OnDestroy {
     }
     this.ngZone.runOutsideAngular(() => {
       this.cellRef.nativeElement.addEventListener(
-        'click',
+        'mouseup',
         this.onCellClick.bind(this)
       );
       this.cellRef.nativeElement.addEventListener(
@@ -121,7 +121,8 @@ export class DataTableCellComponent implements OnInit, OnChanges, OnDestroy {
       column: this.column,
       rowItem: this.rowItem,
       cellComponent: this,
-      rowComponent: this.rowComponent
+      rowComponent: this.rowComponent,
+      event: $event
     };
 
     this.clickCount++;

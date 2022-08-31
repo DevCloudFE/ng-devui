@@ -76,7 +76,7 @@ export class CascaderComponent implements OnInit, OnDestroy, OnChanges, ControlV
 
   isLazyLoad: boolean;
 
-  unsubscribe$ = new Subject();
+  unsubscribe$ = new Subject<void>();
 
   searchValueChange = new Subject<string>();
 

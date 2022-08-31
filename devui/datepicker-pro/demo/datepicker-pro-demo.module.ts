@@ -45,7 +45,7 @@ import { DatepickerProTemplateComponent } from './template/datepicker-template.c
     DDemoNavModule,
     DatepickerProModule,
     RouterModule.forChild([
-      { path: '', redirectTo: 'demo' },
+      { path: '', redirectTo: 'demo', pathMatch: 'full' },
       { path: 'demo', component: DatepickerProDemoComponent },
       {
         path: 'api',

@@ -8,6 +8,7 @@ import { deepTheme, galaxyTheme, infinityTheme, provenceTheme, sweetTheme } from
 import { devuiLargeFontTheme, greenDarkTheme, greenLightTheme } from '../devui-commons/src/header/theme-picker/theme-data-more';
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
+import { insertBaiduScript } from './utils';
 
 ThemeServiceInit({
   'devui-light-theme': devuiLightTheme,
@@ -20,7 +21,9 @@ ThemeServiceInit({
   'sweet-theme': sweetTheme,
   'deep-theme': deepTheme,
   'galaxy-theme': galaxyTheme
-}, null, null, null, true);
+}, 'infinity-theme', null, null, true);
+
+insertBaiduScript();
 
 if (environment.production) {
   enableProdMode();

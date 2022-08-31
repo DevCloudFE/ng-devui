@@ -1,9 +1,11 @@
+import { DOCUMENT } from '@angular/common';
 import {
   AfterViewInit,
   Component,
   ContentChild,
   ElementRef,
   EventEmitter,
+  Inject,
   Input,
   OnDestroy,
   OnInit,
@@ -109,8 +111,11 @@ export class OperableTreeComponent implements OnInit, OnDestroy, AfterViewInit {
     indicatorWidth: 0,
   };
   afterInitAnimate = true;
+  document: Document;
 
-  constructor(private i18n: I18nService, private devConfigService: DevConfigService) {}
+  constructor(@Inject(DOCUMENT) private doc: any, private i18n: I18nService, private devConfigService: DevConfigService) {
+    this.document = this.doc;
+  }
 
   ngOnInit(): void {
     this.i18nCommonText = this.i18n.getI18nText().common;
@@ -129,6 +134,45 @@ export class OperableTreeComponent implements OnInit, OnDestroy, AfterViewInit {
     this.nodeRightClicked.emit({ node: node, event: event });
   }
 
+  copyStyle(source, target) {
+    ['id', 'class', 'style', 'draggable'].forEach((attr) => target.removeAttribute(attr));
+
+    const computedStyle = getComputedStyle(source);
+    for (let i = 0; i < computedStyle.length; i++) {
+      const key = computedStyle[i];
+      if (key.indexOf('transition') < 0) {
+        target.style[key] = computedStyle[key];
+      }
+    }
+    target.style.pointerEvents = 'none';
+
+    for (let i = 0; i < source.children.length; i++) {
+      this.copyStyle(source.children[i], target.children[i]);
+    }
+  }
+
+  multipleDragStyle(event, nodes, target) {
+    const num = nodes.length > 2 ? 2 : nodes.length - 1;
+    const cloneNodes = new Array(num).fill(null);
+    const container = this.document.createElement('div');
+    const cloneNode = target.cloneNode(true);
+    this.copyStyle(target, cloneNode);
+    cloneNode.style.position = 'absolute';
+    cloneNode.style.border = 'solid 1px var(--devui-connected-overlay-line, #526ecc)';
+    cloneNodes.push(cloneNode);
+    cloneNodes.forEach((node, index) => {
+      const child = node || cloneNode.cloneNode(true);
+      child.style.left = `${8 * (num - index)}px`;
+      child.style.top = `${4 * index}px`;
+      container.appendChild(child);
+    });
+    container.className = 'drag-ghost-container';
+    // setDragImage 只能对viewport内的 dom 起作用
+    this.document.body.appendChild(container);
+    event.dataTransfer.setDragImage(container, -16, 0);
+    setTimeout(() => container.remove());
+  }
+
   onDragstart(event, treeNode) {
     this.dragState.draggingNode = event.target;
     const result = { event, treeNode };
@@ -138,11 +182,17 @@ export class OperableTreeComponent implements OnInit, OnDestroy, AfterViewInit {
       parentId: treeNode.parentId,
       nodeTitle: treeNode.data.title,
       isParent: treeNode.data.isParent,
+      isChecked: treeNode.data.isChecked,
+      halfChecked: treeNode.data.halfChecked,
     };
     if (this.canActivateMultipleNode) {
-      const activatedNodes = this.treeFactory.getActivatedNodes() || [];
-      data['multipleData'] = activatedNodes;
-      result['treeNodes'] = activatedNodes;
+      const activatedNodes = this.treeFactory.getActivatedNodes();
+      // 存在无激活项，直接拖拽单个节点情况
+      const availableNodes = activatedNodes.length ? activatedNodes : [treeNode];
+      data['multipleData'] = availableNodes;
+      result['treeNodes'] = availableNodes;
+      // 拖拽启用层叠样式，随拖拽个数变化
+      this.multipleDragStyle(event, availableNodes, event.target);
     }
     event.dataTransfer.setData('Text', JSON.stringify(data));
     this.nodeDragStart.emit(result);
@@ -232,37 +282,28 @@ export class OperableTreeComponent implements OnInit, OnDestroy, AfterViewInit {
       try {
         const transferData = JSON.parse(transferDataStr);
         if (typeof transferData === 'object' && transferData.type === 'operable-tree-node') {
+          let dragResult = Promise.resolve(true);
           const dragNodeId = transferData['nodeId'];
           const dragNodeIds: string[] = [];
+          // 使用对象存储选择状态，因为节点id为数字，避免产生长索引数组影响性能
+          const dragNodesCheckStatus = {};
           if (this.canActivateMultipleNode) {
             const multipleData = transferData['multipleData'];
-            multipleData.forEach((node) => {
-              const id = node.id;
-              const isParent = this.treeFactory.checkIsParent(dropNodeId, id);
-              if (!isParent && id !== dropNodeId) {
-                dragNodeIds.push(id);
-              }
-            });
+            // 多选时遍历所有被激活的节点确认是否为目标节点或其父节点并储存可用节点的选择状态
+            // 反序遍历用于先处理子节点以更新父子同时拖拽的状态
+            multipleData.reverse().forEach((node) => this.reverseSelection(node, dropNodeId, dragNodeIds, dragNodesCheckStatus));
           } else {
             const isParent = this.treeFactory.checkIsParent(dropNodeId, dragNodeId);
             if (dragNodeId === dropNodeId || isParent) {
               return;
             }
+            this.treeFactory.checkNodesById(dragNodeId, false, 'upward');
+            dragNodesCheckStatus[dragNodeId] = { checked: transferData['isChecked'], halfChecked: transferData['halfChecked'] };
           }
-
-          let dragResult = Promise.resolve(true);
           if (this.beforeNodeDrop) {
             dragResult = this.beforeNodeDrop(dragNodeId, dropNodeId, this.dragState.dropType, dragNodeIds);
           }
-
-          dragResult.then(() => {
-            if (this.canActivateMultipleNode) {
-              dragNodeIds.forEach((id) => this.handlerDropNode(id, dropNode));
-            } else {
-              this.handlerDropNode(dragNodeId, dropNode);
-            }
-            this.treeFactory.renderFlattenTree();
-          });
+          dragResult.then(() => this.setSelection(dropNode, dragNodeId, dragNodeIds, dragNodesCheckStatus));
         }
       } catch (e) {
       } finally {
@@ -273,7 +314,39 @@ export class OperableTreeComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-  handlerDropNode(dragNodeId, dropNode) {
+  reverseSelection(node, dropNodeId, dragNodeIds, dragNodesCheckStatus) {
+    const id = node.id;
+    const isParent = this.treeFactory.checkIsParent(dropNodeId, id);
+    if (!isParent && id !== dropNodeId) {
+      this.treeFactory.checkNodesById(id, false, 'upward');
+      // 获取更新后的node状态，不使用node旧数据避免父子同时拖拽状态被覆盖
+      const currentNode = this.treeFactory.getNodeById(id);
+      // 半选不保留，取最新状态，选中则保留原有状态
+      const checkedStatus = node.data.halfChecked ? currentNode.isChecked : node.data.isChecked;
+      dragNodesCheckStatus[id] = { checked: checkedStatus, halfChecked: currentNode.halfChecked };
+      dragNodeIds.push(id);
+    }
+  }
+
+  setSelection(dropNode, dragNodeId, dragNodeIds, dragNodesCheckStatus) {
+    if (this.canActivateMultipleNode) {
+      dragNodeIds.reverse().forEach((id) => this.handleDropNode(id, dropNode));
+    } else {
+      this.handleDropNode(dragNodeId, dropNode);
+    }
+    this.treeFactory.renderFlattenTree();
+
+    // 移动结束后向上整理选择状态，恢复半选状态
+    const finalDragNodeIds = this.canActivateMultipleNode ? dragNodeIds : [dragNodeId];
+    finalDragNodeIds.forEach((id) => {
+      const node = this.treeFactory.getCompleteNodeById(id);
+      node.data.isChecked = dragNodesCheckStatus[id].checked;
+      node.data.halfChecked = dragNodesCheckStatus[id].halfChecked;
+      this.treeFactory.checkParentNodes(node);
+    });
+  }
+
+  handleDropNode(dragNodeId, dropNode) {
     const movingNode = this.treeFactory.nodes[dragNodeId];
     const movingNodeIndex = this.treeFactory.getNodeIndex(movingNode);
     const dropNodeIndex = this.treeFactory.getNodeIndex(dropNode);

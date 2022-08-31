@@ -31,7 +31,7 @@ export class CalendarPanelComponent implements OnInit, OnDestroy {
 
   i18nText: I18nInterface['datePickerPro'];
   i18nSubscription: Subscription;
-  unsubscribe$ = new Subject();
+  unsubscribe$ = new Subject<void>();
 
   allMonthList = [];
   yearAndMonthList = [];
@@ -342,7 +342,7 @@ export class CalendarPanelComponent implements OnInit, OnDestroy {
       } else if (this.pickerSrv.currentActiveInput === 'end' && !this.selectedRangeDate[0]) {
         this.selectedRangeDate[0] = this.curDate;
       } else {
-        this.pickerSrv.closeDropdownEvent.next();
+        this.pickerSrv.closeDropdownEvent.next(false);
       }
     }
     this.pickerSrv.selectedDateChange.next({
@@ -360,7 +360,7 @@ export class CalendarPanelComponent implements OnInit, OnDestroy {
     }
 
     if (this.pickerSrv.closeAfterSelected) {
-      this.pickerSrv.closeDropdownEvent.next();
+      this.pickerSrv.closeDropdownEvent.next(false);
     }
   }
 

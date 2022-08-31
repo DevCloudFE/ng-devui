@@ -4,12 +4,13 @@
     <d-accordion-menu *ngIf="item[childrenKey] !== undefined" [item]="item" [deepth]="deepth" [parent]="parent"></d-accordion-menu>
     <!--非菜单类型-->
     <d-accordion-list
+      #listInstance
       *ngIf="item[childrenKey] !== undefined"
       class="devui-accordion-submenu"
       [deepth]="deepth + 1"
       [data]="item[childrenKey]"
       [parent]="item"
-      [@collapse]="item.open ? 'expanded' : 'collapsed'"
+      [@collapse]="getOpenState(item, listInstance)"
       [@.disabled]="!animateState"
     >
     </d-accordion-list>

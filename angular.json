@@ -67,6 +67,14 @@
                 }
               ]
             },
+            "development": { 
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            },
             "es5": {
               "tsConfig": "src/tsconfig.app.es5.json"
             },
@@ -84,13 +92,17 @@
             "production": {
               "browserTarget": "devui:build:production"
             },
+            "development": { 
+              "browserTarget": "devui:build:development"
+            },
             "es5": {
               "browserTarget": "devui:build:es5"
             },
             "separate": {
               "browserTarget": "devui:build:separate"
             }
-          }
+          },
+          "defaultConfiguration": "development" 
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",

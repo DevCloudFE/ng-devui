@@ -41,7 +41,7 @@ import { PipeDemoComponent } from './pipe/pipe.component';
     DataTableModule,
     TextInputModule,
     RouterModule.forChild([
-      { path: '', redirectTo: 'demo' },
+      { path: '', redirectTo: 'demo', pathMatch: 'full' },
       { path: 'demo', component: CommonDemoComponent },
       {
         path: 'api',

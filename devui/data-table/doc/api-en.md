@@ -158,6 +158,7 @@ On the page:
 | toggleChildrenTableEvent | `EventEmitter<boolean>` | Event for expanding and collapsing all subtables. The value true indicates expanding, and the value false indicates collapse. |
 | sortDirectionChange | `EventEmitter<SortDirection>` | Sort Order Direction Change Event|
 
+
 # dTableCell
 
 ## dTableCell Parameter
@@ -185,6 +186,14 @@ On the page:
 | :-------------------: | :-------: | :-----------------------------------------------------: | :------------------------------------------------- |
 | editStatusEvent | `EventEmitter<boolean>` | Cell editing status event | [edit cell](demo#edit-cell) |
 | toggleChildTableEvent | `EventEmitter<boolean>` | Event for expanding and collapsing the subtable in the current row. The options are true and false. | [Tree table](demo#tree-form) |
+
+## Cell common class
+
+| Parameter name | Description | Jump to Demo |
+| :-------------: | :------------------------------------------------------------: | :------------------------------------------------- |
+| devui-operation-cell | When operation components such as input and d-icon are placed in a cell, padding is adjusted to fit the row height. | |
+| devui-table-link | Add | when placing links in cells.
+| devui-table-title | When table header information is placed in a cell, it is automatically bolded. | |
 
 #### Configure the row template of the dTableBody when the user-defined template is used.
 

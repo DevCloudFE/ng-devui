@@ -18,7 +18,7 @@ export class AnchorBoxDirective implements IAnchorBox, OnDestroy {
   };
   @Input() defaultAnchor: string;
   @Input() scrollTarget: HTMLElement;
-  refreshAnchorMap: Subject<any> = new Subject<any>();
+  refreshAnchorMap: Subject<void> = new Subject<void>();
   anchorMap: {
     [anchor: string]: AnchorDirective;
   };

@@ -3,6 +3,7 @@ import {
   AfterViewInit, Component,
   ComponentFactoryResolver,
   ElementRef, Inject, Input,
+  OnDestroy,
   OnInit,
   QueryList, ViewChildren
 } from '@angular/core';
@@ -10,6 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { IExampleData } from 'ng-devui/shared/helpers';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import * as hljs from 'highlight.js/lib/core';
+import { fromEvent, Subscription } from 'rxjs';
 
 ['javascript', 'typescript'].forEach((langName) => {
   // Using require() here because import() support hasn't landed in Webpack yet
@@ -24,7 +26,7 @@ import * as hljs from 'highlight.js/lib/core';
   ],
   templateUrl: './example-panel.component.html'
 })
-export class ExamplePanelComponent implements OnInit, AfterViewInit {
+export class ExamplePanelComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() data: IExampleData;
   @ViewChildren('html') html: QueryList<ElementRef>;
   @ViewChildren('typescript') typescript: QueryList<ElementRef>;
@@ -35,15 +37,22 @@ export class ExamplePanelComponent implements OnInit, AfterViewInit {
   tmw: string;
   componentPath: string;
   document: Document;
+  subs: Subscription = new Subscription();
+  showHeaderWrapper = false;
   constructor(private componentFactoryResolver: ComponentFactoryResolver,
               private router: Router, private route: ActivatedRoute, private translate: TranslateService,
               @Inject(DOCUMENT) private doc: any) {
     this.document = this.doc;
   }
+  ngOnDestroy(): void {
+    if (this.subs) {
+      this.subs.unsubscribe();
+    }
+  }
 
   ngOnInit(): void {
     const array = this.router.url.split('/');
-    this.componentPath  = array[array.length - 2];
+    this.componentPath = array[array.length - 2];
     this.getData(this.translate.translations[this.translate.currentLang]);
     this.translate.onLangChange.subscribe((event: TranslationChangeEvent) => {
       this.getData(event.translations);
@@ -53,9 +62,27 @@ export class ExamplePanelComponent implements OnInit, AfterViewInit {
       this.componentTab = fragmentIndex === -1
         ? this.router.url.split('/').pop() : this.router.url.split('/').pop().slice(0, fragmentIndex);
     });
+    if (this.subs) {
+      this.subs.unsubscribe();
+    }
+    this.subs = new Subscription();
+    this.addScrollEvent();
   }
 
-  getData (translations) {
+  addScrollEvent() {
+    this.subs.add(
+      fromEvent(window, 'scroll')
+        .subscribe((value) => {
+          if ((value.target as Document).documentElement.scrollTop > 70) {
+            this.showHeaderWrapper = true;
+          } else {
+            this.showHeaderWrapper = false;
+          }
+        })
+    );
+  }
+
+  getData(translations) {
     if (translations && Object.prototype.hasOwnProperty.call(translations['components'], this.componentPath)) {
       const component = translations['components'][this.componentPath];
       this.componentName = component.name;

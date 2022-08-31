@@ -10,7 +10,7 @@
     (cdkDragEnded)="cdkDragEnded()"
   >
     <ng-container *ngIf="isOpen; else minTemp">
-      <div class="devui-nav-sprite-header">
+      <div class="devui-nav-sprite-header" *ngIf="title !== undefined" [ngClass]="{ 'devui-nav-sprite-header-with-title': title }">
         <div class="devui-nav-sprite-header-title">{{ title }}</div>
         <d-button icon="icon-close" bsStyle="text" title="close" (click)="hide()"></d-button>
       </div>
@@ -22,7 +22,9 @@
 <!-- 默认模板 -->
 <ng-template #defaultTemp>
   <div class="devui-nav-sprite-content">
-    <div class="devui-nav-sprite-header">{{ title }}</div>
+    <div *ngIf="title !== undefined" class="devui-nav-sprite-header" [ngClass]="{ 'devui-nav-sprite-header-with-title': title }">
+      {{ title }}
+    </div>
     <ng-container [ngTemplateOutlet]="defaultItemsTemp"></ng-container>
   </div>
 </ng-template>

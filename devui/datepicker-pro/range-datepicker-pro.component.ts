@@ -86,7 +86,7 @@ export class RangeDatepickerProComponent implements OnInit, OnDestroy, AfterView
   i18nText;
   _dateValue = [];
   datepickerConvert: DefaultDateConverter;
-  unsubscribe$ = new Subject();
+  unsubscribe$ = new Subject<void>();
   isOpen = false;
   strWidth = 0;
 
@@ -302,6 +302,8 @@ export class RangeDatepickerProComponent implements OnInit, OnDestroy, AfterView
         type: 'range',
         value: this.pickerSrv.curRangeDate
       });
+
+      this.onChange(this.pickerSrv.curRangeDate);
 
       if (this.showTime) {
         this.pickerSrv.updateTimeChange.next({

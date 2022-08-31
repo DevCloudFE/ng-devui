@@ -5,10 +5,9 @@ import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'd-mention-demo',
-  templateUrl: './mention-demo.component.html'
+  templateUrl: './mention-demo.component.html',
 })
 export class MentionDemoComponent implements OnInit, OnDestroy {
-
   navItems = [];
 
   basicSource: Array<DevuiSourceData> = [
@@ -29,6 +28,11 @@ export class MentionDemoComponent implements OnInit, OnDestroy {
   prefixSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('./prefix/prefix.component.html?raw') },
     { title: 'TS', language: 'typescript', code: require('./prefix/prefix.component.ts?raw') },
+  ];
+
+  toggleSource: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'xml', code: require('./toggle/toggle.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./toggle/toggle.component.ts?raw') },
   ];
 
   subs: Subscription = new Subscription();
@@ -56,10 +60,11 @@ export class MentionDemoComponent implements OnInit, OnDestroy {
       { dAnchorLink: 'async-usage', value: values['async-usage'] },
       { dAnchorLink: 'custom-prefix', value: values['custom-prefix'] },
       { dAnchorLink: 'custom-template', value: values['custom-template'] },
+      { dAnchorLink: 'use-separator', value: values['use-separator'] },
     ];
   }
 
-  ngOnDestroy () {
+  ngOnDestroy() {
     if (this.subs) {
       this.subs.unsubscribe();
     }

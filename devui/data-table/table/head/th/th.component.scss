@@ -1,0 +1,8 @@
+@import '../../../../style/theme/color';
+@import '../../../../style/core/_font';
+
+:host {
+  font-weight: bold;
+  color: $devui-text;
+  font-size: $devui-font-size-sm;
+}

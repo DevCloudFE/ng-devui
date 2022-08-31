@@ -104,3 +104,34 @@
     transform: rotate(360deg) scale(1);
   }
 }
+
+$len: 170px;
+$time: 1800ms;
+
+#infinity-outline {
+  stroke-dasharray: $len * 0.01, $len;
+  stroke-dashoffset: 0;
+  animation: anim $time linear infinite;
+  opacity: 1;
+}
+
+#infinity-bg {
+  stroke: $devui-zinc-20;
+}
+
+@keyframes anim {
+  0% {
+    stroke-dasharray: $len * 0, $len;
+    stroke-dashoffset: -$len * 0;
+  }
+
+  55% {
+    stroke-dasharray: $len * 0.24, $len;
+    stroke-dashoffset: -$len * 0.36;
+  }
+
+  100% {
+    stroke-dasharray: -$len * 0.93, $len;
+    stroke-dashoffset: -$len * 0.93;
+  }
+}

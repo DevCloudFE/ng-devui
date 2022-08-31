@@ -21,7 +21,7 @@ import { StatusDemoComponent } from './status-demo.component';
     DevUIApiModule,
     DDemoNavModule,
     RouterModule.forChild([
-      { path: '', redirectTo: 'demo' },
+      { path: '', redirectTo: 'demo', pathMatch: 'full' },
       { path: 'demo', component: StatusDemoComponent },
       {
         path: 'api',

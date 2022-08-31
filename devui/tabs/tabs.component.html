@@ -1,5 +1,5 @@
 <div class="devui-nav-container devui-nav-{{ size }}">
-  <div *ngIf="scrollMode" class="devui-nav-scroll-ctrl">
+  <div *ngIf="scrollModeToggle" class="devui-nav-scroll-ctrl">
     <span [ngClass]="{ disable: offsetIndex === 0 }" (click)="scroll('prev')">
       <svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1">
         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -13,8 +13,8 @@
   </div>
   <div
     #tabsViewport
-    [style.width]="type === 'tabs' ? '100%' : ''"
-    [ngClass]="{ 'dev-nav-scroll-container': scrollMode, 'devui-nav-shadow': isShowShadow }"
+    [style.width]="type === 'tabs' || type === 'wrapped' ? '100%' : ''"
+    [ngClass]="{ 'dev-nav-scroll-container': scrollModeToggle, 'devui-nav-shadow': isShowShadow }"
   >
     <ul
       #tabsEle
@@ -24,7 +24,7 @@
       [ngClass]="{
         'devui-nav-stacked': vertical,
         'devui-nav-add-button': addable,
-        'devui-nav-overflow': scrollMode
+        'devui-nav-overflow': scrollModeToggle || scrollMode
       }"
     >
       <ng-container *ngFor="let tab of tabs">
@@ -88,7 +88,7 @@
       <div class="devui-nav-{{ type }}-animation" [style.left]="offsetLeft + 'px'" [style.width]="offsetWidth + 'px'"></div>
     </ul>
   </div>
-  <div dDropDown appendToBody *ngIf="scrollMode" class="devui-nav-scroll-ctrl">
+  <div dDropDown appendToBody *ngIf="scrollModeToggle" class="devui-nav-scroll-ctrl">
     <span [ngClass]="{ disable: offsetIndex === tabs.length - 1 }" (click)="scroll('next')">
       <svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1">
         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -118,7 +118,13 @@
       </svg>
     </span>
     <ul role="menu" dDropDownMenu class="devui-nav-dropdown devui-dropdown-menu devui-dropdown-overlay">
-      <li class="devui-dropdown-item" *ngFor="let tab of tabs; index as i" (click)="scroll(null, i, tab)">
+      <li
+        *ngFor="let tab of tabs; index as i"
+        class="devui-dropdown-item"
+        [class.disabled]="tab.disabled"
+        [class.active]="tab.id == activeTab"
+        (click)="tab.disabled ? $event.stopPropagation() : scroll(null, i, tab)"
+      >
         <ng-template
           *ngIf="!tab.title"
           [ngTemplateOutlet]="tab.titleTpl?.templateRef"

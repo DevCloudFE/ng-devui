@@ -761,6 +761,9 @@
         "cardTitle": "DEVUI精品实践课",
         "text": "更新于07月31日15:55"
       },
+      "cardInteractiveDemo": {
+        "title": "可交互卡片"
+      },
       "mediaDemo": {
         "title": "使用图片",
         "description": "通过align可设置d-card-actions操作区域对齐方式：起始对齐、尾部对齐、拉伸对齐。",
@@ -770,6 +773,7 @@
       "anchorLinkValues": {
         "card-basic": "基本用法",
         "card-with-media": "使用图片",
+        "card-interactive-usage": "可交互卡片",
         "card-custom": "自定义区域"
       }
     },
@@ -789,6 +793,9 @@
       "autoplayDemo": {
         "title": "自动轮播"
       },
+      "withTransitionProgressDemo": {
+        "title": "显示切换进度条"
+      },
       "customDemo": {
         "title": "自定义操作"
       },
@@ -796,7 +803,8 @@
         "basic-usage": "基本用法",
         "trigger-usage": "指示器&切换箭头",
         "autoplay-usage": "自动轮播",
-        "custom-usage": "自定义操作"
+        "custom-usage": "自定义操作",
+        "with-transition-progress-usage": "显示切换进度条"
       }
     },
     "checkbox": {
@@ -1164,7 +1172,7 @@
             "devui-shadow-length-slide-right": "向右滑动时出现在左侧边缘的阴影 (dataTable固定左侧列向右滑动)",
             "devui-shadow-length-connected-overlay": "有连接点的弹出(覆盖)层 (DatePicker Cascader Select TagsInput Pagination的下拉菜单等)",
             "devui-shadow-length-hover": "涉及到hover的地方",
-            "devui-shadow-length-feedback-overlay": "信息提示反馈类 (PopOver Tooltip Toast StepsGuide等)",
+            "devui-shadow-length-feedback-overlay": "信息提示反馈类 (PopOver Tooltip Toast StepsGuide等)及占位较大的卡片",
             "devui-shadow-length-fullscreen-overlay": "无连接点的弹出(覆盖)层 (Drawer Modal ImagePreview等)"
           },
           "oldShadows": {
@@ -1865,6 +1873,7 @@
       },
       "innerValidatorDemo": {
         "title": "验证单个元素，使用内置校验器，配置error message",
+        "subtitle": "我们还内置了诸多校验器，可以前往 API 中查看更多信息。",
         "description": "<p> 当前<code>DevUI</code>支持的内置校验器有：<code>required、minlength、maxlength、min、max、requiredTrue、email、pattern、whitespace</code>。</p><p>若需限制用户输入不能全为空格，可使用<code>whitespace</code>内置校验器</p><p>若需限制用户输入长度，将最大限制设置为实际校验值<code>+1</code>是一个好的办法。</p><p>除<code>pattern</code>外，其他内置校验器我们也提供了内置的错误提示信息，在你未自定义提示消息时，我们将使用默认的提示信息。</p><p><code>message</code>配置支持<code>string</code>与<code>object</code>两种形式（支持国际化词条配置，如<code>'zh-cn'</code>，默认将取<code>'default'</code>）。</p>"
       },
       "customerValidatorDemo": {
@@ -1923,12 +1932,18 @@
         "demo-modal": "弹框表单",
         "demo-multi-col": "多列表单",
         "demo-filter": "表单过滤",
-        "demo-validate-template": "模板驱动表单验证（推荐）",
+        "demo-validate-template": "在表单中使用校验器",
         "demo-validate-reactive": "响应式表单验证",
         "demo-custom-status": "指定表单状态",
         "demo-validate-sync": "表单协同验证",
         "demo-validate-cross-component": "跨组件表单验证",
-        "demo-validate-update": "更新验证规则"
+        "demo-validate-update": "更新验证规则",
+        "demo-inner-validator": "使用内置校验器",
+        "demo-custom-validator": "自定义校验器",
+        "demo-error-strategy": "配置错误更新策略，校验时机",
+        "demo-custom-message": "自定义错误提示",
+        "demo-debounce-time": "自定义 debounce time",
+        "demo-user-register": "在用户注册场景中使用"
       }
     },
     "fullscreen": {
@@ -3165,7 +3180,7 @@
       },
       "bigDataDemo": {
         "title": "大数据展示",
-        "description": "需要使用大量选项卡切换。"
+        "description": "可选择直接开启和自动判断两种模式"
       },
       "anchorLinkValues": {
         "basic-usage": "基本用法",
@@ -3369,17 +3384,22 @@
       },
       "prefixDemo": {
         "title": "自定义前缀",
-        "description": "自定义前缀。"
+        "description": "自定义一个或多个前缀。"
       },
       "customDemo": {
         "title": "自定义模板",
         "description": "自定义列表单条展示模板。"
       },
+      "toggleDemo": {
+        "title": "是否使用间隔符",
+        "description": "为避免与其他内容混淆，前缀符 + 关键字前后有间隔符才能分别触发和结束组件，默认间隔符为半角空格。"
+      },
       "anchorLinkValues": {
         "basic-usage": "基本用法",
         "async-usage": "异步用法",
         "custom-prefix": "自定义前缀",
-        "custom-template": "自定义模板"
+        "custom-template": "自定义模板",
+        "toggle-divider": "是否使用间隔符"
       }
     },
     "toggle": {
@@ -3537,10 +3557,15 @@
         "title": "自定义用法",
         "description": "自定义编辑时的显示模板。"
       },
+      "editableDemo": {
+        "title": "可编辑用法",
+        "description": "可自定义初始模板、编辑模板，也可设置内容字符串、内容投影等形式。支持直接点击编辑和操作图标按钮编辑、复制等。"
+      },
       "anchorLinkValues": {
         "title-usage": "标题用法",
         "text-usage": "文本用法",
-        "custom-usage": "自定义用法"
+        "custom-usage": "自定义用法",
+        "editable-usage": "可编辑用法"
       }
     },
     "upload": {
@@ -4165,9 +4190,26 @@
       "trend-icon-template": {
         "title": "自定义趋势图标"
       },
+      "showTrendDemo": {
+        "title": "控制趋势显示"
+      },
+      "trendPositionDemo": {
+        "title": "趋势显示位置"
+      },
+      "customTrendStyleDemo": {
+        "title": "自定义趋势数字样式"
+      },
+      "withSubtextDemo": {
+        "title": "趋势带辅助文本",
+        "description": "如果实际使用需要带百分号，分数如 95%, 222/250 时可以自定义样式"
+      },
       "anchorLinkValues": {
         "basicDemo": "基本用法",
-        "trend-icon-template": "自定义趋势图标"
+        "trend-icon-template": "自定义趋势图标",
+        "show-trend-usage": "控制趋势显示",
+        "trend-position-usage": "趋势显示位置",
+        "custom-trend-style-usage": "自定义趋势数字样式",
+        "with-subtext-usage": "趋势带辅助文本"
       }
     },
     "line-chart": {

@@ -1,4 +1,5 @@
 @import './basic';
+// need to run `node scripts/themeable/transfer-sass-var-to-theme-data.js ` when modified
 // 基础变量
 $devui-global-bg: var(--devui-global-bg, $devui-zinc-5); // 全局带底色背景
 $devui-global-bg-normal: var(--devui-global-bg-normal, $devui-white-5); // 全局白色背景
@@ -93,16 +94,16 @@ $devui-contrast-active: var(--devui-contrast-active, #b12220); // 突出按钮�
 
 // 状态
 $devui-danger-line: var(--devui-danger-line, $devui-red-50); // 失败边框
-$devui-danger-bg: var(--devui-danger-bg, $devui-red-5); // 失败底色
+$devui-danger-bg: var(--devui-danger-bg, $devui-red-10); // 失败底色
 
 $devui-warning-line: var(--devui-warning-line, $devui-orange-50); // 警告边框
-$devui-warning-bg: var(--devui-warning-bg, $devui-orange-5); // 警告底色
+$devui-warning-bg: var(--devui-warning-bg, $devui-orange-10); // 警告底色
 
 $devui-info-line: var(--devui-info-line, $devui-blue-50); // 通知边框
-$devui-info-bg: var(--devui-info-bg, $devui-blue-5); // 通知底色
+$devui-info-bg: var(--devui-info-bg, $devui-blue-10); // 通知底色
 
 $devui-success-line: var(--devui-success-line, $devui-green-50); // 成功边框
-$devui-success-bg: var(--devui-success-bg, $devui-green-5); // 成功底色
+$devui-success-bg: var(--devui-success-bg, $devui-green-10); // 成功底色
 $devui-primary-line: var(--devui-primary-line, $devui-blue-50); // 主要边框
 $devui-primary-bg: var(--devui-primary-bg, $devui-blue-5); // 主要底色
 

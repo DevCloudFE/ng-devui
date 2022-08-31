@@ -30,6 +30,7 @@ export class LoadingService {
     view,
     injector,
     zIndex,
+    loadingStyle = 'default'
   }: ILoadingOptions = {}) {
     const finalComponentFactoryResolver = this.componentFactoryResolver;
 
@@ -63,6 +64,7 @@ export class LoadingService {
       left: view ? view.left : '50%',
       isCustomPosition: !!view,
       target: target ? target : this.document.body,
+      loadingStyle: loadingStyle
     });
 
     this.renderer.setStyle(target, 'position', positionType);

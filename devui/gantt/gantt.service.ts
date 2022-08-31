@@ -23,12 +23,12 @@ export class GanttService {
 
   registContainerEvents(scrollContainer: HTMLElement) {
     // 背景拖拽
-    this.mouseDownListener = fromEvent(scrollContainer, 'mousedown').pipe(pluck<Event, number>('pageX'));
+    this.mouseDownListener = fromEvent(scrollContainer, 'mousedown').pipe(pluck<MouseEvent, 'pageX'>('pageX'));
 
-    this.mouseMoveListener = fromEvent(scrollContainer, 'mousemove').pipe(pluck<Event, number>('pageX'));
+    this.mouseMoveListener = fromEvent(scrollContainer, 'mousemove').pipe(pluck<MouseEvent, 'pageX'>('pageX'));
 
     this.mouseEndListener = merge(fromEvent(scrollContainer, 'mouseup'), fromEvent(scrollContainer, 'mouseout')).pipe(
-      pluck<Event, number>('pageX')
+      pluck<MouseEvent, 'pageX'>('pageX')
     );
   }
 

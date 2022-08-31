@@ -196,11 +196,11 @@ $keyframe-blue: #5e7ce0;
   }
 
   svg.svg-icon path {
-    fill: $devui-icon-fill-weak;
+    fill: $devui-icon-fill;
   }
 
   svg.svg-icon rect {
-    stroke: $devui-icon-fill-weak;
+    stroke: $devui-icon-fill;
   }
 
   &.devui-tree-node__open:not(.devui-tree-node__customIcon) {

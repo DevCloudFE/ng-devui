@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, NgZone, OnDestroy, OnInit, TemplateRef } from '@angular/core';
+import { Component, Directive, ElementRef, HostBinding, Input, NgZone, OnDestroy, OnInit, TemplateRef } from '@angular/core';
 import { fromEvent, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 @Component({
@@ -36,4 +36,19 @@ export class IconComponent implements OnInit, OnDestroy {
     this.destroy$.next();
     this.destroy$.complete();
   }
+}
+
+@Directive({
+  selector: `d-icon-link, [dIconLink]`,
+})
+export class IconLinkDirective {
+  @HostBinding('class.devui-icon-link') default = true;
+}
+
+
+@Directive({
+  selector: `d-icon-hover, [dIconHover]`,
+})
+export class IconHoverDirective {
+  @HostBinding('class.devui-icon-hover') default = true;
 }

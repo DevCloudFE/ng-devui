@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { DFormGroupRuleDirective, DValidateRules, FormLayout } from 'ng-devui/form';
 import { of } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
@@ -15,9 +15,9 @@ export class ValidateCrossComponentComponent implements OnInit {
     childUser: null,
   };
 
-  userFormGroup = new FormGroup({
-    username: new FormControl(this.formData.userName),
-    childUser: new FormControl(this.formData.childUser),
+  userFormGroup = new UntypedFormGroup({
+    username: new UntypedFormControl(this.formData.userName),
+    childUser: new UntypedFormControl(this.formData.childUser),
   });
 
   formRules: { [key: string]: DValidateRules } = {

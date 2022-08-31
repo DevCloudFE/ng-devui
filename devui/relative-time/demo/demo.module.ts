@@ -23,7 +23,7 @@ import { DemoComponent } from './demo.component';
     DevUICodeboxModule,
     DevUIApiModule,
     RouterModule.forChild([
-      { path: '', redirectTo: 'demo' },
+      { path: '', redirectTo: 'demo', pathMatch: 'full' },
       { path: 'demo', component: DemoComponent },
 
       {

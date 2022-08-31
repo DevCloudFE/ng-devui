@@ -23,7 +23,7 @@ DevUI Design设计系统包含了DevUI规则、设计语言和最佳实践的资
 
 ## Angular版本
 
-当前支持的angular版本<font color=red>`^13.0.0`</font>
+当前支持的angular版本<font color=red>`^14.0.0`</font>
 
 ## 快速开始
 

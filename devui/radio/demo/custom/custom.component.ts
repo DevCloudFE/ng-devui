@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 
 @Component({
   selector: 'd-custom',
@@ -9,7 +9,7 @@ export class CustomComponent implements OnInit {
   values2 = ['Item1', 'Item2', 'Item3'];
   choose2 = 'Item3';
 
-  valueControl = new FormControl('Item1');
+  valueControl = new UntypedFormControl('Item1');
 
   values3 = [
     {name: 'Item1'},

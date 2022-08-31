@@ -12,6 +12,7 @@ import { TABLE_TH } from './th.token';
   /* eslint-disable-next-line @angular-eslint/component-selector*/
   selector: '[dHeadCell]',
   templateUrl: './th.component.html',
+  styleUrls: ['./th.component.scss'],
   providers: [{
     provide: TABLE_TH,
     useExisting: forwardRef(() => TableThComponent)

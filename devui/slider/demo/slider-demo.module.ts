@@ -23,7 +23,7 @@ import { SliderDemoComponent } from './slider-demo.component';
     FormsModule,
     DDemoNavModule,
     RouterModule.forChild([
-      {path: '', redirectTo: 'demo'},
+      {path: '', redirectTo: 'demo', pathMatch: 'full'},
       {path: 'demo', component: SliderDemoComponent},
       {
         path: 'api', component: DevUIApiComponent, data: {
