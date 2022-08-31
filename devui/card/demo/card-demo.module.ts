@@ -13,9 +13,10 @@ import { BasicComponent } from './basic/basic.component';
 import { CardDemoComponent } from './card-demo.component';
 import { CustomComponent } from './custom/custom.component';
 import { WithMediaComponent } from './with-media/with-media.component';
+import { CardInteractiveComponent } from './card-interactive/card-interactive.component';
 
 @NgModule({
-  declarations: [CardDemoComponent, BasicComponent, CustomComponent, WithMediaComponent],
+  declarations: [CardDemoComponent, BasicComponent, CustomComponent, WithMediaComponent, CardInteractiveComponent],
   imports: [
     TranslateModule,
     CommonModule,
@@ -26,7 +27,7 @@ import { WithMediaComponent } from './with-media/with-media.component';
     AvatarModule,
     ButtonModule,
     RouterModule.forChild([
-      { path: '', redirectTo: 'demo' },
+      { path: '', redirectTo: 'demo', pathMatch: 'full' },
       { path: 'demo', component: CardDemoComponent },
       { path: 'api', component: DevUIApiComponent, data: {
         'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),

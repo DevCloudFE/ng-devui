@@ -32,7 +32,7 @@ import { TextComponent } from './text/text.component';
     DDemoNavModule,
     DropDownModule,
     RouterModule.forChild([
-      { path: '',  redirectTo: 'demo' },
+      { path: '',  redirectTo: 'demo', pathMatch: 'full' },
       { path: 'demo', component: ButtonDemoComponent},
       { path: 'api', component: DevUIApiComponent, data: {
         'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),

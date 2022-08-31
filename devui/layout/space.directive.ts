@@ -9,7 +9,7 @@ import { DScreenMediaQueryService } from './screen-media-query.service';
 })
 
 export class DSpaceDirective implements OnInit, OnDestroy {
-  private destroy$ = new Subject();
+  private destroy$ = new Subject<void>();
   private executedSpace: [number, number] = [null, null];
 
   @Input() dSpace: DResponseParameter<number | [number, number]>;

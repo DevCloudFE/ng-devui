@@ -40,7 +40,7 @@ ieSupport：是否打开 ie 支持，目前使用 css-var-ponyfill 方案支持 
 
 ## 制作主题切换器
 
-请参考 [ThemePickerComponent](https://github.com/DevCloudFE/ng-devui/blob/master/src/app/theme-picker/theme-picker.component.ts)
+请参考 [ThemePickerComponent](https://github.com/DevCloudFE/ng-devui/blob/master/devui-commons/src/header/theme-picker/theme-picker.component.ts)
 
 ## 使用自定义主题
 

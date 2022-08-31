@@ -27,7 +27,7 @@ import { MultiAutoCompleteDemoComponent } from './multi-auto-complete-demo.compo
     DevUICodeboxModule,
     DDemoNavModule,
     RouterModule.forChild([
-      { path: '', redirectTo: 'demo' },
+      { path: '', redirectTo: 'demo', pathMatch: 'full' },
       { path: 'demo', component: MultiAutoCompleteDemoComponent },
       {
         path: 'api',

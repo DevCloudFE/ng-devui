@@ -26,7 +26,7 @@ import { IconGroupDemoComponent } from './icon-group/icon-group.component';
     DataTableModule,
     DropDownModule,
     RouterModule.forChild([
-      { path: '', redirectTo: 'demo' },
+      { path: '', redirectTo: 'demo', pathMatch: 'full' },
       { path: 'demo', component: IconDemoComponent },
       {
         path: 'api', component: DevUIApiComponent, data: {

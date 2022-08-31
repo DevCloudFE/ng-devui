@@ -1,0 +1,18 @@
+<d-data-table [dataSource]="data">
+  <thead dTableHead>
+    <tr dTableRow>
+      <th dHeadCell>before</th>
+      <th dHeadCell>type</th>
+      <th dHeadCell>after translate</th>
+    </tr>
+  </thead>
+  <tbody dTableBody>
+    <ng-template let-rowItem="rowItem">
+      <tr dTableRow>
+        <td dTableCell>{{ rowItem.number }}</td>
+        <td dTableCell>{{ rowItem.type }}</td>
+        <td dTableCell>{{ rowItem.number | dNumberTrans: rowItem.type }}</td>
+      </tr>
+    </ng-template>
+  </tbody>
+</d-data-table>

@@ -47,7 +47,7 @@ $border-change-function: $devui-animation-ease-in-out-smooth;
   border: 1px solid $devui-form-control-line;
   border-radius: $devui-border-radius;
   outline: none;
-  background-color: $devui-base-bg;
+  background-color: $devui-form-control-bg;
   @include border-transition();
 
   &:not([disabled]):not(.disabled):not(.devui-disabled):not(.error):not(.devui-error) {
@@ -70,6 +70,10 @@ $border-change-function: $devui-animation-ease-in-out-smooth;
       border-color: $devui-disabled-line;
       color: $devui-disabled-text;
     }
+  }
+
+  &::placeholder {
+    color: $devui-placeholder;
   }
 }
 
@@ -107,7 +111,7 @@ $border-change-function: $devui-animation-ease-in-out-smooth;
 
 .devui-input {
   outline: none;
-  background-color: $devui-base-bg;
+  background-color: $devui-form-control-bg;
   border: 1px solid $devui-form-control-line;
   border-radius: $devui-border-radius;
   padding: 4px 8px;
@@ -203,7 +207,7 @@ $border-change-function: $devui-animation-ease-in-out-smooth;
 
 .devui-form-control {
   color: $devui-text;
-  background-color: $devui-base-bg;
+  background-color: $devui-form-control-bg;
   padding: 4px 8px;
   border: 1px solid $devui-form-control-line;
   display: block;
@@ -313,15 +317,18 @@ $border-change-function: $devui-animation-ease-in-out-smooth;
 }
 
 // css选择器不可合并，否则css解析器总是会失败
-input::-moz-placeholder {
+input::-moz-placeholder,
+textarea::-moz-placeholder {
   color: $devui-placeholder;
 }
 
-input:-ms-input-placeholder {
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder {
   color: $devui-placeholder;
 }
 
-input::-webkit-input-placeholder {
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
   color: $devui-placeholder;
 }
 

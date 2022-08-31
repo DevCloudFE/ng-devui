@@ -1,5 +1,5 @@
 export const devuiInitialThemeData = {
-  'devui-global-bg': '#f8f8fa',
+  'devui-global-bg': '#f7f7f9',
   'devui-global-bg-normal': '#ffffff',
   'devui-base-bg': '#ffffff',
   'devui-base-bg-dark': '#252b3a',

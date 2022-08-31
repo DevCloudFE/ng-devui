@@ -27,11 +27,18 @@ In the page
 |    positionType    |           `string`            |       'relative'        | Optional. This parameter specifies the positioning type of the `dLoading` host element. The value is the same as that of the css position attribute    | [Using ShowLoading](demo#show-loading) |
 |        view        | `{top?:string,left?:string}`  | {top: '50%',left:'50%'} | Optional. Adjust the loading display position, that is, the distance between the top and left of the host element                                      | [Basic Usage](demo#basic-usage)        |
 |       zIndex       |   `number`    | -- | Optional. Z-index value in the loading displayed. |  [Basic Usage](demo#basic-usage)       |
+|       loadingStyle       |        [`LoadingStyle`](###LoadingStyle)      |   `'default'`   | Optional. Loading type `'default' \| 'infinity'`.      | [Basic Usage](demo#basic-usage)    |
 
 ### LoadingType
 
 ```ts
 export type LoadingType = Observable<any> | Promise<any> | Array<Promise<any>> | Array<Observable<any>> | Subscription | undefined;
+```
+
+### LoadingStyle
+
+```ts
+export type LoadingStyle = 'default' | 'infinity';
 ```
 
 # LoadingService
@@ -83,3 +90,4 @@ Invoke loadingService.open() in the openFullScreen function to enable loading. T
 | view | `{top?:string,left?:string}` | {top: '50%',left:'50%'} | Optional. Adjust the loading display position, that is, the distance between the top and left of the host element | [Service function](demo#full-screen) |
 | zIndex | `number` | -- | Optional. Z-index value in the loading displayed. | [Service function](demo#full-screen) |
 | injector | `Injector` | -- | Optional. You can specify the syringe that will be used as the parent of the component. |
+|       loadingStyle       |        [`LoadingStyle`](###LoadingStyle)      |   `'default'`   | Optional. Loading type `'default' \| 'infinity'`.      |     |

@@ -1,5 +1,4 @@
 import {
-  AfterContentInit,
   AfterViewInit,
   Component,
   ContentChildren,
@@ -28,14 +27,14 @@ export interface ITabOperation {
   exportAs: 'tabs',
   preserveWhitespaces: false,
 })
-export class TabsComponent implements AfterContentInit, OnChanges, AfterViewInit {
+export class TabsComponent implements OnChanges, AfterViewInit {
   static ID_SEED = 0;
   @ViewChild('tabsEle') tabsEle: ElementRef;
   @ViewChild('tabsViewport') tabsViewport: ElementRef;
   @Input() type: 'tabs' | 'pills' | 'options' | 'wrapped' | 'slider' = 'tabs';
   @Input() size: 'lg' | 'md' | 'sm' | 'xs' = 'md';
   @Input() showContent = true;
-  @Input() scrollMode = false;
+  @Input() scrollMode: boolean | 'normal' | 'auto' = false;
   @Input() activeTab: number | string;
   @Input() customWidth: string;
   @Input() reactivable = false;
@@ -61,53 +60,61 @@ export class TabsComponent implements AfterContentInit, OnChanges, AfterViewInit
   offsetIndex = 0;
   offsetLeft: number;
   offsetWidth: number;
+  scrollModeToggle = false;
   tabsWidth = [];
 
   get isShowShadow() {
-    return this.scrollMode && ['tabs', 'pills', 'wrapped'].includes(this.type);
+    return this.scrollModeToggle && ['tabs', 'pills', 'wrapped'].includes(this.type);
   }
 
-  constructor() {
+  constructor(private el: ElementRef) {
     this.id = `devuiTabs${TabsComponent.ID_SEED++}`;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (this.type === 'slider' && changes['activeTab']) {
+    const { activeTab, scrollMode } = changes;
+    if (activeTab) {
       this.changeActiveSlidingBlock();
+    }
+    if (scrollMode) {
+      this.getTabsWidth();
     }
   }
 
   ngAfterViewInit(): void {
-    if (this.type === 'slider' && this.activeTab === undefined && this.tabs.length > 0 && this.tabs[0]) {
-      this.select(this.tabs.first.id, this.tabsEle.nativeElement.getElementById(this.tabs[0].tabId));
+    if (this.tabs.length) {
+      if (this.activeTab === undefined) {
+        // 无选中选项卡则默认选择第一个未被禁用的选项卡
+        const { id } = this.tabs.find((item) => !item.disabled);
+        this.select(id);
+      } else {
+        this.changeActiveSlidingBlock();
+      }
     }
-    this.getTabsWidth();
 
+    this.getTabsWidth();
     this.tabs.changes.subscribe(() => {
       this.changeActiveSlidingBlock();
-      this.getTabsWidth();
+      // 延时等待tabs渲染完毕
+      setTimeout(() => this.getTabsWidth());
     });
   }
 
-  ngAfterContentInit(): void {
-    if (this.type !== 'slider' && this.activeTab === undefined && this.tabs.length > 0) {
-      this.select(this.tabs.first.id);
+  changeActiveSlidingBlock(): void {
+    if (this.type === 'slider' && this.tabsEle) {
+      // 延时等待active样式切换至正确的tab
+      setTimeout(() => {
+        const tabEle = this.tabsEle.nativeElement.querySelector(`#${this.id} li.active`);
+        if (tabEle) {
+          const leftFix = this.scrollModeToggle ? this.tabsEle.nativeElement.scrollLeft : 0;
+          this.offsetLeft = tabEle.getBoundingClientRect().left + leftFix - this.tabsEle.nativeElement.getBoundingClientRect().left;
+          this.offsetWidth = tabEle.getBoundingClientRect().width;
+        }
+      });
     }
   }
 
-  changeActiveSlidingBlock() {
-    // 延时等待active样式切换至正确的tab
-    setTimeout(() => {
-      const tabEle = this.tabsEle.nativeElement.querySelector(`#${this.id} li.active`);
-      if (tabEle) {
-        const leftFix = this.scrollMode ? this.tabsEle.nativeElement.scrollLeft : 0;
-        this.offsetLeft = tabEle.getBoundingClientRect().left + leftFix - this.tabsEle.nativeElement.getBoundingClientRect().left;
-        this.offsetWidth = tabEle.getBoundingClientRect().width;
-      }
-    });
-  }
-
-  canChange(currentTab: number | string) {
+  canChange(currentTab: number | string): Promise<boolean> {
     let changeResult = Promise.resolve(true);
 
     if (this.beforeChange) {
@@ -126,7 +133,7 @@ export class TabsComponent implements AfterContentInit, OnChanges, AfterViewInit
     return changeResult;
   }
 
-  select(id: number | string, tabEl?) {
+  select(id: number | string, callback?: Function): void {
     if (!this.reactivable && this.activeTab === id) {
       return;
     }
@@ -137,47 +144,57 @@ export class TabsComponent implements AfterContentInit, OnChanges, AfterViewInit
       const tab = this.tabs.find((item) => item.id === id);
       if (tab && !tab.disabled) {
         this.activeTab = id;
-        if (this.type === 'slider' && tabEl && this.tabsEle) {
-          const leftFix = this.scrollMode ? this.tabsEle.nativeElement.scrollLeft : 0;
-          this.offsetLeft = tabEl.getBoundingClientRect().left + leftFix - this.tabsEle.nativeElement.getBoundingClientRect().left;
-          this.offsetWidth = tabEl.getBoundingClientRect().width;
+        this.changeActiveSlidingBlock();
+        if (callback) {
+          callback();
         }
         this.activeTabChange.emit(id);
       }
     });
   }
 
-  checkCloseable(tab) {
+  checkCloseable(tab: TabComponent): boolean {
     const closeable = this.closeable && (this.closeableIds.length === 0 || this.closeableIds.includes(tab.id));
     return !tab.disabled && !tab.titleTpl && closeable;
   }
 
-  addOrDeleteTab(event, id?: number | string) {
+  addOrDeleteTab(event: Event, id?: number | string): void {
     event.stopPropagation();
     const operation = id || id >= 0 ? 'delete' : 'add';
     this.addOrDeleteTabChange.emit({ id, operation });
   }
 
-  getTabsWidth() {
+  getTabsWidth(): void {
     if (this.scrollMode && this.tabsViewport && this.tabsEle) {
-      const tabs = this.tabsEle.nativeElement.querySelectorAll('li.devui-nav-tab-item[role=presentation]');
+      let tabsWidthSum = 0;
+      const tabs = this.tabsEle.nativeElement.querySelectorAll('li.devui-nav-tab-item');
       this.tabsWidth = [];
       tabs.forEach((tab) => {
         const style = getComputedStyle(tab);
         const width = parseFloat(style.marginLeft) + tab.offsetWidth + parseFloat(style.marginRight);
+        tabsWidthSum += width;
         this.tabsWidth.push(width);
+      });
+      // 延时赋值避免脏值检查错误
+      setTimeout(() => {
+        this.scrollModeToggle = this.scrollMode === 'auto' ? tabsWidthSum > this.el.nativeElement.clientWidth : !!this.scrollMode;
+        if (this.scrollModeToggle && this.activeTab && this.tabs) {
+          const data = this.tabs.toArray();
+          const index = data.findIndex((item) => item.id === this.activeTab);
+          const tab = data[index];
+          this.scroll(null, index, tab, true);
+        }
       });
     }
   }
 
-  scroll(direction?: string, index?: number, tab?: TabComponent) {
-    if (this.scrollMode && this.tabsEle) {
-      let dom;
-      const tabs = this.tabsEle.nativeElement.querySelectorAll('li[role=presentation]');
+  scroll(direction?: string, index?: number, tab?: TabComponent, isInitScrollMode?: boolean): void {
+    if (this.scrollModeToggle && this.tabsEle) {
+      const tabs = this.tabsEle.nativeElement.querySelectorAll('li.devui-nav-tab-item');
+      const containerWidth = this.tabsEle.nativeElement.scrollWidth;
+      const scrollLeft = this.tabsEle.nativeElement.scrollLeft;
+      const viewportWidth = this.tabsViewport.nativeElement.offsetWidth;
       if (direction) {
-        const containerWidth = this.tabsEle.nativeElement.scrollWidth;
-        const scrollLeft = this.tabsEle.nativeElement.scrollLeft;
-        const viewportWidth = this.tabsViewport.nativeElement.offsetWidth;
         const distance = direction === 'next' ? scrollLeft + viewportWidth : scrollLeft - viewportWidth;
         let width = 0;
         for (let i = 0; i < this.tabsWidth.length; i++) {
@@ -187,16 +204,22 @@ export class TabsComponent implements AfterContentInit, OnChanges, AfterViewInit
             break;
           }
         }
-        dom = tabs[this.offsetIndex];
-      } else if (index >= 0) {
-        dom = tabs[index];
+        this.scrollIntoView(tabs[this.offsetIndex]);
+      } else if (index >= 0 && tab) {
+        const dom = tabs[index];
         this.offsetIndex = index;
-        this.activeTab = tab.id;
-        this.activeTabChange.emit(this.activeTab);
+        if (isInitScrollMode) {
+          this.scrollIntoView(dom);
+        } else {
+          this.select(tab.id, () => this.scrollIntoView(dom));
+        }
       }
-      if (dom) {
-        dom.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
-      }
+    }
+  }
+
+  scrollIntoView(dom: HTMLElement): void {
+    if (dom) {
+      dom.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
     }
   }
 }

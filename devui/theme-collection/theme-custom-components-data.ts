@@ -27,5 +27,12 @@ export const devuiCustomComponentsDarkThemeData = {
   'devui-btn-common-bg-active': '#4e5057',
   'devui-btn-common-color-active': '#CED1DB',
   'devui-btn-common-border-color-active': 'transparent',
-  'devui-btn-common-border-disabled': 'transparent'
+  'devui-btn-common-border-disabled': 'transparent',
+  'devui-icon-hover-bg': '#393a3e',
+  'devui-icon-active-bg': '#4e5057'
+};
+
+export const devuiCustomComponentsDeepThemeData = {
+  'devui-btn-common-bg': '#E0E0E0',
+  'devui-btn-common-bg-hover': '#BDBDBD',
 };

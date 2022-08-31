@@ -154,7 +154,7 @@ export class SliderComponent implements OnInit, OnChanges, ControlValueAccessor,
         e.stopPropagation();
         e.preventDefault();
       }),
-      pluck<Event, number>('pageX'),
+      pluck<MouseEvent, 'pageX'>('pageX'),
       map((position: number) => this.mousePositionToAdaptiveValue(position))
     );
     this.dragEndListener = fromEvent(document, 'mouseup');
@@ -163,7 +163,7 @@ export class SliderComponent implements OnInit, OnChanges, ControlValueAccessor,
         e.stopPropagation();
         e.preventDefault();
       }),
-      pluck<Event, number>('pageX'),
+      pluck<MouseEvent, 'pageX'>('pageX'),
       distinctUntilChanged(),
       map((position: number) => this.mousePositionToAdaptiveValue(position)),
       distinctUntilChanged(),

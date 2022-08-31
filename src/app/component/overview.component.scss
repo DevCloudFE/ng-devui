@@ -93,7 +93,11 @@
       height: 230px;
       margin-bottom: 18px;
       cursor: pointer;
-      transition: box-shadow $devui-animation-duration-slow $devui-animation-ease-in-out-smooth, transform $devui-animation-duration-slow $devui-animation-ease-in-out-smooth;
+      background: $devui-base-bg;
+      box-shadow: $devui-shadow-length-base $devui-light-shadow;
+      transition:
+        box-shadow $devui-animation-duration-slow $devui-animation-ease-in-out-smooth,
+        transform $devui-animation-duration-slow $devui-animation-ease-in-out-smooth;
 
       &:hover {
         box-shadow: $devui-shadow-length-hover $devui-light-shadow;

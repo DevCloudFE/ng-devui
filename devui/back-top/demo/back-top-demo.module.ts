@@ -27,7 +27,7 @@ import { ScrollContainerComponent } from './scroll-container/scroll-container.co
     ToggleModule,
     BackTopModule,
     RouterModule.forChild([
-      { path: '',  redirectTo: 'demo' },
+      { path: '',  redirectTo: 'demo', pathMatch: 'full' },
       { path: 'demo', component: BackTopDemoComponent},
       { path: 'api', component: DevUIApiComponent, data: {
         'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),

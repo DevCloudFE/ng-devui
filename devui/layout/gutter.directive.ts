@@ -9,7 +9,7 @@ import { DScreenMediaQueryService } from './screen-media-query.service';
 })
 
 export class DGutterDirective implements OnInit, OnDestroy {
-  private destroy$ = new Subject();
+  private destroy$ = new Subject<void>();
   private executedGutter: [number, number] = [null, null];
 
   @Input() dGutter: DResponseParameter<number | [number, number]>;

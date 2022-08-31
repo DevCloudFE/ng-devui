@@ -52,6 +52,7 @@ export class TabsDemoComponent implements OnInit, OnDestroy {
   BigDataSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('./big-data/big-data.component.html?raw') },
     { title: 'TS', language: 'typescript', code: require('./big-data/big-data.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./big-data/big-data.component.scss?raw') },
   ];
   navItems = [];
   subs: Subscription = new Subscription();

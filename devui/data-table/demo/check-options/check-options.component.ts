@@ -74,6 +74,10 @@ export class CheckOptionsComponent implements OnInit {
       onChecked: this.checkTotalData.bind(this)
     },
     {
+      label: '取消所有数据全选',
+      onChecked: this.uncheckTotalData.bind(this)
+    },
+    {
       label: '全选当前页数据',
       onChecked: this.checkPageData.bind(this)
     }
@@ -94,6 +98,15 @@ export class CheckOptionsComponent implements OnInit {
       }
     );
     this.totalDataChecked = true;
+  }
+
+  uncheckTotalData() {
+    this.datatable.setTableCheckStatus(
+      {
+        pageAllChecked: false
+      }
+    );
+    this.totalDataChecked = false;
   }
 
   checkPageData() {

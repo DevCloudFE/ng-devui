@@ -29,6 +29,9 @@ export function ThemeServiceInit(
   ieSupport = false, // TODO：css-var-ponyflll 仍有一些问题待定位
   allowDynamicTheme = false
 ) {
+  if (typeof window === 'undefined' || typeof document === 'undefined') {
+    return null;
+  }
   window[THEME_KEY.themeCollection] = themes || {
     'devui-light-theme': devuiLightTheme,
     'devui-dark-theme': devuiDarkTheme,
@@ -43,7 +46,9 @@ export function ThemeServiceInit(
       appendClasses: ['dark-mode']
     }
   });
-  themeService.initializeTheme(null, allowDynamicTheme);
+
+  const currentTheme = window?.localStorage.getItem(THEME_KEY.userLastPreferTheme) || defaultThemeName;
+  themeService.initializeTheme(currentTheme, allowDynamicTheme);
   if (ieSupport) {
     ieSupportCssVar();
   }
@@ -51,6 +56,9 @@ export function ThemeServiceInit(
 }
 
 export function ThemeServiceFollowSystemOn(themeConfig?: { lightThemeName: string; darkThemeName: string }): Subscription {
+  if (typeof window === 'undefined' || typeof document === 'undefined') {
+    return null;
+  }
   const themeService: ThemeService = window[THEME_KEY.themeService];
   themeService.registerMediaQuery();
   return themeService.mediaQuery.prefersColorSchemeChange.subscribe(value => {
@@ -62,6 +70,9 @@ export function ThemeServiceFollowSystemOn(themeConfig?: { lightThemeName: strin
   });
 }
 export function ThemeServiceFollowSystemOff(sub?: Subscription) {
+  if (typeof window === 'undefined' || typeof document === 'undefined') {
+    return;
+  }
   if (sub) {
     sub.unsubscribe();
   }
@@ -70,6 +81,9 @@ export function ThemeServiceFollowSystemOff(sub?: Subscription) {
 }
 
 export function ieSupportCssVar() {
+  if (typeof window === 'undefined' || typeof document === 'undefined') {
+    return;
+  }
   const isNativeSupport = window['CSS'] && CSS.supports && CSS.supports('(--a: 0)') || false;
   if (isNativeSupport) { return; }
   cssVars({ watch: true, silent: true });

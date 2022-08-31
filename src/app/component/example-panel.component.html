@@ -1,4 +1,8 @@
-<h1>{{ componentName }}</h1>
+<h1>
+  <span style="position: relative; z-index: 1000">{{ componentName }}</span>
+  <div *ngIf="showHeaderWrapper" class="devui-title-container"></div>
+</h1>
+
 <div class="devui-docs-header">
   <div style="margin-bottom: 40px">{{ description }}</div>
   <div *ngIf="tmw">
@@ -6,10 +10,20 @@
     <div style="margin-bottom: 20px" [innerHTML]="tmw"></div>
   </div>
 </div>
-<d-tabs class="d-website-demo-tabs" [showContent]="false" [(activeTab)]="componentTab" (activeTabChange)="activeTabChange($event)">
+
+<d-tabs
+  class="d-website-demo-tabs"
+  [showContent]="false"
+  type="options"
+  size="lg"
+  customWidth="100px"
+  [(activeTab)]="componentTab"
+  (activeTabChange)="activeTabChange($event)"
+>
   <d-tab id="demo" title="Demo"></d-tab>
   <d-tab id="api" title="API"></d-tab>
 </d-tabs>
+
 <div class="examples-viewer">
   <div class="examples-viewer-wrapper">
     <router-outlet></router-outlet>

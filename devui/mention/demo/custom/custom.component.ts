@@ -1,46 +1,40 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'd-mention-custom',
   templateUrl: './custom.component.html',
 })
-export class CustomComponent implements OnInit {
+export class CustomComponent {
   suggestions = [
     {
       name: 'C#',
-      id: 1
+      id: 1,
     },
     {
       name: 'C',
-      id: 2
+      id: 2,
     },
     {
       name: 'C++',
-      id: 3
+      id: 3,
     },
     {
       name: 'Python',
-      id: 4
+      id: 4,
     },
     {
       name: 'Java',
-      id: 5
+      id: 5,
     },
     {
       name: 'JavaScript',
-      id: 6
+      id: 6,
     },
     {
       name: 'Go',
-      id: 7
-    }
+      id: 7,
+    },
   ];
 
   valueWith = (data) => data.name;
-
-  constructor() {}
-
-  ngOnInit() {
-
-  }
 }

@@ -27,7 +27,7 @@ import { SourceConfigComponent } from './source-config/source-config.component';
     DDemoNavModule,
     DropDownModule,
     RouterModule.forChild([
-      { path: '',  redirectTo: 'demo' },
+      { path: '',  redirectTo: 'demo', pathMatch: 'full' },
       { path: 'demo', component: BreadCrumbDemoComponent},
       { path: 'api', component: DevUIApiComponent, data: {
         'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),

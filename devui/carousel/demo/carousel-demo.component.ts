@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { DevuiSourceData } from 'ng-devui/shared/devui-codebox/devui-source-data';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
@@ -7,6 +8,11 @@ import { Subscription } from 'rxjs';
   templateUrl: './carousel-demo.component.html',
 })
 export class CarouselDemoComponent implements OnInit, OnDestroy {
+  withTransitionProgressSourceData: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'xml', code: require('./with-transition-progress/with-transition-progress.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./with-transition-progress/with-transition-progress.component.ts?raw') },
+  ];
+
   CarouselBasicComponent = [
     { title: 'HTML', language: 'html', code: require('./basic/carousel-demo-basic.component.html?raw') },
     { title: 'TS', language: 'typescript', code: require('./basic/carousel-demo-basic.component.ts?raw') },
@@ -52,6 +58,7 @@ export class CarouselDemoComponent implements OnInit, OnDestroy {
       { dAnchorLink: 'trigger-usage', value: values['trigger-usage'] },
       { dAnchorLink: 'autoplay-usage', value: values['autoplay-usage'] },
       { dAnchorLink: 'custom-usage', value: values['custom-usage'] },
+      { dAnchorLink: 'with-transition-progress-usage', value: values['with-transition-progress-usage'] },
     ];
   }
 

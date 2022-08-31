@@ -1,4 +1,5 @@
 import { Component, ElementRef, QueryList, TemplateRef, ViewChildren } from '@angular/core';
+import { MentionPositionType } from './mention.types';
 import { MentionDirective } from './mention.directive';
 
 @Component({
@@ -7,25 +8,15 @@ import { MentionDirective } from './mention.directive';
   styleUrls: ['./mention.component.scss'],
 })
 export class MentionComponent {
-
-  @ViewChildren('items', { read: ElementRef })
-  items!: QueryList<ElementRef>;
-
+  @ViewChildren('items', { read: ElementRef }) items!: QueryList<ElementRef>;
   suggestions = [];
-
-  trigger: MentionDirective;
-
-  value = '';
-
   activeIndex = -1;
-
   loading = false;
-
-  mentionItemTemplate: TemplateRef<any>;
-
+  value = '';
   mentionNotFoundContent = '';
-
-  position;
+  mentionItemTemplate: TemplateRef<any>;
+  trigger: MentionDirective;
+  position: MentionPositionType;
 
   private get focusItemElement(): HTMLElement | null {
     const itemArr = this.items?.toArray();
@@ -35,9 +26,7 @@ export class MentionComponent {
     return null;
   }
 
-  constructor() {}
-
-  selectSuggestion (suggestion) {
+  selectSuggestion(suggestion) {
     if (this.trigger) {
       this.trigger.selectSuggestion(suggestion);
     }

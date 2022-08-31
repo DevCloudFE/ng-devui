@@ -1,13 +1,9 @@
-import {
-  Component,
-  forwardRef, Host, HostBinding, Inject, Input, OnDestroy, OnInit,
-  Optional, QueryList, SkipSelf, ViewChildren, ViewEncapsulation
-} from '@angular/core';
+import { Component, HostBinding, Inject, Input, OnDestroy, OnInit, QueryList, ViewChildren, ViewEncapsulation } from '@angular/core';
 import { expandCollapse, expandCollapseForDomDestroy } from 'ng-devui/utils';
 import { AccordionItemRouterlinkComponent } from './accordion-item-routerlink.component';
-import { ACCORDION_LIST } from './accordion-list-token';
-import { ACCORDION_MENU } from './accordion-menu-token';
+import { AccordionMenuComponent } from './accordion-menu.component';
 import { ACCORDION } from './accordion-token';
+import { AccordionService } from './accordion.service';
 import { AccordionMenuItem } from './accordion.type';
 
 @Component({
@@ -16,15 +12,13 @@ import { AccordionMenuItem } from './accordion.type';
   encapsulation: ViewEncapsulation.None,
   animations: [expandCollapse, expandCollapseForDomDestroy],
   preserveWhitespaces: false,
-  providers: [{
-    provide: ACCORDION_LIST,
-    useExisting: forwardRef(() => AccordionListComponent)
-  }]
 })
 export class AccordionListComponent implements OnInit, OnDestroy {
-
-  constructor(@Optional() @Host() @SkipSelf() @Inject(ACCORDION_MENU) private parentComponent: any,
-              @Inject(ACCORDION) private accordion: any) {}
+  @Input() data: Array<AccordionMenuItem>;
+  @Input() deepth = 0;
+  @Input() parent: AccordionMenuItem;
+  @ViewChildren(AccordionMenuComponent) accordionMenuQueryList: QueryList<any>;
+  @ViewChildren(AccordionItemRouterlinkComponent) accordionItemRouterlinkQueryList: QueryList<AccordionItemRouterlinkComponent>;
   @HostBinding('class.devui-accordion-show-animate') get animateState() {
     return this.accordion.showAnimation;
   }
@@ -40,9 +34,11 @@ export class AccordionListComponent implements OnInit, OnDestroy {
   get linkTypeKey() {
     return this.accordion.linkTypeKey;
   }
+
   get childrenKey() {
     return this.accordion.childrenKey;
   }
+
   get activeKey() {
     return this.accordion.activeKey;
   }
@@ -50,89 +46,111 @@ export class AccordionListComponent implements OnInit, OnDestroy {
   get itemTemplate() {
     return this.accordion.itemTemplate;
   }
+
   get menuItemTemplate() {
     return this.accordion.menuItemTemplate;
   }
+
   get innerListTemplate() {
     return this.accordion.innerListTemplate;
   }
+
   get loadingTemplate() {
     return this.accordion.loadingTemplate;
   }
+
   get noContentTemplate() {
     return this.accordion.noContentTemplate;
   }
+
   get linkType() {
     return this.accordion.linkType;
   }
+
   get i18nCommonText() {
     return this.accordion.i18nCommonText;
   }
+
   get showNoContent() {
     return this.accordion.showNoContent;
   }
+
   get linkDefaultTarget() {
     return this.accordion.linkDefaultTarget;
   }
-  get routerLinkActived(): boolean {
-    return (!!this.accordionItemRouterlinkQueryList
-        && this.accordionItemRouterlinkQueryList.some(airlc => this.isLinkRouterActive(airlc))
-    ) || (
-      !!this.accordionMenuQueryList
-        && this.accordionMenuQueryList.some(amc => this.isMenuRouterActive(amc))
+
+  get routerLinkActivated(): boolean {
+    return (
+      (!!this.accordionItemRouterlinkQueryList && this.accordionItemRouterlinkQueryList.some((airlc) => this.isLinkRouterActive(airlc))) ||
+      (!!this.accordionMenuQueryList && this.accordionMenuQueryList.some((amc) => this.isMenuRouterActive(amc)))
     );
   }
+
   get hasActiveChildren(): boolean {
-    return (!!this.accordionMenuQueryList
-        && this.accordionMenuQueryList.some(amc => this.isMenuDataActive(amc)))
-      || (!!this.data && !!this.data.length
-        && this.data.some(item => this.isItemData(item) && this.isItemDataActive(item))
-      );
+    return (
+      (!!this.accordionMenuQueryList && this.accordionMenuQueryList.some((amc) => this.isMenuDataActive(amc))) ||
+      (!!this.data && !!this.data.length && this.data.some((item) => this.isItemData(item) && this.isItemDataActive(item)))
+    );
   }
-  @Input() data: Array<AccordionMenuItem>;
-  @Input() deepth = 0;
-  @Input() parent: AccordionMenuItem;
-  @ViewChildren(ACCORDION_MENU) accordionMenuQueryList: QueryList<any>;
-  @ViewChildren(AccordionItemRouterlinkComponent) accordionItemRouterlinkQueryList: QueryList<AccordionItemRouterlinkComponent>;
-  6;
+
+  constructor(@Inject(ACCORDION) private accordion: any, private accordionService: AccordionService) {}
+
   ngOnInit(): void {
-    if (this.parentComponent) {
-      setTimeout(() => {this.parentComponent.accordionListFromView = this; });
+    if (this.parent) {
+      this.accordionService.setChildListInstance(this, this.parent);
     }
   }
+
   ngOnDestroy(): void {
-    if (this.parentComponent) {
-      this.parentComponent.accordionListFromView = undefined;
+    if (this.parent) {
+      this.accordionService.setChildListInstance(undefined, this.parent);
     }
   }
+
   private isLinkRouterActive(airlc: AccordionItemRouterlinkComponent): boolean {
-    return airlc.routerLinkActived;
+    return airlc.routerLinkActivated;
   }
+
   private isMenuRouterActive(amc: any): boolean {
-    return amc.routerLinkActived;
+    return amc.routerLinkActivated;
   }
+
   private isMenuDataActive(amc: any): boolean {
     return amc.hasActiveChildren;
   }
+
   private isItemDataActive(item: AccordionMenuItem): boolean {
     return !!item[this.activeKey];
   }
+
   private isItemData(item: AccordionMenuItem): boolean {
     return item[this.childrenKey] === undefined;
   }
-  menuToggleItemFn = (item: any , event?: any) => {
+
+  menuToggleItemFn = (item: any, event?: any) => {
     this.accordion.menuToggleFn({
       item: item,
       open: !item[this.accordion.openKey],
       parent: this.parent.parent,
-      event: event
+      event: event,
     });
   };
+
   itemClickItemFn = (item: any, event?: any) => {
     this.accordion.itemClickFn({
       item: item,
       parent: this.parent,
-      event: event
+      event: event,
     });
   };
+
+  getOpenState(item, list) {
+    let stateFlag = false;
+    if (item && list) {
+      const open = item[this.accordion.openKey];
+      const childActivated = list.routerLinkActivated || list.hasActiveChildren;
+      stateFlag = open === undefined && this.accordion.autoOpenActiveMenu ? childActivated : open;
+    }
+    return stateFlag ? 'expanded' : 'collapsed';
+  }
 }

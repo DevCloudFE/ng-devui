@@ -119,7 +119,8 @@ export class DraggableDirective implements OnInit, AfterViewInit, OnDestroy {
   }
 
   dropSubscription() {
-    this.dragDropService.newSubscription().add(
+    const dragDropSub = this.dragDropService.newSubscription();
+    dragDropSub.add(
       this.dragDropService.dropEvent.subscribe((event) => {
         this.mouseOverElement = undefined;
         this.renderer.removeClass(this.el.nativeElement, this.dragOverClass);
@@ -140,7 +141,8 @@ export class DraggableDirective implements OnInit, AfterViewInit, OnDestroy {
           this.dragDropService.draggedElIdentity = undefined;
         }
         this.dragDropService.subscription.unsubscribe();
-      })).add(
+      }));
+    dragDropSub.add(
       this.dragDropService.dragElShowHideEvent.subscribe(this.dragElShowHideEvent)
     );
   }
@@ -191,7 +193,7 @@ export class DraggableDirective implements OnInit, AfterViewInit, OnDestroy {
       this.dragDropService.dragFollowOptions = this.dragFollowOptions;
       this.dragDropService.dragItemParentName = this.dragItemParentName;
       this.dragDropService.dragItemChildrenName = this.dragItemChildrenName;
-      this.beforeDragStartEvent.next();
+      this.beforeDragStartEvent.next(true);
       if (this.dragPreviewDirective && this.dragPreviewDirective.dragPreviewTemplate) {
         this.dragDropService.dragFollow = true;
         this.dragDropService.dragPreviewDirective = this.dragPreviewDirective;

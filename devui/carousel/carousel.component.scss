@@ -1,6 +1,7 @@
 @import '../style/theme/color';
 @import '../style/theme/shadow';
 @import '../style/core/animation';
+@import '../style/theme/corner';
 
 @mixin fixed-arrow-button() {
   position: absolute;
@@ -82,19 +83,34 @@
     .dot-item {
       width: 6px;
       height: 6px;
-      border-radius: 3px;
+      border-radius: $devui-border-radius-feedback;
       margin-right: 8px;
       background: $devui-icon-fill;
+      cursor: pointer;
+
+      .dot-item-active-progress {
+        width: 0;
+        display: inline-block;
+        position: absolute;
+      }
 
       &:hover {
-        cursor: pointer;
         background: $devui-icon-fill-hover;
       }
 
       &.active {
         width: 24px;
-        background: $devui-icon-fill-active;
-        transition: all $devui-animation-duration-slow $devui-animation-ease-in-out-smooth;
+        background-color: $devui-icon-fill;
+        transition: all $devui-animation-duration-fast $devui-animation-ease-in-out-smooth;
+
+        .dot-item-active-progress {
+          width: 24px;
+          height: 6px;
+          background-color: $devui-icon-fill-active;
+          border-radius: $devui-border-radius-feedback;
+          transition-property: width;
+          transition-timing-function: $devui-animation-ease-out;
+        }
       }
     }
   }

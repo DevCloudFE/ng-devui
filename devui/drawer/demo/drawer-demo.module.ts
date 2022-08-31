@@ -28,7 +28,7 @@ import { UndestroyableComponent } from './undestroyable/undestroyable.component'
     DDemoNavModule,
     TextInputModule,
     RouterModule.forChild([
-      { path: '', redirectTo: 'demo' },
+      { path: '', redirectTo: 'demo', pathMatch: 'full' },
       { path: 'demo', component: DrawerDemoComponent },
       {
         path: 'api',

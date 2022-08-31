@@ -24,6 +24,7 @@ export interface RowSelectedEventArg {
   nestedIndex: string;
   rowItem: any;
   rowComponent: DataTableRowComponent;
+  event?: MouseEvent;
 }
 
 export interface SortEventArg {

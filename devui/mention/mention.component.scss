@@ -1,5 +1,7 @@
-@import './assets/common';
+@import '../style/theme/color';
+@import '../style/theme/corner';
 @import '../style/core/font';
+@import '../style/theme/shadow';
 @import '../style/core/z-index';
 
 .devui-mention-dropdown {

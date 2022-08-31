@@ -28,7 +28,7 @@ import { VerticalComponent } from './vertical/vertical.component';
     DDemoNavModule,
     ReactiveFormsModule,
     RouterModule.forChild([
-      { path: '',  redirectTo: 'demo' },
+      { path: '',  redirectTo: 'demo', pathMatch: 'full' },
       { path: 'demo', component: RadioDemoComponent},
       { path: 'api', component: DevUIApiComponent, data: {
         'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),

@@ -7,7 +7,27 @@
 }
 
 d-alert .devui-alert {
-  border: none;
+  border: 1px solid transparent;
+
+  &.devui-alert-success {
+    border-color: transparent;
+  }
+
+  &.devui-alert-info {
+    border-color: transparent;
+  }
+
+  &.devui-alert-warning {
+    border-color: transparent;
+  }
+
+  &.devui-alert-danger {
+    border-color: transparent;
+  }
+
+  &.devui-alert-simple {
+    border-color: transparent;
+  }
 }
 
 d-alert .devui-alert.devui-alert-simple {

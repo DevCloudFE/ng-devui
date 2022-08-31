@@ -44,7 +44,7 @@ import { TipsComponent } from './tips/tips.component';
     DDemoNavModule,
     TextInputModule,
     RouterModule.forChild([
-      { path: '', redirectTo: 'demo' },
+      { path: '', redirectTo: 'demo', pathMatch: 'full' },
       { path: 'demo', component: ModalDemoComponent },
       {
         path: 'api',

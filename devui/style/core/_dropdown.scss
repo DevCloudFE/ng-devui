@@ -4,6 +4,17 @@
 @import '../core/animation';
 @import '../../style/theme/z-index';
 
+@mixin devui-no-data-tip() {
+  cursor: not-allowed;
+  color: $devui-disabled-text;
+  font-size: $devui-font-size;
+  background: $devui-base-bg;
+  line-height: 22px;
+  padding: 0;
+  text-align: center;
+  user-select: none;
+}
+
 .devui-dropdown {
   position: relative;
   vertical-align: middle;
@@ -64,6 +75,7 @@
 
   &.devui-scrollbar,
   .devui-scrollbar {
+    overflow-x: visible;
     overflow-y: auto;
     overflow-y: overlay;
   }
@@ -147,6 +159,14 @@
       }
     }
   }
+
+  .devui-no-data-tip {
+    @include devui-no-data-tip();
+  }
+}
+
+.devui-dropdown-menu-wrap .devui-no-data-tip {
+  @include devui-no-data-tip();
 }
 
 .devui-form-group.devui-has-feedback {

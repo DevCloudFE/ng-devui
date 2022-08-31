@@ -117,3 +117,7 @@ appendToBodyDirections 默认的显示顺序为 ['rightDown', 'leftDown', 'right
 ## dDropDownMenu
 
 用在需要展开和关闭的菜单内容上，参考 demo。
+
+## dDropDownMenuItem
+
+用在下拉选项上，参考 demo。

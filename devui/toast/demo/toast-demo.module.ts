@@ -27,7 +27,7 @@ import { ToastDemoComponent } from './toast-demo.component';
     DevUIApiModule,
     DDemoNavModule,
     RouterModule.forChild([
-      { path: '', redirectTo: 'demo' },
+      { path: '', redirectTo: 'demo', pathMatch: 'full' },
       { path: 'demo', component: ToastDemoComponent },
       {
         path: 'api',

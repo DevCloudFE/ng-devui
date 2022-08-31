@@ -26,7 +26,7 @@ import { ReadtipTemplateComponent } from './readtip-template/readtip-template.co
     AvatarModule,
     ReadTipModule,
     RouterModule.forChild([
-      { path: '', redirectTo: 'demo' },
+      { path: '', redirectTo: 'demo', pathMatch: 'full' },
       { path: 'demo', component: ReadTipDemoComponent },
       {
         path: 'api',

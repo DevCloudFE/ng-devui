@@ -1,7 +1,7 @@
 @import '~ng-devui/styles-var/devui-var.scss';
 
 body {
-  background: $devui-base-bg;
+  background: $devui-global-bg;
 }
 
 @mixin font-content() {
@@ -432,7 +432,7 @@ body {
 .devui-demo-example.active.anchor-active-by-anchor-link,
 .devui-demo-example.active.anchor-active-by-fragment {
   animation: hightlight-and-disapear 1 3s linear;
-  outline-offset: 8px;
+  outline-offset: 4px;
 }
 
 @keyframes hightlight-and-disapear {

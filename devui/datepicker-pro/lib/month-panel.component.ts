@@ -25,7 +25,7 @@ export class MonthPanelComponent implements OnInit, OnDestroy {
   @ViewChild('scrollList') scrollListCmp: CdkVirtualScrollViewport;
   @Input() isRangeType = false;
 
-  unsubscribe$ = new Subject();
+  unsubscribe$ = new Subject<void>();
   scrollListener: Subscription;
   i18nText: I18nInterface['datePickerPro'];
   i18nSubscription: Subscription;
@@ -193,7 +193,7 @@ export class MonthPanelComponent implements OnInit, OnDestroy {
       } else if (this.pickerSrv.currentActiveInput === 'end' && !this.selectedRangeDate[0]) {
         this.pickerSrv.currentActiveInput = 'start';
       } else {
-        this.pickerSrv.closeDropdownEvent.next();
+        this.pickerSrv.closeDropdownEvent.next(false);
       }
     }
 
@@ -203,7 +203,7 @@ export class MonthPanelComponent implements OnInit, OnDestroy {
     });
 
     if (this.pickerSrv.closeAfterSelected) {
-      this.pickerSrv.closeDropdownEvent.next();
+      this.pickerSrv.closeDropdownEvent.next(false);
     }
   }
 

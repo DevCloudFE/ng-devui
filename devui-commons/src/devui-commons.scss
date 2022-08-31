@@ -16,10 +16,9 @@
 .devui-content-layout {
   top: 60px;
   position: absolute;
-  padding: 0 20% 32px 13%;
-  margin-left: 260px;
-  width: calc(100% - 260px);
-  background-color: $devui-base-bg;
+  padding: 0 15vw 0 25vw;
+  width: calc(100vw - 20px);
+  background-color: $devui-global-bg;
 }
 
 //内容区文档头样式
@@ -48,7 +47,11 @@
 }
 
 .devui-demo-example {
-  margin-bottom: 48px;
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: $devui-base-bg;
+  box-shadow: $devui-shadow-length-base $devui-light-shadow;
+  border-radius: 8px;
 }
 
 .devui-demo-title {
@@ -154,10 +157,10 @@
 .devui-content-nav {
   width: 240px;
   position: fixed;
-  top: 90px;
+  top: 170px;
   right: 0;
   height: 100%;
-  z-index: 1;
+  z-index: calc(#{$devui-z-index-framework} + 1);
 
   .devui-fast-forward {
     width: 130px;
@@ -217,10 +220,6 @@
 @media (max-width: 1800px) {
   .devui-content-nav {
     width: 150px;
-  }
-
-  .devui-content-layout {
-    padding: 0 15% 0 8%;
   }
 }
 

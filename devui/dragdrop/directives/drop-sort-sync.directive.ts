@@ -36,7 +36,8 @@ export class DropSortSyncDirective extends DescendantChildren<DropSortSyncDirect
       this.sortContainer = this.droppable.getSortContainer();
       this.subscription.add(
         this.droppable.placeholderInsertionEvent.subscribe(this.subInsertionEvent)
-      ).add(
+      );
+      this.subscription.add(
         this.droppable.placeholderRenderEvent.subscribe(this.subRenderEvent)
       );
     }

@@ -28,7 +28,7 @@ export class YearPanelComponent implements OnInit, OnDestroy {
 
   yearList = [];
 
-  unsubscribe$ = new Subject();
+  unsubscribe$ = new Subject<void>();
 
   get curHoverDate() {
     return this.pickerSrv.curHoverDate;
@@ -193,7 +193,7 @@ export class YearPanelComponent implements OnInit, OnDestroy {
       } else if (this.pickerSrv.currentActiveInput === 'end' && !this.pickerSrv.curRangeDate[0]) {
         this.pickerSrv.currentActiveInput = 'start';
       } else {
-        this.pickerSrv.closeDropdownEvent.next();
+        this.pickerSrv.closeDropdownEvent.next(false);
       }
     }
 
@@ -203,7 +203,7 @@ export class YearPanelComponent implements OnInit, OnDestroy {
     });
 
     if (this.pickerSrv.closeAfterSelected) {
-      this.pickerSrv.closeDropdownEvent.next();
+      this.pickerSrv.closeDropdownEvent.next(false);
     }
   }
 

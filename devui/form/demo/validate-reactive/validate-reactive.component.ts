@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { DFormGroupRuleDirective, DValidateRules, FormLayout } from 'ng-devui/form';
 import { of } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
@@ -19,12 +19,12 @@ export class ValidateReactiveComponent implements OnInit {
     confirmPassword: '',
   };
 
-  singleSelectControl = new FormControl(null);
+  singleSelectControl = new UntypedFormControl(null);
 
-  userFormGroup = new FormGroup({
-    username: new FormControl(this.formData.userName),
-    password: new FormControl(this.formData.password),
-    confirmPassword: new FormControl(this.formData.confirmPassword),
+  userFormGroup = new UntypedFormGroup({
+    username: new UntypedFormControl(this.formData.userName),
+    password: new UntypedFormControl(this.formData.password),
+    confirmPassword: new UntypedFormControl(this.formData.confirmPassword),
   });
 
   singleSelectRules: DValidateRules = {

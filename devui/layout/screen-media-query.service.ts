@@ -8,7 +8,7 @@ export class DScreenMediaQueryService implements OnDestroy {
   private currentPoint: DBreakpoint;
   private pointChangeSub: ReplaySubject<{ currentPoint: DBreakpoint; change: number; compare: { [key: string]: number } }> =
   new ReplaySubject(1);
-  private destroy$ = new Subject();
+  private destroy$ = new Subject<void>();
 
   // 可以传入一个基准point，返回数据结构{ currentPoint, 变大or变小or没变，比基准point大or小or一样 }
   public getPoint(): ReplaySubject<{ currentPoint: DBreakpoint; change: number; compare: { [key: string]: number } }> {

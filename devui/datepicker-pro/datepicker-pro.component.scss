@@ -10,6 +10,8 @@
     box-sizing: border-box;
     width: 100%;
     min-height: 24px;
+    display: flex;
+    align-items: center;
 
     .devui-input {
       padding: 4px 8px;
@@ -18,6 +20,7 @@
 
     &-icon {
       vertical-align: bottom;
+      height: 16px;
     }
 
     .close-icon-wrapper {

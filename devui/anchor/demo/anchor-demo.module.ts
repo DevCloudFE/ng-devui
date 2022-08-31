@@ -30,7 +30,7 @@ import { ScrollTargetComponent } from './scroll-target/scroll-target.component';
     DevUIApiModule,
     DDemoNavModule,
     RouterModule.forChild([
-      { path: '', redirectTo: 'demo' },
+      { path: '', redirectTo: 'demo', pathMatch: 'full' },
       { path: 'demo', component: AnchorDemoComponent },
       {
         path: 'api',

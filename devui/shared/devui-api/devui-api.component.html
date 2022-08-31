@@ -1,17 +1,16 @@
 <section class="markdown api-container" #targetContainer>
   <ng-container *ngIf="api">
-    <div dCodeCopy [innerHTML]="api | safe: 'html'"></div>
+    <div class="devui-api-container" dCodeCopy [innerHTML]="api | safe: 'html'"></div>
   </ng-container>
 </section>
 
 <d-nav-sprite
   [scrollTarget]="scrollContainer"
   [target]="targetContainer"
-  [height]="600"
   [width]="240"
+  [height]="800"
   [indent]="1"
   [hashSupport]="true"
-  [title]="'API'"
   [view]="{ top: 160, bottom: 0 }"
   (afterNavInit)="afterNavInit($event)"
 ></d-nav-sprite>

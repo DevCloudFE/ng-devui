@@ -1,4 +1,4 @@
-<section class="demo-section">
+<section class="demo-section" style="width: 400px">
   <div>
     <input
       #inputValidate="dValidateRules"
@@ -21,6 +21,7 @@
     />
     <p *ngIf="inputValidate.showError && inputValidate.errorMessage" class="error-message">{{ inputValidate.errorMessage }}</p>
   </div>
+  <br />
   <div>
     <input
       dTextInput

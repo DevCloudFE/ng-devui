@@ -6,7 +6,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { DropDownMenuDirective } from './dropdown-menu.directive';
 import { DropDownToggleDirective } from './dropdown-toggle.directive';
 import { DropDownDirective } from './dropdown.directive';
-import { DropDownModule } from './dropdown.moudule';
+import { DropDownModule } from './dropdown.module';
 @Component({
   template: `
 <div class="height-expand" *ngIf="expand"></div>
@@ -24,16 +24,16 @@ import { DropDownModule } from './dropdown.moudule';
   </a>
   <ul dDropDownMenu>
     <li role="menuitem">
-      <a class="devui-dropdown-item">菜单一</a>
+      <a dDropDownMenuItem>菜单一</a>
     </li>
     <li class="disabled" role="menuitem">
-      <a class="devui-dropdown-item disabled">菜单二(禁用)</a>
+      <a dDropDownMenuItem class="disabled">菜单二(禁用)</a>
     </li>
     <li role="menuitem">
-      <a class="devui-dropdown-item">菜单三</a>
+      <a dDropDownMenuItem>菜单三</a>
     </li>
     <li role="menuitem">
-      <a class="devui-dropdown-item">菜单四</a>
+      <a dDropDownMenuItem>菜单四</a>
     </li>
     <li role="menuitem">
       <input type="text" class="devui-input devui-input-sm devui-search-in-dropdown" placeholder="输入框" />
@@ -45,7 +45,7 @@ import { DropDownModule } from './dropdown.moudule';
       <textarea class="devui-input devui-input-sm devui-search-in-dropdown" placeholder="输入框"></textarea>
     </li>
     <li role="menuitem">
-      <a id="close" class="devui-dropdown-item" (click)="dropdown.toggle()">关闭</a>
+      <a id="close" dDropDownMenuItem (click)="dropdown.toggle()">关闭</a>
     </li>
   </ul>
 </div>
@@ -84,16 +84,16 @@ class TestDropdownComponent {
     </a>
     <ul dDropDownMenu>
       <li role="menuitem">
-        <a class="devui-dropdown-item">菜单一</a>
+        <a dDropDownMenuItem>菜单一</a>
       </li>
       <li class="disabled" role="menuitem">
-        <a class="devui-dropdown-item disabled">菜单二(禁用)</a>
+        <a dDropDownMenuItem class="disabled">菜单二(禁用)</a>
       </li>
       <li role="menuitem">
-        <a class="devui-dropdown-item">菜单三</a>
+        <a dDropDownMenuItem>菜单三</a>
       </li>
       <li role="menuitem">
-        <a class="devui-dropdown-item">菜单四</a>
+        <a dDropDownMenuItem>菜单四</a>
       </li>
     </ul>
   </div>
@@ -123,16 +123,16 @@ class TestDropdownAppendToBodyComponent {
     </a>
     <ul dDropDownMenu>
       <li role="menuitem">
-        <a class="devui-dropdown-item">菜单一</a>
+        <a dDropDownMenuItem>菜单一</a>
       </li>
       <li class="disabled" role="menuitem">
-        <a class="devui-dropdown-item disabled">菜单二(禁用)</a>
+        <a dDropDownMenuItem class="disabled">菜单二(禁用)</a>
       </li>
       <li role="menuitem">
-        <a class="devui-dropdown-item">菜单三</a>
+        <a dDropDownMenuItem>菜单三</a>
       </li>
       <li role="menuitem">
-        <a class="devui-dropdown-item">菜单四</a>
+        <a dDropDownMenuItem>菜单四</a>
       </li>
     </ul>
   </div>
@@ -155,45 +155,45 @@ class TestDropdownToggleComponent {
 
     <ul id="menu1" dDropDownMenu class="devui-dropdown-menu devui-scrollbar" role="menu">
       <li role="menuitem" dDropDown appendToBody [trigger]="trigger2" [appendToBodyDirections]="subMenuDirections">
-        <a class="devui-dropdown-item" dDropDownToggle id="item-1">内容1 <span class="icon icon-chevron-right"></span></a>
+        <a dDropDownMenuItem dDropDownToggle id="item-1">内容1 <span class="icon icon-chevron-right"></span></a>
         <ul id="menu2" dDropDownMenu class="devui-dropdown-menu devui-scrollbar" role="menu">
           <li role="menuitem" dDropDown appendToBody [trigger]="trigger2" [appendToBodyDirections]="subMenuDirections">
-            <a class="devui-dropdown-item" dDropDownToggle id="item-11">内容1-1 <span class="icon icon-chevron-right"></span></a>
+            <a dDropDownMenuItem dDropDownToggle id="item-11">内容1-1 <span class="icon icon-chevron-right"></span></a>
             <ul id="menu3" dDropDownMenu class="devui-dropdown-menu devui-scrollbar" role="menu">
               <li role="menuitem">
-                <a class="devui-dropdown-item" id="item-111">内容1-1-1</a>
+                <a dDropDownMenuItem id="item-111">内容1-1-1</a>
               </li>
               <li role="menuitem">
-                <a class="devui-dropdown-item" id="item-112">内容1-1-2</a>
+                <a dDropDownMenuItem id="item-112">内容1-1-2</a>
               </li>
               <li role="menuitem">
-                <a class="devui-dropdown-item" id="item-113">内容1-1-3</a>
+                <a dDropDownMenuItem id="item-113">内容1-1-3</a>
               </li>
             </ul>
           </li>
           <li role="menuitem" dDropDown appendToBody [trigger]="trigger2" [appendToBodyDirections]="subMenuDirections">
-            <a class="devui-dropdown-item" dDropDownToggle id="item-12">内容1-2 <span class="icon icon-chevron-right"></span></a>
+            <a dDropDownMenuItem dDropDownToggle id="item-12">内容1-2 <span class="icon icon-chevron-right"></span></a>
             <ul id="menu5" dDropDownMenu class="devui-dropdown-menu devui-scrollbar" role="menu">
               <li role="menuitem">
-                <a class="devui-dropdown-item" id="item-121">内容1-2-1</a>
+                <a dDropDownMenuItem id="item-121">内容1-2-1</a>
               </li>
             </ul>
           </li>
           <li role="menuitem">
-            <a class="devui-dropdown-item" id="item-13">内容1-3</a>
+            <a dDropDownMenuItem id="item-13">内容1-3</a>
           </li>
         </ul>
       </li>
       <li role="menuitem" dDropDown appendToBody [trigger]="trigger2" [appendToBodyDirections]="subMenuDirections">
-        <a class="devui-dropdown-item" dDropDownToggle id="item-2">内容2 <span class="icon icon-chevron-right"></span></a>
+        <a dDropDownMenuItem dDropDownToggle id="item-2">内容2 <span class="icon icon-chevron-right"></span></a>
         <ul id="menu4" dDropDownMenu class="devui-dropdown-menu devui-scrollbar" role="menu">
           <li role="menuitem">
-            <a class="devui-dropdown-item" id="item-21">内容2-1</a>
+            <a dDropDownMenuItem id="item-21">内容2-1</a>
           </li>
         </ul>
       </li>
       <li role="menuitem">
-        <a class="devui-dropdown-item" id="item-3">内容2</a>
+        <a dDropDownMenuItem id="item-3">内容2</a>
       </li>
     </ul>
   </div>

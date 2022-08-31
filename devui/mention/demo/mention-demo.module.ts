@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { TextareaModule } from 'ng-devui';
 import { AnchorModule } from 'ng-devui/anchor';
 import { AvatarModule } from 'ng-devui/avatar';
+import { ButtonModule } from 'ng-devui/button';
 import { MentionModule } from 'ng-devui/mention';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
@@ -16,6 +17,7 @@ import { CustomComponent } from './custom/custom.component';
 import { MentionDemoComponent } from './mention-demo.component';
 import { PrefixComponent } from './prefix/prefix.component';
 import { TargetComponent } from './target/target.component';
+import { ToggleComponent } from './toggle/toggle.component';
 
 @NgModule({
   imports: [
@@ -28,21 +30,21 @@ import { TargetComponent } from './target/target.component';
     TextareaModule,
     MentionModule,
     AvatarModule,
+    ButtonModule,
     RouterModule.forChild([
-      { path: '', redirectTo: 'demo' },
+      { path: '', redirectTo: 'demo', pathMatch: 'full' },
       { path: 'demo', component: MentionDemoComponent },
       {
         path: 'api',
         component: DevUIApiComponent,
         data: {
           'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),
-          'en-us': require('!html-loader!markdown-loader!../doc/api-en.md')
+          'en-us': require('!html-loader!markdown-loader!../doc/api-en.md'),
         },
       },
     ]),
   ],
-  declarations: [MentionDemoComponent, BasicComponent, AsyncComponent, CustomComponent, TargetComponent, PrefixComponent],
+  declarations: [MentionDemoComponent, BasicComponent, AsyncComponent, CustomComponent, TargetComponent, PrefixComponent, ToggleComponent],
   exports: [MentionDemoComponent],
-
 })
 export class MentionDemoModule {}

@@ -40,7 +40,7 @@ import { LayoutTopComponent } from './top/top.component';
     TranslateModule,
     DDemoNavModule,
     RouterModule.forChild([
-      { path: '', redirectTo: 'demo' },
+      { path: '', redirectTo: 'demo', pathMatch: 'full' },
       { path: 'demo', component: LayoutDemoComponent },
       {
         path: 'api',

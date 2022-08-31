@@ -113,7 +113,7 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
   KEYBOARD_EVENT_NOT_REFRESH = ['escape', 'enter', 'arrowup', 'arrowdown', /* ie 10 edge */ 'esc', 'up', 'down'];
   popupRef: ComponentRef<AutoCompletePopupComponent>;
 
-  private destroy$ = new Subject();
+  private destroy$ = new Subject<void>();
   i18nText: I18nInterface['autoComplete'];
   popTipsText = '';
   position: any;

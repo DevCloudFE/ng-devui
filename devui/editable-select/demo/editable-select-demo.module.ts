@@ -29,7 +29,7 @@ import { WithSearchFunctionComponent } from './search-function/with-search-funct
     ButtonModule,
     DDemoNavModule,
     RouterModule.forChild([
-      { path: '', redirectTo: 'demo' },
+      { path: '', redirectTo: 'demo', pathMatch: 'full' },
       { path: 'demo', component: EditableSelectDemoComponent },
       {
         path: 'api',

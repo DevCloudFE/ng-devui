@@ -463,7 +463,7 @@ export class DFormGroupRuleDirective extends DAbstractControlRuleDirective imple
   @Input('dValidateRules') rules: DValidateRules;
   @Output() dRulesStatusChange: EventEmitter<any> = new EventEmitter<any>();
 
-  private destroy$ = new Subject();
+  private destroy$ = new Subject<void>();
 
   constructor(@Self() cd: ControlContainer, @Optional() @Host() @SkipSelf() parentDir: DFormGroupRuleDirective, private i18n: I18nService) {
     super(cd, parentDir);
@@ -511,7 +511,7 @@ export class DFormControlRuleDirective extends DAbstractControlRuleDirective imp
   @Input('dValidatePopConfig') popConfig: DPopConfig;
 
   popoverComponentRef: ComponentRef<PopoverComponent>;
-  private destroy$ = new Subject();
+  private destroy$ = new Subject<void>();
   popMessage: string; // 最终显示的message
 
   get showType() {

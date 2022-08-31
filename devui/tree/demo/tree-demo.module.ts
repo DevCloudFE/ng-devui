@@ -45,7 +45,7 @@ import { VirtualScrollComponent } from './virtual-scroll/virtual-scroll.componen
     SafePipeModule,
     SearchModule,
     RouterModule.forChild([
-      { path: '',  redirectTo: 'demo' },
+      { path: '',  redirectTo: 'demo', pathMatch: 'full' },
       { path: 'demo', component: TreeDemoComponent},
       { path: 'api', component: DevUIApiComponent, data: {
         'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),

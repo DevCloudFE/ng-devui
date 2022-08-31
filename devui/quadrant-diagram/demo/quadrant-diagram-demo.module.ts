@@ -23,7 +23,7 @@ import { QuadrantDiagramDemoComponent } from './quadrant-diagram-demo.component'
     DDemoNavModule,
     TranslateModule,
     RouterModule.forChild([
-      { path: '', redirectTo: 'demo' },
+      { path: '', redirectTo: 'demo', pathMatch: 'full' },
       { path: 'demo', component: QuadrantDiagramDemoComponent },
       {
         path: 'api', component: DevUIApiComponent, data: {

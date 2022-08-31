@@ -9,7 +9,7 @@ import { ReadTipOption, StrCopySVG } from './codecopy.types';
 })
 export class CodeCopyDirective implements OnInit, AfterViewInit, OnDestroy {
   @Output('copied') copied: EventEmitter<any> = new EventEmitter<any>();
-  private destroy$ = new Subject();
+  private destroy$ = new Subject<void>();
   timer: any;
   optionsSuccess = ReadTipOption.optionSuccessData['zh-cn'];
   options = ReadTipOption.optionData['zh-cn'];

@@ -39,7 +39,8 @@ export class DragDropSyncBoxDirective implements OnInit, AfterViewInit, OnDestro
       this.dragSyncList.changes.subscribe(
         list => this.dragDropSyncService.updateDragSyncList(list)
       )
-    ).add(
+    );
+    this.sub.add(
       this.dropSyncList.changes.subscribe(
         list => this.dragDropSyncService.updateDropSyncList(list)
       )

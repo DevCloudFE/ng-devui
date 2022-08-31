@@ -43,34 +43,34 @@ In the page
 <xxx [dValidateRules]="yourRules"></xxx>
 ```
 
-# dForm
+## dForm
 
-## dForm Parameter
+### dForm Parameter
 
-| Parameter | Type | Default | Description | Jump to Demo |Global Config| 
-| :----------------: | :-------: | :-----------------------------------: | :----------: | :----------------------------------------------------------------------- | ------------------------------------------------------------- |
-|   layout   | `'horizontal'\|'vertical'\|'columns'` | 'horizontal' | Optional. Sets the form arrangement mode.                                                                                                              | [Basic usage](demo#basic-usage)                            |
-| labelSize  |         `'sm' \| '' \| 'lg'`          |      ''      | Optional. Sets the width of the label. If this parameter is not set, the default value is 100 px. 'sm' corresponds to 80 px, 'lg' corresponds to 150px | [Label horizontal arrangement](demo#demo-label-horizontal) |
-| labelAlign |      `'start'\|'center'\|'end'`       |   'start'    | Optional. This parameter specifies the label alignment mode in horizontal layout mode.                                                                 | [label horizontal arrangement](demo#demo-label-horizontal) |
-|dHasFeedback|              `boolean`                |    false     | Optional. Sets whether to display the feedback icon for the current form. |  |
+|  Parameter   |                 Type                  |   Default    |                                                                      Description                                                                       | Jump to Demo                                               | Global Config |
+| :----------: | :-----------------------------------: | :----------: | :----------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------- | ------------- |
+|    layout    | `'horizontal'\|'vertical'\|'columns'` | 'horizontal' |                                                       Optional. Sets the form arrangement mode.                                                        | [Basic usage](demo#basic-usage)                            |
+|  labelSize   |         `'sm' \| '' \| 'lg'`          |      ''      | Optional. Sets the width of the label. If this parameter is not set, the default value is 100 px. 'sm' corresponds to 80 px, 'lg' corresponds to 150px | [Label horizontal arrangement](demo#demo-label-horizontal) |
+|  labelAlign  |      `'start'\|'center'\|'end'`       |   'start'    |                                 Optional. This parameter specifies the label alignment mode in horizontal layout mode.                                 | [label horizontal arrangement](demo#demo-label-horizontal) |
+| dHasFeedback |               `boolean`               |    false     |                                       Optional. Sets whether to display the feedback icon for the current form.                                        |                                                            |
 
-## dForm Event
+### dForm Event
 
 | Parameter |                                                               Type                                                               | Description                                                                                              | Jump to Demo                                                                   |
 | :-------: | :------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
 |  dSubmit  | `EventEmitter<{valid: boolean, directive: `[`DFormGroupRuleDirective`](#dformgroupruledirective) `\| AbstractControlDirective}>` | Optional. This event is responded to when the dFormSubmit binding element is used to trigger submission. | [Template-driven form verification (recommended)](demo#demo-validate-template) |
 
-# d-form-item
+## d-form-item
 
-## d-form-item parameter
+### d-form-item parameter
 
 |  Parameter   |   Type    | Default | Description                                                                       | Jump to Demo                                            |
 | :----------: | :-------: | :-----: | :-------------------------------------------------------------------------------- | ------------------------------------------------------- |
 | dHasFeedback | `boolean` |  false  | Optional. Sets whether to display the feedback icon for the current form control. | [Reactive form validation](demo#demo-validate-reactive) |
 
-# d-form-label
+## d-form-label
 
-## d-form-label parameter
+### d-form-label parameter
 
 | Parameter |   Type    | Default | Description                                                | Jump to Demo                    |
 | :-------: | :-------: | :-----: | :--------------------------------------------------------- | ------------------------------- |
@@ -78,9 +78,9 @@ In the page
 |  hasHelp  | `boolean` |  false  | Optional. Indicating whether a form item requires help.    | [Basic usage](demo#basic-usage) |
 | helpTips  | `string`  |   ''    | Optional. This parameter is used together with `hasHelp`.  | [Basic usage](demo#basic-usage) |
 
-# d-form-control
+## d-form-control
 
-## d-form-control parameters
+### d-form-control parameters
 
 |   Parameter    |                    Type                     | Default | Description                                                                                     | Jump to Demo                                               |
 | :------------: | :-----------------------------------------: | :-----: | :---------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
@@ -88,36 +88,36 @@ In the page
 | feedbackStatus | [`DFormControlStatus`](#dformcontrolstatus) |   --    | Optional. Manually specify the current control status.                                          | [Specify form status](demo#demo-custom-status)             |
 | suffixTemplate |             `TemplateRef<any>`              |   --    | Optional. Pass icon template to be the suffix of Input.                                         |
 
-# dFormSubmit
+## dFormSubmit
 
 - Specify the element that triggers the `submit` in `<form>` (the dForm needs to be bound).
 - You can set the trigger event (click by default), for example, `dFormSubmit="dblclick"`, to trigger `submit` when an element is double-clicked.
 
-## dFormSubmit Parameter
+### dFormSubmit Parameter
 
 |    Parameter    |   Type   | Default |                                                                 Description                                                                  |                      Jump to Demo                       |
 | :-------------: | :------: | :-----: | :------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------: |
 |   dFormSubmit   | `string` | 'click' |                                          Optional. Configure the event name used to trigger submit.                                          | [Reactive form validation](demo#demo-validate-reactive) |
 | dFormSubmitData |  `any`   |   --    | Optional. Configure the data that needs to be transferred and the dSubmit callback event, which can be used to distinguish multiple buttons. | [Reactive form validation](demo#demo-validate-reactive) |
 
-# dFormReset
+## dFormReset
 
 - Specify the element that triggers the `reset` in `<form>` (the dForm needs to be bound).
 - You can set the trigger event (click by default), for example, `dFormReset="dblclick"`, to trigger `reset` when an element is double-clicked.
 
-## dFormReset Parameter
+### dFormReset Parameter
 
 | Parameter  |   Type   | Default |                        Description                        | Jump to Demo |
 | :--------: | :------: | :-----: | :-------------------------------------------------------: | :----------: |
 | dFormReset | `string` | 'click' | Optional. Configure the event name for triggering submit. |              |
 
-# dValidateRules Form Validation
+## dValidateRules Form Validation
 
-## Locating
+### Locating
 
 - DevUI form verification is based on [Angular Form](https://angular.io/guide/forms-overview) and is fully compatible with responsive forms and template-driven forms. To encapsulate and simplify form validation logic, you only need to configure simple rules. Verification messages and verification status management are automatically completed by DevUI Form.
 
-## How to use
+### How to use form validator
 
 - When you use a responsive form or a template-driven form (both include `Angular FormsModule` in your module):
 
@@ -131,15 +131,14 @@ import { Forms } from '@angular/forms';
 <input [(ngModel)]="name" [dValidateRules]="yourRules" />
 ```
 
-## dValidateRules Parameter
+### dValidateRules Parameter
 
-|   Parameter    |                Type                 | Default |                Description                 |                                  Jump to Demo                                  |
-| :------------: | :---------------------------------: | :-----: | :----------------------------------------: | :----------------------------------------------------------------------------: |
-| dValidateRules | [`DValidateRules`](#dvalidaterules) |   --    | Required. Configure the verification rule. | [Template-driven form verification (recommended)](demo#demo-validate-template) |
-| dValidatePopConfig | [`DPopConfig`](#dpopconfig) |  --  | Optional. popover hint config | [Template-driven form verification (recommended)](demo#demo-validate-template) |
+|     Parameter      |                Type                 | Default |                Description                 |                                  Jump to Demo                                  |
+| :----------------: | :---------------------------------: | :-----: | :----------------------------------------: | :----------------------------------------------------------------------------: |
+|   dValidateRules   | [`DValidateRules`](#dvalidaterules) |   --    | Required. Configure the verification rule. | [Template-driven form verification (recommended)](demo#demo-validate-template) |
+| dValidatePopConfig |     [`DPopConfig`](#dpopconfig)     |   --    |       Optional. popover hint config        | [Template-driven form verification (recommended)](demo#demo-validate-template) |
 
-
-## dValidateSyncKey Parameter
+### dValidateSyncKey Parameter
 
 Collaborative form validation.
 
@@ -147,7 +146,66 @@ Collaborative form validation.
 | :--------------: | :------: | :-----: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------: |
 | dValidateSyncKey | `string` |   --    | Required. This parameter is mandatory. It specifies the unique key. When the value of one element in the form of the same key changes, verification is triggered. responsive and template-driven forms are supported. | [Form collaboration verification](demo#demo-validate-sync) |
 
-# Interface & Type Definition
+## Integrated Validation Rules
+
+### Using
+
+```typescript
+// import at xxx.component.ts
+import { DValidators } from 'ng-devui/form/validator-directive/validators';
+import { DValidateRules } from 'ng-devui/form/validator-directive/validate.type';
+
+const rules: DValidateRules = {
+  validators: [
+    { contains: DValidators.contains('abc'), message: 'Custom Info', isNgValidator: true },
+    { alphabet: DValidators.alphabet, message: 'Custom Info', isNgValidator: true },
+    { whitespace: true } // whitespace has been registered to Angular
+    ...
+  ],
+};
+
+// You can custom your validator like following
+// public static contains(contain: string | number): ValidatorFn {
+//   return (control: AbstractControl): ValidationErrors | null => {
+//     if (DValidators.isEmptyInput(control.value) || DValidators.isEmptyInput(contain)) {
+//       return null;
+//     }
+//     return control.value.indexOf(contain) === -1 ? { contains: { requiredContains: contain,actualValue: control.value } } : null;
+//   };
+// }
+// public static alphabet(control: AbstractControl): ValidationErrors | null {
+//   if (DValidators.isEmptyInput(control.value)) {
+//     return null;
+//   }
+//   return DValidators.AlphabetPattern.test(control.value) ? null : { alphabet: true };
+// }
+```
+
+```html
+<!-- Using in any form components -->
+<d-input [dValidateRules]="rules"></d-input>
+```
+
+### Validators
+
+|  Validator  |                      Description                       |
+| :---------: | :----------------------------------------------------: |
+|  contains   |               Check if it contains sth.                |
+| notContains |             Check if it not contains sth.              |
+|    equal    |              Check if it is equal to sth.              |
+|  notEqual   |            Check if it is not equal to sth.            |
+|    port     |        Check if a port number is in [0, 65535]         |
+|    date     |                Check if a date is valid                |
+|     url     |                Check if a url is valid                 |
+|   integer   |                     Check integer                      |
+|   digits    |                      Check digit                       |
+|   number    | Check if it is a number, including scientific notation |
+|  alphabet   |               Check if it is an alphabet               |
+|   script    |              Check if it is a script tag               |
+|    ipv4     |          Check if it is a valid ipv4 address           |
+|    ipv6     |          Check if it is a valid ipv6 address           |
+
+## Interface & Type Definition
 
 ### DFormControlStatus
 

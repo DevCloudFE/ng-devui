@@ -25,7 +25,7 @@ import { TimePickerDemoComponent } from './time-picker-demo.component';
     TimePickerModule,
     SelectModule,
     RouterModule.forChild([
-      { path: '', redirectTo: 'demo' },
+      { path: '', redirectTo: 'demo', pathMatch: 'full' },
       { path: 'demo', component: TimePickerDemoComponent },
       { path: 'api', component: DevUIApiComponent, data: {
         'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),

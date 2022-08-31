@@ -180,6 +180,15 @@ import { DataTableModule } from 'ng-devui/data-table';
 |      field      |            `string`             | --     |  单元格所属列的字段，作为beforeEditStart、beforeEditEnd的参数  | [编辑单元格](demo#edit-cell) |
 | nestedColumnIndent|         `number`                | 16     |  单元格中子表格的缩进距离，单位px                              | [树形表格](demo#tree-form) |
 
+## 单元格公共class
+
+|     参数名       |                              描述                              | 跳转 Demo                                          |
+| :-------------: | :------------------------------------------------------------: | :------------------------------------------------- |
+|    devui-operation-cell    |                     单元格内放置input，d-icon等操作类组件时需要加上，会调整padding适应行高                     |  |
+|    devui-table-link    |                     单元格内放置链接时需要加上                     |  |
+|    devui-table-title    |                     单元格内放置表头信息时需要加上，会自动加粗                     |  |
+
+
 ## dTableCell 事件
 
 |         事件          |   类型    |                          描述                           | 跳转 Demo                                          |

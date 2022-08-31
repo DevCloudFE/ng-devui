@@ -280,7 +280,7 @@ export class GanttBarComponent implements OnInit, OnChanges, AfterViewInit, OnDe
         e.stopPropagation();
         e.preventDefault();
       }),
-      pluck<Event, number>('pageX')
+      pluck<MouseEvent, 'pageX'>('pageX')
     );
 
     this.dragProgressStartListener = fromEvent(this.ganttBarProgress.nativeElement, 'mousedown').pipe(
@@ -288,7 +288,7 @@ export class GanttBarComponent implements OnInit, OnChanges, AfterViewInit, OnDe
         e.stopPropagation();
         e.preventDefault();
       }),
-      pluck<Event, number>('pageX'),
+      pluck<MouseEvent, 'pageX'>('pageX'),
       map((position: number) => this.mousePositionToAdaptiveValue(position))
     );
 
@@ -297,7 +297,7 @@ export class GanttBarComponent implements OnInit, OnChanges, AfterViewInit, OnDe
         e.stopPropagation();
         e.preventDefault();
       }),
-      pluck<Event, number>('pageX')
+      pluck<MouseEvent, 'pageX'>('pageX')
     );
 
     this.resizeBarRightStartListener = fromEvent(this.ganttBarDarggerRight.nativeElement, 'mousedown').pipe(
@@ -305,7 +305,7 @@ export class GanttBarComponent implements OnInit, OnChanges, AfterViewInit, OnDe
         e.stopPropagation();
         e.preventDefault();
       }),
-      pluck<Event, number>('pageX')
+      pluck<MouseEvent, 'pageX'>('pageX')
     );
 
     this.mouseEndListener = fromEvent(document, 'mouseup');
@@ -314,7 +314,7 @@ export class GanttBarComponent implements OnInit, OnChanges, AfterViewInit, OnDe
         e.stopPropagation();
         e.preventDefault();
       }),
-      pluck<Event, number>('pageX'),
+      pluck<MouseEvent, 'pageX'>('pageX'),
       distinctUntilChanged(),
       takeUntil(this.mouseEndListener)
     );

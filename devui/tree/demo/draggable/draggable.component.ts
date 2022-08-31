@@ -1,5 +1,4 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
-import { ITreeItem, OperableTreeComponent, TreeNode } from 'ng-devui/tree';
 
 @Component({
   selector: 'd-draggable',
@@ -126,9 +125,5 @@ export class DraggableComponent {
       this.dropItems.push(transferDataStr.nodeTitle);
     }
     this.changeDetectorRef.detectChanges();
-  }
-
-  onOperableNodeSelected($event: TreeNode | TreeNode[]) {
-    console.log($event);
   }
 }

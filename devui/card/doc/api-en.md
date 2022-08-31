@@ -18,26 +18,34 @@ In the page:
   <d-card-actions></d-card-actions>
 </d-card>
 ```
-# d-card
-## d-card Block Division
 
-|      Tag     |                                       Description                                               |
-| :------------: | :--------------------------------------------------------------------------------------------: |
-| d-card-header | Title area, which is used as an overview. It usually contains elements such as title `d-card-title`, subtitle `d-card-subtitle`, and avatar `dAvatar` |
-| [dCardMeta] | Media information area, which can store multiple media, including pictures, graphics, and videos |
-| d-card-content | Auxiliary information area, which analyzes and supports the title function. It can contain abstracts or descriptions |
-| d-card-actions | Decision-making function, which can contain operation text or operation icons |
+## d-card
 
-## d-card-header Block Division
+### d-card Block Division
 
-|        Tag      |            Description                 |
-| :-------------: | :------------------------------------: |
-| d-card-title | Card content description, which is generally defined as the card name |
-| [dCardAvatar] | Avatar area, which is used to display images such as avatars |
-| d-card-subtitle | Supplement to the title, including tag information |
+|      Tag       |                                                                      Description                                                                      |
+| :------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------: |
+| d-card-header  | Title area, which is used as an overview. It usually contains elements such as title `d-card-title`, subtitle `d-card-subtitle`, and avatar `dAvatar` |
+|  [dCardMeta]   |                           Media information area, which can store multiple media, including pictures, graphics, and videos                            |
+| d-card-content |                 Auxiliary information area, which analyzes and supports the title function. It can contain abstracts or descriptions                  |
+| d-card-actions |                                     Decision-making function, which can contain operation text or operation icons                                     |
 
-## d-card-actions Parameter
+### d-card 参数
 
-| Parameter |       Type   |     Default      |       Description        | Jump to Demo |Global Config| 
-|   :----------------: | :---:   |         :------:        | :---: | :-------------: | --------- |
-|   align   |   `'start'\|'end'\|'spaceBetween'`  |        'start'      | Optional. Operation area alignment mode, which corresponds to start alignment, tail alignment, and stretch alignment | [Basic usage](demo#card-basic) |
+|    参数     |   类型    | 默认值 |                   描述                    | 跳转 Demo                                       | 全局配置项 |
+| :---------: | :-------: | :----: | :---------------------------------------: | :---------------------------------------------- | ---------- |
+| interactive | `boolean` |   --   | Optional, whether the card is interactive | [Interactive Card](demo#card-interactive-usage) |            |
+
+### d-card-header Block Division
+
+|       Tag       |                              Description                              |
+| :-------------: | :-------------------------------------------------------------------: |
+|  d-card-title   | Card content description, which is generally defined as the card name |
+|  [dCardAvatar]  |     Avatar area, which is used to display images such as avatars      |
+| d-card-subtitle |          Supplement to the title, including tag information           |
+
+### d-card-actions Parameter
+
+| Parameter |               Type               | Default |                                                     Description                                                      |          Jump to Demo          | Global Config |
+| :-------: | :------------------------------: | :-----: | :------------------------------------------------------------------------------------------------------------------: | :----------------------------: | ------------- |
+|   align   | `'start'\|'end'\|'spaceBetween'` | 'start' | Optional. Operation area alignment mode, which corresponds to start alignment, tail alignment, and stretch alignment | [Basic usage](demo#card-basic) |

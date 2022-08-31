@@ -57,7 +57,11 @@ svg.svg-icon-clear {
     }
 
     &.devui-search-no-border {
-      border: none;
+      background-color: unset;
+    }
+
+    &.devui-search-no-border:not(:hover, :focus, :active) {
+      border: 1px solid transparent;
     }
 
     &.devui-clear-exit:not(.devui-icon-left) {

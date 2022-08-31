@@ -8,6 +8,12 @@ import { Subscription } from 'rxjs';
   templateUrl: './card-demo.component.html',
 })
 export class CardDemoComponent implements OnInit, OnDestroy {
+  cardInteractiveSourceData: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'xml', code: require('./card-interactive/card-interactive.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./card-interactive/card-interactive.component.ts?raw') },
+    { title: 'SCSS', language: 'scss', code: require('./card-interactive/card-interactive.component.scss?raw') },
+  ];
+
   CardDemoBasic: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('./basic/basic.component.html?raw') },
     { title: 'TS', language: 'typescript', code: require('./basic/basic.component.ts?raw') },
@@ -46,6 +52,7 @@ export class CardDemoComponent implements OnInit, OnDestroy {
   setNavValues(values) {
     this.navItems = [
       { dAnchorLink: 'card-basic', value: values['card-basic'] },
+      { dAnchorLink: 'card-interactive-usage', value: values['card-interactive-usage'] },
       { dAnchorLink: 'card-with-media', value: values['card-with-media'] },
       { dAnchorLink: 'card-custom', value: values['card-custom'] },
     ];

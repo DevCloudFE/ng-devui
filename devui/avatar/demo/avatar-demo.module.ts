@@ -23,7 +23,7 @@ import { SpecialComponent } from './special/special.component';
     AvatarModule,
     DDemoNavModule,
     RouterModule.forChild([
-      { path: '', redirectTo: 'demo' },
+      { path: '', redirectTo: 'demo', pathMatch: 'full' },
       { path: 'demo', component: AvatarDemoComponent },
       {
         path: 'api', component: DevUIApiComponent, data: {

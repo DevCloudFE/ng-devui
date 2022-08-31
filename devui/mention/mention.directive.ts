@@ -30,33 +30,27 @@ import { getCaretCoordinates } from './utils';
   exportAs: 'dMention',
 })
 export class MentionDirective implements OnInit, OnChanges, AfterViewInit, OnDestroy {
+  @Input() mentionNotFoundContent = 'No suggestion matched';
+  @Input() mentionSuggestions = [];
+  @Input() mentionLoading = false;
+  @Input() mentionTrigger = ['@'];
+  @Input() mentionSeparator = ' ';
+  @Input() mentionSeparatorToggle = { prefix: false, suffix: false };
+  @Input() mentionPosition: MentionPositionType = 'bottom';
+  @Input() mentionItemTemplate: TemplateRef<any>;
+  @Input() mentionValueParse: (value: string) => string = (value) => value;
+  @Output() mentionSelectItem = new EventEmitter();
+  @Output() mentionSearchChange: EventEmitter<MentionOnSearchTypes> = new EventEmitter();
+  @Output() mentionAfterMentionInit: EventEmitter<MentionDirective> = new EventEmitter();
+
+  isOpen = false;
+  activeIndex = -1;
+  unsubscribe$ = new Subject();
+  defaultNotFoundText = '';
+
   get nativeElement() {
     return this.el.nativeElement;
   }
-
-  constructor(
-    private el: ElementRef,
-    private viewContainerRef: ViewContainerRef,
-    private cdr: ChangeDetectorRef,
-    private overlay: Overlay
-  ) {}
-  @Input() mentionNotFoundContent = 'No suggestion matched';
-
-  @Input() mentionSuggestions = [];
-
-  @Input() mentionLoading = false;
-
-  @Input() mentionTrigger = ['@'];
-
-  @Input() mentionPosition: MentionPositionType = 'bottom';
-
-  @Input() mentionItemTemplate: TemplateRef<any>;
-
-  @Output() mentionSelectItem = new EventEmitter();
-
-  @Output() mentionSearchChange: EventEmitter<MentionOnSearchTypes> = new EventEmitter();
-
-  @Output() mentionAfterMentionInit: EventEmitter<MentionDirective> = new EventEmitter();
 
   private value = '';
   private previousValue = '';
@@ -70,15 +64,12 @@ export class MentionDirective implements OnInit, OnChanges, AfterViewInit, OnDes
   private mentionRef: ComponentRef<MentionComponent>;
   private filterSuggestions = [];
 
-  isOpen = false;
-
-  activeIndex = -1;
-
-  unsubscribe$ = new Subject();
-
-  defaultNotFoundText = '';
-
-  @Input() mentionValueParse: (value: string) => string = (value) => value;
+  constructor(
+    private el: ElementRef,
+    private viewContainerRef: ViewContainerRef,
+    private cdr: ChangeDetectorRef,
+    private overlay: Overlay
+  ) {}
 
   @HostListener('keydown', ['$event'])
   onKeyDown(event) {
@@ -130,6 +121,15 @@ export class MentionDirective implements OnInit, OnChanges, AfterViewInit, OnDes
     }
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    const { mentionSuggestions } = changes;
+    if (mentionSuggestions && this.isOpen) {
+      this.previousValue = null;
+      this.activeIndex = -1;
+      this.resetMention(false);
+    }
+  }
+
   ngOnInit(): void {
     this.mentionAfterMentionInit.emit(this);
   }
@@ -142,13 +142,9 @@ export class MentionDirective implements OnInit, OnChanges, AfterViewInit, OnDes
       });
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (Object.prototype.hasOwnProperty.call(changes, 'mentionSuggestions')) {
-      if (this.isOpen) {
-        this.previousValue = null;
-        this.activeIndex = -1;
-        this.resetMention(false);
-      }
+  ngOnDestroy() {
+    if (this.overlayRef) {
+      this.overlayRef.dispose();
     }
   }
 
@@ -159,24 +155,31 @@ export class MentionDirective implements OnInit, OnChanges, AfterViewInit, OnDes
       return;
     }
     this.suggestionsFilter(this.cursorMention, emit);
-    const activeIndex = this.filterSuggestions.indexOf(this.cursorMention.substring(1));
-    this.activeIndex = activeIndex >= 0 ? activeIndex : 0;
-    this.showMention();
+    if (this.mentionSeparatorToggle.suffix || (this.filterSuggestions.length && !this.mentionSeparatorToggle.suffix)) {
+      const activeIndex = this.filterSuggestions.indexOf(this.value);
+      this.activeIndex = activeIndex >= 0 ? activeIndex : 0;
+      this.showMention();
+    } else if (this.mentionLoading) {
+      this.showMention();
+    } else {
+      this.hideMention();
+    }
   }
 
   checkMention() {
-    const value = this.nativeElement.value.replace(/[\r\n]/g, ' ') || '';
+    const value = this.nativeElement.value.replace(/[\r\n]/g, this.mentionSeparator) || '';
     const selectionStart = this.nativeElement.selectionStart;
     let i = this.mentionTrigger.length;
     while (i >= 0) {
       const startPos = value.lastIndexOf(this.mentionTrigger[i], selectionStart);
-      const endPos = value.indexOf(' ', selectionStart) > -1 ? value.indexOf(' ', selectionStart) : value.length;
+      const endPos =
+        value.indexOf(this.mentionSeparator, selectionStart) > -1 ? value.indexOf(this.mentionSeparator, selectionStart) : value.length;
       const mention = value.substring(startPos, selectionStart);
       if (
-        (startPos > 0 && value[startPos - 1] !== ' ') ||
+        (this.mentionSeparatorToggle.prefix && startPos > 0 && value[startPos - 1] !== this.mentionSeparator) ||
         startPos < 0 ||
         mention.includes(this.mentionTrigger[i], 1) ||
-        mention.includes(' ')
+        (this.mentionSeparatorToggle.suffix && mention.includes(this.mentionSeparator))
       ) {
         this.cursorMention = null;
         this.cursorMentionStart = -1;
@@ -296,7 +299,7 @@ export class MentionDirective implements OnInit, OnChanges, AfterViewInit, OnDes
 
   insertMention(mention: Mention) {
     const value: string = this.el.nativeElement.value;
-    const insertValue = mention.mention.trim() + ' ';
+    const insertValue = `${mention.mention.trim()}${this.mentionSeparatorToggle.suffix ? this.mentionSeparator : ''}`;
     const newValue = [value.slice(0, mention.startPos + 1), insertValue, value.slice(mention.endPos, value.length)].join('');
     this.el.nativeElement.value = newValue;
     this.value = newValue;
@@ -320,11 +323,5 @@ export class MentionDirective implements OnInit, OnChanges, AfterViewInit, OnDes
         this.mentionRef.instance.scrollToFocusItem();
       }
     });
-  }
-
-  ngOnDestroy() {
-    if (this.overlayRef) {
-      this.overlayRef.dispose();
-    }
   }
 }

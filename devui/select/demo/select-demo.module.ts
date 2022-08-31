@@ -44,7 +44,7 @@ import { UserSearchNLazyLoadComponent } from './user-search-n-lazyload/user-sear
     ButtonModule,
     DDemoNavModule,
     RouterModule.forChild([
-      { path: '', redirectTo: 'demo' },
+      { path: '', redirectTo: 'demo', pathMatch: 'full' },
       { path: 'demo', component: SelectDemoComponent },
       {
         path: 'api',

@@ -31,7 +31,7 @@ export class TimepickerPanelComponent implements OnInit, OnDestroy {
 
   typeList = ['hour', 'min', 'sec'];
 
-  unsubscribe$ = new Subject();
+  unsubscribe$ = new Subject<void>();
   i18nText: I18nInterface['datePickerPro'];
   i18nSubscription: Subscription;
 

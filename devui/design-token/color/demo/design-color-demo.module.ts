@@ -21,7 +21,7 @@ import { DesignColorDemoComponent } from './design-color-demo.component';
     DDemoNavModule,
     TabsModule,
     RouterModule.forChild([
-      { path: '',  redirectTo: 'demo' },
+      { path: '',  redirectTo: 'demo', pathMatch: 'full' },
       { path: 'demo', component: DesignColorDemoComponent},
       { path: 'api', component: DevUIApiComponent, data: {
         'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),

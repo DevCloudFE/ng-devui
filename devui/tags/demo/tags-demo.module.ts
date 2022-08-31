@@ -21,7 +21,7 @@ import { TagsDemoComponent } from './tags-demo.component';
     DevUIApiModule,
     DDemoNavModule,
     RouterModule.forChild([
-      { path: '', redirectTo: 'demo' },
+      { path: '', redirectTo: 'demo', pathMatch: 'full' },
       { path: 'demo', component: TagsDemoComponent },
       {
         path: 'api',

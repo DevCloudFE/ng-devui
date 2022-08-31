@@ -2,10 +2,12 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'd-mention-target',
-  templateUrl: './target.component.html'
+  templateUrl: './target.component.html',
 })
 export class TargetComponent {
-
+  mentionValue = '';
+  editorRef = null;
+  beforeShow: any;
   suggestions = [
     'C#',
     'C',
@@ -23,17 +25,11 @@ export class TargetComponent {
     'CoffeeScript',
   ];
 
-  mentionValue = '';
-
-  editorRef = null;
-
-  beforeShow;
-
-  contentChange (e) {
+  contentChange(e) {
     this.beforeShow(e);
   }
 
-  afterEditorInit (e) {
+  afterEditorInit(e) {
     this.editorRef = e;
   }
 }

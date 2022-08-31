@@ -2,6 +2,7 @@
 @import '../style/theme/shadow';
 @import '../style/theme/corner';
 @import '../style/core/_font';
+@import '../style/core/animation';
 
 $card-ele-space: var(--card-ele-space, 8px);
 $card-block-space: var(--card-block-space, 16px);
@@ -16,6 +17,18 @@ $card-content-font-size: $devui-font-size;
   padding: 16px 20px;
   border-radius: $card-border-radius;
   box-shadow: $devui-shadow-length-base $devui-light-shadow;
+
+  &.devui-card-interactive {
+    cursor: pointer;
+    transition:
+      box-shadow $devui-animation-duration-slow $devui-animation-ease-in-out-smooth,
+      transform $devui-animation-duration-slow $devui-animation-ease-in-out-smooth;
+
+    &:hover {
+      box-shadow: $devui-shadow-length-hover $devui-light-shadow;
+      transform: translateY(-5px);
+    }
+  }
 }
 
 .devui-card-title {

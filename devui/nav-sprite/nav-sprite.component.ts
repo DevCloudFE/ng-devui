@@ -14,7 +14,7 @@ import {
   Renderer2,
   TemplateRef,
   ViewChild,
-  ViewChildren
+  ViewChildren,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { scrollAnimate } from 'ng-devui/utils';
@@ -49,7 +49,7 @@ export class NavSpriteComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @Input() maxLevel = 3; // 最大层级
 
-  @Input() title = 'menu'; // 名称
+  @Input() title; // 名称
 
   @Input() indent = 2; // 缩进
 

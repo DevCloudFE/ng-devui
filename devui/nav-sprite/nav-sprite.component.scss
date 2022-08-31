@@ -47,10 +47,14 @@
     justify-content: space-between;
     width: 100%;
     color: $devui-text;
+    height: 32px;
     line-height: 32px;
     font-weight: bold;
     font-size: $devui-font-size-card-title;
-    border-bottom: 1px solid $devui-dividing-line;
+
+    &.devui-nav-sprite-header-with-title {
+      border-bottom: 1px solid $devui-dividing-line;
+    }
 
     .devui-nav-spiri-close {
       cursor: pointer;

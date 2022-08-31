@@ -84,7 +84,7 @@ import { ValidateUpdateComponent } from './validate-update/validate-update.compo
     EditableSelectModule,
     DatepickerModule,
     RouterModule.forChild([
-      { path: '', redirectTo: 'demo' },
+      { path: '', redirectTo: 'demo', pathMatch: 'full' },
       { path: 'demo', component: FormDemoComponent },
       {
         path: 'api',

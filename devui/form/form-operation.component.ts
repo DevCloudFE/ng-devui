@@ -62,7 +62,7 @@ export class DFormSubmitDirective implements AfterViewInit, OnDestroy {
 
   @Input('dFormSubmitData') data: any;
 
-  private destroy$ = new Subject();
+  private destroy$ = new Subject<void>();
 
   // TODO：这里是否需要接管如果所关联的表单校验不通过，切换到disabled状态
 
@@ -106,7 +106,7 @@ export class DFormResetDirective implements AfterViewInit, OnDestroy {
     }
   }
 
-  private destroy$ = new Subject();
+  private destroy$ = new Subject<void>();
 
   constructor(private elementRef: ElementRef, @Optional() @Host() private _dForm: FormDirective) {}
 

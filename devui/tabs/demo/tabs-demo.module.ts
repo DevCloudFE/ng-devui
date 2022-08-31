@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { ButtonModule } from 'ng-devui/button';
 import { DropDownModule } from 'ng-devui/dropdown';
+import { LoadingModule } from 'ng-devui/loading';
 import { ModalModule } from 'ng-devui/modal';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
@@ -25,17 +27,19 @@ import { WithoutContentComponent } from './without-content/without-content.compo
 
 @NgModule({
   imports: [
+    ButtonModule,
     CommonModule,
     DDemoNavModule,
     DevUICodeboxModule,
     DevUIApiModule,
     DropDownModule,
+    LoadingModule,
     ModalModule,
     TabsModule,
     TransferModule,
     TranslateModule,
     RouterModule.forChild([
-      { path: '', redirectTo: 'demo' },
+      { path: '', redirectTo: 'demo', pathMatch: 'full' },
       { path: 'demo', component: TabsDemoComponent },
       {
         path: 'api',

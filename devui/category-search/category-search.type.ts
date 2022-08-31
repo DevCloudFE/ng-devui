@@ -52,8 +52,8 @@ export interface ICategorySearchTagItem {
    */
   value?: {
     label?: string;
-    value?: string | Array<ITagOption | number | string>;
-    cache?: string | Array<ITagOption | number | string>;
+    value?: string | ITagOption | Array<ITagOption | number | string>;
+    cache?: string | ITagOption | Array<ITagOption | number | string>;
     [propName: string]: any;
   };
   [propName: string]: any;
