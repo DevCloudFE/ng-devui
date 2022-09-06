@@ -20,7 +20,10 @@
               "xss",
               "enquire.js",
               "color",
-              "codesandbox"
+              "codesandbox",
+              "gridstack",
+              "!html-loader!markdown-loader!../doc/api-cn.md",
+              "!html-loader!markdown-loader!../doc/api-en.md"
             ],
             "customWebpackConfig": {
               "path": "scripts/extra-webpack.config.js"
@@ -67,7 +70,7 @@
                 }
               ]
             },
-            "development": { 
+            "development": {
               "buildOptimizer": false,
               "optimization": false,
               "vendorChunk": true,
@@ -92,7 +95,7 @@
             "production": {
               "browserTarget": "devui:build:production"
             },
-            "development": { 
+            "development": {
               "browserTarget": "devui:build:development"
             },
             "es5": {
@@ -102,7 +105,7 @@
               "browserTarget": "devui:build:separate"
             }
           },
-          "defaultConfiguration": "development" 
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
