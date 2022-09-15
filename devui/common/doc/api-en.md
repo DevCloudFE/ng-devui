@@ -26,6 +26,12 @@ In the page:
   <p>{{ date | dDatePipe: 'y/MM/dd' }}</p>
 </div>
 
+<!-- SafeNullPipe -->
+<div>
+  <p>{{ name | dSafeNullPipe }}</p>
+  <p>{{ age | dSafeNullPipe:'***' }}</p>
+</div>
+
 <!-- SimulateATag -->
 <button dSimulateATag [href]="'https://angular.io'" [target]="'_blank'"></button>
 
@@ -295,6 +301,10 @@ The formatting format is slightly different from the format provided by the Angu
   </tbody>
 </table>
 
+# dSafeNullPipe
+
+Placeholder display automatically when data is `'', null, undefined`,default is: `-`
+
 # HelperUtils Static Methods
 
 ## getBrowserName() => void
@@ -436,17 +446,21 @@ export interface ClientDownloadOptions {
 ```ts
 export type PositionType = 'top' | 'right' | 'bottom' | 'left';
 ```
+
 ### TargetType
+
 ```ts
 export type TargetType = '_blank' | '_self' | '_parent' | '_top' | ;
 ```
 
 ### EncType
+
 ```ts
 export type EncType = 'application/x-www-form-urlencoded' | 'multipart/form-data' | 'text-plain'
 ```
 
 ### CopyResult
+
 ```ts
 export interface CopyResult {
   isSupported: boolean;
@@ -456,6 +470,7 @@ export interface CopyResult {
 ```
 
 ### HttpProgressEvent
+
 ```typescript
 interface HttpProgressEvent {
   type: HttpEventType.DownloadProgress | HttpEventType.UploadProgress;

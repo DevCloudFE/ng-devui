@@ -8,9 +8,13 @@ import { Subscription } from 'rxjs';
   templateUrl: './common-demo.component.html',
 })
 export class CommonDemoComponent implements OnInit, OnDestroy {
-  pipeSource: Array<DevuiSourceData> = [
-    { title: 'HTML', language: 'html', code: require('./pipe/pipe.component.html?raw') },
-    { title: 'TS', language: 'typescript', code: require('./pipe/pipe.component.ts?raw') },
+  datePipeSource: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'html', code: require('./pipe/date-pipe/date-pipe.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./pipe/date-pipe/date-pipe.component.ts?raw') },
+  ];
+  safeNullPipeSource: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'html', code: require('./pipe/safe-null-pipe/safe-null-pipe.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./pipe/safe-null-pipe/safe-null-pipe.component.ts?raw') },
   ];
 
   helperBrowserSource: Array<DevuiSourceData> = [

@@ -883,7 +883,12 @@
         "p2": "Scroll monitoring uses other elements, such as window."
       },
       "pipeDemo": {
-        "title": "DatePipe"
+        "dDatePipe": {
+          "title": "DatePipe"
+        },
+        "dSafeNullPipe": {
+          "title": "Converts Null and Undefined to specified strings, default to '-'"
+        }
       },
       "browserDemo": {
         "title": "Current browser name and version"

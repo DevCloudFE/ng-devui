@@ -869,7 +869,12 @@
         "p2": "滚动监听使用其他元素,比如window·"
       },
       "pipeDemo": {
-        "title": "日期解析器"
+        "dDatePipe": {
+          "title": "日期解析器"
+        },
+        "dSafeNullPipe": {
+          "title": "转换 Null 和 Undefined 为指定字符串，默认为'-'"
+        }
       },
       "browserDemo": {
         "title": "当前浏览器名和版本"
