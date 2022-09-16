@@ -1,14 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'd-demo-time-axis-seperate-way',
-  templateUrl: './seperate-way.component.html'
+  templateUrl: './seperate-way.component.html',
 })
-export class SeperateWayComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+export class SeperateWayComponent {
+  constructor() {}
 }

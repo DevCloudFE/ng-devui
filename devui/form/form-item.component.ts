@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ContentChild, ElementRef, HostBinding, Input, OnInit, Renderer2 } from '@angular/core';
+import { ChangeDetectorRef, Component, ContentChild, ElementRef, HostBinding, Input, Renderer2 } from '@angular/core';
 import { FormControlComponent } from './form-control.component';
 import { FormLabelComponent } from './form-label.component';
 import { DFormControlStatus } from './validator-directive/validate.type';
@@ -9,7 +9,7 @@ import { DFormControlStatus } from './validator-directive/validate.type';
   styleUrls: ['./form-item.component.scss'],
   preserveWhitespaces: false,
 })
-export class FormItemComponent implements OnInit {
+export class FormItemComponent {
   @HostBinding('class.devui-form-has-error-msg') _hasErrorMsg = false;
 
   /**
@@ -28,8 +28,6 @@ export class FormItemComponent implements OnInit {
 
     renderer.addClass(elementRef.nativeElement, 'devui-form-item');
   }
-
-  ngOnInit() {}
 
   updateFeedback(status: DFormControlStatus | null, updateMessage: string): void {
     this._hasErrorMsg = !!updateMessage;

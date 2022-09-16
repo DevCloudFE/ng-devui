@@ -1,14 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'd-button-icon',
   templateUrl: './icon.component.html',
-  styleUrls: ['./icon.component.scss']
+  styleUrls: ['./icon.component.scss'],
 })
-export class IconComponent implements OnInit {
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+export class IconComponent {
+  constructor() {}
 }

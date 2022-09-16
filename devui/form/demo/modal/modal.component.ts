@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { DialogService } from 'ng-devui/modal';
 import { ModalOneComponent } from '../modal-one/modal-one.component';
 
@@ -6,17 +6,10 @@ import { ModalOneComponent } from '../modal-one/modal-one.component';
   selector: 'd-form-demo-modal',
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.css'],
-  providers: [DialogService]
-
+  providers: [DialogService],
 })
-export class ModalComponent implements OnInit {
-
-  constructor(private dialogService: DialogService) {
-  }
-
-  ngOnInit() {
-
-  }
+export class ModalComponent {
+  constructor(private dialogService: DialogService) {}
 
   openstandardDialog(dialogtype?: string) {
     const results = this.dialogService.open({
@@ -37,7 +30,6 @@ export class ModalComponent implements OnInit {
           handler: ($event: Event) => {
             results.modalInstance.hide();
           },
-
         },
         {
           id: 'btn-cancel',
@@ -46,15 +38,13 @@ export class ModalComponent implements OnInit {
           handler: ($event: Event) => {
             results.modalInstance.hide();
           },
-
         },
       ],
       data: {
         name: 'Tom',
         age: 10,
-        address: 'Chengdu'
+        address: 'Chengdu',
       },
     });
   }
-
 }

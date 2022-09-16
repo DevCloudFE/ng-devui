@@ -5,11 +5,11 @@
     class="devui-toast-item-container"
     aria-live="polite"
     [ngClass]="{
-      'devui-toast-message-info': msg.severity == 'info',
-      'devui-toast-message-warn': msg.severity == 'warn',
-      'devui-toast-message-error': msg.severity == 'error',
-      'devui-toast-message-success': msg.severity == 'success',
-      'devui-toast-message-common': msg.severity == 'common'
+      'devui-toast-message-info': msg.severity === 'info',
+      'devui-toast-message-warn': msg.severity === 'warn',
+      'devui-toast-message-error': msg.severity === 'error',
+      'devui-toast-message-success': msg.severity === 'success',
+      'devui-toast-message-common': msg.severity === 'common'
     }"
     (mouseenter)="interrupt(i, msgItem)"
     (mouseleave)="removeReset(i, msgItem, msg)"

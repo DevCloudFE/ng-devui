@@ -1,12 +1,12 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { TreeComponent } from 'ng-devui/tree';
 
 @Component({
   selector: 'd-tree-factory',
   templateUrl: './tree-factory.component.html',
-  styleUrls: ['./tree-factory.component.css']
+  styleUrls: ['./tree-factory.component.css'],
 })
-export class OperationForAllNodesComponent implements OnInit {
+export class OperationForAllNodesComponent {
   @ViewChild('operableTree', { static: true }) operableTree: TreeComponent;
   treeNodeData = '';
   data1 = [
@@ -35,8 +35,8 @@ export class OperationForAllNodesComponent implements OnInit {
             {
               title: 'leaf node 114',
               id: '6',
-            }
-          ]
+            },
+          ],
         },
         {
           title: 'parent node 12 ',
@@ -58,10 +58,10 @@ export class OperationForAllNodesComponent implements OnInit {
             {
               title: 'leaf node 124',
               id: '11',
-            }
-          ]
-        }
-      ]
+            },
+          ],
+        },
+      ],
     },
     {
       title: 'parent node 2 ',
@@ -87,8 +87,8 @@ export class OperationForAllNodesComponent implements OnInit {
             {
               title: 'leaf node 214',
               id: '17',
-            }
-          ]
+            },
+          ],
         },
         {
           title: 'parent node 22 ',
@@ -109,8 +109,8 @@ export class OperationForAllNodesComponent implements OnInit {
             {
               title: 'leaf node 224',
               id: '22',
-            }
-          ]
+            },
+          ],
         },
         {
           title: 'parent node 23 ',
@@ -131,16 +131,14 @@ export class OperationForAllNodesComponent implements OnInit {
             {
               title: 'leaf node 234',
               id: '27',
-            }
-          ]
-        }
-      ]
-    }
+            },
+          ],
+        },
+      ],
+    },
   ];
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
   disableAllNodesCheck($event) {
     this.operableTree.treeFactory.disableAllNodesChecked($event);
   }
@@ -181,7 +179,6 @@ export class OperationForAllNodesComponent implements OnInit {
     } else {
       this.operableTree.treeFactory.endLoading(id);
     }
-
   }
   getNodeById(id) {
     this.treeNodeData = this.operableTree.treeFactory.getNodeById(id);

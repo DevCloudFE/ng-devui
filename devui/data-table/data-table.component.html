@@ -104,7 +104,7 @@
 <div
   class="devui-no-result-wrapper"
   [ngClass]="{ 'overlay-table-no-result': tableOverflowType === 'overlay' || !scrollable }"
-  *ngIf="!dataSource?.length && noResultTemplate != null"
+  *ngIf="!dataSource?.length && noResultTemplate !== null"
 >
   <ng-template [ngTemplateOutlet]="noResultTemplate" [ngTemplateOutletContext]="{ $implicit: this }"></ng-template>
 </div>

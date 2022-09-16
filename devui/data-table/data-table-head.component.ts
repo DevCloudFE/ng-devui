@@ -1,7 +1,24 @@
+/* eslint-disable @angular-eslint/no-conflicting-lifecycle */
 import { DOCUMENT } from '@angular/common';
 import {
-  AfterViewInit, ChangeDetectorRef, Component, DoCheck, ElementRef, EventEmitter, Inject, Input,
-  IterableDiffers, KeyValueDiffers, NgZone, OnChanges, OnDestroy, OnInit, Output, QueryList, SimpleChanges, ViewChildren
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  DoCheck,
+  ElementRef,
+  EventEmitter,
+  Inject,
+  Input,
+  IterableDiffers,
+  KeyValueDiffers,
+  NgZone,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  Output,
+  QueryList,
+  SimpleChanges,
+  ViewChildren,
 } from '@angular/core';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { Subscription } from 'rxjs';
@@ -115,54 +132,45 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
   checkedListForFilter = [];
   document: Document;
   documentElement: HTMLElement;
-  constructor(@Inject(DATA_TABLE) public dt: any,
-              private zone: NgZone,
-              private element: ElementRef,
-              private differs: KeyValueDiffers,
-              private iterableDiffers: IterableDiffers,
-              private ref: ChangeDetectorRef,
-              private i18n: I18nService,
-              @Inject(DOCUMENT) private doc: any) {
+  constructor(
+    @Inject(DATA_TABLE) public dt: any,
+    private zone: NgZone,
+    private element: ElementRef,
+    private differs: KeyValueDiffers,
+    private iterableDiffers: IterableDiffers,
+    private ref: ChangeDetectorRef,
+    private i18n: I18nService,
+    @Inject(DOCUMENT) private doc: any
+  ) {
     this.i18nCommonText = this.i18n.getI18nText().common;
     this.document = this.doc;
     this.documentElement = this.doc.documentElement;
   }
 
-  ngOnInit() {
-    if (this.colDraggable) {
-      this.iterableDiffer = this.iterableDiffers.find([]).create(null);
-      this.objDiffer = {};
-      this.dataSource.forEach((data, index) => {
-        this.objDiffer[index] = this.differs.find(data).create();
-      });
-    }
-
-    this.i18nSubscription = this.i18n.langChange().subscribe((data) => {
-      this.i18nCommonText = data.common;
-    });
-  }
-
+  // eslint-disable-next-line @angular-eslint/no-conflicting-lifecycle
   ngOnChanges(changes: SimpleChanges): void {
     if ((changes['columns'] || changes.multiSort) && this.columns) {
       this.multiSortArray = [];
-      this.columns.forEach(column => {
+      this.columns.forEach((column) => {
         if (column.sortable) {
-          const sortIndex = this.multiSort.findIndex(item => item['field'] === column.field);
+          const sortIndex = this.multiSort.findIndex((item) => item['field'] === column.field);
           this.multiSortArray.push({
             field: column.field,
-            direction: sortIndex !== -1 ? this.multiSort[sortIndex].direction : SortDirection.default
+            direction: sortIndex !== -1 ? this.multiSort[sortIndex].direction : SortDirection.default,
           });
         }
       });
     }
     if (changes['columns'] && this.columns) {
-      this.rowCount = Math.max(... this.columns.map(column => {
-        if (column.advancedHeader) {
-          return column.advancedHeader.length;
-        } else {
-          return 0;
-        }
-      }));
+      this.rowCount = Math.max(
+        ...this.columns.map((column) => {
+          if (column.advancedHeader) {
+            return column.advancedHeader.length;
+          } else {
+            return 0;
+          }
+        })
+      );
       if (this.rowCount > 0) {
         this.rowCountArray = new Array(this.rowCount);
         this.initAdvanceHeader();
@@ -188,6 +196,7 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
     }
   }
 
+  // eslint-disable-next-line @angular-eslint/no-conflicting-lifecycle
   ngDoCheck() {
     if (!this.colDraggable) {
       return;
@@ -216,6 +225,19 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
       this.createCellMap();
     }
   }
+  ngOnInit() {
+    if (this.colDraggable) {
+      this.iterableDiffer = this.iterableDiffers.find([]).create(null);
+      this.objDiffer = {};
+      this.dataSource.forEach((data, index) => {
+        this.objDiffer[index] = this.differs.find(data).create();
+      });
+    }
+
+    this.i18nSubscription = this.i18n.langChange().subscribe((data) => {
+      this.i18nCommonText = data.common;
+    });
+  }
 
   ngAfterViewInit() {
     if (this.colDraggable) {
@@ -223,16 +245,15 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
       this.mirrorContainer = this.element.nativeElement.parentNode.parentNode;
       this.bodyOverflow = this.documentElement.style.overflow;
       this.detecteOriginTable();
-      setTimeout(() => { // wait for table render ready
+      setTimeout(() => {
+        // wait for table render ready
         this.renderFakeTable();
         this.el.style.display = 'none';
-
       });
       this.documentElement.addEventListener('resize', this.renderFakeTable);
       this.createCellMap();
       this.scrollViewEl = this.originTable.parentNode.parentNode;
       this.scrollViewRect = this.scrollViewEl.getBoundingClientRect();
-
     }
   }
 
@@ -245,12 +266,14 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
       } else {
         if (column.advancedHeader[0].colspan) {
           this.cellMap[cellIndex] = {
-            name: column.field, isAdvanceHeader: true,
-            sortKey: [index], headerLength: column.advancedHeader[0].colspan
+            name: column.field,
+            isAdvanceHeader: true,
+            sortKey: [index],
+            headerLength: column.advancedHeader[0].colspan,
           };
           cellIndex++;
         } else {
-          Object.keys(this.cellMap).forEach(key => {
+          Object.keys(this.cellMap).forEach((key) => {
             const item = this.cellMap[key];
             if (item.isAdvanceHeader && item.sortKey.length < item.headerLength) {
               item.sortKey.push(index);
@@ -289,7 +312,7 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
   }
 
   getIfExistMultiSort(field): any {
-    const column = this.columns.find(item => item['field'] === field);
+    const column = this.columns.find((item) => item['field'] === field);
     return !!column.sortable;
   }
 
@@ -297,7 +320,7 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
     if (!this.multiSortArray) {
       return false;
     }
-    const filterField = this.multiSortArray.filter(item => {
+    const filterField = this.multiSortArray.filter((item) => {
       return item['field'] === field;
     });
     if (filterField.length !== 0) {
@@ -310,13 +333,13 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
   onResize($event, column) {
     this.resizeHandlerEvent.emit({
       ...$event,
-      field: column.field
+      field: column.field,
     });
   }
 
   onBeginResize($event) {
     const thRenderWidthList = [];
-    this.thList.forEach(th => {
+    this.thList.forEach((th) => {
       thRenderWidthList.push({ field: th.element.getAttribute('field'), width: th.element.clientWidth });
     });
     this.beginResizeHandlerEvent.emit({ event: $event, thRenderWidthList });
@@ -325,7 +348,7 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
   onResizing($event, column) {
     this.resizingHandlerEvent.emit({
       ...$event,
-      field: column.field
+      field: column.field,
     });
   }
 
@@ -352,7 +375,8 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
   onTap(e) {
     e.preventDefault();
     this.originCellIndex = this.findCellIndex(e);
-    setTimeout(() => { // fix chrome bug, mousedown的时候会错误的触发mousemove
+    setTimeout(() => {
+      // fix chrome bug, mousedown的时候会错误的触发mousemove
       this.documentElement.addEventListener('mousemove', this.handleMousemove);
       this.documentElement.addEventListener('mouseup', () => {
         this.documentElement.removeEventListener('mousemove', this.handleMousemove);
@@ -365,7 +389,8 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
     this.documentElement.removeEventListener('mousemove', this.handleMousemove);
     this.documentElement.addEventListener('mousedown', this.grab);
     this.documentElement.addEventListener('mouseup', this.release);
-    setTimeout(() => { // fix chrome bug, mousedown的时候会错误的触发mousemove
+    setTimeout(() => {
+      // fix chrome bug, mousedown的时候会错误的触发mousemove
       this.dispatchMousedown();
     });
   };
@@ -479,7 +504,7 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
     const rect = el.getBoundingClientRect();
     return {
       left: rect.left + this.getScroll('scrollLeft', 'pageXOffset'),
-      top: rect.top + this.getScroll('scrollTop', 'pageYOffset')
+      top: rect.top + this.getScroll('scrollTop', 'pageYOffset'),
     };
   }
   getScroll(scrollProp, offsetProp) {
@@ -506,9 +531,9 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
       event.initMouseEvent('mousedown', true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
     } else {
       event = new MouseEvent('mousedown', {
-        'view': window,
-        'bubbles': true,
-        'cancelable': true
+        view: window,
+        bubbles: true,
+        cancelable: true,
       });
     }
     return event;
@@ -539,7 +564,7 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
     }
     return {
       item: item,
-      source: source
+      source: source,
     };
   }
 
@@ -635,7 +660,7 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
     const attr = 'margin-right';
     const length = el.children.length;
     Array.from(el.children).forEach((li, dex) => {
-      if (spacing && dex < (length - 1)) {
+      if (spacing && dex < length - 1) {
         (<any>li).style[attr] = `-${spacing}`;
       }
     });
@@ -646,17 +671,15 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
 
   sizeColumnFake(fakeTables, originEl) {
     // calculate width of every column
-    Array.from(originEl.rows[0].children).forEach(
-      (cell, index) => {
-        if (!fakeTables[index]) {
-          return;
-        }
-        const w = (<any>cell).getBoundingClientRect().width;
-        const t = fakeTables[index];
-        this.css(t, { width: `${w}px` });
-        this.css(t.rows[0].children[0], { width: `${w}px` });
+    Array.from(originEl.rows[0].children).forEach((cell, index) => {
+      if (!fakeTables[index]) {
+        return;
       }
-    );
+      const w = (<any>cell).getBoundingClientRect().width;
+      const t = fakeTables[index];
+      this.css(t, { width: `${w}px` });
+      this.css(t.rows[0].children[0], { width: `${w}px` });
+    });
   }
 
   css(el, cssList) {
@@ -784,11 +807,7 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
     if (changed || dropTarget === null) {
       this.lastDropTarget = dropTarget;
     }
-    if (
-      (reference === null && changed) ||
-      reference !== this.item &&
-      reference !== this.nextEl(this.item)
-    ) {
+    if ((reference === null && changed) || (reference !== this.item && reference !== this.nextEl(this.item))) {
       let mover;
       const nowCord = e.pageX;
       if (nowCord < this.oldCoord) {
@@ -867,10 +886,10 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
       return;
     }
 
-    if (this.scrollViewRect.left < x && x < (this.scrollViewRect.left + range)) {
+    if (this.scrollViewRect.left < x && x < this.scrollViewRect.left + range) {
       this.animationRequestId = requestAnimationFrame(scrollToLeft);
     }
-    if ((this.scrollViewRect.right - range) < x && x < this.scrollViewRect.right) {
+    if (this.scrollViewRect.right - range < x && x < this.scrollViewRect.right) {
       this.animationRequestId = requestAnimationFrame(scrollToRight);
     }
   }
@@ -923,8 +942,10 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
       }
     };
     const insertBodyColList = this.getDataBetween(selectedColIndex - 1 + this.colOffset, selectedColIndex + this.colOffset + colSpan);
-    const insertHeaderColList = this.getDataBetween(selectedColIndex + this.secondHeaderOffset - 1, selectedColIndex +
-      this.secondHeaderOffset + colSpan - rowSpan + 1);
+    const insertHeaderColList = this.getDataBetween(
+      selectedColIndex + this.secondHeaderOffset - 1,
+      selectedColIndex + this.secondHeaderOffset + colSpan - rowSpan + 1
+    );
     const getTreeTableCol = (row, rowIndex) => {
       const target = this.getChildTableColumn((<any>row).children[0].children[0], selectedColIndex);
       empty((<any>row).children[0]);
@@ -991,7 +1012,7 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
       }
       this.css(row, { height: `${table.rows[rowIndex].getBoundingClientRect().height}px` });
     });
-    this.colOffset += (colSpan - 1);
+    this.colOffset += colSpan - 1;
     this.secondHeaderOffset = rowSpan > 1 ? this.secondHeaderOffset - 1 : this.secondHeaderOffset;
     return cTable;
   }
@@ -1037,8 +1058,7 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
     this.css(fakeTable.rows[0].children[0], { width: `${w}px` });
 
     // calculate height of every cell
-    const rowHeights = Array.from(originEl.rows)
-      .map(row => (<any>row).children[0].getBoundingClientRect().height);
+    const rowHeights = Array.from(originEl.rows).map((row) => (<any>row).children[0].getBoundingClientRect().height);
     Array.from(fakeTable.rows).forEach((row, rowIndex) => {
       this.css(row, { height: `${rowHeights[rowIndex]}px` });
     });
@@ -1100,12 +1120,14 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
       return after ? this.nextEl(target) : target;
     };
 
-    const inside = () => { // faster, but only available if dropped inside a child element
+    const inside = () => {
+      // faster, but only available if dropped inside a child element
       const rect = target.getBoundingClientRect();
       return resolve(x > rect.left + this.getRectWidth(rect) / 2);
     };
 
-    const outside = () => { // slower, but able to figure out any position
+    const outside = () => {
+      // slower, but able to figure out any position
       const len = dropTarget.children.length;
       let i;
       let el;
@@ -1113,7 +1135,7 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
       for (i = 0; i < len; i++) {
         el = dropTarget.children[i];
         rect = el.getBoundingClientRect();
-        if ((rect.left + rect.width / 2) > x) {
+        if (rect.left + rect.width / 2 > x) {
           return el;
         }
       }
@@ -1125,10 +1147,10 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
   };
 
   getRectWidth(rect) {
-    return rect.width || (rect.right - rect.left);
+    return rect.width || rect.right - rect.left;
   }
   getRectHeight(rect) {
-    return rect.height || (rect.bottom - rect.top);
+    return rect.height || rect.bottom - rect.top;
   }
 
   nextEl(el) {

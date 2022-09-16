@@ -1,17 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'd-alert-without-icon',
   templateUrl: './withoutIcon.component.html',
-  styleUrls: ['./withoutIcon.component.css']
+  styleUrls: ['./withoutIcon.component.css'],
 })
-export class WithoutIconComponent implements OnInit {
-
-  constructor() {
-
-  }
-
-  ngOnInit() {
-  }
-
+export class WithoutIconComponent {
+  constructor() {}
 }

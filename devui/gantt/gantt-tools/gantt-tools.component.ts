@@ -10,7 +10,7 @@ import { UnitRole } from '../gantt.model';
 })
 export class GanttToolsComponent implements OnInit{
 
-  @Input('currentUnit') set currentUnit(val) {
+  @Input() set currentUnit(val) {
     this._currentUnit = val;
     const data = this.views.filter(i => i.value === val);
   }

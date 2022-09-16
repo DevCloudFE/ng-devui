@@ -1,17 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'd-alert-basic',
   templateUrl: './basic.component.html',
-  styleUrls: ['./basic.component.css']
+  styleUrls: ['./basic.component.css'],
 })
-export class BasicComponent implements OnInit {
-
-  constructor() {
-
-  }
-
-  ngOnInit() {
-  }
-
+export class BasicComponent {
+  constructor() {}
 }

@@ -1,26 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'd-tree',
   templateUrl: './tree.component.html',
-  styleUrls: ['./tree.component.scss']
+  styleUrls: ['./tree.component.scss'],
 })
-export class TreeComponent implements OnInit {
-  list1 = [
-    { name: 'Visual Studio Code' },
-    { name: 'Sublime' },
-    { name: 'Atom' }
-  ];
+export class TreeComponent {
+  list1 = [{ name: 'Visual Studio Code' }, { name: 'Sublime' }, { name: 'Atom' }];
 
-  list2 = [
-    { name: 'WebStorm' , children: [{ name: 'notepadd++'}]},
-  ];
-  constructor() {
-
-  }
-
-  ngOnInit() {
-  }
+  list2 = [{ name: 'WebStorm', children: [{ name: 'notepadd++' }] }];
+  constructor() {}
 
   onDrop(e: any, target) {
     const item = e.dragData.item;
@@ -49,5 +38,4 @@ export class TreeComponent implements OnInit {
     }
     target.splice(index, 0, item);
   }
-
 }

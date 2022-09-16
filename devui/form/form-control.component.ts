@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, HostBinding, Input, OnInit, Renderer2, TemplateRef } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, HostBinding, Input, Renderer2, TemplateRef } from '@angular/core';
 import { DFormControlStatus } from './validator-directive/validate.type';
 
 @Component({
@@ -7,7 +7,7 @@ import { DFormControlStatus } from './validator-directive/validate.type';
   styleUrls: ['./form-control.component.scss'],
   preserveWhitespaces: false,
 })
-export class FormControlComponent implements OnInit {
+export class FormControlComponent {
   @Input() extraInfo: string | TemplateRef<any>;
   get extraInfoTemplate() {
     return this.extraInfo instanceof TemplateRef ? this.extraInfo : null;
@@ -37,8 +37,6 @@ export class FormControlComponent implements OnInit {
   constructor(private elementRef: ElementRef, renderer: Renderer2, private cdr: ChangeDetectorRef) {
     renderer.addClass(elementRef.nativeElement, 'devui-form-controls');
   }
-
-  ngOnInit() {}
 
   public updateErrorMessage(message: string) {
     this.errorMessage = message;

@@ -1,34 +1,34 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { TableWidthConfig } from 'ng-devui/data-table';
 import { originSource, SourceType } from '../mock-data';
 
 @Component({
   selector: 'd-header-grouping',
-  templateUrl: './header-grouping.component.html'
+  templateUrl: './header-grouping.component.html',
 })
-export class HeaderGroupingComponent implements OnInit {
+export class HeaderGroupingComponent {
   basicDataSource: Array<SourceType> = JSON.parse(JSON.stringify(originSource.slice(0, 6)));
   tableWidthConfig: TableWidthConfig[] = [
     {
       field: '$index',
-      width: '50px'
+      width: '50px',
     },
     {
       field: 'dob',
-      width: '200px'
+      width: '200px',
     },
     {
       field: 'firstName',
-      width: '150px'
+      width: '150px',
     },
     {
       field: 'lastName',
-      width: '150px'
+      width: '150px',
     },
     {
       field: 'gender',
-      width: '150px'
-    }
+      width: '150px',
+    },
   ];
 
   onResize({ width }, field) {
@@ -39,9 +39,5 @@ export class HeaderGroupingComponent implements OnInit {
       this.tableWidthConfig[index].width = width + 'px';
     }
   }
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+  constructor() {}
 }

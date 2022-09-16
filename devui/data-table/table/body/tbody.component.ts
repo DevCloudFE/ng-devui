@@ -6,9 +6,9 @@ import { TableTrComponent } from '../row/tr.component';
   /* eslint-disable-next-line @angular-eslint/component-selector*/
   selector: '[dTableBody]',
   templateUrl: './tbody.component.html',
-  styleUrls: ['./tbody.component.scss']
+  styleUrls: ['./tbody.component.scss'],
 })
-export class TableTbodyComponent implements OnInit {
+export class TableTbodyComponent {
   @Input() dataSource: any[] = [];
   @Input() rowTemplete: TemplateRef<TableTrComponent>;
   @Input() nestedLayer = 0;
@@ -21,8 +21,6 @@ export class TableTbodyComponent implements OnInit {
   @ContentChild(TemplateRef) rowTempleteForSelect: TemplateRef<TableTrComponent>;
 
   constructor() {}
-
-  ngOnInit() {}
 
   trackByFn(index) {
     return index;

@@ -1,19 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'd-ngmodel',
   templateUrl: './ngmodel.component.html',
-  styleUrls: ['./ngmodel.component.css']
+  styleUrls: ['./ngmodel.component.css'],
 })
-export class NgmodelComponent implements OnInit {
+export class NgmodelComponent {
   searchText = 'devui';
-  constructor() { }
-
-  ngOnInit() {
-  }
+  constructor() {}
 
   onSearch(term) {
     console.log(term);
   }
-
 }

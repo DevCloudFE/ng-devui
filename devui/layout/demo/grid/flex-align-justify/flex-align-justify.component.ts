@@ -1,14 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'd-flex-align-justify',
   templateUrl: './flex-align-justify.component.html',
 })
-export class FlexAlignJustifyComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+export class FlexAlignJustifyComponent {
+  constructor() {}
 }

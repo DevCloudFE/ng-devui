@@ -1,14 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'd-flex-wrap',
   templateUrl: './flex-wrap.component.html',
 })
-export class FlexWrapComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+export class FlexWrapComponent {
+  constructor() {}
 }

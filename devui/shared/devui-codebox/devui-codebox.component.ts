@@ -1,7 +1,7 @@
-import { Component, ElementRef, Inject, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, ElementRef, Inject, Input, ViewEncapsulation } from '@angular/core';
 import { DevuiOnlineIdeService } from '../devui-online-ide/devui-online-ide.service';
 import { DevuiSourceData } from './devui-source-data';
-import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'd-codebox',
@@ -10,7 +10,7 @@ import { DOCUMENT } from '@angular/common';
   encapsulation: ViewEncapsulation.None,
   preserveWhitespaces: false,
 })
-export class DevuiCodeboxComponent implements OnInit {
+export class DevuiCodeboxComponent {
   _copied = false;
 
   @Input() sourceData: Array<DevuiSourceData>;
@@ -67,6 +67,4 @@ export class DevuiCodeboxComponent implements OnInit {
   constructor(private _el: ElementRef, private onlineIdeService: DevuiOnlineIdeService, @Inject(DOCUMENT) private doc: any) {
     this.document = this.doc;
   }
-
-  ngOnInit() {}
 }

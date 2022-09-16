@@ -1,23 +1,17 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  HostBinding,
-  OnInit
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'd-datepicker-range',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './datepicker-range.component.html',
-  styleUrls: ['./datepicker-range.component.scss']
+  styleUrls: ['./datepicker-range.component.scss'],
 })
-export class DatepickerRangeComponent implements OnInit {
+export class DatepickerRangeComponent {
   datePicker1: any;
 
   startDate = new Date();
   endDate = null;
-  ngOnInit() {
-  }
+
   getValue(value) {
     console.log(value);
   }
@@ -28,9 +22,13 @@ export class DatepickerRangeComponent implements OnInit {
     day.setTime(Math.floor(nowTime + ms));
     const oYear = day.getFullYear();
     let oMoth = (day.getMonth() + 1).toString();
-    if (oMoth.length <= 1) { oMoth = '0' + oMoth; }
+    if (oMoth.length <= 1) {
+      oMoth = '0' + oMoth;
+    }
     let oDay = day.getDate().toString();
-    if (oDay.length <= 1) { oDay = '0' + oDay; }
+    if (oDay.length <= 1) {
+      oDay = '0' + oDay;
+    }
     return oYear + str + oMoth + str + oDay;
   }
 
@@ -41,10 +39,13 @@ export class DatepickerRangeComponent implements OnInit {
     day.setTime(Math.floor(nowTime + ms));
     const oYear = day.getFullYear();
     let oMoth = (day.getMonth() + 1).toString();
-    if (oMoth.length <= 1) { oMoth = '0' + oMoth; }
+    if (oMoth.length <= 1) {
+      oMoth = '0' + oMoth;
+    }
     let oDay = day.getDate().toString();
-    if (oDay.length <= 1) { oDay = '0' + oDay; }
+    if (oDay.length <= 1) {
+      oDay = '0' + oDay;
+    }
     return oYear + str + oMoth + str + oDay;
   }
-
 }

@@ -32,10 +32,10 @@
   </div>
   <ul class="devui-pagination-list {{ size ? 'devui-pagination-' + size : '' }}">
     <ng-container *ngIf="!lite">
-      <li *ngIf="preLink" [ngClass]="{ disabled: pageIndex == totalPage }">
+      <li *ngIf="preLink" [ngClass]="{ disabled: pageIndex === totalPage }">
         <a (click)="prev()" class="devui-pagination-link" [innerHTML]="preLink | safe: 'html'"></a>
       </li>
-      <li *ngIf="!preLink" [ngClass]="{ disabled: pageIndex == 1 }">
+      <li *ngIf="!preLink" [ngClass]="{ disabled: pageIndex === 1 }">
         <a (click)="prev()" class="devui-pagination-link">
           <svg width="1em" height="1.5em" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg">
             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -54,7 +54,7 @@
       <li *ngIf="showPages[0] > 2" (click)="preRange()">
         <a>...</a>
       </li>
-      <li *ngFor="let item of showPages" [ngClass]="{ active: item == pageIndex }">
+      <li *ngFor="let item of showPages" [ngClass]="{ active: item === pageIndex }">
         <a (click)="onPageIndexChange(item)">{{ item }}</a>
       </li>
       <li *ngIf="showPages[showPages.length - 1] < totalPage - 1" (click)="nextRange()">
@@ -69,10 +69,10 @@
           <a>{{ pageIndex }}</a>
         </li>
       </ng-container>
-      <li *ngIf="nextLink" [ngClass]="{ disabled: pageIndex == totalPage }">
+      <li *ngIf="nextLink" [ngClass]="{ disabled: pageIndex === totalPage }">
         <a (click)="next()" class="devui-pagination-link" [innerHTML]="nextLink | safe: 'html'"></a>
       </li>
-      <li *ngIf="!nextLink" [ngClass]="{ disabled: pageIndex == totalPage || !total }">
+      <li *ngIf="!nextLink" [ngClass]="{ disabled: pageIndex === totalPage || !total }">
         <a (click)="next()" class="devui-pagination-link">
           <svg width="1em" height="1.5em" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg">
             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -88,7 +88,7 @@
       </li>
     </ng-container>
     <ng-container *ngIf="lite">
-      <li *ngIf="preLink" [ngClass]="{ disabled: pageIndex == totalPage }">
+      <li *ngIf="preLink" [ngClass]="{ disabled: pageIndex === totalPage }">
         <a
           (click)="prev()"
           [attr.aria-label]="nextLink"
@@ -96,7 +96,7 @@
           [innerHTML]="preLink | safe: 'html'"
         ></a>
       </li>
-      <li *ngIf="!preLink" [ngClass]="{ disabled: pageIndex == 1 }">
+      <li *ngIf="!preLink" [ngClass]="{ disabled: pageIndex === 1 }">
         <a (click)="prev()" [attr.aria-label]="nextLink" class="devui-pagination-link devui-pagination-link-lite">
           <svg width="1em" height="1.5em" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg">
             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">

@@ -1,4 +1,4 @@
-import { Component, forwardRef, HostListener, Input, OnInit } from '@angular/core';
+import { Component, forwardRef, HostListener, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Observable } from 'rxjs';
 
@@ -15,7 +15,7 @@ import { Observable } from 'rxjs';
   ],
   preserveWhitespaces: false,
 })
-export class RadioComponent implements OnInit, ControlValueAccessor {
+export class RadioComponent implements ControlValueAccessor {
   private _name: string;
   private _disabled: boolean;
   private inputValue: string;
@@ -53,7 +53,6 @@ export class RadioComponent implements OnInit, ControlValueAccessor {
 
   @Input() beforeChange: (value) => boolean | Promise<boolean> | Observable<boolean>;
 
-
   constructor() {}
 
   _value: any;
@@ -74,8 +73,6 @@ export class RadioComponent implements OnInit, ControlValueAccessor {
 
   private onChange = (_: any) => null;
   private onTouched = () => null;
-
-  ngOnInit() {}
 
   registerHandleChange(fn: any) {
     this.handleChange = fn;

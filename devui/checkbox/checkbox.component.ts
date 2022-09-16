@@ -1,3 +1,4 @@
+/* eslint-disable @angular-eslint/no-output-native */
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -8,7 +9,7 @@ import {
   OnChanges,
   Output,
   SimpleChanges,
-  TemplateRef
+  TemplateRef,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DevConfigService, WithConfig } from 'ng-devui/utils';
@@ -48,10 +49,7 @@ export class CheckBoxComponent implements ControlValueAccessor, OnChanges {
   private onChange = (_: any) => null;
   private onTouch = () => null;
 
-  constructor(
-    private changeDetectorRef: ChangeDetectorRef,
-    private devConfigService: DevConfigService
-  ) {
+  constructor(private changeDetectorRef: ChangeDetectorRef, private devConfigService: DevConfigService) {
     this.id = CheckBoxComponent.ID_SEED++;
   }
 

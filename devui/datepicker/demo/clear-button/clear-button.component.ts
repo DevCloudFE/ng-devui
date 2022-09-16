@@ -1,21 +1,17 @@
-import {
-  ChangeDetectionStrategy,
-  Component, OnInit
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { SelectDateChangeReason } from 'ng-devui/datepicker';
 
 @Component({
   selector: 'd-clear-button',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './clear-button.component.html',
-  styleUrls: ['./clear-button.component.scss']
+  styleUrls: ['./clear-button.component.scss'],
 })
-export class DatepickerClearButtonComponent implements OnInit {
+export class DatepickerClearButtonComponent {
   datePicker1: any;
   selectedDate2 = null;
   changeReason = SelectDateChangeReason;
-  ngOnInit() {
-  }
+
   getValue(value) {
     console.log(value);
   }
@@ -26,10 +22,13 @@ export class DatepickerClearButtonComponent implements OnInit {
     day.setTime(Math.floor(nowTime + ms));
     const oYear = day.getFullYear();
     let oMoth = (day.getMonth() + 1).toString();
-    if (oMoth.length <= 1) { oMoth = '0' + oMoth; }
+    if (oMoth.length <= 1) {
+      oMoth = '0' + oMoth;
+    }
     let oDay = day.getDate().toString();
-    if (oDay.length <= 1) { oDay = '0' + oDay; }
+    if (oDay.length <= 1) {
+      oDay = '0' + oDay;
+    }
     return oYear + str + oMoth + str + oDay;
   }
-
 }

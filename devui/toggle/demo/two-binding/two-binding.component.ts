@@ -1,19 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { DialogService } from 'ng-devui/modal';
 
 @Component({
   selector: 'd-two-binding',
-  templateUrl: './two-binding.component.html'
+  templateUrl: './two-binding.component.html',
 })
-export class TwoBindingComponent implements OnInit {
+export class TwoBindingComponent {
   enable = true;
 
-  constructor(private dialogService: DialogService) { }
+  constructor(private dialogService: DialogService) {}
 
-  ngOnInit() {
-  }
-
-  beforeChange: (value: any) =>  Promise<boolean> = (currentValue) => {
+  beforeChange: (value: any) => Promise<boolean> = (currentValue) => {
     console.log('currentValue: ' + currentValue);
     return new Promise((resolve) => {
       const results = this.dialogService.open({
@@ -31,7 +28,7 @@ export class TwoBindingComponent implements OnInit {
             handler: ($event: Event) => {
               results.modalInstance.hide();
               resolve(true);
-            }
+            },
           },
           {
             id: 'btn-cancel',
@@ -40,9 +37,9 @@ export class TwoBindingComponent implements OnInit {
             handler: ($event: Event) => {
               results.modalInstance.hide();
               resolve(false);
-            }
+            },
           },
-        ]
+        ],
       });
     });
   };
@@ -50,5 +47,4 @@ export class TwoBindingComponent implements OnInit {
   onChange2(state) {
     console.log(state);
   }
-
 }

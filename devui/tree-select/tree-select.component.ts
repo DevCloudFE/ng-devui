@@ -7,14 +7,12 @@ import {
   EventEmitter,
   forwardRef,
   Input,
-  OnChanges,
   OnDestroy,
   OnInit,
   Output,
   Renderer2,
-  SimpleChanges,
   TemplateRef,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
@@ -39,7 +37,7 @@ import DefaultIcons from './tree-default-icons';
   ],
   preserveWhitespaces: false,
 })
-export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterViewInit, OnDestroy, OnChanges {
+export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterViewInit, OnDestroy {
   @Input() checkableRelation: 'upward' | 'downward' | 'both' | 'none' = 'both';
   @Input() set allowClear(allowClear) {
     // 废弃
@@ -168,8 +166,6 @@ export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterV
       this.registerSearchListener();
     }
   }
-
-  ngOnChanges(changes: SimpleChanges): void {}
 
   ngOnDestroy(): void {
     if (this.i18nSubscription) {

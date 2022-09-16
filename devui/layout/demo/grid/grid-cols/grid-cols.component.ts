@@ -1,14 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'd-grid-cols',
   templateUrl: './grid-cols.component.html',
 })
-export class GridColsComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+export class GridColsComponent {
+  constructor() {}
 }

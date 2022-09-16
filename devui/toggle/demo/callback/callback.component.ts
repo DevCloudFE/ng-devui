@@ -1,20 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'd-callback',
-  templateUrl: './callback.component.html'
+  templateUrl: './callback.component.html',
 })
-export class CallbackComponent implements OnInit {
+export class CallbackComponent {
   count = 0;
 
-  constructor() { }
-
-  ngOnInit() {
-  }
+  constructor() {}
 
   onChange(state) {
     console.log(state);
     this.count++;
   }
-
 }

@@ -1,15 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'd-manual',
-  templateUrl: './manual.component.html'
+  templateUrl: './manual.component.html',
 })
-export class ManualComponent implements OnInit {
+export class ManualComponent {
   name;
   nameErrMsg = 'The value must contain at least four characters!';
-  constructor() { }
-
-  ngOnInit() {
-  }
-
 }

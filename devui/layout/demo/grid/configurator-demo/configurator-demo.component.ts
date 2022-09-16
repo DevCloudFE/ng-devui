@@ -1,14 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'd-configurator-demo',
   templateUrl: './configurator-demo.component.html',
 })
-export class ConfiguratorDemoComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+export class ConfiguratorDemoComponent {
+  constructor() {}
 }

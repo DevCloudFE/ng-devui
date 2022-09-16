@@ -55,6 +55,7 @@ export class ToggleComponent implements ControlValueAccessor {
     return this._disabled;
   }
 
+  // eslint-disable-next-line @angular-eslint/no-output-native
   @Output() change = new EventEmitter<boolean>();
 
   private onTouchedCallback = () => {};

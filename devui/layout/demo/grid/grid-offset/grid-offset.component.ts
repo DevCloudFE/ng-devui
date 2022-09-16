@@ -1,14 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'd-grid-offset',
   templateUrl: './grid-offset.component.html',
 })
-export class GridOffsetComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+export class GridOffsetComponent {
+  constructor() {}
 }

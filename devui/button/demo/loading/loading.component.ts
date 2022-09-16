@@ -1,15 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'd-button-loading',
   templateUrl: './loading.component.html',
 })
-export class LoadingComponent implements OnInit {
+export class LoadingComponent {
   showLoading = false;
-  constructor() { }
-
-  ngOnInit() {
-  }
+  constructor() {}
 
   toggleLoading() {
     this.showLoading = true;
@@ -17,5 +14,4 @@ export class LoadingComponent implements OnInit {
       this.showLoading = false;
     }, 1000);
   }
-
 }

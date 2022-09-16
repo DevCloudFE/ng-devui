@@ -1,5 +1,14 @@
 import {
-  AfterContentInit, Component, ContentChildren, EventEmitter, Input, OnChanges, OnDestroy, OnInit, QueryList, SimpleChanges
+  AfterContentInit,
+  Component,
+  ContentChildren,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  QueryList,
+  SimpleChanges,
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { TableCheckOptions, TableCheckStatusArg } from '../../data-table.model';
@@ -9,9 +18,9 @@ import { TableThComponent } from './th/th.component';
 @Component({
   /* eslint-disable-next-line @angular-eslint/component-selector*/
   selector: '[dTableHead]',
-  templateUrl: './thead.component.html'
+  templateUrl: './thead.component.html',
 })
-export class TableTheadComponent implements OnInit, AfterContentInit, OnDestroy, OnChanges {
+export class TableTheadComponent implements AfterContentInit, OnDestroy, OnChanges {
   @Input() checkable: boolean;
   @Input() checkDisabled: boolean;
   @Input() checkOptions: TableCheckOptions[];
@@ -25,9 +34,7 @@ export class TableTheadComponent implements OnInit, AfterContentInit, OnDestroy,
   headerCheckStatusEvent = new EventEmitter<boolean>();
   headerChildrenTableToggleEvent = new EventEmitter<boolean>();
 
-  constructor() { }
-
-  ngOnInit() {}
+  constructor() {}
 
   ngAfterContentInit() {
     if (this.headerRowList) {
@@ -67,7 +74,7 @@ export class TableTheadComponent implements OnInit, AfterContentInit, OnDestroy,
   }
 
   setNestedThToggle() {
-    this.nestedTh = this.thList.find(th => {
+    this.nestedTh = this.thList.find((th) => {
       return th.nestedColumn;
     });
 

@@ -9,9 +9,8 @@ import {
   Injector,
   Input,
   OnDestroy,
-  OnInit,
   TemplateRef,
-  ViewContainerRef
+  ViewContainerRef,
 } from '@angular/core';
 import { OverlayContainerRef } from 'ng-devui/overlay-container';
 import { of } from 'rxjs';
@@ -22,7 +21,7 @@ import { ReadTipOptions, ReadTipRule } from './read-tip.types';
   selector: '[dReadTip]',
   exportAs: 'dReadTip',
 })
-export class ReadTipDirective implements OnInit, OnDestroy {
+export class ReadTipDirective implements OnDestroy {
   readTipComponentRef: ComponentRef<ReadTipComponent>;
 
   _prevTarget;
@@ -113,8 +112,6 @@ export class ReadTipDirective implements OnInit, OnDestroy {
   ) {
     this.document = this.doc;
   }
-
-  ngOnInit() {}
 
   ngOnDestroy() {
     this.destroy();

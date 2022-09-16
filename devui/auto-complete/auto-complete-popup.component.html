@@ -48,8 +48,8 @@
           class="devui-dropdown-item"
           [title]="formatter(item)"
           [ngClass]="{
-            selected: $index == activeIndex,
-            'devui-dropdown-bg': $index == hoverIndex,
+            selected: $index === activeIndex,
+            'devui-dropdown-bg': $index === hoverIndex,
             disabled: disabledKey && item[disabledKey]
           }"
           (click)="onSelect($event, item)"

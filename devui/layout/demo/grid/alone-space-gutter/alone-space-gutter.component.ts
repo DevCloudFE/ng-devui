@@ -1,14 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'd-alone-space-gutter',
   templateUrl: './alone-space-gutter.component.html',
 })
-export class AloneSpaceGutterComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+export class AloneSpaceGutterComponent {
+  constructor() {}
 }

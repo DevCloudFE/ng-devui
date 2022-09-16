@@ -1,17 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'd-icon-left',
-  templateUrl: './icon-left.component.html'
+  templateUrl: './icon-left.component.html',
 })
-export class IconLeftComponent implements OnInit {
-  constructor() { }
-
-  ngOnInit() {
-  }
+export class IconLeftComponent {
+  constructor() {}
 
   onSearch(term) {
     console.log(term);
   }
-
 }

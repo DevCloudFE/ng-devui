@@ -1,17 +1,12 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnInit
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { originSource, SourceType } from '../mock-data';
 
 @Component({
   selector: 'd-datatable-demo-maxheight',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './data-table-demo-maxheight.component.html'
+  templateUrl: './data-table-demo-maxheight.component.html',
 })
-export class DatatableDemoMaxheightComponent implements OnInit {
-
+export class DatatableDemoMaxheightComponent {
   dataTableOptions = {
     columns: [
       {
@@ -37,12 +32,9 @@ export class DatatableDemoMaxheightComponent implements OnInit {
         header: 'Date of birth',
         fieldType: 'date',
         sortable: true,
-      }
-    ]
+      },
+    ],
   };
 
   maxHeightDataSource: Array<SourceType> = JSON.parse(JSON.stringify(originSource.slice()));
-
-  ngOnInit() {
-  }
 }

@@ -460,6 +460,7 @@ const dControlErrorStatusHost = {
   exportAs: 'dValidateRules',
 })
 export class DFormGroupRuleDirective extends DAbstractControlRuleDirective implements OnInit, OnChanges, OnDestroy {
+  // eslint-disable-next-line @angular-eslint/no-input-rename
   @Input('dValidateRules') rules: DValidateRules;
   @Output() dRulesStatusChange: EventEmitter<any> = new EventEmitter<any>();
 
@@ -505,9 +506,11 @@ export class DFormGroupRuleDirective extends DAbstractControlRuleDirective imple
   exportAs: 'dValidateRules',
 })
 export class DFormControlRuleDirective extends DAbstractControlRuleDirective implements OnInit, OnChanges, OnDestroy {
+  // eslint-disable-next-line @angular-eslint/no-input-rename
   @Input('dValidateRules') rules: DValidateRules;
   @Output() dRulesStatusChange: EventEmitter<any> = new EventEmitter<any>();
 
+  // eslint-disable-next-line @angular-eslint/no-input-rename
   @Input('dValidatePopConfig') popConfig: DPopConfig;
 
   popoverComponentRef: ComponentRef<PopoverComponent>;

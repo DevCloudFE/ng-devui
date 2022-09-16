@@ -17,8 +17,6 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "postinstall": "patch-package && ngcc --tsconfig tsconfig.json",
-    "lint:devui": "eslint --ext .js,.ts \"{devui,src}/**/*.{ts,js}\"",
-    "lint:devui:fix": "eslint --ext .js,.ts --fix \"{devui,src}/**/*.{ts,js}\"",
     "prettier": "prettier --config ./.prettierrc --write \"{devui,src}/**/*.html\"",
     "stylelint": "stylelint \"{devui,src}/**/*.{scss,css}\"  --fix",
     "build:devui": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build devui-lib --configuration production",
@@ -57,8 +55,11 @@
   "devDependencies": {
     "@angular-builders/custom-webpack": "^14.0.0",
     "@angular-devkit/build-angular": "^14.1.0",
-    "@angular-eslint/builder": "^14.0.0",
-    "@angular-eslint/eslint-plugin": "^14.0.0",
+    "@angular-eslint/builder": "14.0.4",
+    "@angular-eslint/eslint-plugin": "14.0.4",
+    "@angular-eslint/eslint-plugin-template": "14.0.4",
+    "@angular-eslint/schematics": "14.0.4",
+    "@angular-eslint/template-parser": "14.0.4",
     "@angular/cli": "^14.1.0",
     "@angular/compiler-cli": "^14.1.0",
     "@angular/language-service": "^14.1.0",
@@ -70,13 +71,13 @@
     "@types/lodash-es": "^4.17.5",
     "@types/marked": "^4.0.2",
     "@types/node": "^12.11.1",
-    "@typescript-eslint/eslint-plugin": "^4.29.2",
-    "@typescript-eslint/parser": "^4.30.0",
+    "@typescript-eslint/eslint-plugin": "5.36.2",
+    "@typescript-eslint/parser": "5.36.2",
     "clean-css-cli": "^4.3.0",
-    "css-vars-ponyfill": "^2.3.2",
     "codelyzer": "^6.0.0",
     "codesandbox": "^2.2.3",
-    "eslint": "^7.32.0",
+    "css-vars-ponyfill": "^2.3.2",
+    "eslint": "^8.23.0",
     "highlight.js": "^10.2.0",
     "html-loader": "^1.3.0",
     "husky": "^4.3.0",
@@ -109,7 +110,6 @@
   },
   "lint-staged": {
     "{devui,src}/**/*.{ts,js}": [
-      "eslint --ext .js,.ts --fix",
       "git add"
     ],
     "{devui,src}/**/*.html": [

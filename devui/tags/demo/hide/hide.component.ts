@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'd-hide',
-  templateUrl: './hide.component.html'
+  templateUrl: './hide.component.html',
 })
-export class HideComponent implements OnInit {
+export class HideComponent {
   tagList3: any = [
     { id: 911, name: 'default Color', labelStyle: '' },
     { id: 918, name: 'label color1', labelStyle: 'blue-w98' },
@@ -14,9 +14,5 @@ export class HideComponent implements OnInit {
     { id: 777, name: 'custom label6', labelStyle: 'purple-w98' },
   ];
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+  constructor() {}
 }

@@ -1,14 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'd-badge-status',
-  templateUrl: './status.component.html'
+  templateUrl: './status.component.html',
 })
-export class StatusComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+export class StatusComponent {
+  constructor() {}
 }

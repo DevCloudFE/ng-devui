@@ -2,7 +2,7 @@
   <ul [class.devui-radio-horizontal]="direction === 'row'">
     <ng-container *ngIf="radios.length === 0">
       <li *ngFor="let value of values" class="devui-radio-list-item">
-        <label class="devui-radio" [class.active]="value == _value" [class.disabled]="disabled">
+        <label class="devui-radio" [class.active]="value === _value" [class.disabled]="disabled">
           <input
             type="radio"
             class="devui-radio-input"
@@ -10,7 +10,7 @@
             [name]="name"
             [id]="name + '-' + value"
             [value]="value"
-            [checked]="value == _value"
+            [checked]="value === _value"
             (change)="handleChange($event, value)"
           />
           <span class="devui-radio-material">

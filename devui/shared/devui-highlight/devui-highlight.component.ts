@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, ViewChild, ViewEncapsulation } from '@angular/core';
 import * as HighLight from 'highlight.js/lib/core';
 
 ['xml', 'css', 'typescript'].forEach((langName) => {
@@ -8,14 +8,12 @@ import * as HighLight from 'highlight.js/lib/core';
 });
 
 @Component({
-  selector     : 'd-highlight',
+  selector: 'd-highlight',
   encapsulation: ViewEncapsulation.None,
-  template     : `
-    <pre [ngClass]="'language-'+language"><code #codeEl [innerText]="code"></code></pre>
-  `,
+  template: ` <pre [ngClass]="'language-' + language"><code #codeEl [innerText]="code"></code></pre> `,
   preserveWhitespaces: false,
 })
-export class DevUIHighlightComponent implements OnInit, AfterViewInit {
+export class DevUIHighlightComponent implements AfterViewInit {
   // response: HighlightResult;
   _code;
   @ViewChild('codeEl', { static: true }) codeElement: ElementRef;
@@ -34,9 +32,5 @@ export class DevUIHighlightComponent implements OnInit, AfterViewInit {
     HighLight.highlightBlock(this.codeElement.nativeElement);
   }
 
-  constructor() {
-  }
-
-  ngOnInit() {
-  }
+  constructor() {}
 }

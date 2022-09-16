@@ -5,19 +5,21 @@ import { DragPreviewComponent } from './drag-preview.component';
 
 @Directive({
   selector: '[dDraggable][dDragPreview]',
-  exportAs: 'dDragPreview'
+  exportAs: 'dDragPreview',
 })
-
 export class DragPreviewDirective {
+  // eslint-disable-next-line @angular-eslint/no-input-rename
   @Input('dDragPreview') dragPreviewTemplate: TemplateRef<any>;
   @Input() dragPreviewData;
   @Input() dragPreviewOptions = {
-    skipBatchPreview: false
+    skipBatchPreview: false,
   };
   public previewRef;
-  constructor(private componentFactoryResolver: ComponentFactoryResolver,
-              private overlayContainerRef: OverlayContainerRef, private dragDropService: DragDropService) {
-  }
+  constructor(
+    private componentFactoryResolver: ComponentFactoryResolver,
+    private overlayContainerRef: OverlayContainerRef,
+    private dragDropService: DragDropService
+  ) {}
 
   public createPreview() {
     const finalComponentFactoryResolver = this.componentFactoryResolver;
@@ -36,8 +38,8 @@ export class DragPreviewDirective {
       data: this.dragPreviewData,
       draggedEl: this.dragDropService.draggedEl,
       dragData: this.dragDropService.dragData,
-      batchDragData:  this.dragDropService.batchDragData && this.dragDropService.getBatchDragData(),
-      dragSyncDOMElements: this.dragDropService.dragSyncGroupDirectives && this.getDragSyncDOMElements()
+      batchDragData: this.dragDropService.batchDragData && this.dragDropService.getBatchDragData(),
+      dragSyncDOMElements: this.dragDropService.dragSyncGroupDirectives && this.getDragSyncDOMElements(),
     });
     this.previewRef.instance.updateTemplate();
   }
@@ -52,6 +54,6 @@ export class DragPreviewDirective {
     return this.previewRef && this.previewRef.instance.element;
   }
   private getDragSyncDOMElements() {
-    return this.dragDropService.dragSyncGroupDirectives.map(dir => dir.el.nativeElement);
+    return this.dragDropService.dragSyncGroupDirectives.map((dir) => dir.el.nativeElement);
   }
 }

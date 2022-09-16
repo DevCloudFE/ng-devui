@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'd-condition-radio-group',
   templateUrl: './condition-radio-group.component.html',
 })
-export class ConditionRadioGroupComponent implements OnInit {
+export class ConditionRadioGroupComponent {
   values = ['Item1', 'Item2', 'Item3'];
   choose = 'Item1';
 
@@ -12,8 +12,6 @@ export class ConditionRadioGroupComponent implements OnInit {
   chooseSeason = 'Summer';
 
   constructor() {}
-
-  ngOnInit() {}
 
   beforeChange(values) {
     return values.some((item) => item === 'Item2');

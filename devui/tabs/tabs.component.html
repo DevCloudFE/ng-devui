@@ -33,13 +33,13 @@
           class="devui-nav-tab-item"
           [id]="tab.id === undefined ? '' : tab.id"
           [class.disabled]="tab.disabled"
-          [class.active]="tab.id == activeTab"
+          [class.active]="tab.id === activeTab"
           (click)="select(tab.id)"
         >
           <a
             role="tab"
             data-toggle="tab"
-            [attr.aria-expanded]="tab.id == activeTab"
+            [attr.aria-expanded]="tab.id === activeTab"
             [style.width]="customWidth"
             [ngClass]="{ 'custom-width': customWidth }"
           >
@@ -122,7 +122,7 @@
         *ngFor="let tab of tabs; index as i"
         class="devui-dropdown-item"
         [class.disabled]="tab.disabled"
-        [class.active]="tab.id == activeTab"
+        [class.active]="tab.id === activeTab"
         (click)="tab.disabled ? $event.stopPropagation() : scroll(null, i, tab)"
       >
         <ng-template
@@ -137,7 +137,7 @@
 </div>
 <div class="devui-tab-content" *ngIf="showContent">
   <ng-container *ngFor="let tab of tabs">
-    <div class="devui-tab-pane fade in" role="tabpanel" *ngIf="tab.id == activeTab" [ngClass]="{ 'in active': tab.id == activeTab }">
+    <div class="devui-tab-pane fade in" role="tabpanel" *ngIf="tab.id === activeTab" [ngClass]="{ 'in active': tab.id === activeTab }">
       <ng-template [ngTemplateOutlet]="tab.contentTpl?.templateRef || tab.innerContent"></ng-template>
     </div>
   </ng-container>

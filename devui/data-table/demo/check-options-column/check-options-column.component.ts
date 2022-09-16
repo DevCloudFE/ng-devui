@@ -1,19 +1,21 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { DataTableComponent, TableCheckOptions, TableWidthConfig } from 'ng-devui/data-table';
 import { originSource, SourceType } from '../mock-data';
 
 @Component({
   selector: 'd-check-options-column',
   templateUrl: './check-options-column.component.html',
-  styles: [`
-  .page-nation {
-    position: absolute;
-    right: 12px;
-    margin-top: 4px;
-  }
-  `]
+  styles: [
+    `
+      .page-nation {
+        position: absolute;
+        right: 12px;
+        margin-top: 4px;
+      }
+    `,
+  ],
 })
-export class CheckOptionsColumnComponent implements OnInit {
+export class CheckOptionsColumnComponent {
   @ViewChild(DataTableComponent, { static: true }) datatable: DataTableComponent;
   basicDataSource: Array<SourceType> = JSON.parse(JSON.stringify(originSource.slice(0, 6)));
   dataTableOptions = {
@@ -21,87 +23,83 @@ export class CheckOptionsColumnComponent implements OnInit {
       {
         field: 'firstName',
         header: 'First Name',
-        fieldType: 'text'
+        fieldType: 'text',
       },
       {
         field: 'lastName',
         header: 'Last Name',
-        fieldType: 'text'
+        fieldType: 'text',
       },
       {
         field: 'gender',
         header: 'Gender',
-        fieldType: 'text'
+        fieldType: 'text',
       },
       {
         field: 'dob',
         header: 'Date of birth',
-        fieldType: 'date'
-      }
-    ]
+        fieldType: 'date',
+      },
+    ],
   };
 
   tableWidthConfig: TableWidthConfig[] = [
     {
       field: 'checkbox',
-      width: '55px'
+      width: '55px',
     },
     {
       field: '#',
-      width: '50px'
+      width: '50px',
     },
     {
       field: 'firstName',
-      width: '150px'
+      width: '150px',
     },
     {
       field: 'lastName',
-      width: '150px'
+      width: '150px',
     },
     {
       field: 'gender',
-      width: '150px'
+      width: '150px',
     },
     {
       field: 'dob',
-      width: '200px'
-    }
+      width: '200px',
+    },
   ];
 
   checkOptions: TableCheckOptions[] = [
     {
       label: '全选所有数据',
-      onChecked: this.checkTotalData.bind(this)
+      onChecked: this.checkTotalData.bind(this),
     },
     {
       label: '全选当前页数据',
-      onChecked: this.checkPageData.bind(this)
-    }
+      onChecked: this.checkPageData.bind(this),
+    },
   ];
 
   pager = {
     total: 12,
     pageIndex: 1,
-    pageSize: 6
+    pageSize: 6,
   };
 
   totalDataChecked = false;
 
   checkTotalData() {
-    this.datatable.setTableCheckStatus(
-      {
-        pageAllChecked: true
-      }
-    );
+    this.datatable.setTableCheckStatus({
+      pageAllChecked: true,
+    });
     this.totalDataChecked = true;
   }
 
   checkPageData() {
-    this.datatable.setTableCheckStatus(
-      {
-        pageAllChecked: true
-      }
-    );
+    this.datatable.setTableCheckStatus({
+      pageAllChecked: true,
+    });
     this.totalDataChecked = false;
   }
 
@@ -112,28 +110,21 @@ export class CheckOptionsColumnComponent implements OnInit {
       rowIndex: rowIndex,
       nestedIndex: nestedIndex,
       rowItem: rowItem,
-      checked: checked
+      checked: checked,
     });
-  }
-
-  ngOnInit() {
   }
 
   onPageIndexChange(pageIndex) {
     this.basicDataSource = JSON.parse(JSON.stringify(originSource.slice(pageIndex - 1, pageIndex + 5)));
     setTimeout(() => {
       if (this.totalDataChecked) {
-        this.datatable.setTableCheckStatus(
-          {
-            pageAllChecked: true
-          }
-        );
+        this.datatable.setTableCheckStatus({
+          pageAllChecked: true,
+        });
       } else {
-        this.datatable.setTableCheckStatus(
-          {
-            pageAllChecked: false
-          }
-        );
+        this.datatable.setTableCheckStatus({
+          pageAllChecked: false,
+        });
       }
     });
   }

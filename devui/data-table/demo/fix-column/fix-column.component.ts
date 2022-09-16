@@ -1,18 +1,13 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnInit,
-  ViewChild
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { DataTableComponent, TableWidthConfig } from 'ng-devui/data-table';
 import { originSource, SourceType } from '../mock-data';
 
 @Component({
   selector: 'd-fix-column',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './fix-column.component.html'
+  templateUrl: './fix-column.component.html',
 })
-export class FixColumnComponent implements OnInit {
+export class FixColumnComponent {
   @ViewChild(DataTableComponent, { static: true }) datatable: DataTableComponent;
   basicDataSource: Array<SourceType> = JSON.parse(JSON.stringify(originSource.slice(0, 6)));
   dataTableOptions = {
@@ -21,115 +16,112 @@ export class FixColumnComponent implements OnInit {
         field: 'firstName',
         header: 'First Name',
         fieldType: 'text',
-        fixedLeft: '36px'
+        fixedLeft: '36px',
       },
       {
         field: 'lastName',
         header: 'Last Name',
-        fieldType: 'text'
+        fieldType: 'text',
       },
       {
         field: 'gender',
         header: 'gender',
-        fieldType: 'text'
+        fieldType: 'text',
       },
       {
         field: 'gender',
         header: 'gender',
-        fieldType: 'text'
+        fieldType: 'text',
       },
       {
         field: 'gender',
         header: 'gender',
-        fieldType: 'text'
+        fieldType: 'text',
       },
       {
         field: 'gender',
         header: 'gender',
-        fieldType: 'text'
-      },
-      {
-        field: 'dob',
-        header: 'Date of birth',
-        fieldType: 'date'
-      },
-      {
-        field: 'dob',
-        header: 'Date of birth',
-        fieldType: 'date'
-      },
-      {
-        field: 'dob',
-        header: 'Date of birth',
-        fieldType: 'date'
-      },
-      {
-        field: 'dob',
-        header: 'Date of birth',
-        fieldType: 'date'
+        fieldType: 'text',
       },
       {
         field: 'dob',
         header: 'Date of birth',
         fieldType: 'date',
-        fixedRight: '0px'
-      }
-    ]
+      },
+      {
+        field: 'dob',
+        header: 'Date of birth',
+        fieldType: 'date',
+      },
+      {
+        field: 'dob',
+        header: 'Date of birth',
+        fieldType: 'date',
+      },
+      {
+        field: 'dob',
+        header: 'Date of birth',
+        fieldType: 'date',
+      },
+      {
+        field: 'dob',
+        header: 'Date of birth',
+        fieldType: 'date',
+        fixedRight: '0px',
+      },
+    ],
   };
 
   tableWidthConfig: TableWidthConfig[] = [
     {
       field: 'checkbox',
-      width: '36px'
+      width: '36px',
     },
     {
       field: 'firstName',
-      width: '150px'
+      width: '150px',
     },
     {
       field: 'lastName',
-      width: '150px'
+      width: '150px',
     },
     {
       field: 'gender',
-      width: '150px'
+      width: '150px',
     },
     {
       field: 'gender',
-      width: '150px'
+      width: '150px',
     },
     {
       field: 'gender',
-      width: '150px'
+      width: '150px',
     },
     {
       field: 'gender',
-      width: '150px'
+      width: '150px',
     },
     {
       field: 'dob',
-      width: '150px'
+      width: '150px',
     },
     {
       field: 'dob',
-      width: '150px'
+      width: '150px',
     },
     {
       field: 'dob',
-      width: '150px'
+      width: '150px',
     },
     {
       field: 'dob',
-      width: '150px'
+      width: '150px',
     },
     {
       field: 'dob',
-      width: '150px'
-    }
+      width: '150px',
+    },
   ];
-
-  ngOnInit() {
-  }
 
   onRowCheckChange(checked, rowIndex, nestedIndex, rowItem) {
     rowItem.$checked = checked;
@@ -138,7 +130,7 @@ export class FixColumnComponent implements OnInit {
       rowIndex: rowIndex,
       nestedIndex: nestedIndex,
       rowItem: rowItem,
-      checked: checked
+      checked: checked,
     });
   }
 }

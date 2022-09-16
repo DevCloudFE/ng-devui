@@ -1,16 +1,12 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnInit
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { originSource, SourceType } from '../mock-data';
 
 @Component({
   selector: 'd-datatable-demo-multiheader',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './data-table-demo-multiheader.component.html'
+  templateUrl: './data-table-demo-multiheader.component.html',
 })
-export class DatatableDemoMultiHeaderComponent implements OnInit {
+export class DatatableDemoMultiHeaderComponent {
   basicDataSource: Array<SourceType> = JSON.parse(JSON.stringify(originSource.slice(0, 6)));
 
   cellDBClick(e) {
@@ -29,8 +25,5 @@ export class DatatableDemoMultiHeaderComponent implements OnInit {
   rowClick(e) {
     console.log('row');
     console.log(e);
-  }
-
-  ngOnInit() {
   }
 }

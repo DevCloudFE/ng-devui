@@ -1,3 +1,4 @@
+/* eslint-disable @angular-eslint/no-input-rename */
 import { Directive, Input, OnChanges, OnDestroy, Self } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { DValidateSyncService } from '../services/d-validate-sync.service';
@@ -7,11 +8,9 @@ import { DValidateSyncService } from '../services/d-validate-sync.service';
     [dValidateSyncKey][formGroupName],[dValidateSyncKey][formArrayName],[dValidateSyncKey][ngModelGroup],
     [dValidateSyncKey][formGroup],[dValidateSyncKey]form:not([ngNoForm]),[dValidateSyncKey][ngForm]
   `,
-  exportAs: 'dValidateSync'
+  exportAs: 'dValidateSync',
 })
-
 export class DValidateSyncDirective implements OnChanges, OnDestroy {
-
   private _added = false;
 
   @Input('dValidateSyncKey') key: string;

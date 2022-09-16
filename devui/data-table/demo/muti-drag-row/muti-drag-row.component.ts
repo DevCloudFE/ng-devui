@@ -1,67 +1,64 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { TableWidthConfig } from 'ng-devui/data-table';
 import { originSource, SourceType } from '../mock-data';
 
 @Component({
   selector: 'd-muti-drag-row',
   templateUrl: './muti-drag-row.component.html',
-  styleUrls: ['./muti-drag-row.component.scss']
+  styleUrls: ['./muti-drag-row.component.scss'],
 })
-export class MutiDragRowComponent implements OnInit {
-
+export class MutiDragRowComponent {
   basicDataSource: Array<SourceType> = JSON.parse(JSON.stringify(originSource.slice(0, 6)));
   dataTableOptions = {
     columns: [
       {
         field: 'firstName',
         header: 'First Name',
-        fieldType: 'text'
+        fieldType: 'text',
       },
       {
         field: 'lastName',
         header: 'Last Name',
-        fieldType: 'text'
+        fieldType: 'text',
       },
       {
         field: 'gender',
         header: 'Gender',
-        fieldType: 'text'
+        fieldType: 'text',
       },
       {
         field: 'dob',
         header: 'Date of birth',
-        fieldType: 'date'
-      }
-    ]
+        fieldType: 'date',
+      },
+    ],
   };
 
   tableWidthConfig: TableWidthConfig[] = [
     {
       field: 'drag',
-      width: '4%'
+      width: '4%',
     },
     {
       field: 'firstName',
-      width: '24%'
+      width: '24%',
     },
     {
       field: 'lastName',
-      width: '24%'
+      width: '24%',
     },
     {
       field: 'gender',
-      width: '24%'
+      width: '24%',
     },
     {
       field: 'dob',
-      width: '24%'
-    }
+      width: '24%',
+    },
   ];
 
   list = [];
-  constructor(private cdr: ChangeDetectorRef) { }
-  ngOnInit() {
-  }
+  constructor(private cdr: ChangeDetectorRef) {}
 
   batchSelect(item) {
     item.isSelected = !(item.isSelected || false);
@@ -81,16 +78,18 @@ export class MutiDragRowComponent implements OnInit {
 
   batchDrop(e) {
     let fromIndexLessThanDropIndexCount = 0;
-    e.batchDragData.map((dragData) => {
-      const index = this.basicDataSource.indexOf(dragData);
-      if (index > -1 && index < e.dropIndex) {
-        fromIndexLessThanDropIndexCount++;
-      }
-      dragData.isSelected = false;
-      return dragData;
-    }).forEach((dragData) => {
-      this.removeItem(dragData, this.basicDataSource);
-    });
+    e.batchDragData
+      .map((dragData) => {
+        const index = this.basicDataSource.indexOf(dragData);
+        if (index > -1 && index < e.dropIndex) {
+          fromIndexLessThanDropIndexCount++;
+        }
+        dragData.isSelected = false;
+        return dragData;
+      })
+      .forEach((dragData) => {
+        this.removeItem(dragData, this.basicDataSource);
+      });
     this.basicDataSource.splice(e.dropIndex - fromIndexLessThanDropIndexCount, 0, ...e.batchDragData);
     return;
   }
@@ -112,5 +111,4 @@ export class MutiDragRowComponent implements OnInit {
       this.basicDataSource.push(e.dragData);
     }
   }
-
 }

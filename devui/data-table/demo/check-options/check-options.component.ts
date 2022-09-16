@@ -1,19 +1,21 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { DataTableComponent, TableCheckOptions, TableWidthConfig } from 'ng-devui/data-table';
 import { originSource, SourceType } from '../mock-data';
 
 @Component({
   selector: 'd-check-options',
   templateUrl: './check-options.component.html',
-  styles: [`
-  .page-nation {
-    position: absolute;
-    right: 12px;
-    margin-top: 4px;
-  }
-  `]
+  styles: [
+    `
+      .page-nation {
+        position: absolute;
+        right: 12px;
+        margin-top: 4px;
+      }
+    `,
+  ],
 })
-export class CheckOptionsComponent implements OnInit {
+export class CheckOptionsComponent {
   @ViewChild(DataTableComponent, { static: true }) datatable: DataTableComponent;
   basicDataSource: Array<SourceType> = JSON.parse(JSON.stringify(originSource.slice(0, 6)));
   dataTableOptions = {
@@ -21,100 +23,94 @@ export class CheckOptionsComponent implements OnInit {
       {
         field: 'firstName',
         header: 'First Name',
-        fieldType: 'text'
+        fieldType: 'text',
       },
       {
         field: 'lastName',
         header: 'Last Name',
-        fieldType: 'text'
+        fieldType: 'text',
       },
       {
         field: 'gender',
         header: 'Gender',
-        fieldType: 'text'
+        fieldType: 'text',
       },
       {
         field: 'dob',
         header: 'Date of birth',
-        fieldType: 'date'
-      }
-    ]
+        fieldType: 'date',
+      },
+    ],
   };
 
   tableWidthConfig: TableWidthConfig[] = [
     {
       field: 'checkbox',
-      width: '60px'
+      width: '60px',
     },
     {
       field: '#',
-      width: '10%'
+      width: '10%',
     },
     {
       field: 'firstName',
-      width: '30%'
+      width: '30%',
     },
     {
       field: 'lastName',
-      width: '30%'
+      width: '30%',
     },
     {
       field: 'gender',
-      width: '30%'
+      width: '30%',
     },
     {
       field: 'dob',
-      width: '30%'
-    }
+      width: '30%',
+    },
   ];
 
   checkOptions: TableCheckOptions[] = [
     {
       label: '全选所有数据',
-      onChecked: this.checkTotalData.bind(this)
+      onChecked: this.checkTotalData.bind(this),
     },
     {
       label: '取消所有数据全选',
-      onChecked: this.uncheckTotalData.bind(this)
+      onChecked: this.uncheckTotalData.bind(this),
     },
     {
       label: '全选当前页数据',
-      onChecked: this.checkPageData.bind(this)
-    }
+      onChecked: this.checkPageData.bind(this),
+    },
   ];
 
   pager = {
     total: 12,
     pageIndex: 1,
-    pageSize: 6
+    pageSize: 6,
   };
 
   totalDataChecked = false;
 
   checkTotalData() {
-    this.datatable.setTableCheckStatus(
-      {
-        pageAllChecked: true
-      }
-    );
+    this.datatable.setTableCheckStatus({
+      pageAllChecked: true,
+    });
     this.totalDataChecked = true;
   }
 
   uncheckTotalData() {
-    this.datatable.setTableCheckStatus(
-      {
-        pageAllChecked: false
-      }
-    );
+    this.datatable.setTableCheckStatus({
+      pageAllChecked: false,
+    });
     this.totalDataChecked = false;
   }
 
   checkPageData() {
-    this.datatable.setTableCheckStatus(
-      {
-        pageAllChecked: true
-      }
-    );
+    this.datatable.setTableCheckStatus({
+      pageAllChecked: true,
+    });
     this.totalDataChecked = false;
   }
 
@@ -125,28 +121,21 @@ export class CheckOptionsComponent implements OnInit {
       rowIndex: rowIndex,
       nestedIndex: nestedIndex,
       rowItem: rowItem,
-      checked: checked
+      checked: checked,
     });
-  }
-
-  ngOnInit() {
   }
 
   onPageIndexChange(pageIndex) {
     this.basicDataSource = JSON.parse(JSON.stringify(originSource.slice(pageIndex - 1, pageIndex + 5)));
     setTimeout(() => {
       if (this.totalDataChecked) {
-        this.datatable.setTableCheckStatus(
-          {
-            pageAllChecked: true
-          }
-        );
+        this.datatable.setTableCheckStatus({
+          pageAllChecked: true,
+        });
       } else {
-        this.datatable.setTableCheckStatus(
-          {
-            pageAllChecked: false
-          }
-        );
+        this.datatable.setTableCheckStatus({
+          pageAllChecked: false,
+        });
       }
     });
   }

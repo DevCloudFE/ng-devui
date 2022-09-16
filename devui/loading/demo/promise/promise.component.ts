@@ -1,15 +1,12 @@
-import {
-  Component,
-  OnInit
-} from '@angular/core';
-import {LoadingType} from 'ng-devui/loading';
+import { Component } from '@angular/core';
+import { LoadingType } from 'ng-devui/loading';
 import { timer } from 'rxjs';
 
 @Component({
   selector: 'd-promise',
-  templateUrl: './promise.component.html'
+  templateUrl: './promise.component.html',
 })
-export class PromiseComponent implements OnInit {
+export class PromiseComponent {
   loading3: LoadingType;
   showLoading = false;
   tableNames: string[][] = [[]];
@@ -17,14 +14,7 @@ export class PromiseComponent implements OnInit {
     this.loading3 = undefined;
   }
 
-  ngOnInit() {
-  }
-
   fetchMultiplePromise() {
-    this.loading3 = [
-      timer(3500).toPromise(),
-      timer(3000).toPromise(),
-    ];
+    this.loading3 = [timer(3500).toPromise(), timer(3000).toPromise()];
   }
-
 }

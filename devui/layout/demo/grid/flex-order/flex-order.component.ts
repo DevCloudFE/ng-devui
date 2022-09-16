@@ -1,14 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'd-flex-order',
   templateUrl: './flex-order.component.html',
 })
-export class FlexOrderComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+export class FlexOrderComponent {
+  constructor() {}
 }

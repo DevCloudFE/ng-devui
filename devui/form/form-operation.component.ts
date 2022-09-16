@@ -8,9 +8,8 @@ import {
   HostBinding,
   Input,
   OnDestroy,
-  OnInit,
   Optional,
-  Renderer2
+  Renderer2,
 } from '@angular/core';
 import { fromEvent, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -37,12 +36,10 @@ import { FormDirective } from './form.directive';
   changeDetection: ChangeDetectionStrategy.OnPush,
   preserveWhitespaces: false,
 })
-export class FormOperationComponent implements OnInit {
+export class FormOperationComponent {
   constructor(elementRef: ElementRef, renderer: Renderer2) {
     renderer.addClass(elementRef.nativeElement, 'devui-form-operation');
   }
-
-  ngOnInit() {}
 }
 
 @Directive({

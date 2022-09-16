@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'd-carousel-with-transition-progress',
   templateUrl: './with-transition-progress.component.html',
   styleUrls: ['../demo-common.scss'],
 })
-export class WithTransitionProgressComponent implements OnInit {
+export class WithTransitionProgressComponent {
   array = [1, 2, 3, 4];
   height = '200px';
   activeIndex = 0;
@@ -16,6 +16,4 @@ export class WithTransitionProgressComponent implements OnInit {
   }
 
   constructor() {}
-
-  ngOnInit(): void {}
 }

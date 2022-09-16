@@ -1,12 +1,12 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { GanttService } from 'ng-devui/gantt';
 
 @Component({
   selector: 'd-reset-position',
   templateUrl: './reset-position.component.html',
-  styleUrls: ['./reset-position.component.scss']
+  styleUrls: ['./reset-position.component.scss'],
 })
-export class ResetPositionComponent implements OnInit, OnChanges {
+export class ResetPositionComponent implements OnChanges {
   @Input() datatableElementRef: any;
   @Input() ganttScaleContainerOffsetLeft: number;
   @Input() startDate: Date;
@@ -16,10 +16,7 @@ export class ResetPositionComponent implements OnInit, OnChanges {
   direction: string;
   position: number;
   scrollView: HTMLElement;
-  constructor(private ganttService: GanttService) { }
-
-  ngOnInit() {
-  }
+  constructor(private ganttService: GanttService) {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['startDate'] || changes['endDate'] || changes['ganttScaleContainerOffsetLeft'] || changes['containerScrollLeft']) {

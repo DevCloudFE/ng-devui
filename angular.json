@@ -137,9 +137,9 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "fix": true,
             "lintFilePatterns": [
-              "src/**/*.ts"
+              "src/**/*.ts",
+              "src/**/*.html"
             ]
           }
         }
@@ -203,14 +203,18 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "fix": true,
             "lintFilePatterns": [
-              "devui/**/*.ts"
+              "devui/**/*.ts",
+              "devui/**/*.html"
             ]
           }
         }
       }
     }
   },
-  "defaultProject": "devui"
+  "cli": {
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
+  }
 }
