@@ -26,7 +26,8 @@
     "theme-css-compile": "node scripts/sass-handler.js ./devui/theme-collection/extend-theme.scss ./publish/theme-collection/extend-theme.css",
     "css-minify": "cleancss --format breakWith=lf --output ./publish/devui.min.css ./publish/devui.css",
     "grid-css-compile": "node scripts/sass-handler.js ./devui/style/layout/devui-layout.scss ./publish/devui-layout.css && node scripts/css-handle/handle-prefix.js && cleancss --format breakWith=lf --output ./publish/devui-layout.min.css ./publish/devui-layout.css",
-    "build:devui:ivy": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build devui-lib"
+    "build:devui:ivy": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build devui-lib",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@angular/animations": "^14.1.0",
@@ -80,7 +81,7 @@
     "eslint": "^8.23.0",
     "highlight.js": "^10.2.0",
     "html-loader": "^1.3.0",
-    "husky": "^4.3.0",
+    "husky": "^8.0.1",
     "jasmine-core": "~4.0.0",
     "jasmine-spec-reporter": "~5.0.0",
     "karma": "~6.3.17",
