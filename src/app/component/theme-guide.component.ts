@@ -34,6 +34,7 @@ export class ThemeGuideComponent implements OnInit, AfterViewInit {
       this.refreshView();
     });
   }
+
   get readMe() {
     return this._readMe;
   }
