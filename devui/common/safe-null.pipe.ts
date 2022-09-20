@@ -4,7 +4,7 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'dSafeNullPipe',
 })
 export class SafeNullPipe implements PipeTransform {
-  transform(value: unknown, replace: string = '-'): unknown {
+  transform(value: unknown, replace: string = '--'): unknown {
     if (typeof value === 'undefined' || value === null || value === '') {
       return replace;
     }
