@@ -309,7 +309,7 @@ import { HelperUtils } from 'ng-devui';
 
 # dSafeNullPipe
 
-当数据为`''，null，undefined`时，自动进行占位展示，默认为：`-`
+当数据为`''，null，undefined`时，自动进行占位展示，默认为：`--`
 
 # HelperUtils 静态方法
 

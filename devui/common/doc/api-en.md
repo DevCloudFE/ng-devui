@@ -303,7 +303,7 @@ The formatting format is slightly different from the format provided by the Angu
 
 # dSafeNullPipe
 
-Placeholder display automatically when data is `'', null, undefined`,default is: `-`
+Placeholder display automatically when data is `'', null, undefined`,default is: `--`
 
 # HelperUtils Static Methods
 

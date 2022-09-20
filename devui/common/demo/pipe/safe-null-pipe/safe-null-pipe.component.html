@@ -1,5 +1,6 @@
 <pre>
   Name:{{ name | dSafeNullPipe }}
   Age:{{ age | dSafeNullPipe }}
+  Gender:{{gender|dSafeNullPipe:'**'}}
   Address:{{ address | dSafeNullPipe: '*****' }}
 </pre>

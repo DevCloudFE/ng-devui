@@ -5,12 +5,9 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   templateUrl: './safe-null-pipe.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SafeNullPipeComponent implements OnInit {
+export class SafeNullPipeComponent {
   name = '';
-  age = void 0;
+  gender = void 0;
+  age = 18;
   address = null;
-
-  constructor() {}
-
-  ngOnInit(): void {}
 }
