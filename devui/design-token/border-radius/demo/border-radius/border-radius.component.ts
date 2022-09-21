@@ -13,7 +13,7 @@ export class BorderRadiusComponent implements OnInit, OnDestroy {
   subs: Subscription = new Subscription();
   borderRadius = [];
 
-  constructor(private translate: TranslateService) {}
+  constructor(private translate: TranslateService) { }
 
   ngOnInit() {
     if (typeof window !== undefined) {
@@ -58,9 +58,21 @@ export class BorderRadiusComponent implements OnInit, OnDestroy {
 
   setValues(values) {
     this.borderRadius = [
-      { name: '$devui-border-radius', value: devuiLightTheme.data['devui-border-radius'], description: values.borderRadius['devui-border-radius'] },
-      { name: '$devui-border-radius-feedback', value: devuiLightTheme.data['devui-border-radius-feedback'], description: values.borderRadius['devui-border-radius-feedback'] },
-      { name: '$devui-border-radius-card', value: devuiLightTheme.data['devui-border-radius-card'], description: values.borderRadius['devui-border-radius-card'] },
+      {
+        name: '$devui-border-radius',
+        value: devuiLightTheme.data['devui-border-radius'],
+        description: values.borderRadius['devui-border-radius']
+      },
+      {
+        name: '$devui-border-radius-feedback',
+        value: devuiLightTheme.data['devui-border-radius-feedback'],
+        description: values.borderRadius['devui-border-radius-feedback']
+      },
+      {
+        name: '$devui-border-radius-card',
+        value: devuiLightTheme.data['devui-border-radius-card'],
+        description: values.borderRadius['devui-border-radius-card']
+      },
     ];
 
     if (this.themeService) {
