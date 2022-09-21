@@ -24,7 +24,8 @@ export const newScopeList: Array<string> | string = [
   'mention',
   'icon',
   'navSprite',
-  'NumberTranslator'
+  'NumberTranslator',
+  'common'
 ];
 
 export const sunsetScopeList: Array<string> | string = [
