@@ -42,7 +42,7 @@ export class VirtualScrollComponent implements OnInit {
   }
 
   private expandDataSource(): void {
-    let tmp: Array<SourceType> = this.dataSource;
+    const tmp: Array<SourceType> = this.dataSource;
     for (let index = 0; index < 20; index++) {
       this.dataSource = this.dataSource.concat(tmp);
     }
