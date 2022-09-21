@@ -1,4 +1,6 @@
 module.exports = {
+  parser: '@typescript-eslint/parser',
+  plugins: ['@typescript-eslint', '@angular-eslint/eslint-plugin'],
   rules: {
     "no-useless-constructor": "off",
     "no-useless-concat":"off",
@@ -84,7 +86,7 @@ module.exports = {
     "no-shadow": "off", // 使用@typescript-eslint/no-shadow,规避使用enum类型报错
     "no-trailing-spaces": "error",
     "no-unused-labels": "error",
-    "no-use-before-define": "error",
+    "no-use-before-define": "warn",
     "no-var": "error",
     "prefer-const": "error",
     "semi": "error",
