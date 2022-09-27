@@ -22,7 +22,9 @@ import { HelperDownloadDemoComponent } from './helper-download/helper-download.c
 import { HelperJumpDemoComponent } from './helper-jump/helper-jump.component';
 import { IframPropagateDemoComponent } from './iframe-propagate/iframe-propagate.component';
 import { LazyLoadComponent } from './lazy-load/lazy-load.component';
-import { PipeDemoComponent } from './pipe/pipe.component';
+import { DatePipeDemoComponent } from './pipe/date-pipe/date-pipe.component';
+import { SafeNullPipeComponent } from './pipe/safe-null-pipe/safe-null-pipe.component';
+
 
 @NgModule({
   imports: [
@@ -55,14 +57,15 @@ import { PipeDemoComponent } from './pipe/pipe.component';
   ],
   exports: [CommonDemoComponent],
   declarations: [
-    PipeDemoComponent,
+    DatePipeDemoComponent,
     CommonDemoComponent,
     HelperBrowserComponent,
     HelperJumpDemoComponent,
     HelperDownloadDemoComponent,
     IframPropagateDemoComponent,
     LazyLoadComponent,
-    ClipboardDemoComponent
+    ClipboardDemoComponent,
+    SafeNullPipeComponent
   ],
 })
 export class CommonDemoModule {}

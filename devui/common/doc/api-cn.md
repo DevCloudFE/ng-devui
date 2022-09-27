@@ -32,6 +32,12 @@ import { HelperUtils } from 'ng-devui';
   <p>{{ date | dDatePipe: 'y/MM/dd' }}</p>
 </div>
 
+<!-- SafeNullPipe -->
+<div>
+  <p>{{ name | dSafeNullPipe }}</p>
+  <p>{{ age | dSafeNullPipe:'***' }}</p>
+</div>
+
 <!-- SimulateATag -->
 <button dSimulateATag [href]="'https://angular.io'" [target]="'_blank'"></button>
 
@@ -301,6 +307,10 @@ import { HelperUtils } from 'ng-devui';
   </tbody>
 </table>
 
+# dSafeNullPipe
+
+当数据为`''，null，undefined`时，自动进行占位展示，默认为：`--`
+
 # HelperUtils 静态方法
 
 ## getBrowserName() => void
@@ -444,15 +454,19 @@ export type PositionType = 'top' | 'right' | 'bottom' | 'left';
 ```
 
 ### TargetType
+
 ```ts
 export type TargetType = '_blank' | '_self' | '_parent' | '_top' | ;
 ```
+
 ### EncType
+
 ```ts
 export type EncType = 'application/x-www-form-urlencoded' | 'multipart/form-data' | 'text-plain'
 ```
 
 ### CopyResult
+
 ```ts
 export interface CopyResult {
   isSupported: boolean;
@@ -462,6 +476,7 @@ export interface CopyResult {
 ```
 
 ### HttpProgressEvent
+
 ```typescript
 interface HttpProgressEvent {
   type: HttpEventType.DownloadProgress | HttpEventType.UploadProgress;

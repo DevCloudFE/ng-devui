@@ -869,7 +869,13 @@
         "p2": "滚动监听使用其他元素,比如window·"
       },
       "pipeDemo": {
-        "title": "日期解析器"
+        "dDatePipe": {
+          "title": "日期解析器"
+        },
+        "dSafeNullPipe": {
+          "title": "空值占位管道",
+          "description": "当数据为 ''、null、undefined时可指定任意字符进行占位展示，默认为：'--'"
+        }
       },
       "browserDemo": {
         "title": "当前浏览器名和版本"
@@ -891,6 +897,7 @@
         "lazy-load": "懒加载指令",
         "browser-version": "当前浏览器名和版本",
         "date-pipe": "日期解析器",
+        "safe-null-pipe": "空值占位管道",
         "open-url": "新标签页打开网页",
         "download-file": "文件下载",
         "iframe-propagate": "iframe 冒泡事件",

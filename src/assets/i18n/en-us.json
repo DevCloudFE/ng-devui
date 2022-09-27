@@ -883,7 +883,14 @@
         "p2": "Scroll monitoring uses other elements, such as window."
       },
       "pipeDemo": {
-        "title": "DatePipe"
+        "dDatePipe": {
+          "title": "DatePipe"
+        },
+        "dSafeNullPipe": {
+          "title": "SafeNullPipe",
+          "description": "When the data is '', null, undefined can be specified any character placeholder display, the default is: '--'"
+
+        }
       },
       "browserDemo": {
         "title": "Current browser name and version"
@@ -905,6 +912,7 @@
         "lazy-load": "Lazyload Directive",
         "browser-version": "Current browser name and version",
         "date-pipe": "Datepipe",
+        "safe-null-pipe": "Safe null pipe",
         "open-url": "Open URL in A New Tag",
         "download-file": "Download File",
         "iframe-propagate": "iframe Event Propagate API",
