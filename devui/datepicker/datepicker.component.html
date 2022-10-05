@@ -58,7 +58,7 @@
         </td>
         <td colspan="3" class="devui-dropdown">
           <span class="devui-date-title" (click)="toggle($event, 'year')">{{ i18nText?.yearDisplay(currentYear) }}</span>
-          <span class="devui-date-title-buffer"> </span>
+          <span class="devui-date-title-buffer"></span>
           <span class="devui-date-title" (click)="toggle($event, 'month')" *ngIf="mode !== 'year'">{{
             (i18nText?.monthsOfYear)[currentMonthIndex]
           }}</span>
