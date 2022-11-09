@@ -2,6 +2,7 @@
   #dataTable
   [dataSource]="basicDataSource"
   [beforeCellEdit]="beforeCellEdit"
+  [beforeCellEditEnd]="beforeCellEditEnd"
   (cellEditEnd)="thisCellEditEnd($event)"
   [scrollable]="true"
   [tableOverflowType]="'overlay'"

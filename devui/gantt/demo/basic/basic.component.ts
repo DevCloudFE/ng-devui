@@ -50,6 +50,31 @@ export class BasicComponent implements OnInit, AfterViewInit, OnDestroy {
         this.ganttScaleWidth = this.ganttService.getDurationWidth(this.ganttStartDate, this.ganttEndDate) + 'px';
       }
     });
+    this.list.forEach(item => this.updateBarData(item));
+  }
+
+  updateBarData(item) {
+    item.overdueTime = this.getOverdueTime(item.endDate, new Date());
+    if (item.overdueTime > 0 && item.status !== 'done') {
+      item.status = 'overdue';
+    } else if(item.overdueTime <= 0 && item.status !== 'done') {
+      item.status = 'normal';
+    }
+  }
+
+  updateBarItemStatus(item) {
+    const barData = this.list.find(data => data.id === item.id);
+    if (barData) {
+      this.updateBarData(barData);
+    }
+  }
+
+  getOverdueTime(startDate: Date, endDate: Date): number {
+    if (startDate && endDate) {
+      const timeOffset = endDate.getTime() - startDate.getTime();
+      const duration = timeOffset / GanttService.DAY_DURATION;
+      return Math.floor(duration);
+    }
   }
 
   goToday() {
@@ -108,7 +133,10 @@ export class BasicComponent implements OnInit, AfterViewInit, OnDestroy {
     this.goToday();
   }
 
-  onGanttBarMoveEnd (e) {}
+  onGanttBarMoveEnd (info: GanttTaskInfo) {
+    this.updateData(info);
+    this.updateBarItemStatus(info);
+  }
 
   onMousedown(pageX) {
     this.startMove = true;
@@ -158,6 +186,7 @@ export class BasicComponent implements OnInit, AfterViewInit, OnDestroy {
 
   onGanttBarResize(info: GanttTaskInfo) {
     this.updateData(info);
+    this.updateBarItemStatus(info);
   }
 
   updateData(info: GanttTaskInfo) {

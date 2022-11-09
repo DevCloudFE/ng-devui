@@ -2,8 +2,15 @@
 $len: 170px;
 $time: 1800ms;
 
-d-button {
-  margin-right: 16px;
+section {
+  d-button {
+    margin-right: 16px;
+  }
+
+  span {
+    display: inline-block;
+    width: 80px;
+  }
 }
 
 .devui-infinity-loading {

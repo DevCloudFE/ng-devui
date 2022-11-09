@@ -81,7 +81,7 @@
       </ul>
     </div>
     <div popper-prepend class="devui-tree-select devui-search-container devui-form-group devui-has-feedback" *ngIf="searchable">
-      <d-search #searchInputModel="ngModel" #searchInput [(ngModel)]="searchString" [placeholder]="''"></d-search>
+      <d-search #searchInputModel="ngModel" #searchInput [(ngModel)]="searchString" [placeholder]="searchPlaceholder"></d-search>
     </div>
     <div
       class="devui-tree-select devui-options-container"
@@ -122,12 +122,11 @@
           </ng-template>
         </ng-template>
       </d-operable-tree>
-      <div *ngIf="!treeData || treeData.length <= 0" class="devui-no-data-tip">
-        {{ i18nCommonText?.noData }}
-      </div>
-      <div *ngIf="noRecord" class="devui-no-data-tip">
-        {{ i18nCommonText?.noRecordsFound }}
-      </div>
+      <ng-template
+        *ngIf="!treeData || treeData.length <= 0 || noRecord"
+        [ngTemplateOutlet]="customNoDataTemplate || defaultNoResult"
+        [ngTemplateOutletContext]="{ $implicit: this, isSearchResult: noRecord }"
+      ></ng-template>
     </div>
 
     <!-- 自定义区域 -->
@@ -161,3 +160,9 @@
     </svg>
   </span>
 </div>
+
+<ng-template #defaultNoResult>
+  <div class="devui-no-data-tip">
+    {{ noRecord ? i18nCommonText?.noRecordsFound : i18nCommonText?.noData }}
+  </div>
+</ng-template>

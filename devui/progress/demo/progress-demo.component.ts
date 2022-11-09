@@ -5,22 +5,28 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'd-demo-progress',
   templateUrl: './progress-demo.component.html',
+  styleUrls: ['./progress-demo.component.scss'],
 })
 export class ProgressDemoComponent implements OnInit, OnDestroy {
   basicSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('./basic/basic.component.html?raw') },
     { title: 'TS', language: 'typescript', code: require('./basic/basic.component.ts?raw') },
-    { title: 'SCSS', language: 'css', code: require('./basic/basic.component.css?raw') },
+    { title: 'SCSS', language: 'css', code: require('./basic/basic.component.scss?raw') },
   ];
   circleSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('./circle/circle.component.html?raw') },
     { title: 'TS', language: 'typescript', code: require('./circle/circle.component.ts?raw') },
     { title: 'SCSS', language: 'css', code: require('./circle/circle.component.scss?raw') },
   ];
+  multipleSource: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'xml', code: require('./multiple/multiple.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./multiple/multiple.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./progress-demo.component.scss?raw') },
+  ];
 
   navItems = [];
   subs: Subscription = new Subscription();
-  constructor(private translate: TranslateService) {}
+  constructor(private translate: TranslateService) { }
 
   ngOnInit() {
     this.subs.add(
@@ -41,6 +47,7 @@ export class ProgressDemoComponent implements OnInit, OnDestroy {
     this.navItems = [
       { dAnchorLink: 'basic-usage', value: values['basic-usage'] },
       { dAnchorLink: 'circle-usage', value: values['circle-usage'] },
+      { dAnchorLink: 'multiple-usage', value: values['multiple-usage'] },
     ];
   }
 

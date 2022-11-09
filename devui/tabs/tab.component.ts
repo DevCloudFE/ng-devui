@@ -25,4 +25,6 @@ export class TabComponent {
   @ContentChild(TabContentDirective) contentTpl: TabContentDirective;
   @ContentChild(TabTitleDirective) titleTpl: TabTitleDirective;
   @ViewChild('innerContent', { static: true }) innerContent: TemplateRef<any>;
+  // 是否显示关闭按钮，由父层tabs控制
+  closeable: boolean;
 }

@@ -19,7 +19,12 @@
 <ng-template #popTpl>
   <div
     class="devui-dropdown-menu"
-    [ngClass]="{ 'devui-dropdown-menu-cdk': appendToBody }"
+    [ngClass]="{
+      'devui-dropdown-menu-cdk': appendToBody,
+      'devui-custom-right': customViewTemplate && customViewDirection === 'right',
+      'devui-custom-left': customViewTemplate && customViewDirection === 'left',
+      'devui-custom-top': customViewTemplate && customViewDirection === 'top'
+    }"
     [style.display]="isOpen && (source?.length || noResultItemTemplate) && !disabled ? 'inline-block' : 'none'"
     [style.top]="overview === 'multiline' ? (position?.top < labelMinHeight ? '50%' : '100%') : '100%'"
     [style.left]="overview === 'multiline' ? position?.left + 'px' : '0'"
@@ -32,7 +37,7 @@
     [backdrop]="true"
   >
     <ul
-      class="devui-list-unstyled devui-scrollbar scroll-height"
+      class="devui-list-unstyled devui-scrollbar scroll-height devui-dropdown-menu-wrap"
       [style.maxHeight]="maxHeight + 'px'"
       dLazyLoad
       [enableLazyLoad]="enableLazyLoad"
@@ -53,6 +58,7 @@
             disabled: disabledKey && item[disabledKey]
           }"
           (click)="onSelect($event, item)"
+          (mouseover)="onMouseOver($event, item)"
         >
           <ng-template
             [ngTemplateOutlet]="itemTemplate || defaultItemTemplate"
@@ -74,6 +80,11 @@
         <ng-template [ngTemplateOutlet]="searchingTemplate" [ngTemplateOutletContext]="{ term: term }"> </ng-template>
       </div>
     </ul>
+    <ng-container *ngIf="customViewTemplate">
+      <div class="devui-select-custom-area">
+        <ng-template [ngTemplateOutlet]="customViewTemplate" [ngTemplateOutletContext]="{ $implicit: this }"></ng-template>
+      </div>
+    </ng-container>
   </div>
 </ng-template>
 

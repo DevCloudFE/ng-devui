@@ -21,6 +21,7 @@ import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { SearchComponent } from 'ng-devui/search';
 import { ICheckboxInput, ITreeItem, OperableTreeComponent, TreeNode } from 'ng-devui/tree';
 import { addClassToOrigin, DevConfigService, removeClassFromOrigin, WithConfig } from 'ng-devui/utils';
+import { trim } from 'lodash-es';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import DefaultIcons from './tree-default-icons';
@@ -100,6 +101,7 @@ export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterV
   ) {}
   @Input() @WithConfig() showAnimation = true;
   @Input() placeholder = '';
+  @Input() searchPlaceholder = '';
   @Input() disabled = false;
   @Input() expandTree = false;
   @Input() multiple = false;
@@ -117,11 +119,13 @@ export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterV
   @Input() searchable = false;
   @Input() appendTo = 'body';
   @Input() allowUnselect = true;
+  @Input() enableLabelization = true;
   @Input() iconTemplatePosition: string;
   @Input() iconTemplateInput: TemplateRef<any>;
-  @Input() enableLabelization = true;
   @Input() customItemTemplate: TemplateRef<any>;
+  @Input() customNoDataTemplate: TemplateRef<any>;
   @Input() customViewTemplate: TemplateRef<any>;
+  @Input() customSearchFn: (treeData: TreeNode[], keyword: string) => boolean | TreeNode[];
   @Input() customViewDirection: 'bottom' | 'right' | 'left' = 'bottom';
   @ViewChild('selectHost', { static: true }) selectHost: ElementRef;
   @ViewChild('optionsContainer', { static: true }) optionsContainer: ElementRef;
@@ -419,7 +423,7 @@ export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterV
   }
 
   search(searchString) {
-    const searchRes = this.tree.treeFactory.searchTree(searchString, true);
+    const searchRes = this.customSearchFn ? this.customSearchFnHandle(searchString) : this.tree.treeFactory.searchTree(searchString, true);
     if (typeof searchRes === 'boolean') {
       this.noRecord = searchRes;
     } else if (Array.isArray(searchRes)) {
@@ -427,6 +431,12 @@ export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterV
     }
     this.tree.treeFactory.getFlattenNodes();
     this.popper.update();
+  }
+
+  customSearchFnHandle(searchString) {
+    const keyword = trim(searchString).toLowerCase();
+    this.tree.treeFactory.resetSearchResults();
+    return this.customSearchFn(this.tree.treeFactory.treeRoot, keyword);
   }
 
   private registerSearchListener() {

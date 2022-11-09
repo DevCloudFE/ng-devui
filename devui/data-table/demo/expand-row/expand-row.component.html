@@ -20,8 +20,9 @@
       <tr dTableRow *ngIf="rowIndex === 0">
         <td dTableCell [attr.colspan]="tableWidthConfig.length">
           <div *ngIf="!headerNewForm" (click)="newRow()" class="cursor-pointer">
-            <span class="tips-icon icon-add"></span>
-            <span>Create new data</span>
+            <d-icon [icon]="'icon-add'" dIconHover>
+              <span iconSuffix>Create new data</span>
+            </d-icon>
           </div>
           <div *ngIf="headerNewForm" class="edit-padding-fix">
             <div class="input-block">
@@ -37,9 +38,9 @@
       </tr>
       <tr dTableRow>
         <td dTableCell class="cursor-pointer">
-          <div *ngIf="rowItem.$expandConfig" (click)="toggleExpand(rowItem)">
-            <span class="icon-chevron-up" *ngIf="rowItem.$expandConfig?.expand"></span>
-            <span class="icon-chevron-down" *ngIf="!rowItem.$expandConfig?.expand"></span>
+          <div style="display: flex; align-items: center" *ngIf="rowItem.$expandConfig" (click)="toggleExpand(rowItem)">
+            <d-icon [icon]="'icon-chevron-down'" dIconHover *ngIf="rowItem.$expandConfig?.expand"> </d-icon>
+            <d-icon [icon]="'icon-chevron-right'" dIconHover *ngIf="!rowItem.$expandConfig?.expand"> </d-icon>
           </div>
         </td>
         <td dTableCell>{{ rowIndex + 1 }}</td>

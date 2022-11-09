@@ -28,20 +28,20 @@ export function HttpLoaderFactory(http: HttpClient) {
     HttpClientModule,
     DevuiCommonsModule,
     RouterModule.forRoot([
-      {
+    {
         path: '',
         redirectTo: 'components/zh-cn',
         pathMatch: 'full'
-      },
-      {
+    },
+    {
         path: 'components/:lang',
         loadChildren: () => import('./component/app-content.module').then(m => m.AppContentModule)
-      },
-      {
+    },
+    {
         path: '**',
         redirectTo: 'components/zh-cn'
-      }
-    ], { relativeLinkResolution: 'legacy' }),
+    }
+], { relativeLinkResolution: 'legacy' }),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

@@ -67,7 +67,7 @@
       <ng-template
         [ngTemplateOutlet]="dropDownItemTemplate || defaultDropdownItemTemplate"
         [ngTemplateOutletContext]="{
-          source: option,
+          option: option,
           label: option.label
         }"
       >

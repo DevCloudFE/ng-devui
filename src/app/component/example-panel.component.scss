@@ -63,28 +63,11 @@ div.markdown {
 }
 
 .devui-title-container {
-  background: rgba(248, 248, 250, 0.9);
+  background: $devui-glass-morphism-bg;
   position: absolute;
   height: calc(100% + 50px);
   width: calc(100vw - 20px);
   top: 0;
   margin: 0 -15vw 0 -25vw;
   backdrop-filter: blur(6px);
-}
-
-::ng-deep {
-  body[ui-theme='devui-dark-theme'],
-  body[ui-theme='galaxy-theme'] {
-    .devui-title-container {
-      background: rgba(26, 26, 28, 0.9);
-    }
-  }
-}
-
-::ng-deep {
-  body[ui-theme='deep-theme'] {
-    .devui-title-container {
-      background: rgba(242, 242, 243, 0.9);
-    }
-  }
 }

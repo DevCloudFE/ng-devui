@@ -21,6 +21,7 @@ export class CascaderService implements OnDestroy {
 
   isLazyLoad = false;
   lazyloadCache = {};
+  checkboxRelation = { upward: true, downward: true };
 
   loadChildrenFn: (value: CascaderItem) => Promise<CascaderItem[]> | Observable<CascaderItem[]>;
 
@@ -274,16 +275,22 @@ export class CascaderService implements OnDestroy {
   }
 
   getMultipleValue(value, option: CascaderItem[]): void {
+    const isNoRelation = !this.checkboxRelation.downward || !this.checkboxRelation.upward;
     option.forEach(item => {
       const _value = [...value];
+      _value.push(item.value);
       if (item.children && item.children.length && (item.checked || item.halfChecked)) {
-        _value.push(item.value);
         this.getMultipleValue(_value, item.children);
+        if (isNoRelation) {
+          this.multipleValue.push(_value);
+        }
       } else if (item.checked) {
-        _value.push(item.value);
         this.multipleValue.push(_value);
+      } else if (isNoRelation && item.children?.length) {
+        this.getMultipleValue(_value, item.children);
       }
     });
+
   }
 
   closeAllDropdown(): void {

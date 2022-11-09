@@ -1,0 +1,26 @@
+<div class="user-guide-wapper" dDropDown appendToBody>
+  <div
+    dDropDownToggle
+    class="user-guide"
+    [style.bottom]="userGuideEntrancePosition.bottom"
+    [style.left]="userGuideEntrancePosition.left"
+    [class.user-guide-hidden]="showUserGuideEntrance === false"
+  >
+    <div class="user-guide-text">{{ i18nCommonText.guide }}</div>
+  </div>
+  <div dDropDownMenu class="user-guide-window">
+    <ul>
+      <li *ngFor="let step of steps; let i = index" role="menuitem" class="devui-dropdown-item" (click)="start(i)">
+        <div class="step">
+          <div class="left-item">
+            <div class="title">{{ step.title }}</div>
+            <div class="desc">{{ step.desc }}</div>
+          </div>
+          <div class="right-item">
+            <i *ngIf="step.isFinished" class="icon icon-right-o" style="color: rgb(61, 204, 166); font-size: 16px"></i>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

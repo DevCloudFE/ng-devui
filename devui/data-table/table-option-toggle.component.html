@@ -1,0 +1,171 @@
+<div *ngIf="toggleMode === 'dropdown'" class="btn-group" dDropDown (toggleEvent)="onToggle($event)" appendToBody>
+  <div dDropDownToggle class="devui-option-toggle">
+    <ng-template [ngTemplateOutlet]="host"></ng-template>
+  </div>
+  <div dDropDownMenu class="devui-option-panel" (click)="$event.stopPropagation()">
+    <p class="devui-option-title">{{ i18nText?.tableSetting }}</p>
+    <div class="devui-option-panel-style-setting" *ngIf="showStyleSetting">
+      <div class="devui-option-panel-style-header">
+        <p class="devui-option-subtitle">{{ i18nText?.styles }}</p>
+        <div class="devui-option-size-wrapper" *ngIf="styleSetting.size !== undefined">
+          <div class="devui-option-size-card" (click)="sizeStatus = 'xs'" [ngClass]="{ 'devui-option-item-active': sizeStatus === 'xs' }">
+            <svg
+              width="32px"
+              height="32px"
+              viewBox="0 0 32 32"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+            >
+              <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <path
+                  d="M3.2,11.6 C3.6418278,11.6 4,11.9581722 4,12.4 L4,13.2 C4,13.6418278 3.6418278,14 3.2,14 L2.4,14 C1.9581722,14 1.6,13.6418278 1.6,13.2 L1.6,12.4 C1.6,11.9581722 1.9581722,11.6 2.4,11.6 L3.2,11.6 Z M13.6,11.6 C14.0418278,11.6 14.4,11.9581722 14.4,12.4 L14.4,13.2 C14.4,13.6418278 14.0418278,14 13.6,14 L5.6,14 C5.1581722,14 4.8,13.6418278 4.8,13.2 L4.8,12.4 C4.8,11.9581722 5.1581722,11.6 5.6,11.6 L13.6,11.6 Z M3.2,8.4 C3.6418278,8.4 4,8.7581722 4,9.2 L4,10 C4,10.4418278 3.6418278,10.8 3.2,10.8 L2.4,10.8 C1.9581722,10.8 1.6,10.4418278 1.6,10 L1.6,9.2 C1.6,8.7581722 1.9581722,8.4 2.4,8.4 L3.2,8.4 Z M13.6,8.4 C14.0418278,8.4 14.4,8.7581722 14.4,9.2 L14.4,10 C14.4,10.4418278 14.0418278,10.8 13.6,10.8 L5.6,10.8 C5.1581722,10.8 4.8,10.4418278 4.8,10 L4.8,9.2 C4.8,8.7581722 5.1581722,8.4 5.6,8.4 L13.6,8.4 Z M3.2,5.2 C3.6418278,5.2 4,5.5581722 4,6 L4,6.8 C4,7.2418278 3.6418278,7.6 3.2,7.6 L2.4,7.6 C1.9581722,7.6 1.6,7.2418278 1.6,6.8 L1.6,6 C1.6,5.5581722 1.9581722,5.2 2.4,5.2 L3.2,5.2 Z M13.6,5.2 C14.0418278,5.2 14.4,5.5581722 14.4,6 L14.4,6.8 C14.4,7.2418278 14.0418278,7.6 13.6,7.6 L5.6,7.6 C5.1581722,7.6 4.8,7.2418278 4.8,6.8 L4.8,6 C4.8,5.5581722 5.1581722,5.2 5.6,5.2 L13.6,5.2 Z M3.2,2 C3.6418278,2 4,2.3581722 4,2.8 L4,3.6 C4,4.0418278 3.6418278,4.4 3.2,4.4 L2.4,4.4 C1.9581722,4.4 1.6,4.0418278 1.6,3.6 L1.6,2.8 C1.6,2.3581722 1.9581722,2 2.4,2 L3.2,2 Z M13.6,2 C14.0418278,2 14.4,2.3581722 14.4,2.8 L14.4,3.6 C14.4,4.0418278 14.0418278,4.4 13.6,4.4 L5.6,4.4 C5.1581722,4.4 4.8,4.0418278 4.8,3.6 L4.8,2.8 C4.8,2.3581722 5.1581722,2 5.6,2 L13.6,2 Z"
+                  fill="#BECCFA"
+                ></path>
+              </g>
+            </svg>
+            <d-checkbox
+              [isShowTitle]="false"
+              [ngModel]="sizeStatus === 'xs'"
+              (ngModelChange)="onCardActiveChanges($event, 'xs')"
+              (click)="$event.stopPropagation()"
+            ></d-checkbox>
+            <p>{{ i18nText?.compact }}</p>
+          </div>
+          <div class="devui-option-size-card" (click)="sizeStatus = 'sm'" [ngClass]="{ 'devui-option-item-active': sizeStatus === 'sm' }">
+            <svg
+              width="32px"
+              height="32px"
+              viewBox="0 0 32 32"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+            >
+              <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <path
+                  d="M3.2,10.8 C3.6418278,10.8 4,11.1581722 4,11.6 L4,12.4 C4,12.8418278 3.6418278,13.2 3.2,13.2 L2.4,13.2 C1.9581722,13.2 1.6,12.8418278 1.6,12.4 L1.6,11.6 C1.6,11.1581722 1.9581722,10.8 2.4,10.8 L3.2,10.8 Z M13.6,10.8 C14.0418278,10.8 14.4,11.1581722 14.4,11.6 L14.4,12.4 C14.4,12.8418278 14.0418278,13.2 13.6,13.2 L5.6,13.2 C5.1581722,13.2 4.8,12.8418278 4.8,12.4 L4.8,11.6 C4.8,11.1581722 5.1581722,10.8 5.6,10.8 L13.6,10.8 Z M3.2,6.8 C3.6418278,6.8 4,7.1581722 4,7.6 L4,8.4 C4,8.8418278 3.6418278,9.2 3.2,9.2 L2.4,9.2 C1.9581722,9.2 1.6,8.8418278 1.6,8.4 L1.6,7.6 C1.6,7.1581722 1.9581722,6.8 2.4,6.8 L3.2,6.8 Z M13.6,6.8 C14.0418278,6.8 14.4,7.1581722 14.4,7.6 L14.4,8.4 C14.4,8.8418278 14.0418278,9.2 13.6,9.2 L5.6,9.2 C5.1581722,9.2 4.8,8.8418278 4.8,8.4 L4.8,7.6 C4.8,7.1581722 5.1581722,6.8 5.6,6.8 L13.6,6.8 Z M3.2,2.8 C3.6418278,2.8 4,3.1581722 4,3.6 L4,4.4 C4,4.8418278 3.6418278,5.2 3.2,5.2 L2.4,5.2 C1.9581722,5.2 1.6,4.8418278 1.6,4.4 L1.6,3.6 C1.6,3.1581722 1.9581722,2.8 2.4,2.8 L3.2,2.8 Z M13.6,2.8 C14.0418278,2.8 14.4,3.1581722 14.4,3.6 L14.4,4.4 C14.4,4.8418278 14.0418278,5.2 13.6,5.2 L5.6,5.2 C5.1581722,5.2 4.8,4.8418278 4.8,4.4 L4.8,3.6 C4.8,3.1581722 5.1581722,2.8 5.6,2.8 L13.6,2.8 Z"
+                  fill="#BECCFA"
+                ></path>
+              </g>
+            </svg>
+            <d-checkbox
+              [isShowTitle]="false"
+              [ngModel]="sizeStatus === 'sm'"
+              (ngModelChange)="onCardActiveChanges($event, 'sm')"
+              (click)="$event.stopPropagation()"
+            ></d-checkbox>
+            <p>{{ i18nText?.standard }}</p>
+          </div>
+          <div class="devui-option-size-card" (click)="sizeStatus = 'md'" [ngClass]="{ 'devui-option-item-active': sizeStatus === 'md' }">
+            <svg
+              width="32px"
+              height="32px"
+              viewBox="0 0 32 32"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+            >
+              <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <path
+                  d="M3.2,9.6 C3.6418278,9.6 4,9.9581722 4,10.4 L4,11.2 C4,11.6418278 3.6418278,12 3.2,12 L2.4,12 C1.9581722,12 1.6,11.6418278 1.6,11.2 L1.6,10.4 C1.6,9.9581722 1.9581722,9.6 2.4,9.6 L3.2,9.6 Z M13.6,9.6 C14.0418278,9.6 14.4,9.9581722 14.4,10.4 L14.4,11.2 C14.4,11.6418278 14.0418278,12 13.6,12 L5.6,12 C5.1581722,12 4.8,11.6418278 4.8,11.2 L4.8,10.4 C4.8,9.9581722 5.1581722,9.6 5.6,9.6 L13.6,9.6 Z M3.2,4 C3.6418278,4 4,4.3581722 4,4.8 L4,5.6 C4,6.0418278 3.6418278,6.4 3.2,6.4 L2.4,6.4 C1.9581722,6.4 1.6,6.0418278 1.6,5.6 L1.6,4.8 C1.6,4.3581722 1.9581722,4 2.4,4 L3.2,4 Z M13.6,4 C14.0418278,4 14.4,4.3581722 14.4,4.8 L14.4,5.6 C14.4,6.0418278 14.0418278,6.4 13.6,6.4 L5.6,6.4 C5.1581722,6.4 4.8,6.0418278 4.8,5.6 L4.8,4.8 C4.8,4.3581722 5.1581722,4 5.6,4 L13.6,4 Z"
+                  id="形状结合"
+                  fill="#BECCFA"
+                ></path>
+              </g>
+            </svg>
+            <d-checkbox
+              [isShowTitle]="false"
+              [ngModel]="sizeStatus === 'md'"
+              (ngModelChange)="onCardActiveChanges($event, 'md')"
+              (click)="$event.stopPropagation()"
+            ></d-checkbox>
+            <p>{{ i18nText?.loose }}</p>
+          </div>
+        </div>
+        <div class="devui-option-form" *ngIf="styleSetting.borderType !== undefined">
+          <span>{{ i18nText?.divideLine }}</span>
+          <d-toggle [checked]="styleSetting.borderType === ''" (change)="styleSettingChanges($event, 'border')"></d-toggle>
+        </div>
+
+        <div class="devui-option-form" *ngIf="styleSetting.striped !== undefined">
+          <span>{{ i18nText?.striped }}</span>
+          <d-toggle [checked]="styleSetting.striped" (change)="styleSettingChanges($event, 'striped')"></d-toggle>
+        </div>
+
+        <div class="devui-option-form" *ngIf="styleSetting.shadowType !== undefined">
+          <span>{{ i18nText?.tableShadow }}</span>
+          <d-toggle [checked]="styleSetting.shadowType === 'normal'" (change)="styleSettingChanges($event, 'shadow')"></d-toggle>
+        </div>
+      </div>
+    </div>
+    <div class="devui-option-panel-col-drag">
+      <p class="devui-option-subtitle">{{ i18nText?.colCanSelect }}</p>
+
+      <div *ngIf="colSort" dDroppable [switchWhileCrossEdge]="true" [dropScope]="'drag-place'" (dropEvent)="onDrop($event)" dSortable>
+        <div
+          *ngFor="let data of _columnsData"
+          class="devui-option-drag-item"
+          dDraggable
+          [dragScope]="'drag-place'"
+          [dragHandleClass]="'devui-option-drag-handle'"
+          [dragData]="data"
+          (click)="toggleActive(data)"
+        >
+          <ng-template
+            [ngTemplateOutlet]="colItem"
+            [ngTemplateOutletContext]="{
+              colsData: data,
+              canDrag: true
+            }"
+          ></ng-template>
+        </div>
+      </div>
+      <div *ngIf="!colSort">
+        <div *ngFor="let data of _columnsData" class="devui-option-drag-item" (click)="toggleActive(data)">
+          <ng-template
+            [ngTemplateOutlet]="colItem"
+            [ngTemplateOutletContext]="{
+              colsData: data,
+              canDrag: false
+            }"
+          ></ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="toggleMode === 'modal'" (click)="openModal()">
+  <ng-template [ngTemplateOutlet]="host"></ng-template>
+</div>
+
+<ng-template #host>
+  <ng-content></ng-content>
+</ng-template>
+<ng-template #colItem let-colsData="colsData" let-canDrag="canDrag">
+  <svg
+    *ngIf="canDrag"
+    class="devui-option-drag-handle"
+    width="16px"
+    height="16px"
+    viewBox="0 0 16 16"
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+  >
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+      <g fill="#5170FF" fill-rule="nonzero">
+        <path
+          d="M5.5,0 C6.32842712,-1.3527075e-16 7,0.596953667 7,1.33333333 C7,2.069713 6.32842712,2.66666667 5.5,2.66666667 C4.67157288,2.66666667 4,2.069713 4,1.33333333 C4,0.596953667 4.67157288,1.3527075e-16 5.5,0 Z M5.5,4.44444444 C6.32842712,4.44444444 7,5.04139811 7,5.77777778 C7,6.51415744 6.32842712,7.11111111 5.5,7.11111111 C4.67157288,7.11111111 4,6.51415744 4,5.77777778 C4,5.04139811 4.67157288,4.44444444 5.5,4.44444444 Z M5.5,8.88888889 C6.32842712,8.88888889 7,9.48584256 7,10.2222222 C7,10.9586019 6.32842712,11.5555556 5.5,11.5555556 C4.67157288,11.5555556 4,10.9586019 4,10.2222222 C4,9.48584256 4.67157288,8.88888889 5.5,8.88888889 Z M5.5,13.3333333 C6.32842712,13.3333333 7,13.930287 7,14.6666667 C7,15.4030463 6.32842712,16 5.5,16 C4.67157288,16 4,15.4030463 4,14.6666667 C4,13.930287 4.67157288,13.3333333 5.5,13.3333333 Z M10.5,0 C11.3284271,-1.3527075e-16 12,0.596953667 12,1.33333333 C12,2.069713 11.3284271,2.66666667 10.5,2.66666667 C9.67157288,2.66666667 9,2.069713 9,1.33333333 C9,0.596953667 9.67157288,1.3527075e-16 10.5,0 Z M10.5,4.44444444 C11.3284271,4.44444444 12,5.04139811 12,5.77777778 C12,6.51415744 11.3284271,7.11111111 10.5,7.11111111 C9.67157288,7.11111111 9,6.51415744 9,5.77777778 C9,5.04139811 9.67157288,4.44444444 10.5,4.44444444 Z M10.5,8.88888889 C11.3284271,8.88888889 12,9.48584256 12,10.2222222 C12,10.9586019 11.3284271,11.5555556 10.5,11.5555556 C9.67157288,11.5555556 9,10.9586019 9,10.2222222 C9,9.48584256 9.67157288,8.88888889 10.5,8.88888889 Z M10.5,13.3333333 C11.3284271,13.3333333 12,13.930287 12,14.6666667 C12,15.4030463 11.3284271,16 10.5,16 C9.67157288,16 9,15.4030463 9,14.6666667 C9,13.930287 9.67157288,13.3333333 10.5,13.3333333 Z"
+        ></path>
+      </g>
+    </g>
+  </svg>
+  <span class="devui-option-drag-label">{{ colsData.header }}</span>
+  <d-checkbox
+    [ngClass]="{ 'devui-option-item-active': colsData.checked }"
+    [isShowTitle]="false"
+    [(ngModel)]="colsData.checked"
+    (click)="$event.stopPropagation(); emitData()"
+  ></d-checkbox>
+</ng-template>

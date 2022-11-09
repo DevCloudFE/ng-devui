@@ -9,7 +9,7 @@
     <ng-template let-rowItem="rowItem" let-rowIndex="rowIndex">
       <tr dTableRow>
         <td dTableCell>{{ rowIndex + 1 }}</td>
-        <td class="devui-operation-cell" dTableCell *ngFor="let colOption of dataTableOptions.columns">
+        <td dTableCell *ngFor="let colOption of dataTableOptions.columns">
           {{ colOption.fieldType === 'date' ? (rowItem[colOption.field] | i18nDate: 'short':false) : rowItem[colOption.field] }}
         </td>
       </tr>

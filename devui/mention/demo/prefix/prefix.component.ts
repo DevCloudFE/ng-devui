@@ -13,7 +13,7 @@ export class PrefixComponent {
     'C#',
     'C',
     'C++',
-    'Python',
+    'CPython',
     'Java',
     'JavaScript',
     'Go',

@@ -173,7 +173,7 @@ Searches for nodes that match the target field in the tree. hideUnmatched contro
 
 The `checkAllNodes(checked:boolean)`: determines the check status of all nodes based on the checked value.
 
-`mergeTreeNodes(targetNode:TreeNode)`: indicates the node to be combined. The default value is the entire tree. This operation combines the parent node with only one child node to optimize the tree display.
+`mergeTreeNodes(targetNode:TreeNode)`: indicates the node to be combined. The default value is the entire tree. This operation combines the parent node with only one child node to optimize the tree display. This method changes the parent-child relationship of tree nodes and can be used only when the tree is read-only. If the node changes dynamically, this method is invoked each time after the source data is modified.
 
 `getNodeIndex(node: TreeNode)`: Obtains the position of a specified node in the parent node.
 

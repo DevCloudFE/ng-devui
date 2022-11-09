@@ -1,0 +1,52 @@
+<p style="display: flex; align-items: center">
+  <span>下拉模式，数据变更在每次操作都会触发，列数较少时推荐使用:</span>
+  <d-table-option-toggle
+    style="margin-left: 12px"
+    [styleSetting]="styleSetting"
+    [columnsData]="allColumns"
+    (colChanges)="onColsChanges($event)"
+    (styleChanges)="onStyleChanges($event)"
+  >
+    <d-icon [icon]="'icon-setting'" [operable]="true"></d-icon>
+  </d-table-option-toggle>
+</p>
+
+<p style="display: flex; align-items: center">
+  <span>弹窗编辑模式，数据变更在点击确定时触发，建议列数多余10列时使用时:</span>
+  <d-table-option-toggle
+    style="margin-left: 12px"
+    [toggleMode]="'modal'"
+    [styleSetting]="styleSetting"
+    [columnsData]="allColumns"
+    [modalWidth]="'800px'"
+    (colChanges)="onColsChanges($event)"
+    (styleChanges)="onStyleChanges($event)"
+  >
+    <d-button bsStyle="primary" [bordered]="true" [autofocus]="true">弹窗配置</d-button>
+  </d-table-option-toggle>
+</p>
+<d-data-table
+  [dataSource]="basicDataSource"
+  [scrollable]="true"
+  [tableWidthConfig]="tableWidthConfig"
+  [tableOverflowType]="'overlay'"
+  [size]="styleSetting.size"
+  [borderType]="styleSetting.borderType"
+  [striped]="styleSetting.striped"
+  [shadowType]="styleSetting.shadowType"
+>
+  <thead dTableHead>
+    <tr dTableRow>
+      <th dHeadCell *ngFor="let colOption of dataTableOptions.columns">{{ colOption.header }}</th>
+    </tr>
+  </thead>
+  <tbody dTableBody>
+    <ng-template let-rowItem="rowItem" let-rowIndex="rowIndex">
+      <tr dTableRow>
+        <td class="devui-operation-cell" dTableCell *ngFor="let colOption of dataTableOptions.columns">
+          {{ colOption.fieldType === 'date' ? (rowItem[colOption.field] | i18nDate: 'short':false) : rowItem[colOption.field] }}
+        </td>
+      </tr>
+    </ng-template>
+  </tbody>
+</d-data-table>

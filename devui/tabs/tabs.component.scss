@@ -24,10 +24,15 @@
     float: left;
     transition: text-shadow $devui-animation-duration-slow $devui-animation-ease-in-out;
 
+    &.closeable {
+      white-space: nowrap;
+    }
+
     & > a {
       display: inline-block;
       height: 100%;
       padding: 0;
+      width: max-content;
     }
 
     &.devui-tab-add-icon {
@@ -246,6 +251,10 @@
         width: 100%;
         background: $devui-brand;
       }
+
+      &.devui-tab-add-icon {
+        margin-right: 32px;
+      }
     }
 
     &.devui-nav-stacked {
@@ -431,7 +440,7 @@
   }
 
   .dev-nav-scroll-container {
-    width: calc(100% - 124px);
+    width: calc(100% - 128px);
     height: 100%;
     position: relative;
     overflow: hidden;

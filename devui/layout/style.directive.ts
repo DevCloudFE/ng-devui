@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Input, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, Input, OnDestroy, Renderer2 } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { DBreakpoints, DResponseParameter } from './layout.types';
@@ -7,21 +7,17 @@ import { DScreenMediaQueryService } from './screen-media-query.service';
 @Directive({
   selector: `[dStyle]`,
 })
-
-export class DStyleDirective implements OnInit, OnDestroy {
+export class DStyleDirective implements OnDestroy, AfterViewInit {
   @Input() dStyle: DResponseParameter<Object>;
 
   private destroy$ = new Subject<void>();
   private styleObject = {};
 
-  constructor(
-    private elementRef: ElementRef,
-    private renderer: Renderer2,
-    private screenQueryService: DScreenMediaQueryService
-  ) { }
+  constructor(private elementRef: ElementRef, private renderer: Renderer2, private screenQueryService: DScreenMediaQueryService) {}
 
-  ngOnInit(): void {
-    this.screenQueryService.getPoint()
+  ngAfterViewInit(): void {
+    this.screenQueryService
+      .getPoint()
       .pipe(takeUntil(this.destroy$))
       .subscribe(({ currentPoint }) => {
         this.updateStyle(currentPoint);
@@ -48,11 +44,11 @@ export class DStyleDirective implements OnInit, OnDestroy {
       }
     }
 
-    Object.keys(this.styleObject).forEach(key => {
+    Object.keys(this.styleObject).forEach((key) => {
       this.renderer.removeStyle(this.elementRef.nativeElement, key);
     });
 
-    Object.keys(finalStyleObject).forEach(key => {
+    Object.keys(finalStyleObject).forEach((key) => {
       this.renderer.setStyle(this.elementRef.nativeElement, key, finalStyleObject[key]);
     });
 

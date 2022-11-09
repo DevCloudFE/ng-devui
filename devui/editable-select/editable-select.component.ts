@@ -13,7 +13,7 @@ import {
   Output,
   SimpleChanges,
   TemplateRef,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { AutoCompleteDirective } from 'ng-devui/auto-complete';
@@ -48,12 +48,15 @@ export class EditableSelectComponent implements ControlValueAccessor, OnInit, On
   @Input() disabledKey: string;
   @Input() allowClear = false;
   @Input() enableLazyLoad = false;
+  @Input() customViewTemplate: TemplateRef<any>;
+  @Input() customViewDirection: 'bottom' | 'right' | 'left' | 'top' = 'bottom';
   @Input() formatter = (item: any) => (item ? item.label || item.toString() : '');
   @Input() valueParser = (item) => item;
   @Input() searchFn: (term: string) => Observable<any[]>;
   @Input() @WithConfig() showAnimation = true;
   @Output() loadMore = new EventEmitter<any>();
   @Output() toggleChange = new EventEmitter<any>();
+  @Output() hoverItem: EventEmitter<any> = new EventEmitter();
   @ViewChild(AutoCompleteDirective, { static: true }) autoCompleteDirective: AutoCompleteDirective;
   @ViewChild('editableSelectBox', { static: true }) editableSelectBox: ElementRef;
 
@@ -161,5 +164,9 @@ export class EditableSelectComponent implements ControlValueAccessor, OnInit, On
 
   toggleChangeHandler(value: boolean): void {
     this.toggleChange.emit(value);
+  }
+
+  onHoverItem(event: any): void {
+    this.hoverItem.emit(event);
   }
 }

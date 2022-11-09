@@ -47,5 +47,4 @@ export class VirtualScrollComponent implements OnInit {
       this.dataSource = this.dataSource.concat(tmp);
     }
   }
-
 }

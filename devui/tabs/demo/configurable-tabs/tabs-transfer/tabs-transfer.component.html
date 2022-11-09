@@ -1,0 +1,10 @@
+<d-transfer
+  [disabled]="data.disabled"
+  [isTargetDroppable]="true"
+  (transferToTarget)="transferToTarget($event)"
+  (transferToSource)="transferToSource($event)"
+  [sourceOption]="sourceOption"
+  [targetOption]="targetOption"
+  [titles]="{ source: 'Selectable', target: 'Selected' }"
+>
+</d-transfer>

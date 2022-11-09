@@ -415,10 +415,6 @@ export class RangeDatepickerProComponent implements OnInit, OnDestroy, AfterView
       return;
     }
 
-    if (value.find(t => !this.pickerSrv.dateInRange(t))) {
-      return;
-    }
-
     this.dateValue = value.map(d => {
       return d ? this.datepickerConvert.format(d, this.curFormat) : '';
     });

@@ -18,7 +18,7 @@ export class AsyncComponent {
   }
 
   fetchSuggestions(value: string, callback: (suggestions: string[]) => void): void {
-    const users = ['C#', 'C', 'C++', 'Python', 'Java', 'JavaScript', 'Go', 'Python', 'Ruby', 'F#'];
+    const users = ['C#', 'C', 'C++', 'CPython', 'Java', 'JavaScript', 'Go', 'Python', 'Ruby', 'F#'];
     setTimeout(() => {
       return callback(users.filter((item) => item.indexOf(value) !== -1));
     }, 1000);

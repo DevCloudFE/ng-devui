@@ -30,9 +30,12 @@
     [formatter]="formatter"
     [valueParser]="valueParser"
     [showAnimation]="showAnimation"
+    [customViewTemplate]="customViewTemplate"
+    [customViewDirection]="customViewDirection"
     (toggleChange)="toggleChangeHandler($event)"
     (loadMore)="loadMoreEvent($event)"
     (selectValue)="selectValue()"
+    (hoverItem)="onHoverItem($event)"
   />
   <span class="devui-form-control-feedback">
     <span class="devui-select-clear-icon" (click)="valueClear($event)">

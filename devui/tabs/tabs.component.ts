@@ -12,6 +12,7 @@ import {
   TemplateRef,
   ViewChild
 } from '@angular/core';
+import { sum } from 'lodash-es';
 import { Observable } from 'rxjs';
 import { TabComponent } from './tab.component';
 
@@ -52,7 +53,7 @@ export class TabsComponent implements OnChanges, AfterViewInit {
    * class设置无需内层，外层即可
    */
   @Input() cssClass: string;
-  @Input() beforeChange: (value) => boolean | Promise<boolean> | Observable<boolean>;
+  @Input() beforeChange: (currentValue, previousValue) => boolean | Promise<boolean> | Observable<boolean>;
   @ContentChildren(TabComponent) tabs: QueryList<TabComponent>;
   @Output() activeTabChange = new EventEmitter<number | string>();
   @Output() addOrDeleteTabChange = new EventEmitter<ITabOperation>();
@@ -62,6 +63,7 @@ export class TabsComponent implements OnChanges, AfterViewInit {
   offsetWidth: number;
   scrollModeToggle = false;
   tabsWidth = [];
+  ARROW_DROPDOWN_WIDTH = 128; // 两边箭头和下拉菜单按钮的宽度 48 + 32 + 48
 
   get isShowShadow() {
     return this.scrollModeToggle && ['tabs', 'pills', 'wrapped'].includes(this.type);
@@ -118,7 +120,7 @@ export class TabsComponent implements OnChanges, AfterViewInit {
     let changeResult = Promise.resolve(true);
 
     if (this.beforeChange) {
-      const result: any = this.beforeChange(currentTab);
+      const result: any = this.beforeChange(currentTab, this.activeTab);
       if (typeof result !== 'undefined') {
         if (result.then) {
           changeResult = result;
@@ -154,8 +156,11 @@ export class TabsComponent implements OnChanges, AfterViewInit {
   }
 
   checkCloseable(tab: TabComponent): boolean {
-    const closeable = this.closeable && (this.closeableIds.length === 0 || this.closeableIds.includes(tab.id));
-    return !tab.disabled && !tab.titleTpl && closeable;
+    if (tab.closeable === undefined) {
+      const closeable = this.closeable && (this.closeableIds.length === 0 || this.closeableIds.includes(tab.id));
+      tab.closeable = !tab.disabled && closeable;
+    }
+    return tab.closeable;
   }
 
   addOrDeleteTab(event: Event, id?: number | string): void {
@@ -170,14 +175,19 @@ export class TabsComponent implements OnChanges, AfterViewInit {
       const tabs = this.tabsEle.nativeElement.querySelectorAll('li.devui-nav-tab-item');
       this.tabsWidth = [];
       tabs.forEach((tab) => {
+        let width = tab.offsetWidth;
         const style = getComputedStyle(tab);
-        const width = parseFloat(style.marginLeft) + tab.offsetWidth + parseFloat(style.marginRight);
+        const marginLeft = parseFloat(style.marginLeft);
+        const marginRight = parseFloat(style.marginRight);
+        width += marginLeft > 0 ? marginLeft : 0;
+        width += marginRight > 0 ? marginRight : 0;
         tabsWidthSum += width;
         this.tabsWidth.push(width);
       });
       // 延时赋值避免脏值检查错误
       setTimeout(() => {
-        this.scrollModeToggle = this.scrollMode === 'auto' ? tabsWidthSum > this.el.nativeElement.clientWidth : !!this.scrollMode;
+        const fixWidth = this.el.nativeElement.clientWidth - this.ARROW_DROPDOWN_WIDTH;
+        this.scrollModeToggle = this.scrollMode === 'auto' ? tabsWidthSum > fixWidth : !!this.scrollMode;
         if (this.scrollModeToggle && this.activeTab && this.tabs) {
           const data = this.tabs.toArray();
           const index = data.findIndex((item) => item.id === this.activeTab);
@@ -200,16 +210,20 @@ export class TabsComponent implements OnChanges, AfterViewInit {
         for (let i = 0; i < this.tabsWidth.length; i++) {
           width += this.tabsWidth[i];
           if (width >= distance) {
-            this.offsetIndex = direction === 'next' || i === 0 ? (containerWidth - width < viewportWidth ? tabs.length - 1 : i) : i + 1;
+            this.offsetIndex = i === 0 ? 0 : direction === 'next' ? (containerWidth - width < viewportWidth ? tabs.length - 1 : i) : i + 1;
             break;
           }
         }
         this.scrollIntoView(tabs[this.offsetIndex]);
       } else if (index >= 0 && tab) {
-        const dom = tabs[index];
-        this.offsetIndex = index;
+        const toIndexArr = this.tabsWidth.slice(0, index);
+        const width = sum(toIndexArr);
+        const fixIndex = index === 0 ? 0 : containerWidth - width < viewportWidth ? tabs.length - 1 : index;
+        const dom = tabs[fixIndex];
+        this.offsetIndex = fixIndex;
         if (isInitScrollMode) {
-          this.scrollIntoView(dom);
+          // 切换为滚动模式尚未渲染完，目标dom仍在可视区，不会产生滚动，延时待渲染完毕后执行滚动
+          setTimeout(() => this.scrollIntoView(dom));
         } else {
           this.select(tab.id, () => this.scrollIntoView(dom));
         }

@@ -1,6 +1,13 @@
 <section>
   <h3>Tabs</h3>
-  <d-tabs type="tabs" [addable]="true" [closeable]="true" [(activeTab)]="tabActiveId" (addOrDeleteTabChange)="handle($event, 'tab')">
+  <d-tabs
+    type="tabs"
+    [scrollMode]="'auto'"
+    [addable]="true"
+    [closeable]="true"
+    [(activeTab)]="tabActiveId"
+    (addOrDeleteTabChange)="handle($event, 'tab')"
+  >
     <d-tab *ngFor="let item of tabItems" [id]="item.id" [title]="item.title"></d-tab>
   </d-tabs>
   <br />
@@ -8,6 +15,7 @@
   <d-tabs
     [type]="'wrapped'"
     [addable]="true"
+    [scrollMode]="'auto'"
     [closeable]="true"
     [closeableIds]="['tab2', 'tab3']"
     [(activeTab)]="wrappedActiveId"

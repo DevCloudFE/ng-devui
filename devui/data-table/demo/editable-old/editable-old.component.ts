@@ -33,6 +33,14 @@ export class EditableOldComponent implements OnInit {
     });
   };
 
+  beforeCellEditEnd = (rowItem, column) => {
+    console.log('before edit end:', rowItem, column);
+    if (column.field === "lastName" && rowItem[column.field].length < 3) {
+      return false;
+    }
+    return true;
+  };
+
   finishEdit() {
     this.dataTable.cancelEditingStatus();
   }

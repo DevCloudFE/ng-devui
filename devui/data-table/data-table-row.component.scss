@@ -83,3 +83,12 @@ svg.svg-icon-arrow > g > polygon {
     background: $devui-list-item-hover-bg;
   }
 }
+
+.expand-icon-wrapper {
+  display: flex;
+  justify-content: left;
+
+  polygon {
+    fill: $devui-icon-fill;
+  }
+}

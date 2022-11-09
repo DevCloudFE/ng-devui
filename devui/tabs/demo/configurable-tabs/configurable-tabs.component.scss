@@ -1,0 +1,77 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
+.tabs-menu-container {
+  padding: 8px 0;
+  max-width: 200px;
+}
+
+.tabs-menu-container li {
+  padding: 0 16px;
+  font-size: $devui-font-size;
+  line-height: 36px;
+  width: 200px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+
+.tabs-menu-container li:not(.menu-tab-active):hover {
+  background: $devui-list-item-hover-bg;
+  color: $devui-list-item-hover-text;
+}
+
+.tabs-menu-container li:hover a {
+  text-decoration: none;
+}
+
+.tabs-menu-container li a {
+  color: $devui-text;
+  line-height: 36px;
+  width: 170px;
+  display: inline-block;
+}
+
+a:focus {
+  text-decoration: none;
+}
+
+.line {
+  height: 1px;
+  background: $devui-line;
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
+.more-tabs {
+  margin-top: 5px;
+  cursor: pointer;
+  position: absolute;
+  top: 18px;
+  outline: none;
+  line-height: 1;
+}
+
+.menu-tab-active {
+  background: $devui-list-item-active-bg;
+  color: $devui-list-item-active-text;
+}
+
+li {
+  list-style: none;
+}
+
+.setting-container {
+  display: flex;
+  align-items: center;
+}
+
+pre {
+  border: none;
+}
+
+.icon-chevron-down {
+  position: relative;
+  left: 4px;
+  top: 2px;
+}

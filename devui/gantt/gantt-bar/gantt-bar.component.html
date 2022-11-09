@@ -18,8 +18,8 @@
     </div>
   </div>
   <div #ganttBarMain class="devui-gantt-main" [ngClass]="{ disabled: barMoveDisabled }">
-    <div class="devui-gantt-bar-rail" #ganttBarRail></div>
-    <div class="devui-gantt-bar-track" #ganttBarTrack></div>
+    <div class="devui-gantt-bar-rail devui-gantt-bar-rail-{{ status }}" #ganttBarRail></div>
+    <div class="devui-gantt-bar-track devui-gantt-bar-track-{{ status }}" #ganttBarTrack></div>
   </div>
   <div
     class="devui-gantt-bar-progress"
@@ -44,7 +44,12 @@
       </g>
     </svg>
   </div>
-  <div class="devui-gantt-bar-title {{ customTitleClass }}" *ngIf="showTitle">{{ title }}</div>
+  <div class="devui-gantt-bar-title {{ customTitleClass }}" *ngIf="showTitle">
+    <ng-container *ngIf="titleTemplateRef">
+      <ng-template [ngTemplateOutlet]="titleTemplateRef" [ngTemplateOutletContext]="{ data: data }"></ng-template>
+    </ng-container>
+    <ng-container *ngIf="!titleTemplateRef">{{ title }}</ng-container>
+  </div>
   <ng-template
     *ngIf="tipTemplateRef"
     cdk-connected-overlay

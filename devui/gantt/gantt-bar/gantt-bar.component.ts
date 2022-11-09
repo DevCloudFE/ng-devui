@@ -15,7 +15,7 @@ import {
 } from '@angular/core';
 import { fromEvent, Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged, map, pluck, takeUntil, tap } from 'rxjs/operators';
-import { GanttTaskInfo } from '../gantt.model';
+import { GanttRailStatus, GanttTaskInfo } from '../gantt.model';
 import { GanttService } from '../gantt.service';
 
 @Component({
@@ -98,6 +98,7 @@ export class GanttBarComponent implements OnInit, OnChanges, AfterViewInit, OnDe
   @Input() endDate: Date;
   @Input() progressRate = 0;
   @Input() tipTemplateRef: TemplateRef<any>;
+  @Input() titleTemplateRef: TemplateRef<any>;
   @Input() data: any;
 
   @Input() originOffsetX = 0;
@@ -115,6 +116,8 @@ export class GanttBarComponent implements OnInit, OnChanges, AfterViewInit, OnDe
   @Input() customTitleClass = '';
 
   @Input() scrollElement: HTMLElement;
+
+  @Input() status: GanttRailStatus = 'normal';
 
   @Output() barMoveStartEvent = new EventEmitter<GanttTaskInfo>();
   @Output() barMovingEvent = new EventEmitter<GanttTaskInfo>();

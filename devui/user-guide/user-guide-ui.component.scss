@@ -1,0 +1,407 @@
+@import '../style/core/color';
+@import '../style/theme/corner';
+@import '../style/core/_font';
+@import '../style/core/z-index';
+@import '../style/core/animation';
+
+.user-guide-mask-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: calc(#{$devui-z-index-full-page-overlay} - 1);
+  inset: 0;
+  // background: #293040;
+  // opacity: 0.2;
+  background: #000000;
+  opacity: 0.28;
+  display: none;
+}
+
+.show-overlay {
+  display: block !important;
+}
+
+.user-guide-normal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: calc(#{$devui-z-index-full-page-overlay} - 1);
+  inset: 0;
+  display: none;
+}
+
+.user-guide-top-overlay {
+  top: 0;
+  left: 0;
+  position: absolute;
+  width: 100%;
+  z-index: 10000;
+  // background: #293040;
+  // opacity: 0.2;
+  background: #000000;
+  opacity: 0.28;
+  display: none;
+  transition: all 0.3s ease-out;
+}
+
+.user-guide-bottom-overlay {
+  left: 0;
+  position: absolute;
+  width: 100%;
+  z-index: $devui-z-index-full-page-overlay;
+  // background: #293040;
+  // opacity: 0.2;
+  background: #000000;
+  opacity: 0.28;
+  display: none;
+  transition: all 0.3s ease-out;
+}
+
+.user-guide-left-overlay {
+  left: 0;
+  position: absolute;
+  z-index: $devui-z-index-full-page-overlay;
+  // background: #293040;
+  // opacity: 0.2;
+  background: #000000;
+  opacity: 0.28;
+  display: none;
+  transition: all 0.3s ease-out;
+}
+
+.user-guide-right-overlay {
+  position: absolute;
+  z-index: $devui-z-index-full-page-overlay;
+  // background: #293040;
+  // opacity: 0.2;
+  background: #000000;
+  opacity: 0.28;
+  display: none;
+  transition: all 0.3s ease-out;
+}
+
+.user-guide-top-border {
+  position: absolute;
+  z-index: calc(#{$devui-z-index-full-page-overlay} + 1);
+  background-color: $devui-brand;
+  border: 1px solid $devui-base-bg;
+  transition: all 0.3s ease-out;
+  display: none;
+}
+
+.user-guide-bottom-border {
+  position: absolute;
+  z-index: calc(#{$devui-z-index-full-page-overlay} + 1);
+  background-color: $devui-brand;
+  border: 1px solid $devui-base-bg;
+  transition: all 0.3s ease-out;
+  display: none;
+}
+
+.user-guide-left-border {
+  position: absolute;
+  z-index: calc(#{$devui-z-index-full-page-overlay} + 1);
+  background-color: $devui-brand;
+  border: 1px solid $devui-base-bg;
+  transition: all 0.3s ease-out;
+  display: none;
+}
+
+.user-guide-right-border {
+  position: absolute;
+  z-index: calc(#{$devui-z-index-full-page-overlay} + 1);
+  background-color: $devui-brand;
+  border: 1px solid $devui-base-bg;
+  transition: all 0.3s ease-out;
+  display: none;
+}
+
+.user-guide-dot {
+  position: absolute;
+  z-index: calc(#{$devui-z-index-full-page-overlay} + 1);
+  width: 32px;
+  height: 32px;
+  animation: 2s ease 0s infinite normal both ops-animation;
+  display: none;
+}
+
+.user-guide-panel {
+  position: absolute;
+  z-index: 10001;
+  transition: all 0.3s ease-out;
+}
+
+.user-guide-panel-multiple {
+  min-width: 400px;
+  padding: 12px 20px;
+  background-color: $devui-connected-overlay-bg;
+  transition: all 0.3s ease-out;
+  border-radius: $devui-border-radius;
+  box-shadow: 0 4px 16px 0 rgb(0 0 0 / 28%);
+
+  &-header {
+    padding: 8px 32px 0;
+  }
+
+  &-body {
+    max-width: 320px;
+    font-size: $devui-font-size-card-title;
+
+    .finish-icon {
+      position: absolute;
+      top: 50px;
+      right: 8px;
+    }
+  }
+
+  &-footer {
+    margin-top: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    d-button {
+      margin: 4px;
+    }
+  }
+
+  &-footer-only-dot {
+    margin-top: 8px;
+    justify-content: flex-end;
+  }
+}
+
+.user-guide-panel-single {
+  background-color: $devui-connected-overlay-bg;
+  padding: 8px 12px;
+  transition: all 0.3s ease-out;
+  border-radius: $devui-border-radius;
+  box-shadow: 0 4px 16px 0 rgb(0 0 0 / 28%);
+
+  button.close {
+    margin-left: 12px;
+    font-size: $devui-font-size-icon;
+    font-weight: bold;
+    line-height: 1;
+    color: $devui-icon-fill;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    -webkit-appearance: none;
+
+    svg.svg-icon-close polygon {
+      fill: $devui-text-weak;
+    }
+  }
+}
+
+.user-guide-panel-tip {
+  background-color: $devui-brand;
+  padding: 8px 12px;
+  transition: all 0.3s ease-out;
+  border-radius: $devui-border-radius;
+  box-shadow: 0 4px 16px 0 rgb(0 0 0 / 28%);
+  color: $devui-light-text;
+
+  button.close {
+    margin-left: 12px;
+    font-size: $devui-font-size-icon;
+    font-weight: bold;
+    line-height: 1;
+    color: $devui-light-text;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    -webkit-appearance: none;
+
+    svg.svg-icon-close polygon {
+      fill: $devui-light-text;
+    }
+  }
+}
+
+.user-guide-panel-close {
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  font-size: $devui-font-size-icon;
+  font-weight: bold;
+  line-height: 1;
+  color: $devui-icon-fill;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  -webkit-appearance: none;
+
+  svg.svg-icon-close polygon {
+    fill: $devui-text-weak;
+  }
+
+  &:hover {
+    background: $devui-list-item-hover-bg;
+
+    svg.svg-icon-close polygon {
+      fill: $devui-icon-fill-active;
+    }
+  }
+}
+
+.user-guide-panel-title {
+  font-size: $devui-font-size-card-title;
+  color: $devui-text;
+}
+
+.user-guide-panel-content {
+  margin-top: 8px;
+  font-size: $devui-font-size;
+  color: $devui-aide-text;
+}
+
+.devui-carousel-dots {
+  display: flex;
+  flex-wrap: wrap;
+
+  .dot-item {
+    width: 6px;
+    height: 6px;
+    border-radius: calc(6px / 2);
+    margin-right: 8px;
+    margin-bottom: 4px;
+    background: $devui-icon-fill;
+
+    &:hover {
+      cursor: pointer;
+      background: $devui-brand;
+    }
+
+    &.active {
+      background: $devui-brand;
+      transition: all 0.5s ease;
+    }
+  }
+}
+
+.user-guide-panel-arrow {
+  width: 6px;
+  height: 6px;
+  transform: rotate(45deg);
+  display: block;
+  z-index: -1;
+  background-color: $devui-brand;
+  position: relative;
+}
+
+.devui-mask-layer {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: 'fixed';
+  z-index: calc(#{$devui-z-index-full-page-overlay} - 1);
+}
+
+.devui-carousel-wapper {
+  display: inline-block;
+}
+
+.operate-zone {
+  margin-top: 8px;
+  padding: 8px 0;
+  border: 2px dashed $devui-line;
+  text-align: center;
+  cursor: pointer;
+}
+
+.emphasize-animation {
+  animation: 1s ease 0s infinite normal both ops-animation;
+}
+
+.emphasize-top-animation {
+  animation: 1.5s $devui-animation-ease-in-smooth 0s infinite normal both breath-top-animation;
+}
+
+.emphasize-bottom-animation {
+  animation: 1.5s $devui-animation-ease-in-smooth 0s infinite normal both breath-bottom-animation;
+}
+
+.emphasize-left-animation {
+  animation: 1.5s $devui-animation-ease-in-smooth 0s infinite normal both breath-left-animation;
+}
+
+.emphasize-right-animation {
+  animation: 1.5s $devui-animation-ease-in-smooth 0s infinite normal both breath-right-animation;
+}
+
+@keyframes ops-animation {
+  0% {
+    box-shadow: 0 0 0 $devui-brand;
+  }
+
+  60% {
+    box-shadow: 0 1px 4px $devui-brand;
+  }
+
+  to {
+    box-shadow: 0 0 0 $devui-brand;
+  }
+}
+
+@keyframes breath-top-animation {
+  0% {
+    box-shadow: 0 0 0 $devui-brand;
+  }
+
+  60% {
+    box-shadow: 0 -3px 4px $devui-brand;
+  }
+
+  to {
+    box-shadow: 0 0 0 $devui-brand;
+  }
+}
+
+@keyframes breath-bottom-animation {
+  0% {
+    box-shadow: 0 0 0 $devui-brand;
+  }
+
+  60% {
+    box-shadow: 0 3px 4px $devui-brand;
+  }
+
+  to {
+    box-shadow: 0 0 0 $devui-brand;
+  }
+}
+
+@keyframes breath-left-animation {
+  0% {
+    box-shadow: 0 0 0 $devui-brand;
+  }
+
+  60% {
+    box-shadow: -3px 0 4px $devui-brand;
+  }
+
+  to {
+    box-shadow: 0 0 0 $devui-brand;
+  }
+}
+
+@keyframes breath-right-animation {
+  0% {
+    box-shadow: 0 0 0 $devui-brand;
+  }
+
+  60% {
+    box-shadow: 3px 0 4px $devui-brand;
+  }
+
+  to {
+    box-shadow: 0 0 0 $devui-brand;
+  }
+}

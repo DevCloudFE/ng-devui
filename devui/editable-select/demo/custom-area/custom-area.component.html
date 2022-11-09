@@ -1,0 +1,18 @@
+<d-editable-select
+  placeholder="Search"
+  [appendToBody]="true"
+  [appendToBodyDirections]="['leftDown', 'leftUp']"
+  [source]="languages"
+  [maxHeight]="300"
+  [allowClear]="true"
+  [(ngModel)]="selectItem"
+  [customViewTemplate]="myTemplate"
+  [customViewDirection]="'right'"
+  (hoverItem)="onHoverItem($event)"
+>
+</d-editable-select>
+<pre>{{ (selectItem | json) || 'No language select' }}</pre>
+
+<ng-template #myTemplate let-selectComponent>
+  <div class="custom-wrapper">You hoverd {{ hoverItem }}</div>
+</ng-template>

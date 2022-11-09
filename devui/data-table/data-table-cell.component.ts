@@ -289,7 +289,9 @@ export class DataTableCellComponent implements OnInit, OnChanges, OnDestroy {
         this.creatCellEditor();
         this.documentClickSubscription = this.dt.documentClickEvent.subscribe(
           event => {
-            if (event === 'cancel' || (!this.cellRef.nativeElement.contains(event.target) && !this.clickInTd)) {
+            const containTarget = !this.cellRef.nativeElement.contains(event.target) && !this.clickInTd;
+            const flag = this.dt.beforeCellEditEnd && containTarget ? this.dt.beforeCellEditEnd(this.rowItem, this.column) : true;
+            if ((event === 'cancel' || containTarget) && flag) {
               this.ngZone.run(() => {
                 this.finishCellEdit();
               });
@@ -299,7 +301,9 @@ export class DataTableCellComponent implements OnInit, OnChanges, OnDestroy {
         );
         this.cellEditorClickSubscription = this.dt.cellEditorClickEvent.subscribe(
           event => {
-            if (!this.cellRef.nativeElement.contains(event.target)) {
+            const containTarget = this.cellRef.nativeElement.contains(event.target);
+            const flag = (this.dt.beforeCellEditEnd && !containTarget) ? this.dt.beforeCellEditEnd(this.rowItem, this.column) : true;
+            if (!containTarget && flag) {
               this.finishCellEdit();
             }
           }

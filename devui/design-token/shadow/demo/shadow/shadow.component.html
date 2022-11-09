@@ -3,64 +3,33 @@
 <code>box-shadow: $devui-shadow-length-base $devui-shadow;</code>
 
 <h3 class="devui-h3-title">{{ 'components.design-shadow.shadowDemo.instance.description' | translate }}</h3>
-<d-tabs [type]="'tabs'" [(activeTab)]="activeTab">
-  <d-tab id="curShadow" title="{{ 'components.design-shadow.shadowDemo.instance.defaultTable.tab' | translate }}">
-    <d-data-table #datatable [dataSource]="shadows" [scrollable]="true">
-      <d-column
-        field="name"
-        header="{{ 'components.design-shadow.shadowDemo.instance.defaultTable.shadowName' | translate }}"
-        [width]="'150px'"
-      >
-      </d-column>
-      <d-column
-        field="themeValue"
-        header="{{ 'components.design-shadow.shadowDemo.instance.defaultTable.themeValue' | translate }}"
-        [width]="'150px'"
-      ></d-column>
-      <d-column
-        field="description"
-        header="{{ 'components.design-shadow.shadowDemo.instance.defaultTable.description' | translate }}"
-        [width]="'200px'"
-      >
-      </d-column>
-    </d-data-table>
-  </d-tab>
-  <d-tab id="oldShadow" title="{{ 'components.design-shadow.shadowDemo.instance.oldTable.tab' | translate }}">
-    <d-data-table #datatable [dataSource]="oldShadows" [scrollable]="true">
-      <d-column
-        field="name"
-        header="{{ 'components.design-shadow.shadowDemo.instance.oldTable.shadowName' | translate }}"
-        [width]="'150px'"
-      >
-      </d-column>
-      <d-column
-        field="newName"
-        header="{{ 'components.design-shadow.shadowDemo.instance.oldTable.newShadowName' | translate }}"
-        [width]="'150px'"
-      >
-      </d-column>
-      <d-column
-        field="value"
-        header="{{ 'components.design-shadow.shadowDemo.instance.oldTable.shadowValue' | translate }}"
-        [width]="'150px'"
-      ></d-column>
-      <d-column
-        field="description"
-        header="{{ 'components.design-shadow.shadowDemo.instance.oldTable.description' | translate }}"
-        [width]="'200px'"
-      >
-      </d-column>
-    </d-data-table>
-  </d-tab>
-</d-tabs>
+
+<d-data-table #datatable [dataSource]="shadows" [scrollable]="true">
+  <d-column
+    field="name"
+    header="{{ 'components.design-shadow.shadowDemo.instance.defaultTable.shadowName' | translate }}"
+    [width]="'150px'"
+  >
+  </d-column>
+  <d-column
+    field="value"
+    header="{{ 'components.design-shadow.shadowDemo.instance.defaultTable.themeValue' | translate }}"
+    [width]="'150px'"
+  >
+  </d-column>
+  <d-column
+    field="description"
+    header="{{ 'components.design-shadow.shadowDemo.instance.defaultTable.description' | translate }}"
+    [width]="'200px'"
+  >
+  </d-column>
+</d-data-table>
 
 <h3 class="devui-h3-title">{{ 'components.design-shadow.shadowDemo.instance.description2' | translate }}</h3>
 <d-data-table #datatable [dataSource]="shadowColor" [scrollable]="true">
   <thead dTableHead>
     <tr dTableRow>
       <th dHeadCell>{{ 'components.design-shadow.shadowDemo.instance.colorTable.colorVar' | translate }}</th>
-      <th dHeadCell>{{ 'components.design-shadow.shadowDemo.instance.colorTable.normalColor' | translate }}</th>
-      <th dHeadCell>{{ 'components.design-shadow.shadowDemo.instance.colorTable.darkColor' | translate }}</th>
       <th dHeadCell>{{ 'components.design-shadow.shadowDemo.instance.colorTable.themeValue' | translate }}</th>
       <th dHeadCell>{{ 'components.design-shadow.shadowDemo.instance.colorTable.description' | translate }}</th>
     </tr>
@@ -71,21 +40,9 @@
         <td dTableCell>{{ rowItem?.name }}</td>
         <td dTableCell>
           <div class="color-name">
-            {{ rowItem?.light }}
+            {{ rowItem?.value }}
           </div>
-          <div *ngIf="rowItem?.light" class="color-cube" [ngStyle]="{ 'background-color': rowItem?.light }"></div>
-        </td>
-        <td dTableCell>
-          <div class="color-name">
-            {{ rowItem?.dark }}
-          </div>
-          <div *ngIf="rowItem?.dark" class="color-cube" [ngStyle]="{ 'background-color': rowItem?.dark }"></div>
-        </td>
-        <td dTableCell>
-          <div class="color-name">
-            {{ rowItem?.themeValue }}
-          </div>
-          <div *ngIf="rowItem?.themeValue" class="color-cube" [ngStyle]="{ 'background-color': rowItem?.themeValue }"></div>
+          <div *ngIf="rowItem?.value" class="color-cube" [ngStyle]="{ 'background-color': rowItem?.value }"></div>
         </td>
         <td dTableCell>{{ rowItem?.description }}</td>
       </tr>

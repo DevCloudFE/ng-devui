@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { devuiDarkTheme, devuiLightTheme, ThemeService } from 'ng-devui/theme';
+import { ThemeService } from 'ng-devui/theme';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
-import { cloneDeep } from 'lodash-es';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -13,209 +12,62 @@ export class ShadowComponent implements OnInit, OnDestroy {
   themeService: ThemeService;
   subs: Subscription = new Subscription();
   shadows = [];
-  oldShadows = [];
   shadowColor = [];
+  shadowKey = ['devui-shadow-length'];
+  shadowColorKey = ['shadow'];
+  i18nText: any;
 
-  activeTab: string | number = 'curShadow';
-
-  constructor(private translate: TranslateService) {}
+  constructor(private translate: TranslateService) { this.setI18n(); }
 
   ngOnInit() {
     if (typeof window !== undefined) {
       this.themeService = window['devuiThemeService'];
+      this.changeValueInTable();
       if (this.themeService.eventBus) {
         this.themeService.eventBus.add('themeChanged', this.changeValueInTable);
       }
-      this.setI18n();
+
     }
   }
 
   changeValueInTable = () => {
-    this.changeValue('shadows');
-    this.changeValue('shadowColor');
-  };
-
-  changeValue(type) {
     const theme = this.themeService.currentTheme;
-    this[type].map((obj) => {
-      const nameArr = obj.name.split('$');
-      if (nameArr.length === 2) {
-        const match = theme.data[nameArr[1]];
-        if (match) {
-          obj.themeValue = match;
-        } else {
-          obj.themeValue = obj.value;
+    for (const key in theme.data) {
+      if (Object.prototype.hasOwnProperty.call(theme.data, key)) {
+        if (this.shadowKey.some(item => key.includes(item))) {
+          const obj = {
+            name: '$' + key,
+            value: theme.data[key],
+            description: this.i18nText ? this.i18nText['shadows'][key] : ''
+          };
+          this.shadows.push(obj);
+        }
+        if (this.shadowColorKey.some(item => key.includes(item)) && theme.data[key].startsWith('rgba')) {
+          const obj = {
+            name: '$' + key,
+            value: theme.data[key],
+            description: this.i18nText ? this.i18nText['shadowColor'][key] : ''
+          };
+          this.shadowColor.push(obj);
         }
       }
-    });
-    this[type] = cloneDeep(this[type]);
-  }
+
+    }
+  };
 
   setI18n() {
     this.subs.add(
       this.translate.get('components.design-shadow.shadowDemo.instance').subscribe((res) => {
-        this.setValues(res);
+        this.i18nText = res;
       })
     );
 
     this.subs.add(
       this.translate.onLangChange.subscribe((event: TranslationChangeEvent) => {
         const values = this.translate.instant('components.design-shadow.shadowDemo.instance');
-        this.setValues(values);
+        this.i18nText = values;
       })
     );
-  }
-
-  setValues(values) {
-    this.shadows = [
-      {
-        name: '$devui-shadow-length-base',
-        value: devuiLightTheme.data['devui-shadow-length-base'],
-        description: values.shadows['devui-shadow-length-base']
-      },
-      {
-        name: '$devui-shadow-length-slide-left',
-        value: devuiLightTheme.data['devui-shadow-length-slide-left'],
-        description: values.shadows['devui-shadow-length-slide-left']
-      },
-      {
-        name: '$devui-shadow-length-slide-right',
-        value: devuiLightTheme.data['devui-shadow-length-slide-right'],
-        description: values.shadows['devui-shadow-length-slide-right']
-      },
-      {
-        name: '$devui-shadow-length-connected-overlay',
-        value: devuiLightTheme.data['devui-shadow-length-connected-overlay'],
-        description: values.shadows['devui-shadow-length-connected-overlay'],
-      },
-      {
-        name: '$devui-shadow-length-hover',
-        value: devuiLightTheme.data['devui-shadow-length-hover'],
-        description: values.shadows['devui-shadow-length-hover']
-      },
-      {
-        name: '$devui-shadow-length-feedback-overlay',
-        value: devuiLightTheme.data['devui-shadow-length-feedback-overlay'],
-        description: values.shadows['devui-shadow-length-feedback-overlay'],
-      },
-      {
-        name: '$devui-shadow-length-fullscreen-overlay',
-        value: devuiLightTheme.data['devui-shadow-length-fullscreen-overlay'],
-        description: values.shadows['devui-shadow-length-fullscreen-overlay'],
-      },
-    ];
-
-    this.oldShadows = [
-      {
-        name: '$hwc-shadow-1',
-        newName: '$devui-shadow-length-base $devui-light-shadow',
-        value: '0 1px 3px 0 rbga(0, 0, 0, 0.1)',
-        description: values.oldShadows['hwc-shadow-1'],
-      },
-      {
-        name: '$hwc-shadow-2',
-        newName: '$devui-shadow-length-connected-overlay $devui-shadow',
-        value: '0 2px 5px 0 rgba(0, 0, 0, 0.2)',
-        description: values.oldShadows['hwc-shadow-2'],
-      },
-      {
-        name: '$hwc-shadow-3',
-        newName: '$devui-shadow-length-feedback-overlay $devui-shadow',
-        value: '0 4px 8px 0 rgba(0, 0, 0, 0.2)',
-        description: values.oldShadows['hwc-shadow-3'],
-      },
-      {
-        name: '$hwc-shadow-4',
-        newName: '$devui-shadow-length-hover $devui-shadow',
-        value: '0 2px 8px 0 rgba(94, 124, 224, 0.3)',
-        description: values.oldShadows['hwc-shadow-4'],
-      },
-      {
-        name: '$hwc-shadow-5',
-        newName: '$devui-shadow-length-connected-overlay $devui-light-shadow',
-        value: '0 0 6px 0 rgba(0, 0, 0, 0.1)',
-        description: values.oldShadows['hwc-shadow-5'],
-      },
-      {
-        name: '$hwc-shadow-6',
-        newName: '$devui-shadow-length-base $devui-light-shadow',
-        value: '0 8px 6px -4px rgba(199, 54, 54, 0.4)',
-        description: values.oldShadows['hwc-shadow-6'],
-      },
-      {
-        name: '$hwc-shadow-7',
-        newName: '$devui-shadow-length-fullscreen-overlay $devui-light-shadow',
-        value: '0 10px 40px 0 rgba(0, 0, 0, 0.1)',
-        description: values.oldShadows['hwc-shadow-7'],
-      },
-      {
-        name: '$hwc-shadow-8',
-        newName: '$devui-shadow-length-base $devui-light-shadow',
-        value: '0 1px 2px 0 rgba(57, 71, 166, 0.5)',
-        description: values.oldShadows['hwc-shadow-8'],
-      },
-      {
-        name: '$hwc-shadow-error',
-        newName: '$devui-shadow-length-base $devui-danger',
-        value: '0 1px 3px 0 rgba(199, 54, 54, 0.25)',
-        description: values.oldShadows['hwc-shadow-error'],
-      },
-      {
-        name: '$hwc-shadow-warn',
-        newName: '$devui-shadow-length-base $devui-warning',
-        value: ' 0 1px 3px 0 rgba(204, 100, 20, 0.25)',
-        description: values.oldShadows['hwc-shadow-warn'],
-      },
-      {
-        name: '$hwc-shadow-prompt',
-        newName: '$devui-shadow-length-base $devui-info',
-        value: '0 1px 3px 0 rgba(70, 94, 184, 0.25)',
-        description: values.oldShadows['hwc-shadow-prompt'],
-      },
-      {
-        name: '$hwc-shadow-success',
-        newName: '$devui-shadow-length-base $devui-success',
-        value: '0 1px 3px 0 rgba(39, 176, 128, 0.25)',
-        description: values.oldShadows['hwc-shadow-success'],
-      },
-      {
-        name: '$hwc-shadow-dark',
-        newName: '$devui-shadow-length-feedback-overlay $devui-shadow',
-        value: '0 5px 8px 0 rgba(70, 77, 110, 0.25)',
-        description: values.oldShadows['hwc-shadow-dark'],
-      },
-    ];
-
-    this.shadowColor = [
-      {
-        name: '$devui-shadow',
-        light: devuiLightTheme.data['devui-shadow'],
-        dark: devuiDarkTheme.data['devui-shadow'],
-        description: values.shadowColor['devui-shadow'],
-      },
-      {
-        name: '$devui-light-shadow',
-        light: devuiLightTheme.data['devui-light-shadow'],
-        dark: devuiDarkTheme.data['devui-light-shadow'],
-        description: values.shadowColor['devui-light-shadow'],
-      },
-      {
-        name: '$devui-connected-overlay-shadow',
-        light: devuiLightTheme.data['devui-connected-overlay-shadow'],
-        dark: devuiDarkTheme.data['devui-connected-overlay-shadow'],
-        description: values.shadowColor['devui-connected-overlay-shadow'],
-      },
-      {
-        name: '$devui-feedback-overlay-shadow',
-        light: devuiLightTheme.data['devui-feedback-overlay-shadow'],
-        dark: devuiDarkTheme.data['devui-feedback-overlay-shadow'],
-        description: values.shadowColor['devui-feedback-overlay-shadow'],
-      }
-    ];
-
-    if (this.themeService) {
-      this.changeValueInTable();
-    }
   }
 
   ngOnDestroy() {

@@ -35,6 +35,12 @@
   }
 }
 
+.delay-tag {
+  position: relative;
+  width: max-content;
+  margin-top: 4px;
+}
+
 ::ng-deep .devui-gantt-tips {
   & .title {
     font-size: $devui-font-size-card-title;

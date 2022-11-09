@@ -2,7 +2,6 @@ const { getOptions } = require('loader-utils');
 const validateOptions = require('schema-utils');
 const postcss = require('postcss');
 const postcssLessSyntax = require('postcss-less');
-// const replacePathAlias = require('./less-replace-path-alias')
 const loaderName = 'less-path-alias-replacer-loader';
 const path = require('path');
 const trailingSlashAndContent = /[/\\][^/\\]*?$/;

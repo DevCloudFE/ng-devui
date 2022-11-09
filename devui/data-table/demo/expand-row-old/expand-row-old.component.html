@@ -24,8 +24,9 @@
 </d-data-table>
 <ng-template #quickAddRowTip>
   <div (click)="newRow()" class="cursor-pointer">
-    <span class="tips-icon icon-add"></span>
-    <span>Create new data</span>
+    <d-icon [icon]="'icon-add'" dIconHover>
+      <span iconSuffix>Create new data</span>
+    </d-icon>
   </div>
 </ng-template>
 <ng-template #quickAddRowContent>

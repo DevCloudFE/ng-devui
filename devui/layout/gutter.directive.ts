@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Input, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, Input, OnDestroy, Renderer2 } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { DBreakpoints, DResponseParameter } from './layout.types';
@@ -7,8 +7,7 @@ import { DScreenMediaQueryService } from './screen-media-query.service';
 @Directive({
   selector: `[dGutter]`,
 })
-
-export class DGutterDirective implements OnInit, OnDestroy {
+export class DGutterDirective implements OnDestroy, AfterViewInit {
   private destroy$ = new Subject<void>();
   private executedGutter: [number, number] = [null, null];
 
@@ -16,14 +15,11 @@ export class DGutterDirective implements OnInit, OnDestroy {
   @Input() dGutterDirection: 'vertical' | 'horizontal';
   @Input() dGutterNoOuter: DResponseParameter<boolean>;
 
-  constructor(
-    private elementRef: ElementRef,
-    private renderer: Renderer2,
-    private screenQueryService: DScreenMediaQueryService
-  ) { }
+  constructor(private elementRef: ElementRef, private renderer: Renderer2, private screenQueryService: DScreenMediaQueryService) {}
 
-  ngOnInit(): void {
-    this.screenQueryService.getPoint()
+  ngAfterViewInit(): void {
+    this.screenQueryService
+      .getPoint()
       .pipe(takeUntil(this.destroy$))
       .subscribe(({ currentPoint }) => {
         this.updateGutter(currentPoint);

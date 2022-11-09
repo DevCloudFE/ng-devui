@@ -461,15 +461,15 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, Contro
     });
 
     if (this.currentYear < this.minDate.getFullYear() || this.currentYear > this.maxDate.getFullYear()) {
-      all.map(month => {month.disabled = true; });
+      all.forEach(month => {month.disabled = true; });
     }
 
     if (this.currentYear === this.minDate.getFullYear()) {
-      all.map(month => {month.disabled = month.index < this.minDate.getMonth(); });
+      all.forEach(month => {month.disabled = month.index < this.minDate.getMonth(); });
     }
 
     if (this.currentYear === this.maxDate.getFullYear()) {
-      all.map(month => {month.disabled = month.index > this.maxDate.getMonth(); });
+      all.forEach(month => {month.disabled = month.index > this.maxDate.getMonth(); });
     }
     return all;
   }

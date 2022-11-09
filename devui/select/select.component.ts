@@ -62,28 +62,6 @@ import { debounceTime, filter, map, switchMap } from 'rxjs/operators';
   preserveWhitespaces: false,
 })
 export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewInit, OnDestroy, OnChanges {
-  get isOpen() {
-    return this._isOpen;
-  }
-
-  set isOpen(value) {
-    this._isOpen = value;
-    this.toggleChange.emit(value);
-    this.setDocumentClickListener();
-    if (this.selectWrapper) {
-      this.dropDownWidth = this.width ? this.width : this.selectWrapper.nativeElement.offsetWidth;
-    }
-    if (value) {
-      addClassToOrigin(this.selectWrapper);
-      setTimeout(() => {
-        this.startAnimation = true;
-        this.changeDetectorRef.detectChanges();
-      });
-    } else {
-      removeClassFromOrigin(this.selectWrapper);
-      this.onTouch();
-    }
-  }
   /**
    * 【必选】下拉选项资源，支持Array<string>, Array<{key: value}>
    */
@@ -108,6 +86,10 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
    * 【当传入资源（options）类型为Array<{key: value}，必选】针对传入资源options的每项对应字段做过滤操作
    */
   @Input() filterKey: string;
+  /**
+   * 【当传入资源（options）类型为Array<{key: value}，可选】选项与选中值类型不一致时用于指定赋值属性
+   */
+  @Input() valueKey: string;
   /**
    * 【可选】是否支持多选
    */
@@ -269,31 +251,56 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
   @ViewChild('dropdownUl') dropdownUl: ElementRef;
   @ViewChild(CdkConnectedOverlay) connectedOverlay: CdkConnectedOverlay;
   @ViewChild(CdkVirtualScrollViewport) virtualScrollViewport: CdkVirtualScrollViewport;
-  virtualScrollViewportSizeMightChange = false;
-  showLoading = false;
+
+  set isOpen(value) {
+    this._isOpen = value;
+    this.toggleChange.emit(value);
+    this.setDocumentClickListener();
+    if (this.selectWrapper) {
+      this.dropDownWidth = this.width ? this.width : this.selectWrapper.nativeElement.offsetWidth;
+    }
+    if (value) {
+      addClassToOrigin(this.selectWrapper);
+      setTimeout(() => {
+        this.startAnimation = true;
+        this.changeDetectorRef.detectChanges();
+      });
+    } else {
+      removeClassFromOrigin(this.selectWrapper);
+      this.onTouch();
+      if (this.direction === 'auto') {
+        this.clearText();
+      }
+    }
+  }
+
+  get isOpen() {
+    return this._isOpen;
+  }
+
+  _inputValue: any;
   _isOpen = false;
-  menuPosition: VerticalConnectionPos = 'bottom';
-  halfChecked = false;
   allChecked = false;
+  halfChecked = false;
   isMouseEvent = false;
-  dropDownWidth: number;
+  showLoading = false;
   startAnimation = false;
-
-  filter = '';
-  activeIndex = -1;
-
-  // for multiple
   availableOptions = [];
   multiItems = [];
-
-  popDirection: 'top' | 'bottom';
-
+  value: any;
+  filter = '';
+  activeIndex = -1;
   selectIndex = -1;
-  _inputValue: any;
+  popDirection: 'top' | 'bottom';
+  menuPosition: VerticalConnectionPos = 'bottom';
   document: Document;
+  dropDownWidth: number;
   scrollHeightNum: number;
   minBuffer: number;
   maxBuffer: number;
+  cdkConnectedOverlayOrigin: CdkOverlayOrigin;
+  overlayPositions: Array<ConnectedPosition>;
+  virtualScrollViewportSizeMightChange = false;
   virtualScrollItemSize: any = {
     sm: 30,
     normal: 36,
@@ -301,14 +308,9 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
     space: 4,
   };
 
-  cdkConnectedOverlayOrigin: CdkOverlayOrigin;
-  overlayPositions: Array<ConnectedPosition>;
-
   private sourceSubscription: BehaviorSubject<any>;
   private filterSubscription: Subscription;
-  public value;
   private resetting = false;
-
   private onChange = (_: any) => null;
   private onTouch = () => null;
 
@@ -322,7 +324,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
     @Inject(DOCUMENT) private doc: any
   ) {
     this.valueParser = (item) => (typeof item === 'object' ? item[this.filterKey] || '' : String(item) ? item.toString() : '');
-    this.formatter = (item) => (typeof item === 'object' ? item[this.filterKey] || '' : String(item) ? item.toString() : '');
+    this.formatter = (item) => (typeof item === 'object' ? String(item[this.filterKey]) || '' : String(item) ? item.toString() : '');
     this.document = this.doc;
   }
 
@@ -590,7 +592,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
       }
       this.value = this.multiItems.map((item) => item.option);
     } else {
-      this.value = option;
+      this.value = this.valueKey ? option[this.valueKey] : option;
       this.activeIndex = index;
       this.selectIndex = index;
       this.toggle();

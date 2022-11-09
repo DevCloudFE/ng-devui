@@ -250,7 +250,7 @@ describe('steps guide basic', () => {
         '.devui-guide-btn'
       ])).toBeTruthy();
       // 循环列表看每一项的上一步、下一步都是否正确处罚
-      component.steps.map((step, index) => {
+      component.steps.forEach((step, index) => {
         if (index <= 0) { // 第一步只有下一步
           TestFunctions.guideCorrect(component.positions[index], step.title);
           CommonFunctions.tickEvent(document.querySelector('.devui-guide-btn').children[0], CommonFunctions.event('click'), fixture);

@@ -84,7 +84,7 @@ class TestFunctions {
     CommonFunctions.flushEvent(inputEle.nativeElement, new Event('input'), fixture);
     CommonFunctions.tickEvent(inputEle.nativeElement, new Event('keyup'), fixture, 300);
     let curValue = '';
-    valueArr.map(singleValue => {
+    valueArr.forEach(singleValue => {
       curValue = curValue + singleValue;
       inputEle.nativeElement.value = curValue;
       CommonFunctions.flushEvent(inputEle.nativeElement, new Event('input'), fixture);

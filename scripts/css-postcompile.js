@@ -1,8 +1,6 @@
 const postcss = require('postcss');
 const fs = require('fs');
 const addOriginVar = require('./themeable/add-origin-varvalue');
-// import * as postcss from 'postcss/lib/postcss';
-// import * as addOriginVar from './add-origin-varvalue';
 
 // 处理输入参数
 fs.readFile('./publish/devui.css', (err, content) => {

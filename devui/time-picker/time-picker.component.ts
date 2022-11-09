@@ -482,9 +482,7 @@ export class TimePickerComponent implements OnChanges, OnInit, OnDestroy, Contro
   }
 
   setTimeArr(justScroll?) {
-    this.format.split(':').map((type, index) => {
-      this.setSingleTimeArr(index, justScroll);
-    });
+    this.format.split(':').forEach((type, index) => this.setSingleTimeArr(index, justScroll));
   }
 
   setSingleTimeArr(index, justScroll?) {
@@ -518,7 +516,7 @@ export class TimePickerComponent implements OnChanges, OnInit, OnDestroy, Contro
         }
       );
     } else {
-      this[`${whichList}List`].map(
+      this[`${whichList}List`].forEach(
         (item, i) => {
           if (!justScroll) {
             const time =  unshiftString(String(i), 2, '0');
@@ -585,22 +583,20 @@ export class TimePickerComponent implements OnChanges, OnInit, OnDestroy, Contro
 
   setCurrent(which, current?) {
     const timeArr = current ? current.split(':') : this[which].split(':');
-    this.correct.map((t, i) => {
+    this.correct.forEach((t, i) => {
       this[`_${which}${t}`] = timeArr[i];
     });
   }
 
   getCurrent(which) {
     const res = [];
-    this.correct.map(t => {
-      res.push(this[`_${which}${t}`]);
-    });
+    this.correct.forEach(t => res.push(this[`_${which}${t}`]));
     return res.join(':');
   }
 
   setFormatCurrent(which, current?) {
     const timeArr = current ? current.split(':') : this[which].split(':');
-    this.format.split(':').map((t, i) => {
+    this.format.split(':').forEach((t, i) => {
       switch (t) {
       case 'hh':
         this[`_${which}Hour`] = timeArr[i];
@@ -618,7 +614,7 @@ export class TimePickerComponent implements OnChanges, OnInit, OnDestroy, Contro
   getFormatCurrent(which) {
     const formatArr = this.format.split(':');
     const res = [];
-    formatArr.map(t => {
+    formatArr.forEach(t => {
       switch (t) {
       case 'hh':
         res.push(this[`_${which}Hour`]);
@@ -651,7 +647,7 @@ export class TimePickerComponent implements OnChanges, OnInit, OnDestroy, Contro
       } else if (!type) {
         typeArr = this.format.split(':');
       }
-      typeArr.map((t, i) => {
+      typeArr.forEach((t, i) => {
         switch (t) {
         case 'hh':
           this._selectedTimeHour = unshiftString(timeArr[i], 2, '0');

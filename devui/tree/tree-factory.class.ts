@@ -63,7 +63,7 @@ export interface ITreeInput {
 }
 
 export class TreeNode implements ITreeNodeData {
-  constructor(public id, public parentId, public data) {}
+  constructor(public id, public parentId, public data) { }
 }
 
 export class TreeFactory {
@@ -504,7 +504,7 @@ export class TreeFactory {
     }
   }
 
-  private resetSearchResults() {
+  resetSearchResults() {
     Object.keys(this.nodes).forEach((key) => {
       const treeNode = this.nodes[key];
       treeNode.data.isMatch = false;
@@ -598,6 +598,7 @@ export class TreeFactory {
       if (node.data.children?.length === 1 && node.data.children[0]?.data?.children?.length !== 0) {
         node.data.title = node.data.title + ' / ' + node.data.children[0]?.data?.title;
         node.data.children = node.data.children[0]?.data?.children;
+        node.data.children.forEach(child => { child.parentId = node.id; });
         mergeToNode(node);
       }
       if (node.data.children?.length > 1) {

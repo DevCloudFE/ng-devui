@@ -16,6 +16,8 @@ import { AddDeleteComponent } from './add-delete/add-delete.component';
 import { BasicComponent } from './basic/basic.component';
 import { CustomizeTmpComponent } from './before-change/before-change.component';
 import { BigDataComponent } from './big-data/big-data.component';
+import { ConfigurableComponent } from './configurable-tabs/configurable-tabs.component';
+import { TabsTransferComponent } from './configurable-tabs/tabs-transfer/tabs-transfer.component';
 import { CustomComponent } from './custom/custom.component';
 import { SizeComponent } from './size/size.component';
 import { TabsDemoComponent } from './tabs-demo.component';
@@ -56,10 +58,12 @@ import { WithoutContentComponent } from './without-content/without-content.compo
     AddDeleteComponent,
     BasicComponent,
     BigDataComponent,
+    ConfigurableComponent,
     CustomComponent,
     CustomizeTmpComponent,
     SizeComponent,
     TabsDemoComponent,
+    TabsTransferComponent,
     TypePillsComponent,
     TypeOptionsComponent,
     TypeSliderComponent,

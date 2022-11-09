@@ -289,7 +289,7 @@ export class DatepickerProComponent implements OnInit, AfterViewInit, OnDestroy,
   }
 
   writeValue(value: Date) {
-    if (!value || !this.pickerSrv.dateInRange(new Date(value))) {
+    if (!value) {
       this.clear();
       return;
     }

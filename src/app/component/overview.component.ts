@@ -69,8 +69,8 @@ export class ComponentsOverviewComponent implements OnInit, OnDestroy {
   }
 
   setI18n() {
-    this.overviewText = this.translate.instant('public').overview;
-    this.tagList.map(tag => { tag.title = this.overviewText ? this.overviewText[tag.name] : ''; });
+    this.overviewText = this.translate.instant('public').overview || {};
+    this.tagList.forEach(tag => { tag.title = this.overviewText ? this.overviewText[tag.name] : ''; });
     this.currentLang = this.i18n.getI18nText().locale;
   }
 

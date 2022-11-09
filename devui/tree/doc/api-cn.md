@@ -173,7 +173,7 @@ import { TreeModule } from 'ng-devui/tree';
 
 `checkAllNodes(checked:boolean)`: 根据checked决定所有节点的check状态
 
-`mergeTreeNodes(targetNode:TreeNode)`: 传入需要合并显示的节点，默认为整个树，此操作将合并只有一个子节点的父节点，用于优化树形显示
+`mergeTreeNodes(targetNode:TreeNode)`: 传入需要合并显示的节点，默认为整个树，此操作将合并只有一个子节点的父节点，用于优化树形显示。 本方法将改变树节点的父子关系，仅可在树只读的条件下使用，若节点动态变化，则修改源数据后每次重新调用此方法
 
 `getNodeIndex(node: TreeNode)`: 获取指定节点处于父节点中位置
 

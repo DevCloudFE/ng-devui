@@ -93,7 +93,7 @@ export class InteractionColumnComponent implements OnInit {
     }
     const filterList = $event.name;
     const dataDisplay = [];
-    JSON.parse(JSON.stringify(originSource.slice(0, 6))).map(item => {
+    JSON.parse(JSON.stringify(originSource.slice(0, 6))).forEach(item => {
       if (filterList.includes(item.gender)) {
         dataDisplay.push(item);
       }
@@ -104,7 +104,7 @@ export class InteractionColumnComponent implements OnInit {
   filterChangeMultiple($event) {
     const filterList = $event.map(item => item.name);
     const dataDisplay = [];
-    JSON.parse(JSON.stringify(originSource.slice(0, 6))).map(item => {
+    JSON.parse(JSON.stringify(originSource.slice(0, 6))).forEach(item => {
       if (filterList.includes(item.firstName)) {
         dataDisplay.push(item);
       }

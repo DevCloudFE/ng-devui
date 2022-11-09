@@ -119,6 +119,7 @@ export class CascaderComponent implements OnInit, OnDestroy, OnChanges, ControlV
     this.cascaderSrv.initOptions(this.options);
     this.cascaderSrv.isMultiple = this.multiple;
     this.cascaderSrv.isLazyLoad = this.isLazyLoad;
+    this.cascaderSrv.checkboxRelation = this.checkboxRelation;
     this.initObservale();
     this.initI18n();
   }
@@ -247,6 +248,7 @@ export class CascaderComponent implements OnInit, OnDestroy, OnChanges, ControlV
     tagEvent.event.stopPropagation();
     this.cascaderSrv.updateOptionCheckedStatus(option.value, false, this.checkboxRelation.upward, this.checkboxRelation.downward);
     this.multipleValueList = this.multipleValueList.filter(t => t.value !== option.value);
+    this.onChange(this.cascaderSrv.currentMultipleValue);
     // 当taglist变化导致input高度变化时，更新相对位置
     setTimeout(() => {
       this.mainDropdown.updateCdkConnectedOverlayOrigin();
@@ -287,9 +289,11 @@ export class CascaderComponent implements OnInit, OnDestroy, OnChanges, ControlV
     const targetList = [];
     valueList.forEach(value => {
       let cur: CascaderItem;
+      let cacheTarget: CascaderItem;
       let list = this.cascaderSrv.options;
       for (let i = 0; i < value.length; i++) {
         cur = list.find(l => l.value === value[i]);
+        cacheTarget = cur;
         if (this.isLazyLoad && cur && !cur.children?.length && !cur.isLeaf) {
           this.cascaderSrv.lazyloadMultipleChild(cur, i);
           break;
@@ -299,9 +303,16 @@ export class CascaderComponent implements OnInit, OnDestroy, OnChanges, ControlV
       }
       if (cur && cur.isLeaf) {
         targetList.push(cur);
+        cacheTarget = null;
         this.cascaderSrv.updateOptionCheckedStatus(cur.value, true, this.checkboxRelation.upward, this.checkboxRelation.downward);
       }
+
+      if (cacheTarget) {
+        targetList.push(cacheTarget);
+        this.cascaderSrv.updateOptionCheckedStatus(cacheTarget.value, true, this.checkboxRelation.upward, this.checkboxRelation.downward);
+      }
     });
+
     return targetList;
   }
 
@@ -309,7 +320,7 @@ export class CascaderComponent implements OnInit, OnDestroy, OnChanges, ControlV
   getLabelFromValue(value: Array<number | string>): string {
     let cur;
     let list = this.cascaderSrv.options;
-    value.map(item => {
+    value.forEach(item => {
       cur = list.find(t => t.value === item) || '';
       list = cur.children || [];
     });
@@ -323,7 +334,7 @@ export class CascaderComponent implements OnInit, OnDestroy, OnChanges, ControlV
     let cur;
     let list = this.cascaderSrv.options;
 
-    value.map((item, index) => {
+    value.forEach((item, index) => {
       cur = list.find(t => t.value === item) || '';
       if (cur) {
         path = path === '' ? path + cur.label : path + ' / ' + cur.label;
@@ -385,7 +396,7 @@ export class CascaderComponent implements OnInit, OnDestroy, OnChanges, ControlV
       const width = this.dropdownComp.overlay.overlayRef?.overlayElement.clientWidth;
       const offsetX = this.dropdownComp.overlay.overlayRef?.overlayElement.offsetLeft;
       const offsetRight = window.innerWidth - width - offsetX - 20;
-      this.subMenuDirections.map(t => {t.offsetX = offsetRight < 0 ? offsetRight : 0;});
+      this.subMenuDirections.forEach(t => {t.offsetX = offsetRight < 0 ? offsetRight : 0;});
       this.dropdownComp.reposition();
     }, 0);
   }

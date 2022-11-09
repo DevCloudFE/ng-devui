@@ -10,6 +10,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
 import { BasicComponent } from './basic/basic.component';
 import { CircleComponent } from './circle/circle.component';
+import { MultipleComponent } from './multiple/multiple.component';
 import { ProgressDemoComponent } from './progress-demo.component';
 
 @NgModule({
@@ -22,21 +23,19 @@ import { ProgressDemoComponent } from './progress-demo.component';
     DevUIApiModule,
     DDemoNavModule,
     RouterModule.forChild([
-      { path: '',  redirectTo: 'demo', pathMatch: 'full' },
-      { path: 'demo', component: ProgressDemoComponent},
-      { path: 'api', component: DevUIApiComponent, data: {
-        'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),
-        'en-us': require('!html-loader!markdown-loader!../doc/api-en.md')
-      }}
-    ])
+      { path: '', redirectTo: 'demo', pathMatch: 'full' },
+      { path: 'demo', component: ProgressDemoComponent },
+      {
+        path: 'api',
+        component: DevUIApiComponent,
+        data: {
+          'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),
+          'en-us': require('!html-loader!markdown-loader!../doc/api-en.md'),
+        },
+      },
+    ]),
   ],
   exports: [ProgressDemoComponent],
-  declarations: [
-    ProgressDemoComponent,
-    BasicComponent,
-    CircleComponent,
-  ],
-
+  declarations: [ProgressDemoComponent, BasicComponent, CircleComponent, MultipleComponent],
 })
-export class ProgressDemoModule {
-}
+export class ProgressDemoModule {}

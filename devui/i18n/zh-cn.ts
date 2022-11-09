@@ -16,6 +16,20 @@ export default {
   autoComplete: {
     latestInput: '最近输入',
   },
+  datatable: {
+    tableSetting: '表格设置',
+    ensure: '确认',
+    cancel: '取消',
+    compact: '紧凑',
+    standard: '标准',
+    loose: '宽松',
+    divideLine: '行分割线',
+    striped: '斑马纹填充',
+    tableShadow: '表格阴影',
+    styles: '外观',
+    colSelected: '已选列',
+    colCanSelect: '可选列',
+  },
   datePicker: {
     today: '今天',
     clear: '清除',

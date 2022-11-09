@@ -11,9 +11,9 @@ import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
 import { BasicComponent } from './basic/basic.component';
 import { CardDemoComponent } from './card-demo.component';
+import { CardInteractiveComponent } from './card-interactive/card-interactive.component';
 import { CustomComponent } from './custom/custom.component';
 import { WithMediaComponent } from './with-media/with-media.component';
-import { CardInteractiveComponent } from './card-interactive/card-interactive.component';
 
 @NgModule({
   declarations: [CardDemoComponent, BasicComponent, CustomComponent, WithMediaComponent, CardInteractiveComponent],
