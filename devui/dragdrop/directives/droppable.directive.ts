@@ -613,7 +613,8 @@ export class DroppableDirective implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private calcPositionOutside(event: any, targetElement: any) {
-    const rect = this.getBoundingRectAndRealPosition(targetElement); // targetElement.getBoundingClientRect();
+    // targetElement 获取 getBoundingClientRect
+    const rect = this.getBoundingRectAndRealPosition(targetElement);
     const relY = event.clientY - (rect.y || rect.top);
     const relX = event.clientX - (rect.x || rect.left);
 

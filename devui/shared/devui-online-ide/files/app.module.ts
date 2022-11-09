@@ -19,6 +19,7 @@ import { DevUIModule } from "ng-devui";
 import { I18nModule } from 'ng-devui/i18n';
 import { IconModule } from 'ng-devui/icon';
 import { LazyLoadModule } from 'ng-devui/utils';
+import { NumberTransModule } from 'ng-devui/number-translation';
 
 import {
   AutoCompletePopupComponent,
@@ -55,6 +56,7 @@ ${importStr}
     I18nModule,
     IconModule,
     LazyLoadModule,
+    NumberTransModule,
     TranslateModule.forRoot()
   ],
   declarations: [ ${componentName}, ${componentsStr} ],

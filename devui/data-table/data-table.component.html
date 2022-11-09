@@ -1,5 +1,12 @@
 <div class="devui-data-table {{ cssClass }}">
-  <div class="devui-table-view {{ containFixHeaderHeight ? 'contain-fix-height' : '' }}" #tableView>
+  <div
+    class="devui-table-view {{ containFixHeaderHeight ? 'contain-fix-height' : '' }}"
+    [ngClass]="{
+      'has-width-scroll': hasWidthScroll,
+      'has-height-scroll': hasHeightScroll
+    }"
+    #tableView
+  >
     <div
       *ngIf="fixHeader"
       #fixHeaderContainerRef
@@ -37,9 +44,7 @@
       [ngClass]="{
         'scroll-view': scrollable,
         'overflow-overlay': tableOverflowType === 'overlay',
-        'table-wrap': !fixHeader,
-        'has-width-scroll': hasWidthScroll,
-        'has-height-scroll': hasHeightScroll
+        'table-wrap': !fixHeader
       }"
       [style.height]="tableHeight ? tableHeight : null"
       [style.max-height]="maxHeight ? maxHeight : null"
@@ -122,9 +127,7 @@
     [ngClass]="{
       'scroll-view': scrollable,
       'overflow-overlay': tableOverflowType === 'overlay',
-      'virtual-scroll-wrap': !fixHeader,
-      'has-width-scroll': hasWidthScroll,
-      'has-height-scroll': hasHeightScroll
+      'virtual-scroll-wrap': !fixHeader
     }"
     [style.height]="virtualBodyHeight"
     [style.max-height]="maxHeight ? maxHeight : null"

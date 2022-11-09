@@ -85,7 +85,7 @@ export class TransferDemoSearchComponent {
     this[`${TransferDirection[1 - event].toLocaleLowerCase()}OptionCopy2`] =
       this[`${TransferDirection[1 - event].toLocaleLowerCase()}OptionCopy2`].filter(item => !currentCheck.some(cur => cur.id === item.id));
 
-    currentCheck.map(item => {item.checked = false;});
+    currentCheck.forEach(item => {item.checked = false;});
     this[`${TransferDirection[event].toLocaleLowerCase()}Option2`] =
       this[`${TransferDirection[event].toLocaleLowerCase()}Option2`].concat(currentCheck);
     this[`${TransferDirection[event].toLocaleLowerCase()}OptionCopy2`] =

@@ -42,6 +42,10 @@ export class MutilStylesComponent implements OnInit {
   activeSizeTab: any = 'sm';
   sizeItems = [
     {
+      id: 'mini',
+      title: 'Mini'
+    },
+    {
       id: 'xs',
       title: 'Small'
     },

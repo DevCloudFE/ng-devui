@@ -63,13 +63,13 @@ export function resolveRoutesConfig(lang, routesConfig) {
 
 export function filterData(event, data) {
   const res = cloneDeep(data).filter(catalog => {
-    catalog.children = catalog.children.filter(item => {
-      if (typeof event === 'string') {
-        return item.title.toLowerCase().includes(event.toLowerCase());
-      } else if (Array.isArray(event)) {
-        return event.includes(item.title.toLowerCase());
-      }
-    });
+    catalog.children = catalog.children.filter((item) =>
+      typeof event === 'string'
+        ? item.title.toLowerCase().includes(event.toLowerCase())
+        : Array.isArray(event)
+          ? event.includes(item.title.toLowerCase())
+          : undefined
+    );
     return catalog.children.length;
   });
   return res;

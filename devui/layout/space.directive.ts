@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Input, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, Input, OnDestroy, Renderer2 } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { DBreakpoints, DResponseParameter } from './layout.types';
@@ -7,22 +7,18 @@ import { DScreenMediaQueryService } from './screen-media-query.service';
 @Directive({
   selector: `[dSpace]`,
 })
-
-export class DSpaceDirective implements OnInit, OnDestroy {
+export class DSpaceDirective implements OnDestroy, AfterViewInit {
   private destroy$ = new Subject<void>();
   private executedSpace: [number, number] = [null, null];
 
   @Input() dSpace: DResponseParameter<number | [number, number]>;
   @Input() dSpaceDirection: DResponseParameter<'vertical' | 'horizontal'>;
 
-  constructor(
-    private elementRef: ElementRef,
-    private renderer: Renderer2,
-    private screenQueryService: DScreenMediaQueryService
-  ) { }
+  constructor(private elementRef: ElementRef, private renderer: Renderer2, private screenQueryService: DScreenMediaQueryService) {}
 
-  ngOnInit(): void {
-    this.screenQueryService.getPoint()
+  ngAfterViewInit(): void {
+    this.screenQueryService
+      .getPoint()
       .pipe(takeUntil(this.destroy$))
       .subscribe(({ currentPoint }) => {
         this.updateSpace(currentPoint);

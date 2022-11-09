@@ -652,7 +652,7 @@
       },
       "button-danger": {
         "title": "Danger Buttons",
-        "description": "Indicates key operations in the system, such as purchase scenarios.",
+        "description": "Indicates key operations in the system, such as delete scenarios.",
         "purchase": "Buy"
       },
       "button-loading": {
@@ -889,7 +889,6 @@
         "dSafeNullPipe": {
           "title": "SafeNullPipe",
           "description": "When the data is '', null, undefined can be specified any character placeholder display, the default is: '--'"
-
         }
       },
       "browserDemo": {
@@ -912,7 +911,6 @@
         "lazy-load": "Lazyload Directive",
         "browser-version": "Current browser name and version",
         "date-pipe": "Datepipe",
-        "safe-null-pipe": "Safe null pipe",
         "open-url": "Open URL in A New Tag",
         "download-file": "Download File",
         "iframe-propagate": "iframe Event Propagate API",
@@ -1037,7 +1035,7 @@
             "devui-disabled-bg": "disabled Background Color",
             "devui-disabled-line": "disabled Border Color",
             "devui-disabled-text": "disabled Text Color",
-            "devui-primary-disabled": "Text color of the main button in disabled state",
+            "devui-primary-disabled": "background color of the main button in disabled state",
             "devui-icon-fill-active-disabled": "svg Icon Activation State Disable Color",
             "devui-label-bg": "Default labeling option background color",
             "devui-connected-overlay-bg": "Single-layer background color of the pop-up menu with connection points",
@@ -1076,7 +1074,13 @@
             "disable": "Disable",
             "specialBackground": "Special background color",
             "button": "Button",
-            "status": "Status"
+            "status": "Status",
+            "text": "Text/Icon",
+            "brand": "Brand",
+            "shadow": "Shadow",
+            "border": "Border",
+            "background": "Background",
+            "others": "Others"
           },
           "catalogsList": {
             "text": "Text",
@@ -1498,6 +1502,9 @@
       "mutilStylesDemo": {
         "title": "Table Style"
       },
+      "dynamicColDemo": {
+        "title": "Dynamic Columns And Style"
+      },
       "treeTableDemo": {
         "title": "Tree table",
         "description": "Configure the rendering tree table based on the nestedColumn attribute and the child and $isChildTableOpen fields of row data.\nTwo implementation modes are supported. Method 1 is implemented by customizing the head and body templates and the rows and cells in the templates. Method 2 is implemented by configuring columns."
@@ -1513,6 +1520,7 @@
       "anchorLinkValues": {
         "basic-usage": "Basic Usage",
         "mutil-styles": "Table Style",
+        "dynamic-cols": "Dynamic Columns And Style",
         "async-loading": "Asynchronous data loading",
         "table-interaction": "Table interaction",
         "table-check-options": "Customizing Table Selection",
@@ -2384,12 +2392,17 @@
         "title": "Enable lazy load",
         "description": "Data lazy loading."
       },
+      "customAreaDemo": {
+        "title": "Custom Area",
+        "description": "Using template to custom dropdown area"
+      },
       "anchorLinkValues": {
         "basic-usage": "Basic usage",
         "disable-data-with-source": "Set disable options",
         "with-search-function": "Customized data matching method",
         "async-data-with-function": "Asynchronously obtaining the data source and setting the matching method",
-        "lazy-load": "Enable lazy load"
+        "lazy-load": "Enable lazy load",
+        "custom-area-usage": "Custom Area"
       }
     },
     "editorx": {
@@ -2404,7 +2417,7 @@
       },
       "customToolbarDemo": {
         "title": "Custom Toolbar",
-        "description": "Complete functions + Custom toolbar grouping + Collapse of tools that are not commonly used."
+        "description": "Custom toolbar Icons + Custom toolbar grouping + Collapse of tools that are not commonly used."
       },
       "readOnlyModeDemo": {
         "title": "Read-only Mode",
@@ -2691,16 +2704,21 @@
       "description": "Progress bar.",
       "tmw": "<div>1. When the operation takes a long time. </div> <div> 2. When an operation takes a long time to interrupt the current interface or background operation. </div> <div>3. To display the percentage of completed operations or the number of completed steps/total steps.</div>",
       "basicDemo": {
-        "title": "Basic Usage",
-        "description": "Basic progress and text configuration."
+        "title": "Linear Progress Bar",
+        "description": "You can configure to display text or custom templates on the right or as you progress bar."
       },
       "circleDemo": {
-        "title": "Circle Usage",
-        "description": "Basic progress and text configuration."
+        "title": "Circular progress bar",
+        "description": "You can configure to display text  in the center or customize a template."
+      },
+      "multipleDemo": {
+        "title": "Custom multi-color progress bar",
+        "description": "You can configure multiple segments of different color values or gradient colors."
       },
       "anchorLinkValues": {
-        "basic-usage": "Basic Usage",
-        "circle-usage": "Circle Usage"
+        "basic-usage": "Linear Progress Bar",
+        "circle-usage": "Circular progress bar",
+        "multiple-usage": "Custom multi-color progress bar"
       }
     },
     "quadrant-diagram": {
@@ -3200,6 +3218,10 @@
         "title": "Big data display",
         "description": "You can select the direct on mode and automatic judgment mode."
       },
+      "configurableTabsDemo": {
+        "title": "Customizing Tabs Display and Arrange",
+        "description": "The transfer component is introduced to implement customized tabs display."
+      },
       "anchorLinkValues": {
         "basic-usage": "Basic Usage",
         "no-set-content": "No Content",
@@ -3211,7 +3233,8 @@
         "size": "Size",
         "intercept-tab-switch": "Intercept Tab Switching",
         "add-delete": "Add / Remove",
-        "big-data": "Big data display"
+        "big-data": "Big data display",
+        "custom-tabs-display-and-arrangement": "Customizing Tabs Display and Arrange"
       }
     },
     "tags": {
@@ -3582,11 +3605,21 @@
         "title": "Editable Usage",
         "description": "You can customize the initial template, edit the template, and set the content character string and content projection. Allows users to directly click the edit and operation icons to edit and copy."
       },
+      "textOverflowDemo": {
+        "title": "Text Overflow",
+        "description": "Single-line and multi-line scenarios are supported. The style mode is preferred.",
+        "singleLineContent": "DevUI components are derived from a lots of years of precipitation of Huawei's internal businesses. Only components that support flexible configuration can meet different demands.",
+        "multiRowContent": "DevUI is an open-source front-end solution oriented to mid and back-end products of enterprises. The design values are based on the concepts which are \"simple\", \"immersive\", and \"flexible\". It aims to provide a standard design system for designers and front-end developers. It is also an enterprise-class out-of-the-box product that meets various application scenarios.",
+        "singleLineTitle": "Single line Text Using Style",
+        "multiRowIsWebkitTitle": "Multiline Text if the browser supports webkit",
+        "multiRowNotWebkitTitle": "Multiline Text by calculation",
+        "multiRowExpandTitle": "Multiline Text Using collapse"
+      },
       "anchorLinkValues": {
         "title-usage": "Title Usage",
         "text-usage": "Text Usage",
-        "custom-usage": "Customize",
-        "editable-usage": "Editable Usage"
+        "editable-usage": "Editable Usage",
+        "text-overflow": "Text Overflow"
       }
     },
     "upload": {

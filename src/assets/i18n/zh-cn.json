@@ -638,7 +638,7 @@
       },
       "button-danger": {
         "title": "警示按钮",
-        "description": "用于标识系统中的关键操作，例如购买场景。",
+        "description": "用于标识系统中的关键操作，例如删除场景。",
         "purchase": "购买"
       },
       "button-loading": {
@@ -897,7 +897,6 @@
         "lazy-load": "懒加载指令",
         "browser-version": "当前浏览器名和版本",
         "date-pipe": "日期解析器",
-        "safe-null-pipe": "空值占位管道",
         "open-url": "新标签页打开网页",
         "download-file": "文件下载",
         "iframe-propagate": "iframe 冒泡事件",
@@ -958,14 +957,6 @@
             "themeValue": "当前主题色值",
             "description": "描述"
           },
-          "oldTable": {
-            "tab": "旧版主题颜色对照表",
-            "colorVar": "颜色变量",
-            "newVar": "新版变量",
-            "normalColor": "普通色值",
-            "darkColor": "暗黑色值",
-            "description": "描述"
-          },
           "colorSource": {
             "devui-global-bg": "全局带底色背景",
             "devui-global-bg-normal": "全局白色背景",
@@ -1022,7 +1013,7 @@
             "devui-disabled-bg": "disabled背景颜色",
             "devui-disabled-line": "disabled边框颜色",
             "devui-disabled-text": "disabled文字颜色",
-            "devui-primary-disabled": "主要按钮disabled状态文字颜色",
+            "devui-primary-disabled": "主要按钮disabled状态背景颜色",
             "devui-icon-fill-active-disabled": "svg图标激活状态禁用色",
             "devui-label-bg": "默认标签化选项背景色",
             "devui-connected-overlay-bg": "有连接点的弹出菜单层背景色",
@@ -1055,13 +1046,18 @@
           },
           "catalogs": {
             "basic": "基本变量",
-            "icon": "图标",
+            "text": "文字/图标",
             "form": "表单",
             "list": "列表",
             "disable": "禁用",
             "specialBackground": "特殊背景色",
             "button": "按钮",
-            "status": "状态"
+            "status": "状态色",
+            "brand": "主题色",
+            "shadow": "阴影色",
+            "border": "边框色",
+            "background": "背景色",
+            "others": "其他"
           },
           "catalogsList": {
             "theme": "主题色",
@@ -1483,6 +1479,9 @@
       "mutilStylesDemo": {
         "title": "表格样式"
       },
+      "dynamicColDemo": {
+        "title": "动态列及动态表格样式配置器"
+      },
       "treeTableDemo": {
         "title": "树形表格",
         "description": "通过nestedColumn属性和行数据的children、$isChildTableOpen字段来配置渲染树形表格\n支持两种实现方式，方式一通过自定义head、body模板和其中的行、单元格来实现，方式二通过配置column来实现。"
@@ -1498,6 +1497,7 @@
       "anchorLinkValues": {
         "basic-usage": "基本用法",
         "mutil-styles": "表格样式",
+        "dynamic-cols": "动态列及样式配置器",
         "async-loading": "异步加载数据",
         "table-interaction": "表格交互",
         "table-check-options": "自定义表格选中操作",
@@ -2369,12 +2369,17 @@
         "title": "数据懒加载",
         "description": "数据懒加载。"
       },
+      "customAreaDemo": {
+        "title": "自定义区域",
+        "description": "通过传入模板自定义区域"
+      },
       "anchorLinkValues": {
         "basic-usage": "基本用法",
         "disable-data-with-source": "设置禁用选项",
         "with-search-function": "自定义匹配方法",
         "async-data-with-function": "异步获取数据源并设置匹配方法",
-        "lazy-load": "数据懒加载"
+        "lazy-load": "数据懒加载",
+        "custom-area-usage": "自定义区域"
       }
     },
     "editorx": {
@@ -2389,7 +2394,7 @@
       },
       "customToolbarDemo": {
         "title": "自定义工具栏",
-        "description": "完整功能+自定义工具栏分组+收起不常用的工具按钮。"
+        "description": "自定义工具栏图标+自定义工具栏分组+收起不常用的工具按钮。"
       },
       "readOnlyModeDemo": {
         "title": "只读模式",
@@ -2676,16 +2681,21 @@
       "description": "进度条。",
       "tmw": "<div>1. 当操作需要较长的时间时，向用户展示操作进度。</div> <div>2. 当操作需要打断现有界面或后台运行，需要较长时间时。</div> <div>3. 当需要显示一个操作完成的百分比或已完成的步骤/总步骤时。</div>",
       "basicDemo": {
-        "title": "基本用法",
-        "description": "基本的进度和文字配置。"
+        "title": "线形进度条",
+        "description": "可配置在右端或随进度显示文字或自定义模板。"
       },
       "circleDemo": {
-        "title": "圆环用法",
-        "description": "基本的进度和文字配置。"
+        "title": "环形进度条",
+        "description": "可配置在环形中间显示文字或自定义模板。"
+      },
+      "multipleDemo":{
+        "title": "自定义多色进度条",
+        "description": "可配置多段不同色值或渐变色。"
       },
       "anchorLinkValues": {
-        "basic-usage": "基本用法",
-        "circle-usage": "圆环用法"
+        "basic-usage": "线形进度条",
+        "circle-usage": "环形进度条",
+        "multiple-usage": "自定义多色进度条"
       }
     },
     "quadrant-diagram": {
@@ -3189,6 +3199,10 @@
         "title": "大数据展示",
         "description": "可选择直接开启和自动判断两种模式"
       },
+      "configurableTabsDemo": {
+        "title": "自定义Tabs显示与排列",
+        "description": "通过引入transfer组件，实现tabs的自定义显示。"
+      },
       "anchorLinkValues": {
         "basic-usage": "基本用法",
         "no-set-content": "禁用选项卡",
@@ -3200,7 +3214,8 @@
         "size": "选项卡尺寸",
         "intercept-tab-switch": "拦截tab切换",
         "add-delete": "添加 / 删除",
-        "big-data": "大数据展示"
+        "big-data": "大数据展示",
+        "custom-tabs-display-and-arrangement": "自定义Tabs显示与排列"
       }
     },
     "tags": {
@@ -3568,11 +3583,21 @@
         "title": "可编辑用法",
         "description": "可自定义初始模板、编辑模板，也可设置内容字符串、内容投影等形式。支持直接点击编辑和操作图标按钮编辑、复制等。"
       },
+      "textOverflowDemo": {
+        "title": "文本溢出缩略",
+        "description": "支持单行和多行场景，优先使用样式方式处理",
+        "singleLineContent": "DevUI组件库源自于华为内部大量业务的多年沉淀，支持灵活配置的组件才能满足不同诉求。",
+        "multiRowContent": "DevUI是面向企业中后台产品的开源前端解决方案，其设计价值观基于\"至简\"、\"沉浸\"、\"灵活\"三种自然与人文相结合的理念，旨在为设计师、前端开发者提供标准的设计体系，并满足各类落地场景，是一款企业级开箱即用的产品。",
+        "singleLineTitle": "使用样式处理单行文本",
+        "multiRowIsWebkitTitle": "如果浏览器支持webkit使用样式处理多行文本",
+        "multiRowNotWebkitTitle": "使用计算方式处理多行文本",
+        "multiRowExpandTitle": "设置展开收起显示多行文本"
+      },
       "anchorLinkValues": {
         "title-usage": "标题用法",
         "text-usage": "文本用法",
-        "custom-usage": "自定义用法",
-        "editable-usage": "可编辑用法"
+        "editable-usage": "可编辑用法",
+        "text-overflow": "文本溢出缩略"
       }
     },
     "upload": {

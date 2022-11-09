@@ -1,0 +1,51 @@
+@import '../style/core/color';
+@import '../style/core/_font';
+@import '../style/core/z-index';
+@import '../style/theme/shadow';
+
+.user-guide {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  color: $devui-light-text;
+  background-color: $devui-brand;
+  box-shadow: $devui-shadow-length-base $devui-shadow;
+  position: fixed;
+  z-index: calc(#{$devui-z-index-full-page-overlay} - 1);
+
+  &-hidden {
+    visibility: hidden;
+  }
+
+  &-text {
+    line-height: 60px;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  &:hover {
+    cursor: pointer;
+    box-shadow: $devui-shadow-length-hover $devui-shadow;
+  }
+
+  &-window {
+    width: 200px;
+    // height: 160px;
+    li {
+      padding: 8px 12px 8px 20px;
+
+      .step {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .title {
+        font-size: $devui-font-size;
+        font-weight: bold;
+      }
+
+      cursor: pointer;
+    }
+  }
+}

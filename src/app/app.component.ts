@@ -60,7 +60,7 @@ export class AppComponent implements OnInit, OnDestroy {
       if (event instanceof NavigationEnd) {
         const pathArray = this.router.url.split('/');
         const langParam = pathArray[2];
-        if (!this.i18n.i18nConfig.hasOwnProperty(langParam)) {
+        if (!Object.prototype.hasOwnProperty.call(this.i18n.i18nConfig, langParam)) {
           this.currentLang = this.i18n.DEFAULT_LANG;
           localStorage.setItem('lang', this.i18n.DEFAULT_LANG);
           pathArray[2] = this.i18n.DEFAULT_LANG;
@@ -77,6 +77,7 @@ export class AppComponent implements OnInit, OnDestroy {
     const versionArr = this.version.split('.');
     this.versionOptions = [
       { name: this.version, link: '/components/get-start', target: '_self' },
+      { name: '13.3.0', link: '/13.3.0/', target: '_self' },
       { name: '12.3.0', link: '/12.3.0/', target: '_self' },
       { name: '11.4.0', link: '/11.4.0/', target: '_self' },
       { name: '10.2.0', link: '/10.2.0/', target: '_self' },

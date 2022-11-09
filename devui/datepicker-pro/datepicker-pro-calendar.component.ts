@@ -284,10 +284,6 @@ export class DatepickerProCalendarComponent implements OnInit, AfterViewInit, On
       return;
     }
 
-    if (value.find(t => !this.pickerSrv.dateInRange(t))) {
-      return;
-    }
-
     this.dateValue = value.map(d => {
       return d ? this.datepickerConvert.format(d, this.curFormat) : '';
     });
@@ -300,7 +296,7 @@ export class DatepickerProCalendarComponent implements OnInit, AfterViewInit, On
   }
 
   writeSingleValue(value: Date) {
-    if (!value || !this.pickerSrv.dateInRange(new Date(value))) {
+    if (!value) {
       this.clear();
       return;
     }

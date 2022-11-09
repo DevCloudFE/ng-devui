@@ -398,11 +398,18 @@ d-tag {
       }
     }
 
+    .devui-search-container {
+      max-width: 232px;
+    }
+
     .devui-category-search-tree-container {
       overflow-y: auto;
-      max-height: 270px;
-      margin-bottom: -8px;
-      padding: 4px 0 4px 8px;
+      max-height: 264px;
+      padding: 12px;
+    }
+
+    .devui-no-data-tip {
+      padding: 12px;
     }
 
     .devui-yearOption,

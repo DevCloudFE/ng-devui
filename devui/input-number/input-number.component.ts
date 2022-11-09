@@ -156,6 +156,8 @@ export class InputNumberComponent implements ControlValueAccessor, OnChanges, On
       }
     }
     this.renderer.setProperty(this.inputElement.nativeElement, 'value', value);
+    this.disabledDec = this.value === this.min;
+    this.disabledInc = this.value === this.max;
     this.cdr.detectChanges();
   }
 
@@ -201,14 +203,12 @@ export class InputNumberComponent implements ControlValueAccessor, OnChanges, On
   subscribeIncAction() {
     if (this.incListener && !this.incAction) {
       this.incAction = this.incListener.subscribe(this.increaseValue.bind(this));
-      this.disabledInc = false;
     }
   }
 
   subscribeDecAction() {
     if (this.decListener && !this.decAction) {
       this.decAction = this.decListener.subscribe(this.decreaseValue.bind(this));
-      this.disabledDec = false;
     }
   }
 

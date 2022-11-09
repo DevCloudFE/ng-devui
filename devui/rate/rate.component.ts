@@ -66,7 +66,7 @@ export class RateComponent implements OnInit, ControlValueAccessor {
   }
   // 只读模式配置
   setStaticRating() {
-    const half_star = this.chooseValue % 1;
+    const half_star = this.chooseValue < 0 ? this.chooseValue + 1 : this.chooseValue % 1;
     const int_current_level = Math.floor(this.chooseValue);
     this.setChange(0, int_current_level + 1, '100%');
     if (half_star > 0) {

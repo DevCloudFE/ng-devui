@@ -60,3 +60,5 @@ export enum UnitRole {
   week = 20,
   month = 30,
 }
+
+export type GanttRailStatus = 'normal' | 'overdue' | 'done';

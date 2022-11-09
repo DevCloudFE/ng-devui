@@ -9,7 +9,6 @@
     "date-fns",
     "lodash-es",
     "@popperjs/core",
-    "enquire.js",
     "css-vars-ponyfill"
   ]
 }

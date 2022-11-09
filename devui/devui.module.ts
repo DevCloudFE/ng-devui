@@ -62,6 +62,7 @@ import { TransferModule } from 'ng-devui/transfer';
 import { TreeModule } from 'ng-devui/tree';
 import { TreeSelectModule } from 'ng-devui/tree-select';
 import { UploadModule } from 'ng-devui/upload';
+import { UserGuideModule } from 'ng-devui/user-guide';
 import { WindowRefModule } from 'ng-devui/window-ref';
 export * from 'ng-devui/accordion';
 export * from 'ng-devui/alert';
@@ -126,6 +127,7 @@ export * from 'ng-devui/transfer';
 export * from 'ng-devui/tree';
 export * from 'ng-devui/tree-select';
 export * from 'ng-devui/upload';
+export * from 'ng-devui/user-guide';
 export * from 'ng-devui/window-ref';
 export * from './version';
 
@@ -178,6 +180,7 @@ export * from './version';
     TimeAxisModule,
     TreeModule,
     UploadModule,
+    UserGuideModule,
     InputNumberModule,
     SliderModule,
     SplitterModule,

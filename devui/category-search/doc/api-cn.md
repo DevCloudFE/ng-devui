@@ -89,8 +89,8 @@ export interface ICategorySearchTagItem {
    */
   value?: {
     label: string; // 用于显示选中值，如果指定了 filterKey 则使用该值为属性名，例如 basic demo 中的状态
-    value: string | ITagOption | Array<ITagOption | number | string>; // 下拉列表的选择值
-    cache: string | ITagOption | Array<ITagOption | number | string>; // 下拉列表展开时用于重置选择值的缓存数据
+    value: string | ITagOption | Array<ITagOption | number | string | Date>; // 下拉列表的选择值
+    cache: string | ITagOption | Array<ITagOption | number | string | Date>; // 下拉列表展开时用于重置选择值的缓存数据
   };
   /**
    * dateRange 类型是否显示时分秒

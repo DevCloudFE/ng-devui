@@ -1,4 +1,4 @@
-import { Directive, ElementRef, HostBinding, Input, OnChanges, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, HostBinding, Input, OnChanges, OnDestroy, Renderer2 } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { updateClassList } from './layout-utils';
@@ -8,8 +8,7 @@ import { DScreenMediaQueryService } from './screen-media-query.service';
 @Directive({
   selector: `[dFlex], d-row, d-col`,
 })
-
-export class DFlexDirective implements OnInit, OnChanges, OnDestroy {
+export class DFlexDirective implements OnChanges, OnDestroy, AfterViewInit {
   @HostBinding('class.dl-flex-row') get flexRow() {
     return this.dFlexContainer === 'row';
   }
@@ -35,11 +34,18 @@ export class DFlexDirective implements OnInit, OnChanges, OnDestroy {
 
   private destroy$ = new Subject<void>();
 
-  constructor(
-    private elementRef: ElementRef,
-    private renderer: Renderer2,
-    private screenQueryService: DScreenMediaQueryService
-  ) { }
+  constructor(private elementRef: ElementRef, private renderer: Renderer2, private screenQueryService: DScreenMediaQueryService) {}
+
+  ngAfterViewInit(): void {
+    this.screenQueryService
+      .getPoint()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(({ currentPoint }) => {
+        this.updateFlex(currentPoint);
+      });
+    updateClassList(this, this.elementRef, this.renderer);
+  }
+
   parseFlex(flex: any): string {
     if (typeof flex === 'number') {
       return `${flex}`;
@@ -68,15 +74,6 @@ export class DFlexDirective implements OnInit, OnChanges, OnDestroy {
       }
     }
     this.renderer.setStyle(this.elementRef.nativeElement, 'flex', this.parseFlex(finalFlex));
-  }
-
-  ngOnInit(): void {
-    this.screenQueryService.getPoint()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(({ currentPoint }) => {
-        this.updateFlex(currentPoint);
-      });
-    updateClassList(this, this.elementRef, this.renderer);
   }
 
   ngOnChanges(): void {

@@ -20,13 +20,11 @@ export class DataTableDemoComponent implements OnInit, OnDestroy {
   interactionColumnSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('./interaction-column/interaction-column.component.html?raw') },
     { title: 'TS', language: 'typescript', code: require('./interaction-column/interaction-column.component.ts?raw') },
-    { title: 'SCSS', language: 'css', code: require('./interaction-column/interaction-column.component.scss?raw') },
     { title: 'mock-data', language: 'typescript', code: require('./mock-data?raw') },
   ];
   interactionSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('./interaction/interaction.component.html?raw') },
     { title: 'TS', language: 'typescript', code: require('./interaction/interaction.component.ts?raw') },
-    { title: 'SCSS', language: 'css', code: require('./interaction/interaction.component.scss?raw') },
     { title: 'mock-data', language: 'typescript', code: require('./mock-data?raw') },
   ];
   checkOptionSource: Array<DevuiSourceData> = [
@@ -132,7 +130,11 @@ export class DataTableDemoComponent implements OnInit, OnDestroy {
   mutilStyles: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('./mutil-styles/mutil-styles.component.html?raw') },
     { title: 'TS', language: 'typescript', code: require('./mutil-styles/mutil-styles.component.ts?raw') },
-    { title: 'SCSS', language: 'css', code: require('./mutil-styles/mutil-styles.component.scss?raw') },
+    { title: 'mock-data', language: 'typescript', code: require('./mock-data?raw') },
+  ];
+  dynamicColStyles: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'xml', code: require('./dynamic-cols/dynamic-cols-demo.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./dynamic-cols/dynamic-cols-demo.component.ts?raw') },
     { title: 'mock-data', language: 'typescript', code: require('./mock-data?raw') },
   ];
   fixHeightVirtualScrollSource: Array<DevuiSourceData> = [
@@ -168,6 +170,7 @@ export class DataTableDemoComponent implements OnInit, OnDestroy {
     this.navItems = [
       { dAnchorLink: 'basic-usage', value: values['basic-usage'] },
       { dAnchorLink: 'mutil-styles', value: values['mutil-styles'] },
+      { dAnchorLink: 'dynamic-cols', value: values['dynamic-cols'] },
       { dAnchorLink: 'async-loading', value: values['async-loading'] },
       { dAnchorLink: 'table-interaction', value: values['table-interaction'] },
       { dAnchorLink: 'table-check-options', value: values['table-check-options'] },

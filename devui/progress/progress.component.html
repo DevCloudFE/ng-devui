@@ -1,40 +1,64 @@
-<div *ngIf="type !== 'circle'" class="devui-progress" [ngStyle]="{ height: strokeWidth + 'px' }">
-  <div
-    class="devui-progress-bar"
-    role="progressbar"
-    aria-valuenow="60"
-    aria-valuemin="0"
-    aria-valuemax="100"
-    [style.background-color]="strokeColor || barbgcolor"
-    [style.width]="percentage + '%'"
-  ></div>
-  <span [style.line-height]="strokeWidth + 'px'">{{ percentageText }}</span>
-</div>
-<div *ngIf="type === 'circle'" class="devui-progress-circle">
-  <svg class="devui-progress-circle" viewBox="0 0 100 100">
-    <path
-      class="devui-progress-circle-trail"
-      fill-opacity="0"
-      [attr.stroke-width]="strokeWidth"
-      [ngStyle]="trailPath"
-      [attr.d]="pathString"
-    ></path>
-    <path
-      class="devui-progress-circle-path"
-      [attr.d]="pathString"
-      [attr.stroke-linecap]="'round'"
-      fill-opacity="0"
-      [attr.stroke]="strokeColor || barbgcolor"
-      [attr.stroke-width]="percentage ? strokeWidth : 0"
-      [ngStyle]="strokePath"
-    ></path>
-  </svg>
-  <ng-container *ngIf="showContent">
+<ng-container *ngIf="type === 'line'">
+  <div id="devui-progress-line-{{ id }}" class="devui-progress devui-progress-line" [style.height]="strokeWidth + 'px'">
+    <div
+      *ngFor="let bar of progressData"
+      class="devui-progress-bar"
+      [class.devui-progress-bar-default-bg]="!bar.color"
+      [style.background]="bar.color"
+      [style.width]="bar.width + '%'"
+      [title]="setBarInnerText(bar)"
+    >
+      <span *ngIf="showContentConfig.showInnerContent" [style.line-height]="strokeWidth + 'px'">{{ bar.content }}</span>
+    </div>
+    <span *ngIf="showContentConfig.showCenterContent" [style.line-height]="strokeWidth + 'px'">{{ content }}</span>
+  </div>
+  <ng-container *ngIf="showContentConfig.showOuterContent">
     <ng-template
-      *ngIf="customViewTemplate"
+      *ngIf="customViewTemplate; else defaultPercentageText"
       [ngTemplateOutlet]="customViewTemplate"
       [ngTemplateOutletContext]="{ $implicit: this, percentage: percentage }"
     ></ng-template>
-    <span *ngIf="!customViewTemplate" class="devui-progress-circle-text">{{ percentage }}%</span>
   </ng-container>
-</div>
+</ng-container>
+
+<ng-container *ngIf="type === 'circle'">
+  <div id="devui-progress-circle-{{ id }}" class="devui-progress devui-progress-circle">
+    <svg viewBox="0 0 100 100">
+      <defs *ngIf="isGradient">
+        <linearGradient id="devui-progress-gradient-{{ id }}" x1="100%" y1="0%" x2="0%" y2="0%">
+          <stop *ngFor="let color of arrayStrokeColor" [attr.offset]="color.percentage" [attr.stop-color]="color.color"></stop>
+        </linearGradient>
+      </defs>
+      <path
+        class="devui-progress-circle-trail"
+        fill-opacity="0"
+        [attr.d]="pathString"
+        [attr.stroke-width]="strokeWidth"
+        [ngStyle]="trailPath"
+      ></path>
+      <path
+        *ngFor="let circle of progressData"
+        fill-opacity="0"
+        [attr.d]="pathString"
+        [attr.stroke]="circle.color"
+        [attr.stroke-linecap]="'round'"
+        [attr.stroke-width]="circle.percentage ? strokeWidth : 0"
+        [class.devui-progress-circle-path]="!isGradient"
+        [ngStyle]="circle.strokePath"
+      >
+        <title>{{ circle.percentageText ? circle.percentageText : circle.percentage + '%' }}</title>
+      </path>
+    </svg>
+    <ng-container *ngIf="showContentConfig.showCenterContent">
+      <ng-template
+        *ngIf="customViewTemplate; else defaultPercentageText"
+        [ngTemplateOutlet]="customViewTemplate"
+        [ngTemplateOutletContext]="{ $implicit: this, percentage: percentage }"
+      ></ng-template>
+    </ng-container>
+  </div>
+</ng-container>
+
+<ng-template #defaultPercentageText>
+  <div class="devui-progress-default-text">{{ content }}</div>
+</ng-template>

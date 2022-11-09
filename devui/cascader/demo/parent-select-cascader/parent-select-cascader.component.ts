@@ -106,7 +106,7 @@ export class ParentSelectCascaderComponent {
   ];
 
   value1: Array<string | number>[] = [];
-  value2: Array<string | number>[] = [[1, 4, 8], [1, 4, 9, 81], [1, 41]];
+  value2: Array<string | number>[] = [ [1], [2], [1, 4]];
   value3: Array<string | number>[] = [[1, 4, 8], [1, 4, 9, 81], [1, 41]];
   value4: Array<string | number>[] = [[1, 4, 8], [1, 4, 9, 81], [1, 41]];
 

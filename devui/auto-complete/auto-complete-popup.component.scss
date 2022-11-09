@@ -3,6 +3,60 @@
 .devui-dropdown-menu {
   width: 100%;
   display: block;
+
+  &.devui-custom-right,
+  &.devui-custom-left,
+  &.devui-custom-top {
+    min-width: 400px;
+    display: flex !important;
+
+    & > .devui-dropdown-menu-wrap {
+      display: inline-block;
+    }
+
+    & > .devui-select-custom-area {
+      display: inline-block;
+      overflow: auto;
+    }
+
+    &:not(.devui-custom-top) > .devui-dropdown-menu-wrap {
+      width: calc(50% - 1px);
+    }
+
+    &:not(.devui-custom-top) > .devui-select-custom-area {
+      width: 50%;
+    }
+
+    & > .devui-select-custom-area::before {
+      display: none;
+    }
+  }
+
+  &.devui-custom-top {
+    flex-direction: column-reverse;
+  }
+
+  &.devui-custom-left > .devui-select-custom-area {
+    border-right: 1px solid $devui-dividing-line;
+    order: -1;
+  }
+
+  &.devui-custom-right > .devui-select-custom-area {
+    border-left: 1px solid $devui-dividing-line;
+  }
+
+  &.devui-custom-top > .devui-select-custom-area {
+    border-bottom: 1px solid $devui-dividing-line;
+  }
+}
+
+.devui-select-custom-area::before {
+  display: block;
+  content: '';
+  width: calc(100% - 20px);
+  margin: 0 10px;
+  height: 1px;
+  border-top: 1px solid $devui-dividing-line;
 }
 
 .devui-dropdown-menu-cdk {

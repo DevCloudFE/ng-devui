@@ -19,7 +19,7 @@ export class ToggleComponent {
     'C#',
     'C',
     'C++',
-    'Python',
+    'CPython',
     'Java',
     'JavaScript',
     'Go',

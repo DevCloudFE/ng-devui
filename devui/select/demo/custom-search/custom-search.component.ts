@@ -70,7 +70,7 @@ export class CustomSearchComponent {
    * 例如请求接口后使用 promise resolve 返回数组即可，注意数组需要封装为 [{ id: index, option: option }] 结构
    * 自定义 searchFn 时请勿使用 options
   onSelectObject = (term) =>
-    new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
       this.http.post('url/api', { keyword: term }).subscribe(
         (res: Array<any>) => {
           const result = res.map((option, index) => ({ id: index, option: option }));

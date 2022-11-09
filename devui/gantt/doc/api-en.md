@@ -44,6 +44,8 @@ import {GanttModule} from' ng-devui/gantt';
 | customBgClass   |     `string`      |   --    |Optional.Drag the background color when the Gantt bar is moved.  | -- |
 | customTitleClass   |     `string`      |   --    | Optional. Customizing the title style.                                     | -- |
 | scrollElement | `Element` | -- | Optional, scrolling container. | [Basic Usage](demo#gantt-basic) |
+| status   |     `GanttRailStatus`      | --  | Optional. status`'normal' \| 'overdue' \| 'done'`                 | [Basic Usage](demo#gantt-basic) |
+| titleTemplateRef   |     ``TemplateRef<any>``      | null  | Optional. Custom Title Content Template。         | [Basic Usage](demo#gantt-basic) |
 
 ### d-gantt-bar event
 
@@ -73,10 +75,7 @@ import {GanttModule} from' ng-devui/gantt';
 | id | `string` | null | Optional. Id is supported | [Combined With Datatable](demo#gantt-with-datatable) |
 | data | `object` | null | Optional. Any data can be transferred | [Combined With Datatable](demo#gantt-with-datatable) |
 | progressRate | `number` | 0 | Optional. Progress. For example, 30 indicates 30% progress | [Combined With Datatable](demo#gantt-with-datatable) |
-
-
-|   tip    |      `string`      |     0      | 可选，提示信息                                  | [Combined With Datatable](demo#gantt-with-datatable) |
-
+|   tip    |      `string`      |     0      | Optional. Prompt message                                  | [Combined With Datatable](demo#gantt-with-datatable) |
 
 ### d-gantt-tools parameter
 | Parameter | Type | Default | Description | Jump to Demo |
@@ -135,4 +134,6 @@ export enum UnitRole {
   week = 20,
   month = 30,
 }
+
+export type GanttRailStatus = 'normal' | 'overdue' | 'done';
 ```

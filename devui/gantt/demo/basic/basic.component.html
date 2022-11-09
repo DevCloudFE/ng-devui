@@ -21,10 +21,14 @@
           [startDate]="item?.startDate"
           [endDate]="item?.endDate"
           [tipTemplateRef]="tipTemplate"
+          [titleTemplateRef]="titleTemplate"
           [id]="item?.id"
           [title]="item?.title"
           [progressRate]="item?.progressRate"
           [scrollElement]="ganttContainer"
+          [status]="item?.status"
+          [data]="item"
+          [showTitle]="true"
           (barMoveStartEvent)="onGanttBarMoveStart()"
           (barMovingEvent)="onGanttBarMoving($event)"
           (barResizeStartEvent)="onGanttBarResizeStart()"
@@ -44,5 +48,14 @@
       <div>startDate: {{ ganttInstance?.startDate | i18nDate: 'short' }}</div>
       <div>endDate: {{ ganttInstance?.endDate | i18nDate: 'short' }}</div>
     </div>
+  </ng-template>
+  <ng-template #titleTemplate let-data="data">
+    <d-tag
+      *ngIf="data?.overdueTime > 0 && data?.status !== 'done'"
+      class="delay-tag"
+      [tag]="'overdue ' + data?.overdueTime + ' days'"
+      [labelStyle]="'pink-w98'"
+    >
+    </d-tag>
   </ng-template>
 </d-fullscreen>

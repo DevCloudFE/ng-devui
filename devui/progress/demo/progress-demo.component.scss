@@ -1,0 +1,19 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
+:host ::ng-deep .progress-container {
+  margin-bottom: 20px;
+
+  &.circle-type {
+    display: inline-block;
+    margin-right: 20px;
+
+    d-progress {
+      width: 128px;
+      height: 128px;
+
+      .devui-progress-circle .devui-progress-default-text {
+        font-size: $devui-font-size-price;
+      }
+    }
+  }
+}

@@ -3,12 +3,12 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import {
-  DatepickerModule,
-  EditableSelectModule,
-  InputNumberModule,
-  MultiAutoCompleteModule,
-  TagsModule,
-  TreeSelectModule
+    DatepickerModule,
+    EditableSelectModule,
+    InputNumberModule,
+    MultiAutoCompleteModule,
+    TagsModule,
+    TreeSelectModule
 } from 'ng-devui';
 import { ButtonModule } from 'ng-devui/button';
 import { CheckBoxModule } from 'ng-devui/checkbox';

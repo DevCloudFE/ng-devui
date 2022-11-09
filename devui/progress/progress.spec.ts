@@ -4,22 +4,28 @@ import { By } from '@angular/platform-browser';
 import { ProgressComponent } from './progress.component';
 import { ProgressModule } from './progress.module';
 @Component({
-  template: `<d-progress #progress [percentage]="percentage" [percentageText]="percentageText"> </d-progress>`,
+  template: `<d-progress #progress [percentage]="percentage" [percentageText]="percentageText" [showContent]="showContentConfig">
+  </d-progress>`,
 })
 class TestProgressComponent {
   @ViewChild('progress') progress: ProgressComponent;
   percentage = 80;
   percentageText = '80%';
+  showContentConfig = {
+    showInnerContent: false,
+    showOuterContent: true,
+    showCenterContent: false,
+  };
 }
 
 @Component({
-  template: ` <d-progress #progress [isCircle]="true" [percentage]="percentage"
-     [barbgcolor]="barbgcolor" [strokeWidth]="strokeWidth"> </d-progress>`,
+  template: ` <d-progress #progress [isCircle]="true" [percentage]="percentage" [strokeColor]="strokeColor" [strokeWidth]="strokeWidth">
+  </d-progress>`,
 })
 class TestCircleProgressComponent {
   @ViewChild('progress') progress: ProgressComponent;
   percentage = 80;
-  barbgcolor = '#50D4AB';
+  strokeColor = '#5e7ce0';
   strokeWidth = 8;
 }
 
@@ -27,7 +33,7 @@ describe('progress basic', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [ProgressModule],
-      declarations: [TestProgressComponent, TestCircleProgressComponent]
+      declarations: [TestProgressComponent, TestCircleProgressComponent],
     }).compileComponents();
   });
 
@@ -47,10 +53,9 @@ describe('progress basic', () => {
     describe('should progress display correctly', () => {
       it('should progress background and text display correctly', () => {
         expect(nativeEl.style.width).toBe(component.percentage + '%');
-        expect(debugEl.query(By.css('.devui-progress span')).nativeElement.textContent).toBe(component.percentageText);
+        expect(debugEl.query(By.css('.devui-progress-default-text')).nativeElement.textContent).toBe(component.percentageText);
       });
     });
-
   });
   describe('should circle-progress display correctly', () => {
     let fixture: ComponentFixture<TestCircleProgressComponent>;
@@ -58,12 +63,11 @@ describe('progress basic', () => {
       fixture = TestBed.createComponent(TestCircleProgressComponent);
       const component = fixture.componentInstance;
       fixture.detectChanges();
-      expect(fixture.debugElement.query(By.css('.devui-progress-circle-text')).nativeElement.textContent)
-        .toBe(component.percentage + '%');
-      expect(fixture.debugElement.query(By.css('.devui-progress-circle-path')).nativeElement.style.stroke)
-        .toBe('rgb(80, 212, 171)');
-      expect(fixture.debugElement.query(By.css('.devui-progress-circle-path')).nativeElement.getAttribute('stroke-width'))
-        .toBe(String(component.strokeWidth));
+      expect(fixture.debugElement.query(By.css('.devui-progress-default-text')).nativeElement.textContent).toBe(component.percentage + '%');
+      expect(fixture.debugElement.query(By.css('.devui-progress-circle-path')).nativeElement.getAttribute('stroke')).toBe('#5e7ce0');
+      expect(fixture.debugElement.query(By.css('.devui-progress-circle-path')).nativeElement.getAttribute('stroke-width')).toBe(
+        String(component.strokeWidth)
+      );
     });
   });
 });

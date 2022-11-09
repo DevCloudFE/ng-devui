@@ -6,6 +6,7 @@ export const devuiLightTheme: Theme = new Theme({
   cnName: '浅色主题',
   data: {
     'devui-global-bg': '#f3f6f8',
+    'devui-glass-morphism-bg': 'rgba(243,246,248,0.9)',
     'devui-global-bg-normal': '#ffffff',
     'devui-base-bg': '#ffffff',
     'devui-base-bg-dark': '#333854',
@@ -148,6 +149,7 @@ export const devuiGreenTheme: Theme = new Theme({
   data: {
     ...devuiLightTheme.data,
     'devui-global-bg': '#f3f8f7',
+    'devui-glass-morphism-bg': 'rgba(243,248,247,0.9)',
     'devui-brand': '#3DCCA6',
     'devui-brand-foil': '#7fdac1',
     'devui-brand-hover': '#6DDEBB',
@@ -196,6 +198,7 @@ export const devuiDarkTheme: Theme = new Theme({
   cnName: '深色主题',
   data: {
     'devui-global-bg': '#202124',
+    'devui-glass-morphism-bg': 'rgba(32,33,36,0.9)',
     'devui-global-bg-normal': '#202124',
     'devui-base-bg': '#2E2F31',
     'devui-base-bg-dark': '#2e2f31',

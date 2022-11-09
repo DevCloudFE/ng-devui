@@ -9,6 +9,8 @@ export * from './data-table.module';
 export * from './data-table.token';
 export * from './display-cell-value.pipe';
 export * from './editor-host.directive';
+export * from './table-option-modal.component';
+export * from './table-option-toggle.component';
 export * from './table/body/tbody.component';
 export * from './table/body/td/td.component';
 export * from './table/body/td/td.service';

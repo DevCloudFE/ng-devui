@@ -9,6 +9,12 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./editable-select-demo.component.scss'],
 })
 export class EditableSelectDemoComponent implements OnInit, OnDestroy {
+  customAreaSourceData: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'xml', code: require('./custom-area/custom-area.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./custom-area/custom-area.component.ts?raw') },
+    { title: 'SCSS', language: 'scss', code: require('./custom-area/custom-area.component.scss?raw') },
+  ];
+
   BasicSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('./basic/with-source.component.html?raw') },
     { title: 'TS', language: 'typescript', code: require('./basic/with-source.component.ts?raw') },
@@ -55,6 +61,7 @@ export class EditableSelectDemoComponent implements OnInit, OnDestroy {
       { dAnchorLink: 'with-search-function', value: values['with-search-function'] },
       { dAnchorLink: 'async-data-with-function', value: values['async-data-with-function'] },
       { dAnchorLink: 'lazy-load', value: values['lazy-load'] },
+      { dAnchorLink: 'custom-area-usage', value: values['custom-area-usage'] },
     ];
   }
 

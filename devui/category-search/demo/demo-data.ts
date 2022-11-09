@@ -180,6 +180,8 @@ export const demoData: ICategorySearchTagItem[] = [
     field: 'module',
     type: 'treeSelect',
     group: 'User-defined',
+    searchable: true,
+    searchPlaceholder: 'Search Input',
     options: [
       {
         title: 'parent 1',

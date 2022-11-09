@@ -89,7 +89,7 @@
   cursor: not-allowed !important;
 }
 
-.tree-node-highlight {
+.devui-tree-node-highlight {
   color: $devui-brand;
   font-weight: bold;
 }
@@ -101,8 +101,8 @@
 
 ::ng-deep .devui-tree-drag-ghost-container {
   position: fixed;
-  left: -9999;
-  top: -9999;
+  left: -10000px;
+  top: -10000px;
   width: 100%;
   height: auto;
   background: transparent;

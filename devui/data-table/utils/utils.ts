@@ -1,3 +1,6 @@
+import { ElementRef } from "@angular/core";
+import { TableWidthConfig } from '../data-table.model';
+
 export const simDeepClone = obj => {
   if (obj === null) { return null; }
   if (typeof obj === 'object') {
@@ -12,6 +15,44 @@ export const simDeepClone = obj => {
     return obj;
   }
 };
+
+export function tableResizeFunc(tableWidthConfig: TableWidthConfig[], ele: ElementRef) {
+  let _totalWidth = 0;
+  let lastWidth = 0;
+  let firstResize = true;
+  return function onResize({ width, beforeWidth }, field) {
+    const index = tableWidthConfig.findIndex((config) => {
+      return config.field === field;
+    });
+    if (index > -1) {
+      if (firstResize) {
+        firstResize = false;
+        const ratio = beforeWidth / parseInt(tableWidthConfig[index].width, 10);
+        tableWidthConfig.forEach(t => {
+          t.width = parseInt(t.width, 10) * ratio + 'px';
+        });
+        _totalWidth = ele.nativeElement.querySelector('.table-wrap').offsetWidth;
+        lastWidth = parseInt(tableWidthConfig.slice(-1)[0].width);
+      }
+      tableWidthConfig[index].width = width + 'px';
+
+      let newWidthTotal = 0;
+      tableWidthConfig.forEach(t => {
+        newWidthTotal += parseInt(t.width, 10);
+      });
+
+      const lastCol = tableWidthConfig[tableWidthConfig.length - 1];
+      const lastColWidth = parseInt(lastCol.width, 10);
+      const changeValue = newWidthTotal - _totalWidth;
+      if (changeValue < 0) {
+        lastCol.width = lastColWidth + _totalWidth - newWidthTotal + 'px';
+      } else if (lastColWidth > lastWidth) {
+        const lastChange = (lastColWidth - lastWidth) > changeValue ? changeValue : (lastColWidth - lastWidth);
+        lastCol.width = lastColWidth - lastChange + 'px';
+      }
+    }
+  };
+}
 
 export const highPerformanceFilter = (arr, func) => {
   let res = [];

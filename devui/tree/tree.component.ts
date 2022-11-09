@@ -158,6 +158,7 @@ export class TreeComponent implements OnInit, OnChanges, AfterViewInit, OnDestro
     if (ele && !ele.classList.contains('devui-tree-node__content--value-wrapper')
       && !ele.classList.contains('devui-tree-node__content')
       && !ele.classList.contains('devui-tree-node__title')
+      && !ele.classList.contains('devui-tree-node-highlight')
       && ele.tagName !== 'D-HIGHLIGHT'
       && ele.parentNode?.tagName !== 'D-HIGHLIGHT') {
       return false;

@@ -169,7 +169,15 @@
           [class.select-disabled]="treeNode.data.disableSelect"
           title="{{ treeNode.data.title }}"
         >
-          <d-highlight *ngIf="treeNode.data?.isMatch" [value]="treeNode.data.title" [term]="treeFactory.searchItem"> </d-highlight>
+          <d-highlight
+            *ngIf="treeNode.data?.isMatch && !treeNode.data?.isCustomSearch"
+            [value]="treeNode.data.title"
+            [term]="treeFactory.searchItem"
+          >
+          </d-highlight>
+          <span *ngIf="treeNode.data?.isMatch && treeNode.data?.isCustomSearch" class="devui-tree-node-highlight">{{
+            treeNode.data.title
+          }}</span>
           <ng-container *ngIf="!treeNode.data?.isMatch">{{ treeNode.data.title }}</ng-container>
         </span>
         <span class="devui-tree-node__edit" *ngIf="!nodeTemplate && treeNode.data?.editable">
@@ -413,7 +421,9 @@
             [term]="treeFactory.searchItem"
           >
           </d-highlight>
-          <span *ngIf="treeNode.data?.isMatch && treeNode.data?.isCustomSearch" class="tree-node-highlight">{{ treeNode.data.title }}</span>
+          <span *ngIf="treeNode.data?.isMatch && treeNode.data?.isCustomSearch" class="devui-tree-node-highlight">{{
+            treeNode.data.title
+          }}</span>
           <ng-container *ngIf="!treeNode.data?.isMatch">{{ treeNode.data.title }}</ng-container>
         </span>
         <span class="devui-tree-node__edit" *ngIf="!nodeTemplate && treeNode.data?.editable">

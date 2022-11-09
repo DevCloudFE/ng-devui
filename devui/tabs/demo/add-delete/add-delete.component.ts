@@ -43,11 +43,15 @@ export class AddDeleteComponent implements OnInit {
       const data = this[dataName];
       for (let i = 1; i <= data.length + 1; i++) {
         if (!data.find((item) => item.id === `tab${i}`)) {
+          const newId = `tab${i}`;
           this[dataName].push({
-            id: `tab${i}`,
+            id: newId,
             title: `Tab${i}`,
             content: `Tab${i} Content`,
           });
+          if (type === 'wrapped') {
+            this.wrappedActiveId = newId;
+          }
           break;
         }
       }

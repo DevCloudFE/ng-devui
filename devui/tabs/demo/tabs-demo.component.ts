@@ -54,6 +54,21 @@ export class TabsDemoComponent implements OnInit, OnDestroy {
     { title: 'TS', language: 'typescript', code: require('./big-data/big-data.component.ts?raw') },
     { title: 'SCSS', language: 'css', code: require('./big-data/big-data.component.scss?raw') },
   ];
+  ConfigurableSource: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'xml', code: require('./configurable-tabs/configurable-tabs.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./configurable-tabs/configurable-tabs.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./configurable-tabs/configurable-tabs.component.scss?raw') },
+    {
+      title: 'tabs-transfer HTML',
+      language: 'xml',
+      code: require('./configurable-tabs/tabs-transfer/tabs-transfer.component.html?raw'),
+    },
+    {
+      title: 'tabs-transfer TS',
+      language: 'typescript',
+      code: require('./configurable-tabs/tabs-transfer/tabs-transfer.component.ts?raw'),
+    },
+  ];
   navItems = [];
   subs: Subscription = new Subscription();
   constructor(private translate: TranslateService) {}
@@ -86,6 +101,7 @@ export class TabsDemoComponent implements OnInit, OnDestroy {
       { dAnchorLink: 'intercept-tab-switch', value: values['intercept-tab-switch'] },
       { dAnchorLink: 'add-delete', value: values['add-delete'] },
       { dAnchorLink: 'big-data', value: values['big-data'] },
+      { dAnchorLink: 'custom-tabs-display-and-arrangement', value: values['custom-tabs-display-and-arrangement'] },
     ];
   }
 

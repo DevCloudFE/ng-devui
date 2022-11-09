@@ -16,6 +16,20 @@ export default {
   autoComplete: {
     latestInput: 'Latest input',
   },
+  datatable: {
+    tableSetting: 'Table Setting',
+    ensure: 'Ensure',
+    cancel: 'Cancel',
+    compact: 'Compact',
+    standard: 'Standard',
+    loose: 'Loose',
+    divideLine: 'Divide Line',
+    striped: 'Striped',
+    tableShadow: 'Table Shadow',
+    styles: 'Table Style',
+    colSelected: 'Selected',
+    colCanSelect: 'Selectable',
+  },
   datePicker: {
     today: 'Today',
     clear: 'Clear',

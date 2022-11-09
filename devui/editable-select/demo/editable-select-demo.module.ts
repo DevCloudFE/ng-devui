@@ -12,6 +12,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
 import { AsyncDataWithFunctionComponent } from './async-data-function/async-data-with-function.component';
 import { WithSourceComponent } from './basic/with-source.component';
+import { CustomAreaComponent } from './custom-area/custom-area.component';
 import { DisableDataWithSourceComponent } from './disable-data/disable-data-with-source.component';
 import { EditableSelectDemoComponent } from './editable-select-demo.component';
 import { LazyLoadComponent } from './lazy-load/lazy-load.component';
@@ -49,6 +50,7 @@ import { WithSearchFunctionComponent } from './search-function/with-search-funct
     WithSearchFunctionComponent,
     WithSourceComponent,
     LazyLoadComponent,
+    CustomAreaComponent,
   ],
   providers: [],
 })

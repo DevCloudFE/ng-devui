@@ -9,7 +9,7 @@ export class BasicComponent {
     'C#',
     'C',
     'C++',
-    'Python',
+    'CPython',
     'Java',
     'JavaScript',
     'Go',
@@ -26,7 +26,7 @@ export class BasicComponent {
     console.log(e);
   }
 
-  afterMentionInit (e) {
+  afterMentionInit(e) {
     console.log(e);
   }
 }

@@ -8,16 +8,20 @@ import {
   Directive,
   ElementRef,
   EventEmitter,
+  Host,
   HostListener,
   Input,
   OnChanges,
   OnDestroy,
   OnInit,
+  Optional,
   Output,
+  Self,
   SimpleChanges,
   TemplateRef,
   ViewContainerRef
 } from '@angular/core';
+import { NgModel } from '@angular/forms';
 import { fromEvent, Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { MentionComponent } from './mention.component';
@@ -65,6 +69,7 @@ export class MentionDirective implements OnInit, OnChanges, AfterViewInit, OnDes
   private filterSuggestions = [];
 
   constructor(
+    @Optional() @Host() @Self() private ngModelInstance: NgModel,
     private el: ElementRef,
     private viewContainerRef: ViewContainerRef,
     private cdr: ChangeDetectorRef,
@@ -303,6 +308,9 @@ export class MentionDirective implements OnInit, OnChanges, AfterViewInit, OnDes
     const newValue = [value.slice(0, mention.startPos + 1), insertValue, value.slice(mention.endPos, value.length)].join('');
     this.el.nativeElement.value = newValue;
     this.value = newValue;
+    if (this.ngModelInstance) {
+      this.ngModelInstance.viewToModelUpdate(newValue);
+    }
   }
 
   setPreviousItemActive() {

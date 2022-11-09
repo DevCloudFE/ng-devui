@@ -30,26 +30,29 @@ export class DevuiCodeboxComponent implements OnInit {
   }
 
   copy(value: string): Promise<string> {
-    const promise = new Promise<string>((resolve, reject): void => {
-      let copyTextArea = null as HTMLTextAreaElement;
-      try {
-        copyTextArea = document.createElement('textarea');
-        copyTextArea.style.height = '0px';
-        copyTextArea.style.opacity = '0';
-        copyTextArea.style.width = '0px';
-        document.body.appendChild(copyTextArea);
-        copyTextArea.value = value;
-        copyTextArea.select();
-        document.execCommand('copy');
-        resolve(value);
-      } finally {
-        if (copyTextArea && copyTextArea.parentNode) {
-          copyTextArea.parentNode.removeChild(copyTextArea);
+
+    const promise = new Promise<string>(
+      (resolve, reject): void => {
+        let copyTextArea = null as HTMLTextAreaElement;
+        try {
+          copyTextArea = this.document.createElement('textarea');
+          copyTextArea.style.height = '0px';
+          copyTextArea.style.opacity = '0';
+          copyTextArea.style.width = '0px';
+          this.document.body.appendChild(copyTextArea);
+          copyTextArea.value = value;
+          copyTextArea.select();
+          this.document.execCommand('copy');
+          resolve(value);
+        } finally {
+          if (copyTextArea && copyTextArea.parentNode) {
+            copyTextArea.parentNode.removeChild(copyTextArea);
+          }
         }
       }
-    });
+    );
 
-    return promise;
+    return (promise);
   }
 
   toggleCode() {

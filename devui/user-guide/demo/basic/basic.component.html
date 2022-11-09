@@ -1,0 +1,11 @@
+<section>
+  <h3 class="devui-h3-title">clickable event show</h3>
+  <d-button class="clickable-event" (click)="openSuccessDialog('success')">open modal!</d-button>
+  <h3 class="devui-h3-title">inputable event show</h3>
+  <input id="inputable-event" dTextInput placeholder="Please Enter" class="demo-textinput" />
+  <d-user-guide [steps]="steps" [userGuideEntrancePosition]="{ bottom: '30px', left: '30px' }"></d-user-guide>
+</section>
+
+<ng-template #contentTemplate>
+  <div>若步骤不传入element则不定位到具体元素进行整体的信息展示~</div>
+</ng-template>

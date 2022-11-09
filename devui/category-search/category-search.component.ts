@@ -18,7 +18,6 @@ import {
   ViewChildren
 } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { DatepickerProCalendarComponent } from 'ng-devui/datepicker-pro';
 import { DropDownDirective } from 'ng-devui/dropdown';
 import { DValidateRules } from 'ng-devui/form';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
@@ -48,9 +47,9 @@ import { DefaultTemplateDirective } from './default-template.directive';
 })
 export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewInit, AfterContentInit {
   static ID_SEED = 0;
-  @Input() category: Array<ICategorySearchTagItem>;
+  @Input() category: ICategorySearchTagItem[];
   @Input() defaultSearchField = [];
-  @Input() selectedTags: Array<ICategorySearchTagItem> = [];
+  @Input() selectedTags: ICategorySearchTagItem[] = [];
   @Input() allowClear = true;
   @Input() allowSave = true;
   @Input() allowShowMore = false;
@@ -60,7 +59,7 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
   @Input() inputReadOnly = false;
   @Input() showSearchCategory: SearchConfig | boolean = true; // 配置是否显示搜索相关下拉选项
   @Input() categoryInGroup = false; // 是否按组别显示分类下拉列表
-  @Input() groupOrderConfig: Array<string>; // 用户配置组顺序
+  @Input() groupOrderConfig: string[]; // 用户配置组顺序
   @Input() customGroupNameTemplate: TemplateRef<any>; // 用户自定义组名称显示模板
   @Input() tagMaxWidth: number;
   @Input() textConfig = {
@@ -79,31 +78,33 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
   @ViewChild('InputEle', { static: true }) inputEle: ElementRef;
   @ViewChild('ScrollBarContainer', { static: true }) scrollBarContainer: ElementRef;
   @ViewChild('PrimeContainer', { static: true }) primeContainer: ElementRef;
+  @ViewChild('OperableTree') treeInstance: OperableTreeComponent;
   @ViewChildren('selectedDropdown') selectedDropdownList: QueryList<DropDownDirective>;
-  @ViewChildren(DatepickerProCalendarComponent, { read: ElementRef }) datePickerElements: QueryList<ElementRef>;
   @ViewChildren(DefaultTemplateDirective) defaultTemplates: QueryList<DefaultTemplateDirective>;
   @ContentChildren(ContentTemplateDirective) contentTemplates: QueryList<ContentTemplateDirective>;
-  public currentSelectTag = undefined;
-  public currentTag: ICategorySearchTagItem;
-  public searchField;
-  public id: number;
+
+  id: number;
+  searchField: ICategorySearchTagItem[];
+  categoryDisplay: ICategorySearchTagItem[];
+  currentSearchCategory: ICategorySearchTagItem[];
+  currentSelectTag: ICategorySearchTagItem;
   dateConverter: DateConverter;
-  filterName = '';
+  treeResetFlag: boolean;
   treeSearchKey = '';
+  filterName = '';
   searchKeyCache = '';
   enterSearch = false;
   isShowSavePanel = false;
   isSearchCategory = false;
   isHover = false;
   isFocus = false;
-  noRecord = false;
+  treeNoRecord = false;
   showNoDataTips = false;
   icons = DefaultIcons;
   destroy$ = new Subject<void>();
   i18nCommonText: I18nInterface['common'];
   i18nCategorySearchText: I18nInterface['categorySearch'];
-  currentSearchCategory: Array<ICategorySearchTagItem>;
-  categoryDisplay: Array<ICategorySearchTagItem>;
+  showSearchConfig: SearchConfig;
   currentOpenDropdown: DropDownDirective;
   currentScrollTagIndex: number; // 当前要滚动至的标签索引
   blurTimer: any; // 失焦关闭下拉延时器，失焦后立刻展开下拉需清除该延时
@@ -115,7 +116,6 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
   customTemplates = {}; // 按field标记的自定义模板集合
   joinLabelTypes = ['checkbox', 'label'];
   valueIsArrayTypes = ['numberRange', 'treeSelect'];
-  showSearchConfig: SearchConfig;
   document: Document;
 
   get showFilterNameClear() {
@@ -334,6 +334,9 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
             result = this.joinLabelTypes.includes(item.type) ? this.getItemValue(item.value.value, item.filterKey || 'label') : '';
           }
           item.title = this.setTitle(item, item.type, result);
+          if (item.type === 'label' && item.options[0] && !item.options[0].$label) {
+            this.mergeToLabel(item);
+          }
         } else {
           item = this.initCategoryItem(item);
         }
@@ -487,7 +490,7 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
       field.title = this.setTitle(field, 'radio', value);
     }
     if (field.type === 'label') {
-      if (!field.options[0]?.$label) {
+      if (field.options[0] && !field.options[0].$label) {
         this.mergeToLabel(field);
       }
       result[colorKey] = COLORS[Math.floor(COLORS.length * Math.random())];
@@ -579,8 +582,10 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
       this.closeMenu(inputDropdown);
       return;
     }
-    const tag = this.selectedTags[this.selectedTags.length - 1];
-    this.removeTag(tag);
+    if (this.selectedTags.length) {
+      const tag = this.selectedTags[this.selectedTags.length - 1];
+      this.removeTag(tag);
+    }
     this.closeMenu(inputDropdown);
   }
 
@@ -682,7 +687,6 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
   }
 
   /* 各类型模板调用方法 */
-
   // radio 单选 处理选中项方法
   chooseItem(tag: ICategorySearchTagItem, chooseItem: ITagOption) {
     this.afterDropdownClosed();
@@ -703,21 +707,6 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
       : `${this.dateConverter.format(start)} - ${this.dateConverter.format(end)}`;
     tag.title = this.setTitle(tag, 'dateRange');
     this.updateSelectedTags(tag);
-  }
-
-  dateValueChange(tag: ICategorySearchTagItem, datepickerPro: DatepickerProCalendarComponent) {
-    if (datepickerPro.dateValue.length) {
-      if (tag.value.value && !datepickerPro.dateValue.includes('')) {
-        const date = datepickerPro.curActiveDate;
-        const index = datepickerPro.currentActiveInput === 'start' ? 0 : 1;
-        const value = tag.value.value[index];
-        tag.value.value = value ? [value, date] : [date, value];
-      } else {
-        tag.value.value = [datepickerPro.curActiveDate];
-      }
-    } else {
-      tag.value.value = [];
-    }
   }
 
   // checkbox | label 多选 处理选中项方法
@@ -763,10 +752,19 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
       this.clearCurrentSelectTagFromSearch();
       this.currentOpenDropdown = undefined;
       this.showNoDataTips = false;
+      if (tag.type === 'treeSelect') {
+        setTimeout(() => {
+          this.treeSearch('');
+          this.treeResetFlag = false;
+        }, this.DELAY);
+      }
       return;
     }
     if (tag) {
       this.scrollToTailFlag = false;
+      if (tag.type === 'treeSelect') {
+        this.treeResetFlag = true;
+      }
       if (!isEqual(tag.value.value, tag.value.cache)) {
         tag.value.value = cloneDeep(tag.value.cache);
         this.handleAccordingType(tag.type, tag.value.options);
@@ -781,7 +779,7 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
 
   showCurrentSearchCategory(tag: ICategorySearchTagItem, inputDropdown: DropDownDirective) {
     this.isSearchCategory = true;
-    this.clearSearchKey();
+    this.searchKey = '';
     this.closeMenu(inputDropdown);
     this.chooseCategory(tag, inputDropdown);
     setTimeout(() => this.checkInputSearching(), this.DELAY);
@@ -796,7 +794,7 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
     }
   }
 
-  handleAccordingType(type: string, options: Array<any>) {
+  handleAccordingType(type: string, options: any[]) {
     switch (type) {
     case 'treeSelect':
       options = cloneDeep(options);
@@ -855,7 +853,7 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
   }
 
   // treeSelect 树 处理选中项方法
-  getTreeValue(tag: ICategorySearchTagItem, tree: OperableTreeComponent) {
+  getTreeValue(tag: ICategorySearchTagItem) {
     this.afterDropdownClosed();
     const result = [];
     const selectedIds = [];
@@ -871,7 +869,7 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
       tag.title = this.setTitle(tag, 'treeSelect');
       if (tag.multiple) {
         const halfCheckedIds = [];
-        tree.nodes.forEach((item) => item.data.halfChecked && halfCheckedIds.push(item.id));
+        this.treeInstance.nodes.forEach((item) => item.data.halfChecked && halfCheckedIds.push(item.id));
         this.updateTreeData(tag, tag.value.options, selectedIds, halfCheckedIds);
       }
       this.updateSelectedTags(tag);
@@ -903,23 +901,28 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
     }
   }
 
-  onOperableNodeSelected(selectedNode: ITreeItem, tag: ICategorySearchTagItem, tree: OperableTreeComponent) {
+  onOperableNodeSelected(selectedNode: ITreeItem, tag: ICategorySearchTagItem) {
     if (tag.multiple || (tag.leafOnly && selectedNode.data.isParent)) {
       return;
     }
     if (selectedNode.data.isActive) {
       tag.value.value = [selectedNode.data.originItem];
-      this.getTreeValue(tag, tree);
+      this.getTreeValue(tag);
     } else {
       selectedNode.data.isActive = true;
     }
   }
 
-  treeSearch(tree: OperableTreeComponent, value: string) {
-    tree.operableTree.treeFactory.searchTree(value, true);
-  }
-
-  clearSearchKey() {
-    this.searchKey = '';
+  treeSearch(value: string) {
+    this.treeSearchKey = value;
+    if (this.treeInstance) {
+      const searchRes = this.treeInstance.treeFactory.searchTree(this.treeSearchKey, true);
+      if (typeof searchRes === 'boolean') {
+        this.treeNoRecord = searchRes;
+      } else if (Array.isArray(searchRes)) {
+        this.treeNoRecord = searchRes.every((res) => !res);
+      }
+      this.treeInstance.treeFactory.getFlattenNodes();
+    }
   }
 }

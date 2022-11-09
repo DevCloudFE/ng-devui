@@ -1,3 +1,5 @@
+import { GanttRailStatus } from '../gantt.model';
+
 export const curYear = new Date().getFullYear();
 
 export interface SourceType {
@@ -15,47 +17,58 @@ export interface SourceType {
   endDate?: Date;
   ganttBarPositionOffset?: number;
   ganttBarWidth?: number;
-  status?: string;
+  status?: GanttRailStatus;
   progressRate?: number;
   $isChildTableOpen?: boolean;
   progressDisabled?: boolean;
+  overdueTime?: number;
 }
 
-export const basicData = [
+export const basicData: SourceType[] = [
   {
     id: '1',
     title: 'title1',
-    startDate: new Date(curYear, 4, 5),
-    endDate: new Date(curYear, 4, 10),
-    progressRate: 30
+    startDate: new Date(curYear, 6, 15),
+    endDate: new Date(curYear, 6, 20),
+    progressRate: 30,
+    status: 'normal',
+    overdueTime: 0
   },
   {
     id: '2',
     title: 'title2',
-    startDate: new Date(curYear, 4, 6),
-    endDate: new Date(curYear, 4, 9),
-    progressRate: 30
+    startDate: new Date(curYear, 7, 6),
+    endDate: new Date(curYear, 7, 9),
+    progressRate: 30,
+    status: 'normal',
+    overdueTime: 0
   },
   {
     id: '3',
     title: 'title3',
-    startDate: new Date(curYear, 4, 10),
-    endDate: new Date(curYear, 4, 12),
-    progressRate: 30
+    startDate: new Date(curYear, 6, 18),
+    endDate: new Date(curYear, 6, 22),
+    progressRate: 30,
+    status: 'done',
+    overdueTime: 0
   },
   {
     id: '4',
     title: 'title4',
-    startDate: new Date(curYear, 4, 7),
-    endDate: new Date(curYear, 4, 10),
-    progressRate: 30
+    startDate: new Date(curYear, 6, 17),
+    endDate: new Date(curYear, 6, 22),
+    progressRate: 30,
+    status: 'normal',
+    overdueTime: 0
   },
   {
     id: '5',
     title: 'title5',
-    startDate: new Date(curYear, 4, 8),
-    endDate: new Date(curYear, 4, 12),
-    progressRate: 30
+    startDate: new Date(curYear, 7, 8),
+    endDate: new Date(curYear, 7, 12),
+    progressRate: 30,
+    status: 'normal',
+    overdueTime: 0
   }
 ];
 

@@ -39,6 +39,28 @@ $devui-table-inset-shadow-right: var(--devui-table-inset-shadow-right, -8px 0 8p
       }
     }
 
+    &.has-width-scroll:not(:hover)::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      top: 0;
+      width: 50px;
+      z-index: 100;
+      background: linear-gradient(90deg, transparent, $devui-base-bg);
+    }
+
+    &.has-height-scroll:not(:hover)::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      z-index: 100;
+      height: 20px;
+      background: linear-gradient(180deg, transparent, $devui-base-bg);
+    }
+
     .scroll-view {
       overflow-x: auto;
       overflow-y: scroll;
@@ -51,26 +73,6 @@ $devui-table-inset-shadow-right: var(--devui-table-inset-shadow-right, -8px 0 8p
           overflow: auto;
           overflow: overlay;
         }
-      }
-
-      &.has-width-scroll:not(:hover)::after {
-        content: '';
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        top: 0;
-        width: 50px;
-        background: linear-gradient(90deg, transparent, $devui-base-bg);
-      }
-
-      &.has-height-scroll:not(:hover)::before {
-        content: '';
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        height: 20px;
-        background: linear-gradient(180deg, transparent, $devui-base-bg);
       }
     }
 
@@ -277,7 +279,7 @@ $devui-table-inset-shadow-right: var(--devui-table-inset-shadow-right, -8px 0 8p
         &.devui-detail-cell {
           width: 36px;
           text-align: center;
-          padding: 0;
+          padding-right: 0;
           cursor: pointer;
         }
 
@@ -358,7 +360,7 @@ $devui-table-inset-shadow-right: var(--devui-table-inset-shadow-right, -8px 0 8p
       &.devui-detail-cell {
         width: 36px;
         text-align: center;
-        padding: 0;
+        padding-right: 0;
         cursor: pointer;
       }
 
@@ -535,6 +537,31 @@ $devui-table-inset-shadow-right: var(--devui-table-inset-shadow-right, -8px 0 8p
 
     thead tr th .title {
       line-height: 32px;
+    }
+  }
+
+  &.devui-table-mini ::ng-deep {
+    tbody > tr > td {
+      padding: 0;
+      padding-left: 18px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: $devui-font-size-sm;
+    }
+
+    thead > tr > th.devui-checkable-cell {
+      padding: 0;
+      padding-left: 18px;
+    }
+
+    thead tr th .title {
+      line-height: 24px;
+      font-size: $devui-font-size-sm;
+    }
+
+    thead tr th .header-container {
+      padding-left: 0;
     }
   }
 }
@@ -717,6 +744,12 @@ $devui-table-inset-shadow-right: var(--devui-table-inset-shadow-right, -8px 0 8p
       }
     }
   }
+
+  tr.table-row-selected {
+    .devui-last-sticky-left-cell {
+      background: linear-gradient(to left, transparent, $devui-list-item-selected-bg 10px);
+    }
+  }
 }
 
 :host ::ng-deep .devui-talbe-scorll-middle,
@@ -736,6 +769,12 @@ $devui-table-inset-shadow-right: var(--devui-table-inset-shadow-right, -8px 0 8p
         pointer-events: none;
         box-shadow: inset $devui-table-inset-shadow-right $devui-light-shadow;
       }
+    }
+  }
+
+  tr.table-row-selected {
+    .devui-first-sticky-right-cell {
+      background: linear-gradient(to right, transparent, $devui-list-item-selected-bg 10px);
     }
   }
 }

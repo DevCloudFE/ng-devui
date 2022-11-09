@@ -11,56 +11,48 @@ export class AnimationComponent implements OnInit, OnDestroy {
   themeService: ThemeService;
   subs: Subscription = new Subscription();
   animation = [];
+  i18nText: any;
 
-  constructor(private translate: TranslateService) { }
+  constructor(private translate: TranslateService) {this.setI18n(); }
+
 
   ngOnInit() {
     if (typeof window !== undefined) {
-      this.setI18n();
+      this.themeService = window['devuiThemeService'];
+      this.changeValueInTable();
+      if (this.themeService.eventBus) {
+        this.themeService.eventBus.add('themeChanged', this.changeValueInTable);
+      }
     }
   }
+
+  changeValueInTable = () => {
+    const theme = this.themeService.currentTheme;
+    for (const key in theme.data) {
+      if (key.includes('devui-animation')) {
+        const obj = {
+          name: '$' + key,
+          value: theme.data[key],
+          description: this.i18nText ? this.i18nText[key] : ''
+        };
+        this.animation.push(obj);
+      }
+    }
+  };
 
   setI18n() {
     this.subs.add(
       this.translate.get('components.design-animation.AnimationDemo.instance').subscribe((res) => {
-        this.setValues(res);
+        this.i18nText = res['animation'];
       })
     );
 
     this.subs.add(
       this.translate.onLangChange.subscribe((event: TranslationChangeEvent) => {
         const values = this.translate.instant('components.design-animation.AnimationDemo.instance');
-        this.setValues(values);
+        this.i18nText = values['animation'];
       })
     );
-  }
-
-  setValues(values) {
-    this.animation = [
-      { name: '$devui-animation-duration-slow', value: '300ms', description: values.animation['devui-animation-duration-slow'] },
-      { name: '$devui-animation-duration-base', value: '200ms', description: values.animation['devui-animation-duration-base'] },
-      { name: '$devui-animation-duration-fast', value: '100ms', description: values.animation['devui-animation-duration-fast'] },
-      {
-        name: '$devui-animation-ease-out', value: 'cubic-bezier(0.16, 0.75, 0.5, 1)',
-        description: values.animation['devui-animation-ease-out']
-      },
-      {
-        name: '$devui-animation-ease-in-out', value: 'cubic-bezier(0.5, 0.05, 0.5, 0.95)',
-        description: values.animation['devui-animation-ease-in-out']
-      },
-      {
-        name: '$devui-animation-ease-in', value: 'cubic-bezier(0.5, 0, 0.84, 0.25)',
-        description: values.animation['devui-animation-ease-in']
-      },
-      {
-        name: '$devui-animation-ease-in-out-smooth', value: 'cubic-bezier(0.645, 0.045, 0.355, 1)',
-        description: values.animation['devui-animation-ease-in-out-smooth']
-      },
-      {
-        name: '$devui-animation-linear', value: 'cubic-bezier(0, 0, 1, 1)',
-        description: values.animation['devui-animation-linear']
-      }
-    ];
   }
 
   ngOnDestroy() {

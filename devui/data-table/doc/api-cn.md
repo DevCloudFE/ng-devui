@@ -23,7 +23,7 @@ import { DataTableModule } from 'ng-devui/data-table';
 |       maxWidth        |          `string px`          | --     |                              可选，限制表格最大宽度，默认撑满父容器                              |
 |       maxHeight       |          `string px`          | --     |                                     可选，限制最大高度，默认                                     | [表头固定](demo#table-fixing)                    |
 |       minHeight       |          `string px`          | --     |                                     可选，限制最小高度                                    |  --                |
-|       size            |          `'sm'\|'md'\|'lg'`   | 'sm'     |                                     可选，表格大小,分别对应行高40px,48px,56px                 |[表格样式](demo#mutil-styles)                     |
+|       size            |          `'mini'\| 'xs' \|'sm'\|'md'\|'lg'`   | 'sm'     |                                     可选，表格大小               |[表格样式](demo#mutil-styles)                     |
 |  rowHoveredHighlight  |           `boolean`           | true   |                              可选，鼠标悬浮行时是否高亮,默认高亮认                               |
 | generalRowHoveredData |           `boolean`           | false  |      可选，使用配置column方式实现table,鼠标悬浮行时$hovered是否记录到rowItem中，默认不记录       |
 |       cssClass        |           `string`            | --     |                                       可选，自定义表格样式                                       |
@@ -57,6 +57,7 @@ import { DataTableModule } from 'ng-devui/data-table';
 |        timeout        |           `number`            | 300    | 可选，同时绑定单击、双击事件时，用于区分点击的时间间隔, 默认300`ms`，两个事件不同时使用可以指定为0 |
 |  headerExpandConfig   |      [`TableExpandConfig`](#tableexpandconfig)      | --     |                                   可选，配置header下的额外内容                                   | [扩展行](demo#expand-row)                        |
 |    beforeCellEdit     |           `(rowItem: any, column: any) => Promise<any>`           | --     |         可选，单元格编辑前的拦截方法, <br>resolve(extraOptions)将更新该列的extraOptions          | [编辑单元格](demo#edit-cell)                     |
+|    beforeCellEditEnd     |           `(rowItem: any, column: any) => boolean`           | --     |         可选，单元格编辑结束时的拦截方法，返回true结束编辑，用于添加编辑校验规则，暂不支持异步校验          | [编辑单元格](demo#edit-cell)                     |
 |    headerBg     |           `boolean`           | false     |         可选，表头是否显示背景色         | [表格样式](demo#mutil-styles)                     |
 |    tableLayout     |           `'fixed'\|'auto'`           | 'fixed'     |         可选，表格布局         | [表格样式](demo#mutil-styles)                     |
 |    borderType     |           `''\|'bordered'\|'borderless'`           | ''     |         可选，表格边框类型，默认有行边框，bordered：全边框，borderless：无边框         | [表格样式](demo#mutil-styles)                     |
@@ -76,7 +77,7 @@ import { DataTableModule } from 'ng-devui/data-table';
 |    multiSortChange    |     `EventEmitter<SortEventArg[]>`     | 多列选择Change事件，用来更新多列选择数组，返回单元格信息, 仅column模式下生效 | [表格交互](demo#table-interaction) |
 |       cellClick       |  `EventEmitter<CellSelectedEventArg>`  |            表格单元格点击事件，返回单元格信息            | [表格交互](demo#table-interaction) |
 |      cellDBClick      |  `EventEmitter<CellSelectedEventArg>`  |            表格单元格双击事件，返回单元格信息            | [表格交互](demo#table-interaction) |
-|       rowClick        |  `EventEmitter<RowSelectedEventArg>`   |                表格行点击事件，返回行信息                | [表格交互](demo#table-interaction) |
+|       rowClick        |  `EventEmitter<RowSelectedEventArg>`   |                表格行点击事件，返回行信息, 左右键都会触发, 如果有单元格内点击元素需要拦截触发，需要拦截mouseup事件                | [表格交互](demo#table-interaction) |
 |      rowDBClick       |  `EventEmitter<RowSelectedEventArg>`   |                表格行双击事件，返回行信息                | [表格交互](demo#table-interaction) |
 |     detialToggle      |          `EventEmitter<any>`           |     使用配置column方式时扩展行展开收起事件，返回行状态信息 | [扩展行](demo#expand-row)|
 |     cellEditStart     |  `EventEmitter<CellSelectedEventArg>`  |          表格单元格开始编辑事件，返回单元格信息          |
@@ -329,6 +330,48 @@ export enum SortDirection {
   ASC = 'ASC',
   DESC = 'DESC',
   default = ''
+}
+```
+
+# d-table-option-toggle
+
+动态列及样式配置器，数据驱动，返回配置生成的数据；
+## d-table-option-toggle 参数
+
+|     参数名      |              类型               | 默认值 |                              描述                              | 跳转 Demo                                          |
+| :-------------: | :-----------------------------: | :----- | :------------------------------------------------------------: | :------------------------------------------------- |
+|    columnsData     |            `Array<ColData>`            | []     |                     必选，配置列表头数据                    | [动态列及样式](demo#dynamic-cols) |
+|    colSort     |            `boolean`            | true     |                     可选，是否允许列排序                    | [动态列及样式](demo#dynamic-cols) |
+|    styleSetting     |            `TableStyleData`            | {}     |                     可选，添加相应样式配置及初始值                    | [动态列及样式](demo#dynamic-cols) |
+|    toggleMode     |            `'dropdown' \| 'modal'`            | 'dropdown'     |                     触发类型，下拉或者弹窗，列数过多建议使用弹窗                    | [动态列及样式](demo#dynamic-cols) |
+|    modalWidth     |            `string`            | '600px'     |                    弹窗宽度                    | [动态列及样式](demo#dynamic-cols) |
+
+## d-table-option-toggle 事件
+
+|         事件          |   类型    |                          描述                           | 跳转 Demo                                          |
+| :-------------------: | :-------: | :-----------------------------------------------------: | :------------------------------------------------- |
+|    colChanges    | `EventEmitter<Array<ColData>>` |                   列状态变化                    | [动态列及样式](demo#dynamic-cols) |
+|    styleChanges    | `EventEmitter<TableStyleData>` |                   表格样式变化返回                    | [动态列及样式](demo#dynamic-cols) |
+
+## ColData
+
+```ts
+export interface ColData {
+  header: string;
+  checked: boolean;
+  category?: string;
+  [prop: string]: any;
+}
+```
+
+## TableStyleData
+
+```ts
+export interface TableStyleData {
+  size?: 'xs' | 'sm' | 'md';
+  borderType?: '' | 'borderless';
+  striped?: boolean;
+  shadowType?: 'embed' | 'normal';
 }
 ```
 

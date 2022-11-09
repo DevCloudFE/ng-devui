@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { DataTableComponent, SortDirection, SortEventArg, TableWidthConfig } from 'ng-devui/data-table';
+import { DataTableComponent, SortDirection, SortEventArg, tableResizeFunc, TableWidthConfig } from 'ng-devui/data-table';
 import { originSource, SourceType } from '../mock-data';
 
 @Component({
@@ -83,10 +83,6 @@ export class InteractionComponent implements OnInit {
     }
   ];
 
-  _totalWidth = 0;
-  lastWidth = 0;
-  firstResize = true;
-
   lastNameSortDirection = SortDirection.ASC;
   genderSortDirection = SortDirection.default;
   sortParams = {field: 'lastName', direction: this.lastNameSortDirection};
@@ -111,38 +107,7 @@ export class InteractionComponent implements OnInit {
     };
   }
 
-  onResize({ width, beforeWidth }, field) {
-    const index = this.tableWidthConfig.findIndex((config) => {
-      return config.field === field;
-    });
-    if (index > -1) {
-      if (this.firstResize) {
-        this.firstResize = false;
-        const ratio = beforeWidth / parseInt(this.tableWidthConfig[index].width, 10);
-        this.tableWidthConfig.forEach(t => {
-          t.width = parseInt(t.width, 10) * ratio + 'px';
-        });
-        this._totalWidth = this.ele.nativeElement.querySelector('.table-wrap').offsetWidth;
-        this.lastWidth = parseInt(this.tableWidthConfig.slice(-1)[0].width);
-      }
-      this.tableWidthConfig[index].width = width + 'px';
-
-      let newWidthTotal = 0;
-      this.tableWidthConfig.forEach(t => {
-        newWidthTotal += parseInt(t.width, 10);
-      });
-
-      const lastCol = this.tableWidthConfig[this.tableWidthConfig.length - 1];
-      const lastColWidth = parseInt(lastCol.width, 10);
-      const changeValue = newWidthTotal - this._totalWidth;
-      if (changeValue < 0) {
-        lastCol.width = lastColWidth + this._totalWidth - newWidthTotal + 'px';
-      } else if (lastColWidth > this.lastWidth) {
-        const lastChange = (lastColWidth - this.lastWidth) > changeValue ? changeValue : (lastColWidth - this.lastWidth);
-        lastCol.width = lastColWidth - lastChange + 'px';
-      }
-    }
-  }
+  onResize = tableResizeFunc(this.tableWidthConfig, this.ele);
 
   filterChangeRadio($event) {
     if ($event.name === 'Clear') {
@@ -151,7 +116,7 @@ export class InteractionComponent implements OnInit {
     }
     const filterList = $event.name;
     const dataDisplay = [];
-    JSON.parse(JSON.stringify(originSource.slice(0, 6))).map(item => {
+    JSON.parse(JSON.stringify(originSource.slice(0, 6))).forEach(item => {
       if (filterList.includes(item.gender)) {
         dataDisplay.push(item);
       }
@@ -162,7 +127,7 @@ export class InteractionComponent implements OnInit {
   onFirstFilterChange($event) {
     const filterList = $event.map(item => item.name);
     const dataDisplay = [];
-    JSON.parse(JSON.stringify(originSource.slice(0, 6))).map(item => {
+    JSON.parse(JSON.stringify(originSource.slice(0, 6))).forEach(item => {
       if (filterList.includes(item.firstName)) {
         dataDisplay.push(item);
       }

@@ -1,0 +1,147 @@
+@import '../style/theme/color';
+@import '../style/theme/shadow';
+@import '../style/theme/corner';
+@import '../style/core/_font';
+
+.devui-option-toggle {
+  cursor: pointer;
+}
+
+.devui-option-panel {
+  width: 280px;
+  padding: 20px;
+
+  .devui-option-title {
+    font-size: $devui-font-size-card-title;
+    color: $devui-text;
+    font-weight: bold;
+    margin-bottom: 16px;
+  }
+
+  .devui-option-subtitle {
+    color: $devui-text;
+    font-size: $devui-font-size;
+    font-weight: bold;
+    margin-bottom: 12px;
+  }
+
+  &-col-select {
+    display: inline-block;
+  }
+
+  &-style-setting {
+    display: inline-block;
+    width: 100%;
+    padding-bottom: 20px;
+  }
+
+  .devui-option-size-wrapper {
+    display: flex;
+    justify-content: space-between;
+
+    .devui-option-size-card {
+      width: 72px;
+      height: 72px;
+      border-radius: $devui-border-radius-card;
+      padding: 8px 22px 8px 20px;
+      box-shadow: $devui-shadow-length-base $devui-light-shadow;
+      cursor: pointer;
+      position: relative;
+      color: $devui-aide-text;
+
+      p {
+        width: 72px;
+        margin-left: -20px;
+        text-align: center;
+      }
+
+      d-checkbox {
+        position: absolute;
+        right: 4px;
+        top: 4px;
+        display: none;
+      }
+
+      &.devui-option-item-active {
+        box-shadow: $devui-shadow-length-hover $devui-light-shadow;
+        font-weight: bold;
+        color: $devui-text;
+
+        d-checkbox {
+          display: block;
+        }
+      }
+
+      &:hover {
+        box-shadow: $devui-shadow-length-hover $devui-light-shadow;
+
+        d-checkbox {
+          display: block;
+        }
+      }
+
+      svg {
+        transform: scale(2);
+        transform-origin: 0 0;
+
+        path {
+          fill: $devui-waiting;
+        }
+      }
+    }
+
+    ::ng-deep d-checkbox .devui-checkbox-default-background {
+      border-radius: 50%;
+    }
+  }
+
+  .devui-option-form {
+    margin-top: 18px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .devui-option-panel-col-drag {
+    .devui-option-drag-item {
+      margin: 0 -8px;
+      height: 36px;
+      padding: 10px 8px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      border-radius: $devui-border-radius;
+
+      svg {
+        margin-right: 12px;
+
+        path {
+          fill: $devui-icon-text;
+        }
+      }
+
+      d-checkbox {
+        display: none;
+      }
+
+      d-checkbox.devui-option-item-active {
+        display: block;
+      }
+
+      &:hover {
+        background-color: $devui-list-item-hover-bg;
+
+        d-checkbox {
+          display: block;
+        }
+      }
+    }
+
+    .devui-option-drag-label {
+      flex: 1;
+    }
+
+    ::ng-deep d-checkbox .devui-checkbox-default-background {
+      border-radius: 50%;
+    }
+  }
+}

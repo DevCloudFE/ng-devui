@@ -159,7 +159,10 @@ export class CalendarPanelComponent implements OnInit, OnDestroy {
         this.goToDate(this.selectedRangeDate[0] || this.selectedRangeDate[1] || new Date());
       } else {
         if (!this.selectedRangeDate[1] && this.selectedRangeDate[0]) {
-          this.updateRangeDate([this.selectedRangeDate[0], this.selectedRangeDate[0]]);
+          this.updateRangeDate([
+            this.selectedRangeDate[0],
+            new Date(new Date(this.selectedRangeDate[0].getTime()).setHours(23, 59, 59))
+          ]);
         }
         this.goToDate(this.selectedRangeDate[1] || this.selectedRangeDate[0] || new Date());
       }

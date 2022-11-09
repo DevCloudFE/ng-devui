@@ -24,6 +24,7 @@ import { CheckOptionsComponent } from './check-options/check-options.component';
 import { DataTableDemoComponent } from './data-table-demo.component';
 import { DragColumnComponent } from './drag-column/drag-column.component';
 import { DragRowComponent } from './drag-row/drag-row.component';
+import { DynamicColsDemoComponent } from './dynamic-cols/dynamic-cols-demo.component';
 import { EditableOldComponent } from './editable-old/editable-old.component';
 import { DatatableDemoEditableComponent } from './editable/data-table-demo-editable.component';
 import { ExpandRowOldComponent } from './expand-row-old/expand-row-old.component';
@@ -95,7 +96,8 @@ import { VirtualScrollComponent } from './virtual-scroll/virtual-scroll.componen
     InteractionColumnComponent,
     VirtualScrollComponent,
     MutilStylesComponent,
-    FixHeightVirtualScrollComponent
+    FixHeightVirtualScrollComponent,
+    DynamicColsDemoComponent,
   ],
   providers: [],
 })

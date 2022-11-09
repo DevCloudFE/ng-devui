@@ -134,7 +134,7 @@ describe('transfer', () => {
       flush();
       fixture.detectChanges();
 
-      testComponent.sourceOption.map(t => {
+      testComponent.sourceOption.forEach(t => {
         discardPeriodicTasks();
         if (t.disabled) {
           expect(t['checked']).not.toBeTruthy();
@@ -152,7 +152,7 @@ describe('transfer', () => {
       flush();
       fixture.detectChanges();
 
-      testComponent.targetOption.map(t => {
+      testComponent.targetOption.forEach(t => {
         discardPeriodicTasks();
         if (t.disabled) {
           expect(t['checked']).not.toBeTruthy();

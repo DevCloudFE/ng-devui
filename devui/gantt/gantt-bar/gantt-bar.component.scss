@@ -22,9 +22,20 @@
     }
   }
 
+  .devui-gantt-bar-rail-normal {
+    background: $devui-blue-20;
+  }
+
+  .devui-gantt-bar-rail-overdue {
+    background: $devui-red-10;
+  }
+
+  .devui-gantt-bar-rail-done {
+    background: $devui-gray-10;
+  }
+
   .devui-gantt-bar-rail {
     position: absolute;
-    background: $devui-initial;
     box-shadow: $devui-shadow-length-base rgba(81, 112, 255, 0.19); // TODO: color not variable
     height: 20px;
     margin-top: 4px;
@@ -76,10 +87,21 @@
     }
   }
 
-  .devui-gantt-bar-track {
-    position: absolute;
+  .devui-gantt-bar-track-overdue {
+    background-color: $devui-danger;
+  }
+
+  .devui-gantt-bar-track-done {
+    background-color: $devui-gray-40;
+  }
+
+  .devui-gantt-bar-track-normal {
     background-color: $devui-brand;
     box-shadow: $devui-shadow-length-base rgba(81, 112, 255, 0.4);
+  }
+
+  .devui-gantt-bar-track {
+    position: absolute;
     border-radius: $devui-border-radius 0 0 $devui-border-radius;
     border-radius: $devui-border-radius 0 0 $devui-border-radius;
     height: 20px;

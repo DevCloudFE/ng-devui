@@ -166,7 +166,7 @@ export class OperableTreeComponent implements OnInit, OnDestroy, AfterViewInit {
       child.style.top = `${4 * index}px`;
       container.appendChild(child);
     });
-    container.className = 'drag-ghost-container';
+    container.className = 'devui-tree-drag-ghost-container';
     // setDragImage 只能对viewport内的 dom 起作用
     this.document.body.appendChild(container);
     event.dataTransfer.setDragImage(container, -16, 0);

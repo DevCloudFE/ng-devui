@@ -1,6 +1,6 @@
 {
   "name": "ng-devui",
-  "version": "14.0.0",
+  "version": "14.1.0",
   "license": "MIT",
   "description": "DevUI components based on Angular",
   "keywords": [
@@ -29,7 +29,6 @@
     "date-fns": "^2.20.0",
     "lodash-es": "^4.17.11",
     "@popperjs/core": "^2.5.4",
-    "enquire.js": "^2.1.6",
     "css-vars-ponyfill": "^2.3.2",
     "tslib": "^2.0.0"
   },

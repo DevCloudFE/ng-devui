@@ -2,6 +2,7 @@
 // need to run `node scripts/themeable/transfer-sass-var-to-theme-data.js ` when modified
 // 基础变量
 $devui-global-bg: var(--devui-global-bg, $devui-zinc-5); // 全局带底色背景
+$devui-glass-morphism-bg: var(--devui-glass-morphism-bg, rgba(247, 247, 249, 0.9)); // 毛玻璃样式背景色
 $devui-global-bg-normal: var(--devui-global-bg-normal, $devui-white-5); // 全局白色背景
 $devui-base-bg: var(--devui-base-bg, $devui-white-5); // 基础区块背景白色
 $devui-base-bg-dark: var(--devui-base-bg-dark, $devui-slate-100); // 基础区块背景深色(固定)

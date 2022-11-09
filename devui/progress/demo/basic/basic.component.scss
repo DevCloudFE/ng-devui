@@ -1,0 +1,12 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
+.icon-position.icon-right {
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+  border-radius: $devui-border-radius-full;
+  background-color: $devui-success;
+  color: $devui-light-text;
+  text-align: center;
+  margin-left: 8px;
+}

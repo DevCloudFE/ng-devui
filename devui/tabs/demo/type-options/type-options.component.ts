@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'd-type-options',
-  templateUrl: './type-options.component.html'
+  templateUrl: './type-options.component.html',
 })
 export class TypeOptionsComponent implements OnInit {
-
   tabActiveId: string | number = 'tab1';
   activeTabData;
   tabItems = [
@@ -12,29 +11,28 @@ export class TypeOptionsComponent implements OnInit {
       id: 'tab1',
       title: 'Tab1',
       disabled: true,
-      content: `Tab1 Content`
+      content: `Tab1 Content`,
     },
     {
       id: 'tab2',
       title: 'Tab2',
-      content: `Tab2 Content`
+      content: `Tab2 Content`,
     },
     {
       id: 'tab3',
       title: 'Tab3',
-      content: `Tab3 Content`
+      content: `Tab3 Content`,
     },
   ];
 
-  constructor() {
-  }
   ngOnInit(): void {
     this.activeTabData = this.tabItems[0];
     setTimeout(() => {
       this.tabActiveId = 'tab2';
     }, 100);
   }
-  activeTabChange(tab) {
-    this.activeTabData = this.tabItems.filter(item => item.id === tab)[0];
+
+  activeTabChange(tab: string): void {
+    this.activeTabData = this.tabItems.filter((item) => item.id === tab)[0];
   }
 }

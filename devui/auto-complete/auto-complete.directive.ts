@@ -102,6 +102,8 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
    */
   @Input() enableLazyLoad = false;
   @Input() allowEmptyValueSearch = false; // 在value为空时，是否允许进行搜索
+  @Input() customViewTemplate: TemplateRef<any>;
+  @Input() customViewDirection: 'bottom' | 'right' | 'left' | 'top' = 'bottom';
   @Output() loadMore = new EventEmitter<any>();
   @Output() selectValue = new EventEmitter<any>();
   @Output() transInputFocusEmit = new EventEmitter<any>(); // input状态传给父组件函数
@@ -110,6 +112,7 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
    */
   @Output() changeDropDownStatus = new EventEmitter<any>();
   @Output() toggleChange = new EventEmitter<boolean>();
+  @Output() hoverItem: EventEmitter<any> = new EventEmitter();
   KEYBOARD_EVENT_NOT_REFRESH = ['escape', 'enter', 'arrowup', 'arrowdown', /* ie 10 edge */ 'esc', 'up', 'down'];
   popupRef: ComponentRef<AutoCompletePopupComponent>;
 
@@ -136,9 +139,7 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
     private changeDetectorRef: ChangeDetectorRef,
     private i18n: I18nService,
     private devConfigService: DevConfigService
-  ) {
-
-  }
+  ) {}
 
   ngOnInit() {
     this.init();
@@ -150,6 +151,7 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
     // 动态的创建了popup组件，
     const factory = this.componentFactoryResolver.resolveComponentFactory(AutoCompletePopupComponent);
     this.popupRef = this.viewContainerRef.createComponent(factory, this.viewContainerRef.length, this.injector);
+    this.popupRef.instance.hoverItem.subscribe((item) => this.hoverItem.emit(item));
     this.fillPopup(this.source);
 
     if (!this.searchFn) {
@@ -463,6 +465,8 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
       'position',
       'overview',
       'showAnimation',
+      'customViewTemplate',
+      'customViewDirection',
     ].forEach((key) => {
       if (this[key] !== undefined) {
         pop[key] = this[key];

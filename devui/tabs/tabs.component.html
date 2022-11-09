@@ -19,7 +19,7 @@
     <ul
       #tabsEle
       role="tablist"
-      class="devui-nav devui-nav-{{ type }} {{ cssClass }}"
+      class="devui-nav {{ cssClass }} {{ tabs.length ? 'devui-nav-' + type : '' }}"
       [id]="id"
       [ngClass]="{
         'devui-nav-stacked': vertical,
@@ -34,6 +34,7 @@
           [id]="tab.id === undefined ? '' : tab.id"
           [class.disabled]="tab.disabled"
           [class.active]="tab.id == activeTab"
+          [class.closeable]="checkCloseable(tab)"
           (click)="select(tab.id)"
         >
           <a
@@ -50,7 +51,7 @@
             ></ng-template>
             <span *ngIf="tab.title">{{ tab.title }}</span>
           </a>
-          <span *ngIf="checkCloseable(tab)" class="devui-tab-close-icon" (click)="addOrDeleteTab($event, tab.id)">
+          <span *ngIf="tab.closeable" class="devui-tab-close-icon" (click)="addOrDeleteTab($event, tab.id)">
             <svg
               width="12px"
               height="12px"
@@ -69,7 +70,7 @@
           </span>
         </li>
       </ng-container>
-      <li *ngIf="addable && !addTabTpl; else addTabTpl" class="devui-tab-add-icon">
+      <li *ngIf="addable && !addTabTpl; else addTabTpl" class="devui-nav-tab-item devui-tab-add-icon">
         <a [style.width]="customWidth" (click)="addOrDeleteTab($event)">
           <svg
             width="16px"
@@ -85,7 +86,12 @@
           </svg>
         </a>
       </li>
-      <div class="devui-nav-{{ type }}-animation" [style.left]="offsetLeft + 'px'" [style.width]="offsetWidth + 'px'"></div>
+      <div
+        *ngIf="activeTab !== undefined"
+        class="devui-nav-{{ type }}-animation"
+        [style.left]="offsetLeft + 'px'"
+        [style.width]="offsetWidth + 'px'"
+      ></div>
     </ul>
   </div>
   <div dDropDown appendToBody *ngIf="scrollModeToggle" class="devui-nav-scroll-ctrl">

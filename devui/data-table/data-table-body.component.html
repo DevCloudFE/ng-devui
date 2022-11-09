@@ -93,7 +93,7 @@
       </ng-template>
     </td>
   </tr>
-  <tr class="child-table" *ngIf="rowItem['$isChildTableOpen'] && rowItem['children']">
+  <tr class="child-table" *ngIf="rowItem && rowItem['$isChildTableOpen'] && rowItem['children']">
     <td [attr.colspan]="childTdColspan">
       <table
         class="devui-table {{ type ? 'table-' + type : '' }} {{ rowHoveredHighlight ? 'table-hover' : '' }}"

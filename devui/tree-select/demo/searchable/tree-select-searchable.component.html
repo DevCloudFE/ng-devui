@@ -3,11 +3,11 @@
   <div class="col-md-5" style="font-size: 0">
     <d-tree-select
       placeholder="Standard Input"
+      [searchable]="true"
       [treeData]="data1"
       [expandTree]="true"
       [(ngModel)]="value1"
       (ngModelChange)="showSelected($event)"
-      [searchable]="true"
       style="width: 280px"
     >
     </d-tree-select>
@@ -17,14 +17,27 @@
 <div class="row">
   <div class="col-md-5" style="font-size: 0">
     <d-tree-select
-      placeholder="Standard Input"
       [treeData]="data2"
+      [placeholder]="'Standard Input'"
+      [searchPlaceholder]="'Standard Search Input'"
+      [searchable]="true"
       [multiple]="true"
       [expandTree]="true"
+      [customNoDataTemplate]="noDataTemplate"
       [(ngModel)]="value2"
       (ngModelChange)="showSelected($event)"
       [searchable]="true"
+      [customSearchFn]="customSearchFn"
+      [customNoDataTemplate]="noDataTemplate"
       style="width: 280px"
     ></d-tree-select>
   </div>
 </div>
+<ng-template #noDataTemplate let-isSearchResult>
+  <div class="devui-no-data-tip" *ngIf="isSearchResult">
+    <span>No result.</span>
+  </div>
+  <div class="devui-no-data-tip" *ngIf="!isSearchResult">
+    <span>No data.</span>
+  </div>
+</ng-template>

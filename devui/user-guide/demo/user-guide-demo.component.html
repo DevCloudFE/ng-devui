@@ -1,0 +1,18 @@
+<div class="demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 180, bottom: 0 }">
+  <d-demo-nav [navItems]="navItems"></d-demo-nav>
+
+  <div class="devui-demo-example" [dAnchor]="'user-guide-basic'">
+    <div class="devui-demo-title">{{ 'components.user-guide.basicDemo.title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.user-guide.basicDemo.description' | translate }}</div>
+    <d-codebox id="components-button-primary" [sourceData]="basicSource">
+      <d-user-guide-basic demo></d-user-guide-basic>
+    </d-codebox>
+  </div>
+  <div class="devui-demo-example" [dAnchor]="'user-guide-service-way'">
+    <div class="devui-demo-title">{{ 'components.user-guide.serviceWayDemo.title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.user-guide.serviceWayDemo.description' | translate }}</div>
+    <d-codebox id="components-button-primary" [sourceData]="serviceWaySource">
+      <d-user-guide-service-way demo></d-user-guide-service-way>
+    </d-codebox>
+  </div>
+</div>

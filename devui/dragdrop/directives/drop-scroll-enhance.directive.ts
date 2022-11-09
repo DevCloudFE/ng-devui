@@ -193,7 +193,7 @@ export class DropScrollEnhancedDirective implements AfterViewInit, OnDestroy {
 
   createScrollArea(direction: DropScrollDirection, orientation: DropScrollOrientation) {
     const area = this.document.createElement('div');
-    area.className = 'dropover-scroll-area ' + 'dropover-scroll-area-' + this.getCriticalEdge(direction, orientation);
+    area.className = `dropover-scroll-area dropover-scroll-area-${this.getCriticalEdge(direction, orientation)}`;
     // 处理大小
     area.classList.add('active');
     this.setAreaSize(area, direction, orientation);

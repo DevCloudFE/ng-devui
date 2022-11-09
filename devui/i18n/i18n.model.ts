@@ -69,6 +69,20 @@ export interface I18nInterface {
     yAxisLabel: string;
     defaultTitleConf: [{ title: string }];
   };
+  datatable: {
+    tableSetting: string;
+    ensure: string;
+    cancel: string;
+    compact: string;
+    standard: string;
+    loose: string;
+    divideLine: string;
+    striped: string;
+    tableShadow: string;
+    styles: string;
+    colSelected: string;
+    colCanSelect: string;
+  };
   upload: {
     warning: string;
     upload: string;

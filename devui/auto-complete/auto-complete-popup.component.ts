@@ -3,9 +3,9 @@ import {
   CdkOverlayOrigin,
   ConnectedOverlayPositionChange,
   ConnectedPosition,
-  VerticalConnectionPos
+  VerticalConnectionPos,
 } from '@angular/cdk/overlay';
-import { Component, ElementRef, Input, TemplateRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, TemplateRef, ViewChild } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 import { fadeInOut } from 'ng-devui/utils';
 import { AutoCompleteConfig } from './auto-complete-config';
@@ -34,6 +34,8 @@ export class AutoCompletePopupComponent implements ControlValueAccessor {
   @Input() overview: string;
   @Input() itemTemplate: TemplateRef<any>;
   @Input() noResultItemTemplate: TemplateRef<any>;
+  @Input() customViewTemplate: TemplateRef<any>;
+  @Input() customViewDirection: 'bottom' | 'right' | 'left' | 'top' = 'bottom';
   @Input() searchingTemplate: TemplateRef<any>;
   @Input() isSearching = false;
   @Input() formatter: (item: any) => string;
@@ -44,6 +46,7 @@ export class AutoCompletePopupComponent implements ControlValueAccessor {
   @Input() cdkOverlayOffsetY = 0;
   @Input() origin: CdkOverlayOrigin | undefined;
   @Input() showAnimation = true;
+  @Output() hoverItem: EventEmitter<any> = new EventEmitter();
   @ViewChild('selectMenuElement') selectMenuElement: ElementRef;
   @ViewChild('dropdownUl') dropdownUl: ElementRef;
   @ViewChild(CdkConnectedOverlay) connectedOverlay: CdkConnectedOverlay;
@@ -175,5 +178,9 @@ export class AutoCompletePopupComponent implements ControlValueAccessor {
 
   onPositionChange(position: ConnectedOverlayPositionChange) {
     this.popPosition = position.connectionPair.originY;
+  }
+
+  onMouseOver(event: MouseEvent, item: any) {
+    this.hoverItem.emit(item);
   }
 }

@@ -9,6 +9,7 @@
   >
     <d-tag
       [deletable]="!(disabled || (optionDisabledKey && item.option[optionDisabledKey]))"
+      [maxWidth]="'100%'"
       [tag]="valueParser(item.option)"
       (tagDelete)="removeItem(item, $event?.event, index)"
     ></d-tag>

@@ -1,6 +1,10 @@
 <div class="progress-container">
-  <d-progress [percentage]="80" [percentageText]="'80%'"> </d-progress>
+  <d-progress [percentage]="30" [percentageText]="'30%'" [showContent]="showContentConfig"></d-progress>
 </div>
 <div class="progress-container">
-  <d-progress [percentage]="30" [percentageText]="'30%'" [strokeColor]="'#50D4AB'" [strokeWidth]="30"> </d-progress>
+  <d-progress [percentage]="100" [strokeColor]="'#50d4ab'" [strokeWidth]="16" [showContent]="true">
+    <ng-template let-percentage="percentage">
+      <span class="icon-position icon-right"></span>
+    </ng-template>
+  </d-progress>
 </div>

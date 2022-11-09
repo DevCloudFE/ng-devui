@@ -190,6 +190,10 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
    */
   @Input() beforeCellEdit: (rowItem: any, column: any) => Promise<any>;
   /**
+   * 表格单元格开始编辑后的拦截事件
+   */
+  @Input() beforeCellEditEnd: (rowItem: any, column: any) => boolean;
+  /**
    * 表格单元格开始编辑事件
    */
   @Output() cellEditStart = new EventEmitter<CellSelectedEventArg>();
@@ -291,7 +295,7 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
   /**
    * 表格尺寸，sm对应行高40px， md对应行高48px，lg对应行高56px
    */
-  @Input() size: 'xs' | 'sm' | 'md' | 'lg' = 'sm';
+  @Input() size: 'mini' | 'xs' | 'sm' | 'md' | 'lg' = 'sm';
 
   @Input() shadowType: 'normal' | 'embed' = 'embed';
 

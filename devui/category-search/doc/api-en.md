@@ -88,8 +88,8 @@ export interface ICategorySearchTagItem {
    */
   value?: {
     label: string; // Used to display the selected value, or the property name if filterKey is specified, such as the status in basic demo.
-    value: string | ITagOption | Array<ITagOption | number | string>; // Selected value from the drop-down list box
-    cache: string | ITagOption | Array<ITagOption | number | string>; // Cached data used to reset the selection value when the drop-down list expands
+    value: string | ITagOption | Array<ITagOption | number | string | Date>; // Selected value from the drop-down list box
+    cache: string | ITagOption | Array<ITagOption | number | string | Date>; // Cached data used to reset the selection value when the drop-down list expands
   };
   /**
    * Indicates whether to display hour, minute, and second for the dateRange type.

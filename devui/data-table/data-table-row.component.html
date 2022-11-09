@@ -1,8 +1,7 @@
 <td *ngIf="showExpandToggle" class="devui-detail-cell" [ngClass]="{ 'devui-sticky-left-cell': columns[0]?.fixedLeft }" [style.left]="0">
   <div *ngIf="rowItem.detail || rowItem?.$expandConfig" (click)="toggle()">
-    <span [style.vertical-align]="'middle'" *ngIf="!rowItem['$isDetailOpen'] && !rowItem.$expandConfig?.expand">
+    <span class="expand-icon-wrapper" *ngIf="!rowItem['$isDetailOpen'] && !rowItem.$expandConfig?.expand">
       <svg
-        class="svg-icon-arrow"
         width="16px"
         height="16px"
         viewBox="0 0 16 16"
@@ -10,14 +9,19 @@
         xmlns="http://www.w3.org/2000/svg"
         xmlns:xlink="http://www.w3.org/1999/xlink"
       >
-        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-          <polygon points="4.5 5 8 8.76923077 11.5 5 13 6.61538462 8 12 3 6.61538462"></polygon>
+        <g id="操作/collapse2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+          <polygon
+            id="路径"
+            fill="#293040"
+            fill-rule="nonzero"
+            transform="translate(8.146447, 8.000000) scale(-1, 1) translate(-8.146447, -8.000000) "
+            points="11.7071068 12.2928932 10.2928932 13.7071068 4.58578644 8 10.2928932 2.29289322 11.7071068 3.70710678 7.41421356 8"
+          ></polygon>
         </g>
       </svg>
     </span>
-    <span [style.vertical-align]="'middle'" *ngIf="(rowItem && rowItem['$isDetailOpen']) || rowItem.$expandConfig?.expand">
+    <span class="expand-icon-wrapper" *ngIf="(rowItem && rowItem['$isDetailOpen']) || rowItem.$expandConfig?.expand">
       <svg
-        class="svg-icon-arrow"
         width="16px"
         height="16px"
         viewBox="0 0 16 16"
@@ -25,8 +29,8 @@
         xmlns="http://www.w3.org/2000/svg"
         xmlns:xlink="http://www.w3.org/1999/xlink"
       >
-        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-          <polygon points="11.5 12 8 8.23076923 4.5 12 3 10.3846154 8 5 13 10.3846154"></polygon>
+        <g id="操作/chevron_down" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+          <polygon id="chevron_down" fill="#293040" points="4.5 5 8 8.76923077 11.5 5 13 6.61538462 8 12 3 6.61538462"></polygon>
         </g>
       </svg>
     </span>
@@ -48,6 +52,7 @@
     [content]="rowItem.$checkBoxTips"
     [position]="['top', 'right', 'bottom', 'left']"
     [showAnimation]="false"
+    (mouseup)="$event.stopPropagation()"
   >
   </d-checkbox>
 </td>
