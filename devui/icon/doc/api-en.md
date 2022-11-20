@@ -6,6 +6,12 @@ Import into module：
 import { IconModule } from 'ng-devui/icon';
 ```
 
+Import into standalone：
+
+```typescript
+import { IconComponent, IconGroupComponent } from 'ng-devui/icon';
+```
+
 In the page：
 
 ```html

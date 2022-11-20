@@ -1,12 +1,23 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { DevuiSourceData } from 'ng-devui/shared/devui-codebox/devui-source-data';
-import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { TranslateModule, TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
+import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
+import { BasicComponent } from './basic/basic.component';
+import { IconGroupDemoComponent } from './icon-group/icon-group.component';
 
 @Component({
   templateUrl: './icon-demo.component.html',
+  standalone: true,
+  imports: [
+    TranslateModule,
+    DDemoNavModule,
+    DevUICodeboxModule,
+    BasicComponent,
+    IconGroupDemoComponent]
 })
-export class IconDemoComponent implements OnInit,OnDestroy {
+export class IconDemoComponent implements OnInit, OnDestroy {
   basicSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'html', code: require('./basic/basic.component.html?raw') },
     { title: 'TS', language: 'typescript', code: require('./basic/basic.component.ts?raw') },
@@ -22,7 +33,7 @@ export class IconDemoComponent implements OnInit,OnDestroy {
     { dAnchorLink: 'basic', value: '基本用法' }
   ];
   subs: Subscription = new Subscription();
-  constructor(private translate: TranslateService){}
+  private translate = inject(TranslateService);
   ngOnInit() {
     this.subs.add(
       this.translate.get('components.icon.anchorLinkValues').subscribe((res) => {
