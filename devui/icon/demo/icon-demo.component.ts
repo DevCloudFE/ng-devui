@@ -1,9 +1,21 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { TranslateModule, TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
 import { DevuiSourceData } from 'ng-devui/shared/devui-codebox/devui-source-data';
-import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { BasicComponent } from './basic/basic.component';
+import { IconGroupDemoComponent } from './icon-group/icon-group.component';
 
 @Component({
+  standalone: true,
+  imports: [
+    TranslateModule,
+    DDemoNavModule,
+    DevUICodeboxModule,
+    BasicComponent,
+    IconGroupDemoComponent
+  ],
   templateUrl: './icon-demo.component.html',
 })
 export class IconDemoComponent implements OnInit,OnDestroy {
