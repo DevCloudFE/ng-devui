@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
+import { AccordionComponent } from 'ng-devui/accordion';
 
 @Component({
   selector: 'd-change-key',
+  standalone: true,
+  imports: [AccordionComponent],
   templateUrl: './change-key.component.html',
   styleUrls: ['./change-key.component.css']
 })

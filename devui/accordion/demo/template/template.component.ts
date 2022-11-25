@@ -1,7 +1,11 @@
+import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
+import { AccordionComponent } from 'ng-devui/accordion';
 
 @Component({
   selector: 'd-template',
+  standalone: true,
+  imports: [AccordionComponent, NgIf],
   templateUrl: './template.component.html',
   styleUrls: ['./template.component.scss'],
 })

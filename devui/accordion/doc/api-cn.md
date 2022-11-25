@@ -6,6 +6,12 @@
 import { AccordionModule } from 'ng-devui/accordion';
 ```
 
+在 standalone 中引入：
+
+```typescript
+import { AccordionComponent } from 'ng-devui/accordion';
+```
+
 在页面中使用:
 
 ```html

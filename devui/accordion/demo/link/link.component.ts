@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
+import { AccordionComponent } from 'ng-devui/accordion';
 
 @Component({
   selector: 'd-link',
+  standalone: true,
+  imports: [AccordionComponent],
   templateUrl: './link.component.html',
   styleUrls: ['./link.component.css']
 })

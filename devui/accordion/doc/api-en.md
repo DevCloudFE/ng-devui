@@ -3,7 +3,13 @@
 Import into module:
 
 ```typescript
-import { AccordionModule } from ' ng-devui/accordion';
+import { AccordionModule } from 'ng-devui/accordion';
+```
+
+Import into standalone:
+
+```typescript
+import { AccordionComponent } from 'ng-devui/accordion';
 ```
 
 On the page:

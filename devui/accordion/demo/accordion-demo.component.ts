@@ -1,9 +1,32 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { TranslateModule, TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
+import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
 import { DevuiSourceData } from 'ng-devui/shared/devui-codebox/devui-source-data';
-import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
+import { BasicComponent } from './basic/basic.component';
+import { LinkComponent } from './link/link.component';
+import { TemplateComponent } from './template/template.component';
+import { InnerListTemplateComponent } from './inner-list-template/inner-list-template.component';
+import { MultiLevelComponent } from './multi-level/multi-level.component';
+import { ChangeKeyComponent } from './change-key/change-key.component';
+import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
+
 @Component({
   selector: 'd-accordion-demo',
+  standalone: true,
+  imports: [
+    DDemoNavModule,
+    TranslateModule,
+    DevUICodeboxModule,
+    DevUIApiModule,
+    BasicComponent,
+    LinkComponent,
+    TemplateComponent,
+    InnerListTemplateComponent,
+    MultiLevelComponent,
+    ChangeKeyComponent
+  ],
   templateUrl: './accordion-demo.component.html',
 })
 export class AccordionDemoComponent implements OnInit, OnDestroy {
