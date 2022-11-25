@@ -1,10 +1,13 @@
+import { NgTemplateOutlet } from '@angular/common';
 import { Component, HostBinding, HostListener, Inject, OnChanges, SimpleChanges, ViewChild, ViewEncapsulation } from '@angular/core';
-import { Params, Router, RouterLinkActive, UrlTree } from '@angular/router';
+import { Params, Router, RouterLinkActive, RouterModule, UrlTree } from '@angular/router';
 import { AccordionBaseLinkComponent } from './accordion-base-link-component.class';
 import { ACCORDION } from './accordion-token';
 
 @Component({
   selector: 'd-accordion-item-routerlink',
+  standalone: true,
+  imports: [NgTemplateOutlet, RouterModule],
   templateUrl: './accordion-item-routerlink.component.html',
   encapsulation: ViewEncapsulation.None,
   preserveWhitespaces: false,

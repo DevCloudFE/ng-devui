@@ -1,32 +1,24 @@
 <div
   class="devui-accordion-item-title devui-over-flow-ellipsis"
-  [ngClass]="{
-    open: open,
-    active: childActivated,
-    disabled: disabled
-  }"
+  [class.open]="open"
+  [class.active]="childActivated"
+  [class.disabled]="disabled"
   title="{{ title }}"
   (click)="!disabled && toggle($event)"
 >
-  <div
-    class="devui-accordion-splitter"
-    [ngClass]="{
-      'devui-parent-list': deepth === 0
-    }"
-    [ngStyle]="{ left: deepth * 20 + 10 + 'px' }"
-  ></div>
-  <ng-container *ngIf="!menuItemTemplate">
-    {{ title }}
-  </ng-container>
-  <ng-template
-    *ngIf="menuItemTemplate"
-    [ngTemplateOutlet]="menuItemTemplate"
+  <div class="devui-accordion-splitter" [class.devui-parent-list]="deepth === 0" [style.left.px]="deepth * 20 + 10"></div>
+  <ng-container
+    [ngTemplateOutlet]="menuItemTemplate ?? defaultTemplate"
     [ngTemplateOutletContext]="{
       parent: parent,
       item: item,
       deepth: deepth
     }"
-  ></ng-template>
+  >
+  </ng-container>
+  <ng-template #defaultTemplate>
+    {{ title }}
+  </ng-template>
   <span class="devui-accordion-open-icon">
     <svg
       width="1em"

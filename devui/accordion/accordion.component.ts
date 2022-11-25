@@ -13,17 +13,22 @@ import {
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { DevConfigService, WithConfig } from 'ng-devui/utils';
 import { Subscription } from 'rxjs';
+import { AccordionListComponent } from './accordion-list.component';
 import { ACCORDION } from './accordion-token';
-import { AccordionItemClickEvent, AccordionMenuToggleEvent, AccordionMenuType, AccordionOptions } from './accordion.type';
+import { AccordionService } from './accordion.service';
+import type { AccordionItemClickEvent, AccordionMenuToggleEvent, AccordionMenuType, AccordionOptions } from './accordion.type';
+
 @Component({
   selector: 'd-accordion',
+  standalone: true,
+  imports: [AccordionListComponent],
   templateUrl: './accordion.component.html',
   styleUrls: ['./accordion.component.scss'],
   preserveWhitespaces: false,
   providers: [{
     provide: ACCORDION,
     useExisting: forwardRef(() => AccordionComponent)
-  }]
+  }, AccordionService]
 })
 export class AccordionComponent implements AccordionOptions, OnChanges, OnInit, OnDestroy {
   @Input() data: Array<any> | AccordionMenuType;

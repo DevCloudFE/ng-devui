@@ -1,6 +1,6 @@
 <d-accordion-list
   class="devui-accordion-menu devui-scrollbar"
-  [ngClass]="{ 'devui-accordion-menu-normal': accordionType === 'normal' }"
+  [class.devui-accordion-menu-normal]="accordionType === 'normal'"
   [data]="data"
   [deepth]="0"
   [parent]="null"

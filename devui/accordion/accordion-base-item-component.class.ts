@@ -1,6 +1,6 @@
 import { Directive, HostBinding } from '@angular/core';
 import { AccordionBaseComponent } from './accordion-base-component.class';
-import { AccordionBaseItem, AccordionOptions } from './accordion.type';
+import type { AccordionBaseItem, AccordionOptions } from './accordion.type';
 
 @Directive()
 export abstract class AccordionBaseItemComponent<T extends AccordionBaseItem> extends AccordionBaseComponent<T> {

@@ -1,13 +1,27 @@
+import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import { Component, HostBinding, Inject, Input, OnDestroy, OnInit, QueryList, ViewChildren, ViewEncapsulation } from '@angular/core';
 import { expandCollapse, expandCollapseForDomDestroy } from 'ng-devui/utils';
+import { AccordionItemHreflinkComponent } from './accordion-item-hreflink.component';
 import { AccordionItemRouterlinkComponent } from './accordion-item-routerlink.component';
+import { AccordionItemComponent } from './accordion-item.component';
 import { AccordionMenuComponent } from './accordion-menu.component';
 import { ACCORDION } from './accordion-token';
 import { AccordionService } from './accordion.service';
-import { AccordionMenuItem } from './accordion.type';
+import type { AccordionMenuItem } from './accordion.type';
 
 @Component({
   selector: 'd-accordion-list',
+  standalone: true,
+  imports: [
+    AccordionListComponent,
+    AccordionMenuComponent,
+    AccordionItemComponent,
+    AccordionItemHreflinkComponent,
+    AccordionItemRouterlinkComponent,
+    NgFor,
+    NgIf,
+    NgTemplateOutlet
+  ],
   templateUrl: './accordion-list.component.html',
   encapsulation: ViewEncapsulation.None,
   animations: [expandCollapse, expandCollapseForDomDestroy],
@@ -93,7 +107,7 @@ export class AccordionListComponent implements OnInit, OnDestroy {
     );
   }
 
-  constructor(@Inject(ACCORDION) private accordion: any, private accordionService: AccordionService) {}
+  constructor(@Inject(ACCORDION) private accordion: any, private accordionService: AccordionService) { }
 
   ngOnInit(): void {
     if (this.parent) {

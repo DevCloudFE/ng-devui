@@ -1,6 +1,6 @@
-import { Directive, HostListener } from '@angular/core';
+import { Directive } from '@angular/core';
 import { AccordionBaseItemComponent } from './accordion-base-item-component.class';
-import { AccordionLinkableItem, AccordionOptions } from './accordion.type';
+import type { AccordionLinkableItem, AccordionOptions } from './accordion.type';
 
 @Directive()
 export abstract class AccordionBaseLinkComponent extends AccordionBaseItemComponent<AccordionLinkableItem> {

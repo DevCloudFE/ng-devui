@@ -1,5 +1,5 @@
 import { Directive, HostBinding, Input } from '@angular/core';
-import { AccordionBase, AccordionOptions } from './accordion.type';
+import type { AccordionBase, AccordionOptions } from './accordion.type';
 
 @Directive()
 export abstract class AccordionBaseComponent<T extends AccordionBase> {

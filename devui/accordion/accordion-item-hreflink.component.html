@@ -1,42 +1,21 @@
-<ng-container *ngIf="!disabled">
-  <a class="devui-over-flow-ellipsis" href="{{ link }}" target="{{ target }}" rel="noopener" title="{{ title }}">
-    <div
-      class="devui-accordion-splitter"
-      [ngClass]="{ 'devui-parent-list': deepth === 0 }"
-      [ngStyle]="{ left: deepth * 20 + 10 + 'px' }"
-    ></div>
-    <ng-container *ngIf="!itemTemplate">
-      {{ title }}
-    </ng-container>
-    <ng-template
-      *ngIf="itemTemplate"
-      [ngTemplateOutlet]="itemTemplate"
-      [ngTemplateOutletContext]="{
-        parent: parent,
-        item: item,
-        deepth: deepth
-      }"
-    ></ng-template>
-  </a>
-</ng-container>
-<ng-container *ngIf="disabled">
-  <a class="devui-over-flow-ellipsis" title="{{ title }}">
-    <div
-      class="devui-accordion-splitter"
-      [ngClass]="{ 'devui-parent-list': deepth === 0 }"
-      [ngStyle]="{ left: deepth * 20 + 10 + 'px' }"
-    ></div>
-    <ng-container *ngIf="!itemTemplate">
-      {{ title }}
-    </ng-container>
-    <ng-template
-      *ngIf="itemTemplate"
-      [ngTemplateOutlet]="itemTemplate"
-      [ngTemplateOutletContext]="{
-        parent: parent,
-        item: item,
-        deepth: deepth
-      }"
-    ></ng-template>
-  </a>
-</ng-container>
+<a
+  class="devui-over-flow-ellipsis"
+  [href]="!disabled ? link : null"
+  [target]="!disabled ? target : null"
+  [rel]="!disabled ? 'noopener' : null"
+  title="{{ title }}"
+>
+  <div class="devui-accordion-splitter" [class.devui-parent-list]="deepth === 0" [style.left.px]="deepth * 20 + 10"></div>
+  <ng-container
+    [ngTemplateOutlet]="itemTemplate ?? defaultTemplate"
+    [ngTemplateOutletContext]="{
+      parent: parent,
+      item: item,
+      deepth: deepth
+    }"
+  >
+  </ng-container>
+  <ng-template #defaultTemplate>
+    {{ title }}
+  </ng-template>
+</a>

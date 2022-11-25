@@ -1,10 +1,13 @@
+import { NgTemplateOutlet } from '@angular/common';
 import { Component, HostListener, Inject, ViewEncapsulation } from '@angular/core';
 import { AccordionBaseItemComponent } from './accordion-base-item-component.class';
 import { ACCORDION } from './accordion-token';
-import { AccordionBaseItem } from './accordion.type';
+import type { AccordionBaseItem } from './accordion.type';
 
 @Component({
   selector: 'd-accordion-item',
+  standalone: true,
+  imports: [NgTemplateOutlet],
   templateUrl: './accordion-item.component.html',
   encapsulation: ViewEncapsulation.None,
   preserveWhitespaces: false,

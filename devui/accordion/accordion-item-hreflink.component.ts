@@ -1,9 +1,12 @@
+import { NgTemplateOutlet } from '@angular/common';
 import { Component, HostListener, Inject, ViewEncapsulation } from '@angular/core';
 import { AccordionBaseLinkComponent } from './accordion-base-link-component.class';
 import { ACCORDION } from './accordion-token';
 
 @Component({
   selector: 'd-accordion-item-hreflink',
+  standalone: true,
+  imports: [NgTemplateOutlet],
   templateUrl: './accordion-item-hreflink.component.html',
   encapsulation: ViewEncapsulation.None,
   preserveWhitespaces: false,

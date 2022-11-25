@@ -1,11 +1,15 @@
+import { NgTemplateOutlet } from '@angular/common';
 import { Component, HostBinding, Inject, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AccordionBaseComponent } from './accordion-base-component.class';
 import { ACCORDION } from './accordion-token';
 import { AccordionService } from './accordion.service';
-import { AccordionBaseMenu, AccordionMenuItem } from './accordion.type';
+import type { AccordionBaseMenu, AccordionMenuItem } from './accordion.type';
+
 @Component({
   selector: 'd-accordion-menu',
+  standalone: true,
+  imports: [NgTemplateOutlet],
   templateUrl: './accordion-menu.component.html',
   encapsulation: ViewEncapsulation.None,
   preserveWhitespaces: false,
