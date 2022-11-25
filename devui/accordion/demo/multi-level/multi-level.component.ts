@@ -1,7 +1,12 @@
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { AccordionComponent } from 'ng-devui/accordion';
+import { ToggleModule } from 'ng-devui/toggle';
 
 @Component({
   selector: 'd-multi-level',
+  standalone: true,
+  imports: [AccordionComponent, FormsModule, ToggleModule],
   templateUrl: './multi-level.component.html',
   styleUrls: ['./multi-level.component.css']
 })

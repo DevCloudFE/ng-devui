@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
+import { AccordionComponent } from 'ng-devui/accordion';
 
 @Component({
   selector: 'd-inner-list-template',
+  standalone: true,
+  imports: [AccordionComponent],
   templateUrl: './inner-list-template.component.html',
   styleUrls: ['./inner-list-template.component.css']
 })
