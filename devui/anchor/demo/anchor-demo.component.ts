@@ -1,10 +1,25 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
-import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { DevUICodeboxModule, DevuiSourceData } from 'ng-devui/shared/devui-codebox';
+import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
+import { TranslateModule, TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
+import { AsyncComponent } from './async/async.component';
+import { BasicComponent } from './basic/basic.component';
+import { HashComponent } from './hash/hash.component';
+import { ScrollTargetComponent } from './scroll-target/scroll-target.component';
 
 @Component({
   selector: 'd-anchor-demo',
+  standalone: true,
+  imports: [
+    TranslateModule,
+    DDemoNavModule,
+    DevUICodeboxModule,
+    BasicComponent,
+    AsyncComponent,
+    HashComponent,
+    ScrollTargetComponent
+  ],
   templateUrl: './anchor-demo.component.html',
 })
 export class AnchorDemoComponent implements OnInit, OnDestroy {

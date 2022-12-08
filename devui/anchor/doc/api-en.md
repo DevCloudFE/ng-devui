@@ -6,6 +6,12 @@ Import into module：
 import { AnchorModule } from 'ng-devui';
 ```
 
+Import into standalone
+
+```ts
+import { AnchorDirective, AnchorBoxDirective, AnchorBoxHashSupportDirective, AnchorLinkDirective } from 'ng-devui/anchor';
+```
+
 In the page:
 
 ```html
