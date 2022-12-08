@@ -1,6 +1,6 @@
+import { NgIf } from '@angular/common';
 import {
   Component,
-
   EventEmitter,
   Input,
   Output
@@ -9,6 +9,8 @@ import { AlertType } from './alert.types';
 
 @Component({
   selector: 'd-alert',
+  standalone: true,
+  imports: [NgIf],
   templateUrl: './alert.component.html',
   styleUrls: ['./alert.component.scss'],
   preserveWhitespaces: false,
