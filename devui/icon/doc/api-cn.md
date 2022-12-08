@@ -6,6 +6,12 @@
 import { IconModule } from 'ng-devui/icon';
 ```
 
+在 standalone 中引入：
+
+```typescript
+import { IconComponent, IconGroupComponent } from 'ng-devui/icon';
+```
+
 页面中使用：
 
 ```html
