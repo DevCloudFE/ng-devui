@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { DevUIModule } from 'ng-devui';
-import { LazyLoadModule, SafePipeModule } from 'ng-devui/utils';
+import { LazyLoadDirective, SafePipe } from 'ng-devui/utils';
 import { TranslateModule } from '@ngx-translate/core';
 import scss from 'highlight.js/lib/languages/scss';
 import typescript from 'highlight.js/lib/languages/typescript';
@@ -36,8 +36,8 @@ export function hljsLanguages() {
   ],
   imports: [
     CommonModule,
-    LazyLoadModule,
-    SafePipeModule,
+    LazyLoadDirective,
+    SafePipe,
     TranslateModule,
     DevuiCommonsModule,
     DevUIModule.forRoot(),

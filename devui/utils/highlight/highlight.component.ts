@@ -4,6 +4,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'd-highlight',
+  standalone: true,
   template: ``,
   styleUrls: ['./highlight.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

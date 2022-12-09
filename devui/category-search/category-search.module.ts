@@ -12,7 +12,7 @@ import { SearchModule } from 'ng-devui/search';
 import { TagsModule } from 'ng-devui/tags';
 import { TextInputModule } from 'ng-devui/text-input';
 import { TreeModule } from 'ng-devui/tree';
-import { PopperModule } from 'ng-devui/utils';
+import { PopperComponent } from 'ng-devui/utils';
 import { CategorySearchComponent } from './category-search.component';
 import { ContentTemplateDirective } from './content-template.directive';
 import { DefaultTemplateDirective } from './default-template.directive';
@@ -31,7 +31,7 @@ import { DefaultTemplateDirective } from './default-template.directive';
     InputNumberModule,
     LoadingModule,
     TreeModule,
-    PopperModule,
+    PopperComponent,
     DatepickerProModule,
   ],
   declarations: [CategorySearchComponent, ContentTemplateDirective, DefaultTemplateDirective],

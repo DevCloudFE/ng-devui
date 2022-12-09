@@ -12,7 +12,7 @@ import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
 import { TextInputModule } from 'ng-devui/text-input';
-import { LazyLoadModule } from 'ng-devui/utils';
+import { LazyLoadDirective } from 'ng-devui/utils';
 import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
 import { ClipboardDemoComponent } from './clipboard/clipboard.component';
@@ -37,7 +37,7 @@ import { SafeNullPipeComponent } from './pipe/safe-null-pipe/safe-null-pipe.comp
     DevUIApiModule,
     DCommonModule,
     DDemoNavModule,
-    LazyLoadModule,
+    LazyLoadDirective,
     LoadingModule,
     I18nModule,
     DataTableModule,

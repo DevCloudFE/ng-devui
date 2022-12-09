@@ -15,7 +15,7 @@ import { SelectModule } from 'ng-devui/select';
 import { ToggleModule } from 'ng-devui/toggle';
 import { TooltipModule } from 'ng-devui/tooltip';
 import { TreeSelectModule } from 'ng-devui/tree-select';
-import { LazyLoadModule, SafePipeModule } from 'ng-devui/utils';
+import { LazyLoadDirective, SafePipe } from 'ng-devui/utils';
 import { WindowRefModule } from 'ng-devui/window-ref';
 import { DataTableBodyComponent } from './data-table-body.component';
 import { DataTableCellComponent } from './data-table-cell.component';
@@ -56,10 +56,10 @@ import { DataTableHeadCellTmplComponent } from './tmpl/data-table-head-cell-tmpl
     InputNumberModule,
     DropDownModule,
     TreeSelectModule,
-    SafePipeModule,
+    SafePipe,
     TooltipModule,
     DragDropModule,
-    LazyLoadModule,
+    LazyLoadDirective,
     ToggleModule,
     SearchModule
   ],

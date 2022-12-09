@@ -7,7 +7,7 @@ import { ImagePreviewModule } from 'ng-devui/image-preview';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
-import { SafePipeModule } from 'ng-devui/utils';
+import { SafePipe } from 'ng-devui/utils';
 import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
 import { BasicComponent } from './basic/basic.component';
@@ -24,7 +24,7 @@ import { ZIndexComponent } from './z-index/z-index.component';
     DevUICodeboxModule,
     DevUIApiModule,
     DDemoNavModule,
-    SafePipeModule,
+    SafePipe,
     ButtonModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo', pathMatch: 'full' },

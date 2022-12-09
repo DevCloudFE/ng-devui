@@ -2,7 +2,7 @@ import { AfterViewInit, Directive, ElementRef, EventEmitter, Input, OnChanges, O
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
-@Directive({ selector: '[dLazyLoad]' })
+@Directive({ selector: '[dLazyLoad]', standalone: true })
 export class LazyLoadDirective implements OnDestroy, OnChanges, AfterViewInit {
 
   // 启用懒加载，默认不启用

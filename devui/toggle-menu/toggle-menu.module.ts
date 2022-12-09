@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { CheckBoxModule } from 'ng-devui/checkbox';
 import { LoadingModule } from 'ng-devui/loading';
 import { TagsModule } from 'ng-devui/tags';
-import { HighlightModule, LazyLoadModule } from 'ng-devui/utils';
+import { HighlightComponent, LazyLoadDirective } from 'ng-devui/utils';
 import { WindowRefModule } from 'ng-devui/window-ref';
 import { ToggleMenuContainerComponent } from './toggle-menu-container.component';
 import { ToggleMenuInputComponent } from './toggle-menu-input.component';
@@ -22,8 +22,8 @@ import { ToggleMenuSearchComponent } from './toggle-menu-search.component';
     CommonModule,
     FormsModule,
     CheckBoxModule,
-    HighlightModule,
-    LazyLoadModule,
+    HighlightComponent,
+    LazyLoadDirective,
     LoadingModule,
     OverlayModule,
     ScrollingModule,

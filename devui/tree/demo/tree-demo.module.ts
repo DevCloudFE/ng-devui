@@ -12,7 +12,7 @@ import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
 import { TooltipModule } from 'ng-devui/tooltip';
 import { TreeModule } from 'ng-devui/tree';
-import { SafePipeModule } from 'ng-devui/utils';
+import { SafePipe } from 'ng-devui/utils';
 import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
 import { BasicComponent } from './basic/basic.component';
@@ -42,7 +42,7 @@ import { VirtualScrollComponent } from './virtual-scroll/virtual-scroll.componen
     DDemoNavModule,
     TooltipModule,
     DropDownModule,
-    SafePipeModule,
+    SafePipe,
     SearchModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo', pathMatch: 'full' },
