@@ -4,13 +4,13 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { LoadingModule } from 'ng-devui/loading';
 import { PositioningModule } from 'ng-devui/position';
-import { HighlightModule, LazyLoadModule } from 'ng-devui/utils';
+import { HighlightComponent, LazyLoadDirective } from 'ng-devui/utils';
 import { AutoCompleteConfig } from './auto-complete-config';
 import { AutoCompletePopupComponent } from './auto-complete-popup.component';
 import { AutoCompleteDirective } from './auto-complete.directive';
 
 @NgModule({
-  imports: [CommonModule, FormsModule, OverlayModule, LazyLoadModule, LoadingModule, PositioningModule, HighlightModule],
+  imports: [CommonModule, FormsModule, OverlayModule, LazyLoadDirective, LoadingModule, PositioningModule, HighlightComponent],
   exports: [AutoCompleteDirective, AutoCompletePopupComponent],
   declarations: [AutoCompleteDirective, AutoCompletePopupComponent],
   providers: [AutoCompleteConfig],

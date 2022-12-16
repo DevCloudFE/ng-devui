@@ -8,7 +8,7 @@ import { DragDropModule } from 'ng-devui/dragdrop';
 import { FullscreenModule } from 'ng-devui/fullscreen';
 import { PopoverModule } from 'ng-devui/popover';
 import { ProgressModule } from 'ng-devui/progress';
-import { SafePipeModule } from 'ng-devui/utils';
+import { SafePipe } from 'ng-devui/utils';
 import { QuadrantDiagramService } from './quadrant-diagram.service';
 import { QuadrantLabelComponent } from './quadrant-label/quadrant-label.component';
 import { QuadrantRegionComponent } from './quadrant-region/quadrant-region.component';
@@ -22,7 +22,7 @@ import { QuadrantRegionComponent } from './quadrant-region/quadrant-region.compo
     PopoverModule,
     ProgressModule,
     FullscreenModule,
-    SafePipeModule
+    SafePipe
   ],
   exports: [
     QuadrantDiagramComponent

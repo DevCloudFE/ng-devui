@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { InputNumberModule } from 'ng-devui/input-number';
 import { ModalModule } from 'ng-devui/modal';
 import { TooltipModule } from 'ng-devui/tooltip';
-import { SafePipeModule } from 'ng-devui/utils';
+import { SafePipe } from 'ng-devui/utils';
 
 import { DImagePreviewComponent } from './image-preview.component';
 import { ImagePreviewDirective } from './image-preview.directive';
@@ -14,7 +14,7 @@ import { ImagePreviewDirective } from './image-preview.directive';
   imports: [
     CommonModule,
     ModalModule,
-    SafePipeModule,
+    SafePipe,
     TooltipModule,
     FormsModule,
     InputNumberModule

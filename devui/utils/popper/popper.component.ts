@@ -24,6 +24,7 @@ interface ExtraSetConfig {
 
 @Component({
   selector: 'd-popper-component',
+  standalone: true,
   templateUrl: './popper.component.html',
   styleUrls: [`./popper.component.scss`],
 })

@@ -5,7 +5,7 @@ import { DropDownModule } from 'ng-devui/dropdown';
 import { IconModule } from 'ng-devui/icon';
 import { SelectModule } from 'ng-devui/select';
 import { TextInputModule } from 'ng-devui/text-input';
-import { SafePipeModule } from 'ng-devui/utils';
+import { SafePipe } from 'ng-devui/utils';
 import { PaginationComponent } from './pagination.component';
 
 @NgModule({
@@ -13,7 +13,7 @@ import { PaginationComponent } from './pagination.component';
     CommonModule,
     SelectModule,
     FormsModule,
-    SafePipeModule,
+    SafePipe,
     TextInputModule,
     IconModule,
     DropDownModule

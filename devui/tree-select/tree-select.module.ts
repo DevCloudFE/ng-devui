@@ -5,11 +5,11 @@ import { CheckBoxModule } from 'ng-devui/checkbox';
 import { LoadingModule } from 'ng-devui/loading';
 import { SearchModule } from 'ng-devui/search';
 import { TreeModule } from 'ng-devui/tree';
-import { PopperModule } from 'ng-devui/utils';
+import { PopperComponent } from 'ng-devui/utils';
 import { TreeSelectComponent } from './tree-select.component';
 
 @NgModule({
-  imports: [CommonModule, FormsModule, CheckBoxModule, LoadingModule, TreeModule, PopperModule, SearchModule],
+  imports: [CommonModule, FormsModule, CheckBoxModule, LoadingModule, TreeModule, PopperComponent, SearchModule],
   exports: [TreeSelectComponent],
   declarations: [TreeSelectComponent],
   providers: [],
