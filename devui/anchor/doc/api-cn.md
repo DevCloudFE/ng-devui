@@ -6,6 +6,12 @@
 import { AnchorModule } from 'ng-devui';
 ```
 
+在 standalone 中引入：
+
+```ts
+import { AnchorDirective, AnchorBoxDirective, AnchorBoxHashSupportDirective, AnchorLinkDirective } from 'ng-devui/anchor';
+```
+
 在页面中使用：
 
 ```html
