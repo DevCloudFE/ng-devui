@@ -752,7 +752,7 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
       this.clearCurrentSelectTagFromSearch();
       this.currentOpenDropdown = undefined;
       this.showNoDataTips = false;
-      if (tag.type === 'treeSelect') {
+      if (tag?.type === 'treeSelect') {
         setTimeout(() => {
           this.treeSearch('');
           this.treeResetFlag = false;
