@@ -6,6 +6,12 @@
 import { AlertModule } from 'ng-devui/alert';
 ```
 
+在standalone中引入：
+
+```ts
+import { AlertComponent } from 'ng-devui/alert';
+```
+
 在页面中使用：
 
 ```xml

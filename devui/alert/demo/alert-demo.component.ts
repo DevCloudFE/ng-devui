@@ -1,9 +1,23 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
-import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { DevUICodeboxModule, DevuiSourceData } from 'ng-devui/shared/devui-codebox';
+import { TranslateModule, TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
+import { BasicComponent } from './basic/basic.component';
+import { CloseComponent } from './close/close.component';
+import { WithoutIconComponent } from './withoutIcon/withoutIcon.component';
+import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
+
 @Component({
   selector: 'd-alert-demo',
+  standalone: true,
+  imports: [
+    TranslateModule,
+    DDemoNavModule,
+    DevUICodeboxModule,
+    BasicComponent,
+    CloseComponent,
+    WithoutIconComponent
+  ],
   templateUrl: './alert-demo.component.html'
 })
 export class AlertDemoComponent implements OnInit, OnDestroy {

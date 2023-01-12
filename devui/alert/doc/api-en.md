@@ -6,6 +6,12 @@ Import into module:
 import { AlertModule } from 'ng-devui/alert';
 ```
 
+Import into standalone：
+
+```ts
+import { AlertComponent } from 'ng-devui/alert';
+```
+
 In the page:
 
 ```xml
