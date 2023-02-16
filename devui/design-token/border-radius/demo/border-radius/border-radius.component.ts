@@ -26,6 +26,7 @@ export class BorderRadiusComponent implements OnInit, OnDestroy {
   }
 
   changeValueInTable = () => {
+    this.borderRadius = [];
     const theme = this.themeService.currentTheme;
     for (const key in theme.data) {
       if (key.includes('devui-border-radius')) {

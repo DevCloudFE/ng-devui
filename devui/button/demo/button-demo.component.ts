@@ -56,6 +56,7 @@ export class ButtonDemoComponent implements OnInit, OnDestroy {
   groupsSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('./groups/groups.component.html?raw') },
     { title: 'TS', language: 'typescript', code: require('./groups/groups.component.ts?raw') },
+    { title: 'SCSS', language: 'css', code: require('./groups/groups.component.scss?raw') },
   ];
 
   navItems = [];

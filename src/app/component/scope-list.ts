@@ -8,24 +8,21 @@ export const suggestScopeList: Array<string> = [
 ];
 
 export const newScopeList: Array<string> | string = [
-  'typography',
-  'loading',
-  'tabs',
-  'progress',
-  'datepicker-pro',
-  'tree-select',
-  'cascader',
-  'tree',
-  'fullscreen',
-  'data-table',
+  'tags',
   'userguide',
-  'select',
+  'cascader',
   'category-search',
-  'input-number',
-  'layout',
+  'data-table',
+  'datepicker-pro',
+  'anchor',
+  'upload',
+  'tabs',
+  'time-axis',
+  'editable-select',
+  'typography',
+  'progress',
   'mention',
-  'rate',
-  'tags-input'
+  'dashboard'
 ];
 
 export const sunsetScopeList: Array<string> | string = [

@@ -1,11 +1,16 @@
 <ul class="devui-mention-dropdown" dLoading [showLoading]="loading" [ngClass]="{ 'devui-mention-overlay-top': position === 'top' }">
+  <ng-template
+    *ngIf="mentionHeaderTemplate"
+    [ngTemplateOutlet]="mentionHeaderTemplate"
+    [ngTemplateOutletContext]="{ activeIndex: activeIndex, loading: loading }"
+  ></ng-template>
   <li
     #items
-    class="devui-mention-dropdown-item"
     *ngFor="let suggestion of suggestions; let i = index"
+    class="devui-mention-dropdown-item"
     [class.focus]="i === activeIndex"
-    (mousedown)="$event.preventDefault()"
     (click)="selectSuggestion(suggestion)"
+    (mousedown)="$event.preventDefault()"
   >
     <ng-container *ngIf="mentionItemTemplate; else defaultSuggestion">
       <ng-container [ngTemplateOutlet]="mentionItemTemplate" [ngTemplateOutletContext]="{ $implicit: suggestion }"></ng-container>

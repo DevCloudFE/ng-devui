@@ -15,6 +15,7 @@ import {
   ViewChild,
   ViewChildren
 } from '@angular/core';
+import { Observable } from 'rxjs';
 import { ITagMode } from './tag.component';
 
 @Component({
@@ -41,6 +42,7 @@ export class TagsComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() mode: ITagMode = 'default';
   @Input() titleProperty = '';
   @Input() hideBeyondTags = false;
+  @Input() beforeDelete: () => boolean | Promise<boolean> | Observable<boolean>;
   @ContentChild(TemplateRef) customViewTemplate: TemplateRef<any>;
   @ViewChild('tagsElement') tagsElement: ElementRef;
   @ViewChildren('tagElement', { read: ElementRef }) viewChildren!: QueryList<ElementRef>;
@@ -48,6 +50,8 @@ export class TagsComponent implements OnInit, AfterViewInit, OnChanges {
    * tag被删除后触发
    */
   @Output() tagDelete = new EventEmitter<any>();
+
+  @Output() checkedChange = new EventEmitter<any>();
 
   /**
    * 多标签超出显示相关数据
@@ -111,5 +115,9 @@ export class TagsComponent implements OnInit, AfterViewInit, OnChanges {
 
   removeTag($event, tag, index) {
     this.tagDelete.emit({ tag: tag, index: index, event: $event });
+  }
+
+  tagChecked($event, tag, index) {
+    this.checkedChange.emit({ tag: tag, index: index, checked: $event });
   }
 }

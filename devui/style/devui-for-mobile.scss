@@ -1,0 +1,93 @@
+@import './core/color';
+@import './core/shadow';
+
+@media (max-width: 1279px) {
+  @media (any-hover: none) {
+    * ::-webkit-scrollbar {
+      display: none;
+    }
+
+    d-drawer .drawer {
+      overflow-x: scroll;
+    }
+
+    d-category-search .devui-category-search-line-container {
+      overflow: scroll !important;
+    }
+
+    d-data-table {
+      .devui-data-table .scroll-view,
+      .devui-data-table .viewport-wrapper {
+        overflow: scroll !important;
+      }
+
+      .devui-option-panel .devui-option-panel-col-drag {
+        overflow: scroll !important;
+      }
+    }
+
+    d-virtual-scroll-tree-table d-data-table .devui-data-table .devui-scrollbar {
+      &.overflow-overlay {
+        overflow-x: scroll !important;
+
+        &:hover {
+          overflow-x: scroll !important;
+        }
+      }
+    }
+
+    d-timepicker-panel .devui-time-picker .devui-time-list {
+      overflow-y: scroll !important;
+    }
+
+    d-year-panel .year-list-panel .devui-year-list {
+      overflow-y: auto !important;
+    }
+
+    .devui-time-picker .devui-time-list {
+      overflow-y: auto !important;
+    }
+
+    d-modal {
+      .modal-body {
+        overflow-y: auto !important;
+      }
+    }
+  }
+
+  d-drawer .drawer {
+    overflow-x: overlay;
+
+    // 解决没有backdrop时最外层无宽度的问题
+    &:not(.display-width) {
+      left: 0;
+      right: 0;
+
+      .overlay-wrapper:not(.display-width) {
+        left: 0;
+        right: 0;
+
+        .overlay-backdrop {
+          background: transparent;
+        }
+      }
+    }
+  }
+
+  d-modal {
+    .modal {
+      padding: 32px 20px 0 20px;
+    }
+
+    d-modal-header .modal-header .modal-header-close {
+      left: 0;
+      top: -32px;
+      background: $devui-base-bg;
+      border-radius: 100%;
+      padding-left: 8px;
+      width: 32px;
+      transform: scale(0.8);
+      box-shadow: $devui-shadow-length-base $devui-light-shadow;
+    }
+  }
+}

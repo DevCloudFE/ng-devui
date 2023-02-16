@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'd-tags-input-ngmodel',
-  templateUrl: './ngmodel.component.html',
+  selector: 'd-tags-input-customize',
+  templateUrl: './customize.component.html',
 })
-export class TagsInputDemoNgModelComponent implements OnInit {
-  tagList: any = [];
-  suggestionList: any = [];
+export class TagsInputDemoCustomizeComponent implements OnInit {
+  tagList = [];
+  suggestionList = [];
 
   ngOnInit() {
     this.tagList = [{ name: 'item1' }];
@@ -18,18 +18,16 @@ export class TagsInputDemoNgModelComponent implements OnInit {
       { name: 'item5' },
       { name: 'item6' },
       { name: 'item7' },
+      { name: 'item8' },
     ];
   }
 
-  customCheck = (newtag: string) => {
-    return true;
+  customCheck = (tag: string | { name: string }) => {
+    const str = typeof tag === 'string' ? tag : tag.name;
+    return str.indexOf('item') >= 0;
   };
 
   getTagValue(value) {
     console.log(value);
-  }
-
-  btnClick() {
-    console.log(this.tagList);
   }
 }

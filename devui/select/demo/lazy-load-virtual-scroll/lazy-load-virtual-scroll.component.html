@@ -1,22 +1,16 @@
-<h5 class="text-muted">
-  Virtual Scroll
-  <!--虚拟滚动-->
-</h5>
+<h4>Virtual Scroll<!--虚拟滚动--></h4>
 <div class="row">
   <div class="col-md-5">
     <d-select [virtualScroll]="true" [placeholder]="'Standard Input'" [options]="options"></d-select>
   </div>
 </div>
-<h5 class="text-muted">Scroll to the bottom lazy loading data<!--滚动到底部懒加载数据--></h5>
+<h4>Scroll to the bottom lazy loading data<!--滚动到底部懒加载数据--></h4>
 <div class="row">
   <div class="col-md-5">
     <d-select [enableLazyLoad]="true" (loadMore)="loadMore($event)" [placeholder]="'Small Input'" [options]="options1"></d-select>
   </div>
 </div>
-
-<h5 class="text-muted">
-  Scroll to the bottom to lazy load data using a custom loading template<!--滚动到底部使用自定义loading模板懒加载数据-->
-</h5>
+<h4>Scroll to the bottom to lazy load data using a custom loading template<!--滚动到底部使用自定义loading模板懒加载数据--></h4>
 <div class="row">
   <div class="col-md-5">
     <d-select
@@ -28,6 +22,7 @@
     ></d-select>
   </div>
 </div>
+
 <ng-template #loadingTemplateRef>
   <div class="devui-infinity-loading">
     <svg

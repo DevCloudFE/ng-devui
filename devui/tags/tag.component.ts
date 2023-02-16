@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, TemplateRef } from '@angular/core';
+import { Observable } from 'rxjs';
 
 export type ITagMode = 'default' | 'checkable' | 'closeable';
 
@@ -9,37 +10,29 @@ export type ITagMode = 'default' | 'checkable' | 'closeable';
   exportAs: 'Tag',
   preserveWhitespaces: false,
 })
-export class TagComponent {
+export class TagComponent implements OnChanges {
   /**
    * 【必选】记录输入的标签
    */
-  @Input() tag: string;
-
+  @Input() tag: any;
   @Input() labelStyle = '';
-
   @Input() customColor = '';
-
   // @deprecated
   @Input() deletable = false;
-
   @Input() titleContent: string;
-
   @Input() mode: ITagMode = 'default';
-
   @Input() checked = false;
-
   @Input() maxWidth;
-
   @Input() customViewTemplate: TemplateRef<any>;
+  @Input() beforeDelete: (tag?: any) => boolean | Promise<boolean> | Observable<boolean>;
   /**
    * tag被删除后触发
    */
   @Output() tagDelete = new EventEmitter<any>();
-
   @Output() checkedChange = new EventEmitter<boolean>();
 
+  currentTag: string;
   deleteTag = false;
-
   colorMap = {
     'blue-w98': '#3383ff',
     'aqua-w98': '#39afcc',
@@ -56,9 +49,21 @@ export class TagComponent {
     return !!(this.colorMap[this.labelStyle] || (this.customColor && this.customColor !== ''));
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    const { tag } = changes;
+    if (tag) {
+      this.currentTag = typeof this.tag === 'string' ? this.tag : '';
+    }
+  }
+
   removeTag($event, tag) {
-    this.deleteTag = true;
-    this.tagDelete.emit({ tag: tag, event: $event });
+    this.canDeleteTag(tag).then((canDelete) => {
+      if (!canDelete) {
+        return;
+      }
+      this.deleteTag = true;
+      this.tagDelete.emit({ tag: tag, event: $event });
+    });
   }
 
   tagClick() {
@@ -66,5 +71,24 @@ export class TagComponent {
       this.checked = !this.checked;
       this.checkedChange.emit(this.checked);
     }
+  }
+
+  canDeleteTag(tag) {
+    let closeResult = Promise.resolve(true);
+
+    if (this.beforeDelete) {
+      const result: any = this.beforeDelete(tag);
+      if (typeof result !== 'undefined') {
+        if (result.then) {
+          closeResult = result;
+        } else if (result.subscribe) {
+          closeResult = (result as Observable<boolean>).toPromise();
+        } else {
+          closeResult = Promise.resolve(result);
+        }
+      }
+    }
+
+    return closeResult;
   }
 }

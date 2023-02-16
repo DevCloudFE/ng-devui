@@ -69,6 +69,8 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
    * 【可选】表头选中的下拉项及操作
    */
   @Input() checkOptions: TableCheckOptions[];
+
+  @Input() selectOptionOnCheckbox = false;
   /**
    * 【可选】是否提供显示行详情的功能
    */

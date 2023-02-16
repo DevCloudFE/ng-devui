@@ -18,12 +18,13 @@ import {
   ViewChildren
 } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { DatepickerProCalendarComponent } from 'ng-devui/datepicker-pro';
 import { DropDownDirective } from 'ng-devui/dropdown';
 import { DValidateRules } from 'ng-devui/form';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { ITreeItem, OperableTreeComponent } from 'ng-devui/tree';
 import { DefaultIcons } from 'ng-devui/tree-select';
-import { DateConverter, DefaultDateConverter } from 'ng-devui/utils';
+import { DateConverter, DefaultDateConverter, DevConfigService, WithConfig } from 'ng-devui/utils';
 import { cloneDeep, isEqual, merge, mergeWith } from 'lodash-es';
 import { fromEvent, Observable, Subject } from 'rxjs';
 import { debounceTime, takeUntil, tap } from 'rxjs/operators';
@@ -31,11 +32,13 @@ import {
   ALLOWED_SEARCH_FIELD_TYPES,
   COLORS,
   CreateFilterEvent,
+  ExtendedConfig,
   ICategorySearchTagItem,
   ITagOption,
   SearchConfig,
   SearchEvent,
-  SelectedTagsEvent
+  SelectedTagsEvent,
+  TextConfig
 } from './category-search.type';
 import { ContentTemplateDirective } from './content-template.directive';
 import { DefaultTemplateDirective } from './default-template.directive';
@@ -50,9 +53,19 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
   @Input() category: ICategorySearchTagItem[];
   @Input() defaultSearchField = [];
   @Input() selectedTags: ICategorySearchTagItem[] = [];
+  /**
+   * @deprecated
+   */
   @Input() allowClear = true;
+  /**
+   * @deprecated
+   */
   @Input() allowSave = true;
+  /**
+   * @deprecated
+   */
   @Input() allowShowMore = false;
+  @Input() extendedConfig: ExtendedConfig;
   @Input() toggleScrollToTail = false;
   @Input() searchKey = '';
   @Input() placeholderText: string;
@@ -62,14 +75,16 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
   @Input() groupOrderConfig: string[]; // 用户配置组顺序
   @Input() customGroupNameTemplate: TemplateRef<any>; // 用户自定义组名称显示模板
   @Input() tagMaxWidth: number;
-  @Input() textConfig = {
+  @Input() textConfig: TextConfig = {
     keywordName: '',
     createFilter: '',
     filterTitle: '',
+    labelConnector: '|',
   };
   @Input() filterNameRules: DValidateRules = [];
   @Input() beforeTagChange: (tag, searchKey, operation) => boolean | Promise<boolean> | Observable<boolean>;
   @Input() toggleEvent: (dropdown, tag?, currentSelectTag?) => void;
+  @Input() @WithConfig() styleType = 'default';
   @Output() searchEvent = new EventEmitter<SearchEvent>();
   @Output() selectedTagsChange = new EventEmitter<SelectedTagsEvent>();
   @Output() createFilterEvent = new EventEmitter<CreateFilterEvent>();
@@ -117,26 +132,38 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
   joinLabelTypes = ['checkbox', 'label'];
   valueIsArrayTypes = ['numberRange', 'treeSelect'];
   document: Document;
+  _extendedConfig: ExtendedConfig = {
+    clear: { show: true },
+    save: { show: true },
+    more: { show: false },
+  };
 
   get showFilterNameClear() {
     return typeof this.filterName === 'string' && this.filterName.length > 0;
   }
 
-  constructor(private i18n: I18nService, @Inject(DOCUMENT) private doc: any) {
+  get showExtendedConfig() {
+    return this._extendedConfig.show ?? Boolean(this.selectedTags.length || this.searchKey);
+  }
+
+  constructor(private devConfigService: DevConfigService, @Inject(DOCUMENT) private doc: any, private i18n: I18nService) {
     this.document = this.doc;
     this.dateConverter = new DefaultDateConverter();
     this.id = CategorySearchComponent.ID_SEED++;
     this.showSearchConfig = { keyword: true, field: true, category: true };
-    this.setI18nText();
+    this.i18n
+      .langChange()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data) => this.setI18nAndFilterText(data));
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    const { defaultSearchField, category, selectedTags, searchKey, showSearchCategory, tagMaxWidth, textConfig } = changes;
+    const { defaultSearchField, category, extendedConfig, selectedTags, searchKey, showSearchCategory, tagMaxWidth, textConfig } = changes;
     if (defaultSearchField || category || selectedTags) {
       this.init();
     }
     if (searchKey) {
-      this.setSearchKeyTag();
+      this.setSearchKeyTag(false);
     }
     if (showSearchCategory) {
       this.setSearchShow();
@@ -146,6 +173,9 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
     }
     if (textConfig) {
       this.setI18nAndFilterText(this.i18n.getI18nText());
+    }
+    if (extendedConfig) {
+      this.setExtendedConfig();
     }
   }
 
@@ -204,14 +234,6 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
     }
   }
 
-  setI18nText() {
-    this.setI18nAndFilterText(this.i18n.getI18nText());
-    this.i18n
-      .langChange()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((data) => this.setI18nAndFilterText(data));
-  }
-
   setI18nAndFilterText(data) {
     this.i18nCommonText = data.common;
     this.i18nCategorySearchText = data.categorySearch;
@@ -252,30 +274,52 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
     this.showSearchConfig = { ...this.showSearchConfig, ...customConfig };
   }
 
-  setSearchKeyTag() {
-    const result = this.selectedTags.filter((item) => item.field !== 'devuiCategorySearchKeyword');
-    if (this.searchKey && !this.currentSelectTag) {
-      const label = this.textConfig.keywordName || this.i18nCategorySearchText['keyword'];
-      const searchKeyTag = {
-        options: [],
-        field: 'devuiCategorySearchKeyword',
-        label: label,
-        type: 'keyword',
-        title: `${label}:${this.searchKey}`,
-        value: {
-          label: this.searchKey,
-          value: this.searchKey,
-          cache: this.searchKey,
-        },
-      };
-      this.updateSelectedTags(searchKeyTag, true, result);
-      this.searchKeyCache = this.searchKey;
+  setSearchKeyTag(isSearch = true) {
+    const result = this.searchKey || this.searchKeyCache;
+    if (this.showSearchConfig.keyword && !this.currentSelectTag) {
+      const existingSearchKeyTag = this.selectedTags.find((tag) => tag.field === 'devuiCategorySearchKeyword');
+      if (existingSearchKeyTag && !isSearch && this.searchKey === '') {
+        this.removeTag(existingSearchKeyTag);
+      } else if (this.searchKey && this.searchKey !== existingSearchKeyTag?.value.value) {
+        this.createSearchKeyTag(isSearch);
+      }
     }
     this.searchKey = '';
-    setTimeout(() => {
-      this.enterSearch = false;
-    }, this.DELAY);
+    if (isSearch) {
+      setTimeout(() => {
+        this.enterSearch = false;
+      }, this.DELAY);
+    }
     return result;
+  }
+
+  createSearchKeyTag(isSearch: boolean) {
+    const label = this.textConfig.keywordName || this.i18nCategorySearchText['keyword'];
+    const searchKeyTag: ICategorySearchTagItem = {
+      options: [],
+      field: 'devuiCategorySearchKeyword',
+      label: label,
+      type: 'keyword',
+      title: `${label}:${this.searchKey}`,
+      value: {
+        label: this.searchKey,
+        value: this.searchKey,
+        cache: this.searchKey,
+      },
+    };
+    this.updateSelectedTags(searchKeyTag, isSearch);
+    this.searchKeyCache = this.searchKey;
+    this.searchKey = '';
+  }
+
+  setExtendedConfig() {
+    const oldConfig: ExtendedConfig = {
+      clear: { show: this.allowClear },
+      save: { show: this.allowSave },
+      more: { show: this.allowShowMore },
+    };
+    merge(oldConfig, this.extendedConfig);
+    merge(this._extendedConfig, oldConfig);
   }
 
   init() {
@@ -291,7 +335,14 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
     if (this.selectedTags.length) {
       const [lastItem] = this.selectedTags.slice(-1);
       const isNull = lastItem.value[lastItem.filterKey || 'label'] === undefined;
-      this.currentSelectTag = isNull && (lastItem.value.value === undefined || lastItem.value.value === []) ? lastItem : undefined;
+      this.currentSelectTag =
+        isNull && (lastItem.value.value === undefined || (Array.isArray(lastItem.value.value) && lastItem.value.value.length === 0))
+          ? lastItem
+          : undefined;
+    }
+    if (this.searchKeyCache) {
+      this.searchKey = this.searchKeyCache;
+      this.setSearchKeyTag(false);
     }
   }
 
@@ -384,28 +435,32 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
   }
 
   search() {
-    const result = this.setSearchKeyTag();
-    this.searchEvent.emit({ selectedTags: result, searchKey: this.searchKeyCache });
+    this.searchEvent.emit({
+      selectedTags: this.getSelectedTagsExceptKeyword(),
+      searchKey: this.setSearchKeyTag(),
+    });
     this.isFocus = true;
   }
 
-  searchCategory(item) {
+  searchCategory(item: ICategorySearchTagItem, value?: string) {
     const validField = item;
-    this.updateFieldValue(validField, this.searchKey);
+    this.updateFieldValue(validField, value || this.searchKey);
     this.updateSelectedTags(validField);
     this.searchKey = '';
     this.enterSearch = false;
     this.finishChoose();
   }
 
-  searchInputValue(event) {
+  searchInputValue(event: Event) {
     event.preventDefault();
     event.stopPropagation();
-    const result = this.setSearchKeyTag();
-    this.searchEvent.emit({ selectedTags: result, searchKey: this.searchKeyCache });
+    this.searchEvent.emit({
+      selectedTags: this.getSelectedTagsExceptKeyword(),
+      searchKey: this.setSearchKeyTag(),
+    });
   }
 
-  chooseCategory(item, inputDropdown: DropDownDirective) {
+  chooseCategory(item: ICategorySearchTagItem, inputDropdown: DropDownDirective) {
     // 点选分组名称不处理
     if (item.groupLength !== undefined) {
       return;
@@ -420,7 +475,13 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
     this.updateSelectedTags(item, false);
   }
 
-  updateSelectedTags(tag, valueChanged = true, result?: any) {
+  getSelectedTagsExceptKeyword(): ICategorySearchTagItem[] {
+    return this.showSearchConfig.keyword
+      ? this.selectedTags.filter((item) => item.field !== 'devuiCategorySearchKeyword')
+      : this.selectedTags;
+  }
+
+  updateSelectedTags(tag: ICategorySearchTagItem, valueChanged = true) {
     this.canChange(tag, 'add').then((val) => {
       if (!val) {
         return;
@@ -441,7 +502,11 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
         if (this.scrollToTailFlag) {
           setTimeout(() => this.scrollToTail());
         }
-        this.selectedTagsChange.emit({ selectedTags: result || this.selectedTags, currentChangeTag: tag, operation: 'add' });
+        this.selectedTagsChange.emit({
+          selectedTags: this.getSelectedTagsExceptKeyword(),
+          currentChangeTag: tag,
+          operation: 'add',
+        });
         this.isSearchCategory = false;
       }
     });
@@ -480,13 +545,13 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
     }
   }
 
-  updateFieldValue(field, value) {
+  updateFieldValue(field: ICategorySearchTagItem, value: any) {
     const result = {};
     const filterKey = field.filterKey || 'label';
     const colorKey = field.colorKey || 'color';
     result[filterKey] = value;
     if (field.type === 'radio') {
-      field.value.value = value;
+      field.value.value = { [filterKey]: value };
       field.title = this.setTitle(field, 'radio', value);
     }
     if (field.type === 'label') {
@@ -515,14 +580,15 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
       }
       tag = this.resetValue(tag);
       this.selectedTags = this.selectedTags.filter((item) => item.field !== tag.field);
+      const result = this.getSelectedTagsExceptKeyword();
       if (tag.type === 'keyword') {
         this.searchKey = this.searchKey === this.searchKeyCache ? '' : this.searchKey;
         this.searchKeyCache = '';
         this.enterSearch = this.searchKey !== '';
-        this.searchEvent.emit({ selectedTags: this.selectedTags, searchKey: this.searchKey });
+        this.searchEvent.emit({ selectedTags: result, searchKey: this.searchKey });
       } else {
         this.resolveCategoryDisplay(tag, 'add');
-        this.selectedTagsChange.emit({ selectedTags: this.selectedTags, currentChangeTag: tag, operation: 'delete' });
+        this.selectedTagsChange.emit({ selectedTags: result, currentChangeTag: tag, operation: 'delete' });
       }
       this.currentSelectTag = undefined;
     });
@@ -548,7 +614,8 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
   blurInput(event: FocusEvent) {
     this.blurTimer = setTimeout(() => {
       const className = event.relatedTarget && event.relatedTarget['className'];
-      const outsideHost = !className || className.indexOf(`devui-category-dropdown-menu-${this.id}`) === -1;
+      const outsideHost =
+        !className || (typeof className === 'string' && className.indexOf(`devui-category-dropdown-menu-${this.id}`) === -1);
       if (!this.currentSelectTag && this.currentOpenDropdown && outsideHost) {
         this.currentOpenDropdown.isOpen = false;
       }
@@ -653,8 +720,10 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
   }
 
   createFilterFn() {
-    this.createFilterEvent.emit({ name: this.filterName, selectedTags: this.selectedTags, keyword: this.searchKey });
-    this.filterName = '';
+    this.createFilterEvent.emit({ name: this.filterName, selectedTags: this.getSelectedTagsExceptKeyword(), keyword: this.searchKey });
+    setTimeout(() => {
+      this.filterName = '';
+    }, this.DELAY);
   }
 
   createFilterInputAutoFocus(dropdown: DropDownDirective, inputElm: HTMLElement, filterNameForm: NgForm) {
@@ -665,6 +734,7 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
   }
 
   searchKeyChangeEvent(event: string) {
+    this.searchKey = event;
     this.enterSearch = !!event;
     this.currentSearchCategory = event ? this.category.filter((item) => item['label'].toLowerCase().includes(event.toLowerCase())) : [];
     this.searchKeyChange.emit(event);
@@ -697,16 +767,26 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
     this.updateSelectedTags(tag);
   }
 
-  confirmDate(tag: ICategorySearchTagItem) {
-    this.afterDropdownClosed();
-    const start = tag.value.value[0] as Date;
-    const end = tag.value.value[1] as Date;
-    tag.value.cache = cloneDeep(tag.value.value);
-    tag.value[tag.filterKey || 'label'] = tag.showTime
-      ? `${this.dateConverter.formatDateTime(start)} - ${this.dateConverter.formatDateTime(end)}`
-      : `${this.dateConverter.format(start)} - ${this.dateConverter.format(end)}`;
-    tag.title = this.setTitle(tag, 'dateRange');
-    this.updateSelectedTags(tag);
+  confirmDate(datepicker: DatepickerProCalendarComponent, tag: ICategorySearchTagItem, dropdown: DropDownDirective) {
+    if (!tag.value.value) {
+      return;
+    }
+    if (datepicker.currentActiveInput === 'start') {
+      datepicker.focusChange('end');
+    } else if (!tag.value.value[0]) {
+      datepicker.focusChange('start');
+    } else if (tag.value.value.length > 1) {
+      this.closeMenu(dropdown);
+      this.afterDropdownClosed();
+      const start = tag.value.value[0] as Date;
+      const end = tag.value.value[1] as Date;
+      tag.value.cache = cloneDeep(tag.value.value);
+      tag.value[tag.filterKey || 'label'] = tag.showTime
+        ? `${this.dateConverter.formatDateTime(start)} - ${this.dateConverter.formatDateTime(end)}`
+        : `${this.dateConverter.format(start)} - ${this.dateConverter.format(end)}`;
+      tag.title = this.setTitle(tag, 'dateRange');
+      this.updateSelectedTags(tag);
+    }
   }
 
   // checkbox | label 多选 处理选中项方法
@@ -734,6 +814,7 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
 
   // checkbox | label 当下拉菜单展开重置多选的选中状态
   resetContent(dropdown: DropDownDirective, tag?: ICategorySearchTagItem) {
+    const tagItem = tag || this.currentSelectTag || { type: '', options: [] };
     if (this.blurTimer) {
       clearTimeout(this.blurTimer);
     }
@@ -752,29 +833,41 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
       this.clearCurrentSelectTagFromSearch();
       this.currentOpenDropdown = undefined;
       this.showNoDataTips = false;
-      if (tag?.type === 'treeSelect') {
-        setTimeout(() => {
-          this.treeSearch('');
-          this.treeResetFlag = false;
-        }, this.DELAY);
-      }
+      this.resetTreeRender(dropdown, tagItem, false);
       return;
     }
     if (tag) {
       this.scrollToTailFlag = false;
-      if (tag.type === 'treeSelect') {
-        this.treeResetFlag = true;
-      }
+      this.resetTreeRender(dropdown, tagItem, true);
       if (!isEqual(tag.value.value, tag.value.cache)) {
         tag.value.value = cloneDeep(tag.value.cache);
         this.handleAccordingType(tag.type, tag.value.options);
       }
     } else if (this.currentSelectTag) {
       this.currentSelectTag.value.value = this.valueIsArrayTypes.includes(this.currentSelectTag.type) ? [] : undefined;
+      this.resetTreeRender(dropdown, tagItem, true, true);
       this.handleAccordingType(this.currentSelectTag.type, this.currentSelectTag.options);
       this.scrollToTailFlag = true;
     }
     this.showNoDataTips = this.categoryDisplay.length === 0 || !this.categoryDisplay.some((item) => item && item.groupLength === undefined);
+  }
+
+  resetTreeRender(dropdown: DropDownDirective, tag: any, flag: boolean, isCurrentSelectTag?: boolean) {
+    if (tag.type === 'treeSelect') {
+      setTimeout(() => {
+        this.treeResetFlag = isCurrentSelectTag ? false : flag;
+        if (!flag) {
+          this.treeSearch('');
+          return;
+        }
+        if (tag.searchable) {
+          const dom = dropdown.menuEl.nativeElement.querySelector('.devui-search-container .devui-search>input');
+          if (dom) {
+            dom.focus();
+          }
+        }
+      }, this.DELAY);
+    }
   }
 
   showCurrentSearchCategory(tag: ICategorySearchTagItem, inputDropdown: DropDownDirective) {
@@ -913,10 +1006,12 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
     }
   }
 
-  treeSearch(value: string) {
+  treeSearch(value: string, searchFn?: Function) {
     this.treeSearchKey = value;
     if (this.treeInstance) {
-      const searchRes = this.treeInstance.treeFactory.searchTree(this.treeSearchKey, true);
+      const searchRes = searchFn
+        ? searchFn(this.treeSearchKey, this.treeInstance)
+        : this.treeInstance.treeFactory.searchTree(this.treeSearchKey, true);
       if (typeof searchRes === 'boolean') {
         this.treeNoRecord = searchRes;
       } else if (Array.isArray(searchRes)) {

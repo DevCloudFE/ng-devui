@@ -6,6 +6,7 @@
     appendToBody
     [alignOrigin]="originRef"
     [appendToBodyDirections]="['leftDown', 'leftUp']"
+    [appendToBodyScrollStrategy]="'close'"
     (toggleEvent)="onToggle($event)"
   >
     <div class="align-origin" #origin>

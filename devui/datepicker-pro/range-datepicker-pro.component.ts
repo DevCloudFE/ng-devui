@@ -183,6 +183,7 @@ export class RangeDatepickerProComponent implements OnInit, OnDestroy, AfterView
       this.dropdownToggle.emit(false);
       if (isConfirm) {
         this.confirmEvent.emit(this.pickerSrv.curRangeDate);
+        this.dateValue = this.pickerSrv.curRangeDate.map(d => this.formatDateToString(d));
       }
     });
 

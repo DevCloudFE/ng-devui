@@ -61,7 +61,24 @@ export interface IStep {
 
     defaultStart?: boolean; // Whether to start this tutorial automatically after the page finishes loading
 
+    isCover?: boolean; // Whether there is a mask layer
+
+    extraConfig?: IUserGuideExtraConfig; // Guide Panel Configuration Items
+
+    onExit?： Function; // Callback function on exit
+
     detail: Array<IStepElement>; // Specific steps in this set of guidelines
+```
+
+```TS
+
+export interface IUserGuideExtraConfig {
+  panelBackground?: string; // Guide Panel Background Color
+  nextButtonType?: string; // Next button type
+  infoColor?: string; // Content Color
+  operationColor?: string; // Operation color
+  dotColor?: string; // Navigation Point Color
+}
 ```
 
 ### IStepElement
@@ -72,7 +89,7 @@ export interface IStepElement {
 
     title: string; // Title of the guide step.
 
-    content?: string; // Description of the guide step, which can be character strings, HTML or TemplateRef.
+    content?: string | TemplateRef<any>; // Description of the guide step, which can be character strings, HTML or TemplateRef.
 
     position?: PositionType; // Position of the pop-up window. If this parameter is not transferred, a proper position is automatically selected.
 

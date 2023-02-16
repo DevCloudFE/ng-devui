@@ -218,7 +218,7 @@ export class UserGuideCoreService implements OnDestroy {
 
   private canChange(index: number) {
     let changeResult = Promise.resolve(true);
-    if (this.stepsDetails[index].beforeChange !== undefined) {
+    if (this.stepsDetails[index]?.beforeChange !== undefined) {
       const result: any = this.stepsDetails[index].beforeChange();
       if (typeof result !== 'undefined') {
         if (result.then) {

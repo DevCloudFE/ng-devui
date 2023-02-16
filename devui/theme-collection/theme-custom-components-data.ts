@@ -35,4 +35,5 @@ export const devuiCustomComponentsDarkThemeData = {
 export const devuiCustomComponentsDeepThemeData = {
   'devui-btn-common-bg': '#E0E0E0',
   'devui-btn-common-bg-hover': '#BDBDBD',
+  'devui-btn-common-bg-active': '#A1A1A1'
 };

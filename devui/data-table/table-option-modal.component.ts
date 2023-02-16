@@ -24,12 +24,41 @@ export class TableOptionModalComponent implements OnInit {
 
   filterKey = '';
 
+  allChecked = false;
+  halfCheck = false;
+
   constructor(
     private cdr: ChangeDetectorRef
   ) {}
 
   judgeNameFIlter(name: string) {
     return name.toUpperCase().includes(this.filterKey.toUpperCase());
+  }
+
+  onCheckedChanges() {
+    this.allChecked = true;
+    this.halfCheck = false;
+    this.columnsCache.forEach(t => {
+      if (!t.checked) {
+        this.allChecked = false;
+      }
+
+      if (t.checked) {
+        this.halfCheck = true;
+      }
+    });
+
+    this.halfCheck = (this.halfCheck && !this.allChecked) ? true : false;
+  }
+
+  onAllCheckChanges(checked: boolean) {
+    this.halfCheck = false;
+    this.columnsCache.forEach(t => {
+      if (t.disabled) {
+        return;
+      }
+      t.checked = checked;
+    });
   }
 
   onSearch(value: string) {
@@ -41,6 +70,7 @@ export class TableOptionModalComponent implements OnInit {
     this._columnsData = this.data.columnsData;
     this.columnsCache = [...this._columnsData];
     this._styleSetting = this.data.styleSetting;
+    this.onCheckedChanges();
   }
 
   searchIndex(col) {

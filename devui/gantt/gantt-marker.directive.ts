@@ -10,21 +10,32 @@ export class GanttMarkerDirective implements OnChanges, OnDestroy {
   @Input() monthMark = false;
   @Input() weekend = false;
   @Input() today = false;
+  @Input() index: number;
   @Input() milestone = '';
   @Input() unit: GanttScaleUnit;
   @Input() date: Date;
   @Input() last: boolean;
+  @Input() showDaySplitLine = false;
   hostElement: HTMLElement;
   monthMarkElement: HTMLElement;
   weekendElement: HTMLElement;
   todayElement: HTMLElement;
   milestoneElement: HTMLElement;
+  daySplitLineElement: HTMLElement;
 
   constructor(element: ElementRef, private renderer: Renderer2) {
     this.hostElement = element.nativeElement;
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    if (this.showDaySplitLine && changes['index']) {
+      if (this.index >= 0 && !this.daySplitLineElement && this.unit === GanttScaleUnit.day) {
+        this.drawSplitLine();
+      } else if (this.index >= 0 && this.daySplitLineElement && this.unit === GanttScaleUnit.day) {
+        this.updateSplitLine();
+      }
+    }
+
     if (changes['ganttBarContainerElement'] && this.ganttBarContainerElement) {
       this.initMarkElement();
     }
@@ -66,6 +77,9 @@ export class GanttMarkerDirective implements OnChanges, OnDestroy {
     }
 
     if (changes['unit'] && this.unit) {
+      if(this.unit !== GanttScaleUnit.day) {
+        this.destorySplitLine();
+      }
       this.setElementsStyle();
     }
   }
@@ -105,6 +119,29 @@ export class GanttMarkerDirective implements OnChanges, OnDestroy {
         this.milestoneElement = node;
         this.setElementsStyle();
       }
+    }
+  }
+
+  drawSplitLine() {
+    const node = this.renderer.createElement('div');
+    this.renderer.addClass(node, 'devui-day-split-line');
+    this.renderer.appendChild(this.ganttBarContainerElement, node);
+    this.daySplitLineElement = node;
+    this.updateSplitLine();
+  }
+
+  updateSplitLine() {
+    this.ganttScaleContainerOffsetLeft = this.ganttScaleContainerOffsetLeft ? this.ganttScaleContainerOffsetLeft : 0;
+    const leftOffset = this.hostElement.offsetLeft + this.ganttScaleContainerOffsetLeft + 'px';
+    if(!this.weekend && this.index && this.daySplitLineElement) {
+      this.renderer.setStyle(this.daySplitLineElement, 'left', leftOffset);
+    }
+  }
+
+  destorySplitLine() {
+    if(this.showDaySplitLine && this.daySplitLineElement) {
+      this.renderer.removeChild(this.ganttBarContainerElement, this.daySplitLineElement);
+      this.daySplitLineElement = null;
     }
   }
 
@@ -186,5 +223,6 @@ export class GanttMarkerDirective implements OnChanges, OnDestroy {
 
   ngOnDestroy() {
     this.destroyMarkElement();
+    this.destorySplitLine();
   }
 }

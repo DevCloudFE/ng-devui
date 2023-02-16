@@ -50,12 +50,13 @@ export class OperableTreeComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() addable = false;
   @Input() editable = false;
   @Input() draggable = false;
+  @Input() disableMouseEvent: boolean;
   @Input() checkboxInput: ICheckboxInput = {};
   @Input() beforeAddNode: (node: TreeNode) => Promise<any>;
-  @Input() disableMouseEvent: boolean;
   @Input() beforeDeleteNode: (node: TreeNode) => Promise<any>;
-  @Input() beforeNodeDrop: (dragNodeId: string, dropNodeId: string, dropType: string, dragNodeIds?: string[]) => Promise<any>;
   @Input() beforeEditNode: (node: TreeNode) => Promise<any>;
+  @Input() beforeSelectNode: (node: TreeNode) => Promise<any>;
+  @Input() beforeNodeDrop: (dragNodeId: string, dropNodeId: string, dropType: string, dragNodeIds?: string[]) => Promise<any>;
   @Input() canActivateNode = true;
   @Input() canActivateParentNode = true;
   @Input() canActivateMultipleNode = false;
@@ -69,6 +70,11 @@ export class OperableTreeComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() minBufferPx = 600;
   @Input() maxBufferPx = 900;
   @Input() checkableRelation: 'upward' | 'downward' | 'both' | 'none' = 'both';
+  @Input() indent = '16px';
+  /**
+   * @deprecated
+   */
+  @Input() canIdEmpty = true;
   @Output() nodeSelected = new EventEmitter<TreeNode | TreeNode[]>();
   @Output() nodeDblClicked = new EventEmitter<TreeNode>();
   @Output() nodeRightClicked = new EventEmitter<{ node: TreeNode; event: MouseEvent }>();
@@ -350,7 +356,8 @@ export class OperableTreeComponent implements OnInit, OnDestroy, AfterViewInit {
     const movingNode = this.treeFactory.nodes[dragNodeId];
     const movingNodeIndex = this.treeFactory.getNodeIndex(movingNode);
     const dropNodeIndex = this.treeFactory.getNodeIndex(dropNode);
-    const originalParentNode = movingNode.parentId ? this.treeFactory.nodes[movingNode.parentId] : this.treeFactory.treeRoot;
+    const hasParentId = this.canIdEmpty ? movingNode.parentId : movingNode.parentId !== undefined;
+    const originalParentNode = hasParentId ? this.treeFactory.nodes[movingNode.parentId] : this.treeFactory.treeRoot;
 
     switch (this.dragState.dropType) {
     case 'prev':
@@ -410,22 +417,31 @@ export class OperableTreeComponent implements OnInit, OnDestroy, AfterViewInit {
     if (!this.operableTree.isSelectableRegion(event.target)) {
       return;
     }
-    if (!this.canActivateNode) {
-      this.checkNode(event, treeNode);
-      return;
+    let selectResult = Promise.resolve(true);
+    if (this.beforeSelectNode) {
+      selectResult = this.beforeSelectNode(treeNode);
     }
-    if (this.canActivateParentNode || (!this.canActivateParentNode && !treeNode.data.isParent)) {
-      const isMultiple = this.canActivateMultipleNode && (event.ctrlKey || event.shiftKey);
-      this.treeFactory.activeNodeById(treeNode.id, isMultiple);
-      if (isMultiple) {
-        this.nodeSelected.emit(this.treeFactory.getActivatedNodes());
+    selectResult.then((canSelect) => {
+      if (!canSelect) {
         return;
       }
-    } else {
-      this.toggleNode(event, treeNode);
-      return;
-    }
-    this.nodeSelected.emit(treeNode);
+      if (!this.canActivateNode) {
+        this.checkNode(event, treeNode);
+        return;
+      }
+      if (this.canActivateParentNode || (!this.canActivateParentNode && !treeNode.data.isParent)) {
+        const isMultiple = this.canActivateMultipleNode && (event.ctrlKey || event.shiftKey);
+        this.treeFactory.activeNodeById(treeNode.id, isMultiple);
+        if (isMultiple) {
+          this.nodeSelected.emit(this.treeFactory.getActivatedNodes());
+          return;
+        }
+      } else {
+        this.toggleNode(event, treeNode);
+        return;
+      }
+      this.nodeSelected.emit(treeNode);
+    });
   }
 
   toggleNode(event, treeNode: TreeNode) {
@@ -442,7 +458,10 @@ export class OperableTreeComponent implements OnInit, OnDestroy, AfterViewInit {
       delResult = this.beforeDeleteNode(treeNode);
     }
 
-    delResult.then(() => {
+    delResult.then((canDelete) => {
+      if (!canDelete) {
+        return;
+      }
       this.treeFactory.deleteNodeById(treeNode.id);
       this.nodeDeleted.emit(treeNode);
     });
@@ -490,7 +509,10 @@ export class OperableTreeComponent implements OnInit, OnDestroy, AfterViewInit {
     if (this.beforeEditNode) {
       editResult = this.beforeEditNode(treeNode);
     }
-    editResult.then(() => {
+    editResult.then((canEdit) => {
+      if (!canEdit) {
+        return;
+      }
       this.treeFactory.editNodeTitle(treeNode.id);
     });
   }
@@ -546,11 +568,7 @@ export class OperableTreeComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   get nodes(): any[] {
-    return this.operableTree
-      ? Object.keys(this.treeFactory.nodes).map((k) => {
-        return this.treeFactory.nodes[k];
-      })
-      : [];
+    return this.operableTree ? Object.keys(this.treeFactory.nodes).map((k) => this.treeFactory.nodes[k]) : [];
   }
 
   private postEditNode(treeNode) {

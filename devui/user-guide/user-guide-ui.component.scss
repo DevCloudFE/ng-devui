@@ -1,4 +1,4 @@
-@import '../style/core/color';
+@import '../style/theme/color';
 @import '../style/theme/corner';
 @import '../style/core/_font';
 @import '../style/core/z-index';
@@ -242,8 +242,6 @@
   }
 
   &:hover {
-    background: $devui-list-item-hover-bg;
-
     svg.svg-icon-close polygon {
       fill: $devui-icon-fill-active;
     }
@@ -285,9 +283,9 @@
   }
 }
 
-.user-guide-panel-arrow {
-  width: 6px;
-  height: 6px;
+.devui-user-guide-panel-arrow {
+  width: 8px;
+  height: 8px;
   transform: rotate(45deg);
   display: block;
   z-index: -1;

@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { AfterViewInit, Component, ElementRef, EventEmitter, Inject, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Inject, Input, OnDestroy, OnInit, Output, Renderer2 } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DEFAULT_MODE, DEFAULT_ZINDEX, ESC_KEYCODE } from './fullscreen.config';
 import { FullscreenMode } from './fullscreen.type';
@@ -17,13 +17,14 @@ export class FullscreenComponent implements OnInit, OnDestroy, AfterViewInit {
    * @deprecated
    */
   @Input() target: HTMLElement;
+  @Input() container: HTMLElement;
   @Input() beforeChange: (isFullscreen: boolean, trigger: string) => boolean | Promise<boolean> | Observable<boolean>;
   @Output() fullscreenLaunch: EventEmitter<any> = new EventEmitter<any>();
   document: Document;
   private currentTarget: HTMLElement;
   private isFullscreen = false;
 
-  constructor(private elementRef: ElementRef, @Inject(DOCUMENT) private doc: any) {
+  constructor(@Inject(DOCUMENT) private doc: any, private elementRef: ElementRef, private render: Renderer2) {
     this.document = this.doc;
   }
 
@@ -184,10 +185,18 @@ export class FullscreenComponent implements OnInit, OnDestroy, AfterViewInit {
   };
 
   private addFullScreenStyle() {
-    this.document.getElementsByTagName('html')[0].classList.add('devui-fullscreen');
+    if (this.container) {
+      this.render.addClass(this.container, 'devui-container-fullscreen');
+    } else {
+      this.render.addClass(this.document.getElementsByTagName('html')[0], 'devui-fullscreen');
+    }
   }
 
   private removeFullScreenStyle() {
-    this.document.getElementsByTagName('html')[0].classList.remove('devui-fullscreen');
+    if (this.container) {
+      this.render.removeClass(this.container, 'devui-container-fullscreen');
+    } else {
+      this.render.removeClass(this.document.getElementsByTagName('html')[0], 'devui-fullscreen');
+    }
   }
 }

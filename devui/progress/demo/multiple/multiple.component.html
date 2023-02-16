@@ -1,11 +1,19 @@
 <div class="progress-container">
-  <d-progress [showContent]="showContentConfig" [multiProgressConfig]="config" [strokeWidth]="16"></d-progress>
+  <d-progress #multilineBar [showContent]="showContentConfig" [multiProgressConfig]="config" [percentage]="percentage" [strokeWidth]="16">
+  </d-progress>
 </div>
 <div class="progress-container">
-  <d-progress [showContent]="showContentConfig" [percentage]="99" [strokeColor]="lineGradientColor" [strokeWidth]="16"></d-progress>
+  <d-progress
+    [showContent]="showContentConfig"
+    [percentage]="99"
+    [percentageText]="content"
+    [strokeColor]="lineGradientColor"
+    [strokeWidth]="16"
+  >
+  </d-progress>
 </div>
 <div class="progress-container circle-type">
-  <d-progress [type]="'circle'" [strokeWidth]="8" [multiProgressConfig]="config"></d-progress>
+  <d-progress #multilineCircle [type]="'circle'" [strokeWidth]="8" [multiProgressConfig]="config"> </d-progress>
 </div>
 <div class="progress-container circle-type">
   <d-progress [type]="'circle'" [percentage]="85" [strokeWidth]="8" [strokeColor]="circleGradientColor"></d-progress>

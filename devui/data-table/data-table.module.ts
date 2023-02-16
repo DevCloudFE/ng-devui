@@ -10,6 +10,7 @@ import { DragDropModule } from 'ng-devui/dragdrop';
 import { DropDownModule } from 'ng-devui/dropdown';
 import { InputNumberModule } from 'ng-devui/input-number';
 import { PaginationModule } from 'ng-devui/pagination';
+import { PopoverModule } from 'ng-devui/popover';
 import { SearchModule } from 'ng-devui/search';
 import { SelectModule } from 'ng-devui/select';
 import { ToggleModule } from 'ng-devui/toggle';
@@ -55,6 +56,7 @@ import { DataTableHeadCellTmplComponent } from './tmpl/data-table-head-cell-tmpl
     ButtonModule,
     InputNumberModule,
     DropDownModule,
+    PopoverModule,
     TreeSelectModule,
     SafePipeModule,
     TooltipModule,

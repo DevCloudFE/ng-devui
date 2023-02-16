@@ -36,6 +36,7 @@ export class ModalComponent implements OnInit, OnDestroy {
   @Input() offsetY: string;
   @Input() bodyScrollable = true; // 打开弹窗body是否可滚动
   @Input() escapable: boolean; // 是否支持esc键关闭弹窗
+  @Input() cssClass: string;
   @ViewChild(ModalContainerDirective, { static: true }) modalContainerHost: ModalContainerDirective;
   @ViewChild('dialog', { static: true }) dialogElement: ElementRef;
   animateState = '';

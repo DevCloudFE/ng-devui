@@ -1,6 +1,6 @@
 import { Component, ElementRef, QueryList, TemplateRef, ViewChildren } from '@angular/core';
-import { MentionPositionType } from './mention.types';
 import { MentionDirective } from './mention.directive';
+import { MentionPositionType } from './mention.types';
 
 @Component({
   selector: 'd-mention',
@@ -14,6 +14,7 @@ export class MentionComponent {
   loading = false;
   value = '';
   mentionNotFoundContent = '';
+  mentionHeaderTemplate: TemplateRef<any>;
   mentionItemTemplate: TemplateRef<any>;
   trigger: MentionDirective;
   position: MentionPositionType;

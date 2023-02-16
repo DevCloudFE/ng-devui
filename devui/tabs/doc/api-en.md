@@ -17,9 +17,9 @@ In the page:
 </d-tabs>
 ```
 
-# d-tabs
+## d-tabs
 
-## d-tabs parameter
+### d-tabs parameter
 
 | Parameter    | Type                                    | Default | Description                                                                                                                                                                                                                               | Jump to Demo                                            | Global Config |
 | ------------ | --------------------------------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- | ------------- |
@@ -34,15 +34,16 @@ In the page:
 | addable      | `boolean`                               | false   | Optional. Indicating whether to display the add tab.                                                                                                                                                                                      | [Add / Remove](demo#add-delete)                         |
 | addTabTpl    | `TemplateRef<any>`                      | --      | Optional. Used together with addable to customize the add tab.                                                                                                                                                                            |                                                         |
 | scrollMode   | `boolean \| 'normal'\| 'auto'`          | false   | Optional. Indicates whether to enable big data scrolling. The options are normal and true. The options are auto. The scrolling mode is automatically enabled based on the comparison between the total tab width and container width.     | [Big data display](demo#big-data)                       |
+| isHidden     | `boolean`                               | false   | Optional. Indicates whether to use the hidden mode to not destroy the dom when the tab content is hidden.                                                                                                                                 | [Customizing a Template](demo#custom-template)          |
 
-## d-tabs event
+### d-tabs event
 
 | Parameter            | Type                           | Description                                                                                                                    | Jump to Demo                    |
 | -------------------- | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------- |
 | activeTabChange      | `EventEmitter<number\|string>` | Optional. Callback function for switching tabs. This parameter is optional. It returns the ID of the currently activated tab.  | [Basic usage](demo#basic-usage) |
 | addOrDeleteTabChange | `EventEmitter<number\|string>` | Optional. Callback function for adding or deleting tabs. It returns the tab ID and operation (add \| delete) of the operation. | [Add / Remove](demo#add-delete) |
 
-## d-tab Parameter
+### d-tab Parameter
 
 | Parameter | Type             | Default | Description                                         | Jump to Demo                      |
 | --------- | ---------------- | ------- | --------------------------------------------------- | --------------------------------- |

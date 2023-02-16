@@ -11,7 +11,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
 import { TagsInputDemoAsyncComponent } from './async/async.component';
 import { TagsInputDemoBasicComponent } from './basic/basic.component';
-import { TagsInputDemoNgModelComponent } from './ngmodel/ngmodel.component';
+import { TagsInputDemoCustomizeComponent } from './customize/customize.component';
 import { TagsInputDemoComponent } from './tags.input-demo.component';
 import { TagsInputDemoVirtualScrollComponent } from './virtual-scroll/virtual-scroll.component';
 
@@ -42,7 +42,7 @@ import { TagsInputDemoVirtualScrollComponent } from './virtual-scroll/virtual-sc
   declarations: [
     TagsInputDemoComponent,
     TagsInputDemoBasicComponent,
-    TagsInputDemoNgModelComponent,
+    TagsInputDemoCustomizeComponent,
     TagsInputDemoAsyncComponent,
     TagsInputDemoVirtualScrollComponent,
   ],

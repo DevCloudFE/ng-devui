@@ -11,6 +11,10 @@
   width: 280px;
   padding: 20px;
 
+  .disabled {
+    color: $devui-disabled-text;
+  }
+
   .devui-option-title {
     font-size: $devui-font-size-card-title;
     color: $devui-text;

@@ -1,18 +1,16 @@
-<d-button (btnClick)="btnClick()" style="margin-bottom: 4px">Show Data</d-button>
 <div>
   <d-tags-input
-    id="issue-tags"
     [appendToBody]="true"
-    [suggestionList]="suggestionList"
-    (valueChange)="getTagValue($event)"
     [checkBeforeAdd]="customCheck"
     [itemTemplate]="customizeItemTemplate"
+    [suggestionList]="suggestionList"
     [(ngModel)]="tagList"
+    (valueChange)="getTagValue($event)"
   >
   </d-tags-input>
-  <pre style="margin: 8px 0">{{ tagList | json }}</pre>
+  <pre>{{ tagList | json }}</pre>
 </div>
 
 <ng-template #customizeItemTemplate let-item="option" let-filterKey="filterKey" let-$index="$index">
-  <span>This is custom content：{{ item[filterKey] }}</span>
+  <span>This is custom content: {{ item[filterKey] }}</span>
 </ng-template>

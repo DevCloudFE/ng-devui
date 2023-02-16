@@ -3,6 +3,8 @@ import {
   CdkOverlayOrigin,
   ConnectedOverlayPositionChange,
   ConnectedPosition,
+  ScrollStrategy,
+  ScrollStrategyOptions,
   VerticalConnectionPos
 } from '@angular/cdk/overlay';
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
@@ -35,6 +37,7 @@ import {
   addClassToOrigin,
   AppendToBodyDirection,
   AppendToBodyDirectionsConfig,
+  AppendToBodyScrollStrategyType,
   DevConfigService,
   fadeInOut,
   formWithDropDown,
@@ -42,6 +45,7 @@ import {
   WithConfig
 } from 'ng-devui/utils';
 import { WindowRef } from 'ng-devui/window-ref';
+import { isEqual } from 'lodash-es';
 import { BehaviorSubject, fromEvent, Observable, of, Subscription } from 'rxjs';
 import { debounceTime, filter, map, switchMap } from 'rxjs/operators';
 
@@ -114,6 +118,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
    * 【可选】cdk模式overlay Positions的控制
    */
   @Input() appendToBodyDirections: Array<AppendToBodyDirection | ConnectedPosition> = ['rightDown', 'leftDown', 'rightUp', 'leftUp'];
+  @Input() appendToBodyScrollStrategy: AppendToBodyScrollStrategyType;
   /**
    * 【可选】cdk模式origin width
    */
@@ -241,6 +246,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
   @Input() notAutoScroll = false; // 自动聚焦的时候，自动滚动到select位置
   @Input() loadingTemplateRef: TemplateRef<any>;
   @Input() @WithConfig() showAnimation = true;
+  @Input() @WithConfig() styleType = 'default';
   @ViewChild('selectWrapper', { static: true }) selectWrapper: ElementRef;
   @ViewChild('selectInput') selectInputElement: ElementRef;
   @ViewChild('selectMenu') selectMenuElement: ElementRef;
@@ -298,6 +304,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
   scrollHeightNum: number;
   minBuffer: number;
   maxBuffer: number;
+  scrollStrategy: ScrollStrategy;
   cdkConnectedOverlayOrigin: CdkOverlayOrigin;
   overlayPositions: Array<ConnectedPosition>;
   virtualScrollViewportSizeMightChange = false;
@@ -315,16 +322,18 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
   private onTouch = () => null;
 
   constructor(
+    @Inject(DOCUMENT) private doc: any,
     private renderer: Renderer2,
     private windowRef: WindowRef,
     private changeDetectorRef: ChangeDetectorRef,
     private i18n: I18nService,
     private ngZone: NgZone,
     private devConfigService: DevConfigService,
-    @Inject(DOCUMENT) private doc: any
+    private scrollStrategyOption: ScrollStrategyOptions
   ) {
-    this.valueParser = (item) => (typeof item === 'object' ? item[this.filterKey] || '' : String(item) ? item.toString() : '');
-    this.formatter = (item) => (typeof item === 'object' ? String(item[this.filterKey]) || '' : String(item) ? item.toString() : '');
+    this.valueParser = (item) => this.getValue(item, this.filterKey);
+    this.formatter = (item) => this.getValue(item, this.filterKey);
+    this.scrollStrategy = this.scrollStrategyOption.reposition();
     this.document = this.doc;
   }
 
@@ -372,7 +381,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    const { searchFn, options, appendToBodyDirections, disabled } = changes;
+    const { searchFn, options, appendToBodyDirections, appendToBodyScrollStrategy, disabled } = changes;
     if (searchFn || options) {
       this.resetSource();
       if (this.virtualScroll && this.virtualScrollViewport) {
@@ -382,6 +391,10 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
     }
     if (appendToBodyDirections) {
       this.setPositions();
+    }
+    if (appendToBodyScrollStrategy && this.appendToBodyScrollStrategy) {
+      const func = this.scrollStrategyOption[this.appendToBodyScrollStrategy];
+      this.scrollStrategy = func();
     }
     if (disabled && this.isOpen) {
       this.toggle();
@@ -509,34 +522,26 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
     }
   }
 
-  writeValue(obj: any): void {
-    let objValue = obj;
-    if (obj === null || obj === undefined) {
-      if (this.multiple) {
-        objValue = [];
-      } else {
-        objValue = '';
-      }
-    }
-    this.value = objValue;
-
+  writeValue(value: any): void {
     if (this.multiple) {
-      this.value = this.value ? this.value : [];
-      this.value = Array.isArray(this.value) ? this.value : [this.value];
-      this.multiItems = this.value.map((option, index) => ({ option: option, id: this.options.indexOf(option) }));
+      this.value = value ?? [];
+      this.getMultipleSelectedOption();
     } else {
-      const selectedItem = this.availableOptions.find((item) => this.formatter(item.option) === this.formatter(this.value));
-      this.activeIndex = selectedItem ? selectedItem.id : -1;
-      this.selectIndex = this.activeIndex ? this.activeIndex : -1;
+      this.value = value ?? '';
+      this.getSingleSelectedOption();
     }
-
     this.writeIntoInput(this.value);
     this.changeDetectorRef.markForCheck();
     this.setChecked(this.value);
   }
 
   writeIntoInput(value): void {
-    this._inputValue = this.multiple ? (value || []).map((option) => this.valueParser(option)).join(', ') : this.valueParser(value);
+    let valueItem = value;
+    if (this.valueKey) {
+      valueItem = this.multiple ? this.multiItems.map((item) => item.option) : this.getOption(this.options, value, false);
+      valueItem = valueItem ?? '';
+    }
+    this._inputValue = this.multiple ? (valueItem || []).map((option) => this.valueParser(option)).join(', ') : this.valueParser(valueItem);
     this.setAvailableOptions();
   }
 
@@ -549,11 +554,45 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
       _value = [_value];
     }
     this.availableOptions = this.availableOptions.map((item) => ({
-      isChecked: _value.findIndex((i) => JSON.stringify(i) === JSON.stringify(item.option)) > -1,
+      isChecked: _value.findIndex((i) => isEqual(i, this.valueKey ? item.option[this.valueKey] : item.option)) > -1,
       id: item.id,
       option: item.option,
     }));
   }
+
+  getMultipleSelectedOption() {
+    this.value = this.value || [];
+    this.value = Array.isArray(this.value) ? this.value : [this.value];
+    this.multiItems = this.valueKey
+      ? this.value.map((value) => this.getOption(this.availableOptions, value)).filter((item) => item)
+      : this.value.map((option) => ({ option: option, id: this.getOptionIndex(option) }));
+  }
+
+  getSingleSelectedOption() {
+    const selectedItem = this.valueKey
+      ? this.getOption(this.availableOptions, this.value)
+      : this.availableOptions.find((item) => this.formatter(item.option) === this.formatter(this.value));
+    this.activeIndex = selectedItem ? selectedItem.id : -1;
+    this.selectIndex = this.activeIndex ? this.activeIndex : -1;
+  }
+
+  getOption(data, value, isOption = true) {
+    const res = value ?? false;
+    const valueItem = this.getValue(value, this.valueKey);
+    return res && data.find((item) => this.getValue(isOption ? item.option : item, this.valueKey) === valueItem);
+  }
+
+  getOptionIndex(option) {
+    return this.options.length ? this.options.indexOf(option) : this.availableOptions.findIndex((item) => isEqual(item.option, option));
+  }
+
+  getValue = (item, key) => {
+    let result = item ?? '';
+    if (typeof item === 'object') {
+      result = item[key] ?? '';
+    }
+    return String(result);
+  };
 
   choose = (option, index, $event?: Event) => {
     if ($event) {
@@ -581,7 +620,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
     }
 
     if (this.multiple) {
-      const indexOfOption = this.multiItems.findIndex((item) => JSON.stringify(item.option) === JSON.stringify(option));
+      const indexOfOption = this.multiItems.findIndex((item) => isEqual(item.option, option));
       if (indexOfOption === -1) {
         this.multiItems.push({ id: index, option });
       } else {
@@ -590,7 +629,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
       if (this.keepMultipleOrder === 'origin') {
         this.multiItems.sort((a, b) => a.id - b.id);
       }
-      this.value = this.multiItems.map((item) => item.option);
+      this.value = this.valueKey ? this.multiItems.map((item) => item.option[this.valueKey]) : this.multiItems.map((item) => item.option);
     } else {
       this.value = this.valueKey ? option[this.valueKey] : option;
       this.activeIndex = index;
@@ -798,7 +837,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
 
     if (mutableOption && mutableOption.length > this.multiItems.length - selectedImmutableOption.length) {
       mutableOption.forEach((item) => {
-        const indexOfOption = this.multiItems.findIndex((i) => JSON.stringify(i.option) === JSON.stringify(item.option));
+        const indexOfOption = this.multiItems.findIndex((i) => isEqual(i.option, item.option));
         if (indexOfOption === -1) {
           this.multiItems.push({ id: item.id, option: item.option });
         }
@@ -808,7 +847,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
     }
     this.value = this.multiItems.map((item) => item.option);
     this.writeIntoInput(this.value);
-    this.onChange(this.value);
+    this.onChange(this.valueKey ? this.multiItems.map((item) => item.option[this.valueKey]) : this.value);
     this.valueChange.emit(this.multiItems);
     this.setChecked(this.value);
   }

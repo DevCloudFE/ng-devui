@@ -214,6 +214,9 @@ export class FilterComponent implements OnInit, OnChanges, OnDestroy {
         this.checkedListForFilter.push(item);
       });
     } else {
+      this.filterListDisplay.forEach(item => {
+        item.checked = $event;
+      });
       this.filterList.forEach(item => {
         item.checked = $event;
         this.checkedListForFilter.push(item);
@@ -224,7 +227,7 @@ export class FilterComponent implements OnInit, OnChanges, OnDestroy {
   setHalfChecked() {
     this.filterHalfChecked = false;
     const checked = this.filterListDisplay.filter(item => item.checked);
-    if (checked.length === this.filterListDisplay.length) {
+    if (checked.length && checked.length === this.filterListDisplay.length) {
       this.filterAllChecked = true;
     } else if (checked.length > 0) {
       this.filterHalfChecked = true;

@@ -14,7 +14,7 @@ import {
   Output,
   QueryList,
   Renderer2,
-  SimpleChanges
+  SimpleChanges,
 } from '@angular/core';
 import { GridStack, GridStackNode, GridStackOptions } from 'gridstack';
 import { DashBoardGridStackDefaultOption, GridStackNodeCompatible } from './grid-stack.config';
@@ -31,7 +31,7 @@ export type DashboardWidgetEvent = Array<{
     willItFit?: boolean;
     trashData?: any; // remove
   };
-  origNode?: GridStackNodeCompatible; // add(optional)
+  origNode?: GridStackNodeCompatible;
 }>;
 
 @Component({

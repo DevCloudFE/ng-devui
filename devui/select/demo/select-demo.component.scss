@@ -1,0 +1,24 @@
+:host ::ng-deep {
+  .row {
+    margin-bottom: 16px;
+  }
+
+  .total {
+    padding: 8px 24px;
+  }
+
+  .col-md-5 {
+    width: 50%;
+  }
+
+  pre {
+    border: none;
+  }
+
+  .loading-box {
+    .col-md-1,
+    .col-md-5 {
+      display: inline-block;
+    }
+  }
+}

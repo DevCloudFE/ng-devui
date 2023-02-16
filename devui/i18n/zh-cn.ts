@@ -205,6 +205,7 @@ export default {
     originScale: '原始比例',
     pre: '上一张',
     next: '下一张',
+    origin: '查看原图',
   },
   colorPicker: {
     recentlyUsed: '最近使用',

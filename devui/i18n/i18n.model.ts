@@ -119,6 +119,7 @@ export interface I18nInterface {
     originScale: string;
     pre: string;
     next: string;
+    origin: string;
   };
   colorPicker: {
     recentlyUsed: string;

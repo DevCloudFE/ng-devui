@@ -13,7 +13,7 @@ import {
   Output,
   Self,
   SimpleChanges,
-  SkipSelf
+  SkipSelf,
 } from '@angular/core';
 import {
   AbstractControl,
@@ -22,7 +22,7 @@ import {
   ControlContainer,
   NgControl,
   ValidationErrors,
-  ValidatorFn
+  ValidatorFn,
 } from '@angular/forms';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { OverlayContainerRef } from 'ng-devui/overlay-container';
@@ -39,7 +39,7 @@ import {
   DValidateRule,
   DValidateRules,
   DValidationErrorStrategy,
-  ruleReservedWords
+  ruleReservedWords,
 } from './validate.type';
 
 @Directive()

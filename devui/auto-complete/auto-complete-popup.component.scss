@@ -12,6 +12,10 @@
 
     & > .devui-dropdown-menu-wrap {
       display: inline-block;
+
+      & > .devui-no-data-tip {
+        padding: 12px;
+      }
     }
 
     & > .devui-select-custom-area {

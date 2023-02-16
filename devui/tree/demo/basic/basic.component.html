@@ -1,1 +1,5 @@
+<h4>Default</h4>
 <d-tree #basicTree [tree]="data" (nodeSelected)="onNodeSelected($event)" (nodeToggled)="onNodeToggled($event)"> </d-tree>
+
+<h4>Custom Indent</h4>
+<d-tree #basicTree [tree]="data" [indent]="'8px'" (nodeSelected)="onNodeSelected($event)" (nodeToggled)="onNodeToggled($event)"> </d-tree>

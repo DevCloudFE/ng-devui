@@ -3,7 +3,7 @@
 
 :host {
   &.devui-splitter-bar {
-    background-color: $devui-dividing-line;
+    background-color: $devui-label-bg;
     display: flex;
     position: relative;
     align-items: center;
@@ -12,7 +12,7 @@
     flex-shrink: 0;
 
     .devui-collapse {
-      background-color: $devui-dividing-line;
+      background-color: $devui-label-bg;
       position: absolute;
       z-index: 15;
       cursor: pointer;

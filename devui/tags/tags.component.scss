@@ -10,6 +10,8 @@
 .beyond-tags-wrapper {
   max-width: 300px;
   margin-top: 8px;
+  max-height: 300px;
+  overflow: auto;
 
   .beyond-tag-style {
     margin-bottom: 8px;

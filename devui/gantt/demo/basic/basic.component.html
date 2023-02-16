@@ -1,7 +1,7 @@
 <d-fullscreen [zIndex]="1080" (fullscreenLaunch)="launchFullscreen($event)">
   <div #ganttContainer class="gantt-container" fullscreen-target>
     <div class="header" [style.width]="ganttScaleWidth">
-      <d-gantt-scale [ganttBarContainerElement]="ganttBody" [scrollElement]="ganttContainer"></d-gantt-scale>
+      <d-gantt-scale [ganttBarContainerElement]="ganttBody" [scrollElement]="ganttContainer" [showDaySplitLine]="true"></d-gantt-scale>
     </div>
     <d-gantt-tools
       [currentUnit]="unit"
@@ -45,8 +45,8 @@
     <div class="content">
       <div>Duration: {{ ganttInstance?.duration }}</div>
       <div>ProgressRate: {{ (ganttInstance?.progressRate || 0) + '%' }}</div>
-      <div>startDate: {{ ganttInstance?.startDate | i18nDate: 'short' }}</div>
-      <div>endDate: {{ ganttInstance?.endDate | i18nDate: 'short' }}</div>
+      <div>startDate: {{ ganttInstance?.startDate | i18nDate : 'short' }}</div>
+      <div>endDate: {{ ganttInstance?.endDate | i18nDate : 'short' }}</div>
     </div>
   </ng-template>
   <ng-template #titleTemplate let-data="data">

@@ -2,18 +2,6 @@
 @import '../../style/theme/color';
 @import '../../style/theme/corner';
 
-:host {
-  display: block;
-  background-color: transparent;
-  position: absolute !important;
-  // hover卡片之间间距的时候不应该高亮
-  pointer-events: none;
-  // 内部元素
-  & ::ng-deep > * {
-    pointer-events: auto;
-  }
-}
-
 .ui-draggable-dragging :host > * {
   pointer-events: none !important;
 }

@@ -41,6 +41,7 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
   @Output() resizeHandlerEvent = new EventEmitter<any>();
   @Input() halfChecked: boolean;
   @Input() childrenTableOpen: boolean;
+  @Input() selectOptionOnCheckbox = false;
   @Output() beginResizeHandlerEvent = new EventEmitter<any>();
   @Output() resizingHandlerEvent = new EventEmitter<any>();
   @Output() dragTableEndEvent = new EventEmitter<any>();
@@ -48,6 +49,9 @@ export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit,
   @ViewChildren(TableThComponent) thList: QueryList<TableThComponent>;
 
   objDiffer: {};
+
+  curLabel = '';
+  showTip = false;
 
   isDrag: boolean;
   dragBoxLeft;

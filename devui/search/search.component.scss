@@ -56,7 +56,7 @@ svg.svg-icon-clear {
       padding-left: 32px;
     }
 
-    &.devui-search-no-border {
+    &.devui-search-no-border:not(:focus, :active) {
       background-color: unset;
     }
 

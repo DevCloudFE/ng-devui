@@ -38,6 +38,10 @@ export class TimeAxisDemoComponent implements OnInit, OnDestroy {
     { title: 'HTML', language: 'xml', code: require('./custom-dot/custom-dot.component.html?raw') },
     { title: 'TS', language: 'typescript', code: require('./custom-dot/custom-dot.component.ts?raw') }
   ];
+  singleSource: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'xml', code: require('./single/single.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./single/single.component.ts?raw') }
+  ];
 
   navItems = [];
   subs: Subscription = new Subscription();
@@ -61,12 +65,13 @@ export class TimeAxisDemoComponent implements OnInit, OnDestroy {
   setNavValues(values) {
     this.navItems = [
       { dAnchorLink: 'direction', value: values['direction'] },
+      { dAnchorLink: 'single', value: values['single'] },
       { dAnchorLink: 'custom-dot', value: values['custom-dot'] },
       { dAnchorLink: 'content-with-template', value: values['content-with-template'] },
       { dAnchorLink: 'content-with-html', value: values['content-with-html'] },
       { dAnchorLink: 'content-with-alternative-mode', value: values['content-with-alternative-mode'] },
       { dAnchorLink: 'basic-usage', value: values['basic-usage'] },
-      { dAnchorLink: 'seperate-way', value: values['seperate-way'] }
+      { dAnchorLink: 'seperate-way', value: values['seperate-way'] },
     ];
   }
 

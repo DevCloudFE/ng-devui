@@ -17,6 +17,7 @@ import {GanttModule} from' ng-devui/gantt';
 | height | `number` | -- | Optional, hight. |
 | startDate | `Date` | -- | Optional, start date. |
 | endDate | `Date` | -- | Optional, end date. |
+| showDaySplitLine | `boolean` |  `false`  | Optional, Whether to display daily dividers.     |
 
 ### d-gantt-scale event
 

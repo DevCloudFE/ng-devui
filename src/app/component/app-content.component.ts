@@ -1,8 +1,4 @@
-import {
-  Component,
-  OnDestroy,
-  ViewEncapsulation
-} from '@angular/core';
+import { Component, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { Routes } from '@angular/router';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
@@ -10,6 +6,7 @@ import { ComponentDataService } from './component.data.service';
 import { routesConfig } from './component.route';
 import { resolveRoutesConfig } from './resolve-routes-config.service';
 import { newScopeList, sunsetScopeList } from './scope-list';
+
 @Component({
   selector: 'd-app-content',
   templateUrl: './app-content.component.html',
@@ -19,10 +16,10 @@ export class AppContentComponent implements OnDestroy {
   routes: Routes = [];
   componentsData = [];
   sideMenuList = [
-    {path: 'overview', name: '组件总览', linkType: 'routerLink' },
-    {path: 'get-start', name: '快速开始', linkType: 'routerLink' },
-    {path: 'theme-guide', name: '主题化使用指南', linkType: 'routerLink' },
-    {path: 'global-config', name: '全局设置', linkType: 'routerLink' }
+    { path: 'overview', name: '组件总览', linkType: 'routerLink' },
+    { path: 'get-start', name: '快速开始', linkType: 'routerLink' },
+    { path: 'theme-guide', name: '主题化使用指南', linkType: 'routerLink' },
+    { path: 'global-config', name: '全局设置', linkType: 'routerLink' },
   ];
   clickSub: Subscription = new Subscription();
   // @ViewChild('dSearch', { static: true }) dSearch: SearchComponent;
@@ -30,6 +27,7 @@ export class AppContentComponent implements OnDestroy {
   componentsText: any = {};
   overviewText: any = {};
   text: any;
+
   constructor(private translate: TranslateService, private comDataService: ComponentDataService) {
     this.setI18n();
     this.resolveRoutesConfig();
@@ -48,7 +46,7 @@ export class AppContentComponent implements OnDestroy {
     this.overviewText = this.translate.instant('public').overview;
     this.text = {
       new: this.overviewText?.newChange,
-      sunset: this.overviewText?.sunset
+      sunset: this.overviewText?.sunset,
     };
   }
 

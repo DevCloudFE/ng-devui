@@ -10,7 +10,7 @@ export class TagsInputDemoAsyncComponent implements OnInit {
   suggestionList: any = [];
 
   ngOnInit() {
-    this.tagList = [{ id: 918, name: '11111' }, { name: 'item4' }];
+    this.tagList = [{ name: 'item4' }, { name: 'item8' }];
     this.taskTagConfig = {
       displayProperty: 'name',
       maxLength: 25,
@@ -26,14 +26,10 @@ export class TagsInputDemoAsyncComponent implements OnInit {
         { name: 'item5' },
         { name: 'item6' },
         { name: 'item7' },
-        { id: 918, name: '11111' },
+        { name: 'item8' },
       ];
     }, 1000);
   }
-
-  customCheck = (newtag: string) => {
-    return true;
-  };
 
   getTagValue(value) {
     console.log(value);

@@ -2,6 +2,13 @@
 @import '../style/theme/corner';
 @import '../style/core/_font';
 
+@mixin ellipsis() {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 :host {
   display: flex;
   align-items: center;
@@ -47,6 +54,7 @@
         right: 8px;
         height: 100%;
         line-height: 100%;
+        @include ellipsis();
       }
     }
 
@@ -60,6 +68,7 @@
       top: 0;
       width: fit-content;
       transform: translateX(-50%);
+      @include ellipsis();
     }
   }
 
@@ -72,6 +81,7 @@
       left: 50%;
       -webkit-transform: translate(-50%, -50%);
       transform: translate(-50%, -50%);
+      @include ellipsis();
     }
 
     .devui-progress-circle-trail {

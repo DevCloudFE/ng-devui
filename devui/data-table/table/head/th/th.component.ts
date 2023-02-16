@@ -238,7 +238,7 @@ export class TableThComponent implements OnChanges, OnDestroy {
       if (this.tableElement) {
         this.renderer2.appendChild(this.tableElement, resizeBar);
         this.renderer2.setStyle(resizeBar, 'display', 'block');
-        this.renderer2.setStyle(resizeBar, 'left', initialOffset + this.initialWidth + 'px');
+        this.renderer2.setStyle(resizeBar, 'left', initialOffset + this.initialWidth - 2 + 'px');
         this.resizeBarRefElement = resizeBar;
       }
 

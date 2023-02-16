@@ -3,7 +3,8 @@ import {
   CdkOverlayOrigin,
   ConnectedOverlayPositionChange,
   ConnectedPosition,
-  VerticalConnectionPos,
+  ScrollStrategy,
+  VerticalConnectionPos
 } from '@angular/cdk/overlay';
 import { Component, ElementRef, EventEmitter, Input, Output, TemplateRef, ViewChild } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
@@ -57,6 +58,8 @@ export class AutoCompletePopupComponent implements ControlValueAccessor {
   overlayPositions: Array<ConnectedPosition>;
   popPosition: VerticalConnectionPos = 'bottom';
   popDirection: 'top' | 'bottom';
+  scrollStrategy: ScrollStrategy;
+
   private value: any;
   private onChange = (_: any) => null;
   private onTouched = () => null;
@@ -183,4 +186,6 @@ export class AutoCompletePopupComponent implements ControlValueAccessor {
   onMouseOver(event: MouseEvent, item: any) {
     this.hoverItem.emit(item);
   }
+
+  hidePopup() {}
 }

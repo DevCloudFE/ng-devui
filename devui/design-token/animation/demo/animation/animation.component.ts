@@ -13,7 +13,7 @@ export class AnimationComponent implements OnInit, OnDestroy {
   animation = [];
   i18nText: any;
 
-  constructor(private translate: TranslateService) {this.setI18n(); }
+  constructor(private translate: TranslateService) { this.setI18n(); }
 
 
   ngOnInit() {
@@ -27,6 +27,7 @@ export class AnimationComponent implements OnInit, OnDestroy {
   }
 
   changeValueInTable = () => {
+    this.animation = [];
     const theme = this.themeService.currentTheme;
     for (const key in theme.data) {
       if (key.includes('devui-animation')) {

@@ -1,4 +1,5 @@
 import { Directive, HostBinding, Input } from '@angular/core';
+import { DevConfigService, WithConfig } from 'ng-devui/utils';
 
 @Directive({
   selector: '[dTextInput]',
@@ -7,6 +8,7 @@ import { Directive, HostBinding, Input } from '@angular/core';
 export class TextDirective {
   @Input() @HostBinding('class.error') error: boolean;
   @Input() size = '';
+  @Input() @WithConfig() styleType = 'default';
 
   @HostBinding('class.devui-textinput-lg')
   get large() {
@@ -18,6 +20,10 @@ export class TextDirective {
     return this.size === 'sm';
   }
 
-  constructor() { }
+  @HostBinding('class.devui-gray-style')
+  get gray() {
+    return this.styleType === 'gray';
+  }
 
+  constructor(private devConfigService: DevConfigService) {}
 }

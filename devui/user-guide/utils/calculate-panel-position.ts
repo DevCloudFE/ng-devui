@@ -1,5 +1,8 @@
 import { IStepElementDetail } from '../user-guide.types';
 
+const ARROW_WIDTH = 8;
+const PANEL_TO_ELEMENT = 10;
+
 export class PanelPostion {
   top: number;
   left: number;
@@ -19,13 +22,13 @@ export class PanelPostion {
     if (this.step.position !== undefined) {
       this.availablePosition = this.step.position.split('-')[0];
     } else {
-      if (curStepRect.bottom + panelRect.height + 10 <= this.document.documentElement.clientHeight) {
+      if (curStepRect.bottom + panelRect.height + PANEL_TO_ELEMENT <= this.document.documentElement.clientHeight) {
         this.availablePosition = 'bottom';
-      } else if (curStepRect.top - panelRect.height - 10 > 0) {
+      } else if (curStepRect.top - panelRect.height - PANEL_TO_ELEMENT > 0) {
         this.availablePosition = 'top';
-      } else if (curStepRect.right + panelRect.width + 10 <= this.document.documentElement.clientWidth) {
+      } else if (curStepRect.right + panelRect.width + PANEL_TO_ELEMENT <= this.document.documentElement.clientWidth) {
         this.availablePosition = 'right';
-      } else if (curStepRect.left - panelRect.width - 10 > 0) {
+      } else if (curStepRect.left - panelRect.width - PANEL_TO_ELEMENT > 0) {
         this.availablePosition = 'left';
       }
     }
@@ -33,17 +36,17 @@ export class PanelPostion {
 
   calculateTopAndLeft(curStepRect, panelRect) {
     if (this.availablePosition === 'bottom') {
-      this.top = curStepRect.bottom + 10;
-      this.arrowTopBias = 3;
+      this.top = curStepRect.bottom + PANEL_TO_ELEMENT;
+      this.arrowTopBias = ARROW_WIDTH / 2;
     } else if (this.availablePosition === 'top') {
-      this.arrowTopBias = panelRect.height - 3;
-      this.top = curStepRect.top - panelRect.height - 10;
+      this.arrowTopBias = panelRect.height - ARROW_WIDTH / 2;
+      this.top = curStepRect.top - panelRect.height - PANEL_TO_ELEMENT;
     } else if (this.availablePosition === 'right') {
-      this.left = curStepRect.right + 10;
-      this.arrowLeftBias = -3;
-    } else if (curStepRect.left - panelRect.width - 10 > 0) {
-      this.left = curStepRect.left - panelRect.width - 10;
-      this.arrowLeftBias = panelRect.width - 3;
+      this.left = curStepRect.right + PANEL_TO_ELEMENT;
+      this.arrowLeftBias = -ARROW_WIDTH / 2;
+    } else if (curStepRect.left - panelRect.width - PANEL_TO_ELEMENT > 0) {
+      this.left = curStepRect.left - panelRect.width - PANEL_TO_ELEMENT;
+      this.arrowLeftBias = panelRect.width - ARROW_WIDTH / 2;
     }
   }
 
@@ -98,13 +101,13 @@ export class PanelPostion {
   calculateTopBottomBias(curStepRect, panelRect) {
     if (this.alignDirection === 'middle') {
       this.left = curStepRect.left + curStepRect.width / 2 - panelRect.width / 2;
-      this.arrowLeftBias = panelRect.width / 2 - 3;
+      this.arrowLeftBias = panelRect.width / 2 - ARROW_WIDTH / 2;
     } else if (this.alignDirection === 'left') {
       this.left = curStepRect.left;
-      this.arrowLeftBias = 6;
+      this.arrowLeftBias = PANEL_TO_ELEMENT + ARROW_WIDTH;
     } else if (this.alignDirection === 'right') {
       this.left = curStepRect.right - panelRect.width;
-      this.arrowLeftBias = panelRect.width - 12;
+      this.arrowLeftBias = panelRect.width - PANEL_TO_ELEMENT - ARROW_WIDTH;
     }
   }
 
@@ -114,10 +117,10 @@ export class PanelPostion {
       this.arrowTopBias = panelRect.height / 2;
     } else if (this.alignDirection === 'top') {
       this.top = curStepRect.top;
-      this.arrowTopBias = 12;
+      this.arrowTopBias = PANEL_TO_ELEMENT + ARROW_WIDTH;
     } else if (this.alignDirection === 'bottom') {
       this.top = curStepRect.bottom - panelRect.height;
-      this.arrowTopBias = panelRect.height - 12;
+      this.arrowTopBias = panelRect.height - PANEL_TO_ELEMENT - ARROW_WIDTH;
     }
   }
 
@@ -146,12 +149,10 @@ export class PanelPostion {
     this.calculateAlignDirection(curStepRect, panelRect);
     this.calculateBias(curStepRect, panelRect);
 
-    if (this.step.type === 'tip') {
-      const panelArrow = this.document.querySelector('.user-guide-panel-arrow') as HTMLElement;
-      panelArrow.style.cssText = `
-          top: ${this.arrowTopBias}px;
-          left: ${this.arrowLeftBias}px;
-        `;
+    const panelArrow = this.document.querySelector('.devui-user-guide-panel-arrow') as HTMLElement;
+    if (panelArrow) {
+      panelArrow.style.top =`${this.arrowTopBias}px`;
+      panelArrow.style.left =`${this.arrowLeftBias}px`;
     }
 
     panel.style.cssText = `

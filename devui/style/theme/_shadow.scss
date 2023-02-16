@@ -4,9 +4,9 @@ $devui-shadow-length-base: var(--devui-shadow-length-base, 0 1px 4px 0); //直�
 
 $devui-shadow-length-slide-left: var(--devui-shadow-length-slide-left, -2px 0 8px 0); //向左滑动时出现在右侧边缘的阴影 (dataTable固定右侧列向左滑动)
 $devui-shadow-length-slide-right: var(--devui-shadow-length-slide-right, 2px 0 8px 0); //向右滑动时出现在左侧边缘的阴影 (dataTable固定左侧列向右滑动)
-$devui-shadow-length-connected-overlay: var(--devui-shadow-length-connected-overlay, 0 4px 8px 0); //有连接点的弹出(覆盖)层 (DatePicker Cascader Select TagsInput Pagination的下拉菜单等)
+$devui-shadow-length-connected-overlay: var(--devui-shadow-length-connected-overlay, 0 2px 8px 0); //有连接点的弹出(覆盖)层 (DatePicker Cascader Select TagsInput Pagination的下拉菜单等)
 
 $devui-shadow-length-hover: var(--devui-shadow-length-hover, 0 8px 16px 0); //涉及到hover的地方
-$devui-shadow-length-feedback-overlay: var(--devui-shadow-length-feedback-overlay, 0 8px 16px 0); //信息提示反馈类 (PopOver Tooltip Toast StepsGuide等)
+$devui-shadow-length-feedback-overlay: var(--devui-shadow-length-feedback-overlay, 0 6px 16px 0); //信息提示反馈类 (PopOver Tooltip Toast StepsGuide等)
 
 $devui-shadow-length-fullscreen-overlay: var(--devui-shadow-length-fullscreen-overlay, 0 12px 24px 0); //无连接点的弹出(覆盖)层 (Drawer Modal ImagePreview等)

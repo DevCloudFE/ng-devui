@@ -143,8 +143,18 @@
 </div>
 <div class="devui-tab-content" *ngIf="showContent">
   <ng-container *ngFor="let tab of tabs">
-    <div class="devui-tab-pane fade in" role="tabpanel" *ngIf="tab.id == activeTab" [ngClass]="{ 'in active': tab.id == activeTab }">
-      <ng-template [ngTemplateOutlet]="tab.contentTpl?.templateRef || tab.innerContent"></ng-template>
-    </div>
+    <ng-template [ngTemplateOutlet]="isHidden ? hiddenTpl : destroyTpl" [ngTemplateOutletContext]="{ tab: tab }"> </ng-template>
   </ng-container>
 </div>
+
+<ng-template #destroyTpl let-tab="tab">
+  <div class="devui-tab-pane fade in" role="tabpanel" *ngIf="tab.id == activeTab" [ngClass]="{ 'in active': tab.id == activeTab }">
+    <ng-template [ngTemplateOutlet]="tab.contentTpl?.templateRef || tab.innerContent"></ng-template>
+  </div>
+</ng-template>
+
+<ng-template #hiddenTpl let-tab="tab">
+  <div class="devui-tab-pane fade in" role="tabpanel" [hidden]="tab.id != activeTab" [ngClass]="{ 'in active': tab.id == activeTab }">
+    <ng-template [ngTemplateOutlet]="tab.contentTpl?.templateRef || tab.innerContent"></ng-template>
+  </div>
+</ng-template>

@@ -5,17 +5,19 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './basic.component.html',
 })
 export class TagsInputDemoBasicComponent implements OnInit {
-  tagList: any = [];
   taskTagConfig: any;
-  suggestionList: any = [];
+  tagList = [];
+  suggestionList = [];
 
   ngOnInit() {
-    this.tagList = [{ id: 1769, name: '123' }];
+    this.tagList = [{ id: 1769, name: 'inputTag' }];
     this.taskTagConfig = {
       displayProperty: 'name',
       maxLength: 25,
       minLength: 1,
       maxTags: 25,
+      maxHeight: '84px',
+      multiline: false,
       placeholder: 'Add a tag',
       spellcheck: false,
       caseSensitivity: false,
@@ -29,12 +31,9 @@ export class TagsInputDemoBasicComponent implements OnInit {
       { name: 'item5' },
       { name: 'item6' },
       { name: 'item7' },
+      { name: 'item8' },
     ];
   }
-
-  customCheck = (newtag: string) => {
-    return true;
-  };
 
   getTagValue(value) {
     console.log(value);

@@ -6,12 +6,11 @@ import { of } from 'rxjs';
 @Component({
   selector: 'd-custom-search',
   templateUrl: './custom-search.component.html',
-  styleUrls: ['./custom-search.component.css'],
 })
 export class CustomSearchComponent {
   @ViewChild('networkSearchSelect') selectComponent: SelectComponent;
   timer: any;
-  currentOption1 = '';
+  currentOption1: any;
   currentOption2 = [];
   options = [
     {

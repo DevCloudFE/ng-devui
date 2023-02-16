@@ -72,7 +72,7 @@ export class PositionService {
   getScrollParent(element) {
     let style = getComputedStyle(element);
     const excludeStaticParent = style.position === 'absolute';
-    const overflowRegex = /(auto|scroll|hidden)/;
+    const overflowRegex = /(auto|scroll|overlay)/;
 
     if (style.position === 'fixed') {
       return this.documentRef.body;

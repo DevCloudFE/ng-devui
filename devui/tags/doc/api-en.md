@@ -22,6 +22,7 @@ In the page:
 |           checked           |   `boolean`   |  false  | Optional. Initial status of a tag. selected.                                                                                                                           | [Single Tag](demo#single-tag)   |
 |         customColor         |   `string`    |   ''    | Optional. Enter a color string (for example, '#f50') and customize the color label.                                                                                   | [Single Tag](demo#single-tag) |
 |    maxWidth     |   `string`    |    --     | Optional. Indicates the maximum width of the label. If the label exceeds the maximum width, the text is omitted and an ellipsis is displayed.       | [Single Tag](demo#single-tag) |
+|       beforeDelete       | `(tag?: string)=>boolean\|Promise<boolean>\|Observable<boolean>` |    --    | Optional. Delete previous callbacks.                       |
 
 ## d-tag event
 
@@ -38,9 +39,11 @@ In the page:
 |   deleteable    | `boolean` |  false  | Optional. Specifies whether a tag can be deleted.                                                   | [Tag Group](demo#tags-group) |
 |  titleProperty  | `string`  |   ''    | Optional. Sets the attribute name. When the cursor is hovered, the value of the title is displayed. | [Tag Group](demo#tags-group) |
 |    hideBeyondTags    | `boolean`  |   false   | Optional. If the total width of the tag group exceeds the width of the parent, hide the extra tag.  | [Multi-Label Exceed Hide](demo#hide-tags) |
+|       beforeDelete       | `(tag?: string)=>boolean\|Promise<boolean>\|Observable<boolean>` |    --    | Optional. Delete previous callbacks.                       |
 
 ## d-tags event
 
 | Event name |                          Type                          | Description                           | Jump to Demo                                  |
 | :--------: | :----------------------------------------------------: | :------------------------------------ | --------------------------------------------- |
 | tagDelete  | `EventEmitter<{tag: tag, index: index, event: event}>` | Event triggered when a tag is deleted. | [Tag Group](demo#tags-group) |
+| checkedChange | `EventEmitter<{ tag: tag, index: index, checked: event }>` | This event is triggered when the check status of a tag changes. |  |

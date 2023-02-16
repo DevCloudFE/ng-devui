@@ -1,31 +1,33 @@
 import { InjectionToken } from '@angular/core';
-export interface IShowAnimationConfig {
+export interface IGlobalConfig {
   showAnimation?: boolean;
+  styleType?: 'default' | 'gray';
+  size?: 'xs' | 'sm' | 'md' | 'lg';
 }
-export type GlobalConfig = IShowAnimationConfig;
-
-export interface TooltipConfig extends IShowAnimationConfig {
+export type GlobalConfig = IGlobalConfig;
+export interface TooltipConfig extends IGlobalConfig {
   mouseEnterDelay?: number;
   mouseLeaveDelay?: number;
 }
-export type PanelConfig = IShowAnimationConfig;
-export type ModalConfig = IShowAnimationConfig;
-export type DropdownConfig = IShowAnimationConfig;
-export type AccordionConfig = IShowAnimationConfig;
-export type TwodatepickerConfig = IShowAnimationConfig;
-export type PopoverConfig = IShowAnimationConfig;
-export type SelectConfig = IShowAnimationConfig;
-export type TreeselectConfig = IShowAnimationConfig;
-export type PopperConfig = IShowAnimationConfig;
-export type TreeConfig = IShowAnimationConfig;
-export type EditableselectConfig = IShowAnimationConfig;
-export type AutocompleteConfig = IShowAnimationConfig;
-export type MultiautocompleteConfig = IShowAnimationConfig;
-export type DatepickerConfig = IShowAnimationConfig;
-export type CascaderConfig = IShowAnimationConfig;
-export type TagsinputConfig = IShowAnimationConfig;
-export type TimepickerConfig = IShowAnimationConfig;
-export type CheckboxConfig = IShowAnimationConfig;
+export type PanelConfig = IGlobalConfig;
+export type ModalConfig = IGlobalConfig;
+export type DropdownConfig = IGlobalConfig;
+export type AccordionConfig = IGlobalConfig;
+export type TwodatepickerConfig = IGlobalConfig;
+export type PopoverConfig = IGlobalConfig;
+export type SelectConfig = IGlobalConfig;
+export type TreeselectConfig = IGlobalConfig;
+export type PopperConfig = IGlobalConfig;
+export type TreeConfig = IGlobalConfig;
+export type EditableselectConfig = IGlobalConfig;
+export type AutocompleteConfig = IGlobalConfig;
+export type MultiautocompleteConfig = IGlobalConfig;
+export type DatepickerConfig = IGlobalConfig;
+export type CascaderConfig = IGlobalConfig;
+export type TagsinputConfig = IGlobalConfig;
+export type TimepickerConfig = IGlobalConfig;
+export type CheckboxConfig = IGlobalConfig;
+export type TypographyConfig = IGlobalConfig;
 export interface DevUIGlobalConfig {
   tooltip?: TooltipConfig;
   dropdown?: DropdownConfig;
@@ -49,9 +51,9 @@ export interface DevUIGlobalConfig {
   checkbox?: CheckboxConfig;
   checkboxgroup?: CheckboxConfig;
   panel?: PanelConfig;
+  typography?: TypographyConfig;
   global?: GlobalConfig;
 }
-
 
 export type DevUIGlobalConfigKey = keyof DevUIGlobalConfig;
 export type DevUIGlobalInsideConfigKey = keyof DevUIGlobalConfig['global'];

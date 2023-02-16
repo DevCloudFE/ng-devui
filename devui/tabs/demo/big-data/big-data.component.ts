@@ -7,7 +7,8 @@ import { Component } from '@angular/core';
 export class BigDataComponent {
   toggle = false;
   showLoading = false;
-  tabActiveId: string | number = 'tab1';
+  normalTabActiveId: string | number = 'tab1';
+  autoTabActiveId: string | number = 'tab1';
   baseData = [{ id: 'tab1', title: 'Tab1', content: 'Tab1 Content' }];
   staticData = [];
   dynamicData = this.baseData;
@@ -22,11 +23,15 @@ export class BigDataComponent {
     }
   }
 
+  activateRandomTab() {
+    this.normalTabActiveId = `tab${Math.floor(Math.random() * 50)}`;
+  }
+
   getData() {
     this.showLoading = true;
     setTimeout(() => {
       this.dynamicData = this.toggle ? this.baseData : [...this.staticData];
-      this.tabActiveId = this.toggle ? 'tab1' : 'tab21';
+      this.autoTabActiveId = this.toggle ? 'tab1' : 'tab21';
       this.toggle = !this.toggle;
       this.showLoading = false;
     }, 1000);

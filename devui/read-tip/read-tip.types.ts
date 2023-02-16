@@ -28,7 +28,7 @@ export interface ReadTipRule {
   appendToBody?: boolean;
   dataFn?: ({
     element,
-    rule: ReadTipRule,
+    rule,
   }) => Observable<{ title?: string; content?: string; template?: TemplateRef<any>; customData?: any }>;
 }
 

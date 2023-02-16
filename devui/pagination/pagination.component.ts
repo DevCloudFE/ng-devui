@@ -127,7 +127,7 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy,
   i18nText: I18nInterface['pagination'];
   i18nLocale: I18nInterface['locale'];
   i18nSubscription: Subscription;
-  constructor(private ref: ChangeDetectorRef, private i18n: I18nService) { }
+  constructor(private ref: ChangeDetectorRef, private i18n: I18nService) {}
 
   ngOnInit(): void {
     this.i18nText = this.i18n.getI18nText().pagination;
@@ -216,7 +216,7 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy,
       if (this.lite) {
         this.litePaginatorIndex = {
           value: this.pageIndex,
-          label: `${this.pageIndex}/${this.totalPage}`
+          label: `${this.pageIndex}/${this.totalPage}`,
         };
       }
       this.pageIndexChange.emit(pageIndex);
@@ -233,7 +233,9 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy,
       }
       this.adjustPaginatorWidth();
     }
-    this.dropDownElement.dropDown.toggle();
+    if (this.dropDownElement) {
+      this.dropDownElement.dropDown.toggle();
+    }
   }
 
   hasPrev(): boolean {
@@ -249,7 +251,7 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy,
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    const shouldUpdateRanges = PaginationComponent.EFFECT_PAGE_RANGE_KEYS.some(key => !!changes[key]);
+    const shouldUpdateRanges = PaginationComponent.EFFECT_PAGE_RANGE_KEYS.some((key) => !!changes[key]);
     if (shouldUpdateRanges) {
       this.minPageSizeOptions = Math.min(...this.pageSizeOptions);
       this.totalPage = this.getTotalPage();
@@ -287,13 +289,13 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy,
     let start = this.pageIndex - 1;
     let end = this.pageIndex + 1;
 
-    const arriveLeftBound = index => index < 1;
+    const arriveLeftBound = (index) => index < 1;
     const arriveRightBound = (index) => index > this.totalPage;
     const fullPageRang = (pages) => pages.length >= this.maxItems - 2;
 
     while (!(fullPageRang(showPages) || (arriveLeftBound(start) && arriveRightBound(end)))) {
       if (!arriveLeftBound(start)) {
-        showPages.unshift((start--));
+        showPages.unshift(start--);
       }
 
       if (!fullPageRang(showPages) && !arriveRightBound(end)) {
@@ -304,18 +306,17 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy,
   }
 
   private constructLitePaginatorOptions(): void {
-    if (this.litePaginatorOptions.length === 0 ||
-      this.litePaginatorOptions.length !== this.litePaginatorOptionsLengthCache) {
+    if (this.litePaginatorOptions.length === 0 || this.litePaginatorOptions.length !== this.litePaginatorOptionsLengthCache) {
       this.litePaginatorOptions = Array.from({ length: this.totalPage }).map((v, index: number) => {
         return {
           label: `${index + 1}/${this.totalPage}`,
-          value: index + 1
+          value: index + 1,
         };
       });
     }
     this.litePaginatorIndex = {
       value: this.pageIndex,
-      label: `${this.pageIndex}/${this.totalPage}`
+      label: `${this.pageIndex}/${this.totalPage}`,
     };
   }
 
@@ -360,7 +361,6 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy,
     this.unsubscribeLoseFocusHandler();
     if (this.i18nSubscription) {
       this.i18nSubscription.unsubscribe();
-
     }
   }
 

@@ -1,5 +1,6 @@
 import { AfterContentInit, AfterViewInit, Component, ContentChildren, ElementRef, Input, QueryList, TemplateRef } from '@angular/core';
 import { TimeAxisItemComponent } from './time-axis-item/time-axis-item.component';
+import { TimeAxisMode } from './time-axis.type';
 @Component({
   selector: 'd-time-axis',
   templateUrl: './time-axis.component.html',
@@ -13,7 +14,7 @@ export class TimeAxisComponent implements AfterContentInit, AfterViewInit {
   @Input() data;
   @Input() contentTemplate: TemplateRef<any>;
   @Input() direction = 'vertical';
-  @Input() mode = 'normal';
+  @Input() mode: TimeAxisMode = 'normal';
   @Input() widthMode = 'fitContent';
 
   constructor(private elementRef: ElementRef) {
@@ -29,7 +30,7 @@ export class TimeAxisComponent implements AfterContentInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    if (this._direction === 'horizontal') {
+    if (this._direction === 'horizontal' && this.mode !== 'top' && this.mode !== 'bottom') {
       const ulElement = this.elementRef.nativeElement.querySelector('.devui-time-axis-horizontal')  as HTMLElement;
       const topElement = this.elementRef.nativeElement.querySelector('.devui-time-axis-item-data-horizontal-top')  as HTMLElement;
       const bottomElement = this.elementRef.nativeElement.querySelector('.devui-time-axis-item-data-horizontal-bottom')  as HTMLElement;

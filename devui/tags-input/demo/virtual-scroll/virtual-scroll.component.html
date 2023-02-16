@@ -1,13 +1,13 @@
 <d-tags-input
-  [(ngModel)]="tagList"
   [displayProperty]="taskTagConfig.displayProperty"
   [placeholder]="taskTagConfig.placeholder"
-  [minLength]="taskTagConfig.minLength"
   [maxLength]="taskTagConfig.maxLength"
+  [minLength]="taskTagConfig.minLength"
   [maxTags]="taskTagConfig.maxTags"
   [suggestionList]="suggestionList"
   [virtualScroll]="true"
+  [(ngModel)]="tagList"
   (valueChange)="getTagValue($event)"
 >
 </d-tags-input>
-<pre style="margin-top: 8px">{{ tagList | json }}</pre>
+<pre>{{ tagList | json }}</pre>

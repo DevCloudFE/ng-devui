@@ -53,6 +53,14 @@
     padding: 12px 0;
   }
 
+  .devui-time-axis-item-axis-padding-mode-top {
+    padding-bottom: 0;
+  }
+
+  .devui-time-axis-item-axis-padding-mode-bottom {
+    padding-top: 0;
+  }
+
   .devui-time-axis-line-style {
     &-dashed {
       border-bottom-style: dashed;
@@ -127,6 +135,14 @@
 
   .devui-time-axis-item-axis-padding-vertical {
     padding: 0 12px;
+  }
+
+  .devui-time-axis-item-axis-padding-mode-left {
+    padding-right: 0;
+  }
+
+  .devui-time-axis-item-axis-padding-mode-right {
+    padding-left: 0;
   }
 
   .devui-time-axis-line-style {

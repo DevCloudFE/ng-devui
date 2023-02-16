@@ -5,20 +5,18 @@
       <d-select
         [overview]="'underlined'"
         [placeholder]="'please select'"
-        [options]="options3"
+        [options]="options"
         [isSearch]="true"
         [readonly]="true"
         [multiple]="true"
         [(ngModel)]="select1"
         [filterKey]="'name'"
-        [extraConfig]="{
-          labelization: { enable: true, overflow: 'multiple-line' }
-        }"
+        [extraConfig]="{ labelization: { enable: true, overflow: 'multiple-line' } }"
         [size]="'sm'"
       ></d-select>
     </div>
     <div class="col-md-1">
-      <d-button bsStyle="common" (btnClick)="changeSelect1()">Change default</d-button>
+      <d-button bsStyle="common" (btnClick)="changeSelect()">Change default</d-button>
     </div>
   </div>
   <div class="row">
@@ -34,7 +32,7 @@
   <div class="row">
     <div class="col-md-5">
       <d-select
-        [options]="options3"
+        [options]="options"
         [isSearch]="true"
         [readonly]="true"
         [multiple]="true"
@@ -58,7 +56,7 @@
   <div class="row">
     <div class="col-md-5">
       <d-select
-        [options]="options3"
+        [options]="options"
         [isSearch]="true"
         [readonly]="true"
         [multiple]="true"

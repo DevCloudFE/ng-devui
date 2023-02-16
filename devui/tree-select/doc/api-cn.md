@@ -3,7 +3,7 @@
 在 module 中引入：
 
 ```ts
-import { TreeSelectModule } from 'ng-devui/treeSelect';
+import { TreeSelectModule } from 'ng-devui/tree-select';
 ```
 
 在页面中使用：

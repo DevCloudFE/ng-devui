@@ -8,3 +8,13 @@
 svg > g > polygon {
   fill: $devui-icon-text;
 }
+
+.close-icon {
+  cursor: pointer;
+  vertical-align: text-bottom;
+  margin-left: 12px;
+}
+
+.active {
+  background-color: $devui-list-item-active-bg;
+}

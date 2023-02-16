@@ -12,11 +12,11 @@ In the page:
 <d-tree [tree]="data"></d-tree> <d-operable-tree [tree]="data"></d-operable-tree>
 ```
 
-# d-tree
+## d-tree
 
-## d-tree parameters
+### d-tree parameters
 
-##### Basic tree, without adding, deleting, modifying, and querying
+#### Basic tree, without adding, deleting, modifying, and querying
 
 | Parameter           | Type                                 | Default         | Description                                                                                                                                                          | Jump to Demo                                               | Global Config |
 | ------------------- | ------------------------------------ | --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- | ------------- |
@@ -38,22 +38,23 @@ In the page:
 | minBufferPx         | `number`                             | 600             | Optional. Sets the minimum buffer size during virtual scrolling. For details, see https://material.angular.io/cdk/scrolling/overview#scrolling-over-fixed-size-items | [Operation tree of large data volume](demo#virtual-scroll) | .             |
 | maxBufferPx         | `number`                             | 900             | Optional. Sets the maximum buffer size during virtual scrolling. For details, see https://material.angular.io/cdk/scrolling/overview#scrolling-over-fixed-size-items | [Operation tree of large data volume](demo#virtual-scroll) | .             |
 | showAnimation       | `boolean`                            | true            | Optional. Indicating whether to display animations.                                                                                                                  | [Without Animation](demo#without-animation)                | ✔             |
+| indent       | `string`                            | '16px'            | Optional.   Sets the indentation between tree levels                                                                                                           | [Basic Usage](demo#basic-usage)        |      |
 
 ## d-tree Event
 
 | Parameter        | Type                                                              | Description                                                                                                                                                                                                                                               | Jump to Demo                                                                                                           |
-| ---------------- | ----------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ------------------------------- |
+| ---------------- | ----------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
 | nodeSelected     | `EventEmitter<`[`TreeNode`](#treenode)`>`                         | Optional. Callback function for node selection. It returns the data of the selected node.                                                                                                                                                                 | [Basic Usage](demo#basic-usage)                                                                                        |
 | nodeDblClicked   | `EventEmitter<`[`TreeNode`](#treenode)`>`                         | Optional. Callback function used when a node is double-clicked. It returns the data of the current node.                                                                                                                                                  | [Custom Display Fields](demo#custom-display-field)                                                                     |
 | nodeRightClicked | `EventEmitter<{event:MouseEvent,node:`[`TreeNode`](#treenode)`}>` | Optional. Callback function used when a node is right-clicked. It returns the data and mouse event of the current node.                                                                                                                                   | [Custom Display Fields](demo#custom-display-field)                                                                     |
-| nodeToggled      | `EventEmitter<`[`TreeNode`](#treenode)`>`                         | Optional. Callback function for expanding and folding a node. It returns the data of the current node.                                                                                                                                                    |                                                                                                                        | [Basic Usage](demo#basic-usage) |
+| nodeToggled      | `EventEmitter<`[`TreeNode`](#treenode)`>`                         | Optional. Callback function for expanding and folding a node. It returns the data of the current node.                                                                                                                                                    | [Basic Usage](demo#basic-usage)                                                                                        |
 | afterTreeInit    | `EventEmitter<Dictionary<`[`TreeNode`](#treenode)`>>`             | Optional. It is a callback event after tree nodes are generated. It returns information about all nodes in the current tree. This event is mainly used to perform specific operations after rendering is completed in the case of a large amount of data. | The function is the same as that of [Operation tree of large data volume](demo#virtual-scroll) in the d-operable-tree. |
 
-# d-operable-tree
+## d-operable-tree
 
-## d-operable-tree parameter
+### d-operable-tree parameter
 
-##### Add, delete, and modify buttons when you move the mouse over or select them.
+#### Add, delete, and modify buttons when you move the mouse over or select them.
 
 | Parameter               | Type                                      | Default         | Description                                                                                                                                                                                                   | Jump to Demo                                                           | Global Config |
 | ----------------------- | ----------------------------------------- | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- | ------------- |
@@ -82,6 +83,7 @@ In the page:
 | beforeDeleteNode        | `Promise<any>`                            | --              | Optional. Callback before deleting a node (parameter: current node)                                                                                                                                           | [Operation button](demo#operation-button)                              |
 | beforeNodeDrop          | `Promise<any>`                            | --              | Optional. Callback before dragging a subnode (parameters are the currently dragged node, release node, and placement type (`prev`, `inner`, and `next`))                                                      | [drragable tree](demo#drag-and-drop-tree)                              |
 | beforeEditNode          | `Promise<any>`                            | --              | Optional. callback before editing a subnode (parameters are the currently edited node)                                                                                                                        | [Operation button](demo#operation-button)                              |
+| beforeSelectNode        | `Promise<any>`                            | --              | Optional. callback before selecting a node (parameter: current node)                                                                                                                                          | [Operation button](demo#operation-button)                              |
 | postAddNode             | `Promise<any>`                            | --              | Optional. Callback after a node is added (parameters are added)                                                                                                                                               | [Operation button](demo#operation-button)                              |
 | dropType                | `IDropType`                               | --              | Optional. Sets the position where a node is to be dragged. `dropPrev` indicates to be placed before a node, `dropNext` indicates to be placed after a node, and `dropInner` indicates to be placed in a node. | [Draggable tree](demo#drag-and-drop-tree)                              |
 | virtualScroll           | `boolean`                                 | false           | Optional. Whether to enable virtual scrolling. This parameter is used to process a large amount of data.                                                                                                      | [Operation tree of large data volume](demo#virtual-scroll)             |
@@ -90,11 +92,13 @@ In the page:
 | minBufferPx             | `number`                                  | 600             | Optional. Sets the minimum buffer size during virtual scrolling. For details, see https://material.angular.io/cdk/scrolling/overview#scrolling-over-fixed-size-items                                          | [Operation tree of large data volume](demo#virtual-scroll)             | .             |
 | maxBufferPx             | `number`                                  | 900             | Optional. Sets the maximum buffer size during virtual scrolling. For details, see https://material.angular.io/cdk/scrolling/overview#scrolling-over-fixed-size-items                                          | [Operation tree of large data volume](demo#virtual-scroll)             | .             |
 | disableMouseEvent       | `boolean`                                 | false           | Optional. Sets whether to disable the mouse move-in event. This parameter is used when the appendTobody function is used and the content in the drop-down list box cannot be hovered.                         | [Custom Icon](demo#custom-icon)                                        |
+| indent       | `string`                            | '16px'            | Optional.   Sets the indentation between tree levels                                                                                                           | [Basic Usage](demo#basic-usage)        |      |
 | showAnimation           | `boolean`                                 | true            | Optional. Indicating whether to display animations.                                                                                                                                                           | [Without Animation](demo#without-animation)                            | ✔             |
 | loadingTemplateRef      | `TemplateRef<any>`                        | --              | Optional. Customizing the template being loaded                                                                                                                                                               |
 | treeNodesRef            | `TemplateRef<any>`                        | --              | Optional. It specifies the display template of a customized node.                                                                                                                                             |
 
-## d-operable-tree event
+
+### d-operable-tree event
 
 | Parameter          | Type                                                                                                            | Description                                                                                                                                                                                                                                                                                                                                              | Jump to Demo                                           |
 | ------------------ | --------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------ |
@@ -119,9 +123,9 @@ In the page:
 - `treeNodeTitleKey`: key value of the node display field. The default value is `title`.
 - `checkboxInput`: Sets related attributes for the checkbox. The default value is `{color: 'F38826'}`. ~~disableType is used to unify disableType of all subnodes.
 
-# Interface & Type Definition
+## Interface & Type Definition
 
-## **TreeFactoryAPI**
+### **TreeFactoryAPI**
 
 The component provides a TreeFactory. You can perform the following operations on the TreeFactory instance:
 see: [Common treeFactory functions](demo#tree-factory)
@@ -189,7 +193,7 @@ The `checkAllNodes(checked:boolean)`: determines the check status of all nodes b
 
 ```
 
-## Customizing a Template
+### Customizing a Template
 
 Parameters for customizing extra icons are as follows:
 

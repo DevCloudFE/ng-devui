@@ -1,9 +1,17 @@
-<div #tagsInputWrapper class="devui-tags-host {{ multiline ? '' : 'init-inline' }}" tabindex="-1" (click)="host_click()">
+<div
+  #tagsInputWrapper
+  class="devui-tags-host {{ multiline ? 'multi-inline' : 'init-inline' }}"
+  [class.devui-gray-style]="styleType === 'gray'"
+  [class.disabled]="disabled || selectedItems?.length >= maxTags"
+  tabindex="-1"
+  (click)="host_click()"
+>
   <d-toggle-menu-container
     [isOpen]="isOpen"
     [appendToBody]="appendToBody"
     [selectWrapper]="tagsInputWrapperItem"
     [disabled]="disabled || selectedItems?.length >= maxTags"
+    [paused]="!showSuggestion"
     [toggleOnFocus]="true"
     [showAnimation]="showAnimation"
     [closeScope]="'blank'"
@@ -17,6 +25,7 @@
       [disabled]="disabled"
       [maxHeight]="maxHeight"
       [maxWidth]="'100%'"
+      [mode]="multiline ? 'multiple-line' : 'scroll-y'"
       (removeChange)="removeTag($event)"
     ></d-toggle-menu-label>
     <d-toggle-menu-search
@@ -27,7 +36,6 @@
       [spellcheck]="spellcheck"
       [isShowSearchIcon]="false"
       [disabled]="disabled || selectedItems?.length >= maxTags"
-      [inputWidth]="multiline ? '' : 'auto'"
       [delay]="0"
       (searchInputValueChange)="searchInputValueChange($event)"
     ></d-toggle-menu-search>

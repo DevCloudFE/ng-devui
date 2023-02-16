@@ -26,7 +26,7 @@
       (@flyInOut.done)="animationDone.next($event)"
       [@.disabled]="!showAnimation"
       [style.left]="position === 'left' ? 0 : null"
-      [style.right]="position === 'right' ? 0 : null"
+      [style.right]="position === 'right' ? _right : null"
     >
       <div class="drawer-content" cdkScrollable>
         <ng-template dDrawerContentHost></ng-template>

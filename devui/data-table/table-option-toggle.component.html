@@ -105,10 +105,12 @@
         <div
           *ngFor="let data of _columnsData"
           class="devui-option-drag-item"
+          [ngClass]="{ disabled: data.disabled }"
           dDraggable
           [dragScope]="'drag-place'"
           [dragHandleClass]="'devui-option-drag-handle'"
           [dragData]="data"
+          [disabled]="data.disabled"
           (click)="toggleActive(data)"
         >
           <ng-template
@@ -166,6 +168,7 @@
     [ngClass]="{ 'devui-option-item-active': colsData.checked }"
     [isShowTitle]="false"
     [(ngModel)]="colsData.checked"
+    [disabled]="colsData.disabled"
     (click)="$event.stopPropagation(); emitData()"
   ></d-checkbox>
 </ng-template>

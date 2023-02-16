@@ -74,10 +74,6 @@ export class CheckOptionsComponent implements OnInit {
       onChecked: this.checkTotalData.bind(this)
     },
     {
-      label: '取消所有数据全选',
-      onChecked: this.uncheckTotalData.bind(this)
-    },
-    {
       label: '全选当前页数据',
       onChecked: this.checkPageData.bind(this)
     }
@@ -90,6 +86,7 @@ export class CheckOptionsComponent implements OnInit {
   };
 
   totalDataChecked = false;
+  allCheckedStatus = false;
 
   checkTotalData() {
     this.datatable.setTableCheckStatus(
@@ -98,15 +95,11 @@ export class CheckOptionsComponent implements OnInit {
       }
     );
     this.totalDataChecked = true;
+    this.allCheckedStatus = true;
   }
 
-  uncheckTotalData() {
-    this.datatable.setTableCheckStatus(
-      {
-        pageAllChecked: false
-      }
-    );
-    this.totalDataChecked = false;
+  checkAllChange(checked: boolean) {
+    this.allCheckedStatus = checked;
   }
 
   checkPageData() {
@@ -116,6 +109,7 @@ export class CheckOptionsComponent implements OnInit {
       }
     );
     this.totalDataChecked = false;
+    this.allCheckedStatus = true;
   }
 
   onRowCheckChange(checked, rowIndex, nestedIndex, rowItem) {
@@ -135,7 +129,7 @@ export class CheckOptionsComponent implements OnInit {
   onPageIndexChange(pageIndex) {
     this.basicDataSource = JSON.parse(JSON.stringify(originSource.slice(pageIndex - 1, pageIndex + 5)));
     setTimeout(() => {
-      if (this.totalDataChecked) {
+      if (this.totalDataChecked && this.allCheckedStatus) {
         this.datatable.setTableCheckStatus(
           {
             pageAllChecked: true

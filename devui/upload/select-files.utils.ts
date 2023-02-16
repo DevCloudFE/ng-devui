@@ -120,8 +120,8 @@ export class SelectFiles {
   }
 
   simulateClickEvent(input) {
-    const evt = this.document.createEvent('MouseEvents');
-    evt.initMouseEvent('click', true, true, window, 1, 0, 0, 0, 0, false, false, false, false, 0, null);
+    const evt = new MouseEvent('click');
+    evt.stopPropagation();
     input.dispatchEvent(evt);
   }
 }

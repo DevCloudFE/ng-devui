@@ -7,19 +7,14 @@
         [filterKey]="'name'"
         [isSelectAll]="true"
         [multiple]="true"
-        [(ngModel)]="currentOption1"
+        [(ngModel)]="currentOption"
         [searchFn]="onSelectObject"
         [isSearch]="true"
+        [appendToBody]="true"
       >
         <ng-template let-option="option" let-filterKey="filterKey">
-          <div>
-            name：
-            <!--名称：-->{{ option['name'] }}
-          </div>
-          <div>
-            email:
-            <!--邮箱：-->{{ option['email'] }}
-          </div>
+          <div>name: {{ option['name'] }}</div>
+          <div>email: {{ option['email'] }}</div>
         </ng-template>
       </d-select>
     </div>

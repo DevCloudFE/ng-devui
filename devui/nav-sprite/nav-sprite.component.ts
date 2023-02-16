@@ -14,7 +14,7 @@ import {
   Renderer2,
   TemplateRef,
   ViewChild,
-  ViewChildren,
+  ViewChildren
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { scrollAnimate } from 'ng-devui/utils';
@@ -152,7 +152,7 @@ export class NavSpriteComponent implements OnInit, AfterViewInit, OnDestroy {
       scrollAnimate(
         this.targetContainer,
         this.targetContainer.scrollTop,
-        this.menus[this.activeIndex]?.scrollPosition?.startLine,
+        this.menus[this.activeIndex]?.scrollPosition?.startLine + 1,
         undefined,
         undefined,
         () => {
@@ -182,6 +182,7 @@ export class NavSpriteComponent implements OnInit, AfterViewInit, OnDestroy {
         level: i.tagName.match(/\d+/)[0],
         label: i.innerText,
         href: this.baseUrl + '#' + i.innerText,
+        element: i,
         scrollPosition: this.getScrollPosition(i),
       };
     });
@@ -204,6 +205,7 @@ export class NavSpriteComponent implements OnInit, AfterViewInit, OnDestroy {
     if (!this.isToViewByNav) {
       const scrollTop = this.targetContainer.scrollTop;
       const index = this.menus.findIndex((ele, i) => {
+        this.menus[i + 1].scrollPosition = this.getScrollPosition(this.menus[i + 1].element);
         return scrollTop >= ele.scrollPosition.startLine && scrollTop < this.menus[i + 1]?.scrollPosition.startLine;
       });
       if (index !== -1 && this.activeIndex !== index) {
@@ -270,13 +272,15 @@ export class NavSpriteComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.activeIndex !== index) {
       this.activeIndex = index;
       const target = this.menus[index];
-      scrollAnimate(this.targetContainer, this.targetContainer.scrollTop, target?.scrollPosition.startLine, undefined, undefined, () => {
-        this.setUrlHash();
-        this.setTargetActive();
-        setTimeout(() => {
-          this.isToViewByNav = false;
-        }, this.timeGap);
-      });
+      target.scrollPosition = this.getScrollPosition(target.element);
+      scrollAnimate(
+        this.targetContainer, this.targetContainer.scrollTop, target?.scrollPosition.startLine + 1, undefined, undefined, () => {
+          this.setUrlHash();
+          this.setTargetActive();
+          setTimeout(() => {
+            this.isToViewByNav = false;
+          }, this.timeGap);
+        });
       this.isToViewByNav = true;
     }
   }

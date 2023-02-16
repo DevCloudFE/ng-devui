@@ -11,7 +11,6 @@ import { TransformableElement } from './transformable-element';
   changeDetection: ChangeDetectionStrategy.OnPush,
   preserveWhitespaces: false,
 })
-
 export class DImagePreviewComponent implements OnInit, OnDestroy {
   _data: any;
   @Input()
@@ -42,15 +41,11 @@ export class DImagePreviewComponent implements OnInit, OnDestroy {
 
   get targetImageSrc(): string {
     // 防止targetImageIndex出现-1的情况
-    const idx = this.targetImageIndex >= 0 && this.targetImageIndex || 0;
+    const idx = (this.targetImageIndex >= 0 && this.targetImageIndex) || 0;
     return this.images[idx].getAttribute('src');
   }
 
-  constructor(
-    private elementRef: ElementRef,
-    private i18n: I18nService,
-    @Inject(DOCUMENT) private doc: any
-  ) {
+  constructor(private elementRef: ElementRef, private i18n: I18nService, @Inject(DOCUMENT) private doc: any) {
     this.document = this.doc;
   }
 
@@ -139,6 +134,36 @@ export class DImagePreviewComponent implements OnInit, OnDestroy {
   setScaleOriginal() {
     this.transformableImageElementRef.setOriginalScale();
     this.isOptimal = false;
+  }
+
+  getOriginalImage() {
+    if (!this.targetImageSrc) {
+      return;
+    }
+    if (this.targetImageSrc.startsWith('data:image')) {
+      const img = this.images[this.targetImageIndex] as HTMLImageElement;
+      const win = window.open();
+      const content = `
+        <html style="height: 100%;">
+          <head>
+            <meta name="viewport" content="width=device-width, minimum-scale=0.1">
+            <title>base64 Image (${img.naturalWidth}×${img.naturalHeight})</title>
+          </head>
+          <body style="margin: 0px; background: #0e0e0e; height: 100%; display:flex; align-items:"center">
+            <img style="display: block;-webkit-user-select: none;margin: auto;" src="${this.targetImageSrc}">
+          </body>
+        </html>`;
+      win.document.body.outerHTML = content;
+      win.opener = null;
+    } else {
+      const a = document.createElement('a');
+      const event = new MouseEvent('click');
+      a.href = this.targetImageSrc;
+      a.rel = 'noopener';
+      a.target = '_blank';
+      a.dispatchEvent(event);
+      a.remove();
+    }
   }
 
   inputChange($event) {

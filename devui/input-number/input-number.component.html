@@ -3,7 +3,8 @@
   [ngClass]="{
     disabled: disabled,
     'devui-input-number-lg': size === 'lg',
-    'devui-input-number-sm': size === 'sm'
+    'devui-input-number-sm': size === 'sm',
+    'devui-gray-style': styleType === 'gray'
   }"
 >
   <span class="input-control-button input-control-inc" [ngClass]="{ disabled: disabledInc }" #incButton>
@@ -47,7 +48,8 @@
   class="input-container"
   [ngClass]="{
     'devui-input-number-lg': size === 'lg',
-    'devui-input-number-sm': size === 'sm'
+    'devui-input-number-sm': size === 'sm',
+    'devui-gray-style': styleType === 'gray'
   }"
 >
   <input

@@ -1,6 +1,11 @@
 <div style="padding-bottom: 24px">
-  <d-data-table [dataSource]="basicDataSource" [tableOverflowType]="'overlay'" [tableWidthConfig]="tableWidthConfig">
-    <thead dTableHead [checkable]="true" [checkOptions]="checkOptions">
+  <d-data-table
+    [dataSource]="basicDataSource"
+    [tableOverflowType]="'overlay'"
+    [tableWidthConfig]="tableWidthConfig"
+    (checkAllChange)="checkAllChange($event)"
+  >
+    <thead dTableHead [checkable]="true" [checkOptions]="checkOptions" [selectOptionOnCheckbox]="true">
       <tr dTableRow>
         <th dHeadCell>#</th>
         <th dHeadCell *ngFor="let colOption of dataTableOptions.columns">{{ colOption.header }}</th>
@@ -25,7 +30,7 @@
           </td>
           <td dTableCell>{{ rowIndex + 1 }}</td>
           <td dTableCell *ngFor="let colOption of dataTableOptions.columns">
-            {{ colOption.fieldType === 'date' ? (rowItem[colOption.field] | i18nDate: 'short':false) : rowItem[colOption.field] }}
+            {{ colOption.fieldType === 'date' ? (rowItem[colOption.field] | i18nDate : 'short' : false) : rowItem[colOption.field] }}
           </td>
         </tr>
       </ng-template>

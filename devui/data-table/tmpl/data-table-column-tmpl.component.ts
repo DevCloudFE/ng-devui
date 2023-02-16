@@ -1,6 +1,15 @@
 import {
-  ChangeDetectionStrategy, Component, ContentChild, EventEmitter, Input, OnChanges,
-  OnDestroy, OnInit, Output, SimpleChanges, TemplateRef
+  ChangeDetectionStrategy,
+  Component,
+  ContentChild,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  Output,
+  SimpleChanges,
+  TemplateRef,
 } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FilterConfig } from '../data-table.model';
@@ -11,7 +20,7 @@ import { DataTableHeadCellTmplComponent } from './data-table-head-cell-tmpl.comp
 @Component({
   selector: 'd-column',
   template: '',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DataTableColumnTmplComponent implements OnChanges, OnDestroy, OnInit {
   @Input() advancedHeader: Array<{
@@ -39,8 +48,8 @@ export class DataTableColumnTmplComponent implements OnChanges, OnDestroy, OnIni
   @Input() order: number = Number.MAX_VALUE;
   @Input() nestedColumn = false;
   /**
-* 传入筛选列表
-*/
+   * 传入筛选列表
+   */
   @Input() filterList: Array<FilterConfig>;
   @Output() filterChange = new EventEmitter<FilterConfig[]>();
   @Output() filterToggle = new EventEmitter<{
@@ -68,9 +77,7 @@ export class DataTableColumnTmplComponent implements OnChanges, OnDestroy, OnIni
   // @deprecated
   @Input() fieldType = 'text';
 
-  constructor() {
-
-  }
+  constructor() {}
   ngOnInit(): void {}
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['order']) {
@@ -86,17 +93,11 @@ export class DataTableColumnTmplComponent implements OnChanges, OnDestroy, OnIni
     this.orderChange.unsubscribe();
   }
 
-  // column.extraOptions?.dateFormat
-
   emitFilterData(filterData) {
     this.filterChange.emit(filterData);
   }
 
-  emitFilterToggle(data: {
-    isOpen: boolean;
-    checklist: FilterConfig[];
-  }) {
+  emitFilterToggle(data: { isOpen: boolean; checklist: FilterConfig[] }) {
     this.filterToggle.emit(data);
   }
-
 }

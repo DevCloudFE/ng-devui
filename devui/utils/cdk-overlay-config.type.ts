@@ -1,5 +1,7 @@
 import { ConnectedPosition } from '@angular/cdk/overlay';
 
+// block Ӧ��������ȷ�����ݲ��� api �п���
+export type AppendToBodyScrollStrategyType= 'block' | 'close' | 'noop' | 'reposition';
 export type AppendToBodyDirection= 'rightDown'| 'rightUp' | 'leftUp'| 'leftDown' | 'centerDown' | 'centerUp';
 export const AppendToBodyDirectionsConfig: {
   [p in AppendToBodyDirection]: ConnectedPosition

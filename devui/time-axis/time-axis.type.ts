@@ -20,3 +20,5 @@ export interface TimeAxisData {
     data?: any;
   }>;
 }
+
+export type TimeAxisMode = 'normal' | 'alternative' | 'top' | 'bottom' | 'left' | 'right';

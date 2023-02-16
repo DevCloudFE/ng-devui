@@ -50,6 +50,7 @@ export class CascaderComponent implements OnInit, OnDestroy, OnChanges, ControlV
   @Input() dropdownPanelClass = '';
   @Input() appendToBody = true;
   @Input() @WithConfig() showAnimation = true;
+  @Input() @WithConfig() styleType = 'default';
   @Input()
   set loadChildrenFn(fn: (value: CascaderItem) => Promise<CascaderItem[]> | Observable<CascaderItem[]>) {
     this.isLazyLoad = !!fn;

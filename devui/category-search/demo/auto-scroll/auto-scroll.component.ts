@@ -231,6 +231,7 @@ export class AutoScrollComponent {
   ];
   finalSearchItems: any;
   finalSearchKey: any;
+  extendedConfig = { more: { show: true } };
 
   searchEvent(event) {
     console.log('search items', event);

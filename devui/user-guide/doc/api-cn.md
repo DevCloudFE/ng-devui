@@ -60,9 +60,24 @@ export interface IStep {
 
     defaultStart?: boolean; // 是否在页面完成加载后自动开始本套教程
 
+    isCover?: boolean; // 是否有遮罩层
+
+    extraConfig?: IUserGuideExtraConfig; //指引面板配置项
+
     onExit?： Function; //退出时的回调函数
 
     detail: Array<IStepElement>; // 本套指引具体步骤
+}
+```
+
+```TS
+
+export interface IUserGuideExtraConfig {
+  panelBackground?: string; // 指引面板背景色
+  nextButtonType?: string; // 下一步按钮类型
+  infoColor?: string; // 内容颜色
+  operationColor?: string; // 操作颜色
+  dotColor?: string; // 导航点颜色
 }
 ```
 
@@ -74,7 +89,7 @@ export interface IStepElement {
 
     title: string; // 指引步骤的标题
 
-    content?: string; // 指引步骤的解说内容，支持字符串、html或TemplateRef
+    content?: string | TemplateRef<any>; // 指引步骤的解说内容，支持字符串、html或TemplateRef
 
     position?: PositionType; //弹窗位置，不传入则自动选择一个合适的位置
 

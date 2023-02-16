@@ -1,4 +1,5 @@
 import { Component, ContentChild, Input, OnChanges, SimpleChanges, TemplateRef } from '@angular/core';
+import { merge } from 'lodash-es';
 import { IGradientColor, IProgressItem, ShowContentConfig } from './progress.types';
 
 @Component({
@@ -9,6 +10,7 @@ import { IGradientColor, IProgressItem, ShowContentConfig } from './progress.typ
 })
 export class ProgressComponent implements OnChanges {
   static ID_SEED = 0;
+  @Input() isDynamic = true;
   @Input() percentage = 0;
   @Input() percentageText: string;
   /**
@@ -41,6 +43,7 @@ export class ProgressComponent implements OnChanges {
   pathString: string;
   trailPath: { [key: string]: string };
   progressData: IProgressItem[] = [];
+  gradientColor: IGradientColor[] = [];
   isGradient = false;
   showContentConfig = {
     showInnerContent: false,
@@ -52,24 +55,16 @@ export class ProgressComponent implements OnChanges {
     return this.percentageText ? this.percentageText : `${this.percentage}%`;
   }
 
-  get arrayStrokeColor() {
-    return this.strokeColor as Array<IGradientColor>;
-  }
-
   constructor() {
     this.id = ProgressComponent.ID_SEED++;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    const { multiProgressConfig, percentage, showContent, strokeColor, type } = changes;
-    if (multiProgressConfig) {
-      this.init();
-    }
-    if (!this.multiProgressConfig?.length && (percentage || strokeColor || type)) {
-      this.init();
-    }
-    if (type && this.type === 'circle') {
-      this.setCircleProgress();
+    const { isCircle, multiProgressConfig, percentage, showContent, strokeColor, type } = changes;
+    const hasChanged = [percentage, strokeColor, type, isCircle].some((change) => change);
+
+    if (multiProgressConfig || (this.multiProgressConfig?.length && percentage) || (!this.multiProgressConfig?.length && hasChanged)) {
+      this.render();
     }
     if (showContent) {
       this.showContentConfig =
@@ -83,32 +78,40 @@ export class ProgressComponent implements OnChanges {
     }
   }
 
-  init(): void {
-    this.progressData = this.multiProgressConfig?.length
+  render(): void {
+    const data = this.multiProgressConfig?.length
       ? [...this.multiProgressConfig]
       : [
         {
-          color: this.checkStrokeColor() || this.barbgcolor,
-          percentage: this.percentage,
-          percentageText: this.percentageText,
-          content: this.content,
+          color: (this.checkStrokeColor() || this.barbgcolor) ?? '',
+          percentage: this.percentage ?? 0,
+          percentageText: this.percentageText ?? '',
+          content: this.content ?? '',
         },
       ];
+
     if (this.type === 'line') {
-      this.checkSumOfPercentages((sum: number, item: IProgressItem) => {
+      this.checkSumOfPercentages(data, (sum: number, item: IProgressItem) => {
         item.width = sum;
       });
     }
-  }
 
-  setBarInnerText(bar: IProgressItem) {
-    if (!bar.content) {
-      bar.content = bar.percentageText ? bar.percentageText : `${bar.percentage}%`;
+    if (this.type === 'circle') {
+      this.setCircleProgress(data);
     }
-    return bar.content;
+
+    // 展示数据倒序输出，短的后输出，显示层级高
+    data.reverse();
+
+    if (this.isDynamic) {
+      // merge方式覆盖数据，不改变数据源，避免重渲染dom导致动画失效
+      merge(this.progressData, data);
+    } else {
+      this.progressData = [...data];
+    }
   }
 
-  setCircleProgress(): void {
+  setCircleProgress(data: IProgressItem[]): void {
     const radius = 50 - this.strokeWidth / 2;
     const beginPositionY = -radius;
     const endPositionY = radius * -2;
@@ -123,7 +126,7 @@ export class ProgressComponent implements OnChanges {
       strokeDashoffset: `0`,
       transition: 'stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s',
     };
-    this.checkSumOfPercentages((sum: number, item: IProgressItem) => {
+    this.checkSumOfPercentages(data, (sum: number, item: IProgressItem) => {
       item.strokePath = {
         stroke: item.color || this.checkStrokeColor() || this.barbgcolor || (null as any),
         strokeDasharray: `${(sum / 100) * len}px ${len}px`,
@@ -133,24 +136,20 @@ export class ProgressComponent implements OnChanges {
     });
   }
 
-  checkSumOfPercentages(func: Function) {
-    const result = this.progressData.reduce((sum: number, item: IProgressItem) => {
-      sum += item.percentage;
+  checkSumOfPercentages(data: IProgressItem[], func: Function) {
+    const result = data.reduce((sum: number, item: IProgressItem, index: number) => {
+      sum += Number(item.percentage);
+      sum = sum > 100 || (index > 0 && index === data.length - 1 && this.percentage === 100) ? 100 : sum;
       func(sum, item);
       return sum;
     }, 0);
-    if (result > 100) {
-      throw new Error('The sum of percentages cannot exceed 100%.');
-    } else {
-      this.percentage = result;
-    }
-    // 和值检查通过后将展示数据倒序输出，短的后输出，显示层级高
-    this.progressData.reverse();
+    this.percentage = this.percentage >= 100 ? 100 : result;
   }
 
   checkStrokeColor(): string {
     if (Array.isArray(this.strokeColor)) {
       this.isGradient = true;
+      this.gradientColor = this.strokeColor;
       if (this.type === 'line') {
         const colors = this.strokeColor.map((item) => `${item.color} ${item.percentage}`).join(', ');
         const result = `linear-gradient(to right, ${colors})`;

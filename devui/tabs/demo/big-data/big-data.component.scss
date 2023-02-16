@@ -4,8 +4,16 @@ section {
 
 d-button {
   position: absolute;
-  left: 160px;
-  top: 128px;
+
+  &#normal {
+    left: 184px;
+    top: -2px;
+  }
+
+  &#auto {
+    left: 160px;
+    top: 128px;
+  }
 }
 
 d-tabs:last-child {

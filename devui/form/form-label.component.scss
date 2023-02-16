@@ -32,6 +32,10 @@
 
   path {
     fill: $devui-shape-icon-fill;
+
+    &:hover {
+      fill: $devui-shape-icon-fill-hover;
+    }
   }
 }
 

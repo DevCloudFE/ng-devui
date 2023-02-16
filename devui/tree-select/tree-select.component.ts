@@ -100,6 +100,7 @@ export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterV
     private devConfigService: DevConfigService
   ) {}
   @Input() @WithConfig() showAnimation = true;
+  @Input() @WithConfig() styleType = 'default';
   @Input() placeholder = '';
   @Input() searchPlaceholder = '';
   @Input() disabled = false;
@@ -449,7 +450,7 @@ export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterV
     event.preventDefault();
     event.stopPropagation();
     if (this.multiple) {
-      this.tree.treeFactory.checkNodesById(item[this.treeNodeIdKey], false);
+      this.tree.treeFactory.checkNodesById(item[this.treeNodeIdKey], false, this.checkableRelation);
       const curValue = this.tree.treeFactory.getCheckedNodes();
       this.value = this.leafOnly
         ? curValue.filter((node) => !node.data.isParent).map((node) => node.data.originItem)

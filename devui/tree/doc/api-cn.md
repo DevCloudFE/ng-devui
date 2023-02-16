@@ -12,11 +12,11 @@ import { TreeModule } from 'ng-devui/tree';
 <d-tree [tree]="data"></d-tree> <d-operable-tree [tree]="data"></d-operable-tree>
 ```
 
-# d-tree
+## d-tree
 
-## d-tree 参数
+### d-tree 参数
 
-##### 基本的树，没有增删改查等操作
+#### 基本的树，没有增删改查等操作
 
 | 参数                | 类型                                 | 默认值          | 描述                                                                                                                           | 跳转 Demo                               | 全局配置项 |
 | ------------------- | ------------------------------------ | --------------- | ------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------- | ---------- |
@@ -38,6 +38,7 @@ import { TreeModule } from 'ng-devui/tree';
 | minBufferPx         | `number`                             | 600             | 可选，设置虚拟滚动时的最小 buffer 尺寸，参考https://material.angular.io/cdk/scrolling/overview#scrolling-over-fixed-size-items | [大数据量可操作树](demo#virtual-scroll) |
 | maxBufferPx         | `number`                             | 900             | 可选，设置虚拟滚动时的最大 buffer 尺寸，参考https://material.angular.io/cdk/scrolling/overview#scrolling-over-fixed-size-items | [大数据量可操作树](demo#virtual-scroll) |
 | showAnimation       | `boolean`                            | true            | 可选，是否展示动画                                                                                                             | [无动画](demo#without-animation)        | ✔          |
+| indent       | `string`                            | '16px'            | 可选，设置树各层级之间的缩进                                                                                                             | [基本用法](demo#basic-usage)        |          |
 
 ## d-tree 事件
 
@@ -49,11 +50,11 @@ import { TreeModule } from 'ng-devui/tree';
 | nodeToggled      | `EventEmitter<`[`TreeNode`](#treenode)`>`                         | 可选，节点展开收起的回调函数，返回当前操作的节点的数据                                                     | [基本用法](demo#basic-usage)                                         |
 | afterTreeInit    | `EventEmitter<Dictionary<`[`TreeNode`](#treenode)`>>`             | 可选，树节点生成完毕后的回调事件，返回当前树的所有节点信息，多用于大数据量情况下需要渲染完成后执行特定操作 | 与 d-operable-tree 的[大数据量可操作树](demo#virtual-scroll)使用一致 |
 
-# d-operable-tree
+## d-operable-tree
 
-## d-operable-tree 参数
+### d-operable-tree 参数
 
-##### 鼠标滑过或者选中支持增删改按钮操作
+#### 鼠标滑过或者选中支持增删改按钮操作
 
 | 参数                    | 类型                                         | 默认值          | 描述                                                                                                                           | 跳转 Demo                                      | 全局配置项 |
 | ----------------------- | -------------------------------------------- | --------------- | ------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------- | ---------- |
@@ -82,6 +83,7 @@ import { TreeModule } from 'ng-devui/tree';
 | beforeDeleteNode        | `Promise<any>`                               | --              | 可选，删除节点前回调(参数为当前节点)                                                                                           | [操作按钮](demo#operation-button)              |
 | beforeNodeDrop          | `Promise<any>`                               | --              | 可选，子节点内部拖动 drop 前回调(参数为当前拖动的节点，释放位置的节点，放置类型（`prev`，`inner`，`next`）)                    | [可拖拽树](demo#drag-and-drop-tree)            |
 | beforeEditNode          | `Promise<any>`                               | --              | 可选，子节点编辑前回调(参数为当前编辑的节点)                                                                                   | [操作按钮](demo#operation-button)              |
+| beforeSelectNode        | `Promise<any>`                               | --              | 可选，节点点选前回调(参数为当前节点)                                                                                           | [操作按钮](demo#operation-button)              |
 | postAddNode             | `Promise<any>`                               | --              | 可选，新增节点后回调(参数为新增节点)                                                                                           | [操作按钮](demo#operation-button)              |
 | dropType                | [`IDropType`](#idroptype)                    | --              | 可选，设置拖拽放置的位置，`dropPrev`为放置在节点前，`dropNext`为放置在节点后，`dropInner`为放置在节点中                        | [可拖拽树](demo#drag-and-drop-tree)            |
 | virtualScroll           | `boolean`                                    | false           | 可选，是否开启虚拟滚动，用于处理大数据量的情形                                                                                 | [大数据量可操作树](demo#virtual-scroll)        |
@@ -93,6 +95,7 @@ import { TreeModule } from 'ng-devui/tree';
 | showAnimation           | `boolean`                                    | true            | 可选，是否展示动画                                                                                                             | [无动画](demo#without-animation)               | ✔          |
 | loadingTemplateRef      | `TemplateRef<any>`                           | --              | 可选，自定义加载中的模板                                                                                                       |
 | treeNodesRef            | `TemplateRef<any>`                           | --              | 可选，自定义节点的显示模板                                                                                                     |
+| indent       | `string`                            | '16px'            | 可选，设置树各层级之间的缩进                                                                                                             | [基本用法](demo#basic-usage)        |      |
 
 ## d-operable-tree 事件
 
@@ -119,9 +122,9 @@ import { TreeModule } from 'ng-devui/tree';
 - `treeNodeTitleKey`: 用来标识节点显示字段的键值，默认为 `title`
 - `checkboxInput`: 用来给 checkbox 设置相关属性，其默认值为 `{ color: 'F38826' }`, ~~disableType 属性用来统一所有子节点的 disableType~~。
 
-# 接口 & 类型定义
+## 接口 & 类型定义
 
-## TreeFactoryAPI
+### TreeFactoryAPI
 
 组件提供一个 TreeFactory，你可以从 TreeFactory 的实例上拿到下列方法来进行操作:
 参考：[常用 TreeFactory 函数](demo#tree-factory)
@@ -195,7 +198,7 @@ import { TreeModule } from 'ng-devui/tree';
 
 ```
 
-## 自定义模板
+### 自定义模板
 
 自定义额外图标相关参数如下
 

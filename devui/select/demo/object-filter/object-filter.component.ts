@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'd-object-filter',
   templateUrl: './object-filter.component.html',
-  styleUrls: ['./object-filter.component.css'],
 })
 export class ObjectFilterComponent {
   options = [
@@ -24,5 +23,5 @@ export class ObjectFilterComponent {
     },
   ];
   objectValue = {};
-  numberValue = undefined;
+  numberValue: number;
 }

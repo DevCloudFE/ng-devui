@@ -81,10 +81,6 @@
   font-size: $devui-font-size;
 }
 
-.devui-select-list-wrapper.devui-form-control {
-  cursor: pointer;
-}
-
 .devui-form-group > input.devui-form-control.devui-select-input {
   cursor: pointer;
   padding-right: 2em;
@@ -100,10 +96,6 @@
       padding-right: 4em;
     }
   }
-}
-
-.devui-select-list-wrapper.devui-form-control {
-  cursor: pointer;
 }
 
 .devui-dropdown-item {
@@ -350,6 +342,7 @@ div.devui-dropdown-menu.devui-dropdown-menu-multiple > ul.devui-list-unstyled li
 }
 
 .devui-select-list-wrapper.devui-form-control {
+  cursor: pointer;
   height: auto;
   margin: 0;
   padding: 0;
@@ -541,6 +534,17 @@ li.disabled ::ng-deep .devui-checkbox.disabled label {
   .devui-select-list-wrapper.devui-form-control.disabled {
     color: $devui-disabled-text;
   }
+
+  &.devui-gray-style {
+    background-color: $devui-disabled-bg !important;
+    border-color: transparent !important;
+
+    .devui-select-list-wrapper.devui-form-control,
+    .devui-form-control.devui-select-input {
+      background-color: $devui-disabled-bg !important;
+      border-color: transparent !important;
+    }
+  }
 }
 
 .devui-dropdown-origin,
@@ -715,6 +719,8 @@ input::-ms-clear {
 }
 
 :host ::ng-deep .devui-select-tag-item {
+  max-width: 100%;
+
   d-tag {
     width: 100%;
 
@@ -738,5 +744,13 @@ input::-ms-clear {
       color: $devui-disabled-text;
       cursor: not-allowed;
     }
+  }
+}
+
+.devui-gray-style {
+  border-radius: $devui-border-radius;
+
+  .devui-select-list-wrapper.devui-form-control {
+    background-color: transparent;
   }
 }

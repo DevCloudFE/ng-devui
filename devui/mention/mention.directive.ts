@@ -41,6 +41,7 @@ export class MentionDirective implements OnInit, OnChanges, AfterViewInit, OnDes
   @Input() mentionSeparator = ' ';
   @Input() mentionSeparatorToggle = { prefix: false, suffix: false };
   @Input() mentionPosition: MentionPositionType = 'bottom';
+  @Input() mentionHeaderTemplate: TemplateRef<any>;
   @Input() mentionItemTemplate: TemplateRef<any>;
   @Input() mentionValueParse: (value: string) => string = (value) => value;
   @Output() mentionSelectItem = new EventEmitter();
@@ -224,6 +225,7 @@ export class MentionDirective implements OnInit, OnChanges, AfterViewInit, OnDes
     }
     if (this.overlayRef && !this.overlayRef.hasAttached()) {
       this.mentionRef = this.overlayRef.attach(this.portal);
+      this.mentionRef.instance.mentionHeaderTemplate = this.mentionHeaderTemplate;
       this.mentionRef.instance.mentionItemTemplate = this.mentionItemTemplate;
       this.mentionRef.instance.mentionNotFoundContent = this.mentionNotFoundContent;
     }

@@ -16,12 +16,13 @@ import {
   ViewChild
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { DevConfigService, WithConfig } from 'ng-devui/utils';
 import { fromEvent, Observable, Subscription } from 'rxjs';
 
 const INPUT_NUMBER_CONTROL_VALUE_ACCESSOR: any = {
   provide: NG_VALUE_ACCESSOR,
   useExisting: forwardRef(() => InputNumberComponent),
-  multi: true
+  multi: true,
 };
 
 export type InputSizeType = '' | 'sm' | 'lg';
@@ -33,7 +34,6 @@ export type InputSizeType = '' | 'sm' | 'lg';
   providers: [INPUT_NUMBER_CONTROL_VALUE_ACCESSOR],
   preserveWhitespaces: false,
 })
-
 export class InputNumberComponent implements ControlValueAccessor, OnChanges, OnDestroy, AfterViewInit {
   @Input() step = 1;
   @Input() disabled = false;
@@ -44,6 +44,7 @@ export class InputNumberComponent implements ControlValueAccessor, OnChanges, On
   @Input() placeholder = '';
   @Input() maxLength = 0;
   @Input() reg: RegExp | string;
+  @Input() @WithConfig() styleType = 'default';
   @Output() afterValueChanged = new EventEmitter<number>();
   @Output() whileValueChanging = new EventEmitter<number>();
   @ViewChild('incButton', { static: true }) incButton: ElementRef;
@@ -81,14 +82,17 @@ export class InputNumberComponent implements ControlValueAccessor, OnChanges, On
     return this._max;
   }
 
-  private onTouchedCallback = () => {
-  };
+  private onTouchedCallback = () => {};
 
-  private onChangeCallback = (v: any) => {
-  };
+  private onChangeCallback = (v: any) => {};
 
-  constructor(private cdr: ChangeDetectorRef, private el: ElementRef, private renderer: Renderer2,
-              @Inject(DOCUMENT) private doc: any) {
+  constructor(
+    private cdr: ChangeDetectorRef,
+    private devConfigService: DevConfigService,
+    private el: ElementRef,
+    private renderer: Renderer2,
+    @Inject(DOCUMENT) private doc: any
+  ) {
     this.document = this.doc;
   }
 
@@ -248,7 +252,7 @@ export class InputNumberComponent implements ControlValueAccessor, OnChanges, On
         this.updateValue(0);
       } else {
         const decimals = this.getMaxDecimals(this.value);
-        const floatValue = type === 'increase' ? (this.value + this.step) : (this.value - this.step);
+        const floatValue = type === 'increase' ? this.value + this.step : this.value - this.step;
         if (this.matchReg(String(floatValue))) {
           this.updateValue(parseFloat(floatValue.toFixed(decimals)));
         }
@@ -267,17 +271,17 @@ export class InputNumberComponent implements ControlValueAccessor, OnChanges, On
 
   private canIncrease() {
     if (this.allowEmpty && (this.value === null || this.value === undefined)) {
-      return (this.min + this.step) <= this.max;
+      return this.min + this.step <= this.max;
     } else {
-      return (this.value + this.step) <= this.max;
+      return this.value + this.step <= this.max;
     }
   }
 
   private canDecrease() {
     if (this.allowEmpty && (this.value === null || this.value === undefined)) {
-      return (this.min + this.step) <= this.max;
+      return this.min + this.step <= this.max;
     } else {
-      return (this.value - this.step) >= this.min;
+      return this.value - this.step >= this.min;
     }
   }
 
@@ -366,12 +370,14 @@ export class InputNumberComponent implements ControlValueAccessor, OnChanges, On
       this.setValue(this.lastValue);
       return;
     } else if (
-      value === '-' || value.match(/^\s*(-|\+)?\d+\.$/) || value.match(/^\s*(-|\+)?\d+\.[0-9]*0$/) || value.match(/^\s*(-|\+)0+$/)
+      value === '-' ||
+      value.match(/^\s*(-|\+)?\d+\.$/) ||
+      value.match(/^\s*(-|\+)?\d+\.[0-9]*0$/) ||
+      value.match(/^\s*(-|\+)0+$/)
     ) {
       // indeterminate state
       return;
     } else if (value.match(/^\s*(-|\+)?(\d+|(\d*(\.\d*)))$/)) {
-
       if (this.decimalLimit !== undefined && this.decimalLimit !== null) {
         value = parseFloat(value).toFixed(this.decimalLimit);
       }

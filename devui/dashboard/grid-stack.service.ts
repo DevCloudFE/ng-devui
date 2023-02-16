@@ -1,7 +1,6 @@
 import { Injectable, isDevMode } from '@angular/core';
-import { GridItemHTMLElement, GridStack, GridStackDDI, GridStackNode, Utils } from 'gridstack';
-import 'gridstack/dist/h5/gridstack-dd-native';
-import { GridStackDDNative } from 'gridstack/dist/h5/gridstack-dd-native';
+import { DDGridStack, GridItemHTMLElement, GridStack, GridStackNode, Utils } from 'gridstack';
+import { DDElement } from 'gridstack/dist/dd-element';
 import { DashboardComponent } from './dashboard.component';
 import { DashboardLibraryTrashDirective } from './widget-library/library-trash.directive';
 import { DashboardLibraryWidgetDirective } from './widget-library/library-widget.directive';
@@ -13,12 +12,12 @@ export class GridStackService {
   lastStyleSheet: CSSStyleSheet;
 
   getDD() {
-    return (GridStackDDI.get() as GridStackDDNative);
+    return (DDGridStack.get() as DDGridStack);
   }
 
   static cleanDragIn(el: HTMLElement) {
     if (el.classList.contains('ui-draggable')) {
-      (GridStackDDI.get() as GridStackDDNative).draggable(el, 'destroy');
+      (DDGridStack.get() as DDGridStack).draggable(el, 'destroy');
     }
   }
   static isDraggable(el: HTMLElement) {
@@ -31,25 +30,25 @@ export class GridStackService {
     if (!GridStackService.isDraggable(el)) {
       return;
     }
-    (GridStackDDI.get() as GridStackDDNative).draggable(el, 'enable');
+    (DDGridStack.get() as DDGridStack).draggable(el, 'enable');
   }
   static disableDrag(el: HTMLElement) {
     if (!GridStackService.isDraggable(el)) {
       return;
     }
-    (GridStackDDI.get() as GridStackDDNative).draggable(el, 'disable');
+    (DDGridStack.get() as DDGridStack).draggable(el, 'disable');
   }
   static enableDrop(el: HTMLElement) {
     if (!GridStackService.isDroppable(el)) {
       return;
     }
-    (GridStackDDI.get() as GridStackDDNative).droppable(el, 'enable');
+    (DDGridStack.get() as DDGridStack).droppable(el, 'enable');
   }
   static disableDrop(el: HTMLElement) {
     if (!GridStackService.isDroppable(el)) {
       return;
     }
-    (GridStackDDI.get() as GridStackDDNative).droppable(el, 'disable');
+    (DDGridStack.get() as DDGridStack).droppable(el, 'disable');
   }
   _itemRemoving = (el: GridItemHTMLElement, remove: boolean) => {
     const node = el ? el.gridstackNode : undefined;
@@ -101,7 +100,6 @@ export class GridStackService {
         if (!node.grid || node.grid === that) {
           that['_leave'](el, helper);
         }
-        this.fixFloat(that, node); // 增加了float模式下的恢复
         this.getDD().off(el, 'drag');
         return false;
       })
@@ -135,7 +133,6 @@ export class GridStackService {
 
         this.getDD().off(el, 'drag');
         that.engine.removeNode(node);
-        this.fixFloat(that, node);
 
         that['_updateContainerHeight']();
 
@@ -161,24 +158,6 @@ export class GridStackService {
       this.getDD().off(trashZone, 'dropover').off(trashZone, 'dropout');
     }
   }
-
-  private fixFloat(gridstack: GridStack, node: GridStackNode) {
-    if (gridstack.getFloat()) {
-      gridstack.engine.batchUpdate();
-      gridstack.engine.nodes
-        .filter((n) => n !== node)
-        .reverse()
-        .forEach((n) => {
-          if (n['_origX'] !== undefined || n['_origY'] !== undefined) {
-            n.x = n['_origX'] !== undefined ? n['_origX'] : n.x;
-            n.y = n['_origY'] !== undefined ? n['_orig&'] : n.y;
-            gridstack.engine.moveNode(n, { x: n.x, y: n.y });
-            gridstack['_writeAttrs'](n.el, n.x, n.y);
-          }
-        });
-      gridstack.engine.commit();
-    }
-  }
   /* 设置新的可拖入的widget */
   setupDragIn(
     el: HTMLElement,
@@ -186,9 +165,10 @@ export class GridStackService {
     helper?: ((event: any) => HTMLElement) | string,
     notify?: (eventType: string) => (...args: any) => void
   ) {
-    this.getDD().dragIn(el, {
+    const _ddElement = DDElement.init(el);
+    _ddElement.setupDraggable({
       ...widget.targetDashboard.finalOption.dragInOptions,
-      ...{ helper: helper || widget.targetDashboard.finalOption.dragInOptions.helper ,handle:this.gridStack.opts.handle},
+      ...{ helper: helper || widget.targetDashboard.finalOption.dragInOptions.helper, handle: this.gridStack.opts.handle },
       ...{
         start: () => {
           this.dragInWidget = widget;
@@ -197,7 +177,7 @@ export class GridStackService {
           }
         },
         stop: () => {
-          this.dragInWidget = undefined;
+          // TODO: 升级gridstack@6.0.0后drop内dragInWidget一直为undefined ,因此删掉了 this.dragInWidget = undefined;
           if (notify) {
             notify('dragStop')();
           }
@@ -247,7 +227,7 @@ export class GridStackService {
       } else {
         this.lastStyleSheet.removeRule(0);
       }
-      const column = this.gridStack.opts.column;
+      const column = this.gridStack.opts.column as number;
       const margin = this.gridStack.opts.margin as number;
       const marginUnit = this.gridStack.opts.marginUnit;
       const cellHeight = this.gridStack.opts.cellHeight as number;

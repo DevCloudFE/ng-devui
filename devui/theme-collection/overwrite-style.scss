@@ -5,6 +5,16 @@
   height: 32px;
   line-height: 32px;
 }
+// button large size change to '40px'
+.devui-btn:not(.devui-btn-xs):not(.devui-btn-sm):not(.devui-btn-md) {
+  height: 40px;
+  line-height: 40px;
+}
+// button small size change to '28px'
+.devui-btn:not(.devui-btn-xs):not(.devui-btn-lg):not(.devui-btn-md) {
+  height: 28px;
+  line-height: 28px;
+}
 
 d-alert .devui-alert {
   border: 1px solid transparent;
@@ -242,24 +252,6 @@ d-select .devui-form-group {
   }
 }
 
-d-toggle-menu-container .devui-toggle-menu-container {
-  d-toggle-menu-label {
-    ul.devui-select-tag-list {
-      height: 28px !important;
-      min-height: 28px !important;
-
-      &.multiple-line .devui-select-tag-item {
-        margin: 4px 0 0 4px;
-      }
-    }
-  }
-
-  &.disabled d-toggle-menu-label ul.devui-select-tag-list {
-    height: 30px !important;
-    padding-top: 1px;
-  }
-}
-
 d-tree-select {
   .devui-tree-select .popper .popper-activator .devui-select-input.devui-tree-select-input {
     padding: 4px 10px;
@@ -332,6 +324,29 @@ ul.devui-dropdown-menu {
 }
 
 d-tags-input {
+  .devui-tags-host {
+    min-height: 32px !important;
+
+    d-toggle-menu-container {
+      .devui-toggle-menu.devui-toggle-menu-container.disabled d-toggle-menu-label ul.devui-select-tag-list,
+      d-toggle-menu-search .devui-toggle-menu-search > input {
+        min-height: 30px;
+      }
+
+      .devui-toggle-menu-container d-toggle-menu-label .devui-select-tag-list {
+        padding-bottom: 4px;
+
+        &.multiple-line {
+          max-height: 52px;
+        }
+
+        .devui-select-tag-item {
+          margin: 4px 0 0 4px;
+        }
+      }
+    }
+  }
+
   .devui-tags-autocomplete .devui-suggestion-list {
     padding: 12px !important;
   }

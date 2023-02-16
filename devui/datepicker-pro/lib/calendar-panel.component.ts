@@ -344,6 +344,7 @@ export class CalendarPanelComponent implements OnInit, OnDestroy {
         this.pickerSrv.currentActiveInput = 'end';
       } else if (this.pickerSrv.currentActiveInput === 'end' && !this.selectedRangeDate[0]) {
         this.selectedRangeDate[0] = this.curDate;
+        this.pickerSrv.currentActiveInput = 'start';
       } else {
         this.pickerSrv.closeDropdownEvent.next(false);
       }

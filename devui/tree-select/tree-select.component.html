@@ -11,6 +11,7 @@
     <div
       #selectHost
       class="devui-select-input devui-form-control devui-tree-select-input devui-dropdown-origin"
+      [class.devui-gray-style]="styleType === 'gray'"
       (click)="toggle()"
       autocomplete="off"
       [ngClass]="{ disabled: disabled, 'devui-select-no-label': !enableLabelization }"

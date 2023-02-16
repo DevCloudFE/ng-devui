@@ -179,7 +179,7 @@
     left: 10px;
     width: 2px;
     height: 40px;
-    background: $devui-dividing-line;
+    border-left: 2px solid $devui-dividing-line;
     vertical-align: middle;
 
     &.devui-parent-list {
@@ -192,7 +192,7 @@
     display: block;
     width: 2px;
     height: 18px;
-    background-color: $devui-form-control-line-active;
+    border-left: 2px solid $devui-form-control-line-active;
     position: absolute;
     top: 11px;
     left: 0;

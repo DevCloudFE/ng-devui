@@ -26,7 +26,7 @@ import { FullscreenDemoNormalComponent } from "./normal/normal.component";
       {
         path: "",
         redirectTo: "demo",
-        pathMatch: 'full'
+        pathMatch: "full"
       },
       {
         path: "demo",

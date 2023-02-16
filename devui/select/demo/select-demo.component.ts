@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'd-select-demo',
   templateUrl: './select-demo.component.html',
+  styleUrls: ['./select-demo.component.scss'],
 })
 export class SelectDemoComponent implements OnInit, OnDestroy {
   SelectBasicComponent: Array<DevuiSourceData> = [
@@ -15,7 +16,6 @@ export class SelectDemoComponent implements OnInit, OnDestroy {
   SelectObjectComponent: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('./custom-search/custom-search.component.html?raw') },
     { title: 'TS', language: 'typescript', code: require('./custom-search/custom-search.component.ts?raw') },
-    { title: 'SCSS', language: 'css', code: require('./custom-search/custom-search.component.css?raw') },
   ];
   SelectAllComponent: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('./select-all/select-all.component.html?raw') },
@@ -33,7 +33,6 @@ export class SelectDemoComponent implements OnInit, OnDestroy {
   CustomAreaComponent: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('./custom-area/custom-area.component.html?raw') },
     { title: 'TS', language: 'typescript', code: require('./custom-area/custom-area.component.ts?raw') },
-    { title: 'SCSS', language: 'css', code: require('./custom-area/custom-area.component.css?raw') },
   ];
   CustomAreaDirectionComponent: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('./custom-area-direction/custom-area-direction.component.html?raw') },
@@ -43,12 +42,10 @@ export class SelectDemoComponent implements OnInit, OnDestroy {
   AppendToBodyComponent: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('./append-to-body/append-to-body.component.html?raw') },
     { title: 'TS', language: 'typescript', code: require('./append-to-body/append-to-body.component.ts?raw') },
-    { title: 'SCSS', language: 'css', code: require('./append-to-body/append-to-body.component.css?raw') },
   ];
   DisabledComponent: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('./disabled/disabled.component.html?raw') },
     { title: 'TS', language: 'typescript', code: require('./disabled/disabled.component.ts?raw') },
-    { title: 'SCSS', language: 'css', code: require('./disabled/disabled.component.css?raw') },
   ];
   LabelizationComponent: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('./labelization/labelization.component.html?raw') },
@@ -58,7 +55,6 @@ export class SelectDemoComponent implements OnInit, OnDestroy {
   ObjectFilterComponent: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('./object-filter/object-filter.component.html?raw') },
     { title: 'TS', language: 'typescript', code: require('./object-filter/object-filter.component.ts?raw') },
-    { title: 'SCSS', language: 'css', code: require('./object-filter/object-filter.component.css?raw') },
   ];
   LazyLoadVirtualScrollComponent: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('./lazy-load-virtual-scroll/lazy-load-virtual-scroll.component.html?raw') },
@@ -68,7 +64,6 @@ export class SelectDemoComponent implements OnInit, OnDestroy {
   LoadingComponent: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('./loading/loading.component.html?raw') },
     { title: 'TS', language: 'typescript', code: require('./loading/loading.component.ts?raw') },
-    { title: 'SCSS', language: 'css', code: require('./loading/loading.component.css?raw') },
   ];
   UserLimitSelectedNumberComponent: Array<DevuiSourceData> = [
     {
@@ -81,27 +76,22 @@ export class SelectDemoComponent implements OnInit, OnDestroy {
       language: 'typescript',
       code: require('./user-limit-selected-number/user-limit-selected-number.component.ts?raw'),
     },
-    { title: 'SCSS', language: 'css', code: require('./user-limit-selected-number/user-limit-selected-number.component.css?raw') },
   ];
   MultiKeepOrderComponent: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('./multi-keep-order/multi-keep-order.component.html?raw') },
     { title: 'TS', language: 'typescript', code: require('./multi-keep-order/multi-keep-order.component.ts?raw') },
-    { title: 'SCSS', language: 'css', code: require('./multi-keep-order/multi-keep-order.component.css?raw') },
   ];
   UserSearchNLazyLoadComponent: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('./user-search-n-lazyload/user-search-n-lazyload.component.html?raw') },
     { title: 'TS', language: 'typescript', code: require('./user-search-n-lazyload/user-search-n-lazyload.component.ts?raw') },
-    { title: 'SCSS', language: 'css', code: require('./user-search-n-lazyload/user-search-n-lazyload.component.css?raw') },
   ];
   UserMailSearchComponent: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('./user-mail-search/user-mail-search.component.html?raw') },
     { title: 'TS', language: 'typescript', code: require('./user-mail-search/user-mail-search.component.ts?raw') },
-    { title: 'SCSS', language: 'css', code: require('./user-mail-search/user-mail-search.component.css?raw') },
   ];
   ModelValueComponent: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('./model-value/model-value.component.html?raw') },
     { title: 'TS', language: 'typescript', code: require('./model-value/model-value.component.ts?raw') },
-    { title: 'SCSS', language: 'css', code: require('./model-value/model-value.component.css?raw') },
     { title: 'ParseFromPipe', language: 'typescript', code: require('./model-value/parse-from.pipe.ts?raw') },
     { title: 'MapToPipe', language: 'typescript', code: require('./model-value/map-to.pipe.ts?raw') },
   ];

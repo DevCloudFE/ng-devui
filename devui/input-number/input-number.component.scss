@@ -20,9 +20,6 @@
 
     .input-control-buttons:not(.disabled) {
       border-color: $devui-form-control-line-hover;
-    }
-
-    .input-control-buttons:not(.disabled) {
       display: flex;
     }
   }
@@ -98,7 +95,6 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background-color: $devui-base-bg;
 
       &.input-control-inc svg {
         position: relative;

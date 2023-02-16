@@ -1,7 +1,7 @@
 <div class="modal-footer">
   <d-button
     *ngFor="let button of buttons"
-    [bsSize]="'lg'"
+    [bsSize]="'md'"
     [attr.id]="button.id"
     (btnClick)="button.handler($event)"
     [bsStyle]="button.cssClass"

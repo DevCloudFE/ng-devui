@@ -22,6 +22,7 @@ export interface IModalOptions {
   bodyScrollable?: boolean;
   contentTemplate?: TemplateRef<any>;
   escapable?: boolean;
+  cssClass?: string;
 }
 
 export interface IDialogOptions {

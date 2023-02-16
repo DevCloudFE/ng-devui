@@ -85,6 +85,10 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
    */
   @Input() virtualScroll = false;
   /**
+   * 【可选】是否使用下拉列表
+   */
+  @Input() showSuggestion = true;
+  /**
    * 【可选】下拉选项
    */
   @Input() suggestionList: any = [];
@@ -107,6 +111,7 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
   @Input() itemTemplate: TemplateRef<any>;
   @Input() checkBeforeAdd: (newTag: string) => boolean | Promise<boolean> | Observable<boolean>;
   @Input() @WithConfig() showAnimation = true;
+  @Input() @WithConfig() styleType = 'default';
   /**
    * 输出函数，当选中某个选项项后，将会调用此函数，参数为当前选择项的值。如果需要获取所有选择状态的值，请参考(ngModelChange)方法
    */
@@ -137,7 +142,7 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
   valueParser: (item: any) => any;
   searchFn: (term: string) => Observable<Array<{ id: string | number; option: any }>>;
 
-  private DEBONCE_TIME = 300;
+  private DEBOUNCE_TIME = 300;
   private sourceSubscription: BehaviorSubject<any>;
   private KEYS: any = {
     backspace: 8,
@@ -211,7 +216,7 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
       const inputDom = this.searchBox.el.nativeElement.querySelector('input');
       // input失焦不冒泡，直接监听事件处理会早于list中点击事件传递到该组件，因此增加debounceTime待下拉列表关闭后判断是否插入标签
       this.blurEventSubscription = fromEvent(inputDom, 'blur')
-        .pipe(debounceTime(this.DEBONCE_TIME))
+        .pipe(debounceTime(this.DEBOUNCE_TIME))
         .subscribe(() => {
           if (this.isOpen) {
             return;
